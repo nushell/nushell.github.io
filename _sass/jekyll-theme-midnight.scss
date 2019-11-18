@@ -57,6 +57,10 @@ a {
   font-weight:400;
   text-decoration:none;
 
+  &.nu {
+    font-size: 30px;
+  }
+
   &:hover {
     color: #4ec526;
   }
@@ -125,7 +129,10 @@ pre {
   }
 }
 
-
+table {
+  width:100%;
+  border-collapse:collapse;
+}
 
 #header {
   z-index: 100;
@@ -144,11 +151,12 @@ pre {
     padding: 0 0px;
     background: none;
     margin: 10px auto;
-    font-size: 24px;
+    font-size: 22px;
     border: none;
-    border-radius: 100px;
+    border-radius: 5px;
     word-spacing: 25px;
-    text-align: center;
+    text-align: left;
+    border-bottom-width: 50px;
 
     li {
       font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -161,31 +169,35 @@ pre {
       font-size: 14px;
 
       a {
-        color: white;
-        border: 1px solid #5d910b;
-        background: linear-gradient(#93bd20, #659e10);
-        border-radius: 2px;
+        color: #fff;
+        border: 1px solid none;
+        border-radius: 5px;
+        background: #4e9a06;
+        border-radius: 5px;
         box-shadow: inset 0px 1px 0px rgba(255,255,255,.3), 0px 3px 7px rgba(0,0,0,.7);
-
-        background-color: #93bd20;
-        padding: 50px 12px;
-        margin-top: 6px;
-        line-height:14px;
-        font-size:20px;
-        display:inline-block;
+        word-spacing: 2px;
+        background-color: #4e9a06;
+        padding: 4px 6px;
+        padding-top: 8px;
+        padding-bottom: 4px;
+        font-size:15px;
         text-align:center;
 
         &:hover {
-          background: linear-gradient(#749619, #527f0e);
-          background-color: #659e10;
-          border: 1px solid #527f0e;
+          background: #4ec526;
+          background-color: #4ec526;
+          border: 1px solid none;
+          border-radius: 5px;
           box-shadow: inset 0px 1px 1px rgba(0,0,0,.2), 0px 1px 0px rgba(0,0,0,.0);
         }
       }
 
       &.fork {
-        float: left;
+        float: right;
         margin-left: 0px;
+        size: 12px;
+        border-radius: 5px;
+        top: 5px;
       }
 
       &.downloads {

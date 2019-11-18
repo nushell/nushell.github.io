@@ -19,9 +19,8 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Nushell
-description: Nu Shell. A modern shell for the GitHub era.
+description: A modern shell for the GitHub era.
 
-baseurl: "" # the subpath of your site, e.g. /blog
 # url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  nushell
 url: https://github.com/nushell
