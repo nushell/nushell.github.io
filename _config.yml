@@ -23,7 +23,7 @@ description: A modern shell for the GitHub era.
 
 # url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  nushell
-url: https://github.com/nushell
+url: "https://github.com/nushell"
 
 # Build settings
 theme: jekyll-theme-midnight

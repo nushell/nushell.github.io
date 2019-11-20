@@ -154,9 +154,12 @@ table {
     font-size: 22px;
     border: none;
     border-radius: 5px;
-    word-spacing: 25px;
     text-align: left;
     border-bottom-width: 50px;
+
+    a {
+      margin-left: 18px;
+    }
 
     li {
       font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
