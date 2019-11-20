@@ -10,7 +10,7 @@ At the bottom of this page you can also find quick references to the commands pr
 
 ## Nu Book
 
-You can read our [book](https://book.nushell.sh) to lern more about the basic concepts behind Nu. It covers a lot of examples which will help you to have an easy start. 
+You can read our [book](https://book.nushell.sh) to lern more about the core concepts behind Nu. It covers a lot of examples which will help you to have an easy start. 
 
 ## Contributor Book
 

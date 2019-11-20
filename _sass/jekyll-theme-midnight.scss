@@ -107,8 +107,9 @@ code {
   color:#282828;
   font-size:13px;
   margin: 0 4px;
-  padding: 4px 6px;
-  border-radius: 2px;
+  padding: 2px 4px;
+  border-radius: 5px;
+  background: #eeeeee;
   //background: #333;
 }
 
@@ -123,6 +124,7 @@ pre {
 
   code {
     color: #efefef;
+    background: #333;
     text-shadow: 0px 1px 0px #000;
     margin: 0;
     padding: 0;
