@@ -12,7 +12,7 @@ Hello, and welcome to the Nushell project. The goal of this project is to take t
 
 Nu draws inspiration from projects like PowerShell, functional programming languages, and modern CLI tools. Rather than thinking of files and services as raw streams of text, Nu looks at each input as something with structure. For example, when you list the contents of a directory, what you get back is a table of rows, where each row represents an item in that directory. These values can be piped through a series of steps, in a series of commands called a 'pipeline'.
 
-![Example of nushell](images/nushell-autocomplete.gif "Example of nushell")
+![Example of nushell](https://www.nushell.sh/images/nushell-autocomplete.gif "Example of nushell")
 
 ## Pipelines
 

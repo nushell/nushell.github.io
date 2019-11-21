@@ -158,9 +158,12 @@ table {
     border-radius: 5px;
     text-align: left;
     border-bottom-width: 50px;
+    flex-wrap: wrap;
+    display: flow-root;
+
 
     a {
-      margin-left: 18px;
+      margin-right: 15px;
     }
 
     li {
@@ -197,7 +200,7 @@ table {
         }
       }
 
-      &.fork {
+      &.button {
         float: right;
         margin-left: 0px;
         size: 12px;
