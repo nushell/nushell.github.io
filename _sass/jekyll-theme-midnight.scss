@@ -53,16 +53,17 @@ h3 {
 }
 
 a {
-  color:#4e9a06;
+  color:#418305;
   font-weight:400;
   text-decoration:none;
+  font-weight: bold;
 
   &.nu {
     font-size: 30px;
   }
 
   &:hover {
-    color: #4ec526;
+    color: #60c007;
   }
 }
 
@@ -88,6 +89,7 @@ strong {
   margin:0 auto;
   position:relative;
   padding: 0 20px;
+  margin-top: 70px;
 }
 
 section img {
@@ -140,30 +142,39 @@ table {
   z-index: 100;
   left:0;
   top: 0px;
-  height: 60px;
+  height: min-content;
   width: 100%;
   position: fixed;
   background: url(../images/nav-bg.gif) #353535;
   border-bottom: 4px solid #434343;
   box-shadow: 0px 1px 3px rgba(0,0,0,.25);
-
+  padding-top: 2px;
+  padding-bottom: 2px;
   nav {
     max-width: 650px;
     margin: 2px auto;
     padding: 0 0px;
     background: none;
-    margin: 10px auto;
+    //padding-top: 10px;
     font-size: 22px;
     border: none;
     border-radius: 5px;
     text-align: left;
-    border-bottom-width: 50px;
     flex-wrap: wrap;
     display: flow-root;
+    margin-top: 10px;
 
 
     a {
       margin-right: 15px;
+      margin-top: 5px;
+      color: #4ec526;
+      font-weight: normal;
+
+      &:hover {
+        color: #40ff00;
+      }
+
     }
 
     li {
@@ -172,26 +183,29 @@ table {
       list-style: none;
       display: inline;
       color: white;
-      line-height: 50px;
+      line-height: 20px;
       text-shadow: 0px 1px 0px rgba(0,0,0,.2);
       font-size: 14px;
+      margin-top: 10px;
+      margin-bottom: 5px;
 
       a {
         color: #fff;
         border: 1px solid none;
         border-radius: 5px;
-        background: #4e9a06;
+        background: #418305;
         border-radius: 5px;
         box-shadow: inset 0px 1px 0px rgba(255,255,255,.3), 0px 3px 7px rgba(0,0,0,.7);
         word-spacing: 2px;
-        background-color: #4e9a06;
-        padding: 4px 6px;
+        background-color: #418305;
+        padding: 4px 4px;
         padding-top: 8px;
         padding-bottom: 4px;
         font-size:15px;
         text-align:center;
 
         &:hover {
+          color: #fff;
           background: #4ec526;
           background-color: #4ec526;
           border: 1px solid none;
