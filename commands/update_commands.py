@@ -58,7 +58,15 @@ while l < per_row:
     filename2 = row2[l].replace(".md", "")
     filename3 = row3[l].replace(".md", "")
     filename4 = row4[l].replace(".md", "")
-    print("[" + filename1 + "]" + "(/commands/" + filename1 + ".html)" + " | " + "[" + filename1 + "]" + "(/commands/" + filename1 + ".html)" + " | " + "[" + filename1 + "]" + "(/commands/" + filename1 + ".html)" + " | " + "[" + filename1 + "]" + "(/commands/" + filename1 + ".html)", file=f)
+
+    link_row1 = "[" + filename1 + "]" + "(/commands/" + filename1 + ".html)"
+    link_row2 = "[" + filename2 + "]" + "(/commands/" + filename2 + ".html)"
+    link_row3 = "[" + filename3 + "]" + "(/commands/" + filename3 + ".html)"
+    if filename4 == "":
+        link_row4 = ""
+    else:
+        link_row4 = "[" + filename4 + "]" + "(/commands/" + filename4 + ".html)"
+    print(link_row1 + " | " + link_row2 + " | " + link_row3 + " | " + link_row4, file=f)
     l = l +1
 
 f.close()
