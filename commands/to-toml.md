@@ -1,4 +1,7 @@
-# to-toml
+---
+title: to-toml
+layout: command
+---
 
 Converts table data into toml text.
 

@@ -1,4 +1,7 @@
-# env
+---
+title: env
+layout: command
+---
 
 The `env` command prints to terminal the environment of nushell
 

@@ -1,4 +1,7 @@
-# version
+---
+title: version
+layout: command
+---
 
 Outputs the nushell version.
 

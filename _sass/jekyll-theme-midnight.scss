@@ -183,7 +183,7 @@ table {
       list-style: none;
       display: inline;
       color: white;
-      line-height: 20px;
+      line-height: min-content;
       text-shadow: 0px 1px 0px rgba(0,0,0,.2);
       font-size: 14px;
       margin-top: 10px;
@@ -199,7 +199,7 @@ table {
         word-spacing: 2px;
         background-color: #418305;
         padding: 4px 4px;
-        padding-top: 8px;
+        padding-top: 4px;
         padding-bottom: 4px;
         font-size:15px;
         text-align:center;

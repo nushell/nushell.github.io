@@ -1,4 +1,7 @@
-# inc
+---
+title: inc
+layout: command
+---
 
 This command increments the value of variable by one.
 

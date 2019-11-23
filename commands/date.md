@@ -1,4 +1,7 @@
-# date
+---
+title: date
+layout: command
+---
 
 Use `date` to get the current date and time. Defaults to local timezone but you can get it in UTC too.
 

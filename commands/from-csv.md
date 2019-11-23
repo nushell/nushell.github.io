@@ -1,4 +1,7 @@
-# from-csv
+---
+title: from-csv
+layout: command
+---
 
 Converts csv data into table. Use this when nushell cannot dertermine the input file extension.
 
