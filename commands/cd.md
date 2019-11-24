@@ -1,4 +1,7 @@
-# cd
+---
+title: cd
+layout: command
+---
 
 If you didn't already know, the `cd` command is very simple. It stands for 'change directory' and it does exactly that. It changes the current directory to the one specified. If no directory is specified, it takes you to the home directory. Additionally, using `cd ..` takes you to the parent directory.
 

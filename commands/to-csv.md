@@ -1,4 +1,7 @@
-# to-csv
+---
+title: to-csv
+layout: command
+---
 
 Converts table data into csv text.
 

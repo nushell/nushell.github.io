@@ -1,4 +1,7 @@
-# edit
+---
+title: edit
+layout: command
+---
 
 Edits an existing column on a table. First parameter is the column to edit and the second parameter is the value to put.
 

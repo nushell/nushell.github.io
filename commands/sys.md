@@ -1,4 +1,7 @@
-# sys
+---
+title: sys
+layout: command
+---
 
 This command gives information about the system where nu is running on.
 

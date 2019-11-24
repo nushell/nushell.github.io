@@ -1,4 +1,7 @@
-# to-yaml
+---
+title: to-yaml
+layout: command
+---
 
 Converts table data into yaml text.
 

@@ -1,4 +1,7 @@
-# where
+---
+title: where
+layout: command
+---
 
 This command filters the content of a table based on a condition passed as a parameter, which must be a boolean expression making use of any of the table columns. Other commands such as `ls` are capable of feeding `where` with their output through pipelines.
 
