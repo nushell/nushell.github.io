@@ -1,10 +1,10 @@
-<div id="header">
 <nav>
-        <a class="nu" href="{{ '/' | relative_url }}">nu<font color=white>></font></a>
-        <a href="{{ '/documentation.html' | relative_url }}">Docs</a>
-        <a href="{{ '/installation.html' | relative_url }}">Get</a>
-        <a href="{{ '/contribute.html' | relative_url }}">Contribute</a>
-        <a href="{{ '/about.html' | relative_url }}">About</a>
-        <li class="button"><a href="http://blog.nushell.sh">Visit our Blog</a></li>
+        <a class="nu" href="{{ '/' | relative_url }}">nu</a>
+        <a class="{% if include.current == 'Documentation' %} active {% endif %}" href="{{ '/documentation.html' | relative_url }}">Docs</a>
+        <a class="{% if include.current == 'Installation' %} active {% endif %}" href="{{ '/installation.html' | relative_url }}">Get</a>
+        <a class="{% if include.current == 'Contribute' %} active {% endif %}" href="{{ '/contribute.html' | relative_url }}">Contribute</a>
+        <a class="{% if include.current == 'about' %} active {% endif %}" href="{{ '/about.html' | relative_url }}">About</a>
+        <div class="right">
+                <a href="http://blog.nushell.sh" class="button">Visit our Blog</a>
+        </div>
 </nav>
-</div>
