@@ -2,22 +2,32 @@
 @import "fonts";
 @import "rouge-base16-dark.scss";
 
+$text-dark: #242424;
+$text-light: #585858;
+
+$green-dark: #418305;
+$green-medium: #5bb006;
+
+$green-bright: #51cd28;
+$green-brighter: #69ff33;
+
+
 body {
-  padding:0px 0 20px 0px;
-  margin: 0px;
+  padding: 0 0 20px 0;
+  margin: 0;
   font:18px/1.5 "OpenSans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   //color: #f0e7d5
-  color:#585858;
+  color: $text-light;
   font-weight: normal;
   //background: #252525;
   background: #ffffff;
-  background-attachment: fixed !important;
+  //background-attachment: fixed !important;
   //background: linear-gradient(#2a2a29, #1c1c1c);
 }
 
 h1, h2, h3, h4, h5, h6 {
   //color:#e8e8e8;
-  color: #242424;
+  color: $text-dark;
   margin: -60px 0 10px;
   padding-top: 60px;
   font-weight: normal;
@@ -42,27 +52,25 @@ h2 {
 
 h3 {
   font-size: 1.45em;
-  color: #535353;
+  color: $text-light;
 }
 
 h4, h5, h6 {
-  color: #242424;
+  color: $text-dark;
   font-weight: bold;
   margin: -55px 0 0.5em 0;
 }
 
 a {
-  color:#418305;
-  font-weight:400;
+  color: $green-dark;
   text-decoration:none;
   font-weight: bold;
 
   &:hover {
-    color: #60c007;
+    color: $green-medium;
   }
-
   &:focus {
-    color: #60c007;
+    color: $green-medium;
     outline: none;
   }
 }
@@ -70,8 +78,8 @@ a {
 a.anchor {
   display: none;
   position: absolute;
-  margin: -70px 0 -10px -40px;
-  padding: 70px 0 10px 0;
+  margin: -10px 0 -10px -40px;
+  padding: 10px 0 10px 0;
   width: 40px;
   opacity: 0.6;
 
@@ -81,7 +89,7 @@ a.anchor {
 
   &::before {
     content: '🔗';
-    color: #bbb;
+    color: #999;
     font-size: 19px;
     vertical-align: bottom;
   }
@@ -100,17 +108,15 @@ a small {
   display:block;
 }
 
-ul{
+ul {
   list-style-type: square;
-  color: #555;
 }
 
 .wrapper {
   max-width: 900px;
-  margin:0 auto;
-  position:relative;
+  margin: 70px auto 0;
+  position: relative;
   padding: 0 20px;
-  margin-top: 70px;
 }
 
 section img {
@@ -119,15 +125,14 @@ section img {
 }
 
 blockquote {
-  border-left:3px solid #4e9a06;
-  margin:0;
+  border-left:3px solid $green-medium;
   padding:0 0 0 20px;
   font-style:italic;
 }
 
 code {
   font-family: Monaco, 'Source Code Pro', 'Bitstream Vera Sans Mono', 'Lucida Console', Terminal, monospace;
-  color:#282828;
+  color: $text-dark;
   font-size: 80%;
   margin: 0 4px;
   padding: 2px 4px;
@@ -141,7 +146,7 @@ pre {
   background: #333;
   border-radius: 5px;
   border: 1px solid #121212;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,.3);
+  box-shadow: inset 0 1px 3px rgba(black, .3);
   overflow: auto;
   overflow-y: hidden;
   font-size: 80%;
@@ -151,7 +156,7 @@ pre {
     color: #efefef;
     font-size: inherit;
     background: transparent;
-    text-shadow: 0px 1px 0px #000;
+    text-shadow: 0 1px 0 black;
     margin: 0;
     padding: 0;
   }
@@ -171,7 +176,7 @@ table {
   width: 100%;
   position: fixed;
   background: url(../images/nav-bg.gif) #353535;
-  box-shadow: 0px 1px 3px rgba(0,0,0,.25);
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
 
   nav {
     max-width: 900px;
@@ -189,16 +194,17 @@ table {
       margin-right: 15px;
       line-height: 55px;
       vertical-align: middle;
-      color: #4ec526;
+      color: $green-bright;
+      text-shadow: 0 1px 0 rgba(black, 0.4);
       font-weight: normal;
 
       &.active {
-        color: #40ff00;
-        box-shadow: inset 0 -3px 0 #40ff00;
+        color: $green-brighter;
+        box-shadow: inset 0 -3px 0 $green-brighter;
       }
 
       &:hover, &:focus {
-        color: #40ff00;
+        color: $green-brighter;
       }
 
       &.nu {
@@ -223,20 +229,20 @@ table {
 
       a.button {
         color: white;
-        text-shadow: 0px 1px 0px rgba(#000, .2);
+        text-shadow: 0 1px 0 rgba(black, .2);
         border-radius: 5px;
-        box-shadow: inset 0px 1px 0px rgba(255,255,255,.3), 0px 3px 7px rgba(0,0,0,.7);
+        box-shadow: inset 0 1px 0 rgba(white, .3), 0 3px 7px rgba(black, .7);
         word-spacing: 2px;
-        background-color: #418305;
+        background-color: $green-dark;
         padding: 4px 10px;
         margin-top: 10px;
         font-size: 80%;
         line-height: 1.5em;
+        transition: background-color .15s;
   
         &:hover, &:focus {
           color: #fff;
-          background-color: #529c0d;
-          border: 1px solid none;
+          background-color: $green-medium;
           border-radius: 5px;
         }
 
@@ -253,8 +259,7 @@ footer {
   font-weight: 400;
   color: #3e3e3e;
   max-width: 900px;
-  margin: 2px auto;
-  padding: 0 0px;
+  padding: 0;
   background: none;
   margin: 10px auto;
 
@@ -280,9 +285,8 @@ footer {
 
 section {
   max-width: 900px;
-  padding: 30px 0px 50px 0px;
-  margin: 20px 0;
-  margin-top: 70px;
+  padding: 30px 0 50px 0;
+  margin: 70px 0 20px 0;
 
   #title {
     border-bottom: 1px solid #aaa;
@@ -295,15 +299,17 @@ section {
       text-align: center;
       line-height: 1em;
       margin: 0.25em 0;
+      padding: 0;
     }
 
     .subheading {
       text-align: center;
+      color: #242424;
     }
 
     hr {
-      border: 1px solid #aaa;
-      border-width: 1px 0 0 0;
+      border: 0 solid #aaa;
+      border-bottom-width: 1px;
     }
 
     p {
