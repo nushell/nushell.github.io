@@ -15,12 +15,29 @@
     <!--[if lt IE 8]>
     <link rel="stylesheet" href="{{ '/assets/css/ie.css' | relative_url }}">
     <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .social {
+        width: max-content;
+        margin: 0 auto;
+      }
+      .social a {
+        display: inline-block;
+        margin: 0 10px;
+        width: 90px;
+        text-align: center;
+      }
+      .social a img {
+        display: block;
+        width: 50px;
+        height: auto;
+        margin: 0 auto;
+      }
+    </style>
   </head>
   <body>
       <div id="header">
-            {% include navigation.html %}
+            {% include navigation.html current="about" %}
       </div><!-- end header -->
 
     <div class="wrapper">
@@ -28,18 +45,23 @@
       <section>
         <div id="title">
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
-          <h3><center>{{ site.description | default: site.github.project_tagline }}</center></h3>
-          <hr>
+          <div class="subheading">{{ site.description | default: site.github.project_tagline }}</div>
         </div>
         {{ content }}
-        You can find us here:
-        <p>
-          <a href="https://github.com/nushell/nushell"><img height=20 src="https://www.nushell.sh/images/github.svg">         GitHub</a><br>
 
-          <a href="https://discord.gg/NtAbbGn"><img height=20 src="https://www.nushell.sh/images/discord.svg">          Discord</a><br>
-
-          <a href="https://twitter.com/nu_shell"><img height=20 src="https://www.nushell.sh/images/twitter.svg">      Twitter</a>
-        </p>
+        <p>You can find us here:</p>
+        <div class="social">
+          <a href="https://github.com/nushell/nushell">
+            <img height=20 src="https://www.nushell.sh/images/github.svg" alt="GitHub">
+            <span>GitHub</span>
+          </a><a href="https://discord.gg/NtAbbGn">
+            <img height=20 src="https://www.nushell.sh/images/discord.svg" alt="Discord">
+            <span>Discord</span>
+          </a><a href="https://twitter.com/nu_shell">
+            <img height=20 src="https://www.nushell.sh/images/twitter.svg" alt="Twitter">
+            <span>Twitter</span>
+          </a>  
+        </div>
         </section>
 
     </div>
@@ -56,12 +78,10 @@
     {% endif %}
 
     <footer>
-        <div>
-            <center>
-              <span class="credits left">Project maintained by <a href="{{ site.url }}">{{ site.github_username }}</a></span>
-              <span class="credits right">Theme: modified version of <a href="https://github.com/pages-themes/midnight/">midnight</a></span>
-            </center>
-        </div>
+      <div>
+        <span class="credits left">Project maintained by <a href="{{ site.url }}">{{ site.github_username }}</a></span>
+        <span class="credits right">Theme: modified version of <a href="https://github.com/pages-themes/midnight/">midnight</a></span>
+      </div>
     </footer>
   </body>
 </html>
