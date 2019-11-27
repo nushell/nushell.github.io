@@ -63,8 +63,14 @@
           </a>  
         </div>
         </section>
-
     </div>
+
+    <footer>
+      <div>
+        <span class="credits left">Project maintained by <a href="{{ site.url }}">{{ site.github_username }}</a></span>
+        <span class="credits right">Theme: modified version of <a href="https://github.com/pages-themes/midnight/">midnight</a></span>
+      </div>
+    </footer>
 
     {% if site.google_analytics %}
       <script>
@@ -77,11 +83,6 @@
       </script>
     {% endif %}
 
-    <footer>
-      <div>
-        <span class="credits left">Project maintained by <a href="{{ site.url }}">{{ site.github_username }}</a></span>
-        <span class="credits right">Theme: modified version of <a href="https://github.com/pages-themes/midnight/">midnight</a></span>
-      </div>
-    </footer>
+    {% include script.html %}
   </body>
 </html>

@@ -65,6 +65,32 @@ a {
   }
 }
 
+a.anchor {
+  display: none;
+  position: absolute;
+  margin: -70px 0 -10px -40px;
+  padding: 70px 0 10px 0;
+  width: 40px;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::before {
+    content: '🔗';
+    color: #bbb;
+    font-size: 19px;
+    vertical-align: bottom;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  &:hover a.anchor {
+    display: inline-block;
+  }
+}
+
 a small {
   font-size:11px;
   color:#555;
