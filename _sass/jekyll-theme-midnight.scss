@@ -160,6 +160,13 @@ pre {
     margin: 0;
     padding: 0;
   }
+
+  u {
+    text-decoration: none;
+    width: 1ch;
+    overflow: visible;
+    display: inline-block;
+  }
 }
 
 table {
