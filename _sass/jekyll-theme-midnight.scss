@@ -150,7 +150,7 @@ pre {
   overflow: auto;
   overflow-y: hidden;
   font-size: 80%;
-  line-height: 1.35em;
+  line-height: 1.3em;
 
   code {
     color: #efefef;
@@ -161,9 +161,12 @@ pre {
     padding: 0;
   }
 
+  // table borders:
   u {
     text-decoration: none;
     width: 1ch;
+    height: 1em;
+    color: white;
     overflow: visible;
     display: inline-block;
   }
