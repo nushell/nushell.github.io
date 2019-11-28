@@ -36,6 +36,12 @@
 
     </div>
 
+    <footer>
+      <div class="centered">
+        If you found an error in this command documentation or want to adapt it <a href="https://github.com/nushell/nushell/blob/master/docs/commands/{{page.title}}.md">please go here</a>
+      </div>
+    </footer>
+
     {% if site.google_analytics %}
       <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -46,12 +52,7 @@
         ga('send', 'pageview');
       </script>
     {% endif %}
+    
+    {% include script.html %}
   </body>
-
-  <footer>
-    <div class="centered">
-      If you found an error in this command documentation or want to adapt it <a href="https://github.com/nushell/nushell/blob/master/docs/commands/{{page.title}}.md">please go here</a>
-    </div>
-</footer>
-  
 </html>

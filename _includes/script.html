@@ -1,0 +1,8 @@
+<script type="text/javascript">
+    $('h1, h2, h3, h4, h5, h6').filter('[id]').each(function () {
+        var el = document.createElement('a')
+        el.className = 'anchor'
+        el.href = '#' + this.id;
+        this.prepend(el)
+    });
+</script>
