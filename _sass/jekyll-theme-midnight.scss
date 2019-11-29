@@ -88,7 +88,7 @@ a.anchor {
   }
 
   &::before {
-    content: '🔗';
+    content: '\01F517';
     color: #999;
     font-size: 19px;
     vertical-align: bottom;
@@ -150,7 +150,7 @@ pre {
   overflow: auto;
   overflow-y: hidden;
   font-size: 80%;
-  line-height: 1.35em;
+  line-height: 1.3em;
 
   code {
     color: #efefef;
@@ -159,6 +159,17 @@ pre {
     text-shadow: 0 1px 0 black;
     margin: 0;
     padding: 0;
+  }
+
+  // table borders:
+  u {
+    text-decoration: none;
+    width: 1ch;
+    height: 1em;
+    color: white;
+    font-weight: normal;
+    overflow: visible;
+    display: inline-block;
   }
 }
 
