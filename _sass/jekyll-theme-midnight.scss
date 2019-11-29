@@ -88,6 +88,7 @@ a.anchor {
   }
 
   &::before {
+    // Link Symbol Emoji  https://unicode-table.com/en/1F517/
     content: '\01F517';
     color: #999;
     font-size: 19px;
