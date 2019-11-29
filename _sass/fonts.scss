@@ -1,4 +1,28 @@
 @font-face {
+    font-family: 'Source Code Pro';
+    src: url('../fonts/SourceCodePro-Regular.eot');
+    src: local('Source Code Pro Regular'),
+         url('../fonts/SourceCodePro-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/SourceCodePro-Regular.woff') format('woff'),
+         url('../fonts/SourceCodePro-Regular.ttf') format('truetype'),
+         url('../fonts/SourceCodePro-Regular.svg#SourceCodePro') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('../fonts/SourceCodePro-Bold.eot');
+  src: local('Source Code Pro Bold'),
+       url('../fonts/SourceCodePro-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/SourceCodePro-Bold.woff') format('woff'),
+       url('../fonts/SourceCodePro-Bold.ttf') format('truetype'),
+       url('../fonts/SourceCodePro-Bold.svg#SourceCodePro') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
     font-family: 'OpenSans';
     src: url('../fonts/OpenSans-Light-webfont.eot');
     src: local('Open Sans Light'),
@@ -8,7 +32,6 @@
          url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
     font-weight: 300;
     font-style: normal;
-
 }
 
 @font-face {
@@ -21,7 +44,6 @@
          url('../fonts/OpenSans-LightItalic-webfont.svg#OpenSansLightItalic') format('svg');
     font-weight: 300;
     font-style: italic;
-
 }
 
 @font-face {
@@ -34,7 +56,6 @@
          url('../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-    -webkit-font-smoothing:antialiased;
 }
 
 @font-face {
@@ -47,7 +68,6 @@
          url('../fonts/OpenSans-Italic-webfont.svg#OpenSansItalic') format('svg');
     font-weight: normal;
     font-style: italic;
-    -webkit-font-smoothing:antialiased;
 }
 
 @font-face {
@@ -60,7 +80,6 @@
          url('../fonts/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg');
     font-weight: bold;
     font-style: normal;
-    -webkit-font-smoothing:antialiased;
 }
 
 @font-face {
@@ -73,5 +92,4 @@
          url('../fonts/OpenSans-BoldItalic-webfont.svg#OpenSansBoldItalic') format('svg');
     font-weight: bold;
     font-style: italic;
-    -webkit-font-smoothing:antialiased;
 }
