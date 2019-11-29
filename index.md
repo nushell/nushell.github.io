@@ -24,7 +24,7 @@ In Unix, it's common to pipe between commands to split up a sophisticated comman
 
 Commands are separated by the pipe symbol (`|`) to denote a pipeline flowing left to right.
 
-```
+```shell
 /home/jonathan/Source/nushell(master)> ls | where type == "Directory" | autoview
 ━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
  #  │ name      │ type      │ readonly │ size   │ accessed     │ modified
@@ -48,7 +48,7 @@ Because most of the time you'll want to see the output of a pipeline, `autoview`
 
 Being able to use the same commands and compose them differently is an important philosophy in Nu. For example, we could use the built-in `ps` command as well to get a list of the running processes, using the same `where` as above.
 
-```text
+```shell
 /home/jonathan/Source/nushell(master)> ps | where cpu > 0
 ━━━┯━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━
  # │ pid   │ name            │ status   │ cpu
