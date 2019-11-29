@@ -22,14 +22,16 @@ The [cookbook](https://github.com/nushell/cookbook) is another book which will c
 
 # Quick command references
 
-[add](/commands/add.html) | [fetch](/commands/fetch.html) | [pick](/commands/pick.html) | [tags](/commands/tags.html)
-[append](/commands/append.html) | [first](/commands/first.html) | [pivot](/commands/pivot.html) | [to-csv](/commands/to-csv.html)
-[average](/commands/average.html) | [from-csv](/commands/from-csv.html) | [prepend](/commands/prepend.html) | [to-json](/commands/to-json.html)
-[cd](/commands/cd.html) | [from-toml](/commands/from-toml.html) | [reject](/commands/reject.html) | [to-toml](/commands/to-toml.html)
+[add](/commands/add.html) | [from-csv](/commands/from-csv.html) | [pick](/commands/pick.html) | [tags](/commands/tags.html)
+[append](/commands/append.html) | [from-json](/commands/from-json.html) | [pivot](/commands/pivot.html) | [to-csv](/commands/to-csv.html)
+[average](/commands/average.html) | [from-toml](/commands/from-toml.html) | [prepend](/commands/prepend.html) | [to-json](/commands/to-json.html)
+[cd](/commands/cd.html) | [from-yaml](/commands/from-yaml.html) | [reject](/commands/reject.html) | [to-toml](/commands/to-toml.html)
 [count](/commands/count.html) | [group-by](/commands/group-by.html) | [reverse](/commands/reverse.html) | [to-tsv](/commands/to-tsv.html)
 [date](/commands/date.html) | [help](/commands/help.html) | [shells](/commands/shells.html) | [to-url](/commands/to-url.html)
-[echo](/commands/echo.html) | [inc](/commands/inc.html) | [size](/commands/size.html) | [to-yaml](/commands/to-yaml.html)
-[edit](/commands/edit.html) | [last](/commands/last.html) | [sort-by](/commands/sort-by.html) | [trim](/commands/trim.html)
-[enter](/commands/enter.html) | [lines](/commands/lines.html) | [str](/commands/str.html) | [version](/commands/version.html)
-[env](/commands/env.html) | [nth](/commands/nth.html) | [sum](/commands/sum.html) | [where](/commands/where.html)
-[exit](/commands/exit.html) | [open](/commands/open.html) | [sys](/commands/sys.html) | 
+[echo](/commands/echo.html) | [histogram](/commands/histogram.html) | [size](/commands/size.html) | [to-yaml](/commands/to-yaml.html)
+[edit](/commands/edit.html) | [history](/commands/history.html) | [sort-by](/commands/sort-by.html) | [trim](/commands/trim.html)
+[enter](/commands/enter.html) | [inc](/commands/inc.html) | [split-column](/commands/split-column.html) | [version](/commands/version.html)
+[env](/commands/env.html) | [last](/commands/last.html) | [split-row](/commands/split-row.html) | [where](/commands/where.html)
+[exit](/commands/exit.html) | [lines](/commands/lines.html) | [str](/commands/str.html) | 
+[fetch](/commands/fetch.html) | [nth](/commands/nth.html) | [sum](/commands/sum.html) | 
+[first](/commands/first.html) | [open](/commands/open.html) | [sys](/commands/sys.html) | 
