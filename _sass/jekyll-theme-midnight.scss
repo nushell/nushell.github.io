@@ -369,10 +369,11 @@ section {
     padding: 0 5px;
 
     nav {
-      font-size: 18px;
+      font-size: 17px;
 
       a {
-        line-height: 45px;
+        line-height: 42px;
+        margin-right: 9px;
       }
       div.right a.button {
         margin-top: 6px;
@@ -380,13 +381,38 @@ section {
       }
     }
   }
+  .no-mobile {
+    display: none;
+  }
 }
 
 @media print, screen and (max-width: 480px) {
+  body {
+    font-size: 17px;
+  }
+
   section {
     margin-top: 40px;
+
+    h1 {
+      font-size: 1.7em;
+    }
+
+    h2 {
+      font-size: 1.4em;
+    }
+
+    h3 {
+      font-size: 1.2em;
+    }
+
+    #title h1 {
+      font-size: 2.5em;
+    }
   }
-  nav {
-    display: none;
+  #header nav {
+    div.right a.button {
+      padding: 4px 8px;
+    }
   }
 }
