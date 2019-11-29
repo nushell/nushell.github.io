@@ -2,7 +2,6 @@
 title: average
 layout: command
 ---
- 
 This command allows you to calculate the average of values in a column.  
 
 ## Examples 
