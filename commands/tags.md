@@ -1,7 +1,4 @@
----
-title: tags
-layout: command
----
+# tags
 
 The tags commands allows users to access the metadata of the previous value in
 the pipeline. This command may be run on multiple values of input as well.

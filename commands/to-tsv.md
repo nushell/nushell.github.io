@@ -1,7 +1,4 @@
----
-title: to-tsv
-layout: command
----
+# to-tsv
 
 Converts table data into tsv text.
 

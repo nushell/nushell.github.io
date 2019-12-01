@@ -1,7 +1,4 @@
----
-title: trim
-layout: command
----
+# trim
 
 Trim leading and following whitespace from text data
 

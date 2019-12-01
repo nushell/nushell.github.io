@@ -1,7 +1,4 @@
----
-title: histogram
-layout: command
----
+# histogram
 
 Creates a new table with a histogram based on the column name passed in.
 

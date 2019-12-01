@@ -1,7 +1,4 @@
----
-title: append
-layout: command
----
+# append
 This command allows you to  append the given row to the table.
 
 **Note**: 

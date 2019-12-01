@@ -1,7 +1,4 @@
----
-title: add
-layout: command
----
+# add
 
 This command adds a column to any table output. The first parameter takes the heading, the second parameter takes the value for all the rows.
 

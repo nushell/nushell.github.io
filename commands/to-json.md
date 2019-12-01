@@ -1,7 +1,4 @@
----
-title: to-json
-layout: command
----
+# to-json
 
 Converts table data into json text.
 

@@ -1,7 +1,4 @@
----
-title: nth
-layout: command
----
+# nth
 
 This command returns the nth row of a table, starting from 0.  
 If the number given is less than 0 or more than the number of rows, nothing is returned.

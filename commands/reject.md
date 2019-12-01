@@ -1,7 +1,4 @@
----
-title: reject
-layout: command
----
+# reject
 
 This column removes or rejects the columns passed to it.
 
