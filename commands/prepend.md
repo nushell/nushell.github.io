@@ -1,7 +1,4 @@
----
-title: prepend
-layout: command
----
+# prepend
 This command prepends the given row to the front of the table
 
 **Note**: 

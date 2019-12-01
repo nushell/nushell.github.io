@@ -1,7 +1,4 @@
----
-title: average
-layout: command
----
+# average 
 This command allows you to calculate the average of values in a column.  
 
 ## Examples 

@@ -1,7 +1,4 @@
----
-title: pivot
-layout: command
----
+# pivot
 
 Pivots the table contents so rows become columns and columns become rows.
 

@@ -1,7 +1,4 @@
----
-title: open
-layout: command
----
+# open
 
 Loads a file into a cell, convert it to table if possible (avoid by appending `--raw` flag)
 

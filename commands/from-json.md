@@ -1,7 +1,4 @@
----
-title: from-json
-layout: command
----
+# from-json
 
 Parse text as `.json` and create table. Use this when nushell cannot dertermine the input file extension.
 

@@ -1,7 +1,4 @@
----
-title: echo
-layout: command
----
+# echo
 
 Use `echo` to repeat arguments back to the user
 

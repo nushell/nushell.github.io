@@ -1,7 +1,4 @@
----
-title: pick
-layout: command
----
+# pick
 
 This command displays only the column names passed on to it.
 
