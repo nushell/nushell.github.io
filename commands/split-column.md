@@ -1,4 +1,7 @@
-# split-column
+---
+title: split-column
+layout: command
+---
 
 Split row contents across multiple columns via the separator.
 

@@ -1,4 +1,7 @@
-# shells
+---
+title: shells
+layout: command
+---
 
 Lists all the active nu shells with a number/index, a name and the path. Also marks the current nu shell.
 

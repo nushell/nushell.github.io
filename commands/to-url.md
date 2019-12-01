@@ -1,4 +1,7 @@
-# to-url
+---
+title: to-url
+layout: command
+---
 
 Converts table data into url-formatted text.
 

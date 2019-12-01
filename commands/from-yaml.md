@@ -1,4 +1,7 @@
-# from-yaml
+---
+title: from-yaml
+layout: command
+---
 
 Parse text as `.yaml/.yml` and create table. Use this when nushell cannot determine the input file extension.
 

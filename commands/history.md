@@ -1,4 +1,7 @@
-# history
+---
+title: history
+layout: command
+---
 
 Displays the last 100 commands.
 

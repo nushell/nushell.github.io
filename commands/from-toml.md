@@ -1,4 +1,7 @@
-# from-toml
+---
+title: from-toml
+layout: command
+---
 Converts toml data into table. Use this when nushell cannot dertermine the input file extension.
 
 ## Example

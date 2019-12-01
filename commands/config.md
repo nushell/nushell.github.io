@@ -1,4 +1,7 @@
-# config
+---
+title: config
+layout: command
+---
 
 Configuration management.
 

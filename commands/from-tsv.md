@@ -1,4 +1,7 @@
-# from-tsv
+---
+title: from-tsv
+layout: command
+---
 
 Parse text as `.tsv` and create table.
 

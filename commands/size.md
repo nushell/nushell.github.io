@@ -1,4 +1,7 @@
-# size
+---
+title: size
+layout: command
+---
 
 This commands gives word count statistics on any text.
 

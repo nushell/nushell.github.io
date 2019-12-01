@@ -1,4 +1,7 @@
-# group-by
+---
+title: group-by
+layout: command
+---
 
 This command creates a new table with the data from the table rows grouped by the column given.
 

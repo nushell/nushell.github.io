@@ -1,5 +1,8 @@
 
-# sort-by
+---
+title: sort-by
+layout: command
+---
 
 The `sort-by` command sorts the table being displayed in the terminal by a chosen column(s). 
 
