@@ -1,4 +1,7 @@
-# reverse
+---
+title: reverse
+layout: command
+---
 
 This command reverses the order of the elements in a sorted table. 
 

@@ -1,4 +1,7 @@
-# fetch
+---
+title: fetch
+layout: command
+---
 
 This command loads from a URL into a cell, convert it to table if possible (avoid by appending `--raw` flag)
 

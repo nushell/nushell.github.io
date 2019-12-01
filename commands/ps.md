@@ -1,4 +1,7 @@
-# ps
+---
+title: ps
+layout: command
+---
 
 This command shows information about system processes.
 

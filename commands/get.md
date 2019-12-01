@@ -1,4 +1,7 @@
-# get
+---
+title: get
+layout: command
+---
 
 Open given cells as text.
 

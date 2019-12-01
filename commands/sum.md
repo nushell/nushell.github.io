@@ -1,4 +1,7 @@
-# sum 
+---
+title: sum
+layout: command
+---
 This command allows you to calculate the sum of values in a column.  
 
 ## Examples 

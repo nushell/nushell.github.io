@@ -1,4 +1,7 @@
-# split-row
+---
+title: split-row
+layout: command
+---
 
 Split row contents over multiple rows via the separator.
 

@@ -1,4 +1,7 @@
-# help
+---
+title: help
+layout: command
+---
 
 Use `help` for more information on a command.
 Use `help commands` to list all availble commands.

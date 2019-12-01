@@ -1,4 +1,7 @@
-# format
+---
+title: format
+layout: command
+---
 
 Format columns into a string using a simple pattern
 

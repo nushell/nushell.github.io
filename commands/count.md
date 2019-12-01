@@ -1,4 +1,7 @@
-# count
+---
+title: count
+layout: command
+---
 
 This command counts the number of rows in a table.
 

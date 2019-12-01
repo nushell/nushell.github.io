@@ -1,4 +1,7 @@
-# enter
+---
+title: enter
+layout: command
+---
 
 This command creates a new shell and begin at this path.
 
