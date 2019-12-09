@@ -18,7 +18,7 @@ In the [contributers book](https://github.com/nushell/contributor-book) you can 
 
 ## Cookbook
 
-The [cookbook](https://github.com/nushell/cookbook) is another book which will cover more stuff in the future.
+[Nu Cookbook](https://github.com/nushell/cookbook) is a collection of examples to help you get the most out of using Nushell. It offers multiple ways of expressing the same pipelines so you can become familiar with all the commands.
 
 # Quick command references
 
