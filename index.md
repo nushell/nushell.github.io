@@ -65,7 +65,7 @@ Being able to use the same commands and compose them differently is an important
 
 Nu can load file and URL contents as raw text or as structured data (if it recognizes the format). For example, you can load a .toml file as structured data and explore it:
 
-```shell
+```
 /home/jonathan/Source/nushell(master)> open Cargo.toml
 ──────────────────┬────────────────┬──────────────────
  bin              │ dependencies   │ dev-dependencies
@@ -76,7 +76,7 @@ Nu can load file and URL contents as raw text or as structured data (if it recog
 
 We can pipeline this into a command that gets the contents of one of the columns:
 
-```shell
+```
 /home/jonathan/Source/nushell(master)> open Cargo.toml | get package
 ─────────────────┬────────────────────────────┬─────────┬─────────┬──────┬─────────
  authors         │ description                │ edition │ license │ name │ version
