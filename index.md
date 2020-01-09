@@ -24,7 +24,7 @@ In Unix, it's common to pipe between commands to split up a sophisticated comman
 
 Commands are separated by the pipe symbol (`|`) to denote a pipeline flowing left to right.
 
-```shell
+```
 /home/jonathan/Source/nushell(master)> ls | where type == "Directory" | autoview
 ━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
  #  │ name      │ type      │ readonly │ size   │ accessed     │ modified
