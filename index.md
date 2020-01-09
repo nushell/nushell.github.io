@@ -26,18 +26,18 @@ Commands are separated by the pipe symbol (`|`) to denote a pipeline flowing lef
 
 ```
 /home/jonathan/Source/nushell(master)> ls | where type == "Directory" | autoview
-━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
- #  │ name      │ type      │ readonly │ size   │ accessed     │ modified
-────┼───────────┼───────────┼──────────┼────────┼──────────────┼────────────────
-  0 │ .azure    │ Directory │          │ 4.1 KB │ 2 months ago │ a day ago
-  1 │ target    │ Directory │          │ 4.1 KB │ 3 days ago   │ 3 days ago
-  2 │ images    │ Directory │          │ 4.1 KB │ 2 months ago │ 2 weeks ago
-  3 │ tests     │ Directory │          │ 4.1 KB │ 2 months ago │ 37 minutes ago
-  4 │ tmp       │ Directory │          │ 4.1 KB │ 2 weeks ago  │ 2 weeks ago
-  5 │ src       │ Directory │          │ 4.1 KB │ 2 months ago │ 37 minutes ago
-  6 │ assets    │ Directory │          │ 4.1 KB │ a month ago  │ a month ago
-  7 │ docs      │ Directory │          │ 4.1 KB │ 2 months ago │ 2 months ago
-━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━
+────┬───────────────┬───────────┬────────┬──────────────┬───────────────┬───────────────
+ #  │ name          │ type      │ size   │ created      │ accessed      │ modified
+────┼───────────────┼───────────┼────────┼──────────────┼───────────────┼───────────────
+  0 │ .azure        │ Directory │   —    │ 6 months ago │ 3 days ago    │ 3 days ago
+  1 │ .cargo        │ Directory │   —    │ 7 months ago │ a month ago   │ a month ago
+  2 │ .circleci     │ Directory │   —    │ 4 months ago │ 3 months ago  │ 3 months ago
+  3 │ .git          │ Directory │ 4.1 KB │ 7 months ago │ 7 minutes ago │ 7 minutes ago
+  4 │ .github       │ Directory │   —    │ 3 months ago │ 2 months ago  │ 2 months ago
+  5 │ .vscode       │ Directory │   —    │ 2 months ago │ 2 months ago  │ 2 months ago
+  6 │ assets        │ Directory │   —    │ 5 months ago │ 5 months ago  │ 5 months ago
+  7 │ crates        │ Directory │ 8.2 KB │ a month ago  │ a week ago    │ a week ago
+────┴───────────────┴───────────┴────────┴──────────────┴───────────────┴───────────────
 ```
 
 Because most of the time you'll want to see the output of a pipeline, `autoview` is assumed. We could have also written the above:
