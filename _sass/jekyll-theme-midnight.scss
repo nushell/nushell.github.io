@@ -350,6 +350,10 @@ section {
   border-radius: 50px;
 }
 
+.mobile {
+  display: none;
+}
+
 @media print, screen and (max-width: 720px) {
 
   #title {
@@ -377,7 +381,7 @@ section {
     padding: 0 5px;
 
     nav {
-      font-size: 17px;
+      font-size: 16px;
 
       a {
         line-height: 42px;
@@ -392,11 +396,14 @@ section {
   .no-mobile {
     display: none;
   }
+  .mobile {
+    display: inline-block;
+  }
 }
 
 @media print, screen and (max-width: 480px) {
   body {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   section {
