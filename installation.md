@@ -118,7 +118,7 @@ You can also install Nu with all the bells and whistles (be sure to have install
 [dependencies](https://book.nushell.sh/en/installation#dependencies) for your platform):
 
 ```
-cargo install nu --features=stable
+cargo install nu --all --features=stable
 ```
 
 ## Building from source
@@ -135,7 +135,7 @@ From there, we can build and run Nu if we are using `rustup` with:
 
 ```
 > cd nushell
-nushell> cargo build --features=stable && cargo run --features=stable
+nushell> cargo build --all --features=stable && cargo run --all --features=stable
 ```
 
 You can also build and run Nu in release mode:
