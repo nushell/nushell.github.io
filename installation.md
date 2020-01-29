@@ -135,7 +135,7 @@ From there, we can build and run Nu if we are using `rustup` with:
 
 ```
 > cd nushell
-nushell> cargo build --all-features && cargo run --all-features
+nushell> cargo build --workspace --features=stable && cargo run --features=stable
 ```
 
 You can also build and run Nu in release mode:
