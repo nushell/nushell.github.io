@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="{{ site.lang | default: "en-US" }}">
+<link rel="icon" type="image/png" href="https://www.nushell.sh/images/link.png">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  {% seo %}
+  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
+  <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <!--[if lt IE 8]>
+    <link rel="stylesheet" href="{{ '/assets/css/ie.css' | relative_url }}">
+    <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+  <div id="header">
+    {% include navigation.html current="index" %}
+  </div><!-- end header -->
+
+  <div class="wrapper">
+
+    <section>
+
+      <div class="greeting">
+        <div id="title">
+          <h1>{{ site.title | default: site.github.repository_name }}</h1>
+          <div class="subheading">{{ site.description | default: site.github.project_tagline }}</div>
+        </div>
+        Welcome to the Nushell project.<br>
+        The goal of this project is to take the Unix philosophy of shells,
+        where pipes connect simple commands together, and bring it to the modern style of development.
+      </div>
+      <br>
+
+      <div class="slideshow-container">
+
+        <div class="slides fade">
+          <img src="images/ls_table.png" style="width:100%">
+          <div class="slidetext">Beautiful Tables</div>
+        </div>
+
+        <div class="slides fade">
+          <img src="images/committers.png" style="width:100%">
+          <div class="slidetext">Fun with Data</div>
+        </div>
+
+        <div class="slides fade" style="text-align: right;">
+          <img src="images/ps_sum.png" style="width:100%">
+          <div class="slidetext">Structured Data</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <br>
+
+      <div style="text-align: center;">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+      <hr>
+      <br>
+      <br>
+      <div class="information">
+        <h1>Installation Overview</h1>
+        There are a many ways to get Nu:
+        <ul>
+          <li><a href="{{ '/installation.html#pre-built-binaries' | relative_url }}">Download
+              pre-built binaries</a>
+          </li>
+          <li><a href="{{ '/installation.html#building-from-source' | relative_url }}">Built it from source</a></li>
+          <li><a href="{{ '/installation.html#installing-from-cratesio' | relative_url }}">Install it from crates.io</a>
+          </li>
+          <li><a href="{{ '/installation.html' | relative_url }}">other</a></li>
+        </ul>
+      </div>
+      <br>
+      <div class="information">
+        <h1>Further information</h1>
+        For a quick start we recommend you to read our <a href="https://www.nushell.sh/book">book</a>.
+        It contains all the information you need for setting up Nushell and start working with it.
+        <br>
+        <br>
+        If you've already gone through Nu Book and you still want to have more examples of what Nu is capable off, you
+        can take a look in the <a href="https://www.nushell.sh/cookbook">cookbook</a>.
+      </div>
+
+      {{ content }}
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="centered">
+      If you have suggestions or want to change something please give us <a
+        href="https://github.com/nushell/nushell.github.io">feedback</a>
+    </div>
+  </footer>
+
+  {% if site.google_analytics %}
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', '{{ site.google_analytics }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+  {% endif %}
+  <script>
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("slides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {
+        slideIndex = 1
+      }
+      if (n < 1) {
+        slideIndex = slides.length
+      }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" current", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " current";
+    }
+
+  </script>
+
+  {% include script.html %}
+
+</body>
+
+</html>

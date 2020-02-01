@@ -293,13 +293,13 @@ footer {
 
 section {
   max-width: 900px;
-  padding: 30px 0 50px 0;
+  padding: 30px 0 40px 0;
   margin: 70px 0 20px 0;
 
   #title {
     border-bottom: 1px solid #aaa;
-    margin: 0 0 40px 0;
-    padding: 0 0 15px 0;
+    margin: 0 0 0px 0;
+    padding: 0 0 10px 0;
 
     h1 {
       font-weight: 300;
@@ -354,6 +354,107 @@ section {
   display: none;
 }
 
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  height: min-content;
+}
+
+.slides {
+  display: none;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0px 3px 3px 0px;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0px 0px 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.slidetext {
+  color: #282828;
+  font-size: 16px;
+  padding: 8px 13px;
+  padding-top: 120px;
+  position: absolute;
+  bottom: 8px;
+  width: 160px;
+  text-align: right;
+  background: #16c60c;
+  border-top-left-radius: 240px;
+  right: 0;
+  font-weight: bold;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.current, .dot:hover {
+  background-color: #717171;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.greeting {
+  text-align: center;
+  //font-size: 20px;
+}
+
+.information {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: $text-dark;
+  border-radius: 5px;
+  h1 {
+    padding-top: 8px;
+  }
+  //background: #d2e9d0;
+  background: #eafae9;
+  padding-bottom: 8px;
+}
+
+
+@-webkit-keyframes fade {
+  from {opacity: .4;}
+  to {opacity: 1;}
+}
+
+@keyframes fade {
+  from {opacity: .4;}
+  to {opacity: 1;}
+}
+
 @media print, screen and (max-width: 720px) {
 
   #title {
@@ -373,6 +474,15 @@ section {
         display: block;
       }
     }
+  }
+  .slidetext {
+    color: white;
+    width: 120px;
+    padding-top: 0;
+    padding-bottom: 0px;
+    font-size: 16px;
+    font-weight: normal;
+    border-top-left-radius: 20px;
   }
 }
 
