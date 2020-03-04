@@ -93,18 +93,84 @@
       <hr>
       <br>
       <br>
+
+      <h1>Installation Overview</h1>
       <div class="information">
-        <h1>Installation Overview</h1>
-        There are a many ways to get Nu:
-        <ul>
-          <li><a href="{{ '/installation.html#pre-built-binaries' | relative_url }}">Download
-              pre-built binaries</a>
-          </li>
-          <li><a href="{{ '/installation.html#building-from-source' | relative_url }}">Built it from source</a></li>
-          <li><a href="{{ '/installation.html#installing-from-cratesio' | relative_url }}">Install it from crates.io</a>
-          </li>
-          <li><a href="{{ '/installation.html' | relative_url }}">other</a></li>
-        </ul>
+        <div class="tab">
+          <button id="winbutton" class="tablinks" onclick="showOS(event,'Windows', 'winbutton')">Windows</button>
+          <button id="linuxbutton" class="tablinks" onclick="showOS(event,'Linux', 'linuxbutton')">Linux</button>
+          <button id="macbutton" class="tablinks" onclick="showOS(event,'macOS', 'macbutton')">macOS</button>
+        </div>
+        <div id="Windows" class="tabcontent">
+          <h3>Pre-built binaries</h3>
+          <p><strong>Please Note:</strong> Nu works on Windows 10 and does not currently have Windows 7/8.1 support.</p>
+
+          <p>Download the current released <code class="language-plaintext highlighter-rouge">.zip</code>-file from the
+            <a href="https://github.com/nushell/nushell/releases">release page</a>
+            and extract it, for example, to:</p>
+
+          <div class="language-plaintext highlighter-rouge">
+            <div class="highlight">
+              <pre class="highlight"><code>C:\Program Files
+  </code></pre>
+            </div>
+          </div>
+
+          <p>And then add the folder of <code class="language-plaintext highlighter-rouge">nu</code> to your <code
+              class="language-plaintext highlighter-rouge">PATH</code>.
+            Once we have done that, we can run Nu using the <code class="language-plaintext highlighter-rouge">nu</code>
+            command:</p>
+
+          <div class="language-plaintext highlighter-rouge">
+            <div class="highlight">
+              <pre class="highlight"><code>&gt; nu
+  C:\Users\user&gt;
+  </code></pre>
+            </div>
+          </div>
+          <h3>Building Nu locally</h3>
+          <p>You can of course build Nu locally. To do this please look over <a
+              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a></p>
+        </div>
+
+
+        <div id="Linux" class="tabcontent">
+          <h3>Homebrew</h3>
+          <p>If you use <a href="https://brew.sh/">Homebrew</a> on macOS or Linux, you can install the binary by running
+          </p>
+
+          <div class="language-shell highlighter-rouge">
+            <div class="highlight">
+              <pre class="highlight"><code><span class="o">&gt;</span> brew <span class="nb">install </span>nushell
+  </code></pre>
+            </div>
+          </div>
+          <h3>Building Nu locally</h3>
+          <p>You can of course build Nu locally. To do this please look over <a
+              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a></p>
+        </div>
+
+
+        <div id="macOS" class="tabcontent">
+          <h3>Pre-built binaries</h3>
+          <p>You can download Nu pre-built from the <a href="https://github.com/nushell/nushell/releases">release
+              page</a>.
+          </p>
+          <h3 id="homebrew">Homebrew</h3>
+
+          <p>If you use <a href="https://brew.sh/">Homebrew</a> on macOS or Linux, you can install the binary by running
+          </p>
+
+          <div class="language-shell highlighter-rouge">
+            <div class="highlight">
+              <pre class="highlight"><code><span class="o">&gt;</span> brew <span class="nb">install </span>nushell
+  </code></pre>
+            </div>
+          </div>
+          <h3>Building Nu locally</h3>
+          <p>You can of course build Nu locally. To do this please look over <a
+              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a></p>
+        </div>
       </div>
       <br>
       <div class="information">
@@ -195,6 +261,85 @@
       dots[slideIndex - 1].className += " current";
     }
 
+    function showOS(evt, osName, btnname) {
+      var i, tabcontent, tablinks;
+
+
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      document.getElementById("Windows").style.display = "none";
+      document.getElementById("macOS").style.display = "none";
+      document.getElementById("Linux").style.display = "none";
+
+      document.getElementById("winbutton").style.backgroundColor = "#fff";
+      document.getElementById("macbutton").style.backgroundColor = "#fff";
+      document.getElementById("linuxbutton").style.backgroundColor = "#fff";
+
+      document.getElementById(osName).style.display = "block";
+      evt.currentTarget.className += " active";
+      document.getElementById(btnname).style.backgroundColor = "#16c60c";
+    }
+
+    var OSName = "Unknown";
+    if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
+      OSName = "Windows";
+      document.getElementById("Windows").style.display = "block";
+      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
+    }
+    if (window.navigator.userAgent.indexOf("Windows NT 6.2") != -1) {
+      OSName = "Windows";
+      document.getElementById("Windows").style.display = "block";
+      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
+    }
+    if (window.navigator.userAgent.indexOf("Windows NT 6.1") != -1) {
+      OSName = "Windows";
+      document.getElementById("Windows").style.display = "block";
+      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
+    }
+    if (window.navigator.userAgent.indexOf("Windows NT 6.0") != -1) {
+      OSName = "Windows";
+      document.getElementById("Windows").style.display = "block";
+      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
+    }
+    if (window.navigator.userAgent.indexOf("Windows NT 5.1") != -1) {
+      OSName = "Windows";
+      document.getElementById("Windows").style.display = "block";
+      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
+    }
+    if (window.navigator.userAgent.indexOf("Windows NT 5.0") != -1) {
+      OSName = "Windows";
+      document.getElementById("Windows").style.display = "block";
+      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
+    }
+    if (window.navigator.userAgent.indexOf("Mac") != -1) {
+      OSName = "macOS";
+      document.getElementById("macOS").style.display = "block";
+      document.getElementById("macbutton").style.backgroundColor = "#16c60c";
+    }
+    if (window.navigator.userAgent.indexOf("X11") != -1) {
+      OSName = "Linux";
+      document.getElementById("Linux").style.display = "block";
+      document.getElementById("linuxbutton").style.backgroundColor = "#16c60c";
+    }
+    if (window.navigator.userAgent.indexOf("Linux") != -1) {
+      OSName = "Linux";
+      document.getElementById("Linux").style.display = "block";
+      document.getElementById("linuxbutton").style.backgroundColor = "#16c60c";
+    }
+
+    if (OSName == "Unknown") {
+      OSName = "Linux";
+      document.getElementById("Linux").style.display = "block";
+      document.getElementById("linuxbutton").style.backgroundColor = "#16c60c";
+    }
   </script>
 
   {% include script.html %}
