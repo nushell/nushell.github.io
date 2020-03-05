@@ -129,14 +129,18 @@
             </div>
           </div>
           <h3>Building Nu locally</h3>
-          <p>You can of course build Nu locally. To do this please look over <a
-              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a></p>
+          <p>For instructions on how to build Nu locally please look over <a
+              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a>.</p>
         </div>
 
 
         <div id="Linux" class="tabcontent">
+          <h3>Packaging status</h3>
+          <p>Packages are available in the following repos:</p>
+          <p><a href="https://repology.org/project/nushell/versions" style="text-align: center;"><img
+                src="https://repology.org/badge/vertical-allrepos/nushell.svg" alt="Packaging status" /></a></p>
           <h3>Homebrew</h3>
-          <p>If you use <a href="https://brew.sh/">Homebrew</a> on macOS or Linux, you can install the binary by running
+          <p>If you use <a href="https://brew.sh/">Homebrew</a> on Linux, you can install the binary by running
           </p>
 
           <div class="language-shell highlighter-rouge">
@@ -146,8 +150,8 @@
             </div>
           </div>
           <h3>Building Nu locally</h3>
-          <p>You can of course build Nu locally. To do this please look over <a
-              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a></p>
+          <p>For instructions on how to build Nu locally please look over <a
+              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a>.</p>
         </div>
 
 
@@ -158,7 +162,7 @@
           </p>
           <h3 id="homebrew">Homebrew</h3>
 
-          <p>If you use <a href="https://brew.sh/">Homebrew</a> on macOS or Linux, you can install the binary by running
+          <p>If you use <a href="https://brew.sh/">Homebrew</a> on macOS, you can install the binary by running
           </p>
 
           <div class="language-shell highlighter-rouge">
@@ -168,8 +172,8 @@
             </div>
           </div>
           <h3>Building Nu locally</h3>
-          <p>You can of course build Nu locally. To do this please look over <a
-              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a></p>
+          <p>For instructions on how to build Nu locally please look over <a
+              href="{{ '/installation.html#building-it-locally' | relative_url }}">here</a>.</p>
         </div>
       </div>
       <br>
@@ -275,70 +279,35 @@
         tablinks[i].className = tablinks[i].className.replace(" active", "");
       }
 
-      document.getElementById("Windows").style.display = "none";
-      document.getElementById("macOS").style.display = "none";
-      document.getElementById("Linux").style.display = "none";
-
-      document.getElementById("winbutton").style.backgroundColor = "#fff";
-      document.getElementById("macbutton").style.backgroundColor = "#fff";
-      document.getElementById("linuxbutton").style.backgroundColor = "#fff";
-
       document.getElementById(osName).style.display = "block";
       evt.currentTarget.className += " active";
-      document.getElementById(btnname).style.backgroundColor = "#16c60c";
     }
 
     var OSName = "Unknown";
-    if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
+    if (window.navigator.userAgent.indexOf("Windows NT") != -1) {
       OSName = "Windows";
       document.getElementById("Windows").style.display = "block";
-      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
-    }
-    if (window.navigator.userAgent.indexOf("Windows NT 6.2") != -1) {
-      OSName = "Windows";
-      document.getElementById("Windows").style.display = "block";
-      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
-    }
-    if (window.navigator.userAgent.indexOf("Windows NT 6.1") != -1) {
-      OSName = "Windows";
-      document.getElementById("Windows").style.display = "block";
-      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
-    }
-    if (window.navigator.userAgent.indexOf("Windows NT 6.0") != -1) {
-      OSName = "Windows";
-      document.getElementById("Windows").style.display = "block";
-      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
-    }
-    if (window.navigator.userAgent.indexOf("Windows NT 5.1") != -1) {
-      OSName = "Windows";
-      document.getElementById("Windows").style.display = "block";
-      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
-    }
-    if (window.navigator.userAgent.indexOf("Windows NT 5.0") != -1) {
-      OSName = "Windows";
-      document.getElementById("Windows").style.display = "block";
-      document.getElementById("winbutton").style.backgroundColor = "#16c60c";
+      document.getElementById("winbutton").className += " active";
     }
     if (window.navigator.userAgent.indexOf("Mac") != -1) {
       OSName = "macOS";
       document.getElementById("macOS").style.display = "block";
-      document.getElementById("macbutton").style.backgroundColor = "#16c60c";
+      document.getElementById("macbutton").className += " active";
     }
     if (window.navigator.userAgent.indexOf("X11") != -1) {
       OSName = "Linux";
       document.getElementById("Linux").style.display = "block";
-      document.getElementById("linuxbutton").style.backgroundColor = "#16c60c";
+      document.getElementById("linuxbutton").className += " active";
     }
     if (window.navigator.userAgent.indexOf("Linux") != -1) {
       OSName = "Linux";
       document.getElementById("Linux").style.display = "block";
-      document.getElementById("linuxbutton").style.backgroundColor = "#16c60c";
+      document.getElementById("linuxbutton").className += " active";
     }
-
     if (OSName == "Unknown") {
       OSName = "Linux";
       document.getElementById("Linux").style.display = "block";
-      document.getElementById("linuxbutton").style.backgroundColor = "#16c60c";
+      document.getElementById("linuxbutton").className += " active";
     }
   </script>
 

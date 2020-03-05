@@ -446,8 +446,8 @@ section {
 .tab button {
   background-color: inherit;
   float: left;
-  border: none;
   border: 1px solid #ccc;
+  border-bottom: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   outline: none;
@@ -463,6 +463,7 @@ section {
 .tab button.active {
   // has currently now effect because the colors are set with javascript
   background-color: #16c60c;
+  color: #fff;
 }
 
 .tabcontent {
