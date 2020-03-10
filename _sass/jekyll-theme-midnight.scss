@@ -436,6 +436,45 @@ section {
   animation-duration: 1.5s;
 }
 
+.tab {
+  overflow: hidden;
+  background-color: #fff;
+  border-bottom: 1px inset #ccc;
+  bottom: -1px;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: #15c60c57;
+}
+
+.tab button.active {
+  // has currently now effect because the colors are set with javascript
+  background-color: #16c60c;
+  color: #fff;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top: none;
+}
+
 .information {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -445,7 +484,8 @@ section {
     padding-top: 8px;
   }
   //background: #d2e9d0;
-  background: #eafae9;
+  //background: #eafae9;
+  background: #ffffff;
   padding-bottom: 8px;
 }
 
