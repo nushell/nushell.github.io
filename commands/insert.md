@@ -1,5 +1,5 @@
 ---
-title: add
+title: insert
 layout: command
 ---
 
@@ -8,7 +8,7 @@ This command adds a column to any table output. The first parameter takes the he
 ## Examples
 
 ```shell
-> ls | add is_on_a_computer yes_obviously
+> ls | insert is_on_a_computer yes_obviously
 ━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━
  # │ name                       │ type │ readonly │ size   │ accessed  │ modified  │ is_on_a_computer 
 ───┼────────────────────────────┼──────┼──────────┼────────┼───────────┼───────────┼──────────────────
@@ -21,7 +21,7 @@ This command adds a column to any table output. The first parameter takes the he
 ```
 
 ```shell
-> shells | add os linux_on_this_machine
+> shells | insert os linux_on_this_machine
 ━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━
  # │   │ name       │ path                           │ os 
 ───┼───┼────────────┼────────────────────────────────┼───────────────────────
