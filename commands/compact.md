@@ -1,6 +1,7 @@
 ---
 title: compact
 layout: command
+nu_version: 0.11
 ---
 
 This command allows us to filters out rows with empty columns. Other commands are capable of feeding `compact` with their output through pipelines.
@@ -10,7 +11,7 @@ This command allows us to filters out rows with empty columns. Other commands ar
 > [input-command] | compact [column-name]
 ```
 
-## Examples 
+## Examples
 
 Let's say we have a table like this:
 

@@ -1,6 +1,7 @@
 ---
 title: group-by
 layout: command
+nu_version: 0.11
 ---
 
 This command creates a new table with the data from the table rows grouped by the column given.
@@ -40,7 +41,7 @@ We can use the `group-by` command on 'UN statistical region' to create a table p
 ━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━
 ```
 
-Now we can already get some informations like "which continental regions are there" and "how many countries are in each region". 
+Now we can already get some information like "which continental regions are there" and "how many countries are in each region".
 If we want to see only the countries in the continental region of Oceania we can type:
 
 ```shell

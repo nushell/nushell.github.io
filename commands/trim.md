@@ -1,6 +1,7 @@
 ---
 title: trim
 layout: command
+nu_version: 0.11
 ---
 
 Trim leading and following whitespace from text data

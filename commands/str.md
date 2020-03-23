@@ -1,6 +1,7 @@
 ---
 title: str
 layout: command
+nu_version: 0.11
 ---
 
 Consumes either a single value or a table and converts the provided data to a string and optionally applies a change.

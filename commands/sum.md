@@ -1,10 +1,11 @@
 ---
 title: sum
 layout: command
+nu_version: 0.11
 ---
-This command allows you to calculate the sum of values in a column.  
+This command allows you to calculate the sum of values in a column.
 
-## Examples 
+## Examples
 To get the sum of the file sizes in a directory, simply pipe the size column from the ls command to the sum command.
 
 ```shell

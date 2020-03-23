@@ -1,6 +1,7 @@
 ---
 title: tags
 layout: command
+nu_version: 0.11
 ---
 
 The tags commands allows users to access the metadata of the previous value in
