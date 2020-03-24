@@ -1,5 +1,5 @@
 # this script needs to be run in the /commands folder and the documentation.md file should be in /
-# command references need to be at the bottom otherwise this script will overwrite everything thats coming after these references
+# command references need to be at the bottom otherwise this script will overwrite everything that's coming after these references
 # if the heading of the command references changes line 58 needs to be changed to the new heading
 
 import os

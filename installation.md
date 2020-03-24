@@ -64,13 +64,13 @@ To build the base image:
 
 ```bash
 $ docker build -f docker/Dockerfile.nu-base -t nushell/nu-base .
-``` 
+```
 
 And then to build the smaller container (using a Multistage build):
 
 ```bash
 $ docker build -f docker/Dockerfile -t nushell/nu .
-``` 
+```
 
 Either way, you can run either container as follows:
 
@@ -96,13 +96,13 @@ These are the recommended compiler suites:
 
 ### Required dependencies:
 
-* pkg-config and libssl (only needed on Linux)  
-  ➜ on Debian/Ubuntu: `apt install pkg-config libssl-dev`  
+* pkg-config and libssl (only needed on Linux)
+  ➜ on Debian/Ubuntu: `apt install pkg-config libssl-dev`
   ➜ on macOS: `brew install openssl cmake`
 
 ### Optional dependencies:
 
-* To use Nu with all possible optional features enabled, you'll also need the following:  
+* To use Nu with all possible optional features enabled, you'll also need the following:
   ➜ on Linux (on Debian/Ubuntu): `apt install libxcb-composite0-dev libx11-dev`
 
 ## Installing from crates.io
