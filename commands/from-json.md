@@ -1,6 +1,7 @@
 ---
 title: from-json
 layout: command
+nu_version: 0.11
 ---
 
 Parse text as `.json` and create table. Use this when nushell cannot dertermine the input file extension.
@@ -29,8 +30,8 @@ Syntax: `from-json {flags}`
 ```shell
 > open command_from-json | from-json
 ━━━━━━━━━━━┯━━━━━━━━━┯━━━━━━━
- title     │ type    │ flags 
+ title     │ type    │ flags
 ───────────┼─────────┼───────
- from-json │ command │ Yes 
+ from-json │ command │ Yes
 ━━━━━━━━━━━┷━━━━━━━━━┷━━━━━━━
 ```

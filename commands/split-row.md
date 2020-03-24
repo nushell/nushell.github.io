@@ -1,6 +1,7 @@
 ---
 title: split-row
 layout: command
+nu_version: 0.11
 ---
 
 Split row contents over multiple rows via the separator.
@@ -25,13 +26,13 @@ using the `split-row` command.
 ```shell
 open table.txt | split-row ", "
 ━━━┯━━━━━━━━━
- # │ <value> 
+ # │ <value>
 ───┼─────────
- 0 │ 4 
- 1 │ 0 
- 2 │ 2 
- 3 │ 0 
- 4 │ 7 
- 5 │ 8 
+ 0 │ 4
+ 1 │ 0
+ 2 │ 2
+ 3 │ 0
+ 4 │ 7
+ 5 │ 8
 ━━━┷━━━━━━━━━
 ```

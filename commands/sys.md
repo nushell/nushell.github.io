@@ -1,9 +1,10 @@
 ---
 title: sys
 layout: command
+nu_version: 0.11
 ---
 
-This command gives information about the system where nu is running on.
+This command gives information about the system nu is running on.
 
 ## Examples
 
@@ -16,7 +17,7 @@ This command gives information about the system where nu is running on.
 ━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━
 > sys | get host
 ━━━━━━━━┯━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━
- name   │ release │ hostname     │ arch   │ uptime         │ users
+ name   │ release │ hostname     │ arch   │ uptime         │ sessions
 ────────┼─────────┼──────────────┼────────┼────────────────┼──────────────────
  Darwin │ 18.7.0  │ C02Y437GJGH6 │ x86_64 │ [table: 1 row] │ [table: 17 rows]
 ━━━━━━━━┷━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━

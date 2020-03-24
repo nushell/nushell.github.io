@@ -1,6 +1,7 @@
 ---
 title: config
 layout: command
+nu_version: 0.11
 ---
 
 Configuration management.

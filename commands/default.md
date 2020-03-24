@@ -1,6 +1,7 @@
 ---
 title: default
 layout: command
+nu_version: 0.11
 ---
 
 This command sets a default row's column if missing. Other commands are capable of feeding `default` with their output through pipelines.
@@ -10,7 +11,7 @@ This command sets a default row's column if missing. Other commands are capable 
 > [input-command] | default [column-name] [column-value]
 ```
 
-## Examples 
+## Examples
 
 Let's say we have a table like this:
 

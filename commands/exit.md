@@ -1,11 +1,12 @@
 ---
 title: exit
 layout: command
+nu_version: 0.11
 ---
 
 Exits the nu shell. If you have multiple nu shells, use `exit --now` to exit all of them.
 
-## Examples 
+## Examples
 
 ```shell
 > exit
@@ -14,19 +15,19 @@ Exits the nu shell. If you have multiple nu shells, use `exit --now` to exit all
 ```
 > shells
 ━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- # │   │ name       │ path 
+ # │   │ name       │ path
 ───┼───┼────────────┼─────────────────────────────────────
- 0 │   │ filesystem │ /home/jonathanturner/Source/nushell 
- 1 │   │ filesystem │ /home 
- 2 │ X │ filesystem │ /usr 
+ 0 │   │ filesystem │ /home/jonathanturner/Source/nushell
+ 1 │   │ filesystem │ /home
+ 2 │ X │ filesystem │ /usr
 ━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 > exit
 > shells
 ━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- # │   │ name       │ path 
+ # │   │ name       │ path
 ───┼───┼────────────┼─────────────────────────────────────
- 0 │   │ filesystem │ /home/jonathanturner/Source/nushell 
- 1 │ X │ filesystem │ /home 
+ 0 │   │ filesystem │ /home/jonathanturner/Source/nushell
+ 1 │ X │ filesystem │ /home
 ━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 > exit --now
 exits both the shells

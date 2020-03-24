@@ -1,6 +1,7 @@
 ---
 title: to-csv
 layout: command
+nu_version: 0.11
 ---
 
 Converts table data into csv text.

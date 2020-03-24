@@ -1,10 +1,11 @@
 ---
 title: average
 layout: command
+nu_version: 0.11
 ---
-This command allows you to calculate the average of values in a column.  
+This command allows you to calculate the average of values in a column.
 
-## Examples 
+## Examples
 To get the average of the file sizes in a directory, simply pipe the size column from the ls command to the average command.
 
 ```shell

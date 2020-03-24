@@ -1,6 +1,7 @@
 ---
 title: from-toml
 layout: command
+nu_version: 0.11
 ---
 Converts toml data into table. Use this when nushell cannot dertermine the input file extension.
 

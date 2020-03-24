@@ -4,8 +4,54 @@
 
 import os
 import math
+import subprocess
+from shutil import copyfile
 
+version = input("enter current project version: ")
 
+os.mkdir("tmp")
+os.chdir("tmp")
+git_return = subprocess.call(["git","init",])
+if git_return == 1:
+    print("error: couldn't initialize git repo")
+    os.chdir("../")
+    subprocess.call(["rm", "-rf", "tmp"])
+    exit(1)
+git_return = subprocess.call(["git", "remote", "add", "origin", "-f", "https://github.com/nushell/nushell"])
+if git_return == 1:
+    print("error: couldn't add git remote repo (check internet connection)")
+    os.chdir("../")
+    subprocess.call(["rm", "-rf", "tmp"])
+    exit(1)
+
+os.chdir(".git/info")
+directory_in_str = os.getcwd() + "/"
+f = open(directory_in_str + "sparse-checkout", "a")
+f.write("docs/commands")
+f.close()
+subprocess.call(["git","config","core.sparseCheckout", "true"])
+os.chdir("../../")
+git_return = subprocess.call(["git","pull","origin","master"])
+if git_return == 1:
+    print("error: couldn't clone repo (check internet connection)")
+    os.chdir("../")
+    subprocess.call(["rm", "-rf", "tmp"])
+    exit(1)
+
+directory_in_str = os.getcwd() + "/"
+
+directory = os.fsencode(directory_in_str)
+for file in os.listdir(directory):
+    filename = os.fsdecode(file)
+    if filename.endswith(".md"):
+        os.remove(filename)
+        continue
+    else:
+        continue
+
+os.chdir("../")
+
+os.chdir("tmp/docs/commands")
 directory_in_str = os.getcwd() + "/"
 
 # get all files in the working directory which are of type *.md (except the readme file)
@@ -37,6 +83,7 @@ for file in files:
             print("---", file=f)
             print("title: " + filename, file=f)
             print("layout: command", file=f)
+            print("nu_version: " + version, file=f)
             print("---", file=f)
             line = line + 1
             continue
@@ -47,10 +94,23 @@ for file in files:
 
 f.close()
 
+print(os.getcwd())
+
+directory_in_str = os.getcwd() + "/"
+
+directory = os.fsencode(directory_in_str)
+for file in os.listdir(directory):
+    filename = os.fsdecode(file)
+    copyfile(filename,"../../../" + filename)
+
+os.chdir("../../../")
+subprocess.call(["rm", "-rf", "tmp"])
+
 
 # write the new table to the end of the markdown file
 
 # save the old content of the documentation.md file (down to the heading '# Quick command references')
+directory_in_str = os.getcwd() + "/"
 f = open(directory_in_str + "../documentation.md", "r")
 lines = f.read().splitlines()
 line = 0

@@ -1,6 +1,7 @@
 ---
 title: lines
 layout: command
+nu_version: 0.11
 ---
 This command takes a string from a pipeline as input, and returns a table where each line of the input string is a row in the table. Empty lines are ignored. This command is capable of feeding other commands, such as `nth`, with its output.
 
@@ -9,16 +10,16 @@ This command takes a string from a pipeline as input, and returns a table where 
 > [input-command] | lines
 ```
 
-## Examples 
+## Examples
 Basic usage:
 ```shell
 > printf "Hello\nWorld!\nLove, nushell." | lines
 ━━━┯━━━━━━━━━━━━━━━━
- # │ value 
+ # │ value
 ───┼────────────────
- 0 │ Hello 
- 1 │ World! 
- 2 │ Love, nushell. 
+ 0 │ Hello
+ 1 │ World!
+ 2 │ Love, nushell.
 ━━━┷━━━━━━━━━━━━━━━━
 ```
 
