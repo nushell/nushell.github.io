@@ -1,7 +1,7 @@
 ---
 title: inc
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 This command increments the value of variable by one.

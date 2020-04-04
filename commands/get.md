@@ -1,7 +1,7 @@
 ---
 title: get
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Open given cells as text.

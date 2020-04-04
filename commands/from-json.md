@@ -1,7 +1,7 @@
 ---
 title: from-json
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Parse text as `.json` and create table. Use this when nushell cannot dertermine the input file extension.

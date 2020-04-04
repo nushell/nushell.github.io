@@ -1,7 +1,7 @@
 ---
 title: to-url
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Converts table data into url-formatted text.

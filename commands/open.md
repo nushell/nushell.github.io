@@ -1,7 +1,7 @@
 ---
 title: open
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Loads a file into a cell, convert it to table if possible (avoid by appending `--raw` flag)

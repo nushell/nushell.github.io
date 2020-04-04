@@ -1,7 +1,7 @@
 ---
 title: split-column
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Split row contents across multiple columns via the separator.
