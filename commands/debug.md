@@ -1,7 +1,7 @@
 ---
 title: debug
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 `debug` prints a debugging view of the table data. It is useful when you want to get the specific types of the data and while investigating errors.

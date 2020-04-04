@@ -1,7 +1,7 @@
 ---
 title: average
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 This command allows you to calculate the average of values in a column.
 

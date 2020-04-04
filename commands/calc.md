@@ -1,7 +1,7 @@
 ---
 title: calc
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 calc is a command that takes a math expression from the pipeline and calculates that into a number.

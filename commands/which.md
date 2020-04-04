@@ -1,7 +1,7 @@
 ---
 title: which
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Finds a program file.

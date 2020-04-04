@@ -1,7 +1,7 @@
 ---
 title: from-tsv
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Parse text as `.tsv` and create table.

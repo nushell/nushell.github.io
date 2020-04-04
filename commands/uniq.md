@@ -1,7 +1,7 @@
 ---
 title: uniq
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Returns unique rows or values from a dataset.

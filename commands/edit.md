@@ -1,7 +1,7 @@
 ---
 title: edit
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Edits an existing column on a table. First parameter is the column to edit and the second parameter is the value to put.

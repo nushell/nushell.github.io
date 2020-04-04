@@ -1,7 +1,7 @@
 ---
 title: pivot
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Pivots the table contents so rows become columns and columns become rows.

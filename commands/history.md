@@ -1,7 +1,7 @@
 ---
 title: history
 layout: command
-nu_version: 0.11
+nu_version: 0.12
 ---
 
 Displays the last 100 commands.
