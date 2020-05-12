@@ -1,7 +1,7 @@
 ---
 title: sum
 layout: command
-nu_version: 0.12
+nu_version: 0.14
 ---
 This command allows you to calculate the sum of values in a column.
 

@@ -1,7 +1,7 @@
 ---
 title: count
 layout: command
-nu_version: 0.12
+nu_version: 0.14
 ---
 
 This command counts the number of rows in a table.

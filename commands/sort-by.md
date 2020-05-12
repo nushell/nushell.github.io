@@ -2,7 +2,7 @@
 ---
 title: sort-by
 layout: command
-nu_version: 0.12
+nu_version: 0.14
 ---
 
 The `sort-by` command sorts the table being displayed in the terminal by a chosen column(s).

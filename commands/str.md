@@ -1,7 +1,7 @@
 ---
 title: str
 layout: command
-nu_version: 0.12
+nu_version: 0.14
 ---
 
 Consumes either a single value or a table and converts the provided data to a string and optionally applies a change.
@@ -51,4 +51,26 @@ Consumes either a single value or a table and converts the provided data to a st
 ─────────
        6
 ━━━━━━━━━
+
+> echo "nu" | str --capitalize
+━━━━━━━━━
+ <value>
+─────────
+      Nu
+━━━━━━━━━
+
+> echo "Nu    " | str --trim
+━━━━━━━━━
+ <value>
+─────────
+      Nu
+━━━━━━━━━
+> shells | str path --find-replace ["TUX" "skipper"]
+━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ # │   │ name       │ path
+───┼───┼────────────┼────────────────────────────────
+ 0 │ X │ filesystem │ /home/skipper/stuff/expr/stuff
+ 1 │   │ filesystem │ /
+━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ```
