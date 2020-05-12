@@ -1,12 +1,8 @@
----
-title: from-tsv
-layout: command
-nu_version: 0.12
----
+# from tsv
 
 Parse text as `.tsv` and create table.
 
-Syntax: `from-tsv {flags}`
+Syntax: `from tsv {flags}`
 
 ### Flags:
 
@@ -26,10 +22,10 @@ Li        Lithium
 Be        Beryllium
 ```
 
-If we pass the output of the `open` command to `from-tsv` we get a correct formatted table:
+If we pass the output of the `open` command to `from tsv` we get a correct formatted table:
 
 ```shell
-> open elements.txt | from-tsv
+> open elements.txt | from tsv
 ━━━┯━━━━━━━━┯━━━━━━━━━━━
  # │ Symbol │ Element
 ───┼────────┼───────────
@@ -43,7 +39,7 @@ If we pass the output of the `open` command to `from-tsv` we get a correct forma
 Using the `--headerless` flag has the following output:
 
 ```shell
-> open elements.txt | from-tsv --headerless
+> open elements.txt | from tsv --headerless
 ━━━━┯━━━━━━━━━┯━━━━━━━━━━━
  #  │ Column1 │ Column2
 ────┼─────────┼───────────

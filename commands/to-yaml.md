@@ -1,8 +1,4 @@
----
-title: to-yaml
-layout: command
-nu_version: 0.12
----
+# to yaml
 
 Converts table data into yaml text.
 
@@ -17,7 +13,7 @@ Converts table data into yaml text.
  1 │   │ filesystem │ /home/shaurya/Pictures
  2 │   │ filesystem │ /home/shaurya/Desktop
 ━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━
-> shells | to-yaml
+> shells | to yaml
 ---
 - " ": X
   name: filesystem
@@ -37,7 +33,7 @@ Converts table data into yaml text.
 ────────────────────┼────────────────┼─────────────────┼───────┼─────────────────┼─────────────────
  Visual Studio 2017 │ [table: 1 row] │ [table: 5 rows] │       │ [table: 2 rows] │ [table: 2 rows]
 ━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━
-> open appveyor.yml | to-yaml
+> open appveyor.yml | to yaml
 ---
 image: Visual Studio 2017
 environment:

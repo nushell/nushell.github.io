@@ -1,8 +1,4 @@
----
-title: to-toml
-layout: command
-nu_version: 0.12
----
+# to toml
 
 Converts table data into toml text.
 
@@ -17,7 +13,7 @@ Converts table data into toml text.
  1 │   │ filesystem │ /home/shaurya/Pictures
  2 │   │ filesystem │ /home/shaurya/Desktop
 ━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━
-> shells | to-toml
+> shells | to toml
 [[]]
 " " = "X"
 name = "filesystem"
@@ -42,7 +38,7 @@ path = "/home/shaurya/Desktop"
 ────────────────┼──────────────────┼────────────────
  [table: 1 row] │ [table: 1 row]   │ [table: 1 row]
 ━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━
-> open cargo_sample.toml | to-toml
+> open cargo_sample.toml | to toml
 [dependencies]
 ansi_term = "0.11.0"
 app_dirs = "1.2.1"
@@ -87,7 +83,7 @@ version = "0.4.6"
 [dependencies.cursive]
 default-features = false
 features = ["pancurses-backend"]
-version = "0.12.0"
+version = "0.14.0"
 
 [dependencies.futures-preview]
 features = ["compat", "io-compat"]
@@ -105,7 +101,7 @@ version = "0.16"
 pretty_assertions = "0.6.1"
 
 [package]
-authors = ["Yehuda Katz <wycats@gmail.com>"]
+authors = ["The Nu Project Contributors"]
 description = "A shell for the GitHub era"
 edition = "2018"
 license = "ISC"

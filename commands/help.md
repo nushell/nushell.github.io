@@ -1,7 +1,7 @@
 ---
 title: help
 layout: command
-nu_version: 0.12
+nu_version: 0.14
 ---
 
 Use `help` for more information on a command.
