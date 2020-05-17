@@ -23,7 +23,7 @@ description: A new type of shell.
 
 # url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  nushell
-url: "https://github.com/nushell"
+url: "https://www.nushell.sh"
 google_analytics: UA-69474134-2
 
 # Build settings
