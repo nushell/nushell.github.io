@@ -5,3 +5,4 @@ _site
 vendor
 *.iml
 .idea/
+public
