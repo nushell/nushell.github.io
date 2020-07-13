@@ -22,7 +22,9 @@ In the [contributors book](https://www.nushell.sh/contributor-book) you can find
 
 ## Command Reference
 
-<details><summary>alias</summary>    
+<details><summary>alias - Define a shortcut for another command.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/alias.md)    
     
 Define a shortcut for another command.    
     
@@ -46,8 +48,12 @@ Examples:
   > alias l [x] { ls $x }    
     
     
+    
 </details>    
-<details><summary>ansi</summary>    
+    
+<details><summary>ansi - Output ANSI codes to change color</summary>    
+    
+    
     
 Output ANSI codes to change color    
     
@@ -68,8 +74,12 @@ Examples:
   > ansi reset    
     
     
+    
 </details>    
-<details><summary>append</summary>    
+    
+<details><summary>append - Append the given row to the table</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/append.md)    
     
 Append the given row to the table    
     
@@ -87,8 +97,12 @@ Examples:
   > echo [1 2 3] | append 4    
     
     
+    
 </details>    
-<details><summary>autoenv</summary>    
+    
+<details><summary>autoenv - Manage directory specific environments</summary>    
+    
+    
     
 Manage directory specific environments    
     
@@ -103,7 +117,10 @@ Examples:
   > autoenv trust    
     
     
-- <details><summary>autoenv trust</summary>    
+    
+- <details><summary>autoenv trust - Manage directory specific environments</summary>    
+    
+      
     
   Manage directory specific environments    
       
@@ -117,8 +134,13 @@ Examples:
     Allow .nu-env file in current directory    
     > autoenv trust    
       
+      
+    
   </details>    
-- <details><summary>autoenv untrust</summary>    
+    
+- <details><summary>autoenv untrust - Manage directory specific environments</summary>    
+    
+      
     
   Manage directory specific environments    
       
@@ -132,9 +154,15 @@ Examples:
     Allow .nu-env file in current directory    
     > autoenv trust    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>autoview</summary>    
+    
+<details><summary>autoview - View the contents of the pipeline as a table or list.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/autoview.md)    
     
 View the contents of the pipeline as a table or list.    
     
@@ -152,8 +180,12 @@ Examples:
   > ls    
     
     
+    
 </details>    
-<details><summary>binaryview</summary>    
+    
+<details><summary>binaryview - Autoview of binary data.</summary>    
+    
+    
     
 Autoview of binary data.    
     
@@ -165,8 +197,12 @@ Flags:
   -l, --lores: use low resolution output mode    
     
     
+    
 </details>    
-<details><summary>build-string</summary>    
+    
+<details><summary>build-string - Builds a string from the arguments</summary>    
+    
+    
     
 Builds a string from the arguments    
     
@@ -184,8 +220,12 @@ Examples:
   > build-string 'foo' 3    
     
     
+    
 </details>    
-<details><summary>cal</summary>    
+    
+<details><summary>cal - Display a calendar.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/cal.md)    
     
 Display a calendar.    
     
@@ -212,8 +252,12 @@ Examples:
   > cal --week-start monday    
     
     
+    
 </details>    
-<details><summary>calc</summary>    
+    
+<details><summary>calc - Parse a math expression into a number</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/calc.md)    
     
 Parse a math expression into a number    
     
@@ -228,8 +272,12 @@ Examples:
   > echo '10 / 4' | calc    
     
     
+    
 </details>    
-<details><summary>cd</summary>    
+    
+<details><summary>cd - Change to a new path.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/cd.md)    
     
 Change to a new path.    
     
@@ -256,8 +304,12 @@ Examples:
   > cd -    
     
     
+    
 </details>    
-<details><summary>char</summary>    
+    
+<details><summary>char - Output special characters (eg. 'newline')</summary>    
+    
+    
     
 Output special characters (eg. 'newline')    
     
@@ -275,8 +327,12 @@ Examples:
   > char newline    
     
     
+    
 </details>    
-<details><summary>clear</summary>    
+    
+<details><summary>clear - clears the terminal</summary>    
+    
+    
     
 clears the terminal    
     
@@ -291,8 +347,12 @@ Examples:
   > clear    
     
     
+    
 </details>    
-<details><summary>clip</summary>    
+    
+<details><summary>clip - Copy the contents of the pipeline to the copy/paste buffer</summary>    
+    
+    
     
 Copy the contents of the pipeline to the copy/paste buffer    
     
@@ -307,8 +367,12 @@ Examples:
   > echo 'secret value' | clip    
     
     
+    
 </details>    
-<details><summary>compact</summary>    
+    
+<details><summary>compact - Creates a table with non-empty rows</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/compact.md)    
     
 Creates a table with non-empty rows    
     
@@ -329,8 +393,12 @@ Examples:
   > ls -af | compact target    
     
     
+    
 </details>    
-<details><summary>config</summary>    
+    
+<details><summary>config - Configuration management.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/config.md)    
     
 Configuration management.    
     
@@ -370,8 +438,12 @@ Examples:
   > config --path    
     
     
+    
 </details>    
-<details><summary>count</summary>    
+    
+<details><summary>count - Show the total number of rows or items.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/count.md)    
     
 Show the total number of rows or items.    
     
@@ -386,8 +458,12 @@ Examples:
   > echo [1 2 3 4 5] | count    
     
     
+    
 </details>    
-<details><summary>cp</summary>    
+    
+<details><summary>cp - Copy files.</summary>    
+    
+    
     
 Copy files.    
     
@@ -410,8 +486,12 @@ Examples:
   > cp -r dir_a dir_b    
     
     
+    
 </details>    
-<details><summary>date</summary>    
+    
+<details><summary>date - Get the current datetime.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/date.md)    
     
 Get the current datetime.    
     
@@ -439,8 +519,12 @@ Examples:
   > date --format '%Y-%m-%d %H:%M:%S.%f %z' --raw    
     
     
+    
 </details>    
-<details><summary>debug</summary>    
+    
+<details><summary>debug - Print the Rust debug representation of the values</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/debug.md)    
     
 Print the Rust debug representation of the values    
     
@@ -452,8 +536,12 @@ Flags:
   -r, --raw: Prints the raw value representation.    
     
     
+    
 </details>    
-<details><summary>default</summary>    
+    
+<details><summary>default - Sets a default row's column if missing.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/default.md)    
     
 Sets a default row's column if missing.    
     
@@ -472,8 +560,12 @@ Examples:
   > ls -af | default target 'nothing'    
     
     
+    
 </details>    
-<details><summary>describe</summary>    
+    
+<details><summary>describe - Describes the objects in the stream.</summary>    
+    
+    
     
 Describes the objects in the stream.    
     
@@ -484,8 +576,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>do</summary>    
+    
+<details><summary>do - Runs a block, optionally ignoring errors</summary>    
+    
+    
     
 Runs a block, optionally ignoring errors    
     
@@ -507,8 +603,12 @@ Examples:
   > do -i { thisisnotarealcommand }    
     
     
+    
 </details>    
-<details><summary>drop</summary>    
+    
+<details><summary>drop - Drop the last number of rows.</summary>    
+    
+    
     
 Drop the last number of rows.    
     
@@ -529,8 +629,12 @@ Examples:
   > echo [1 2 3] | drop 2    
     
     
+    
 </details>    
-<details><summary>du</summary>    
+    
+<details><summary>du - Find disk usage sizes of specified items</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/du.md)    
     
 Find disk usage sizes of specified items    
     
@@ -553,8 +657,12 @@ Examples:
   > du    
     
     
+    
 </details>    
-<details><summary>each</summary>    
+    
+<details><summary>each - Run a block on each row of the table.</summary>    
+    
+    
     
 Run a block on each row of the table.    
     
@@ -579,8 +687,12 @@ Examples:
   > echo ['bob' 'fred'] | each --numbered { echo `{{$it.index}} is {{$it.item}}` }    
     
     
+    
 </details>    
-<details><summary>echo</summary>    
+    
+<details><summary>echo - Echo the arguments back to the user.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/echo.md)    
     
 Echo the arguments back to the user.    
     
@@ -601,8 +713,12 @@ Examples:
   > echo $nu    
     
     
+    
 </details>    
-<details><summary>empty?</summary>    
+    
+<details><summary>empty? - Checks emptiness. The last value is the replacement value for any empty column(s) given to check against the table.</summary>    
+    
+    
     
 Checks emptiness. The last value is the replacement value for any empty column(s) given to check against the table.    
     
@@ -616,8 +732,19 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>enter</summary>    
+    
+<details><summary>enter - Create a new shell and begin at this path.    
+            
+Multiple encodings are supported for reading text files by using    
+the '--encoding <encoding>' parameter. Here is an example of a few:    
+big5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5    
+    
+For a more complete list of encodings please refer to the encoding_rs    
+documentation link at https://docs.rs/encoding_rs/0.8.23/encoding_rs/#statics</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/enter.md)    
     
 Create a new shell and begin at this path.    
             
@@ -649,8 +776,12 @@ Examples:
   > enter file.csv --encoding iso-8859-1    
     
     
+    
 </details>    
-<details><summary>every</summary>    
+    
+<details><summary>every - Show (or skip) every n-th row, starting from the first one.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/every.md)    
     
 Show (or skip) every n-th row, starting from the first one.    
     
@@ -672,8 +803,12 @@ Examples:
   > echo [1 2 3 4 5] | every 2 --skip    
     
     
+    
 </details>    
-<details><summary>exit</summary>    
+    
+<details><summary>exit - Exit the current shell (or all shells)</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/exit.md)    
     
 Exit the current shell (or all shells)    
     
@@ -692,8 +827,12 @@ Examples:
   > exit --now    
     
     
+    
 </details>    
-<details><summary>fetch</summary>    
+    
+<details><summary>fetch - Load from a URL into a cell, convert to table if possible (avoid by appending '--raw')</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/fetch.md)    
     
 Load from a URL into a cell, convert to table if possible (avoid by appending '--raw')    
     
@@ -710,8 +849,12 @@ Flags:
   -r, --raw: fetch contents as text rather than a table    
     
     
+    
 </details>    
-<details><summary>first</summary>    
+    
+<details><summary>first - Show only the first number of rows.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/first.md)    
     
 Show only the first number of rows.    
     
@@ -732,8 +875,12 @@ Examples:
   > echo [1 2 3] | first 2    
     
     
+    
 </details>    
-<details><summary>format</summary>    
+    
+<details><summary>format - Format columns into a string using a simple pattern.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/format.md)    
     
 Format columns into a string using a simple pattern.    
     
@@ -751,8 +898,12 @@ Examples:
   > ls | format '{name}: {size}'    
     
     
+    
 </details>    
-<details><summary>from</summary>    
+    
+<details><summary>from - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/from.md)    
     
 Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
     
@@ -763,7 +914,10 @@ Flags:
   -h, --help: Display this help message    
     
     
-- <details><summary>from bson</summary>    
+    
+- <details><summary>from bson - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+      
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -773,8 +927,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from csv</summary>    
+    
+- <details><summary>from csv - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from csv](https://github.com/nushell/nushell/blob/main/docs/commands/from-csv.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -784,8 +943,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from db</summary>    
+    
+- <details><summary>from db - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+      
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -795,8 +959,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from eml</summary>    
+    
+- <details><summary>from eml - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+      
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -806,8 +975,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from ics</summary>    
+    
+- <details><summary>from ics - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from ics](https://github.com/nushell/nushell/blob/main/docs/commands/from-ics.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -817,8 +991,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from ini</summary>    
+    
+- <details><summary>from ini - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from ini](https://github.com/nushell/nushell/blob/main/docs/commands/from-ini.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -828,8 +1007,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from json</summary>    
+    
+- <details><summary>from json - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from json](https://github.com/nushell/nushell/blob/main/docs/commands/from-json.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -839,8 +1023,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from ods</summary>    
+    
+- <details><summary>from ods - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from ods](https://github.com/nushell/nushell/blob/main/docs/commands/from-ods.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -850,8 +1039,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from sqlite</summary>    
+    
+- <details><summary>from sqlite - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+      
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -861,8 +1055,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from ssv</summary>    
+    
+- <details><summary>from ssv - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+      
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -872,8 +1071,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from toml</summary>    
+    
+- <details><summary>from toml - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from toml](https://github.com/nushell/nushell/blob/main/docs/commands/from-toml.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -883,8 +1087,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from tsv</summary>    
+    
+- <details><summary>from tsv - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from tsv](https://github.com/nushell/nushell/blob/main/docs/commands/from-tsv.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -894,8 +1103,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from url</summary>    
+    
+- <details><summary>from url - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from url](https://github.com/nushell/nushell/blob/main/docs/commands/from-url.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -905,8 +1119,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from vcf</summary>    
+    
+- <details><summary>from vcf - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from vcf](https://github.com/nushell/nushell/blob/main/docs/commands/from-vcf.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -916,8 +1135,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from xlsx</summary>    
+    
+- <details><summary>from xlsx - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from xlsx](https://github.com/nushell/nushell/blob/main/docs/commands/from-xlsx.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -927,8 +1151,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from xml</summary>    
+    
+- <details><summary>from xml - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from xml](https://github.com/nushell/nushell/blob/main/docs/commands/from-xml.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -938,8 +1167,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from yaml</summary>    
+    
+- <details><summary>from yaml - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+  [Detailed Doc for from yaml](https://github.com/nushell/nushell/blob/main/docs/commands/from-yaml.md)    
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -949,8 +1183,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>from yml</summary>    
+    
+- <details><summary>from yml - Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)</summary>    
+    
+      
     
   Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)    
       
@@ -960,9 +1199,15 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>get</summary>    
+    
+<details><summary>get - Open given cells as text.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/get.md)    
     
 Open given cells as text.    
     
@@ -983,8 +1228,12 @@ Examples:
   > sys | get cpu    
     
     
+    
 </details>    
-<details><summary>group-by</summary>    
+    
+<details><summary>group-by - Creates a new table with the data from the table rows grouped by the column given.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/group-by.md)    
     
 Creates a new table with the data from the table rows grouped by the column given.    
     
@@ -1005,7 +1254,10 @@ Examples:
   > echo [1 3 1 3 2 1 1] | group-by    
     
     
-- <details><summary>group-by date</summary>    
+    
+- <details><summary>group-by date - Creates a new table with the data from the table rows grouped by the column given.</summary>    
+    
+      
     
   Creates a new table with the data from the table rows grouped by the column given.    
       
@@ -1025,9 +1277,15 @@ Examples:
     Group items by their value    
     > echo [1 3 1 3 2 1 1] | group-by    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>headers</summary>    
+    
+<details><summary>headers - Use the first row of the table as column names</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/headers.md)    
     
 Use the first row of the table as column names    
     
@@ -1042,8 +1300,12 @@ Examples:
   > echo "a b c|1 2 3" | split row "|" | split column " " | headers    
     
     
+    
 </details>    
-<details><summary>help</summary>    
+    
+<details><summary>help - Display help information about commands.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/help.md)    
     
 Display help information about commands.    
     
@@ -1057,8 +1319,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>histogram</summary>    
+    
+<details><summary>histogram - Creates a new table with a histogram based on the column name passed in.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/histogram.md)    
     
 Creates a new table with a histogram based on the column name passed in.    
     
@@ -1083,8 +1349,12 @@ Examples:
   > echo [1 2 3 1 1 1 2 2 1 1] | histogram    
     
     
+    
 </details>    
-<details><summary>history</summary>    
+    
+<details><summary>history - Display command history.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/history.md)    
     
 Display command history.    
     
@@ -1095,8 +1365,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>if</summary>    
+    
+<details><summary>if - Filter table to match the condition.</summary>    
+    
+    
     
 Filter table to match the condition.    
     
@@ -1119,8 +1393,12 @@ Examples:
   > echo 1 | if $it > 5 { echo 'greater than 5' } { echo 'less than or equal to 5' }    
     
     
+    
 </details>    
-<details><summary>inc</summary>    
+    
+<details><summary>inc - Increment a value or version. Optionally use the column of a table.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/inc.md)    
     
 Increment a value or version. Optionally use the column of a table.    
     
@@ -1137,8 +1415,12 @@ Flags:
   -p, --patch: increment the patch version (eg 1.2.1 -> 1.2.2)    
     
     
+    
 </details>    
-<details><summary>insert</summary>    
+    
+<details><summary>insert - Insert a new column with a given value.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/insert.md)    
     
 Insert a new column with a given value.    
     
@@ -1153,8 +1435,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>keep</summary>    
+    
+<details><summary>keep - Keep the number of rows only</summary>    
+    
+    
     
 Keep the number of rows only    
     
@@ -1175,8 +1461,12 @@ Examples:
   > echo [1 2 3 4 5] | keep 4    
     
     
+    
 </details>    
-<details><summary>keep-until</summary>    
+    
+<details><summary>keep-until - Keeps rows until the condition matches.</summary>    
+    
+    
     
 Keeps rows until the condition matches.    
     
@@ -1190,8 +1480,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>keep-while</summary>    
+    
+<details><summary>keep-while - Keeps rows while the condition matches.</summary>    
+    
+    
     
 Keeps rows while the condition matches.    
     
@@ -1205,8 +1499,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>kill</summary>    
+    
+<details><summary>kill - Kill a process using the process id.</summary>    
+    
+    
     
 Kill a process using the process id.    
     
@@ -1230,8 +1528,12 @@ Examples:
   > kill --force 12345    
     
     
+    
 </details>    
-<details><summary>last</summary>    
+    
+<details><summary>last - Show only the last number of rows.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/last.md)    
     
 Show only the last number of rows.    
     
@@ -1252,8 +1554,12 @@ Examples:
   > echo [1 2 3 4 5] | last 3    
     
     
+    
 </details>    
-<details><summary>lines</summary>    
+    
+<details><summary>lines - Split single string into rows, one per line.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/lines.md)    
     
 Split single string into rows, one per line.    
     
@@ -1268,8 +1574,12 @@ Examples:
   > ^echo "two\nlines" | lines    
     
     
+    
 </details>    
-<details><summary>ls</summary>    
+    
+<details><summary>ls - View the contents of the current or given path.</summary>    
+    
+    
     
 View the contents of the current or given path.    
     
@@ -1298,8 +1608,12 @@ Examples:
   > ls *.rs    
     
     
+    
 </details>    
-<details><summary>match</summary>    
+    
+<details><summary>match - filter rows by regex</summary>    
+    
+    
     
 filter rows by regex    
     
@@ -1314,8 +1628,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>math</summary>    
+    
+<details><summary>math - Use mathematical functions as aggregate functions on a list of numbers or tables</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/math.md)    
     
 Use mathematical functions as aggregate functions on a list of numbers or tables    
     
@@ -1326,7 +1644,10 @@ Flags:
   -h, --help: Display this help message    
     
     
-- <details><summary>math avg</summary>    
+    
+- <details><summary>math avg - Use mathematical functions as aggregate functions on a list of numbers or tables</summary>    
+    
+      
     
   Use mathematical functions as aggregate functions on a list of numbers or tables    
       
@@ -1336,8 +1657,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>math max</summary>    
+    
+- <details><summary>math max - Use mathematical functions as aggregate functions on a list of numbers or tables</summary>    
+    
+      
     
   Use mathematical functions as aggregate functions on a list of numbers or tables    
       
@@ -1347,8 +1673,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>math median</summary>    
+    
+- <details><summary>math median - Use mathematical functions as aggregate functions on a list of numbers or tables</summary>    
+    
+      
     
   Use mathematical functions as aggregate functions on a list of numbers or tables    
       
@@ -1358,8 +1689,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>math min</summary>    
+    
+- <details><summary>math min - Use mathematical functions as aggregate functions on a list of numbers or tables</summary>    
+    
+      
     
   Use mathematical functions as aggregate functions on a list of numbers or tables    
       
@@ -1369,8 +1705,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>math mode</summary>    
+    
+- <details><summary>math mode - Use mathematical functions as aggregate functions on a list of numbers or tables</summary>    
+    
+      
     
   Use mathematical functions as aggregate functions on a list of numbers or tables    
       
@@ -1380,8 +1721,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>math sum</summary>    
+    
+- <details><summary>math sum - Use mathematical functions as aggregate functions on a list of numbers or tables</summary>    
+    
+      
     
   Use mathematical functions as aggregate functions on a list of numbers or tables    
       
@@ -1391,9 +1737,15 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>merge</summary>    
+    
+<details><summary>merge - Merge a table.</summary>    
+    
+    
     
 Merge a table.    
     
@@ -1411,8 +1763,12 @@ Examples:
   > ls | select name | keep 3 | merge { echo [1 2 3] | wrap index }    
     
     
+    
 </details>    
-<details><summary>mkdir</summary>    
+    
+<details><summary>mkdir - Make directories, creates intermediary directories as required.</summary>    
+    
+    
     
 Make directories, creates intermediary directories as required.    
     
@@ -1431,8 +1787,12 @@ Examples:
   > mkdir foo    
     
     
+    
 </details>    
-<details><summary>move</summary>    
+    
+<details><summary>move - moves across desired subcommand.</summary>    
+    
+    
     
 moves across desired subcommand.    
     
@@ -1443,7 +1803,10 @@ Flags:
   -h, --help: Display this help message    
     
     
-- <details><summary>move column</summary>    
+    
+- <details><summary>move column - moves across desired subcommand.</summary>    
+    
+      
     
   moves across desired subcommand.    
       
@@ -1453,9 +1816,15 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>mv</summary>    
+    
+<details><summary>mv - Move files or directories.</summary>    
+    
+    
     
 Move files or directories.    
     
@@ -1480,8 +1849,12 @@ Examples:
   > mv *.txt my/subdirectory    
     
     
+    
 </details>    
-<details><summary>n</summary>    
+    
+<details><summary>n - Go to next shell.</summary>    
+    
+    
     
 Go to next shell.    
     
@@ -1492,8 +1865,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>nth</summary>    
+    
+<details><summary>nth - Return only the selected rows</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/nth.md)    
     
 Return only the selected rows    
     
@@ -1515,8 +1892,19 @@ Examples:
   > echo [first second third] | nth 0 2    
     
     
+    
 </details>    
-<details><summary>open</summary>    
+    
+<details><summary>open - Load a file into a cell, convert to table if possible (avoid by appending '--raw').    
+            
+Multiple encodings are supported for reading text files by using    
+the '--encoding <encoding>' parameter. Here is an example of a few:    
+big5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5    
+    
+For a more complete list of encodings please refer to the encoding_rs    
+documentation link at https://docs.rs/encoding_rs/0.8.23/encoding_rs/#statics</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/open.md)    
     
 Load a file into a cell, convert to table if possible (avoid by appending '--raw').    
             
@@ -1546,8 +1934,12 @@ Examples:
   > open file.csv --encoding iso-8859-1 | from csv    
     
     
+    
 </details>    
-<details><summary>p</summary>    
+    
+<details><summary>p - Go to previous shell.</summary>    
+    
+    
     
 Go to previous shell.    
     
@@ -1558,8 +1950,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>parse</summary>    
+    
+<details><summary>parse - Parse columns from string data using a simple pattern.</summary>    
+    
+    
     
 Parse columns from string data using a simple pattern.    
     
@@ -1574,8 +1970,12 @@ Flags:
   -r, --regex: use full regex syntax for patterns    
     
     
+    
 </details>    
-<details><summary>pivot</summary>    
+    
+<details><summary>pivot - Pivots the table contents so rows become columns and columns become rows.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/pivot.md)    
     
 Pivots the table contents so rows become columns and columns become rows.    
     
@@ -1591,8 +1991,12 @@ Flags:
   -i, --ignore-titles: don't pivot the column names into values    
     
     
+    
 </details>    
-<details><summary>post</summary>    
+    
+<details><summary>post - Post content to a url and retrieve data as a table if possible.</summary>    
+    
+    
     
 Post content to a url and retrieve data as a table if possible.    
     
@@ -1612,8 +2016,12 @@ Flags:
   -r, --raw: return values as a string instead of a table    
     
     
+    
 </details>    
-<details><summary>prepend</summary>    
+    
+<details><summary>prepend - Prepend the given row to the front of the table</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/prepend.md)    
     
 Prepend the given row to the front of the table    
     
@@ -1631,8 +2039,12 @@ Examples:
   > echo [2 3 4] | prepend 1    
     
     
+    
 </details>    
-<details><summary>ps</summary>    
+    
+<details><summary>ps - View information about system processes.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/ps.md)    
     
 View information about system processes.    
     
@@ -1644,8 +2056,12 @@ Flags:
   -f, --full: list all available columns for each entry    
     
     
+    
 </details>    
-<details><summary>pwd</summary>    
+    
+<details><summary>pwd - Output the current working directory.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/pwd.md)    
     
 Output the current working directory.    
     
@@ -1660,8 +2076,12 @@ Examples:
   > pwd    
     
     
+    
 </details>    
-<details><summary>random</summary>    
+    
+<details><summary>random - Generate random values</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/random.md)    
     
 Generate random values    
     
@@ -1672,7 +2092,10 @@ Flags:
   -h, --help: Display this help message    
     
     
-- <details><summary>random bool</summary>    
+    
+- <details><summary>random bool - Generate random values</summary>    
+    
+      
     
   Generate random values    
       
@@ -1682,8 +2105,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>random dice</summary>    
+    
+- <details><summary>random dice - Generate random values</summary>    
+    
+      
     
   Generate random values    
       
@@ -1693,8 +2121,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>random uuid</summary>    
+    
+- <details><summary>random uuid - Generate random values</summary>    
+    
+      
     
   Generate random values    
       
@@ -1704,9 +2137,15 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>range</summary>    
+    
+<details><summary>range - Return only the selected rows</summary>    
+    
+    
     
 Return only the selected rows    
     
@@ -1720,8 +2159,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>reject</summary>    
+    
+<details><summary>reject - Remove the given columns from the table.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/reject.md)    
     
 Remove the given columns from the table.    
     
@@ -1739,8 +2182,12 @@ Examples:
   > ls | reject modified    
     
     
+    
 </details>    
-<details><summary>rename</summary>    
+    
+<details><summary>rename - Creates a new table with columns renamed.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/rename.md)    
     
 Creates a new table with columns renamed.    
     
@@ -1762,8 +2209,12 @@ Examples:
   > echo "{a: 1, b: 2, c: 3}" | from json | rename spam eggs cars    
     
     
+    
 </details>    
-<details><summary>reverse</summary>    
+    
+<details><summary>reverse - Reverses the table.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/reverse.md)    
     
 Reverses the table.    
     
@@ -1778,8 +2229,12 @@ Examples:
   > echo [3 1 2 19 0] | reverse    
     
     
+    
 </details>    
-<details><summary>rm</summary>    
+    
+<details><summary>rm - Remove file(s)</summary>    
+    
+    
     
 Remove file(s)    
     
@@ -1806,8 +2261,12 @@ Examples:
   > rm --permanent file.txt    
     
     
+    
 </details>    
-<details><summary>run_external</summary>    
+    
+<details><summary>run_external - </summary>    
+    
+    
     
     
     
@@ -1821,8 +2280,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>save</summary>    
+    
+<details><summary>save - Save the contents of the pipeline to a file.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/save.md)    
     
 Save the contents of the pipeline to a file.    
     
@@ -1837,8 +2300,12 @@ Flags:
   -r, --raw: treat values as-is rather than auto-converting based on file extension    
     
     
+    
 </details>    
-<details><summary>select</summary>    
+    
+<details><summary>select - Down-select table to only these columns.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/select.md)    
     
 Down-select table to only these columns.    
     
@@ -1859,8 +2326,12 @@ Examples:
   > ls | select name size    
     
     
+    
 </details>    
-<details><summary>shells</summary>    
+    
+<details><summary>shells - Display the list of current shells.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/shells.md)    
     
 Display the list of current shells.    
     
@@ -1871,8 +2342,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>shuffle</summary>    
+    
+<details><summary>shuffle - Shuffle rows randomly.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/shuffle.md)    
     
 Shuffle rows randomly.    
     
@@ -1883,8 +2358,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>size</summary>    
+    
+<details><summary>size - Gather word count statistics on the text.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/size.md)    
     
 Gather word count statistics on the text.    
     
@@ -1899,8 +2378,12 @@ Examples:
   > echo "There are seven words in this sentence" | size    
     
     
+    
 </details>    
-<details><summary>skip</summary>    
+    
+<details><summary>skip - Skip some number of rows.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/skip.md)    
     
 Skip some number of rows.    
     
@@ -1918,8 +2401,12 @@ Examples:
   > echo [1 2 3 4 5 6 7] | skip 5    
     
     
+    
 </details>    
-<details><summary>skip-until</summary>    
+    
+<details><summary>skip-until - Skips rows until the condition matches.</summary>    
+    
+    
     
 Skips rows until the condition matches.    
     
@@ -1933,8 +2420,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>skip-while</summary>    
+    
+<details><summary>skip-while - Skips rows while the condition matches.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/skip-while.md)    
     
 Skips rows while the condition matches.    
     
@@ -1948,8 +2439,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>sort-by</summary>    
+    
+<details><summary>sort-by - Sort by the given columns, in increasing order.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/sort-by.md)    
     
 Sort by the given columns, in increasing order.    
     
@@ -1973,8 +2468,12 @@ Examples:
   > ls | sort-by type size    
     
     
+    
 </details>    
-<details><summary>split</summary>    
+    
+<details><summary>split - split contents across desired subcommand (like row, column) via the separator.</summary>    
+    
+    
     
 split contents across desired subcommand (like row, column) via the separator.    
     
@@ -1985,7 +2484,10 @@ Flags:
   -h, --help: Display this help message    
     
     
-- <details><summary>split chars</summary>    
+    
+- <details><summary>split chars - split contents across desired subcommand (like row, column) via the separator.</summary>    
+    
+      
     
   split contents across desired subcommand (like row, column) via the separator.    
       
@@ -1995,8 +2497,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>split column</summary>    
+    
+- <details><summary>split column - split contents across desired subcommand (like row, column) via the separator.</summary>    
+    
+  [Detailed Doc for split column](https://github.com/nushell/nushell/blob/main/docs/commands/split-column.md)    
     
   split contents across desired subcommand (like row, column) via the separator.    
       
@@ -2006,8 +2513,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>split row</summary>    
+    
+- <details><summary>split row - split contents across desired subcommand (like row, column) via the separator.</summary>    
+    
+  [Detailed Doc for split row](https://github.com/nushell/nushell/blob/main/docs/commands/split-row.md)    
     
   split contents across desired subcommand (like row, column) via the separator.    
       
@@ -2017,9 +2529,15 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>split-by</summary>    
+    
+<details><summary>split-by - Creates a new table with the data from the inner tables split by the column given.</summary>    
+    
+    
     
 Creates a new table with the data from the inner tables split by the column given.    
     
@@ -2033,8 +2551,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>start</summary>    
+    
+<details><summary>start - Opens each file/directory/URL using the default application</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/start.md)    
     
 Opens each file/directory/URL using the default application    
     
@@ -2049,8 +2571,12 @@ Flags:
   -a, --application <string>: Specifies the application used for opening the files/directories/urls    
     
     
+    
 </details>    
-<details><summary>str</summary>    
+    
+<details><summary>str - Apply string function.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/str.md)    
     
 Apply string function.    
     
@@ -2064,7 +2590,10 @@ Flags:
   -h, --help: Display this help message    
     
     
-- <details><summary>str capitalize</summary>    
+    
+- <details><summary>str capitalize - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2077,8 +2606,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str collect</summary>    
+    
+- <details><summary>str collect - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2091,8 +2625,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str downcase</summary>    
+    
+- <details><summary>str downcase - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2105,8 +2644,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str find-replace</summary>    
+    
+- <details><summary>str find-replace - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2119,8 +2663,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str length</summary>    
+    
+- <details><summary>str length - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2133,8 +2682,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str set</summary>    
+    
+- <details><summary>str set - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2147,8 +2701,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str substring</summary>    
+    
+- <details><summary>str substring - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2161,8 +2720,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str to-datetime</summary>    
+    
+- <details><summary>str to-datetime - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2175,8 +2739,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str to-decimal</summary>    
+    
+- <details><summary>str to-decimal - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2189,8 +2758,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str to-int</summary>    
+    
+- <details><summary>str to-int - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2203,8 +2777,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str trim</summary>    
+    
+- <details><summary>str trim - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2217,8 +2796,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>str upcase</summary>    
+    
+- <details><summary>str upcase - Apply string function.</summary>    
+    
+      
     
   Apply string function.    
       
@@ -2231,9 +2815,15 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>sys</summary>    
+    
+<details><summary>sys - View information about the current system.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/sys.md)    
     
 View information about the current system.    
     
@@ -2244,8 +2834,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>table</summary>    
+    
+<details><summary>table - View the contents of the pipeline as a table.</summary>    
+    
+    
     
 View the contents of the pipeline as a table.    
     
@@ -2257,8 +2851,12 @@ Flags:
   -n, --start_number <number>: row number to start viewing from    
     
     
+    
 </details>    
-<details><summary>tags</summary>    
+    
+<details><summary>tags - Read the tags (metadata) for values.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/tags.md)    
     
 Read the tags (metadata) for values.    
     
@@ -2269,8 +2867,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>textview</summary>    
+    
+<details><summary>textview - Autoview of text data.</summary>    
+    
+    
     
 Autoview of text data.    
     
@@ -2281,8 +2883,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>to</summary>    
+    
+<details><summary>to - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/to.md)    
     
 Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
     
@@ -2293,7 +2899,10 @@ Flags:
   -h, --help: Display this help message    
     
     
-- <details><summary>to bson</summary>    
+    
+- <details><summary>to bson - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+      
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2303,8 +2912,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to csv</summary>    
+    
+- <details><summary>to csv - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+  [Detailed Doc for to csv](https://github.com/nushell/nushell/blob/main/docs/commands/to-csv.md)    
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2314,8 +2928,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to db</summary>    
+    
+- <details><summary>to db - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+      
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2325,8 +2944,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to html</summary>    
+    
+- <details><summary>to html - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+      
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2336,8 +2960,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to json</summary>    
+    
+- <details><summary>to json - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+  [Detailed Doc for to json](https://github.com/nushell/nushell/blob/main/docs/commands/to-json.md)    
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2347,8 +2976,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to md</summary>    
+    
+- <details><summary>to md - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+      
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2358,8 +2992,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to sqlite</summary>    
+    
+- <details><summary>to sqlite - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+      
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2369,8 +3008,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to toml</summary>    
+    
+- <details><summary>to toml - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+  [Detailed Doc for to toml](https://github.com/nushell/nushell/blob/main/docs/commands/to-toml.md)    
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2380,8 +3024,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to tsv</summary>    
+    
+- <details><summary>to tsv - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+  [Detailed Doc for to tsv](https://github.com/nushell/nushell/blob/main/docs/commands/to-tsv.md)    
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2391,8 +3040,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to url</summary>    
+    
+- <details><summary>to url - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+  [Detailed Doc for to url](https://github.com/nushell/nushell/blob/main/docs/commands/to-url.md)    
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2402,8 +3056,13 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
-- <details><summary>to yaml</summary>    
+    
+- <details><summary>to yaml - Convert table into an output format (based on subcommand, like csv, html, json, yaml).</summary>    
+    
+  [Detailed Doc for to yaml](https://github.com/nushell/nushell/blob/main/docs/commands/to-yaml.md)    
     
   Convert table into an output format (based on subcommand, like csv, html, json, yaml).    
       
@@ -2413,9 +3072,15 @@ Flags:
   Flags:    
     -h, --help: Display this help message    
       
+      
+    
   </details>    
+    
 </details>    
-<details><summary>touch</summary>    
+    
+<details><summary>touch - creates a file</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/touch.md)    
     
 creates a file    
     
@@ -2433,8 +3098,12 @@ Examples:
   > touch fixture.json    
     
     
+    
 </details>    
-<details><summary>tree</summary>    
+    
+<details><summary>tree - View the contents of the pipeline as a tree.</summary>    
+    
+    
     
 View the contents of the pipeline as a tree.    
     
@@ -2445,8 +3114,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>trim</summary>    
+    
+<details><summary>trim - Trim leading and following whitespace from text data.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/trim.md)    
     
 Trim leading and following whitespace from text data.    
     
@@ -2461,8 +3134,12 @@ Examples:
   > echo "    Hello world" | trim    
     
     
+    
 </details>    
-<details><summary>uniq</summary>    
+    
+<details><summary>uniq - Return the unique rows</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/uniq.md)    
     
 Return the unique rows    
     
@@ -2474,8 +3151,12 @@ Flags:
   -c, --count: Count the unique rows    
     
     
+    
 </details>    
-<details><summary>update</summary>    
+    
+<details><summary>update - Update an existing column to have a new value.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/update.md)    
     
 Update an existing column to have a new value.    
     
@@ -2490,8 +3171,12 @@ Flags:
   -h, --help: Display this help message    
     
     
+    
 </details>    
-<details><summary>version</summary>    
+    
+<details><summary>version - Display Nu version</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/version.md)    
     
 Display Nu version    
     
@@ -2506,8 +3191,12 @@ Examples:
   > version    
     
     
+    
 </details>    
-<details><summary>where</summary>    
+    
+<details><summary>where - Filter table to match the condition.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/where.md)    
     
 Filter table to match the condition.    
     
@@ -2534,8 +3223,12 @@ Examples:
   > ls | where modified <= 2M    
     
     
+    
 </details>    
-<details><summary>which</summary>    
+    
+<details><summary>which - Finds a program file.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/which.md)    
     
 Finds a program file.    
     
@@ -2550,8 +3243,12 @@ Flags:
   -a, --all: list all executables    
     
     
+    
 </details>    
-<details><summary>with-env</summary>    
+    
+<details><summary>with-env - Runs a block with an environment set. Eg) with-env [NAME 'foo'] { echo $nu.env.NAME }</summary>    
+    
+    
     
 Runs a block with an environment set. Eg) with-env [NAME 'foo'] { echo $nu.env.NAME }    
     
@@ -2570,8 +3267,12 @@ Examples:
   > with-env [MYENV "my env value"] { echo $nu.env.MYENV }    
     
     
+    
 </details>    
-<details><summary>wrap</summary>    
+    
+<details><summary>wrap - Wraps the given data in a table.</summary>    
+    
+[Detailed doc](https://github.com/nushell/nushell/blob/main/docs/commands/wrap.md)    
     
 Wraps the given data in a table.    
     
@@ -2592,4 +3293,6 @@ Examples:
   > echo [1 2 3] | wrap MyColumn    
     
     
+    
 </details>    
+    
