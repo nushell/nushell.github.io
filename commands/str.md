@@ -59,7 +59,7 @@ Applies the subcommand to a value or a table.
 ```
 
 ```shell
-> echo "1, 2, 3" | split row "," | str to int | math sum
+> echo "1, 2, 3" | split row "," | str to-int | math sum
 6
 ```
 
