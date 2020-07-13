@@ -2,18 +2,17 @@
 ---
 title: sort-by
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 The `sort-by` command sorts the table being displayed in the terminal by a chosen column(s).
 
 `sort-by` takes multiple arguments (being the names of columns) sorting by each argument in order.
 
-
-## Examples -
+## Examples
 
 ```shell
-/home/example> ls | sort-by size
+> ls | sort-by size
 ━━━┯━━━━━━┯━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
  # │ name │ type │ readonly │ size   │ accessed       │ modified
 ───┼──────┼──────┼──────────┼────────┼────────────────┼────────────────
@@ -29,7 +28,7 @@ The `sort-by` command sorts the table being displayed in the terminal by a chose
 ```
 
 ```shell
-/home/example> ls | sort-by size name
+> ls | sort-by size name
 ━━━┯━━━━━━┯━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
  # │ name │ type │ readonly │ size   │ accessed       │ modified
 ───┼──────┼──────┼──────────┼────────┼────────────────┼────────────────
@@ -43,8 +42,8 @@ The `sort-by` command sorts the table being displayed in the terminal by a chose
  7 │ b    │ File │          │ 349 B  │ 36 minutes ago │ 36 minutes ago
 ```
 
-```
-/home/example> ls | sort-by accessed
+```shell
+> ls | sort-by accessed
 ━━━┯━━━━━━┯━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
  # │ name │ type │ readonly │ size   │ accessed       │ modified
 ───┼──────┼──────┼──────────┼────────┼────────────────┼────────────────

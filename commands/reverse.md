@@ -1,7 +1,7 @@
 ---
 title: reverse
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 This command reverses the order of the elements in a sorted table.
@@ -19,6 +19,9 @@ This command reverses the order of the elements in a sorted table.
  3 │ youshouldeatmorecereal.txt │ File │          │ 768 B  │ 30 seconds ago │ now
  4 │ zeusiscrazy.txt            │ File │          │ 556 B  │ 22 minutes ago │ 18 minutes ago
 ━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━┷━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━
+```
+
+```shell
 > ls | sort-by name | reverse
 ━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
  # │ name                       │ type │ readonly │ size   │ accessed       │ modified
@@ -42,6 +45,9 @@ This command reverses the order of the elements in a sorted table.
  3 │ zeusiscrazy.txt            │ File │          │ 556 B  │ 22 minutes ago │ 19 minutes ago
  4 │ youshouldeatmorecereal.txt │ File │          │ 768 B  │ a minute ago   │ 26 seconds ago
 ━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━┷━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━
+```
+
+```shell
 > ls | sort-by size | reverse
 ━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
  # │ name                       │ type │ readonly │ size   │ accessed       │ modified

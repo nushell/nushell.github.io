@@ -1,7 +1,7 @@
 ---
 title: wrap
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 Wraps data in a table
@@ -17,15 +17,17 @@ Syntax: `wrap <column>`
 `wrap` will give a name to a column of `<value>` data:
 
 ```shell
-/home/chris> ls | get name
+> ls | get name
 ───┬──────────────
- # │ <value>
+ # │
 ───┼──────────────
  0 │ americas.csv
  1 │ iso.csv
 ───┴──────────────
+```
 
-/home/chris> ls | get name | wrap filename
+```shell
+> ls | get name | wrap filename
 ───┬──────────────
  # │ filename
 ───┼──────────────
@@ -34,10 +36,10 @@ Syntax: `wrap <column>`
 ───┴──────────────
 ```
 
-`wrap` will encapsulate rows as embedded tables :
+`wrap` will encapsulate rows as embedded tables:
 
 ```shell
-/home/chris> ls | select name type size
+> ls | select name type size
 ───┬──────────────┬──────┬─────────
  # │ name         │ type │ size
 ───┼──────────────┼──────┼─────────
@@ -45,7 +47,7 @@ Syntax: `wrap <column>`
  1 │ iso.csv      │ File │ 20.8 KB
 ───┴──────────────┴──────┴─────────
 
-/home/chris> ls | select name type size | each {wrap details}
+> ls | select name type size | each {wrap details}
 ───┬────────────────
  # │ details
 ───┼────────────────
@@ -54,12 +56,11 @@ Syntax: `wrap <column>`
 ───┴────────────────
 ```
 
-`wrap` will encapsulate a whole table as an embedded table :
+`wrap` will encapsulate a whole table as an embedded table:
 
 ```shell
-/home/chris> ls | wrap files
+> ls | wrap files
 ───────┬────────────────
  files │ [table 2 rows]
 ───────┴────────────────
 ```
-

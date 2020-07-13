@@ -1,7 +1,7 @@
 ---
 title: open
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 Loads a file into a cell, convert it to table if possible (avoid by appending `--raw` flag)
@@ -22,6 +22,9 @@ Loads a file into a cell, convert it to table if possible (avoid by appending `-
   Age: 50
   Telephone: 99521080
   Country: Germany
+```
+
+```shell
 > open user.yaml
 ━━━┯━━━━━━━━━┯━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━
  # │ Name    │ Age │ Telephone │ Country
@@ -30,6 +33,9 @@ Loads a file into a cell, convert it to table if possible (avoid by appending `-
  1 │ Michael │  42 │  44002010 │ Spain
  2 │ Will    │  50 │  99521080 │ Germany
 ━━━┷━━━━━━━━━┷━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━
+```
+
+```shell
 > open user.yaml --raw
 - Name: Peter
   Age: 30
@@ -48,25 +54,28 @@ Loads a file into a cell, convert it to table if possible (avoid by appending `-
 ```shell
 > cat user.json
 [
-	{
-		"Name": "Peter",
-		"Age": 30,
-		"Telephone": 88204828,
-		"Country": "Singapore"
-	},
-	{
-		"Name": "Michael",
-		"Age": 42,
-		"Telephone": 44002010,
-		"Country": "Spain"
-	},
-	{
-		"Name": "Will",
-		"Age": 50,
-		"Telephone": 99521080,
-		"Country": "Germany"
-	}
+    {
+        "Name": "Peter",
+        "Age": 30,
+        "Telephone": 88204828,
+        "Country": "Singapore"
+    },
+    {
+        "Name": "Michael",
+        "Age": 42,
+        "Telephone": 44002010,
+        "Country": "Spain"
+    },
+    {
+        "Name": "Will",
+        "Age": 50,
+        "Telephone": 99521080,
+        "Country": "Germany"
+    }
 ]
+```
+
+```shell
 > open user.json
 ━━━┯━━━━━━━━━┯━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━
  # │ Name    │ Age │ Telephone │ Country
@@ -75,25 +84,28 @@ Loads a file into a cell, convert it to table if possible (avoid by appending `-
  1 │ Michael │  42 │  44002010 │ Spain
  2 │ Will    │  50 │  99521080 │ Germany
 ━━━┷━━━━━━━━━┷━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━
+```
+
+```shell
 > open user.json --raw
 [
-	{
-		"Name": "Peter",
-		"Age": 30,
-		"Telephone": 88204828,
-		"Country": "Singapore"
-	},
-	{
-		"Name": "Michael",
-		"Age": 42,
-		"Telephone": 44002010,
-		"Country": "Spain"
-	},
-	{
-		"Name": "Will",
-		"Age": 50,
-		"Telephone": 99521080,
-		"Country": "Germany"
-	}
+    {
+        "Name": "Peter",
+        "Age": 30,
+        "Telephone": 88204828,
+        "Country": "Singapore"
+    },
+    {
+        "Name": "Michael",
+        "Age": 42,
+        "Telephone": 44002010,
+        "Country": "Spain"
+    },
+    {
+        "Name": "Will",
+        "Age": 50,
+        "Telephone": 99521080,
+        "Country": "Germany"
+    }
 ]
 ```

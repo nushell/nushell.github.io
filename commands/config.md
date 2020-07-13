@@ -1,14 +1,14 @@
 ---
 title: config
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 Configuration management.
 
 Syntax: `config {flags}`
 
-### Flags
+## Flags
 
     --load <file path shape>
       load the config from the path give
@@ -31,17 +31,22 @@ Syntax: `config {flags}`
     --path
       return the path to the config file
 
-### Variables
+## Variables
 
-| Variable        | Type                   | Description                                                    |
-| --------------- | ---------------------- | -------------------------------------------------------------- |
-| path            | table of strings       | PATH to use to find binaries                                   |
-| env             | row                    | the environment variables to pass to external commands         |
-| ctrlc_exit      | boolean                | whether or not to exit Nu after multiple ctrl-c presses        |
-| table_mode      | "light" or other       | enable lightweight or normal tables                            |
-| edit_mode       | "vi" or "emacs"        | changes line editing to "vi" or "emacs" mode                   |
-| key_timeout     | integer (milliseconds) | vi: the delay to wait for a longer key sequence after ESC      |
-| completion_mode | "circular" or "list"   | changes completion type to "circular" (default) or "list" mode |
+| Variable           | Type                   | Description                                                               |
+| ------------------ | ---------------------- | ------------------------------------------------------------------------- |
+| path               | table of strings       | PATH to use to find binaries                                              |
+| env                | row                    | the environment variables to pass to external commands                    |
+| ctrlc_exit         | boolean                | whether or not to exit Nu after multiple ctrl-c presses                   |
+| table_mode         | "light" or other       | enable lightweight or normal tables                                       |
+| edit_mode          | "vi" or "emacs"        | changes line editing to "vi" or "emacs" mode                              |
+| key_timeout        | integer (milliseconds) | vi: the delay to wait for a longer key sequence after ESC                 |
+| history_size       | integer                | maximum entries that will be stored in history (100,000 default)          |
+| completion_mode    | "circular" or "list"   | changes completion type to "circular" (default) or "list" mode            |
+| complete_from_path | boolean                | whether or not to complete names of binaries on PATH (default true)       |
+| rm_always_trash    | boolean                | whether or not to always use system trash when no flags are given to `rm` |
+| pivot_mode         | "auto" or "always" or "never"                | "auto" will only pivot single row tables if the output is greater than the terminal width. "always" will always pivot single row tables. "never" will never pivot single row tables.            |
+| plugin_dirs        | table of strings       | additional directories to search for plugins during startup               |
 
 ## Examples
 
