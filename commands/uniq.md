@@ -1,7 +1,7 @@
 ---
 title: uniq
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 Returns unique rows or values from a dataset.
@@ -10,7 +10,7 @@ Returns unique rows or values from a dataset.
 
 Given a file `test.csv`
 
-```
+```csv
 first_name,last_name,rusty_at,type
 Andrés,Robalino,10/11/2013,A
 Andrés,Robalino,10/11/2013,A
@@ -18,7 +18,7 @@ Jonathan,Turner,10/12/2013,B
 Yehuda,Katz,10/11/2013,A
 ```
 
-```
+```shell
 > `open test.csv | uniq`
 ━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━
  # │ first_name │ last_name │ rusty_at   │ type
@@ -29,12 +29,26 @@ Yehuda,Katz,10/11/2013,A
 ━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━
 ```
 
-```
+```shell
 > `open test.csv | get type | uniq`
 ━━━┯━━━━━━━━━
- # │ <value>
+ # │
 ───┼─────────
  0 │ A
  1 │ B
 ━━━┷━━━━━━━━━
+```
+
+### Counting
+
+`--count` or `-c` is the flag to output a `count` column.
+
+```shell
+> `open test.csv | get type | uniq -c`
+───┬───────┬───────
+ # │ value │ count
+───┼───────┼───────
+ 0 │ A     │     3
+ 1 │ B     │     2
+───┴───────┴───────
 ```

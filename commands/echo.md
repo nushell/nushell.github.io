@@ -1,7 +1,7 @@
 ---
 title: echo
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 Use `echo` to repeat arguments back to the user
@@ -10,7 +10,15 @@ Use `echo` to repeat arguments back to the user
 
 ```shell
 > echo Hello world
-Hello world
+───┬───────
+ # │
+───┼───────
+ 0 │ Hello
+ 1 │ world
+───┴───────
+```
+
+```shell
 > echo "Hello, world!"
 Hello, world!
 ```

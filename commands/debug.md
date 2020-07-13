@@ -1,17 +1,17 @@
 ---
 title: debug
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 `debug` prints a debugging view of the table data. It is useful when you want to get the specific types of the data and while investigating errors.
 
 ## Examples
 
-```
-❯ ls | first 2 | debug
+```shell
+> ls | first 2 | debug
 ───┬──────────────────────────────────────────
- # │ <value>
+ # │
 ───┼──────────────────────────────────────────
  0 │ (name=".azure"
    │ type="Dir"
@@ -24,10 +24,13 @@ nu_version: 0.14
    │ modified=2020-01-06T05:45:30.933303081Z((B
    │ mdate))
 ───┴──────────────────────────────────────────
-❯ ls | last 8 | get type | debug
-───┬─────────
- # │ <value>
-───┼─────────
+```
+
+```shell
+> ls | last 8 | get type | debug
+───┬───────────────────────
+ # │
+───┼───────────────────────
  0 │ "Dir"
  1 │ "Dir"
  2 │ "File"
@@ -36,10 +39,16 @@ nu_version: 0.14
  5 │ "Dir"
  6 │ "Dir"
  7 │ "Dir"
-───┴─────────
-❯ open --raw Cargo.toml | size | debug
-(lines=271 words=955 chars=7855 max length=7856)
-❯ du src/ | debug
+───┴───────────────────────
+```
+
+```shell
+> open --raw Cargo.toml | size | debug
+(lines=139 words=560 chars=4607 max length=4607)
+```
+
+```shell
+> du src/ | debug
 (path="src"(path)
  apparent=705300(bytesize)
  physical=1118208(bytesize)
