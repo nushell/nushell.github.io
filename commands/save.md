@@ -4,7 +4,7 @@ layout: command
 nu_version: 0.16.1
 ---
 
-This command saves the contents of the pipeline to a file. Use this in combination with the `to-json`, `to-csv`, ... commands to save the contents in the specified format.
+This command saves the contents of the pipeline to a file. Use this in combination with the `to json`, `to csv`, ... commands to save the contents in the specified format.
 
 Syntax: `save (path) {flags}`
 
