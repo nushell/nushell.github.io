@@ -1,18 +1,20 @@
 ---
 title: calc
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 calc is a command that takes a math expression from the pipeline and calculates that into a number.
 
 This command supports the following operations -
 
-operations :
+operations:
+
 * binary operators: +, -, *, /, % (remainder), ^ (power)
 * unary operators: +, -, ! (factorial)
 
-functions :
+functions:
+
 * sqrt, abs
 * exp, ln, log10
 * sin, cos, tan, asin, acos, atan, atan2
@@ -22,40 +24,74 @@ functions :
 * max(x, ...), min(x, ...): maximum and minimum of 1 or more numbers
 
 constants:
+
 * pi
 * e
 
-## Examples -
+## Examples
 
-```
+```shell
 > echo "1+2+3" | calc
-6.000000000000000
+6.0
+```
+
+```shell
 > echo "1-2+3" | calc
-2.000000000000000
+2.0
+```
+
+```shell
 > echo "-(-23)" | calc
-23.00000000000000
+23.0
+```
+
+```shell
 > echo "5^2" | calc
-25.00000000000000
+25.0
+```
+
+```shell
 > echo "5^3" | calc
-125.0000000000000
+125.0
+```
+
+```shell
 > echo "min(5,4,3,2,1,0,-100,45)" | calc
--100.0000000000000
+-100.0
+```
+
+```shell
 > echo "max(5,4,3,2,1,0,-100,45)" | calc
-45.00000000000000
-> echo "sqrt(2) | calc"
+45.0
+```
+
+```shell
+> echo sqrt(2) | calc
 1.414213562373095
+```
+
+```shell
 > echo pi | calc
 3.141592653589793
-> echo e | calc
-2.718281828459045
-> echo "sin(pi / 2)" | calc
-1.000000000000000
-> echo "floor(5999/1000)" | calc
-5.000000000000000
 ```
 
+```shell
+> echo e | calc
+2.718281828459045
 ```
-❯ open abc.json
+
+```shell
+> echo "sin(pi / 2)" | calc
+1.0
+```
+
+```shell
+> echo "floor(5999/1000)" | calc
+5.0
+```
+
+```shell
+> open abc.json
 ───┬──────
  # │ size
 ───┼──────
@@ -68,10 +104,12 @@ constants:
  6 │  999
  7 │ 1639
 ───┴──────
+```
 
-❯ open abc.json | format "({size} + 500) * 4"
+```shell
+> open abc.json | format "({size} + 500) * 4"
 ───┬──────────────────
- # │ <value>
+ # │
 ───┼──────────────────
  0 │ (816 + 500) * 4
  1 │ (1627 + 500) * 4
@@ -82,10 +120,12 @@ constants:
  6 │ (999 + 500) * 4
  7 │ (1639 + 500) * 4
 ───┴──────────────────
+```
 
-❯ open abc.json | format "({size} + 500) * 4" | calc
+```shell
+> open abc.json | format "({size} + 500) * 4" | calc
 ───┬───────────
- # │ <value>
+ # │
 ───┼───────────
  0 │ 5264.0000
  1 │ 8508.0000
@@ -96,10 +136,12 @@ constants:
  6 │ 5996.0000
  7 │ 8556.0000
 ───┴───────────
+```
 
-❯ open abc.json | format "({size} - 1000) * 4" | calc
+```shell
+> open abc.json | format "({size} - 1000) * 4" | calc
 ───┬────────────
- # │ <value>
+ # │
 ───┼────────────
  0 │  -736.0000
  1 │  2508.0000
@@ -114,7 +156,7 @@ constants:
 
 Note that since `calc` uses floating-point numbers, the result may not always be precise.
 
-```
+```shell
 > echo "floor(5999999999999999999/1000000000000000000)" | calc
-6.000000000000000
+6.0
 ```

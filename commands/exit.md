@@ -1,7 +1,7 @@
 ---
 title: exit
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 Exits the nu shell. If you have multiple nu shells, use `exit --now` to exit all of them.
@@ -12,7 +12,7 @@ Exits the nu shell. If you have multiple nu shells, use `exit --now` to exit all
 > exit
 ```
 
-```
+```shell
 > shells
 ━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  # │   │ name       │ path

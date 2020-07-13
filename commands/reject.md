@@ -1,7 +1,7 @@
 ---
 title: reject
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 This command removes or rejects the columns passed to it.
@@ -19,6 +19,9 @@ This command removes or rejects the columns passed to it.
  3 │ abaracadabra.txt           │ File │          │ 401 B  │ a month ago │ a month ago │ a month ago
  4 │ youshouldeatmorecereal.txt │ File │          │ 768 B  │ a month ago │ a month ago │ a month ago
 ━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━┷━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━
+```
+
+```shell
 > ls | reject readonly
 ━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━
  # │ name                       │ type │ size   │ created     │ accessed    │ modified
@@ -29,6 +32,9 @@ This command removes or rejects the columns passed to it.
  3 │ abaracadabra.txt           │ File │ 401 B  │ a month ago │ a month ago │ a month ago
  4 │ youshouldeatmorecereal.txt │ File │ 768 B  │ a month ago │ a month ago │ a month ago
 ━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━
+```
+
+```shell
 > ls | reject readonly accessed
 ━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━
  # │ name                       │ type │ size   │ created     │ modified

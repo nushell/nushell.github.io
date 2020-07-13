@@ -1,14 +1,14 @@
 ---
 title: shells
 layout: command
-nu_version: 0.14
+nu_version: 0.16.1
 ---
 
 Lists all the active nu shells with a number/index, a name and the path. Also marks the current nu shell.
 
 ## Examples
 
-```
+```shell
 > shells
 ━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  # │   │ name       │ path
@@ -19,7 +19,7 @@ Lists all the active nu shells with a number/index, a name and the path. Also ma
 ━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-```
+```shell
 /> shells
 ━━━┯━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  # │   │ name                                             │ path

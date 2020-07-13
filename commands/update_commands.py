@@ -31,7 +31,7 @@ f.write("docs/commands")
 f.close()
 subprocess.call(["git","config","core.sparseCheckout", "true"])
 os.chdir("../../")
-git_return = subprocess.call(["git","pull","origin","master"])
+git_return = subprocess.call(["git","pull","origin","main"])
 if git_return == 1:
     print("error: couldn't clone repo (check internet connection)")
     os.chdir("../")
