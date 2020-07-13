@@ -1,0 +1,9 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<br>
+{{ .Content }}
+<br>
+{{ range .Pages }}
+<a class="nu-command-link" href="{{ .Permalink }}">{{ .Title }}</a> <br>
+{{ end }}
+{{ end }}

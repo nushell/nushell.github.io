@@ -1,0 +1,16 @@
+<header class="nu-top-app-bar">
+    <div class="nu-top-app-bar__row">
+        <div class="nu-top-app-bar__section nu-top-app-bar__section--start">
+            <span class="h1-minor">
+                <span class="nu-logo-green">nu</span><span class="nu-logo-black">shell</span>
+            </span>
+        </div>
+        <div class="nu-top-app-bar__section nu-top-app-bar__section--end">
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}" class="nu-top-app-bar__link h1-minor-minor">
+            <span>{{ .Name }}</span>
+        </a>
+        {{ end }}
+        </div>
+    </div>
+</header>
