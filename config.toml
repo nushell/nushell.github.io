@@ -1,0 +1,27 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Nushell"
+theme = "nu"
+
+[params]
+    description = "The modern and powerful shell."
+
+[menu]
+
+  [[menu.main]]
+    identifier = "home"
+    name = "home"
+    url = "/"
+    weight = -110
+
+  [[menu.main]]
+    identifier = "docs"
+    name = "docs"
+    url = "/docs"
+    weight = -100
+
+  [[menu.main]]
+    identifier = "github"
+    name = "github"
+    url = "https://github.com/nushell/nushell"
+    weight = -90

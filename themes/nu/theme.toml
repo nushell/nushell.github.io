@@ -1,0 +1,12 @@
+name = "nu"
+license = "MIT"
+licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE"
+description = "A shell for nu"
+homepage = "http://example.com/"
+tags = []
+features = []
+min_version = "0.41.0"
+
+[author]
+  name = ""
+  homepage = ""
