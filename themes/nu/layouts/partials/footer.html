@@ -1,0 +1,8 @@
+{{ if .IsTranslated }}
+<hr class="footer-line">
+<div class="language-footer">
+    {{ range .Translations }}
+    <a href="{{ .Permalink }}">{{ .Lang }}: {{ .Title }}</a>
+    {{ end }}
+</div>
+{{ end }}

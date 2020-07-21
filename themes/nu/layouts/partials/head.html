@@ -4,7 +4,9 @@
     <title>{{ if not .IsHome }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end }}{{ end }} ">
     <link rel="canonical" href="{{ .Permalink }}" />
-    <link rel="stylesheet" href="/css/nu.css" type="text/css" >
+    {{ $sass := resources.Get "sass/main.scss" }}
+    {{ $style := $sass | resources.ToCSS }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" />
     {{ template "_internal/opengraph.html" . }}
     {{ template "_internal/twitter_cards.html" . }}
     <script src="https://unpkg.com/quicklink@2.0.0/dist/quicklink.umd.js"></script>

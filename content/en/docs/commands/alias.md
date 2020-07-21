@@ -1,5 +1,6 @@
 ---
 title: alias
+description: Define aliases for commands.
 layout: command
 nu_version: 0.14
 ---

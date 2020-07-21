@@ -3,7 +3,16 @@
 <br>
 {{ .Content }}
 <br>
-{{ range .Pages }}
-<a class="nu-command-link" href="{{ .Permalink }}">{{ .Title }}</a> <br>
-{{ end }}
+<div class="nu-card-list">
+    {{ range .Pages }}
+    <div class="nu-card">
+        <a class="nu-command-link" href="{{ .Permalink }}">{{ .Title }}</a> <br>
+        {{ if .Description }}
+        <div class="nu-card__body">
+        {{ .Description }}
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
 {{ end }}

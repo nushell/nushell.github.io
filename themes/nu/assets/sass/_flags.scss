@@ -1,0 +1,18 @@
+.nu-flag-definition {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    & &__flag, & &__definition {
+        display: block;
+    }
+    &__flag {
+        font-family: 'Fira Code', monospace;
+        font-size: 14px;
+    }
+    &__definition {
+        padding: 6px;
+        margin-left: 10px;
+    }
+}

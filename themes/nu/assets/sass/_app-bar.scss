@@ -1,0 +1,70 @@
+/* The App Bar */
+.nu-top-app-bar {
+    width: 100%;
+
+    background-color: var(--header);
+    color: var(--on-header);
+    border-bottom: 2px solid var(--border);
+
+    box-shadow: var(--downset-shadow);
+
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    &__row {
+        width: 100%;
+        height: 70px;
+    
+        display: flex;
+        position: relative;
+    }
+    &__section {
+        display: inline-flex;
+        flex: 1 1 auto;
+        align-items: center;
+        padding: 16px;
+        &--start {
+            justify-content: flex-start;
+            order: -1;
+        }
+        &--end {
+            justify-content: flex-end;
+            order: 1;
+        }
+    }
+    &__link {
+        color: var(--on-header-seconday);
+        text-decoration: none;
+        margin-left: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+
+.nu-top-app-bar {
+    &__row {
+        flex-direction: column;
+        height: initial;
+    }
+    &__section--end {
+        justify-content: space-around;
+    }
+}
+
+}
+
+.nu-logo {
+    &-green {
+        color: var(--header-green);
+    }
+    &-black {
+        color: var(--header-black);
+    }
+}
+

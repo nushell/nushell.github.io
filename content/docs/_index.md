@@ -1,5 +1,0 @@
----
-title: nushell documentation
----
-
-### Commands

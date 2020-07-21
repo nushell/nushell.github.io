@@ -1,0 +1,22 @@
+.nu-card {
+    background-color: var(--code);
+    color: var(--on-code);
+
+    border: 2px solid var(--border);
+    border-radius: 10px;
+
+    padding: 15px;
+
+    &__body {
+        margin-top: 6px;
+    }
+}
+
+.nu-card-list {
+    display: flex;
+    flex-direction: column;
+
+    .nu-card + .nu-card {
+        margin-top: 10px;
+    }
+}

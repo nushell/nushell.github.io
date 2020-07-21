@@ -28,6 +28,7 @@
     /* Semantic Roles */
     --background: var(--dark-1);
     --on-background: var(--light-2);
+    --chip: var(--dark-2);
 
     --header: var(--dark-2);
     --on-header: var(--light-2);
@@ -52,27 +53,28 @@
 }
 
 @media (prefers-color-scheme: light) {
-:root {
-    --background: var(--light-1);
-    --on-background: var(--dark-2);
+    :root {
+        --background: var(--light-1);
+        --on-background: var(--dark-2);
+        --chip: var(--light-2);
 
-    --header: var(--light-2);
-    --on-header: var(--dark-2);
-    --on-header-secondary: var(--dark-1);
+        --header: var(--light-2);
+        --on-header: var(--dark-2);
+        --on-header-secondary: var(--dark-1);
 
-    --code: var(--light-2);
-    --on-code: var(--dark-2);
+        --code: var(--light-2);
+        --on-code: var(--dark-2);
 
-    --border: rgba(0,0,0,0.1);
+        --border: rgba(0,0,0,0.1);
 
-    --header-green: var(--green-0);
-    --header-black: var(--dark-2);
+        --header-green: var(--green-0);
+        --header-black: var(--dark-2);
 
-    --code-green: var(--green-0);
-    --code-cyan: var(--cyan-0);
-    --code-violet: var(--violet-0);
-    --code-yellow: var(--yellow-0);
-}
+        --code-green: var(--green-0);
+        --code-cyan: var(--cyan-0);
+        --code-violet: var(--violet-0);
+        --code-yellow: var(--yellow-0);
+    }
 }
 
 .code-green {
