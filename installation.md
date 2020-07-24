@@ -32,6 +32,14 @@ Once we have done that, we can run Nu using the `nu` command:
 C:\Users\user>
 ```
 
+## Scoop
+
+If you use [Scoop](https://scoop.sh/) on Windows, you can install the binary by running
+
+```shell
+> scoop install nu
+```
+
 ## macOS
 
 You can download Nu pre-built from the [release page](https://github.com/nushell/nushell/releases).
