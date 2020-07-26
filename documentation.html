@@ -59,10 +59,6 @@ layout: doc
         flex-direction: row;
     }
 
-    .row__item {
-        margin-left: 10px;
-    }
-
     .invisible {
         visibility: hidden;
     }
@@ -72,8 +68,8 @@ layout: doc
     }
 
     #sidebar {
-        min-width: 200px;
-        max-height: 600px;
+        min-width: 10vw;
+        max-height: 80vh;
         overflow-y: scroll;
     }
 
@@ -97,6 +93,12 @@ layout: doc
         outline: inherit;
     }
 
+
+    .button.selected {
+        background-color: #69ff33;
+        /* green-brighter */
+    }
+
     .grow {
         flex-grow: 1;
     }
@@ -108,42 +110,35 @@ layout: doc
             <div class="row">
                 <button class="row__item button grow"
                     onclick="toggleFrame('{{ command.name | replace: ' ', '_' }}-usage')">{{ command.name }}</button>
-                {% if command.subcommands %}
-                <button class="row__item button" onclick="toggleVisible('{{ command.name }}-subs')"><i
-                        class="fa fa-plus"></i></button>
-                {% else %}
-                <button class="row__item button invisible"><i class="fa fa-plus"></i></button>
-                {% endif %}
             </div>
-            <div id="{{ command.name }}-subs" class="hidden">
-                <ul>
-                    {% for sub_command in command.subcommands %}
-                    <li class="row">
-                        <button class="row__item button grow"
-                            onclick="toggleFrame('{{ sub_command.name | replace: ' ', '_' }}-usage')">{{ sub_command.name }}</button>
-                    </li>
-                    {% endfor %}
-                </ul>
+            {% if command.subcommands %}
+            <div id="{{ command.name }}-subs">
+                {% for sub_command in command.subcommands %}
+                <div class="row">
+                    <button class="row__item button grow"
+                        onclick="toggleFrame('{{ sub_command.name | replace: ' ', '_' }}-usage')">{{ sub_command.name }}</button>
+                </div>
+                {% endfor %}
             </div>
+            {% endif %}
             {% endfor %}
         </div>
         <div class="frame">
             {% for command in site.data.commands %}
-            <div id="{{ command.name | replace: ' ', '_' }}-usage" class="hidden stack">
+            <div id="{{ command.name | replace: ' ', '_' }}-usage" class="hidden">
                 {% if command.doc_link %}
-                <a class="row__item" href="{{ command.doc_link }}">Detailed Documentation&emsp;<i
-                        class="fa fa-book"></i></a>
+                <a href="{{ command.doc_link }}">Detailed Documentation&emsp;<i class="fa fa-book"></i></a>
                 {% else %}
-                <a class="row__item invisible" href="">Detailed Documentation<i class="fa fa-book"></i></a>
+                <a class="invisible" href="">Detailed Documentation<i class="fa fa-book"></i></a>
                 {% endif %}
                 <pre><code>{{ command.documentation | strip_html  }}</code></pre>
             </div>
             {% for sub_command in command.subcommands %}
             <div id="{{ sub_command.name | replace: ' ', '_' }}-usage" class="hidden">
                 {% if sub_command.doc_link %}
-                <a class="row__item" href="{{ sub_command.doc_link }}">&emsp;<i class="fa fa-book"></i></a>
+                <a href="{{ sub_command.doc_link }}">&emsp;<i class="fa fa-book"></i></a>
                 {% else %}
-                <a class="row__item invisible" href="">Detailed Documentation<i class="fa fa-book"></i></a>
+                <a class="invisible" href="">Detailed Documentation<i class="fa fa-book"></i></a>
                 {% endif %}
                 <pre><code>{{ sub_command.documentation | strip_html  }}</code></pre>
             </div>
@@ -164,6 +159,7 @@ layout: doc
         $("#" + id).toggleClass("hidden")
         last = id;
     }
+
     // Just so we have something showing at the start
     toggleFrame("alias-usage");
 </script>
