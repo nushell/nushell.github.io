@@ -1,0 +1,581 @@
+---
+- name: alias
+  usage: Define a shortcut for another command.
+  doc_link: /commands/alias.html
+  documentation: "Define a shortcut for another command.\n\nUsage:\n  > alias <name> <args> <block> {flags} \n\nParameters:\n  <name> the name of the alias\n  <args> the arguments to the alias\n  <block> the block to run as the body of the alias\n\nFlags:\n  -h, --help: Display this help message\n  -s, --save: save the alias to your config\n\nExamples:\n  An alias without parameters\n  > alias say-hi [] { echo 'Hello!' }\n\n  An alias with a single parameter\n  > alias l [x] { ls $x }\n\n"
+- name: ansi
+  usage: Output ANSI codes to change color
+  documentation: "Output ANSI codes to change color\n\nUsage:\n  > ansi <color> {flags} \n\nParameters:\n  <color> the name of the color to use or 'reset' to reset the color\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Change color to green\n  > ansi green\n\n  Reset the color\n  > ansi reset\n\n"
+- name: append
+  usage: Append the given row to the table
+  doc_link: /commands/append.html
+  documentation: "Append the given row to the table\n\nUsage:\n  > append <row value> {flags} \n\nParameters:\n  <row value> the value of the row to append to the table\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Add something to the end of a list or table\n  > echo [1 2 3] | append 4\n\n"
+- name: autoenv
+  usage: "Manage directory specific environment variables and scripts. Create a file called .nu-env in any directory and run 'autoenv trust' to let nushell read it when entering the directory.\nThe file can contain several optional sections:\n    env: environment variables to set when visiting the directory. The variables are unset after leaving the directory and any overwritten values are restored.\n    scriptvars: environment variables that should be set to the return value of a script. After they have been set, they behave in the same way as variables set in the env section.\n    scripts: scripts to run when entering the directory or leaving it. Note that exitscripts are not run in the directory they are declared in."
+  documentation: "Manage directory specific environment variables and scripts. Create a file called .nu-env in any directory and run 'autoenv trust' to let nushell read it when entering the directory.\nThe file can contain several optional sections:\n    env: environment variables to set when visiting the directory. The variables are unset after leaving the directory and any overwritten values are restored.\n    scriptvars: environment variables that should be set to the return value of a script. After they have been set, they behave in the same way as variables set in the env section.\n    scripts: scripts to run when entering the directory or leaving it. Note that exitscripts are not run in the directory they are declared in.\n\nUsage:\n  > autoenv {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Example .nu-env file\n  > cat .nu-env\n    [env]\n    mykey = \"myvalue\"\n\n    [scriptvars]\n    myscript = \"echo myval\"\n\n    [scripts]\n    entryscripts = [\"touch hello.txt\", \"touch hello2.txt\"]\n    exitscripts = [\"touch bye.txt\"]\n\n"
+  subcommands:
+    - name: autoenv trust
+      usage: Trust a .nu-env file in the current or given directory
+      documentation: "Trust a .nu-env file in the current or given directory\n\nUsage:\n  > autoenv trust (dir) {flags} \n\nParameters:\n  (dir) Directory to allow\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Allow .nu-env file in current directory\n  > autoenv trust\n\n  Allow .nu-env file in directory foo\n  > autoenv trust foo\n\n"
+    - name: autoenv untrust
+      usage: Untrust a .nu-env file in the current or given directory
+      documentation: "Untrust a .nu-env file in the current or given directory\n\nUsage:\n  > autoenv untrust (dir) {flags} \n\nParameters:\n  (dir) Directory to disallow\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Disallow .nu-env file in current directory\n  > autoenv untrust\n\n  Disallow .nu-env file in directory foo\n  > autoenv untrust foo\n\n"
+- name: autoview
+  usage: View the contents of the pipeline as a table or list.
+  doc_link: /commands/autoview.html
+  documentation: "View the contents of the pipeline as a table or list.\n\nUsage:\n  > autoview {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Automatically view the results\n  > ls | autoview\n\n  Autoview is also implied. The above can be written as\n  > ls\n\n"
+- name: binaryview
+  usage: Autoview of binary data.
+  documentation: "Autoview of binary data.\n\nUsage:\n  > binaryview {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -l, --lores: use low resolution output mode\n\n"
+- name: build-string
+  usage: Builds a string from the arguments
+  documentation: "Builds a string from the arguments\n\nUsage:\n  > build-string  ...args{flags} \n\nParameters:\n  ...args: all values to form into the string\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Builds a string from a string and a number, without spaces between them\n  > build-string 'foo' 3\n\n"
+- name: cal
+  usage: Display a calendar.
+  doc_link: /commands/cal.html
+  documentation: "Display a calendar.\n\nUsage:\n  > cal {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -y, --year: Display the year column\n  -q, --quarter: Display the quarter column\n  -m, --month: Display the month column\n  --full-year <integer>: Display a year-long calendar for the specified year\n  --week-start <string>: Display the calendar with the specified day as the first day of the week\n  --month-names: Display the month names instead of integers\n\nExamples:\n  This month's calendar\n  > cal\n\n  The calendar for all of 2012\n  > cal --full-year 2012\n\n  This month's calendar with the week starting on monday\n  > cal --week-start monday\n\n"
+- name: calc
+  usage: Parse a math expression into a number
+  doc_link: /commands/calc.html
+  documentation: "Parse a math expression into a number\n\nUsage:\n  > calc {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Calculate math in the pipeline\n  > echo '10 / 4' | calc\n\n"
+- name: cd
+  usage: Change to a new path.
+  doc_link: /commands/cd.html
+  documentation: "Change to a new path.\n\nUsage:\n  > cd (directory) {flags} \n\nParameters:\n  (directory) the directory to change to\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Change to a new directory called 'dirname'\n  > cd dirname\n\n  Change to your home directory\n  > cd\n\n  Change to your home directory (alternate version)\n  > cd ~\n\n  Change to the previous directory\n  > cd -\n\n"
+- name: char
+  usage: "Output special characters (eg. 'newline')"
+  documentation: "Output special characters (eg. 'newline')\n\nUsage:\n  > ansi <character> {flags} \n\nParameters:\n  <character> the name of the character to output\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Output newline\n  > char newline\n\n"
+- name: clear
+  usage: clears the terminal
+  documentation: "clears the terminal\n\nUsage:\n  > clear {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Clear the screen\n  > clear\n\n"
+- name: clip
+  usage: Copy the contents of the pipeline to the copy/paste buffer
+  documentation: "Copy the contents of the pipeline to the copy/paste buffer\n\nUsage:\n  > clip {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Save text to the clipboard\n  > echo 'secret value' | clip\n\n"
+- name: compact
+  usage: Creates a table with non-empty rows
+  doc_link: /commands/compact.html
+  documentation: "Creates a table with non-empty rows\n\nUsage:\n  > compact  ...args{flags} \n\nParameters:\n  ...args: the columns to compact from the table\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Filter out all null entries in a list\n  > echo [1 2 $null 3 $null $null] | compact\n\n  Filter out all directory entries having no 'target'\n  > ls -af | compact target\n\n"
+- name: config
+  usage: Configuration management.
+  doc_link: /commands/config.html
+  documentation: "Configuration management.\n\nUsage:\n  > config {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+  subcommands:
+    - name: config clear
+      usage: clear the config
+      documentation: "clear the config\n\nUsage:\n  > config clear {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Clear the config (be careful!)\n  > config clear\n\n"
+    - name: config get
+      usage: Gets a value from the config
+      documentation: "Gets a value from the config\n\nUsage:\n  > config get <get> {flags} \n\nParameters:\n  <get> value to get from the config\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the current startup commands\n  > config get startup\n\n"
+    - name: config load
+      usage: Loads the config from the path given
+      documentation: "Loads the config from the path given\n\nUsage:\n  > config load <load> {flags} \n\nParameters:\n  <load> Path to load the config from\n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: config path
+      usage: return the path to the config file
+      documentation: "return the path to the config file\n\nUsage:\n  > config path {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the path to the current config file\n  > config path\n\n"
+    - name: config remove
+      usage: Removes a value from the config
+      documentation: "Removes a value from the config\n\nUsage:\n  > config remove <remove> {flags} \n\nParameters:\n  <remove> remove a value from the config\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Remove the startup commands\n  > config --remove startup\n\n"
+    - name: config set
+      usage: Sets a value in the config
+      documentation: "Sets a value in the config\n\nUsage:\n  > config set <key> <value> {flags} \n\nParameters:\n  <key> variable name to set\n  <value> value to use\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Set completion_mode to circular\n  > config set [completion_mode circular]\n\n"
+    - name: config set_into
+      usage: Sets a value in the config
+      documentation: "Sets a value in the config\n\nUsage:\n  > config set_into <set_into> {flags} \n\nParameters:\n  <set_into> sets a variable from values in the pipeline\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Store the contents of the pipeline as a path\n  > echo ['/usr/bin' '/bin'] | config set_into path\n\n"
+- name: count
+  usage: Show the total number of rows or items.
+  doc_link: /commands/count.html
+  documentation: "Show the total number of rows or items.\n\nUsage:\n  > count {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Count the number of entries in a list\n  > echo [1 2 3 4 5] | count\n\n"
+- name: cp
+  usage: Copy files.
+  documentation: "Copy files.\n\nUsage:\n  > cp <src> <dst> {flags} \n\nParameters:\n  <src> the place to copy from\n  <dst> the place to copy to\n\nFlags:\n  -h, --help: Display this help message\n  -r, --recursive: copy recursively through subdirectories\n\nExamples:\n  Copy myfile to dir_b\n  > cp myfile dir_b\n\n  Recursively copy dir_a to dir_b\n  > cp -r dir_a dir_b\n\n"
+- name: date
+  usage: Get the current datetime.
+  doc_link: /commands/date.html
+  documentation: "Get the current datetime.\n\nUsage:\n  > date {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -u, --utc: use universal time (UTC)\n  -l, --local: use the local time\n  -f, --format <string>: report datetime in supplied strftime format\n  -r, --raw: print date without tables\n\nExamples:\n  Get the current local time and date\n  > date\n\n  Get the current UTC time and date\n  > date --utc\n\n  Get the current time and date and report it based on format\n  > date --format '%Y-%m-%d %H:%M:%S.%f %z'\n\n  Get the current time and date and report it without a table\n  > date --format '%Y-%m-%d %H:%M:%S.%f %z' --raw\n\n"
+- name: debug
+  usage: Print the Rust debug representation of the values
+  doc_link: /commands/debug.html
+  documentation: "Print the Rust debug representation of the values\n\nUsage:\n  > debug {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -r, --raw: Prints the raw value representation.\n\n"
+- name: default
+  usage: "Sets a default row's column if missing."
+  doc_link: /commands/default.html
+  documentation: "Sets a default row's column if missing.\n\nUsage:\n  > default <column name> <column value> {flags} \n\nParameters:\n  <column name> the name of the column\n  <column value> the value of the column to default\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Give a default 'target' to all file entries\n  > ls -af | default target 'nothing'\n\n"
+- name: describe
+  usage: Describes the objects in the stream.
+  documentation: "Describes the objects in the stream.\n\nUsage:\n  > describe {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: do
+  usage: "Runs a block, optionally ignoring errors"
+  documentation: "Runs a block, optionally ignoring errors\n\nUsage:\n  > do <block> {flags} \n\nParameters:\n  <block> the block to run \n\nFlags:\n  -h, --help: Display this help message\n  -i, --ignore_errors: ignore errors as the block runs\n\nExamples:\n  Run the block\n  > do { echo hello }\n\n  Run the block and ignore errors\n  > do -i { thisisnotarealcommand }\n\n"
+- name: drop
+  usage: Drop the last number of rows.
+  documentation: "Drop the last number of rows.\n\nUsage:\n  > drop (rows) {flags} \n\nParameters:\n  (rows) starting from the back, the number of rows to drop\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Remove the last item of a list/table\n  > echo [1 2 3] | drop\n\n  Remove the last 2 items of a list/table\n  > echo [1 2 3] | drop 2\n\n"
+- name: du
+  usage: Find disk usage sizes of specified items
+  doc_link: /commands/du.html
+  documentation: "Find disk usage sizes of specified items\n\nUsage:\n  > du (path) {flags} \n\nParameters:\n  (path) starting directory\n\nFlags:\n  -h, --help: Display this help message\n  -a, --all: Output file sizes as well as directory sizes\n  -r, --deref: Dereference symlinks to their targets for size\n  -x, --exclude <pattern>: Exclude these file names\n  -d, --max-depth <integer>: Directory recursion limit\n  -m, --min-size <integer>: Exclude files below this size\n\nExamples:\n  Disk usage of the current directory\n  > du\n\n"
+- name: each
+  usage: Run a block on each row of the table.
+  documentation: "Run a block on each row of the table.\n\nUsage:\n  > each <block> {flags} \n\nParameters:\n  <block> the block to run on each row\n\nFlags:\n  -h, --help: Display this help message\n  -n, --numbered: returned a numbered item ($it.index and $it.item)\n\nExamples:\n  Echo the sum of each row\n  > echo [[1 2] [3 4]] | each { echo $it | math sum }\n\n  Echo the square of each integer\n  > echo [1 2 3] | each { echo $(= $it * $it) }\n\n  Number each item and echo a message\n  > echo ['bob' 'fred'] | each --numbered { echo `{{$it.index}} is {{$it.item}}` }\n\n"
+- name: echo
+  usage: Echo the arguments back to the user.
+  doc_link: /commands/echo.html
+  documentation: "Echo the arguments back to the user.\n\nUsage:\n  > echo  ...args{flags} \n\nParameters:\n  ...args: the values to echo\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Put a hello message in the pipeline\n  > echo 'hello'\n\n  Print the value of the special '$nu' variable\n  > echo $nu\n\n"
+- name: empty?
+  usage: Checks emptiness. The last value is the replacement value for any empty column(s) given to check against the table.
+  documentation: "Checks emptiness. The last value is the replacement value for any empty column(s) given to check against the table.\n\nUsage:\n  > empty?  ...args{flags} \n\nParameters:\n  ...args: the names of the columns to check emptiness followed by the replacement value.\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: enter
+  usage: "Create a new shell and begin at this path.\n        \nMultiple encodings are supported for reading text files by using\nthe '--encoding <encoding>' parameter. Here is an example of a few:\nbig5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5\n\nFor a more complete list of encodings please refer to the encoding_rs\ndocumentation link at https://docs.rs/encoding_rs/0.8.23/encoding_rs/#statics"
+  doc_link: /commands/enter.html
+  documentation: "Create a new shell and begin at this path.\n        \nMultiple encodings are supported for reading text files by using\nthe '--encoding <encoding>' parameter. Here is an example of a few:\nbig5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5\n\nFor a more complete list of encodings please refer to the encoding_rs\ndocumentation link at https://docs.rs/encoding_rs/0.8.23/encoding_rs/#statics\n\nUsage:\n  > enter <location> {flags} \n\nParameters:\n  <location> the location to create a new shell from\n\nFlags:\n  -h, --help: Display this help message\n  -e, --encoding <string>: encoding to use to open file\n\nExamples:\n  Enter a path as a new shell\n  > enter ../projectB\n\n  Enter a file as a new shell\n  > enter package.json\n\n  Enters file with iso-8859-1 encoding\n  > enter file.csv --encoding iso-8859-1\n\n"
+- name: every
+  usage: "Show (or skip) every n-th row, starting from the first one."
+  doc_link: /commands/every.html
+  documentation: "Show (or skip) every n-th row, starting from the first one.\n\nUsage:\n  > every <stride> {flags} \n\nParameters:\n  <stride> how many rows to skip between (and including) each row returned\n\nFlags:\n  -h, --help: Display this help message\n  -s, --skip: skip the rows that would be returned, instead of selecting them\n\nExamples:\n  Get every second row\n  > echo [1 2 3 4 5] | every 2\n\n  Skip every second row\n  > echo [1 2 3 4 5] | every 2 --skip\n\n"
+- name: exit
+  usage: Exit the current shell (or all shells)
+  doc_link: /commands/exit.html
+  documentation: "Exit the current shell (or all shells)\n\nUsage:\n  > exit {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -n, --now: exit out of the shell immediately\n\nExamples:\n  Exit the current shell\n  > exit\n\n  Exit all shells (exiting Nu)\n  > exit --now\n\n"
+- name: fetch
+  usage: "Load from a URL into a cell, convert to table if possible (avoid by appending '--raw')"
+  doc_link: /commands/fetch.html
+  documentation: "Load from a URL into a cell, convert to table if possible (avoid by appending '--raw')\n\nUsage:\n  > fetch <URL> {flags} \n\nParameters:\n  <URL> the URL to fetch the contents from\n\nFlags:\n  -h, --help: Display this help message\n  -u, --user <any>: the username when authenticating\n  -p, --password <any>: the password when authenticating\n  -r, --raw: fetch contents as text rather than a table\n\n"
+- name: first
+  usage: Show only the first number of rows.
+  doc_link: /commands/first.html
+  documentation: "Show only the first number of rows.\n\nUsage:\n  > first (rows) {flags} \n\nParameters:\n  (rows) starting from the front, the number of rows to return\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Return the first item of a list/table\n  > echo [1 2 3] | first\n\n  Return the first 2 items of a list/table\n  > echo [1 2 3] | first 2\n\n"
+- name: format
+  usage: Format columns into a string using a simple pattern.
+  doc_link: /commands/format.html
+  documentation: "Format columns into a string using a simple pattern.\n\nUsage:\n  > format <pattern> {flags} \n\nParameters:\n  <pattern> the pattern to output. Eg) \"{foo}: {bar}\"\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Print filenames with their sizes\n  > ls | format '{name}: {size}'\n\n"
+- name: from
+  usage: "Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)"
+  doc_link: /commands/from.html
+  documentation: "Parse content (string or binary) as a table (input format based on subcommand, like csv, ini, json, toml)\n\nUsage:\n  > from {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+  subcommands:
+    - name: from bson
+      usage: Parse binary as .bson and create table.
+      documentation: "Parse binary as .bson and create table.\n\nUsage:\n  > from bson {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Convert bson data to a table\n  > open file.bin | from bson\n\n"
+    - name: from csv
+      usage: Parse text as .csv and create table.
+      documentation: "Parse text as .csv and create table.\n\nUsage:\n  > from csv {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -s, --separator <string>: a character to separate columns, defaults to ','\n  --headerless: don't treat the first row as column names\n\nExamples:\n  Convert comma-separated data to a table\n  > open data.txt | from csv\n\n  Convert comma-separated data to a table, ignoring headers\n  > open data.txt | from csv --headerless\n\n  Convert semicolon-separated data to a table\n  > open data.txt | from csv --separator ';'\n\n"
+    - name: from db
+      usage: Parse binary data as db and create table.
+      documentation: "Parse binary data as db and create table.\n\nUsage:\n  > from db {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from eml
+      usage: Parse text as .eml and create table.
+      documentation: "Parse text as .eml and create table.\n\nUsage:\n  > from eml {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -b, --preview-body <integer>: How many bytes of the body to preview\n\n"
+    - name: from ics
+      usage: Parse text as .ics and create table.
+      documentation: "Parse text as .ics and create table.\n\nUsage:\n  > from ics {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from ini
+      usage: Parse text as .ini and create table
+      documentation: "Parse text as .ini and create table\n\nUsage:\n  > from ini {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from json
+      usage: Parse text as .json and create table.
+      documentation: "Parse text as .json and create table.\n\nUsage:\n  > from json {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -o, --objects: treat each line as a separate value\n\n"
+    - name: from ods
+      usage: Parse OpenDocument Spreadsheet(.ods) data and create table.
+      documentation: "Parse OpenDocument Spreadsheet(.ods) data and create table.\n\nUsage:\n  > from ods {flags} \n\nFlags:\n  -h, --help: Display this help message\n  --headerless: don't treat the first row as column names\n\n"
+    - name: from sqlite
+      usage: Parse binary data as sqlite .db and create table.
+      documentation: "Parse binary data as sqlite .db and create table.\n\nUsage:\n  > from sqlite {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from ssv
+      usage: Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
+      documentation: "Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.\n\nUsage:\n  > from ssv {flags} \n\nFlags:\n  -h, --help: Display this help message\n  --headerless: don't treat the first row as column names\n  -a, --aligned-columns: assume columns are aligned\n  -m, --minimum-spaces <integer>: the minimum spaces to separate columns\n\n"
+    - name: from toml
+      usage: Parse text as .toml and create table.
+      documentation: "Parse text as .toml and create table.\n\nUsage:\n  > from toml {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from tsv
+      usage: Parse text as .tsv and create table.
+      documentation: "Parse text as .tsv and create table.\n\nUsage:\n  > from tsv {flags} \n\nFlags:\n  -h, --help: Display this help message\n  --headerless: don't treat the first row as column names\n\n"
+    - name: from url
+      usage: Parse url-encoded string as a table.
+      documentation: "Parse url-encoded string as a table.\n\nUsage:\n  > from url {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from vcf
+      usage: Parse text as .vcf and create table.
+      documentation: "Parse text as .vcf and create table.\n\nUsage:\n  > from vcf {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from xlsx
+      usage: Parse binary Excel(.xlsx) data and create table.
+      documentation: "Parse binary Excel(.xlsx) data and create table.\n\nUsage:\n  > from xlsx {flags} \n\nFlags:\n  -h, --help: Display this help message\n  --headerless: don't treat the first row as column names\n\n"
+    - name: from xml
+      usage: Parse text as .xml and create table.
+      documentation: "Parse text as .xml and create table.\n\nUsage:\n  > from xml {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from yaml
+      usage: Parse text as .yaml/.yml and create table.
+      documentation: "Parse text as .yaml/.yml and create table.\n\nUsage:\n  > from yaml {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: from yml
+      usage: Parse text as .yaml/.yml and create table.
+      documentation: "Parse text as .yaml/.yml and create table.\n\nUsage:\n  > from yml {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: get
+  usage: Open given cells as text.
+  doc_link: /commands/get.html
+  documentation: "Open given cells as text.\n\nUsage:\n  > get  ...args{flags} \n\nParameters:\n  ...args: optionally return additional data by path\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Extract the name of files as a list\n  > ls | get name\n\n  Extract the cpu list from the sys information\n  > sys | get cpu\n\n"
+- name: group-by
+  usage: create a new table grouped.
+  doc_link: /commands/group-by.html
+  documentation: "create a new table grouped.\n\nUsage:\n  > group-by (grouper) {flags} \n\nParameters:\n  (grouper) the grouper value to use\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  group items by column named \"type\"\n  > ls | group-by type\n\n  blocks can be used for generating a grouping key (same as above)\n  > ls | group-by { get type }\n\n  you can also group by raw values by leaving out the argument\n  > echo [1 3 1 3 2 1 1] | group-by\n\n  write pipelines for a more involved grouping key\n  > echo [1 3 1 3 2 1 1] | group-by { echo `({{$it}} - 1) % 3` | calc | str from }\n\n"
+  subcommands:
+    - name: group-by date
+      usage: creates a table grouped by date.
+      documentation: "creates a table grouped by date.\n\nUsage:\n  > group-by date (column_name) {flags} \n\nParameters:\n  (column_name) the name of the column to group by\n\nFlags:\n  -h, --help: Display this help message\n  -f, --format <string>: Specify date and time formatting\n\nExamples:\n  Group files by type\n  > ls | group-by date --format '%d/%m/%Y'\n\n"
+- name: headers
+  usage: Use the first row of the table as column names
+  doc_link: /commands/headers.html
+  documentation: "Use the first row of the table as column names\n\nUsage:\n  > headers {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Create headers for a raw string\n  > echo \"a b c|1 2 3\" | split row \"|\" | split column \" \" | headers\n\n"
+- name: help
+  usage: Display help information about commands.
+  doc_link: /commands/help.html
+  documentation: "Display help information about commands.\n\nUsage:\n  > help  ...args{flags} \n\nParameters:\n  ...args: the name of command to get help on\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: histogram
+  usage: Creates a new table with a histogram based on the column name passed in.
+  doc_link: /commands/histogram.html
+  documentation: "Creates a new table with a histogram based on the column name passed in.\n\nUsage:\n  > histogram <column_name>  ...args{flags} \n\nParameters:\n  <column_name> the name of the column to graph by\n  ...args: column name to give the histogram's frequency column\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get a histogram for the types of files\n  > ls | histogram type\n\n  Get a histogram for the types of files, with frequency column named count\n  > ls | histogram type count\n\n  Get a histogram for a list of numbers\n  > echo [1 2 3 1 1 1 2 2 1 1] | histogram\n\n"
+- name: history
+  usage: Display command history.
+  doc_link: /commands/history.html
+  documentation: "Display command history.\n\nUsage:\n  > history {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: if
+  usage: Filter table to match the condition.
+  documentation: "Filter table to match the condition.\n\nUsage:\n  > if <condition> <then_case> <else_case> {flags} \n\nParameters:\n  <condition> the condition that must match\n  <then_case> block to run if condition is true\n  <else_case> block to run if condition is false\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Run a block if a condition is true\n  > echo 10 | if $it > 5 { echo 'greater than 5' } { echo 'less than or equal to 5' }\n\n  Run a block if a condition is false\n  > echo 1 | if $it > 5 { echo 'greater than 5' } { echo 'less than or equal to 5' }\n\n"
+- name: inc
+  usage: Increment a value or version. Optionally use the column of a table.
+  doc_link: /commands/inc.html
+  documentation: "Increment a value or version. Optionally use the column of a table.\n\nUsage:\n  > inc  ...args{flags} \n\nParameters:\n  ...args: the column(s) to update\n\nFlags:\n  -h, --help: Display this help message\n  -M, --major: increment the major version (eg 1.2.1 -> 2.0.0)\n  -m, --minor: increment the minor version (eg 1.2.1 -> 1.3.0)\n  -p, --patch: increment the patch version (eg 1.2.1 -> 1.2.2)\n\n"
+- name: insert
+  usage: Insert a new column with a given value.
+  doc_link: /commands/insert.html
+  documentation: "Insert a new column with a given value.\n\nUsage:\n  > insert <column> <value> {flags} \n\nParameters:\n  <column> the column name to insert\n  <value> the value to give the cell(s)\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: keep
+  usage: Keep the number of rows only
+  documentation: "Keep the number of rows only\n\nUsage:\n  > keep (rows) {flags} \n\nParameters:\n  (rows) starting from the front, the number of rows to keep\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Keep the first row\n  > echo [1 2 3] | keep\n\n  Keep the first four rows\n  > echo [1 2 3 4 5] | keep 4\n\n"
+- name: keep-until
+  usage: Keeps rows until the condition matches.
+  documentation: "Keeps rows until the condition matches.\n\nUsage:\n  > keep-until <condition> {flags} \n\nParameters:\n  <condition> the condition that must be met to stop keeping rows\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: keep-while
+  usage: Keeps rows while the condition matches.
+  documentation: "Keeps rows while the condition matches.\n\nUsage:\n  > keep-while <condition> {flags} \n\nParameters:\n  <condition> the condition that must be met to keep rows\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: kill
+  usage: Kill a process using the process id.
+  documentation: "Kill a process using the process id.\n\nUsage:\n  > kill <pid>  ...args{flags} \n\nParameters:\n  <pid> process id of process that is to be killed\n  ...args: rest of processes to kill\n\nFlags:\n  -h, --help: Display this help message\n  -f, --force: forcefully kill the process\n  -q, --quiet: won't print anything to the console\n\nExamples:\n  Kill the pid using the most memory\n  > ps | sort-by mem | last | kill $it.pid\n\n  Force kill a given pid\n  > kill --force 12345\n\n"
+- name: last
+  usage: Show only the last number of rows.
+  doc_link: /commands/last.html
+  documentation: "Show only the last number of rows.\n\nUsage:\n  > last (rows) {flags} \n\nParameters:\n  (rows) starting from the back, the number of rows to return\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the last row\n  > echo [1 2 3] | last\n\n  Get the last three rows\n  > echo [1 2 3 4 5] | last 3\n\n"
+- name: lines
+  usage: "Split single string into rows, one per line."
+  doc_link: /commands/lines.html
+  documentation: "Split single string into rows, one per line.\n\nUsage:\n  > lines {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Split multi-line string into lines\n  > ^echo \"two\\nlines\" | lines\n\n"
+- name: ls
+  usage: View the contents of the current or given path.
+  documentation: "View the contents of the current or given path.\n\nUsage:\n  > ls (path) {flags} \n\nParameters:\n  (path) a path to get the directory contents from\n\nFlags:\n  -h, --help: Display this help message\n  -a, --all: also show hidden files\n  -f, --full: list all available columns for each entry\n  -s, --short-names: only print the file names and not the path\n  -w, --with-symlink-targets: display the paths to the target files that symlinks point to\n  -d, --du: display the apparent directory size in place of the directory metadata size\n\nExamples:\n  List all files in the current directory\n  > ls\n\n  List all files in a subdirectory\n  > ls subdir\n\n  List all rust files\n  > ls *.rs\n\n"
+- name: match
+  usage: filter rows by regex
+  documentation: "filter rows by regex\n\nUsage:\n  > match <member> <regex> {flags} \n\nParameters:\n  <member> the column name to match\n  <regex> the regex to match with\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: math
+  usage: Use mathematical functions as aggregate functions on a list of numbers or tables
+  doc_link: /commands/math.html
+  documentation: "Use mathematical functions as aggregate functions on a list of numbers or tables\n\nUsage:\n  > math {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+  subcommands:
+    - name: math avg
+      usage: Finds the average of a list of numbers or tables
+      documentation: "Finds the average of a list of numbers or tables\n\nUsage:\n  > math avg {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the average of a list of numbers\n  > echo [-50 100.0 25] | math avg\n\n"
+    - name: math max
+      usage: Finds the maximum within a list of numbers or tables
+      documentation: "Finds the maximum within a list of numbers or tables\n\nUsage:\n  > math max {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Find the maximum of list of numbers\n  > echo [-50 100 25] | math max\n\n"
+    - name: math median
+      usage: Gets the median of a list of numbers
+      documentation: "Gets the median of a list of numbers\n\nUsage:\n  > math median {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the median of a list of numbers\n  > echo [3 8 9 12 12 15] | math median\n\n"
+    - name: math min
+      usage: Finds the minimum within a list of numbers or tables
+      documentation: "Finds the minimum within a list of numbers or tables\n\nUsage:\n  > math min {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the minimum of a list of numbers\n  > echo [-50 100 25] | math min\n\n"
+    - name: math mode
+      usage: Gets the most frequent element(s) from a list of numbers or tables
+      documentation: "Gets the most frequent element(s) from a list of numbers or tables\n\nUsage:\n  > math mode {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the mode(s) of a list of numbers\n  > echo [3 3 9 12 12 15] | math mode\n\n"
+    - name: math stddev
+      usage: Finds the stddev of a list of numbers or tables
+      documentation: "Finds the stddev of a list of numbers or tables\n\nUsage:\n  > math stddev {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the stddev of a list of numbers\n  > echo [1 2 3 4 5] | math stddev\n\n"
+    - name: math sum
+      usage: Finds the sum of a list of numbers or tables
+      documentation: "Finds the sum of a list of numbers or tables\n\nUsage:\n  > math sum {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Sum a list of numbers\n  > echo [1 2 3] | math sum\n\n  Get the disk usage for the current directory\n  > ls --all --du | get size | math sum\n\n"
+    - name: math variance
+      usage: Finds the variance of a list of numbers or tables
+      documentation: "Finds the variance of a list of numbers or tables\n\nUsage:\n  > math variance {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the variance of a list of numbers\n  > echo [1 2 3 4 5] | math variance\n\n"
+- name: merge
+  usage: Merge a table.
+  documentation: "Merge a table.\n\nUsage:\n  > merge <block> {flags} \n\nParameters:\n  <block> the block to run and merge into the table\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Merge a 1-based index column with some ls output\n  > ls | select name | keep 3 | merge { echo [1 2 3] | wrap index }\n\n"
+- name: mkdir
+  usage: "Make directories, creates intermediary directories as required."
+  documentation: "Make directories, creates intermediary directories as required.\n\nUsage:\n  > mkdir  ...args{flags} \n\nParameters:\n  ...args: the name(s) of the path(s) to create\n\nFlags:\n  -h, --help: Display this help message\n  -s, --show-created-paths: show the path(s) created.\n\nExamples:\n  Make a directory named foo\n  > mkdir foo\n\n"
+- name: move
+  usage: moves across desired subcommand.
+  documentation: "moves across desired subcommand.\n\nUsage:\n  > move {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+  subcommands:
+    - name: move column
+      usage: Move columns.
+      documentation: "Move columns.\n\nUsage:\n  > move column  ...args{flags} \n\nParameters:\n  ...args: the columns to move\n\nFlags:\n  -h, --help: Display this help message\n  --after <column path>: the column that will precede the columns moved\n  --before <column path>: the column that will be next the columns moved\n\n"
+- name: mv
+  usage: Move files or directories.
+  documentation: "Move files or directories.\n\nUsage:\n  > mv <source> <destination> {flags} \n\nParameters:\n  <source> the location to move files/directories from\n  <destination> the location to move files/directories to\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Rename a file\n  > mv before.txt after.txt\n\n  Move a file into a directory\n  > mv test.txt my/subdirectory\n\n  Move many files into a directory\n  > mv *.txt my/subdirectory\n\n"
+- name: n
+  usage: Go to next shell.
+  documentation: "Go to next shell.\n\nUsage:\n  > n {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: nth
+  usage: Return only the selected rows
+  doc_link: /commands/nth.html
+  documentation: "Return only the selected rows\n\nUsage:\n  > nth <row number>  ...args{flags} \n\nParameters:\n  <row number> the number of the row to return\n  ...args: Optionally return more rows\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get the second row\n  > echo [first second third] | nth 1\n\n  Get the first and third rows\n  > echo [first second third] | nth 0 2\n\n"
+- name: open
+  usage: "Load a file into a cell, convert to table if possible (avoid by appending '--raw').\n        \nMultiple encodings are supported for reading text files by using\nthe '--encoding <encoding>' parameter. Here is an example of a few:\nbig5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5\n\nFor a more complete list of encodings please refer to the encoding_rs\ndocumentation link at https://docs.rs/encoding_rs/0.8.23/encoding_rs/#statics"
+  doc_link: /commands/open.html
+  documentation: "Load a file into a cell, convert to table if possible (avoid by appending '--raw').\n        \nMultiple encodings are supported for reading text files by using\nthe '--encoding <encoding>' parameter. Here is an example of a few:\nbig5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5\n\nFor a more complete list of encodings please refer to the encoding_rs\ndocumentation link at https://docs.rs/encoding_rs/0.8.23/encoding_rs/#statics\n\nUsage:\n  > open <path> {flags} \n\nParameters:\n  <path> the file path to load values from\n\nFlags:\n  -h, --help: Display this help message\n  -r, --raw: load content as a string instead of a table\n  -e, --encoding <string>: encoding to use to open file\n\nExamples:\n  Opens \"users.csv\" and creates a table from the data\n  > open users.csv\n\n  Opens file with iso-8859-1 encoding\n  > open file.csv --encoding iso-8859-1 | from csv\n\n"
+- name: p
+  usage: Go to previous shell.
+  documentation: "Go to previous shell.\n\nUsage:\n  > p {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: parse
+  usage: Parse columns from string data using a simple pattern.
+  documentation: "Parse columns from string data using a simple pattern.\n\nUsage:\n  > parse <pattern> {flags} \n\nParameters:\n  <pattern> the pattern to match. Eg) \"{foo}: {bar}\"\n\nFlags:\n  -h, --help: Display this help message\n  -r, --regex: use full regex syntax for patterns\n\n"
+- name: pivot
+  usage: Pivots the table contents so rows become columns and columns become rows.
+  doc_link: /commands/pivot.html
+  documentation: "Pivots the table contents so rows become columns and columns become rows.\n\nUsage:\n  > pivot  ...args{flags} \n\nParameters:\n  ...args: the names to give columns once pivoted\n\nFlags:\n  -h, --help: Display this help message\n  -r, --header-row: treat the first row as column names\n  -i, --ignore-titles: don't pivot the column names into values\n\n"
+- name: post
+  usage: Post content to a url and retrieve data as a table if possible.
+  documentation: "Post content to a url and retrieve data as a table if possible.\n\nUsage:\n  > post <path> <body> {flags} \n\nParameters:\n  <path> the URL to post to\n  <body> the contents of the post body\n\nFlags:\n  -h, --help: Display this help message\n  -u, --user <any>: the username when authenticating\n  -p, --password <any>: the password when authenticating\n  -t, --content-type <any>: the MIME type of content to post\n  -l, --content-length <any>: the length of the content being posted\n  -r, --raw: return values as a string instead of a table\n\n"
+- name: prepend
+  usage: Prepend the given row to the front of the table
+  doc_link: /commands/prepend.html
+  documentation: "Prepend the given row to the front of the table\n\nUsage:\n  > prepend <row value> {flags} \n\nParameters:\n  <row value> the value of the row to prepend to the table\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Add something to the beginning of a list or table\n  > echo [2 3 4] | prepend 1\n\n"
+- name: ps
+  usage: View information about system processes.
+  doc_link: /commands/ps.html
+  documentation: "View information about system processes.\n\nUsage:\n  > ps {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -f, --full: list all available columns for each entry\n\n"
+- name: pwd
+  usage: Output the current working directory.
+  doc_link: /commands/pwd.html
+  documentation: "Output the current working directory.\n\nUsage:\n  > pwd {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Print the current working directory\n  > pwd\n\n"
+- name: random
+  usage: Generate random values
+  doc_link: /commands/random.html
+  documentation: "Generate random values\n\nUsage:\n  > random {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+  subcommands:
+    - name: random bool
+      usage: Generate a random boolean value
+      documentation: "Generate a random boolean value\n\nUsage:\n  > random bool {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -b, --bias <number>: Adjusts the probability of a \"true\" outcome\n\nExamples:\n  Generate a random boolean value\n  > random bool\n\n  Generate a random boolean value with a 75% chance of \"true\"\n  > random bool --bias 0.75\n\n"
+    - name: random dice
+      usage: Generate a random dice roll
+      documentation: "Generate a random dice roll\n\nUsage:\n  > random dice {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -d, --dice <integer>: The amount of dice being rolled\n  -s, --sides <integer>: The amount of sides a die has\n\nExamples:\n  Roll 1 dice with 6 sides each\n  > random dice\n\n  Roll 10 dice with 12 sides each\n  > random dice -d 10 -s 12\n\n"
+    - name: random uuid
+      usage: Generate a random uuid4 string
+      documentation: "Generate a random uuid4 string\n\nUsage:\n  > random uuid {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Generate a random uuid4 string\n  > random uuid\n\n"
+- name: range
+  usage: Return only the selected rows
+  documentation: "Return only the selected rows\n\nUsage:\n  > range <rows > {flags} \n\nParameters:\n  <rows > range of rows to return: Eg) 4..7 (=> from 4 to 7)\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: reject
+  usage: Remove the given columns from the table.
+  doc_link: /commands/reject.html
+  documentation: "Remove the given columns from the table.\n\nUsage:\n  > reject  ...args{flags} \n\nParameters:\n  ...args: the names of columns to remove\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Lists the files in a directory without showing the modified column\n  > ls | reject modified\n\n"
+- name: rename
+  usage: Creates a new table with columns renamed.
+  doc_link: /commands/rename.html
+  documentation: "Creates a new table with columns renamed.\n\nUsage:\n  > rename <column_name>  ...args{flags} \n\nParameters:\n  <column_name> the new name for the first column\n  ...args: the new name for additional columns\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Rename a column\n  > echo \"{a: 1, b: 2, c: 3}\" | from json | rename my_column\n\n  Rename many columns\n  > echo \"{a: 1, b: 2, c: 3}\" | from json | rename spam eggs cars\n\n"
+- name: reverse
+  usage: Reverses the table.
+  doc_link: /commands/reverse.html
+  documentation: "Reverses the table.\n\nUsage:\n  > reverse {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Sort list of numbers in descending file size\n  > echo [3 1 2 19 0] | reverse\n\n"
+- name: rm
+  usage: Remove file(s)
+  documentation: "Remove file(s)\n\nUsage:\n  > rm  ...args{flags} \n\nParameters:\n  ...args: the file path(s) to remove\n\nFlags:\n  -h, --help: Display this help message\n  -t, --trash: use the platform's recycle bin instead of permanently deleting\n  -p, --permanent: don't use recycle bin, delete permanently\n  -r, --recursive: delete subdirectories recursively\n\nExamples:\n  Delete or move a file to the system trash (depending on 'rm_always_trash' config option)\n  > rm file.txt\n\n  Move a file to the system trash\n  > rm --trash file.txt\n\n  Delete a file permanently\n  > rm --permanent file.txt\n\n"
+- name: run_external
+  usage: ""
+  documentation: "\n\nUsage:\n  > run_external  ...args{flags} \n\nParameters:\n  ...args: external command arguments\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: save
+  usage: Save the contents of the pipeline to a file.
+  doc_link: /commands/save.html
+  documentation: "Save the contents of the pipeline to a file.\n\nUsage:\n  > save (path) {flags} \n\nParameters:\n  (path) the path to save contents to\n\nFlags:\n  -h, --help: Display this help message\n  -r, --raw: treat values as-is rather than auto-converting based on file extension\n\n"
+- name: select
+  usage: Down-select table to only these columns.
+  doc_link: /commands/select.html
+  documentation: "Down-select table to only these columns.\n\nUsage:\n  > select  ...args{flags} \n\nParameters:\n  ...args: the columns to select from the table\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Select just the name column\n  > ls | select name\n\n  Select the name and size columns\n  > ls | select name size\n\n"
+- name: shells
+  usage: Display the list of current shells.
+  doc_link: /commands/shells.html
+  documentation: "Display the list of current shells.\n\nUsage:\n  > shells {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: shuffle
+  usage: Shuffle rows randomly.
+  doc_link: /commands/shuffle.html
+  documentation: "Shuffle rows randomly.\n\nUsage:\n  > shuffle {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: size
+  usage: Gather word count statistics on the text.
+  doc_link: /commands/size.html
+  documentation: "Gather word count statistics on the text.\n\nUsage:\n  > size {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Count the number of words in a string\n  > echo \"There are seven words in this sentence\" | size\n\n"
+- name: skip
+  usage: Skip some number of rows.
+  doc_link: /commands/skip.html
+  documentation: "Skip some number of rows.\n\nUsage:\n  > skip (rows) {flags} \n\nParameters:\n  (rows) How many rows to skip\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Skip the first 5 rows\n  > echo [1 2 3 4 5 6 7] | skip 5\n\n"
+  subcommands:
+    - name: skip until
+      usage: Skips rows until the condition matches.
+      documentation: "Skips rows until the condition matches.\n\nUsage:\n  > skip until <condition> {flags} \n\nParameters:\n  <condition> The condition that must be met to stop skipping\n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: skip while
+      usage: Skips rows while the condition matches.
+      documentation: "Skips rows while the condition matches.\n\nUsage:\n  > skip while <condition> {flags} \n\nParameters:\n  <condition> The condition that must be met to continue skipping\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: sort-by
+  usage: "Sort by the given columns, in increasing order."
+  doc_link: /commands/sort-by.html
+  documentation: "Sort by the given columns, in increasing order.\n\nUsage:\n  > sort-by  ...args{flags} \n\nParameters:\n  ...args: the column(s) to sort by\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Sort list by increasing value\n  > echo [4 2 3 1] | sort-by\n\n  Sort output by increasing file size\n  > ls | sort-by size\n\n  Sort output by type, and then by file size for each type\n  > ls | sort-by type size\n\n"
+- name: split
+  usage: "split contents across desired subcommand (like row, column) via the separator."
+  documentation: "split contents across desired subcommand (like row, column) via the separator.\n\nUsage:\n  > split {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+  subcommands:
+    - name: split chars
+      usage: "splits a string's characters into separate rows"
+      documentation: "splits a string's characters into separate rows\n\nUsage:\n  > split chars {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Split the string's characters into separate rows\n  > echo 'hello' | split chars\n\n"
+    - name: split column
+      usage: splits contents across multiple columns via the separator.
+      documentation: "splits contents across multiple columns via the separator.\n\nUsage:\n  > split column <separator>  ...args{flags} \n\nParameters:\n  <separator> the character that denotes what separates columns\n  ...args: column names to give the new columns\n\nFlags:\n  -h, --help: Display this help message\n  -c, --collapse-empty: remove empty columns\n\n"
+    - name: split row
+      usage: splits contents over multiple rows via the separator.
+      documentation: "splits contents over multiple rows via the separator.\n\nUsage:\n  > split row <separator> {flags} \n\nParameters:\n  <separator> the character that denotes what separates rows\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: split-by
+  usage: Creates a new table with the data from the inner tables split by the column given.
+  documentation: "Creates a new table with the data from the inner tables split by the column given.\n\nUsage:\n  > split-by (column_name) {flags} \n\nParameters:\n  (column_name) the name of the column within the nested table to split by\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: start
+  usage: Opens each file/directory/URL using the default application
+  doc_link: /commands/start.html
+  documentation: "Opens each file/directory/URL using the default application\n\nUsage:\n  > start  ...args{flags} \n\nParameters:\n  ...args: files/urls/directories to open\n\nFlags:\n  -h, --help: Display this help message\n  -a, --application <string>: Specifies the application used for opening the files/directories/urls\n\n"
+- name: str
+  usage: Apply string function.
+  doc_link: /commands/str.html
+  documentation: "Apply string function.\n\nUsage:\n  > str  ...args{flags} \n\nParameters:\n  ...args: optionally convert by column paths\n\nFlags:\n  -h, --help: Display this help message\n\n"
+  subcommands:
+    - name: str capitalize
+      usage: capitalizes text
+      documentation: "capitalizes text\n\nUsage:\n  > str capitalize  ...args{flags} \n\nParameters:\n  ...args: optionally capitalize text by column paths\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Capitalize contents\n  > echo 'good day' | str capitalize\n\n"
+    - name: str collect
+      usage: collects a list of strings into a string
+      documentation: "collects a list of strings into a string\n\nUsage:\n  > str collect {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Collect a list of string\n  > echo ['a' 'b' 'c'] | str collect\n\n"
+    - name: str downcase
+      usage: downcases text
+      documentation: "downcases text\n\nUsage:\n  > str downcase  ...args{flags} \n\nParameters:\n  ...args: optionally downcase text by column paths\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Downcase contents\n  > echo 'NU' | str downcase\n\n"
+    - name: str find-replace
+      usage: finds and replaces text
+      documentation: "finds and replaces text\n\nUsage:\n  > str find-replace <find> <replace>  ...args{flags} \n\nParameters:\n  <find> the pattern to find\n  <replace> the replacement pattern\n  ...args: optionally find and replace text by column paths\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Find and replace contents with capture group\n  > echo 'my_library.rb' | str find-replace '(.+).rb' '$1.nu'\n\n"
+    - name: str from
+      usage: Converts numeric types to strings. Trims trailing zeros unless decimals parameter is specified.
+      documentation: "Converts numeric types to strings. Trims trailing zeros unless decimals parameter is specified.\n\nUsage:\n  > str from  ...args{flags} \n\nParameters:\n  ...args: optionally convert to string by column paths\n\nFlags:\n  -h, --help: Display this help message\n  -d, --decimals <integer>: decimal digits to which to round\n  -g, --group-digits: group digits, currently by thousand with commas\n\nExamples:\n  round to nearest integer\n  > = 1.7 | str from -d 0\n\n  format large number with localized digit grouping\n  > = 1000000.2 | str from -g\n\n"
+    - name: str length
+      usage: outputs the lengths of the strings in the pipeline
+      documentation: "outputs the lengths of the strings in the pipeline\n\nUsage:\n  > str length {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Return the lengths of multiple strings\n  > echo 'hello' | str length\n\n  Return the lengths of multiple strings\n  > echo 'hi' 'there' | str length\n\n"
+    - name: str reverse
+      usage: outputs the reversals of the strings in the pipeline
+      documentation: "outputs the reversals of the strings in the pipeline\n\nUsage:\n  > str reverse {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Return the reversals of multiple strings\n  > echo 'Nushell' | str reverse\n\n"
+    - name: str set
+      usage: sets text
+      documentation: "sets text\n\nUsage:\n  > str set <set>  ...args{flags} \n\nParameters:\n  <set> the new string to set\n  ...args: optionally set text by column paths\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Set contents with preferred string\n  > echo 'good day' | str set 'good bye'\n\n  Set the contents on preferred column paths\n  > open Cargo.toml | str set '255' package.version\n\n"
+    - name: str substring
+      usage: substrings text
+      documentation: "substrings text\n\nUsage:\n  > str substring <range>  ...args{flags} \n\nParameters:\n  <range> the indexes to substring [start end]\n  ...args: optionally substring text by column paths\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Get a substring from the text\n  > echo 'good nushell' | str substring [5 12]\n\n  Alternatively, you can use the form\n  > echo 'good nushell' | str substring '5,12'\n\n  Get the last characters from the string\n  > echo 'good nushell' | str substring ',-5'\n\n  Get the remaining characters from a starting index\n  > echo 'good nushell' | str substring '5,'\n\n  Get the characters from the beginning until ending index\n  > echo 'good nushell' | str substring ',7'\n\n"
+    - name: str to-datetime
+      usage: converts text into datetime
+      documentation: "converts text into datetime\n\nUsage:\n  > str to-datetime  ...args{flags} \n\nParameters:\n  ...args: optionally convert text into datetime by column paths\n\nFlags:\n  -h, --help: Display this help message\n  -f, --format <string>: Specify date and time formatting\n\nExamples:\n  Convert to datetime\n  > echo '16.11.1984 8:00 am +0000' | str to-datetime\n\n"
+    - name: str to-decimal
+      usage: converts text into decimal
+      documentation: "converts text into decimal\n\nUsage:\n  > str to-decimal  ...args{flags} \n\nParameters:\n  ...args: optionally convert text into decimal by column paths\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Convert to decimal\n  > echo '3.1415' | str to-decimal\n\n"
+    - name: str to-int
+      usage: converts text into integer
+      documentation: "converts text into integer\n\nUsage:\n  > str to-int  ...args{flags} \n\nParameters:\n  ...args: optionally convert text into integer by column paths\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Convert to an integer\n  > echo '255' | str to-int\n\n"
+    - name: str trim
+      usage: trims text
+      documentation: "trims text\n\nUsage:\n  > str trim  ...args{flags} \n\nParameters:\n  ...args: optionally trim text by column paths\n\nFlags:\n  -h, --help: Display this help message\n  -c, --char <string>: character to trim (default: whitespace)\n\nExamples:\n  Trim whitespace\n  > echo 'Nu shell ' | str trim\n\n  Trim a specific character\n  > echo '=== Nu shell ===' | str trim -c '=' | str trim\n\n"
+    - name: str upcase
+      usage: upcases text
+      documentation: "upcases text\n\nUsage:\n  > str upcase  ...args{flags} \n\nParameters:\n  ...args: optionally upcase text by column paths\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Upcase contents\n  > echo 'nu' | str upcase\n\n"
+- name: sys
+  usage: View information about the current system.
+  doc_link: /commands/sys.html
+  documentation: "View information about the current system.\n\nUsage:\n  > sys {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: table
+  usage: View the contents of the pipeline as a table.
+  documentation: "View the contents of the pipeline as a table.\n\nUsage:\n  > table {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -n, --start_number <number>: row number to start viewing from\n\n"
+- name: tags
+  usage: Read the tags (metadata) for values.
+  doc_link: /commands/tags.html
+  documentation: "Read the tags (metadata) for values.\n\nUsage:\n  > tags {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: textview
+  usage: Autoview of text data.
+  documentation: "Autoview of text data.\n\nUsage:\n  > textview {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: to
+  usage: "Convert table into an output format (based on subcommand, like csv, html, json, yaml)."
+  doc_link: /commands/to.html
+  documentation: "Convert table into an output format (based on subcommand, like csv, html, json, yaml).\n\nUsage:\n  > to {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+  subcommands:
+    - name: to bson
+      usage: Convert table into .bson text.
+      documentation: "Convert table into .bson text.\n\nUsage:\n  > to bson {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: to csv
+      usage: "Convert table into .csv text "
+      documentation: "Convert table into .csv text \n\nUsage:\n  > to csv {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -s, --separator <string>: a character to separate columns, defaults to ','\n  --headerless: do not output the columns names as the first row\n\n"
+    - name: to db
+      usage: Convert table to db data
+      documentation: "Convert table to db data\n\nUsage:\n  > to db {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: to html
+      usage: Convert table into simple HTML
+      documentation: "Convert table into simple HTML\n\nUsage:\n  > to html {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -t, --html_color: change ansi colors to html colors\n  -n, --no_color: remove all ansi colors in output\n  -d, --dark_bg: indicate your background color is a darker color\n\n"
+    - name: to json
+      usage: Converts table data into JSON text.
+      documentation: "Converts table data into JSON text.\n\nUsage:\n  > to json {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -p, --pretty <integer>: Formats the JSON text with the provided indentation setting\n\nExamples:\n  Outputs an unformatted JSON string representing the contents of this table\n  > echo [1 2 3] | to json\n\n  Outputs a formatted JSON string representing the contents of this table with an indentation setting of 2 spaces\n  > echo [1 2 3] | to json --pretty 2\n\n"
+    - name: to md
+      usage: Convert table into simple Markdown
+      documentation: "Convert table into simple Markdown\n\nUsage:\n  > to md {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: to sqlite
+      usage: Convert table to sqlite .db binary data
+      documentation: "Convert table to sqlite .db binary data\n\nUsage:\n  > to sqlite {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: to toml
+      usage: Convert table into .toml text
+      documentation: "Convert table into .toml text\n\nUsage:\n  > to toml {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: to tsv
+      usage: Convert table into .tsv text
+      documentation: "Convert table into .tsv text\n\nUsage:\n  > to tsv {flags} \n\nFlags:\n  -h, --help: Display this help message\n  --headerless: do not output the column names as the first row\n\n"
+    - name: to url
+      usage: Convert table into url-encoded text
+      documentation: "Convert table into url-encoded text\n\nUsage:\n  > to url {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+    - name: to yaml
+      usage: Convert table into .yaml/.yml text
+      documentation: "Convert table into .yaml/.yml text\n\nUsage:\n  > to yaml {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: touch
+  usage: creates a file
+  doc_link: /commands/touch.html
+  documentation: "creates a file\n\nUsage:\n  > touch <filename> {flags} \n\nParameters:\n  <filename> the path of the file you want to create\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Creates \"fixture.json\"\n  > touch fixture.json\n\n"
+- name: tree
+  usage: View the contents of the pipeline as a tree.
+  documentation: "View the contents of the pipeline as a tree.\n\nUsage:\n  > tree {flags} \n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: trim
+  usage: Trim leading and following whitespace from text data.
+  doc_link: /commands/trim.html
+  documentation: "Trim leading and following whitespace from text data.\n\nUsage:\n  > trim {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Trims surrounding whitespace and outputs \"Hello world\"\n  > echo \"    Hello world\" | trim\n\n"
+- name: uniq
+  usage: Return the unique rows
+  doc_link: /commands/uniq.html
+  documentation: "Return the unique rows\n\nUsage:\n  > uniq {flags} \n\nFlags:\n  -h, --help: Display this help message\n  -c, --count: Count the unique rows\n\n"
+- name: update
+  usage: Update an existing column to have a new value.
+  doc_link: /commands/update.html
+  documentation: "Update an existing column to have a new value.\n\nUsage:\n  > update <field> <replacement value> {flags} \n\nParameters:\n  <field> the name of the column to update\n  <replacement value> the new value to give the cell(s)\n\nFlags:\n  -h, --help: Display this help message\n\n"
+- name: version
+  usage: Display Nu version
+  doc_link: /commands/version.html
+  documentation: "Display Nu version\n\nUsage:\n  > version {flags} \n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Display Nu version\n  > version\n\n"
+- name: where
+  usage: Filter table to match the condition.
+  doc_link: /commands/where.html
+  documentation: "Filter table to match the condition.\n\nUsage:\n  > where <condition> {flags} \n\nParameters:\n  <condition> the condition that must match\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  List all files in the current directory with sizes greater than 2kb\n  > ls | where size > 2kb\n\n  List only the files in the current directory\n  > ls | where type == File\n\n  List all files with names that contain \"Car\"\n  > ls | where name =~ \"Car\"\n\n  List all files that were modified in the last two months\n  > ls | where modified <= 2M\n\n"
+- name: which
+  usage: Finds a program file.
+  doc_link: /commands/which.html
+  documentation: "Finds a program file.\n\nUsage:\n  > which <application> {flags} \n\nParameters:\n  <application> application\n\nFlags:\n  -h, --help: Display this help message\n  -a, --all: list all executables\n\n"
+- name: with-env
+  usage: "Runs a block with an environment set. Eg) with-env [NAME 'foo'] { echo $nu.env.NAME }"
+  documentation: "Runs a block with an environment set. Eg) with-env [NAME 'foo'] { echo $nu.env.NAME }\n\nUsage:\n  > with-env <variable> <block> {flags} \n\nParameters:\n  <variable> the environment variable to temporarily set\n  <block> the block to run once the variable is set\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Set the MYENV environment variable\n  > with-env [MYENV \"my env value\"] { echo $nu.env.MYENV }\n\n"
+- name: wrap
+  usage: Wraps the given data in a table.
+  doc_link: /commands/wrap.html
+  documentation: "Wraps the given data in a table.\n\nUsage:\n  > wrap (column) {flags} \n\nParameters:\n  (column) the name of the new column\n\nFlags:\n  -h, --help: Display this help message\n\nExamples:\n  Wrap a list into a table with the default column name\n  > echo [1 2 3] | wrap\n\n  Wrap a list into a table with a given column name\n  > echo [1 2 3] | wrap MyColumn\n\n"
