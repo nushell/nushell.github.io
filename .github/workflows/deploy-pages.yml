@@ -18,7 +18,7 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify --baseUrl http://nushell.sh/website_exploration
+        run: hugo --minify --baseUrl https://www.nushell.sh/website_exploration
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.7
