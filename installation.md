@@ -6,10 +6,10 @@ title: Installation
 This is just a short description of how you can install Nu.
 There is an installation guide offering more detailed documentation on how to install Nu.
 It is available in different languages:
-[English](https://book.nushell.sh/en/installation),
-[Español](https://book.nushell.sh/es/instalacion),
-[Português do Brasil](https://book.nushell.sh/pt-br/instalacao) and
-[日本語](https://book.nushell.sh/ja/installation).
+[English](https://www.nushell.sh/book/en/installation.html),
+[Español](https://www.nushell.sh/book/es/instalacion.html),
+[Português do Brasil](https://www.nushell.sh/book/pt-BR/instalacao.html) and
+[日本語](https://www.nushell.sh/book/ja/installation.html).
 
 # Pre-built binaries
 
@@ -123,7 +123,7 @@ cargo install nu
 ```
 
 You can also install Nu with all the bells and whistles (be sure to have installed the
-[dependencies](https://book.nushell.sh/en/installation#dependencies) for your platform):
+[dependencies](https://www.nushell.sh/book/en/installation#dependencies) for your platform):
 
 ```
 cargo install nu --features=stable
