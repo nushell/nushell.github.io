@@ -1,10 +1,14 @@
 ---
 title: count
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
-This command counts the number of rows in a table.
+Obtain the row or column count of a table.
+
+## Flags
+
+* `-c`, `--column`: Calculate number of columns in table
 
 ## Examples
 
@@ -36,14 +40,18 @@ This command counts the number of rows in a table.
 ────┴────────────────────┴──────┴──────────┴──────────────
 ```
 
+By default, `count` will return the number of rows in a table
+
 ```shell
 > ls | count
 20
 ```
 
+The `-c` flag will produce a count of the columns in the table
+
 ```shell
-> ls | get name | count
-20
+> ls | count -c
+4
 ```
 
 ```shell

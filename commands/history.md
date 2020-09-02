@@ -1,7 +1,7 @@
 ---
 title: history
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 Displays the last 100 commands.
@@ -16,6 +16,6 @@ Displays the last 100 commands.
 ...
  97  │ date
  98  │ ls
- 99  │ ls -fa
+ 99  │ ls -la
 ─────┴────────────────────────────────────────────────────────────────────────
 ```

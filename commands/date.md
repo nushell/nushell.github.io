@@ -1,7 +1,7 @@
 ---
 title: date
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 Use `date` to get the current date and time. Defaults to local timezone but you can get it in UTC too.

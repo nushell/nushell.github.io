@@ -1,7 +1,7 @@
 ---
 title: enter
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 This command creates a new shell and begin at this path.

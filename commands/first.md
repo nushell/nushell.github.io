@@ -1,7 +1,7 @@
 ---
 title: first
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 Use `first` to retrieve the first "n" rows of a table. `first` has a required amount parameter that indicates how many rows you would like returned. If more than one row is returned, an index column will be included showing the row number.
