@@ -1,7 +1,7 @@
 ---
 title: du
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 `du` stands for disk usage. It will give you the physical and apparent size of files and folders

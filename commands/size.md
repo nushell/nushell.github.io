@@ -1,7 +1,7 @@
 ---
 title: size
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 This commands gives word count statistics on any text.
@@ -11,7 +11,7 @@ This commands gives word count statistics on any text.
 ```shell
 > open lalala.txt | size
 ━━━━━━━┯━━━━━━━┯━━━━━━━┯━━━━━━━━━━━━
- lines │ words │ chars │ max length
+ lines │ words │ chars │ bytes
 ───────┼───────┼───────┼────────────
      4 │    10 │    72 │         72
 ━━━━━━━┷━━━━━━━┷━━━━━━━┷━━━━━━━━━━━━
@@ -20,7 +20,7 @@ This commands gives word count statistics on any text.
 ```shell
 > open the_mysterious_affair_at_styles.txt | size
 ━━━━━━━┯━━━━━━━┯━━━━━━━━┯━━━━━━━━━━━━
- lines │ words │ chars  │ max length
+ lines │ words │ chars  │ bytes
 ───────┼───────┼────────┼────────────
   8935 │ 62352 │ 349459 │     361771
 ━━━━━━━┷━━━━━━━┷━━━━━━━━┷━━━━━━━━━━━━

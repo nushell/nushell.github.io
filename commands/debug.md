@@ -1,7 +1,7 @@
 ---
 title: debug
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 `debug` prints a debugging view of the table data. It is useful when you want to get the specific types of the data and while investigating errors.
@@ -44,7 +44,7 @@ nu_version: 0.16.1
 
 ```shell
 > open --raw Cargo.toml | size | debug
-(lines=139 words=560 chars=4607 max length=4607)
+(lines=139 words=560 chars=4607 bytes=4607)
 ```
 
 ```shell

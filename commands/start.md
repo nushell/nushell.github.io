@@ -1,7 +1,7 @@
 ---
 title: start
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 Opens each file/directory/URL using the default application.

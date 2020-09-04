@@ -1,7 +1,7 @@
 ---
 title: to
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 Converts table data into a string or binary. The target format is specified as a subcommand, like `to csv` or `to json`.
@@ -17,6 +17,7 @@ Converts table data into a string or binary. The target format is specified as a
 * [to toml](to-toml.md)
 * [to tsv](to-tsv.md)
 * [to url](to-url.md)
+* [to xml](to-xml.md)
 * [to yaml](to-yaml.md)
 
 *Subcommands without links are currently missing their documentation.*

@@ -1,7 +1,7 @@
 ---
 title: shuffle
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 Shuffles the rows in a random order.

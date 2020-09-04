@@ -1,7 +1,7 @@
 ---
 title: ps
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 This command shows information about system processes.

@@ -1,7 +1,7 @@
 ---
 title: alias
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 This command allows you to define shortcuts for other common commands. By default, they only apply to the current session. To persist them, add `--save`.
@@ -10,13 +10,13 @@ Syntax: `alias {flags} <name> [<parameters>] {<body>}`
 
 The command expects three parameters:
 
-* the name of alias
-* the parameters as a space-separated list (`[a b ...]`), can be empty (`[]`)
-* the body of the alias as a `{...}` block
+* The name of the alias
+* The parameters as a space-separated list (`[a b ...]`), can be empty (`[]`)
+* The body of the alias as a `{...}` block
 
 ## Flags
 
-* `-s`, `--save`: Save the alias to your config (see `config --path` to edit them later)
+* `-s`, `--save`: Save the alias to your config (see `config path` to edit them later)
 
 ## Examples
 
@@ -55,30 +55,15 @@ flags:
 
 ## Persistent aliases
 
-Aliases are most useful when they are persistent. For that, add them to your startup config:
+Aliases are most useful when they are persistent. For that, use the `--save` flag:
 
 ```shell
-> config --set [startup ["alias myecho [msg] { echo $msg }"]]
+> alias --save myecho [msg] { echo $msg }
 ```
 
-This is fine for the first alias, but since it overwrites the startup config, you need a different approach for additional aliases.
+This will store the alias in your config, under the `startup` key. To edit the saved alias, run it again with the same name, or edit your config file directly. You can find the location of the file using `config path`.
 
-To add a 2nd alias:
-
+For example, to edit your config file in `vi`, run:
 ```shell
-> config --get startup | append "alias s [] { git status -sb }" | config --set_into startup
-```
-
-This first reads the `startup` config (a table of strings), then appends another alias, then sets the `startup` config with the output of the pipeline.
-
-To make this process easier, you could define another alias:
-
-```shell
-> alias addalias [alias-string] { config --get startup | append $alias-string | config --set_into startup }
-```
-
-Then use that to add more aliases:
-
-```shell
-> addalias "alias s [] { git status -sb }"
+> vi $(config path)
 ```

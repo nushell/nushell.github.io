@@ -1,19 +1,15 @@
----
-title: split-column
-layout: command
-nu_version: 0.14
----
+# split column
 
-Split row contents across multiple columns via the separator.
+splits contents across multiple columns via the separator.
 
-Syntax: `split-column <separator>  ...args{flags}`
+Syntax: `split column <separator>  ...args{flags}`
 
-### Parameters
+## Parameters
 
 * `<separator>`: string that denotes what separates columns
 * `args`: column names to give the new columns. If not specified they will be set to `Column1` `Column2` ...
 
-### Flags
+## Flags
 
     --collapse-empty
       Removes empty columns
@@ -35,11 +31,11 @@ If we have file structured like this:
 1.0459770114942528 | 1.0925925925925926 | 0.6164383561643836
 ```
 
-We can build a table from it using the `split-column` command
+We can build a table from it using the `split column` command
 
 ```shell
-> open coordinates.txt | lines | split-column " | "
-━━━┯━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━
+> open coordinates.txt | lines | split column " | "
+───┬─────────────────────┬──────────────────────┬────────────────────
  # │ Column1             │ Column2              │ Column3
 ───┼─────────────────────┼──────────────────────┼────────────────────
  0 │ 0.12643678160919541 │ 0.6851851851851852   │ 0.273972602739726
@@ -52,14 +48,14 @@ We can build a table from it using the `split-column` command
  7 │ 0.9310344827586207  │ 1.1296296296296295   │ 0.7123287671232876
  8 │ 0.3448275862068966  │ 0.018518518518518517 │ 0.6575342465753424
  9 │ 1.0459770114942528  │ 1.0925925925925926   │ 0.6164383561643836
-━━━┷━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━
+───┴─────────────────────┴──────────────────────┴────────────────────
 ```
 
 And give names to the columns
 
 ```shell
-> open coordinates.txt | lines | split-column " | " x y z
-━━━┯━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━
+> open coordinates.txt | lines | split column " | " x y z
+───┬─────────────────────┬──────────────────────┬────────────────────
  # │ x                   │ y                    │ z
 ───┼─────────────────────┼──────────────────────┼────────────────────
  0 │ 0.12643678160919541 │ 0.6851851851851852   │ 0.273972602739726
@@ -72,5 +68,5 @@ And give names to the columns
  7 │ 0.9310344827586207  │ 1.1296296296296295   │ 0.7123287671232876
  8 │ 0.3448275862068966  │ 0.018518518518518517 │ 0.6575342465753424
  9 │ 1.0459770114942528  │ 1.0925925925925926   │ 0.6164383561643836
-━━━┷━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━
+───┴─────────────────────┴──────────────────────┴────────────────────
 ```

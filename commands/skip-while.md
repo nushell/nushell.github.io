@@ -1,7 +1,7 @@
 ---
 title: skip-while
 layout: command
-nu_version: 0.16.1
+nu_version: 0.18.1
 ---
 
 Skips rows while the condition matches.
