@@ -1,7 +1,7 @@
 ---
 title: pwd
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 Print the current working directory.

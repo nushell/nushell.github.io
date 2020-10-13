@@ -1,7 +1,7 @@
 ---
 title: insert
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 This command adds a column to any table output. The first parameter takes the heading, the second parameter takes the value for all the rows.

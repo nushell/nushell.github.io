@@ -1,7 +1,7 @@
 ---
 title: group-by
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 This command creates a new table with the data from the table rows grouped by the column given.

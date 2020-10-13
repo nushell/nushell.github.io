@@ -1,7 +1,7 @@
 ---
 title: random
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 Use `random` to generate random values
@@ -91,4 +91,35 @@ true
 ```shell
 > random uuid
 8af4de39-acbc-42f0-94d1-7cfad6c01f8b
+```
+
+## integer
+
+* `random integer`: Generate a random integer
+
+### integer Flags
+
+* `m`, `--min` \<integer>: The minimum value to generate
+* `x`, `--max` \<integer>: The maximum value to generate
+
+### integer Examples
+
+```shell
+> random integer
+42
+```
+
+```shell
+> random integer 5000..
+8700890823
+```
+
+```shell
+> random integer ..100
+73
+```
+
+```shell
+> random integer 100000..200000
+173400
 ```

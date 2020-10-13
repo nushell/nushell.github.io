@@ -1,7 +1,7 @@
 ---
 title: math
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 Mathematical functions that generally only operate on a list of numbers (integers, decimals, bytes) and tables.

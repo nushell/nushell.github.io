@@ -1,7 +1,7 @@
 ---
 title: compact
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 This command allows us to filters out rows with empty columns. Other commands are capable of feeding `compact` with their output through pipelines.

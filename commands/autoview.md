@@ -1,7 +1,7 @@
 ---
 title: autoview
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 Print the content of the pipeline as a table or list.

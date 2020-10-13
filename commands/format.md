@@ -1,7 +1,7 @@
 ---
 title: format
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 Format columns into a string using a simple pattern
