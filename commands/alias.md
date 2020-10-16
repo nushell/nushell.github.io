@@ -1,7 +1,7 @@
 ---
 title: alias
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 This command allows you to define shortcuts for other common commands. By default, they only apply to the current session. To persist them, add `--save`.

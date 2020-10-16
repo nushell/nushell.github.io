@@ -1,7 +1,7 @@
 ---
 title: headers
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 Use `headers` to turn the first row of a table into meaningful column names.

@@ -1,7 +1,7 @@
 ---
 title: every
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 Selects every n-th row of a table, starting from the first one. With the `--skip` flag, every n-th row will be skipped, inverting the original functionality.

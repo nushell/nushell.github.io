@@ -1,7 +1,7 @@
 ---
 title: size
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 This commands gives word count statistics on any text.

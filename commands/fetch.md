@@ -1,7 +1,7 @@
 ---
 title: fetch
 layout: command
-nu_version: 0.18.1
+nu_version: 0.20.0
 ---
 
 This command loads from a URL into a cell, convert it to table if possible (avoid by appending `--raw` flag)
