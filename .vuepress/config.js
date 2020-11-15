@@ -40,7 +40,8 @@ module.exports = {
     repo: "nushell/nushell",
     repoLabel: "GitHub",
     editLinks: true,
-    docsDir: "",
+    docsRepo: "nushell/website_exploration",
+    docsBranch: "main",
     lastUpdated: false,
     locales: {
       "/": {
