@@ -52,6 +52,7 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
+          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/book/": [
@@ -125,6 +126,7 @@ module.exports = {
         nav: [
           { text: "Libro", link: "/es/book/" },
           { text: "Libro Colaborador", link: "/es/contributor-book/" },
+          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/es/book/": [
@@ -174,7 +176,10 @@ module.exports = {
         selectText: "言語",
         label: "日本語",
         editLinkText: "GitHubでこのページを編集する",
-        nav: [{ text: "本", link: "/ja/book/" }],
+        nav: [
+          { text: "本", link: "/ja/book/" },
+          { text: "Demo", link: "http://nushell.sh/demo" },
+        ],
         sidebar: {
           "/ja/book/": [
             {
@@ -205,6 +210,7 @@ module.exports = {
         nav: [
           { text: "Livro", link: "/pt-BR/book/" },
           { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
+          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/pt-BR/book/": [
@@ -248,7 +254,10 @@ module.exports = {
         selectText: "语言",
         label: "中文",
         editLinkText: "在GitHub上编辑此页面",
-        nav: [{ text: "书", link: "/zh-CN/book/" }],
+        nav: [
+          { text: "书", link: "/zh-CN/book/" },
+          { text: "Demo", link: "http://nushell.sh/demo" },
+        ],
         sidebar: {
           "/zh-cn/book/": [
             {
