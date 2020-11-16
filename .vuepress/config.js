@@ -1,5 +1,4 @@
 module.exports = {
-  base: "/website_exploration/",
   locales: {
     "/": {
       lang: "English",
@@ -40,8 +39,8 @@ module.exports = {
     repo: "nushell/nushell",
     repoLabel: "GitHub",
     editLinks: true,
-    docsRepo: "nushell/website_exploration",
-    docsBranch: "main",
+    docsRepo: "nushell/nushell.github.io",
+    docsBranch: "master",
     lastUpdated: false,
     locales: {
       "/": {
