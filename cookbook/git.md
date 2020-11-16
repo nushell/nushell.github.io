@@ -20,7 +20,7 @@ Deleted branch post-argument-positions (was 9d34ec9).
 
 Parse formatted commit messages (more details in the parsing git log section)
 
-`git log "--pretty=format:%h(nu)%aN(nu)%s(nu)%aD" | lines | split column "(nu)" sha1 committer desc merged_at | first 10`
+`git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | first 10`
 
 
 Output
@@ -46,7 +46,7 @@ Output
 
 ### View git comitter activity as a `histogram`
 
-`git log "--pretty=format:%h(nu)%aN(nu)%s(nu)%aD" | lines | split column "(nu)" sha1 committer desc  merged_at | histogram committer merger | sort-by merger | reverse`
+`git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc  merged_at | histogram committer merger | sort-by merger | reverse`
 
 ```
 ━━━━┯━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
