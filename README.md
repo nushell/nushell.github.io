@@ -1,11 +1,48 @@
-# nushell.github.io
+---
+home: true
+heroImage: null
+heroText: NuShell
+tagline: A new type of shell.
+actionText: Get Started →
+actionLink: /book/
+features:
+  - title: Control your system with powerful pipelines
+    details: Pipelines let you command your system like never before. Your system belongs to you, and it awaits your command.
+  - title: Everything is data.
+    details: Rather than having the need to remember all the parameters to all the commands, we can just use the same, regardless of where it came from.
+  - title: Powerful Plugins
+    details: Nu can't come with everything you might want to do with it, so you can extend using its powerful plugin system.
+footer: If you have suggestions or want to change something please give us feedback
 
-This repository contains the source for the [Nu website](https://www.nushell.sh). The website is hosted on GitHub Pages and uses the static site generator [jekyll](https://jekyllrb.com/).
+---
+### Quick Install
 
-# Test it locally
+#### Install Latest Version
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+Install the latest version from the [releases page](https://github.com/nushell/nushell/releases)
 
-# License
+From source on [crates.io](https://crates.io):
 
-The website is made available under MIT license. The [original theme](https://github.com/pages-themes/midnight) is released under CC0.
+```sh
+$ cargo install nu
+```
+
+#### Install via Package Manager
+
+With [Homebrew](https://brew.sh/):
+
+```sh
+$ brew install nushell
+```
+
+With [Scoop](https://scoop.sh):
+
+```powershell
+$ scoop install nu
+```
+
+#### Start the shell
+
+```
+$ nu
+```

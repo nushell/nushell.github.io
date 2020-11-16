@@ -1,0 +1,2 @@
+> nu
+C:\Users\user>

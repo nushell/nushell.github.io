@@ -1,0 +1,3 @@
+# Nu Blog
+
+<BlogPosts />

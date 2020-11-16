@@ -1,0 +1,198 @@
+# データの読み込み
+
+これまでに、`ls`、`ps`、`date`、および`sys`コマンドを使って、ファイル、プロセス、日付そしてシステム自身の情報を取得する方法をみてきました。各コマンドはテーブル情報を提供しますが、データをテーブルに読み込む他の方法があります。
+
+## ファイルを開く
+
+データを操作するためのNuの最も強力なコマンドのひとつが`open`コマンドです。これは様々なデータ形式に対応したマルチツールです。これがなにを意味するかをみるために、jsonファイルを開いてみましょう。
+
+```
+> open editors/vscode/package.json
+------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
+ name | descript | author   | license | version | reposito | publishe | categori | keywords | engines  | activati | main     | contribu | scripts  | devDepen
+      | ion      |          |         |         | ry       | r        | es       |          |          | onEvents |          | tes      |          | dencies
+------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
+ lark | Lark     | Lark     | MIT     | 1.0.0   | [object] | vscode   | [0       | [1 item] | [object] | [1 item] | ./out/ex | [object] | [object] | [object]
+      | support  | develope |         |         |          |          | items]   |          |          |          | tension  |          |          |
+      | for VS   | rs       |         |         |          |          |          |          |          |          |          |          |          |
+      | Code     |          |         |         |          |          |          |          |          |          |          |          |          |
+------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
+```
+
+`ls`と同様、Nuが理解できるタイプのファイルを開くと、単なるテキスト(またはバイトストリーム)以上のものが返ってきます。ここでは、JavaScriptプロジェクト内の"package.json"ファイルを開いています。NuはJSONテキストを認識し、テーブルデータを返すことができます。
+
+プロジェクトのバージョンを確認したい場合は、`get`コマンドを利用します。
+
+```
+> open editors/vscode/package.json | get version
+1.0.0
+```
+
+Nuが現在、直接データをテーブルに読み込める形式は次の通りです。
+
+* json
+* yaml
+* toml
+* xml
+* csv
+* ini
+
+しかし、これらのいずれでもないテキストファイルを読み込むとどうなるでしょうか、試してみましょう。
+
+```
+> open README.md
+```
+
+ファイルの内容が表示されます。ファイルが大きすぎる場合は、便利なスクロールビューでファイルの中身を確認し、ターミナルに戻ってきます。読みやすさのために、ソースファイルやマークダウンといった一般的なファイル形式ではシンタックスハイライトを提供します。
+
+裏側では、Nuはこれらのファイルをひとつの大きな文字列としてみています。次に、これらの文字列から必要なデータを取得する方法について説明します。
+
+## 文字列を扱う
+
+Nuの外からきたデータをNuがいつも理解できるとは限らないことを理解しておくのは重要なことです。多くの場合このデータは文字列として与えられます。
+
+以下のファイルが与えられたと想定してみましょう。
+
+```
+> open people.txt
+Octavia | Butler | Writer
+Bob | Ross | Painter
+Antonio | Vivaldi | Composer
+```
+
+必要なデータはパイプ('|')記号で区切られており、各行はそれぞれの人物を表しています。Nuはデフォルトではパイプで区切られたファイル形式を知らないので、明示的にこのファイルをパースする必要があります。
+
+ファイルを読み込むときに最初に行うことは、１度に１行ずつ作業することです。
+
+```
+> open people.txt | lines
+---+------------------------------
+ # | value
+---+------------------------------
+ 0 | Octavia | Butler | Writer
+ 1 | Bob | Ross | Painter
+ 2 | Antonio | Vivaldi | Composer
+---+------------------------------
+```
+
+テーブルにもどってきたので、ラインで作業していることがわかります。次のステップは、行をもうすこし便利なものに分割できるかみてみることです。そのために、`split column`コマンドを利用します。名前からわかるように、`split column`は区切り記号を含む文字列を列に分割する方法を提供します。区切り文字列が何であるかを指定するだけでよいのです。
+
+
+
+```
+> open people.txt | lines | split column "|"
+---+----------+-----------+-----------
+ # | Column1  | Column2   | Column3
+---+----------+-----------+-----------
+ 0 | Octavia  |  Butler   |  Writer
+ 1 | Bob      |  Ross     |  Painter
+ 2 | Antonio  |  Vivaldi  |  Composer
+---+----------+-----------+-----------
+```
+
+ほとんど正しいように見えますが、余分なスペースを含んでいます。区切り文字を変更してみましょう。
+
+```
+> open people.txt | lines | split column " | "
+---+---------+---------+----------
+ # | Column1 | Column2 | Column3
+---+---------+---------+----------
+ 0 | Octavia | Butler  | Writer
+ 1 | Bob     | Ross    | Painter
+ 2 | Antonio | Vivaldi | Composer
+---+---------+---------+----------
+```
+
+悪くありません。`split column`はデフォルトの列名もつけてくれます。
+
+```
+> open people.txt | lines | split column " | " | get Column1
+---+---------
+ # | value
+---+---------
+ 0 | Octavia
+ 1 | Bob
+ 2 | Antonio
+---+---------
+```
+
+デフォルトの名前を利用するかわりに、列に名前をつけることもできます。
+
+```
+> open people.txt | lines | split column " | " first_name last_name job
+---+------------+-----------+----------
+ # | first_name | last_name | job
+---+------------+-----------+----------
+ 0 | Octavia    | Butler    | Writer
+ 1 | Bob        | Ross      | Painter
+ 2 | Antonio    | Vivaldi   | Composer
+---+------------+-----------+----------
+```
+
+データをテーブルに変換できたので、これまでテーブルに利用してきたすべてのコマンドをつかうことができます。
+
+```
+> open people.txt | lines | split column " | " first_name last_name job | sort-by first_name
+---+------------+-----------+----------
+ # | first_name | last_name | job
+---+------------+-----------+----------
+ 0 | Antonio    | Vivaldi   | Composer
+ 1 | Bob        | Ross      | Painter
+ 2 | Octavia    | Butler    | Writer
+---+------------+-----------+----------
+```
+
+文字列を操作するために使用できるその他のコマンドです。
+* str
+* lines
+* size
+
+データがNuが理解できる構造をもっていることがわかっている場合に呼び出すことのできるヘルパーコマンドのセットもあります。例えば、Rustのロックファイルを開いてみましょう。
+
+```
+> open Cargo.lock
+# This file is automatically @generated by Cargo.
+# It is not intended for manual editing.
+[[package]]
+name = "adhoc_derive"
+version = "0.1.2"
+```
+
+"Cargo.lock"ファイルは実際には.tomlファイルですが、ファイル拡張子が.tomlではありません。でも大丈夫です、`from toml`コマンドが使えます。
+
+```
+> open Cargo.lock | from toml
+----------+-------------
+ metadata | package
+----------+-------------
+ [object] | [405 items]
+----------+-------------
+```
+
+Nuが理解できるテキスト形式ごとに`from`コマンドが用意されています。
+
+## rawモードで開く
+
+ファイルを開いてそのデータのテーブルをすぐに操作できると便利ですが、これは必ずしもやりたいことであるとは限りません。テキストをそのまま取得するために、`open`コマンドにオプションフラグを渡すことができます。
+
+```
+> open Cargo.toml --raw
+[package]                                                                                        name = "nu"
+version = "0.1.3"
+authors = ["Yehuda Katz <wycats@gmail.com>", "Jonathan Turner <jonathan.d.turner@gmail.com>"]
+description = "A shell for the GitHub era"
+license = "MIT"
+```
+
+## URLからの取得
+
+ファイルシステムからファイルを読み込むことに加えて、`fetch`コマンドを利用してURLからリソースを取得できます。
+
+```
+> fetch https://www.jonathanturner.org/feed.xml
+----------
+ rss
+----------
+ [1 item]
+----------
+```

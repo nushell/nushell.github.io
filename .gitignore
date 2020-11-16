@@ -1,7 +1,4 @@
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
-*.iml
-.idea/
+node_modules
+.vuepress/dist/
+npm-debug.log
+.DS_Store
