@@ -5,7 +5,7 @@ The idea behind this table is to help you understand how Nu built-ins and plug-i
 Note: this table assumes Nu 0.14.1 or later.
 
 
-| NuShell                | Clojure                       | Tablecloth (Ocaml / Elm)                             | Haskell                                    |
+| Nushell                | Clojure                       | Tablecloth (Ocaml / Elm)                             | Haskell                                    |
 | ---------------------- | ----------------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
 | alias                  |                               |                                                      |                                            |                                                 |
 | append                 | conj, into, concat            | append, (++), concat, concatMap                      | (++)                                       |                                                 |

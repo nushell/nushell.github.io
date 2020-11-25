@@ -5,7 +5,7 @@ The idea behind this table is to help you understand how Nu operators relate to 
 Note: this table assumes Nu 0.14.1 or later.
 
 
-| NuShell  | SQL      | Python              | .Net LINQ (C#)       | PowerShell             | Bash               |
+| Nushell  | SQL      | Python              | .Net LINQ (C#)       | PowerShell             | Bash               |
 | -------- | -------- | --------------------| -------------------- | ---------------------- | ------------------ |
 | ==       | =        | ==                  | ==                   | -eq, -is               | -eq                |
 | !=       | !=, <>   | !=                  | !=                   | -ne, -isnot            | -ne                |

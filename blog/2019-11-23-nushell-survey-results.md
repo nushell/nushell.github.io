@@ -99,7 +99,7 @@ Overwhelming, people sent us love and encouragement. Lots of it. We wanted to ta
 * _"It is an interesting and worthwhile take on the command line environment."_
 * _"It's a great project, I wanna use it as my daily driver"_
 * _"I'm super super duper excited to use this shell"_
-* _"I think NuShell is an awesome project. Thanks for doing this"_
+* _"I think Nushell is an awesome project. Thanks for doing this"_
 
 And thank *you* for responding to our survey!
 

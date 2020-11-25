@@ -5,7 +5,7 @@ La idea detrás de esta tabla is ayudarte a entender como los comandos internos 
 Nota: esta tabla asume Nu 0.14.1 o posterior.
 
 
-| NuShell                | Python                        | Kotlin (Java)                                        | C++                                        | Rust                                            |
+| Nushell                | Python                        | Kotlin (Java)                                        | C++                                        | Rust                                            |
 | ---------------------- | ----------------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
 | alias                  |                               |                                                      |                                            |                                                 |
 | append                 | list.append, set.add          | add                                                  | push_back, emplace_back                    | push, push_back                                 |

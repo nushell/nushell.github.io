@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: null
-heroText: NuShell
+heroText: Nushell
 tagline: 新しいタイプのシェル。.
 actionText: Get Started →
 actionLink: /ja/book/

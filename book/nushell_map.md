@@ -5,7 +5,7 @@ The idea behind this table is to help you understand how Nu built-ins and plug-i
 Note: this table assumes Nu 0.14.1 or later.
 
 
-| NuShell                | SQL                           | .Net LINQ (C#)                                       | PowerShell (without external modules)      | Bash                                            |
+| Nushell                | SQL                           | .Net LINQ (C#)                                       | PowerShell (without external modules)      | Bash                                            |
 | ---------------------- | ----------------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
 | alias                  |   -                           |   -                                                  | alias                                      | alias                                           |
 | append                 |   -                           | Append                                               | -Append                                    |                                                 |

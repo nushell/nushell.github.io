@@ -16,7 +16,7 @@
 * [Escaping commands](escaping.md) - Escaping to native commands of the same name
 * [Plugins](plugins.md) - Enhancing nushell with more features using plugins
 * [Coming from bash](coming_from_bash.md) - Guide for those coming to nushell from bash
-* [NuShell map from shells/DSL](nushell_map.md) - A guide to help understand how nushell compares with SQL, Linq, PowerShell and Bash.
-* [NuShell map from imperative languages](nushell_map_imperative.md) - A guide to help understand how nushell compares with Python, Kotlin, C++, C# and Rust.
-* [NuShell map from functional languages](nushell_map_functional.md) - A guide to help understand how nushell compares with Clojure, Tablecloth (Ocaml / Elm) and Haskell.
-* [NuShell operator map](nushell_operator_map.md) - A guide to help understand operators.
+* [Nushell map from shells/DSL](nushell_map.md) - A guide to help understand how nushell compares with SQL, Linq, PowerShell and Bash.
+* [Nushell map from imperative languages](nushell_map_imperative.md) - A guide to help understand how nushell compares with Python, Kotlin, C++, C# and Rust.
+* [Nushell map from functional languages](nushell_map_functional.md) - A guide to help understand how nushell compares with Clojure, Tablecloth (Ocaml / Elm) and Haskell.
+* [Nushell operator map](nushell_operator_map.md) - A guide to help understand operators.

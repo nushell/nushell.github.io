@@ -2,27 +2,27 @@ module.exports = {
   locales: {
     "/": {
       lang: "English",
-      title: "NuShell",
+      title: "Nushell",
       description: "A new type of shell.",
     },
     "/es/": {
       lang: "es",
-      title: "NuShell",
+      title: "Nushell",
       description: "Un nuevo tipo de caparazón.",
     },
     "/ja/": {
       lang: "ja",
-      title: "NuShell",
+      title: "Nushell",
       description: "新しいタイプのシェル。.",
     },
     "/pt-BR/": {
       lang: "pt-BR",
-      title: "NuShell",
+      title: "Nushell",
       description: "Um novo tipo de concha.",
     },
     "/zh-cn/": {
       lang: "zh-cn",
-      title: "NuShell",
+      title: "Nushell",
       description: "一种新型的外壳。.",
     },
   },

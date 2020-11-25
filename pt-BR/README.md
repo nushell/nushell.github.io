@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: null
-heroText: NuShell
+heroText: Nushell
 tagline: Um novo tipo de concha.
 actionText: Get Started →
 actionLink: /pt-BR/book/
