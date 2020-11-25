@@ -5,7 +5,7 @@ La idea detrás de esta tabla is ayudarte a entender como los comandos internos 
 Nota: Esta tabla asume Nu 0.14.1 o posterior.
 
 
-| NuShell                | Clojure                       | Tablecloth (Ocaml / Elm)                             | Haskell                                    |
+| Nushell                | Clojure                       | Tablecloth (Ocaml / Elm)                             | Haskell                                    |
 | ---------------------- | ----------------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
 | alias                  |                               |                                                      |                                            |                                                 |
 | append                 | conj                          |                                                      | (++)                                       |                                                 |

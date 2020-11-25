@@ -5,7 +5,7 @@ The idea behind this table is to help you understand how Nu built-ins and plug-i
 Note: this table assumes Nu 0.14.1 or later.
 
 
-| NuShell                | Python                        | Kotlin (Java)                                        | C++                                        | Rust                                            |
+| Nushell                | Python                        | Kotlin (Java)                                        | C++                                        | Rust                                            |
 | ---------------------- | ----------------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
 | alias                  |                               |                                                      |                                            |                                                 |
 | append                 | list.append, set.add          | add                                                  | push_back, emplace_back                    | push, push_back                                 |

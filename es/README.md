@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: null
-heroText: NuShell
+heroText: Nushell
 tagline: Un nuevo tipo de caparazón.
 actionText: Get Started →
 actionLink: /es/book/

@@ -5,7 +5,7 @@ La idea detrás de esta tabla is ayudarte a entender como los operadores en Nu s
 Nota: esta tabla asume Nu 0.14.1 o posterior.
 
 
-| NuShell  | SQL      | Python              | .Net LINQ (C#)       | PowerShell             | Bash               |
+| Nushell  | SQL      | Python              | .Net LINQ (C#)       | PowerShell             | Bash               |
 | -------- | -------- | ------------------- | -------------------- | ---------------------- | ------------------ |
 | =        | =        | ==                  | ==                   | -eq, -is               | -eq                |
 | !=       | !=, <>   | !=                  | !=                   | -ne, -isnot            | -ne                |

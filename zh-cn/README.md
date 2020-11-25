@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: null
-heroText: NuShell
+heroText: Nushell
 tagline: 一种新型的外壳。.
 actionText: Get Started →
 actionLink: /zh-cn/book/
