@@ -113,3 +113,24 @@ Example: a list of strings
 
 Blocks represent a block of code in Nu. For example, in the command `each { echo $it }` the block is the portion contained in curly braces, `{ echo $it }`. Blocks are a useful way of representing code that can be executed on each row of data.
 
+### Groups
+
+Take this example:
+
+```
+foo {
+  line1
+  line2; line3 | line4
+}
+```
+
+Inside the block, you have two separate groups that run to completions, a group
+is a semicolon-separated list of pipelines, the last of which is output to the
+screen.
+
+- `line1` is a group unto itself, so that command will run to completion and get
+displayed on the screen.
+- `line2` is a pipeline inside of the second group. It runs, but its contents
+  are not viewed on the screen.
+- `line3` | `line4` is the second pipeline in the second group. It runs, and its
+  contents get viewed.
