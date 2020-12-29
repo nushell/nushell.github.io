@@ -1,6 +1,6 @@
 # データの読み込み
 
-これまでに、`ls`、`ps`、`date`、および`sys`コマンドを使って、ファイル、プロセス、日付そしてシステム自身の情報を取得する方法をみてきました。各コマンドはテーブル情報を提供しますが、データをテーブルに読み込む他の方法があります。
+これまでに、`ls`、`ps`、`date`、および`sys`コマンドを使って、ファイル、プロセス、日付そしてシステム自身の情報を取得する方法をみてきました。各コマンドはテーブル情報を提供しますが、他にもデータをテーブルに読み込む方法があります。
 
 ## ファイルを開く
 
@@ -8,15 +8,23 @@
 
 ```
 > open editors/vscode/package.json
-------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
- name | descript | author   | license | version | reposito | publishe | categori | keywords | engines  | activati | main     | contribu | scripts  | devDepen
-      | ion      |          |         |         | ry       | r        | es       |          |          | onEvents |          | tes      |          | dencies
-------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
- lark | Lark     | Lark     | MIT     | 1.0.0   | [object] | vscode   | [0       | [1 item] | [object] | [1 item] | ./out/ex | [object] | [object] | [object]
-      | support  | develope |         |         |          |          | items]   |          |          |          | tension  |          |          |
-      | for VS   | rs       |         |         |          |          |          |          |          |          |          |          |          |
-      | Code     |          |         |         |          |          |          |          |          |          |          |          |          |
-------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
+──────────────────┬───────────────────────────────────────────────────────────────────────────────
+ name             │ lark 
+ description      │ Lark support for VS Code 
+ author           │ Lark developers 
+ license          │ MIT 
+ version          │ 1.0.0 
+ repository       │ [row type url] 
+ publisher        │ vscode 
+ categories       │ [table 0 rows] 
+ keywords         │ [table 1 rows] 
+ engines          │ [row vscode] 
+ activationEvents │ [table 1 rows] 
+ main             │ ./out/extension 
+ contributes      │ [row configuration grammars languages] 
+ scripts          │ [row compile postinstall test vscode:prepublish watch] 
+ devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient] 
+──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
 `ls`と同様、Nuが理解できるタイプのファイルを開くと、単なるテキスト(またはバイトストリーム)以上のものが返ってきます。ここでは、JavaScriptプロジェクト内の"package.json"ファイルを開いています。NuはJSONテキストを認識し、テーブルデータを返すことができます。
@@ -43,7 +51,7 @@ Nuが現在、直接データをテーブルに読み込める形式は次の通
 > open README.md
 ```
 
-ファイルの内容が表示されます。ファイルが大きすぎる場合は、便利なスクロールビューでファイルの中身を確認し、ターミナルに戻ってきます。読みやすさのために、ソースファイルやマークダウンといった一般的なファイル形式ではシンタックスハイライトを提供します。
+ファイルの内容が表示されます。ファイルが大きすぎる場合は、便利なスクロールビューでファイルの中身を確認してからターミナルに戻ってることができます。読みやすさのために、ソースファイルやマークダウンといった一般的なファイル形式ではシンタックスハイライトを提供します。
 
 裏側では、Nuはこれらのファイルをひとつの大きな文字列としてみています。次に、これらの文字列から必要なデータを取得する方法について説明します。
 
@@ -62,84 +70,80 @@ Antonio | Vivaldi | Composer
 
 必要なデータはパイプ('|')記号で区切られており、各行はそれぞれの人物を表しています。Nuはデフォルトではパイプで区切られたファイル形式を知らないので、明示的にこのファイルをパースする必要があります。
 
-ファイルを読み込むときに最初に行うことは、１度に１行ずつ作業することです。
+ファイルを読み込むときに最初に行うことは、１行ずつ作業することです。
 
 ```
 > open people.txt | lines
----+------------------------------
- # | value
----+------------------------------
- 0 | Octavia | Butler | Writer
- 1 | Bob | Ross | Painter
- 2 | Antonio | Vivaldi | Composer
----+------------------------------
+───┬──────────────────────────────
+ 0 │ Octavia | Butler | Writer 
+ 1 │ Bob | Ross | Painter
+ 2 │ Antonio | Vivaldi | Composer 
+───┴──────────────────────────────
 ```
 
-テーブルにもどってきたので、ラインで作業していることがわかります。次のステップは、行をもうすこし便利なものに分割できるかみてみることです。そのために、`split column`コマンドを利用します。名前からわかるように、`split column`は区切り記号を含む文字列を列に分割する方法を提供します。区切り文字列が何であるかを指定するだけでよいのです。
+テーブルにもどってきたので、行を使って作業していることがわかります。次のステップは、行をもうすこし便利なものに分割できるかみてみることです。そのために、`split`コマンドを利用します。名前からわかるように、`split`は区切り文字を含む文字列を列に分割する方法を提供します。`split`の`column`サブコマンドを使って、複数の列に分割するします。必要なのは区切り文字を指定することだけです。
 
 
 
 ```
 > open people.txt | lines | split column "|"
----+----------+-----------+-----------
- # | Column1  | Column2   | Column3
----+----------+-----------+-----------
- 0 | Octavia  |  Butler   |  Writer
- 1 | Bob      |  Ross     |  Painter
- 2 | Antonio  |  Vivaldi  |  Composer
----+----------+-----------+-----------
+───┬──────────┬───────────┬───────────
+ # │ Column1  │ Column2   │ Column3 
+───┼──────────┼───────────┼───────────
+ 0 │ Octavia  │  Butler   │  Writer 
+ 1 │ Bob      │  Ross     │  Painter
+ 2 │ Antonio  │  Vivaldi  │  Composer 
+───┴──────────┴───────────┴───────────
 ```
 
-ほとんど正しいように見えますが、余分なスペースを含んでいます。区切り文字を変更してみましょう。
+ほとんど正しいように見えますが、余分なスペースを含んでいます。余分なスペースを`trim`してみましょう。
 
 ```
-> open people.txt | lines | split column " | "
----+---------+---------+----------
- # | Column1 | Column2 | Column3
----+---------+---------+----------
- 0 | Octavia | Butler  | Writer
- 1 | Bob     | Ross    | Painter
- 2 | Antonio | Vivaldi | Composer
----+---------+---------+----------
+> open people.txt | lines | split column "|" | str trim
+───┬─────────┬─────────┬──────────
+ # │ Column1 │ Column2 │ Column3 
+───┼─────────┼─────────┼──────────
+ 0 │ Octavia │ Butler  │ Writer 
+ 1 │ Bob     │ Ross    │ Painter
+ 2 │ Antonio │ Vivaldi │ Composer 
+───┴─────────┴─────────┴──────────
 ```
 
-悪くありません。`split column`はデフォルトの列名もつけてくれます。
+悪くありません。`split`コマンドは利用可能なデータとデフォルトのカラム名をつけてくれます。
 
 ```
-> open people.txt | lines | split column " | " | get Column1
----+---------
- # | value
----+---------
- 0 | Octavia
- 1 | Bob
- 2 | Antonio
----+---------
+> open people.txt | lines | split column "|" | str trim | get Column1
+───┬─────────
+ 0 │ Octavia 
+ 1 │ Bob 
+ 2 │ Antonio 
+───┴─────────
 ```
 
 デフォルトの名前を利用するかわりに、列に名前をつけることもできます。
 
 ```
-> open people.txt | lines | split column " | " first_name last_name job
----+------------+-----------+----------
- # | first_name | last_name | job
----+------------+-----------+----------
- 0 | Octavia    | Butler    | Writer
- 1 | Bob        | Ross      | Painter
- 2 | Antonio    | Vivaldi   | Composer
----+------------+-----------+----------
+> open people.txt | lines | split column "|" first_name last_name job | str trim 
+───┬────────────┬───────────┬──────────
+ # │ first_name │ last_name │ job 
+───┼────────────┼───────────┼──────────
+ 0 │ Octavia    │ Butler    │ Writer 
+ 1 │ Bob        │ Ross      │ Painter
+ 2 │ Antonio    │ Vivaldi   │ Composer 
+───┴────────────┴───────────┴──────────
 ```
 
 データをテーブルに変換できたので、これまでテーブルに利用してきたすべてのコマンドをつかうことができます。
 
 ```
-> open people.txt | lines | split column " | " first_name last_name job | sort-by first_name
----+------------+-----------+----------
- # | first_name | last_name | job
----+------------+-----------+----------
- 0 | Antonio    | Vivaldi   | Composer
- 1 | Bob        | Ross      | Painter
- 2 | Octavia    | Butler    | Writer
----+------------+-----------+----------
+> open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
+───┬────────────┬───────────┬──────────
+ # │ first_name │ last_name │ job 
+───┼────────────┼───────────┼──────────
+ 0 │ Antonio    │ Vivaldi   │ Composer 
+ 1 │ Bob        │ Ross      │ Painter
+ 2 │ Octavia    │ Butler    │ Writer 
+───┴────────────┴───────────┴──────────
 ```
 
 文字列を操作するために使用できるその他のコマンドです。
@@ -162,18 +166,17 @@ version = "0.1.2"
 
 ```
 > open Cargo.lock | from toml
-----------+-------------
- metadata | package
-----------+-------------
- [object] | [405 items]
-----------+-------------
+──────────┬───────────────────
+ metadata │ [row 107 columns] 
+ package  │ [table 130 rows] 
+──────────┴───────────────────
 ```
 
-Nuが理解できるテキスト形式ごとに`from`コマンドが用意されています。
+`from`コマンドはサポートされているテキストフォーマットをサブコマンドとして渡すことでNuが扱える構造化データごとに利用できます。
 
 ## rawモードで開く
 
-ファイルを開いてそのデータのテーブルをすぐに操作できると便利ですが、これは必ずしもやりたいことであるとは限りません。テキストをそのまま取得するために、`open`コマンドにオプションフラグを渡すことができます。
+ファイルを開いてそのデータのテーブルをすぐに操作できると便利ですが、これは必ずしもやりたいことであるとは限りません。テキストをそのまま取得するために、`open`コマンドに`--raw`オプションフラグを渡すことができます。
 
 ```
 > open Cargo.toml --raw
@@ -187,12 +190,11 @@ license = "MIT"
 ## URLからの取得
 
 ファイルシステムからファイルを読み込むことに加えて、`fetch`コマンドを利用してURLからリソースを取得できます。
+これはインターネットからURLの内容をフェッチして返してくれます。
 
 ```
 > fetch https://www.jonathanturner.org/feed.xml
-----------
- rss
-----------
- [1 item]
-----------
+─────┬───────────────────────────
+ rss │ [row attributes children] 
+─────┴───────────────────────────
 ```

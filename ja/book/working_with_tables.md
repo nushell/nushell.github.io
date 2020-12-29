@@ -1,25 +1,22 @@
 # テーブルを扱う
 
-Nuでデータを表示する一般的な方法はテーブルを使用することです。Nuには、探しているものを見つけやすくしたり、必要なデータを絞り込んだりするのに便利なテーブルを操作するためのコマンドが多数付属しています。
+Nuでデータを表示する一般的な方法はテーブルを使用することです。Nuには、探しているものを見つけやすくしたり、必要なデータを絞り込んだりするのに便利なテーブルを操作するためのコマンドがたくさん用意されています。
 
 まずはじめに、今回利用するテーブルを確認しましょう。
 
 ```
 > ls
----+---------------+------+----------+---------+------------+------------
- # | name          | type | readonly | size    | accessed   | modified
----+---------------+------+----------+---------+------------+------------
- 0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
- 1 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
- 2 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
- 3 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
- 4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
- 5 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
- 6 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
- 7 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
- 8 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
- 9 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
----+---------------+------+----------+---------+------------+------------
+───┬───────────────┬──────┬─────────┬────────────
+ # │ name          │ type │ size    │ modified 
+───┼───────────────┼──────┼─────────┼────────────
+ 0 │ files.rs      │ File │  4.6 KB │ 5 days ago 
+ 1 │ lib.rs        │ File │   330 B │ 5 days ago 
+ 2 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago 
+ 3 │ parse.rs      │ File │ 49.8 KB │ 1 day ago 
+ 4 │ path.rs       │ File │  2.1 KB │ 5 days ago 
+ 5 │ shapes.rs     │ File │  4.7 KB │ 5 days ago 
+ 6 │ signature.rs  │ File │  1.2 KB │ 5 days ago 
+───┴───────────────┴──────┴─────────┴────────────
 ```
 
 ## データのソート
@@ -28,20 +25,17 @@ Nuでデータを表示する一般的な方法はテーブルを使用するこ
 
 ```
 > ls | sort-by size
----+---------------+------+----------+---------+------------+------------
- # | name          | type | readonly | size    | accessed   | modified
----+---------------+------+----------+---------+------------+------------
- 0 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
- 1 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
- 2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
- 3 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
- 4 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
- 5 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
- 6 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
- 7 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
- 8 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
- 9 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
----+---------------+------+----------+---------+------------+------------
+───┬───────────────┬──────┬─────────┬────────────
+ # │ name          │ type │ size    │ modified 
+───┼───────────────┼──────┼─────────┼────────────
+ 0 │ lib.rs        │ File │   330 B │ 5 days ago 
+ 1 │ signature.rs  │ File │  1.2 KB │ 5 days ago 
+ 2 │ path.rs       │ File │  2.1 KB │ 5 days ago 
+ 3 │ files.rs      │ File │  4.6 KB │ 5 days ago 
+ 4 │ shapes.rs     │ File │  4.7 KB │ 5 days ago 
+ 5 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago 
+ 6 │ parse.rs      │ File │ 49.8 KB │ 1 day ago 
+───┴───────────────┴──────┴─────────┴────────────
 ```
 
 比較さえできれば任意の列でソートが行なえます。例えば、"name"、"accessed"、または"modified"列でソートすることができます。
@@ -52,35 +46,32 @@ Nuでデータを表示する一般的な方法はテーブルを使用するこ
 
 ```
 > ls | select name size
----+---------------+---------
- # | name          | size
----+---------------+---------
- 0 | add.rs        | 2.7 KB
- 1 | sum.rs        | 3.0 KB
- 2 | inc.rs        | 11.8 KB
- 3 | str.rs        | 21.4 KB
- 4 | skip.rs       | 1.7 KB
- 5 | textview.rs   | 9.4 KB
- 6 | binaryview.rs | 13.0 KB
- 7 | edit.rs       | 2.7 KB
- 8 | tree.rs       | 3.0 KB
- 9 | sys.rs        | 9.2 KB
----+---------------+---------
+───┬───────────────┬─────────
+ # │ name          │ size 
+───┼───────────────┼─────────
+ 0 │ files.rs      │  4.6 KB 
+ 1 │ lib.rs        │   330 B 
+ 2 │ lite_parse.rs │  6.3 KB 
+ 3 │ parse.rs      │ 49.8 KB 
+ 4 │ path.rs       │  2.1 KB 
+ 5 │ shapes.rs     │  4.7 KB 
+ 6 │ signature.rs  │  1.2 KB 
+───┴───────────────┴─────────
 ```
 
 こうすることで、より必要とするデータにフォーカスしたテーブルを作ることができます。次にディレクトリからもっとも小さい5つのファイルを表示してみます。
 
 ```
 > ls | sort-by size | first 5
----+---------+------+----------+--------+------------+------------
- # | name    | type | readonly | size   | accessed   | modified
----+---------+------+----------+--------+------------+------------
- 0 | skip.rs | File |          | 1.7 KB | 2 days ago | 2 days ago
- 1 | add.rs  | File |          | 2.7 KB | 2 days ago | 2 days ago
- 2 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
- 3 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
- 4 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
----+---------+------+----------+--------+------------+------------
+───┬──────────────┬──────┬────────┬────────────
+ # │ name         │ type │ size   │ modified 
+───┼──────────────┼──────┼────────┼────────────
+ 0 │ lib.rs       │ File │  330 B │ 5 days ago 
+ 1 │ signature.rs │ File │ 1.2 KB │ 5 days ago 
+ 2 │ path.rs      │ File │ 2.1 KB │ 5 days ago 
+ 3 │ files.rs     │ File │ 4.6 KB │ 5 days ago 
+ 4 │ shapes.rs    │ File │ 4.7 KB │ 5 days ago 
+───┴──────────────┴──────┴────────┴────────────
 ```
 
 もっとも小さいファイルを取得するためにまずサイズでソートし、それから`first 5`を利用してテーブルから最初の5行を返しています。
@@ -89,42 +80,40 @@ Nuでデータを表示する一般的な方法はテーブルを使用するこ
 
 ```
 > ls | sort-by size | first 5 | skip 2
----+---------+------+----------+--------+------------+------------
- # | name    | type | readonly | size   | accessed   | modified
----+---------+------+----------+--------+------------+------------
- 0 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
- 1 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
- 2 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
----+---------+------+----------+--------+------------+------------
+───┬───────────┬──────┬────────┬────────────
+ # │ name      │ type │ size   │ modified 
+───┼───────────┼──────┼────────┼────────────
+ 0 │ path.rs   │ File │ 2.1 KB │ 5 days ago 
+ 1 │ files.rs  │ File │ 4.6 KB │ 5 days ago 
+ 2 │ shapes.rs │ File │ 4.7 KB │ 5 days ago 
+───┴───────────┴──────┴────────┴────────────
 ```
 
 関心のある３行に絞り込みました。
 
-データを選択するための他のコマンドもみてみましょう。テーブルの各行が数字をもつことを疑問に思っているかもしれません。これは単一の行を簡単に指定する方法として機能します。テーブルをファイル名でソートして、`n-th`コマンドを利用してn行目を選択してみましょう。
+データを選択するための他のコマンドもみてみましょう。テーブルの各行が数字をもつことを疑問に思っているかもしれません。これは単一の行を簡単に指定する方法として機能します。テーブルをファイル名でソートして、`nth`コマンドを利用してn行目を選択してみましょう。
 
 ```
 > ls | sort-by name
----+---------------+------+----------+---------+------------+------------
- # | name          | type | readonly | size    | accessed   | modified
----+---------------+------+----------+---------+------------+------------
- 0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
- 1 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
- 2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
- 3 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
- 4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
- 5 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
- 6 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
- 7 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
- 8 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
- 9 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
----+---------------+------+----------+---------+------------+------------
+───┬───────────────┬──────┬─────────┬────────────
+ # │ name          │ type │ size    │ modified 
+───┼───────────────┼──────┼─────────┼────────────
+ 0 │ files.rs      │ File │  4.6 KB │ 5 days ago 
+ 1 │ lib.rs        │ File │   330 B │ 5 days ago 
+ 2 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago 
+ 3 │ parse.rs      │ File │ 49.8 KB │ 1 day ago 
+ 4 │ path.rs       │ File │  2.1 KB │ 5 days ago 
+ 5 │ shapes.rs     │ File │  4.7 KB │ 5 days ago 
+ 6 │ signature.rs  │ File │  1.2 KB │ 5 days ago 
+───┴───────────────┴──────┴─────────┴────────────
 
 > ls | sort-by name | nth 5
---------+------+----------+---------+------------+------------
- name   | type | readonly | size    | accessed   | modified
---------+------+----------+---------+------------+------------
- str.rs | File |          | 21.4 KB | 2 days ago | 2 days ago
---------+------+----------+---------+------------+------------
+──────────┬────────────
+ name     │ shapes.rs 
+ type     │ File 
+ size     │ 4.7 KB 
+ modified │ 5 days ago 
+──────────┴────────────
 ```
 
 ## テーブルからデータを取得する
@@ -133,20 +122,15 @@ Nuでデータを表示する一般的な方法はテーブルを使用するこ
 
 ```
 > ls | get name
----+---------------
- # | value
----+---------------
- 0 | add.rs
- 1 | sum.rs
- 2 | inc.rs
- 3 | str.rs
- 4 | skip.rs
- 5 | textview.rs
- 6 | binaryview.rs
- 7 | edit.rs
- 8 | tree.rs
- 9 | sys.rs
----+---------------
+───┬───────────────
+ 0 │ files.rs 
+ 1 │ lib.rs 
+ 2 │ lite_parse.rs 
+ 3 │ parse.rs 
+ 4 │ path.rs 
+ 5 │ shapes.rs 
+ 6 │ signature.rs 
+───┴───────────────
 ```
 
 これで各ファイルの名前が取得できました。
@@ -155,20 +139,17 @@ Nuでデータを表示する一般的な方法はテーブルを使用するこ
 
 ```
 > ls | select name
----+---------------
- # | name
----+---------------
- 0 | add.rs
- 1 | sum.rs
- 2 | inc.rs
- 3 | str.rs
- 4 | skip.rs
- 5 | textview.rs
- 6 | binaryview.rs
- 7 | edit.rs
- 8 | tree.rs
- 9 | sys.rs
----+---------------
+───┬───────────────
+ # │ name 
+───┼───────────────
+ 0 │ files.rs 
+ 1 │ lib.rs 
+ 2 │ lite_parse.rs 
+ 3 │ parse.rs 
+ 4 │ path.rs 
+ 5 │ shapes.rs 
+ 6 │ signature.rs 
+───┴───────────────
 ```
 
 両者は非常に似ています！両者の違いを明確にしておきましょう。
@@ -190,70 +171,60 @@ Nuでデータを表示する一般的な方法はテーブルを使用するこ
 
 ```
 > open rustfmt.toml
----------
- edition
----------
- 2018
----------
+─────────┬──────
+ edition │ 2018 
+─────────┴──────
 ```
 
 値が2021の"next_edition"列を追加してみましょう。
 
 ```
-> open rustfmt.toml | add next_edition 2021
----------+--------------
- edition | next_edition
----------+--------------
- 2018    | 2021
----------+--------------
+> open rustfmt.toml | insert next_edition 2021
+──────────────┬──────
+ edition      │ 2018 
+ next_edition │ 2021 
+──────────────┴──────
 ```
 
 元のファイルは変更されていないことに注意してください。
 
 ```
 > open rustfmt.toml
----------
- edition
----------
- 2018
----------
+─────────┬──────
+ edition │ 2018 
+─────────┴──────
 ```
 
 
 Nuの変更は永続的な変更ではなく、値自体に作用する関数的な変更です。これにより、結果を書き出す準備ができるまでパイプライン上で様々な種類の作業をおこなうことができます。ここでは、`save`コマンドを使用して結果を書き出すことができます。
 
 ```
-> open rustfmt.toml | add next_edition 2021 | save rustfmt2.toml
-/home/jonathan/Source/nushell(master)> open rustfmt2.toml
----------+--------------
- edition | next_edition
----------+--------------
- 2018    | 2021
----------+--------------
+> open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
+> open rustfmt2.toml
+──────────────┬──────
+ edition      │ 2018 
+ next_edition │ 2021 
+──────────────┴──────
 ```
 
-### 列の編集する
+### 列を更新する
 
-`add`コマンドと同様に、`edit`コマンドを利用して列の内容を新しい値に変更することもできます。実際に動作を確認するために同じファイルを開いてみましょう。
+`insert`コマンドと同様に、`update`コマンドを利用して列の内容を新しい値に変更することもできます。実際に動作を確認するために同じファイルを開いてみましょう。
 
 ```
-open rustfmt.toml
----------
- edition
----------
- 2018
----------
+> open rustfmt.toml
+─────────┬──────
+ edition │ 2018 
+─────────┴──────
 ```
 
 今度は、サポートした次のeditionを指定するよう更新しましょう。
 
 ```
-> open rustfmt.toml | edit edition 2021
----------
- edition
----------
- 2021
----------
+> open rustfmt.toml | update edition 2021
+─────────┬──────
+ edition │ 2021 
+─────────┴──────
 ```
 
 ### 値を増やす
@@ -262,17 +233,13 @@ open rustfmt.toml
 
 ```
 > open rustfmt.toml
----------
- edition
----------
- 2018
----------
+─────────┬──────
+ edition │ 2018 
+─────────┴──────
 > open rustfmt.toml | inc edition
----------
- edition
----------
- 2019
----------
+─────────┬──────
+ edition │ 2019 
+─────────┴──────
 ```
 
 "edition"の値は数字なので、`inc`を使って更新することができます。バージョンを扱う際には`inc`がその真価を発揮します。

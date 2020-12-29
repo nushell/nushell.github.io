@@ -3,13 +3,22 @@
 Nuには、見た目や挙動を変更させるための内部的な変数があります。
 以下がそのリストです。
 
-| 変数        | 型           | 説明  |
+| Variable        | Type           | Description  |
 | ------------- | ------------- | ----- |
-| path | table of strings | バイナリーを検索するためのPATH |
+| completion_mode | "list" or "circular" | 利用する自動補完のモード |
+| ctrlc_exit | boolean | ctrl-cを複数回押したときにNuをexitするかどうか |
+| disable_table_indexes | boolean | テーブルインデックスカラムを無効にするかどうか |
+| edit_mode | "vi" or "emacs" | 行の編集モードを"vi"か"emacs"モードに変更する |
 | env | row | 外部コマンドに渡す環境変数 |
-| ctrlc_exit | boolean | Ctrl-cを複数回おしたときにNuを終了するかどうか|
-| table_mode | "light" or other | 軽量なテーブルを有効にする |
-| edit_mode | "vi" or "emacs" | 行編集を"vi"または"emacs"モードに変更する|
+| header_align | "center", "right", or other | テーブルのヘッダーの揃え方 |
+| key_timeout | integer | editモードのスイッチ時のタイムアウト |
+| nonzero_exit_errors | boolean | 外部コマンドが0以外の終了ステータスの場合にエラーを表示するかどうか|
+| path | list of strings | バイナリーを検索するPATH |
+| startup | list of strings | `alias`のようなnushell起動時に実行するコマンド |
+| table_mode | "light" or other | テーブルのモード |
+| no_auto_pivot | boolean | 自動で1行のデータをpivotするかどうか |
+| skip_welcome_message | boolean | nushell起動時にウェルカムメッセージの表示をスキップするかどうか |
+
 
 ## 利用方法
 
@@ -37,11 +46,12 @@ Nuには、見た目や挙動を変更させるための内部的な変数があ
 
 ```
 > config
-━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━
- edit_mode │ env            │ path             │ table_mode 
-───────────┼────────────────┼──────────────────┼────────────
- emacs     │ [table: 1 row] │ [table: 10 rows] │ normal 
-━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━
+─────────────────┬──────────────────
+ completion_mode │ circular 
+ env             │ [row 51 columns] 
+ path            │ [table 9 rows] 
+ startup         │ [table 1 rows] 
+─────────────────┴──────────────────
 ```
 
 注: もしまだ変数を設定していない場合、出力が空の場合があります。
@@ -75,12 +85,8 @@ Nuには、見た目や挙動を変更させるための内部的な変数があ
 設定ファイルはデフォルトの場所から読み込まれます。この場所をみつけるには`-path`フラグを利用します。
 
 ```
-config path
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- <value> 
-───────────────────────────────────────
- /home/nusheller/.config/nu/config.toml 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+> config path
+/home/jonathant/.config/nu/config.toml
 ```
 
 ### ファイルから設定を読み込む
@@ -129,11 +135,17 @@ Nuをログインシェルとして利用するには、`path`と`env`変数を�
 
 ## プロンプトの設定
 
-現在、プロンプトの設定は[starship](https://github.com/starship/starship)プロンプトサポートつきでNuをインストールすることで可能になります。
+プロンプトの設定は`prompt`の値を設定することで行います。  
+例えば、[starship](https://starshp.rs)を使うには、ダウンロードして次のコマンドを実行します。(0.18.2 and later)
 
 ```
-nushell on 📙 master [$] is 📦 v0.5.1 via 🦀 v1.40.0-nightly 
-❯ 
+config set prompt `echo $(starship prompt)`
 ```
 
-Starshipは楽しくカラフルで驚くほど強力なプロンプトです。設定するには[starshipのドキュメント](https://starship.rs/config/)の手順にしたがってください。
+Nuを再起動すると
+
+```
+nushell on 📙 master [$] is 📦 v0.18.2 via 🦀 v1.48.0-nightly
+❯
+```
+
