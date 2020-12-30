@@ -8,5 +8,5 @@
 
 Nuが起動すると、システムがスキャンされ、見つかったプラグインがロードされます。
 
-Nuプラグインが利用するプロトコルはNuの開発中に変更される可能性があります。プロトコルの詳細と独自のプラグインの作成方法を学ぶのに最適なのは、[Nuリポジトリのプラグインのソース](https://github.com/nushell/nushell/tree/master/src/plugins)を読むことです。
+Nuプラグインが利用するプロトコルはNuの開発中に変更される可能性があります。プロトコルの詳細と独自のプラグインの作成方法を学ぶのに最適なのは、[Nuリポジトリのプラグインのソース](https://github.com/nushell/nushell/tree/master/crates)を読むことです。
 [コントリビュータブックのプラグインの章](https://github.com/nushell/contributor-book/blob/master/en/plugins.md)も参照してください。

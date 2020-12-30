@@ -9,7 +9,7 @@ Dockerを利用してビルド済のコンテナをプルしてくる方法も�
 
 ## Windows
 
-**Note** NuはWindows 10で動作しますが、現在のところ7/8.1のサポートはありません。
+**Note** NuはWindows 10で動作しますが、現在のところ7/8.1はサポートされていません。
 
 [リリースページ](https://github.com/nushell/nushell/releases)から`.zip`ファイルをダウンロードして、例えば次の箇所に解凍します。
 
@@ -38,7 +38,7 @@ Dockerを利用してビルド済のコンテナをプルしてくる方法も�
 
 "nu-base"と"nu"のどちらにもバイナリーが含まれますが、nu-baseには`/code`内にソースコードと全ての依存関係も含まれています。
 
-[dockerfiles](https://github.com/nushell/nushell/tree/master/docker)を利用してローカルにコンテナをビルドすることもできます。
+[dockerfiles](https://github.com/nushell/nushell/tree/master/docker)を利用してローカルでコンテナをビルドすることもできます。
 ベースイメージをビルドするには:
 
 <<< @/snippets/installation/build_containers_locally_base_image.sh
@@ -74,7 +74,7 @@ Windowsの場合、Visual Studio Community Editionをインストールすると
 
 Rustがシステムにまだインストールされていない場合は、[rustup](https://rustup.rs/)を利用してRustをインストールする方法がベストです。Rustupは、異なるRustのバージョンのインストールを管理するツールです。
 
-Nuは現在、**最新のstable(1.39 or later)** バージョンのRustを必要とします。
+Nuは現在、**最新のstable(1.46 or later)** バージョンのRustを必要とします。
 `rustup`で正しいversionを選択するのが良い方法です。
 最初に"rustup"を実行すると、インストールするRustのバージョンを尋ねられます。
 
@@ -83,7 +83,8 @@ Nuは現在、**最新のstable(1.39 or later)** バージョンのRustを必要
 準備ができたら、1を押してからエンターを押します。
 
 もし、`rustup`を経由してRustをインストールしたくない場合、他の方法でもインストールすることができます。(例えば、Linuxディストリビューションのパッケージから)
-その場合でもRustの1.39以上のバージョンがインストールされるようにしてください。
+その場合でもRustの1.46以上のバージョンがインストールされるようにしてください。
+
 ## 依存関係
 
 ### Debian / Ubuntu
@@ -96,6 +97,12 @@ Nuは現在、**最新のstable(1.39 or later)** バージョンのRustを必要
 
 <<< @/snippets/installation/use_rawkey_and_clipboard.sh
 
+### RHEL based distros
+
+"libxcb", "openssl-devel"および"libX11-devel"パッケージをインストールする必要があります。
+
+<<< @/snippets/installation/install_rhel_dependencies.sh
+
 ### macOS
 
 [Homebrew](https://brew.sh/)を利用して、"openssl"と"cmake"をインストールしてください。
@@ -104,7 +111,8 @@ Nuは現在、**最新のstable(1.39 or later)** バージョンのRustを必要
 
 ## [crates.io](https://crates.io)からのインストール
 
-必要となる依存関係が準備できたら、Rustコンパイラーに付属している`cargo`を使って、Nuをインストールできます。
+必要となる依存関係が準備できたら、Rustコンパイラーに付属している`cargo`を使って、Nuをインストールできます。  
+cargoはNuとそのソースの依存関係をダウンロードし、ビルドしたあと、実行できるようにcargoのbin pathにインストールします。
 
 <<< @/snippets/installation/cargo_install_nu.sh
 
@@ -118,6 +126,7 @@ Nuは現在、**最新のstable(1.39 or later)** バージョンのRustを必要
 
 <<< @/snippets/installation/build_nu_yourself.sh
 
+上で示したすべての依存関係がシステムにあることを確認してください。  
 インストールが完了すると、`nu`コマンドでNuを実行できます。
 
 <<< @/snippets/installation/crates_run_nu.sh
@@ -135,6 +144,10 @@ Gitでメインのnushellリポジトリをクローンし、Nuをビルドし�
 リリースモードでNuをビルドし実行することもできます。
 
 <<< @/snippets/installation/build_nu_from_source_release.sh
+
+Rustに慣れている人は、"run"がデフォルトでビルドを行うのに、なぜ"build"と"run"の両方を行うのか疑問に思うかもしれません。  
+これはCargoの新しい`default-run`オプションの欠点を回避し、全てのプラグインがビルドされるようにするためですが、将来的には必要なくなるかもしれません。
+
 
 ## ログインシェルとして設定するには
 
