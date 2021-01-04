@@ -124,7 +124,7 @@ foo {
 }
 ```
 
-Inside the block, you have two separate groups that run to completions, a group
+Inside the block, you have two separate groups that run to completion, a group
 is a semicolon-separated list of pipelines, the last of which is output to the
 screen.
 
