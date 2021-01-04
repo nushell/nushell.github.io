@@ -1,2 +1,2 @@
-> sys | get host.sessions | ^echo $it
+> sys | get host.sessions | each { ^echo $it }
 jonathan
