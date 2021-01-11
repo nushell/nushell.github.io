@@ -114,7 +114,13 @@ Notes:
 Add the output of a pipeline to your clipboard.
 Note, this currently needs to be string output.
 
-`sys | get mem | to-json | clip`
+Note that `clip` is not yet enabled by default. If the output of `version |
+get features` contains `clipboard-cli` then your copy of NuShell contains
+`clip`. If `clip` is not availble, then your operating system may provide a
+command that performs a similar function e.g. `clip` on Windows or `pbcopy`
+on macOS.
+
+`sys | get mem | to json | clip`
 
 Output pasted from `clip` :)
 
