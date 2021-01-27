@@ -21,3 +21,4 @@
 * [Nushell map from imperative languages](nushell_map_imperative.md) - A guide to help understand how nushell compares with Python, Kotlin, C++, C# and Rust. Contributions welcome.
 * [Nushell map from functional languages](nushell_map_functional.md) - A guide to help understand how nushell compares with Clojure, Tablecloth (Ocaml / Elm) and Haskell. Contributions welcome.
 * [Nushell operator map](nushell_operator_map.md) - A guide to help understand operators.
+* [Command Reference](command_reference.md) - A list of all Nushell's commands.

@@ -11,3 +11,4 @@
 * [Shells](shells_em_shells.md) - Trabalhando com múltiplos locais
 * [Escapando comandos](escapando.md) - Escapando para comandos nativos com o mesmo nome
 * [Plugins](plugins.md) - Melhorando o nushell com mais funcionalidades usando plugins
+* [Command Reference](command_reference.md) - A list of all Nushell's commands.

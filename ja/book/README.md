@@ -18,6 +18,6 @@
 * [Bashから来た人向け](coming_from_bash.md) - bashからnushellに来た人向けガイド
 * [shells/DSLとnushellの対応表](nushell_map.md) - nushellとSQL, Linq, PowerShell, Bashとの対応表。コントリビューション歓迎。
 * [命令形言語とnushellの対応表](nushell_map_imperative.md) - nushellとPython, Kotlin, C++, C#, Rustとの対応表。コントリビューション歓迎。
-* [関数型言語とnushellの対応表](nushell_map_functional.md) - nushellとClojure, Tablecloth (Ocaml / Elm), Haskellとの対応表。コントリビューション歓迎。 
+* [関数型言語とnushellの対応表](nushell_map_functional.md) - nushellとClojure, Tablecloth (Ocaml / Elm), Haskellとの対応表。コントリビューション歓迎。
 * [Nushell演算子対応表](nushell_operator_map.md) - 演算子の対応表。
-
+* [Command Reference](command_reference.md) - A list of all Nushell's commands.
