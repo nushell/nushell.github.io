@@ -116,7 +116,7 @@ Note, this currently needs to be string output.
 
 Note that `clip` is not yet enabled by default. If the output of `version |
 get features` contains `clipboard-cli` then your copy of NuShell contains
-`clip`. If `clip` is not availble, then your operating system may provide a
+`clip`. If `clip` is not available, then your operating system may provide a
 command that performs a similar function e.g. `clip` on Windows or `pbcopy`
 on macOS.
 
