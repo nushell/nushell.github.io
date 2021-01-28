@@ -13,10 +13,11 @@
 * [Environment](environment.md) - Working with environment variables
 * [Metadata](metadata.md) - An explanation of nushell's metadata system
 * [Shells](shells_in_shells.md) - Working with multiple locations
-* [Escaping commands](escaping.md) - Escaping to native commands of the same name 
+* [Escaping commands](escaping.md) - Escaping to native commands of the same name
 * [Plugins](plugins.md) - Enhancing nushell with more features using plugins
 * [Coming from Bash](coming_from_bash.md) - Guide for those coming to nushell from bash
 * [Nushell map from shells/DSL](nushell_map.md) - A guide to help understand how nushell compares with SQL, Linq, PowerShell and Bash. Contributions welcome.
 * [Nushell map from imperative languages](nushell_map_imperative.md) - A guide to help understand how nushell compares with Python, Kotlin, C++, C# and Rust. Contributions welcome.
 * [Nushell map from functional languages](nushell_map_functional.md) - A guide to help understand how nushell compares with Clojure, Tablecloth (Ocaml / Elm) and Haskell. Contributions welcome.
 * [Nushell operator map](nushell_operator_map.md) - A guide to help understand operators.
+* [Command Reference](command_reference.md) - A list of all Nushell's commands.

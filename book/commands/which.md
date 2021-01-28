@@ -1,0 +1,85 @@
+---
+title: which
+layout: command
+nu_version: 0.20.0
+---
+
+Finds a program file.
+
+Usage:
+  > which <application> {flags}
+
+## Parameters
+
+- application: the name of the command to find the path to
+
+## Flags
+
+- --all: list all executables
+
+## Examples
+
+`which` finds the location of an executable:
+
+```shell
+> which python
+─────────┬─────────────────
+ arg     │ python
+ path    │ /usr/bin/python
+ builtin │ No
+─────────┴─────────────────
+```
+
+```shell
+> which cargo
+─────────┬────────────────────────────
+ arg     │ cargo
+ path    │ /home/bob/.cargo/bin/cargo
+ builtin │ No
+─────────┴────────────────────────────
+```
+
+`which` will identify nushell commands:
+
+```shell
+> which ls
+─────────┬──────────────────────────
+ arg     │ ls
+ path    │ nushell built-in command
+ builtin │ Yes
+─────────┴──────────────────────────
+```
+
+```shell
+> which which
+─────────┬──────────────────────────
+ arg     │ which
+ path    │ nushell built-in command
+ builtin │ Yes
+─────────┴──────────────────────────
+```
+
+Passing the `all` flag identifies all instances of a command or binary
+
+```shell
+> which ls --all
+───┬─────┬──────────────────────────┬─────────
+ # │ arg │ path                     │ builtin
+───┼─────┼──────────────────────────┼─────────
+ 0 │ ls  │ nushell built-in command │ Yes
+ 1 │ ls  │ /bin/ls                  │ No
+───┴─────┴──────────────────────────┴─────────
+```
+
+`which` will also identify local binaries
+
+```shell
+> touch foo
+> chmod +x foo
+> which ./foo
+─────────┬────────────────────────────────
+ arg     │ ./foo
+ path    │ /Users/josephlyons/Desktop/foo
+ builtin │ No
+─────────┴────────────────────────────────
+```

@@ -20,3 +20,4 @@
 * [Mapa Nushell de lenguajes imperativos](mapa_imperativo_nushell.md) - Guía de ayuda para comprender como nushell se compara con Python, Kotlin, C++, C# y Rust.
 * [Mapa Nushell de lenguajes funcionales](mapa_funcional_nushell.md) - Guía de ayuda para comprender como nushell se compara con Clojure, Tablecloth (Ocaml / Elm), y Haskell.
 * [Mapa Nushell de operadores](mapa_nushell_operador_map.md) - Guía para ayudar a entender los operadores.
+* [Command Reference](command_reference.md) - A list of all Nushell's commands.
