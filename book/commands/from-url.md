@@ -1,7 +1,7 @@
 ---
 title: from url
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Parse [url-encoded string](https://url.spec.whatwg.org/#application/x-www-form-urlencoded) as a table.

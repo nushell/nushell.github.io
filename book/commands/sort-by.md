@@ -1,8 +1,5 @@
----
-title: sort-by
-layout: command
-nu_version: 0.20.0
----
+
+# sort-by
 
 The `sort-by` command sorts the table being displayed in the terminal by a chosen column(s).
 

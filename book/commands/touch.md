@@ -1,7 +1,7 @@
 ---
 title: touch
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Create one or more files in the current or an already existent directory.
@@ -46,7 +46,7 @@ Create a file within an already existent folder.
 ──────────┴───────────
 ```
 
-Create three files at oince
+Create three files at once
 ```shell
 > touch a b c
 > ls

@@ -1,9 +1,4 @@
----
-title: textview config
-layout: command
-nu_version: 0.20.0
----
-
+# textview config
 The configuration for textview, which is used to autoview text files, uses [bat](https://docs.rs/bat/0.15.4/bat/struct.PrettyPrinter.html). The textview configurtion will **not** use any existing `bat` configuration you may have.
 
 ## Configuration Points and Defaults

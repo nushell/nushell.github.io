@@ -1,8 +1,4 @@
----
-title: skip-while
-layout: command
-nu_version: 0.20.0
----
+# skip-while
 
 Skips rows while the condition matches.
 

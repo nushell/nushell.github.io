@@ -1,7 +1,7 @@
 ---
 title: random
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Use `random` to generate random values
@@ -122,4 +122,11 @@ true
 ```shell
 > random integer 100000..200000
 173400
+```
+
+### chars Examples
+Generate a random password of length 15
+```shell
+> random chars -l 15
+fWBSbE7QtaoJGeo
 ```

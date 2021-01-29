@@ -1,7 +1,7 @@
 ---
 title: which
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Finds a program file.
@@ -82,4 +82,28 @@ Passing the `all` flag identifies all instances of a command or binary
  path    │ /Users/josephlyons/Desktop/foo
  builtin │ No
 ─────────┴────────────────────────────────
+```
+
+`which` also identifies aliases
+
+```shell
+> alias e = echo
+> which e
+───┬─────┬───────────────┬─────────
+ # │ arg │     path      │ builtin
+───┼─────┼───────────────┼─────────
+ 0 │ e   │ Nushell alias │ No
+───┴─────┴───────────────┴─────────
+```
+
+and custom commands
+
+```shell
+> def my_cool_echo [arg] { echo $arg }
+> which my_cool_echo
+───┬──────────────┬────────────────────────┬─────────
+ # │     arg      │          path          │ builtin
+───┼──────────────┼────────────────────────┼─────────
+ 0 │ my_cool_echo │ Nushell custom command │ No
+───┴──────────────┴────────────────────────┴─────────
 ```

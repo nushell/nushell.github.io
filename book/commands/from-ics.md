@@ -1,7 +1,7 @@
 ---
 title: from ics
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Parse text as `.ics` and create table.

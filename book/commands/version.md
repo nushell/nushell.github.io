@@ -1,7 +1,7 @@
 ---
 title: version
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Outputs the nushell version.

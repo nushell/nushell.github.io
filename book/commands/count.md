@@ -1,7 +1,7 @@
 ---
 title: count
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Obtain the row or column count of a table.
