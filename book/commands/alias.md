@@ -4,8 +4,6 @@ layout: command
 nu_version: 0.25.0
 ---
 
-# alias
-
 This command allows you to define shortcuts for other common commands. By default, they only apply to the current session. To persist them, add them to your config.
 
 Syntax: `alias <name> = <body>`
