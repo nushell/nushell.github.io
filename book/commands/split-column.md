@@ -1,8 +1,9 @@
 ---
 title: split column
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
+
 splits contents across multiple columns via the separator.
 
 Syntax: `split column <separator>  ...args{flags}`

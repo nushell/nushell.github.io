@@ -1,7 +1,7 @@
 ---
 title: empty
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Check for empty values. Pass the column names to check emptiness. Optionally pass a block as the last parameter if setting contents to empty columns is wanted.

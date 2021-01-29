@@ -1,7 +1,7 @@
 ---
-title: from cvs
+title: from csv
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Converts csv data into table. Use this when nushell cannot determine the input file extension.

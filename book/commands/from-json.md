@@ -1,7 +1,7 @@
 ---
 title: from json
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Parse text as `.json` and create table. Use this when nushell cannot determine the input file extension.

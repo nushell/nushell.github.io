@@ -1,7 +1,7 @@
 ---
 title: to yaml
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Converts table data into yaml text.

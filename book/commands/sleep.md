@@ -1,7 +1,7 @@
 ---
 title: sleep
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
 
 Delay for a specified amount of time

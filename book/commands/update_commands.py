@@ -79,9 +79,10 @@ for file in files:
     # open and overwrite the command documentation
     f = open(directory_in_str + file, "w")
     while line < len(lines):
-        if lines[line].find("# " + filename) != -1:
+        replacement = filename.replace("-", " ")
+        if lines[line].find("# " + replacement) != -1:
             print("---", file=f)
-            print("title: " + filename, file=f)
+            print("title: " + replacement, file=f)
             print("layout: command", file=f)
             print("nu_version: " + version, file=f)
             print("---", file=f)

@@ -1,8 +1,9 @@
 ---
 title: math eval
 layout: command
-nu_version: 0.20.0
+nu_version: 0.26.0
 ---
+
 math eval is a command that takes a math expression from the pipeline and evaluates that into a number. It also optionally takes the math expression as an argument.
 
 This command supports the following operations -
