@@ -9,20 +9,20 @@ An example of the nushell `config.toml` can be found in our repo [here](https://
 ### Root level configuration settings.
 These are at the root level, not because they're more important, but because they are not in a toml section.
 
-| Name                  | Purpose                                                                                                              | Value Type | Options                                                                                         | Example                                                                                                                                                                                                                                                                 |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------|------------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| complete_from_path    | Whether or not to complete names of binaries on PATH                                                                 | boolean    | true or false                                                                                   | complete_from_path = true                                                                                                                                                                                                                                               |
-| ctrlc_exit            | Enables/Disables nushell to exit when the key combination of Ctrl+C is hit multiple times.                           | boolean    | true or false                                                                                   | ctrlc_exit = false                                                                                                                                                                                                                                                      |
-| disable_table_indexes | Enables/Disables the index (#) column on tables.                                                                     | boolean    | true or false                                                                                   | disable_table_indexes = false                                                                                                                                                                                                                                           |
-| filesize_format       | Set the file size units format returned from the ls command.                                                         | string     | b, kb, kib, mb, mib, gb, big, etc                                                               | filesize_format = "B"                                                                                                                                                                                                                                                   |
-| nonzero_exit_errors   | Enables/Disables the reporting of non-zeros exit errors.                                                             | boolean    | true or false                                                                                   | nonzero_exit_errors = true                                                                                                                                                                                                                                              |
-| pivot_mode            | Tells nushell how to pivot single row tables.                                                                        | string     | auto, always, never                                                                             | pivot_mode = "auto"                                                                                                                                                                                                                                                     |
-| plugin_dirs           | Tells nushell to look in these folders for optional nushell plugins.                                                 | array      | quoted string of folders delimited by commas between brackets `[ ]`                             | plugin_dirs = ["D:\\Src\\GitHub\\nu-plugin-lib\\samples\\Nu.Plugin.Len\\bin\\Debug\\netcoreapp3.1"]                                                                                                                                                                     |
-| prompt                | Instructs nushell to run this command pipeline for every prompt.                                                     | string     | quote command pipeline or custom command.                                                       | prompt = "echo $(ansi gb) $(pwd) $(ansi reset) \"(\" $(ansi cb) $(do -i { git rev-parse --abbrev-ref HEAD | str trim }) $(ansi reset) \")\" $(char newline) $(ansi yb) $(date --format \"%m/%d/%Y %I:%M:%S%.3f %p\" --raw) $(ansi reset) \"> \" | str collect"          |
-| rm_always_trash       | Enables/Disables nushell to always delete files to the recycle bin/trash can.                                        | boolean    | true or false                                                                                   | rm_always_trash = true                                                                                                                                                                                                                                                  |
-| skip_welcome_message  | Enables/Disables the nushell welcome message.                                                                        | boolean    | true or false                                                                                   | skip_welcome_message = true                                                                                                                                                                                                                                             |
-| startup               | Load and run command at startup. These commands can take the form of aliases, custom commands, or external commands. | array      | quoted string of commands delimited by commas between brackets `[ ]`                            | startup = [ "alias la = ls --long", "def nudown [] {fetch https://api.github.com/repos/nushell/nushell/releases | get assets | select name download_count}", "def nuver [] {version | insert nushell_features {get features | str collect ', '} | reject features}", ]  |
-| table_mode            | Defines which "theme" that table drawing should use in nushell.                                                      | string     | basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other | table_mode = "other"                                                                                                                                                                                                                                                    |
+| Name                  | Purpose                                                                                                              | Value Type | Options                                                                                         |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------|------------|-------------------------------------------------------------------------------------------------|
+| complete_from_path    | Whether or not to complete names of binaries on PATH                                                                 | boolean    | true or false                                                                                   |
+| ctrlc_exit            | Enables/Disables nushell to exit when the key combination of Ctrl+C is hit multiple times.                           | boolean    | true or false                                                                                   |
+| disable_table_indexes | Enables/Disables the index (#) column on tables.                                                                     | boolean    | true or false                                                                                   |
+| filesize_format       | Set the file size units format returned from the ls command.                                                         | string     | b, kb, kib, mb, mib, gb, big, etc                                                               |
+| nonzero_exit_errors   | Enables/Disables the reporting of non-zeros exit errors.                                                             | boolean    | true or false                                                                                   |
+| pivot_mode            | Tells nushell how to pivot single row tables.                                                                        | string     | auto, always, never                                                                             |
+| plugin_dirs           | Tells nushell to look in these folders for optional nushell plugins.                                                 | array      | quoted string of folders delimited by commas between brackets `[ ]`                             |
+| prompt                | Instructs nushell to run this command pipeline for every prompt.                                                     | string     | quote command pipeline or custom command.                                                       |
+| rm_always_trash       | Enables/Disables nushell to always delete files to the recycle bin/trash can.                                        | boolean    | true or false                                                                                   |
+| skip_welcome_message  | Enables/Disables the nushell welcome message.                                                                        | boolean    | true or false                                                                                   |
+| startup               | Load and run command at startup. These commands can take the form of aliases, custom commands, or external commands. | array      | quoted string of commands delimited by commas between brackets `[ ]`                            |
+| table_mode            | Defines which "theme" that table drawing should use in nushell.                                                      | string     | basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other |
 
 ### Color Config section
 
@@ -60,67 +60,67 @@ the color alone or with one of the following attributes.
 - red_underline
 - blue_dimmed
 
-| Name                      | Purpose                                     | Value Type | Options        | Example                             |
-|---------------------------|---------------------------------------------|------------|----------------|-------------------------------------|
-| [color_config]            | This is the section name                    | heading     |   | [color_config]                      |
-| header_align              | Apply an alignment to the header            | string     | Outlined above | header_align = "l"                  |
-| header_bold               | Enable/Disable bold for the header          | string     | Outlined above | header_bold = true                  |
-| header_color              | Apply a color to the header                 | string     | Outlined above | header_color = "c"                  |
-| index_color               | Apply a style of the Index (#)              | string     | Outlined above | index_color = "rd"                  |
-| leading_trailing_space_bg | Apply a style to leading and trailing space | string     | Outlined above | leading_trailing_space_bg = "white" |
-| primitive_binary          | Apply a style to Primitive::Binary          | string     | Outlined above | primitive_binary = "cyan"           |
-| primitive_boolean         | Apply a style to Primitive::Boolean         | string     | Outlined above | primitive_boolean = "green"         |
-| primitive_columnpath      | Apply a style to Primitive::ColumnPath      | string     | Outlined above | primitive_columnpath = "cyan"       |
-| primitive_date            | Apply a style to Primitive::Date            | string     | Outlined above | primitive_date = "ru"               |
-| primitive_decimal         | Apply a style to Primitive::Decimal         | string     | Outlined above | primitive_decimal = "red"           |
-| primitive_duration        | Apply a style to Primitive::Duration        | string     | Outlined above | primitive_duration = "blue"         |
-| primitive_filesize        | Apply a style to Primitive::Filesize        | string     | Outlined above | primitive_filesize = "ur"           |
-| primitive_int             | Apply a style to Primitive::Int             | string     | Outlined above | primitive_int = "green"             |
-| primitive_line            | Apply a style to Primitive::Line            | string     | Outlined above | primitive_line = "yellow"           |
-| primitive_path            | Apply a style to Primitive::Path            | string     | Outlined above | primitive_path = "yellow"           |
-| primitive_pattern         | Apply a style to Primitive::Pattern         | string     | Outlined above | primitive_pattern = "white"         |
-| primitive_range           | Apply a style to Primitive::Range           | string     | Outlined above | primitive_range = "purple"          |
-| primitive_string          | Apply a style to Primitive::String          | string     | Outlined above | primitive_string = "pb"             |
-| separator_color           | Apply a style to the table lines            | string     | Outlined above | separator_color = "purple"          |
+| Name                      | Purpose                                     | Value Type | Options        |
+|---------------------------|---------------------------------------------|------------|----------------|
+| [color_config]            | This is the section name                    | string     | Outlined above |
+| header_align              | Apply an alignment to the header            | string     | Outlined above |
+| header_bold               | Enable/Disable bold for the header          | string     | Outlined above |
+| header_color              | Apply a color to the header                 | string     | Outlined above |
+| index_color               | Apply a style of the Index (#)              | string     | Outlined above |
+| leading_trailing_space_bg | Apply a style to leading and trailing space | string     | Outlined above |
+| primitive_binary          | Apply a style to Primitive::Binary          | string     | Outlined above |
+| primitive_boolean         | Apply a style to Primitive::Boolean         | string     | Outlined above |
+| primitive_columnpath      | Apply a style to Primitive::ColumnPath      | string     | Outlined above |
+| primitive_date            | Apply a style to Primitive::Date            | string     | Outlined above |
+| primitive_decimal         | Apply a style to Primitive::Decimal         | string     | Outlined above |
+| primitive_duration        | Apply a style to Primitive::Duration        | string     | Outlined above |
+| primitive_filesize        | Apply a style to Primitive::Filesize        | string     | Outlined above |
+| primitive_int             | Apply a style to Primitive::Int             | string     | Outlined above |
+| primitive_line            | Apply a style to Primitive::Line            | string     | Outlined above |
+| primitive_path            | Apply a style to Primitive::Path            | string     | Outlined above |
+| primitive_pattern         | Apply a style to Primitive::Pattern         | string     | Outlined above |
+| primitive_range           | Apply a style to Primitive::Range           | string     | Outlined above |
+| primitive_string          | Apply a style to Primitive::String          | string     | Outlined above |
+| separator_color           | Apply a style to the table lines            | string     | Outlined above |
 
 ### Line Editor section
 The `[line_editor]` section of the `config.toml` controls how our line editor, `rustyline` behaves. These configuration settings are specific to the `rustyline` crate we use.
 
-| Name                    | Purpose                                                                                   | Value Type | Options                                                                  | Example                                  |
-|-------------------------|-------------------------------------------------------------------------------------------|------------|--------------------------------------------------------------------------|------------------------------------------|
-| [line_editor]           | This is the section name                                                                  | heading           |                                                                          | [line_editor]                            |
-| auto_add_history        | Enable/Disable automatically add each non-blank line to history.                          | boolean    | true or false                                                            | auto_add_history = TRUE                  |
-| bell_style              | The bell style for the line editor                                                        | string     | audible, none, visible                                                   | bell_style = "audible"                   |
-| color_mode              | The color mode for the line editor                                                        | string     | enabled, forced, disabled                                                | color_mode = "enabled"                   |
-| completion_prompt_limit | When listing completion alternatives, only display one screen of possibilities at a time. | number           |                                                                          | completion_prompt_limit = 100            |
-| completion_type         | Method used to iterate history items                                                      | string     | circular, list, fuzzy - note fuzzy is not currently supported by nushell | completion_type = "circular"             |
-| edit_mode               | The mode for the line editor                                                              | string     | vi or emails                                                             | edit_mode = "emacs"                      |
-| history_duplicates      | Rule to apply regarding the adding of duplicates to the history                           | string     | alwaysadd, ignoreconsecutive                                             | history_duplicates = "ignoreconsecutive" |
-| history_ignore_space    | Enable/Disable the history to ignore space                                                | boolean    | true or false                                                            | history_ignore_space = FALSE             |
-| keyseq_timeout_ms       | Duration rustyline will wait for a character when reading an ambiguous key sequence.      | string     | duration in milliseconds                                                 | keyseq_timeout_ms = 500                  |
-| max_history_size        | The maximum history size                                                                  | number           |                                                                          | max_history_size = 100000                |
-| tab_stop                | The number of characters for indented/outdented commands                                  | number     |                                                                  | tab_stop = 4                             |
+| Name                    | Purpose                                                                                  | Value Type | Options                                                                  |
+|-------------------------|------------------------------------------------------------------------------------------|------------|--------------------------------------------------------------------------|
+| [line_editor]           | This is the section name                                                                 |            |                                                                          |
+| auto_add_history        | Enable/Disable automatically add each non-blank line to history                          | boolean    | true or false                                                            |
+| bell_style              | The bell style for the line editor                                                       | string     | audible, none, visible                                                   |
+| color_mode              | The color mode for the line editor                                                       | string     | enabled, forced, disabled                                                |
+| completion_prompt_limit | When listing completion alternatives, only display one screen of possibilities at a time |            |                                                                          |
+| completion_type         | Method used to iterate history items                                                     | string     | circular, list, fuzzy - note fuzzy is not currently supported by nushell |
+| edit_mode               | The mode for the line editor                                                             | string     | vi or emails                                                             |
+| history_duplicates      | Rule to apply regarding the adding of duplicates to the history                          | string     | alwaysadd, ignoreconsecutive                                             |
+| history_ignore_space    | Enable/Disable the history to ignore space                                               | boolean    | true or false                                                            |
+| keyseq_timeout_ms       | Duration rustyline will wait for a character when reading an ambiguous key sequence      | string     | duration in milliseconds                                                 |
+| max_history_size        | The maximum history size                                                                 | number     |                                                                          |
+| tab_stop                | The number of characters for indented/outdented commands                                 | number     |
 
 ### Textview section
 The `[textview]` section of the `config.toml` file is a section with settings for our textviewer which is currently [bat](https://github.com/sharkdp/bat). So, all these settings apply to the `bat` configuration built into nushell. It won't use settings you may currently have on your system if you use `bat`.
 
-| Name                     | Purpose                                                                                                           | Value Type       | Options                        | Example                         |
-|--------------------------|-------------------------------------------------------------------------------------------------------------------|------------------|--------------------------------|---------------------------------|
-| [textview]               | This is the section name                                                                                          | heading                 |                                | [textview]                      |
-| colored_output           | Enable/Disable whether or not the output should be colorized                                                      | boolean          | true or false                  | colored_output = TRUE           |
-| grid                     | Enable/Disable a grid                                                                                             | boolean          | true or false                  | grid = FALSE                    |
-| header                   | Enable/Disable a header                                                                                           | boolean          | true or false                  | header = TRUE                   |
-| line_numbers             | Enable/Disable line numbers                                                                                       | boolean          | true or false                  | line_numbers = TRUE             |
-| pager                    | Set the pager to use                                                                                              | string           |                                | pager = "less"                  |
-| paging_mode              | Set the paging mode                                                                                               | string           | Always, QuitIfOneScreen, Never | paging_mode = "QuitIfOneScreen" |
-| snip                     | Enable/Disable snip                                                                                               | boolean          | true or false                  | snip = TRUE                     |
-| tab_width                | The width of tab characters. Currently, a value of 0 will cause tabs to be passed through without expanding them. | number           |                                | tab_width = 4                   |
-| term_width               | The character width of the terminal                                                                               | string or number |                                | term_width = "default"          |
-| theme                    | Set the bat color theme to use                                                                                    | string           |                                | theme = "TwoDark"               |
-| true_color               | Enable/Disable whether the output terminal supports true color                                                    |                  | true or false                  | true_color = TRUE               |
-| use_italics              | Enable/Disable italic type                                                                                        | boolean          | true or false                  | use_italics = TRUE              |
-| vcs_modification_markers | Enable/Disable version control system modification markers                                                        | boolean          | true or false                  | vcs_modification_markers = TRUE |
-| wrapping_mode            | Set if and how text should be wrapped                                                                             | string           | Character, NoWrapping          | wrapping_mode = "NoWrapping"    |
+| Name                     | Purpose                                                                                                           | Value Type | Options                        |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------|------------|--------------------------------|
+| [textview]               | This is the section name                                                                                          |            |                                |
+| colored_output           | Enable/Disable whether or not the output should be colorized                                                      | boolean    | true or false                  |
+| grid                     | Enable/Disable a grid                                                                                             | boolean    | true or false                  |
+| header                   | Enable/Disable a header                                                                                           | boolean    | true or false                  |
+| line_numbers             | Enable/Disable line numbers                                                                                       | boolean    | true or false                  |
+| pager                    | Set the pager to use                                                                                              | string     | less, more, etc                |
+| paging_mode              | Set the paging mode                                                                                               | string     | always, quitifonescreen, never |
+| snip                     | Enable/Disable snip                                                                                               | boolean    | true or false                  |
+| tab_width                | The width of tab characters. Currently, a value of 0 will cause tabs to be passed through without expanding them. | number     |                                |
+| term_width               | The character width of the terminal                                                                               | string     |                                |
+| theme                    | Set the bat color theme to use                                                                                    | string     |                                |
+| true_color               | Enable/Disable whether the output terminal supports true color                                                    |            | true or false                  |
+| use_italics              | Enable/Disable italic type                                                                                        | boolean    | true or false                  |
+| vcs_modification_markers | Enable/Disable version control system modification markers                                                        | boolean    | true or false                  |
+| wrapping_mode            | Set if and how text should be wrapped                                                                             | string     | character, nowrapping          |
 
 ### Path section
 
