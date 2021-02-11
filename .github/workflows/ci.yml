@@ -1,9 +1,8 @@
-name: Github Pages Deployment
-
+name: CI
 on: [push, pull_request]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +14,11 @@ jobs:
 
       - run: npm install
       - run: npm run build
-
+        
+  deploy:
+    runs-on: ubuntu-18.04
+    if: ${{ github.event_name == 'push' }}
+    steps:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
