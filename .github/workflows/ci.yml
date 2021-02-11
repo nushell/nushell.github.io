@@ -17,7 +17,7 @@ jobs:
         
   deploy:
     runs-on: ubuntu-18.04
-    if: github.repository == 'nushell/nushell.github.io'
+    if: ${{ github.event_name == 'push' }}
     steps:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
