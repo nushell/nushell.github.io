@@ -255,7 +255,19 @@ windir = "C:\\WINDOWS"
 WSLENV = "WT_SESSION::WT_PROFILE_ID"
 ```
 
-## `config` command usage
+## Startup commands
+
+To run commands at start, Nushell offers a special part of the configuration that contains a list of strings which will be treated as commands you haved typed in as Nushell starts up.
+
+Let's add a single line to print "hello" as Nushell starts up:
+
+```
+config set startup ["echo 'hello'"]
+```
+
+The startup section lets you do the configuration steps that should happen before your Nushell session begins, including adding aliases or custom commands.
+
+## Using the `config` command
 
 ### Setting variables
 
