@@ -8,9 +8,11 @@
 * [Working with tables](working_with_tables.md) - Working with nushell tables
 * [Pipeline](pipeline.md) - How the pipeline works
 * [Configuration](configuration.md) - How to configure nushell
-* [Aliases](aliases.md) - Added aliases for blocks of commands
+* [Custom commands](custom_commands.md) - Creating your own commands
+* [Aliases](aliases.md) - How to alias commands
 * [Math](math.md) - Math operations in nushell
 * [Environment](environment.md) - Working with environment variables
+* [Scripts](scripts.md) - Creating your own scripts
 * [Metadata](metadata.md) - An explanation of nushell's metadata system
 * [Shells](shells_in_shells.md) - Working with multiple locations
 * [Escaping commands](escaping.md) - Escaping to native commands of the same name

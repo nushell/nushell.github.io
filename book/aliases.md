@@ -1,50 +1,27 @@
 # Aliases
 
-Nu's ability to compose long pipelines allow you a lot of control over your data and system, but it comes at the price of a lot of typing. Ideally, you'd be able to save your well-crafted pipelines to use again and again.
+Aliases in Nushell offer a way of doing a simple, textual replacement. This allows you to create a shorthand name for a longer command, including its default arguments.
 
-This is where aliases come in.
-
-An alias allows you to create a short name for a block of commands.  When the alias is run, it's like you typed that block of commands out.
-
-Example:
+For example, let's create an alias called `ll` which will expand to `ls -l`.
 
 ```
-> alias ls-names [] { ls | select name }
-> ls-names
-────┬────────────────────
- #  │ name 
-────┼────────────────────
-  0 │ 404.html 
-  1 │ CONTRIBUTING.md 
-  2 │ Gemfile 
-  3 │ Gemfile.lock 
-  4 │ LICENSE 
+> alias ll = ls -l
 ```
 
-## Parameters
-
-Aliases can also take optional parameters that are passed to the block.  Each of these becomes a new variable in the block.
+We can now call this alias:
 
 ```
-> alias e [msg] { echo $msg }
-> e "hello world"
-hello world
+> ll
 ```
 
-You can have an arbitrary number of these arguments.  When the user doesn't provide a value, the variable in the block will evaluate to Nothing and be removed.
+Once we do, it's as if we typed `ls -l`. This also allows us to pass in flags or positional parameters. For example, we can now also write:
+
+```
+> ll -a
+```
+
+And get the equivalent to having typed `ls -l -a`.
 
 ## Persisting
 
-By default, aliases only apply to the current session. That can be useful for a temporary helper or testing a new alias, but for aliases to be really useful, they need to be persisted. To do so, call the alias with the `--save` flag (or the `-s` shorthand). For example:
-
-```
-alias e --save [msg] { echo $msg }
-```
-
-Aliases are stored in the startup config, which you can look at with `config get startup`. If you get an error, the `startup` config doesn't yet exist.
-
-You can also edit aliases directly in the config.toml file, for example using `vi`:
-
-```
-config path | vi $it
-```
+For information about how to persist aliases so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md#startup-commands) and add your aliases to the `startup` section.
