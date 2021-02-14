@@ -71,6 +71,7 @@ module.exports = {
                 "custom_commands",
                 "aliases",
                 "math",
+                "variables_and_invocations",
                 "environment",
                 "scripts",
                 "metadata",

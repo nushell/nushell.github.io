@@ -133,11 +133,14 @@ def greet [
 }
 ```
 
+*Note:* Flags are named by their longhand name, so the above example would need to use `$age` and not `$a`.
+
 Now, we can call this updated definition using the shorthand flag:
 
 ```
 > greet -a 10 hello
 ```
+
 
 ## Documenting your command
 
