@@ -33,7 +33,7 @@ def greet [name] {
 
 There is no requirement that definitions have to come before the parts of the script that call the definitions, allowing you to put them where you feel comfortable.
 
-### Order of evaluation
+### How scripts are processed
 
 In a script, definitions run first. This allows us to call the definitions using the calls in the script.
 

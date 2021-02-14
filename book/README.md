@@ -11,6 +11,7 @@
 * [Custom commands](custom_commands.md) - Creating your own commands
 * [Aliases](aliases.md) - How to alias commands
 * [Math](math.md) - Math operations in nushell
+* [Variables and invocations](variables_and_invocations.md) - Variables and invocations
 * [Environment](environment.md) - Working with environment variables
 * [Scripts](scripts.md) - Creating your own scripts
 * [Metadata](metadata.md) - An explanation of nushell's metadata system

@@ -60,3 +60,35 @@ The following comparisons are also available:
 
 Nushell also supports `&&` and `||` to join two operations that return boolean values, using 'and' and 'or' respectively.  For example: `ls | where name in ["one" "two" "three"] && size > 10kb`
 
+## Order of operations
+
+Math operations are evaluated in the follow order (from highest precedence to lowest):
+
+* Parentheses (`()`)
+* Multiply (`*`) and Divide (`/`) 
+* Add (`+`) and Subtract (`-`)
+
+```
+> = 3 * (1 + 2)
+9
+```
+
+## Short-hand math mode
+
+A variation of math mode that Nushell supports is called "short-hand" math mode. This is because it gives you a way of accessing columns using a simple short-hand.
+
+You may have already used this functionality before. If, for example, we wanted to only see rows from `ls` where the entry is at least ten kilobytes, we can write:
+
+```
+> ls | where size > 10kb
+```
+
+The `where size > 10kb` is a command with two parts: the command names `where` and the short-hand math expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`.  If we look at the fully expanded form, we would see:
+
+```
+> ls | where { = $it.size > 10kb }
+```
+
+The `=` gives us the full math mode. Rather than having to type all this out every time a command needs to work with column data, we use this short-hand mode to access column data.
+
+For the expansion to work, the column must appear on the left-hand side of the operation. Above, `size` appears on the left-hand side of the comparison, which allows the expression to expand into the full math mode block.
