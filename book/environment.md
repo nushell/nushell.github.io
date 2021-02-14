@@ -13,6 +13,8 @@ You can see the current environment variables that will be sent to applications 
  DISPLAY                  │ :1 
 ```
 
+## Single-use environment variables
+
 The environment is created from the settings in the Nu configuration and from the environment that Nu is run inside of.  You can updated the environment permanently using the techniques listed in [configuration](configuration.md) chapter.
 
 You can also temporarily update an environment variable when you run a command or pipeline of commands.
@@ -30,3 +32,17 @@ A common shorthand, inspired by Bash and others, is also available. You can writ
 > FOO=BAR echo $nu.env.FOO
 BAR
 ```
+
+## Scoped environment variables
+
+You can also set environment variables that will be available in the current scope (the block you're in and any block inside of it).
+
+To do so, you can use the `let-env` command.
+
+```
+> let-env FOO = BAR
+```
+
+## Permanent environment variables
+
+You can also set environment variables that are set at startup and are available for the duration of Nushell running. These can be set in the `env` section of the [config](configuration.md).
