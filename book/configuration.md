@@ -94,7 +94,7 @@ The `[line_editor]` section of the `config.toml` controls how our line editor, `
 | color_mode              | The color mode for the line editor                                                       | string     | enabled, forced, disabled                                                |
 | completion_prompt_limit | When listing completion alternatives, only display one screen of possibilities at a time |            |                                                                          |
 | completion_type         | Method used to iterate history items                                                     | string     | circular, list, fuzzy - note fuzzy is not currently supported by nushell |
-| edit_mode               | The mode for the line editor                                                             | string     | vi or emails                                                             |
+| edit_mode               | The mode for the line editor                                                             | string     | vi or emacs                                                             |
 | history_duplicates      | Rule to apply regarding the adding of duplicates to the history                          | string     | alwaysadd, ignoreconsecutive                                             |
 | history_ignore_space    | Enable/Disable the history to ignore space                                               | boolean    | true or false                                                            |
 | keyseq_timeout_ms       | Duration rustyline will wait for a character when reading an ambiguous key sequence      | string     | duration in milliseconds                                                 |
@@ -380,7 +380,7 @@ Prompt configuration is handled by setting the value of `prompt`.
 For example, to use [Starship](https://starship.rs), download it and enter the following command (0.18.2 and later):
 
 ```
-config set prompt `echo $(starship prompt)`
+config set prompt "starship prompt"
 ```
 
 Now restart Nu.

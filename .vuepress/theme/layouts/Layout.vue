@@ -17,7 +17,7 @@ export default {
 @import url('https://adobe-fonts.github.io/source-code-pro/source-code-pro.css');
 
 code {
-  font-family: -apple-system, 'Source Code Pro', sans-serif;
+  font-family: 'Source Code Pro', 'Courier New';
   font-size: 16px;
 }
 </style>
