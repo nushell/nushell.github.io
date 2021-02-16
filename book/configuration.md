@@ -380,7 +380,7 @@ Prompt configuration is handled by setting the value of `prompt`.
 For example, to use [Starship](https://starship.rs), download it and enter the following command (0.18.2 and later):
 
 ```
-config set prompt `echo $(starship prompt)`
+config set prompt "starship prompt"
 ```
 
 Now restart Nu.
