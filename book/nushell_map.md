@@ -28,7 +28,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | drop                   |                               |                                                      |                                            |                                                 |
 | du                     |   -                           |   -                                                  |                                            | du                                              |
 | each                   | cursor                        |                                                      | ForEach-Object, foreach, for               |                                                 |
-| echo                   | print                         |   -                                                  | Write-Output, write                        | echo                                            |
+| echo                   | print                         |   -                                                  | Write-Output, write                        | echo                                            | 	Sort-Object {Get-
 | enter                  |   -                           |   -                                                  |                                            |                                                 |
 | evaluate_by            |                               |                                                      |                                            |                                                 |
 | exit                   |   -                           |                                                      | exit                                       | exit                                            |
@@ -77,7 +77,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | save                   |   -                           |   -                                                  | Write-Output, Out-File                     | > foo.txt                                       |
 | select(`***`)          | select                        | Select                                               | Select-Object, select                      |                                                 |
 | shells                 |   -                           |   -                                                  |   -                                        |                                                 |
-| shuffle                |                               | Random                                               | $var                                       | Sort-Object {Get-Random}                        |
+| shuffle                |                               | Random                                               | Sort-Object {Get-Random}                   |   -                        |
 | size                   |                               |                                                      | Measure-Object, measure                    | wc                                              |
 | skip                   | where row_number()            | Skip                                                 | Select-Object -Skip                        |                                                 |
 | skip_until             |                               |                                                      |                                            |                                                 |
