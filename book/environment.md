@@ -43,6 +43,8 @@ To do so, you can use the `let-env` command.
 > let-env FOO = BAR
 ```
 
+let-env is similar to the **export** command in bash.
+
 ## Permanent environment variables
 
 You can also set environment variables that are set at startup and are available for the duration of Nushell running. These can be set in the `env` section of the [config](configuration.md).
