@@ -6,4 +6,5 @@ This website is based on Vuepress.
 
 ## Running Vuepress locally
 
-// todo
+1. [Install yarn](https://yarnpkg.com/getting-started/install)
+1. Run `yarn vuepress dev`
