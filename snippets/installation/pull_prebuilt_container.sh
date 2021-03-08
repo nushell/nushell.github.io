@@ -1,2 +1,2 @@
-$ docker pull quay.io/nushell/nu
 $ docker pull quay.io/nushell/nu-base
+$ docker pull quay.io/nushell/nu
