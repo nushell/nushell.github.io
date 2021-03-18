@@ -85,6 +85,11 @@ error: Type Error
 
 This can help you guide users of your definitions to call them with only the supported types.
 
+The currently accepted types are (as of version 0.28.0):
+```
+int, string, path, table, unit, number, pattern, range, block, any
+```
+
 ## Flags
 
 In addition to passing positional parameters, you can also pass named parameters by defining flags for your custom commands.
