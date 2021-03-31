@@ -98,7 +98,7 @@ Dates and times are held together in the Date value type. Date values used by th
 
 Durations represent a length of time.  A second, 5 weeks, and a year are all durations.
 
-Eg) `1w` is the duration of one week.
+Eg) `1wk` is the duration of one week.
 
 This chart shows all durations currently supported:
 
