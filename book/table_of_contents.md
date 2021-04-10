@@ -9,6 +9,7 @@
 * [Pipeline](pipeline.md) - How the pipeline works
 * [Configuration](configuration.md) - How to configure Nu
 * [Aliases](aliases.md) - Aliases for blocks of commands
+* [Operators](operators.md) - Operators supported by nushell
 * [Math](math.md) - Math operations in Nu
 * [Environment](environment.md) - Working with environment variables
 * [Metadata](metadata.md) - An explanation of Nu's metadata system

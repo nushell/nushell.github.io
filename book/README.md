@@ -10,6 +10,7 @@
 * [Configuration](configuration.md) - How to configure nushell
 * [Custom commands](custom_commands.md) - Creating your own commands
 * [Aliases](aliases.md) - How to alias commands
+* [Operators](operators.md) - Operators supported by nushell
 * [Math](math.md) - Math operations in nushell
 * [Variables and invocations](variables_and_invocations.md) - Variables and invocations
 * [Environment](environment.md) - Working with environment variables

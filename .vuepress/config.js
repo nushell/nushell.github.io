@@ -70,6 +70,7 @@ module.exports = {
                 "configuration",
                 "custom_commands",
                 "aliases",
+                "operators",
                 "math",
                 "variables_and_invocations",
                 "environment",
