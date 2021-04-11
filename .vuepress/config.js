@@ -65,6 +65,7 @@ module.exports = {
                 "moving_around",
                 "types_of_data",
                 "loading_data",
+                "working_with_lists",
                 "working_with_tables",
                 "pipeline",
                 "configuration",

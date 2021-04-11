@@ -5,6 +5,7 @@
 * [Moving around](moving_around.md) - Moving around in Nu
 * [Types of data](types_of_data.md) - Types of data in Nu
 * [Loading data](loading_data.md) - Loading data and using it
+* [Working with lists](working_with_lists.md) - Working with Nu lists
 * [Working with tables](working_with_tables.md) - Working with Nu tables
 * [Pipeline](pipeline.md) - How the pipeline works
 * [Configuration](configuration.md) - How to configure Nu
