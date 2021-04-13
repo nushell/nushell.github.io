@@ -1,24 +1,28 @@
 # Table of Contents
 
-* [Installation](installation.md) - Installing Nu
-* [Introduction](introduction.md) - Getting started
-* [Moving around](moving_around.md) - Moving around in Nu
-* [Types of data](types_of_data.md) - Types of data in Nu
-* [Loading data](loading_data.md) - Loading data and using it
-* [Working with lists](working_with_lists.md) - Working with Nu lists
-* [Working with tables](working_with_tables.md) - Working with Nu tables
-* [Pipeline](pipeline.md) - How the pipeline works
-* [Configuration](configuration.md) - How to configure Nu
-* [Aliases](aliases.md) - Aliases for blocks of commands
-* [Operators](operators.md) - Operators supported by nushell
-* [Math](math.md) - Math operations in Nu
-* [Environment](environment.md) - Working with environment variables
-* [Metadata](metadata.md) - An explanation of Nu's metadata system
-* [Shells](shells_in_shells.md) - Working with multiple locations
-* [Escaping commands](escaping.md) - Escaping to native commands of the same name 
-* [Plugins](plugins.md) - Enhancing Nu with more features using plugins
-* [Coming from bash](coming_from_bash.md) - Guide for those coming to Nu from bash
-* [Nu map from shells/DSL](nushell_map.md) - Guide to show how Nu compares to SQL, Linq/C#, PowerShell and Bash
-* [Nu map from imperative languages](nushell_map_imperative.md) - Guide to show how Nu compares to Python, Kotlin, C++ and Rust
-* [Nu map from functional languages](nushell_map_functional.md) - Guide to show how Nu compares to Clojure, Tablecloth (Ocaml / Elm) and Haskell
-* [Nu operator map](nushell_operator_map.md) - Guide to show how Nu compares to operators in general purpose programming languages
+- [Installation](installation.md) - Installing nushell
+- [Introduction](introduction.md) - Getting started
+- [Moving around](moving_around.md) - Moving around in nushell
+- [Types of data](types_of_data.md) - Types of data in nushell
+- [Loading data](loading_data.md) - Loading data and using it
+- [Working with lists](working_with_lists.md) - Working with Nu lists
+- [Working with tables](working_with_tables.md) - Working with Nu tables
+- [Pipeline](pipeline.md) - How the pipeline works
+- [Configuration](configuration.md) - How to configure nushell
+- [Custom commands](custom_commands.md) - Creating your own commands
+- [Aliases](aliases.md) - How to alias commands
+- [Operators](operators.md) - Operators supported by nushell
+- [Math](math.md) - Math operations in nushell
+- [Variables and invocations](variables_and_invocations.md) - Variables and invocations
+- [Environment](environment.md) - Working with environment variables
+- [Scripts](scripts.md) - Creating your own scripts
+- [Metadata](metadata.md) - An explanation of Nu's metadata system
+- [Shells](shells_in_shells.md) - Working with multiple locations
+- [Escaping commands](escaping.md) - Escaping to native commands of the same name
+- [Plugins](plugins.md) - Enhancing nushell with more features using plugins
+- [Coming from Bash](coming_from_bash.md) - Guide for those coming to nushell from Bash
+- [Nushell map from shells/DSL](nushell_map.md) - Guide to show how nushell compares with SQL, Linq, PowerShell, and Bash
+- [Nushell map from imperative languages](nushell_map_imperative.md) - Guide to show how nushell compares with Python, Kotlin, C++, C#, and Rust
+- [Nushell map from functional languages](nushell_map_functional.md) - Guide to show how nushell compares with Clojure, Tablecloth (Ocaml / Elm) and Haskell
+- [Nushell operator map](nushell_operator_map.md) - Guide to show how nushell operators compare with those in general purpose programming languages
+- [Command Reference](command_reference.md) - List of all Nushell's commands
