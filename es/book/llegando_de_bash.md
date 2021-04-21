@@ -7,7 +7,7 @@ Nota: Esta tabla asume Nushell 0.14.1 or posterior.
 | `ls`     | `ls` | Lists the files in the current directory |
 | `ls <dir>`    | `ls <dir>`| Lists the files in the given directory |
 | `ls pattern*` | `ls pattern*` | Lists files that match a given pattern |
-| `ls -la` | `ls --full` or `ls -f` | List files with all available information |
+| `ls -la` | `ls --long --all` or `ls -la` | List files with all available information, including hidden files |
 | `ls -d */` | `ls | where type == Dir` | List directories |
 | `cd <directory>` | `cd <directory>` | Change to the given directory |
 | `cd` | `cd` | Change to the home directory |

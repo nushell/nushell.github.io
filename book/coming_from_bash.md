@@ -7,7 +7,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | `ls`     | `ls` | Lists the files in the current directory |
 | `ls <dir>`    | `ls <dir>`| Lists the files in the given directory |
 | `ls pattern*` | `ls pattern*` | Lists files that match a given pattern |
-| `ls -la` | `ls --full` or `ls -f` | List files with all available information |
+| `ls -la` | `ls --long --all` or `ls -la` | List files with all available information, including hidden files |
 | `ls -d */` | `ls | where type == Dir` | List directories |
 | `find . -name *.rs` | `ls **/*.rs` | Find recursively all files that match a given pattern |
 | `cd <directory>` | `cd <directory>` | Change to the given directory |
