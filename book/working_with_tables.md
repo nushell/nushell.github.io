@@ -167,7 +167,7 @@ In addition to selecting data from a table, we can also update what the table ha
 
 ### Adding a new column
 
-We can use the `add` command to add a new column to the table. Let's look at an example:
+We can use the `insert` command to add a new column to the table. Let's look at an example:
 
 ```
 > open rustfmt.toml
@@ -176,7 +176,7 @@ We can use the `add` command to add a new column to the table. Let's look at an 
 ─────────┴──────
 ```
 
-Let's add an column called "next_edition" with the value 2021:
+Let's add a column called "next_edition" with the value 2021:
 
 ```
 > open rustfmt.toml | insert next_edition 2021

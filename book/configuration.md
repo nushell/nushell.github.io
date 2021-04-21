@@ -23,6 +23,7 @@ These are at the root level, not because they're more important, but because the
 | skip_welcome_message  | Enables/Disables the nushell welcome message.                                                                        | boolean    | true or false                                                                                   |
 | startup               | Load and run command at startup. These commands can take the form of aliases, custom commands, or external commands. | array      | quoted string of commands delimited by commas between brackets `[ ]`                            |
 | table_mode            | Defines which "theme" that table drawing should use in nushell.                                                      | string     | basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other |
+| completion_match_method | Sets case-sensitivity of autocompletion                                                                            | string     | case-insensitive, case-sensitive                                                             |
 
 ### Color Config section
 
