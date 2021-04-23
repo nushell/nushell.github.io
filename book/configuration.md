@@ -390,3 +390,16 @@ Now restart Nu.
 nushell on 📙 master [$] is 📦 v0.18.2 via 🦀 v1.48.0-nightly
 ❯
 ```
+
+If your prompt looks a bit garbled like this:
+
+```
+%{%}~%{%}
+%{%}❯%{%}
+```
+
+you may want to unset the `STARSHIP_SHELL` environment variable when setting the prompt.
+
+```
+config set prompt "STARSHIP_SHELL= starship prompt"
+```
