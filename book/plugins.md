@@ -8,4 +8,4 @@ To add a plugin, simply build it and put the binary in your PATH. Nu plugins beg
 
 When Nu starts up, it scans your system and loads the plugins it finds.
 
-The protocol that Nu plugins use is subject to change while Nu is under heavy development. The best place to learn more about the protocol and how to create your own plugins is by reading the source for the [plugins in the Nu repository](https://github.com/nushell/nushell/tree/master/crates). You can also refer to the [plugins chapter of the contributor book](https://github.com/nushell/contributor-book/blob/master/en/plugins.md)
+The protocol that Nu plugins use is subject to change while Nu is under heavy development. The best place to learn more about the protocol and how to create your own plugins is by reading the source for the [plugins in the Nu repository](https://github.com/nushell/nushell/tree/master/crates). You can also refer to the [plugins chapter of the contributor book](https://www.nushell.sh/contributor-book/plugins.html)
