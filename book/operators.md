@@ -1,4 +1,4 @@
-\# Operators
+# Operators
 
 Nushell supports the following operators:
 
