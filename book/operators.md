@@ -1,4 +1,4 @@
-# Operators
+\# Operators
 
 Nushell supports the following operators:
 
@@ -21,7 +21,7 @@ Nushell supports the following operators:
 | `in`     | value in list                   |
 | `not-in` | value not in list               |
 | `&&`     | and two Boolean values          |
-| `||`     | or two Boolean values           |
+| `\|\|`     | or two Boolean values           |
 
 Parentheses can be used for grouping to specify evaluation order.
 Operators can only be used in "math mode".
