@@ -19,7 +19,7 @@ Nushell supports the following operators:
 | `=~`     | string contains another         |
 | `!~`     | string does not contain another |
 | `in`     | value in list                   |
-| `not in` | value not in list               |
+| `not-in` | value not in list               |
 | `&&`     | and two Boolean values          |
 | `||`     | or two Boolean values           |
 
