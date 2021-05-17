@@ -37,7 +37,7 @@ _Note: It's common practice in Nushell to separate the words of the command with
 
 ## Sub-commands
 
-You can also define subcommands to commands using a space. For example, if we wanted to add a new subcommand to `str`, we can create it my naming our subcommand to start with "str ". For example:
+You can also define subcommands to commands using a space. For example, if we wanted to add a new subcommand to `str`, we can create it by naming our subcommand to start with "str ". For example:
 
 ```nushell
 def "str mycommand" [] {
