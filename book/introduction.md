@@ -38,9 +38,13 @@ What if we wanted to show the processes that were actively using the CPU? Just l
 
 So far, we've been using `ls` and `ps` to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore `date` and `sys`.
 
-Running `date utc` gives us information about the current day and time:
+Running `date now` gives us information about the current day and time:
 
 <<< @/snippets/introduction/date_example.sh
+
+To get the date as a table we can feed it into `date to-table`
+
+<<< @/snippets/introduction/date_table_example.sh
 
 Running `sys` gives information about the system that Nu is running on:
 
