@@ -17,7 +17,7 @@ Nu's core value is that working in a shell should be fun. To support this, we be
 
 - *Optimal performance*. While we care about performance, the focus on performance should be in service of making Nu more usable and enjoyable to use. Best performance on micro-benchmarks is a non-goal.
 - *Strictness*. We want to help users write good scripts, but we should focus on helping them write correct scripts with good errors and good documentation.
-- *POSIX-compliance*. Nu intentionally optimizes for a pleasant experience over matching how commandline programs work in a POSIX-compliant way. It's important to be able to interop between Nu commands and external commands, but maintain strict compatibility is a non-goal. 
+- *POSIX-compliance*. Nu intentionally optimizes for a pleasant experience over matching how commandline programs work in a POSIX-compliant way. It's important to be able to interop between Nu commands and external commands, but maintaining strict compatibility is a non-goal. 
 - *Paradigm adherence*. Nu looks at the shell space flexibly, and borrows good ideas where possible from functional programming, systems programming, OOP, and more. Following any particular paradigm rigidly does not serve the goals of the Nu project.
 
 ## Basic Design
