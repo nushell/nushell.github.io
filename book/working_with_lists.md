@@ -17,7 +17,7 @@ let names = [Mark Tami Amanda Jeremy]
 echo $names | each { build-string "Hello, " $it "!" }
 # Outputs "Hello, Mark!" and three more similar lines.
 
-echo $names | each -n { build-string $($it.index | inc) ")" $it.item }
+echo $names | each -n { build-string ($it.index | inc) ")" $it.item }
 ```
 
 The `split row` command creates a list from a string based on a delimiter.
@@ -72,10 +72,10 @@ For example:
 
 ```bash
 # Do any color names end with "e"?
-echo $colors | any? $(echo $it | str ends-with "e") # true
+echo $colors | any? (echo $it | str ends-with "e") # true
 
 # Is the length of any color name less than 3?
-echo $colors | any? $(echo $it | str length) < 3 # false
+echo $colors | any? (echo $it | str length) < 3 # false
 
 # Are any scores greater than 7?
 echo $scores | any? $it > 7 # true
@@ -90,10 +90,10 @@ For example:
 
 ```bash
 # Do all color names end with "e"?
-echo $colors | all? $(echo $it | str ends-with "e") # false
+echo $colors | all? (echo $it | str ends-with "e") # false
 
 # Is the length of all color names greater than or equal to 3?
-echo $colors | all? $(echo $it | str length) >= 3 # true
+echo $colors | all? (echo $it | str length) >= 3 # true
 
 # Are all scores greater than 7?
 echo $scores | all? $it > 7 # false
@@ -108,8 +108,8 @@ For example:
 
 ```bash
 let colors = [yellow green]
-let colors = $(echo $colors | prepend red)
-let colors = $(echo $colors | append purple)
+let colors = (echo $colors | prepend red)
+let colors = (echo $colors | append purple)
 echo $colors # [red yellow green purple]
 ```
 
@@ -136,13 +136,13 @@ For example:
 
 ```bash
 let scores = [3 8 4]
-echo "total =" $(echo $scores | reduce { = $acc + $it }) # 15
+echo "total =" (echo $scores | reduce { $acc + $it }) # 15
 
-echo "total =" $(echo $scores | math sum) # easier approach, same result
+echo "total =" (echo $scores | math sum) # easier approach, same result
 
-echo "product =" $(echo $scores | reduce --fold 1 { = $acc * $it }) # 96
+echo "product =" (echo $scores | reduce --fold 1 { $acc * $it }) # 96
 
-echo $scores | reduce -n { = $acc.item + $it.index * $it.item }
+echo $scores | reduce -n { $acc.item + $it.index * $it.item }
 # This should produce 0*3 + 1*8 + 2*4 = 16.
 # But see https://github.com/nushell/nushell/issues/3298.
 ```

@@ -29,16 +29,16 @@ We can use a variable path to evaluate the variable `$my-value` and get the valu
 testuser
 ```
 
-## Invocations
+## Subexpressions
 
-What if instead of a value, you needed to run a command and use its output? For this, you can use an invocation.
+You can always evaluate a subexpression and use its result by wrapping the expression with parentheses `()`.
 
-Invocations also start with `$` and are wrapped with parentheses. The parentheses contain a pipeline that will run to completion, and the resulting value will then be used. For example, `$(ls)` would run the `ls` command and give back the resulting table and `$(git branch --show-current)` runs the external git command and returns a string with the name of the current branch.
+The parentheses contain a pipeline that will run to completion, and the resulting value will then be used. For example, `(ls)` would run the `ls` command and give back the resulting table and `(git branch --show-current)` runs the external git command and returns a string with the name of the current branch. You can also use parentheses to run math expressions like `(2 + 3)`.
 
-Invocations can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an invocation to run a pipelines and assign this to a variable:
+Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an invocation to run a pipelines and assign this to a variable:
 
 ```
-> let names-of-big-files = $(ls | where size > 10kb)
+> let names-of-big-files = (ls | where size > 10kb)
 > echo $names-of-big-files
 ───┬────────────┬──────┬──────────┬──────────────
  # │    name    │ type │   size   │   modified   
@@ -48,9 +48,9 @@ Invocations can also be pipelines and not just single commands. If we wanted to 
 ───┴────────────┴──────┴──────────┴──────────────
 ```
 
-## Invocation paths
+## Subexpressions and paths
 
-Invocations also support paths. For example, let's say we wanted to get a list of the filenames in the current directory. One way to do this is to use a pipeline:
+Subexpressions also support paths. For example, let's say we wanted to get a list of the filenames in the current directory. One way to do this is to use a pipeline:
 
 ```
 > ls | get name
@@ -59,7 +59,7 @@ Invocations also support paths. For example, let's say we wanted to get a list o
 We can do a very similar action in a single step using an invocation path:
 
 ```
-> echo $(ls).name
+> echo (ls).name
 ```
 
 It depends on the needs of the code and your particular style which form works best for you.
