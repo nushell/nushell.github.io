@@ -13,7 +13,7 @@
 - [Aliases](aliases.md) - How to alias commands
 - [Operators](operators.md) - Operators supported by nushell
 - [Math](math.md) - Math operations in nushell
-- [Variables and invocations](variables_and_invocations.md) - Variables and invocations
+- [Variables and subexpressions](variables_and_subexpressions.md) - Working with variables and working with subexpressions
 - [Environment](environment.md) - Working with environment variables
 - [Scripts](scripts.md) - Creating your own scripts
 - [Metadata](metadata.md) - An explanation of Nu's metadata system
