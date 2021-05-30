@@ -1,7 +1,7 @@
 ---
 title: touch
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Create one or more files in the current or an already existent directory.

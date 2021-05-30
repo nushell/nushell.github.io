@@ -1,7 +1,7 @@
 ---
 title: def
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Use `def` to create a custom command.
@@ -54,7 +54,7 @@ It is possible to comment them by appending `# Comment text`!
 Example
 ```shell
 def cmd [
-parameter # Paramter Comment
+parameter # Parameter comment
 --flag: int # Flag comment
 ...rest: path # Rest comment
 ] { ... }

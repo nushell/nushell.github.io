@@ -1,7 +1,7 @@
 ---
 title: rename
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Use `rename` to give columns more appropriate names.

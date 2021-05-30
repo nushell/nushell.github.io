@@ -1,7 +1,7 @@
 ---
 title: histogram
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Creates a new table with a histogram based on the column name passed in.

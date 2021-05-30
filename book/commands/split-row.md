@@ -1,7 +1,7 @@
 ---
 title: split row
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 splits contents over multiple rows via the separator.

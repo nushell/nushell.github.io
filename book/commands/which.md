@@ -1,7 +1,7 @@
 ---
 title: which
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Finds a program file.
@@ -26,7 +26,7 @@ Usage:
 ─────────┬─────────────────
  arg     │ python
  path    │ /usr/bin/python
- builtin │ No
+ builtin │ false
 ─────────┴─────────────────
 ```
 
@@ -35,7 +35,7 @@ Usage:
 ─────────┬────────────────────────────
  arg     │ cargo
  path    │ /home/bob/.cargo/bin/cargo
- builtin │ No
+ builtin │ false
 ─────────┴────────────────────────────
 ```
 
@@ -46,7 +46,7 @@ Usage:
 ─────────┬──────────────────────────
  arg     │ ls
  path    │ nushell built-in command
- builtin │ Yes
+ builtin │ true
 ─────────┴──────────────────────────
 ```
 
@@ -55,7 +55,7 @@ Usage:
 ─────────┬──────────────────────────
  arg     │ which
  path    │ nushell built-in command
- builtin │ Yes
+ builtin │ true
 ─────────┴──────────────────────────
 ```
 
@@ -66,8 +66,8 @@ Passing the `all` flag identifies all instances of a command or binary
 ───┬─────┬──────────────────────────┬─────────
  # │ arg │ path                     │ builtin
 ───┼─────┼──────────────────────────┼─────────
- 0 │ ls  │ nushell built-in command │ Yes
- 1 │ ls  │ /bin/ls                  │ No
+ 0 │ ls  │ nushell built-in command │ true
+ 1 │ ls  │ /bin/ls                  │ false
 ───┴─────┴──────────────────────────┴─────────
 ```
 
@@ -80,7 +80,7 @@ Passing the `all` flag identifies all instances of a command or binary
 ─────────┬────────────────────────────────
  arg     │ ./foo
  path    │ /Users/josephlyons/Desktop/foo
- builtin │ No
+ builtin │ false
 ─────────┴────────────────────────────────
 ```
 
@@ -92,7 +92,7 @@ Passing the `all` flag identifies all instances of a command or binary
 ───┬─────┬───────────────┬─────────
  # │ arg │     path      │ builtin
 ───┼─────┼───────────────┼─────────
- 0 │ e   │ Nushell alias │ No
+ 0 │ e   │ Nushell alias │ false
 ───┴─────┴───────────────┴─────────
 ```
 
@@ -104,6 +104,6 @@ and custom commands
 ───┬──────────────┬────────────────────────┬─────────
  # │     arg      │          path          │ builtin
 ───┼──────────────┼────────────────────────┼─────────
- 0 │ my_cool_echo │ Nushell custom command │ No
+ 0 │ my_cool_echo │ Nushell custom command │ false
 ───┴──────────────┴────────────────────────┴─────────
 ```

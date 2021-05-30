@@ -45,6 +45,12 @@ To do so, you can use the `let-env` command.
 
 let-env is similar to the **export** command in bash.
 
+If you have more than one environment variable you'd like to set, you can create a table of name/value pairs and load multiple variables at the same time.
+
+```
+> load-env [[name, value]; ["BOB", "FOO"] ["JAY", "BAR"]]
+```
+
 ## Permanent environment variables
 
 You can also set environment variables that are set at startup and are available for the duration of Nushell running. These can be set in the `env` section of the [config](configuration.md).

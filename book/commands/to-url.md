@@ -1,7 +1,7 @@
 ---
 title: to url
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Converts table data into [url-encoded text](https://url.spec.whatwg.org/#application/x-www-form-urlencoded).

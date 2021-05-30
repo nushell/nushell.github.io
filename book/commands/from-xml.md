@@ -1,7 +1,7 @@
 ---
 title: from xml
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Parse text as `.xml` and create table. Use this when nushell cannot determine the input file extension.
