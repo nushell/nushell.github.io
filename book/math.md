@@ -81,7 +81,7 @@ You may have already used this functionality before. If, for example, we wanted 
 > ls | where size > 10kb
 ```
 
-The `where size > 10kb` is a command with two parts: the command names `where` and the short-hand math expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`.  If we look at the fully expanded form, we would see:
+The `where size > 10kb` is a command with two parts: the command name `where` and the short-hand math expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`.  If we look at the fully expanded form, we would see:
 
 ```
 > ls | where {|$it| $it.size > 10kb }
@@ -89,4 +89,4 @@ The `where size > 10kb` is a command with two parts: the command names `where` a
 
 Rather than having to type all this out every time a command needs to work with column data, we use this short-hand mode to access column data.
 
-For the expansion to work, the column must appear on the left-hand side of the operation. Above, `size` appears on the left-hand side of the comparison, which allows the expression to expand into the full math mode block.
+For the expansion to work, the column name must appear on the left-hand side of the operation. Above, `size` appears on the left-hand side of the comparison, which allows the expression to expand into the full math mode block.
