@@ -31,7 +31,7 @@ testuser
 
 ## Subexpressions
 
-You can always evaluate a subexpression and use its result by wrapping the expression with parentheses `()`.
+You can always evaluate a subexpression and use its result by wrapping the expression with parentheses `()`. Note that previous versions of Nushell (prior to 0.32) used `$()`.
 
 The parentheses contain a pipeline that will run to completion, and the resulting value will then be used. For example, `(ls)` would run the `ls` command and give back the resulting table and `(git branch --show-current)` runs the external git command and returns a string with the name of the current branch. You can also use parentheses to run math expressions like `(2 + 3)`.
 
