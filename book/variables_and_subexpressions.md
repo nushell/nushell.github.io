@@ -1,6 +1,6 @@
-# Variables and Invocations
+# Variables and Subexpressions
 
-There are two types of evaluation expressions in Nushell: variables and invocations. You know that you're looking at an evaluation expression because it begins with a dollar sign (`$`). This indicates that when Nushell gets the value in this position, it will need to run an evaluation step to process the expression and then use the resulting value. Both evaluation expression forms support a simple form and a 'path' form for working with more complex data.
+There are two types of evaluation expressions in Nushell: variables and subexpressions. You know that you're looking at an evaluation expression because it begins with a dollar sign (`$`). This indicates that when Nushell gets the value in this position, it will need to run an evaluation step to process the expression and then use the resulting value. Both evaluation expression forms support a simple form and a 'path' form for working with more complex data.
 
 ## Variables
 
@@ -35,7 +35,7 @@ You can always evaluate a subexpression and use its result by wrapping the expre
 
 The parentheses contain a pipeline that will run to completion, and the resulting value will then be used. For example, `(ls)` would run the `ls` command and give back the resulting table and `(git branch --show-current)` runs the external git command and returns a string with the name of the current branch. You can also use parentheses to run math expressions like `(2 + 3)`.
 
-Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an invocation to run a pipelines and assign this to a variable:
+Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an subexpression to run a pipelines and assign this to a variable:
 
 ```
 > let names-of-big-files = (ls | where size > 10kb)
@@ -56,7 +56,7 @@ Subexpressions also support paths. For example, let's say we wanted to get a lis
 > ls | get name
 ```
 
-We can do a very similar action in a single step using an invocation path:
+We can do a very similar action in a single step using a subexpression path:
 
 ```
 > echo (ls).name
