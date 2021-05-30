@@ -1,13 +1,11 @@
 # Math
 
-Sometimes you just need to add a few numbers when you're working on a task.  Nu offers a set of basic math operations that you can use:
-
-To get into "math mode", you start the command with an `=`.  This lets Nu know what you're about to write will use operators.  Some commands, like `where` will do this for you so that you don't have to.
+Sometimes you just need to add a few numbers when you're working on a task.  Nu offers a set of basic math operations that you can use. Math expressions are available wherever you can call a command.
 
 ## Add, Subtract, Multiply, Divide
 
 ```
-> = 1 + 3
+> 1 + 3
 4
 ```
 
@@ -22,12 +20,12 @@ You can use parentheses to group math expression in math mode. This allows you t
 You can check if a value is in a set of values or not using the `in` and `not-in` operators.
 
 ```
-> = 1 in [1 2 3]
+> 1 in [1 2 3]
 true
 ```
 
 ```
-> = 1 not-in [1 2 3]
+> 1 not-in [1 2 3]
 false
 ```
 
@@ -36,12 +34,12 @@ false
 You can check to see if a string is inside of another string, or not inside of another string, using `=~` and `!~`.
 
 ```
-> = "foobar" =~ "foo"
+> "foobar" =~ "foo"
 true
 ```
 
 ```
-> = "foobar" !~ "baz"
+> "foobar" !~ "baz"
 true
 ```
 
@@ -69,7 +67,7 @@ Math operations are evaluated in the follow order (from highest precedence to lo
 * Add (`+`) and Subtract (`-`)
 
 ```
-> = 3 * (1 + 2)
+> 3 * (1 + 2)
 9
 ```
 
@@ -86,9 +84,9 @@ You may have already used this functionality before. If, for example, we wanted 
 The `where size > 10kb` is a command with two parts: the command names `where` and the short-hand math expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`.  If we look at the fully expanded form, we would see:
 
 ```
-> ls | where { = $it.size > 10kb }
+> ls | where {|$it| $it.size > 10kb }
 ```
 
-The `=` gives us the full math mode. Rather than having to type all this out every time a command needs to work with column data, we use this short-hand mode to access column data.
+Rather than having to type all this out every time a command needs to work with column data, we use this short-hand mode to access column data.
 
 For the expansion to work, the column must appear on the left-hand side of the operation. Above, `size` appears on the left-hand side of the comparison, which allows the expression to expand into the full math mode block.

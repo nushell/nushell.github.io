@@ -204,6 +204,8 @@ We can also create a table with multiple rows of data:
 
 Blocks represent a block of code in Nu. For example, in the command `each { echo $it }` the block is the portion contained in curly braces, `{ echo $it }`. Blocks are a useful way of representing code that can be executed on each row of data.
 
+Blocks can also include parameters. These parameters are listed between a pair of pipe symbols.  For example, you can change the parameter set by the `each` command using: `each {|x| echo $x }`.
+
 ## Groups
 
 Take this example:
