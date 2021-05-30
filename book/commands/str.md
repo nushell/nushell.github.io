@@ -1,7 +1,7 @@
 ---
 title: str
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Applies the subcommand to a value or a table.

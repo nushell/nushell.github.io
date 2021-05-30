@@ -1,7 +1,7 @@
 ---
 title: shells
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Lists all the active nu shells with a number/index, a name and the path. Also marks the current nu shell.

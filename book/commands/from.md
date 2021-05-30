@@ -1,7 +1,7 @@
 ---
 title: from
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Converts content (string or binary) into a table. The source format is specified as a subcommand, like `from csv` or `from json`.

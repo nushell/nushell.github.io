@@ -1,7 +1,7 @@
 ---
 title: skip
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Skips the first 'n' rows of a table.

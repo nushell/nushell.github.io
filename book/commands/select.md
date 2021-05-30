@@ -1,7 +1,7 @@
 ---
 title: select
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 This command displays only the column names passed on to it.

@@ -1,7 +1,7 @@
 ---
 title: random
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Use `random` to generate random values

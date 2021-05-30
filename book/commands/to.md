@@ -1,7 +1,7 @@
 ---
 title: to
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Converts table data into a string or binary. The target format is specified as a subcommand, like `to csv` or `to json`.

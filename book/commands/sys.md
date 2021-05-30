@@ -1,7 +1,7 @@
 ---
 title: sys
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 This command gives information about the system nu is running on.

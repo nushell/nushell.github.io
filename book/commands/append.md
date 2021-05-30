@@ -1,7 +1,7 @@
 ---
 title: append
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Append a row to the table.

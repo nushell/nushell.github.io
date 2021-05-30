@@ -1,7 +1,7 @@
 ---
 title: from vcf
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Parse text as `.vcf` and create table.

@@ -1,7 +1,7 @@
 ---
 title: to json
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Converts table data into JSON text.

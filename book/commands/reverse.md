@@ -1,7 +1,7 @@
 ---
 title: reverse
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 This command reverses the order of the elements in a sorted table.

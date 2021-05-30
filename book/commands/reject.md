@@ -1,7 +1,7 @@
 ---
 title: reject
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 This command removes or rejects the columns passed to it.

@@ -1,7 +1,7 @@
 ---
 title: echo
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Use `echo` to repeat arguments back to the user

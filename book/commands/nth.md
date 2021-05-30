@@ -1,7 +1,7 @@
 ---
 title: nth
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 This command returns the nth row of a table, starting from 0.

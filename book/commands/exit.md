@@ -1,7 +1,7 @@
 ---
 title: exit
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Exits the nu shell. If you have multiple nu shells, use `exit --now` to exit all of them.

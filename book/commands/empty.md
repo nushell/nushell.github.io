@@ -1,7 +1,7 @@
 ---
 title: empty
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Check for empty values. Pass the column names to check emptiness. Optionally pass a block as the last parameter if setting contents to empty columns is wanted.
@@ -28,12 +28,12 @@ Given the following meals
 Show the empty contents
 ```shell
 > echo [[meal size]; [arepa small] [taco '']] | empty? meal size
-═══╦══════╦══════
- # ║ meal ║ size
-═══╬══════╬══════
- 0 ║ No   ║ No
- 1 ║ No   ║ Yes
-═══╩══════╩══════
+═══╦═══════╦═══════
+ # ║ meal  ║ size
+═══╬═══════╬═══════
+ 0 ║ false ║ false
+ 1 ║ false ║ true
+═══╩═══════╩═══════
 ```
 
 Let's assume we have a report of totals per day. For simplicity we show just for three days `2020/04/16`, `2020/07/10`, and `2020/11/16`. Like so
@@ -60,7 +60,7 @@ We want to add two totals (numbers `33` and `37`) for the day `2020/04/16`
 
 Set a table with two numbers for the empty column
 ```shell
-> echo [[2020/04/16 2020/07/10 2020/11/16]; ['' [27] [37]]] | empty? 2020/04/16 { = [33 37] }
+> echo [[2020/04/16 2020/07/10 2020/11/16]; ['' [27] [37]]] | empty? 2020/04/16 { [33 37] }
 ═══╦════════════════╦════════════════╦════════════════
  # ║ 2020/04/16     ║ 2020/07/10     ║ 2020/11/16
 ═══╬════════════════╬════════════════╬════════════════
@@ -70,7 +70,7 @@ Set a table with two numbers for the empty column
 
 Checking all the numbers
 ```shell
-> echo [[2020/04/16 2020/07/10 2020/11/16]; ['' [27] [37]]] | empty? 2020/04/16 { = [33 37] } | pivot _ totals | get totals
+> echo [[2020/04/16 2020/07/10 2020/11/16]; ['' [27] [37]]] | empty? 2020/04/16 { [33 37] } | pivot _ totals | get totals
 ═══╦════
  0 ║ 33
  1 ║ 37

@@ -1,7 +1,7 @@
 ---
 title: update
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 Updates an existing column on a table. First parameter is the column to update and the second parameter is the value to put.

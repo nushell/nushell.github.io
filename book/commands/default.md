@@ -1,7 +1,7 @@
 ---
 title: default
 layout: command
-nu_version: 0.26.0
+nu_version: 0.32
 ---
 
 This command sets a default row's column if missing. Other commands are capable of feeding `default` with their output through pipelines.
