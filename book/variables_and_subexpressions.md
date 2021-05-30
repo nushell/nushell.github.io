@@ -31,14 +31,14 @@ testuser
 
 ## Subexpressions
 
-You can always evaluate a subexpression and use its result by wrapping the expression with parentheses `()`.
+You can always evaluate a subexpression and use its result by wrapping the expression with dollar-prefixed parentheses `$()`.
 
-The parentheses contain a pipeline that will run to completion, and the resulting value will then be used. For example, `(ls)` would run the `ls` command and give back the resulting table and `(git branch --show-current)` runs the external git command and returns a string with the name of the current branch. You can also use parentheses to run math expressions like `(2 + 3)`.
+The parentheses contain a pipeline that will run to completion, and the resulting value will then be used. For example, `$(ls)` would run the `ls` command and give back the resulting table and `$(git branch --show-current)` runs the external git command and returns a string with the name of the current branch. You can also use parentheses to run math expressions like `$(= 2 + 3)`.
 
 Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an subexpression to run a pipelines and assign this to a variable:
 
 ```
-> let names-of-big-files = (ls | where size > 10kb)
+> let names-of-big-files = $(ls | where size > 10kb)
 > echo $names-of-big-files
 ───┬────────────┬──────┬──────────┬──────────────
  # │    name    │ type │   size   │   modified   
@@ -59,7 +59,7 @@ Subexpressions also support paths. For example, let's say we wanted to get a lis
 We can do a very similar action in a single step using a subexpression path:
 
 ```
-> echo (ls).name
+> echo $(ls).name
 ```
 
 It depends on the needs of the code and your particular style which form works best for you.
