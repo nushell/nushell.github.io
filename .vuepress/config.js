@@ -73,7 +73,7 @@ module.exports = {
                 "aliases",
                 "operators",
                 "math",
-                "variables_and_invocations",
+                "variables_and_subexpressions",
                 "environment",
                 "scripts",
                 "metadata",
