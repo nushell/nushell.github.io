@@ -50,8 +50,8 @@ For example:
 
 ```bash
 let colors = [red green blue]
-= 'blue' in $colors # true
-= 'yellow' in $colors # false
+'blue' in $colors # true
+'yellow' in $colors # false
 ```
 
 The `where` command can be used to create a subset of a list.
