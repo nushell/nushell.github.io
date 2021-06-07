@@ -146,3 +146,13 @@ echo $scores | reduce -n { $acc.item + $it.index * $it.item }
 # This should produce 0*3 + 1*8 + 2*4 = 16.
 # But see https://github.com/nushell/nushell/issues/3298.
 ```
+
+
+The `wrap` command converts list to a table. Each list value will
+be converted to a separate row with single column:
+```bash
+let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
+
+# Show world clock for selected time zones
+echo $zones | wrap 'Zone' | insert Time {(date now | date to-timezone $it.Zone | date format '%Y.%m.%d %H:%M')}
+```
