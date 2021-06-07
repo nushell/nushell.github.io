@@ -17,7 +17,7 @@ let names = [Mark Tami Amanda Jeremy]
 echo $names | each { build-string "Hello, " $it "!" }
 # Outputs "Hello, Mark!" and three more similar lines.
 
-echo $names | each -n { build-string ($it.index | inc) ")" $it.item }
+echo $names | each -n { build-string ($it.index + 1) ")" $it.item }
 ```
 
 The `split row` command creates a list from a string based on a delimiter.
@@ -36,6 +36,7 @@ The `empty?` command determines whether a string, list, or table is empty.
 It can be used with lists as follows:
 
 ```bash
+let colors = [red green blue]
 = $colors | empty? # false
 
 let colors = []
@@ -49,8 +50,8 @@ For example:
 
 ```bash
 let colors = [red green blue]
-= blue in $colors # true
-= yellow in $colors # false
+= 'blue' in $colors # true
+= 'yellow' in $colors # false
 ```
 
 The `where` command can be used to create a subset of a list.
@@ -58,7 +59,7 @@ The following example gets all the colors whose names end in "e".
 
 ```bash
 let colors = [red orange yellow green blue purple]
-echo $colors | where {= $(echo $it | str ends-with 'e')}
+echo $colors | where (echo $it | str ends-with 'e')
 # The block passed to where must evaluate to a boolean.
 # This outputs the list [orange blue purple].
 
@@ -99,7 +100,7 @@ echo $colors | all? (echo $it | str length) >= 3 # true
 echo $scores | all? $it > 7 # false
 
 # Are all scores even?
-echo $scores | all $it mod 2 == 0 # false
+echo $scores | all? $it mod 2 == 0 # false
 ```
 
 The `append` command appends a single value to the end of a list.
@@ -121,8 +122,7 @@ For example:
 ```bash
 echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 
-echo [[1 2] [3 [4 5 [6 7 8]]]] |
-  flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
+echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
 The `reduce` command computes a single value from a list.
