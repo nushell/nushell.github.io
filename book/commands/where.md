@@ -29,13 +29,11 @@ Strings have two additional operators:
 
 Dates can also be compared using the duration types. For example, `where accessed > 2w` will check the date in accessed to see if it's greater than 2 weeks ago. Durations currently allow these abbreviations:
 
-- `1s` (one second)
-- `1m` (one minute)
-- `1h` (one hour)
-- `1d` (one day)
-- `1w` (one week)
-- `1M` (one month)
-- `1y` (one year)
+- `1sec` (one second)
+- `1min` (one minute)
+- `1hr` (one hour)
+- `1day` (one day)
+- `1wk` (one week)
 
 ## Boolean check
 
@@ -80,7 +78,7 @@ Where with the form `| where readonly` is used to check boolean values. For exam
 ```
 
 ```shell
-> ls -l | where accessed <= 1w
+> ls -l | where accessed <= 1wk
 ───┬────────────────────┬──────┬────────┬──────────┬───────────┬─────────────┬───────┬──────────┬──────────────┬─────────────┬─────────────
  # │ name               │ type │ target │ readonly │ mode      │ uid         │ group │ size     │ created      │ accessed    │ modified
 ───┼────────────────────┼──────┼────────┼──────────┼───────────┼─────────────┼───────┼──────────┼──────────────┼─────────────┼─────────────

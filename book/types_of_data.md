@@ -109,8 +109,6 @@ This chart shows all durations currently supported:
 |1hr       | one hour   |
 |1day      | one day    |
 |1wk       | one week   |
-|1mon      | one month  |
-|1yr       | one year   |
 
 ## Ranges
 
