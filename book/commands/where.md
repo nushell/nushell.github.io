@@ -27,7 +27,7 @@ Strings have two additional operators:
 - `=~` (fuzzy match to allow)
 - `!~` (fuzzy match to not allow)
 
-Dates can also be compared using the duration types. For example, `where accessed > 2w` will check the date in accessed to see if it's greater than 2 weeks ago. Durations currently allow these abbreviations:
+Dates can also be compared using the duration types. For example, `where accessed > 2wk` will check the date in accessed to see if it's greater than 2 weeks ago. Durations currently allow these abbreviations:
 
 - `1sec` (one second)
 - `1min` (one minute)
