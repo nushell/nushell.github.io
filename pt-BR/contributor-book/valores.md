@@ -69,7 +69,7 @@ Outros tipos de dados que talvez sejam um pouco diferentes do normal:
 * `Line(String)` = Um valor do tipo string com um carriage return (ou cr/lf) no final
 * `ColumnPath(ColumnPath)` = Um caminho para percorrer até chegar a um valor em uma tabela
 * `Pattern(string)` = um padrão glob (como `nu*` em `ls nu*`)
-* `Duration(u64)` = Uma contagem no valor de segundos (como `1h`, `3600s`, `1440m`, `1d`, `86400s` em `echo 1h 3600s 1440m 1d 86400s` )
+* `Duration(u64)` = Uma contagem no valor de segundos (como `1hr` em `ls | where modified < 1hr` )
 * `Range(Box<Range>)` = Um intervalo de valores (como `0..2` em `ls | range 0..2`)
 * `Path(PathBuf)` = um caminho de arquivo
 * `Binary(Vec<u8>)` = um array de bytes

@@ -54,7 +54,7 @@ Column pathsはテーブルにおける特定のサブテーブル、列、行�
 
 Durationは時間の長さを表します。1秒、5週間、1年はすべてDurationの値です。
 
-例) `1w`は1週間を表すDurationです。
+例) `1wk`は1週間を表すDurationです。
 
 この表は現在サポートされているすべてのDurationを示しています。
 
@@ -65,8 +65,6 @@ Durationは時間の長さを表します。1秒、5週間、1年はすべてDur
 |1hr       | one hour   |
 |1day      | one day    |
 |1wk       | one week   |
-|1mon      | one month  |
-|1yr       | one year   |
 
 ### Ranges
 

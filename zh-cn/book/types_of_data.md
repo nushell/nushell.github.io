@@ -53,7 +53,7 @@ Lines 是隐式带有依赖操作系统的换行符的字符串。
 
 持续时间表示一定长度的时间段。一秒、五周、一年等等都是持续时间。
 
-例如 `1w` 表示 one week，即一周。
+例如 `1wk` 表示 one week，即一周。
 
 这个表显示了目前支持的时间单位：
 
@@ -64,8 +64,6 @@ Lines 是隐式带有依赖操作系统的换行符的字符串。
 |1hr       | one hour   | 一时 |
 |1day      | one day    | 一日 |
 |1wk       | one week   | 一周 |
-|1mon      | one month  | 一月 |
-|1yr       | one year   | 一年 |
 
 ### 范围 Ranges
 
