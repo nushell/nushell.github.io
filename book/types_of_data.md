@@ -35,14 +35,14 @@ Double quotes are the most common form of quotes and one you may see whenever te
 
 Single quotes also give you a string value, just like double quotes. The difference here is that they allow you to use double quotes in the text: `'he said "can you grab my glass?"'`
 
-**Backtick quotes**
+**String interpolation**
 ```
 `my message`
 ```
-A powerful form of string uses backticks. These allow you to create a string from inputs in the pipeline.
+Nushell also string interpolation, allowing you to run sub-expressions inside of strings.
 
 ```
-> ls | each { echo `{{name}} is {{size}}` }
+> ls | each { echo $"($it.name) is ($it.size)" }
 ───┬─────────────────────
  0 │ genawait is 4.1 KB  
  1 │ learncpp is 4.1 KB  
