@@ -37,7 +37,7 @@ Single quotes also give you a string value, just like double quotes. The differe
 
 **String interpolation**
 ```
-`my message`
+$"my message"
 ```
 Nushell also string interpolation, allowing you to run sub-expressions inside of strings.
 
