@@ -61,8 +61,11 @@ To see all the dataframes that are stored in memory you can use
 ```
 > dataframe list
 
+───┬──────┬──────┬─────────┬────────────────────────
  # │ name │ rows │ columns │        location
- 0 │ $df  │ 10   │ 8       │ test_small.csv
+───┼──────┼──────┼─────────┼────────────────────────
+ 0 │ $df  │ 10   │ 8       │ ..\test_small.csv
+───┴──────┴──────┴─────────┴────────────────────────
 ```
 
 As you can see, the command lists the created dataframes together with basic
@@ -82,8 +85,11 @@ that exist in `df` by using the `aggregate` command
 ```
 > $df | dataframe aggregate sum
 
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬──────
  # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼──────
  0 │    40 │   145 │  4.5000 │ 46.0000 │       │        │       │
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴──────
 ```
 
 As you can see, the aggregate function computes the sum for those columns where
@@ -93,8 +99,11 @@ command
 ```
 $df | dataframe aggregate sum | dataframe select [int_1 int_2 float_1 float_2]
 
+───┬───────┬───────┬─────────┬─────────
  # │ int_1 │ int_2 │ float_1 │ float_2
+───┼───────┼───────┼─────────┼─────────
  0 │    40 │   145 │  4.5000 │ 46.0000
+───┴───────┴───────┴─────────┴─────────
 ```
 
 you can even store the result from this aggregation as you would store any
@@ -109,9 +118,12 @@ and you can see that now we have to dataframes stored in memory
 ```
 > dataframe list
 
+───┬──────┬──────┬─────────┬────────────────────────
  # │ name │ rows │ columns │        location
- 0 │ $df  │ 10   │ 8       │ ..\data\test_small.csv
+───┼──────┼──────┼─────────┼────────────────────────
+ 0 │ $df  │ 10   │ 8       │ ..\test_small.csv
  1 │ $res │ 1    │ 4       │ stream
+───┴──────┴──────┴─────────┴────────────────────────
 ```
 
 pretty neat isn't it?
@@ -142,11 +154,14 @@ called `int_1`
 ```
 > $df | dataframe join $df_a [int_1] [int_1]
 
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬─────────┬─────────────┬───────────────┬───────────────┬─────────────
  # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word   │ int_2_right │ float_1_right │ float_2_right │ first_right
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼─────────┼─────────────┼───────────────┼───────────────┼─────────────
  0 │     6 │    16 │  0.6000 │  5.0000 │ b     │ a      │ a     │ sixth   │          11 │        0.1000 │        0.0000 │ b
  1 │     7 │    17 │  0.7000 │  6.0000 │ b     │ c      │ a     │ seventh │          12 │        0.2000 │        1.0000 │ a
  2 │     8 │    18 │  0.8000 │  7.0000 │ c     │ c      │ b     │ eight   │          13 │        0.3000 │        2.0000 │ a
  3 │     9 │    19 │  0.9000 │  8.0000 │ c     │ c      │ b     │ ninth   │          14 │        0.4000 │        3.0000 │ a
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴─────────┴─────────────┴───────────────┴───────────────┴─────────────
 ```
 
 By default, the join command does an inner join, meaning that it will keep the
@@ -170,8 +185,11 @@ To create a `GroupBy` object you only need to use the `goupby` command
 > let group = ($df | dataframe group-by [first])
 > $group
 
+───┬──────────┬───────
  # │ property │ value
+───┼──────────┼───────
  0 │ group by │ first
+───┴──────────┴───────
 ```
 
 When printing the `GroupBy` object we can see the columns that are used as
@@ -179,12 +197,15 @@ criteria to group the dataframe. Using the `GroupBy` we can aggregate the
 dataframe using multiple operations
 
 ```
-$group | aggregate sum
+$group | dataframe aggregate sum
 
+───┬───────┬───────────┬───────────┬─────────────┬─────────────
  # │ first │ int_1_sum │ int_2_sum │ float_1_sum │ float_2_sum
+───┼───────┼───────────┼───────────┼─────────────┼─────────────
  0 │ a     │         6 │        36 │      0.6000 │      4.0000
  1 │ b     │        17 │        62 │      2.2000 │     18.0000
  2 │ c     │        17 │        47 │      1.7000 │     24.0000
+───┴───────┴───────────┴───────────┴─────────────┴─────────────
 ```
 
 and using the same `GroupBy` you can perform now another operation on the
@@ -193,10 +214,13 @@ whole dataframe, like `min` in this case
 ```
 $group | aggregate min
 
+───┬───────┬───────────┬───────────┬─────────────┬─────────────
  # │ first │ int_1_min │ int_2_min │ float_1_min │ float_2_min
+───┼───────┼───────────┼───────────┼─────────────┼─────────────
  0 │ a     │         1 │        11 │      0.1000 │      1.0000
  1 │ b     │         0 │        14 │      0.4000 │      3.0000
  2 │ c     │         0 │        10 │      0.0000 │      7.0000
+───┴───────┴───────────┴───────────┴─────────────┴─────────────
 ```
 
 by the way, you have the option to select columns when doing the `aggregate`
