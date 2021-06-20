@@ -337,14 +337,6 @@ The configuration file is loaded from a default location. To find what this loca
 /home/jonathant/.config/nu/config.toml
 ```
 
-### Loading the config from a file
-
-You may wish to load the configuration from a different file than the default. To do so, use the `load` parameter:
-
-```
-> config load myconfiguration.toml
-```
-
 ## Configuring Nu as a login shell
 
 To use Nu as a login shell, you'll need to configure the `path` and `env` configuration variables. With these, you'll have enough support to run external commands as a login shell.
