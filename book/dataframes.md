@@ -40,8 +40,8 @@ int_1,int_2,float_1,float_2,first,second,third,word
 0,10,0.0,9.0,c,c,b,zero
 ```
 
-Save the file however you want to, for the sake of these examples the file will
-be called `test_small.csv`.
+Save the file and name it however you want to, for the sake of these examples
+the file will be called `test_small.csv`.
 
 Now, to read that file as a dataframe use the `dataframe load` command like
 this:
@@ -71,8 +71,8 @@ To see all the dataframes that are stored in memory you can use
 As you can see, the command lists the created dataframes together with basic
 information about them.
 
-> Note: If you want to see all the commands that you have available to work
-> with databases you can use `help dataframe`
+> Note: If you want to see all the dataframe commands that are available you
+> can use `help dataframe`
 
 With the dataframe in memory we can start doing column operations with the
 `DataFrame`
@@ -93,8 +93,8 @@ that exist in `df` by using the `aggregate` command
 ```
 
 As you can see, the aggregate function computes the sum for those columns where
-a sum makes sense. You can select the columns you want by using the `select`
-command
+a sum makes sense. If you want to filter out the text column, you can select
+the columns you want by using the `select` command
 
 ```
 $df | dataframe aggregate sum | dataframe select [int_1 int_2 float_1 float_2]
@@ -113,7 +113,7 @@ other nushell variable
 > let res = ($df | dataframe aggregate sum | dataframe select [int_1 int_2 float_1 float_2])
 ```
 
-and you can see that now we have to dataframes stored in memory
+and now we have two dataframes stored in memory
 
 ```
 > dataframe list
@@ -129,9 +129,8 @@ and you can see that now we have to dataframes stored in memory
 pretty neat isn't it?
 
 You can perform several aggregations on the dataframe in order to extract basic
-information from the dataframe. You can explore what other options there are
-for the aggregate command, let's continue with more interesting dataframe
-commands.
+information from the dataframe and do basic data analysis on your brand new
+dataframe.
 
 ## Joining a DataFrame
 
@@ -148,8 +147,10 @@ int_1,int_2,float_1,float_2,first
 6,11,0.1,0.0,b
 ```
 
-Now, with the second dataframe loaded in memory we can join them using the column
-called `int_1`
+> Note: Use the `dataframe load` command to create the new variable
+
+Now, with the second dataframe loaded in memory we can join them using the
+column called `int_1`
 
 ```
 > $df | dataframe join $df_a [int_1] [int_1]
@@ -166,20 +167,20 @@ called `int_1`
 
 By default, the join command does an inner join, meaning that it will keep the
 rows where both dataframes share the same value. You can select a left join to
-keep the missing columns from the left dataframe. You can also save this result
+keep the missing rows from the left dataframe. You can also save this result
 in order to use for further operations.
 
 ## DataFrame groupby
 
 One of the most powerful operations that can be performed with a DataFrame is
-the `groupby`. This command will allow you to perform aggregation operations
+the `group-by`. This command will allow you to perform aggregation operations
 based on a grouping criteria. In nushell, a `GroupBy` is a type of object that
 can be stored and reused for multiple aggregations. This is quite handy, since
-the creation of the grouped pairs is the expensive operation while doing
-groupby and there is no need to repeat it is you are planning to do multiple
-operations.
+the creation of the grouped pairs is the most expensive operation while doing
+groupby and there is no need to repeat it if you are planning to do multiple
+operations with the same group condition.
 
-To create a `GroupBy` object you only need to use the `goupby` command
+To create a `GroupBy` object you only need to use the `group-by` command
 
 ```
 > let group = ($df | dataframe group-by [first])
@@ -224,7 +225,7 @@ $group | aggregate min
 ```
 
 by the way, you have the option to select columns when doing the `aggregate`
-command
+command, instead of using the `dataframe select` command
 
 ```
 > $group | dataframe aggregate mean [int_1 int_2]
@@ -238,9 +239,9 @@ command
 ───┴───────┴────────────┴────────────
 ```
 
-and finally, with the groupby object we can create a pivot table. Lets use
-the column called `second` as the pivot column and the column `float_1` as
-the value column
+the created `GroupBy` object is so handy that it can even used as base for
+pivoting a table. As an example, Lets use the column called `second` as the
+pivot column and the column `float_1` as the value column
 
 
 ```
@@ -255,5 +256,74 @@ the value column
 ───┴───────┴────────┴────────┴────────
 ```
 
-As you can see, the `GroupBy` object is a very powerful variable to keep in
-memory.
+As you can see, the `GroupBy` object is a very powerful variable and it is
+worthy it to keep in memory to keep exploring your dataset.
+
+## Creating Dataframes
+
+It is also possible to construct dataframes from basic nushell primitives, such
+as integers, decimals, or strings. Let's create a small dataframe using the
+command `to-df`.
+
+```
+> let a = ([[a b]; [1 2] [3 4] [5 6]] | dataframe to-df)
+> $a
+
+───┬───┬───
+ # │ b │ a
+───┼───┼───
+ 0 │ 2 │ 1
+ 1 │ 4 │ 3
+ 2 │ 6 │ 5
+───┴───┴───
+```
+
+> Note: For the time being, not all of Nushell primitives can be converted into
+> a dataframe. This will change in the future, as the dataframe feature matures
+
+We can append columns to a dataframe in order to create a new variable. As an
+example, let's append two columns to our mini dataframe `$a`
+
+```
+> let a2 = ($a | dataframe with-column $a.a --name a2 | dataframe with-column $a.a --name a3)
+
+───┬───┬───┬────┬────
+ # │ b │ a │ a2 │ a3
+───┼───┼───┼────┼────
+ 0 │ 2 │ 1 │  1 │  1
+ 1 │ 4 │ 3 │  3 │  3
+ 2 │ 6 │ 5 │  5 │  5
+───┴───┴───┴────┴────
+```
+
+the powerful Nushell's piping syntax allows us to create new dataframes by
+taking data from other dataframes and append it to them. Now, if you list your
+dataframes you will see in total four dataframes
+
+```
+> dataframe list
+
+───┬───────┬──────┬─────────┬────────────────────────
+ # │  name │ rows │ columns │        location
+───┼───────┼──────┼─────────┼────────────────────────
+ 0 │ $a    │ 3    │ 2       │ stream
+ 1 │ $a2   │ 3    │ 4       │ stream
+ 2 │ $df_a │ 4    │ 5       │ ..\test_small.csv
+ 3 │ $df   │ 10   │ 8       │ ..\test_small.csv
+───┴───────┴──────┴─────────┴────────────────────────
+```
+
+One thing that is important to mention is how the memory is being optimized
+while working with dataframes, and this is thanks to Apache Arrow and Polars.
+In a very simple representation, each column in a DataFrame is an Arrow Array,
+which is using several memory specifications in order to maintain the data as
+packed as possible ([columnar
+specification](https://arrow.apache.org/docs/format/Columnar.html)). The other
+optimization trick is the fact that whenever possible, the columns from the
+dataframes are shared between dataframes, avoiding memory duplication for the
+same data. This means that dataframes `$a` and `$a2` are sharing the same two
+columns we created using the `to-df` command. For this reason, it isn't
+possible to change the value of a column in a dataframe. However, you can
+create new columns based on data from other columns or dataframes.
+
+## Working with Series
