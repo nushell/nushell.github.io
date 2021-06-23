@@ -46,7 +46,7 @@ the file will be called `test_small.csv`.
 Now, to read that file as a dataframe use the `dataframe load` command like
 this:
 
-```
+```shell
 > let df = (dataframe load test_small.csv)
 ```
 
@@ -58,7 +58,7 @@ created.
 
 To see all the dataframes that are stored in memory you can use
 
-```
+```shell
 > dataframe list
 
 ───┬──────┬──────┬─────────┬────────────────────────
@@ -82,7 +82,7 @@ With the dataframe in memory we can start doing column operations with the
 Let's start with basic aggregations on the dataframe. Let's sum all the columns
 that exist in `df` by using the `aggregate` command
 
-```
+```shell
 > $df | dataframe aggregate sum
 
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬──────
@@ -96,7 +96,7 @@ As you can see, the aggregate function computes the sum for those columns where
 a sum makes sense. If you want to filter out the text column, you can select
 the columns you want by using the `select` command
 
-```
+```shell
 $df | dataframe aggregate sum | dataframe select [int_1 int_2 float_1 float_2]
 
 ───┬───────┬───────┬─────────┬─────────
@@ -109,13 +109,13 @@ $df | dataframe aggregate sum | dataframe select [int_1 int_2 float_1 float_2]
 you can even store the result from this aggregation as you would store any
 other nushell variable
 
-```
+```shell
 > let res = ($df | dataframe aggregate sum | dataframe select [int_1 int_2 float_1 float_2])
 ```
 
 and now we have two dataframes stored in memory
 
-```
+```shell
 > dataframe list
 
 ───┬──────┬──────┬─────────┬────────────────────────
@@ -152,7 +152,7 @@ int_1,int_2,float_1,float_2,first
 Now, with the second dataframe loaded in memory we can join them using the
 column called `int_1`
 
-```
+```shell
 > $df | dataframe join $df_a [int_1] [int_1]
 
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬─────────┬─────────────┬───────────────┬───────────────┬─────────────
@@ -182,7 +182,7 @@ operations with the same group condition.
 
 To create a `GroupBy` object you only need to use the `group-by` command
 
-```
+```shell
 > let group = ($df | dataframe group-by [first])
 > $group
 
@@ -197,7 +197,7 @@ When printing the `GroupBy` object we can see the columns that are used as
 criteria to group the dataframe. Using the `GroupBy` we can aggregate the
 dataframe using multiple operations
 
-```
+```shell
 $group | dataframe aggregate sum
 
 ───┬───────┬───────────┬───────────┬─────────────┬─────────────
@@ -212,7 +212,7 @@ $group | dataframe aggregate sum
 and using the same `GroupBy` you can perform now another operation on the
 whole dataframe, like `min` in this case
 
-```
+```shell
 $group | aggregate min
 
 ───┬───────┬───────────┬───────────┬─────────────┬─────────────
@@ -227,7 +227,7 @@ $group | aggregate min
 by the way, you have the option to select columns when doing the `aggregate`
 command, instead of using the `dataframe select` command
 
-```
+```shell
 > $group | dataframe aggregate mean [int_1 int_2]
 
 ───┬───────┬────────────┬────────────
@@ -244,7 +244,7 @@ pivoting a table. As an example, Lets use the column called `second` as the
 pivot column and the column `float_1` as the value column
 
 
-```
+```shell
 > $group | dataframe pivot second float_1 sum
 
 ───┬───────┬────────┬────────┬────────
@@ -265,7 +265,7 @@ It is also possible to construct dataframes from basic nushell primitives, such
 as integers, decimals, or strings. Let's create a small dataframe using the
 command `to-df`.
 
-```
+```shell
 > let a = ([[a b]; [1 2] [3 4] [5 6]] | dataframe to-df)
 > $a
 
@@ -284,7 +284,7 @@ command `to-df`.
 We can append columns to a dataframe in order to create a new variable. As an
 example, let's append two columns to our mini dataframe `$a`
 
-```
+```shell
 > let a2 = ($a | dataframe with-column $a.a --name a2 | dataframe with-column $a.a --name a3)
 
 ───┬───┬───┬────┬────
@@ -300,7 +300,7 @@ the powerful Nushell's piping syntax allows us to create new dataframes by
 taking data from other dataframes and append it to them. Now, if you list your
 dataframes you will see in total four dataframes
 
-```
+```shell
 > dataframe list
 
 ───┬───────┬──────┬─────────┬────────────────────────
@@ -318,7 +318,7 @@ while working with dataframes, and this is thanks to Apache Arrow and Polars.
 In a very simple representation, each column in a DataFrame is an Arrow Array,
 which is using several memory specifications in order to maintain the data as
 packed as possible ([columnar
-specification](https://arrow.apache.org/docs/format/Columnar.html)). The other
+specification](https://arrow.apache.org/docs/format/Columnar.html). The other
 optimization trick is the fact that whenever possible, the columns from the
 dataframes are shared between dataframes, avoiding memory duplication for the
 same data. This means that dataframes `$a` and `$a2` are sharing the same two
@@ -327,3 +327,198 @@ possible to change the value of a column in a dataframe. However, you can
 create new columns based on data from other columns or dataframes.
 
 ## Working with Series
+
+A `Series` is the building block of a `DataFrame`. Each Series represents a
+column and they can have multiple types, for example float, int or string.
+Let's start working with Series by creating one using the `to-series` command:
+
+```shell
+> let new = ([9 8 4] | dataframe to-series new_col)
+> $new
+
+───┬───────────────
+ # │ new_col (i64)
+───┼───────────────
+ 0 │             9
+ 1 │             8
+ 2 │             4
+───┴───────────────
+```
+
+We have created a new series from a list of integers. We can do the same by
+using floats or strings.
+
+Series have their own basic operations defined, and it can be used to create
+other Series. Let's create a new Series by doing some arithmetic on the
+previously created column.
+
+```shell
+> let new_2 = ($new * 3 + 10)
+> $new_2
+
+───┬───────────────
+ # │ new_col (i64)
+───┼───────────────
+ 0 │            37
+ 1 │            34
+ 2 │            22
+───┴───────────────
+```
+
+Now we have a new Series that was constructed by doing basic operations on the
+previous variable.
+
+> Note: If you want to see how many variables you have stored in memory you can
+> use `$scope.variables`
+
+Lets rename that series so it has a memorable name.
+
+```shell
+> let new_2 = ($new_2 | dataframe rename memorable)
+> $new_2
+
+───┬─────────────────
+ # │ memorable (i64)
+───┼─────────────────
+ 0 │              37
+ 1 │              34
+ 2 │              22
+───┴─────────────────
+```
+
+We can also do basic operations with both Series as well, as long as they have
+the same data type.
+
+```shell
+> $new_2 - $new
+
+───┬─────────────────────────────
+ # │ sub_memorable_new_col (i64)
+───┼─────────────────────────────
+ 0 │                          28
+ 1 │                          26
+ 2 │                          18
+───┴─────────────────────────────
+```
+
+And we can add them to previously defined dataframes
+
+```shell
+> let new_df = ($a | dataframe with-column $new --name new_col)
+> $new_df
+
+───┬───┬───┬─────────
+ # │ b │ a │ new_col
+───┼───┼───┼─────────
+ 0 │ 2 │ 1 │       9
+ 1 │ 4 │ 3 │       8
+ 2 │ 6 │ 5 │       4
+───┴───┴───┴─────────
+```
+
+The Series stored in a Dataframe can also be used directly, for example,
+we can multiply columns `a` and `b` to create a new Series
+
+```shell
+> $new_df.a * $new_df.b
+
+───┬───────────────
+ # │ mul_a_b (i64)
+───┼───────────────
+ 0 │             2
+ 1 │            12
+ 2 │            30
+───┴───────────────
+```
+
+and we can start piping things in order to create new columns and dataframes
+
+```shell
+> let $new_df = ($new_df | dataframe with-column ($new_df.a * $new_df.b / $new_df.new_col) --name my_sum)
+> let $new_df
+
+───┬───┬───┬─────────┬────────
+ # │ b │ a │ new_col │ my_sum
+───┼───┼───┼─────────┼────────
+ 0 │ 2 │ 1 │       9 │      0
+ 1 │ 4 │ 3 │       8 │      1
+ 2 │ 6 │ 5 │       4 │      7
+───┴───┴───┴─────────┴────────
+```
+
+Nushell piping system can help you create very interesting workflows
+
+# Filtering DataFrames
+
+Series have another key use in when working with DataFrames, and it is the fact
+that we can build boolean masks out of them. Lets start by creating a simple
+mask using the equality operator
+
+```shell
+> let mask = ($new == 8)
+> $mask
+
+───┬────────────────
+ # │ new_col (bool)
+───┼────────────────
+ 0 │ false
+ 1 │ true
+ 2 │ false
+───┴────────────────
+```
+
+and with this mask we can now filter a dataframe, like this
+
+```shell
+> $new_df | dataframe filter-with $mask
+
+───┬───┬───┬─────────┬────────
+ # │ a │ b │ new_col │ my_sum
+───┼───┼───┼─────────┼────────
+ 0 │ 3 │ 4 │       8 │      1
+───┴───┴───┴─────────┴────────
+```
+
+Now we have a new dataframe with only the values where the mask was true.
+
+The masks can also be created from Nushell lists as well, for example:
+
+```shell
+> let mask1 = ([$true $true $false] | dataframe to-series mask)
+> $new_df | dataframe filter-with $mask1
+
+───┬───┬───┬─────────┬────────
+ # │ a │ b │ new_col │ my_sum
+───┼───┼───┼─────────┼────────
+ 0 │ 1 │ 2 │       9 │      0
+ 1 │ 3 │ 4 │       8 │      1
+───┴───┴───┴─────────┴────────
+```
+
+To create complex masks, we have the `AND`
+
+```shell
+> $mask && $mask1
+
+───┬─────────────────────────
+ # │ and_new_col_mask (bool)
+───┼─────────────────────────
+ 0 │ false
+ 1 │ true
+ 2 │ false
+───┴─────────────────────────
+```
+
+and `OR` operations
+
+```shell
+> $mask || $mask1
+
+───┬────────────────────────
+ # │ or_new_col_mask (bool)
+───┼────────────────────────
+ 0 │ true
+ 1 │ true
+ 2 │ false
+───┴────────────────────────
+```
