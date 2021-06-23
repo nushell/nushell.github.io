@@ -60,8 +60,8 @@ module.exports = {
               title: "Nu Book",
               collapsable: false,
               children: [
+                "",
                 "installation",
-                "introduction",
                 "moving_around",
                 "types_of_data",
                 "loading_data",
@@ -95,7 +95,7 @@ module.exports = {
               title: "Contributor Book",
               collapsable: false,
               children: [
-                "introduction",
+                "",
                 "philosophy",
                 "values",
                 "commands",
