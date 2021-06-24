@@ -93,7 +93,7 @@ The `[line_editor]` section of the `config.toml` controls how our line editor, `
 | auto_add_history        | Enable/Disable automatically add each non-blank line to history                          | boolean    | true or false                                                            |
 | bell_style              | The bell style for the line editor                                                       | string     | audible, none, visible                                                   |
 | color_mode              | The color mode for the line editor                                                       | string     | enabled, forced, disabled                                                |
-| completion_prompt_limit | When listing completion alternatives, only display one screen of possibilities at a time |            |                                                                          |
+| completion_prompt_limit | When listing completion alternatives, only display one screen of possibilities at a time | number     |                                                                          |
 | completion_type         | Method used to iterate history items                                                     | string     | circular, list, fuzzy - note fuzzy is not currently supported by nushell |
 | edit_mode               | The mode for the line editor                                                             | string     | vi or emacs                                                             |
 | history_duplicates      | Rule to apply regarding the adding of duplicates to the history                          | string     | alwaysadd, ignoreconsecutive                                             |
@@ -118,7 +118,7 @@ The `[textview]` section of the `config.toml` file is a section with settings fo
 | tab_width                | The width of tab characters. Currently, a value of 0 will cause tabs to be passed through without expanding them. | number     |                                |
 | term_width               | The character width of the terminal                                                                               | string     |                                |
 | theme                    | Set the bat color theme to use                                                                                    | string     |                                |
-| true_color               | Enable/Disable whether the output terminal supports true color                                                    |            | true or false                  |
+| true_color               | Enable/Disable whether the output terminal supports true color                                                    | boolean    | true or false                  |
 | use_italics              | Enable/Disable italic type                                                                                        | boolean    | true or false                  |
 | vcs_modification_markers | Enable/Disable version control system modification markers                                                        | boolean    | true or false                  |
 | wrapping_mode            | Set if and how text should be wrapped                                                                             | string     | character, nowrapping          |
