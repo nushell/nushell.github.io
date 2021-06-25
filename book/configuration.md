@@ -23,7 +23,6 @@ These are at the root level, not because they're more important, but because the
 | skip_welcome_message  | Enables/Disables the nushell welcome message.                                                                        | boolean    | true or false                                                                                   |
 | startup               | Load and run command at startup. These commands can take the form of aliases, custom commands, or external commands. | array      | quoted string of commands delimited by commas between brackets `[ ]`                            |
 | table_mode            | Defines which "theme" that table drawing should use in nushell.                                                      | string     | basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other |
-| completion_match_method | Sets case-sensitivity of autocompletion                                                                            | string     | case-insensitive, case-sensitive                                                             |
 
 ### Color Config section
 
@@ -101,6 +100,7 @@ The `[line_editor]` section of the `config.toml` controls how our line editor, `
 | keyseq_timeout_ms       | Duration rustyline will wait for a character when reading an ambiguous key sequence      | string     | duration in milliseconds                                                 |
 | max_history_size        | The maximum history size                                                                 | number     |                                                                          |
 | tab_stop                | The number of characters for indented/outdented commands                                 | number     |
+| completion_match_method | Sets case-sensitivity of autocompletion                                                                            | string     | case-insensitive, case-sensitive                                                             |
 
 ### Textview section
 The `[textview]` section of the `config.toml` file is a section with settings for our textviewer which is currently [bat](https://github.com/sharkdp/bat). So, all these settings apply to the `bat` configuration built into nushell. It won't use settings you may currently have on your system if you use `bat`.
