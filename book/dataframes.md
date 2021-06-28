@@ -31,13 +31,13 @@ int_1,int_2,float_1,float_2,first,second,third,word
 1,11,0.1,1.0,a,b,c,first
 2,12,0.2,1.0,a,b,c,second
 3,13,0.3,2.0,a,b,c,third
-4,14,0.4,3.0,b,a,c,fourth
-0,15,0.5,4.0,b,a,a,fifth
-6,16,0.6,5.0,b,a,a,sixth
-7,17,0.7,6.0,b,c,a,seventh
+4,14,0.4,3.0,b,a,c,second
+0,15,0.5,4.0,b,a,a,third
+6,16,0.6,5.0,b,a,a,second
+7,17,0.7,6.0,b,c,a,third
 8,18,0.8,7.0,c,c,b,eight
 9,19,0.9,8.0,c,c,b,ninth
-0,10,0.0,9.0,c,c,b,zero
+0,10,0.0,9.0,c,c,b,ninth
 ```
 
 Save the file and name it however you want to, for the sake of these examples
@@ -158,8 +158,8 @@ column called `int_1`
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬─────────┬─────────────┬───────────────┬───────────────┬─────────────
  # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word   │ int_2_right │ float_1_right │ float_2_right │ first_right
 ───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼─────────┼─────────────┼───────────────┼───────────────┼─────────────
- 0 │     6 │    16 │  0.6000 │  5.0000 │ b     │ a      │ a     │ sixth   │          11 │        0.1000 │        0.0000 │ b
- 1 │     7 │    17 │  0.7000 │  6.0000 │ b     │ c      │ a     │ seventh │          12 │        0.2000 │        1.0000 │ a
+ 0 │     6 │    16 │  0.6000 │  5.0000 │ b     │ a      │ a     │ second  │          11 │        0.1000 │        0.0000 │ b
+ 1 │     7 │    17 │  0.7000 │  6.0000 │ b     │ c      │ a     │ third   │          12 │        0.2000 │        1.0000 │ a
  2 │     8 │    18 │  0.8000 │  7.0000 │ c     │ c      │ b     │ eight   │          13 │        0.3000 │        2.0000 │ a
  3 │     9 │    19 │  0.9000 │  8.0000 │ c     │ c      │ b     │ ninth   │          14 │        0.4000 │        3.0000 │ a
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴─────────┴─────────────┴───────────────┴───────────────┴─────────────
@@ -201,7 +201,7 @@ dataframe using multiple operations
 $group | dataframe aggregate sum
 
 ───┬───────┬───────────┬───────────┬─────────────┬─────────────
- # │ first │ int_1_sum │ int_2_sum │ float_1_sum │ float_2_sum
+ # │ first │ int_1     │ int_2     │ float_1     │ float_2
 ───┼───────┼───────────┼───────────┼─────────────┼─────────────
  0 │ a     │         6 │        36 │      0.6000 │      4.0000
  1 │ b     │        17 │        62 │      2.2000 │     18.0000
@@ -216,7 +216,7 @@ whole dataframe, like `min` in this case
 $group | aggregate min
 
 ───┬───────┬───────────┬───────────┬─────────────┬─────────────
- # │ first │ int_1_min │ int_2_min │ float_1_min │ float_2_min
+ # │ first │ int_1     │ int_2     │ float_1     │ float_2
 ───┼───────┼───────────┼───────────┼─────────────┼─────────────
  0 │ a     │         1 │        11 │      0.1000 │      1.0000
  1 │ b     │         0 │        14 │      0.4000 │      3.0000
@@ -231,7 +231,7 @@ command, instead of using the `dataframe select` command
 > $group | dataframe aggregate mean [int_1 int_2]
 
 ───┬───────┬────────────┬────────────
- # │ first │ int_1_mean │ int_2_mean
+ # │ first │ int_1      │ int_2
 ───┼───────┼────────────┼────────────
  0 │ a     │     2.0000 │    12.0000
  1 │ b     │     4.2500 │    15.5000
@@ -448,7 +448,7 @@ and we can start piping things in order to create new columns and dataframes
 
 Nushell piping system can help you create very interesting workflows
 
-# Filtering DataFrames
+## Series and masks
 
 Series have another key use in when working with DataFrames, and it is the fact
 that we can build boolean masks out of them. Lets start by creating a simple
@@ -522,3 +522,216 @@ and `OR` operations
  2 │ false
 ───┴────────────────────────
 ```
+
+We can also create a mask by checking if some values exist in other Series.
+Using the first dataframe that we created we can do something like this
+
+```shell
+> let mask3 = ($df.first | dataframe is-in ([b c] | dataframe to-series))
+
+───┬──────────────
+ # │ first (bool)
+───┼──────────────
+ 0 │ false
+ 1 │ false
+ 2 │ false
+ 3 │ true
+ 4 │ true
+ 5 │ true
+ 6 │ true
+ 7 │ true
+ 8 │ true
+ 9 │ true
+───┴──────────────
+```
+
+and this new mask can be used to filter the dataframe
+
+
+```shell
+> $df | dataframe filter-with $mask3
+
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬─────────
+ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼─────────
+ 0 │     4 │    14 │  0.4000 │  3.0000 │ b     │ a      │ c     │ second
+ 1 │     0 │    15 │  0.5000 │  4.0000 │ b     │ a      │ a     │ third
+ 2 │     6 │    16 │  0.6000 │  5.0000 │ b     │ a      │ a     │ second
+ 3 │     7 │    17 │  0.7000 │  6.0000 │ b     │ c      │ a     │ third
+ 4 │     8 │    18 │  0.8000 │  7.0000 │ c     │ c      │ b     │ eight
+ 5 │     9 │    19 │  0.9000 │  8.0000 │ c     │ c      │ b     │ ninth
+ 6 │     0 │    10 │  0.0000 │  9.0000 │ c     │ c      │ b     │ ninth
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴─────────
+```
+
+So, to conclude this section, masks are our main way to create new versions of
+dataframes.
+
+> Note. You can also use `dataframe slice` or `dataframe sample` to create new
+> dataframes from bigger dataframes
+
+Another important operation that can be done with masks is setting or replacing
+a value from a series. For example, we can change the value in the column
+`first` where the value is equal to `a`
+
+```shell
+test > $df.first | dataframe set new --mask ($df.first =~ a)
+
+───┬──────────────
+ # │ string (str)
+───┼──────────────
+ 0 │ new
+ 1 │ new
+ 2 │ new
+ 3 │ b
+ 4 │ b
+ 5 │ b
+ 6 │ b
+ 7 │ c
+ 8 │ c
+ 9 │ c
+───┴──────────────
+```
+
+## Unique values
+
+Another important operation that can be done with `Series` is to search for
+unique values in a list or column. Lets use again the first dataframe we
+created to test these operations.
+
+The first and most common operation that we have is `value_counts`. This
+command calculates a count of the unique values that exist in a Series. For
+example, we can use it to count how many occurrences we have in the column
+`first`
+
+```shell
+> $df.first | dataframe value-counts
+
+───┬───────┬────────
+ # │ first │ counts
+───┼───────┼────────
+ 0 │ b     │      4
+ 1 │ c     │      3
+ 2 │ a     │      3
+───┴───────┴────────
+```
+
+As expected, the command returns a new dataframe that can be used to do more
+queries.
+
+Continuing with our exploration of `Series`, the next thing that we can do is
+to only get the unique unique values from a series, like this
+
+```shell
+> $df.first | dataframe unique
+
+───┬─────────────
+ # │ first (str)
+───┼─────────────
+ 0 │ c
+ 1 │ b
+ 2 │ a
+───┴─────────────
+```
+
+Or we can get a mask that we can use to filter out the rows where data is
+unique or duplicated. For example, we can select the rows for unique values
+in column `word`
+
+
+```shell
+> $df | dataframe filter-with ($df.word | dataframe is-unique)
+
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────
+ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────
+ 0 │     1 │    11 │  0.1000 │  1.0000 │ a     │ b      │ c     │ first
+ 1 │     8 │    18 │  0.8000 │  7.0000 │ c     │ c      │ b     │ eight
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────
+```
+
+Or all the duplicated ones
+
+```shell
+> $df | dataframe filter-with ($df.word | dataframe is-duplicated)
+
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────
+ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────
+ 0 │     2 │    12 │  0.2000 │  1.0000 │ a     │ b      │ c     │ second
+ 1 │     3 │    13 │  0.3000 │  2.0000 │ a     │ b      │ c     │ third
+ 2 │     4 │    14 │  0.4000 │  3.0000 │ b     │ a      │ c     │ second
+ 3 │     0 │    15 │  0.5000 │  4.0000 │ b     │ a      │ a     │ third
+ 4 │     6 │    16 │  0.6000 │  5.0000 │ b     │ a      │ a     │ second
+ 5 │     7 │    17 │  0.7000 │  6.0000 │ b     │ c      │ a     │ third
+ 6 │     9 │    19 │  0.9000 │  8.0000 │ c     │ c      │ b     │ ninth
+ 7 │     0 │    10 │  0.0000 │  9.0000 │ c     │ c      │ b     │ ninth
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
+```
+
+
+## Dataframes commands
+
+So far we have seen quite a few operations that can be done using `DataFrame`s
+commands. However, the commands we have used so far, are not all the commands
+available to work with data and be assured that there will be more as the
+feature becomes more stable.
+
+The next list show the available dataframe commands with its description, and
+whenever possible, its analogous nushell command.
+
+| Command Name | Applies To | Description | Nushell Equivalent |
+| ------------ | ---------- | ----------- | ------------------ |
+| aggregate | DataFrame, GroupBy, Series | Performs an aggregation operation on a dataframe, groupby or series object| math |
+| all-false | Series | Returns true if all values are false| |
+| all-true | Series | Returns true if all values are true| |
+| arg-max | Series | Return index for max value in series| |
+| arg-min | Series | Return index for min value in series| |
+| arg-sort | Series | Returns indexes for a sorted series| |
+| arg-true | Series | Returns indexes where values are true| |
+| arg-unique | Series | Returns indexes for unique values| |
+| column | DataFrame | Returns the selected column as Series| |
+| count-null | Series | Counts null values| |
+| count-unique | Series | Counts unique value| |
+| drop | DataFrame | Creates a new dataframe by dropping the selected columns| drop |
+| drop-duplicates | DataFrame | Drops duplicate values in dataframe| |
+| drop-nulls | DataFrame, Series | Drops null values in dataframe| |
+| dtypes | DataFrame | Show dataframe data types| |
+| filter|with | DataFrame | Filters dataframe using a mask as reference| |
+| get | DataFrame | Creates dataframe with the selected columns| get |
+| group-by | DataFrame | Creates a groupby object that can be used for other aggregations| group-by |
+| head | DataFrame | Creates new dataframe with head rows| |
+| is-duplicated | Series | Creates mask indicating duplicated values| |
+| is-in | Series | Checks if elements from a series are contained in right series| |
+| is-not-null | Series | Creates mask where value is not null| |
+| is-null | Series | Creates mask where value is null| |
+| is-unique | Series | Creates mask indicating unique values| |
+| join | DataFrame | Joins a dataframe using columns as reference| |
+| list | | Lists stored dataframes| |
+| load | | Loads dataframe form csv file| load |
+| melt | DataFrame | Unpivot a DataFrame from wide to long format| |
+| pivot | GroupBy | Performs a pivot operation on a groupby object| pivot |
+| rename | Series | Renames a series| rename |
+| sample | DataFrame | Create sample dataframe| |
+| select | DataFrame | Creates a new dataframe with the selected columns| select |
+| set | Series | Sets value where given mask is true| |
+| shift | Series | Shifts the values by a given period| |
+| show | DataFrame | Converts a section of the dataframe to a Table or List value| |
+| slice | DataFrame | Creates new dataframe from a slice of rows| |
+| sort | DataFrame, Series | Creates new sorted dataframe or series| sort |
+| tail | DataFrame | Creates new dataframe with tail rows| |
+| to-csv | DataFrame | Saves dataframe to csv file| to csv |
+| to-df | | Converts a pipelined Table or List into a polars dataframe| |
+| to-dummies | DataFrame | Creates a new dataframe with dummy variables| |
+| to-parquet | DataFrame | Saves dataframe to parquet file| |
+| to-series | | Converts a pipelined List into a polars series| |
+| unique | Series | Returns unique values from a series| |
+| value-counts | Series | Returns a dataframe with the counts for unique values in series| |
+| where | DataFrame | Filter dataframe to match the condition| where |
+| with-column | DataFrame | Adds a series to the dataframe| |
+
+
+## Operation comparison
+
+
+## Future of Dataframes
