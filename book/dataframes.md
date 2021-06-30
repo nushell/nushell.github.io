@@ -137,7 +137,7 @@ dataframe.
 It is also possible to join two dataframes using a column as reference. We are
 going to join our mini dataframe with another mini dataframe. Copy these lines
 in another file and create the corresponding dataframe (for these examples we
-are going to call it test_small_a.csv)
+are going to call it `test_small_a.csv`)
 
 ```
 int_1,int_2,float_1,float_2,first
@@ -239,7 +239,7 @@ command, instead of using the `dataframe select` command
 ───┴───────┴────────────┴────────────
 ```
 
-the created `GroupBy` object is so handy that it can even used as base for
+the created `GroupBy` object is so handy that it can even be used as base for
 pivoting a table. As an example, Lets use the column called `second` as the
 pivot column and the column `float_1` as the value column
 
@@ -314,11 +314,11 @@ dataframes you will see in total four dataframes
 ```
 
 One thing that is important to mention is how the memory is being optimized
-while working with dataframes, and this is thanks to Apache Arrow and Polars.
-In a very simple representation, each column in a DataFrame is an Arrow Array,
-which is using several memory specifications in order to maintain the data as
-packed as possible ([columnar
-specification](https://arrow.apache.org/docs/format/Columnar.html). The other
+while working with dataframes, and this is thanks to **Apache Arrow** and
+**Polars**. In a very simple representation, each column in a DataFrame is an
+Arrow Array, which is using several memory specifications in order to maintain
+the data as packed as possible (check [Arrow columnar
+format](https://arrow.apache.org/docs/format/Columnar.html)). The other
 optimization trick is the fact that whenever possible, the columns from the
 dataframes are shared between dataframes, avoiding memory duplication for the
 same data. This means that dataframes `$a` and `$a2` are sharing the same two
@@ -348,7 +348,7 @@ Let's start working with Series by creating one using the `to-series` command:
 We have created a new series from a list of integers. We can do the same by
 using floats or strings.
 
-Series have their own basic operations defined, and it can be used to create
+Series have their own basic operations defined, and they can be used to create
 other Series. Let's create a new Series by doing some arithmetic on the
 previously created column.
 
@@ -371,7 +371,7 @@ previous variable.
 > Note: If you want to see how many variables you have stored in memory you can
 > use `$scope.variables`
 
-Lets rename that series so it has a memorable name.
+Lets rename that series so it has a memorable name
 
 ```shell
 > let new_2 = ($new_2 | dataframe rename memorable)
@@ -387,7 +387,7 @@ Lets rename that series so it has a memorable name.
 ```
 
 We can also do basic operations with both Series as well, as long as they have
-the same data type.
+the same data type
 
 ```shell
 > $new_2 - $new
@@ -446,7 +446,7 @@ and we can start piping things in order to create new columns and dataframes
 ───┴───┴───┴─────────┴────────
 ```
 
-Nushell piping system can help you create very interesting workflows
+Nushell piping system can help you create very interesting workflows.
 
 ## Series and masks
 
@@ -575,7 +575,7 @@ a value from a series. For example, we can change the value in the column
 `first` where the value is equal to `a`
 
 ```shell
-test > $df.first | dataframe set new --mask ($df.first =~ a)
+> $df.first | dataframe set new --mask ($df.first =~ a)
 
 ───┬──────────────
  # │ string (str)
@@ -677,8 +677,8 @@ commands. However, the commands we have used so far, are not all the commands
 available to work with data and be assured that there will be more as the
 feature becomes more stable.
 
-The next list show the available dataframe commands with its description, and
-whenever possible, its analogous nushell command.
+The next list show the available dataframe commands with their description, and
+whenever possible, their analogous nushell command.
 
 | Command Name | Applies To | Description | Nushell Equivalent |
 | ------------ | ---------- | ----------- | ------------------ |
@@ -697,7 +697,7 @@ whenever possible, its analogous nushell command.
 | drop-duplicates | DataFrame | Drops duplicate values in dataframe| |
 | drop-nulls | DataFrame, Series | Drops null values in dataframe| |
 | dtypes | DataFrame | Show dataframe data types| |
-| filter|with | DataFrame | Filters dataframe using a mask as reference| |
+| filter-with | DataFrame | Filters dataframe using a mask as reference| |
 | get | DataFrame | Creates dataframe with the selected columns| get |
 | group-by | DataFrame | Creates a groupby object that can be used for other aggregations| group-by |
 | head | DataFrame | Creates new dataframe with head rows| |
@@ -708,7 +708,7 @@ whenever possible, its analogous nushell command.
 | is-unique | Series | Creates mask indicating unique values| |
 | join | DataFrame | Joins a dataframe using columns as reference| |
 | list | | Lists stored dataframes| |
-| load | | Loads dataframe form csv file| load |
+| load | | Loads dataframe form csv file| open |
 | melt | DataFrame | Unpivot a DataFrame from wide to long format| |
 | pivot | GroupBy | Performs a pivot operation on a groupby object| pivot |
 | rename | Series | Renames a series| rename |
@@ -721,7 +721,7 @@ whenever possible, its analogous nushell command.
 | sort | DataFrame, Series | Creates new sorted dataframe or series| sort |
 | tail | DataFrame | Creates new dataframe with tail rows| |
 | to-csv | DataFrame | Saves dataframe to csv file| to csv |
-| to-df | | Converts a pipelined Table or List into a polars dataframe| |
+| to-df | | Converts a pipelined Table or List into Dataframe| |
 | to-dummies | DataFrame | Creates a new dataframe with dummy variables| |
 | to-parquet | DataFrame | Saves dataframe to parquet file| |
 | to-series | | Converts a pipelined List into a polars series| |
@@ -731,7 +731,206 @@ whenever possible, its analogous nushell command.
 | with-column | DataFrame | Adds a series to the dataframe| |
 
 
-## Operation comparison
+## Benchmark comparisons
+
+To finish this book page, it makes sense to have a little benchmark comparison
+using different data processing frameworks. For this example we will be using
+native nushell commands, dataframe nushell commands and Pandas.
+
+The dataframe that we will be using to process the data is the
+[New Zealand business demography](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) dataset.
+Download it if you want to follows the tests we are going to be doing.
+
+
+### File information
+
+The file we are using has 5 columns and 5,429,252 rows, we can check that by
+using our reliable `dataframe list` command
+
+```shell
+> let df = (dataframe load .\Data7602DescendingYearOrder.csv)
+> dataframe list
+
+───┬──────┬─────────┬─────────┬───────────────────────────────────
+ # │ name │  rows   │ columns │             location
+───┼──────┼─────────┼─────────┼───────────────────────────────────
+ 0 │ $df  │ 5429252 │ 5       │ .\Data7602DescendingYearOrder.csv
+───┴──────┴─────────┴─────────┴───────────────────────────────────
+```
+
+we can have a look at the first lines of the file using `dataframe head`
+
+```shell
+> $df | dataframe head
+
+───┬──────────┬─────────┬──────┬───────────┬──────────
+ # │ anzsic06 │  Area   │ year │ geo_count │ ec_count
+───┼──────────┼─────────┼──────┼───────────┼──────────
+ 0 │ A        │ A100100 │ 2000 │        96 │      130
+ 1 │ A        │ A100200 │ 2000 │       198 │      110
+ 2 │ A        │ A100300 │ 2000 │        42 │       25
+ 3 │ A        │ A100400 │ 2000 │        66 │       40
+ 4 │ A        │ A100500 │ 2000 │        63 │       40
+───┴──────────┴─────────┴──────┴───────────┴──────────
+```
+
+and finally, we can get an idea of the inferred datatypes
+
+
+```shell
+> $df | dataframe dtypes
+
+───┬───────────┬───────
+ # │  column   │ dtype
+───┼───────────┼───────
+ 0 │ anzsic06  │ str
+ 1 │ Area      │ str
+ 2 │ year      │ i64
+ 3 │ geo_count │ i64
+ 4 │ ec_count  │ i64
+───┴───────────┴───────
+```
+
+### Loading the file
+
+Let's start by comparing loading times between them. We will start by loading
+the data using nushell load command
+
+```shell
+> benchmark {open .\Data7602DescendingYearOrder.csv}
+
+───┬─────────────────────────
+ # │        real time
+───┼─────────────────────────
+ 0 │ 30sec 479ms 614us 400ns
+───┴─────────────────────────
+```
+
+Loading the file using native nushell commands took 30 secs. Not bad for loading
+five million records in order to do data analysis. But we think we can do a
+bit better than that.
+
+Let's use now Pandas. We are going to use the next script to load the file
+
+```python
+import pandas as pd
+
+df = pd.read_csv("Data7602DescendingYearOrder.csv")
+```
+
+And the benchmark for it is
+
+```shell
+> benchmark {python load.py}
+
+───┬───────────────────────
+ # │       real time
+───┼───────────────────────
+ 0 │ 2sec 91ms 872us 900ns
+───┴───────────────────────
+```
+
+That is a great improvement, from 30 secs to 2 seconds. Nicely done Pandas!!!
+
+Probably we can load the data a bit faster. This time we will use nushell's
+`dataframe load` command
+
+
+```shell
+> benchmark {dataframe load .\Data7602DescendingYearOrder.csv}
+
+───┬───────────────────
+ # │     real time
+───┼───────────────────
+ 0 │ 601ms 700us 700ns
+───┴───────────────────
+```
+
+This time it took us 0.6 seconds. Not bad at all.
+
+### Groupby comparison
+
+Lets do a slightly more complex operation this time. We are going to group by
+year and add groups using the column `geo_count`.
+
+Again, we are going to start with nushell native command.
+
+```shell
+> benchmark {
+	open .\Data7602DescendingYearOrder.csv
+	| group-by year
+	| pivot header rows
+	| update rows { get rows | math sum }
+	| flatten
+}
+
+───┬────────────────────────
+ # │       real time
+───┼────────────────────────
+ 0 │ 6min 30sec 622ms 312us
+───┴────────────────────────
+```
+
+So, six minutes to perform this aggregated operation.
+
+Let's try the same operation in pandas
+
+```python
+import pandas as pd
+
+df = pd.read_csv("Data7602DescendingYearOrder.csv")
+res = df.groupby("year")["geo_count"].sum()
+print(res)
+```
+
+And the result from the benchmark is
+
+```shell
+> benchmark {python .\load.py}
+
+───┬────────────────────────
+ # │       real time
+───┼────────────────────────
+ 0 │ 1sec 966ms 954us 800ns
+───┴────────────────────────
+```
+
+Not bad at all. Again, pandas managed to get it done in a fraction of the time.
+
+To finish the comparison let's try nushell dataframes. We are going to put
+all the operations in one `nu` file to make sure we are doing similar
+operations
+
+```shell
+let df = (dataframe load Data7602DescendingYearOrder.csv)
+let res = ($df | dataframe group-by [year] | dataframe aggregate sum [geo_count])
+$res
+```
+
+and the benchmark with dataframes is
+
+```shell
+> benchmark {source load.nu}
+
+───┬───────────────────
+ # │     real time
+───┼───────────────────
+ 0 │ 557ms 658us 500ns
+───┴───────────────────
+```
+
+Luckily nushell dataframes managed to halve the time again. Isn't that great?
 
 
 ## Future of Dataframes
+
+We hope that by the end of this page you have a solid grasp of how to use the
+dataframe commands. As you can see they offer powerful operations that can
+help you process data faster and natively.
+
+However, the future of these dataframes is still very experimental. New
+commands and tools that take advantage of these commands will be added as they
+mature. For example, the next step for dataframes is the introduction of Lazy
+Dataframes. These will allow you to define complex data operations that will be
+executed until you decide to "finish" the pipe. This will give nushell the
+chance to select the optimal plan to query the data you would be asking for.
