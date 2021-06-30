@@ -366,6 +366,26 @@ Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
 With this, you should be able to `chsh` and set Nu to be your login shell. After a logout, on your next login you should be greeted with a shiny Nu prompt.
 
+### macOS: Keeping `/usr/bin/open` as `open`
+
+Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
+As nushell has it's own `open` command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
+One way to work around this is to define `alias`es in your `startup` config like this:
+
+```
+cat (config path)
+
+startup = [
+  "alias nuopen = open",
+  "alias open = ^open",
+]
+```
+
+Or using a one-liner:
+```
+config set startup (config get startup | append "alias nuopen = open" | append "alias open = ^open")
+```
+
 ## Prompt configuration
 
 Prompt configuration is handled by setting the value of `prompt`.
