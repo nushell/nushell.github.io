@@ -43,11 +43,11 @@ int_1,int_2,float_1,float_2,first,second,third,word
 Save the file and name it however you want to, for the sake of these examples
 the file will be called `test_small.csv`.
 
-Now, to read that file as a dataframe use the `dataframe load` command like
+Now, to read that file as a dataframe use the `dataframe open` command like
 this:
 
 ```shell
-> let df = (dataframe load test_small.csv)
+> let df = (dataframe open test_small.csv)
 ```
 
 This should create the value `df` in memory which holds the data we just
@@ -97,7 +97,7 @@ a sum makes sense. If you want to filter out the text column, you can select
 the columns you want by using the `select` command
 
 ```shell
-$df | dataframe aggregate sum | dataframe select [int_1 int_2 float_1 float_2]
+$df | dataframe aggregate sum | dataframe select int_1 int_2 float_1 float_2
 
 ───┬───────┬───────┬─────────┬─────────
  # │ int_1 │ int_2 │ float_1 │ float_2
@@ -110,7 +110,7 @@ you can even store the result from this aggregation as you would store any
 other nushell variable
 
 ```shell
-> let res = ($df | dataframe aggregate sum | dataframe select [int_1 int_2 float_1 float_2])
+> let res = ($df | dataframe aggregate sum | dataframe select int_1 int_2 float_1 float_2)
 ```
 
 and now we have two dataframes stored in memory
@@ -147,13 +147,13 @@ int_1,int_2,float_1,float_2,first
 6,11,0.1,0.0,b
 ```
 
-> Note: Use the `dataframe load` command to create the new variable
+> Note: Use the `dataframe open` command to create the new variable
 
 Now, with the second dataframe loaded in memory we can join them using the
 column called `int_1`
 
 ```shell
-> $df | dataframe join $df_a [int_1] [int_1]
+> $df | dataframe join $df_a -l [int_1] -r [int_1]
 
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬─────────┬─────────────┬───────────────┬───────────────┬─────────────
  # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word   │ int_2_right │ float_1_right │ float_2_right │ first_right
@@ -183,7 +183,7 @@ operations with the same group condition.
 To create a `GroupBy` object you only need to use the `group-by` command
 
 ```shell
-> let group = ($df | dataframe group-by [first])
+> let group = ($df | dataframe group-by first)
 > $group
 
 ───┬──────────┬───────
@@ -222,21 +222,6 @@ $group | aggregate min
  1 │ b     │         0 │        14 │      0.4000 │      3.0000
  2 │ c     │         0 │        10 │      0.0000 │      7.0000
 ───┴───────┴───────────┴───────────┴─────────────┴─────────────
-```
-
-by the way, you have the option to select columns when doing the `aggregate`
-command, instead of using the `dataframe select` command
-
-```shell
-> $group | dataframe aggregate mean [int_1 int_2]
-
-───┬───────┬────────────┬────────────
- # │ first │ int_1      │ int_2
-───┼───────┼────────────┼────────────
- 0 │ a     │     2.0000 │    12.0000
- 1 │ b     │     4.2500 │    15.5000
- 2 │ c     │     5.6666 │    15.6666
-───┴───────┴────────────┴────────────
 ```
 
 the created `GroupBy` object is so handy that it can even be used as base for
@@ -684,13 +669,13 @@ whenever possible, their analogous nushell command.
 | ------------ | ---------- | ----------- | ------------------ |
 | aggregate | DataFrame, GroupBy, Series | Performs an aggregation operation on a dataframe, groupby or series object| math |
 | all-false | Series | Returns true if all values are false| |
-| all-true | Series | Returns true if all values are true| |
+| all-true | Series | Returns true if all values are true| all? |
 | arg-max | Series | Return index for max value in series| |
 | arg-min | Series | Return index for min value in series| |
 | arg-sort | Series | Returns indexes for a sorted series| |
 | arg-true | Series | Returns indexes where values are true| |
 | arg-unique | Series | Returns indexes for unique values| |
-| column | DataFrame | Returns the selected column as Series| |
+| column | DataFrame | Returns the selected column as Series| get |
 | count-null | Series | Counts null values| |
 | count-unique | Series | Counts unique value| |
 | drop | DataFrame | Creates a new dataframe by dropping the selected columns| drop |
@@ -698,18 +683,19 @@ whenever possible, their analogous nushell command.
 | drop-nulls | DataFrame, Series | Drops null values in dataframe| |
 | dtypes | DataFrame | Show dataframe data types| |
 | filter-with | DataFrame | Filters dataframe using a mask as reference| |
+| first | DataFrame | Creates new dataframe with first rows| first |
 | get | DataFrame | Creates dataframe with the selected columns| get |
 | group-by | DataFrame | Creates a groupby object that can be used for other aggregations| group-by |
-| head | DataFrame | Creates new dataframe with head rows| |
 | is-duplicated | Series | Creates mask indicating duplicated values| |
-| is-in | Series | Checks if elements from a series are contained in right series| |
+| is-in | Series | Checks if elements from a series are contained in right series| in |
 | is-not-null | Series | Creates mask where value is not null| |
-| is-null | Series | Creates mask where value is null| |
+| is-null | Series | Creates mask where value is null| `<column_name> == $nothing` |
 | is-unique | Series | Creates mask indicating unique values| |
 | join | DataFrame | Joins a dataframe using columns as reference| |
+| last | DataFrame | Creates new dataframe with last rows| last |
 | list | | Lists stored dataframes| |
-| load | | Loads dataframe form csv file| open |
 | melt | DataFrame | Unpivot a DataFrame from wide to long format| |
+| open | | Loads dataframe form csv file| open |
 | pivot | GroupBy | Performs a pivot operation on a groupby object| pivot |
 | rename | Series | Renames a series| rename |
 | sample | DataFrame | Create sample dataframe| |
@@ -719,16 +705,15 @@ whenever possible, their analogous nushell command.
 | show | DataFrame | Converts a section of the dataframe to a Table or List value| |
 | slice | DataFrame | Creates new dataframe from a slice of rows| |
 | sort | DataFrame, Series | Creates new sorted dataframe or series| sort |
-| tail | DataFrame | Creates new dataframe with tail rows| |
 | to-csv | DataFrame | Saves dataframe to csv file| to csv |
 | to-df | | Converts a pipelined Table or List into Dataframe| |
 | to-dummies | DataFrame | Creates a new dataframe with dummy variables| |
 | to-parquet | DataFrame | Saves dataframe to parquet file| |
 | to-series | | Converts a pipelined List into a polars series| |
-| unique | Series | Returns unique values from a series| |
+| unique | Series | Returns unique values from a series| uniq |
 | value-counts | Series | Returns a dataframe with the counts for unique values in series| |
 | where | DataFrame | Filter dataframe to match the condition| where |
-| with-column | DataFrame | Adds a series to the dataframe| |
+| with-column | DataFrame | Adds a series to the dataframe| `insert <column_name> <value> | update <column_name> { <new_value> }` |
 
 
 ## Benchmark comparisons
@@ -748,7 +733,7 @@ The file we are using has 5 columns and 5,429,252 rows, we can check that by
 using our reliable `dataframe list` command
 
 ```shell
-> let df = (dataframe load .\Data7602DescendingYearOrder.csv)
+> let df = (dataframe open .\Data7602DescendingYearOrder.csv)
 > dataframe list
 
 ───┬──────┬─────────┬─────────┬───────────────────────────────────
@@ -833,11 +818,11 @@ And the benchmark for it is
 That is a great improvement, from 30 secs to 2 seconds. Nicely done Pandas!!!
 
 Probably we can load the data a bit faster. This time we will use nushell's
-`dataframe load` command
+`dataframe open` command
 
 
 ```shell
-> benchmark {dataframe load .\Data7602DescendingYearOrder.csv}
+> benchmark {dataframe open .\Data7602DescendingYearOrder.csv}
 
 ───┬───────────────────
  # │     real time
@@ -902,8 +887,8 @@ all the operations in one `nu` file to make sure we are doing similar
 operations
 
 ```shell
-let df = (dataframe load Data7602DescendingYearOrder.csv)
-let res = ($df | dataframe group-by [year] | dataframe aggregate sum [geo_count])
+let df = (dataframe open Data7602DescendingYearOrder.csv)
+let res = ($df | dataframe group-by year | dataframe aggregate sum | dataframe select geo_count)
 $res
 ```
 
