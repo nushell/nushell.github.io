@@ -74,6 +74,27 @@ information about them.
 > Note: If you want to see all the dataframe commands that are available you
 > can use `help dataframe`
 
+And if you want to see a preview of the loaded dataframe you can do this
+
+```shell
+> $df
+
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────
+ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────
+ 0 │     1 │    11 │  0.1000 │  1.0000 │ a     │ b      │ c     │ first
+ 1 │     2 │    12 │  0.2000 │  1.0000 │ a     │ b      │ c     │ second
+ 2 │     3 │    13 │  0.3000 │  2.0000 │ a     │ b      │ c     │ third
+ 3 │     4 │    14 │  0.4000 │  3.0000 │ b     │ a      │ c     │ second
+ 4 │     0 │    15 │  0.5000 │  4.0000 │ b     │ a      │ a     │ third
+ 5 │     6 │    16 │  0.6000 │  5.0000 │ b     │ a      │ a     │ second
+ 6 │     7 │    17 │  0.7000 │  6.0000 │ b     │ c      │ a     │ third
+ 7 │     8 │    18 │  0.8000 │  7.0000 │ c     │ c      │ b     │ eight
+ 8 │     9 │    19 │  0.9000 │  8.0000 │ c     │ c      │ b     │ ninth
+ 9 │     0 │    10 │  0.0000 │  9.0000 │ c     │ c      │ b     │ ninth
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
+```
+
 With the dataframe in memory we can start doing column operations with the
 `DataFrame`
 
@@ -165,6 +186,12 @@ column called `int_1`
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴─────────┴─────────────┴───────────────┴───────────────┴─────────────
 ```
 
+> Note: In `Nu` when a command has multiple arguments that are expecting
+> multiple values we use brackets `[]` to enclose those values. In the case of
+> `dataframe join` we can join on multiple columns as long as they have the
+> same type, for example we could have done `$df | dataframe join $df_a -l
+> [int_1 int_2] -r [int_1 int_2]`
+
 By default, the join command does an inner join, meaning that it will keep the
 rows where both dataframes share the same value. You can select a left join to
 keep the missing rows from the left dataframe. You can also save this result
@@ -225,7 +252,7 @@ $group | aggregate min
 ```
 
 the created `GroupBy` object is so handy that it can even be used as base for
-pivoting a table. As an example, Lets use the column called `second` as the
+pivoting a table.  As an example, Lets use the column called `second` as the
 pivot column and the column `float_1` as the value column
 
 
@@ -240,6 +267,13 @@ pivot column and the column `float_1` as the value column
  2 │ b     │        │ 1.5000 │ 0.7000
 ───┴───────┴────────┴────────┴────────
 ```
+
+> Note: a pivot operation is a way to aggregate data based on two columns. In
+> the previous example, the result of the pivot command produced a table that
+> represents the sum of all the values in the column `float_1` that are shared
+> between columns `first` (now the rows) and `second` (now the columns). So,
+> the value of `1.5` shown in row `b` and column `a` is the sum of all the
+> floats where the column `first` is `b` and column `second` is `a`
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
 worthy it to keep in memory to keep exploring your dataset.
@@ -840,6 +874,10 @@ year and add groups using the column `geo_count`.
 
 Again, we are going to start with nushell native command.
 
+> Note. If you are following all the examples we have done so far, be aware
+> that the next command will use a large amount of memory. This may affect the
+> performance of you system while this is being executed
+
 ```shell
 > benchmark {
 	open .\Data7602DescendingYearOrder.csv
@@ -919,3 +957,6 @@ mature. For example, the next step for dataframes is the introduction of Lazy
 Dataframes. These will allow you to define complex data operations that will be
 executed until you decide to "finish" the pipe. This will give nushell the
 chance to select the optimal plan to query the data you would be asking for.
+
+Keep visiting this book in order to check the new things happening to
+dataframes and how they can help you process data faster and efficiently.
