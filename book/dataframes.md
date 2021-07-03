@@ -829,6 +829,70 @@ a value from a series. For example, we can change the value in the column
 ───┴──────────────
 ```
 
+## Series as indices
+
+Another way of filtering a dataframe is by using a list of indices and the
+dataframe command `take`. For example, let's say that we want to get rows 1, 4,
+and 6 from our original dataframe. With that in mind, we can use the next
+command to extract that information
+
+```shell
+> let indices = ([1 4 6] | dataframe to-series)
+> $df | dataframe take $indices
+
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────
+ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────
+ 0 │     2 │    12 │  0.2000 │  1.0000 │ a     │ b      │ c     │ second
+ 1 │     0 │    15 │  0.5000 │  4.0000 │ b     │ a      │ a     │ third
+ 2 │     7 │    17 │  0.7000 │  6.0000 │ b     │ c      │ a     │ third
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
+```
+
+The command `take` is very handy, specially if we mix it with other commands.
+Let's say that we want to extract all rows for the first duplicated element for
+column `first`. In order to do that, we can use the command `dataframe
+arg-unique` as shown in the next example
+
+```shell
+> let indices = ($df.first | dataframe arg-unique)
+> $df | dataframe take $indices
+
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────
+ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────
+ 0 │     1 │    11 │  0.1000 │  1.0000 │ a     │ b      │ c     │ first
+ 1 │     4 │    14 │  0.4000 │  3.0000 │ b     │ a      │ c     │ second
+ 2 │     8 │    18 │  0.8000 │  7.0000 │ c     │ c      │ b     │ eight
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
+```
+
+Or what if we want to create a new sorted dataframe using a column in specific.
+We can use the `dataframe arg-sort` to accomplish that. In the next example we
+can sort the dataframe by the column `word`
+
+> Note. The same result could be accomplished using the command `sort`
+
+```shell
+> let indices = ($df.word | dataframe arg-sort)
+> $df | dataframe take $indices
+
+───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────
+ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word
+───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────
+ 0 │     8 │    18 │  0.8000 │  7.0000 │ c     │ c      │ b     │ eight
+ 1 │     1 │    11 │  0.1000 │  1.0000 │ a     │ b      │ c     │ first
+ 2 │     9 │    19 │  0.9000 │  8.0000 │ c     │ c      │ b     │ ninth
+ 3 │     0 │    10 │  0.0000 │  9.0000 │ c     │ c      │ b     │ ninth
+ 4 │     2 │    12 │  0.2000 │  1.0000 │ a     │ b      │ c     │ second
+ 5 │     4 │    14 │  0.4000 │  3.0000 │ b     │ a      │ c     │ second
+ 6 │     6 │    16 │  0.6000 │  5.0000 │ b     │ a      │ a     │ second
+ 7 │     3 │    13 │  0.3000 │  2.0000 │ a     │ b      │ c     │ third
+ 8 │     0 │    15 │  0.5000 │  4.0000 │ b     │ a      │ a     │ third
+ 9 │     7 │    17 │  0.7000 │  6.0000 │ b     │ c      │ a     │ third
+───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
+```
+
 ## Unique values
 
 Another important operation that can be done with `Series` is to search for
