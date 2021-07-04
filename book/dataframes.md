@@ -1,5 +1,7 @@
 # Dataframes
 
+> Note. The dataframe commands are available from version 0.33.1 onwards
+
 As you have seen so far, nushell makes working with data its main priority.
 `Lists` and `Tables` are there to help you cycle through values in order to
 perform multiple operations or find data in a a breeze. However, there are
@@ -26,17 +28,17 @@ processing data.
 For this little benchmark exercise we will be comparing native nushell
 commands, dataframe nushell commands and Python Pandas commands. For the time
 being don't pay too much attention on the `dataframe` commands. They will be
-explain in future sections of this page.
+explained in future sections of this page.
 
 > System Details: The benchmarks presented in this section were run using a
 > machine with a processor Intel(R) Core(TM) i7-10710U (CPU @1.10GHz 1.61 GHz)
 > and 16 gb of RAM.
 >
-> All examples where run on Nushell version 0.32.1
+> All examples where run on Nushell version 0.33.1
 
 ### File information
 
-The dataframe that we will be using to process the data is the
+The file that we will be using for the benchmarks is the
 [New Zealand business demography](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) dataset.
 Feel free to download it if you want to follows these tests.
 
@@ -277,10 +279,11 @@ To see all the dataframes that are stored in memory you can use
 ───┴──────┴──────┴─────────┴────────────────────────
 ```
 
-As you can see, the command lists the created dataframes together with basic
+As you can see, the command shows the created dataframes together with basic
 information about them.
 
-And if you want to see a preview of the loaded dataframe you can do this
+And if you want to see a preview of the loaded dataframe you can send the
+dataframe variable to the stream
 
 ```shell
 > $df
@@ -356,7 +359,7 @@ and now we have two dataframes stored in memory
 ───┴──────┴──────┴─────────┴────────────────────────
 ```
 
-pretty neat isn't it?
+pretty neat, isn't it?
 
 You can perform several aggregations on the dataframe in order to extract basic
 information from the dataframe and do basic data analysis on your brand new
@@ -800,15 +803,9 @@ and this new mask can be used to filter the dataframe
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴─────────
 ```
 
-So, to conclude this section, masks are our main way to create new versions of
-dataframes.
-
-> Note. You can also use `dataframe slice` or `dataframe sample` to create new
-> dataframes from bigger dataframes
-
-Another important operation that can be done with masks is setting or replacing
-a value from a series. For example, we can change the value in the column
-`first` where the value is equal to `a`
+Another operation that can be done with masks is setting or replacing a value
+from a series. For example, we can change the value in the column `first` where
+the value is equal to `a`
 
 ```shell
 > $df.first | dataframe set new --mask ($df.first =~ a)
@@ -831,10 +828,10 @@ a value from a series. For example, we can change the value in the column
 
 ## Series as indices
 
-Another way of filtering a dataframe is by using a list of indices and the
-dataframe command `take`. For example, let's say that we want to get rows 1, 4,
-and 6 from our original dataframe. With that in mind, we can use the next
-command to extract that information
+Series can be also used as a way of filtering a dataframe by using them as a
+list of indices. For example, let's say that we want to get rows 1, 4, and 6
+from our original dataframe. With that in mind, we can use the next command to
+extract that information
 
 ```shell
 > let indices = ([1 4 6] | dataframe to-series)
@@ -893,11 +890,34 @@ can sort the dataframe by the column `word`
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
+And finally, we can create new Series by setting a new value in the marked
+indices. Have a look at the next command
+
+```shell
+> let indices = ([0 2] | dataframe to-series);
+> $df.int_1 | dataframe set-with-idx 123 --indices $indices
+
+───┬─────────────
+ # │ int_1 (i64)
+───┼─────────────
+ 0 │         123
+ 1 │           2
+ 2 │         123
+ 3 │           4
+ 4 │           0
+ 5 │           6
+ 6 │           7
+ 7 │           8
+ 8 │           9
+ 9 │           0
+───┴─────────────
+```
+
 ## Unique values
 
-Another important operation that can be done with `Series` is to search for
-unique values in a list or column. Lets use again the first dataframe we
-created to test these operations.
+Another operation that can be done with `Series` is to search for unique values
+in a list or column. Lets use again the first dataframe we created to test
+these operations.
 
 The first and most common operation that we have is `value_counts`. This
 command calculates a count of the unique values that exist in a Series. For
@@ -1010,16 +1030,19 @@ whenever possible, their analogous nushell command.
 | last | DataFrame | Creates new dataframe with last rows| last |
 | list | | Lists stored dataframes| |
 | melt | DataFrame | Unpivot a DataFrame from wide to long format| |
+| not | Series  Inverts boolean mask | |
 | open | | Loads dataframe form csv file| open |
 | pivot | GroupBy | Performs a pivot operation on a groupby object| pivot |
 | rename | Series | Renames a series| rename |
 | sample | DataFrame | Create sample dataframe| |
 | select | DataFrame | Creates a new dataframe with the selected columns| select |
 | set | Series | Sets value where given mask is true| |
+| set-with-idx | Series | Sets value in the given index | |
 | shift | Series | Shifts the values by a given period| |
 | show | DataFrame | Converts a section of the dataframe to a Table or List value| |
 | slice | DataFrame | Creates new dataframe from a slice of rows| |
 | sort | DataFrame, Series | Creates new sorted dataframe or series| sort |
+| take |DataFrame, Series | Creates new dataframe using the given indices | |
 | to-csv | DataFrame | Saves dataframe to csv file| to csv |
 | to-df | | Converts a pipelined Table or List into Dataframe| |
 | to-dummies | DataFrame | Creates a new dataframe with dummy variables| |
