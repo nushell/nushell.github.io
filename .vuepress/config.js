@@ -110,6 +110,7 @@ module.exports = {
               title: "Cookbook",
               collapsable: false,
               children: [
+                "",
                 "setup",
                 "help",
                 "system",
