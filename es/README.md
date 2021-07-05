@@ -2,7 +2,7 @@
 home: true
 heroImage: null
 heroText: Nushell
-tagline: Un nuevo tipo de caparazón.
+tagline: Un nuevo tipo de shell.
 actionText: Get Started →
 actionLink: /es/book/
 features:
