@@ -80,6 +80,7 @@ module.exports = {
                 "shells_in_shells",
                 "escaping",
                 "plugins",
+                "dataframes",
                 "coming_from_bash",
                 "nushell_map",
                 "nushell_map_imperative",
