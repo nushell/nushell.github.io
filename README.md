@@ -6,8 +6,8 @@ tagline: A new type of shell.
 actionText: Get Started →
 actionLink: /book/
 features:
-  - title: Control your system with powerful pipelines
-    details: Pipelines let you command your system like never before. Your system belongs to you, and it awaits your command.
+  - title: Powerful pipelines to control your system
+    details: Pipelines allow you to work with your system like never before. You are in control of the system, ready for your next command.
   - title: Everything is data.
     details: Rather than having the need to remember all the parameters to all the commands, we can just use the same, regardless of where it came from.
   - title: Powerful Plugins
