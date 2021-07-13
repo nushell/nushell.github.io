@@ -8,7 +8,7 @@ module.exports = {
     "/es/": {
       lang: "es",
       title: "Nushell",
-      description: "Un nuevo tipo de caparazón.",
+      description: "Un nuevo tipo de shell.",
     },
     "/ja/": {
       lang: "ja",
@@ -18,7 +18,7 @@ module.exports = {
     "/pt-BR/": {
       lang: "pt-BR",
       title: "Nushell",
-      description: "Um novo tipo de concha.",
+      description: "Um novo tipo de shell.",
     },
     "/zh-cn/": {
       lang: "zh-cn",
@@ -80,6 +80,7 @@ module.exports = {
                 "shells_in_shells",
                 "escaping",
                 "plugins",
+                "dataframes",
                 "coming_from_bash",
                 "nushell_map",
                 "nushell_map_imperative",
@@ -110,6 +111,7 @@ module.exports = {
               title: "Cookbook",
               collapsable: false,
               children: [
+                "",
                 "setup",
                 "help",
                 "system",

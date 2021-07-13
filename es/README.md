@@ -2,46 +2,46 @@
 home: true
 heroImage: null
 heroText: Nushell
-tagline: Un nuevo tipo de caparazón.
-actionText: Get Started →
+tagline: Un nuevo tipo de shell.
+actionText: Empieza →
 actionLink: /es/book/
 features:
-  - title: Control your system with powerful pipelines
-    details: Pipelines let you command your system like never before. Your system belongs to you, and it awaits your command.
-  - title: Everything is data.
-    details: Rather than having the need to remember all the parameters to all the commands, we can just use the same, regardless of where it came from.
-  - title: Powerful Plugins
-    details: Nu can't come with everything you might want to do with it, so you can extend using its powerful plugin system.
-footer: If you have suggestions or want to change something please give us feedback
+  - title: Pipelines potentes para controlar tu sistema
+    details: Pipelines permiten trabajar con tu sistema como nunca antes. Tienes el control del sistema, listo para tu siguiente comando.
+  - title: Todo es data.
+    details: En lugar de tener la necesidad de recordar todos los parámetros de todos los comandos, podemos usar los mismos, independientemente de su procedencia.
+  - title: Plugins
+    details: Nu no puede incluir todo lo que quieras hacer con él, por lo que puedes extenderlo usando su sistema fuerte de plugins.
+footer: Sugerencias o propuestas de cambios son bienvenidas. Escríbenos
 
 ---
-### Quick Install
+### Instalación rápida
 
-#### Install Latest Version
+#### Ultima versión
 
-Install the latest version from the [releases page](https://github.com/nushell/nushell/releases)
+Instala la última versión en la [pagina de releases](https://github.com/nushell/nushell/releases)
 
-From source on [crates.io](https://crates.io):
+Desde la fuente en [crates.io](https://crates.io):
 
 ```sh
 $ cargo install nu
 ```
 
-#### Install via Package Manager
+#### Instalación a través de resolvedores de paquetes
 
-With [Homebrew](https://brew.sh/):
+En [Homebrew](https://brew.sh/):
 
 ```sh
 $ brew install nushell
 ```
 
-With [Scoop](https://scoop.sh):
+En [Scoop](https://scoop.sh):
 
 ```powershell
 $ scoop install nu
 ```
 
-#### Start the shell
+#### Inicia la shell
 
 ```
 $ nu

@@ -23,7 +23,6 @@ These are at the root level, not because they're more important, but because the
 | skip_welcome_message  | Enables/Disables the nushell welcome message.                                                                        | boolean    | true or false                                                                                   |
 | startup               | Load and run command at startup. These commands can take the form of aliases, custom commands, or external commands. | array      | quoted string of commands delimited by commas between brackets `[ ]`                            |
 | table_mode            | Defines which "theme" that table drawing should use in nushell.                                                      | string     | basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other |
-| completion_match_method | Sets case-sensitivity of autocompletion                                                                            | string     | case-insensitive, case-sensitive                                                             |
 
 ### Color Config section
 
@@ -93,7 +92,7 @@ The `[line_editor]` section of the `config.toml` controls how our line editor, `
 | auto_add_history        | Enable/Disable automatically add each non-blank line to history                          | boolean    | true or false                                                            |
 | bell_style              | The bell style for the line editor                                                       | string     | audible, none, visible                                                   |
 | color_mode              | The color mode for the line editor                                                       | string     | enabled, forced, disabled                                                |
-| completion_prompt_limit | When listing completion alternatives, only display one screen of possibilities at a time |            |                                                                          |
+| completion_prompt_limit | When listing completion alternatives, only display one screen of possibilities at a time | number     |                                                                          |
 | completion_type         | Method used to iterate history items                                                     | string     | circular, list, fuzzy - note fuzzy is not currently supported by nushell |
 | edit_mode               | The mode for the line editor                                                             | string     | vi or emacs                                                             |
 | history_duplicates      | Rule to apply regarding the adding of duplicates to the history                          | string     | alwaysadd, ignoreconsecutive                                             |
@@ -101,6 +100,7 @@ The `[line_editor]` section of the `config.toml` controls how our line editor, `
 | keyseq_timeout_ms       | Duration rustyline will wait for a character when reading an ambiguous key sequence      | string     | duration in milliseconds                                                 |
 | max_history_size        | The maximum history size                                                                 | number     |                                                                          |
 | tab_stop                | The number of characters for indented/outdented commands                                 | number     |
+| completion_match_method | Sets case-sensitivity of autocompletion                                                                            | string     | case-insensitive, case-sensitive                                                             |
 
 ### Textview section
 The `[textview]` section of the `config.toml` file is a section with settings for our textviewer which is currently [bat](https://github.com/sharkdp/bat). So, all these settings apply to the `bat` configuration built into nushell. It won't use settings you may currently have on your system if you use `bat`.
@@ -118,7 +118,7 @@ The `[textview]` section of the `config.toml` file is a section with settings fo
 | tab_width                | The width of tab characters. Currently, a value of 0 will cause tabs to be passed through without expanding them. | number     |                                |
 | term_width               | The character width of the terminal                                                                               | string     |                                |
 | theme                    | Set the bat color theme to use                                                                                    | string     |                                |
-| true_color               | Enable/Disable whether the output terminal supports true color                                                    |            | true or false                  |
+| true_color               | Enable/Disable whether the output terminal supports true color                                                    | boolean    | true or false                  |
 | use_italics              | Enable/Disable italic type                                                                                        | boolean    | true or false                  |
 | vcs_modification_markers | Enable/Disable version control system modification markers                                                        | boolean    | true or false                  |
 | wrapping_mode            | Set if and how text should be wrapped                                                                             | string     | character, nowrapping          |
@@ -365,6 +365,26 @@ Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 ```
 
 With this, you should be able to `chsh` and set Nu to be your login shell. After a logout, on your next login you should be greeted with a shiny Nu prompt.
+
+### macOS: Keeping `/usr/bin/open` as `open`
+
+Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
+As nushell has it's own `open` command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
+One way to work around this is to define `alias`es in your `startup` config like this:
+
+```
+cat (config path)
+
+startup = [
+  "alias nuopen = open",
+  "alias open = ^open",
+]
+```
+
+Or using a one-liner:
+```
+config set startup (config get startup | append "alias nuopen = open" | append "alias open = ^open")
+```
 
 ## Prompt configuration
 
