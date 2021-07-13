@@ -56,10 +56,10 @@ using `dataframe list` command
 ───┴──────┴─────────┴─────────┴───────────────────────────────────
 ```
 
-we can have a look at the first lines of the file using `dataframe head`
+we can have a look at the first lines of the file using `dataframe first`
 
 ```shell
-> $df | dataframe head
+> $df | dataframe first
 
 ───┬──────────┬─────────┬──────┬───────────┬──────────
  # │ anzsic06 │  Area   │ year │ geo_count │ ec_count
