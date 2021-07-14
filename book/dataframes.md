@@ -373,7 +373,7 @@ in another file and create the corresponding dataframe (for these examples we
 are going to call it `test_small_a.csv`)
 
 ```
-int_1a,int_2,float_1,float_2,first
+int_1,int_2,float_1,float_2,first
 9,14,0.4,3.0,a
 8,13,0.3,2.0,a
 7,12,0.2,1.0,a
@@ -387,11 +387,11 @@ We use the `dataframe open` command to create the new variable
 ```
 
 Now, with the second dataframe loaded in memory we can join them using the
-column called `int_1` from the left dataframe and the column `int_1a` from the
+column called `int_1` from the left dataframe and the column `int_1` from the
 right dataframe
 
 ```shell
-> $df | dataframe join $df_a -l [int_1] -r [int_1a]
+> $df | dataframe join $df_a -l [int_1] -r [int_1]
 
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬─────────┬─────────────┬───────────────┬───────────────┬─────────────
  # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word   │ int_2_right │ float_1_right │ float_2_right │ first_right
@@ -407,7 +407,7 @@ right dataframe
 > multiple values we use brackets `[]` to enclose those values. In the case of
 > `dataframe join` we can join on multiple columns as long as they have the
 > same type, for example we could have done `$df | dataframe join $df_a -l
-> [int_1 int_2] -r [int_1a int_2]`
+> [int_1 int_2] -r [int_1 int_2]`
 
 By default, the join command does an inner join, meaning that it will keep the
 rows where both dataframes share the same value. You can select a left join to
