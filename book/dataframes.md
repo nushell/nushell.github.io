@@ -2,48 +2,48 @@
 
 > Note. The dataframe commands are available from version 0.33.1 onwards
 
-As you have seen so far, nushell makes working with data its main priority.
+As we have seen so far, nushell makes working with data its main priority.
 `Lists` and `Tables` are there to help you cycle through values in order to
 perform multiple operations or find data in a a breeze. However, there are
-certain operations where a row based data layout is not the most efficient way
-to process data, specially when working with extremely large files. Operations
-like group-by or join using large datasets can be costly memory wise, and may
-lead to large computational times if they are not done using the appropriate
+certain operations where a row-based data layout is not the most efficient way
+to process data, especially when working with extremely large files. Operations
+like group-by or join using large datasets can be costly memory-wise, and may
+lead to large computation times if they are not done using the appropriate
 data format.
 
 For this reason, the `DataFrame` structure was introduced to nushell. A
 `DataFrame` stores its data in a columnar format using as its base the [Apache
-Arrow](https://arrow.apache.org/) specification and uses
+Arrow](https://arrow.apache.org/) specification, and uses
 [Polars](https://github.com/pola-rs/polars) as the motor for performing
 extremely [fast columnar operations](https://h2oai.github.io/db-benchmark/).
 
-You may be wondering now how fast this combo could be and how could it make
+You may be wondering now how fast this combo could be, and how could it make
 working with data easier and more reliable. For this reason, let's start this
 page by presenting benchmarks on common operations that are done when
 processing data.
 
-
 ## Benchmark comparisons
 
 For this little benchmark exercise we will be comparing native nushell
-commands, dataframe nushell commands and Python Pandas commands. For the time
-being don't pay too much attention on the `dataframe` commands. They will be
-explained in future sections of this page.
+commands, dataframe nushell commands and [Python
+Pandas](https://pandas.pydata.org/) commands. For the time being don't pay too
+much attention to the `dataframe` commands. They will be explained in later
+sections of this page.
 
 > System Details: The benchmarks presented in this section were run using a
 > machine with a processor Intel(R) Core(TM) i7-10710U (CPU @1.10GHz 1.61 GHz)
 > and 16 gb of RAM.
 >
-> All examples where run on Nushell version 0.33.1
+> All examples where run on Nushell version 0.33.1.
 
 ### File information
 
 The file that we will be using for the benchmarks is the
 [New Zealand business demography](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) dataset.
-Feel free to download it if you want to follows these tests.
+Feel free to download it if you want to follow these tests.
 
-The dataset has 5 columns and 5,429,252 rows, we can check that by
-using `dataframe list` command
+The dataset has 5 columns and 5,429,252 rows. We can check that by using the
+`dataframe list` command:
 
 ```shell
 > let df = (dataframe open .\Data7602DescendingYearOrder.csv)
@@ -56,7 +56,7 @@ using `dataframe list` command
 ───┴──────┴─────────┴─────────┴───────────────────────────────────
 ```
 
-we can have a look at the first lines of the file using `dataframe first`
+We can have a look at the first lines of the file using `dataframe first`:
 
 ```shell
 > $df | dataframe first
@@ -72,8 +72,7 @@ we can have a look at the first lines of the file using `dataframe first`
 ───┴──────────┴─────────┴──────┴───────────┴──────────
 ```
 
-and finally, we can get an idea of the inferred datatypes
-
+...and finally, we can get an idea of the inferred datatypes:
 
 ```shell
 > $df | dataframe dtypes
@@ -91,8 +90,8 @@ and finally, we can get an idea of the inferred datatypes
 
 ### Loading the file
 
-Let's start by comparing loading times between them. First, We will load the
-data using nushell load command
+Let's start by comparing loading times between the various methods. First, we
+will load the data using nushell load command:
 
 ```shell
 > benchmark {open .\Data7602DescendingYearOrder.csv}
@@ -104,11 +103,11 @@ data using nushell load command
 ───┴─────────────────────────
 ```
 
-Loading the file using native nushell commands took 30 secs. Not bad for loading
-five million records in order to do data analysis. But we think we can do a
-bit better than that.
+Loading the file using native nushell commands took 30 seconds. Not bad for
+loading five million records in order to do data analysis. But we can do a bit
+better than that.
 
-Let's use now Pandas. We are going to use the next script to load the file
+Let's now use Pandas. We are going to use the next script to load the file:
 
 ```python
 import pandas as pd
@@ -116,7 +115,7 @@ import pandas as pd
 df = pd.read_csv("Data7602DescendingYearOrder.csv")
 ```
 
-And the benchmark for it is
+And the benchmark for it is:
 
 ```shell
 > benchmark {python load.py}
@@ -128,11 +127,10 @@ And the benchmark for it is
 ───┴───────────────────────
 ```
 
-That is a great improvement, from 30 secs to 2 seconds. Nicely done Pandas!!!
+That is a great improvement, from 30 seconds to 2 seconds. Nicely done, Pandas!
 
 Probably we can load the data a bit faster. This time we will use nushell's
-`dataframe open` command
-
+`dataframe open` command:
 
 ```shell
 > benchmark {dataframe open .\Data7602DescendingYearOrder.csv}
@@ -148,14 +146,14 @@ This time it took us 0.6 seconds. Not bad at all.
 
 ### Group-by comparison
 
-Lets do a slightly more complex operation this time. We are going to group by
-year and add groups using the column `geo_count`.
+Lets do a slightly more complex operation this time. We are going to group the
+data by year, and add groups using the column `geo_count`.
 
 Again, we are going to start with nushell native command.
 
-> Note. If you want to run this example be aware that the next command will use
-> a large amount of memory. This may affect the performance of you system while
-> this is being executed
+> Note: If you want to run this example, be aware that the next command will
+> use a large amount of memory. This may affect the performance of you system
+> while this is being executed.
 
 ```shell
 > benchmark {
@@ -175,7 +173,7 @@ Again, we are going to start with nushell native command.
 
 So, six minutes to perform this aggregated operation.
 
-Let's try the same operation in pandas
+Let's try the same operation in pandas:
 
 ```python
 import pandas as pd
@@ -185,7 +183,7 @@ res = df.groupby("year")["geo_count"].sum()
 print(res)
 ```
 
-And the result from the benchmark is
+And the result from the benchmark is:
 
 ```shell
 > benchmark {python .\load.py}
@@ -199,9 +197,9 @@ And the result from the benchmark is
 
 Not bad at all. Again, pandas managed to get it done in a fraction of the time.
 
-To finish the comparison let's try nushell dataframes. We are going to put
-all the operations in one `nu` file to make sure we are doing similar
-operations
+To finish the comparison, let's try nushell dataframes. We are going to put
+all the operations in one `nu` file, to make sure we are doing similar
+operations:
 
 ```shell
 let df = (dataframe open Data7602DescendingYearOrder.csv)
@@ -209,7 +207,7 @@ let res = ($df | dataframe group-by year | dataframe aggregate sum | dataframe s
 $res
 ```
 
-and the benchmark with dataframes is
+and the benchmark with dataframes is:
 
 ```shell
 > benchmark {source load.nu}
@@ -225,7 +223,7 @@ Luckily nushell dataframes managed to halve the time again. Isn't that great?
 
 As you can see, Nushell's `Dataframe` commands are as fast as the most common
 tools that exist today to do data analysis. The commands that are included in
-this release have the potential to become your go to tool when doing data
+this release have the potential to become your go-to tool for doing data
 analysis. By composing complex nushell pipelines, you can extract information
 from data in a reliable way.
 
@@ -989,7 +987,6 @@ Or all the duplicated ones
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-
 ## Dataframes commands
 
 So far we have seen quite a few operations that can be done using `DataFrame`s
@@ -1052,8 +1049,6 @@ whenever possible, their analogous nushell command.
 | value-counts | Series | Returns a dataframe with the counts for unique values in series| |
 | where | DataFrame | Filter dataframe to match the condition| where |
 | with-column | DataFrame | Adds a series to the dataframe| `insert <column_name> <value> | update <column_name> { <new_value> }` |
-
-
 
 ## Future of Dataframes
 
