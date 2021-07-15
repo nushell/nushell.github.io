@@ -225,7 +225,7 @@ path = [
 ]
 
 # Some environment variables removed to protect the innocent
-# These are from a Windows environemnt, Mac and Linux will look slightly different
+# These are from a Windows environment, Mac and Linux will look slightly different
 [env]
 ALLUSERSPROFILE = "C:\\ProgramData"
 CommonProgramFiles = "C:\\Program Files\\Common Files"
@@ -369,7 +369,7 @@ With this, you should be able to `chsh` and set Nu to be your login shell. After
 ### macOS: Keeping `/usr/bin/open` as `open`
 
 Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
-As nushell has it's own `open` command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
+As nushell has its own `open` command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
 One way to work around this is to define `alias`es in your `startup` config like this:
 
 ```
