@@ -225,7 +225,7 @@ path = [
 ]
 
 # Some environment variables removed to protect the innocent
-# These are from a Windows environemnt, Mac and Linux will look slightly different
+# These are from a Windows environment, Mac and Linux will look slightly different
 [env]
 ALLUSERSPROFILE = "C:\\ProgramData"
 CommonProgramFiles = "C:\\Program Files\\Common Files"
