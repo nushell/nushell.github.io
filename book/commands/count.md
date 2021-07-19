@@ -4,6 +4,8 @@ layout: command
 nu_version: 0.26.0
 ---
 
+**[Rename `count` to `length`](https://github.com/nushell/nushell/pull/3166) since 0.29 version!**
+
 Obtain the row or column count of a table.
 
 ## Flags
