@@ -295,7 +295,7 @@ Running the `config` command without any arguments will show a table of the curr
 ```
 > config
 ─────────────────┬──────────────────
- completion_mode │ circular
+ completion_type │ circular
  env             │ [row 51 columns]
  path            │ [table 9 rows]
  startup         │ [table 1 rows]
