@@ -44,6 +44,8 @@ Nu currently supports the following formats for loading data directly into table
 * xml
 * csv
 * ini
+* xls
+* xlsx
 
 But what happens if you load a text file that isn't one of these? Let's try it:
 
