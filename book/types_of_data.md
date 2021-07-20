@@ -36,10 +36,13 @@ Double quotes are the most common form of quotes and one you may see whenever te
 Single quotes also give you a string value, just like double quotes. The difference here is that they allow you to use double quotes in the text: `'he said "can you grab my glass?"'`
 
 **String interpolation**
+Nushell supports string interpolation, allowing you to run sub-expressions inside of strings prefixed with `$`. For instance:
+
 ```
-$"my message"
+> echo $"6 x 7 = (6 * 7)"
+6 x 7 = 42
 ```
-Nushell also string interpolation, allowing you to run sub-expressions inside of strings.
+
 
 ```
 > ls | each { echo $"($it.name) is ($it.size)" }
