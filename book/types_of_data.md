@@ -39,7 +39,7 @@ Single quotes also give you a string value, just like double quotes. The differe
 ```
 $"my message"
 ```
-Nushell also string interpolation, allowing you to run sub-expressions inside of strings.
+Nushell also supports string interpolation, allowing you to run sub-expressions inside of strings.
 
 ```
 > ls | each { echo $"($it.name) is ($it.size)" }
