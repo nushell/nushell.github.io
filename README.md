@@ -12,7 +12,7 @@ features:
     details: Rather than having the need to remember all the parameters to all the commands, we can just use the same, regardless of where it came from.
   - title: Powerful Plugins
     details: Nu can't come with everything you might want to do with it, so you can extend using its powerful plugin system.
-footer: If you have suggestions or want to change something please give us feedback
+footer: If you have suggestions or want to change something please [send a PR](https://github.com/nushell/nushell.github.io) or [give us feedback](https://github.com/nushell/nushell.github.io/issues)
 
 ---
 ### Quick Install
