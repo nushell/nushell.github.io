@@ -33,10 +33,10 @@ With [Homebrew](https://brew.sh/):
 $ brew install nushell
 ```
 
-With [Scoop](https://scoop.sh):
+With [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/):
 
 ```powershell
-$ scoop install nu
+$ winget install nu
 ```
 
 #### Start the shell
