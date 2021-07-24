@@ -275,7 +275,7 @@ The startup section lets you do the configuration steps that should happen befor
 To set one of these variables, you can use `config set`. For example:
 
 ```
-> config set edit_mode "vi"
+> config set line_editor.edit_mode "vi"
 ```
 
 ### Setting a variable from the pipeline
@@ -309,7 +309,7 @@ Note: if you haven't set any configuration variables, yet, this may be empty.
 Using the `get` flag, you can retrieve the value for a given variable:
 
 ```
-> config get edit_mode
+> config get line_editor.edit_mode
 ```
 
 ### Removing a variable
@@ -317,7 +317,7 @@ Using the `get` flag, you can retrieve the value for a given variable:
 To remove a variable from the configuration, use the `remove` flag:
 
 ```
-> config remove edit_mode
+> config remove line_editor.edit_mode
 ```
 
 ### Clearing the whole configuration
