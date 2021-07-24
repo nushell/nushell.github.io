@@ -8,7 +8,7 @@ You can download Nu pre-built from the [release page](https://github.com/nushell
 
 ### Windows
 
-**please note:** Nu works on Windows 10 and does not currently have Windows 7/8.1 support.
+**Please note:** Nu works on Windows 10 and does not currently have Windows 7/8.1 support.
 
 Download the current released `.zip`-file from the [release page](https://github.com/nushell/nushell/releases) and extract it for example to:
 
@@ -26,7 +26,7 @@ to  `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is 
 
 <<< @/snippets/installation/windows_change_default_profile.sh
 
-Now `nu` should load on startup of the Windows Terminal.
+Now, `nu` should load on startup of the Windows Terminal.
 
 ## Pre-built docker containers
 

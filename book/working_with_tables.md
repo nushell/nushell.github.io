@@ -1,6 +1,6 @@
 # Working with tables
 
-One of the common ways of seeing data in Nu is through a table. Nu comes with a number of commands for working with tables to make it convenient to find what you're looking for, and for narrowing the data to just what you need.
+One of the common ways of seeing data in Nu is through a table. Nu comes with a number of commands for working with tables to make it convenient to find what you're looking for, and for narrowing down the data to just what you need.
 
 To start off, let's get a table that we can use:
 
@@ -209,7 +209,7 @@ pipeline until we're ready to write out the result with any changes we'd like if
 
 ### Updating a column
 
-Similarly to the `insert` command, we can also use the `update` command to change the contents of a column to a new value. To see it in action let's open the same file:
+In a similar way to the `insert` command, we can also use the `update` command to change the contents of a column to a new value. To see it in action let's open the same file:
 
 ```
 > open rustfmt.toml

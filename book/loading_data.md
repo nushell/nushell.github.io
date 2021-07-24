@@ -1,6 +1,6 @@
 # Loading data
 
-Earlier we saw how you can use commands like `ls`, `ps`, `date`, and `sys` to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
+Earlier, we saw how you can use commands like `ls`, `ps`, `date`, and `sys` to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
 
 ## Opening files
 
@@ -95,7 +95,7 @@ We can see that we're working with the lines because we're back into a table. Ou
 ───┴──────────┴───────────┴───────────
 ```
 
-That almost looks correct. Looks like there is extra space there. Let's `trim` that extra space:
+That *almost* looks correct. It looks like there's an extra space there. Let's `trim` that extra space:
 
 ```
 > open people.txt | lines | split column "|" | str trim
@@ -146,9 +146,9 @@ Now that our data is in a table, we can use all the commands we've used on table
 ```
 
 There are other commands you can use to work with strings:
-* str
-* lines
-* size
+* `str`
+* `lines`
+* `size`
 
 There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:
 
@@ -188,7 +188,7 @@ license = "MIT"
 
 ## Fetching URLs
 
-In addition to loading files from your filesystem, you can also load URLs by using the `fetch` command. This will fetch the contents of the URL from the internet and return it to you:
+In addition to loading files from your filesystem, you can also load URLs by using the `fetch` command. This will fetch the contents of the URL from the internet and return it:
 
 ```
 > fetch https://www.jonathanturner.org/feed.xml

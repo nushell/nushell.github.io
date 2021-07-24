@@ -1,10 +1,10 @@
 # Types of data
 
-Traditionally, Unix shell commands have communicated with each other using strings of text. One command would output text via standard out (often abbreviated 'stdout') and the other would read in text via standard in (or 'stdin'). In this way, the two commands could communicate.
+Traditionally, Unix shell commands have communicated with each other using strings of text. One command would output text via standard out (often abbreviated 'stdout') and the other would read in text via standard in (or 'stdin'), allowing the two commands to communicate.
 
 We can think of this kind of communication as string-based.
 
-Nu embraces this approach for its commands and grows it to include other kinds of data.  Currently, Nu supports two kinds of data types: simple and structured.
+Nu embraces this approach for its commands and expands it to include other kinds of data.  Currently, Nu supports two kinds of data types: simple and structured.
 
 Like many programming languages, Nu models data using a set of simple and structured data types. Simple data types include integers, floats, strings, booleans, dates, and paths. It also includes a special type for filesizes.
 
@@ -176,7 +176,7 @@ Example: a list of strings
 
 ## Tables
 
-The table is core data structure in Nushell. You'll see as you run commands that many of them return tables as output. A table has both rows and columns.
+The table is a core data structure in Nushell. As you run commands, you'll see that many of them return tables as output. A table has both rows and columns.
 
 We can create our own tables similarly to how we create a list. Because tables also contain columns and not just values, we pass in the name of the column values:
 
