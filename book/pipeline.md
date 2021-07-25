@@ -1,10 +1,10 @@
 # Pipelines
 
-One of the core designs of Nu is the pipeline, a design idea that tracks its roots back decades to some of the original philosophy behind Unix. Just as Nu extends from the single string data type of Unix, Nu also extends the idea of the pipeline to include more than just text.
+One of the core designs of Nu is the pipeline, a design idea that traces its roots back decades to some of the original philosophy behind Unix. Just as Nu extends from the single string data type of Unix, Nu also extends the idea of the pipeline to include more than just text.
 
 ## Basics
 
-A pipeline is constructed with three parts: the input, the filter, and the output.
+A pipeline is composed of three parts: the input, the filter, and the output.
 
 ```
 > open "Cargo.toml" | inc package.version | save "Cargo_new.toml"

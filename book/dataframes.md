@@ -4,7 +4,7 @@
 
 As we have seen so far, nushell makes working with data its main priority.
 `Lists` and `Tables` are there to help you cycle through values in order to
-perform multiple operations or find data in a a breeze. However, there are
+perform multiple operations or find data in a breeze. However, there are
 certain operations where a row-based data layout is not the most efficient way
 to process data, especially when working with extremely large files. Operations
 like group-by or join using large datasets can be costly memory-wise, and may

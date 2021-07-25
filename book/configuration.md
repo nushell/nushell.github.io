@@ -2,7 +2,7 @@
 
 ## Nushell Configuration with `config.toml`
 
-Nushell uses a configuration system that loads a toml file at launch time. That configuration file is called the Nushell config.toml file. It contains the configuration points that nushell will use as default settings. Each setting follows a key value pattern. A value can be a number, a string, or an array. Below is a description of each setting.
+Nushell uses a configuration system that loads a toml file at launch time. That configuration file is called the Nushell `config.toml` file. It contains the configuration points that nushell will use as default settings. Each setting follows a key value pattern. A value can be a number, a string, or an array. Below is a description of each setting.
 
 An example of the nushell `config.toml` can be found in our repo [here](https://github.com/nushell/nushell/tree/main/docs/sample_config).
 

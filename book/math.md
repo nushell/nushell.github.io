@@ -1,6 +1,6 @@
 # Math
 
-Sometimes you just need to add a few numbers when you're working on a task.  Nu offers a set of basic math operations that you can use. Math expressions are available wherever you can call a command.
+Sometimes, you just need to add a few numbers when you're working on a task.  Nu offers a set of basic math operations that you can use. Math expressions are available wherever you can call a command.
 
 ## Add, Subtract, Multiply, Divide
 
@@ -9,7 +9,7 @@ Sometimes you just need to add a few numbers when you're working on a task.  Nu 
 4
 ```
 
-In Nu, you can do the usual add, subtract, multiply and divide with the operators `+`, `-`, `*`, and `/` respectively.  Operator precedence is respected, so `1 + 2 * 3` will be treated as `1 + (2 * 3)`.  Which leads us to parentheses.
+In Nu, you can do the usual add, subtract, multiply and divide with the operators `+`, `-`, `*`, and `/` respectively.  Operator precedence is respected, so `1 + 2 * 3` will be treated as `1 + (2 * 3)`.  Which leads us to another concept: parentheses.
 
 ## Parentheses
 
