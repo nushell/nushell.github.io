@@ -67,6 +67,8 @@ The above is the same as if we had written:
 > echo "hello"
 ```
 
+Also see [Working with Strings](https://www.nushell.sh/book/loading_data.html#working-with-strings).
+
 ## Lines
 
 Lines are strings with an implied OS-dependent line ending. When used, the OS-specific line ending is used.
