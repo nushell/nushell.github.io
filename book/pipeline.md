@@ -28,7 +28,7 @@ If a pipeline is getting a bit long for one line, you can enclose it within `(` 
 )
 ``` 
 
-Also see [subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
+Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
 
 ## Working with external commands
 
