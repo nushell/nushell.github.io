@@ -12,8 +12,6 @@ features:
     details: Rather than having the need to remember all the parameters to all the commands, we can just use the same, regardless of where it came from.
   - title: Powerful Plugins
     details: Nu can't come with everything you might want to do with it, so you can extend using its powerful plugin system.
-footer: If you have suggestions or want to change something please give us feedback
-
 ---
 ### Quick Install
 
@@ -35,10 +33,10 @@ With [Homebrew](https://brew.sh/):
 $ brew install nushell
 ```
 
-With [Scoop](https://scoop.sh):
+With [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/):
 
 ```powershell
-$ scoop install nu
+$ winget install nu
 ```
 
 #### Start the shell
@@ -46,3 +44,6 @@ $ scoop install nu
 ```
 $ nu
 ```
+
+
+*You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls)*

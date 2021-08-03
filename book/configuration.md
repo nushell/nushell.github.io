@@ -2,7 +2,7 @@
 
 ## Nushell Configuration with `config.toml`
 
-Nushell uses a configuration system that loads a toml file at launch time. That configuration file is called the Nushell config.toml file. It contains the configuration points that nushell will use as default settings. Each setting follows a key value pattern. A value can be a number, a string, or an array. Below is a description of each setting.
+Nushell uses a configuration system that loads a toml file at launch time. That configuration file is called the Nushell `config.toml` file. It contains the configuration points that nushell will use as default settings. Each setting follows a key value pattern. A value can be a number, a string, or an array. Below is a description of each setting.
 
 An example of the nushell `config.toml` can be found in our repo [here](https://github.com/nushell/nushell/tree/main/docs/sample_config).
 
@@ -225,7 +225,7 @@ path = [
 ]
 
 # Some environment variables removed to protect the innocent
-# These are from a Windows environemnt, Mac and Linux will look slightly different
+# These are from a Windows environment, Mac and Linux will look slightly different
 [env]
 ALLUSERSPROFILE = "C:\\ProgramData"
 CommonProgramFiles = "C:\\Program Files\\Common Files"
@@ -275,7 +275,7 @@ The startup section lets you do the configuration steps that should happen befor
 To set one of these variables, you can use `config set`. For example:
 
 ```
-> config set edit_mode "vi"
+> config set line_editor.edit_mode "vi"
 ```
 
 ### Setting a variable from the pipeline
@@ -295,7 +295,7 @@ Running the `config` command without any arguments will show a table of the curr
 ```
 > config
 ─────────────────┬──────────────────
- completion_mode │ circular
+ completion_type │ circular
  env             │ [row 51 columns]
  path            │ [table 9 rows]
  startup         │ [table 1 rows]
@@ -309,7 +309,7 @@ Note: if you haven't set any configuration variables, yet, this may be empty.
 Using the `get` flag, you can retrieve the value for a given variable:
 
 ```
-> config get edit_mode
+> config get line_editor.edit_mode
 ```
 
 ### Removing a variable
@@ -317,7 +317,7 @@ Using the `get` flag, you can retrieve the value for a given variable:
 To remove a variable from the configuration, use the `remove` flag:
 
 ```
-> config remove edit_mode
+> config remove line_editor.edit_mode
 ```
 
 ### Clearing the whole configuration
@@ -369,7 +369,7 @@ With this, you should be able to `chsh` and set Nu to be your login shell. After
 ### macOS: Keeping `/usr/bin/open` as `open`
 
 Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
-As nushell has it's own `open` command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
+As nushell has its own `open` command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
 One way to work around this is to define `alias`es in your `startup` config like this:
 
 ```

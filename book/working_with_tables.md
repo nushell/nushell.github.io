@@ -1,6 +1,6 @@
 # Working with tables
 
-One of the common ways of seeing data in Nu is through a table. Nu comes with a number of commands for working with tables to make it convenient to find what you're looking for, and for narrowing the data to just what you need.
+One of the common ways of seeing data in Nu is through a table. Nu comes with a number of commands for working with tables to make it convenient to find what you're looking for, and for narrowing down the data to just what you need.
 
 To start off, let's get a table that we can use:
 
@@ -157,7 +157,7 @@ These look very similar! Let's see if we can spell out the difference between th
 * `select` - creates a new table which includes only the columns specified
 * `get` - returns the values inside the column specified as a list
 
-The one way to tell these apart looking at the table is the characteristic `value` column name, which lets us know that this is going to be a list of values we can work with.
+The one way to tell these apart looking at the table is that the column names are missing, which lets us know that this is going to be a list of values we can work with.
 
 The `get` command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
 
@@ -209,7 +209,7 @@ pipeline until we're ready to write out the result with any changes we'd like if
 
 ### Updating a column
 
-Similarly to the `insert` command, we can also use the `update` command to change the contents of a column to a new value. To see it in action let's open the same file:
+In a similar way to the `insert` command, we can also use the `update` command to change the contents of a column to a new value. To see it in action let's open the same file:
 
 ```
 > open rustfmt.toml

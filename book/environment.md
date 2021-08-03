@@ -1,6 +1,6 @@
 # Environment
 
-A common task in a shell is to control the environment that external applications will use. Often this is done automatically, as the environment is packaged up and given to the external application as it launches. Sometimes, though, we want to have more precise control over what environment variables an application sees.
+A common task in a shell is to control the environment that external applications will use. This is often done automatically, as the environment is packaged up and given to the external application as it launches. Sometimes, though, we want to have more precise control over what environment variables an application sees.
 
 You can see the current environment variables that will be sent to applications by echoing the value for `$nu.env`
 

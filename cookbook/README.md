@@ -1,8 +1,8 @@
 # Cookbook
 
 In this section we have put together a bunch of useful tips to get you
-started with Nushell. These are simple commands that will help you easy your
-way into the Nushell way.
+started with Nushell. These are simple commands that will help you ease your
+way into the Nushell philosophy.
 
 However, if you are in the need of more detailed Nushell scripts, have a look
 at the [Nushell's scripts](https://github.com/nushell/nu_scripts) repository

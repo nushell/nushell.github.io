@@ -1,10 +1,10 @@
 # Pipelines
 
-One of the core designs of Nu is the pipeline, a design idea that tracks its roots back decades to some of the original philosophy behind Unix. Just as Nu extends from the single string data type of Unix, Nu also extends the idea of the pipeline to include more than just text.
+One of the core designs of Nu is the pipeline, a design idea that traces its roots back decades to some of the original philosophy behind Unix. Just as Nu extends from the single string data type of Unix, Nu also extends the idea of the pipeline to include more than just text.
 
 ## Basics
 
-A pipeline is constructed with three parts: the input, the filter, and the output.
+A pipeline is composed of three parts: the input, the filter, and the output.
 
 ```
 > open "Cargo.toml" | inc package.version | save "Cargo_new.toml"
@@ -15,6 +15,20 @@ The first command, `open "Cargo.toml"`, is an input (sometimes also called a "so
 The second command, `inc package.version`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the `inc` command in our example), or they may do another operation, like logging, as the values pass through.
 
 The last command, `save "Cargo_new.toml"`, is an output (sometimes called a "sink"). An output takes input from the pipeline and does some final operation on it. In our example, we save what comes through the pipeline to a file as the final step. Other types of output commands may take the values and view them for the user.
+
+## Multi-line pipelines
+
+If a pipeline is getting a bit long for one line, you can enclose it within `(` and `)` to create a subexpression:
+
+```
+(
+    "01/22/2021" |
+    parse "{month}/{day}/{year}" |
+    get year
+)
+``` 
+
+Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
 
 ## Working with external commands
 
