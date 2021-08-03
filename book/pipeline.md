@@ -16,6 +16,20 @@ The second command, `inc package.version`, is a filter. Filters take the data th
 
 The last command, `save "Cargo_new.toml"`, is an output (sometimes called a "sink"). An output takes input from the pipeline and does some final operation on it. In our example, we save what comes through the pipeline to a file as the final step. Other types of output commands may take the values and view them for the user.
 
+## Multi-line pipelines
+
+If a pipeline is getting a bit long for one line, you can enclose it within `(` and `)` to create a subexpression:
+
+```
+(
+    "01/22/2021" |
+    parse "{month}/{day}/{year}" |
+    get year
+)
+``` 
+
+Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
+
 ## Working with external commands
 
 Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data.md)), but what about commands outside of Nu?  Let's look at some examples of working with external commands:
