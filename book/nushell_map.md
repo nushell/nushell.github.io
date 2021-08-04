@@ -28,7 +28,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | drop                   |                               |                                                      |                                            |                                                 |
 | du                     |   -                           |   -                                                  |                                            | du                                              |
 | each                   | cursor                        |                                                      | ForEach-Object, foreach, for               |                                                 |
-| echo                   | print                         |   -                                                  | Write-Output, write                        | echo                                            | 	Sort-Object {Get-
+| echo                   | print, union all  |   -                                                  | Write-Output, write                        | echo                                            | 	Sort-Object {Get-
 | enter                  |   -                           |   -                                                  |                                            |                                                 |
 | evaluate_by            |                               |                                                      |                                            |                                                 |
 | exit                   |   -                           |                                                      | exit                                       | exit                                            |
