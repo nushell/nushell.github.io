@@ -163,7 +163,23 @@ The `get` command can go one step further and take a path to data deeper in the 
 
 ## Changing data in a table
 
-In addition to selecting data from a table, we can also update what the table has. We may want to add new columns, or edit the contents of a cell. In Nu, rather than editing in place, each of the commands in the section will return a new table in the pipeline.
+In addition to selecting data from a table, we can also update what the table has. We may want to combine tables, add new columns, or edit the contents of a cell. In Nu, rather than editing in place, each of the commands in the section will return a new table in the pipeline.
+
+### Concatenating Tables
+
+We can concatenate tables with identical column names using `echo`:
+
+```
+> let $first = [[a b]; [1 2]]
+> let $second = [[a b]; [3 4]]
+> echo $first $second
+───┬───┬───
+ # │ a │ b
+───┼───┼───
+ 0 │ 1 │ 2
+ 1 │ 3 │ 4
+───┴───┴───
+```
 
 ### Adding a new column
 
