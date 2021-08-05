@@ -33,13 +33,13 @@ def greet [name] {
 
 There is no requirement that definitions have to come before the parts of the script that call the definitions, allowing you to put them where you feel comfortable.
 
-### How scripts are processed
+## How scripts are processed
 
 In a script, definitions run first. This allows us to call the definitions using the calls in the script.
 
 After the definitions run, we start at the top of the script file and run each group of commands one after another.
 
-### Script lines
+## Script lines
 
 To better understand how Nushell sees lines of code, let's take a look at an example script:
 
@@ -49,3 +49,21 @@ b; c | d
 ```
 
 When this script is run, Nushell will first run the `a` command to completion and view its results. Next, Nushell will run `b; c | d` following the rules in the "Command groups" section.
+
+## Parameterizing Scripts
+
+Passing arguments to a script is not currently possible, but you can use environmental variables to parameterize a script
+
+For example, suppose `myscript.nu` contains the following line:
+
+```
+echo $nu.env.FOO
+```
+
+You can execute `myscript.nu` from `bash` or within `nushell` itself by passing `FOO` as an environmental variable:
+
+```
+> FOO=bar nu ./myscript.nu
+bar
+```
+
