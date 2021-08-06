@@ -14,7 +14,7 @@ The second stage is the actual doing of work. Here the plugins are sent either a
 
 ## Discovery
 
-Nu discovers plugins by checking all directories available in the current PATH.
+Nu discovers plugins by checking all directories specified by `plugin_dirs` config entry and the directory where `nu` executable lies. You can change the configuration by executing `config set plugin_dirs ["/path","/to","/search"]` in Nu.
 In each directory, Nu is looking for executable files that match the pattern `nu_plugin_*` where `*` is a minimum of one alphanumeric character.
 On Windows, this has a similar pattern of `nu_plugin_*.exe` or `nu_plugin_*.bat`.
 
