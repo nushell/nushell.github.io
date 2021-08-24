@@ -27,7 +27,7 @@ Nota: Esta tabla asume Nushell 0.14.1 or posterior.
 | `chmod` | `<not yet possible>` | Changes the file attributes |
 | `date -d <date>` | `echo <date> | str to-datetime -f <format>` | Parse a date ([format documentation](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
 | `sed` | `str find-replace` | Find and replace a pattern in a string |
-| `grep <pattern>` | `where { ($it | str contains <substring>) }` | Filter strings that contain the substring |
+| `grep <pattern>` | `where $it =~ <substring>` | Filter strings that contain the substring |
 | `man <command>` | `help <command>` | Get the help for a given command |
 |  | `help commands` | List all available commands |
 |  | `help --find <string>` | Search for match in all available commands |
