@@ -28,7 +28,7 @@ We've started collecting examples to share with each other as Nushell grows and 
 
 ![Dark theme vscode showing Nushell](../assets/images/two_year_vscode.png)
 
-To work with Nushell, we also published a [vscode extension](https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang) to work with it.
+To work with Nushell, we also published a [vscode extension](https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang).
 
 ### Nushell, the shell
 
