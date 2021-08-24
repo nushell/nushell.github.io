@@ -36,7 +36,6 @@ Note: this table assumes Nu 0.14.1 or later.
 | format                 | format                        |                                                      | Text.Printf.printf                         |                                                 |
 | from                   |                               |                                                      |                                            |                                                 |
 | get                    |                               |                                                      |                                            |                                                 |
-| grep                   | filter, filterv, select       | filter, filterMap                                    | filter                                     |                                                 |
 | group_by               | group-by                      |                                                      | group, groupBy                             |                                                 |
 | headers                |                               |                                                      |                                            |                                                 |
 | help                   | doc                           |                                                      |                                            |                                                 |

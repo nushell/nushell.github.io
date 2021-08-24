@@ -35,7 +35,6 @@
 | format                 | format                        |                                                      | Text.Printf.printf                         |                                                 |
 | from                   |                               |                                                      |                                            |                                                 |
 | get                    |                               |                                                      |                                            |                                                 |
-| grep                   | filter, filterv, select       | filter, filterMap                                    | filter                                     |                                                 |
 | group_by               | group-by                      |                                                      | group, groupBy                             |                                                 |
 | headers                |                               |                                                      |                                            |                                                 |
 | help                   | doc                           |                                                      |                                            |                                                 |

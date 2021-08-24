@@ -52,7 +52,6 @@ Nota: Esta tabla asume Nu 0.14.1 o posterior.
 | from xml               | cast(variable as xml)         | N/A                                                  | ConvertFrom-Xml                            |                                                 |
 | from yaml              | N/A                           | N/A                                                  | N/A                                        |                                                 |
 | get                    |                               | Select                                               | (cmd).column                               |                                                 |
-| grep                   | filter                        | filter                                               | filter                                     | filter                                          |
 | group_by               | group by                      | GroupBy, group                                       | Group-Object, group                        |                                                 |
 | headers                |                               |                                                      |                                            |                                                 |
 | help                   | sp_help                       | N/A                                                  | Get-Help, help, man                        | man                                             |

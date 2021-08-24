@@ -35,7 +35,6 @@
 | format                 | format                        | format                                               | format                                     | format!                                         |
 | from                   | csv, json, sqlite3            |                                                      |                                            |                                                 |
 | get                    | dict[\"key\"]                 | Map[\"key\"]                                         | map[\"key\"]                               | HashMap["key"], get, entry                      |
-| grep                   | filter                        | filter                                               | filter                                     | filter                                          |
 | group_by               | itertools.groupby             | groupBy                                              |                                            | group_by                                        |
 | headers                |                               |                                                      |                                            |                                                 |
 | help                   | help                          |                                                      |                                            |                                                 |
