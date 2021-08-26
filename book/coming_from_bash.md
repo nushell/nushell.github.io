@@ -39,6 +39,8 @@ Note: this table assumes Nu 0.14.1 or later.
 | `export` | `echo $nu.env` | List the current environment variables |
 | `<update ~/.bashrc>` | `echo $nu.env | insert var value | config set_into env` | Update environment variables permanently |
 | `FOO=BAR ./bin` | `FOO=BAR ./bin` | Update environment temporarily |
+| `export FOO=BAR` | `let-env FOO = BAR` | Set environment variable for current session |
+| `unset FOO` | `let-env FOO = $nothing` | Unset environment variable for current session |
 | `alias s="git status -sb"` | `alias s = git status -sb` | Define an alias temporarily |
 | `<update ~/.bashrc>` | `<update nu/config.toml>` | Add and edit alias permanently (for new shells), find path for the file with `config path` |
 | `bash -c <commands>` | `nu -c <commands>` | Run a pipeline of commands (requires 0.9.1 or later) |
