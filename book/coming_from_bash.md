@@ -26,13 +26,16 @@ Note: this table assumes Nu 0.14.1 or later.
 | `rm -rf <path>` | `rm -r <path>` | Recursively removes the given path |
 | `chmod` | `<not yet possible>` | Changes the file attributes |
 | `date -d <date>` | `echo <date> | str to-datetime -f <format>` | Parse a date ([format documentation](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
+| `sed` | `str find-replace` | Find and replace a pattern in a string |
+| `grep <pattern>` | `where $it =~ <substring>` | Filter strings that contain the substring |
 | `man <command>` | `help <command>` | Get the help for a given command |
 |  | `help commands` | List all available commands |
+|  | `help --find <string>` | Search for match in all available commands |
 | `command1 && command2` | `command1; command2` | Run a command, and if it's successful run a second |
 | `stat $(which git)` | `stat (which git).path` | Use command output as argument for other command |
 | `echo $PATH` | `echo $nu.path` | See the current path |
 | `<update ~/.bashrc>` | `config set path [<dir1> <dir2> ...]` | Update PATH permanently |
-| `export PATH = $PATH:/usr/other/bin` | `<not yet possible>` | Update PATH temporarily |
+| `export PATH = $PATH:/usr/other/bin` | `pathvar add <path>` | Update PATH temporarily |
 | `export` | `echo $nu.env` | List the current environment variables |
 | `<update ~/.bashrc>` | `echo $nu.env | insert var value | config set_into env` | Update environment variables permanently |
 | `FOO=BAR ./bin` | `FOO=BAR ./bin` | Update environment temporarily |
@@ -41,3 +44,4 @@ Note: this table assumes Nu 0.14.1 or later.
 | `bash -c <commands>` | `nu -c <commands>` | Run a pipeline of commands (requires 0.9.1 or later) |
 | `bash <script file>` | `nu <script file>` | Run a script file (requires 0.9.1 or later) |
 | `\` | `<not yet possible>` | Line continuation is not yet supported. |
+

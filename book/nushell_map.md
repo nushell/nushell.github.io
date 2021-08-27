@@ -37,7 +37,6 @@ Note: this table assumes Nu 0.14.1 or later.
 | format                 |                               | String.Format                                        | String.Format                              |                                                 |
 | from                   | import flatfile, openjson, cast(variable as xml) |   -                               | Import/ConvertFrom-{Csv,Xml,Html,Json}     |                                                 |
 | get                    |                               | Select                                               | (cmd).column                               |                                                 |
-| grep                   | filter                        | filter                                               | filter                                     | filter                                          |
 | group_by               | group by                      | GroupBy, group                                       | Group-Object, group                        |                                                 |
 | headers                |                               |                                                      |                                            |                                                 |
 | help                   | sp_help                       |   -                                                  | Get-Help, help, man                        | man                                             |

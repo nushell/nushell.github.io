@@ -51,7 +51,6 @@ Nota: esta tabla asume Nu 0.14.1 o posterior.
 | from xml               |                               |                                                      |                                            |                                                 |
 | from yaml              |                               |                                                      |                                            |                                                 |
 | get                    | dict[\"key\"]                 | Map[\"key\"]                                         | map[\"key\"]                               |                                                 |
-| grep                   | filter                        | filter                                               | filter                                     | filter                                          |
 | group_by               | itertools.groupby             |                                                      |                                            |                                                 |
 | headers                |                               |                                                      |                                            |                                                 |
 | help                   | help                          |                                                      |                                            |                                                 |

@@ -51,7 +51,6 @@ Nota: Esta tabla asume Nu 0.14.1 o posterior.
 | from xml               |                               |                                                      |                                            |                                                 |
 | from yaml              |                               |                                                      |                                            |                                                 |
 | get                    |                               |                                                      |                                            |                                                 |
-| grep                   | filter                        |                                                      | filter                                     |                                                 |
 | group_by               | group-by                      |                                                      |                                            |                                                 |
 | headers                |                               |                                                      |                                            |                                                 |
 | help                   | doc                           |                                                      |                                            |                                                 |
