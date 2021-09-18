@@ -2,7 +2,7 @@
 
 Hola, y bienvenido al proyecto Nushell. El objetivo de este proyecto es tomar la filosofía Unix de shells, dónde tuberías *-pipes-* conectan comandos simples juntos y llevarlos al estilo moderno de desarrollo.
 
-Nu toma ideas de muchos territorios familiares: shells tradicionales como bash, shells basadas en objetos como PowerShell, programación funcional, programación de sistemas, y más. Pero, en lugar de ser un "Todo en uno", No enfoca su energía en hacer algunas cosas bien:
+Nu toma ideas de muchos territorios familiares: shells tradicionales como bash, shells basadas en objetos como PowerShell, programación funcional, programación de sistemas, y más. Pero, en lugar de ser un "Todo en uno", Nu enfoca su energía en hacer algunas cosas bien:
 
 * Crear una multiplataforma shell flexible con un toque moderno.
 * Permitir mezclar y combinar aplicaciones de línea de comandos con una shell que entiende la estructura de sus datos.
