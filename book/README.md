@@ -2,7 +2,7 @@
 
 Hello, and welcome to the Nushell project. The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development.
 
-Nu takes cues from a lot of familiar territory: traditional shells like bash, advanced shells like PowerShell, functional programming, systems programming, and more. But rather than trying to be the jack of all trades, Nu focuses its energy on doing a few things well:
+Nu takes cues from a lot of familiar territory: traditional shells like bash, object based shells like PowerShell, functional programming, systems programming, and more. But rather than trying to be the jack of all trades, Nu focuses its energy on doing a few things well:
 
 * Create a flexible cross-platform shell with a modern feel
 * Allow you to mix and match commandline applications with a shell that understands the structure of your data
@@ -50,7 +50,7 @@ Running `sys` gives information about the system that Nu is running on:
 
 <<< @/snippets/introduction/sys_example.sh
 
-This is a bit different than the tables we saw before. The `sys` command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to get the column to view:
+This is a bit different than the tables we saw before. The `sys` command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to *get* the column to view:
 
 <<< @/snippets/introduction/sys_get_example.sh
 
@@ -58,11 +58,11 @@ The `get` command lets us jump into the contents of a column of the table. Here,
 
 <<< @/snippets/introduction/sys_get_nested_example.sh
 
-Right now, there's just one user on the system named "jonathan". You'll notice that we can pass a column path (the `host.sessions` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
+Right now, there's just one user on the system named "jt". You'll notice that we can pass a column path (the `host.sessions` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
 
-You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "jonathan". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
+You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "jt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
 
-Let's see how strings work outside of Nu in action. We'll take our example from before and run the external `echo` command (the `^` tells nu to not use the built-in `echo` command):
+Let's see how strings work outside of Nu in action. We'll take our example from before and run the external `echo` command (the `^` tells Nu to not use the built-in `echo` command):
 
 <<< @/snippets/introduction/sys_get_external_echo_example.sh
 

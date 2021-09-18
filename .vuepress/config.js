@@ -144,21 +144,21 @@ module.exports = {
               title: "Nu Libro",
               collapsable: false,
               children: [
+                "",
                 "instalacion",
-                "introduccion",
                 "explorando",
                 "tipos_de_datos",
-                "cargando_datos",
+                "cargando_datos", // "trabajando_con_listas"
                 "trabajando_con_tablas",
                 "pipeline",
-                "configuracion",
-                "aliases",
-                "matematicas",
-                "entorno",
+                "configuracion", // "custom_commands"
+                "aliases", // "operadores"
+                "matematicas", // "variables_y_subexpresiones"
+                "entorno", // "scripts"
                 "metadatos",
                 "shells_en_shells",
                 "escapando",
-                "plugins",
+                "plugins", // "dataframes"
                 "llegando_de_bash",
                 "mapa_nushell",
                 "mapa_imperativo_nushell",
