@@ -1,4 +1,4 @@
 > sys | get host.sessions.name
-───┬─────────
- 0 │ jonathan
-───┴─────────
+───┬────
+ 0 │ jt
+───┴────
