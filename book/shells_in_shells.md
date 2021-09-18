@@ -23,21 +23,23 @@ Entering is similar to changing directories (as we saw with the `cd` command). T
 ```
 /home/jonathan/Source/book(master)> shells
 ───┬────────┬────────────┬─────────────────────────────────
- # │ active │ name       │ path 
+ # │ active │ name       │ path
 ───┼────────┼────────────┼─────────────────────────────────
- 0 │        │ filesystem │ /home/jonathant/Source/nushell/ 
- 1 │ X      │ filesystem │ /home/jonathant/Source/book 
+ 0 │        │ filesystem │ /home/jonathant/Source/nushell/
+ 1 │ X      │ filesystem │ /home/jonathant/Source/book
+ 2 │        │ filesystem │ /home/jonathant/Source/music/
 ───┴────────┴────────────┴─────────────────────────────────
 ```
 
-The `shells` command shows us there are two shells currently active: our original "nushell" source directory and now this new "book" directory.
+The `shells` command shows us there are three shells currently active: our original "nushell" source directory and now this new "book" directory.
 
-We can jump between these shells with the `n` and `p` shortcuts, short for "next" and "previous":
+We can jump between these shells with the `n`, `p` and `g` shortcuts, short for "next", "previous" and "goto":
 
 ```
 /home/jonathant/Source/book(master)> n
 /home/jonathant/Source/nushell(master)> p
-/home/jonathant/Source/book(master)>
+/home/jonathant/Source/book(master)> g 2
+/home/jonathant/Source/music(master)>
 ```
 
 We can see the directory changing, but we're always able to get back to a previous directory we were working on. This allows us to work in multiple directories in the same session.
