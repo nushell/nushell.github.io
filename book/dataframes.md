@@ -566,20 +566,20 @@ A `Series` is the building block of a `DataFrame`. Each Series represents a
 column with the same data type, and we can create multiple Series of different
 types, such as float, int or string.
 
-Let's start our exploration with Series by creating one using the `to-series`
+Let's start our exploration with Series by creating one using the `to-df`
 command:
 
 ```shell
-> let new = ([9 8 4] | dataframe to-series new_col)
+> let new = ([9 8 4] | dataframe to-df)
 > $new
 
-───┬───────────────
- # │ new_col (i64)
-───┼───────────────
- 0 │             9
- 1 │             8
- 2 │             4
-───┴───────────────
+───┬───
+ # │ 0
+───┼───
+ 0 │ 9
+ 1 │ 8
+ 2 │ 4
+───┴───
 ```
 
 We have created a new series from a list of integers (we could have done the
@@ -593,13 +593,13 @@ previously created column.
 > let new_2 = ($new * 3 + 10)
 > $new_2
 
-───┬───────────────
- # │ new_col (i64)
-───┼───────────────
- 0 │            37
- 1 │            34
- 2 │            22
-───┴───────────────
+───┬────
+ # │ 0
+───┼────
+ 0 │ 37
+ 1 │ 34
+ 2 │ 22
+───┴────
 ```
 
 Now we have a new Series that was constructed by doing basic operations on the
@@ -614,28 +614,28 @@ Lets rename our previous Series so it has a memorable name
 > let new_2 = ($new_2 | dataframe rename memorable)
 > $new_2
 
-───┬─────────────────
- # │ memorable (i64)
-───┼─────────────────
- 0 │              37
- 1 │              34
- 2 │              22
-───┴─────────────────
+───┬───────────
+ # │ memorable
+───┼───────────
+ 0 │        37
+ 1 │        34
+ 2 │        22
+───┴───────────
 ```
 
 We can also do basic operations with two Series as long as they have the same
 data type
 
 ```shell
-> $new_2 - $new
+> $new - $new_2
 
-───┬─────────────────────────────
- # │ sub_memorable_new_col (i64)
-───┼─────────────────────────────
- 0 │                          28
- 1 │                          26
- 2 │                          18
-───┴─────────────────────────────
+───┬──────────
+ # │ sub_0_0
+───┼──────────
+ 0 │     -28
+ 1 │     -26
+ 2 │     -18
+───┴──────────
 ```
 
 And we can add them to previously defined dataframes
@@ -659,13 +659,13 @@ we can multiply columns `a` and `b` to create a new Series
 ```shell
 > $new_df.a * $new_df.b
 
-───┬───────────────
- # │ mul_a_b (i64)
-───┼───────────────
- 0 │             2
- 1 │            12
- 2 │            30
-───┴───────────────
+───┬─────────
+ # │ mul_a_b
+───┼─────────
+ 0 │       2
+ 1 │      12
+ 2 │      30
+───┴─────────
 ```
 
 and we can start piping things in order to create new columns and dataframes
@@ -695,13 +695,13 @@ mask using the equality operator
 > let mask = ($new == 8)
 > $mask
 
-───┬────────────────
- # │ new_col (bool)
-───┼────────────────
+───┬─────────
+ # │ new_col
+───┼─────────
  0 │ false
  1 │ true
  2 │ false
-───┴────────────────
+───┴─────────
 ```
 
 and with this mask we can now filter a dataframe, like this
@@ -721,7 +721,7 @@ Now we have a new dataframe with only the values where the mask was true.
 The masks can also be created from Nushell lists as well, for example:
 
 ```shell
-> let mask1 = ([$true $true $false] | dataframe to-series mask)
+> let mask1 = ([$true $true $false] | dataframe to-df mask)
 > $new_df | dataframe filter-with $mask1
 
 ───┬───┬───┬─────────┬────────
@@ -737,13 +737,13 @@ To create complex masks, we have the `AND`
 ```shell
 > $mask && $mask1
 
-───┬─────────────────────────
- # │ and_new_col_mask (bool)
-───┼─────────────────────────
+───┬──────────────────
+ # │ and_new_col_mask
+───┼──────────────────
  0 │ false
  1 │ true
  2 │ false
-───┴─────────────────────────
+───┴──────────────────
 ```
 
 and `OR` operations
@@ -751,24 +751,24 @@ and `OR` operations
 ```shell
 > $mask || $mask1
 
-───┬────────────────────────
- # │ or_new_col_mask (bool)
-───┼────────────────────────
+───┬─────────────────
+ # │ or_new_col_mask
+───┼─────────────────
  0 │ true
  1 │ true
  2 │ false
-───┴────────────────────────
+───┴─────────────────
 ```
 
 We can also create a mask by checking if some values exist in other Series.
 Using the first dataframe that we created we can do something like this
 
 ```shell
-> let mask3 = ($df.first | dataframe is-in ([b c] | dataframe to-series))
+> let mask3 = ($df.first | dataframe is-in ([b c] | dataframe to-df))
 
-───┬──────────────
- # │ first (bool)
-───┼──────────────
+───┬──────
+ # │ first
+───┼───────
  0 │ false
  1 │ false
  2 │ false
@@ -779,7 +779,7 @@ Using the first dataframe that we created we can do something like this
  7 │ true
  8 │ true
  9 │ true
-───┴──────────────
+───┴───────
 ```
 
 and this new mask can be used to filter the dataframe
@@ -808,9 +808,9 @@ the value is equal to `a`
 ```shell
 > $df.first | dataframe set new --mask ($df.first =~ a)
 
-───┬──────────────
- # │ string (str)
-───┼──────────────
+───┬────────
+ # │ string
+───┼────────
  0 │ new
  1 │ new
  2 │ new
@@ -821,7 +821,7 @@ the value is equal to `a`
  7 │ c
  8 │ c
  9 │ c
-───┴──────────────
+───┴────────
 ```
 
 ## Series as indices
@@ -832,7 +832,7 @@ from our original dataframe. With that in mind, we can use the next command to
 extract that information
 
 ```shell
-> let indices = ([1 4 6] | dataframe to-series)
+> let indices = ([1 4 6] | dataframe to-df)
 > $df | dataframe take $indices
 
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────
@@ -892,23 +892,23 @@ And finally, we can create new Series by setting a new value in the marked
 indices. Have a look at the next command
 
 ```shell
-> let indices = ([0 2] | dataframe to-series);
+> let indices = ([0 2] | dataframe to-df);
 > $df.int_1 | dataframe set-with-idx 123 --indices $indices
 
-───┬─────────────
- # │ int_1 (i64)
-───┼─────────────
- 0 │         123
- 1 │           2
- 2 │         123
- 3 │           4
- 4 │           0
- 5 │           6
- 6 │           7
- 7 │           8
- 8 │           9
- 9 │           0
-───┴─────────────
+───┬───────
+ # │ int_1
+───┼───────
+ 0 │   123
+ 1 │     2
+ 2 │   123
+ 3 │     4
+ 4 │     0
+ 5 │     6
+ 6 │     7
+ 7 │     8
+ 8 │     9
+ 9 │     0
+───┴───────
 ```
 
 ## Unique values
@@ -943,13 +943,13 @@ to only get the unique unique values from a series, like this
 ```shell
 > $df.first | dataframe unique
 
-───┬─────────────
- # │ first (str)
-───┼─────────────
+───┬───────
+ # │ first
+───┼───────
  0 │ c
  1 │ b
  2 │ a
-───┴─────────────
+───┴───────
 ```
 
 Or we can get a mask that we can use to filter out the rows where data is
@@ -1044,7 +1044,6 @@ whenever possible, their analogous nushell command.
 | to-df | | Converts a pipelined Table or List into Dataframe| |
 | to-dummies | DataFrame | Creates a new dataframe with dummy variables| |
 | to-parquet | DataFrame | Saves dataframe to parquet file| |
-| to-series | | Converts a pipelined List into a polars series| |
 | unique | Series | Returns unique values from a series| uniq |
 | value-counts | Series | Returns a dataframe with the counts for unique values in series| |
 | where | DataFrame | Filter dataframe to match the condition| where |
