@@ -29,30 +29,6 @@ Dockerを利用してビルド済のコンテナをプルしてくる方法も�
 
 これで`nu`がWindows Terminalの起動時にロードされます。
 
-## ビルド済のDockerコンテナ
-
-ビルド済のDockerコンテナをプルしたい場合はQuay.io上で[nushell organization](https://quay.io/organization/nushell)のためのタグを閲覧できます。
-コンテナのプルは以下のように行います。
-
-<<< @/snippets/installation/pull_prebuilt_container.sh
-
-"nu-base"と"nu"のどちらにもバイナリーが含まれますが、nu-baseには`/code`内にソースコードと全ての依存関係も含まれています。
-
-[dockerfiles](https://github.com/nushell/nushell/tree/master/docker)を利用してローカルでコンテナをビルドすることもできます。
-ベースイメージをビルドするには:
-
-<<< @/snippets/installation/build_containers_locally_base_image.sh
-
-そして、小さなコンテナをビルドするには(マルチステージビルドを利用):
-
-<<< @/snippets/installation/build_containers_locally_multistage_build.sh
-
-どちらの方法でも、次のようにコンテナを実行できます:
-
-<<< @/snippets/installation/run_containers_built_locally.sh
-
-サイズを重要視する場合は、２番目のコンテナのほうが少し小さくなります。
-
 ## 事前準備
 
 Nuをインストールする前に、システムに必要なツールがそろっているか確認する必要があります。現在、Rustのツールチェインといくつかの依存関係が必要です。

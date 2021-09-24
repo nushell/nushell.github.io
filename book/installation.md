@@ -28,30 +28,6 @@ to  `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is 
 
 Now, `nu` should load on startup of the Windows Terminal.
 
-## Pre-built docker containers
-
-If you want to pull a pre-built container, you can browse tags for the [nushell organization](https://quay.io/organization/nushell)
-on [Quay.io](https://quay.io/). Pulling a container would come down to:
-
-<<< @/snippets/installation/pull_prebuilt_container.sh
-
-Both "nu-base" and "nu" provide the `nu` binary, however nu-base also includes the source code at `/code`
-in the container and all dependencies. The "nu" container is a bit smaller, if size is important to you.
-
-
-Optionally, you can also build the containers locally using the [provided dockerfiles](https://github.com/nushell/nushell/tree/master/docker):
-To build the base image ("nu-base"):
-
-<<< @/snippets/installation/build_containers_locally_base_image.sh
-
-And to build the smaller container("nu") using a multi-stage build:
-
-<<< @/snippets/installation/build_containers_locally_multistage_build.sh
-
-You can run either the pre-built or locally built containers as follows:
-
-<<< @/snippets/installation/run_containers_built_locally.sh
-
 ## Getting Ready
 
 Before we can install Nu, we need to make sure our system has the necessary requirements. Currently, this means making sure we have both the Rust toolchain and local dependencies installed.
