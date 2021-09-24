@@ -42,41 +42,6 @@ y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos 
  
  Ahora `nu` debería cargar al inicio de la Terminal de Windows.
 
-## Contenedores de Docker preconstruidos
-
-Si deseas jalar un contenedor preconstruido, puedes navegar las etiquetas de la [organización nushell](https://quay.io/organization/nushell)
-en Quay.io. Jalar un contenedor se reduce a:
-
-```bash
-$ docker pull quay.io/nushell/nu
-$ docker pull quay.io/nushell/nu-base
-```
-
-Tanto "nu-base" y "nu" proporciona el binario `nu`, sin embargo nu-base también incluye el código fuente en `/code` en el contenedor y todas las dependencias.
-
-Opcionalmente, también puedes construir los contenedores localmente utilizando los [dockerfiles proporcionados](https://github.com/nushell/nushell/tree/master/docker):
-Para construir la imagen base:
-
-```bash
-$ docker build -f docker/Dockerfile.nu-base -t nushell/nu-base .
-``` 
-
-y luego para construir el contenedor más pequeño (usando una construcción de varias etapas):
-
-```bash
-$ docker build -f docker/Dockerfile -t nushell/nu .
-``` 
-
-De cualquier manera, se puede ejecutar cualquier contenedor de la siguiente manera:
-
-```bash
-$ docker run -it nushell/nu-base
-$ docker run -it nushell/nu
-/> exit
-```
-
-El segundo contenedor es un poco más pequeño, si tamaño es importante para ti.
-
 ## Preparación
 
 Antes de que podamos instalar Nu, necesitamos asegurarnos de que nuestro sistema tenga los requerimientos necesarios. Actualmente significa que debemos verificar tener instalado tanto el Rust toolchain así como las dependencias locales. Estás son las suites de compilación recomendadas:

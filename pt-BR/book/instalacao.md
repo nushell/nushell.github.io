@@ -6,41 +6,6 @@ Atualmente, as melhores maneiras de instalar o Nu são a partir do [crates.io](h
 
 Você pode baixar o Nu da [página de releases](https://github.com/nushell/nushell/releases). Alternativamente, se você usa o [Homebrew](https://brew.sh/) para macOS, pode instalar o binário executando o comando `brew install nushell`.
 
-## Containers Docker
-
-Se quiser baixar um container pronto, você pode navegar nas tags da [organização nushell](https://quay.io/organization/nushell) no Quay.io. Baixar um container se resume a:
-
-```bash
-$ docker pull quay.io/nushell/nu
-$ docker pull quay.io/nushell/nu-base
-```
-
-Tanto o "nu-base" como o "nu" fornecem o binário `nu`, mas o nu-base também inclui o código fonte no container em `/code`, bem como todas as dependências.
-
-Opcionalmente, você pode fazer o build dos containers localmente usando os [dockerfiles fornecidos](https://github.com/nushell/nushell/tree/master/docker):
-
-Para fazer o build da imagem base:
-
-```bash
-$ docker build -f docker/Dockerfile.nu-base -t nushell/nu-base .
-```
-
-E então, para fazer o build do container menor (usando o build Multiestágios):
-
-```bash
-$ docker build -f docker/Dockerfile -t nushell/nu .
-```
-
-De qualquer modo, você pode rodar qualquer um dos containers assim:
-
-```bash
-$ docker run -it nushell/nu-base
-$ docker run -it nushell/nu
-/> exit
-```
-
-O segundo container é um pouco menor, se o tamanho for importante para você.
-
 ## Preparando
 
 Antes de instalar o Nu, precisamos nos certificar de que nosso sistema tem os requisitos necessários. Atualmente, isso significa ter certeza de que temos tanto o conjunto de ferramentas do Rust como as dependências locais instaladas.
