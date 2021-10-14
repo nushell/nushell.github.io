@@ -65,7 +65,6 @@ the color alone or with one of the following attributes.
 |---------------------------|---------------------------------------------|------------|----------------|
 | [color_config]            | This is the section name                    | string     | Outlined above |
 | header_align              | Apply an alignment to the header            | string     | Outlined above |
-| header_bold               | Enable/Disable bold for the header          | string     | Outlined above |
 | header_color              | Apply a color to the header                 | string     | Outlined above |
 | index_color               | Apply a style of the Index (#)              | string     | Outlined above |
 | leading_trailing_space_bg | Apply a style to leading and trailing space | string     | Outlined above |
