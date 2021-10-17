@@ -18,7 +18,7 @@ Nu also uses modern globs as well, which allow you access to deeper directories.
 
 <<< @/snippets/moving_around/ls_deep_glob_example.sh
 
- Here, we're looking for any file that ends with ".md", and the two asterisks further say "in any directory starting from here".
+Here, we're looking for any file that ends with ".md", and the two asterisks further say "in any directory starting from here".
 
 ## Changing the current directory
 

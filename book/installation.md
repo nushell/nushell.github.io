@@ -52,7 +52,7 @@ Nu currently requires the **latest stable (1.55 or later)** version of Rust. The
 
 Once we are ready, we press 1 and then enter.
 
-If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.46 or later.
+If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.55 or later.
 
 ## Dependencies
 
