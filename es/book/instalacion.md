@@ -80,7 +80,7 @@ Current installation options:
 
 Una vez que estamos listos, presionamos 1 y luego enter.
 
-Si prefieres no instalar Rust mediante `rustup`, también puedes instalar a través de otros métodos (Ej. un paquete en alguna distribución de Linux). Solo asegúrate de instalar una versión que sea Rust 1.39 o posterior.
+Si prefieres no instalar Rust mediante `rustup`, también puedes instalar a través de otros métodos (Ej. un paquete en alguna distribución de Linux). Solo asegúrate de instalar una versión que sea Rust 1.55 o posterior.
 
 ## Dependencias
 
