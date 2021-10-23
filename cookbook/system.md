@@ -101,10 +101,9 @@ Output
 
 This process can be sent the kill signal in a one-liner:
 
-`ps | where name == node | format "{pid}" | kill -9 $it`
+`ps | where name == node | get pid | kill -9 $it`
 
 Notes: 
-- `format "{pid}"` is necessary for now since a value of type Int (pid) can not be converted to a string yet, which is necessary for $it. This has been fixed with 0.8.1. With version 0.8.1 you can simplify this by simply using `get pid`.
 - `kill` is Linux/Unix specific command, it is not built-in to nu.
 
 ---
