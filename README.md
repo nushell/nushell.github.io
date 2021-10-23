@@ -36,7 +36,7 @@ $ brew install nushell
 With [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/):
 
 ```powershell
-$ winget install nu
+$ winget install -e nu
 ```
 
 #### Start the shell
