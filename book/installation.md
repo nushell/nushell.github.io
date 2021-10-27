@@ -1,6 +1,6 @@
 # Installing Nu
 
-The best way currently to get Nu up and running is to install from [crates.io](https://crates.io), download pre-built binaries from our [release page](https://github.com/nushell/nushell/releases), build from source, or pulling a pre-built container with Docker.
+The best way currently to get Nu up and running is to install from [crates.io](https://crates.io), download pre-built binaries from our [release page](https://github.com/nushell/nushell/releases), or build from source.
 
 ## Pre-built binaries
 
@@ -18,7 +18,7 @@ And then add the folder of `nu` to your PATH. Once we have done that, we can run
 
 <<< @/snippets/installation/windows_run_nu.sh
 
-If you are using the new [Windows Terminal](https://github.com/microsoft/terminal) you can set `nu` as your default shell by adding:
+If you are using [Windows Terminal](https://github.com/microsoft/terminal) you can set `nu` as your default shell by adding:
 
 <<< @/snippets/installation/windows_terminal_default_shell.sh
 
@@ -46,13 +46,13 @@ For Windows, when you install Visual Studio Community Edition, make sure to inst
 
 If we don't already have Rust on our system, the best way to install it is via [rustup](https://rustup.rs/). Rustup is a way of managing Rust installations, including managing using different Rust versions. 
 
-Nu currently requires the **latest stable (1.46 or later)** version of Rust. The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
+Nu currently requires the **latest stable (1.55 or later)** version of Rust. The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
 
 <<< @/snippets/installation/rustup_choose_rust_version.sh
 
 Once we are ready, we press 1 and then enter.
 
-If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.46 or later.
+If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.55 or later.
 
 ## Dependencies
 

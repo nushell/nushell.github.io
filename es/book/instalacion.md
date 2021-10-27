@@ -1,6 +1,6 @@
 # Instalando Nu
 
-La mejor manera actualmente para poner en marcha Nu es instalándolo a través de [crates.io](https://crates.io), descargando desde [nuestra página](https://github.com/nushell/nushell/releases), compilarlo desde la fuente, o jalando un contenedor preconstruido con Docker.
+La mejor manera actualmente para poner en marcha Nu es instalándolo a través de [crates.io](https://crates.io), descargando desde [nuestra página](https://github.com/nushell/nushell/releases), y compilar desde la fuente.
 
 ## Binarios
 
@@ -23,7 +23,7 @@ y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos 
  C:\Users\user>
  ```
 
- Si te encuentras usando la nueva [Windows Terminal](https://github.com/microsoft/terminal) puedes establecer `nu` como la shell por defecto añadiendo:
+ Si te encuentras usando [Windows Terminal](https://github.com/microsoft/terminal) puedes establecer `nu` como la shell por defecto añadiendo:
 
  ```         
 {
@@ -64,7 +64,7 @@ Para que Rust funcione correctamente, necesitarás tener un suite de compilació
 
 En el caso de que no dispongamos de Rust en nuestro sistema la mejor manera de instalarlo es mediante [rustup](https://rustup.rs/). Rustup es una manera de manejar instalaciones de Rust incluyendo distintas versiones de Rust.
 
-Nu actualmente requiere la versión **estable más reciente (1.39 o posterior)** de Rust. La mejor manera de `rustup` inferir la versión correcta para ti. En el momento de abrir `rustup` te solicitará qué versión de Rust deseas instalar:
+Nu actualmente requiere la versión **estable más reciente (1.55 o posterior)** de Rust. La mejor manera de `rustup` inferir la versión correcta para ti. En el momento de abrir `rustup` te solicitará qué versión de Rust deseas instalar:
 
 ```
 Current installation options:
@@ -80,7 +80,7 @@ Current installation options:
 
 Una vez que estamos listos, presionamos 1 y luego enter.
 
-Si prefieres no instalar Rust mediante `rustup`, también puedes instalar a través de otros métodos (Ej. un paquete en alguna distribución de Linux). Solo asegúrate de instalar una versión que sea Rust 1.39 o posterior.
+Si prefieres no instalar Rust mediante `rustup`, también puedes instalar a través de otros métodos (Ej. un paquete en alguna distribución de Linux). Solo asegúrate de instalar una versión que sea Rust 1.55 o posterior.
 
 ## Dependencias
 
