@@ -77,9 +77,9 @@ Note: this table assumes Nu 0.14.1 or later.
 | shells                 |                               |                                                      |                                            |                                                 |
 | shuffle                | random.shuffle                |                                                      |                                            |                                                 |
 | size                   | len                           |                                                      |                                            |                                                 |
-| skip                   | list[x:]                      |                                                      |                                            | &Vec[x..]                                       |
+| skip                   | list[x:]                      |                                                      |                                            | &Vec[x..],skip                                 |
 | skip_until             |                               |                                                      |                                            |                                                 |
-| skip_while             | itertools.dropwhile           |                                                      |                                            |                                                 |
+| skip_while             | itertools.dropwhile           |                                                      |                                            | skip_while                                     |
 | sort-by                | sorted, list.sort             | sortedBy, sortedWith, Arrays.sort, Collections.sort  | sort                                       | sort                                            |
 | split_by               | str.split{,lines}, re.split   | split                                                | views::split                               | split                                           |
 | split_column           |                               |                                                      |                                            |                                                 |
