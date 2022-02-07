@@ -21,6 +21,7 @@
 - [Escaping commands](escaping.md) - Escaping to native commands of the same name
 - [Plugins](plugins.md) - Enhancing nushell with more features using plugins
 - [Dataframes](dataframes.md) - Working with dataframes in nushell
+- [Regular Expressions](regular_expressions.md) - Guide to use regex
 - [Coming from Bash](coming_from_bash.md) - Guide for those coming to nushell from Bash
 - [Nushell map from shells/DSL](nushell_map.md) - Guide to show how nushell compares with SQL, Linq, PowerShell, and Bash
 - [Nushell map from imperative languages](nushell_map_imperative.md) - Guide to show how nushell compares with Python, Kotlin, C++, C#, and Rust
