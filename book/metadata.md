@@ -20,19 +20,16 @@ Values that flow through a pipeline in Nu often have a set of additional informa
 Let's run the `open` command again, but this time, we'll look at the tags it gives back:
 
 ```
-> open Cargo.toml | tags
+> open Cargo.toml | metadata
 ────────┬───────────────────────────────────────────
- span   │ [row end start] 
- anchor │ /home/jonathant/Source/nushell/Cargo.toml 
+ span   │ {record 2 fields}
 ────────┴───────────────────────────────────────────
 ```
 
-Currently, we track two bits of metadata on the values in pipeline. You can notice that we have the anchor, which gives the location for where this data was loaded from. This can help Nu better understand how to present data.
-
-There's also a span. Let's take a closer look at that:
+Currently, we track only the span of where values come from. Let's take a closer look at that:
 
 ```
-> open Cargo.toml | tags | get span
+> open Cargo.toml | metadta | get span
 ───────┬────
  start │ 5 
  end   │ 15 

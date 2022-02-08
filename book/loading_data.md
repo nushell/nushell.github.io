@@ -38,14 +38,20 @@ If we wanted to check the version of the project we were looking at, we can use 
 
 Nu currently supports the following formats for loading data directly into tables:
 
-* json
-* yaml
-* toml
-* xml
 * csv
+* eml
+* ics
 * ini
-* xls
-* xlsx
+* json
+* ods
+* ssv
+* toml
+* tsv
+* url
+* vcf
+* xlsx / xls
+* xml
+* yaml / yml
 
 But what happens if you load a text file that isn't one of these? Let's try it:
 

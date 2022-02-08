@@ -157,13 +157,21 @@ Binary data, like the data from an image file, is a group of raw bytes.
 
 Structured data builds from the simple data. For example, instead of a single integer, structured data gives us a way to represent multiple integers in the same value. Here's a list of the currently supported structured data types: rows, lists, and blocks.
 
-## Rows
+## Records
 
-The row data type represents what you would see in one row of data in the table. It has different elements of data, and each element of data is given a column name.
+Records hold key-value pairs, much like objects in JSON. As these can sometimes have many fields, a record is printed up-down rather than left-right:
+
+```
+> echo {name: sam, rank: 10}
+╭──────┬─────╮
+│ name │ sam │
+│ rank │ 10  │
+╰──────┴─────╯
+```
 
 ## Lists
 
-Lists can hold more than one value. These can be simple values.  They can also hold rows, and the combination of a list of rows is often called a "table".
+Lists can hold more than one value. These can be simple values.  They can also hold rows, and the combination of a list of records is often called a "table".
 
 Example: a list of strings
 
@@ -201,6 +209,18 @@ We can also create a table with multiple rows of data:
  0 │ Value1  │ Value2  
  1 │ Value3  │ Value4  
 ───┴─────────┴─────────
+```
+
+You can also create a table as a list of records:
+
+```
+> echo [{name: sam, rank: 10}, {name: bob, rank: 7}] 
+╭───┬──────┬──────╮
+│ # │ name │ rank │
+├───┼──────┼──────┤
+│ 0 │ sam  │   10 │
+│ 1 │ bob  │    7 │
+╰───┴──────┴──────╯
 ```
 
 ## Blocks
