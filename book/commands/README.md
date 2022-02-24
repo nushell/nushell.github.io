@@ -1,5 +1,7 @@
-# How do I get started?
-
+---
+title: How do I get started?
+layout: command
+---
 Pick any command from the checklist and write a comment acknowledging you started work.
 
 ## Instructions for documenting a Nu command of your choosing

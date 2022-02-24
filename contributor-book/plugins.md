@@ -142,7 +142,7 @@ impl Plugin for Len {
     fn config(&mut self) -> Result<Signature, ShellError> {
         Ok(Signature::build("len").desc("My custom len plugin").filter())
     }
-    
+
     fn filter(&mut self, input: Value) -> Result<Vec<ReturnValue>, ShellError> {
         Ok(vec![ReturnSuccess::value(self.len(input)?)])
     }
@@ -259,6 +259,10 @@ flags:
   -h, --help: Display this help message
 ```
 
+**Provides executing regular expressions**
+
+We basically use the [regex]<https://github.com/rust-lang/regex> crate. Unless there is a specific reason, it is recommended to use it.
+
 ## Creating a plugin (in Python)
 
 We can also create plugins in other programming languages. In this section, we'll write the same `len` plugin in Python.
@@ -372,7 +376,7 @@ All of this takes a few imports to accomplish, so we make sure to include them.
 Finally, to make it easier to run our Python, we make this file executable (using something like `chmod +x nu_plugin_len`) and add the path to our python at the top. This trick works for Unix-based platforms, for Windows we would need to create an .exe or .bat file that would invoke the python code for us.
 
 We are using Python 3 because Python 2 will not be maintained past 2020. However our script works accordingly with Python 2 and with Python 3.
-Just change the first line into: 
+Just change the first line into:
 
 ```python
 #!/usr/bin/python

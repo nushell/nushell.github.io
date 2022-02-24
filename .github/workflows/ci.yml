@@ -1,5 +1,5 @@
 name: CI
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build:
@@ -14,24 +14,3 @@ jobs:
 
       - run: npm install
       - run: npm run build
-        
-  deploy:
-    runs-on: ubuntu-18.04
-    if: ${{ github.event_name == 'push' }}
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node
-        uses: actions/setup-node@v2-beta
-        with:
-          node-version: '12'
-
-      - run: npm install
-      - run: npm run build
-        
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./.vuepress/dist
-          cname: www.nushell.sh
