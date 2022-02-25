@@ -29,7 +29,7 @@ Let's run the `open` command again, but this time, we'll look at the tags it giv
 Currently, we track only the span of where values come from. Let's take a closer look at that:
 
 ```
-> open Cargo.toml | metadta | get span
+> open Cargo.toml | metadata | get span
 ───────┬────
  start │ 5 
  end   │ 15 
