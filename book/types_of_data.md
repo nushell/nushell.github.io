@@ -45,7 +45,7 @@ Nushell supports string interpolation, allowing you to run sub-expressions insid
 
 
 ```
-> ls | each { echo $"($it.name) is ($it.size)" }
+> ls | each { |it| echo $"($it.name) is ($it.size)" }
 ───┬─────────────────────
  0 │ genawait is 4.1 KB  
  1 │ learncpp is 4.1 KB  
