@@ -2,8 +2,8 @@
 home: true
 heroImage: null
 heroText: Nushell
-tagline: 一种新型的外壳。.
-actionText: Get Started →
+tagline: 新型的Shell
+actionText: 点击了解更多
 actionLink: /zh-cn/book/
 features:
   - title: Powerful pipelines to control your system
@@ -15,33 +15,36 @@ features:
 footer: If you have suggestions or want to change something please give us feedback
 
 ---
-### Quick Install
+### 快速安装
 
-#### Install Latest Version
+#### 下载最新版本的 Nushell （二进制文件）
 
-Install the latest version from the [releases page](https://github.com/nushell/nushell/releases)
+请从 [GitHub releases page](https://github.com/nushell/nushell/releases) 下载最新版本的 Nushell 二进制文件
 
-From source on [crates.io](https://crates.io):
+#### 自行编译（使用 Rust 工具链）
+
+请确保你知道什么是 Rust 工具链以及 Cargo 再进行此步操作！
+自行编译来自 [crates.io](https://crates.io) 的源代码:
 
 ```sh
 $ cargo install nu
 ```
 
-#### Install via Package Manager
+#### 通过包管理器安装
 
-With [Homebrew](https://brew.sh/):
+使用 [Homebrew(MacOS & Linux)](https://brew.sh/) 进行安装:
 
 ```sh
 $ brew install nushell
 ```
 
-With [Scoop](https://scoop.sh):
+使用 [Scoop(Windows)](https://scoop.sh):
 
 ```powershell
 $ scoop install nu
 ```
 
-#### Start the shell
+#### 开始你的 Nushell 旅程吧！
 
 ```
 $ nu
