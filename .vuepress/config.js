@@ -94,7 +94,7 @@ module.exports = {
         sidebar: {
           "/old_book/": [
             {
-              title: "Nu Book (old)",
+              title: "Nu Book (0.44)",
               collapsable: false,
               children: [
                 "",
