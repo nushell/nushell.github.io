@@ -34,7 +34,7 @@ We defined `hello` and `hi` custom commands inside a `greetings` module.
 
 The `export` keyword makes it possible to later import the commands from the module.
 
-Similar to `def`, it is also possible to mark `def-env` with the `export` keyword (you can learn more about `def-env` in the [Environment](configuration.md) chapter).
+Similar to `def`, it is also possible to mark `def-env` with the `export` keyword (you can learn more about `def-env` in the [Environment](environment.md) chapter).
 
 ## Using modules
 
