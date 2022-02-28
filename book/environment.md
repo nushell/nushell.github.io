@@ -56,6 +56,22 @@ If you have more than one environment variable you'd like to set, you can create
 
 You can also set environment variables that are set at startup and are available for the duration of Nushell running. These can be set in the `env` section of the [config](configuration.md).
 
+## Defining environment from custom commands
+
+Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
+However, a command defined as `def-env` instead of `def` (it applies also to `export def`, see [Modules](modules.md)) will preserve the environment on the caller's side:
+```
+> def-env foo [] {
+    let-env FOO = 'BAR'
+}
+
+> foo
+
+> $env.FOO
+BAR
+```
+
+
 ## Removing environment variables
 
 You can remove an environment variable only if it was set in the current scope:
