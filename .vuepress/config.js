@@ -90,8 +90,6 @@ module.exports = {
               ],
             },
           ],
-	},
-        sidebar: {
           "/old_book/": [
             {
               title: "Nu Book (0.44)",
