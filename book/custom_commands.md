@@ -85,10 +85,26 @@ error: Type Error
 
 This can help you guide users of your definitions to call them with only the supported types.
 
-The currently accepted types are (as of version 0.28.0):
-```
-int, string, path, table, unit, number, pattern, range, block, any
-```
+The currently accepted types are (as of version 0.59.0):
+
+ - `any`
+ - `block`
+ - `cell-path`
+ - `duration`
+ - `path`
+ - `expr`
+ - `filesize`
+ - `glob`
+ - `int`
+ - `math`
+ - `number`
+ - `operator`
+ - `range`
+ - `cond`
+ - `bool`
+ - `signature`
+ - `string`
+ - `variable`
 
 ## Flags
 
@@ -263,4 +279,4 @@ Now, if we call the above command later in a pipeline, we can see what it does w
 
 ## Persisting
 
-For information about how to persist custom commands so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md#startup-commands) and add your custom commands to the `startup` section.
+For information about how to persist custom commands so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md#startup-commands) and add your startup script.

@@ -63,7 +63,7 @@ Nushell also supports `&&` and `||` to join two operations that return boolean v
 Math operations are evaluated in the follow order (from highest precedence to lowest):
 
 * Parentheses (`()`)
-* Multiply (`*`) and Divide (`/`) 
+* Multiply (`*`) and Divide (`/`) and Power (`**`)
 * Add (`+`) and Subtract (`-`)
 
 ```

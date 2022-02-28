@@ -52,18 +52,22 @@ When this script is run, Nushell will first run the `a` command to completion an
 
 ## Parameterizing Scripts
 
-Passing arguments to a script is not currently possible, but you can use environmental variables to parameterize a script
-
-For example, suppose `myscript.nu` contains the following line:
+You can pass arguments to scripts by passing them following the name of the script name.
 
 ```
-echo $nu.env.FOO
+> nu <script name> <script args>
 ```
 
-You can execute `myscript.nu` from `bash` or within `nushell` itself by passing `FOO` as an environmental variable:
+This will call the `main` command in your script.
 
 ```
-> FOO=bar nu ./myscript.nu
-bar
+# myscript.nu
+
+def main[x: int] {
+  $x + 10
+}
+```
+```
+> nu myscript.nu 100
 ```
 
