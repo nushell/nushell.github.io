@@ -1,16 +1,18 @@
 ---
 title: version
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
 
-Outputs the nushell version.
+Display Nu version.
+
+## Signature
+
+```> version ```
 
 ## Examples
 
+Display Nu version
 ```shell
 > version
-─────────┬────────
- version │ 0.15.1
-─────────┴────────
 ```

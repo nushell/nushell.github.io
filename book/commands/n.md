@@ -1,15 +1,23 @@
 ---
 title: n
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
-Go to next shell.
 
-## Usage
+Switch to the next shell.
+
+## Signature
+
+```> n ```
+
+## Examples
+
+Make two directories and enter new shells for them, use `n` to jump to the next shell
 ```shell
-> n {flags} 
- ```
+> mkdir foo bar; enter foo; enter ../bar; n
+```
 
-## Flags
-* -h, --help: Display this help message
-
+Run `n` several times and note the changes of current directory
+```shell
+> n
+```

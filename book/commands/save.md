@@ -1,34 +1,28 @@
 ---
 title: save
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
 
-This command saves the contents of the pipeline to a file. Use this in combination with the `to json`, `to csv`, ... commands to save the contents in the specified format.
+Save a file.
 
-Syntax: `save (path) {flags}`
+## Signature
+
+```> save (filename) --raw```
 
 ## Parameters
 
-* `(path)` the path to save contents to
+ -  `filename`: the filename to use
+ -  `--raw`: save file as raw binary
 
-### Flags
+## Examples
 
-    --raw
-      treat values as-is rather than auto-converting based on file extension
-
-## Example
-
-You can save the name of files in a directory like this:
-
+Save a string to foo.txt in current directory
 ```shell
-> ls | where type == File | select name | save filenames.csv
+> echo 'save me' | save foo.txt
 ```
 
-Or you can format it in supported formats using one of the `to` commands:
-
+Save a record to foo.json in current directory
 ```shell
-> ls | where type == File | select name | to csv | save filenames
+> echo { a: 1, b: 2 } | save foo.json
 ```
-
-`filename.csv` and `filenames` are both `csv` formatted files. Nu auto-converts the format if a supported file extension is given.

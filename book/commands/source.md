@@ -1,18 +1,32 @@
 ---
 title: source
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
+
 Runs a script file in the current context.
 
-## Usage
-```shell
-> source <filename> {flags} 
- ```
+## Signature
+
+```> source (filename)```
 
 ## Parameters
-* `<filename>` the filepath to the script file to source
 
-## Flags
-* -h, --help: Display this help message
+ -  `filename`: the filepath to the script file to source
 
+## Examples
+
+Runs foo.nu in the current context
+```shell
+> source foo.nu
+```
+
+Runs foo.nu in current context and call the command defined, suppose foo.nu has content: `def say-hi [] { echo 'Hi!' }`
+```shell
+> source ./foo.nu; say-hi
+```
+
+Runs foo.nu in current context and call the `main` command automatically, suppose foo.nu has content: `def main [] { echo 'Hi!' }`
+```shell
+> source ./foo.nu
+```

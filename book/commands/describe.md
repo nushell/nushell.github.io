@@ -1,15 +1,18 @@
 ---
 title: describe
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
-Describes the objects in the stream.
 
-## Usage
+Describe the value(s) piped in.
+
+## Signature
+
+```> describe ```
+
+## Examples
+
+Describe the type of a string
 ```shell
-> describe {flags} 
- ```
-
-## Flags
-* -h, --help: Display this help message
-
+> 'hello' | describe
+```

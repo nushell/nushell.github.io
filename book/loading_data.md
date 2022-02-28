@@ -43,6 +43,7 @@ Nu currently supports the following formats for loading data directly into table
 * ics
 * ini
 * json
+* nuon
 * ods
 * ssv
 * toml

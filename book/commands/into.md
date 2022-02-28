@@ -1,20 +1,11 @@
 ---
 title: into
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
+
 Apply into function.
 
-## Usage
-```shell
-> into <subcommand> {flags} 
- ```
+## Signature
 
-## Subcommands
-* into binary - Convert value to a binary primitive
-* into int - Convert value to integer
-* into string - Convert value to string
-
-## Flags
-* -h, --help: Display this help message
-
+```> into ```
