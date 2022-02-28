@@ -20,7 +20,7 @@ The environment is created from the settings in the Nu configuration and from th
 A common shorthand, inspired by Bash and others, is also available. You can write the above example as:
 
 ```
-> FOO=BAR echo $nu.env.FOO
+> FOO=BAR echo $env.FOO
 BAR
 ```
 
