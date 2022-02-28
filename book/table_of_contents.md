@@ -15,6 +15,7 @@
 - [Math](math.md) - Math operations in nushell
 - [Variables and subexpressions](variables_and_subexpressions.md) - Working with variables and working with subexpressions
 - [Environment](environment.md) - Working with environment variables
+- [Modules](modules.md) - Creating and using your own modules
 - [Scripts](scripts.md) - Creating your own scripts
 - [Metadata](metadata.md) - An explanation of Nu's metadata system
 - [Shells](shells_in_shells.md) - Working with multiple locations

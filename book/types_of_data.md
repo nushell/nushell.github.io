@@ -99,6 +99,15 @@ The two values of booleans are `$true` and `$false`.
 
 Dates and times are held together in the Date value type. Date values used by the system are timezone-aware, and by default use the UTC timezone.
 
+Dates are in three forms, based on the RFC 3339 standard:
+
+* A date:
+  * `2022-02-02`
+* A date and time (in GMT):
+  * `2022-02-02T14:30:00`
+* A date and time with timezone:
+  * `2022-02-02T14:30:00+05:00`
+
 ## Duration
 
 Durations represent a length of time.  A second, 5 weeks, and a year are all durations.

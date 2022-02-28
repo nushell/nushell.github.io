@@ -75,6 +75,7 @@ module.exports = {
                 "math",
                 "variables_and_subexpressions",
                 "environment",
+                "modules",
                 "scripts",
                 "metadata",
                 "shells_in_shells",
