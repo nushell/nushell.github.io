@@ -27,7 +27,7 @@ BAR
 You can also temporarily update an environment variable when you run a command or pipeline of commands.
 
 ```
-> with-env [FOO BAR] { echo $nu.env.FOO }
+> with-env [FOO BAR] { echo $env.FOO }
 BAR
 ```
 
@@ -41,7 +41,7 @@ You can also set environment variables that will be available in the current sco
 To do so, you can use the `let-env` command.
 
 ```
-> let-env FOO = BAR
+> let-env FOO = 'BAR'
 ```
 
 let-env is similar to the **export** command in bash.
@@ -77,7 +77,7 @@ BAR
 You can remove an environment variable only if it was set in the current scope:
 
 ```
-> let-env FOO = BAR
+> let-env FOO = 'BAR'
 ...
 > hide FOO
 ```
@@ -85,11 +85,11 @@ You can remove an environment variable only if it was set in the current scope:
 If you want to remove an environment variable stemming from a parent scope, you can `hide` it:
 
 ```
-> let-env FOO = BAR
+> let-env FOO = 'BAR'
 > do {
     hide FOO
     # $nu.env.FOO does not exist
   }
-> $nu.env.FOO
+> $env.FOO
 BAR
 ```
