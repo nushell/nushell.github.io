@@ -78,6 +78,7 @@ module.exports = {
                 "modules",
                 "scripts",
                 "metadata",
+                "creating_errors",
                 "shells_in_shells",
                 "escaping",
                 "plugins",
