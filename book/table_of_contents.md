@@ -18,6 +18,7 @@
 - [Modules](modules.md) - Creating and using your own modules
 - [Scripts](scripts.md) - Creating your own scripts
 - [Metadata](metadata.md) - An explanation of Nu's metadata system
+- [Creating your own errors](creating_errors.md) - Creating your own error messages
 - [Shells](shells_in_shells.md) - Working with multiple locations
 - [Escaping commands](escaping.md) - Escaping to native commands of the same name
 - [Plugins](plugins.md) - Enhancing nushell with more features using plugins
