@@ -17,7 +17,7 @@ A simple module can be defined like this:
      }
 }
 ```
-or in a file named the name of the module you want to create:
+or in a file named the same as the the module you want to create:
 ```
 # greetings.nu
 
@@ -34,9 +34,11 @@ We defined `hello` and `hi` custom commands inside a `greetings` module.
 
 The `export` keyword makes it possible to later import the commands from the module.
 
+Similar to `def`, it is also possible to mark `def-env` with the `export` keyword (you can learn more about `def-env` in the [Environment](configuration.md) chapter).
+
 ## Using modules
 
-By itself, the module does not do anything. To use what a module produces, we need to `use` it.
+By itself, the module does not do anything. To use what the module exports, we need to `use` it.
 
 ```
 > use greetings
@@ -54,27 +56,25 @@ The `hello` and `hi` commands are now available with the `greetings` prefix.
 In general, anything after the `use` keyword forms an **import pattern** which controls how the symbols are imported.
 The import pattern can be one of the following:
 
-`use greeting`
+`use greetings`
 
-Importing just the module name imports all symbols with the module name as a prefix.
+Imports all symbols with the module name as a prefix (we saw this in the previous example).
 
-`use greeting hello`
+`use greetings hello`
 
-Importing the module name and the name of an export will import only the selected command into the current scope.
+The `hello` symbol will be imported directly without any prefix.
 
-`use greeting [ hello, hi ]`
+`use greetings [ hello, hi ]`
 
-Importing the module and a list of names will import only the listed commands into the current scope.
+Imports multiple symbols directly without any prefix
 
 `use greetings *`
 
-You can also use the module name and the `*` glob import to import all names directly into the current scope
+You can also use the module name and the `*` glob to import all names directly without any prefix
 
-## Module files
+## Module Files
 
-Typing the module definition to the command line can be tedious.
-You could save the module code into a script and `source` it.
-However, there is another way that lets Nushell implicitly treat a source file as a module.
+Nushell lets you implicitly treat a source file as a module.
 Let's start by saving the body of the module definition into a file:
 ```
 # greetings.nu
@@ -88,7 +88,7 @@ export def hi [where: string] {
 }
 ```
 
-Now, you can use `use` directly on the file:
+Now, you can call `use` directly on the file:
 ```
 > use greetings.nu
 
@@ -99,7 +99,7 @@ hello world!
 hi there!
 ```
 
-Nushell automatically infers the module's name from the base name of the file ("greetings" without the ".nu" extension).
+Nushell automatically infers the module's name from the stem of the file ("greetings" without the ".nu" extension).
 You can use any import patterns as described above with the file name instead of the module name.
 
 ## Local Custom Commands
@@ -160,7 +160,7 @@ hello Arthur, King of the Britons!
 
 You can notice we do not assign the value to `MYNAME` directly.
 Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we call `use`.
-We can demonstrate this property for example with the `random` command:
+We can demonstrate this property, for example, with the `random` command:
 ```
 > module roll { export env ROLL { random dice | into string } }
 
@@ -183,7 +183,8 @@ We can demonstrate this property for example with the `random` command:
 
 ## Hiding
 
-Any custom command or environment variable, imported from a module or not, can be "hidden", restoring the previous definition.
+Any custom command, alias or environment variable, imported from a module or not, can be "hidden", restoring the previous definition.
+(Note, it is not yet possible to export aliases from modules but they can still be hidden.)
 We do this with the `hide` command:
 ```
 > def foo [] { "foo" }
@@ -202,7 +203,7 @@ It can be one of the following:
 
 `hide foo` or `hide greetings`
 * If the name is a custom command or an environment variable, hides it directly. Otherwise:
-* If the name is a module name, hides all of its overlay prefixed with the module name
+* If the name is a module name, hides all of its exports prefixed with the module name
 
 `hide greetings hello`
 
@@ -214,7 +215,7 @@ It can be one of the following:
 
 `hide greetings *`
 
-* Hides the whole module's overlay, without the prefix
+* Hides all of the module's exports, without the prefix
 
 Let's show these with examples.
 We saw direct hiding of a custom command already.
