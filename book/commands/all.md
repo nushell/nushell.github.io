@@ -1,29 +1,27 @@
 ---
-title: all
+title: all?
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
-Find if the table rows matches the condition.
 
-## Usage
-```shell
-> all? <condition> {flags} 
- ```
+Test if every element of the input matches a predicate.
+
+## Signature
+
+```> all? (predicate)```
 
 ## Parameters
-* `<condition>` the condition that must match
 
-## Flags
-* -h, --help: Display this help message
+ -  `predicate`: the predicate that must match
 
 ## Examples
-  Find if services are running
+
+Find if services are running
 ```shell
 > echo [[status]; [UP] [UP]] | all? status == UP
- ```
+```
 
-  Check that all values are even
+Check that all values are even
 ```shell
 > echo [2 4 6 8] | all? ($it mod 2) == 0
- ```
-
+```

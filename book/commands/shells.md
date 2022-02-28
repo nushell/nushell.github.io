@@ -1,30 +1,23 @@
 ---
 title: shells
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
 
-Lists all the active nu shells with a number/index, a name and the path. Also marks the current nu shell.
+Lists all open shells.
+
+## Signature
+
+```> shells ```
 
 ## Examples
 
+Enter a new shell at parent path '..' and show all opened shells
 ```shell
-> shells
-━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- # │   │ name       │ path
-───┼───┼────────────┼─────────────────────────────────────
- 0 │   │ filesystem │ /home/jonathanturner/Source/nushell
- 1 │   │ filesystem │ /usr
- 2 │ X │ filesystem │ /home
-━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+> enter ..; shells
 ```
 
+Show currently active shell
 ```shell
-/> shells
-━━━┯━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- # │   │ name                                             │ path
-───┼───┼──────────────────────────────────────────────────┼─────────────────────────────────────
- 0 │   │ filesystem                                       │ /home/jonathanturner/Source/nushell
- 1 │ X │ {/home/jonathanturner/Source/nushell/Cargo.toml} │ /
-━━━┷━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+> shells | where active == $true
 ```

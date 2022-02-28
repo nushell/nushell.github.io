@@ -1,21 +1,32 @@
 ---
 title: history
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
 
-Displays the last 100 commands.
+Get the command history
 
-## Example
+## Signature
 
+```> history --clear```
+
+## Parameters
+
+ -  `--clear`: Clears out the history entries
+
+## Examples
+
+Get current history length
 ```shell
-> history
-─────┬────────────────────────────────────────────────────────────────────────
-  #  │
-─────┼────────────────────────────────────────────────────────────────────────
-...
- 97  │ date
- 98  │ ls
- 99  │ ls -la
-─────┴────────────────────────────────────────────────────────────────────────
+> history | length
+```
+
+Show last 5 commands you have ran
+```shell
+> history | last 5
+```
+
+Search all the commands from history that contains 'cargo'
+```shell
+> history | wrap cmd | where cmd =~ cargo
 ```

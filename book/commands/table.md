@@ -1,16 +1,27 @@
 ---
 title: table
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
-View the contents of the pipeline as a table.
 
-## Usage
+Render the table.
+
+## Signature
+
+```> table --start-number```
+
+## Parameters
+
+ -  `--start-number {int}`: row number to start viewing from
+
+## Examples
+
+List the files in current directory with index number start from 1.
 ```shell
-> table {flags} 
- ```
+> ls | table -n 1
+```
 
-## Flags
-* -h, --help: Display this help message
-* -n, --start_number <number>: row number to start viewing from
-
+Render data in table view
+```shell
+> echo [[a b]; [1 2] [3 4]] | table
+```

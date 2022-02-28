@@ -1,41 +1,18 @@
 ---
 title: shuffle
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
 
-Shuffles the rows in a random order.
+Shuffle rows randomly.
+
+## Signature
+
+```> shuffle ```
 
 ## Examples
 
-Passing the same input to shuffle multiple times gives different results -
-
+Shuffle rows randomly (execute it several times and see the difference)
 ```shell
-> echo [ a b c d ] | shuffle
-───┬───
- 0 │ a
- 1 │ c
- 2 │ d
- 3 │ b
-───┴───
-```
-
-```shell
-> echo [ a b c d ] | shuffle
-───┬───
- 0 │ c
- 1 │ b
- 2 │ d
- 3 │ a
-───┴───
-```
-
-```shell
-> echo [ a b c d ] | shuffle
-───┬───
- 0 │ c
- 1 │ b
- 2 │ a
- 3 │ d
-───┴───
+> echo [[version patch]; [1.0.0 $false] [3.0.1 $true] [2.0.0 $false]] | shuffle
 ```

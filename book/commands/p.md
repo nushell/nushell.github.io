@@ -1,15 +1,23 @@
 ---
 title: p
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
-Go to previous shell.
 
-## Usage
+Switch to the previous shell.
+
+## Signature
+
+```> p ```
+
+## Examples
+
+Make two directories and enter new shells for them, use `p` to jump to the previous shell
 ```shell
-> p {flags} 
- ```
+> mkdir foo bar; enter foo; enter ../bar; p
+```
 
-## Flags
-* -h, --help: Display this help message
-
+Run `p` several times and note the changes of current directory
+```shell
+> p
+```

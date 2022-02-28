@@ -1,21 +1,18 @@
 ---
 title: clear
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
-Clears the terminal.
 
-## Usage
-```shell
-> clear {flags} 
- ```
+Clear the terminal.
 
-## Flags
-* -h, --help: Display this help message
+## Signature
+
+```> clear ```
 
 ## Examples
-  Clear the screen
+
+Clear the terminal
 ```shell
 > clear
- ```
-
+```

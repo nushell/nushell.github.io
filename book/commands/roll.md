@@ -1,22 +1,11 @@
 ---
 title: roll
 layout: command
-nu_version: 0.32
+version: 0.59.0
 ---
-Rolls the table rows.
 
-## Usage
-```shell
-> roll (by) <subcommand> {flags} 
- ```
+Rolling commands for tables
 
-## Subcommands
-* roll column - Rolls the table columns
-* roll up - Rolls the table rows
+## Signature
 
-## Parameters
-* `(by)` the number of times to roll
-
-## Flags
-* -h, --help: Display this help message
-
+```> roll ```
