@@ -30,6 +30,8 @@ Changing the current working directory can also be done if `cd` is omitted and a
 
 <<< @/snippets/moving_around/cd_without_command_example.sh
 
+**Note:** changing the directory with `cd` changes the `PWD` environment variable. This means that a change of a directory is kept to the current block. Once you exit the block, you'll return to the previous directory. You can learn more about working with this in the [environment chapter](./environment.md).
+
 ## Filesystem commands
 
 Nu also provides some basic filesystem commands that works cross-platform. 
