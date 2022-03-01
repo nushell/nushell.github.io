@@ -550,24 +550,24 @@ What if we throw in the `sort-by` and `reverse` commands for good measure? Also,
 This is still a lot of data so let's just look at the top 10 and use the `rename` command to name the columns. We could've also provided the column names with the pivot command.
 
 ```shell
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | update date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose | update column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10
+> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | update date {|d| $d.date | into datetime} | group-by name | transpose | update column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10
 ```
 
 ```
-───┬─────────────────────┬─────────
- # │        name         │ commits
-───┼─────────────────────┼─────────
- 0 │ JT                  │     851
- 1 │ Darren Schroeder    │     242
- 2 │ Fernando Herrera    │     176
- 3 │ Jakub Žádník        │     136
- 4 │ Michael Angerman    │      61
- 5 │ Andrés N. Robalino  │      29
- 6 │ Luccas Mateus       │      27
- 7 │ Stefan Stanciulescu │      27
- 8 │ Jonathan Turner     │      23
- 9 │ Tanishq Kancharla   │      21
-───┴─────────────────────┴─────────
+───┬────────────────────┬─────────
+ # │        name        │ commits
+───┼────────────────────┼─────────
+ 0 │ Jonathan Turner    │    1420
+ 1 │ JT                 │     851
+ 2 │ Andrés N. Robalino │     383
+ 3 │ Darren Schroeder   │     380
+ 4 │ Fernando Herrera   │     176
+ 5 │ Yehuda Katz        │     165
+ 6 │ Jakub Žádník       │     140
+ 7 │ Joseph T. Lyons    │      87
+ 8 │ Michael Angerman   │      71
+ 9 │ Jason Gedge        │      67
+───┴────────────────────┴─────────
 ```
 
 And there you have it. The top 10 committers and we learned a little bit of parsing along the way.
@@ -575,23 +575,23 @@ And there you have it. The top 10 committers and we learned a little bit of pars
 Here's one last little known command. Perhaps you don't want your table numbered starting with 0. Here's a way to change that with the `table` command.
 
 ```shell
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | update date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose | update column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10 | table -n 1
+> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | update date {|d| $d.date | into datetime} | group-by name | transpose | update column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10 | table -n 1
 ```
 
 ```
-────┬─────────────────────┬─────────
- #  │        name         │ commits
-────┼─────────────────────┼─────────
-  1 │ JT                  │     851
-  2 │ Darren Schroeder    │     242
-  3 │ Fernando Herrera    │     176
-  4 │ Jakub Žádník        │     136
-  5 │ Michael Angerman    │      61
-  6 │ Andrés N. Robalino  │      29
-  7 │ Luccas Mateus       │      27
-  8 │ Stefan Stanciulescu │      27
-  9 │ Jonathan Turner     │      23
- 10 │ Tanishq Kancharla   │      21
+────┬────────────────────┬─────────
+ #  │        name        │ commits
+────┼────────────────────┼─────────
+  1 │ Jonathan Turner    │    1420
+  2 │ JT                 │     851
+  3 │ Andrés N. Robalino │     383
+  4 │ Darren Schroeder   │     380
+  5 │ Fernando Herrera   │     176
+  6 │ Yehuda Katz        │     165
+  7 │ Jakub Žádník       │     140
+  8 │ Joseph T. Lyons    │      87
+  9 │ Michael Angerman   │      71
+ 10 │ Jason Gedge        │      67
 ```
 
 Created on 11/9/2020 with Nushell on Windows 10.
