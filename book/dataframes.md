@@ -49,11 +49,11 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 > let df = (dfr open .\Data7602DescendingYearOrder.csv)
 > dfr list
 
-───┬──────┬─────────┬─────────┬───────────────────────────────────
- # │ name │  rows   │ columns │             location
-───┼──────┼─────────┼─────────┼───────────────────────────────────
- 0 │ $df  │ 5429252 │ 5       │ .\Data7602DescendingYearOrder.csv
-───┴──────┴─────────┴─────────┴───────────────────────────────────
+───┬──────┬─────────┬─────────
+ # │ name │  rows   │ columns 
+───┼──────┼─────────┼─────────
+ 0 │ $df  │ 5429252 │ 5        
+───┴──────┴─────────┴─────────
 ```
 
 We can have a look at the first lines of the file using `dfr first`:
@@ -270,11 +270,11 @@ To see all the dataframes that are stored in memory you can use
 ```shell
 > dfr list
 
-───┬──────┬──────┬─────────┬────────────────────────
- # │ name │ rows │ columns │        location
-───┼──────┼──────┼─────────┼────────────────────────
- 0 │ $df  │ 10   │ 8       │ ..\test_small.csv
-───┴──────┴──────┴─────────┴────────────────────────
+───┬──────┬──────┬─────────
+ # │ name │ rows │ columns 
+───┼──────┼──────┼─────────
+ 0 │ $df  │ 10   │ 8       
+───┴──────┴──────┴─────────
 ```
 
 As you can see, the command shows the created dataframes together with basic
@@ -349,12 +349,12 @@ and now we have two dataframes stored in memory
 ```shell
 > dfr list
 
-───┬──────┬──────┬─────────┬────────────────────────
- # │ name │ rows │ columns │        location
-───┼──────┼──────┼─────────┼────────────────────────
- 0 │ $df  │ 10   │ 8       │ ..\test_small.csv
- 1 │ $res │ 1    │ 4       │ stream
-───┴──────┴──────┴─────────┴────────────────────────
+───┬──────┬──────┬─────────
+ # │ name │ rows │ columns 
+───┼──────┼──────┼─────────
+ 0 │ $df  │ 10   │ 8       
+ 1 │ $res │ 1    │ 4       
+───┴──────┴──────┴─────────
 ```
 
 pretty neat, isn't it?
@@ -537,14 +537,14 @@ dataframes you will see in total four dataframes
 ```shell
 > dfr list
 
-───┬───────┬──────┬─────────┬────────────────────────
- # │  name │ rows │ columns │        location
-───┼───────┼──────┼─────────┼────────────────────────
- 0 │ $a    │ 3    │ 2       │ stream
- 1 │ $a2   │ 3    │ 4       │ stream
- 2 │ $df_a │ 4    │ 5       │ ..\test_small.csv
- 3 │ $df   │ 10   │ 8       │ ..\test_small.csv
-───┴───────┴──────┴─────────┴────────────────────────
+───┬───────┬──────┬─────────
+ # │  name │ rows │ columns 
+───┼───────┼──────┼─────────
+ 0 │ $a    │ 3    │ 2       
+ 1 │ $a2   │ 3    │ 4       
+ 2 │ $df_a │ 4    │ 5       
+ 3 │ $df   │ 10   │ 8       
+───┴───────┴──────┴─────────
 ```
 
 One thing that is important to mention is how the memory is being optimized
