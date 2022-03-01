@@ -13,7 +13,7 @@ Like `each`, `par-each` works on each element in the pipeline as it comes in, ru
 Let's say you wanted to count the number of files in each sub-directory of the current directory. Using `each`, you could write this as:
 
 ```
-> ls | where type == dir | each { |it| {name: $it.name, len: (ls $it.name | length) }
+> ls | where type == dir | each { |it| {name: $it.name, len: (ls $it.name | length) } }
 ```
 
 We create a record for each entry, and fill it with the name of the directory and the count of entries in that sub-directory.
@@ -23,7 +23,7 @@ On your machine, the times may vary. For this machine, it took 21 milliseconds f
 Now, since this operation can be run in parallel, let's convert the above to paralle by changing `each` to `par-each`:
 
 ```
-> ls | where type == dir | par-each { |it| {name: $it.name, len: (ls $it.name | length) }
+> ls | where type == dir | par-each { |it| {name: $it.name, len: (ls $it.name | length) } }
 ```
 
 On this machine, it now runs in 6ms. That's quite a difference!
