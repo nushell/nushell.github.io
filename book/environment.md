@@ -76,8 +76,9 @@ However, a command defined as `def-env` instead of `def` (it applies also to `ex
 BAR
 ```
 
-## (WIP) Environment variable conversions
+## Environment variable conversions
 
+(Section text is WIP)
 You can use the `ENV_CONVERSIONS` environment variable to convert between a string and a value.
 There are some examples in `default_config.nu`.
 
