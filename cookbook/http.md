@@ -6,9 +6,11 @@ title: HTTP
 
 ### Fetching JSON from a url
 
-`fetch https://jsonplaceholder.typicode.com/posts | first 5`
+```shell
+> fetch https://jsonplaceholder.typicode.com/posts | first 5
+```
 
-Output 
+Output
 
 ```
 ━━━┯━━━━━━━━┯━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -44,13 +46,13 @@ Output
 
 ### Fetch from multiple urls
 
-Suppose you are querying several endpoints, 
+Suppose you are querying several endpoints,
 perhaps with different query parameters and you want to view all the responses as a single dataset.
 You can make use of `$it` to run nu commands on every row of data.
 
 An example JSON file, `urls.json`, with the following contents:
 
-```
+```json
 {
   "urls": [
     "https://jsonplaceholder.typicode.com/posts/1",
@@ -60,7 +62,9 @@ An example JSON file, `urls.json`, with the following contents:
 }
 ```
 
-`open urls.json | get urls | fetch $it`
+```shell
+> open urls.json | get urls | each { |u| fetch $u }
+```
 
 Output
 
@@ -89,7 +93,9 @@ Output
 
 If you specify the `--raw` flag, you'll see 3 separate json objects, one in each row.
 
-`open urls.json | get urls | fetch $it --raw`
+```shell
+> open urls.json | get urls | each { |u| fetch $u -r }
+```
 
 Output
 
@@ -125,19 +131,38 @@ Output
 
 To combine these responses together into a valid JSON array, you can turn the table into json.
 
-`open urls.json | get urls | fetch $it | to-json`
+```shell
+> open urls.json | get urls | each { |u| fetch $u } | to json
+```
 
 Output
 
-```
-[{"userId":1,"id":1,"title":"sunt aut facere repellat provident occaecati excepturi optio reprehenderit","body":"quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"},{"userId":1,"id":2,"title":"qui est esse","body":"est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"},{"userId":1,"id":3,"title":"ea molestias quasi exercitationem repellat qui ipsa sit aut","body":"et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"}]
+```json
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "qui est esse",
+    "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+    "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+  }
+]
 ```
 
 ---
 
-Making a `post` request to an endpoint with a JSON payload.
-To make long requests easier,
-you can organize your json payloads inside a file.
+Making a `post` request to an endpoint with a JSON payload. To make long requests easier, you can organize your json payloads inside a file.
 
 ```json
 {
@@ -149,7 +174,9 @@ you can organize your json payloads inside a file.
 }
 ```
 
-`open payload.json | get my_payload | post https://jsonplaceholder.typicode.com/posts $it`
+```shell
+> open payload.json | get my_payload | to json | post https://jsonplaceholder.typicode.com/posts $in
+```
 
 Output
 
@@ -163,11 +190,11 @@ Output
 
 ---
 
-We can put this all together into a pipeline where we read data, manipulate it, and then send it back to the API.
-Lets `fetch` a post, `increment` the id, and `post` it back to the endpoint.
-In this particular example, the test endpoint gives back an arbitrary response which we can't actually mutate.
+We can put this all together into a pipeline where we read data, manipulate it, and then send it back to the API. Lets `fetch` a post, `increment` the id, and `post` it back to the endpoint. In this particular example, the test endpoint gives back an arbitrary response which we can't actually mutate.
 
-`open urls.json | get urls | first | fetch $it | inc id | to-json | post https://jsonplaceholder.typicode.com/posts $it`
+```shell
+> open urls.json | get urls | first | fetch $in | update id {|item| $item.id | inc} | to json | post https://jsonplaceholder.typicode.com/posts $in
+```
 
 ```
 ━━━━━

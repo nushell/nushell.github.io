@@ -6,37 +6,39 @@ title: Files
 
 ### Editing a file and then saving the changes
 
-Here we are making edits to `Cargo.toml`.
-We increase the patch version of the crate using `inc` and then save it back to the file.
+Here we are making edits to `Cargo.toml`. We increase the patch version of the crate using `inc` and then save it back to the file.
 Use `help inc` to get more information.
-
 
 Read the file's initial contents
 
-`open Cargo.toml | get package.version`
+```shell
+> open Cargo.toml | get package.version
+```
 
 Output
 
-`0.5.1`
+`0.59.0`
 
 Make the edit to the version number and save it.
 
-Nu keeps track of the file you have opened.
-You may omit the filename argument from `save` if you want to save the changes to the opened file.
+_Note: running this command should work but it will reorder the toml file alphabetically by section._
 
-`open Cargo.toml | inc package.version --patch | save`
+```shell
+> open Cargo.toml | update package.version { |p| $p | get package.version | inc --patch } | save Cargo.toml
+```
 
 Output
-*none*
+_none_
 
 View the changes we made to the file.
 
-`open Cargo.toml | get package.version`
+```shell
+> open Cargo.toml | get package.version
+```
 
 Output
 
-`0.5.2`
-
+`0.59.1`
 
 ---
 
@@ -55,9 +57,11 @@ Fugazi:In On The Kill Taker:1993
 
 You can parse it into a table.
 
-`open bands.txt | lines | split column ":" Band Album Year | skip 1 | sort-by Year`
+```shell
+> open bands.txt | lines | split column ":" Band Album Year | skip 1 | sort-by Year
+```
 
-Output 
+Output
 
 ```
 ━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━
@@ -73,17 +77,24 @@ Output
 
 You can alternatively do this using `parse`.
 
-`open bands.txt | lines | parse "{Band}:{Album}:{Year}" | skip 1 | sort-by Year`
+```shell
+open bands.txt | lines | parse "{Band}:{Album}:{Year}" | skip 1 | sort-by Year
+```
+
+Or, you can utilize the `headers` command to use the first row as a header row like. The only difference would be the headers would match the case of the text file. So, in this case, the headers would be lowercase.
+
+```shell
+> open bands.txt | lines | split column ":" | headers | sort-by year
+```
 
 ---
 
 ### Word occurrence count with Ripgrep
 
-Suppose you would like to check the number of lines the string "Tagged" appears per file in the nushell project,
-then sort those files by largest line count.
+Suppose you would like to check the number of lines the string "Value" appears per file in the nushell project, then sort those files by largest line count.
 
-```
-rg -c Tagged | lines | split column ":" file line_count | str to-int line_count | sort-by line_count | reverse
+```shell
+> rg -c Value | lines | split column ":" file line_count | into int line_count | sort-by line_count | reverse
 ```
 
 Output

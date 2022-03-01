@@ -4,121 +4,96 @@ title: Setup
 
 # Setup
 
-To get the most out of nu,
-it is important to setup your path and env for easy access.
-There are other ways to view these values and variables,
-however setting up your nu configuration will make it much easier as these are supported cross-platform.
-
---- 
-
-### Configure your path
-
-`config set path $nu.path`
-
-Output
-
-```
-━━━━━━━━━━━━━━━━━━
- path
-──────────────────
- [table: 91 rows]
-━━━━━━━━━━━━━━━━━━
-```
+To get the most out of nu, it is important to setup your path and env for easy access.
+There are other ways to view these values and variables, however setting up your nu configuration will make it much easier as these are supported cross-platform.
 
 ---
 
-### Configure your environment variables
+### Configure your path and other environment variables
 
-`config set env $nu.env`
+In order to configure your path in nushell you'll need to modify your `PATH` environment variable in your `config.nu` file. Open your `config.nu` file and put an entry in it like `let-env PATH = "path1;path2;path3"` ensuring that you use the proper path separation character, which is different by platform.
 
-Output
+Alternately, if you want to change your path temporarily, you can do the same command at the prompt.
 
-```
-━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
- path             │ env
-──────────────────┼────────────────
- [table: 91 rows] │ [table: 1 row]
-━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━
+If you want to append a folder to your `PATH` environment variable you can do that too using the `append` or `prepend` command like this:
+
+```shell
+> let-env PATH = ($env.PATH | append "some/other/path")
 ```
 
----
-
-### How to list your paths
-
-`echo $nu.path` 
-
-or 
-
-`config | get path`
-
-Output
-
-```
-━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- #  │ <value>
-────┼──────────────────────────────────────────────────────────────────────
-  0 │ C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\
-  1 │ C:\Program Files\Microsoft SQL Server\140\Tools\Binn\
-  2 │ C:\Program Files\Microsoft SQL Server\140\DTS\Binn\
-  3 │ C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\
-  4 │ C:\Program Files\erl10.3\bin
-  5 │ C:\Program Files (x86)\Elixir\bin
-  4 │ C:\Program Files\MongoDB\Server\4.0\bin
-  5 │ C:\Users\nu_shell\.cargo\bin
-  6 │ C:\Program Files\PostgreSQL\9.6\bin
-  7 │ C:\Program Files\PostgreSQL\9.6\lib
-  8 │ C:\WINDOWS\system32\WindowsPowerShell\v1.0\
-  9 │ C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common
- 10 │ C:\Program Files\Common Files\Microsoft Shared\Windows Live
- 11 │ C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live
- 12 │ C:\Windows\system32
- 13 │ C:\Windows
- 14 │ C:\Windows\System32\Wbem
- 15 │ C:\Windows\System32\WindowsPowerShell\v1.0\
-━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
-
----
+For more detailed instructions, see the our environment variables documentation [here](https://github.com/nushell/nushell/blob/main/docs/Environment_Variables.md)
 
 ### How to list your environment variables
 
-`echo $nu.env | pivot` 
-
-or 
-
-`config | get env | pivot`
+```shell
+> $env
+```
 
 Output
 
 ```
-━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- #  │ Column0                         │ Column1
-────┼─────────────────────────────────┼──────────────────────────────────────────────────────────
-  0 │ =::                             │ ::\
-  1 │ ALLUSERSPROFILE                 │ C:\ProgramData
-  2 │ APPDATA                         │ C:\Users\nu_shell\AppData\Roaming
-  3 │ CLASSPATH                       │ .;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip
-  4 │ COLUMNS                         │ 80
-  5 │ COMPUTERNAME                    │ nu_shell
-  6 │ ChocolateyInstall               │ C:\ProgramData\chocolatey
-  7 │ ChocolateyLastPathUpdate        │ Sun Oct  8 16:37:30 2017
-━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+─────────────────────────────────┬────────────────────────────────────────────
+ ALLUSERSPROFILE                 │ C:\ProgramData
+ CARGO_PKG_AUTHORS               │ The Nu Project Contributors
+ CARGO_PKG_DESCRIPTION           │ A new type of shell
+ CARGO_PKG_HOMEPAGE              │ https://www.nushell.sh
+ CARGO_PKG_LICENSE               │ MIT
+ CARGO_PKG_LICENSE_FILE          │
+ CARGO_PKG_NAME                  │ nu
+ CARGO_PKG_REPOSITORY            │ https://github.com/nushell/nushell
+ CARGO_PKG_VERSION               │ 0.59.0
+ CARGO_PKG_VERSION_MAJOR         │ 0
+```
+
+or for a more detailed view, use our new `env` command.
+
+```shell
+> env
+```
+
+Output
+
+```
+────┬─────────────────────────────┬─────────────────────────────┬─────────────────────────────┬──────────────────────────────
+ #  │            name             │            type             │            value            │             raw
+────┼─────────────────────────────┼─────────────────────────────┼─────────────────────────────┼──────────────────────────────
+  0 │ ALLUSERSPROFILE             │ string                      │ C:\ProgramData              │ C:\ProgramData
+  1 │ APPDATA                     │ string                      │ C:\Users\someuser10\AppData │ C:\Users\someuser10\AppData
+    │                             │                             │ \Roaming                    │ \Roaming
+  2 │ CARGO                       │ string                      │ \\?\C:\Users\someuser10\.ru │ \\?\C:\Users\someuser10\.ru
+    │                             │                             │ stup\toolchains\stable-x86_ │ stup\toolchains\stable-x86_
+    │                             │                             │ 64-pc-windows-msvc\bin\carg │ 64-pc-windows-msvc\bin\carg
+    │                             │                             │ o.exe                       │ o.exe
+  3 │ CARGO_HOME                  │ string                      │ C:\Users\someuser10\.cargo  │ C:\Users\someuser10\.cargo
+  4 │ CARGO_MANIFEST_DIR          │ string                      │ C:\Users\someuser10\source\ │ C:\Users\someuser10\source\
+    │                             │                             │ repos\forks\nushell         │ repos\forks\nushell
+  5 │ CARGO_PKG_AUTHORS           │ string                      │ The Nu Project Contributors │ The Nu Project Contributors
+  6 │ CARGO_PKG_DESCRIPTION       │ string                      │ A new type of shell         │ A new type of shell
+  7 │ CARGO_PKG_HOMEPAGE          │ string                      │ https://www.nushell.sh      │ https://www.nushell.sh
+  8 │ CARGO_PKG_LICENSE           │ string                      │ MIT                         │ MIT
+  9 │ CARGO_PKG_LICENSE_FILE      │ string                      │                             │
+ 10 │ CARGO_PKG_NAME              │ string                      │ nu                          │ nu
+ 11 │ CARGO_PKG_REPOSITORY        │ string                      │ https://github.com/nushell/ │ https://github.com/nushell/
 ```
 
 ---
 
 ### How to get a single environment variable's value
 
-`config | get env.APPDATA` 
+```shell
+> $env.APPDATA
+```
 
-or 
+or
 
-`config | get env | select APPDATA`
+```shell
+> env | where name == APPDATA
+```
 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- APPDATA
-───────────────────────────────────
- C:\Users\nu_shell\AppData\Roaming
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+───┬─────────┬────────┬─────────────────────────────────────┬─────────────────────────────────────
+ # │  name   │  type  │                value                │                 raw
+───┼─────────┼────────┼─────────────────────────────────────┼─────────────────────────────────────
+ 0 │ APPDATA │ string │ C:\Users\someuser10\AppData\Roaming │ C:\Users\someuser10\AppData\Roaming
+───┴─────────┴────────┴─────────────────────────────────────┴─────────────────────────────────────
 ```
