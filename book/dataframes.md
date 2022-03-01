@@ -52,7 +52,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ───┬──────┬─────────┬─────────
  # │ name │  rows   │ columns 
 ───┼──────┼─────────┼─────────
- 0 │ $df  │ 5429252 │ 5        
+ 0 │ $df  │ 5429252 │ 5       
 ───┴──────┴─────────┴─────────
 ```
 
