@@ -57,7 +57,7 @@ module.exports = {
         sidebar: {
           "/book/": [
             {
-              title: "Nu Book",
+              title: "Nu Book (0.59+)",
               collapsable: false,
               children: [
                 "",
