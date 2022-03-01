@@ -7,46 +7,57 @@ title: Git
 Nu can help with common `Git` tasks like removing all local branches which have been merged into master.
 
 ### Delete git merged branches
-Warning: This command will hard delete the merged branches from your machine.
-You may want to check the branches selected for deletion by omitting the last git command.
 
-`git branch --merged | lines | where ($it != "* master" && $it != "* main") | each { git branch -D ($it | str trim) }`
+**Warning**: This command will hard delete the merged branches from your machine. You may want to check the branches selected for deletion by omitting the last git command.
 
-Output
+```shell
+> git branch --merged | lines | where ($it != "* master" && $it != "* main") | each {|br| git branch -D ($br | str trim) }
+```
+
+Output - the empty row is output because `git` may be outputting something unexpected that we'd like to track down.
 
 ```
 Deleted branch post-argument-positions (was 9d34ec9).
+╭───┬──╮
+│ 0 │  │
+╰───┴──╯
 ```
 
 Parse formatted commit messages (more details in the parsing git log section)
 
-`git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | first 10`
-
+```shell
+> git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | first 10
+```
 
 Output
 
 ```
-━━━┯━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- # │ hash    │ author          │ time        │ message
-───┼─────────┼─────────────────┼─────────────┼──────────────────────────────────────────────────────────────────
- 0 │ 9d34ec9 │ Jonathan Turner │ 13 days ago │ Merge pull request #891 from nushell/jonathandturner-patch-1
- 1 │ fd92271 │ Jonathan Turner │ 13 days ago │ Move rustyline dep back to crates
- 2 │ 2d44b7d │ Jonathan Turner │ 2 weeks ago │ Update README.md
- 3 │ faccb06 │ Jonathan Turner │ 2 weeks ago │ Merge pull request #890 from jonathandturner/append_prepend
- 4 │ a9cd6b4 │ Jonathan Turner │ 2 weeks ago │ Format files
- 5 │ 81691e0 │ Jonathan Turner │ 2 weeks ago │ Add prepend and append commands
- 6 │ 26f40dc │ Jonathan Turner │ 2 weeks ago │ Merge pull request #889 from jonathandturner/read_plugin
- 7 │ 3820fef │ Jonathan Turner │ 2 weeks ago │ Add a simple read/parse plugin to better handle text data
- 8 │ b6824d8 │ Jonathan Turner │ 2 weeks ago │ Merge pull request #886 from notryanb/fetch-from-variable
- 9 │ e09160e │ Ryan Blecher    │ 2 weeks ago │ add ability to create PathBuf from string to avoid type mismatch
-━━━┷━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+───┬──────────┬───────────────────┬───────────────────────────────────────────────────────┬─────────────────────────────────
+ # │   sha1   │     committer     │                         desc                          │            merged_at
+───┼──────────┼───────────────────┼───────────────────────────────────────────────────────┼─────────────────────────────────
+ 0 │ 42f1874a │ Justin Ma         │ Update some examples and docs (#4682)                 │ Tue, 1 Mar 2022 21:05:29 +0800
+ 1 │ 2a89936b │ JT                │ Move to latest stable crossterm, with fix (#4684)     │ Tue, 1 Mar 2022 07:05:46 -0500
+ 2 │ ece5e7db │ Fernando Herrera  │ dataframe list command (#4681)                        │ Tue, 1 Mar 2022 11:41:13 +0000
+ 3 │ a6a96b29 │ JT                │ Add binary literals (#4680)                           │ Mon, 28 Feb 2022 18:31:53 -0500
+ 4 │ e3100e6a │ Luca Trevisani    │ Fix alias in `docs/sample_config/config.toml` (#4669) │ Mon, 28 Feb 2022 22:47:14 +0100
+ 5 │ cb5c61d2 │ JT                │ Fix open ended ranges (#4677)                         │ Mon, 28 Feb 2022 11:15:31 -0500
+ 6 │ b09acdb7 │ Justin Ma         │ Fix unsupported type message for some math related    │ Mon, 28 Feb 2022 23:14:33 +0800
+   │          │                   │ commands (#4672)                                      │
+ 7 │ 0924975b │ JT                │ Use default_config.nu by default (#4675)              │ Mon, 28 Feb 2022 10:12:08 -0500
+ 8 │ d6a6c4b0 │ JT                │ Add back in default keybindings (#4673)               │ Mon, 28 Feb 2022 08:54:40 -0500
+ 9 │ eec17304 │ Stefan Holderbach │ Add profiling build profile and symbol strip (#4630)  │ Mon, 28 Feb 2022 13:13:24 +0100
+───┴──────────┴───────────────────┴───────────────────────────────────────────────────────┴─────────────────────────────────
 ```
 
 ---
 
 ### View git comitter activity as a `histogram`
 
-`git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc  merged_at | histogram committer merger | sort-by merger | reverse`
+_Note: the `histogram` command is not yet ported to the latest version_
+
+```shell
+> git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | histogram committer merger | sort-by merger | reverse
+```
 
 ```
 ━━━━┯━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -66,4 +77,4 @@ Output
  11 │ Odin Dutton         │ *
  12 │ Jonathan Rothberg   │ *
  ━━━┷━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- ```
+```

@@ -8,122 +8,147 @@ Nu offers many commands and plugins that help navigate a command-line interface,
 
 ### View all files in the current directory
 
-`ls | where type == File`
+```shell
+> ls | where type == file
+```
 
-Output 
+Output
 
 ```
-━━━━┯━━━━━━━━━━━━━━━━━━━━┯━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━
- #  │ name               │ type │ readonly │ size     │ created      │ accessed     │ modified
-────┼────────────────────┼──────┼──────────┼──────────┼──────────────┼──────────────┼──────────────
-  0 │ .editorconfig      │ File │          │   236 B  │ 2 months ago │ 2 months ago │ 2 months ago
-  1 │ .gitignore         │ File │          │   189 B  │ 2 months ago │ 2 months ago │ 2 months ago
-  2 │ .gitpod.Dockerfile │ File │          │   164 B  │ a month ago  │ a month ago  │ a month ago
-  3 │ .gitpod.yml        │ File │          │   803 B  │ a month ago  │ a month ago  │ a month ago
-  4 │ build.rs           │ File │          │   1.2 KB │ 3 weeks ago  │ 3 weeks ago  │ 3 weeks ago
-  5 │ Cargo.lock         │ File │          │ 153.7 KB │ a week ago   │ a week ago   │ a week ago
-  6 │ Cargo.toml         │ File │          │   4.7 KB │ a week ago   │ a week ago   │ a week ago
-  7 │ CODE_OF_CONDUCT.md │ File │          │   3.4 KB │ 2 months ago │ 2 months ago │ 2 months ago
-  8 │ features.toml      │ File │          │   443 B  │ 3 weeks ago  │ 3 weeks ago  │ 3 weeks ago
-  9 │ LICENSE            │ File │          │   1.1 KB │ 2 months ago │ 2 months ago │ 2 months ago
- 10 │ Makefile.toml      │ File │          │   647 B  │ 2 months ago │ 2 months ago │ 2 months ago
- 11 │ README.md          │ File │          │  18.3 KB │ a week ago   │ a week ago   │ a week ago
- 12 │ rust-toolchain     │ File │          │    17 B  │ a month ago  │ a month ago  │ a month ago
- 13 │ rustfmt.toml       │ File │          │    16 B  │ 2 months ago │ 2 months ago │ 2 months ago
-━━━━┷━━━━━━━━━━━━━━━━━━━━┷━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━
+────┬─────────────────────────────────┬──────┬──────────┬────────────────
+ #  │              name               │ type │   size   │    modified
+────┼─────────────────────────────────┼──────┼──────────┼────────────────
+  0 │ CODE_OF_CONDUCT.md              │ file │   3.5 KB │ 10 months ago
+  1 │ CONTRIBUTING.md                 │ file │   1.8 KB │ 10 months ago
+  2 │ Cargo.lock                      │ file │ 118.4 KB │ 2 hours ago
+  3 │ Cargo.toml                      │ file │   4.1 KB │ 2 hours ago
+  4 │ Cargo.toml.old                  │ file │   7.2 KB │ 2 weeks ago
+  5 │ LICENSE                         │ file │   1.1 KB │ 4 months ago
+  6 │ Makefile.toml                   │ file │    473 B │ 10 months ago
+  7 │ README.build.txt                │ file │    193 B │ 10 months ago
+  8 │ README.md                       │ file │  15.8 KB │ 3 days ago
+  9 │ bands.txt                       │ file │    156 B │ 2 hours ago
+ 10 │ extra_features_cargo_install.sh │ file │     54 B │ 4 months ago
+ 11 │ files                           │ file │      3 B │ an hour ago
+ 12 │ payload.json                    │ file │     88 B │ 21 minutes ago
+ 13 │ rustfmt.toml                    │ file │     16 B │ 10 months ago
+ 14 │ urls.json                       │ file │    182 B │ 25 minutes ago
+────┴─────────────────────────────────┴──────┴──────────┴────────────────
 ```
 
 ---
 
 ### View all directories in the current directory
 
-`ls | where type == Dir`
+```shell
+> ls | where type == dir
+```
 
 Output
 
 ```
-────┬───────────┬──────┬──────┬──────────────
- #  │ name      │ type │ size │ modified
-────┼───────────┼──────┼──────┼──────────────
-  0 │ .azure    │ Dir  │  —   │ 1 week ago
-  1 │ .cargo    │ Dir  │  —   │ 2 months ago
-  2 │ .circleci │ Dir  │  —   │ 5 months ago
-  3 │ .git      │ Dir  │  —   │ 19 mins ago
-  4 │ .github   │ Dir  │  —   │ 3 months ago
-  5 │ assets    │ Dir  │  —   │ 5 months ago
-  6 │ crates    │ Dir  │  —   │ 1 month ago
-  7 │ debian    │ Dir  │  —   │ 4 months ago
-  8 │ docker    │ Dir  │  —   │ 3 months ago
-  9 │ docs      │ Dir  │  —   │ 4 months ago
- 10 │ images    │ Dir  │  —   │ 5 months ago
- 11 │ src       │ Dir  │  —   │ 1 week ago
- 12 │ target    │ Dir  │  —   │ 2 months ago
- 13 │ tests     │ Dir  │  —   │ 3 weeks ago
-────┴───────────┴──────┴──────┴──────────────
+────┬───────────┬──────┬─────────┬───────────────
+ #  │   name    │ type │  size   │   modified
+────┼───────────┼──────┼─────────┼───────────────
+  0 │ .azureold │ dir  │     0 B │ 3 weeks ago
+  1 │ .cargo    │ dir  │     0 B │ 10 months ago
+  2 │ .vscode   │ dir  │     0 B │ 10 months ago
+  3 │ crates    │ dir  │ 12.3 KB │ 3 weeks ago
+  4 │ docs      │ dir  │  4.1 KB │ a day ago
+  5 │ images    │ dir  │  4.1 KB │ 2 weeks ago
+  6 │ pkg_mgrs  │ dir  │     0 B │ 10 months ago
+  7 │ samples   │ dir  │     0 B │ 10 months ago
+  8 │ src       │ dir  │  4.1 KB │ 3 hours ago
+  9 │ target    │ dir  │     0 B │ 2 weeks ago
+ 10 │ tests     │ dir  │     0 B │ 4 months ago
+ 11 │ wix       │ dir  │     0 B │ 2 weeks ago
+────┴───────────┴──────┴─────────┴───────────────
 ```
 
 ---
 
 ### Find processes sorted by greatest cpu utilization.
 
-`ps | where cpu > 0 | sort-by cpu | reverse`
+```shell
+> ps | where cpu > 0 | sort-by cpu | reverse
+```
 
 Output
 
 ```
-━━━┯━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━
- # │ pid   │ name                  │ status  │ cpu
-───┼───────┼───────────────────────┼─────────┼───────────────────
- 0 │  8564 │ nu_plugin_ps.exe      │ Running │ 70.86496000000001
- 1 │ 13324 │ EpicGamesLauncher.exe │ Running │ 6.141082000000000
- 2 │ 21084 │ firefox.exe           │ Running │ 6.006489999999999
- 3 │ 19792 │ Code.exe              │ Running │ 5.207409999999999
-━━━┷━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━
+───┬───────┬────────────────────┬───────┬─────────┬─────────
+ # │  pid  │        name        │  cpu  │   mem   │ virtual
+───┼───────┼────────────────────┼───────┼─────────┼─────────
+ 0 │ 11928 │ nu.exe             │ 32.12 │ 47.7 MB │ 20.9 MB
+ 1 │ 11728 │ Teams.exe          │ 10.71 │ 53.8 MB │ 50.8 MB
+ 2 │ 21460 │ msedgewebview2.exe │  8.43 │ 54.0 MB │ 36.8 MB
+───┴───────┴────────────────────┴───────┴─────────┴─────────
 ```
 
 ---
 
 ### Find and kill a hanging process
 
-Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process:
+Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process.
 
-`ps | where name == node`
+```shell
+> ps | where name == Notepad2.exe
+```
 
 Output
 
 ```
-━━━━━━━┯━━━━━━┯━━━━━━━━━┯━━━━━━━━┯━━━━━━━━━┯━━━━━━━━━
- pid   │ name │ status  │ cpu    │ mem     │ virtual 
-───────┼──────┼─────────┼────────┼─────────┼─────────
- 15447 │ node │ Running │ 0.0000 │ 18.5 MB │  4.7 GB 
-━━━━━━━┷━━━━━━┷━━━━━━━━━┷━━━━━━━━┷━━━━━━━━━┷━━━━━━━━━
+───┬──────┬──────────────┬──────┬─────────┬─────────
+ # │ pid  │     name     │ cpu  │   mem   │ virtual
+───┼──────┼──────────────┼──────┼─────────┼─────────
+ 0 │ 9268 │ Notepad2.exe │ 0.00 │ 32.0 MB │  9.8 MB
+───┴──────┴──────────────┴──────┴─────────┴─────────
 ```
 
 This process can be sent the kill signal in a one-liner:
 
-`ps | where name == node | format "{pid}" | kill -9 $it`
+```shell
+> ps | where name == Notepad2.exe | get pid.0 | kill -9 $in
+```
 
-Notes: 
-- `format "{pid}"` is necessary for now since a value of type Int (pid) can not be converted to a string yet, which is necessary for $it. This has been fixed with 0.8.1. With version 0.8.1 you can simplify this by simply using `get pid`.
+Output
+
+```
+───┬────────────────────────────────────────────────────────────────
+ 0 │ SUCCESS: Sent termination signal to the process with PID 9268.
+───┴────────────────────────────────────────────────────────────────
+```
+
+Notes:
+
 - `kill` is Linux/Unix specific command, it is not built-in to nu.
+- filtering with the `where` command, as shown above, is case-sensitive.
 
 ---
 
 ### Pipeline content to clipboard
 
+_Note: clip/clipboard-cli is has not been ported yet in the new version_
+
 Add the output of a pipeline to your clipboard.
 Note, this currently needs to be string output.
 
-Note that `clip` is not yet enabled by default. If the output of `version |
-get features` contains `clipboard-cli` then your copy of NuShell contains
+Note that `clip` is not yet enabled by default. If the output of `version | get features` contains `clipboard-cli` then your copy of NuShell contains
 `clip`. If `clip` is not available, then your operating system may provide a
 command that performs a similar function e.g. `clip` on Windows or `pbcopy`
 on macOS.
 
-`sys | get mem | to json | clip`
+```shell
+sys | get mem | to json | clip
+```
 
 Output pasted from `clip` :)
 
-```
-{"total":17125339136,"free":8653758464,"swap total":34305208320,"swap free":19703889920}
+```json
+{
+  "total": 34047156000,
+  "free": 19571089000,
+  "swap total": 7516192000,
+  "swap free": 7516192000
+}
 ```
