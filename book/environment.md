@@ -13,14 +13,14 @@ You can see the current environment variables using the `env` command:
   36   PROMPT_COMMAND       block                <Block 197>          <Block 197>
 ```
 
-In Nushell, environment variable can be any value and have of any type (see the `type` column).
+In Nushell, environment variables can be any value and have any type (see the `type` column).
 The actual value of the env. variable used within Nushell is under the `value` column.
 You can query the value directly using the `$env` variable, for example, `$env.PATH | length`.
 The last `raw` column shows the actual value that will be sent to external applications (check [ENV_CONVERSIONS](#environment-variable-conversions) for details).
 
 ## Single-use environment variables
 
-The environment is created from the settings in the Nu configuration and from the environment that Nu is run inside of.  You can updated the environment permanently using the techniques listed in [configuration](configuration.md) chapter.
+The environment is created from the settings in the Nu configuration and from the environment that Nu is run inside of.  You can update the environment permanently using the techniques listed in [configuration](configuration.md) chapter.
 
 A common shorthand, inspired by Bash and others, is also available. You can write the above example as:
 
