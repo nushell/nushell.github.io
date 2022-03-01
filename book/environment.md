@@ -79,7 +79,7 @@ BAR
 ## (WIP) Environment variable conversions
 
 You can use the `ENV_CONVERSIONS` environment variable to convert between a string and a value.
-There are some ecamples in `default_config.nu`.
+There are some examples in `default_config.nu`.
 
 ## Removing environment variables
 
