@@ -13,7 +13,7 @@ You can see the current environment variables using the `env` command:
   36   PROMPT_COMMAND       block                <Block 197>          <Block 197>
 ```
 
-In Nushell, environment variables can be any value and have of any type (see the `type` column).
+In Nushell, environment variables can be any value and have any type (see the `type` column).
 The actual value of the env. variable used within Nushell is under the `value` column.
 You can query the value directly using the `$env` variable, for example, `$env.PATH | length`.
 The last `raw` column shows the actual value that will be sent to external applications (check [ENV_CONVERSIONS](#environment-variable-conversions) for details).
