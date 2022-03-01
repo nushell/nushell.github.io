@@ -11,16 +11,15 @@ Nu can help with common `Git` tasks like removing all local branches which have 
 **Warning**: This command will hard delete the merged branches from your machine. You may want to check the branches selected for deletion by omitting the last git command.
 
 ```shell
-> git branch --merged | lines | where ($it != "* master" && $it != "* main") | each {|br| git branch -D ($br | str trim) }
+> git branch --merged | lines | where ($it != "* master" && $it != "* main") | each {|br| git branch -D ($br | str trim) } | str trim
 ```
 
-Output - the empty row is output because `git` may be outputting something unexpected that we'd like to track down.
+Output
 
 ```
-Deleted branch post-argument-positions (was 9d34ec9).
-╭───┬──╮
-│ 0 │  │
-╰───┴──╯
+───┬───────────────────────────────────────────
+ 0 │ Deleted branch start_urls (was fc01bb45).
+───┴───────────────────────────────────────────
 ```
 
 Parse formatted commit messages (more details in the parsing git log section)
