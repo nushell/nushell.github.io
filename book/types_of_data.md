@@ -116,13 +116,16 @@ Eg) `1wk` is the duration of one week.
 
 This chart shows all durations currently supported:
 
-| Duration | Length     |
-|----------|------------|
-|1sec      | one second |
-|1min      | one minute |
-|1hr       | one hour   |
-|1day      | one day    |
-|1wk       | one week   |
+| Duration   | Length          |
+|------------|-----------------|
+|`1ns`       | one nanosecond  |
+|`1us`       | one microsecond |
+|`1ms`       | one millisecond |
+|`1sec`      | one second      |
+|`1min`      | one minute      |
+|`1hr`       | one hour        |
+|`1day`      | one day         |
+|`1wk`       | one week        |
 
 ## Ranges
 
@@ -151,16 +154,27 @@ File paths are a platform-independent way of representing a file path in the giv
 File sizes are held in a special integer type called bytes. Examples include `100b`, `15kb`, and `100mb`.
 
 The full list of filesize units are:
-* `pb`: petabytes
-* `tb`: terabytes
-* `gb`: gigabytes
-* `mb`: megabytes
-* `kb`: kilobytes
 * `b`: bytes
+* `kb`: kilobytes (aka 1000 bytes)
+* `mb`: megabytes
+* `gb`: gigabytes
+* `tb`: terabytes
+* `pb`: petabytes
+* `kib`: kibibytes (aka 1024 bytes)
+* `mib`: mebibytes
+* `gib`: gibibytes
+* `tib`: tebibytes
+* `pib`: pebibytes
 
 ## Binary data
 
 Binary data, like the data from an image file, is a group of raw bytes.
+
+You can write binary as a literal using the `0x[...]` form:
+
+```
+> 0x[1F FF]
+```
 
 ## Structured data
 

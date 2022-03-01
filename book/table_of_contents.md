@@ -15,6 +15,7 @@
 - [Math](math.md) - Math operations in nushell
 - [Variables and subexpressions](variables_and_subexpressions.md) - Working with variables and working with subexpressions
 - [Environment](environment.md) - Working with environment variables
+- [Stdout, stderr, and exit codes](stdout_stderr_exit_codes.md) - Working with stdout, stderr, and exit codes
 - [Modules](modules.md) - Creating and using your own modules
 - [Scripts](scripts.md) - Creating your own scripts
 - [Metadata](metadata.md) - An explanation of Nu's metadata system
@@ -22,6 +23,7 @@
 - [Shells](shells_in_shells.md) - Working with multiple locations
 - [Escaping commands](escaping.md) - Escaping to native commands of the same name
 - [Plugins](plugins.md) - Enhancing nushell with more features using plugins
+- [Parallelism](parallelism.md) - Running your code in parallel
 - [Dataframes](dataframes.md) - Working with dataframes in nushell
 - [Regular Expressions](regular_expressions.md) - Guide to use regex
 - [Coming from Bash](coming_from_bash.md) - Guide for those coming to nushell from Bash
