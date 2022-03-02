@@ -5,6 +5,11 @@ module.exports = {
       title: "Nushell",
       description: "A new type of shell.",
     },
+    "/de/": {
+      lang: "Deutsch",
+      title: "Nushell",
+      description: "Eine neuer Art von Shell.",
+    },
     "/es/": {
       lang: "es",
       title: "Nushell",
@@ -161,6 +166,35 @@ module.exports = {
                 "parsing_git_log",
                 "http",
                 "misc",
+              ],
+            },
+          ],
+        },
+      },
+      "/de/": {
+        selectText: "Sprachen",
+        label: "Deutsch",
+        editLinkText: "Diese Seite auf GitHub bearbeiten",
+        nav: [
+          { text: "Book", link: "/de/book/" },
+          { text: "Contributor Book", link: "/contributor-book/" },
+          { text: "Cookbook", link: "/cookbook/" },
+          { text: "Blog", link: "/blog/" },
+          { text: "Demo", link: "http://nushell.sh/demo" },
+        ],
+        sidebar: {
+          "/de/book/": [
+            {
+              title: "Nu Handbuch (0.59+)",
+              collapsable: false,
+              children: [
+                "",
+                "installation",
+                "konfiguration",
+                "eigene_befehle",
+                "aliase",
+                "von_bash_kommend",
+                "command_reference",
               ],
             },
           ],
