@@ -12,9 +12,9 @@ def greet [name] {
 }
 ```
 
-In dieser Definition, wird ein Befehl `greet` beschrieben, der einen Parameter `name` konsumiert. Nach diesem Parameter erfolgt die Beschreibung was passiert, wenn der Befehl ausgeführt wird. Wenn der Befehl aufgerufen wird, wird der Wert der als Parameter `name` übergeben wurde in die Variable `$name` geschrieben, die im Codeblock verfügbar ist.
+In dieser Definition, wird ein Befehl `greet` beschrieben, der einen Parameter `name` konsumiert. Nach diesem Parameter erfolgt die Beschreibung was passiert, wenn der Befehl ausgeführt wird. Wenn der Befehl aufgerufen wird, wird der Wert, der als Parameter `name` übergeben wurde, in die Variable `$name` geschrieben, die im Codeblock verfügbar ist.
 
-Um den obigen Befehl auszuführen, wird er wie ein eingebauter Befehl aufgerufen:
+Um den obigen Befehl auszuführen wird er wie ein eingebauter Befehl aufgerufen:
 
 ```
 > greet "world"
@@ -37,7 +37,7 @@ _Hinweis: Es wird empfohlen Worte in Befehlen mit `-` zur besseren Lesbarkeit zu
 
 ## Unterbefehle
 
-Es ist auch möglich Unterbefehle zu definieren. Dazu wird der Unterbefehl vom SUperbefehl durch ein Leerzeichen getrennt. Wenn beispielsweise der Befehl `str` durch einen Unterbefehl `mycommand` erweitert werden soll, funktioniert das wie folgt:
+Es ist auch möglich Unterbefehle zu definieren. Dazu wird der Unterbefehl vom Superbefehl durch ein Leerzeichen getrennt. Wenn beispielsweise der Befehl `str` durch einen Unterbefehl `mycommand` erweitert werden soll, funktioniert das wie folgt:
 
 ```nushell
 def "str mycommand" [] {
@@ -61,7 +61,7 @@ def greet [name: string] {
 }
 ```
 
-Die Typen der Parameter anzugeben ist optional. Nushell erlaubt es diese wegzulassen und behandelt diese dann als Typ `any`. Es kann also jede Art von Typ verarbeitet werden. Wenn ein Typ angegeben wurde, überprüft Nushell den Typ wenn die Funktion aufgerufen wird.
+Die Typen der Parameter anzugeben ist optional. Nushell erlaubt es diese wegzulassen und behandelt diese dann als Typ `any`. Es kann also jede Art von Typ verarbeitet werden. Wenn ein Typ angegeben wurde, überprüft Nushell den Typ, wenn die Funktion aufgerufen wird.
 
 Beispielhaft soll nur noch ein `int` als Typ erlaubt sein:
 
@@ -156,7 +156,7 @@ def greet [
 
 *Hinweis:* Flags sind benannt nach der langen Form des Namens. Im obigen Beispiel erfolgt der Zugriff immer über `$age` und nicht über `$a`.
 
-Nun kann diese neue Versio von `greet` wie folgt aufgerufen werden:
+Nun kann diese neue Version von `greet` wie folgt aufgerufen werden:
 
 ```
 > greet -a 10 hello
@@ -178,7 +178,7 @@ def greet [
 }
 ```
 
-Wenn der Befehl definiert ist, kann `help greet` aufgerufen werden um Informationen zum Befehl zu erhalten:
+Wenn der Befehl definiert ist kann `help greet` aufgerufen werden, um Informationen zum Befehl zu erhalten:
 
 ```
 Usage:
@@ -192,7 +192,7 @@ Flags:
   -a, --age <integer>  
 ```
 
-Wie zu sehen ist, werden der Parameter und die Flag die definiert wurden aufgelistet. Zusätzlich gibt es noch die Flag `-h`, die jeder Befehl hat.
+Wie zu sehen ist, werden der Parameter und die Flag, die definiert wurden, aufgelistet. Zusätzlich gibt es noch die Flag `-h`, die jeder Befehl hat.
 
 Um diese Hilfe zu verbessern, können Beschreibungen zur Definition hinzugefügt werden:
 
@@ -206,7 +206,7 @@ def greet [
 }
 ```
 
-Diese Kommentare, die zur Definition und den Parametern hinzugefügt wurden, werden sichtbar wenn die Hilfe zum Befehl aufgerufen wird.
+Diese Kommentare, die zur Definition und den Parametern hinzugefügt wurden, werden sichtbar, wenn die Hilfe zum Befehl aufgerufen wird.
 
 Wenn jetzt `help greet` ausgeführt wird, wird ein hilfreicherer Text angezeigt:
 
@@ -232,7 +232,7 @@ Eigene Befehle streamen ihre Ausgabe gleich wie eingebaute Befehle. Beispielswei
 > ls | get name
 ```
 
-`ls` soll jetzt in ein neuen, eigenen Befehl verschoben werden:
+`ls` soll jetzt in einen neuen, eigenen Befehl verschoben werden:
 
 ```nushell
 def my-ls [] { ls }

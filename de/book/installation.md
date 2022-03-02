@@ -10,15 +10,15 @@ Von der [Release-Seite](https://github.com/nushell/nushell/releases) kann Nushel
 
 **Achtung:** Nu funtioniert aktuell auf Windows 10 und hat keine Unterstützung für Windows 7/8.1.
 
-Die aktuelle Veröffentlichte `.zip`-Datei von der [Release-Seite](https://github.com/nushell/nushell/releases) herunterladen und den Inhalt extrahieren:
+Die aktuelle, veröffentlichte `.zip`-Datei von der [Release-Seite](https://github.com/nushell/nushell/releases) herunterladen und den Inhalt extrahieren nach:
 
 <<< @/snippets/installation/windows_example_extraction_location.sh
 
-Danach den `nu` beinhaltenden Ordner der Umgebungsvariable PATH hinzufügen. Wenn das passiert ist, kann `nu` wie folgt gestartet:
+Danach den `nu` beinhaltenden Ordner der Umgebungsvariable PATH hinzufügen. Wenn das passiert ist, kann `nu` wie folgt gestartet werden:
 
 <<< @/snippets/installation/windows_run_nu.sh
 
-Für Nutzer des [Windows Terminal](https://github.com/microsoft/terminal) kann `nu` wie als Standard-Shell gesetzt werden, indem:
+Für Nutzer des [Windows Terminal](https://github.com/microsoft/terminal) kann `nu` als Standard-Shell gesetzt werden, indem:
 
 <<< @/snippets/installation/windows_terminal_default_shell.sh
 
@@ -80,13 +80,13 @@ Mittels [Homebrew](https://brew.sh/), müssen die Pakete "openssl" und "cmake" �
 
 ## Installieren von [crates.io](https://crates.io)
 
-Wenn alle die Abhängigkeitenn, die für Nu benötigt werden, installiert sind, kann `cargo` verwendt werden um Nu zu installieren.
+Wenn alle die Abhängigkeitenn, die für Nu benötigt werden, installiert sind, kann `cargo` verwendet werden um Nu zu installieren.
 
 <<< @/snippets/installation/cargo_install_nu.sh
 
-Das war's! Cargo wird Nu und seine anderen Abhängigkeiten herunterladen, kompilieren und schließlich im "cargo bin path" installieren damit es benutzt werden kann.
+Das war's! Cargo wird Nu und seine anderen Abhängigkeiten herunterladen, kompilieren und schließlich im "cargo bin path" installieren, damit es benutzt werden kann.
 
-Wenn mehr Funktionalitäten installieren werden sollen, kann der folgende Befehl verwendet werden:
+Wenn mehr Funktionalitäten installiert werden sollen, kann der folgende Befehl verwendet werden:
 
 <<< @/snippets/installation/cargo_install_nu_more_features.sh
 
@@ -121,7 +121,7 @@ Leute, die sich mit Rust auskennen, wundern sich womöglich, warum hier sowohl e
 **!!! Nu befindet sich noch in der Entwicklung und ist unter Umständen nicht stabil genug für die tägliche Nutzung. !!!**
 
 Um die Login-Shell festzulegen, kann der Befehl [`chsh`](https://linux.die.net/man/1/chsh) verwendet werden.
-Manche Linux-Distributionen haben eine Liste von erlaubten Shells in `/etc/shells` und verbieten es die Shell zu ändern bis Nu in der Whitelist ist. Wenn die `shells`-Datei nicht abgeändert wurde, erscheint vielleicht einen ähnlichen Fehler, wie:
+Manche Linux-Distributionen haben eine Liste von erlaubten Shells in `/etc/shells` und verbieten es die Shell zu ändern, bis Nu in der Whitelist ist. Wenn die `shells`-Datei nicht abgeändert wurde, erscheint vielleicht einen ähnlichen Fehler, wie:
 
 <<< @/snippets/installation/chsh_invalid_shell_error.sh
 

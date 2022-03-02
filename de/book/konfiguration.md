@@ -2,13 +2,13 @@
 
 ## Nushell Konfiguration mittels `config.nu`
 
-Nushell nutzt ein Konfigurationssystem, das ein Nushell-Skript beim Start ausführt. Die Konfigurationsdatei wird Nushell `config.nu` genannt. Der Pfad zu dieser Konfigurationsdatei kann durch den Aufruf von `echo $nu.config-path` herausgefunden werden. Es handelt sich dabei um eine Datei die abgearbeitet wird und in jedem Schritt Definitionen, Umgebungsvariablen und mehr zum globalen Namespace hinzufügt.
+Nushell nutzt ein Konfigurationssystem, das ein Nushell-Skript beim Start ausführt. Die Konfigurationsdatei wird für Nushell `config.nu` genannt. Der Pfad zu dieser Konfigurationsdatei kann durch den Aufruf von `echo $nu.config-path` herausgefunden werden. Es handelt sich dabei um eine Datei die abgearbeitet wird und in jedem Schritt Definitionen, Umgebungsvariablen und mehr zum globalen Namespace hinzufügt.
 
 Ein Beispiel für eine Nushell `config.nu` kann [hier](https://github.com/nushell/nushell/blob/main/src/default_config.nu) in unserem Repository gefunden werden.
 
 ### `$config` konfigurieren
 
-Die zentralen Konfigurationen von Nushell sind in der globalen `$config` Variable festgehalten. Dieser Eintrag wie folgt erstellt werden:
+Die zentralen Konfigurationen von Nushell sind in der globalen `$config` Variable festgehalten. Dieser Eintrag kann wie folgt erstellt werden:
 
 ```
 let $config = {
@@ -24,11 +24,11 @@ let $config = ($config | update <field name> <field value>)
 
 ### Umgebung
 
-Die Shell-Umgebung kann durch Aufrufe von `let-env` in der `config.nu`-Datei geändert werden. Es gibt einige wichtige Nushell-spezifische Einstellungen:
+Die Shell-Umgebung kann durch Aufrufe von `let-env` in der `config.nu`-Datei geändert werden. Es gibt einige wichtige Nushell-spezifischen Einstellungen:
 
 - `LS_COLORS`: Setzt die Farben für Dateitypen in ls
 - `PROMPT_COMMAND`: Befehle, die ausgeführt werden, um die Prompt zu erzeugen (Block oder String)
-- `PROMPT_COMMAND_RIGHT`: Befehle, die ausgeführt werden, um die rechte Prompt zu erzeugen (Block)
+- `PROMPT_COMMAND_RIGHT`: Befehle, die ausgeführt werden, um die Prompt zu erzeugen (Block)
 - `PROMPT_INDICATOR = "〉"`: Indikator, der der Prompt folgt (default: ">"-like Unicode symbol)
 - `PROMPT_INDICATOR_VI_INSERT = ": "`
 - `PROMPT_INDICATOR_VI_NORMAL = "〉 "`

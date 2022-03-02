@@ -1,6 +1,6 @@
 # Aliase
 
-Aliase in Nushell bieten eine einfache Möglichkeit, um Texte zur ersetzen. Damit ist es möglich, einen Kurznamen für längere Befehle zu definieren - inclusive der Argumente.
+Aliase in Nushell bieten eine einfache Möglichkeit, um Texte zur ersetzen. Damit ist es möglich, einen Kurznamen für längere Befehle zu definieren - inklusive der Argumente.
 
 Beispielsweise kann ein Alias namens `ll` definiert werden, der den längeren Befehl `ls -l` ersetzt:
 

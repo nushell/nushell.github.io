@@ -6,12 +6,12 @@ tagline: Eine neue Art von Shell
 actionText: Loslegen →
 actionLink: /de/book/
 features:
-  - title: Leistungsfähige Pipelines um Ihr System zu kontrollieren
+  - title: Leistungsfähige Pipelines für Kontrolle über das System
     details: Pipelines erlauben es mit dem System zu interagieren wie niemals zuvor. Das System unter Kontrolle haben - immer bereit für den nächsten Befehl.
   - title: Alles sind Daten.
-    details: Anstatt alle Parameter aller Commands zu kennen, können überall die Selben verwendet werden, ganz egal woher die Daten kommen.
+    details: Anstatt alle Parameter aller Befehle zu kennen, können überall die Selben verwendet werden, ganz egal woher die Daten kommen.
   - title: Leistungsfähige Plugins
-    details: Nu kann nicht alle Funktionen liefern, die man sich vorstellen kann. Deshalb können man Nu über das leistungsfähige Pluginsystem beliebig erweitern.
+    details: Nu kann nicht alle Funktionen liefern, die man sich vorstellen kann. Deshalb lässt sich Nu über das leistungsfähige Plugin-System beliebig erweitern.
 ---
 ### Schnellstart
 
@@ -39,7 +39,7 @@ Mittels [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget
 $ winget install nu
 ```
 
-Windows-Nutzer müssen eventuall noch die [Microsoft Visual C++ 2015 Redistributables](https://www.microsoft.com/en-us/download/details.aspx?id=52685) installieren.
+Windows-Nutzer müssen eventuell noch die [Microsoft Visual C++ 2015 Redistributables](https://www.microsoft.com/en-us/download/details.aspx?id=52685) installieren.
 
 #### Starten der Shell
 
@@ -48,4 +48,4 @@ $ nu
 ```
 
 
-*Dazu beitragen diese Seite zu verbesern durch [Feedback](https://github.com/nushell/nushell.github.io/issues) oder eine [Pull Request](https://github.com/nushell/nushell.github.io/pulls)*
+*Dazu beitragen diese Seite zu verbessern durch [Feedback](https://github.com/nushell/nushell.github.io/issues) oder eine [Pull Request](https://github.com/nushell/nushell.github.io/pulls)*
