@@ -4,7 +4,7 @@ The best way currently to get Nu up and running is to install from [crates.io](h
 
 ## Pre-built binaries
 
-You can download Nu pre-built from the [release page](https://github.com/nushell/nushell/releases). Alternatively, if you use [Homebrew](https://brew.sh/) for macOS or Linux, you can install the binary by running `brew install nushell`, and if you use [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) on Windows, you can install Nu by running `winget install nu`.
+You can download Nu pre-built from the [release page](https://github.com/nushell/nushell/releases). Alternatively, if you use [Homebrew](https://brew.sh/) for macOS or Linux, you can install the binary by running `brew install nushell`, and if you use [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) on Windows, you can install Nu by running `winget install nushell`.
 
 ### Windows
 
