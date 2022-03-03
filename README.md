@@ -36,7 +36,7 @@ $ brew install nushell
 With [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/):
 
 ```powershell
-$ winget install nu
+$ winget install nushell
 ```
 
 For Windows users, you may also need to install the [Microsoft Visual C++ 2015 Redistributables](https://www.microsoft.com/en-us/download/details.aspx?id=52685).
