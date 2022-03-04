@@ -1,0 +1,62 @@
+# Strings
+
+Strings in Nushell help to hold text data for later use. This can include file names, file paths, names of columns,
+and much more. Strings are so common that Nushell offers a couple ways to work with them, letting you pick what best
+matches your needs.
+
+## Single-quoted string
+
+The simplest string in Nushell is the single-quoted string. This string uses the `'` character to surround some text. Here's the text for hello world as a single-quoted string:
+
+```
+> 'hello world'
+hello world
+```
+
+Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range
+of text data.
+
+## Double-quoted strings
+
+For more complex strings, Nushell also offers double-quoted strings. These strings use the `"` character to surround text. They also support the ability escape characters inside the text using the `\` character.
+
+For example, we could write the text hello followed by a new line and then world, using escape characters and a double-quoted string:
+
+```
+> "hello\nworld"
+hello
+world
+```
+
+Escape characters let you quickly add in a character that would otherwise be hard to type.
+
+Nushell currently supports the following escape characters:
+
+  - `\"` - double-quote character
+  - `\'` - single-quote character
+  - `\\` - backslash
+  - `\/` - forward slash
+  - `\b` - backspace
+  - `\f` - formfeed
+  - `\r` - carriage return
+  - `\n` - newline (line feed)
+  - `\t` - tab
+  - `\uXXXX` - a unicode character (replace XXXX with the number of unicode character)
+
+## String interpolation
+
+More complex string use cases also need a new form of string: the string interpolation. This is a way of building text from both raw text and the result of running expressions. String interpolation combines the results together, giving you a new string.
+
+String interpolation uses `$" "` and `$' '` as ways to wrap interpolated text.
+
+For example, let's say we have a variable called `$name` and we want to greet the name of the person contained in this variable:
+
+```
+> let name = "Alice"
+> $"greetings, ($name)"
+greetings, Alice
+```
+
+By wrapping expressions in `()`, we can run them to completion and use the results to help build the string.
+
+String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" "`, form. These correspond to the single-quoted and double-quoted strings: single-quoted string interpolation doesn't support escape characters while double-quoted string interpolation does. 
