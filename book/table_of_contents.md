@@ -9,6 +9,7 @@
 - [Working with tables](working_with_tables.md) - Working with Nu tables
 - [Pipeline](pipeline.md) - How the pipeline works
 - [Configuration](configuration.md) - How to configure nushell
+- [3rd Party Prompts](3rdpartyprompts.md) - How to configure 3rd party prompts
 - [Custom commands](custom_commands.md) - Creating your own commands
 - [Aliases](aliases.md) - How to alias commands
 - [Operators](operators.md) - Operators supported by nushell
@@ -25,6 +26,7 @@
 - [Plugins](plugins.md) - Enhancing nushell with more features using plugins
 - [Parallelism](parallelism.md) - Running your code in parallel
 - [Dataframes](dataframes.md) - Working with dataframes in nushell
+- [Coloring and Theming](coloring_and_theming.md) - How to change the colors and themes in nushell
 - [Regular Expressions](regular_expressions.md) - Guide to use regex
 - [Coming from Bash](coming_from_bash.md) - Guide for those coming to nushell from Bash
 - [Nushell map from shells/DSL](nushell_map.md) - Guide to show how nushell compares with SQL, Linq, PowerShell, and Bash
