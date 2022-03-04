@@ -5,6 +5,7 @@
 - [Moving around](moving_around.md) - Moving around in nushell
 - [Types of data](types_of_data.md) - Types of data in nushell
 - [Loading data](loading_data.md) - Loading data and using it
+- [Strings](strings.md) - Strings, escape characters, and string interpolation
 - [Working with lists](working_with_lists.md) - Working with Nu lists
 - [Working with tables](working_with_tables.md) - Working with Nu tables
 - [Pipeline](pipeline.md) - How the pipeline works
