@@ -43,7 +43,7 @@ let colors = []
 = $colors | empty? # true
 ```
 
-The `in` and `not in` operators are used to test whether a value is in a list.
+The `in` and `not-in` operators are used to test whether a value is in a list.
 Operators can only be used in "math mode".
 One way to enter math mode is to begin an expression with `=`.
 For example:
