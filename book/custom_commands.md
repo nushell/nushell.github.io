@@ -224,7 +224,7 @@ Flags:
   -a, --age <integer>: The age of the person
 ```
 
-## Output
+## Pipeline Output
 
 Custom commands stream their output just like built-in commands. For example, let's say we wanted to refactor this pipeline:
 
@@ -251,29 +251,26 @@ We can use the output from this command just as we would `ls`.
 
 This lets us easily build custom commands and process their output. Note, we don't use return statements like other languages. Instead, we build pipelines that output streams of data that can be connected to other pipelines.
 
-## Input 
+## Pipeline Input 
 
-Custom commands can also take input, just like other commands. This input is passed from the pipeline to the block that the custom command uses.
+Custom commands can also take input from the pipeline, just like other commands. This input is automatically passed to the block that the custom command uses.
 
-Let's make our own echo command that also outputs a line after each value that it gets from the input:
+Let's make our own command that doubles every value it receives as input:
 
 ```nushell
-def my-echo [] {
-  each {
-    echo $it "--"
-  }
+def double [] {
+  each { |it| 2 * $it }
 }
 ```
 
 Now, if we call the above command later in a pipeline, we can see what it does with the input:
 
 ```
-> echo foo bar | my-echo
+> [1 2 3] | double
 ───┬─────
- 0 │ foo 
- 1 │ --  
- 2 │ bar 
- 3 │ --  
+ 0 │ 2 
+ 1 │ 4   
+ 2 │ 6 
 ───┴─────
 ```
 
