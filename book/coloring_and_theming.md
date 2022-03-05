@@ -471,7 +471,7 @@ let config = {
   footer_mode: always #always, never, number_of_rows, auto
   animate_prompt: false
   float_precision: 2
-  without_color: false
+  use_ansi_coloring: true
   filesize_format: "b" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
   edit_mode: emacs # vi
   max_history_size: 10000
