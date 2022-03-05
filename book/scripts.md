@@ -48,7 +48,7 @@ a
 b; c | d
 ```
 
-When this script is run, Nushell will first run the `a` command to completion and view its results. Next, Nushell will run `b; c | d` following the rules in the "Command groups" section.
+When this script is run, Nushell will first run the `a` command to completion and view its results. Next, Nushell will run `b; c | d` following the rules in the ["Groups" section](https://www.nushell.sh/book/types_of_data.html#groups).
 
 ## Parameterizing Scripts
 
