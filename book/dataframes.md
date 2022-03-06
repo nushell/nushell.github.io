@@ -2,7 +2,7 @@
 
 > Note. The dataframe commands are available from version 0.33.1 onwards
 
-As we have seen so far, nushell makes working with data its main priority.
+As we have seen so far, Nushell makes working with data its main priority.
 `Lists` and `Tables` are there to help you cycle through values in order to
 perform multiple operations or find data in a breeze. However, there are
 certain operations where a row-based data layout is not the most efficient way
@@ -11,7 +11,7 @@ like group-by or join using large datasets can be costly memory-wise, and may
 lead to large computation times if they are not done using the appropriate
 data format.
 
-For this reason, the `DataFrame` structure was introduced to nushell. A
+For this reason, the `DataFrame` structure was introduced to Nushell. A
 `DataFrame` stores its data in a columnar format using as its base the [Apache
 Arrow](https://arrow.apache.org/) specification, and uses
 [Polars](https://github.com/pola-rs/polars) as the motor for performing
@@ -24,8 +24,8 @@ processing data.
 
 ## Benchmark comparisons
 
-For this little benchmark exercise we will be comparing native nushell
-commands, dataframe nushell commands and [Python
+For this little benchmark exercise we will be comparing native Nushell
+commands, dataframe Nushell commands and [Python
 Pandas](https://pandas.pydata.org/) commands. For the time being don't pay too
 much attention to the `dataframe` commands. They will be explained in later
 sections of this page.
@@ -34,7 +34,7 @@ sections of this page.
 > machine with a processor Intel(R) Core(TM) i7-10710U (CPU @1.10GHz 1.61 GHz)
 > and 16 gb of RAM.
 >
-> All examples where run on Nushell version 0.33.1.
+> All examples were run on Nushell version 0.33.1.
 
 ### File information
 
@@ -91,7 +91,7 @@ We can have a look at the first lines of the file using `dfr first`:
 ### Loading the file
 
 Let's start by comparing loading times between the various methods. First, we
-will load the data using nushell load command:
+will load the data using Nushell's `open` command:
 
 ```shell
 > benchmark {open .\Data7602DescendingYearOrder.csv}
@@ -103,9 +103,8 @@ will load the data using nushell load command:
 ───┴─────────────────────────
 ```
 
-Loading the file using native nushell commands took 30 seconds. Not bad for
-loading five million records in order to do data analysis. But we can do a bit
-better than that.
+Loading the file using native Nushell functionality took 30 seconds. Not bad for
+loading five million records! But we can do a bit better than that.
 
 Let's now use Pandas. We are going to use the next script to load the file:
 
@@ -129,7 +128,7 @@ And the benchmark for it is:
 
 That is a great improvement, from 30 seconds to 2 seconds. Nicely done, Pandas!
 
-Probably we can load the data a bit faster. This time we will use nushell's
+Probably we can load the data a bit faster. This time we will use Nushell's
 `dfr open` command:
 
 ```shell
@@ -146,13 +145,13 @@ This time it took us 0.6 seconds. Not bad at all.
 
 ### Group-by comparison
 
-Lets do a slightly more complex operation this time. We are going to group the
+Let's do a slightly more complex operation this time. We are going to group the
 data by year, and add groups using the column `geo_count`.
 
-Again, we are going to start with nushell native command.
+Again, we are going to start with a Nushell native command.
 
 > Note: If you want to run this example, be aware that the next command will
-> use a large amount of memory. This may affect the performance of you system
+> use a large amount of memory. This may affect the performance of your system
 > while this is being executed.
 
 ```shell
@@ -197,7 +196,7 @@ And the result from the benchmark is:
 
 Not bad at all. Again, pandas managed to get it done in a fraction of the time.
 
-To finish the comparison, let's try nushell dataframes. We are going to put
+To finish the comparison, let's try Nushell dataframes. We are going to put
 all the operations in one `nu` file, to make sure we are doing similar
 operations:
 
@@ -219,12 +218,12 @@ and the benchmark with dataframes is:
 ───┴───────────────────
 ```
 
-Luckily nushell dataframes managed to halve the time again. Isn't that great?
+Luckily Nushell dataframes managed to halve the time again. Isn't that great?
 
 As you can see, Nushell's `Dataframe` commands are as fast as the most common
 tools that exist today to do data analysis. The commands that are included in
 this release have the potential to become your go-to tool for doing data
-analysis. By composing complex nushell pipelines, you can extract information
+analysis. By composing complex Nushell pipelines, you can extract information
 from data in a reliable way.
 
 ## Working with Dataframes
@@ -337,14 +336,14 @@ $df | dfr aggregate sum | dfr select int_1 int_2 float_1 float_2
 ───┴───────┴───────┴─────────┴─────────
 ```
 
-you can even store the result from this aggregation as you would store any
-other nushell variable
+You can even store the result from this aggregation as you would store any
+other Nushell variable
 
 ```shell
 > let res = ($df | dfr aggregate sum | dfr select int_1 int_2 float_1 float_2)
 ```
 
-and now we have two dataframes stored in memory
+And now we have two dataframes stored in memory
 
 ```shell
 > dfr list
@@ -357,7 +356,7 @@ and now we have two dataframes stored in memory
 ───┴──────┴──────┴─────────
 ```
 
-pretty neat, isn't it?
+Pretty neat, isn't it?
 
 You can perform several aggregations on the dataframe in order to extract basic
 information from the dataframe and do basic data analysis on your brand new
@@ -416,7 +415,7 @@ in order to use it for further operations.
 
 One of the most powerful operations that can be performed with a DataFrame is
 the `group-by`. This command will allow you to perform aggregation operations
-based on a grouping criteria. In nushell, a `GroupBy` is a type of object that
+based on a grouping criteria. In Nushell, a `GroupBy` is a type of object that
 can be stored and reused for multiple aggregations. This is quite handy, since
 the creation of the grouped pairs is the most expensive operation while doing
 group-by and there is no need to repeat it if you are planning to do multiple
@@ -451,7 +450,7 @@ $group | dfr aggregate sum
 ───┴───────┴───────────┴───────────┴─────────────┴─────────────
 ```
 
-and using the same `GroupBy` you can perform now another operation on the
+And using the same `GroupBy` you can perform now another operation on the
 whole dataframe, like `min` in this case
 
 ```shell
@@ -466,8 +465,8 @@ $group | aggregate min
 ───┴───────┴───────────┴───────────┴─────────────┴─────────────
 ```
 
-the created `GroupBy` object is so handy that it can even be used as base for
-pivoting a table.  As an example, Lets use the column called `second` as the
+The created `GroupBy` object is so handy that it can even be used as a base for
+pivoting a table.  As an example, let's use the column called `second` as the
 pivot column and the column `float_1` as the value column
 
 
@@ -491,11 +490,11 @@ pivot column and the column `float_1` as the value column
 > floats where the column `first` is `b` and column `second` is `a`
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
-worthy it to keep in memory to keep exploring your dataset.
+worth keeping in memory while you explore your dataset.
 
 ## Creating Dataframes
 
-It is also possible to construct dataframes from basic nushell primitives, such
+It is also possible to construct dataframes from basic Nushell primitives, such
 as integers, decimals, or strings. Let's create a small dataframe using the
 command `to-df`.
 
@@ -530,8 +529,8 @@ example, let's append two columns to our mini dataframe `$a`
 ───┴───┴───┴────┴────
 ```
 
-the powerful Nushell's piping syntax allows us to create new dataframes by
-taking data from other dataframes and append it to them. Now, if you list your
+Nushell's powerful piping syntax allows us to create new dataframes by
+taking data from other dataframes and appending it to them. Now, if you list your
 dataframes you will see in total four dataframes
 
 ```shell
@@ -608,7 +607,7 @@ previous variable.
 > Note: If you want to see how many variables you have stored in memory you can
 > use `$scope.variables`
 
-Lets rename our previous Series so it has a memorable name
+Let's rename our previous Series so it has a memorable name
 
 ```shell
 > let new_2 = ($new_2 | dfr rename memorable)
@@ -683,12 +682,12 @@ and we can start piping things in order to create new columns and dataframes
 ───┴───┴───┴─────────┴────────
 ```
 
-Nushell piping system can help you create very interesting workflows.
+Nushell's piping system can help you create very interesting workflows.
 
 ## Series and masks
 
 Series have another key use in when working with DataFrames, and it is the fact
-that we can build boolean masks out of them. Lets start by creating a simple
+that we can build boolean masks out of them. Let's start by creating a simple
 mask using the equality operator
 
 ```shell
@@ -718,7 +717,7 @@ and with this mask we can now filter a dataframe, like this
 
 Now we have a new dataframe with only the values where the mask was true.
 
-The masks can also be created from Nushell lists as well, for example:
+The masks can also be created from Nushell lists, for example:
 
 ```shell
 > let mask1 = ([$true $true $false] | dfr to-df mask)
@@ -844,7 +843,7 @@ extract that information
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-The command `take` is very handy, specially if we mix it with other commands.
+The command `take` is very handy, especially if we mix it with other commands.
 Let's say that we want to extract all rows for the first duplicated element for
 column `first`. In order to do that, we can use the command `dfr
 arg-unique` as shown in the next example
@@ -987,15 +986,15 @@ Or all the duplicated ones
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-## Dataframes commands
+## Dataframe commands
 
 So far we have seen quite a few operations that can be done using `DataFrame`s
-commands. However, the commands we have used so far, are not all the commands
+commands. However, the commands we have used so far are not all the commands
 available to work with data and be assured that there will be more as the
 feature becomes more stable.
 
-The next list show the available dataframe commands with their description, and
-whenever possible, their analogous nushell command.
+The next list shows the available dataframe commands with their descriptions, and
+whenever possible, their analogous Nushell command.
 
 | Command Name | Applies To | Description | Nushell Equivalent |
 | ------------ | ---------- | ----------- | ------------------ |
@@ -1059,7 +1058,7 @@ However, the future of these dataframes is still very experimental. New
 commands and tools that take advantage of these commands will be added as they
 mature. For example, the next step for dataframes is the introduction of Lazy
 Dataframes. These will allow you to define complex data operations that will be
-executed until you decide to "finish" the pipe. This will give nushell the
+executed until you decide to "finish" the pipe. This will give Nushell the
 chance to select the optimal plan to query the data you would be asking for.
 
 Keep visiting this book in order to check the new things happening to

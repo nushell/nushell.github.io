@@ -1,6 +1,6 @@
 # Stdout, Stderr, and Exit Codes
 
-An import piece of interop between Nushell and external commands is working with the standard streams of data coming from the external.
+An important piece of interop between Nushell and external commands is working with the standard streams of data coming from the external.
 
 The first of these important streams is stdout.
 

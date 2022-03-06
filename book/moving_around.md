@@ -34,7 +34,7 @@ Changing the current working directory can also be done if `cd` is omitted and a
 
 ## Filesystem commands
 
-Nu also provides some basic filesystem commands that works cross-platform. 
+Nu also provides some basic filesystem commands that work cross-platform. 
 
 We can move an item from one place to another using the `mv` command:
 

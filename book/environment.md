@@ -20,7 +20,7 @@ The last `raw` column shows the actual value that will be sent to external appli
 
 ## Single-use environment variables
 
-The environment is created from the settings in the Nu configuration and from the environment that Nu is run inside of.  You can update the environment permanently using the techniques listed in [configuration](configuration.md) chapter.
+The environment is created from the settings in the Nu configuration and from the environment that Nu is run inside of.  You can update the environment permanently using the techniques listed in the [configuration](configuration.md) chapter.
 
 A common shorthand, inspired by Bash and others, is also available. You can write the above example as:
 

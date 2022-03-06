@@ -41,11 +41,11 @@ Nushell currently supports the following escape characters:
   - `\r` - carriage return
   - `\n` - newline (line feed)
   - `\t` - tab
-  - `\uXXXX` - a unicode character (replace XXXX with the number of unicode character)
+  - `\uXXXX` - a unicode character (replace XXXX with the number of the unicode character)
 
 ## String interpolation
 
-More complex string use cases also need a new form of string: the string interpolation. This is a way of building text from both raw text and the result of running expressions. String interpolation combines the results together, giving you a new string.
+More complex string use cases also need a new form of string: string interpolation. This is a way of building text from both raw text and the result of running expressions. String interpolation combines the results together, giving you a new string.
 
 String interpolation uses `$" "` and `$' '` as ways to wrap interpolated text.
 

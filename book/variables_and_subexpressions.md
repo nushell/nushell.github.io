@@ -35,7 +35,7 @@ You can always evaluate a subexpression and use its result by wrapping the expre
 
 The parentheses contain a pipeline that will run to completion, and the resulting value will then be used. For example, `(ls)` would run the `ls` command and give back the resulting table and `(git branch --show-current)` runs the external git command and returns a string with the name of the current branch. You can also use parentheses to run math expressions like `(2 + 3)`.
 
-Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an subexpression to run a pipelines and assign this to a variable:
+Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an subexpression to run a pipeline and assign this to a variable:
 
 ```
 > let names-of-big-files = (ls | where size > 10kb)
