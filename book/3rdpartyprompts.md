@@ -10,7 +10,7 @@ nerdfonts are not required but they make the presentation much better.
 
 ## oh-my-posh
 
-[site](ttps://ohmyposh.dev/)
+[site](https://ohmyposh.dev/)
 
 [repo](https://github.com/JanDeDobbeleer/oh-my-posh)
 
