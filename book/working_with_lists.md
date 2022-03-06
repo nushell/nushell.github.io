@@ -149,7 +149,7 @@ echo $scores | reduce -n { $acc.item + $it.index * $it.item }
 
 
 The `wrap` command converts list to a table. Each list value will
-be converted to a separate row with single column:
+be converted to a separate row with a single column:
 ```bash
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 

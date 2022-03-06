@@ -5,7 +5,7 @@ Using the [metadata](metadata.md) information, you can create your own custom er
 * The title of the error
 * The label of error message, which includes both the text of the label and the span to underline
 
-You can use the `error make` command to create your own error messages. For example, let's say you had your own command called `my-command` and you wanted to give an error back to the caller about something wrong the the parameter that was passed in.
+You can use the `error make` command to create your own error messages. For example, let's say you had your own command called `my-command` and you wanted to give an error back to the caller about something wrong with a parameter that was passed in.
 
 First, you can take the span of where the argument is coming from:
 

@@ -20,7 +20,7 @@ We create a record for each entry, and fill it with the name of the directory an
 
 On your machine, the times may vary. For this machine, it took 21 milliseconds for the current directory.
 
-Now, since this operation can be run in parallel, let's convert the above to paralle by changing `each` to `par-each`:
+Now, since this operation can be run in parallel, let's convert the above to parallel by changing `each` to `par-each`:
 
 ```
 > ls | where type == dir | par-each { |it| {name: $it.name, len: (ls $it.name | length) } }
@@ -28,4 +28,4 @@ Now, since this operation can be run in parallel, let's convert the above to par
 
 On this machine, it now runs in 6ms. That's quite a difference!
 
-You'll notice, if you look at the results, that they come back in different orders each run (depending on the number of hardware threads on your system). As tasks finish, and we get the correct result, we may need to additional steps if we want our results in a particular order. For example, for the above, we may want to sort the results by the "name" field. This allows both `each` and `par-each` versions of our script to give the same result.
+You'll notice, if you look at the results, that they come back in different orders each run (depending on the number of hardware threads on your system). As tasks finish, and we get the correct result, we may need to add additional steps if we want our results in a particular order. For example, for the above, we may want to sort the results by the "name" field. This allows both `each` and `par-each` versions of our script to give the same result.
