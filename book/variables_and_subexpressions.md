@@ -64,7 +64,7 @@ We can do a very similar action in a single step using a subexpression path:
 
 It depends on the needs of the code and your particular style which form works best for you.
 
-## Short-hand subexpressions
+## Short-hand subexpressions (row conditions)
 
 Nushell supports accessing columns in a subexpression using a simple short-hand. You may have already used this functionality before. If, for example, we wanted to only see rows from `ls` where the entry is at least ten kilobytes we can write:
 
