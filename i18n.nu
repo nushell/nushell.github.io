@@ -3,7 +3,7 @@ let meta = open 'i18n-meta.json'
 
 def update-i18n-status [] {
 
-    print 'This table holds the overview of the nushell docs writing and translation status. Welcome to participate in the translation of the docs. Please notify me after you finish some translation. Thanks'
+    print 'This table holds the overview of the nushell docs writing and translation status. Welcome to participate in the translation of the docs. You can update the `i18n-meta.json` file when you have finished writing or translating the doc. Thanks'
     print ''
     print '---'
     print ''
