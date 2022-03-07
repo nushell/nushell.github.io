@@ -18,7 +18,7 @@ Wenn oh-my-posh verwendet werden soll, kann dies in wenigen Schritten für Nushe
 
 1. oh-my-posh installieren und die Farbschemata herunterladen entsprechend dieser [Anleitung](https://ohmyposh.dev/docs/linux#installation)
 2. Herunterladen und installieren einer [nerd font](https://github.com/ryanoasis/nerd-fonts).
-3. PROMPT_COMMAND in `~/.config/nushell/config.nu` setzen und `M365Princess.omp-json` beliebig ändern entsprechend der [Demo](https://ohmyposh.dev/docs/themes).
+3. PROMPT_COMMAND in `~/.config/nushell/config.nu` setzen und `M365Princess.omp.json` beliebig ändern entsprechend der [Demo](https://ohmyposh.dev/docs/themes).
 
 ```shell
 > let-env PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }

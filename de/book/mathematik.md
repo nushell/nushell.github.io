@@ -70,23 +70,3 @@ Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von d
 > 3 * (1 + 2)
 9
 ```
-
-## Short-hand Mathematik-Modus
-
-Eine Variation des Mathematik-Modus, den Nushell bereitstellt, ist der sogenannte "short-hand" Mathematik-Modus. Er wird "short-hand" genannt, da er einen einfachen Weg bereitstellt, um auf Spalten über eine "short-hand" zuzugreifen.
-
-Wenn beispielsweise nur Zeilen in `ls` angezeigt werden sollen, in der die Größe der Datei größer als 10 Kilobytes ist, kann der folgende Befehl verwendet werden:
-
-```
-> ls | where size > 10kb
-```
-
-`where size > 10kb`  ist ein Befehl mit zwei Teilen: Dem Befehlsnamen `where` und dem short-hand mathematischen Ausdruck `size > 10kb`. Hier wird auch klar, warum das Ganze short-hand heißt: `size` ist hier die gekürzte Version von `$it.size`. Wenn der komplette ausführliche Befehl verwendet wird, sieht derselbe Befehl folgendermaßen aus:
-
-```
-> ls | where {|$it| $it.size > 10kb }
-```
-
-Anstatt immer diesen sehr unhandlichen Befehl auszutippen, wenn mit Daten in Spalten gearbeitet werden soll, kann der short-hand Modus verwendet werden.
-
-Damit diese Erweiterung der short-hand in die lange Form funktioniert, muss der Name der Spalte als Operator auf der linken Seite angegeben werden. Im obigen Beispiel ist `size` auf der linken Seite und erlaubt dadurch die automatische Erweiterung zur längeren Form, die intern verwendet wird.

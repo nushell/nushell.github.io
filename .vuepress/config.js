@@ -179,7 +179,7 @@ module.exports = {
         label: "Deutsch",
         editLinkText: "Diese Seite auf GitHub bearbeiten",
         nav: [
-          { text: "Book", link: "/de/book/" },
+          { text: "Buch", link: "/de/book/" },
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
@@ -198,6 +198,7 @@ module.exports = {
                 "eigene_befehle",
                 "aliase",
                 "mathematik",
+                "variablen_und_unterausdruecke",
                 "plugins",
                 "von_bash_kommend",
                 "command_reference",
