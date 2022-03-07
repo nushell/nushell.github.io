@@ -55,3 +55,5 @@ $ nu
 
 
 *You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls)*
+
+If you have any questions you can [join our community on discord](https://discord.gg/NtAbbGn)
