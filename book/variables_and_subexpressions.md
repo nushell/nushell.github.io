@@ -13,6 +13,16 @@ If we create a variable, we can print its contents by using `$` to refer to it:
 > echo $my-value
 4
 ```
+Variables in Nushell are immutable, that means that you can not change its value after declaration.
+They can be shadowed in nested block, that results in:
+
+```
+> let my-value = 4
+> do { let my-value = 5; echo $my-value }
+5
+> echo $my-value
+4
+```
 
 ## Variable paths
 
