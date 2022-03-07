@@ -63,3 +63,21 @@ We can do a very similar action in a single step using a subexpression path:
 ```
 
 It depends on the needs of the code and your particular style which form works best for you.
+
+## Short-hand subexpressions
+
+Nushell supports accessing columns in a subexpression using a simple short-hand. You may have already used this functionality before. If, for example, we wanted to only see rows from `ls` where the entry is at least ten kilobytes we can write:
+
+```
+> ls | where size > 10kb
+```
+
+The `where size > 10kb` is a command with two parts: the command name `where` and the short-hand expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`. This could also be written in any of the following ways:
+
+```
+> ls | where $it.size > 10kb
+> ls | where ($it.size > 10kb)
+> ls | where {|$it| $it.size > 10kb }
+```
+
+For short-hand syntax to work, the column name must appear on the left-hand side of the operation (like `size` in `size > 10kb`).
