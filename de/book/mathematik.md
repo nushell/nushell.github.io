@@ -43,7 +43,7 @@ true
 true
 ```
 
-## Comparisons
+## Vergleiche
 
 Die folgenden Vergleichsoperatoren sind ebenfalls verfügbar:
 
@@ -54,11 +54,11 @@ Die folgenden Vergleichsoperatoren sind ebenfalls verfügbar:
 * `==` - gleich
 * `!=` - ungleich
 
-## Compound operators
+## Verknüpfungsoperatoren
 
 Nushell unterstützt auch die Operatoren `&&` ("und") und `||` ("oder") um zwei Operationen die Bool-Werte zurückgeben zu verbinden. Zum Beispiel: `ls | where name in ["one" "two" "three"] && size > 10kb`
 
-## Reihenfolge von OperationenOrder of operations
+## Reihenfolge von Operationen
 
 Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von der höchsten Priorität zur niedrigsten Priorität):
 
