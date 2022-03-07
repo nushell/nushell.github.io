@@ -38,9 +38,9 @@ Damit Rust richtig funktioniert, muss eine kompatible Compiler-Suite auf dem Sys
 
 * Linux: GCC oder Clang
 * macOS: Clang (Xcode installieren)
-* Windows: [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
-
-Für Windows, wenn die Visual Studio Community Edition installiert wird, sollte sichergestellt werden, dass auch die "C++ build tools" installiert werden, da `link.exe` benötigt wird, das als Teil der optionalen Installationsoptionen angeboten wird. Damit ist das System bereit für den nächsten Schritt.
+* Windows: MSVC (installieren von [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/) oder der [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022))
+    * Sicherstellen, dass "Desktop development with C++" installiert wird
+    * Jede Visual Studio Edition sollte funktionieren (Community ist gratis)
 
 ### Rust installieren
 
