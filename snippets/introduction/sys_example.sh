@@ -1,9 +1,9 @@
 > sys
-─────────┬─────────────────────────────────────────
- host    │ [row 7 columns]
- cpu     │ [row cores current ghz max ghz min ghz]
- disks   │ [table 2 rows]
- mem     │ [row free swap free swap total total]
- net     │ [table 11 rows]
- battery │ [table 1 rows]
-─────────┴─────────────────────────────────────────
+╭───────┬───────────────────╮
+│ host  │ {record 6 fields} │
+│ cpu   │ [table 4 rows]    │
+│ disks │ [table 3 rows]    │
+│ mem   │ {record 4 fields} │
+│ temp  │ [table 1 row]     │
+│ net   │ [table 4 rows]    │
+╰───────┴───────────────────╯

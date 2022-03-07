@@ -1,8 +1,9 @@
 > ps
-─────┬───────┬──────────────────┬─────────┬─────────┬──────────┬─────────
- #   │ pid   │ name             │ status  │ cpu     │ mem      │ virtual
-─────┼───────┼──────────────────┼─────────┼─────────┼──────────┼─────────
-   0 │ 33155 │ nu_plugin_core_p │ Running │  3.8496 │   1.8 MB │  4.4 GB
-   1 │ 32841 │ mdworker_shared  │ Running │  0.0000 │  19.3 MB │  4.4 GB
-   2 │ 32829 │ CoreServicesUIAg │ Running │  0.0000 │  16.1 MB │  4.5 GB
-   3 │ 32828 │ mdworker_shared  │ Running │  0.0000 │  23.0 MB │  4.4 GB
+╭─────┬──────┬──────────────────────┬─────────┬───────┬───────────┬──────────╮
+│  #  │ pid  │         name         │ status  │  cpu  │    mem    │ virtual  │
+├─────┼──────┼──────────────────────┼─────────┼───────┼───────────┼──────────┤
+│   0 │ 7570 │ nu                   │ Running │  1.96 │  23.2 MiB │ 32.8 GiB │
+│   1 │ 3533 │ remindd              │ Sleep   │  0.00 │ 103.6 MiB │ 32.3 GiB │
+│   2 │ 3495 │ TVCacheExtension     │ Sleep   │  0.00 │  11.9 MiB │ 32.2 GiB │
+│   3 │ 3490 │ MusicCacheExtension  │ Sleep   │  0.00 │  12.9 MiB │ 32.2 GiB │
+...
