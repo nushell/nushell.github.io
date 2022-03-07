@@ -1,0 +1,317 @@
+[
+  {
+    "name": "3rdpartyprompts.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "aliases.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "coloring_and_theming.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "coming_from_bash.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "command_reference.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "configuration.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "creating_errors.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "custom_commands.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "dataframes.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "environment.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "escaping.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "installation.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "loading_data.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "math.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "metadata.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "modules.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "moving_around.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "nushell_map.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "nushell_map_functional.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "nushell_map_imperative.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "nushell_operator_map.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "operators.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "parallelism.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "pipeline.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "plugins.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "regular_expressions.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "scripts.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "shells_in_shells.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "stdout_stderr_exit_codes.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "strings.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "table_of_contents.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "types_of_data.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "variables_and_subexpressions.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "working_with_lists.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "working_with_tables.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  }
+]
