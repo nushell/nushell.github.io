@@ -7,7 +7,7 @@ For the 0.44 version of Nushell, you should read the [0.44 version of the book](
 
 Hello, and welcome to the Nushell project. The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development.
 
-Nu takes cues from a lot of familiar territory: traditional shells like bash, object based shells like PowerShell, functional programming, systems programming, and more. But rather than trying to be the jack of all trades, Nu focuses its energy on doing a few things well:
+Nu takes cues from a lot of familiar territory: traditional shells like bash, object based shells like PowerShell, functional programming, systems programming, and more. But rather than trying to be a jack of all trades, Nu focuses its energy on doing a few things well:
 
 * Create a flexible cross-platform shell with a modern feel
 * Allow you to mix and match commandline applications with a shell that understands the structure of your data
@@ -21,7 +21,7 @@ The first thing you'll notice when you run a command like `ls` is that instead o
 
 The table is more than just showing the directory in a different way. Just like tables in a spreadsheet, this table allows us to work with the data more interactively.
 
-The first thing we'll do is to sort our table by the size. To do this, we'll take the output from `ls` and feed it into a command that can sort tables based on the contents of a column.
+The first thing we'll do is to sort our table by size. To do this, we'll take the output from `ls` and feed it into a command that can sort tables based on the contents of a column.
 
 <<< @/snippets/introduction/ls_sort_by_reverse_example.sh
 
