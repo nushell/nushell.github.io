@@ -199,6 +199,7 @@ module.exports = {
                 "aliase",
                 "mathematik",
                 "variablen_und_unterausdruecke",
+                "escaping",
                 "plugins",
                 "von_bash_kommend",
                 "command_reference",
