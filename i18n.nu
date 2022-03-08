@@ -1,5 +1,9 @@
 
-let meta = open 'i18n-meta.json'
+let META_FILE = 'i18n-meta.json'
+if ($META_FILE | path exists) == false {
+    echo '[]' | save -r $META_FILE
+}
+let meta = open $META_FILE
 
 # Update issue contents for https://github.com/nushell/nushell.github.io/issues/261
 def update-i18n-status [] {
