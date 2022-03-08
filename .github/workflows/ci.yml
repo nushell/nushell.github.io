@@ -10,7 +10,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2-beta
         with:
-          node-version: '12'
+          node-version: '16'
 
       - run: npm install
       - run: npm run build
