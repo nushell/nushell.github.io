@@ -248,9 +248,9 @@ You can also create a table as a list of records:
 
 ## Blocks
 
-Blocks represent a block of code in Nu. For example, in the command `each { echo $it }` the block is the portion contained in curly braces, `{ echo $it }`. Blocks are a useful way of representing code that can be executed on each row of data.
+Blocks represent a block of code in Nu. For example, in the command `each { |it| echo $it }` the block is the portion contained in curly braces, `{ |it| echo $it }`. Block parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary.
 
-Blocks can also include parameters. These parameters are listed between a pair of pipe symbols.  For example, you can change the parameter set by the `each` command using: `each {|x| echo $x }`.
+Blocks are a useful way to represent code that can be executed on each row of data. It is idiomatic to use `$it` as a parameter name in `each` blocks, but not required; `each { |x| echo $x }` works the same way as `each { |it| echo $it }`.
 
 ## Groups
 
