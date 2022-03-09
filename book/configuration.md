@@ -2,9 +2,9 @@
 
 ## Nushell Configuration with `config.nu`
 
-Nushell uses a configuration system that loads a nushell script file at launch time. That configuration file is called the Nushell `config.nu` file. The path to the configuration file can be found by calling `echo $nu.config-path`. It's a source file that runs, each step adding definitions, environment variables, and more to the global namespace.
+Nushell uses a configuration system that loads+runs a Nushell script file at launch time. That configuration file is called the `config.nu` file, and the path to it can be found by calling `echo $nu.config-path`. `config.nu` can add definitions, environment variables, and more to the global namespace.
 
-An example of the nushell `config.nu` can be found in our repo [here](https://github.com/nushell/nushell/blob/main/src/default_config.nu).
+An example `config.nu` file can be found in our repo [here](https://github.com/nushell/nushell/blob/main/src/default_config.nu).
 
 ### Configuring `$config`
 
@@ -24,7 +24,7 @@ let $config = ($config | update <field name> <field value>)
 
 ### Environment
 
-You can update the environment using `let-env` calls inside of the `config.nu` file. There are some important ones to look at which doing Nushell-specific settings:
+You can set environment variables using `let-env` calls inside the `config.nu` file. These are some important variables to look at for Nushell-specific settings:
 
 - `LS_COLORS`: Sets up colors per file type in ls
 - `PROMPT_COMMAND`: Code to execute for setting up the prompt (block or string)
@@ -45,10 +45,10 @@ To use Nu as a login shell, you'll need to configure the `$env` variable. With t
 You can build the full set of environment variables by running Nu inside of another shell, like Bash. Once you're in Nu, you can run a command like this:
 
 ```
-> env | each { echo $"let-env ($it.name) = '($it.raw)'" } | str collect (char nl)
+> env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str collect (char nl)
 ```
 
-This will print out a `let-env` lines, one for each environment variable along with its setting.
+This will print out `let-env` lines, one for each environment variable along with its setting.
 
 Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
@@ -69,7 +69,7 @@ With this, you should be able to `chsh` and set Nu to be your login shell. After
 ### macOS: Keeping `/usr/bin/open` as `open`
 
 Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
-As nushell has its own `open` command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
+As Nushell has its own `open` command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
 One way to work around this is to define `alias`es in your `config.nu` file like this:
 
 ```

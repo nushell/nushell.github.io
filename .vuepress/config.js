@@ -179,7 +179,7 @@ module.exports = {
         label: "Deutsch",
         editLinkText: "Diese Seite auf GitHub bearbeiten",
         nav: [
-          { text: "Book", link: "/de/book/" },
+          { text: "Buch", link: "/de/book/" },
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
@@ -194,8 +194,13 @@ module.exports = {
                 "",
                 "installation",
                 "konfiguration",
+                "3rdpartyprompts",
                 "eigene_befehle",
                 "aliase",
+                "mathematik",
+                "variablen_und_unterausdruecke",
+                "escaping",
+                "plugins",
                 "von_bash_kommend",
                 "command_reference",
               ],
@@ -381,5 +386,11 @@ module.exports = {
       },
     },
   },
-  plugins: ["@vuepress/plugin-back-to-top", "@vuepress/plugin-medium-zoom"],
+  plugins: [
+    "@vuepress/plugin-back-to-top",
+    "@vuepress/plugin-medium-zoom",
+    ["@vuepress/search", {
+      test: `^(?!.*old_book)` // Exclude the old Nu book from search; it clutters up search results
+    }]
+  ],
 };

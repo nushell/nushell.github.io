@@ -13,6 +13,16 @@ If we create a variable, we can print its contents by using `$` to refer to it:
 > echo $my-value
 4
 ```
+Variables in Nushell are immutable, that means that you can not change its value after declaration.
+They can be shadowed in nested block, that results in:
+
+```
+> let my-value = 4
+> do { let my-value = 5; echo $my-value }
+5
+> echo $my-value
+4
+```
 
 ## Variable paths
 
@@ -35,7 +45,7 @@ You can always evaluate a subexpression and use its result by wrapping the expre
 
 The parentheses contain a pipeline that will run to completion, and the resulting value will then be used. For example, `(ls)` would run the `ls` command and give back the resulting table and `(git branch --show-current)` runs the external git command and returns a string with the name of the current branch. You can also use parentheses to run math expressions like `(2 + 3)`.
 
-Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an subexpression to run a pipelines and assign this to a variable:
+Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an subexpression to run a pipeline and assign this to a variable:
 
 ```
 > let names-of-big-files = (ls | where size > 10kb)
@@ -63,3 +73,21 @@ We can do a very similar action in a single step using a subexpression path:
 ```
 
 It depends on the needs of the code and your particular style which form works best for you.
+
+## Short-hand subexpressions (row conditions)
+
+Nushell supports accessing columns in a subexpression using a simple short-hand. You may have already used this functionality before. If, for example, we wanted to only see rows from `ls` where the entry is at least ten kilobytes we can write:
+
+```
+> ls | where size > 10kb
+```
+
+The `where size > 10kb` is a command with two parts: the command name `where` and the short-hand expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`. This could also be written in any of the following ways:
+
+```
+> ls | where $it.size > 10kb
+> ls | where ($it.size > 10kb)
+> ls | where {|$it| $it.size > 10kb }
+```
+
+For short-hand syntax to work, the column name must appear on the left-hand side of the operation (like `size` in `size > 10kb`).

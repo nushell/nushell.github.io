@@ -1,6 +1,6 @@
 # Coloring and Theming in Nushell
 
-There are a few main parts that nushell allows you to change the color. All of these can be set in the `config.nu` configuration file. If you see the hash/hashtag/pound mark `#` in the config file it means the text after it is commented out.
+Many parts of Nushell's interface can have their color customized. All of these can be set in the `config.nu` configuration file. If you see the hash/hashtag/pound mark `#` in the config file it means the text after it is commented out.
 
 1. table borders
 2. primitive values
@@ -12,7 +12,7 @@ There are a few main parts that nushell allows you to change the color. All of t
 
 ---
 
-Table borders are controlled by the `table_mode` setting in the `config.nu`. Here is an example:
+Table borders are controlled by the `table_mode` setting in `config.nu`. Here is an example:
 
 ```shell
 > let $config = {
@@ -200,11 +200,11 @@ Here are the current options for `table_mode`:
 
 ---
 
-The "#hex" format is one way you typically see colors represented. It's simply the `#` character followed by 6 characters. The first two are for `red`, the second two are for `green`, and the third two are for `blue`. It's important that this string be surrounded in quotes, otherwise nushell thinks it's a commented out string.
+The "#hex" format is one way you typically see colors represented. It's simply the `#` character followed by 6 characters. The first two are for `red`, the second two are for `green`, and the third two are for `blue`. It's important that this string be surrounded in quotes, otherwise Nushell thinks it's a commented out string.
 
 Example: The primary `red` color is `"#ff0000"` or `"#FF0000"`. Upper and lower case in letters shouldn't make a difference.
 
-This `"#hex"` format allows us to specify 24-bit truecolor tones to different parts of nushell.
+This `"#hex"` format allows us to specify 24-bit truecolor tones to different parts of Nushell.
 
 ## `full "#hex"` format
 
@@ -314,7 +314,7 @@ Here's another small example using multiple color syntaxes with some comments.
 
 ## `Shape` values
 
-As mentioned above, `shape` is a term used to indicate the sytax coloring.
+As mentioned above, `shape` is a term used to indicate the syntax coloring.
 
 Here's the current list of flat shapes.
 
@@ -358,7 +358,7 @@ Here's a small example of how to apply color to these items. Anything not specif
 
 ## `Prompt` configuration and coloring
 
-The nushell prompt is configurable through these environment variables settings.
+The Nushell prompt is configurable through these environment variables:
 
 - `PROMPT_COMMAND`: Code to execute for setting up the prompt (block)
 - `PROMPT_COMMAND_RIGHT`: Code to execute for setting up the _RIGHT_ prompt (block) (see oh-my.nu in nu_scripts)
@@ -400,7 +400,7 @@ Theming combines all the coloring above. Here's a quick example of one we put to
 The key to making theming work is to make sure you specify all themes and colors you're going to use in the `config.nu` file _before_ you declare the `let config = ` line.
 
 ```
-# lets define some colors
+# let's define some colors
 
 let base00 = "#181818" # Default Background
 let base01 = "#282828" # Lighter Background (Used for status bars, line number and folding marks)

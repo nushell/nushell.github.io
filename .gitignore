@@ -2,3 +2,4 @@ node_modules
 .vuepress/dist/
 npm-debug.log
 .DS_Store
+package-lock.json

@@ -10,11 +10,12 @@ There are three ways to represent a path:
 * As an inner list of path parts, e.g., '[[ / home viking spam.txt ]]'.
   Splitting into parts is done by the `path split` command.
 
+All subcommands accept all three variants as an input. Furthermore, the 'path
 join' subcommand can be used to join the structured path or path parts back into
 the path literal.
 
 Usage:
-  > path 
+  > path
 
 Subcommands:
   path basename - Get the final component of a path
@@ -29,3 +30,4 @@ Subcommands:
 
 Flags:
   -h, --help
+      Display this help message

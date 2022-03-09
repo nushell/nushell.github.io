@@ -12,7 +12,7 @@ def greet [name] {
 }
 ```
 
-In this definition, we define the `greet` command, which takes a single parameter `name`. Following this parameter is the block that represents what will happen with the custom command runs. When called, the custom command will set the value passed for `name` as the `$name` variable, which will be available to the block.
+In this definition, we define the `greet` command, which takes a single parameter `name`. Following this parameter is the block that represents what will happen when the custom command runs. When called, the custom command will set the value passed for `name` as the `$name` variable, which will be available to the block.
 
 To run the above, we can call it like we would call built-in commands:
 
@@ -31,7 +31,7 @@ As we do, we also get output just as we would with built-in commands:
 
 ## Command names
 
-In Nushell, a command name a string of characters or a quoted string. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊`, and `123`. 
+In Nushell, a command name is a string of characters or a quoted string. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊`, and `123`. 
 
 _Note: It's common practice in Nushell to separate the words of the command with `-` for better readability._ For example `get-size` instead of `getsize` or `get_size`.
 

@@ -10,9 +10,9 @@ Alternatively, for macOS or Linux, you can install the binary using [Homebrew](h
 
 ### Windows
 
-**Please note:** Nu works on Windows 10 and does not currently have Windows 7/8.1 support.
+**Please note:** Nu works on Windows 10+ and does not currently have Windows 7/8.1 support.
 
-Download the current released `.zip`-file from the [release page](https://github.com/nushell/nushell/releases) and extract it for example to:
+Download the current release's `.zip`-file from the [release page](https://github.com/nushell/nushell/releases) and extract it for example to:
 
 <<< @/snippets/installation/windows_example_extraction_location.sh
 
@@ -32,7 +32,7 @@ Now, `nu` should load on startup of the Windows Terminal.
 
 ## Getting Ready
 
-Before we can install Nu, we need to make sure our system has the necessary requirements. Currently, this means making sure we have both the Rust toolchain and local dependencies installed.
+Before we can install Nu from source, we need to make sure our system has the necessary requirements. Currently, this means making sure we have both the Rust toolchain and local dependencies installed.
 
 ### Installing a compiler suite
 
@@ -40,9 +40,9 @@ For Rust to work properly, you'll need to have a compatible compiler suite insta
 
 * Linux: GCC or Clang
 * macOS: Clang (install Xcode)
-* Windows: [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
-
-For Windows, when you install Visual Studio Community Edition, make sure to install the "C++ build tools" as what we need is `link.exe` which is provided as part of that optional install.  With that, we're ready to move to the next step.
+* Windows: MSVC (install [Visual Studio](https://visualstudio.microsoft.com/vs/community/) or the [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022))
+    * Make sure to install the "Desktop development with C++" workload
+    * Any Visual Studio edition will work (Community is free)
 
 ### Installing Rust
 
@@ -76,7 +76,7 @@ You will need to install "libxcb", "openssl-devel" and "libX11-devel":
 
 ### macOS
 
-Using [Homebrew](https://brew.sh/), you will need to install the "openssl" and "cmake" using: 
+Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmake" using: 
 
 <<< @/snippets/installation/macos_deps.sh
 
@@ -104,11 +104,11 @@ Once installed, we can run Nu using the `nu` command:
 
 ## Building from source
 
-We can also build our own Nu from source directly from github. This gives us immediate access to the latest Nu features and bug fixes.
+We can also build our own Nu from source directly from GitHub. This gives us immediate access to the latest Nu features and bug fixes.
 
 <<< @/snippets/installation/git_clone_nu.sh
 
-Git will clone the main nushell repo for us. From there, we can build and run Nu if we are using `rustup` with:
+Git will clone the main Nushell repo for us. From there, we can build and run Nu if we are using `rustup` with:
 
 <<< @/snippets/installation/build_nu_from_source.sh
 
