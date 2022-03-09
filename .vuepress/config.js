@@ -386,5 +386,11 @@ module.exports = {
       },
     },
   },
-  plugins: ["@vuepress/plugin-back-to-top", "@vuepress/plugin-medium-zoom"],
+  plugins: [
+    "@vuepress/plugin-back-to-top",
+    "@vuepress/plugin-medium-zoom",
+    ["@vuepress/search", {
+      test: `^(?!.*old_book)` // Exclude the old Nu book from search; it clutters up search results
+    }]
+  ],
 };
