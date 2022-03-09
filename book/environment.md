@@ -16,7 +16,7 @@ You can see the current environment variables using the `env` command:
 In Nushell, environment variables can be any value and have any type (see the `type` column).
 The actual value of the env. variable used within Nushell is under the `value` column.
 You can query the value directly using the `$env` variable, for example, `$env.PATH | length`.
-The last `raw` column shows the actual value that will be sent to external applications (check [ENV_CONVERSIONS](#environment-variable-conversions) for details).
+The last `raw` column shows the actual value that will be sent to external applications (see [Environment variable conversions](#environment-variable-conversions) for details).
 
 ## Single-use environment variables
 
@@ -78,9 +78,49 @@ BAR
 
 ## Environment variable conversions
 
-(Section text is WIP)
-You can use the `ENV_CONVERSIONS` environment variable to convert between a string and a value.
-There are some examples in `default_config.nu`.
+You can set the `ENV_CONVERSIONS` environment variable to convert other environment variables between a string and a value.
+For example, the [default config](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu) includes conversion of PATH (and Path used on Windows) environment variables from a sting to a list.
+After the config loaded, any existing environment variable specified inside `ENV_CONVERSIONS` will be translated according to its `from_string` field into a value of any type.
+External tools require environment variables to be strings, therefore, any non-string environment variable needs to be converted first.
+The conversion of value -> string is set by the `to_string` field of `ENV_CONVERSIONS` and is done every time an external command is run.
+
+Let's illustrate the conversions with an example.
+Put the following in your config.nu:
+```
+let-env ENV_CONVERSIONS = {
+    # ... you might have Path and PATH already there, add:
+    FOO : {
+        from_string: { |s| $s | split row '-' }
+        to_string: { |v| $v | str collect '-' }
+    }    
+}
+```
+Now, within a Nushell instance:
+```
+> with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
+
+> $env.FOO
+  0   a
+  1   b
+  2   c
+```
+You can see the `$env.FOO` is now a list in a new Nushell instance with the updated config.
+You can also test the conversion manually by
+```
+> do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
+```
+Now, to test the conversion list -> string, run:
+```
+> nu -c '$env.FOO'  
+a-b-c
+```
+Because `nu` is an external program, Nushell translated the `[ a b c ]` according to `ENV_CONVERSIONS.FOO.to_string` and passed it to the `nu` process.
+Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was succesful.
+You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
+
+If we look back at the `env` command, the `raw` column shows the value translated by `ENV_CONVERSIONS.<name>.to_string` and the `value` column shows the value used in Nushell (the result of `ENV_CONVERSIONS.<name>.from_string` in the case of `FOO`).
+
+_(Important! The environment conversion string -> value happens **after** the config.nu is evaluated. All environment variables in config.nu are still strings unless you set them manually to some other values.)_
 
 ## Removing environment variables
 
