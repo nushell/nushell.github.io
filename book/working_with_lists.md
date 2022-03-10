@@ -122,7 +122,7 @@ echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 The `reduce` command computes a single value from a list.
 It uses a block which takes 2 parameters: the current item (conventionally named `it`) and an accumulator
 (conventionally named `acc`). To specify an initial value for the accumulator, use the `--fold` (`-f`) flag.
-To change both parameters to have `index` and `item` values, add the `--numbered` (`-n`) flag.
+To change `it` to have `index` and `item` values, add the `--numbered` (`-n`) flag.
 For example:
 
 ```bash
@@ -133,17 +133,15 @@ echo "total =" ($scores | math sum) # easier approach, same result
 
 echo "product =" ($scores | reduce --fold 1 { |it, acc| $acc * $it }) # 96
 
-echo $scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item }
-# This should produce 0*3 + 1*8 + 2*4 = 16.
-# But see https://github.com/nushell/nushell/issues/4759
+echo $scores | reduce -n { |it, acc| $acc + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
 ```
 
 
-The `wrap` command converts list to a table. Each list value will
+The `wrap` command converts a list to a table. Each list value will
 be converted to a separate row with a single column:
 ```bash
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 
 # Show world clock for selected time zones
-echo $zones | wrap 'Zone' | insert Time {(date now | date to-timezone $it.Zone | date format '%Y.%m.%d %H:%M')}
+$zones | wrap 'Zone' | update Time {|it| (date now | date to-timezone $it.Zone | date format '%Y.%m.%d %H:%M')}
 ```
