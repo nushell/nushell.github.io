@@ -67,6 +67,7 @@ module.exports = {
               children: [
                 "",
                 "installation",
+                "thinking_in_nushell",
                 "moving_around",
                 "types_of_data",
                 "loading_data",
