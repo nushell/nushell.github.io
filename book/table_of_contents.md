@@ -1,7 +1,8 @@
 # Table of Contents
 
 - [Installation](installation.md) - Installing Nushell
-- [Introduction](introduction.md) - Getting started
+- [Introduction](README.md) - Getting started
+- [Thinking in Nushell](thinking_in_nushell.md) - Thinking in Nushell
 - [Moving around](moving_around.md) - Moving around in Nushell
 - [Types of data](types_of_data.md) - Types of data in Nushell
 - [Loading data](loading_data.md) - Loading data and using it
