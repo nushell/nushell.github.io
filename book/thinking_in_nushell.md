@@ -40,7 +40,7 @@ source "output.nu"
 abc
 ```
 
-The `source` command runs at parse time, while the parser finds all the definitions that are visible to the program. At evaluation time, those definitions should all be visible.
+The `source` command runs at parse time, where the parser finds all the definitions that are visible to the program. At evaluation time, those definitions should all be visible.
 
 In the above, we've expected the evaluator to run between each line, but Nushell does not interleave parsing and evaluation like this.
 
@@ -52,7 +52,7 @@ Another common issue is trying to dynamically create the filename to source from
 
 This would require the evaluator to run and evaluate the string before the parser was able to look inside the file to find definitions. Again, this mixes parsing and evaluation, no longer keeping them separate.
 
-**Thinking in Nushell:** Nushell is designed to use a single parsing phase separate from evaluation. This will allow for strong IDE support that understands your project well, accurate error messages, and an easier language for third-party tools to work with. 
+**Thinking in Nushell:** Nushell is designed to use a single parsing phase separate from evaluation. This will allow for strong IDE support, accurate error messages, and an easier language for third-party tools to work with. 
 
 ## Variables are immutable
 
