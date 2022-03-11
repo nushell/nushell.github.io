@@ -47,6 +47,11 @@ module.exports = {
     docsRepo: "nushell/nushell.github.io",
     docsBranch: "main",
     lastUpdated: false,
+    algolia: {
+      apiKey: 'dd6a8f770a42efaed5befa429d167232',
+      indexName: 'nushell',
+      appId: 'GHCTOYCW6T',
+    },
     locales: {
       "/": {
         selectText: "Languages",
