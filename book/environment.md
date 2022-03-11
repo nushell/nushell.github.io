@@ -10,7 +10,7 @@ You can see the current environment variables using the `env` command:
   17   EDITOR               string               nvim                 nvim
   28   LANG                 string               en_US.UTF-8          en_US.UTF-8
   35   PATH                 list<unknown>        [list 16 items]      /path1:/path2:/...
-  36   PROMPT_COMMAND       block                <Block 197>          <Block 197>
+  36   PROMPT_COMMAND       block                <Block 197>          
 ```
 
 In Nushell, environment variables can be any value and have any type (see the `type` column).
@@ -119,6 +119,8 @@ Running commands with `nu -c` does not load the config file, therefore the env c
 You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
 If we look back at the `env` command, the `raw` column shows the value translated by `ENV_CONVERSIONS.<name>.to_string` and the `value` column shows the value used in Nushell (the result of `ENV_CONVERSIONS.<name>.from_string` in the case of `FOO`).
+If the value is not a string and does not have `to_string` conversion, it is not passed to an external (see the `raw` column of `PROMPT_COMMAND`).
+One exception is `PATH` (`Path` on Windows): By default, it converts the string to a list on startup and from a list to a string when running externals if no manual conversions are specified.
 
 _(Important! The environment conversion string -> value happens **after** the config.nu is evaluated. All environment variables in config.nu are still strings unless you set them manually to some other values.)_
 
