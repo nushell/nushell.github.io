@@ -1,6 +1,6 @@
 # Thinking in Nushell
 
-To help you understand - and get the most out of - Nushell, we've put together this section on "thinking in Nushell". By learning to thinking in Nushell and use the patterns it provides, you'll hit fewer issues getting started and be better setup for success.
+To help you understand - and get the most out of - Nushell, we've put together this section on "thinking in Nushell". By learning to think in Nushell and use the patterns it provides, you'll hit fewer issues getting started and be better setup for success.
 
 So what does it mean to think in Nushell? Here are some common topics that come up with new users of Nushell.
 
