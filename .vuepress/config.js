@@ -390,6 +390,16 @@ module.exports = {
   plugins: [
     "@vuepress/plugin-back-to-top",
     "@vuepress/plugin-medium-zoom",
+    ["feed", {
+      canonical_base: "https://www.nushell.sh/",
+      feed_options: {
+        title: "Nushell Blog",
+        link: "https://www.nushell.sh/blog",
+        favicon: "https://www.nushell.sh/icon.png"
+      },
+      posts_directories: ['/blog/'],
+      sort: entries => entries.sort((a, b) => new Date(b.date) - new Date(a.date))
+    }],
     ["@vuepress/search", {
       test: `^(?!.*old_book)` // Exclude the old Nu book from search; it clutters up search results
     }]
