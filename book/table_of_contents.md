@@ -26,6 +26,7 @@
 - [Escaping commands](escaping.md) - Escaping to native commands of the same name
 - [Plugins](plugins.md) - Enhancing Nushell with more features using plugins
 - [Parallelism](parallelism.md) - Running your code in parallel
+- [Line editor](line_editor.md) - Nushell's line editor
 - [Dataframes](dataframes.md) - Working with dataframes in Nushell
 - [Coloring and Theming](coloring_and_theming.md) - How to change the colors and themes in Nushell
 - [Regular Expressions](regular_expressions.md) - Guide to use regex

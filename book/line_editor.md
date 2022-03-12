@@ -1,0 +1,274 @@
+# Reedline. Nushell's line editor
+
+Nushell's line editor [Reedline](https://github.com/nushell/reedline) is a cross platform
+line reader designed to be modular and flexible. The engine is in charge of controlling
+the command history, validations, completions, hints and screen paint.
+
+## Configuration
+
+### Editing mode
+
+Reedline allows you to edit text using two modes: vi and emacs. In order to select
+your favorite you need to modify your config file and write down your preferred mode.
+
+For example:
+```bash
+  let $config = {
+    ...
+    edit_mode: emacs
+    ...
+  }
+```
+
+Each edit mode comes with the usual keybinding for vi and emacs text editing. However you
+can define additional keybindings to improve your editing experience.
+
+### Command history
+
+As mentioned before, Reedline manages and stores all the commands that are edited and sent
+to Nushell. To configure the max number of records that Reedline should store you will need
+to adjust this value in your config file:
+
+```bash
+  let $config = {
+    ...
+    max_history_size: 1000
+    ...
+  }
+```
+
+### Customizing your prompt
+
+Reedline prompt is also highly customizable. In order to construct you perfect prompt, you
+could define the next environmental variables in your config file:
+
+```bash
+# Use nushell functions to define your right and left prompt
+def create_left_prompt [] {
+    let path_segment = ($nu.cwd)
+
+    $path_segment
+}
+
+def create_right_prompt [] {
+    let time_segment = ([
+        (date now | date format '%m/%d/%Y %r')
+    ] | str collect)
+
+    $time_segment
+}
+
+let-env PROMPT_COMMAND = { create_left_prompt }
+let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
+```
+
+> Note: You don't have to define the environmental variables using Nushell functions. You can use
+> simple strings to define them.
+
+You can also customize the prompt indicator for the line editor by modifying the next env variables.
+
+```bash
+let-env PROMPT_INDICATOR = "〉"
+let-env PROMPT_INDICATOR_VI_INSERT = ": "
+let-env PROMPT_INDICATOR_VI_NORMAL = "〉"
+let-env PROMPT_MULTILINE_INDICATOR = "::: "
+```
+
+> Note: The prompt indicators are environmental variables that represent the state of the prompt
+
+
+## Keybindings
+
+Reedline keybindings are powerful constructs that let you build chains of events that can be
+triggered with a specific combination of keys.
+
+For example, let's say that you would like to map the completion menu to the `Ctrl + t` keybinding
+(default is `tab`). You can add the next entry to your config file.
+
+```bash
+  let $config = {
+    ...
+
+    keybindings: [
+      {
+        name: completion_menu
+        modifier: control
+        keycode: char_t
+        mode: emacs
+        event: { send: menu name: completion_menu }
+      }
+    ]
+
+    ...
+  }
+```
+
+After loading this new `config.nu`, your new keybinding (`Ctrl + t`) will open the completion command.
+
+Each keybinding requires the next elements:
+- name: Unique name for your keybinding for easy reference in `$config.keybindings`
+- modifier: A key modifier for the keybinding. The options are:
+  - none
+  - control
+  - alt
+  - shift
+  - control | alt
+  - control | alt | shift
+- keycode: This represent the key to be pressed
+- mode: emacs, vi_insert, vi_normal (a single string or a list. e.g. [`vi_insert` `vi_normal`])
+- event: The type of event that is going to be sent by the keybinding. The options are:
+    - send
+    - edit
+    - until
+
+> Note: All of the available modifiers, keycodes and events can be found with the command
+> `keybindings list`
+
+The event section of the keybinding entry is where the actions to be performed are defined. In the
+previous example we defined a single `send` event (defined with a record) that was going to be sent
+to the engine. We can also define a series of events that will be executed one after the other with
+the defined keybindind. The next example clears the prompt, inserts a string and then enters that value
+
+```bash
+  let $config = {
+    ...
+
+    keybindings: [
+    {
+      name: change_dir_with_fzf
+      modifier: CONTROL
+      keycode: Char_t
+      mode: emacs
+      event:[
+          { edit: {cmd: Clear} }
+          { edit: {
+              cmd: InsertString,
+              value: "cd (ls | where type == dir | each { |it| $it.name} | str collect (char nl) | fzf | decode utf-8 | str trim)"
+            }
+          }
+          { send: Enter }
+        ]
+    }
+
+    ...
+  }
+```
+
+One disadvantage of the previous keybinding is the fact that the inserted text will be processed by the
+validator and saved in the history, making the keybinding a bit slow and populating the command history with
+the same command. For that reason there is the `executehostcommand` type of event.
+The next example does the same as the previous one in a simpler way.
+
+```bash
+  let $config = {
+    ...
+
+    keybindings: [
+    {
+      name: change_dir_with_fzf
+      modifier: CONTROL
+      keycode: Char_y
+      mode: emacs
+      event: {
+        send: executehostcommand,
+        cmd: "cd (ls | where type == dir | each { |it| $it.name} | str collect (char nl) | fzf | decode utf-8 | str trim)"
+      }
+    }
+  ]
+
+    ...
+  }
+```
+
+To complete this keybinding tour we need to discuss the `until` type for event. As you have seen so
+far, you can send a single or a list of events. When a list of events is sent, each and everyone of them
+is processed.
+
+However, there maybe cases when you want to assign different events to the same keybinding.
+This is specially useful with Nushell menus. For example, say you still want to activate your completion
+menu with `Ctrl + t` but you also want to move to the next element in the menu once it is activated.
+
+For these cases, we have the `until` keyword. The events listed inside the until event will be processed
+one by one with the difference that as soon as one is successful, the event processing is stopped.
+
+The next keybinding represents this case.
+
+```bash
+  let $config = {
+    ...
+
+    keybindings: [
+      {
+        name: completion_menu
+        modifier: control
+        keycode: char_t
+        mode: emacs
+        event: {
+          until: [
+            { send: menu name: completion_menu }
+            { send: menunext }
+          ]
+        }
+      }
+    ]
+
+    ...
+  }
+```
+
+The previous keybinding will first try to open a completion menu. If the menu is not active, it will
+activate it and sent a success signal. If the keybinding is pressed again, since there is an active
+menu, the next event it will send is the MenuNext, which means that it will select the next element
+in the menu.
+
+As you can see the `until` keyword allows us the define two events for the same keybinding. To the
+moment of this writing, only the Menu events allow this type of layering. The other non menu event
+types will always return a success value, meaning that the until will stop as soon as it reaches the
+command. For example, the next keybinding will always send a `down` because that event is always
+successful
+
+```bash
+  let $config = {
+    ...
+
+    keybindings: [
+      {
+        name: completion_menu
+        modifier: control
+        keycode: char_t
+        mode: emacs
+        event: {
+          until: [
+            { send: down }
+            { send: menu name: completion_menu }
+            { send: menunext }
+          ]
+        }
+      }
+    ]
+
+    ...
+  }
+```
+
+
+## Menus
+
+```
+  menu_config: {
+    columns: 4
+    col_width: 20   # Optional value. If missing all the screen width is used to calculate column width
+    col_padding: 2
+    text_style: green
+    selected_text_style: green_reverse
+    marker: "| "
+  }
+  history_config: {
+    page_size: 10
+    selector: "!"
+    text_style: green
+    selected_text_style: green_reverse
+    marker: "? "
+  }
+
+```
