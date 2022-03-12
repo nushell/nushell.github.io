@@ -1,38 +1,27 @@
 # Installing Nu
 
-The best way currently to get Nu up and running is to install from [crates.io](https://crates.io), download pre-built binaries from our [release page](https://github.com/nushell/nushell/releases), or build from source.
+There are lots of ways to get Nu up and running. You can download pre-built binaries from our [release page](https://github.com/nushell/nushell/releases), [use your favourite package manager](https://repology.org/project/nushell/versions), or build from source.
 
 ## Pre-built binaries
 
-You can download Nu pre-built from the [release page](https://github.com/nushell/nushell/releases).
+Nu binaries are published for Linux, macOS, and Windows [with each GitHub release](https://github.com/nushell/nushell/releases). Just download, extract the binaries, then copy them to a location on your PATH.
 
-Alternatively, for macOS or Linux, you can install the binary using [Homebrew](https://brew.sh/) by running `brew install nushell`, and on Windows you can install Nu with [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) by running `winget install nushell`, or with [Chocolatey](https://chocolatey.org/) by running `choco install nushell`.
+## Package managers
 
-### Windows
+Nu is available via several package managers:
 
-**Please note:** Nu works on Windows 10+ and does not currently have Windows 7/8.1 support.
+[![Packaging status](https://repology.org/badge/vertical-allrepos/nushell.svg)](https://repology.org/project/nushell/versions)
 
-Download the current release's `.zip`-file from the [release page](https://github.com/nushell/nushell/releases) and extract it for example to:
+For macOS and Linux, [Homebrew](https://brew.sh/) is a popular choice (`brew install nushell`).
 
-<<< @/snippets/installation/windows_example_extraction_location.sh
+For Windows:
+- [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) (`winget install nushell`)
+- [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
+- [Scoop](https://scoop.sh/) (`scoop install nu`)
 
-And then add the folder of `nu` to your PATH. Once we have done that, we can run Nu using the `nu` command:
+## Build from source
 
-<<< @/snippets/installation/windows_run_nu.sh
-
-If you are using [Windows Terminal](https://github.com/microsoft/terminal) you can set `nu` as your default shell by adding:
-
-<<< @/snippets/installation/windows_terminal_default_shell.sh
-
-to  `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is to change the `"defaultProfile"` to:
-
-<<< @/snippets/installation/windows_change_default_profile.sh
-
-Now, `nu` should load on startup of the Windows Terminal.
-
-## Getting Ready
-
-Before we can install Nu from source, we need to make sure our system has the necessary requirements. Currently, this means making sure we have both the Rust toolchain and local dependencies installed.
+You can also build Nu from source. First, you will need to set up the Rust toolchain and its dependencies.
 
 ### Installing a compiler suite
 
@@ -56,9 +45,9 @@ Once we are ready, we press 1 and then enter.
 
 If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.55 or later.
 
-## Dependencies
+### Dependencies
 
-### Debian/Ubuntu
+#### Debian/Ubuntu
 
 You will need to install the "pkg-config" and "libssl-dev" package:
 
@@ -68,47 +57,41 @@ Linux users who wish to use the `rawkey` or `clipboard` optional features will n
 
 <<< @/snippets/installation/use_rawkey_and_clipboard.sh
 
-### RHEL based distros
+#### RHEL based distros
 
 You will need to install "libxcb", "openssl-devel" and "libX11-devel":
 
 <<< @/snippets/installation/install_rhel_dependencies.sh
 
-### macOS
+#### macOS
 
 Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmake" using: 
 
 <<< @/snippets/installation/macos_deps.sh
 
-## Installing from [crates.io](https://crates.io)
+### Build using [crates.io](https://crates.io)
 
-Once we have the dependencies Nu needs, we can install it using the `cargo` command that comes with the Rust compiler.
+Nu releases are published as source to the popular Rust package registry [crates.io](https://crates.io/). This makes it easy to build+install the latest Nu release with `cargo`:
 
 <<< @/snippets/installation/cargo_install_nu.sh
 
-That's it!  The cargo tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path so that we can run it.
+That's it! The `cargo` tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path so we can run it.
 
 If you want to install with more features, you can use:
 
 <<< @/snippets/installation/cargo_install_nu_more_features.sh
 
-For all the available features, the easiest way is to check out Nu and build it yourself using the same Rust tools:
-
-<<< @/snippets/installation/build_nu_yourself.sh
-
-For this to work, make sure you have all the dependencies (shown above) on your system.
-
 Once installed, we can run Nu using the `nu` command:
 
 <<< @/snippets/installation/crates_run_nu.sh
 
-## Building from source
+### Building from the GitHub repository
 
-We can also build our own Nu from source directly from GitHub. This gives us immediate access to the latest Nu features and bug fixes.
+We can also build our own Nu from the latest source on GitHub. This gives us immediate access to the latest features and bug fixes. First, clone the repo:
 
 <<< @/snippets/installation/git_clone_nu.sh
 
-Git will clone the main Nushell repo for us. From there, we can build and run Nu if we are using `rustup` with:
+From there, we can build and run Nu with:
 
 <<< @/snippets/installation/build_nu_from_source.sh
 
@@ -118,7 +101,7 @@ You can also build and run Nu in release mode:
 
 People familiar with Rust may wonder why we do both a "build" and a "run" step if "run" does a build by default. This is to get around a shortcoming of the new `default-run` option in Cargo, and ensure that all plugins are built, though this may not be required in the future.
 
-## Setting as your login shell
+## Setting the login shell (*nix)
 
 **!!! Nu is still in development, and may not be stable for everyday use. !!!**
 
@@ -129,3 +112,16 @@ Some Linux distributions have a list of valid shells located in `/etc/shells` an
 
 You can add Nu to the list of allowed shells by appending your Nu binary to the `shells` file.
 The path to add can be found with the command `which nu`, usually it is `$HOME/.cargo/bin/nu`.
+
+
+## Setting the default shell (Windows Terminal)
+
+If you are using [Windows Terminal](https://github.com/microsoft/terminal) you can set `nu` as your default shell by adding:
+
+<<< @/snippets/installation/windows_terminal_default_shell.sh
+
+to  `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is to change the `"defaultProfile"` to:
+
+<<< @/snippets/installation/windows_change_default_profile.sh
+
+Now, `nu` should load on startup of the Windows Terminal.
