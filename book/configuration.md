@@ -24,7 +24,13 @@ let $config = ($config | update <field name> <field value>)
 
 ### Environment
 
-You can set environment variables using `let-env` calls inside the `config.nu` file. These are some important variables to look at for Nushell-specific settings:
+You can set environment variables for the duration of a Nushell session using [`let-env`](commands/let-env.html) calls inside the `config.nu` file. For example:
+
+```
+let-env FOO = 'BAR'
+```
+
+These are some important variables to look at for Nushell-specific settings:
 
 - `LS_COLORS`: Sets up colors per file type in ls
 - `PROMPT_COMMAND`: Code to execute for setting up the prompt (block or string)
@@ -48,7 +54,7 @@ You can build the full set of environment variables by running Nu inside of anot
 > env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str collect (char nl)
 ```
 
-This will print out `let-env` lines, one for each environment variable along with its setting.
+This will print out [`let-env`](commands/let-env.html) lines, one for each environment variable along with its setting.
 
 Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
