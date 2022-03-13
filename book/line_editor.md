@@ -244,8 +244,6 @@ the keybinding definition. For example, a `Multiple([])` event is built for you 
 in the keybinding's event.  An `Edit([])` event is the same as the `edit` type that was mentioned. And the
 `UntilFound([])` event is the same as the `until` type mentioned before.
 
-
-
 ### Edit type
 
 The `edit` type is the simplification of the `Edit([])` event. The `event` type simplifies defining complex
@@ -259,7 +257,7 @@ The usual syntax for an `edit` is the next one
       event: { edit: <NAME OF EDIT FROM LIST> }
     ...
 ```
-with the exception of those edits in the list that have a `()` after the name. Those edits require a
+The syntax for the edits in the list that a `()` changes a little bit. Since those edits require an extra
 value to be fully defined. For example, if we would like to insert a string where the prompt is
 located, then you can use
 ```bash
