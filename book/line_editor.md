@@ -136,7 +136,7 @@ or
 ```bash
   ...
   event: [
-    { edit: {cmd: Clear} }
+    { edit: Clear }
     { send: Enter }
   ]
   ...
@@ -159,11 +159,10 @@ inserts a string and then enters that value
       keycode: Char_t
       mode: emacs
       event:[
-          { edit: {cmd: Clear} }
-          { edit: {
-              cmd: InsertString,
-              value: "cd (ls | where type == dir | each { |it| $it.name} | str collect (char nl) | fzf | decode utf-8 | str trim)"
-            }
+          { edit: Clear }
+          { edit: InsertString,
+            value: "cd (ls | where type == dir | each { |it| $it.name} | str collect (char nl) | fzf | decode utf-8 | str trim)"
+
           }
           { send: Enter }
         ]
