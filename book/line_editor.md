@@ -240,9 +240,11 @@ and the `ExecuteHostCommand` requires a valid command that will be sent to the e
 
 It is worth mentioning that in the events list you will also see `Edit([])`, `Multiple([])` and
 `UntilFound([])`. These options are not available for the parser since they are constructed based on
-the structure. For example, a `Multiple([])` event is built for you when sending a list of records
-in the keybinding.  An `Edit([])` event it the same as the `edit` type that was mentioned. And the
+the keybinding definition. For example, a `Multiple([])` event is built for you when defining a list of records
+in the keybinding's event.  An `Edit([])` event is the same as the `edit` type that was mentioned. And the
 `UntilFound([])` event is the same as the `until` type mentioned before.
+
+
 
 ### Edit type
 
