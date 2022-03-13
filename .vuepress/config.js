@@ -62,7 +62,6 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/book/": [
@@ -189,7 +188,6 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/de/book/": [
@@ -223,7 +221,6 @@ module.exports = {
           { text: "Libro Colaborador", link: "/es/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/es/book/": [
@@ -279,7 +276,6 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/ja/book/": [
@@ -314,7 +310,6 @@ module.exports = {
           { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/pt-BR/book/": [
@@ -364,7 +359,6 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/zh-cn/book/": [
