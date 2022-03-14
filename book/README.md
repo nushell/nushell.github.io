@@ -41,7 +41,7 @@ What if we wanted to show the processes that were actively using the CPU? Just l
 
 <<< @/snippets/introduction/ps_where_example.sh
 
-So far, we've been using [`ls`](commands/ls.md) and [`ps`](commands/ps.md) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore `date` and `sys`.
+So far, we've been using [`ls`](commands/ls.md) and [`ps`](commands/ps.md) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore [`date`](commands/date.md) and `sys`.
 
 Running `date now` gives us information about the current day and time:
 
