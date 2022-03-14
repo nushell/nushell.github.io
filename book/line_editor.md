@@ -319,11 +319,11 @@ The next keybinding represents this case.
 ```
 
 The previous keybinding will first try to open a completion menu. If the menu is not active, it will
-activate it and sent a success signal. If the keybinding is pressed again, since there is an active
-menu, then next event it will send is the MenuNext, which means that it will move the selector to
+activate it and send a success signal. If the keybinding is pressed again, since there is an active
+menu, then the next event it will send is MenuNext, which means that it will move the selector to
 the next element in the menu.
 
-As you can see the `until` keyword allows us the define two events for the same keybinding. To the
+As you can see the `until` keyword allows us to define two events for the same keybinding. At the
 moment of this writing, only the Menu events allow this type of layering. The other non menu event
 types will always return a success value, meaning that the `until` event will stop as soon as it
 reaches the command.
