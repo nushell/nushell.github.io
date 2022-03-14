@@ -48,7 +48,7 @@ Nu works with data piped between two external commands in the same way as other 
 
 ## Behind the scenes
 
-You may have wondered how we see a table if [`ls`](commands/ls.md) is an input and not an output. Nu adds this output for us automatically using another command called `table`. The `table` command is appended to any pipeline that doesn't have an output allowing us to see the result.
+You may have wondered how we see a table if [`ls`](commands/ls.md) is an input and not an output. Nu adds this output for us automatically using another command called [`table`](commands/table.md). The [`table`](commands/table.md) command is appended to any pipeline that doesn't have an output allowing us to see the result.
 
 In effect, the command:
 
