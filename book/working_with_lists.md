@@ -17,7 +17,7 @@ $names | each -n { |it| $"($it.index + 1) - ($it.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 
-The `split row` command creates a list from a string based on a delimiter.
+The [`split row`](commands/split_row.md) command creates a list from a string based on a delimiter.
 For example, `let colors = ("red,green,blue" | split row ",")`
 creates the list `[red green blue]`.
 
