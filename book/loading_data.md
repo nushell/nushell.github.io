@@ -154,7 +154,7 @@ Now that our data is in a table, we can use all the commands we've used on table
 
 There are other commands you can use to work with strings:
 * `str`
-* `lines`
+* [`lines`](commands/lines.md)
 * `size`
 
 There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:

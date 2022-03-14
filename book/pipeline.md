@@ -40,7 +40,7 @@ Data will flow from the internal_command to the external_command. This data is e
 
 `external_command | internal_command`
 
-Data coming from an external command into Nu will collect into a single string, and then will be passed into internal_command. Commands like `lines` help make it easier to bring in data from external commands in such a way that it's easier to work with.
+Data coming from an external command into Nu will collect into a single string, and then will be passed into internal_command. Commands like [`lines`](commands/lines.md) help make it easier to bring in data from external commands in such a way that it's easier to work with.
 
 `external_command_1 | external_command_2`
 
