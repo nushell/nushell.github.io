@@ -1,13 +1,20 @@
 let vers = (version).version
 
 for command in ($nu.scope.commands | where is_custom == false && is_extern == false) {
+    # this is going in the frontmatter as a multiline YAML string, so indentation matters
+    let indented_usage = ($command.usage | lines | each {|it| $"  ($it)"} | str collect (char nl))
+
     let top = $"---
 title: ($command.command)
 layout: command
 version: ($vers)
+usage: |
+($indented_usage)
 ---
 
-($command.usage)
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 "
     let sig = ($command.signature | each { |param|
