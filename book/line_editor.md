@@ -282,7 +282,7 @@ As you can see, these two types will allow you to construct any type of keybindi
 ### Until type
 
 To complete this keybinding tour we need to discuss the `until` type for event. As you have seen so
-far, you can send a single event or a list of events. And as we have seen, wWhen a list of events
+far, you can send a single event or a list of events. And as we have seen, when a list of events
 is sent, each and everyone of them is processed.
 
 However, there maybe cases when you want to assign different events to the same keybinding.
