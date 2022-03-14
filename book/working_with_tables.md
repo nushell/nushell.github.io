@@ -167,7 +167,7 @@ In addition to selecting data from a table, we can also update what the table ha
 
 ### Concatenating Tables
 
-We can concatenate tables with identical column names using `echo`:
+We can concatenate tables with identical column names using [`echo`](commands/echo.md):
 
 ```
 > let $first = [[a b]; [1 2]]

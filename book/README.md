@@ -67,7 +67,7 @@ Right now, there's just one user on the system named "jt". You'll notice that we
 
 You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "jt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
 
-Let's see how strings work outside of Nu in action. We'll take our example from before and run the external `echo` command (the `^` tells Nu to not use the built-in `echo` command):
+Let's see how strings work outside of Nu in action. We'll take our example from before and run the external `echo` command (the `^` tells Nu to not use the built-in [`echo`](commands/echo.md) command):
 
 <<< @/snippets/introduction/sys_get_external_echo_example.sh
 
