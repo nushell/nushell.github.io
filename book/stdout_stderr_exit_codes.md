@@ -62,7 +62,7 @@ Because streams of bytes can be difficult to work with, especially given how com
 
 Nushell attempts to convert to text using UTF-8. If at any time the conversion fails, the rest of the stream is assumed to always be bytes.
 
-If you want more control over the decoding of the byte stream, you can use the `decode` command. The `decode` command can be inserted into the pipeline after the external, or other raw stream-creating command, and will handle decoding the bytes based on the argument you give decode. For example, you could decode shift-jis text this way:
+If you want more control over the decoding of the byte stream, you can use the [`decode`](commands/decode.md) command. The [`decode`](commands/decode.md) command can be inserted into the pipeline after the external, or other raw stream-creating command, and will handle decoding the bytes based on the argument you give decode. For example, you could decode shift-jis text this way:
 
 ```
 > 0x[8a 4c] | decode shift-jis
