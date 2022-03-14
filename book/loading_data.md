@@ -195,7 +195,7 @@ license = "MIT"
 
 ## Fetching URLs
 
-In addition to loading files from your filesystem, you can also load URLs by using the `fetch` command. This will fetch the contents of the URL from the internet and return it:
+In addition to loading files from your filesystem, you can also load URLs by using the [`fetch`](commands/fetch.md) command. This will fetch the contents of the URL from the internet and return it:
 
 ```
 > fetch https://www.jonathanturner.org/feed.xml
