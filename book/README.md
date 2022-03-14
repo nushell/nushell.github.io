@@ -41,7 +41,7 @@ What if we wanted to show the processes that were actively using the CPU? Just l
 
 <<< @/snippets/introduction/ps_where_example.sh
 
-So far, we've been using [`ls`](commands/ls.md) and [`ps`](commands/ps.md) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore [`date`](commands/date.md) and `sys`.
+So far, we've been using [`ls`](commands/ls.md) and [`ps`](commands/ps.md) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore [`date`](commands/date.md) and [`sys`](commands/sys.md).
 
 Running `date now` gives us information about the current day and time:
 
@@ -51,11 +51,11 @@ To get the date as a table we can feed it into `date to-table`
 
 <<< @/snippets/introduction/date_table_example.sh
 
-Running `sys` gives information about the system that Nu is running on:
+Running [`sys`](commands/sys.md) gives information about the system that Nu is running on:
 
 <<< @/snippets/introduction/sys_example.sh
 
-This is a bit different than the tables we saw before. The `sys` command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to *get* the column to view:
+This is a bit different than the tables we saw before. The [`sys`](commands/sys.md) command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to *get* the column to view:
 
 <<< @/snippets/introduction/sys_get_example.sh
 
