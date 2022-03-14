@@ -97,8 +97,8 @@ echo $scores | all? $it > 7 # false
 echo $scores | all? $it mod 2 == 0 # false
 ```
 
-The `append` command appends a single value to the end of a list.
-The `prepend` command prepends a single value to the beginning of a list.
+The [`append`](commands/append.md) command appends a single value to the end of a list.
+The [`prepend`](commands/prepend.md) command prepends a single value to the beginning of a list.
 For example:
 
 ```bash
