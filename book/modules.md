@@ -185,7 +185,7 @@ We can demonstrate this property, for example, with the `random` command:
 
 Any custom command, alias or environment variable, imported from a module or not, can be "hidden", restoring the previous definition.
 (Note, it is not yet possible to export aliases from modules but they can still be hidden.)
-We do this with the `hide` command:
+We do this with the [`hide`](commands/hide.md) command:
 ```
 > def foo [] { "foo" }
 
@@ -197,7 +197,7 @@ foo
 > foo  # error! command not found!
 ```
 
-The `hide` command also accepts import patterns, just like [`use`](commands/use.md).
+The [`hide`](commands/hide.md) command also accepts import patterns, just like [`use`](commands/use.md).
 The import pattern is interpreted slightly differently, though.
 It can be one of the following:
 
