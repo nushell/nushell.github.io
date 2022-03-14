@@ -37,13 +37,13 @@ Nushell tracks the last exit code of the recently completed external in one of t
 > echo $env.LAST_EXIT_CODE
 ```
 
-The second uses a command called `complete`.
+The second uses a command called [`complete`](commands/complete.md).
 
-## Using the `complete` command
+## Using the [`complete`](commands/complete.md) command
 
-The `complete` command allows you to run an external to completion, and gather the stdout, stderr, and exit code together in one record.
+The [`complete`](commands/complete.md) command allows you to run an external to completion, and gather the stdout, stderr, and exit code together in one record.
 
-If we try to run the external `cat` on a file that doesn't exist, we can see what `complete` does with the streams, including the redirected stderr:
+If we try to run the external `cat` on a file that doesn't exist, we can see what [`complete`](commands/complete.md) does with the streams, including the redirected stderr:
 
 ```
 > do -i { cat unknown.txt } | complete
