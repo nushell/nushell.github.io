@@ -91,7 +91,7 @@ We can have a look at the first lines of the file using `dfr first`:
 ### Loading the file
 
 Let's start by comparing loading times between the various methods. First, we
-will load the data using Nushell's `open` command:
+will load the data using Nushell's [`open`](commands/open.md) command:
 
 ```shell
 > benchmark {open .\Data7602DescendingYearOrder.csv}

@@ -6,9 +6,9 @@ Early shells allow you to move around your filesystem and run commands, and mode
 
 <<< @/snippets/moving_around/ls_example.sh
 
-As we've seen in other chapters, `ls` is a command for viewing the contents of a path. Nu will return the contents as a table that we can use.
+As we've seen in other chapters, [`ls`](commands/ls.md) is a command for viewing the contents of a path. Nu will return the contents as a table that we can use.
 
-The `ls` command also takes an optional argument, to change what you'd like to view.  For example, we can list the files that end in ".md"
+The [`ls`](commands/ls.md) command also takes an optional argument, to change what you'd like to view.  For example, we can list the files that end in ".md"
 
 <<< @/snippets/moving_around/ls_shallow_glob_example.sh
 
@@ -48,7 +48,7 @@ We can remove an item:
 
 <<< @/snippets/moving_around/rm_example.sh
 
-The three commands also can use the glob capabilities we saw earlier with `ls`.
+The three commands also can use the glob capabilities we saw earlier with [`ls`](commands/ls.md).
 
 Finally, we can create a new directory using the `mkdir` command:
 

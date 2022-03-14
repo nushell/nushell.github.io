@@ -21,7 +21,7 @@ To start off, let's get a table that we can use:
 
 ## Sorting the data
 
-We can sort a table by calling the `sort-by` command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
+We can sort a table by calling the [`sort-by`](commands/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
 
 ```
 > ls | sort-by size
@@ -42,7 +42,7 @@ We can sort a table by any column that can be compared. For example, we could al
 
 ## Selecting the data you want
 
-We can select data from a table by choosing to select specific columns or specific rows.  Let's `select` a few columns from our table to use:
+We can select data from a table by choosing to select specific columns or specific rows.  Let's [`select`](commands/select.md) a few columns from our table to use:
 
 ```
 > ls | select name size
@@ -118,7 +118,7 @@ Let's look at a few other commands for selecting data.  You may have wondered wh
 
 ## Getting data out of a table
 
-So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the `get` command:
+So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](commands/get.md) command:
 
 ```
 > ls | get name
@@ -135,7 +135,7 @@ So far, we've worked with tables by trimming the table down to only what we need
 
 We now have the values for each of the filenames.
 
-This might look like the `select` command we saw earlier, so let's put that here as well to compare the two:
+This might look like the [`select`](commands/select.md) command we saw earlier, so let's put that here as well to compare the two:
 
 ```
 > ls | select name
@@ -154,12 +154,12 @@ This might look like the `select` command we saw earlier, so let's put that here
 
 These look very similar! Let's see if we can spell out the difference between these two commands to make it clear:
 
-* `select` - creates a new table which includes only the columns specified
-* `get` - returns the values inside the column specified as a list
+* [`select`](commands/select.md) - creates a new table which includes only the columns specified
+* [`get`](commands/get.md) - returns the values inside the column specified as a list
 
 The one way to tell these apart looking at the table is that the column names are missing, which lets us know that this is going to be a list of values we can work with.
 
-The `get` command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
+The [`get`](commands/get.md) command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
 
 ## Changing data in a table
 
@@ -167,7 +167,7 @@ In addition to selecting data from a table, we can also update what the table ha
 
 ### Concatenating Tables
 
-We can concatenate tables with identical column names using `echo`:
+We can concatenate tables with identical column names using [`echo`](commands/echo.md):
 
 ```
 > let $first = [[a b]; [1 2]]
@@ -245,7 +245,7 @@ And now, let's update the edition to point at the next edition we hope to suppor
 
 ### Incrementing values
 
-There's one more command that Nu supports that will help us work with numbers and versions: `inc`. 
+There's one more command that Nu supports that will help us work with numbers and versions: [`inc`](commands/inc.md). 
 
 ```
 > open rustfmt.toml
@@ -258,7 +258,7 @@ There's one more command that Nu supports that will help us work with numbers an
 ─────────┴──────
 ```
 
-Because the value in "edition" is a number, we can use `inc` to update it.  Where `inc` really shines is working with versions:
+Because the value in "edition" is a number, we can use [`inc`](commands/inc.md) to update it.  Where [`inc`](commands/inc.md) really shines is working with versions:
 
 ```
 > open Cargo.toml | get package.version
