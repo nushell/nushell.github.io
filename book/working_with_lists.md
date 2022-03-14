@@ -29,7 +29,7 @@ which is "Tami" can be accessed with `$names.1`.
 The [`length`](commands/length.md) command returns the number of items in a list.
 For example, `[red green blue] | length` outputs `3`.
 
-The `empty?` command determines whether a string, list, or table is empty.
+The [`empty?`](commands/empty.md) command determines whether a string, list, or table is empty.
 It can be used with lists as follows:
 
 ```bash
