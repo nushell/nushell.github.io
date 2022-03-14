@@ -42,7 +42,7 @@ We can sort a table by any column that can be compared. For example, we could al
 
 ## Selecting the data you want
 
-We can select data from a table by choosing to select specific columns or specific rows.  Let's `select` a few columns from our table to use:
+We can select data from a table by choosing to select specific columns or specific rows.  Let's [`select`](commands/select.md) a few columns from our table to use:
 
 ```
 > ls | select name size
@@ -135,7 +135,7 @@ So far, we've worked with tables by trimming the table down to only what we need
 
 We now have the values for each of the filenames.
 
-This might look like the `select` command we saw earlier, so let's put that here as well to compare the two:
+This might look like the [`select`](commands/select.md) command we saw earlier, so let's put that here as well to compare the two:
 
 ```
 > ls | select name
@@ -154,7 +154,7 @@ This might look like the `select` command we saw earlier, so let's put that here
 
 These look very similar! Let's see if we can spell out the difference between these two commands to make it clear:
 
-* `select` - creates a new table which includes only the columns specified
+* [`select`](commands/select.md) - creates a new table which includes only the columns specified
 * `get` - returns the values inside the column specified as a list
 
 The one way to tell these apart looking at the table is that the column names are missing, which lets us know that this is going to be a list of values we can work with.
