@@ -35,13 +35,13 @@ Just as in the Unix philosophy, being able to have commands talk to each other g
 
 <<< @/snippets/introduction/ps_example.sh
 
-You may be familiar with the `ps` command if you've used Linux. With it, we can get a list of all the current processes that the system is running, what their status is, and what their name is. We can also see the CPU load for the processes.
+You may be familiar with the [`ps`](commands/ps.md) command if you've used Linux. With it, we can get a list of all the current processes that the system is running, what their status is, and what their name is. We can also see the CPU load for the processes.
 
-What if we wanted to show the processes that were actively using the CPU? Just like we did with the [`ls`](commands/ls.md) command earlier, we can also work with the table that the `ps` command gives back to us:
+What if we wanted to show the processes that were actively using the CPU? Just like we did with the [`ls`](commands/ls.md) command earlier, we can also work with the table that the [`ps`](commands/ps.md) command gives back to us:
 
 <<< @/snippets/introduction/ps_where_example.sh
 
-So far, we've been using [`ls`](commands/ls.md) and `ps` to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore `date` and `sys`.
+So far, we've been using [`ls`](commands/ls.md) and [`ps`](commands/ps.md) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore `date` and `sys`.
 
 Running `date now` gives us information about the current day and time:
 

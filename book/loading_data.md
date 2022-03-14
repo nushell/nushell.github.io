@@ -1,6 +1,6 @@
 # Loading data
 
-Earlier, we saw how you can use commands like [`ls`](commands/ls.md), `ps`, `date`, and `sys` to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
+Earlier, we saw how you can use commands like [`ls`](commands/ls.md), [`ps`](commands/ps.md), `date`, and `sys` to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
 
 ## Opening files
 
