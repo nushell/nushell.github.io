@@ -61,7 +61,7 @@ let scores = [7 10 8 6 7]
 echo $scores | where $it > 7 # [10 8]
 ```
 
-The `any?` command determines if any item in a list
+The [`any?`](commands/any.md) command determines if any item in a list
 matches a given condition.
 For example:
 
