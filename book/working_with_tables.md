@@ -118,7 +118,7 @@ Let's look at a few other commands for selecting data.  You may have wondered wh
 
 ## Getting data out of a table
 
-So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the `get` command:
+So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](commands/get.md) command:
 
 ```
 > ls | get name
@@ -155,11 +155,11 @@ This might look like the [`select`](commands/select.md) command we saw earlier, 
 These look very similar! Let's see if we can spell out the difference between these two commands to make it clear:
 
 * [`select`](commands/select.md) - creates a new table which includes only the columns specified
-* `get` - returns the values inside the column specified as a list
+* [`get`](commands/get.md) - returns the values inside the column specified as a list
 
 The one way to tell these apart looking at the table is that the column names are missing, which lets us know that this is going to be a list of values we can work with.
 
-The `get` command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
+The [`get`](commands/get.md) command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
 
 ## Changing data in a table
 

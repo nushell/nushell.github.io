@@ -29,7 +29,7 @@ One of Nu's most powerful assets in working with data is the `open` command. It 
 
 In a similar way to [`ls`](commands/ls.md), opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
 
-If we wanted to check the version of the project we were looking at, we can use the `get` command.
+If we wanted to check the version of the project we were looking at, we can use the [`get`](commands/get.md) command.
 
 ```
 > open editors/vscode/package.json | get version

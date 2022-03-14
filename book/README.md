@@ -59,7 +59,7 @@ This is a bit different than the tables we saw before. The [`sys`](commands/sys.
 
 <<< @/snippets/introduction/sys_get_example.sh
 
-The `get` command lets us jump into the contents of a column of the table. Here, we're looking into the "host" column, which contains information about the host that Nu is running on. The name of the OS, the hostname, the CPU, and more. Let's get the name of the users on the system:
+The [`get`](commands/get.md) command lets us jump into the contents of a column of the table. Here, we're looking into the "host" column, which contains information about the host that Nu is running on. The name of the OS, the hostname, the CPU, and more. Let's get the name of the users on the system:
 
 <<< @/snippets/introduction/sys_get_nested_example.sh
 
