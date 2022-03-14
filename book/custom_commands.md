@@ -232,13 +232,13 @@ Custom commands stream their output just like built-in commands. For example, le
 > ls | get name
 ```
 
-Let's move `ls` into a command that we've written:
+Let's move [`ls`](commands/ls.md) into a command that we've written:
 
 ```nushell
 def my-ls [] { ls }
 ```
 
-We can use the output from this command just as we would `ls`.
+We can use the output from this command just as we would [`ls`](commands/ls.md).
 
 ```
 > my-ls | get name

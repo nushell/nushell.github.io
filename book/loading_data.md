@@ -1,6 +1,6 @@
 # Loading data
 
-Earlier, we saw how you can use commands like `ls`, `ps`, `date`, and `sys` to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
+Earlier, we saw how you can use commands like [`ls`](commands/ls.md), `ps`, `date`, and `sys` to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
 
 ## Opening files
 
@@ -27,7 +27,7 @@ One of Nu's most powerful assets in working with data is the `open` command. It 
 ──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
-In a similar way to `ls`, opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
+In a similar way to [`ls`](commands/ls.md), opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
 
 If we wanted to check the version of the project we were looking at, we can use the `get` command.
 

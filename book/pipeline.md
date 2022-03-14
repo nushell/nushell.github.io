@@ -10,7 +10,7 @@ A pipeline is composed of three parts: the input, the filter, and the output.
 > open "Cargo.toml" | inc package.version | save "Cargo_new.toml"
 ```
 
-The first command, `open "Cargo.toml"`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with.  Commands like `ls` are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
+The first command, `open "Cargo.toml"`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with.  Commands like [`ls`](commands/ls.md) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
 
 The second command, `inc package.version`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the `inc` command in our example), or they may do another operation, like logging, as the values pass through.
 
@@ -48,7 +48,7 @@ Nu works with data piped between two external commands in the same way as other 
 
 ## Behind the scenes
 
-You may have wondered how we see a table if `ls` is an input and not an output. Nu adds this output for us automatically using another command called `table`. The `table` command is appended to any pipeline that doesn't have an output allowing us to see the result.
+You may have wondered how we see a table if [`ls`](commands/ls.md) is an input and not an output. Nu adds this output for us automatically using another command called `table`. The `table` command is appended to any pipeline that doesn't have an output allowing us to see the result.
 
 In effect, the command:
 
