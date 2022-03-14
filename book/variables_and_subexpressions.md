@@ -82,7 +82,7 @@ Nushell supports accessing columns in a subexpression using a simple short-hand.
 > ls | where size > 10kb
 ```
 
-The `where size > 10kb` is a command with two parts: the command name `where` and the short-hand expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`. This could also be written in any of the following ways:
+The `where size > 10kb` is a command with two parts: the command name [`where`](commands/where.md) and the short-hand expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`. This could also be written in any of the following ways:
 
 ```
 > ls | where $it.size > 10kb

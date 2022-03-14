@@ -48,7 +48,7 @@ let colors = [red green blue]
 'yellow' in $colors # false
 ```
 
-The `where` command can be used to create a subset of a list.
+The [`where`](commands/where.md) command can be used to create a subset of a list.
 The following example gets all the colors whose names end in "e".
 
 ```bash
