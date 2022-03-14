@@ -79,7 +79,7 @@ echo $scores | any? $it > 7 # true
 echo $scores | any? $it mod 2 == 1 # true
 ```
 
-The `all?` command determines if every item in a list
+The [`all?`](commands/all.md) command determines if every item in a list
 matches a given condition.
 For example:
 
