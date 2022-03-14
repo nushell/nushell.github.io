@@ -105,8 +105,8 @@ In practice, this lets you write some concise code for working with subdirectori
 
 The `cd` command changes the `PWD` environment variables, and this variable change does not escape the block, allowing each iteration to start from the current directory and enter the next subdirectory.
 
-Having the environment scoped like this makes commands more predictable, easier to read, and when the time comes, easier to debug. Nushell also provides helper commands like `def-env`, `load-env`, as convenient ways of doing batches of updates to the environment.
+Having the environment scoped like this makes commands more predictable, easier to read, and when the time comes, easier to debug. Nushell also provides helper commands like [`def-env`](commands/def-env.md), `load-env`, as convenient ways of doing batches of updates to the environment.
 
-`*` - there is one exception here, where `def-env` allows you to create a command that participates in the caller's environment
+`*` - there is one exception here, where [`def-env`](commands/def-env.md) allows you to create a command that participates in the caller's environment
 
 **Thinking in Nushell:** - The coding best practice of no global mutable variables extends to the environment in Nushell. Using the built-in helper commands will let you more easily work with the environment in Nushell. Taking advantage of the fact that environments are scoped to blocks can also help you write more concise scripts and interact with external commands without adding things into a global environment you don't need.
