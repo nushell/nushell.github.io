@@ -5,7 +5,7 @@ The literal syntax for creating a `list` is to include expressions
 in square brackets separated by spaces or commas (for readability).
 For example, `[foo bar baz]` or `[foo, bar, baz]`.
 
-To iterate over the items in a list, use the `each` command with a [block](types_of_data.html#blocks)
+To iterate over the items in a list, use the [`each`](commands/each.md) command with a [block](types_of_data.html#blocks)
 of Nu code that specifies what to do to each item. The block parameter (e.g. `|it|` in `{ |it| echo $it }`) is normally the current list item, but the `--numbered` (`-n`) flag can change it to have `index` and `item` values if needed. For example:
 
 ```bash

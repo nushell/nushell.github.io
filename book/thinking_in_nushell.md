@@ -58,7 +58,7 @@ This would require the evaluator to run and evaluate the string before the parse
 
 Another common surprise for folks coming from other languages is that Nushell variables are immutable (and indeed some people have started to call them "constants" to reflect this). Coming to Nushell you'll want to spend some time becoming familiar with working in a more functional style, as this tends to help write code that works best with immutable variables.
 
-You might wonder why Nushell uses immutable variables. Early on in Nushell's development we decided to see how long we could go using a more data-focused, functional style in the language. More recently, we added a key bit of functionality into Nushell that made these early experiments show their value: parallelism. By switching from `each` to `par-each` in any Nushell script, you're able to run the corresponding block of code in parallel over the input. This is possible because Nushell's design leans heavily on immutability, composition, and pipelining.
+You might wonder why Nushell uses immutable variables. Early on in Nushell's development we decided to see how long we could go using a more data-focused, functional style in the language. More recently, we added a key bit of functionality into Nushell that made these early experiments show their value: parallelism. By switching from [`each`](commands/each.md) to `par-each` in any Nushell script, you're able to run the corresponding block of code in parallel over the input. This is possible because Nushell's design leans heavily on immutability, composition, and pipelining.
 
 Just because Nushell variables are immutable doesn't mean things don't change. Nushell makes heavy use of the technique of "shadowing". Shadowing means creating a new variable with the same name as a previously declared variable.  For example, say you had an `$x` in scope, and you wanted a new `$x` that was one greater:
 
@@ -68,7 +68,7 @@ let x = $x + 1
 
 This new `x` is visible to any code that follows this line. Careful use of shadowing can make for an easier time working with variables, though it's not required.
 
-Loop counters are another common pattern for mutable variables and are built into most iterating commands, for example you can get both each item and an index of each item using the `-n` flag on `each`:
+Loop counters are another common pattern for mutable variables and are built into most iterating commands, for example you can get both each item and an index of each item using the `-n` flag on [`each`](commands/each.md):
 
 ```
 > ls | each -n { |it| $"Number ($it.index) is size ($it.item.size)" }
