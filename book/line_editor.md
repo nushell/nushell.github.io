@@ -39,7 +39,7 @@ to adjust this value in your config file:
 
 ### Customizing your prompt
 
-Reedline prompt is also highly customizable. In order to construct you perfect prompt, you
+Reedline prompt is also highly customizable. In order to construct your perfect prompt, you
 could define the next environmental variables in your config file:
 
 ```bash
