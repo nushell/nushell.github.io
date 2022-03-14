@@ -160,7 +160,7 @@ hello Arthur, King of the Britons!
 
 You can notice we do not assign the value to `MYNAME` directly.
 Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we call [`use`](commands/use.md).
-We can demonstrate this property, for example, with the `random` command:
+We can demonstrate this property, for example, with the [`random`](commands/random.md) command:
 ```
 > module roll { export env ROLL { random dice | into string } }
 
