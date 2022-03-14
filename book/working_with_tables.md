@@ -21,7 +21,7 @@ To start off, let's get a table that we can use:
 
 ## Sorting the data
 
-We can sort a table by calling the `sort-by` command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
+We can sort a table by calling the [`sort-by`](commands/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
 
 ```
 > ls | sort-by size
