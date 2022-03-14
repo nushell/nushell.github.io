@@ -137,7 +137,7 @@ hi there!
 
 So far we used modules just to import custom commands.
 It is possible to export environment variables the same way.
-The syntax is slightly different than what you might be used to from commands like [`let-env`](commands/let-env.md) or `load-env`:
+The syntax is slightly different than what you might be used to from commands like [`let-env`](commands/let-env.md) or [`load-env`](commands/load-env.md):
 ```
 # greetings.nu
 
