@@ -4,7 +4,7 @@ Earlier, we saw how you can use commands like [`ls`](commands/ls.md), [`ps`](com
 
 ## Opening files
 
-One of Nu's most powerful assets in working with data is the `open` command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
+One of Nu's most powerful assets in working with data is the [`open`](commands/open.md) command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
 
 ```
 > open editors/vscode/package.json
@@ -182,7 +182,7 @@ The `from` command can be used for each of the structured data text formats that
 
 ## Opening in raw mode
 
-While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the `open` command can take an optional `--raw` flag:
+While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the [`open`](commands/open.md) command can take an optional `--raw` flag:
 
 ```
 > open Cargo.toml --raw
