@@ -74,7 +74,7 @@ Loop counters are another common pattern for mutable variables and are built int
 > ls | each -n { |it| $"Number ($it.index) is size ($it.item.size)" }
 ```
 
-You can also use the `reduce` command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:
+You can also use the [`reduce`](commands/reduce.md) command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:
 
 ```
 > [one, two, three, four, five, six] | reduce {|curr, max| 

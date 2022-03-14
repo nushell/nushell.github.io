@@ -119,7 +119,7 @@ echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-The `reduce` command computes a single value from a list.
+The [`reduce`](commands/reduce.md) command computes a single value from a list.
 It uses a block which takes 2 parameters: the current item (conventionally named `it`) and an accumulator
 (conventionally named `acc`). To specify an initial value for the accumulator, use the `--fold` (`-f`) flag.
 To change `it` to have `index` and `item` values, add the `--numbered` (`-n`) flag.
