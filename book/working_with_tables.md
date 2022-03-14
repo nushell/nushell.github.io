@@ -245,7 +245,7 @@ And now, let's update the edition to point at the next edition we hope to suppor
 
 ### Incrementing values
 
-There's one more command that Nu supports that will help us work with numbers and versions: `inc`. 
+There's one more command that Nu supports that will help us work with numbers and versions: [`inc`](commands/inc.md). 
 
 ```
 > open rustfmt.toml
@@ -258,7 +258,7 @@ There's one more command that Nu supports that will help us work with numbers an
 ─────────┴──────
 ```
 
-Because the value in "edition" is a number, we can use `inc` to update it.  Where `inc` really shines is working with versions:
+Because the value in "edition" is a number, we can use [`inc`](commands/inc.md) to update it.  Where [`inc`](commands/inc.md) really shines is working with versions:
 
 ```
 > open Cargo.toml | get package.version

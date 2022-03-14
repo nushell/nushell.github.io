@@ -12,7 +12,7 @@ A pipeline is composed of three parts: the input, the filter, and the output.
 
 The first command, `open "Cargo.toml"`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with.  Commands like [`ls`](commands/ls.md) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
 
-The second command, `inc package.version`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the `inc` command in our example), or they may do another operation, like logging, as the values pass through.
+The second command, `inc package.version`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the [`inc`](commands/inc.md) command in our example), or they may do another operation, like logging, as the values pass through.
 
 The last command, `save "Cargo_new.toml"`, is an output (sometimes called a "sink"). An output takes input from the pipeline and does some final operation on it. In our example, we save what comes through the pipeline to a file as the final step. Other types of output commands may take the values and view them for the user.
 
