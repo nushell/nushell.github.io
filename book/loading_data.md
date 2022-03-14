@@ -102,7 +102,7 @@ We can see that we're working with the lines because we're back into a table. Ou
 ───┴──────────┴───────────┴───────────
 ```
 
-That *almost* looks correct. It looks like there's an extra space there. Let's `trim` that extra space:
+That *almost* looks correct. It looks like there's an extra space there. Let's [`trim`](commands/str_trim.md) that extra space:
 
 ```
 > open people.txt | lines | split column "|" | str trim
