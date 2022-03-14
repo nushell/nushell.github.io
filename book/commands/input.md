@@ -2,9 +2,13 @@
 title: input
 layout: command
 version: 0.59.1
+usage: |
+  Get input from the user.
 ---
 
-Get input from the user.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

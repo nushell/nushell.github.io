@@ -2,9 +2,13 @@
 title: dfr strftime
 layout: command
 version: 0.59.1
+usage: |
+  Formats date based on string rule
 ---
 
-Formats date based on string rule
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

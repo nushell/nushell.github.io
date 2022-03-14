@@ -2,9 +2,13 @@
 title: sort-by
 layout: command
 version: 0.59.1
+usage: |
+  Sort by the given columns, in increasing order.
 ---
 
-Sort by the given columns, in increasing order.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

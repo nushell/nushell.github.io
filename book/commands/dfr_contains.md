@@ -2,9 +2,13 @@
 title: dfr contains
 layout: command
 version: 0.59.1
+usage: |
+  Checks if a pattern is contained in a string
 ---
 
-Checks if a pattern is contained in a string
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

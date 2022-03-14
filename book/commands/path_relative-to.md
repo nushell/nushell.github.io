@@ -2,9 +2,13 @@
 title: path relative-to
 layout: command
 version: 0.59.1
+usage: |
+  Get a path as relative to another path.
 ---
 
-Get a path as relative to another path.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

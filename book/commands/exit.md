@@ -2,9 +2,13 @@
 title: exit
 layout: command
 version: 0.59.1
+usage: |
+  Runs a script file in the current context.
 ---
 
-Runs a script file in the current context.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

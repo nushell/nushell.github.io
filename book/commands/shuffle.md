@@ -2,9 +2,13 @@
 title: shuffle
 layout: command
 version: 0.59.1
+usage: |
+  Shuffle rows randomly.
 ---
 
-Shuffle rows randomly.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

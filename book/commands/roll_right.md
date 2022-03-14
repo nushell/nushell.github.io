@@ -2,9 +2,13 @@
 title: roll right
 layout: command
 version: 0.59.1
+usage: |
+  Roll table columns right
 ---
 
-Roll table columns right
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

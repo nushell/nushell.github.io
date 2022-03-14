@@ -2,9 +2,13 @@
 title: split-by
 layout: command
 version: 0.59.1
+usage: |
+  Create a new table splitted.
 ---
 
-Create a new table splitted.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

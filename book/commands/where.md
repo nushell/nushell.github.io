@@ -2,9 +2,13 @@
 title: where
 layout: command
 version: 0.59.1
+usage: |
+  Filter values based on a condition.
 ---
 
-Filter values based on a condition.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

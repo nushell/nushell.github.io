@@ -2,9 +2,13 @@
 title: export
 layout: command
 version: 0.59.1
+usage: |
+  Export custom commands or environment variables from a module.
 ---
 
-Export custom commands or environment variables from a module.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

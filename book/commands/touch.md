@@ -2,9 +2,13 @@
 title: touch
 layout: command
 version: 0.59.1
+usage: |
+  Creates one or more files.
 ---
 
-Creates one or more files.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

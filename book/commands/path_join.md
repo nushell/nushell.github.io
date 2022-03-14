@@ -2,9 +2,13 @@
 title: path join
 layout: command
 version: 0.59.1
+usage: |
+  Join a structured path or a list of path parts.
 ---
 
-Join a structured path or a list of path parts.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

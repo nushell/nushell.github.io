@@ -2,9 +2,13 @@
 title: into decimal
 layout: command
 version: 0.59.1
+usage: |
+  converts text into decimal
 ---
 
-converts text into decimal
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

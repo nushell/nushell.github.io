@@ -2,9 +2,13 @@
 title: transpose
 layout: command
 version: 0.59.1
+usage: |
+  Transposes the table contents so rows become columns and columns become rows.
 ---
 
-Transposes the table contents so rows become columns and columns become rows.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

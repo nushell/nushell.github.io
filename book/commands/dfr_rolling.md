@@ -2,9 +2,13 @@
 title: dfr rolling
 layout: command
 version: 0.59.1
+usage: |
+  Rolling calculation for a series
 ---
 
-Rolling calculation for a series
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

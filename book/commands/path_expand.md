@@ -2,9 +2,13 @@
 title: path expand
 layout: command
 version: 0.59.1
+usage: |
+  Try to expand a path to its absolute form
 ---
 
-Try to expand a path to its absolute form
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

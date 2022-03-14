@@ -2,9 +2,13 @@
 title: module
 layout: command
 version: 0.59.1
+usage: |
+  Define a custom module
 ---
 
-Define a custom module
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: dfr str-slice
 layout: command
 version: 0.59.1
+usage: |
+  Slices the string from the start position until the selected length
 ---
 
-Slices the string from the start position until the selected length
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

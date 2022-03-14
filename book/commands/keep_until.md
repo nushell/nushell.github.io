@@ -2,9 +2,13 @@
 title: keep until
 layout: command
 version: 0.59.1
+usage: |
+  Keep elements of the input until a predicate is true.
 ---
 
-Keep elements of the input until a predicate is true.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

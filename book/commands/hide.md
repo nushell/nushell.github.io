@@ -2,9 +2,13 @@
 title: hide
 layout: command
 version: 0.59.1
+usage: |
+  Hide symbols in the current scope
 ---
 
-Hide symbols in the current scope
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

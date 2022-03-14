@@ -2,9 +2,13 @@
 title: reduce
 layout: command
 version: 0.59.1
+usage: |
+  Aggregate a list table to a single value using an accumulator block.
 ---
 
-Aggregate a list table to a single value using an accumulator block.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

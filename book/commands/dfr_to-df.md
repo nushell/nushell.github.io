@@ -2,9 +2,13 @@
 title: dfr to-df
 layout: command
 version: 0.59.1
+usage: |
+  Converts a List, Table or Dictionary into a dataframe
 ---
 
-Converts a List, Table or Dictionary into a dataframe
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

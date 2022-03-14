@@ -2,9 +2,13 @@
 title: dfr get-hour
 layout: command
 version: 0.59.1
+usage: |
+  Gets hour from date
 ---
 
-Gets hour from date
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

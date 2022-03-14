@@ -2,9 +2,13 @@
 title: from ssv
 layout: command
 version: 0.59.1
+usage: |
+  Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
 ---
 
-Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

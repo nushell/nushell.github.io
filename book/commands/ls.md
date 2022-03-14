@@ -2,9 +2,13 @@
 title: ls
 layout: command
 version: 0.59.1
+usage: |
+  List the files in a directory.
 ---
 
-List the files in a directory.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

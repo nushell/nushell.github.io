@@ -2,9 +2,13 @@
 title: dfr set-with-idx
 layout: command
 version: 0.59.1
+usage: |
+  Sets value in the given index
 ---
 
-Sets value in the given index
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

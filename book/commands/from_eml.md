@@ -2,9 +2,13 @@
 title: from eml
 layout: command
 version: 0.59.1
+usage: |
+  Parse text as .eml and create table.
 ---
 
-Parse text as .eml and create table.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

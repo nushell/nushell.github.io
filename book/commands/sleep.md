@@ -2,9 +2,13 @@
 title: sleep
 layout: command
 version: 0.59.1
+usage: |
+  Delay for a specified amount of time.
 ---
 
-Delay for a specified amount of time.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: prepend
 layout: command
 version: 0.59.1
+usage: |
+  Prepend a row to the table.
 ---
 
-Prepend a row to the table.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

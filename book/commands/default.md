@@ -2,9 +2,13 @@
 title: default
 layout: command
 version: 0.59.1
+usage: |
+  Sets a default row's column if missing.
 ---
 
-Sets a default row's column if missing.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

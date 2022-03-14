@@ -2,9 +2,13 @@
 title: url query
 layout: command
 version: 0.59.1
+usage: |
+  gets the query of a url
 ---
 
-gets the query of a url
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

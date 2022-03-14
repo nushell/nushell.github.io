@@ -2,9 +2,13 @@
 title: for
 layout: command
 version: 0.59.1
+usage: |
+  Loop over a range
 ---
 
-Loop over a range
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: uniq
 layout: command
 version: 0.59.1
+usage: |
+  Return the unique rows.
 ---
 
-Return the unique rows.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

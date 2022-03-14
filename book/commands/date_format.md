@@ -2,9 +2,13 @@
 title: date format
 layout: command
 version: 0.59.1
+usage: |
+  Format a given date using a format string.
 ---
 
-Format a given date using a format string.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

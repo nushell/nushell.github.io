@@ -2,9 +2,13 @@
 title: random dice
 layout: command
 version: 0.59.1
+usage: |
+  Generate a random dice roll
 ---
 
-Generate a random dice roll
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

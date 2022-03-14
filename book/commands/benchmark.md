@@ -2,9 +2,13 @@
 title: benchmark
 layout: command
 version: 0.59.1
+usage: |
+  Time the running time of a block
 ---
 
-Time the running time of a block
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

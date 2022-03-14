@@ -2,9 +2,13 @@
 title: path dirname
 layout: command
 version: 0.59.1
+usage: |
+  Get the parent directory of a path
 ---
 
-Get the parent directory of a path
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: date to-timezone
 layout: command
 version: 0.59.1
+usage: |
+  Convert a date to a given time zone.
 ---
 
-Convert a date to a given time zone.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: get
 layout: command
 version: 0.59.1
+usage: |
+  Extract data using a cell path.
 ---
 
-Extract data using a cell path.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

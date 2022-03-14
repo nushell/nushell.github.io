@@ -2,9 +2,13 @@
 title: str rpad
 layout: command
 version: 0.59.1
+usage: |
+  pad a string with a character a certain length
 ---
 
-pad a string with a character a certain length
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

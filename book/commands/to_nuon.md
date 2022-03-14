@@ -2,9 +2,13 @@
 title: to nuon
 layout: command
 version: 0.59.1
+usage: |
+  Converts table data into Nuon (Nushell Object Notation) text.
 ---
 
-Converts table data into Nuon (Nushell Object Notation) text.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

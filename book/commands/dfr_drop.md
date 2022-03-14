@@ -2,9 +2,13 @@
 title: dfr drop
 layout: command
 version: 0.59.1
+usage: |
+  Creates a new dataframe by dropping the selected columns
 ---
 
-Creates a new dataframe by dropping the selected columns
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

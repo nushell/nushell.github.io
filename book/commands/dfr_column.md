@@ -2,9 +2,13 @@
 title: dfr column
 layout: command
 version: 0.59.1
+usage: |
+  Returns the selected column
 ---
 
-Returns the selected column
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: build-string
 layout: command
 version: 0.59.1
+usage: |
+  Create a string from the arguments.
 ---
 
-Create a string from the arguments.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

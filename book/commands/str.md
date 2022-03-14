@@ -2,9 +2,13 @@
 title: str
 layout: command
 version: 0.59.1
+usage: |
+  Various commands for working with string data.
 ---
 
-Various commands for working with string data.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

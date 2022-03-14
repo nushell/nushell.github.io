@@ -2,9 +2,13 @@
 title: select
 layout: command
 version: 0.59.1
+usage: |
+  Down-select table to only these columns.
 ---
 
-Down-select table to only these columns.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

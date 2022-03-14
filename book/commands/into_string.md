@@ -2,9 +2,13 @@
 title: into string
 layout: command
 version: 0.59.1
+usage: |
+  Convert value to string
 ---
 
-Convert value to string
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

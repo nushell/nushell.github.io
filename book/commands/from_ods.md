@@ -2,9 +2,13 @@
 title: from ods
 layout: command
 version: 0.59.1
+usage: |
+  Parse OpenDocument Spreadsheet(.ods) data and create table.
 ---
 
-Parse OpenDocument Spreadsheet(.ods) data and create table.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

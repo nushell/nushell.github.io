@@ -2,9 +2,13 @@
 title: every
 layout: command
 version: 0.59.1
+usage: |
+  Show (or skip) every n-th row, starting from the first one.
 ---
 
-Show (or skip) every n-th row, starting from the first one.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

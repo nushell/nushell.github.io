@@ -2,9 +2,13 @@
 title: into bool
 layout: command
 version: 0.59.1
+usage: |
+  Convert value to boolean
 ---
 
-Convert value to boolean
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

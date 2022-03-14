@@ -2,9 +2,13 @@
 title: update
 layout: command
 version: 0.59.1
+usage: |
+  Update an existing column to have a new value, or create a new column.
 ---
 
-Update an existing column to have a new value, or create a new column.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

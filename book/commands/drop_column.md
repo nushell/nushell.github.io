@@ -2,9 +2,13 @@
 title: drop column
 layout: command
 version: 0.59.1
+usage: |
+  Remove the last number of columns. If you want to remove columns by name, try 'reject'.
 ---
 
-Remove the last number of columns. If you want to remove columns by name, try 'reject'.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

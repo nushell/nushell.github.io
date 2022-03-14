@@ -2,9 +2,13 @@
 title: path type
 layout: command
 version: 0.59.1
+usage: |
+  Get the type of the object a path refers to (e.g., file, dir, symlink)
 ---
 
-Get the type of the object a path refers to (e.g., file, dir, symlink)
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

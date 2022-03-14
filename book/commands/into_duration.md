@@ -2,9 +2,13 @@
 title: into duration
 layout: command
 version: 0.59.1
+usage: |
+  Convert value to duration
 ---
 
-Convert value to duration
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

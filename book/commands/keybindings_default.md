@@ -2,9 +2,13 @@
 title: keybindings default
 layout: command
 version: 0.59.1
+usage: |
+  List default keybindings
 ---
 
-List default keybindings
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

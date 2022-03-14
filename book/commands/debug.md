@@ -2,9 +2,13 @@
 title: debug
 layout: command
 version: 0.59.1
+usage: |
+  Debug print the value(s) piped in.
 ---
 
-Debug print the value(s) piped in.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

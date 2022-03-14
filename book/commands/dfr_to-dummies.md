@@ -2,9 +2,13 @@
 title: dfr to-dummies
 layout: command
 version: 0.59.1
+usage: |
+  Creates a new dataframe with dummy variables
 ---
 
-Creates a new dataframe with dummy variables
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
