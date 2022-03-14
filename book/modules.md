@@ -38,7 +38,7 @@ Similar to [`def`](commands/def.md), it is also possible to mark [`def-env`](com
 
 ## Using modules
 
-By itself, the module does not do anything. To use what the module exports, we need to `use` it.
+By itself, the module does not do anything. To use what the module exports, we need to [`use`](commands/use.md) it.
 
 ```
 > use greetings
@@ -53,7 +53,7 @@ The `hello` and `hi` commands are now available with the `greetings` prefix.
 
 ## Importing symbols
 
-In general, anything after the `use` keyword forms an **import pattern** which controls how the symbols are imported.
+In general, anything after the [`use`](commands/use.md) keyword forms an **import pattern** which controls how the symbols are imported.
 The import pattern can be one of the following:
 
 `use greetings`
@@ -88,7 +88,7 @@ export def hi [where: string] {
 }
 ```
 
-Now, you can call `use` directly on the file:
+Now, you can call [`use`](commands/use.md) directly on the file:
 ```
 > use greetings.nu
 
@@ -159,7 +159,7 @@ hello Arthur, King of the Britons!
 ```
 
 You can notice we do not assign the value to `MYNAME` directly.
-Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we call `use`.
+Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we call [`use`](commands/use.md).
 We can demonstrate this property, for example, with the `random` command:
 ```
 > module roll { export env ROLL { random dice | into string } }
@@ -197,7 +197,7 @@ foo
 > foo  # error! command not found!
 ```
 
-The `hide` command also accepts import patterns, just like `use`.
+The `hide` command also accepts import patterns, just like [`use`](commands/use.md).
 The import pattern is interpreted slightly differently, though.
 It can be one of the following:
 
