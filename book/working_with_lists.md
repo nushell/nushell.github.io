@@ -108,7 +108,7 @@ let colors = ($colors | append purple)
 echo $colors # [red yellow green purple]
 ```
 
-The `flatten` command creates a new list from an existing list
+The [`flatten`](commands/flatten.md) command creates a new list from an existing list
 by adding items in nested lists to the top-level list.
 This can be called multiple times to flatten lists nested at any depth.
 For example:
