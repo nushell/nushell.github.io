@@ -283,10 +283,10 @@ As you can see, these two types will allow you to construct any type of keybindi
 
 To complete this keybinding tour we need to discuss the `until` type for event. As you have seen so
 far, you can send a single event or a list of events. And as we have seen, when a list of events
-is sent, each and everyone of them is processed.
+is sent, each and every one of them is processed.
 
-However, there maybe cases when you want to assign different events to the same keybinding.
-This is specially useful with Nushell menus. For example, say you still want to activate your completion
+However, there may be cases when you want to assign different events to the same keybinding.
+This is especially useful with Nushell menus. For example, say you still want to activate your completion
 menu with `Ctrl + t` but you also want to move to the next element in the menu once it is activated
 using the same keybinding.
 
