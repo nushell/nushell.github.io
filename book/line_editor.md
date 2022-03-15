@@ -362,7 +362,7 @@ Thanks to Reedline, Nushell has menus that can help you with your day to day she
 ### Completion menu
 
 The completion menu is a [context sensitive](https://www.youtube.com/watch?v=ujDIU7HPdHc) menu that will
-present suggestions based on what is the status of the prompt. These suggestions can range from path
+present suggestions based on the status of the prompt. These suggestions can range from path
 suggestions to command alternatives. While writing a command, you can activate the menu to see available
 flags for an internal command. Also, if you have defined your custom completions for external commands,
 these will appear in the menu as well.
