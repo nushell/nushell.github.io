@@ -122,8 +122,10 @@ Each keybinding requires the next elements:
   - control | alt
   - control | alt | shift
 - keycode: This represent the key to be pressed
-- mode: emacs, vi_insert, vi_normal (a single string or a list. e.g. [`vi_insert` `vi_normal`])
-- event: The type of event that is going to be sent by the keybinding. The options are:
+- mode: emacs, vi_insert, vi_normal (a single string or a list. e.g.
+  [`vi_insert` `vi_normal`])
+- event: The type of event that is going to be sent by the keybinding. The
+  options are:
     - send
     - edit
     - until
@@ -387,14 +389,14 @@ shell scripting.
 ### Completion menu
 
 The completion menu is a context sensitive menu that will present suggestions
-based on what is the status of the prompt. These suggestions can range from
-path suggestions to command alternatives. While writing a command, you can
-activate the menu to see available flags for an internal command. Also, if you
-have defined your custom completions for external commands, these will appear
-in the menu as well.
+based on the status of the prompt. These suggestions can range from path
+suggestions to command alternatives. While writing a command, you can activate
+the menu to see available flags for an internal command. Also, if you have
+defined your custom completions for external commands, these will appear in the
+menu as well.
 
-The completion menu by default is accessed by pressing `tab` and it can be
-configured by modifying the next values from the config object
+The completion menu by default is accessed by pressing `tab` and it can be configured by
+modifying these values from the config object:
 
 ```bash
   let $config = {
@@ -425,8 +427,7 @@ The history menu is a handy way to access the editor history. When activating
 the menu (default `Ctrl+x`) the command history is presented in reverse
 chronological order, making it extremely easy to select a previous command.
 
-The history menu can be configured by modifying the next values from the config
-object
+The history menu can be configured by modifying these values from the config object:
 
 ```bash
   let $config = {
@@ -445,9 +446,9 @@ object
 
 ```
 
-When the history menu is activated, `page_size` number of records is pulled
-from the history and presented in the menu. If there is space in the terminal,
-when you press again `Ctrl+x` the menu will pull the same number of records and
+When the history menu is activated, it pulls `page_size` records from the
+history and presents them in the menu. If there is space in the terminal, when
+you press `Ctrl+x` again the menu will pull the same number of records and
 append them to the current page. If it isn't possible to present all the pulled
 records, the menu will create a new page. The pages can be navigated by
 pressing `Ctrl+z` to go to previous page or `Ctrl+x` to go to next page.
@@ -486,9 +487,11 @@ Instead of pressing down to select the fourth entry, you can type `!3` and
 press enter. This will insert the selected text in the prompt position, saving
 you time scrolling down the menu.
 
-Both, history search and quick selection, can be used together. You can
-activate you menu, do a quick search and then quick select using the quick
-selection character.
+History search and quick selection can be used together. You can activate the menu, do a quick
+search, and then quick select using the quick selection character.
+
+It should be mentioned that if you would like to change the quick selection character for something else,
+you can modify the `selector` value from the `history_config` in the `$config` object.
 
 ### Menu keybindings
 
