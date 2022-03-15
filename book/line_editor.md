@@ -357,21 +357,146 @@ For example, the next keybinding will always send a `down` because that event is
 
 ## Menus
 
-```
-  menu_config: {
-    columns: 4
-    col_width: 20   # Optional value. If missing all the screen width is used to calculate column width
-    col_padding: 2
-    text_style: green
-    selected_text_style: green_reverse
-    marker: "| "
+Thanks to Reedline, Nushell has menus that can help you with your day to day shell scripting.
+
+### Completion menu
+
+The completion menu is a [context sensitive](https://www.youtube.com/watch?v=ujDIU7HPdHc) menu that will
+present suggestions based on what is the status of the prompt. These suggestions can range from path
+suggestions to command alternatives. While writing a command, you can activate the menu to see available
+flags for an internal command. Also, if you have defined your custom completions for external commands,
+these will appear in the menu as well.
+
+The completion menu by default is accessed by pressing `tab` and it can be configured by
+modifying the next values from the config object
+
+```bash
+  let $config = {
+    ...
+
+    quick_completions: true    # set this to false to prevent auto-selecting completions when only one remains
+    partial_completions: true  # set this to false to prevent partial filling of the prompt
+
+    menu_config: {
+      columns: 4         # Number of columns in the menu
+      col_width: 20      # Optional value. If missing all the screen width is used to calculate column width
+      col_padding: 2     # Number of characters between string and next column
+      text_style: green  # Text color style for non selected text
+      selected_text_style: green_reverse  # Color style for selected text
+      marker: "| "       # Indicator that appears when the menu is active
+    }
+
+    ...
   }
-  history_config: {
-    page_size: 10
-    selector: "!"
-    text_style: green
-    selected_text_style: green_reverse
-    marker: "? "
+```
+
+By modifying these parameters you can customize the layout of your menu to your liking.
+
+### History menu
+
+The history menu is a handy way to access the editor history. When activating the menu (default `Ctrl+x`)
+the command history is presented in reverse chronological order, making it extremely easy to select a
+previous command.
+
+The history menu can be configured by modifying the next values from the config object
+
+```bash
+  let $config = {
+    ...
+
+    history_config: {
+      page_size: 10      # Number of entries that will presented when activating the menu
+      selector: "!"      # Character to indicate a quick selection in the menu
+      text_style: green  # Text color style for non selected text
+      selected_text_style: green_reverse  # Color style for selected text
+      marker: "? "       # Indicator that appears when the menu is active
+    }
+
+    ...
   }
 
+```
+
+When the history menu is activated, `page_size` number of records is pulled from the history and presented
+in the menu. If there is space in the terminal, when you press again `Ctrl+x` the menu will pull the same
+number of records and append them to the current page. If it isn't possible to present all the pulled
+records, the menu will create a new page. The pages can be navigated by pressing `Ctrl+z` to go to
+previous page or `Ctrl+x` to go to next page.
+
+#### Searching the history
+
+To search in your history you can start typing key words for the command you are looking for. Once
+the menu is activated, anything that you type will be replaced by the selected command from your history.
+for example, say that you have already typed this
+
+```bash
+let a = ()
+```
+you can place the cursor inside the `()` and activate the menu. You can filter the history by typing
+key words and as soon as you select an entry, the typed words will be replaced
+
+```bash
+let a = (ls | where size > 10MiB)
+```
+
+#### Menu quick selection
+
+Another nice feature of the menu is the ability to quick select something from it. Say you have
+activated your menu and it looks like this
+
+```bash
+>
+0: ls | where size > 10MiB
+1: ls | where size > 20MiB
+2: ls | where size > 30MiB
+3: ls | where size > 40MiB
+```
+Instead of pressing down to select the fourth entry, you can type `!3` and press enter. This will
+insert the selected text in the prompt position, saving you time scrolling down the menu.
+
+Both, history search and quick selection, can be used together. You can activate you menu, do a quick
+search and then quick select using the quick selection character.
+
+It should be mentioned that if you would like to change the quick selection character for something else,
+you can modify the `selector` value from the `history_config` in the `$config` object.
+
+### Menu keybindings
+
+In case you want to change the default way both menus are activated, you can change that by defining
+new keybindings. For example, the next two keybindings assign the completion and history menu
+to `Ctrl+t` and `Ctrl+y` respectively
+
+```bash
+  let $config = {
+    ...
+
+    keybindings: [
+      {
+        name: completion_menu
+        modifier: control
+        keycode: char_t
+        mode: [vi_insert vi_normal]
+        event: {
+          until: [
+            { send: menu name: completion_menu }
+            { send: menupagenext }
+          ]
+        }
+      }
+      {
+        name: history_menu
+        modifier: control
+        keycode: char_y
+        mode: [vi_insert vi_normal]
+        event: {
+          until: [
+            { send: menu name: history_menu }
+            { send: menupagenext }
+          ]
+        }
+      }
+    ]
+
+    ...
+  }
 ```

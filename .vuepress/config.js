@@ -91,6 +91,7 @@ module.exports = {
                 "escaping",
                 "plugins",
                 "parallelism",
+                "line_editor",
                 "dataframes",
                 "coloring_and_theming",
                 "coming_from_bash",
