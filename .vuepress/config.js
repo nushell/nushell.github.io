@@ -398,9 +398,6 @@ module.exports = {
       },
       posts_directories: ['/blog/'],
       sort: entries => entries.sort((a, b) => new Date(b.date) - new Date(a.date))
-    }],
-    ["@vuepress/search", {
-      test: `^(?!.*old_book)` // Exclude the old Nu book from search; it clutters up search results
     }]
   ],
 };
