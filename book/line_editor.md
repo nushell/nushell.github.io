@@ -368,7 +368,7 @@ flags for an internal command. Also, if you have defined your custom completions
 these will appear in the menu as well.
 
 The completion menu by default is accessed by pressing `tab` and it can be configured by
-modifying the next values from the config object
+modifying these values from the config object:
 
 ```bash
   let $config = {
