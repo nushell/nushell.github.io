@@ -1,13 +1,8 @@
 {
-  "name": "nushell_website",
+  "name": "nushell.github.io",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "authors": {
-    "name": "",
-    "email": ""
-  },
-  "repository": "/nushell_website",
+  "description": "The Nushell website (nushell.sh)",
+  "repository": "github:nushell/nushell.github.io",
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build"
