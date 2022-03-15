@@ -454,8 +454,8 @@ activated your menu and it looks like this
 Instead of pressing down to select the fourth entry, you can type `!3` and press enter. This will
 insert the selected text in the prompt position, saving you time scrolling down the menu.
 
-Both, history search and quick selection, can be used together. You can activate you menu, do a quick
-search and then quick select using the quick selection character.
+History search and quick selection can be used together. You can activate the menu, do a quick
+search, and then quick select using the quick selection character.
 
 It should be mentioned that if you would like to change the quick selection character for something else,
 you can modify the `selector` value from the `history_config` in the `$config` object.
