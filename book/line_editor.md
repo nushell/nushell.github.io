@@ -9,9 +9,10 @@ and screen paint.
 
 ### Editing mode
 
-Reedline allows you to edit text using two modes: vi and emacs. In order to
-select your favorite you need to modify your config file and write down your
-preferred mode.
+Reedline allows you to edit text using two modes: vi and emacs. If not
+specified, the default edit mode is emacs mode. In order to select your
+favorite you need to modify your config file and write down your preferred
+mode.
 
 For example:
 ```bash
