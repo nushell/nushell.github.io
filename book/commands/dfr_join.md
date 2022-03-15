@@ -2,9 +2,13 @@
 title: dfr join
 layout: command
 version: 0.59.1
+usage: |
+  Joins a dataframe using columns as reference
 ---
 
-Joins a dataframe using columns as reference
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

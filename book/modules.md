@@ -34,11 +34,11 @@ We defined `hello` and `hi` custom commands inside a `greetings` module.
 
 The `export` keyword makes it possible to later import the commands from the module.
 
-Similar to `def`, it is also possible to mark `def-env` with the `export` keyword (you can learn more about `def-env` in the [Environment](environment.md) chapter).
+Similar to [`def`](commands/def.md), it is also possible to mark [`def-env`](commands/def-env.md) with the `export` keyword (you can learn more about [`def-env`](commands/def-env.md) in the [Environment](environment.md) chapter).
 
 ## Using modules
 
-By itself, the module does not do anything. To use what the module exports, we need to `use` it.
+By itself, the module does not do anything. To use what the module exports, we need to [`use`](commands/use.md) it.
 
 ```
 > use greetings
@@ -53,7 +53,7 @@ The `hello` and `hi` commands are now available with the `greetings` prefix.
 
 ## Importing symbols
 
-In general, anything after the `use` keyword forms an **import pattern** which controls how the symbols are imported.
+In general, anything after the [`use`](commands/use.md) keyword forms an **import pattern** which controls how the symbols are imported.
 The import pattern can be one of the following:
 
 `use greetings`
@@ -88,7 +88,7 @@ export def hi [where: string] {
 }
 ```
 
-Now, you can call `use` directly on the file:
+Now, you can call [`use`](commands/use.md) directly on the file:
 ```
 > use greetings.nu
 
@@ -137,7 +137,7 @@ hi there!
 
 So far we used modules just to import custom commands.
 It is possible to export environment variables the same way.
-The syntax is slightly different than what you might be used to from commands like `let-env` or `load-env`:
+The syntax is slightly different than what you might be used to from commands like [`let-env`](commands/let-env.md) or [`load-env`](commands/load-env.md):
 ```
 # greetings.nu
 
@@ -159,8 +159,8 @@ hello Arthur, King of the Britons!
 ```
 
 You can notice we do not assign the value to `MYNAME` directly.
-Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we call `use`.
-We can demonstrate this property, for example, with the `random` command:
+Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we call [`use`](commands/use.md).
+We can demonstrate this property, for example, with the [`random`](commands/random.md) command:
 ```
 > module roll { export env ROLL { random dice | into string } }
 
@@ -185,7 +185,7 @@ We can demonstrate this property, for example, with the `random` command:
 
 Any custom command, alias or environment variable, imported from a module or not, can be "hidden", restoring the previous definition.
 (Note, it is not yet possible to export aliases from modules but they can still be hidden.)
-We do this with the `hide` command:
+We do this with the [`hide`](commands/hide.md) command:
 ```
 > def foo [] { "foo" }
 
@@ -197,7 +197,7 @@ foo
 > foo  # error! command not found!
 ```
 
-The `hide` command also accepts import patterns, just like `use`.
+The [`hide`](commands/hide.md) command also accepts import patterns, just like [`use`](commands/use.md).
 The import pattern is interpreted slightly differently, though.
 It can be one of the following:
 

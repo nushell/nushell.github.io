@@ -2,9 +2,13 @@
 title: which
 layout: command
 version: 0.59.1
+usage: |
+  Finds a program file, alias or custom command.
 ---
 
-Finds a program file, alias or custom command.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

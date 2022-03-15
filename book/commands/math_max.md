@@ -2,9 +2,13 @@
 title: math max
 layout: command
 version: 0.59.1
+usage: |
+  Finds the maximum within a list of numbers or tables
 ---
 
-Finds the maximum within a list of numbers or tables
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

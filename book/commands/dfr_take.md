@@ -2,9 +2,13 @@
 title: dfr take
 layout: command
 version: 0.59.1
+usage: |
+  Creates new dataframe using the given indices
 ---
 
-Creates new dataframe using the given indices
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

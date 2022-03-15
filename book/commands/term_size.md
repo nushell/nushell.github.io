@@ -2,9 +2,13 @@
 title: term size
 layout: command
 version: 0.59.1
+usage: |
+  Returns the terminal size
 ---
 
-Returns the terminal size
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

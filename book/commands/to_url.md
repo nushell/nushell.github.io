@@ -2,9 +2,13 @@
 title: to url
 layout: command
 version: 0.59.1
+usage: |
+  Convert table into url-encoded text
 ---
 
-Convert table into url-encoded text
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

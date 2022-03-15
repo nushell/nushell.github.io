@@ -2,9 +2,13 @@
 title: dfr is-in
 layout: command
 version: 0.59.1
+usage: |
+  Checks if elements from a series are contained in right series
 ---
 
-Checks if elements from a series are contained in right series
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

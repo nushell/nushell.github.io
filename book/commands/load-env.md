@@ -2,9 +2,13 @@
 title: load-env
 layout: command
 version: 0.59.1
+usage: |
+  Loads an environment update from a record.
 ---
 
-Loads an environment update from a record.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

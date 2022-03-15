@@ -2,9 +2,13 @@
 title: alias
 layout: command
 version: 0.59.1
+usage: |
+  Alias a command (with optional flags) to a new name
 ---
 
-Alias a command (with optional flags) to a new name
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

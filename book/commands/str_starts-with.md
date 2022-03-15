@@ -2,9 +2,13 @@
 title: str starts-with
 layout: command
 version: 0.59.1
+usage: |
+  checks if string starts with pattern
 ---
 
-checks if string starts with pattern
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

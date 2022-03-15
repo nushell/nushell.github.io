@@ -2,9 +2,13 @@
 title: dfr to-parquet
 layout: command
 version: 0.59.1
+usage: |
+  Saves dataframe to parquet file
 ---
 
-Saves dataframe to parquet file
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

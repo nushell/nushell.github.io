@@ -2,9 +2,13 @@
 title: dfr to-uppercase
 layout: command
 version: 0.59.1
+usage: |
+  Uppercase the strings in the column
 ---
 
-Uppercase the strings in the column
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

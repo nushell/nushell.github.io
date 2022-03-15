@@ -2,9 +2,13 @@
 title: str index-of
 layout: command
 version: 0.59.1
+usage: |
+  Returns starting index of given pattern in string counting from 0. Returns -1 when there are no results.
 ---
 
-Returns starting index of given pattern in string counting from 0. Returns -1 when there are no results.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

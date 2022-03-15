@@ -2,9 +2,13 @@
 title: last
 layout: command
 version: 0.59.1
+usage: |
+  Show only the last number of rows.
 ---
 
-Show only the last number of rows.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

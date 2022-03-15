@@ -2,9 +2,13 @@
 title: skip
 layout: command
 version: 0.59.1
+usage: |
+  Skip the first n elements of the input.
 ---
 
-Skip the first n elements of the input.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

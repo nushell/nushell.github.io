@@ -1,10 +1,10 @@
 # Loading data
 
-Earlier, we saw how you can use commands like `ls`, `ps`, `date`, and `sys` to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
+Earlier, we saw how you can use commands like [`ls`](commands/ls.md), [`ps`](commands/ps.md), [`date`](commands/date.md), and [`sys`](commands/sys.md) to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
 
 ## Opening files
 
-One of Nu's most powerful assets in working with data is the `open` command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
+One of Nu's most powerful assets in working with data is the [`open`](commands/open.md) command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
 
 ```
 > open editors/vscode/package.json
@@ -27,9 +27,9 @@ One of Nu's most powerful assets in working with data is the `open` command. It 
 ──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
-In a similar way to `ls`, opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
+In a similar way to [`ls`](commands/ls.md), opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
 
-If we wanted to check the version of the project we were looking at, we can use the `get` command.
+If we wanted to check the version of the project we were looking at, we can use the [`get`](commands/get.md) command.
 
 ```
 > open editors/vscode/package.json | get version
@@ -89,7 +89,7 @@ The first thing we want to do when bringing in the file is to work with it a lin
 ───┴──────────────────────────────
 ```
 
-We can see that we're working with the lines because we're back into a table. Our next step is to see if we can split up the rows into something a little more useful. For that, we'll use the `split` command. `split`, as the name implies, gives us a way to split a delimited string. We will use `split`'s `column` subcommand to split the contents across multiple columns. We tell it what the delimiter is, and it does the rest:
+We can see that we're working with the lines because we're back into a table. Our next step is to see if we can split up the rows into something a little more useful. For that, we'll use the [`split`](commands/split.md) command. [`split`](commands/split.md), as the name implies, gives us a way to split a delimited string. We will use [`split`](commands/split.md)'s `column` subcommand to split the contents across multiple columns. We tell it what the delimiter is, and it does the rest:
 
 ```
 > open people.txt | lines | split column "|"
@@ -102,7 +102,7 @@ We can see that we're working with the lines because we're back into a table. Ou
 ───┴──────────┴───────────┴───────────
 ```
 
-That *almost* looks correct. It looks like there's an extra space there. Let's `trim` that extra space:
+That *almost* looks correct. It looks like there's an extra space there. Let's [`trim`](commands/str_trim.md) that extra space:
 
 ```
 > open people.txt | lines | split column "|" | str trim
@@ -115,7 +115,7 @@ That *almost* looks correct. It looks like there's an extra space there. Let's `
 ───┴─────────┴─────────┴──────────
 ```
 
-Not bad. The `split` command gives us data we can use. It also goes ahead and gives us default column names:
+Not bad. The [`split`](commands/split.md) command gives us data we can use. It also goes ahead and gives us default column names:
 
 ```
 > open people.txt | lines | split column "|" | str trim | get Column1
@@ -154,8 +154,8 @@ Now that our data is in a table, we can use all the commands we've used on table
 
 There are other commands you can use to work with strings:
 * `str`
-* `lines`
-* `size`
+* [`lines`](commands/lines.md)
+* [`size`](commands/size.md)
 
 There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:
 
@@ -182,7 +182,7 @@ The `from` command can be used for each of the structured data text formats that
 
 ## Opening in raw mode
 
-While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the `open` command can take an optional `--raw` flag:
+While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the [`open`](commands/open.md) command can take an optional `--raw` flag:
 
 ```
 > open Cargo.toml --raw
@@ -195,7 +195,7 @@ license = "MIT"
 
 ## Fetching URLs
 
-In addition to loading files from your filesystem, you can also load URLs by using the `fetch` command. This will fetch the contents of the URL from the internet and return it:
+In addition to loading files from your filesystem, you can also load URLs by using the [`fetch`](commands/fetch.md) command. This will fetch the contents of the URL from the internet and return it:
 
 ```
 > fetch https://www.jonathanturner.org/feed.xml

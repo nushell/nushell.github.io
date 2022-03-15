@@ -250,7 +250,7 @@ You can also create a table as a list of records:
 
 Blocks represent a block of code in Nu. For example, in the command `each { |it| echo $it }` the block is the portion contained in curly braces, `{ |it| echo $it }`. Block parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary.
 
-Blocks are a useful way to represent code that can be executed on each row of data. It is idiomatic to use `$it` as a parameter name in `each` blocks, but not required; `each { |x| echo $x }` works the same way as `each { |it| echo $it }`.
+Blocks are a useful way to represent code that can be executed on each row of data. It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required; `each { |x| echo $x }` works the same way as `each { |it| echo $it }`.
 
 ## Groups
 

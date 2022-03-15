@@ -2,9 +2,13 @@
 title: roll down
 layout: command
 version: 0.59.1
+usage: |
+  Roll table rows down
 ---
 
-Roll table rows down
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

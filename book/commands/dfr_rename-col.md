@@ -2,9 +2,13 @@
 title: dfr rename-col
 layout: command
 version: 0.59.1
+usage: |
+  rename a dataframe column
 ---
 
-rename a dataframe column
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

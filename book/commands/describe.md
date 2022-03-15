@@ -2,9 +2,13 @@
 title: describe
 layout: command
 version: 0.59.1
+usage: |
+  Describe the value(s) piped in.
 ---
 
-Describe the value(s) piped in.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

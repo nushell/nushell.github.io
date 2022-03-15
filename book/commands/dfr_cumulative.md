@@ -2,9 +2,13 @@
 title: dfr cumulative
 layout: command
 version: 0.59.1
+usage: |
+  Cumulative calculation for a series
 ---
 
-Cumulative calculation for a series
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

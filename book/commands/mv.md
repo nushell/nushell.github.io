@@ -2,9 +2,13 @@
 title: mv
 layout: command
 version: 0.59.1
+usage: |
+  Move files or directories.
 ---
 
-Move files or directories.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

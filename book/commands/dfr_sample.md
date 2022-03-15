@@ -2,9 +2,13 @@
 title: dfr sample
 layout: command
 version: 0.59.1
+usage: |
+  Create sample dataframe
 ---
 
-Create sample dataframe
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

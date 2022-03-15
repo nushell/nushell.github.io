@@ -2,9 +2,13 @@
 title: str upcase
 layout: command
 version: 0.59.1
+usage: |
+  upcases text
 ---
 
-upcases text
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

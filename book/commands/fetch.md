@@ -2,9 +2,13 @@
 title: fetch
 layout: command
 version: 0.59.1
+usage: |
+  Fetch the contents from a URL (HTTP GET operation).
 ---
 
-Fetch the contents from a URL (HTTP GET operation).
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

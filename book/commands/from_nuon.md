@@ -2,9 +2,13 @@
 title: from nuon
 layout: command
 version: 0.59.1
+usage: |
+  Convert from nuon to structured data
 ---
 
-Convert from nuon to structured data
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

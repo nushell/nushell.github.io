@@ -2,9 +2,13 @@
 title: ansi gradient
 layout: command
 version: 0.59.1
+usage: |
+  draw text with a provided start and end code making a gradient
 ---
 
-draw text with a provided start and end code making a gradient
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

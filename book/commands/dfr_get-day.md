@@ -2,9 +2,13 @@
 title: dfr get-day
 layout: command
 version: 0.59.1
+usage: |
+  Gets day from date
 ---
 
-Gets day from date
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

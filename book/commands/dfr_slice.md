@@ -2,9 +2,13 @@
 title: dfr slice
 layout: command
 version: 0.59.1
+usage: |
+  Creates new dataframe from a slice of rows
 ---
 
-Creates new dataframe from a slice of rows
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

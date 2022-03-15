@@ -2,9 +2,13 @@
 title: math floor
 layout: command
 version: 0.59.1
+usage: |
+  Applies the floor function to a list of numbers
 ---
 
-Applies the floor function to a list of numbers
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

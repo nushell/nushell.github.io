@@ -2,9 +2,13 @@
 title: headers
 layout: command
 version: 0.59.1
+usage: |
+  Use the first row of the table as column names.
 ---
 
-Use the first row of the table as column names.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

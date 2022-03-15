@@ -2,9 +2,13 @@
 title: url path
 layout: command
 version: 0.59.1
+usage: |
+  gets the path of a url
 ---
 
-gets the path of a url
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

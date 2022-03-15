@@ -2,9 +2,13 @@
 title: do
 layout: command
 version: 0.59.1
+usage: |
+  Run a block
 ---
 
-Run a block
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
@@ -26,4 +30,9 @@ Run the block
 Run the block and ignore errors
 ```shell
 > do -i { thisisnotarealcommand }
+```
+
+Run the block, with a positional parameter
+```shell
+> do {|x| 100 + $x } 50
 ```

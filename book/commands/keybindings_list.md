@@ -2,9 +2,13 @@
 title: keybindings list
 layout: command
 version: 0.59.1
+usage: |
+  List available options that can be used to create keybindings
 ---
 
-List available options that can be used to create keybindings
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

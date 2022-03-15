@@ -2,9 +2,13 @@
 title: seq
 layout: command
 version: 0.59.1
+usage: |
+  Print sequences of numbers.
 ---
 
-Print sequences of numbers.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

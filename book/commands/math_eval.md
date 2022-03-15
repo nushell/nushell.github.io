@@ -2,9 +2,13 @@
 title: math eval
 layout: command
 version: 0.59.1
+usage: |
+  Evaluate a math expression into a number
 ---
 
-Evaluate a math expression into a number
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: dfr arg-true
 layout: command
 version: 0.59.1
+usage: |
+  Returns indexes where values are true
 ---
 
-Returns indexes where values are true
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

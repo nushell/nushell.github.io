@@ -2,9 +2,13 @@
 title: reduce
 layout: command
 version: 0.59.1
+usage: |
+  Aggregate a list table to a single value using an accumulator block.
 ---
 
-Aggregate a list table to a single value using an accumulator block.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
@@ -23,6 +27,11 @@ Sum values of a list (same as 'math sum')
 > [ 1 2 3 4 ] | reduce {|it, acc| $it + $acc }
 ```
 
+Sum values of a list (same as 'math sum')
+```shell
+> [ 1 2 3 ] | reduce -n {|it, acc| $acc + $it.item }
+```
+
 Sum values with a starting value (fold)
 ```shell
 > [ 1 2 3 4 ] | reduce -f 10 {|it, acc| $acc + $it }
@@ -36,10 +45,10 @@ Replace selected characters in a string with 'X'
 Find the longest string and its index
 ```shell
 > [ one longest three bar ] | reduce -n { |it, acc|
-        if ($it.item | str length) > ($acc | str length) {
-            $it.item
-        } else {
-            $acc
-        }
-    }
+                    if ($it.item | str length) > ($acc | str length) {
+                        $it.item
+                    } else {
+                        $acc
+                    }
+                }
 ```

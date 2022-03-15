@@ -2,9 +2,13 @@
 title: n
 layout: command
 version: 0.59.1
+usage: |
+  Switch to the next shell.
 ---
 
-Switch to the next shell.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

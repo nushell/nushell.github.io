@@ -2,9 +2,13 @@
 title: ls
 layout: command
 version: 0.59.1
+usage: |
+  List the files in a directory.
 ---
 
-List the files in a directory.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
@@ -34,4 +38,19 @@ List all files in a subdirectory
 List all rust files
 ```shell
 > ls *.rs
+```
+
+List all files and directories whose name do not contain 'bar'
+```shell
+> ls -s | where name !~ bar
+```
+
+List all dirs with full path name in your home directory
+```shell
+> ls -f ~ | where type == dir
+```
+
+List all dirs in your home directory which have not been modified in 7 days
+```shell
+> ls -s ~ | where type == dir && modified < ((date now) - 7day)
 ```

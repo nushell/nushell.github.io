@@ -2,9 +2,13 @@
 title: dfr shape
 layout: command
 version: 0.59.1
+usage: |
+  Shows column and row size for a dataframe
 ---
 
-Shows column and row size for a dataframe
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

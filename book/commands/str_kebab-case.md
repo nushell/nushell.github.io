@@ -2,9 +2,13 @@
 title: str kebab-case
 layout: command
 version: 0.59.1
+usage: |
+  converts a string to kebab-case
 ---
 
-converts a string to kebab-case
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

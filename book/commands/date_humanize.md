@@ -2,9 +2,13 @@
 title: date humanize
 layout: command
 version: 0.59.1
+usage: |
+  Print a 'humanized' format for the date, relative to now.
 ---
 
-Print a 'humanized' format for the date, relative to now.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

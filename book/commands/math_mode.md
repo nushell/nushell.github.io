@@ -2,9 +2,13 @@
 title: math mode
 layout: command
 version: 0.59.1
+usage: |
+  Gets the most frequent element(s) from a list of numbers or tables
 ---
 
-Gets the most frequent element(s) from a list of numbers or tables
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

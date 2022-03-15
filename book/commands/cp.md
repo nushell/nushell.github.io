@@ -2,9 +2,13 @@
 title: cp
 layout: command
 version: 0.59.1
+usage: |
+  Copy files.
 ---
 
-Copy files.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

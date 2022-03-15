@@ -2,9 +2,13 @@
 title: dfr append
 layout: command
 version: 0.59.1
+usage: |
+  Appends a new dataframe
 ---
 
-Appends a new dataframe
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

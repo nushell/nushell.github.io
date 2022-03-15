@@ -2,9 +2,13 @@
 title: kill
 layout: command
 version: 0.59.1
+usage: |
+  Kill a process using the process id.
 ---
 
-Kill a process using the process id.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

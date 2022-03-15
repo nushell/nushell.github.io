@@ -2,9 +2,13 @@
 title: extern
 layout: command
 version: 0.59.1
+usage: |
+  Define a signature for an external command
 ---
 
-Define a signature for an external command
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: str contains
 layout: command
 version: 0.59.1
+usage: |
+  Checks if string contains pattern
 ---
 
-Checks if string contains pattern
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

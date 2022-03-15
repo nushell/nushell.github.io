@@ -2,9 +2,13 @@
 title: dfr all-false
 layout: command
 version: 0.59.1
+usage: |
+  Returns true if all values are false
 ---
 
-Returns true if all values are false
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

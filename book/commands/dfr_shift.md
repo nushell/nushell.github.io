@@ -2,9 +2,13 @@
 title: dfr shift
 layout: command
 version: 0.59.1
+usage: |
+  Shifts the values by a given period
 ---
 
-Shifts the values by a given period
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

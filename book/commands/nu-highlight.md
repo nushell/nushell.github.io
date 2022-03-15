@@ -2,9 +2,13 @@
 title: nu-highlight
 layout: command
 version: 0.59.1
+usage: |
+  Syntax highlight the input string.
 ---
 
-Syntax highlight the input string.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

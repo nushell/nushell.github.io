@@ -2,9 +2,13 @@
 title: ansi strip
 layout: command
 version: 0.59.1
+usage: |
+  strip ansi escape sequences from string
 ---
 
-strip ansi escape sequences from string
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: char
 layout: command
 version: 0.59.1
+usage: |
+  Output special characters (e.g., 'newline').
 ---
 
-Output special characters (e.g., 'newline').
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

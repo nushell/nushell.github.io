@@ -2,9 +2,13 @@
 title: dfr rename
 layout: command
 version: 0.59.1
+usage: |
+  Renames a series
 ---
 
-Renames a series
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

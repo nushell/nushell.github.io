@@ -2,9 +2,13 @@
 title: collect
 layout: command
 version: 0.59.1
+usage: |
+  Collect the stream and pass it to a block.
 ---
 
-Collect the stream and pass it to a block.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

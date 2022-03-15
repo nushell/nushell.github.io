@@ -2,9 +2,13 @@
 title: open
 layout: command
 version: 0.59.1
+usage: |
+  Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 ---
 
-Opens a file.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
@@ -30,4 +34,9 @@ Open a file, as raw bytes
 Open a file, using the input to get filename
 ```shell
 > echo 'myfile.txt' | open
+```
+
+Open a file, and decode it by the specified encoding
+```shell
+> open myfile.txt --raw | decode utf-8
 ```

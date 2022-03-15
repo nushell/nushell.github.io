@@ -2,9 +2,13 @@
 title: group-by
 layout: command
 version: 0.59.1
+usage: |
+  Create a new table grouped.
 ---
 
-Create a new table grouped.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

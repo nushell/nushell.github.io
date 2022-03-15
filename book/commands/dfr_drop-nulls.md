@@ -2,9 +2,13 @@
 title: dfr drop-nulls
 layout: command
 version: 0.59.1
+usage: |
+  Drops null values in dataframe
 ---
 
-Drops null values in dataframe
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

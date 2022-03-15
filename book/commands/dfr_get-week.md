@@ -2,9 +2,13 @@
 title: dfr get-week
 layout: command
 version: 0.59.1
+usage: |
+  Gets week from date
 ---
 
-Gets week from date
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

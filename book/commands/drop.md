@@ -2,9 +2,13 @@
 title: drop
 layout: command
 version: 0.59.1
+usage: |
+  Remove the last number of rows or columns.
 ---
 
-Remove the last number of rows or columns.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

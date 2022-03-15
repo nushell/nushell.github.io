@@ -2,9 +2,13 @@
 title: grid
 layout: command
 version: 0.59.1
+usage: |
+  Renders the output to a textual terminal grid.
 ---
 
-Renders the output to a textual terminal grid.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

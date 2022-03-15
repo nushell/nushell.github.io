@@ -2,9 +2,13 @@
 title: rename
 layout: command
 version: 0.59.1
+usage: |
+  Creates a new table with columns renamed.
 ---
 
-Creates a new table with columns renamed.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

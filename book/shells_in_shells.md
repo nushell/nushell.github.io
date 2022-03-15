@@ -18,7 +18,7 @@ To get started, let's enter a directory:
   3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago 
 ```
 
-Entering is similar to changing directories (as we saw with the `cd` command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the `shells` command to list the current directories we have active:
+Entering is similar to changing directories (as we saw with the `cd` command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the [`shells`](commands/shells.md) command to list the current directories we have active:
 
 ```
 /home/jonathan/Source/book(main)> shells
@@ -32,7 +32,7 @@ Entering is similar to changing directories (as we saw with the `cd` command). T
 
 ```
 
-The `shells` command shows us there are three shells currently active: our original "nushell" source directory and now this new "book" directory.
+The [`shells`](commands/shells.md) command shows us there are three shells currently active: our original "nushell" source directory and now this new "book" directory.
 
 We can jump between these shells with the `n`, `p` and `g` shortcuts, short for "next", "previous" and "goto":
 

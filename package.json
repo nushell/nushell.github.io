@@ -1,21 +1,20 @@
 {
-  "name": "nushell_website",
+  "name": "nushell.github.io",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "authors": {
-    "name": "",
-    "email": ""
-  },
-  "repository": "/nushell_website",
+  "description": "The Nushell website (nushell.sh)",
+  "repository": "github:nushell/nushell.github.io",
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build"
   },
   "license": "MIT",
   "devDependencies": {
-    "vuepress": "^1.9.0",
     "@vuepress/plugin-back-to-top": "^1.9.0",
-    "@vuepress/plugin-medium-zoom": "^1.9.0"
+    "@vuepress/plugin-medium-zoom": "^1.9.0",
+    "vuepress": "^1.9.0",
+    "vuepress-plugin-feed": "^0.1.9"
+  },
+  "dependencies": {
+    "@docsearch/js": "3"
   }
 }

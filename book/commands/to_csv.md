@@ -2,9 +2,13 @@
 title: to csv
 layout: command
 version: 0.59.1
+usage: |
+  Convert table into .csv text
 ---
 
-Convert table into .csv text
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

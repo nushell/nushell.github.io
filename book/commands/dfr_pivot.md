@@ -2,9 +2,13 @@
 title: dfr pivot
 layout: command
 version: 0.59.1
+usage: |
+  Performs a pivot operation on a groupby object
 ---
 
-Performs a pivot operation on a groupby object
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

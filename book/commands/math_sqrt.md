@@ -2,9 +2,13 @@
 title: math sqrt
 layout: command
 version: 0.59.1
+usage: |
+  Applies the square root function to a list of numbers
 ---
 
-Applies the square root function to a list of numbers
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

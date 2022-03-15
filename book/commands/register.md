@@ -2,9 +2,13 @@
 title: register
 layout: command
 version: 0.59.1
+usage: |
+  Register a plugin
 ---
 
-Register a plugin
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

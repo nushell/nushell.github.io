@@ -2,9 +2,13 @@
 title: skip while
 layout: command
 version: 0.59.1
+usage: |
+  Skip elements of the input while a predicate is true.
 ---
 
-Skip elements of the input while a predicate is true.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

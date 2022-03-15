@@ -2,9 +2,13 @@
 title: path split
 layout: command
 version: 0.59.1
+usage: |
+  Split a path into parts by a separator.
 ---
 
-Split a path into parts by a separator.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

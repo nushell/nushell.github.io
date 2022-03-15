@@ -47,6 +47,11 @@ module.exports = {
     docsRepo: "nushell/nushell.github.io",
     docsBranch: "main",
     lastUpdated: false,
+    algolia: {
+      apiKey: 'dd6a8f770a42efaed5befa429d167232',
+      indexName: 'nushell',
+      appId: 'GHCTOYCW6T',
+    },
     locales: {
       "/": {
         selectText: "Languages",
@@ -57,7 +62,6 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/book/": [
@@ -184,7 +188,6 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/de/book/": [
@@ -218,7 +221,6 @@ module.exports = {
           { text: "Libro Colaborador", link: "/es/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/es/book/": [
@@ -274,7 +276,6 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/ja/book/": [
@@ -309,7 +310,6 @@ module.exports = {
           { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/pt-BR/book/": [
@@ -359,7 +359,6 @@ module.exports = {
           { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
-          { text: "Demo", link: "http://nushell.sh/demo" },
         ],
         sidebar: {
           "/zh-cn/book/": [
@@ -390,8 +389,15 @@ module.exports = {
   plugins: [
     "@vuepress/plugin-back-to-top",
     "@vuepress/plugin-medium-zoom",
-    ["@vuepress/search", {
-      test: `^(?!.*old_book)` // Exclude the old Nu book from search; it clutters up search results
+    ["feed", {
+      canonical_base: "https://www.nushell.sh/",
+      feed_options: {
+        title: "Nushell Blog",
+        link: "https://www.nushell.sh/blog",
+        favicon: "https://www.nushell.sh/icon.png"
+      },
+      posts_directories: ['/blog/'],
+      sort: entries => entries.sort((a, b) => new Date(b.date) - new Date(a.date))
     }]
   ],
 };
