@@ -398,7 +398,7 @@ The history menu is a handy way to access the editor history. When activating th
 the command history is presented in reverse chronological order, making it extremely easy to select a
 previous command.
 
-The history menu can be configured by modifying the next values from the config object
+The history menu can be configured by modifying these values from the config object:
 
 ```bash
   let $config = {
