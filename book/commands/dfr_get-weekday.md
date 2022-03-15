@@ -2,9 +2,13 @@
 title: dfr get-weekday
 layout: command
 version: 0.59.1
+usage: |
+  Gets weekday from date
 ---
 
-Gets weekday from date
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: decode
 layout: command
 version: 0.59.1
+usage: |
+  Decode bytes as a string.
 ---
 
-Decode bytes as a string.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

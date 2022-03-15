@@ -2,9 +2,13 @@
 title: dfr arg-min
 layout: command
 version: 0.59.1
+usage: |
+  Return index for min value in series
 ---
 
-Return index for min value in series
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

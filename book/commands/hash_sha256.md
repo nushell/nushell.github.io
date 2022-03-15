@@ -2,9 +2,13 @@
 title: hash sha256
 layout: command
 version: 0.59.1
+usage: |
+  hash a value using the sha256 hash algorithm
 ---
 
-hash a value using the sha256 hash algorithm
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: drop nth
 layout: command
 version: 0.59.1
+usage: |
+  Drop the selected rows.
 ---
 
-Drop the selected rows.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

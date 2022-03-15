@@ -2,9 +2,13 @@
 title: dfr to-nu
 layout: command
 version: 0.59.1
+usage: |
+  Converts a section of the dataframe to Nushell Table
 ---
 
-Converts a section of the dataframe to Nushell Table
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

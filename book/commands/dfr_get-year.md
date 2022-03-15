@@ -2,9 +2,13 @@
 title: dfr get-year
 layout: command
 version: 0.59.1
+usage: |
+  Gets year from date
 ---
 
-Gets year from date
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

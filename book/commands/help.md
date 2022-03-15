@@ -2,9 +2,13 @@
 title: help
 layout: command
 version: 0.59.1
+usage: |
+  Display help information about commands.
 ---
 
-Display help information about commands.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

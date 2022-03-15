@@ -2,9 +2,13 @@
 title: into filesize
 layout: command
 version: 0.59.1
+usage: |
+  Convert value to filesize
 ---
 
-Convert value to filesize
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

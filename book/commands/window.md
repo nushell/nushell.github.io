@@ -2,9 +2,13 @@
 title: window
 layout: command
 version: 0.59.1
+usage: |
+  Creates a sliding window of `window_size` that slide by n rows/elements across input.
 ---
 
-Creates a sliding window of `window_size` that slide by n rows/elements across input.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

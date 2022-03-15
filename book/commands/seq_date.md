@@ -2,9 +2,13 @@
 title: seq date
 layout: command
 version: 0.59.1
+usage: |
+  print sequences of dates
 ---
 
-print sequences of dates
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

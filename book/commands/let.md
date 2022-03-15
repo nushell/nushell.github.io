@@ -2,9 +2,13 @@
 title: let
 layout: command
 version: 0.59.1
+usage: |
+  Create a variable and give it a value.
 ---
 
-Create a variable and give it a value.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

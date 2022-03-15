@@ -2,9 +2,13 @@
 title: dfr melt
 layout: command
 version: 0.59.1
+usage: |
+  Unpivot a DataFrame from wide to long format
 ---
 
-Unpivot a DataFrame from wide to long format
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

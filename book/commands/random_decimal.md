@@ -2,9 +2,13 @@
 title: random decimal
 layout: command
 version: 0.59.1
+usage: |
+  Generate a random decimal within a range [min..max]
 ---
 
-Generate a random decimal within a range [min..max]
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

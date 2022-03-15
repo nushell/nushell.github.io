@@ -2,9 +2,13 @@
 title: dfr to-csv
 layout: command
 version: 0.59.1
+usage: |
+  Saves dataframe to csv file
 ---
 
-Saves dataframe to csv file
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

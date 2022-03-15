@@ -2,9 +2,13 @@
 title: to json
 layout: command
 version: 0.59.1
+usage: |
+  Converts table data into JSON text.
 ---
 
-Converts table data into JSON text.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: def-env
 layout: command
 version: 0.59.1
+usage: |
+  Define a custom command, which participates in the caller environment
 ---
 
-Define a custom command, which participates in the caller environment
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

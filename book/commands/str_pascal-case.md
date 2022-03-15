@@ -2,9 +2,13 @@
 title: str pascal-case
 layout: command
 version: 0.59.1
+usage: |
+  converts a string to PascalCase
 ---
 
-converts a string to PascalCase
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

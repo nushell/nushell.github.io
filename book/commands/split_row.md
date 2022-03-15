@@ -2,9 +2,13 @@
 title: split row
 layout: command
 version: 0.59.1
+usage: |
+  splits contents over multiple rows via the separator.
 ---
 
-splits contents over multiple rows via the separator.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

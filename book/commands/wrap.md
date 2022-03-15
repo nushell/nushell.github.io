@@ -2,9 +2,13 @@
 title: wrap
 layout: command
 version: 0.59.1
+usage: |
+  Wrap the value into a column.
 ---
 
-Wrap the value into a column.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

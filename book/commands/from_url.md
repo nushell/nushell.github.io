@@ -2,9 +2,13 @@
 title: from url
 layout: command
 version: 0.59.1
+usage: |
+  Parse url-encoded string as a table.
 ---
 
-Parse url-encoded string as a table.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

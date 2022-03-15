@@ -2,9 +2,13 @@
 title: post
 layout: command
 version: 0.59.1
+usage: |
+  Post a body to a URL (HTTP POST operation).
 ---
 
-Post a body to a URL (HTTP POST operation).
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

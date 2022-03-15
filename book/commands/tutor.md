@@ -2,9 +2,13 @@
 title: tutor
 layout: command
 version: 0.59.1
+usage: |
+  Run the tutorial. To begin, run: tutor
 ---
 
-Run the tutorial. To begin, run: tutor
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

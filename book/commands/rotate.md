@@ -2,9 +2,13 @@
 title: rotate
 layout: command
 version: 0.59.1
+usage: |
+  Rotates a table clockwise (default) or counter-clockwise (use --ccw flag).
 ---
 
-Rotates a table clockwise (default) or counter-clockwise (use --ccw flag).
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

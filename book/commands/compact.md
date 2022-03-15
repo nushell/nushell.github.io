@@ -2,9 +2,13 @@
 title: compact
 layout: command
 version: 0.59.1
+usage: |
+  Creates a table with non-empty rows.
 ---
 
-Creates a table with non-empty rows.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

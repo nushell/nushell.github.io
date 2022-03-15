@@ -2,9 +2,13 @@
 title: str camel-case
 layout: command
 version: 0.59.1
+usage: |
+  converts a string to camelCase
 ---
 
-converts a string to camelCase
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

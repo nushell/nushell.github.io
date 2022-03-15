@@ -2,9 +2,13 @@
 title: any?
 layout: command
 version: 0.59.1
+usage: |
+  Tests if any element of the input matches a predicate.
 ---
 
-Tests if any element of the input matches a predicate.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

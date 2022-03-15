@@ -2,9 +2,13 @@
 title: view-source
 layout: command
 version: 0.59.1
+usage: |
+  View a block, module, or a definition
 ---
 
-View a block, module, or a definition
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

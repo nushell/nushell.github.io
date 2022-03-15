@@ -2,9 +2,13 @@
 title: if
 layout: command
 version: 0.59.1
+usage: |
+  Conditionally run a block.
 ---
 
-Conditionally run a block.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

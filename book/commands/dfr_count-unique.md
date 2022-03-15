@@ -2,9 +2,13 @@
 title: dfr count-unique
 layout: command
 version: 0.59.1
+usage: |
+  Counts unique values
 ---
 
-Counts unique values
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: str ends-with
 layout: command
 version: 0.59.1
+usage: |
+  checks if string ends with pattern
 ---
 
-checks if string ends with pattern
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: export def-env
 layout: command
 version: 0.59.1
+usage: |
+  Define a custom command that participates in the environment and export it from a module
 ---
 
-Define a custom command that participates in the environment and export it from a module
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

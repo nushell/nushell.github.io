@@ -2,9 +2,13 @@
 title: dfr drop-duplicates
 layout: command
 version: 0.59.1
+usage: |
+  Drops duplicate values in dataframe
 ---
 
-Drops duplicate values in dataframe
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

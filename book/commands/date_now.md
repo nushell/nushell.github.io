@@ -2,9 +2,13 @@
 title: date now
 layout: command
 version: 0.59.1
+usage: |
+  Get the current date.
 ---
 
-Get the current date.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

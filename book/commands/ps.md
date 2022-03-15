@@ -2,9 +2,13 @@
 title: ps
 layout: command
 version: 0.59.1
+usage: |
+  View information about system processes.
 ---
 
-View information about system processes.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

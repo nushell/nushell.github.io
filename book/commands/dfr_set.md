@@ -2,9 +2,13 @@
 title: dfr set
 layout: command
 version: 0.59.1
+usage: |
+  Sets value where given mask is true
 ---
 
-Sets value where given mask is true
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

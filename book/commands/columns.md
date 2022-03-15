@@ -2,9 +2,13 @@
 title: columns
 layout: command
 version: 0.59.1
+usage: |
+  Show the columns in the input.
 ---
 
-Show the columns in the input.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

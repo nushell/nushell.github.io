@@ -2,9 +2,13 @@
 title: to toml
 layout: command
 version: 0.59.1
+usage: |
+  Convert table into .toml text
 ---
 
-Convert table into .toml text
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

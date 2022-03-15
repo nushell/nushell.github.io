@@ -2,9 +2,13 @@
 title: length
 layout: command
 version: 0.59.1
+usage: |
+  Count the number of elements in the input.
 ---
 
-Count the number of elements in the input.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

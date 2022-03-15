@@ -2,9 +2,13 @@
 title: dfr aggregate
 layout: command
 version: 0.59.1
+usage: |
+  Performs an aggregation operation on a dataframe and groupby object
 ---
 
-Performs an aggregation operation on a dataframe and groupby object
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

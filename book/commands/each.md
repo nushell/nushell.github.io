@@ -2,9 +2,13 @@
 title: each
 layout: command
 version: 0.59.1
+usage: |
+  Run a block on each element of input
 ---
 
-Run a block on each element of input
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

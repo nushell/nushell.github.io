@@ -2,9 +2,13 @@
 title: empty?
 layout: command
 version: 0.59.1
+usage: |
+  Check for empty values.
 ---
 
-Check for empty values.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

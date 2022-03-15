@@ -2,9 +2,13 @@
 title: dfr arg-unique
 layout: command
 version: 0.59.1
+usage: |
+  Returns indexes for unique values
 ---
 
-Returns indexes for unique values
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

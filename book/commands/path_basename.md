@@ -2,9 +2,13 @@
 title: path basename
 layout: command
 version: 0.59.1
+usage: |
+  Get the final component of a path
 ---
 
-Get the final component of a path
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

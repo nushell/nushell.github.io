@@ -2,9 +2,13 @@
 title: random bool
 layout: command
 version: 0.59.1
+usage: |
+  Generate a random boolean value
 ---
 
-Generate a random boolean value
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

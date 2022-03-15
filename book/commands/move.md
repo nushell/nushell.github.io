@@ -2,9 +2,13 @@
 title: move
 layout: command
 version: 0.59.1
+usage: |
+  Move columns before or after other columns
 ---
 
-Move columns before or after other columns
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

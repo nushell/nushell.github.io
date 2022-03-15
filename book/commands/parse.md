@@ -2,9 +2,13 @@
 title: parse
 layout: command
 version: 0.59.1
+usage: |
+  Parse columns from string data using a simple pattern.
 ---
 
-Parse columns from string data using a simple pattern.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

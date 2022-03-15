@@ -2,9 +2,13 @@
 title: range
 layout: command
 version: 0.59.1
+usage: |
+  Return only the selected rows.
 ---
 
-Return only the selected rows.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

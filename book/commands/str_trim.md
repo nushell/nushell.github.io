@@ -2,9 +2,13 @@
 title: str trim
 layout: command
 version: 0.59.1
+usage: |
+  trims text
 ---
 
-trims text
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

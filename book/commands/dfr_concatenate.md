@@ -2,9 +2,13 @@
 title: dfr concatenate
 layout: command
 version: 0.59.1
+usage: |
+  Concatenates strings with other array
 ---
 
-Concatenates strings with other array
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: dfr first
 layout: command
 version: 0.59.1
+usage: |
+  Creates new dataframe with first rows
 ---
 
-Creates new dataframe with first rows
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

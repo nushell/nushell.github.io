@@ -2,9 +2,13 @@
 title: dfr arg-sort
 layout: command
 version: 0.59.1
+usage: |
+  Returns indexes for a sorted series
 ---
 
-Returns indexes for a sorted series
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: str collect
 layout: command
 version: 0.59.1
+usage: |
+  creates a string from the input, optionally using a separator
 ---
 
-creates a string from the input, optionally using a separator
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

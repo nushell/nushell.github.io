@@ -2,9 +2,13 @@
 title: find
 layout: command
 version: 0.59.1
+usage: |
+  Searches terms in the input or for elements of the input that satisfies the predicate.
 ---
 
-Searches terms in the input or for elements of the input that satisfies the predicate.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

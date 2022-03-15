@@ -2,9 +2,13 @@
 title: lines
 layout: command
 version: 0.59.1
+usage: |
+  Converts input to lines
 ---
 
-Converts input to lines
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

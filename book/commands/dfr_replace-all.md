@@ -2,9 +2,13 @@
 title: dfr replace-all
 layout: command
 version: 0.59.1
+usage: |
+  Replace all (sub)strings by a regex pattern
 ---
 
-Replace all (sub)strings by a regex pattern
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

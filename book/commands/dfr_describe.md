@@ -2,9 +2,13 @@
 title: dfr describe
 layout: command
 version: 0.59.1
+usage: |
+  Describes dataframes numeric columns
 ---
 
-Describes dataframes numeric columns
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

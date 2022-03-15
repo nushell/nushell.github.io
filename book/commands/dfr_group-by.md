@@ -2,9 +2,13 @@
 title: dfr group-by
 layout: command
 version: 0.59.1
+usage: |
+  Creates a groupby object that can be used for other aggregations
 ---
 
-Creates a groupby object that can be used for other aggregations
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

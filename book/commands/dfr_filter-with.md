@@ -2,9 +2,13 @@
 title: dfr filter-with
 layout: command
 version: 0.59.1
+usage: |
+  Filters dataframe using a mask as reference
 ---
 
-Filters dataframe using a mask as reference
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

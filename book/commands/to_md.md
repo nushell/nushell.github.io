@@ -2,9 +2,13 @@
 title: to md
 layout: command
 version: 0.59.1
+usage: |
+  Convert table into simple Markdown
 ---
 
-Convert table into simple Markdown
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

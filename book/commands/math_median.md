@@ -2,9 +2,13 @@
 title: math median
 layout: command
 version: 0.59.1
+usage: |
+  Gets the median of a list of numbers
 ---
 
-Gets the median of a list of numbers
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

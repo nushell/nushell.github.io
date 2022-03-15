@@ -2,9 +2,13 @@
 title: dfr get-ordinal
 layout: command
 version: 0.59.1
+usage: |
+  Gets ordinal from date
 ---
 
-Gets ordinal from date
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

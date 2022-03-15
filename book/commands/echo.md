@@ -2,9 +2,13 @@
 title: echo
 layout: command
 version: 0.59.1
+usage: |
+  Echo the arguments back to the user.
 ---
 
-Echo the arguments back to the user.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

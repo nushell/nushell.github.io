@@ -2,9 +2,13 @@
 title: detect columns
 layout: command
 version: 0.59.1
+usage: |
+  splits contents across multiple columns via the separator.
 ---
 
-splits contents across multiple columns via the separator.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

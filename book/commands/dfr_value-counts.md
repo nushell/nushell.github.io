@@ -2,9 +2,13 @@
 title: dfr value-counts
 layout: command
 version: 0.59.1
+usage: |
+  Returns a dataframe with the counts for unique values in series
 ---
 
-Returns a dataframe with the counts for unique values in series
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

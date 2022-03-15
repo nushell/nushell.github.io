@@ -2,9 +2,13 @@
 title: hash base64
 layout: command
 version: 0.59.1
+usage: |
+  base64 encode or decode a value
 ---
 
-base64 encode or decode a value
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

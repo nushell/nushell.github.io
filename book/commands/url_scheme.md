@@ -2,9 +2,13 @@
 title: url scheme
 layout: command
 version: 0.59.1
+usage: |
+  gets the scheme (eg http, file) of a url
 ---
 
-gets the scheme (eg http, file) of a url
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: str length
 layout: command
 version: 0.59.1
+usage: |
+  outputs the lengths of the strings in the pipeline
 ---
 
-outputs the lengths of the strings in the pipeline
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

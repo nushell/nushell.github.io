@@ -2,9 +2,13 @@
 title: table
 layout: command
 version: 0.59.1
+usage: |
+  Render the table.
 ---
 
-Render the table.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

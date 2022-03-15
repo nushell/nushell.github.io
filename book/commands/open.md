@@ -2,9 +2,13 @@
 title: open
 layout: command
 version: 0.59.1
+usage: |
+  Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 ---
 
-Load a file into a cell, converting to table if possible (avoid by appending '--raw').
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

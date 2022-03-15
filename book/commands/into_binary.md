@@ -2,9 +2,13 @@
 title: into binary
 layout: command
 version: 0.59.1
+usage: |
+  Convert value to a binary primitive
 ---
 
-Convert value to a binary primitive
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -2,9 +2,13 @@
 title: mkdir
 layout: command
 version: 0.59.1
+usage: |
+  Make directories, creates intermediary directories as required.
 ---
 
-Make directories, creates intermediary directories as required.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

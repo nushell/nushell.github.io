@@ -2,9 +2,13 @@
 title: str screaming-snake-case
 layout: command
 version: 0.59.1
+usage: |
+  converts a string to SCREAMING_SNAKE_CASE
 ---
 
-converts a string to SCREAMING_SNAKE_CASE
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

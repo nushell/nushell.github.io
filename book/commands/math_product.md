@@ -2,9 +2,13 @@
 title: math product
 layout: command
 version: 0.59.1
+usage: |
+  Finds the product of a list of numbers or tables
 ---
 
-Finds the product of a list of numbers or tables
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
