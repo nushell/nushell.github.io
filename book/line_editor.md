@@ -417,8 +417,8 @@ The history menu can be configured by modifying these values from the config obj
 
 ```
 
-When the history menu is activated, `page_size` number of records is pulled from the history and presented
-in the menu. If there is space in the terminal, when you press again `Ctrl+x` the menu will pull the same
+When the history menu is activated, it pulls `page_size` records from the history and presents them
+in the menu. If there is space in the terminal, when you press `Ctrl+x` again the menu will pull the same
 number of records and append them to the current page. If it isn't possible to present all the pulled
 records, the menu will create a new page. The pages can be navigated by pressing `Ctrl+z` to go to
 previous page or `Ctrl+x` to go to next page.
