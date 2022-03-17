@@ -92,7 +92,7 @@ Note: this table assumes Nu 0.43 or later.
 | touch                  |                               |                                                      |                                            |                                                 |
 | trim                   | trim, triml, trimr            | trim, trimLeft, trimRight                            | strip                                      |                                                 |
 | uniq                   | set                           | Set.empty                                            | Data.Set                                   |                                                 |
-| update                 |                               |                                                      |                                            |                                                 |
+| upsert                 |                               |                                                      |                                            |                                                 |
 | version                |                               |                                                      |                                            |                                                 |
 | with_env               |                               |                                                      |                                            |                                                 |
 | what                   |                               |                                                      |                                            |                                                 |

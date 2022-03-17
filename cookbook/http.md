@@ -193,7 +193,7 @@ Output
 We can put this all together into a pipeline where we read data, manipulate it, and then send it back to the API. Lets `fetch` a post, `increment` the id, and `post` it back to the endpoint. In this particular example, the test endpoint gives back an arbitrary response which we can't actually mutate.
 
 ```shell
-> open urls.json | get urls | first | fetch $in | update id {|item| $item.id | inc} | to json | post https://jsonplaceholder.typicode.com/posts $in
+> open urls.json | get urls | first | fetch $in | upsert id {|item| $item.id | inc} | to json | post https://jsonplaceholder.typicode.com/posts $in
 ```
 
 ```

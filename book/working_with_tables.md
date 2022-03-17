@@ -237,7 +237,7 @@ In a similar way to the `insert` command, we can also use the `update` command t
 And now, let's update the edition to point at the next edition we hope to support:
 
 ```
-> open rustfmt.toml | update edition 2021
+> open rustfmt.toml | upsert edition 2021
 ─────────┬──────
  edition │ 2021 
 ─────────┴──────
