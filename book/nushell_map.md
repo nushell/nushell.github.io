@@ -90,7 +90,7 @@ Note: this table assumes Nu 0.43 or later.
 | touch                  |   -                           |   -                                                  | Set-Content                                | touch                                           |
 | trim                   | rtrim, ltrim                  | Trim, TrimStart, TrimEnd                             | Trim                                       |                                                 |
 | uniq                   | distinct                      | Distinct                                             | Get-Unique, gu                             | uniq                                            |
-| update                 | As                            |   -                                                  |                                            |                                                 |
+| upsert                 | As                            |   -                                                  |                                            |                                                 |
 | version                | select @@version              |   -                                                  | $PSVersionTable                            |                                                 |
 | with_env               |   -                           |   -                                                  | $env:FOO = 'bar'                           | export foo = "bar"                              |
 | where                  | where                         | Where                                                | Where-Object, where, "?" operator          |                                                 |

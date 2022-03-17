@@ -24,7 +24,7 @@ Make the edit to the version number and save it.
 _Note: running this command should work but it will reorder the toml file alphabetically by section._
 
 ```shell
-> open Cargo.toml | update package.version { |p| $p | get package.version | inc --patch } | save Cargo.toml
+> open Cargo.toml | upsert package.version { |p| $p | get package.version | inc --patch } | save Cargo.toml
 ```
 
 Output

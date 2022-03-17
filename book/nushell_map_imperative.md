@@ -91,7 +91,7 @@ Note: this table assumes Nu 0.43 or later.
 | touch                  | open(path, 'a').close()       |                                                      |                                            |                                                 |
 | trim                   | strip, rstrip, lstrip         | trim, trimStart, trimEnd                             | regex                                      | trim, trim_{start,end}, strip_{suffix,prefix}   |
 | uniq                   | set                           | Set                                                  | set                                        | HashSet                                         |
-| update                 |                               |                                                      |                                            |                                                 |
+| upsert                 |                               |                                                      |                                            |                                                 |
 | version                | sys.version, sys.version_info |                                                      |                                            |                                                 |
 | with-env               | os.environ                    |                                                      |                                            |                                                 |
 | where                  | filter                        | filter                                               | filter                                     | filter                                          |
