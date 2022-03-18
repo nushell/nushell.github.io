@@ -178,7 +178,7 @@ You can remove an environment variable only if it was set in the current scope:
 > hide FOO
 ```
 
-If you want to remove an environment variable stemming from a parent scope, you can [`hide`](commands/hide.html) it:
+If you want to remove an environment variable stemming from a parent scope, you can [`hide`](commands/hide.html) it (see [Modules](modules.md) for details about hiding):
 
 ```
 > let-env FOO = 'BAR'
