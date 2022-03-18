@@ -20,6 +20,63 @@ The last `raw` column shows the actual value that will be sent to external appli
 
 The environment is initially created from the Nu [configuration file](configuration.md) and from the environment that Nu is run inside of.
 
+## Setting environment variables
+
+There are several ways to set an environment variable:
+
+### [`let-env`](commands/let-env.html)
+
+Using the `let-env` command is the most straightforward method
+
+```
+> let-env FOO = 'BAR'
+```
+
+'let-env' is similar to the **export** command in bash.
+
+### [`load-env`](commands/load-env.html)
+
+If you have more than one environment variable you'd like to set, you can use `load-env` to create a table of name/value pairs and load multiple variables at the same time:
+
+```
+> load-env { "BOB": "FOO", "JAY": "BAR" }
+```
+
+### One-shot environment variables
+
+These are defined to be active only temporarily for a duration of executing a code block.
+See [Single-use environment variables](environment.md#single-use-environment-variables) for details.
+
+### Calling a command defined with [`def-env`](commands/def-env.md)
+
+See [Defining environment from custom commands](environment.md#defining-environment-from-custom-commands) for details.
+
+### Using module's exports
+
+See [Modules](modules.md) for details.
+
+## Scoping
+
+When you set and environment variable, it will be available only in the current scope (the block you're in and any block inside of it).
+
+Here is a small example to demonstrate the environment scoping:
+```
+> let-env FOO = "BAR"
+> do { 
+    let-env FOO = "BAZ"
+    $env.FOO == "BAZ"
+}
+true
+> $env.FOO == "BAR"
+true
+```
+
+## Changing directory
+
+Common task in a shell is to change directory with the [`cd`](commands/cd.html) command.
+In Nushell, calling `cd` is equivalent to setting the `PWD` environment variable.
+Therefore, it follows the same rules as other environment variables (for example, scoping).
+
 ## Single-use environment variables
 
 A common shorthand to set an environment variable once is available, inspired by Bash and others:
@@ -32,30 +89,11 @@ BAR
 You can also use [`with-env`](commands/with-env.html) to do the same thing more explicitly:
 
 ```
-> with-env [FOO BAR] { echo $env.FOO }
+> with-env { FOO: BAR } { echo $env.FOO }
 BAR
 ```
 
 The [`with-env`](commands/with-env.html) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR").  Once this is done, the [block](types_of_data.html#blocks) will run with this new environment variable set.
-
-
-## Scoped environment variables
-
-You can set environment variables that will be available only in the current scope (the block you're in and any block inside of it).
-
-To do so, use the [`let-env`](commands/let-env.html) command.
-
-```
-> let-env FOO = 'BAR'
-```
-
-let-env is similar to the **export** command in bash.
-
-If you have more than one environment variable you'd like to set, you can use [`load-env`](commands/load-env.html) to create a table of name/value pairs and load multiple variables at the same time:
-
-```
-> load-env { "BOB": "FOO", "JAY": "BAR" }
-```
 
 ## Permanent environment variables
 
