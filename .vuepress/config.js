@@ -73,6 +73,12 @@ module.exports = {
                 "installation",
                 "thinking_in_nushell",
                 "moving_around",
+              ]
+            },
+            {
+              title: "Nu Fundamentals",
+              collapsable: false,
+              children: [
                 "types_of_data",
                 "loading_data",
                 "working_with_strings",
@@ -104,6 +110,7 @@ module.exports = {
                 "stdout_stderr_exit_codes",
                 "escaping",
                 "3rdpartyprompts",
+                "shells_in_shells",
                 "line_editor",
                 "coloring_and_theming",
               ]
@@ -123,10 +130,9 @@ module.exports = {
               title: "Advanced",
               collapsable: false,
               children: [
-                "creating_errors",
                 "dataframes",
                 "metadata",
-                "shells_in_shells",
+                "creating_errors",
                 "parallelism",
                 "plugins",
               ]
