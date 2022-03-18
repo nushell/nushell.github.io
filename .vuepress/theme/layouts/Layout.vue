@@ -21,3 +21,9 @@ code {
   font-size: 16px;
 }
 </style>
+
+<style>
+img.hero {
+  border-radius: 10px;
+}
+</style>

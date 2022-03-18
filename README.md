@@ -14,19 +14,20 @@ features:
     details: Nu can't come with everything you might want to do with it, so you can extend it using a powerful plugin system.
 ---
 
-![Screenshot showing using the ls command](/frontpage/ls-example.png)
+<img src="/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
+
 
 ### Nu works with existing data
 
 Nu speaks [JSON, YAML, XML, Excel and more](/book/loading_data.html) out of the box. It's easy to bring data into a Nu pipeline whether it's in a file, a database, or a web API:
 
-![Screenshot showing fetch with a web API](/frontpage/fetch-example.png)
+<img src="/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
 ### Nu has great errors
 
 Nu operates on typed data, so it catches bugs that other shells don't. And when things break, Nu tells you exactly where and why:
 
-![Screenshot showing Nu catching a type error](/frontpage/miette-example.png)
+<img src="/frontpage/miette-example.png" alt="Screenshot showing Nu catching a type error" class="hero"/>
 
 ## Get Nu
 
