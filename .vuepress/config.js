@@ -59,7 +59,7 @@ module.exports = {
         editLinkText: "Edit this page on GitHub",
         nav: [
           { text: "Book", link: "/book/" },
-          { text: "Contributor Book", link: "/contributor-book/" },
+          // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -143,22 +143,22 @@ module.exports = {
               ],
             },
           ],
-          "/contributor-book/": [
-            {
-              title: "Contributor Book",
-              collapsable: false,
-              children: [
-                "",
-                "philosophy",
-                "values",
-                "commands",
-                "streams",
-                "metadata",
-                "plugins",
-                "shells",
-              ],
-            },
-          ],
+          // "/contributor-book/": [
+          //   {
+          //     title: "Contributor Book",
+          //     collapsable: false,
+          //     children: [
+          //       "",
+          //       "philosophy",
+          //       "values",
+          //       "commands",
+          //       "streams",
+          //       "metadata",
+          //       "plugins",
+          //       "shells",
+          //     ],
+          //   },
+          // ],
           "/cookbook/": [
             {
               title: "Cookbook",
@@ -186,7 +186,7 @@ module.exports = {
         editLinkText: "Diese Seite auf GitHub bearbeiten",
         nav: [
           { text: "Buch", link: "/de/book/" },
-          { text: "Contributor Book", link: "/contributor-book/" },
+          // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -219,7 +219,7 @@ module.exports = {
         editLinkText: "Edita esta página en GitHub",
         nav: [
           { text: "Libro", link: "/es/book/" },
-          { text: "Libro Colaborador", link: "/es/contributor-book/" },
+          // { text: "Libro Colaborador", link: "/es/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -253,19 +253,19 @@ module.exports = {
               ],
             },
           ],
-          "/es/contributor-book/": [
-            {
-              title: "Contributor Book",
-              collapsable: false,
-              children: [
-                "introduccion",
-                "filosofia",
-                "valores",
-                "comandos",
-                "metadatos",
-              ],
-            },
-          ],
+          // "/es/contributor-book/": [
+          //   {
+          //     title: "Contributor Book",
+          //     collapsable: false,
+          //     children: [
+          //       "introduccion",
+          //       "filosofia",
+          //       "valores",
+          //       "comandos",
+          //       "metadatos",
+          //     ],
+          //   },
+          // ],
         },
       },
       "/ja/": {
@@ -274,7 +274,7 @@ module.exports = {
         editLinkText: "GitHubでこのページを編集する",
         nav: [
           { text: "本", link: "/ja/book/" },
-          { text: "Contributor Book", link: "/contributor-book/" },
+          // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -308,7 +308,7 @@ module.exports = {
         editLinkText: "Edite esta página no GitHub",
         nav: [
           { text: "Livro", link: "/pt-BR/book/" },
-          { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
+          // { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -333,22 +333,22 @@ module.exports = {
               ],
             },
           ],
-          "/pt-BR/contributor-book/": [
-            {
-              title: "Contributor Book",
-              collapsable: false,
-              children: [
-                "introdução",
-                "filosofia",
-                "valores",
-                "comandos",
-                "streams",
-                "metadados",
-                "plugins",
-                "shells",
-              ],
-            },
-          ],
+          // "/pt-BR/contributor-book/": [
+          //   {
+          //     title: "Contributor Book",
+          //     collapsable: false,
+          //     children: [
+          //       "introdução",
+          //       "filosofia",
+          //       "valores",
+          //       "comandos",
+          //       "streams",
+          //       "metadados",
+          //       "plugins",
+          //       "shells",
+          //     ],
+          //   },
+          // ],
         },
       },
       "/zh-cn/": {
@@ -357,7 +357,7 @@ module.exports = {
         editLinkText: "在GitHub上编辑此页面",
         nav: [
           { text: "书", link: "/zh-CN/book/" },
-          { text: "Contributor Book", link: "/contributor-book/" },
+          // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
