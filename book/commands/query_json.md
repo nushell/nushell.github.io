@@ -2,9 +2,13 @@
 title: query json
 layout: command
 version: 0.59.1
+usage: |
+  execute json query on json file (open --raw <file> | query json 'query string')
 ---
 
-execute json query on json file (open --raw <file> | query json 'query string')
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

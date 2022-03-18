@@ -1,10 +1,14 @@
 ---
 title: inc
 layout: command
-version: 0.59.0
+version: 0.59.1
+usage: |
+  Increment a value or version. Optionally use the column of a table.
 ---
 
-Increment a value or version. Optionally use the column of a table.
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
