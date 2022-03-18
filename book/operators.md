@@ -1,6 +1,6 @@
 # Operators
 
-Nushell supports the following operators:
+Nushell supports the following operators for common math, logic, and string operations:
 
 | Operator | Description                     |
 | -------- | ------------------------------- |
@@ -25,11 +25,18 @@ Nushell supports the following operators:
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
 
-Commands that take a boolean expression, such as
-`where`, `keep while`, `keep until`, `skip while`, and `skip until`,
-are automatically evaluated in shorthand math mode.
+## Order of operations
 
-For example, `let a = 2; let b = 3; $a * $b` outputs `6`.
+Math operations are evaluated in the follow order (from highest precedence to lowest):
+
+* Parentheses (`()`)
+* Multiply (`*`) and Divide (`/`) and Power (`**`)
+* Add (`+`) and Subtract (`-`)
+
+```
+> 3 * (1 + 2)
+9
+```
 
 ## Case Sensitivity
 

@@ -97,7 +97,6 @@ module.exports = {
                 "operators",
                 "variables_and_subexpressions",
                 "scripts",
-                "math",
                 "modules",
               ]
             },
