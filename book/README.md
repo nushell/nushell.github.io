@@ -73,6 +73,8 @@ Let's see how strings work outside of Nu in action. We'll take our example from 
 
 If this looks very similar to what we had before, you have a keen eye! It is similar, but with one important difference: we've called `^echo` with the value we saw earlier. This allows us to pass data out of Nu into `echo` (or any command outside of Nu, like `git` for example).
 
-*Note: help text for any of Nu's builtin commands can be discovered with the `help` command*:
+### Getting Help
+
+Help text for any of Nu's builtin commands can be discovered with the [`help`](commands/help.md) command. To see all commands, run `help commands`.
 
 <<< @/snippets/introduction/help_example.sh

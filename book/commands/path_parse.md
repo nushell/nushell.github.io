@@ -28,7 +28,7 @@ Parse a path
 
 Replace a complex extension
 ```shell
-> '/home/viking/spam.tar.gz' | path parse -e tar.gz | update extension { 'txt' }
+> '/home/viking/spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
 ```
 
 Ignore the extension

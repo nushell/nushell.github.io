@@ -6,54 +6,49 @@ tagline: A new type of shell.
 actionText: Get Started →
 actionLink: /book/
 features:
-  - title: Powerful pipelines to control your system
-    details: Pipelines allow you to work with your system like never before. You are in control of the system, ready for your next command.
-  - title: Everything is data.
-    details: Rather than having the need to remember all the parameters to all the commands, we can just use the same, regardless of where it came from.
-  - title: Powerful Plugins
-    details: Nu can't come with everything you might want to do with it, so you can extend using its powerful plugin system.
+  - title: Pipelines to control any OS
+    details: Nu works on Linux, macOS, and Windows. Learn it once, use it anywhere.
+  - title: Everything is data
+    details: Nu pipelines use structured data so you can safely select, filter, and sort the same way every time. Stop parsing strings and start solving problems.
+  - title: Powerful plugins
+    details: Nu can't come with everything you might want to do with it, so you can extend it using a powerful plugin system.
 ---
-### Quick Install
 
-#### Install Latest Version
+<img src="/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
 
-Install the latest version from the [releases page](https://github.com/nushell/nushell/releases)
 
-From source on [crates.io](https://crates.io):
+### Nu works with existing data
 
-```sh
-$ cargo install nu
-```
+Nu speaks [JSON, YAML, XML, Excel and more](/book/loading_data.html) out of the box. It's easy to bring data into a Nu pipeline whether it's in a file, a database, or a web API:
 
-#### Install via Package Manager
+<img src="/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
-With [Homebrew](https://brew.sh/):
+### Nu has great errors
+
+Nu operates on typed data, so it catches bugs that other shells don't. And when things break, Nu tells you exactly where and why:
+
+<img src="/frontpage/miette-example.png" alt="Screenshot showing Nu catching a type error" class="hero"/>
+
+## Get Nu
+
+Nushell is available [as downloadable binaries](https://github.com/nushell/nushell/releases), [via your favourite package manager](https://repology.org/project/nushell/versions), and as [source code](https://github.com/nushell/nushell). Read [the detailed installation instructions](/book/installation.html) or dive right in:
+
+#### macOS / Linux:
 
 ```sh
 $ brew install nushell
 ```
 
-With [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/):
+#### Windows:
 
 ```powershell
 $ winget install nushell
 ```
 
-With [Chocolatey](https://chocolatey.org/):
+Windows users may also need to install the latest [Microsoft Visual C++ Redistributable](https://docs.microsoft.com/cpp/windows/latest-supported-vc-redist).
 
-```powershell
-$ choco install nushell
-```
+## Community
 
-For Windows users, you may also need to install the [Microsoft Visual C++ 2015 Redistributables](https://www.microsoft.com/en-us/download/details.aspx?id=52685).
+Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!
 
-#### Start the shell
-
-```
-$ nu
-```
-
-
-*You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls)*
-
-If you have any questions you can [join our community on discord](https://discord.gg/NtAbbGn)
+You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls). 

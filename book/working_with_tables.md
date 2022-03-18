@@ -183,7 +183,7 @@ We can concatenate tables with identical column names using [`echo`](commands/ec
 
 ### Adding a new column
 
-We can use the `insert` command to add a new column to the table. Let's look at an example:
+We can use the [`insert`](commands/insert.md) command to add a new column to the table. Let's look at an example:
 
 ```
 > open rustfmt.toml
@@ -212,7 +212,7 @@ Notice that we if open the original file, the contents have stayed the same:
 ```
 
 Changes in Nu are functional changes, meaning that they work on the values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our 
-pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the `save` command:
+pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](commands/save.md) command:
 
 ```
 > open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
@@ -225,7 +225,7 @@ pipeline until we're ready to write out the result with any changes we'd like if
 
 ### Updating a column
 
-In a similar way to the `insert` command, we can also use the `update` command to change the contents of a column to a new value. To see it in action let's open the same file:
+In a similar way to the [`insert`](commands/insert.md) command, we can also use the [`update`](commands/update.md) command to change the contents of a column to a new value. To see it in action let's open the same file:
 
 ```
 > open rustfmt.toml
@@ -242,6 +242,8 @@ And now, let's update the edition to point at the next edition we hope to suppor
  edition │ 2021 
 ─────────┴──────
 ```
+
+You can also use the [`upsert`](commands/upsert.md) command to insert or update depending on whether the column already exists.
 
 ### Incrementing values
 

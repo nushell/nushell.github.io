@@ -19,7 +19,7 @@ let $config = {
 You can also shadow `$config` and update it:
 
 ```
-let $config = ($config | update <field name> <field value>)
+let $config = ($config | upsert <field name> <field value>)
 ```
 
 ### Environment
