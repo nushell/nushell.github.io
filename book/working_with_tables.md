@@ -245,32 +245,36 @@ And now, let's update the edition to point at the next edition we hope to suppor
 
 You can also use the [`upsert`](commands/upsert.md) command to insert or update depending on whether the column already exists.
 
-### Incrementing values
+### Moving columns
 
-There's one more command that Nu supports that will help us work with numbers and versions: [`inc`](commands/inc.md). 
-
-```
-> open rustfmt.toml
-─────────┬──────
- edition │ 2018 
-─────────┴──────
-> open rustfmt.toml | inc edition
-─────────┬──────
- edition │ 2019 
-─────────┴──────
-```
-
-Because the value in "edition" is a number, we can use [`inc`](commands/inc.md) to update it.  Where [`inc`](commands/inc.md) really shines is working with versions:
+You can use `move` to move columns in the table. For example, if we wanted to move the "name" column from `ls` after the "size" column, we could do:
 
 ```
-> open Cargo.toml | get package.version
-0.1.3
-> open Cargo.toml | inc package.version --minor | get package.version
-0.2.0
+> ls | move name --after size
+╭────┬──────┬─────────┬───────────────────┬──────────────╮
+│ #  │ type │  size   │       name        │   modified   │
+├────┼──────┼─────────┼───────────────────┼──────────────┤
+│  0 │ dir  │   256 B │ Applications      │ 3 days ago   │
+│  1 │ dir  │   256 B │ Data              │ 2 weeks ago  │
+│  2 │ dir  │   448 B │ Desktop           │ 2 hours ago  │
+│  3 │ dir  │   192 B │ Disks             │ a week ago   │
+│  4 │ dir  │   416 B │ Documents         │ 4 days ago   │
+...
 ```
 
-When working with versions, we can use the flag to say how to increment the version:
+### Renaming columns
 
-* **--major** - increment the major version (0.1.3 -> 1.0.0)
-* **--minor** - increment the minor version (0.1.3 -> 0.2.0)
-* **--patch** - increment the patch version (0.1.3 -> 0.1.4)
+You can also `rename` columns in a table by passing it through the rename command. If we wanted to run `ls` and rename the columns, we can use this example:
+
+```
+> ls | rename filename filetype filesize date
+╭────┬───────────────────┬──────────┬──────────┬──────────────╮
+│ #  │     filename      │ filetype │ filesize │     date     │
+├────┼───────────────────┼──────────┼──────────┼──────────────┤
+│  0 │ Applications      │ dir      │    256 B │ 3 days ago   │
+│  1 │ Data              │ dir      │    256 B │ 2 weeks ago  │
+│  2 │ Desktop           │ dir      │    448 B │ 2 hours ago  │
+│  3 │ Disks             │ dir      │    192 B │ a week ago   │
+│  4 │ Documents         │ dir      │    416 B │ 4 days ago   │
+...
+```
