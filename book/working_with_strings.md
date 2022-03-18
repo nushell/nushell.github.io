@@ -60,3 +60,23 @@ greetings, Alice
 By wrapping expressions in `()`, we can run them to completion and use the results to help build the string.
 
 String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" "`, form. These correspond to the single-quoted and double-quoted strings: single-quoted string interpolation doesn't support escape characters while double-quoted string interpolation does. 
+
+## Splitting strings
+
+The [`split row`](commands/split_row.md) command creates a list from a string based on a delimiter.
+For example, `let colors = ("red,green,blue" | split row ",")` creates the list `[red green blue]`.
+
+The [`split column`](commands/split_column.md) command will create a table from a string based on a delimiter. For example `let colors = ("red,green,blue" | split column ",")` creates a table, giving only column to each element.
+
+Finally, the [`split chars`](commands/split_chars.md) command will split a string into a list of characters.
+
+## The `str` command
+
+Many string functions are subcommands of the `str` command. You can get a full list using `help str`.
+
+For example, you can look if a string contains a particular character using `str contains`:
+
+```
+> "hello world" | str contains "w"
+true
+```
