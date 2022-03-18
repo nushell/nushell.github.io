@@ -97,8 +97,9 @@ The [`with-env`](commands/with-env.html) command will temporarily set the enviro
 
 ## Permanent environment variables
 
-You can also set environment variables at startup so they are available for the duration of Nushell running. To do this, call [`let-env`](commands/let-env.html) or [`load-env`](commands/load-env.html) in [the Nu configuration file](configuration.md).
-
+You can also set environment variables at startup so they are available for the duration of Nushell running.
+To do this, set an environment variable inside [the Nu configuration file](configuration.md).
+For example:
 ```
 # In config.nu
 let-env FOO = 'BAR'
