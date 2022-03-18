@@ -1,4 +1,4 @@
-# Strings
+# Working with strings
 
 Strings in Nushell help to hold text data for later use. This can include file names, file paths, names of columns,
 and much more. Strings are so common that Nushell offers a couple ways to work with them, letting you pick what best

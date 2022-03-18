@@ -1,4 +1,4 @@
-# Thinking in Nushell
+# Thinking in Nu
 
 To help you understand - and get the most out of - Nushell, we've put together this section on "thinking in Nushell". By learning to think in Nushell and use the patterns it provides, you'll hit fewer issues getting started and be better setup for success.
 

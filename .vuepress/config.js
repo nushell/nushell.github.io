@@ -66,7 +66,7 @@ module.exports = {
         sidebar: {
           "/book/": [
             {
-              title: "Nu Book (0.59+)",
+              title: "Getting Started",
               collapsable: false,
               children: [
                 "",
@@ -75,38 +75,62 @@ module.exports = {
                 "moving_around",
                 "types_of_data",
                 "loading_data",
-                "strings",
+                "working_with_strings",
                 "working_with_lists",
                 "working_with_tables",
                 "pipeline",
-                "configuration",
-                "3rdpartyprompts",
+                "command_reference",
+              ],
+            },
+            {
+              title: "Programming in Nu",
+              collapsable: false,
+              children: [
                 "custom_commands",
                 "aliases",
                 "operators",
-                "math",
                 "variables_and_subexpressions",
+                "scripts",
+                "math",
+                "modules",
+              ]
+            },
+            {
+              title: "Nu as a shell",
+              collapsable: false,
+              children: [
+                "configuration",
                 "environment",
                 "stdout_stderr_exit_codes",
-                "modules",
-                "scripts",
-                "metadata",
-                "creating_errors",
-                "shells_in_shells",
                 "escaping",
-                "plugins",
-                "parallelism",
+                "3rdpartyprompts",
                 "line_editor",
-                "dataframes",
                 "coloring_and_theming",
+              ]
+            },
+            {
+              title: "Coming to Nu",
+              collapsable: false,
+              children: [
                 "coming_from_bash",
                 "nushell_map",
                 "nushell_map_imperative",
                 "nushell_map_functional",
                 "nushell_operator_map",
-                "command_reference",
-              ],
+              ]
             },
+            {
+              title: "Advanced",
+              collapsable: false,
+              children: [
+                "creating_errors",
+                "dataframes",
+                "metadata",
+                "shells_in_shells",
+                "parallelism",
+                "plugins",
+              ]
+            }
           ],
           "/old_book/": [
             {
