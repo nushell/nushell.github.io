@@ -3,7 +3,7 @@ title: insert
 layout: command
 version: 0.59.1
 usage: |
-  Deprecated command
+  Insert a new column.
 ---
 
 # `{{ $frontmatter.title }}`
@@ -12,4 +12,16 @@ usage: |
 
 ## Signature
 
-```> insert ```
+```> insert (field) (new value)```
+
+## Parameters
+
+ -  `field`: the name of the column to insert
+ -  `new value`: the new value to give the cell(s)
+
+## Examples
+
+Insert a new value
+```shell
+> echo {'name': 'nu', 'stars': 5} | insert alias 'Nushell'
+```
