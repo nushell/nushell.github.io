@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Command</th>
-    <th>Beschreibung</th>
+    <th>Description</th>
   </tr>
   <tr v-for="command in $site.pages.filter(p => p.path.indexOf('/book/commands/') >= 0)">
    <td><a :href="command.path"><code>{{ command.title }}</code></a></td>
