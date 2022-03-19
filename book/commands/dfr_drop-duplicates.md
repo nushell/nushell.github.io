@@ -12,12 +12,13 @@ usage: |
 
 ## Signature
 
-```> dfr drop-duplicates (subset) --maintain```
+```> dfr drop-duplicates (subset) --maintain --last```
 
 ## Parameters
 
  -  `subset`: subset of columns to drop duplicates
  -  `--maintain`: maintain order
+ -  `--last`: keeps last duplicate value (by default keeps first)
 
 ## Examples
 

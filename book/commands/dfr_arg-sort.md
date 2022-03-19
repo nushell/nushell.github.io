@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr arg-sort --reverse```
+```> dfr arg-sort --reverse --nulls-last```
 
 ## Parameters
 
  -  `--reverse`: reverse order
+ -  `--nulls-last`: nulls ordered last
 
 ## Examples
 
