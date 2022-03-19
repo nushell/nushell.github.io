@@ -59,54 +59,83 @@ module.exports = {
         editLinkText: "Edit this page on GitHub",
         nav: [
           { text: "Book", link: "/book/" },
-          { text: "Contributor Book", link: "/contributor-book/" },
+          // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
         sidebar: {
           "/book/": [
             {
-              title: "Nu Book (0.59+)",
+              title: "Getting Started",
               collapsable: false,
               children: [
                 "",
                 "installation",
                 "thinking_in_nushell",
                 "moving_around",
+              ]
+            },
+            {
+              title: "Nu Fundamentals",
+              collapsable: false,
+              children: [
                 "types_of_data",
                 "loading_data",
-                "strings",
+                "working_with_strings",
                 "working_with_lists",
                 "working_with_tables",
                 "pipeline",
-                "configuration",
-                "3rdpartyprompts",
+                "command_reference",
+              ],
+            },
+            {
+              title: "Programming in Nu",
+              collapsable: false,
+              children: [
                 "custom_commands",
                 "aliases",
                 "operators",
-                "math",
                 "variables_and_subexpressions",
+                "scripts",
+                "modules",
+              ]
+            },
+            {
+              title: "Nu as a shell",
+              collapsable: false,
+              children: [
+                "configuration",
                 "environment",
                 "stdout_stderr_exit_codes",
-                "modules",
-                "scripts",
-                "metadata",
-                "creating_errors",
-                "shells_in_shells",
                 "escaping",
-                "plugins",
-                "parallelism",
+                "3rdpartyprompts",
+                "shells_in_shells",
                 "line_editor",
-                "dataframes",
                 "coloring_and_theming",
+              ]
+            },
+            {
+              title: "Coming to Nu",
+              collapsable: false,
+              children: [
                 "coming_from_bash",
                 "nushell_map",
                 "nushell_map_imperative",
                 "nushell_map_functional",
                 "nushell_operator_map",
-                "command_reference",
-              ],
+              ]
             },
+            {
+              title: "Advanced",
+              collapsable: false,
+              children: [
+                "dataframes",
+                "metadata",
+                "creating_errors",
+                "parallelism",
+                "plugins",
+              ]
+            }
           ],
           "/old_book/": [
             {
@@ -143,22 +172,22 @@ module.exports = {
               ],
             },
           ],
-          "/contributor-book/": [
-            {
-              title: "Contributor Book",
-              collapsable: false,
-              children: [
-                "",
-                "philosophy",
-                "values",
-                "commands",
-                "streams",
-                "metadata",
-                "plugins",
-                "shells",
-              ],
-            },
-          ],
+          // "/contributor-book/": [
+          //   {
+          //     title: "Contributor Book",
+          //     collapsable: false,
+          //     children: [
+          //       "",
+          //       "philosophy",
+          //       "values",
+          //       "commands",
+          //       "streams",
+          //       "metadata",
+          //       "plugins",
+          //       "shells",
+          //     ],
+          //   },
+          // ],
           "/cookbook/": [
             {
               title: "Cookbook",
@@ -186,7 +215,7 @@ module.exports = {
         editLinkText: "Diese Seite auf GitHub bearbeiten",
         nav: [
           { text: "Buch", link: "/de/book/" },
-          { text: "Contributor Book", link: "/contributor-book/" },
+          // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -219,7 +248,7 @@ module.exports = {
         editLinkText: "Edita esta página en GitHub",
         nav: [
           { text: "Libro", link: "/es/book/" },
-          { text: "Libro Colaborador", link: "/es/contributor-book/" },
+          // { text: "Libro Colaborador", link: "/es/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -253,19 +282,19 @@ module.exports = {
               ],
             },
           ],
-          "/es/contributor-book/": [
-            {
-              title: "Contributor Book",
-              collapsable: false,
-              children: [
-                "introduccion",
-                "filosofia",
-                "valores",
-                "comandos",
-                "metadatos",
-              ],
-            },
-          ],
+          // "/es/contributor-book/": [
+          //   {
+          //     title: "Contributor Book",
+          //     collapsable: false,
+          //     children: [
+          //       "introduccion",
+          //       "filosofia",
+          //       "valores",
+          //       "comandos",
+          //       "metadatos",
+          //     ],
+          //   },
+          // ],
         },
       },
       "/ja/": {
@@ -274,7 +303,7 @@ module.exports = {
         editLinkText: "GitHubでこのページを編集する",
         nav: [
           { text: "本", link: "/ja/book/" },
-          { text: "Contributor Book", link: "/contributor-book/" },
+          // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -308,7 +337,7 @@ module.exports = {
         editLinkText: "Edite esta página no GitHub",
         nav: [
           { text: "Livro", link: "/pt-BR/book/" },
-          { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
+          // { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],
@@ -333,22 +362,22 @@ module.exports = {
               ],
             },
           ],
-          "/pt-BR/contributor-book/": [
-            {
-              title: "Contributor Book",
-              collapsable: false,
-              children: [
-                "introdução",
-                "filosofia",
-                "valores",
-                "comandos",
-                "streams",
-                "metadados",
-                "plugins",
-                "shells",
-              ],
-            },
-          ],
+          // "/pt-BR/contributor-book/": [
+          //   {
+          //     title: "Contributor Book",
+          //     collapsable: false,
+          //     children: [
+          //       "introdução",
+          //       "filosofia",
+          //       "valores",
+          //       "comandos",
+          //       "streams",
+          //       "metadados",
+          //       "plugins",
+          //       "shells",
+          //     ],
+          //   },
+          // ],
         },
       },
       "/zh-cn/": {
@@ -357,7 +386,7 @@ module.exports = {
         editLinkText: "在GitHub上编辑此页面",
         nav: [
           { text: "书", link: "/zh-CN/book/" },
-          { text: "Contributor Book", link: "/contributor-book/" },
+          // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },
         ],

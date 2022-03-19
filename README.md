@@ -7,11 +7,11 @@ actionText: Get Started →
 actionLink: /book/
 features:
   - title: Pipelines to control any OS
-    details: Nu works on Linux, macOS, and Windows. Learn it once, use it anywhere.
+    details: Nu works on Linux, macOS, and Windows. Learn it once, then use it anywhere.
   - title: Everything is data
     details: Nu pipelines use structured data so you can safely select, filter, and sort the same way every time. Stop parsing strings and start solving problems.
   - title: Powerful plugins
-    details: Nu can't come with everything you might want to do with it, so you can extend it using a powerful plugin system.
+    details: It's easy to extend Nu using a powerful plugin system.
 ---
 
 <img src="/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
@@ -23,7 +23,7 @@ Nu speaks [JSON, YAML, XML, Excel and more](/book/loading_data.html) out of the 
 
 <img src="/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
-### Nu has great errors
+### Nu has great error messages
 
 Nu operates on typed data, so it catches bugs that other shells don't. And when things break, Nu tells you exactly where and why:
 

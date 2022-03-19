@@ -47,9 +47,9 @@ Nushell supports string interpolation, allowing you to run sub-expressions insid
 ```
 > ls | each { |it| echo $"($it.name) is ($it.size)" }
 ───┬─────────────────────
- 0 │ genawait is 4.1 KB  
- 1 │ learncpp is 4.1 KB  
- 2 │ nuscripts is 4.1 KB 
+ 0 │ genawait is 4.1 KB
+ 1 │ learncpp is 4.1 KB
+ 2 │ nuscripts is 4.1 KB
 ───┴─────────────────────
 ```
 
@@ -93,7 +93,7 @@ In addition to `*`, there is also the `?` pattern which will match a single char
 
 Booleans are the state of being true or false. Rather than writing the value directly, it is often a result of a comparison.
 
-The two values of booleans are `$true` and `$false`.
+The two values of booleans are `true` and `false`.
 
 ## Dates
 
@@ -201,9 +201,9 @@ Example: a list of strings
 ```
 > echo [sam fred george]
 ───┬────────
- 0 │ sam 
- 1 │ fred 
- 2 │ george 
+ 0 │ sam
+ 1 │ fred
+ 2 │ george
 ───┴────────
 ```
 
@@ -216,9 +216,9 @@ We can create our own tables similarly to how we create a list. Because tables a
 ```
 > echo [[Column1, Column2]; [Value1, Value2]]
 ───┬─────────┬─────────
- # │ Column1 │ Column2 
+ # │ Column1 │ Column2
 ───┼─────────┼─────────
- 0 │ Value1  │ Value2  
+ 0 │ Value1  │ Value2
 ───┴─────────┴─────────
 ```
 
@@ -227,17 +227,17 @@ We can also create a table with multiple rows of data:
 ```
 > echo [[Column1, Column2]; [Value1, Value2] [Value3, Value4]]
 ───┬─────────┬─────────
- # │ Column1 │ Column2 
+ # │ Column1 │ Column2
 ───┼─────────┼─────────
- 0 │ Value1  │ Value2  
- 1 │ Value3  │ Value4  
+ 0 │ Value1  │ Value2
+ 1 │ Value3  │ Value4
 ───┴─────────┴─────────
 ```
 
 You can also create a table as a list of records:
 
 ```
-> echo [{name: sam, rank: 10}, {name: bob, rank: 7}] 
+> echo [{name: sam, rank: 10}, {name: bob, rank: 7}]
 ╭───┬──────┬──────╮
 │ # │ name │ rank │
 ├───┼──────┼──────┤

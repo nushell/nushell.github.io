@@ -720,7 +720,7 @@ Now we have a new dataframe with only the values where the mask was true.
 The masks can also be created from Nushell lists, for example:
 
 ```shell
-> let mask1 = ([$true $true $false] | dfr to-df mask)
+> let mask1 = ([true true false] | dfr to-df mask)
 > $new_df | dfr filter-with $mask1
 
 ───┬───┬───┬─────────┬────────
