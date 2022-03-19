@@ -93,7 +93,7 @@ In addition to `*`, there is also the `?` pattern which will match a single char
 
 Booleans are the state of being true or false. Rather than writing the value directly, it is often a result of a comparison.
 
-The two values of booleans are `$true` and `$false` (also `true` or `false`).
+The two values of booleans are `true` and `false`.
 
 ## Dates
 
