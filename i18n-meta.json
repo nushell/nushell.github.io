@@ -108,7 +108,7 @@
     "pt-BR": "-"
   },
   {
-    "name": "loading_data.md",
+    "name": "line_editor.md",
     "en": "In progress",
     "de": "-",
     "zh-cn": "-",
@@ -117,7 +117,7 @@
     "pt-BR": "-"
   },
   {
-    "name": "math.md",
+    "name": "loading_data.md",
     "en": "In progress",
     "de": "-",
     "zh-cn": "-",
@@ -261,7 +261,7 @@
     "pt-BR": "-"
   },
   {
-    "name": "strings.md",
+    "name": "table_of_contents.md",
     "en": "In progress",
     "de": "-",
     "zh-cn": "-",
@@ -270,7 +270,7 @@
     "pt-BR": "-"
   },
   {
-    "name": "table_of_contents.md",
+    "name": "thinking_in_nushell.md",
     "en": "In progress",
     "de": "-",
     "zh-cn": "-",
@@ -298,6 +298,15 @@
   },
   {
     "name": "working_with_lists.md",
+    "en": "In progress",
+    "de": "-",
+    "zh-cn": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "working_with_strings.md",
     "en": "In progress",
     "de": "-",
     "zh-cn": "-",

@@ -11,15 +11,15 @@ def update-i18n-status [] {
     print "The following table holds the overview of the Nushell docs’ writing and translation status. Welcome to participate in the translation of the docs. And please update the `i18n-meta.json` file after you have finished writing or translating the doc. Thanks"
     print $'(char nl)---(char nl)'
 
-    ls -s book
+    ls -s book/*.md
         | where type == file && name != README.md
         | select name
-        | update en {|it| get-cell $it.name en }
-        | update de {|it| get-cell $it.name de }
-        | update zh-cn {|it| get-cell $it.name zh-cn }
-        | update ja {|it| get-cell $it.name ja }
-        | update es {|it| get-cell $it.name es }
-        | update pt-BR {|it| get-cell $it.name pt-BR }
+        | upsert en {|it| get-cell $it.name en }
+        | upsert de {|it| get-cell $it.name de }
+        | upsert zh-cn {|it| get-cell $it.name zh-cn }
+        | upsert ja {|it| get-cell $it.name ja }
+        | upsert es {|it| get-cell $it.name es }
+        | upsert pt-BR {|it| get-cell $it.name pt-BR }
         | to md --pretty
 
     print $'(char nl)Possible status values: `-`,`Completed`,`In Progress`,`Being translated by @ABC`(char nl)'
@@ -43,15 +43,15 @@ def get-cell [
 
 # Generate or update meta data for docs' translation status
 def gen-i18n-meta [] {
-    ls -s book
+    ls -s book/*.md
         | where type == file && name != README.md
         | select name
-        | update en {|it| get-cell $it.name en }
-        | update de {|it| get-cell $it.name de }
-        | update zh-cn {|it| get-cell $it.name zh-cn }
-        | update ja {|it| get-cell $it.name ja }
-        | update es {|it| get-cell $it.name es }
-        | update pt-BR {|it| get-cell $it.name pt-BR }
+        | upsert en {|it| get-cell $it.name en }
+        | upsert de {|it| get-cell $it.name de }
+        | upsert zh-cn {|it| get-cell $it.name zh-cn }
+        | upsert ja {|it| get-cell $it.name ja }
+        | upsert es {|it| get-cell $it.name es }
+        | upsert pt-BR {|it| get-cell $it.name pt-BR }
         | to json -i 2
         | save -r i18n-meta.json
 }
