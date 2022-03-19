@@ -32,7 +32,7 @@ In Nushell, we use the `>` as the greater-than operator. This fits better with t
 
 An important part of Nushell's design and specifically where it differs from many dynamic languages is that "parse time" and "evaluation time" are separate and do not mix. These terms come from programming language design and compiler theory where parsing is where you take the text and convert it to an abstract representation, and evaluation is where you take the abstract representation and run it.
 
-For example, the following doesn't make sense in Nushell:
+For example, trying to execute the next script doesn't make sense in Nushell:
 
 ```
 echo "def abc [] { 1 + 2 }" | save output.nu
@@ -52,7 +52,7 @@ Another common issue is trying to dynamically create the filename to source from
 
 This would require the evaluator to run and evaluate the string before the parser was able to look inside the file to find definitions. Again, this mixes parsing and evaluation, no longer keeping them separate.
 
-**Thinking in Nushell:** Nushell is designed to use a single parsing phase separate from evaluation. This will allow for strong IDE support, accurate error messages, and an easier language for third-party tools to work with. 
+**Thinking in Nushell:** Nushell is designed to use a single parsing phase separate from evaluation. This will allow for strong IDE support, accurate error messages, and an easier language for third-party tools to work with.
 
 ## Variables are immutable
 
@@ -77,8 +77,8 @@ Loop counters are another common pattern for mutable variables and are built int
 You can also use the [`reduce`](commands/reduce.md) command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:
 
 ```
-> [one, two, three, four, five, six] | reduce {|curr, max| 
-    if ($curr | str length) > ($max | str length) { 
+> [one, two, three, four, five, six] | reduce {|curr, max|
+    if ($curr | str length) > ($max | str length) {
         $curr
     } else {
         $max
