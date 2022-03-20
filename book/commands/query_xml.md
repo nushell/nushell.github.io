@@ -2,9 +2,13 @@
 title: query xml
 layout: command
 version: 0.59.1
+usage: |
+  execute xpath query on xml
 ---
 
-execute xpath query on xml
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
