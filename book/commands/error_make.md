@@ -27,3 +27,10 @@ Create a custom error for a custom command
       error make {msg: "this is fishy", label: {text: "fish right here", start: $span.start, end: $span.end } }
     }
 ```
+
+Create a simple custom error for a custom command
+```shell
+> def foo [x] {
+      error make {msg: "this is fishy"}
+    }
+```
