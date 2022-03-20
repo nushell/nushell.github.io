@@ -52,22 +52,20 @@ When this script is run, Nushell will first run the `a` command to completion an
 
 ## Parameterizing Scripts
 
-You can pass arguments to scripts by passing them following the name of the script name.
+Script files can optionally contain a special `main` command. `main` will be run after any other Nu code, and is primarily used to add parameters to scripts. You can pass arguments to scripts after the script name (`nu <script name> <script args>`).
 
-```
-> nu <script name> <script args>
-```
-
-This will call the `main` command in your script.
+For example:
 
 ```
 # myscript.nu
 
-def main[x: int] {
+def main [x: int] {
   $x + 10
 }
 ```
+
 ```
 > nu myscript.nu 100
+110
 ```
 
