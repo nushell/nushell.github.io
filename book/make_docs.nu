@@ -1,5 +1,11 @@
 let vers = (version).version
 
+let book_exists = ('book' | path exists)
+if $book_exists == false {
+    $'(ansi r)This script should be ran from the root directory of docs, aka the parent directory of `book`...(ansi reset)'
+    exit --now
+}
+
 for command in ($nu.scope.commands | where is_custom == false && is_extern == false) {
     # this is going in the frontmatter as a multiline YAML string, so indentation matters
     let indented_usage = ($command.usage | lines | each {|it| $"  ($it)"} | str collect (char nl))
