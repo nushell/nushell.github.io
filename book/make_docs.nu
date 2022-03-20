@@ -2,7 +2,9 @@ let vers = (version).version
 
 let book_exists = ('book' | path exists)
 if $book_exists == false {
-    $'(ansi r)This script should be ran from the root directory of docs, aka the parent directory of `book`...(ansi reset)'
+    print (error make {
+        msg: "please run this script from the root of the website repo",
+    })
     exit --now
 }
 
