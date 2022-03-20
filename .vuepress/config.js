@@ -111,6 +111,8 @@ module.exports = {
                 "3rdpartyprompts",
                 "shells_in_shells",
                 "line_editor",
+                "externs",
+                "custom_completions",
                 "coloring_and_theming",
               ]
             },
