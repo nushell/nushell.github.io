@@ -1,5 +1,13 @@
 let vers = (version).version
 
+let book_exists = ('book' | path exists)
+if $book_exists == false {
+    print (error make {
+        msg: "please run this script from the root of the website repo",
+    })
+    exit --now
+}
+
 for command in ($nu.scope.commands | where is_custom == false && is_extern == false) {
     # this is going in the frontmatter as a multiline YAML string, so indentation matters
     let indented_usage = ($command.usage | lines | each {|it| $"  ($it)"} | str collect (char nl))

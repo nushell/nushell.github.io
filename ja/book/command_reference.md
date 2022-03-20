@@ -1,7 +1,5 @@
 # Command Reference
 
-To see all commands in Nushell, run [`help commands`](commands/help.md).
-
 <script>
   export default {
     computed: {
@@ -16,8 +14,8 @@ To see all commands in Nushell, run [`help commands`](commands/help.md).
 
 <table>
   <tr>
-    <th>Command</th>
-    <th>Description</th>
+    <th>コマンド</th>
+    <th>説明 </th>
   </tr>
   <tr v-for="command in commands">
    <td><a :href="command.path"><code>{{ command.title }}</code></a></td>

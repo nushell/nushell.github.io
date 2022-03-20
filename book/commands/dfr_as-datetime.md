@@ -27,7 +27,7 @@ usage: |
 
 ## Parameters
 
- -  `format`: formating date string
+ -  `format`: formating date time string
  -  `--not-exact`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
 
 ## Examples

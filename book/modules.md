@@ -183,6 +183,20 @@ We can demonstrate this property, for example, with the [`random`](commands/rand
 6
 ```
 
+## Exporting symbols
+
+As mentioned above, you can export definitions and environment variables from modules. This lets you more easily group related definitions together and export the ones you want to make public.
+
+You can also export aliases and externs, giving you a way to only use these features when you need. Exporting externs also gives you the ability to hide custom completion commands in a module, so they don't have to be part of the global namespace.
+
+Here's the full list of ways you can export:
+
+- `export def` - export a custom command
+- `export def-env` - export a custom environment command
+- `export env` - export an environment variable
+- `export alias` - export an alias
+- `export extern` - export a known external definition
+
 ## Hiding
 
 Any custom command, alias or environment variable, imported from a module or not, can be "hidden", restoring the previous definition.

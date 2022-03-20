@@ -2,9 +2,13 @@
 title: query web
 layout: command
 version: 0.59.1
+usage: |
+  execute selector query on html/web
 ---
 
-execute selector query on html/web
+# `{{ $frontmatter.title }}`
+
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -111,6 +111,8 @@ module.exports = {
                 "3rdpartyprompts",
                 "shells_in_shells",
                 "line_editor",
+                "externs",
+                "custom_completions",
                 "coloring_and_theming",
               ]
             },
@@ -385,7 +387,7 @@ module.exports = {
         label: "中文",
         editLinkText: "在GitHub上编辑此页面",
         nav: [
-          { text: "书", link: "/zh-CN/book/" },
+          { text: "书", link: "/zh-cn/book/" },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: "Cookbook", link: "/cookbook/" },
           { text: "Blog", link: "/blog/" },

@@ -1,6 +1,5 @@
 # Command Reference
 
-To see all commands in Nushell, run [`help commands`](commands/help.md).
 
 <script>
   export default {
