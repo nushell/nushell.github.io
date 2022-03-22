@@ -1,12 +1,16 @@
 # Scripts
 
-In Nushell, you can write and run scripts in the Nushell language. To run a script, you pass it as an argument to the `nu` commandline application.
+In Nushell, you can write and run scripts in the Nushell language. To run a script, you can pass it as an argument to the `nu` commandline application:
 
 ```
 > nu myscript.nu
 ```
 
-This will run the script to completion.
+This will run the script to completion in a new instance of Nu. You can also run scripts inside the *current* instance of Nu using [`source`](commands/source.md):
+
+```
+> source myscript.nu
+```
 
 Let's look at an example script file:
 
@@ -52,22 +56,33 @@ When this script is run, Nushell will first run the `a` command to completion an
 
 ## Parameterizing Scripts
 
-You can pass arguments to scripts by passing them following the name of the script name.
+Script files can optionally contain a special `main` command. `main` will be run after any other Nu code, and is primarily used to add parameters to scripts. You can pass arguments to scripts after the script name (`nu <script name> <script args>`).
 
-```
-> nu <script name> <script args>
-```
-
-This will call the `main` command in your script.
+For example:
 
 ```
 # myscript.nu
 
-def main[x: int] {
+def main [x: int] {
   $x + 10
 }
 ```
+
 ```
 > nu myscript.nu 100
+110
 ```
 
+## Shebangs (`!#`)
+
+On Linux and macOS you can optionally use a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) to tell the OS that a file should be interpreted by Nu. For example, with the following in a file named `myscript`:
+
+```
+#!/usr/bin/env nu
+echo "Hello World!"
+```
+
+```
+> ./myscript
+Hello World!
+```
