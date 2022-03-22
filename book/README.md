@@ -1,7 +1,7 @@
 # Introduction
 
 ::: warning
-This is the version of the book that works with the version of Nushell in main (0.59 and later).
+This is the version of the book that works with the version of Nushell in main (0.60 and later).
 For the 0.44 version of Nushell, you should read the [0.44 version of the book](/old_book/).
 :::
 
