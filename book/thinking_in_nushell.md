@@ -20,7 +20,7 @@ While it does have these amenities, Nushell isn't bash. The bash way of working,
 > echo "hello" > output.txt
 ```
 
-In Nushell, we use the `>` as the greater-than operator. This fits better with the language aspect of Nushell. Instead, you pipe to a file that has the job of saving content:
+In Nushell, we use the `>` as the greater-than operator. This fits better with the language aspect of Nushell. Instead, you pipe to a command that has the job of saving content:
 
 ```
 > echo "hello" | save output.txt
