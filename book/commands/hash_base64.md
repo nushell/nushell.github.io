@@ -1,7 +1,7 @@
 ---
 title: hash base64
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   base64 encode or decode a value
 ---

@@ -1,7 +1,7 @@
 ---
 title: hash sha256
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   hash a value using the sha256 hash algorithm
 ---

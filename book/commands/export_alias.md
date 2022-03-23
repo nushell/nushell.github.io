@@ -1,7 +1,7 @@
 ---
 title: export alias
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Define an alias and export it from a module
 ---

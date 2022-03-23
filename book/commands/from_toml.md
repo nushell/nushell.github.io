@@ -1,7 +1,7 @@
 ---
 title: from toml
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Parse text as .toml and create table.
 ---

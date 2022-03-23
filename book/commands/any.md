@@ -1,7 +1,7 @@
 ---
 title: any?
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Tests if any element of the input matches a predicate.
 ---

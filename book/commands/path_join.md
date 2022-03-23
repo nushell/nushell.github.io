@@ -1,7 +1,7 @@
 ---
 title: path join
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Join a structured path or a list of path parts.
 ---

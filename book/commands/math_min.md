@@ -1,7 +1,7 @@
 ---
 title: math min
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Finds the minimum within a list of numbers or tables
 ---

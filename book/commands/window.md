@@ -1,7 +1,7 @@
 ---
 title: window
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Creates a sliding window of `window_size` that slide by n rows/elements across input.
 ---

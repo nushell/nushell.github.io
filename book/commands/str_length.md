@@ -1,7 +1,7 @@
 ---
 title: str length
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   outputs the lengths of the strings in the pipeline
 ---

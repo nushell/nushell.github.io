@@ -1,7 +1,7 @@
 ---
 title: default
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Sets a default row's column if missing.
 ---

@@ -1,7 +1,7 @@
 ---
 title: extern
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Define a signature for an external command
 ---

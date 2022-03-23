@@ -1,7 +1,7 @@
 ---
 title: split
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Split contents across desired subcommand (like row, column) via the separator.
 ---

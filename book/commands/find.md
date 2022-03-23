@@ -1,7 +1,7 @@
 ---
 title: find
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Searches terms in the input or for elements of the input that satisfies the predicate.
 ---

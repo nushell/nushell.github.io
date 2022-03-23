@@ -1,7 +1,7 @@
 ---
 title: random decimal
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Generate a random decimal within a range [min..max]
 ---
