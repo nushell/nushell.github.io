@@ -387,7 +387,7 @@ Nushell will respect and use the `LS_COLORS` environment variable setting on Mac
 
 There's an exhaustive list [here](https://github.com/trapd00r/LS_COLORS), which is overkill, but gives you an rudimentary understanding of how to create a ls_colors file that `dircolors` can turn into a `LS_COLORS` environment variable.
 
-[This](https://www.linuxhowto.net/how-to-set-colors-for-ls-command/) is a pretty good introduction to `LS_COLORS`. I'm sure you can fine many more tutorials on the web.
+[This](https://www.linuxhowto.net/how-to-set-colors-for-ls-command/) is a pretty good introduction to `LS_COLORS`. I'm sure you can find many more tutorials on the web.
 
 I like the `vivid` application and currently have it configured in my `config.nu` like this. You can find `vivid` [here](https://github.com/sharkdp/vivid).
 
