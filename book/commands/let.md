@@ -1,7 +1,7 @@
 ---
 title: let
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Create a variable and give it a value.
 ---

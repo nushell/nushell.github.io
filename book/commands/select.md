@@ -1,7 +1,7 @@
 ---
 title: select
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Down-select table to only these columns.
 ---

@@ -1,7 +1,7 @@
 ---
 title: sleep
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Delay for a specified amount of time.
 ---

@@ -1,7 +1,7 @@
 ---
 title: length
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Count the number of elements in the input.
 ---

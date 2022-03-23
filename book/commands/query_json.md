@@ -1,7 +1,7 @@
 ---
 title: query json
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   execute json query on json file (open --raw <file> | query json 'query string')
 ---

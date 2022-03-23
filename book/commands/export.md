@@ -1,7 +1,7 @@
 ---
 title: export
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Export custom commands or environment variables from a module.
 ---

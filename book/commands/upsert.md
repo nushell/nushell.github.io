@@ -1,7 +1,7 @@
 ---
 title: upsert
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Update an existing column to have a new value, or insert a new column.
 ---

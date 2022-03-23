@@ -1,7 +1,7 @@
 ---
 title: collect
 layout: command
-version: 0.59.1
+version: 0.60.0
 usage: |
   Collect the stream and pass it to a block.
 ---
