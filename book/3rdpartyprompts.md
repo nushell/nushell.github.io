@@ -18,10 +18,27 @@ If you like [oh-my-posh](https://ohmyposh.dev/), you can use oh-my-posh with Nus
 
 1. Install Oh My Posh and download oh-my-posh's themes following [guide](https://ohmyposh.dev/docs/linux#installation).
 2. Download and install a [nerd font](https://github.com/ryanoasis/nerd-fonts).
-3. Set the PROMPT_COMMAND in ~/.config/nushell/config.nu, change `M365Princess.omp.json` to whatever you like [Themes demo](https://ohmyposh.dev/docs/themes).
+3. Set the PROMPT_COMMAND in ~/.config/nushell/config.nu(or the path output by `$nu.config-path`), change `M365Princess.omp.json` to whatever you like [Themes demo](https://ohmyposh.dev/docs/themes).
 
 ```shell
 > let-env PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
+```
+
+For MacOS users:
+
+1. You can install oh-my-posh by `brew`, just following the [guide here](https://ohmyposh.dev/docs/macos)
+2. Download and install a [nerd font](https://github.com/ryanoasis/nerd-fonts).
+3. Set the PROMPT_COMMAND in the file output by `$nu.config-path`, here is a code snippet:
+
+```shell
+let posh-dir = (brew --prefix oh-my-posh | str trim)
+let posh-theme = $'($posh-dir)/share/oh-my-posh/themes/'
+# Change the theme names to: zash/space/robbyrussel/powerline/powerlevel10k_lean/
+# material/half-life/lambda Or double lines theme: amro/pure/spaceship, etc.
+# For more [Themes demo](https://ohmyposh.dev/docs/themes)
+let-env PROMPT_COMMAND = { oh-my-posh prompt print primary --config $'($posh-theme)/zash.omp.json' }
+# Optional
+let-env PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 ```
 
 ## Starship
