@@ -85,12 +85,27 @@ alias open = ^open
 
 ## Prompt configuration
 
-Prompt configuration is handled by setting the value of `prompt`.
+### Starship
 
-For example, to use [Starship](https://starship.rs), download it and enter the following command:
+Here's an example config section for starship:
 
 ```
-let-env PROMPT_COMMAND = "starship prompt"
+let-env STARSHIP_SHELL = "nu"
+
+def create_left_prompt [] {
+    starship prompt --cmd-duration $env.CMD_DURATION_MS --status $env.LAST_EXIT_CODE
+}
+
+# Use nushell functions to define your right and left prompt
+let-env PROMPT_COMMAND = { create_left_prompt }
+let-env PROMPT_COMMAND_RIGHT = ""
+
+# The prompt indicators are environmental variables that represent
+# the state of the prompt
+let-env PROMPT_INDICATOR = ""
+let-env PROMPT_INDICATOR_VI_INSERT = ": "
+let-env PROMPT_INDICATOR_VI_NORMAL = "〉"
+let-env PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
 Now restart Nu.
@@ -113,4 +128,3 @@ you may want to configure `STARSHIP_SHELL` environment variable when setting the
 config set prompt "STARSHIP_SHELL=nushell starship prompt"
 ```
 
-See more documentation on 3rd party prompts [here](https://github.com/nushell/nushell/blob/main/docs/3rd_Party_Prompts.md).
