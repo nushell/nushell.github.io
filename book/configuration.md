@@ -111,20 +111,6 @@ let-env PROMPT_MULTILINE_INDICATOR = "::: "
 Now restart Nu.
 
 ```
-nushell on 📙 main is 📦 v0.43.0 via 🦀 v1.59.0
+nushell on 📙 main is 📦 v0.60.0 via 🦀 v1.59.0
 ❯
 ```
-
-If your prompt looks a bit garbled like this:
-
-```
-%{%}~%{%}
-%{%}❯%{%}
-```
-
-you may want to configure `STARSHIP_SHELL` environment variable when setting the prompt.
-
-```
-config set prompt "STARSHIP_SHELL=nushell starship prompt"
-```
-
