@@ -49,11 +49,12 @@ let-env PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 
 1. Follow the links above and install starship.
 2. Install nerdfonts depending on your preferences.
-3. Set the starship shell environment variable to `nu` by running this commend `let-env STARSHIP_SHELL = "nu"`
-4. If you want the default ticking clock with date & time on the right prompt execut this command `hide PROMPT_COMMAND_RIGHT`
-5. If you don't want the default indicator, you can run this command `let-env PROMPT_INDICATOR = " "`
-6. Set starship as your left prompt with this command `let-env PROMPT_COMMAND = { starship prompt --cmd-duration $env.CMD_DURATION_MS --status $env.LAST_EXIT_CODE | str trim }`. Note that you may not have to use `str trim` in the Nushell prompt if you disable starship's default newline setting with this entry in the starship.toml file `add_newline = false`. There have been reports that this might not play nice with Nushell prompts. We're still testing.
-7. Since Nushell supports a right prompt you can also play around with starship's ability to set a right prompt. Setting the right prompt in Nushell is identical to setting the left prompt however you use `PROMPT_COMMAND_RIGHT`.
+3. Set the starship shell environment variable to `nu` by running this command `let-env STARSHIP_SHELL = "nu"`
+4. Set the starship session key environment variable by running this command `let-env STARSHIP_SESSION_KEY = (random chars -l 16)`
+5. If you want the default ticking clock with date & time on the right prompt, execute this command `hide PROMPT_COMMAND_RIGHT`
+6. If you don't want the default indicator, you can run this command `let-env PROMPT_INDICATOR = " "`
+7. Set starship as your left prompt with this command `let-env PROMPT_COMMAND = { starship prompt --cmd-duration $env.CMD_DURATION_MS --status $env.LAST_EXIT_CODE | str trim }`. Note that you may not have to use `str trim` in the Nushell prompt if you disable starship's default newline setting with this entry in the starship.toml file `add_newline = false`. There have been reports that this might not play nice with Nushell prompts. We're still testing.
+8. Since Nushell supports a right prompt you can also play around with starship's ability to set a right prompt. Setting the right prompt in Nushell is identical to setting the left prompt however you use `PROMPT_COMMAND_RIGHT`.
 
 ## Purs
 
