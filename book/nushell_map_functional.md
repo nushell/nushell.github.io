@@ -5,15 +5,15 @@ The idea behind this table is to help you understand how Nu built-ins and plug-i
 Note: this table assumes Nu 0.43 or later.
 
 
-| Nushell                | Clojure                       | Tablecloth (Ocaml / Elm)                             | Haskell                                    |
+| Nushell                | Clojure                       | Tablecloth (Ocaml / Elm)                             | Haskell                                    |                                                 |
 | ---------------------- | ----------------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
 | alias                  |                               |                                                      |                                            |                                                 |
 | append                 | conj, into, concat            | append, (++), concat, concatMap                      | (++)                                       |                                                 |
 | args                   |                               |                                                      |                                            |                                                 |
 | autoview               |                               |                                                      |                                            |                                                 |
-| math avg           |                               |                                                      |                                            |                                                 |
-| into binary        | Integer/toHexString           |                                                      | showHex                                    |                                                 |
-| calc, `<math expression>`           | math operators                |                                                      |                                            |                                                 |
+| math avg               |                               |                                                      |                                            |                                                 |
+| into binary            | Integer/toHexString           |                                                      | showHex                                    |                                                 |
+| calc, `<math expression>`| math operators              |                                                      |                                            |                                                 |
 | cd                     |                               |                                                      |                                            |                                                 |
 | clear                  |                               |                                                      |                                            |                                                 |
 | clip                   |                               |                                                      |                                            |                                                 |
