@@ -10,7 +10,7 @@ Hello, and welcome to the Nushell project. The goal of this project is to take t
 Nu takes cues from a lot of familiar territory: traditional shells like bash, object based shells like PowerShell, gradually typed languages like TypeScript, functional programming, systems programming, and more. But rather than trying to be a jack of all trades, Nu focuses its energy on doing a few things well:
 
 * Being a flexible cross-platform shell with a modern feel
-* Solving problems as a modern programming language that works the structure of your data
+* Solving problems as a modern programming language that works with the structure of your data
 * Giving clear error messages and clean IDE support
 
 The easiest way to see what Nu can do is to start with some examples, so let's dive in.

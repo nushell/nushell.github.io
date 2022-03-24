@@ -20,7 +20,7 @@ While it does have these amenities, Nushell isn't bash. The bash way of working,
 > echo "hello" > output.txt
 ```
 
-In Nushell, we use the `>` as the greater-than operator. This fits better with the language aspect of Nushell. Instead, you pipe to a file that has the job of saving content:
+In Nushell, we use the `>` as the greater-than operator. This fits better with the language aspect of Nushell. Instead, you pipe to a command that has the job of saving content:
 
 ```
 > echo "hello" | save output.txt
@@ -30,9 +30,9 @@ In Nushell, we use the `>` as the greater-than operator. This fits better with t
 
 ## Parsing and evaluation are different stages
 
-An important part of Nushell's design and specifically where it differs from many dynamic languages is that "parse time" and "evaluation time" are separate and do not mix. These terms come from programming language design and compiler theory where parsing is where you take the text and convert it to an abstract representation, and evaluation is where you take the abstract representation and run it.
+An important part of Nushell's design and specifically where it differs from many dynamic languages is that "parse time" and "evaluation time" are separate and do not mix. These terms come from programming language design and compiler theory, in which parsing is where you convert text to an abstract representation, and evaluation is where you run the abstract representation.
 
-For example, trying to execute the next script doesn't make sense in Nushell:
+For example, the following doesn't make sense in Nushell, and will fail to execute if run as a script:
 
 ```
 echo "def abc [] { 1 + 2 }" | save output.nu
@@ -40,7 +40,7 @@ source "output.nu"
 abc
 ```
 
-The `source` command runs at parse time, where the parser finds all the definitions that are visible to the program. At evaluation time, those definitions should all be visible.
+The `source` command runs at parse time, where the parser finds all the definitions that are visible to the program. By evaluation time, those definitions should all be visible. However, since the output.nu file is not created until evaluation time (by the save command), the source command is unable to read definitions from it during parse time.
 
 In the above, we've expected the evaluator to run between each line, but Nushell does not interleave parsing and evaluation like this.
 
