@@ -178,7 +178,7 @@ You can write binary as a literal using the `0x[...]` form:
 
 ## Structured data
 
-Structured data builds from the simple data. For example, instead of a single integer, structured data gives us a way to represent multiple integers in the same value. Here's a list of the currently supported structured data types: rows, lists, and blocks.
+Structured data builds from the simple data. For example, instead of a single integer, structured data gives us a way to represent multiple integers in the same value. Here's a list of the currently supported structured data types: records, lists and tables.
 
 ## Records
 
@@ -214,9 +214,9 @@ The table is a core data structure in Nushell. As you run commands, you'll see t
 We can create our own tables similarly to how we create a list. Because tables also contain columns and not just values, we pass in the name of the column values:
 
 ```
-> echo [[Column1, Column2]; [Value1, Value2]]
+> echo [[column1, column2]; [Value1, Value2]]
 ───┬─────────┬─────────
- # │ Column1 │ Column2
+ # │ column1 │ column2
 ───┼─────────┼─────────
  0 │ Value1  │ Value2
 ───┴─────────┴─────────
@@ -225,9 +225,9 @@ We can create our own tables similarly to how we create a list. Because tables a
 We can also create a table with multiple rows of data:
 
 ```
-> echo [[Column1, Column2]; [Value1, Value2] [Value3, Value4]]
+> echo [[column1, column2]; [Value1, Value2] [Value3, Value4]]
 ───┬─────────┬─────────
- # │ Column1 │ Column2
+ # │ column1 │ column2
 ───┼─────────┼─────────
  0 │ Value1  │ Value2
  1 │ Value3  │ Value4
