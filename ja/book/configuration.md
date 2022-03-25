@@ -136,7 +136,7 @@ Nuをログインシェルとして利用するには、`path`と`env`変数を�
 ## プロンプトの設定
 
 プロンプトの設定は`prompt`の値を設定することで行います。  
-例えば、[starship](https://starshp.rs)を使うには、ダウンロードして次のコマンドを実行します。(0.18.2 and later)
+例えば、[starship](https://starship.rs)を使うには、ダウンロードして次のコマンドを実行します。(0.18.2 and later)
 
 ```
 config set prompt "starship prompt"
