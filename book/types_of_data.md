@@ -178,7 +178,7 @@ You can write binary as a literal using the `0x[...]` form:
 
 ## Structured data
 
-Structured data builds from the simple data. For example, instead of a single integer, structured data gives us a way to represent multiple integers in the same value. Here's a list of the currently supported structured data types: records, lists, tables, blocks and groups.
+Structured data builds from the simple data. For example, instead of a single integer, structured data gives us a way to represent multiple integers in the same value. Here's a list of the currently supported structured data types: records, lists and tables.
 
 ## Records
 
