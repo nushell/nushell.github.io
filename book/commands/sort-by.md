@@ -51,3 +51,8 @@ Sort strings (reversed case-insensitive)
 ```shell
 > echo [airplane Truck Car] | sort-by -i -r
 ```
+
+Sort a table by its column (reversed order)
+```shell
+> [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit -r
+```

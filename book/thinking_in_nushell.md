@@ -97,7 +97,7 @@ In Nushell, blocks control their own environment. Changes to the environment are
 In practice, this lets you write some concise code for working with subdirectories, for example, if you wanted to build each sub-project in the current directory, you could run:
 
 ```
-> ls | each {
+> ls | each { |it|
     cd $it.name
     make
 }
