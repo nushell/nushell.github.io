@@ -63,7 +63,7 @@ String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" 
 
 Interpolated strings do not currently support any way of escaping parentheses. If you would like to include parentheses in the resulting string, one workaround is to use sub-expressions which evaluate to the `(` or `)` characters, such as [`char lp` and `char rp`](commands/char.md). For example:
 
-```nushell
+```
 > $"2 + 2 is (2 + 2) (char lp)you guessed it!(char rp)"
 2 + 2 is 4 (you guessed it!)
 ```
