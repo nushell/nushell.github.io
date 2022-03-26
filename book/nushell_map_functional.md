@@ -82,7 +82,9 @@ Note: this table assumes Nu 0.43 or later.
 | split-by               | split, split-{at,with,lines}  | split, words, lines                                  | split, words, lines                        |                                                 |
 | split column           |                               |                                                      |                                            |                                                 |
 | split row              |                               |                                                      |                                            |                                                 |
-| str                    | clojure.string functions      | String functions                                     |                                            |                                                 |
+| str(`*`)               | clojure.string functions      | String functions                                     |                                            |                                                 |
+| str collect            | join                          | concat                                               | intercalate                                |                                                 |
+| str trim               | trim, triml, trimr            | trim, trimLeft, trimRight                            | strip                                      |                                                 |
 | sum                    | apply +                       | sum                                                  | sum                                        |                                                 |
 | sys                    |                               |                                                      |                                            |                                                 |
 | table                  |                               |                                                      |                                            |                                                 |
@@ -90,7 +92,6 @@ Note: this table assumes Nu 0.43 or later.
 | tree(`*`)              |                               |                                                      |                                            |                                                 |
 | to                     |                               |                                                      |                                            |                                                 |
 | touch                  |                               |                                                      |                                            |                                                 |
-| trim                   | trim, triml, trimr            | trim, trimLeft, trimRight                            | strip                                      |                                                 |
 | uniq                   | set                           | Set.empty                                            | Data.Set                                   |                                                 |
 | upsert                 |                               |                                                      |                                            |                                                 |
 | version                |                               |                                                      |                                            |                                                 |
