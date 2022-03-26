@@ -8,7 +8,7 @@ module.exports = {
     "/de/": {
       lang: "Deutsch",
       title: "Nushell",
-      description: "Eine neuer Art von Shell.",
+      description: "Eine neue Art von Shell.",
     },
     "/es/": {
       lang: "es",
