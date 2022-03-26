@@ -105,7 +105,7 @@ The currently accepted types are (as of version 0.59.0):
  - `signature`
  - `string`
  - `variable`
-
+ 
 ## Optional positional parameters
 
 By default, positional parameters are required. If a positional parameter is not passed, we will encounter an error:
@@ -204,6 +204,38 @@ Now, we can call this updated definition using the shorthand flag:
 > greet -a 10 hello
 ```
 
+## Rest parameters
+
+There may be cases when you want to define a command which takes any number of positional arguments. We can do this with a rest parameter, using the following `...` syntax:
+
+```nushell
+def greet [...name: string] {
+  echo "hello all:"
+  for $n in $name {
+    echo $n
+  }
+}
+
+greet earth mars jupiter venus
+```
+
+We could call the above definition of the `greet` command with any number of arguments, including none at all. All of the arguments are collected into `$name` as a list.
+
+Rest parameters can be used together with positional parameters:
+
+```
+def greet [vip: string, ...name: string] {
+  echo "hello to our VIP" $vip
+  echo "and hello to everybody else:"
+  for $n in $name {
+    echo $n
+  }
+}
+
+#     $vip          $name
+#     .--. .----------------------.
+greet moon earth mars jupiter venus
+```
 
 ## Documenting your command
 
