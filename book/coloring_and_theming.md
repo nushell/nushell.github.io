@@ -29,11 +29,10 @@ Here are the current options for `table_mode`:
 5. `light`
 6. `thin`
 7. `with_love`
-8. `rounded`
-9. `reinforced`
-10. `heavy`
-11. `none`
-12. `other`
+8. `reinforced`
+9. `heavy`
+10. `none`
+11. `other`
 
 ### `Color symbologies`
 
