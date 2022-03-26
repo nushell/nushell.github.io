@@ -7,15 +7,15 @@ To start off, let's get a table that we can use:
 ```
 > ls
 ───┬───────────────┬──────┬─────────┬────────────
- # │ name          │ type │ size    │ modified 
+ # │ name          │ type │ size    │ modified
 ───┼───────────────┼──────┼─────────┼────────────
- 0 │ files.rs      │ File │  4.6 KB │ 5 days ago 
- 1 │ lib.rs        │ File │   330 B │ 5 days ago 
- 2 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago 
- 3 │ parse.rs      │ File │ 49.8 KB │ 1 day ago 
- 4 │ path.rs       │ File │  2.1 KB │ 5 days ago 
- 5 │ shapes.rs     │ File │  4.7 KB │ 5 days ago 
- 6 │ signature.rs  │ File │  1.2 KB │ 5 days ago 
+ 0 │ files.rs      │ File │  4.6 KB │ 5 days ago
+ 1 │ lib.rs        │ File │   330 B │ 5 days ago
+ 2 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago
+ 3 │ parse.rs      │ File │ 49.8 KB │ 1 day ago
+ 4 │ path.rs       │ File │  2.1 KB │ 5 days ago
+ 5 │ shapes.rs     │ File │  4.7 KB │ 5 days ago
+ 6 │ signature.rs  │ File │  1.2 KB │ 5 days ago
 ───┴───────────────┴──────┴─────────┴────────────
 ```
 
@@ -26,15 +26,15 @@ We can sort a table by calling the [`sort-by`](commands/sort-by.md) command and 
 ```
 > ls | sort-by size
 ───┬───────────────┬──────┬─────────┬────────────
- # │ name          │ type │ size    │ modified 
+ # │ name          │ type │ size    │ modified
 ───┼───────────────┼──────┼─────────┼────────────
- 0 │ lib.rs        │ File │   330 B │ 5 days ago 
- 1 │ signature.rs  │ File │  1.2 KB │ 5 days ago 
- 2 │ path.rs       │ File │  2.1 KB │ 5 days ago 
- 3 │ files.rs      │ File │  4.6 KB │ 5 days ago 
- 4 │ shapes.rs     │ File │  4.7 KB │ 5 days ago 
- 5 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago 
- 6 │ parse.rs      │ File │ 49.8 KB │ 1 day ago 
+ 0 │ lib.rs        │ File │   330 B │ 5 days ago
+ 1 │ signature.rs  │ File │  1.2 KB │ 5 days ago
+ 2 │ path.rs       │ File │  2.1 KB │ 5 days ago
+ 3 │ files.rs      │ File │  4.6 KB │ 5 days ago
+ 4 │ shapes.rs     │ File │  4.7 KB │ 5 days ago
+ 5 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago
+ 6 │ parse.rs      │ File │ 49.8 KB │ 1 day ago
 ───┴───────────────┴──────┴─────────┴────────────
 ```
 
@@ -47,15 +47,15 @@ We can select data from a table by choosing to select specific columns or specif
 ```
 > ls | select name size
 ───┬───────────────┬─────────
- # │ name          │ size 
+ # │ name          │ size
 ───┼───────────────┼─────────
- 0 │ files.rs      │  4.6 KB 
- 1 │ lib.rs        │   330 B 
- 2 │ lite_parse.rs │  6.3 KB 
- 3 │ parse.rs      │ 49.8 KB 
- 4 │ path.rs       │  2.1 KB 
- 5 │ shapes.rs     │  4.7 KB 
- 6 │ signature.rs  │  1.2 KB 
+ 0 │ files.rs      │  4.6 KB
+ 1 │ lib.rs        │   330 B
+ 2 │ lite_parse.rs │  6.3 KB
+ 3 │ parse.rs      │ 49.8 KB
+ 4 │ path.rs       │  2.1 KB
+ 5 │ shapes.rs     │  4.7 KB
+ 6 │ signature.rs  │  1.2 KB
 ───┴───────────────┴─────────
 ```
 
@@ -64,13 +64,13 @@ This helps to create a table that's more focused on what we need.  Next, let's s
 ```
 > ls | sort-by size | first 5
 ───┬──────────────┬──────┬────────┬────────────
- # │ name         │ type │ size   │ modified 
+ # │ name         │ type │ size   │ modified
 ───┼──────────────┼──────┼────────┼────────────
- 0 │ lib.rs       │ File │  330 B │ 5 days ago 
- 1 │ signature.rs │ File │ 1.2 KB │ 5 days ago 
- 2 │ path.rs      │ File │ 2.1 KB │ 5 days ago 
- 3 │ files.rs     │ File │ 4.6 KB │ 5 days ago 
- 4 │ shapes.rs    │ File │ 4.7 KB │ 5 days ago 
+ 0 │ lib.rs       │ File │  330 B │ 5 days ago
+ 1 │ signature.rs │ File │ 1.2 KB │ 5 days ago
+ 2 │ path.rs      │ File │ 2.1 KB │ 5 days ago
+ 3 │ files.rs     │ File │ 4.6 KB │ 5 days ago
+ 4 │ shapes.rs    │ File │ 4.7 KB │ 5 days ago
 ───┴──────────────┴──────┴────────┴────────────
 ```
 
@@ -81,39 +81,38 @@ You can also `skip` rows that you don't want.  Let's skip the first two of the 5
 ```
 > ls | sort-by size | first 5 | skip 2
 ───┬───────────┬──────┬────────┬────────────
- # │ name      │ type │ size   │ modified 
+ # │ name      │ type │ size   │ modified
 ───┼───────────┼──────┼────────┼────────────
- 0 │ path.rs   │ File │ 2.1 KB │ 5 days ago 
- 1 │ files.rs  │ File │ 4.6 KB │ 5 days ago 
- 2 │ shapes.rs │ File │ 4.7 KB │ 5 days ago 
+ 0 │ path.rs   │ File │ 2.1 KB │ 5 days ago
+ 1 │ files.rs  │ File │ 4.6 KB │ 5 days ago
+ 2 │ shapes.rs │ File │ 4.7 KB │ 5 days ago
 ───┴───────────┴──────┴────────┴────────────
 ```
 
 We've narrowed it to three rows we care about.
 
-Let's look at a few other commands for selecting data.  You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row.  Let's sort our table by the file name and then pick one of the rows with the `nth` command using its row number:
+Let's look at a few other commands for selecting data.  You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row.  Let's sort our table by the file name and then pick one of the rows with the `select` command using its row number:
 
 ```
 > ls | sort-by name
 ───┬───────────────┬──────┬─────────┬────────────
- # │ name          │ type │ size    │ modified 
+ # │ name          │ type │ size    │ modified
 ───┼───────────────┼──────┼─────────┼────────────
- 0 │ files.rs      │ File │  4.6 KB │ 5 days ago 
- 1 │ lib.rs        │ File │   330 B │ 5 days ago 
- 2 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago 
- 3 │ parse.rs      │ File │ 49.8 KB │ 1 day ago 
- 4 │ path.rs       │ File │  2.1 KB │ 5 days ago 
- 5 │ shapes.rs     │ File │  4.7 KB │ 5 days ago 
- 6 │ signature.rs  │ File │  1.2 KB │ 5 days ago 
+ 0 │ files.rs      │ File │  4.6 KB │ 5 days ago
+ 1 │ lib.rs        │ File │   330 B │ 5 days ago
+ 2 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago
+ 3 │ parse.rs      │ File │ 49.8 KB │ 1 day ago
+ 4 │ path.rs       │ File │  2.1 KB │ 5 days ago
+ 5 │ shapes.rs     │ File │  4.7 KB │ 5 days ago
+ 6 │ signature.rs  │ File │  1.2 KB │ 5 days ago
 ───┴───────────────┴──────┴─────────┴────────────
 
-> ls | sort-by name | nth 5
-──────────┬────────────
- name     │ shapes.rs 
- type     │ File 
- size     │ 4.7 KB 
- modified │ 5 days ago 
-──────────┴────────────
+> ls | sort-by name | select 5
+───┬───────────────┬──────┬─────────┬────────────
+ # │ name          │ type │ size    │ modified
+───┼───────────────┼──────┼─────────┼────────────
+ 0 │ shapes.rs     │ File │  4.7 KB │ 5 days ago
+───┴───────────────┴──────┴─────────┴────────────
 ```
 
 ## Getting data out of a table
@@ -123,13 +122,13 @@ So far, we've worked with tables by trimming the table down to only what we need
 ```
 > ls | get name
 ───┬───────────────
- 0 │ files.rs 
- 1 │ lib.rs 
- 2 │ lite_parse.rs 
- 3 │ parse.rs 
- 4 │ path.rs 
- 5 │ shapes.rs 
- 6 │ signature.rs 
+ 0 │ files.rs
+ 1 │ lib.rs
+ 2 │ lite_parse.rs
+ 3 │ parse.rs
+ 4 │ path.rs
+ 5 │ shapes.rs
+ 6 │ signature.rs
 ───┴───────────────
 ```
 
@@ -140,15 +139,15 @@ This might look like the [`select`](commands/select.md) command we saw earlier, 
 ```
 > ls | select name
 ───┬───────────────
- # │ name 
+ # │ name
 ───┼───────────────
- 0 │ files.rs 
- 1 │ lib.rs 
- 2 │ lite_parse.rs 
- 3 │ parse.rs 
- 4 │ path.rs 
- 5 │ shapes.rs 
- 6 │ signature.rs 
+ 0 │ files.rs
+ 1 │ lib.rs
+ 2 │ lite_parse.rs
+ 3 │ parse.rs
+ 4 │ path.rs
+ 5 │ shapes.rs
+ 6 │ signature.rs
 ───┴───────────────
 ```
 
@@ -188,7 +187,7 @@ We can use the [`insert`](commands/insert.md) command to add a new column to the
 ```
 > open rustfmt.toml
 ─────────┬──────
- edition │ 2018 
+ edition │ 2018
 ─────────┴──────
 ```
 
@@ -197,8 +196,8 @@ Let's add a column called "next_edition" with the value 2021:
 ```
 > open rustfmt.toml | insert next_edition 2021
 ──────────────┬──────
- edition      │ 2018 
- next_edition │ 2021 
+ edition      │ 2018
+ next_edition │ 2021
 ──────────────┴──────
 ```
 
@@ -207,19 +206,19 @@ Notice that we if open the original file, the contents have stayed the same:
 ```
 > open rustfmt.toml
 ─────────┬──────
- edition │ 2018 
+ edition │ 2018
 ─────────┴──────
 ```
 
-Changes in Nu are functional changes, meaning that they work on the values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our 
+Changes in Nu are functional changes, meaning that they work on the values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our
 pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](commands/save.md) command:
 
 ```
 > open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
 > open rustfmt2.toml
 ──────────────┬──────
- edition      │ 2018 
- next_edition │ 2021 
+ edition      │ 2018
+ next_edition │ 2021
 ──────────────┴──────
 ```
 
@@ -230,7 +229,7 @@ In a similar way to the [`insert`](commands/insert.md) command, we can also use 
 ```
 > open rustfmt.toml
 ─────────┬──────
- edition │ 2018 
+ edition │ 2018
 ─────────┴──────
 ```
 
@@ -239,7 +238,7 @@ And now, let's update the edition to point at the next edition we hope to suppor
 ```
 > open rustfmt.toml | update edition 2021
 ─────────┬──────
- edition │ 2021 
+ edition │ 2021
 ─────────┴──────
 ```
 

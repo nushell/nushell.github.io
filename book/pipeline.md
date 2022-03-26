@@ -26,7 +26,7 @@ If a pipeline is getting a bit long for one line, you can enclose it within `(` 
     parse "{month}/{day}/{year}" |
     get year
 )
-``` 
+```
 
 Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
 
@@ -36,7 +36,7 @@ Nu commands communicate with each other using the Nu data types (see [types of d
 
 `internal_command | external_command`
 
-Data will flow from the internal_command to the external_command. This data is will get converted to a string, so that they can be sent to the `stdin` of the external_command.
+Data will flow from the internal_command to the external_command. This data will get converted to a string, so that they can be sent to the `stdin` of the external_command.
 
 `external_command | internal_command`
 
