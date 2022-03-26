@@ -22,17 +22,17 @@ Table borders are controlled by the `table_mode` setting in `config.nu`. Here is
 
 Here are the current options for `table_mode`:
 
-1. `rounded` # of course, this is the best one :)
-2. `basic`
-3. `compact`
-4. `compact_double`
-5. `light`
-6. `thin`
-7. `with_love`
-8. `reinforced`
-9. `heavy`
-10. `none`
-11. `other`
+- `rounded` # of course, this is the best one :)
+- `basic`
+- `compact`
+- `compact_double`
+- `light`
+- `thin`
+- `with_love`
+- `reinforced`
+- `heavy`
+- `none`
+- `other`
 
 ### `Color symbologies`
 
