@@ -82,6 +82,8 @@ Note: this table assumes Nu 0.43 or later.
 | split column           |                               |                                                      |                                            |                                                 |
 | split row              |                               |                                                      |                                            |                                                 |
 | str(`*`)               | str functions                 | String functions                                     | string functions                           | &str, String functions                          |
+| str collect            | str.join                      | joinToString                                         |                                            | join                                            |
+| str trim               | strip, rstrip, lstrip         | trim, trimStart, trimEnd                             | regex                                      | trim, trim_{start,end}, strip_{suffix,prefix}   |
 | sum                    | sum                           | sum                                                  | reduce                                     | sum                                             |
 | sys(`*`)               | sys                           |                                                      |                                            |                                                 |
 | table                  |                               |                                                      |                                            |                                                 |
@@ -89,7 +91,6 @@ Note: this table assumes Nu 0.43 or later.
 | tree(`*`)              |                               |                                                      |                                            |                                                 |
 | to                     | csv, json, sqlite3            |                                                      |                                            |                                                 |
 | touch                  | open(path, 'a').close()       |                                                      |                                            |                                                 |
-| trim                   | strip, rstrip, lstrip         | trim, trimStart, trimEnd                             | regex                                      | trim, trim_{start,end}, strip_{suffix,prefix}   |
 | uniq                   | set                           | Set                                                  | set                                        | HashSet                                         |
 | upsert                 |                               |                                                      |                                            |                                                 |
 | version                | sys.version, sys.version_info |                                                      |                                            |                                                 |
