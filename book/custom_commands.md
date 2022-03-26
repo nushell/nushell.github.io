@@ -106,6 +106,48 @@ The currently accepted types are (as of version 0.59.0):
  - `string`
  - `variable`
 
+## Optional positional parameters
+
+By default, positional parameters are required. If a positional parameter is not passed, we will encounter an error:
+
+```
+  × Missing required positional argument.
+   ╭─[entry #23:1:1]
+ 1 │ greet
+   ·      ▲
+   ·      ╰── missing name
+   ╰────
+  help: Usage: greet <name>
+```
+
+We can instead mark a positional parameter as optional by putting a question mark (`?`) after its name. For example:
+
+```nushell
+def greet [name?: string] {
+  echo "hello" $name
+}
+
+greet
+```
+
+Making a positional parameter optional does not change its name when accessed in the body. As the example above shows, it is still accessed with `$name`, despite the `?` suffix in the parameter list.
+
+When an optional parameter is not passed, its value in the command body is equal to `null` and `$nothing`. We can use this to act on the case where a parameter was not passed:
+
+```nushell
+def greet [name?: string] {
+  if ($name == null) {
+    echo "hello, I don't know your name!"
+  } else {
+    echo "hello" $name
+  }
+}
+
+greet
+```
+
+If required and optional positional parameters are used together, then the required parameters must appear in the definition first.
+
 ## Flags
 
 In addition to passing positional parameters, you can also pass named parameters by defining flags for your custom commands.
