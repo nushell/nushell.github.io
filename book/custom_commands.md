@@ -233,7 +233,7 @@ def greet [vip: string, ...name: string] {
 }
 
 #     $vip          $name
-#     .--. .----------------------.
+#     ---- ------------------------
 greet moon earth mars jupiter venus
 ```
 
