@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> fmt ```
+`> fmt `
 
 ## Examples
 
 format numbers
+
 ```shell
 > 42 | fmt
 ```

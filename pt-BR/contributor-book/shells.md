@@ -4,11 +4,11 @@ title: Shells
 
 # Shells
 
-Talvez um conceito único de Nu seja o de `shells`,  apesar de a ideia de trabalhar em diversos lugares ao mesmo tempo em um shell é bem comum (via pushd/popd, telas, e mais). O que talvez torne o Nu um pouco diferente é que o seu conceito de `shells` é de ambas plataformas e funciona tanto no sistema de arquivos quanto dentro de valores.
+Talvez um conceito único de Nu seja o de `shells`, apesar de a ideia de trabalhar em diversos lugares ao mesmo tempo em um shell é bem comum (via pushd/popd, telas, e mais). O que talvez torne o Nu um pouco diferente é que o seu conceito de `shells` é de ambas plataformas e funciona tanto no sistema de arquivos quanto dentro de valores.
 
 **Nota:** O conceito de um Value Shell é um de muitos fatores de design abertos e está sujeito a mudanças no futuro.
 
-Um  **Shell** é uma interface semelhante a um sistema de arquivos que descreve um conjunto de operações de arquivos e como operá-los, incluindo: `cd`, `ls`, `mkdir`, `rm`, `cp`, e `mv`. Nem todos os tipos de shells suportam todas as operações de arquivos, mas as operações de arquivos servem para tentar descrever o que um shell deveria fazer.
+Um **Shell** é uma interface semelhante a um sistema de arquivos que descreve um conjunto de operações de arquivos e como operá-los, incluindo: `cd`, `ls`, `mkdir`, `rm`, `cp`, e `mv`. Nem todos os tipos de shells suportam todas as operações de arquivos, mas as operações de arquivos servem para tentar descrever o que um shell deveria fazer.
 
 Os dois tipos de shell atualmente disponíveis são FilesystemShell and ValueShell, mas outros tipos de shells já foram discutidos.
 
@@ -19,9 +19,9 @@ O filesystem shell é um shell que trabalha diretamente com o sistema de arquivo
 ```
 > shells
 ━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
-   │ name       │ path 
+   │ name       │ path
 ───┼────────────┼────────────────
- X │ filesystem │ /home/jonathan 
+ X │ filesystem │ /home/jonathan
 ━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━
 ```
 
@@ -31,10 +31,10 @@ Podemos adicionar mais um filesystem shell para essa lista usando o comando `ent
 > enter Source
 /home/jonathan/Source> shells
 ━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━
- # │   │ name       │ path 
+ # │   │ name       │ path
 ───┼───┼────────────┼───────────────────────
- 0 │   │ filesystem │ /home/jonathan 
- 1 │ X │ filesystem │ /home/jonathan/Source 
+ 0 │   │ filesystem │ /home/jonathan
+ 1 │ X │ filesystem │ /home/jonathan/Source
 ━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━
 ```
 

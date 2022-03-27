@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> dfr contains (pattern)```
+`> dfr contains (pattern)`
 
 ## Parameters
 
- -  `pattern`: Regex pattern to be searched
+- `pattern`: Regex pattern to be searched
 
 ## Examples
 
 Returns boolean indicating if pattern was found
+
 ```shell
 > [abc acb acb] | dfr to-df | dfr contains ab
 ```

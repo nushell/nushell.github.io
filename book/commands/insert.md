@@ -12,16 +12,17 @@ usage: |
 
 ## Signature
 
-```> insert (field) (new value)```
+`> insert (field) (new value)`
 
 ## Parameters
 
- -  `field`: the name of the column to insert
- -  `new value`: the new value to give the cell(s)
+- `field`: the name of the column to insert
+- `new value`: the new value to give the cell(s)
 
 ## Examples
 
 Insert a new value
+
 ```shell
 > echo {'name': 'nu', 'stars': 5} | insert alias 'Nushell'
 ```

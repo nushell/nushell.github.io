@@ -24,7 +24,7 @@ Nuevamente ejecutemos el comando `open` pero esta vez observaremos las etiquetas
 ----------+------------------------------------------
  span     | anchor
 ----------+------------------------------------------
- [object] | /home/jonathan/Source/nushell/Cargo.toml 
+ [object] | /home/jonathan/Source/nushell/Cargo.toml
 ----------+------------------------------------------
 ```
 
@@ -35,12 +35,10 @@ También hay lapso (span). Miremos más de cerca a eso:
 ```
 > open Cargo.toml | tags | get span
 -------+-----
- start | end 
+ start | end
 -------+-----
- 5     | 15 
+ 5     | 15
 -------+-----
 ```
 
 El lapso "start" y "end" aquí se refiere en dónde estará el subrayado en la línea. Si cuentas a partir de 5 y luego hasta 15 podrás observar que se alinea con el nombre de archivo "Cargo.toml". Así es como Nu sabía qué subrayar apropiadamente en el error que vimos previamente.
-
-

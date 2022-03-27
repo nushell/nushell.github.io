@@ -4,9 +4,9 @@ Hello, and welcome to the Nushell project. The goal of this project is to take t
 
 Nu takes cues from a lot of familiar territory: traditional shells like bash, object based shells like PowerShell, functional programming, systems programming, and more. But rather than trying to be the jack of all trades, Nu focuses its energy on doing a few things well:
 
-* Create a flexible cross-platform shell with a modern feel
-* Allow you to mix and match commandline applications with a shell that understands the structure of your data
-* Have the level of UX polish that modern CLI apps provide
+- Create a flexible cross-platform shell with a modern feel
+- Allow you to mix and match commandline applications with a shell that understands the structure of your data
+- Have the level of UX polish that modern CLI apps provide
 
 The easiest way to see what Nu can do is to start with some examples, so let's dive in.
 
@@ -50,7 +50,7 @@ Running `sys` gives information about the system that Nu is running on:
 
 <<< @/snippets/introduction/sys_example.sh
 
-This is a bit different than the tables we saw before. The `sys` command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to *get* the column to view:
+This is a bit different than the tables we saw before. The `sys` command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to _get_ the column to view:
 
 <<< @/snippets/introduction/sys_get_example.sh
 
@@ -68,6 +68,6 @@ Let's see how strings work outside of Nu in action. We'll take our example from 
 
 If this looks very similar to what we had before, you have a keen eye! It is similar, but with one important difference: we've called `^echo` with the value we saw earlier. This allows us to pass data out of Nu into `echo` (or any command outside of Nu, like `git` for example).
 
-*Note: help text for any of Nu's builtin commands can be discovered with the `help` command*:
+_Note: help text for any of Nu's builtin commands can be discovered with the `help` command_:
 
 <<< @/snippets/introduction/help_example.sh

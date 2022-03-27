@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> dfr describe --quantiles```
+`> dfr describe --quantiles`
 
 ## Parameters
 
- -  `--quantiles {table}`: optional quantiles for describe
+- `--quantiles {table}`: optional quantiles for describe
 
 ## Examples
 
 dataframe description
+
 ```shell
 > [[a b]; [1 1] [1 1]] | dfr to-df | dfr describe
 ```

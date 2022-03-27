@@ -12,16 +12,18 @@ usage: |
 
 ## Signature
 
-```> shells ```
+`> shells `
 
 ## Examples
 
 Enter a new shell at parent path '..' and show all opened shells
+
 ```shell
 > enter ..; shells
 ```
 
 Show currently active shell
+
 ```shell
 > shells | where active == true
 ```

@@ -14,7 +14,7 @@ When reading a binary file it will attempt to display its content as hexadecimal
 numbers and the corresponding characters.
 
 `-h`, `--help`
-  Display help message.
+Display help message.
 
 ## Examples
 

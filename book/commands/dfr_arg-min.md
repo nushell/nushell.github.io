@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr arg-min ```
+`> dfr arg-min `
 
 ## Examples
 
 Returns index for min value
+
 ```shell
 > [1 3 2] | dfr to-df | dfr arg-min
 ```

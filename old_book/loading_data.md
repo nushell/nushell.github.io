@@ -9,21 +9,21 @@ One of Nu's most powerful assets in working with data is the `open` command. It 
 ```
 > open editors/vscode/package.json
 ──────────────────┬───────────────────────────────────────────────────────────────────────────────
- name             │ lark 
- description      │ Lark support for VS Code 
- author           │ Lark developers 
- license          │ MIT 
- version          │ 1.0.0 
- repository       │ [row type url] 
- publisher        │ vscode 
- categories       │ [table 0 rows] 
- keywords         │ [table 1 rows] 
- engines          │ [row vscode] 
- activationEvents │ [table 1 rows] 
- main             │ ./out/extension 
- contributes      │ [row configuration grammars languages] 
- scripts          │ [row compile postinstall test vscode:prepublish watch] 
- devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient] 
+ name             │ lark
+ description      │ Lark support for VS Code
+ author           │ Lark developers
+ license          │ MIT
+ version          │ 1.0.0
+ repository       │ [row type url]
+ publisher        │ vscode
+ categories       │ [table 0 rows]
+ keywords         │ [table 1 rows]
+ engines          │ [row vscode]
+ activationEvents │ [table 1 rows]
+ main             │ ./out/extension
+ contributes      │ [row configuration grammars languages]
+ scripts          │ [row compile postinstall test vscode:prepublish watch]
+ devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient]
 ──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
@@ -38,14 +38,14 @@ If we wanted to check the version of the project we were looking at, we can use 
 
 Nu currently supports the following formats for loading data directly into tables:
 
-* json
-* yaml
-* toml
-* xml
-* csv
-* ini
-* xls
-* xlsx
+- json
+- yaml
+- toml
+- xml
+- csv
+- ini
+- xls
+- xlsx
 
 But what happens if you load a text file that isn't one of these? Let's try it:
 
@@ -59,7 +59,7 @@ Below the surface, what Nu sees in these text files is one large string. Next, w
 
 ## Working with strings
 
-An important part of working with data coming from outside Nu is that it's not always in a format that Nu understands. Often this data is given to us as a string. 
+An important part of working with data coming from outside Nu is that it's not always in a format that Nu understands. Often this data is given to us as a string.
 
 Let's imagine that we're given this data file:
 
@@ -69,6 +69,7 @@ Octavia | Butler | Writer
 Bob | Ross | Painter
 Antonio | Vivaldi | Composer
 ```
+
 Each bit of data we want is separated by the pipe ('|') symbol, and each person is on a separate line. Nu doesn't have a pipe-delimited file format by default, so we'll have to parse this ourselves.
 
 The first thing we want to do when bringing in the file is to work with it a line at a time:
@@ -76,9 +77,9 @@ The first thing we want to do when bringing in the file is to work with it a lin
 ```
 > open people.txt | lines
 ───┬──────────────────────────────
- 0 │ Octavia | Butler | Writer 
+ 0 │ Octavia | Butler | Writer
  1 │ Bob | Ross | Painter
- 2 │ Antonio | Vivaldi | Composer 
+ 2 │ Antonio | Vivaldi | Composer
 ───┴──────────────────────────────
 ```
 
@@ -87,24 +88,24 @@ We can see that we're working with the lines because we're back into a table. Ou
 ```
 > open people.txt | lines | split column "|"
 ───┬──────────┬───────────┬───────────
- # │ Column1  │ Column2   │ Column3 
+ # │ Column1  │ Column2   │ Column3
 ───┼──────────┼───────────┼───────────
- 0 │ Octavia  │  Butler   │  Writer 
+ 0 │ Octavia  │  Butler   │  Writer
  1 │ Bob      │  Ross     │  Painter
- 2 │ Antonio  │  Vivaldi  │  Composer 
+ 2 │ Antonio  │  Vivaldi  │  Composer
 ───┴──────────┴───────────┴───────────
 ```
 
-That *almost* looks correct. It looks like there's an extra space there. Let's `trim` that extra space:
+That _almost_ looks correct. It looks like there's an extra space there. Let's `trim` that extra space:
 
 ```
 > open people.txt | lines | split column "|" | str trim
 ───┬─────────┬─────────┬──────────
- # │ Column1 │ Column2 │ Column3 
+ # │ Column1 │ Column2 │ Column3
 ───┼─────────┼─────────┼──────────
- 0 │ Octavia │ Butler  │ Writer 
+ 0 │ Octavia │ Butler  │ Writer
  1 │ Bob     │ Ross    │ Painter
- 2 │ Antonio │ Vivaldi │ Composer 
+ 2 │ Antonio │ Vivaldi │ Composer
 ───┴─────────┴─────────┴──────────
 ```
 
@@ -113,22 +114,22 @@ Not bad. The `split` command gives us data we can use. It also goes ahead and gi
 ```
 > open people.txt | lines | split column "|" | str trim | get Column1
 ───┬─────────
- 0 │ Octavia 
- 1 │ Bob 
- 2 │ Antonio 
+ 0 │ Octavia
+ 1 │ Bob
+ 2 │ Antonio
 ───┴─────────
 ```
 
 We can also name our columns instead of using the default names:
 
 ```
-> open people.txt | lines | split column "|" first_name last_name job | str trim 
+> open people.txt | lines | split column "|" first_name last_name job | str trim
 ───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job 
+ # │ first_name │ last_name │ job
 ───┼────────────┼───────────┼──────────
- 0 │ Octavia    │ Butler    │ Writer 
+ 0 │ Octavia    │ Butler    │ Writer
  1 │ Bob        │ Ross      │ Painter
- 2 │ Antonio    │ Vivaldi   │ Composer 
+ 2 │ Antonio    │ Vivaldi   │ Composer
 ───┴────────────┴───────────┴──────────
 ```
 
@@ -137,18 +138,19 @@ Now that our data is in a table, we can use all the commands we've used on table
 ```
 > open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
 ───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job 
+ # │ first_name │ last_name │ job
 ───┼────────────┼───────────┼──────────
- 0 │ Antonio    │ Vivaldi   │ Composer 
+ 0 │ Antonio    │ Vivaldi   │ Composer
  1 │ Bob        │ Ross      │ Painter
- 2 │ Octavia    │ Butler    │ Writer 
+ 2 │ Octavia    │ Butler    │ Writer
 ───┴────────────┴───────────┴──────────
 ```
 
 There are other commands you can use to work with strings:
-* `str`
-* `lines`
-* `size`
+
+- `str`
+- `lines`
+- `size`
 
 There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:
 
@@ -166,8 +168,8 @@ The "Cargo.lock" file is actually a .toml file, but the file extension isn't .to
 ```
 > open Cargo.lock | from toml
 ──────────┬───────────────────
- metadata │ [row 107 columns] 
- package  │ [table 130 rows] 
+ metadata │ [row 107 columns]
+ package  │ [table 130 rows]
 ──────────┴───────────────────
 ```
 
@@ -193,6 +195,6 @@ In addition to loading files from your filesystem, you can also load URLs by usi
 ```
 > fetch https://www.jonathanturner.org/feed.xml
 ─────┬───────────────────────────
- rss │ [row attributes children] 
+ rss │ [row attributes children]
 ─────┴───────────────────────────
 ```

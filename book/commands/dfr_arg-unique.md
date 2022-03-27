@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr arg-unique ```
+`> dfr arg-unique `
 
 ## Examples
 
 Returns indexes for unique values
+
 ```shell
 > [1 2 2 3 3] | dfr to-df | dfr arg-unique
 ```

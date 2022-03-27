@@ -12,16 +12,17 @@ usage: |
 
 ## Signature
 
-```> dfr replace --pattern --replace```
+`> dfr replace --pattern --replace`
 
 ## Parameters
 
- -  `--pattern {string}`: Regex pattern to be matched
- -  `--replace {string}`: replacing string
+- `--pattern {string}`: Regex pattern to be matched
+- `--replace {string}`: replacing string
 
 ## Examples
 
 Replaces string
+
 ```shell
 > [abc abc abc] | dfr to-df | dfr replace -p ab -r AB
 ```

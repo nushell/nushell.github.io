@@ -9,13 +9,13 @@ Una de las funciones más destacadas de Nu para trabajar con datos es el comando
 ```
 > open editors/vscode/package.json
 ------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
- name | descript | author   | license | version | reposito | publishe | categori | keywords | engines  | activati | main     | contribu | scripts  | devDepen 
-      | ion      |          |         |         | ry       | r        | es       |          |          | onEvents |          | tes      |          | dencies 
+ name | descript | author   | license | version | reposito | publishe | categori | keywords | engines  | activati | main     | contribu | scripts  | devDepen
+      | ion      |          |         |         | ry       | r        | es       |          |          | onEvents |          | tes      |          | dencies
 ------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
- lark | Lark     | Lark     | MIT     | 1.0.0   | [object] | vscode   | [0       | [1 item] | [object] | [1 item] | ./out/ex | [object] | [object] | [object] 
-      | support  | develope |         |         |          |          | items]   |          |          |          | tension  |          |          |  
-      | for VS   | rs       |         |         |          |          |          |          |          |          |          |          |          |  
-      | Code     |          |         |         |          |          |          |          |          |          |          |          |          |  
+ lark | Lark     | Lark     | MIT     | 1.0.0   | [object] | vscode   | [0       | [1 item] | [object] | [1 item] | ./out/ex | [object] | [object] | [object]
+      | support  | develope |         |         |          |          | items]   |          |          |          | tension  |          |          |
+      | for VS   | rs       |         |         |          |          |          |          |          |          |          |          |          |
+      | Code     |          |         |         |          |          |          |          |          |          |          |          |          |
 ------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
 ```
 
@@ -30,12 +30,12 @@ Si deseamos revisar la versión del proyecto que estamos mirando podemos usar el
 
 Actualmente Nu soporta los siguiente formatos para cargar datos directamente a tablas:
 
-* json
-* yaml
-* toml
-* xml
-* csv
-* ini
+- json
+- yaml
+- toml
+- xml
+- csv
+- ini
 
 ¿Pero qué sucede si cargas un archivo de texto que no sea de estos? Probemos:
 
@@ -67,11 +67,11 @@ Lo primero que queremos hacer al cargar el archivo es trabajarlo línea por lín
 ```
 > open gente.txt | lines
 ---+------------------------------
- # | value 
+ # | value
 ---+------------------------------
- 0 | Octavia | Butler | Writer 
- 1 | Bob | Ross | Painter 
- 2 | Antonio | Vivaldi | Composer 
+ 0 | Octavia | Butler | Writer
+ 1 | Bob | Ross | Painter
+ 2 | Antonio | Vivaldi | Composer
 ---+------------------------------
 ```
 
@@ -80,11 +80,11 @@ Podemos darnos cuenta que estamos trabajando con las líneas porque estamos de v
 ```
 > open gente.txt | lines | split column "|"
 ---+----------+-----------+-----------
- # | Column1  | Column2   | Column3 
+ # | Column1  | Column2   | Column3
 ---+----------+-----------+-----------
- 0 | Octavia  |  Butler   |  Writer 
- 1 | Bob      |  Ross     |  Painter 
- 2 | Antonio  |  Vivaldi  |  Composer 
+ 0 | Octavia  |  Butler   |  Writer
+ 1 | Bob      |  Ross     |  Painter
+ 2 | Antonio  |  Vivaldi  |  Composer
 ---+----------+-----------+-----------
 ```
 
@@ -93,11 +93,11 @@ Casi se ve correcto. Parece que hay espacio extra ahí. Cambiemos nuestro delimi
 ```
 > open gente.txt | lines | split column " | "
 ---+---------+---------+----------
- # | Column1 | Column2 | Column3 
+ # | Column1 | Column2 | Column3
 ---+---------+---------+----------
- 0 | Octavia | Butler  | Writer 
- 1 | Bob     | Ross    | Painter 
- 2 | Antonio | Vivaldi | Composer 
+ 0 | Octavia | Butler  | Writer
+ 1 | Bob     | Ross    | Painter
+ 2 | Antonio | Vivaldi | Composer
 ---+---------+---------+----------
 ```
 
@@ -106,11 +106,11 @@ Nada mal. El comando `split` nos da datos que podemos usar. Adicionalmente nos c
 ```
 > open gente.txt | lines | split column " | " | get Column1
 ---+---------
- # | value 
+ # | value
 ---+---------
- 0 | Octavia 
- 1 | Bob 
- 2 | Antonio 
+ 0 | Octavia
+ 1 | Bob
+ 2 | Antonio
 ---+---------
 ```
 
@@ -119,11 +119,11 @@ También podemos nombrar nuestras columnas en vez de usar nombres predeterminado
 ```
 > open gente.txt | lines | split column " | " primer_nombre apellido trabajo
 ---+---------------+-----------+----------
- # | primer_nombre | apellido  | trabajo 
+ # | primer_nombre | apellido  | trabajo
 ---+---------------+-----------+----------
- 0 | Octavia       | Butler    | Writer 
- 1 | Bob           | Ross      | Painter 
- 2 | Antonio       | Vivaldi   | Composer 
+ 0 | Octavia       | Butler    | Writer
+ 1 | Bob           | Ross      | Painter
+ 2 | Antonio       | Vivaldi   | Composer
 ---+---------------+-----------+----------
 ```
 
@@ -132,18 +132,19 @@ Ahora que tenemos nuestros datos en una tabla podemos usar todos los comandos qu
 ```
 > open gente.txt | lines | split column " | " primer_nombre apellido trabajo | sort-by primer_nombre
 ---+---------------+-----------+----------
- # | primer_nombre | apellido  | trabajo 
+ # | primer_nombre | apellido  | trabajo
 ---+---------------+-----------+----------
- 0 | Antonio       | Vivaldi   | Composer 
- 1 | Bob           | Ross      | Painter 
- 2 | Octavia       | Butler    | Writer 
+ 0 | Antonio       | Vivaldi   | Composer
+ 1 | Bob           | Ross      | Painter
+ 2 | Octavia       | Butler    | Writer
 ---+---------------+-----------+----------
 ```
 
 Hay otros comandos que puedes usar para trabajar con cadenas:
-* str
-* lines
-* size
+
+- str
+- lines
+- size
 
 También hay un conjunto de comandos auxiliares que podemos llamar si conocemos de antemano que los datos tienen una estructura que Nu debería de entender. Por ejemplo, abramos un Rust archivo lock:
 
@@ -163,9 +164,9 @@ El archivo "Cargo.lock" es un archivo en formato .toml pero la extensión del ar
 ```
 > open Cargo.lock | from toml
 ----------+-------------
- metadata | package 
+ metadata | package
 ----------+-------------
- [object] | [405 items] 
+ [object] | [405 items]
 ----------+-------------
 ```
 
@@ -192,8 +193,8 @@ Además de cargar archivos desde tu archivos de sistema, también puedes usar el
 ```
 > fetch http://www.andresrobalino.com/feed.xml
 ----------
- rss 
+ rss
 ----------
- [1 item] 
+ [1 item]
 ----------
 ```

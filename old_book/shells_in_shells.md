@@ -10,12 +10,12 @@ To get started, let's enter a directory:
 /home/jonathant/Source/nushell(master)> enter ../book
 /home/jonathant/Source/book(master)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
- #  │ name               │ type │ size   │ modified 
+ #  │ name               │ type │ size   │ modified
 ────┼────────────────────┼──────┼────────┼─────────────
-  0 │ 404.html           │ File │  429 B │ 2 hours ago 
-  1 │ CONTRIBUTING.md    │ File │  955 B │ 2 hours ago 
-  2 │ Gemfile            │ File │ 1.1 KB │ 2 hours ago 
-  3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago 
+  0 │ 404.html           │ File │  429 B │ 2 hours ago
+  1 │ CONTRIBUTING.md    │ File │  955 B │ 2 hours ago
+  2 │ Gemfile            │ File │ 1.1 KB │ 2 hours ago
+  3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago
 ```
 
 Entering is similar to changing directories (as we saw with the `cd` command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the `shells` command to list the current directories we have active:
@@ -62,13 +62,13 @@ Let's `enter` the file "Cargo.toml" from Nu's source code:
 /home/jonathant/Source/nushell(master)> enter Cargo.toml
 /> ls
 ────────────────────┬───────────────────────────
- bin                │ [table 18 rows] 
- build-dependencies │ [row nu-build serde toml] 
- dependencies       │ [row 29 columns] 
- dev-dependencies   │ [row nu-test-support] 
- features           │ [row 19 columns] 
- package            │ [row 12 columns] 
- workspace          │ [row members] 
+ bin                │ [table 18 rows]
+ build-dependencies │ [row nu-build serde toml]
+ dependencies       │ [row 29 columns]
+ dev-dependencies   │ [row nu-test-support]
+ features           │ [row 19 columns]
+ package            │ [row 12 columns]
+ workspace          │ [row members]
 ────────────────────┴───────────────────────────
 ```
 
@@ -79,10 +79,10 @@ Before we continue, let's check the active shells:
 ```
 > shells
 ───┬────────┬─────────────────────────────────────────────┬─────────────────────────────────
- # │ active │ name                                        │ path 
+ # │ active │ name                                        │ path
 ───┼────────┼─────────────────────────────────────────────┼─────────────────────────────────
- 0 │        │ filesystem                                  │ /home/jonathant/Source/nushell/ 
- 1 │ X      │ {/home/jonathant/Source/nushell/Cargo.toml} │ / 
+ 0 │        │ filesystem                                  │ /home/jonathant/Source/nushell/
+ 1 │ X      │ {/home/jonathant/Source/nushell/Cargo.toml} │ /
 ───┴────────┴─────────────────────────────────────────────┴─────────────────────────────────
 ```
 
@@ -91,13 +91,13 @@ We can observe that we have two active shells and telling us we are currently in
 ```
 /> ls
 ────────────────────┬───────────────────────────
- bin                │ [table 18 rows] 
- build-dependencies │ [row nu-build serde toml] 
- dependencies       │ [row 29 columns] 
- dev-dependencies   │ [row nu-test-support] 
- features           │ [row 19 columns] 
- package            │ [row 12 columns] 
- workspace          │ [row members] 
+ bin                │ [table 18 rows]
+ build-dependencies │ [row nu-build serde toml]
+ dependencies       │ [row 29 columns]
+ dev-dependencies   │ [row nu-test-support]
+ features           │ [row 19 columns]
+ package            │ [row 12 columns]
+ workspace          │ [row members]
 ────────────────────┴───────────────────────────
 ```
 
@@ -107,14 +107,14 @@ What we're looking for might be inside of the "bin" column. So let's go into the
 > cd bin
 /bin> ls
 ────┬─────────────────────────────┬────────────────────────────────────────────┬───────────────────
- #  │ name                        │ path                                       │ required-features 
+ #  │ name                        │ path                                       │ required-features
 ────┼─────────────────────────────┼────────────────────────────────────────────┼───────────────────
-  0 │ fail                        │ crates/nu-test-support/src/bins/fail.rs    │ [table 1 rows] 
-  1 │ chop                        │ crates/nu-test-support/src/bins/chop.rs    │ [table 1 rows] 
-  2 │ cococo                      │ crates/nu-test-support/src/bins/cococo.rs  │ [table 1 rows] 
-  3 │ nonu                        │ crates/nu-test-support/src/bins/nonu.rs    │ [table 1 rows] 
-  4 │ iecho                       │ crates/nu-test-support/src/bins/iecho.rs   │ [table 1 rows] 
-  5 │ nu_plugin_core_textview     │ src/plugins/nu_plugin_core_textview.rs     │ [table 1 rows] 
+  0 │ fail                        │ crates/nu-test-support/src/bins/fail.rs    │ [table 1 rows]
+  1 │ chop                        │ crates/nu-test-support/src/bins/chop.rs    │ [table 1 rows]
+  2 │ cococo                      │ crates/nu-test-support/src/bins/cococo.rs  │ [table 1 rows]
+  3 │ nonu                        │ crates/nu-test-support/src/bins/nonu.rs    │ [table 1 rows]
+  4 │ iecho                       │ crates/nu-test-support/src/bins/iecho.rs   │ [table 1 rows]
+  5 │ nu_plugin_core_textview     │ src/plugins/nu_plugin_core_textview.rs     │ [table 1 rows]
 ```
 
 From here, we can always jump back to the directory we were working in before using p (for previous).
@@ -128,10 +128,10 @@ Let's verify the shells again:
 ```
 /home/jonathant/Source/nushell/(simple_list_view)> shells
 ───┬────────┬─────────────────────────────────────────────┬─────────────────────────────────
- # │ active │ name                                        │ path 
+ # │ active │ name                                        │ path
 ───┼────────┼─────────────────────────────────────────────┼─────────────────────────────────
- 0 │ X      │ filesystem                                  │ /home/jonathant/Source/nushell/ 
- 1 │        │ {/home/jonathant/Source/nushell/Cargo.toml} │ /bin 
+ 0 │ X      │ filesystem                                  │ /home/jonathant/Source/nushell/
+ 1 │        │ {/home/jonathant/Source/nushell/Cargo.toml} │ /bin
 ───┴────────┴─────────────────────────────────────────────┴─────────────────────────────────
 
 

@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> clear ```
+`> clear `
 
 ## Examples
 
 Clear the terminal
+
 ```shell
 > clear
 ```

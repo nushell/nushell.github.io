@@ -4,7 +4,7 @@ layout: command
 nu_version: 0.32
 ---
 
-Parses MS Excel binary data into a table. `open` calls `from xlsx` automatically when the file extension  is `xlsx`. Use this command when `open` is unable to guess the file type from the extension.
+Parses MS Excel binary data into a table. `open` calls `from xlsx` automatically when the file extension is `xlsx`. Use this command when `open` is unable to guess the file type from the extension.
 
 ## Examples
 

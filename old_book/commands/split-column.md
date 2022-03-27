@@ -6,12 +6,12 @@ nu_version: 0.32
 
 splits contents across multiple columns via the separator.
 
-Syntax: `split column <separator>  ...args{flags}`
+Syntax: `split column <separator> ...args{flags}`
 
 ## Parameters
 
-* `<separator>`: string that denotes what separates columns
-* `args`: column names to give the new columns. If not specified they will be set to `Column1` `Column2` ...
+- `<separator>`: string that denotes what separates columns
+- `args`: column names to give the new columns. If not specified they will be set to `Column1` `Column2` ...
 
 ## Flags
 

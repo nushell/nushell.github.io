@@ -12,16 +12,18 @@ usage: |
 
 ## Signature
 
-```> from toml ```
+`> from toml `
 
 ## Examples
 
 Converts toml formatted string to table
+
 ```shell
 > 'a = 1' | from toml
 ```
 
 Converts toml formatted string to table
+
 ```shell
 > 'a = 1
 b = [1, 2]' | from toml

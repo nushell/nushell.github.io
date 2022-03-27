@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> to yaml ```
+`> to yaml `
 
 ## Examples
 
 Outputs an YAML string representing the contents of this table
+
 ```shell
 > [[foo bar]; ["1" "2"]] | to yaml
 ```

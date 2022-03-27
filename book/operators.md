@@ -3,7 +3,7 @@
 Nushell supports the following operators for common math, logic, and string operations:
 
 | Operator | Description                     |
-| -------- | ------------------------------- |
+| -------- | ------------------------------- | --- | --------------------- |
 | `+`      | add                             |
 | `-`      | subtract                        |
 | `*`      | multiply                        |
@@ -21,7 +21,7 @@ Nushell supports the following operators for common math, logic, and string oper
 | `in`     | value in list                   |
 | `not-in` | value not in list               |
 | `&&`     | and two Boolean values          |
-| `||`     | or two Boolean values           |
+| `        |                                 | `   | or two Boolean values |
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
 
@@ -29,9 +29,9 @@ Parentheses can be used for grouping to specify evaluation order or for calling 
 
 Math operations are evaluated in the follow order (from highest precedence to lowest):
 
-* Parentheses (`()`)
-* Multiply (`*`) and Divide (`/`) and Power (`**`)
-* Add (`+`) and Subtract (`-`)
+- Parentheses (`()`)
+- Multiply (`*`) and Divide (`/`) and Power (`**`)
+- Add (`+`) and Subtract (`-`)
 
 ```
 > 3 * (1 + 2)

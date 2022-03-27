@@ -12,4 +12,4 @@ usage: |
 
 ## Signature
 
-```> math ```
+`> math `

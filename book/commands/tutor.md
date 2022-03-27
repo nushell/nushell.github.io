@@ -12,21 +12,23 @@ usage: |
 
 ## Signature
 
-```> tutor (search) --find```
+`> tutor (search) --find`
 
 ## Parameters
 
- -  `search`: item to search for, or 'list' to list available tutorials
- -  `--find {string}`: Search tutorial for a phrase
+- `search`: item to search for, or 'list' to list available tutorials
+- `--find {string}`: Search tutorial for a phrase
 
 ## Examples
 
 Begin the tutorial
+
 ```shell
 > tutor begin
 ```
 
 Search a tutorial by phrase
+
 ```shell
 > tutor -f "$in"
 ```

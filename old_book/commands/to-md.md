@@ -8,7 +8,7 @@ Convert table into simple Markdown.
 
 ## Flags
 
-* `-p`, `--pretty`: Formats the Markdown table to vertically align items
+- `-p`, `--pretty`: Formats the Markdown table to vertically align items
 
 ## Example
 

@@ -47,12 +47,12 @@ true
 
 Die folgenden Vergleichsoperatoren sind ebenfalls verfügbar:
 
-* `<` - kleiner als
-* `<=` - kleiner gleich
-* `>` - größer als
-* `>=` - größer gleich
-* `==` - gleich
-* `!=` - ungleich
+- `<` - kleiner als
+- `<=` - kleiner gleich
+- `>` - größer als
+- `>=` - größer gleich
+- `==` - gleich
+- `!=` - ungleich
 
 ## Verknüpfungsoperatoren
 
@@ -62,9 +62,9 @@ Nushell unterstützt auch die Operatoren `&&` ("und") und `||` ("oder") um zwei 
 
 Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von der höchsten Priorität zur niedrigsten Priorität):
 
-* Klammern (`()`)
-* Multiplikation (`*`), Division (`/`) und Potenz (`**`)
-* Addition (`+`) und Subtraktion (`-`)
+- Klammern (`()`)
+- Multiplikation (`*`), Division (`/`) und Potenz (`**`)
+- Addition (`+`) und Subtraktion (`-`)
 
 ```
 > 3 * (1 + 2)

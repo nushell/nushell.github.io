@@ -14,51 +14,51 @@ Descarga el archivo actual `.zip` [de la página de releases](https://github.com
 
 ```
  C:\Program Files
- ```
+```
 
 y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos eso, podemos ejecutar Nu usando el comando `nu`:
 
 ```
  > nu
  C:\Users\user>
- ```
+```
 
- Si te encuentras usando [Windows Terminal](https://github.com/microsoft/terminal) puedes establecer `nu` como la shell por defecto añadiendo:
+Si te encuentras usando [Windows Terminal](https://github.com/microsoft/terminal) puedes establecer `nu` como la shell por defecto añadiendo:
 
- ```         
+```
 {
-  "guid": "{2b372ca1-1ee2-403d-a839-6d63077ad871}",
-  "hidden": false,
-  "name": "Nu Shell",
-  "commandline": "nu.exe"
+ "guid": "{2b372ca1-1ee2-403d-a839-6d63077ad871}",
+ "hidden": false,
+ "name": "Nu Shell",
+ "commandline": "nu.exe"
 }
- ```
+```
 
- a  `"profiles"` en las preferencias de tu Terminal (archivo JSON). Lo último que tienes que hacer es cambiar `"defaultProfile"` a:
+a `"profiles"` en las preferencias de tu Terminal (archivo JSON). Lo último que tienes que hacer es cambiar `"defaultProfile"` a:
 
- ```
- "defaultProfile": "{2b372ca1-1ee2-403d-a839-6d63077ad871}",
- ```
- 
- Ahora `nu` debería cargar al inicio de la Terminal de Windows.
+```
+"defaultProfile": "{2b372ca1-1ee2-403d-a839-6d63077ad871}",
+```
+
+Ahora `nu` debería cargar al inicio de la Terminal de Windows.
 
 ## Preparación
 
 Antes de que podamos instalar Nu, necesitamos asegurarnos de que nuestro sistema tenga los requerimientos necesarios. Actualmente significa que debemos verificar tener instalado tanto el Rust toolchain así como las dependencias locales. Estás son las suites de compilación recomendadas:
 
-* Linux: GCC or Clang
-* macOS: Clang (install Xcode)
-* Windows: [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
+- Linux: GCC or Clang
+- macOS: Clang (install Xcode)
+- Windows: [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
 
 Para Linux y macOS, una vez que hayas instalado la suite de compilación, todo estará listo para instalar Rust a través de `rustup` (ver más abajo).
 
-For Windows, when you install Visual Studio Community Edition, make sure to install the "C++ build tools" as what we need is `link.exe` which is provided as part of that optional install.  With that, we're ready to move to the next step.
+For Windows, when you install Visual Studio Community Edition, make sure to install the "C++ build tools" as what we need is `link.exe` which is provided as part of that optional install. With that, we're ready to move to the next step.
 
 Para Windows, cuando instalas Visual Studio Community Edition, asegúrate de instalar las herramientas "C++ build tools" ya que lo que necesitamos es `link.exe`, que es proporcionado como parte de esa instalación optcional. Con eso, estamos listos para el siguiente paso.
 
 ### Instalando un suite de compilación
 
-Para que Rust funcione correctamente, necesitarás tener un suite de compilación compatible instalado en el sistema. 
+Para que Rust funcione correctamente, necesitarás tener un suite de compilación compatible instalado en el sistema.
 
 ### Instalando Rust
 
@@ -126,18 +126,20 @@ Si deseas instalar con más funcionalidades, puedes hacer:
 
 Para todas las funcionalidades disponibles, la manera más fácil es descargar la fuente de Nu y construírlo usted mismo usando las herramientas de Rust:
 
- ```
- > git clone https://github.com/nushell/nushell.git
- > cd nushell
- nushell> cargo install --path . --force --features=stable
+```
+> git clone https://github.com/nushell/nushell.git
+> cd nushell
+nushell> cargo install --path . --force --features=stable
 
 Para que esto funcione, asegúrate de tener todas las dependencias instaladas (que se muestran arriba) en el sistema.
 
 Finalizada la instalación podemos ejecutar Nu usando el comando `nu`:
 
 ```
+
 $ nu
-/home/jonathan/Source> 
+/home/jonathan/Source>
+
 ```
 
 ## Construyendo desde la fuente
@@ -145,20 +147,26 @@ $ nu
 También podemos contruir nuestro propio Nu directamente desde github. Esto nos da acceso inmediato a las últimas funcionalidades y corrección de bugs.
 
 ```
+
 > git clone https://github.com/nushell/nushell.git
+
 ```
 
 Git nos clonará el repositorio principal de Nu. Partiendo de ahí podemos contruir y arrancar Nu si estamos usando `rustup` con:
 
 ```
+
 > cd nushell
-nushell> cargo build --workspace --features=stable && cargo run --features=stable
+> nushell> cargo build --workspace --features=stable && cargo run --features=stable
+
 ```
 
 También puedes construir y arrancar Nu en modo release:
 
 ```
+
 nushell> cargo build --release --workspace --features=stable && cargo run --release --features=stable
+
 ```
 Gente familiarizada con Rust se preguntará la razón por la que hacemos un paso "build" y otro paso "run" si "run" construye por defecto. Esto es para evitar una deficiencia de la nueva opción `default-run` en Cargo y asegurar que todos los plugins se construyan aunque puede que esto no sea necesario en el futuro.
 
@@ -172,7 +180,10 @@ Para configurar la shell de inicio de sesión, puedes usra el comando [`chsh`](h
 En algunas distribuciones de Linux se encuentra una lista válida de shells en `/etc/shells` y no permitirá cambiar la shell hasta que Nu esté en la lista blanca. Es posible que vea un error similar al siguiente si no ha actualizado el archivo `shells`:
 
 ```
+
 chsh: /home/username/.cargo/bin/nu is an invalid shell
+
 ```
 
 Puedes agregar Nu a la lista de shells válidas añadiendo el binario al archivo `shells`. La ruta para agregar puedes encontrarla con el comando `which nu`, usualmente es `$HOME/.cargo/bin/nu`.
+```

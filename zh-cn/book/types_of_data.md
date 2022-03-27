@@ -58,12 +58,12 @@ Lines 是隐式带有依赖操作系统的换行符的字符串。
 这个表显示了目前支持的时间单位：
 
 | Duration | Length     | 中文 |
-|----------|------------|------|
-|1sec      | one second | 一秒 |
-|1min      | one minute | 一分 |
-|1hr       | one hour   | 一时 |
-|1day      | one day    | 一日 |
-|1wk       | one week   | 一周 |
+| -------- | ---------- | ---- |
+| 1sec     | one second | 一秒 |
+| 1min     | one minute | 一分 |
+| 1hr      | one hour   | 一时 |
+| 1day     | one day    | 一日 |
+| 1wk      | one week   | 一周 |
 
 ### 范围 Ranges
 

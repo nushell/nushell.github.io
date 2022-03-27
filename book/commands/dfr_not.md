@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr not ```
+`> dfr not `
 
 ## Examples
 
 Inverts boolean mask
+
 ```shell
 > [true false true] | dfr to-df | dfr not
 ```

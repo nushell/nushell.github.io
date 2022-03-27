@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> from ini ```
+`> from ini `
 
 ## Examples
 
 Converts ini formatted string to table
+
 ```shell
 > '[foo]
 a=1

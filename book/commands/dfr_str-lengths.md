@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr str-lengths ```
+`> dfr str-lengths `
 
 ## Examples
 
 Returns string lengths
+
 ```shell
 > [a ab abc] | dfr to-df | dfr str-lengths
 ```

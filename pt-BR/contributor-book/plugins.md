@@ -15,7 +15,7 @@ O segundo estágio é a realização do verdadeiro trabalho. Aqui é enviado tan
 ## Descoberta
 
 Nu descobre plugins ao checar todos os diretórios disponíveis no PATH atual.
-Em cada diretório, Nu busca por arquivos executáveis que combinam com o padrão  `nu_plugin_*`, onde `*` é no mínimo um caracter alfanumérico.
+Em cada diretório, Nu busca por arquivos executáveis que combinam com o padrão `nu_plugin_*`, onde `*` é no mínimo um caracter alfanumérico.
 No Windows, isso é um padrão similar à `nu_plugin_*.exe` ou `nu_plugin_*.bat`.
 
 Assim que um arquivo que combine com o padrão for descoberto, Nu vai invocar o arquivo e passar ao primeiro comando JSON-RPC: config.
@@ -23,7 +23,7 @@ Config responde com a assinatura do plugin, que é idêntico a assinatura usada 
 
 Nu continua essa busca até ter percorrido todos os diretórios no caminho.
 
-Após ter percorrido o caminho, dois outros diretórios serão verificados o diretório alvo/debug e o diretório alvo/release. Um ou outro diretório vai ser buscado, dependendo seo  Nu foi compilado no módo de depuração ou de release, respectivamente. Isso permite testar rapidamente os plugins durante o desenvolvimento.
+Após ter percorrido o caminho, dois outros diretórios serão verificados o diretório alvo/debug e o diretório alvo/release. Um ou outro diretório vai ser buscado, dependendo seo Nu foi compilado no módo de depuração ou de release, respectivamente. Isso permite testar rapidamente os plugins durante o desenvolvimento.
 
 ## Criando um plugin (em Rust)
 
@@ -108,7 +108,7 @@ fn main() {
 }
 ```
 
-No main, simplesmente chamamos uma única função `serve_plugin`. Isso vai fazer o trabalho de chamar o plugin, lidando com a serialização/desserialização do JSON, e enviando valores e erros de volta para o Nu. Para iniciá-lo, passamos  algo que implementa a trait `Plugin`.
+No main, simplesmente chamamos uma única função `serve_plugin`. Isso vai fazer o trabalho de chamar o plugin, lidando com a serialização/desserialização do JSON, e enviando valores e erros de volta para o Nu. Para iniciá-lo, passamos algo que implementa a trait `Plugin`.
 
 Em seguida, acima do main, está a implementação da trait `Plugin` para o nosso plugin em particular. Aqui, vamos implementar a trait Plugin para o nosso tipo, Len, que veremos em breve. Vamos ver como implementamos essa trait:
 
@@ -128,13 +128,13 @@ impl Plugin for Len {
 }
 ```
 
-As duas partes mais importantes dessa implementação  são a parte de `config`, que é executada pelo Nu quando se inicia pela primeira vez. Isso informa ao Nu as informações básicas sobre o plugin: nome, parâmetros recebidos, descrição e qual o tipo do plugin.
+As duas partes mais importantes dessa implementação são a parte de `config`, que é executada pelo Nu quando se inicia pela primeira vez. Isso informa ao Nu as informações básicas sobre o plugin: nome, parâmetros recebidos, descrição e qual o tipo do plugin.
 Aqui, informamos ao Nu que o nome é "len", damos uma básica descrição de `ajuda` para mostrar e que somos um plugin de filtro (ao invés de um plugin de saída).
 
 Em seguida, na implementação do `filter`, descrevemos como as informações são processadas com o fluxo de dados neste plugin. Aqui, recebemos um valor (um `Value`) de cada vez.
 Também retornamos ou um Vec de valores ou um erro.
 Retornar um vec ao invés de um único valor nos permite remover valores, ou adicionar outros, além de trabalhar com o único valor recebido.
-  
+
 Já que o `begin_filter` não faz nada, podemos remove-lo. Isso simplificaria o código acima:
 
 ```rust
@@ -142,7 +142,7 @@ impl Plugin for Len {
     fn config(&mut self) -> Result<Signature, ShellError> {
         Ok(Signature::build("len").desc("My custom len plugin").filter())
     }
-    
+
     fn filter(&mut self, input: Value) -> Result<Vec<ReturnValue>, ShellError> {
         Ok(vec![ReturnSuccess::value(self.len(input)?)])
     }
@@ -333,7 +333,7 @@ Para esse plugin, temos que servir a função básica: responder ao request da c
 
 A partir disso, vemos qual método é invocado. Para esse plugin, existem quatro métodos que nos preocupamos: config, begin_filter, filter, e end_filter. Quando recebemos um request do tipo 'config', respondemos com a assinatura desse plugin, que é um pedaço de informação dizendo ao Nu como o comando deve ser chamado. Assim que for enviado, saímos do loop para que o plugin possa encerrar e ser invocado novamente quando o filtro iniciar.
 
-Os outros três métodos -- begin_filter, filter, e end_filter -- trabalham todos juntos para filtrar os dados recebidos. Como esse plugin vai trabalhar separadamente com cada pedaço de dado, transformando strings nos seus respectivos tamanhos, fazemos a maior parte do nosso trabalho no método `filter`. O método 'end_filter' é usado para encerrar o plugin,  então usamos ele para sair do loop.
+Os outros três métodos -- begin_filter, filter, e end_filter -- trabalham todos juntos para filtrar os dados recebidos. Como esse plugin vai trabalhar separadamente com cada pedaço de dado, transformando strings nos seus respectivos tamanhos, fazemos a maior parte do nosso trabalho no método `filter`. O método 'end_filter' é usado para encerrar o plugin, então usamos ele para sair do loop.
 
 ```python
 def get_length(string_value):
@@ -384,4 +384,4 @@ e você já pode utilizar.
 
 Você pode aprender mais sobre criar um plugin de Nu com C# aqui:
 
-* .Net Core nu-plugin-lib: (https://github.com/myty/nu-plugin-lib)
+- .Net Core nu-plugin-lib: (https://github.com/myty/nu-plugin-lib)

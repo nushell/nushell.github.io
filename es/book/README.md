@@ -1,12 +1,12 @@
 # Introducción
 
-Hola, y bienvenido al proyecto Nushell. El objetivo de este proyecto es tomar la filosofía Unix de shells, dónde tuberías *-pipes-* conectan comandos simples juntos y llevarlos al estilo moderno de desarrollo.
+Hola, y bienvenido al proyecto Nushell. El objetivo de este proyecto es tomar la filosofía Unix de shells, dónde tuberías _-pipes-_ conectan comandos simples juntos y llevarlos al estilo moderno de desarrollo.
 
 Nu toma ideas de muchos territorios familiares: shells tradicionales como bash, shells basadas en objetos como PowerShell, programación funcional, programación de sistemas, y más. Pero, en lugar de ser un "Todo en uno", Nu enfoca su energía en hacer algunas cosas bien:
 
-* Crear una multiplataforma shell flexible con un toque moderno.
-* Permitir mezclar y combinar aplicaciones de línea de comandos con una shell que entiende la estructura de sus datos.
-* Tenga el brillo UX que proporcionan las aplicaciones modernas CLI.
+- Crear una multiplataforma shell flexible con un toque moderno.
+- Permitir mezclar y combinar aplicaciones de línea de comandos con una shell que entiende la estructura de sus datos.
+- Tenga el brillo UX que proporcionan las aplicaciones modernas CLI.
 
 La manera más facil de ver qué puede hacer Nu es con ejemplos, iniciemos.
 
@@ -50,7 +50,7 @@ Ejecutando `sys` devuelve información sobre el sistema en el que se ejecuta Nu:
 
 <<< @/snippets/introduction/sys_example.sh
 
-Esta tabla se ve un poco diferente con las que ya hemos trabajado. El comando `sys` nos regresa una tabla que también contiene tablas estructuradas en las celdas en vez de valores simples. Para explorar esos datos, necesitamos *obtener* la columna deseada para mostrar:
+Esta tabla se ve un poco diferente con las que ya hemos trabajado. El comando `sys` nos regresa una tabla que también contiene tablas estructuradas en las celdas en vez de valores simples. Para explorar esos datos, necesitamos _obtener_ la columna deseada para mostrar:
 
 <<< @/snippets/introduction/sys_get_example.sh
 
@@ -62,12 +62,12 @@ En este momento, solo hay un usuario en el sistema llamado "jt". Notarás que po
 
 Es posible que hayas notado algo más diferente también. En lugar de tener una tabla de datos, tenemos solo un elemento individual: la cadena "jt". Nu trabaja tanto con tabla de datos así como cadenas. Cadenas son una parte importante de trabajar con comandos fuera de Nu.
 
-Miremos en acción cómo funcionan las cadenas fuera de Nu. Tomaremos el ejemplo anterior y ejecutaremos el comando externo `echo` (el carácter `^` le informa a Nu que no se desea usar el comando *interno* también llamado `echo`):
+Miremos en acción cómo funcionan las cadenas fuera de Nu. Tomaremos el ejemplo anterior y ejecutaremos el comando externo `echo` (el carácter `^` le informa a Nu que no se desea usar el comando _interno_ también llamado `echo`):
 
 <<< @/snippets/introduction/sys_get_external_echo_example.sh
 
 Si esto se parece mucho a lo que teníamos antes, ¡tienes buen ojo! Es similar, pero con una diferencia importante: hemos llamado `echo` con el valor que vimos antes. Esto nos permite pasar datos fuera de Nu a `echo` (o cualquier comando fuera de Nu, como `git` por ejemplo)
 
-*Nota: Para texto de ayuda de los comandos internos de Nu, puedes descubrirlos con el comando `help`*:
+_Nota: Para texto de ayuda de los comandos internos de Nu, puedes descubrirlos con el comando `help`_:
 
 <<< @/snippets/introduction/help_example.sh

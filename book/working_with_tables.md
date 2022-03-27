@@ -42,7 +42,7 @@ We can sort a table by any column that can be compared. For example, we could al
 
 ## Selecting the data you want
 
-We can select data from a table by choosing to select specific columns or specific rows.  Let's [`select`](commands/select.md) a few columns from our table to use:
+We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](commands/select.md) a few columns from our table to use:
 
 ```
 > ls | select name size
@@ -59,7 +59,7 @@ We can select data from a table by choosing to select specific columns or specif
 ───┴───────────────┴─────────
 ```
 
-This helps to create a table that's more focused on what we need.  Next, let's say we want to only look at the 5 smallest files in this directory:
+This helps to create a table that's more focused on what we need. Next, let's say we want to only look at the 5 smallest files in this directory:
 
 ```
 > ls | sort-by size | first 5
@@ -76,7 +76,7 @@ This helps to create a table that's more focused on what we need.  Next, let's s
 
 You'll notice we first sort the table by size to get to the smallest file, and then we use the `first 5` to return the first 5 rows of the table.
 
-You can also `skip` rows that you don't want.  Let's skip the first two of the 5 rows we returned above:
+You can also `skip` rows that you don't want. Let's skip the first two of the 5 rows we returned above:
 
 ```
 > ls | sort-by size | first 5 | skip 2
@@ -91,7 +91,7 @@ You can also `skip` rows that you don't want.  Let's skip the first two of the 5
 
 We've narrowed it to three rows we care about.
 
-Let's look at a few other commands for selecting data.  You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row.  Let's sort our table by the file name and then pick one of the rows with the `select` command using its row number:
+Let's look at a few other commands for selecting data. You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row. Let's sort our table by the file name and then pick one of the rows with the `select` command using its row number:
 
 ```
 > ls | sort-by name
@@ -153,8 +153,8 @@ This might look like the [`select`](commands/select.md) command we saw earlier, 
 
 These look very similar! Let's see if we can spell out the difference between these two commands to make it clear:
 
-* [`select`](commands/select.md) - creates a new table which includes only the columns specified
-* [`get`](commands/get.md) - returns the values inside the column specified as a list
+- [`select`](commands/select.md) - creates a new table which includes only the columns specified
+- [`get`](commands/get.md) - returns the values inside the column specified as a list
 
 The one way to tell these apart looking at the table is that the column names are missing, which lets us know that this is going to be a list of values we can work with.
 

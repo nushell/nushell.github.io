@@ -4,30 +4,30 @@
 
 ## ファイルを開く
 
-データを操作するためのNuの最も強力なコマンドのひとつが`open`コマンドです。これは様々なデータ形式に対応したマルチツールです。これがなにを意味するかをみるために、jsonファイルを開いてみましょう。
+データを操作するための Nu の最も強力なコマンドのひとつが`open`コマンドです。これは様々なデータ形式に対応したマルチツールです。これがなにを意味するかをみるために、json ファイルを開いてみましょう。
 
 ```
 > open editors/vscode/package.json
 ──────────────────┬───────────────────────────────────────────────────────────────────────────────
- name             │ lark 
- description      │ Lark support for VS Code 
- author           │ Lark developers 
- license          │ MIT 
- version          │ 1.0.0 
- repository       │ [row type url] 
- publisher        │ vscode 
- categories       │ [table 0 rows] 
- keywords         │ [table 1 rows] 
- engines          │ [row vscode] 
- activationEvents │ [table 1 rows] 
- main             │ ./out/extension 
- contributes      │ [row configuration grammars languages] 
- scripts          │ [row compile postinstall test vscode:prepublish watch] 
- devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient] 
+ name             │ lark
+ description      │ Lark support for VS Code
+ author           │ Lark developers
+ license          │ MIT
+ version          │ 1.0.0
+ repository       │ [row type url]
+ publisher        │ vscode
+ categories       │ [table 0 rows]
+ keywords         │ [table 1 rows]
+ engines          │ [row vscode]
+ activationEvents │ [table 1 rows]
+ main             │ ./out/extension
+ contributes      │ [row configuration grammars languages]
+ scripts          │ [row compile postinstall test vscode:prepublish watch]
+ devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient]
 ──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
-`ls`と同様、Nuが理解できるタイプのファイルを開くと、単なるテキスト(またはバイトストリーム)以上のものが返ってきます。ここでは、JavaScriptプロジェクト内の"package.json"ファイルを開いています。NuはJSONテキストを認識し、テーブルデータを返すことができます。
+`ls`と同様、Nu が理解できるタイプのファイルを開くと、単なるテキスト(またはバイトストリーム)以上のものが返ってきます。ここでは、JavaScript プロジェクト内の"package.json"ファイルを開いています。Nu は JSON テキストを認識し、テーブルデータを返すことができます。
 
 プロジェクトのバージョンを確認したい場合は、`get`コマンドを利用します。
 
@@ -36,14 +36,14 @@
 1.0.0
 ```
 
-Nuが現在、直接データをテーブルに読み込める形式は次の通りです。
+Nu が現在、直接データをテーブルに読み込める形式は次の通りです。
 
-* json
-* yaml
-* toml
-* xml
-* csv
-* ini
+- json
+- yaml
+- toml
+- xml
+- csv
+- ini
 
 しかし、これらのいずれでもないテキストファイルを読み込むとどうなるでしょうか、試してみましょう。
 
@@ -53,11 +53,11 @@ Nuが現在、直接データをテーブルに読み込める形式は次の通
 
 ファイルの内容が表示されます。ファイルが大きすぎる場合は、便利なスクロールビューでファイルの中身を確認してからターミナルに戻ってることができます。読みやすさのために、ソースファイルやマークダウンといった一般的なファイル形式ではシンタックスハイライトを提供します。
 
-裏側では、Nuはこれらのファイルをひとつの大きな文字列としてみています。次に、これらの文字列から必要なデータを取得する方法について説明します。
+裏側では、Nu はこれらのファイルをひとつの大きな文字列としてみています。次に、これらの文字列から必要なデータを取得する方法について説明します。
 
 ## 文字列を扱う
 
-Nuの外からきたデータをNuがいつも理解できるとは限らないことを理解しておくのは重要なことです。多くの場合このデータは文字列として与えられます。
+Nu の外からきたデータを Nu がいつも理解できるとは限らないことを理解しておくのは重要なことです。多くの場合このデータは文字列として与えられます。
 
 以下のファイルが与えられたと想定してみましょう。
 
@@ -68,31 +68,29 @@ Bob | Ross | Painter
 Antonio | Vivaldi | Composer
 ```
 
-必要なデータはパイプ('|')記号で区切られており、各行はそれぞれの人物を表しています。Nuはデフォルトではパイプで区切られたファイル形式を知らないので、明示的にこのファイルをパースする必要があります。
+必要なデータはパイプ('|')記号で区切られており、各行はそれぞれの人物を表しています。Nu はデフォルトではパイプで区切られたファイル形式を知らないので、明示的にこのファイルをパースする必要があります。
 
 ファイルを読み込むときに最初に行うことは、１行ずつ作業することです。
 
 ```
 > open people.txt | lines
 ───┬──────────────────────────────
- 0 │ Octavia | Butler | Writer 
+ 0 │ Octavia | Butler | Writer
  1 │ Bob | Ross | Painter
- 2 │ Antonio | Vivaldi | Composer 
+ 2 │ Antonio | Vivaldi | Composer
 ───┴──────────────────────────────
 ```
 
 テーブルにもどってきたので、行を使って作業していることがわかります。次のステップは、行をもうすこし便利なものに分割できるかみてみることです。そのために、`split`コマンドを利用します。名前からわかるように、`split`は区切り文字を含む文字列を列に分割する方法を提供します。`split`の`column`サブコマンドを使って、複数の列に分割するします。必要なのは区切り文字を指定することだけです。
 
-
-
 ```
 > open people.txt | lines | split column "|"
 ───┬──────────┬───────────┬───────────
- # │ Column1  │ Column2   │ Column3 
+ # │ Column1  │ Column2   │ Column3
 ───┼──────────┼───────────┼───────────
- 0 │ Octavia  │  Butler   │  Writer 
+ 0 │ Octavia  │  Butler   │  Writer
  1 │ Bob      │  Ross     │  Painter
- 2 │ Antonio  │  Vivaldi  │  Composer 
+ 2 │ Antonio  │  Vivaldi  │  Composer
 ───┴──────────┴───────────┴───────────
 ```
 
@@ -101,11 +99,11 @@ Antonio | Vivaldi | Composer
 ```
 > open people.txt | lines | split column "|" | str trim
 ───┬─────────┬─────────┬──────────
- # │ Column1 │ Column2 │ Column3 
+ # │ Column1 │ Column2 │ Column3
 ───┼─────────┼─────────┼──────────
- 0 │ Octavia │ Butler  │ Writer 
+ 0 │ Octavia │ Butler  │ Writer
  1 │ Bob     │ Ross    │ Painter
- 2 │ Antonio │ Vivaldi │ Composer 
+ 2 │ Antonio │ Vivaldi │ Composer
 ───┴─────────┴─────────┴──────────
 ```
 
@@ -114,22 +112,22 @@ Antonio | Vivaldi | Composer
 ```
 > open people.txt | lines | split column "|" | str trim | get Column1
 ───┬─────────
- 0 │ Octavia 
- 1 │ Bob 
- 2 │ Antonio 
+ 0 │ Octavia
+ 1 │ Bob
+ 2 │ Antonio
 ───┴─────────
 ```
 
 デフォルトの名前を利用するかわりに、列に名前をつけることもできます。
 
 ```
-> open people.txt | lines | split column "|" first_name last_name job | str trim 
+> open people.txt | lines | split column "|" first_name last_name job | str trim
 ───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job 
+ # │ first_name │ last_name │ job
 ───┼────────────┼───────────┼──────────
- 0 │ Octavia    │ Butler    │ Writer 
+ 0 │ Octavia    │ Butler    │ Writer
  1 │ Bob        │ Ross      │ Painter
- 2 │ Antonio    │ Vivaldi   │ Composer 
+ 2 │ Antonio    │ Vivaldi   │ Composer
 ───┴────────────┴───────────┴──────────
 ```
 
@@ -138,20 +136,21 @@ Antonio | Vivaldi | Composer
 ```
 > open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
 ───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job 
+ # │ first_name │ last_name │ job
 ───┼────────────┼───────────┼──────────
- 0 │ Antonio    │ Vivaldi   │ Composer 
+ 0 │ Antonio    │ Vivaldi   │ Composer
  1 │ Bob        │ Ross      │ Painter
- 2 │ Octavia    │ Butler    │ Writer 
+ 2 │ Octavia    │ Butler    │ Writer
 ───┴────────────┴───────────┴──────────
 ```
 
 文字列を操作するために使用できるその他のコマンドです。
-* str
-* lines
-* size
 
-データがNuが理解できる構造をもっていることがわかっている場合に呼び出すことのできるヘルパーコマンドのセットもあります。例えば、Rustのロックファイルを開いてみましょう。
+- str
+- lines
+- size
+
+データが Nu が理解できる構造をもっていることがわかっている場合に呼び出すことのできるヘルパーコマンドのセットもあります。例えば、Rust のロックファイルを開いてみましょう。
 
 ```
 > open Cargo.lock
@@ -162,19 +161,19 @@ name = "adhoc_derive"
 version = "0.1.2"
 ```
 
-"Cargo.lock"ファイルは実際には.tomlファイルですが、ファイル拡張子が.tomlではありません。でも大丈夫です、`from toml`コマンドが使えます。
+"Cargo.lock"ファイルは実際には.toml ファイルですが、ファイル拡張子が.toml ではありません。でも大丈夫です、`from toml`コマンドが使えます。
 
 ```
 > open Cargo.lock | from toml
 ──────────┬───────────────────
- metadata │ [row 107 columns] 
- package  │ [table 130 rows] 
+ metadata │ [row 107 columns]
+ package  │ [table 130 rows]
 ──────────┴───────────────────
 ```
 
-`from`コマンドはサポートされているテキストフォーマットをサブコマンドとして渡すことでNuが扱える構造化データごとに利用できます。
+`from`コマンドはサポートされているテキストフォーマットをサブコマンドとして渡すことで Nu が扱える構造化データごとに利用できます。
 
-## rawモードで開く
+## raw モードで開く
 
 ファイルを開いてそのデータのテーブルをすぐに操作できると便利ですが、これは必ずしもやりたいことであるとは限りません。テキストをそのまま取得するために、`open`コマンドに`--raw`オプションフラグを渡すことができます。
 
@@ -187,14 +186,14 @@ description = "A shell for the GitHub era"
 license = "MIT"
 ```
 
-## URLからの取得
+## URL からの取得
 
-ファイルシステムからファイルを読み込むことに加えて、`fetch`コマンドを利用してURLからリソースを取得できます。
-これはインターネットからURLの内容をフェッチして返してくれます。
+ファイルシステムからファイルを読み込むことに加えて、`fetch`コマンドを利用して URL からリソースを取得できます。
+これはインターネットから URL の内容をフェッチして返してくれます。
 
 ```
 > fetch https://www.jonathanturner.org/feed.xml
 ─────┬───────────────────────────
- rss │ [row attributes children] 
+ rss │ [row attributes children]
 ─────┴───────────────────────────
 ```

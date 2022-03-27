@@ -4,7 +4,7 @@ layout: command
 nu_version: 0.32
 ---
 
-Parses OpenDocument Spreadsheet binary data into a table. `open` calls `from ods` automatically when the file extension  is `ods`. Use this command when `open` is unable to guess the file type from the extension.
+Parses OpenDocument Spreadsheet binary data into a table. `open` calls `from ods` automatically when the file extension is `ods`. Use this command when `open` is unable to guess the file type from the extension.
 
 ## Examples
 

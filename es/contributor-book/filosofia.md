@@ -15,12 +15,11 @@ El valor central de Nu es que trabajar en un shell debe ser divertido. Para esto
 
 ## No metas
 
-- *Rendimiento óptimo*. Si bien nos preocupa rendimiento, el enfoque en el rendimiento debe estar al servicio de hacer que Nu sea más usable y agradable de usar. El mejor rendimiento en micro-puntos de referencia no es un objetivo.
-- *Estricto*. Queremos ayudar a los usuarios a escribir buenos scripts, pero centrándonos en que dichos scripts sean correctos con buenos errores y buena documentación.
-- *Cumplimiento-POSIX*. Nu se optimiza intencionalmente para una experiencia placentera en vez de igualar cómo programas de línea de comandos funcionan de una manera POSIX-compliant. Es importante poder interoperar entre comandos de Nu y comandos externos, pero mantener compatibilidad estricta no es una meta. 
-- *Adhesión de paradigma*. Nu mira el espacio de shells flexiblemente, y presta buenas ideas de programación funcional, programación de sistemas, orientación a objetos, y más donde sea posible. Seguir algun paradigma en particular de manera rígida no sirve para los objetivos del proyecto Nu.
+- _Rendimiento óptimo_. Si bien nos preocupa rendimiento, el enfoque en el rendimiento debe estar al servicio de hacer que Nu sea más usable y agradable de usar. El mejor rendimiento en micro-puntos de referencia no es un objetivo.
+- _Estricto_. Queremos ayudar a los usuarios a escribir buenos scripts, pero centrándonos en que dichos scripts sean correctos con buenos errores y buena documentación.
+- _Cumplimiento-POSIX_. Nu se optimiza intencionalmente para una experiencia placentera en vez de igualar cómo programas de línea de comandos funcionan de una manera POSIX-compliant. Es importante poder interoperar entre comandos de Nu y comandos externos, pero mantener compatibilidad estricta no es una meta.
+- _Adhesión de paradigma_. Nu mira el espacio de shells flexiblemente, y presta buenas ideas de programación funcional, programación de sistemas, orientación a objetos, y más donde sea posible. Seguir algun paradigma en particular de manera rígida no sirve para los objetivos del proyecto Nu.
 
 ## Diseño Básico
 
 El diseño central de Nu es el modelo de datos. Comandos siguen en gran medida en el servicio para facilitar la creación de datos, trabajar con datos, y ver datos. Una de las piezas visibles de este trabajo es la canalización a través de la tubería, que se basa en gran medida en las ideas originales de Unix de conectar comandos simples en comandos más complejos. Nu toma esta filosofía de Unix y la extiende desde solo cádenas de texto al más amplio conjuntos de datos que es más común en lenguajes modernos de programación.
-

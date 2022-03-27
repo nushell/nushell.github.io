@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> dfr group-by ...rest```
+`> dfr group-by ...rest`
 
 ## Parameters
 
- -  `...rest`: groupby columns
+- `...rest`: groupby columns
 
 ## Examples
 
 Grouping by column a
+
 ```shell
 > [[a b]; [one 1] [one 2]] | dfr to-df | dfr group-by a
 ```

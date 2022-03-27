@@ -19,9 +19,9 @@ The filesystem shell is the shell that works directly with a filesystem and a co
 ```
 > shells
 ━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━
-   │ name       │ path 
+   │ name       │ path
 ───┼────────────┼────────────────
- X │ filesystem │ /home/jonathan 
+ X │ filesystem │ /home/jonathan
 ━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━
 ```
 
@@ -31,10 +31,10 @@ We can add a new filesystem shell to this list by using the `enter` command. Thi
 > enter Source
 /home/jonathan/Source> shells
 ━━━┯━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━
- # │   │ name       │ path 
+ # │   │ name       │ path
 ───┼───┼────────────┼───────────────────────
- 0 │   │ filesystem │ /home/jonathan 
- 1 │ X │ filesystem │ /home/jonathan/Source 
+ 0 │   │ filesystem │ /home/jonathan
+ 1 │ X │ filesystem │ /home/jonathan/Source
 ━━━┷━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -50,4 +50,4 @@ The Value Shell gives you the ability to explore the inside of a structured valu
 
 The current implementation of the Value Shell is limited to the read-only subset of file operations, namely: `cd` and `ls`. Future designs may wish to explore this further, but there are open design questions around mutating an `enter`ed file and how the rest of the environment observes these changes (e.g. what happens if you enter the file being used by `config`?)
 
-In a Value Shell, the `cd` command changes the path that is being observed as the "current working directory" in the object, but in actuality is the field path. This means that the path "/abc/def" is the path "abc.def" outside of the Value Shell. 
+In a Value Shell, the `cd` command changes the path that is being observed as the "current working directory" in the object, but in actuality is the field path. This means that the path "/abc/def" is the path "abc.def" outside of the Value Shell.

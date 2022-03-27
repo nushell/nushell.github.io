@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> str reverse ...rest```
+`> str reverse ...rest`
 
 ## Parameters
 
- -  `...rest`: optionally reverse text by column paths
+- `...rest`: optionally reverse text by column paths
 
 ## Examples
 
 Return the reversals of multiple strings
+
 ```shell
 > 'Nushell' | str reverse
 ```

@@ -12,8 +12,8 @@ usage: |
 
 ## Signature
 
-```> gstat (path)```
+`> gstat (path)`
 
 ## Parameters
 
- -  `path`: path to repo
+- `path`: path to repo

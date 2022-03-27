@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr unique ```
+`> dfr unique `
 
 ## Examples
 
 Returns unique values from a series
+
 ```shell
 > [2 2 2 2 2] | dfr to-df | dfr unique
 ```

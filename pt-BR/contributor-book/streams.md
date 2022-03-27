@@ -4,7 +4,7 @@ title: Streams
 
 # Streams
 
-Streams assíncronas formam a base de como a informação trafega de um lado do pipeline para o outro. Isso permite que o Nu trabalhe com comandos internos, comandos externos e plugins  de uma forma relativamente contínua.
+Streams assíncronas formam a base de como a informação trafega de um lado do pipeline para o outro. Isso permite que o Nu trabalhe com comandos internos, comandos externos e plugins de uma forma relativamente contínua.
 
 Existem dois tipos fundamentais de streams no Nu: InputStream e OutputStream
 
@@ -52,7 +52,3 @@ Erros que forem passados para a stream vão ser detectados como valores que são
 ### Actions
 
 Uma ação se difere de um valor, pois enquanto um valor é um pedaço de dado que será visto pelo próximo comando no pipeline, uma ação é algo destinado apenas para o ambiente de execução interno do Nu. Ações mudam o estado do shell, por exemplo, ao mudar o diretório corrente, mudando o shell atual, atualizando tabelas, e assim por diante.
-
-
-
-

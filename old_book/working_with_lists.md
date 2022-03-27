@@ -147,9 +147,9 @@ echo $scores | reduce -n { $acc.item + $it.index * $it.item }
 # But see https://github.com/nushell/nushell/issues/3298.
 ```
 
-
 The `wrap` command converts list to a table. Each list value will
 be converted to a separate row with single column:
+
 ```bash
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 

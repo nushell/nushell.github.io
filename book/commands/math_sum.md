@@ -12,16 +12,18 @@ usage: |
 
 ## Signature
 
-```> math sum ```
+`> math sum `
 
 ## Examples
 
 Sum a list of numbers
+
 ```shell
 > [1 2 3] | math sum
 ```
 
 Get the disk usage for the current directory
+
 ```shell
 > ls | get size | math sum
 ```

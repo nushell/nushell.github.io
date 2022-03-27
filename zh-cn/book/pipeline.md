@@ -1,6 +1,6 @@
 # 管道
 
-Nu  的核心设计之一就是管道，这种设计思想可以追溯到几十年前的 Unix 背后的原始哲学。 正如 Nu 从 Unix 的字符串数据类型扩展而来，Nu 还扩展了管道的思想，使其不仅包含文本。
+Nu 的核心设计之一就是管道，这种设计思想可以追溯到几十年前的 Unix 背后的原始哲学。 正如 Nu 从 Unix 的字符串数据类型扩展而来，Nu 还扩展了管道的思想，使其不仅包含文本。
 
 ## 基础
 
@@ -24,7 +24,6 @@ Ni 命令使用 Nu 数据类型来与其他命令协作（查看 [数据类型](
 
 `internal_command | external_command`
 
-
 数据将从 internal_command 流到 external_command 。 该数据应为字符串，以便可以将它们发送到 external_command 的 `stdin`。
 
 `external_command | internal_command`
@@ -33,7 +32,7 @@ Ni 命令使用 Nu 数据类型来与其他命令协作（查看 [数据类型](
 
 `external_command_1 | external_command_2`
 
-Nu像Bash一样，以与其他 Shell 相同的方式处理在两个外部命令之间传递的数据。 external_command_1 的 `stdout` 连接到external_command_2的 `stdin` 。 这使数据在两个命令之间自然流动。
+Nu 像 Bash 一样，以与其他 Shell 相同的方式处理在两个外部命令之间传递的数据。 external_command_1 的 `stdout` 连接到 external_command_2 的 `stdin` 。 这使数据在两个命令之间自然流动。
 
 ## 幕后
 

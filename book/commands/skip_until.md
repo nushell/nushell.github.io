@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> skip until (predicate)```
+`> skip until (predicate)`
 
 ## Parameters
 
- -  `predicate`: the predicate that skipped element must not match
+- `predicate`: the predicate that skipped element must not match
 
 ## Examples
 
 Skip until the element is positive
+
 ```shell
 > echo [-2 0 2 -1] | skip until $it > 0
 ```

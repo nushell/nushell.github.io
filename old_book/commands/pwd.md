@@ -7,7 +7,7 @@ nu_version: 0.32
 Print the current working directory.
 
 `-h`, `--help`
-  Display help message.
+Display help message.
 
 ## Examples
 

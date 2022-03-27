@@ -6,11 +6,11 @@ nu_version: 0.32
 
 Open given cells as text.
 
-Syntax: `get  ...args`
+Syntax: `get ...args`
 
 ## Parameters
 
-* `args`: optionally return additional data by path
+- `args`: optionally return additional data by path
 
 ## Examples
 

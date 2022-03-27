@@ -2,7 +2,6 @@
 
 En Nushell hay dos tipos de expresiones de evaluación: variables y subexpresiones. Cuando lees expresiones que empiezan con el signo dólar (`$`) sabes que trabajas con una expresión de evaluación. Esto indica que cuando Nushell toma el valor en esta posición, necesitará ejecutar un paso de evaluación para procesar la expresión y posterioremente usar el valor del resultado. Ambas formas de expresión de evaluación soportan un modo simple y una forma ruta (`path`) para trabajar con datos más complejos.
 
-
 ## Variables
 
 La variable es el más simple de ambas expresiones de evaluación. Durante la evaluación, una variable es remplazada for su valor.
@@ -42,10 +41,10 @@ Subexpresiones también pueden ser tuberías y no solamente comandos individuale
 > let nombres-de-archivos-grandes = (ls | where size > 10kb)
 > echo $nombres-de-archivos-grandes
 ───┬────────────┬──────┬──────────┬──────────────
- # │    name    │ type │   size   │   modified   
+ # │    name    │ type │   size   │   modified
 ───┼────────────┼──────┼──────────┼──────────────
- 0 │ Cargo.lock │ File │ 155.3 KB │ 17 hours ago 
- 1 │ README.md  │ File │  15.9 KB │ 17 hours ago 
+ 0 │ Cargo.lock │ File │ 155.3 KB │ 17 hours ago
+ 1 │ README.md  │ File │  15.9 KB │ 17 hours ago
 ───┴────────────┴──────┴──────────┴──────────────
 ```
 

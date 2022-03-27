@@ -36,11 +36,11 @@ Bevor Nu installiert werden kann, muss sichergestellt werden, dass das System di
 
 Damit Rust richtig funktioniert, muss eine kompatible Compiler-Suite auf dem System installiert sein. Die empfohlenen Compiler-Suites sind:
 
-* Linux: GCC oder Clang
-* macOS: Clang (Xcode installieren)
-* Windows: MSVC (installieren von [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/) oder der [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022))
-    * Sicherstellen, dass "Desktop development with C++" installiert wird
-    * Jede Visual Studio Edition sollte funktionieren (Community ist gratis)
+- Linux: GCC oder Clang
+- macOS: Clang (Xcode installieren)
+- Windows: MSVC (installieren von [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/) oder der [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022))
+  - Sicherstellen, dass "Desktop development with C++" installiert wird
+  - Jede Visual Studio Edition sollte funktionieren (Community ist gratis)
 
 ### Rust installieren
 
@@ -74,7 +74,7 @@ Für RHEL basierte Distributionen müssen die Pakete "libxcb", "openssl-devel" u
 
 ### macOS
 
-Mittels [Homebrew](https://brew.sh/), müssen die Pakete "openssl" und "cmake" über folgenden Befehl installiert werden: 
+Mittels [Homebrew](https://brew.sh/), müssen die Pakete "openssl" und "cmake" über folgenden Befehl installiert werden:
 
 <<< @/snippets/installation/macos_deps.sh
 

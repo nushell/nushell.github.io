@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> dfr last (rows)```
+`> dfr last (rows)`
 
 ## Parameters
 
- -  `rows`: Number of rows for tail
+- `rows`: Number of rows for tail
 
 ## Examples
 
 Create new dataframe with last rows
+
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr last 1
 ```

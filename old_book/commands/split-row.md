@@ -10,7 +10,7 @@ Syntax: `split row <separator>`
 
 ## Parameters
 
-* `<separator>` the character that denotes what separates rows
+- `<separator>` the character that denotes what separates rows
 
 ## Examples
 

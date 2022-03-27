@@ -22,7 +22,7 @@ If you are using [Windows Terminal](https://github.com/microsoft/terminal) you c
 
 <<< @/snippets/installation/windows_terminal_default_shell.sh
 
-to  `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is to change the `"defaultProfile"` to:
+to `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is to change the `"defaultProfile"` to:
 
 <<< @/snippets/installation/windows_change_default_profile.sh
 
@@ -36,15 +36,15 @@ Before we can install Nu, we need to make sure our system has the necessary requ
 
 For Rust to work properly, you'll need to have a compatible compiler suite installed on your system. These are the recommended compiler suites:
 
-* Linux: GCC or Clang
-* macOS: Clang (install Xcode)
-* Windows: [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
+- Linux: GCC or Clang
+- macOS: Clang (install Xcode)
+- Windows: [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
 
-For Windows, when you install Visual Studio Community Edition, make sure to install the "C++ build tools" as what we need is `link.exe` which is provided as part of that optional install.  With that, we're ready to move to the next step.
+For Windows, when you install Visual Studio Community Edition, make sure to install the "C++ build tools" as what we need is `link.exe` which is provided as part of that optional install. With that, we're ready to move to the next step.
 
 ### Installing Rust
 
-If we don't already have Rust on our system, the best way to install it is via [rustup](https://rustup.rs/). Rustup is a way of managing Rust installations, including managing using different Rust versions. 
+If we don't already have Rust on our system, the best way to install it is via [rustup](https://rustup.rs/). Rustup is a way of managing Rust installations, including managing using different Rust versions.
 
 Nu currently requires the **latest stable (1.55 or later)** version of Rust. The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
 
@@ -74,7 +74,7 @@ You will need to install "libxcb", "openssl-devel" and "libX11-devel":
 
 ### macOS
 
-Using [Homebrew](https://brew.sh/), you will need to install the "openssl" and "cmake" using: 
+Using [Homebrew](https://brew.sh/), you will need to install the "openssl" and "cmake" using:
 
 <<< @/snippets/installation/macos_deps.sh
 
@@ -84,7 +84,7 @@ Once we have the dependencies Nu needs, we can install it using the `cargo` comm
 
 <<< @/snippets/installation/cargo_install_nu.sh
 
-That's it!  The cargo tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path so that we can run it.
+That's it! The cargo tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path so that we can run it.
 
 If you want to install with more features, you can use:
 

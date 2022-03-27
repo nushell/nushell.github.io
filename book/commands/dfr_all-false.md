@@ -12,16 +12,18 @@ usage: |
 
 ## Signature
 
-```> dfr all-false ```
+`> dfr all-false `
 
 ## Examples
 
 Returns true if all values are false
+
 ```shell
 > [false false false] | dfr to-df | dfr all-false
 ```
 
 Checks the result from a comparison
+
 ```shell
 > let s = ([5 6 2 10] | dfr to-df);
     let res = ($s > 9);

@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> split chars ```
+`> split chars `
 
 ## Examples
 
 Split the string's characters into separate rows
+
 ```shell
 > 'hello' | split chars
 ```

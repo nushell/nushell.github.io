@@ -3,33 +3,40 @@ title: mv
 layout: command
 nu_version: 0.32
 ---
+
 Move files or directories.
 
 ## Usage
+
 ```shell
-> mv <source> <destination> {flags} 
- ```
+> mv <source> <destination> {flags}
+```
 
 ## Parameters
-* `<source>` the location to move files/directories from
-* `<destination>` the location to move files/directories to
+
+- `<source>` the location to move files/directories from
+- `<destination>` the location to move files/directories to
 
 ## Flags
-* -h, --help: Display this help message
+
+- -h, --help: Display this help message
 
 ## Examples
-  Rename a file
+
+Rename a file
+
 ```shell
 > mv before.txt after.txt
- ```
+```
 
-  Move a file into a directory
+Move a file into a directory
+
 ```shell
 > mv test.txt my/subdirectory
- ```
+```
 
-  Move many files into a directory
+Move many files into a directory
+
 ```shell
 > mv *.txt my/subdirectory
- ```
-
+```

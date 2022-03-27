@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr to-lowercase ```
+`> dfr to-lowercase `
 
 ## Examples
 
 Modifies strings to lowercase
+
 ```shell
 > [Abc aBc abC] | dfr to-df | dfr to-lowercase
 ```

@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> load-env (update)```
+`> load-env (update)`
 
 ## Parameters
 
- -  `update`: the record to use for updates
+- `update`: the record to use for updates
 
 ## Examples
 
 Load variables from an input stream
+
 ```shell
 > {NAME: ABE, AGE: UNKNOWN} | load-env; echo $env.NAME
 ```
 
 Load variables from an argument
+
 ```shell
 > load-env {NAME: ABE, AGE: UNKNOWN}; echo $env.NAME
 ```

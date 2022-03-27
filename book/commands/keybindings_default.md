@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> keybindings default ```
+`> keybindings default `
 
 ## Examples
 
 Get list with default keybindings
+
 ```shell
 > keybindings default
 ```

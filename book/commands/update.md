@@ -12,21 +12,23 @@ usage: |
 
 ## Signature
 
-```> update (field) (replacement value)```
+`> update (field) (replacement value)`
 
 ## Parameters
 
- -  `field`: the name of the column to update
- -  `replacement value`: the new value to give the cell(s)
+- `field`: the name of the column to update
+- `replacement value`: the new value to give the cell(s)
 
 ## Examples
 
 Update a column value
+
 ```shell
 > echo {'name': 'nu', 'stars': 5} | update name 'Nushell'
 ```
 
 Use in block form for more involved updating logic
+
 ```shell
 > echo [[count fruit]; [1 'apple']] | update count {|f| $f.count + 1}
 ```

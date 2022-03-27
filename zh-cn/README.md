@@ -13,8 +13,8 @@ features:
   - title: Powerful Plugins
     details: Nu can't come with everything you might want to do with it, so you can extend using its powerful plugin system.
 footer: If you have suggestions or want to change something please give us feedback
-
 ---
+
 ### 快速安装
 
 #### 下载最新版本的 Nushell （二进制文件）

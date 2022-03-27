@@ -31,11 +31,9 @@ Currently, we track only the span of where values come from. Let's take a closer
 ```
 > open Cargo.toml | metadata | get span
 ───────┬────
- start │ 5 
- end   │ 15 
+ start │ 5
+ end   │ 15
 ───────┴────
 ```
 
 The span "start" and "end" here refer to where the underline will be in the line. If you count over 5, and then count up to 15, you'll see it lines up with the "Cargo.toml" filename. This is how the error we saw earlier knew what to underline.
-
-

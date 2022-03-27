@@ -10,8 +10,8 @@ Syntax: `alias <name> = <body>`
 
 The command expects two parameters:
 
-* The name of the alias
-* The body of the alias
+- The name of the alias
+- The body of the alias
 
 ## Examples
 

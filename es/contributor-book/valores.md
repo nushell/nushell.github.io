@@ -12,6 +12,7 @@ pub struct Value {
     pub tag: Tag,
 }
 ```
+
 Donde el campo `value` es cualquier tipo de valor `UntaggedValue` dado y el campo `tag` contiene [metadatos](metadatos.md) asociado con él.
 
 Un `UntaggedValue` cubre los siguientes tipos de valores:
@@ -63,17 +64,17 @@ Nu viene con dos tipos de números 'grandes': `BigInt` para enteros y `BigDecima
 
 Otros tipo de datos, quizás un poco diferentes a la norma:
 
-* `Nothing` = representa un valor vacío
-* `Bytes(u64)` = tamaños de archivo en números de bytes
-* `Line(String)` = valor de cadena con un final de retorno de carro implícito (o cr / lf)
-* `ColumnPath(ColumnPath)` = rutas para extraer valores de las tablas
-* `Pattern(string)` = un patrón glob (como `nu*` en `ls nu*`)
-* `Duration(u64)` = representa duración en segundos (como `1hr` en `ls | where modified < 1hr` )
-* `Range(Box<Range>)` = rangos (como `0..2` en `ls | range 0..2`)
-* `Path(PathBuf)` = una ruta de archivo
-* `Binary(Vec<u8>)` = un arreglo de bytes
-* `BeginningOfStream` = un marcador para denotar el inicio de un stream
-* `EndOfStream` = un marador para denotar el fin de un stream
+- `Nothing` = representa un valor vacío
+- `Bytes(u64)` = tamaños de archivo en números de bytes
+- `Line(String)` = valor de cadena con un final de retorno de carro implícito (o cr / lf)
+- `ColumnPath(ColumnPath)` = rutas para extraer valores de las tablas
+- `Pattern(string)` = un patrón glob (como `nu*` en `ls nu*`)
+- `Duration(u64)` = representa duración en segundos (como `1hr` en `ls | where modified < 1hr` )
+- `Range(Box<Range>)` = rangos (como `0..2` en `ls | range 0..2`)
+- `Path(PathBuf)` = una ruta de archivo
+- `Binary(Vec<u8>)` = un arreglo de bytes
+- `BeginningOfStream` = un marcador para denotar el inicio de un stream
+- `EndOfStream` = un marador para denotar el fin de un stream
 
 ## UntaggedValue
 
@@ -87,7 +88,7 @@ Nu utiliza un conjunto de términos que coinciden un poco más con las hojas de 
 
 ### Bloques (`Block`)
 
-Bloques representa código listo para ser ejecutado por el evaluador. Un ejemplo de esto es la condición `where {$it > 10}`. 
+Bloques representa código listo para ser ejecutado por el evaluador. Un ejemplo de esto es la condición `where {$it > 10}`.
 
 ### Errores (`Error`)
 

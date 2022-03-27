@@ -22,9 +22,9 @@ Vamos executar o comando `open` de novo, mas, dessa vez, vamos olhar as tags que
 ```shell
 > open Cargo.toml | tags
 ----------+------------------------------------------
- span     | origin 
+ span     | origin
 ----------+------------------------------------------
- [object] | /home/jonathan/Source/nushell/Cargo.toml 
+ [object] | /home/jonathan/Source/nushell/Cargo.toml
 ----------+------------------------------------------
 ```
 
@@ -35,9 +35,9 @@ Há também um coluna intervalo (span). Vamos ver mais de perto:
 ```shell
 > open Cargo.toml | tags | get span
 -------+-----
- start | end 
+ start | end
 -------+-----
- 5     | 15 
+ 5     | 15
 -------+-----
 ```
 

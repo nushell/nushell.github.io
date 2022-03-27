@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> error make (error_struct)```
+`> error make (error_struct)`
 
 ## Parameters
 
- -  `error_struct`: the error to create
+- `error_struct`: the error to create
 
 ## Examples
 
 Create a custom error for a custom command
+
 ```shell
 > def foo [x] {
       let span = (metadata $x).span;
@@ -29,6 +30,7 @@ Create a custom error for a custom command
 ```
 
 Create a simple custom error for a custom command
+
 ```shell
 > def foo [x] {
       error make {msg: "this is fishy"}

@@ -35,7 +35,7 @@ Nu também usa coringas modernos, que permitem acesso a diretórios mais profund
  3   | src/commands/cd.rs                                  | File |          | 277 B    | a week ago     | a week ago
  4   | src/commands/classified.rs                          | File |          | 13.5 KB  | 15 hours ago   | 15 hours ago
  5   | src/commands/clip.rs                                | File |          | 2.0 KB   | 2 days ago     | 2 days ago
- ```
+```
 
 Aqui estamos procurando qualquer arquivo cujo nome termine com ".rs" e os dois asteriscos dizem ainda "em qualquer diretório começando a partir daqui".
 

@@ -7,15 +7,16 @@ Nushell uses a configuration system that loads a toml file at launch time. That 
 An example of the nushell `config.toml` can be found in our repo [here](https://github.com/nushell/nushell/tree/main/docs/sample_config).
 
 ### Root level configuration settings.
+
 These are at the root level, not because they're more important, but because they are not in a toml section.
 
 | Name                  | Purpose                                                                                                              | Value Type | Options                                                                                         |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------|------------|-------------------------------------------------------------------------------------------------|
+| --------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
 | complete_from_path    | Whether or not to complete names of binaries on PATH                                                                 | boolean    | true or false                                                                                   |
 | ctrlc_exit            | Enables/Disables nushell to exit when the key combination of Ctrl+C is hit multiple times.                           | boolean    | true or false                                                                                   |
 | disable_table_indexes | Enables/Disables the index (#) column on tables.                                                                     | boolean    | true or false                                                                                   |
 | filesize_format       | Set the file size units format returned from the ls command.                                                         | string     | b, kb, kib, mb, mib, gb, gib, etc                                                               |
-| filesize_metric       | Set the file size metric (power of 1000 / power of 1024). `true` for KB,MB,GB; `false` for KiB,MiB,GiB              | boolean     | true of false                                                               |
+| filesize_metric       | Set the file size metric (power of 1000 / power of 1024). `true` for KB,MB,GB; `false` for KiB,MiB,GiB               | boolean    | true of false                                                                                   |
 | nonzero_exit_errors   | Enables/Disables the reporting of non-zeros exit errors.                                                             | boolean    | true or false                                                                                   |
 | pivot_mode            | Tells nushell how to pivot single row tables.                                                                        | string     | auto, always, never                                                                             |
 | plugin_dirs           | Tells nushell to look in these folders for optional nushell plugins.                                                 | array      | quoted string of folders delimited by commas between brackets `[ ]`                             |
@@ -33,7 +34,7 @@ For each of the options in the color_config section, you are able to set
 the color alone or with one of the following attributes.
 
 | color  | abbreviation |
-|--------|--------------|
+| ------ | ------------ |
 | green  | g            |
 | red    | r            |
 | blue   | u            |
@@ -44,7 +45,7 @@ the color alone or with one of the following attributes.
 | white  | w            |
 
 | attribute | abbreviation |
-|-----------|--------------|
+| --------- | ------------ |
 | bold      | b            |
 | underline | u            |
 | italic    | i            |
@@ -52,17 +53,19 @@ the color alone or with one of the following attributes.
 | reverse   | r            |
 
 #### Abbreviated Examples:
+
 - `gb` means green bold
 - `ru` means red underline
 - `ud` means blue dimmed
 
 #### Verbose Examples:
+
 - green_bold
 - red_underline
 - blue_dimmed
 
 | Name                      | Purpose                                     | Value Type | Options        |
-|---------------------------|---------------------------------------------|------------|----------------|
+| ------------------------- | ------------------------------------------- | ---------- | -------------- |
 | [color_config]            | This is the section name                    | string     | Outlined above |
 | header_align              | Apply an alignment to the header            | string     | Outlined above |
 | header_color              | Apply a color to the header                 | string     | Outlined above |
@@ -84,29 +87,31 @@ the color alone or with one of the following attributes.
 | separator_color           | Apply a style to the table lines            | string     | Outlined above |
 
 ### Line Editor section
+
 The `[line_editor]` section of the `config.toml` controls how our line editor, `rustyline` behaves. These configuration settings are specific to the `rustyline` crate we use.
 
 | Name                    | Purpose                                                                                  | Value Type | Options                                                                  |
-|-------------------------|------------------------------------------------------------------------------------------|------------|--------------------------------------------------------------------------|
+| ----------------------- | ---------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------ |
 | [line_editor]           | This is the section name                                                                 |            |                                                                          |
 | auto_add_history        | Enable/Disable automatically add each non-blank line to history                          | boolean    | true or false                                                            |
 | bell_style              | The bell style for the line editor                                                       | string     | audible, none, visible                                                   |
 | color_mode              | The color mode for the line editor                                                       | string     | enabled, forced, disabled                                                |
 | completion_prompt_limit | When listing completion alternatives, only display one screen of possibilities at a time | number     |                                                                          |
 | completion_type         | Method used to iterate history items                                                     | string     | circular, list, fuzzy - note fuzzy is not currently supported by nushell |
-| edit_mode               | The mode for the line editor                                                             | string     | vi or emacs                                                             |
+| edit_mode               | The mode for the line editor                                                             | string     | vi or emacs                                                              |
 | history_duplicates      | Rule to apply regarding the adding of duplicates to the history                          | string     | alwaysadd, ignoreconsecutive                                             |
 | history_ignore_space    | Enable/Disable the history to ignore space                                               | boolean    | true or false                                                            |
 | keyseq_timeout_ms       | Duration rustyline will wait for a character when reading an ambiguous key sequence      | string     | duration in milliseconds                                                 |
 | max_history_size        | The maximum history size                                                                 | number     |                                                                          |
 | tab_stop                | The number of characters for indented/outdented commands                                 | number     |
-| completion_match_method | Sets case-sensitivity of autocompletion                                                                            | string     | case-insensitive, case-sensitive                                                             |
+| completion_match_method | Sets case-sensitivity of autocompletion                                                  | string     | case-insensitive, case-sensitive                                         |
 
 ### Textview section
+
 The `[textview]` section of the `config.toml` file is a section with settings for our textviewer which is currently [bat](https://github.com/sharkdp/bat). So, all these settings apply to the `bat` configuration built into nushell. It won't use settings you may currently have on your system if you use `bat`.
 
 | Name                     | Purpose                                                                                                           | Value Type | Options                        |
-|--------------------------|-------------------------------------------------------------------------------------------------------------------|------------|--------------------------------|
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------ |
 | [textview]               | This is the section name                                                                                          |            |                                |
 | colored_output           | Enable/Disable whether or not the output should be colorized                                                      | boolean    | true or false                  |
 | grid                     | Enable/Disable a grid                                                                                             | boolean    | true or false                  |
@@ -382,6 +387,7 @@ startup = [
 ```
 
 Or using a one-liner:
+
 ```
 config set startup (config get startup | append "alias nuopen = open" | append "alias open = ^open")
 ```

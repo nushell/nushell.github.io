@@ -1,4 +1,3 @@
-
 # sort-by
 
 The `sort-by` command sorts the table being displayed in the terminal by a chosen column(s).
@@ -7,7 +6,7 @@ The `sort-by` command sorts the table being displayed in the terminal by a chose
 
 ## Flags
 
-* `-i`, `--insensitive`: Sort string-based columns case insensitively
+- `-i`, `--insensitive`: Sort string-based columns case insensitively
 
 ## Examples
 

@@ -12,16 +12,17 @@ usage: |
 
 ## Signature
 
-```> dfr set (value) --mask```
+`> dfr set (value) --mask`
 
 ## Parameters
 
- -  `value`: value to be inserted in series
- -  `--mask {any}`: mask indicating insertions
+- `value`: value to be inserted in series
+- `--mask {any}`: mask indicating insertions
 
 ## Examples
 
 Shifts the values by a given period
+
 ```shell
 > let s = ([1 2 2 3 3] | dfr to-df | dfr shift 2);
     let mask = ($s | dfr is-null);

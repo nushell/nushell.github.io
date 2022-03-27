@@ -46,7 +46,7 @@ Certifique-se de digitar "nightly" aqui e pressionar enter. Isso vai levar à co
 Modify PATH variable? (y/n)
 ```
 
-Você pode opcionalmente atualizar o seu *path*. Normalmente é uma boa ideia, pois torna os passos seguintes mais fáceis.
+Você pode opcionalmente atualizar o seu _path_. Normalmente é uma boa ideia, pois torna os passos seguintes mais fáceis.
 
 ```shell
 Current installation options:
@@ -136,7 +136,7 @@ Você também pode fazer o build e rodar o Nu em modo release:
 nushell> cargo build --release --workspace --features=stable && cargo run --release --features=stable
 ```
 
-Pessoas mais acostumadas com Rust podem se perguntar por que fazemos tanto o "build" como o "run" se o "run" já faz o build por padrão. Isso serve para contornar uma falha da nova opção `default-run` no Cargo e assegurar que será feito o build de todos os plugins, embora  possa não ser necessário no futuro.
+Pessoas mais acostumadas com Rust podem se perguntar por que fazemos tanto o "build" como o "run" se o "run" já faz o build por padrão. Isso serve para contornar uma falha da nova opção `default-run` no Cargo e assegurar que será feito o build de todos os plugins, embora possa não ser necessário no futuro.
 
 ## Configurando como login shell
 

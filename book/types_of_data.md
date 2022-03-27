@@ -4,7 +4,7 @@ Traditionally, Unix shell commands have communicated with each other using strin
 
 We can think of this kind of communication as string-based.
 
-Nu embraces this approach for its commands and expands it to include other kinds of data.  Currently, Nu supports two kinds of data types: simple and structured.
+Nu embraces this approach for its commands and expands it to include other kinds of data. Currently, Nu supports two kinds of data types: simple and structured.
 
 Like many programming languages, Nu models data using a set of simple and structured data types. Simple data types include integers, floats, strings, booleans, dates, and paths. It also includes a special type for filesizes.
 
@@ -29,6 +29,7 @@ A string of characters that represents text. There are a few ways we can represe
 Double quotes are the most common form of quotes and one you may see whenever text is required.
 
 **Single quotes**
+
 ```
 'my message'
 ```
@@ -42,7 +43,6 @@ Nushell supports string interpolation, allowing you to run sub-expressions insid
 > echo $"6 x 7 = (6 * 7)"
 6 x 7 = 42
 ```
-
 
 ```
 > ls | each { |it| echo $"($it.name) is ($it.size)" }
@@ -101,31 +101,31 @@ Dates and times are held together in the Date value type. Date values used by th
 
 Dates are in three forms, based on the RFC 3339 standard:
 
-* A date:
-  * `2022-02-02`
-* A date and time (in GMT):
-  * `2022-02-02T14:30:00`
-* A date and time with timezone:
-  * `2022-02-02T14:30:00+05:00`
+- A date:
+  - `2022-02-02`
+- A date and time (in GMT):
+  - `2022-02-02T14:30:00`
+- A date and time with timezone:
+  - `2022-02-02T14:30:00+05:00`
 
 ## Duration
 
-Durations represent a length of time.  A second, 5 weeks, and a year are all durations.
+Durations represent a length of time. A second, 5 weeks, and a year are all durations.
 
 Eg) `1wk` is the duration of one week.
 
 This chart shows all durations currently supported:
 
-| Duration   | Length          |
-|------------|-----------------|
-|`1ns`       | one nanosecond  |
-|`1us`       | one microsecond |
-|`1ms`       | one millisecond |
-|`1sec`      | one second      |
-|`1min`      | one minute      |
-|`1hr`       | one hour        |
-|`1day`      | one day         |
-|`1wk`       | one week        |
+| Duration | Length          |
+| -------- | --------------- |
+| `1ns`    | one nanosecond  |
+| `1us`    | one microsecond |
+| `1ms`    | one millisecond |
+| `1sec`   | one second      |
+| `1min`   | one minute      |
+| `1hr`    | one hour        |
+| `1day`   | one day         |
+| `1wk`    | one week        |
 
 ## Ranges
 
@@ -154,17 +154,18 @@ File paths are a platform-independent way of representing a file path in the giv
 File sizes are held in a special integer type called bytes. Examples include `100b`, `15kb`, and `100mb`.
 
 The full list of filesize units are:
-* `b`: bytes
-* `kb`: kilobytes (aka 1000 bytes)
-* `mb`: megabytes
-* `gb`: gigabytes
-* `tb`: terabytes
-* `pb`: petabytes
-* `kib`: kibibytes (aka 1024 bytes)
-* `mib`: mebibytes
-* `gib`: gibibytes
-* `tib`: tebibytes
-* `pib`: pebibytes
+
+- `b`: bytes
+- `kb`: kilobytes (aka 1000 bytes)
+- `mb`: megabytes
+- `gb`: gigabytes
+- `tb`: terabytes
+- `pb`: petabytes
+- `kib`: kibibytes (aka 1024 bytes)
+- `mib`: mebibytes
+- `gib`: gibibytes
+- `tib`: tebibytes
+- `pib`: pebibytes
 
 ## Binary data
 
@@ -194,7 +195,7 @@ Records hold key-value pairs, much like objects in JSON. As these can sometimes 
 
 ## Lists
 
-Lists can hold more than one value. These can be simple values.  They can also hold rows, and the combination of a list of records is often called a "table".
+Lists can hold more than one value. These can be simple values. They can also hold rows, and the combination of a list of records is often called a "table".
 
 Example: a list of strings
 
@@ -268,7 +269,7 @@ is a semicolon-separated list of pipelines, the last of which is output to the
 screen.
 
 - `line1` is a group unto itself, so that command will run to completion and get
-displayed on the screen.
+  displayed on the screen.
 - `line2` is a pipeline inside of the second group. It runs, but its contents
   are not viewed on the screen.
 - `line3` | `line4` is the second pipeline in the second group. It runs, and its

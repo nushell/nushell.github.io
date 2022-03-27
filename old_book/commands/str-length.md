@@ -3,27 +3,33 @@ title: str length
 layout: command
 nu_version: 0.32
 ---
+
 outputs the lengths of the strings in the pipeline
 
 ## Usage
+
 ```shell
-> str length ...args {flags} 
- ```
+> str length ...args {flags}
+```
 
 ## Parameters
-* ...args: optionally find length of text by column paths
+
+- ...args: optionally find length of text by column paths
 
 ## Flags
-* -h, --help: Display this help message
+
+- -h, --help: Display this help message
 
 ## Examples
-  Return the lengths of multiple strings
+
+Return the lengths of multiple strings
+
 ```shell
 > echo 'hello' | str length
- ```
+```
 
-  Return the lengths of multiple strings
+Return the lengths of multiple strings
+
 ```shell
 > echo 'hi' 'there' | str length
- ```
-
+```

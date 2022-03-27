@@ -3,19 +3,22 @@ title: chart bar
 layout: command
 nu_version: 0.32
 ---
+
 Bar charts
 
 ## Usage
+
 ```shell
-> chart bar (columns) {flags} 
- ```
+> chart bar (columns) {flags}
+```
 
 ## Parameters
-* `(columns)` the columns to chart [x-axis y-axis]
+
+- `(columns)` the columns to chart [x-axis y-axis]
 
 ## Flags
-* -h, --help: Display this help message
-* -a, --acc: accumulate values
-* -u, --use <column path>: column to use for evaluation
-* -f, --format <string>: Specify date and time formatting
 
+- -h, --help: Display this help message
+- -a, --acc: accumulate values
+- -u, --use <column path>: column to use for evaluation
+- -f, --format <string>: Specify date and time formatting

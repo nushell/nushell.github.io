@@ -9,9 +9,9 @@ Hello, and welcome to the Nushell project. The goal of this project is to take t
 
 Nu takes cues from a lot of familiar territory: traditional shells like bash, object based shells like PowerShell, gradually typed languages like TypeScript, functional programming, systems programming, and more. But rather than trying to be a jack of all trades, Nu focuses its energy on doing a few things well:
 
-* Being a flexible cross-platform shell with a modern feel
-* Solving problems as a modern programming language that works with the structure of your data
-* Giving clear error messages and clean IDE support
+- Being a flexible cross-platform shell with a modern feel
+- Solving problems as a modern programming language that works with the structure of your data
+- Giving clear error messages and clean IDE support
 
 The easiest way to see what Nu can do is to start with some examples, so let's dive in.
 
@@ -55,7 +55,7 @@ Running [`sys`](commands/sys.md) gives information about the system that Nu is r
 
 <<< @/snippets/introduction/sys_example.sh
 
-This is a bit different than the tables we saw before. The [`sys`](commands/sys.md) command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to *get* the column to view:
+This is a bit different than the tables we saw before. The [`sys`](commands/sys.md) command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to _get_ the column to view:
 
 <<< @/snippets/introduction/sys_get_example.sh
 

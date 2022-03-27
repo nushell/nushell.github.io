@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr dtypes ```
+`> dfr dtypes `
 
 ## Examples
 
 Dataframe dtypes
+
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr dtypes
 ```

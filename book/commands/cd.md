@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> cd (path)```
+`> cd (path)`
 
 ## Parameters
 
- -  `path`: the path to change to
+- `path`: the path to change to
 
 ## Examples
 
 Change to your home directory
+
 ```shell
 > cd ~
 ```

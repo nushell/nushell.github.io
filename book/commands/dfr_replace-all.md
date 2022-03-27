@@ -12,16 +12,17 @@ usage: |
 
 ## Signature
 
-```> dfr replace-all --pattern --replace```
+`> dfr replace-all --pattern --replace`
 
 ## Parameters
 
- -  `--pattern {string}`: Regex pattern to be matched
- -  `--replace {string}`: replacing string
+- `--pattern {string}`: Regex pattern to be matched
+- `--replace {string}`: replacing string
 
 ## Examples
 
 Replaces string
+
 ```shell
 > [abac abac abac] | dfr to-df | dfr replace-all -p a -r A
 ```

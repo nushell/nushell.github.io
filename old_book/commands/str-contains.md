@@ -3,29 +3,35 @@ title: str contains
 layout: command
 nu_version: 0.32
 ---
+
 Checks if string contains pattern
 
 ## Usage
+
 ```shell
-> str contains <pattern> ...args {flags} 
- ```
+> str contains <pattern> ...args {flags}
+```
 
 ## Parameters
-* `<pattern>` the pattern to find
-* ...args: optionally check if string contains pattern by column paths
+
+- `<pattern>` the pattern to find
+- ...args: optionally check if string contains pattern by column paths
 
 ## Flags
-* -h, --help: Display this help message
-* -i, --insensitive: search is case insensitive
+
+- -h, --help: Display this help message
+- -i, --insensitive: search is case insensitive
 
 ## Examples
-  Check if string contains pattern
+
+Check if string contains pattern
+
 ```shell
 > echo 'my_library.rb' | str contains '.rb'
- ```
+```
 
-  Check if string contains pattern case insensitive
+Check if string contains pattern case insensitive
+
 ```shell
 > echo 'my_library.rb' | str contains -i '.RB'
- ```
-
+```

@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> dfr column (column)```
+`> dfr column (column)`
 
 ## Parameters
 
- -  `column`: column name
+- `column`: column name
 
 ## Examples
 
 Returns the selected column as series
+
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr column a
 ```

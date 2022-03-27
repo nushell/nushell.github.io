@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> keep until (predicate)```
+`> keep until (predicate)`
 
 ## Parameters
 
- -  `predicate`: the predicate that kept element must not match
+- `predicate`: the predicate that kept element must not match
 
 ## Examples
 
 Keep until the element is positive
+
 ```shell
 > echo [-1 -2 9 1] | keep until $it > 0
 ```

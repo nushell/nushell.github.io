@@ -12,16 +12,18 @@ usage: |
 
 ## Signature
 
-```> from nuon ```
+`> from nuon `
 
 ## Examples
 
 Converts nuon formatted string to table
+
 ```shell
 > '{ a:1 }' | from nuon
 ```
 
 Converts nuon formatted string to table
+
 ```shell
 > '{ a:1, b: [1, 2] }' | from nuon
 ```

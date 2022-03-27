@@ -6,7 +6,7 @@ In Nushell, you can write and run scripts in the Nushell language. To run a scri
 > nu myscript.nu
 ```
 
-This will run the script to completion in a new instance of Nu. You can also run scripts inside the *current* instance of Nu using [`source`](commands/source.md):
+This will run the script to completion in a new instance of Nu. You can also run scripts inside the _current_ instance of Nu using [`source`](commands/source.md):
 
 ```
 > source myscript.nu
@@ -75,7 +75,7 @@ def main [x: int] {
 
 ## Shebangs (`!#`)
 
-On Linux and macOS you can optionally use a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) to tell the OS that a file should be interpreted by Nu. For example, with the following in a file named `myscript`:
+On Linux and macOS you can optionally use a [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) to tell the OS that a file should be interpreted by Nu. For example, with the following in a file named `myscript`:
 
 ```
 #!/usr/bin/env nu

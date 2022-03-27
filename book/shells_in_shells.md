@@ -10,12 +10,12 @@ To get started, let's enter a directory:
 /home/jonathant/Source/nushell(main)> enter ../book
 /home/jonathant/Source/book(main)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
- #  │ name               │ type │ size   │ modified 
+ #  │ name               │ type │ size   │ modified
 ────┼────────────────────┼──────┼────────┼─────────────
-  0 │ 404.html           │ File │  429 B │ 2 hours ago 
-  1 │ CONTRIBUTING.md    │ File │  955 B │ 2 hours ago 
-  2 │ Gemfile            │ File │ 1.1 KB │ 2 hours ago 
-  3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago 
+  0 │ 404.html           │ File │  429 B │ 2 hours ago
+  1 │ CONTRIBUTING.md    │ File │  955 B │ 2 hours ago
+  2 │ Gemfile            │ File │ 1.1 KB │ 2 hours ago
+  3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago
 ```
 
 Entering is similar to changing directories (as we saw with the `cd` command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the [`shells`](commands/shells.md) command to list the current directories we have active:
@@ -23,11 +23,11 @@ Entering is similar to changing directories (as we saw with the `cd` command). T
 ```
 /home/jonathan/Source/book(main)> shells
 ───┬────────┬────────────┬─────────────────────────
- # │ active │    name    │          path                
+ # │ active │    name    │          path
 ───┼────────┼────────────┼─────────────────────────
- 0 │ false  │ filesystem │ /home/jt/Source/nushell          
- 1 │ true   │ filesystem │ /home/jt/Source/book 
- 2 │ false  │ filesystem │ /home/jt/Source/music          
+ 0 │ false  │ filesystem │ /home/jt/Source/nushell
+ 1 │ true   │ filesystem │ /home/jt/Source/book
+ 2 │ false  │ filesystem │ /home/jt/Source/music
 ───┴────────┴────────────┴─────────────────────────
 
 ```

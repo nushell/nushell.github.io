@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> math sqrt ```
+`> math sqrt `
 
 ## Examples
 
 Apply the square root function to a list of numbers
+
 ```shell
 > [9 16] | math sqrt
 ```

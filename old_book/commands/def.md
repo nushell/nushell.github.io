@@ -42,6 +42,7 @@ The syntax of the def command is as follows.
 
 The signature is a list of parameters flags and at maximum one rest argument. You can specify the type of each of them by appending `: <type>`.
 Example:
+
 ```shell
 def cmd [
 parameter: string
@@ -52,6 +53,7 @@ parameter: string
 
 It is possible to comment them by appending `# Comment text`!
 Example
+
 ```shell
 def cmd [
 parameter # Parameter comment
@@ -62,6 +64,7 @@ parameter # Parameter comment
 
 Flags can have a single character shorthand form. For example `--output` is often abbreviated by `-o`. You can declare a shorthand by writing `(-<shorthand>)` after the flag name.
 Example
+
 ```shell
 def cmd [
 --flag(-f): int # Flag comment
@@ -70,6 +73,7 @@ def cmd [
 
 You can make a parameter optional by adding `?` to its name. Optional parameters do not need to be passed.
 (TODO Handling optional parameters in scripts is WIP. Please don't expect it to work seamlessly)
+
 ```shell
 def cmd [
 parameter?: path # Optional parameter

@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> metadata (expression)```
+`> metadata (expression)`
 
 ## Parameters
 
- -  `expression`: the expression you want metadata for
+- `expression`: the expression you want metadata for
 
 ## Examples
 
 Get the metadata of a variable
+
 ```shell
 > metadata $a
 ```
 
 Get the metadata of the input
+
 ```shell
 > ls | metadata
 ```

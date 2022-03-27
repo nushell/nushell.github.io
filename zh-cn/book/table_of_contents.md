@@ -12,7 +12,7 @@
 - [自定义命令](custom_commands.md) - 创建你自己的命令
 - [别名](aliases.md) - 如何为命令添加别名
 - [运算符](operators.md) - Nushell 支持的运算符
-- [数学](math.md) - Nushell里的数学计算
+- [数学](math.md) - Nushell 里的数学计算
 - [变量和子表达式](variables_and_subexpressions.md) - 使用变量和子表达式
 - [环境变量](environment.md) - 使用环境变量
 - [模块](modules.md) - 创建和使用你自己的模块
@@ -24,7 +24,7 @@
 - [插件](plugins.md) - 通过插件增强 Nushell 并添加更多功能
 - [数据帧](dataframes.md) - 在 Nushell 里使用数据帧
 - [正则表达式](regular_expressions.md) - 正则使用指南
-- [Bash用户上手指南](coming_from_bash.md) - 帮助 Bash 用户快速上手 Nushell
+- [Bash 用户上手指南](coming_from_bash.md) - 帮助 Bash 用户快速上手 Nushell
 - [从 shells/DSL 到 Nushell](nushell_map.md) - Nushell 与 SQL, Linq, PowerShell 及 Bash 的差异
 - [从命令式语言到 Nushell](nushell_map_imperative.md) - Nushell 与 Python, Kotlin, C++, C# 和 Rust 的差异
 - [从函数式编程语言到 Nushell](nushell_map_functional.md) - Nushell 与 Clojure, Tablecloth (Ocaml / Elm) 和 Haskell 的差异

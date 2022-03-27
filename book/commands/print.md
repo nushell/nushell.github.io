@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> print ...rest```
+`> print ...rest`
 
 ## Parameters
 
- -  `...rest`: the values to print
+- `...rest`: the values to print
 
 ## Examples
 
 Print 'hello world'
+
 ```shell
 > print "hello world"
 ```
 
 Print the sum of 2 and 3
+
 ```shell
 > print (2 + 3)
 ```

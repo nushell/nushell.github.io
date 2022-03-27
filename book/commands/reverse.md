@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> reverse ```
+`> reverse `
 
 ## Examples
 
 Reverse the items
+
 ```shell
 > [0,1,2,3] | reverse
 ```

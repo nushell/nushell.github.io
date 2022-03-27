@@ -8,19 +8,19 @@ Converts table data into a string or binary. The target format is specified as a
 
 ## Available Subcommands
 
-* to bson
-* [to csv](to-csv.md)
-* to html
-* [to json](to-json.md)
-* [to md](to-md.md)
-* to sqlite
-* [to toml](to-toml.md)
-* [to tsv](to-tsv.md)
-* [to url](to-url.md)
-* [to xml](to-xml.md)
-* [to yaml](to-yaml.md)
+- to bson
+- [to csv](to-csv.md)
+- to html
+- [to json](to-json.md)
+- [to md](to-md.md)
+- to sqlite
+- [to toml](to-toml.md)
+- [to tsv](to-tsv.md)
+- [to url](to-url.md)
+- [to xml](to-xml.md)
+- [to yaml](to-yaml.md)
 
-*Subcommands without links are currently missing their documentation.*
+_Subcommands without links are currently missing their documentation._
 
 ## Example
 

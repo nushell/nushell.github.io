@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> keep while (predicate)```
+`> keep while (predicate)`
 
 ## Parameters
 
- -  `predicate`: the predicate that kept element must not match
+- `predicate`: the predicate that kept element must not match
 
 ## Examples
 
 Keep while the element is negative
+
 ```shell
 > echo [-1 -2 9 1] | keep while $it < 0
 ```

@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> enter (path)```
+`> enter (path)`
 
 ## Parameters
 
- -  `path`: the path to enter as a new shell
+- `path`: the path to enter as a new shell
 
 ## Examples
 
 Enter a new shell at path '../dir-foo'
+
 ```shell
 > enter ../dir-foo
 ```

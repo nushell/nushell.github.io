@@ -12,17 +12,18 @@ usage: |
 
 ## Signature
 
-```> export def (name) (params) (block)```
+`> export def (name) (params) (block)`
 
 ## Parameters
 
- -  `name`: definition name
- -  `params`: parameters
- -  `block`: body of the definition
+- `name`: definition name
+- `params`: parameters
+- `block`: body of the definition
 
 ## Examples
 
 Define a custom command in a module and call it
+
 ```shell
 > module spam { export def foo [] { "foo" } }; use spam foo; foo
 ```
