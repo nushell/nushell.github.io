@@ -1,0 +1,6 @@
+package-lock.json
+# Dependencies
+node_modules
+book/commands/str_trim.md
+book/commands/hash_base64.md
+book/commands/dfr_aggregate.md
