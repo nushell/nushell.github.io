@@ -1,7 +1,7 @@
 ---
 title: group
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Groups input into groups of `group_size`.
 ---

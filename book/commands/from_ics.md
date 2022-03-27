@@ -1,7 +1,7 @@
 ---
 title: from ics
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse text as .ics and create table.
 ---

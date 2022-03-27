@@ -1,7 +1,7 @@
 ---
 title: dfr is-unique
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates mask indicating unique values
 ---

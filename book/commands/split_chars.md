@@ -1,7 +1,7 @@
 ---
 title: split chars
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   splits a string's characters into separate rows
 ---

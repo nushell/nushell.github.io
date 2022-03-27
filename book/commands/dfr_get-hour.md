@@ -1,7 +1,7 @@
 ---
 title: dfr get-hour
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Gets hour from date
 ---

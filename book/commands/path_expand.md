@@ -1,7 +1,7 @@
 ---
 title: path expand
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Try to expand a path to its absolute form
 ---

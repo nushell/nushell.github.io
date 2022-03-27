@@ -1,7 +1,7 @@
 ---
 title: from yml
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse text as .yaml/.yml and create table.
 ---

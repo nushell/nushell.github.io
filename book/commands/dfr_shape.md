@@ -1,7 +1,7 @@
 ---
 title: dfr shape
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Shows column and row size for a dataframe
 ---

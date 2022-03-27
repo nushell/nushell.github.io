@@ -1,7 +1,7 @@
 ---
 title: keybindings listen
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Get input from the user.
 ---

@@ -1,7 +1,7 @@
 ---
 title: str reverse
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   outputs the reversals of the strings in the pipeline
 ---

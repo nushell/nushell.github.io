@@ -1,7 +1,7 @@
 ---
 title: grid
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Renders the output to a textual terminal grid.
 ---

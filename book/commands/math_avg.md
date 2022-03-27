@@ -1,7 +1,7 @@
 ---
 title: math avg
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Finds the average of a list of numbers or tables
 ---

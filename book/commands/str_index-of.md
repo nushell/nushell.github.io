@@ -1,7 +1,7 @@
 ---
 title: str index-of
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Returns starting index of given pattern in string counting from 0. Returns -1 when there are no results.
 ---

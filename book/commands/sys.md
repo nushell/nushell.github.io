@@ -1,7 +1,7 @@
 ---
 title: sys
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   View information about the system.
 ---

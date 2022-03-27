@@ -1,7 +1,7 @@
 ---
 title: str downcase
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   downcases text
 ---

@@ -1,7 +1,7 @@
 ---
 title: dfr drop-nulls
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Drops null values in dataframe
 ---

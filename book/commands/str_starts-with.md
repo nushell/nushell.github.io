@@ -1,7 +1,7 @@
 ---
 title: str starts-with
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   checks if string starts with pattern
 ---

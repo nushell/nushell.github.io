@@ -1,7 +1,7 @@
 ---
 title: dfr to-lowercase
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Lowercase the strings in the column
 ---

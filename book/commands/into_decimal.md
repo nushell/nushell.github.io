@@ -1,7 +1,7 @@
 ---
 title: into decimal
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   converts text into decimal
 ---

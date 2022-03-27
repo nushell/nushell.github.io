@@ -1,7 +1,7 @@
 ---
 title: str to-int
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Deprecated command
 ---

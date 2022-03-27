@@ -1,7 +1,7 @@
 ---
 title: dfr as-datetime
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Converts string to datetime. Format example:
           "%y/%m/%d %H:%M:%S"  => 21/12/31 12:54:98

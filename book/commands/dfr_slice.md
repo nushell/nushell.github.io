@@ -1,7 +1,7 @@
 ---
 title: dfr slice
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates new dataframe from a slice of rows
 ---

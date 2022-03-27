@@ -1,7 +1,7 @@
 ---
 title: dfr to-csv
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Saves dataframe to csv file
 ---

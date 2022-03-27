@@ -1,7 +1,7 @@
 ---
 title: dfr is-duplicated
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates mask indicating duplicated values
 ---

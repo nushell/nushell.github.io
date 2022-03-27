@@ -1,7 +1,7 @@
 ---
 title: str lpad
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   pad a string with a character a certain length
 ---

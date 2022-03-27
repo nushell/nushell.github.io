@@ -1,7 +1,7 @@
 ---
 title: which
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Finds a program file, alias or custom command.
 ---

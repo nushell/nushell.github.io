@@ -1,7 +1,7 @@
 ---
 title: path dirname
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Get the parent directory of a path
 ---

@@ -1,7 +1,7 @@
 ---
 title: mkdir
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Make directories, creates intermediary directories as required.
 ---

@@ -1,7 +1,7 @@
 ---
 title: to json
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Converts table data into JSON text.
 ---

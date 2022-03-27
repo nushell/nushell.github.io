@@ -1,7 +1,7 @@
 ---
 title: size
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Gather word count statistics on the text.
 ---

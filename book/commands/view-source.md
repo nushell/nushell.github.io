@@ -1,7 +1,7 @@
 ---
 title: view-source
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   View a block, module, or a definition
 ---

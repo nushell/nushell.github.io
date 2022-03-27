@@ -1,7 +1,7 @@
 ---
 title: math round
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Applies the round function to a list of numbers
 ---

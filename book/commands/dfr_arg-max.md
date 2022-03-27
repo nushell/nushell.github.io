@@ -1,7 +1,7 @@
 ---
 title: dfr arg-max
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Return index for max value in series
 ---

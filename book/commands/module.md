@@ -1,7 +1,7 @@
 ---
 title: module
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Define a custom module
 ---

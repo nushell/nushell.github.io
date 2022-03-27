@@ -1,7 +1,7 @@
 ---
 title: echo
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Echo the arguments back to the user.
 ---

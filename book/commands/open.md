@@ -1,7 +1,7 @@
 ---
 title: open
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 ---

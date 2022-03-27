@@ -1,7 +1,7 @@
 ---
 title: dfr as-date
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Converts string to date. Format example:
           "%Y-%m-%d"    => 2021-12-31

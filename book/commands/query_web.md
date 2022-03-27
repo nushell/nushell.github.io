@@ -1,7 +1,7 @@
 ---
 title: query web
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   execute selector query on html/web
 ---

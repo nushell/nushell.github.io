@@ -1,7 +1,7 @@
 ---
 title: use
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Use definitions from a module
 ---

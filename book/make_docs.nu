@@ -37,17 +37,17 @@ usage: |
         }
     } | str collect " ")
 
-    let signature = $"## Signature(char nl)(char nl)```> ($command.command) ($sig)```(char nl)(char nl)"
+    let signature = $"## Signature(char nl)(char nl)`> ($command.command) ($sig)`(char nl)(char nl)"
 
     let params = ($command.signature | each { |param|
         if $param.parameter_type == "positional" {
-            $" -  `($param.parameter_name)`: ($param.description)"
+            $"- `($param.parameter_name)`: ($param.description)"
         } else if $param.parameter_type == "switch" {
-            $" -  `--($param.parameter_name)`: ($param.description)"
+            $"- `--($param.parameter_name)`: ($param.description)"
         } else if $param.parameter_type == "named" {
-            $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
+            $"- `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
         } else if $param.parameter_type == "rest" {
-            $" -  `...($param.parameter_name)`: ($param.description)"
+            $"- `...($param.parameter_name)`: ($param.description)"
         }
     } | str collect (char nl))
 
@@ -62,6 +62,7 @@ usage: |
 
         let $examples = ($command.examples | each { |example|
 $"($example.description)
+
 ```shell
 > ($example.example)
 ```

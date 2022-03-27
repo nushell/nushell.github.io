@@ -1,7 +1,7 @@
 ---
 title: term size
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Returns the terminal size
 ---

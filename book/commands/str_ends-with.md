@@ -1,7 +1,7 @@
 ---
 title: str ends-with
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   checks if string ends with pattern
 ---

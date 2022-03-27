@@ -1,7 +1,7 @@
 ---
 title: format
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Format columns into a string using a simple pattern.
 ---

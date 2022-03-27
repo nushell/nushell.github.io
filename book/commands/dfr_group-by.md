@@ -1,7 +1,7 @@
 ---
 title: dfr group-by
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates a groupby object that can be used for other aggregations
 ---

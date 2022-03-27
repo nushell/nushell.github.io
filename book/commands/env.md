@@ -1,7 +1,7 @@
 ---
 title: env
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Display current environment variables
 ---

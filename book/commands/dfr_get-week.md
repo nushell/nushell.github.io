@@ -1,7 +1,7 @@
 ---
 title: dfr get-week
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Gets week from date
 ---

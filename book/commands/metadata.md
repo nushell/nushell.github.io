@@ -1,7 +1,7 @@
 ---
 title: metadata
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Get the metadata for items in the stream
 ---
