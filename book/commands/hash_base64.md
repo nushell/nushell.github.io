@@ -18,7 +18,7 @@ usage: |
 
 - `...rest`: optionally base64 encode / decode data by column paths
 - `--character-set {string}`: specify the character rules for encoding the input.
-  Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt'
+	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt'
 - `--encode`: encode the input as base64. This is the default behavior if not specified.
 - `--decode`: decode the input from base64
 

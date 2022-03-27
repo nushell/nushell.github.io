@@ -20,7 +20,7 @@ usage: |
 - `--char {string}`: character to trim (default: whitespace)
 - `--left`: trims characters only from the beginning of the string (default: whitespace)
 - `--right`: trims characters only from the end of the string (default: whitespace)
-- `--all`: trims all characters from both sides of the string _and_ in the middle (default: whitespace)
+- `--all`: trims all characters from both sides of the string *and* in the middle (default: whitespace)
 - `--both`: trims all characters from left and right side of the string (default: whitespace)
 - `--format`: trims spaces replacing multiple characters with singles in the middle (default: whitespace)
 
