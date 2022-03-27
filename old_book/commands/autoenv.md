@@ -41,4 +41,3 @@ Example .nu-env file
 
         [env]
         mykey = "myvalue"
-

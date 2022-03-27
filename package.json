@@ -19,6 +19,9 @@
     "vuepress": "^1.9.0",
     "vuepress-plugin-feed": "^0.1.9"
   },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "dependencies": {
     "@docsearch/js": "3"
   }
