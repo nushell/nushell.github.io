@@ -38,21 +38,21 @@ If we wanted to check the version of the project we were looking at, we can use 
 
 Nu currently supports the following formats for loading data directly into tables:
 
-* csv
-* eml
-* ics
-* ini
-* json
-* nuon
-* ods
-* ssv
-* toml
-* tsv
-* url
-* vcf
-* xlsx / xls
-* xml
-* yaml / yml
+- csv
+- eml
+- ics
+- ini
+- json
+- nuon
+- ods
+- ssv
+- toml
+- tsv
+- url
+- vcf
+- xlsx / xls
+- xml
+- yaml / yml
 
 But what happens if you load a text file that isn't one of these? Let's try it:
 
@@ -76,6 +76,7 @@ Octavia | Butler | Writer
 Bob | Ross | Painter
 Antonio | Vivaldi | Composer
 ```
+
 Each bit of data we want is separated by the pipe ('|') symbol, and each person is on a separate line. Nu doesn't have a pipe-delimited file format by default, so we'll have to parse this ourselves.
 
 The first thing we want to do when bringing in the file is to work with it a line at a time:
@@ -102,7 +103,7 @@ We can see that we're working with the lines because we're back into a table. Ou
 ───┴──────────┴───────────┴───────────
 ```
 
-That *almost* looks correct. It looks like there's an extra space there. Let's [`trim`](commands/str_trim.md) that extra space:
+That _almost_ looks correct. It looks like there's an extra space there. Let's [`trim`](commands/str_trim.md) that extra space:
 
 ```
 > open people.txt | lines | split column "|" | str trim
@@ -153,9 +154,10 @@ Now that our data is in a table, we can use all the commands we've used on table
 ```
 
 There are other commands you can use to work with strings:
-* `str`
-* [`lines`](commands/lines.md)
-* [`size`](commands/size.md)
+
+- `str`
+- [`lines`](commands/lines.md)
+- [`size`](commands/size.md)
 
 There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:
 

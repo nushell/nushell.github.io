@@ -9,12 +9,14 @@ Check for empty values. Pass the column names to check emptiness. Optionally pas
 ## Examples
 
 Check if a value is empty
+
 ```shell
 > echo '' | empty?
 true
 ```
 
 Given the following meals
+
 ```shell
 > echo [[meal size]; [arepa small] [taco '']]
 ═══╦═══════╦═══════
@@ -26,6 +28,7 @@ Given the following meals
 ```
 
 Show the empty contents
+
 ```shell
 > echo [[meal size]; [arepa small] [taco '']] | empty? meal size
 ═══╦═══════╦═══════
@@ -37,6 +40,7 @@ Show the empty contents
 ```
 
 Let's assume we have a report of totals per day. For simplicity we show just for three days `2020/04/16`, `2020/07/10`, and `2020/11/16`. Like so
+
 ```shell
 > echo [[2020/04/16 2020/07/10 2020/11/16]; ['' 27 37]]
 ═══╦════════════╦════════════╦════════════
@@ -47,6 +51,7 @@ Let's assume we have a report of totals per day. For simplicity we show just for
 ```
 
 In the future, the report now has many totals logged per day. In this example, we have 1 total for the day `2020/07/10` and `2020/11/16` like so
+
 ```shell
 > echo [[2020/04/16 2020/07/10 2020/11/16]; ['' [27] [37]]]
 ═══╦════════════╦════════════════╦════════════════
@@ -59,6 +64,7 @@ In the future, the report now has many totals logged per day. In this example, w
 We want to add two totals (numbers `33` and `37`) for the day `2020/04/16`
 
 Set a table with two numbers for the empty column
+
 ```shell
 > echo [[2020/04/16 2020/07/10 2020/11/16]; ['' [27] [37]]] | empty? 2020/04/16 { [33 37] }
 ═══╦════════════════╦════════════════╦════════════════
@@ -69,6 +75,7 @@ Set a table with two numbers for the empty column
 ```
 
 Checking all the numbers
+
 ```shell
 > echo [[2020/04/16 2020/07/10 2020/11/16]; ['' [27] [37]]] | empty? 2020/04/16 { [33 37] } | pivot _ totals | get totals
 ═══╦════

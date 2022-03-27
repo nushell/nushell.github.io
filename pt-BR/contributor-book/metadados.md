@@ -17,4 +17,4 @@ Anchor representa a localização de origem de um valor. Se o valor foi carregad
 
 Um Span são as localizações de início e fim do valor que foi criado ou referenciado na linha de comando. Eles são normalmente vistos como o underline abaixo de uma mensagem de erro.
 
-Enquanto spans de linguagens de programação tradicionalmente carregam também o arquivo de origem do span, aqui assumimos que um span While spans from programming languages traditionally also carry the file the span came from, aqui assumimos que o span  sempre abrange um valor referenciado na linha de comando, em vez de em um arquivo de origem. Quando o Nu for capaz de executar seus próprios arquivos fonte, isso provavelmente vai precisar ser revisado.
+Enquanto spans de linguagens de programação tradicionalmente carregam também o arquivo de origem do span, aqui assumimos que um span While spans from programming languages traditionally also carry the file the span came from, aqui assumimos que o span sempre abrange um valor referenciado na linha de comando, em vez de em um arquivo de origem. Quando o Nu for capaz de executar seus próprios arquivos fonte, isso provavelmente vai precisar ser revisado.

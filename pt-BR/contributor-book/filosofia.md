@@ -15,10 +15,10 @@ O principal valor do Nu é que trabalhar em um shell deve ser divertido. Para ap
 
 ## Não objetivos
 
-- *Performance ótima*. Apesar de nos preocuparmos com performance, o foco em performance deve ser no serviço de fazer o Nu mais utilizável e prazeroso de se utilizar. Melhor performance em micro-benchmarks não é um objetivo.
-- *Rigor*. Nós queremos ajudar usuários a escrever bons scripts, mas devemos focar em ajudá-los a escrever scripts corretos com bons erros e boa documentação.
-- *Conformidade com POSIX*. Nu otimiza intencionalmente para uma experiência agradável em comparação com a forma como os programas de linha de comando funcionam de uma forma compatível com POSIX. É importante ser capaz de interoperar entre comandos Nu e comandos externos, mas manter uma compatibilidade estrita não é um objetivo
-- *Aderência de paradigma*. Nu observa o espaço de flexibilidade dos shells, e quando possível busca ideias de programação funcional, programação de sistemas, POO, e mais. Seguir qualquer paradigma de forma rígida não é um dos objetivos do projeto Nu.
+- _Performance ótima_. Apesar de nos preocuparmos com performance, o foco em performance deve ser no serviço de fazer o Nu mais utilizável e prazeroso de se utilizar. Melhor performance em micro-benchmarks não é um objetivo.
+- _Rigor_. Nós queremos ajudar usuários a escrever bons scripts, mas devemos focar em ajudá-los a escrever scripts corretos com bons erros e boa documentação.
+- _Conformidade com POSIX_. Nu otimiza intencionalmente para uma experiência agradável em comparação com a forma como os programas de linha de comando funcionam de uma forma compatível com POSIX. É importante ser capaz de interoperar entre comandos Nu e comandos externos, mas manter uma compatibilidade estrita não é um objetivo
+- _Aderência de paradigma_. Nu observa o espaço de flexibilidade dos shells, e quando possível busca ideias de programação funcional, programação de sistemas, POO, e mais. Seguir qualquer paradigma de forma rígida não é um dos objetivos do projeto Nu.
 
 ## Design Básico
 

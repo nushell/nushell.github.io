@@ -7,15 +7,15 @@ You can see the current environment variables that will be sent to applications 
 ```
 > echo $nu.env
 ──────────────────────────┬──────────────────────────────
- COLORTERM                │ truecolor 
- DBUS_SESSION_BUS_ADDRESS │ unix:path=/run/user/1000/bus 
- DESKTOP_SESSION          │ gnome 
- DISPLAY                  │ :1 
+ COLORTERM                │ truecolor
+ DBUS_SESSION_BUS_ADDRESS │ unix:path=/run/user/1000/bus
+ DESKTOP_SESSION          │ gnome
+ DISPLAY                  │ :1
 ```
 
 ## Single-use environment variables
 
-The environment is created from the settings in the Nu configuration and from the environment that Nu is run inside of.  You can updated the environment permanently using the techniques listed in [configuration](configuration.md) chapter.
+The environment is created from the settings in the Nu configuration and from the environment that Nu is run inside of. You can updated the environment permanently using the techniques listed in [configuration](configuration.md) chapter.
 
 You can also temporarily update an environment variable when you run a command or pipeline of commands.
 
@@ -24,7 +24,7 @@ You can also temporarily update an environment variable when you run a command o
 BAR
 ```
 
-The `with-env` command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR").  Once this is done, the block will run with this new environment variable set.
+The `with-env` command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the block will run with this new environment variable set.
 
 A common shorthand, inspired by Bash and others, is also available. You can write the above example as:
 

@@ -3,27 +3,33 @@ title: url scheme
 layout: command
 nu_version: 0.32
 ---
+
 gets the scheme (eg http, file) of a url
 
 ## Usage
+
 ```shell
-> url scheme ...args {flags} 
- ```
+> url scheme ...args {flags}
+```
 
 ## Parameters
-* ...args: optionally operate by path
+
+- ...args: optionally operate by path
 
 ## Flags
-* -h, --help: Display this help message
+
+- -h, --help: Display this help message
 
 ## Examples
-  Get scheme of a url
+
+Get scheme of a url
+
 ```shell
 > echo 'http://www.example.com' | url scheme
- ```
+```
 
-  You get an empty string if there is no scheme
+You get an empty string if there is no scheme
+
 ```shell
 > echo 'test' | url scheme
- ```
-
+```

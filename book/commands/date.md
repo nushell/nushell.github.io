@@ -12,4 +12,4 @@ usage: |
 
 ## Signature
 
-```> date ```
+`> date `

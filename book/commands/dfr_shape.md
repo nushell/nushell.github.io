@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr shape ```
+`> dfr shape `
 
 ## Examples
 
 Shows row and column shape
+
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr shape
 ```

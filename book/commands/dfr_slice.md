@@ -12,16 +12,17 @@ usage: |
 
 ## Signature
 
-```> dfr slice (offset) (size)```
+`> dfr slice (offset) (size)`
 
 ## Parameters
 
- -  `offset`: start of slice
- -  `size`: size of slice
+- `offset`: start of slice
+- `size`: size of slice
 
 ## Examples
 
 Create new dataframe from a slice of the rows
+
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr slice 0 1
 ```

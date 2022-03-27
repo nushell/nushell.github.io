@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> random chars --length```
+`> random chars --length`
 
 ## Parameters
 
- -  `--length {int}`: Number of chars
+- `--length {int}`: Number of chars
 
 ## Examples
 
 Generate random chars
+
 ```shell
 > random chars
 ```
 
 Generate random chars with specified length
+
 ```shell
 > random chars -l 20
 ```

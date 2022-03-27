@@ -8,11 +8,11 @@ Use `random` to generate random values
 
 ## bool
 
-* `random bool`: Generate a random boolean value
+- `random bool`: Generate a random boolean value
 
 ### bool Flags
 
-* `-b`, `--bias` \<number>: Adjusts the probability of a "true" outcome
+- `-b`, `--bias` \<number>: Adjusts the probability of a "true" outcome
 
 ### bool Examples
 
@@ -28,12 +28,12 @@ true
 
 ## dice
 
-* `random dice`: Generate a random dice roll
+- `random dice`: Generate a random dice roll
 
 ### dice Flags
 
-* `d`, `--dice` \<integer>: The amount of dice being rolled
-* `s`, `--sides` \<integer>: The amount of sides a die has
+- `d`, `--dice` \<integer>: The amount of dice being rolled
+- `s`, `--sides` \<integer>: The amount of sides a die has
 
 ### dice Examples
 
@@ -84,7 +84,7 @@ true
 
 ## uuid
 
-* `random uuid`: Generate a random uuid4 string
+- `random uuid`: Generate a random uuid4 string
 
 ### uuid Examples
 
@@ -95,12 +95,12 @@ true
 
 ## integer
 
-* `random integer`: Generate a random integer
+- `random integer`: Generate a random integer
 
 ### integer Flags
 
-* `m`, `--min` \<integer>: The minimum value to generate
-* `x`, `--max` \<integer>: The maximum value to generate
+- `m`, `--min` \<integer>: The minimum value to generate
+- `x`, `--max` \<integer>: The maximum value to generate
 
 ### integer Examples
 
@@ -125,7 +125,9 @@ true
 ```
 
 ### chars Examples
+
 Generate a random password of length 15
+
 ```shell
 > random chars -l 15
 fWBSbE7QtaoJGeo

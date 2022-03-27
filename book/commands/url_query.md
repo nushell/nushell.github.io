@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> url query ...rest```
+`> url query ...rest`
 
 ## Parameters
 
- -  `...rest`: optionally operate by cell path
+- `...rest`: optionally operate by cell path
 
 ## Examples
 
 Get query of a url
+
 ```shell
 > echo 'http://www.example.com/?foo=bar&baz=quux' | url query
 ```
 
 No query gives the empty string
+
 ```shell
 > echo 'http://www.example.com/' | url query
 ```

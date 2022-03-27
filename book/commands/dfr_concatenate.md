@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> dfr concatenate (other)```
+`> dfr concatenate (other)`
 
 ## Parameters
 
- -  `other`: Other array with string to be concatenated
+- `other`: Other array with string to be concatenated
 
 ## Examples
 
 Concatenate string
+
 ```shell
 > let other = ([za xs cd] | dfr to-df);
     [abc abc abc] | dfr to-df | dfr concatenate $other

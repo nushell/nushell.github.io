@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import ParentLayout from "@parent-theme/layouts/Layout.vue";
+import ParentLayout from '@parent-theme/layouts/Layout.vue';
 
 export default {
-  name: "Layout",
+  name: 'Layout',
   components: {
     ParentLayout,
   },

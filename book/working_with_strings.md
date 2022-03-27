@@ -32,16 +32,16 @@ Escape characters let you quickly add in a character that would otherwise be har
 
 Nushell currently supports the following escape characters:
 
-  - `\"` - double-quote character
-  - `\'` - single-quote character
-  - `\\` - backslash
-  - `\/` - forward slash
-  - `\b` - backspace
-  - `\f` - formfeed
-  - `\r` - carriage return
-  - `\n` - newline (line feed)
-  - `\t` - tab
-  - `\uXXXX` - a unicode character (replace XXXX with the number of the unicode character)
+- `\"` - double-quote character
+- `\'` - single-quote character
+- `\\` - backslash
+- `\/` - forward slash
+- `\b` - backspace
+- `\f` - formfeed
+- `\r` - carriage return
+- `\n` - newline (line feed)
+- `\t` - tab
+- `\uXXXX` - a unicode character (replace XXXX with the number of the unicode character)
 
 ## String interpolation
 
@@ -59,7 +59,7 @@ greetings, Alice
 
 By wrapping expressions in `()`, we can run them to completion and use the results to help build the string.
 
-String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" "`, form. These correspond to the single-quoted and double-quoted strings: single-quoted string interpolation doesn't support escape characters while double-quoted string interpolation does. 
+String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" "`, form. These correspond to the single-quoted and double-quoted strings: single-quoted string interpolation doesn't support escape characters while double-quoted string interpolation does.
 
 ## Splitting strings
 

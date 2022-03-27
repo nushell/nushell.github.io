@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> complete ```
+`> complete `
 
 ## Examples
 
 Run the external completion
+
 ```shell
 > ^external arg1 | complete
 ```

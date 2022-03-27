@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> math eval (math expression)```
+`> math eval (math expression)`
 
 ## Parameters
 
- -  `math expression`: the math expression to evaluate
+- `math expression`: the math expression to evaluate
 
 ## Examples
 
 Evaluate math in the pipeline
+
 ```shell
 > '10 / 4' | math eval
 ```

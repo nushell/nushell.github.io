@@ -3,28 +3,34 @@ title: exec
 layout: command
 nu_version: 0.32
 ---
+
 Execute command.
 
 ## Usage
+
 ```shell
-> exec <command> ...args {flags} 
- ```
+> exec <command> ...args {flags}
+```
 
 ## Parameters
-* `<command>` the command to execute
-* ...args: any additional arguments for command
+
+- `<command>` the command to execute
+- ...args: any additional arguments for command
 
 ## Flags
-* -h, --help: Display this help message
+
+- -h, --help: Display this help message
 
 ## Examples
-  Execute 'ps aux'
+
+Execute 'ps aux'
+
 ```shell
 > exec ps aux
- ```
+```
 
-  Execute 'nautilus'
+Execute 'nautilus'
+
 ```shell
 > exec nautilus
- ```
-
+```

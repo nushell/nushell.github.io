@@ -28,6 +28,7 @@ Syntax: `ps`
 ```
 
 Find processes with the highest cpu time
+
 ```shell
 > ps -l | sort-by cpu_time | last 2
  # │ pid │       name       │ status  │  cpu   │   mem    │ virtual │     cpu_time      │ parent │         exe          │       command

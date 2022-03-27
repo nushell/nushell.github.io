@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr value-counts ```
+`> dfr value-counts `
 
 ## Examples
 
 Calculates value counts
+
 ```shell
 > [5 5 5 5 6 6] | dfr to-df | dfr value-counts
 ```

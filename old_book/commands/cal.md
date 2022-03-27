@@ -8,12 +8,12 @@ Use `cal` to display a calendar.
 
 ## Flags
 
-* `-y`, `--year`: Display the year column
-* `-q`, `--quarter`: Display the quarter column
-* `-m`, `--month`: Display the month column
-* `--full-year` \<integer>: Display a year-long calendar for the specified year
-* `--week-start` \<string>: Display the calendar with the specified day as the first day of the week
-* `--month-names`: Display the month names instead of integers
+- `-y`, `--year`: Display the year column
+- `-q`, `--quarter`: Display the quarter column
+- `-m`, `--month`: Display the month column
+- `--full-year` \<integer>: Display a year-long calendar for the specified year
+- `--week-start` \<string>: Display the calendar with the specified day as the first day of the week
+- `--month-names`: Display the month names instead of integers
 
 ## Examples
 

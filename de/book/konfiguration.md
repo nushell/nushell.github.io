@@ -93,6 +93,7 @@ Danach muss Nu neugestartet werden.
 nushell on 📙 main [$] is 📦 v0.44.0 via 🦀 v1.59.0
 ❯
 ```
+
 Wenn die Prompt etwas seltsam aussieht:
 
 ```

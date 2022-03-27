@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> url host ...rest```
+`> url host ...rest`
 
 ## Parameters
 
- -  `...rest`: optionally operate by cell path
+- `...rest`: optionally operate by cell path
 
 ## Examples
 
 Get host of a url
+
 ```shell
 > echo 'http://www.example.com/foo/bar' | url host
 ```

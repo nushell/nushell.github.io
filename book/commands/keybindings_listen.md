@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> keybindings listen ```
+`> keybindings listen `
 
 ## Examples
 
 Type and see key event codes
+
 ```shell
 > keybindings listen
 ```

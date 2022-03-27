@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> str length ...rest```
+`> str length ...rest`
 
 ## Parameters
 
- -  `...rest`: optionally find length of text by column paths
+- `...rest`: optionally find length of text by column paths
 
 ## Examples
 
 Return the lengths of multiple strings
+
 ```shell
 > 'hello' | str length
 ```
 
 Return the lengths of multiple strings
+
 ```shell
 > ['hi' 'there'] | str length
 ```

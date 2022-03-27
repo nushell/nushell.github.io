@@ -17,15 +17,15 @@
 
 <script>
 export default {
-  name: "BlogPosts",
+  name: 'BlogPosts',
   computed: {
     posts() {
       return this.$site.pages
         .filter((p) => {
-          return p.path.indexOf("/blog/") >= 0 && p.path != "/blog/";
+          return p.path.indexOf('/blog/') >= 0 && p.path != '/blog/';
         })
         .map((p) => {
-          let path = p.path.replace("/blog/", "");
+          let path = p.path.replace('/blog/', '');
           return { ...p, path: path, date: path.substring(0, 10) };
         })
         .sort((a, b) => new Date(b.date) - new Date(a.date));

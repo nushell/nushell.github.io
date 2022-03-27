@@ -15,8 +15,8 @@ If the number given is less than 0 or more than the number of rows, nothing is r
 
 ## Parameters
 
-* `<row number>` the number of the row to return
-* `args`: Optionally return more rows
+- `<row number>` the number of the row to return
+- `args`: Optionally return more rows
 
 ## Examples
 

@@ -12,8 +12,8 @@ usage: |
 
 ## Signature
 
-```> query json (query)```
+`> query json (query)`
 
 ## Parameters
 
- -  `query`: json query
+- `query`: json query

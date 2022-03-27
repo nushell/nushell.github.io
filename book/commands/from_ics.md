@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> from ics ```
+`> from ics `
 
 ## Examples
 
 Converts ics formatted string to table
+
 ```shell
 > 'BEGIN:VCALENDAR
 END:VCALENDAR' | from ics

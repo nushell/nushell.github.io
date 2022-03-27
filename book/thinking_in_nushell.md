@@ -60,7 +60,7 @@ Another common surprise for folks coming from other languages is that Nushell va
 
 You might wonder why Nushell uses immutable variables. Early on in Nushell's development we decided to see how long we could go using a more data-focused, functional style in the language. More recently, we added a key bit of functionality into Nushell that made these early experiments show their value: parallelism. By switching from [`each`](commands/each.md) to [`par-each`](commands/par-each.md) in any Nushell script, you're able to run the corresponding block of code in parallel over the input. This is possible because Nushell's design leans heavily on immutability, composition, and pipelining.
 
-Just because Nushell variables are immutable doesn't mean things don't change. Nushell makes heavy use of the technique of "shadowing". Shadowing means creating a new variable with the same name as a previously declared variable.  For example, say you had an `$x` in scope, and you wanted a new `$x` that was one greater:
+Just because Nushell variables are immutable doesn't mean things don't change. Nushell makes heavy use of the technique of "shadowing". Shadowing means creating a new variable with the same name as a previously declared variable. For example, say you had an `$x` in scope, and you wanted a new `$x` that was one greater:
 
 ```
 let x = $x + 1

@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr arg-true ```
+`> dfr arg-true `
 
 ## Examples
 
 Returns indexes where values are true
+
 ```shell
 > [false true false] | dfr to-df | dfr arg-true
 ```

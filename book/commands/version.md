@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> version ```
+`> version `
 
 ## Examples
 
 Display Nu version
+
 ```shell
 > version
 ```

@@ -16,7 +16,6 @@ features:
 
 <img src="/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
 
-
 ### Nu works with existing data
 
 Nu speaks [JSON, YAML, XML, Excel and more](/book/loading_data.html) out of the box. It's easy to bring data into a Nu pipeline whether it's in a file, a database, or a web API:
@@ -51,4 +50,4 @@ Windows users may also need to install the latest [Microsoft Visual C++ Redistri
 
 Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!
 
-You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls). 
+You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls).

@@ -9,9 +9,9 @@ Hallo und herzlich Willkommen beim Nushell Projekt. Das Ziel diese Projekts ist 
 
 Nu ist von vielen Seiten beeinflusst: traditionelle Shells wie Bash, objektbasiert Shells wie PowerShell, funktionale Programmierung, Systems Programming und viele Weitere. Aber statt die eierlegende Wollmilchsau zu sein, liegt der Fokus von Nu darauf, die angebotenen Funktionen gut zu beherrschen:
 
-* Flexible cross-plattform Shell mit einem modernen Verhalten
-* Ausgaben von Kommandozeilenprogrammen mit einer Shell zu verarbeiten, die Struktur von Daten versteht
-* Ein Interface besitzen, das den modernen Bedürfnissen gerecht wird
+- Flexible cross-plattform Shell mit einem modernen Verhalten
+- Ausgaben von Kommandozeilenprogrammen mit einer Shell zu verarbeiten, die Struktur von Daten versteht
+- Ein Interface besitzen, das den modernen Bedürfnissen gerecht wird
 
 Der einfachste Weg zu verstehen, was Nu alles leisten kann, ist entlang von Beispielen. Los geht's!
 
@@ -55,11 +55,11 @@ Der Aufruf von `sys` gibt Informationen zum System aus, auf dem Nu läuft:
 
 <<< @/snippets/introduction/sys_example.sh
 
-Diese Ausgabe unterscheidet sich nun von den vorherigen. Der `sys` Befehl gibt eine Tabelle zurück, die selbst strukturierte Tabellen in den Zellen enthält anstatt nur einfache Werte. Um auf die Daten zuzugreifen, wird der *get* Befehl verwendet:
+Diese Ausgabe unterscheidet sich nun von den vorherigen. Der `sys` Befehl gibt eine Tabelle zurück, die selbst strukturierte Tabellen in den Zellen enthält anstatt nur einfache Werte. Um auf die Daten zuzugreifen, wird der _get_ Befehl verwendet:
 
 <<< @/snippets/introduction/sys_get_example.sh
 
-Der `get` Befehl erlaubt es, in die Inhalte einer Tabellenzelle einzutauchen.  Hier wird beispielsweise die Spalte "host" näher betrachtet, die Informationen über den Host, auf dem Nu läuft, enthält. Der Name des Betriebssystem (OS), die CPU und mehr. Nun sollen die Namen der Nutzer auf dem System ausgegeben werden:
+Der `get` Befehl erlaubt es, in die Inhalte einer Tabellenzelle einzutauchen. Hier wird beispielsweise die Spalte "host" näher betrachtet, die Informationen über den Host, auf dem Nu läuft, enthält. Der Name des Betriebssystem (OS), die CPU und mehr. Nun sollen die Namen der Nutzer auf dem System ausgegeben werden:
 
 <<< @/snippets/introduction/sys_get_nested_example.sh
 
@@ -73,6 +73,6 @@ Nun soll aufgezeigt werden, wie mit Strings außerhalb von Nu gearbeitet wird. D
 
 Das sieht jetzt genau gleich aus wie die Ausgabe zuvor. Was soll das? Es ist ähnlich aber mit einem entscheidenden Unterschied: `^echo` wurde aufgerufen. Das erlaubt es uns Daten aus Nu heraus an beliebige Befehle außerhalb von Nu zu geben wie `echo` oder `git`.
 
-*Hinweis: Hilfe zu allen in Nu eingebauten Befehlen kann mit dem Befehl `help` angezeigt werden*:
+_Hinweis: Hilfe zu allen in Nu eingebauten Befehlen kann mit dem Befehl `help` angezeigt werden_:
 
 <<< @/snippets/introduction/help_example.sh

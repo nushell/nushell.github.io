@@ -7,21 +7,21 @@ nu_version: 0.32
 Mathematical functions that generally only operate on a list of numbers (integers, decimals, bytes) and tables.
 Currently the following functions are implemented:
 
-* `math abs`: Returns absolute values of a list of numbers
-* `math avg`: Finds the average of a list of numbers or tables
-* `math ceil`: Applies the ceil function to a list of numbers
-* [`math eval`](math-eval.md): Evaluates a list of math expressions into numbers
-* `math floor`: Applies the floor function to a list of numbers
-* `math max`: Finds the maximum within a list of numbers or tables
-* `math median`: Finds the median of a list of numbers or tables
-* `math min`: Finds the minimum within a list of numbers or tables
-* `math mode`: Finds the most frequent element(s) within a list of numbers or tables
-* `math round`: Applies the round function to a list of numbers
-* `math sqrt`: Applies the square root function to a list of numbers
-* `math stddev`: Finds the standard deviation of a list of numbers or tables
-* `math sum`: Finds the sum of a list of numbers or tables
-* `math product`: Finds the product of a list of numbers or tables
-* `math variance`: Finds the variance of a list of numbers or tables
+- `math abs`: Returns absolute values of a list of numbers
+- `math avg`: Finds the average of a list of numbers or tables
+- `math ceil`: Applies the ceil function to a list of numbers
+- [`math eval`](math-eval.md): Evaluates a list of math expressions into numbers
+- `math floor`: Applies the floor function to a list of numbers
+- `math max`: Finds the maximum within a list of numbers or tables
+- `math median`: Finds the median of a list of numbers or tables
+- `math min`: Finds the minimum within a list of numbers or tables
+- `math mode`: Finds the most frequent element(s) within a list of numbers or tables
+- `math round`: Applies the round function to a list of numbers
+- `math sqrt`: Applies the square root function to a list of numbers
+- `math stddev`: Finds the standard deviation of a list of numbers or tables
+- `math sum`: Finds the sum of a list of numbers or tables
+- `math product`: Finds the product of a list of numbers or tables
+- `math variance`: Finds the variance of a list of numbers or tables
 
 However, the mathematical functions like `min` and `max` are more permissive and also work on `Dates`.
 

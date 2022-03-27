@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> from vcf ```
+`> from vcf `
 
 ## Examples
 
 Converts ics formatted string to table
+
 ```shell
 > 'BEGIN:VCARD
 N:Foo

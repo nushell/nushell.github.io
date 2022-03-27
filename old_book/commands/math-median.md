@@ -3,19 +3,23 @@ title: math median
 layout: command
 nu_version: 0.32
 ---
+
 Gets the median of a list of numbers
 
 ## Usage
+
 ```shell
-> math median {flags} 
- ```
+> math median {flags}
+```
 
 ## Flags
-* -h, --help: Display this help message
+
+- -h, --help: Display this help message
 
 ## Examples
-  Get the median of a list of numbers
+
+Get the median of a list of numbers
+
 ```shell
 > echo [3 8 9 12 12 15] | math median
- ```
-
+```

@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> to tsv --noheaders```
+`> to tsv --noheaders`
 
 ## Parameters
 
- -  `--noheaders`: do not output the column names as the first row
+- `--noheaders`: do not output the column names as the first row
 
 ## Examples
 
 Outputs an TSV string representing the contents of this table
+
 ```shell
 > [[foo bar]; [1 2]] | to tsv
 ```

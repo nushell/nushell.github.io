@@ -6,12 +6,12 @@ nu_version: 0.32
 
 Creates a new table with a histogram based on the column name passed in.
 
-Syntax: `histogram <column_name>  ...args`
+Syntax: `histogram <column_name> ...args`
 
 ## Parameters
 
-* `<column-name>`: name of the column to graph by
-* `args`: column name to give the histogram's frequency column
+- `<column-name>`: name of the column to graph by
+- `args`: column name to give the histogram's frequency column
 
 ## Examples
 

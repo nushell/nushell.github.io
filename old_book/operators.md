@@ -3,7 +3,7 @@
 Nushell supports the following operators:
 
 | Operator | Description                     |
-| -------- | ------------------------------- |
+| -------- | ------------------------------- | --- | --------------------- |
 | `+`      | add                             |
 | `-`      | subtract                        |
 | `*`      | multiply                        |
@@ -21,7 +21,7 @@ Nushell supports the following operators:
 | `in`     | value in list                   |
 | `not-in` | value not in list               |
 | `&&`     | and two Boolean values          |
-| `||`     | or two Boolean values           |
+| `        |                                 | `   | or two Boolean values |
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
 

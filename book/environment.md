@@ -3,6 +3,7 @@
 A common task in a shell is to control the environment that external applications will use. This is often done automatically, as the environment is packaged up and given to the external application as it launches. Sometimes, though, we want to have more precise control over what environment variables an application sees.
 
 You can see the current environment variables using the [`env`](commands/env.html) command:
+
 ```
    #           name                 type                value                 raw
 ──────────────────────────────────────────────────────────────────────────────────────────
@@ -10,7 +11,7 @@ You can see the current environment variables using the [`env`](commands/env.htm
   17   EDITOR               string               nvim                 nvim
   28   LANG                 string               en_US.UTF-8          en_US.UTF-8
   35   PATH                 list<unknown>        [list 16 items]      /path1:/path2:/...
-  36   PROMPT_COMMAND       block                <Block 197>          
+  36   PROMPT_COMMAND       block                <Block 197>
 ```
 
 In Nushell, environment variables can be any value and have any type (see the `type` column).
@@ -60,9 +61,10 @@ See [Modules](modules.md) for details.
 When you set and environment variable, it will be available only in the current scope (the block you're in and any block inside of it).
 
 Here is a small example to demonstrate the environment scoping:
+
 ```
 > let-env FOO = "BAR"
-> do { 
+> do {
     let-env FOO = "BAZ"
     $env.FOO == "BAZ"
 }
@@ -93,13 +95,14 @@ You can also use [`with-env`](commands/with-env.html) to do the same thing more 
 BAR
 ```
 
-The [`with-env`](commands/with-env.html) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR").  Once this is done, the [block](types_of_data.html#blocks) will run with this new environment variable set.
+The [`with-env`](commands/with-env.html) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the [block](types_of_data.html#blocks) will run with this new environment variable set.
 
 ## Permanent environment variables
 
 You can also set environment variables at startup so they are available for the duration of Nushell running.
 To do this, set an environment variable inside [the Nu configuration file](configuration.md).
 For example:
+
 ```
 # In config.nu
 let-env FOO = 'BAR'
@@ -109,6 +112,7 @@ let-env FOO = 'BAR'
 
 Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
 However, a command defined as [`def-env`](commands/def-env.html) instead of [`def`](commands/def.html) (it applies also to `export def`, see [Modules](modules.md)) will preserve the environment on the caller's side:
+
 ```
 > def-env foo [] {
     let-env FOO = 'BAR'
@@ -130,16 +134,19 @@ The conversion of value -> string is set by the `to_string` field of `ENV_CONVER
 
 Let's illustrate the conversions with an example.
 Put the following in your config.nu:
+
 ```
 let-env ENV_CONVERSIONS = {
     # ... you might have Path and PATH already there, add:
     FOO : {
         from_string: { |s| $s | split row '-' }
         to_string: { |v| $v | str collect '-' }
-    }    
+    }
 }
 ```
+
 Now, within a Nushell instance:
+
 ```
 > with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
 
@@ -148,16 +155,21 @@ Now, within a Nushell instance:
   1   b
   2   c
 ```
+
 You can see the `$env.FOO` is now a list in a new Nushell instance with the updated config.
 You can also test the conversion manually by
+
 ```
 > do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
 ```
+
 Now, to test the conversion list -> string, run:
+
 ```
-> nu -c '$env.FOO'  
+> nu -c '$env.FOO'
 a-b-c
 ```
+
 Because `nu` is an external program, Nushell translated the `[ a b c ]` according to `ENV_CONVERSIONS.FOO.to_string` and passed it to the `nu` process.
 Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was succesful.
 You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`

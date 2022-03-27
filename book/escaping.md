@@ -13,4 +13,3 @@ Escape to external command:
 ```
 > ^ls
 ```
-

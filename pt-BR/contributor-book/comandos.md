@@ -14,11 +14,11 @@ Todos os comandos dentro do Nu, incluindo plugins, são comandos internos. Coman
 
 Comandos usam uma checagem de tipo simples para garantir que os argumentos passados possam ser lidados corretamente. Para permitir isso, cada comando oferece uma Signature que informa o Nu:
 
-* O nome do comando
-* Os argumentos posicionauis (eg, em `start x y` o `x` e o `y`são argumentos posicionais)
-* Se o comando recebe um número irrestrito de argumentos posicionais adicionais (eg, `start a1 a2 a3 ... a99 a100`)
-* Os argumentos nomeados (eg, `start --now`)
-* Se o comando é um filtro ou a saída
+- O nome do comando
+- Os argumentos posicionauis (eg, em `start x y` o `x` e o `y`são argumentos posicionais)
+- Se o comando recebe um número irrestrito de argumentos posicionais adicionais (eg, `start a1 a2 a3 ... a99 a100`)
+- Os argumentos nomeados (eg, `start --now`)
+- Se o comando é um filtro ou a saída
 
 Com essa informação, um pipeline pode verificar problemas potenciais antes de ser executado.
 

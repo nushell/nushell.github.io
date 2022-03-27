@@ -1,6 +1,5 @@
 # Command Reference
 
-
 <script>
   export default {
     computed: {

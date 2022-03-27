@@ -82,7 +82,6 @@ echo "product =" ($scores | reduce --fold 1 { |it, acc| $acc * $it }) # 96
 echo $scores | reduce -n { |it, acc| $acc + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
 ```
 
-
 ## Accessing the list
 
 To access a list item at a given index, use the `$name.index` form where `$name` is a variable that holds a list.
@@ -116,7 +115,6 @@ let colors = [red green blue]
 'yellow' in $colors # false
 'gold' not-in $colors # true
 ```
-
 
 The [`any?`](commands/any.md) command determines if any item in a list
 matches a given condition.
@@ -169,6 +167,7 @@ echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 
 The [`wrap`](commands/wrap.md) command converts a list to a table. Each list value will
 be converted to a separate row with a single column:
+
 ```bash
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 

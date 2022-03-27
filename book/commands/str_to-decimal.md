@@ -12,4 +12,4 @@ usage: |
 
 ## Signature
 
-```> str to-decimal ```
+`> str to-decimal `

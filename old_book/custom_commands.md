@@ -24,14 +24,14 @@ As we do, we also get output just as we would with built-in commands:
 
 ```
 ───┬───────
- 0 │ hello 
- 1 │ world 
+ 0 │ hello
+ 1 │ world
 ───┴───────
 ```
 
 ## Command names
 
-In Nushell, a command name a string of characters or a quoted string. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊`, and `123`. 
+In Nushell, a command name a string of characters or a quoted string. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊`, and `123`.
 
 _Note: It's common practice in Nushell to separate the words of the command with `-` for better readability._ For example `get-size` instead of `getsize` or `get_size`.
 
@@ -86,6 +86,7 @@ error: Type Error
 This can help you guide users of your definitions to call them with only the supported types.
 
 The currently accepted types are (as of version 0.28.0):
+
 ```
 int, string, path, table, unit, number, pattern, range, block, any
 ```
@@ -138,14 +139,13 @@ def greet [
 }
 ```
 
-*Note:* Flags are named by their longhand name, so the above example would need to use `$age` and not `$a`.
+_Note:_ Flags are named by their longhand name, so the above example would need to use `$age` and not `$a`.
 
 Now, we can call this updated definition using the shorthand flag:
 
 ```
 > greet -a 10 hello
 ```
-
 
 ## Documenting your command
 
@@ -166,14 +166,14 @@ Once defined, we can run `help greet` to get the help information for the comman
 
 ```
 Usage:
-  > greet <name> {flags} 
+  > greet <name> {flags}
 
 Parameters:
-  <name> 
+  <name>
 
 Flags:
   -h, --help: Display this help message
-  -a, --age <integer>  
+  -a, --age <integer>
 ```
 
 You can see the parameter and flag that we defined, as well as the `-h` help flag that all commands get.
@@ -198,7 +198,7 @@ Now, if we run `help greet`, we're given a more helpful help text:
 A greeting command that can greet the caller
 
 Usage:
-  > greet <name> {flags} 
+  > greet <name> {flags}
 
 Parameters:
   <name> The name of the person to greet
@@ -227,15 +227,15 @@ We can use the output from this command just as we would `ls`.
 ```
 > my-ls | get name
 ───┬───────────────────────
- 0 │ myscript.nu           
- 1 │ myscript2.nu          
- 2 │ welcome_to_nushell.md 
+ 0 │ myscript.nu
+ 1 │ myscript2.nu
+ 2 │ welcome_to_nushell.md
 ───┴───────────────────────
 ```
 
 This lets us easily build custom commands and process their output. Note, we don't use return statements like other languages. Instead, we build pipelines that output streams of data that can be connected to other pipelines.
 
-## Input 
+## Input
 
 Custom commands can also take input, just like other commands. This input is passed from the pipeline to the block that the custom command uses.
 
@@ -254,10 +254,10 @@ Now, if we call the above command later in a pipeline, we can see what it does w
 ```
 > echo foo bar | my-echo
 ───┬─────
- 0 │ foo 
- 1 │ --  
- 2 │ bar 
- 3 │ --  
+ 0 │ foo
+ 1 │ --
+ 2 │ bar
+ 3 │ --
 ───┴─────
 ```
 

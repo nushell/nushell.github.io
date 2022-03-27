@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> path type --columns```
+`> path type --columns`
 
 ## Parameters
 
- -  `--columns {table}`: Optionally operate by column path
+- `--columns {table}`: Optionally operate by column path
 
 ## Examples
 
 Show type of a filepath
+
 ```shell
 > '.' | path type
 ```
 
 Show type of a filepath in a column
+
 ```shell
 > ls | path type -c [ name ]
 ```

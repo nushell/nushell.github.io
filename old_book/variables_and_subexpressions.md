@@ -41,10 +41,10 @@ Subexpressions can also be pipelines and not just single commands. If we wanted 
 > let names-of-big-files = (ls | where size > 10kb)
 > echo $names-of-big-files
 ───┬────────────┬──────┬──────────┬──────────────
- # │    name    │ type │   size   │   modified   
+ # │    name    │ type │   size   │   modified
 ───┼────────────┼──────┼──────────┼──────────────
- 0 │ Cargo.lock │ File │ 155.3 KB │ 17 hours ago 
- 1 │ README.md  │ File │  15.9 KB │ 17 hours ago 
+ 0 │ Cargo.lock │ File │ 155.3 KB │ 17 hours ago
+ 1 │ README.md  │ File │  15.9 KB │ 17 hours ago
 ───┴────────────┴──────┴──────────┴──────────────
 ```
 

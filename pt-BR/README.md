@@ -13,8 +13,8 @@ features:
   - title: Plugins Poderosos
     details: Nu pode não vir com tudo que você possa querer fazer com ele. Por isso, você pode extendê-lo com seu poderoso sistema de plugins.
 footer: Se você tem sugestões ou deseja mudar algo, por favor nos dê feedback
-
 ---
+
 ### Instalação Rápida
 
 #### Instalar a Última Versão

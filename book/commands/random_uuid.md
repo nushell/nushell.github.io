@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> random uuid ```
+`> random uuid `
 
 ## Examples
 
 Generate a random uuid4 string
+
 ```shell
 > random uuid
 ```

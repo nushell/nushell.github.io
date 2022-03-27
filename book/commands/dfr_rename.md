@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> dfr rename (name)```
+`> dfr rename (name)`
 
 ## Parameters
 
- -  `name`: new series name
+- `name`: new series name
 
 ## Examples
 
 Renames a series
+
 ```shell
 > [5 6 7 8] | dfr to-df | dfr rename new_name
 ```

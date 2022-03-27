@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> describe ```
+`> describe `
 
 ## Examples
 
 Describe the type of a string
+
 ```shell
 > 'hello' | describe
 ```

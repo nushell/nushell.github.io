@@ -12,22 +12,24 @@ usage: |
 
 ## Signature
 
-```> def (def_name) (params) (block)```
+`> def (def_name) (params) (block)`
 
 ## Parameters
 
- -  `def_name`: definition name
- -  `params`: parameters
- -  `block`: body of the definition
+- `def_name`: definition name
+- `params`: parameters
+- `block`: body of the definition
 
 ## Examples
 
 Define a command and run it
+
 ```shell
 > def say-hi [] { echo 'hi' }; say-hi
 ```
 
 Define a command and run it with parameter(s)
+
 ```shell
 > def say-sth [sth: string] { echo $sth }; say-sth hi
 ```

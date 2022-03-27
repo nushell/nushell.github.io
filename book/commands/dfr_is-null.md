@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr is-null ```
+`> dfr is-null `
 
 ## Examples
 
 Create mask where values are null
+
 ```shell
 > let s = ([5 6 0 8] | dfr to-df);
     let res = ($s / $s);

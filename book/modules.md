@@ -8,6 +8,7 @@ _Note! The current implementation of modules is quite bare-bones and will be exp
 ## Basics
 
 A simple module can be defined like this:
+
 ```
 > module greetings {
      export def hello [name: string] {
@@ -19,7 +20,9 @@ A simple module can be defined like this:
      }
 }
 ```
+
 or in a file named the same as the the module you want to create:
+
 ```
 # greetings.nu
 
@@ -51,6 +54,7 @@ hello world!
 > greetings hi "there"
 hi there!
 ```
+
 The `hello` and `hi` commands are now available with the `greetings` prefix.
 
 ## Importing symbols
@@ -78,6 +82,7 @@ You can also use the module name and the `*` glob to import all names directly w
 
 Nushell lets you implicitly treat a source file as a module.
 Let's start by saving the body of the module definition into a file:
+
 ```
 # greetings.nu
 
@@ -91,6 +96,7 @@ export def hi [where: string] {
 ```
 
 Now, you can call [`use`](commands/use.md) directly on the file:
+
 ```
 > use greetings.nu
 
@@ -107,6 +113,7 @@ You can use any import patterns as described above with the file name instead of
 ## Local Custom Commands
 
 Any custom commands defined in a module without the `export` keyword will work only in the module's scope:
+
 ```
 # greetings.nu
 
@@ -122,7 +129,9 @@ def greetings-helper [greeting: string, subject: string] {
     $"($greeting) ($subject)!"
 }
 ```
+
 Then, in Nushell we import all definitions from the "greetings.nu":
+
 ```
 > use greetings.nu *
 
@@ -140,6 +149,7 @@ hi there!
 So far we used modules just to import custom commands.
 It is possible to export environment variables the same way.
 The syntax is slightly different than what you might be used to from commands like [`let-env`](commands/let-env.md) or [`load-env`](commands/load-env.md):
+
 ```
 # greetings.nu
 
@@ -149,7 +159,9 @@ export def hello [name: string] {
     $"hello ($name)"
 }
 ```
+
 `use` works the same way as with custom commands:
+
 ```
 > use greetings.nu
 
@@ -163,6 +175,7 @@ hello Arthur, King of the Britons!
 You can notice we do not assign the value to `MYNAME` directly.
 Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we call [`use`](commands/use.md).
 We can demonstrate this property, for example, with the [`random`](commands/random.md) command:
+
 ```
 > module roll { export env ROLL { random dice | into string } }
 
@@ -202,6 +215,7 @@ Here's the full list of ways you can export:
 Any custom command, alias or environment variable, imported from a module or not, can be "hidden", restoring the previous definition.
 (Note, it is not yet possible to export aliases from modules but they can still be hidden.)
 We do this with the [`hide`](commands/hide.md) command:
+
 ```
 > def foo [] { "foo" }
 
@@ -218,24 +232,26 @@ The import pattern is interpreted slightly differently, though.
 It can be one of the following:
 
 `hide foo` or `hide greetings`
-* If the name is a custom command or an environment variable, hides it directly. Otherwise:
-* If the name is a module name, hides all of its exports prefixed with the module name
+
+- If the name is a custom command or an environment variable, hides it directly. Otherwise:
+- If the name is a module name, hides all of its exports prefixed with the module name
 
 `hide greetings hello`
 
-* Hides only the prefixed command / environment variable
+- Hides only the prefixed command / environment variable
 
 `hide greetings [hello, hi]`
 
-* Hides only the prefixed commands / environment variables
+- Hides only the prefixed commands / environment variables
 
 `hide greetings *`
 
-* Hides all of the module's exports, without the prefix
+- Hides all of the module's exports, without the prefix
 
 Let's show these with examples.
 We saw direct hiding of a custom command already.
 Let's try environment variables:
+
 ```
 > let-env FOO = "FOO"
 
@@ -246,7 +262,9 @@ FOO
 
 > $env.FOO  # error! environment variable not found!
 ```
+
 The first case also applies to commands / environment variables brought from a module (using the "greetings.nu" file defined above):
+
 ```
 > use greetings.nu *
 
@@ -264,7 +282,9 @@ hello world!
 
 > hello "world" # error! command not found!
 ```
+
 And finally, when the name is the module name (assuming the previous `greetings` module):
+
 ```
 > use greetings.nu
 

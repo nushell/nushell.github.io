@@ -10,7 +10,7 @@ Syntax: `save (path) {flags}`
 
 ## Parameters
 
-* `(path)` the path to save contents to
+- `(path)` the path to save contents to
 
 ### Flags
 

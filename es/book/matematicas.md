@@ -2,7 +2,6 @@
 
 Hay veces que simplemente necesitas sumar un par de números cuando te encuentras resolviendo problemas. Nu ofrece un conjunto de operaciones matemáticas básicas que puedes utilizar. Expresiones matemáticas se encuentran disponibles cuando llamas a un comando.
 
-
 ## Sumar, Restar, Mupltiplicar, Dividir
 
 ```
@@ -48,12 +47,12 @@ true
 
 Los siguientes comparadores también se encuentran disponibles:
 
-* `<` - menor que
-* `<=` - menor o igual que
-* `>` - mayor que
-* `>=` - mayor o igual que
-* `==` - igual a
-* `!=` - no es igual a
+- `<` - menor que
+- `<=` - menor o igual que
+- `>` - mayor que
+- `>=` - mayor o igual que
+- `==` - igual a
+- `!=` - no es igual a
 
 ## Operadores Compuestos
 
@@ -63,9 +62,9 @@ Nushell también soporta `&&` y `||` para unir dos operaciones que regresen valo
 
 Las operaciones matemáticas son evaluadas de la siguiente manera (de mayor precedencia a menor):
 
-* Parentesis (`()`)
-* Multiplicación (`*`) y División (`/`) 
-* Suma (`+`) y Resta (`-`)
+- Parentesis (`()`)
+- Multiplicación (`*`) y División (`/`)
+- Suma (`+`) y Resta (`-`)
 
 ```
 > 3 * (1 + 2)

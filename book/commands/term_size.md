@@ -12,26 +12,29 @@ usage: |
 
 ## Signature
 
-```> term size --columns --rows```
+`> term size --columns --rows`
 
 ## Parameters
 
- -  `--columns`: Report only the width of the terminal
- -  `--rows`: Report only the height of the terminal
+- `--columns`: Report only the width of the terminal
+- `--rows`: Report only the height of the terminal
 
 ## Examples
 
 Return the width height of the terminal
+
 ```shell
 > term size
 ```
 
 Return the width (columns) of the terminal
+
 ```shell
 > term size -c
 ```
 
 Return the height (rows) of the terminal
+
 ```shell
 > term size -r
 ```

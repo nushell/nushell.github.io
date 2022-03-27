@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> date list-timezone ```
+`> date list-timezone `
 
 ## Examples
 
 Show timezone(s) that contains 'Shanghai'
+
 ```shell
 > date list-timezone | where timezone =~ Shanghai
 ```

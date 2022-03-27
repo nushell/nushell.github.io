@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> collect (block)```
+`> collect (block)`
 
 ## Parameters
 
- -  `block`: the block to run once the stream is collected
+- `block`: the block to run once the stream is collected
 
 ## Examples
 
 Use the second value in the stream
+
 ```shell
 > echo 1 2 3 | collect { |x| echo $x.1 }
 ```

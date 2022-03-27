@@ -33,7 +33,7 @@ testuser
 
 Unterausdrücke können jederzeit ausgewertet und die Ergebnisse verwendet werden, indem der Ausdruck in Klammern `()` gepackt wird. Hinweis: In älteren Versionen von Nushell (älter als 0.32) wurde `$()` benutzt.
 
-Die Klammern enthalten eine Pipeline, die bis zum Ende durchlaufen wird und deren Ergebnis dann verwendet wird.  Hier einige Beispiele: `(ls)` würde den `ls` Befehl ausführen und die entsprechende Tabelle zurückgeben und `(git branch --show-current)` führt den externen Befehl `git` aus und gibt einen String mit dem Namen des aktuellen Branch zurück. Diese Klammern können auch verwendet werden, um mathematische Ausdrücke, wie `(2 + 3)`, auszuwerten.
+Die Klammern enthalten eine Pipeline, die bis zum Ende durchlaufen wird und deren Ergebnis dann verwendet wird. Hier einige Beispiele: `(ls)` würde den `ls` Befehl ausführen und die entsprechende Tabelle zurückgeben und `(git branch --show-current)` führt den externen Befehl `git` aus und gibt einen String mit dem Namen des aktuellen Branch zurück. Diese Klammern können auch verwendet werden, um mathematische Ausdrücke, wie `(2 + 3)`, auszuwerten.
 
 Unterausdrücke können auch ganze Pipelines statt nur einzelner Befehle enthalten. Um eine Liste von Dateien mit einer Größe größer als 10 Kilobytes zu bekommen, kann die folgende Pipeline verwendet und einer Variable zugewiesen werden:
 
@@ -41,10 +41,10 @@ Unterausdrücke können auch ganze Pipelines statt nur einzelner Befehle enthalt
 > let names-of-big-files = (ls | where size > 10kb)
 > echo $names-of-big-files
 ───┬────────────┬──────┬──────────┬──────────────
- # │    name    │ type │   size   │   modified   
+ # │    name    │ type │   size   │   modified
 ───┼────────────┼──────┼──────────┼──────────────
- 0 │ Cargo.lock │ File │ 155.3 KB │ 17 hours ago 
- 1 │ README.md  │ File │  15.9 KB │ 17 hours ago 
+ 0 │ Cargo.lock │ File │ 155.3 KB │ 17 hours ago
+ 1 │ README.md  │ File │  15.9 KB │ 17 hours ago
 ───┴────────────┴──────┴──────────┴──────────────
 ```
 
@@ -72,7 +72,7 @@ Nushell erlaubt den Zugriff auf Spalten in Tabellen in Unterausdrücken durch ei
 > ls | where size > 10kb
 ```
 
-`where size > 10kb`  ist ein Befehl mit zwei Teilen: Dem Befehlsnamen `where` und dem short-hand Ausdruck `size > 10kb`. Hier wird auch klar, warum das Ganze short-hand heißt: `size` ist hier die gekürzte Version von `$it.size`. Das Ganze könnte auch mit einer der folgenden ausführlicheren Varianten erreicht werden:
+`where size > 10kb` ist ein Befehl mit zwei Teilen: Dem Befehlsnamen `where` und dem short-hand Ausdruck `size > 10kb`. Hier wird auch klar, warum das Ganze short-hand heißt: `size` ist hier die gekürzte Version von `$it.size`. Das Ganze könnte auch mit einer der folgenden ausführlicheren Varianten erreicht werden:
 
 ```
 > ls | where $it.size > 10kb

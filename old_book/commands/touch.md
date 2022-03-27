@@ -9,7 +9,7 @@ It has no effect on existing files.
 Unlike GNU touch, the access time and the modified time are not updated.
 
 `-h`, `--help`
-  Display help message.
+Display help message.
 
 ## Examples
 
@@ -47,6 +47,7 @@ Create a file within an already existent folder.
 ```
 
 Create three files at once
+
 ```shell
 > touch a b c
 > ls
@@ -57,3 +58,4 @@ Create three files at once
   1 │ b                  │ File │      0 B │ 0 sec ago
   2 │ c                  │ File │      0 B │ 0 sec ago
 ────┴────────────────────┴──────┴──────────┴──────────────
+```

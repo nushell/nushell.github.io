@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> echo ...rest```
+`> echo ...rest`
 
 ## Parameters
 
- -  `...rest`: the values to echo
+- `...rest`: the values to echo
 
 ## Examples
 
 Put a hello message in the pipeline
+
 ```shell
 > echo 'hello'
 ```
 
 Print the value of the special '$nu' variable
+
 ```shell
 > echo $nu
 ```

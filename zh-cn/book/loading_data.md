@@ -41,12 +41,12 @@
 
 Nu 目前支持直接从以下格式加载表数据：
 
-* json
-* yaml
-* toml
-* xml
-* csv
-* ini
+- json
+- yaml
+- toml
+- xml
+- csv
+- ini
 
 但是，当你加载另外的文本文件时会发生什么呢？让我们试一试：
 
@@ -148,10 +148,11 @@ Antonio | Vivaldi | Composer
 ```
 
 其他可用于字符串的指令有：
-* split-row
-* str
-* lines
-* size
+
+- split-row
+- str
+- lines
+- size
 
 如果我们已经知道数据具有 Nu 能够理解的格式，则可以调用一组帮助程序命令。 例如，我们打开一个 Cargo.lock 文件：
 
@@ -193,7 +194,7 @@ license = "MIT"
 
 ## 获取 URLs
 
-除了从文件系统加载文件之外，您还可以使用 `fetch` 命令加载 URL。 这将从互联网上获取URL的内容并将其返回给您：
+除了从文件系统加载文件之外，您还可以使用 `fetch` 命令加载 URL。 这将从互联网上获取 URL 的内容并将其返回给您：
 
 ```
 > fetch https://www.jonathanturner.org/feed.xml

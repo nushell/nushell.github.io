@@ -8,7 +8,7 @@ Converts table data into XML text.
 
 ## Flags
 
-* `-p`, `--pretty` \<integer>: Formats the XML text with the provided indentation setting
+- `-p`, `--pretty` \<integer>: Formats the XML text with the provided indentation setting
 
 ## Example
 
@@ -74,7 +74,7 @@ Converts table data into XML text.
 
 Due to XML and internal representation, `to xml` is currently limited, it will:
 
-* Only process table data loaded from XML files (e.g. `open file.json | to xml` will fail)
-* Drop XML prolog declarations
-* Drop namespaces
-* Drop comments
+- Only process table data loaded from XML files (e.g. `open file.json | to xml` will fail)
+- Drop XML prolog declarations
+- Drop namespaces
+- Drop comments

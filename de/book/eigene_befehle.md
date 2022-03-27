@@ -24,14 +24,14 @@ Wenn das getan wird, wird eine Ausgabe erzeugt, die wie die der eingebauten Befe
 
 ```
 ───┬───────
- 0 │ hello 
- 1 │ world 
+ 0 │ hello
+ 1 │ world
 ───┴───────
 ```
 
 ## Namen von Befehlen
 
-In Nushell ist ein valider Name eines Befehls ein String aus Zeichen oder ein String in Anführungszeichen. Beispiele hierfür sind: `greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊` und `123`. 
+In Nushell ist ein valider Name eines Befehls ein String aus Zeichen oder ein String in Anführungszeichen. Beispiele hierfür sind: `greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊` und `123`.
 
 _Hinweis: Es wird empfohlen Worte in Befehlen mit `-` zur besseren Lesbarkeit zu trennen._ Beispiele: `get-size` anstatt `getsize` oder `get_size`.
 
@@ -87,24 +87,24 @@ Dies kann dabei helfen Nutzer darauf aufmerksam zu machen, welche Art von Typ er
 
 Die aktuell erlaubten Typen sind (mit Version 0.59.0 und neuer):
 
- - `any`
- - `block`
- - `cell-path`
- - `duration`
- - `path`
- - `expr`
- - `filesize`
- - `glob`
- - `int`
- - `math`
- - `number`
- - `operator`
- - `range`
- - `cond`
- - `bool`
- - `signature`
- - `string`
- - `variable`
+- `any`
+- `block`
+- `cell-path`
+- `duration`
+- `path`
+- `expr`
+- `filesize`
+- `glob`
+- `int`
+- `math`
+- `number`
+- `operator`
+- `range`
+- `cond`
+- `bool`
+- `signature`
+- `string`
+- `variable`
 
 ## Flags
 
@@ -154,14 +154,13 @@ def greet [
 }
 ```
 
-*Hinweis:* Flags sind benannt nach der langen Form des Namens. Im obigen Beispiel erfolgt der Zugriff immer über `$age` und nicht über `$a`.
+_Hinweis:_ Flags sind benannt nach der langen Form des Namens. Im obigen Beispiel erfolgt der Zugriff immer über `$age` und nicht über `$a`.
 
 Nun kann diese neue Version von `greet` wie folgt aufgerufen werden:
 
 ```
 > greet -a 10 hello
 ```
-
 
 ## Dokumentation für den eigenen Befehl
 
@@ -182,14 +181,14 @@ Wenn der Befehl definiert ist kann `help greet` aufgerufen werden, um Informatio
 
 ```
 Usage:
-  > greet <name> {flags} 
+  > greet <name> {flags}
 
 Parameters:
-  <name> 
+  <name>
 
 Flags:
   -h, --help: Display this help message
-  -a, --age <integer>  
+  -a, --age <integer>
 ```
 
 Wie zu sehen ist, werden der Parameter und die Flag, die definiert wurden, aufgelistet. Zusätzlich gibt es noch die Flag `-h`, die jeder Befehl hat.
@@ -214,7 +213,7 @@ Wenn jetzt `help greet` ausgeführt wird, wird ein hilfreicherer Text angezeigt:
 A greeting command that can greet the caller
 
 Usage:
-  > greet <name> {flags} 
+  > greet <name> {flags}
 
 Parameters:
   <name> The name of the person to greet
@@ -243,15 +242,15 @@ Die Ausgabe dieses Befehls, kann identisch zur Ausgabe von `ls` verwendet werden
 ```
 > my-ls | get name
 ───┬───────────────────────
- 0 │ myscript.nu           
- 1 │ myscript2.nu          
- 2 │ welcome_to_nushell.md 
+ 0 │ myscript.nu
+ 1 │ myscript2.nu
+ 2 │ welcome_to_nushell.md
 ───┴───────────────────────
 ```
 
 Das erlaubt es sehr einfach eigene Befehle zu definieren und deren Ausgabe zu verwenden. Ein Hinweis: Es werden keine return Statements wie in anderen Sprachen verwendet. Stattdessen werden in Nushell Pipelines gebaut, die ihre Ausgabe zur verbundenen Pipeline streamen.
 
-## Eingabe 
+## Eingabe
 
 Eigene Befehle können, wie andere Befehle, auch Eingaben verarbeiten. Diese Eingabe wird durch die Pipeline an den Codeblock des eigenen Befehls übergeben.
 
@@ -270,10 +269,10 @@ Wenn dieser neue Befehl nun in einer Pipeline aufgerufen wird, sieht die Ausgabe
 ```
 > echo foo bar | my-echo
 ───┬─────
- 0 │ foo 
- 1 │ --  
- 2 │ bar 
- 3 │ --  
+ 0 │ foo
+ 1 │ --
+ 2 │ bar
+ 3 │ --
 ───┴─────
 ```
 

@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> math variance --sample```
+`> math variance --sample`
 
 ## Parameters
 
- -  `--sample`: calculate sample variance
+- `--sample`: calculate sample variance
 
 ## Examples
 
 Get the variance of a list of numbers
+
 ```shell
 > echo [1 2 3 4 5] | math variance
 ```
 
 Get the sample variance of a list of numbers
+
 ```shell
 > [1 2 3 4 5] | math variance -s
 ```

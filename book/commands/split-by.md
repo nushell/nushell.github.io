@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> split-by (splitter)```
+`> split-by (splitter)`
 
 ## Parameters
 
- -  `splitter`: the splitter value to use
+- `splitter`: the splitter value to use
 
 ## Examples
 
 split items by column named "lang"
+
 ```shell
 >
                 {

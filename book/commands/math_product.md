@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> math product ```
+`> math product `
 
 ## Examples
 
 Get the product of a list of numbers
+
 ```shell
 > [2 3 3 4] | math product
 ```

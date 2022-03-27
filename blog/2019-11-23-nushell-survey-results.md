@@ -33,9 +33,10 @@ People also enjoyed the rich support for different file formats that Nu ships wi
 Other topics mentioned: syntax highlighting, good plugins, shells feature, tags feature, and that it is written in Rust.
 
 ### Quotes
-* _"The structured data handling is awesome!"_
-* _"Tables! \o/"_
-* _"It makes it easier to work with data on the command line. I especially love that it's cross-platform."_
+
+- _"The structured data handling is awesome!"_
+- _"Tables! \o/"_
+- _"It makes it easier to work with data on the command line. I especially love that it's cross-platform."_
 
 ## Where should Nushell improve? (20 responses)
 
@@ -46,10 +47,11 @@ Nu users also pointed out a few areas where they hoped Nu would improve over tim
 There were also a batch of additional improvements people wished for: full scripting support, better examples/documentation, improved stability, interactive table viewing, more commands, smarter table drawing, better coloring, better error messages, aliases, prompt customization, and general performance improvements.
 
 ### Quotes
-* _"Better documentation for how to write custom wrappers around existing tools."_
-* _"The coloring and autocomplete and a scripting language"_
-* _"Compatibility with other shells. It's annoying that I often have to add quotes when copying a command from a website."_
-* _"Honestly, I wish I knew enough about Nu that I could add a bunch of documentation to show others what it could do."_
+
+- _"Better documentation for how to write custom wrappers around existing tools."_
+- _"The coloring and autocomplete and a scripting language"_
+- _"Compatibility with other shells. It's annoying that I often have to add quotes when copying a command from a website."_
+- _"Honestly, I wish I knew enough about Nu that I could add a bunch of documentation to show others what it could do."_
 
 # Nu non-users
 
@@ -64,10 +66,11 @@ Top of the list are "time" and "maturity". Many people mentioned that it takes t
 We also heard from many people who were perfectly comfortable in their current shells, whether it be zsh, bash, or fish. For these responders, Nu doesn't offer a compelling reason to switch, yet.
 
 ### Quotes
-* _"I'm very invested in bash already, but I love the concept and the work being done."_
-* _"Too comfy with the current shell, also I am lazy, but the project is awesome"_
-* _"I don’t transform data in the shell much, so the core value proposition of nu shell doesn’t resonate well with me."_
-* _"I know a lot about traditional shells and don't want to re-learn how to do all that in nushell"_
+
+- _"I'm very invested in bash already, but I love the concept and the work being done."_
+- _"Too comfy with the current shell, also I am lazy, but the project is awesome"_
+- _"I don’t transform data in the shell much, so the core value proposition of nu shell doesn’t resonate well with me."_
+- _"I know a lot about traditional shells and don't want to re-learn how to do all that in nushell"_
 
 ## Used Nu but stopped (38 responses)
 
@@ -80,10 +83,10 @@ Digging in a bit further, it's not only that Nu itself is changing, but that the
 Other topics that came up: needing better autocomplete, needing aliases, better scripting, support for Windows network drives, and improved documentation.
 
 ### Quotes
-* _"It was interesting, but I have a pretty significant ecosystem built around my flows in Bash and Zsh I can't give up just yet. Maybe that's just something I need to work with."_
-* _"Also the lack of documentation around the different commands is a major impediment."_
-* _"Lack of middle-of-the-word completion, mostly. Also all the aliases I have defined that I’d need to port over."_
 
+- _"It was interesting, but I have a pretty significant ecosystem built around my flows in Bash and Zsh I can't give up just yet. Maybe that's just something I need to work with."_
+- _"Also the lack of documentation around the different commands is a major impediment."_
+- _"Lack of middle-of-the-word completion, mostly. Also all the aliases I have defined that I’d need to port over."_
 
 # Anything else we should know? (68 responses)
 
@@ -91,17 +94,18 @@ Other topics that came up: needing better autocomplete, needing aliases, better 
 
 As our final question, we gave responders a chance to give us any last thoughts they felt we should know.
 
-Overwhelming, people sent us love and encouragement. Lots of it. We wanted to take a moment to appreciate everyone who sent us kind notes to keep going, that they loved what we were building and were excited to try it in the future, and how much they loved the concept.  Thank you! We're excited to keep going, and it feels great to hear from people who are enthusiastic about the project.
+Overwhelming, people sent us love and encouragement. Lots of it. We wanted to take a moment to appreciate everyone who sent us kind notes to keep going, that they loved what we were building and were excited to try it in the future, and how much they loved the concept. Thank you! We're excited to keep going, and it feels great to hear from people who are enthusiastic about the project.
 
 ### Quotes
-* _"Keep going! Will definitely give Nu a try when it's more mature."_
-* _"I love how much effort is being put into communication and evolution of the tool."_
-* _"It is an interesting and worthwhile take on the command line environment."_
-* _"It's a great project, I wanna use it as my daily driver"_
-* _"I'm super super duper excited to use this shell"_
-* _"I think Nushell is an awesome project. Thanks for doing this"_
 
-And thank *you* for responding to our survey!
+- _"Keep going! Will definitely give Nu a try when it's more mature."_
+- _"I love how much effort is being put into communication and evolution of the tool."_
+- _"It is an interesting and worthwhile take on the command line environment."_
+- _"It's a great project, I wanna use it as my daily driver"_
+- _"I'm super super duper excited to use this shell"_
+- _"I think Nushell is an awesome project. Thanks for doing this"_
+
+And thank _you_ for responding to our survey!
 
 # Conclusions
 

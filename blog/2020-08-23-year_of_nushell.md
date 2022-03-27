@@ -14,13 +14,13 @@ Hard to imagine that it's already been a year since Nu first went public. At the
 
 When Nu first started, it started with a simple idea: the output of `ls`, `ps`, and `sysinfo` should all output the same thing. Taking a page from PowerShell, we explored outputting structured data and quickly settled on a table design that would support the output of each of the three commands, with the added ability of streaming the output as it became available.
 
-Around this idea, we then built a set of "filters", like the `where` clause, borrowed from SQL, and a growing set of data types we would support natively.  Soon, we were able to write more complex statements like `ls | where size > 10kb`. This became the crux of the idea - commands that output values from a core set of data types into a stream, composed together with the traditional UNIX pipe (`|`), so that you could build up a complex set of commands that work over the data as it streams through.
+Around this idea, we then built a set of "filters", like the `where` clause, borrowed from SQL, and a growing set of data types we would support natively. Soon, we were able to write more complex statements like `ls | where size > 10kb`. This became the crux of the idea - commands that output values from a core set of data types into a stream, composed together with the traditional UNIX pipe (`|`), so that you could build up a complex set of commands that work over the data as it streams through.
 
 # Nushell today
 
 ## Contributors
 
-Before we got started talking about Nushell today, we wanted to give a *big* "thank you!" to everyone who has contributed to Nu to get us to this point. Nu is what it is because of your help.
+Before we got started talking about Nushell today, we wanted to give a _big_ "thank you!" to everyone who has contributed to Nu to get us to this point. Nu is what it is because of your help.
 
 1ntEgr8, AaronC81, AdminXVII, aeosynth, aeshirey, aidanharris, almindor, Aloso, Amanita-muscaria, amousa11, andrasio, Andrew-Webb, arashout, arnaldo2792, avandesa, avranju, bailey-layzer, BatmanAoD, bndbsh, Bocom, boisgera, Borimino, BradyBromley, BurNiinTRee, Byron, candostdagdeviren, casidiablo, charlespierce, chhetripradeep, cjpearce, coolshaurya, cristicismas, DangerFunPants, daschl, daveremy, davidrobertmason, Delapouite, dependabot[bot], Detegr, devnought, Dimagog, djc, drmason13, DrSensor, elichai, eltonlaw, EmNudge, eoinkelly, equal-l2, est31, fdncred, filalex77, Flare576, gilesv, gorogoroumaru, GuillaumeGomez, hdhoang, he4d, hilias, HiranmayaGundu, hirschenberger, homburg, iamcodemaker, incrop, ineol, Jacobious52, jankoprowski, JCavallo, jdvr, jerodsanto, JesterOrNot, johnae, johnterickson, jonathandturner, JonnyWalker81, jonstodle, JosephTLyons, jzaefferer, k-brk, Kelli314, klnusbaum, kloun, kornelski, kubouch, kvrhdn, landaire, lesichkovm, LhKipp, lightclient, lincis, lord, luccasmmg, marcelocg, matsuu, mattclarke, mattyhall, max-sixty, mfarberbrodsky, mhmdanas, mike-morr, miller-time, mistydemeo, mlbright, mlh758, morrme, nalshihabi, naufraghi, nespera, neuronull, nickgerace, nmandery, notryanb, oknozor, orf, orientnab, oskarskog, oylenshpeegul, pag4k, Paradiesstaub, philip-peterson, piotrek-szczygiel, pizzafox, pka, pmeredit, pontaoski, Porges, pulpdrew, q-b, quebin31, rabisg0, ramonsnir, rimathia, ritobanrc, rnxpyke, romanlevin, routrohan, rrichardson, rtlechow, rutrum, ryuichi1208, Samboy218, samhedin, sandorex, sdfnz, sebastian-xyz, shaaraddalvi, shiena, siedentop, Sosthene-Guedon, Southclaws, svartalf, taiki-e, Tauheed-Elahee, tchak, thegedge, tim77, Tiwalun, twe4ked, twitu, u5surf, UltraWelfare, uma0317, utam0k, vsoch, vthriller, waldyrious, warrenseine, wycats, yaahc, yahsinhuangtw, yanganto, ymgyt, zombie110year
 
@@ -84,7 +84,7 @@ error: Coercion error
   │   duration
 ```
 
-*note: we'll be making this error better in the future*
+_note: we'll be making this error better in the future_
 
 Data in Nu also isn't just the value, but it's also a set of metadata that comes with the value. For example, if you load data from a file using the `open` command, we track the place that it's loaded along with the data that's loaded. We can see this metadata using the `tags` command:
 
@@ -132,7 +132,7 @@ To `echo $it` doesn't really do anything interesting, it just passes along the v
 ls | echo $it.name
 ```
 
-Now, in 4 words we've asked Nu to list all the files in the current directory and output only the names. This pipeline, if there are 100s of thousands of files, will happily stream out its results as it finds new files.  As in this case:
+Now, in 4 words we've asked Nu to list all the files in the current directory and output only the names. This pipeline, if there are 100s of thousands of files, will happily stream out its results as it finds new files. As in this case:
 
 ```
 ls **/* | echo $it.name
@@ -198,7 +198,7 @@ Nushell currently sits at just over 55k lines of code, built from almost 1300 me
 
 ![image of a Nu growing from under 20000 lines of code to over 55000 lines of code](../assets/images/year_1_kloc.png)
 
-*Growth in code size with each version*
+_Growth in code size with each version_
 
 # Surprises?
 
@@ -216,10 +216,10 @@ Had you a time machine and told us a year ago that we still wouldn't have variab
 
 Yes, it's definitely important. But we're also surprised just how far you can get without them. When you think about how you work with a piece of data, maybe you break it apart, maybe you work over the lines, or maybe you search inside of it. Each of these has a built-in way to perform the task in Nu and none require user-defined variables.
 
-That, of course, has its limits. At some point you want to take the result of one batch of commands and store it for later.  We're thinking through how to do this, and it comes down to a few basic questions:
+That, of course, has its limits. At some point you want to take the result of one batch of commands and store it for later. We're thinking through how to do this, and it comes down to a few basic questions:
 
-* Should variables work in a traditional way? That is, should we fully evaluate what we pass to the variable during assignment?
-* Or, should Nu instead "hold" the pipeline you use during the assignment, so that you can run it whenever you want the value of the variable (possibly caching the result if possible)? This is less traditional, but more in line with a language that works lazily on potentially endless streams of data.
+- Should variables work in a traditional way? That is, should we fully evaluate what we pass to the variable during assignment?
+- Or, should Nu instead "hold" the pipeline you use during the assignment, so that you can run it whenever you want the value of the variable (possibly caching the result if possible)? This is less traditional, but more in line with a language that works lazily on potentially endless streams of data.
 
 There are other questions we still need to answer as well, like how do variables and function definitions play together? How do variables shadow each other (or even if they're allowed)?
 
@@ -227,9 +227,9 @@ There are other questions we still need to answer as well, like how do variables
 
 Nushell, being a language focused on working on structured data, has a few quirks with how and when the data is viewed. For one, Nushell has multiple types of data, and different types of data may have different viewing needs. To help with this, we created `autoview`, a command that will look at the data and detect a variety of different cases. Once it's identified the shape of the data, it will call out to the viewing command that handles viewing that particular kind of data.
 
-Autoview is applied to any of the data being output directly to the user, which is the case for the last step of a pipeline.  For example, the pipeline `ls` is actually `ls | autoview` behind the scenes. The `ls` command outputs each row of data corresponding to the files in the directory, creating a table. These rows are passed to `autoview` which detects that we need to view a table, calls the `table` command, which then views the data.  This generally feels natural, well, most of the time.
+Autoview is applied to any of the data being output directly to the user, which is the case for the last step of a pipeline. For example, the pipeline `ls` is actually `ls | autoview` behind the scenes. The `ls` command outputs each row of data corresponding to the files in the directory, creating a table. These rows are passed to `autoview` which detects that we need to view a table, calls the `table` command, which then views the data. This generally feels natural, well, most of the time.
 
-It makes sense that `ls | where size > 10kb` doesn't output the data that flows between the two commands. If we did, it wouldn't be clear what the actual answer was. But what about in this situation: `ls; echo "done"`?  Do we output the result of `ls` or not?
+It makes sense that `ls | where size > 10kb` doesn't output the data that flows between the two commands. If we did, it wouldn't be clear what the actual answer was. But what about in this situation: `ls; echo "done"`? Do we output the result of `ls` or not?
 
 In the current version of Nu, we don't. We treat anything to the left of `;` as "do this, finish it, but don't run 'autoview'". This let's you do a series of different kinds of processing and only then view the end result.
 
@@ -259,7 +259,7 @@ There are some really juicy open questions that we'll work on in the coming year
 
 Looking at Nu today, you can see some common parts of languages like `if` or `open`, but it doesn't yet feel like there's enough syntax to build up full programs. You can't define your own commands, your own variables, and you can't build out a project across multiple files. We're working to address all of these limitations so that Nu can function not only for one-liners, but also for much more.
 
-## Getting completions *really* good
+## Getting completions _really_ good
 
 A regular point of feedback is that people want completions where possible. We've got some ideas here that will allow us to have completions in far more places, including external commands (think `git checkout <TAB>`). We're laying the groundwork for this now, and looking forward to rolling out more functionality as we go.
 

@@ -10,7 +10,7 @@ excerpt: Today, we're introducing a new shell, written in Rust. It draws inspira
 
 Today, we're introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.
 
-It's called Nushell, or just Nu for short.  We have a [book](https://book.nushell.sh/en) (¡también se habla [Español](https://book.nushell.sh/es)!). We have a [repo](https://github.com/nushell/nushell).
+It's called Nushell, or just Nu for short. We have a [book](https://book.nushell.sh/en) (¡también se habla [Español](https://book.nushell.sh/es)!). We have a [repo](https://github.com/nushell/nushell).
 
 This release was made by Jonathan Turner (me), Yehuda Katz, and Andrés Robalino, with contributions from Odin Dutton.
 
@@ -26,7 +26,7 @@ In this post, I'll talk about how a few simple ideas drive how Nu works, what Nu
 
 # Simple ideas
 
-To Nu, everything is data.  When you type `ls`, you're given a table of information about the directory you're listing:
+To Nu, everything is data. When you type `ls`, you're given a table of information about the directory you're listing:
 
 ![ls command](../assets/images/nu_ls.png)
 
@@ -38,7 +38,7 @@ Or we could choose to sort it by a column, or only show directories, or more. Th
 
 ![ps with filtering](../assets/images/nu_ps_filter.png)
 
-Where this simple concept - that everything in Nu is data - starts to shine when we try other commands and realize that we're using the same commands to filter, to sort, etc. Rather than having the need to remember all the parameters to all the commands, we can just use the same verbs to act over our data, regardless of where the data came from.  Nu pushes this idea even further.
+Where this simple concept - that everything in Nu is data - starts to shine when we try other commands and realize that we're using the same commands to filter, to sort, etc. Rather than having the need to remember all the parameters to all the commands, we can just use the same verbs to act over our data, regardless of where the data came from. Nu pushes this idea even further.
 
 ![opening toml file](../assets/images/open_cargo.png)
 
@@ -268,7 +268,7 @@ In Nu, we can `enter` a directory, which adds it to a ring of shells we can boun
 
 Using `n` and `p` we can jump back and forth between the shells. `exit` gets us out of a shell.
 
-You might noticed that `name` column in the `shells` table. Why's that there?  Oh no... oh yes.
+You might noticed that `name` column in the `shells` table. Why's that there? Oh no... oh yes.
 
 ```
 > enter Cargo.toml
@@ -282,7 +282,7 @@ You might noticed that `name` column in the `shells` table. Why's that there?  O
 ---+---+--------------------------------------------+-------------------------------
 ```
 
-That's right, we're in the file.  Can we `cd`? Oh yes, we can:
+That's right, we're in the file. Can we `cd`? Oh yes, we can:
 
 ```
 /> ls
@@ -312,7 +312,7 @@ That's right, we're in the file.  Can we `cd`? Oh yes, we can:
 
 # Plugins
 
-Nu can't come with everything you might want to do with it, so we're releasing Nu with the ability to extend it with plugins.  There's more information in the [plugins chapters](https://book.nushell.sh/en/plugins).  Nu will look for these plugins in your path, and load them up on startup.
+Nu can't come with everything you might want to do with it, so we're releasing Nu with the ability to extend it with plugins. There's more information in the [plugins chapters](https://book.nushell.sh/en/plugins). Nu will look for these plugins in your path, and load them up on startup.
 
 # All because of Rust
 

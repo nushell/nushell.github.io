@@ -13,4 +13,3 @@ Aufruf des Systembefehls:
 ```
 > ^ls
 ```
-

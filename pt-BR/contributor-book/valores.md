@@ -64,17 +64,17 @@ Nu vêm com dois "grandes" tipos de números: `BigInt` para inteiros e `BigDecim
 
 Outros tipos de dados que talvez sejam um pouco diferentes do normal:
 
-* `Nothing` = Um valor vazio
-* `Bytes(u64)` = tamanho do arquivo em número de bytes
-* `Line(String)` = Um valor do tipo string com um carriage return (ou cr/lf) no final
-* `ColumnPath(ColumnPath)` = Um caminho para percorrer até chegar a um valor em uma tabela
-* `Pattern(string)` = um padrão glob (como `nu*` em `ls nu*`)
-* `Duration(u64)` = Uma contagem no valor de segundos (como `1hr` em `ls | where modified < 1hr` )
-* `Range(Box<Range>)` = Um intervalo de valores (como `0..2` em `ls | range 0..2`)
-* `Path(PathBuf)` = um caminho de arquivo
-* `Binary(Vec<u8>)` = um array de bytes
-* `BeginningOfStream` = um marcador para indicar o início de uma stream
-* `EndOfStream` = um marcador para indicar o fim de uma stream
+- `Nothing` = Um valor vazio
+- `Bytes(u64)` = tamanho do arquivo em número de bytes
+- `Line(String)` = Um valor do tipo string com um carriage return (ou cr/lf) no final
+- `ColumnPath(ColumnPath)` = Um caminho para percorrer até chegar a um valor em uma tabela
+- `Pattern(string)` = um padrão glob (como `nu*` em `ls nu*`)
+- `Duration(u64)` = Uma contagem no valor de segundos (como `1hr` em `ls | where modified < 1hr` )
+- `Range(Box<Range>)` = Um intervalo de valores (como `0..2` em `ls | range 0..2`)
+- `Path(PathBuf)` = um caminho de arquivo
+- `Binary(Vec<u8>)` = um array de bytes
+- `BeginningOfStream` = um marcador para indicar o início de uma stream
+- `EndOfStream` = um marcador para indicar o fim de uma stream
 
 ## UntaggedValue
 

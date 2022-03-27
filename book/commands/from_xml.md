@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> from xml ```
+`> from xml `
 
 ## Examples
 
 Converts xml formatted string to table
+
 ```shell
 > '<?xml version="1.0" encoding="UTF-8"?>
 <note>

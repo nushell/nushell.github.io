@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> math min ```
+`> math min `
 
 ## Examples
 
 Get the minimum of a list of numbers
+
 ```shell
 > [-50 100 25] | math min
 ```

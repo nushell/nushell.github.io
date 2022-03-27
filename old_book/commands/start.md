@@ -10,7 +10,7 @@ Syntax: `start ...args{flags}`
 
 ## Parameters
 
-* `args`: a list of space-separated files to open
+- `args`: a list of space-separated files to open
 
 ## Flags
 

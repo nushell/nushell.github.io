@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr list ```
+`> dfr list `
 
 ## Examples
 
 Creates a new dataframe and shows it in the dataframe list
+
 ```shell
 > let test = ([[a b];[1 2] [3 4]] | dfr to-df);
     dfr list

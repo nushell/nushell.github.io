@@ -10,7 +10,7 @@ A pipeline is composed of three parts: the input, the filter, and the output.
 > open "Cargo.toml" | inc package.version --minor | save "Cargo_new.toml"
 ```
 
-The first command, `open "Cargo.toml"`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with.  Commands like [`ls`](commands/ls.md) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
+The first command, `open "Cargo.toml"`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with. Commands like [`ls`](commands/ls.md) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
 
 The second command, `inc package.version --minor`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the [`inc`](commands/inc.md) command in our example), or they may do another operation, like logging, as the values pass through.
 
@@ -32,7 +32,7 @@ Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressio
 
 ## Working with external commands
 
-Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data.md)), but what about commands outside of Nu?  Let's look at some examples of working with external commands:
+Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data.md)), but what about commands outside of Nu? Let's look at some examples of working with external commands:
 
 `internal_command | external_command`
 

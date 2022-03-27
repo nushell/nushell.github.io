@@ -12,7 +12,7 @@ El comando `ls` también recibe un argumento opcional para cambiar qué te gusta
 
 <<< @/snippets/moving_around/ls_shallow_glob_example.sh
 
-El asterisco  (\*) en el argumento que pasamos "\*.md" a veces se llama comodín o glob. Nos permite complementar cualquier cosa. Puedes leer el glob "\*.md" como "complementa cualquier archivo siempre y cuando termine en '.md'"
+El asterisco (\*) en el argumento que pasamos "\*.md" a veces se llama comodín o glob. Nos permite complementar cualquier cosa. Puedes leer el glob "\*.md" como "complementa cualquier archivo siempre y cuando termine en '.md'"
 
 Nu también usa globs modernos permitiendo acceder directorios más profundos.
 

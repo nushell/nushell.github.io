@@ -47,7 +47,7 @@ C:\Users\user>
 ## 预构建 Docker 容器
 
 如果你想要拉取一个预构建的容器，你可以在 Quay.io 上浏览 [nushell organization](https://quay.io/organization/nushell)
- 标签。拉取容器可以通过：
+标签。拉取容器可以通过：
 
 ```bash
 $ docker pull quay.io/nushell/nu
@@ -87,9 +87,9 @@ $ docker run -it nushell/nu
 
 为了使 Rust 正常工作，你需要在系统上安装兼容的编译器套件。 这些是推荐的编译器套件：
 
-* Linux: GCC or Clang
-* macOS: Clang (install Xcode)
-* Windows: [Visual Studio 社区版](https://visualstudio.microsoft.com/vs/community/)
+- Linux: GCC or Clang
+- macOS: Clang (install Xcode)
+- Windows: [Visual Studio 社区版](https://visualstudio.microsoft.com/vs/community/)
 
 对于 Linux 和 macOS，一旦你安装了这些编译器，你就可以准备通过 `rustup` （见后文） 来安装 Rust 了。
 

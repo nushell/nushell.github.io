@@ -8,7 +8,7 @@ Obtain the row or column count of a table.
 
 ## Flags
 
-* `-c`, `--column`: Calculate number of columns in table
+- `-c`, `--column`: Calculate number of columns in table
 
 ## Examples
 

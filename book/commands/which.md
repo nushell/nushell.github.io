@@ -12,17 +12,18 @@ usage: |
 
 ## Signature
 
-```> which (application) ...rest --all```
+`> which (application) ...rest --all`
 
 ## Parameters
 
- -  `application`: application
- -  `...rest`: additional applications
- -  `--all`: list all executables
+- `application`: application
+- `...rest`: additional applications
+- `--all`: list all executables
 
 ## Examples
 
 Find if the 'myapp' application is available
+
 ```shell
 > which myapp
 ```

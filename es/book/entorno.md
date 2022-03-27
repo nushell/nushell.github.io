@@ -7,10 +7,10 @@ Puedes ver las variables de entorno actuales que se enviarán a las aplicaciones
 ```
 > echo $nu.env
 ──────────────────────────┬──────────────────────────────
- COLORTERM                │ truecolor 
- DBUS_SESSION_BUS_ADDRESS │ unix:path=/run/user/1000/bus 
- DESKTOP_SESSION          │ gnome 
- DISPLAY                  │ :1 
+ COLORTERM                │ truecolor
+ DBUS_SESSION_BUS_ADDRESS │ unix:path=/run/user/1000/bus
+ DESKTOP_SESSION          │ gnome
+ DISPLAY                  │ :1
 ```
 
 El ambiente es creador a través de los ajustes en la configuración de Nu y a partir del entorno en el que se ejecuta Nu. Puedes actualizar el ambiente permanentement usando técnicas enumeradas en el capítulo de [configuración](configuracion.md).

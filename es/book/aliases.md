@@ -12,13 +12,13 @@ Ejemplo:
 > alias ls-nombres [] { ls | select name }
 > ls-nombres
 ────┬────────────────────
- #  │ name 
+ #  │ name
 ────┼────────────────────
-  0 │ 404.html 
-  1 │ CONTRIBUTING.md 
-  2 │ Gemfile 
-  3 │ Gemfile.lock 
-  4 │ LICENSE 
+  0 │ 404.html
+  1 │ CONTRIBUTING.md
+  2 │ Gemfile
+  3 │ Gemfile.lock
+  4 │ LICENSE
 ```
 
 ## Parámetros

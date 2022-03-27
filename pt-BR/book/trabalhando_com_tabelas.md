@@ -7,18 +7,18 @@ Para começar, vamos usar a seguinte tabela:
 ```shell
 > ls
 ---+---------------+------+----------+---------+------------+------------
- # | name          | type | readonly | size    | accessed   | modified 
+ # | name          | type | readonly | size    | accessed   | modified
 ---+---------------+------+----------+---------+------------+------------
- 0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago 
- 1 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago 
- 2 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago 
- 3 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago 
- 4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago 
- 5 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago 
- 6 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago 
- 7 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago 
- 8 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago 
- 9 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago 
+ 0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+ 1 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+ 2 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+ 3 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+ 4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+ 5 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+ 6 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+ 7 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+ 8 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+ 9 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
 ---+---------------+------+----------+---------+------------+------------
 ```
 
@@ -29,18 +29,18 @@ Podemos ordenar uma tabela chamando o comando `sort-by` e informando quais colun
 ```shell
 > ls | sort-by size
 ---+---------------+------+----------+---------+------------+------------
- # | name          | type | readonly | size    | accessed   | modified 
+ # | name          | type | readonly | size    | accessed   | modified
 ---+---------------+------+----------+---------+------------+------------
- 0 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago 
- 1 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago 
- 2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago 
- 3 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago 
- 4 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago 
- 5 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago 
- 6 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago 
- 7 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago 
- 8 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago 
- 9 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago 
+ 0 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+ 1 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+ 2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+ 3 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+ 4 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+ 5 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+ 6 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+ 7 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+ 8 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+ 9 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
 ---+---------------+------+----------+---------+------------+------------
 ```
 
@@ -53,18 +53,18 @@ Podemos selecionar dados de uma tabela escolhendo colunas ou linhas específicas
 ```shell
 > ls | select name size
 ---+---------------+---------
- # | name          | size 
+ # | name          | size
 ---+---------------+---------
- 0 | add.rs        | 2.7 KB 
- 1 | sum.rs        | 3.0 KB 
- 2 | inc.rs        | 11.8 KB 
- 3 | str.rs        | 21.4 KB 
- 4 | skip.rs       | 1.7 KB 
- 5 | textview.rs   | 9.4 KB 
- 6 | binaryview.rs | 13.0 KB 
- 7 | edit.rs       | 2.7 KB 
- 8 | tree.rs       | 3.0 KB 
- 9 | sys.rs        | 9.2 KB 
+ 0 | add.rs        | 2.7 KB
+ 1 | sum.rs        | 3.0 KB
+ 2 | inc.rs        | 11.8 KB
+ 3 | str.rs        | 21.4 KB
+ 4 | skip.rs       | 1.7 KB
+ 5 | textview.rs   | 9.4 KB
+ 6 | binaryview.rs | 13.0 KB
+ 7 | edit.rs       | 2.7 KB
+ 8 | tree.rs       | 3.0 KB
+ 9 | sys.rs        | 9.2 KB
 ---+---------------+---------
 ```
 
@@ -73,13 +73,13 @@ Isso ajuda a criar uma tabela mais focada no que precisamos. A seguir, digamos q
 ```shell
 > ls | sort-by size | first 5
 ---+---------+------+----------+--------+------------+------------
- # | name    | type | readonly | size   | accessed   | modified 
+ # | name    | type | readonly | size   | accessed   | modified
 ---+---------+------+----------+--------+------------+------------
- 0 | skip.rs | File |          | 1.7 KB | 2 days ago | 2 days ago 
- 1 | add.rs  | File |          | 2.7 KB | 2 days ago | 2 days ago 
- 2 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago 
- 3 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago 
- 4 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago 
+ 0 | skip.rs | File |          | 1.7 KB | 2 days ago | 2 days ago
+ 1 | add.rs  | File |          | 2.7 KB | 2 days ago | 2 days ago
+ 2 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+ 3 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+ 4 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
 ---+---------+------+----------+--------+------------+------------
 ```
 
@@ -90,11 +90,11 @@ Você também pode usar `skip` para pular as linhas que não quiser. Vamos pular
 ```shell
 > ls | sort-by size | first 5 | skip 2
 ---+---------+------+----------+--------+------------+------------
- # | name    | type | readonly | size   | accessed   | modified 
+ # | name    | type | readonly | size   | accessed   | modified
 ---+---------+------+----------+--------+------------+------------
- 0 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago 
- 1 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago 
- 2 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago 
+ 0 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+ 1 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+ 2 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
 ---+---------+------+----------+--------+------------+------------
 ```
 
@@ -105,25 +105,25 @@ Vamos examinar alguns outros comandos para selecionar dados. Você pode ter se p
 ```shell
 > ls | sort-by name
 ---+---------------+------+----------+---------+------------+------------
- # | name          | type | readonly | size    | accessed   | modified 
+ # | name          | type | readonly | size    | accessed   | modified
 ---+---------------+------+----------+---------+------------+------------
- 0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago 
- 1 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago 
- 2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago 
- 3 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago 
- 4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago 
- 5 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago 
- 6 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago 
- 7 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago 
- 8 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago 
- 9 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago 
+ 0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+ 1 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+ 2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+ 3 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+ 4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+ 5 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+ 6 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+ 7 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+ 8 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+ 9 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
 ---+---------------+------+----------+---------+------------+------------
 
 > ls | sort-by name | nth 5
 --------+------+----------+---------+------------+------------
- name   | type | readonly | size    | accessed   | modified 
+ name   | type | readonly | size    | accessed   | modified
 --------+------+----------+---------+------------+------------
- str.rs | File |          | 21.4 KB | 2 days ago | 2 days ago 
+ str.rs | File |          | 21.4 KB | 2 days ago | 2 days ago
 --------+------+----------+---------+------------+------------
 ```
 
@@ -134,18 +134,18 @@ Até agora, trabalhamos as tabelas reduzindo-as para somente o que precisamos. �
 ```shell
 > ls | get name
 ---+---------------
- # | value 
+ # | value
 ---+---------------
- 0 | add.rs 
- 1 | sum.rs 
- 2 | inc.rs 
- 3 | str.rs 
- 4 | skip.rs 
- 5 | textview.rs 
- 6 | binaryview.rs 
- 7 | edit.rs 
- 8 | tree.rs 
- 9 | sys.rs 
+ 0 | add.rs
+ 1 | sum.rs
+ 2 | inc.rs
+ 3 | str.rs
+ 4 | skip.rs
+ 5 | textview.rs
+ 6 | binaryview.rs
+ 7 | edit.rs
+ 8 | tree.rs
+ 9 | sys.rs
 ---+---------------
 ```
 
@@ -156,25 +156,25 @@ Parece muito com o comando `select` que vimos antes, então vamos colocá-lo aqu
 ```shell
 > ls | select name
 ---+---------------
- # | name 
+ # | name
 ---+---------------
- 0 | add.rs 
- 1 | sum.rs 
- 2 | inc.rs 
- 3 | str.rs 
- 4 | skip.rs 
- 5 | textview.rs 
- 6 | binaryview.rs 
- 7 | edit.rs 
- 8 | tree.rs 
- 9 | sys.rs 
+ 0 | add.rs
+ 1 | sum.rs
+ 2 | inc.rs
+ 3 | str.rs
+ 4 | skip.rs
+ 5 | textview.rs
+ 6 | binaryview.rs
+ 7 | edit.rs
+ 8 | tree.rs
+ 9 | sys.rs
 ---+---------------
 ```
 
 São muito parecidos! Vamos tentar explicar a diferença entre esses dois comandos para esclarecer:
 
-* `select` - cria uam nova tabela que inclui apenas as colunas especificadas
-* `get` - retorna os valores dentro da coluna especificada
+- `select` - cria uam nova tabela que inclui apenas as colunas especificadas
+- `get` - retorna os valores dentro da coluna especificada
 
 A única maneira de diferenciá-los olhando para a tabela é o nome característico da coluna `value`, que nos permite saber que se trata de uma lista de valores com a qual podemos trabalhar.
 
@@ -191,9 +191,9 @@ Podemos usar o comando `add` para adicionar uma nova coluna na tabela. Vejamos u
 ```shell
 > open rustfmt.toml
 ---------
- edition 
+ edition
 ---------
- 2018 
+ 2018
 ---------
 ```
 
@@ -202,9 +202,9 @@ Vamos adicionar uma coluna chamada "next_edition" com o valor 2021:
 ```shell
 > open rustfmt.toml | add next_edition 2021
 ---------+--------------
- edition | next_edition 
+ edition | next_edition
 ---------+--------------
- 2018    | 2021 
+ 2018    | 2021
 ---------+--------------
 ```
 
@@ -213,9 +213,9 @@ Note que, se abrirmos o arquivo original, seu conteúdo permanece o mesmo:
 ```shell
 > open rustfmt.toml
 ---------
- edition 
+ edition
 ---------
- 2018 
+ 2018
 ---------
 ```
 
@@ -225,9 +225,9 @@ Alterações no Nu são alterações funcionais, isto é, atuam sobre os valores
 > open rustfmt.toml | add next_edition 2021 | save rustfmt2.toml
 > open rustfmt2.toml
 ---------+--------------
- edition | next_edition 
+ edition | next_edition
 ---------+--------------
- 2018    | 2021 
+ 2018    | 2021
 ---------+--------------
 ```
 
@@ -238,9 +238,9 @@ Semelhante ao comando `add`, podemos usar o comando `edit` para alterar o conte�
 ```shell
 open rustfmt.toml
 ---------
- edition 
+ edition
 ---------
- 2018 
+ 2018
 ---------
 ```
 
@@ -249,9 +249,9 @@ E agora vamos alterar a coluna `edition` para mostrar a próxima edição à qua
 ```shell
 > open rustfmt.toml | edit edition 2021
 ---------
- edition 
+ edition
 ---------
- 2021 
+ 2021
 ---------
 ```
 
@@ -262,15 +262,15 @@ Existe mais um comando do Nu que nos ajudará a trabalhar com números e versõe
 ```shell
 > open rustfmt.toml
 ---------
- edition 
+ edition
 ---------
- 2018 
+ 2018
 ---------
 > open rustfmt.toml | inc edition
 ---------
- edition 
+ edition
 ---------
- 2019 
+ 2019
 ---------
 ```
 
@@ -285,6 +285,6 @@ Como o valor em "edition" é um número, podemos usar `inc` para alterá-lo. Ond
 
 Quando estamos trabalhando com versões, podemos usar um dos modificadores a seguir para informar como incrementar a versão:
 
-* **--major** - incrementa a versão major (0.1.3 -> 1.0.0)
-* **--minor** - incrementa a versão minor (0.1.3 -> 0.2.0)
-* **--patch** - incrementa a versão patch (0.1.3 -> 0.1.4)
+- **--major** - incrementa a versão major (0.1.3 -> 1.0.0)
+- **--minor** - incrementa a versão minor (0.1.3 -> 0.2.0)
+- **--patch** - incrementa a versão patch (0.1.3 -> 0.1.4)

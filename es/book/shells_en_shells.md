@@ -4,16 +4,16 @@
 
 Mientras es común trabajar en un directorio puede ser beneficioso trabajar en múltiples lugares al mismo tiempo. Para esto Nu ofrece el concepto de "shells". Tal como implica, son una manera de tener activo múltiples shells en uno permitiendote rápidamente saltar entre directorios de trabajo y más.
 
-Para empezar entremos a un directorio: 
+Para empezar entremos a un directorio:
 
 ```
 /home/jonathan/Source/nushell(master)> enter ../lark
 /home/jonathan/Source/lark(master)> ls
 ----+----------------+-----------+----------+---------+---------------+---------------
- #  | name           | type      | readonly | size    | accessed      | modified 
+ #  | name           | type      | readonly | size    | accessed      | modified
 ----+----------------+-----------+----------+---------+---------------+---------------
- 0  | Cargo.toml     | File      |          | 2.2 KB  | 6 months ago  | 6 months ago 
- 1  | target         | Directory |          | 4.1 KB  | 10 months ago | 6 months ago 
+ 0  | Cargo.toml     | File      |          | 2.2 KB  | 6 months ago  | 6 months ago
+ 1  | target         | Directory |          | 4.1 KB  | 10 months ago | 6 months ago
  2  | notes          | Directory |          | 4.1 KB  | 10 months ago | 6 months ago
 ```
 
@@ -22,10 +22,10 @@ Entrar es similar a cambiar directorios (como vimos previamente con el comando `
 ```
 /home/jonathan/Source/lark(master)> shells
 ---+---+------------+-------------------------------
- # |   | name       | path 
+ # |   | name       | path
 ---+---+------------+-------------------------------
- 0 |   | filesystem | /home/jonathan/Source/nushell 
- 1 | X | filesystem | /home/jonathan/Source/lark 
+ 0 |   | filesystem | /home/jonathan/Source/nushell
+ 1 | X | filesystem | /home/jonathan/Source/lark
 ---+---+------------+-------------------------------
 ```
 
@@ -59,9 +59,9 @@ Entraremos al archivo "Cargo.toml" del código fuente de Nu:
 /Users/andresrobalino/Code/nushell(master)> enter Cargo.toml
 /> ls
 ------------+--------------+------------------+----------+----------
- bin        | dependencies | dev-dependencies | lib      | package 
+ bin        | dependencies | dev-dependencies | lib      | package
 ------------+--------------+------------------+----------+----------
- [11 items] | [object]     | [object]         | [object] | [object] 
+ [11 items] | [object]     | [object]         | [object] | [object]
 ------------+--------------+------------------+----------+----------
 ```
 
@@ -85,9 +85,9 @@ Observamos que hay dos activas indicándonos que nos encontramos dentro de "Carg
 ```
 /> ls
 ------------+--------------+------------------+----------+----------
- bin        | dependencies | dev-dependencies | lib      | package 
+ bin        | dependencies | dev-dependencies | lib      | package
 ------------+--------------+------------------+----------+----------
- [11 items] | [object]     | [object]         | [object] | [object] 
+ [11 items] | [object]     | [object]         | [object] | [object]
 ------------+--------------+------------------+----------+----------
 ```
 
@@ -97,23 +97,23 @@ Puede que los complementos se encuentren en "bin", vamos ahí:
 > cd bin
 /bin> ls
 ----+----------------------+---------------------------
- #  | name                 | path 
+ #  | name                 | path
 ----+----------------------+---------------------------
- 0  | nu_plugin_inc        | src/plugins/inc.rs 
- 1  | nu_plugin_sum        | src/plugins/sum.rs 
- 2  | nu_plugin_add        | src/plugins/add.rs 
- 3  | nu_plugin_edit       | src/plugins/edit.rs 
- 4  | nu_plugin_str        | src/plugins/str.rs 
- 5  | nu_plugin_skip       | src/plugins/skip.rs 
- 6  | nu_plugin_sys        | src/plugins/sys.rs 
- 7  | nu_plugin_tree       | src/plugins/tree.rs 
- 8  | nu_plugin_binaryview | src/plugins/binaryview.rs 
- 9  | nu_plugin_textview   | src/plugins/textview.rs 
- 10 | nu                   | src/main.rs 
+ 0  | nu_plugin_inc        | src/plugins/inc.rs
+ 1  | nu_plugin_sum        | src/plugins/sum.rs
+ 2  | nu_plugin_add        | src/plugins/add.rs
+ 3  | nu_plugin_edit       | src/plugins/edit.rs
+ 4  | nu_plugin_str        | src/plugins/str.rs
+ 5  | nu_plugin_skip       | src/plugins/skip.rs
+ 6  | nu_plugin_sys        | src/plugins/sys.rs
+ 7  | nu_plugin_tree       | src/plugins/tree.rs
+ 8  | nu_plugin_binaryview | src/plugins/binaryview.rs
+ 9  | nu_plugin_textview   | src/plugins/textview.rs
+ 10 | nu                   | src/main.rs
 ----+----------------------+---------------------------
 ```
 
-Notar que siempre podemos saltar de vuelta al directorio en el que estuvimos trabajando usando `p` (para previo). 
+Notar que siempre podemos saltar de vuelta al directorio en el que estuvimos trabajando usando `p` (para previo).
 
 ```
 /bin> p
@@ -138,20 +138,20 @@ Nos encontramos ahora en la shell donde estuvimos antes de entrar al archivo "Ca
 /Users/andresrobalino/Code/nushell(master)> cd src/plugins/
 /Users/andresrobalino/Code/nushell/src/plugins(master)> ls
 ----+---------------+------+----------+---------+------------+------------
- #  | name          | type | readonly | size    | accessed   | modified 
+ #  | name          | type | readonly | size    | accessed   | modified
 ----+---------------+------+----------+---------+------------+------------
  0  | doc.rs        | File |          | 3.0 KB  | a week ago | a week ago
- 1  | sum.rs        | File |          | 3.0 KB  | a week ago | a week ago 
- 2  | inc.rs        | File |          | 11.8 KB | a week ago | a week ago 
- 3  | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago 
- 4  | edit.rs       | File |          | 2.7 KB  | a week ago | a week ago 
- 5  | str.rs        | File |          | 21.4 KB | 5 days ago | 5 days ago 
- 6  | secret.rs     | File |          | 1.8 KB  | 2 days ago | 2 days ago 
- 7  | skip.rs       | File |          | 1.7 KB  | a week ago | a week ago 
- 8  | binaryview.rs | File |          | 13.0 KB | a week ago | a week ago 
- 9  | tree.rs       | File |          | 3.0 KB  | a week ago | a week ago 
- 10 | add.rs        | File |          | 2.7 KB  | a week ago | a week ago 
- 11 | textview.rs   | File |          | 9.4 KB  | 5 days ago | 5 days ago 
+ 1  | sum.rs        | File |          | 3.0 KB  | a week ago | a week ago
+ 2  | inc.rs        | File |          | 11.8 KB | a week ago | a week ago
+ 3  | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+ 4  | edit.rs       | File |          | 2.7 KB  | a week ago | a week ago
+ 5  | str.rs        | File |          | 21.4 KB | 5 days ago | 5 days ago
+ 6  | secret.rs     | File |          | 1.8 KB  | 2 days ago | 2 days ago
+ 7  | skip.rs       | File |          | 1.7 KB  | a week ago | a week ago
+ 8  | binaryview.rs | File |          | 13.0 KB | a week ago | a week ago
+ 9  | tree.rs       | File |          | 3.0 KB  | a week ago | a week ago
+ 10 | add.rs        | File |          | 2.7 KB  | a week ago | a week ago
+ 11 | textview.rs   | File |          | 9.4 KB  | 5 days ago | 5 days ago
 ----+---------------+------+----------+---------+------------+------------
 ```
 

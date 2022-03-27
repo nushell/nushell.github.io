@@ -15,6 +15,7 @@ Nu is available via several package managers:
 For macOS and Linux, [Homebrew](https://brew.sh/) is a popular choice (`brew install nushell`).
 
 For Windows:
+
 - [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) (`winget install nushell`)
 - [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
@@ -27,15 +28,15 @@ You can also build Nu from source. First, you will need to set up the Rust toolc
 
 For Rust to work properly, you'll need to have a compatible compiler suite installed on your system. These are the recommended compiler suites:
 
-* Linux: GCC or Clang
-* macOS: Clang (install Xcode)
-* Windows: MSVC (install [Visual Studio](https://visualstudio.microsoft.com/vs/community/) or the [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022))
-    * Make sure to install the "Desktop development with C++" workload
-    * Any Visual Studio edition will work (Community is free)
+- Linux: GCC or Clang
+- macOS: Clang (install Xcode)
+- Windows: MSVC (install [Visual Studio](https://visualstudio.microsoft.com/vs/community/) or the [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022))
+  - Make sure to install the "Desktop development with C++" workload
+  - Any Visual Studio edition will work (Community is free)
 
 ### Installing Rust
 
-If we don't already have Rust on our system, the best way to install it is via [rustup](https://rustup.rs/). Rustup is a way of managing Rust installations, including managing using different Rust versions. 
+If we don't already have Rust on our system, the best way to install it is via [rustup](https://rustup.rs/). Rustup is a way of managing Rust installations, including managing using different Rust versions.
 
 Nu currently requires the **latest stable (1.55 or later)** version of Rust. The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
 
@@ -65,7 +66,7 @@ You will need to install "libxcb", "openssl-devel" and "libX11-devel":
 
 #### macOS
 
-Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmake" using: 
+Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmake" using:
 
 <<< @/snippets/installation/macos_deps.sh
 
@@ -101,7 +102,7 @@ You can also build and run Nu in release mode:
 
 People familiar with Rust may wonder why we do both a "build" and a "run" step if "run" does a build by default. This is to get around a shortcoming of the new `default-run` option in Cargo, and ensure that all plugins are built, though this may not be required in the future.
 
-## Setting the login shell (*nix)
+## Setting the login shell (\*nix)
 
 **!!! Nu is still in development, and may not be stable for everyday use. !!!**
 
@@ -113,14 +114,13 @@ Some Linux distributions have a list of valid shells located in `/etc/shells` an
 You can add Nu to the list of allowed shells by appending your Nu binary to the `shells` file.
 The path to add can be found with the command `which nu`, usually it is `$HOME/.cargo/bin/nu`.
 
-
 ## Setting the default shell (Windows Terminal)
 
 If you are using [Windows Terminal](https://github.com/microsoft/terminal) you can set `nu` as your default shell by adding:
 
 <<< @/snippets/installation/windows_terminal_default_shell.sh
 
-to  `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is to change the `"defaultProfile"` to:
+to `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is to change the `"defaultProfile"` to:
 
 <<< @/snippets/installation/windows_change_default_profile.sh
 

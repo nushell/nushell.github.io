@@ -14,12 +14,12 @@ Todos los comandos dentro de Nu, incluyendo complementos (plugins), son comandos
 
 Los comandos utilizan verificación de tipado ligero para garantizar que los argumentos pasados puedan ser manejados correctamente. Para habilitar esto, cada comando proporciona una firma que le dice a Nu:
 
-* El nombre del comando
-* Los argumentos posicionales (ej, en `start x y` la `x` y la `y` son argumentos posicionales)
-* Si el comando 
-* Si el comando toma un número adicional ilimitado de argumentos posicionales (ej, `start a1 a2 a3 ... a99 a100`)
-* Los argumentos nombrados (ej, `start --now`)
-* Si el comando es un filtro o sink
+- El nombre del comando
+- Los argumentos posicionales (ej, en `start x y` la `x` y la `y` son argumentos posicionales)
+- Si el comando
+- Si el comando toma un número adicional ilimitado de argumentos posicionales (ej, `start a1 a2 a3 ... a99 a100`)
+- Los argumentos nombrados (ej, `start --now`)
+- Si el comando es un filtro o sink
 
 Con esta información, se puede verificar problemas potenciales antes de la ejecución de la tubería.
 

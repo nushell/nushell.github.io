@@ -12,21 +12,23 @@ usage: |
 
 ## Signature
 
-```> str ends-with (pattern) ...rest```
+`> str ends-with (pattern) ...rest`
 
 ## Parameters
 
- -  `pattern`: the pattern to match
- -  `...rest`: optionally matches suffix of text by column paths
+- `pattern`: the pattern to match
+- `...rest`: optionally matches suffix of text by column paths
 
 ## Examples
 
 Checks if string ends with '.rb' pattern
+
 ```shell
 > 'my_library.rb' | str ends-with '.rb'
 ```
 
 Checks if string ends with '.txt' pattern
+
 ```shell
 > 'my_library.rb' | str ends-with '.txt'
 ```

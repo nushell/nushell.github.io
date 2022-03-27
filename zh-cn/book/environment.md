@@ -7,10 +7,10 @@ Shell 中的一项常见任务是控制外部应用程序将使用的环境。 �
 ```
 > echo $nu.env
 ──────────────────────────┬──────────────────────────────
- COLORTERM                │ truecolor 
- DBUS_SESSION_BUS_ADDRESS │ unix:path=/run/user/1000/bus 
- DESKTOP_SESSION          │ gnome 
- DISPLAY                  │ :1 
+ COLORTERM                │ truecolor
+ DBUS_SESSION_BUS_ADDRESS │ unix:path=/run/user/1000/bus
+ DESKTOP_SESSION          │ gnome
+ DISPLAY                  │ :1
 ```
 
 环境可以通过 Nu 的配置文件或者启动 Nu 时的环境来创建。你可以使用 [配置](configuration.md) 章节中所列出的技术永久地更新环境。

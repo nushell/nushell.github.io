@@ -66,4 +66,3 @@ You can execute `myscript.nu` from `bash` or within `nushell` itself by passing 
 > FOO=bar nu ./myscript.nu
 bar
 ```
-

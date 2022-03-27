@@ -12,16 +12,18 @@ usage: |
 
 ## Signature
 
-```> from yml ```
+`> from yml `
 
 ## Examples
 
 Converts yaml formatted string to table
+
 ```shell
 > 'a: 1' | from yaml
 ```
 
 Converts yaml formatted string to table
+
 ```shell
 > '[ a: 1, b: [1, 2] ]' | from yaml
 ```

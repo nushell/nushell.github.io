@@ -4,7 +4,7 @@ title: Metadata
 
 # Metadata
 
-All values that flow into and out of commands in Nu are tagged with metadata. You'll see this commonly around the codebase as `Tagged<Value>`. 
+All values that flow into and out of commands in Nu are tagged with metadata. You'll see this commonly around the codebase as `Tagged<Value>`.
 
 Though the metadata that is tracked is still in its early days, we expect to expand this as Nu matures.
 

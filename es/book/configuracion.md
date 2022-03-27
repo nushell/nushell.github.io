@@ -2,19 +2,19 @@
 
 Nu tiene un número pequeño, pero creciente, de variables internas que puedes establecer cambios en su aspecto y funcionamiento. A continuación una lista de las variables actuales, sus tipos, y una descripción de cómo se utilizan:
 
-| Variable        | Tipo           | Descripción  |
-| ------------- | ------------- | ----- |
-| completion_mode | "list" o "circular" | el estilo de autocompletar a usar |
-| ctrlc_exit | booleano | salir o no de Nu después de presionar ctrl-c varias veces |
-| disable_table_indexes | booleano | elimina la columna de índice de la tabla |
-| edit_mode | "vi" o "emacs" | cambia edición de línea a modo "vi" o "emacs" |
-| env | fila | variables de entorno que serán pasadas a comandos externos |
-| header_align | "center", "right", u otro | alinea los encabezados de la tabla alineados al centro, a la derecha o a la izquierda |
-| key_timeout | entero | el tiempo de espera utilizado para cambiar entre los modos de edición |
-| nonzero_exit_errors | booleano | si imprimir errores para códigos de salida no-ceros para externos |
-| path | tabla de cadenas | PATH para usar en búsqueda de binarios |
-| startup | lista de cadenas | comandos, como `alias`es, para ejecutar cuando nushell arranca |
-| table_mode | "light" o otro | habilitar tablas livianas o normales |
+| Variable              | Tipo                      | Descripción                                                                           |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------------- |
+| completion_mode       | "list" o "circular"       | el estilo de autocompletar a usar                                                     |
+| ctrlc_exit            | booleano                  | salir o no de Nu después de presionar ctrl-c varias veces                             |
+| disable_table_indexes | booleano                  | elimina la columna de índice de la tabla                                              |
+| edit_mode             | "vi" o "emacs"            | cambia edición de línea a modo "vi" o "emacs"                                         |
+| env                   | fila                      | variables de entorno que serán pasadas a comandos externos                            |
+| header_align          | "center", "right", u otro | alinea los encabezados de la tabla alineados al centro, a la derecha o a la izquierda |
+| key_timeout           | entero                    | el tiempo de espera utilizado para cambiar entre los modos de edición                 |
+| nonzero_exit_errors   | booleano                  | si imprimir errores para códigos de salida no-ceros para externos                     |
+| path                  | tabla de cadenas          | PATH para usar en búsqueda de binarios                                                |
+| startup               | lista de cadenas          | comandos, como `alias`es, para ejecutar cuando nushell arranca                        |
+| table_mode            | "light" o otro            | habilitar tablas livianas o normales                                                  |
 
 ## Uso
 
@@ -43,9 +43,9 @@ Ejecutando el comando `config` sin argumentos mostrará una tabla de las prefere
 ```
 > config
 ━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━
- edit_mode │ env            │ path             │ table_mode 
+ edit_mode │ env            │ path             │ table_mode
 ───────────┼────────────────┼──────────────────┼────────────
- emacs     │ [table: 1 row] │ [table: 10 rows] │ normal 
+ emacs     │ [table: 1 row] │ [table: 10 rows] │ normal
 ━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━
 ```
 
@@ -82,9 +82,9 @@ El archivo de configuración se carga desde una ubicación predeterminada. Para 
 ```
 config path
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- <value> 
+ <value>
 ───────────────────────────────────────
- /home/nusheller/.config/nu/config.toml 
+ /home/nusheller/.config/nu/config.toml
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -130,7 +130,8 @@ Con esto, deberías de poder hacer `chsh` y establecer Nu como la shell de inici
 Actualmente, la configuración del prompt es manejada instalando Nu con el soporte prompt proporcionado con [starship](https://github.com/starship/starship).
 
 ```
-nushell on 📙 master [$] is 📦 v0.5.1 via 🦀 v1.40.0-nightly 
-❯ 
+nushell on 📙 master [$] is 📦 v0.5.1 via 🦀 v1.40.0-nightly
+❯
 ```
+
 Starship es un prompt divertido, colorido y sorprendentemente poderoso. Para configurarlo, sigue los pasos en su [manual de configuración](https://starship.rs/config/).

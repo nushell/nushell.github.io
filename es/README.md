@@ -13,8 +13,8 @@ features:
   - title: Plugins
     details: Nu no puede incluir todo lo que quieras hacer con él, por lo que puedes extenderlo usando su sistema fuerte de plugins.
 footer: Sugerencias o propuestas de cambios son bienvenidas. Escríbenos
-
 ---
+
 ### Instalación rápida
 
 #### Ultima versión

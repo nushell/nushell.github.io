@@ -12,20 +12,22 @@ usage: |
 
 ## Signature
 
-```> from xlsx --sheets```
+`> from xlsx --sheets`
 
 ## Parameters
 
- -  `--sheets {list<string>}`: Only convert specified sheets
+- `--sheets {list<string>}`: Only convert specified sheets
 
 ## Examples
 
 Convert binary .xlsx data to a table
+
 ```shell
 > open test.txt | from xlsx
 ```
 
 Convert binary .xlsx data to a table, specifying the tables
+
 ```shell
 > open test.txt | from xlsx -s [Spreadsheet1]
 ```

@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> lines --skip-empty```
+`> lines --skip-empty`
 
 ## Parameters
 
- -  `--skip-empty`: skip empty lines
+- `--skip-empty`: skip empty lines
 
 ## Examples
 
 Split multi-line string into lines
+
 ```shell
 > echo $'two(char nl)lines' | lines
 ```

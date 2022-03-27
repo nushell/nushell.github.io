@@ -10,7 +10,7 @@ Syntax: `format <pattern>`
 
 ## Parameters
 
-* `<pattern>`: the pattern to match
+- `<pattern>`: the pattern to match
 
 ## Example
 

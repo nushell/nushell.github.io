@@ -12,8 +12,8 @@ usage: |
 
 ## Signature
 
-```> query xml (query)```
+`> query xml (query)`
 
 ## Parameters
 
- -  `query`: xpath query
+- `query`: xpath query

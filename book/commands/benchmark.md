@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> benchmark (block)```
+`> benchmark (block)`
 
 ## Parameters
 
- -  `block`: the block to run
+- `block`: the block to run
 
 ## Examples
 
 Benchmarks a command within a block
+
 ```shell
 > benchmark { sleep 500ms }
 ```

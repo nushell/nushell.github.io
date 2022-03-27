@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr get-day ```
+`> dfr get-day `
 
 ## Examples
 
 Returns day from a date
+
 ```shell
 > let dt = ('2020-08-04T16:39:18+00:00' | into datetime -z 'UTC');
     let df = ([$dt $dt] | dfr to-df);

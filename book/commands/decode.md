@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> decode (encoding)```
+`> decode (encoding)`
 
 ## Parameters
 
- -  `encoding`: the text encoding to use
+- `encoding`: the text encoding to use
 
 ## Examples
 
 Decode the output of an external command
+
 ```shell
 > cat myfile.q | decode utf-8
 ```

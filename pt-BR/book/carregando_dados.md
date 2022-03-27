@@ -9,13 +9,13 @@ Uma das funcionalidades mais poderosas do Nu para lidar com dados é o comando `
 ```shell
 > open editors/vscode/package.json
 ------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
- name | descript | author   | license | version | reposito | publishe | categori | keywords | engines  | activati | main     | contribu | scripts  | devDepen 
-      | ion      |          |         |         | ry       | r        | es       |          |          | onEvents |          | tes      |          | dencies 
+ name | descript | author   | license | version | reposito | publishe | categori | keywords | engines  | activati | main     | contribu | scripts  | devDepen
+      | ion      |          |         |         | ry       | r        | es       |          |          | onEvents |          | tes      |          | dencies
 ------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
- lark | Lark     | Lark     | MIT     | 1.0.0   | [object] | vscode   | [0       | [1 item] | [object] | [1 item] | ./out/ex | [object] | [object] | [object] 
-      | support  | develope |         |         |          |          | items]   |          |          |          | tension  |          |          |  
-      | for VS   | rs       |         |         |          |          |          |          |          |          |          |          |          |  
-      | Code     |          |         |         |          |          |          |          |          |          |          |          |          |  
+ lark | Lark     | Lark     | MIT     | 1.0.0   | [object] | vscode   | [0       | [1 item] | [object] | [1 item] | ./out/ex | [object] | [object] | [object]
+      | support  | develope |         |         |          |          | items]   |          |          |          | tension  |          |          |
+      | for VS   | rs       |         |         |          |          |          |          |          |          |          |          |          |
+      | Code     |          |         |         |          |          |          |          |          |          |          |          |          |
 ------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
 ```
 
@@ -30,12 +30,12 @@ Se quisermos checar a versão do projeto que estamos olhando, podemos usar o com
 
 O Nu atualmente suporta carregar dados diretamente para tabelas a partir dos seguintes formatos:
 
-* json
-* yaml
-* toml
-* xml
-* csv
-* ini
+- json
+- yaml
+- toml
+- xml
+- csv
+- ini
 
 Mas o que acontece se você carregar um arquivo texto cujo formato não é um desses? Vamos tentar:
 
@@ -67,11 +67,11 @@ A primeira coisa que queremos fazer ao carregar o arquivo é trabalhar com ele l
 ```shell
 > open people.txt | lines
 ---+------------------------------
- # | value 
+ # | value
 ---+------------------------------
- 0 | Octavia | Butler | Writer 
- 1 | Bob | Ross | Painter 
- 2 | Antonio | Vivaldi | Composer 
+ 0 | Octavia | Butler | Writer
+ 1 | Bob | Ross | Painter
+ 2 | Antonio | Vivaldi | Composer
 ---+------------------------------
 ```
 
@@ -80,11 +80,11 @@ Podemos notar que estamos lidando com linhas porque voltamos a ver uma tabela. N
 ```shell
 > open people.txt | lines | split column "|"
 ---+----------+-----------+-----------
- # | Column1  | Column2   | Column3 
+ # | Column1  | Column2   | Column3
 ---+----------+-----------+-----------
- 0 | Octavia  |  Butler   |  Writer 
- 1 | Bob      |  Ross     |  Painter 
- 2 | Antonio  |  Vivaldi  |  Composer 
+ 0 | Octavia  |  Butler   |  Writer
+ 1 | Bob      |  Ross     |  Painter
+ 2 | Antonio  |  Vivaldi  |  Composer
 ---+----------+-----------+-----------
 ```
 
@@ -93,11 +93,11 @@ Está quase certo. Parece que tem um espaço extra ali. Vamos mudar nosso delimi
 ```shell
 > open people.txt | lines | split column " | "
 ---+---------+---------+----------
- # | Column1 | Column2 | Column3 
+ # | Column1 | Column2 | Column3
 ---+---------+---------+----------
- 0 | Octavia | Butler  | Writer 
- 1 | Bob     | Ross    | Painter 
- 2 | Antonio | Vivaldi | Composer 
+ 0 | Octavia | Butler  | Writer
+ 1 | Bob     | Ross    | Painter
+ 2 | Antonio | Vivaldi | Composer
 ---+---------+---------+----------
 ```
 
@@ -106,11 +106,11 @@ Nada mal. O comando `split column` retorna dados que podemos usar. Ele também v
 ```shell
 > open people.txt | lines | split column " | " | get Column1
 ---+---------
- # | value 
+ # | value
 ---+---------
- 0 | Octavia 
- 1 | Bob 
- 2 | Antonio 
+ 0 | Octavia
+ 1 | Bob
+ 2 | Antonio
 ---+---------
 ```
 
@@ -119,11 +119,11 @@ Podemos também nomear nossas colunas ao invés de usar os nomes padrão:
 ```shell
 > open people.txt | lines | split column " | " first_name last_name job
 ---+------------+-----------+----------
- # | first_name | last_name | job 
+ # | first_name | last_name | job
 ---+------------+-----------+----------
- 0 | Octavia    | Butler    | Writer 
- 1 | Bob        | Ross      | Painter 
- 2 | Antonio    | Vivaldi   | Composer 
+ 0 | Octavia    | Butler    | Writer
+ 1 | Bob        | Ross      | Painter
+ 2 | Antonio    | Vivaldi   | Composer
 ---+------------+-----------+----------
 ```
 
@@ -132,18 +132,19 @@ Agora que nossos dados estão em uma tabela, podemos usar todos os comandos que 
 ```shell
 > open people.txt | lines | split column " | " first_name last_name job | sort-by first_name
 ---+------------+-----------+----------
- # | first_name | last_name | job 
+ # | first_name | last_name | job
 ---+------------+-----------+----------
- 0 | Antonio    | Vivaldi   | Composer 
- 1 | Bob        | Ross      | Painter 
- 2 | Octavia    | Butler    | Writer 
+ 0 | Antonio    | Vivaldi   | Composer
+ 1 | Bob        | Ross      | Painter
+ 2 | Octavia    | Butler    | Writer
 ---+------------+-----------+----------
 ```
 
 Há outros comandos que você pode usar para trabalhar com strings:
-* str
-* lines
-* size
+
+- str
+- lines
+- size
 
 Há também um conjunto de comandos auxiliares que podemos chamar se soubermos que os dados têm uma estrutura que o Nu deve ser capaz de entender. Por exemplo, vamos abrir um arquivo de lock do Rust:
 
@@ -161,9 +162,9 @@ O arquivo "Cargo.lock" é na verdade um arquivo .toml, mas a extensão do arquiv
 ```shell
 > open Cargo.lock | from toml
 ----------+-------------
- metadata | package 
+ metadata | package
 ----------+-------------
- [object] | [405 items] 
+ [object] | [405 items]
 ----------+-------------
 ```
 
@@ -189,8 +190,8 @@ Além de carregar dados a partir do sistema de arquivos, você também pode pass
 ```shell
 > open https://www.jonathanturner.org/feed.xml
 ----------
- rss 
+ rss
 ----------
- [1 item] 
+ [1 item]
 ----------
 ```

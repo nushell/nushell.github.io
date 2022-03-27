@@ -10,23 +10,23 @@ This command supports the following operations -
 
 operations:
 
-* Binary operators: +, -, *, /, % (remainder), ^ (power)
-* Unary operators: +, -, ! (factorial)
+- Binary operators: +, -, \*, /, % (remainder), ^ (power)
+- Unary operators: +, -, ! (factorial)
 
 functions:
 
-* sqrt, abs
-* exp, ln, log10
-* sin, cos, tan, asin, acos, atan, atan2
-* sinh, cosh, tanh, asinh, acosh, atanh
-* floor, ceil, round
-* signum
-* max(x, ...), min(x, ...): maximum and minimum of 1 or more numbers
+- sqrt, abs
+- exp, ln, log10
+- sin, cos, tan, asin, acos, atan, atan2
+- sinh, cosh, tanh, asinh, acosh, atanh
+- floor, ceil, round
+- signum
+- max(x, ...), min(x, ...): maximum and minimum of 1 or more numbers
 
 constants:
 
-* pi
-* e
+- pi
+- e
 
 ## Examples
 

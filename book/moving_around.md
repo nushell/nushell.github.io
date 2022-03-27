@@ -8,7 +8,7 @@ Early shells allow you to move around your filesystem and run commands, and mode
 
 As we've seen in other chapters, [`ls`](commands/ls.md) is a command for viewing the contents of a path. Nu will return the contents as a table that we can use.
 
-The [`ls`](commands/ls.md) command also takes an optional argument, to change what you'd like to view.  For example, we can list the files that end in ".md"
+The [`ls`](commands/ls.md) command also takes an optional argument, to change what you'd like to view. For example, we can list the files that end in ".md"
 
 <<< @/snippets/moving_around/ls_shallow_glob_example.sh
 
@@ -34,7 +34,7 @@ Changing the current working directory can also be done if `cd` is omitted and a
 
 ## Filesystem commands
 
-Nu also provides some basic filesystem commands that work cross-platform. 
+Nu also provides some basic filesystem commands that work cross-platform.
 
 We can move an item from one place to another using the `mv` command:
 

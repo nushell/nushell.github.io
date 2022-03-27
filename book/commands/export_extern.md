@@ -12,16 +12,17 @@ usage: |
 
 ## Signature
 
-```> export extern (def_name) (params)```
+`> export extern (def_name) (params)`
 
 ## Parameters
 
- -  `def_name`: definition name
- -  `params`: parameters
+- `def_name`: definition name
+- `params`: parameters
 
 ## Examples
 
 Export the signature for an external command
+
 ```shell
 > export extern echo [text: string]
 ```

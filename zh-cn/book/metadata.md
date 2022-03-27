@@ -22,8 +22,8 @@ error: Expected a string from pipeline
 ```
 > open Cargo.toml | tags
 ────────┬───────────────────────────────────────────
- span   │ [row end start] 
- anchor │ /home/jonathant/Source/nushell/Cargo.toml 
+ span   │ [row end start]
+ anchor │ /home/jonathant/Source/nushell/Cargo.toml
 ────────┴───────────────────────────────────────────
 ```
 
@@ -34,8 +34,8 @@ error: Expected a string from pipeline
 ```
 > open Cargo.toml | tags | get span
 ───────┬────
- start │ 5 
- end   │ 15 
+ start │ 5
+ end   │ 15
 ───────┴────
 ```
 

@@ -13,6 +13,7 @@ features:
   - title: Leistungsfähige Plugins
     details: Nu kann nicht alle Funktionen liefern, die man sich vorstellen kann. Deshalb lässt sich Nu über das leistungsfähige Plugin-System beliebig erweitern.
 ---
+
 ### Schnellstart
 
 #### Neueste Version installieren
@@ -40,6 +41,7 @@ $ winget install nushell
 ```
 
 Mittels [Chocolatey](https://chocolatey.org/):
+
 ```powershell
 $ choco install nushell
 ```
@@ -52,5 +54,4 @@ Windows-Nutzer müssen eventuell noch die [Microsoft Visual C++ 2015 Redistribut
 $ nu
 ```
 
-
-*Dazu beitragen diese Seite zu verbessern durch [Feedback](https://github.com/nushell/nushell.github.io/issues) oder eine [Pull Request](https://github.com/nushell/nushell.github.io/pulls)*
+_Dazu beitragen diese Seite zu verbessern durch [Feedback](https://github.com/nushell/nushell.github.io/issues) oder eine [Pull Request](https://github.com/nushell/nushell.github.io/pulls)_

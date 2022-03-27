@@ -7,7 +7,8 @@ nu_version: 0.32
 Finds a program file.
 
 Usage:
-  > which <application> {flags}
+
+> which <application> {flags}
 
 ## Parameters
 

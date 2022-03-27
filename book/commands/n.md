@@ -12,16 +12,18 @@ usage: |
 
 ## Signature
 
-```> n ```
+`> n `
 
 ## Examples
 
 Make two directories and enter new shells for them, use `n` to jump to the next shell
+
 ```shell
 > mkdir foo bar; enter foo; enter ../bar; n
 ```
 
 Run `n` several times and note the changes of current directory
+
 ```shell
 > n
 ```

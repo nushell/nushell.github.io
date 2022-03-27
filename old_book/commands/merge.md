@@ -3,22 +3,27 @@ title: merge
 layout: command
 nu_version: 0.32
 ---
+
 Merge a table.
 
 ## Usage
+
 ```shell
-> merge <block> {flags} 
- ```
+> merge <block> {flags}
+```
 
 ## Parameters
-* `<block>` the block to run and merge into the table
+
+- `<block>` the block to run and merge into the table
 
 ## Flags
-* -h, --help: Display this help message
+
+- -h, --help: Display this help message
 
 ## Examples
-  Merge a 1-based index column with some ls output
+
+Merge a 1-based index column with some ls output
+
 ```shell
 > ls | select name | keep 3 | merge { echo [1 2 3] | wrap index }
- ```
-
+```

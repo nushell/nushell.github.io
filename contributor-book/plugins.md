@@ -149,7 +149,7 @@ impl Plugin for Len {
 }
 ```
 
-If that's the case, why have a `begin_filter`?  Let's look at the signature of `begin_filter` a little closer:
+If that's the case, why have a `begin_filter`? Let's look at the signature of `begin_filter` a little closer:
 
 ```rust
 fn begin_filter(&mut self, _: CallInfo) -> Result<Vec<ReturnValue>, ShellError> {
@@ -388,5 +388,4 @@ and you are good to go.
 
 You can learn about creating a Nu plugin with C# here:
 
-* [.Net Core nu-plugin-lib](https://github.com/myty/nu-plugin-lib)
-
+- [.Net Core nu-plugin-lib](https://github.com/myty/nu-plugin-lib)

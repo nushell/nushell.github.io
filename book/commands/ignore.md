@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> ignore ```
+`> ignore `
 
 ## Examples
 
 Ignore the output of an echo command
+
 ```shell
 > echo done | ignore
 ```

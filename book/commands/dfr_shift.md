@@ -12,15 +12,16 @@ usage: |
 
 ## Signature
 
-```> dfr shift (period)```
+`> dfr shift (period)`
 
 ## Parameters
 
- -  `period`: shift period
+- `period`: shift period
 
 ## Examples
 
 Shifts the values by a given period
+
 ```shell
 > [1 2 2 3 3] | dfr to-df | dfr shift 2 | dfr drop-nulls
 ```

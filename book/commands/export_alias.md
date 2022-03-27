@@ -12,16 +12,17 @@ usage: |
 
 ## Signature
 
-```> export alias (name) (initial_value)```
+`> export alias (name) (initial_value)`
 
 ## Parameters
 
- -  `name`: name of the alias
- -  `initial_value`: equals sign followed by value
+- `name`: name of the alias
+- `initial_value`: equals sign followed by value
 
 ## Examples
 
 export an alias of ll to ls -l, from a module
+
 ```shell
 > export alias ll = ls -l
 ```

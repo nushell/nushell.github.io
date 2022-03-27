@@ -13,4 +13,3 @@ This covers three separate areas:
 1. The Design Philosophy of Nu
 1. The Implementation of Nu
 1. Best practices of coding for Nu
-

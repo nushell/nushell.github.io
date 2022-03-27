@@ -15,6 +15,7 @@ favorite you need to modify your config file and write down your preferred
 mode.
 
 For example:
+
 ```bash
   let $config = {
     ...
@@ -82,7 +83,6 @@ let-env PROMPT_MULTILINE_INDICATOR = "::: "
 > Note: The prompt indicators are environmental variables that represent the
 > state of the prompt
 
-
 ## Keybindings
 
 Reedline keybindings are powerful constructs that let you build chains of
@@ -114,6 +114,7 @@ After loading this new `config.nu`, your new keybinding (`Ctrl + t`) will open
 the completion command.
 
 Each keybinding requires the next elements:
+
 - name: Unique name for your keybinding for easy reference in `$config.keybindings`
 - modifier: A key modifier for the keybinding. The options are:
   - none
@@ -127,9 +128,9 @@ Each keybinding requires the next elements:
   [`vi_insert` `vi_normal`])
 - event: The type of event that is going to be sent by the keybinding. The
   options are:
-    - send
-    - edit
-    - until
+  - send
+  - edit
+  - until
 
 > Note: All of the available modifiers, keycodes and events can be found with
 > the command `keybindings list`
@@ -143,7 +144,9 @@ Something like this
   event: { send: Enter }
   ...
 ```
+
 or
+
 ```bash
   ...
   event: [
@@ -219,15 +222,19 @@ are all the `EditCommands` that can be processed by the engine.
 ### Send type
 
 To find all the available options for `send` you can use
+
 ```bash
 keybindings list | where type == events
 ```
+
 And the syntax for `send` events is the next one
+
 ```bash
     ...
       event: { send: <NAME OF EVENT FROM LIST> }
     ...
 ```
+
 > Note: You can write the name of the events with capital letters. The
 > keybinding parser is case insensitive
 
@@ -243,8 +250,10 @@ name of the menu to be activated (completion_menu or history_menu)
       }
     ...
 ```
+
 and the `ExecuteHostCommand` requires a valid command that will be sent to the
 engine
+
 ```bash
     ...
       event: {
@@ -258,7 +267,7 @@ It is worth mentioning that in the events list you will also see `Edit([])`,
 `Multiple([])` and `UntilFound([])`. These options are not available for the
 parser since they are constructed based on the keybinding definition. For
 example, a `Multiple([])` event is built for you when defining a list of
-records in the keybinding's event.  An `Edit([])` event is the same as the
+records in the keybinding's event. An `Edit([])` event is the same as the
 `edit` type that was mentioned. And the `UntilFound([])` event is the same as
 the `until` type mentioned before.
 
@@ -267,19 +276,24 @@ the `until` type mentioned before.
 The `edit` type is the simplification of the `Edit([])` event. The `event` type
 simplifies defining complex editing events for the keybindings. To list the
 available options you can use the next command
+
 ```bash
 keybindings list | where type == edits
 ```
+
 The usual syntax for an `edit` is the next one
+
 ```bash
     ...
       event: { edit: <NAME OF EDIT FROM LIST> }
     ...
 ```
+
 The syntax for the edits in the list that have a `()` changes a little bit.
 Since those edits require an extra value to be fully defined. For example, if
 we would like to insert a string where the prompt is located, then you will
 have to use
+
 ```bash
     ...
       event: {
@@ -288,7 +302,9 @@ have to use
       }
     ...
 ```
+
 or say you want to move right until the first `S`
+
 ```bash
     ...
       event: {
@@ -381,7 +397,6 @@ is always successful
   }
 ```
 
-
 ## Menus
 
 Thanks to Reedline, Nushell has menus that can help you with your day to day
@@ -464,6 +479,7 @@ have already typed this
 ```bash
 let a = ()
 ```
+
 you can place the cursor inside the `()` and activate the menu. You can filter
 the history by typing key words and as soon as you select an entry, the typed
 words will be replaced
@@ -484,6 +500,7 @@ it. Say you have activated your menu and it looks like this
 2: ls | where size > 30MiB
 3: ls | where size > 40MiB
 ```
+
 Instead of pressing down to select the fourth entry, you can type `!3` and
 press enter. This will insert the selected text in the prompt position, saving
 you time scrolling down the menu.
