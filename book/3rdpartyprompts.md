@@ -49,12 +49,37 @@ let-env PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 
 1. Follow the links above and install starship.
 2. Install nerdfonts depending on your preferences.
-3. Set the starship shell environment variable to `nu` by running this command `let-env STARSHIP_SHELL = "nu"`
-4. Set the starship session key environment variable by running this command `let-env STARSHIP_SESSION_KEY = (random chars -l 16)`
-5. If you want the default ticking clock with date & time on the right prompt, execute this command `hide PROMPT_COMMAND_RIGHT`
-6. If you don't want the default indicator, you can run this command `let-env PROMPT_INDICATOR = " "`
-7. Set starship as your left prompt with this command `let-env PROMPT_COMMAND = { starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)' | str trim }`. Note that you may not have to use `str trim` in the Nushell prompt if you disable starship's default newline setting with this entry in the starship.toml file `add_newline = false`. There have been reports that this might not play nice with Nushell prompts. We're still testing.
-8. Since Nushell supports a right prompt you can also play around with starship's ability to set a right prompt. Setting the right prompt in Nushell is identical to setting the left prompt however you use `PROMPT_COMMAND_RIGHT`.
+3. Use the config example below. Make sure to set the `STARSHIP_SHELL` environment variable.
+
+Here's an example config section for starship:
+
+```
+let-env STARSHIP_SHELL = "nu"
+
+def create_left_prompt [] {
+    starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)'
+}
+
+# Use nushell functions to define your right and left prompt
+let-env PROMPT_COMMAND = { create_left_prompt }
+let-env PROMPT_COMMAND_RIGHT = ""
+
+# The prompt indicators are environmental variables that represent
+# the state of the prompt
+let-env PROMPT_INDICATOR = ""
+let-env PROMPT_INDICATOR_VI_INSERT = ": "
+let-env PROMPT_INDICATOR_VI_NORMAL = "〉"
+let-env PROMPT_MULTILINE_INDICATOR = "::: "
+```
+
+Now restart Nu.
+
+```
+nushell on 📙 main is 📦 v0.60.0 via 🦀 v1.59.0
+❯
+```
+
+You can learn more about configuring starship in the [official starship configuration documentation](https://github.com/starship/starship#step-2-setup-your-shell-to-use-starship).
 
 ## Purs
 
