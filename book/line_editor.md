@@ -50,7 +50,7 @@ prompt, you could define the next environmental variables in your config file:
 ```bash
 # Use nushell functions to define your right and left prompt
 def create_left_prompt [] {
-    let path_segment = ($nu.cwd)
+    let path_segment = ($env.PWD)
 
     $path_segment
 }
