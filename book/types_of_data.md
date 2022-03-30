@@ -193,6 +193,16 @@ Records hold key-value pairs, much like objects in JSON. As these can sometimes 
 ╰──────┴─────╯
 ```
 
+They can be dynamically produced with [reduce](https://www.nushell.sh/book/commands/reduce.html):
+
+```
+> echo [[name value]; [NAME1 VALUE1] [NAME2 VALUE2]] | reduce -f {} {|it, acc| $acc | upsert $it.name $it.value }
+╭───────┬────────╮
+│ NAME1 │ VALUE1 │
+│ NAME2 │ VALUE2 │
+╰───────┴────────╯
+```
+
 ## Lists
 
 Lists can hold more than one value. These can be simple values. They can also hold rows, and the combination of a list of records is often called a "table".
