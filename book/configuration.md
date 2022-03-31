@@ -76,10 +76,10 @@ With this, you should be able to `chsh` and set Nu to be your login shell. After
 
 Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
 As Nushell has its own [`open`](commands/open.md) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
-One way to work around this is to define `alias`es in your `config.nu` file like this:
+One way to work around this is to define a custom command for Nushell's `open` and create an alias for the system's `open` in your `config.nu` file like this:
 
 ```
-alias nuopen = open
+def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
 
