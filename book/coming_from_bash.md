@@ -8,7 +8,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | `ls <dir>`                           | `ls <dir>`                                       | Lists the files in the given directory                            |
 | `ls pattern*`                        | `ls pattern*`                                    | Lists files that match a given pattern                            |
 | `ls -la`                             | `ls --long --all` or `ls -la`                    | List files with all available information, including hidden files |
-| `ls -d */`                           | `ls                                              | where type == Dir`                                                | List directories                                                                                       |
+| `ls -d */`                           | `ls                                              | where type == dir`                                                | List directories                                                                                       |
 | `find . -name *.rs`                  | `ls **/*.rs`                                     | Find recursively all files that match a given pattern             |
 | `find . -name Makefile               | xargs vim`                                       | `ls \*\*/Makefile                                                 | get name                                                                                               | vim $in` | Pass values as command parameters |
 | `cd <directory>`                     | `cd <directory>`                                 | Change to the given directory                                     |
