@@ -4,7 +4,7 @@
 
 Nushell uses a configuration system that loads+runs a Nushell script file at launch time. That configuration file is called the `config.nu` file, and the path to it can be found by calling `echo $nu.config-path`. `config.nu` can add definitions, environment variables, and more to the global namespace.
 
-An example `config.nu` file can be found in our repo [here](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu).
+We currently provide the full list of configurable options as a sample `config.nu` which can be found in our repo [here](https://github.com/nushell/nushell/blob/0.60.0/docs/sample_config/default_config.nu).
 
 ### Configuring `$config`
 
