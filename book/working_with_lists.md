@@ -93,6 +93,14 @@ let names = [Mark Tami Amanda Jeremy]
 $names.1 # gives Tami
 ```
 
+If the index is in some variable `$index` we can use the `get` command to extract the item from the list.
+
+```bash
+let names = [Mark Tami Amanda Jeremy]
+let index = 1
+$names | get $index # gives Tami
+```
+
 The [`length`](commands/length.md) command returns the number of items in a list.
 For example, `[red green blue] | length` outputs `3`.
 
