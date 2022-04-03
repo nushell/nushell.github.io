@@ -397,6 +397,11 @@ is always successful
   }
 ```
 
+### Troubleshooting keybinding problems
+
+Your terminal environment may not always propagate your key combinations on to nushell the way you expect it to.
+You can use the command `keybindings listen` to figure out if certain keypresses are actually received by nushell, and how.
+
 ## Menus
 
 Thanks to Reedline, Nushell has menus that can help you with your day to day
