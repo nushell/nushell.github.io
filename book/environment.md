@@ -35,6 +35,15 @@ Using the `let-env` command is the most straightforward method
 
 'let-env' is similar to the **export** command in bash.
 
+So if you want to extend the `PATH` variable for example, you could do that as follows.
+
+```
+let-env PATH = ($env.PATH | prepend '/path/you/want/to/add')
+```
+
+Here we've prepended our folder to the existing folders in the PATH, so it will have the highest priority.
+If you want to give it the lowest priority instead, you can use the `append` command.
+
 ### [`load-env`](commands/load-env.html)
 
 If you have more than one environment variable you'd like to set, you can use `load-env` to create a table of name/value pairs and load multiple variables at the same time:
