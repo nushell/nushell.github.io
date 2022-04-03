@@ -1,6 +1,8 @@
 # Dataframes
 
-> Note. The dataframe commands are available from version 0.33.1 onwards
+::: tip 
+The dataframe commands are available from version 0.33.1 onwards
+:::
 
 As we have seen so far, Nushell makes working with data its main priority.
 `Lists` and `Tables` are there to help you cycle through values in order to
@@ -150,9 +152,11 @@ data by year, and add groups using the column `geo_count`.
 
 Again, we are going to start with a Nushell native command.
 
-> Note: If you want to run this example, be aware that the next command will
-> use a large amount of memory. This may affect the performance of your system
-> while this is being executed.
+::: tip 
+If you want to run this example, be aware that the next command will
+use a large amount of memory. This may affect the performance of your system
+while this is being executed.
+:::
 
 ```shell
 > benchmark {
@@ -261,8 +265,10 @@ this:
 This should create the value `df` in memory which holds the data we just
 created.
 
-> Note: The command `dfrs open` can read either **csv** or **parquet**
-> files.
+::: tip 
+The command `dfrs open` can read either **csv** or **parquet**
+files.
+:::
 
 To see all the dataframes that are stored in memory you can use
 
@@ -304,8 +310,10 @@ dataframe variable to the stream
 With the dataframe in memory we can start doing column operations with the
 `DataFrame`
 
-> Note: If you want to see all the dataframe commands that are available you
-> can use `help dfr`
+::: tip 
+If you want to see all the dataframe commands that are available you
+can use `help dfr`
+:::
 
 ## Basic aggregations
 
@@ -400,10 +408,12 @@ right dataframe
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴─────────┴─────────────┴───────────────┴───────────────┴─────────────
 ```
 
-> Note: In `Nu` when a command has multiple arguments that are expecting
-> multiple values we use brackets `[]` to enclose those values. In the case of
-> `dfr join` we can join on multiple columns as long as they have the
-> same type, for example we could have done `$df | dfr join $df_a -l [int_1 int_2] -r [int_1a int_2]`
+::: tip 
+In `Nu` when a command has multiple arguments that are expecting
+multiple values we use brackets `[]` to enclose those values. In the case of
+`dfr join` we can join on multiple columns as long as they have the
+same type, for example we could have done `$df | dfr join $df_a -l [int_1 int_2] -r [int_1a int_2]`
+:::
 
 By default, the join command does an inner join, meaning that it will keep the
 rows where both dataframes share the same value. You can select a left join to
@@ -480,12 +490,14 @@ pivot column and the column `float_1` as the value column
 ───┴───────┴────────┴────────┴────────
 ```
 
-> Note: a pivot operation is a way to aggregate data based on two columns. In
-> the previous example, the result of the pivot command produced a table that
-> represents the sum of all the values in the column `float_1` that are shared
-> between columns `first` (now the rows) and `second` (now the columns). So,
-> the value of `1.5` shown in row `b` and column `a` is the sum of all the
-> floats where the column `first` is `b` and column `second` is `a`
+::: tip 
+a pivot operation is a way to aggregate data based on two columns. In
+the previous example, the result of the pivot command produced a table that
+represents the sum of all the values in the column `float_1` that are shared
+between columns `first` (now the rows) and `second` (now the columns). So,
+the value of `1.5` shown in row `b` and column `a` is the sum of all the
+floats where the column `first` is `b` and column `second` is `a`
+:::
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
 worth keeping in memory while you explore your dataset.
@@ -509,8 +521,10 @@ command `to-df`.
 ───┴───┴───
 ```
 
-> Note: For the time being, not all of Nushell primitives can be converted into
-> a dataframe. This will change in the future, as the dataframe feature matures
+::: tip 
+For the time being, not all of Nushell primitives can be converted into
+a dataframe. This will change in the future, as the dataframe feature matures
+:::
 
 We can append columns to a dataframe in order to create a new variable. As an
 example, let's append two columns to our mini dataframe `$a`
@@ -602,8 +616,10 @@ previously created column.
 Now we have a new Series that was constructed by doing basic operations on the
 previous variable.
 
-> Note: If you want to see how many variables you have stored in memory you can
-> use `$scope.variables`
+::: tip 
+If you want to see how many variables you have stored in memory you can
+use `$scope.variables`
+:::
 
 Let's rename our previous Series so it has a memorable name
 
@@ -861,7 +877,9 @@ Or what if we want to create a new sorted dataframe using a column in specific.
 We can use the `dfr arg-sort` to accomplish that. In the next example we
 can sort the dataframe by the column `word`
 
-> Note. The same result could be accomplished using the command `sort`
+::: tip 
+The same result could be accomplished using the command `sort`
+:::
 
 ```shell
 > let indices = ($df.word | dfr arg-sort)
