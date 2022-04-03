@@ -26,7 +26,7 @@ Wenn oh-my-posh verwendet werden soll, kann dies in wenigen Schritten für Nushe
 
 ## Starship
 
-[Webseite](https://starship.rs/)
+[Website](https://starship.rs/)
 
 [Repository](https://github.com/starship/starship)
 
