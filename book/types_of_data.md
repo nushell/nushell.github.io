@@ -193,6 +193,17 @@ Records hold key-value pairs, much like objects in JSON. As these can sometimes 
 ╰──────┴─────╯
 ```
 
+You can iterate over records by first transposing it into a table:
+```
+> echo {name: sam, rank: 10} | transpose key value
+╭───┬──────┬───────╮
+│ # │ key  │ value │
+├───┼──────┼───────┤
+│ 0 │ name │  sam  │
+│ 1 │ rank │   10  │
+╰───┴──────┴───────╯
+```
+
 ## Lists
 
 Lists can hold more than one value. These can be simple values. They can also hold rows, and the combination of a list of records is often called a "table".
