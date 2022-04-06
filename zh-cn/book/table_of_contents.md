@@ -2,19 +2,23 @@
 
 - [安装](installation.md) - 安装 Nushell
 - [介绍](introduction.md) - 开始使用
+- [Nushell 开发思想](thinking_in_nushell.md) - Nushell 开发思想
 - [四处移动](moving_around.md) - 在 Nushell 里四处移动
 - [数据类型](types_of_data.md) - Nushell 中的数据类型
 - [加载数据](loading_data.md) - 加载及使用数据
+- [字符串](strings.md) - 字符串、转义字符和字符串插值
 - [使用列表](working_with_lists.md) - 使用 Nushell 的列表
 - [使用表格](working_with_tables.md) - 使用 Nushell 的表格
 - [管道](pipeline.md) - 管道是如何运作的
 - [配置](configuration.md) - 如何配置 Nushell
+- [第三方命令行提示](3rdpartyprompts.md) - 如何配置第三方命令行提示
 - [自定义命令](custom_commands.md) - 创建你自己的命令
 - [别名](aliases.md) - 如何为命令添加别名
 - [运算符](operators.md) - Nushell 支持的运算符
 - [数学](math.md) - Nushell 里的数学计算
 - [变量和子表达式](variables_and_subexpressions.md) - 使用变量和子表达式
 - [环境变量](environment.md) - 使用环境变量
+- [标准输出、错误和退出码](stdout_stderr_exit_codes.md) - 使用标准输出、错误和退出码
 - [模块](modules.md) - 创建和使用你自己的模块
 - [脚本](scripts.md) - 创建你自己的脚本
 - [元数据](metadata.md) - 细说 Nushell 的元数据系统
@@ -22,7 +26,10 @@
 - [Shells](shells_in_shells.md) - 同时在多个 Shell 里面工作
 - [命令转移](escaping.md) - 转移到同名的本机原生命令
 - [插件](plugins.md) - 通过插件增强 Nushell 并添加更多功能
+- [平行](parallelism.md) - 并行运行你的代码
+- [行编辑器](line_editor.md) - Nushell 的行编辑器
 - [数据帧](dataframes.md) - 在 Nushell 里使用数据帧
+- [配色和主题](coloring_and_theming.md) - 如何改变 Nushell 的颜色和主题
 - [正则表达式](regular_expressions.md) - 正则使用指南
 - [Bash 用户上手指南](coming_from_bash.md) - 帮助 Bash 用户快速上手 Nushell
 - [从 shells/DSL 到 Nushell](nushell_map.md) - Nushell 与 SQL, Linq, PowerShell 及 Bash 的差异

@@ -63,7 +63,7 @@ The [`get`](commands/get.md) command lets us jump into the contents of a column 
 
 <<< @/snippets/introduction/sys_get_nested_example.sh
 
-Right now, there's just one user on the system named "jt". You'll notice that we can pass a column path (the `host.sessions` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
+Right now, there's just one user on the system named "jt". You'll notice that we can pass a column path (the `host.sessions.name` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
 
 You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "jt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
 
