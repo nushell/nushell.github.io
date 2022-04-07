@@ -92,7 +92,7 @@ You can also use the [`reduce`](commands/reduce.md) command to work in the same 
 
 Nushell takes multiple design cues from compiled languages. One such cue is that languages should avoid global mutable state. Shells have commonly used global mutation to update the environment, but Nushell steers clear of this approach.
 
-In Nushell, blocks control their own environment. Changes to the environment are scoped to the block where they happen`*`.
+In Nushell, blocks control their own environment. Changes to the environment are scoped to the block where they happen.
 
 In practice, this lets you write some concise code for working with subdirectories, for example, if you wanted to build each sub-project in the current directory, you could run:
 

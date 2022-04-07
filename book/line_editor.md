@@ -50,7 +50,7 @@ prompt, you could define the next environmental variables in your config file:
 ```bash
 # Use nushell functions to define your right and left prompt
 def create_left_prompt [] {
-    let path_segment = ($nu.cwd)
+    let path_segment = ($env.PWD)
 
     $path_segment
 }
@@ -67,8 +67,10 @@ let-env PROMPT_COMMAND = { create_left_prompt }
 let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
 ```
 
-> Note: You don't have to define the environmental variables using Nushell
-> functions. You can use simple strings to define them.
+::: tip
+You don't have to define the environmental variables using Nushell
+functions. You can use simple strings to define them.
+:::
 
 You can also customize the prompt indicator for the line editor by modifying
 the next env variables.
@@ -80,8 +82,10 @@ let-env PROMPT_INDICATOR_VI_NORMAL = "〉"
 let-env PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
-> Note: The prompt indicators are environmental variables that represent the
-> state of the prompt
+::: tip
+The prompt indicators are environmental variables that represent the
+state of the prompt
+:::
 
 ## Keybindings
 
@@ -132,8 +136,10 @@ Each keybinding requires the next elements:
   - edit
   - until
 
-> Note: All of the available modifiers, keycodes and events can be found with
-> the command `keybindings list`
+::: tip
+All of the available modifiers, keycodes and events can be found with
+the command `keybindings list`
+:::
 
 The event section of the keybinding entry is where the actions to be performed
 are defined. In this field you can use either a record or a list of records.
@@ -235,8 +241,10 @@ And the syntax for `send` events is the next one
     ...
 ```
 
-> Note: You can write the name of the events with capital letters. The
-> keybinding parser is case insensitive
+::: tip
+You can write the name of the events with capital letters. The
+keybinding parser is case insensitive
+:::
 
 There are two exceptions to this rule: the `Menu` and `ExecuteHostCommand`.
 Those two events require an extra field to be complete. The `Menu` needs the
@@ -396,6 +404,11 @@ is always successful
     ...
   }
 ```
+
+### Troubleshooting keybinding problems
+
+Your terminal environment may not always propagate your key combinations on to nushell the way you expect it to.
+You can use the command `keybindings listen` to figure out if certain keypresses are actually received by nushell, and how.
 
 ## Menus
 

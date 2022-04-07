@@ -24,7 +24,7 @@ When [`register`](commands/register.md) is called:
 
 1. Nu launches the plugin and sends it a "Signature" message over stdin
 2. The plugin responds via stdout with a message containing its signature (name, description, arguments, flags, and more)
-3. Nu saves the plugin signature in the file at `$nu.plugin-path`, so registration is persisted across across multiple launches
+3. Nu saves the plugin signature in the file at `$nu.plugin-path`, so registration is persisted across multiple launches
 
 Once registered, the plugin is available as part of your set of commands:
 

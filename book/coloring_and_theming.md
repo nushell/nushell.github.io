@@ -392,6 +392,8 @@ I like the `vivid` application and currently have it configured in my `config.nu
 
 `let-env LS_COLORS = (vivid generate molokai | str trim)`
 
+If `LS_COLORS` is not set, nushell will default to a builtin `LS_COLORS` setting, based on 8-bit (extended) ANSI colors.
+
 ## Theming
 
 Theming combines all the coloring above. Here's a quick example of one we put together quickly to demonstrate the ability to theme. This is a spin on the `base16` themes that we see so widespread on the web.

@@ -4,7 +4,7 @@
 
 Nushell uses a configuration system that loads+runs a Nushell script file at launch time. That configuration file is called the `config.nu` file, and the path to it can be found by calling `echo $nu.config-path`. `config.nu` can add definitions, environment variables, and more to the global namespace.
 
-An example `config.nu` file can be found in our repo [here](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu).
+We currently provide the full list of configurable options as a sample `config.nu` which can be found in our repo [here](https://github.com/nushell/nushell/blob/0.60.0/docs/sample_config/default_config.nu).
 
 ### Configuring `$config`
 
@@ -76,10 +76,10 @@ With this, you should be able to `chsh` and set Nu to be your login shell. After
 
 Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
 As Nushell has its own [`open`](commands/open.md) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
-One way to work around this is to define `alias`es in your `config.nu` file like this:
+One way to work around this is to define a custom command for Nushell's `open` and create an alias for the system's `open` in your `config.nu` file like this:
 
 ```
-alias nuopen = open
+def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
 
