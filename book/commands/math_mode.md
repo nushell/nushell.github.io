@@ -1,7 +1,7 @@
 ---
 title: math mode
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Gets the most frequent element(s) from a list of numbers or tables
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> math mode `
+```> math mode ```
 
 ## Examples
 
 Get the mode(s) of a list of numbers
-
 ```shell
 > [3 3 9 12 12 15] | math mode
 ```

@@ -1,7 +1,7 @@
 ---
 title: to yaml
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Convert table into .yaml/.yml text
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> to yaml `
+```> to yaml ```
 
 ## Examples
 
 Outputs an YAML string representing the contents of this table
-
 ```shell
 > [[foo bar]; ["1" "2"]] | to yaml
 ```

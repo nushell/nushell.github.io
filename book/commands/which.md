@@ -1,7 +1,7 @@
 ---
 title: which
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Finds a program file, alias or custom command.
 ---
@@ -12,18 +12,17 @@ usage: |
 
 ## Signature
 
-`> which (application) ...rest --all`
+```> which (application) ...rest --all```
 
 ## Parameters
 
-- `application`: application
-- `...rest`: additional applications
-- `--all`: list all executables
+ -  `application`: application
+ -  `...rest`: additional applications
+ -  `--all`: list all executables
 
 ## Examples
 
 Find if the 'myapp' application is available
-
 ```shell
 > which myapp
 ```

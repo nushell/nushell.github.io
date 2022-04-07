@@ -1,7 +1,7 @@
 ---
 title: dfr is-not-null
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates mask where value is not null
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr is-not-null `
+```> dfr is-not-null ```
 
 ## Examples
 
 Create mask where values are not null
-
 ```shell
 > let s = ([5 6 0 8] | dfr to-df);
     let res = ($s / $s);

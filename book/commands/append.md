@@ -1,9 +1,9 @@
 ---
 title: append
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
-  Append a row to the table.
+  Append any number of rows to a table.
 ---
 
 # `{{ $frontmatter.title }}`
@@ -12,28 +12,25 @@ usage: |
 
 ## Signature
 
-`> append (row)`
+```> append (row)```
 
 ## Parameters
 
-- `row`: the row to append
+ -  `row`: the row, list, or table to append
 
 ## Examples
 
 Append one Int item
-
 ```shell
 > [0,1,2,3] | append 4
 ```
 
 Append three Int items
-
 ```shell
 > [0,1] | append [2,3,4]
 ```
 
 Append Ints and Strings
-
 ```shell
 > [0,1] | append [2,nu,4,shell]
 ```

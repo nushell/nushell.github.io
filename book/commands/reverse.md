@@ -1,7 +1,7 @@
 ---
 title: reverse
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Reverses the table.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> reverse `
+```> reverse ```
 
 ## Examples
 
 Reverse the items
-
 ```shell
 > [0,1,2,3] | reverse
 ```

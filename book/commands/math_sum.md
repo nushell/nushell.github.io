@@ -1,7 +1,7 @@
 ---
 title: math sum
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Finds the sum of a list of numbers or tables
 ---
@@ -12,18 +12,16 @@ usage: |
 
 ## Signature
 
-`> math sum `
+```> math sum ```
 
 ## Examples
 
 Sum a list of numbers
-
 ```shell
 > [1 2 3] | math sum
 ```
 
 Get the disk usage for the current directory
-
 ```shell
 > ls | get size | math sum
 ```

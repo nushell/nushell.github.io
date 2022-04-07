@@ -1,7 +1,7 @@
 ---
 title: split-by
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Create a new table splitted.
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> split-by (splitter)`
+```> split-by (splitter)```
 
 ## Parameters
 
-- `splitter`: the splitter value to use
+ -  `splitter`: the splitter value to use
 
 ## Examples
 
 split items by column named "lang"
-
 ```shell
 >
                 {

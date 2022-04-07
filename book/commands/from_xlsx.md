@@ -1,7 +1,7 @@
 ---
 title: from xlsx
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse binary Excel(.xlsx) data and create table.
 ---
@@ -12,22 +12,20 @@ usage: |
 
 ## Signature
 
-`> from xlsx --sheets`
+```> from xlsx --sheets```
 
 ## Parameters
 
-- `--sheets {list<string>}`: Only convert specified sheets
+ -  `--sheets {list<string>}`: Only convert specified sheets
 
 ## Examples
 
 Convert binary .xlsx data to a table
-
 ```shell
 > open test.txt | from xlsx
 ```
 
 Convert binary .xlsx data to a table, specifying the tables
-
 ```shell
 > open test.txt | from xlsx -s [Spreadsheet1]
 ```

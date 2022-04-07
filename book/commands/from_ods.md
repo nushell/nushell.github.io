@@ -1,7 +1,7 @@
 ---
 title: from ods
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 ---
@@ -12,22 +12,20 @@ usage: |
 
 ## Signature
 
-`> from ods --sheets`
+```> from ods --sheets```
 
 ## Parameters
 
-- `--sheets {list<string>}`: Only convert specified sheets
+ -  `--sheets {list<string>}`: Only convert specified sheets
 
 ## Examples
 
 Convert binary .ods data to a table
-
 ```shell
 > open test.txt | from ods
 ```
 
 Convert binary .ods data to a table, specifying the tables
-
 ```shell
 > open test.txt | from ods -s [Spreadsheet1]
 ```

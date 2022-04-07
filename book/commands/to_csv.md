@@ -1,7 +1,7 @@
 ---
 title: to csv
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Convert table into .csv text
 ---
@@ -12,23 +12,21 @@ usage: |
 
 ## Signature
 
-`> to csv --separator --noheaders`
+```> to csv --separator --noheaders```
 
 ## Parameters
 
-- `--separator {string}`: a character to separate columns, defaults to ','
-- `--noheaders`: do not output the columns names as the first row
+ -  `--separator {string}`: a character to separate columns, defaults to ','
+ -  `--noheaders`: do not output the columns names as the first row
 
 ## Examples
 
 Outputs an CSV string representing the contents of this table
-
 ```shell
 > [[foo bar]; [1 2]] | to csv
 ```
 
 Outputs an CSV string representing the contents of this table
-
 ```shell
 > [[foo bar]; [1 2]] | to csv -s ';'
 ```

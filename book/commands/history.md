@@ -1,7 +1,7 @@
 ---
 title: history
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Get the command history
 ---
@@ -12,28 +12,25 @@ usage: |
 
 ## Signature
 
-`> history --clear`
+```> history --clear```
 
 ## Parameters
 
-- `--clear`: Clears out the history entries
+ -  `--clear`: Clears out the history entries
 
 ## Examples
 
 Get current history length
-
 ```shell
 > history | length
 ```
 
 Show last 5 commands you have ran
-
 ```shell
 > history | last 5
 ```
 
 Search all the commands from history that contains 'cargo'
-
 ```shell
 > history | wrap cmd | where cmd =~ cargo
 ```

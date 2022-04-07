@@ -1,7 +1,7 @@
 ---
 title: describe
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Describe the value(s) piped in.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> describe `
+```> describe ```
 
 ## Examples
 
 Describe the type of a string
-
 ```shell
 > 'hello' | describe
 ```

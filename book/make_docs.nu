@@ -79,7 +79,7 @@ $"($example.description)
             str collect (char nl)
         )
 
-    let safe_name = ($command.command | str find-replace '\?' '' | str find-replace ' ' '_')
+    let safe_name = ($command.command | str replace '\?' '' | str replace ' ' '_')
     $doc | save --raw $"./book/commands/($safe_name).md"
     $"./book/commands/($safe_name).md"
 } | length | $"($in) commands written"

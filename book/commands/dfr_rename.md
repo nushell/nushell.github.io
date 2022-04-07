@@ -1,7 +1,7 @@
 ---
 title: dfr rename
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Renames a series
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> dfr rename (name)`
+```> dfr rename (name)```
 
 ## Parameters
 
-- `name`: new series name
+ -  `name`: new series name
 
 ## Examples
 
 Renames a series
-
 ```shell
 > [5 6 7 8] | dfr to-df | dfr rename new_name
 ```

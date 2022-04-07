@@ -1,7 +1,7 @@
 ---
 title: date
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   date
 ---
@@ -12,4 +12,4 @@ usage: |
 
 ## Signature
 
-`> date `
+```> date ```

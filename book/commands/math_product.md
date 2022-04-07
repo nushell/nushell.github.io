@@ -1,7 +1,7 @@
 ---
 title: math product
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Finds the product of a list of numbers or tables
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> math product `
+```> math product ```
 
 ## Examples
 
 Get the product of a list of numbers
-
 ```shell
 > [2 3 3 4] | math product
 ```

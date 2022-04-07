@@ -1,7 +1,7 @@
 ---
 title: zip
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Combine a stream with the input
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> zip (other)`
+```> zip (other)```
 
 ## Parameters
 
-- `other`: the other input
+ -  `other`: the other input
 
 ## Examples
 
 Zip multiple streams and get one of the results
-
 ```shell
 > 1..3 | zip 4..6
 ```

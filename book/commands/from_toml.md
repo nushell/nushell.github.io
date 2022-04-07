@@ -1,7 +1,7 @@
 ---
 title: from toml
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse text as .toml and create table.
 ---
@@ -12,18 +12,16 @@ usage: |
 
 ## Signature
 
-`> from toml `
+```> from toml ```
 
 ## Examples
 
 Converts toml formatted string to table
-
 ```shell
 > 'a = 1' | from toml
 ```
 
 Converts toml formatted string to table
-
 ```shell
 > 'a = 1
 b = [1, 2]' | from toml

@@ -1,7 +1,7 @@
 ---
 title: complete
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Complete the external piped in, collecting outputs and exit code
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> complete `
+```> complete ```
 
 ## Examples
 
 Run the external completion
-
 ```shell
 > ^external arg1 | complete
 ```

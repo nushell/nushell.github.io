@@ -1,7 +1,7 @@
 ---
 title: dfr shape
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Shows column and row size for a dataframe
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr shape `
+```> dfr shape ```
 
 ## Examples
 
 Shows row and column shape
-
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr shape
 ```

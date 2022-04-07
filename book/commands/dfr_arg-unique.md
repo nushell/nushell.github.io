@@ -1,7 +1,7 @@
 ---
 title: dfr arg-unique
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Returns indexes for unique values
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr arg-unique `
+```> dfr arg-unique ```
 
 ## Examples
 
 Returns indexes for unique values
-
 ```shell
 > [1 2 2 3 3] | dfr to-df | dfr arg-unique
 ```

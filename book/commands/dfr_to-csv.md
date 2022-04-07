@@ -1,7 +1,7 @@
 ---
 title: dfr to-csv
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Saves dataframe to csv file
 ---
@@ -12,24 +12,22 @@ usage: |
 
 ## Signature
 
-`> dfr to-csv (file) --delimiter --no-header`
+```> dfr to-csv (file) --delimiter --no-header```
 
 ## Parameters
 
-- `file`: file path to save dataframe
-- `--delimiter {string}`: file delimiter character
-- `--no-header`: Indicates if file doesn't have header
+ -  `file`: file path to save dataframe
+ -  `--delimiter {string}`: file delimiter character
+ -  `--no-header`: Indicates if file doesn't have header
 
 ## Examples
 
 Saves dataframe to csv file
-
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr to-csv test.csv
 ```
 
 Saves dataframe to csv file using other delimiter
-
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr to-csv test.csv -d '|'
 ```

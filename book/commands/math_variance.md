@@ -1,7 +1,7 @@
 ---
 title: math variance
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Finds the variance of a list of numbers or tables
 ---
@@ -12,22 +12,20 @@ usage: |
 
 ## Signature
 
-`> math variance --sample`
+```> math variance --sample```
 
 ## Parameters
 
-- `--sample`: calculate sample variance
+ -  `--sample`: calculate sample variance
 
 ## Examples
 
 Get the variance of a list of numbers
-
 ```shell
 > echo [1 2 3 4 5] | math variance
 ```
 
 Get the sample variance of a list of numbers
-
 ```shell
 > [1 2 3 4 5] | math variance -s
 ```

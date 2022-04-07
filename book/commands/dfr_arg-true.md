@@ -1,7 +1,7 @@
 ---
 title: dfr arg-true
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Returns indexes where values are true
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr arg-true `
+```> dfr arg-true ```
 
 ## Examples
 
 Returns indexes where values are true
-
 ```shell
 > [false true false] | dfr to-df | dfr arg-true
 ```

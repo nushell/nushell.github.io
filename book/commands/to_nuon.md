@@ -1,7 +1,7 @@
 ---
 title: to nuon
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Converts table data into Nuon (Nushell Object Notation) text.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> to nuon `
+```> to nuon ```
 
 ## Examples
 
 Outputs a nuon string representing the contents of this table
-
 ```shell
 > [1 2 3] | to nuon
 ```

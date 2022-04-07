@@ -1,7 +1,7 @@
 ---
 title: dfr cumulative
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Cumulative calculation for a series
 ---
@@ -12,17 +12,16 @@ usage: |
 
 ## Signature
 
-`> dfr cumulative (type) --reverse`
+```> dfr cumulative (type) --reverse```
 
 ## Parameters
 
-- `type`: rolling operation
-- `--reverse`: Reverse cumulative calculation
+ -  `type`: rolling operation
+ -  `--reverse`: Reverse cumulative calculation
 
 ## Examples
 
 Cumulative sum for a series
-
 ```shell
 > [1 2 3 4 5] | dfr to-df | dfr cumulative sum
 ```

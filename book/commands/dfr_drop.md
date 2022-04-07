@@ -1,7 +1,7 @@
 ---
 title: dfr drop
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates a new dataframe by dropping the selected columns
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> dfr drop ...rest`
+```> dfr drop ...rest```
 
 ## Parameters
 
-- `...rest`: column names to be dropped
+ -  `...rest`: column names to be dropped
 
 ## Examples
 
 drop column a
-
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr drop a
 ```

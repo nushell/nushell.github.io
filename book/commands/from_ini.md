@@ -1,7 +1,7 @@
 ---
 title: from ini
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse text as .ini and create table
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> from ini `
+```> from ini ```
 
 ## Examples
 
 Converts ini formatted string to table
-
 ```shell
 > '[foo]
 a=1
