@@ -395,12 +395,19 @@ module.exports = {
         sidebar: {
           '/zh-cn/book/': [
             {
-              title: 'Nu 书',
+              title: '入门篇',
               collapsable: false,
               children: [
+                '',
                 'installation',
-                'introduction',
+                'thinking_in_nushell',
                 'moving_around',
+              ],
+            },
+            {
+              title: '待续',
+              collapsable: false,
+              children: [
                 'types_of_data',
                 'loading_data',
                 'working_with_tables',
