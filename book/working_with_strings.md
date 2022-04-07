@@ -59,19 +59,12 @@ greetings, Alice
 
 By wrapping expressions in `()`, we can run them to completion and use the results to help build the string.
 
-String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" "`, form. These correspond to the single-quoted and double-quoted strings: single-quoted string interpolation doesn't support escape characters such as `\n`, while double-quoted string interpolation does. 
+String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" "`, form. These correspond to the single-quoted and double-quoted strings: single-quoted string interpolation doesn't support escape characters while double-quoted string interpolation does. 
 
-Interpolated strings do not currently support any way of escaping parentheses. If you would like to include parentheses in the resulting string, one workaround is to use sub-expressions which evaluate to the `(` or `)` characters, such as [`char lp` and `char rp`](commands/char.md). For example:
-
-```
-> $"2 + 2 is (2 + 2) (char lp)you guessed it!(char rp)"
-2 + 2 is 4 (you guessed it!)
-```
-
-Alternatively, you could compose the string using the [`build-string`](commands/build-string.md) command instead:
+As of version 0.61, interpolated strings support escaping parentheses, so that the `(` and `)` characters may be used in a string without Nushell trying to evaluate what appears between them:
 
 ```
-> build-string "2 + 2 is " (2 + 2) " (you guessed it!)"
+> $"2 + 2 is (2 + 2) \(you guessed it!)"
 2 + 2 is 4 (you guessed it!)
 ```
 
