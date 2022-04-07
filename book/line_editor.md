@@ -67,7 +67,7 @@ let-env PROMPT_COMMAND = { create_left_prompt }
 let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
 ```
 
-::: tip 
+::: tip
 You don't have to define the environmental variables using Nushell
 functions. You can use simple strings to define them.
 :::
@@ -82,7 +82,7 @@ let-env PROMPT_INDICATOR_VI_NORMAL = "〉"
 let-env PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
-::: tip 
+::: tip
 The prompt indicators are environmental variables that represent the
 state of the prompt
 :::
@@ -136,7 +136,7 @@ Each keybinding requires the next elements:
   - edit
   - until
 
-::: tip 
+::: tip
 All of the available modifiers, keycodes and events can be found with
 the command `keybindings list`
 :::
@@ -241,7 +241,7 @@ And the syntax for `send` events is the next one
     ...
 ```
 
-::: tip 
+::: tip
 You can write the name of the events with capital letters. The
 keybinding parser is case insensitive
 :::
