@@ -1,7 +1,7 @@
 ---
 title: dfr arg-max
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Return index for max value in series
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr arg-max `
+```> dfr arg-max ```
 
 ## Examples
 
 Returns index for max value
-
 ```shell
 > [1 3 2] | dfr to-df | dfr arg-max
 ```

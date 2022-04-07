@@ -1,7 +1,7 @@
 ---
 title: dfr to-lowercase
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Lowercase the strings in the column
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr to-lowercase `
+```> dfr to-lowercase ```
 
 ## Examples
 
 Modifies strings to lowercase
-
 ```shell
 > [Abc aBc abC] | dfr to-df | dfr to-lowercase
 ```

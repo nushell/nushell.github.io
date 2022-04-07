@@ -1,7 +1,7 @@
 ---
 title: dfr is-null
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates mask where value is null
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr is-null `
+```> dfr is-null ```
 
 ## Examples
 
 Create mask where values are null
-
 ```shell
 > let s = ([5 6 0 8] | dfr to-df);
     let res = ($s / $s);

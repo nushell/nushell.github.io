@@ -1,7 +1,7 @@
 ---
 title: last
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Show only the last number of rows.
 ---
@@ -12,16 +12,20 @@ usage: |
 
 ## Signature
 
-`> last (rows)`
+```> last (rows)```
 
 ## Parameters
 
-- `rows`: starting from the back, the number of rows to return
+ -  `rows`: starting from the back, the number of rows to return
 
 ## Examples
 
 Get the last 2 items
-
 ```shell
 > [1,2,3] | last 2
+```
+
+Get the last item
+```shell
+> [1,2,3] | last
 ```

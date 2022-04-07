@@ -81,6 +81,10 @@ nushell on 📙 main is 📦 v0.60.0 via 🦀 v1.59.0
 
 You can learn more about configuring starship in the [official starship configuration documentation](https://github.com/starship/starship#step-2-setup-your-shell-to-use-starship).
 
+## Powerline
+
+1. 
+
 ## Purs
 
 [repo](https://github.com/xcambar/purs)

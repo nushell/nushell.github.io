@@ -1,7 +1,7 @@
 ---
 title: split chars
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   splits a string's characters into separate rows
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> split chars `
+```> split chars ```
 
 ## Examples
 
 Split the string's characters into separate rows
-
 ```shell
 > 'hello' | split chars
 ```

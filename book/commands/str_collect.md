@@ -1,7 +1,7 @@
 ---
 title: str collect
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   creates a string from the input, optionally using a separator
 ---
@@ -12,22 +12,20 @@ usage: |
 
 ## Signature
 
-`> str collect (separator)`
+```> str collect (separator)```
 
 ## Parameters
 
-- `separator`: optional separator to use when creating string
+ -  `separator`: optional separator to use when creating string
 
 ## Examples
 
 Create a string from input
-
 ```shell
 > ['nu', 'shell'] | str collect
 ```
 
 Create a string from input with a separator
-
 ```shell
 > ['nu', 'shell'] | str collect '-'
 ```

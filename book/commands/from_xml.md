@@ -1,7 +1,7 @@
 ---
 title: from xml
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse text as .xml and create table.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> from xml `
+```> from xml ```
 
 ## Examples
 
 Converts xml formatted string to table
-
 ```shell
 > '<?xml version="1.0" encoding="UTF-8"?>
 <note>

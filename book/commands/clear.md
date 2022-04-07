@@ -1,7 +1,7 @@
 ---
 title: clear
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Clear the terminal.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> clear `
+```> clear ```
 
 ## Examples
 
 Clear the terminal
-
 ```shell
 > clear
 ```

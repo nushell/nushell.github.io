@@ -1,7 +1,7 @@
 ---
 title: dfr to-parquet
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Saves dataframe to parquet file
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> dfr to-parquet (file)`
+```> dfr to-parquet (file)```
 
 ## Parameters
 
-- `file`: file path to save dataframe
+ -  `file`: file path to save dataframe
 
 ## Examples
 
 Saves dataframe to csv file
-
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr to-parquet test.parquet
 ```

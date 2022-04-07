@@ -1,7 +1,7 @@
 ---
 title: date list-timezone
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   List supported time zones.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> date list-timezone `
+```> date list-timezone ```
 
 ## Examples
 
 Show timezone(s) that contains 'Shanghai'
-
 ```shell
 > date list-timezone | where timezone =~ Shanghai
 ```

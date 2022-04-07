@@ -1,7 +1,7 @@
 ---
 title: from vcf
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse text as .vcf and create table.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> from vcf `
+```> from vcf ```
 
 ## Examples
 
 Converts ics formatted string to table
-
 ```shell
 > 'BEGIN:VCARD
 N:Foo

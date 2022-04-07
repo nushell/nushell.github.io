@@ -1,7 +1,7 @@
 ---
 title: dfr is-duplicated
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates mask indicating duplicated values
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr is-duplicated `
+```> dfr is-duplicated ```
 
 ## Examples
 
 Create mask indicating duplicated values
-
 ```shell
 > [5 6 6 6 8 8 8] | dfr to-df | dfr is-duplicated
 ```

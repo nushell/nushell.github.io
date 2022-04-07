@@ -1,7 +1,7 @@
 ---
 title: to url
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Convert table into url-encoded text
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> to url `
+```> to url ```
 
 ## Examples
 
 Outputs an URL string representing the contents of this table
-
 ```shell
 > [[foo bar]; ["1" "2"]] | to url
 ```

@@ -1,7 +1,7 @@
 ---
 title: par-each
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Run a block on each element of input in parallel
 ---
@@ -12,23 +12,21 @@ usage: |
 
 ## Signature
 
-`> par-each (block) --numbered`
+```> par-each (block) --numbered```
 
 ## Parameters
 
-- `block`: the block to run
-- `--numbered`: iterate with an index
+ -  `block`: the block to run
+ -  `--numbered`: iterate with an index
 
 ## Examples
 
 Multiplies elements in list
-
 ```shell
 > [1 2 3] | par-each { |it| 2 * $it }
 ```
 
 Iterate over each element, print the matching value and its index
-
 ```shell
 > [1 2 3] | par-each -n { |it| if $it.item == 2 { echo $"found 2 at ($it.index)!"} }
 ```

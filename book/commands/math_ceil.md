@@ -1,7 +1,7 @@
 ---
 title: math ceil
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Applies the ceil function to a list of numbers
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> math ceil `
+```> math ceil ```
 
 ## Examples
 
 Apply the ceil function to a list of numbers
-
 ```shell
 > [1.5 2.3 -3.1] | math ceil
 ```

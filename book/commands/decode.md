@@ -1,7 +1,7 @@
 ---
 title: decode
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Decode bytes as a string.
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> decode (encoding)`
+```> decode (encoding)```
 
 ## Parameters
 
-- `encoding`: the text encoding to use
+ -  `encoding`: the text encoding to use
 
 ## Examples
 
 Decode the output of an external command
-
 ```shell
 > cat myfile.q | decode utf-8
 ```

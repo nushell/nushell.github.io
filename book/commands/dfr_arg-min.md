@@ -1,7 +1,7 @@
 ---
 title: dfr arg-min
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Return index for min value in series
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr arg-min `
+```> dfr arg-min ```
 
 ## Examples
 
 Returns index for min value
-
 ```shell
 > [1 3 2] | dfr to-df | dfr arg-min
 ```

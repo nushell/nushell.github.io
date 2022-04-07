@@ -1,7 +1,7 @@
 ---
 title: gstat
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Get the git status of a repo
 ---
@@ -12,8 +12,8 @@ usage: |
 
 ## Signature
 
-`> gstat (path)`
+```> gstat (path)```
 
 ## Parameters
 
-- `path`: path to repo
+ -  `path`: path to repo

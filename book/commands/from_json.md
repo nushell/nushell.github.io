@@ -1,7 +1,7 @@
 ---
 title: from json
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Convert from json to structured data
 ---
@@ -12,22 +12,20 @@ usage: |
 
 ## Signature
 
-`> from json --objects`
+```> from json --objects```
 
 ## Parameters
 
-- `--objects`: treat each line as a separate value
+ -  `--objects`: treat each line as a separate value
 
 ## Examples
 
 Converts json formatted string to table
-
 ```shell
 > '{ "a": 1 }' | from json
 ```
 
 Converts json formatted string to table
-
 ```shell
 > '{ "a": 1, "b": [1, 2] }' | from json
 ```

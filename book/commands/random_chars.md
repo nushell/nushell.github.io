@@ -1,7 +1,7 @@
 ---
 title: random chars
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Generate random chars
 ---
@@ -12,22 +12,20 @@ usage: |
 
 ## Signature
 
-`> random chars --length`
+```> random chars --length```
 
 ## Parameters
 
-- `--length {int}`: Number of chars
+ -  `--length {int}`: Number of chars
 
 ## Examples
 
 Generate random chars
-
 ```shell
 > random chars
 ```
 
 Generate random chars with specified length
-
 ```shell
 > random chars -l 20
 ```

@@ -1,7 +1,7 @@
 ---
 title: math median
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Gets the median of a list of numbers
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> math median `
+```> math median ```
 
 ## Examples
 
 Get the median of a list of numbers
-
 ```shell
 > [3 8 9 12 12 15] | math median
 ```

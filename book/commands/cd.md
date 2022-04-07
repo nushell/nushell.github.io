@@ -1,7 +1,7 @@
 ---
 title: cd
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Change directory.
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> cd (path)`
+```> cd (path)```
 
 ## Parameters
 
-- `path`: the path to change to
+ -  `path`: the path to change to
 
 ## Examples
 
 Change to your home directory
-
 ```shell
 > cd ~
 ```

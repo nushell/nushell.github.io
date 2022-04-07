@@ -1,7 +1,7 @@
 ---
 title: def-env
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Define a custom command, which participates in the caller environment
 ---
@@ -12,18 +12,17 @@ usage: |
 
 ## Signature
 
-`> def-env (def_name) (params) (block)`
+```> def-env (def_name) (params) (block)```
 
 ## Parameters
 
-- `def_name`: definition name
-- `params`: parameters
-- `block`: body of the definition
+ -  `def_name`: definition name
+ -  `params`: parameters
+ -  `block`: body of the definition
 
 ## Examples
 
 Set environment variable by call a custom command
-
 ```shell
 > def-env foo [] { let-env BAR = "BAZ" }; foo; $env.BAR
 ```

@@ -1,7 +1,7 @@
 ---
 title: random uuid
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Generate a random uuid4 string
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> random uuid `
+```> random uuid ```
 
 ## Examples
 
 Generate a random uuid4 string
-
 ```shell
 > random uuid
 ```

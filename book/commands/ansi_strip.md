@@ -1,7 +1,7 @@
 ---
 title: ansi strip
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   strip ansi escape sequences from string
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> ansi strip ...column path`
+```> ansi strip ...column path```
 
 ## Parameters
 
-- `...column path`: optionally, remove ansi sequences by column paths
+ -  `...column path`: optionally, remove ansi sequences by column paths
 
 ## Examples
 
 strip ansi escape sequences from string
-
 ```shell
 > echo [ (ansi green) (ansi cursor_on) "hello" ] | str collect | ansi strip
 ```

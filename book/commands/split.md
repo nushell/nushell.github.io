@@ -1,7 +1,7 @@
 ---
 title: split
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Split contents across desired subcommand (like row, column) via the separator.
 ---
@@ -12,4 +12,4 @@ usage: |
 
 ## Signature
 
-`> split `
+```> split ```
