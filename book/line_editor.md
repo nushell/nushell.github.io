@@ -761,12 +761,12 @@ In order to make the menu interactive, these two variables area available in
 the block: `$buffer` and `$position`. The `$buffer` contains the value captured
 by the menu, when the option `only_buffer_difference` is true, `$buffer` is the
 text written after the menu was activated. If `only_buffer_difference` is
-false, `$buffer` is all the string in line. The `$pos` variable can be used to
-create replacement spans based on the idea you had for your menu. The value of
-`$pos` changes based on whether `only_buffer_difference` is true or false. When
-true, `$pos` is the starting position in the string where text was inserted
-after the menu was activated. When the value is false, `$pos` indicates the
-actual cursor position.
+false, `$buffer` is all the string in line. The `$position` variable can be
+used to create replacement spans based on the idea you had for your menu. The
+value of `$position` changes based on whether `only_buffer_difference` is true
+or false. When true, `$position` is the starting position in the string where
+text was inserted after the menu was activated. When the value is false,
+`$position` indicates the actual cursor position.
 
 Using this information, you can design your menu to present the information you
 require and to replace that value in the location you need it. The only thing
