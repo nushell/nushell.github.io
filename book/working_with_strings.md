@@ -13,8 +13,7 @@ The simplest string in Nushell is the single-quoted string. This string uses the
 hello world
 ```
 
-Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range
-of text data.
+Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range of text data.
 
 ## Double-quoted strings
 

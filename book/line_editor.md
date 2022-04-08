@@ -30,38 +30,37 @@ Each edit mode comes with the usual keybinding for vi and emacs text editing.
 
 Emacs and Vi Insert keybindings
 
-| Key | Event |
-|---|---|
-| Esc | Esc |
-| Backspace | Backspace |
-| End | Move to end of line |
-| End | Complete history hint |
-| Home | Move to line start |
-| Ctr + c | Cancel current line |
-| Ctr + l | Clear screen |
-| Ctr + r | Search history |
+| Key         | Event                 |
+| ----------- | --------------------- |
+| Esc         | Esc                   |
+| Backspace   | Backspace             |
+| End         | Move to end of line   |
+| End         | Complete history hint |
+| Home        | Move to line start    |
+| Ctr + c     | Cancel current line   |
+| Ctr + l     | Clear screen          |
+| Ctr + r     | Search history        |
 | Ctr + Right | Complete history word |
-| Ctr + Right | Move word right |
-| Ctr + Left | Move word left |
-| Up | Move menu up |
-| Up | Move up |
-| Down | Move menu down |
-| Down | Move down |
-| Left | Move menu left |
-| Left | Move left |
-| Right | History hint complete |
-| Right | Move menu right |
-| Right | Move right |
-| Ctr + b | Move menu left |
-| Ctr + b | Move left |
-| Ctr + f | History hint complete |
-| Ctr + f | Move menu right |
-| Ctr + f | Move right |
-| Ctr + p | Move menu up |
-| Ctr + p | Move up |
-| Ctr + n | Move menu down |
-| Ctr + n | Move down |
-
+| Ctr + Right | Move word right       |
+| Ctr + Left  | Move word left        |
+| Up          | Move menu up          |
+| Up          | Move up               |
+| Down        | Move menu down        |
+| Down        | Move down             |
+| Left        | Move menu left        |
+| Left        | Move left             |
+| Right       | History hint complete |
+| Right       | Move menu right       |
+| Right       | Move right            |
+| Ctr + b     | Move menu left        |
+| Ctr + b     | Move left             |
+| Ctr + f     | History hint complete |
+| Ctr + f     | Move menu right       |
+| Ctr + f     | Move right            |
+| Ctr + p     | Move menu up          |
+| Ctr + p     | Move up               |
+| Ctr + n     | Move menu down        |
+| Ctr + n     | Move down             |
 
 Vi Normal keybindings
 | Key | Event |
@@ -116,7 +115,6 @@ Vi Normal actions
 | s | History search |
 | D | Delete to end |
 | A | Append to end |
-
 
 ### Command history
 

@@ -410,8 +410,8 @@ module.exports = {
               children: [
                 'types_of_data',
                 'loading_data',
-                // 'working_with_strings',
-                // 'working_with_lists',
+                'working_with_strings',
+                'working_with_lists',
                 'working_with_tables',
                 'pipeline',
                 '/book/command_reference.md',
