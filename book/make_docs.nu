@@ -57,6 +57,18 @@ usage: |
         ""
     }
 
+    let extra_usage = if $command.extra_usage == "" { "" } else {
+        # It's a little ugly to encode the extra usage in a code block,
+        # but otherwise Vuepress's Markdown engine makes everything go haywire
+        # (the `ansi` command is a good example).
+        # TODO: find a better way to display plain text with minimal formatting
+        $"## Notes
+```text
+($command.extra_usage)
+```
+"
+    }
+
     let examples = if ($command.examples | length) > 0 {
         let example_top = $"## Examples(char nl)(char nl)"
 
@@ -73,7 +85,7 @@ $"($example.description)
     } else { "" }
 
     let doc = (
-            ($top + $signature + $parameters + $examples) |
+            ($top + $signature + $parameters + $extra_usage + $examples ) |
             lines |
             each {|it| ($it | str trim -r) } |
             str collect (char nl)
