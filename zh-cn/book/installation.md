@@ -2,7 +2,7 @@
 
 有很多方法可以获取并使用 Nu。你可以从我们的[发布页面](https://github.com/nushell/nushell/releases)下载预编译的二进制文件，[使用你喜欢的软件包管理器](https://repology.org/project/nushell/versions)，或者从源码构建。
 
-## 预编译的二进制文件
+## 预编译二进制包
 
 Nu 二进制文件在[GitHub 的 Release 页](https://github.com/nushell/nushell/releases)发布，适用于 Linux、macOS 和 Windows。只需下载并解压二进制文件，然后将其复制到你的系统`PATH`上的某个位置。
 
