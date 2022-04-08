@@ -525,7 +525,7 @@ To navigate the menu you can select the next element by using `tab`, you can
 scroll the description by pressing left or right and you can even paste into
 the line the available command examples.
 
-The help menu can be configures by modifying the next parameters
+The help menu can be configured by modifying the next parameters
 
 ```bash
   let $config = {
@@ -683,19 +683,22 @@ character.
 In case you find that the default menus are not enough for you and you have
 the need to create your own menu, Nushell can help you with that.
 
-In order to add a new menu that fulfills your needs, you can use as template
-one of the default layouts available in nushell: columnar, list or description.
+In order to add a new menu that fulfills your needs, you can use one of the default
+layouts as a template. The templates available in nushell are columnar, list or
+description.
 
 The columnar menu will show you data in a columnar fashion adjusting the column
-number based on the size of the text displayed in your columns. The list type
-of menu will always display suggestions as a list, giving you the option to
-select values using `!` plus number combination. The description type will give
-you more space to display a description for some values, together with extra
-information that could be inserted into the buffer.
+number based on the size of the text displayed in your columns. 
+
+The list type of menu will always display suggestions as a list, giving you the
+option to select values using `!` plus number combination. 
+
+The description type will give you more space to display a description for some
+values, together with extra information that could be inserted into the buffer.
 
 Let's say we want to create a menu that displays all the variables created
 during your session, we are going to call it `vars_menu`. This menu will use a
-list layout (layout: list). To search for values we want to use only the things
+list layout (layout: list). To search for values, we want to use only the things
 that are written after the menu has been activated (only_buffer_difference:
 true).
 
