@@ -3,7 +3,7 @@ title: date
 layout: command
 version: 0.60.1
 usage: |
-  date
+  Date-related commands
 ---
 
 # `{{ $frontmatter.title }}`

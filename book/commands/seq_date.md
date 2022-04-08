@@ -3,7 +3,7 @@ title: seq date
 layout: command
 version: 0.60.1
 usage: |
-  print sequences of dates
+  Print sequences of dates
 ---
 
 # `{{ $frontmatter.title }}`

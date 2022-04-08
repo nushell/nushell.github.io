@@ -3,7 +3,7 @@ title: fmt
 layout: command
 version: 0.60.1
 usage: |
-  format numbers
+  Format a number
 ---
 
 # `{{ $frontmatter.title }}`
@@ -16,7 +16,7 @@ usage: |
 
 ## Examples
 
-format numbers
+Get a record containing multiple formats for the number 42
 ```shell
 > 42 | fmt
 ```

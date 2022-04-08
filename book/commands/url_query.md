@@ -3,7 +3,7 @@ title: url query
 layout: command
 version: 0.60.1
 usage: |
-  gets the query of a url
+  Get the query string of a URL
 ---
 
 # `{{ $frontmatter.title }}`
@@ -20,12 +20,12 @@ usage: |
 
 ## Examples
 
-Get query of a url
+Get a query string
 ```shell
 > echo 'http://www.example.com/?foo=bar&baz=quux' | url query
 ```
 
-No query gives the empty string
+Returns an empty string if there is no query string
 ```shell
 > echo 'http://www.example.com/' | url query
 ```

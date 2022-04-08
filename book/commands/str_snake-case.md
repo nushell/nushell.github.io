@@ -3,7 +3,7 @@ title: str snake-case
 layout: command
 version: 0.60.1
 usage: |
-  converts a string to snake_case
+  Convert a string to snake_case
 ---
 
 # `{{ $frontmatter.title }}`

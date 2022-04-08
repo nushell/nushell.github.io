@@ -3,7 +3,7 @@ title: str ends-with
 layout: command
 version: 0.60.1
 usage: |
-  checks if string ends with pattern
+  Check if a string ends with a pattern
 ---
 
 # `{{ $frontmatter.title }}`

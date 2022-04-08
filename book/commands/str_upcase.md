@@ -3,7 +3,7 @@ title: str upcase
 layout: command
 version: 0.60.1
 usage: |
-  upcases text
+  Make text uppercase
 ---
 
 # `{{ $frontmatter.title }}`

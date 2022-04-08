@@ -3,7 +3,7 @@ title: str replace
 layout: command
 version: 0.60.1
 usage: |
-  finds and replaces text
+  Find and replace text
 ---
 
 # `{{ $frontmatter.title }}`

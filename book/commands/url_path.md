@@ -3,7 +3,7 @@ title: url path
 layout: command
 version: 0.60.1
 usage: |
-  gets the path of a url
+  Get the path of a URL
 ---
 
 # `{{ $frontmatter.title }}`

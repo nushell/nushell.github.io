@@ -3,7 +3,7 @@ title: str rpad
 layout: command
 version: 0.60.1
 usage: |
-  pad a string with a character a certain length
+  Right-pad a string to a specific length
 ---
 
 # `{{ $frontmatter.title }}`
@@ -22,12 +22,12 @@ usage: |
 
 ## Examples
 
-Right pad a string with a character a number of places
+Right-pad a string with asterisks until it's 10 characters wide
 ```shell
 > 'nushell' | str rpad -l 10 -c '*'
 ```
 
-Right pad a string with a character a number of places
+Right-pad a string with zeroes until it's 10 characters wide
 ```shell
 > '123' | str rpad -l 10 -c '0'
 ```

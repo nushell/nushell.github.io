@@ -3,7 +3,7 @@ title: str substring
 layout: command
 version: 0.60.1
 usage: |
-  substrings text
+  Get part of a string
 ---
 
 # `{{ $frontmatter.title }}`

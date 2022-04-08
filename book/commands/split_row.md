@@ -3,7 +3,7 @@ title: split row
 layout: command
 version: 0.60.1
 usage: |
-  splits contents over multiple rows via the separator.
+  Split a string into multiple rows using a separator
 ---
 
 # `{{ $frontmatter.title }}`

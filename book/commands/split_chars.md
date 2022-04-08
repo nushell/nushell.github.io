@@ -3,7 +3,7 @@ title: split chars
 layout: command
 version: 0.60.1
 usage: |
-  splits a string's characters into separate rows
+  Split a string's characters into separate rows
 ---
 
 # `{{ $frontmatter.title }}`

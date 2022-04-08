@@ -3,7 +3,7 @@ title: str downcase
 layout: command
 version: 0.60.1
 usage: |
-  downcases text
+  Make text lowercase
 ---
 
 # `{{ $frontmatter.title }}`
