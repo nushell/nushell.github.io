@@ -414,7 +414,7 @@ module.exports = {
                 'working_with_lists',
                 'working_with_tables',
                 'pipeline',
-                '/book/command_reference.md',
+                'command_reference',
               ],
             },
             {

@@ -1,53 +1,65 @@
 # 管道
 
-Nu 的核心设计之一就是管道，这种设计思想可以追溯到几十年前的 Unix 背后的原始哲学。 正如 Nu 从 Unix 的字符串数据类型扩展而来，Nu 还扩展了管道的思想，使其不仅包含文本。
+Nu 的核心设计之一是管道，这个设计思想可以追溯到几十年前 Unix 背后的一些原始理念。正如 Nu 拓展了 Unix 的单一字符串数据类型一样，Nu 也扩展了管道的概念，使其不仅仅包括文本。
 
 ## 基础
 
-一个管道由三个部分组成：输入、过滤器和输出。
+一个管道由三部分组成：输入、过滤器和输出。
 
+```bash
+> open "Cargo.toml" | inc package.version --minor | save "Cargo_new.toml"
 ```
-> open "Cargo.toml" | inc package.version | save "Cargo_new.toml"
+
+第一条命令：`open "Cargo.toml"` 是一个输入（有时也称为 "源"或 "生产者"），它创建或加载数据，并将其送入管道。管道待处理的值正是来自于输入。像[`ls`](/book/commands/ls.md)这样的命令也是输入，因为它们从文件系统中获取数据，并通过管道发送以便能被后续使用。
+
+第二个命令：`inc package.version --minor` 是一个过滤器。过滤器获取所给的数据并对其进行处理。它们可能会改变它（如我们例子中的[`inc`](/book/commands/inc.md)命令），或者在数值通过时对其做其他操作，如记录。
+
+最后一条命令：`save "Cargo_new.toml"` 是一个输出（有时称为 "接收者"）。输出从管道中获取输入，并对其进行一些最终操作。在我们的例子中，我们在最后一步把通过管道的内容保存到一个文件中。还有一些其他类型的输出命令可以获取数值并供用户查看。
+
+## 多行管道
+
+如果一个管道对一行来说有些长，你可以把它放在`(`和`)`里，以创建一个子表达式：
+
+```bash
+(
+    "01/22/2021" |
+    parse "{month}/{day}/{year}" |
+    get year
+)
 ```
 
-第一个命令，`open "Cargo.toml"`，是一个输入（有时也被称为源或供应）。它创建或加载输出并提供给一个管道。
+也可以参考 [子表达式](variables_and_subexpressions.html#子表达式)
 
-第一个命令 `open "Cargo.toml"` 是输入（有时也称为「源」或「生产者」）。 这将创建或加载数据并将其馈送到管道中。 管道具有输入要使用的值，这是来自输入的。 像 `ls` 这样的命令也是输入，因为它们从文件系统中获取数据并通过管道发送数据，以便可以使用它们。
+## 与外部命令交互
 
-第二个命令 `inc package.version` 是一个过滤器。 过滤器获取给定的数据，并经常对其进行处理。 他们可以更改它（就像在我们的示例中使用 `inc` 命令一样），或者在值通过时可以做其他操作，例如记录。
-
-最后一个命令 `save "Cargo_new.toml"` 是输出（有时称为「接收器」）。 输出从管道获取输入并对其进行一些最终操作。 在我们的示例中，我们将通过管道传输的内容保存到文件中作为最后一步。 其他类型的输出命令可能会使用这些值并为用户查看它们。
-
-## 与外部命令协作
-
-Ni 命令使用 Nu 数据类型来与其他命令协作（查看 [数据类型](types_of_data.md)，但 Nu 之外的命令又如何呢？让我们看看一些与外部命令协作的例子：
+Nu 命令之间使用 Nu 的数据类型进行通信（见[数据类型](types_of_data.md)），但 Nu 之外的命令呢？让我们看看一些与外部命令交互的例子：
 
 `internal_command | external_command`
 
-数据将从 internal_command 流到 external_command 。 该数据应为字符串，以便可以将它们发送到 external_command 的 `stdin`。
+数据将从 `internal_command` 流向 `external_command`。这些数据将被转换为字符串，以便它们可以被发送到外部命令的`stdin`。
 
 `external_command | internal_command`
 
-来自外部命令的数据将被 Nu 收集到一个字符串中，然后将被传递到 internal_command 中。 像 `lines` 这样的命令有助于更轻松地从外部命令中引入数据，并使其易于使用。
+从外部命令进入 Nu 的数据将以字节的形式流入，Nushell 将尝试自动将其转换为 UTF-8 文本。如果成功，一个文本数据流将被发送到`internal_command`；如果不成功，一个二进制数据流将被发送到`internal_command`。像[`lines`](/book/commands/lines.md)这样的命令有助于从外部命令接收数据，因为它提供了分离的数据行以供后续使用。
 
 `external_command_1 | external_command_2`
 
-Nu 像 Bash 一样，以与其他 Shell 相同的方式处理在两个外部命令之间传递的数据。 external_command_1 的 `stdout` 连接到 external_command_2 的 `stdin` 。 这使数据在两个命令之间自然流动。
+Nu 在两个外部命令之间以与其他 shell 相同的方式处理数据管道，比如 Bash。`external_command_1`的`stdout`与`external_command_2`的`stdin`相连，这让数据在两个命令之间自然流动。
 
-## 幕后
+## 幕后解说
 
-你可能想知道为什么 `ls` 是输入而不是输出的情况下我们是如何看到表的。 Nu 使用另一个名为 `autoview` 的命令自动为我们添加此输出。 `autoview` 命令会附加到没有输出的任何管道中，以使我们能够浏览结果。
+你可能想知道，既然[`ls`](/book/commands/ls.md)是一个输入而不是一个输出，我们为何看到一个表格？其实 Nu 使用了另一个叫做[`table`](/book/commands/table.md)的命令为我们自动添加了这个输出。[`table`](/book/commands/table.md)命令被附加到任何没有输出的管道上，这使得我们可以看到结果。
 
-事实上，这个命令：
+实际上，该命令：
 
 ```
 > ls
 ```
 
-和这条管道：
+还有管道：
 
 ```
-> ls | autoview
+> ls | table
 ```
 
 是一样的。
