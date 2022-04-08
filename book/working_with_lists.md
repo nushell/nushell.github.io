@@ -45,8 +45,7 @@ $names | each -n { |it| $"($it.index + 1) - ($it.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 
-The [`where`](commands/where.md) command can be used to create a subset of a list, effectively
-filtering the list based on a condition.
+The [`where`](commands/where.md) command can be used to create a subset of a list, effectively filtering the list based on a condition.
 
 The following example gets all the colors whose names end in "e".
 
