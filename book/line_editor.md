@@ -510,7 +510,53 @@ You can use the command `keybindings listen` to figure out if certain keypresses
 ## Menus
 
 Thanks to Reedline, Nushell has menus that can help you with your day to day
-shell scripting.
+shell scripting. Next we present the default menus that are always available
+when using Nushell
+
+### Help menu
+
+The help menu is there to ease your transition into Nushell. Say you are
+putting together an amazing pipeline and then you forgot the internal command
+that would reverse a string for you. Instead of deleting your pipe, you can
+activate the help menu with `ctr+q`. Once active just type keywords for the
+command you are looking for and the menu will show you commands that match your
+input. The matching is done on the name of the commands or the commands
+description.
+
+To navigate the menu you can select the next element by using `tab`, you can
+scroll the description by pressing left or right and you can even paste into
+the line the available command examples.
+
+The help menu can be configures by modifying the next parameters
+
+```bash
+  let $config = {
+    ...
+
+    menus = [
+      ...
+      {
+        name: help_menu
+        only_buffer_difference: true # Search is done on the text written after activating the menu
+        marker: "? "                 # Indicator that appears with the menu is active
+        type: {
+            layout: description      # Type of menu
+            columns: 4               # Number of columns where the options are displayed
+            col_width: 20            # Optional value. If missing all the screen width is used to calculate column width
+            col_padding: 2           # Padding between columns
+            selection_rows: 4        # Number of rows allowed to display found options
+            description_rows: 10     # Number of rows allowed to display command description
+        }
+        style: {
+            text: green                   # Text style
+            selected_text: green_reverse  # Text style for selected option
+            description_text: yellow      # Text style for description
+        }
+      }
+      ...
+    ]
+    ...
+```
 
 ### Completion menu
 
@@ -528,20 +574,27 @@ modifying these values from the config object:
   let $config = {
     ...
 
-    quick_completions: true    # set this to false to prevent auto-selecting completions when only one remains
-    partial_completions: true  # set this to false to prevent partial filling of the prompt
-
-    menu_config: {
-      columns: 4         # Number of columns in the menu
-      col_width: 20      # Optional value. If missing all the screen width is used to calculate column width
-      col_padding: 2     # Number of characters between string and next column
-      text_style: green  # Text color style for non selected text
-      selected_text_style: green_reverse  # Color style for selected text
-      marker: "| "       # Indicator that appears when the menu is active
-    }
-
+    menus = [
+      ...
+      {
+        name: completion_menu
+        only_buffer_difference: false # Search is done on the text written after activating the menu
+        marker: "| "                  # Indicator that appears with the menu is active
+        type: {
+            layout: columnar          # Type of menu
+            columns: 4                # Number of columns where the options are displayed
+            col_width: 20             # Optional value. If missing all the screen width is used to calculate column width
+            col_padding: 2            # Padding between columns
+        }
+        style: {
+            text: green                   # Text style
+            selected_text: green_reverse  # Text style for selected option
+            description_text: yellow      # Text style for description
+        }
+      }
+      ...
+    ]
     ...
-  }
 ```
 
 By modifying these parameters you can customize the layout of your menu to your
@@ -559,17 +612,25 @@ The history menu can be configured by modifying these values from the config obj
   let $config = {
     ...
 
-    history_config: {
-      page_size: 10      # Number of entries that will presented when activating the menu
-      selector: "!"      # Character to indicate a quick selection in the menu
-      text_style: green  # Text color style for non selected text
-      selected_text_style: green_reverse  # Color style for selected text
-      marker: "? "       # Indicator that appears when the menu is active
-    }
-
+    menus = [
+      ...
+      {
+        name: help_menu
+        only_buffer_difference: true # Search is done on the text written after activating the menu
+        marker: "? "                 # Indicator that appears with the menu is active
+        type: {
+            layout: list             # Type of menu
+            page_size: 10            # Number of entries that will presented when activating the menu
+        }
+        style: {
+            text: green                   # Text style
+            selected_text: green_reverse  # Text style for selected option
+            description_text: yellow      # Text style for description
+        }
+      }
+      ...
+    ]
     ...
-  }
-
 ```
 
 When the history menu is activated, it pulls `page_size` records from the
@@ -615,8 +676,102 @@ Instead of pressing down to select the fourth entry, you can type `!3` and
 press enter. This will insert the selected text in the prompt position, saving
 you time scrolling down the menu.
 
-History search and quick selection can be used together. You can activate the menu, do a quick
-search, and then quick select using the quick selection character.
+History search and quick selection can be used together. You can activate the
+menu, do a quick search, and then quick select using the quick selection
+character.
+
+### User defined menus
+
+In case you find that the default menus are not enough for you and you have
+the need to create your own menu, Nushell can help you with that.
+
+In order to add a new menu that fulfills your needs, you can use as template
+one of the default layouts available in nushell: columnar, list or description.
+
+The columnar menu will show you data in a columnar fashion adjusting the column
+number based on the size of the text displayed in your columns. The list type
+of menu will always display suggestions as a list, giving you the option to
+select values using `!` plus number combination. The description type will give
+you more space to display a description for some values, together with extra
+information that could be inserted into the buffer.
+
+Let's say we want to create a menu that displays all the variables created
+during your session, we are going to call it `vars_menu`. This menu will use a
+list layout (layout: list). To search for values we want to use only the things
+that are written after the menu has been activated (only_buffer_difference:
+true).
+
+With that in mind, the desired menu would look like this
+
+```bash
+  let $config = {
+    ...
+
+    menus = [
+      ...
+      {
+        name: vars_menu
+        only_buffer_difference: true
+        marker: "# "
+        type: {
+            layout: list
+            page_size: 10
+        }
+        style: {
+            text: green
+            selected_text: green_reverse
+            description_text: yellow
+        }
+        source: { |buffer, position|
+            $nu.scope.vars
+            | where name =~ $buffer
+            | sort-by name
+            | each { |it| {value: $it.name description: $it.type} }
+        }
+      }
+      ...
+    ]
+    ...
+```
+
+As you can see, the new menu is identical to the `history_menu` previously
+described. The only huge difference is the new field called `source`. The
+`source` field is a nushell definition of the values you want to display in the
+menu. For this menu we are extracting the data from `$nu.scope.vars` and we
+are using it to create records that will be used to populate the menu.
+
+The required structure for the record is the next one
+
+```bash
+{
+  value:       # The value that will be inserted in the buffer
+  description: # Optional. Description that will be display with the selected value
+  span: {      # Optional. Span indicating what section of the string will be replaced by the value
+    start:
+    end:
+  }
+  extra: [string] # Optional. A list of strings that will be displayed with the selected value. Only works with a description menu
+}
+```
+
+For the menu to display something, at least the `value` field has to be present
+in the resulting record.
+
+In order to make the menu interactive, these two variables area available in
+the block: `$buffer` and `$position`. The `$buffer` contains the value captured
+by the menu, when the option `only_buffer_difference` is true, `$buffer` is the
+text written after the menu was activated. If `only_buffer_difference` is
+false, `$buffer` is all the string in line. The `$pos` variable can be used to
+create replacement spans based on the idea you had for your menu. The value of
+`$pos` changes based on whether `only_buffer_difference` is true or false. When
+true, `$pos` is the starting position in the string where text was inserted
+after the menu was activated. When the value is false, `$pos` indicates the
+actual cursor position.
+
+Using this information, you can design your menu to present the information you
+require and to replace that value in the location you need it. The only thing
+extra that you need to play with your menu is to define a keybinding that will
+activate your brand new menu.
 
 ### Menu keybindings
 
