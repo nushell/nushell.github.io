@@ -1,9 +1,9 @@
 ---
-title: query
+title: str find-replace
 layout: command
 version: 0.60.1
 usage: |
-  Show all the query commands
+  Deprecated command
 ---
 
 # `{{ $frontmatter.title }}`
@@ -12,4 +12,4 @@ usage: |
 
 ## Signature
 
-```> query ```
+```> str find-replace ```
