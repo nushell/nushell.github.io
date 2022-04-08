@@ -61,6 +61,13 @@ By wrapping expressions in `()`, we can run them to completion and use the resul
 
 String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" "`, form. These correspond to the single-quoted and double-quoted strings: single-quoted string interpolation doesn't support escape characters while double-quoted string interpolation does.
 
+As of version 0.61, interpolated strings support escaping parentheses, so that the `(` and `)` characters may be used in a string without Nushell trying to evaluate what appears between them:
+
+```
+> $"2 + 2 is (2 + 2) \(you guessed it!)"
+2 + 2 is 4 (you guessed it!)
+```
+
 ## Splitting strings
 
 The [`split row`](commands/split_row.md) command creates a list from a string based on a delimiter.
