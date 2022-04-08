@@ -3,7 +3,7 @@ title: dfr rename-col
 layout: command
 version: 0.60.1
 usage: |
-  rename a dataframe column
+  Rename a dataframe column
 ---
 
 # `{{ $frontmatter.title }}`

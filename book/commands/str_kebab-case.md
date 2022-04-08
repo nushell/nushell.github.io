@@ -3,7 +3,7 @@ title: str kebab-case
 layout: command
 version: 0.60.1
 usage: |
-  converts a string to kebab-case
+  Convert a string to kebab-case
 ---
 
 # `{{ $frontmatter.title }}`

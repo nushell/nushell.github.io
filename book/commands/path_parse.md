@@ -21,19 +21,19 @@ usage: |
 
 ## Examples
 
-Parse a path
+Parse a single path
 ```shell
-> '/home/viking/spam.txt' | path parse
+> 'C:\Users\viking\spam.txt' | path parse
 ```
 
 Replace a complex extension
 ```shell
-> '/home/viking/spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
+> 'C:\Users\viking\spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
 ```
 
 Ignore the extension
 ```shell
-> '/etc/conf.d' | path parse -e ''
+> 'C:\Users\viking.d' | path parse -e ''
 ```
 
 Parse all paths under the 'name' column

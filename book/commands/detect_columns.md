@@ -3,7 +3,7 @@ title: detect columns
 layout: command
 version: 0.60.1
 usage: |
-  splits contents across multiple columns via the separator.
+  Attempt to automatically split text into multiple columns
 ---
 
 # `{{ $frontmatter.title }}`

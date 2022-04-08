@@ -3,7 +3,7 @@ title: hash sha256
 layout: command
 version: 0.60.1
 usage: |
-  hash a value using the sha256 hash algorithm
+  Hash a value using the sha256 hash algorithm
 ---
 
 # `{{ $frontmatter.title }}`

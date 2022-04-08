@@ -3,7 +3,7 @@ title: url host
 layout: command
 version: 0.60.1
 usage: |
-  gets the host of a url
+  Get the host of a URL
 ---
 
 # `{{ $frontmatter.title }}`

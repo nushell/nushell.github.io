@@ -3,7 +3,7 @@ title: into decimal
 layout: command
 version: 0.60.1
 usage: |
-  converts text into decimal
+  Convert text into a decimal
 ---
 
 # `{{ $frontmatter.title }}`

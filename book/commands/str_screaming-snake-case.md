@@ -3,7 +3,7 @@ title: str screaming-snake-case
 layout: command
 version: 0.60.1
 usage: |
-  converts a string to SCREAMING_SNAKE_CASE
+  Convert a string to SCREAMING_SNAKE_CASE
 ---
 
 # `{{ $frontmatter.title }}`

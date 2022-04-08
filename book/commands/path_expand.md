@@ -23,7 +23,7 @@ usage: |
 
 Expand an absolute path
 ```shell
-> '/home/joe/foo/../bar' | path expand
+> 'C:\Users\joe\foo\..\bar' | path expand
 ```
 
 Expand a path in a column
@@ -33,5 +33,5 @@ Expand a path in a column
 
 Expand a relative path
 ```shell
-> 'foo/../bar' | path expand
+> 'foo\..\bar' | path expand
 ```

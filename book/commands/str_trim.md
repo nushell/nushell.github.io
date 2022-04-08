@@ -3,7 +3,7 @@ title: str trim
 layout: command
 version: 0.60.1
 usage: |
-  trims text
+  Trim whitespace or specific character
 ---
 
 # `{{ $frontmatter.title }}`

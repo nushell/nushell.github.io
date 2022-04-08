@@ -3,7 +3,7 @@ title: str collect
 layout: command
 version: 0.60.1
 usage: |
-  creates a string from the input, optionally using a separator
+  Concatenate multiple strings into a single string, with an optional separator between each
 ---
 
 # `{{ $frontmatter.title }}`

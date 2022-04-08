@@ -3,7 +3,7 @@ title: ansi strip
 layout: command
 version: 0.60.1
 usage: |
-  strip ansi escape sequences from string
+  Strip ANSI escape sequences from a string
 ---
 
 # `{{ $frontmatter.title }}`
@@ -16,11 +16,11 @@ usage: |
 
 ## Parameters
 
- -  `...column path`: optionally, remove ansi sequences by column paths
+ -  `...column path`: optionally, remove ANSI sequences by column paths
 
 ## Examples
 
-strip ansi escape sequences from string
+Strip ANSI escape sequences from a string
 ```shell
 > echo [ (ansi green) (ansi cursor_on) "hello" ] | str collect | ansi strip
 ```

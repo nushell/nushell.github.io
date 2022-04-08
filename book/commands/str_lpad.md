@@ -3,7 +3,7 @@ title: str lpad
 layout: command
 version: 0.60.1
 usage: |
-  pad a string with a character a certain length
+  Left-pad a string to a specific length
 ---
 
 # `{{ $frontmatter.title }}`
@@ -22,12 +22,12 @@ usage: |
 
 ## Examples
 
-Left pad a string with a character a number of places
+Left-pad a string with asterisks until it's 10 characters wide
 ```shell
 > 'nushell' | str lpad -l 10 -c '*'
 ```
 
-Left pad a string with a character a number of places
+Left-pad a string with zeroes until it's 10 character wide
 ```shell
 > '123' | str lpad -l 10 -c '0'
 ```

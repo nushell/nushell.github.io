@@ -3,7 +3,7 @@ title: str reverse
 layout: command
 version: 0.60.1
 usage: |
-  outputs the reversals of the strings in the pipeline
+  Reverse every string in the pipeline
 ---
 
 # `{{ $frontmatter.title }}`
@@ -20,7 +20,12 @@ usage: |
 
 ## Examples
 
-Return the reversals of multiple strings
+Reverse a single string
 ```shell
 > 'Nushell' | str reverse
+```
+
+Reverse multiple strings in a list
+```shell
+> ['Nushell' 'is' 'cool'] | str reverse
 ```

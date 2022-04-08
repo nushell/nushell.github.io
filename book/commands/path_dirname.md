@@ -24,7 +24,7 @@ usage: |
 
 Get dirname of a path
 ```shell
-> '/home/joe/code/test.txt' | path dirname
+> 'C:\Users\joe\code\test.txt' | path dirname
 ```
 
 Get dirname of a path in a column
@@ -34,10 +34,10 @@ Get dirname of a path in a column
 
 Walk up two levels
 ```shell
-> '/home/joe/code/test.txt' | path dirname -n 2
+> 'C:\Users\joe\code\test.txt' | path dirname -n 2
 ```
 
 Replace the part that would be returned with a custom path
 ```shell
-> '/home/joe/code/test.txt' | path dirname -n 2 -r /home/viking
+> 'C:\Users\joe\code\test.txt' | path dirname -n 2 -r C:\Users\viking
 ```

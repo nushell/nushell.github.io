@@ -3,7 +3,7 @@ title: url scheme
 layout: command
 version: 0.60.1
 usage: |
-  gets the scheme (eg http, file) of a url
+  Get the scheme (e.g. http, file) of a URL
 ---
 
 # `{{ $frontmatter.title }}`
@@ -20,7 +20,7 @@ usage: |
 
 ## Examples
 
-Get scheme of a url
+Get the scheme of a URL
 ```shell
 > echo 'http://www.example.com' | url scheme
 ```

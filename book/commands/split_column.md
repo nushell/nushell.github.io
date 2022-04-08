@@ -3,7 +3,7 @@ title: split column
 layout: command
 version: 0.60.1
 usage: |
-  splits contents across multiple columns via the separator.
+  Split a string into multiple columns using a separator
 ---
 
 # `{{ $frontmatter.title }}`
@@ -16,7 +16,7 @@ usage: |
 
 ## Parameters
 
- -  `separator`: the character that denotes what separates columns
+ -  `separator`: the character or string that denotes what separates columns
  -  `...rest`: column names to give the new columns
  -  `--collapse-empty`: remove empty columns
 

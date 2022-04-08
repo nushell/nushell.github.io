@@ -3,7 +3,7 @@ title: into datetime
 layout: command
 version: 0.60.1
 usage: |
-  converts text into datetime
+  Convert text into a datetime
 ---
 
 # `{{ $frontmatter.title }}`

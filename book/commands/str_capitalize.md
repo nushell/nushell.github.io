@@ -3,7 +3,7 @@ title: str capitalize
 layout: command
 version: 0.60.1
 usage: |
-  capitalizes text
+  Capitalize text
 ---
 
 # `{{ $frontmatter.title }}`

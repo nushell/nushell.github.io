@@ -3,7 +3,7 @@ title: str pascal-case
 layout: command
 version: 0.60.1
 usage: |
-  converts a string to PascalCase
+  Convert a string to PascalCase
 ---
 
 # `{{ $frontmatter.title }}`

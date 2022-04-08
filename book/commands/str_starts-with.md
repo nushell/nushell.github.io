@@ -3,7 +3,7 @@ title: str starts-with
 layout: command
 version: 0.60.1
 usage: |
-  checks if string starts with pattern
+  Check if string starts with a pattern
 ---
 
 # `{{ $frontmatter.title }}`

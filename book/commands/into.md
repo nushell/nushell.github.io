@@ -3,7 +3,7 @@ title: into
 layout: command
 version: 0.60.1
 usage: |
-  Apply into function.
+  Commands to convert data from one type to another.
 ---
 
 # `{{ $frontmatter.title }}`

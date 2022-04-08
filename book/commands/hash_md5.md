@@ -3,7 +3,7 @@ title: hash md5
 layout: command
 version: 0.60.1
 usage: |
-  hash a value using the md5 hash algorithm
+  Hash a value using the md5 hash algorithm
 ---
 
 # `{{ $frontmatter.title }}`
