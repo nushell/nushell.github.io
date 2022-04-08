@@ -24,9 +24,99 @@ For example:
   }
 ```
 
+#### Default keybindings
+
 Each edit mode comes with the usual keybinding for vi and emacs text editing.
-However you can define additional keybindings to improve your editing
-experience.
+
+Emacs and Vi Insert keybindings
+
+| Key | Event |
+|---|---|
+| Esc | Esc |
+| Backspace | Backspace |
+| End | Move to end of line |
+| End | Complete history hint |
+| Home | Move to line start |
+| Ctr + c | Cancel current line |
+| Ctr + l | Clear screen |
+| Ctr + r | Search history |
+| Ctr + Right | Complete history word |
+| Ctr + Right | Move word right |
+| Ctr + Left | Move word left |
+| Up | Move menu up |
+| Up | Move up |
+| Down | Move menu down |
+| Down | Move down |
+| Left | Move menu left |
+| Left | Move left |
+| Right | History hint complete |
+| Right | Move menu right |
+| Right | Move right |
+| Ctr + b | Move menu left |
+| Ctr + b | Move left |
+| Ctr + f | History hint complete |
+| Ctr + f | Move menu right |
+| Ctr + f | Move right |
+| Ctr + p | Move menu up |
+| Ctr + p | Move up |
+| Ctr + n | Move menu down |
+| Ctr + n | Move down |
+
+
+Vi Normal keybindings
+| Key | Event |
+|---|---|
+| Ctr + c | Cancel current line |
+| Ctr + l | Clear screen |
+| Up | Move menu up |
+| Up | Move up |
+| Down | Move menu down |
+| Down | Move down |
+| Left | Move menu left |
+| Left | Move left |
+| Right | Move menu right |
+| Right | Move right |
+
+Besides the previous keybindings, while in Vi normal mode you can use the classic
+vi mode of executing actions by selecting a motion or an action. The available
+options for the combinations are:
+
+Vi Normal motions
+| Key | motion |
+|---|---|
+| w | Word |
+| d | Line end |
+| 0 | Line start |
+| $ | Line end |
+| f | Right until char |
+| t | Right before char |
+| F | Left until char |
+| T | Left before char |
+
+Vi Normal actions
+| Key | action |
+|---|---|
+| d | Delete |
+| p | Paste after |
+| P | Paste before |
+| h | Move left |
+| l | Move right |
+| j | Move down |
+| k | Move up |
+| w | Move word right |
+| b | Move word left |
+| i | Enter Vi insert at current char |
+| a | Enter Vi insert after char |
+| 0 | Move to start of line |
+| ^ | Move to start of line |
+| $ | Move to end of line |
+| u | Undo |
+| c | Change |
+| x | Delete char |
+| s | History search |
+| D | Delete to end |
+| A | Append to end |
+
 
 ### Command history
 
@@ -67,7 +157,7 @@ let-env PROMPT_COMMAND = { create_left_prompt }
 let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
 ```
 
-::: tip 
+::: tip
 You don't have to define the environmental variables using Nushell
 functions. You can use simple strings to define them.
 :::
@@ -82,7 +172,7 @@ let-env PROMPT_INDICATOR_VI_NORMAL = "〉"
 let-env PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
-::: tip 
+::: tip
 The prompt indicators are environmental variables that represent the
 state of the prompt
 :::
@@ -136,9 +226,16 @@ Each keybinding requires the next elements:
   - edit
   - until
 
-::: tip 
+::: tip
 All of the available modifiers, keycodes and events can be found with
 the command `keybindings list`
+:::
+
+::: tip
+The keybindings added to `vi_insert` mode will be available when the
+line editor is in insert mode (when you can write text), and the keybindings
+marked with `vi_normal` mode will be available when in normal (when the cursor
+moves using h, j, k or l)
 :::
 
 The event section of the keybinding entry is where the actions to be performed
@@ -241,7 +338,7 @@ And the syntax for `send` events is the next one
     ...
 ```
 
-::: tip 
+::: tip
 You can write the name of the events with capital letters. The
 keybinding parser is case insensitive
 :::
