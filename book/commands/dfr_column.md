@@ -1,7 +1,7 @@
 ---
 title: dfr column
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Returns the selected column
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> dfr column (column)`
+```> dfr column (column)```
 
 ## Parameters
 
-- `column`: column name
+ -  `column`: column name
 
 ## Examples
 
 Returns the selected column as series
-
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr column a
 ```

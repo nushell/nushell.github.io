@@ -1,7 +1,7 @@
 ---
 title: dfr slice
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Creates new dataframe from a slice of rows
 ---
@@ -12,17 +12,16 @@ usage: |
 
 ## Signature
 
-`> dfr slice (offset) (size)`
+```> dfr slice (offset) (size)```
 
 ## Parameters
 
-- `offset`: start of slice
-- `size`: size of slice
+ -  `offset`: start of slice
+ -  `size`: size of slice
 
 ## Examples
 
 Create new dataframe from a slice of the rows
-
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr slice 0 1
 ```

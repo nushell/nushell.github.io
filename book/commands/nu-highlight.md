@@ -1,7 +1,7 @@
 ---
 title: nu-highlight
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Syntax highlight the input string.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> nu-highlight `
+```> nu-highlight ```
 
 ## Examples
 
 Describe the type of a string
-
 ```shell
 > 'let x = 3' | nu-highlight
 ```

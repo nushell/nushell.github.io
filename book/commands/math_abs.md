@@ -1,7 +1,7 @@
 ---
 title: math abs
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Returns absolute values of a list of numbers
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> math abs `
+```> math abs ```
 
 ## Examples
 
 Get absolute of each value in a list of numbers
-
 ```shell
 > [-50 -100.0 25] | math abs
 ```

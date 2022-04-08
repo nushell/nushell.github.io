@@ -1,7 +1,7 @@
 ---
 title: keybindings
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Keybindings related commands
 ---
@@ -12,4 +12,4 @@ usage: |
 
 ## Signature
 
-`> keybindings `
+```> keybindings ```

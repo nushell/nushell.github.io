@@ -1,7 +1,7 @@
 ---
 title: dfr strftime
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Formats date based on string rule
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> dfr strftime (fmt)`
+```> dfr strftime (fmt)```
 
 ## Parameters
 
-- `fmt`: Format rule
+ -  `fmt`: Format rule
 
 ## Examples
 
 Formats date
-
 ```shell
 > let dt = ('2020-08-04T16:39:18+00:00' | into datetime -z 'UTC');
     let df = ([$dt $dt] | dfr to-df);

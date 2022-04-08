@@ -1,7 +1,7 @@
 ---
 title: sys
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   View information about the system.
 ---
@@ -12,24 +12,21 @@ usage: |
 
 ## Signature
 
-`> sys `
+```> sys ```
 
 ## Examples
 
 Show info about the system
-
 ```shell
 > sys
 ```
 
 Show the os system name with get
-
 ```shell
 > (sys).host | get name
 ```
 
 Show the os system name
-
 ```shell
 > (sys).host.name
 ```

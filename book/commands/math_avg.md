@@ -1,7 +1,7 @@
 ---
 title: math avg
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Finds the average of a list of numbers or tables
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> math avg `
+```> math avg ```
 
 ## Examples
 
 Get the average of a list of numbers
-
 ```shell
 > [-50 100.0 25] | math avg
 ```

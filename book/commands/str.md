@@ -1,7 +1,7 @@
 ---
 title: str
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Various commands for working with string data.
 ---
@@ -12,4 +12,4 @@ usage: |
 
 ## Signature
 
-`> str `
+```> str ```

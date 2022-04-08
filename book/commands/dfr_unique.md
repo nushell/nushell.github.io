@@ -1,7 +1,7 @@
 ---
 title: dfr unique
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Returns unique values from a series
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr unique `
+```> dfr unique ```
 
 ## Examples
 
 Returns unique values from a series
-
 ```shell
 > [2 2 2 2 2] | dfr to-df | dfr unique
 ```

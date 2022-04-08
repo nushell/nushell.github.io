@@ -1,6 +1,6 @@
 # Dataframes
 
-::: tip 
+::: tip
 The dataframe commands are available from version 0.33.1 onwards
 :::
 
@@ -152,7 +152,7 @@ data by year, and add groups using the column `geo_count`.
 
 Again, we are going to start with a Nushell native command.
 
-::: tip 
+::: tip
 If you want to run this example, be aware that the next command will
 use a large amount of memory. This may affect the performance of your system
 while this is being executed.
@@ -265,7 +265,7 @@ this:
 This should create the value `df` in memory which holds the data we just
 created.
 
-::: tip 
+::: tip
 The command `dfrs open` can read either **csv** or **parquet**
 files.
 :::
@@ -310,7 +310,7 @@ dataframe variable to the stream
 With the dataframe in memory we can start doing column operations with the
 `DataFrame`
 
-::: tip 
+::: tip
 If you want to see all the dataframe commands that are available you
 can use `help dfr`
 :::
@@ -408,7 +408,7 @@ right dataframe
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴─────────┴─────────────┴───────────────┴───────────────┴─────────────
 ```
 
-::: tip 
+::: tip
 In `Nu` when a command has multiple arguments that are expecting
 multiple values we use brackets `[]` to enclose those values. In the case of
 `dfr join` we can join on multiple columns as long as they have the
@@ -490,7 +490,7 @@ pivot column and the column `float_1` as the value column
 ───┴───────┴────────┴────────┴────────
 ```
 
-::: tip 
+::: tip
 a pivot operation is a way to aggregate data based on two columns. In
 the previous example, the result of the pivot command produced a table that
 represents the sum of all the values in the column `float_1` that are shared
@@ -521,7 +521,7 @@ command `to-df`.
 ───┴───┴───
 ```
 
-::: tip 
+::: tip
 For the time being, not all of Nushell primitives can be converted into
 a dataframe. This will change in the future, as the dataframe feature matures
 :::
@@ -616,7 +616,7 @@ previously created column.
 Now we have a new Series that was constructed by doing basic operations on the
 previous variable.
 
-::: tip 
+::: tip
 If you want to see how many variables you have stored in memory you can
 use `$scope.variables`
 :::
@@ -877,7 +877,7 @@ Or what if we want to create a new sorted dataframe using a column in specific.
 We can use the `dfr arg-sort` to accomplish that. In the next example we
 can sort the dataframe by the column `word`
 
-::: tip 
+::: tip
 The same result could be accomplished using the command `sort`
 :::
 

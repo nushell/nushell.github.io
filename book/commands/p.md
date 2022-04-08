@@ -1,7 +1,7 @@
 ---
 title: p
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Switch to the previous shell.
 ---
@@ -12,18 +12,16 @@ usage: |
 
 ## Signature
 
-`> p `
+```> p ```
 
 ## Examples
 
 Make two directories and enter new shells for them, use `p` to jump to the previous shell
-
 ```shell
 > mkdir foo bar; enter foo; enter ../bar; p
 ```
 
 Run `p` several times and note the changes of current directory
-
 ```shell
 > p
 ```

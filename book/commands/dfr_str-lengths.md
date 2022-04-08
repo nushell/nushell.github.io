@@ -1,7 +1,7 @@
 ---
 title: dfr str-lengths
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Get lengths of all strings
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr str-lengths `
+```> dfr str-lengths ```
 
 ## Examples
 
 Returns string lengths
-
 ```shell
 > [a ab abc] | dfr to-df | dfr str-lengths
 ```

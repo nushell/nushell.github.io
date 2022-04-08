@@ -1,7 +1,7 @@
 ---
 title: math min
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Finds the minimum within a list of numbers or tables
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> math min `
+```> math min ```
 
 ## Examples
 
 Get the minimum of a list of numbers
-
 ```shell
 > [-50 100 25] | math min
 ```

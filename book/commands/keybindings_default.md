@@ -1,7 +1,7 @@
 ---
 title: keybindings default
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   List default keybindings
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> keybindings default `
+```> keybindings default ```
 
 ## Examples
 
 Get list with default keybindings
-
 ```shell
 > keybindings default
 ```

@@ -1,7 +1,7 @@
 ---
 title: from eml
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse text as .eml and create table.
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> from eml --preview-body`
+```> from eml --preview-body```
 
 ## Parameters
 
-- `--preview-body {int}`: How many bytes of the body to preview
+ -  `--preview-body {int}`: How many bytes of the body to preview
 
 ## Examples
 
 Convert eml structured data into table
-
 ```shell
 > 'From: test@email.com
 Subject: Welcome
@@ -31,7 +30,6 @@ Test' | from eml
 ```
 
 Convert eml structured data into table
-
 ```shell
 > 'From: test@email.com
 Subject: Welcome

@@ -1,7 +1,7 @@
 ---
 title: shells
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Lists all open shells.
 ---
@@ -12,18 +12,16 @@ usage: |
 
 ## Signature
 
-`> shells `
+```> shells ```
 
 ## Examples
 
 Enter a new shell at parent path '..' and show all opened shells
-
 ```shell
 > enter ..; shells
 ```
 
 Show currently active shell
-
 ```shell
 > shells | where active == true
 ```

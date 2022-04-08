@@ -1,7 +1,7 @@
 ---
 title: do
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Run a block
 ---
@@ -12,30 +12,27 @@ usage: |
 
 ## Signature
 
-`> do (block) ...rest --ignore-errors`
+```> do (block) ...rest --ignore-errors```
 
 ## Parameters
 
-- `block`: the block to run
-- `...rest`: the parameter(s) for the block
-- `--ignore-errors`: ignore errors as the block runs
+ -  `block`: the block to run
+ -  `...rest`: the parameter(s) for the block
+ -  `--ignore-errors`: ignore errors as the block runs
 
 ## Examples
 
 Run the block
-
 ```shell
 > do { echo hello }
 ```
 
 Run the block and ignore errors
-
 ```shell
 > do -i { thisisnotarealcommand }
 ```
 
 Run the block, with a positional parameter
-
 ```shell
 > do {|x| 100 + $x } 50
 ```

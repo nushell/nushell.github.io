@@ -1,7 +1,7 @@
 ---
 title: from ics
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse text as .ics and create table.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> from ics `
+```> from ics ```
 
 ## Examples
 
 Converts ics formatted string to table
-
 ```shell
 > 'BEGIN:VCALENDAR
 END:VCALENDAR' | from ics

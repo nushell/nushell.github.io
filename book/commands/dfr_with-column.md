@@ -1,7 +1,7 @@
 ---
 title: dfr with-column
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Adds a series to the dataframe
 ---
@@ -12,17 +12,16 @@ usage: |
 
 ## Signature
 
-`> dfr with-column (series) --name`
+```> dfr with-column (series) --name```
 
 ## Parameters
 
-- `series`: series to be added
-- `--name {string}`: column name
+ -  `series`: series to be added
+ -  `--name {string}`: column name
 
 ## Examples
 
 Adds a series to the dataframe
-
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr with-column ([5 6] | dfr to-df) --name c
 ```

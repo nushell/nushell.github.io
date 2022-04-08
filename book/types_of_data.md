@@ -194,6 +194,7 @@ Records hold key-value pairs, much like objects in JSON. As these can sometimes 
 ```
 
 You can iterate over records by first transposing it into a table:
+
 ```
 > echo {name: sam, rank: 10} | transpose key value
 ╭───┬──────┬───────╮

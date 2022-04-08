@@ -1,7 +1,7 @@
 ---
 title: help
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Display help information about commands.
 ---
@@ -12,41 +12,36 @@ usage: |
 
 ## Signature
 
-`> help ...rest --find`
+```> help ...rest --find```
 
 ## Parameters
 
-- `...rest`: the name of command to get help on
-- `--find {string}`: string to find in command usage
+ -  `...rest`: the name of command to get help on
+ -  `--find {string}`: string to find in command names, usage, and search terms
 
 ## Examples
 
 show all commands and sub-commands
-
 ```shell
 > help commands
 ```
 
 generate documentation
-
 ```shell
 > help generate_docs
 ```
 
 show help for single command
-
 ```shell
 > help match
 ```
 
 show help for single sub-command
-
 ```shell
 > help str lpad
 ```
 
-search for string in command usage
-
+search for string in command names, usage and search terms
 ```shell
 > help --find char
 ```

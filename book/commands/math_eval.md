@@ -1,7 +1,7 @@
 ---
 title: math eval
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Evaluate a math expression into a number
 ---
@@ -12,16 +12,15 @@ usage: |
 
 ## Signature
 
-`> math eval (math expression)`
+```> math eval (math expression)```
 
 ## Parameters
 
-- `math expression`: the math expression to evaluate
+ -  `math expression`: the math expression to evaluate
 
 ## Examples
 
 Evaluate math in the pipeline
-
 ```shell
 > '10 / 4' | math eval
 ```

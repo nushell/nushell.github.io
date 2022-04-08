@@ -1,7 +1,7 @@
 ---
 title: version
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Display Nu version.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> version `
+```> version ```
 
 ## Examples
 
 Display Nu version
-
 ```shell
 > version
 ```

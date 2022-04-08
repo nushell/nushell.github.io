@@ -1,7 +1,7 @@
 ---
 title: path exists
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Check whether a path exists
 ---
@@ -12,22 +12,20 @@ usage: |
 
 ## Signature
 
-`> path exists --columns`
+```> path exists --columns```
 
 ## Parameters
 
-- `--columns {table}`: Optionally operate by column path
+ -  `--columns {table}`: Optionally operate by column path
 
 ## Examples
 
 Check if a file exists
-
 ```shell
 > '/home/joe/todo.txt' | path exists
 ```
 
 Check if a file exists in a column
-
 ```shell
 > ls | path exists -c [ name ]
 ```

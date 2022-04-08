@@ -1,7 +1,7 @@
 ---
 title: input
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Get input from the user.
 ---
@@ -12,17 +12,17 @@ usage: |
 
 ## Signature
 
-`> input (prompt) --bytes-until`
+```> input (prompt) --bytes-until --suppress-output```
 
 ## Parameters
 
-- `prompt`: prompt to show the user
-- `--bytes-until {string}`: read bytes (not text) until a stop byte
+ -  `prompt`: prompt to show the user
+ -  `--bytes-until {string}`: read bytes (not text) until a stop byte
+ -  `--suppress-output`: don't print keystroke values
 
 ## Examples
 
 Get input from the user, and assign to a variable
-
 ```shell
 > let user-input = (input)
 ```

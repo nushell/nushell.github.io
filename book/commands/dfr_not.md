@@ -1,7 +1,7 @@
 ---
 title: dfr not
 layout: command
-version: 0.59.1
+version: 0.60.1
 usage: |
   Inverts boolean mask
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> dfr not `
+```> dfr not ```
 
 ## Examples
 
 Inverts boolean mask
-
 ```shell
 > [true false true] | dfr to-df | dfr not
 ```

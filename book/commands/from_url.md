@@ -1,7 +1,7 @@
 ---
 title: from url
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   Parse url-encoded string as a table.
 ---
@@ -12,12 +12,11 @@ usage: |
 
 ## Signature
 
-`> from url `
+```> from url ```
 
 ## Examples
 
 Convert url encoded string into a table
-
 ```shell
 > 'bread=baguette&cheese=comt%C3%A9&meat=ham&fat=butter' | from url
 ```
