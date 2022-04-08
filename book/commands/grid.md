@@ -20,6 +20,15 @@ usage: |
  -  `--color`: draw output with color
  -  `--separator {string}`: character to separate grid with
 
+## Notes
+```text
+grid was built to give a concise gridded layout for ls. however,
+it determines what to put in the grid by looking for a column named
+'name'. this works great for tables and records but for lists we
+need to do something different. such as with '[one two three] | grid'
+it creates a fake column called 'name' for these values so that it
+prints out the list properly.
+```
 ## Examples
 
 Render a simple list to a grid

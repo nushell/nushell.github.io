@@ -23,6 +23,10 @@ usage: |
  -  `--headers {any}`: custom headers you want to add
  -  `--raw`: fetch contents as text rather than a table
 
+## Notes
+```text
+Performs HTTP GET operation.
+```
 ## Examples
 
 Fetch content from url.com

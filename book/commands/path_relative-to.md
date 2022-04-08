@@ -19,6 +19,12 @@ usage: |
  -  `path`: Parent shared with the input path
  -  `--columns {table}`: Optionally operate by column path
 
+## Notes
+```text
+Can be used only when the input and the argument paths are either both
+absolute or both relative. The argument path needs to be a parent of the input
+path.
+```
 ## Examples
 
 Find a relative path from two absolute paths

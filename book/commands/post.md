@@ -26,6 +26,10 @@ usage: |
  -  `--raw`: return values as a string instead of a table
  -  `--insecure`: allow insecure server connections when using SSL
 
+## Notes
+```text
+Performs HTTP POST operation.
+```
 ## Examples
 
 Post content to url.com

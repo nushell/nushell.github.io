@@ -20,6 +20,11 @@ usage: |
  -  `then_block`: block to run if check succeeds
  -  `else_expression`: expression or block to run if check fails
 
+## Notes
+```text
+This command is a parser keyword. For details, check
+https://www.nushell.sh/book/thinking_in_nushell.html#parsing-and-evaluation-are-different-stages
+```
 ## Examples
 
 Output a value if a condition matches, otherwise return nothing

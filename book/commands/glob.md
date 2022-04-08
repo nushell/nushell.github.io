@@ -19,6 +19,10 @@ usage: |
  -  `glob`: the glob expression
  -  `--depth {int}`: directory depth to search
 
+## Notes
+```text
+For more glob pattern help please refer to https://github.com/olson-sean-k/wax
+```
 ## Examples
 
 Search for *.rs files
