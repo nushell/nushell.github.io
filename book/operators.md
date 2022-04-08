@@ -42,10 +42,11 @@ Math operations are evaluated in the follow order (from highest precedence to lo
 
 The `=~` and `!~` operators provide a convenient way to evaluate [regular expressions](https://cheatography.com/davechild/cheat-sheets/regular-expressions/). You don't need to know regular expressions to use them - they're also an easy way to check whether 1 string contains another.
 
-- `string =~ pattern` returns **true** if `string` contains a match for `pattern`, and **false** otherwise. 
-- `string !~ pattern` returns **false** if `string` contains a match for `pattern`, and **true** otherwise. 
+- `string =~ pattern` returns **true** if `string` contains a match for `pattern`, and **false** otherwise.
+- `string !~ pattern` returns **false** if `string` contains a match for `pattern`, and **true** otherwise.
 
 For example:
+
 ```bash
 foobarbaz =~ bar # returns true
 foobarbaz !~ bar # returns false
@@ -66,11 +67,13 @@ Operators are usually case-sensitive when operating on strings. There are a few 
 ```
 
 2. Use the [`str contains`](commands/str_contains.md) command's `--insensitive` flag:
+
 ```bash
 "FOO" | str contains --insensitive "foo"
 ```
 
 3. Convert strings to lowercase with [`str downcase`](commands/str_downcase.md) before comparing:
+
 ```bash
 ("FOO" | str downcase) == ("Foo" | str downcase)
 ```
