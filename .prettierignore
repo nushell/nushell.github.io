@@ -2,3 +2,4 @@
 node_modules
 package-lock.json
 book/commands/*.md
+operators.md

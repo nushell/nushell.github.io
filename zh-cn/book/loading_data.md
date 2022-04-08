@@ -1,12 +1,10 @@
 # 加载数据
 
-之前我们使用了 `ls`, `ps`, `date`, `sys` 来从文件系统、进程、日期时间和系统本身加载了数据。每条命令都以表的形式提供了我们能够探索到的信息。
-我们在工作时也可通过其他方法将数据加载为表。
+之前我们使用了[`ls`](/book/commands/ls.md)、[`ps`](/book/commands/ps.md)、[`date`](/book/commands/date.md)和[`sys`](/book/commands/sys.md)等命令来加载关于文件、进程、日期时间和系统本身的信息。每条命令都会给我们提供一个信息表，以对其进行探索。我们也可以通过其他方式将数据载入表格以供使用。
 
 ## 打开文件
 
-处理数据时 Nu 最有力的工具就是 `open` 命令。它时一个多用工具，可以在许多不同数据格式下工作。
-要明白这一点，让我们尝试来打开一个 json 文件：
+Nu 在处理数据方面最强大的能力之一是[`open`](/book/commands/open.md)命令。它是一个多功能命令，可以处理许多不同的数据格式。为了说明这一点让我们试着打开一个 JSON 文件：
 
 ```
 > open editors/vscode/package.json
@@ -29,10 +27,9 @@
 ──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
-就像 `ls` 一样，打开一个 Nu 能够理解的文件类型将给我们比文本（或字节流）更丰富的信息。
-这里我们打开了一个 JavaScript 项目的 "package.json" 文件。Nu 可以识别 JSON 文本并以表的形式返回数据。
+与[`ls`](/book/commands/ls.md)类似，打开一个 Nu 支持的文件类型，会返回一些不仅仅是文本（或一个字节流）的东西。这里我们打开了一个来自 JavaScript 项目的 "package.json"文件。Nu 可以识别 JSON 文本并将其解析为一个数据表。
 
-如果我们想要检查这个项目的版本，可以用 `get` 指令：
+如果我们想查看当前项目的版本，我们可以使用[`get`](/book/commands/get.md)命令：
 
 ```
 > open editors/vscode/package.json | get version
@@ -41,28 +38,37 @@
 
 Nu 目前支持直接从以下格式加载表数据：
 
-- json
-- yaml
-- toml
-- xml
 - csv
+- eml
+- ics
 - ini
+- json
+- nuon
+- ods
+- ssv
+- toml
+- tsv
+- url
+- vcf
+- xlsx / xls
+- xml
+- yaml / yml
 
-但是，当你加载另外的文本文件时会发生什么呢？让我们试一试：
+但是，当你加载其他的文本文件时会发生什么呢？让我们试一试：
 
-```
+```bash
 > open README.md
 ```
 
-我们展示了文件的内容。如果文件过大，我们可以得到一个受控的滚动视图来查看文件并返回终端。有助于可读性，Nu 还会高亮一般文件格式，例如源代码文件、Markdown 等。
+我们会看到该文件的内容，如果文件太大则会得到一个方便的滚动视图来查看文件，然后再跳回终端。为了提高可读性，Nu 还将语法高亮显示常见的文件格式，如源码文件、Markdown 等等。
 
-在表象之下，Nu 在这些文本文件中看到的是一个大字符串。 接下来，我们将讨论如何使用这些字符串以从中获取所需的数据。
+本质上，这些文本文件对 Nu 来说就是一个大字符串。接下来，我们将讨论如何处理这些字符串，以便从中获得我们需要的数据。
 
 ## 处理字符串
 
-处理来自 Nu 外部的数据的一个要点是，它并不总是采用 Nu 可以理解的格式。 通常，此数据以字符串形式提供给我们。
+处理来自 Nu 外部数据时一个普遍情况是，它并不总是以 Nu 理解的格式出现。通常这些数据是以字符串的形式提供给我们的。
 
-让我们想象我们得到了这样一个数据文件：
+想象一下，我们得到了这个数据文件：
 
 ```
 > open people.txt
@@ -71,9 +77,9 @@ Bob | Ross | Painter
 Antonio | Vivaldi | Composer
 ```
 
-我们想要的每个数据都用管道符（'|'）分隔，并且每个人在独立的行中。Nu 默认没有管道符分隔的文件格式，所以我们不得不自行解析它。
+我们想要的数据都由管道（`|`）符号隔开，每人单独一行。由于 Nu 没有默认的以管道分隔的文件格式，所以我们必须自己来解析。
 
-首先，我们想要做的是每次处理一行：
+当我们引入这个文件时，我们需要做的第一件事是确保后续每次只处理一行：
 
 ```
 > open people.txt | lines
@@ -84,12 +90,12 @@ Antonio | Vivaldi | Composer
 ───┴──────────────────────────────
 ```
 
-我们可以看到我们正在处理这些行，因为我们回到了表格中。 下一步是查看是否可以将行拆分成更有用的内容。 为此，我们将使用 `split-column` 命令。 顾名思义，「分隔列」为我们提供了一种将定界字符串拆分为列的方法。 我们告诉它分隔符是什么，其余的将由它完成：
+可以看到，我们正在处理这些行，因为我们又回到了一个表中。下一步是看看是否可以把行分割成更有用的东西。为此，我们将使用[`split`](/book/commands/split.md)命令。[`split`](/book/commands/split.md)，顾名思义，为我们提供了一种分割字符串的方法。我们将使用[`split`](/book/commands/split.md)的`column`子命令，将内容分成多列。我们会告诉它分隔符是什么，剩下的就由它来完成：
 
 ```
-> open people.txt | lines | split-column "|"
+> open people.txt | lines | split column "|"
 ───┬──────────┬───────────┬───────────
- # │ Column1  │ Column2   │ Column3
+ # │ column1  │ column2   │ column3
 ───┼──────────┼───────────┼───────────
  0 │ Octavia  │  Butler   │  Writer
  1 │ Bob      │  Ross     │  Painter
@@ -97,12 +103,12 @@ Antonio | Vivaldi | Composer
 ───┴──────────┴───────────┴───────────
 ```
 
-这看起来就差不多了。但貌似它还有一些额外的空白字符。让我们 `trim` 掉这些空格：
+这看起来差不多了，只是还有一些额外的空白字符，让我们 [`trim`](/book/commands/str_trim.md) 掉这些空格：
 
 ```
-> open people.txt | lines | split-column "|" | str trim
+> open people.txt | lines | split column "|" | str trim
 ───┬─────────┬─────────┬──────────
- # │ Column1 │ Column2 │ Column3
+ # │ column1 │ column2 │ column3
 ───┼─────────┼─────────┼──────────
  0 │ Octavia │ Butler  │ Writer
  1 │ Bob     │ Ross    │ Painter
@@ -110,10 +116,10 @@ Antonio | Vivaldi | Composer
 ───┴─────────┴─────────┴──────────
 ```
 
-不错。 `split-column` 命令得到了我们可以使用的数据。它也给了我们一行默认列名：
+还不错，[`split`](/book/commands/split.md)命令返回给我们可以使用的数据，还预设了默认的列名：
 
 ```
-> open people.txt | lines | split-column "|" | str trim | get Column1
+> open people.txt | lines | split column "|" | str trim | get column1
 ───┬─────────
  0 │ Octavia
  1 │ Bob
@@ -121,10 +127,10 @@ Antonio | Vivaldi | Composer
 ───┴─────────
 ```
 
-我们也可以用我们提供的列名代替默认的：
+我们也可以用自定义的列名代替默认的：
 
 ```
-> open people.txt | lines | split-column "|" first_name last_name job | str trim
+> open people.txt | lines | split column "|" first_name last_name job | str trim
 ───┬────────────┬───────────┬──────────
  # │ first_name │ last_name │ job
 ───┼────────────┼───────────┼──────────
@@ -134,10 +140,10 @@ Antonio | Vivaldi | Composer
 ───┴────────────┴───────────┴──────────
 ```
 
-现在，我们的数据在一个表中了，我们可以使用之前我们对表所用的一切命令来处理它：
+现在，我们的数据加载到一个表中了，我们可以使用之前对表所用的各种命令来处理它：
 
 ```
-> open people.txt | lines | split-column "|" first_name last_name job | str trim | sort-by first_name
+> open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
 ───┬────────────┬───────────┬──────────
  # │ first_name │ last_name │ job
 ───┼────────────┼───────────┼──────────
@@ -147,16 +153,15 @@ Antonio | Vivaldi | Composer
 ───┴────────────┴───────────┴──────────
 ```
 
-其他可用于字符串的指令有：
+其他可用于字符串的命令有：
 
-- split-row
-- str
-- lines
-- size
+- `str`
+- [`lines`](/book/commands/lines.md)
+- [`size`](/book/commands/size.md)
 
-如果我们已经知道数据具有 Nu 能够理解的格式，则可以调用一组帮助程序命令。 例如，我们打开一个 Cargo.lock 文件：
+如果我们已经知道待处理的数据具有 Nu 能够理解的格式，则可以使用一些辅助命令，例如，我们打开一个 Rust 的 Cargo.lock 文件：
 
-```
+```toml
 > open Cargo.lock
 # This file is automatically @generated by Cargo.
 # It is not intended for manual editing.
@@ -165,7 +170,7 @@ name = "adhoc_derive"
 version = "0.1.2"
 ```
 
-"Cargo.lock" 实际上是一个 .toml 文件，但是文件扩展名不是 .toml。也行，我们可以使用 `from toml` 命令：
+"Cargo.lock" 实际上是一个 .toml 文件，但是文件扩展名不是 .toml。没关系，我们可以使用 `from toml` 命令：
 
 ```
 > open Cargo.lock | from toml
@@ -175,14 +180,13 @@ version = "0.1.2"
 ──────────┴───────────────────
 ```
 
-每种 Nu 能理解的格式都有对应的 `from` 命令可以使用。
+每种 Nu 能打开并理解的结构化数据文本格式都有对应的 `from` 命令可以使用，只需要把支持的格式作为子命令传给 `from` 就可以了。
 
-## 以原始模式操作
+## 以原始模式打开
 
-虽然能够打开文件并立即使用其数据表很有帮助，但这并不总是我们想要做的。
-为了获得纯文本，`open` 命令可以使用可选的 `--raw` 标志：
+虽然能够打开一个文件并立即使用其数据表很有帮助，但这并不总是我们想要的。为了获得原始文本，[`open`](/book/commands/open.md)命令可以接受一个可选的`--raw`标志：
 
-```
+```toml
 > open Cargo.toml --raw
 [package]
 name = "nu"
@@ -194,7 +198,7 @@ license = "MIT"
 
 ## 获取 URLs
 
-除了从文件系统加载文件之外，您还可以使用 `fetch` 命令加载 URL。 这将从互联网上获取 URL 的内容并将其返回给您：
+除了从文件系统中加载文件，你还可以通过使用[`fetch`](/book/commands/fetch.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
 
 ```
 > fetch https://www.jonathanturner.org/feed.xml

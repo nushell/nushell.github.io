@@ -1,7 +1,7 @@
 ---
 title: query xml
 layout: command
-version: 0.60.0
+version: 0.60.1
 usage: |
   execute xpath query on xml
 ---
@@ -12,8 +12,8 @@ usage: |
 
 ## Signature
 
-`> query xml (query)`
+```> query xml (query)```
 
 ## Parameters
 
-- `query`: xpath query
+ -  `query`: xpath query
