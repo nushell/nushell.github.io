@@ -19,6 +19,11 @@ usage: |
  -  `--columns {table}`: Optionally operate by column path
  -  `--extension {string}`: Manually supply the extension (without the dot)
 
+## Notes
+```text
+Each path is split into a table with 'parent', 'stem' and 'extension' fields.
+On Windows, an extra 'prefix' column is added.
+```
 ## Examples
 
 Parse a single path

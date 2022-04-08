@@ -19,6 +19,10 @@ usage: |
  -  `command`: the command to execute
  -  `...rest`: any additional arguments for the command
 
+## Notes
+```text
+Currently supported only on Unix-based systems.
+```
 ## Examples
 
 Execute external 'ps aux' tool

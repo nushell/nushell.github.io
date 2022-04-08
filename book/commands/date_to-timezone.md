@@ -18,6 +18,10 @@ usage: |
 
  -  `time zone`: time zone description
 
+## Notes
+```text
+Use 'date list-timezone' to list all supported time zones.
+```
 ## Examples
 
 Get the current date in UTC+05:00

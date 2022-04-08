@@ -21,6 +21,11 @@ usage: |
  -  `--encoding {string}`: Encoding used to communicate with plugin. Options: [capnp, json]
  -  `--shell {path}`: path of shell used to run plugin (cmd, sh, python, etc)
 
+## Notes
+```text
+This command is a parser keyword. For details, check
+https://www.nushell.sh/book/thinking_in_nushell.html#parsing-and-evaluation-are-different-stages
+```
 ## Examples
 
 Register `nu_plugin_query` plugin from ~/.cargo/bin/ dir
