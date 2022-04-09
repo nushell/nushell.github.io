@@ -24,4 +24,4 @@ And get the equivalent to having typed `ls -l -a`.
 
 ## Persisting
 
-For information about how to persist aliases so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md#startup-commands).
+For information about how to persist aliases so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md).
