@@ -25,8 +25,8 @@ module.exports = {
       title: 'Nushell',
       description: 'Um novo tipo de shell.',
     },
-    '/zh-cn/': {
-      lang: 'zh-cn',
+    '/zh-CN/': {
+      lang: 'zh-CN',
       title: 'Nushell',
       description: '一种新型的外壳。.',
     },
@@ -382,18 +382,18 @@ module.exports = {
           // ],
         },
       },
-      '/zh-cn/': {
+      '/zh-CN/': {
         selectText: '语言',
         label: '中文',
         editLinkText: '在GitHub上编辑此页面',
         nav: [
-          { text: '书', link: '/zh-cn/book/' },
+          { text: '书', link: '/zh-CN/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
           { text: 'Blog', link: '/blog/' },
         ],
         sidebar: {
-          '/zh-cn/book/': [
+          '/zh-CN/book/': [
             {
               title: '入门篇',
               collapsable: false,
@@ -418,15 +418,21 @@ module.exports = {
               ],
             },
             {
-              title: '待续',
+              title: 'Nushell 编程',
               collapsable: false,
               children: [
-                'configuration',
+                'custom_commands',
                 'aliases',
-                'math',
-                'environment',
-                'metadata',
+                // 'operators',
+                // 'variables_and_subexpressions',
+                // 'scripts',
+                // 'modules',
               ],
+            },
+            {
+              title: '待续',
+              collapsable: false,
+              children: ['configuration', 'math', 'environment', 'metadata'],
             },
           ],
         },
