@@ -423,8 +423,8 @@ module.exports = {
               children: [
                 'custom_commands',
                 'aliases',
-                // 'operators',
-                // 'variables_and_subexpressions',
+                'operators',
+                'variables_and_subexpressions',
                 // 'scripts',
                 // 'modules',
               ],
