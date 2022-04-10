@@ -500,6 +500,30 @@ is always successful
   }
 ```
 
+### Removing a default keybinding
+
+If you want to remove a certain default keybinding without replacing it with a different action, you can set `event: null`.
+
+e.g. to disable screen clearing with `Ctrl + l` for all edit modes
+
+```bash
+  let $config = {
+    ...
+
+    keybindings: [
+      {
+        modifier: control
+        keycode: char_l
+        mode: [emacs, vi_normal, vi_insert]
+        event: null
+      }
+    ]
+
+    ...
+  }
+
+```
+
 ### Troubleshooting keybinding problems
 
 Your terminal environment may not always propagate your key combinations on to nushell the way you expect it to.
