@@ -24,4 +24,4 @@ Das ist äquivalent zu `ls -l -a`. Deutlich kürzer.
 
 ## Persistenz
 
-Für Informationen, um Aliase dauerhaft zu speichern, damit diese immer in Nushell nutzbar sind, kann ein Blick auf das [Konfigurationskapitel](configuration.md#startup-befehle) geworfen werden.
+Für Informationen, um Aliase dauerhaft zu speichern, damit diese immer in Nushell nutzbar sind, kann ein Blick auf das [Konfigurationskapitel](konfiguration.md) geworfen werden.

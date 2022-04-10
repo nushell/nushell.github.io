@@ -36,7 +36,7 @@ Die Shell-Umgebung kann durch Aufrufe von `let-env` in der `config.nu`-Datei ge�
 
 ### Farbkonfiguration
 
-Mehr Informationen zu Farbeinstellungen und Themes kann im [entsprechenden Kapitel](https://github.com/nushell/nushell/blob/main/docs/How_To_Coloring_and_Theming.md) gefunden werden.
+Mehr Informationen zu Farbeinstellungen und Themes kann im [entsprechenden Kapitel](/book/coloring_and_theming.md) gefunden werden.
 
 ## Nushell als Login-Shell
 
@@ -94,4 +94,4 @@ Darüber hinaus wird als Markierung ein Promptindikator gesetzt, welcher den akt
 - `PROMPT_INDICATOR_VI_NORMAL = "〉 "`
 - `PROMPT_MULTILINE_INDICATOR = "::: "`
 
-Mehr Dokumentation zu fertigen Prompts von Drittanbietern kann [hier](3rd_Party_Prompts.md) gefunden werden.
+Mehr Dokumentation zu fertigen Prompts von Drittanbietern kann [hier](3rdpartyprompts.md) gefunden werden.

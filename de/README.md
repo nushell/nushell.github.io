@@ -30,7 +30,7 @@ Nu arbeitet mit typisierten Daten, wodurch Fehler abgefangen werden, die andere 
 
 ## Nu installieren
 
-Nushell ist verfügbar [als kompiliertes Programm](https://github.com/nushell/nushell/releases), [von einem Packetmanager](https://repology.org/project/nushell/versions), und als [Source Code](https://github.com/nushell/nushell). Die detaillierten Installationsanweisungen sind [hier](/book/installation.html) zu finden. Oder direkt loslegen:
+Nushell ist verfügbar [als kompiliertes Programm](https://github.com/nushell/nushell/releases), [von einem Packetmanager](https://repology.org/project/nushell/versions), und als [Source Code](https://github.com/nushell/nushell). Die detaillierten Installationsanweisungen sind [hier](/de/book/installation.html) zu finden. Oder direkt loslegen:
 
 #### macOS / Linux:
 
