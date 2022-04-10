@@ -5,6 +5,14 @@ if ($META_FILE | path exists) == false {
 }
 let meta = open $META_FILE
 
+# Check if a git repo has the specified ref: could be a branch or tag, etc.
+def 'has-ref' [
+  ref: string   # The git ref to check
+] {
+  let parse = (git rev-parse --verify -q $ref)
+  if ($parse | empty?) { false } else { true }
+}
+
 # Update issue contents for https://github.com/nushell/nushell.github.io/issues/261
 def update-i18n-status [] {
 
@@ -12,17 +20,17 @@ def update-i18n-status [] {
     print $'(char nl)---(char nl)'
 
     ls -s book/*.md
-        | where type == file && name != README.md
+        | where type == file
         | select name
         | upsert en {|it| get-cell $it.name en }
         | upsert de {|it| get-cell $it.name de }
-        | upsert zh-cn {|it| get-cell $it.name zh-cn }
+        | upsert zh-CN {|it| get-cell $it.name zh-CN }
         | upsert ja {|it| get-cell $it.name ja }
         | upsert es {|it| get-cell $it.name es }
         | upsert pt-BR {|it| get-cell $it.name pt-BR }
         | to md --pretty
 
-    print $'(char nl)Possible status values: `-`,`Completed`,`In Progress`,`Being translated by @ABC`(char nl)'
+    print $'(char nl)Possible status values: `-`,`Completed`,`In Progress`,`Being translated by @ABC` or a COMMIT ID indicate your translation end to.(char nl)'
 }
 
 def get-cell [
@@ -37,18 +45,24 @@ def get-cell [
 
     } else {    # For existing docs
         let val = ($match | get $lng | get 0)
-        if ($val | empty?) { $cellDefault } else { $val }
+        if ($val | empty?) {
+            $cellDefault
+        } else if (has-ref $val) {
+            $'Translate to ($val)'
+        } else {
+            $val
+        }
     }
 }
 
 # Generate or update meta data for docs' translation status
 def gen-i18n-meta [] {
     ls -s book/*.md
-        | where type == file && name != README.md
+        | where type == file
         | select name
         | upsert en {|it| get-cell $it.name en }
         | upsert de {|it| get-cell $it.name de }
-        | upsert zh-cn {|it| get-cell $it.name zh-cn }
+        | upsert zh-CN {|it| get-cell $it.name zh-CN }
         | upsert ja {|it| get-cell $it.name ja }
         | upsert es {|it| get-cell $it.name es }
         | upsert pt-BR {|it| get-cell $it.name pt-BR }
