@@ -50,7 +50,7 @@ Nu benötigt aktuell die **latest stable (1.55 oder neuer)** Version von Rust. D
 
 <<< @/snippets/installation/rustup_choose_rust_version.sh
 
-Wenn Sie bereit sind, drücken Sie 1 und dann Enter.
+Wenn Sie bereit sind, drücken Sie `1` und dann `Enter`.
 
 Wenn Rust nicht via `rustup` installiert werden soll, können auch andere Methoden verwendet werden um es zu installieren (z.B. vom Paketmanager der Linux-Distro). Dabei muss sichergestellt werden, dass es sich um Rust-Version 1.55 oder neuer handelt.
 
@@ -58,23 +58,23 @@ Wenn Rust nicht via `rustup` installiert werden soll, können auch andere Method
 
 ### Debian/Ubuntu
 
-Es müssen die Pakete "pkg-config" und "libssl-dev" installiert werden:
+Es müssen die Pakete `pkg-config` und `libssl-dev` installiert werden:
 
 <<< @/snippets/installation/install_pkg_config_libssl_dev.sh
 
-Linux-Nutzer die die optionalen Funktionen `rawkey` und `clipboard` verwenden möchten, müssen außerdem die Pakete "libx11-dev" und "libxcb-composite0-dev" installieren:
+Linux-Nutzer die die optionalen Funktionen `rawkey` und `clipboard` verwenden möchten, müssen außerdem die Pakete `libx11-dev` und `libxcb-composite0-dev` installieren:
 
 <<< @/snippets/installation/use_rawkey_and_clipboard.sh
 
 ### RHEL basierte Distributionen
 
-Für RHEL basierte Distributionen müssen die Pakete "libxcb", "openssl-devel" und "libX11-devel" installiert werden:
+Für RHEL basierte Distributionen müssen die Pakete `libxcb`, `openssl-devel` und `libX11-devel` installiert werden:
 
 <<< @/snippets/installation/install_rhel_dependencies.sh
 
 ### macOS
 
-Mittels [Homebrew](https://brew.sh/), müssen die Pakete "openssl" und "cmake" über folgenden Befehl installiert werden:
+Mittels [Homebrew](https://brew.sh/), müssen die Pakete `openssl` und `cmake` über folgenden Befehl installiert werden:
 
 <<< @/snippets/installation/macos_deps.sh
 
@@ -84,7 +84,7 @@ Wenn alle die Abhängigkeitenn, die für Nu benötigt werden, installiert sind, 
 
 <<< @/snippets/installation/cargo_install_nu.sh
 
-Das war's! Cargo wird Nu und seine anderen Abhängigkeiten herunterladen, kompilieren und schließlich im "cargo bin path" installieren, damit es benutzt werden kann.
+Das war's! Cargo wird Nu und seine anderen Abhängigkeiten herunterladen, kompilieren und schließlich im cargo `bin` Pfad installieren, damit es benutzt werden kann.
 
 Wenn mehr Funktionalitäten installiert werden sollen, kann der folgende Befehl verwendet werden:
 
@@ -110,11 +110,11 @@ Git clont das main nushell Repo. Von da aus, kann Nu, wenn `rustup` verwendet wi
 
 <<< @/snippets/installation/build_nu_from_source.sh
 
-Nu kann auch in "release mode" kompiliert und gestartet werden:
+Nu kann auch in "release" Modus kompiliert und gestartet werden:
 
 <<< @/snippets/installation/build_nu_from_source_release.sh
 
-Leute, die sich mit Rust auskennen, wundern sich womöglich, warum hier sowohl ein "build" als auch ein "run" durchgeführt wird, obwohl "run" standardmäßig auch einen Build durchführt. Das ist nötig, um ein Problem mit der neuen `default-run`-Option von Cargo zu umgehen, damit alle Plugins kompiliert werden. Dies wird unter Umständen in Zukunft nicht mehr nötig sein.
+Leute, die sich mit Rust auskennen, wundern sich womöglich, warum hier sowohl ein `build` als auch ein `run` durchgeführt wird, obwohl `run` standardmäßig auch einen Build durchführt. Das ist nötig, um ein Problem mit der neuen `default-run`-Option von Cargo zu umgehen, damit alle Plugins kompiliert werden. Dies wird unter Umständen in Zukunft nicht mehr nötig sein.
 
 ## Als Login-Shell verwenden
 

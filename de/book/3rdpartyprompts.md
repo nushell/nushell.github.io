@@ -3,6 +3,7 @@
 ## nerdfonts
 
 nerdfonts sind nicht zwangsweise notwendig, machen aber die Darstellung viel besser.
+Sie enthalten unter anderem Symbole für Betriebssysteme oder den Git-Status und graphische Formen für einen ansprechenden Prompt.
 
 [Webseite](https://www.nerdfonts.com)
 
@@ -14,11 +15,11 @@ nerdfonts sind nicht zwangsweise notwendig, machen aber die Darstellung viel bes
 
 [Repository](https://github.com/JanDeDobbeleer/oh-my-posh)
 
-Wenn oh-my-posh verwendet werden soll, kann dies in wenigen Schritten für Nushell erreicht werden. Die Integration in Nushell funktioniert sehr gut. Die folgenden Schritte werden dazu benötigt:
+Wenn [oh-my-posh](https://ohmyposh.dev/) verwendet werden soll, kann dies in wenigen Schritten für Nushell erreicht werden. Die Integration in Nushell funktioniert sehr gut. Die folgenden Schritte werden dazu benötigt:
 
 1. oh-my-posh installieren und die Farbschemata herunterladen entsprechend dieser [Anleitung](https://ohmyposh.dev/docs/linux#installation)
 2. Herunterladen und installieren einer [nerd font](https://github.com/ryanoasis/nerd-fonts).
-3. PROMPT_COMMAND in `~/.config/nushell/config.nu` setzen und `M365Princess.omp.json` beliebig ändern entsprechend der [Demo](https://ohmyposh.dev/docs/themes).
+3. Die Umgebungsvariable `PROMPT_COMMAND` durch hinzufügen der folgenden Zeile in `~/.config/nushell/config.nu` setzen. Den Style `M365Princess.omp.json` kann man entsprechend der [Demo](https://ohmyposh.dev/docs/themes) beliebig ändern .
 
 ```shell
 > let-env PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
