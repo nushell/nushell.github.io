@@ -2,7 +2,7 @@
 
 ## Nushell Konfiguration mittels `config.nu`
 
-Nushell nutzt ein Konfigurationssystem, das ein Nushell-Skript beim Start ausführt. Die Konfigurationsdatei wird für Nushell `config.nu` genannt. Der Pfad zu dieser Konfigurationsdatei kann durch den Aufruf von `echo $nu.config-path` herausgefunden werden. Es handelt sich dabei um eine Datei die abgearbeitet wird und in jedem Schritt Definitionen, Umgebungsvariablen und mehr zum globalen Namespace hinzufügt.
+Nushell nutzt ein Konfigurationssystem, das ein Nushell-Skript beim Start ausführt. Die Konfigurationsdatei wird für Nushell `config.nu` genannt. Der Pfad zu dieser Konfigurationsdatei kann durch den Aufruf von `echo $nu.config-path` herausgefunden werden. Es handelt sich dabei um eine Datei, die abgearbeitet wird und in jedem Schritt Definitionen, Umgebungsvariablen und mehr zum globalen Namespace hinzufügt.
 
 Ein Beispiel für eine Nushell `config.nu` kann [hier](https://github.com/nushell/nushell/blob/main/src/default_config.nu) in unserem Repository gefunden werden.
 
@@ -79,32 +79,19 @@ alias open = ^open
 
 ## Konfiguration der Prompt
 
-Die Konfiguration der Prompt wird durch das Setzen der Variable `prompt` durchgeführt.
-
-Um beispielsweise [Starship](https://starship.rs) zu nutzen, muss es heruntergeladen werden und der folgende Befehl eingegeben werden:
-
-```
-let-env PROMPT_COMMAND = "starship prompt"
-```
-
-Danach muss Nu neugestartet werden.
+Die Konfiguration der Prompt wird durch das Setzen der Umgebungsvariable `PROMPT_COMMAND` bzw. `PROMPT_COMMAND_RIGHT` durchgeführt.
+Diese akzeptieren entweder einen String oder einen Codeblock der ausgeführt wird.
 
 ```
-nushell on 📙 main [$] is 📦 v0.44.0 via 🦀 v1.59.0
-❯
+let-env PROMPT_COMMAND = "Hallo Nu"  # Die Hauptprompt auf einen festen String setzen
+let-env PROMPT_COMMAND_RIGHT = {pwd} # Den rechte Promptteil mit dem aktuellen Verzeichnis anzeigen
 ```
 
-Wenn die Prompt etwas seltsam aussieht:
+Darüber hinaus wird als Markierung ein Promptindikator gesetzt, welcher den aktuellen Modus oder einen Zeilenumbruch anzeigt:
 
-```
-%{%}~%{%}
-%{%}❯%{%}
-```
+- `PROMPT_INDICATOR = "〉"`: Indikator, der der Prompt folgt (default: ">"-like Unicode symbol)
+- `PROMPT_INDICATOR_VI_INSERT = ": "`
+- `PROMPT_INDICATOR_VI_NORMAL = "〉 "`
+- `PROMPT_MULTILINE_INDICATOR = "::: "`
 
-sollte unter Umständen die `STARSHIP_SHELL` Umgebungsvariable gesetzt werden:
-
-```
-config set prompt "STARSHIP_SHELL=nushell starship prompt"
-```
-
-Mehr Dokumentation zu Prompts von Drittanbietern kann [hier](https://github.com/nushell/nushell/blob/main/docs/3rd_Party_Prompts.md) gefunden werden.
+Mehr Dokumentation zu fertigen Prompts von Drittanbietern kann [hier](3rd_Party_Prompts.md) gefunden werden.

@@ -7,7 +7,7 @@ Für die Versionen 0.44 und älter von Nushell, sollte die [alte Version](/old_b
 
 Hallo und herzlich Willkommen beim Nushell Projekt. Das Ziel diese Projekts ist es, die Philosophie von Unix Shells, wo Pipes einfache Befehle miteinander verbinden, mit modernen Ansätzen zu verbinden.
 
-Nu ist von vielen Seiten beeinflusst: traditionelle Shells wie Bash, objektbasiert Shells wie PowerShell, funktionale Programmierung, Systems Programming und viele Weitere. Aber statt die eierlegende Wollmilchsau zu sein, liegt der Fokus von Nu darauf, die angebotenen Funktionen gut zu beherrschen:
+Nu ist von vielen Seiten beeinflusst: traditionelle Shells wie Bash, objektbasierte Shells wie PowerShell, funktionale Programmierung, Systems Programming und viele Weitere. Aber statt die eierlegende Wollmilchsau zu sein, liegt der Fokus von Nu darauf, die angebotenen Funktionen gut zu beherrschen:
 
 - Flexible cross-plattform Shell mit einem modernen Verhalten
 - Ausgaben von Kommandozeilenprogrammen mit einer Shell zu verarbeiten, die Struktur von Daten versteht
