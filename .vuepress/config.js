@@ -425,8 +425,8 @@ module.exports = {
                 'aliases',
                 'operators',
                 'variables_and_subexpressions',
-                // 'scripts',
-                // 'modules',
+                'scripts',
+                'modules',
               ],
             },
             {
