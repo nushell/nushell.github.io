@@ -5,6 +5,11 @@ module.exports = {
       title: 'Nushell',
       description: 'A new type of shell.',
     },
+    '/zh-CN/': {
+      lang: 'zh-CN',
+      title: 'Nushell',
+      description: '一种新型的Shell',
+    },
     '/de/': {
       lang: 'Deutsch',
       title: 'Nushell',
@@ -24,11 +29,6 @@ module.exports = {
       lang: 'pt-BR',
       title: 'Nushell',
       description: 'Um novo tipo de shell.',
-    },
-    '/zh-CN/': {
-      lang: 'zh-CN',
-      title: 'Nushell',
-      description: '一种新型的外壳。.',
     },
   },
   head: [
@@ -427,6 +427,17 @@ module.exports = {
                 'variables_and_subexpressions',
                 'scripts',
                 'modules',
+              ],
+            },
+            {
+              title: '迁移到 Nu',
+              collapsable: false,
+              children: [
+                'coming_from_bash',
+                'nushell_map',
+                'nushell_map_imperative',
+                'nushell_map_functional',
+                'nushell_operator_map',
               ],
             },
             {
