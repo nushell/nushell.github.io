@@ -1010,7 +1010,7 @@ The next list shows the available dataframe commands with their descriptions, an
 whenever possible, their analogous Nushell command.
 
 | Command Name    | Applies To                  | Description                                                                | Nushell Equivalent            |
-| --------------- | --------------------------- | -------------------------------------------------------------------------- | ----------------------------- | ------------------------------------- |
+| --------------- | --------------------------- | -------------------------------------------------------------------------- | ----------------------------- |
 | aggregate       | DataFrame, GroupBy, Series  | Performs an aggregation operation on a dataframe, groupby or series object | math                          |
 | all-false       | Series                      | Returns true if all values are false                                       |                               |
 | all-true        | Series                      | Returns true if all values are true                                        | all?                          |

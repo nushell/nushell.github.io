@@ -63,58 +63,61 @@ Emacs and Vi Insert keybindings
 | Ctr + n     | Move down             |
 
 Vi Normal keybindings
-| Key | Event |
-|---|---|
+
+| Key     | Event               |
+| ------- | ------------------- |
 | Ctr + c | Cancel current line |
-| Ctr + l | Clear screen |
-| Up | Move menu up |
-| Up | Move up |
-| Down | Move menu down |
-| Down | Move down |
-| Left | Move menu left |
-| Left | Move left |
-| Right | Move menu right |
-| Right | Move right |
+| Ctr + l | Clear screen        |
+| Up      | Move menu up        |
+| Up      | Move up             |
+| Down    | Move menu down      |
+| Down    | Move down           |
+| Left    | Move menu left      |
+| Left    | Move left           |
+| Right   | Move menu right     |
+| Right   | Move right          |
 
 Besides the previous keybindings, while in Vi normal mode you can use the classic
 vi mode of executing actions by selecting a motion or an action. The available
 options for the combinations are:
 
 Vi Normal motions
-| Key | motion |
-|---|---|
-| w | Word |
-| d | Line end |
-| 0 | Line start |
-| $ | Line end |
-| f | Right until char |
-| t | Right before char |
-| F | Left until char |
-| T | Left before char |
+
+| Key | motion            |
+| --- | ----------------- |
+| w   | Word              |
+| d   | Line end          |
+| 0   | Line start        |
+| $   | Line end          |
+| f   | Right until char  |
+| t   | Right before char |
+| F   | Left until char   |
+| T   | Left before char  |
 
 Vi Normal actions
-| Key | action |
-|---|---|
-| d | Delete |
-| p | Paste after |
-| P | Paste before |
-| h | Move left |
-| l | Move right |
-| j | Move down |
-| k | Move up |
-| w | Move word right |
-| b | Move word left |
-| i | Enter Vi insert at current char |
-| a | Enter Vi insert after char |
-| 0 | Move to start of line |
-| ^ | Move to start of line |
-| $ | Move to end of line |
-| u | Undo |
-| c | Change |
-| x | Delete char |
-| s | History search |
-| D | Delete to end |
-| A | Append to end |
+
+| Key | action                          |
+| --- | ------------------------------- |
+| d   | Delete                          |
+| p   | Paste after                     |
+| P   | Paste before                    |
+| h   | Move left                       |
+| l   | Move right                      |
+| j   | Move down                       |
+| k   | Move up                         |
+| w   | Move word right                 |
+| b   | Move word left                  |
+| i   | Enter Vi insert at current char |
+| a   | Enter Vi insert after char      |
+| 0   | Move to start of line           |
+| ^   | Move to start of line           |
+| $   | Move to end of line             |
+| u   | Undo                            |
+| c   | Change                          |
+| x   | Delete char                     |
+| s   | History search                  |
+| D   | Delete to end                   |
+| A   | Append to end                   |
 
 ### Command history
 
@@ -712,10 +715,10 @@ layouts as a template. The templates available in nushell are columnar, list or
 description.
 
 The columnar menu will show you data in a columnar fashion adjusting the column
-number based on the size of the text displayed in your columns. 
+number based on the size of the text displayed in your columns.
 
 The list type of menu will always display suggestions as a list, giving you the
-option to select values using `!` plus number combination. 
+option to select values using `!` plus number combination.
 
 The description type will give you more space to display a description for some
 values, together with extra information that could be inserted into the buffer.

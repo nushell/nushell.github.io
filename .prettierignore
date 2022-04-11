@@ -1,5 +1,9 @@
 
 node_modules
 package-lock.json
-book/commands/*.md
+
 operators.md
+dataframes.md
+nushell_map.md
+coming_from_bash.md
+book/commands/*.md
