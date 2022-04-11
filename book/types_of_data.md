@@ -171,11 +171,14 @@ The full list of filesize units are:
 
 Binary data, like the data from an image file, is a group of raw bytes.
 
-You can write binary as a literal using the `0x[...]` form:
+You can write binary as a literal using any of the `0x[...]` or `0b[...]` forms:
 
 ```
 > 0x[1F FF]
+> 0b[1 1010]
 ```
+
+Incomplete bytes will be left-padded with zeros.
 
 ## Structured data
 
