@@ -1,10 +1,5 @@
 # Introduction
 
-::: warning
-This is the version of the book that works with the version of Nushell in main (0.60 and later).
-For the 0.44 version of Nushell, you should read the [0.44 version of the book](/old_book/).
-:::
-
 Hello, and welcome to the Nushell project. The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development.
 
 Nu takes cues from a lot of familiar territory: traditional shells like bash, object based shells like PowerShell, gradually typed languages like TypeScript, functional programming, systems programming, and more. But rather than trying to be a jack of all trades, Nu focuses its energy on doing a few things well:
