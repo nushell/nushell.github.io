@@ -430,6 +430,22 @@ module.exports = {
               ],
             },
             {
+              title: 'Nu 作为 Shell 使用',
+              collapsable: false,
+              children: [
+                'configuration',
+                'environment',
+                // 'stdout_stderr_exit_codes',
+                // 'escaping',
+                // '3rdpartyprompts',
+                // 'shells_in_shells',
+                // 'line_editor',
+                // 'externs',
+                // 'custom_completions',
+                // 'coloring_and_theming',
+              ],
+            },
+            {
               title: '迁移到 Nu',
               collapsable: false,
               children: [
@@ -441,9 +457,15 @@ module.exports = {
               ],
             },
             {
-              title: '待续',
+              title: '高级篇',
               collapsable: false,
-              children: ['configuration', 'math', 'environment', 'metadata'],
+              children: [
+                // 'dataframes',
+                'metadata',
+                'creating_errors',
+                'parallelism',
+                'plugins',
+              ],
             },
           ],
         },
