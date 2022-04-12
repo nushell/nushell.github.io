@@ -1,10 +1,17 @@
 # Configuration
 
-## Nushell Configuration with `config.nu`
+## Nushell Configuration with `env.nu` and `config.nu`
 
-Nushell uses a configuration system that loads+runs a Nushell script file at launch time. That configuration file is called the `config.nu` file, and the path to it can be found by calling `echo $nu.config-path`. `config.nu` can add definitions, environment variables, and more to the global namespace.
+Nushell uses a configuration system that loads+runs two Nushell script files at launch time:
+First, `env.nu`, then `config.nu`.
+Paths to these files can be found by calling `echo $nu.env-path` and `echo $nu.config-path`.
+`env.nu` is meant to define the environment variables which are then available within `config.nu`.
+`config.nu` can be used to add definitions, aliases, and more to the global namespace.
 
-We currently provide the full list of configurable options as a sample `config.nu` which can be found in our repo [here](https://github.com/nushell/nushell/blob/0.60.0/docs/sample_config/default_config.nu).
+_(You can think of the Nushell config loading sequence as executing two [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) lines on startup: `source /path/to/env.nu` and `source /path/to/config.nu`. Therefore, using `env.nu` for environment and `config.nu` for other config is just a convention.)_
+
+When you launch Nushell without these files set up, Nushell will prompt you to download the [`default env.nu`](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_env.nu) and [`default config.nu`](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu).
+You can browse the default files for default values of environment variables and a list of all configurable settings.
 
 ### Configuring `$config`
 
@@ -22,9 +29,11 @@ You can also shadow `$config` and update it:
 let $config = ($config | upsert <field name> <field value>)
 ```
 
+By convention, this variable is defined in the `config.nu` file.
+
 ### Environment
 
-You can set environment variables for the duration of a Nushell session using [`let-env`](commands/let-env.html) calls inside the `config.nu` file. For example:
+You can set environment variables for the duration of a Nushell session using [`let-env`](commands/let-env.html) calls inside the `env.nu` file. For example:
 
 ```
 let-env FOO = 'BAR'
