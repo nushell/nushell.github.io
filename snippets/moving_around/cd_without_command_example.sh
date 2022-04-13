@@ -1,1 +1,1 @@
-> new_directory
+> ./new_directory
