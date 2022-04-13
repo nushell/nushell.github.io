@@ -25,7 +25,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | `mkdir -p <path>`                    | `mkdir <path>`                                   | Creates the given path, creating parents as necessary             |
 | `touch test.txt`                     | `touch test.txt`                                 | Create a file                                                     |
 | `> <path>`                           | `| save --raw <path>`                            | Save string into a file                                           |
-| `>> <path>`                          | `<not yet possible>`                             | Append string to a file                                           |
+| `>> <path>`                          | `| save --raw --append <path>`                   | Append string to a file                                           |
 | `cat <path>`                         | `open --raw <path>`                              | Display the contents of the given file                            |
 |                                      | `open <path>`                                    | Read a file as structured data                                    |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                             | Move file to new location                                         |
