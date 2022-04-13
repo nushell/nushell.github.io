@@ -5,6 +5,11 @@ module.exports = {
       title: 'Nushell',
       description: 'A new type of shell.',
     },
+    '/zh-CN/': {
+      lang: 'zh-CN',
+      title: 'Nushell',
+      description: '一种新型的Shell',
+    },
     '/de/': {
       lang: 'Deutsch',
       title: 'Nushell',
@@ -24,11 +29,6 @@ module.exports = {
       lang: 'pt-BR',
       title: 'Nushell',
       description: 'Um novo tipo de shell.',
-    },
-    '/zh-CN/': {
-      lang: 'zh-CN',
-      title: 'Nushell',
-      description: '一种新型的外壳。.',
     },
   },
   head: [
@@ -430,9 +430,42 @@ module.exports = {
               ],
             },
             {
-              title: '待续',
+              title: 'Nu 作为 Shell 使用',
               collapsable: false,
-              children: ['configuration', 'math', 'environment', 'metadata'],
+              children: [
+                'configuration',
+                'environment',
+                // 'stdout_stderr_exit_codes',
+                // 'escaping',
+                // '3rdpartyprompts',
+                // 'shells_in_shells',
+                // 'line_editor',
+                // 'externs',
+                // 'custom_completions',
+                // 'coloring_and_theming',
+              ],
+            },
+            {
+              title: '迁移到 Nu',
+              collapsable: false,
+              children: [
+                'coming_from_bash',
+                'nushell_map',
+                'nushell_map_imperative',
+                'nushell_map_functional',
+                'nushell_operator_map',
+              ],
+            },
+            {
+              title: '高级篇',
+              collapsable: false,
+              children: [
+                // 'dataframes',
+                'metadata',
+                'creating_errors',
+                'parallelism',
+                'plugins',
+              ],
             },
           ],
         },
