@@ -67,7 +67,7 @@ See [Modules](modules.md) for details.
 
 ## Scoping
 
-When you set and environment variable, it will be available only in the current scope (the block you're in and any block inside of it).
+When you set an environment variable, it will be available only in the current scope (the block you're in and any block inside of it).
 
 Here is a small example to demonstrate the environment scoping:
 
@@ -136,7 +136,7 @@ BAR
 ## Environment variable conversions
 
 You can set the `ENV_CONVERSIONS` environment variable to convert other environment variables between a string and a value.
-For example, the [default config](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu) includes conversion of PATH (and Path used on Windows) environment variables from a sting to a list.
+For example, the [default config](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu) includes conversion of PATH (and Path used on Windows) environment variables from a string to a list.
 After the config loaded, any existing environment variable specified inside `ENV_CONVERSIONS` will be translated according to its `from_string` field into a value of any type.
 External tools require environment variables to be strings, therefore, any non-string environment variable needs to be converted first.
 The conversion of value -> string is set by the `to_string` field of `ENV_CONVERSIONS` and is done every time an external command is run.
@@ -180,7 +180,7 @@ a-b-c
 ```
 
 Because `nu` is an external program, Nushell translated the `[ a b c ]` according to `ENV_CONVERSIONS.FOO.to_string` and passed it to the `nu` process.
-Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was succesful.
+Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was successful.
 You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
 If we look back at the [`env`](commands/env.html) command, the `raw` column shows the value translated by `ENV_CONVERSIONS.<name>.to_string` and the `value` column shows the value used in Nushell (the result of `ENV_CONVERSIONS.<name>.from_string` in the case of `FOO`).
