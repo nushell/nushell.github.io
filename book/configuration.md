@@ -51,7 +51,7 @@ These are some important variables to look at for Nushell-specific settings:
 
 ### Color Config section
 
-You can learn more about setting up colors and theming in the [associated chapter](https://github.com/nushell/nushell/blob/main/docs/How_To_Coloring_and_Theming.md).
+You can learn more about setting up colors and theming in the [associated chapter](coloring_and_theming.md).
 
 ## Configuring Nu as a login shell
 
