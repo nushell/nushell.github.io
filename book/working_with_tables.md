@@ -166,12 +166,12 @@ In addition to selecting data from a table, we can also update what the table ha
 
 ### Concatenating Tables
 
-We can concatenate tables with identical column names using [`echo`](commands/echo.md):
+We can concatenate tables with identical column names using [`append`](commands/append.md):
 
 ```
 > let $first = [[a b]; [1 2]]
 > let $second = [[a b]; [3 4]]
-> echo $first $second
+> $first | append $second
 ───┬───┬───
  # │ a │ b
 ───┼───┼───
