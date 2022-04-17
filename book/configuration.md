@@ -92,6 +92,12 @@ def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
 
-## Prompt configuration
+## PATH configuration
 
-Third-party prompts now have their [own section in the Nushell book](3rdpartyprompts.md).
+To append a path to [the PATH variable](<https://en.wikipedia.org/wiki/PATH_(variable)>), you can use [`let-env`](commands/let-env.html) and [`append`](commands/append.html) in `env.nu`:
+
+```
+let-env PATH = ($env.PATH | append '/some/path')
+```
+
+This will append `/some/path` to the end of PATH; you can also use [`prepend`](commands/prepend.html) to add entries to the start of PATH.
