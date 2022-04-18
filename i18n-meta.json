@@ -2,8 +2,8 @@
   {
     "name": "3rdpartyprompts.md",
     "en": "Completed",
+    "zh-CN": "f5987a82d@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "f5987a82d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -11,8 +11,8 @@
   {
     "name": "README.md",
     "en": "Completed",
+    "zh-CN": "c13a71d11@hustcer",
     "de": "-",
-    "zh-CN": "c13a71d11",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -20,8 +20,8 @@
   {
     "name": "aliases.md",
     "en": "Completed",
+    "zh-CN": "218f600a9@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "218f600a9",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -29,8 +29,8 @@
   {
     "name": "coloring_and_theming.md",
     "en": "Completed",
+    "zh-CN": "f3dc86d3d@hustcer",
     "de": "-",
-    "zh-CN": "f3dc86d3d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -38,8 +38,8 @@
   {
     "name": "coming_from_bash.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -47,8 +47,8 @@
   {
     "name": "command_reference.md",
     "en": "Completed",
-    "de": "translated by @sebastian-xyz",
     "zh-CN": "-",
+    "de": "translated by @sebastian-xyz",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -56,8 +56,8 @@
   {
     "name": "configuration.md",
     "en": "Completed",
+    "zh-CN": "f5987a82d@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "f5987a82d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -65,8 +65,8 @@
   {
     "name": "creating_errors.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "-",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -74,8 +74,8 @@
   {
     "name": "custom_commands.md",
     "en": "Completed",
+    "zh-CN": "218f600a9@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "218f600a9",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -83,8 +83,8 @@
   {
     "name": "custom_completions.md",
     "en": "Completed",
+    "zh-CN": "f5987a82d@hustcer",
     "de": "-",
-    "zh-CN": "f5987a82d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -92,8 +92,8 @@
   {
     "name": "dataframes.md",
     "en": "Completed",
-    "de": "-",
     "zh-CN": "-",
+    "de": "-",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -101,8 +101,8 @@
   {
     "name": "environment.md",
     "en": "Completed",
+    "zh-CN": "f5987a82d@hustcer",
     "de": "-",
-    "zh-CN": "f5987a82d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -110,8 +110,8 @@
   {
     "name": "escaping.md",
     "en": "Completed",
+    "zh-CN": "f5987a82d@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "f5987a82d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -119,8 +119,8 @@
   {
     "name": "externs.md",
     "en": "Completed",
+    "zh-CN": "f5987a82d@hustcer",
     "de": "-",
-    "zh-CN": "f5987a82d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -128,8 +128,8 @@
   {
     "name": "installation.md",
     "en": "Completed",
+    "zh-CN": "c13a71d11@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "c13a71d11",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -137,8 +137,8 @@
   {
     "name": "line_editor.md",
     "en": "Completed",
-    "de": "-",
     "zh-CN": "-",
+    "de": "-",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -146,8 +146,8 @@
   {
     "name": "loading_data.md",
     "en": "Completed",
+    "zh-CN": "c13a71d11@hustcer",
     "de": "-",
-    "zh-CN": "c13a71d11",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -155,8 +155,8 @@
   {
     "name": "metadata.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "-",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -164,8 +164,8 @@
   {
     "name": "modules.md",
     "en": "Completed",
+    "zh-CN": "115b193d2@hustcer",
     "de": "-",
-    "zh-CN": "115b193d2",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -173,8 +173,8 @@
   {
     "name": "moving_around.md",
     "en": "Completed",
+    "zh-CN": "c13a71d11@hustcer",
     "de": "-",
-    "zh-CN": "c13a71d11",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -182,8 +182,8 @@
   {
     "name": "nushell_map.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "-",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -191,8 +191,8 @@
   {
     "name": "nushell_map_functional.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "-",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -200,8 +200,8 @@
   {
     "name": "nushell_map_imperative.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "-",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -209,8 +209,8 @@
   {
     "name": "nushell_operator_map.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "-",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -218,8 +218,8 @@
   {
     "name": "operators.md",
     "en": "Completed",
+    "zh-CN": "0b0389f2c@hustcer",
     "de": "-",
-    "zh-CN": "0b0389f2c",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -227,8 +227,8 @@
   {
     "name": "parallelism.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "-",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -236,8 +236,8 @@
   {
     "name": "pipeline.md",
     "en": "Completed",
+    "zh-CN": "13129315c@hustcer",
     "de": "-",
-    "zh-CN": "13129315c",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -245,8 +245,8 @@
   {
     "name": "plugins.md",
     "en": "Completed",
+    "zh-CN": "ae23eeba3@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "ae23eeba3",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -254,8 +254,8 @@
   {
     "name": "regular_expressions.md",
     "en": "Completed",
+    "zh-CN": "1163a763a@hustcer",
     "de": "-",
-    "zh-CN": "-",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -263,8 +263,8 @@
   {
     "name": "scripts.md",
     "en": "Completed",
+    "zh-CN": "115b193d2@hustcer",
     "de": "-",
-    "zh-CN": "115b193d2",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -272,8 +272,8 @@
   {
     "name": "shells_in_shells.md",
     "en": "Completed",
+    "zh-CN": "f5987a82d@hustcer",
     "de": "-",
-    "zh-CN": "f5987a82d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -281,8 +281,8 @@
   {
     "name": "stdout_stderr_exit_codes.md",
     "en": "Completed",
+    "zh-CN": "f5987a82d@hustcer",
     "de": "-",
-    "zh-CN": "f5987a82d",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -290,8 +290,8 @@
   {
     "name": "table_of_contents.md",
     "en": "Completed",
+    "zh-CN": "c13a71d11@hustcer",
     "de": "-",
-    "zh-CN": "c13a71d11",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -299,8 +299,8 @@
   {
     "name": "thinking_in_nushell.md",
     "en": "Completed",
+    "zh-CN": "c13a71d11@hustcer",
     "de": "-",
-    "zh-CN": "c13a71d11",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -308,8 +308,8 @@
   {
     "name": "types_of_data.md",
     "en": "Completed",
+    "zh-CN": "c13a71d11@hustcer",
     "de": "-",
-    "zh-CN": "c13a71d11",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -317,8 +317,8 @@
   {
     "name": "variables_and_subexpressions.md",
     "en": "Completed",
+    "zh-CN": "0b0389f2c@hustcer",
     "de": "translated by @sebastian-xyz",
-    "zh-CN": "0b0389f2c",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -326,8 +326,8 @@
   {
     "name": "working_with_lists.md",
     "en": "Completed",
+    "zh-CN": "13129315c@hustcer",
     "de": "-",
-    "zh-CN": "13129315c",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -335,8 +335,8 @@
   {
     "name": "working_with_strings.md",
     "en": "Completed",
+    "zh-CN": "13129315c@hustcer",
     "de": "-",
-    "zh-CN": "13129315c",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"
@@ -344,8 +344,8 @@
   {
     "name": "working_with_tables.md",
     "en": "Completed",
+    "zh-CN": "13129315c@hustcer",
     "de": "-",
-    "zh-CN": "13129315c",
     "ja": "-",
     "es": "-",
     "pt-BR": "-"

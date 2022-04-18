@@ -23,14 +23,14 @@ def update-i18n-status [] {
         | where type == file
         | select name
         | upsert en {|it| get-cell $it.name en }
-        | upsert de {|it| get-cell $it.name de }
         | upsert zh-CN {|it| get-cell $it.name zh-CN }
+        | upsert de {|it| get-cell $it.name de }
         | upsert ja {|it| get-cell $it.name ja }
         | upsert es {|it| get-cell $it.name es }
         | upsert pt-BR {|it| get-cell $it.name pt-BR }
         | to md --pretty
 
-    print $'(char nl)Possible status values: `-`,`Completed`,`In Progress`,`Being translated by @ABC` or a COMMIT ID indicate your translation end to.(char nl)'
+    print $'(char nl)Possible status values: `-`,`Completed`,`In Progress`,`Being translated by @ABC`, `commit_id@author` or simply a COMMIT ID indicate your translation end to.(char nl)'
 }
 
 def get-cell [
@@ -47,6 +47,15 @@ def get-cell [
         let val = ($match | get $lng | get 0)
         if ($val | empty?) {
             $cellDefault
+        # Handle data like: "c13a71d11@hustcer"
+        } else if ($val | str contains '@') {
+            let commit = ($val | split row '@')
+            let id = ($commit | get 0)
+            if ($commit | length) > 1 && (has-ref $id) {
+                $'Translate to ($id) by ($commit | get 1)'
+            } else {
+                $val
+            }
         } else if (has-ref $val) {
             $'Translate to ($val)'
         } else {
@@ -61,8 +70,8 @@ def gen-i18n-meta [] {
         | where type == file
         | select name
         | upsert en {|it| get-cell $it.name en }
-        | upsert de {|it| get-cell $it.name de }
         | upsert zh-CN {|it| get-cell $it.name zh-CN }
+        | upsert de {|it| get-cell $it.name de }
         | upsert ja {|it| get-cell $it.name ja }
         | upsert es {|it| get-cell $it.name es }
         | upsert pt-BR {|it| get-cell $it.name pt-BR }
@@ -70,13 +79,59 @@ def gen-i18n-meta [] {
         | save -r i18n-meta.json
 }
 
-def main [
-    task: string    # Avaliable task: `gen`, `update`
+def has-change [
+    name: string,       # The doc file name to check
+    commit: string,     # The ending commit id
 ] {
+    let diff = (git diff $commit $'book/($name)' | str trim)
+    if ($diff | empty?) { $'(ansi g)No(ansi reset)' } else { $'(ansi r)Yes(ansi reset)' }
+}
+
+def check-outdated-translation [
+    lng: string     # The locale to check outdated
+] {
+    let columns = { 'zh-cn': 'zh-CN', 'pt-br': 'pt-BR' }
+    let locale = if ($lng in $columns) { $columns | get $lng } else { $lng }
+    open i18n-meta.json | select name $locale | insert outdated { |it|
+        let val = ($it | get $locale)
+        if ($val | empty?) || $val == '-' {
+            '-'
+        # Handle data like: "c13a71d11@hustcer"
+        } else if ($val | str contains '@') {
+            let commit = ($val | split row '@')
+            let id = ($commit | get 0)
+            if ($commit | length) > 1 && (has-ref $id) {
+                has-change $it.name $id
+            } else {
+                'N/A'
+            }
+        } else if (has-ref $val) {
+            has-change $it.name $val
+        } else {
+            'N/A'
+        }
+    } | sort-by outdated name
+}
+
+# Use `nu ./i18n.nu outdated zh-CN` to check outdated translations for zh-CN
+# Some helper commands for i18n related tasks
+def main [
+    task: string    # Avaliable task: `gen`, `update`, `outdated`
+    lng?: string    # The locale to check outdated: zh-CN, de, etc.
+] {
+    let locales = ['zh-cn', 'de', 'ja', 'es', 'pt-br']
+
     if $task == 'gen' {
         gen-i18n-meta
     } else if $task == 'update' {
         update-i18n-status
+    } else if $task == 'outdated' {
+        let available = ($lng | str downcase) in $locales
+        if (not $available) {
+            $'(ansi r)Unsupported locale, available locales: ($locales), Please try again!(ansi reset)(char nl)'
+            exit --now
+        }
+        check-outdated-translation $lng
     }
 }
 
