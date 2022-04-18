@@ -299,14 +299,16 @@ Here's another small example using multiple color syntaxes with some comments.
         separator: "#88b719" # this sets only the foreground color like PR #486
         leading_trailing_space_bg: white # this sets only the foreground color in the original style
         header: { # this is like PR #489
-        fg: "#B01455", # note, quotes are required on the values with hex colors
-        bg: "#ffb900",# note, commas are not required, it could also be all on one line
-        attr: bli # note, there are no quotes around this value. it works with or without quotes
+            fg: "#B01455", # note, quotes are required on the values with hex colors
+            bg: "#ffb900",# note, commas are not required, it could also be all on one line
+            attr: bli # note, there are no quotes around this value. it works with or without quotes
         }
         date: "#75507B"
         filesize: "#729fcf"
-        row_index: { # note, that this is another way to set only the foreground, no need to specify bg and attr
-        fg: "#e50914"
+        row_index: {
+            # note, that this is another way to set only the foreground, no need to specify bg and attr
+            fg: "#e50914"
+        }
     }
 }
 ```
@@ -400,7 +402,7 @@ Theming combines all the coloring above. Here's a quick example of one we put to
 
 The key to making theming work is to make sure you specify all themes and colors you're going to use in the `config.nu` file _before_ you declare the `let config = ` line.
 
-```
+```shell
 # let's define some colors
 
 let base00 = "#181818" # Default Background
