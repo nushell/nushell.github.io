@@ -442,7 +442,7 @@ module.exports = {
                 // 'line_editor',
                 'externs',
                 'custom_completions',
-                // 'coloring_and_theming',
+                'coloring_and_theming',
               ],
             },
             {
