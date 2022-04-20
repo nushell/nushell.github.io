@@ -22,6 +22,22 @@ Once we do, it's as if we typed `ls -l`. This also allows us to pass in flags or
 
 And get the equivalent to having typed `ls -l -a`.
 
+## How to write an alias with Pipes
+
+If you want to add a pipe to your alias you must must enclose it with parentheses which are a pair of round brackets ( ) used to mark off your set of commands with pipes.
+
+```
+alias lsname = (ls | get name)
+```
+
+Here is an alias with more than one pipe
+
+```
+alias lt = (ls | sort-by modified -r | sort-by type)
+```
+
 ## Persisting
 
-For information about how to persist aliases so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md).
+To make your alias persistent it must be added to your *config.nu* file.
+
+For more details about how to persist aliases so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md).
