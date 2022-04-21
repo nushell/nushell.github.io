@@ -439,7 +439,7 @@ module.exports = {
                 'escaping',
                 '3rdpartyprompts',
                 'shells_in_shells',
-                // 'line_editor',
+                'line_editor',
                 'externs',
                 'custom_completions',
                 'coloring_and_theming',
