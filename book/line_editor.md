@@ -785,7 +785,7 @@ The required structure for the record is the next one
 For the menu to display something, at least the `value` field has to be present
 in the resulting record.
 
-In order to make the menu interactive, these two variables area available in
+In order to make the menu interactive, these two variables are available in
 the block: `$buffer` and `$position`. The `$buffer` contains the value captured
 by the menu, when the option `only_buffer_difference` is true, `$buffer` is the
 text written after the menu was activated. If `only_buffer_difference` is

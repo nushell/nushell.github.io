@@ -52,7 +52,7 @@ def get-cell [
             let commit = ($val | split row '@')
             let id = ($commit | get 0)
             if ($commit | length) > 1 && (has-ref $id) {
-                $'Translate to ($id) by ($commit | get 1)'
+                $'Translate to ($id) by @($commit | get 1)'
             } else {
                 $val
             }
@@ -76,7 +76,7 @@ def gen-i18n-meta [] {
         | upsert es {|it| get-cell $it.name es }
         | upsert pt-BR {|it| get-cell $it.name pt-BR }
         | to json -i 2
-        | save -r i18n-meta.json
+        | save -r $META_FILE
 }
 
 def has-change [
@@ -92,7 +92,7 @@ def check-outdated-translation [
 ] {
     let columns = { 'zh-cn': 'zh-CN', 'pt-br': 'pt-BR' }
     let locale = if ($lng in $columns) { $columns | get $lng } else { $lng }
-    open i18n-meta.json | select name $locale | insert outdated { |it|
+    open $META_FILE | select name $locale | insert outdated { |it|
         let val = ($it | get $locale)
         if ($val | empty?) || $val == '-' {
             '-'
