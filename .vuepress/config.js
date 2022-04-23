@@ -288,12 +288,12 @@ module.exports = {
               title: 'Programming in Nu',
               collapsable: false,
               children: [
-                'custom_commands',
-                'aliases',
-                'operators',
-                'variables_and_subexpressions',
-                'scripts',
-                'modules',
+                // 'custom_commands',
+                // 'aliases',
+                // 'operators',
+                // 'variables_and_subexpressions',
+                // 'scripts',
+                // 'modules',
               ],
             },
             {
