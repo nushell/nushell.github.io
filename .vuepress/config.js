@@ -553,7 +553,7 @@ module.exports = {
               title: '高级篇',
               collapsable: false,
               children: [
-                // 'dataframes',
+                'dataframes',
                 'metadata',
                 'creating_errors',
                 'parallelism',

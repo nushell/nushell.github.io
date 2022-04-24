@@ -1,51 +1,30 @@
 # Dataframes
 
 ::: tip
-The dataframe commands are available from version 0.33.1 onwards
+Dataframe 相关命令从 0.33.1 版本开始支持
 :::
 
-As we have seen so far, Nushell makes working with data its main priority.
-`Lists` and `Tables` are there to help you cycle through values in order to
-perform multiple operations or find data in a breeze. However, there are
-certain operations where a row-based data layout is not the most efficient way
-to process data, especially when working with extremely large files. Operations
-like group-by or join using large datasets can be costly memory-wise, and may
-lead to large computation times if they are not done using the appropriate
-data format.
+正如我们到目前为止所看到的，Nushell 把数据处理作为其主要任务。`Lists` 和 `Tables`的存在是为了帮助你循环处理值，以便执行多种操作或轻而易举地找到数据。然而，在某些操作中，基于行的数据布局并不是处理数据的最有效方式，特别是在处理极其庞大的文件时。对于大型数据集的`group-by`或`join`等操作，如果不使用适当的数据格式，会占用大量的内存，并可能耗费大量的计算时间。
 
-For this reason, the `DataFrame` structure was introduced to Nushell. A
-`DataFrame` stores its data in a columnar format using as its base the [Apache
-Arrow](https://arrow.apache.org/) specification, and uses
-[Polars](https://github.com/pola-rs/polars) as the motor for performing
-extremely [fast columnar operations](https://h2oai.github.io/db-benchmark/).
+出于这个原因，Nushell 引入了`DataFrame`结构。`DataFrame`以列格式存储数据，以 [Apache Arrow](https://arrow.apache.org/) 规范为基础，并使用 [Polars](https://github.com/pola-rs/polars) 作为执行极其 [快速列式操作](https://h2oai.github.io/db-benchmark/) 的马达。
 
-You may be wondering now how fast this combo could be, and how could it make
-working with data easier and more reliable. For this reason, let's start this
-page by presenting benchmarks on common operations that are done when
-processing data.
+你现在可能想知道这个组合能有多快，以及它如何能使数据工作更容易、更可靠。出于这个原因，让我们在本页开始时介绍一下处理数据时的常见操作的性能测试情况。
 
-## Benchmark comparisons
+## 性能测试对比
 
-For this little benchmark exercise we will be comparing native Nushell
-commands, dataframe Nushell commands and [Python
-Pandas](https://pandas.pydata.org/) commands. For the time being don't pay too
-much attention to the `dataframe` commands. They will be explained in later
-sections of this page.
+在这个小的性能测试练习中，我们将比较本地的 Nushell 原生命令、Nushell DataFrame 相关命令和[Python Pandas](https://pandas.pydata.org/)命令。暂时不要太在意`dataframe`命令，它们将在本页后面的章节中解释。
 
-> System Details: The benchmarks presented in this section were run using a
-> machine with a processor Intel(R) Core(TM) i7-10710U (CPU @1.10GHz 1.61 GHz)
-> and 16 gb of RAM.
+> 系统细节：本节介绍的性能测试是用一台配备 Intel(R) Core(TM) i7-10710U
+> （CPU @1.10GHz 1.61GHz）和 16 GB 内存的机器运行的。
 >
-> All examples were run on Nushell version 0.33.1.
+> 所有的例子都在 Nushell 0.33.1 版本上运行。
 
-### File information
+### 文件信息
 
-The file that we will be using for the benchmarks is the
-[New Zealand business demography](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) dataset.
-Feel free to download it if you want to follow these tests.
+我们将用于性能测试的文件是 [新西兰商业人口统计](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) 数据集。
+如果你想尝试这些测试，请下载该文件。
 
-The dataset has 5 columns and 5,429,252 rows. We can check that by using the
-`dfr list` command:
+该数据集有 5 列，5,429,252 行。我们可以通过使用`dfr list`命令来检查：
 
 ```shell
 > let df = (dfr open .\Data7602DescendingYearOrder.csv)
@@ -58,7 +37,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ───┴──────┴─────────┴─────────
 ```
 
-We can have a look at the first lines of the file using `dfr first`:
+我们可以用`dfr first`看一下文件的第一行：
 
 ```shell
 > $df | dfr first
@@ -74,7 +53,7 @@ We can have a look at the first lines of the file using `dfr first`:
 ───┴──────────┴─────────┴──────┴───────────┴──────────
 ```
 
-...and finally, we can get an idea of the inferred datatypes:
+...最后，我们可以了解一下推断出的数据类型：
 
 ```shell
 > $df | dfr dtypes
@@ -90,10 +69,9 @@ We can have a look at the first lines of the file using `dfr first`:
 ───┴───────────┴───────
 ```
 
-### Loading the file
+### 加载文件
 
-Let's start by comparing loading times between the various methods. First, we
-will load the data using Nushell's [`open`](commands/open.md) command:
+让我们先来比较一下各种方法的加载时间。首先，我们将使用 Nushell 的[`open`](/book/commands/open.md)命令加载数据：
 
 ```shell
 > benchmark {open .\Data7602DescendingYearOrder.csv}
@@ -105,10 +83,9 @@ will load the data using Nushell's [`open`](commands/open.md) command:
 ───┴─────────────────────────
 ```
 
-Loading the file using native Nushell functionality took 30 seconds. Not bad for
-loading five million records! But we can do a bit better than that.
+使用原生的 Nushell 功能加载文件需要 30 秒。对于加载 500 万条记录来说，这还算不错！但我们可以做得更好一些。
 
-Let's now use Pandas. We are going to use the next script to load the file:
+现在让我们使用 Pandas。我们将使用以下脚本来加载文件：
 
 ```python
 import pandas as pd
@@ -116,7 +93,7 @@ import pandas as pd
 df = pd.read_csv("Data7602DescendingYearOrder.csv")
 ```
 
-And the benchmark for it is:
+而它的性能测试结果是：
 
 ```shell
 > benchmark {python load.py}
@@ -128,10 +105,9 @@ And the benchmark for it is:
 ───┴───────────────────────
 ```
 
-That is a great improvement, from 30 seconds to 2 seconds. Nicely done, Pandas!
+这是一个很大的进步，从 30 秒到 2 秒。干得好，Pandas!
 
-Probably we can load the data a bit faster. This time we will use Nushell's
-`dfr open` command:
+也许我们加载数据可以再快一点，这一次我们将使用 Nushell 的`dfr open`命令：
 
 ```shell
 > benchmark {dfr open .\Data7602DescendingYearOrder.csv}
@@ -143,19 +119,16 @@ Probably we can load the data a bit faster. This time we will use Nushell's
 ───┴───────────────────
 ```
 
-This time it took us 0.6 seconds. Not bad at all.
+这一次，我们花了 0.6 秒。一点也不差。
 
-### Group-by comparison
+### `Group-by`比较
 
-Let's do a slightly more complex operation this time. We are going to group the
-data by year, and add groups using the column `geo_count`.
+这次让我们做一个稍微复杂的操作。我们将按年份对数据进行分组，并根据`geo_count`列对分组求和。
 
-Again, we are going to start with a Nushell native command.
+同样，我们要从 Nushell 的原生命令开始：
 
 ::: tip
-If you want to run this example, be aware that the next command will
-use a large amount of memory. This may affect the performance of your system
-while this is being executed.
+如果你想运行这个例子，请注意接下来的命令将使用大量的内存，在该命令执行期间可能会影响你的系统性能。
 :::
 
 ```shell
@@ -174,9 +147,9 @@ while this is being executed.
 ───┴────────────────────────
 ```
 
-So, six minutes to perform this aggregated operation.
+所以，执行这个聚合操作需要 6 分钟。
 
-Let's try the same operation in pandas:
+让我们试试在`pandas`中进行同样的操作：
 
 ```python
 import pandas as pd
@@ -186,7 +159,7 @@ res = df.groupby("year")["geo_count"].sum()
 print(res)
 ```
 
-And the result from the benchmark is:
+而性能测试的结果是：
 
 ```shell
 > benchmark {python .\load.py}
@@ -198,11 +171,9 @@ And the result from the benchmark is:
 ───┴────────────────────────
 ```
 
-Not bad at all. Again, pandas managed to get it done in a fraction of the time.
+一点也不差！同样，Pandas 设法在很短的时间内完成了它。
 
-To finish the comparison, let's try Nushell dataframes. We are going to put
-all the operations in one `nu` file, to make sure we are doing similar
-operations:
+为了进行比较，让我们试试 Nushell Dataframes。我们要把所有的操作放在一个`nu`文件中，以确保我们做的是类似的操作：
 
 ```shell
 let df = (dfr open Data7602DescendingYearOrder.csv)
@@ -210,7 +181,7 @@ let res = ($df | dfr group-by year | dfr aggregate sum | dfr select geo_count)
 $res
 ```
 
-and the benchmark with dataframes is:
+当使用 Dataframes 时的性能测试结果是：
 
 ```shell
 > benchmark {source load.nu}
@@ -222,21 +193,13 @@ and the benchmark with dataframes is:
 ───┴───────────────────
 ```
 
-Luckily Nushell dataframes managed to halve the time again. Isn't that great?
+幸运的是，Nushell Dataframe 设法将时间再次减半。这不是很好吗？
 
-As you can see, Nushell's `Dataframe` commands are as fast as the most common
-tools that exist today to do data analysis. The commands that are included in
-this release have the potential to become your go-to tool for doing data
-analysis. By composing complex Nushell pipelines, you can extract information
-from data in a reliable way.
+正如你所看到的，Nushell 的`Dataframe`命令和现在最常见的做数据分析的工具一样快。这个发行版中的命令有可能成为你做数据分析的首选工具。通过组合复杂的 Nushell 管道，你可以以一种可靠的方式从数据中提取信息。
 
-## Working with Dataframes
+## 使用 DataFrames
 
-After seeing a glimpse of the things that can be done with `Dataframe`
-commands, now it is time to start testing them. To begin let's create a sample
-CSV file that will become our sample dataframe that we will be using along with
-the examples. In your favorite file editor paste the next lines to create out
-sample csv file.
+在看到了可以用`Dataframe`命令完成的事情之后，现在是时候开始测试它们了。首先，让我们创建一个样本 CSV 文件，该文件将成为我们的样本 Dataframe，并与示例一起使用。在你喜欢的编辑器中粘贴下面几行来创建样本 csv 文件：
 
 ```csv
 int_1,int_2,float_1,float_2,first,second,third,word
@@ -252,25 +215,21 @@ int_1,int_2,float_1,float_2,first,second,third,word
 0,10,0.0,9.0,c,c,b,ninth
 ```
 
-Save the file and name it however you want to, for the sake of these examples
-the file will be called `test_small.csv`.
+保存该文件并随意命名，在这些例子中，该文件将被称为`test_small.csv`。
 
-Now, to read that file as a dataframe use the `dfr open` command like
-this:
+现在，要将该文件作为 Dataframe 进行读取，请使用`dfr open`命令，如下所示：
 
 ```shell
 > let df = (dfr open test_small.csv)
 ```
 
-This should create the value `df` in memory which holds the data we just
-created.
+这应该会在内存中创建一个值`df`，用来存放我们刚刚创建的数据。
 
 ::: tip
-The command `dfrs open` can read either **csv** or **parquet**
-files.
+`dfrs open`命令可以读取 **csv** 或 **parquet** 文件。
 :::
 
-To see all the dataframes that are stored in memory you can use
+要查看存储在内存中的所有 Dataframes，你可以使用：
 
 ```shell
 > dfr list
@@ -282,11 +241,9 @@ To see all the dataframes that are stored in memory you can use
 ───┴──────┴──────┴─────────
 ```
 
-As you can see, the command shows the created dataframes together with basic
-information about them.
+正如你所看到的，该命令显示了所创建的 Dataframe 以及关于它们的基本信息。
 
-And if you want to see a preview of the loaded dataframe you can send the
-dataframe variable to the stream
+如果你想看到加载的 Dataframe 的预览，你可以将 Dataframe 变量发送到流中：
 
 ```shell
 > $df
@@ -307,18 +264,15 @@ dataframe variable to the stream
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-With the dataframe in memory we can start doing column operations with the
-`DataFrame`
+有了内存中的 DataFrame，我们就可以开始对 `DataFrame` 进行列操作。
 
 ::: tip
-If you want to see all the dataframe commands that are available you
-can use `help dfr`
+如果你想看到所有可用的 DataFrame 命令，你可以使用`help dfr`。
 :::
 
-## Basic aggregations
+## 基本聚合
 
-Let's start with basic aggregations on the dataframe. Let's sum all the columns
-that exist in `df` by using the `aggregate` command
+让我们从 DataFrame 的基本聚合开始，通过使用`aggregate`命令对`df`中存在的所有列进行求和：
 
 ```shell
 > $df | dfr aggregate sum
@@ -330,9 +284,7 @@ that exist in `df` by using the `aggregate` command
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴──────
 ```
 
-As you can see, the aggregate function computes the sum for those columns where
-a sum makes sense. If you want to filter out the text column, you can select
-the columns you want by using the `select` command
+正如你所看到的，聚合函数(`aggregate`)为那些有意义的列计算出了总和。如果你想过滤掉文本列，你可以使用`select`命令来选择你想要的列。
 
 ```shell
 $df | dfr aggregate sum | dfr select int_1 int_2 float_1 float_2
@@ -344,14 +296,13 @@ $df | dfr aggregate sum | dfr select int_1 int_2 float_1 float_2
 ───┴───────┴───────┴─────────┴─────────
 ```
 
-You can even store the result from this aggregation as you would store any
-other Nushell variable
+你甚至可以像存储任何其他 Nushell 变量一样存储这个聚合的结果：
 
 ```shell
 > let res = ($df | dfr aggregate sum | dfr select int_1 int_2 float_1 float_2)
 ```
 
-And now we have two dataframes stored in memory
+现在我们有两个 DataFrame 存储在内存中：
 
 ```shell
 > dfr list
@@ -364,18 +315,13 @@ And now we have two dataframes stored in memory
 ───┴──────┴──────┴─────────
 ```
 
-Pretty neat, isn't it?
+很整洁，不是吗？
 
-You can perform several aggregations on the dataframe in order to extract basic
-information from the dataframe and do basic data analysis on your brand new
-dataframe.
+你可以在 DataFrame 上进行若干聚合，以便从中提取基本信息，也可以对你的全新 DataFrame 进行基本数据分析。
 
-## Joining a DataFrame
+## 连接 DataFrame
 
-It is also possible to join two dataframes using a column as reference. We are
-going to join our mini dataframe with another mini dataframe. Copy these lines
-in another file and create the corresponding dataframe (for these examples we
-are going to call it `test_small_a.csv`)
+也可以用一个列作为参考来连接(`join`)两个 DataFrame。我们将把我们的迷你 DataFrame 与另一个迷你 DataFrame 连接起来。在另一个文件中复制这些行，并创建相应的 DataFrame（在以下例子中，我们将称之为`test_small_a.csv`）。
 
 ```
 int_1a,int_2,float_1,float_2,first
@@ -385,15 +331,13 @@ int_1a,int_2,float_1,float_2,first
 6,11,0.1,0.0,b
 ```
 
-We use the `dfr open` command to create the new variable
+我们使用`dfr open`命令来创建新的变量：
 
 ```shell
 > let df_a = (dfr open test_small_a.csv)
 ```
 
-Now, with the second dataframe loaded in memory we can join them using the
-column called `int_1` from the left dataframe and the column `int_1a` from the
-right dataframe
+现在，当第二个 DataFrame 加载到内存中时，我们可以使用左边 DataFrame 的`int_1`列和右边 DataFrame 的`int_1a`列来连接它们。
 
 ```shell
 > $df | dfr join $df_a -l [int_1] -r [int_1a]
@@ -409,28 +353,16 @@ right dataframe
 ```
 
 ::: tip
-In `Nu` when a command has multiple arguments that are expecting
-multiple values we use brackets `[]` to enclose those values. In the case of
-`dfr join` we can join on multiple columns as long as they have the
-same type, for example we could have done `$df | dfr join $df_a -l [int_1 int_2] -r [int_1a int_2]`
+在`Nu`中，当一个命令有多个参数，并期望得到多个值时，我们用方括号`[]`来包裹这些值。在`dfr join`的情况下，我们可以对多个列进行连接，只要它们具有相同的类型，例如我们可以这样做：`$df | dfr join $df_a -l [int_1 int_2] -r [int_1a int_2]`。
 :::
 
-By default, the join command does an inner join, meaning that it will keep the
-rows where both dataframes share the same value. You can select a left join to
-keep the missing rows from the left dataframe. You can also save this result
-in order to use it for further operations.
+默认情况下，连接命令做的是内连接，也就是说，它将保留两个 DataFrame 都有相同值的记录。你可以选择一个左联接来保留左边 DataFrame 中缺失的行。你也可以保存这个结果，以便在以后的操作中使用它。
 
-## DataFrame group-by
+## DataFrame 分组
 
-One of the most powerful operations that can be performed with a DataFrame is
-the `group-by`. This command will allow you to perform aggregation operations
-based on a grouping criteria. In Nushell, a `GroupBy` is a type of object that
-can be stored and reused for multiple aggregations. This is quite handy, since
-the creation of the grouped pairs is the most expensive operation while doing
-group-by and there is no need to repeat it if you are planning to do multiple
-operations with the same group condition.
+可以用 DataFrame 进行的最强大的操作之一是`group-by`。这个命令将允许你根据一个分组条件进行聚合操作。在 Nushell 中，`GroupBy`是一种可以被存储和重复使用的对象，可以被用于多个聚合。这是很方便的，因为在进行分组时，创建分组对是最昂贵的运算，如果你打算用同一个分组条件进行多个操作，就没有必要重复该运算。
 
-To create a `GroupBy` object you only need to use the `group-by` command
+要创建一个`GroupBy`对象，你只需要使用`group-by`命令：
 
 ```shell
 > let group = ($df | dfr group-by first)
@@ -443,9 +375,7 @@ To create a `GroupBy` object you only need to use the `group-by` command
 ───┴──────────┴───────
 ```
 
-When printing the `GroupBy` object we can see the columns that are used as
-criteria to group the dataframe. Using the `GroupBy` we can aggregate the
-dataframe using multiple operations
+当打印 `GroupBy` 对象时，我们可以看到被用作条件的列来对 DataFrame 进行分组。使用`GroupBy`，我们可以使用多种操作对 DataFrame 进行聚合。
 
 ```shell
 $group | dfr aggregate sum
@@ -459,8 +389,7 @@ $group | dfr aggregate sum
 ───┴───────┴───────────┴───────────┴─────────────┴─────────────
 ```
 
-And using the same `GroupBy` you can perform now another operation on the
-whole dataframe, like `min` in this case
+使用同样的 `GroupBy`，你可以对整个 DataFrame 进行另一个操作，比如本例中的`min`：
 
 ```shell
 $group | aggregate min
@@ -474,9 +403,7 @@ $group | aggregate min
 ───┴───────┴───────────┴───────────┴─────────────┴─────────────
 ```
 
-The created `GroupBy` object is so handy that it can even be used as a base for
-pivoting a table. As an example, let's use the column called `second` as the
-pivot column and the column `float_1` as the value column
+创建的`GroupBy`对象非常方便，它甚至可以被用作表格透视的基础。作为一个例子，让我们使用名为`second`的列作为透视列，而`float_1`列作为值列：
 
 ```shell
 > $group | dfr pivot second float_1 sum
@@ -491,22 +418,14 @@ pivot column and the column `float_1` as the value column
 ```
 
 ::: tip
-a pivot operation is a way to aggregate data based on two columns. In
-the previous example, the result of the pivot command produced a table that
-represents the sum of all the values in the column `float_1` that are shared
-between columns `first` (now the rows) and `second` (now the columns). So,
-the value of `1.5` shown in row `b` and column `a` is the sum of all the
-floats where the column `first` is `b` and column `second` is `a`
+透视操作是一种基于两列数据进行聚合的方法。在前面的例子中，透视命令的结果产生了一个表格，代表了列`float_1`中所有数值的总和，这些数值在列`first`（现在是行）和`second`（现在是列）中共享。因此，显示在第`b`行和第`a`列的值`1.5`是所有浮点的总和，其中第`first`列是`b`，第`second`列是`a`。
 :::
 
-As you can see, the `GroupBy` object is a very powerful variable and it is
-worth keeping in memory while you explore your dataset.
+正如你所看到的，`GroupBy`对象是一个非常强大的变量，在你操作数据集时，它值得被保留在内存中。
 
-## Creating Dataframes
+## 创建 DataFrames
 
-It is also possible to construct dataframes from basic Nushell primitives, such
-as integers, decimals, or strings. Let's create a small dataframe using the
-command `to-df`.
+也可以从基本的 Nushell 基础类型，如整数、小数或字符串，来构建 DataFrames。让我们使用`to-df`命令来创建一个小的 Dataframe：
 
 ```shell
 > let a = ([[a b]; [1 2] [3 4] [5 6]] | dfr to-df)
@@ -522,12 +441,10 @@ command `to-df`.
 ```
 
 ::: tip
-For the time being, not all of Nushell primitives can be converted into
-a dataframe. This will change in the future, as the dataframe feature matures
+目前，并不是所有的 Nushell 基本类型都可以转换为 Dataframe。随着 Dataframe 功能的成熟，这一点将在未来发生变化。
 :::
 
-We can append columns to a dataframe in order to create a new variable. As an
-example, let's append two columns to our mini dataframe `$a`
+我们可以在一个 Dataframe 中添加列，以创建一个新的变量。作为一个例子，让我们在迷你 Dataframe `$a` 上添加两列：
 
 ```shell
 > let a2 = ($a | dfr with-column $a.a --name a2 | dfr with-column $a.a --name a3)
@@ -541,9 +458,7 @@ example, let's append two columns to our mini dataframe `$a`
 ───┴───┴───┴────┴────
 ```
 
-Nushell's powerful piping syntax allows us to create new dataframes by
-taking data from other dataframes and appending it to them. Now, if you list your
-dataframes you will see in total four dataframes
+Nushell 强大的管道语法允许我们通过从其他 Dataframe 中获取数据并将其附加到这些 Dataframe 中来创建新的 Dataframe。现在，如果你列出你的 Dataframe，你会看到总共有四个：
 
 ```shell
 > dfr list
@@ -558,27 +473,13 @@ dataframes you will see in total four dataframes
 ───┴───────┴──────┴─────────
 ```
 
-One thing that is important to mention is how the memory is being optimized
-while working with dataframes, and this is thanks to **Apache Arrow** and
-**Polars**. In a very simple representation, each column in a DataFrame is an
-Arrow Array, which is using several memory specifications in order to maintain
-the data as packed as possible (check [Arrow columnar
-format](https://arrow.apache.org/docs/format/Columnar.html)). The other
-optimization trick is the fact that whenever possible, the columns from the
-dataframes are shared between dataframes, avoiding memory duplication for the
-same data. This means that dataframes `$a` and `$a2` are sharing the same two
-columns we created using the `to-df` command. For this reason, it isn't
-possible to change the value of a column in a dataframe. However, you can
-create new columns based on data from other columns or dataframes.
+值得一提的是，在使用 Dataframe 时，内存是如何被优化的呢？这要感谢 **Apache Arrow** 和 **Polars**。在一个非常简单的表示中，DataFrame 中的每一列都是一个 Arrow 数组，它使用了几种内存规格，以塞满尽可能多的数据（查看 [Arrow 列格式](https://arrow.apache.org/docs/format/Columnar.html) ）；另一个优化技巧是，只要有可能，Dataframe 中的列就会在多个 Dataframe 之间共享，避免了相同数据的内存重复占用。这意味着 Dataframe `$a`和`$a2`共享我们用`to-df`命令创建的两个列。由于这个原因，不能改变 Dataframe 中某一列的值。然而，你可以根据其他列或 Dataframe 的数据创建新的列。
 
-## Working with Series
+## 使用系列
 
-A `Series` is the building block of a `DataFrame`. Each Series represents a
-column with the same data type, and we can create multiple Series of different
-types, such as float, int or string.
+系列(`Series`) 是 `DataFrame` 的基本组成部分。每个系列代表一个具有相同数据类型的列，我们可以创建多个不同类型的系列，如浮点、整型或字符串。
 
-Let's start our exploration with Series by creating one using the `to-df`
-command:
+让我们通过使用`to-df`命令创建一个系列，来开始我们对系列的探索：
 
 ```shell
 > let new = ([9 8 4] | dfr to-df)
@@ -593,12 +494,9 @@ command:
 ───┴───
 ```
 
-We have created a new series from a list of integers (we could have done the
-same using floats or strings)
+我们从一个整数列表创建了一个新的系列（我们也可以用浮点数或字符串做同样的事情）。
 
-Series have their own basic operations defined, and they can be used to create
-other Series. Let's create a new Series by doing some arithmetic on the
-previously created column.
+系列已经定义了自己的基本操作，它们可以用来创建其他系列。让我们通过对先前创建的列进行一些运算来创建一个新的系列：
 
 ```shell
 > let new_2 = ($new * 3 + 10)
@@ -613,15 +511,13 @@ previously created column.
 ───┴────
 ```
 
-Now we have a new Series that was constructed by doing basic operations on the
-previous variable.
+现在我们有一个新的系列，它是通过对前一个变量进行基本操作而构建的。
 
 ::: tip
-If you want to see how many variables you have stored in memory you can
-use `$nu.scope.vars`
+如果你想看看你在内存中存储了多少变量，你可以使用`$nu.scope.vars`。
 :::
 
-Let's rename our previous Series so it has a memorable name
+让我们重新命名我们之前的系列为 `memorable`
 
 ```shell
 > let new_2 = ($new_2 | dfr rename memorable)
@@ -636,8 +532,7 @@ Let's rename our previous Series so it has a memorable name
 ───┴───────────
 ```
 
-We can also do basic operations with two Series as long as they have the same
-data type
+只要两个系列的数据类型相同，我们也可以对它们进行基本操作：
 
 ```shell
 > $new - $new_2
@@ -651,7 +546,7 @@ data type
 ───┴──────────
 ```
 
-And we can add them to previously defined dataframes
+而且我们可以将它们添加到先前定义的 Dataframes 中：
 
 ```shell
 > let new_df = ($a | dfr with-column $new --name new_col)
@@ -666,8 +561,7 @@ And we can add them to previously defined dataframes
 ───┴───┴───┴─────────
 ```
 
-The Series stored in a Dataframe can also be used directly, for example,
-we can multiply columns `a` and `b` to create a new Series
+存储在 DataFrame 中的系列也可以直接使用，例如，我们可以将列`a`和`b`相乘来创建一个新系列：
 
 ```shell
 > $new_df.a * $new_df.b
@@ -681,7 +575,7 @@ we can multiply columns `a` and `b` to create a new Series
 ───┴─────────
 ```
 
-and we can start piping things in order to create new columns and dataframes
+我们可以开始使用管道，以创建新的列和 Dataframes：
 
 ```shell
 > let $new_df = ($new_df | dfr with-column ($new_df.a * $new_df.b / $new_df.new_col) --name my_sum)
@@ -696,13 +590,11 @@ and we can start piping things in order to create new columns and dataframes
 ───┴───┴───┴─────────┴────────
 ```
 
-Nushell's piping system can help you create very interesting workflows.
+Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 
-## Series and masks
+## 系列和掩码
 
-Series have another key use in when working with DataFrames, and it is the fact
-that we can build boolean masks out of them. Let's start by creating a simple
-mask using the equality operator
+在使用 DataFrames 时，系列还有另一个关键用途，那就是我们可以用它们来建立布尔掩码（Mask）。让我们先用等于运算符创建一个简单的掩码：
 
 ```shell
 > let mask = ($new == 8)
@@ -717,7 +609,7 @@ mask using the equality operator
 ───┴─────────
 ```
 
-and with this mask we can now filter a dataframe, like this
+有了这个掩码，我们现在可以过滤一个 DataFrame，像这样：
 
 ```shell
 > $new_df | dfr filter-with $mask
@@ -729,9 +621,9 @@ and with this mask we can now filter a dataframe, like this
 ───┴───┴───┴─────────┴────────
 ```
 
-Now we have a new dataframe with only the values where the mask was true.
+现在我们有一个新的 DataFrame，其中只有掩码为真的值。
 
-The masks can also be created from Nushell lists, for example:
+掩码也可以从 Nushell 列表中创建，比如：
 
 ```shell
 > let mask1 = ([true true false] | dfr to-df mask)
@@ -745,7 +637,7 @@ The masks can also be created from Nushell lists, for example:
 ───┴───┴───┴─────────┴────────
 ```
 
-To create complex masks, we have the `AND`
+为了创建复杂的掩码，我们可以使用`AND`：
 
 ```shell
 > $mask && $mask1
@@ -759,7 +651,7 @@ To create complex masks, we have the `AND`
 ───┴──────────────────
 ```
 
-and `OR` operations
+或者 `OR` 操作：
 
 ```shell
 > $mask || $mask1
@@ -773,8 +665,7 @@ and `OR` operations
 ───┴─────────────────
 ```
 
-We can also create a mask by checking if some values exist in other Series.
-Using the first dataframe that we created we can do something like this
+我们也可以通过检查某些值是否存在于其他系列来创建一个掩码。使用我们创建的第一个 Dataframe，我们可以这样做：
 
 ```shell
 > let mask3 = ($df.first | dfr is-in ([b c] | dfr to-df))
@@ -795,7 +686,7 @@ Using the first dataframe that we created we can do something like this
 ───┴───────
 ```
 
-and this new mask can be used to filter the dataframe
+而这个新的掩码可以用来过滤 Dataframe
 
 ```shell
 > $df | dfr filter-with $mask3
@@ -813,9 +704,7 @@ and this new mask can be used to filter the dataframe
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴─────────
 ```
 
-Another operation that can be done with masks is setting or replacing a value
-from a series. For example, we can change the value in the column `first` where
-the value is equal to `a`
+另一个可以用掩码进行的操作是设置或替换一个系列的值。例如，我们可以改变列`first`中的值，如果该值包含`a`：
 
 ```shell
 > $df.first | dfr set new --mask ($df.first =~ a)
@@ -836,12 +725,9 @@ the value is equal to `a`
 ───┴────────
 ```
 
-## Series as indices
+## 系列作为索引
 
-Series can be also used as a way of filtering a dataframe by using them as a
-list of indices. For example, let's say that we want to get rows 1, 4, and 6
-from our original dataframe. With that in mind, we can use the next command to
-extract that information
+系列也可以作为过滤 DataFrame 的一种方式，将它们作为索引列表使用。例如，假设我们想从原始 DataFrame 中获取第1、4和6行。针对这一点，我们可以使用以下命令来提取这些信息：
 
 ```shell
 > let indices = ([1 4 6] | dfr to-df)
@@ -856,9 +742,8 @@ extract that information
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-The command `take` is very handy, especially if we mix it with other commands.
-Let's say that we want to extract all rows for the first duplicated element for
-column `first`. In order to do that, we can use the command `dfr arg-unique` as shown in the next example
+命令`take`非常方便，特别是当我们把它与其他命令混合使用时。
+比方说，我们想提取列`first`的唯一元素的所有行。为了做到这一点，我们可以使用`dfr arg-unique`命令，如下例所示：
 
 ```shell
 > let indices = ($df.first | dfr arg-unique)
@@ -873,12 +758,10 @@ column `first`. In order to do that, we can use the command `dfr arg-unique` as 
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-Or what if we want to create a new sorted dataframe using a column in specific.
-We can use the `dfr arg-sort` to accomplish that. In the next example we
-can sort the dataframe by the column `word`
+或者，如果我们想使用一个特定的列来创建一个新的有序 DataFrame，该怎么办？我们可以使用`dfr arg-sort`来完成这个任务。在下一个例子中，我们可以通过`word`列对 DataFrame 进行排序：
 
 ::: tip
-The same result could be accomplished using the command `sort`
+同样的结果也可以用`sort`命令来完成。
 :::
 
 ```shell
@@ -901,8 +784,7 @@ The same result could be accomplished using the command `sort`
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-And finally, we can create new Series by setting a new value in the marked
-indices. Have a look at the next command
+最后，我们可以通过在标记的索引中设置一个新值来创建新的系列。请看下一条命令：
 
 ```shell
 > let indices = ([0 2] | dfr to-df);
@@ -924,16 +806,11 @@ indices. Have a look at the next command
 ───┴───────
 ```
 
-## Unique values
+## 唯一值
 
-Another operation that can be done with `Series` is to search for unique values
-in a list or column. Lets use again the first dataframe we created to test
-these operations.
+另一个可以用`Series`完成的操作是在一个列表或列中搜索唯一值。让我们再次使用我们创建的第一个 DataFrame 来测试这些操作。
 
-The first and most common operation that we have is `value_counts`. This
-command calculates a count of the unique values that exist in a Series. For
-example, we can use it to count how many occurrences we have in the column
-`first`
+第一个也是最常见的操作是`value_counts`。这个命令计算出一个系列中存在的唯一值的数量。例如，我们可以用它来计算 `first` 列各值的出现次数：
 
 ```shell
 > $df.first | dfr value-counts
@@ -947,11 +824,9 @@ example, we can use it to count how many occurrences we have in the column
 ───┴───────┴────────
 ```
 
-As expected, the command returns a new dataframe that can be used to do more
-queries.
+正如预期的那样，该命令返回一个新的 DataFrame，可以用来做更多的查询。
 
-Continuing with our exploration of `Series`, the next thing that we can do is
-to only get the unique unique values from a series, like this
+继续我们对 `Series` 的探索，我们要做的下一件事是只从一个系列中获得唯一值，像这样：
 
 ```shell
 > $df.first | dfr unique
@@ -965,9 +840,7 @@ to only get the unique unique values from a series, like this
 ───┴───────
 ```
 
-Or we can get a mask that we can use to filter out the rows where data is
-unique or duplicated. For example, we can select the rows for unique values
-in column `word`
+或者我们可以得到一个掩码，用来过滤出数据唯一或重复的行。例如，我们可以选择列 `word` 中含唯一值的行：
 
 ```shell
 > $df | dfr filter-with ($df.word | dfr is-unique)
@@ -980,7 +853,7 @@ in column `word`
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────
 ```
 
-Or all the duplicated ones
+或所有含重复值的行：
 
 ```shell
 > $df | dfr filter-with ($df.word | dfr is-duplicated)
@@ -999,80 +872,68 @@ Or all the duplicated ones
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-## Dataframe commands
+## Dataframe 命令
 
-So far we have seen quite a few operations that can be done using `DataFrame`s
-commands. However, the commands we have used so far are not all the commands
-available to work with data and be assured that there will be more as the
-feature becomes more stable.
+到目前为止，我们已经看到了很多可以使用 `DataFrame` 相关命令的操作。然而，到目前为止，我们所使用的命令并不包括所有可用来处理数据的命令，请放心，随着该功能的稳定，还会有更多的命令。
 
-The next list shows the available dataframe commands with their descriptions, and
-whenever possible, their analogous Nushell command.
+下表列出了可用的`DataFrame`命令及其描述，并尽可能显示其类似的 Nushell 命令。
 
-| Command Name    | Applies To                  | Description                                                                | Nushell Equivalent            |
-| --------------- | --------------------------- | -------------------------------------------------------------------------- | ----------------------------- |
-| aggregate       | DataFrame, GroupBy, Series  | Performs an aggregation operation on a dataframe, groupby or series object | math                          |
-| all-false       | Series                      | Returns true if all values are false                                       |                               |
-| all-true        | Series                      | Returns true if all values are true                                        | all?                          |
-| arg-max         | Series                      | Return index for max value in series                                       |                               |
-| arg-min         | Series                      | Return index for min value in series                                       |                               |
-| arg-sort        | Series                      | Returns indexes for a sorted series                                        |                               |
-| arg-true        | Series                      | Returns indexes where values are true                                      |                               |
-| arg-unique      | Series                      | Returns indexes for unique values                                          |                               |
-| column          | DataFrame                   | Returns the selected column as Series                                      | get                           |
-| count-null      | Series                      | Counts null values                                                         |                               |
-| count-unique    | Series                      | Counts unique value                                                        |                               |
-| drop            | DataFrame                   | Creates a new dataframe by dropping the selected columns                   | drop                          |
-| drop-duplicates | DataFrame                   | Drops duplicate values in dataframe                                        |                               |
-| drop-nulls      | DataFrame, Series           | Drops null values in dataframe                                             |                               |
-| dtypes          | DataFrame                   | Show dataframe data types                                                  |                               |
-| filter-with     | DataFrame                   | Filters dataframe using a mask as reference                                |                               |
-| first           | DataFrame                   | Creates new dataframe with first rows                                      | first                         |
-| get             | DataFrame                   | Creates dataframe with the selected columns                                | get                           |
-| group-by        | DataFrame                   | Creates a groupby object that can be used for other aggregations           | group-by                      |
-| is-duplicated   | Series                      | Creates mask indicating duplicated values                                  |                               |
-| is-in           | Series                      | Checks if elements from a series are contained in right series             | in                            |
-| is-not-null     | Series                      | Creates mask where value is not null                                       |                               |
-| is-null         | Series                      | Creates mask where value is null                                           | `<column_name> == $nothing`   |
-| is-unique       | Series                      | Creates mask indicating unique values                                      |                               |
-| join            | DataFrame                   | Joins a dataframe using columns as reference                               |                               |
-| last            | DataFrame                   | Creates new dataframe with last rows                                       | last                          |
-| list            |                             | Lists stored dataframes                                                    |                               |
-| melt            | DataFrame                   | Unpivot a DataFrame from wide to long format                               |                               |
-| not             | Series Inverts boolean mask |                                                                            |
-| open            |                             | Loads dataframe form csv file                                              | open                          |
-| pivot           | GroupBy                     | Performs a pivot operation on a groupby object                             | pivot                         |
-| rename          | Series                      | Renames a series                                                           | rename                        |
-| sample          | DataFrame                   | Create sample dataframe                                                    |                               |
-| select          | DataFrame                   | Creates a new dataframe with the selected columns                          | select                        |
-| set             | Series                      | Sets value where given mask is true                                        |                               |
-| set-with-idx    | Series                      | Sets value in the given index                                              |                               |
-| shift           | Series                      | Shifts the values by a given period                                        |                               |
-| show            | DataFrame                   | Converts a section of the dataframe to a Table or List value               |                               |
-| slice           | DataFrame                   | Creates new dataframe from a slice of rows                                 |                               |
-| sort            | DataFrame, Series           | Creates new sorted dataframe or series                                     | sort                          |
-| take            | DataFrame, Series           | Creates new dataframe using the given indices                              |                               |
-| to-csv          | DataFrame                   | Saves dataframe to csv file                                                | to csv                        |
-| to-df           |                             | Converts a pipelined Table or List into Dataframe                          |                               |
-| to-dummies      | DataFrame                   | Creates a new dataframe with dummy variables                               |                               |
-| to-parquet      | DataFrame                   | Saves dataframe to parquet file                                            |                               |
-| unique          | Series                      | Returns unique values from a series                                        | uniq                          |
-| value-counts    | Series                      | Returns a dataframe with the counts for unique values in series            |                               |
-| where           | DataFrame                   | Filter dataframe to match the condition                                    | where                         |
-| with-column     | DataFrame                   | Adds a series to the dataframe                                             | `insert <column_name> <value> | upsert <column_name> { <new_value> }` |
+| 命令名          | 应用于                      | 描述                                               | Nushell 类似命令              |
+| --------------- | --------------------------- | -------------------------------------------------- | ----------------------------- |
+| aggregate       | DataFrame, GroupBy, Series  | 在一个 Dataframe、GroupBy 或系列对象上执行聚合操作 | math                          |
+| all-false       | Series                      | 如果所有的值都是假的，则返回真                     |                               |
+| all-true        | Series                      | 如果所有的值都是真的，则返回真                     | all?                          |
+| arg-max         | Series                      | 返回系列中最大值的索引                             |                               |
+| arg-min         | Series                      | 返回系列中最小值的索引                             |                               |
+| arg-sort        | Series                      | 返回排序后的系列的索引                             |                               |
+| arg-true        | Series                      | 返回值为真的索引                                   |                               |
+| arg-unique      | Series                      | 返回唯一值的索引                                   |                               |
+| column          | DataFrame                   | 将选定的列作为系列返回                             | get                           |
+| count-null      | Series                      | 计算空值                                           |                               |
+| count-unique    | Series                      | 计算唯一值                                         |                               |
+| drop            | DataFrame                   | 通过删除选定的列来创建一个新的 Dataframe           | drop                          |
+| drop-duplicates | DataFrame                   | 删除 Dataframe 中的重复值                          |                               |
+| drop-nulls      | DataFrame, Series           | 丢弃 Dataframe 中的空值                            |                               |
+| dtypes          | DataFrame                   | 显示 DataFrame 的数据类型                          |                               |
+| filter-with     | DataFrame                   | 使用 Mask 作为参考来过滤 DataFrame                 |                               |
+| first           | DataFrame                   | 用第一行创建新的 DataFrame                         | first                         |
+| get             | DataFrame                   | 用选定的列创建 DataFrame                           | get                           |
+| group-by        | DataFrame                   | 创建一个 GroupBy 对象，可用于其他聚合              | group-by                      |
+| is-duplicated   | Series                      | 创建表示重复值的 Mask                              |                               |
+| is-in           | Series                      | 检查一个系列的元素是否包含在右边的系列中           | in                            |
+| is-not-null     | Series                      | 创建值为非空的 Mask                                |                               |
+| is-null         | Series                      | 创建值为空的 Mask                                  | `<column_name> == $nothing`   |
+| is-unique       | Series                      | 创建表示唯一值的 Mask                              |                               |
+| join            | DataFrame                   | 使用列作为参考来连接一个 DataFrame                 |                               |
+| last            | DataFrame                   | 用最后几行创建新的 DataFrame                       | last                          |
+| list            |                             | 列出已存储的 DataFrame                             |                               |
+| melt            | DataFrame                   | 将一个 DataFrame 从宽格式转为长格式                |                               |
+| not             | Series Inverts boolean mask |                                                    |
+| open            |                             | 从 csv 文件中加载 DataFrame                        | open                          |
+| pivot           | GroupBy                     | 在 GroupBy 对象上执行透视操作                      | pivot                         |
+| rename          | Series                      | 重命名一个系列                                     | rename                        |
+| sample          | DataFrame                   | 创建样本 DataFrame                                 |                               |
+| select          | DataFrame                   | 用选定的列创建一个新的 DataFrame                   | select                        |
+| set             | Series                      | 在给定的 Mask 为真时设置值                         |                               |
+| set-with-idx    | Series                      | 设置给定索引中的值                                 |                               |
+| shift           | Series                      | 将值移到一个给定的时段                             |                               |
+| show            | DataFrame                   | 将 DataFrame 的一个部分转换为一个表或列表值        |                               |
+| slice           | DataFrame                   | 从行的切片中创建新的 DataFrame                     |                               |
+| sort            | DataFrame, Series           | 创建新的排序 DataFrame 或系列                      | sort                          |
+| take            | DataFrame, Series           | 使用给定的索引创建新的 DataFrame                   |                               |
+| to-csv          | DataFrame                   | 将 DataFrame 保存为 csv 文件                       | to csv                        |
+| to-df           |                             | 将一个管道里的表或列表转换为 DataFrame             |                               |
+| to-dummies      | DataFrame                   | 创建一个带有假值的新 DataFrame                     |                               |
+| to-parquet      | DataFrame                   | 将 DataFrame 保存到 parquet 文件中                 |                               |
+| unique          | Series                      | 返回一个系列中的唯一值                             | uniq                          |
+| value-counts    | Series                      | 返回一个带有系列中唯一值的计数的 DataFrame         |                               |
+| where           | DataFrame                   | 过滤 DataFrame 以符合条件                          | where                         |
+| with-column     | DataFrame                   | 在 DataFrame 中添加一个系列                        | `insert <column_name> <value> | upsert <column_name> { <new_value> }` |
 
-## Future of Dataframes
+## Dataframes 的未来
 
-We hope that by the end of this page you have a solid grasp of how to use the
-dataframe commands. As you can see they offer powerful operations that can
-help you process data faster and natively.
+我们希望在本页结束时，你已经牢固掌握了如何使用 Dataframe 相关命令。正如你所看到的，它们提供了强大的操作，可以帮助你更快更原生地处理数据。
 
-However, the future of these dataframes is still very experimental. New
-commands and tools that take advantage of these commands will be added as they
-mature. For example, the next step for dataframes is the introduction of Lazy
-Dataframes. These will allow you to define complex data operations that will be
-executed until you decide to "finish" the pipe. This will give Nushell the
-chance to select the optimal plan to query the data you would be asking for.
+然而，Dataframes 的未来仍然是非常实验性的，随着这些命令的成熟，新的命令和利用这些命令的工具将被加入。例如，Dataframes 的下一步是引入惰性 Dataframes，这将允许你定义复杂的数据操作，这些操作将在你决定 "**完成**" 这个管道时才被执行。这将使 Nushell 有机会选择最佳计划来查询你所要求的数据。
 
-Keep visiting this book in order to check the new things happening to
-dataframes and how they can help you process data faster and efficiently.
+请继续访问本书，以查看 Dataframes 的最新情况，以及它们如何帮助你更快更有效地处理数据。
