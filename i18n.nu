@@ -128,6 +128,10 @@ def main [
     } else if $task == 'update' {
         update-i18n-status
     } else if $task == 'outdated' {
+        if ($lng | empty?) {
+            $'(ansi r)A locale code required, available locales: ($locales), Please try again!(ansi reset)(char nl)'
+            exit --now
+        }
         let available = ($lng | str downcase) in $locales
         if (not $available) {
             $'(ansi r)Unsupported locale, available locales: ($locales), Please try again!(ansi reset)(char nl)'
