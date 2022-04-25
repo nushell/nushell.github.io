@@ -186,7 +186,7 @@ We can use the [`merge`](commands/merge.md) command to merge two (or more) table
 
 ```
 > let $first = [[a b]; [1 2]]
-> let $second = [[a b]; [3 4]]
+> let $second = [[c d]; [3 4]]
 > $first | merge {$second}
 ───┬───┬───┬───┬───
  # │ a │ b │ c │ d
