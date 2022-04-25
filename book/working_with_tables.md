@@ -180,6 +180,48 @@ We can concatenate tables with identical column names using [`append`](commands/
 ───┴───┴───
 ```
 
+### Merging Tables
+
+We can use the [`merge`](commands/merge.md) command to merge two (or more) tables together
+
+```
+> let $first = [[a b]; [1 2]]
+> let $second = [[a b]; [3 4]]
+> $first | merge {$second}
+───┬───┬───┬───┬───
+ # │ a │ b │ c │ d
+───┼───┼───┼───┼───
+ 0 │ 1 │ 2 │ 3 │ 4
+───┴───┴───┴───┴───
+```
+
+Let's add a third table:
+
+```
+> let $third = [[e f]; [5 6]]
+```
+We could join all three tables together like this:
+
+```
+> $first | merge {$second} | merge {$third}
+───┬───┬───┬───┬───┬───┬───
+ # │ a │ b │ c │ d │ e │ f
+───┼───┼───┼───┼───┼───┼───
+ 0 │ 1 │ 2 │ 3 │ 4 │ 5 │ 6
+───┴───┴───┴───┴───┴───┴───
+```
+Or we could use the [`reduce`](commands/reduce.md) command to dynamically merge all tables:
+
+```
+> [$first $second $third] | reduce {|it, acc| $acc|merge {$it}}
+───┬───┬───┬───┬───┬───┬───
+ # │ a │ b │ c │ d │ e │ f
+───┼───┼───┼───┼───┼───┼───
+ 0 │ 1 │ 2 │ 3 │ 4 │ 5 │ 6
+───┴───┴───┴───┴───┴───┴───
+```
+
+
 ### Adding a new column
 
 We can use the [`insert`](commands/insert.md) command to add a new column to the table. Let's look at an example:
