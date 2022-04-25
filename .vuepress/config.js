@@ -15,11 +15,6 @@ module.exports = {
       title: 'Nushell',
       description: 'Eine neue Art von Shell.',
     },
-    '/tr/': {
-      lang: 'tr',
-      title: 'Nushell',
-      description: 'A new type of shell.',
-    },
     '/es/': {
       lang: 'es',
       title: 'Nushell',
@@ -34,6 +29,11 @@ module.exports = {
       lang: 'pt-BR',
       title: 'Nushell',
       description: 'Um novo tipo de shell.',
+    },
+    '/tr/': {
+      lang: 'tr',
+      title: 'Nushell',
+      description: 'A new type of shell.',
     },
   },
   head: [
