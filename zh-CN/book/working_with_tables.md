@@ -166,12 +166,12 @@
 
 ### 拼接表
 
-我们可以使用[`echo`](/book/commands/echo.md)将列名相同的表拼接起来：
+我们可以使用[`append`](/book/commands/append.md)将列名相同的表拼接起来：
 
 ```
 > let $first = [[a b]; [1 2]]
 > let $second = [[a b]; [3 4]]
-> echo $first $second
+> $first | append $second
 ───┬───┬───
  # │ a │ b
 ───┼───┼───

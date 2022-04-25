@@ -92,6 +92,12 @@ def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
 
-## 命令提示配置
+## `PATH` 配置
 
-第三方提示现在有了自己的 [Nushell 书中的章节](3rdpartyprompts.md)。
+要在 [PATH 变量](<https://en.wikipedia.org/wiki/PATH_(variable)>) 中添加一个路径，你可以在`env.nu`中使用 [`let-env`](/book/commands/let-env.html) 和 [`append`](/book/commands/append.html) 完成，如下：
+
+```shell
+let-env PATH = ($env.PATH | append '/some/path')
+```
+
+这将把`/some/path`追加到`PATH`的末尾；你也可以使用 [`prepend`](/book/commands/prepend.html) 将该路径添加到`PATH`的开头。
