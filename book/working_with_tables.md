@@ -187,7 +187,7 @@ We can use the [`merge`](commands/merge.md) command to merge two (or more) table
 ```
 > let $first = [[a b]; [1 2]]
 > let $second = [[c d]; [3 4]]
-> $first | merge {$second}
+> $first | merge { $second }
 ───┬───┬───┬───┬───
  # │ a │ b │ c │ d
 ───┼───┼───┼───┼───
@@ -203,7 +203,7 @@ Let's add a third table:
 We could join all three tables together like this:
 
 ```
-> $first | merge {$second} | merge {$third}
+> $first | merge { $second } | merge { $third }
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───
@@ -213,7 +213,7 @@ We could join all three tables together like this:
 Or we could use the [`reduce`](commands/reduce.md) command to dynamically merge all tables:
 
 ```
-> [$first $second $third] | reduce {|it, acc| $acc|merge {$it}}
+> [$first $second $third] | reduce {|it, acc| $acc|merge { $it }}
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───
