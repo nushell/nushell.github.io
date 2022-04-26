@@ -25,7 +25,7 @@ let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `mkdir -p <path>`                    | `mkdir <path>`                                   | 创建给定的路径，如果父目录不存在则自动创建 |
 | `touch test.txt`                     | `touch test.txt`                                 | 新建文件                                   |
 | `> <path>`                           | `| save --raw <path>`                            | 保存字符串到给定文件                       |
-| `>> <path>`                          | `<not yet possible>`                             | 追加字符串到给定文件                       |
+| `>> <path>`                          | `| save --raw --append <path>`                   | 追加字符串到给定文件                       |
 | `cat <path>`                         | `open --raw <path>`                              | 显示给定文件的内容                         |
 |                                      | `open <path>`                                    | 将文件作为结构化数据读取                   |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                             | 移动文件到新的位置                         |
