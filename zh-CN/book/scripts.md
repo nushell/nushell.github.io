@@ -23,7 +23,7 @@ def greet [name] {
 greet "world"
 ```
 
-脚本文件包含了自定义命令的定义以及主脚本(`main`)本身，它将在自定义命令定义后运行。
+脚本文件包含了自定义命令的定义以及主脚本本身，它将在自定义命令定义后运行。
 
 在上面的例子中，首先`greet`是由 Nushell 解释器定义的，这使得我们之后可以调用这个定义，我们可以把上面的内容写成：
 
@@ -73,7 +73,7 @@ def main [x: int] {
 
 ## Shebangs (`!#`)
 
-在 Linux 和 macOS 上，你可以选择使用[Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>)来告诉操作系统一个文件应该被 `Nu` 解释。例如，在一个名为 `myscript` 的文件中包含以下内容：
+在 Linux 和 macOS 上，你可以选择使用 [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>)来告诉操作系统一个文件应该被 `Nu` 解释。例如，在一个名为 `myscript` 的文件中包含以下内容：
 
 ```bash
 #!/usr/bin/env nu

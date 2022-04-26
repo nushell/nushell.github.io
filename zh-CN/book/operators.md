@@ -40,7 +40,7 @@ Nushell 支持以下常见的数学、逻辑和字符串操作的运算符：
 
 ## 正则表达式 / 字符串包含运算符
 
-`=~`和`!~`运算符提供了一种更方便的方法来评估[正则表达式](https://cheatography.com/davechild/cheat-sheets/regular-expressions/)。你不需要知道正则表达式就可以使用它们 —— 它们也是检查一个字符串是否包含另一个的简单方法：
+`=~`和`!~`运算符提供了一种更方便的方法来评估 [正则表达式](https://cheatography.com/davechild/cheat-sheets/regular-expressions/)。你不需要知道正则表达式就可以使用它们 —— 它们也是检查一个字符串是否包含另一个的简单方法：
 
 - `string =~ pattern` 如果 `string` 包含 `pattern` 的匹配返回 **true**, 反之返回 **false**；
 - `string !~ pattern` 如果 `string` 包含 `pattern` 的匹配返回 **false**, 反之返回 **true**；

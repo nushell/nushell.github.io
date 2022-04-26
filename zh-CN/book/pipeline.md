@@ -10,9 +10,9 @@ Nu 的核心设计之一是管道，这个设计思想可以追溯到几十年�
 > open "Cargo.toml" | inc package.version --minor | save "Cargo_new.toml"
 ```
 
-第一条命令：`open "Cargo.toml"` 是一个输入（有时也称为 "源"或 "生产者"），它创建或加载数据，并将其送入管道。管道待处理的值正是来自于此输入。像[`ls`](/book/commands/ls.md)这样的命令也是输入，因为它们从文件系统中获取数据，并通过管道发送以便能被后续使用。
+第一条命令：`open "Cargo.toml"` 是一个输入（有时也称为 "源" 或 "生产者"），它创建或加载数据，并将其送入管道。管道待处理的值正是来自于此输入。像[`ls`](/book/commands/ls.md)这样的命令也是输入，因为它们从文件系统中获取数据，并通过管道发送以便能被后续使用。
 
-第二个命令：`inc package.version --minor` 是一个过滤器。过滤器获取所给的数据并对其进行处理。它们可能会修改它（如我们例子中的[`inc`](/book/commands/inc.md)命令），或者在数值通过时对其做其他操作，如记录。
+第二个命令：`inc package.version --minor` 是一个过滤器。过滤器获取输入的数据并对其进行处理。它们可能会修改它（如我们例子中的[`inc`](/book/commands/inc.md)命令），或者在值通过时对其做其他操作，如记录。
 
 最后一条命令：`save "Cargo_new.toml"` 是一个输出（有时称为 "接收者"）。输出从管道中获取输入，并对其进行一些最终操作。在我们的例子中，我们在最后一步把通过管道的内容保存到一个文件中。还有一些其他类型的输出命令可以获取数值并供用户查看。
 
@@ -44,7 +44,7 @@ Nu 命令之间使用 Nu 的数据类型进行通信（见[数据类型](types_o
 
 `external_command_1 | external_command_2`
 
-Nu 在两个外部命令之间以与其他 shell 相同的方式处理数据管道，比如 Bash。`external_command_1`的`stdout`与`external_command_2`的`stdin`相连，这让数据在两个命令之间自然流动。
+Nu 在两个外部命令之间以与其他 Shell 相同的方式处理数据管道，比如 Bash。`external_command_1`的`stdout`与`external_command_2`的`stdin`相连，这让数据在两个命令之间自然流动。
 
 ## 幕后解说
 
