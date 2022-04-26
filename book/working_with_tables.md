@@ -200,6 +200,7 @@ Let's add a third table:
 ```
 > let $third = [[e f]; [5 6]]
 ```
+
 We could join all three tables together like this:
 
 ```
@@ -210,6 +211,7 @@ We could join all three tables together like this:
  0 │ 1 │ 2 │ 3 │ 4 │ 5 │ 6
 ───┴───┴───┴───┴───┴───┴───
 ```
+
 Or we could use the [`reduce`](commands/reduce.md) command to dynamically merge all tables:
 
 ```
@@ -220,7 +222,6 @@ Or we could use the [`reduce`](commands/reduce.md) command to dynamically merge 
  0 │ 1 │ 2 │ 3 │ 4 │ 5 │ 6
 ───┴───┴───┴───┴───┴───┴───
 ```
-
 
 ### Adding a new column
 

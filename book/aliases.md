@@ -38,6 +38,6 @@ alias lt = (ls | sort-by modified -r | sort-by type)
 
 ## Persisting
 
-To make your alias persistent it must be added to your *config.nu* file.
+To make your alias persistent it must be added to your _config.nu_ file.
 
 For more details about how to persist aliases so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md).

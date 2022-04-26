@@ -1,10 +1,10 @@
 # 安装 Nu
 
-有很多方法可以获取并使用 Nu。你可以从我们的[发布页面](https://github.com/nushell/nushell/releases)下载预编译的二进制文件，[使用你喜欢的软件包管理器](https://repology.org/project/nushell/versions)，或者从源码构建。
+有很多方法可以获取并使用 Nu。你可以从我们的[发布页面](https://github.com/nushell/nushell/releases)下载预编译的二进制文件，也可以 [使用你喜欢的软件包管理器](https://repology.org/project/nushell/versions)，或者从源码构建。
 
 ## 预编译二进制包
 
-Nu 二进制文件在[GitHub 的 Release 页](https://github.com/nushell/nushell/releases)发布，适用于 Linux、macOS 和 Windows。只需下载并解压二进制文件，然后将其复制到你的系统`PATH`上的某个位置。
+Nu 二进制文件在 [GitHub 的 Release 页](https://github.com/nushell/nushell/releases)发布，适用于 Linux、macOS 和 Windows。只需下载并解压二进制文件，然后将其复制到你的系统`PATH`上的某个位置即可。
 
 ## 软件包管理器
 
@@ -30,13 +30,13 @@ Nu 可以通过几个软件包管理器获得：
 
 - Linux：GCC 或 Clang
 - macOS：Clang (安装 Xcode)
-- Windows：MSVC（安装[Visual Studio](https://visualstudio.microsoft.com/vs/community/)或[Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022))
+- Windows：MSVC（安装 [Visual Studio](https://visualstudio.microsoft.com/vs/community/) 或 [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022))
   - 请确保安装 "用 C++进行桌面开发" 相关包
   - 任何 Visual Studio 版本都可以(社区版是免费的)
 
 ### 安装 Rust
 
-如果我们的系统中还没有 Rust，最好的方法是通过[rustup](https://rustup.rs/)来安装它。Rustup 是一种管理 Rust 安装的工具，可以管理使用不同的 Rust 版本。
+如果我们的系统中还没有 Rust，最好的方法是通过 [rustup](https://rustup.rs/) 来安装它。Rustup 是一种管理 Rust 安装的工具，可以管理使用不同的 Rust 版本。
 
 Nu 目前需要 **最新（1.59 或更高）的稳定** 版本的 Rust。最好的方法是让`rustup`为你找到正确的版本。当你第一次打开`rustup`时，它会询问你想安装哪个版本的 Rust：
 
@@ -50,29 +50,29 @@ Nu 目前需要 **最新（1.59 或更高）的稳定** 版本的 Rust。最好�
 
 #### Debian/Ubuntu
 
-你将需要安装 "pkg-config "和 "libssl-dev "包：
+你将需要安装 "pkg-config" 和 "libssl-dev" 包：
 
 <<< @/snippets/installation/install_pkg_config_libssl_dev.sh
 
-对于希望使用 "rawkey" 或 "clipboard " 可选功能的 Linux 用户，需要安装 "libx11-dev" 和 "libxcb-composite0-dev" 软件包。
+对于希望使用 "rawkey" 或 "clipboard" 可选功能的 Linux 用户，需要安装 "libx11-dev" 和 "libxcb-composite0-dev" 软件包。
 
 <<< @/snippets/installation/use_rawkey_and_clipboard.sh
 
 #### 基于 RHEL 的发行版
 
-你需要安装 "libxcb"、"openssl-devel "和 "libX11-devel"：
+你需要安装 "libxcb"、"openssl-devel" 和 "libX11-devel"：
 
 <<< @/snippets/installation/install_rhel_dependencies.sh
 
 #### macOS
 
-使用[Homebrew](https://brew.sh/)，你需要通过如下方式安装 "openssl" 和 "cmake" ：
+使用 [Homebrew](https://brew.sh/)，你需要通过如下方式安装 "openssl" 和 "cmake" ：
 
 <<< @/snippets/installation/macos_deps.sh
 
-### 使用[crates.io](https://crates.io)进行构建
+### 使用 [crates.io](https://crates.io)进行构建
 
-Nu 发行版会作为源码发布到流行的 Rust 包仓库[crates.io](https://crates.io/)，这使得使用 `cargo` 构建并安装最新的 Nu 版本变得很容易：
+Nu 发行版会作为源码发布到流行的 Rust 包仓库 [crates.io](https://crates.io/)，这使得使用 `cargo` 构建并安装最新的 Nu 版本变得很容易：
 
 <<< @/snippets/installation/cargo_install_nu.sh
 
@@ -114,9 +114,9 @@ Nu 发行版会作为源码发布到流行的 Rust 包仓库[crates.io](https://
 你可以通过在`shells`文件中添加你的 Nu 二进制文件来把 Nu 添加到允许的 Shells 列表中。
 添加的路径可以用`which nu`命令找到，通常是`$HOME/.cargo/bin/nu`。
 
-## 设置默认的 shell (Windows 终端)
+## 设置默认的 Shell (Windows 终端)
 
-如果你使用的是[Windows Terminal](https://github.com/microsoft/terminal)，你可以通过添加如下内容到你的终端设置`"profiles"`（JSON 文件）中来设置`nu`作为你的默认 Shell：
+如果你使用的是 [Windows Terminal](https://github.com/microsoft/terminal)，你可以通过添加如下内容到你的终端设置`"profiles"`（JSON 文件）中来设置`nu`作为你的默认 Shell：
 
 <<< @/snippets/installation/windows_terminal_default_shell.sh
 
