@@ -46,4 +46,4 @@ As of writing this, the only metadata returned includes:
 ## Reference
 
 More useful information on the `tags` command can be found by referencing [The
-Nu Book's entry on Metadata](https://www.nushell.sh/book/en/metadata.html)
+Nu Book's entry on Metadata](https://www.nushell.sh/book/metadata.html)
