@@ -14,7 +14,7 @@ Nerdfonts 并不是必需的，但它们能使呈现效果更好。
 
 [仓库](https://github.com/JanDeDobbeleer/oh-my-posh)
 
-如果你喜欢[oh-my-posh](https://ohmyposh.dev/)，可以通过以下几个步骤在 Nushell 里使用 oh-my-posh，它与 Nushell 一起配合得很好。在 Nushell 里设置 oh-my-posh 的步骤：
+如果你喜欢 [oh-my-posh](https://ohmyposh.dev/)，可以通过以下几个步骤在 Nushell 里使用 oh-my-posh，它与 Nushell 一起配合得很好。在 Nushell 里设置 oh-my-posh 的步骤：
 
 1. 安装 Oh My Posh 并按照 [指南](https://ohmyposh.dev/docs/linux#installation)下载 oh-my-posh 的主题。
 2. 下载并安装一个 [Nerdfonts 字体](https://github.com/ryanoasis/nerd-fonts)。
