@@ -2,11 +2,11 @@
 
 Nu 可以通过插件进行扩展。插件的行为与 Nu 的内置命令很相似，另外的好处是它们可以与 Nu 本身分开添加。
 
-Nu 的插件是可执行的；Nu 在需要时启动它们，并通过[stdin, stdout, and stderr](https://en.wikipedia.org/wiki/Standard_streams)与它们进行通信。Nu 的插件可以使用 JSON 或[Cap'n Proto](https://capnproto.org/)作为它们的通信编码。
+Nu 的插件是可执行的；Nu 在需要时启动它们，并通过 [stdin, stdout 和 stderr](https://en.wikipedia.org/wiki/Standard_streams) 与它们进行通信。Nu 的插件可以使用 JSON 或 [Cap'n Proto](https://capnproto.org/) 作为它们的通信编码方式。
 
 ## 添加一个插件
 
-要添加一个插件，请调用[`register`](/book/commands/register.md)命令来告诉 Nu 在哪里可以找到它，与此同时，你还需要告诉 Nushell 这个插件使用什么方式进行编码方式。
+要添加一个插件，请调用[`register`](/book/commands/register.md)命令来告诉 Nu 在哪里可以找到它，与此同时，你还需要告诉 Nushell 这个插件使用什么方式进行编码。
 
 Linux+macOS:
 
@@ -34,7 +34,7 @@ Windows:
 
 ## 示例
 
-Nu 的主版本包含了一些插件的例子，这些例子对学习插件协议的工作方式很有帮助：
+Nu 的主版本中包含了一些插件的例子，这些例子对学习插件协议的工作方式很有帮助：
 
 - [Rust](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_example)
 - [Python](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_python/plugin.py)

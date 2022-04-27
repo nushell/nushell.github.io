@@ -1,7 +1,7 @@
-# Dataframes
+# DataFrames
 
 ::: tip
-Dataframe 相关命令从 0.33.1 版本开始支持
+DataFrame 相关命令从 0.33.1 版本开始支持
 :::
 
 正如我们到目前为止所看到的，Nushell 把数据处理作为其主要任务。`Lists` 和 `Tables`的存在是为了帮助你循环处理值，以便执行多种操作或轻而易举地找到数据。然而，在某些操作中，基于行的数据布局并不是处理数据的最有效方式，特别是在处理极其庞大的文件时。对于大型数据集的`group-by`或`join`等操作，如果不使用适当的数据格式，会占用大量的内存，并可能耗费大量的计算时间。
@@ -173,7 +173,7 @@ print(res)
 
 一点也不差！同样，Pandas 设法在很短的时间内完成了它。
 
-为了进行比较，让我们试试 Nushell Dataframes。我们要把所有的操作放在一个`nu`文件中，以确保我们做的是类似的操作：
+为了进行比较，让我们试试 Nushell DataFrames。我们要把所有的操作放在一个`nu`文件中，以确保我们做的是类似的操作：
 
 ```shell
 let df = (dfr open Data7602DescendingYearOrder.csv)
@@ -181,7 +181,7 @@ let res = ($df | dfr group-by year | dfr aggregate sum | dfr select geo_count)
 $res
 ```
 
-当使用 Dataframes 时的性能测试结果是：
+当使用 DataFrames 时的性能测试结果是：
 
 ```shell
 > benchmark {source load.nu}
@@ -193,13 +193,13 @@ $res
 ───┴───────────────────
 ```
 
-幸运的是，Nushell Dataframe 设法将时间再次减半。这不是很好吗？
+幸运的是，Nushell DataFrame 设法将时间再次减半。这不是很好吗？
 
-正如你所看到的，Nushell 的`Dataframe`命令和现在最常见的做数据分析的工具一样快。这个发行版中的命令有可能成为你做数据分析的首选工具。通过组合复杂的 Nushell 管道，你可以以一种可靠的方式从数据中提取信息。
+正如你所看到的，Nushell 的`DataFrame`命令和现在最常见的做数据分析的工具一样快。这个发行版中的命令有可能成为你做数据分析的首选工具。通过组合复杂的 Nushell 管道，你可以以一种可靠的方式从数据中提取信息。
 
 ## 使用 DataFrames
 
-在看到了可以用`Dataframe`命令完成的事情之后，现在是时候开始测试它们了。首先，让我们创建一个样本 CSV 文件，该文件将成为我们的样本 Dataframe，并与示例一起使用。在你喜欢的编辑器中粘贴下面几行来创建样本 csv 文件：
+在看到了可以用`DataFrame`命令完成的事情之后，现在是时候开始测试它们了。首先，让我们创建一个样本 CSV 文件，该文件将成为我们的样本 DataFrame，并与示例一起使用。在你喜欢的编辑器中粘贴下面几行来创建样本 csv 文件：
 
 ```csv
 int_1,int_2,float_1,float_2,first,second,third,word
@@ -217,7 +217,7 @@ int_1,int_2,float_1,float_2,first,second,third,word
 
 保存该文件并随意命名，在这些例子中，该文件将被称为`test_small.csv`。
 
-现在，要将该文件作为 Dataframe 进行读取，请使用`dfr open`命令，如下所示：
+现在，要将该文件作为 DataFrame 进行读取，请使用`dfr open`命令，如下所示：
 
 ```shell
 > let df = (dfr open test_small.csv)
@@ -229,7 +229,7 @@ int_1,int_2,float_1,float_2,first,second,third,word
 `dfrs open`命令可以读取 **csv** 或 **parquet** 文件。
 :::
 
-要查看存储在内存中的所有 Dataframes，你可以使用：
+要查看存储在内存中的所有 DataFrames，你可以使用：
 
 ```shell
 > dfr list
@@ -241,9 +241,9 @@ int_1,int_2,float_1,float_2,first,second,third,word
 ───┴──────┴──────┴─────────
 ```
 
-正如你所看到的，该命令显示了所创建的 Dataframe 以及关于它们的基本信息。
+正如你所看到的，该命令显示了所创建的 DataFrame 以及关于它们的基本信息。
 
-如果你想看到加载的 Dataframe 的预览，你可以将 Dataframe 变量发送到流中：
+如果你想看到加载的 DataFrame 的预览，你可以将 DataFrame 变量发送到流中：
 
 ```shell
 > $df
@@ -425,7 +425,7 @@ $group | aggregate min
 
 ## 创建 DataFrames
 
-也可以从基本的 Nushell 基础类型，如整数、小数或字符串，来构建 DataFrames。让我们使用`to-df`命令来创建一个小的 Dataframe：
+也可以从基本的 Nushell 基础类型，如整数、小数或字符串，来构建 DataFrames。让我们使用`to-df`命令来创建一个小的 DataFrame：
 
 ```shell
 > let a = ([[a b]; [1 2] [3 4] [5 6]] | dfr to-df)
@@ -441,10 +441,10 @@ $group | aggregate min
 ```
 
 ::: tip
-目前，并不是所有的 Nushell 基本类型都可以转换为 Dataframe。随着 Dataframe 功能的成熟，这一点将在未来发生变化。
+目前，并不是所有的 Nushell 基本类型都可以转换为 DataFrame。随着 DataFrame 功能的成熟，这一点将在未来发生变化。
 :::
 
-我们可以在一个 Dataframe 中添加列，以创建一个新的变量。作为一个例子，让我们在迷你 Dataframe `$a` 上添加两列：
+我们可以在一个 DataFrame 中添加列，以创建一个新的变量。作为一个例子，让我们在迷你 DataFrame `$a` 上添加两列：
 
 ```shell
 > let a2 = ($a | dfr with-column $a.a --name a2 | dfr with-column $a.a --name a3)
@@ -458,7 +458,7 @@ $group | aggregate min
 ───┴───┴───┴────┴────
 ```
 
-Nushell 强大的管道语法允许我们通过从其他 Dataframe 中获取数据并将其附加到这些 Dataframe 中来创建新的 Dataframe。现在，如果你列出你的 Dataframe，你会看到总共有四个：
+Nushell 强大的管道语法允许我们通过从其他 DataFrame 中获取数据并将其附加到这些 DataFrame 中来创建新的 DataFrame。现在，如果你列出你的 DataFrame，你会看到总共有四个：
 
 ```shell
 > dfr list
@@ -473,7 +473,7 @@ Nushell 强大的管道语法允许我们通过从其他 Dataframe 中获取数�
 ───┴───────┴──────┴─────────
 ```
 
-值得一提的是，在使用 Dataframe 时，内存是如何被优化的呢？这要感谢 **Apache Arrow** 和 **Polars**。在一个非常简单的表示中，DataFrame 中的每一列都是一个 Arrow 数组，它使用了几种内存规格，以塞满尽可能多的数据（查看 [Arrow 列格式](https://arrow.apache.org/docs/format/Columnar.html) ）；另一个优化技巧是，只要有可能，Dataframe 中的列就会在多个 Dataframe 之间共享，避免了相同数据的内存重复占用。这意味着 Dataframe `$a`和`$a2`共享我们用`to-df`命令创建的两个列。由于这个原因，不能改变 Dataframe 中某一列的值。然而，你可以根据其他列或 Dataframe 的数据创建新的列。
+值得一提的是，在使用 DataFrame 时，内存是如何被优化的呢？这要感谢 **Apache Arrow** 和 **Polars**。在一个非常简单的表示中，DataFrame 中的每一列都是一个 Arrow 数组，它使用了几种内存规格，以塞满尽可能多的数据（查看 [Arrow 列格式](https://arrow.apache.org/docs/format/Columnar.html) ）；另一个优化技巧是，只要有可能，DataFrame 中的列就会在多个 DataFrame 之间共享，避免了相同数据的内存重复占用。这意味着 DataFrame `$a`和`$a2`共享我们用`to-df`命令创建的两个列。由于这个原因，不能改变 DataFrame 中某一列的值。然而，你可以根据其他列或 DataFrame 的数据创建新的列。
 
 ## 使用系列
 
@@ -546,7 +546,7 @@ Nushell 强大的管道语法允许我们通过从其他 Dataframe 中获取数�
 ───┴──────────
 ```
 
-而且我们可以将它们添加到先前定义的 Dataframes 中：
+而且我们可以将它们添加到先前定义的 DataFrames 中：
 
 ```shell
 > let new_df = ($a | dfr with-column $new --name new_col)
@@ -575,7 +575,7 @@ Nushell 强大的管道语法允许我们通过从其他 Dataframe 中获取数�
 ───┴─────────
 ```
 
-我们可以开始使用管道，以创建新的列和 Dataframes：
+我们可以开始使用管道，以创建新的列和 DataFrames：
 
 ```shell
 > let $new_df = ($new_df | dfr with-column ($new_df.a * $new_df.b / $new_df.new_col) --name my_sum)
@@ -665,7 +665,7 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 ───┴─────────────────
 ```
 
-我们也可以通过检查某些值是否存在于其他系列来创建一个掩码。使用我们创建的第一个 Dataframe，我们可以这样做：
+我们也可以通过检查某些值是否存在于其他系列来创建一个掩码。使用我们创建的第一个 DataFrame，我们可以这样做：
 
 ```shell
 > let mask3 = ($df.first | dfr is-in ([b c] | dfr to-df))
@@ -686,7 +686,7 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 ───┴───────
 ```
 
-而这个新的掩码可以用来过滤 Dataframe
+而这个新的掩码可以用来过滤 DataFrame
 
 ```shell
 > $df | dfr filter-with $mask3
@@ -880,7 +880,7 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 
 | 命令名          | 应用于                      | 描述                                               | Nushell 类似命令              |
 | --------------- | --------------------------- | -------------------------------------------------- | ----------------------------- |
-| aggregate       | DataFrame, GroupBy, Series  | 在一个 Dataframe、GroupBy 或系列对象上执行聚合操作 | math                          |
+| aggregate       | DataFrame, GroupBy, Series  | 在一个 DataFrame、GroupBy 或系列对象上执行聚合操作 | math                          |
 | all-false       | Series                      | 如果所有的值都是假的，则返回真                     |                               |
 | all-true        | Series                      | 如果所有的值都是真的，则返回真                     | all?                          |
 | arg-max         | Series                      | 返回系列中最大值的索引                             |                               |
@@ -891,9 +891,9 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 | column          | DataFrame                   | 将选定的列作为系列返回                             | get                           |
 | count-null      | Series                      | 计算空值                                           |                               |
 | count-unique    | Series                      | 计算唯一值                                         |                               |
-| drop            | DataFrame                   | 通过删除选定的列来创建一个新的 Dataframe           | drop                          |
-| drop-duplicates | DataFrame                   | 删除 Dataframe 中的重复值                          |                               |
-| drop-nulls      | DataFrame, Series           | 丢弃 Dataframe 中的空值                            |                               |
+| drop            | DataFrame                   | 通过删除选定的列来创建一个新的 DataFrame           | drop                          |
+| drop-duplicates | DataFrame                   | 删除 DataFrame 中的重复值                          |                               |
+| drop-nulls      | DataFrame, Series           | 丢弃 DataFrame 中的空值                            |                               |
 | dtypes          | DataFrame                   | 显示 DataFrame 的数据类型                          |                               |
 | filter-with     | DataFrame                   | 使用 Mask 作为参考来过滤 DataFrame                 |                               |
 | first           | DataFrame                   | 用第一行创建新的 DataFrame                         | first                         |
@@ -930,10 +930,10 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 | where           | DataFrame                   | 过滤 DataFrame 以符合条件                          | where                         |
 | with-column     | DataFrame                   | 在 DataFrame 中添加一个系列                        | `insert <column_name> <value> | upsert <column_name> { <new_value> }` |
 
-## Dataframes 的未来
+## DataFrames 的未来
 
-我们希望在本页结束时，你已经牢固掌握了如何使用 Dataframe 相关命令。正如你所看到的，它们提供了强大的操作，可以帮助你更快更原生地处理数据。
+我们希望在本页结束时，你已经牢固掌握了如何使用 DataFrame 相关命令。正如你所看到的，它们提供了强大的操作，可以帮助你更快更原生地处理数据。
 
-然而，Dataframes 的未来仍然是非常实验性的，随着这些命令的成熟，新的命令和利用这些命令的工具将被加入。例如，Dataframes 的下一步是引入惰性 Dataframes，这将允许你定义复杂的数据操作，这些操作将在你决定 "**完成**" 这个管道时才被执行。这将使 Nushell 有机会选择最佳计划来查询你所要求的数据。
+然而，DataFrames 的未来仍然是非常实验性的，随着这些命令的成熟，新的命令和利用这些命令的工具将被加入。例如，DataFrames 的下一步是引入惰性 DataFrames，这将允许你定义复杂的数据操作，这些操作将在你决定 "**完成**" 这个管道时才被执行。这将使 Nushell 有机会选择最佳计划来查询你所要求的数据。
 
-请继续访问本书，以查看 Dataframes 的最新情况，以及它们如何帮助你更快更有效地处理数据。
+请继续访问本书，以查看 DataFrames 的最新情况，以及它们如何帮助你更快更有效地处理数据。
