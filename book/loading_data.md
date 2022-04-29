@@ -64,7 +64,7 @@ We're shown the contents of the file. If the file is too large, we get a handy s
 
 Below the surface, what Nu sees in these text files is one large string. Next, we'll talk about how to work with these strings to get the data we need out of them.
 
-## Working with strings
+## Handling Strings
 
 An important part of working with data coming from outside Nu is that it's not always in a format that Nu understands. Often this data is given to us as a string.
 
