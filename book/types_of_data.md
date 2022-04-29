@@ -67,7 +67,7 @@ The above is the same as if we had written:
 > echo "hello"
 ```
 
-Also see [Working with Strings](https://www.nushell.sh/book/loading_data.html#working-with-strings).
+Also see [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings).
 
 ## Lines
 
