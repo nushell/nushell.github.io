@@ -46,6 +46,10 @@ $ winget install nushell
 
 Windows users may also need to install the latest [Microsoft Visual C++ Redistributable](https://docs.microsoft.com/cpp/windows/latest-supported-vc-redist).
 
+## Use Nu in Github Action
+
+You can also use `Nushell` in your Github Actions, [`setup-nu`](https://github.com/marketplace/actions/setup-nu) is there for you.
+
 ## Community
 
 Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!
