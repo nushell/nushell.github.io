@@ -380,7 +380,7 @@ If you don't like the default `PROMPT_INDICATOR` you could change it like this.
 > let-env PROMPT_INDICATOR = "> "
 ```
 
-Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/engine-q/prompt/oh-my.nu).
+Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/prompt/oh-my.nu).
 
 ## `LS_COLORS` colors for the `ls` command
 
