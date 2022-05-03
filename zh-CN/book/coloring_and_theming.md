@@ -380,7 +380,7 @@ Nushell 的提示符可以通过这些环境变量进行配置：
 > let-env PROMPT_INDICATOR = "> "
 ```
 
-提示的颜色由 `PROMPT_COMMAND` 中的 `block` 控制，在这里你可以编写自己的自定义提示。我们写了一个稍微花哨点的，有 git 状态的，位于 [nu_scripts 仓库](https://github.com/nushell/nu_scripts/blob/main/engine-q/prompt/oh-my.nu)。
+提示的颜色由 `PROMPT_COMMAND` 中的 `block` 控制，在这里你可以编写自己的自定义提示。我们写了一个稍微花哨点的，有 git 状态的，位于 [nu_scripts 仓库](https://github.com/nushell/nu_scripts/blob/main/prompt/oh-my.nu)。
 
 ## `ls` 命令的配色:`LS_COLORS`
 
