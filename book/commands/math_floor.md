@@ -1,7 +1,7 @@
 ---
 title: math floor
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Applies the floor function to a list of numbers
 ---

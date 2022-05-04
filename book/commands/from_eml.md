@@ -1,7 +1,7 @@
 ---
 title: from eml
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Parse text as .eml and create table.
 ---

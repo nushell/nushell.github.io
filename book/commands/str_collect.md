@@ -1,7 +1,7 @@
 ---
 title: str collect
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Concatenate multiple strings into a single string, with an optional separator between each
 ---

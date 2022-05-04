@@ -1,7 +1,7 @@
 ---
 title: path dirname
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Get the parent directory of a path
 ---
@@ -24,7 +24,7 @@ usage: |
 
 Get dirname of a path
 ```shell
-> 'C:\Users\joe\code\test.txt' | path dirname
+> '/home/joe/code/test.txt' | path dirname
 ```
 
 Get dirname of a path in a column
@@ -34,10 +34,10 @@ Get dirname of a path in a column
 
 Walk up two levels
 ```shell
-> 'C:\Users\joe\code\test.txt' | path dirname -n 2
+> '/home/joe/code/test.txt' | path dirname -n 2
 ```
 
 Replace the part that would be returned with a custom path
 ```shell
-> 'C:\Users\joe\code\test.txt' | path dirname -n 2 -r C:\Users\viking
+> '/home/joe/code/test.txt' | path dirname -n 2 -r /home/viking
 ```

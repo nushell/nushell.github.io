@@ -1,7 +1,7 @@
 ---
 title: str replace
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Find and replace text
 ---
@@ -12,7 +12,7 @@ usage: |
 
 ## Signature
 
-```> str replace (find) (replace) ...rest --all --no-expand```
+```> str replace (find) (replace) ...rest --all --no-expand --string```
 
 ## Parameters
 
@@ -21,6 +21,7 @@ usage: |
  -  `...rest`: optionally find and replace text by column paths
  -  `--all`: replace all occurrences of find string
  -  `--no-expand`: do not expand the replace parameter as a regular expression
+ -  `--string`: do not use regular expressions for string find and replace
 
 ## Examples
 
@@ -42,4 +43,14 @@ Find and replace all occurrences of find string in table
 Find and replace contents without using the replace parameter as a regular expression
 ```shell
 > 'dogs_$1_cats' | str replace '\$1' '$2' -n
+```
+
+Find and replace the first occurence using string replacement *not* regular expressions
+```shell
+> 'c:\some\cool\path' | str replace 'c:\some\cool' '~' -s
+```
+
+Find and replace all occurences using string replacement *not* regular expressions
+```shell
+> 'abc abc abc' | str replace -a 'b' 'z' -s
 ```

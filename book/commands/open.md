@@ -1,7 +1,7 @@
 ---
 title: open
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 ---
@@ -21,7 +21,7 @@ usage: |
 
 ## Examples
 
-Open a file, with structure (based on file extension)
+Open a file, with structure (based on file extension or SQLite database header)
 ```shell
 > open myfile.json
 ```

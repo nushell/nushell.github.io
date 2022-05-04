@@ -1,7 +1,7 @@
 ---
 title: date humanize
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Print a 'humanized' format for the date, relative to now.
 ---

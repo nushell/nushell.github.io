@@ -1,7 +1,7 @@
 ---
 title: ansi
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Output ANSI codes to change color.
 ---

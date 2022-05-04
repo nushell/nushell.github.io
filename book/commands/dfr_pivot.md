@@ -1,7 +1,7 @@
 ---
 title: dfr pivot
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Performs a pivot operation on a groupby object
 ---

@@ -1,7 +1,7 @@
 ---
 title: path split
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Split a path into parts by a separator.
 ---
@@ -22,7 +22,7 @@ usage: |
 
 Split a path into parts
 ```shell
-> 'C:\Users\viking\spam.txt' | path split
+> '/home/viking/spam.txt' | path split
 ```
 
 Split all paths under the 'name' column

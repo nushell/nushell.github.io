@@ -1,7 +1,7 @@
 ---
 title: dfr filter-with
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Filters dataframe using a mask as reference
 ---

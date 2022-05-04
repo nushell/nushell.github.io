@@ -1,7 +1,7 @@
 ---
 title: take while
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Take elements of the input while a predicate is true.
 ---

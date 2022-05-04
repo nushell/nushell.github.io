@@ -1,7 +1,7 @@
 ---
 title: get
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Extract data using a cell path.
 ---

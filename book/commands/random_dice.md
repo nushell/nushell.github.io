@@ -1,7 +1,7 @@
 ---
 title: random dice
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Generate a random dice roll
 ---

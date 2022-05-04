@@ -1,7 +1,7 @@
 ---
 title: math sum
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Finds the sum of a list of numbers or tables
 ---

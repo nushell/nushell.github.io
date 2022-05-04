@@ -1,7 +1,7 @@
 ---
 title: char
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Output special characters (e.g., 'newline').
 ---
@@ -12,7 +12,7 @@ usage: |
 
 ## Signature
 
-```> char (character) ...rest --list --unicode```
+```> char (character) ...rest --list --unicode --integer```
 
 ## Parameters
 
@@ -20,6 +20,7 @@ usage: |
  -  `...rest`: multiple Unicode bytes
  -  `--list`: List all supported character names
  -  `--unicode`: Unicode string i.e. 1f378
+ -  `--integer`: Create a codepoint from an integer
 
 ## Examples
 
@@ -36,6 +37,11 @@ Output prompt character, newline and a hamburger character
 Output Unicode character
 ```shell
 > char -u 1f378
+```
+
+Create Unicode from integer codepoint values
+```shell
+> char -i (0x60 + 1) (0x60 + 2)
 ```
 
 Output multi-byte Unicode character

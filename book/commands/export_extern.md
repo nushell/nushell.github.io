@@ -1,7 +1,7 @@
 ---
 title: export extern
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Define an extern and export it from a module
 ---
