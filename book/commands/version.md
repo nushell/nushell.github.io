@@ -1,7 +1,7 @@
 ---
 title: version
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Display Nu version.
 ---

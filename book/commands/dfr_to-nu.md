@@ -1,7 +1,7 @@
 ---
 title: dfr to-nu
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Converts a section of the dataframe to Nushell Table
 ---

@@ -1,7 +1,7 @@
 ---
 title: glob
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Creates a list of files and/or folders based on the glob pattern provided.
 ---

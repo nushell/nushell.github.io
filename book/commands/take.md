@@ -1,7 +1,7 @@
 ---
 title: take
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Take the first n elements of the input.
 ---

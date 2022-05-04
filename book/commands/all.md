@@ -1,7 +1,7 @@
 ---
 title: all?
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Test if every element of the input matches a predicate.
 ---

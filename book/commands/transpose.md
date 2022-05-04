@@ -1,7 +1,7 @@
 ---
 title: transpose
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Transposes the table contents so rows become columns and columns become rows.
 ---

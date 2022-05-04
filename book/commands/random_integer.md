@@ -1,7 +1,7 @@
 ---
 title: random integer
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Generate a random integer [min..max]
 ---

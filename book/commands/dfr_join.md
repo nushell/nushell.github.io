@@ -1,7 +1,7 @@
 ---
 title: dfr join
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Joins a dataframe using columns as reference
 ---

@@ -1,7 +1,7 @@
 ---
 title: ls
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   List the files in a directory.
 ---
@@ -35,6 +35,11 @@ List all files in a subdirectory
 > ls subdir
 ```
 
+List all files with full path in the parent directory
+```shell
+> ls -f ..
+```
+
 List all rust files
 ```shell
 > ls *.rs
@@ -45,9 +50,9 @@ List all files and directories whose name do not contain 'bar'
 > ls -s | where name !~ bar
 ```
 
-List all dirs with full path name in your home directory
+List all dirs in your home directory
 ```shell
-> ls -f ~ | where type == dir
+> ls ~ | where type == dir
 ```
 
 List all dirs in your home directory which have not been modified in 7 days

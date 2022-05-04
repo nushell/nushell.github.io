@@ -1,7 +1,7 @@
 ---
 title: str screaming-snake-case
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Convert a string to SCREAMING_SNAKE_CASE
 ---

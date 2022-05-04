@@ -1,7 +1,7 @@
 ---
 title: math mode
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Gets the most frequent element(s) from a list of numbers or tables
 ---

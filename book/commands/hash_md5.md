@@ -1,7 +1,7 @@
 ---
 title: hash md5
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Hash a value using the md5 hash algorithm
 ---

@@ -1,7 +1,7 @@
 ---
 title: enter
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Enters a new shell at the given path.
 ---

@@ -1,7 +1,7 @@
 ---
 title: ignore
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Ignore the output of the previous command in the pipeline
 ---

@@ -1,7 +1,7 @@
 ---
 title: describe
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Describe the value(s) piped in.
 ---

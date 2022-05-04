@@ -1,7 +1,7 @@
 ---
 title: help
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Display help information about commands.
 ---
@@ -24,11 +24,6 @@ usage: |
 show all commands and sub-commands
 ```shell
 > help commands
-```
-
-generate documentation
-```shell
-> help generate_docs
 ```
 
 show help for single command

@@ -1,7 +1,7 @@
 ---
 title: take until
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Take elements of the input until a predicate is true.
 ---

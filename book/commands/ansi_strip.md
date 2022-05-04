@@ -1,7 +1,7 @@
 ---
 title: ansi strip
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Strip ANSI escape sequences from a string
 ---

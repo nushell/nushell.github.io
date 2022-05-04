@@ -1,7 +1,7 @@
 ---
 title: split row
 layout: command
-version: 0.60.1
+version: 0.62.0
 usage: |
   Split a string into multiple rows using a separator
 ---
