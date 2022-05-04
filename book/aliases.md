@@ -36,6 +36,20 @@ Here is an alias with more than one pipe
 alias lt = (ls | sort-by modified -r | sort-by type)
 ```
 
+## Path Aliases
+
+You may want to add paths to executables as aliases. In order to do this you can use the `run-external` command to run the program.
+
+Here is an alias that will run Firefox (on Windows):
+
+```
+alias firefox = run-external 'C:\Program Files\Mozilla Firefox\firefox.exe'
+```
+
+<!-- Is there a way to get rid of this? I know this doesnt happen with firefox but with other apps like gimp it waits -->
+
+_Note: The terminal may for the program to exit before continuing._
+
 ## Persisting
 
 To make your alias persistent it must be added to your _config.nu_ file.
