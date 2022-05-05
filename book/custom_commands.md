@@ -1,6 +1,6 @@
 # Custom commands
 
-Nu's ability to compose long pipelines allow you a lot of control over your data and system, but it comes at the price of a lot of typing. Ideally, you'd be able to save your well-crafted pipelines to use again and again.
+Nu's ability to compose long pipelines allows you a lot of control over your data and system, but it comes at the price of a lot of typing. Ideally, you'd be able to save your well-crafted pipelines to use again and again.
 
 This is where custom commands come in.
 
@@ -28,6 +28,20 @@ As we do, we also get output just as we would with built-in commands:
  1 │ world
 ───┴───────
 ```
+
+::: tip
+`echo` returns its arguments separately to the pipeline. If you want to use it to generate a single string append ` | str collect` to the pipeline:
+
+```nushell
+def greet [name] {
+  echo "hello " $name | str collect
+}
+
+greet nushell
+```
+
+returns `hello nushell`
+:::
 
 ## Command names
 
@@ -57,17 +71,17 @@ When defining custom commands, you can name and optionally set the type for each
 
 ```nushell
 def greet [name: string] {
-  echo "hello" $name
+  echo "hello " $name | str collect
 }
 ```
 
-The types of parameters are optional. Nushell supports leaving them off, and treating the parameter as `any` if so. If you annotated a type on a parameter, Nushell will check this type when you call the function.
+The types of parameters are optional. Nushell supports leaving them off and treating the parameter as `any` if so. If you annotated a type on a parameter, Nushell will check this type when you call the function.
 
 For example, let's say you wanted to take in an `int` instead:
 
 ```nushell
 def greet [name: int] {
-  echo "hello" $name
+  echo "hello " $name | str collect
 }
 
 greet world
@@ -106,6 +120,36 @@ The currently accepted types are (as of version 0.59.0):
 - `string`
 - `variable`
 
+## Parameters with a default value
+
+To make a parameter optional and directly provide a default value for it you can provide a default value in the command definition.
+
+```nushell
+def greet [name = "nushell"] {
+  echo "hello " $name | str collect
+}
+```
+
+You can call this command either without the parameter or with a value to override the default value:
+
+```
+> greet
+hello nushell
+> greet world
+hello world
+```
+
+You can also combine a default value with a [type requirement](#parameter-types):
+
+```
+def congratulate [age: int = 18] {
+  echo "Happy birthday! Wow you are " $age " years old now!" | str collect
+}
+```
+
+If you want to check if an optional parameter is present or not and not just rely on a default value use [optional positional parameters](#optional-positional-parameters) instead.
+
+
 ## Optional positional parameters
 
 By default, positional parameters are required. If a positional parameter is not passed, we will encounter an error:
@@ -124,7 +168,7 @@ We can instead mark a positional parameter as optional by putting a question mar
 
 ```nushell
 def greet [name?: string] {
-  echo "hello" $name
+  echo "hello" $name | str collect
 }
 
 greet
@@ -139,12 +183,14 @@ def greet [name?: string] {
   if ($name == null) {
     echo "hello, I don't know your name!"
   } else {
-    echo "hello" $name
+    echo "hello " $name | str collect
   }
 }
 
 greet
 ```
+
+If you just want to set a default value when the parameter is missing it is simpler to use a [default value](#parameters-with-a-default-value) instead.
 
 If required and optional positional parameters are used together, then the required parameters must appear in the definition first.
 
@@ -225,7 +271,7 @@ Rest parameters can be used together with positional parameters:
 
 ```
 def greet [vip: string, ...name: string] {
-  echo "hello to our VIP" $vip
+  echo "hello to our VIP " $vip | str collect
   echo "and hello to everybody else:"
   for $n in $name {
     echo $n
@@ -323,7 +369,7 @@ We can use the output from this command just as we would [`ls`](commands/ls.md).
 ───┴───────────────────────
 ```
 
-This lets us easily build custom commands and process their output. Note, we don't use return statements like other languages. Instead, we build pipelines that output streams of data that can be connected to other pipelines.
+This lets us easily build custom commands and process their output. Note, that we don't use return statements like other languages. Instead, we build pipelines that output streams of data that can be connected to other pipelines.
 
 ## Pipeline Input
 
