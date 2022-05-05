@@ -139,7 +139,7 @@ hello nushell
 hello world
 ```
 
-You can also combine a default value with a type requirement:
+You can also combine a default value with a [type requirement](#parameter-types):
 
 ```
 def congratulate [age: int = 18] {
@@ -147,7 +147,7 @@ def congratulate [age: int = 18] {
 }
 ```
 
-If you want to check if an optional parameter is present or not and not just rely on a default value use *optional positional parameters* instead.
+If you want to check if an optional parameter is present or not and not just rely on a default value use [optional positional parameters](#optional-positional-parameters) instead.
 
 
 ## Optional positional parameters
@@ -189,6 +189,8 @@ def greet [name?: string] {
 
 greet
 ```
+
+If you just want to set a default value when the parameter is missing it is simpler to use a [default value](#parameters-with-a-default-value) instead.
 
 If required and optional positional parameters are used together, then the required parameters must appear in the definition first.
 
