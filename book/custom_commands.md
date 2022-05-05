@@ -1,6 +1,6 @@
 # Custom commands
 
-Nu's ability to compose long pipelines allow you a lot of control over your data and system, but it comes at the price of a lot of typing. Ideally, you'd be able to save your well-crafted pipelines to use again and again.
+Nu's ability to compose long pipelines allows you a lot of control over your data and system, but it comes at the price of a lot of typing. Ideally, you'd be able to save your well-crafted pipelines to use again and again.
 
 This is where custom commands come in.
 
@@ -8,7 +8,7 @@ An example definition of a custom command:
 
 ```nushell
 def greet [name] {
-  echo "hello" $name
+  echo "hello " $name
 }
 ```
 
@@ -75,7 +75,7 @@ def greet [name: string] {
 }
 ```
 
-The types of parameters are optional. Nushell supports leaving them off, and treating the parameter as `any` if so. If you annotated a type on a parameter, Nushell will check this type when you call the function.
+The types of parameters are optional. Nushell supports leaving them off and treating the parameter as `any` if so. If you annotated a type on a parameter, Nushell will check this type when you call the function.
 
 For example, let's say you wanted to take in an `int` instead:
 
@@ -130,7 +130,7 @@ def greet [name = "nushell"] {
 }
 ```
 
-You can call this command either without the parameter or with a value to overrride the default value:
+You can call this command either without the parameter or with a value to override the default value:
 
 ```
 > greet
@@ -367,7 +367,7 @@ We can use the output from this command just as we would [`ls`](commands/ls.md).
 ───┴───────────────────────
 ```
 
-This lets us easily build custom commands and process their output. Note, we don't use return statements like other languages. Instead, we build pipelines that output streams of data that can be connected to other pipelines.
+This lets us easily build custom commands and process their output. Note, that we don't use return statements like other languages. Instead, we build pipelines that output streams of data that can be connected to other pipelines.
 
 ## Pipeline Input
 
