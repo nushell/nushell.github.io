@@ -29,6 +29,20 @@ As we do, we also get output just as we would with built-in commands:
 ───┴───────
 ```
 
+::: tip
+`echo` returns its arguments separately to the pipeline. If you want to use it to generate a single string append ` | str collect` to the pipeline:
+
+```nushell
+def greet [name] {
+  echo "hello" $name | str collect
+}
+
+greet nushell
+```
+
+returns `hello nushell`
+:::
+
 ## Command names
 
 In Nushell, a command name is a string of characters or a quoted string. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊`, and `123`.
@@ -57,7 +71,7 @@ When defining custom commands, you can name and optionally set the type for each
 
 ```nushell
 def greet [name: string] {
-  echo "hello" $name
+  echo "hello " $name | str collect
 }
 ```
 
@@ -67,7 +81,7 @@ For example, let's say you wanted to take in an `int` instead:
 
 ```nushell
 def greet [name: int] {
-  echo "hello" $name
+  echo "hello " $name | str collect
 }
 
 greet world
@@ -106,6 +120,36 @@ The currently accepted types are (as of version 0.59.0):
 - `string`
 - `variable`
 
+## Parameters with a default value
+
+To make a parameter optional and directly provide a default value for it you can provide a default value in the command definition.
+
+```nushell
+def greet [name = "nushell"] {
+  echo "hello " $name | str collect
+}
+```
+
+You can call this command either without the parameter or with a value to overrride the default value:
+
+```
+> greet
+hello nushell
+> greet world
+hello world
+```
+
+You can also combine a default value with a type requirement:
+
+```
+def congratulate [age: int = 18] {
+  echo "Happy birthday! Wow you are " $age " years old now!" | str collect
+}
+```
+
+If you want to check if an optional parameter is present or not and not just rely on a default value use *optional positional parameters* instead.
+
+
 ## Optional positional parameters
 
 By default, positional parameters are required. If a positional parameter is not passed, we will encounter an error:
@@ -124,7 +168,7 @@ We can instead mark a positional parameter as optional by putting a question mar
 
 ```nushell
 def greet [name?: string] {
-  echo "hello" $name
+  echo "hello" $name | str collect
 }
 
 greet
@@ -139,7 +183,7 @@ def greet [name?: string] {
   if ($name == null) {
     echo "hello, I don't know your name!"
   } else {
-    echo "hello" $name
+    echo "hello " $name | str collect
   }
 }
 
@@ -225,7 +269,7 @@ Rest parameters can be used together with positional parameters:
 
 ```
 def greet [vip: string, ...name: string] {
-  echo "hello to our VIP" $vip
+  echo "hello to our VIP " $vip | str collect
   echo "and hello to everybody else:"
   for $n in $name {
     echo $n
