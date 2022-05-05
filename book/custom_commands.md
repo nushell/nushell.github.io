@@ -8,7 +8,7 @@ An example definition of a custom command:
 
 ```nushell
 def greet [name] {
-  echo "hello " $name
+  echo "hello" $name
 }
 ```
 
@@ -34,7 +34,7 @@ As we do, we also get output just as we would with built-in commands:
 
 ```nushell
 def greet [name] {
-  echo "hello" $name | str collect
+  echo "hello " $name | str collect
 }
 
 greet nushell
