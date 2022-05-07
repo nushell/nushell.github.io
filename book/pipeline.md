@@ -16,11 +16,18 @@ The second command, `inc package.version --minor`, is a filter. Filters take the
 
 The last command, `save "Cargo_new.toml"`, is an output (sometimes called a "sink"). An output takes input from the pipeline and does some final operation on it. In our example, we save what comes through the pipeline to a file as the final step. Other types of output commands may take the values and view them for the user.
 
+The `$in` variable will collect the pipeline into a value for you, allowing you to access the whole stream as a parameter:
+
+```nushell
+> echo 1 2 3 | $in.1 * $in.2
+6
+```
+
 ## Multi-line pipelines
 
 If a pipeline is getting a bit long for one line, you can enclose it within `(` and `)` to create a subexpression:
 
-```
+```nushell
 (
     "01/22/2021" |
     parse "{month}/{day}/{year}" |
