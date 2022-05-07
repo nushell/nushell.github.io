@@ -394,6 +394,17 @@ Now, if we call the above command later in a pipeline, we can see what it does w
 ───┴─────
 ```
 
+We can also store the input for later use using the `$in` variable:
+
+```nushell
+def nullify [...cols] {
+  let start = $in
+  $cols | reduce --fold $start { |col, df|
+    $df | upsert $col null
+  }
+}
+```
+
 ## Persisting
 
 For information about how to persist custom commands so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md) and add your startup script.
