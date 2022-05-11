@@ -23,7 +23,7 @@ module.exports = {
     '/ja/': {
       lang: 'ja',
       title: 'Nushell',
-      description: '新しいタイプのシェル。.',
+      description: '新しいタイプのシェル',
     },
     '/pt-BR/': {
       lang: 'pt-BR',
