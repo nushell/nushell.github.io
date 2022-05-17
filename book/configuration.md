@@ -13,20 +13,20 @@ _(You can think of the Nushell config loading sequence as executing two [REPL](h
 When you launch Nushell without these files set up, Nushell will prompt you to download the [`default env.nu`](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_env.nu) and [`default config.nu`](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu).
 You can browse the default files for default values of environment variables and a list of all configurable settings.
 
-### Configuring `$config`
+### Configuring `$env.config`
 
-Nushell's main settings are kept in the global `$config` variable as a record. This record can be created using:
+Nushell's main settings are kept in the `config` environment variable as a record. This record can be created using:
 
 ```
-let $config = {
+let-env $config = {
   ...
 }
 ```
 
-You can also shadow `$config` and update it:
+You can also shadow `$env.config` and update it:
 
 ```
-let $config = ($config | upsert <field name> <field value>)
+let-env $config = ($env.config | upsert <field name> <field value>)
 ```
 
 By convention, this variable is defined in the `config.nu` file.
@@ -38,6 +38,8 @@ You can set environment variables for the duration of a Nushell session using [`
 ```
 let-env FOO = 'BAR'
 ```
+
+_(Although $env.config is an environment varialbe, it is still defined by convention inside config.nu.)_
 
 These are some important variables to look at for Nushell-specific settings:
 
