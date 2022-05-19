@@ -28,9 +28,9 @@ In Nushell, we use the `>` as the greater-than operator. This fits better with t
 
 **Thinking in Nushell:** The way Nushell views data is that data flows through the pipeline until it reaches the user or is handled by a final command. Nushell uses commands to do work. Learning these commands and when to use them helps you compose many kinds of pipelines.
 
-## Parsing and evaluation are different stages
+## Think of Nushell as a compiled language
 
-An important part of Nushell's design and specifically where it differs from many dynamic languages is that "parse time" and "evaluation time" are separate and do not mix. These terms come from programming language design and compiler theory, in which parsing is where you convert text to an abstract representation, and evaluation is where you run the abstract representation.
+An important part of Nushell's design and specifically where it differs from many dynamic languages is that Nushell converts the source you give it to something to run, and then runs the result. It doesn't have an `eval` features which allows you to continue pulling in new source during runtime. This means that tasks like including files to be part of your project need to be known paths, much like includes in compiled languages like C++ or Rust.
 
 For example, the following doesn't make sense in Nushell, and will fail to execute if run as a script:
 
@@ -40,9 +40,7 @@ source "output.nu"
 abc
 ```
 
-The `source` command runs at parse time, where the parser finds all the definitions that are visible to the program. By evaluation time, those definitions should all be visible. However, since the output.nu file is not created until evaluation time (by the save command), the source command is unable to read definitions from it during parse time.
-
-In the above, we've expected the evaluator to run between each line, but Nushell does not interleave parsing and evaluation like this.
+The `source` command will grow the source that is compiled, but the `save` from the earlier line won't have had a chance to run. Nushell runs the whole block as if it were a single file, rather than running one line at a time. In the example, since the output.nu file is not created until after the 'compilation' step, the source command is unable to read definitions from it during parse time.
 
 Another common issue is trying to dynamically create the filename to source from:
 
@@ -50,9 +48,9 @@ Another common issue is trying to dynamically create the filename to source from
 > source $"($my-path)/common.nu"
 ```
 
-This would require the evaluator to run and evaluate the string before the parser was able to look inside the file to find definitions. Again, this mixes parsing and evaluation, no longer keeping them separate.
+This would require the evaluator to run and evaluate the string, but unfortunately Nushell needs this information at compile-time.
 
-**Thinking in Nushell:** Nushell is designed to use a single parsing phase separate from evaluation. This will allow for strong IDE support, accurate error messages, and an easier language for third-party tools to work with.
+**Thinking in Nushell:** Nushell is designed to use a single compile step for all the source you send it, and this is separate from evaluation. This will allow for strong IDE support, accurate error messages, an easier language for third-party tools to work with, and in the future even fancier output like being able to compile Nushell directly to a binary file.
 
 ## Variables are immutable
 
