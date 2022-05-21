@@ -136,8 +136,8 @@ BAR
 ## Environment variable conversions
 
 You can set the `ENV_CONVERSIONS` environment variable to convert other environment variables between a string and a value.
-For example, the [default config](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu) includes conversion of PATH (and Path used on Windows) environment variables from a string to a list.
-After the config loaded, any existing environment variable specified inside `ENV_CONVERSIONS` will be translated according to its `from_string` field into a value of any type.
+For example, the [default enfironment config](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_env.nu) includes conversion of PATH (and Path used on Windows) environment variables from a string to a list.
+After both `env.nu` and `config.nu` are loaded, any existing environment variable specified inside `ENV_CONVERSIONS` will be translated according to its `from_string` field into a value of any type.
 External tools require environment variables to be strings, therefore, any non-string environment variable needs to be converted first.
 The conversion of value -> string is set by the `to_string` field of `ENV_CONVERSIONS` and is done every time an external command is run.
 
@@ -179,7 +179,7 @@ Now, to test the conversion list -> string, run:
 a-b-c
 ```
 
-Because `nu` is an external program, Nushell translated the `[ a b c ]` according to `ENV_CONVERSIONS.FOO.to_string` and passed it to the `nu` process.
+Because `nu` is an external program, Nushell translated the `[ a b c ]` list according to `ENV_CONVERSIONS.FOO.to_string` and passed it to the `nu` process.
 Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was successful.
 You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
@@ -187,11 +187,11 @@ If we look back at the [`env`](commands/env.html) command, the `raw` column show
 If the value is not a string and does not have `to_string` conversion, it is not passed to an external (see the `raw` column of `PROMPT_COMMAND`).
 One exception is `PATH` (`Path` on Windows): By default, it converts the string to a list on startup and from a list to a string when running externals if no manual conversions are specified.
 
-_(Important! The environment conversion string -> value happens **after** the config.nu is evaluated. All environment variables in config.nu are still strings unless you set them manually to some other values.)_
+_(Important! The environment conversion string -> value happens **after** the env.nu and config.nu are evaluated. All environment variables in env.nu and config.nu are still strings unless you set them manually to some other values.)_
 
 ## Removing environment variables
 
-You can remove an environment variable only if it was set in the current scope:
+You can remove an environment variable only if it was set in the current scope via [`hide`](commands/hide.html):
 
 ```
 > let-env FOO = 'BAR'
@@ -199,7 +199,7 @@ You can remove an environment variable only if it was set in the current scope:
 > hide FOO
 ```
 
-If you want to remove an environment variable stemming from a parent scope, you can [`hide`](commands/hide.html) it (see [Modules](modules.md) for details about hiding):
+The hiding is also scoped which both allows you to remove an environment variable temporarily and prevents you from modifying a parent environment from within a child scope:
 
 ```
 > let-env FOO = 'BAR'
@@ -210,3 +210,5 @@ If you want to remove an environment variable stemming from a parent scope, you 
 > $env.FOO
 BAR
 ```
+
+You can check [Modules](modules.md) for more details about hiding.
