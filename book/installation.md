@@ -38,13 +38,13 @@ For Rust to work properly, you'll need to have a compatible compiler suite insta
 
 If we don't already have Rust on our system, the best way to install it is via [rustup](https://rustup.rs/). Rustup is a way of managing Rust installations, including managing using different Rust versions.
 
-Nu currently requires the **latest stable (1.59 or later)** version of Rust. The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
+Nu currently requires the **latest stable (1.60 or later)** version of Rust. The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
 
 <<< @/snippets/installation/rustup_choose_rust_version.sh
 
 Once we are ready, we press 1 and then enter.
 
-If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.59 or later.
+If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.60 or later.
 
 ### Dependencies
 

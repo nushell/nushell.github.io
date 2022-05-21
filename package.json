@@ -13,8 +13,8 @@
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.9.7",
     "@vuepress/plugin-medium-zoom": "^1.9.7",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.4.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1",
     "prettier": "^2.6.2",
     "vuepress": "^1.9.7",
     "vuepress-plugin-feed": "^0.1.9"
