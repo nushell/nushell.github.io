@@ -13,20 +13,20 @@ _(你可以把 Nushell 的配置加载顺序想象成在启动时执行两行 [R
 当你在没有设置这些文件的情况下启动 Nushell，Nushell 会提示你下载[`default env.nu`](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_env.nu)和[`default config.nu`](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu)。
 你可以通过浏览这些默认文件，了解环境变量的默认值和所有可配置项的列表。
 
-### 配置 `$config`
+### 配置 `$env.config`
 
-Nushell 的主要设置是以记录的形式保存在全局的`$config`变量中。这个记录可以用以下方式创建：
+Nushell 的主要设置是以记录的形式保存在 `config` 环境变量中。这个记录可以用以下方式创建：
 
 ```bash
-let $config = {
+let-env $config = {
   ...
 }
 ```
 
-你也可以隐藏(shadow)`$config`并更新它：
+你也可以隐藏(shadow)`$env.config`并更新它：
 
 ```bash
-let $config = ($config | upsert <field name> <field value>)
+let-env $config = ($env.config | upsert <field name> <field value>)
 ```
 
 按照约定，这个变量被定义在`config.nu`文件中。
@@ -38,6 +38,8 @@ let $config = ($config | upsert <field name> <field value>)
 ```bash
 let-env FOO = 'BAR'
 ```
+
+_(尽管 `$env.config` 是一个环境变量，按照惯例它仍然在 `config.nu` 中定义。)_
 
 以下是值得关注的且为 Nushell 所特有的几个相对重要的环境变量：
 

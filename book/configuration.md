@@ -39,7 +39,7 @@ You can set environment variables for the duration of a Nushell session using [`
 let-env FOO = 'BAR'
 ```
 
-_(Although $env.config is an environment varialbe, it is still defined by convention inside config.nu.)_
+_(Although $env.config is an environment variable, it is still defined by convention inside config.nu.)_
 
 These are some important variables to look at for Nushell-specific settings:
 
