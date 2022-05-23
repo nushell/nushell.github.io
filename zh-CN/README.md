@@ -18,7 +18,7 @@ features:
 
 ### Nu 可以与现有数据一起工作
 
-Nu 开箱即用支持 [JSON、YAML、XML、Excel 等](/zh-CN/book/loading_data.html)。无论是文件、数据库还是网络 API 中的数据，都可以很容易地引入 Nu 管道：
+Nu 开箱即用支持 [JSON、YAML、SQLite、Excel 等](/zh-CN/book/loading_data.html)。无论是文件、数据库还是网络 API 中的数据，都可以很容易地引入 Nu 管道：
 
 <img src="/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
@@ -30,7 +30,7 @@ Nu 在类型化的数据上操作，所以它能捕捉到其他 Shell 无法捕�
 
 ## 获取 Nu
 
-Nushell 可以通过 [你喜欢的软件包管理器](https://repology.org/project/nushell/versions) 来安装 [可下载的二进制文件](https://github.com/nushell/nushell/releases)，此外也可以以 [源码](https://github.com/nushell/nushell)方式获得。在此阅读 [详细的安装说明](/zh-CN/book/installation.html)或直接开始：
+Nushell 可以通过 [你喜欢的软件包管理器](https://repology.org/project/nushell/versions) 来安装 [可下载的二进制文件](https://github.com/nushell/nushell/releases)，可以在 [GitHub Action](https://github.com/marketplace/actions/setup-nu) 中使用，此外也可以以 [源码](https://github.com/nushell/nushell)方式获得。在此阅读 [详细的安装说明](/zh-CN/book/installation.html)或直接开始：
 
 #### macOS / Linux:
 
@@ -45,10 +45,6 @@ $ winget install nushell
 ```
 
 Windows 用户可能需要安装最新的 [Microsoft Visual C++ Redistributable](https://docs.microsoft.com/cpp/windows/latest-supported-vc-redist)。
-
-## 在 Github Action 中使用 Nu
-
-你也可以在 Github Action 中使用 `Nushell`，更多详情可以查看 [`setup-nu`](https://github.com/marketplace/actions/setup-nu)。
 
 ## 社区
 
