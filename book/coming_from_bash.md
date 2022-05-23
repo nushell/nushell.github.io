@@ -58,3 +58,4 @@ Note: this table assumes Nu 0.14.1 or later.
 | `bash -c <commands>`                 | `nu -c <commands>`                               | Run a pipeline of commands (requires 0.9.1 or later)              |
 | `bash <script file>`                 | `nu <script file>`                               | Run a script file (requires 0.9.1 or later)                       |
 | `\`                                  | `(` followed by `)`                              | Line continuation is not yet supported.                           |
+| `pwd`                                | `$env.PWD`                                       | Display the current directory                                     |
