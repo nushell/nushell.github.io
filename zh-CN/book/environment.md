@@ -136,8 +136,8 @@ BAR
 ## 环境变量转换
 
 你可以通过设置`ENV_CONVERSIONS`环境变量，来在字符串和值之间转换其他环境变量。
-例如，[默认配置](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu)包括将`PATH`（和 Windows 上使用的`Path`）环境变量从一个字符串转换为一个列表。
-配置加载后，任何在`ENV_CONVERSIONS`内指定的现有环境变量将根据其`from_string`字段被转换为任何类型的值。
+例如，[默认环境配置](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_env.nu)包括将`PATH`（和 Windows 上使用的`Path`）环境变量从一个字符串转换为一个列表。
+在 `env.nu` 和 `config.nu` 配置文件加载后，任何在`ENV_CONVERSIONS`内指定的现有环境变量将根据其`from_string`字段被转换为任何类型的值。
 外部工具要求环境变量是字符串，因此，任何非字符串的环境变量需要先进行转换：
 值->字符串的转换由`ENV_CONVERSIONS`的`to_string`字段设置，每次运行外部命令时都会进行转换。
 
@@ -179,7 +179,7 @@ let-env ENV_CONVERSIONS = {
 a-b-c
 ```
 
-因为`nu`是一个外部程序，Nushell 根据`ENV_CONVERSIONS.FOO.to_string`翻译了`[ a b c ]`，并把它传递给`nu`进程。
+因为`nu`是一个外部程序，Nushell 根据`ENV_CONVERSIONS.FOO.to_string`翻译了 `[ a b c ]` 列表，并把它传递给`nu`进程。
 用`nu -c`运行命令不会加载配置文件，因此`FOO`的环境转换没有了，它被显示为一个普通的字符串 —— 这样我们可以验证转换是否成功。
 你也可以通过`do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`手动运行这个步骤。
 
@@ -187,11 +187,11 @@ a-b-c
 如果这个值不是字符串，并且没有`to_string`的转换，它就不会被传递给外部（见`PROMPT_COMMAND`的`raw`列）。
 一个例外是`PATH`（Windows 上的`Path`）。默认情况下，它在启动时将字符串转换为列表，在运行外部程序时，如果没有指定手动转换，则从列表转换为字符串。
 
-_(重要! 环境转换字符串->值发生在 config.nu 被运行**之后**。config.nu 中的所有环境变量仍然是字符串，除非你手动将它们设置为一些其他的值。)_
+_(重要! 环境转换字符串->值发生在 `env.nu` 和 `config.nu` 被运行**之后**。`env.nu` 和 `config.nu` 中的所有环境变量仍然是字符串，除非你手动将它们设置为一些其他的值。)_
 
 ## 删除环境变量
 
-只有当一个环境变量被设置在当前作用域中时，你才能删除它：
+只有当一个环境变量被设置在当前作用域中时，你才能通过 [`hide`](/book/commands/hide.html) 命令“删除”它：
 
 ```bash
 > let-env FOO = 'BAR'
@@ -199,7 +199,7 @@ _(重要! 环境转换字符串->值发生在 config.nu 被运行**之后**。co
 > hide FOO
 ```
 
-如果你想删除源自父级作用域的环境变量，你可以用[`hide`](/book/commands/hide.html)隐藏它（关于隐藏的细节，请参见 [模块](modules.md#隐藏)）：
+隐藏也是有作用域的，这既允许你暂时删除一个环境变量，又可以防止你从子作用域内修改父环境：
 
 ```bash
 > let-env FOO = 'BAR'
@@ -210,3 +210,5 @@ _(重要! 环境转换字符串->值发生在 config.nu 被运行**之后**。co
 > $env.FOO
 BAR
 ```
+
+关于隐藏的更多细节，请参考 [模块](modules.md#隐藏)

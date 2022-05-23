@@ -29,6 +29,20 @@ def greet [name] {
 ───┴───────
 ```
 
+::: tip
+`echo`将其参数分别返回给管道。如果你想用它来生成一个单一的字符串，请在管道中添加` | str collect`：
+
+```shell
+def greet [name] {
+  echo "hello " $name | str collect
+}
+
+greet nushell
+```
+
+返回 `hello nushell`
+:::
+
 ## 命令名称
 
 在 Nushell 中，命令名是一串字符或一个带引号的字符串。下面是一些有效命令名的例子：`greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊`, 和`123`。
@@ -57,7 +71,7 @@ def "str mycommand" [] {
 
 ```bash
 def greet [name: string] {
-  echo "hello" $name
+  echo "hello " $name | str collect
 }
 ```
 
@@ -67,7 +81,7 @@ def greet [name: string] {
 
 ```bash
 def greet [name: int] {
-  echo "hello" $name
+  echo "hello " $name | str collect
 }
 
 greet world
@@ -106,6 +120,35 @@ error: Type Error
 - `string`
 - `variable`
 
+## 具有默认值的参数
+
+若要使一个参数成为可选的，并具有默认值，你可以在命令定义中指定该默认值：
+
+```shell
+def greet [name = "nushell"] {
+  echo "hello " $name | str collect
+}
+```
+
+你可以在没有参数的情况下调用这个命令，也可以指定一个值来覆盖默认值：
+
+```
+> greet
+hello nushell
+> greet world
+hello world
+```
+
+你也可以将默认值与[类型要求](#参数类型)相结合：
+
+```
+def congratulate [age: int = 18] {
+  echo "Happy birthday! Wow you are " $age " years old now!" | str collect
+}
+```
+
+如果你想检查一个可选参数是否存在，而不是仅仅依赖一个默认值，请使用[可选位置参数](#可选位置参数)代替。
+
 ## 可选位置参数
 
 默认情况下，位置参数(Positional Parameters)是必须的。如果没有传递位置参数，我们将遇到一个报错：
@@ -124,7 +167,7 @@ error: Type Error
 
 ```bash
 def greet [name?: string] {
-  echo "hello" $name
+  echo "hello" $name | str collect
 }
 
 greet
@@ -139,12 +182,14 @@ def greet [name?: string] {
   if ($name == null) {
     echo "hello, I don't know your name!"
   } else {
-    echo "hello" $name
+    echo "hello " $name | str collect
   }
 }
 
 greet
 ```
+
+如果你只是想在参数缺失时设置一个默认值，那么使用[默认值](#具有默认值的参数)来代替就更简单了。
 
 如果必需的和可选的位置参数一起使用，那么必需的参数必须先出现在定义中。
 
@@ -225,7 +270,7 @@ greet earth mars jupiter venus
 
 ```bash
 def greet [vip: string, ...name: string] {
-  echo "hello to our VIP" $vip
+  echo "hello to our VIP " $vip | str collect
   echo "and hello to everybody else:"
   for $n in $name {
     echo $n
@@ -346,6 +391,17 @@ def double [] {
  1 │ 4
  2 │ 6
 ───┴─────
+```
+
+我们还可以使用`$in`变量来存储输入，以便在后面使用：
+
+```shell
+def nullify [...cols] {
+  let start = $in
+  $cols | reduce --fold $start { |col, df|
+    $df | upsert $col null
+  }
+}
 ```
 
 ## 持久化
