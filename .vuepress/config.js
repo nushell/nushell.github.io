@@ -30,11 +30,11 @@ module.exports = {
       title: 'Nushell',
       description: 'Um novo tipo de shell.',
     },
-    '/tr/': {
-      lang: 'tr',
-      title: 'Nushell',
-      description: 'A new type of shell.',
-    },
+    // '/tr/': {
+    //   lang: 'tr',
+    //   title: 'Nushell',
+    //   description: 'A new type of shell.',
+    // },
   },
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
