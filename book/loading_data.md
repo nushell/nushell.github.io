@@ -60,7 +60,7 @@ But what happens if you load a text file that isn't one of these? Let's try it:
 > open README.md
 ```
 
-We're shown the contents of the file. If the file is too large, we get a handy scroll-view to look at the file and then jump back to the terminal. To help with readability, Nu will also syntax-highlight common file formats like source files, Markdown, and more.
+We're shown the contents of the file.
 
 Below the surface, what Nu sees in these text files is one large string. Next, we'll talk about how to work with these strings to get the data we need out of them.
 
