@@ -25,7 +25,7 @@ Note: this table assumes Nu 0.43 or later.
 | default                   |                              |                                 |                          |     |
 | drop                      |                              |                                 |                          |     |
 | du                        |                              |                                 |                          |     |
-| each                      | map, mapv, iterate           | map, forEach                    | map                      |     |
+| each                      | map, mapv, iterate           | map, forEach                    | map, mapM                |     |
 | echo                      | println                      |                                 | putStrLn, print          |     |
 | enter                     |                              |                                 |                          |     |
 | exit                      | System/exit                  |                                 |                          |     |
