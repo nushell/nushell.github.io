@@ -73,7 +73,7 @@ def main [x: int] {
 110
 ```
 
-## Shebangs (`!#`)
+## Shebangs (`#!`)
 
 On Linux and macOS you can optionally use a [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) to tell the OS that a file should be interpreted by Nu. For example, with the following in a file named `myscript`:
 
