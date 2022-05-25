@@ -1,7 +1,7 @@
 ---
 title: load-env
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Loads an environment update from a record.
 ---

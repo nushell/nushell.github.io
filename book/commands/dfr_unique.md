@@ -1,7 +1,7 @@
 ---
 title: dfr unique
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Returns unique values from a series
 ---
@@ -12,7 +12,13 @@ usage: |
 
 ## Signature
 
-```> dfr unique ```
+```> dfr unique --subset --last --maintain-order```
+
+## Parameters
+
+ -  `--subset {any}`: Subset of column(s) to use to maintain rows (lazy df)
+ -  `--last`: Keeps last unique value. Default keeps first value (lazy df)
+ -  `--maintain-order`: Keep the same order as the original DataFrame (lazy df)
 
 ## Examples
 

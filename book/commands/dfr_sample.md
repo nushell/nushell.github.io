@@ -1,7 +1,7 @@
 ---
 title: dfr sample
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Create sample dataframe
 ---
@@ -12,12 +12,13 @@ usage: |
 
 ## Signature
 
-```> dfr sample --n-rows --fraction --replace```
+```> dfr sample --n-rows --fraction --seed --replace```
 
 ## Parameters
 
  -  `--n-rows {int}`: number of rows to be taken from dataframe
  -  `--fraction {number}`: fraction of dataframe to be taken
+ -  `--seed {number}`: seed for the selection
  -  `--replace`: sample with replace
 
 ## Examples

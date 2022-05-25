@@ -1,9 +1,9 @@
 ---
 title: dfr first
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
-  Creates new dataframe with first rows
+  Creates new dataframe with first rows or creates a first expression
 ---
 
 # `{{ $frontmatter.title }}`
@@ -23,4 +23,9 @@ usage: |
 Create new dataframe with head rows
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr to-df | dfr first 1
+```
+
+Creates a first expression from a column
+```shell
+> dfr col a | dfr first
 ```

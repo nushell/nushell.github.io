@@ -1,7 +1,7 @@
 ---
 title: from csv
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Parse text as .csv and create table.
 ---
@@ -12,12 +12,13 @@ usage: |
 
 ## Signature
 
-```> from csv --separator --noheaders --trim```
+```> from csv --separator --noheaders --no-infer --trim```
 
 ## Parameters
 
  -  `--separator {string}`: a character to separate columns, defaults to ','
  -  `--noheaders`: don't treat the first row as column names
+ -  `--no-infer`: no field type inferencing
  -  `--trim {string}`: drop leading and trailing whitespaces around headers names and/or field values
 
 ## Examples

@@ -1,7 +1,7 @@
 ---
 title: to nuon
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Converts table data into Nuon (Nushell Object Notation) text.
 ---

@@ -1,7 +1,7 @@
 ---
 title: watch
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Watch for file changes and execute Nu code when they happen.
 ---

@@ -1,7 +1,7 @@
 ---
 title: str snake-case
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Convert a string to snake_case
 ---
@@ -20,22 +20,22 @@ usage: |
 
 ## Examples
 
-convert a string to camelCase
+convert a string to snake_case
 ```shell
 >  "NuShell" | str snake-case
 ```
 
-convert a string to camelCase
+convert a string to snake_case
 ```shell
 >  "this_is_the_second_case" | str snake-case
 ```
 
-convert a string to camelCase
+convert a string to snake_case
 ```shell
 > "this-is-the-first-case" | str snake-case
 ```
 
-convert a column from a table to snake-case
+convert a column from a table to snake_case
 ```shell
 > [[lang, gems]; [nuTest, 100]] | str snake-case lang
 ```

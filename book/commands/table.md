@@ -1,7 +1,7 @@
 ---
 title: table
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Render the table.
 ---
@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> table --start-number```
+```> table --start-number --list```
 
 ## Parameters
 
  -  `--start-number {int}`: row number to start viewing from
+ -  `--list`: list available table modes/themes
 
 ## Examples
 

@@ -1,7 +1,7 @@
 ---
 title: drop column
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Remove the last number of columns. If you want to remove columns by name, try 'reject'.
 ---

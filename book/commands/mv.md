@@ -1,7 +1,7 @@
 ---
 title: mv
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Move files or directories.
 ---
@@ -12,13 +12,14 @@ usage: |
 
 ## Signature
 
-```> mv (source) (destination) --quiet```
+```> mv (source) (destination) --verbose --interactive```
 
 ## Parameters
 
  -  `source`: the location to move files/directories from
  -  `destination`: the location to move files/directories to
- -  `--quiet`: suppress output showing files moved
+ -  `--verbose`: make mv to be verbose, showing files been moved.
+ -  `--interactive`: ask user to confirm action
 
 ## Examples
 

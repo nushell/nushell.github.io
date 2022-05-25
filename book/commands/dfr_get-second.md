@@ -1,7 +1,7 @@
 ---
 title: dfr get-second
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Gets second from date
 ---

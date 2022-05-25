@@ -1,7 +1,7 @@
 ---
 title: from xml
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Parse text as .xml and create table.
 ---

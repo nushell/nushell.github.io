@@ -1,7 +1,7 @@
 ---
 title: db col
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Creates column expression for database
 ---
@@ -22,5 +22,5 @@ usage: |
 
 Creates a named column expression
 ```shell
-> col name_1
+> db col name_1
 ```

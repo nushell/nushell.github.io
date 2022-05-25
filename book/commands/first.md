@@ -1,7 +1,7 @@
 ---
 title: first
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Show only the first number of rows.
 ---

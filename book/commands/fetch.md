@@ -1,7 +1,7 @@
 ---
 title: fetch
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Fetch the contents from a URL.
 ---

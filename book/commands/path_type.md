@@ -1,7 +1,7 @@
 ---
 title: path type
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Get the type of the object a path refers to (e.g., file, dir, symlink)
 ---
