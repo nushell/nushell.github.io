@@ -15,7 +15,7 @@ This `git log` command is interesting but you can't do a lot with it like this.
 Let's make it more parsable
 
 ```shell
-> git log --pretty="%h|%s|%aN|%aE|%aD" -n 25`
+> git log --pretty="%h|%s|%aN|%aE|%aD" -n 25
 ```
 
 This will work but I've been burnt by this in the past when a pipe `|` gets injected in the commits.
