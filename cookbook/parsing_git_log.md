@@ -314,7 +314,7 @@ Now let's try `group-by` and see what happens. This is a tiny bit tricky because
 ────────────┴────────────────
 ```
 
-This would look better if we pivot the data and name the columns
+This would look better if we transpose the data and name the columns
 
 ```shell
 > git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | date format '%Y-%m-%d'} | group-by date | transpose date count
@@ -477,7 +477,7 @@ Or even show me all the commits in the last 7 days.
 ────┴──────────┴──────────────────────────┴───────────────────┴─────────────────────────┴──────────────
 ```
 
-Now, with the 365 day slice of data, let's `group-by` name where the commits are less than a year old. This table has a lot of columns so it's unreadable. However, if we `group-by` name and `pivot` the table things will look much cleaner. `Pivot` takes rows and turns them into columns or turns columns into rows.
+Now, with the 365 day slice of data, let's `group-by` name where the commits are less than a year old. This table has a lot of columns so it's unreadable. However, if we `group-by` name and `transpose` the table things will look much cleaner. `Pivot` takes rows and turns them into columns or turns columns into rows.
 
 ```shell
 > git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose
@@ -547,7 +547,7 @@ What if we throw in the `sort-by` and `reverse` commands for good measure? Also,
 ...
 ```
 
-This is still a lot of data so let's just look at the top 10 and use the `rename` command to name the columns. We could've also provided the column names with the pivot command.
+This is still a lot of data so let's just look at the top 10 and use the `rename` command to name the columns. We could've also provided the column names with the `transpose` command.
 
 ```shell
 > git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10
