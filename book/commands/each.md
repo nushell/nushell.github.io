@@ -1,7 +1,7 @@
 ---
 title: each
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Run a block on each element of input
 ---

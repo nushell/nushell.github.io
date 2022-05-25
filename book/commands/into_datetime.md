@@ -1,7 +1,7 @@
 ---
 title: into datetime
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Convert text into a datetime
 ---
@@ -12,39 +12,39 @@ usage: |
 
 ## Signature
 
-```> into datetime ...rest --list --timezone --offset --format```
+```> into datetime ...rest --timezone --offset --format --list```
 
 ## Parameters
 
  -  `...rest`: optionally convert text into datetime by column paths
- -  `--list`: lists strftime cheatsheet
- -  `--timezone {string}`: Specify timezone if the input is timestamp, like 'UTC/u' or 'LOCAL/l'
- -  `--offset {int}`: Specify timezone by offset if the input is timestamp, like '+8', '-4', prior than timezone
- -  `--format {string}`: Specify date and time formatting
+ -  `--timezone {string}`: Specify timezone if the input is a Unix timestamp. Valid options: 'UTC' ('u') or 'LOCAL' ('l')
+ -  `--offset {int}`: Specify timezone by offset from UTC if the input is a Unix timestamp, like '+8', '-4'
+ -  `--format {string}`: Specify an expected format for parsing strings to datetimes. Use --list to see all possible options
+ -  `--list`: Show all possible variables for use with the --format flag
 
 ## Examples
 
 Convert to datetime
 ```shell
-> '16.11.1984 8:00 am +0000' | into datetime
+> '27.02.2021 1:55 pm +0000' | into datetime
 ```
 
 Convert to datetime
 ```shell
-> '2020-08-04T16:39:18+00:00' | into datetime
+> '2021-02-27T13:55:40+00:00' | into datetime
 ```
 
 Convert to datetime using a custom format
 ```shell
-> '20200904_163918+0000' | into datetime -f '%Y%m%d_%H%M%S%z'
+> '20210227_135540+0000' | into datetime -f '%Y%m%d_%H%M%S%z'
 ```
 
-Convert timestamp (no larger than 8e+12) to datetime using a specified timezone
+Convert timestamp (no larger than 8e+12) to a UTC datetime
 ```shell
-> '1614434140' | into datetime -z 'UTC'
+> 1614434140 | into datetime
 ```
 
 Convert timestamp (no larger than 8e+12) to datetime using a specified timezone offset (between -12 and 12)
 ```shell
-> '1614434140' | into datetime -o +9
+> 1614434140 | into datetime -o +9
 ```

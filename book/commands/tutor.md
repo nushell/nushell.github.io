@@ -1,7 +1,7 @@
 ---
 title: tutor
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Run the tutorial. To begin, run: tutor
 ---

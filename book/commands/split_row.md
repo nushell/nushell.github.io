@@ -1,7 +1,7 @@
 ---
 title: split row
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Split a string into multiple rows using a separator
 ---
@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> split row (separator)```
+```> split row (separator) --number```
 
 ## Parameters
 
  -  `separator`: the character that denotes what separates rows
+ -  `--number {int}`: Split into maximum number of items
 
 ## Examples
 

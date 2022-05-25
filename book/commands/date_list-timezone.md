@@ -1,7 +1,7 @@
 ---
 title: date list-timezone
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   List supported time zones.
 ---

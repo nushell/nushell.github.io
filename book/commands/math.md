@@ -1,7 +1,7 @@
 ---
 title: math
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.
 ---

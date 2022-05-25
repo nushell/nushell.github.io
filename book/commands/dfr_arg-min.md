@@ -1,7 +1,7 @@
 ---
 title: dfr arg-min
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Return index for min value in series
 ---

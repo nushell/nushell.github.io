@@ -1,9 +1,9 @@
 ---
 title: dfr filter-with
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
-  Filters dataframe using a mask as reference
+  Filters dataframe using a mask or expression as reference
 ---
 
 # `{{ $frontmatter.title }}`
@@ -12,11 +12,11 @@ usage: |
 
 ## Signature
 
-```> dfr filter-with (mask)```
+```> dfr filter-with (mask or expression)```
 
 ## Parameters
 
- -  `mask`: boolean mask used to filter data
+ -  `mask or expression`: boolean mask used to filter data
 
 ## Examples
 

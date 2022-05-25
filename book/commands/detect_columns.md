@@ -1,7 +1,7 @@
 ---
 title: detect columns
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Attempt to automatically split text into multiple columns
 ---

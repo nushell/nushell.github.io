@@ -1,7 +1,7 @@
 ---
 title: where
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Filter values based on a condition.
 ---

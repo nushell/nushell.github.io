@@ -1,7 +1,7 @@
 ---
 title: math max
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Finds the maximum within a list of numbers or tables
 ---

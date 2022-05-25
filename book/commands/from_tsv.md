@@ -1,7 +1,7 @@
 ---
 title: from tsv
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Parse text as .tsv and create table.
 ---
@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> from tsv --noheaders --trim```
+```> from tsv --noheaders --no-infer --trim```
 
 ## Parameters
 
  -  `--noheaders`: don't treat the first row as column names
+ -  `--no-infer`: no field type inferencing
  -  `--trim {string}`: drop leading and trailing whitespaces around headers names and/or field values
 
 ## Examples

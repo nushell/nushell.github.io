@@ -1,7 +1,7 @@
 ---
 title: reduce
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Aggregate a list table to a single value using an accumulator block.
 ---
@@ -29,7 +29,7 @@ Sum values of a list (same as 'math sum')
 
 Sum values of a list (same as 'math sum')
 ```shell
-> [ 1 2 3 ] | reduce -n {|it, acc| $acc + $it.item }
+> [ 1 2 3 ] | reduce -n {|it, acc| $acc.item + $it.item }
 ```
 
 Sum values with a starting value (fold)
@@ -45,10 +45,10 @@ Replace selected characters in a string with 'X'
 Find the longest string and its index
 ```shell
 > [ one longest three bar ] | reduce -n { |it, acc|
-                    if ($it.item | str length) > ($acc | str length) {
+                    if ($it.item | str length) > ($acc.item | str length) {
                         $it.item
                     } else {
-                        $acc
+                        $acc.item
                     }
                 }
 ```

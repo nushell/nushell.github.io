@@ -1,7 +1,7 @@
 ---
 title: math ceil
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Applies the ceil function to a list of numbers
 ---

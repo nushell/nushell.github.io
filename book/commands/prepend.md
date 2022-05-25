@@ -1,7 +1,7 @@
 ---
 title: prepend
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Prepend any number of rows to a table.
 ---

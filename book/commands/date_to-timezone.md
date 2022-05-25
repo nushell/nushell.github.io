@@ -1,7 +1,7 @@
 ---
 title: date to-timezone
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Convert a date to a given time zone.
 ---

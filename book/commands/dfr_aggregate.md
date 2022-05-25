@@ -1,9 +1,9 @@
 ---
 title: dfr aggregate
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
-  Performs an aggregation operation on a dataframe and groupby object
+  Performs a series of aggregations from a group by
 ---
 
 # `{{ $frontmatter.title }}`
@@ -12,29 +12,36 @@ usage: |
 
 ## Signature
 
-```> dfr aggregate (operation_name) --quantile --explicit```
+```> dfr aggregate ...Group by expressions```
 
 ## Parameters
 
- -  `operation_name`:
-	Dataframes: mean, sum, min, max, quantile, median, var, std
-	GroupBy: mean, sum, min, max, first, last, nunique, quantile, median, var, std, count
- -  `--quantile {number}`: quantile value for quantile operation
- -  `--explicit`: returns explicit names for groupby aggregations
+ -  `...Group by expressions`: Expression(s) that define the aggregations to be applied
 
 ## Examples
 
-Aggregate sum by grouping by column a and summing on col b
+Group by and perform an aggregation
 ```shell
-> [[a b]; [one 1] [one 2]] | dfr to-df | dfr group-by a | dfr aggregate sum
+> [[a b]; [1 2] [1 4] [2 6] [2 4]]
+    | dfr to-df
+    | dfr group-by a
+    | dfr aggregate [
+        ("b" | dfr min | dfr as "b_min")
+        ("b" | dfr max | dfr as "b_max")
+        ("b" | dfr sum | dfr as "b_sum")
+     ]
 ```
 
-Aggregate sum in dataframe columns
+Group by and perform an aggregation
 ```shell
-> [[a b]; [4 1] [5 2]] | dfr to-df | dfr aggregate sum
-```
-
-Aggregate sum in series
-```shell
-> [4 1 5 6] | dfr to-df | dfr aggregate sum
+> [[a b]; [1 2] [1 4] [2 6] [2 4]]
+    | dfr to-df
+    | dfr to-lazy
+    | dfr group-by a
+    | dfr aggregate [
+        ("b" | dfr min | dfr as "b_min")
+        ("b" | dfr max | dfr as "b_max")
+        ("b" | dfr sum | dfr as "b_sum")
+     ]
+    | dfr collect
 ```

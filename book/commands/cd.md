@@ -1,7 +1,7 @@
 ---
 title: cd
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Change directory.
 ---
@@ -23,4 +23,9 @@ usage: |
 Change to your home directory
 ```shell
 > cd ~
+```
+
+Change to a directory via abbreviations
+```shell
+> cd d/s/9
 ```

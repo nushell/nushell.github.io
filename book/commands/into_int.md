@@ -1,7 +1,7 @@
 ---
 title: into int
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Convert value to integer
 ---
@@ -49,6 +49,11 @@ Convert file size to integer
 Convert bool to integer
 ```shell
 > [false, true] | into int
+```
+
+Convert date to integer (Unix timestamp)
+```shell
+> 2022-02-02 | into int
 ```
 
 Convert to integer from binary

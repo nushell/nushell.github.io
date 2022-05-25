@@ -1,7 +1,7 @@
 ---
 title: dfr set-with-idx
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Sets value in the given index
 ---

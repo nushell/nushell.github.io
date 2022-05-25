@@ -1,7 +1,7 @@
 ---
 title: db as
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Creates an alias for a column selection
 ---
@@ -23,13 +23,4 @@ usage: |
 Creates an alias for a column selection
 ```shell
 > db col name_a | db as new_a
-```
-
-Creates an alias for a table
-```shell
-> db open name
-    | db select a
-    | db from table_a
-    | db as table_a_new
-    | db describe
 ```

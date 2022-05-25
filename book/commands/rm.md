@@ -1,7 +1,7 @@
 ---
 title: rm
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Remove file(s).
 ---
@@ -12,7 +12,7 @@ usage: |
 
 ## Signature
 
-```> rm ...rest --trash --permanent --recursive --force --quiet```
+```> rm ...rest --trash --permanent --recursive --force --verbose --interactive```
 
 ## Parameters
 
@@ -21,7 +21,8 @@ usage: |
  -  `--permanent`: don't use recycle bin, delete permanently
  -  `--recursive`: delete subdirectories recursively
  -  `--force`: suppress error when no file
- -  `--quiet`: suppress output showing files deleted
+ -  `--verbose`: make rm to be verbose, showing files been deleted
+ -  `--interactive`: ask user to confirm action
 
 ## Examples
 

@@ -1,7 +1,7 @@
 ---
 title: str screaming-snake-case
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Convert a string to SCREAMING_SNAKE_CASE
 ---
@@ -20,17 +20,17 @@ usage: |
 
 ## Examples
 
-convert a string to camelCase
+convert a string to SCREAMING_SNAKE_CASE
 ```shell
 >  "NuShell" | str screaming-snake-case
 ```
 
-convert a string to camelCase
+convert a string to SCREAMING_SNAKE_CASE
 ```shell
 >  "this_is_the_second_case" | str screaming-snake-case
 ```
 
-convert a string to camelCase
+convert a string to SCREAMING_SNAKE_CASE
 ```shell
 > "this-is-the-first-case" | str screaming-snake-case
 ```

@@ -1,7 +1,7 @@
 ---
 title: dfr rename-col
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Rename a dataframe column
 ---
@@ -12,12 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr rename-col (from) (to)```
+```> dfr rename-col (columns) (new names)```
 
 ## Parameters
 
- -  `from`: column name to be renamed
- -  `to`: new column name
+ -  `columns`: Column(s) to be renamed. A string or list of strings
+ -  `new names`: New names for the selected column(s). A string or list of strings
 
 ## Examples
 

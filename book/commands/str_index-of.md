@@ -1,9 +1,9 @@
 ---
 title: str index-of
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
-  Returns starting index of given pattern in string counting from 0. Returns -1 when there are no results.
+  Returns start index of first occurrence of pattern in string, or -1 if no match
 ---
 
 # `{{ $frontmatter.title }}`

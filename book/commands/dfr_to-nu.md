@@ -1,9 +1,9 @@
 ---
 title: dfr to-nu
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
-  Converts a section of the dataframe to Nushell Table
+  Convert expression to a nu value for access and exploration
 ---
 
 # `{{ $frontmatter.title }}`
@@ -12,21 +12,11 @@ usage: |
 
 ## Signature
 
-```> dfr to-nu --n-rows --tail```
-
-## Parameters
-
- -  `--n-rows {number}`: number of rows to be shown
- -  `--tail`: shows tail rows
+```> dfr to-nu ```
 
 ## Examples
 
-Shows head rows from dataframe
+Convert a col expression into a nushell value
 ```shell
-> [[a b]; [1 2] [3 4]] | dfr to-df | dfr to-nu
-```
-
-Shows tail rows from dataframe
-```shell
-> [[a b]; [1 2] [3 4] [5 6]] | dfr to-df | dfr to-nu -t -n 1
+> dfr col col_a | dfr to-nu
 ```

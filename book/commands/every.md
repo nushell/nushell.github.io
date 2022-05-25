@@ -1,7 +1,7 @@
 ---
 title: every
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Show (or skip) every n-th row, starting from the first one.
 ---

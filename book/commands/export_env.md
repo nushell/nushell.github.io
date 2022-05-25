@@ -1,7 +1,7 @@
 ---
 title: export env
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Export a block from a module that will be evaluated as an environment variable when imported.
 ---

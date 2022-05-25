@@ -1,7 +1,7 @@
 ---
 title: dfr shift
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Shifts the values by a given period
 ---
@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> dfr shift (period)```
+```> dfr shift (period) --fill```
 
 ## Parameters
 
  -  `period`: shift period
+ -  `--fill {any}`: Expression to use to fill the null values (lazy df)
 
 ## Examples
 

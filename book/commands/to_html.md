@@ -1,7 +1,7 @@
 ---
 title: to html
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Convert table into simple HTML
 ---

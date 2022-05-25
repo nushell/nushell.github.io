@@ -1,7 +1,7 @@
 ---
 title: dfr describe
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Describes dataframes numeric columns
 ---

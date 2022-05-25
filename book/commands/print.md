@@ -1,7 +1,7 @@
 ---
 title: print
 layout: command
-version: 0.62.0
+version: 0.63.0
 usage: |
   Prints the values given
 ---
@@ -12,11 +12,12 @@ usage: |
 
 ## Signature
 
-```> print ...rest```
+```> print ...rest --no_newline```
 
 ## Parameters
 
  -  `...rest`: the values to print
+ -  `--no_newline`: print without inserting a newline for the line ending
 
 ## Examples
 
