@@ -21,8 +21,8 @@ Nushell supports the following operators for common math, logic, and string oper
 | `in`     | value in list                                           |
 | `not-in` | value not in list                                       |
 | `not`    | logical not                                             |
-| `&&`     | and two Boolean values                                  |
-| `||`     | or two Boolean values                                   |
+| `&&`, `and` | and two Boolean values                               |
+| `||`, `or` | or two Boolean values                                 |
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
 
