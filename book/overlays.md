@@ -116,6 +116,35 @@ eggs
 Overlays remember what you add to them and store that information even if you remove them.
 This can let you repeatedly swap between different contexts.
 
+::: tip
+Sometimes, after adding an overlay, you might not want custom definitions to be added into it.
+The solution can be to create a new empty overlay that would be used just for recording the custom changes:
+
+```
+(zero)> overlay add spam
+
+(spam)> module scratchpad { }
+
+(spam)> overlay add scratchpad
+
+(scratchpad)> def eggs [] { "eggs" }
+```
+
+The `eggs` command is added into `scratchpad` while keeping `spam` intact.
+
+_Coming in version 0.64:_
+To make it less verbose, you can use the [`overlay new`](commands/overlay_new.md) command:
+
+```
+(zero)> overlay add spam
+
+(spam)> overlay new scratchpad
+
+(scratchpad)> def eggs [] { "eggs" }
+```
+
+:::
+
 ## Preserving Definitions
 
 Sometimes, you might want to remove an overlay, but keep all the custom definitions you added without having to redefine them in the next active overlay:
