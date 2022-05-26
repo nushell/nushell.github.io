@@ -103,6 +103,7 @@ module.exports = {
                 'variables_and_subexpressions',
                 'scripts',
                 'modules',
+                'overlays',
               ],
             },
             {
