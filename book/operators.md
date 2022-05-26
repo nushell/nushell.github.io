@@ -20,6 +20,7 @@ Nushell supports the following operators for common math, logic, and string oper
 | `!~`     | inverse regex match / string does *not* contain another |
 | `in`     | value in list                                           |
 | `not-in` | value not in list                                       |
+| `not`    | logical not                                             |
 | `&&`     | and two Boolean values                                  |
 | `||`     | or two Boolean values                                   |
 
