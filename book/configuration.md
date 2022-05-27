@@ -18,7 +18,7 @@ You can browse the default files for default values of environment variables and
 Nushell's main settings are kept in the `config` environment variable as a record. This record can be created using:
 
 ```
-let-env $config = {
+let-env config = {
   ...
 }
 ```
@@ -26,7 +26,7 @@ let-env $config = {
 You can also shadow `$env.config` and update it:
 
 ```
-let-env $config = ($env.config | upsert <field name> <field value>)
+let-env config = ($env.config | upsert <field name> <field value>)
 ```
 
 By convention, this variable is defined in the `config.nu` file.
