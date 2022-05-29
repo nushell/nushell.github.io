@@ -30,7 +30,7 @@ In Nushell, we use the `>` as the greater-than operator. This fits better with t
 
 ## Think of Nushell as a compiled language
 
-An important part of Nushell's design and specifically where it differs from many dynamic languages is that Nushell converts the source you give it to something to run, and then runs the result. It doesn't have an `eval` features which allows you to continue pulling in new source during runtime. This means that tasks like including files to be part of your project need to be known paths, much like includes in compiled languages like C++ or Rust.
+An important part of Nushell's design and specifically where it differs from many dynamic languages is that Nushell converts the source you give it into something to run, and then runs the result. It doesn't have an `eval` feature which allows you to continue pulling in new source during runtime. This means that tasks like including files to be part of your project need to be known paths, much like includes in compiled languages like C++ or Rust.
 
 For example, the following doesn't make sense in Nushell, and will fail to execute if run as a script:
 
