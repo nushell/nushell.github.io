@@ -1,3 +1,8 @@
+const { feedPlugin } = require('vuepress-plugin-feed2');
+const { defaultTheme } = require('@vuepress/theme-default');
+const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
+const { mediumZoomPlugin } = require('@vuepress/plugin-medium-zoom');
+
 module.exports = {
   locales: {
     '/': {
@@ -45,7 +50,7 @@ module.exports = {
     ],
     ['link', { rel: 'icon', href: '/icon.png' }],
   ],
-  themeConfig: {
+  theme: defaultTheme({
     repo: 'nushell/nushell',
     repoLabel: 'GitHub',
     editLinks: true,
@@ -60,9 +65,9 @@ module.exports = {
     locales: {
       '/': {
         selectText: 'Languages',
-        label: 'English',
+        selectLanguageName: 'English',
         editLinkText: 'Edit this page on GitHub',
-        nav: [
+        navbar: [
           { text: 'Book', link: '/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -219,9 +224,9 @@ module.exports = {
       },
       '/de/': {
         selectText: 'Sprachen',
-        label: 'Deutsch',
+        selectLanguageName: 'Deutsch',
         editLinkText: 'Diese Seite auf GitHub bearbeiten',
-        nav: [
+        navbar: [
           { text: 'Buch', link: '/de/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -252,9 +257,9 @@ module.exports = {
       },
       '/tr/': {
         selectText: 'Languages',
-        label: 'Turkish',
+        selectLanguageName: 'Turkish',
         editLinkText: 'Edit this page on GitHub',
-        nav: [
+        navbar: [
           { text: 'Book', link: '/tr/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -340,9 +345,9 @@ module.exports = {
       },
       '/es/': {
         selectText: 'Idiomas',
-        label: 'Español',
+        selectLanguageName: 'Español',
         editLinkText: 'Edita esta página en GitHub',
-        nav: [
+        navbar: [
           { text: 'Libro', link: '/es/book/' },
           // { text: "Libro Colaborador", link: "/es/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -395,9 +400,9 @@ module.exports = {
       },
       '/ja/': {
         selectText: '言語',
-        label: '日本語',
+        selectLanguageName: '日本語',
         editLinkText: 'GitHubでこのページを編集する',
-        nav: [
+        navbar: [
           { text: '本', link: '/ja/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -429,9 +434,9 @@ module.exports = {
       },
       '/pt-BR/': {
         selectText: 'Línguas',
-        label: 'Português do Brasil',
+        selectLanguageName: 'Português do Brasil',
         editLinkText: 'Edite esta página no GitHub',
-        nav: [
+        navbar: [
           { text: 'Livro', link: '/pt-BR/book/' },
           // { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -478,9 +483,9 @@ module.exports = {
       },
       '/zh-CN/': {
         selectText: '语言',
-        label: '中文',
+        selectLanguageName: '中文',
         editLinkText: '在GitHub上编辑此页面',
-        nav: [
+        navbar: [
           { text: '书', link: '/zh-CN/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -565,23 +570,23 @@ module.exports = {
         },
       },
     },
-  },
+  }),
   plugins: [
-    '@vuepress/plugin-back-to-top',
-    '@vuepress/plugin-medium-zoom',
-    [
-      'feed',
-      {
-        canonical_base: 'https://www.nushell.sh/',
-        feed_options: {
-          title: 'Nushell Blog',
-          link: 'https://www.nushell.sh/blog',
-          favicon: 'https://www.nushell.sh/icon.png',
-        },
-        posts_directories: ['/blog/'],
-        sort: (entries) =>
-          entries.sort((a, b) => new Date(b.date) - new Date(a.date)),
+    backToTopPlugin(),
+    mediumZoomPlugin(),
+    feedPlugin({
+      hostname: 'www.nushell.sh',
+      canonical_base: 'https://www.nushell.sh/',
+      feed_options: {
+        title: 'Nushell Blog',
+        link: 'https://www.nushell.sh/blog',
+        favicon: 'https://www.nushell.sh/icon.png',
       },
-    ],
+      rss: true,
+      json: true,
+      posts_directories: ['/blog/'],
+      sort: (entries) =>
+        entries.sort((a, b) => new Date(b.date) - new Date(a.date)),
+    }),
   ],
 };
