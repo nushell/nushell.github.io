@@ -45,11 +45,11 @@ The file that we will be using for the benchmarks is the
 Feel free to download it if you want to follow these tests.
 
 The dataset has 5 columns and 5,429,252 rows. We can check that by using the
-`dfr list` command:
+`dfr ls` command:
 
 ```shell
 > let df = (dfr open .\Data7602DescendingYearOrder.csv)
-> dfr list
+> dfr ls
 
 ───┬──────┬─────────┬─────────
  # │ name │  rows   │ columns
@@ -205,8 +205,8 @@ all the operations in one `nu` file, to make sure we are doing similar
 operations:
 
 ```shell
-let df = (dfr open Data7602DescendingYearOrder.csv)
-let res = ($df | dfr group-by year | dfr aggregate sum | dfr select geo_count)
+let df = dfr open Data7602DescendingYearOrder.csv
+let res = ($df | dfr group-by year | dfr agg ("geo_count" | dfr sum)
 $res
 ```
 
@@ -259,21 +259,21 @@ Now, to read that file as a dataframe use the `dfr open` command like
 this:
 
 ```shell
-> let df = (dfr open test_small.csv)
+> let df = dfr open test_small.csv
 ```
 
-This should create the value `df` in memory which holds the data we just
+This should create the value `$df` in memory which holds the data we just
 created.
 
 ::: tip
-The command `dfrs open` can read either **csv** or **parquet**
+The command `dfr open` can read either **csv** or **parquet**
 files.
 :::
 
 To see all the dataframes that are stored in memory you can use
 
 ```shell
-> dfr list
+> dfr ls
 
 ───┬──────┬──────┬─────────
  # │ name │ rows │ columns
@@ -312,7 +312,8 @@ With the dataframe in memory we can start doing column operations with the
 
 ::: tip
 If you want to see all the dataframe commands that are available you
-can use `help dfr`
+can use `help dfr` or you can query nushell's scope
+`$nu.scope.commands | where category =~ dataframe`
 :::
 
 ## Basic aggregations
@@ -321,7 +322,7 @@ Let's start with basic aggregations on the dataframe. Let's sum all the columns
 that exist in `df` by using the `aggregate` command
 
 ```shell
-> $df | dfr aggregate sum
+> $df | dfr sum
 
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬──────
  # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word
@@ -335,7 +336,7 @@ a sum makes sense. If you want to filter out the text column, you can select
 the columns you want by using the `select` command
 
 ```shell
-$df | dfr aggregate sum | dfr select int_1 int_2 float_1 float_2
+$df | dfr sum | dfr select int_1 int_2 float_1 float_2
 
 ───┬───────┬───────┬─────────┬─────────
  # │ int_1 │ int_2 │ float_1 │ float_2
@@ -348,13 +349,18 @@ You can even store the result from this aggregation as you would store any
 other Nushell variable
 
 ```shell
-> let res = ($df | dfr aggregate sum | dfr select int_1 int_2 float_1 float_2)
+> let res = ($df | dfr sum | dfr select int_1 int_2 float_1 float_2)
 ```
+
+::: tip
+Type `let res = ( !! )` and press enter. This will auto complete the previously
+executed command. Note the space between ( and !!.
+:::
 
 And now we have two dataframes stored in memory
 
 ```shell
-> dfr list
+> dfr ls
 
 ───┬──────┬──────┬─────────
  # │ name │ rows │ columns
@@ -378,7 +384,7 @@ in another file and create the corresponding dataframe (for these examples we
 are going to call it `test_small_a.csv`)
 
 ```
-int_1a,int_2,float_1,float_2,first
+int_1,int_2,float_1,float_2,first
 9,14,0.4,3.0,a
 8,13,0.3,2.0,a
 7,12,0.2,1.0,a
@@ -388,15 +394,15 @@ int_1a,int_2,float_1,float_2,first
 We use the `dfr open` command to create the new variable
 
 ```shell
-> let df_a = (dfr open test_small_a.csv)
+> let df_a = dfr open test_small_a.csv
 ```
 
 Now, with the second dataframe loaded in memory we can join them using the
-column called `int_1` from the left dataframe and the column `int_1a` from the
+column called `int_1` from the left dataframe and the column `int_1` from the
 right dataframe
 
 ```shell
-> $df | dfr join $df_a -l [int_1] -r [int_1a]
+> $df | dfr join $df_a int_1 int_1
 
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬─────────┬─────────────┬───────────────┬───────────────┬─────────────
  # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word   │ int_2_right │ float_1_right │ float_2_right │ first_right
@@ -412,7 +418,7 @@ right dataframe
 In `Nu` when a command has multiple arguments that are expecting
 multiple values we use brackets `[]` to enclose those values. In the case of
 `dfr join` we can join on multiple columns as long as they have the
-same type, for example we could have done `$df | dfr join $df_a -l [int_1 int_2] -r [int_1a int_2]`
+same type, for example we could have done `$df | dfr join $df_a [int_1 int_2] [int_1 int_2]`
 :::
 
 By default, the join command does an inner join, meaning that it will keep the
@@ -436,68 +442,43 @@ To create a `GroupBy` object you only need to use the `group-by` command
 > let group = ($df | dfr group-by first)
 > $group
 
-───┬──────────┬───────
- # │ property │ value
-───┼──────────┼───────
- 0 │ group by │ first
-───┴──────────┴───────
+ LazyGroupBy │ apply aggregation to complete execution plan
 ```
 
-When printing the `GroupBy` object we can see the columns that are used as
-criteria to group the dataframe. Using the `GroupBy` we can aggregate the
-dataframe using multiple operations
+When printing the `GroupBy` object we can see that it is in the background a
+lazy operation waiting to be completed by adding an aggregation. Using the
+`GroupBy` we can create aggregations on a column
 
 ```shell
-$group | dfr aggregate sum
+$group | dfr agg ("int_1" | dfr agg sum)
+
+───┬───────┬───────────┬
+ # │ first │ int_1     │
+───┼───────┼───────────┼
+ 0 │ a     │         6 │
+ 1 │ b     │        17 │
+ 2 │ c     │        17 │
+───┴───────┴───────────┴
+```
+
+or we can define multiple aggregations on the same or different columns
+
+```shell
+$group | dfr agg [
+	("int_1" | dfr n-unique)
+	("int_2" | dfr min)
+	("float_1" | dfr sum)
+	("float_2" | dfr count)
+] | dfr sort-by first
 
 ───┬───────┬───────────┬───────────┬─────────────┬─────────────
  # │ first │ int_1     │ int_2     │ float_1     │ float_2
 ───┼───────┼───────────┼───────────┼─────────────┼─────────────
- 0 │ a     │         6 │        36 │      0.6000 │      4.0000
- 1 │ b     │        17 │        62 │      2.2000 │     18.0000
- 2 │ c     │        17 │        47 │      1.7000 │     24.0000
+ 0 │ a     │         3 │        11 │      0.6000 │      3
+ 1 │ b     │         4 │        14 │      2.2000 │      4
+ 2 │ c     │         3 │        10 │      1.7000 │      3
 ───┴───────┴───────────┴───────────┴─────────────┴─────────────
 ```
-
-And using the same `GroupBy` you can perform now another operation on the
-whole dataframe, like `min` in this case
-
-```shell
-$group | aggregate min
-
-───┬───────┬───────────┬───────────┬─────────────┬─────────────
- # │ first │ int_1     │ int_2     │ float_1     │ float_2
-───┼───────┼───────────┼───────────┼─────────────┼─────────────
- 0 │ a     │         1 │        11 │      0.1000 │      1.0000
- 1 │ b     │         0 │        14 │      0.4000 │      3.0000
- 2 │ c     │         0 │        10 │      0.0000 │      7.0000
-───┴───────┴───────────┴───────────┴─────────────┴─────────────
-```
-
-The created `GroupBy` object is so handy that it can even be used as a base for
-pivoting a table. As an example, let's use the column called `second` as the
-pivot column and the column `float_1` as the value column
-
-```shell
-> $group | dfr pivot second float_1 sum
-
-───┬───────┬────────┬────────┬────────
- # │ first │   b    │   a    │   c
-───┼───────┼────────┼────────┼────────
- 0 │ a     │ 0.6000 │        │
- 1 │ c     │        │        │ 1.7000
- 2 │ b     │        │ 1.5000 │ 0.7000
-───┴───────┴────────┴────────┴────────
-```
-
-::: tip
-a pivot operation is a way to aggregate data based on two columns. In
-the previous example, the result of the pivot command produced a table that
-represents the sum of all the values in the column `float_1` that are shared
-between columns `first` (now the rows) and `second` (now the columns). So,
-the value of `1.5` shown in row `b` and column `a` is the sum of all the
-floats where the column `first` is `b` and column `second` is `a`
-:::
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
 worth keeping in memory while you explore your dataset.
@@ -546,7 +527,7 @@ taking data from other dataframes and appending it to them. Now, if you list you
 dataframes you will see in total four dataframes
 
 ```shell
-> dfr list
+> dfr ls
 
 ───┬───────┬──────┬─────────
  # │  name │ rows │ columns
@@ -624,7 +605,7 @@ use `$nu.scope.vars`
 Let's rename our previous Series so it has a memorable name
 
 ```shell
-> let new_2 = ($new_2 | dfr rename memorable)
+> let new_2 = ($new_2 | dfr rename "0" memorable)
 > $new_2
 
 ───┬───────────
@@ -734,7 +715,7 @@ Now we have a new dataframe with only the values where the mask was true.
 The masks can also be created from Nushell lists, for example:
 
 ```shell
-> let mask1 = ([true true false] | dfr to-df mask)
+> let mask1 = ([true true false] | dfr to-df)
 > $new_df | dfr filter-with $mask1
 
 ───┬───┬───┬─────────┬────────
@@ -858,7 +839,8 @@ extract that information
 
 The command `take` is very handy, especially if we mix it with other commands.
 Let's say that we want to extract all rows for the first duplicated element for
-column `first`. In order to do that, we can use the command `dfr arg-unique` as shown in the next example
+column `first`. In order to do that, we can use the command `dfr arg-unique` as
+shown in the next example
 
 ```shell
 > let indices = ($df.first | dfr arg-unique)
@@ -999,6 +981,155 @@ Or all the duplicated ones
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
+## Lazy Dataframes
+
+Lazy dataframes are a way to query data by creating a logical plan. The
+advantage of this approach is that the plan never gets evaluated until you need
+to extract data. This way you could chain together aggregations, joins and
+selections and collect the data once you are happy with the selected
+operations.
+
+Let's create a small example of a lazy dataframe
+
+```shell
+> let a = ([[a b]; [1 a] [2 b] [3 c] [4 d]] | dfr to-lazy)
+> $a
+────────────────┬────────────────────────────────────────────────
+ plan           │ DATAFRAME(in-memory): ["a", "b"];
+                │     project */2 columns    |    details: None;
+                │     selection: "None"
+ optimized_plan │ DATAFRAME(in-memory): ["a", "b"];
+                │     project */2 columns    |    details: None;
+                │     selection: "None"
+────────────────┴────────────────────────────────────────────────
+```
+
+As you can see, the resulting dataframe is not yet evaluated, it stays as a
+set of instructions that can be done on the data. If you were to collect that
+dataframe you would get the next result
+
+```shell
+> $a | dfr collect
+───┬───┬───
+ # │ a │ b
+───┼───┼───
+ 0 │ 1 │ a
+ 1 │ 2 │ b
+ 2 │ 3 │ c
+ 3 │ 4 │ d
+───┴───┴───
+```
+
+as you can see, the collect command executes the plan and creates a nushell
+table for you.
+
+All dataframes operations should work with eager or lazy dataframes. The are
+converted in the background for compatibility. However, to take advantage of
+lazy operations if is recommended to only use lazy operations with lazy
+dataframes.
+
+To find all lazy dataframe operations you can use
+
+```shell
+$nu.scope.commands | where category =~ lazyframe
+```
+
+With your lazy frame defined we can start chaining operations on it. For
+example this
+
+```shell
+> $a
+:::   | dfr reverse
+:::   | dfr with-column [
+:::      ((dfr col a) * 2 | dfr as double_a)
+:::      ((dfr col a) / 2 | dfr as half_a)
+:::   ]
+:::   | dfr collect
+───┬───┬───┬──────────┬────────
+ # │ a │ b │ double_a │ half_a
+───┼───┼───┼──────────┼────────
+ 0 │ 4 │ d │        8 │      2
+ 1 │ 3 │ c │        6 │      1
+ 2 │ 2 │ b │        4 │      1
+ 3 │ 1 │ a │        2 │      0
+───┴───┴───┴──────────┴────────
+```
+
+:::tip
+You can use the line buffer editor to format your queries (ctr + o) easily
+:::
+
+This query uses the lazy reverse command to invert the dataframe and the
+`with-column` command to create new two columns using `expressions`.
+An `expression` is used to define and operation that is executed on the lazy
+frame. When put together they create the whole set of instructions used by the
+lazy commands to query the data. To list all the commands that generate an
+expression you can use
+
+```shell
+$nu.scope.commands | where category =~ expression
+```
+
+In our previous example, we use the `col` command to indicate that column `a`
+will be multiplied by 2 and then it will be aliased to the name `double_a`.
+In some cases the use of the `col` command can be inferred. For example, using
+the select command we can use only a string
+
+```shell
+> $a | dfr select a | dfr collect
+```
+
+or the `col` command
+
+```shell
+> $a | dfr select (dfr col a) | dfr collect
+```
+
+Let's try something more complicated and create aggregations from a lazy
+dataframe
+
+```shell
+> let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | dfr to-lazy )
+> $a
+:::   | dfr group-by name
+:::   | dfr agg [
+:::       ("value"  | dfr sum  | dfr as sum)
+:::       ("value"  | dfr mean  | dfr as mean)
+:::     ]
+:::   | dfr collect
+───┬──────┬─────┬──────
+ # │ name │ sum │ mean
+───┼──────┼─────┼──────
+ 0 │ two  │   5 │ 2.50
+ 1 │ one  │   2 │ 1.00
+───┴──────┴─────┴──────
+```
+
+And we could join on a lazy dataframe that hasn't being collected. Let's join
+the resulting group by to the original lazy frame
+
+```shell
+> let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | dfr to-lazy )
+> let group = ($a
+:::   | dfr group-by name
+:::   | dfr agg [
+:::       ("value"  | dfr sum  | dfr as sum)
+:::       ("value"  | dfr mean  | dfr as mean)
+:::     ])
+> $a | dfr join $group name name | dfr collect
+───┬──────┬───────┬─────┬──────
+ # │ name │ value │ sum │ mean
+───┼──────┼───────┼─────┼──────
+ 0 │ one  │     1 │   2 │ 1.00
+ 1 │ two  │     2 │   5 │ 2.50
+ 2 │ one  │     1 │   2 │ 1.00
+ 3 │ two  │     3 │   5 │ 2.50
+───┴──────┴───────┴─────┴──────
+```
+
+As you can see lazy frames are a powerful construct that will let you query
+data using a flexible syntax, resulting in blazing fast results.
+
 ## Dataframe commands
 
 So far we have seen quite a few operations that can be done using `DataFrame`s
@@ -1037,12 +1168,12 @@ whenever possible, their analogous Nushell command.
 | is-unique       | Series                      | Creates mask indicating unique values                                      |                               |
 | join            | DataFrame                   | Joins a dataframe using columns as reference                               |                               |
 | last            | DataFrame                   | Creates new dataframe with last rows                                       | last                          |
-| list            |                             | Lists stored dataframes                                                    |                               |
+| ls              |                             | Lists stored dataframes                                                    |                               |
 | melt            | DataFrame                   | Unpivot a DataFrame from wide to long format                               |                               |
 | not             | Series Inverts boolean mask |                                                                            |
 | open            |                             | Loads dataframe form csv file                                              | open                          |
 | pivot           | GroupBy                     | Performs a pivot operation on a groupby object                             | pivot                         |
-| rename          | Series                      | Renames a series                                                           | rename                        |
+| rename          | Dataframe, Series           | Renames a series                                                           | rename                        |
 | sample          | DataFrame                   | Create sample dataframe                                                    |                               |
 | select          | DataFrame                   | Creates a new dataframe with the selected columns                          | select                        |
 | set             | Series                      | Sets value where given mask is true                                        |                               |
@@ -1050,7 +1181,7 @@ whenever possible, their analogous Nushell command.
 | shift           | Series                      | Shifts the values by a given period                                        |                               |
 | show            | DataFrame                   | Converts a section of the dataframe to a Table or List value               |                               |
 | slice           | DataFrame                   | Creates new dataframe from a slice of rows                                 |                               |
-| sort            | DataFrame, Series           | Creates new sorted dataframe or series                                     | sort                          |
+| sort-by         | DataFrame, Series           | Creates new sorted dataframe or series                                     | sort                          |
 | take            | DataFrame, Series           | Creates new dataframe using the given indices                              |                               |
 | to-csv          | DataFrame                   | Saves dataframe to csv file                                                | to csv                        |
 | to-df           |                             | Converts a pipelined Table or List into Dataframe                          |                               |
