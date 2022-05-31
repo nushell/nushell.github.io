@@ -65,6 +65,15 @@ See [Defining environment from custom commands](environment.md#defining-environm
 
 See [Modules](modules.md) for details.
 
+## Reading environment varibles
+
+Individual environment variables are fields of a record that is stored in the `$env` variable and can be read with `$env.VARIABLE`:
+
+```
+> $env.FOO
+BAR
+```
+
 ## Scoping
 
 When you set an environment variable, it will be available only in the current scope (the block you're in and any block inside of it).
