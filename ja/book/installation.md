@@ -13,19 +13,19 @@ Docker を利用してビルド済のコンテナをプルしてくる方法も�
 
 [リリースページ](https://github.com/nushell/nushell/releases)から`.zip`ファイルをダウンロードして、例えば次の箇所に解凍します。
 
-<<< @/snippets/installation/windows_example_extraction_location.sh
+@[code](@snippets/installation/windows_example_extraction_location.sh)
 
 そして、`nu`フォルダを PATH に追加します。これが済めば、`nu`コマンドで Nu を起動できます。
 
-<<< @/snippets/installation/windows_run_nu.sh
+@[code](@snippets/installation/windows_run_nu.sh)
 
 もし、[Windows Terminal](https://github.com/microsoft/terminal)を使っているなら、次のようにして`nu`をデフォルトシェルに指定できます。
 
-<<< @/snippets/installation/windows_terminal_default_shell.sh
+@[code](@snippets/installation/windows_terminal_default_shell.sh)
 
 この設定を Terminal Settings の`"profiles"`に追加します。そして、`"defaultProfile"`を次のように変更します。
 
-<<< @/snippets/installation/windows_change_default_profile.sh
+@[code](@snippets/installation/windows_change_default_profile.sh)
 
 これで`nu`が Windows Terminal の起動時にロードされます。
 
@@ -54,7 +54,7 @@ Nu は現在、**最新の stable(1.46 or later)** バージョンの Rust を�
 `rustup`で正しい version を選択するのが良い方法です。
 最初に"rustup"を実行すると、インストールする Rust のバージョンを尋ねられます。
 
-<<< @/snippets/installation/rustup_choose_rust_version.sh
+@[code](@snippets/installation/rustup_choose_rust_version.sh)
 
 準備ができたら、1 を押してからエンターを押します。
 
@@ -67,61 +67,61 @@ Nu は現在、**最新の stable(1.46 or later)** バージョンの Rust を�
 
 "pkg-config"および"libssl-dev"パッケージをインストールしてください。
 
-<<< @/snippets/installation/install_pkg_config_libssl_dev.sh
+@[code](@snippets/installation/install_pkg_config_libssl_dev.sh)
 
 `rawkey`や`clipboard`機能を使用する Linux ユーザーは"libx11-dev"および"libxcb-composite0-dev"パッケージをインストールする必要があります。
 
-<<< @/snippets/installation/use_rawkey_and_clipboard.sh
+@[code](@snippets/installation/use_rawkey_and_clipboard.sh)
 
 ### RHEL based distros
 
 "libxcb", "openssl-devel"および"libX11-devel"パッケージをインストールする必要があります。
 
-<<< @/snippets/installation/install_rhel_dependencies.sh
+@[code](@snippets/installation/install_rhel_dependencies.sh)
 
 ### macOS
 
 [Homebrew](https://brew.sh/)を利用して、"openssl"と"cmake"をインストールしてください。
 
-<<< @/snippets/installation/macos_deps.sh
+@[code](@snippets/installation/macos_deps.sh)
 
 ## [crates.io](https://crates.io)からのインストール
 
-必要となる依存関係が準備できたら、Rust コンパイラーに付属している`cargo`を使って、Nu をインストールできます。  
+必要となる依存関係が準備できたら、Rust コンパイラーに付属している`cargo`を使って、Nu をインストールできます。
 cargo は Nu とそのソースの依存関係をダウンロードし、ビルドしたあと、実行できるように cargo の bin path にインストールします。
 
-<<< @/snippets/installation/cargo_install_nu.sh
+@[code](@snippets/installation/cargo_install_nu.sh)
 
 これでおしまいです！`cargo`は Nu のソースコードとその依存関係をダウンロードしてビルドし、`cargo`のバイナリーパスにインストールすることで Nu を実行できるようにします。
 
 より多くの機能をインストールするには、次のようにします。
 
-<<< @/snippets/installation/cargo_install_nu_more_features.sh
+@[code](@snippets/installation/cargo_install_nu_more_features.sh)
 
 すべての機能を利用するための最も簡単な方法は Nu をチェックアウトして、Rust ツールを利用してビルドすることです。
 
-<<< @/snippets/installation/build_nu_yourself.sh
+@[code](@snippets/installation/build_nu_yourself.sh)
 
-上で示したすべての依存関係がシステムにあることを確認してください。  
+上で示したすべての依存関係がシステムにあることを確認してください。
 インストールが完了すると、`nu`コマンドで Nu を実行できます。
 
-<<< @/snippets/installation/crates_run_nu.sh
+@[code](@snippets/installation/crates_run_nu.sh)
 
 ## ソースからビルド
 
 github のソースから直接ビルドすることもできます。こうすることで、最新の機能やバグ修正にすぐにアクセスすることができます。
 
-<<< @/snippets/installation/git_clone_nu.sh
+@[code](@snippets/installation/git_clone_nu.sh)
 
 Git でメインの nushell リポジトリをクローンし、Nu をビルドして実行できます。
 
-<<< @/snippets/installation/build_nu_from_source.sh
+@[code](@snippets/installation/build_nu_from_source.sh)
 
 リリースモードで Nu をビルドし実行することもできます。
 
-<<< @/snippets/installation/build_nu_from_source_release.sh
+@[code](@snippets/installation/build_nu_from_source_release.sh)
 
-Rust に慣れている人は、"run"がデフォルトでビルドを行うのに、なぜ"build"と"run"の両方を行うのか疑問に思うかもしれません。  
+Rust に慣れている人は、"run"がデフォルトでビルドを行うのに、なぜ"build"と"run"の両方を行うのか疑問に思うかもしれません。
 これは Cargo の新しい`default-run`オプションの欠点を回避し、全てのプラグインがビルドされるようにするためですが、将来的には必要なくなるかもしれません。
 
 ## ログインシェルとして設定するには
@@ -132,7 +132,7 @@ Rust に慣れている人は、"run"がデフォルトでビルドを行うの�
 一部の Linux ディストリビューションには`/etc/shells`に有効なシェルのリストが記載されており、Nu がホワイトリストに登録されるまで変更ができません。
 `shells`ファイルを更新していない場合は次のようなエラーが表示される場合があります。
 
-<<< @/snippets/installation/chsh_invalid_shell_error.sh
+@[code](@snippets/installation/chsh_invalid_shell_error.sh)
 
 Nu バイナリを`shells`ファイルに追加することにより、許可されたシェルのリストに Nu を追加できます。
 追加するパスは`which nu`コマンドで見つけることができます。通常は`$HOME/.cargo/bin/nu`です。

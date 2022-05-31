@@ -1,3 +1,4 @@
+const path = require('path');
 const { feedPlugin } = require('vuepress-plugin-feed2');
 const { defaultTheme } = require('@vuepress/theme-default');
 const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
@@ -50,6 +51,12 @@ module.exports = {
     ],
     ['link', { rel: 'icon', href: '/icon.png' }],
   ],
+  markdown: {
+    importCode: {
+      handleImportPath: (str) =>
+        str.replace(/^@snippets/, path.resolve(__dirname, '../snippets')),
+    },
+  },
   theme: defaultTheme({
     repo: 'nushell/nushell',
     repoLabel: 'GitHub',
