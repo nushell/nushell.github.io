@@ -162,7 +162,7 @@ while this is being executed.
 > benchmark {
 	open .\Data7602DescendingYearOrder.csv
 	| group-by year
-	| pivot header rows
+	| transpose header rows
 	| upsert rows { get rows | math sum }
 	| flatten
 }
@@ -206,7 +206,7 @@ operations:
 
 ```shell
 let df = dfr open Data7602DescendingYearOrder.csv
-let res = ($df | dfr group-by year | dfr agg ("geo_count" | dfr sum)
+let res = ($df | dfr group-by year | dfr agg ("geo_count" | dfr sum))
 $res
 ```
 
