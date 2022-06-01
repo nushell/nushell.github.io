@@ -5,5 +5,5 @@ package-lock.json
 operators.md
 dataframes.md
 nushell_map.md
-coming_from_bash.md
+*_bash.md
 book/commands/*.md

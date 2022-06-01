@@ -52,6 +52,9 @@ module.exports = {
     ['link', { rel: 'icon', href: '/icon.png' }],
   ],
   markdown: {
+    code: {
+      lineNumbers: false,
+    },
     importCode: {
       handleImportPath: (str) =>
         str.replace(/^@snippets/, path.resolve(__dirname, '../snippets')),
