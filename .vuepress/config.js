@@ -83,17 +83,17 @@ module.exports = {
         sidebar: {
           '/book/': [
             {
-              title: 'Getting Started',
+              text: 'Getting Started',
               collapsable: false,
               children: [
-                '',
+                'README.md',
                 'installation',
                 'thinking_in_nushell',
                 'moving_around',
               ],
             },
             {
-              title: 'Nu Fundamentals',
+              text: 'Nu Fundamentals',
               collapsable: false,
               children: [
                 'types_of_data',
@@ -106,7 +106,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Programming in Nu',
+              text: 'Programming in Nu',
               collapsable: false,
               children: [
                 'custom_commands',
@@ -119,7 +119,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Nu as a shell',
+              text: 'Nu as a shell',
               collapsable: false,
               children: [
                 'configuration',
@@ -135,7 +135,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Coming to Nu',
+              text: 'Coming to Nu',
               collapsable: false,
               children: [
                 'coming_from_bash',
@@ -146,7 +146,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Advanced',
+              text: 'Advanced',
               collapsable: false,
               children: [
                 'dataframes',
@@ -159,7 +159,7 @@ module.exports = {
           ],
           //   '/old_book/': [
           //     {
-          //       title: 'Nu Book (0.44)',
+          //       text: 'Nu Book (0.44)',
           //       collapsable: false,
           //       children: [
           //         '',
@@ -194,7 +194,7 @@ module.exports = {
           //   ],
           // "/contributor-book/": [
           //   {
-          //     title: "Contributor Book",
+          //     text: "Contributor Book",
           //     collapsable: false,
           //     children: [
           //       "",
@@ -210,10 +210,10 @@ module.exports = {
           // ],
           '/cookbook/': [
             {
-              title: 'Cookbook',
+              text: 'Cookbook',
               collapsable: false,
               children: [
-                '',
+                'README.md',
                 'setup',
                 'help',
                 'system',
@@ -242,10 +242,10 @@ module.exports = {
         sidebar: {
           '/de/book/': [
             {
-              title: 'Nu Handbuch (0.59+)',
+              text: 'Nu Handbuch (0.59+)',
               collapsable: false,
               children: [
-                '',
+                'README.md',
                 'installation',
                 'konfiguration',
                 '3rdpartyprompts',
@@ -275,17 +275,17 @@ module.exports = {
         sidebar: {
           '/tr/book/': [
             {
-              title: 'Getting Started',
+              text: 'Getting Started',
               collapsable: false,
               children: [
-                '',
+                // 'README.md',
                 // 'installation',
                 // 'thinking_in_nushell',
                 // 'moving_around',
               ],
             },
             {
-              title: 'Nu Fundamentals',
+              text: 'Nu Fundamentals',
               collapsable: false,
               children: [
                 // 'types_of_data',
@@ -298,7 +298,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Programming in Nu',
+              text: 'Programming in Nu',
               collapsable: false,
               children: [
                 // 'custom_commands',
@@ -310,7 +310,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Nu as a shell',
+              text: 'Nu as a shell',
               collapsable: false,
               children: [
                 // 'configuration',
@@ -326,7 +326,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Coming to Nu',
+              text: 'Coming to Nu',
               collapsable: false,
               children: [
                 // 'coming_from_bash',
@@ -337,7 +337,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Advanced',
+              text: 'Advanced',
               collapsable: false,
               children: [
                 // 'dataframes',
@@ -363,10 +363,10 @@ module.exports = {
         sidebar: {
           '/es/book/': [
             {
-              title: 'Nu Libro',
+              text: 'Nu Libro',
               collapsable: false,
               children: [
-                '',
+                'README.md',
                 'instalacion',
                 'explorando',
                 'tipos_de_datos',
@@ -392,7 +392,7 @@ module.exports = {
           ],
           // "/es/contributor-book/": [
           //   {
-          //     title: "Contributor Book",
+          //     text: "Contributor Book",
           //     collapsable: false,
           //     children: [
           //       "introduccion",
@@ -418,7 +418,7 @@ module.exports = {
         sidebar: {
           '/ja/book/': [
             {
-              title: 'Nu 本',
+              text: 'Nu 本',
               collapsable: false,
               children: [
                 'installation',
@@ -452,7 +452,7 @@ module.exports = {
         sidebar: {
           '/pt-BR/book/': [
             {
-              title: 'Nu Livro',
+              text: 'Nu Livro',
               collapsable: false,
               children: [
                 'instalacao',
@@ -472,7 +472,7 @@ module.exports = {
           ],
           // "/pt-BR/contributor-book/": [
           //   {
-          //     title: "Contributor Book",
+          //     text: "Contributor Book",
           //     collapsable: false,
           //     children: [
           //       "introdução",
@@ -501,17 +501,17 @@ module.exports = {
         sidebar: {
           '/zh-CN/book/': [
             {
-              title: '入门篇',
+              text: '入门篇',
               collapsable: false,
               children: [
-                '',
+                'README.md',
                 'installation',
                 'thinking_in_nushell',
                 'moving_around',
               ],
             },
             {
-              title: 'Nu 基础篇',
+              text: 'Nu 基础篇',
               collapsable: false,
               children: [
                 'types_of_data',
@@ -524,7 +524,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Nushell 编程',
+              text: 'Nushell 编程',
               collapsable: false,
               children: [
                 'custom_commands',
@@ -536,7 +536,7 @@ module.exports = {
               ],
             },
             {
-              title: 'Nu 作为 Shell 使用',
+              text: 'Nu 作为 Shell 使用',
               collapsable: false,
               children: [
                 'configuration',
@@ -552,7 +552,7 @@ module.exports = {
               ],
             },
             {
-              title: '迁移到 Nu',
+              text: '迁移到 Nu',
               collapsable: false,
               children: [
                 'coming_from_bash',
@@ -563,7 +563,7 @@ module.exports = {
               ],
             },
             {
-              title: '高级篇',
+              text: '高级篇',
               collapsable: false,
               children: [
                 'dataframes',
