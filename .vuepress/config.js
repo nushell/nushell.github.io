@@ -1,6 +1,7 @@
 const path = require('path');
 const { feedPlugin } = require('vuepress-plugin-feed2');
 const { defaultTheme } = require('@vuepress/theme-default');
+const { docsearchPlugin } = require('@vuepress/plugin-docsearch');
 const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
 const { mediumZoomPlugin } = require('@vuepress/plugin-medium-zoom');
 
@@ -67,11 +68,6 @@ module.exports = {
     docsRepo: 'nushell/nushell.github.io',
     docsBranch: 'main',
     lastUpdated: false,
-    algolia: {
-      apiKey: 'dd6a8f770a42efaed5befa429d167232',
-      indexName: 'nushell',
-      appId: 'GHCTOYCW6T',
-    },
     locales: {
       '/': {
         selectText: 'Languages',
@@ -584,6 +580,11 @@ module.exports = {
   plugins: [
     backToTopPlugin(),
     mediumZoomPlugin(),
+    docsearchPlugin({
+      appId: 'GHCTOYCW6T',
+      indexName: 'nushell',
+      apiKey: 'dd6a8f770a42efaed5befa429d167232',
+    }),
     feedPlugin({
       hostname: 'www.nushell.sh',
       canonical_base: 'https://www.nushell.sh/',
@@ -599,4 +600,10 @@ module.exports = {
         entries.sort((a, b) => new Date(b.date) - new Date(a.date)),
     }),
   ],
+  onPrepared: async (app) => {
+    await app.writeTemp(
+      'pages.js',
+      `export default ${JSON.stringify(app.pages.map(({ data }) => data))}`
+    );
+  },
 };
