@@ -3,12 +3,12 @@
 Hinweis: Diese Tabelle geht von Nu 0.59 oder neuer aus.
 
 | Bash                                 | Nu                                               | Funktion                                                                                                      |
-| ------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | --------------------- |
+| ------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
 | `ls`                                 | `ls`                                             | Auflisten der Dateien des aktuellen Pfads                                                                     |
 | `ls <dir>`                           | `ls <dir>`                                       | Auflisten der Dateien am angegebenen Pfad                                                                     |
 | `ls pattern*`                        | `ls pattern*`                                    | Auflisten von Dateien, die dem gegebenen Schema/Pattern folgen                                                |
 | `ls -la`                             | `ls --long --all` or `ls -la`                    | Auflisten aller Dateien (inklusive versteckte) mit allen verfügbaren Informationen                            |
-| `ls -d */`                           | `ls                                              | where type == Dir`                                                                                            | Auflisten von Ordnern |
+| `ls -d */`                           | `ls \| where type == Dir`                        | Auflisten von Ordnern                                                                                         |
 | `find . -name *.rs`                  | `ls **/*.rs`                                     | Rekursives auflisten aller Dateien, die zum gegebenen Schema/Pattern passen                                   |
 | `cd <directory>`                     | `cd <directory>`                                 | Wechseln an den angegebenen Pfad                                                                              |
 | `cd`                                 | `cd`                                             | Wechseln in den HOME-Ordner                                                                                   |
@@ -37,7 +37,7 @@ Hinweis: Diese Tabelle geht von Nu 0.59 oder neuer aus.
 | `stat $(which git)`                  | `stat (which git).path`                          | Ausgabe eines Befehls als Eingabe für einen anderen Befehl verwenden                                          |
 | `echo $PATH`                         | `echo $env.PATH`                                 | Aktuelle PATH-Variable anzeigen                                                                               |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | PATH permanent ändern                                                                                         |
-| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH                       | append /usr/other/bin)`                                                                                       | PATH temporär ändern  |
+| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)`  | PATH temporär ändern                                                                                    |
 | `export`                             | `echo $env`                                      | Anzeigen der aktuellen Umgebungsvariablen                                                                     |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Umgebungsvariablen permanent ändern                                                                           |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | Umgebungsvariablen temporär ändern                                                                            |
