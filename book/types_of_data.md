@@ -145,10 +145,6 @@ Let's say you wanted to start counting at 3, but you didn't have a specific end 
 
 You can also make the start of the range open. In this case, Nushell will start counting with `0`, and go up from there. The range `..2` is the numbers 0, 1, and 2.
 
-## File paths
-
-File paths are a platform-independent way of representing a file path in the given OS. Examples include /usr/bin and C:\Users\file.txt.
-
 ## File sizes
 
 File sizes are held in a special integer type called bytes. Examples include `100b`, `15kb`, and `100mb`.
