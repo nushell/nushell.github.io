@@ -250,6 +250,32 @@ Now, we can call this updated definition using the shorthand flag:
 > greet -a 10 hello
 ```
 
+Flags can also be used as basic switches. This means that their presence or absence is taken as an argument for the definition. Extending the previous example:
+
+```nushell
+def greet [
+  name: string
+  --age (-a): int
+  --twice
+] {
+  if $twice {
+    echo $name $name $age $age
+  } else {
+    echo $name $age
+  }
+}
+```
+
+And the definition can be either called as:
+```
+> greet -a 10 --twice hello
+```
+
+Or just without the switch flag:
+```
+> greet -a 10 hello
+```
+
 ## Rest parameters
 
 There may be cases when you want to define a command which takes any number of positional arguments. We can do this with a rest parameter, using the following `...` syntax:
