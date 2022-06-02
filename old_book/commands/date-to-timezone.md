@@ -12,7 +12,7 @@ Use 'date list-timezone' to list all supported time zones.
 
 ## Parameters
 
-<time zone> time zone description
+`<time zone>` time zone description
 
 ## Flags
 

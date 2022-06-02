@@ -19,8 +19,8 @@ Move columns.
 ## Flags
 
 - -h, --help: Display this help message
-- --after <column path>: the column that will precede the columns moved
-- --before <column path>: the column that will be next the columns moved
+- --after `<column path>`: the column that will precede the columns moved
+- --before `<column path>`: the column that will be next the columns moved
 
 ## Examples
 

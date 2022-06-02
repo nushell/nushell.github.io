@@ -15,4 +15,4 @@ Parse text as .eml and create table.
 ## Flags
 
 - -h, --help: Display this help message
-- -b, --preview-body <integer>: How many bytes of the body to preview
+- -b, --preview-body `<integer>`: How many bytes of the body to preview

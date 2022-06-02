@@ -19,8 +19,8 @@ Convert value to a binary primitive
 ## Flags
 
 - -h, --help: Display this help message
-- -s, --skip <integer>: skip x number of bytes
-- -b, --bytes <integer>: show y number of bytes
+- -s, --skip `<integer>`: skip x number of bytes
+- -b, --bytes `<integer>`: show y number of bytes
 
 ## Examples
 

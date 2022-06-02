@@ -20,5 +20,5 @@ Bar charts
 
 - -h, --help: Display this help message
 - -a, --acc: accumulate values
-- -u, --use <column path>: column to use for evaluation
-- -f, --format <string>: Specify date and time formatting
+- -u, --use `<column path>`: column to use for evaluation
+- -f, --format `<string>`: Specify date and time formatting

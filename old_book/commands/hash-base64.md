@@ -19,7 +19,7 @@ base64 encode or decode a value
 ## Flags
 
 - -h, --help: Display this help message
-- -c, --character_set <string>: specify the character rules for encoding the input.
+- -c, --character_set `<string>`: specify the character rules for encoding the input.
   Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt'
 - -e, --encode: encode the input as base64. This is the default behavior if not specified.
 - -d, --decode: decode the input from base64

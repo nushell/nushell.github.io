@@ -22,7 +22,7 @@ Kill a process using the process id.
 - -h, --help: Display this help message
 - -f, --force: forcefully kill the process
 - -q, --quiet: won't print anything to the console
-- -s, --signal <integer>: signal decimal number to be sent instead of the default 15 (unsupported on Windows)
+- -s, --signal `<integer>`: signal decimal number to be sent instead of the default 15 (unsupported on Windows)
 
 ## Examples
 
