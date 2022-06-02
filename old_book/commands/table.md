@@ -15,4 +15,4 @@ View the contents of the pipeline as a table.
 ## Flags
 
 - -h, --help: Display this help message
-- -n, --start_number <number>: row number to start viewing from
+- -n, --start_number `<number>`: row number to start viewing from

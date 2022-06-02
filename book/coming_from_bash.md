@@ -15,17 +15,17 @@ Note: this table assumes Nu 0.14.1 or later.
 | `ls <dir>`                           | `ls <dir>`                                       | Lists the files in the given directory                            |
 | `ls pattern*`                        | `ls pattern*`                                    | Lists files that match a given pattern                            |
 | `ls -la`                             | `ls --long --all` or `ls -la`                    | List files with all available information, including hidden files |
-| `ls -d */`                           | `ls | where type == dir`                         | List directories                                                  |
+| `ls -d */`                           | `ls \| where type == dir`                        | List directories                                                  |
 | `find . -name *.rs`                  | `ls **/*.rs`                                     | Find recursively all files that match a given pattern             |
-| `find . -name Makefile | xargs vim`  | `ls \*\*/Makefile | get name | vim $in`          | Pass values as command parameters                                 |
+| `find . -name Makefile \| xargs vim` | `ls \*\*/Makefile \| get name \| vim $in`        | Pass values as command parameters                                 |
 | `cd <directory>`                     | `cd <directory>`                                 | Change to the given directory                                     |
 | `cd`                                 | `cd`                                             | Change to the home directory                                      |
 | `cd -`                               | `cd -`                                           | Change to the previous directory                                  |
 | `mkdir <path>`                       | `mkdir <path>`                                   | Creates the given path                                            |
 | `mkdir -p <path>`                    | `mkdir <path>`                                   | Creates the given path, creating parents as necessary             |
 | `touch test.txt`                     | `touch test.txt`                                 | Create a file                                                     |
-| `> <path>`                           | `| save --raw <path>`                            | Save string into a file                                           |
-| `>> <path>`                          | `| save --raw --append <path>`                   | Append string to a file                                           |
+| `> <path>`                           | `\| save --raw <path>`                           | Save string into a file                                           |
+| `>> <path>`                          | `\| save --raw --append <path>`                  | Append string to a file                                           |
 | `cat <path>`                         | `open --raw <path>`                              | Display the contents of the given file                            |
 |                                      | `open <path>`                                    | Read a file as structured data                                    |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                             | Move file to new location                                         |
@@ -35,7 +35,7 @@ Note: this table assumes Nu 0.14.1 or later.
 |                                      | `rm -t <path>`                                   | Move the given file to the system trash                           |
 | `rm -rf <path>`                      | `rm -r <path>`                                   | Recursively removes the given path                                |
 | `chmod`                              | `<not yet possible>`                             | Changes the file attributes                                       |
-| `date -d <date>`                     | `"<date>" | into datetime -f <format>`           | Parse a date ([format documentation](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
+| `date -d <date>`                     | `"<date>" \| into datetime -f <format>`          | Parse a date ([format documentation](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
 | `sed`                                | `str find-replace`                               | Find and replace a pattern in a string                            |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>` | Filter strings that contain the substring                         |
 | `man <command>`                      | `help <command>`                                 | Get the help for a given command                                  |
@@ -45,7 +45,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | `stat $(which git)`                  | `stat (which git).path`                          | Use command output as argument for other command                  |
 | `echo $PATH`                         | `echo $env.PATH`                                 | See the current path                                              |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update PATH permanently                                           |
-| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH | append /usr/other/bin)` | Update PATH temporarily                                       |
+| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                       |
 | `export`                             | `echo $env`                                      | List the current environment variables                            |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update environment variables permanently                          |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | Update environment temporarily                                    |

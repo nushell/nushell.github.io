@@ -40,7 +40,7 @@ Nu 可以通过几个软件包管理器获得：
 
 Nu 目前需要 **最新（1.60 或更高）的稳定** 版本的 Rust。最好的方法是让`rustup`为你找到正确的版本。当你第一次打开`rustup`时，它会询问你想安装哪个版本的 Rust：
 
-<<< @/snippets/installation/rustup_choose_rust_version.sh
+@[code](@snippets/installation/rustup_choose_rust_version.sh)
 
 一旦我们准备好了，我们就按 `1`，然后回车。
 
@@ -52,53 +52,53 @@ Nu 目前需要 **最新（1.60 或更高）的稳定** 版本的 Rust。最好�
 
 你将需要安装 "pkg-config" 和 "libssl-dev" 包：
 
-<<< @/snippets/installation/install_pkg_config_libssl_dev.sh
+@[code](@snippets/installation/install_pkg_config_libssl_dev.sh)
 
 对于希望使用 "rawkey" 或 "clipboard" 可选功能的 Linux 用户，需要安装 "libx11-dev" 和 "libxcb-composite0-dev" 软件包。
 
-<<< @/snippets/installation/use_rawkey_and_clipboard.sh
+@[code](@snippets/installation/use_rawkey_and_clipboard.sh)
 
 #### 基于 RHEL 的发行版
 
 你需要安装 "libxcb"、"openssl-devel" 和 "libX11-devel"：
 
-<<< @/snippets/installation/install_rhel_dependencies.sh
+@[code](@snippets/installation/install_rhel_dependencies.sh)
 
 #### macOS
 
 使用 [Homebrew](https://brew.sh/)，你需要通过如下方式安装 "openssl" 和 "cmake" ：
 
-<<< @/snippets/installation/macos_deps.sh
+@[code](@snippets/installation/macos_deps.sh)
 
 ### 使用 [crates.io](https://crates.io)进行构建
 
 Nu 发行版会作为源码发布到流行的 Rust 包仓库 [crates.io](https://crates.io/)，这使得使用 `cargo` 构建并安装最新的 Nu 版本变得很容易：
 
-<<< @/snippets/installation/cargo_install_nu.sh
+@[code](@snippets/installation/cargo_install_nu.sh)
 
 如此即可! `cargo`工具将完成下载 Nu 及其源码依赖，构建并将其安装到 cargo bin 路径中，以便我们能够运行它。
 
 如果你想安装更多的功能，你可以使用：
 
-<<< @/snippets/installation/cargo_install_nu_more_features.sh
+@[code](@snippets/installation/cargo_install_nu_more_features.sh)
 
 安装完毕后，我们可以使用 `nu` 命令运行 Nu：
 
-<<< @/snippets/installation/crates_run_nu.sh
+@[code](@snippets/installation/crates_run_nu.sh)
 
 ### 从 GitHub 仓库构建
 
 我们也可以从 GitHub 上的最新源码构建自己的 Nu。这让我们可以立即获得最新的功能和错误修复。首先，克隆源码仓库：
 
-<<< @/snippets/installation/git_clone_nu.sh
+@[code](@snippets/installation/git_clone_nu.sh)
 
 然后，我们可以用以下方式构建和运行 Nu：
 
-<<< @/snippets/installation/build_nu_from_source.sh
+@[code](@snippets/installation/build_nu_from_source.sh)
 
 你也可以在**发布**模式下构建和运行 Nu：
 
-<<< @/snippets/installation/build_nu_from_source_release.sh
+@[code](@snippets/installation/build_nu_from_source_release.sh)
 
 熟悉 Rust 的人可能会问，如果 "run" 默认会构建，为什么我们还要做 "build" 和 "run" 这两个步骤？这是为了解决 Cargo 中新的 `default-run` 选项的缺陷，并确保所有插件都被构建，尽管这在将来可能不再需要。
 
@@ -109,7 +109,7 @@ Nu 发行版会作为源码发布到流行的 Rust 包仓库 [crates.io](https:/
 要设置登录 Shell，你可以使用[`chsh`](https://linux.die.net/man/1/chsh)命令。
 一些 Linux 发行版有一个位于`/etc/shells`的有效 Shell 列表，在 Nu 被列入白名单之前不允许改变 Shell。如果你没有更新`shells`文件，你可能会看到类似于下面的错误：
 
-<<< @/snippets/installation/chsh_invalid_shell_error.sh
+@[code](@snippets/installation/chsh_invalid_shell_error.sh)
 
 你可以通过在`shells`文件中添加你的 Nu 二进制文件来把 Nu 添加到允许的 Shells 列表中。
 添加的路径可以用`which nu`命令找到，通常是`$HOME/.cargo/bin/nu`。
@@ -118,10 +118,10 @@ Nu 发行版会作为源码发布到流行的 Rust 包仓库 [crates.io](https:/
 
 如果你使用的是 [Windows Terminal](https://github.com/microsoft/terminal)，你可以通过添加如下内容到你的终端设置`"profiles"`（JSON 文件）中来设置`nu`作为你的默认 Shell：
 
-<<< @/snippets/installation/windows_terminal_default_shell.sh
+@[code](@snippets/installation/windows_terminal_default_shell.sh)
 
 最后需要做的是将 `"defaultProfile"` 改为:
 
-<<< @/snippets/installation/windows_change_default_profile.sh
+@[code](@snippets/installation/windows_change_default_profile.sh)
 
 之后，`nu` 应该会在 **Windows Terminal** 启动时被加载。

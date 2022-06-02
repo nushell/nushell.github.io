@@ -1190,7 +1190,7 @@ whenever possible, their analogous Nushell command.
 | unique          | Series                      | Returns unique values from a series                                        | uniq                          |
 | value-counts    | Series                      | Returns a dataframe with the counts for unique values in series            |                               |
 | where           | DataFrame                   | Filter dataframe to match the condition                                    | where                         |
-| with-column     | DataFrame                   | Adds a series to the dataframe                                             | `insert <column_name> <value> | upsert <column_name> { <new_value> }` |
+| with-column     | DataFrame                   | Adds a series to the dataframe                                             | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
 
 ## Future of Dataframes
 

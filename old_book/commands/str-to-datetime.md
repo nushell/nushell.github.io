@@ -15,9 +15,9 @@ converts text into datetime
 ## Flags
 
 - -h, --help: Display this help message
-- -z, --timezone <string>: Specify timezone if the input is timestamp, like 'UTC/u' or 'LOCAL/l'
-- -o, --offset <integer>: Specify timezone by offset if the input is timestamp, like '+8', '-4', prior than timezone
-- -f, --format <string>: Specify date and time formatting
+- -z, --timezone `<string>`: Specify timezone if the input is timestamp, like 'UTC/u' or 'LOCAL/l'
+- -o, --offset `<integer>`: Specify timezone by offset if the input is timestamp, like '+8', '-4', prior than timezone
+- -f, --format `<string>`: Specify date and time formatting
 
 ## Examples
 

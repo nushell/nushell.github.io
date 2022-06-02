@@ -19,7 +19,7 @@ Convert value to string
 ## Flags
 
 - -h, --help: Display this help message
-- -d, --decimals <integer>: decimal digits to which to round
+- -d, --decimals `<integer>`: decimal digits to which to round
 
 ## Examples
 

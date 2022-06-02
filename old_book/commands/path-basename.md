@@ -19,7 +19,7 @@ Get the final component of a path
 ## Flags
 
 - -h, --help: Display this help message
-- -r, --replace <string>: Return original path with basename replaced by this string
+- -r, --replace `<string>`: Return original path with basename replaced by this string
 
 ## Examples
 

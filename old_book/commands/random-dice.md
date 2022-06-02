@@ -15,8 +15,8 @@ Generate a random dice roll
 ## Flags
 
 - -h, --help: Display this help message
-- -d, --dice <integer>: The amount of dice being rolled
-- -s, --sides <integer>: The amount of sides a die has
+- -d, --dice `<integer>`: The amount of dice being rolled
+- -s, --sides `<integer>`: The amount of sides a die has
 
 ## Examples
 

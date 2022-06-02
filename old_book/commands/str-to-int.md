@@ -15,7 +15,7 @@ converts text into integer
 ## Flags
 
 - -h, --help: Display this help message
-- -r, --radix <number>: radix of integer
+- -r, --radix `<number>`: radix of integer
 
 ## Examples
 

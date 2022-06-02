@@ -23,8 +23,8 @@ Print sequences of numbers.
 ## Flags
 
 - -h, --help: Display this help message
-- -s, --separator <string>: separator character (defaults to \n)
-- -t, --terminator <string>: terminator character (defaults to \n)
+- -s, --separator `<string>`: separator character (defaults to \n)
+- -t, --terminator `<string>`: terminator character (defaults to \n)
 - -w, --widths: equalize widths of all numbers by padding with zeros
 
 ## Examples

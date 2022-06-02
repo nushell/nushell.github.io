@@ -22,7 +22,7 @@ On Windows, an extra 'prefix' column is added.
 ## Flags
 
 - -h, --help: Display this help message
-- -e, --extension <string>: Manually supply the extension (without the dot)
+- -e, --extension `<string>`: Manually supply the extension (without the dot)
 
 ## Examples
 

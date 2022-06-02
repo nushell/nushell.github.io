@@ -15,7 +15,7 @@ Converts a column of filesizes to some specified format
 ## Parameters
 
 - `<field>` the name of the column to update
-  <format value> the format into which convert the filesizes
+  `<format value>` the format into which convert the filesizes
 
 ## Flags
 

@@ -19,8 +19,8 @@ Get the parent directory of a path
 ## Flags
 
 - -h, --help: Display this help message
-- -r, --replace <string>: Return original path with dirname replaced by this string
-- -n, --num-levels <integer>: Number of directories to walk up
+- -r, --replace `<string>`: Return original path with dirname replaced by this string
+- -n, --num-levels `<integer>`: Number of directories to walk up
 
 ## Examples
 
