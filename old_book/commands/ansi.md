@@ -74,8 +74,8 @@ Format:
 ## Flags
 
 - -h, --help: Display this help message
-- -e, --escape `<any>`: escape sequence without the escape character(s)
-- -o, --osc `<any>`: operating system command (ocs) escape sequence without the escape character(s)
+- -e, --escape <any>: escape sequence without the escape character(s)
+- -o, --osc <any>: operating system command (ocs) escape sequence without the escape character(s)
 
 ## Examples
 

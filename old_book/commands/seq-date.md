@@ -15,13 +15,13 @@ print sequences of dates
 ## Flags
 
 - -h, --help: Display this help message
-- -s, --separator `<string>`: separator character (defaults to \n)
-- -o, --output_format `<string>`: prints dates in this format (defaults to %Y-%m-%d)
-- -i, --input_format `<string>`: give argument dates in this format (defaults to %Y-%m-%d)
-- -b, --begin_date `<string>`: beginning date range
-- -e, --end_date `<string>`: ending date
-- -n, --increment `<integer>`: increment dates by this number
-- -d, --days `<integer>`: number of days to print
+- -s, --separator <string>: separator character (defaults to \n)
+- -o, --output_format <string>: prints dates in this format (defaults to %Y-%m-%d)
+- -i, --input_format <string>: give argument dates in this format (defaults to %Y-%m-%d)
+- -b, --begin_date <string>: beginning date range
+- -e, --end_date <string>: ending date
+- -n, --increment <integer>: increment dates by this number
+- -d, --days <integer>: number of days to print
 - -r, --reverse: print dates in reverse
 
 ## Examples

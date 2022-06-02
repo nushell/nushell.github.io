@@ -928,7 +928,7 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 | unique          | Series                      | 返回一个系列中的唯一值                             | uniq                          |
 | value-counts    | Series                      | 返回一个带有系列中唯一值的计数的 DataFrame         |                               |
 | where           | DataFrame                   | 过滤 DataFrame 以符合条件                          | where                         |
-| with-column     | DataFrame                   | 在 DataFrame 中添加一个系列                        | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
+| with-column     | DataFrame                   | 在 DataFrame 中添加一个系列                        | `insert <column_name> <value> | upsert <column_name> { <new_value> }` |
 
 ## DataFrames 的未来
 

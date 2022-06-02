@@ -20,7 +20,7 @@ Runs a block on sliding windows of `window_size` rows of a table at a time.
 ## Flags
 
 - -h, --help: Display this help message
-- -s, --stride `<integer>`: the number of rows to slide over between windows
+- -s, --stride <integer>: the number of rows to slide over between windows
 
 ## Examples
 

@@ -16,12 +16,11 @@
 </template>
 
 <script>
-import pages from '@temp/pages';
 export default {
   name: 'BlogPosts',
   computed: {
     posts() {
-      return pages
+      return this.$site.pages
         .filter((p) => {
           return p.path.indexOf('/blog/') >= 0 && p.path != '/blog/';
         })

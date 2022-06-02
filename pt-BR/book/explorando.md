@@ -4,7 +4,7 @@ Shells mais antigos permitem que você navegue pelo sistema de arquivos e execut
 
 ## Visualizando o conteúdo de directórios
 
-@[code](@snippets/moving_around/ls_example.sh)
+<<< @/snippets/moving_around/ls_example.sh
 
 Como vimos em outros capítulos, `ls` é um comando para visualizar o conteúdo de um caminho. Nu retorna o conteúdo como uma tabela que podemos usar adiante.
 

@@ -19,8 +19,8 @@ pad a string with a character a certain length
 ## Flags
 
 - -h, --help: Display this help message
-- -l, --length `<integer>` (required parameter): length to pad to
-- -c, --character `<string>` (required parameter): character to pad with
+- -l, --length <integer> (required parameter): length to pad to
+- -c, --character <string> (required parameter): character to pad with
 
 ## Examples
 

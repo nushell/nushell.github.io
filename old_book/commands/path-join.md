@@ -22,7 +22,7 @@ the output of 'path parse' and 'path split' subcommands.
 ## Flags
 
 - -h, --help: Display this help message
-- -a, --append `<file path>`: Path to append to the input
+- -a, --append <file path>: Path to append to the input
 
 ## Examples
 

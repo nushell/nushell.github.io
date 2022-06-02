@@ -21,7 +21,7 @@ Block must be (A, A) -> A unless --fold is selected, in which case it may be A, 
 ## Flags
 
 - -h, --help: Display this help message
-- -f, --fold `<any>`: reduce with initial value
+- -f, --fold <any>: reduce with initial value
 - -n, --numbered: returned a numbered item ($it.index and $it.item)
 
 ## Examples

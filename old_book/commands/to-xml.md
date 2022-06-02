@@ -8,7 +8,7 @@ Converts table data into XML text.
 
 ## Flags
 
-- `-p`, `--pretty` `<integer>`: Formats the XML text with the provided indentation setting
+- `-p`, `--pretty` \<integer>: Formats the XML text with the provided indentation setting
 
 ## Example
 

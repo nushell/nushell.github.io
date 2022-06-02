@@ -8,7 +8,7 @@ Finds a program file.
 
 Usage:
 
-> which `<application>` {flags}
+> which <application> {flags}
 
 ## Parameters
 

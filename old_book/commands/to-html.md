@@ -19,5 +19,5 @@ Convert table into simple HTML
 - -n, --no_color: remove all ansi colors in output
 - -d, --dark: indicate your background color is a darker color
 - -p, --partial: only output the html for the content itself
-- -t, --theme `<string>`: the name of the theme to use (github, blulocolight, ...)
+- -t, --theme <string>: the name of the theme to use (github, blulocolight, ...)
 - -l, --list: list the names of all available themes

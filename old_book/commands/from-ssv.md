@@ -17,4 +17,4 @@ Parse text as space-separated values and create a table. The default minimum num
 - -h, --help: Display this help message
 - -n, --noheaders: don't treat the first row as column names
 - -a, --aligned-columns: assume columns are aligned
-- -m, --minimum-spaces `<integer>`: the minimum spaces to separate columns
+- -m, --minimum-spaces <integer>: the minimum spaces to separate columns

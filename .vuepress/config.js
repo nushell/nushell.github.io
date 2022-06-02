@@ -1,10 +1,3 @@
-const path = require('path');
-const { feedPlugin } = require('vuepress-plugin-feed2');
-const { defaultTheme } = require('@vuepress/theme-default');
-const { docsearchPlugin } = require('@vuepress/plugin-docsearch');
-const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
-const { mediumZoomPlugin } = require('@vuepress/plugin-medium-zoom');
-
 module.exports = {
   locales: {
     '/': {
@@ -52,28 +45,24 @@ module.exports = {
     ],
     ['link', { rel: 'icon', href: '/icon.png' }],
   ],
-  markdown: {
-    code: {
-      lineNumbers: false,
-    },
-    importCode: {
-      handleImportPath: (str) =>
-        str.replace(/^@snippets/, path.resolve(__dirname, '../snippets')),
-    },
-  },
-  theme: defaultTheme({
+  themeConfig: {
     repo: 'nushell/nushell',
     repoLabel: 'GitHub',
     editLinks: true,
     docsRepo: 'nushell/nushell.github.io',
     docsBranch: 'main',
     lastUpdated: false,
+    algolia: {
+      apiKey: 'dd6a8f770a42efaed5befa429d167232',
+      indexName: 'nushell',
+      appId: 'GHCTOYCW6T',
+    },
     locales: {
       '/': {
         selectText: 'Languages',
-        selectLanguageName: 'English',
+        label: 'English',
         editLinkText: 'Edit this page on GitHub',
-        navbar: [
+        nav: [
           { text: 'Book', link: '/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -82,17 +71,17 @@ module.exports = {
         sidebar: {
           '/book/': [
             {
-              text: 'Getting Started',
+              title: 'Getting Started',
               collapsable: false,
               children: [
-                'README.md',
+                '',
                 'installation',
                 'thinking_in_nushell',
                 'moving_around',
               ],
             },
             {
-              text: 'Nu Fundamentals',
+              title: 'Nu Fundamentals',
               collapsable: false,
               children: [
                 'types_of_data',
@@ -105,7 +94,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Programming in Nu',
+              title: 'Programming in Nu',
               collapsable: false,
               children: [
                 'custom_commands',
@@ -118,7 +107,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Nu as a shell',
+              title: 'Nu as a shell',
               collapsable: false,
               children: [
                 'configuration',
@@ -134,7 +123,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Coming to Nu',
+              title: 'Coming to Nu',
               collapsable: false,
               children: [
                 'coming_from_bash',
@@ -145,7 +134,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Advanced',
+              title: 'Advanced',
               collapsable: false,
               children: [
                 'dataframes',
@@ -158,7 +147,7 @@ module.exports = {
           ],
           //   '/old_book/': [
           //     {
-          //       text: 'Nu Book (0.44)',
+          //       title: 'Nu Book (0.44)',
           //       collapsable: false,
           //       children: [
           //         '',
@@ -193,7 +182,7 @@ module.exports = {
           //   ],
           // "/contributor-book/": [
           //   {
-          //     text: "Contributor Book",
+          //     title: "Contributor Book",
           //     collapsable: false,
           //     children: [
           //       "",
@@ -209,10 +198,10 @@ module.exports = {
           // ],
           '/cookbook/': [
             {
-              text: 'Cookbook',
+              title: 'Cookbook',
               collapsable: false,
               children: [
-                'README.md',
+                '',
                 'setup',
                 'help',
                 'system',
@@ -230,9 +219,9 @@ module.exports = {
       },
       '/de/': {
         selectText: 'Sprachen',
-        selectLanguageName: 'Deutsch',
+        label: 'Deutsch',
         editLinkText: 'Diese Seite auf GitHub bearbeiten',
-        navbar: [
+        nav: [
           { text: 'Buch', link: '/de/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -241,10 +230,10 @@ module.exports = {
         sidebar: {
           '/de/book/': [
             {
-              text: 'Nu Handbuch (0.59+)',
+              title: 'Nu Handbuch (0.59+)',
               collapsable: false,
               children: [
-                'README.md',
+                '',
                 'installation',
                 'konfiguration',
                 '3rdpartyprompts',
@@ -263,9 +252,9 @@ module.exports = {
       },
       '/tr/': {
         selectText: 'Languages',
-        selectLanguageName: 'Turkish',
+        label: 'Turkish',
         editLinkText: 'Edit this page on GitHub',
-        navbar: [
+        nav: [
           { text: 'Book', link: '/tr/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -274,17 +263,17 @@ module.exports = {
         sidebar: {
           '/tr/book/': [
             {
-              text: 'Getting Started',
+              title: 'Getting Started',
               collapsable: false,
               children: [
-                // 'README.md',
+                '',
                 // 'installation',
                 // 'thinking_in_nushell',
                 // 'moving_around',
               ],
             },
             {
-              text: 'Nu Fundamentals',
+              title: 'Nu Fundamentals',
               collapsable: false,
               children: [
                 // 'types_of_data',
@@ -297,7 +286,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Programming in Nu',
+              title: 'Programming in Nu',
               collapsable: false,
               children: [
                 // 'custom_commands',
@@ -309,7 +298,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Nu as a shell',
+              title: 'Nu as a shell',
               collapsable: false,
               children: [
                 // 'configuration',
@@ -325,7 +314,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Coming to Nu',
+              title: 'Coming to Nu',
               collapsable: false,
               children: [
                 // 'coming_from_bash',
@@ -336,7 +325,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Advanced',
+              title: 'Advanced',
               collapsable: false,
               children: [
                 // 'dataframes',
@@ -351,9 +340,9 @@ module.exports = {
       },
       '/es/': {
         selectText: 'Idiomas',
-        selectLanguageName: 'Español',
+        label: 'Español',
         editLinkText: 'Edita esta página en GitHub',
-        navbar: [
+        nav: [
           { text: 'Libro', link: '/es/book/' },
           // { text: "Libro Colaborador", link: "/es/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -362,10 +351,10 @@ module.exports = {
         sidebar: {
           '/es/book/': [
             {
-              text: 'Nu Libro',
+              title: 'Nu Libro',
               collapsable: false,
               children: [
-                'README.md',
+                '',
                 'instalacion',
                 'explorando',
                 'tipos_de_datos',
@@ -391,7 +380,7 @@ module.exports = {
           ],
           // "/es/contributor-book/": [
           //   {
-          //     text: "Contributor Book",
+          //     title: "Contributor Book",
           //     collapsable: false,
           //     children: [
           //       "introduccion",
@@ -406,9 +395,9 @@ module.exports = {
       },
       '/ja/': {
         selectText: '言語',
-        selectLanguageName: '日本語',
+        label: '日本語',
         editLinkText: 'GitHubでこのページを編集する',
-        navbar: [
+        nav: [
           { text: '本', link: '/ja/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -417,7 +406,7 @@ module.exports = {
         sidebar: {
           '/ja/book/': [
             {
-              text: 'Nu 本',
+              title: 'Nu 本',
               collapsable: false,
               children: [
                 'installation',
@@ -440,9 +429,9 @@ module.exports = {
       },
       '/pt-BR/': {
         selectText: 'Línguas',
-        selectLanguageName: 'Português do Brasil',
+        label: 'Português do Brasil',
         editLinkText: 'Edite esta página no GitHub',
-        navbar: [
+        nav: [
           { text: 'Livro', link: '/pt-BR/book/' },
           // { text: "Livro de Contribuidor", link: "/pt-BR/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -451,7 +440,7 @@ module.exports = {
         sidebar: {
           '/pt-BR/book/': [
             {
-              text: 'Nu Livro',
+              title: 'Nu Livro',
               collapsable: false,
               children: [
                 'instalacao',
@@ -471,7 +460,7 @@ module.exports = {
           ],
           // "/pt-BR/contributor-book/": [
           //   {
-          //     text: "Contributor Book",
+          //     title: "Contributor Book",
           //     collapsable: false,
           //     children: [
           //       "introdução",
@@ -489,9 +478,9 @@ module.exports = {
       },
       '/zh-CN/': {
         selectText: '语言',
-        selectLanguageName: '中文',
+        label: '中文',
         editLinkText: '在GitHub上编辑此页面',
-        navbar: [
+        nav: [
           { text: '书', link: '/zh-CN/book/' },
           // { text: "Contributor Book", link: "/contributor-book/" },
           { text: 'Cookbook', link: '/cookbook/' },
@@ -500,17 +489,17 @@ module.exports = {
         sidebar: {
           '/zh-CN/book/': [
             {
-              text: '入门篇',
+              title: '入门篇',
               collapsable: false,
               children: [
-                'README.md',
+                '',
                 'installation',
                 'thinking_in_nushell',
                 'moving_around',
               ],
             },
             {
-              text: 'Nu 基础篇',
+              title: 'Nu 基础篇',
               collapsable: false,
               children: [
                 'types_of_data',
@@ -523,7 +512,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Nushell 编程',
+              title: 'Nushell 编程',
               collapsable: false,
               children: [
                 'custom_commands',
@@ -535,7 +524,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Nu 作为 Shell 使用',
+              title: 'Nu 作为 Shell 使用',
               collapsable: false,
               children: [
                 'configuration',
@@ -551,7 +540,7 @@ module.exports = {
               ],
             },
             {
-              text: '迁移到 Nu',
+              title: '迁移到 Nu',
               collapsable: false,
               children: [
                 'coming_from_bash',
@@ -562,7 +551,7 @@ module.exports = {
               ],
             },
             {
-              text: '高级篇',
+              title: '高级篇',
               collapsable: false,
               children: [
                 'dataframes',
@@ -576,34 +565,23 @@ module.exports = {
         },
       },
     },
-  }),
-  plugins: [
-    backToTopPlugin(),
-    mediumZoomPlugin(),
-    docsearchPlugin({
-      appId: 'GHCTOYCW6T',
-      indexName: 'nushell',
-      apiKey: 'dd6a8f770a42efaed5befa429d167232',
-    }),
-    feedPlugin({
-      hostname: 'www.nushell.sh',
-      canonical_base: 'https://www.nushell.sh/',
-      feed_options: {
-        title: 'Nushell Blog',
-        link: 'https://www.nushell.sh/blog',
-        favicon: 'https://www.nushell.sh/icon.png',
-      },
-      rss: true,
-      json: true,
-      posts_directories: ['/blog/'],
-      sort: (entries) =>
-        entries.sort((a, b) => new Date(b.date) - new Date(a.date)),
-    }),
-  ],
-  onPrepared: async (app) => {
-    await app.writeTemp(
-      'pages.js',
-      `export default ${JSON.stringify(app.pages.map(({ data }) => data))}`
-    );
   },
+  plugins: [
+    '@vuepress/plugin-back-to-top',
+    '@vuepress/plugin-medium-zoom',
+    [
+      'feed',
+      {
+        canonical_base: 'https://www.nushell.sh/',
+        feed_options: {
+          title: 'Nushell Blog',
+          link: 'https://www.nushell.sh/blog',
+          favicon: 'https://www.nushell.sh/icon.png',
+        },
+        posts_directories: ['/blog/'],
+        sort: (entries) =>
+          entries.sort((a, b) => new Date(b.date) - new Date(a.date)),
+      },
+    ],
+  ],
 };

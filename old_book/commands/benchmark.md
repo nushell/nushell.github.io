@@ -19,7 +19,7 @@ Runs a block and returns the time it took to execute it.
 ## Flags
 
 - -h, --help: Display this help message
-- -p, --passthrough `<block>`: Display the benchmark results and pass through the block's output
+- -p, --passthrough <block>: Display the benchmark results and pass through the block's output
 
 ## Examples
 

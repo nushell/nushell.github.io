@@ -15,7 +15,7 @@ Generate random chars
 ## Flags
 
 - -h, --help: Display this help message
-- -l, --length `<integer>`: Number of chars
+- -l, --length <integer>: Number of chars
 
 ## Examples
 

@@ -19,7 +19,7 @@ trims text
 ## Flags
 
 - -h, --help: Display this help message
-- -c, --char `<string>`: character to trim (default: whitespace)
+- -c, --char <string>: character to trim (default: whitespace)
 
 ## Examples
 

@@ -12,7 +12,7 @@ Use `random` to generate random values
 
 ### bool Flags
 
-- `-b`, `--bias` `<number>`: Adjusts the probability of a "true" outcome
+- `-b`, `--bias` \<number>: Adjusts the probability of a "true" outcome
 
 ### bool Examples
 
@@ -32,8 +32,8 @@ true
 
 ### dice Flags
 
-- `d`, `--dice` `<integer>`: The amount of dice being rolled
-- `s`, `--sides` `<integer>`: The amount of sides a die has
+- `d`, `--dice` \<integer>: The amount of dice being rolled
+- `s`, `--sides` \<integer>: The amount of sides a die has
 
 ### dice Examples
 
@@ -99,8 +99,8 @@ true
 
 ### integer Flags
 
-- `m`, `--min` `<integer>`: The minimum value to generate
-- `x`, `--max` `<integer>`: The maximum value to generate
+- `m`, `--min` \<integer>: The minimum value to generate
+- `x`, `--max` \<integer>: The maximum value to generate
 
 ### integer Examples
 

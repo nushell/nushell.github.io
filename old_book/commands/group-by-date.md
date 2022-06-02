@@ -15,7 +15,7 @@ creates a table grouped by date.
 ## Flags
 
 - -h, --help: Display this help message
-- -f, --format `<string>`: Specify date and time formatting
+- -f, --format <string>: Specify date and time formatting
 
 ## Examples
 

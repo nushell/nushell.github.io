@@ -15,7 +15,7 @@ Generate a random boolean value
 ## Flags
 
 - -h, --help: Display this help message
-- -b, --bias `<number>`: Adjusts the probability of a "true" outcome
+- -b, --bias <number>: Adjusts the probability of a "true" outcome
 
 ## Examples
 

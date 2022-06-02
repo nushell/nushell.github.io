@@ -15,7 +15,7 @@ Applies the round function to a list of numbers
 ## Flags
 
 - -h, --help: Display this help message
-- -p, --precision `<number>`: digits of precision
+- -p, --precision <number>: digits of precision
 
 ## Examples
 

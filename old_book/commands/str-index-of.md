@@ -16,7 +16,7 @@ Returns starting index of given pattern in string counting from 0. Returns -1 wh
 ## Flags
 
 - -h, --help: Display this help message
-- -r, --range `<any>`: optional start and/or end index
+- -r, --range <any>: optional start and/or end index
 - -e, --end: search from the end of the string
 
 ## Examples
