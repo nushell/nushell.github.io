@@ -1,14 +1,18 @@
 ---
 title: watch
-layout: command
 version: 0.63.0
 usage: |
   Watch for file changes and execute Nu code when they happen.
 ---
 
-# `{{ $frontmatter.title }}`
+<script>
+  import { usePageFrontmatter } from '@vuepress/client';
+  export default { computed: { frontmatter() { return usePageFrontmatter().value; } } }
+</script>
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+# <code>{{ frontmatter.title }}</code>
+
+<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
 
 ## Signature
 
@@ -20,7 +24,7 @@ usage: |
  -  `block`: A Nu block of code to run whenever a file changes. The block will be passed `operation`, `path`, and `new_path` (for renames only) arguments in that order
  -  `--debounce-ms {int}`: Debounce changes for this many milliseconds (default: 100). Adjust if you find that single writes are reported as multiple events
  -  `--glob {string}`: Only report changes for files that match this glob pattern (default: all files)
- -  `--recursive {bool}`: Watch all directories under `path` recursively. Will be ignored if `path` is a file (default: true)
+ -  `--recursive {bool}`: Watch all directories under `<path>` recursively. Will be ignored if `<path>` is a file (default: true)
  -  `--verbose`: Operate in verbose mode (default: false)
 
 ## Examples

@@ -1,14 +1,18 @@
 ---
 title: ignore
-layout: command
 version: 0.63.0
 usage: |
   Ignore the output of the previous command in the pipeline
 ---
 
-# `{{ $frontmatter.title }}`
+<script>
+  import { usePageFrontmatter } from '@vuepress/client';
+  export default { computed: { frontmatter() { return usePageFrontmatter().value; } } }
+</script>
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+# <code>{{ frontmatter.title }}</code>
+
+<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
 
 ## Signature
 

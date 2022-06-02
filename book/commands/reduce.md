@@ -1,14 +1,18 @@
 ---
 title: reduce
-layout: command
 version: 0.63.0
 usage: |
   Aggregate a list table to a single value using an accumulator block.
 ---
 
-# `{{ $frontmatter.title }}`
+<script>
+  import { usePageFrontmatter } from '@vuepress/client';
+  export default { computed: { frontmatter() { return usePageFrontmatter().value; } } }
+</script>
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+# <code>{{ frontmatter.title }}</code>
+
+<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
 
 ## Signature
 
