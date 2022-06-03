@@ -149,7 +149,6 @@ def congratulate [age: int = 18] {
 
 If you want to check if an optional parameter is present or not and not just rely on a default value use [optional positional parameters](#optional-positional-parameters) instead.
 
-
 ## Optional positional parameters
 
 By default, positional parameters are required. If a positional parameter is not passed, we will encounter an error:
@@ -267,11 +266,13 @@ def greet [
 ```
 
 And the definition can be either called as:
+
 ```
 > greet -a 10 --twice hello
 ```
 
 Or just without the switch flag:
+
 ```
 > greet -a 10 hello
 ```

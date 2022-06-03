@@ -7,3 +7,6 @@ dataframes.md
 nushell_map.md
 *_bash*.md
 book/commands/*.md
+.vuepress/.temp
+.vuepress/.cache
+.vuepress/dist/
