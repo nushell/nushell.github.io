@@ -595,6 +595,7 @@ module.exports = {
       },
       rss: true,
       json: true,
+      atom: true,
       posts_directories: ['/blog/'],
       sort: (entries) =>
         entries.sort((a, b) => new Date(b.date) - new Date(a.date)),
