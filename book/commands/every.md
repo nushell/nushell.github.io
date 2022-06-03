@@ -1,14 +1,18 @@
 ---
 title: every
-layout: command
 version: 0.63.0
 usage: |
   Show (or skip) every n-th row, starting from the first one.
 ---
 
-# `{{ $frontmatter.title }}`
+<script>
+  import { usePageFrontmatter } from '@vuepress/client';
+  export default { computed: { frontmatter() { return usePageFrontmatter().value; } } }
+</script>
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+# <code>{{ frontmatter.title }}</code>
+
+<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
 
 ## Signature
 

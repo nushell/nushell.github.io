@@ -1,14 +1,18 @@
 ---
 title: collect
-layout: command
 version: 0.63.0
 usage: |
   Collect the stream and pass it to a block.
 ---
 
-# `{{ $frontmatter.title }}`
+<script>
+  import { usePageFrontmatter } from '@vuepress/client';
+  export default { computed: { frontmatter() { return usePageFrontmatter().value; } } }
+</script>
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+# <code>{{ frontmatter.title }}</code>
+
+<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
 
 ## Signature
 
