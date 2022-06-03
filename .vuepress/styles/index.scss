@@ -1,6 +1,14 @@
 .navbar .navbar-items-wrapper {
   flex-direction: row-reverse;
 }
+
 button.toggle-dark-button {
   margin-right: 30px;
+}
+
+#docsearch-container {
+  width: 239px;
+  .DocSearch-Button-Container {
+    width: 150px;
+  }
 }
