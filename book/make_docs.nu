@@ -14,15 +14,19 @@ for command in ($nu.scope.commands | where is_custom == false && is_extern == fa
 
     let top = $"---
 title: ($command.command)
-layout: command
 version: ($vers)
 usage: |
 ($indented_usage)
 ---
 
-# `{{ $frontmatter.title }}`
+<script>
+  import { usePageFrontmatter } from '@vuepress/client';
+  export default { computed: { frontmatter\() { return usePageFrontmatter\().value; } } }
+</script>
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+# <code>{{ frontmatter.title }}</code>
+
+<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
 
 "
     let sig = ($command.signature | each { |param|
