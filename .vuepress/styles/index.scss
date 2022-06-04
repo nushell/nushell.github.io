@@ -2,15 +2,25 @@
   flex-direction: row-reverse;
 }
 
-button.toggle-dark-button {
-  margin-right: 30px;
+@media screen and (min-width: 720px) and (max-width: 815px) {
+  #docsearch-container {
+    width: 150px;
+  }
+  button.toggle-dark-button {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 816px) {
   #docsearch-container {
     width: 239px;
     .DocSearch-Button-Container {
       width: 150px;
     }
+  }
+
+  button.toggle-dark-button {
+    margin-right: 30px;
   }
 }
