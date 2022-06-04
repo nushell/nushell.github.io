@@ -1,6 +1,7 @@
 const path = require('path');
 const { feedPlugin } = require('vuepress-plugin-feed2');
 const { defaultTheme } = require('@vuepress/theme-default');
+const { sitemapPlugin } = require('vuepress-plugin-sitemap2');
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch');
 const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
 const { mediumZoomPlugin } = require('@vuepress/plugin-medium-zoom');
@@ -578,6 +579,9 @@ module.exports = {
     },
   }),
   plugins: [
+    sitemapPlugin({
+      hostname: 'https://www.nushell.sh/',
+    }),
     backToTopPlugin(),
     mediumZoomPlugin(),
     docsearchPlugin({
