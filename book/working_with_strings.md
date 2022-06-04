@@ -8,7 +8,7 @@ matches your needs.
 
 The simplest string in Nushell is the single-quoted string. This string uses the `'` character to surround some text. Here's the text for hello world as a single-quoted string:
 
-```
+```sh
 > 'hello world'
 hello world
 ```
@@ -21,7 +21,7 @@ For more complex strings, Nushell also offers double-quoted strings. These strin
 
 For example, we could write the text hello followed by a new line and then world, using escape characters and a double-quoted string:
 
-```
+```sh
 > "hello\nworld"
 hello
 world
@@ -50,7 +50,7 @@ String interpolation uses `$" "` and `$' '` as ways to wrap interpolated text.
 
 For example, let's say we have a variable called `$name` and we want to greet the name of the person contained in this variable:
 
-```
+```sh
 > let name = "Alice"
 > $"greetings, ($name)"
 greetings, Alice
@@ -62,7 +62,7 @@ String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" 
 
 As of version 0.61, interpolated strings support escaping parentheses, so that the `(` and `)` characters may be used in a string without Nushell trying to evaluate what appears between them:
 
-```
+```sh
 > $"2 + 2 is (2 + 2) \(you guessed it!)"
 2 + 2 is 4 (you guessed it!)
 ```
@@ -82,7 +82,110 @@ Many string functions are subcommands of the `str` command. You can get a full l
 
 For example, you can look if a string contains a particular character using `str contains`:
 
-```
+```sh
 > "hello world" | str contains "w"
 true
 ```
+
+### Trimming Strings
+
+You can trim the sides of a string with the [`str trim`](commands/str_trim.md) command. By default, the [`str trim`](commands/str_trim.md) commands trims whitespace from both sides of the string. For example
+
+```sh
+> '       My   string   ' | str trim
+My   string
+```
+
+You can specificy on which side the trimming occurs with the `--right` and `--left` options.
+
+To trim a specific character, use `--char <Character>` to specificy the character to trim.
+
+Here's an example of all the options in action:
+
+```sh
+> '=== Nu shell ===' | str trim -r -c '='
+=== Nu shell
+```
+
+### Substrings
+
+Substrings are slices of a string. They have startpoint and an endpoint. Heres an example of using a substring:
+
+```sh
+> 'Hello World!' | str index-of 'o'
+4
+> 'Hello World!' | str index-of 'r'
+8
+> 'Hello World!' | str substring '4,8'
+o Wo
+```
+
+### String padding
+
+With the [`str lpad`](commands/str_lpad.md) and [`str rpad`](commands/str_rpad.md) commands you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
+
+```sh
+> '1234' | str lpad -l 10 -c '0'
+0000001234
+> '1234' | str rpad -l 10 -c '0' | str length
+10
+```
+
+### Reversing Strings
+
+This can be done easily with the [`str reverse`](commands/str_reverse.md) command.
+
+```sh
+> 'Nushell' | str reverse
+llehsuN
+> ['Nushell' 'is' 'cool'] | str reverse
+╭───┬─────────╮
+│ 0 │ llehsuN │
+│ 1 │ si      │
+│ 2 │ looc    │
+╰───┴─────────╯
+```
+
+## String Parsing
+
+With the [`parse`](commands/parse.md) command you can parse a string into columns. For example:
+
+```sh
+> 'Nushell is the best' | parse '{shell} is {type}'
+╭───┬─────────┬──────────╮
+│ # │  shell  │   type   │
+├───┼─────────┼──────────┤
+│ 0 │ Nushell │ the best │
+╰───┴─────────┴──────────╯
+> 'Bash is kinda cringe' | parse --regex '(?P<shell>\w+) is (?P<type>[\w\s]+)'
+╭───┬───────┬──────────────╮
+│ # │ shell │     type     │
+├───┼───────┼──────────────┤
+│ 0 │ Bash  │ kinda cringe │
+╰───┴───────┴──────────────╯
+```
+
+## Converting Strings
+
+There are multiple ways to convert strings to and from other types.
+
+### To String
+
+1. Using [`into string`](commands/into_string.md). e.g. `123 | into string`
+2. Using string interpolation. e.g. `$'(123)'`
+3. Using [`build-string`](commands/build-string.md). e.g. `build-string (123)`
+
+### From String
+
+1. Using [`into <type>`](commands/into.md). e.g. `'123' | into int`
+
+## Coloring Strings
+
+You can color strings with the [`ansi`](commands/ansi.md) command. For example:
+
+```sh
+> $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
+```
+
+`ansi purple_bold` makes the text a bold purple
+`ansi reset` resets the coloring to the default. (Tip: You should always end colored strings with `ansi reset`)
