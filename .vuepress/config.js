@@ -1,10 +1,18 @@
 const path = require('path');
+const { gitPlugin } = require('@vuepress/plugin-git');
 const { feedPlugin } = require('vuepress-plugin-feed2');
 const { defaultTheme } = require('@vuepress/theme-default');
 const { sitemapPlugin } = require('vuepress-plugin-sitemap2');
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch');
 const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
 const { mediumZoomPlugin } = require('@vuepress/plugin-medium-zoom');
+
+const compareDate = (dateA, dateB) => {
+  if (!dateA || !(dateA instanceof Date)) return 1;
+  if (!dateB || !(dateB instanceof Date)) return -1;
+
+  return dateB.getTime() - dateA.getTime();
+};
 
 module.exports = {
   locales: {
@@ -579,9 +587,7 @@ module.exports = {
     },
   }),
   plugins: [
-    sitemapPlugin({
-      hostname: 'https://www.nushell.sh/',
-    }),
+    gitPlugin(),
     backToTopPlugin(),
     mediumZoomPlugin(),
     docsearchPlugin({
@@ -590,20 +596,30 @@ module.exports = {
       apiKey: 'dd6a8f770a42efaed5befa429d167232',
     }),
     feedPlugin({
-      hostname: 'www.nushell.sh',
-      canonical_base: 'https://www.nushell.sh/',
-      feed_options: {
-        title: 'Nushell Blog',
-        link: 'https://www.nushell.sh/blog',
-        favicon: 'https://www.nushell.sh/icon.png',
-      },
       rss: true,
       json: true,
       atom: true,
+      count: 30,
+      hostname: 'www.nushell.sh',
       atomOutputFilename: 'feed.atom',
-      posts_directories: ['/blog/'],
-      sort: (entries) =>
-        entries.sort((a, b) => new Date(b.date) - new Date(a.date)),
+      filter: ({ frontmatter, filePathRelative }) => {
+        return (
+          frontmatter.feed === true || filePathRelative?.indexOf('blog/') >= 0
+        );
+      },
+      sorter: (a, b) => {
+        return compareDate(
+          a.data.git?.createdTime
+            ? new Date(a.data.git?.createdTime)
+            : a.frontmatter.date,
+          b.data.git?.createdTime
+            ? new Date(b.data.git?.createdTime)
+            : b.frontmatter.date
+        );
+      },
+    }),
+    sitemapPlugin({
+      hostname: 'https://www.nushell.sh/',
     }),
   ],
   onPrepared: async (app) => {
