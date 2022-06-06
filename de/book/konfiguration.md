@@ -66,6 +66,14 @@ Als nächstes, muss auf manchen Distributionen sichergestellt werden, dass Nu in
 
 Damit sollte es möglich sein, Nu als Login-Shell mit `chsh` festzulegen. Nach dem Ausloggen und erneutem Einloggen sollte Nu als Shell grüßen.
 
+### Konfiguration mittels `login.nu`
+
+Wenn Nushell als Login-Shell benutzt wird, kann eine spezifische Konfigurationsdatei angelegt werden, die nur in diesem Fall ausgelesen wird. Hierfür muss eine Datei namens `login.nu` im Standard-Konfigurationsverzeichnis abgelegt sein.
+
+Die Datei `login.nu` wird nach `env.nu` und `config.nu` eingelesen, so dass diese Konfigurationen überschrieben werden können.
+
+Der Pfad zu dieser Konfigurationsdatei steht in `$nu.loginshell-path`.
+
 ### macOS: `/usr/bin/open` als `open` behalten
 
 Manche Tools (z.B. Emacs) vertrauen darauf, dass `open` Dateien auf dem Mac öffnet.
