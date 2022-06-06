@@ -83,6 +83,14 @@ Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
 With this, you should be able to `chsh` and set Nu to be your login shell. After a logout, on your next login you should be greeted with a shiny Nu prompt.
 
+### Configuration with `login.nu`
+
+If Nushell is used as a loginshell, you can use a specific configuration file which is only sourced in this case. Therefore a file with name `login.nu` has to be in the standard configuration directory.
+
+The file `login.nu` is sourced after `env.nu` and `config.nu`, so that you can overwrite those configurations if you need.
+
+There is an enviroment variable `$nu.loginshell-path` containing the path to this file.
+
 ### macOS: Keeping `/usr/bin/open` as `open`
 
 Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
