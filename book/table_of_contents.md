@@ -6,7 +6,7 @@
 - [Moving around](moving_around.md) - Moving around in Nushell
 - [Types of data](types_of_data.md) - Types of data in Nushell
 - [Loading data](loading_data.md) - Loading data and using it
-- [Strings](strings.md) - Strings, escape characters, and string interpolation
+- [Strings](working_with_strings.md) - Strings, escape characters, and string interpolation
 - [Working with lists](working_with_lists.md) - Working with Nu lists
 - [Working with tables](working_with_tables.md) - Working with Nu tables
 - [Pipeline](pipeline.md) - How the pipeline works
@@ -15,7 +15,6 @@
 - [Custom commands](custom_commands.md) - Creating your own commands
 - [Aliases](aliases.md) - How to alias commands
 - [Operators](operators.md) - Operators supported by Nushell
-- [Math](math.md) - Math operations in Nushell
 - [Variables and subexpressions](variables_and_subexpressions.md) - Working with variables and working with subexpressions
 - [Environment](environment.md) - Working with environment variables
 - [Stdout, stderr, and exit codes](stdout_stderr_exit_codes.md) - Working with stdout, stderr, and exit codes

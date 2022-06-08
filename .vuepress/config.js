@@ -600,7 +600,7 @@ module.exports = {
       json: true,
       atom: true,
       count: 30,
-      hostname: 'www.nushell.sh',
+      hostname: 'https://www.nushell.sh',
       atomOutputFilename: 'feed.atom',
       filter: ({ frontmatter, filePathRelative }) => {
         return (

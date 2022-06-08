@@ -54,4 +54,4 @@ Github Actions で `Nushell` を使うこともできます。 [`setup-nu`](http
 
 Nu に関する質問がある場合は[Discord](https://discord.gg/NtAbbGn)に参加してください！
 
-サイトの改善には、[フィードバック](<(https://github.com/nushell/nushell.github.io/issues)>)や[PR](<(https://github.com/nushell/nushell.github.io/pulls)>)をお寄せください。
+サイトの改善には、[フィードバック](https://github.com/nushell/nushell.github.io/issues)や[PR](https://github.com/nushell/nushell.github.io/pulls)をお寄せください。

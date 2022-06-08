@@ -1,12 +1,12 @@
 # Table of Contents
 
 - [安装](installation.md) - 安装 Nushell
-- [介绍](introduction.md) - 开始使用
+- [介绍](README.md) - 开始使用
 - [Nushell 开发思想](thinking_in_nushell.md) - Nushell 开发思想
 - [四处移动](moving_around.md) - 在 Nushell 里四处移动
 - [数据类型](types_of_data.md) - Nushell 中的数据类型
 - [加载数据](loading_data.md) - 加载及使用数据
-- [字符串](strings.md) - 字符串、转义字符和字符串插值
+- [字符串](working_with_strings.md) - 字符串、转义字符和字符串插值
 - [使用列表](working_with_lists.md) - 使用 Nushell 的列表
 - [使用表格](working_with_tables.md) - 使用 Nushell 的表格
 - [管道](pipeline.md) - 管道是如何运作的
@@ -15,7 +15,6 @@
 - [自定义命令](custom_commands.md) - 创建你自己的命令
 - [别名](aliases.md) - 如何为命令添加别名
 - [运算符](operators.md) - Nushell 支持的运算符
-- [数学](math.md) - Nushell 里的数学计算
 - [变量和子表达式](variables_and_subexpressions.md) - 使用变量和子表达式
 - [环境变量](environment.md) - 使用环境变量
 - [标准输出、错误和退出码](stdout_stderr_exit_codes.md) - 使用标准输出、错误和退出码
