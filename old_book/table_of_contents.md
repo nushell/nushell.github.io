@@ -27,4 +27,3 @@
 - [Nushell map from imperative languages](nushell_map_imperative.md) - Guide to show how nushell compares with Python, Kotlin, C++, C#, and Rust
 - [Nushell map from functional languages](nushell_map_functional.md) - Guide to show how nushell compares with Clojure, Tablecloth (Ocaml / Elm) and Haskell
 - [Nushell operator map](nushell_operator_map.md) - Guide to show how nushell operators compare with those in general purpose programming languages
-- [Command Reference](command_reference.md) - List of all Nushell's commands
