@@ -109,7 +109,7 @@ Here's an example of all the options in action:
 
 ### Substrings
 
-Substrings are slices of a string. They have startpoint and an endpoint. Heres an example of using a substring:
+Substrings are slices of a string. They have startpoint and an endpoint. Here's an example of using a substring:
 
 ```sh
 > 'Hello World!' | str index-of 'o'
