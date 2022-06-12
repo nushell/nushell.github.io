@@ -1149,7 +1149,6 @@ whenever possible, their analogous Nushell command.
 | arg-sort        | Series                      | Returns indexes for a sorted series                                        |                               |
 | arg-true        | Series                      | Returns indexes where values are true                                      |                               |
 | arg-unique      | Series                      | Returns indexes for unique values                                          |                               |
-| column          | DataFrame                   | Returns the selected column as Series                                      | get                           |
 | count-null      | Series                      | Counts null values                                                         |                               |
 | count-unique    | Series                      | Counts unique value                                                        |                               |
 | drop            | DataFrame                   | Creates a new dataframe by dropping the selected columns                   | drop                          |
@@ -1167,7 +1166,7 @@ whenever possible, their analogous Nushell command.
 | is-unique       | Series                      | Creates mask indicating unique values                                      |                               |
 | join            | DataFrame                   | Joins a dataframe using columns as reference                               |                               |
 | last            | DataFrame                   | Creates new dataframe with last rows                                       | last                          |
-| ls              |                             | Lists stored dataframes                                                    |                               |
+| ls-df           |                             | Lists stored dataframes                                                    |                               |
 | melt            | DataFrame                   | Unpivot a DataFrame from wide to long format                               |                               |
 | not             | Series Inverts boolean mask |                                                                            |
 | open            |                             | Loads dataframe form csv file                                              | open                          |
