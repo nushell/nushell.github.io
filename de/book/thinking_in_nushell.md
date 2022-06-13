@@ -45,9 +45,6 @@ source "output.nu"
 abc
 ```
 
-
-
-
 Der `source` Befehl will das output Skript ausführen, aber der `save` Befehl müsste dafür bereits ausgeführt worden sein.
 Nushell führt den ganzen Block aus, als wäre es eine Datei, anstatt Zeile für Zeile. Da die output.nu erst erstellt werden muss,
 bevor sie ausgeführt werden kann, können die drei Zeilen nicht im voraus `kompiliert` werden.
@@ -70,7 +67,6 @@ Eine andere Überraschung für Benutzer aus anderen Sprachen ist, dass in Nushel
 (Einige haben bereits angefangen sie Konstanten zu nennen, um diesem Umstand gerechter zu werden)
 Es macht sicher Sinn, sich mit der Funktionalen Programmierung auseinander zu setzen, wenn man mit Nushell arbeiten will,
 da dies am besten funktioniert, wenn man mit unveränderlichen Variablen arbeitet.
-
 
 Was ist denn der Grund warum Nushell unveränderliche Variablen verwendet? Zu Beginn der Entwicklung von Nushell wurde entschieden, auf einen Daten fokusierten,
 funktionalen Stil zu setzen. Erst kürzlich wurde eine Funktionalität zu Nushell hinzugefügt, die den Vorteil dieser frühen Experimente zeigt: Parallelität
@@ -111,7 +107,6 @@ Zum Beispiel, wenn der längste Text in einer Liste von Texten gesucht wird:
 **Denken in Nushell** wer sich veränderbare Variablen gewohnt ist, braucht eine gewisse Zeit, um sich einen mehr Funktionalen Stil anzugewöhnen.
 Nushell hat einige eingebaute Fähigkeiten um mit diesem Modell umzugehen. Diese zu kennen hilft um Code im Nushell Stil zu schreiben.
 Dass damit Teile des Codes parallel ausgeführt werden können ist ein toller Mehrwert.
-
 
 ## Nushells Umgebung hat Gültigkeitsbereiche
 
