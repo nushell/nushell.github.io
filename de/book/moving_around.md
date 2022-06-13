@@ -4,25 +4,25 @@ Traditionelle Shells erlauben es im Dateisystem zu navigieren und Befehle auszuf
 
 ## Verzeichnisinhalt ansehen
 
-@[code](@/snippets/moving_around/ls_example.sh)
+@[code](@snippets/moving_around/ls_example.sh)
 
 Wie im anderen Kapitel bereits gezeigt wurde, ist [`ls`](commands/ls.ms) der Befehl um den Inhalt eines Pfades anzuzeigen. Der Output wird als Tabelle dargestellt.
 
 Der [`ls`](commands/ls.md) Befehl nimmt auch ein optionales Argument entgegen, um die Ansicht zu verändern. Zum Beispiel um nur ".md" Dateien an zu zeigen.
 
-@[code](@/snippets/moving_around/ls_shallow_glob_example.sh)
+@[code](@snippets/moving_around/ls_shallow_glob_example.sh)
 
 Der Asterisk (\*) im obigen Beispiel "\*.md" wird auch als Wildcard oder glob bezeichnet. Es kann für jedes Zeichen stehen. Man kann "\*.md" auch als "entspricht jeder Datei, die mit '.md' aufhört" lesen.
 
 Nu verwendet auch moderne globs, mit welchen man auch tiefer liegende Verzeichnisse erreichen kann.
 
-@[code](@/snippets/moving_around/ls_deep_glob_example.sh)
+@[code](@snippets/moving_around/ls_deep_glob_example.sh)
 
 Hier werden alle ".md" Dateien ausgegeben, die "in jedem tiefer liegenden Verzeichnis" von hier aus liegen.
 
 ## Wechseln des aktuellen Verzeichnisses
 
-@[code](@/snippets/moving_around/cd_example.sh)
+@[code](@snippets/moving_around/cd_example.sh)
 
 Um vom aktuellen Verzeichnis in ein neues zu gelangen, wird der `cd` Befehl verwendet. Wie in jeder anderen Shell, kann entweder der Name des Verzeichnisses angeben, oder mit `..` ein Verzeichnis hochgesprungen werden.
 
