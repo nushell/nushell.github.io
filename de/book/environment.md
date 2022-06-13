@@ -23,7 +23,6 @@ Die letzte Spalte `raw` beinhaltet den Wert, den ein externes Programm erhält (
 
 Die Umgebung wird erstellt durch Nus [Konfigurations-Datei](configuration.md) und von der Umgebung, in der Nu gestartet wurde.
 
-
 ## Setzen von Umgebungsvariablen
 
 Es gibt mehrere Möglichkeiten eine Umgebungsvariable zu setzen:
@@ -50,7 +49,7 @@ Soll der Pfad ans Ende angehängt werden, so wird `append` verwendet.
 ### [`load-env`](commands/load-env.html)
 
 Wenn mehrere Umgebungsvariablen gesetzt werden sollen, so kann `load-env` eine ganze Tabelle mitgegeben werden.
-Diese besteht aus name/value Paaren, welche alle auf einmal geladen werden: 
+Diese besteht aus name/value Paaren, welche alle auf einmal geladen werden:
 
 ```
 > load-env { "BOB": "FOO", "JAY": "BAR" }
@@ -196,10 +195,10 @@ Dieser Schritt kann auch manuell ausgelöst werden mit `do $env.ENV_CONVERSIONS.
 Zurückschauend auf den [`env`](commands/env.html) Befehl, die `raw` Spalte zeigt die Werte, die mit `ENV_CONVERSIONS.<name>.to_string` übersetzt wurden.
 Die `value` Spalte zeigt die Werte, die Nushell benutzt (Das Resultat von `ENV_CONVERSIONS.<name>.from_string` wie bei `FOO`)
 Wenn der Wert kein String ist und keine `to_string` Konvertierung angewendet wird, wird er nicht an einen externen Befehl weitergeleitet (siehe die `raw` Spalte von `PROMPT_COMMAND`)
-Eine Ausnahme ist die `PATH` Variable (`Path` in Windows): Standardmässig wird diese von einem String in eine Liste konvertiert beim Start 
+Eine Ausnahme ist die `PATH` Variable (`Path` in Windows): Standardmässig wird diese von einem String in eine Liste konvertiert beim Start
 und von einer Liste in einen String, wenn externe Befehle gestartet werden.
 
-_(Wichtig! Die Umgebungs-Konvertierung string -> value findet statt **nachdem** env.nu und config.nu ausgewertet wurden. 
+_(Wichtig! Die Umgebungs-Konvertierung string -> value findet statt **nachdem** env.nu und config.nu ausgewertet wurden.
 Alle Umgebungsvariablen in env.nu und config.nu sind immer noch Strings solange sie nicht manuell auf andere Werte gesetzt wurden.)_
 
 ## Entfernen von Umgebungsvariablen

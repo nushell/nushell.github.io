@@ -255,7 +255,11 @@ module.exports = {
               children: [
                 'README.md',
                 'installation',
+                'thinking_in_nushell',
+                'moving_around',
+                'types_of_data',
                 'konfiguration',
+                'environment',
                 '3rdpartyprompts',
                 'eigene_befehle',
                 'aliase',

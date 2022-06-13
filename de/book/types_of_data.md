@@ -24,7 +24,6 @@ Dezimalzahlen sind Zahlen mit einem Bruchanteil. Beispiele sind 1.5, 2.0 und 15.
 
 Eine Zeichenfolge die einen Text repräsentiert. Es gibt mehrere Möglichkeiten einen Text in Nushell dar zu stellen:
 
-
 **Doppelte Anführungszeichen**
 
 ```
@@ -40,7 +39,7 @@ Doppelte Anführungszeichen werden am häufigsten verwendet und finden sich übe
 ```
 
 Einfache Anführungszeichen ergeben ebenfalls einen Text zurück. Der Unterschied ist, dass sie es erlauben, doppelte Anführungszeichen innerhalb des Textes zu verwenden:
- `'Er sagte "lasst uns anstossen?"'`
+`'Er sagte "lasst uns anstossen?"'`
 
 **Text Erweiterung** (interpolation)
 Nushell unterstützt Text Erweiterung, was es erlaubt, Unterausdrücke innerhalb eines Textes zu verwenden. Diese werden mit `$` ausgedrückt:
@@ -245,7 +244,7 @@ Beispiel: Eine Liste von Texten
 
 ## Tabellen (tables)
 
-Die Tabelle ist eine zentrale Datenstruktur in Nushell. Viele der eingebauten Befehle geben als Resultat eine Tabelle aus. 
+Die Tabelle ist eine zentrale Datenstruktur in Nushell. Viele der eingebauten Befehle geben als Resultat eine Tabelle aus.
 Eine Tabelle besteht immer aus Zeilen und Spalten.
 
 Eine Tabelle wird ähnlich erstellt wie eine Liste. Weil diese auch Spalten und nicht nur Werte enthält, geben wir die Spalten zuerst an:
@@ -285,8 +284,7 @@ Oder aus einer Liste von Wertepaaren:
 
 ## Blöcke (blocks)
 
-Unter einem Block versteht man einen Block aus Code. Wie im Befehl `each { |it| echo $it }` ist der Block der Teil in den geschweiften Klammern, also { |it| echo $it }`.
-Block Parameter werden zwischen zwei Pipe-Symbolen eingegeben (z.B. ` |it| `)
+Unter einem Block versteht man einen Block aus Code. Wie im Befehl `each { |it| echo $it }` ist der Block der Teil in den geschweiften Klammern, also { |it| echo $it }`. Block Parameter werden zwischen zwei Pipe-Symbolen eingegeben (z.B. ` |it| `)
 
 Blöcke sind ein praktischer Weg Code einzugeben, der auf jeder Zeile der Daten ausgeführt wird. Es ist üblich `$it` als Parameter in [`each`](commands/each.md)
 zu benutzen, aber nicht zwingend. `each { |x| echo $x }`funktioniert gleich wie `each { |it| echo $it }`.
