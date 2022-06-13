@@ -78,7 +78,7 @@ echo "total =" ($scores | math sum) # easier approach, same result
 
 echo "product =" ($scores | reduce --fold 1 { |it, acc| $acc * $it }) # 96
 
-echo $scores | reduce -n { |it, acc| $acc + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
+echo $scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
 ```
 
 ## Accessing the list
