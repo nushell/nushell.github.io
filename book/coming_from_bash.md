@@ -7,7 +7,7 @@ To make these commands available in `nu` as well, add the following line to your
 let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 
-Note: this table assumes Nu 0.14.1 or later.
+Note: this table assumes Nu 0.60.0 or later.
 
 | Bash                                 | Nu                                               | Task                                                              |
 | ------------------------------------ | ------------------------------------------------ | ----------------------------------------------------------------- |
@@ -45,7 +45,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | `stat $(which git)`                  | `stat (which git).path`                          | Use command output as argument for other command                  |
 | `echo $PATH`                         | `echo $env.PATH`                                 | See the current path                                              |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update PATH permanently                                           |
-| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                       |
+| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                      |
 | `export`                             | `echo $env`                                      | List the current environment variables                            |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update environment variables permanently                          |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | Update environment temporarily                                    |
