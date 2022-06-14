@@ -34,7 +34,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | `rm <path>`                          | `rm <path>`                                      | Remove the given file                                             |
 |                                      | `rm -t <path>`                                   | Move the given file to the system trash                           |
 | `rm -rf <path>`                      | `rm -r <path>`                                   | Recursively removes the given path                                |
-| `chmod`                              | `chmod`                                          | Changes the file attributes                                       |
+| `chmod`                              | `chmod`                                          | Changes the file attributes (on UNIX-like platforms)              |
 | `date -d <date>`                     | `"<date>" \| into datetime -f <format>`          | Parse a date ([format documentation](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
 | `sed`                                | `str replace`                                    | Find and replace a pattern in a string                            |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>` | Filter strings that contain the substring                         |
@@ -57,5 +57,5 @@ Note: this table assumes Nu 0.14.1 or later.
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Add and edit alias permanently (for new shells)                   |
 | `bash -c <commands>`                 | `nu -c <commands>`                               | Run a pipeline of commands (requires 0.9.1 or later)              |
 | `bash <script file>`                 | `nu <script file>`                               | Run a script file (requires 0.9.1 or later)                       |
-| `\`                                  | `( <command> )`                                  | Line continuation                                                 |
+| `\`                                  | `( <command> )`                                  | A command can span multiple lines when wrapped with `(` and `)`   |
 | `pwd`                                | `$env.PWD`                                       | Display the current directory                                     |
