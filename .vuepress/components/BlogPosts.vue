@@ -58,6 +58,10 @@ export default {
   margin-top: 0.5rem;
   margin-bottom: 0.75rem;
   font-size: 24px;
+  padding-top: 0;
+}
+.dark .title a {
+  color: #adb6be;
 }
 .read-more {
   font-weight: 500;
