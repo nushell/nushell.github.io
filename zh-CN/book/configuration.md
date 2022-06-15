@@ -53,7 +53,7 @@ _(尽管 `$env.config` 是一个环境变量，按照惯例它仍然在 `config.
 
 ### 使用内置命令
 
-我们在 Nushell 新版本中新增了 2 个内置命令(`config nu` 和 `config env`),凭借这两个命令，你可以使用自定义的编辑器或者 IDE 快速的更改 Nushell 配置信息
+从 Nushell 0.64 版本开始新增了 2 个内置命令(`config nu` 和 `config env`),凭借这两个命令，你可以使用自定义的编辑器或者 IDE 快速地更改 Nushell 配置信息
 
 Nushell 遵循如下的规则来匹配编辑器:
 
