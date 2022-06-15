@@ -52,13 +52,15 @@ _(尽管 `$env.config` 是一个环境变量，按照惯例它仍然在 `config.
 - `PROMPT_MULTILINE_INDICATOR = "::: "`
 
 ### 使用内置命令
-我们在Nushell新版本中新增了2个内置命令(`config nu` 和 `config env`),凭借这两个命令，你可以使用自定义的编辑器或者IDE快速的更改Nushell配置信息
+
+我们在 Nushell 新版本中新增了 2 个内置命令(`config nu` 和 `config env`),凭借这两个命令，你可以使用自定义的编辑器或者 IDE 快速的更改 Nushell 配置信息
 
 Nushell 遵循如下的规则来匹配编辑器:
+
 1. `$config.buffer_editor`
 2. `$env.EDITOR`
 3. `$env.VISUAL`
-4. 如果上面都未匹配成功，则针对Windows运行`notepad`, 其他系统`nano`
+4. 如果上面都未匹配成功，则针对 Windows 运行`notepad`, 其他系统`nano`
 
 ### 颜色配置部分
 

@@ -52,9 +52,11 @@ These are some important variables to look at for Nushell-specific settings:
 - `PROMPT_MULTILINE_INDICATOR = "::: "`
 
 ### Configurations with built-in commands
+
 With new release of Nushell, we have introduced two new commands(`config nu` and `config env`) which help you quickly edit nu configurations with your preferred text editor/IDE
 
 Nushell follows underneath orders to locate the editor:
+
 1. `$config.buffer_editor`
 2. `$env.EDITOR`
 3. `$env.VISUAL`
