@@ -6,9 +6,9 @@ Traditionelle Shells erlauben es im Dateisystem zu navigieren und Befehle auszuf
 
 @[code](@snippets/moving_around/ls_example.sh)
 
-Wie im anderen Kapitel bereits gezeigt wurde, ist [`ls`](commands/ls.ms) der Befehl um den Inhalt eines Pfades anzuzeigen. Der Output wird als Tabelle dargestellt.
+Wie im anderen Kapitel bereits gezeigt wurde, ist [`ls`](/book/commands/ls.ms) der Befehl um den Inhalt eines Pfades anzuzeigen. Der Output wird als Tabelle dargestellt.
 
-Der [`ls`](commands/ls.md) Befehl nimmt auch ein optionales Argument entgegen, um die Ansicht zu verändern. Zum Beispiel um nur ".md" Dateien an zu zeigen.
+Der [`ls`](/book/commands/ls.md) Befehl nimmt auch ein optionales Argument entgegen, um die Ansicht zu verändern. Zum Beispiel um nur ".md" Dateien an zu zeigen.
 
 @[code](@snippets/moving_around/ls_shallow_glob_example.sh)
 
@@ -49,7 +49,7 @@ Ein Objekt löschen:
 
 @[code](@snippets/moving_around/rm_example.sh)
 
-Diese drei Befehle können auch von der glob Fähigkeit profitieren, wie beim [`ls`](commands/ls.md).
+Diese drei Befehle können auch von der glob Fähigkeit profitieren, wie beim [`ls`](/book/commands/ls.md).
 
 Zu guter Letzt wird ein neues Verzeichnis angelegt mit dem `mkdir` Befehl:
 
