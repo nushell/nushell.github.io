@@ -6,7 +6,7 @@ Traditionelle Shells erlauben es im Dateisystem zu navigieren und Befehle auszuf
 
 @[code](@snippets/moving_around/ls_example.sh)
 
-Wie im anderen Kapitel bereits gezeigt wurde, ist [`ls`](/book/commands/ls.ms) der Befehl um den Inhalt eines Pfades anzuzeigen. Der Output wird als Tabelle dargestellt.
+Wie im anderen Kapitel bereits gezeigt wurde, ist [`ls`](/book/commands/ls.md) der Befehl um den Inhalt eines Pfades anzuzeigen. Der Output wird als Tabelle dargestellt.
 
 Der [`ls`](/book/commands/ls.md) Befehl nimmt auch ein optionales Argument entgegen, um die Ansicht zu verändern. Zum Beispiel um nur ".md" Dateien an zu zeigen.
 
