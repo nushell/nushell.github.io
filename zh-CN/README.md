@@ -44,8 +44,6 @@ $ brew install nushell
 $ winget install nushell
 ```
 
-Windows 用户可能需要安装最新的 [Microsoft Visual C++ Redistributable](https://docs.microsoft.com/cpp/windows/latest-supported-vc-redist)。
-
 ## 社区
 
 如果你有任何问题可以在 [Dicord](https://discord.gg/NtAbbGn) 上找到我们。
