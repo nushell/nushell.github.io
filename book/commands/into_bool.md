@@ -1,6 +1,6 @@
 ---
 title: into bool
-version: 0.63.0
+version: 0.64.0
 usage: |
   Convert value to boolean
 ---

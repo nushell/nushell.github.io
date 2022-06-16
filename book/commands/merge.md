@@ -1,6 +1,6 @@
 ---
 title: merge
-version: 0.63.0
+version: 0.64.0
 usage: |
   Merge a table into an input table
 ---
@@ -32,4 +32,9 @@ Merge an index column into the input table
 Merge two records
 ```shell
 > {a: 1, b: 2} | merge { {c: 3} }
+```
+
+Merge two records with overlap key
+```shell
+> {a: 1, b: 3} | merge { {b: 2, c: 4} }
 ```

@@ -1,6 +1,6 @@
 ---
 title: inc
-version: 0.63.0
+version: 0.64.0
 usage: |
   Increment a value or version. Optionally use the column of a table.
 ---

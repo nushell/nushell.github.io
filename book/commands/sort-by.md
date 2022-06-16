@@ -1,6 +1,6 @@
 ---
 title: sort-by
-version: 0.63.0
+version: 0.64.0
 usage: |
   Sort by the given columns, in increasing order.
 ---
@@ -16,13 +16,14 @@ usage: |
 
 ## Signature
 
-```> sort-by ...columns --reverse --insensitive```
+```> sort-by ...columns --reverse --insensitive --natural```
 
 ## Parameters
 
  -  `...columns`: the column(s) to sort by
  -  `--reverse`: Sort in reverse order
  -  `--insensitive`: Sort string-based columns case-insensitively
+ -  `--natural`: Sort alphanumeric string-based columns naturally
 
 ## Examples
 
@@ -44,6 +45,11 @@ sort a list of strings
 sort a list of strings in reverse
 ```shell
 > [betty amy sarah] | sort-by -r
+```
+
+sort a list of alphanumeric strings naturally
+```shell
+> [test1 test11 test2] | sort-by -n
 ```
 
 Sort strings (case-insensitive)

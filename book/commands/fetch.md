@@ -1,6 +1,6 @@
 ---
 title: fetch
-version: 0.63.0
+version: 0.64.0
 usage: |
   Fetch the contents from a URL.
 ---
@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> fetch (URL) --user --password --timeout --headers --raw```
+```> fetch (URL) --user --password --timeout --headers --raw --output --bin --append```
 
 ## Parameters
 
@@ -26,6 +26,9 @@ usage: |
  -  `--timeout {int}`: timeout period in seconds
  -  `--headers {any}`: custom headers you want to add
  -  `--raw`: fetch contents as text rather than a table
+ -  `--output {path}`: save contents into a file
+ -  `--bin`: if saving into a file, save as raw binary
+ -  `--append`: if saving into a file, append to end of file
 
 ## Notes
 ```text

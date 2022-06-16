@@ -1,6 +1,6 @@
 ---
 title: shuffle
-version: 0.63.0
+version: 0.64.0
 usage: |
   Shuffle rows randomly.
 ---

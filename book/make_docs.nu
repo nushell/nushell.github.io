@@ -8,7 +8,7 @@ if $book_exists == false {
     exit --now
 }
 
-for command in ($nu.scope.commands | where is_custom == false && is_extern == false) {
+for command in ($nu.scope.commands | where is_custom == false && is_extern == false | sort-by category) {
     # this is going in the frontmatter as a multiline YAML string, so indentation matters
     let indented_usage = ($command.usage | lines | each {|it| $"  ($it)"} | str collect (char nl))
 
@@ -96,6 +96,7 @@ $"($example.description)
         )
 
     let safe_name = ($command.command | str replace '\?' '' | str replace ' ' '_')
+    let safe_name = if ($command.category =~ 'frame') { $'_($safe_name)' } else { $safe_name }
     $doc | save --raw $"./book/commands/($safe_name).md"
     $"./book/commands/($safe_name).md"
 } | length | $"($in) commands written"

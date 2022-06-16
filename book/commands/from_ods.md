@@ -1,6 +1,6 @@
 ---
 title: from ods
-version: 0.63.0
+version: 0.64.0
 usage: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 ---
@@ -26,10 +26,10 @@ usage: |
 
 Convert binary .ods data to a table
 ```shell
-> open test.txt | from ods
+> open --raw test.ods | from ods
 ```
 
 Convert binary .ods data to a table, specifying the tables
 ```shell
-> open test.txt | from ods -s [Spreadsheet1]
+> open --raw test.ods | from ods -s [Spreadsheet1]
 ```
