@@ -1,6 +1,6 @@
 ---
 title: path join
-version: 0.63.0
+version: 0.64.0
 usage: |
   Join a structured path or a list of path parts.
 ---
@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> path join (append) --columns```
+```> path join ...append --columns```
 
 ## Parameters
 
- -  `append`: Path to append to the input
+ -  `...append`: Path to append to the input
  -  `--columns {table}`: Optionally operate by column path
 
 ## Notes
@@ -33,6 +33,11 @@ the output of 'path parse' and 'path split' subcommands.
 Append a filename to a path
 ```shell
 > '/home/viking' | path join spam.txt
+```
+
+Append a filename to a path
+```shell
+> '/home/viking' | path join spams this_spam.txt
 ```
 
 Append a filename to a path inside a column

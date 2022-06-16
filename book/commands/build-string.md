@@ -1,6 +1,6 @@
 ---
 title: build-string
-version: 0.63.0
+version: 0.64.0
 usage: |
   Create a string from the arguments.
 ---
@@ -31,5 +31,5 @@ Builds a string from letters a b c
 
 Builds a string from letters a b c
 ```shell
-> build-string (1 + 2) = one ' ' plus ' ' two
+> build-string $"(1 + 2)" = one ' ' plus ' ' two
 ```

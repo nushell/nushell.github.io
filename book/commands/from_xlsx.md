@@ -1,6 +1,6 @@
 ---
 title: from xlsx
-version: 0.63.0
+version: 0.64.0
 usage: |
   Parse binary Excel(.xlsx) data and create table.
 ---
@@ -26,10 +26,10 @@ usage: |
 
 Convert binary .xlsx data to a table
 ```shell
-> open test.txt | from xlsx
+> open --raw test.xlsx | from xlsx
 ```
 
 Convert binary .xlsx data to a table, specifying the tables
 ```shell
-> open test.txt | from xlsx -s [Spreadsheet1]
+> open --raw test.xlsx | from xlsx -s [Spreadsheet1]
 ```

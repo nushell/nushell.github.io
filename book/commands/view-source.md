@@ -1,6 +1,6 @@
 ---
 title: view-source
-version: 0.63.0
+version: 0.64.0
 usage: |
   View a block, module, or a definition
 ---

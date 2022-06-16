@@ -1,6 +1,6 @@
 ---
 title: db order-by
-version: 0.63.0
+version: 0.64.0
 usage: |
   Orders by query
 ---
@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> db order-by ...select --ascending --nulls_first```
+```> db order-by ...select --ascending --nulls-first```
 
 ## Parameters
 
  -  `...select`: Select expression(s) on the table
  -  `--ascending`: Order by ascending values
- -  `--nulls_first`: Show nulls first in order
+ -  `--nulls-first`: Show nulls first in order
 
 ## Examples
 

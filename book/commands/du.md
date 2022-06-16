@@ -1,6 +1,6 @@
 ---
 title: du
-version: 0.63.0
+version: 0.64.0
 usage: |
   Find disk usage sizes of specified items.
 ---

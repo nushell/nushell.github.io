@@ -1,6 +1,6 @@
 ---
 title: hash base64
-version: 0.63.0
+version: 0.64.0
 usage: |
   base64 encode or decode a value
 ---

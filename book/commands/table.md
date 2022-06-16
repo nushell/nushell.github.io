@@ -1,6 +1,6 @@
 ---
 title: table
-version: 0.63.0
+version: 0.64.0
 usage: |
   Render the table.
 ---
@@ -16,12 +16,13 @@ usage: |
 
 ## Signature
 
-```> table --start-number --list```
+```> table --start-number --list --width```
 
 ## Parameters
 
  -  `--start-number {int}`: row number to start viewing from
  -  `--list`: list available table modes/themes
+ -  `--width {int}`: number of terminal columns wide (not output columns)
 
 ## Examples
 

@@ -1,6 +1,6 @@
 ---
 title: drop nth
-version: 0.63.0
+version: 0.64.0
 usage: |
   Drop the selected rows.
 ---
@@ -48,4 +48,14 @@ Drop rows 2 0 4
 Drop range rows from second to fourth
 ```shell
 > echo [first second third fourth fifth] | drop nth (1..3)
+```
+
+Drop all rows except first row
+```shell
+> [0,1,2,3,4,5] | drop nth 1..
+```
+
+Drop rows 3,4,5
+```shell
+> [0,1,2,3,4,5] | drop nth 3..
 ```

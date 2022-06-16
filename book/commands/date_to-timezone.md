@@ -1,6 +1,6 @@
 ---
 title: date to-timezone
-version: 0.63.0
+version: 0.64.0
 usage: |
   Convert a date to a given time zone.
 ---

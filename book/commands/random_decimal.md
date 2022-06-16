@@ -1,6 +1,6 @@
 ---
 title: random decimal
-version: 0.63.0
+version: 0.64.0
 usage: |
   Generate a random decimal within a range [min..max]
 ---

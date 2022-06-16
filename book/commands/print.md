@@ -1,6 +1,6 @@
 ---
 title: print
-version: 0.63.0
+version: 0.64.0
 usage: |
   Prints the values given
 ---
@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> print ...rest --no_newline```
+```> print ...rest --no-newline```
 
 ## Parameters
 
  -  `...rest`: the values to print
- -  `--no_newline`: print without inserting a newline for the line ending
+ -  `--no-newline`: print without inserting a newline for the line ending
 
 ## Examples
 

@@ -1,6 +1,6 @@
 ---
 title: db over
-version: 0.63.0
+version: 0.64.0
 usage: |
   Adds a partition to an expression function
 ---

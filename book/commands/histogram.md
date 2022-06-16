@@ -1,6 +1,6 @@
 ---
 title: histogram
-version: 0.63.0
+version: 0.64.0
 usage: |
   Creates a new table with a histogram based on the column name passed in.
 ---
