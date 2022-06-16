@@ -44,8 +44,6 @@ $ brew install nushell
 $ winget install nushell
 ```
 
-Windows users may also need to install the latest [Microsoft Visual C++ Redistributable](https://docs.microsoft.com/cpp/windows/latest-supported-vc-redist).
-
 ## Community
 
 Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!
