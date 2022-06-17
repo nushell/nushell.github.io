@@ -1,8 +1,8 @@
 ---
 title: str substring
-version: 0.63.0
+version: 0.64.0
 usage: |
-  Get part of a string
+  Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 ---
 
 <script>
@@ -25,7 +25,7 @@ usage: |
 
 ## Examples
 
-Get a substring from the text
+Get a substring "nushell" from the text "good nushell"
 ```shell
 >  'good nushell' | str substring [5 12]
 ```

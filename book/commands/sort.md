@@ -1,6 +1,6 @@
 ---
 title: sort
-version: 0.63.0
+version: 0.64.0
 usage: |
   Sort in increasing order.
 ---
@@ -16,12 +16,13 @@ usage: |
 
 ## Signature
 
-```> sort --reverse --insensitive```
+```> sort --reverse --insensitive --values```
 
 ## Parameters
 
  -  `--reverse`: Sort in reverse order
  -  `--insensitive`: Sort string-based columns case-insensitively
+ -  `--values`: If input is a single record, sort the record by values, ignored if input is not a single record
 
 ## Examples
 
@@ -53,4 +54,14 @@ Sort strings (case-insensitive)
 Sort strings (reversed case-insensitive)
 ```shell
 > echo [airplane Truck Car] | sort -i -r
+```
+
+Sort record by key
+```shell
+> {b: 3, a: 4} | sort
+```
+
+Sort record by value
+```shell
+> {a: 4, b: 3} | sort
 ```

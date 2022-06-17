@@ -1,6 +1,6 @@
 ---
 title: use
-version: 0.63.0
+version: 0.64.0
 usage: |
   Use definitions from a module
 ---
@@ -24,8 +24,8 @@ usage: |
 
 ## Notes
 ```text
-This command is a parser keyword. For details, check
-https://www.nushell.sh/book/thinking_in_nushell.html#parsing-and-evaluation-are-different-stages
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nushell.html
 ```
 ## Examples
 

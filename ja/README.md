@@ -44,8 +44,6 @@ $ brew install nushell
 $ winget install nushell
 ```
 
-また、Windows ユーザーの方は、最新の[Microsoft Visual C++ Redistributable](https://docs.microsoft.com/cpp/windows/latest-supported-vc-redist)のインストールが必要になる場合があります。
-
 ## Nu を Github Actions で利用する
 
 Github Actions で `Nushell` を使うこともできます。 [`setup-nu`](https://github.com/marketplace/actions/setup-nu) が用意されているので、それを使ってください。

@@ -1,6 +1,6 @@
 ---
 title: from tsv
-version: 0.63.0
+version: 0.64.0
 usage: |
   Parse text as .tsv and create table.
 ---

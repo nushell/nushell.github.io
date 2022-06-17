@@ -11,10 +11,20 @@ Like many programming languages, Nu models data using a set of simple and struct
 ## Integers
 
 Integers (or round) numbers. Examples include 1, 5, and 100.
+You can cast a string into an Integer with the `into int` command
+
+```
+> "1" | into int
+```
 
 ## Decimal
 
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
+You can cast a string into an Decimal with the `into decimal` command
+
+```
+> "1.2" | into decimal
+```
 
 ## Strings
 
@@ -65,6 +75,12 @@ The above is the same as if we had written:
 
 ```
 > echo "hello"
+```
+
+Cast from a string into another type by using the `into <type>` command
+```
+> "1" | into int
+> "1.2" | into decimal
 ```
 
 Also see [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings).

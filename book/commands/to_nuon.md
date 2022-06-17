@@ -1,6 +1,6 @@
 ---
 title: to nuon
-version: 0.63.0
+version: 0.64.0
 usage: |
   Converts table data into Nuon (Nushell Object Notation) text.
 ---
@@ -20,7 +20,7 @@ usage: |
 
 ## Examples
 
-Outputs a nuon string representing the contents of this table
+Outputs a nuon string representing the contents of this list
 ```shell
 > [1 2 3] | to nuon
 ```

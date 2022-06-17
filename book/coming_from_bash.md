@@ -7,7 +7,7 @@ To make these commands available in `nu` as well, add the following line to your
 let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 
-Note: this table assumes Nu 0.14.1 or later.
+Note: this table assumes Nu 0.60.0 or later.
 
 | Bash                                 | Nu                                               | Task                                                              |
 | ------------------------------------ | ------------------------------------------------ | ----------------------------------------------------------------- |
@@ -34,7 +34,6 @@ Note: this table assumes Nu 0.14.1 or later.
 | `rm <path>`                          | `rm <path>`                                      | Remove the given file                                             |
 |                                      | `rm -t <path>`                                   | Move the given file to the system trash                           |
 | `rm -rf <path>`                      | `rm -r <path>`                                   | Recursively removes the given path                                |
-| `chmod`                              | `<not yet possible>`                             | Changes the file attributes                                       |
 | `date -d <date>`                     | `"<date>" \| into datetime -f <format>`          | Parse a date ([format documentation](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
 | `sed`                                | `str replace`                                    | Find and replace a pattern in a string                            |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>` | Filter strings that contain the substring                         |
@@ -45,7 +44,7 @@ Note: this table assumes Nu 0.14.1 or later.
 | `stat $(which git)`                  | `stat (which git).path`                          | Use command output as argument for other command                  |
 | `echo $PATH`                         | `echo $env.PATH`                                 | See the current path                                              |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update PATH permanently                                           |
-| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                       |
+| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                      |
 | `export`                             | `echo $env`                                      | List the current environment variables                            |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update environment variables permanently                          |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | Update environment temporarily                                    |
@@ -57,5 +56,5 @@ Note: this table assumes Nu 0.14.1 or later.
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Add and edit alias permanently (for new shells)                   |
 | `bash -c <commands>`                 | `nu -c <commands>`                               | Run a pipeline of commands (requires 0.9.1 or later)              |
 | `bash <script file>`                 | `nu <script file>`                               | Run a script file (requires 0.9.1 or later)                       |
-| `\`                                  | `(` followed by `)`                              | Line continuation is not yet supported.                           |
+| `\`                                  | `( <command> )`                                  | A command can span multiple lines when wrapped with `(` and `)`   |
 | `pwd`                                | `$env.PWD`                                       | Display the current directory                                     |
