@@ -486,10 +486,10 @@ worth keeping in memory while you explore your dataset.
 
 It is also possible to construct dataframes from basic Nushell primitives, such
 as integers, decimals, or strings. Let's create a small dataframe using the
-command `to-df`.
+command `into df`.
 
 ```shell
-> let a = ([[a b]; [1 2] [3 4] [5 6]] | to-df)
+> let a = ([[a b]; [1 2] [3 4] [5 6]] | into df)
 > $a
 
 ───┬───┬───
@@ -547,7 +547,7 @@ format](https://arrow.apache.org/docs/format/Columnar.html)). The other
 optimization trick is the fact that whenever possible, the columns from the
 dataframes are shared between dataframes, avoiding memory duplication for the
 same data. This means that dataframes `$a` and `$a2` are sharing the same two
-columns we created using the `to-df` command. For this reason, it isn't
+columns we created using the `into df` command. For this reason, it isn't
 possible to change the value of a column in a dataframe. However, you can
 create new columns based on data from other columns or dataframes.
 
@@ -557,11 +557,11 @@ A `Series` is the building block of a `DataFrame`. Each Series represents a
 column with the same data type, and we can create multiple Series of different
 types, such as float, int or string.
 
-Let's start our exploration with Series by creating one using the `to-df`
+Let's start our exploration with Series by creating one using the `into df`
 command:
 
 ```shell
-> let new = ([9 8 4] | to-df)
+> let new = ([9 8 4] | into df)
 > $new
 
 ───┬───
@@ -714,7 +714,7 @@ Now we have a new dataframe with only the values where the mask was true.
 The masks can also be created from Nushell lists, for example:
 
 ```shell
-> let mask1 = ([true true false] | to-df)
+> let mask1 = ([true true false] | into df)
 > $new_df | filter-with $mask1
 
 ───┬───┬───┬─────────┬────────
@@ -757,7 +757,7 @@ We can also create a mask by checking if some values exist in other Series.
 Using the first dataframe that we created we can do something like this
 
 ```shell
-> let mask3 = ($df.first | is-in ([b c] | to-df))
+> let mask3 = ($df.first | is-in ([b c] | into df))
 
 ───┬──────
  # │ first
@@ -824,7 +824,7 @@ from our original dataframe. With that in mind, we can use the next command to
 extract that information
 
 ```shell
-> let indices = ([1 4 6] | to-df)
+> let indices = ([1 4 6] | into df)
 > $df | take $indices
 
 ───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────
@@ -886,7 +886,7 @@ And finally, we can create new Series by setting a new value in the marked
 indices. Have a look at the next command
 
 ```shell
-> let indices = ([0 2] | to-df);
+> let indices = ([0 2] | into df);
 > $df.int_1 | set-with-idx 123 --indices $indices
 
 ───┬───────
@@ -991,7 +991,7 @@ operations.
 Let's create a small example of a lazy dataframe
 
 ```shell
-> let a = ([[a b]; [1 a] [2 b] [3 c] [4 d]] | to-lazy)
+> let a = ([[a b]; [1 a] [2 b] [3 c] [4 d]] | into lazy)
 > $a
 ────────────────┬────────────────────────────────────────────────
  plan           │ DATAFRAME(in-memory): ["a", "b"];
@@ -1088,7 +1088,7 @@ Let's try something more complicated and create aggregations from a lazy
 dataframe
 
 ```shell
-> let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | to-lazy )
+> let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | into lazy )
 > $a
 :::   | group-by name
 :::   | agg [
@@ -1108,7 +1108,7 @@ And we could join on a lazy dataframe that hasn't being collected. Let's join
 the resulting group by to the original lazy frame
 
 ```shell
-> let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | to-lazy )
+> let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | into lazy )
 > let group = ($a
 :::   | group-by name
 :::   | agg [
@@ -1181,10 +1181,10 @@ whenever possible, their analogous Nushell command.
 | slice           | DataFrame                   | Creates new dataframe from a slice of rows                                 |                               |
 | sort-by         | DataFrame, Series           | Creates new sorted dataframe or series                                     | sort                          |
 | take            | DataFrame, Series           | Creates new dataframe using the given indices                              |                               |
-| to-csv          | DataFrame                   | Saves dataframe to csv file                                                | to csv                        |
-| to-df           |                             | Converts a pipelined Table or List into Dataframe                          |                               |
-| to-dummies      | DataFrame                   | Creates a new dataframe with dummy variables                               |                               |
-| to-parquet      | DataFrame                   | Saves dataframe to parquet file                                            |                               |
+| to csv          | DataFrame                   | Saves dataframe to csv file                                                | to csv                        |
+| into df         |                             | Converts a pipelined Table or List into Dataframe                          |                               |
+| dummies         | DataFrame                   | Creates a new dataframe with dummy variables                               |                               |
+| to parquet      | DataFrame                   | Saves dataframe to parquet file                                            |                               |
 | unique          | Series                      | Returns unique values from a series                                        | uniq                          |
 | value-counts    | Series                      | Returns a dataframe with the counts for unique values in series            |                               |
 | where           | DataFrame                   | Filter dataframe to match the condition                                    | where                         |
