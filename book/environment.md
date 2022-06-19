@@ -65,7 +65,7 @@ See [Defining environment from custom commands](environment.md#defining-environm
 
 See [Modules](modules.md) for details.
 
-## Reading environment varibles
+## Reading environment variables
 
 Individual environment variables are fields of a record that is stored in the `$env` variable and can be read with `$env.VARIABLE`:
 

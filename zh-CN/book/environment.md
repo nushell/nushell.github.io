@@ -65,6 +65,15 @@ let-env PATH = ($env.PATH | prepend '/path/you/want/to/add')
 
 参见 [模块](modules.md#环境变量) 部分了解更多详情。
 
+## 读取环境变量
+
+单个环境变量是记录的一个字段，存储在 `$env` 变量中，可以用 `$env.VARIABLE` 读取：
+
+```
+> $env.FOO
+BAR
+```
+
 ## 作用域
 
 当你设置环境变量时，它将只在当前作用域内可用（变量所在的块和它里面的任何块）。
