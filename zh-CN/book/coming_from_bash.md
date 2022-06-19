@@ -34,7 +34,6 @@ let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `rm <path>`                          | `rm <path>`                                      | 删除给定的文件                             |
 |                                      | `rm -t <path>`                                   | 将给定的文件移到系统垃圾箱                 |
 | `rm -rf <path>`                      | `rm -r <path>`                                   | 递归地删除给定的路径                       |
-| `chmod`                              | `<not yet possible>`                             | 改变文件属性                               |
 | `date -d <date>`                     | `"<date>" \| into datetime -f <format>`          | 解析日期 ([日期格式文档](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
 | `sed`                                | `str replace`                                    | 查找和替换一个字符串中的模式               |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>` | 过滤包含特定字符串的字符串                 |

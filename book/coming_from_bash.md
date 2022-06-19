@@ -34,7 +34,6 @@ Note: this table assumes Nu 0.60.0 or later.
 | `rm <path>`                          | `rm <path>`                                      | Remove the given file                                             |
 |                                      | `rm -t <path>`                                   | Move the given file to the system trash                           |
 | `rm -rf <path>`                      | `rm -r <path>`                                   | Recursively removes the given path                                |
-| `chmod`                              | `<not yet possible>`                             | Changes the file attributes                                       |
 | `date -d <date>`                     | `"<date>" \| into datetime -f <format>`          | Parse a date ([format documentation](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
 | `sed`                                | `str replace`                                    | Find and replace a pattern in a string                            |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>` | Filter strings that contain the substring                         |
