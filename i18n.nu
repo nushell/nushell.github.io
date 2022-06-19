@@ -53,7 +53,7 @@ def get-cell [
             let commit = ($val | split row '@')
             let id = ($commit | get 0)
             if ($commit | length) > 1 && (has-ref $id) {
-                $'Translate to ($id) by @($commit | get 1)'
+                $'($id)@($commit | get 1)'
             } else {
                 $val
             }

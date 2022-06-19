@@ -249,6 +249,34 @@ _注意：_ 标志是以其全称命名的，所以上面的例子的命令体�
 > greet -a 10 hello
 ```
 
+标志也可以作为基本开关使用，这意味着它们的存在或不存在被当作定义的参数。延伸前面的例子：
+
+```shell
+def greet [
+  name: string
+  --age (-a): int
+  --twice
+] {
+  if $twice {
+    echo $name $name $age $age
+  } else {
+    echo $name $age
+  }
+}
+```
+
+而这个定义可以通过如下方式调用：
+
+```
+> greet -a 10 --twice hello
+```
+
+或者只是没有开关标志：
+
+```
+> greet -a 10 hello
+```
+
 ## 剩余参数
 
 在某些情况下, 你可能想定义一个需要任意数量的位置参数的命令。我们可以用一个剩余参数(Rest Parameter)来实现这一点，通过下面的`...`语法：
