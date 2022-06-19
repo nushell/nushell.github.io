@@ -18,7 +18,7 @@ _(你可以把 Nushell 的配置加载顺序想象成在启动时执行两行 [R
 Nushell 的主要设置是以记录的形式保存在 `config` 环境变量中。这个记录可以用以下方式创建：
 
 ```bash
-let-env $config = {
+let-env config = {
   ...
 }
 ```
@@ -26,7 +26,7 @@ let-env $config = {
 你也可以隐藏(shadow)`$env.config`并更新它：
 
 ```bash
-let-env $config = ($env.config | upsert <field name> <field value>)
+let-env config = ($env.config | upsert <field name> <field value>)
 ```
 
 按照约定，这个变量被定义在`config.nu`文件中。
@@ -51,9 +51,9 @@ _(尽管 `$env.config` 是一个环境变量，按照惯例它仍然在 `config.
 - `PROMPT_INDICATOR_VI_NORMAL = "〉 "`
 - `PROMPT_MULTILINE_INDICATOR = "::: "`
 
-### 使用内置命令
+### 使用内置命令进行配置
 
-从 Nushell 0.64 版本开始新增了 2 个内置命令(`config nu` 和 `config env`),凭借这两个命令，你可以使用自定义的编辑器或者 IDE 快速地更改 Nushell 配置信息
+从 Nushell 0.64 版本开始新增了两个内置命令(`config nu` 和 `config env`), 通过这两个命令，你可以使用自定义的编辑器或者 IDE 快速地更改 Nushell 配置信息
 
 Nushell 遵循如下的规则来匹配编辑器:
 
@@ -93,6 +93,14 @@ Nushell 遵循如下的规则来匹配编辑器:
 ```
 
 这样你就可以使用`chsh`命令来将 Nu 设置为你的登录 Shell。在你注销后下次登录时，应该可以看到一个闪亮的 Nu 提示。
+
+### 使用 `login.nu` 进行配置
+
+如果 Nushell 被用作登录 Shell，你可以使用一个特定的配置文件，该文件只在该情况下才会被加载。因此，一个名为 `login.nu` 的文件必须在标准配置目录中。
+
+文件 `login.nu` 的加载在 `env.nu` 和 `config.nu` 之后，所以你可以覆盖这些配置，如果你需要的话。
+
+有一个环境变量 `$nu.loginshell-path` 包含该文件的路径。
 
 ### macOS: 保持 `open` 为 `/usr/bin/open`
 

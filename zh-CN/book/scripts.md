@@ -71,7 +71,7 @@ def main [x: int] {
 110
 ```
 
-## Shebangs (`!#`)
+## Shebangs (`#!`)
 
 在 Linux 和 macOS 上，你可以选择使用 [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>)来告诉操作系统一个文件应该被 `Nu` 解释。例如，在一个名为 `myscript` 的文件中包含以下内容：
 

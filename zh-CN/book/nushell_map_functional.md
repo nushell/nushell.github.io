@@ -25,7 +25,7 @@
 | default                   |                              |                                 |                          |     |
 | drop                      |                              |                                 |                          |     |
 | du                        |                              |                                 |                          |     |
-| each                      | map, mapv, iterate           | map, forEach                    | map                      |     |
+| each                      | map, mapv, iterate           | map, forEach                    | map, mapM                |     |
 | echo                      | println                      |                                 | putStrLn, print          |     |
 | enter                     |                              |                                 |                          |     |
 | exit                      | System/exit                  |                                 |                          |     |
