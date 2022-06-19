@@ -100,7 +100,7 @@ If Nushell is used as a login shell, you can use a specific configuration file w
 
 The file `login.nu` is sourced after `env.nu` and `config.nu`, so that you can overwrite those configurations if you need.
 
-There is an enviroment variable `$nu.loginshell-path` containing the path to this file.
+There is an environment variable `$nu.loginshell-path` containing the path to this file.
 
 ### macOS: Keeping `/usr/bin/open` as `open`
 
