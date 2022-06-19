@@ -7,7 +7,7 @@
 let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 
-注意：本表针对 Nu 0.14.1 或更高版本。
+注意：本表针对 Nu 0.60.0 或更高版本。
 
 | Bash                                 | Nu                                               | Task                                       |
 | ------------------------------------ | ------------------------------------------------ | ------------------------------------------ |
@@ -36,7 +36,7 @@ let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `rm -rf <path>`                      | `rm -r <path>`                                   | 递归地删除给定的路径                       |
 | `chmod`                              | `<not yet possible>`                             | 改变文件属性                               |
 | `date -d <date>`                     | `"<date>" \| into datetime -f <format>`          | 解析日期 ([日期格式文档](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
-| `sed`                                | `str find-replace`                               | 查找和替换一个字符串中的模式               |
+| `sed`                                | `str replace`                                    | 查找和替换一个字符串中的模式               |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>` | 过滤包含特定字符串的字符串                 |
 | `man <command>`                      | `help <command>`                                 | 获得特定命令的帮助信息                     |
 |                                      | `help commands`                                  | 列出所有可用的命令                         |
@@ -57,4 +57,5 @@ let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | 永久添加和编辑别名（新开Shell会话生效）    |
 | `bash -c <commands>`                 | `nu -c <commands>`                               | 运行一组命令（需要0.9.1或更高版本）        |
 | `bash <script file>`                 | `nu <script file>`                               | 运行一个脚本文件（需要0.9.1或更高版本）    |
-| `\`                                  | `(` followed by `)`                              | 目前还不支持换行延续性                     |
+| `\`                                  | `( <command> )`                                  | 当命令被 `(` 和 `)` 包裹的时候可以跨多行   |
+| `pwd`                                | `$env.PWD`                                       | 显示当前目录                               |
