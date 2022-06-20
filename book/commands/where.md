@@ -5,14 +5,9 @@ usage: |
   Filter values based on a condition.
 ---
 
-<script>
-  import { usePageFrontmatter } from '@vuepress/client';
-  export default { computed: { frontmatter() { return usePageFrontmatter().value; } } }
-</script>
+# <code>{{ $frontmatter.title }}</code>
 
-# <code>{{ frontmatter.title }}</code>
-
-<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 

@@ -5,14 +5,9 @@ usage: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 ---
 
-<script>
-  import { usePageFrontmatter } from '@vuepress/client';
-  export default { computed: { frontmatter() { return usePageFrontmatter().value; } } }
-</script>
+# <code>{{ $frontmatter.title }}</code>
 
-# <code>{{ frontmatter.title }}</code>
-
-<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
