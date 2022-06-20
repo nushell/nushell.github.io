@@ -223,6 +223,8 @@ module.exports = {
                 'thinking_in_nushell',
                 'moving_around',
                 'types_of_data',
+                'loading_data',
+                'working_with_strings',
                 'konfiguration',
                 'environment',
                 '3rdpartyprompts',
