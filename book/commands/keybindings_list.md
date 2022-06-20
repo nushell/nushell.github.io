@@ -5,14 +5,9 @@ usage: |
   List available options that can be used to create keybindings
 ---
 
-<script>
-  import { usePageFrontmatter } from '@vuepress/client';
-  export default { computed: { frontmatter() { return usePageFrontmatter().value; } } }
-</script>
+# <code>{{ $frontmatter.title }}</code>
 
-# <code>{{ frontmatter.title }}</code>
-
-<div style='white-space: pre-wrap;'>{{ frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
 
 ## Signature
 
