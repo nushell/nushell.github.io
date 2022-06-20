@@ -6,7 +6,7 @@ Nushell 中的字符串用于保存文本数据以便后续使用，其中可以
 
 Nushell 中最简单的字符串是单引号字符串。这种字符串使用`'`字符来包裹文本。下面是作为单引号字符串的`hello world`示例：
 
-```bash
+```sh
 > 'hello world'
 hello world
 ```
@@ -19,7 +19,7 @@ hello world
 
 例如，我们可以用转义字符和双引号字符串写出文字 hello，然后换行，再写上 world：
 
-```bash
+```sh
 > "hello\nworld"
 hello
 world
@@ -48,7 +48,7 @@ Nushell 目前支持以下转义字符：
 
 例如，假设我们有一个叫做`$name`的变量，我们想问候这个变量中所包含的人：
 
-```bash
+```sh
 > let name = "Alice"
 > $"greetings, ($name)"
 greetings, Alice
@@ -60,7 +60,7 @@ greetings, Alice
 
 从 0.61 版开始，字符串插值支持转义小括号，所以`(`和`)`字符可以在一个字符串中使用，而 Nushell 不会试图计算它们之间出现的内容：
 
-```shell
+```sh
 > $"2 + 2 is (2 + 2) \(you guessed it!)"
 2 + 2 is 4 (you guessed it!)
 ```
@@ -80,7 +80,111 @@ greetings, Alice
 
 例如, 你可以使用`str contains`来检查一个字符串是否包含某个特定的字符：
 
-```bash
+```sh
 > "hello world" | str contains "w"
 true
 ```
+
+### 修剪字符串
+
+你可以用 [`str trim`](/book/commands/str_trim.md) 命令修剪字符串的两侧。默认情况下，[`str trim`](/book/commands/str_trim.md) 命令会修剪字符串两边的空白。比如：
+
+```sh
+> '       My   string   ' | str trim
+My   string
+```
+
+你可以用 `--right` 和 `--left` 选项来指定对哪一边进行修剪。
+
+要修剪一个特定的字符，使用 `--char <Character>` 来指定要修剪的字符。
+
+下面是一个传入了所有选项的例子：
+
+```sh
+> '=== Nu shell ===' | str trim -r -c '='
+=== Nu shell
+```
+
+### 子字符串
+
+子字符串是一个字符串的切片，它们有起始点和结束点。下面是一个使用子串的例子：
+
+```sh
+> 'Hello World!' | str index-of 'o'
+4
+> 'Hello World!' | str index-of 'r'
+8
+> 'Hello World!' | str substring '4,8'
+o Wo
+```
+
+### 字符串填充
+
+使用 [`str lpad`](/book/commands/str_lpad.md) 和 [`str rpad`](/book/commands/str_rpad.md) 命令，你可以给字符串添加填充。填充会给字符串添加字符，直到它达到一定的长度。比如：
+
+```sh
+> '1234' | str lpad -l 10 -c '0'
+0000001234
+> '1234' | str rpad -l 10 -c '0' | str length
+10
+```
+
+### 反转字符串
+
+反转字符串可以通过 [`str reverse`](/book/commands/str_reverse.md) 命令轻松完成：
+
+```sh
+> 'Nushell' | str reverse
+llehsuN
+> ['Nushell' 'is' 'cool'] | str reverse
+╭───┬─────────╮
+│ 0 │ llehsuN │
+│ 1 │ si      │
+│ 2 │ looc    │
+╰───┴─────────╯
+```
+
+## 解析字符串
+
+通过 [`parse`](/book/commands/parse.md) 命令，你可以将一个字符串解析成若干列。比如：
+
+```sh
+> 'Nushell is the best' | parse '{shell} is {type}'
+╭───┬─────────┬──────────╮
+│ # │  shell  │   type   │
+├───┼─────────┼──────────┤
+│ 0 │ Nushell │ the best │
+╰───┴─────────┴──────────╯
+> 'Bash is kinda cringe' | parse --regex '(?P<shell>\w+) is (?P<type>[\w\s]+)'
+╭───┬───────┬──────────────╮
+│ # │ shell │     type     │
+├───┼───────┼──────────────┤
+│ 0 │ Bash  │ kinda cringe │
+╰───┴───────┴──────────────╯
+```
+
+## 字符串转换
+
+有多种方法可以将字符串转换为其他类型或者反之。
+
+### 转换为字符串
+
+1. 使用 [`into string`](/book/commands/into_string.md)。例如：`123 | into string`
+2. 通过字符串插值。例如：`$'(123)'`
+3. 使用 [`build-string`](/book/commands/build-string.md)。例如：`build-string (123)`
+
+### 字符串转换为其他类型
+
+1. 使用 [`into <type>`](/book/commands/into.md)。例如：`'123' | into int`
+
+## 字符串着色
+
+你可以通过 [`ansi`](/book/commands/ansi.md) 命令给字符串着色。例如：
+
+```sh
+> $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
+```
+
+`ansi purple_bold` 使文本紫色加粗
+
+`ansi reset` 将着色重置为默认值。(提示: 你应该总是用 `ansi reset` 来结束着色的字符串)
