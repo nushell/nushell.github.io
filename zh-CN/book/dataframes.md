@@ -859,15 +859,12 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-## Lazy Dataframes
+## 惰性 Dataframe
 
-Lazy dataframes are a way to query data by creating a logical plan. The
-advantage of this approach is that the plan never gets evaluated until you need
-to extract data. This way you could chain together aggregations, joins and
-selections and collect the data once you are happy with the selected
-operations.
+惰性 Dataframe 是一种通过创建逻辑计划来查询数据的方法。这种方法的优点是，在你需要提取数据之前，该计划
+永远不会被评估。这样，你可以把聚合、连接和选择连在一起，一旦你对所选操作感到满意，就可以收集数据。
 
-Let's create a small example of a lazy dataframe
+让我们创建一个惰性 Dataframe 的小例子：
 
 ```shell
 > let a = ([[a b]; [1 a] [2 b] [3 c] [4 d]] | into lazy)
@@ -882,9 +879,8 @@ Let's create a small example of a lazy dataframe
 ────────────────┴────────────────────────────────────────────────
 ```
 
-As you can see, the resulting dataframe is not yet evaluated, it stays as a
-set of instructions that can be done on the data. If you were to collect that
-dataframe you would get the next result
+正如你所看到的，产生的 Dataframe 还没有被评估，它以一组可以对数据进行操作的指令的形式存在。
+如果你要收集这个 Dataframe，你会得到如下结果：
 
 ```shell
 > $a | collect
@@ -898,22 +894,18 @@ dataframe you would get the next result
 ───┴───┴───
 ```
 
-as you can see, the collect command executes the plan and creates a nushell
-table for you.
+正如你所看到的，`collect` 命令执行了计划并为你创建了一个 Nushell 表。
 
-All dataframes operations should work with eager or lazy dataframes. The are
-converted in the background for compatibility. However, to take advantage of
-lazy operations if is recommended to only use lazy operations with lazy
-dataframes.
+所有的 Dataframe 操作都应该能与惰性或者非惰性的 Dataframe 一起工作。为了兼容，这些操作在后台
+进行了转换。然而，为了利用惰性操作的优势，我们建议只对惰性 Dataframe 使用惰性操作。
 
-To find all lazy dataframe operations you can use
+要找到所有惰性 Dataframe 操作，你可以使用：
 
 ```shell
 $nu.scope.commands | where category =~ lazyframe
 ```
 
-With your lazy frame defined we can start chaining operations on it. For
-example this
+在定义了你的惰性 Dataframe 后，我们可以开始对它进行链式操作。例如：
 
 ```shell
 > $a
@@ -934,37 +926,31 @@ example this
 ```
 
 :::tip
-You can use the line buffer editor to format your queries (ctr + o) easily
+你可以使用行缓存编辑器来轻松地格式化你的查询（ctr + o）
 :::
 
-This query uses the lazy reverse command to invert the dataframe and the
-`with-column` command to create new two columns using `expressions`.
-An `expression` is used to define and operation that is executed on the lazy
-frame. When put together they create the whole set of instructions used by the
-lazy commands to query the data. To list all the commands that generate an
-expression you can use
+这个查询使用惰性 `reverse` 命令来反转 Dataframe，使用 `with-column` 命令并使用 `expressions` 来创建新的两列。
+`expression` 用于定义在惰性 Dataframe 上执行的操作。当它们组合在一起时，就形成了整个由惰性命令来查询数据的
+指令集。要列出所有产生表达式的命令，你可以使用：
 
 ```shell
 $nu.scope.commands | where category =~ expression
 ```
 
-In our previous example, we use the `col` command to indicate that column `a`
-will be multiplied by 2 and then it will be aliased to the name `double_a`.
-In some cases the use of the `col` command can be inferred. For example, using
-the select command we can use only a string
+在我们前面的例子中，我们使用 `col` 命令来表示列 `a` 将被乘以2，然后它将被命名为 `double_a`。
+在某些情况下，可以推断出 `col` 命令的使用，例如，使用 `select` 命令，我们可以只使用一个字符串：
 
 ```shell
 > $a | select a | collect
 ```
 
-or the `col` command
+或者使用 `col` 命令：
 
 ```shell
 > $a | select (col a) | collect
 ```
 
-Let's try something more complicated and create aggregations from a lazy
-dataframe
+让我们尝试更复杂的东西，从一个惰性 Dataframe 中创建聚合：
 
 ```shell
 > let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | into lazy )
@@ -983,8 +969,7 @@ dataframe
 ───┴──────┴─────┴──────
 ```
 
-And we could join on a lazy dataframe that hasn't being collected. Let's join
-the resulting group by to the original lazy frame
+我们可以在一个还没有被收集的惰性 Dataframe 上进行连接操作。让我们把产生的分组连接到原来的惰性 Dataframe 中去吧
 
 ```shell
 > let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | into lazy )
@@ -1005,8 +990,7 @@ the resulting group by to the original lazy frame
 ───┴──────┴───────┴─────┴──────
 ```
 
-As you can see lazy frames are a powerful construct that will let you query
-data using a flexible syntax, resulting in blazing fast results.
+正如你所看到的，惰性 Dataframe 是一个强大的结构，它可以让你使用灵活的语法来查询数据，从而极快地获得结果。
 
 ## Dataframe 命令
 

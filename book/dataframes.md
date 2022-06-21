@@ -1022,7 +1022,7 @@ dataframe you would get the next result
 as you can see, the collect command executes the plan and creates a nushell
 table for you.
 
-All dataframes operations should work with eager or lazy dataframes. The are
+All dataframes operations should work with eager or lazy dataframes. They are
 converted in the background for compatibility. However, to take advantage of
 lazy operations if is recommended to only use lazy operations with lazy
 dataframes.
@@ -1060,7 +1060,7 @@ You can use the line buffer editor to format your queries (ctr + o) easily
 
 This query uses the lazy reverse command to invert the dataframe and the
 `with-column` command to create new two columns using `expressions`.
-An `expression` is used to define and operation that is executed on the lazy
+An `expression` is used to define an operation that is executed on the lazy
 frame. When put together they create the whole set of instructions used by the
 lazy commands to query the data. To list all the commands that generate an
 expression you can use
