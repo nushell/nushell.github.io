@@ -14,19 +14,19 @@ features:
     details: 具备强大的插件系统，Nu 可以轻松扩展。
 ---
 
-<img src="/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
 
 ### Nu 可以与现有数据一起工作
 
 Nu 开箱即用支持 [JSON、YAML、SQLite、Excel 等](/zh-CN/book/loading_data.html)。无论是文件、数据库还是网络 API 中的数据，都可以很容易地引入 Nu 管道：
 
-<img src="/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
 ### Nu 有很棒的错误反馈
 
 Nu 在类型化的数据上操作，所以它能捕捉到其他 Shell 无法捕捉到的 Bug。当意外发生时，Nu 会告诉你确切的位置和原因：
 
-<img src="/frontpage/miette-example.png" alt="Screenshot showing Nu catching a type error" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/miette-example.png" alt="Screenshot showing Nu catching a type error" class="hero"/>
 
 ## 获取 Nu
 

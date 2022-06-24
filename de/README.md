@@ -14,19 +14,19 @@ features:
     details: Nu kann dank des leistungsfähigen Plugin-Systems einfach erweitert werden.
 ---
 
-<img src="/frontpage/ls-example.png" alt="Screenshot zeigt die Verwendung des ls-Befehls" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot zeigt die Verwendung des ls-Befehls" class="hero"/>
 
 ### Nu funktioniert mit existierenden Daten
 
 Nu versteht [JSON, YAML, XML, Excel und noch mehr](/book/loading_data.html). Es ist einfach Daten in eine Nu Pipeline zu laden ganz egal ob diese in einer Datei, einer Datenbank oder einer Web-API liegen:
 
-<img src="/frontpage/fetch-example.png" alt="Screenshot zeigt das Laden von Daten von einer Web-API" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot zeigt das Laden von Daten von einer Web-API" class="hero"/>
 
 ### Nu hat tolle Fehlermeldungen
 
 Nu arbeitet mit typisierten Daten, wodurch Fehler abgefangen werden, die andere Shells nicht erkennen. Und falls etwas schiefgeht bekommt genau mitgeteilt wo und weshalb:
 
-<img src="/frontpage/miette-example.png" alt="Screenshot zeigt eine Fehlermeldung, wenn Nu einen type error abfängt" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/miette-example.png" alt="Screenshot zeigt eine Fehlermeldung, wenn Nu einen type error abfängt" class="hero"/>
 
 ## Nu installieren
 
