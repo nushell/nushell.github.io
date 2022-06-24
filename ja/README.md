@@ -14,19 +14,19 @@ features:
     details: 強力なプラグインシステムを使って、Nuを簡単に拡張することができます。
 ---
 
-<img src="/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
 
 ### Nu は既存のデータとの連携が可能
 
 Nu はでは[JSON, YAML, XML, Excel and more](/book/loading_data.html)を標準サポートしています。ファイル、データベース、Web API など、どのようなデータでも簡単に Nu パイプラインに取り込むことができます。
 
-<img src="/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
 ### Nu のエラーメッセージは非常に分かりやすい
 
 Nu は型付けされたデータを操作するので、他のシェルでは見つけられないバグを発見することができます。そして、壊れたときには、どこで、なぜ壊れたかを正確に教えてくれます。
 
-<img src="/frontpage/miette-example.png" alt="Screenshot showing Nu catching a type error" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/miette-example.png" alt="Screenshot showing Nu catching a type error" class="hero"/>
 
 ## Nu をインストールする
 
