@@ -132,7 +132,7 @@ eggs
 
 `eggs` 命令被添加到 `scratchpad` 中，同时保持 `spam` 不变。
 
-_0.64 版本新增:_
+_0.64 版本新增：_
 为了让上述步骤不那么冗长，你可以使用 [`overlay new`](/book/commands/overlay_new.md) 命令：
 
 ```shell
