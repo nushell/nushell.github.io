@@ -82,7 +82,7 @@ foo
 ───┴──────
 ```
 
-Furthermore, [`overlay remove`](commands/overlay_remove.md) without an argument will remove the last active ovelay.
+Furthermore, [`overlay remove`](commands/overlay_remove.md) without an argument will remove the last active overlay.
 
 ## Overlays are Recordable
 
