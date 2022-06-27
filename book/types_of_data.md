@@ -8,6 +8,12 @@ Nu embraces this approach for its commands and expands it to include other kinds
 
 Like many programming languages, Nu models data using a set of simple and structured data types. Simple data types include integers, floats, strings, booleans, dates, and paths. It also includes a special type for filesizes.
 
+One can get the type of a value with the [`describe`](commands/describe.md) command.
+
+```
+> 42 | describe
+```
+
 ## Integers
 
 Integers (or round) numbers. Examples include 1, 5, and 100.
