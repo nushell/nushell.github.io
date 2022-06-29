@@ -9,7 +9,7 @@ A good way to become familiar with all that nu has to offer is by utilizing the 
 ### How to see all supported commands:
 
 ```shell
-> help commands | where is_custom == $false | first 10 | drop column
+> help commands | where is_custom == false | first 10 | drop column
 ```
 
 Output
