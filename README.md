@@ -34,13 +34,13 @@ Nushell is available as [downloadable binaries](https://github.com/nushell/nushe
 
 #### macOS / Linux:
 
-```sh
+```console
 $ brew install nushell
 ```
 
 #### Windows:
 
-```powershell
+```console
 $ winget install nushell
 ```
 
