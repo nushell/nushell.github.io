@@ -88,7 +88,7 @@ The `where size > 10kb` is a command with two parts: the command name [`where`](
 ```
 > ls | where $it.size > 10kb
 > ls | where ($it.size > 10kb)
-> ls | where {|$it| $it.size > 10kb }
+> ls | where {|$x| $x.size > 10kb }
 ```
 
 For short-hand syntax to work, the column name must appear on the left-hand side of the operation (like `size` in `size > 10kb`).
