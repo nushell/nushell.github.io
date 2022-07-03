@@ -1,4 +1,4 @@
-# Mit Text (strings) arbeiten
+# Mit Text arbeiten
 
 Texte können ganz verschiedene Formen von Daten annehmen.
 Es können Dateinamen, Verzeichniss-Pfade, Spaltennamen und vieles mehr sein.
@@ -20,7 +20,7 @@ womit sie ideal sind, um diverse Formen von Text zu enthalten.
 
 ## Texte in doppelten Anführungszeichen
 
-Für komplexere Formen, werdne in Nushell Texte in doppelte 
+Für komplexere Formen, werden in Nushell Texte in doppelte 
 Anführungszeichen gesetzt. Diese werden mit dem `'` Zeichen umgeben.
 Sie unterstützen die Verwendung von Escape-Zeichen mit der Verwendung 
 eines `\`.
