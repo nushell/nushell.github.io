@@ -58,7 +58,7 @@ so dass der externe Befehl diese von `stdin` lesen kann.
 Daten die von einem externen Befehl in Nu ankommen, werden als Bytes verarbeitet, die Nushell automatisch in UTF-8 konvertieren versucht.
 Wenn dies gelingt, wird ein Textstrom an den internen Befehl gesendet. Wenn nicht, wird ein Strom von binären Daten weitergeleitet.
 
-Befehle wie [`lines`](commands/lines.md) helfen dabei, mit externen Daten zu arbeiten, da er diskrete Zeilen der Daten zurückgibt.
+Befehle wie [`lines`](/book/commands/lines.md) helfen dabei, mit externen Daten zu arbeiten, da er diskrete Zeilen der Daten zurückgibt.
 
 `externer_befehl_1 | externer_befehl_2`
 
@@ -67,9 +67,9 @@ Der `stdout` des externen_befehl_1 wiird mit dem `stdin` des externen_befehl_2 v
 
 ## Hinter den Kulissen
 
-Warum gibt dann der [`ls`](commands/ls.md) Befehl eine Tabelle zurück, wenn er doch ein Input ist und kein Output?
-Nu fügt diesen Output automatisch hinzu, indem sie den Befehl [`table`](commands/table.md) verwendet.
-Der [`table`](commands/table.md) Befehl wird an jede Pipeline angefügt, die keinen eigenen Output besitzen.
+Warum gibt dann der [`ls`](/book/commands/ls.md) Befehl eine Tabelle zurück, wenn er doch ein Input ist und kein Output?
+Nu fügt diesen Output automatisch hinzu, indem sie den Befehl [`table`](/book/commands/table.md) verwendet.
+Der [`table`](/book/commands/table.md) Befehl wird an jede Pipeline angefügt, die keinen eigenen Output besitzen.
 Dies erlaubt es den Output in dieser Form zu sehen. Tatsächlich ist der Befehl:
 
 ```
