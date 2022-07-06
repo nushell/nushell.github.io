@@ -1,6 +1,6 @@
 ---
 title: sort-by
-version: 0.64.0
+version: 0.65.1
 usage: |
   sorts a lazy dataframe based on expression(s)
 ---
@@ -22,10 +22,10 @@ usage: |
 
 Sort dataframe by one column
 ```shell
-> [[a b]; [6 2] [1 4] [4 1]] | to-df | sort-by a
+> [[a b]; [6 2] [1 4] [4 1]] | into df | sort-by a
 ```
 
 Sort column using two columns
 ```shell
-> [[a b]; [6 2] [1 1] [1 4] [2 4]] | to-df | sort-by [a b] -r [false true]
+> [[a b]; [6 2] [1 1] [1 4] [2 4]] | into df | sort-by [a b] -r [false true]
 ```

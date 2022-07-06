@@ -1,6 +1,6 @@
 ---
 title: collect
-version: 0.64.0
+version: 0.65.1
 usage: |
   Collect lazy dataframe into eager dataframe
 ---
@@ -17,5 +17,5 @@ usage: |
 
 drop duplicates
 ```shell
-> [[a b]; [1 2] [3 4]] | to-lazy | collect
+> [[a b]; [1 2] [3 4]] | into lazy | collect
 ```

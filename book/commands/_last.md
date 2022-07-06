@@ -1,6 +1,6 @@
 ---
 title: last
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates new dataframe with tail rows or creates a last expression
 ---
@@ -21,5 +21,5 @@ usage: |
 
 Create new dataframe with last rows
 ```shell
-> [[a b]; [1 2] [3 4]] | to-df | last 1
+> [[a b]; [1 2] [3 4]] | into df | last 1
 ```

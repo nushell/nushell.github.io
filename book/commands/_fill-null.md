@@ -1,6 +1,6 @@
 ---
 title: fill-null
-version: 0.64.0
+version: 0.65.1
 usage: |
   Replaces NULL values with the given expression
 ---
@@ -21,5 +21,5 @@ usage: |
 
 Fills the null values by 0
 ```shell
-> [1 2 2 3 3] | to-df | shift 2 | fill-null 0
+> [1 2 2 3 3] | into df | shift 2 | fill-null 0
 ```

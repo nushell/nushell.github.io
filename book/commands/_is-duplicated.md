@@ -1,6 +1,6 @@
 ---
 title: is-duplicated
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates mask indicating duplicated values
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Create mask indicating duplicated values
 ```shell
-> [5 6 6 6 8 8 8] | to-df | is-duplicated
+> [5 6 6 6 8 8 8] | into df | is-duplicated
 ```

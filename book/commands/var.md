@@ -1,6 +1,6 @@
 ---
 title: var
-version: 0.64.0
+version: 0.65.1
 usage: |
   Create a var expression for an aggregation
 ---
@@ -18,7 +18,7 @@ usage: |
 Var aggregation for a group by
 ```shell
 > [[a b]; [one 2] [one 2] [two 1] [two 1]]
-    | to-df
+    | into df
     | group-by a
     | agg (col b | var)
 ```

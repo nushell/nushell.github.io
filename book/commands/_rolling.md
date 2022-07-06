@@ -1,6 +1,6 @@
 ---
 title: rolling
-version: 0.64.0
+version: 0.65.1
 usage: |
   Rolling calculation for a series
 ---
@@ -22,10 +22,10 @@ usage: |
 
 Rolling sum for a series
 ```shell
-> [1 2 3 4 5] | to-df | rolling sum 2 | drop-nulls
+> [1 2 3 4 5] | into df | rolling sum 2 | drop-nulls
 ```
 
 Rolling max for a series
 ```shell
-> [1 2 3 4 5] | to-df | rolling max 2 | drop-nulls
+> [1 2 3 4 5] | into df | rolling max 2 | drop-nulls
 ```

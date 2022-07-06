@@ -1,6 +1,6 @@
 ---
 title: get-ordinal
-version: 0.64.0
+version: 0.65.1
 usage: |
   Gets ordinal from date
 ---
@@ -18,6 +18,6 @@ usage: |
 Returns ordinal from a date
 ```shell
 > let dt = ('2020-08-04T16:39:18+00:00' | into datetime -z 'UTC');
-    let df = ([$dt $dt] | to-df);
+    let df = ([$dt $dt] | into df);
     $df | get-ordinal
 ```

@@ -1,6 +1,6 @@
 ---
 title: max
-version: 0.64.0
+version: 0.65.1
 usage: |
   Aggregates columns to their max value
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Max value from columns in a dataframe
 ```shell
-> [[a b]; [6 2] [1 4] [4 1]] | to-df | max
+> [[a b]; [6 2] [1 4] [4 1]] | into df | max
 ```

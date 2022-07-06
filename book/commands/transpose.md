@@ -1,6 +1,6 @@
 ---
 title: transpose
-version: 0.64.0
+version: 0.65.1
 usage: |
   Transposes the table contents so rows become columns and columns become rows.
 ---
@@ -11,7 +11,7 @@ usage: |
 
 ## Signature
 
-```> transpose ...rest --header-row --ignore-titles --as-record```
+```> transpose ...rest --header-row --ignore-titles --as-record --keep-last --keep-all```
 
 ## Parameters
 
@@ -19,6 +19,8 @@ usage: |
  -  `--header-row`: treat the first row as column names
  -  `--ignore-titles`: don't transpose the column names into values
  -  `--as-record`: transfer to record if the result is a table and contains only one row
+ -  `--keep-last`: on repetition of record fields due to `header-row`, keep the last value obtained
+ -  `--keep-all`: on repetition of record fields due to `header-row`, keep all the values obtained
 
 ## Examples
 

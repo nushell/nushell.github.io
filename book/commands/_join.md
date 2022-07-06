@@ -1,6 +1,6 @@
 ---
 title: join
-version: 0.64.0
+version: 0.65.1
 usage: |
   Joins a lazy frame with other lazy frame
 ---
@@ -28,14 +28,14 @@ usage: |
 
 Join two lazy dataframes
 ```shell
-> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | to-lazy);
-    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | to-lazy);
+> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | into lazy);
+    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | into lazy);
     $df_a | join $df_b a foo | collect
 ```
 
 Join one eager dataframe with a lazy dataframe
 ```shell
-> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | to-df);
-    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | to-lazy);
+> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | into df);
+    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | into lazy);
     $df_a | join $df_b a foo
 ```

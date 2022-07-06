@@ -1,6 +1,6 @@
 ---
 title: append
-version: 0.64.0
+version: 0.65.1
 usage: |
   Appends a new dataframe
 ---
@@ -22,12 +22,12 @@ usage: |
 
 Appends a dataframe as new columns
 ```shell
-> let a = ([[a b]; [1 2] [3 4]] | to-df);
+> let a = ([[a b]; [1 2] [3 4]] | into df);
     $a | append $a
 ```
 
 Appends a dataframe merging at the end of columns
 ```shell
-> let a = ([[a b]; [1 2] [3 4]] | to-df);
+> let a = ([[a b]; [1 2] [3 4]] | into df);
     $a | append $a --col
 ```

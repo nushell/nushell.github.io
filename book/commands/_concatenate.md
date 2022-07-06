@@ -1,6 +1,6 @@
 ---
 title: concatenate
-version: 0.64.0
+version: 0.65.1
 usage: |
   Concatenates strings with other array
 ---
@@ -21,6 +21,6 @@ usage: |
 
 Concatenate string
 ```shell
-> let other = ([za xs cd] | to-df);
-    [abc abc abc] | to-df | concatenate $other
+> let other = ([za xs cd] | into df);
+    [abc abc abc] | into df | concatenate $other
 ```

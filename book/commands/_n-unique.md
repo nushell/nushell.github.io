@@ -1,6 +1,6 @@
 ---
 title: n-unique
-version: 0.64.0
+version: 0.65.1
 usage: |
   Counts unique values
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Counts unique values
 ```shell
-> [1 1 2 2 3 3 4] | to-df | n-unique
+> [1 1 2 2 3 3 4] | into df | n-unique
 ```

@@ -1,6 +1,6 @@
 ---
 title: echo
-version: 0.64.0
+version: 0.65.1
 usage: |
   Echo the arguments back to the user.
 ---
@@ -17,6 +17,10 @@ usage: |
 
  -  `...rest`: the values to echo
 
+## Notes
+```text
+Unlike `print`, this command returns an actual value that will be passed to the next command of the pipeline.
+```
 ## Examples
 
 Put a hello message in the pipeline

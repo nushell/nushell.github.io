@@ -1,6 +1,6 @@
 ---
 title: par-each
-version: 0.64.0
+version: 0.65.1
 usage: |
   Run a block on each element of input in parallel
 ---

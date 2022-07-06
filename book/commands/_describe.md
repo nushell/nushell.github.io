@@ -1,6 +1,6 @@
 ---
 title: describe
-version: 0.64.0
+version: 0.65.1
 usage: |
   Describes dataframes numeric columns
 ---
@@ -21,5 +21,5 @@ usage: |
 
 dataframe description
 ```shell
-> [[a b]; [1 1] [1 1]] | to-df | describe
+> [[a b]; [1 1] [1 1]] | into df | describe
 ```

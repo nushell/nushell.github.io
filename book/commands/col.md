@@ -1,6 +1,6 @@
 ---
 title: col
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates a named column expression
 ---
@@ -21,5 +21,5 @@ usage: |
 
 Creates a named column expression and converts it to a nu object
 ```shell
-> col a | to-nu
+> col a | into nu
 ```

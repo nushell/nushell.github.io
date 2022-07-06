@@ -1,6 +1,6 @@
 ---
 title: which
-version: 0.64.0
+version: 0.65.1
 usage: |
   Finds a program file, alias or custom command.
 ---

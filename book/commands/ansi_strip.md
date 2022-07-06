@@ -1,6 +1,6 @@
 ---
 title: ansi strip
-version: 0.64.0
+version: 0.65.1
 usage: |
   Strip ANSI escape sequences from a string
 ---

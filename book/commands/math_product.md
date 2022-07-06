@@ -1,6 +1,6 @@
 ---
 title: math product
-version: 0.64.0
+version: 0.65.1
 usage: |
   Finds the product of a list of numbers or tables
 ---

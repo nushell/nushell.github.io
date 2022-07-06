@@ -1,8 +1,8 @@
 ---
 title: print
-version: 0.64.0
+version: 0.65.1
 usage: |
-  Prints the values given
+  Print the given values to stdout
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -11,13 +11,21 @@ usage: |
 
 ## Signature
 
-```> print ...rest --no-newline```
+```> print ...rest --no-newline --stderr```
 
 ## Parameters
 
  -  `...rest`: the values to print
  -  `--no-newline`: print without inserting a newline for the line ending
+ -  `--stderr`: print to stderr instead of stdout
 
+## Notes
+```text
+Unlike `echo`, this command does not return any value (`print | describe` will return "nothing").
+Since this command has no output, there is no point in piping it with other commands.
+
+`print` may be used inside blocks of code (e.g.: hooks) to display text during execution without interfering with the pipeline.
+```
 ## Examples
 
 Print 'hello world'

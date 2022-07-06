@@ -1,8 +1,8 @@
 ---
 title: describe
-version: 0.64.0
+version: 0.65.1
 usage: |
-  Describe the type and structure of the value(s) piped in.
+  Describes connection and query of the DB object
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -15,7 +15,7 @@ usage: |
 
 ## Examples
 
-Describe the type of a string
+Describe SQLite database constructed query
 ```shell
-> 'hello' | describe
+> open foo.db | into db | select col_1 | from table_1 | describe
 ```

@@ -1,6 +1,6 @@
 ---
 title: with-column
-version: 0.64.0
+version: 0.65.1
 usage: |
   Adds a series to the dataframe
 ---
@@ -23,14 +23,14 @@ usage: |
 Adds a series to the dataframe
 ```shell
 > [[a b]; [1 2] [3 4]]
-    | to-df
-    | with-column ([5 6] | to-df) --name c
+    | into df
+    | with-column ([5 6] | into df) --name c
 ```
 
 Adds a series to the dataframe
 ```shell
 > [[a b]; [1 2] [3 4]]
-    | to-lazy
+    | into lazy
     | with-column [
         ((col a) * 2 | as "c")
         ((col a) * 3 | as "d")

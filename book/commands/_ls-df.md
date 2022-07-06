@@ -1,6 +1,6 @@
 ---
 title: ls-df
-version: 0.64.0
+version: 0.65.1
 usage: |
   Lists stored dataframes
 ---
@@ -17,6 +17,6 @@ usage: |
 
 Creates a new dataframe and shows it in the dataframe list
 ```shell
-> let test = ([[a b];[1 2] [3 4]] | to-df);
+> let test = ([[a b];[1 2] [3 4]] | into df);
     ls-df
 ```

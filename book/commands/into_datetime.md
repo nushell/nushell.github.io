@@ -1,6 +1,6 @@
 ---
 title: into datetime
-version: 0.64.0
+version: 0.65.1
 usage: |
   Convert text into a datetime
 ---
@@ -46,4 +46,9 @@ Convert timestamp (no larger than 8e+12) to a UTC datetime
 Convert timestamp (no larger than 8e+12) to datetime using a specified timezone offset (between -12 and 12)
 ```shell
 > 1614434140 | into datetime -o +9
+```
+
+Convert timestamps like the sqlite history t
+```shell
+> 1656165681720 | into datetime
 ```

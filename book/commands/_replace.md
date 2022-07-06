@@ -1,6 +1,6 @@
 ---
 title: replace
-version: 0.64.0
+version: 0.65.1
 usage: |
   Replace the leftmost (sub)string by a regex pattern
 ---
@@ -22,5 +22,5 @@ usage: |
 
 Replaces string
 ```shell
-> [abc abc abc] | to-df | replace -p ab -r AB
+> [abc abc abc] | into df | replace -p ab -r AB
 ```

@@ -1,6 +1,6 @@
 ---
 title: select
-version: 0.64.0
+version: 0.65.1
 usage: |
   Down-select table to only these columns.
 ---

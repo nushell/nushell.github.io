@@ -1,6 +1,6 @@
 ---
 title: into int
-version: 0.64.0
+version: 0.65.1
 usage: |
   Convert value to integer
 ---
@@ -11,12 +11,13 @@ usage: |
 
 ## Signature
 
-```> into int ...rest --radix```
+```> into int ...rest --radix --little-endian```
 
 ## Parameters
 
  -  `...rest`: column paths to convert to int (for table input)
  -  `--radix {number}`: radix of integer
+ -  `--little-endian`: use little-endian byte decoding
 
 ## Examples
 

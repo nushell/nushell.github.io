@@ -1,6 +1,6 @@
 ---
 title: drop-nulls
-version: 0.64.0
+version: 0.65.1
 usage: |
   Drops null values in dataframe
 ---
@@ -21,7 +21,7 @@ usage: |
 
 drop null values in dataframe
 ```shell
-> let df = ([[a b]; [1 2] [3 0] [1 2]] | to-df);
+> let df = ([[a b]; [1 2] [3 0] [1 2]] | into df);
     let res = ($df.b / $df.b);
     let a = ($df | with-column $res --name res);
     $a | drop-nulls
@@ -29,6 +29,6 @@ drop null values in dataframe
 
 drop null values in dataframe
 ```shell
-> let s = ([1 2 0 0 3 4] | to-df);
+> let s = ([1 2 0 0 3 4] | into df);
     ($s / $s) | drop-nulls
 ```

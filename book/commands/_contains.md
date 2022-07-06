@@ -1,6 +1,6 @@
 ---
 title: contains
-version: 0.64.0
+version: 0.65.1
 usage: |
   Checks if a pattern is contained in a string
 ---
@@ -21,5 +21,5 @@ usage: |
 
 Returns boolean indicating if pattern was found
 ```shell
-> [abc acb acb] | to-df | contains ab
+> [abc acb acb] | into df | contains ab
 ```

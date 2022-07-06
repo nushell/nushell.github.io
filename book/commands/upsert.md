@@ -1,6 +1,6 @@
 ---
 title: upsert
-version: 0.64.0
+version: 0.65.1
 usage: |
   Update an existing column to have a new value, or insert a new column.
 ---

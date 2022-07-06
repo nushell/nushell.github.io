@@ -1,6 +1,6 @@
 ---
 title: agg
-version: 0.64.0
+version: 0.65.1
 usage: |
   Performs a series of aggregations from a group by
 ---
@@ -22,7 +22,7 @@ usage: |
 Group by and perform an aggregation
 ```shell
 > [[a b]; [1 2] [1 4] [2 6] [2 4]]
-    | to-df
+    | into df
     | group-by a
     | agg [
         (col b | min | as "b_min")
@@ -34,7 +34,7 @@ Group by and perform an aggregation
 Group by and perform an aggregation
 ```shell
 > [[a b]; [1 2] [1 4] [2 6] [2 4]]
-    | to-lazy
+    | into lazy
     | group-by a
     | agg [
         (col b | min | as "b_min")

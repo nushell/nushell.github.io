@@ -1,6 +1,6 @@
 ---
 title: take
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates new dataframe using the given indices
 ---
@@ -21,14 +21,14 @@ usage: |
 
 Takes selected rows from dataframe
 ```shell
-> let df = ([[a b]; [4 1] [5 2] [4 3]] | to-df);
-    let indices = ([0 2] | to-df);
+> let df = ([[a b]; [4 1] [5 2] [4 3]] | into df);
+    let indices = ([0 2] | into df);
     $df | take $indices
 ```
 
 Takes selected rows from series
 ```shell
-> let series = ([4 1 5 2 4 3] | to-df);
-    let indices = ([0 2] | to-df);
+> let series = ([4 1 5 2 4 3] | into df);
+    let indices = ([0 2] | into df);
     $series | take $indices
 ```

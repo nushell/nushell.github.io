@@ -1,6 +1,6 @@
 ---
 title: is-null
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates mask where value is null
 ---
@@ -17,7 +17,7 @@ usage: |
 
 Create mask where values are null
 ```shell
-> let s = ([5 6 0 8] | to-df);
+> let s = ([5 6 0 8] | into df);
     let res = ($s / $s);
     $res | is-null
 ```

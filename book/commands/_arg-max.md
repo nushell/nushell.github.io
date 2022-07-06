@@ -1,6 +1,6 @@
 ---
 title: arg-max
-version: 0.64.0
+version: 0.65.1
 usage: |
   Return index for max value in series
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Returns index for max value
 ```shell
-> [1 3 2] | to-df | arg-max
+> [1 3 2] | into df | arg-max
 ```

@@ -1,6 +1,6 @@
 ---
 title: config env
-version: 0.64.0
+version: 0.65.1
 usage: |
   Edit nu environment configurations
 ---

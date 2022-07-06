@@ -1,6 +1,6 @@
 ---
 title: arg-sort
-version: 0.64.0
+version: 0.65.1
 usage: |
   Returns indexes for a sorted series
 ---
@@ -22,10 +22,10 @@ usage: |
 
 Returns indexes for a sorted series
 ```shell
-> [1 2 2 3 3] | to-df | arg-sort
+> [1 2 2 3 3] | into df | arg-sort
 ```
 
 Returns indexes for a sorted series
 ```shell
-> [1 2 2 3 3] | to-df | arg-sort -r
+> [1 2 2 3 3] | into df | arg-sort -r
 ```

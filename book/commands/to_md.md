@@ -1,6 +1,6 @@
 ---
 title: to md
-version: 0.64.0
+version: 0.65.1
 usage: |
   Convert table into simple Markdown
 ---
@@ -33,4 +33,9 @@ Optionally, output a formatted markdown string
 Treat each row as a markdown element
 ```shell
 > [{"H1": "Welcome to Nushell" } [[foo bar]; [1 2]]] | to md --per-element --pretty
+```
+
+Render a list
+```shell
+> [0 1 2] | to md --pretty
 ```

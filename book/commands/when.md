@@ -1,6 +1,6 @@
 ---
 title: when
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates and modifies a when expression
 ---
@@ -33,7 +33,7 @@ Create a when conditions
 Create a new column for the dataframe
 ```shell
 > [[a b]; [6 2] [1 4] [4 1]]
-   | to-lazy
+   | into lazy
    | with-column (
        when ((col a) > 2) 4 | otherwise 5 | as c
      )

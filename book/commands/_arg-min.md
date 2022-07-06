@@ -1,6 +1,6 @@
 ---
 title: arg-min
-version: 0.64.0
+version: 0.65.1
 usage: |
   Return index for min value in series
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Returns index for min value
 ```shell
-> [1 3 2] | to-df | arg-min
+> [1 3 2] | into df | arg-min
 ```

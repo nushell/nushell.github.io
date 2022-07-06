@@ -1,6 +1,6 @@
 ---
 title: filter-with
-version: 0.64.0
+version: 0.65.1
 usage: |
   Filters dataframe using a mask or expression as reference
 ---
@@ -21,11 +21,11 @@ usage: |
 
 Filter dataframe using a bool mask
 ```shell
-> let mask = ([true false] | to-df);
-    [[a b]; [1 2] [3 4]] | to-df | filter-with $mask
+> let mask = ([true false] | into df);
+    [[a b]; [1 2] [3 4]] | into df | filter-with $mask
 ```
 
 Filter dataframe using an expression
 ```shell
-> [[a b]; [1 2] [3 4]] | to-df | filter-with ((col a) > 1)
+> [[a b]; [1 2] [3 4]] | into df | filter-with ((col a) > 1)
 ```
