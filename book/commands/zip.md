@@ -1,6 +1,6 @@
 ---
 title: zip
-version: 0.64.0
+version: 0.65.1
 usage: |
   Combine a stream with the input
 ---

@@ -1,6 +1,6 @@
 ---
 title: hash md5
-version: 0.64.0
+version: 0.65.1
 usage: |
   Hash a value using the md5 hash algorithm
 ---
@@ -11,17 +11,23 @@ usage: |
 
 ## Signature
 
-```> hash md5 ...rest```
+```> hash md5 ...rest --binary```
 
 ## Parameters
 
  -  `...rest`: optionally md5 hash data by cell path
+ -  `--binary`: Output binary instead of hexadecimal representation
 
 ## Examples
 
-md5 encode a string
+get a hexadecimaly encoded string of the md5 digest of a string
 ```shell
 > echo 'abcdefghijklmnopqrstuvwxyz' | hash md5
+```
+
+get the md5 digest of a string in binary
+```shell
+> echo 'abcdefghijklmnopqrstuvwxyz' | hash md5 --binary
 ```
 
 md5 encode a file

@@ -1,6 +1,6 @@
 ---
 title: split column
-version: 0.64.0
+version: 0.65.1
 usage: |
   Split a string into multiple columns using a separator
 ---

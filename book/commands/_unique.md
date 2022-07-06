@@ -1,6 +1,6 @@
 ---
 title: unique
-version: 0.64.0
+version: 0.65.1
 usage: |
   Returns unique values from a dataframe
 ---
@@ -23,7 +23,7 @@ usage: |
 
 Returns unique values from a series
 ```shell
-> [2 2 2 2 2] | to-df | unique
+> [2 2 2 2 2] | into df | unique
 ```
 
 Creates a is unique expression from a column

@@ -1,6 +1,6 @@
 ---
 title: replace-all
-version: 0.64.0
+version: 0.65.1
 usage: |
   Replace all (sub)strings by a regex pattern
 ---
@@ -22,5 +22,5 @@ usage: |
 
 Replaces string
 ```shell
-> [abac abac abac] | to-df | replace-all -p a -r A
+> [abac abac abac] | into df | replace-all -p a -r A
 ```

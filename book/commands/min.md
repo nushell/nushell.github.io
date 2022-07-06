@@ -1,6 +1,6 @@
 ---
 title: min
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates a min expression
 ---
@@ -18,7 +18,7 @@ usage: |
 Min aggregation for a group by
 ```shell
 > [[a b]; [one 2] [one 4] [two 1]]
-    | to-df
+    | into df
     | group-by a
     | agg (col b | min)
 ```

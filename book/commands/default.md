@@ -1,6 +1,6 @@
 ---
 title: default
-version: 0.64.0
+version: 0.65.1
 usage: |
   Sets a default row's column if missing.
 ---
@@ -23,6 +23,11 @@ usage: |
 Give a default 'target' column to all file entries
 ```shell
 > ls -la | default 'nothing' target
+```
+
+Get the env value of `MY_ENV` with a default value 'abc' if not present
+```shell
+> $env | get -i MY_ENV | default 'abc'
 ```
 
 Default the `$nothing` value in a list

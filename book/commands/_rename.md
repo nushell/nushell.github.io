@@ -1,6 +1,6 @@
 ---
 title: rename
-version: 0.64.0
+version: 0.65.1
 usage: |
   Rename a dataframe column
 ---
@@ -22,15 +22,15 @@ usage: |
 
 Renames a series
 ```shell
-> [5 6 7 8] | to-df | rename '0' new_name
+> [5 6 7 8] | into df | rename '0' new_name
 ```
 
 Renames a dataframe column
 ```shell
-> [[a b]; [1 2] [3 4]] | to-df | rename a a_new
+> [[a b]; [1 2] [3 4]] | into df | rename a a_new
 ```
 
 Renames two dataframe columns
 ```shell
-> [[a b]; [1 2] [3 4]] | to-df | rename [a b] [a_new b_new]
+> [[a b]; [1 2] [3 4]] | into df | rename [a b] [a_new b_new]
 ```

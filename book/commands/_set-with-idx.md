@@ -1,6 +1,6 @@
 ---
 title: set-with-idx
-version: 0.64.0
+version: 0.65.1
 usage: |
   Sets value in the given index
 ---
@@ -22,7 +22,7 @@ usage: |
 
 Set value in selected rows from series
 ```shell
-> let series = ([4 1 5 2 4 3] | to-df);
-    let indices = ([0 2] | to-df);
+> let series = ([4 1 5 2 4 3] | into df);
+    let indices = ([0 2] | into df);
     $series | set-with-idx 6 -i $indices
 ```

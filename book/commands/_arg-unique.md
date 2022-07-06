@@ -1,6 +1,6 @@
 ---
 title: arg-unique
-version: 0.64.0
+version: 0.65.1
 usage: |
   Returns indexes for unique values
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Returns indexes for unique values
 ```shell
-> [1 2 2 3 3] | to-df | arg-unique
+> [1 2 2 3 3] | into df | arg-unique
 ```

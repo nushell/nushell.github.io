@@ -1,6 +1,6 @@
 ---
 title: cumulative
-version: 0.64.0
+version: 0.65.1
 usage: |
   Cumulative calculation for a series
 ---
@@ -22,5 +22,5 @@ usage: |
 
 Cumulative sum for a series
 ```shell
-> [1 2 3 4 5] | to-df | cumulative sum
+> [1 2 3 4 5] | into df | cumulative sum
 ```

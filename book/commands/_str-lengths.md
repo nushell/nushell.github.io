@@ -1,6 +1,6 @@
 ---
 title: str-lengths
-version: 0.64.0
+version: 0.65.1
 usage: |
   Get lengths of all strings
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Returns string lengths
 ```shell
-> [a ab abc] | to-df | str-lengths
+> [a ab abc] | into df | str-lengths
 ```

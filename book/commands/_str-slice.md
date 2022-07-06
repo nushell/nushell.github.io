@@ -1,6 +1,6 @@
 ---
 title: str-slice
-version: 0.64.0
+version: 0.65.1
 usage: |
   Slices the string from the start position until the selected length
 ---
@@ -22,5 +22,5 @@ usage: |
 
 Creates slices from the strings
 ```shell
-> [abcded abc321 abc123] | to-df | str-slice 1 -l 2
+> [abcded abc321 abc123] | into df | str-slice 1 -l 2
 ```

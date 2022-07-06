@@ -1,6 +1,6 @@
 ---
 title: random integer
-version: 0.64.0
+version: 0.65.1
 usage: |
   Generate a random integer [min..max]
 ---

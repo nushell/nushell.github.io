@@ -1,6 +1,6 @@
 ---
 title: math ceil
-version: 0.64.0
+version: 0.65.1
 usage: |
   Applies the ceil function to a list of numbers
 ---

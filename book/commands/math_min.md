@@ -1,6 +1,6 @@
 ---
 title: math min
-version: 0.64.0
+version: 0.65.1
 usage: |
   Finds the minimum within a list of numbers or tables
 ---

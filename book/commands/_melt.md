@@ -1,6 +1,6 @@
 ---
 title: melt
-version: 0.64.0
+version: 0.65.1
 usage: |
   Unpivot a DataFrame from wide to long format
 ---
@@ -24,5 +24,5 @@ usage: |
 
 melt dataframe
 ```shell
-> [[a b c d]; [x 1 4 a] [y 2 5 b] [z 3 6 c]] | to-df | melt -c [b c] -v [a d]
+> [[a b c d]; [x 1 4 a] [y 2 5 b] [z 3 6 c]] | into df | melt -c [b c] -v [a d]
 ```

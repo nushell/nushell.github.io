@@ -1,6 +1,6 @@
 ---
 title: all-true
-version: 0.64.0
+version: 0.65.1
 usage: |
   Returns true if all values are true
 ---
@@ -17,12 +17,12 @@ usage: |
 
 Returns true if all values are true
 ```shell
-> [true true true] | to-df | all-true
+> [true true true] | into df | all-true
 ```
 
 Checks the result from a comparison
 ```shell
-> let s = ([5 6 2 8] | to-df);
+> let s = ([5 6 2 8] | into df);
     let res = ($s > 9);
     $res | all-true
 ```

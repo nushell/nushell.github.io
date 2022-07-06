@@ -1,6 +1,6 @@
 ---
 title: table
-version: 0.64.0
+version: 0.65.1
 usage: |
   Render the table.
 ---
@@ -19,6 +19,10 @@ usage: |
  -  `--list`: list available table modes/themes
  -  `--width {int}`: number of terminal columns wide (not output columns)
 
+## Notes
+```text
+If the table contains a column called 'index', this column is used as the table index instead of the usual continuous index
+```
 ## Examples
 
 List the files in current directory with index number start from 1.

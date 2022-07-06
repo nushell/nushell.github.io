@@ -1,6 +1,6 @@
 ---
 title: get
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates dataframe with the selected columns
 ---
@@ -21,5 +21,5 @@ usage: |
 
 Returns the selected column
 ```shell
-> [[a b]; [1 2] [3 4]] | to-df | get a
+> [[a b]; [1 2] [3 4]] | into df | get a
 ```

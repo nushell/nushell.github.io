@@ -1,6 +1,6 @@
 ---
 title: complete
-version: 0.64.0
+version: 0.65.1
 usage: |
   Complete the external piped in, collecting outputs and exit code
 ---

@@ -1,6 +1,6 @@
 ---
 title: drop-duplicates
-version: 0.64.0
+version: 0.65.1
 usage: |
   Drops duplicate values in dataframe
 ---
@@ -23,5 +23,5 @@ usage: |
 
 drop duplicates
 ```shell
-> [[a b]; [1 2] [3 4] [1 2]] | to-df | drop-duplicates
+> [[a b]; [1 2] [3 4] [1 2]] | into df | drop-duplicates
 ```

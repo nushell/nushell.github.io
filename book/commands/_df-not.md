@@ -1,6 +1,6 @@
 ---
 title: df-not
-version: 0.64.0
+version: 0.65.1
 usage: |
   Inverts boolean mask
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Inverts boolean mask
 ```shell
-> [true false true] | to-df | df-not
+> [true false true] | into df | df-not
 ```

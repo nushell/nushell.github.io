@@ -1,8 +1,8 @@
 ---
 title: take
-version: 0.64.0
+version: 0.65.1
 usage: |
-  Take the first n elements of the input.
+  Take only the first n elements.
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -15,16 +15,16 @@ usage: |
 
 ## Parameters
 
- -  `n`: the number of elements to take
+ -  `n`: starting from the front, the number of elements to return
 
 ## Examples
 
-Take two elements
+Return the first item of a list/table
 ```shell
-> echo [[editions]; [2015] [2018] [2021]] | take 2
+> [1 2 3] | take
 ```
 
-Take the first value
+Return the first 2 items of a list/table
 ```shell
-> echo [2 4 6 8] | take
+> [1 2 3] | take 2
 ```

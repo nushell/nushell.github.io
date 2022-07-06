@@ -1,6 +1,6 @@
 ---
 title: quantile
-version: 0.64.0
+version: 0.65.1
 usage: |
   Aggregates the columns to the selected quantile
 ---
@@ -22,7 +22,7 @@ usage: |
 Quantile aggregation for a group by
 ```shell
 > [[a b]; [one 2] [one 4] [two 1]]
-    | to-df
+    | into df
     | group-by a
     | agg (col b | quantile 0.5)
 ```

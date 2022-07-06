@@ -1,6 +1,6 @@
 ---
 title: select
-version: 0.64.0
+version: 0.65.1
 usage: |
   Selects columns from lazyframe
 ---
@@ -21,5 +21,5 @@ usage: |
 
 Select a column from the dataframe
 ```shell
-> [[a b]; [6 2] [4 2] [2 2]] | to-df | select a
+> [[a b]; [6 2] [4 2] [2 2]] | into df | select a
 ```

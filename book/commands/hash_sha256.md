@@ -1,6 +1,6 @@
 ---
 title: hash sha256
-version: 0.64.0
+version: 0.65.1
 usage: |
   Hash a value using the sha256 hash algorithm
 ---
@@ -11,17 +11,23 @@ usage: |
 
 ## Signature
 
-```> hash sha256 ...rest```
+```> hash sha256 ...rest --binary```
 
 ## Parameters
 
  -  `...rest`: optionally sha256 hash data by cell path
+ -  `--binary`: Output binary instead of hexadecimal representation
 
 ## Examples
 
-sha256 encode a string
+get a hexadecimaly encoded string of the sha256 digest of a string
 ```shell
 > echo 'abcdefghijklmnopqrstuvwxyz' | hash sha256
+```
+
+get the sha256 digest of a string in binary
+```shell
+> echo 'abcdefghijklmnopqrstuvwxyz' | hash sha256 --binary
 ```
 
 sha256 encode a file

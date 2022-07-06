@@ -1,6 +1,6 @@
 ---
 title: to yaml
-version: 0.64.0
+version: 0.65.1
 usage: |
   Convert table into .yaml/.yml text
 ---

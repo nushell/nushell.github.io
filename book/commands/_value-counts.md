@@ -1,6 +1,6 @@
 ---
 title: value-counts
-version: 0.64.0
+version: 0.65.1
 usage: |
   Returns a dataframe with the counts for unique values in series
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Calculates value counts
 ```shell
-> [5 5 5 5 6 6] | to-df | value-counts
+> [5 5 5 5 6 6] | into df | value-counts
 ```

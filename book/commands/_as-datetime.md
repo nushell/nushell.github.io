@@ -1,6 +1,6 @@
 ---
 title: as-datetime
-version: 0.64.0
+version: 0.65.1
 usage: |
   Converts string to datetime.
 ---
@@ -37,5 +37,5 @@ Format example:
 
 Converts string to datetime
 ```shell
-> ["2021-12-30 00:00:00" "2021-12-31 00:00:00"] | to-df | as-datetime "%Y-%m-%d %H:%M:%S"
+> ["2021-12-30 00:00:00" "2021-12-31 00:00:00"] | into df | as-datetime "%Y-%m-%d %H:%M:%S"
 ```

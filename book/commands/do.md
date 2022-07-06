@@ -1,6 +1,6 @@
 ---
 title: do
-version: 0.64.0
+version: 0.65.1
 usage: |
   Run a block
 ---
@@ -11,13 +11,14 @@ usage: |
 
 ## Signature
 
-```> do (block) ...rest --ignore-errors```
+```> do (block) ...rest --ignore-errors --capture-errors```
 
 ## Parameters
 
  -  `block`: the block to run
  -  `...rest`: the parameter(s) for the block
  -  `--ignore-errors`: ignore errors as the block runs
+ -  `--capture-errors`: capture errors as the block runs and return it
 
 ## Examples
 

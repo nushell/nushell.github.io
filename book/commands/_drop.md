@@ -1,6 +1,6 @@
 ---
 title: drop
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates a new dataframe by dropping the selected columns
 ---
@@ -21,5 +21,5 @@ usage: |
 
 drop column a
 ```shell
-> [[a b]; [1 2] [3 4]] | to-df | drop a
+> [[a b]; [1 2] [3 4]] | into df | drop a
 ```

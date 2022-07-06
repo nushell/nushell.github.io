@@ -1,6 +1,6 @@
 ---
 title: gstat
-version: 0.64.0
+version: 0.65.1
 usage: |
   Get the git status of a repo
 ---

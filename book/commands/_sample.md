@@ -1,6 +1,6 @@
 ---
 title: sample
-version: 0.64.0
+version: 0.65.1
 usage: |
   Create sample dataframe
 ---
@@ -11,7 +11,7 @@ usage: |
 
 ## Signature
 
-```> sample --n-rows --fraction --seed --replace```
+```> sample --n-rows --fraction --seed --replace --shuffle```
 
 ## Parameters
 
@@ -19,15 +19,16 @@ usage: |
  -  `--fraction {number}`: fraction of dataframe to be taken
  -  `--seed {number}`: seed for the selection
  -  `--replace`: sample with replace
+ -  `--shuffle`: shuffle sample
 
 ## Examples
 
 Sample rows from dataframe
 ```shell
-> [[a b]; [1 2] [3 4]] | to-df | sample -n 1
+> [[a b]; [1 2] [3 4]] | into df | sample -n 1
 ```
 
 Shows sample row using fraction and replace
 ```shell
-> [[a b]; [1 2] [3 4] [5 6]] | to-df | sample -f 0.5 -e
+> [[a b]; [1 2] [3 4] [5 6]] | into df | sample -f 0.5 -e
 ```

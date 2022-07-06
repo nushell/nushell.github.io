@@ -1,6 +1,6 @@
 ---
 title: count-null
-version: 0.64.0
+version: 0.65.1
 usage: |
   Counts null values
 ---
@@ -17,6 +17,6 @@ usage: |
 
 Counts null values
 ```shell
-> let s = ([1 1 0 0 3 3 4] | to-df);
+> let s = ([1 1 0 0 3 3 4] | into df);
     ($s / $s) | count-null
 ```

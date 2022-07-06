@@ -1,6 +1,6 @@
 ---
 title: drop column
-version: 0.64.0
+version: 0.65.1
 usage: |
   Remove the last number of columns. If you want to remove columns by name, try 'reject'.
 ---

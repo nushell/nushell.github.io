@@ -1,6 +1,6 @@
 ---
 title: math avg
-version: 0.64.0
+version: 0.65.1
 usage: |
   Finds the average of a list of numbers or tables
 ---

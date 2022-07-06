@@ -1,6 +1,6 @@
 ---
 title: as
-version: 0.64.0
+version: 0.65.1
 usage: |
   Creates an alias expression
 ---
@@ -21,5 +21,5 @@ usage: |
 
 Creates and alias expression
 ```shell
-> col a | as new_a | to-nu
+> col a | as new_a | into nu
 ```

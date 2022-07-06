@@ -1,6 +1,6 @@
 ---
 title: arg-true
-version: 0.64.0
+version: 0.65.1
 usage: |
   Returns indexes where values are true
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Returns indexes where values are true
 ```shell
-> [false true false] | to-df | arg-true
+> [false true false] | into df | arg-true
 ```

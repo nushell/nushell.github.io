@@ -1,6 +1,6 @@
 ---
 title: is-in
-version: 0.64.0
+version: 0.65.1
 usage: |
   Checks if elements from a series are contained in right series
 ---
@@ -21,6 +21,6 @@ usage: |
 
 Checks if elements from a series are contained in right series
 ```shell
-> let other = ([1 3 6] | to-df);
-    [5 6 6 6 8 8 8] | to-df | is-in $other
+> let other = ([1 3 6] | into df);
+    [5 6 6 6 8 8 8] | into df | is-in $other
 ```

@@ -1,6 +1,6 @@
 ---
 title: hide
-version: 0.64.0
+version: 0.65.1
 usage: |
   Hide symbols in the current scope
 ---

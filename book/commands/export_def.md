@@ -1,6 +1,6 @@
 ---
 title: export def
-version: 0.64.0
+version: 0.65.1
 usage: |
   Define a custom command and export it from a module
 ---

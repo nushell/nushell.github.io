@@ -1,6 +1,6 @@
 ---
 title: shift
-version: 0.64.0
+version: 0.65.1
 usage: |
   Shifts the values by a given period
 ---
@@ -22,5 +22,5 @@ usage: |
 
 Shifts the values by a given period
 ```shell
-> [1 2 2 3 3] | to-df | shift 2 | drop-nulls
+> [1 2 2 3 3] | into df | shift 2 | drop-nulls
 ```

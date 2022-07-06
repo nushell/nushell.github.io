@@ -1,6 +1,6 @@
 ---
 title: path basename
-version: 0.64.0
+version: 0.65.1
 usage: |
   Get the final component of a path
 ---

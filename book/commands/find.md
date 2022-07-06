@@ -1,6 +1,6 @@
 ---
 title: find
-version: 0.64.0
+version: 0.65.1
 usage: |
   Searches terms in the input or for elements of the input that satisfies the predicate.
 ---
