@@ -23,6 +23,15 @@ Nushell supports the following operators for common math, logic, and string oper
 | `not`    | logical not                                             |
 | `&&`, `and` | and two Boolean values                               |
 | `\|\|`, `or`| or two Boolean values                                |
+| `fdiv` | floor division |
+| `**` | pow |
+| `bit-or` | bitwise or |
+| `bit-xor` | bitwise xor |
+| `bit-and` | bitwise and |
+| `bit-shl` | bitwise shift left |
+| `bit-shr` | bitwise shift right |
+| `starts-with` | string starts with |
+| `ends-with` | string ends with |
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
 
