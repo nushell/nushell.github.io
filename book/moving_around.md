@@ -24,32 +24,32 @@ Here, we're looking for any file that ends with ".md", and the two asterisks fur
 
 @[code](@snippets/moving_around/cd_example.sh)
 
-To change from the current directory to a new one, we use the `cd` command. Just as in other shells, we can use either the name of the directory, or if we want to go up a directory we can use the `..` shortcut.
+To change from the current directory to a new one, we use the [`cd`](commands/cd.md) command. Just as in other shells, we can use either the name of the directory, or if we want to go up a directory we can use the `..` shortcut.
 
-Changing the current working directory can also be done if `cd` is omitted and a path by itself is given:
+Changing the current working directory can also be done if [`cd`](commands/cd.md) is omitted and a path by itself is given:
 
 @[code](@snippets/moving_around/cd_without_command_example.sh)
 
-**Note:** changing the directory with `cd` changes the `PWD` environment variable. This means that a change of a directory is kept to the current block. Once you exit the block, you'll return to the previous directory. You can learn more about working with this in the [environment chapter](./environment.md).
+**Note:** changing the directory with [`cd`](commands/cd.md) changes the `PWD` environment variable. This means that a change of a directory is kept to the current block. Once you exit the block, you'll return to the previous directory. You can learn more about working with this in the [environment chapter](./environment.md).
 
 ## Filesystem commands
 
 Nu also provides some basic filesystem commands that work cross-platform.
 
-We can move an item from one place to another using the `mv` command:
+We can move an item from one place to another using the [`mv`](commands/mv.md) command:
 
 @[code](@snippets/moving_around/mv_example.sh)
 
-We can copy an item from one location to another:
+We can copy an item from one location to another with the [`cp`](commands/cp.md) command:
 
 @[code](@snippets/moving_around/cp_example.sh)
 
-We can remove an item:
+We can remove an item with the [`rm`](commands/rm.md) command:
 
 @[code](@snippets/moving_around/rm_example.sh)
 
 The three commands also can use the glob capabilities we saw earlier with [`ls`](commands/ls.md).
 
-Finally, we can create a new directory using the `mkdir` command:
+Finally, we can create a new directory using the [`mkdir`](commands/mkdir.md) command:
 
 @[code](@snippets/moving_around/mkdir_example.sh)
