@@ -483,3 +483,27 @@ let config = {
 ```
 
 if you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
+
+### Working on light background terminal
+
+Nushell's default config file contains a light theme definition, if you are working on a light background terminal, you can applied light theme easily.
+
+```shell
+# in $nu.config-file
+let-env config = {
+  ...
+  color_config: $dark_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  ...
+}
+```
+
+You can just change it to light theme by replacing `$dark_theme` to `$light_theme`
+
+```shell
+# in $nu.config-file
+let-env config = {
+  ...
+  color_config: $light_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  ...
+}
+```
