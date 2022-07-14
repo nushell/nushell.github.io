@@ -44,6 +44,7 @@ Note: this table assumes Nu 0.43 or later.
 | keep-while             |                               | TakeWhile                                            |                                            |                                                 |
 | kill                   |   -                           |   -                                                  | Stop-Process, kill                         | kill                                            |
 | last                   |                               | Last, LastOrDefault                                  | Select-Object -Last                        | tail                                            |
+| length                 | count                         | Count                                                |                                            |                                                 |
 | lines                  |   -                           |   -                                                  | File.ReadAllLines                          |                                                 |
 | ls                     |   -                           |   -                                                  | Get-ChildItem, dir, ls                     | ls                                              |
 | match(`*`)             | case when                     | Regex.IsMatch                                        | [regex]                                    |                                                 |
