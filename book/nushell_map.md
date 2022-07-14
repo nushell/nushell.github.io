@@ -17,7 +17,6 @@ Note: this table assumes Nu 0.43 or later.
 | clear                  |   -                           |   -                                                  | Clear-Host                                 | clear                                           |
 | compact                |                               |                                                      |                                            |                                                 |
 | config                 |   -                           |   -                                                  | $Profile                                   | vi .bashrc, .profile                            |
-| count                  | count                         | Count                                                | Measure-Object, measure                    | wc                                              |
 | cp                     |   -                           |   -                                                  | Copy-Item, cp, copy                        | cp                                              |
 | date                   | NOW() / getdate()             | DateTime class                                       | Get-Date                                   | date                                            |
 | debug                  |                               |                                                      |                                            |                                                 |
@@ -45,6 +44,7 @@ Note: this table assumes Nu 0.43 or later.
 | keep-while             |                               | TakeWhile                                            |                                            |                                                 |
 | kill                   |   -                           |   -                                                  | Stop-Process, kill                         | kill                                            |
 | last                   |                               | Last, LastOrDefault                                  | Select-Object -Last                        | tail                                            |
+| length                 | count                         | Count                                                | Measure-Object, measure                    | wc                                              |
 | lines                  |   -                           |   -                                                  | File.ReadAllLines                          |                                                 |
 | ls                     |   -                           |   -                                                  | Get-ChildItem, dir, ls                     | ls                                              |
 | match(`*`)             | case when                     | Regex.IsMatch                                        | [regex]                                    |                                                 |
