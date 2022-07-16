@@ -11,6 +11,8 @@ This website is based on Vuepress.
 1. Run `yarn install`
 1. Run `yarn vuepress dev`
 
+If you're adding a new page to the book, to make it appaer, put it also to `.vuepress/config.js`.
+
 ## Translation Guide
 
 1. First of all, make sure you have installed `node.js`, `yarn`, and then clone the doc repo locally:
