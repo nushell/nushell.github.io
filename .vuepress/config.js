@@ -122,7 +122,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Nu as a shell',
+              text: 'Nu as a Shell',
               collapsable: false,
               children: [
                 '/book/configuration.md',
