@@ -135,6 +135,7 @@ module.exports = {
                 '/book/externs.md',
                 '/book/custom_completions.md',
                 '/book/coloring_and_theming.md',
+                '/book/hooks.md',
               ],
             },
             {
