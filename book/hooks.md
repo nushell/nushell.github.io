@@ -1,15 +1,16 @@
 # Hooks
 
 Hooks allow you to run a code snippet at some predefined situations.
-Hooks are only available in the interactive mode, they do not work if you run a Nushell on a script (`nu script.nu`) or commands (`nu -c "echo foo"`).
+They are only available in the interactive mode ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)), they do not work if you run a Nushell with a script (`nu script.nu`) or commands (`nu -c "echo foo"`) arguments.
 
-Currently, we support these hooks:
+Currently, we support these types of hooks:
 
 - `pre_prompt` : Triggered before the prompt is drawn
-- `pre_execution` : Triggered before a command starts executing
+- `pre_execution` : Triggered before the line input starts executing
 - `env_change` : Triggered when an environment variable changes
 
-More specifically, one Nushell REPL cycle looks like this:
+To make it clearer, we can break down Nushell's execution cycle.
+The steps to evaluate one line in the REPL mode are as follows:
 
 1. Check for `pre_prompt` hooks and run them
 1. Check for `env_change` hooks and run them
@@ -24,7 +25,7 @@ To enable hooks, define them in your [config](configuration.md):
 
 ```
 let-env config = {
-    ...other config...
+    # ...other config...
 
     hooks: {
         pre_prompt: { print "pre prompt hook" }
@@ -37,9 +38,9 @@ let-env config = {
 ```
 
 Try putting the above to your config, running Nushell and moving around your filesytem.
-When you change a directory, the `PWD` environment variable changes and triggers the hook with the previous and the current values stored in `before` and `after` variables, respectively.
+When you change a directory, the `PWD` environment variable changes and the change triggers the hook with the previous and the current values stored in `before` and `after` variables, respectively.
 
-Instead of defining a just a single hook per trigger, it is possible to define a list of hooks which will run in sequence:
+Instead of defining a just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
 
 ```
 let-env config = {
@@ -64,7 +65,7 @@ let-env config = {
 }
 ```
 
-Also, it might be more practical to update the existing config with new hooks like this, instead of defining the whole config:
+Also, it might be more practical to update the existing config with new hooks, instead of defining the whole config from scratch:
 
 ```
 let-env config = ($env.config | upsert hooks {
@@ -79,7 +80,7 @@ let-env config = ($env.config | upsert hooks {
 ## Changing Environment
 
 One feature of the hooks is that they preserve the environment.
-Environment variables defined inside the hook block will be preserved in a similar way as [`def-env`](environment.md#defining-environment-from-custom-commands).
+Environment variables defined inside the hook **block** will be preserved in a similar way as [`def-env`](environment.md#defining-environment-from-custom-commands).
 You can test it with the following example:
 
 ```
@@ -99,10 +100,14 @@ One thing you might be tempted to do is to activate an environment whenever you 
 
 ```
 let-env config = ($env.config | upsert hooks {
-    env_change: {|before, after|
-        if $after == /some/path/to/directory {
-            load-env { SPAM: eggs }
-        }
+    env_change: {
+        PWD: [
+            {|before, after|
+                if $after == /some/path/to/directory {
+                    load-env { SPAM: eggs }
+                }
+            }
+        ]
     }
 })
 ```
@@ -110,13 +115,17 @@ let-env config = ($env.config | upsert hooks {
 This won't work because the environment will be active only within the `if` block.
 In this case, you could easily rewrite it as `load-env (if $after == ... { ... } else { {} })` but this pattern is fairly common and later we'll see that not all cases can be rewritten like this.
 
-To deal with the above problem, we introduce another way to define a hook -- a record:
+To deal with the above problem, we introduce another way to define a hook -- **a record**:
 
 ```
 let-env config = ($env.config | upsert hooks {
-    env_change:
-        condition: {|before, after| $after == /some/path/to/directory }
-        code: {|before, after| load-env { SPAM: eggs } }
+    env_change: {
+        PWD: [
+            {
+                condition: {|before, after| $after == /some/path/to/directory }
+                code: {|before, after| load-env { SPAM: eggs } }
+            }
+        ]
     }
 })
 ```
@@ -124,14 +133,15 @@ let-env config = ($env.config | upsert hooks {
 When the hook triggers, it evaluates the `condition` block.
 If it returns `true`, the `code` block will be evaluated.
 If it returns `false`, nothing will happen.
-If it returns something else, it will throw an error.
+If it returns something else, an error will be thrown.
+The `condition` field can also be omitted altogether in which case the hook will always evaluate.
 
 The `pre_prompt` and `pre_execution` hook types also support the conditional hooks but they don't accept the `before` and `after` parameters.
 
 ## Hooks as Strings
 
-So far a hook was defined as a block which preserves only the environment, but nothing else.
-Another way to define a hook is as a string.
+So far a hook was defined as a block that preserves only the environment, but nothing else.
+To be able to define commands or aliases, it is possible to define the `code` field as **a string**.
 You can think of it as if you typed the string into the REPL and hit Enter.
 So, the hook from the previous section can be also written as
 
@@ -142,6 +152,25 @@ So, the hook from the previous section can be also written as
 
 > $env.SPAM
 eggs
+```
+
+This feature can be used, for example, to conditionally bring in definitions based on the current directory:
+
+```
+let-env config = ($env.config | upsert hooks {
+    env_change: {
+        PWD: [
+            {
+                condition: {|_, after| $after == /some/path/to/directory }
+                code: 'def foo [] { print "foo" }'
+            }
+            {
+                condition: {|before, _| $before == /some/path/to/directory }
+                code: 'hide foo'
+            }
+        ]
+    }
+})
 ```
 
 ## Examples
