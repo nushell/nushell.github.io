@@ -8,7 +8,10 @@ This website is based on Vuepress.
 
 1. [Install Node.js](https://nodejs.org/en/download/)
 1. [Install yarn](https://yarnpkg.com/getting-started/install)
+1. Run `yarn install`
 1. Run `yarn vuepress dev`
+
+If you're adding a new page to the book, to make it appaer, put it also to `.vuepress/config.js`.
 
 ## Translation Guide
 

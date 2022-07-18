@@ -19,6 +19,7 @@
 - [Environment](environment.md) - Working with environment variables
 - [Stdout, stderr, and exit codes](stdout_stderr_exit_codes.md) - Working with stdout, stderr, and exit codes
 - [Modules](modules.md) - Creating and using your own modules
+- [Hooks](hooks.md) - Adding code snippets to be run automatically
 - [Scripts](scripts.md) - Creating your own scripts
 - [Metadata](metadata.md) - An explanation of Nu's metadata system
 - [Creating your own errors](creating_errors.md) - Creating your own error messages
