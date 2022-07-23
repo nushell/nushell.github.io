@@ -483,3 +483,27 @@ let config = {
 ```
 
 如果你想在主题设计上火力全开，你需要把我在一开始提到的所有项目作为主题，包括`LS_COLORS`和提示。祝您好运!
+
+### 在终端上使用浅色背景
+
+Nushell 的默认配置文件包含一个浅色主题定义，如果你在浅色背景的终端上工作，你可以很容易地应用浅色主题：
+
+```shell
+# in $nu.config-file
+let-env config = {
+  ...
+  color_config: $dark_theme   # 如果你需要浅色主题, 可以将 `$dark_theme` 替换为 `$light_theme`
+  ...
+}
+```
+
+你只需要将 `$dark_theme` 替换为 `$light_theme` 就可以切换到浅色主题了：
+
+```shell
+# in $nu.config-file
+let-env config = {
+  ...
+  color_config: $light_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  ...
+}
+```
