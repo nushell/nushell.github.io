@@ -32,7 +32,7 @@
   {
     "name": "coloring_and_theming.md",
     "en": "Completed",
-    "zh-CN": "51522d5591@hustcer",
+    "zh-CN": "1b7d01ac3b@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -140,6 +140,16 @@
     "pt-BR": "-"
   },
   {
+    "name": "hooks.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
     "name": "installation.md",
     "en": "Completed",
     "zh-CN": "fa90895307@hustcer",
@@ -192,7 +202,7 @@
   {
     "name": "moving_around.md",
     "en": "Completed",
-    "zh-CN": "fa90895307@hustcer",
+    "zh-CN": "1b7d01ac3b@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -202,7 +212,7 @@
   {
     "name": "nushell_map.md",
     "en": "Completed",
-    "zh-CN": "61bb68454f@hustcer",
+    "zh-CN": "1b7d01ac3b@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -242,7 +252,7 @@
   {
     "name": "operators.md",
     "en": "Completed",
-    "zh-CN": "61bb68454f@hustcer",
+    "zh-CN": "1b7d01ac3b@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -332,7 +342,7 @@
   {
     "name": "table_of_contents.md",
     "en": "Completed",
-    "zh-CN": "61bb68454f@hustcer",
+    "zh-CN": "1b7d01ac3b@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -352,7 +362,7 @@
   {
     "name": "types_of_data.md",
     "en": "Completed",
-    "zh-CN": "61bb68454f@hustcer",
+    "zh-CN": "1b7d01ac3b@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -362,7 +372,7 @@
   {
     "name": "variables_and_subexpressions.md",
     "en": "Completed",
-    "zh-CN": "61bb68454f@hustcer",
+    "zh-CN": "1b7d01ac3b@hustcer",
     "de": "translated by @sebastian-xyz",
     "tr": "-",
     "ja": "-",
