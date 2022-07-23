@@ -19,6 +19,7 @@
 - [环境变量](environment.md) - 使用环境变量
 - [标准输出、错误和退出码](stdout_stderr_exit_codes.md) - 使用标准输出、错误和退出码
 - [模块](modules.md) - 创建和使用你自己的模块
+- [钩子](hooks.md) - 添加自动运行的代码片断
 - [脚本](scripts.md) - 创建你自己的脚本
 - [元数据](metadata.md) - 细说 Nushell 的元数据系统
 - [创建你自己的`错误`](creating_errors.md) - 创建你自己的错误信息
