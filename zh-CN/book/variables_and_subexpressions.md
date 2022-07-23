@@ -88,7 +88,7 @@ Nushell 支持使用一种简化的方式访问子表达式中的列，你可能
 ```bash
 > ls | where $it.size > 10kb
 > ls | where ($it.size > 10kb)
-> ls | where {|$it| $it.size > 10kb }
+> ls | where {|$x| $x.size > 10kb }
 ```
 
 为了使简化语法正常工作，列名必须出现在操作的左侧（如`size > 10kb`中的`size`）。
