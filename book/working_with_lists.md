@@ -28,7 +28,7 @@ For example:
 let colors = [yellow green]
 let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
-echo $colors # [red yellow green purple]
+$colors # [red yellow green purple]
 ```
 
 ## Iterating over lists
@@ -51,7 +51,7 @@ The following example gets all the colors whose names end in "e".
 
 ```bash
 let colors = [red orange yellow green blue purple]
-echo $colors | where ($it | str ends-with 'e')
+$colors | where ($it | str ends-with 'e')
 ```
 
 In this example, we keep only values higher than `7`.
@@ -61,7 +61,7 @@ In this example, we keep only values higher than `7`.
 # This outputs the list [orange blue purple].
 
 let scores = [7 10 8 6 7]
-echo $scores | where $it > 7 # [10 8]
+$scores | where $it > 7 # [10 8]
 ```
 
 The [`reduce`](commands/reduce.md) command computes a single value from a list.
@@ -78,7 +78,7 @@ echo "total =" ($scores | math sum) # easier approach, same result
 
 echo "product =" ($scores | reduce --fold 1 { |it, acc| $acc * $it }) # 96
 
-echo $scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
+$scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
 ```
 
 ## Accessing the list
@@ -129,16 +129,16 @@ For example:
 
 ```bash
 # Do any color names end with "e"?
-echo $colors | any? ($it | str ends-with "e") # true
+$colors | any? ($it | str ends-with "e") # true
 
 # Is the length of any color name less than 3?
-echo $colors | any? ($it | str length) < 3 # false
+$colors | any? ($it | str length) < 3 # false
 
 # Are any scores greater than 7?
-echo $scores | any? $it > 7 # true
+$scores | any? $it > 7 # true
 
 # Are any scores odd?
-echo $scores | any? $it mod 2 == 1 # true
+$scores | any? $it mod 2 == 1 # true
 ```
 
 The [`all?`](commands/all.md) command determines if every item in a list
@@ -147,16 +147,16 @@ For example:
 
 ```bash
 # Do all color names end with "e"?
-echo $colors | all? ($it | str ends-with "e") # false
+$colors | all? ($it | str ends-with "e") # false
 
 # Is the length of all color names greater than or equal to 3?
-echo $colors | all? ($it | str length) >= 3 # true
+$colors | all? ($it | str length) >= 3 # true
 
 # Are all scores greater than 7?
-echo $scores | all? $it > 7 # false
+$scores | all? $it > 7 # false
 
 # Are all scores even?
-echo $scores | all? $it mod 2 == 0 # false
+$scores | all? $it mod 2 == 0 # false
 ```
 
 ## Converting the list
@@ -167,9 +167,9 @@ This can be called multiple times to flatten lists nested at any depth.
 For example:
 
 ```bash
-echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
+[1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 
-echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
+[[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
 The [`wrap`](commands/wrap.md) command converts a list to a table. Each list value will
