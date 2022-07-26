@@ -5,12 +5,12 @@
 
 目前，我们支持这些类型的钩子：
 
-- `pre_prompt` : 在命令提示显示之前被触发
-- `pre_execution` : 在行输入开始执行前触发
-- `env_change` : 当环境变量发生变化时被触发
+- `pre_prompt` : 在命令提示显示之前被触发；
+- `pre_execution` : 在行输入开始执行前被触发；
+- `env_change` : 当环境变量发生变化时被触发；
 
-为了更清楚地说明问题，我们可以将 Nushell 的执行周期进行分解。
-在 REPL 模式下，评估一行的步骤如下：
+为了更清晰地阐述，我们可以将 Nushell 的执行周期进行分解。
+在 REPL 模式下，评估一行（代码）的步骤如下：
 
 1. 检查 `pre_prompt` 钩子并运行它们；
 2. 检查 `env_change` 钩子并运行它们；
@@ -207,7 +207,7 @@ let-env config = ($env.config | upsert hooks.env_change.PWD {|config|
 
 ### 进入目录时自动激活相应环境
 
-这个将在进入一个目录后寻找 `test-env.nu` 并加载：
+以下代码将在进入一个目录（'/path/to/target/dir'）后寻找 `test-env.nu` 并加载，而在离开该目录的时候移除相关定义（除了 `PWD` 环境变量）：
 
 ```shell
 let-env config = ($env.config | upsert hooks.env_change.PWD {
