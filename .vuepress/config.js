@@ -98,7 +98,7 @@ module.exports = {
                 '/book/installation.md',
                 '/book/quick_tour.md',
                 '/book/moving_around.md',
-                '/book/thinking_in_nushell.md',
+                '/book/thinking_in_nu.md',
               ],
             },
             {
