@@ -160,7 +160,7 @@ module.exports = {
               ],
             },
             {
-              text: 'Advanced',
+              text: '(Not So) Advanced',
               link: '/book/advanced.md',
               collapsable: false,
               children: [
