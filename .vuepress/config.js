@@ -441,6 +441,7 @@ module.exports = {
                 'externs',
                 'custom_completions',
                 'coloring_and_theming',
+                'hooks.md',
               ],
             },
             {

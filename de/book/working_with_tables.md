@@ -170,7 +170,7 @@ wie man sie z.B. in einer .json Datei findet.
 
 ## Daten einer Tabelle ändern
 
-Zusätzlich zum Auswählen von Daten in einer Tabelle, kann auch deren Inhalt geändert werden. 
+Zusätzlich zum Auswählen von Daten in einer Tabelle, kann auch deren Inhalt geändert werden.
 Tabellen können kombiniert werden, neue Spalten hinzugefügt, oder Werte verändert werden.
 In Nu wird dadurch nicht die Tabelle direkt geändert, sondern jeder Befehl generiert eine neue Tabelle in der Pipeline.
 

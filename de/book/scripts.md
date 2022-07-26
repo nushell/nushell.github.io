@@ -60,7 +60,7 @@ Als nächstes führt Nushell der Reihe nach `b; c | d` aus analog den Regeln aus
 
 ## Skripte parametrisieren
 
-Skripte können optional einen speziellen "main" Befehl enthalten. 
+Skripte können optional einen speziellen "main" Befehl enthalten.
 `Main` wird ausgeführt nachdem der restliche Nu Code ausgeführt wurde und wird vor allem benutzt um Argumente an das Skript zu übergeben.
 Argumente werden an ein Skript übergeben indem sie nach dem Skriptnamen angefügt werden (`nu <script name> <script args>`).
 
@@ -81,7 +81,7 @@ def main [x: int] {
 
 ## Shebangs (`#!`)
 
-Auf Linux und macOS kann optional ein [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) eingesetzt werden, 
+Auf Linux und macOS kann optional ein [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) eingesetzt werden,
 um dem OS mitzuteilen, wie die Datei interpretiert werden will.
 Hier zum Beispiel in einer Datei mit dem Damen `myscript`:
 

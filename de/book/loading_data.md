@@ -33,7 +33,7 @@ Hier zum Beispiel was passiert, wenn eine json Datei geöffnet wird:
 ──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
-Ähnlich wie beim [`ls`](/book/commands/ls.md) Befehl, bekommen wir mehr als nur Text 
+Ähnlich wie beim [`ls`](/book/commands/ls.md) Befehl, bekommen wir mehr als nur Text
 (oder einen Stream von bytes) zurück, wenn wir einen Dateityp öffnen, den Nu versteht.
 Hier wurde ein "package.json" von einem JavaScript Projekt geöffnet. Nu erkennt den json text
 und parst die Daten in eine Tabelle.
@@ -103,7 +103,8 @@ Zuerst wird die Datei so geladen, dass jede Zeile für sich verarbeitet werden k
  2 │ Antonio | Vivaldi | Composer
 ───┴──────────────────────────────
 ```
-Dadurch wird bereits wieder eine Tabelle ausgegeben. Im nächsten Schritt sollen die Spalten 
+
+Dadurch wird bereits wieder eine Tabelle ausgegeben. Im nächsten Schritt sollen die Spalten
 in etwas brauchbares aufgeteilt werden.
 Dafür verwenden wir den [`split`](/book/commands/split.md) Befehl. Wie der Name schon verräht,
 kann damit ein String durch ein Trennzeichen aufgesplittet oder aufgetrennt werden.
@@ -135,8 +136,7 @@ Mit dem [`trim`](/book/commands/str_trim.md) Befehl wird dieser beseitigt:
 ───┴─────────┴─────────┴──────────
 ```
 
-
-Nicht schlecht. Der [`split`](/book/commands/split.md) Befehl gibt nicht nur brauchbare Daten zurück, 
+Nicht schlecht. Der [`split`](/book/commands/split.md) Befehl gibt nicht nur brauchbare Daten zurück,
 sondern bezeichnet auch noch standardmässig die Spaltennamen:
 
 ```
@@ -203,13 +203,14 @@ Das ist ok, denn mit dem `from` und seinem Unterbefehl `toml` können wir dies e
  package  │ [table 130 rows]
 ──────────┴───────────────────
 ```
+
 Der `from` Befehl kann für jedes strukturierte Datenformat, welches Nu versteht, verwendet werden,
 indem das Format als entsprechender Unterbefehl verwendet wird.
 
 ## Öffnen im raw Modus
 
 Auch wenn es hilfreich ist, beim Öffnen einer Datei direkt eine Tabelle zu erhalten,
-ist dies nicht immer gewünscht. Um den darunter liegenden Text zu erhalten, kann dem 
+ist dies nicht immer gewünscht. Um den darunter liegenden Text zu erhalten, kann dem
 [`open`](/book/commands/open.md) Befehl das Flag `--raw` mitgegeben werden:
 
 ```
@@ -223,7 +224,7 @@ license = "MIT"
 
 ## URLs abrufen
 
-Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`fetch`](/book/commands/fetch.md) 
+Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`fetch`](/book/commands/fetch.md)
 Befehl geladen werden. Dies wird den Inhalt der URL aus dem Netz abrufen und zurückgeben:
 
 ```

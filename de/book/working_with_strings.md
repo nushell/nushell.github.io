@@ -2,7 +2,7 @@
 
 Texte können ganz verschiedene Formen von Daten annehmen.
 Es können Dateinamen, Verzeichniss-Pfade, Spaltennamen und vieles mehr sein.
-Texte kommen so oft vor, dass Nushell diverse Wege bereitstellt um mit 
+Texte kommen so oft vor, dass Nushell diverse Wege bereitstellt um mit
 ihnen zu arbeiten. Der Anwendungsfall entscheidet, welches am besten passt.
 
 ## Texte in einfachen Anführungszeichen
@@ -20,9 +20,9 @@ womit sie ideal sind, um diverse Formen von Text zu enthalten.
 
 ## Texte in doppelten Anführungszeichen
 
-Für komplexere Formen, werden in Nushell Texte in doppelte 
+Für komplexere Formen, werden in Nushell Texte in doppelte
 Anführungszeichen gesetzt. Diese werden mit dem `'` Zeichen umgeben.
-Sie unterstützen die Verwendung von Escape-Zeichen mit der Verwendung 
+Sie unterstützen die Verwendung von Escape-Zeichen mit der Verwendung
 eines `\`.
 
 Zum Beispiel kann das Hallo Welt von vorhin geschrieben werden als,
@@ -59,7 +59,7 @@ als auch aus dem Ergebnis von laufenden Ausdrücken bestehen. Text Interpolation
 diese Texte zusammen zu einem neuen Text-Ergebnis.
 
 Die Text Interpolation wird mit `$" "` und `$" "` gebildet.
- 
+
 Soll zum Beispiel eine Person per Namen gegrüsst werden, deren Namen in einer Variablen steht,
 dann sieht das so aus:
 
@@ -69,7 +69,7 @@ dann sieht das so aus:
 greetings, Alice
 ```
 
-Ein Ausdruck in `()` wird zuerst fertig ausgeführt. Das Ergebnis wird zur Bildung 
+Ein Ausdruck in `()` wird zuerst fertig ausgeführt. Das Ergebnis wird zur Bildung
 des finalen Textes verwendet.
 
 Text Interpolationen funktionieren mit einfachen Anführungszeichen, `$' '`,
@@ -99,7 +99,6 @@ erstellt eine Tabelle mit den Elementen als Spalte.
 
 Schliesslich trennt der [`split chars`](/book/commands/split_chars.md) Befehl
 einen Text in seine Zeichen auf.
-
 
 ## Der `str` Befehl
 

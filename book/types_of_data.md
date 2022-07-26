@@ -84,6 +84,7 @@ The above is the same as if we had written:
 ```
 
 Cast from a string into another type by using the `into <type>` command
+
 ```
 > "1" | into int
 > "1.2" | into decimal
