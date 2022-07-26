@@ -1,4 +1,4 @@
-# Types of data
+# Types of Data
 
 Traditionally, Unix shell commands have communicated with each other using strings of text. One command would output text via standard out (often abbreviated 'stdout') and the other would read in text via standard in (or 'stdin'), allowing the two commands to communicate.
 
@@ -84,6 +84,7 @@ The above is the same as if we had written:
 ```
 
 Cast from a string into another type by using the `into <type>` command
+
 ```
 > "1" | into int
 > "1.2" | into decimal

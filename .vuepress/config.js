@@ -108,10 +108,10 @@ module.exports = {
               children: [
                 '/book/types_of_data.md',
                 '/book/loading_data.md',
+                '/book/pipelines.md',
                 '/book/working_with_strings.md',
                 '/book/working_with_lists.md',
                 '/book/working_with_tables.md',
-                '/book/pipeline.md',
                 '/book/command_reference.md',
               ],
             },
