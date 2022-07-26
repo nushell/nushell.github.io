@@ -18,7 +18,7 @@ Befehle wie [`ls`](/book/commands/ls.md) sind ebenfalls Inputs, da sie Daten aus
 Der zweite Befehl, `inc package.version --minor`, ist ein Filter. Filter verarbeiten die Daten auf eine bestimmte Weise.
 Vielleicht ändern sie Teile (wie der [`inc`](/book/commands/inc.md) im Beispiel), oder sie führen eine andere Operation aus wie Loggen.
 
-Der letzte Befehl, `save "Cargo_new.toml"`, ist ein Output (manchmal auch "sink" genannt). Ein Output nimmt die Daten aus der Pipeline entgegen und führt 
+Der letzte Befehl, `save "Cargo_new.toml"`, ist ein Output (manchmal auch "sink" genannt). Ein Output nimmt die Daten aus der Pipeline entgegen und führt
 eine abschliessende Operation daran aus. Im Beispiel wird der Inhalt der Pipeline als letzten Schritt in eine Datei gespeichert.
 Andere Arten von Output geben die Daten aus der Pipeline zum Beispiel auf der Kommandozeile aus.
 

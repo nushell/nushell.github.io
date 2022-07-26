@@ -38,7 +38,7 @@ echo $colors # [red yellow green purple]
 
 Um durch eine Liste zu iterieren, wird der [`each`](/book/commands/each.md) Befehl vewendet, dem ein [block](types_of_data.html#blocks)
 mit Nu-Code folgt, der auf jedes Element der Liste angewendet wird. Der Block Parameter (z.B. `|it|` in `{ |it| echo $it }`)
-entspricht normalerweise dem Element der Liste, was jedoch mit dem `--numbered` (`-n`) Flag geändert werden kann in die zwei 
+entspricht normalerweise dem Element der Liste, was jedoch mit dem `--numbered` (`-n`) Flag geändert werden kann in die zwei
 Parameter `index` und `item`. zum Beispiel:
 
 ```bash
@@ -85,10 +85,6 @@ echo "product =" ($scores | reduce --fold 1 { |it, acc| $acc * $it }) # 96
 
 echo $scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
 ```
-
-
-
-
 
 ## Auf Listen zugreifen
 
