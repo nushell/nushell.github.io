@@ -45,12 +45,14 @@ Most repositories contain `CONTRIBUTING.md` file with tips and details that shou
 Nushell itself is written in [Rust](https://www.rust-lang.org).
 However, you do not have to be a Rust programmer to help.
 If you know some web development, you can contribute to improving this website or the Nana project.
-If you wrote a cool script, plugin or integrated Nushell somewhere, we'd welcome your contribution to `nu_scripts` or Awesome Nu.
-(You can contribute to Nushell just by using Nushell!)
-Discovering bugs with reproduction steps and filing GitHub issues for them is a valuable help, too!
+[Dataframes](dataframes.md) can use your data processing expertise.
 
-Contributing to this book does not require any special skills aside from a basic familiarity with Markdown.
+If you wrote a cool script, plugin or integrated Nushell somewhere, we'd welcome your contribution to `nu_scripts` or Awesome Nu.
+Discovering bugs with reproduction steps and filing GitHub issues for them is a valuable help, too!
+You can contribute to Nushell just by using Nushell!
+
 Since Nushell evolves fast, this book is in a constant need of updating.
+Contributing to this book does not require any special skills aside from a basic familiarity with Markdown.
 Furthermore, you can consider translating parts of it to your language.
 
 ## Community
