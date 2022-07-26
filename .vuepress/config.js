@@ -86,30 +86,38 @@ module.exports = {
         sidebar: {
           '/book/': [
             {
+              text: 'Introduction',
+              link: '/book/README.md',
+              collapsable: false,
+            },
+            {
               text: 'Getting Started',
+              link: '/book/getting_started.md',
               collapsable: false,
               children: [
-                '/book/README.md',
                 '/book/installation.md',
-                '/book/thinking_in_nushell.md',
+                '/book/quick_tour.md',
                 '/book/moving_around.md',
+                '/book/thinking_in_nu.md',
               ],
             },
             {
               text: 'Nu Fundamentals',
+              link: '/book/nu_fundamentals.md',
               collapsable: false,
               children: [
                 '/book/types_of_data.md',
                 '/book/loading_data.md',
+                '/book/pipelines.md',
                 '/book/working_with_strings.md',
                 '/book/working_with_lists.md',
                 '/book/working_with_tables.md',
-                '/book/pipeline.md',
                 '/book/command_reference.md',
               ],
             },
             {
               text: 'Programming in Nu',
+              link: '/book/programming_in_nu.md',
               collapsable: false,
               children: [
                 '/book/custom_commands.md',
@@ -123,6 +131,7 @@ module.exports = {
             },
             {
               text: 'Nu as a Shell',
+              link: '/book/nu_as_a_shell.md',
               collapsable: false,
               children: [
                 '/book/configuration.md',
@@ -140,6 +149,7 @@ module.exports = {
             },
             {
               text: 'Coming to Nu',
+              link: '/book/coming_to_nu.md',
               collapsable: false,
               children: [
                 '/book/coming_from_bash.md',
@@ -150,7 +160,8 @@ module.exports = {
               ],
             },
             {
-              text: 'Advanced',
+              text: '(Not So) Advanced',
+              link: '/book/advanced.md',
               collapsable: false,
               children: [
                 '/book/dataframes.md',

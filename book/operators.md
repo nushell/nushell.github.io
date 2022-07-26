@@ -35,7 +35,7 @@ Nushell supports the following operators for common math, logic, and string oper
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
 
-## Order of operations
+## Order of Operations
 
 Math operations are evaluated in the follow order (from highest precedence to lowest):
 
@@ -47,6 +47,27 @@ Math operations are evaluated in the follow order (from highest precedence to lo
 > 3 * (1 + 2)
 9
 ```
+
+## Types
+
+Not all operations make sense for all data types.
+If you attempt to perform an operation on non-compatible data types, you will be met with an error message that should explain what went wrong:
+```
+> "spam" - 1
+Error: nu::parser::unsupported_operation (link)
+
+  × Types mismatched for operation.
+   ╭─[entry #49:1:1]
+ 1 │ "spam" - 1
+   · ───┬── ┬ ┬
+   ·    │   │ ╰── int
+   ·    │   ╰── doesn't support these values.
+   ·    ╰── string
+   ╰────
+  help: Change string or int to be the right types and try again.
+```
+
+The rules might sometimes feel a bit strict, but on the other hand there should be less unexpected side effects.
 
 ## Regular Expression / string-contains Operators
 

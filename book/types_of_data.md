@@ -1,4 +1,4 @@
-# Types of data
+# Types of Data
 
 Traditionally, Unix shell commands have communicated with each other using strings of text. One command would output text via standard out (often abbreviated 'stdout') and the other would read in text via standard in (or 'stdin'), allowing the two commands to communicate.
 

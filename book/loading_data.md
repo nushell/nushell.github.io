@@ -64,6 +64,46 @@ We're shown the contents of the file.
 
 Below the surface, what Nu sees in these text files is one large string. Next, we'll talk about how to work with these strings to get the data we need out of them.
 
+## NUON
+
+Nushell Object Notation (NUON) aims to be for Nushell what JavaScript Object Notation (JSON) is for JavaScript.
+That is, NUON code is a valid Nushell code that describes some data structure.
+For example, this is a valid NUON (example from the [default configuration file](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu)):
+
+```
+{
+  menus: [
+    # Configuration for default nushell menus
+    # Note the lack of souce parameter
+    {
+      name: completion_menu
+      only_buffer_difference: false
+      marker: "| "
+      type: {
+          layout: columnar
+          columns: 4
+          col_width: 20   # Optional value. If missing all the screen width is used to calculate column width
+          col_padding: 2
+      }
+      style: {
+          text: green
+          selected_text: green_reverse
+          description_text: yellow
+      }
+    }
+  ]
+}
+```
+
+You might notice it is quite similar to JSON, and you're right.
+**NUON is a superset of JSON!**
+That is, any JSON code is a valid NUON code, therefore a valid Nushell code.
+Compared to JSON, NUON is more "human-friendly".
+For example, comments are allowed and commas are not required.
+
+One limitation of NUON currently is that it cannot represent all of the Nushell [datatypes](types_of_data.md).
+Most notably, NUON does not allow to serialize blocks.
+
 ## Handling Strings
 
 An important part of working with data coming from outside Nu is that it's not always in a format that Nu understands. Often this data is given to us as a string.
