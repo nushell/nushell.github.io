@@ -1,6 +1,6 @@
 ---
 title: use
-version: 0.65.1
+version: 0.66.1
 usage: |
   Use definitions from a module
 ---

@@ -1,6 +1,6 @@
 ---
 title: detect columns
-version: 0.65.1
+version: 0.66.1
 usage: |
   Attempt to automatically split text into multiple columns
 ---

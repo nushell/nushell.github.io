@@ -1,6 +1,6 @@
 ---
 title: transpose
-version: 0.65.1
+version: 0.66.1
 usage: |
   Transposes the table contents so rows become columns and columns become rows.
 ---

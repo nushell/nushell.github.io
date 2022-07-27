@@ -1,6 +1,6 @@
 ---
 title: any?
-version: 0.65.1
+version: 0.66.1
 usage: |
   Tests if any element of the input matches a predicate.
 ---

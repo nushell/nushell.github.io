@@ -1,6 +1,6 @@
 ---
 title: debug
-version: 0.65.1
+version: 0.66.1
 usage: |
   Debug print the value(s) piped in.
 ---

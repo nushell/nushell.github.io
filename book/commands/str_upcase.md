@@ -1,6 +1,6 @@
 ---
 title: str upcase
-version: 0.65.1
+version: 0.66.1
 usage: |
   Make text uppercase
 ---

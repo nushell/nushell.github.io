@@ -1,6 +1,6 @@
 ---
 title: join
-version: 0.65.1
+version: 0.66.1
 usage: |
   Joins with another table or derived table. Default join type is inner
 ---

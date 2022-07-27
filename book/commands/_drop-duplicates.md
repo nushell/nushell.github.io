@@ -1,6 +1,6 @@
 ---
 title: drop-duplicates
-version: 0.65.1
+version: 0.66.1
 usage: |
   Drops duplicate values in dataframe
 ---

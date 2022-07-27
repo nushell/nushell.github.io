@@ -1,6 +1,6 @@
 ---
 title: with-column
-version: 0.65.1
+version: 0.66.1
 usage: |
   Adds a series to the dataframe
 ---

@@ -1,6 +1,6 @@
 ---
 title: compact
-version: 0.65.1
+version: 0.66.1
 usage: |
   Creates a table with non-empty rows.
 ---

@@ -1,6 +1,6 @@
 ---
 title: str collect
-version: 0.65.1
+version: 0.66.1
 usage: |
   Concatenate multiple strings into a single string, with an optional separator between each
 ---

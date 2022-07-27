@@ -1,6 +1,6 @@
 ---
 title: decode base64
-version: 0.65.1
+version: 0.66.1
 usage: |
   base64 decode a value
 ---

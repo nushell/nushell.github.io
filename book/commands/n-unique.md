@@ -1,6 +1,6 @@
 ---
 title: n-unique
-version: 0.65.1
+version: 0.66.1
 usage: |
   creates a n-unique expression
 ---

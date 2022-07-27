@@ -1,6 +1,6 @@
 ---
 title: get-year
-version: 0.65.1
+version: 0.66.1
 usage: |
   Gets year from date
 ---

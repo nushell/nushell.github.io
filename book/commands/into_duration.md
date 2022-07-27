@@ -1,6 +1,6 @@
 ---
 title: into duration
-version: 0.65.1
+version: 0.66.1
 usage: |
   Convert value to duration
 ---
@@ -17,6 +17,10 @@ usage: |
 
  -  `...rest`: column paths to convert to duration (for table input)
 
+## Notes
+```text
+into duration does not take leap years into account and every month is calculated with 30 days
+```
 ## Examples
 
 Convert string to duration in table

@@ -1,6 +1,6 @@
 ---
 title: last
-version: 0.65.1
+version: 0.66.1
 usage: |
   Show only the last number of rows.
 ---

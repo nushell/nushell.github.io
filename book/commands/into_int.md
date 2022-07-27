@@ -1,6 +1,6 @@
 ---
 title: into int
-version: 0.65.1
+version: 0.66.1
 usage: |
   Convert value to integer
 ---
@@ -64,4 +64,19 @@ Convert to integer from binary
 Convert to integer from hex
 ```shell
 > 'FF' |  into int -r 16
+```
+
+Convert octal string to integer
+```shell
+> '0o10132' | into int
+```
+
+Convert 0 padded string to integer
+```shell
+> '0010132' | into int
+```
+
+Convert 0 padded string to integer with radix
+```shell
+> '0010132' | into int -r 8
 ```

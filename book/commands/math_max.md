@@ -1,6 +1,6 @@
 ---
 title: math max
-version: 0.65.1
+version: 0.66.1
 usage: |
   Finds the maximum within a list of numbers or tables
 ---

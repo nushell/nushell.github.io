@@ -1,6 +1,6 @@
 ---
 title: export def-env
-version: 0.65.1
+version: 0.66.1
 usage: |
   Define a custom command that participates in the environment and export it from a module
 ---

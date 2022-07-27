@@ -1,6 +1,6 @@
 ---
 title: shape
-version: 0.65.1
+version: 0.66.1
 usage: |
   Shows column and row size for a dataframe
 ---

@@ -1,8 +1,8 @@
 ---
-title: db
-version: 0.64.0
+title: bytes
+version: 0.66.1
 usage: |
-  Database commands
+  Various commands for working with byte data
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -11,4 +11,4 @@ usage: |
 
 ## Signature
 
-```> db ```
+```> bytes ```

@@ -1,6 +1,6 @@
 ---
 title: keybindings default
-version: 0.65.1
+version: 0.66.1
 usage: |
   List default keybindings
 ---

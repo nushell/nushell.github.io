@@ -1,6 +1,6 @@
 ---
 title: let
-version: 0.65.1
+version: 0.66.1
 usage: |
   Create a variable and give it a value.
 ---

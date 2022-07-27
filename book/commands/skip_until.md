@@ -1,6 +1,6 @@
 ---
 title: skip until
-version: 0.65.1
+version: 0.66.1
 usage: |
   Skip elements of the input until a predicate is true.
 ---

@@ -1,6 +1,6 @@
 ---
 title: benchmark
-version: 0.65.1
+version: 0.66.1
 usage: |
   Time the running time of a block
 ---

@@ -1,6 +1,6 @@
 ---
 title: slice
-version: 0.65.1
+version: 0.66.1
 usage: |
   Creates new dataframe from a slice of rows
 ---

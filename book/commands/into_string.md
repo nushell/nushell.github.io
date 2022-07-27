@@ -1,6 +1,6 @@
 ---
 title: into string
-version: 0.65.1
+version: 0.66.1
 usage: |
   Convert value to string
 ---
@@ -19,6 +19,11 @@ usage: |
  -  `--decimals {int}`: decimal digits to which to round
 
 ## Examples
+
+convert integer to string and append three decimal places
+```shell
+> 5 | into string -d 3
+```
 
 convert decimal to string and round to nearest integer
 ```shell

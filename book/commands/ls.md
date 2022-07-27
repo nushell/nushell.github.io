@@ -1,6 +1,6 @@
 ---
 title: ls
-version: 0.65.1
+version: 0.66.1
 usage: |
   List the files in a directory.
 ---
@@ -11,16 +11,17 @@ usage: |
 
 ## Signature
 
-```> ls (pattern) --all --long --short-names --full-paths --du```
+```> ls ...pattern(s) --all --long --short-names --full-paths --du --directory```
 
 ## Parameters
 
- -  `pattern`: the glob pattern to use
+ -  `...pattern(s)`: the glob pattern(s) to use
  -  `--all`: Show hidden files
  -  `--long`: List all available columns for each entry
  -  `--short-names`: Only print the file names and not the path
  -  `--full-paths`: display paths as absolute paths
  -  `--du`: Display the apparent directory size in place of the directory metadata size
+ -  `--directory`: List the specified directory itself instead of its contents
 
 ## Examples
 
@@ -44,6 +45,11 @@ List all rust files
 > ls *.rs
 ```
 
+List all rust files and all toml files
+```shell
+> ls *.rs *.toml
+```
+
 List all files and directories whose name do not contain 'bar'
 ```shell
 > ls -s | where name !~ bar
@@ -57,4 +63,9 @@ List all dirs in your home directory
 List all dirs in your home directory which have not been modified in 7 days
 ```shell
 > ls -s ~ | where type == dir && modified < ((date now) - 7day)
+```
+
+List given paths, show directories themselves
+```shell
+> ['/path/to/directory' '/path/to/file'] | each { |it| ls -D $it } | flatten
 ```

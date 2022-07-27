@@ -1,6 +1,6 @@
 ---
 title: schema
-version: 0.65.1
+version: 0.66.1
 usage: |
   Show sqlite database information, including its schema.
 ---

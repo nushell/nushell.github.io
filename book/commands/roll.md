@@ -1,6 +1,6 @@
 ---
 title: roll
-version: 0.65.1
+version: 0.66.1
 usage: |
   Rolling commands for tables
 ---

@@ -1,6 +1,6 @@
 ---
 title: path relative-to
-version: 0.65.1
+version: 0.66.1
 usage: |
   Get a path as relative to another path.
 ---

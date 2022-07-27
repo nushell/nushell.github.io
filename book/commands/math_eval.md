@@ -1,6 +1,6 @@
 ---
 title: math eval
-version: 0.65.1
+version: 0.66.1
 usage: |
   Evaluate a math expression into a number
 ---

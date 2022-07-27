@@ -1,6 +1,6 @@
 ---
 title: str replace
-version: 0.65.1
+version: 0.66.1
 usage: |
   Find and replace text
 ---

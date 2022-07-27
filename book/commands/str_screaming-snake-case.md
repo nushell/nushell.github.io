@@ -1,6 +1,6 @@
 ---
 title: str screaming-snake-case
-version: 0.65.1
+version: 0.66.1
 usage: |
   Convert a string to SCREAMING_SNAKE_CASE
 ---

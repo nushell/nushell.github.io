@@ -1,6 +1,6 @@
 ---
 title: sort-by
-version: 0.65.1
+version: 0.66.1
 usage: |
   sorts a lazy dataframe based on expression(s)
 ---

@@ -1,6 +1,6 @@
 ---
 title: export
-version: 0.65.1
+version: 0.66.1
 usage: |
   Export custom commands or environment variables from a module.
 ---

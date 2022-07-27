@@ -1,6 +1,6 @@
 ---
 title: into lazy
-version: 0.65.1
+version: 0.66.1
 usage: |
   Converts a dataframe into a lazy dataframe
 ---

@@ -1,6 +1,6 @@
 ---
 title: encode base64
-version: 0.65.1
+version: 0.66.1
 usage: |
   base64 encode a value
 ---

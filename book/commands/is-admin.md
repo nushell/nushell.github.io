@@ -1,6 +1,6 @@
 ---
 title: is-admin
-version: 0.65.1
+version: 0.66.1
 usage: |
   Check if nushell is running with administrator or root privileges
 ---

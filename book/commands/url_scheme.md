@@ -1,6 +1,6 @@
 ---
 title: url scheme
-version: 0.65.1
+version: 0.66.1
 usage: |
   Get the scheme (e.g. http, file) of a URL
 ---

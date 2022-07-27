@@ -1,6 +1,6 @@
 ---
 title: where
-version: 0.65.1
+version: 0.66.1
 usage: |
   Filter values based on a condition.
 ---
@@ -11,11 +11,12 @@ usage: |
 
 ## Signature
 
-```> where (cond)```
+```> where (cond) --block```
 
 ## Parameters
 
  -  `cond`: condition
+ -  `--block {block}`: use where with a block or variable instead
 
 ## Examples
 
@@ -37,4 +38,9 @@ List all files with names that contain "Car"
 List all files that were modified in the last two weeks
 ```shell
 > ls | where modified >= (date now) - 2wk
+```
+
+Get all numbers above 3 with an existing block condition
+```shell
+> let a = {$in > 3}; [1, 2, 5, 6] | where -b $a
 ```
