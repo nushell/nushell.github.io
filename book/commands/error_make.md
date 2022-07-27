@@ -1,6 +1,6 @@
 ---
 title: error make
-version: 0.65.1
+version: 0.66.1
 usage: |
   Create an error.
 ---
@@ -11,11 +11,12 @@ usage: |
 
 ## Signature
 
-```> error make (error_struct)```
+```> error make (error_struct) --unspanned```
 
 ## Parameters
 
  -  `error_struct`: the error to create
+ -  `--unspanned`: remove the origin label from the error
 
 ## Examples
 

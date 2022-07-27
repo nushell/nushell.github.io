@@ -1,6 +1,6 @@
 ---
 title: open-df
-version: 0.65.1
+version: 0.66.1
 usage: |
   Opens csv, json or parquet file to create dataframe
 ---

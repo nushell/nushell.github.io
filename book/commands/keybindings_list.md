@@ -1,6 +1,6 @@
 ---
 title: keybindings list
-version: 0.65.1
+version: 0.66.1
 usage: |
   List available options that can be used to create keybindings
 ---

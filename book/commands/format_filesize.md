@@ -1,6 +1,6 @@
 ---
 title: format filesize
-version: 0.65.1
+version: 0.66.1
 usage: |
   Converts a column of filesizes to some specified format
 ---

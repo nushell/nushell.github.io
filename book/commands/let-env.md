@@ -1,6 +1,6 @@
 ---
 title: let-env
-version: 0.65.1
+version: 0.66.1
 usage: |
   Create an environment variable and give it a value.
 ---

@@ -1,6 +1,6 @@
 ---
 title: path split
-version: 0.65.1
+version: 0.66.1
 usage: |
   Split a path into parts by a separator.
 ---

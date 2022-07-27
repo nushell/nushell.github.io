@@ -1,6 +1,6 @@
 ---
 title: replace
-version: 0.65.1
+version: 0.66.1
 usage: |
   Replace the leftmost (sub)string by a regex pattern
 ---

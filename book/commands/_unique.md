@@ -1,6 +1,6 @@
 ---
 title: unique
-version: 0.65.1
+version: 0.66.1
 usage: |
   Returns unique values from a dataframe
 ---

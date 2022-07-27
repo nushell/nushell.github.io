@@ -1,6 +1,6 @@
 ---
 title: field
-version: 0.65.1
+version: 0.66.1
 usage: |
   Creates column expression for database
 ---

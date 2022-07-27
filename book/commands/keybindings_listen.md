@@ -1,6 +1,6 @@
 ---
 title: keybindings listen
-version: 0.65.1
+version: 0.66.1
 usage: |
   Get input from the user.
 ---

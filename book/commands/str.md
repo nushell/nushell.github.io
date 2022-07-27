@@ -1,6 +1,6 @@
 ---
 title: str
-version: 0.65.1
+version: 0.66.1
 usage: |
   Various commands for working with string data
 ---

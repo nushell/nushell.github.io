@@ -1,6 +1,6 @@
 ---
 title: overlay remove
-version: 0.65.1
+version: 0.66.1
 usage: |
   Remove an active overlay
 ---
@@ -11,12 +11,13 @@ usage: |
 
 ## Signature
 
-```> overlay remove (name) --keep-custom```
+```> overlay remove (name) --keep-custom --keep-env```
 
 ## Parameters
 
  -  `name`: Overlay to remove
- -  `--keep-custom`: Keep newly added symbols within the next activated overlay
+ -  `--keep-custom`: Keep all newly added symbols within the next activated overlay
+ -  `--keep-env {list<string>}`: List of environment variables to keep from the removed overlay
 
 ## Notes
 ```text
@@ -44,4 +45,11 @@ Remove the last activated overlay
 > module spam { export env FOO { "foo" } }
     overlay add spam
     overlay remove
+```
+
+Keep the current working directory when removing an overlay
+```shell
+> overlay new spam
+    cd some-dir
+    overlay remove --keep-env [ PWD ] spam
 ```

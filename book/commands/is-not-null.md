@@ -1,6 +1,6 @@
 ---
 title: is-not-null
-version: 0.65.1
+version: 0.66.1
 usage: |
   creates a is not null expression
 ---

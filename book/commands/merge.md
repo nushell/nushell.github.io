@@ -1,6 +1,6 @@
 ---
 title: merge
-version: 0.65.1
+version: 0.66.1
 usage: |
   Merge a table into an input table
 ---

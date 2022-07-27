@@ -1,6 +1,6 @@
 ---
 title: str snake-case
-version: 0.65.1
+version: 0.66.1
 usage: |
   Convert a string to snake_case
 ---

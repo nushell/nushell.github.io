@@ -1,6 +1,6 @@
 ---
 title: path type
-version: 0.65.1
+version: 0.66.1
 usage: |
   Get the type of the object a path refers to (e.g., file, dir, symlink)
 ---

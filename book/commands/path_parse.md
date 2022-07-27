@@ -1,6 +1,6 @@
 ---
 title: path parse
-version: 0.65.1
+version: 0.66.1
 usage: |
   Convert a path into structured data.
 ---

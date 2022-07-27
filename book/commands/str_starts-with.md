@@ -1,6 +1,6 @@
 ---
 title: str starts-with
-version: 0.65.1
+version: 0.66.1
 usage: |
   Check if string starts with a pattern
 ---

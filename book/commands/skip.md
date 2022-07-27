@@ -1,6 +1,6 @@
 ---
 title: skip
-version: 0.65.1
+version: 0.66.1
 usage: |
   Skip the first n elements of the input.
 ---

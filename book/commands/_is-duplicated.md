@@ -1,6 +1,6 @@
 ---
 title: is-duplicated
-version: 0.65.1
+version: 0.66.1
 usage: |
   Creates mask indicating duplicated values
 ---

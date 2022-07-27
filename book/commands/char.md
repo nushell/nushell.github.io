@@ -1,6 +1,6 @@
 ---
 title: char
-version: 0.65.1
+version: 0.66.1
 usage: |
   Output special characters (e.g., 'newline').
 ---

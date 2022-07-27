@@ -1,6 +1,6 @@
 ---
 title: mv
-version: 0.65.1
+version: 0.66.1
 usage: |
   Move files or directories.
 ---
@@ -11,12 +11,12 @@ usage: |
 
 ## Signature
 
-```> mv (source) (destination) --verbose --interactive```
+```> mv (destination) ...source(s) --verbose --interactive```
 
 ## Parameters
 
- -  `source`: the location to move files/directories from
  -  `destination`: the location to move files/directories to
+ -  `...source(s)`: the location(s) to move files/directories from
  -  `--verbose`: make mv to be verbose, showing files been moved.
  -  `--interactive`: ask user to confirm action
 

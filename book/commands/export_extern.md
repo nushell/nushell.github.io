@@ -1,6 +1,6 @@
 ---
 title: export extern
-version: 0.65.1
+version: 0.66.1
 usage: |
   Define an extern and export it from a module
 ---

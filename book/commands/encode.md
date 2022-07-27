@@ -1,6 +1,6 @@
 ---
 title: encode
-version: 0.65.1
+version: 0.66.1
 usage: |
   Encode an UTF-8 string into other kind of representations.
 ---

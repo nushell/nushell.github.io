@@ -1,6 +1,6 @@
 ---
 title: export alias
-version: 0.65.1
+version: 0.66.1
 usage: |
   Define an alias and export it from a module
 ---

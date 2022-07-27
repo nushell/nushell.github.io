@@ -1,6 +1,6 @@
 ---
 title: sys
-version: 0.65.1
+version: 0.66.1
 usage: |
   View information about the system.
 ---

@@ -1,6 +1,6 @@
 ---
 title: from yaml
-version: 0.65.1
+version: 0.66.1
 usage: |
   Parse text as .yaml/.yml and create table.
 ---

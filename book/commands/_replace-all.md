@@ -1,6 +1,6 @@
 ---
 title: replace-all
-version: 0.65.1
+version: 0.66.1
 usage: |
   Replace all (sub)strings by a regex pattern
 ---

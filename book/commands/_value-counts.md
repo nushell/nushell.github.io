@@ -1,6 +1,6 @@
 ---
 title: value-counts
-version: 0.65.1
+version: 0.66.1
 usage: |
   Returns a dataframe with the counts for unique values in series
 ---

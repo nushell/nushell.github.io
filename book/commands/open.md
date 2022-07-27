@@ -1,6 +1,6 @@
 ---
 title: open
-version: 0.65.1
+version: 0.66.1
 usage: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 ---

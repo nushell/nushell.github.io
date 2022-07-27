@@ -1,6 +1,6 @@
 ---
 title: rename
-version: 0.65.1
+version: 0.66.1
 usage: |
   Rename a dataframe column
 ---

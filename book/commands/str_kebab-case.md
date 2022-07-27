@@ -1,6 +1,6 @@
 ---
 title: str kebab-case
-version: 0.65.1
+version: 0.66.1
 usage: |
   Convert a string to kebab-case
 ---

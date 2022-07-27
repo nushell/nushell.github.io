@@ -1,6 +1,6 @@
 ---
 title: when
-version: 0.65.1
+version: 0.66.1
 usage: |
   Creates and modifies a when expression
 ---

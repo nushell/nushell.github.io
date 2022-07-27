@@ -1,6 +1,6 @@
 ---
 title: enter
-version: 0.65.1
+version: 0.66.1
 usage: |
   Enters a new shell at the given path.
 ---
