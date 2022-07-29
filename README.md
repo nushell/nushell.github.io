@@ -44,6 +44,8 @@ $ brew install nushell
 $ winget install nushell
 ```
 
+After installing, launch Nu by typing `nu`.
+
 ## Community
 
 Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!

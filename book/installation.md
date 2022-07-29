@@ -20,6 +20,8 @@ For Windows:
 - [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 
+The main Nushell binary is named `nu` (or `nu.exe` on Windows). After installation, you can launch it by typing `nu`.
+
 ## Build from source
 
 You can also build Nu from source. First, you will need to set up the Rust toolchain and its dependencies.
