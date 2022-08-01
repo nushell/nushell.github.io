@@ -247,6 +247,7 @@ module.exports = {
                 'plugins',
                 'von_bash_kommend',
                 'command_reference',
+                'coloring_and_theming',
               ],
             },
           ],

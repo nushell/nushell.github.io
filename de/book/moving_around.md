@@ -24,20 +24,20 @@ Hier werden alle ".md" Dateien ausgegeben, die "in jedem tiefer liegenden Verzei
 
 @[code](@snippets/moving_around/cd_example.sh)
 
-Um vom aktuellen Verzeichnis in ein neues zu gelangen, wird der `cd` Befehl verwendet. Wie in jeder anderen Shell, kann entweder der Name des Verzeichnisses angeben, oder mit `..` ein Verzeichnis hochgesprungen werden.
+Um vom aktuellen Verzeichnis in ein neues zu gelangen, wird der [`cd`](/book/commands/cd.md) Befehl verwendet. Wie in jeder anderen Shell, kann entweder der Name des Verzeichnisses angeben, oder mit `..` ein Verzeichnis hochgesprungen werden.
 
-Es kann jedoch auch das Verzeichnis gewechselt werden ohne `cd` angeben zu müssen, indem einfach der neue Pfad angegeben wird:
+Es kann jedoch auch das Verzeichnis gewechselt werden ohne [`cd`](/book/commands/cd.md) angeben zu müssen, indem einfach der neue Pfad angegeben wird:
 
 @[code](@snippets/moving_around/cd_without_command_example.sh)
 
-**Hinweis** wenn mit `cd` das Verzeichnis gewechselt wird, ändert sich die `PWD` Umgebungsvariable. Das heisst der Wechsel bleibt für den aktuellen Block bestehen. Beim Verlassen des Blocks, wird wieder ins vorherige Verzeichnis gewechselt.
+**Hinweis** wenn mit [`cd`](/book/commands/cd.md) das Verzeichnis gewechselt wird, ändert sich die `PWD` Umgebungsvariable. Das heisst der Wechsel bleibt für den aktuellen Block bestehen. Beim Verlassen des Blocks, wird wieder ins vorherige Verzeichnis gewechselt.
 Mehr zu dieser Funktionsweise findet sich im Kapitel [environment chapter](./environment.md).
 
 ## Dateisystem Befehle
 
 Nu stellt auch einige Dateisystem Basis-Befehle zur Verfügung, die auf allen Platformen laufen.
 
-Ein Objekt von einem Ort an einen anderen verschieben mit `mv`:
+Ein Objekt von einem Ort an einen anderen verschieben mit [`mv`](/book/commands/mv.md):
 
 @[code](@snippets/moving_around/mv_example.sh)
 
@@ -51,6 +51,6 @@ Ein Objekt löschen:
 
 Diese drei Befehle können auch von der glob Fähigkeit profitieren, wie beim [`ls`](/book/commands/ls.md).
 
-Zu guter Letzt wird ein neues Verzeichnis angelegt mit dem `mkdir` Befehl:
+Zu guter Letzt wird ein neues Verzeichnis angelegt mit dem [`mkdir`](/book/commands/mkdir.md) Befehl:
 
 @[code](@snippets/moving_around/mkdir_example.sh)
