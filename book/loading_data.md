@@ -45,6 +45,7 @@ Nu currently supports the following formats for loading data directly into table
 - json
 - nuon
 - ods
+- SQLite databases
 - ssv
 - toml
 - tsv
@@ -234,6 +235,28 @@ authors = ["Yehuda Katz <wycats@gmail.com>", "Jonathan Turner <jonathan.d.turner
 description = "A shell for the GitHub era"
 license = "MIT"
 ```
+
+## SQLite
+
+SQLite databases are automatically detected by [`open`](commands/open.md), no matter what their file extension is. You can open a whole database:
+
+```
+> open foo.db
+```
+
+Or [`get`](commands/get.md) a specific table:
+
+```
+> open foo.db | get some_table
+```
+
+Or run any SQL query you like:
+
+```
+> open foo.db | query db "select * from some_table"
+```
+
+(Note: some older versions of Nu use `into db | query` instead of `query db` )
 
 ## Fetching URLs
 
