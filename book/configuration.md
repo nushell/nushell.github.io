@@ -10,7 +10,8 @@ Paths to these files can be found by calling `echo $nu.env-path` and `echo $nu.c
 
 _(You can think of the Nushell config loading sequence as executing two [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) lines on startup: `source /path/to/env.nu` and `source /path/to/config.nu`. Therefore, using `env.nu` for environment and `config.nu` for other config is just a convention.)_
 
-When you launch Nushell without these files set up, Nushell will prompt you to download the [`default env.nu`](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_env.nu) and [`default config.nu`](https://github.com/nushell/nushell/blob/main/docs/sample_config/default_config.nu).
+When you launch Nushell without these files set up, Nushell will prompt you to download the [`default env.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_env.nu) and [`default config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_config.nu).
+
 You can browse the default files for default values of environment variables and a list of all configurable settings.
 
 ### Configuring `$env.config`
