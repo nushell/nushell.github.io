@@ -4,7 +4,7 @@
 
 Nushell nutzt ein Konfigurationssystem, das ein Nushell-Skript beim Start ausführt. Die Konfigurationsdatei wird für Nushell `config.nu` genannt. Der Pfad zu dieser Konfigurationsdatei kann durch den Aufruf von `echo $nu.config-path` herausgefunden werden. Es handelt sich dabei um eine Datei, die abgearbeitet wird und in jedem Schritt Definitionen, Umgebungsvariablen und mehr zum globalen Namespace hinzufügt.
 
-Ein Beispiel für eine Nushell `config.nu` kann [hier](https://github.com/nushell/nushell/blob/main/src/default_config.nu) in unserem Repository gefunden werden.
+Ein Beispiel für eine Nushell `config.nu` kann [hier](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_config.nu) in unserem Repository gefunden werden.
 
 ### `$config` konfigurieren
 
