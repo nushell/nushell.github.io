@@ -56,7 +56,7 @@ If we try to run the external `cat` on a file that doesn't exist, we can see wha
 
 ## Raw streams
 
-Both stdout and stderr are represented as "raw streams" inside of Nushell. These are streams that are streams of bytes rather than structured streams, which are what internal Nushell commands use.
+Both stdout and stderr are represented as "raw streams" inside of Nushell. These are streams of bytes rather than structured data, which are what internal Nushell commands use.
 
 Because streams of bytes can be difficult to work with, especially given how common it is to use output as it was text data, Nushell attempts to convert raw streams into text data. This allows other commands to pull on the output of external commands and receive strings they can further process.
 
