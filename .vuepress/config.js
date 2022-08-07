@@ -203,6 +203,7 @@ module.exports = {
                 'git',
                 'parsing_git_log',
                 'http',
+                'direnv',
                 'misc',
               ],
             },
