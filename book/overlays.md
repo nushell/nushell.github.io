@@ -132,7 +132,6 @@ The solution can be to create a new empty overlay that would be used just for re
 
 The `eggs` command is added into `scratchpad` while keeping `spam` intact.
 
-_Coming in version 0.64:_
 To make it less verbose, you can use the [`overlay new`](commands/overlay_new.md) command:
 
 ```
@@ -142,8 +141,41 @@ To make it less verbose, you can use the [`overlay new`](commands/overlay_new.md
 
 (scratchpad)> def eggs [] { "eggs" }
 ```
-
 :::
+
+## Prefixed Overlays
+
+The `overlay add` command would take all commands and aliases from the module and put them directly into the current namespace.
+However, you might want to keep them as subcommands behind the module's name.
+That's what `--prefix` is for:
+```
+(zero)> module spam {
+    export def foo [] { "foo" }
+}
+
+(zero)> overlay add --prefix spam
+
+(spam)> spam foo
+foo
+```
+
+## Rename an Overlay
+
+You can change the name of the added overlay with the `as` keyword:
+```
+(zero)> module spam { export def foo [] { "foo" } }
+
+(zero)> overlay add spam as eggs
+
+(eggs)> foo
+foo
+
+(eggs)> overlay remove eggs
+
+(spam)>
+```
+
+This can be useful if you have a generic script name, such as virtualenv's `activate.nu` but you want some more descriptive name for your overlay.
 
 ## Preserving Definitions
 
