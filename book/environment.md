@@ -200,12 +200,12 @@ _(Important! The environment conversion string -> value happens **after** the en
 
 ## Removing environment variables
 
-You can remove an environment variable only if it was set in the current scope via [`hide`](commands/hide.html):
+You can remove an environment variable only if it was set in the current scope via [`hide-env`](commands/hide_env.html):
 
 ```
 > let-env FOO = 'BAR'
 ...
-> hide FOO
+> hide-env FOO
 ```
 
 The hiding is also scoped which both allows you to remove an environment variable temporarily and prevents you from modifying a parent environment from within a child scope:
@@ -213,7 +213,7 @@ The hiding is also scoped which both allows you to remove an environment variabl
 ```
 > let-env FOO = 'BAR'
 > do {
-    hide FOO
+    hide-env FOO
     # $env.FOO does not exist
   }
 > $env.FOO
