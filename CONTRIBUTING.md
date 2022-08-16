@@ -11,7 +11,7 @@ This website is based on Vuepress.
 1. Run `yarn install`
 1. Run `yarn vuepress dev`
 
-If you're adding a new page to the book, to make it appaer, put it also to `.vuepress/config.js`.
+If you're adding a new page to the book, to make it appear, put it also to `.vuepress/config.js`.
 
 ## Translation Guide
 
@@ -22,7 +22,7 @@ If you're adding a new page to the book, to make it appaer, put it also to `.vue
 4. Modify the vuepress config file `nu-docs/.vuepress/config.js`, add `zh-CN` related configs, here is a [commit](https://github.com/nushell/nushell.github.io/commit/46d1672) for reference;
 5. Add README.md in the `book` dir, and that will be the default introduction page of Nushell. Note: Please **DO NOT** translate the file name of the docs.
 6. Run `yarn vuepress dev`, then open **http://localhost:8080/** in your browser, switch to the language you are going to translate into, and you will see the introduction page you have just created. You can translate the docs and save them to get a preview in the browser;
-7. Update the `nu-docs/i18n-meta.json` file, fill the locale value of the doc you have just finished. It's recommend to use `commit_id@author` or simply a `commit_id` to indicate your translation end to the specified commit;
-8. Commit your changes, It's recommend to squash all your commit in one commit with a commit message like this: `Translate your_doc_file.md to zh-CN from commit: f3dc86d3d`;
+7. Update the `nu-docs/i18n-meta.json` file, fill the locale value of the doc you have just finished. It's recommended to use `commit_id@author` or simply a `commit_id` to indicate your translation end to the specified commit;
+8. Commit your changes, It's recommended to squash all your commits in one commit with a commit message like this: `Translate your_doc_file.md to zh-CN from commit: f3dc86d3d`;
 9. Send a Pull Request;
-10. Check outdated translations: You can use command like `nu ./i18n.nu outdated zh-CN` to check the outdated translations(documents have been changed after your last translation) for the specified locale.
+10. Check outdated translations: You can use a command like `nu ./i18n.nu outdated zh-CN` to check the outdated translations(documents have been changed after your last translation) for the specified locale.
