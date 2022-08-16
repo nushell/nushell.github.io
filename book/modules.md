@@ -21,7 +21,7 @@ A simple module can be defined like this:
 }
 ```
 
-or in a file named the same as the the module you want to create:
+or in a file named the same as the module you want to create:
 
 ```
 # greetings.nu
