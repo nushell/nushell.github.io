@@ -1,6 +1,6 @@
 ---
 title: roll down
-version: 0.66.1
+version: 0.67.0
 usage: |
   Roll table rows down
 ---

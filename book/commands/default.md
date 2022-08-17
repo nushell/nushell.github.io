@@ -1,6 +1,6 @@
 ---
 title: default
-version: 0.66.1
+version: 0.67.0
 usage: |
   Sets a default row's column if missing.
 ---

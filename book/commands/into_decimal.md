@@ -1,6 +1,6 @@
 ---
 title: into decimal
-version: 0.66.1
+version: 0.67.0
 usage: |
   Convert text into a decimal
 ---
@@ -19,17 +19,22 @@ usage: |
 
 ## Examples
 
-Convert string to integer in table
+Convert string to decimal in table
 ```shell
 > [[num]; ['5.01']] | into decimal num
 ```
 
-Convert string to integer
+Convert string to decimal
 ```shell
 > '1.345' | into decimal
 ```
 
-Convert decimal to integer
+Convert decimal to decimal
 ```shell
 > '-5.9' | into decimal
+```
+
+Convert boolean to decimal
+```shell
+> true | into decimal
 ```

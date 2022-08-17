@@ -1,6 +1,6 @@
 ---
 title: as
-version: 0.66.1
+version: 0.67.0
 usage: |
   Creates an alias expression
 ---

@@ -1,6 +1,6 @@
 ---
 title: order-by
-version: 0.66.1
+version: 0.67.0
 usage: |
   Orders by query
 ---
@@ -23,9 +23,8 @@ usage: |
 
 orders query by a column
 ```shell
-> open db.mysql
-    | into db
-    | from table_a
+> open db.sqlite
+    | from table table_a
     | select a
     | order-by a
     | describe
@@ -33,9 +32,8 @@ orders query by a column
 
 orders query by column a ascending and by column b
 ```shell
-> open db.mysql
-    | into db
-    | from table_a
+> open db.sqlite
+    | from table table_a
     | select a
     | order-by a --ascending
     | order-by b

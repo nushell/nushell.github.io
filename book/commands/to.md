@@ -1,6 +1,6 @@
 ---
 title: to
-version: 0.66.1
+version: 0.67.0
 usage: |
   Translate structured data to a format
 ---

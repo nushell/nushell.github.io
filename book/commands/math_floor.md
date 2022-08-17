@@ -1,6 +1,6 @@
 ---
 title: math floor
-version: 0.66.1
+version: 0.67.0
 usage: |
   Applies the floor function to a list of numbers
 ---

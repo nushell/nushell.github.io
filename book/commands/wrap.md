@@ -1,6 +1,6 @@
 ---
 title: wrap
-version: 0.66.1
+version: 0.67.0
 usage: |
   Wrap the value into a column.
 ---

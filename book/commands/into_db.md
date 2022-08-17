@@ -1,6 +1,6 @@
 ---
 title: into db
-version: 0.66.1
+version: 0.67.0
 usage: |
   Converts into an open db connection
 ---
@@ -13,9 +13,13 @@ usage: |
 
 ```> into db ```
 
+## Notes
+```text
+This function is used as type hint for parser, specially if the query is not started with 'from table'
+```
 ## Examples
 
 Converts an open file into a db object
 ```shell
-> open db.mysql | into db
+> open db.sqlite | into db
 ```

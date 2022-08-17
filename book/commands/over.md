@@ -1,6 +1,6 @@
 ---
 title: over
-version: 0.66.1
+version: 0.67.0
 usage: |
   Adds a partition to an expression function
 ---
@@ -26,9 +26,8 @@ Adds a partition to a function expression
 
 orders query by a column
 ```shell
-> open db.mysql
-    | into db
+> open db.sqlite
+    | from table table_a
     | select (fn lead col_a | over col_b)
-    | from table_a
     | describe
 ```

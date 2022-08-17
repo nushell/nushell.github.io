@@ -1,8 +1,8 @@
 ---
 title: encode base64
-version: 0.66.1
+version: 0.67.0
 usage: |
-  base64 encode a value
+  Base64 encode a value
 ---
 
 # <code>{{ $frontmatter.title }}</code>

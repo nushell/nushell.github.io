@@ -1,6 +1,6 @@
 ---
 title: path expand
-version: 0.66.1
+version: 0.67.0
 usage: |
   Try to expand a path to its absolute form
 ---
@@ -11,11 +11,12 @@ usage: |
 
 ## Signature
 
-```> path expand --strict --columns```
+```> path expand --strict --no-symlink --columns```
 
 ## Parameters
 
  -  `--strict`: Throw an error if the path could not be expanded
+ -  `--no-symlink`: Do not resolve symbolic links
  -  `--columns {table}`: Optionally operate by column path
 
 ## Examples

@@ -1,6 +1,6 @@
 ---
 title: as-date
-version: 0.66.1
+version: 0.67.0
 usage: |
   Converts string to date.
 ---

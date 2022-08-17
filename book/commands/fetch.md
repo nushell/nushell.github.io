@@ -1,6 +1,6 @@
 ---
 title: fetch
-version: 0.66.1
+version: 0.67.0
 usage: |
   Fetch the contents from a URL.
 ---

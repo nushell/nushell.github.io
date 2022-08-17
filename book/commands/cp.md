@@ -1,6 +1,6 @@
 ---
 title: cp
-version: 0.66.1
+version: 0.67.0
 usage: |
   Copy files.
 ---
@@ -11,16 +11,16 @@ usage: |
 
 ## Signature
 
-```> cp (destination) ...source(s) --recursive --verbose --interactive --no-dereference```
+```> cp (source) (destination) --recursive --verbose --interactive --no-symlink```
 
 ## Parameters
 
+ -  `source`: the place to copy from
  -  `destination`: the place to copy to
- -  `...source(s)`: the place(s) to copy from
  -  `--recursive`: copy recursively through subdirectories
  -  `--verbose`: do copy in verbose mode (default:false)
  -  `--interactive`: ask user to confirm action
- -  `--no-dereference`: If the -r option is specified, no symbolic links are followed.
+ -  `--no-symlink`: no symbolic links are followed, only works if -r is active
 
 ## Examples
 

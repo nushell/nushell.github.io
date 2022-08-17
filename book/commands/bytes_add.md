@@ -1,8 +1,8 @@
 ---
 title: bytes add
-version: 0.66.1
+version: 0.67.0
 usage: |
-  add specified bytes to the input
+  Add specified bytes to the input
 ---
 
 # <code>{{ $frontmatter.title }}</code>

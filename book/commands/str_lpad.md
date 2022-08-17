@@ -1,6 +1,6 @@
 ---
 title: str lpad
-version: 0.66.1
+version: 0.67.0
 usage: |
   Left-pad a string to a specific length
 ---

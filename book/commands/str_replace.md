@@ -1,6 +1,6 @@
 ---
 title: str replace
-version: 0.66.1
+version: 0.67.0
 usage: |
   Find and replace text
 ---
@@ -52,4 +52,14 @@ Find and replace the first occurence using string replacement *not* regular expr
 Find and replace all occurences using string replacement *not* regular expressions
 ```shell
 > 'abc abc abc' | str replace -a 'b' 'z' -s
+```
+
+Find and replace with fancy-regex
+```shell
+> 'a sucessful b' | str replace '\b([sS])uc(?:cs|s?)e(ed(?:ed|ing|s?)|ss(?:es|ful(?:ly)?|i(?:ons?|ve(?:ly)?)|ors?)?)\b' '${1}ucce$2'
+```
+
+Find and replace with fancy-regex
+```shell
+> 'GHIKK-9+*' | str replace '[*[:xdigit:]+]' 'z'
 ```

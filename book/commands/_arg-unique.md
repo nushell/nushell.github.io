@@ -1,6 +1,6 @@
 ---
 title: arg-unique
-version: 0.66.1
+version: 0.67.0
 usage: |
   Returns indexes for unique values
 ---

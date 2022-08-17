@@ -1,6 +1,6 @@
 ---
 title: sort
-version: 0.66.1
+version: 0.67.0
 usage: |
   Sort in increasing order.
 ---

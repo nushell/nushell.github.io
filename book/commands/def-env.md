@@ -1,6 +1,6 @@
 ---
 title: def-env
-version: 0.66.1
+version: 0.67.0
 usage: |
   Define a custom command, which participates in the caller environment
 ---

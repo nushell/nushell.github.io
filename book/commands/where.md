@@ -1,6 +1,6 @@
 ---
 title: where
-version: 0.66.1
+version: 0.67.0
 usage: |
   Filter values based on a condition.
 ---

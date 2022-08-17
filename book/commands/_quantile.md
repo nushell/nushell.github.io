@@ -1,6 +1,6 @@
 ---
 title: quantile
-version: 0.66.1
+version: 0.67.0
 usage: |
   Aggregates the columns to the selected quantile
 ---

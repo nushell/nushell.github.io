@@ -1,6 +1,6 @@
 ---
 title: prepend
-version: 0.66.1
+version: 0.67.0
 usage: |
   Prepend any number of rows to a table.
 ---

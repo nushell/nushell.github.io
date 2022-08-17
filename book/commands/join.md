@@ -1,6 +1,6 @@
 ---
 title: join
-version: 0.66.1
+version: 0.67.0
 usage: |
   Joins with another table or derived table. Default join type is inner
 ---
@@ -27,25 +27,22 @@ usage: |
 
 joins two tables on col_b
 ```shell
-> open db.mysql
-    | into db
-    | select col_a
-    | from table_1 --as t1
+> open db.sqlite
+    | from table table_1 --as t1
     | join table_2 col_b --as t2
+    | select col_a
     | describe
 ```
 
 joins a table with a derived table using aliases
 ```shell
-> open db.mysql
-    | into db
-    | select col_a
-    | from table_1 --as t1
+> open db.sqlite
+    | from table table_1 --as t1
     | join (
-        open db.mysql
-        | into db
+        open db.sqlite
+        | from table table_2
         | select col_c
-        | from table_2
       ) ((field t1.col_a) == (field t2.col_c)) --as t2 --right
+    | select col_a
     | describe
 ```

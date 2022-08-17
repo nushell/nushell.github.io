@@ -1,6 +1,6 @@
 ---
 title: shift
-version: 0.66.1
+version: 0.67.0
 usage: |
   Shifts the values by a given period
 ---

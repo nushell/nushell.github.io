@@ -1,6 +1,6 @@
 ---
 title: fn
-version: 0.66.1
+version: 0.67.0
 usage: |
   Creates function expression for a select operation
 ---
@@ -28,9 +28,8 @@ Creates a function expression
 
 orders query by a column
 ```shell
-> open db.mysql
-    | into db
+> open db.sqlite
+    | from table table_a
     | select (fn lead col_a)
-    | from table_a
     | describe
 ```

@@ -1,6 +1,6 @@
 ---
 title: df-not
-version: 0.66.1
+version: 0.67.0
 usage: |
   Inverts boolean mask
 ---

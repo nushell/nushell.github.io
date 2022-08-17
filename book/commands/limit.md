@@ -1,6 +1,6 @@
 ---
 title: limit
-version: 0.66.1
+version: 0.67.0
 usage: |
   Limit result from query
 ---
@@ -21,9 +21,8 @@ usage: |
 
 Limits selection from table
 ```shell
-> open db.mysql
-    | into db
-    | from table_a
+> open db.sqlite
+    | from table table_a
     | select a
     | limit 10
     | describe

@@ -1,6 +1,6 @@
 ---
 title: query
-version: 0.66.1
+version: 0.67.0
 usage: |
   Show all the query commands
 ---

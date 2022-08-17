@@ -1,6 +1,6 @@
 ---
 title: std
-version: 0.66.1
+version: 0.67.0
 usage: |
   Creates a std expression for an aggregation
 ---

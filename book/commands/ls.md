@@ -1,6 +1,6 @@
 ---
 title: ls
-version: 0.66.1
+version: 0.67.0
 usage: |
   List the files in a directory.
 ---
@@ -11,11 +11,11 @@ usage: |
 
 ## Signature
 
-```> ls ...pattern(s) --all --long --short-names --full-paths --du --directory```
+```> ls (pattern) --all --long --short-names --full-paths --du --directory```
 
 ## Parameters
 
- -  `...pattern(s)`: the glob pattern(s) to use
+ -  `pattern`: the glob pattern to use
  -  `--all`: Show hidden files
  -  `--long`: List all available columns for each entry
  -  `--short-names`: Only print the file names and not the path
@@ -43,11 +43,6 @@ List all files with full path in the parent directory
 List all rust files
 ```shell
 > ls *.rs
-```
-
-List all rust files and all toml files
-```shell
-> ls *.rs *.toml
 ```
 
 List all files and directories whose name do not contain 'bar'

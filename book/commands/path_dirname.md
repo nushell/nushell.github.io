@@ -1,6 +1,6 @@
 ---
 title: path dirname
-version: 0.66.1
+version: 0.67.0
 usage: |
   Get the parent directory of a path
 ---

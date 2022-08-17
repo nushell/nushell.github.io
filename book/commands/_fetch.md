@@ -1,6 +1,6 @@
 ---
 title: fetch
-version: 0.66.1
+version: 0.67.0
 usage: |
   collects the lazyframe to the selected rows
 ---

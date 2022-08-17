@@ -1,6 +1,6 @@
 ---
 title: seq
-version: 0.66.1
+version: 0.67.0
 usage: |
   Print sequences of numbers.
 ---

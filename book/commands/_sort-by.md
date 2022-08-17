@@ -1,6 +1,6 @@
 ---
 title: sort-by
-version: 0.66.1
+version: 0.67.0
 usage: |
   sorts a lazy dataframe based on expression(s)
 ---
@@ -11,12 +11,13 @@ usage: |
 
 ## Signature
 
-```> sort-by ...sort expression --reverse```
+```> sort-by ...sort expression --reverse --nulls-last```
 
 ## Parameters
 
  -  `...sort expression`: sort expression for the dataframe
  -  `--reverse {list<bool>}`: Reverse sorting. Default is false
+ -  `--nulls-last`: nulls are shown last in the dataframe
 
 ## Examples
 

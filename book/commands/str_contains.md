@@ -1,6 +1,6 @@
 ---
 title: str contains
-version: 0.66.1
+version: 0.67.0
 usage: |
   Checks if string contains pattern
 ---

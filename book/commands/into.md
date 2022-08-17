@@ -1,6 +1,6 @@
 ---
 title: into
-version: 0.66.1
+version: 0.67.0
 usage: |
   Commands to convert data from one type to another.
 ---

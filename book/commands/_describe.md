@@ -1,6 +1,6 @@
 ---
 title: describe
-version: 0.66.1
+version: 0.67.0
 usage: |
   Describes dataframes numeric columns
 ---

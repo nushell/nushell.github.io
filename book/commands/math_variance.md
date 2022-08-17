@@ -1,6 +1,6 @@
 ---
 title: math variance
-version: 0.66.1
+version: 0.67.0
 usage: |
   Finds the variance of a list of numbers or tables
 ---

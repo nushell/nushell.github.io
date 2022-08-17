@@ -1,6 +1,6 @@
 ---
 title: str capitalize
-version: 0.66.1
+version: 0.67.0
 usage: |
   Capitalize first letter of text
 ---
