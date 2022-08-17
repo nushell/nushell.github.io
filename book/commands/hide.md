@@ -1,8 +1,8 @@
 ---
 title: hide
-version: 0.66.1
+version: 0.67.0
 usage: |
-  Hide symbols in the current scope
+  Hide definitions in the current scope
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -19,7 +19,7 @@ usage: |
 
 ## Notes
 ```text
-Symbols are hidden by priority: First aliases, then custom commands, then environment variables.
+Definitions are hidden by priority: First aliases, then custom commands.
 
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nushell.html

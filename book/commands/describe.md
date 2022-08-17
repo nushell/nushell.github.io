@@ -1,6 +1,6 @@
 ---
 title: describe
-version: 0.66.1
+version: 0.67.0
 usage: |
   Describes connection and query of the DB object
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Describe SQLite database constructed query
 ```shell
-> open foo.db | into db | select col_1 | from table_1 | describe
+> open foo.db | from table table_1 | select col_1 | describe
 ```

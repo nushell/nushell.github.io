@@ -1,6 +1,6 @@
 ---
 title: grid
-version: 0.66.1
+version: 0.67.0
 usage: |
   Renders the output to a textual terminal grid.
 ---

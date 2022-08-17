@@ -1,6 +1,6 @@
 ---
 title: cd
-version: 0.66.1
+version: 0.67.0
 usage: |
   Change directory.
 ---
@@ -27,4 +27,9 @@ Change to your home directory
 Change to a directory via abbreviations
 ```shell
 > cd d/s/9
+```
+
+Change to the previous working directory ($OLDPWD)
+```shell
+> cd -
 ```

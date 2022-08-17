@@ -1,6 +1,6 @@
 ---
 title: source
-version: 0.66.1
+version: 0.67.0
 usage: |
   Runs a script file in the current context.
 ---

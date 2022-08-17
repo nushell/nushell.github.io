@@ -1,6 +1,6 @@
 ---
 title: math mode
-version: 0.66.1
+version: 0.67.0
 usage: |
   Gets the most frequent element(s) from a list of numbers or tables
 ---

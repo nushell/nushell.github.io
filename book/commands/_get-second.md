@@ -1,6 +1,6 @@
 ---
 title: get-second
-version: 0.66.1
+version: 0.67.0
 usage: |
   Gets second from date
 ---

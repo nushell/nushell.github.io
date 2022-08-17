@@ -1,6 +1,6 @@
 ---
 title: watch
-version: 0.66.1
+version: 0.67.0
 usage: |
   Watch for file changes and execute Nu code when they happen.
 ---

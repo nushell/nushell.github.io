@@ -1,6 +1,6 @@
 ---
 title: into int
-version: 0.66.1
+version: 0.67.0
 usage: |
   Convert value to integer
 ---

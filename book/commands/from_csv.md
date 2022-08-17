@@ -1,6 +1,6 @@
 ---
 title: from csv
-version: 0.66.1
+version: 0.67.0
 usage: |
   Parse text as .csv and create table.
 ---

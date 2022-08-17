@@ -1,6 +1,6 @@
 ---
 title: post
-version: 0.66.1
+version: 0.67.0
 usage: |
   Post a body to a URL.
 ---

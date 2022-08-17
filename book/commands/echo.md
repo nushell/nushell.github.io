@@ -1,6 +1,6 @@
 ---
 title: echo
-version: 0.66.1
+version: 0.67.0
 usage: |
   Echo the arguments back to the user.
 ---

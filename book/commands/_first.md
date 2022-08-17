@@ -1,8 +1,8 @@
 ---
 title: first
-version: 0.66.1
+version: 0.67.0
 usage: |
-  Creates new dataframe with first rows
+  Show only the first number of rows.
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -15,11 +15,16 @@ usage: |
 
 ## Parameters
 
- -  `rows`: Number of rows for head
+ -  `rows`: starting from the front, the number of rows to return
 
 ## Examples
 
-Create new dataframe with head rows
+Return the first row of a dataframe
 ```shell
-> [[a b]; [1 2] [3 4]] | into df | first 1
+> [[a b]; [1 2] [3 4]] | into df | first
+```
+
+Return the first two rows of a dataframe
+```shell
+> [[a b]; [1 2] [3 4]] | into df | first 2
 ```

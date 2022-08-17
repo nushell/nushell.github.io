@@ -1,6 +1,6 @@
 ---
 title: take while
-version: 0.66.1
+version: 0.67.0
 usage: |
   Take elements of the input while a predicate is true.
 ---

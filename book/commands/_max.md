@@ -1,6 +1,6 @@
 ---
 title: max
-version: 0.66.1
+version: 0.67.0
 usage: |
   Aggregates columns to their max value
 ---

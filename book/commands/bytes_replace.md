@@ -1,6 +1,6 @@
 ---
 title: bytes replace
-version: 0.66.1
+version: 0.67.0
 usage: |
   Find and replace binary
 ---

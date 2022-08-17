@@ -1,6 +1,6 @@
 ---
 title: schema
-version: 0.66.1
+version: 0.67.0
 usage: |
   Show sqlite database information, including its schema.
 ---
@@ -17,5 +17,5 @@ usage: |
 
 Show the schema of a SQLite database
 ```shell
-> open foo.db | into db | schema
+> open foo.db | schema
 ```

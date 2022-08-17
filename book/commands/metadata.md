@@ -1,6 +1,6 @@
 ---
 title: metadata
-version: 0.66.1
+version: 0.67.0
 usage: |
   Get the metadata for items in the stream
 ---

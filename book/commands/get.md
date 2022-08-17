@@ -1,6 +1,6 @@
 ---
 title: get
-version: 0.66.1
+version: 0.67.0
 usage: |
   Extract data using a cell path.
 ---

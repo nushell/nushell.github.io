@@ -1,6 +1,6 @@
 ---
 title: into nu
-version: 0.66.1
+version: 0.67.0
 usage: |
   Convert expression into a nu value for access and exploration
 ---

@@ -1,6 +1,6 @@
 ---
 title: to md
-version: 0.66.1
+version: 0.67.0
 usage: |
   Convert table into simple Markdown
 ---

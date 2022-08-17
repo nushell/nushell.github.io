@@ -1,6 +1,6 @@
 ---
 title: all-false
-version: 0.66.1
+version: 0.67.0
 usage: |
   Returns true if all values are false
 ---

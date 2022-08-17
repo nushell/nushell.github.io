@@ -1,6 +1,6 @@
 ---
 title: drop
-version: 0.66.1
+version: 0.67.0
 usage: |
   Creates a new dataframe by dropping the selected columns
 ---

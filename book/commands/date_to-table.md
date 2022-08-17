@@ -1,6 +1,6 @@
 ---
 title: date to-table
-version: 0.66.1
+version: 0.67.0
 usage: |
   Convert the date into a structured table.
 ---

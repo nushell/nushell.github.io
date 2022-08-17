@@ -1,6 +1,6 @@
 ---
 title: build-string
-version: 0.66.1
+version: 0.67.0
 usage: |
   Create a string from the arguments.
 ---

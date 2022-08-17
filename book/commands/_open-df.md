@@ -1,6 +1,6 @@
 ---
 title: open-df
-version: 0.66.1
+version: 0.67.0
 usage: |
   Opens csv, json or parquet file to create dataframe
 ---
@@ -11,11 +11,12 @@ usage: |
 
 ## Signature
 
-```> open-df (file) --delimiter --no-header --infer-schema --skip-rows --columns```
+```> open-df (file) --lazy --delimiter --no-header --infer-schema --skip-rows --columns```
 
 ## Parameters
 
  -  `file`: file path to load values from
+ -  `--lazy`: creates a lazy dataframe
  -  `--delimiter {string}`: file delimiter character. CSV file
  -  `--no-header`: Indicates if file doesn't have header. CSV file
  -  `--infer-schema {number}`: Number of rows to infer the schema of the file. CSV file

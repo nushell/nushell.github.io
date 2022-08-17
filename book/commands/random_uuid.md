@@ -1,6 +1,6 @@
 ---
 title: random uuid
-version: 0.66.1
+version: 0.67.0
 usage: |
   Generate a random uuid4 string
 ---

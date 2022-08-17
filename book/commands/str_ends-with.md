@@ -1,6 +1,6 @@
 ---
 title: str ends-with
-version: 0.66.1
+version: 0.67.0
 usage: |
   Check if a string ends with a pattern
 ---

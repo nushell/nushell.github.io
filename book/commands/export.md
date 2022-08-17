@@ -1,8 +1,8 @@
 ---
 title: export
-version: 0.66.1
+version: 0.67.0
 usage: |
-  Export custom commands or environment variables from a module.
+  Export definitions or environment variables from a module.
 ---
 
 # <code>{{ $frontmatter.title }}</code>

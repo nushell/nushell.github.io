@@ -1,6 +1,6 @@
 ---
 title: parse
-version: 0.66.1
+version: 0.67.0
 usage: |
   Parse columns from string data using a simple pattern.
 ---
@@ -28,4 +28,24 @@ Parse a string into two named columns
 Parse a string using regex pattern
 ```shell
 > echo "hi there" | parse -r '(?P<foo>\w+) (?P<bar>\w+)'
+```
+
+Parse a string using fancy-regex named capture group pattern
+```shell
+> echo "foo bar." | parse -r '\s*(?<name>\w+)(?=\.)'
+```
+
+Parse a string using fancy-regex capture group pattern
+```shell
+> echo "foo! bar." | parse -r '(\w+)(?=\.)|(\w+)(?=!)'
+```
+
+Parse a string using fancy-regex look behind pattern
+```shell
+> echo " @another(foo bar)   " | parse -r '\s*(?<=[() ])(@\w+)(\([^)]*\))?\s*'
+```
+
+Parse a string using fancy-regex look ahead atomic group pattern
+```shell
+> echo "abcd" | parse -r '^a(bc(?=d)|b)cd$'
 ```

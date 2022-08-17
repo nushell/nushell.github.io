@@ -1,6 +1,6 @@
 ---
 title: agg
-version: 0.66.1
+version: 0.67.0
 usage: |
   Performs a series of aggregations from a group by
 ---

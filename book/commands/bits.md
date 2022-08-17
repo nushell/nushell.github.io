@@ -1,8 +1,8 @@
 ---
-title: match
-version: 0.66.1
+title: bits
+version: 0.67.0
 usage: |
-  Deprecated command
+  Various commands for working with bits
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -11,4 +11,4 @@ usage: |
 
 ## Signature
 
-```> match ```
+```> bits ```

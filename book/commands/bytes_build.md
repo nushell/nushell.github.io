@@ -1,6 +1,6 @@
 ---
 title: bytes build
-version: 0.66.1
+version: 0.67.0
 usage: |
   Create bytes from the arguments.
 ---

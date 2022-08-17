@@ -1,6 +1,6 @@
 ---
 title: count
-version: 0.66.1
+version: 0.67.0
 usage: |
   creates a count expression
 ---
