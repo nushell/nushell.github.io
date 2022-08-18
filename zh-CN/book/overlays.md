@@ -154,13 +154,13 @@ _0.64 版本新增：_
 
 (spam)> def eggs [] { "eggs" }
 
-(spam)> overlay remove --keep spam
+(spam)> overlay remove --keep-custom spam
 
 (zero)> eggs
 eggs
 ```
 
-`--keep` 标志正是用来做这个的。
+`--keep-custom` 标志正是用来做这个的。
 
 ## 覆层顺序
 

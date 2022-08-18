@@ -186,13 +186,13 @@ Sometimes, you might want to remove an overlay, but keep all the custom definiti
 
 (spam)> def eggs [] { "eggs" }
 
-(spam)> overlay remove --keep spam
+(spam)> overlay remove --keep-custom spam
 
 (zero)> eggs
 eggs
 ```
 
-The `--keep` flag does exactly that.
+The `--keep-custom` flag does exactly that.
 
 ## Ordering Overlays
 
