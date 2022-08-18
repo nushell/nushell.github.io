@@ -194,6 +194,24 @@ eggs
 
 The `--keep-custom` flag does exactly that.
 
+One can also keep a set of environment variables that were defined inside an overlay, but remove the rest:
+
+```
+(zero)> module spam { export def foo [] { "foo" }; export env FOO {"foo"}}
+
+(zero)> overlay add spam
+
+(spam)> overlay remove spam --keep-env [FOO]
+
+(zero)> foo
+Error: Can't run executable...
+
+(zero)> $env.FOO
+foo
+```
+
+The `--keep-env` flag does exactly that.
+
 ## Ordering Overlays
 
 The overlays are arranged as a stack.
