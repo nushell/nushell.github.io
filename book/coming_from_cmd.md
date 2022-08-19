@@ -36,8 +36,8 @@ This table was last updated for Nu 0.66.0.
 | `MKLINK`                             |                                                  | Create symbolic links                                             |
 | `MOVE`                               | `mv`                                             | Move files                                                        |
 | `PATH`                               | `$env.Path`                                      | Display the current path variable                                 |
-| `PATH <path>;%PATH%`                 | `let-env Path = ($env.Path | prepend <path>`)    | Edit the path variable                                            |
-| `PATH %PATH%;<path>`                 | `let-env Path = ($env.Path | prepend <path>`)    | Edit the path variable                                            |
+| `PATH <path>;%PATH%`                 | `let-env Path = ($env.Path \| prepend <path>`)   | Edit the path variable                                            |
+| `PATH %PATH%;<path>`                 | `let-env Path = ($env.Path \| prepend <path>`)   | Edit the path variable                                            |
 | `PAUSE`                              | `input "Press any key to continue . . ."`        | Pause script execution                                            |
 | `PROMPT <template>`                  | `let-env PROMPT_COMMAND = { <command> }`         | Change the terminal prompt                                        |
 | `PUSHD <path>`/`POPD`                | `enter <path>`/`exit`                            | Change working directory temporarily                              |
@@ -47,7 +47,7 @@ This table was last updated for Nu 0.66.0.
 | `SET <var>=<string>`                 | `let-env <var> = <string>`                       | Set environment variables                                         |
 | `SETLOCAL`                           | (default behavior)                               | Localize environment changes to a script                          |
 | `START <path>`                       | `explorer <path>`                                | Open a file as if double-clicked in File Explorer                 |
-| `TIME /T`                            | `date now | date format "%H:%M:%S"`              | Get the current time                                              |
+| `TIME /T`                            | `date now \| date format "%H:%M:%S"`             | Get the current time                                              |
 | `TIME`                               |                                                  | Set the current time                                              |
 | `TITLE`                              |                                                  | Set the cmd.exe window name                                       |
 | `TYPE`                               | `open --raw`                                     | Display the contents of a text file                               |
