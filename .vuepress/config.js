@@ -153,6 +153,7 @@ module.exports = {
               collapsable: false,
               children: [
                 '/book/coming_from_bash.md',
+                '/book/coming_from_cmd.md',
                 '/book/nushell_map.md',
                 '/book/nushell_map_imperative.md',
                 '/book/nushell_map_functional.md',
