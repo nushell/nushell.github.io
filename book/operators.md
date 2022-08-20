@@ -8,7 +8,6 @@ Nushell supports the following operators for common math, logic, and string oper
 | `-`      | subtract                                                |
 | `*`      | multiply                                                |
 | `/`      | divide                                                  |
-| `**`     | exponentiation (power)                                  |
 | `mod`    | modulo                                                  |
 | `==`     | equal                                                   |
 | `!=`     | not equal                                               |
