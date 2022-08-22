@@ -210,8 +210,6 @@ Error: Can't run executable...
 foo
 ```
 
-The `--keep-env` flag does exactly that.
-
 ## Ordering Overlays
 
 The overlays are arranged as a stack.
