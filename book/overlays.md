@@ -194,7 +194,7 @@ eggs
 
 The `--keep-custom` flag does exactly that.
 
-One can also keep a list of environment variables that were defined inside an overlay, but remove the rest:
+One can also keep a list of environment variables that were defined inside an overlay, but remove the rest, using the `--keep-env` flag:
 
 ```
 (zero)> module spam { export def foo [] { "foo" }; export env FOO {"foo"}}
