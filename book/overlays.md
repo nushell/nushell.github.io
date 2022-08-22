@@ -186,13 +186,29 @@ Sometimes, you might want to remove an overlay, but keep all the custom definiti
 
 (spam)> def eggs [] { "eggs" }
 
-(spam)> overlay remove --keep spam
+(spam)> overlay remove --keep-custom spam
 
 (zero)> eggs
 eggs
 ```
 
-The `--keep` flag does exactly that.
+The `--keep-custom` flag does exactly that.
+
+One can also keep a list of environment variables that were defined inside an overlay, but remove the rest, using the `--keep-env` flag:
+
+```
+(zero)> module spam { export def foo [] { "foo" }; export env FOO {"foo"}}
+
+(zero)> overlay add spam
+
+(spam)> overlay remove spam --keep-env [FOO]
+
+(zero)> foo
+Error: Can't run executable...
+
+(zero)> $env.FOO
+foo
+```
 
 ## Ordering Overlays
 
