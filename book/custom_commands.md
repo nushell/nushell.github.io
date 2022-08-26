@@ -65,6 +65,14 @@ Now we can call our custom command as if it were a built-in subcommand of `str`:
 > str mycommand
 ```
 
+Of course, commands with spaces in them are defined in the same way:
+
+```nushell
+def "custom command" [] {
+  echo "this is a custom command with a space in the name!"
+}
+```
+
 ## Parameter types
 
 When defining custom commands, you can name and optionally set the type for each parameter. For example, you can write the above as:
