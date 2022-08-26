@@ -45,7 +45,7 @@ returns `hello nushell`
 
 ## Command names
 
-In Nushell, a command name is a string of characters or a quoted string. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `"mycommand"`, `😊`, and `123`.
+In Nushell, a command name is a string of characters. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `my command`, and `😊`. 
 
 _Note: It's common practice in Nushell to separate the words of the command with `-` for better readability._ For example `get-size` instead of `getsize` or `get_size`.
 
