@@ -245,7 +245,10 @@ Second row in columns `c` and `d` is empty because our `second` table only conta
 ```
 > let first = [[a b]; [1 2] [3 4]]
 > let second = [[c d]; [3 4]]
-> $first|group ($second|length) | each {|it| merge {$second}} | flatten
+> $first|group ($second|length) 
+  | each {|it|
+    merge {$second}
+  } | flatten
 ───┬───┬───┬───┬───
  # │ a │ b │ c │ d
 ───┼───┼───┼───┼───
@@ -264,7 +267,16 @@ Can we do that with more than two tables? Sure we can! Let's add a third table:
 We could join all three tables like this:
 
 ```
-> $first | group ($second|length) | each {|it| merge { $second  }} | flatten | group ($third|length) | each {|it| merge { $third }} |flatten
+> $first | group ($second|length)
+   | each {|it|
+     merge { $second  }
+   } 
+   | flatten 
+   | group ($third|length) 
+   | each {|it|
+     merge { $third }
+   }
+   |flatten
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───
