@@ -206,6 +206,7 @@ module.exports = {
                 'http',
                 'direnv',
                 'misc',
+                'tables',
               ],
             },
           ],
