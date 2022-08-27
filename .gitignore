@@ -4,7 +4,6 @@
 node_modules
 npm-debug.log
 .vuepress/dist/
-package-lock.json
 
 # ignore the git mailmap file
 .mailmap
