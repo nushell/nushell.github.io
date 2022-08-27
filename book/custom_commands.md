@@ -107,7 +107,7 @@ error: Type Error
 
 This can help you guide users of your definitions to call them with only the supported types.
 
-The currently accepted types are (as of version 0.59.0):
+The currently accepted types are (as of version 0.65.0):
 
 - `any`
 - `block`
@@ -127,6 +127,10 @@ The currently accepted types are (as of version 0.59.0):
 - `signature`
 - `string`
 - `variable`
+- `record`
+- `list`
+- `table`
+- `error`
 
 ## Parameters with a default value
 
