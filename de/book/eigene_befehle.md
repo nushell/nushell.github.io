@@ -85,7 +85,7 @@ error: Type Error
 
 Dies kann dabei helfen Nutzer darauf aufmerksam zu machen, welche Art von Typ erlaubt ist.
 
-Die aktuell erlaubten Typen sind (mit Version 0.59.0 und neuer):
+Die aktuell erlaubten Typen sind (mit Version 0.65.0 und neuer):
 
 - `any`
 - `block`
@@ -105,6 +105,10 @@ Die aktuell erlaubten Typen sind (mit Version 0.59.0 und neuer):
 - `signature`
 - `string`
 - `variable`
+- `record`
+- `list`
+- `table`
+- `error`
 
 ## Flags
 

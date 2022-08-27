@@ -99,7 +99,7 @@ error: Type Error
 
 这可以帮助指导你的用户只使用支持的类型来调用你所定义的命令。
 
-目前可以支持的类型是（从 0.59.0 版本开始）：
+目前可以支持的类型是（从 0.65.0 版本开始）：
 
 - `any`
 - `block`
@@ -119,6 +119,10 @@ error: Type Error
 - `signature`
 - `string`
 - `variable`
+- `record`
+- `list`
+- `table`
+- `error`
 
 ## 具有默认值的参数
 
