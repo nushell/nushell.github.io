@@ -215,7 +215,7 @@ We could join all three tables together like this:
 Or we could use the [`reduce`](commands/reduce.md) command to dynamically merge all tables:
 
 ```
-> [$first $second $third] | reduce {|it, acc| $acc|merge { $it }}
+> [$first $second $third] | reduce {|it, acc| $acc | merge { $it }}
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───
@@ -245,7 +245,7 @@ Second row in columns `c` and `d` is empty because our `second` table only conta
 ```
 > let first = [[a b]; [1 2] [3 4]]
 > let second = [[c d]; [3 4]]
-> $first|group ($second|length) 
+> $first | group ($second | length)
   | each {|it|
     merge {$second}
   } | flatten
@@ -270,13 +270,13 @@ We could join all three tables like this:
 > $first | group ($second|length)
    | each {|it|
      merge { $second  }
-   } 
-   | flatten 
-   | group ($third|length) 
+   }
+   | flatten
+   | group ($third | length)
    | each {|it|
      merge { $third }
    }
-   |flatten
+   | flatten
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───
@@ -291,11 +291,11 @@ Or just like last time we could use the [`reduce`](docs/reduce.md) command to me
 ```
 > [$first_table $second_table $third_table]|reduce {|it, acc|
     $acc
-    |group ($it|length)
-    |each {|x|
+    | group ($it | length)
+    | each {|x|
         merge {$it}
     }
-    |flatten
+    | flatten
 }
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
