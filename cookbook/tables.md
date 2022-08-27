@@ -21,7 +21,7 @@ Examples shown in [`Working with tables`](../book/working_with_tables.md) work f
 ───┴───┴───┴───┴───
 ```
 
-Second row in columns `c` and `d` is empty because our `second` table only contained a single row so nushell has nothing to fill the remaining rows with. But what if we wanted the smaller table to 'wrap around' and keep filling the rows? For that we can use the [`group`](commands/group.md) command to split the larger table into subtables, merge each of them with the smaller table and then combine the merged tables together using [`flatten`](commands/flatten.md) command like this:
+Second row in columns `c` and `d` is empty because our `second` table only contained a single row so nushell has nothing to fill the remaining rows with. But what if we wanted the smaller table to 'wrap around' and keep filling the rows? For that we can use the [`group`](../book/commands/group.md) command to split the larger table into subtables, merge each of them with the smaller table and then combine the merged tables together using [`flatten`](../book/commands/flatten.md) command like this:
 
 ```
 > let first = [[a b]; [1 2] [3 4]]
@@ -67,7 +67,7 @@ We could join all three tables like this:
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-Or just like last time we could use the [`reduce`](docs/reduce.md) command to merge tables together recursively:
+Or just like last time we could use the [`reduce`](../book/docs/reduce.md) command to merge tables together recursively:
 
 ```
 > [$first_table $second_table $third_table]|reduce {|it, acc|
