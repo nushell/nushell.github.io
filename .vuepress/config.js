@@ -1,3 +1,4 @@
+import path;
 const { gitPlugin } = require('@vuepress/plugin-git');
 const { feedPlugin } = require('vuepress-plugin-feed2');
 const { defaultTheme } = require('@vuepress/theme-default');
