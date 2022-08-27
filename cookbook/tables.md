@@ -6,7 +6,7 @@ title: Advanced table workflows
 
 ### Merging tables of different size
 
-Examples shown in [`Working with tables`](../book/working_with_tables.md) work fine when our tables had equal amount of rows but what if we want to merge tables of different sizes?
+Examples shown in [`Working with tables`](../book/working_with_tables.md) work fine when our tables have equal amount of rows but what if we want to merge tables of different sizes?
 
 ```
 > let first = [[a b]; [1 2] [3 4]]
