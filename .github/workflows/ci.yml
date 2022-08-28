@@ -13,4 +13,8 @@ jobs:
           node-version: '16'
 
       - run: npm install
-      - run: npm run build
+      # - run: npm run build
+      - name: Build Static Docs
+        env:
+          NODE_OPTIONS: '--max_old_space_size=8192'
+        run: npm run build
