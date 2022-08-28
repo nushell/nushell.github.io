@@ -1,8 +1,9 @@
 {
   "name": "nushell.github.io",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "The Nushell website (nushell.sh)",
   "repository": "github:nushell/nushell.github.io",
+  "type": "module",
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build",
@@ -11,17 +12,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@vuepress/plugin-git": "2.0.0-beta.48",
-    "@vuepress/plugin-back-to-top": "2.0.0-beta.48",
-    "@vuepress/plugin-docsearch": "2.0.0-beta.48",
-    "@vuepress/plugin-medium-zoom": "2.0.0-beta.48",
-    "@vuepress/theme-default": "2.0.0-beta.48",
+    "@vuepress/plugin-git": "2.0.0-beta.50",
+    "@vuepress/plugin-back-to-top": "2.0.0-beta.50",
+    "@vuepress/plugin-docsearch": "2.0.0-beta.50",
+    "@vuepress/plugin-medium-zoom": "2.0.0-beta.50",
+    "@vuepress/theme-default": "2.0.0-beta.50",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "vuepress": "2.0.0-beta.48",
-    "vuepress-plugin-feed2": "2.0.0-beta.86",
-    "vuepress-plugin-sitemap2": "2.0.0-beta.86"
+    "vuepress": "2.0.0-beta.50",
+    "vuepress-plugin-feed2": "2.0.0-beta.91",
+    "vuepress-plugin-sitemap2": "2.0.0-beta.91"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
