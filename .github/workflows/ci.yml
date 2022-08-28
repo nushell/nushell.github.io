@@ -16,5 +16,5 @@ jobs:
       # - run: npm run build
       - name: Build Static Docs
         env:
-          NODE_OPTIONS: '--max-old-space-size=8192'
+          NODE_OPTIONS: '--max_old_space_size=10240'
         run: npm run build
