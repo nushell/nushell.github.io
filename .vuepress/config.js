@@ -1,11 +1,12 @@
-const path = require('path');
-const { gitPlugin } = require('@vuepress/plugin-git');
-const { feedPlugin } = require('vuepress-plugin-feed2');
-const { defaultTheme } = require('@vuepress/theme-default');
-const { sitemapPlugin } = require('vuepress-plugin-sitemap2');
-const { docsearchPlugin } = require('@vuepress/plugin-docsearch');
-const { backToTopPlugin } = require('@vuepress/plugin-back-to-top');
-const { mediumZoomPlugin } = require('@vuepress/plugin-medium-zoom');
+import path from 'path';
+import { defineUserConfig } from '@vuepress/cli';
+import { gitPlugin } from '@vuepress/plugin-git';
+import { feedPlugin } from 'vuepress-plugin-feed2';
+import { defaultTheme } from '@vuepress/theme-default';
+import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
+import { docsearchPlugin } from '@vuepress/plugin-docsearch';
+import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
+import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom';
 
 const compareDate = (dateA, dateB) => {
   if (!dateA || !(dateA instanceof Date)) return 1;
@@ -14,7 +15,7 @@ const compareDate = (dateA, dateB) => {
   return dateB.getTime() - dateA.getTime();
 };
 
-module.exports = {
+export default defineUserConfig({
   locales: {
     '/': {
       lang: 'English',
@@ -528,4 +529,4 @@ module.exports = {
       `export default ${JSON.stringify(app.pages.map(({ data }) => data))}`
     );
   },
-};
+});
