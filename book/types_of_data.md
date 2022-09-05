@@ -139,16 +139,19 @@ Eg) `1wk` is the duration of one week.
 
 This chart shows all durations currently supported:
 
-| Duration | Length          |
-| -------- | --------------- |
-| `1ns`    | one nanosecond  |
-| `1us`    | one microsecond |
-| `1ms`    | one millisecond |
-| `1sec`   | one second      |
-| `1min`   | one minute      |
-| `1hr`    | one hour        |
-| `1day`   | one day         |
-| `1wk`    | one week        |
+| Duration | Length                     |
+| -------- | -------------------------- |
+| `1ns`    | one nanosecond             |
+| `1us`    | one microsecond            |
+| `1ms`    | one millisecond            |
+| `1sec`   | one second                 |
+| `1min`   | one minute                 |
+| `1hr`    | one hour                   |
+| `1day`   | one day                    |
+| `1wk`    | one week                   |
+| `1month` | one month (30 days)        |
+| `1yr`    | one year (365 days)        |
+| `1dec`   | one decade (10 * 365 days) |
 
 ## Ranges
 
@@ -180,11 +183,15 @@ The full list of filesize units are:
 - `gb`: gigabytes
 - `tb`: terabytes
 - `pb`: petabytes
+- `eb`: exabytes
+- `zb`: zettabyte
 - `kib`: kibibytes (aka 1024 bytes)
 - `mib`: mebibytes
 - `gib`: gibibytes
 - `tib`: tebibytes
 - `pib`: pebibytes
+- `eib`: exbibyte
+- `zib`: zebibyte
 
 ## Binary data
 
