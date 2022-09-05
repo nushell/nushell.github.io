@@ -15,9 +15,9 @@ usage: |
 
 ## Parameters
 
- -  `def_name`: definition name
- -  `params`: parameters
- -  `block`: body of the definition
+ -  `def_name`: definition name, via which the command/function will be available in the environment in which it was defined
+ -  `params`: parameters (each parameter will represent a variable within the scope of `block` during the command's execution)
+ -  `block`: body of the definition; see https://www.nushell.sh/book/thinking_in_nu.html#nushell-s-environment-is-scoped for more information on scoping in Nushell
 
 ## Notes
 ```text
