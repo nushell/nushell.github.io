@@ -42,7 +42,7 @@
 | history           |                              |                                 |                          |     |
 | inc(`*`)          | inc                          |                                 | succ                     |     |
 | insert            |                              |                                 |                          |     |
-| is_empty          | empty?                       | isEmpty                         |                          |     |
+| is-empty          | empty?                       | isEmpty                         |                          |     |
 | keep              | take, drop-last, pop         | take, init                      | take, init               |     |
 | keep_until        |                              |                                 |                          |     |
 | keep_while        | take-while                   | takeWhile                       | takeWhile                |     |

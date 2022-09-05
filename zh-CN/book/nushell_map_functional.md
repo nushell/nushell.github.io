@@ -41,7 +41,7 @@
 | history                   |                              |                                 |                          |     |
 | inc(`*`)                  | inc                          |                                 | succ                     |     |
 | insert                    |                              |                                 |                          |     |
-| empty?                    | empty?                       | isEmpty                         |                          |     |
+| is-empty                  | empty?                       | isEmpty                         |                          |     |
 | keep                      | take, drop-last, pop         | take, init                      | take, init               |     |
 | keep-until                |                              |                                 |                          |     |
 | keep-while                | take-while                   | takeWhile                       | takeWhile                |     |

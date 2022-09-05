@@ -40,7 +40,7 @@
 | history      |                               |                                                     |                         |                                               |
 | inc(`*`)     | x += 1                        | x++                                                 | x++                     | x += 1                                        |
 | insert       | list.insert                   |                                                     |                         |                                               |
-| empty?       | is None                       | isEmpty                                             | empty                   | is_empty                                      |
+| is-empty     | is None                       | isEmpty                                             | empty                   | is_empty                                      |
 | keep         | list[:x]                      |                                                     |                         | &Vec[..x]                                     |
 | keep until   |                               |                                                     |                         |                                               |
 | keep while   | itertools.takewhile           |                                                     |                         |                                               |
