@@ -2,7 +2,7 @@
 title: def
 version: 0.67.0
 usage: |
-  Define a custom command
+  Define a custom command or subcommand
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -41,4 +41,11 @@ Define a command with default parameters
 > def say-default [thing: string = 'hello'] { echo $thing }
 > say-default
 > say-default goodbye
+```
+
+Define a command with optional (positional) parameters
+```shell
+> def say [text?: string] { echo $text }
+> say
+> say hello
 ```
