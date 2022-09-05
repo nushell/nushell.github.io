@@ -1143,7 +1143,7 @@ whenever possible, their analogous Nushell command.
 | --------------- | --------------------------- | -------------------------------------------------------------------------- | ----------------------------- |
 | aggregate       | DataFrame, GroupBy, Series  | Performs an aggregation operation on a dataframe, groupby or series object | math                          |
 | all-false       | Series                      | Returns true if all values are false                                       |                               |
-| all-true        | Series                      | Returns true if all values are true                                        | all?                          |
+| all-true        | Series                      | Returns true if all values are true                                        | all                           |
 | arg-max         | Series                      | Return index for max value in series                                       |                               |
 | arg-min         | Series                      | Return index for min value in series                                       |                               |
 | arg-sort        | Series                      | Returns indexes for a sorted series                                        |                               |

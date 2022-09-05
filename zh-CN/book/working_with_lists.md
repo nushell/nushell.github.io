@@ -100,14 +100,14 @@ $names | get $index # gives Tami
 
 [`length`](/book/commands/length.md)命令返回列表中的元素个数。例如，`[red green blue] | length`输出`3`。
 
-[`empty?`](/book/commands/empty.md) 命令确定一个字符串、列表或表格是否为空。它可以与列表一起使用，如下所示：
+[`is-empty`](/book/commands/is-empty.md) 命令确定一个字符串、列表或表格是否为空。它可以与列表一起使用，如下所示：
 
 ```bash
 let colors = [red green blue]
-$colors | empty? # false
+$colors | is-empty # false
 
 let colors = []
-$colors | empty? # true
+$colors | is-empty # true
 ```
 
 `in` 和 `not-in` 运算符用于测试一个值是否在一个列表中，例如：
@@ -119,36 +119,36 @@ let colors = [red green blue]
 'gold' not-in $colors # true
 ```
 
-[`any?`](/book/commands/any.md)命令用于确定一个列表中是否有任意一个元素匹配给定的条件，例如：
+[`any`](/book/commands/any.md)命令用于确定一个列表中是否有任意一个元素匹配给定的条件，例如：
 
 ```bash
 # Do any color names end with "e"?
-echo $colors | any? ($it | str ends-with "e") # true
+echo $colors | any ($it | str ends-with "e") # true
 
 # Is the length of any color name less than 3?
-echo $colors | any? ($it | str length) < 3 # false
+echo $colors | any ($it | str length) < 3 # false
 
 # Are any scores greater than 7?
-echo $scores | any? $it > 7 # true
+echo $scores | any $it > 7 # true
 
 # Are any scores odd?
-echo $scores | any? $it mod 2 == 1 # true
+echo $scores | any $it mod 2 == 1 # true
 ```
 
-[`all?`](/book/commands/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
+[`all`](/book/commands/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
 
 ```bash
 # Do all color names end with "e"?
-echo $colors | all? ($it | str ends-with "e") # false
+echo $colors | all ($it | str ends-with "e") # false
 
 # Is the length of all color names greater than or equal to 3?
-echo $colors | all? ($it | str length) >= 3 # true
+echo $colors | all ($it | str length) >= 3 # true
 
 # Are all scores greater than 7?
-echo $scores | all? $it > 7 # false
+echo $scores | all $it > 7 # false
 
 # Are all scores even?
-echo $scores | all? $it mod 2 == 0 # false
+echo $scores | all $it mod 2 == 0 # false
 ```
 
 ## 转换列表

@@ -107,15 +107,15 @@ $names | get $index # gives Tami
 Der [`length`](/book/commands/length.md) Befehl gibt die Anzahl Elemente in der Liste zurück.
 Zum Beispiel, `[red green blue] | length` ergibt `3`.
 
-Der [`empty?`](/book/commands/empty.md) Befehl ermittelt, ob ein String, eine Liste oder eine Tabelle leer ist.
+Der [`is-empty`](/book/commands/is-empty.md) Befehl ermittelt, ob ein String, eine Liste oder eine Tabelle leer ist.
 Mit einer Liste wird er so verwendet:
 
 ```bash
 let colors = [red green blue]
-$colors | empty? # false
+$colors | is-empty # false
 
 let colors = []
-$colors | empty? # true
+$colors | is-empty # true
 ```
 
 Der `in` und `not-in` Operator wird verwendet, um zu testen, ob ein Wert in einer Liste vorhanden ist oder nicht.
@@ -128,38 +128,38 @@ let colors = [red green blue]
 'gold' not-in $colors # true
 ```
 
-Der [`any?`](/book/commands/any.md) Befehl ermittelt, ob irgend ein Element der Liste einer Bedingung entspricht.
+Der [`any`](/book/commands/any.md) Befehl ermittelt, ob irgend ein Element der Liste einer Bedingung entspricht.
 Zum Beispiel:
 
 ```bash
 # Do any color names end with "e"?
-echo $colors | any? ($it | str ends-with "e") # true
+echo $colors | any ($it | str ends-with "e") # true
 
 # Is the length of any color name less than 3?
-echo $colors | any? ($it | str length) < 3 # false
+echo $colors | any ($it | str length) < 3 # false
 
 # Are any scores greater than 7?
-echo $scores | any? $it > 7 # true
+echo $scores | any $it > 7 # true
 
 # Are any scores odd?
-echo $scores | any? $it mod 2 == 1 # true
+echo $scores | any $it mod 2 == 1 # true
 ```
 
-Der [`all?`](/book/commands/all.md) Befehl wiederum ermittelt, ob jedes Element der Liste einer Bedingung entspricht.
+Der [`all`](/book/commands/all.md) Befehl wiederum ermittelt, ob jedes Element der Liste einer Bedingung entspricht.
 Zum Beispiel:
 
 ```bash
 # Do all color names end with "e"?
-echo $colors | all? ($it | str ends-with "e") # false
+echo $colors | all ($it | str ends-with "e") # false
 
 # Is the length of all color names greater than or equal to 3?
-echo $colors | all? ($it | str length) >= 3 # true
+echo $colors | all ($it | str length) >= 3 # true
 
 # Are all scores greater than 7?
-echo $scores | all? $it > 7 # false
+echo $scores | all $it > 7 # false
 
 # Are all scores even?
-echo $scores | all? $it mod 2 == 0 # false
+echo $scores | all $it mod 2 == 0 # false
 ```
 
 ## Eine Liste konvertieren

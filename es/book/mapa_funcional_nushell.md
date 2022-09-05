@@ -57,7 +57,7 @@ Nota: Esta tabla asume Nu 0.14.1 o posterior.
 | history         |                            |                          |                          |     |
 | inc(`*`)        | inc                        |                          | succ                     |     |
 | insert          |                            |                          |                          |     |
-| is_empty        | empty?                     |                          |                          |     |
+| is-empty        | empty?                     |                          |                          |     |
 | keep            | take, drop-last, pop       |                          | init, take               |     |
 | keep_until      |                            |                          |                          |     |
 | keep_while      |                            |                          |                          |     |

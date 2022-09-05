@@ -19,11 +19,11 @@ Output
  # │     name      │  category  │ is_plugin │ is_custom │                             usage
 ───┼───────────────┼────────────┼───────────┼───────────┼────────────────────────────────────────────────────────────────
  0 │ alias         │ core       │ false     │ false     │ Alias a command (with optional flags) to a new name
- 1 │ all?          │ filters    │ false     │ false     │ Test if every element of the input matches a predicate.
+ 1 │ all           │ filters    │ false     │ false     │ Test if every element of the input matches a predicate.
  2 │ ansi          │ platform   │ false     │ false     │ Output ANSI codes to change color.
  3 │ ansi gradient │ platform   │ false     │ false     │ draw text with a provided start and end code making a gradient
  4 │ ansi strip    │ platform   │ false     │ false     │ strip ansi escape sequences from string
- 5 │ any?          │ filters    │ false     │ false     │ Tests if any element of the input matches a predicate.
+ 5 │ any           │ filters    │ false     │ false     │ Tests if any element of the input matches a predicate.
  6 │ append        │ filters    │ false     │ false     │ Append a row to the table.
  7 │ benchmark     │ system     │ false     │ false     │ Time the running time of a block
  8 │ build-string  │ strings    │ false     │ false     │ Create a string from the arguments.

@@ -103,15 +103,15 @@ $names | get $index # gives Tami
 The [`length`](commands/length.md) command returns the number of items in a list.
 For example, `[red green blue] | length` outputs `3`.
 
-The [`empty?`](commands/empty.md) command determines whether a string, list, or table is empty.
+The [`is-empty`](commands/is-empty.md) command determines whether a string, list, or table is empty.
 It can be used with lists as follows:
 
 ```bash
 let colors = [red green blue]
-$colors | empty? # false
+$colors | is-empty # false
 
 let colors = []
-$colors | empty? # true
+$colors | is-empty # true
 ```
 
 The `in` and `not-in` operators are used to test whether a value is in a list. For example:
@@ -123,40 +123,40 @@ let colors = [red green blue]
 'gold' not-in $colors # true
 ```
 
-The [`any?`](commands/any.md) command determines if any item in a list
+The [`any`](commands/any.md) command determines if any item in a list
 matches a given condition.
 For example:
 
 ```bash
 # Do any color names end with "e"?
-$colors | any? ($it | str ends-with "e") # true
+$colors | any ($it | str ends-with "e") # true
 
 # Is the length of any color name less than 3?
-$colors | any? ($it | str length) < 3 # false
+$colors | any ($it | str length) < 3 # false
 
 # Are any scores greater than 7?
-$scores | any? $it > 7 # true
+$scores | any $it > 7 # true
 
 # Are any scores odd?
-$scores | any? $it mod 2 == 1 # true
+$scores | any $it mod 2 == 1 # true
 ```
 
-The [`all?`](commands/all.md) command determines if every item in a list
+The [`all`](commands/all.md) command determines if every item in a list
 matches a given condition.
 For example:
 
 ```bash
 # Do all color names end with "e"?
-$colors | all? ($it | str ends-with "e") # false
+$colors | all ($it | str ends-with "e") # false
 
 # Is the length of all color names greater than or equal to 3?
-$colors | all? ($it | str length) >= 3 # true
+$colors | all ($it | str length) >= 3 # true
 
 # Are all scores greater than 7?
-$scores | all? $it > 7 # false
+$scores | all $it > 7 # false
 
 # Are all scores even?
-$scores | all? $it mod 2 == 0 # false
+$scores | all $it mod 2 == 0 # false
 ```
 
 ## Converting the list

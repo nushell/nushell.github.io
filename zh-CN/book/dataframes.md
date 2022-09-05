@@ -1002,7 +1002,7 @@ $nu.scope.commands | where category =~ expression
 | --------------- | --------------------------- | -------------------------------------------------- | ----------------------------- |
 | aggregate       | DataFrame, GroupBy, Series  | 在一个 DataFrame、GroupBy 或系列对象上执行聚合操作 | math                          |
 | all-false       | Series                      | 如果所有的值都是假的，则返回真                     |                               |
-| all-true        | Series                      | 如果所有的值都是真的，则返回真                     | all?                          |
+| all-true        | Series                      | 如果所有的值都是真的，则返回真                     | all                           |
 | arg-max         | Series                      | 返回系列中最大值的索引                             |                               |
 | arg-min         | Series                      | 返回系列中最小值的索引                             |                               |
 | arg-sort        | Series                      | 返回排序后的系列的索引                             |                               |
