@@ -31,6 +31,12 @@ Define a command and run it
 > def say-hi [] { echo 'hi' }; say-hi
 ```
 
+Define a subcommand and run it
+```shell
+> def str greet [] { echo 'good afternoon' }
+> str greet
+```
+
 Define a command and run it with parameter(s)
 ```shell
 > def say-sth [sth: string] { echo $sth }; say-sth hi
