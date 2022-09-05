@@ -59,3 +59,9 @@ Define a command with optional (positional) parameters
 > say
 > say hello
 ```
+
+Define a command with an unknown number of parameters (rest parameters)
+```shell
+> def say-all [...text: string] { for $x in $text { echo $x } }
+> say-all gas liquid solid plasma
+```
