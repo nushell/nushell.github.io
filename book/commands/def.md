@@ -23,6 +23,10 @@ usage: |
 ```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nushell.html
+
+More information about defining custom commands (i.e., functions) using the
+`def` keyword is available here:
+https://www.nushell.sh/book/custom_commands.html
 ```
 ## Examples
 
