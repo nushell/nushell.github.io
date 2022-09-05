@@ -123,3 +123,15 @@ let-env PATH = ($env.PATH | append '/some/path')
 ```
 
 This will append `/some/path` to the end of PATH; you can also use [`prepend`](commands/prepend.html) to add entries to the start of PATH.
+
+### Homebrew
+
+[Homebrew](https://brew.sh/) is a popular package manager that often requires PATH configuration. To add it to your Nushell PATH:
+
+```
+# macOS ARM64 (Apple Silicon)
+let-env PATH = ($env.PATH | prepend '/opt/homebrew/bin')
+
+# Linux
+let-env PATH = ($env.PATH | prepend '/home/linuxbrew/.linuxbrew/bin')
+```
