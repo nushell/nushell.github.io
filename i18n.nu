@@ -10,7 +10,7 @@ def 'has-ref' [
   ref: string   # The git ref to check
 ] {
   let parse = (git rev-parse --verify -q $ref)
-  if ($parse | empty?) { false } else { true }
+  if ($parse | is-empty) { false } else { true }
 }
 
 # Update issue contents for https://github.com/nushell/nushell.github.io/issues/261
@@ -46,7 +46,7 @@ def get-cell [
 
     } else {    # For existing docs
         let val = ($match | get $lng | get 0)
-        if ($val | empty?) {
+        if ($val | is-empty) {
             $cellDefault
         # Handle data like: "c13a71d11@hustcer"
         } else if ($val | str contains '@') {
@@ -86,7 +86,7 @@ def has-change [
     commit: string,     # The ending commit id
 ] {
     let diff = (git diff $commit $'book/($name)' | str trim)
-    if ($diff | empty?) { $'(ansi g)No(ansi reset)' } else { $'(ansi r)Yes(ansi reset)' }
+    if ($diff | is-empty) { $'(ansi g)No(ansi reset)' } else { $'(ansi r)Yes(ansi reset)' }
 }
 
 def check-outdated-translation [
@@ -96,7 +96,7 @@ def check-outdated-translation [
     let locale = if ($lng in $columns) { $columns | get $lng } else { $lng }
     open $META_FILE | select name $locale | insert outdated { |it|
         let val = ($it | get $locale)
-        if ($val | empty?) || $val == '-' {
+        if ($val | is-empty) || $val == '-' {
             '-'
         # Handle data like: "c13a71d11@hustcer"
         } else if ($val | str contains '@') {
@@ -128,7 +128,7 @@ def main [
     } else if $task == 'update' {
         update-i18n-status
     } else if $task == 'outdated' {
-        if ($lng | empty?) {
+        if ($lng | is-empty) {
             $'(ansi r)A locale code required, available locales: ($locales), Please try again!(ansi reset)(char nl)'
             exit --now
         }
