@@ -35,3 +35,10 @@ Define a command and run it with parameter(s)
 ```shell
 > def say-sth [sth: string] { echo $sth }; say-sth hi
 ```
+
+Define a command with default parameters
+```shell
+> def say-default [thing: string = 'hello'] { echo $thing }
+> say-default
+> say-default goodbye
+```
