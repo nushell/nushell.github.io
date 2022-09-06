@@ -1,6 +1,6 @@
 ---
 title: into nu
-version: 0.67.0
+version: 0.67.1
 usage: |
   Converts a section of the dataframe into nushell Table
 ---

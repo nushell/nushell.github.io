@@ -1,6 +1,6 @@
 ---
-title: empty?
-version: 0.67.0
+title: is-empty
+version: 0.67.1
 usage: |
   Check for empty values.
 ---
@@ -11,7 +11,7 @@ usage: |
 
 ## Signature
 
-```> empty? ...rest```
+```> is-empty ...rest```
 
 ## Parameters
 
@@ -21,15 +21,15 @@ usage: |
 
 Check if a string is empty
 ```shell
-> '' | empty?
+> '' | is-empty
 ```
 
 Check if a list is empty
 ```shell
-> [] | empty?
+> [] | is-empty
 ```
 
 Check if more than one column are empty
 ```shell
-> [[meal size]; [arepa small] [taco '']] | empty? meal size
+> [[meal size]; [arepa small] [taco '']] | is-empty meal size
 ```

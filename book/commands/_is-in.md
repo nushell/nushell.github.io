@@ -1,6 +1,6 @@
 ---
 title: is-in
-version: 0.67.0
+version: 0.67.1
 usage: |
   Checks if elements from a series are contained in right series
 ---

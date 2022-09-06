@@ -1,6 +1,6 @@
 ---
 title: run-external
-version: 0.67.0
+version: 0.67.1
 usage: |
   Runs external command
 ---
@@ -11,11 +11,12 @@ usage: |
 
 ## Signature
 
-```> run-external ...rest --redirect-stdout --redirect-stderr```
+```> run-external (command) ...args --redirect-stdout --redirect-stderr```
 
 ## Parameters
 
- -  `...rest`: external command to run
+ -  `command`: external comamdn to run
+ -  `...args`: arguments for external command
  -  `--redirect-stdout`: redirect-stdout
  -  `--redirect-stderr`: redirect-stderr
 

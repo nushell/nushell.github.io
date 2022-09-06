@@ -1,6 +1,6 @@
 ---
 title: str-lengths
-version: 0.67.0
+version: 0.67.1
 usage: |
   Get lengths of all strings
 ---

@@ -1,6 +1,6 @@
 ---
 title: use
-version: 0.67.0
+version: 0.67.1
 usage: |
   Use definitions from a module
 ---
@@ -20,7 +20,7 @@ usage: |
 ## Notes
 ```text
 This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nushell.html
+  https://www.nushell.sh/book/thinking_in_nu.html
 ```
 ## Examples
 

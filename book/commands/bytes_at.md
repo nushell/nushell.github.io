@@ -1,6 +1,6 @@
 ---
 title: bytes at
-version: 0.67.0
+version: 0.67.1
 usage: |
   Get bytes defined by a range. Note that the start is included but the end is excluded, and that the first byte is index 0.
 ---

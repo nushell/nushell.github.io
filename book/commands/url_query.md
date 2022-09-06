@@ -1,6 +1,6 @@
 ---
 title: url query
-version: 0.67.0
+version: 0.67.1
 usage: |
   Get the query string of a URL
 ---

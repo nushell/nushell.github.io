@@ -1,6 +1,6 @@
 ---
 title: sum
-version: 0.67.0
+version: 0.67.1
 usage: |
   Creates a sum expression for an aggregation
 ---

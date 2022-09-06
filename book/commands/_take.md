@@ -1,6 +1,6 @@
 ---
 title: take
-version: 0.67.0
+version: 0.67.1
 usage: |
   Creates new dataframe using the given indices
 ---

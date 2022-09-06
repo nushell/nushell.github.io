@@ -1,6 +1,6 @@
 ---
 title: split row
-version: 0.67.0
+version: 0.67.1
 usage: |
   Split a string into multiple rows using a separator
 ---

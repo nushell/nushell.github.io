@@ -1,6 +1,6 @@
 ---
 title: str rpad
-version: 0.67.0
+version: 0.67.1
 usage: |
   Right-pad a string to a specific length
 ---

@@ -1,6 +1,6 @@
 ---
 title: contains
-version: 0.67.0
+version: 0.67.1
 usage: |
   Checks if a pattern is contained in a string
 ---

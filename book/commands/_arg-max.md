@@ -1,6 +1,6 @@
 ---
 title: arg-max
-version: 0.67.0
+version: 0.67.1
 usage: |
   Return index for max value in series
 ---

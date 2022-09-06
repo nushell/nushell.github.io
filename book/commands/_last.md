@@ -1,6 +1,6 @@
 ---
 title: last
-version: 0.67.0
+version: 0.67.1
 usage: |
   Creates new dataframe with tail rows or creates a last expression
 ---

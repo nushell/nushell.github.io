@@ -1,6 +1,6 @@
 ---
 title: cp
-version: 0.67.0
+version: 0.67.1
 usage: |
   Copy files.
 ---
@@ -18,7 +18,7 @@ usage: |
  -  `source`: the place to copy from
  -  `destination`: the place to copy to
  -  `--recursive`: copy recursively through subdirectories
- -  `--verbose`: do copy in verbose mode (default:false)
+ -  `--verbose`: show successful copies in addition to failed copies (default:false)
  -  `--interactive`: ask user to confirm action
  -  `--no-symlink`: no symbolic links are followed, only works if -r is active
 

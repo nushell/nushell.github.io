@@ -1,6 +1,6 @@
 ---
 title: str pascal-case
-version: 0.67.0
+version: 0.67.1
 usage: |
   Convert a string to PascalCase
 ---

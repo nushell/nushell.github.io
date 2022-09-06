@@ -1,6 +1,6 @@
 ---
 title: agg-groups
-version: 0.67.0
+version: 0.67.1
 usage: |
   creates an agg_groups expression
 ---

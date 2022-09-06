@@ -1,6 +1,6 @@
 ---
 title: tutor
-version: 0.67.0
+version: 0.67.1
 usage: |
   Run the tutorial. To begin, run: tutor
 ---

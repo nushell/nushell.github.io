@@ -1,6 +1,6 @@
 ---
 title: with-env
-version: 0.67.0
+version: 0.67.1
 usage: |
   Runs a block with an environment variable set.
 ---

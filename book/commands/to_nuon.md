@@ -1,6 +1,6 @@
 ---
 title: to nuon
-version: 0.67.0
+version: 0.67.1
 usage: |
   Converts table data into Nuon (Nushell Object Notation) text.
 ---

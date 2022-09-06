@@ -1,6 +1,6 @@
 ---
 title: extern
-version: 0.67.0
+version: 0.67.1
 usage: |
   Define a signature for an external command
 ---
@@ -21,7 +21,7 @@ usage: |
 ## Notes
 ```text
 This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nushell.html
+  https://www.nushell.sh/book/thinking_in_nu.html
 ```
 ## Examples
 

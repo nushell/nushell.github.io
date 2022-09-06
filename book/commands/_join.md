@@ -1,6 +1,6 @@
 ---
 title: join
-version: 0.67.0
+version: 0.67.1
 usage: |
   Joins a lazy frame with other lazy frame
 ---

@@ -1,6 +1,6 @@
 ---
 title: term size
-version: 0.67.0
+version: 0.67.1
 usage: |
   Returns the terminal size
 ---

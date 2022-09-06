@@ -1,6 +1,6 @@
 ---
 title: each while
-version: 0.67.0
+version: 0.67.1
 usage: |
   Run a block on each element of input until a $nothing is found
 ---

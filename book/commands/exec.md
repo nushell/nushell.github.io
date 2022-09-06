@@ -1,6 +1,6 @@
 ---
 title: exec
-version: 0.67.0
+version: 0.67.1
 usage: |
   Execute a command, replacing the current process.
 ---

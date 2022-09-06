@@ -1,6 +1,6 @@
 ---
 title: fill-na
-version: 0.67.0
+version: 0.67.1
 usage: |
   Replaces NA values with the given expression
 ---

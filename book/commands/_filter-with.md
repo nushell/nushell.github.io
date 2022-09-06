@@ -1,6 +1,6 @@
 ---
 title: filter-with
-version: 0.67.0
+version: 0.67.1
 usage: |
   Filters dataframe using a mask or expression as reference
 ---

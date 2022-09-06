@@ -1,6 +1,6 @@
 ---
 title: lowercase
-version: 0.67.0
+version: 0.67.1
 usage: |
   Lowercase the strings in the column
 ---

@@ -1,6 +1,6 @@
 ---
 title: overlay list
-version: 0.67.0
+version: 0.67.1
 usage: |
   List all active overlays
 ---
@@ -22,6 +22,6 @@ The overlays are listed in the order they were activated.
 Get the last activated overlay
 ```shell
 > module spam { export def foo [] { "foo" } }
-    overlay add spam
+    overlay use spam
     overlay list | last
 ```

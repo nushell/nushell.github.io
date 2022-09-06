@@ -1,6 +1,6 @@
 ---
 title: query xml
-version: 0.67.0
+version: 0.67.1
 usage: |
   execute xpath query on xml
 ---
