@@ -1,6 +1,6 @@
 ---
 title: math stddev
-version: 0.67.1
+version: 0.68.0
 usage: |
   Finds the stddev of a list of numbers or tables
 ---

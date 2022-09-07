@@ -1,6 +1,6 @@
 ---
 title: date humanize
-version: 0.67.1
+version: 0.68.0
 usage: |
   Print a 'humanized' format for the date, relative to now.
 ---

@@ -1,6 +1,6 @@
 ---
 title: columns
-version: 0.67.1
+version: 0.68.0
 usage: |
   Show the columns in the input.
 ---

@@ -1,6 +1,6 @@
 ---
 title: window
-version: 0.67.1
+version: 0.68.0
 usage: |
   Creates a sliding window of `window_size` that slide by n rows/elements across input.
 ---

@@ -1,6 +1,6 @@
 ---
 title: std
-version: 0.67.1
+version: 0.68.0
 usage: |
   Aggregates columns to their std value
 ---

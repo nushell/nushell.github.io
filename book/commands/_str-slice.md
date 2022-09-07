@@ -1,6 +1,6 @@
 ---
 title: str-slice
-version: 0.67.1
+version: 0.68.0
 usage: |
   Slices the string from the start position until the selected length
 ---

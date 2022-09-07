@@ -1,6 +1,6 @@
 ---
 title: reject
-version: 0.67.1
+version: 0.68.0
 usage: |
   Remove the given columns from the table. If you want to remove rows, try 'drop'.
 ---

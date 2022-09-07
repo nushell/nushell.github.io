@@ -1,6 +1,6 @@
 ---
 title: arg-min
-version: 0.67.1
+version: 0.68.0
 usage: |
   Return index for min value in series
 ---

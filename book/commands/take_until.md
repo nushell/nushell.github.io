@@ -1,6 +1,6 @@
 ---
 title: take until
-version: 0.67.1
+version: 0.68.0
 usage: |
   Take elements of the input until a predicate is true.
 ---

@@ -1,6 +1,6 @@
 ---
 title: date format
-version: 0.67.1
+version: 0.68.0
 usage: |
   Format a given date using a format string.
 ---

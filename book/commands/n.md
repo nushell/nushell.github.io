@@ -1,6 +1,6 @@
 ---
 title: n
-version: 0.67.1
+version: 0.68.0
 usage: |
   Switch to the next shell.
 ---

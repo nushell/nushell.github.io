@@ -1,6 +1,6 @@
 ---
 title: to html
-version: 0.67.1
+version: 0.68.0
 usage: |
   Convert table into simple HTML
 ---

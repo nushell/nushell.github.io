@@ -1,6 +1,6 @@
 ---
 title: set-with-idx
-version: 0.67.1
+version: 0.68.0
 usage: |
   Sets value in the given index
 ---

@@ -1,6 +1,6 @@
 ---
 title: ansi
-version: 0.67.1
+version: 0.68.0
 usage: |
   Output ANSI codes to change color.
 ---

@@ -1,6 +1,6 @@
 ---
 title: skip while
-version: 0.67.1
+version: 0.68.0
 usage: |
   Skip elements of the input while a predicate is true.
 ---

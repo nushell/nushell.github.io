@@ -1,6 +1,6 @@
 ---
 title: is-unique
-version: 0.67.1
+version: 0.68.0
 usage: |
   Creates mask indicating unique values
 ---

@@ -1,6 +1,6 @@
 ---
 title: path join
-version: 0.67.1
+version: 0.68.0
 usage: |
   Join a structured path or a list of path parts.
 ---

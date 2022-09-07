@@ -1,6 +1,6 @@
 ---
 title: export env
-version: 0.67.1
+version: 0.68.0
 usage: |
   Export a block from a module that will be evaluated as an environment variable when imported.
 ---

@@ -1,6 +1,6 @@
 ---
 title: str index-of
-version: 0.67.1
+version: 0.68.0
 usage: |
   Returns start index of first occurrence of pattern in string, or -1 if no match
 ---

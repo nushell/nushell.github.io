@@ -1,6 +1,6 @@
 ---
 title: group
-version: 0.67.1
+version: 0.68.0
 usage: |
   Groups input into groups of `group_size`.
 ---

@@ -1,6 +1,6 @@
 ---
 title: update cells
-version: 0.67.1
+version: 0.68.0
 usage: |
   Update the table cells.
 ---

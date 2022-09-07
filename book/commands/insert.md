@@ -1,6 +1,6 @@
 ---
 title: insert
-version: 0.67.1
+version: 0.68.0
 usage: |
   Insert a new column.
 ---

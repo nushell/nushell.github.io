@@ -1,6 +1,6 @@
 ---
 title: overlay hide
-version: 0.67.1
+version: 0.68.0
 usage: |
   Hide an active overlay
 ---

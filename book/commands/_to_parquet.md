@@ -1,6 +1,6 @@
 ---
 title: to parquet
-version: 0.67.1
+version: 0.68.0
 usage: |
   Saves dataframe to parquet file
 ---

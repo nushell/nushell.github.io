@@ -1,6 +1,6 @@
 ---
 title: from nuon
-version: 0.67.1
+version: 0.68.0
 usage: |
   Convert from nuon to structured data
 ---

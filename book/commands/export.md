@@ -1,6 +1,6 @@
 ---
 title: export
-version: 0.67.1
+version: 0.68.0
 usage: |
   Export definitions or environment variables from a module.
 ---

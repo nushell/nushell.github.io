@@ -1,6 +1,6 @@
 ---
 title: all
-version: 0.67.1
+version: 0.68.0
 usage: |
   Test if every element of the input matches a predicate.
 ---

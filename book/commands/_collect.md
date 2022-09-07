@@ -1,6 +1,6 @@
 ---
 title: collect
-version: 0.67.1
+version: 0.68.0
 usage: |
   Collect lazy dataframe into eager dataframe
 ---

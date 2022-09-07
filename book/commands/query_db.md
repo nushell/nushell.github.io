@@ -1,6 +1,6 @@
 ---
 title: query db
-version: 0.67.1
+version: 0.68.0
 usage: |
   Query a database using SQL.
 ---
