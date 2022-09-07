@@ -152,7 +152,7 @@
   {
     "name": "installation.md",
     "en": "Completed",
-    "zh-CN": "fa90895307@hustcer",
+    "zh-CN": "73ef7f3153@hustcer",
     "de": "translated by @sebastian-xyz",
     "tr": "-",
     "ja": "-",
@@ -192,7 +192,7 @@
   {
     "name": "modules.md",
     "en": "Completed",
-    "zh-CN": "115b193d2@hustcer",
+    "zh-CN": "73ef7f3153@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -222,7 +222,7 @@
   {
     "name": "nushell_map_functional.md",
     "en": "Completed",
-    "zh-CN": "fa90895307@hustcer",
+    "zh-CN": "73ef7f3153@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -232,7 +232,7 @@
   {
     "name": "nushell_map_imperative.md",
     "en": "Completed",
-    "zh-CN": "ae23eeba3@hustcer",
+    "zh-CN": "73ef7f3153@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -280,7 +280,7 @@
     "pt-BR": "-"
   },
   {
-    "name": "pipeline.md",
+    "name": "pipelines.md",
     "en": "Completed",
     "zh-CN": "6f61fadb69@hustcer",
     "de": "931d7240e2@petrisch",
@@ -332,7 +332,7 @@
   {
     "name": "stdout_stderr_exit_codes.md",
     "en": "Completed",
-    "zh-CN": "f5987a82d@hustcer",
+    "zh-CN": "73ef7f3153@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -350,7 +350,7 @@
     "pt-BR": "-"
   },
   {
-    "name": "thinking_in_nushell.md",
+    "name": "thinking_in_nu.md",
     "en": "Completed",
     "zh-CN": "fa90895307@hustcer",
     "de": "-",
@@ -362,7 +362,7 @@
   {
     "name": "types_of_data.md",
     "en": "Completed",
-    "zh-CN": "1b7d01ac3b@hustcer",
+    "zh-CN": "73ef7f3153@hustcer",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -382,7 +382,7 @@
   {
     "name": "working_with_lists.md",
     "en": "Completed",
-    "zh-CN": "fa90895307@hustcer",
+    "zh-CN": "73ef7f3153@hustcer",
     "de": "ad03c8d55c@petrisch",
     "tr": "-",
     "ja": "-",
@@ -402,7 +402,7 @@
   {
     "name": "working_with_tables.md",
     "en": "Completed",
-    "zh-CN": "51522d5591@hustcer",
+    "zh-CN": "73ef7f3153@hustcer",
     "de": "ad03c8d55c@petrisch",
     "tr": "-",
     "ja": "-",

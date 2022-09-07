@@ -20,6 +20,8 @@ Nu 可以通过几个软件包管理器获得：
 - [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 
+Nushell 的主要二进制文件被命名为 `nu`（或 Windows 下的 `nu.exe`）。安装完成后你可以通过输入 `nu` 来启动它。
+
 ## 从源码构建
 
 你也可以从源代码构建`Nu`。首先，你需要设置 Rust 工具链和它的依赖项。

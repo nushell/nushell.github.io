@@ -140,16 +140,19 @@ Eg) `1wk`是一个星期的时间间隔。
 
 下表显示了目前支持的所有时间间隔：
 
-| Duration | 时长   |
-| -------- | ------ |
-| `1ns`    | 1 纳秒 |
-| `1us`    | 1 微秒 |
-| `1ms`    | 1 毫秒 |
-| `1sec`   | 1 秒   |
-| `1min`   | 1 分钟 |
-| `1hr`    | 1 小时 |
-| `1day`   | 1 天   |
-| `1wk`    | 1 周   |
+| Duration | 时长                |
+| -------- | ------------------- |
+| `1ns`    | 1 纳秒              |
+| `1us`    | 1 微秒              |
+| `1ms`    | 1 毫秒              |
+| `1sec`   | 1 秒                |
+| `1min`   | 1 分钟              |
+| `1hr`    | 1 小时              |
+| `1day`   | 1 天                |
+| `1wk`    | 1 周                |
+| `1month` | 一个月 (30 天)      |
+| `1yr`    | 一年 (365 天)       |
+| `1dec`   | 十年 (10 \* 365 天) |
 
 ## 区间
 
@@ -181,11 +184,15 @@ Eg) `1wk`是一个星期的时间间隔。
 - `gb`: gigabytes
 - `tb`: terabytes
 - `pb`: petabytes
+- `eb`: exabytes
+- `zb`: zettabyte
 - `kib`: kibibytes (aka 1024 bytes)
 - `mib`: mebibytes
 - `gib`: gibibytes
 - `tib`: tebibytes
 - `pib`: pebibytes
+- `eib`: exbibyte
+- `zib`: zebibyte
 
 ## 二进制数据
 
