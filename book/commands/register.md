@@ -1,6 +1,6 @@
 ---
 title: register
-version: 0.67.0
+version: 0.68.0
 usage: |
   Register a plugin
 ---
@@ -17,13 +17,13 @@ usage: |
 
  -  `plugin`: path of executable for plugin
  -  `signature`: Block with signature description as json object
- -  `--encoding {string}`: Encoding used to communicate with plugin. Options: [capnp, json]
+ -  `--encoding {string}`: Encoding used to communicate with plugin. Options: [json, msgpack]
  -  `--shell {path}`: path of shell used to run plugin (cmd, sh, python, etc)
 
 ## Notes
 ```text
 This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nushell.html
+  https://www.nushell.sh/book/thinking_in_nu.html
 ```
 ## Examples
 

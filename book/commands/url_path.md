@@ -1,6 +1,6 @@
 ---
 title: url path
-version: 0.67.0
+version: 0.68.0
 usage: |
   Get the path of a URL
 ---

@@ -1,6 +1,6 @@
 ---
 title: to json
-version: 0.67.0
+version: 0.68.0
 usage: |
   Converts table data into JSON text.
 ---

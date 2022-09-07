@@ -1,6 +1,6 @@
 ---
 title: shells
-version: 0.67.0
+version: 0.68.0
 usage: |
   Lists all open shells.
 ---

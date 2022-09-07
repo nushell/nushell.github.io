@@ -1,6 +1,6 @@
 ---
 title: arg-sort
-version: 0.67.0
+version: 0.68.0
 usage: |
   Returns indexes for a sorted series
 ---

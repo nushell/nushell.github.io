@@ -1,6 +1,6 @@
 ---
 title: collect
-version: 0.67.0
+version: 0.68.0
 usage: |
   Collect the stream and pass it to a block.
 ---

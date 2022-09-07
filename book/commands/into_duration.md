@@ -1,6 +1,6 @@
 ---
 title: into duration
-version: 0.67.0
+version: 0.68.0
 usage: |
   Convert value to duration
 ---
@@ -11,11 +11,12 @@ usage: |
 
 ## Signature
 
-```> into duration ...rest```
+```> into duration ...rest --convert```
 
 ## Parameters
 
  -  `...rest`: column paths to convert to duration (for table input)
+ -  `--convert {string}`: convert duration into another duration
 
 ## Notes
 ```text
@@ -31,4 +32,9 @@ Convert string to duration in table
 Convert string to duration
 ```shell
 > '7min' | into duration
+```
+
+Convert string to a named duration
+```shell
+> '7min' | into duration --convert sec
 ```

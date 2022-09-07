@@ -1,6 +1,6 @@
 ---
 title: into datetime
-version: 0.67.0
+version: 0.68.0
 usage: |
   Convert text into a datetime
 ---

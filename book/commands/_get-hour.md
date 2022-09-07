@@ -1,6 +1,6 @@
 ---
 title: get-hour
-version: 0.67.0
+version: 0.68.0
 usage: |
   Gets hour from date
 ---

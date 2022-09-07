@@ -1,6 +1,6 @@
 ---
 title: reject
-version: 0.67.0
+version: 0.68.0
 usage: |
   Remove the given columns from the table. If you want to remove rows, try 'drop'.
 ---
@@ -27,4 +27,9 @@ Lists the files in a directory without showing the modified column
 Reject the specified field in a record
 ```shell
 > echo {a: 1, b: 2} | reject a
+```
+
+Reject a nested field in a record
+```shell
+> echo {a: {b: 3,c: 5}} | reject a.b
 ```

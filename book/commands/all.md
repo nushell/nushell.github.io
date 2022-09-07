@@ -1,6 +1,6 @@
 ---
-title: all?
-version: 0.67.0
+title: all
+version: 0.68.0
 usage: |
   Test if every element of the input matches a predicate.
 ---
@@ -11,7 +11,7 @@ usage: |
 
 ## Signature
 
-```> all? (predicate)```
+```> all (predicate)```
 
 ## Parameters
 
@@ -21,10 +21,10 @@ usage: |
 
 Find if services are running
 ```shell
-> echo [[status]; [UP] [UP]] | all? status == UP
+> echo [[status]; [UP] [UP]] | all status == UP
 ```
 
 Check that all values are even
 ```shell
-> echo [2 4 6 8] | all? ($it mod 2) == 0
+> echo [2 4 6 8] | all ($it mod 2) == 0
 ```

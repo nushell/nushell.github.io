@@ -1,6 +1,6 @@
 ---
 title: hide
-version: 0.67.0
+version: 0.68.0
 usage: |
   Hide definitions in the current scope
 ---
@@ -22,7 +22,7 @@ usage: |
 Definitions are hidden by priority: First aliases, then custom commands.
 
 This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nushell.html
+  https://www.nushell.sh/book/thinking_in_nu.html
 ```
 ## Examples
 

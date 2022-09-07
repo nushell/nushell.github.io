@@ -1,6 +1,6 @@
 ---
 title: from table
-version: 0.67.0
+version: 0.68.0
 usage: |
   Select section from query statement for a DB
 ---

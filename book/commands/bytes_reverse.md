@@ -1,6 +1,6 @@
 ---
 title: bytes reverse
-version: 0.67.0
+version: 0.68.0
 usage: |
   Reverse every bytes in the pipeline
 ---

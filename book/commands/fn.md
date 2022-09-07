@@ -1,6 +1,6 @@
 ---
 title: fn
-version: 0.67.0
+version: 0.68.0
 usage: |
   Creates function expression for a select operation
 ---

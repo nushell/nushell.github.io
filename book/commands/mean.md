@@ -1,6 +1,6 @@
 ---
 title: mean
-version: 0.67.0
+version: 0.68.0
 usage: |
   Creates a mean expression for an aggregation
 ---

@@ -1,6 +1,6 @@
 ---
 title: export def-env
-version: 0.67.0
+version: 0.68.0
 usage: |
   Define a custom command that participates in the environment and export it from a module
 ---
@@ -22,7 +22,7 @@ usage: |
 ## Notes
 ```text
 This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nushell.html
+  https://www.nushell.sh/book/thinking_in_nu.html
 
 === EXTRA NOTE ===
 All blocks are scoped, including variable definition and environment variable changes.
