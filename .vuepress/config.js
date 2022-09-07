@@ -413,7 +413,7 @@ export default defineUserConfig({
               children: [
                 'README.md',
                 'installation',
-                'thinking_in_nushell',
+                'thinking_in_nu',
                 'moving_around',
               ],
             },
@@ -426,7 +426,7 @@ export default defineUserConfig({
                 'working_with_strings',
                 'working_with_lists',
                 'working_with_tables',
-                'pipeline',
+                'pipelines',
                 'command_reference',
               ],
             },

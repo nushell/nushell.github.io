@@ -28,7 +28,7 @@
 let colors = [yellow green]
 let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
-echo $colors # [red yellow green purple]
+$colors # [red yellow green purple]
 ```
 
 ## 迭代列表
@@ -50,7 +50,7 @@ $names | each -n { |it| $"($it.index + 1) - ($it.item)" }
 
 ```bash
 let colors = [red orange yellow green blue purple]
-echo $colors | where ($it | str ends-with 'e')
+$colors | where ($it | str ends-with 'e')
 ```
 
 在这个例子中，我们只保留大于`7`的数字：
@@ -60,7 +60,7 @@ echo $colors | where ($it | str ends-with 'e')
 # This outputs the list [orange blue purple].
 
 let scores = [7 10 8 6 7]
-echo $scores | where $it > 7 # [10 8]
+$scores | where $it > 7 # [10 8]
 ```
 
 [`reduce`](/book/commands/reduce.md)命令从一个列表计算一个单一的值。
@@ -76,7 +76,7 @@ echo "total =" ($scores | math sum) # easier approach, same result
 
 echo "product =" ($scores | reduce --fold 1 { |it, acc| $acc * $it }) # 96
 
-echo $scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
+$scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
 ```
 
 ## 访问列表
@@ -123,32 +123,32 @@ let colors = [red green blue]
 
 ```bash
 # Do any color names end with "e"?
-echo $colors | any ($it | str ends-with "e") # true
+$colors | any ($it | str ends-with "e") # true
 
 # Is the length of any color name less than 3?
-echo $colors | any ($it | str length) < 3 # false
+$colors | any ($it | str length) < 3 # false
 
 # Are any scores greater than 7?
-echo $scores | any $it > 7 # true
+$scores | any $it > 7 # true
 
 # Are any scores odd?
-echo $scores | any $it mod 2 == 1 # true
+$scores | any $it mod 2 == 1 # true
 ```
 
 [`all`](/book/commands/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
 
 ```bash
 # Do all color names end with "e"?
-echo $colors | all ($it | str ends-with "e") # false
+$colors | all ($it | str ends-with "e") # false
 
 # Is the length of all color names greater than or equal to 3?
-echo $colors | all ($it | str length) >= 3 # true
+$colors | all ($it | str length) >= 3 # true
 
 # Are all scores greater than 7?
-echo $scores | all $it > 7 # false
+$scores | all $it > 7 # false
 
 # Are all scores even?
-echo $scores | all $it mod 2 == 0 # false
+$scores | all $it mod 2 == 0 # false
 ```
 
 ## 转换列表
@@ -156,9 +156,9 @@ echo $scores | all $it mod 2 == 0 # false
 [`flatten`](/book/commands/flatten.md)命令通过将嵌套列表中的元素添加到顶层列表中来从现有的列表创建一个新列表。这条命令可以被多次调用，以使任意嵌套深度的列表变平。例如：
 
 ```bash
-echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
+[1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 
-echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
+[[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
 [`wrap`](/book/commands/wrap.md)命令将一个列表转换为一个表格。每个列表的值将都会被转换为一个单独的行和列：
