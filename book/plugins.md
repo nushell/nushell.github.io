@@ -2,7 +2,7 @@
 
 Nu can be extended using plugins. Plugins behave much like Nu's built-in commands, with the added benefit that they can be added separately from Nu itself.
 
-Nu plugins are executables; Nu launches them as needed and communicates with them over [stdin, stdout, and stderr](https://en.wikipedia.org/wiki/Standard_streams). Nu plugins can use either JSON or [Cap'n Proto](https://capnproto.org/) as their communication encoding.
+Nu plugins are executables; Nu launches them as needed and communicates with them over [stdin, stdout, and stderr](https://en.wikipedia.org/wiki/Standard_streams). Nu plugins can use either JSON or MSGPACK as their communication encoding.
 
 ## Adding a plugin
 
@@ -11,20 +11,21 @@ To add a plugin, call the [`register`](commands/register.md) command to tell Nu 
 Linux+macOS:
 
 ```
-> register --encoding=capnp ./my_plugins/my-cool-plugin
+> register ./my_plugins/my-cool-plugin
 ```
 
 Windows:
 
 ```
-> register --encoding=capnp .\my_plugins\my-cool-plugin.exe
+> register .\my_plugins\my-cool-plugin.exe
 ```
 
 When [`register`](commands/register.md) is called:
 
-1. Nu launches the plugin and sends it a "Signature" message over stdin
-2. The plugin responds via stdout with a message containing its signature (name, description, arguments, flags, and more)
-3. Nu saves the plugin signature in the file at `$nu.plugin-path`, so registration is persisted across multiple launches
+1. Nu launches the plugin, and wait for plugin tell Nu which communication encoding it should use
+2. Nu sends it a "Signature" message over stdin
+3. The plugin responds via stdout with a message containing its signature (name, description, arguments, flags, and more)
+4. Nu saves the plugin signature in the file at `$nu.plugin-path`, so registration is persisted across multiple launches
 
 Once registered, the plugin is available as part of your set of commands:
 
