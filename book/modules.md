@@ -3,7 +3,7 @@
 Similar to many other programming languages, Nushell also has modules that let you import custom commands into a current scope.
 However, since Nushell is also a shell, modules allow you to import environment variables which can be used to conveniently activate/deactivate various environments.
 
-_Note! The current implementation of modules is quite bare-bones and will be expanded in the future. For example, it is not yet possible to import a module from within a module._
+_Note! The current implementation of modules is quite bare-bones and will be expanded in the future._
 
 ## Basics
 
