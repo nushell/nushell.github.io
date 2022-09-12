@@ -141,6 +141,7 @@ To make it less verbose, you can use the [`overlay new`](commands/overlay_new.md
 
 (scratchpad)> def eggs [] { "eggs" }
 ```
+
 :::
 
 ## Prefixed Overlays
@@ -148,6 +149,7 @@ To make it less verbose, you can use the [`overlay new`](commands/overlay_new.md
 The `overlay add` command would take all commands and aliases from the module and put them directly into the current namespace.
 However, you might want to keep them as subcommands behind the module's name.
 That's what `--prefix` is for:
+
 ```
 (zero)> module spam {
     export def foo [] { "foo" }
@@ -162,6 +164,7 @@ foo
 ## Rename an Overlay
 
 You can change the name of the added overlay with the `as` keyword:
+
 ```
 (zero)> module spam { export def foo [] { "foo" } }
 
