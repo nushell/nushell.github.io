@@ -9,16 +9,16 @@ import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom';
 
 import {
-  navbarEn,
   navbarDe,
+  navbarEn,
   navbarEs,
   navbarJa,
   navbarPtBR,
   navbarZhCN,
+  sidebarDe,
   sidebarEn,
   sidebarEs,
   sidebarJa,
-  sidebarDe,
   sidebarPtBR,
   sidebarZhCN,
 } from './configs/index.js';
