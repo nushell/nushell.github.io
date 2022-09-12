@@ -8,16 +8,18 @@ Nu plugins are executables; Nu launches them as needed and communicates with the
 
 To add a plugin, call the [`register`](commands/register.md) command to tell Nu where to find it. As you do, you'll need to also tell Nushell what encoding the plugin uses.
 
+Please note that the plugin name needs to start with `nu_plugin_`, Nu uses the name prefix to detect plugins.
+
 Linux+macOS:
 
 ```
-> register ./my_plugins/my-cool-plugin
+> register ./my_plugins/nu_plugin_cool
 ```
 
 Windows:
 
 ```
-> register .\my_plugins\my-cool-plugin.exe
+> register .\my_plugins\nu_plugin_cool.exe
 ```
 
 When [`register`](commands/register.md) is called:
