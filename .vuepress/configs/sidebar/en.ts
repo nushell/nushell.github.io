@@ -1,7 +1,7 @@
 import type { SidebarConfig } from '@vuepress/theme-default';
 
 export const sidebarEn: SidebarConfig = {
-  '/book/latest': [
+  '/book/': [
     {
       text: 'Introduction',
       link: '/book/README.md',

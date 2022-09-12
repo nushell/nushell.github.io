@@ -5,7 +5,7 @@ export const navbarEn: NavbarConfig = [
     text: 'Book',
     children: [
       { text: 'latest', link: '/book/' },
-      { text: 'v0.68.x', link: '/book/v0.68.x' },
+      { text: 'v0.68.x', link: '/book/v0.68.x/' },
     ],
   },
   // { text: "Contributor Book", link: "/contributor-book/" },
