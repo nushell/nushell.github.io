@@ -124,6 +124,7 @@ export const sidebarEn: SidebarConfig = {
         'direnv',
         'misc',
         'tables',
+        'polars_v_pandas_v_nushell',
       ],
     },
   ],
