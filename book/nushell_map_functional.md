@@ -1,6 +1,6 @@
 # Nu map from functional languages
 
-The idea behind this table is to help you understand how Nu built-ins and plug-ins relate to functional languages. We've tried to produce a map of all the Nu commands and what their equivalents are in other languages. Contributions are welcome.
+The idea behind this table is to help you understand how Nu builtins and plugins relate to functional languages. We've tried to produce a map of all the Nu commands and what their equivalents are in other languages. Contributions are welcome.
 
 Note: this table assumes Nu 0.43 or later.
 
