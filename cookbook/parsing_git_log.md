@@ -115,7 +115,7 @@ Ahhh, that looks much better.
 ───┴──────────┴──────────────────────┴──────────────────┴──────────────────────┴──────────────────
 ```
 
-Hmmm, that date string is a string. If it were a date vs a string it could be used for sorting by date. The way we do that is we have to convert the date time to a real datetime and update the column. Try this.
+Hmmm, that date string is a string. If it were a date vs a string it could be used for sorting by date. The way we do that is we have to convert the datetime to a real datetime and update the column. Try this.
 
 ```shell
 > git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime}

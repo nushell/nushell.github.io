@@ -81,7 +81,7 @@ You can alternatively do this using `parse`.
 open bands.txt | lines | parse "{Band}:{Album}:{Year}" | skip 1 | sort-by Year
 ```
 
-Or, you can utilize the `headers` command to use the first row as a header row like. The only difference would be the headers would match the case of the text file. So, in this case, the headers would be lowercase.
+Or, you can utilize the `headers` command to use the first row as a header row. The only difference would be the headers would match the case of the text file. So, in this case, the headers would be lowercase.
 
 ```shell
 > open bands.txt | lines | split column ":" | headers | sort-by year

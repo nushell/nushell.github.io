@@ -24,13 +24,13 @@ And get the equivalent to having typed `ls -l -a`.
 
 ## How to write an alias with Pipes
 
-If you want to add a pipe to your alias you must must enclose it with parentheses which are a pair of round brackets ( ) used to mark off your set of commands with pipes.
+If you want to add a pipe to your alias you must enclose it with parentheses which are a pair of round brackets ( ) used to mark off your set of commands with pipes.
 
 ```
 alias lsname = (ls | get name)
 ```
 
-Here is an alias with more than one pipe
+Here is an alias with more than one pipe:
 
 ```
 alias lt = (ls | sort-by modified -r | sort-by type)

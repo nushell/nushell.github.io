@@ -10,7 +10,7 @@ Furthermore, Nushell has several different configuration files that are run on s
 
 A big feature of any shell are [environment variables](environment.md).
 In Nushell, environment variables are scoped and can have any type supported by Nushell.
-This brings in some additional design consideratios so please refer to the linked section for more details.
+This brings in some additional design considerations so please refer to the linked section for more details.
 
 The other sections explain how to work with [stdout, stderr and exit codes](stdout_stderr_exit_codes.md), how to [escape a command call to the external command call](escaping.md), and how to [configure 3rd party prompts](3rdpartyprompts.md) to work with Nushell.
 

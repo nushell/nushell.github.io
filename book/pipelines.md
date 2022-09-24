@@ -47,7 +47,7 @@ Data will flow from the internal_command to the external_command. This data will
 
 `external_command | internal_command`
 
-Data coming from an external command into Nu will come in as bytes that Nushell will try to automatically convert to UTF-8 text. If successful, a stream of text data will be sent to internal_command. If unsuccessful, a stream of binary data will be sent to internal command.. Commands like [`lines`](commands/lines.md) help make it easier to bring in data from external commands, as it gives discrete lines of data to work with.
+Data coming from an external command into Nu will come in as bytes that Nushell will try to automatically convert to UTF-8 text. If successful, a stream of text data will be sent to internal_command. If unsuccessful, a stream of binary data will be sent to internal command. Commands like [`lines`](commands/lines.md) help make it easier to bring in data from external commands, as it gives discrete lines of data to work with.
 
 `external_command_1 | external_command_2`
 

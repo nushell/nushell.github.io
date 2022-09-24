@@ -40,7 +40,7 @@ let-env config = {
 Try putting the above to your config, running Nushell and moving around your filesytem.
 When you change a directory, the `PWD` environment variable changes and the change triggers the hook with the previous and the current values stored in `before` and `after` variables, respectively.
 
-Instead of defining a just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
+Instead of defining just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
 
 ```
 let-env config = {

@@ -194,7 +194,7 @@ You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a
 
 If we look back at the [`env`](commands/env.html) command, the `raw` column shows the value translated by `ENV_CONVERSIONS.<name>.to_string` and the `value` column shows the value used in Nushell (the result of `ENV_CONVERSIONS.<name>.from_string` in the case of `FOO`).
 If the value is not a string and does not have `to_string` conversion, it is not passed to an external (see the `raw` column of `PROMPT_COMMAND`).
-One exception is `PATH` (`Path` on Windows): By default, it converts the string to a list on startup and from a list to a string when running externals if no manual conversions are specified.
+One exception is `PATH` (`Path` on Windows): by default, it converts the string to a list on startup and from a list to a string when running externals if no manual conversions are specified.
 
 _(Important! The environment conversion string -> value happens **after** the env.nu and config.nu are evaluated. All environment variables in env.nu and config.nu are still strings unless you set them manually to some other values.)_
 

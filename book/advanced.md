@@ -1,6 +1,6 @@
 # (Not So) Advanced
 
-While the "Advanced" title might sound daunting and you might be tempted to skip this chapter, in fact, some of the most interesing and powerful features can be found here.
+While the "Advanced" title might sound daunting and you might be tempted to skip this chapter, in fact, some of the most interesting and powerful features can be found here.
 
 Nushell operates on _structured data_.
 You could say tha Nushell is a "data-first" shell and a programming language.

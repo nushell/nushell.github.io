@@ -57,7 +57,7 @@ $colors | where ($it | str ends-with 'e')
 In this example, we keep only values higher than `7`.
 
 ```bash
-# The block passed to where must evaluate to a boolean.
+# The block passed to `where` must evaluate to a boolean.
 # This outputs the list [orange blue purple].
 
 let scores = [7 10 8 6 7]

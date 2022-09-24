@@ -42,7 +42,7 @@ In this way, you can support jumping between working directories. Note that curr
 
 **Limitations**
 
-There are some limitations of the filesystem shell in its current state of development. One such limitation is that you can not easily add multiple new paths to the ring buffer at a time (for example: `enter $it`), as each new addition to the ring buffer will change the current directory. This limitation is not inherent in the design of the ring buffer and a future design may wish to separate `enter` from the changing of the current working directory.
+There are some limitations of the filesystem shell in its current state of development. One such limitation is that you cannot easily add multiple new paths to the ring buffer at a time (for example: `enter $it`), as each new addition to the ring buffer will change the current directory. This limitation is not inherent in the design of the ring buffer and a future design may wish to separate `enter` from the changing of the current working directory.
 
 ## Value Shell
 

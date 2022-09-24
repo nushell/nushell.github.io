@@ -74,7 +74,7 @@ We can have a look at the first lines of the file using `first`:
 ───┴──────────┴─────────┴──────┴───────────┴──────────
 ```
 
-...and finally, we can get an idea of the inferred datatypes:
+...and finally, we can get an idea of the inferred data types:
 
 ```shell
 > $df | dtypes

@@ -10,8 +10,6 @@ Many parts of Nushell's interface can have their color customized. All of these 
 
 ## `Table borders`
 
----
-
 Table borders are controlled by the `table_mode` setting in `config.nu`. Here is an example:
 
 ```shell
@@ -394,7 +392,7 @@ I like the `vivid` application and currently have it configured in my `config.nu
 
 `let-env LS_COLORS = (vivid generate molokai | str trim)`
 
-If `LS_COLORS` is not set, nushell will default to a builtin `LS_COLORS` setting, based on 8-bit (extended) ANSI colors.
+If `LS_COLORS` is not set, nushell will default to a built-in `LS_COLORS` setting, based on 8-bit (extended) ANSI colors.
 
 ## Theming
 

@@ -11,7 +11,7 @@ Nu's core value is that working in a shell should be fun. To support this, we be
 - A modern shell should be designed for usability and ergonomics. **Above all else, Nu should be fun to use.**
 - It should provide great informative errors messages when a command will not succeed correctly. This is critically important. A fun shell gives **clear, actionable errors**.
 - It should be built around supporting casual use, as this is the majority of use in a shell, even by experienced users. Building a shell that is **fun for casual use makes a fun shell for everyone**.
-- Nu supports experimentation and **growing ideas from experiments to programs**. The ability to evolve ideas to one-liners, scripts, and then to programs is a key role a shell plays. To support this, Nu builds on the idea of composable commands that work on a shared set of datatypes.
+- Nu supports experimentation and **growing ideas from experiments to programs**. The ability to evolve ideas to one-liners, scripts, and then to programs is a key role a shell plays. To support this, Nu builds on the idea of composable commands that work on a shared set of data types.
 
 ## Non-goals
 
