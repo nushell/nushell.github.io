@@ -52,7 +52,7 @@ Note: this table assumes Nu 0.60.0 or later.
 | `echo $FOO`                          | `echo $env.FOO`                                  | Use environment variables                                         |
 | `unset FOO`                          | `hide FOO`                                       | Unset environment variable for current session                    |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                       | Define an alias temporarily                                       |
-| `type FOO`                           | `which FOO`                                      | Display information about a command (built-in, alias, or executable) |
+| `type FOO`                           | `which FOO`                                      | Display information about a command (builtin, alias, or executable) |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Add and edit alias permanently (for new shells)                   |
 | `bash -c <commands>`                 | `nu -c <commands>`                               | Run a pipeline of commands (requires 0.9.1 or later)              |
 | `bash <script file>`                 | `nu <script file>`                               | Run a script file (requires 0.9.1 or later)                       |
