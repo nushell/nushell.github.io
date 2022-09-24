@@ -23,4 +23,6 @@ It is also possible to define [custom signatures for external commands](externs.
 
 [Coloring and Theming in Nu](coloring_and_theming.md) goes into more detail about how to configure Nushell's appearance.
 
+If you want to schedule some commands to run in the background, [Background task in Nu](background_task.md) provide a simple guideline for you to follow.
+
 And finally, [hooks](hooks.md) allow you to insert fragments of Nushell code to run at certain events.
