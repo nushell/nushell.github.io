@@ -5,7 +5,7 @@ title: Setup
 # Setup
 
 To get the most out of nu, it is important to setup your path and env for easy access.
-There are other ways to view these values and variables, however setting up your nu configuration will make it much easier as these are supported cross-platform.
+There are other ways to view these values and variables, however setting up your nu configuration will make it much easier as these have cross-platform support.
 
 ---
 
@@ -21,7 +21,7 @@ If you want to append a folder to your `PATH` environment variable you can do th
 > let-env PATH = ($env.PATH | append "some/other/path")
 ```
 
-For more detailed instructions, see the our environment variables documentation [here](https://github.com/nushell/nushell/blob/main/docs/Environment_Variables.md)
+For more detailed instructions, see the environment variables documentation [here](https://github.com/nushell/nushell/blob/main/docs/Environment_Variables.md)
 
 ### How to list your environment variables
 

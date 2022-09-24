@@ -1,7 +1,7 @@
 # Reedline, Nu's line editor
 
 Nushell's line editor [Reedline](https://github.com/nushell/reedline) is a
-cross platform line reader designed to be modular and flexible. The engine is
+cross-platform line reader designed to be modular and flexible. The engine is
 in charge of controlling the command history, validations, completions, hints
 and screen paint.
 
@@ -136,7 +136,7 @@ Reedline should store you will need to adjust this value in your config file:
 ### Customizing your prompt
 
 Reedline prompt is also highly customizable. In order to construct your perfect
-prompt, you could define the next environmental variables in your config file:
+prompt, you could define the next environment variables in your config file:
 
 ```bash
 # Use nushell functions to define your right and left prompt
@@ -159,7 +159,7 @@ let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
 ```
 
 ::: tip
-You don't have to define the environmental variables using Nushell
+You don't have to define the environment variables using Nushell
 functions. You can use simple strings to define them.
 :::
 
@@ -174,7 +174,7 @@ let-env PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
 ::: tip
-The prompt indicators are environmental variables that represent the
+The prompt indicators are environment variables that represent the
 state of the prompt
 :::
 

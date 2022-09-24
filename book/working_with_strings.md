@@ -89,16 +89,16 @@ true
 
 ### Trimming Strings
 
-You can trim the sides of a string with the [`str trim`](commands/str_trim.md) command. By default, the [`str trim`](commands/str_trim.md) commands trims whitespace from both sides of the string. For example
+You can trim the sides of a string with the [`str trim`](commands/str_trim.md) command. By default, the [`str trim`](commands/str_trim.md) commands trims whitespace from both sides of the string. For example:
 
 ```sh
 > '       My   string   ' | str trim
 My   string
 ```
 
-You can specificy on which side the trimming occurs with the `--right` and `--left` options.
+You can specify on which side the trimming occurs with the `--right` and `--left` options.
 
-To trim a specific character, use `--char <Character>` to specificy the character to trim.
+To trim a specific character, use `--char <Character>` to specify the character to trim.
 
 Here's an example of all the options in action:
 
@@ -109,7 +109,7 @@ Here's an example of all the options in action:
 
 ### Substrings
 
-Substrings are slices of a string. They have startpoint and an endpoint. Here's an example of using a substring:
+Substrings are slices of a string. They have a startpoint and an endpoint. Here's an example of using a substring:
 
 ```sh
 > 'Hello World!' | str index-of 'o'

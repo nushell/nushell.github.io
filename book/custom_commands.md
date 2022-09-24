@@ -324,7 +324,7 @@ greet moon earth mars jupiter venus
 
 ## Documenting your command
 
-In order to best help users of your custom commands, you can also document them with additional descriptions for the commands and the parameters.
+In order to best help users of your custom commands, you can also document them with additional descriptions for the commands and parameters.
 
 Taking our previous example:
 

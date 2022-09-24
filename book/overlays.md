@@ -27,7 +27,7 @@ To create a new overlay, you first need a module:
 }
 ```
 
-We'll use this module throughout the chapter: Whenever you see `overlay add spam`, assume `spam` is referring to this module.
+We'll use this module throughout the chapter, so whenever you see `overlay add spam`, assume `spam` is referring to this module.
 
 To create the overlay, call [`overlay add`](commands/overlay_add.md):
 
@@ -178,7 +178,7 @@ foo
 (spam)>
 ```
 
-This can be useful if you have a generic script name, such as virtualenv's `activate.nu` but you want some more descriptive name for your overlay.
+This can be useful if you have a generic script name, such as virtualenv's `activate.nu` but you want a more descriptive name for your overlay.
 
 ## Preserving Definitions
 
@@ -216,8 +216,8 @@ foo
 ## Ordering Overlays
 
 The overlays are arranged as a stack.
-If multiple overlays contain the same definition, say `foo`, the one from the last active one would take a precedence.
-To bring some overlay to the top of the stack, you can call `overlay add` again:
+If multiple overlays contain the same definition, say `foo`, the one from the last active one would take precedence.
+To bring an overlay to the top of the stack, you can call `overlay add` again:
 
 ```
 (zero)> def foo [] { "foo-in-zero" }
@@ -239,4 +239,4 @@ foo-in-zero
 ───┴──────
 ```
 
-Now, the `zero` overlay takes a precedence.
+Now, the `zero` overlay takes precedence.

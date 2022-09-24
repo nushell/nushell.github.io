@@ -72,11 +72,11 @@ The `hello` symbol will be imported directly without any prefix.
 
 `use greetings [ hello, hi ]`
 
-Imports multiple symbols directly without any prefix
+Imports multiple symbols directly without any prefix.
 
 `use greetings *`
 
-You can also use the module name and the `*` glob to import all names directly without any prefix
+You can also use the module name and the `*` glob to import all names directly without any prefix.
 
 ## Module Files
 

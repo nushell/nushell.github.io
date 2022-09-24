@@ -6,7 +6,7 @@ way into the Nushell philosophy.
 
 However, if you are in the need of more detailed Nushell scripts, have a look
 at the [Nushell's scripts](https://github.com/nushell/nu_scripts) repository
-were you will find interesting scripts done for Nushell.
+where you will find interesting scripts written for Nushell.
 
 And if you are looking for cool oneliners like this one
 

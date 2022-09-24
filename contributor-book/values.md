@@ -58,7 +58,7 @@ Let's look at these in reverse order to see how Primitives build towards our ful
 
 ## Primitive
 
-A `Primitive` data type is a fundamental type in Nu. While these have similarities to the fundamental datatypes of programming languages, there are a few differences because of the shell capabilities of Nu.
+A `Primitive` data type is a fundamental type in Nu. While these have similarities to the fundamental data types of programming languages, there are a few differences because of the shell capabilities of Nu.
 
 Nu comes with two 'big' number types: `BigInt` for integers and `BigDecimal` for decimal numbers. This allows Nu in the future to do mathematical operations and maintain precision for longer.
 

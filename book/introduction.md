@@ -68,6 +68,6 @@ If this looks very similar to what we had before, you have a keen eye! It is sim
 
 ### Getting Help
 
-Help text for any of Nu's builtin commands can be discovered with the [`help`](commands/help.md) command. To see all commands, run `help commands`. You can also search for a topic by doing `help -f <topic>`.
+Help text for any of Nu's built-in commands can be discovered with the [`help`](commands/help.md) command. To see all commands, run `help commands`. You can also search for a topic by doing `help -f <topic>`.
 
 @[code](@snippets/introduction/help_example.sh)
