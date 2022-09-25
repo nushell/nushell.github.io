@@ -217,7 +217,7 @@ let-env config = ($env.config | upsert hooks.env_change.PWD {
                 ($after == '/path/to/target/dir'
                     and ($after | path join test-env.nu | path exists))
             }
-            code: "overlay add test-env.nu"
+            code: "overlay use test-env.nu"
         }
         {
             condition: {|before, after|
@@ -225,7 +225,7 @@ let-env config = ($env.config | upsert hooks.env_change.PWD {
                     and '/path/to/target/dir' in $before
                     and 'test-env' in (overlay list))
             }
-            code: "overlay remove test-env --keep-env [ PWD ]"
+            code: "overlay hide test-env --keep-env [ PWD ]"
         }
     ]
 })

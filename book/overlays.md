@@ -206,11 +206,14 @@ The `--keep-custom` flag does exactly that.
 One can also keep a list of environment variables that were defined inside an overlay, but remove the rest, using the `--keep-env` flag:
 
 ```
-(zero)> module spam { export def foo [] { "foo" }; export env FOO {"foo"}}
+(zero)> module spam {
+    export def foo [] { "foo" }
+    export-env { let-env FOO = "foo" }
+}
 
 (zero)> overlay use spam
 
-(spam)> overlay hide spam --keep-env [FOO]
+(spam)> overlay hide spam --keep-env [ FOO ]
 
 (zero)> foo
 Error: Can't run executable...
