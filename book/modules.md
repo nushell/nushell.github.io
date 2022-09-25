@@ -177,15 +177,17 @@ You can put a complex code defining your environment without polluting the names
 ```
 export-env {
     def tmp [] { "tmp" }
+    def other [] { "other" }
 
     let len = (tmp | str length)
 
     load-env {
+        OTHER_ENV: (other)
         TMP_LEN: $len
     }
 }
 ```
-Only the `$env.TMP_LEN` is preserved after evaluating the `export-env` module.
+Only `$env.TMP_LEN` and `$env.OTHER_ENV` are preserved after evaluating the `export-env` module.
 :::
 
 ## Exporting symbols
