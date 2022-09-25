@@ -170,6 +170,24 @@ Arthur, King of the Britons
 hello Arthur, King of the Britons!
 ```
 
+::: tip
+You might wonder why we can't just define `let-env` at the top of the module.
+The reason is that the `export-env {...}` block keeps its scope separate from the rest of the module which makes it more organized.
+You can put a complex code defining your environment without polluting the namespace of the module, for example:
+```
+export-env {
+    def tmp [] { "tmp" }
+
+    let len = (tmp | str length)
+
+    load-env {
+        TMP_LEN: $len
+    }
+}
+```
+Only the `$env.TMP_LEN` is preserved after evaluating the `export-env` module.
+:::
+
 ## Exporting symbols
 
 Apart from `def` and `def-env`, you can also export `alias`es and `extern`s, giving you a way to only use these features when you need. Exporting externs also gives you the ability to hide custom completion commands in a module, so they don't have to be part of the global namespace.
