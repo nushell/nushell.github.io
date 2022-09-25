@@ -3,8 +3,6 @@
 Similar to many other programming languages, Nushell also has modules that let you import custom commands into a current scope.
 However, since Nushell is also a shell, modules allow you to import environment variables which can be used to conveniently activate/deactivate various environments.
 
-_Note! The current implementation of modules is quite bare-bones and will be expanded in the future._
-
 ## Basics
 
 A simple module can be defined like this:
@@ -147,73 +145,45 @@ hi there!
 ## Environment Variables
 
 So far we used modules just to import custom commands.
-It is possible to export environment variables the same way.
-The syntax is slightly different than what you might be used to from commands like [`let-env`](commands/let-env.md) or [`load-env`](commands/load-env.md):
+However, modules can also define an environment using [`export-env`](commands/export-env.md):
 
 ```
 # greetings.nu
 
-export env MYNAME { "Arthur, King of the Britons" }
+export-env {
+    let-env MYNAME = "Arthur, King of the Britons"
+}
 
-export def hello [name: string] {
-    $"hello ($name)"
+export def hello [] {
+    $"hello ($env.MYNAME)"
 }
 ```
 
-`use` works the same way as with custom commands:
-
+`use` will run the code inside the `export-env` block and merge its environment into the current scope:
 ```
 > use greetings.nu
 
-> $env."greetings MYNAME"
+> $env.MYNAME
 Arthur, King of the Britons
 
-> greetings hello $env."greetings MYNAME"
+> greetings hello
 hello Arthur, King of the Britons!
-```
-
-You can notice we do not assign the value to `MYNAME` directly.
-Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we call [`use`](commands/use.md).
-We can demonstrate this property, for example, with the [`random`](commands/random.md) command:
-
-```
-> module roll { export env ROLL { random dice | into string } }
-
-> use roll ROLL
-
-> $env.ROLL
-4
-
-> $env.ROLL
-4
-
-> use roll ROLL
-
-> $env.ROLL
-6
-
-> $env.ROLL
-6
 ```
 
 ## Exporting symbols
 
-As mentioned above, you can export definitions and environment variables from modules. This lets you more easily group related definitions together and export the ones you want to make public.
-
-You can also export aliases and externs, giving you a way to only use these features when you need. Exporting externs also gives you the ability to hide custom completion commands in a module, so they don't have to be part of the global namespace.
+Apart from `def` and `def-env`, you can also export `alias`es and `extern`s, giving you a way to only use these features when you need. Exporting externs also gives you the ability to hide custom completion commands in a module, so they don't have to be part of the global namespace.
 
 Here's the full list of ways you can export:
 
 - `export def` - export a custom command
 - `export def-env` - export a custom environment command
-- `export env` - export an environment variable
 - `export alias` - export an alias
 - `export extern` - export a known external definition
 
 ## Hiding
 
-Any custom command, alias or environment variable, imported from a module or not, can be "hidden", restoring the previous definition.
-(Note, it is not yet possible to export aliases from modules but they can still be hidden.)
+Any custom command or alias, imported from a module or not, can be "hidden", restoring the previous definition.
 We do this with the [`hide`](commands/hide.md) command:
 
 ```
@@ -248,55 +218,16 @@ It can be one of the following:
 
 - Hides all of the module's exports, without the prefix
 
-Let's show these with examples.
-We saw direct hiding of a custom command already.
-Let's try environment variables:
+## Hiding Environment Variables
 
+Environment variables can be hidden with [`hide-env`](commands/hide-env.md):
 ```
 > let-env FOO = "FOO"
 
 > $env.FOO
 FOO
 
-> hide FOO
+> hide-env FOO
 
 > $env.FOO  # error! environment variable not found!
-```
-
-The first case also applies to commands / environment variables brought from a module (using the "greetings.nu" file defined above):
-
-```
-> use greetings.nu *
-
-> $env.MYNAME
-Arthur, King of the Britons
-
-> hello "world"
-hello world!
-
-> hide MYNAME
-
-> $env.MYNAME  # error! environment variable not found!
-
-> hide hello
-
-> hello "world" # error! command not found!
-```
-
-And finally, when the name is the module name (assuming the previous `greetings` module):
-
-```
-> use greetings.nu
-
-> $env."greetings MYNAME"
-Arthur, King of the Britons
-
-> greetings hello "world"
-hello world!
-
-> hide greetings
-
-> $env."greetings MYNAME"  # error! environment variable not found!
-
-> greetings hello "world" # error! command not found!
 ```
