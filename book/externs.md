@@ -44,6 +44,17 @@ In the above example, you'll notice some types are followed by `@` followed by t
 
 Both the type (or shape) of the argument and the custom completion tell Nushell about how to complete values for that flag or position. For example, setting a shape to `path` allows Nushell to complete the value to a filepath for you. Using the `@` with a custom completion overrides this default behavior, letting the custom completion give you full completion list.
 
+## Format specifiers
+
+Positional parameters can be made optional with a `?` (as seen above) or repeated with a preceding `...`:
+
+```
+  export extern "git add" [
+    ...pathspecs: glob
+    # …
+  ]
+```
+
 ## Limitations
 
 There are a few limitations to the current `extern` syntax. In Nushell, flags and positional arguments are very flexible: flags can precede positional arguments, flags can be mixed into positional arguments, and flags can follow positional arguments. Many external commands are not this flexible. There is not yet a way to require a particular ordering of flags and positional arguments to the style required by the external.
