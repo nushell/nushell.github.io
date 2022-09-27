@@ -17,7 +17,7 @@ This table was last updated for Nu 0.67.0.
 | `COLOR`                              |                                                                                        | Set the console default foreground/background colors                  |
 |                                      | `ansi {flags} (code)`                                                                  | Output ANSI codes to change color                                     |
 | `COPY <source> <destination>`        | `cp <source> <destination>`                                                            | Copy files                                                            |
-| `COPY <file1>+<file2> <destination>` | `[<file1>, <file2>] \| each { open --raw } \| str collect \| save --raw <destination>` | Append multiple files into one                                        |
+| `COPY <file1>+<file2> <destination>` | `[<file1>, <file2>] \| each { open --raw } \| str join \| save --raw <destination>` | Append multiple files into one                                        |
 | `DATE /T`                            | `date now`                                                                             | Get the current date                                                  |
 | `DATE`                               |                                                                                        | Set the date                                                          |
 | `DEL <file>` or `ERASE <file>`       | `rm <file>`                                                                            | Delete files                                                          |

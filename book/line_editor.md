@@ -149,7 +149,7 @@ def create_left_prompt [] {
 def create_right_prompt [] {
     let time_segment = ([
         (date now | date format '%m/%d/%Y %r')
-    ] | str collect)
+    ] | str join)
 
     $time_segment
 }
@@ -279,7 +279,7 @@ first clears the prompt, inserts a string and then enters that value
       event:[
           { edit: Clear }
           { edit: InsertString,
-            value: "cd (ls | where type == dir | each { |it| $it.name} | str collect (char nl) | fzf | decode utf-8 | str trim)"
+            value: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
 
           }
           { send: Enter }
@@ -309,7 +309,7 @@ event to the engine
       mode: emacs
       event: {
         send: executehostcommand,
-        cmd: "cd (ls | where type == dir | each { |it| $it.name} | str collect (char nl) | fzf | decode utf-8 | str trim)"
+        cmd: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
       }
     }
   ]

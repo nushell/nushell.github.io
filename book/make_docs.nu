@@ -10,7 +10,7 @@ if $book_exists == false {
 
 for command in ($nu.scope.commands | where is_custom == false && is_extern == false | sort-by category) {
     # this is going in the frontmatter as a multiline YAML string, so indentation matters
-    let indented_usage = ($command.usage | lines | each {|it| $"  ($it)"} | str collect (char nl))
+    let indented_usage = ($command.usage | lines | each {|it| $"  ($it)"} | str join (char nl))
 
     let top = $"---
 title: ($command.command)
@@ -34,7 +34,7 @@ usage: |
         } else if $param.parameter_type == "rest" {
             $"...($param.parameter_name)"
         }
-    } | str collect " ")
+    } | str join " ")
 
     let signature = $"## Signature(char nl)(char nl)```> ($command.command) ($sig)```(char nl)(char nl)"
 
@@ -48,7 +48,7 @@ usage: |
         } else if $param.parameter_type == "rest" {
             $" -  `...($param.parameter_name)`: ($param.description)"
         }
-    } | str collect (char nl))
+    } | str join (char nl))
 
     let parameters = if ($command.signature | length) > 0 {
         $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)"
@@ -78,7 +78,7 @@ $"($example.description)
 ```
 
 "
-        } | str collect)
+        } | str join)
 
         $example_top + $examples
     } else { "" }
@@ -87,7 +87,7 @@ $"($example.description)
             ($top + $signature + $parameters + $extra_usage + $examples ) |
             lines |
             each {|it| ($it | str trim -r) } |
-            str collect (char nl)
+            str join (char nl)
         )
 
     let safe_name = ($command.command | str replace '\?' '' | str replace ' ' '_')

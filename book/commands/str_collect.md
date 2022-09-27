@@ -1,5 +1,5 @@
 ---
-title: str collect
+title: str join
 version: 0.68.0
 usage: |
   Concatenate multiple strings into a single string, with an optional separator between each
@@ -11,7 +11,7 @@ usage: |
 
 ## Signature
 
-```> str collect (separator)```
+```> str join (separator)```
 
 ## Parameters
 
@@ -21,10 +21,10 @@ usage: |
 
 Create a string from input
 ```shell
-> ['nu', 'shell'] | str collect
+> ['nu', 'shell'] | str join
 ```
 
 Create a string from input with a separator
 ```shell
-> ['nu', 'shell'] | str collect '-'
+> ['nu', 'shell'] | str join '-'
 ```

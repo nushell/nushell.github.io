@@ -9,10 +9,10 @@ Nushell 和外部命令之间互操作的一个重要部分是与来自外部的
 标准输出流(stdout)是大多数外部应用程序将数据发送到管道或屏幕上的方式。如果由外部应用发送到其 stdout 的数据是管道的一部分，Nushell 会默认接收。
 
 ```bash
-> external | str collect
+> external | str join
 ```
 
-以上将调用名为`external`的外部命令，并将 stdout 输出流重定向到管道中。有了这个重定向，Nushell 就可以把数据传递给管道中的下一个命令，这里是`str collect`。
+以上将调用名为`external`的外部命令，并将 stdout 输出流重定向到管道中。有了这个重定向，Nushell 就可以把数据传递给管道中的下一个命令，这里是`str join`。
 
 如果没有管道，Nushell 将不做任何重定向，允许它直接打印到屏幕上。
 

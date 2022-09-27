@@ -30,11 +30,11 @@ As we do, we also get output just as we would with built-in commands:
 ```
 
 ::: tip
-`echo` returns its arguments separately to the pipeline. If you want to use it to generate a single string append ` | str collect` to the pipeline:
+`echo` returns its arguments separately to the pipeline. If you want to use it to generate a single string append ` | str join` to the pipeline:
 
 ```nushell
 def greet [name] {
-  echo "hello " $name | str collect
+  echo "hello " $name | str join
 }
 
 greet nushell
@@ -79,7 +79,7 @@ When defining custom commands, you can name and optionally set the type for each
 
 ```nushell
 def greet [name: string] {
-  echo "hello " $name | str collect
+  echo "hello " $name | str join
 }
 ```
 
@@ -89,7 +89,7 @@ For example, let's say you wanted to take in an `int` instead:
 
 ```nushell
 def greet [name: int] {
-  echo "hello " $name | str collect
+  echo "hello " $name | str join
 }
 
 greet world
@@ -138,7 +138,7 @@ To make a parameter optional and directly provide a default value for it you can
 
 ```nushell
 def greet [name = "nushell"] {
-  echo "hello " $name | str collect
+  echo "hello " $name | str join
 }
 ```
 
@@ -155,7 +155,7 @@ You can also combine a default value with a [type requirement](#parameter-types)
 
 ```
 def congratulate [age: int = 18] {
-  echo "Happy birthday! Wow you are " $age " years old now!" | str collect
+  echo "Happy birthday! Wow you are " $age " years old now!" | str join
 }
 ```
 
@@ -179,7 +179,7 @@ We can instead mark a positional parameter as optional by putting a question mar
 
 ```nushell
 def greet [name?: string] {
-  echo "hello" $name | str collect
+  echo "hello" $name | str join
 }
 
 greet
@@ -194,7 +194,7 @@ def greet [name?: string] {
   if ($name == null) {
     echo "hello, I don't know your name!"
   } else {
-    echo "hello " $name | str collect
+    echo "hello " $name | str join
   }
 }
 
@@ -310,7 +310,7 @@ Rest parameters can be used together with positional parameters:
 
 ```
 def greet [vip: string, ...name: string] {
-  echo "hello to our VIP " $vip | str collect
+  echo "hello to our VIP " $vip | str join
   echo "and hello to everybody else:"
   for $n in $name {
     echo $n

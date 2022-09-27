@@ -136,7 +136,7 @@ def create_left_prompt [] {
 def create_right_prompt [] {
     let time_segment = ([
         (date now | date format '%m/%d/%Y %r')
-    ] | str collect)
+    ] | str join)
 
     $time_segment
 }
@@ -249,7 +249,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
       event:[
           { edit: Clear }
           { edit: InsertString,
-            value: "cd (ls | where type == dir | each { |it| $it.name} | str collect (char nl) | fzf | decode utf-8 | str trim)"
+            value: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
 
           }
           { send: Enter }
@@ -274,7 +274,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
       mode: emacs
       event: {
         send: ExecuteHostCommand,
-        cmd: "cd (ls | where type == dir | each { |it| $it.name} | str collect (char nl) | fzf | decode utf-8 | str trim)"
+        cmd: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
       }
     }
   ]
