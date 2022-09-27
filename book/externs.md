@@ -46,7 +46,7 @@ Both the type (or shape) of the argument and the custom completion tell Nushell 
 
 ## Format specifiers
 
-Positional parameters can be made optional with a `?` (as seen above) the remaining parameters can be matched with `...` before the parameter name:
+Positional parameters can be made optional with a `?` (as seen above) the remaining parameters can be matched with `...` before the parameter name, which will return a list of arguments.
 
 ```
   export extern "git add" [
