@@ -37,5 +37,5 @@ Use in block form for more involved updating logic
 
 Use in block form for more involved updating logic
 ```shell
-> echo [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | upsert authors {|a| $a.authors | str collect ','}
+> echo [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | upsert authors {|a| $a.authors | str join ','}
 ```

@@ -80,7 +80,7 @@ Note: this table assumes Nu 0.43 or later.
 | split column           |                               |   -                                                  |                                            |                                                 |
 | split row              |                               |   -                                                  |                                            |                                                 |
 | str(`*`)               | string functions              | String class                                         | String class                               |                                                 |
-| str collect            | concat_ws                     | Join                                                 | Join-String                                |                                                 |
+| str join            | concat_ws                     | Join                                                 | Join-String                                |                                                 |
 | str trim               | rtrim, ltrim                  | Trim, TrimStart, TrimEnd                             | Trim                                       |                                                 |
 | sum                    | sum                           | Sum                                                  | Measure-Object, measure                    |                                                 |
 | sys(`*`)               |   -                           |   -                                                  | Get-ComputerInfo                           | uname, lshw, lsblk, lscpu, lsusb, hdparam, free |

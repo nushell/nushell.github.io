@@ -81,7 +81,7 @@
 | split column |                               |                                                     |                         |                                               |
 | split row    |                               |                                                     |                         |                                               |
 | str(`*`)     | str functions                 | String functions                                    | string functions        | &str, String functions                        |
-| str collect  | str.join                      | joinToString                                        |                         | join                                          |
+| str join  | str.join                      | joinToString                                        |                         | join                                          |
 | str trim     | strip, rstrip, lstrip         | trim, trimStart, trimEnd                            | regex                   | trim, trim*{start,end}, strip*{suffix,prefix} |
 | sum          | sum                           | sum                                                 | reduce                  | sum                                           |
 | sys(`*`)     | sys                           |                                                     |                         |                                               |

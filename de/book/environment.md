@@ -156,7 +156,7 @@ let-env ENV_CONVERSIONS = {
     # ... you might have Path and PATH already there, add:
     FOO : {
         from_string: { |s| $s | split row '-' }
-        to_string: { |v| $v | str collect '-' }
+        to_string: { |v| $v | str join '-' }
     }
 }
 ```

@@ -21,5 +21,5 @@ usage: |
 
 Strip ANSI escape sequences from a string
 ```shell
-> echo [ (ansi green) (ansi cursor_on) "hello" ] | str collect | ansi strip
+> echo [ (ansi green) (ansi cursor_on) "hello" ] | str join | ansi strip
 ```

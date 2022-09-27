@@ -45,7 +45,7 @@ Um Nushell als Login-Shell zu verwenden, muss die `$env` Variable konfiguriert w
 Der komplette Satz an Umgebungsvariablen kann erzeugt werden, wenn Nu in einer anderen Shell, wie beispielsweise Bash, ausgeführt wird. In diese Nu-Sitzung kann ein Befehl wie der folgende verwendet werden, um `$env` zu setzen:
 
 ```
-> env | each { echo $"let-env ($it.name) = '($it.raw)'" } | str collect (char nl)
+> env | each { echo $"let-env ($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
 Das wird `let-env` Zeilen ausgeben - eine für jede Umgebungsvariable - inklusive der nötigen Werte.

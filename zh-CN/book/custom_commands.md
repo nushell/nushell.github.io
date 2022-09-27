@@ -30,11 +30,11 @@ def greet [name] {
 ```
 
 ::: tip
-`echo`将其参数分别返回给管道。如果你想用它来生成一个单一的字符串，请在管道中添加` | str collect`：
+`echo`将其参数分别返回给管道。如果你想用它来生成一个单一的字符串，请在管道中添加` | str join`：
 
 ```shell
 def greet [name] {
-  echo "hello " $name | str collect
+  echo "hello " $name | str join
 }
 
 greet nushell
@@ -71,7 +71,7 @@ def "str mycommand" [] {
 
 ```bash
 def greet [name: string] {
-  echo "hello " $name | str collect
+  echo "hello " $name | str join
 }
 ```
 
@@ -81,7 +81,7 @@ def greet [name: string] {
 
 ```bash
 def greet [name: int] {
-  echo "hello " $name | str collect
+  echo "hello " $name | str join
 }
 
 greet world
@@ -130,7 +130,7 @@ error: Type Error
 
 ```shell
 def greet [name = "nushell"] {
-  echo "hello " $name | str collect
+  echo "hello " $name | str join
 }
 ```
 
@@ -147,7 +147,7 @@ hello world
 
 ```
 def congratulate [age: int = 18] {
-  echo "Happy birthday! Wow you are " $age " years old now!" | str collect
+  echo "Happy birthday! Wow you are " $age " years old now!" | str join
 }
 ```
 
@@ -171,7 +171,7 @@ def congratulate [age: int = 18] {
 
 ```bash
 def greet [name?: string] {
-  echo "hello" $name | str collect
+  echo "hello" $name | str join
 }
 
 greet
@@ -186,7 +186,7 @@ def greet [name?: string] {
   if ($name == null) {
     echo "hello, I don't know your name!"
   } else {
-    echo "hello " $name | str collect
+    echo "hello " $name | str join
   }
 }
 
@@ -302,7 +302,7 @@ greet earth mars jupiter venus
 
 ```bash
 def greet [vip: string, ...name: string] {
-  echo "hello to our VIP " $vip | str collect
+  echo "hello to our VIP " $vip | str join
   echo "and hello to everybody else:"
   for $n in $name {
     echo $n

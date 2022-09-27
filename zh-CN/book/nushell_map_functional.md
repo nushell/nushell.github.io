@@ -82,7 +82,7 @@
 | split column              |                              |                                 |                          |     |
 | split row                 |                              |                                 |                          |     |
 | str(`*`)                  | clojure.string functions     | String functions                |                          |     |
-| str collect               | join                         | concat                          | intercalate              |     |
+| str join               | join                         | concat                          | intercalate              |     |
 | str trim                  | trim, triml, trimr           | trim, trimLeft, trimRight       | strip                    |     |
 | sum                       | apply +                      | sum                             | sum                      |     |
 | sys                       |                              |                                 |                          |     |

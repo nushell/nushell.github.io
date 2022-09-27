@@ -54,7 +54,7 @@ following values:
     https://en.wikipedia.org/wiki/ANSI_escape_code
 
 OSC: '\x1b]' is not required for --osc parameter
-Example: echo [(ansi -o '0') 'some title' (char bel)] | str collect
+Example: echo [(ansi -o '0') 'some title' (char bel)] | str join
 Format: #
     0 Set window title and icon name
     1 Set icon name
@@ -79,12 +79,12 @@ Reset the color
 
 Use ansi to color text (rb = red bold, gb = green bold, pb = purple bold)
 ```shell
-> echo [(ansi rb) Hello " " (ansi gb) Nu " " (ansi pb) World (ansi reset)] | str collect
+> echo [(ansi rb) Hello " " (ansi gb) Nu " " (ansi pb) World (ansi reset)] | str join
 ```
 
 Use ansi to color text (italic bright yellow on red 'Hello' with green bold 'Nu' and purple bold 'World')
 ```shell
-> echo [(ansi -e '3;93;41m') Hello (ansi reset) " " (ansi gb) Nu " " (ansi pb) World (ansi reset)] | str collect
+> echo [(ansi -e '3;93;41m') Hello (ansi reset) " " (ansi gb) Nu " " (ansi pb) World (ansi reset)] | str join
 ```
 
 Use ansi to color text with a style (blue on red in bold)

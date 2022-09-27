@@ -73,7 +73,7 @@ Nushell 遵循如下的规则来匹配编辑器:
 你可以通过在另一个 Shell（如 Bash）中运行 Nu 来建立完整的环境变量集。一旦你进入 Nu，你可以运行这样的命令：
 
 ```bash
-> env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str collect (char nl)
+> env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
 这将打印出[`let-env`](/book/commands/let-env.md)所有行，且包含每个环境变量及其设置。

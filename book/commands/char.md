@@ -30,7 +30,7 @@ Output newline
 
 Output prompt character, newline and a hamburger character
 ```shell
-> echo [(char prompt) (char newline) (char hamburger)] | str collect
+> echo [(char prompt) (char newline) (char hamburger)] | str join
 ```
 
 Output Unicode character

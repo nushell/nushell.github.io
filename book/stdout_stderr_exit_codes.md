@@ -9,10 +9,10 @@ The first of these important streams is stdout.
 Stdout is the way that most external apps will send data into the pipeline or to the screen. Data sent by an external app to its stdout is received by Nushell by default if it's part of a pipeline:
 
 ```
-> external | str collect
+> external | str join
 ```
 
-The above would call the external named `external` and would redirect the stdout output stream into the pipeline. With this redirection, Nushell can then pass the data to the next command in the pipeline, here `str collect`.
+The above would call the external named `external` and would redirect the stdout output stream into the pipeline. With this redirection, Nushell can then pass the data to the next command in the pipeline, here `str join`.
 
 Without the pipeline, Nushell will not do any redirection, allowing it to print directly to the screen.
 
