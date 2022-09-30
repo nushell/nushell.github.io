@@ -1,6 +1,6 @@
 ---
 title: set
-version: 0.68.0
+version: 0.69.1
 usage: |
   Sets value where given mask is true
 ---

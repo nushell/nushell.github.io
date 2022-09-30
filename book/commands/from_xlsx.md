@@ -1,6 +1,6 @@
 ---
 title: from xlsx
-version: 0.68.0
+version: 0.69.1
 usage: |
   Parse binary Excel(.xlsx) data and create table.
 ---

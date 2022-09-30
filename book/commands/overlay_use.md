@@ -1,6 +1,6 @@
 ---
 title: overlay use
-version: 0.68.0
+version: 0.69.1
 usage: |
   Use definitions from a module as an overlay
 ---
@@ -33,6 +33,13 @@ Create an overlay from a module
     foo
 ```
 
+Create an overlay from a module and rename it
+```shell
+> module spam { export def foo [] { "foo" } }
+    overlay use spam as spam_new
+    foo
+```
+
 Create an overlay with a prefix
 ```shell
 > echo 'export def foo { "foo" }'
@@ -42,7 +49,7 @@ Create an overlay with a prefix
 
 Create an overlay from a file
 ```shell
-> echo 'export env FOO { "foo" }' | save spam.nu
+> echo 'export-env { let-env FOO = "foo" }' | save spam.nu
     overlay use spam.nu
     $env.FOO
 ```

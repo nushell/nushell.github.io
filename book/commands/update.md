@@ -1,6 +1,6 @@
 ---
 title: update
-version: 0.68.0
+version: 0.69.1
 usage: |
   Update an existing column to have a new value.
 ---

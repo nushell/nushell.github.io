@@ -1,6 +1,6 @@
 ---
 title: str rpad
-version: 0.68.0
+version: 0.69.1
 usage: |
   Right-pad a string to a specific length
 ---
@@ -31,7 +31,7 @@ Right-pad a string with zeroes until it's 10 characters wide
 > '123' | str rpad -l 10 -c '0'
 ```
 
-Use rpad to truncate a string
+Use rpad to truncate a string to its first three characters
 ```shell
 > '123456789' | str rpad -l 3 -c '0'
 ```

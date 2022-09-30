@@ -1,6 +1,6 @@
 ---
 title: from ssv
-version: 0.68.0
+version: 0.69.1
 usage: |
   Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
 ---

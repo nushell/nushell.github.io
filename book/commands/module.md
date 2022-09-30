@@ -1,6 +1,6 @@
 ---
 title: module
-version: 0.68.0
+version: 0.69.1
 usage: |
   Define a custom module
 ---
@@ -30,9 +30,9 @@ Define a custom command in a module and call it
 > module spam { export def foo [] { "foo" } }; use spam foo; foo
 ```
 
-Define an environment variable in a module and evaluate it
+Define an environment variable in a module
 ```shell
-> module foo { export env FOO_ENV { "BAZ" } }; use foo FOO_ENV; $env.FOO_ENV
+> module foo { export-env { let-env FOO = "BAZ" } }; use foo; $env.FOO
 ```
 
 Define a custom command that participates in the environment in a module and call it

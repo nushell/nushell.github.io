@@ -1,6 +1,6 @@
 ---
 title: str lpad
-version: 0.68.0
+version: 0.69.1
 usage: |
   Left-pad a string to a specific length
 ---
@@ -31,7 +31,7 @@ Left-pad a string with zeroes until it's 10 character wide
 > '123' | str lpad -l 10 -c '0'
 ```
 
-Use lpad to truncate a string
+Use lpad to truncate a string to its last three characters
 ```shell
 > '123456789' | str lpad -l 3 -c '0'
 ```

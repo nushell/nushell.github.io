@@ -1,8 +1,8 @@
 ---
 title: str distance
-version: 0.68.0
+version: 0.69.1
 usage: |
-  compare to strings and return the edit distance/levenshtein distance
+  compare two strings and return the edit distance/levenshtein distance
 ---
 
 # <code>{{ $frontmatter.title }}</code>

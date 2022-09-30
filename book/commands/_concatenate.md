@@ -1,6 +1,6 @@
 ---
 title: concatenate
-version: 0.68.0
+version: 0.69.1
 usage: |
   Concatenates strings with other array
 ---

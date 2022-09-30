@@ -1,8 +1,8 @@
 ---
 title: str index-of
-version: 0.68.0
+version: 0.69.1
 usage: |
-  Returns start index of first occurrence of pattern in string, or -1 if no match
+  Returns start index of first occurrence of string in input, or -1 if no match
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -11,33 +11,33 @@ usage: |
 
 ## Signature
 
-```> str index-of (pattern) ...rest --range --end```
+```> str index-of (string) ...rest --range --end```
 
 ## Parameters
 
- -  `pattern`: the pattern to find index of
- -  `...rest`: optionally returns index of pattern in string by column paths
+ -  `string`: the string to find index of
+ -  `...rest`: optionally returns index of string in input by column paths
  -  `--range {any}`: optional start and/or end index
- -  `--end`: search from the end of the string
+ -  `--end`: search from the end of the input
 
 ## Examples
 
-Returns index of pattern in string
+Returns index of string in input
 ```shell
 >  'my_library.rb' | str index-of '.rb'
 ```
 
-Returns index of pattern in string with start index
+Returns index of string in input with start index
 ```shell
 >  '.rb.rb' | str index-of '.rb' -r '1,'
 ```
 
-Returns index of pattern in string with end index
+Returns index of string in input with end index
 ```shell
 >  '123456' | str index-of '6' -r ',4'
 ```
 
-Returns index of pattern in string with start and end index
+Returns index of string in input with start and end index
 ```shell
 >  '123456' | str index-of '3' -r '1,4'
 ```
@@ -47,7 +47,7 @@ Alternatively you can use this form
 >  '123456' | str index-of '3' -r [1 4]
 ```
 
-Returns index of pattern in string
+Returns index of string in input
 ```shell
 >  '/this/is/some/path/file.txt' | str index-of '/' -e
 ```

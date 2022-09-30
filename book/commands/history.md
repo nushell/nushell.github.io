@@ -1,6 +1,6 @@
 ---
 title: history
-version: 0.68.0
+version: 0.69.1
 usage: |
   Get the command history
 ---

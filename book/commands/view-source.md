@@ -1,6 +1,6 @@
 ---
 title: view-source
-version: 0.68.0
+version: 0.69.1
 usage: |
   View a block, module, or a definition
 ---
@@ -36,7 +36,7 @@ View the source of a custom command, which participates in the caller environmen
 
 View the source of a module
 ```shell
-> module mod-foo { export env FOO_ENV { 'BAZ' } }; view-source mod-foo
+> module mod-foo { export-env { let-env FOO_ENV = 'BAZ' } }; view-source mod-foo
 ```
 
 View the source of an alias

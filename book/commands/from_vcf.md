@@ -1,6 +1,6 @@
 ---
 title: from vcf
-version: 0.68.0
+version: 0.69.1
 usage: |
   Parse text as .vcf and create table.
 ---

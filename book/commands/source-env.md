@@ -1,6 +1,6 @@
 ---
 title: source-env
-version: 0.68.0
+version: 0.69.1
 usage: |
   Source the environment from a source file into the current environment.
 ---

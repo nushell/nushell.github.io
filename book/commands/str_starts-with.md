@@ -1,8 +1,8 @@
 ---
 title: str starts-with
-version: 0.68.0
+version: 0.69.1
 usage: |
-  Check if string starts with a pattern
+  Check if an input starts with a string
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -11,26 +11,26 @@ usage: |
 
 ## Signature
 
-```> str starts-with (pattern) ...rest```
+```> str starts-with (string) ...rest```
 
 ## Parameters
 
- -  `pattern`: the pattern to match
+ -  `string`: the string to match
  -  `...rest`: optionally matches prefix of text by column paths
 
 ## Examples
 
-Checks if string starts with 'my' pattern
+Checks if input string starts with 'my'
 ```shell
 > 'my_library.rb' | str starts-with 'my'
 ```
 
-Checks if string starts with 'my' pattern
+Checks if input string starts with 'my'
 ```shell
 > 'Cargo.toml' | str starts-with 'Car'
 ```
 
-Checks if string starts with 'my' pattern
+Checks if input string starts with 'my'
 ```shell
 > 'Cargo.toml' | str starts-with '.toml'
 ```

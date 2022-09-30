@@ -1,6 +1,6 @@
 ---
 title: get
-version: 0.68.0
+version: 0.69.1
 usage: |
   Extract data using a cell path.
 ---
@@ -17,7 +17,7 @@ usage: |
 
  -  `cell_path`: the cell path to the data
  -  `...rest`: additional cell paths
- -  `--ignore-errors`: return nothing if path can't be found
+ -  `--ignore-errors`: when there are empty cells, instead of erroring out, replace them with nothing
  -  `--sensitive`: get path in a case sensitive manner
 
 ## Examples

@@ -1,6 +1,6 @@
 ---
 title: exit
-version: 0.68.0
+version: 0.69.1
 usage: |
   Exit a Nu shell or exit Nu entirely.
 ---

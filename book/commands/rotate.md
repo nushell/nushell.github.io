@@ -1,6 +1,6 @@
 ---
 title: rotate
-version: 0.68.0
+version: 0.69.1
 usage: |
   Rotates a table clockwise (default) or counter-clockwise (use --ccw flag).
 ---

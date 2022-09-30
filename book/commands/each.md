@@ -1,6 +1,6 @@
 ---
 title: each
-version: 0.68.0
+version: 0.69.1
 usage: |
   Run a block on each element of input
 ---

@@ -1,6 +1,6 @@
 ---
 title: group-by
-version: 0.68.0
+version: 0.69.1
 usage: |
   Creates a groupby object that can be used for other aggregations
 ---

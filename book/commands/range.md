@@ -1,6 +1,6 @@
 ---
 title: range
-version: 0.68.0
+version: 0.69.1
 usage: |
   Return only the selected rows.
 ---

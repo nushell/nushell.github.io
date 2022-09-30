@@ -1,6 +1,6 @@
 ---
 title: bytes index-of
-version: 0.68.0
+version: 0.69.1
 usage: |
   Returns start index of first occurrence of pattern in bytes, or -1 if no match
 ---

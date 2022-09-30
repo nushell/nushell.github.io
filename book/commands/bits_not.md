@@ -1,6 +1,6 @@
 ---
 title: bits not
-version: 0.68.0
+version: 0.69.1
 usage: |
   Performs logical negation on each bit
 ---

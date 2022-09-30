@@ -1,6 +1,6 @@
 ---
 title: register
-version: 0.68.0
+version: 0.69.1
 usage: |
   Register a plugin
 ---
@@ -11,13 +11,12 @@ usage: |
 
 ## Signature
 
-```> register (plugin) (signature) --encoding --shell```
+```> register (plugin) (signature) --shell```
 
 ## Parameters
 
  -  `plugin`: path of executable for plugin
  -  `signature`: Block with signature description as json object
- -  `--encoding {string}`: Encoding used to communicate with plugin. Options: [json, msgpack]
  -  `--shell {path}`: path of shell used to run plugin (cmd, sh, python, etc)
 
 ## Notes
@@ -29,10 +28,10 @@ This command is a parser keyword. For details, check:
 
 Register `nu_plugin_query` plugin from ~/.cargo/bin/ dir
 ```shell
-> register -e json ~/.cargo/bin/nu_plugin_query
+> register ~/.cargo/bin/nu_plugin_query
 ```
 
 Register `nu_plugin_query` plugin from `nu -c`(plugin will be available in that nu session only)
 ```shell
-> let plugin = ((which nu).path.0 | path dirname | path join 'nu_plugin_query'); nu -c $'register -e json ($plugin); version'
+> let plugin = ((which nu).path.0 | path dirname | path join 'nu_plugin_query'); nu -c $'register ($plugin); version'
 ```

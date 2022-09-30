@@ -1,6 +1,6 @@
 ---
 title: drop
-version: 0.68.0
+version: 0.69.1
 usage: |
   Remove the last number of rows or columns.
 ---

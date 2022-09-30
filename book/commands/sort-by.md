@@ -1,6 +1,6 @@
 ---
 title: sort-by
-version: 0.68.0
+version: 0.69.1
 usage: |
   Sort by the given columns, in increasing order.
 ---

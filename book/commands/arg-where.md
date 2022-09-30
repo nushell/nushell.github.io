@@ -1,6 +1,6 @@
 ---
 title: arg-where
-version: 0.68.0
+version: 0.69.1
 usage: |
   Creates an expression that returns the arguments where expression is true
 ---

@@ -1,8 +1,8 @@
 ---
 title: uniq
-version: 0.68.0
+version: 0.69.1
 usage: |
-  Return the unique rows.
+  Return the distinct values in the input.
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -15,34 +15,34 @@ usage: |
 
 ## Parameters
 
- -  `--count`: Count the unique rows
- -  `--repeated`: Count the rows that has more than one value
- -  `--ignore-case`: Ignore differences in case when comparing
- -  `--unique`: Only return unique values
+ -  `--count`: Return a table containing the distinct input values together with their counts
+ -  `--repeated`: Return the input values that occur more than once
+ -  `--ignore-case`: Ignore differences in case when comparing input values
+ -  `--unique`: Return the input values that occur once only
 
 ## Examples
 
-Remove duplicate rows of a list/table
+Return the distinct values of a list/table (remove duplicates so that each value occurs once only)
 ```shell
 > [2 3 3 4] | uniq
 ```
 
-Only print duplicate lines, one for each group
+Return the input values that occur more than once
 ```shell
 > [1 2 2] | uniq -d
 ```
 
-Only print unique lines lines
+Return the input values that occur once only
 ```shell
 > [1 2 2] | uniq -u
 ```
 
-Ignore differences in case when comparing
+Ignore differences in case when comparing input values
 ```shell
 > ['hello' 'goodbye' 'Hello'] | uniq -i
 ```
 
-Remove duplicate rows and show counts of a list/table
+Return a table containing the distinct input values together with their counts
 ```shell
 > [1 2 2] | uniq -c
 ```

@@ -1,6 +1,6 @@
 ---
 title: select
-version: 0.68.0
+version: 0.69.1
 usage: |
   Down-select table to only these columns.
 ---
@@ -11,11 +11,12 @@ usage: |
 
 ## Signature
 
-```> select ...rest```
+```> select ...rest --ignore-errors```
 
 ## Parameters
 
  -  `...rest`: the columns to select from the table
+ -  `--ignore-errors`: when a column has empty cells, instead of erroring out, replace them with nothing
 
 ## Examples
 
