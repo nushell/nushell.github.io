@@ -1,6 +1,6 @@
 ---
 title: alias
-version: 0.68.0
+version: 0.69.1
 usage: |
   Alias a command (with optional flags) to a new name
 ---

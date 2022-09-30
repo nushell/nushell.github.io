@@ -1,8 +1,8 @@
 ---
 title: any
-version: 0.68.0
+version: 0.69.1
 usage: |
-  Tests if any element of the input matches a predicate.
+  Tests if any element of the input fulfills a predicate expression.
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -15,7 +15,7 @@ usage: |
 
 ## Parameters
 
- -  `predicate`: the predicate that must match
+ -  `predicate`: the predicate expression that should return a boolean
 
 ## Examples
 

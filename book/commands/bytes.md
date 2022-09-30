@@ -1,6 +1,6 @@
 ---
 title: bytes
-version: 0.68.0
+version: 0.69.1
 usage: |
   Various commands for working with byte data
 ---

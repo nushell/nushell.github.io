@@ -1,6 +1,6 @@
 ---
 title: from
-version: 0.68.0
+version: 0.69.1
 usage: |
   Parse a string or binary data into structured data
 ---

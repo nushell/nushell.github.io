@@ -1,6 +1,6 @@
 ---
 title: query json
-version: 0.68.0
+version: 0.69.1
 usage: |
   execute json query on json file (open --raw <file> | query json 'query string')
 ---

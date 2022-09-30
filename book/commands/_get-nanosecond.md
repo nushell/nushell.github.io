@@ -1,6 +1,6 @@
 ---
 title: get-nanosecond
-version: 0.68.0
+version: 0.69.1
 usage: |
   Gets nanosecond from date
 ---

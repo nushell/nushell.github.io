@@ -1,6 +1,6 @@
 ---
 title: fill-null
-version: 0.68.0
+version: 0.69.1
 usage: |
   Replaces NULL values with the given expression
 ---

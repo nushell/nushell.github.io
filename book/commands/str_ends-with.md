@@ -1,8 +1,8 @@
 ---
 title: str ends-with
-version: 0.68.0
+version: 0.69.1
 usage: |
-  Check if a string ends with a pattern
+  Check if an input ends with a string
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -11,21 +11,21 @@ usage: |
 
 ## Signature
 
-```> str ends-with (pattern) ...rest```
+```> str ends-with (string) ...rest```
 
 ## Parameters
 
- -  `pattern`: the pattern to match
+ -  `string`: the string to match
  -  `...rest`: optionally matches suffix of text by column paths
 
 ## Examples
 
-Checks if string ends with '.rb' pattern
+Checks if string ends with '.rb'
 ```shell
 > 'my_library.rb' | str ends-with '.rb'
 ```
 
-Checks if string ends with '.txt' pattern
+Checks if string ends with '.txt'
 ```shell
 > 'my_library.rb' | str ends-with '.txt'
 ```

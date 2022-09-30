@@ -1,6 +1,6 @@
 ---
 title: overlay hide
-version: 0.68.0
+version: 0.69.1
 usage: |
   Hide an active overlay
 ---
@@ -16,8 +16,8 @@ usage: |
 ## Parameters
 
  -  `name`: Overlay to hide
- -  `--keep-custom`: Keep all newly added symbols within the next activated overlay
- -  `--keep-env {list<string>}`: List of environment variables to keep from the hidden overlay
+ -  `--keep-custom`: Keep all newly added commands and aliases in the next activated overlay
+ -  `--keep-env {list<string>}`: List of environment variables to keep in the next activated overlay
 
 ## Notes
 ```text
@@ -26,11 +26,14 @@ This command is a parser keyword. For details, check:
 ```
 ## Examples
 
-Hide an overlay created from a module
+Keep a custom command after hiding the overlay
 ```shell
 > module spam { export def foo [] { "foo" } }
     overlay use spam
-    overlay hide spam
+    def bar [] { "bar" }
+    overlay hide spam --keep-custom
+    bar
+
 ```
 
 Hide an overlay created from a file
@@ -42,7 +45,7 @@ Hide an overlay created from a file
 
 Hide the last activated overlay
 ```shell
-> module spam { export env FOO { "foo" } }
+> module spam { export-env { let-env FOO = "foo" } }
     overlay use spam
     overlay hide
 ```

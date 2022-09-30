@@ -1,6 +1,6 @@
 ---
 title: get-ordinal
-version: 0.68.0
+version: 0.69.1
 usage: |
   Gets ordinal from date
 ---

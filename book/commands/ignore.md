@@ -1,6 +1,6 @@
 ---
 title: ignore
-version: 0.68.0
+version: 0.69.1
 usage: |
   Ignore the output of the previous command in the pipeline
 ---

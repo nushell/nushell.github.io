@@ -1,6 +1,6 @@
 ---
 title: date to-record
-version: 0.68.0
+version: 0.69.1
 usage: |
   Convert the date into a structured table.
 ---

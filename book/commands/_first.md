@@ -1,6 +1,6 @@
 ---
 title: first
-version: 0.68.0
+version: 0.69.1
 usage: |
   Show only the first number of rows.
 ---

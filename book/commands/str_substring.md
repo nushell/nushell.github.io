@@ -1,6 +1,6 @@
 ---
 title: str substring
-version: 0.68.0
+version: 0.69.1
 usage: |
   Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 ---

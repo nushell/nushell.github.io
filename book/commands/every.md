@@ -1,6 +1,6 @@
 ---
 title: every
-version: 0.68.0
+version: 0.69.1
 usage: |
   Show (or skip) every n-th row, starting from the first one.
 ---

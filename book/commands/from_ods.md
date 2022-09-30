@@ -1,6 +1,6 @@
 ---
 title: from ods
-version: 0.68.0
+version: 0.69.1
 usage: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 ---

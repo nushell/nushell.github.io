@@ -1,6 +1,6 @@
 ---
 title: split list
-version: 0.68.0
+version: 0.69.1
 usage: |
   Split a list into multiple lists using a separator
 ---

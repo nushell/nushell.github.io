@@ -1,6 +1,6 @@
 ---
 title: glob
-version: 0.68.0
+version: 0.69.1
 usage: |
   Creates a list of files and/or folders based on the glob pattern provided.
 ---

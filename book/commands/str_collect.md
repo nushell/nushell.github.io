@@ -1,8 +1,8 @@
 ---
-title: str join
-version: 0.68.0
+title: str collect
+version: 0.69.1
 usage: |
-  Concatenate multiple strings into a single string, with an optional separator between each
+  'str collect' is deprecated. Please use 'str join' instead.
 ---
 
 # <code>{{ $frontmatter.title }}</code>
@@ -11,7 +11,7 @@ usage: |
 
 ## Signature
 
-```> str join (separator)```
+```> str collect (separator)```
 
 ## Parameters
 
@@ -21,10 +21,10 @@ usage: |
 
 Create a string from input
 ```shell
-> ['nu', 'shell'] | str join
+> ['nu', 'shell'] | str collect
 ```
 
 Create a string from input with a separator
 ```shell
-> ['nu', 'shell'] | str join '-'
+> ['nu', 'shell'] | str collect '-'
 ```
