@@ -74,7 +74,7 @@ To use Nu as a login shell, you'll need to configure the `$env` variable. With t
 You can build the full set of environment variables by running Nu inside of another shell, like Bash. Once you're in Nu, you can run a command like this:
 
 ```
-> env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str join (char nl)
+> env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str collect (char nl)
 ```
 
 This will print out [`let-env`](commands/let-env.html) lines, one for each environment variable along with its setting.
