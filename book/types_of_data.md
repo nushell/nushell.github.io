@@ -1,14 +1,12 @@
 # Types of Data
 
-Traditionally, Unix shell commands have communicated with each other using strings of text. One command would output text via standard out (often abbreviated 'stdout') and the other would read in text via standard in (or 'stdin'), allowing the two commands to communicate.
+Traditionally, Unix shell commands have communicated with each other using strings of text: one command would write text to standard output (often abbreviated 'stdout') and the other would read text from standard input (or 'stdin'), allowing the two commands to communicate.
 
-We can think of this kind of communication as string-based.
+Nu embraces this approach, and expands it to include other types of data, in addition to strings.
 
-Nu embraces this approach for its commands and expands it to include other kinds of data. Currently, Nu supports two kinds of data types: simple and structured.
+Like many programming languages, Nu models data using a set of simple, and structured data types. Simple data types include integers, floats, strings, booleans, dates. There are also special types for filesizes and time durations.
 
-Like many programming languages, Nu models data using a set of simple and structured data types. Simple data types include integers, floats, strings, booleans, dates, and paths. It also includes a special type for filesizes.
-
-One can get the type of a value with the [`describe`](commands/describe.md) command.
+The [`describe`](commands/describe.md) command returns the type of a data value:
 
 ```
 > 42 | describe
@@ -16,14 +14,14 @@ One can get the type of a value with the [`describe`](commands/describe.md) comm
 
 ## Integers
 
-Integers (or round) numbers. Examples include 1, 5, and 100.
-You can cast a string into an Integer with the `into int` command
+Examples of integers (i.e. "round numbers") include 1, 0, -5,  and 100.
+You can parse a string into an integer with the `into int` command
 
 ```
-> "1" | into int
+> "-5" | into int
 ```
 
-## Decimal
+## Decimals
 
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
 You can cast a string into an Decimal with the `into decimal` command
@@ -34,89 +32,31 @@ You can cast a string into an Decimal with the `into decimal` command
 
 ## Strings
 
-A string of characters that represents text. There are a few ways we can represent text in Nushell:
+A string of characters that represents text. There are a few ways these can be constructed:
 
-**Double quotes**
+- Double quotes
+  - `"Line1\nLine2\n"`
+- Single quotes
+  `'She said "Nushell is the future".'`
+- Dynamic string interpolation
+  - `$"6 x 7 = (6 * 7)"`
+  - `ls | each { |it| $"($it.name) is ($it.size)" }`
+- Bare strings
+  - `echo hello`
 
-```
-"my message"
-```
-
-Double quotes are the most common form of quotes and one you may see whenever text is required.
-
-**Single quotes**
-
-```
-'my message'
-```
-
-Single quotes also give you a string value, just like double quotes. The difference here is that they allow you to use double quotes in the text: `'he said "can you grab my glass?"'`
-
-**String interpolation**
-Nushell supports string interpolation, allowing you to run sub-expressions inside of strings prefixed with `$`. For instance:
-
-```
-> echo $"6 x 7 = (6 * 7)"
-6 x 7 = 42
-```
-
-```
-> ls | each { |it| echo $"($it.name) is ($it.size)" }
-───┬─────────────────────
- 0 │ genawait is 4.1 KB
- 1 │ learncpp is 4.1 KB
- 2 │ nuscripts is 4.1 KB
-───┴─────────────────────
-```
-
-**Bare strings**
-
-```
-> echo hello
-```
-
-A unique trait of Nushell is that you can also create a string of one word without any quotes at all.
-
-The above is the same as if we had written:
-
-```
-> echo "hello"
-```
-
-Cast from a string into another type by using the `into <type>` command
-
-```
-> "1" | into int
-> "1.2" | into decimal
-```
-
-Also see [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings).
-
-## Lines
-
-Lines are strings with an implied OS-dependent line ending. When used, the OS-specific line ending is used.
-
-## Column paths
-
-Column paths are a path through the table to a specific sub-table, column, row, or cell.
-
-Eg) The value `foo.0.bar` in `open data.toml | get foo.0.bar`
-
-## Glob patterns (wildcards)
-
-In Nushell, file operations may also allow you to pass in a glob pattern, sometimes called a 'wildcard'. This allows you to give a pattern that may match multiple file paths.
-
-The most general pattern is the `*`, which will match all paths. More often, you'll see this pattern used as part of another pattern, for example `*.bak` and `temp*`.
-
-In Nushell, we also support double `*` to talk about traversing deeper paths that are nested inside of other directories. For example, `ls **/*` will list all the non-hidden paths nested under the current directory.
-
-In addition to `*`, there is also the `?` pattern which will match a single character. For example, you can match the word "port" by using the pattern `p???`.
+See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
 
 ## Booleans
 
-Booleans are the state of being true or false. Rather than writing the value directly, it is often a result of a comparison.
-
-The two values of booleans are `true` and `false`.
+There are just two boolean values: `true` and `false`. Rather than writing the values directly, they often result from a comparison:
+```sh
+> let mybool = 2 > 1
+> $mybool
+true
+> let mybool = ($env.HOME | path exists)
+> $mybool
+true
+```
 
 ## Dates
 
@@ -131,13 +71,9 @@ Dates are in three forms, based on the RFC 3339 standard:
 - A date and time with timezone:
   - `2022-02-02T14:30:00+05:00`
 
-## Duration
+## Durations
 
-Durations represent a length of time. A second, 5 weeks, and a year are all durations.
-
-Eg) `1wk` is the duration of one week.
-
-This chart shows all durations currently supported:
+Durations represent a length of time. This chart shows all durations currently supported:
 
 | Duration | Length                      |
 | -------- | --------------------------- |
@@ -149,31 +85,22 @@ This chart shows all durations currently supported:
 | `1hr`    | one hour                    |
 | `1day`   | one day                     |
 | `1wk`    | one week                    |
-| `1month` | one month (30 days)         |
-| `1yr`    | one year (365 days)         |
-| `1dec`   | one decade (10 \* 365 days) |
 
-## Ranges
+You can make fractional durations:
+```sh
+> 3.14day
+3day 3hr 21min
+```
 
-A range is a way of expressing a sequence of values from start to finish. They take the form 'start' + '..' + 'end'. For example, the range `1..3` means the numbers 1, 2, and 3.
-
-## Inclusive and non-inclusive ranges
-
-Ranges are inclusive by default, meaning that the ending value is counted as part of the range. The range `1..3` includes the number `3` as the last value in the range.
-
-Sometimes, you may want a range that comes up to a number but doesn't use that number in the output. For this case, you can use `..<` instead of `..`. For example, `1..<5` is the numbers 1, 2, 3, and 4.
-
-## Open-ended ranges
-
-Ranges can also be open-ended. You can remove the start or the end of the range to make it open-ended.
-
-Let's say you wanted to start counting at 3, but you didn't have a specific end in mind. You could use the range `3..` to represent this. When you use a range that's open-ended on the right side, remember that this will continue counting for as long as possible, which could be a very long time! You'll often want to use open-ended ranges with commands like `first`, so you can take the number of elements you want from the range.
-
-You can also make the start of the range open. In this case, Nushell will start counting with `0`, and go up from there. The range `..2` is the numbers 0, 1, and 2.
+And you can do calculations with durations:
+```sh
+> 30day / 1sec  # How many seconds in 30 days?
+2592000
+```
 
 ## File sizes
 
-File sizes are held in a special integer type called bytes. Examples include `100b`, `15kb`, and `100mb`.
+Nushell also has a special type for file sizes. Examples include `100b`, `15kb`, and `100mb`.
 
 The full list of filesize units are:
 
@@ -192,6 +119,34 @@ The full list of filesize units are:
 - `pib`: pebibytes
 - `eib`: exbibyte
 - `zib`: zebibyte
+
+As with durations, you can make fractional file sizes, and do calculations:
+```sh
+> 1Gb / 1b
+1000000000
+> 1Gib / 1b
+1073741824
+> (1Gib / 1b) == 2 ** 30
+true
+```
+
+## Ranges
+
+A range is a way of expressing a sequence of values from start to finish. They take the form \<start\>..\<end\>. For example, the range `1..3` means the numbers 1, 2, and 3.
+
+### Inclusive and non-inclusive ranges
+
+Ranges are inclusive by default, meaning that the ending value is counted as part of the range. The range `1..3` includes the number `3` as the last value in the range.
+
+Sometimes, you may want a range that is limited by a number but doesn't use that number in the output. For this, you can use `..<` instead of `..`. For example, `1..<5` is the numbers 1, 2, 3, and 4.
+
+### Open-ended ranges
+
+Ranges can also be open-ended. You can remove the start or the end of the range to make it open-ended.
+
+Let's say you wanted to start counting at 3, but you didn't have a specific end in mind. You could use the range `3..` to represent this. When you use a range that's open-ended on the right side, remember that this will continue counting for as long as possible, which could be a very long time! You'll often want to use open-ended ranges with commands like `take`, so you can take the number of elements you want from the range.
+
+You can also make the start of the range open. In this case, Nushell will start counting with `0`. For example, the range `..2` is the numbers 0, 1, and 2.
 
 ## Binary data
 
@@ -288,6 +243,11 @@ You can also create a table as a list of records:
 │ 1 │ bob  │    7 │
 ╰───┴──────┴──────╯
 ```
+
+### Column paths
+
+Column paths are a path through the table to a specific sub-table, column, row, or cell. E.g. the value `foo.0.bar` in `open data.toml | get foo.0.bar`
+
 
 ## Blocks
 

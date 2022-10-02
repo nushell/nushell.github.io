@@ -42,6 +42,24 @@ Nushell currently supports the following escape characters:
 - `\t` - tab
 - `\uXXXX` - a unicode character (replace XXXX with the number of the unicode character)
 
+## Bare strings
+
+Like other shell languages (but unlike most other programming languages) strings can also be written without any quotes:
+```sh
+> echo hello
+hello
+```
+
+Be careful though, some bare words have special meaning in nu and so will not be interpreted as a string:
+```
+> echo true | describe
+bool
+> echo trueX | describe
+string
+```
+So, while bare strings are useful for informal command line usage, when programming more formally in nu you should generally use quotes.
+
+
 ## String interpolation
 
 More complex string use cases also need a new form of string: string interpolation. This is a way of building text from both raw text and the result of running expressions. String interpolation combines the results together, giving you a new string.
