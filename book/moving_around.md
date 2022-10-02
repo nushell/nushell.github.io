@@ -12,13 +12,20 @@ The [`ls`](commands/ls.md) command also takes an optional argument, to change wh
 
 @[code](@snippets/moving_around/ls_shallow_glob_example.sh)
 
+## Glob patterns (wildcards)
+
 The asterisk (\*) in the above optional argument "\*.md" is sometimes called a wildcard or a glob. It lets us match anything. You could read the glob "\*.md" as "match any filename, so long as it ends with '.md' "
 
-Nu also uses modern globs as well, which allow you access to deeper directories.
+The most general glob is `*`, which will match all paths. More often, you'll see this pattern used as part of another pattern, for example `*.bak` and `temp*`.
+
+In Nushell, we also support double `*` to talk about traversing deeper paths that are nested inside of other directories. For example, `ls **/*` will list all the non-hidden paths nested under the current directory.
 
 @[code](@snippets/moving_around/ls_deep_glob_example.sh)
 
 Here, we're looking for any file that ends with ".md", and the two asterisks further say "in any directory starting from here".
+
+In addition to `*`, there is also the `?` pattern which will match a single character. For example, you can match the word "port" by using the pattern `p???`.
+
 
 ## Changing the current directory
 
