@@ -43,7 +43,7 @@ Note: this table assumes Nu 0.60.0 or later.
 | `command1 && command2`               | `command1; command2`                             | Run a command, and if it's successful run a second                |
 | `stat $(which git)`                  | `stat (which git).path`                          | Use command output as argument for other command                  |
 | `echo /tmp/$RANDOM` | `echo $"/tmp/(random integer)"` | Use command output in a string |
-| cargo b --jobs=$(nproc) | `cargo b $"--jobs=(sys | get cpu | length)"` | Use command output in an option |
+| `cargo b --jobs=$(nproc)` | `cargo b $"--jobs=(sys | get cpu | length)"` | Use command output in an option |
 | `echo $PATH`                         | `echo $env.PATH`                                 | See the current path                                              |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update PATH permanently                                           |
 | `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                      |
