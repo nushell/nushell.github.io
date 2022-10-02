@@ -42,6 +42,7 @@ Note: this table assumes Nu 0.60.0 or later.
 |                                      | `help --find <string>`                           | Search for match in all available commands                        |
 | `command1 && command2`               | `command1; command2`                             | Run a command, and if it's successful run a second                |
 | `stat $(which git)`                  | `stat (which git).path`                          | Use command output as argument for other command                  |
+| `echo /tmp/$RANDOM` | `echo $"/tmp/(random integer)"` | Use command output in a string |
 | `echo $PATH`                         | `echo $env.PATH`                                 | See the current path                                              |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update PATH permanently                                           |
 | `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                      |
