@@ -17,7 +17,6 @@ Linux+macOS:
 ```
 
 Windows:
-nu_plugin_python_example.py
 
 ```
 > register .\my_plugins\nu_plugin_cool.exe
