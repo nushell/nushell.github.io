@@ -25,7 +25,7 @@ usage: |
 
 Expand an absolute path
 ```shell
-> 'C:\Users\joe\foo\..\bar' | path expand
+> '/home/joe/foo/../bar' | path expand
 ```
 
 Expand a path in a column
@@ -35,10 +35,5 @@ Expand a path in a column
 
 Expand a relative path
 ```shell
-> 'foo\..\bar' | path expand
-```
-
-Expand an absolute path without following symlink
-```shell
-> 'foo\..\bar' | path expand -n
+> 'foo/../bar' | path expand
 ```

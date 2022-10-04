@@ -23,7 +23,7 @@ usage: |
 
 Check if a file exists
 ```shell
-> 'C:\Users\joe\todo.txt' | path exists
+> '/home/joe/todo.txt' | path exists
 ```
 
 Check if a file exists in a column

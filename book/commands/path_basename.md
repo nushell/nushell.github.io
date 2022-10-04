@@ -24,20 +24,15 @@ usage: |
 
 Get basename of a path
 ```shell
-> 'C:\Users\joe\test.txt' | path basename
+> '/home/joe/test.txt' | path basename
 ```
 
-Get basename of a path in a column
+Get basename of a path by column
 ```shell
-> ls .. | path basename -c [ name ]
-```
-
-Get basename of a path in a column
-```shell
-> [[name];[C:\Users\Joe]] | path basename -c [ name ]
+> [[name];[/home/joe]] | path basename -c [ name ]
 ```
 
 Replace basename of a path
 ```shell
-> 'C:\Users\joe\test.txt' | path basename -r 'spam.png'
+> '/home/joe/test.txt' | path basename -r 'spam.png'
 ```
