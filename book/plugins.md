@@ -40,7 +40,7 @@ Once registered, the plugin is available as part of your set of commands:
 Nu's main repo contains example plugins that are useful for learning how the plugin protocol works:
 
 - [Rust](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_example)
-- [Python](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_python/plugin.py)
+- [Python](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_python)
 
 ## Debugging
 
