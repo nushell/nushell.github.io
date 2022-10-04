@@ -1,13 +1,15 @@
 ---
 title: limit
 version: 0.69.1
+database: |
+  Limit result from query
 usage: |
   Limit result from query
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
 
 ## Signature
 

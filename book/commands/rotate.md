@@ -1,13 +1,15 @@
 ---
 title: rotate
 version: 0.69.1
+filters: |
+  Rotates a table clockwise (default) or counter-clockwise (use --ccw flag).
 usage: |
   Rotates a table clockwise (default) or counter-clockwise (use --ccw flag).
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

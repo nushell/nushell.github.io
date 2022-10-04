@@ -1,13 +1,15 @@
 ---
 title: query json
 version: 0.69.1
+filters: |
+  execute json query on json file (open --raw <file> | query json 'query string')
 usage: |
   execute json query on json file (open --raw <file> | query json 'query string')
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

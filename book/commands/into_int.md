@@ -1,13 +1,15 @@
 ---
 title: into int
 version: 0.69.1
+conversions: |
+  Convert value to integer
 usage: |
   Convert value to integer
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for conversions
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.conversions }}</div>
 
 ## Signature
 

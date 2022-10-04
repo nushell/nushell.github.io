@@ -1,13 +1,15 @@
 ---
 title: into filesize
 version: 0.69.1
+conversions: |
+  Convert value to filesize
 usage: |
   Convert value to filesize
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for conversions
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.conversions }}</div>
 
 ## Signature
 

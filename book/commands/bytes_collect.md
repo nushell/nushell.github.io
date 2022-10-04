@@ -1,13 +1,15 @@
 ---
 title: bytes collect
 version: 0.69.1
+bytes: |
+  Concatenate multiple binary into a single binary, with an optional separator between each
 usage: |
   Concatenate multiple binary into a single binary, with an optional separator between each
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bytes
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bytes }}</div>
 
 ## Signature
 

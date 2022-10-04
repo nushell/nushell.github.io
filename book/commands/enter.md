@@ -1,13 +1,15 @@
 ---
 title: enter
 version: 0.69.1
+shells: |
+  Enters a new shell at the given path.
 usage: |
   Enters a new shell at the given path.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for shells
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.shells }}</div>
 
 ## Signature
 

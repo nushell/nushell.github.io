@@ -1,13 +1,15 @@
 ---
 title: export-env
 version: 0.69.1
+env: |
+  Run a block and preserve its environment in a current scope.
 usage: |
   Run a block and preserve its environment in a current scope.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for env
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.env }}</div>
 
 ## Signature
 

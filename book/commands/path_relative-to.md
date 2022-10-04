@@ -1,13 +1,15 @@
 ---
 title: path relative-to
 version: 0.69.1
+default: |
+  Get a path as relative to another path.
 usage: |
   Get a path as relative to another path.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for default
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.default }}</div>
 
 ## Signature
 
@@ -28,7 +30,7 @@ path.
 
 Find a relative path from two absolute paths
 ```shell
-> '/home/viking' | path relative-to '/home'
+> 'C:\Users\viking' | path relative-to 'C:\Users'
 ```
 
 Find a relative path from two absolute paths in a column
@@ -38,5 +40,5 @@ Find a relative path from two absolute paths in a column
 
 Find a relative path from two relative paths
 ```shell
-> 'eggs/bacon/sausage/spam' | path relative-to 'eggs/bacon/sausage'
+> 'eggs\bacon\sausage\spam' | path relative-to 'eggs\bacon\sausage'
 ```

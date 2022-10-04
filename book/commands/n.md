@@ -1,13 +1,15 @@
 ---
 title: n
 version: 0.69.1
+shells: |
+  Switch to the next shell.
 usage: |
   Switch to the next shell.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for shells
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.shells }}</div>
 
 ## Signature
 

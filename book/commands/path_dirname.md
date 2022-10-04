@@ -1,13 +1,15 @@
 ---
 title: path dirname
 version: 0.69.1
+default: |
+  Get the parent directory of a path
 usage: |
   Get the parent directory of a path
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for default
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.default }}</div>
 
 ## Signature
 
@@ -23,7 +25,7 @@ usage: |
 
 Get dirname of a path
 ```shell
-> '/home/joe/code/test.txt' | path dirname
+> 'C:\Users\joe\code\test.txt' | path dirname
 ```
 
 Get dirname of a path in a column
@@ -33,10 +35,10 @@ Get dirname of a path in a column
 
 Walk up two levels
 ```shell
-> '/home/joe/code/test.txt' | path dirname -n 2
+> 'C:\Users\joe\code\test.txt' | path dirname -n 2
 ```
 
 Replace the part that would be returned with a custom path
 ```shell
-> '/home/joe/code/test.txt' | path dirname -n 2 -r /home/viking
+> 'C:\Users\joe\code\test.txt' | path dirname -n 2 -r C:\Users\viking
 ```

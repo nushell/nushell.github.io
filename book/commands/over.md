@@ -1,13 +1,15 @@
 ---
 title: over
 version: 0.69.1
+db_expression: |
+  Adds a partition to an expression function
 usage: |
   Adds a partition to an expression function
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for db-expression
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.db_expression }}</div>
 
 ## Signature
 

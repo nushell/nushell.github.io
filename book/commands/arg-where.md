@@ -1,13 +1,15 @@
 ---
 title: arg-where
 version: 0.69.1
+expression: |
+  Creates an expression that returns the arguments where expression is true
 usage: |
   Creates an expression that returns the arguments where expression is true
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for expression
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 

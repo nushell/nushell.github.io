@@ -1,13 +1,15 @@
 ---
 title: clear
 version: 0.69.1
+platform: |
+  Clear the terminal.
 usage: |
   Clear the terminal.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for platform
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.platform }}</div>
 
 ## Signature
 

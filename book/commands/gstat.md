@@ -1,13 +1,15 @@
 ---
 title: gstat
 version: 0.69.1
+prompt: |
+  Get the git status of a repo
 usage: |
   Get the git status of a repo
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for Prompt
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.prompt }}</div>
 
 ## Signature
 

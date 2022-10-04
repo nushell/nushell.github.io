@@ -1,13 +1,15 @@
 ---
 title: each while
 version: 0.69.1
+filters: |
+  Run a block on each element of input until a $nothing is found
 usage: |
   Run a block on each element of input until a $nothing is found
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

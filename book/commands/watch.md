@@ -1,13 +1,15 @@
 ---
 title: watch
 version: 0.69.1
+filesystem: |
+  Watch for file changes and execute Nu code when they happen.
 usage: |
   Watch for file changes and execute Nu code when they happen.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filesystem
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filesystem }}</div>
 
 ## Signature
 

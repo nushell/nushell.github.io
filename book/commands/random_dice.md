@@ -1,13 +1,15 @@
 ---
 title: random dice
 version: 0.69.1
+random: |
+  Generate a random dice roll
 usage: |
   Generate a random dice roll
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for random
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.random }}</div>
 
 ## Signature
 

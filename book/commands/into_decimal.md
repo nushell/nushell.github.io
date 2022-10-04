@@ -1,13 +1,15 @@
 ---
 title: into decimal
 version: 0.69.1
+default: |
+  Convert text into a decimal
 usage: |
   Convert text into a decimal
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for default
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.default }}</div>
 
 ## Signature
 

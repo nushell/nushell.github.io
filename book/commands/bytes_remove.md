@@ -1,13 +1,15 @@
 ---
 title: bytes remove
 version: 0.69.1
+bytes: |
+  Remove bytes
 usage: |
   Remove bytes
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bytes
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bytes }}</div>
 
 ## Signature
 

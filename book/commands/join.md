@@ -1,13 +1,18 @@
 ---
 title: join
 version: 0.69.1
+database: |
+  Joins with another table or derived table. Default join type is inner
+lazyframe: |
+  Joins a lazy frame with other lazy frame
 usage: |
   Joins with another table or derived table. Default join type is inner
+  Joins a lazy frame with other lazy frame
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
 
 ## Signature
 
@@ -45,4 +50,39 @@ joins a table with a derived table using aliases
       ) ((field t1.col_a) == (field t2.col_c)) --as t2 --right
     | select col_a
     | describe
+```
+
+# <code>{{ $frontmatter.title }}</code> for lazyframe
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+
+## Signature
+
+```> join (other) (left_on) (right_on) --inner --left --outer --cross --suffix```
+
+## Parameters
+
+ -  `other`: LazyFrame to join with
+ -  `left_on`: Left column(s) to join on
+ -  `right_on`: Right column(s) to join on
+ -  `--inner`: inner joing between lazyframes (default)
+ -  `--left`: left join between lazyframes
+ -  `--outer`: outer join between lazyframes
+ -  `--cross`: cross join between lazyframes
+ -  `--suffix {string}`: Suffix to use on columns with same name
+
+## Examples
+
+Join two lazy dataframes
+```shell
+> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | into lazy);
+    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | into lazy);
+    $df_a | join $df_b a foo | collect
+```
+
+Join one eager dataframe with a lazy dataframe
+```shell
+> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | into df);
+    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | into lazy);
+    $df_a | join $df_b a foo
 ```

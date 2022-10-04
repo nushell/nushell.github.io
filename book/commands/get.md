@@ -1,13 +1,37 @@
 ---
 title: get
 version: 0.69.1
+dataframe: |
+  Creates dataframe with the selected columns
+filters: |
+  Extract data using a cell path.
 usage: |
+  Creates dataframe with the selected columns
   Extract data using a cell path.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for dataframe
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe }}</div>
+
+## Signature
+
+```> get ...rest```
+
+## Parameters
+
+ -  `...rest`: column names to sort dataframe
+
+## Examples
+
+Returns the selected column
+```shell
+> [[a b]; [1 2] [3 4]] | into df | get a
+```
+
+# <code>{{ $frontmatter.title }}</code> for filters
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

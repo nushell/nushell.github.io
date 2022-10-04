@@ -1,13 +1,15 @@
 ---
 title: config reset
 version: 0.69.1
+env: |
+  Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu
 usage: |
   Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for env
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.env }}</div>
 
 ## Signature
 

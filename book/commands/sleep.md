@@ -1,13 +1,15 @@
 ---
 title: sleep
 version: 0.69.1
+platform: |
+  Delay for a specified amount of time.
 usage: |
   Delay for a specified amount of time.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for platform
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.platform }}</div>
 
 ## Signature
 

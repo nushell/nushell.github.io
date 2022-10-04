@@ -1,13 +1,15 @@
 ---
 title: merge
 version: 0.69.1
+filters: |
+  Merge a table into an input table
 usage: |
   Merge a table into an input table
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

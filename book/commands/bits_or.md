@@ -1,13 +1,15 @@
 ---
 title: bits or
 version: 0.69.1
+bits: |
+  Performs bitwise or for integers
 usage: |
   Performs bitwise or for integers
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bits
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bits }}</div>
 
 ## Signature
 

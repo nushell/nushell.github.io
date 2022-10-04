@@ -1,13 +1,15 @@
 ---
 title: drop column
 version: 0.69.1
+filters: |
+  Remove the last number of columns. If you want to remove columns by name, try 'reject'.
 usage: |
   Remove the last number of columns. If you want to remove columns by name, try 'reject'.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

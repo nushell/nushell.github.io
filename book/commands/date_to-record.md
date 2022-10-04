@@ -1,13 +1,15 @@
 ---
 title: date to-record
 version: 0.69.1
+date: |
+  Convert the date into a structured table.
 usage: |
   Convert the date into a structured table.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for date
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.date }}</div>
 
 ## Signature
 

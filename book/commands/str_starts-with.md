@@ -1,13 +1,15 @@
 ---
 title: str starts-with
 version: 0.69.1
+strings: |
+  Check if an input starts with a string
 usage: |
   Check if an input starts with a string
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 

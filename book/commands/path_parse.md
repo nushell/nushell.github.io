@@ -1,13 +1,15 @@
 ---
 title: path parse
 version: 0.69.1
+default: |
+  Convert a path into structured data.
 usage: |
   Convert a path into structured data.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for default
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.default }}</div>
 
 ## Signature
 
@@ -25,19 +27,19 @@ On Windows, an extra 'prefix' column is added.
 ```
 ## Examples
 
-Parse a path
+Parse a single path
 ```shell
-> '/home/viking/spam.txt' | path parse
+> 'C:\Users\viking\spam.txt' | path parse
 ```
 
 Replace a complex extension
 ```shell
-> '/home/viking/spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
+> 'C:\Users\viking\spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
 ```
 
 Ignore the extension
 ```shell
-> '/etc/conf.d' | path parse -e ''
+> 'C:\Users\viking.d' | path parse -e ''
 ```
 
 Parse all paths under the 'name' column

@@ -1,0 +1,27 @@
+---
+title: fill-na
+version: 0.69.1
+lazyframe: |
+  Replaces NA values with the given expression
+usage: |
+  Replaces NA values with the given expression
+---
+
+# <code>{{ $frontmatter.title }}</code> for lazyframe
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+
+## Signature
+
+```> fill-na (fill)```
+
+## Parameters
+
+ -  `fill`: Expression to use to fill the NAN values
+
+## Examples
+
+
+```shell
+>
+```

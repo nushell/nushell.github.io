@@ -1,13 +1,15 @@
 ---
 title: bytes add
 version: 0.69.1
+bytes: |
+  Add specified bytes to the input
 usage: |
   Add specified bytes to the input
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bytes
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bytes }}</div>
 
 ## Signature
 

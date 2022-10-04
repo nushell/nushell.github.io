@@ -1,13 +1,60 @@
 ---
 title: first
 version: 0.69.1
+dataframe: |
+  Show only the first number of rows.
+expression: |
+  creates a first expression
+filters: |
+  Show only the first number of rows.
 usage: |
+  Show only the first number of rows.
+  creates a first expression
   Show only the first number of rows.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for dataframe
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe }}</div>
+
+## Signature
+
+```> first (rows)```
+
+## Parameters
+
+ -  `rows`: starting from the front, the number of rows to return
+
+## Examples
+
+Return the first row of a dataframe
+```shell
+> [[a b]; [1 2] [3 4]] | into df | first
+```
+
+Return the first two rows of a dataframe
+```shell
+> [[a b]; [1 2] [3 4]] | into df | first 2
+```
+
+# <code>{{ $frontmatter.title }}</code> for expression
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.expression }}</div>
+
+## Signature
+
+```> first ```
+
+## Examples
+
+Creates a first expression from a column
+```shell
+> col a | first
+```
+
+# <code>{{ $frontmatter.title }}</code> for filters
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

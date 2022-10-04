@@ -1,13 +1,15 @@
 ---
 title: col
 version: 0.69.1
+expression: |
+  Creates a named column expression
 usage: |
   Creates a named column expression
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for expression
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 

@@ -1,13 +1,15 @@
 ---
 title: expr-not
 version: 0.69.1
+expression: |
+  creates a not expression
 usage: |
   creates a not expression
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for expression
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 

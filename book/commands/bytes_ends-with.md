@@ -1,13 +1,15 @@
 ---
 title: bytes ends-with
 version: 0.69.1
+bytes: |
+  Check if bytes ends with a pattern
 usage: |
   Check if bytes ends with a pattern
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bytes
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bytes }}</div>
 
 ## Signature
 

@@ -1,13 +1,15 @@
 ---
 title: bytes at
 version: 0.69.1
+bytes: |
+  Get bytes defined by a range. Note that the start is included but the end is excluded, and that the first byte is index 0.
 usage: |
   Get bytes defined by a range. Note that the start is included but the end is excluded, and that the first byte is index 0.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bytes
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bytes }}</div>
 
 ## Signature
 

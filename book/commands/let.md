@@ -1,13 +1,15 @@
 ---
 title: let
 version: 0.69.1
+core: |
+  Create a variable and give it a value.
 usage: |
   Create a variable and give it a value.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for core
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.core }}</div>
 
 ## Signature
 

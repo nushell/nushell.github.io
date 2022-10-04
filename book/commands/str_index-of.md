@@ -1,13 +1,15 @@
 ---
 title: str index-of
 version: 0.69.1
+strings: |
+  Returns start index of first occurrence of string in input, or -1 if no match
 usage: |
   Returns start index of first occurrence of string in input, or -1 if no match
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 

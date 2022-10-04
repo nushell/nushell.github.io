@@ -1,13 +1,15 @@
 ---
 title: prepend
 version: 0.69.1
+filters: |
+  Prepend any number of rows to a table.
 usage: |
   Prepend any number of rows to a table.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

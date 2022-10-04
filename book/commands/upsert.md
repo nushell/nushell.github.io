@@ -1,13 +1,15 @@
 ---
 title: upsert
 version: 0.69.1
+filters: |
+  Update an existing column to have a new value, or insert a new column.
 usage: |
   Update an existing column to have a new value, or insert a new column.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

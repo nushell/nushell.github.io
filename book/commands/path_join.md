@@ -1,13 +1,15 @@
 ---
 title: path join
 version: 0.69.1
+default: |
+  Join a structured path or a list of path parts.
 usage: |
   Join a structured path or a list of path parts.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for default
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.default }}</div>
 
 ## Signature
 
@@ -27,12 +29,12 @@ the output of 'path parse' and 'path split' subcommands.
 
 Append a filename to a path
 ```shell
-> '/home/viking' | path join spam.txt
+> 'C:\Users\viking' | path join spam.txt
 ```
 
 Append a filename to a path
 ```shell
-> '/home/viking' | path join spams this_spam.txt
+> 'C:\Users\viking' | path join spams this_spam.txt
 ```
 
 Append a filename to a path inside a column
@@ -42,10 +44,10 @@ Append a filename to a path inside a column
 
 Join a list of parts into a path
 ```shell
-> [ '/' 'home' 'viking' 'spam.txt' ] | path join
+> [ 'C:' '\' 'Users' 'viking' 'spam.txt' ] | path join
 ```
 
 Join a structured path into a path
 ```shell
-> [[ parent stem extension ]; [ '/home/viking' 'spam' 'txt' ]] | path join
+> [ [parent stem extension]; ['C:\Users\viking' 'spam' 'txt']] | path join
 ```

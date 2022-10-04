@@ -1,13 +1,37 @@
 ---
 title: fetch
 version: 0.69.1
+lazyframe: |
+  collects the lazyframe to the selected rows
+network: |
+  Fetch the contents from a URL.
 usage: |
+  collects the lazyframe to the selected rows
   Fetch the contents from a URL.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for lazyframe
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+
+## Signature
+
+```> fetch (rows)```
+
+## Parameters
+
+ -  `rows`: number of rows to be fetched from lazyframe
+
+## Examples
+
+Fetch a rows from the dataframe
+```shell
+> [[a b]; [6 2] [4 2] [2 2]] | into df | fetch 2
+```
+
+# <code>{{ $frontmatter.title }}</code> for network
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.network }}</div>
 
 ## Signature
 

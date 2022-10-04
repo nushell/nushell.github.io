@@ -1,13 +1,15 @@
 ---
 title: cal
 version: 0.69.1
+generators: |
+  Display a calendar.
 usage: |
   Display a calendar.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for generators
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.generators }}</div>
 
 ## Signature
 

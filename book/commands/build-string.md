@@ -1,13 +1,15 @@
 ---
 title: build-string
 version: 0.69.1
+strings: |
+  Create a string from the arguments.
 usage: |
   Create a string from the arguments.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 

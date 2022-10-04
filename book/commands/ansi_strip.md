@@ -1,13 +1,15 @@
 ---
 title: ansi strip
 version: 0.69.1
+platform: |
+  Strip ANSI escape sequences from a string
 usage: |
   Strip ANSI escape sequences from a string
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for platform
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.platform }}</div>
 
 ## Signature
 

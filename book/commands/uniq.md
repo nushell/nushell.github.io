@@ -1,13 +1,15 @@
 ---
 title: uniq
 version: 0.69.1
+filters: |
+  Return the distinct values in the input.
 usage: |
   Return the distinct values in the input.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

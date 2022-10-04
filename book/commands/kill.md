@@ -1,17 +1,19 @@
 ---
 title: kill
 version: 0.69.1
+platform: |
+  Kill a process using the process id.
 usage: |
   Kill a process using the process id.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for platform
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.platform }}</div>
 
 ## Signature
 
-```> kill (pid) ...rest --force --quiet --signal```
+```> kill (pid) ...rest --force --quiet```
 
 ## Parameters
 
@@ -19,7 +21,6 @@ usage: |
  -  `...rest`: rest of processes to kill
  -  `--force`: forcefully kill the process
  -  `--quiet`: won't print anything to the console
- -  `--signal {int}`: signal decimal number to be sent instead of the default 15 (unsupported on Windows)
 
 ## Examples
 

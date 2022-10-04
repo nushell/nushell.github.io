@@ -1,13 +1,15 @@
 ---
 title: grid
 version: 0.69.1
+viewers: |
+  Renders the output to a textual terminal grid.
 usage: |
   Renders the output to a textual terminal grid.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for viewers
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.viewers }}</div>
 
 ## Signature
 

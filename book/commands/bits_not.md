@@ -1,13 +1,15 @@
 ---
 title: bits not
 version: 0.69.1
+bits: |
+  Performs logical negation on each bit
 usage: |
   Performs logical negation on each bit
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bits
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bits }}</div>
 
 ## Signature
 

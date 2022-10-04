@@ -1,13 +1,15 @@
 ---
 title: export use
 version: 0.69.1
+core: |
+  Use definitions from a module and export them from this module
 usage: |
   Use definitions from a module and export them from this module
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for core
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.core }}</div>
 
 ## Signature
 

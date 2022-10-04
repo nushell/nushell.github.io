@@ -1,13 +1,15 @@
 ---
 title: config env
 version: 0.69.1
+env: |
+  Edit nu environment configurations
 usage: |
   Edit nu environment configurations
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for env
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.env }}</div>
 
 ## Signature
 

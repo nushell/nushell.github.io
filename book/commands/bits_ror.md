@@ -1,13 +1,15 @@
 ---
 title: bits ror
 version: 0.69.1
+bits: |
+  Bitwise rotate right for integers
 usage: |
   Bitwise rotate right for integers
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bits
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bits }}</div>
 
 ## Signature
 
