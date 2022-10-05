@@ -1,13 +1,15 @@
 ---
 title: help
 version: 0.69.1
+core: |
+  Display help information about commands.
 usage: |
   Display help information about commands.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for core
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.core }}</div>
 
 ## Signature
 

@@ -1,13 +1,15 @@
 ---
 title: url query
 version: 0.69.1
+network: |
+  Get the query string of a URL
 usage: |
   Get the query string of a URL
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for network
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.network }}</div>
 
 ## Signature
 

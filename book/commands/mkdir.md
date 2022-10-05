@@ -1,13 +1,15 @@
 ---
 title: mkdir
 version: 0.69.1
+filesystem: |
+  Make directories, creates intermediary directories as required.
 usage: |
   Make directories, creates intermediary directories as required.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filesystem
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filesystem }}</div>
 
 ## Signature
 

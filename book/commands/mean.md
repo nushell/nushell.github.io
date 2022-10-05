@@ -1,13 +1,18 @@
 ---
 title: mean
 version: 0.69.1
+expression: |
+  Creates a mean expression for an aggregation
+lazyframe: |
+  Aggregates columns to their mean value
 usage: |
   Creates a mean expression for an aggregation
+  Aggregates columns to their mean value
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for expression
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 
@@ -21,4 +26,19 @@ Mean aggregation for a group by
     | into df
     | group-by a
     | agg (col b | mean)
+```
+
+# <code>{{ $frontmatter.title }}</code> for lazyframe
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+
+## Signature
+
+```> mean ```
+
+## Examples
+
+Mean value from columns in a dataframe
+```shell
+> [[a b]; [6 2] [4 2] [2 2]] | into df | mean
 ```

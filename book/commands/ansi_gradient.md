@@ -1,13 +1,15 @@
 ---
 title: ansi gradient
 version: 0.69.1
+platform: |
+  Draw text with a provided start and end code making a gradient
 usage: |
   Draw text with a provided start and end code making a gradient
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for platform
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.platform }}</div>
 
 ## Signature
 

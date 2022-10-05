@@ -1,13 +1,15 @@
 ---
 title: term size
 version: 0.69.1
+platform: |
+  Returns the terminal size
 usage: |
   Returns the terminal size
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for platform
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.platform }}</div>
 
 ## Signature
 

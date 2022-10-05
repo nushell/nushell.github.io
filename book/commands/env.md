@@ -1,13 +1,15 @@
 ---
 title: env
 version: 0.69.1
+env: |
+  Display current environment variables
 usage: |
   Display current environment variables
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for env
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.env }}</div>
 
 ## Signature
 

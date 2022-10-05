@@ -1,13 +1,15 @@
 ---
 title: decode base64
 version: 0.69.1
+hash: |
+  Base64 decode a value
 usage: |
   Base64 decode a value
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for hash
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.hash }}</div>
 
 ## Signature
 

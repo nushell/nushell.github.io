@@ -1,13 +1,15 @@
 ---
 title: date to-timezone
 version: 0.69.1
+date: |
+  Convert a date to a given time zone.
 usage: |
   Convert a date to a given time zone.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for date
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.date }}</div>
 
 ## Signature
 

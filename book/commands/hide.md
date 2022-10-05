@@ -1,13 +1,15 @@
 ---
 title: hide
 version: 0.69.1
+core: |
+  Hide definitions in the current scope
 usage: |
   Hide definitions in the current scope
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for core
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.core }}</div>
 
 ## Signature
 

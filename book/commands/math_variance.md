@@ -1,13 +1,15 @@
 ---
 title: math variance
 version: 0.69.1
+math: |
+  Finds the variance of a list of numbers or tables
 usage: |
   Finds the variance of a list of numbers or tables
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for math
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.math }}</div>
 
 ## Signature
 

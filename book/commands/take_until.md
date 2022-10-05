@@ -1,13 +1,15 @@
 ---
 title: take until
 version: 0.69.1
+filters: |
+  Take elements of the input until a predicate is true.
 usage: |
   Take elements of the input until a predicate is true.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

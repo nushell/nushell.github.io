@@ -1,13 +1,15 @@
 ---
 title: from url
 version: 0.69.1
+formats: |
+  Parse url-encoded string as a table.
 usage: |
   Parse url-encoded string as a table.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for formats
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.formats }}</div>
 
 ## Signature
 

@@ -1,13 +1,15 @@
 ---
 title: str distance
 version: 0.69.1
+strings: |
+  compare two strings and return the edit distance/levenshtein distance
 usage: |
   compare two strings and return the edit distance/levenshtein distance
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 

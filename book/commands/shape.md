@@ -1,0 +1,23 @@
+---
+title: shape
+version: 0.69.1
+dataframe: |
+  Shows column and row size for a dataframe
+usage: |
+  Shows column and row size for a dataframe
+---
+
+# <code>{{ $frontmatter.title }}</code> for dataframe
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe }}</div>
+
+## Signature
+
+```> shape ```
+
+## Examples
+
+Shows row and column shape
+```shell
+> [[a b]; [1 2] [3 4]] | into df | shape
+```

@@ -1,13 +1,49 @@
 ---
 title: select
 version: 0.69.1
-usage: |
+database: |
+  Creates a select statement for a DB
+filters: |
   Down-select table to only these columns.
+lazyframe: |
+  Selects columns from lazyframe
+usage: |
+  Creates a select statement for a DB
+  Down-select table to only these columns.
+  Selects columns from lazyframe
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
+
+## Signature
+
+```> select ...select```
+
+## Parameters
+
+ -  `...select`: Select expression(s) on the table
+
+## Examples
+
+selects a column from a database
+```shell
+> open db.sqlite | into db | select a | describe
+```
+
+selects columns from a database using alias
+```shell
+> open db.sqlite
+    | into db
+    | select (field a | as new_a) b c
+    | from table table_1
+    | describe
+```
+
+# <code>{{ $frontmatter.title }}</code> for filters
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 
@@ -28,4 +64,23 @@ Select just the name column
 Select the name and size columns
 ```shell
 > ls | select name size
+```
+
+# <code>{{ $frontmatter.title }}</code> for lazyframe
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+
+## Signature
+
+```> select ...select expressions```
+
+## Parameters
+
+ -  `...select expressions`: Expression(s) that define the column selection
+
+## Examples
+
+Select a column from the dataframe
+```shell
+> [[a b]; [6 2] [4 2] [2 2]] | into df | select a
 ```

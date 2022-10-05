@@ -1,13 +1,15 @@
 ---
 title: date now
 version: 0.69.1
+date: |
+  Get the current date.
 usage: |
   Get the current date.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for date
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.date }}</div>
 
 ## Signature
 

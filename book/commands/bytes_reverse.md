@@ -1,13 +1,15 @@
 ---
 title: bytes reverse
 version: 0.69.1
+bytes: |
+  Reverse every bytes in the pipeline
 usage: |
   Reverse every bytes in the pipeline
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for bytes
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bytes }}</div>
 
 ## Signature
 

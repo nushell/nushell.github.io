@@ -1,13 +1,15 @@
 ---
 title: glob
 version: 0.69.1
+filesystem: |
+  Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
   Creates a list of files and/or folders based on the glob pattern provided.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filesystem
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filesystem }}</div>
 
 ## Signature
 

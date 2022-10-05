@@ -1,13 +1,15 @@
 ---
 title: keybindings default
 version: 0.69.1
+platform: |
+  List default keybindings
 usage: |
   List default keybindings
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for platform
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.platform }}</div>
 
 ## Signature
 

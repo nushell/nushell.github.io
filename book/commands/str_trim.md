@@ -1,13 +1,15 @@
 ---
 title: str trim
 version: 0.69.1
+default: |
+  Trim whitespace or specific character
 usage: |
   Trim whitespace or specific character
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for default
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.default }}</div>
 
 ## Signature
 

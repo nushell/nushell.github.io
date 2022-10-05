@@ -1,13 +1,15 @@
 ---
 title: size
 version: 0.69.1
+strings: |
+  Gather word count statistics on the text.
 usage: |
   Gather word count statistics on the text.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 

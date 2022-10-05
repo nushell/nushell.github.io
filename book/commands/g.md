@@ -1,13 +1,15 @@
 ---
 title: g
 version: 0.69.1
+shells: |
+  Switch to a given shell, or list all shells if no given shell number.
 usage: |
   Switch to a given shell, or list all shells if no given shell number.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for shells
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.shells }}</div>
 
 ## Signature
 

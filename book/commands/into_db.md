@@ -1,13 +1,15 @@
 ---
 title: into db
 version: 0.69.1
+database: |
+  Converts into an open db connection
 usage: |
   Converts into an open db connection
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
 
 ## Signature
 

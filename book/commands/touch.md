@@ -1,13 +1,15 @@
 ---
 title: touch
 version: 0.69.1
+filesystem: |
+  Creates one or more files.
 usage: |
   Creates one or more files.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filesystem
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filesystem }}</div>
 
 ## Signature
 

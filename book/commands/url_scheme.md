@@ -1,13 +1,15 @@
 ---
 title: url scheme
 version: 0.69.1
+network: |
+  Get the scheme (e.g. http, file) of a URL
 usage: |
   Get the scheme (e.g. http, file) of a URL
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for network
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.network }}</div>
 
 ## Signature
 

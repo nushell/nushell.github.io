@@ -1,13 +1,44 @@
 ---
 title: to csv
 version: 0.69.1
+dataframe: |
+  Saves dataframe to csv file
+formats: |
+  Convert table into .csv text 
 usage: |
-  Convert table into .csv text
+  Saves dataframe to csv file
+  Convert table into .csv text 
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for dataframe
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe }}</div>
+
+## Signature
+
+```> to csv (file) --delimiter --no-header```
+
+## Parameters
+
+ -  `file`: file path to save dataframe
+ -  `--delimiter {string}`: file delimiter character
+ -  `--no-header`: Indicates if file doesn't have header
+
+## Examples
+
+Saves dataframe to csv file
+```shell
+> [[a b]; [1 2] [3 4]] | into df | to csv test.csv
+```
+
+Saves dataframe to csv file using other delimiter
+```shell
+> [[a b]; [1 2] [3 4]] | into df | to csv test.csv -d '|'
+```
+
+# <code>{{ $frontmatter.title }}</code> for formats
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.formats }}</div>
 
 ## Signature
 

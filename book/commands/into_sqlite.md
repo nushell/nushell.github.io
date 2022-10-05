@@ -1,13 +1,15 @@
 ---
 title: into sqlite
 version: 0.69.1
+conversions: |
+  Convert table into a sqlite database
 usage: |
   Convert table into a sqlite database
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for conversions
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.conversions }}</div>
 
 ## Signature
 

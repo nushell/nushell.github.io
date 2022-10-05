@@ -1,13 +1,15 @@
 ---
 title: let-env
 version: 0.69.1
+env: |
+  Create an environment variable and give it a value.
 usage: |
   Create an environment variable and give it a value.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for env
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.env }}</div>
 
 ## Signature
 

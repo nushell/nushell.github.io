@@ -1,13 +1,15 @@
 ---
 title: detect columns
 version: 0.69.1
+strings: |
+  Attempt to automatically split text into multiple columns
 usage: |
   Attempt to automatically split text into multiple columns
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 

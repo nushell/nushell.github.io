@@ -1,13 +1,15 @@
 ---
 title: format filesize
 version: 0.69.1
+strings: |
+  Converts a column of filesizes to some specified format
 usage: |
   Converts a column of filesizes to some specified format
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 

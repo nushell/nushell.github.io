@@ -1,13 +1,18 @@
 ---
 title: sort-by
 version: 0.69.1
+filters: |
+  Sort by the given columns, in increasing order.
+lazyframe: |
+  sorts a lazy dataframe based on expression(s)
 usage: |
   Sort by the given columns, in increasing order.
+  sorts a lazy dataframe based on expression(s)
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 
@@ -60,4 +65,30 @@ Sort strings (reversed case-insensitive)
 Sort a table by its column (reversed order)
 ```shell
 > [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit -r
+```
+
+# <code>{{ $frontmatter.title }}</code> for lazyframe
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+
+## Signature
+
+```> sort-by ...sort expression --reverse --nulls-last```
+
+## Parameters
+
+ -  `...sort expression`: sort expression for the dataframe
+ -  `--reverse {list<bool>}`: Reverse sorting. Default is false
+ -  `--nulls-last`: nulls are shown last in the dataframe
+
+## Examples
+
+Sort dataframe by one column
+```shell
+> [[a b]; [6 2] [1 4] [4 1]] | into df | sort-by a
+```
+
+Sort column using two columns
+```shell
+> [[a b]; [6 2] [1 1] [1 4] [2 4]] | into df | sort-by [a b] -r [false true]
 ```

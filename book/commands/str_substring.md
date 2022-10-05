@@ -1,13 +1,15 @@
 ---
 title: str substring
 version: 0.69.1
+default: |
+  Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 usage: |
   Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for default
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.default }}</div>
 
 ## Signature
 

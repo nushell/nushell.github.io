@@ -1,13 +1,15 @@
 ---
 title: alias
 version: 0.69.1
+core: |
+  Alias a command (with optional flags) to a new name
 usage: |
   Alias a command (with optional flags) to a new name
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for core
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.core }}</div>
 
 ## Signature
 

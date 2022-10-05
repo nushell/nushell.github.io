@@ -1,13 +1,45 @@
 ---
 title: append
 version: 0.69.1
+dataframe: |
+  Appends a new dataframe
+filters: |
+  Append any number of rows to a table.
 usage: |
+  Appends a new dataframe
   Append any number of rows to a table.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for dataframe
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe }}</div>
+
+## Signature
+
+```> append (other) --col```
+
+## Parameters
+
+ -  `other`: dataframe to be appended
+ -  `--col`: appends in col orientation
+
+## Examples
+
+Appends a dataframe as new columns
+```shell
+> let a = ([[a b]; [1 2] [3 4]] | into df);
+    $a | append $a
+```
+
+Appends a dataframe merging at the end of columns
+```shell
+> let a = ([[a b]; [1 2] [3 4]] | into df);
+    $a | append $a --col
+```
+
+# <code>{{ $frontmatter.title }}</code> for filters
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

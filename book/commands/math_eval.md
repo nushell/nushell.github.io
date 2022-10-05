@@ -1,13 +1,15 @@
 ---
 title: math eval
 version: 0.69.1
+math: |
+  Evaluate a math expression into a number
 usage: |
   Evaluate a math expression into a number
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for math
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.math }}</div>
 
 ## Signature
 

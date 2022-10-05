@@ -1,13 +1,15 @@
 ---
 title: headers
 version: 0.69.1
+filters: |
+  Use the first row of the table as column names.
 usage: |
   Use the first row of the table as column names.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

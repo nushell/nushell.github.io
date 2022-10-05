@@ -1,13 +1,37 @@
 ---
 title: drop
 version: 0.69.1
+dataframe: |
+  Creates a new dataframe by dropping the selected columns
+filters: |
+  Remove the last number of rows or columns.
 usage: |
+  Creates a new dataframe by dropping the selected columns
   Remove the last number of rows or columns.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for dataframe
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe }}</div>
+
+## Signature
+
+```> drop ...rest```
+
+## Parameters
+
+ -  `...rest`: column names to be dropped
+
+## Examples
+
+drop column a
+```shell
+> [[a b]; [1 2] [3 4]] | into df | drop a
+```
+
+# <code>{{ $frontmatter.title }}</code> for filters
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

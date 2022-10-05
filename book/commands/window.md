@@ -1,13 +1,15 @@
 ---
 title: window
 version: 0.69.1
+filters: |
+  Creates a sliding window of `window_size` that slide by n rows/elements across input.
 usage: |
   Creates a sliding window of `window_size` that slide by n rows/elements across input.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

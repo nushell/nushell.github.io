@@ -1,13 +1,41 @@
 ---
 title: where
 version: 0.69.1
+database: |
+  Includes a where statement for a query
+filters: |
+  Filter values based on a condition.
 usage: |
+  Includes a where statement for a query
   Filter values based on a condition.
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
+
+## Signature
+
+```> where (where)```
+
+## Parameters
+
+ -  `where`: Where expression on the table
+
+## Examples
+
+selects a column from a database with a where clause
+```shell
+> open db.sqlite
+    | from table table_1
+    | select a
+    | where ((field a) > 1)
+    | describe
+```
+
+# <code>{{ $frontmatter.title }}</code> for filters
+
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

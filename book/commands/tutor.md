@@ -1,13 +1,15 @@
 ---
 title: tutor
 version: 0.69.1
+misc: |
+  Run the tutorial. To begin, run: tutor
 usage: |
   Run the tutorial. To begin, run: tutor
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for misc
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.misc }}</div>
 
 ## Signature
 

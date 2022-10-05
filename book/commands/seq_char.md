@@ -1,13 +1,15 @@
 ---
 title: seq char
 version: 0.69.1
+generators: |
+  Print sequence of chars
 usage: |
   Print sequence of chars
 ---
 
-# <code>{{ $frontmatter.title }}</code>
+# <code>{{ $frontmatter.title }}</code> for generators
 
-<div style='white-space: pre-wrap;'>{{ $frontmatter.usage }}</div>
+<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.generators }}</div>
 
 ## Signature
 
