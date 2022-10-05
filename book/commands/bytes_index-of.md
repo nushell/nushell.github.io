@@ -9,7 +9,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for bytes
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.bytes }}</div>
+<div class='command-title'>{{ $frontmatter.bytes }}</div>
 
 ## Signature
 

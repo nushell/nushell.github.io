@@ -15,7 +15,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
+<div class='command-title'>{{ $frontmatter.database }}</div>
 
 ## Signature
 
@@ -43,7 +43,7 @@ selects columns from a database using alias
 
 # <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
+<div class='command-title'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 
@@ -68,7 +68,7 @@ Select the name and size columns
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
 
 ## Signature
 

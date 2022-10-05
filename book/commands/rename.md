@@ -12,7 +12,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for dataframe or lazyframe
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe_or_lazyframe }}</div>
+<div class='command-title'>{{ $frontmatter.dataframe_or_lazyframe }}</div>
 
 ## Signature
 
@@ -42,7 +42,7 @@ Renames two dataframe columns
 
 # <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
+<div class='command-title'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

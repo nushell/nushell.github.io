@@ -15,7 +15,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
+<div class='command-title'>{{ $frontmatter.database }}</div>
 
 ## Signature
 
@@ -47,7 +47,7 @@ groups by column column a and counts records
 
 # <code>{{ $frontmatter.title }}</code> for default
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.default }}</div>
 
 ## Signature
 
@@ -71,7 +71,7 @@ you can also group by raw values by leaving out the argument
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
 
 ## Signature
 

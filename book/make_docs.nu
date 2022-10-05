@@ -54,7 +54,7 @@ def get-doc [command] {
   let top = $"
 # <code>{{ $frontmatter.title }}</code> for ($command.category)
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.($command.category | str snake-case) }}</div>
+<div class='command-title'>{{ $frontmatter.($command.category | str snake-case) }}</div>
 
 "
   let sig = ($command.signature | each { |param|

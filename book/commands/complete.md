@@ -9,7 +9,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for system
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.system }}</div>
+<div class='command-title'>{{ $frontmatter.system }}</div>
 
 ## Signature
 

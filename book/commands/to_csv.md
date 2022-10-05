@@ -12,7 +12,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe }}</div>
+<div class='command-title'>{{ $frontmatter.dataframe }}</div>
 
 ## Signature
 
@@ -38,7 +38,7 @@ Saves dataframe to csv file using other delimiter
 
 # <code>{{ $frontmatter.title }}</code> for formats
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.formats }}</div>
+<div class='command-title'>{{ $frontmatter.formats }}</div>
 
 ## Signature
 

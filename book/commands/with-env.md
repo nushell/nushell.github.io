@@ -9,7 +9,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for env
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.env }}</div>
+<div class='command-title'>{{ $frontmatter.env }}</div>
 
 ## Signature
 

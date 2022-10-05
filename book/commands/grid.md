@@ -9,7 +9,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for viewers
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.viewers }}</div>
+<div class='command-title'>{{ $frontmatter.viewers }}</div>
 
 ## Signature
 

@@ -2,11 +2,16 @@
   flex-direction: row-reverse;
 }
 
+.command-title {
+  margin-top: 15px;
+  white-space: pre-wrap;
+}
+
 @media screen and (min-width: 720px) and (max-width: 815px) {
   #docsearch-container {
     width: 150px;
   }
-  button.toggle-dark-button {
+  button.toggle-color-mode-button {
     margin-right: 20px;
     margin-left: 20px;
   }
@@ -20,7 +25,7 @@
     }
   }
 
-  button.toggle-dark-button {
+  button.toggle-color-mode-button {
     margin-right: 30px;
   }
 }

@@ -9,7 +9,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for date
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.date }}</div>
+<div class='command-title'>{{ $frontmatter.date }}</div>
 
 ## Signature
 
