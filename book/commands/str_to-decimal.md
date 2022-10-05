@@ -9,7 +9,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for deprecated
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.deprecated }}</div>
+<div class='command-title'>{{ $frontmatter.deprecated }}</div>
 
 ## Signature
 

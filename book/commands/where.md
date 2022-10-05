@@ -12,7 +12,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
+<div class='command-title'>{{ $frontmatter.database }}</div>
 
 ## Signature
 
@@ -35,7 +35,7 @@ selects a column from a database with a where clause
 
 # <code>{{ $frontmatter.title }}</code> for filters
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.filters }}</div>
+<div class='command-title'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 

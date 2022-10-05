@@ -12,7 +12,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.dataframe }}</div>
+<div class='command-title'>{{ $frontmatter.dataframe }}</div>
 
 ## Signature
 
@@ -32,7 +32,7 @@ Checks if elements from a series are contained in right series
 
 # <code>{{ $frontmatter.title }}</code> for expression
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.expression }}</div>
+<div class='command-title'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 

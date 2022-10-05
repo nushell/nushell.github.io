@@ -12,7 +12,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
 
 ## Signature
 
@@ -31,7 +31,7 @@ Fetch a rows from the dataframe
 
 # <code>{{ $frontmatter.title }}</code> for network
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.network }}</div>
+<div class='command-title'>{{ $frontmatter.network }}</div>
 
 ## Signature
 

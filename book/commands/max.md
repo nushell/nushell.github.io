@@ -12,7 +12,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for expression
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.expression }}</div>
+<div class='command-title'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 
@@ -30,7 +30,7 @@ Max aggregation for a group by
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.lazyframe }}</div>
+<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
 
 ## Signature
 

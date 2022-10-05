@@ -12,7 +12,7 @@ usage: |
 
 # <code>{{ $frontmatter.title }}</code> for database
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.database }}</div>
+<div class='command-title'>{{ $frontmatter.database }}</div>
 
 ## Signature
 
@@ -46,7 +46,7 @@ Creates a AND clause combined with an expression AND
 
 # <code>{{ $frontmatter.title }}</code> for db-expression
 
-<div style='white-space: pre-wrap;margin-top: 10px'>{{ $frontmatter.db_expression }}</div>
+<div class='command-title'>{{ $frontmatter.db_expression }}</div>
 
 ## Signature
 
