@@ -260,7 +260,7 @@ Blocks are a useful way to represent code that can be executed on each row of da
 Take this example:
 
 ```
-foo {
+def foo [] {
   line1
   line2; line3 | line4
 }
