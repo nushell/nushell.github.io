@@ -4,6 +4,12 @@
 The dataframe commands are available from version 0.33.1 onwards
 :::
 
+::: warning
+To use the dataframe support you need a fully-featured build with `cargo build --features extra`.
+Most binary releases like the one provided via [GitHub](https://github.com/nushell/nushell/releases) should already include this.
+[See the installation instructions](/book/installation.md) for further details.
+:::
+
 As we have seen so far, Nushell makes working with data its main priority.
 `Lists` and `Tables` are there to help you cycle through values in order to
 perform multiple operations or find data in a breeze. However, there are
