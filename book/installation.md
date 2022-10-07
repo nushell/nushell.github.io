@@ -80,7 +80,7 @@ Nu releases are published as source to the popular Rust package registry [crates
 
 That's it! The `cargo` tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path so we can run it.
 
-If you want to install with more features, you can use:
+If you want to install with more features, you can install using the `--features=extra` flag, which includes support for dataframes, sqlite databases, and a handful of odds and ends:
 
 @[code](@snippets/installation/cargo_install_nu_more_features.sh)
 
