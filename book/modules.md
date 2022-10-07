@@ -153,7 +153,7 @@ The syntax is slightly different than what you might be used to from commands li
 ```
 # greetings.nu
 
-export env MYNAME { "Arthur, King of the Britons" }
+export-env { let_env MYNAME = "Arthur, King of the Britons" }
 
 export def hello [name: string] {
     $"hello ($name)"
@@ -165,10 +165,10 @@ export def hello [name: string] {
 ```
 > use greetings.nu
 
-> $env."greetings MYNAME"
+> $env.MYNAME
 Arthur, King of the Britons
 
-> greetings hello $env."greetings MYNAME"
+> greetings hello $env.MYNAME
 hello Arthur, King of the Britons!
 ```
 
@@ -177,9 +177,9 @@ Instead, we give it a block of code (`{ ...}`) that gets evaluated every time we
 We can demonstrate this property, for example, with the [`random`](commands/random.md) command:
 
 ```
-> module roll { export env ROLL { random dice | into string } }
+> module roll { export-env {let-env ROLL = ( random dice | into string ) } }
 
-> use roll ROLL
+> use roll
 
 > $env.ROLL
 4
@@ -206,7 +206,7 @@ Here's the full list of ways you can export:
 
 - `export def` - export a custom command
 - `export def-env` - export a custom environment command
-- `export env` - export an environment variable
+- `export-env` - export an environment variable
 - `export alias` - export an alias
 - `export extern` - export a known external definition
 
@@ -281,22 +281,4 @@ hello world!
 > hide hello
 
 > hello "world" # error! command not found!
-```
-
-And finally, when the name is the module name (assuming the previous `greetings` module):
-
-```
-> use greetings.nu
-
-> $env."greetings MYNAME"
-Arthur, King of the Britons
-
-> greetings hello "world"
-hello world!
-
-> hide greetings
-
-> $env."greetings MYNAME"  # error! environment variable not found!
-
-> greetings hello "world" # error! command not found!
 ```
