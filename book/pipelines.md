@@ -37,6 +37,19 @@ If a pipeline is getting a bit long for one line, you can enclose it within `(` 
 
 Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
 
+## Semicolons
+
+Take this example:
+
+```
+> line1; line2 | line3
+```
+
+Here, semicolons are used in conjunction with pipelines. When a semicolon is used, no output data is produced to be piped. As such, the `$in` variable will not work when used immediately after the semicolon. 
+
+- As there is a semicolon after `line1`, the command will run to completion and get displayed on the screen.
+- `line2` | `line3` is a normal pipeline. It runs, and its contents are displayed after `line1`'s contents.
+
 ## Working with external commands
 
 Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data.md)), but what about commands outside of Nu? Let's look at some examples of working with external commands:
