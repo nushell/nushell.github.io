@@ -9,8 +9,8 @@
 如果我们创建了一个变量，我们可以通过使用`$`来引用它并打印其内容：
 
 ```bash
-> let my-value = 4
-> echo $my-value
+> let my_value = 4
+> echo $my_value
 4
 ```
 
@@ -18,10 +18,10 @@ Nushell 中的变量是不可变的，这意味着你不能在声明后修改它
 不过它们可以在嵌套块中被隐藏，这导致：
 
 ```bash
-> let my-value = 4
-> do { let my-value = 5; echo $my-value }
+> let my_value = 4
+> do { let my_value = 5; echo $my_value }
 5
-> echo $my-value
+> echo $my_value
 4
 ```
 
@@ -30,13 +30,13 @@ Nushell 中的变量是不可变的，这意味着你不能在声明后修改它
 变量路径通过深入变量的内容，找到其中的列，并最终获得一个值。比如，对于前面的例子如果我们不是赋值`4`，而是赋值了一个表的值：
 
 ```bash
-> let my-value = [[name]; [testuser]]
+> let my_value = [[name]; [testuser]]
 ```
 
-我们可以使用一个变量路径来访问变量`$my-value`并只用一步从`name`列获得数值：
+我们可以使用一个变量路径来访问变量`$my_value`并只用一步从`name`列获得数值：
 
 ```bash
-> echo $my-value.name
+> echo $my_value.name
 testuser
 ```
 
@@ -49,8 +49,8 @@ testuser
 子表达式也可以是管道，而不仅仅是单个命令。如果我们想得到一个大于 10KB 的文件名列表，我们可以使用子表达式来运行一个管道，并将其赋值给一个变量：
 
 ```bash
-> let names-of-big-files = (ls | where size > 10kb)
-> echo $names-of-big-files
+> let names_of_big_files = (ls | where size > 10kb)
+> echo $names_of_big_files
 ───┬────────────┬──────┬──────────┬──────────────
  # │    name    │ type │   size   │   modified
 ───┼────────────┼──────┼──────────┼──────────────

@@ -45,7 +45,7 @@ The `source` command will grow the source that is compiled, but the `save` from 
 Another common issue is trying to dynamically create the filename to source from:
 
 ```
-> source $"($my-path)/common.nu"
+> source $"($my_path)/common.nu"
 ```
 
 This would require the evaluator to run and evaluate the string, but unfortunately Nushell needs this information at compile-time.

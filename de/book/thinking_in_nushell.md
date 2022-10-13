@@ -52,7 +52,7 @@ bevor sie ausgeführt werden kann, können die drei Zeilen nicht im voraus `komp
 Ein anderes Problem ist, einen Dateinamen dynamisch erzeugen zu wollen um ihn auszuführen:
 
 ```
-> source $"($my-path)/common.nu"
+> source $"($my_path)/common.nu"
 ```
 
 Dies würde voraussetzen, dass Nushell die Eingabe auswerten kann um sie dann auszuführen, jedoch wird diese Information zur Kompilierzeit benötigt.

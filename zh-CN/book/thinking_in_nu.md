@@ -45,7 +45,7 @@ abc
 另一个常见的问题是试图动态地创建文件名并`source`，如下：
 
 ```bash
-> source $"($my-path)/common.nu"
+> source $"($my_path)/common.nu"
 ```
 
 这就需要求值器(Evaluator)运行并对字符串进行求值(Evaluate)，但不幸的是，Nushell 在编译时就需要这些信息。

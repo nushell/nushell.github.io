@@ -9,8 +9,8 @@ Die einfachere Variante der auszuwertenden Ausdrücke ist die Variable. Während
 Wenn eine Variable erzeugt wurde, kann der Inhalt dieser Variable ausgegeben werden, indem `$` vor dem Variablennamen verwendet wird:
 
 ```
-> let my-value = 4
-> echo $my-value
+> let my_value = 4
+> echo $my_value
 4
 ```
 
@@ -19,13 +19,13 @@ Wenn eine Variable erzeugt wurde, kann der Inhalt dieser Variable ausgegeben wer
 Ein Pfad einer Variable funktioniert ähnlich wie ein strukturierter Datentyp. Es kann mittels Referenzen auf den Inhalt der Variable beziehungsweise die Spalten in der Variable zugegriffen werden, um final bei einem bestimmten Wert zu landen. Wenn beispielsweise anstatt der `4` im obigen Beispiel, der Variablen eine Tabelle zugewiesen wurde:
 
 ```
-> let my-value = [[name]; [testuser]]
+> let my_value = [[name]; [testuser]]
 ```
 
-Hier kann ein Pfad der Variable `$my-value` verwendet werden, um den Wert der Spalte `name` in nur einem Schritt zu bekommen:
+Hier kann ein Pfad der Variable `$my_value` verwendet werden, um den Wert der Spalte `name` in nur einem Schritt zu bekommen:
 
 ```
-> echo $my-value.name
+> echo $my_value.name
 testuser
 ```
 
@@ -38,8 +38,8 @@ Die Klammern enthalten eine Pipeline, die bis zum Ende durchlaufen wird und dere
 Unterausdrücke können auch ganze Pipelines statt nur einzelner Befehle enthalten. Um eine Liste von Dateien mit einer Größe größer als 10 Kilobytes zu bekommen, kann die folgende Pipeline verwendet und einer Variable zugewiesen werden:
 
 ```
-> let names-of-big-files = (ls | where size > 10kb)
-> echo $names-of-big-files
+> let names_of_big_files = (ls | where size > 10kb)
+> echo $names_of_big_files
 ───┬────────────┬──────┬──────────┬──────────────
  # │    name    │ type │   size   │   modified
 ───┼────────────┼──────┼──────────┼──────────────
