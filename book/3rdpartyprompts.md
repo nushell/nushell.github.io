@@ -31,12 +31,12 @@ For MacOS users:
 3. Set the PROMPT_COMMAND in the file output by `$nu.config-path`, here is a code snippet:
 
 ```shell
-let posh-dir = (brew --prefix oh-my-posh | str trim)
-let posh-theme = $'($posh-dir)/share/oh-my-posh/themes/'
+let posh_dir = (brew --prefix oh-my-posh | str trim)
+let posh_theme = $'($posh_dir)/share/oh-my-posh/themes/'
 # Change the theme names to: zash/space/robbyrussel/powerline/powerlevel10k_lean/
 # material/half-life/lambda Or double lines theme: amro/pure/spaceship, etc.
 # For more [Themes demo](https://ohmyposh.dev/docs/themes)
-let-env PROMPT_COMMAND = { oh-my-posh prompt print primary --config $'($posh-theme)/zash.omp.json' }
+let-env PROMPT_COMMAND = { oh-my-posh prompt print primary --config $'($posh_theme)/zash.omp.json' }
 # Optional
 let-env PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 ```

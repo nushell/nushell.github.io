@@ -9,8 +9,8 @@ The simpler of the two evaluation expressions is the variable. During evaluation
 If we create a variable, we can print its contents by using `$` to refer to it:
 
 ```
-> let my-value = 4
-> echo $my-value
+> let my_value = 4
+> echo $my_value
 4
 ```
 
@@ -18,10 +18,10 @@ Variables in Nushell are immutable, that means that you cannot change its value 
 They can be shadowed in nested block, that results in:
 
 ```
-> let my-value = 4
-> do { let my-value = 5; echo $my-value }
+> let my_value = 4
+> do { let my_value = 5; echo $my_value }
 5
-> echo $my-value
+> echo $my_value
 4
 ```
 
@@ -30,13 +30,13 @@ They can be shadowed in nested block, that results in:
 A variable path works by reaching inside of the contents of a variable, navigating columns inside of it, to reach a final value. Let's say instead of `4`, we had assigned a table value:
 
 ```
-> let my-value = [[name]; [testuser]]
+> let my_value = [[name]; [testuser]]
 ```
 
-We can use a variable path to evaluate the variable `$my-value` and get the value from the `name` column in a single step:
+We can use a variable path to evaluate the variable `$my_value` and get the value from the `name` column in a single step:
 
 ```
-> echo $my-value.name
+> echo $my_value.name
 testuser
 ```
 
@@ -49,8 +49,8 @@ The parentheses contain a pipeline that will run to completion, and the resultin
 Subexpressions can also be pipelines and not just single commands. If we wanted to get a list of filenames larger than ten kilobytes, we can use an subexpression to run a pipeline and assign the result to a variable:
 
 ```
-> let names-of-big-files = (ls | where size > 10kb)
-> echo $names-of-big-files
+> let names_of_big_files = (ls | where size > 10kb)
+> echo $names_of_big_files
 ───┬────────────┬──────┬──────────┬──────────────
  # │    name    │ type │   size   │   modified
 ───┼────────────┼──────┼──────────┼──────────────

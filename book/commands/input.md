@@ -25,5 +25,5 @@ usage: |
 
 Get input from the user, and assign to a variable
 ```shell
-> let user-input = (input)
+> let user_input = (input)
 ```
