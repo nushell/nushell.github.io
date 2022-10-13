@@ -254,25 +254,3 @@ Column paths are a path through the table to a specific sub-table, column, row, 
 Blocks represent a block of code in Nu. For example, in the command `each { |it| echo $it }` the block is the portion contained in curly braces, `{ |it| echo $it }`. Block parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary.
 
 Blocks are a useful way to represent code that can be executed on each row of data. It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required; `each { |x| echo $x }` works the same way as `each { |it| echo $it }`.
-
-## Groups
-
-Take this example:
-
-```
-def foo [] {
-  line1
-  line2; line3 | line4
-}
-```
-
-Inside the block, you have two separate groups that run to completion, a group
-is a semicolon-separated list of pipelines, the last of which is output to the
-screen.
-
-- `line1` is a group unto itself, so that command will run to completion and get
-  displayed on the screen.
-- `line2` is a pipeline inside of the second group. It runs, but its contents
-  are not viewed on the screen.
-- `line3` | `line4` is the second pipeline in the second group. It runs, and its
-  contents get viewed.
