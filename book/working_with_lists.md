@@ -72,11 +72,11 @@ For example:
 
 ```bash
 let scores = [3 8 4]
-echo "total =" ($scores | reduce { |it, acc| $acc + $it }) # 15
+echo $"total = ($scores | reduce { |it, acc| $acc + $it })" # total = 15
 
-echo "total =" ($scores | math sum) # easier approach, same result
+echo $"total = ($scores | math sum)" # easier approach, same result
 
-echo "product =" ($scores | reduce --fold 1 { |it, acc| $acc * $it }) # 96
+echo $"product = ($scores | reduce --fold 1 { |it, acc| $acc * $it })" # total = 96
 
 $scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
 ```
