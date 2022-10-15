@@ -114,9 +114,9 @@ You can trim the sides of a string with the [`str trim`](commands/str_trim.md) c
 My   string
 ```
 
-You can specify on which side the trimming occurs with the `--right` and `--left` options.
+You can specify on which side the trimming occurs with the `--right` and `--left` options. (`-r` and `-l` being the short-form options respectively)
 
-To trim a specific character, use `--char <Character>` to specify the character to trim.
+To trim a specific character, use `--char <Character>` or `-c <Character>` to specify the character to trim.
 
 Here's an example of all the options in action:
 
