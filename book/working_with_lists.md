@@ -52,14 +52,13 @@ The following example gets all the colors whose names end in "e".
 ```bash
 let colors = [red orange yellow green blue purple]
 $colors | where ($it | str ends-with 'e')
+# The block passed to `where` must evaluate to a boolean.
+# This outputs the list [orange blue purple].
 ```
 
 In this example, we keep only values higher than `7`.
 
 ```bash
-# The block passed to `where` must evaluate to a boolean.
-# This outputs the list [orange blue purple].
-
 let scores = [7 10 8 6 7]
 $scores | where $it > 7 # [10 8]
 ```
