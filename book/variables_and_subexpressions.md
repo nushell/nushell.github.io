@@ -92,3 +92,25 @@ The `where size > 10kb` is a command with two parts: the command name [`where`](
 ```
 
 For short-hand syntax to work, the column name must appear on the left-hand side of the operation (like `size` in `size > 10kb`).
+
+## Subexpressions with external commands
+You may find something strange when you're using subexpression with external commands, for example:
+
+```
+> echo $"my pwd is (pwd), hooray!"
+```
+
+And nu gives you the following output:
+
+```
+my pwd is /private/tmp
+, hooray!
+```
+
+That's because when you execute `(pwd)`, it yields to `/private/tmp\n`, and the value is inserted into our string, so the raw string will be `my pwd is /private/tmp\n, hooray!`, and then `\n` is a newline character.  A work around can be put `str trim` after external command, like this:
+
+```
+> echo $"my pwd is (pwd | str trim), hooray!"
+```
+
+Then everything will be normal.
