@@ -58,3 +58,16 @@ export extern "git push" [
 ```
 
 Custom completions will serve the same role in this example as in the previous examples. The examples above call into two different custom completions, based on the position the user is currently in.
+
+## Custom descriptions
+
+As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` and `description` field.
+
+```
+def my_commits [] {
+    [
+        { value: "5c2464", description: "Add .gitignore" },
+        { value: "f3a377", description: "Initial commit" }
+    ]
+}
+```
