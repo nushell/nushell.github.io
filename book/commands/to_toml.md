@@ -1,6 +1,6 @@
 ---
 title: to toml
-version: 0.69.1
+version: 0.70.0
 formats: |
   Convert table into .toml text
 usage: |

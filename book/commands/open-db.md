@@ -1,6 +1,6 @@
 ---
 title: open-db
-version: 0.69.1
+version: 0.70.0
 database: |
   Open a database
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: update
-version: 0.69.1
+version: 0.70.0
 filters: |
   Update an existing column to have a new value.
 usage: |

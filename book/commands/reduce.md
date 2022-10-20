@@ -1,6 +1,6 @@
 ---
 title: reduce
-version: 0.69.1
+version: 0.70.0
 default: |
   Aggregate a list table to a single value using an accumulator block.
 usage: |

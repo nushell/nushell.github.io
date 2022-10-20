@@ -1,6 +1,6 @@
 ---
 title: all
-version: 0.69.1
+version: 0.70.0
 filters: |
   Test if every element of the input fulfills a predicate expression.
 usage: |

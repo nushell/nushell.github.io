@@ -1,6 +1,6 @@
 ---
 title: move
-version: 0.69.1
+version: 0.70.0
 filters: |
   Move columns before or after other columns
 usage: |

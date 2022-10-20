@@ -1,6 +1,6 @@
 ---
-title: query dfr
-version: 0.69.1
+title: query df
+version: 0.70.0
 dataframe: |
   Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause.
 usage: |
@@ -13,7 +13,7 @@ usage: |
 
 ## Signature
 
-```> query dfr (sql)```
+```> query df (sql)```
 
 ## Parameters
 
@@ -23,5 +23,5 @@ usage: |
 
 Query dataframe using SQL
 ```shell
-> [[a b]; [1 2] [3 4]] | into df | query dfr 'select a from df'
+> [[a b]; [1 2] [3 4]] | into df | query df 'select a from df'
 ```

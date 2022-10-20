@@ -1,6 +1,6 @@
 ---
 title: query web
-version: 0.69.1
+version: 0.70.0
 network: |
   execute selector query on html/web
 usage: |

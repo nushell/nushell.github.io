@@ -1,6 +1,6 @@
 ---
 title: path basename
-version: 0.69.1
+version: 0.70.0
 default: |
   Get the final component of a path
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: limit
-version: 0.69.1
+version: 0.70.0
 database: |
   Limit result from query
 usage: |

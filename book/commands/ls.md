@@ -1,6 +1,6 @@
 ---
 title: ls
-version: 0.69.1
+version: 0.70.0
 filesystem: |
   List the files in a directory.
 usage: |

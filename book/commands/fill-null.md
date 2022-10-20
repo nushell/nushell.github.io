@@ -1,6 +1,6 @@
 ---
 title: fill-null
-version: 0.69.1
+version: 0.70.0
 lazyframe: |
   Replaces NULL values with the given expression
 usage: |

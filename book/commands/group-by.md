@@ -1,6 +1,6 @@
 ---
 title: group-by
-version: 0.69.1
+version: 0.70.0
 database: |
   Group by query
 default: |

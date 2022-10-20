@@ -1,6 +1,6 @@
 ---
 title: join
-version: 0.69.1
+version: 0.70.0
 database: |
   Joins with another table or derived table. Default join type is inner
 lazyframe: |

@@ -1,6 +1,6 @@
 ---
 title: hide
-version: 0.69.1
+version: 0.70.0
 core: |
   Hide definitions in the current scope
 usage: |

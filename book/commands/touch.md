@@ -1,6 +1,6 @@
 ---
 title: touch
-version: 0.69.1
+version: 0.70.0
 filesystem: |
   Creates one or more files.
 usage: |

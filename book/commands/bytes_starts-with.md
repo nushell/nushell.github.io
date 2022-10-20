@@ -1,6 +1,6 @@
 ---
 title: bytes starts-with
-version: 0.69.1
+version: 0.70.0
 bytes: |
   Check if bytes starts with a pattern
 usage: |

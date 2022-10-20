@@ -1,6 +1,6 @@
 ---
 title: as
-version: 0.69.1
+version: 0.70.0
 database: |
   Creates an alias for a column selection
 db_expression: |

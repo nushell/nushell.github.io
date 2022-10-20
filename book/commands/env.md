@@ -1,6 +1,6 @@
 ---
 title: env
-version: 0.69.1
+version: 0.70.0
 env: |
   Display current environment variables
 usage: |

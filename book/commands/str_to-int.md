@@ -1,6 +1,6 @@
 ---
 title: str to-int
-version: 0.69.1
+version: 0.70.0
 deprecated: |
   Deprecated command
 usage: |

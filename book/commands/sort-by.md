@@ -1,6 +1,6 @@
 ---
 title: sort-by
-version: 0.69.1
+version: 0.70.0
 filters: |
   Sort by the given columns, in increasing order.
 lazyframe: |

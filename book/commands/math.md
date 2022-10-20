@@ -1,6 +1,6 @@
 ---
 title: math
-version: 0.69.1
+version: 0.70.0
 math: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.
 usage: |

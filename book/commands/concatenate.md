@@ -1,6 +1,6 @@
 ---
 title: concatenate
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Concatenates strings with other array
 usage: |

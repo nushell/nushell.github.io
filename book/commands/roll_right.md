@@ -1,6 +1,6 @@
 ---
 title: roll right
-version: 0.69.1
+version: 0.70.0
 filters: |
   Roll table columns right
 usage: |

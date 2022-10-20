@@ -1,6 +1,6 @@
 ---
 title: str starts-with
-version: 0.69.1
+version: 0.70.0
 strings: |
   Check if an input starts with a string
 usage: |

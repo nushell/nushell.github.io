@@ -1,6 +1,6 @@
 ---
 title: unique
-version: 0.69.1
+version: 0.70.0
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe
 usage: |

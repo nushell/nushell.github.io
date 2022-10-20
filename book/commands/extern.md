@@ -1,6 +1,6 @@
 ---
 title: extern
-version: 0.69.1
+version: 0.70.0
 core: |
   Define a signature for an external command
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: from nuon
-version: 0.69.1
+version: 0.70.0
 experimental: |
   Convert from nuon to structured data
 usage: |

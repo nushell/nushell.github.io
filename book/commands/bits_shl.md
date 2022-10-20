@@ -1,6 +1,6 @@
 ---
 title: bits shl
-version: 0.69.1
+version: 0.70.0
 bits: |
   Bitwise shift left for integers
 usage: |

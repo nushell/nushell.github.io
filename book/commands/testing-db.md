@@ -1,6 +1,6 @@
 ---
 title: testing-db
-version: 0.69.1
+version: 0.70.0
 database: |
   Temporal Command: Create query object
 usage: |

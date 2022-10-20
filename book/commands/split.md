@@ -1,6 +1,6 @@
 ---
 title: split
-version: 0.69.1
+version: 0.70.0
 strings: |
   Split contents across desired subcommand (like row, column) via the separator.
 usage: |

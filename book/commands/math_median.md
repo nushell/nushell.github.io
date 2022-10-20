@@ -1,6 +1,6 @@
 ---
 title: math median
-version: 0.69.1
+version: 0.70.0
 math: |
   Gets the median of a list of numbers
 usage: |

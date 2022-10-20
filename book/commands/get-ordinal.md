@@ -1,6 +1,6 @@
 ---
 title: get-ordinal
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Gets ordinal from date
 usage: |

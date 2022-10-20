@@ -1,6 +1,6 @@
 ---
 title: zip
-version: 0.69.1
+version: 0.70.0
 filters: |
   Combine a stream with the input
 usage: |

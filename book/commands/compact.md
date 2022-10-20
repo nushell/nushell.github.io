@@ -1,6 +1,6 @@
 ---
 title: compact
-version: 0.69.1
+version: 0.70.0
 filters: |
   Creates a table with non-empty rows.
 usage: |

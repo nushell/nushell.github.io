@@ -1,6 +1,6 @@
 ---
 title: length
-version: 0.69.1
+version: 0.70.0
 filters: |
   Count the number of elements in the input.
 usage: |

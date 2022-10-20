@@ -1,6 +1,6 @@
 ---
 title: set-with-idx
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Sets value in the given index
 usage: |

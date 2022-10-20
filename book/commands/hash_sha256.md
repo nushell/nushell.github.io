@@ -1,6 +1,6 @@
 ---
 title: hash sha256
-version: 0.69.1
+version: 0.70.0
 default: |
   Hash a value using the sha256 hash algorithm
 usage: |

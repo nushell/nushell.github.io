@@ -1,6 +1,6 @@
 ---
 title: with-column
-version: 0.69.1
+version: 0.70.0
 dataframe_or_lazyframe: |
   Adds a series to the dataframe
 usage: |

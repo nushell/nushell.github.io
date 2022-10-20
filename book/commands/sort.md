@@ -1,6 +1,6 @@
 ---
 title: sort
-version: 0.69.1
+version: 0.70.0
 filters: |
   Sort in increasing order.
 usage: |

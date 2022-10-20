@@ -1,6 +1,6 @@
 ---
 title: into sqlite
-version: 0.69.1
+version: 0.70.0
 conversions: |
   Convert table into a sqlite database
 usage: |

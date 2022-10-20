@@ -1,6 +1,6 @@
 ---
 title: describe
-version: 0.69.1
+version: 0.70.0
 core: |
   Describe the type and structure of the value(s) piped in.
 database: |

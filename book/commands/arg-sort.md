@@ -1,6 +1,6 @@
 ---
 title: arg-sort
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Returns indexes for a sorted series
 usage: |

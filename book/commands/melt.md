@@ -1,6 +1,6 @@
 ---
 title: melt
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Unpivot a DataFrame from wide to long format
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: export-env
-version: 0.69.1
+version: 0.70.0
 env: |
   Run a block and preserve its environment in a current scope.
 usage: |

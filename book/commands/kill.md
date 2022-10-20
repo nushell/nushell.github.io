@@ -1,6 +1,6 @@
 ---
 title: kill
-version: 0.69.1
+version: 0.70.0
 platform: |
   Kill a process using the process id.
 usage: |

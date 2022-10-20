@@ -1,6 +1,6 @@
 ---
 title: get-nanosecond
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Gets nanosecond from date
 usage: |

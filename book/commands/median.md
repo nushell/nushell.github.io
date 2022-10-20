@@ -1,6 +1,6 @@
 ---
 title: median
-version: 0.69.1
+version: 0.70.0
 expression: |
   Creates a median expression for an aggregation
 lazyframe: |

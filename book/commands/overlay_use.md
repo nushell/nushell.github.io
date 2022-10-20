@@ -1,6 +1,6 @@
 ---
 title: overlay use
-version: 0.69.1
+version: 0.70.0
 core: |
   Use definitions from a module as an overlay
 usage: |

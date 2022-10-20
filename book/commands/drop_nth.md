@@ -1,6 +1,6 @@
 ---
 title: drop nth
-version: 0.69.1
+version: 0.70.0
 filters: |
   Drop the selected rows.
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: table
-version: 0.69.1
+version: 0.70.0
 viewers: |
   Render the table.
 usage: |
@@ -13,13 +13,19 @@ usage: |
 
 ## Signature
 
-```> table --start-number --list --width```
+```> table --start-number --list --width --expand --expand-deep --flatten --flatten-separator --collapse```
 
 ## Parameters
 
  -  `--start-number {int}`: row number to start viewing from
  -  `--list`: list available table modes/themes
  -  `--width {int}`: number of terminal columns wide (not output columns)
+ -  `--expand`: expand the table structure in a light mode
+ -  `--expand-deep {int}`: an expand limit of recursion which will take place
+ -  `--flatten`: Flatten simple arrays
+ -  `--flatten-separator {string}`: sets a seperator when 'flatten' used
+ -  `--collapse`: expand the table structure in colapse mode.
+Be aware collapse mode currently doesn't support width controll
 
 ## Notes
 ```text
@@ -35,4 +41,14 @@ List the files in current directory with index number start from 1.
 Render data in table view
 ```shell
 > echo [[a b]; [1 2] [3 4]] | table
+```
+
+Render data in table view (expanded)
+```shell
+> echo [[a b]; [1 2] [2 [4 4]]] | table --expand
+```
+
+Render data in table view (collapsed)
+```shell
+> echo [[a b]; [1 2] [2 [4 4]]] | table --collapse
 ```

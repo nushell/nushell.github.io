@@ -1,6 +1,6 @@
 ---
 title: math sqrt
-version: 0.69.1
+version: 0.70.0
 math: |
   Applies the square root function to a list of numbers
 usage: |

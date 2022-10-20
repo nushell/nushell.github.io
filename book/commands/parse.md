@@ -1,6 +1,6 @@
 ---
 title: parse
-version: 0.69.1
+version: 0.70.0
 strings: |
   Parse columns from string data using a simple pattern.
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: debug
-version: 0.69.1
+version: 0.70.0
 core: |
   Debug print the value(s) piped in.
 usage: |

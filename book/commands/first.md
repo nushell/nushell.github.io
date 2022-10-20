@@ -1,6 +1,6 @@
 ---
 title: first
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Show only the first number of rows.
 expression: |

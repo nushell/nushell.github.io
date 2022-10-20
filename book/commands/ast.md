@@ -1,6 +1,6 @@
 ---
 title: ast
-version: 0.69.1
+version: 0.70.0
 core: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |

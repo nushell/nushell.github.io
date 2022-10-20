@@ -1,6 +1,6 @@
 ---
 title: order-by
-version: 0.69.1
+version: 0.70.0
 database: |
   Orders by query
 usage: |

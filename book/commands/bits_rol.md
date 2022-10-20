@@ -1,6 +1,6 @@
 ---
 title: bits rol
-version: 0.69.1
+version: 0.70.0
 bits: |
   Bitwise rotate left for integers
 usage: |

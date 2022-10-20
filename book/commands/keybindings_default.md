@@ -1,6 +1,6 @@
 ---
 title: keybindings default
-version: 0.69.1
+version: 0.70.0
 platform: |
   List default keybindings
 usage: |

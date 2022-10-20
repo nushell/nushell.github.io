@@ -1,6 +1,6 @@
 ---
 title: bytes length
-version: 0.69.1
+version: 0.70.0
 bytes: |
   Output the length of any bytes in the pipeline
 usage: |

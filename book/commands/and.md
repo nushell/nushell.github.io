@@ -1,6 +1,6 @@
 ---
 title: and
-version: 0.69.1
+version: 0.70.0
 database: |
   Includes an AND clause for a query
 db_expression: |

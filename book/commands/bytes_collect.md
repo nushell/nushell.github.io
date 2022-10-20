@@ -1,6 +1,6 @@
 ---
 title: bytes collect
-version: 0.69.1
+version: 0.70.0
 bytes: |
   Concatenate multiple binary into a single binary, with an optional separator between each
 usage: |

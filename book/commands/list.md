@@ -1,6 +1,6 @@
 ---
 title: list
-version: 0.69.1
+version: 0.70.0
 expression: |
   Aggregates a group to a Series
 usage: |

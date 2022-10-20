@@ -1,6 +1,6 @@
 ---
 title: commandline
-version: 0.69.1
+version: 0.70.0
 core: |
   View or modify the current command line input buffer
 usage: |

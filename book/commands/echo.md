@@ -1,6 +1,6 @@
 ---
 title: echo
-version: 0.69.1
+version: 0.70.0
 core: |
   Echo the arguments back to the user.
 usage: |

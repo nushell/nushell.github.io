@@ -1,6 +1,6 @@
 ---
 title: from url
-version: 0.69.1
+version: 0.70.0
 formats: |
   Parse url-encoded string as a table.
 usage: |

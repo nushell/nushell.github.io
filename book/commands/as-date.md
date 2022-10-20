@@ -1,6 +1,6 @@
 ---
 title: as-date
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Converts string to date.
 usage: |

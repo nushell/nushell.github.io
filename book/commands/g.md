@@ -1,6 +1,6 @@
 ---
 title: g
-version: 0.69.1
+version: 0.70.0
 shells: |
   Switch to a given shell, or list all shells if no given shell number.
 usage: |

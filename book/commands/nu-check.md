@@ -1,6 +1,6 @@
 ---
 title: nu-check
-version: 0.69.1
+version: 0.70.0
 strings: |
   Validate and parse input content
 usage: |

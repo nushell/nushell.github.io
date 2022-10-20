@@ -1,6 +1,6 @@
 ---
 title: n-unique
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Counts unique values
 expression: |

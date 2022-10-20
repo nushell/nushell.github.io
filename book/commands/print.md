@@ -1,6 +1,6 @@
 ---
 title: print
-version: 0.69.1
+version: 0.70.0
 strings: |
   Print the given values to stdout
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: load-env
-version: 0.69.1
+version: 0.70.0
 filesystem: |
   Loads an environment update from a record.
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: ps
-version: 0.69.1
+version: 0.70.0
 system: |
   View information about system processes.
 usage: |

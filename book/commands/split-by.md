@@ -1,6 +1,6 @@
 ---
 title: split-by
-version: 0.69.1
+version: 0.70.0
 default: |
   Create a new table splitted.
 usage: |

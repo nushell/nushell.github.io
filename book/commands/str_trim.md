@@ -1,6 +1,6 @@
 ---
 title: str trim
-version: 0.69.1
+version: 0.70.0
 default: |
   Trim whitespace or specific character
 usage: |

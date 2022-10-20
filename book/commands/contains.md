@@ -1,6 +1,6 @@
 ---
 title: contains
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Checks if a pattern is contained in a string
 usage: |

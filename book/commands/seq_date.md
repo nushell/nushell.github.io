@@ -1,6 +1,6 @@
 ---
 title: seq date
-version: 0.69.1
+version: 0.70.0
 generators: |
   Print sequences of dates
 usage: |

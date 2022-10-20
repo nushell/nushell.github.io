@@ -1,6 +1,6 @@
 ---
 title: to text
-version: 0.69.1
+version: 0.70.0
 formats: |
   Converts data into simple text.
 usage: |

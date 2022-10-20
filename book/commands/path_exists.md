@@ -1,6 +1,6 @@
 ---
 title: path exists
-version: 0.69.1
+version: 0.70.0
 default: |
   Check whether a path exists
 usage: |

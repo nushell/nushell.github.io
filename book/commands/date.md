@@ -1,6 +1,6 @@
 ---
 title: date
-version: 0.69.1
+version: 0.70.0
 date: |
   Date-related commands
 usage: |

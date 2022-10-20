@@ -1,6 +1,6 @@
 ---
 title: url host
-version: 0.69.1
+version: 0.70.0
 network: |
   Get the host of a URL
 usage: |

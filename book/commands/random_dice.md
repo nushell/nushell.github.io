@@ -1,6 +1,6 @@
 ---
 title: random dice
-version: 0.69.1
+version: 0.70.0
 random: |
   Generate a random dice roll
 usage: |

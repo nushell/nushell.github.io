@@ -1,6 +1,6 @@
 ---
 title: str find-replace
-version: 0.69.1
+version: 0.70.0
 deprecated: |
   Deprecated command
 usage: |

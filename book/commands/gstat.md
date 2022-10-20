@@ -1,6 +1,6 @@
 ---
 title: gstat
-version: 0.69.1
+version: 0.70.0
 prompt: |
   Get the git status of a repo
 usage: |
