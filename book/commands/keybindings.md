@@ -1,6 +1,6 @@
 ---
 title: keybindings
-version: 0.69.1
+version: 0.70.0
 platform: |
   Keybindings related commands
 usage: |

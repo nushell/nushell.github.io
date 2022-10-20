@@ -1,6 +1,6 @@
 ---
 title: replace
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern
 usage: |

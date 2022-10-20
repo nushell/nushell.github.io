@@ -1,6 +1,6 @@
 ---
 title: str ends-with
-version: 0.69.1
+version: 0.70.0
 strings: |
   Check if an input ends with a string
 usage: |

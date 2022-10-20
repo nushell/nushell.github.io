@@ -1,6 +1,6 @@
 ---
 title: get-day
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Gets day from date
 usage: |

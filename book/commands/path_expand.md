@@ -1,6 +1,6 @@
 ---
 title: path expand
-version: 0.69.1
+version: 0.70.0
 default: |
   Try to expand a path to its absolute form
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: str distance
-version: 0.69.1
+version: 0.70.0
 strings: |
   compare two strings and return the edit distance/levenshtein distance
 usage: |

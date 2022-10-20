@@ -1,6 +1,6 @@
 ---
 title: into decimal
-version: 0.69.1
+version: 0.70.0
 default: |
   Convert text into a decimal
 usage: |

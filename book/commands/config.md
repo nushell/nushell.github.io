@@ -1,6 +1,6 @@
 ---
 title: config
-version: 0.69.1
+version: 0.70.0
 env: |
   Edit nushell configuration files
 usage: |

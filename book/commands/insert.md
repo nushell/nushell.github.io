@@ -1,6 +1,6 @@
 ---
 title: insert
-version: 0.69.1
+version: 0.70.0
 filters: |
   Insert a new column.
 usage: |

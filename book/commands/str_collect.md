@@ -1,6 +1,6 @@
 ---
 title: str collect
-version: 0.69.1
+version: 0.70.0
 strings: |
   'str collect' is deprecated. Please use 'str join' instead.
 usage: |

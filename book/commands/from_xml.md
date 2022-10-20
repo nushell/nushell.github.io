@@ -1,6 +1,6 @@
 ---
 title: from xml
-version: 0.69.1
+version: 0.70.0
 formats: |
   Parse text as .xml and create table.
 usage: |

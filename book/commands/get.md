@@ -1,6 +1,6 @@
 ---
 title: get
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Creates dataframe with the selected columns
 filters: |

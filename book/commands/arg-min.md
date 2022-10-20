@@ -1,6 +1,6 @@
 ---
 title: arg-min
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Return index for min value in series
 usage: |

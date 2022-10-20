@@ -1,6 +1,6 @@
 ---
 title: ls-df
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Lists stored dataframes
 usage: |

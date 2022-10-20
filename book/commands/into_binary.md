@@ -1,6 +1,6 @@
 ---
 title: into binary
-version: 0.69.1
+version: 0.70.0
 conversions: |
   Convert value to a binary primitive
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: from ini
-version: 0.69.1
+version: 0.70.0
 formats: |
   Parse text as .ini and create table
 usage: |

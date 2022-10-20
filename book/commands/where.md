@@ -1,6 +1,6 @@
 ---
 title: where
-version: 0.69.1
+version: 0.70.0
 database: |
   Includes a where statement for a query
 filters: |

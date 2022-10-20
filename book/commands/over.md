@@ -1,6 +1,6 @@
 ---
 title: over
-version: 0.69.1
+version: 0.70.0
 db_expression: |
   Adds a partition to an expression function
 usage: |

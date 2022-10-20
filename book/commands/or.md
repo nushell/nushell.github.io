@@ -1,6 +1,6 @@
 ---
 title: or
-version: 0.69.1
+version: 0.70.0
 database: |
   Includes an OR clause for a query
 db_expression: |

@@ -1,6 +1,6 @@
 ---
 title: size
-version: 0.69.1
+version: 0.70.0
 strings: |
   Gather word count statistics on the text.
 usage: |

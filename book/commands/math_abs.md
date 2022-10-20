@@ -1,6 +1,6 @@
 ---
 title: math abs
-version: 0.69.1
+version: 0.70.0
 math: |
   Returns absolute values of a list of numbers
 usage: |

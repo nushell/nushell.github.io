@@ -1,6 +1,6 @@
 ---
 title: fill-na
-version: 0.69.1
+version: 0.70.0
 lazyframe: |
   Replaces NA values with the given expression
 usage: |

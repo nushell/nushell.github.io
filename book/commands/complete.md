@@ -1,6 +1,6 @@
 ---
 title: complete
-version: 0.69.1
+version: 0.70.0
 system: |
   Complete the external piped in, collecting outputs and exit code
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: drop-nulls
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Drops null values in dataframe
 usage: |

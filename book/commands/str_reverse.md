@@ -1,6 +1,6 @@
 ---
 title: str reverse
-version: 0.69.1
+version: 0.70.0
 strings: |
   Reverse every string in the pipeline
 usage: |

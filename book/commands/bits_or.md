@@ -1,6 +1,6 @@
 ---
 title: bits or
-version: 0.69.1
+version: 0.70.0
 bits: |
   Performs bitwise or for integers
 usage: |

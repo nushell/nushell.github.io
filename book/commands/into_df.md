@@ -1,6 +1,6 @@
 ---
 title: into df
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Converts a List, Table or Dictionary into a dataframe
 usage: |

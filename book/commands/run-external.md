@@ -1,6 +1,6 @@
 ---
 title: run-external
-version: 0.69.1
+version: 0.70.0
 system: |
   Runs external command
 usage: |
@@ -17,14 +17,19 @@ usage: |
 
 ## Parameters
 
- -  `command`: external comamdn to run
+ -  `command`: external command to run
  -  `...args`: arguments for external command
- -  `--redirect-stdout`: redirect-stdout
- -  `--redirect-stderr`: redirect-stderr
+ -  `--redirect-stdout`: redirect stdout to the pipeline
+ -  `--redirect-stderr`: redirect stderr to the pipeline
 
 ## Examples
 
 Run an external command
 ```shell
 > run-external "echo" "-n" "hello"
+```
+
+Redirect stdout from an external command into the pipeline
+```shell
+> run-external --redirect-stdout "echo" "-n" "hello" | split chars
 ```

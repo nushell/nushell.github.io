@@ -1,6 +1,6 @@
 ---
 title: into duration
-version: 0.69.1
+version: 0.70.0
 conversions: |
   Convert value to duration
 usage: |
@@ -36,7 +36,12 @@ Convert string to duration
 > '7min' | into duration
 ```
 
-Convert string to a named duration
+Convert string to the requested duration as a string
 ```shell
 > '7min' | into duration --convert sec
+```
+
+Convert duration to the requested duration as a string
+```shell
+> 420sec | into duration --convert min
 ```

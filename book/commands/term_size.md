@@ -1,10 +1,10 @@
 ---
 title: term size
-version: 0.69.1
+version: 0.70.0
 platform: |
-  Returns the terminal size
+  Returns a record containing the number of columns (width) and rows (height) of the terminal
 usage: |
-  Returns the terminal size
+  Returns a record containing the number of columns (width) and rows (height) of the terminal
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform
@@ -13,26 +13,21 @@ usage: |
 
 ## Signature
 
-```> term size --columns --rows```
-
-## Parameters
-
- -  `--columns`: Report only the width of the terminal
- -  `--rows`: Report only the height of the terminal
+```> term size ```
 
 ## Examples
 
-Return the width height of the terminal
+Return the columns (width) and rows (height) of the terminal
 ```shell
 > term size
 ```
 
-Return the width (columns) of the terminal
+Return the columns (width) of the terminal
 ```shell
-> term size -c
+> (term size).columns
 ```
 
-Return the height (rows) of the terminal
+Return the rows (height) of the terminal
 ```shell
-> term size -r
+> (term size).rows
 ```

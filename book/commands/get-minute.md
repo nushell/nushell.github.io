@@ -1,6 +1,6 @@
 ---
 title: get-minute
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Gets minute from date
 usage: |

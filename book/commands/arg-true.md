@@ -1,6 +1,6 @@
 ---
 title: arg-true
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Returns indexes where values are true
 usage: |

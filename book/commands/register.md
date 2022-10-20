@@ -1,6 +1,6 @@
 ---
 title: register
-version: 0.69.1
+version: 0.70.0
 core: |
   Register a plugin
 usage: |

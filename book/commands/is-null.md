@@ -1,6 +1,6 @@
 ---
 title: is-null
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Creates mask where value is null
 expression: |

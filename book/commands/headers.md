@@ -1,6 +1,6 @@
 ---
 title: headers
-version: 0.69.1
+version: 0.70.0
 filters: |
   Use the first row of the table as column names.
 usage: |

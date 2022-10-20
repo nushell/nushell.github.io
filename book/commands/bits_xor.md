@@ -1,6 +1,6 @@
 ---
 title: bits xor
-version: 0.69.1
+version: 0.70.0
 bits: |
   Performs bitwise xor for integers
 usage: |

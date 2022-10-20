@@ -1,6 +1,6 @@
 ---
 title: bits shr
-version: 0.69.1
+version: 0.70.0
 bits: |
   Bitwise shift right for integers
 usage: |

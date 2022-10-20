@@ -1,6 +1,6 @@
 ---
 title: all-false
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Returns true if all values are false
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: roll
-version: 0.69.1
+version: 0.70.0
 filters: |
   Rolling commands for tables
 usage: |

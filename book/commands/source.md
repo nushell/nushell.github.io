@@ -1,6 +1,6 @@
 ---
 title: source
-version: 0.69.1
+version: 0.70.0
 core: |
   Runs a script file in the current context.
 usage: |

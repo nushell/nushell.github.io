@@ -1,6 +1,6 @@
 ---
 title: fn
-version: 0.69.1
+version: 0.70.0
 db_expression: |
   Creates function expression for a select operation
 usage: |

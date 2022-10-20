@@ -1,6 +1,6 @@
 ---
 title: uppercase
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Uppercase the strings in the column
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: into db
-version: 0.69.1
+version: 0.70.0
 database: |
   Converts into an open db connection
 usage: |

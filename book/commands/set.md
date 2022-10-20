@@ -1,6 +1,6 @@
 ---
 title: set
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Sets value where given mask is true
 usage: |

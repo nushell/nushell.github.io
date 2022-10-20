@@ -1,6 +1,6 @@
 ---
 title: from json
-version: 0.69.1
+version: 0.70.0
 formats: |
   Convert from json to structured data
 usage: |

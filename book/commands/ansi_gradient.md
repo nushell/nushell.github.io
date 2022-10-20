@@ -1,6 +1,6 @@
 ---
 title: ansi gradient
-version: 0.69.1
+version: 0.70.0
 platform: |
   Draw text with a provided start and end code making a gradient
 usage: |

@@ -1,6 +1,6 @@
 ---
 title: split chars
-version: 0.69.1
+version: 0.70.0
 strings: |
   Split a string's characters into separate rows
 usage: |

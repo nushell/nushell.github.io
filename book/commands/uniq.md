@@ -1,6 +1,6 @@
 ---
 title: uniq
-version: 0.69.1
+version: 0.70.0
 filters: |
   Return the distinct values in the input.
 usage: |

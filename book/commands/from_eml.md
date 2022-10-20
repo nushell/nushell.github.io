@@ -1,6 +1,6 @@
 ---
 title: from eml
-version: 0.69.1
+version: 0.70.0
 formats: |
   Parse text as .eml and create table.
 usage: |

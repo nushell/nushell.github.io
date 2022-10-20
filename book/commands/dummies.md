@@ -1,6 +1,6 @@
 ---
 title: dummies
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Creates a new dataframe with dummy variables
 usage: |

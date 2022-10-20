@@ -1,6 +1,6 @@
 ---
 title: str-slice
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Slices the string from the start position until the selected length
 usage: |

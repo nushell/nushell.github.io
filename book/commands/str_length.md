@@ -1,6 +1,6 @@
 ---
 title: str length
-version: 0.69.1
+version: 0.70.0
 strings: |
   Output the length of any strings in the pipeline
 usage: |

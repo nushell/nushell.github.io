@@ -1,6 +1,6 @@
 ---
 title: def
-version: 0.69.1
+version: 0.70.0
 core: |
   Define a custom command
 usage: |

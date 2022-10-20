@@ -1,6 +1,6 @@
 ---
 title: input
-version: 0.69.1
+version: 0.70.0
 platform: |
   Get input from the user.
 usage: |
@@ -25,5 +25,5 @@ usage: |
 
 Get input from the user, and assign to a variable
 ```shell
-> let user-input = (input)
+> let user_input = (input)
 ```

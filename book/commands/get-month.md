@@ -1,6 +1,6 @@
 ---
 title: get-month
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Gets month from date
 usage: |

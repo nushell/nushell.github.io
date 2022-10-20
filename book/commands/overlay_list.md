@@ -1,6 +1,6 @@
 ---
 title: overlay list
-version: 0.69.1
+version: 0.70.0
 core: |
   List all active overlays
 usage: |

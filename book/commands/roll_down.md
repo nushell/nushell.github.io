@@ -1,6 +1,6 @@
 ---
 title: roll down
-version: 0.69.1
+version: 0.70.0
 filters: |
   Roll table rows down
 usage: |

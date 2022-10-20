@@ -1,6 +1,6 @@
 ---
 title: bits ror
-version: 0.69.1
+version: 0.70.0
 bits: |
   Bitwise rotate right for integers
 usage: |

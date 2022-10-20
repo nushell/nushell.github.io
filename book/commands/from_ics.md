@@ -1,6 +1,6 @@
 ---
 title: from ics
-version: 0.69.1
+version: 0.70.0
 formats: |
   Parse text as .ics and create table.
 usage: |

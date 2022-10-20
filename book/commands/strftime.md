@@ -1,6 +1,6 @@
 ---
 title: strftime
-version: 0.69.1
+version: 0.70.0
 dataframe: |
   Formats date based on string rule
 usage: |

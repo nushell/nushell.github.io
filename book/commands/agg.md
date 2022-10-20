@@ -1,6 +1,6 @@
 ---
 title: agg
-version: 0.69.1
+version: 0.70.0
 lazyframe: |
   Performs a series of aggregations from a group by
 usage: |

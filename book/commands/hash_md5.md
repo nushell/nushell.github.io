@@ -1,6 +1,6 @@
 ---
 title: hash md5
-version: 0.69.1
+version: 0.70.0
 default: |
   Hash a value using the md5 hash algorithm
 usage: |

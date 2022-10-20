@@ -1,6 +1,6 @@
 ---
 title: collect
-version: 0.69.1
+version: 0.70.0
 database: |
   Collects a query from a database database connection
 filters: |
@@ -34,11 +34,12 @@ Collect from a select query
 
 ## Signature
 
-```> collect (block)```
+```> collect (block) --keep-env```
 
 ## Parameters
 
  -  `block`: the block to run once the stream is collected
+ -  `--keep-env`: let the block affect environment variables
 
 ## Examples
 

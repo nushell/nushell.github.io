@@ -1,6 +1,6 @@
 ---
 title: any
-version: 0.69.1
+version: 0.70.0
 filters: |
   Tests if any element of the input fulfills a predicate expression.
 usage: |

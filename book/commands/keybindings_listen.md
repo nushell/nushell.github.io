@@ -1,6 +1,6 @@
 ---
 title: keybindings listen
-version: 0.69.1
+version: 0.70.0
 platform: |
   Get input from the user.
 usage: |

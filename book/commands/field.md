@@ -1,6 +1,6 @@
 ---
 title: field
-version: 0.69.1
+version: 0.70.0
 db_expression: |
   Creates column expression for database
 usage: |

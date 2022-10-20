@@ -1,6 +1,6 @@
 ---
 title: math sum
-version: 0.69.1
+version: 0.70.0
 math: |
   Finds the sum of a list of numbers or tables
 usage: |

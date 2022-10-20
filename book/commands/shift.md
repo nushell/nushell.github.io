@@ -1,6 +1,6 @@
 ---
 title: shift
-version: 0.69.1
+version: 0.70.0
 dataframe_or_lazyframe: |
   Shifts the values by a given period
 usage: |

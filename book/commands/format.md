@@ -1,6 +1,6 @@
 ---
 title: format
-version: 0.69.1
+version: 0.70.0
 strings: |
   Format columns into a string using a simple pattern.
 usage: |

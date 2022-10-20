@@ -1,6 +1,6 @@
 ---
 title: from toml
-version: 0.69.1
+version: 0.70.0
 formats: |
   Parse text as .toml and create table.
 usage: |
