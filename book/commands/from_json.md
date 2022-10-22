@@ -1,5 +1,7 @@
 ---
 title: from json
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Convert from json to structured data

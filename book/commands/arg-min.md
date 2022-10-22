@@ -1,5 +1,7 @@
 ---
 title: arg-min
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Return index for min value in series

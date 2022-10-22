@@ -1,5 +1,7 @@
 ---
 title: overlay hide
+categories: |
+  core
 version: 0.70.0
 core: |
   Hide an active overlay

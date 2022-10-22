@@ -1,5 +1,7 @@
 ---
 title: split-by
+categories: |
+  default
 version: 0.70.0
 default: |
   Create a new table splitted.

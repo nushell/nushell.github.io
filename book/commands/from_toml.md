@@ -1,5 +1,7 @@
 ---
 title: from toml
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse text as .toml and create table.

@@ -1,5 +1,9 @@
 ---
 title: group-by
+categories: |
+  database
+  default
+  lazyframe
 version: 0.70.0
 database: |
   Group by query

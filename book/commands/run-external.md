@@ -1,5 +1,7 @@
 ---
 title: run-external
+categories: |
+  system
 version: 0.70.0
 system: |
   Runs external command

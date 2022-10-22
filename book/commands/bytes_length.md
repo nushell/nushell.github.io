@@ -1,5 +1,7 @@
 ---
 title: bytes length
+categories: |
+  bytes
 version: 0.70.0
 bytes: |
   Output the length of any bytes in the pipeline

@@ -1,5 +1,7 @@
 ---
 title: overlay
+categories: |
+  core
 version: 0.70.0
 core: |
   Commands for manipulating overlays.

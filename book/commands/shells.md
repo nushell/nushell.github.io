@@ -1,5 +1,7 @@
 ---
 title: shells
+categories: |
+  shells
 version: 0.70.0
 shells: |
   Lists all open shells.

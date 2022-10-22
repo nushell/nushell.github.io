@@ -1,5 +1,7 @@
 ---
 title: seq char
+categories: |
+  generators
 version: 0.70.0
 generators: |
   Print sequence of chars

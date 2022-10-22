@@ -1,5 +1,7 @@
 ---
 title: str replace
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Find and replace text

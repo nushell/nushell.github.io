@@ -1,5 +1,7 @@
 ---
 title: env
+categories: |
+  env
 version: 0.70.0
 env: |
   Display current environment variables

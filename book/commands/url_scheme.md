@@ -1,5 +1,7 @@
 ---
 title: url scheme
+categories: |
+  network
 version: 0.70.0
 network: |
   Get the scheme (e.g. http, file) of a URL

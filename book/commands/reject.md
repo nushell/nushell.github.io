@@ -1,5 +1,7 @@
 ---
 title: reject
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Remove the given columns from the table. If you want to remove rows, try 'drop'.

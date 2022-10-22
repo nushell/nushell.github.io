@@ -1,5 +1,7 @@
 ---
 title: split
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Split contents across desired subcommand (like row, column) via the separator.

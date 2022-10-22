@@ -1,5 +1,7 @@
 ---
 title: math variance
+categories: |
+  math
 version: 0.70.0
 math: |
   Finds the variance of a list of numbers or tables

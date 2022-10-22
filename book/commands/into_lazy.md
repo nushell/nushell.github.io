@@ -1,5 +1,7 @@
 ---
 title: into lazy
+categories: |
+  lazyframe
 version: 0.70.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe

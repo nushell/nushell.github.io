@@ -1,5 +1,7 @@
 ---
 title: str
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Various commands for working with string data

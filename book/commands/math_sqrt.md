@@ -1,5 +1,7 @@
 ---
 title: math sqrt
+categories: |
+  math
 version: 0.70.0
 math: |
   Applies the square root function to a list of numbers

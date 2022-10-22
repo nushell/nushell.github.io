@@ -1,5 +1,7 @@
 ---
 title: str to-int
+categories: |
+  deprecated
 version: 0.70.0
 deprecated: |
   Deprecated command

@@ -1,5 +1,7 @@
 ---
 title: melt
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Unpivot a DataFrame from wide to long format

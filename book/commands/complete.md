@@ -1,5 +1,7 @@
 ---
 title: complete
+categories: |
+  system
 version: 0.70.0
 system: |
   Complete the external piped in, collecting outputs and exit code

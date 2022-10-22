@@ -1,5 +1,7 @@
 ---
 title: export def
+categories: |
+  core
 version: 0.70.0
 core: |
   Define a custom command and export it from a module

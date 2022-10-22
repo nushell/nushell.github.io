@@ -1,5 +1,7 @@
 ---
 title: def
+categories: |
+  core
 version: 0.70.0
 core: |
   Define a custom command

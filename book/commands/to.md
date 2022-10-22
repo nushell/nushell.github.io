@@ -1,5 +1,7 @@
 ---
 title: to
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Translate structured data to a format

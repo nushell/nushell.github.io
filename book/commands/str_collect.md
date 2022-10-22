@@ -1,5 +1,7 @@
 ---
 title: str collect
+categories: |
+  strings
 version: 0.70.0
 strings: |
   'str collect' is deprecated. Please use 'str join' instead.

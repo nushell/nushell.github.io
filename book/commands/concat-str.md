@@ -1,5 +1,7 @@
 ---
 title: concat-str
+categories: |
+  expression
 version: 0.70.0
 expression: |
   Creates a concat string expression

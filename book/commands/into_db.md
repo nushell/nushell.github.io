@@ -1,5 +1,7 @@
 ---
 title: into db
+categories: |
+  database
 version: 0.70.0
 database: |
   Converts into an open db connection

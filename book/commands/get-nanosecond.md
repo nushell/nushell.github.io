@@ -1,5 +1,7 @@
 ---
 title: get-nanosecond
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Gets nanosecond from date

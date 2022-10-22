@@ -1,5 +1,7 @@
 ---
 title: split chars
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Split a string's characters into separate rows

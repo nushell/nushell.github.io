@@ -1,5 +1,7 @@
 ---
 title: skip while
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Skip elements of the input while a predicate is true.

@@ -1,5 +1,7 @@
 ---
 title: skip
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Skip the first n elements of the input.

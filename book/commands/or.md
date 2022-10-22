@@ -1,5 +1,8 @@
 ---
 title: or
+categories: |
+  database
+  db-expression
 version: 0.70.0
 database: |
   Includes an OR clause for a query

@@ -1,5 +1,7 @@
 ---
 title: bits rol
+categories: |
+  bits
 version: 0.70.0
 bits: |
   Bitwise rotate left for integers

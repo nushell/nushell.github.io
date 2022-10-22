@@ -1,5 +1,7 @@
 ---
 title: is-unique
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Creates mask indicating unique values

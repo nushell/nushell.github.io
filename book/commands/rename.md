@@ -1,5 +1,8 @@
 ---
 title: rename
+categories: |
+  dataframe or lazyframe
+  filters
 version: 0.70.0
 dataframe_or_lazyframe: |
   Rename a dataframe column

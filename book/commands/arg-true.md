@@ -1,5 +1,7 @@
 ---
 title: arg-true
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Returns indexes where values are true

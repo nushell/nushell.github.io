@@ -1,5 +1,9 @@
 ---
 title: first
+categories: |
+  dataframe
+  expression
+  filters
 version: 0.70.0
 dataframe: |
   Show only the first number of rows.

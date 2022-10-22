@@ -1,5 +1,9 @@
 ---
 title: collect
+categories: |
+  database
+  filters
+  lazyframe
 version: 0.70.0
 database: |
   Collects a query from a database database connection

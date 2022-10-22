@@ -1,5 +1,7 @@
 ---
 title: char
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Output special characters (e.g., 'newline').

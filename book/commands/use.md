@@ -1,5 +1,7 @@
 ---
 title: use
+categories: |
+  core
 version: 0.70.0
 core: |
   Use definitions from a module

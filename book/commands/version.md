@@ -1,5 +1,7 @@
 ---
 title: version
+categories: |
+  default
 version: 0.70.0
 default: |
   Display Nu version.

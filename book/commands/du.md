@@ -1,5 +1,7 @@
 ---
 title: du
+categories: |
+  core
 version: 0.70.0
 core: |
   Find disk usage sizes of specified items.

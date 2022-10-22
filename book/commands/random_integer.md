@@ -1,5 +1,7 @@
 ---
 title: random integer
+categories: |
+  random
 version: 0.70.0
 random: |
   Generate a random integer [min..max]

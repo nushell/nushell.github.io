@@ -1,5 +1,7 @@
 ---
 title: source-env
+categories: |
+  core
 version: 0.70.0
 core: |
   Source the environment from a source file into the current environment.

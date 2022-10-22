@@ -1,5 +1,7 @@
 ---
 title: math mode
+categories: |
+  math
 version: 0.70.0
 math: |
   Gets the most frequent element(s) from a list of numbers or tables

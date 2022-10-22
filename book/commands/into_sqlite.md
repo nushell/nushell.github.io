@@ -1,5 +1,7 @@
 ---
 title: into sqlite
+categories: |
+  conversions
 version: 0.70.0
 conversions: |
   Convert table into a sqlite database

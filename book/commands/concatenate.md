@@ -1,5 +1,7 @@
 ---
 title: concatenate
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Concatenates strings with other array

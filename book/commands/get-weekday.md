@@ -1,5 +1,7 @@
 ---
 title: get-weekday
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Gets weekday from date

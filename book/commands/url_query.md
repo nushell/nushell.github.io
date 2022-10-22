@@ -1,5 +1,7 @@
 ---
 title: url query
+categories: |
+  network
 version: 0.70.0
 network: |
   Get the query string of a URL

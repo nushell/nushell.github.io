@@ -1,5 +1,7 @@
 ---
 title: export extern
+categories: |
+  core
 version: 0.70.0
 core: |
   Define an extern and export it from a module

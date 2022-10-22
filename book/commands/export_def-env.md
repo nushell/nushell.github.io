@@ -1,5 +1,7 @@
 ---
 title: export def-env
+categories: |
+  core
 version: 0.70.0
 core: |
   Define a custom command that participates in the environment and export it from a module

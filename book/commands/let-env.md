@@ -1,5 +1,7 @@
 ---
 title: let-env
+categories: |
+  env
 version: 0.70.0
 env: |
   Create an environment variable and give it a value.

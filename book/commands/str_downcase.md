@@ -1,5 +1,7 @@
 ---
 title: str downcase
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Make text lowercase

@@ -1,5 +1,7 @@
 ---
 title: format
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Format columns into a string using a simple pattern.

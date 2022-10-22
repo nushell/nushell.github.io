@@ -1,5 +1,7 @@
 ---
 title: into df
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Converts a List, Table or Dictionary into a dataframe

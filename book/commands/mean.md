@@ -1,5 +1,8 @@
 ---
 title: mean
+categories: |
+  expression
+  lazyframe
 version: 0.70.0
 expression: |
   Creates a mean expression for an aggregation

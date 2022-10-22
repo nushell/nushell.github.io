@@ -1,5 +1,7 @@
 ---
 title: explode
+categories: |
+  expression
 version: 0.70.0
 expression: |
   creates an explode expression

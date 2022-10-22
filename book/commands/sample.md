@@ -1,5 +1,7 @@
 ---
 title: sample
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Create sample dataframe

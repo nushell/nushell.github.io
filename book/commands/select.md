@@ -1,5 +1,9 @@
 ---
 title: select
+categories: |
+  database
+  filters
+  lazyframe
 version: 0.70.0
 database: |
   Creates a select statement for a DB

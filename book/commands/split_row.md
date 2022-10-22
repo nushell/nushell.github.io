@@ -1,5 +1,7 @@
 ---
 title: split row
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Split a string into multiple rows using a separator

@@ -1,5 +1,7 @@
 ---
 title: df-not
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Inverts boolean mask

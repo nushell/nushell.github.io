@@ -1,5 +1,7 @@
 ---
 title: build-string
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Create a string from the arguments.

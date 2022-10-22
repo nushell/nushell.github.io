@@ -1,5 +1,7 @@
 ---
 title: cp
+categories: |
+  filesystem
 version: 0.70.0
 filesystem: |
   Copy files.

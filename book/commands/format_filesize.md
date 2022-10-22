@@ -1,5 +1,7 @@
 ---
 title: format filesize
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Converts a column of filesizes to some specified format

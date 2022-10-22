@@ -1,5 +1,7 @@
 ---
 title: each while
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Run a block on each element of input until a $nothing is found

@@ -1,5 +1,7 @@
 ---
 title: nu-check
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Validate and parse input content

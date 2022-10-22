@@ -1,5 +1,7 @@
 ---
 title: if
+categories: |
+  core
 version: 0.70.0
 core: |
   Conditionally run a block.

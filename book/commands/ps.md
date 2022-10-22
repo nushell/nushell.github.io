@@ -1,5 +1,7 @@
 ---
 title: ps
+categories: |
+  system
 version: 0.70.0
 system: |
   View information about system processes.

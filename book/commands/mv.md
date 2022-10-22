@@ -1,5 +1,7 @@
 ---
 title: mv
+categories: |
+  filesystem
 version: 0.70.0
 filesystem: |
   Move files or directories.

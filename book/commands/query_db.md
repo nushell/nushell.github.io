@@ -1,5 +1,7 @@
 ---
 title: query db
+categories: |
+  database
 version: 0.70.0
 database: |
   Query a database using SQL.

@@ -1,5 +1,7 @@
 ---
 title: filter
+categories: |
+  lazyframe
 version: 0.70.0
 lazyframe: |
   Filter dataframe based in expression

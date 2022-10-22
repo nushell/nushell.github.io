@@ -1,5 +1,7 @@
 ---
 title: bits shl
+categories: |
+  bits
 version: 0.70.0
 bits: |
   Bitwise shift left for integers

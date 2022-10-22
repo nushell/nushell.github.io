@@ -1,5 +1,7 @@
 ---
 title: insert
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Insert a new column.

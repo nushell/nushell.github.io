@@ -1,5 +1,8 @@
 ---
 title: quantile
+categories: |
+  expression
+  lazyframe
 version: 0.70.0
 expression: |
   Aggregates the columns to the selected quantile

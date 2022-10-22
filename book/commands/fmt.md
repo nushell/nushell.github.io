@@ -1,5 +1,7 @@
 ---
 title: fmt
+categories: |
+  conversions
 version: 0.70.0
 conversions: |
   Format a number

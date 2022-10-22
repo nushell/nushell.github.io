@@ -1,5 +1,7 @@
 ---
 title: ls
+categories: |
+  filesystem
 version: 0.70.0
 filesystem: |
   List the files in a directory.

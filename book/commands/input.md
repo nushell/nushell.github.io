@@ -1,5 +1,7 @@
 ---
 title: input
+categories: |
+  platform
 version: 0.70.0
 platform: |
   Get input from the user.

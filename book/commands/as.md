@@ -1,5 +1,9 @@
 ---
 title: as
+categories: |
+  database
+  db-expression
+  expression
 version: 0.70.0
 database: |
   Creates an alias for a column selection

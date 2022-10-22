@@ -1,5 +1,7 @@
 ---
 title: math
+categories: |
+  math
 version: 0.70.0
 math: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.

@@ -1,5 +1,7 @@
 ---
 title: move
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Move columns before or after other columns

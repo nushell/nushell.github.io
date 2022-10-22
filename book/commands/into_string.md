@@ -1,5 +1,7 @@
 ---
 title: into string
+categories: |
+  conversions
 version: 0.70.0
 conversions: |
   Convert value to string

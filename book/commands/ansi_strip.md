@@ -1,5 +1,7 @@
 ---
 title: ansi strip
+categories: |
+  platform
 version: 0.70.0
 platform: |
   Strip ANSI escape sequences from a string

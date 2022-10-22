@@ -1,5 +1,7 @@
 ---
 title: date to-table
+categories: |
+  date
 version: 0.70.0
 date: |
   Convert the date into a structured table.

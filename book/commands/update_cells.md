@@ -1,5 +1,7 @@
 ---
 title: update cells
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Update the table cells.

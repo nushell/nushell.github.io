@@ -1,5 +1,7 @@
 ---
 title: from ods
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.

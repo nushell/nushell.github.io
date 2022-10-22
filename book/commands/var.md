@@ -1,5 +1,8 @@
 ---
 title: var
+categories: |
+  expression
+  lazyframe
 version: 0.70.0
 expression: |
   Create a var expression for an aggregation

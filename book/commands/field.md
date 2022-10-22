@@ -1,5 +1,7 @@
 ---
 title: field
+categories: |
+  db-expression
 version: 0.70.0
 db_expression: |
   Creates column expression for database

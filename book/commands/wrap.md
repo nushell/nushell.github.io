@@ -1,5 +1,7 @@
 ---
 title: wrap
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Wrap the value into a column.

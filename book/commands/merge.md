@@ -1,5 +1,7 @@
 ---
 title: merge
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Merge a table into an input table

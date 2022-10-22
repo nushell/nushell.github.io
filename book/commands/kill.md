@@ -1,5 +1,7 @@
 ---
 title: kill
+categories: |
+  platform
 version: 0.70.0
 platform: |
   Kill a process using the process id.
@@ -13,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> kill (pid) ...rest --force --quiet --signal```
+```> kill (pid) ...rest --force --quiet```
 
 ## Parameters
 
@@ -21,7 +23,6 @@ usage: |
  -  `...rest`: rest of processes to kill
  -  `--force`: forcefully kill the process
  -  `--quiet`: won't print anything to the console
- -  `--signal {int}`: signal decimal number to be sent instead of the default 15 (unsupported on Windows)
 
 ## Examples
 

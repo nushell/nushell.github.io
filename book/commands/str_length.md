@@ -1,5 +1,7 @@
 ---
 title: str length
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Output the length of any strings in the pipeline

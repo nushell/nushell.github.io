@@ -1,5 +1,7 @@
 ---
 title: find
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Searches terms in the input or for elements of the input that satisfies the predicate.

@@ -1,5 +1,7 @@
 ---
 title: roll up
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Roll table rows up

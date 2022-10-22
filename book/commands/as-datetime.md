@@ -1,5 +1,7 @@
 ---
 title: as-datetime
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Converts string to datetime.

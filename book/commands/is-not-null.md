@@ -1,5 +1,8 @@
 ---
 title: is-not-null
+categories: |
+  dataframe
+  expression
 version: 0.70.0
 dataframe: |
   Creates mask where value is not null

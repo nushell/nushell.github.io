@@ -1,5 +1,7 @@
 ---
 title: path
+categories: |
+  default
 version: 0.70.0
 default: |
   Explore and manipulate paths.

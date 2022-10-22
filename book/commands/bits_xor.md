@@ -1,5 +1,7 @@
 ---
 title: bits xor
+categories: |
+  bits
 version: 0.70.0
 bits: |
   Performs bitwise xor for integers

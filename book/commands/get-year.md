@@ -1,5 +1,7 @@
 ---
 title: get-year
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Gets year from date

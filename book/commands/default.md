@@ -1,5 +1,7 @@
 ---
 title: default
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Sets a default row's column if missing.

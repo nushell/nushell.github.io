@@ -1,5 +1,7 @@
 ---
 title: url path
+categories: |
+  network
 version: 0.70.0
 network: |
   Get the path of a URL

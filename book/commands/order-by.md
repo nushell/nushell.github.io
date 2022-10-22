@@ -1,5 +1,7 @@
 ---
 title: order-by
+categories: |
+  database
 version: 0.70.0
 database: |
   Orders by query

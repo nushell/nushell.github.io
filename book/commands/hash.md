@@ -1,5 +1,7 @@
 ---
 title: hash
+categories: |
+  hash
 version: 0.70.0
 hash: |
   Apply hash function.

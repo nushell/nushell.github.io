@@ -1,5 +1,7 @@
 ---
 title: from yml
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse text as .yaml/.yml and create table.

@@ -1,5 +1,8 @@
 ---
 title: drop
+categories: |
+  dataframe
+  filters
 version: 0.70.0
 dataframe: |
   Creates a new dataframe by dropping the selected columns

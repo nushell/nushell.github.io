@@ -1,5 +1,7 @@
 ---
 title: drop-duplicates
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Drops duplicate values in dataframe

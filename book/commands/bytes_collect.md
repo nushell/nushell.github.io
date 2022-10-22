@@ -1,5 +1,7 @@
 ---
 title: bytes collect
+categories: |
+  bytes
 version: 0.70.0
 bytes: |
   Concatenate multiple binary into a single binary, with an optional separator between each

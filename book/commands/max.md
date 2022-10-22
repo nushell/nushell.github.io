@@ -1,5 +1,8 @@
 ---
 title: max
+categories: |
+  expression
+  lazyframe
 version: 0.70.0
 expression: |
   Creates a max expression

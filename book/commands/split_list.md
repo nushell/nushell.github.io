@@ -1,5 +1,7 @@
 ---
 title: split list
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Split a list into multiple lists using a separator

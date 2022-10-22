@@ -1,5 +1,7 @@
 ---
 title: date now
+categories: |
+  date
 version: 0.70.0
 date: |
   Get the current date.
