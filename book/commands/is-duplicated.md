@@ -1,5 +1,7 @@
 ---
 title: is-duplicated
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Creates mask indicating duplicated values

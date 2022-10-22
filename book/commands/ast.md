@@ -1,5 +1,7 @@
 ---
 title: ast
+categories: |
+  core
 version: 0.70.0
 core: |
   Print the abstract syntax tree (ast) for a pipeline.

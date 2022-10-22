@@ -1,5 +1,7 @@
 ---
 title: help
+categories: |
+  core
 version: 0.70.0
 core: |
   Display help information about commands.

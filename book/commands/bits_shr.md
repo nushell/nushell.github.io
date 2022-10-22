@@ -1,5 +1,7 @@
 ---
 title: bits shr
+categories: |
+  bits
 version: 0.70.0
 bits: |
   Bitwise shift right for integers

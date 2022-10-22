@@ -1,5 +1,7 @@
 ---
 title: table
+categories: |
+  viewers
 version: 0.70.0
 viewers: |
   Render the table.

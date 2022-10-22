@@ -1,5 +1,7 @@
 ---
 title: math avg
+categories: |
+  math
 version: 0.70.0
 math: |
   Finds the average of a list of numbers or tables

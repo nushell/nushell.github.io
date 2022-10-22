@@ -1,5 +1,7 @@
 ---
 title: enter
+categories: |
+  shells
 version: 0.70.0
 shells: |
   Enters a new shell at the given path.

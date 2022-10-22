@@ -1,5 +1,7 @@
 ---
 title: from xlsx
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse binary Excel(.xlsx) data and create table.

@@ -1,5 +1,7 @@
 ---
 title: print
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Print the given values to stdout

@@ -1,5 +1,7 @@
 ---
 title: history session
+categories: |
+  misc
 version: 0.70.0
 misc: |
   Get the command history session

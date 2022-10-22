@@ -1,5 +1,7 @@
 ---
 title: to html
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Convert table into simple HTML

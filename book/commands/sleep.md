@@ -1,5 +1,7 @@
 ---
 title: sleep
+categories: |
+  platform
 version: 0.70.0
 platform: |
   Delay for a specified amount of time.

@@ -1,5 +1,7 @@
 ---
 title: prepend
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Prepend any number of rows to a table.

@@ -1,5 +1,7 @@
 ---
 title: from ssv
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.

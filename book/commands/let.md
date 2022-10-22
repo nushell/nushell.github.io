@@ -1,5 +1,7 @@
 ---
 title: let
+categories: |
+  core
 version: 0.70.0
 core: |
   Create a variable and give it a value.

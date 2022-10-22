@@ -1,5 +1,7 @@
 ---
 title: url
+categories: |
+  network
 version: 0.70.0
 network: |
   Apply url function.

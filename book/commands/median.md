@@ -1,5 +1,8 @@
 ---
 title: median
+categories: |
+  expression
+  lazyframe
 version: 0.70.0
 expression: |
   Creates a median expression for an aggregation

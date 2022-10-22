@@ -1,5 +1,7 @@
 ---
 title: cal
+categories: |
+  generators
 version: 0.70.0
 generators: |
   Display a calendar.

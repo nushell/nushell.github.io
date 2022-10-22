@@ -1,5 +1,7 @@
 ---
 title: uppercase
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Uppercase the strings in the column

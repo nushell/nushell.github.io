@@ -1,5 +1,7 @@
 ---
 title: size
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Gather word count statistics on the text.

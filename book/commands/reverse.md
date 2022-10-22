@@ -1,5 +1,8 @@
 ---
 title: reverse
+categories: |
+  filters
+  lazyframe
 version: 0.70.0
 filters: |
   Reverses the table.

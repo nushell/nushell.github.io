@@ -1,5 +1,7 @@
 ---
 title: math floor
+categories: |
+  math
 version: 0.70.0
 math: |
   Applies the floor function to a list of numbers

@@ -1,5 +1,7 @@
 ---
 title: all-false
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Returns true if all values are false

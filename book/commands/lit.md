@@ -1,5 +1,7 @@
 ---
 title: lit
+categories: |
+  expression
 version: 0.70.0
 expression: |
   Creates a literal expression

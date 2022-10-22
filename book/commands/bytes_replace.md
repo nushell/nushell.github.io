@@ -1,5 +1,7 @@
 ---
 title: bytes replace
+categories: |
+  bytes
 version: 0.70.0
 bytes: |
   Find and replace binary

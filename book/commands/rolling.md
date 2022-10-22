@@ -1,5 +1,7 @@
 ---
 title: rolling
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Rolling calculation for a series

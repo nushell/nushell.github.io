@@ -1,5 +1,7 @@
 ---
 title: ansi
+categories: |
+  platform
 version: 0.70.0
 platform: |
   Output ANSI codes to change color.

@@ -1,5 +1,7 @@
 ---
 title: date list-timezone
+categories: |
+  date
 version: 0.70.0
 date: |
   List supported time zones.

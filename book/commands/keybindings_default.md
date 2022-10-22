@@ -1,5 +1,7 @@
 ---
 title: keybindings default
+categories: |
+  platform
 version: 0.70.0
 platform: |
   List default keybindings

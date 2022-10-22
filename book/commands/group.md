@@ -1,5 +1,7 @@
 ---
 title: group
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Groups input into groups of `group_size`.

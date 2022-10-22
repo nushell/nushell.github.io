@@ -1,5 +1,7 @@
 ---
 title: save
+categories: |
+  filesystem
 version: 0.70.0
 filesystem: |
   Save a file.

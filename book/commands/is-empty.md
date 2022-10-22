@@ -1,5 +1,7 @@
 ---
 title: is-empty
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Check for empty values.

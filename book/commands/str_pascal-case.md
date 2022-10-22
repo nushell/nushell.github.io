@@ -1,5 +1,7 @@
 ---
 title: str pascal-case
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Convert a string to PascalCase

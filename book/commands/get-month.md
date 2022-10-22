@@ -1,5 +1,7 @@
 ---
 title: get-month
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Gets month from date

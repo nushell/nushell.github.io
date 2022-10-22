@@ -1,5 +1,7 @@
 ---
 title: str ends-with
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Check if an input ends with a string

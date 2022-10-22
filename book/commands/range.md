@@ -1,5 +1,7 @@
 ---
 title: range
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Return only the selected rows.

@@ -1,5 +1,7 @@
 ---
 title: date
+categories: |
+  date
 version: 0.70.0
 date: |
   Date-related commands

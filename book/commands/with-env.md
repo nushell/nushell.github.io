@@ -1,5 +1,7 @@
 ---
 title: with-env
+categories: |
+  env
 version: 0.70.0
 env: |
   Runs a block with an environment variable set.

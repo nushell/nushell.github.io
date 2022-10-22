@@ -1,5 +1,7 @@
 ---
 title: to parquet
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Saves dataframe to parquet file

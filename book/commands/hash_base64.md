@@ -1,5 +1,7 @@
 ---
 title: hash base64
+categories: |
+  deprecated
 version: 0.70.0
 deprecated: |
   Deprecated command

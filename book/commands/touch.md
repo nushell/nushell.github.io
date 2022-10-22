@@ -1,5 +1,7 @@
 ---
 title: touch
+categories: |
+  filesystem
 version: 0.70.0
 filesystem: |
   Creates one or more files.

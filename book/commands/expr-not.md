@@ -1,5 +1,7 @@
 ---
 title: expr-not
+categories: |
+  expression
 version: 0.70.0
 expression: |
   creates a not expression

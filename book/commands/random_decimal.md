@@ -1,5 +1,7 @@
 ---
 title: random decimal
+categories: |
+  random
 version: 0.70.0
 random: |
   Generate a random decimal within a range [min..max]

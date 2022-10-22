@@ -1,5 +1,7 @@
 ---
 title: math product
+categories: |
+  math
 version: 0.70.0
 math: |
   Finds the product of a list of numbers or tables

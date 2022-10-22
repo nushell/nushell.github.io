@@ -1,5 +1,7 @@
 ---
 title: str trim
+categories: |
+  default
 version: 0.70.0
 default: |
   Trim whitespace or specific character

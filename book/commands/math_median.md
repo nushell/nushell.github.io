@@ -1,5 +1,7 @@
 ---
 title: math median
+categories: |
+  math
 version: 0.70.0
 math: |
   Gets the median of a list of numbers

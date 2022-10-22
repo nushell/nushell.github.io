@@ -1,5 +1,7 @@
 ---
 title: bytes reverse
+categories: |
+  bytes
 version: 0.70.0
 bytes: |
   Reverse every bytes in the pipeline

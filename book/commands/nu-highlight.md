@@ -1,5 +1,7 @@
 ---
 title: nu-highlight
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Syntax highlight the input string.

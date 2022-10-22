@@ -1,5 +1,7 @@
 ---
 title: str rpad
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Right-pad a string to a specific length

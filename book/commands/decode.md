@@ -1,5 +1,7 @@
 ---
 title: decode
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Decode bytes as a string.

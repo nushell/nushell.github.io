@@ -1,5 +1,8 @@
 ---
 title: to csv
+categories: |
+  dataframe
+  formats
 version: 0.70.0
 dataframe: |
   Saves dataframe to csv file

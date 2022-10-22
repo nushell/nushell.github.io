@@ -1,5 +1,7 @@
 ---
 title: config reset
+categories: |
+  env
 version: 0.70.0
 env: |
   Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu

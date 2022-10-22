@@ -1,5 +1,7 @@
 ---
 title: url host
+categories: |
+  network
 version: 0.70.0
 network: |
   Get the host of a URL

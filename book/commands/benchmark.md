@@ -1,5 +1,7 @@
 ---
 title: benchmark
+categories: |
+  system
 version: 0.70.0
 system: |
   Time the running time of a block

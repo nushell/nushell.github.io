@@ -1,5 +1,7 @@
 ---
 title: parse
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Parse columns from string data using a simple pattern.

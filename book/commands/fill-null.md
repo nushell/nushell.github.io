@@ -1,5 +1,7 @@
 ---
 title: fill-null
+categories: |
+  lazyframe
 version: 0.70.0
 lazyframe: |
   Replaces NULL values with the given expression

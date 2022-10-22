@@ -1,5 +1,7 @@
 ---
 title: from xml
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse text as .xml and create table.

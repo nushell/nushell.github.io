@@ -1,5 +1,7 @@
 ---
 title: list
+categories: |
+  expression
 version: 0.70.0
 expression: |
   Aggregates a group to a Series

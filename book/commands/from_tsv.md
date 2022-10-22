@@ -1,5 +1,7 @@
 ---
 title: from tsv
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse text as .tsv and create table.

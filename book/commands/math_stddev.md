@@ -1,5 +1,7 @@
 ---
 title: math stddev
+categories: |
+  math
 version: 0.70.0
 math: |
   Finds the stddev of a list of numbers or tables

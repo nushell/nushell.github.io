@@ -1,5 +1,7 @@
 ---
 title: ls-df
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Lists stored dataframes

@@ -1,5 +1,7 @@
 ---
 title: alias
+categories: |
+  core
 version: 0.70.0
 core: |
   Alias a command (with optional flags) to a new name

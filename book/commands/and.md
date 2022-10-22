@@ -1,5 +1,8 @@
 ---
 title: and
+categories: |
+  database
+  db-expression
 version: 0.70.0
 database: |
   Includes an AND clause for a query

@@ -1,5 +1,7 @@
 ---
 title: keybindings
+categories: |
+  platform
 version: 0.70.0
 platform: |
   Keybindings related commands

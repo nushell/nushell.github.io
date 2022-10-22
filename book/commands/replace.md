@@ -1,5 +1,7 @@
 ---
 title: replace
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern

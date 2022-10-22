@@ -1,5 +1,8 @@
 ---
 title: flatten
+categories: |
+  expression
+  filters
 version: 0.70.0
 expression: |
   creates a flatten expression

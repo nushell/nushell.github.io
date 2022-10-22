@@ -1,5 +1,7 @@
 ---
 title: overlay new
+categories: |
+  core
 version: 0.70.0
 core: |
   Create an empty overlay

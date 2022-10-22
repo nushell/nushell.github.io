@@ -1,5 +1,7 @@
 ---
 title: post
+categories: |
+  network
 version: 0.70.0
 network: |
   Post a body to a URL.

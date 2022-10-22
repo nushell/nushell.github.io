@@ -1,5 +1,7 @@
 ---
 title: from csv
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse text as .csv and create table.

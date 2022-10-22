@@ -1,5 +1,7 @@
 ---
 title: into decimal
+categories: |
+  default
 version: 0.70.0
 default: |
   Convert text into a decimal

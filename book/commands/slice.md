@@ -1,5 +1,7 @@
 ---
 title: slice
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Creates new dataframe from a slice of rows

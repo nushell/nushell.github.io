@@ -1,5 +1,7 @@
 ---
 title: hash md5
+categories: |
+  default
 version: 0.70.0
 default: |
   Hash a value using the md5 hash algorithm

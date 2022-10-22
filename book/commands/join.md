@@ -1,5 +1,8 @@
 ---
 title: join
+categories: |
+  database
+  lazyframe
 version: 0.70.0
 database: |
   Joins with another table or derived table. Default join type is inner

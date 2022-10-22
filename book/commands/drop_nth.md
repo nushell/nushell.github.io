@@ -1,5 +1,7 @@
 ---
 title: drop nth
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Drop the selected rows.

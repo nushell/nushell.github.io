@@ -1,5 +1,7 @@
 ---
 title: take while
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Take elements of the input while a predicate is true.

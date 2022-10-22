@@ -1,5 +1,7 @@
 ---
 title: rm
+categories: |
+  filesystem
 version: 0.70.0
 filesystem: |
   Remove file(s).

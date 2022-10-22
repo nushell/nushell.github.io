@@ -1,5 +1,7 @@
 ---
 title: roll
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Rolling commands for tables

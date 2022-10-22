@@ -1,5 +1,7 @@
 ---
 title: str reverse
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Reverse every string in the pipeline

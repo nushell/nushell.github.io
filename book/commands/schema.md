@@ -1,5 +1,7 @@
 ---
 title: schema
+categories: |
+  database
 version: 0.70.0
 database: |
   Show sqlite database information, including its schema.

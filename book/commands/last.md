@@ -1,5 +1,9 @@
 ---
 title: last
+categories: |
+  dataframe
+  expression
+  filters
 version: 0.70.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression

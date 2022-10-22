@@ -1,5 +1,9 @@
 ---
 title: into nu
+categories: |
+  dataframe
+  db-expression
+  expression
 version: 0.70.0
 dataframe: |
   Converts a section of the dataframe into nushell Table

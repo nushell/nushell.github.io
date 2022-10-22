@@ -1,5 +1,7 @@
 ---
 title: mkdir
+categories: |
+  filesystem
 version: 0.70.0
 filesystem: |
   Make directories, creates intermediary directories as required.

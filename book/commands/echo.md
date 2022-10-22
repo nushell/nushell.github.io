@@ -1,5 +1,7 @@
 ---
 title: echo
+categories: |
+  core
 version: 0.70.0
 core: |
   Echo the arguments back to the user.

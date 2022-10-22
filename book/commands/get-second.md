@@ -1,5 +1,7 @@
 ---
 title: get-second
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Gets second from date

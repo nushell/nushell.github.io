@@ -1,5 +1,7 @@
 ---
 title: random dice
+categories: |
+  random
 version: 0.70.0
 random: |
   Generate a random dice roll

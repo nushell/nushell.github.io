@@ -1,5 +1,7 @@
 ---
 title: math max
+categories: |
+  math
 version: 0.70.0
 math: |
   Finds the maximum within a list of numbers or tables

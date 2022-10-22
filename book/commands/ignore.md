@@ -1,5 +1,7 @@
 ---
 title: ignore
+categories: |
+  core
 version: 0.70.0
 core: |
   Ignore the output of the previous command in the pipeline

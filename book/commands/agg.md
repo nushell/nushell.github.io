@@ -1,5 +1,7 @@
 ---
 title: agg
+categories: |
+  lazyframe
 version: 0.70.0
 lazyframe: |
   Performs a series of aggregations from a group by

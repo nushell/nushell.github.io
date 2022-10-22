@@ -1,5 +1,7 @@
 ---
 title: str join
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Concatenate multiple strings into a single string, with an optional separator between each

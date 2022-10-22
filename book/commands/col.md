@@ -1,5 +1,7 @@
 ---
 title: col
+categories: |
+  expression
 version: 0.70.0
 expression: |
   Creates a named column expression

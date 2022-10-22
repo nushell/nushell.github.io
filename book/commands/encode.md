@@ -1,5 +1,7 @@
 ---
 title: encode
+categories: |
+  strings
 version: 0.70.0
 strings: |
   Encode an UTF-8 string into other kind of representations.

@@ -1,5 +1,7 @@
 ---
 title: decode base64
+categories: |
+  hash
 version: 0.70.0
 hash: |
   Base64 decode a value

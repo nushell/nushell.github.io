@@ -1,5 +1,7 @@
 ---
 title: bytes remove
+categories: |
+  bytes
 version: 0.70.0
 bytes: |
   Remove bytes

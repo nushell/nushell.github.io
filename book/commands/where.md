@@ -1,5 +1,8 @@
 ---
 title: where
+categories: |
+  database
+  filters
 version: 0.70.0
 database: |
   Includes a where statement for a query

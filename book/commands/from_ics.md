@@ -1,5 +1,7 @@
 ---
 title: from ics
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Parse text as .ics and create table.

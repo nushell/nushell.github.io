@@ -1,5 +1,7 @@
 ---
 title: to yaml
+categories: |
+  formats
 version: 0.70.0
 formats: |
   Convert table into .yaml/.yml text

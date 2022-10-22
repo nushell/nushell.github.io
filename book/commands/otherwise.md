@@ -1,5 +1,7 @@
 ---
 title: otherwise
+categories: |
+  expression
 version: 0.70.0
 expression: |
   completes a when expression

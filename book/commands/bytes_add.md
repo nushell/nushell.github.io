@@ -1,5 +1,7 @@
 ---
 title: bytes add
+categories: |
+  bytes
 version: 0.70.0
 bytes: |
   Add specified bytes to the input

@@ -1,5 +1,7 @@
 ---
 title: bits and
+categories: |
+  bits
 version: 0.70.0
 bits: |
   Performs bitwise and for integers

@@ -1,5 +1,7 @@
 ---
 title: sys
+categories: |
+  system
 version: 0.70.0
 system: |
   View information about the system.

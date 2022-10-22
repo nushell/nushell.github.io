@@ -1,5 +1,7 @@
 ---
 title: to arrow
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Saves dataframe to arrow file

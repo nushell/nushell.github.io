@@ -1,5 +1,7 @@
 ---
 title: seq date
+categories: |
+  generators
 version: 0.70.0
 generators: |
   Print sequences of dates

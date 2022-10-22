@@ -1,5 +1,7 @@
 ---
 title: config nu
+categories: |
+  env
 version: 0.70.0
 env: |
   Edit nu configurations

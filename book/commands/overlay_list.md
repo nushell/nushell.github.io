@@ -1,5 +1,7 @@
 ---
 title: overlay list
+categories: |
+  core
 version: 0.70.0
 core: |
   List all active overlays

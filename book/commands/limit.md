@@ -1,5 +1,7 @@
 ---
 title: limit
+categories: |
+  database
 version: 0.70.0
 database: |
   Limit result from query

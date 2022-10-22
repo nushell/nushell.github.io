@@ -1,5 +1,7 @@
 ---
 title: roll right
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Roll table columns right

@@ -1,5 +1,7 @@
 ---
 title: shape
+categories: |
+  dataframe
 version: 0.70.0
 dataframe: |
   Shows column and row size for a dataframe

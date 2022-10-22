@@ -1,5 +1,8 @@
 ---
 title: append
+categories: |
+  dataframe
+  filters
 version: 0.70.0
 dataframe: |
   Appends a new dataframe

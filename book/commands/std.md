@@ -1,5 +1,8 @@
 ---
 title: std
+categories: |
+  expression
+  lazyframe
 version: 0.70.0
 expression: |
   Creates a std expression for an aggregation

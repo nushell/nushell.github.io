@@ -1,5 +1,7 @@
 ---
 title: math abs
+categories: |
+  math
 version: 0.70.0
 math: |
   Returns absolute values of a list of numbers

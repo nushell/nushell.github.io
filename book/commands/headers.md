@@ -1,5 +1,7 @@
 ---
 title: headers
+categories: |
+  filters
 version: 0.70.0
 filters: |
   Use the first row of the table as column names.

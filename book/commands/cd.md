@@ -1,5 +1,7 @@
 ---
 title: cd
+categories: |
+  filesystem
 version: 0.70.0
 filesystem: |
   Change directory.

@@ -1,5 +1,7 @@
 ---
 title: when
+categories: |
+  expression
 version: 0.70.0
 expression: |
   Creates and modifies a when expression

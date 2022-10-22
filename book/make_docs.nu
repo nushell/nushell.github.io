@@ -25,9 +25,12 @@ for command in $commands {
     $'($cat | str snake-case): |
   ($usage)'
   } | str join (char nl))
+  let category_list = "  " + ($cmds_group | get $command.command | get category | str join "\n  " )
 
   let top = $"---
 title: ($command.command)
+categories: |
+($category_list)
 version: ($vers)
 ($category_matter)
 usage: |
