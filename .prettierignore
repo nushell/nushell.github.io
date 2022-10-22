@@ -1,6 +1,7 @@
 
 node_modules
 package-lock.json
+*.cjs
 
 operators.md
 dataframes.md

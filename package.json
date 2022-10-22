@@ -5,6 +5,7 @@
   "repository": "github:nushell/nushell.github.io",
   "type": "module",
   "scripts": {
+    "update": "node update_book_commands.cjs",
     "dev": "vuepress dev",
     "build": "vuepress build",
     "prepare": "husky install",
