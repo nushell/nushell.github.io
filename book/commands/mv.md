@@ -22,6 +22,7 @@ usage: |
  -  `source`: the location to move files/directories from
  -  `destination`: the location to move files/directories to
  -  `--verbose`: make mv to be verbose, showing files been moved.
+ -  `--force`: overwrite the destination if it exists (file only)
  -  `--interactive`: ask user to confirm action
 
 ## Examples
