@@ -28,7 +28,7 @@ Builds a string from letters a b c
 > build-string a b c
 ```
 
-Builds a string from letters a b c
+Builds a string from subexpression separating words with spaces
 ```shell
 > build-string $"(1 + 2)" = one ' ' plus ' ' two
 ```
