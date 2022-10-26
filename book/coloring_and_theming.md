@@ -357,7 +357,7 @@ Here's a small example of how to apply color to these items. Anything not specif
 
 ## `Prompt` configuration and coloring
 
-The Nushell prompt is configurable through these environment variables:
+The Nushell prompt is configurable through these environment variables and config items:
 
 - `PROMPT_COMMAND`: Code to execute for setting up the prompt (block)
 - `PROMPT_COMMAND_RIGHT`: Code to execute for setting up the _RIGHT_ prompt (block) (see oh-my.nu in nu_scripts)
@@ -365,6 +365,7 @@ The Nushell prompt is configurable through these environment variables:
 - `PROMPT_INDICATOR_VI_INSERT` = ": "
 - `PROMPT_INDICATOR_VI_NORMAL` = "v "
 - `PROMPT_MULTILINE_INDICATOR` = "::: "
+- `render_right_prompt_on_last_line`: Bool value to enable or disable the right prompt to be rendered on the last line of the prompt
 
 Example: For a simple prompt one could do this. Note that `PROMPT_COMMAND` requires a `block` whereas the others require a `string`.
 
@@ -376,6 +377,15 @@ If you don't like the default `PROMPT_INDICATOR` you could change it like this.
 
 ```shell
 > let-env PROMPT_INDICATOR = "> "
+```
+
+If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
+
+```
+config {
+    render_right_prompt_on_last_line = true
+    ...
+}
 ```
 
 Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/prompt/oh-my.nu).
