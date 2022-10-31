@@ -27,12 +27,12 @@ _注意：要了解覆层，请确保先查看 [模块](modules.md)，因为覆�
 }
 ```
 
-我们将在本章中使用这个模块。每当你看到 `overlay add spam`，就应该知道 `spam` 是指这个模块。
+我们将在本章中使用这个模块。每当你看到 `overlay use spam`，就应该知道 `spam` 是指这个模块。
 
-要创建覆层，请调用 [`overlay add`](/book/commands/overlay_add.md)。
+要创建覆层，请调用 [`overlay use`](/book/commands/overlay_add.md)。
 
 ```shell
-> overlay add spam
+> overlay use spam
 
 > foo
 foo
@@ -55,10 +55,10 @@ baz
 
 ## 移除覆层
 
-如果你不再需要叠加定义，请调用 [`overlay remove`](/book/commands/overlay_remove.md)：
+如果你不再需要叠加定义，请调用 [`overlay hide`](/book/commands/overlay_remove.md)：
 
 ```shell
-(spam)> overlay remove spam
+(spam)> overlay hide spam
 
 (zero)> foo
 Error: Can't run executable...
@@ -73,7 +73,7 @@ Error: Can't run executable...
 任何添加的覆层都会在作用域结束时被移除：
 
 ```shell
-(zero)> do { overlay add spam; foo }
+(zero)> do { overlay use spam; foo }
 foo
 
 (zero)> overlay list
@@ -82,14 +82,14 @@ foo
 ───┴──────
 ```
 
-此外，[`overlay remove`](/book/commands/overlay_remove.md) 在没有参数的情况下，将删除最后一个活动的覆层。
+此外，[`overlay hide`](/book/commands/overlay_remove.md) 在没有参数的情况下，将删除最后一个活动的覆层。
 
 ## 覆层是可记录的
 
 任何新的定义（命令、别名、环境变量）都会被记录到最后一个活动的覆层：
 
 ```shell
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> def eggs [] { "eggs" }
 ```
@@ -98,7 +98,7 @@ foo
 如果我们删除该覆层，我们就不能再调用它：
 
 ```shell
-(spam)> overlay remove spam
+(spam)> overlay hide spam
 
 (zero)> eggs
 Error: Can't run executable...
@@ -107,7 +107,7 @@ Error: Can't run executable...
 但是，我们可以把它找回来!
 
 ```shell
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> eggs
 eggs
@@ -121,11 +121,11 @@ eggs
 解决的办法是创建一个新的空的覆层，只用来记录自定义的变化：
 
 ```shell
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> module scratchpad { }
 
-(spam)> overlay add scratchpad
+(spam)> overlay use scratchpad
 
 (scratchpad)> def eggs [] { "eggs" }
 ```
@@ -136,7 +136,7 @@ _0.64 版本新增：_
 为了让上述步骤不那么冗长，你可以使用 [`overlay new`](/book/commands/overlay_new.md) 命令：
 
 ```shell
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> overlay new scratchpad
 
@@ -150,11 +150,11 @@ _0.64 版本新增：_
 有时，你可能想删除一个覆层，但保留所有你添加的自定义定义，而不必在下一个活动覆层中重新定义它们：
 
 ```shell
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> def eggs [] { "eggs" }
 
-(spam)> overlay remove --keep-custom spam
+(spam)> overlay hide --keep-custom spam
 
 (zero)> eggs
 eggs
@@ -166,17 +166,17 @@ eggs
 
 覆层被排成一个堆栈。
 如果多个覆层包含相同的定义，比如 `foo`，最后一个活动的覆层将优先。
-要把某个覆层放到堆栈的顶部，你可以再次调用 `overlay add`：
+要把某个覆层放到堆栈的顶部，你可以再次调用 `overlay use`：
 
 ```shell
 (zero)> def foo [] { "foo-in-zero" }
 
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> foo
 foo
 
-(spam)> overlay add zero
+(spam)> overlay use zero
 
 (zero)> foo
 foo-in-zero

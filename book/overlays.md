@@ -21,18 +21,18 @@ To create a new overlay, you first need a module:
 
     export alias bar = "bar"
 
-    export env BAZ {
-        "baz"
+    export-env {
+        load-env { BAZ: "baz" }
     }
 }
 ```
 
-We'll use this module throughout the chapter, so whenever you see `overlay add spam`, assume `spam` is referring to this module.
+We'll use this module throughout the chapter, so whenever you see `overlay use spam`, assume `spam` is referring to this module.
 
-To create the overlay, call [`overlay add`](commands/overlay_add.md):
+To create the overlay, call [`overlay use`](commands/overlay_use.md):
 
 ```
-> overlay add spam
+> overlay use spam
 
 > foo
 foo
@@ -50,15 +50,19 @@ baz
 ───┴──────
 ```
 
+It brought the module's definitions into the current scope and evaluated the `export-env` block the same way as `use` command would (see [Modules](modules.md#environment-variables) chapter).
+
+::: tip
 In the following sections, the `>` prompt will be preceded by the name of the last active overlay.
 `(spam)> some-command` means the `spam` overlay is the last active overlay when the command was typed.
+:::
 
 ## Removing an Overlay
 
-If you don't need the overlay definitions anymore, call [`overlay remove`](commands/overlay_remove.md):
+If you don't need the overlay definitions anymore, call [`overlay hide`](commands/overlay_remove.md):
 
 ```
-(spam)> overlay remove spam
+(spam)> overlay hide spam
 
 (zero)> foo
 Error: Can't run executable...
@@ -73,7 +77,7 @@ The overlays are also scoped.
 Any added overlays are removed at the end of the scope:
 
 ```
-(zero)> do { overlay add spam; foo }
+(zero)> do { overlay use spam; foo }  # overlay is active only inside the block
 foo
 
 (zero)> overlay list
@@ -82,14 +86,14 @@ foo
 ───┴──────
 ```
 
-Furthermore, [`overlay remove`](commands/overlay_remove.md) without an argument will remove the last active overlay.
+The last way to remove an overlay is to call [`overlay hide`](commands/overlay_remove.md) without an argument which will remove the last active overlay.
 
-## Overlays are Recordable
+## Overlays Are Recordable
 
 Any new definition (command, alias, environment variable) is recorded into the last active overlay:
 
 ```
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> def eggs [] { "eggs" }
 ```
@@ -98,7 +102,7 @@ Now, the `eggs` command belongs to the `spam` overlay.
 If we remove the overlay, we can't call it anymore:
 
 ```
-(spam)> overlay remove spam
+(spam)> overlay hide spam
 
 (zero)> eggs
 Error: Can't run executable...
@@ -107,7 +111,7 @@ Error: Can't run executable...
 But we can bring it back!
 
 ```
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> eggs
 eggs
@@ -121,11 +125,11 @@ Sometimes, after adding an overlay, you might not want custom definitions to be 
 The solution can be to create a new empty overlay that would be used just for recording the custom changes:
 
 ```
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> module scratchpad { }
 
-(spam)> overlay add scratchpad
+(spam)> overlay new scratchpad
 
 (scratchpad)> def eggs [] { "eggs" }
 ```
@@ -135,7 +139,7 @@ The `eggs` command is added into `scratchpad` while keeping `spam` intact.
 To make it less verbose, you can use the [`overlay new`](commands/overlay_new.md) command:
 
 ```
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> overlay new scratchpad
 
@@ -146,7 +150,7 @@ To make it less verbose, you can use the [`overlay new`](commands/overlay_new.md
 
 ## Prefixed Overlays
 
-The `overlay add` command would take all commands and aliases from the module and put them directly into the current namespace.
+The `overlay use` command would take all commands and aliases from the module and put them directly into the current namespace.
 However, you might want to keep them as subcommands behind the module's name.
 That's what `--prefix` is for:
 
@@ -155,11 +159,13 @@ That's what `--prefix` is for:
     export def foo [] { "foo" }
 }
 
-(zero)> overlay add --prefix spam
+(zero)> overlay use --prefix spam
 
 (spam)> spam foo
 foo
 ```
+
+Note that this does not apply for environment variables.
 
 ## Rename an Overlay
 
@@ -168,14 +174,14 @@ You can change the name of the added overlay with the `as` keyword:
 ```
 (zero)> module spam { export def foo [] { "foo" } }
 
-(zero)> overlay add spam as eggs
+(zero)> overlay use spam as eggs
 
 (eggs)> foo
 foo
 
-(eggs)> overlay remove eggs
+(eggs)> overlay hide eggs
 
-(spam)>
+(zero)>
 ```
 
 This can be useful if you have a generic script name, such as virtualenv's `activate.nu` but you want a more descriptive name for your overlay.
@@ -185,11 +191,11 @@ This can be useful if you have a generic script name, such as virtualenv's `acti
 Sometimes, you might want to remove an overlay, but keep all the custom definitions you added without having to redefine them in the next active overlay:
 
 ```
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> def eggs [] { "eggs" }
 
-(spam)> overlay remove --keep-custom spam
+(spam)> overlay hide --keep-custom spam
 
 (zero)> eggs
 eggs
@@ -200,11 +206,14 @@ The `--keep-custom` flag does exactly that.
 One can also keep a list of environment variables that were defined inside an overlay, but remove the rest, using the `--keep-env` flag:
 
 ```
-(zero)> module spam { export def foo [] { "foo" }; export env FOO {"foo"}}
+(zero)> module spam {
+    export def foo [] { "foo" }
+    export-env { let-env FOO = "foo" }
+}
 
-(zero)> overlay add spam
+(zero)> overlay use spam
 
-(spam)> overlay remove spam --keep-env [FOO]
+(spam)> overlay hide spam --keep-env [ FOO ]
 
 (zero)> foo
 Error: Can't run executable...
@@ -217,17 +226,17 @@ foo
 
 The overlays are arranged as a stack.
 If multiple overlays contain the same definition, say `foo`, the one from the last active one would take precedence.
-To bring an overlay to the top of the stack, you can call `overlay add` again:
+To bring an overlay to the top of the stack, you can call `overlay use` again:
 
 ```
 (zero)> def foo [] { "foo-in-zero" }
 
-(zero)> overlay add spam
+(zero)> overlay use spam
 
 (spam)> foo
 foo
 
-(spam)> overlay add zero
+(spam)> overlay use zero
 
 (zero)> foo
 foo-in-zero

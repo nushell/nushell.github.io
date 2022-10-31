@@ -24,7 +24,7 @@ This table was last updated for Nu 0.67.0.
 | `DIR`                                | `ls`                                                                                   | List files in the current directory                                   |
 | `ECHO <message>`                     | `print <message>`                                                                      | Print the given values to stdout                                      |
 | `ECHO ON`                            |                                                                                        | Echo executed commands to stdout                                      |
-| `ENDLOCAL`                           | `export env`                                                                           | Change env in the caller                                              |
+| `ENDLOCAL`                           | `export-env`                                                                           | Change env in the caller                                              |
 | `EXIT`                               | `exit`                                                                                 | Close the prompt or script                                            |
 | `FOR %<var> IN (<set>) DO <command>` | `for $<var> in <set> { <command> }`                                                    | Run a command for each item in a set                                  |
 | `FTYPE`                              |                                                                                        | Displays or modifies file types used in file extension associations   |
