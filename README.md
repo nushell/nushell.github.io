@@ -7,7 +7,7 @@ actionText: Get Started →
 actionLink: /book/
 features:
   - title: Pipelines to control any OS
-    details: Nu works on Linux, macOS, and Windows. Learn it once, then use it anywhere.
+    details: Nu works on Linux, macOS, BSD and Windows. Learn it once, then use it anywhere.
   - title: Everything is data
     details: Nu pipelines use structured data so you can safely select, filter, and sort the same way every time. Stop parsing strings and start solving problems.
   - title: Powerful plugins
