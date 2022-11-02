@@ -16,7 +16,7 @@ nerdfonts are not required but they make the presentation much better.
 
 If you like [oh-my-posh](https://ohmyposh.dev/), you can use oh-my-posh with Nushell with a few steps. It works great with Nushell. How to setup oh-my-posh with Nushell:
 
-1. Install Oh My Posh and download oh-my-posh's themes following [guide](https://ohmyposh.dev/docs/linux#installation).
+1. Install Oh My Posh and download oh-my-posh's themes following [guide](https://ohmyposh.dev/docs/installation/linux).
 2. Download and install a [nerd font](https://github.com/ryanoasis/nerd-fonts).
 3. Set the PROMPT_COMMAND in ~/.config/nushell/config.nu(or the path output by `$nu.config-path`), change `M365Princess.omp.json` to whatever you like [Themes demo](https://ohmyposh.dev/docs/themes).
 
