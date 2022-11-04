@@ -16,17 +16,17 @@ Nushell, for example, also has support for other common capabilities like gettin
 
 While it does have these amenities, Nushell isn't bash. The bash way of working, and the POSIX style in general, is not one that Nushell supports. For example, in bash, you might use:
 
-```
+```sh
 > echo "hello" > output.txt
 ```
 
 In Nushell, we use the `>` as the greater-than operator. This fits better with the language aspect of Nushell. Instead, you pipe to a command that has the job of saving content:
 
 ```
-> echo "hello" | save output.txt
+> "hello" | save output.txt
 ```
 
-**Thinking in Nushell:** The way Nushell views data is that data flows through the pipeline until it reaches the user or is handled by a final command. Nushell uses commands to do work. Learning these commands and when to use them helps you compose many kinds of pipelines.
+**Thinking in Nushell:** The way Nushell views data is that data flows through the pipeline until it reaches the user or is handled by a final command. You can simply type data, from strings to JSON-style lists and records, and follow it with `|` to send it through the pipeline. Nushell uses commands to do work and produce more data. Learning these commands and when to use them helps you compose many kinds of pipelines.
 
 ## Think of Nushell as a compiled language
 
@@ -35,7 +35,7 @@ An important part of Nushell's design and specifically where it differs from man
 For example, the following doesn't make sense in Nushell, and will fail to execute if run as a script:
 
 ```
-echo "def abc [] { 1 + 2 }" | save output.nu
+"def abc [] { 1 + 2 }" | save output.nu
 source "output.nu"
 abc
 ```

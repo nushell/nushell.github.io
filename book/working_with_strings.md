@@ -44,20 +44,47 @@ Nushell currently supports the following escape characters:
 
 ## Bare strings
 
-Like other shell languages (but unlike most other programming languages) strings can also be written without any quotes:
+Like other shell languages (but unlike most other programming languages) strings consisting of a single 'word' can also be written without any quotes:
 ```sh
-> echo hello
+> print hello
 hello
+> [hello] | describe
+list<string>
+```
+But be careful - if you use a bare word plainly on the command line (that is, not inside a data structure or used as a command parameter) or inside round brackets `(` `)`, it will be interpreted as an external command:
+```
+> hello
+Error: nu::shell::external_command
+
+  × External command failed
+   ╭─[entry #5:1:1]
+ 1 │ hello
+   · ──┬──
+   ·   ╰── executable was not found
+   ╰────
+  help: program not found
 ```
 
-Be careful though, some bare words have special meaning in nu and so will not be interpreted as a string:
+Also, many bare words have special meaning in nu, and so will not be interpreted as a string:
 ```
-> echo true | describe
+> true | describe
 bool
-> echo trueX | describe
-string
+> [true] | describe
+list<bool>
+> [trueX] | describe
+list<string>
+> trueX | describe
+Error: nu::shell::external_command
+
+  × External command failed
+   ╭─[entry #5:1:1]
+ 1 │ trueX | describe
+   · ──┬──
+   ·   ╰── executable was not found
+   ╰────
+  help: program not found
 ```
-So, while bare strings are useful for informal command line usage, when programming more formally in nu you should generally use quotes.
+So, while bare strings are useful for informal command line usage, when programming more formally in nu, you should generally use quotes.
 
 
 ## String interpolation

@@ -247,7 +247,7 @@ If you're already running `nu` during the installation process of your plugin, e
 
 ```
 > nu
-> echo hello | len
+> hello | len
 5
 > help len
 This is my custom len plugin

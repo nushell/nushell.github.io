@@ -34,7 +34,7 @@ $colors # [red yellow green purple]
 ## Iterating over lists
 
 To iterate over the items in a list, use the [`each`](commands/each.md) command with a [block](types_of_data.html#blocks)
-of Nu code that specifies what to do to each item. The block parameter (e.g. `|it|` in `{ |it| echo $it }`) is normally the current list item, but the `--numbered` (`-n`) flag can change it to have `index` and `item` values if needed. For example:
+of Nu code that specifies what to do to each item. The block parameter (e.g. `|it|` in `{ |it| print $it }`) is normally the current list item, but the `--numbered` (`-n`) flag can change it to have `index` and `item` values if needed. For example:
 
 ```bash
 let names = [Mark Tami Amanda Jeremy]
@@ -71,11 +71,11 @@ For example:
 
 ```bash
 let scores = [3 8 4]
-echo $"total = ($scores | reduce { |it, acc| $acc + $it })" # total = 15
+$"total = ($scores | reduce { |it, acc| $acc + $it })" # total = 15
 
-echo $"total = ($scores | math sum)" # easier approach, same result
+$"total = ($scores | math sum)" # easier approach, same result
 
-echo $"product = ($scores | reduce --fold 1 { |it, acc| $acc * $it })" # total = 96
+$"product = ($scores | reduce --fold 1 { |it, acc| $acc * $it })" # total = 96
 
 $scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
 ```

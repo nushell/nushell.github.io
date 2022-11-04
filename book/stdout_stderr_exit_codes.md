@@ -34,7 +34,7 @@ Nushell tracks the last exit code of the recently completed external in one of t
 
 ```
 > do -i { external }
-> echo $env.LAST_EXIT_CODE
+> $env.LAST_EXIT_CODE
 ```
 
 The second uses a command called [`complete`](commands/complete.md).

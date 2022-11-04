@@ -10,7 +10,7 @@ If we create a variable, we can print its contents by using `$` to refer to it:
 
 ```
 > let my_value = 4
-> echo $my_value
+> $my_value
 4
 ```
 
@@ -19,9 +19,9 @@ They can be shadowed in nested block, that results in:
 
 ```
 > let my_value = 4
-> do { let my_value = 5; echo $my_value }
+> do { let my_value = 5; $my_value }
 5
-> echo $my_value
+> $my_value
 4
 ```
 
@@ -36,7 +36,7 @@ A variable path works by reaching inside of the contents of a variable, navigati
 We can use a variable path to evaluate the variable `$my_value` and get the value from the `name` column in a single step:
 
 ```
-> echo $my_value.name
+> $my_value.name
 testuser
 ```
 
@@ -50,7 +50,7 @@ Subexpressions can also be pipelines and not just single commands. If we wanted 
 
 ```
 > let names_of_big_files = (ls | where size > 10kb)
-> echo $names_of_big_files
+> $names_of_big_files
 ───┬────────────┬──────┬──────────┬──────────────
  # │    name    │ type │   size   │   modified
 ───┼────────────┼──────┼──────────┼──────────────
@@ -70,7 +70,7 @@ Subexpressions also support paths. For example, let's say we wanted to get a lis
 We can do a very similar action in a single step using a subexpression path:
 
 ```
-> echo (ls).name
+> (ls).name
 ```
 
 It depends on the needs of the code and your particular style which form works best for you.
@@ -97,7 +97,7 @@ For short-hand syntax to work, the column name must appear on the left-hand side
 You may find something strange when you're using subexpression with external commands, for example:
 
 ```
-> echo $"my pwd is (pwd), hooray!"
+> $"my pwd is (pwd), hooray!"
 ```
 
 And nu gives you the following output:
@@ -110,7 +110,7 @@ my pwd is /private/tmp
 That's because when you execute `(pwd)`, it yields to `/private/tmp\n`, and the value is inserted into our string, so the raw string will be `my pwd is /private/tmp\n, hooray!`, and then `\n` is a newline character.  A work around can be put `str trim` after external command, like this:
 
 ```
-> echo $"my pwd is (pwd | str trim), hooray!"
+> $"my pwd is (pwd | str trim), hooray!"
 ```
 
 Then everything will be normal.

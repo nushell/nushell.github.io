@@ -42,7 +42,8 @@ A string of characters that represents text. There are a few ways these can be c
   - `$"6 x 7 = (6 * 7)"`
   - `ls | each { |it| $"($it.name) is ($it.size)" }`
 - Bare strings
-  - `echo hello`
+  - `print hello`
+  - `[foo bar baz]`
 
 See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
 
@@ -171,7 +172,7 @@ Structured data builds from the simple data. For example, instead of a single in
 Records hold key-value pairs, much like objects in JSON. As these can sometimes have many fields, a record is printed up-down rather than left-right:
 
 ```
-> echo {name: sam, rank: 10}
+> {name: sam, rank: 10}
 ╭──────┬─────╮
 │ name │ sam │
 │ rank │ 10  │
@@ -181,7 +182,7 @@ Records hold key-value pairs, much like objects in JSON. As these can sometimes 
 You can iterate over records by first transposing it into a table:
 
 ```
-> echo {name: sam, rank: 10} | transpose key value
+> {name: sam, rank: 10} | transpose key value
 ╭───┬──────┬───────╮
 │ # │ key  │ value │
 ├───┼──────┼───────┤
@@ -197,7 +198,7 @@ Lists can hold more than one value. These can be simple values. They can also ho
 Example: a list of strings
 
 ```
-> echo [sam fred george]
+> [sam fred george]
 ───┬────────
  0 │ sam
  1 │ fred
@@ -212,7 +213,7 @@ The table is a core data structure in Nushell. As you run commands, you'll see t
 We can create our own tables similarly to how we create a list. Because tables also contain columns and not just values, we pass in the name of the column values:
 
 ```
-> echo [[column1, column2]; [Value1, Value2]]
+> [[column1, column2]; [Value1, Value2]]
 ───┬─────────┬─────────
  # │ column1 │ column2
 ───┼─────────┼─────────
@@ -223,7 +224,7 @@ We can create our own tables similarly to how we create a list. Because tables a
 We can also create a table with multiple rows of data:
 
 ```
-> echo [[column1, column2]; [Value1, Value2] [Value3, Value4]]
+> [[column1, column2]; [Value1, Value2] [Value3, Value4]]
 ───┬─────────┬─────────
  # │ column1 │ column2
 ───┼─────────┼─────────
@@ -235,7 +236,7 @@ We can also create a table with multiple rows of data:
 You can also create a table as a list of records:
 
 ```
-> echo [{name: sam, rank: 10}, {name: bob, rank: 7}]
+> [{name: sam, rank: 10}, {name: bob, rank: 7}]
 ╭───┬──────┬──────╮
 │ # │ name │ rank │
 ├───┼──────┼──────┤
@@ -251,6 +252,6 @@ Column paths are a path through the table to a specific sub-table, column, row, 
 
 ## Blocks
 
-Blocks represent a block of code in Nu. For example, in the command `each { |it| echo $it }` the block is the portion contained in curly braces, `{ |it| echo $it }`. Block parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary.
+Blocks represent a block of code in Nu. For example, in the command `each { |it| print $it }` the block is the portion contained in curly braces, `{ |it| print $it }`. Block parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary. You can also use `$in` in most blocks instead of providing a parameter: `each { print $in }`
 
-Blocks are a useful way to represent code that can be executed on each row of data. It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required; `each { |x| echo $x }` works the same way as `each { |it| echo $it }`.
+Blocks are a useful way to represent code that can be executed on each row of data. It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required; `each { |x| print $x }` works the same way as `each { |it| print $it }`.
