@@ -17,7 +17,7 @@ Note: this table assumes Nu 0.60.0 or later.
 | `ls -la`                             | `ls --long --all` or `ls -la`                    | List files with all available information, including hidden files |
 | `ls -d */`                           | `ls \| where type == dir`                        | List directories                                                  |
 | `find . -name *.rs`                  | `ls **/*.rs`                                     | Find recursively all files that match a given pattern             |
-| `find . -name Makefile \| xargs vim` | `ls **/Makefile \| get name \| vim $in`        | Pass values as command parameters                                 |
+| `find . -name Makefile \| xargs vim` | `ls **/Makefile \| get name \| vim $in`          | Pass values as command parameters                                 |
 | `cd <directory>`                     | `cd <directory>`                                 | Change to the given directory                                     |
 | `cd`                                 | `cd`                                             | Change to the home directory                                      |
 | `cd -`                               | `cd -`                                           | Change to the previous directory                                  |
@@ -42,21 +42,21 @@ Note: this table assumes Nu 0.60.0 or later.
 |                                      | `help --find <string>`                           | Search for match in all available commands                        |
 | `command1 && command2`               | `command1; command2`                             | Run a command, and if it's successful run a second                |
 | `stat $(which git)`                  | `stat (which git).path`                          | Use command output as argument for other command                  |
-| `echo /tmp/$RANDOM` | `echo $"/tmp/(random integer)"` | Use command output in a string |
-| `cargo b --jobs=$(nproc)` | `cargo b $"--jobs=(sys \| get cpu \| length)"` | Use command output in an option |
-| `echo $PATH`                         | `echo $env.PATH`                                 | See the current path                                              |
+| `echo /tmp/$RANDOM`                  | `$"/tmp/(random integer)"`                       | Use command output in a string                                    |
+| `cargo b --jobs=$(nproc)`            | `cargo b $"--jobs=(sys \| get cpu \| length)"`   | Use command output in an option                                   |
+| `echo $PATH`                         | `$env.PATH`                                      | See the current path                                              |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update PATH permanently                                           |
 | `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                      |
-| `export`                             | `echo $env`                                      | List the current environment variables                            |
+| `export`                             | `$env`                                           | List the current environment variables                            |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update environment variables permanently                          |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | Update environment temporarily                                    |
 | `export FOO=BAR`                     | `let-env FOO = BAR`                              | Set environment variable for current session                      |
-| `echo $FOO`                          | `echo $env.FOO`                                  | Use environment variables                                         |
+| `echo $FOO`                          | `$env.FOO`                                       | Use environment variables                                         |
 | `unset FOO`                          | `hide FOO`                                       | Unset environment variable for current session                    |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                       | Define an alias temporarily                                       |
 | `type FOO`                           | `which FOO`                                      | Display information about a command (builtin, alias, or executable) |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Add and edit alias permanently (for new shells)                   |
-| `bash -c <commands>`                 | `nu -c <commands>`                               | Run a pipeline of commands (requires 0.9.1 or later)              |
-| `bash <script file>`                 | `nu <script file>`                               | Run a script file (requires 0.9.1 or later)                       |
+| `bash -c <commands>`                 | `nu -c <commands>`                               | Run a pipeline of commands                                        |
+| `bash <script file>`                 | `nu <script file>`                               | Run a script file                                                 |
 | `\`                                  | `( <command> )`                                  | A command can span multiple lines when wrapped with `(` and `)`   |
 | `pwd`                                | `$env.PWD`                                       | Display the current directory                                     |

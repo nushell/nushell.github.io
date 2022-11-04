@@ -19,7 +19,7 @@ The last command, `save "Cargo_new.toml"`, is an output (sometimes called a "sin
 The `$in` variable will collect the pipeline into a value for you, allowing you to access the whole stream as a parameter:
 
 ```nushell
-> echo 1 2 3 | $in.1 * $in.2
+> [1 2 3] | $in.1 * $in.2
 6
 ```
 

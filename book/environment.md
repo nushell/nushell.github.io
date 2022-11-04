@@ -102,14 +102,14 @@ Therefore, it follows the same rules as other environment variables (for example
 A common shorthand to set an environment variable once is available, inspired by Bash and others:
 
 ```
-> FOO=BAR echo $env.FOO
+> FOO=BAR $env.FOO
 BAR
 ```
 
 You can also use [`with-env`](commands/with-env.html) to do the same thing more explicitly:
 
 ```
-> with-env { FOO: BAR } { echo $env.FOO }
+> with-env { FOO: BAR } { $env.FOO }
 BAR
 ```
 

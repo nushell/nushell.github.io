@@ -46,15 +46,15 @@ Nushell currently supports the following escape characters:
 
 Like other shell languages (but unlike most other programming languages) strings can also be written without any quotes:
 ```sh
-> echo hello
+> hello
 hello
 ```
 
-Be careful though, some bare words have special meaning in nu and so will not be interpreted as a string:
+Be careful though - some bare words have special meaning in nu and so will not be interpreted as a string:
 ```
-> echo true | describe
+> true | describe
 bool
-> echo trueX | describe
+> trueX | describe
 string
 ```
 So, while bare strings are useful for informal command line usage, when programming more formally in nu you should generally use quotes.

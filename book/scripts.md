@@ -17,7 +17,7 @@ Let's look at an example script file:
 ```
 # myscript.nu
 def greet [name] {
-  echo "hello" $name
+  ["hello" $name]
 }
 
 greet "world"
@@ -31,7 +31,7 @@ In the above, first `greet` is defined by the Nushell interpreter. This allows u
 greet "world"
 
 def greet [name] {
-  echo "hello" $name
+  ["hello" $name]
 }
 ```
 
@@ -79,7 +79,7 @@ On Linux and macOS you can optionally use a [shebang](<https://en.wikipedia.org/
 
 ```
 #!/usr/bin/env nu
-echo "Hello World!"
+"Hello World!"
 ```
 
 ```

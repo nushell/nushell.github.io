@@ -8,9 +8,12 @@ An example definition of a custom command:
 
 ```nushell
 def greet [name] {
-  echo "hello" $name
+  ['hello' $name]
 }
 ```
+
+::: tip
+The value produced by the last line of a command becomes the command's returned value. In this case, a list containing the string `'hello'` and `$name` is returned.
 
 In this definition, we define the `greet` command, which takes a single parameter `name`. Following this parameter is the block that represents what will happen when the custom command runs. When called, the custom command will set the value passed for `name` as the `$name` variable, which will be available to the block.
 
@@ -30,11 +33,11 @@ As we do, we also get output just as we would with built-in commands:
 ```
 
 ::: tip
-`echo` returns its arguments separately to the pipeline. If you want to use it to generate a single string append ` | str join` to the pipeline:
+If you want to generate a single string, you can use the string interpolation syntax to embed $name in it:
 
 ```nushell
 def greet [name] {
-  echo "hello " $name | str join
+  $"hello ($name)"
 }
 
 greet nushell
@@ -55,7 +58,7 @@ You can also define subcommands to commands using a space. For example, if we wa
 
 ```nushell
 def "str mycommand" [] {
-  echo hello
+  hello
 }
 ```
 
@@ -69,7 +72,7 @@ Of course, commands with spaces in their names are defined in the same way:
 
 ```nushell
 def "custom command" [] {
-  echo "this is a custom command with a space in the name!"
+  "this is a custom command with a space in the name!"
 }
 ```
 
@@ -79,7 +82,7 @@ When defining custom commands, you can name and optionally set the type for each
 
 ```nushell
 def greet [name: string] {
-  echo "hello " $name | str join
+  $"hello ($name)"
 }
 ```
 
@@ -89,7 +92,7 @@ For example, let's say you wanted to take in an `int` instead:
 
 ```nushell
 def greet [name: int] {
-  echo "hello " $name | str join
+  $"hello ($name)"
 }
 
 greet world
@@ -102,7 +105,7 @@ error: Type Error
   ┌─ shell:6:7
   │
 5 │ greet world
-  │       ^^^^^ Expected int, found world
+  │       ^^^^^ Expected int
 ```
 
 This can help you guide users of your definitions to call them with only the supported types.
@@ -138,7 +141,7 @@ To make a parameter optional and directly provide a default value for it you can
 
 ```nushell
 def greet [name = "nushell"] {
-  echo "hello " $name | str join
+  $"hello ($name)"
 }
 ```
 
@@ -155,7 +158,7 @@ You can also combine a default value with a [type requirement](#parameter-types)
 
 ```
 def congratulate [age: int = 18] {
-  echo "Happy birthday! Wow you are " $age " years old now!" | str join
+  $"Happy birthday! You are ($age) years old now!"
 }
 ```
 
@@ -179,7 +182,7 @@ We can instead mark a positional parameter as optional by putting a question mar
 
 ```nushell
 def greet [name?: string] {
-  echo "hello" $name | str join
+  $"hello ($name)"
 }
 
 greet
@@ -187,14 +190,14 @@ greet
 
 Making a positional parameter optional does not change its name when accessed in the body. As the example above shows, it is still accessed with `$name`, despite the `?` suffix in the parameter list.
 
-When an optional parameter is not passed, its value in the command body is equal to `null` and `$nothing`. We can use this to act on the case where a parameter was not passed:
+When an optional parameter is not passed, its value in the command body is equal to `null`. We can use this to act on the case where a parameter was not passed:
 
 ```nushell
 def greet [name?: string] {
   if ($name == null) {
-    echo "hello, I don't know your name!"
+    "hello, I don't know your name!"
   } else {
-    echo "hello " $name | str join
+    $"hello ($name)"
   }
 }
 
@@ -216,7 +219,7 @@ def greet [
   name: string
   --age: int
 ] {
-  echo $name $age
+  [$name $age]
 }
 ```
 
@@ -249,7 +252,7 @@ def greet [
   name: string
   --age (-a): int
 ] {
-  echo $name $age
+  [$name $age]
 }
 ```
 
@@ -270,9 +273,9 @@ def greet [
   --twice
 ] {
   if $twice {
-    echo $name $name $age $age
+    [$name $name $age $age]
   } else {
-    echo $name $age
+    [$name $age]
   }
 }
 ```
@@ -295,14 +298,17 @@ There may be cases when you want to define a command which takes any number of p
 
 ```nushell
 def greet [...name: string] {
-  echo "hello all:"
+  "hello all:"
   for $n in $name {
-    echo $n
+    $n
   }
 }
 
 greet earth mars jupiter venus
 ```
+
+::: tip
+Each line of a command has its resulting value printed out when run, as long as it isn't `null`. Hence, `"hello all:"` above will be printed out despite not being the return value.
 
 We could call the above definition of the `greet` command with any number of arguments, including none at all. All of the arguments are collected into `$name` as a list.
 
@@ -310,10 +316,10 @@ Rest parameters can be used together with positional parameters:
 
 ```
 def greet [vip: string, ...name: string] {
-  echo "hello to our VIP " $vip | str join
-  echo "and hello to everybody else:"
+  $"hello to our VIP ($vip)" 
+  "and hello to everybody else:"
   for $n in $name {
-    echo $n
+    $n
   }
 }
 
@@ -333,7 +339,7 @@ def greet [
   name: string
   --age (-a): int
 ] {
-  echo $name $age
+  [$name $age]
 }
 ```
 
@@ -361,7 +367,7 @@ def greet [
   name: string      # The name of the person to greet
   --age (-a): int   # The age of the person
 ] {
-  echo $name $age
+  [$name $age]
 }
 ```
 
