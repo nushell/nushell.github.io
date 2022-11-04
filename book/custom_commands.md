@@ -308,7 +308,7 @@ greet earth mars jupiter venus
 ```
 
 ::: tip
-Each line of a command has its resulting value printed out when run, as long as it isn't `null`. Hence, `"hello all:"` above will be printed out despite not being the return value.
+Each line of a command has its resulting value printed out when run, as long as it isn't `null`. Hence, `"hello all:"` above will be printed out despite not being the return value. To prevent this, you can place `null` (or the `ignore` command) at the end of the pipeline, like so: `"hello all:" | null`. Also note that most file system commands, such as `save` or `cd`, always output `null`.
 
 We could call the above definition of the `greet` command with any number of arguments, including none at all. All of the arguments are collected into `$name` as a list.
 

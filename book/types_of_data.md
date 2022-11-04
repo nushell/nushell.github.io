@@ -42,7 +42,7 @@ A string of characters that represents text. There are a few ways these can be c
   - `$"6 x 7 = (6 * 7)"`
   - `ls | each { |it| $"($it.name) is ($it.size)" }`
 - Bare strings
-  - `hello`
+  - `"hello"`
 
 See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
 
