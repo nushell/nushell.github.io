@@ -186,7 +186,7 @@ Structured data builds from the simple data. For example, instead of a single in
 
 ## Records
 
-Records hold key-value pairs. Record syntax is very similar to objects in JSON. However, commas are *not* required to separate values if Nushell can easily distinguish them!
+Records hold key-value pairs, which associate string keys with various data values. Record syntax is very similar to objects in JSON. However, commas are *not* required to separate values if Nushell can easily distinguish them!
 
 ```sh
 > {name: sam rank: 10}
@@ -236,9 +236,7 @@ false
 
 ## Lists
 
-Lists can hold more than one value. These can be simple values. They can also hold rows, and the combination of a list of records is often called a "table".
-
-List syntax is very similar to arrays in JSON. However, commas are *not* required to separate values if Nushell can easily distinguish them!
+Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are *not* required to separate values if Nushell can easily distinguish them!
 ```sh
 > [sam fred george]
 ╭───┬────────╮
