@@ -6,7 +6,7 @@ matches your needs.
 
 ## String formats at a glance
 
-| Format of string            | Example                 | Escapes                   | Quirks                                                                 |
+| Format of string            | Example                 | Escapes                   | Notes                                                                 |
 | --------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
 | Single-quoted string        | `'[^\n]+'`              | None                      | Cannot contain any `'`                                                 |
 | Backtick string             | <code>\`[^\n]+\`</code> | None                      | Cannot contain any backticks `                                         |
@@ -120,6 +120,17 @@ Error: nu::shell::external_command
 ```
 
 So, while bare strings are useful for informal command line usage, when programming more formally in nu, you should generally use quotes.
+
+## Strings as external commands
+
+You can place the `^` sigil in front of any string (including a variable) to have Nushell execute the string as if it was an external command:
+```sh
+^'C:\Program Files\exiftool.exe'
+
+> let foo = 'C:\Program Files\exiftool.exe'
+> ^$foo
+```
+You can also use the `run-external` command for this purpose, which provides additional flags and options.
 
 ## String interpolation
 
