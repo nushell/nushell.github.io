@@ -18,7 +18,7 @@ The [`describe`](commands/describe.md) command returns the type of a data value:
 |---|---|
 | Integers | `-65535` |
 | Decimals (floats) | `9.9999`, `Infinity` |
-| Strings | <code>"hello", 'hello', \`hello\`</code> |
+| Strings | <code>"hole 18", 'hole 18', \`hole 18\`, hole18</code> |
 | Booleans | `true` |
 | Dates | `2000-01-01` |
 | Durations | `2min + 12sec` |
@@ -28,6 +28,8 @@ The [`describe`](commands/describe.md) command returns the type of a data value:
 | Lists | `[0 1 'two' 3]` |
 | Records | `{name:"Nushell", lang: "Rust"}` |
 | Tables | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]` |
+| Blocks | <code>{\|e\| $e + 1 \| into string }</code>, <code>{ $in.name.0 \| path exists }</code>|
+| Null | `null` |
 
 ## Integers
 
@@ -223,12 +225,12 @@ You can iterate over records by first transposing it into a table:
 ╰───┴──────┴───────╯
 ```
 
-Accessing records' data is similar to JavaScript:
+Accessing records' data is done by placing a `.` before a string, which is usually a bare string:
 ```sh
 > {x:12 y:4}.x
 12
 ```
-However, if a record has a key name that can't be expressed as a bare string, you'll need to use more explicit string syntax, like so:
+However, if a record has a key name that can't be expressed as a bare string, or resembles an integer (see lists, below), you'll need to use more explicit string syntax, like so:
 ```sh
 > {"1":true " ":false}." "
 false
@@ -257,7 +259,7 @@ Lists are equivalent to the individual columns of tables. You can think of a lis
 ```
 :::
 
-Accessing lists' data is similar to JavaScript. However, you use the `.` access syntax with bare integers, without needing to enclose them in square brackets:
+Accessing lists' data is done by placing a `.` before a bare integer:
 ```sh
 > [a b c].1
 b
@@ -321,9 +323,9 @@ This is true regardless of which table syntax you use:
 :::
 
 
-### Paths
+### Cell Paths
 
-You can combine list and record data access syntax to navigate tables. When used on tables, these access chains are called "paths".
+You can combine list and record data access syntax to navigate tables. When used on tables, these access chains are called "cell paths".
 
 You can access individual rows by number to obtain records:
 ```sh
@@ -376,3 +378,37 @@ There are numerous other commands for selecting and reducing the data in tables,
 Blocks represent a block of code in Nu. For example, in the command `each { |it| print $it }` the block is the portion contained in curly braces, `{ |it| print $it }`. Block parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary. You can also use `$in` in most blocks instead of providing a parameter: `each { print $in }`
 
 Blocks are a useful way to represent code that can be executed on each row of data. It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required; `each { |x| print $x }` works the same way as `each { |it| print $it }`.
+
+## Null
+
+Finally, there is `null` (also known as `$nothing`) which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like `save` or `cd`) produce `null`.
+
+You can place `null` at the end of a pipeline to replace the pipeline's output with it, and thus print nothing:
+```sh
+git checkout featurebranch | null
+```
+
+:::warning
+
+`null` is not the same as the absence of a value! It is possible for a table to be produced that has holes in some of its rows. Attempting to access this value will not produce `null`, but instead cause an error:
+```sh
+> [{a:1 b:2} {b:1}]
+╭───┬────┬───╮
+│ # │ a  │ b │
+├───┼────┼───┤
+│ 0 │  1 │ 2 │
+│ 1 │ ❎ │ 1 │
+╰───┴────┴───╯
+> [{a:1 b:2} {b:1}].1.a
+Error: nu::shell::column_not_found
+
+  × Cannot find column
+   ╭─[entry #15:1:1]
+ 1 │ [{a:1 b:2} {b:1}].1.a
+   ·            ──┬──    ┬
+   ·              │      ╰── cannot find column
+   ·              ╰── value originates here
+   ╰────
+```
+The absence of a value is (as of Nushell 0.71) printed as the ❎ emoji in interactive output.
+::: 
