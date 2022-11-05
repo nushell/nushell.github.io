@@ -8,16 +8,33 @@ Like many programming languages, Nu models data using a set of simple, and struc
 
 The [`describe`](commands/describe.md) command returns the type of a data value:
 
-```
+```sh
 > 42 | describe
 ```
+
+## Types at a glance
+
+| Type | Example
+|---|---|
+| Integers | `-65535` |
+| Decimals (floats) | `9.9999`, `Infinity` |
+| Strings | <code>"hello", 'hello', \`hello\`</code> |
+| Booleans | `true` |
+| Dates | `2000-01-01` |
+| Durations | `2min + 12sec` |
+| File sizes | `64mb` |
+| Ranges | `0..4`, `0..<5`, `0..`, `..4` |
+| Binary | `0x[FE FF]` |
+| Lists | `[0 1 'two' 3]` |
+| Records | `{name:"Nushell", lang: "Rust"}` |
+| Tables | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]` |
 
 ## Integers
 
 Examples of integers (i.e. "round numbers") include 1, 0, -5,  and 100.
 You can parse a string into an integer with the `into int` command
 
-```
+```sh
 > "-5" | into int
 ```
 
@@ -26,7 +43,7 @@ You can parse a string into an integer with the `into int` command
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
 You can cast a string into an Decimal with the `into decimal` command
 
-```
+```sh
 > "1.2" | into decimal
 ```
 
@@ -155,7 +172,7 @@ Binary data, like the data from an image file, is a group of raw bytes.
 
 You can write binary as a literal using any of the `0x[...]`, `0b[...]`, or `0o[...]` forms:
 
-```
+```sh
 > 0x[1F FF]  # Hexadecimal
 > 0b[1 1010] # Binary
 > 0o[777]    # Octal
@@ -169,19 +186,34 @@ Structured data builds from the simple data. For example, instead of a single in
 
 ## Records
 
-Records hold key-value pairs, much like objects in JSON. As these can sometimes have many fields, a record is printed up-down rather than left-right:
+Records hold key-value pairs. Record syntax is very similar to objects in JSON. However, commas are *not* required to separate values if Nushell can easily distinguish them!
 
-```
-> {name: sam, rank: 10}
+```sh
+> {name: sam rank: 10}
 ╭──────┬─────╮
 │ name │ sam │
 │ rank │ 10  │
 ╰──────┴─────╯
 ```
+As these can sometimes have many fields, a record is printed up-down rather than left-right.
+
+:::tip
+A record is identical to a single row of a table (see below). You can think of a record as essentially being a "one-row table", with each of its keys as a column (although a true one-row table is something distinct from a record).
+
+This means that any command that operates on a table's rows *also* operates on records. For instance, `insert`, which adds data to each of a table's rows, can be used with records:
+```sh
+> {x:3 y:1} | insert z 0
+╭───┬───╮
+│ x │ 3 │
+│ y │ 1 │
+│ z │ 0 │
+╰───┴───╯
+```
+:::
 
 You can iterate over records by first transposing it into a table:
 
-```
+```sh
 > {name: sam, rank: 10} | transpose key value
 ╭───┬──────┬───────╮
 │ # │ key  │ value │
@@ -191,19 +223,56 @@ You can iterate over records by first transposing it into a table:
 ╰───┴──────┴───────╯
 ```
 
+Accessing records' data is similar to JavaScript:
+```sh
+> {x:12 y:4}.x
+12
+```
+However, if a record has a key name that can't be expressed as a bare string, you'll need to use more explicit string syntax, like so:
+```sh
+> {"1":true " ":false}." "
+false
+```
+
 ## Lists
 
 Lists can hold more than one value. These can be simple values. They can also hold rows, and the combination of a list of records is often called a "table".
 
-Example: a list of strings
-
-```
+List syntax is very similar to arrays in JSON. However, commas are *not* required to separate values if Nushell can easily distinguish them!
+```sh
 > [sam fred george]
-───┬────────
- 0 │ sam
- 1 │ fred
- 2 │ george
-───┴────────
+╭───┬────────╮
+│ 0 │ sam    │
+│ 1 │ fred   │
+│ 2 │ george │
+╰───┴────────╯
+```
+
+:::tip
+Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column *also* operates on a list. For instance, `where` can be used with lists:
+```sh
+> [bell book candle] | where ($it =~ 'b')
+╭───┬──────╮
+│ 0 │ bell │
+│ 1 │ book │
+╰───┴──────╯
+```
+:::
+
+Accessing lists' data is similar to JavaScript. However, you use the `.` access syntax with bare integers, without needing to enclose them in square brackets:
+```sh
+> [a b c].1
+b
+```
+
+To get a sub-list from a list, you can use the `range` command:
+```sh
+> [a b c d e f] | range 1..3
+╭───┬───╮
+│ 0 │ b │
+│ 1 │ c │
+│ 2 │ d │
+╰───┴───╯
 ```
 
 ## Tables
@@ -212,30 +281,19 @@ The table is a core data structure in Nushell. As you run commands, you'll see t
 
 We can create our own tables similarly to how we create a list. Because tables also contain columns and not just values, we pass in the name of the column values:
 
-```
-> [[column1, column2]; [Value1, Value2]]
-───┬─────────┬─────────
- # │ column1 │ column2
-───┼─────────┼─────────
- 0 │ Value1  │ Value2
-───┴─────────┴─────────
-```
-
-We can also create a table with multiple rows of data:
-
-```
+```sh
 > [[column1, column2]; [Value1, Value2] [Value3, Value4]]
-───┬─────────┬─────────
- # │ column1 │ column2
-───┼─────────┼─────────
- 0 │ Value1  │ Value2
- 1 │ Value3  │ Value4
-───┴─────────┴─────────
+╭───┬─────────┬─────────╮
+│ # │ column1 │ column2 │
+├───┼─────────┼─────────┤
+│ 0 │ Value1  │ Value2  │
+│ 1 │ Value3  │ Value4  │
+╰───┴─────────┴─────────╯
 ```
 
-You can also create a table as a list of records:
+You can also create a table as a list of records, JSON-style:
 
-```
+```sh
 > [{name: sam, rank: 10}, {name: bob, rank: 7}]
 ╭───┬──────┬──────╮
 │ # │ name │ rank │
@@ -245,10 +303,75 @@ You can also create a table as a list of records:
 ╰───┴──────┴──────╯
 ```
 
-### Column paths
+:::tip
+Internally, tables are simply **lists of records**. This means that any command which extracts or isolates a specific row of a table will produce a record. For example, `get 0`, when used on a list, extracts the first value. But when used on a table (a list of records), it extracts a record:
+```sh
+> [{x:12, y:5}, {x:3, y:6}] | get 0
+╭───┬────╮
+│ x │ 12 │
+│ y │ 5  │
+╰───┴────╯
+```
+This is true regardless of which table syntax you use:
+```sh
+[[x,y];[12,5],[3,6]] | get 0
+╭───┬────╮
+│ x │ 12 │
+│ y │ 5  │
+╰───┴────╯
+```
+:::
 
-Column paths are a path through the table to a specific sub-table, column, row, or cell. E.g. the value `foo.0.bar` in `open data.toml | get foo.0.bar`
 
+### Paths
+
+You can combine list and record data access syntax to navigate tables. When used on tables, these access chains are called "paths".
+
+You can access individual rows by number to obtain records:
+```sh
+> [{langs:[Rust JS Python], releases:60}].0
+╭──────────┬────────────────╮
+│ langs    │ [list 3 items] │
+│ releases │ 60             │
+╰──────────┴────────────────╯
+> [{langs:[Rust JS Python], releases:60}].0.langs.2
+Python
+```
+
+Moreover, you can also access entire columns of a table by name, to obtain lists:
+```sh
+> [{x:12 y:5} {x:4 y:7} {x:2 y:2}].x
+╭───┬────╮
+│ 0 │ 12 │
+│ 1 │  4 │
+│ 2 │  2 │
+╰───┴────╯
+```
+
+Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the `select` command with column names:
+```sh
+> [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select y z
+╭───┬───┬───╮
+│ # │ y │ z │
+├───┼───┼───┤
+│ 0 │ 5 │ 1 │
+│ 1 │ 7 │ 3 │
+│ 2 │ 2 │ 0 │
+╰───┴───┴───╯
+```
+
+To remove rows from a table, you'll commonly use the `select` command with row numbers, as you would with a list:
+```sh
+> [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select 1 2
+╭───┬───┬───┬───╮
+│ # │ x │ y │ z │
+├───┼───┼───┼───┤
+│ 0 │ 4 │ 7 │ 3 │
+│ 1 │ 2 │ 2 │ 0 │
+╰───┴───┴───┴───╯
+```
+
+There are numerous other commands for selecting and reducing the data in tables, records and lists.
 
 ## Blocks
 
