@@ -274,15 +274,33 @@ With the [`parse`](commands/parse.md) command you can parse a string into column
 ╰───┴──────────┴────────────╯
 ```
 
-If a string is known to contain comma-separated or space-separated data, you can use `from ssv` or `from csv`:
+If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use `from csv`, `from tsv` or `from ssv`:
 
 ```sh
-
+> "acronym,long\nAPL,A Programming Language" | from csv
+╭───┬─────────┬────────────────────────╮
+│ # │ acronym │          long          │
+├───┼─────────┼────────────────────────┤
+│ 0 │ APL     │ A Programming Language │
+╰───┴─────────┴────────────────────────╯
+> "name  duration\nonestop.mid  4:06" | from ssv
+╭───┬─────────────┬──────────╮
+│ # │    name     │ duration │
+├───┼─────────────┼──────────┤
+│ 0 │ onestop.mid │ 4:06     │
+╰───┴─────────────┴──────────╯
+> "rank\tsuit\nJack\tSpades\nAce\tClubs" | from tsv
+╭───┬──────┬────────╮
+│ # │ rank │  suit  │
+├───┼──────┼────────┤
+│ 0 │ Jack │ Spades │
+│ 1 │ Ace  │ Clubs  │
+╰───┴──────┴────────╯
 ```
 
 ## String comparison
 
-In addition to the standard `==` and `!=` operators, various operators exist for specifically comparing strings to one another.
+In addition to the standard `==` and `!=` operators, a few operators exist for specifically comparing strings to one another.
 
 Those familiar with Bash and Perl will recognise the regex comparison operators:
 
