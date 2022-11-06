@@ -33,15 +33,15 @@ Using the `let-env` command is the most straightforward method
 > let-env FOO = 'BAR'
 ```
 
-'let-env' is similar to the **export** command in bash.
+'let-env' is similar to the **export** command in Bash.
 
-So if you want to extend the `PATH` variable for example, you could do that as follows.
+So, if you want to extend the Windows `Path` variable, for example, you could do that as follows.
 
 ```
-let-env PATH = ($env.PATH | prepend '/path/you/want/to/add')
+let-env Path = ($env.Path | prepend 'C:\path\you\want\to\add')
 ```
 
-Here we've prepended our folder to the existing folders in the PATH, so it will have the highest priority.
+Here we've prepended our folder to the existing folders in the Path, so it will have the highest priority.
 If you want to give it the lowest priority instead, you can use the `append` command.
 
 ### [`load-env`](commands/load-env.html)
