@@ -38,7 +38,7 @@ Using the `let-env` command is the most straightforward method
 So, if you want to extend the Windows `Path` variable, for example, you could do that as follows.
 
 ```
-let-env Path = ($env.Path | prepend '\path\you\want\to\add')
+let-env Path = ($env.Path | prepend 'C:\path\you\want\to\add')
 ```
 
 Here we've prepended our folder to the existing folders in the Path, so it will have the highest priority.
