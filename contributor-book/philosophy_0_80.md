@@ -29,7 +29,7 @@ In cases where the user would reasonably have an expectation of the functionalit
 The intent of Nushell's design is to be a scripting language. Scripting can take many forms, from simple pipelines to large scripts. Nushell should handle these with ease by meeting reasonable expectations in terms of:
 - Modularity
 - Readability
-- Programming language features and convenience\
+- Programming language features and convenience
 
 ### Structured data
 
