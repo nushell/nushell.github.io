@@ -8,6 +8,7 @@ Currently, we support these types of hooks:
 - `pre_prompt` : Triggered before the prompt is drawn
 - `pre_execution` : Triggered before the line input starts executing
 - `env_change` : Triggered when an environment variable changes
+- `display_output` : A block that the output is passed to (experimental).
 
 To make it clearer, we can break down Nushell's execution cycle.
 The steps to evaluate one line in the REPL mode are as follows:
@@ -17,6 +18,7 @@ The steps to evaluate one line in the REPL mode are as follows:
 1. Display prompt and wait for user input
 1. After user typed something and pressed "Enter": Check for `pre_execution` hooks and run them
 1. Parse and evaluate user input
+1. If `display_output` is defined, use it to print command output
 1. Return to 1.
 
 ## Basic Hooks
@@ -230,3 +232,22 @@ let-env config = ($env.config | upsert hooks.env_change.PWD {
     ]
 })
 ```
+### Filtering or diverting command output
+
+You can use the `display_output` hook to redirect the output of commands.
+You should define a block that works on all value types.
+The output of external commands is not filtered through `display_output`.
+
+This hook can display the output in a separate window,
+perhaps as rich HTML text.  Here is the basic idea of how to do that:
+```
+let-env config = ($env.config | upsert hooks {
+    display_output: { to html --partial --no-color | save --raw /tmp/nu-output.html }
+})
+```
+You can view the result by opening `file:///tmp/nu-output.html` in
+a web browser.
+Of course this isn't very convenient unless you use
+a browser that automaticaly reloads when the file changes.
+Instead of the `save` command, you would normally customize this
+to send the HTML output to a desired window.
