@@ -99,7 +99,8 @@ The core language and standard library needs to cover the following categories t
 * Filesytem
 * Operating system
 * Manipulating the environment
-* Parsing string data into structure data
+* Parsing string data into structured data
+* Formatting structured data as standard string formats (CSV and JSON)
 * Querying, filtering, and manipulating structured data
 * Network connectivity
     * note: Network support is fundamental because with it users can easily acquire and install Nushell extensions
