@@ -42,7 +42,22 @@ Values in Nushell can be records, lists, tables, binary data, and more. Being ab
 Nushell takes the Unix philosophy of pipelines to heart. Commands should be built with the intent of composition. Nushell enables composition via the use of pipes (`|`), just like Unix pipelines.
 
 Composing commands, both built-in and user-defined, is a core piece of Nushell. The design of Nushell and its standard library must support both easily composing commands as well as allowing the user to easily create compose-able commands.
+### Command philosophy
 
+Specifically, Nushell's philosophy about commands is represented by the following positions (these apply especially to the library of builtin commands distributed with nushell, but are also good guidance for your own commands and plugins):
+
+1. There should be one -- and preferably only one -- obvious way to do it.
+  You will probably recognize this from the "[Zen of Python](https://peps.python.org/pep-0020/)"!  
+
+2. The aim of our library of builtin commands is to provide a collection of simple and composable primitive commands, that covers essential shell programming needs and allows virtually anything to be built via composition and creation of custom user commands and plugins.
+  That's as opposed to maintaining an extensive catalog of more specialized commands in the core nushell codebase: more specialized functionality should exist as community-contributed libraries (e.g. plugins/nushell libraries).
+
+3. If something can be done conveniently by composition of simpler commands then we do not add flags and options to do the same thing.
+
+4. The primary input to a command should generally be supplied as "input", not as a positional argument.
+  This is what enables pipeline composition.
+
+5. A given command, on a given input, should generally always produce the same type of output data structure; the presence/absence/value of arguments and flags shouldn't change the output type.
 ## Command signatures and their parts
 
 ### Signature
