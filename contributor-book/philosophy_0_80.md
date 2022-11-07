@@ -39,7 +39,7 @@ Values in Nushell can be records, lists, tables, binary data, and more. Being ab
 
 ### Pipelines
 
-Nushell takes the Unix philosophy of pipelines to heart. Commands should be built with the intent of composition. Nushell leverages this composition via the use of pipes (`|`), just like Unix pipelines.
+Nushell takes the Unix philosophy of pipelines to heart. Commands should be built with the intent of composition. Nushell enables composition via the use of pipes (`|`), just like Unix pipelines.
 
 Composing commands, both built-in and user-defined, is a core piece of Nushell. The design of Nushell and its standard library must support both easily composing commands as well as allowing the user to easily create compose-able commands.
 
