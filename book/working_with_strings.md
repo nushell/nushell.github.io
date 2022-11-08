@@ -4,18 +4,48 @@ Strings in Nushell help to hold text data for later use. This can include file n
 and much more. Strings are so common that Nushell offers a couple ways to work with them, letting you pick what best
 matches your needs.
 
-## Single-quoted string
+## String formats at a glance
+
+| Format of string            | Example                 | Escapes                   | Notes                                                                 |
+| --------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
+| Single-quoted string        | `'[^\n]+'`              | None                      | Cannot contain any `'`                                                 |
+| Backtick string             | <code>\`[^\n]+\`</code> | None                      | Cannot contain any backticks `                                         |
+| Double-quoted string        | `"The\nEnd"`            | C-style backslash escapes | All backslashes must be escaped                                        |
+| Bare string                 | `ozymandias`            | None                      | Can only contain "word" characters; Cannot be used in command position |
+| Single-quoted interpolation | `$'Captain ($name)'`    | None                      | Cannot contain any `'` or unmatched `()`                               |
+| Double-quoted interpolation | `$"Captain ($name)"`    | C-style backslash escapes | All backslashes and `()` must be escaped                               |
+
+## Single-quoted strings
 
 The simplest string in Nushell is the single-quoted string. This string uses the `'` character to surround some text. Here's the text for hello world as a single-quoted string:
 
 ```sh
 > 'hello world'
 hello world
+> 'The
+end'
+The
+end
 ```
 
 Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range of text data.
 
-## Double-quoted strings
+## Backtick-quoted strings
+
+Single-quoted strings, due to not supporting any escapes, cannot contain any single-quote characters themselves. As an alternative, backtick strings using the <code>`</code> character also exist:
+
+```sh
+> `no man's land`
+no man's land
+> `no man's
+land`
+no man's
+land
+```
+
+Of course, backtick strings cannot contain any backticks themselves. Otherwise, they are identical to single-quoted strings.
+
+## Double-quoted Strings
 
 For more complex strings, Nushell also offers double-quoted strings. These strings use the `"` character to surround text. They also support the ability escape characters inside the text using the `\` character.
 
@@ -45,13 +75,16 @@ Nushell currently supports the following escape characters:
 ## Bare strings
 
 Like other shell languages (but unlike most other programming languages) strings consisting of a single 'word' can also be written without any quotes:
+
 ```sh
 > print hello
 hello
 > [hello] | describe
 list<string>
 ```
+
 But be careful - if you use a bare word plainly on the command line (that is, not inside a data structure or used as a command parameter) or inside round brackets `(` `)`, it will be interpreted as an external command:
+
 ```
 > hello
 Error: nu::shell::external_command
@@ -66,6 +99,7 @@ Error: nu::shell::external_command
 ```
 
 Also, many bare words have special meaning in nu, and so will not be interpreted as a string:
+
 ```
 > true | describe
 bool
@@ -84,8 +118,19 @@ Error: nu::shell::external_command
    ╰────
   help: program not found
 ```
+
 So, while bare strings are useful for informal command line usage, when programming more formally in nu, you should generally use quotes.
 
+## Strings as external commands
+
+You can place the `^` sigil in front of any string (including a variable) to have Nushell execute the string as if it was an external command:
+```sh
+^'C:\Program Files\exiftool.exe'
+
+> let foo = 'C:\Program Files\exiftool.exe'
+> ^$foo
+```
+You can also use the `run-external` command for this purpose, which provides additional flags and options.
 
 ## String interpolation
 
@@ -115,24 +160,54 @@ As of version 0.61, interpolated strings support escaping parentheses, so that t
 ## Splitting strings
 
 The [`split row`](commands/split_row.md) command creates a list from a string based on a delimiter.
-For example, `let colors = ("red,green,blue" | split row ",")` creates the list `[red green blue]`.
 
-The [`split column`](commands/split_column.md) command will create a table from a string based on a delimiter. For example `let colors = ("red,green,blue" | split column ",")` creates a table, giving only column to each element.
+```sh
+> "red,green,blue" | split row ","
+╭───┬───────╮
+│ 0 │ red   │
+│ 1 │ green │
+│ 2 │ blue  │
+╰───┴───────╯
+```
+
+The [`split column`](commands/split_column.md) command will create a table from a string based on a delimiter. This applies generic column names to the table.
+
+```sh
+> "red,green,blue" | split column ","
+╭───┬─────────┬─────────┬─────────╮
+│ # │ column1 │ column2 │ column3 │
+├───┼─────────┼─────────┼─────────┤
+│ 0 │ red     │ green   │ blue    │
+╰───┴─────────┴─────────┴─────────╯
+```
 
 Finally, the [`split chars`](commands/split_chars.md) command will split a string into a list of characters.
+
+```sh
+> 'aeiou' | split chars
+╭───┬───╮
+│ 0 │ a │
+│ 1 │ e │
+│ 2 │ i │
+│ 3 │ o │
+│ 4 │ u │
+╰───┴───╯
+```
 
 ## The `str` command
 
 Many string functions are subcommands of the `str` command. You can get a full list using `help str`.
 
-For example, you can look if a string contains a particular character using `str contains`:
+For example, you can look if a string contains a particular substring using `str contains`:
 
 ```sh
-> "hello world" | str contains "w"
+> "hello world" | str contains "o wo"
 true
 ```
 
-### Trimming Strings
+(You might also prefer, for brevity, the `=~` operator (described below).)
+
+### Trimming strings
 
 You can trim the sides of a string with the [`str trim`](commands/str_trim.md) command. By default, the [`str trim`](commands/str_trim.md) commands trims whitespace from both sides of the string. For example:
 
@@ -176,7 +251,7 @@ With the [`str lpad`](commands/str_lpad.md) and [`str rpad`](commands/str_rpad.m
 10
 ```
 
-### Reversing Strings
+### Reversing strings
 
 This can be done easily with the [`str reverse`](commands/str_reverse.md) command.
 
@@ -191,40 +266,86 @@ llehsuN
 ╰───┴─────────╯
 ```
 
-## String Parsing
+## String parsing
 
 With the [`parse`](commands/parse.md) command you can parse a string into columns. For example:
 
 ```sh
-> 'Nushell is the best' | parse '{shell} is {type}'
-╭───┬─────────┬──────────╮
-│ # │  shell  │   type   │
-├───┼─────────┼──────────┤
-│ 0 │ Nushell │ the best │
-╰───┴─────────┴──────────╯
-> 'Bash is kinda cringe' | parse --regex '(?P<shell>\w+) is (?P<type>[\w\s]+)'
-╭───┬───────┬──────────────╮
-│ # │ shell │     type     │
-├───┼───────┼──────────────┤
-│ 0 │ Bash  │ kinda cringe │
-╰───┴───────┴──────────────╯
+> 'Nushell 0.80' | parse '{shell} {version}'
+╭───┬─────────┬─────────╮
+│ # │  shell  │ version │
+├───┼─────────┼─────────┤
+│ 0 │ Nushell │ 0.80    │
+╰───┴─────────┴─────────╯
+> 'where all data is structured!' | parse --regex '(?P<subject>\w*\s?\w+) is (?P<adjective>\w+)'
+╭───┬──────────┬────────────╮
+│ # │ subject  │ adjective  │
+├───┼──────────┼────────────┤
+│ 0 │ all data │ structured │
+╰───┴──────────┴────────────╯
 ```
 
-## Converting Strings
+If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use `from csv`, `from tsv` or `from ssv`:
+
+```sh
+> "acronym,long\nAPL,A Programming Language" | from csv
+╭───┬─────────┬────────────────────────╮
+│ # │ acronym │          long          │
+├───┼─────────┼────────────────────────┤
+│ 0 │ APL     │ A Programming Language │
+╰───┴─────────┴────────────────────────╯
+> "name  duration\nonestop.mid  4:06" | from ssv
+╭───┬─────────────┬──────────╮
+│ # │    name     │ duration │
+├───┼─────────────┼──────────┤
+│ 0 │ onestop.mid │ 4:06     │
+╰───┴─────────────┴──────────╯
+> "rank\tsuit\nJack\tSpades\nAce\tClubs" | from tsv
+╭───┬──────┬────────╮
+│ # │ rank │  suit  │
+├───┼──────┼────────┤
+│ 0 │ Jack │ Spades │
+│ 1 │ Ace  │ Clubs  │
+╰───┴──────┴────────╯
+```
+
+## String comparison
+
+In addition to the standard `==` and `!=` operators, a few operators exist for specifically comparing strings to one another.
+
+Those familiar with Bash and Perl will recognise the regex comparison operators:
+
+```sh
+> 'APL' =~ '^\w{0,3}$'
+true
+> 'FORTRAN' !~ '^\w{0,3}$'
+true
+```
+
+Two other operators exist for simpler comparisons:
+
+```sh
+> 'JavaScript' starts-with 'Java'
+true
+> 'OCaml' ends-with 'Caml'
+true
+```
+
+## Converting strings
 
 There are multiple ways to convert strings to and from other types.
 
-### To String
+### To string
 
 1. Using [`into string`](commands/into_string.md). e.g. `123 | into string`
 2. Using string interpolation. e.g. `$'(123)'`
 3. Using [`build-string`](commands/build-string.md). e.g. `build-string (123)`
 
-### From String
+### From string
 
 1. Using [`into <type>`](commands/into.md). e.g. `'123' | into int`
 
-## Coloring Strings
+## Coloring strings
 
 You can color strings with the [`ansi`](commands/ansi.md) command. For example:
 
