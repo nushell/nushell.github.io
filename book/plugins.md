@@ -32,7 +32,7 @@ When [`register`](commands/register.md) is called:
 Once registered, the plugin is available as part of your set of commands:
 
 ```
-> help commands | where is_plugin == true
+> $nu.scope.commands | where is_plugin == true
 ```
 
 ## Examples
