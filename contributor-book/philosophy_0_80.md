@@ -119,8 +119,7 @@ The core language and standard library needs to cover the following categories t
 * Querying, filtering, and manipulating structured data
 * Network connectivity
     * note: Network support is fundamental because with it users can easily acquire and install Nushell extensions
-* Basic formats:
-    * CSV and JSON support
+* Basic formats (exact list to be determined by common use cases)
 * Basic date support
 
 The following categories should be moved to plugins:
@@ -128,8 +127,7 @@ The following categories should be moved to plugins:
 * Database connectivity
 * Dataframe support
 * Hash functionality
-* Format support
-    * Any non-CSV or JSON file format
+* Uncommon format support
 * Experimental commands
 * Binary data functionality
 * Random number support
@@ -158,6 +156,8 @@ Bash logic operators:
 cat foo.txt && cat bar.txt
 cat foo.txt || cat bar.txt
 ```
+
+We don't have plans to support the full bash language, only the above capabilities that would be common muscle memory for most bash users.
 
 ### Limited mutation
 
@@ -190,9 +190,8 @@ Closure example:
 ls | each { |x| $x.name + "foo" }
 ```
 
-### Math without spaces
+## Extensions
 
-It will be possible to not require spaces in math. For example, `1+1` instead of requiring `1 + 1`. While a small change, this is part of a set of changes to make the language feel a little less surprising to people coming from other languages.
+We will need to design and implement an easy-to-use extension mechanism that allows people to extend Nushell with additional functionality. This will be important both for helping shrink the core Nushell down but also to make it easy for contributors to create and share their own extensions.
 
-*JT: Is this more important than having nice looking dates? This doesn't seem to be as important now if we lean into a shell-first focus.*
-
+The extension mechanism will need a standard form by 1.0. For 0.80, we should have our best guess at a complete solution that meets the design goals.
