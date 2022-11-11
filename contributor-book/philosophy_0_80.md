@@ -128,9 +128,9 @@ The following categories should be moved to plugins:
 * Hash functionality
 * Uncommon format support
 * Experimental commands
-* Binary data functionality
-* Random number support
-* Math support
+* Supplemental random number support (eg `random dice`)
+* Supplemental math support from `math`
+* Supplemental binary data functionality from `bytes`
 * Advanced date support
 
 We should select commands to be in the core categories which meet the common use cases for Nushell. Commands that are in the core categories that are uncommon use cases should move to optional extensions.
