@@ -18,9 +18,8 @@ Nushell should work to serve its role as a shell and a language with a focus on 
     * Ctrl-C
     * Ctrl-D
     * and others
-* Unix-only: Handling background tasks
-    * Ctrl-Z
-    * Background/foregrounding of tasks
+* Support for background tasks
+   * In Unix, this may mean Ctrl-Z and traditional background/foregrounding of tasks or a more modern approach
 
 In cases where the user would reasonably have an expectation of the functionality of the shell, we should make every effort to include. If a feature would be a reasonable expectation (say ctrl-z on Unix), then we should have OS-specific functionality for that platform that meets that expectation.
 
