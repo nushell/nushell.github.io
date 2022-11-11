@@ -10,7 +10,7 @@ Designs should work towards serving this goal. Those that don't should be remove
 
 ### Shell-first
 
-Nushell should work to serve its roll as a shell and a language with a focus on shells. Shell types of activities include, but aren't limited to:
+Nushell should work to serve its role as a shell and a language with a focus on shells. Shell types of activities include, but aren't limited to:
 
 * Running commands
 * Redirecting stdout/stdin/stderr
