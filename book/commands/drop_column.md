@@ -2,7 +2,7 @@
 title: drop column
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Remove the last number of columns. If you want to remove columns by name, try 'reject'.
 usage: |

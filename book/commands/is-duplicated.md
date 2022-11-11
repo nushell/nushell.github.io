@@ -2,7 +2,7 @@
 title: is-duplicated
 categories: |
   dataframe
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Creates mask indicating duplicated values
 usage: |

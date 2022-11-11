@@ -2,7 +2,7 @@
 title: str to-decimal
 categories: |
   deprecated
-version: 0.70.0
+version: 0.71.0
 deprecated: |
   Deprecated command
 usage: |

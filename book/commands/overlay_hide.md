@@ -2,7 +2,7 @@
 title: overlay hide
 categories: |
   core
-version: 0.70.0
+version: 0.71.0
 core: |
   Hide an active overlay
 usage: |
@@ -42,7 +42,7 @@ Keep a custom command after hiding the overlay
 
 Hide an overlay created from a file
 ```shell
-> echo 'export alias f = "foo"' | save spam.nu
+> 'export alias f = "foo"' | save spam.nu
     overlay use spam.nu
     overlay hide spam
 ```

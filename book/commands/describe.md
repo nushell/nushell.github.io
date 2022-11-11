@@ -4,7 +4,7 @@ categories: |
   core
   database
   dataframe
-version: 0.70.0
+version: 0.71.0
 core: |
   Describe the type and structure of the value(s) piped in.
 database: |

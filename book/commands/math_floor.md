@@ -2,7 +2,7 @@
 title: math floor
 categories: |
   math
-version: 0.70.0
+version: 0.71.0
 math: |
   Applies the floor function to a list of numbers
 usage: |

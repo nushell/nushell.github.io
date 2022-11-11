@@ -2,7 +2,7 @@
 title: arg-sort
 categories: |
   dataframe
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Returns indexes for a sorted series
 usage: |

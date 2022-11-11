@@ -3,7 +3,7 @@ title: take
 categories: |
   dataframe
   filters
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Creates new dataframe using the given indices
 filters: |

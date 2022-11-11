@@ -1,6 +1,8 @@
 ---
 title: query web
-version: 0.70.0
+categories: |
+  network
+version: 0.71.0
 network: |
   execute selector query on html/web
 usage: |

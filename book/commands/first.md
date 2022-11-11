@@ -4,17 +4,17 @@ categories: |
   dataframe
   expression
   filters
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Show only the first number of rows.
 expression: |
   creates a first expression
 filters: |
-  Show only the first number of rows.
+  Return only the first several rows of the input. Counterpart of 'last'. Opposite of 'skip'.
 usage: |
   Show only the first number of rows.
   creates a first expression
-  Show only the first number of rows.
+  Return only the first several rows of the input. Counterpart of 'last'. Opposite of 'skip'.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe

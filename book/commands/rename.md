@@ -3,7 +3,7 @@ title: rename
 categories: |
   dataframe or lazyframe
   filters
-version: 0.70.0
+version: 0.71.0
 dataframe_or_lazyframe: |
   Rename a dataframe column
 filters: |

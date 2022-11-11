@@ -2,7 +2,7 @@
 title: overlay use
 categories: |
   core
-version: 0.70.0
+version: 0.71.0
 core: |
   Use definitions from a module as an overlay
 usage: |
@@ -46,14 +46,14 @@ Create an overlay from a module and rename it
 
 Create an overlay with a prefix
 ```shell
-> echo 'export def foo { "foo" }'
+> 'export def foo { "foo" }'
     overlay use --prefix spam
     spam foo
 ```
 
 Create an overlay from a file
 ```shell
-> echo 'export-env { let-env FOO = "foo" }' | save spam.nu
+> 'export-env { let-env FOO = "foo" }' | save spam.nu
     overlay use spam.nu
     $env.FOO
 ```

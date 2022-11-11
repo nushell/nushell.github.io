@@ -3,7 +3,7 @@ title: quantile
 categories: |
   expression
   lazyframe
-version: 0.70.0
+version: 0.71.0
 expression: |
   Aggregates the columns to the selected quantile
 lazyframe: |
@@ -27,7 +27,7 @@ usage: |
 
 ## Examples
 
-Quantile aggregation for a group by
+Quantile aggregation for a group-by
 ```shell
 > [[a b]; [one 2] [one 4] [two 1]]
     | into df

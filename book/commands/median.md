@@ -3,7 +3,7 @@ title: median
 categories: |
   expression
   lazyframe
-version: 0.70.0
+version: 0.71.0
 expression: |
   Creates a median expression for an aggregation
 lazyframe: |
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Median aggregation for a group by
+Median aggregation for a group-by
 ```shell
 > [[a b]; [one 2] [one 4] [two 1]]
     | into df

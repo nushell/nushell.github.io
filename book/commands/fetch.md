@@ -3,7 +3,7 @@ title: fetch
 categories: |
   lazyframe
   network
-version: 0.70.0
+version: 0.71.0
 lazyframe: |
   collects the lazyframe to the selected rows
 network: |

@@ -2,7 +2,7 @@
 title: exit
 categories: |
   shells
-version: 0.70.0
+version: 0.71.0
 shells: |
   Exit a Nu shell or exit Nu entirely.
 usage: |

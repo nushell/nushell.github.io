@@ -2,7 +2,7 @@
 title: export alias
 categories: |
   core
-version: 0.70.0
+version: 0.71.0
 core: |
   Define an alias and export it from a module
 usage: |

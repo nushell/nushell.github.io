@@ -2,7 +2,7 @@
 title: str substring
 categories: |
   default
-version: 0.70.0
+version: 0.71.0
 default: |
   Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 usage: |
@@ -24,12 +24,17 @@ usage: |
 
 ## Examples
 
-Get a substring "nushell" from the text "good nushell"
+Get a substring "nushell" from the text "good nushell" using a range
+```shell
+>  'good nushell' | str substring 5..12
+```
+
+Alternately, you can pass in a list
 ```shell
 >  'good nushell' | str substring [5 12]
 ```
 
-Alternatively, you can use the form
+Or a simple comma-separated string
 ```shell
 >  'good nushell' | str substring '5,12'
 ```

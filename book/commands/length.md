@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Count the number of elements in the input.
 usage: |
@@ -23,12 +23,12 @@ usage: |
 
 ## Examples
 
-Count the number of entries in a list
+Count the number of items in a list
 ```shell
-> echo [1 2 3 4 5] | length
+> [1 2 3 4 5] | length
 ```
 
-Count the number of columns in the calendar table
+Count the number of columns in a table
 ```shell
-> cal | length -c
+> [{columnA: A0 columnB: B0}] | length -c
 ```

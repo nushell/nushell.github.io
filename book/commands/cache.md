@@ -2,7 +2,7 @@
 title: cache
 categories: |
   lazyframe
-version: 0.70.0
+version: 0.71.0
 lazyframe: |
   Caches operations in a new LazyFrame
 usage: |

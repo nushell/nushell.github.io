@@ -2,7 +2,7 @@
 title: str-slice
 categories: |
   dataframe
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Slices the string from the start position until the selected length
 usage: |

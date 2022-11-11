@@ -2,7 +2,7 @@
 title: testing-db
 categories: |
   database
-version: 0.70.0
+version: 0.71.0
 database: |
   Temporal Command: Create query object
 usage: |

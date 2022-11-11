@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Sets a default row's column if missing.
 usage: |
@@ -34,7 +34,7 @@ Get the env value of `MY_ENV` with a default value 'abc' if not present
 > $env | get -i MY_ENV | default 'abc'
 ```
 
-Default the `$nothing` value in a list
+Replace the `null` value in a list
 ```shell
-> [1, 2, $nothing, 4] | default 3
+> [1, 2, null, 4] | default 3
 ```

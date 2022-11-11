@@ -12,23 +12,23 @@ if $book_exists == false {
 do -i { rm book/commands/*.md }
 
 let commands = ($nu.scope.commands | where is_custom == false && is_extern == false | sort-by category)
-let cmds_group = ($commands | group-by command)
+let cmds_group = ($commands | group-by name)
 
 for command in $commands {
-  let safe_name = ($command.command | str replace '\?' '' | str replace ' ' '_')
+  let safe_name = ($command.name | str replace '\?' '' | str replace ' ' '_')
   let doc_path = (['.', 'book', 'commands', $'($safe_name).md'] | path join)
 
   # this is going in the frontmatter as a multiline YAML string, so indentation matters
-  let indented_usage = ($cmds_group | get $command.command | get usage | each {|it| $"  ($it)"} | str join (char nl))
-  let category_matter = ($cmds_group | get $command.command | get category | each { |cat|
-    let usage = ($cmds_group | get $command.command | where category == $cat | get usage | str join (char nl))
+  let indented_usage = ($cmds_group | get $command.name | get usage | each {|it| $"  ($it)"} | str join (char nl))
+  let category_matter = ($cmds_group | get $command.name | get category | each { |cat|
+    let usage = ($cmds_group | get $command.name | where category == $cat | get usage | str join (char nl))
     $'($cat | str snake-case): |
   ($usage)'
   } | str join (char nl))
-  let category_list = "  " + ($cmds_group | get $command.command | get category | str join "\n  " )
+  let category_list = "  " + ($cmds_group | get $command.name | get category | str join "\n  " )
 
   let top = $"---
-title: ($command.command)
+title: ($command.name)
 categories: |
 ($category_list)
 version: ($vers)
@@ -41,7 +41,7 @@ usage: |
 }
 
 for command in $commands {
-  let safe_name = ($command.command | str replace '\?' '' | str replace ' ' '_')
+  let safe_name = ($command.name | str replace '\?' '' | str replace ' ' '_')
   let doc = get-doc $command
   let doc_path = (['.', 'book', 'commands', $'($safe_name).md'] | path join)
 
@@ -72,7 +72,7 @@ def get-doc [command] {
     }
   } | str join " ")
 
-  let signature = $"## Signature(char nl)(char nl)```> ($command.command) ($sig)```(char nl)(char nl)"
+  let signature = $"## Signature(char nl)(char nl)```> ($command.name) ($sig)```(char nl)(char nl)"
 
   let params = ($command.signature | each { |param|
     if $param.parameter_type == "positional" {

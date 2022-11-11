@@ -2,7 +2,7 @@
 title: otherwise
 categories: |
   expression
-version: 0.70.0
+version: 0.71.0
 expression: |
   completes a when expression
 usage: |

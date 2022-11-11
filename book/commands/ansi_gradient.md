@@ -2,7 +2,7 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.70.0
+version: 0.71.0
 platform: |
   Draw text with a provided start and end code making a gradient
 usage: |
