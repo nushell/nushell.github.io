@@ -4,17 +4,17 @@ categories: |
   dataframe
   expression
   filters
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression
 expression: |
   creates a last expression
 filters: |
-  Show only the last number of rows.
+  Return only the last several rows of the input. Counterpart of 'first'. Opposite of 'drop'.
 usage: |
   Creates new dataframe with tail rows or creates a last expression
   creates a last expression
-  Show only the last number of rows.
+  Return only the last several rows of the input. Counterpart of 'first'. Opposite of 'drop'.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe

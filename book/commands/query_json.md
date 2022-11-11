@@ -1,6 +1,8 @@
 ---
 title: query json
-version: 0.70.0
+categories: |
+  filters
+version: 0.71.0
 filters: |
   execute json query on json file (open --raw <file> | query json 'query string')
 usage: |

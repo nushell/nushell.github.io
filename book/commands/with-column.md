@@ -2,7 +2,7 @@
 title: with-column
 categories: |
   dataframe or lazyframe
-version: 0.70.0
+version: 0.71.0
 dataframe_or_lazyframe: |
   Adds a series to the dataframe
 usage: |

@@ -1,17 +1,17 @@
 ---
 title: str collect
 categories: |
-  strings
-version: 0.70.0
-strings: |
+  deprecated
+version: 0.71.0
+deprecated: |
   'str collect' is deprecated. Please use 'str join' instead.
 usage: |
   'str collect' is deprecated. Please use 'str join' instead.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for strings
+# <code>{{ $frontmatter.title }}</code> for deprecated
 
-<div class='command-title'>{{ $frontmatter.strings }}</div>
+<div class='command-title'>{{ $frontmatter.deprecated }}</div>
 
 ## Signature
 

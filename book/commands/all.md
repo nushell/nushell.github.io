@@ -2,7 +2,7 @@
 title: all
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Test if every element of the input fulfills a predicate expression.
 usage: |
@@ -19,16 +19,21 @@ usage: |
 
 ## Parameters
 
- -  `predicate`: the predicate expression that must evaluate to a boolean
+ -  `predicate`: the expression, or block, that must evaluate to a boolean
 
 ## Examples
 
-Find if services are running
+Check if each row's status is the string 'UP'
 ```shell
-> echo [[status]; [UP] [UP]] | all status == UP
+> [[status]; [UP] [UP]] | all status == UP
 ```
 
-Check that all values are even
+Check that all of the values are even, using the built-in $it variable
 ```shell
-> echo [2 4 6 8] | all ($it mod 2) == 0
+> [2 4 6 8] | all ($it mod 2) == 0
+```
+
+Check that all of the values are even, using a block
+```shell
+> [2 4 6 8] | all {|e| $e mod 2 == 0 }
 ```

@@ -2,7 +2,7 @@
 title: url scheme
 categories: |
   network
-version: 0.70.0
+version: 0.71.0
 network: |
   Get the scheme (e.g. http, file) of a URL
 usage: |

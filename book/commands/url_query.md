@@ -2,7 +2,7 @@
 title: url query
 categories: |
   network
-version: 0.70.0
+version: 0.71.0
 network: |
   Get the query string of a URL
 usage: |

@@ -2,11 +2,11 @@
 title: into df
 categories: |
   dataframe
-version: 0.70.0
+version: 0.71.0
 dataframe: |
-  Converts a List, Table or Dictionary into a dataframe
+  Converts a list, table or record into a dataframe
 usage: |
-  Converts a List, Table or Dictionary into a dataframe
+  Converts a list, table or record into a dataframe
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe

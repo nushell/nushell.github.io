@@ -4,7 +4,7 @@ categories: |
   dataframe
   db-expression
   expression
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Converts a section of the dataframe into nushell Table
 db_expression: |

@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.70.0
+version: 0.71.0
 strings: |
   Encode an UTF-8 string into other kind of representations.
 usage: |
@@ -35,5 +35,5 @@ documentation link at https://docs.rs/encoding_rs/0.8.28/encoding_rs/#statics
 
 Encode an UTF-8 string into Shift-JIS
 ```shell
-> echo "負けると知って戦うのが、遥かに美しいのだ" | encode shift-jis
+> "負けると知って戦うのが、遥かに美しいのだ" | encode shift-jis
 ```

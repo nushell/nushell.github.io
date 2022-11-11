@@ -2,7 +2,7 @@
 title: math eval
 categories: |
   math
-version: 0.70.0
+version: 0.71.0
 math: |
   Evaluate a math expression into a number
 usage: |

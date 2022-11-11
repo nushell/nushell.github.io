@@ -2,11 +2,11 @@
 title: each
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
-  Run a block on each element of input
+  Run a block on each row of input
 usage: |
-  Run a block on each element of input
+  Run a block on each row of input
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -23,6 +23,16 @@ usage: |
  -  `--keep-empty`: keep empty result cells
  -  `--numbered`: iterate with an index
 
+## Notes
+```text
+Since tables are lists of records, passing a table into 'each' will
+iterate over each record, not necessarily each cell within it.
+
+Avoid passing single records to this command. Since a record is a
+one-row structure, 'each' will only run once, behaving similar to 'do'.
+To iterate over a record's values, try converting it to a table
+with 'transpose' first.
+```
 ## Examples
 
 Multiplies elements in list

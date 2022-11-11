@@ -2,7 +2,7 @@
 title: str contains
 categories: |
   strings
-version: 0.70.0
+version: 0.71.0
 strings: |
   Checks if input contains string
 usage: |

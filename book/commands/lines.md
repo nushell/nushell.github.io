@@ -2,7 +2,7 @@
 title: lines
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Converts input to lines
 usage: |
@@ -25,5 +25,5 @@ usage: |
 
 Split multi-line string into lines
 ```shell
-> echo $'two(char nl)lines' | lines
+> echo $"two\nlines" | lines
 ```

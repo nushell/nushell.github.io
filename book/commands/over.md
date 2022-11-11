@@ -2,7 +2,7 @@
 title: over
 categories: |
   db-expression
-version: 0.70.0
+version: 0.71.0
 db_expression: |
   Adds a partition to an expression function
 usage: |

@@ -2,7 +2,7 @@
 title: do
 categories: |
   core
-version: 0.70.0
+version: 0.71.0
 core: |
   Run a block
 usage: |
@@ -21,7 +21,7 @@ usage: |
 
  -  `block`: the block to run
  -  `...rest`: the parameter(s) for the block
- -  `--ignore-errors`: ignore errors as the block runs
+ -  `--ignore-errors`: ignore shell errors as the block runs
  -  `--capture-errors`: capture errors as the block runs and return it
 
 ## Examples
@@ -31,9 +31,14 @@ Run the block
 > do { echo hello }
 ```
 
-Run the block and ignore errors
+Run the block and ignore shell errors
 ```shell
 > do -i { thisisnotarealcommand }
+```
+
+Abort the pipeline if a program returns a non-zero exit code
+```shell
+> do -c { nu -c 'exit 1' } | myscarycommand
 ```
 
 Run the block, with a positional parameter

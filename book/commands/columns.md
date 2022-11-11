@@ -3,7 +3,7 @@ title: columns
 categories: |
   dataframe
   filters
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Show dataframe columns
 filters: |

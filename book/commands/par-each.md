@@ -2,7 +2,7 @@
 title: par-each
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Run a block on each element of input in parallel
 usage: |

@@ -2,11 +2,11 @@
 title: into db
 categories: |
   database
-version: 0.70.0
+version: 0.71.0
 database: |
-  Converts into an open db connection
+  Converts the input into an open db connection
 usage: |
-  Converts into an open db connection
+  Converts the input into an open db connection
 ---
 
 # <code>{{ $frontmatter.title }}</code> for database
@@ -19,11 +19,11 @@ usage: |
 
 ## Notes
 ```text
-This function is used as type hint for parser, specially if the query is not started with 'from table'
+This function is used as a hint to Nushell to optimize the pipeline for database queries.
 ```
 ## Examples
 
-Converts an open file into a db object
+Converts an open file into a db object.
 ```shell
 > open db.sqlite | into db
 ```

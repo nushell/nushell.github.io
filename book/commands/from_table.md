@@ -2,7 +2,7 @@
 title: from table
 categories: |
   database
-version: 0.70.0
+version: 0.71.0
 database: |
   Select section from query statement for a DB
 usage: |

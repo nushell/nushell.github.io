@@ -2,7 +2,7 @@
 title: fill-na
 categories: |
   lazyframe
-version: 0.70.0
+version: 0.71.0
 lazyframe: |
   Replaces NA values with the given expression
 usage: |

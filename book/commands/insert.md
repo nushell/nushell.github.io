@@ -2,7 +2,7 @@
 title: insert
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Insert a new column.
 usage: |

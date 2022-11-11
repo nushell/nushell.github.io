@@ -2,11 +2,11 @@
 title: merge
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
-  Merge a table into an input table
+  Merge the input with a record or table, overwriting values in matching columns.
 usage: |
-  Merge a table into an input table
+  Merge the input with a record or table, overwriting values in matching columns.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -19,21 +19,30 @@ usage: |
 
 ## Parameters
 
- -  `block`: the block to run and merge into the table
+ -  `block`: the new value to merge with, or a block that produces it
 
+## Notes
+```text
+You may provide a column structure to merge, or a block
+that generates a column structure.
+
+When merging tables, row 0 of the input table is overwritten
+with values from row 0 of the provided table, then
+repeating this process with row 1, and so on.
+```
 ## Examples
 
-Merge an index column into the input table
+Add an 'index' column to the input table
 ```shell
 > [a b c] | wrap name | merge { [1 2 3] | wrap index }
 ```
 
 Merge two records
 ```shell
-> {a: 1, b: 2} | merge { {c: 3} }
+> {a: 1, b: 2} | merge {c: 3}
 ```
 
-Merge two records with overlap key
+Merge records, overwriting overlapping values
 ```shell
-> {a: 1, b: 3} | merge { {b: 2, c: 4} }
+> {a: 1, b: 3} | merge { { b: 2 } | merge { c: 4 } }
 ```

@@ -4,7 +4,7 @@ categories: |
   database
   db-expression
   expression
-version: 0.70.0
+version: 0.71.0
 database: |
   Creates an alias for a column selection
 db_expression: |

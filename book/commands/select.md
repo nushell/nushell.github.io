@@ -4,7 +4,7 @@ categories: |
   database
   filters
   lazyframe
-version: 0.70.0
+version: 0.71.0
 database: |
   Creates a select statement for a DB
 filters: |

@@ -3,14 +3,14 @@ title: drop
 categories: |
   dataframe
   filters
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Creates a new dataframe by dropping the selected columns
 filters: |
-  Remove the last number of rows or columns.
+  Remove the last several rows of the input. Counterpart of 'skip'. Opposite of 'last'.
 usage: |
   Creates a new dataframe by dropping the selected columns
-  Remove the last number of rows or columns.
+  Remove the last several rows of the input. Counterpart of 'skip'. Opposite of 'last'.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe

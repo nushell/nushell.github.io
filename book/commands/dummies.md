@@ -2,7 +2,7 @@
 title: dummies
 categories: |
   dataframe
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Creates a new dataframe with dummy variables
 usage: |

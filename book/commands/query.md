@@ -1,6 +1,8 @@
 ---
 title: query
-version: 0.70.0
+categories: |
+  filters
+version: 0.71.0
 filters: |
   Show all the query commands
 usage: |

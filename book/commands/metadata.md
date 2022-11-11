@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   core
-version: 0.70.0
+version: 0.71.0
 core: |
   Get the metadata for items in the stream
 usage: |

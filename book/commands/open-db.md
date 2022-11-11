@@ -2,7 +2,7 @@
 title: open-db
 categories: |
   database
-version: 0.70.0
+version: 0.71.0
 database: |
   Open a database
 usage: |

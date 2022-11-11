@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Searches terms in the input or for elements of the input that satisfies the predicate.
 usage: |
@@ -36,7 +36,7 @@ Search for multiple terms in a command output
 
 Search for a term in a string
 ```shell
-> echo Cargo.toml | find toml
+> 'Cargo.toml' | find toml
 ```
 
 Search a number or a file size in a list of numbers

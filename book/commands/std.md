@@ -3,7 +3,7 @@ title: std
 categories: |
   expression
   lazyframe
-version: 0.70.0
+version: 0.71.0
 expression: |
   Creates a std expression for an aggregation
 lazyframe: |
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Std aggregation for a group by
+Std aggregation for a group-by
 ```shell
 > [[a b]; [one 2] [one 2] [two 1] [two 1]]
     | into df

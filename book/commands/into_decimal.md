@@ -2,7 +2,7 @@
 title: into decimal
 categories: |
   default
-version: 0.70.0
+version: 0.71.0
 default: |
   Convert text into a decimal
 usage: |

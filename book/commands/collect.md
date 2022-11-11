@@ -4,7 +4,7 @@ categories: |
   database
   filters
   lazyframe
-version: 0.70.0
+version: 0.71.0
 database: |
   Collects a query from a database database connection
 filters: |

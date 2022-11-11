@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.70.0
+version: 0.71.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -42,4 +42,14 @@ Use in block form for more involved updating logic
 Use in block form for more involved updating logic
 ```shell
 > echo [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | upsert authors {|a| $a.authors | str join ','}
+```
+
+Upsert an int into a list, updating an existing value based on the index
+```shell
+> [1 2 3] | upsert 0 2
+```
+
+Upsert an int into a list, inserting a new value based on the index
+```shell
+> [1 2 3] | upsert 3 4
 ```

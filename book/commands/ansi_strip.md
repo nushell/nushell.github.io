@@ -2,7 +2,7 @@
 title: ansi strip
 categories: |
   platform
-version: 0.70.0
+version: 0.71.0
 platform: |
   Strip ANSI escape sequences from a string
 usage: |
@@ -25,5 +25,5 @@ usage: |
 
 Strip ANSI escape sequences from a string
 ```shell
-> echo [ (ansi green) (ansi cursor_on) "hello" ] | str join | ansi strip
+> $'(ansi green)(ansi cursor_on)hello' | ansi strip
 ```

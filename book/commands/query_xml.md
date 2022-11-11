@@ -1,6 +1,8 @@
 ---
 title: query xml
-version: 0.70.0
+categories: |
+  filters
+version: 0.71.0
 filters: |
   execute xpath query on xml
 usage: |

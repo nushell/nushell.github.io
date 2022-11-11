@@ -2,7 +2,7 @@
 title: math sum
 categories: |
   math
-version: 0.70.0
+version: 0.71.0
 math: |
   Finds the sum of a list of numbers or tables
 usage: |

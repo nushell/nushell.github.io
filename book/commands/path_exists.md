@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   default
-version: 0.70.0
+version: 0.71.0
 default: |
   Check whether a path exists
 usage: |
@@ -25,7 +25,7 @@ usage: |
 
 Check if a file exists
 ```shell
-> 'C:\Users\joe\todo.txt' | path exists
+> '/home/joe/todo.txt' | path exists
 ```
 
 Check if a file exists in a column

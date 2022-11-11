@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.70.0
+version: 0.71.0
 conversions: |
   Convert text into a datetime
 usage: |

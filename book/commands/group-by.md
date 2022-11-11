@@ -4,17 +4,17 @@ categories: |
   database
   default
   lazyframe
-version: 0.70.0
+version: 0.71.0
 database: |
-  Group by query
+  Group-by query
 default: |
-  Create a new table grouped.
+  Split a table into groups based on one column's values, and return a record with those groups.
 lazyframe: |
-  Creates a groupby object that can be used for other aggregations
+  Creates a group-by object that can be used for other aggregations
 usage: |
-  Group by query
-  Create a new table grouped.
-  Creates a groupby object that can be used for other aggregations
+  Group-by query
+  Split a table into groups based on one column's values, and return a record with those groups.
+  Creates a group-by object that can be used for other aggregations
 ---
 
 # <code>{{ $frontmatter.title }}</code> for database
@@ -63,12 +63,12 @@ groups by column column a and counts records
 
 ## Examples
 
-group items by column named "type"
+Group items by the "type" column's values
 ```shell
 > ls | group-by type
 ```
 
-you can also group by raw values by leaving out the argument
+You can also group by raw values by leaving out the argument
 ```shell
 > echo ['1' '3' '1' '3' '2' '1' '1'] | group-by
 ```
@@ -79,11 +79,11 @@ you can also group by raw values by leaving out the argument
 
 ## Signature
 
-```> group-by ...Group by expressions```
+```> group-by ...Group-by expressions```
 
 ## Parameters
 
- -  `...Group by expressions`: Expression(s) that define the lazy group by
+ -  `...Group-by expressions`: Expression(s) that define the lazy group-by
 
 ## Examples
 

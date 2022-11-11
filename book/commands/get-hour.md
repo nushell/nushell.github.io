@@ -2,7 +2,7 @@
 title: get-hour
 categories: |
   dataframe
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Gets hour from date
 usage: |

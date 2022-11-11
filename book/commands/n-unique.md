@@ -3,7 +3,7 @@ title: n-unique
 categories: |
   dataframe
   expression
-version: 0.70.0
+version: 0.71.0
 dataframe: |
   Counts unique values
 expression: |
