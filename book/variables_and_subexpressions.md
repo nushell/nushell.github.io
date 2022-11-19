@@ -36,7 +36,7 @@ A variable path works by reaching inside of the contents of a variable, navigati
 We can use a variable path to evaluate the variable `$my_value` and get the value from the `name` column in a single step:
 
 ```
-> $my_value.name
+> $my_value.name.0
 testuser
 ```
 
