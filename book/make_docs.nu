@@ -8,8 +8,10 @@ if $book_exists == false {
   exit --now
 }
 
-# Clean all commands and regenerate the docs
-do -i { rm book/commands/*.md }
+# Old commands are currently not deleted because some of them
+# are platform-specific, and a single run of this script will not regenerate
+# all of them.
+#do -i { rm book/commands/*.md }
 
 let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
 let cmds_group = ($commands | group-by name)
@@ -89,16 +91,24 @@ def get-doc [command] {
 
   let parameters = if $no_param { "" } else { $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)" }
 
-  let extra_usage = if $command.extra_usage == "" { "" } else {
-    # It's a little ugly to encode the extra usage in a code block,
-    # but otherwise Vuepress's Markdown engine makes everything go haywire
-    # (the `ansi` command is a good example).
-    # TODO: find a better way to display plain text with minimal formatting
-    $"## Notes
-```text
-($command.extra_usage)
-```
-"
+  let ex = $command.extra_usage
+  # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
+  # being interpreted as markdown. This is strictly hard-coded for now.
+  let extra_usage = if $ex == "" { "" } else if $command.command in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
+    $"## Notes(char nl)```text(char nl)($command.extra_usage)(char nl)```(char nl)"
+  } else {
+    ""
+  }
+
+  let parameters = if $no_param { "" } else { $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)" }
+
+  let ex = $command.extra_usage
+  # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
+  # being interpreted as markdown. This is strictly hard-coded for now.
+  let extra_usage = if $ex == "" { "" } else if $command.command in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
+    $"## Notes(char nl)```text(char nl)($command.extra_usage)(char nl)```(char nl)"
+  } else {
+    $"## Notes(char nl)( $ex )(char nl)(char nl)"
   }
 
   let examples = if ($command.examples | length) > 0 {
