@@ -3,7 +3,7 @@
 While the "Advanced" title might sound daunting and you might be tempted to skip this chapter, in fact, some of the most interesting and powerful features can be found here.
 
 Nushell operates on _structured data_.
-You could say tha Nushell is a "data-first" shell and a programming language.
+You could say that Nushell is a "data-first" shell and a programming language.
 To further explore the data-centric direction, Nushell includes a full-featured dataframe processing engine using [Polars](https://github.com/pola-rs/polars) as the backend.
 Make sure to check the [Dataframes documentation](dataframes.md) if you want to process large data efficiently directly in your shell.
 
