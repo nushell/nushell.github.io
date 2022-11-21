@@ -20,4 +20,5 @@ Signatures:
 
 It says that `str join` command expect input pipeline is a list of string, and take optional `string` type argument, finally the output type is `string`.
 
-Some commands don't required input pipepline data, the first argument type will be `<nothing>`, the same is happened to output type if one command returns empty.
+Some commands don't accept or require data through the input pipeline, thus the input type will be `<nothing>`.
+The same is true for the output type if the command returns `null` (e.g. `rm`).
