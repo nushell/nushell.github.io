@@ -1,1 +1,1 @@
-nushell> cargo build --release --workspace --features=extra && cargo run --release --features=extra
+nushell> cargo build --release --workspace && cargo run --release
