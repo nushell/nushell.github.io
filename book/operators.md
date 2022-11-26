@@ -8,7 +8,9 @@ Nushell supports the following operators for common math, logic, and string oper
 | `-`      | subtract                                                |
 | `*`      | multiply                                                |
 | `/`      | divide                                                  |
+| `//`     | floor division                                          |
 | `mod`    | modulo                                                  |
+| `**`     | exponentiation (power)                                  |
 | `==`     | equal                                                   |
 | `!=`     | not equal                                               |
 | `<`      | less than                                               |
@@ -20,10 +22,9 @@ Nushell supports the following operators for common math, logic, and string oper
 | `in`     | value in list                                           |
 | `not-in` | value not in list                                       |
 | `not`    | logical not                                             |
-| `&&`, `and`   | and two Boolean values                             |
-| `\|\|`, `or`  | or two Boolean values                              |
-| `//`          | floor division                                     |
-| `**`          | pow                                                |
+| `&&`, `and`   | and two Boolean expressions (short-circuits)       |
+| `\|\|`, `or`  | or two Boolean expressions (short-circuits)        |
+| `xor`         | exclusive or two boolean expressions               |
 | `bit-or`      | bitwise or                                         |
 | `bit-xor`     | bitwise xor                                        |
 | `bit-and`     | bitwise and                                        |
@@ -31,16 +32,28 @@ Nushell supports the following operators for common math, logic, and string oper
 | `bit-shr`     | bitwise shift right                                |
 | `starts-with` | string starts with                                 |
 | `ends-with`   | string ends with                                   |
+| `++`          | append lists                                       |
+
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
 
 ## Order of Operations
 
-Math operations are evaluated in the follow order (from highest precedence to lowest):
+Operations are evaluated in the following order (from highest precedence to lowest):
 
 - Parentheses (`()`)
-- Multiply (`*`) and Divide (`/`) and Power (`**`)
+- Exponentiation/Power (`**`)
+- Multiply (`*`), Divide (`/`), Integer/Floor Division (`//`), and Modulo (`mod`) 
 - Add (`+`) and Subtract (`-`)
+- Bit shifting (`bit-shl`, `bit-shr`)
+- Comparison operations (`==`, `!=`, `<`, `>`, `<=`, `>=`), membership tests (`in`, `not-in`, `starts-with`, `ends-with`), regex matching (`=~`, `!~`), and list appending (`++`)
+- Bitwise and (`bit-and`)
+- Bitwise xor (`bit-xor`)
+- Bitwise or (`bit-or`)
+- Logical and (`&&`, `and`)
+- Logical xor (`xor`)
+- Logical or (`||`, `or`)
+- Assignment operations
 
 ```
 > 3 * (1 + 2)
