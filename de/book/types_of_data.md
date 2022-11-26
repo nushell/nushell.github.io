@@ -189,7 +189,7 @@ Binär kann explizit wörtlich geschrieben werden in einer der Formen `0x[...]`,
 ```
 > 0x[1F FF]  # Hexadecimal
 > 0b[1 1010] # Binary
-> 0o[777]    # Octal
+> 0o[377]    # Octal
 ```
 
 Nicht vollständige bytes werden links mit Nullen aufgefüllt (left-padded)
