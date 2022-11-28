@@ -57,6 +57,9 @@ Specifically, Nushell's philosophy about commands is represented by the followin
   This is what enables pipeline composition.
 
 5. A given command, on a given input, should generally always produce the same type of output data structure; the presence/absence/value of arguments and flags shouldn't change the output type.
+
+6. Commands should not consume their entire input streams unless that is explicitly part of the functionality of that command.
+
 ## Command signatures and their parts
 
 ### Signature
@@ -139,7 +142,7 @@ We should select commands to be in the core categories which meet the common use
 
 Rather than describe the whole of the language here, this section describes the changes expected to come as part of 0.80 and how they differ from the 0.60 series.
 
-### More bash-ism
+### More shell functionality
 
 Being a shell-focused language means incorporating more of the expected shell-features into the language. These include:
 
@@ -150,13 +153,25 @@ cat foo.txt >> bar.txt
 cat foo.txt 2> bar.txt
 ```
 
-Bash logic operators:
+Note: as of 0.72, these are currently:
+```
+cat foo.txt out> bar.txt
+cat foo.txt err> bar.txt
+```
+(note: no operator support for append currently)
+
+Equivalent functionality for Bash logic operators:
 ```
 cat foo.txt && cat bar.txt
 cat foo.txt || cat bar.txt
 ```
+Note: as of 0.72, these are currently:
+```
+cat foo.txt; cat bar.txt
+try { cat foo.txt } catch { cat bar.txt }
+```
 
-We don't have plans to support the full bash language, only the above capabilities that would be common muscle memory for most bash users.
+We don't have plans to support the full bash language.
 
 ### Limited mutation
 
