@@ -11,7 +11,7 @@ where you will find interesting scripts written for Nushell.
 And if you are looking for cool oneliners like this one
 
 ```shell
-> (fetch https://api.chucknorris.io/jokes/random).value
+> fetch https://api.chucknorris.io/jokes/random | get value
 ```
 
 head to join Nushell's discord channel and check the
