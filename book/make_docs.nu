@@ -37,10 +37,10 @@ usage: |
 ($indented_usage)
 ---
 "
-  $top | save --raw $doc_path
+  $top | save -f --raw $doc_path
 }
 
-for command in $commands {
+$commands | each { |command|
   let safe_name = ($command.name | str replace '\?' '' | str replace ' ' '_')
   let doc = get-doc $command
   let doc_path = (['.', 'book', 'commands', $'($safe_name).md'] | path join)
@@ -48,7 +48,7 @@ for command in $commands {
   if ($doc_path | path exists) {
     $doc | save --raw --append $doc_path
   } else {
-    $doc | save --raw $doc_path
+    $doc | save -f --raw $doc_path
   }
   $doc_path
 } | length | $"($in) commands written"
@@ -60,33 +60,41 @@ def get-doc [command] {
 <div class='command-title'>{{ $frontmatter.($command.category | str snake-case) }}</div>
 
 "
-  let sig = ($command.signature | each { |param|
-    if $param.parameter_type == "positional" {
-      $"('(')($param.parameter_name)(')')"
-    } else if $param.parameter_type == "switch" {
-      $"--($param.parameter_name)"
-    } else if $param.parameter_type == "named" {
-      $"--($param.parameter_name)"
-    } else if $param.parameter_type == "rest" {
-      $"...($param.parameter_name)"
-    }
-  } | str join " ")
+  let no_sig = ($command | get signatures | is-empty)
+  let sig = if $no_sig { '' } else {
+    let columns = ($command.signatures | columns)
+    ($command.signatures | get $columns.0 | each { |param|
 
-  let signature = $"## Signature(char nl)(char nl)```> ($command.name) ($sig)```(char nl)(char nl)"
+      if $param.parameter_type == "positional" {
+        $"('(')($param.parameter_name)(')')"
+      } else if $param.parameter_type == "switch" {
+        $"--($param.parameter_name)"
+      } else if $param.parameter_type == "named" {
+        $"--($param.parameter_name)"
+      } else if $param.parameter_type == "rest" {
+        $"...($param.parameter_name)"
+      }
+    } | str join " ")
+  }
 
-  let params = ($command.signature | each { |param|
-    if $param.parameter_type == "positional" {
-      $" -  `($param.parameter_name)`: ($param.description)"
-    } else if $param.parameter_type == "switch" {
-      $" -  `--($param.parameter_name)`: ($param.description)"
-    } else if $param.parameter_type == "named" {
-      $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
-    } else if $param.parameter_type == "rest" {
-      $" -  `...($param.parameter_name)`: ($param.description)"
-    }
-  } | str join (char nl))
+  let signatures = $"## Signature(char nl)(char nl)```> ($command.name) ($sig)```(char nl)(char nl)"
 
-  let parameters = if ($command.signature | length) > 0 {
+  let params = if $no_sig { '' } else {
+    let columns = ($command.signatures | columns)
+    ($command.signatures | get $columns.0 | each { |param|
+      if $param.parameter_type == "positional" {
+        $" -  `($param.parameter_name)`: ($param.description)"
+      } else if $param.parameter_type == "switch" {
+        $" -  `--($param.parameter_name)`: ($param.description)"
+      } else if $param.parameter_type == "named" {
+        $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
+      } else if $param.parameter_type == "rest" {
+        $" -  `...($param.parameter_name)`: ($param.description)"
+      }
+    } | str join (char nl))
+  }
+
+  let parameters = if not $no_sig {
     $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)"
   } else {
     ""
@@ -120,7 +128,7 @@ $"($example.description)
   } else { "" }
 
   let doc = (
-    ($top + $signature + $parameters + $extra_usage + $examples ) |
+    ($top + $signatures + $parameters + $extra_usage + $examples ) |
     lines |
     each {|it| ($it | str trim -r) } |
     str join (char nl)
