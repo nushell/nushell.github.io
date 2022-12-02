@@ -25,4 +25,4 @@ Modules let you define a public interface vs. private commands and you can impor
 By defining an overlay, you bring in module's definitions into its own swappable "layer" that gets applied on top of other overlays.
 This enables features like activating virtual environments or overriding sets of default commands with custom variants.
 
-Some built-in command's help message shows [signature](command_signature.md).  You can take a look to get general rules about command signature.
+The help message of some built-in commands shows a [signature](command_signature.md).  You can take a look at it to get general rules how the command can be used.
