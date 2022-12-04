@@ -56,10 +56,6 @@ You will need to install the "pkg-config" and "libssl-dev" package:
 
 @[code](@snippets/installation/install_pkg_config_libssl_dev.sh)
 
-Linux users who wish to use the `rawkey` or `clipboard` optional features will need to install the "libx11-dev" and "libxcb-composite0-dev" packages:
-
-@[code](@snippets/installation/use_rawkey_and_clipboard.sh)
-
 #### RHEL based distros
 
 You will need to install "libxcb", "openssl-devel" and "libX11-devel":
