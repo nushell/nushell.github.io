@@ -13,22 +13,23 @@ do -i { rm book/commands/*.md }
 
 let commands = ($nu.scope.commands | where is_custom == false && is_extern == false | sort-by category)
 let cmds_group = ($commands | group-by name)
+let uniq_cmds = ($cmds_group | columns)
 
-for command in $commands {
-  let safe_name = ($command.name | str replace '\?' '' | str replace ' ' '_')
+$uniq_cmds | each { |cname|
+  let safe_name = ($cname| str replace '\?' '' | str replace ' ' '_')
   let doc_path = (['.', 'book', 'commands', $'($safe_name).md'] | path join)
-
-  # this is going in the frontmatter as a multiline YAML string, so indentation matters
-  let indented_usage = ($cmds_group | get $command.name | get usage | each {|it| $"  ($it)"} | str join (char nl))
-  let category_matter = ($cmds_group | get $command.name | get category | each { |cat|
-    let usage = ($cmds_group | get $command.name | where category == $cat | get usage | str join (char nl))
-    $'($cat | str snake-case): |
+  let cmd_list = ($cmds_group | get $cname)
+  let indented_usage = ($cmd_list | get usage | each {|it| $"  ($it)"} | str join (char nl))
+  let category_matter = ($cmd_list | get category | each { |cat|
+  let usage = ($cmd_list | where category == $cat | get usage | str join (char nl))
+  $'($cat | str snake-case): |
   ($usage)'
   } | str join (char nl))
-  let category_list = "  " + ($cmds_group | get $command.name | get category | str join "\n  " )
+  let category_list = "  " + ($cmd_list | get category | str join "\n  " )
 
+  # this is going in the frontmatter as a multiline YAML string, so indentation matters
   let top = $"---
-title: ($command.name)
+title: ($cname)
 categories: |
 ($category_list)
 version: ($vers)
@@ -37,19 +38,8 @@ usage: |
 ($indented_usage)
 ---
 "
-  $top | save --raw $doc_path
-}
-
-for command in $commands {
-  let safe_name = ($command.name | str replace '\?' '' | str replace ' ' '_')
-  let doc = get-doc $command
-  let doc_path = (['.', 'book', 'commands', $'($safe_name).md'] | path join)
-
-  if ($doc_path | path exists) {
-    $doc | save --raw --append $doc_path
-  } else {
-    $doc | save --raw $doc_path
-  }
+  let doc = ($cmds_group | get $cname | each { |command| get-doc $command } | str join)
+  [$top $doc] | str join | save --raw $doc_path
   $doc_path
 } | length | $"($in) commands written"
 
