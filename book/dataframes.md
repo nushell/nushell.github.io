@@ -1199,8 +1199,8 @@ help you process data faster and natively.
 However, the future of these dataframes is still very experimental. New
 commands and tools that take advantage of these commands will be added as they
 mature. For example, the next step for dataframes is the introduction of Lazy
-Dataframes. These will allow you to define complex data operations that will be
-executed until you decide to "finish" the pipe. This will give Nushell the
+Dataframes. These will allow you to define complex data operations that will not
+be executed until you decide to "finish" the pipe. This will give Nushell the
 chance to select the optimal plan to query the data you would be asking for.
 
 Keep visiting this book in order to check the new things happening to
