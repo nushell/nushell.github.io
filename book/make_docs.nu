@@ -50,11 +50,14 @@ def get-doc [command] {
 <div class='command-title'>{{ $frontmatter.($command.category | str snake-case) }}</div>
 
 "
-  let no_sig = ($command | get signatures | is-empty)
-  let sig = if $no_sig { '' } else {
-    let columns = ($command.signatures | columns)
-    ($command.signatures | get $columns.0 | each { |param|
 
+  let columns = ($command.signatures | columns)
+  let no_sig = ($command | get signatures | is-empty)
+  let no_param = if $no_sig { true } else {
+    $command.signatures | get $columns.0 | where parameter_type == 'positional' | is-empty
+  }
+  let sig = if $no_sig { '' } else {
+    ($command.signatures | get $columns.0 | each { |param|
       if $param.parameter_type == "positional" {
         $"('(')($param.parameter_name)(')')"
       } else if $param.parameter_type == "switch" {
@@ -70,7 +73,6 @@ def get-doc [command] {
   let signatures = $"## Signature(char nl)(char nl)```> ($command.name) ($sig)```(char nl)(char nl)"
 
   let params = if $no_sig { '' } else {
-    let columns = ($command.signatures | columns)
     ($command.signatures | get $columns.0 | each { |param|
       if $param.parameter_type == "positional" {
         $" -  `($param.parameter_name)`: ($param.description)"
@@ -84,7 +86,7 @@ def get-doc [command] {
     } | str join (char nl))
   }
 
-  let parameters = if not $no_sig {
+  let parameters = if not $no_param {
     $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)"
   } else {
     ""
