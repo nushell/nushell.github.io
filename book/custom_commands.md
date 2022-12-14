@@ -59,7 +59,7 @@ You can also define subcommands to commands using a space. For example, if we wa
 
 ```nushell
 def "str mycommand" [] {
-  hello
+  "hello"
 }
 ```
 
