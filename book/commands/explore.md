@@ -1,0 +1,83 @@
+---
+title: explore
+categories: |
+  viewers
+version: 0.71.0
+viewers: |
+    Explore is a table pager, just like `less` but for table structured data.
+usage: |
+    Explore is a table pager, just like `less` but for table structured data.
+---
+
+# <code>{{ $frontmatter.title }}</code> for viewers
+
+<div class='command-title'>{{ $frontmatter.viewers }}</div>
+
+## Signature
+
+```> table --head --index --reverse --peek```
+
+## Parameters
+
+ -  `--head {boolean}`: turn off column headers
+ -  `--index`: show row indexes (by default it's not showed)
+ -  `--reverse`: start from the last row
+ -  `--peek`: returns a last used value, so it can be used in next pipelines
+
+## Get Started
+
+![explore-ls-png](https://user-images.githubusercontent.com/20165848/207849604-421312e3-537f-4b2e-b83e-f1f83f2a79d5.png)
+
+So the main point of `explore` is `:table` (Which you see on the above screenshot).
+
+You can interact with it via `<Left>`, `<Right>`, `<Up>`, `<Down>` *arrow keys*.
+
+You can inspect a underlying values by entrering into cursor mode. You can press either `<i>` or `<Enter>` to do so.
+Then using *arrow keys* you can chose a nessary cell.
+And you'll be able to see it's underlying structure.
+
+You can obtain more information about the various aspects of it by `:help`.
+
+## Commands
+
+`explore` has a list of built in commands you can use. Commands are run through pressing `<:>` and then a command name.
+
+To find out the comprehensive list of commands you can type `:help`.
+
+## Config
+
+You can configure many things including styles and colors.
+You can find the example config in `default-config.nu`.
+
+### `:tweak` command
+
+The `tweak` command can be used to set config options right inside.
+For example run
+
+```
+:tweak table.split_line red
+```
+
+![explore-tweak-gif](https://user-images.githubusercontent.com/20165848/207865839-992476b1-1bdb-44eb-92ce-19a761beaebf.gif)
+
+### `:config-show` command
+
+You can use `:config-show` to inspect currently used config.
+
+## Examples
+
+### Peeking a value
+
+```nu
+$nu | explore --peek
+```
+
+![explore-peek-gif](https://user-images.githubusercontent.com/20165848/207854897-35cb7b1d-7f7d-4ae2-9ec8-df19ac04ac99.gif)
+
+### Interactive configuration
+
+```nu
+explore -i
+```
+
+![explore-config-gif](https://user-images.githubusercontent.com/20165848/207876962-18a1b8b4-a1a9-4024-8ca4-efb7beabc431.gif)
