@@ -29,6 +29,7 @@
 - [Parallelism](parallelism.md) - Running your code in parallel
 - [Line editor](line_editor.md) - Nushell's line editor
 - [Dataframes](dataframes.md) - Working with dataframes in Nushell
+- [Explore](explore.md) - Working with dataframes in Nushell
 - [Coloring and Theming](coloring_and_theming.md) - How to change the colors and themes in Nushell
 - [Regular Expressions](regular_expressions.md) - Guide to use regex
 - [Coming from Bash](coming_from_bash.md) - Guide for those coming to Nushell from Bash
