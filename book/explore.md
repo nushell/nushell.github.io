@@ -52,6 +52,18 @@ $nu | explore --peek
 
 ![explore-peek-gif](https://user-images.githubusercontent.com/20165848/207854897-35cb7b1d-7f7d-4ae2-9ec8-df19ac04ac99.gif)
 
+### `:try` command
+
+There's an interactive environment which you can use to navigate through data using `nu`.
+
+![explore-try-gif](https://user-images.githubusercontent.com/20165848/208159049-0954c327-9cdf-4cb3-a6e9-e3ba86fde55c.gif)
+
+#### Keeping the chosen value by `$nu`
+
+Remember you can combine it with `--peek`.
+
+![explore-try-nu-gif](https://user-images.githubusercontent.com/20165848/208161203-96b51209-726d-449a-959a-48b205c6f55a.gif)
+
 ### `:tweak` command
 
 The `tweak` command can be used to set config options right inside.
