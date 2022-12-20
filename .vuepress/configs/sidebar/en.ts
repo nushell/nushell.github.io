@@ -44,7 +44,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/scripts.md',
         '/book/modules.md',
         '/book/overlays.md',
-        '/book/command_signature.md'
+        '/book/command_signature.md',
       ],
     },
     {
@@ -63,7 +63,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/custom_completions.md',
         '/book/coloring_and_theming.md',
         '/book/hooks.md',
-        '/book/background_task.md'
+        '/book/background_task.md',
       ],
     },
     {
@@ -89,6 +89,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/creating_errors.md',
         '/book/parallelism.md',
         '/book/plugins.md',
+        '/book/explore.md',
       ],
     },
   ],

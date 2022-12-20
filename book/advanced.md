@@ -12,5 +12,7 @@ This metadata can be used, for example, to [create custom errors](creating_error
 
 Thanks to Nushell's strict scoping rules, it is very easy to [iterate over collections in parallel](parallelism.md) which can help you speed up long-running scripts by just typing a few characters.
 
+You can have an overview of `explore` command with [explore](explore.md)
+
 Finally, you can extend Nushell's functionality with [plugins](plugins.md).
 Almost anything can be a plugin as long as it communicates with Nushell in a protocol that Nushell understands.
