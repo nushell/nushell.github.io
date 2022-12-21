@@ -244,6 +244,19 @@ Let's add a column called "next_edition" with the value 2021:
 ──────────────┴──────
 ```
 
+This visual may be slightly confusing, because it looks like what we've just done is add a row. In this case, remember: rows have numbers, columns have names. If it still is confusing, note that appending one more row will make the table render as expected:
+
+```
+> open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_edition: 2024}
+───┬─────────┬──────────────
+ # │ edition │ next_edition 
+───┼─────────┼──────────────
+ 0 │    2018 │         2021 
+ 1 │    2021 │         2024 
+───┴─────────┴──────────────
+
+```
+
 Notice that if we open the original file, the contents have stayed the same:
 
 ```
