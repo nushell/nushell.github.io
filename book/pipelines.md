@@ -113,7 +113,7 @@ You decided to use `grep` and [pipe](https://www.nushell.sh/book/pipelines.html)
 ls: cannot access ''$'\342\224\202'' 32 '$'\342\224\202'' /usr/share/nvim/runtime/tutor        '$'\342\224\202\n': No such file or directory
 ```
 
-What's wrong? It turns out nu shell pipe the whole record(including all tabulators) to `^ls`, and `^ls` accept them all! so you need to convert the record to text first using [`to text`](commands/to_text.md) we mentioned above:
+What's wrong? Nushell renders lists and tables (by adding a border with characters like `╭`,`─`,`┬`,`╮`) before piping them as text to external commands. If that's not the behavior you want, you must explicitly convert the data to a string before piping it to an external. For example, you can do so with [`to text`](commands/to_text.md):
 
 ```
 > ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^ls -la $in 
