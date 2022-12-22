@@ -84,12 +84,6 @@ And the pipeline:
 
 Are one and the same.
 
-And if you want to see the original form, you can use [`to text`](commands/to_text.md):
-
-```
-> ls | to text
-```
-
 ## Output result to external commands 
 
 Sometimes you want to output your data to some external commands and continue processing them, but the data inside nushell are structured, which means if you output them directly, you will get result you don't want. 
