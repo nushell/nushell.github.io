@@ -9,26 +9,26 @@ A good way to become familiar with all that nu has to offer is by utilizing the 
 ### How to see all supported commands:
 
 ```shell
-> help commands | where is_custom == false | first 10 | drop column
+> help commands | where command_type != builtin | first 10 | drop column 2
 ```
 
 Output
 
 ```
-───┬───────────────┬────────────┬───────────┬───────────┬────────────────────────────────────────────────────────────────
- # │     name      │  category  │ is_plugin │ is_custom │                             usage
-───┼───────────────┼────────────┼───────────┼───────────┼────────────────────────────────────────────────────────────────
- 0 │ alias         │ core       │ false     │ false     │ Alias a command (with optional flags) to a new name
- 1 │ all           │ filters    │ false     │ false     │ Test if every element of the input matches a predicate.
- 2 │ ansi          │ platform   │ false     │ false     │ Output ANSI codes to change color.
- 3 │ ansi gradient │ platform   │ false     │ false     │ draw text with a provided start and end code making a gradient
- 4 │ ansi strip    │ platform   │ false     │ false     │ strip ansi escape sequences from string
- 5 │ any           │ filters    │ false     │ false     │ Tests if any element of the input matches a predicate.
- 6 │ append        │ filters    │ false     │ false     │ Append a row to the table.
- 7 │ benchmark     │ system     │ false     │ false     │ Time the running time of a block
- 8 │ build-string  │ strings    │ false     │ false     │ Create a string from the arguments.
- 9 │ cal           │ generators │ false     │ false     │ Display a calendar.
-───┴───────────────┴────────────┴───────────┴───────────┴────────────────────────────────────────────────────────────────
+───┬─────────────────────┬──────────┬──────────────┬───────────────────────────────────────────────────────────────────────
+ # │        name         │ category │ command_type │                                 usage                                 
+───┼─────────────────────┼──────────┼──────────────┼───────────────────────────────────────────────────────────────────────
+ 0 │ alias               │ core     │ keyword      │ Alias a command (with optional flags) to a new name                   
+ 1 │ break               │ core     │ keyword      │ Break a loop                                                          
+ 2 │ continue            │ core     │ keyword      │ Continue a loop from the next iteration                               
+ 3 │ create_left_prompt  │ default  │ custom       │                                                                       
+ 4 │ create_right_prompt │ default  │ custom       │                                                                       
+ 5 │ def                 │ core     │ keyword      │ Define a custom command                                               
+ 6 │ def-env             │ core     │ keyword      │ Define a custom command, which participates in the caller environment 
+ 7 │ export              │ core     │ keyword      │ Export definitions or environment variables from a module.            
+ 8 │ export alias        │ core     │ keyword      │ Define an alias and export it from a module                           
+ 9 │ export def          │ core     │ keyword      │ Define a custom command and export it from a module                   
+───┴─────────────────────┴──────────┴──────────────┴───────────────────────────────────────────────────────────────────────
 ```
 
 ---
