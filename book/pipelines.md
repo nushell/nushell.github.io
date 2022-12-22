@@ -86,7 +86,7 @@ Are one and the same.
 
 ## Output result to external commands 
 
-Sometimes you want to output your data to some external commands and continue processing them, but the data inside nushell are structured, which means if you output them directly, you will get result you don't want. 
+Sometimes you want to output Nushell structured data to an external command for further processing. However, Nushell's default formatting options for structured data may not be what you want.
 For example, you want to find a file named "tutor" under "/usr/share/vim/runtime" and check its ownership  
 
 ```
