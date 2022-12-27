@@ -51,10 +51,11 @@ def get-doc [command] {
 
 "
 
+  let param_type = ['switch', 'named', 'rest', 'positional']
   let columns = ($command.signatures | columns)
   let no_sig = ($command | get signatures | is-empty)
   let no_param = if $no_sig { true } else {
-    $command.signatures | get $columns.0 | where parameter_type == 'positional' | is-empty
+    $command.signatures | get $columns.0 | where parameter_type in $param_type | is-empty
   }
   let sig = if $no_sig { '' } else {
     ($command.signatures | get $columns.0 | each { |param|
@@ -72,7 +73,7 @@ def get-doc [command] {
 
   let signatures = $"## Signature(char nl)(char nl)```> ($command.name) ($sig)```(char nl)(char nl)"
 
-  let params = if $no_sig { '' } else {
+  let params = if $no_param { '' } else {
     ($command.signatures | get $columns.0 | each { |param|
       if $param.parameter_type == "positional" {
         $" -  `($param.parameter_name)`: ($param.description)"
@@ -86,11 +87,7 @@ def get-doc [command] {
     } | str join (char nl))
   }
 
-  let parameters = if not $no_param {
-    $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)"
-  } else {
-    ""
-  }
+  let parameters = if $no_param { "" } else { $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)" }
 
   let extra_usage = if $command.extra_usage == "" { "" } else {
     # It's a little ugly to encode the extra usage in a code block,
