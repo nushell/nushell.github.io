@@ -2,11 +2,11 @@
 title: rotate
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
-  Rotates a table clockwise (default) or counter-clockwise (use --ccw flag).
+  Rotates a table or record clockwise (default) or counter-clockwise (use --ccw flag).
 usage: |
-  Rotates a table clockwise (default) or counter-clockwise (use --ccw flag).
+  Rotates a table or record clockwise (default) or counter-clockwise (use --ccw flag).
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -24,9 +24,9 @@ usage: |
 
 ## Examples
 
-Rotate 2x2 table clockwise
+Rotate a record clockwise, producing a table (like `transpose` but with column order reversed)
 ```shell
-> [[a b]; [1 2]] | rotate
+> {a:1, b:2} | rotate
 ```
 
 Rotate 2x3 table clockwise

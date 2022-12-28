@@ -4,7 +4,7 @@ categories: |
   dataframe
   expression
   filters
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Show only the first number of rows.
 expression: |
@@ -23,11 +23,7 @@ usage: |
 
 ## Signature
 
-```> first (rows)```
-
-## Parameters
-
- -  `rows`: starting from the front, the number of rows to return
+```> first ```
 
 ## Examples
 
@@ -80,7 +76,7 @@ Return the first 2 items of a list/table
 > [1 2 3] | first 2
 ```
 
-Return the first 2 items of a bytes
+Return the first 2 bytes of a binary value
 ```shell
 > 0x[01 23 45] | first 2
 ```

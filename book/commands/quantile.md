@@ -3,7 +3,7 @@ title: quantile
 categories: |
   expression
   lazyframe
-version: 0.71.0
+version: 0.73.1
 expression: |
   Aggregates the columns to the selected quantile
 lazyframe: |
@@ -19,11 +19,7 @@ usage: |
 
 ## Signature
 
-```> quantile (quantile)```
-
-## Parameters
-
- -  `quantile`: quantile value for quantile operation
+```> quantile ```
 
 ## Examples
 
@@ -41,11 +37,7 @@ Quantile aggregation for a group-by
 
 ## Signature
 
-```> quantile (quantile)```
-
-## Parameters
-
- -  `quantile`: quantile value for quantile operation
+```> quantile ```
 
 ## Examples
 

@@ -2,11 +2,11 @@
 title: math avg
 categories: |
   math
-version: 0.71.0
+version: 0.73.1
 math: |
-  Finds the average of a list of numbers or tables
+  Returns the average of a list of numbers
 usage: |
-  Finds the average of a list of numbers or tables
+  Returns the average of a list of numbers
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Get the average of a list of numbers
+Compute the average of a list of numbers
 ```shell
 > [-50 100.0 25] | math avg
 ```

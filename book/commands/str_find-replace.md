@@ -2,7 +2,7 @@
 title: str find-replace
 categories: |
   deprecated
-version: 0.71.0
+version: 0.73.1
 deprecated: |
   Deprecated command
 usage: |

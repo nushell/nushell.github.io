@@ -2,7 +2,7 @@
 title: path expand
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Try to expand a path to its absolute form
 usage: |
@@ -21,7 +21,7 @@ usage: |
 
  -  `--strict`: Throw an error if the path could not be expanded
  -  `--no-symlink`: Do not resolve symbolic links
- -  `--columns {table}`: Optionally operate by column path
+ -  `--columns {table}`: For a record or table input, expand strings at the given columns
 
 ## Examples
 

@@ -2,11 +2,11 @@
 title: into sqlite
 categories: |
   conversions
-version: 0.71.0
+version: 0.73.1
 conversions: |
-  Convert table into a sqlite database
+  Convert table into a SQLite database
 usage: |
-  Convert table into a sqlite database
+  Convert table into a SQLite database
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions
@@ -24,22 +24,22 @@ usage: |
 
 ## Examples
 
-Convert ls entries into a sqlite database with 'main' as the table name
+Convert ls entries into a SQLite database with 'main' as the table name
 ```shell
 > ls | into sqlite my_ls.db
 ```
 
-Convert ls entries into a sqlite database with 'my_table' as the table name
+Convert ls entries into a SQLite database with 'my_table' as the table name
 ```shell
 > ls | into sqlite my_ls.db -t my_table
 ```
 
-Convert table literal into a sqlite database with 'main' as the table name
+Convert table literal into a SQLite database with 'main' as the table name
 ```shell
 > [[name]; [-----] [someone] [=====] [somename] ['(((((']] | into sqlite filename.db
 ```
 
-Convert a variety of values in table literal form into a sqlite database
+Convert a variety of values in table literal form into a SQLite database
 ```shell
 > [one 2 5.2 six true 100mib 25sec] | into sqlite variety.db
 ```

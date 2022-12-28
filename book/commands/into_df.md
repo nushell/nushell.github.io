@@ -2,7 +2,7 @@
 title: into df
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Converts a list, table or record into a dataframe
 usage: |

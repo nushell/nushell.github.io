@@ -2,11 +2,11 @@
 title: path relative-to
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
-  Get a path as relative to another path.
+  Express a path as relative to another path.
 usage: |
-  Get a path as relative to another path.
+  Express a path as relative to another path.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `path`: Parent shared with the input path
- -  `--columns {table}`: Optionally operate by column path
+ -  `--columns {table}`: For a record or table input, convert strings at the given columns
 
 ## Notes
 ```text

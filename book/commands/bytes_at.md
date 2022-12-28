@@ -2,7 +2,7 @@
 title: bytes at
 categories: |
   bytes
-version: 0.71.0
+version: 0.73.1
 bytes: |
   Get bytes defined by a range. Note that the start is included but the end is excluded, and that the first byte is index 0.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `range`: the indexes to get bytes
- -  `...rest`: optionally get bytes by column paths
+ -  `...rest`: for a data structure input, get bytes from data at the given cell paths
 
 ## Examples
 

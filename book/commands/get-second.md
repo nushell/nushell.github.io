@@ -2,7 +2,7 @@
 title: get-second
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Gets second from date
 usage: |

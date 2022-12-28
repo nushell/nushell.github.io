@@ -2,7 +2,7 @@
 title: str reverse
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Reverse every string in the pipeline
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally reverse text by column paths
+ -  `...rest`: For a data structure input, reverse strings at the given cell paths
 
 ## Examples
 

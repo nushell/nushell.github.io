@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Encode an UTF-8 string into other kind of representations.
 usage: |

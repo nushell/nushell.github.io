@@ -2,7 +2,7 @@
 title: format filesize
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Converts a column of filesizes to some specified format
 usage: |
@@ -20,16 +20,16 @@ usage: |
 ## Parameters
 
  -  `format value`: the format into which convert the file sizes
- -  `...rest`: optinally find and replace text by column paths
+ -  `...rest`: For a data structure input, format filesizes at the given cell paths
 
 ## Examples
 
-Convert the size row to KB
+Convert the size column to KB
 ```shell
 > ls | format filesize KB size
 ```
 
-Convert the apparent row to B
+Convert the apparent column to B
 ```shell
 > du | format filesize B apparent
 ```

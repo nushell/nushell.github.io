@@ -2,7 +2,7 @@
 title: hash sha256
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Hash a value using the sha256 hash algorithm
 usage: |
@@ -24,17 +24,17 @@ usage: |
 
 ## Examples
 
-get a hexadecimaly encoded string of the sha256 digest of a string
+Return the sha256 hash of a string, hex-encoded
 ```shell
-> echo 'abcdefghijklmnopqrstuvwxyz' | hash sha256
+> 'abcdefghijklmnopqrstuvwxyz' | hash sha256
 ```
 
-get the sha256 digest of a string in binary
+Return the sha256 hash of a string, as binary
 ```shell
-> echo 'abcdefghijklmnopqrstuvwxyz' | hash sha256 --binary
+> 'abcdefghijklmnopqrstuvwxyz' | hash sha256 --binary
 ```
 
-sha256 encode a file
+Return the sha256 hash of a file's contents
 ```shell
 > open ./nu_0_24_1_windows.zip | hash sha256
 ```

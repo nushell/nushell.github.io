@@ -2,7 +2,7 @@
 title: rolling
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Rolling calculation for a series
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> rolling (type) (window)```
-
-## Parameters
-
- -  `type`: rolling operation
- -  `window`: Window size for rolling
+```> rolling ```
 
 ## Examples
 

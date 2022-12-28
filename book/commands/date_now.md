@@ -2,7 +2,7 @@
 title: date now
 categories: |
   date
-version: 0.71.0
+version: 0.73.1
 date: |
   Get the current date.
 usage: |

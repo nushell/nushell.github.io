@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Convert a path into structured data.
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--columns {table}`: Optionally operate by column path
+ -  `--columns {table}`: For a record or table input, convert strings at the given columns
  -  `--extension {string}`: Manually supply the extension (without the dot)
 
 ## Notes

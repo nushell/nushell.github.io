@@ -2,7 +2,7 @@
 title: debug
 categories: |
   core
-version: 0.71.0
+version: 0.73.1
 core: |
   Debug print the value(s) piped in.
 usage: |
@@ -23,12 +23,17 @@ usage: |
 
 ## Examples
 
-Print the value of a string
+Debug print a string
 ```shell
 > 'hello' | debug
 ```
 
-Print the value of a table
+Debug print a list
 ```shell
-> echo [[version patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | debug
+> ['hello'] | debug
+```
+
+Debug print a table
+```shell
+> [[version patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | debug
 ```

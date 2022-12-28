@@ -2,11 +2,11 @@
 title: math product
 categories: |
   math
-version: 0.71.0
+version: 0.73.1
 math: |
-  Finds the product of a list of numbers or tables
+  Returns the product of a list of numbers or the products of each column of a table
 usage: |
-  Finds the product of a list of numbers or tables
+  Returns the product of a list of numbers or the products of each column of a table
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Get the product of a list of numbers
+Compute the product of a list of numbers
 ```shell
 > [2 3 3 4] | math product
 ```

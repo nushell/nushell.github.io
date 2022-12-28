@@ -2,11 +2,11 @@
 title: from url
 categories: |
   formats
-version: 0.71.0
+version: 0.73.1
 formats: |
-  Parse url-encoded string as a table.
+  Parse url-encoded string as a record.
 usage: |
-  Parse url-encoded string as a table.
+  Parse url-encoded string as a record.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Convert url encoded string into a table
+Convert url encoded string into a record
 ```shell
 > 'bread=baguette&cheese=comt%C3%A9&meat=ham&fat=butter' | from url
 ```

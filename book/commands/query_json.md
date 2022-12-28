@@ -2,7 +2,7 @@
 title: query json
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   execute json query on json file (open --raw <file> | query json 'query string')
 usage: |
@@ -15,8 +15,4 @@ usage: |
 
 ## Signature
 
-```> query json (query)```
-
-## Parameters
-
- -  `query`: json query
+```> query json ```

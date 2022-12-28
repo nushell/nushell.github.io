@@ -2,7 +2,7 @@
 title: zip
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Combine a stream with the input
 usage: |
@@ -23,7 +23,12 @@ usage: |
 
 ## Examples
 
-Zip multiple streams and get one of the results
+Zip two lists
+```shell
+> [1 2] | zip [3 4]
+```
+
+Zip two streams
 ```shell
 > 1..3 | zip 4..6
 ```

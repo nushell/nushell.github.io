@@ -2,7 +2,7 @@
 title: path basename
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Get the final component of a path
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--columns {table}`: Optionally operate by column path
+ -  `--columns {table}`: For a record or table input, convert strings in the given columns to their basename
  -  `--replace {string}`: Return original path with basename replaced by this string
 
 ## Examples

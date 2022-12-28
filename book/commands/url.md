@@ -2,7 +2,7 @@
 title: url
 categories: |
   network
-version: 0.71.0
+version: 0.73.1
 network: |
   Apply url function.
 usage: |

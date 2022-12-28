@@ -2,7 +2,7 @@
 title: histogram
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Creates a new table with a histogram based on the column name passed in.
 usage: |
@@ -25,22 +25,22 @@ usage: |
 
 ## Examples
 
-Get a histogram for the types of files
+Compute a histogram of file types
 ```shell
 > ls | histogram type
 ```
 
-Get a histogram for the types of files, with frequency column named freq
+Compute a histogram for the types of files, with frequency column named freq
 ```shell
 > ls | histogram type freq
 ```
 
-Get a histogram for a list of numbers
+Compute a histogram for a list of numbers
 ```shell
-> echo [1 2 3 1 1 1 2 2 1 1] | histogram
+> [1 2 1] | histogram
 ```
 
-Get a histogram for a list of numbers, and percentage is based on the maximum value
+Compute a histogram for a list of numbers, and percentage is based on the maximum value
 ```shell
-> echo [1 2 3 1 1 1 2 2 1 1] | histogram --percentage-type relative
+> [1 2 3 1 1 1 2 2 1 1] | histogram --percentage-type relative
 ```

@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -20,28 +20,23 @@ usage: |
 ## Parameters
 
  -  `field`: the name of the column to update or insert
- -  `replacement value`: the new value to give the cell(s)
+ -  `replacement value`: the new value to give the cell(s), or a closure to create the value
 
 ## Examples
 
-Update a column value
+Update a record's value
 ```shell
-> echo {'name': 'nu', 'stars': 5} | upsert name 'Nushell'
+> {'name': 'nu', 'stars': 5} | upsert name 'Nushell'
 ```
 
-Insert a new column
+Insert a new entry into a single record
 ```shell
-> echo {'name': 'nu', 'stars': 5} | upsert language 'Rust'
+> {'name': 'nu', 'stars': 5} | upsert language 'Rust'
 ```
 
-Use in block form for more involved updating logic
+Use in closure form for more involved updating logic
 ```shell
-> echo [[count fruit]; [1 'apple']] | upsert count {|f| $f.count + 1}
-```
-
-Use in block form for more involved updating logic
-```shell
-> echo [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | upsert authors {|a| $a.authors | str join ','}
+> [[count fruit]; [1 'apple']] | upsert count {|row index| ($row.fruit | str length) + $index }
 ```
 
 Upsert an int into a list, updating an existing value based on the index

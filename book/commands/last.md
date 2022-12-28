@@ -4,7 +4,7 @@ categories: |
   dataframe
   expression
   filters
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression
 expression: |
@@ -23,11 +23,7 @@ usage: |
 
 ## Signature
 
-```> last (rows)```
-
-## Parameters
-
- -  `rows`: Number of rows for tail
+```> last ```
 
 ## Examples
 

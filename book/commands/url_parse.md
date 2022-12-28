@@ -1,12 +1,12 @@
 ---
-title: url host
+title: url parse
 categories: |
   network
-version: 0.71.0
+version: 0.73.1
 network: |
-  Get the host of a URL
+  Parses a url
 usage: |
-  Get the host of a URL
+  Parses a url
 ---
 
 # <code>{{ $frontmatter.title }}</code> for network
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> url host ...rest```
+```> url parse ...rest```
 
 ## Parameters
 
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Get host of a url
+Parses a url
 ```shell
-> echo 'http://www.example.com/foo/bar' | url host
+> 'http://user123:pass567@www.example.com:8081/foo/bar?param1=section&p2=&f[name]=vldc#hello' | url parse
 ```

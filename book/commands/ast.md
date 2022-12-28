@@ -2,7 +2,7 @@
 title: ast
 categories: |
   core
-version: 0.71.0
+version: 0.73.1
 core: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |

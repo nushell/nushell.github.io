@@ -2,7 +2,7 @@
 title: str length
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Output the length of any strings in the pipeline
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally find length of text by column paths
+ -  `...rest`: For a data structure input, replace strings at the given cell paths with their length
 
 ## Examples
 

@@ -2,11 +2,11 @@
 title: each
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
-  Run a block on each row of input
+  Run a closure on each row of the input list, creating a new list with the results.
 usage: |
-  Run a block on each row of input
+  Run a closure on each row of the input list, creating a new list with the results.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -15,13 +15,13 @@ usage: |
 
 ## Signature
 
-```> each (block) --keep-empty --numbered```
+```> each (closure) --keep-empty --numbered```
 
 ## Parameters
 
- -  `block`: the block to run
+ -  `closure`: the closure to run
  -  `--keep-empty`: keep empty result cells
- -  `--numbered`: iterate with an index
+ -  `--numbered`: iterate with an index (deprecated; use a two-parameter closure instead)
 
 ## Notes
 ```text
@@ -35,22 +35,27 @@ with 'transpose' first.
 ```
 ## Examples
 
-Multiplies elements in list
+Multiplies elements in the list
 ```shell
-> [1 2 3] | each { |it| 2 * $it }
+> [1 2 3] | each {|e| 2 * $e }
 ```
 
-Iterate over each element, keeping only values that succeed
+Produce a list of values in the record, converted to string
 ```shell
-> [1 2 3] | each { |it| if $it == 2 { echo "found 2!"} }
+> {major:2, minor:1, patch:4} | values | each { into string }
 ```
 
-Iterate over each element, print the matching value and its index
+Produce a list that has "two" for each 2 in the input
 ```shell
-> [1 2 3] | each -n { |it| if $it.item == 2 { echo $"found 2 at ($it.index)!"} }
+> [1 2 3 2] | each {|e| if $e == 2 { "two" } }
+```
+
+Iterate over each element, producing a list showing indexes of any 2s
+```shell
+> [1 2 3] | each {|el ind| if $el == 2 { $"found 2 at ($ind)!"} }
 ```
 
 Iterate over each element, keeping all results
 ```shell
-> [1 2 3] | each --keep-empty { |it| if $it == 2 { echo "found 2!"} }
+> [1 2 3] | each --keep-empty {|e| if $e == 2 { "found 2!"} }
 ```

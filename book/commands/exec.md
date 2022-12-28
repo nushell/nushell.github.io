@@ -2,7 +2,7 @@
 title: exec
 categories: |
   system
-version: 0.71.0
+version: 0.73.1
 system: |
   Execute a command, replacing the current process.
 usage: |
@@ -15,12 +15,11 @@ usage: |
 
 ## Signature
 
-```> exec (command) ...rest```
+```> exec (command)```
 
 ## Parameters
 
  -  `command`: the command to execute
- -  `...rest`: any additional arguments for the command
 
 ## Notes
 ```text

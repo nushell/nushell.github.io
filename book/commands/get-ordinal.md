@@ -2,7 +2,7 @@
 title: get-ordinal
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Gets ordinal from date
 usage: |

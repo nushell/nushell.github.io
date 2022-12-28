@@ -2,7 +2,7 @@
 title: every
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Show (or skip) every n-th row, starting from the first one.
 usage: |

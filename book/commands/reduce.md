@@ -2,11 +2,11 @@
 title: reduce
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
-  Aggregate a list table to a single value using an accumulator block.
+  Aggregate a list to a single value using an accumulator closure.
 usage: |
-  Aggregate a list table to a single value using an accumulator block.
+  Aggregate a list to a single value using an accumulator closure.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default
@@ -15,13 +15,13 @@ usage: |
 
 ## Signature
 
-```> reduce (block) --fold --numbered```
+```> reduce (closure) --fold --numbered```
 
 ## Parameters
 
- -  `block`: reducing function
+ -  `closure`: reducing function
  -  `--fold {any}`: reduce with initial value
- -  `--numbered`: iterate with an index
+ -  `--numbered`: iterate with an index (deprecated; use a 3-parameter closure instead)
 
 ## Examples
 
@@ -30,9 +30,9 @@ Sum values of a list (same as 'math sum')
 > [ 1 2 3 4 ] | reduce {|it, acc| $it + $acc }
 ```
 
-Sum values of a list (same as 'math sum')
+Sum values of a list, plus their indexes
 ```shell
-> [ 1 2 3 ] | reduce -n {|it, acc| $acc.item + $it.item }
+> [ 8 7 6 ] | reduce {|it, acc, ind| $acc + $it + $ind }
 ```
 
 Sum values with a starting value (fold)
@@ -45,13 +45,7 @@ Replace selected characters in a string with 'X'
 > [ i o t ] | reduce -f "Arthur, King of the Britons" {|it, acc| $acc | str replace -a $it "X" }
 ```
 
-Find the longest string and its index
+Add ascending numbers to each of the filenames, and join with semicolons.
 ```shell
-> [ one longest three bar ] | reduce -n { |it, acc|
-                    if ($it.item | str length) > ($acc.item | str length) {
-                        $it.item
-                    } else {
-                        $acc.item
-                    }
-                }
+> ['foo.gz', 'bar.gz', 'baz.gz'] | reduce -f '' {|str all ind| $"($all)(if $ind != 0 {'; '})($ind + 1)-($str)" }
 ```

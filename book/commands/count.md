@@ -2,7 +2,7 @@
 title: count
 categories: |
   expression
-version: 0.71.0
+version: 0.73.1
 expression: |
   creates a count expression
 usage: |

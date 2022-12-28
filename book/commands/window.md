@@ -2,7 +2,7 @@
 title: window
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Creates a sliding window of `window_size` that slide by n rows/elements across input.
 usage: |
@@ -27,7 +27,7 @@ usage: |
 
 A sliding window of two elements
 ```shell
-> echo [1 2 3 4] | window 2
+> [1 2 3 4] | window 2
 ```
 
 A sliding window of two elements, with a stride of 3

@@ -2,7 +2,7 @@
 title: update cells
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Update the table cells.
 usage: |
@@ -15,11 +15,11 @@ usage: |
 
 ## Signature
 
-```> update cells (block) --columns```
+```> update cells (closure) --columns```
 
 ## Parameters
 
- -  `block`: the block to run an update for each cell
+ -  `closure`: the closure to run an update for each cell
  -  `--columns {table}`: list of columns to update
 
 ## Examples

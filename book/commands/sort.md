@@ -2,7 +2,7 @@
 title: sort
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Sort in increasing order.
 usage: |
@@ -15,13 +15,14 @@ usage: |
 
 ## Signature
 
-```> sort --reverse --insensitive --values```
+```> sort --reverse --ignore-case --values --natural```
 
 ## Parameters
 
  -  `--reverse`: Sort in reverse order
- -  `--insensitive`: Sort string-based columns case-insensitively
- -  `--values`: If input is a single record, sort the record by values, ignored if input is not a single record
+ -  `--ignore-case`: Sort string-based data case-insensitively
+ -  `--values`: If input is a single record, sort the record by values; ignored if input is not a single record
+ -  `--natural`: Sort alphanumeric string-based values naturally (1, 9, 10, 99, 100, ...)
 
 ## Examples
 
@@ -47,20 +48,20 @@ sort a list of strings in reverse
 
 Sort strings (case-insensitive)
 ```shell
-> echo [airplane Truck Car] | sort -i
+> [airplane Truck Car] | sort -i
 ```
 
 Sort strings (reversed case-insensitive)
 ```shell
-> echo [airplane Truck Car] | sort -i -r
+> [airplane Truck Car] | sort -i -r
 ```
 
-Sort record by key
+Sort record by key (case-insensitive)
 ```shell
 > {b: 3, a: 4} | sort
 ```
 
 Sort record by value
 ```shell
-> {a: 4, b: 3} | sort
+> {b: 4, a: 3, c:1} | sort -v
 ```

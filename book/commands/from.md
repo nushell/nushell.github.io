@@ -2,7 +2,7 @@
 title: from
 categories: |
   formats
-version: 0.71.0
+version: 0.73.1
 formats: |
   Parse a string or binary data into structured data
 usage: |
@@ -16,3 +16,8 @@ usage: |
 ## Signature
 
 ```> from ```
+
+## Notes
+```text
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+```

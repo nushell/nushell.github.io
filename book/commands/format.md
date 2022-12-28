@@ -2,7 +2,7 @@
 title: format
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Format columns into a string using a simple pattern.
 usage: |
@@ -30,5 +30,5 @@ Print filenames with their sizes
 
 Print elements from some columns of a table
 ```shell
-> echo [[col1, col2]; [v1, v2] [v3, v4]] | format '{col2}'
+> [[col1, col2]; [v1, v2] [v3, v4]] | format '{col2}'
 ```

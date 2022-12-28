@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   hash
-version: 0.71.0
+version: 0.73.1
 hash: |
   Base64 decode a value
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally base64 decode data by column paths
+ -  `...rest`: For a data structure input, decode data at the given cell paths
  -  `--character-set {string}`: specify the character rules for encoding the input.
 	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt'
  -  `--binary`: Output a binary value instead of decoding payload as UTF-8
@@ -32,10 +32,10 @@ Will attempt to decode binary payload as an UTF-8 string by default. Use the `--
 
 Base64 decode a value and output as UTF-8 string
 ```shell
-> echo 'U29tZSBEYXRh' | decode base64
+> 'U29tZSBEYXRh' | decode base64
 ```
 
 Base64 decode a value and output as binary
 ```shell
-> echo 'U29tZSBEYXRh' | decode base64 --binary
+> 'U29tZSBEYXRh' | decode base64 --binary
 ```

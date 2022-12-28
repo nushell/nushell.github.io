@@ -2,7 +2,7 @@
 title: get-month
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Gets month from date
 usage: |

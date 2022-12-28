@@ -3,7 +3,7 @@ title: is-null
 categories: |
   dataframe
   expression
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Creates mask where value is null
 expression: |

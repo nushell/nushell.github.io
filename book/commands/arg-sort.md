@@ -2,7 +2,7 @@
 title: arg-sort
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Returns indexes for a sorted series
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> arg-sort --reverse --nulls-last```
-
-## Parameters
-
- -  `--reverse`: reverse order
- -  `--nulls-last`: nulls ordered last
+```> arg-sort ```
 
 ## Examples
 

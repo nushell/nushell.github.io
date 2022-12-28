@@ -2,11 +2,11 @@
 title: str contains
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
-  Checks if input contains string
+  Checks if string input contains a substring
 usage: |
-  Checks if input contains string
+  Checks if string input contains a substring
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -15,13 +15,13 @@ usage: |
 
 ## Signature
 
-```> str contains (string) ...rest --insensitive --not```
+```> str contains (string) ...rest --ignore-case --not```
 
 ## Parameters
 
- -  `string`: the string to find
- -  `...rest`: optionally check if input contains string by column paths
- -  `--insensitive`: search is case insensitive
+ -  `string`: the substring to find
+ -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
+ -  `--ignore-case`: search is case insensitive
  -  `--not`: does not contain
 
 ## Examples

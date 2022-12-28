@@ -2,7 +2,7 @@
 title: overlay use
 categories: |
   core
-version: 0.71.0
+version: 0.73.1
 core: |
   Use definitions from a module as an overlay
 usage: |
@@ -15,13 +15,14 @@ usage: |
 
 ## Signature
 
-```> overlay use (name) (as) --prefix```
+```> overlay use (name) (as) --prefix --reload```
 
 ## Parameters
 
  -  `name`: Module name to use overlay for
  -  `as`: as keyword followed by a new name
  -  `--prefix`: Prepend module name to the imported commands and aliases
+ -  `--reload`: If the overlay already exists, reload its definitions and environment.
 
 ## Notes
 ```text

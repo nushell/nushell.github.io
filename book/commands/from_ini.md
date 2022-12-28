@@ -2,11 +2,11 @@
 title: from ini
 categories: |
   formats
-version: 0.71.0
+version: 0.73.1
 formats: |
-  Parse text as .ini and create table
+  Parse text as .ini and create record
 usage: |
-  Parse text as .ini and create table
+  Parse text as .ini and create record
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Converts ini formatted string to table
+Converts ini formatted string to record
 ```shell
 > '[foo]
 a=1

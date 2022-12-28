@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `string`: the string to find index of
- -  `...rest`: optionally returns index of string in input by column paths
+ -  `...rest`: For a data structure input, search strings at the given cell paths, and replace with result
  -  `--range {any}`: optional start and/or end index
  -  `--end`: search from the end of the input
 

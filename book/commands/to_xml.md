@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.71.0
+version: 0.73.1
 formats: |
   Convert table into .xml text
 usage: |

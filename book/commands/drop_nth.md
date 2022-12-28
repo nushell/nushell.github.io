@@ -2,7 +2,7 @@
 title: drop nth
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Drop the selected rows.
 usage: |
@@ -46,7 +46,7 @@ Drop rows 2 0 4
 
 Drop range rows from second to fourth
 ```shell
-> echo [first second third fourth fifth] | drop nth (1..3)
+> [first second third fourth fifth] | drop nth (1..3)
 ```
 
 Drop all rows except first row

@@ -1,49 +1,17 @@
 ---
 title: select
 categories: |
-  database
   filters
   lazyframe
-version: 0.71.0
-database: |
-  Creates a select statement for a DB
+version: 0.73.1
 filters: |
   Down-select table to only these columns.
 lazyframe: |
   Selects columns from lazyframe
 usage: |
-  Creates a select statement for a DB
   Down-select table to only these columns.
   Selects columns from lazyframe
 ---
-
-# <code>{{ $frontmatter.title }}</code> for database
-
-<div class='command-title'>{{ $frontmatter.database }}</div>
-
-## Signature
-
-```> select ...select```
-
-## Parameters
-
- -  `...select`: Select expression(s) on the table
-
-## Examples
-
-selects a column from a database
-```shell
-> open db.sqlite | into db | select a | describe
-```
-
-selects columns from a database using alias
-```shell
-> open db.sqlite
-    | into db
-    | select (field a | as new_a) b c
-    | from table table_1
-    | describe
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 
@@ -56,9 +24,19 @@ selects columns from a database using alias
 ## Parameters
 
  -  `...rest`: the columns to select from the table
- -  `--ignore-errors`: when a column has empty cells, instead of erroring out, replace them with nothing
+ -  `--ignore-errors`: when an error occurs, instead of erroring out, suppress the error message
 
 ## Examples
+
+Select a column in a table
+```shell
+> [{a: a b: b}] | select a
+```
+
+Select a field in a record
+```shell
+> {a: a b: b} | select a
+```
 
 Select just the name column
 ```shell
@@ -76,11 +54,7 @@ Select the name and size columns
 
 ## Signature
 
-```> select ...select expressions```
-
-## Parameters
-
- -  `...select expressions`: Expression(s) that define the column selection
+```> select ```
 
 ## Examples
 

@@ -3,7 +3,7 @@ title: sort-by
 categories: |
   filters
   lazyframe
-version: 0.71.0
+version: 0.73.1
 filters: |
   Sort by the given columns, in increasing order.
 lazyframe: |
@@ -19,53 +19,28 @@ usage: |
 
 ## Signature
 
-```> sort-by ...columns --reverse --insensitive --natural```
+```> sort-by ...rest --reverse --ignore-case --natural```
 
 ## Parameters
 
- -  `...columns`: the column(s) to sort by
+ -  `...rest`: the column(s) to sort by
  -  `--reverse`: Sort in reverse order
- -  `--insensitive`: Sort string-based columns case-insensitively
- -  `--natural`: Sort alphanumeric string-based columns naturally
+ -  `--ignore-case`: Sort string-based columns case-insensitively
+ -  `--natural`: Sort alphanumeric string-based columns naturally (1, 9, 10, 99, 100, ...)
 
 ## Examples
 
-sort the list by increasing value
+Sort files by modified date
 ```shell
-> [2 0 1] | sort-by
+> ls | sort-by modified
 ```
 
-sort the list by decreasing value
+Sort files by name (case-insensitive)
 ```shell
-> [2 0 1] | sort-by -r
+> ls | sort-by name -i
 ```
 
-sort a list of strings
-```shell
-> [betty amy sarah] | sort-by
-```
-
-sort a list of strings in reverse
-```shell
-> [betty amy sarah] | sort-by -r
-```
-
-sort a list of alphanumeric strings naturally
-```shell
-> [test1 test11 test2] | sort-by -n
-```
-
-Sort strings (case-insensitive)
-```shell
-> echo [airplane Truck Car] | sort-by -i
-```
-
-Sort strings (reversed case-insensitive)
-```shell
-> echo [airplane Truck Car] | sort-by -i -r
-```
-
-Sort a table by its column (reversed order)
+Sort a table by a column (reversed order)
 ```shell
 > [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit -r
 ```
@@ -76,13 +51,7 @@ Sort a table by its column (reversed order)
 
 ## Signature
 
-```> sort-by ...sort expression --reverse --nulls-last```
-
-## Parameters
-
- -  `...sort expression`: sort expression for the dataframe
- -  `--reverse {list<bool>}`: Reverse sorting. Default is false
- -  `--nulls-last`: nulls are shown last in the dataframe
+```> sort-by ```
 
 ## Examples
 

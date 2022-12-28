@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Get the parent directory of a path
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--columns {table}`: Optionally operate by column path
+ -  `--columns {table}`: For a record or table input, convert strings at the given columns to their dirname
  -  `--replace {string}`: Return original path with dirname replaced by this string
  -  `--num-levels {int}`: Number of directories to walk up
 

@@ -2,7 +2,7 @@
 title: split
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Split contents across desired subcommand (like row, column) via the separator.
 usage: |
@@ -16,3 +16,8 @@ usage: |
 ## Signature
 
 ```> split ```
+
+## Notes
+```text
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+```

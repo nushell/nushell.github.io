@@ -2,7 +2,7 @@
 title: date format
 categories: |
   date
-version: 0.71.0
+version: 0.73.1
 date: |
   Format a given date using a format string.
 usage: |
@@ -24,19 +24,19 @@ usage: |
 
 ## Examples
 
-Format a given date using the default format (RFC 2822).
+Format a given date-time as a string using the default format (RFC 2822).
 ```shell
 > "2021-10-22 20:00:12 +01:00" | date format
 ```
 
-Format a given date using a given format string.
+Format the current date-time using a given format string.
 ```shell
-> date format '%Y-%m-%d'
+> date now | date format "%Y-%m-%d %H:%M:%S"
 ```
 
-Format a given date using a given format string.
+Format the current date using a given format string.
 ```shell
-> date format "%Y-%m-%d %H:%M:%S"
+> date now | date format "%Y-%m-%d %H:%M:%S"
 ```
 
 Format a given date using a given format string.

@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.71.0
+version: 0.73.1
 filesystem: |
   Save a file.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> save (filename) --stderr --raw --append```
+```> save (filename) --stderr --raw --append --force```
 
 ## Parameters
 
@@ -23,6 +23,7 @@ usage: |
  -  `--stderr {path}`: the filename used to save stderr, only works with `-r` flag
  -  `--raw`: save file as raw binary
  -  `--append`: append input to the end of the file
+ -  `--force`: overwrite the destination
 
 ## Examples
 

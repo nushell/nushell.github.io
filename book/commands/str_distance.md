@@ -2,11 +2,11 @@
 title: str distance
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
-  compare two strings and return the edit distance/levenshtein distance
+  Compare two strings and return the edit distance/Levenshtein distance
 usage: |
-  compare two strings and return the edit distance/levenshtein distance
+  Compare two strings and return the edit distance/Levenshtein distance
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -20,11 +20,16 @@ usage: |
 ## Parameters
 
  -  `compare-string`: the first string to compare
- -  `...rest`: optionally check if string contains pattern by column paths
+ -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
 
 ## Examples
 
 get the edit distance between two strings
 ```shell
 > 'nushell' | str distance 'nutshell'
+```
+
+Compute edit distance between strings in record and another string, using cell paths
+```shell
+> [{a: 'nutshell' b: 'numetal'}] | str distance 'nushell' 'a' 'b'
 ```

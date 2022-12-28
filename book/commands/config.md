@@ -2,7 +2,7 @@
 title: config
 categories: |
   env
-version: 0.71.0
+version: 0.73.1
 env: |
   Edit nushell configuration files
 usage: |
@@ -16,3 +16,8 @@ usage: |
 ## Signature
 
 ```> config ```
+
+## Notes
+```text
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+```

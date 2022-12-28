@@ -2,7 +2,7 @@
 title: count-null
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Counts null values
 usage: |

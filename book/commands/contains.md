@@ -2,7 +2,7 @@
 title: contains
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Checks if a pattern is contained in a string
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> contains (pattern)```
-
-## Parameters
-
- -  `pattern`: Regex pattern to be searched
+```> contains ```
 
 ## Examples
 

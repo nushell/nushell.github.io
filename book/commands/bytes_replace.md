@@ -2,7 +2,7 @@
 title: bytes replace
 categories: |
   bytes
-version: 0.71.0
+version: 0.73.1
 bytes: |
   Find and replace binary
 usage: |
@@ -21,7 +21,7 @@ usage: |
 
  -  `find`: the pattern to find
  -  `replace`: the replacement pattern
- -  `...rest`: optionally find and replace text by column paths
+ -  `...rest`: for a data structure input, replace bytes in data at the given cell paths
  -  `--all`: replace all occurrences of find binary
 
 ## Examples

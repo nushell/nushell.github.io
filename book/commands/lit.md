@@ -2,7 +2,7 @@
 title: lit
 categories: |
   expression
-version: 0.71.0
+version: 0.73.1
 expression: |
   Creates a literal expression
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> lit (literal)```
-
-## Parameters
-
- -  `literal`: literal to construct the expression
+```> lit ```
 
 ## Examples
 

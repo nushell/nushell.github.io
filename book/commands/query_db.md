@@ -2,7 +2,7 @@
 title: query db
 categories: |
   database
-version: 0.71.0
+version: 0.73.1
 database: |
   Query a database using SQL.
 usage: |

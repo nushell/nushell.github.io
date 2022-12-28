@@ -2,7 +2,7 @@
 title: split list
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Split a list into multiple lists using a separator
 usage: |
@@ -31,4 +31,9 @@ Split a list of chars into two lists
 Split a list of lists into two lists of lists
 ```shell
 > [[1,2], [2,3], [3,4]] | split list [2,3]
+```
+
+Split a list of chars into two lists
+```shell
+> [a, b, c, d, a, e, f, g] | split list a
 ```

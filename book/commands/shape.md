@@ -2,7 +2,7 @@
 title: shape
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Shows column and row size for a dataframe
 usage: |

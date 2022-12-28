@@ -2,7 +2,7 @@
 title: bytes index-of
 categories: |
   bytes
-version: 0.71.0
+version: 0.73.1
 bytes: |
   Returns start index of first occurrence of pattern in bytes, or -1 if no match
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `pattern`: the pattern to find index of
- -  `...rest`: optionally returns index of pattern in string by column paths
+ -  `...rest`: for a data structure input, find the indexes at the given cell paths
  -  `--all`: returns all matched index
  -  `--end`: search from the end of the binary
 

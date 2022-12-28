@@ -2,7 +2,7 @@
 title: from ics
 categories: |
   formats
-version: 0.71.0
+version: 0.73.1
 formats: |
   Parse text as .ics and create table.
 usage: |

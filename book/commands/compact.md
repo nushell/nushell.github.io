@@ -2,7 +2,7 @@
 title: compact
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Creates a table with non-empty rows.
 usage: |
@@ -15,11 +15,11 @@ usage: |
 
 ## Signature
 
-```> compact ...columns```
+```> compact ...rest```
 
 ## Parameters
 
- -  `...columns`: the columns to compact from the table
+ -  `...rest`: the columns to compact from the table
 
 ## Examples
 

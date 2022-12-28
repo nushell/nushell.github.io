@@ -3,7 +3,7 @@ title: fetch
 categories: |
   lazyframe
   network
-version: 0.71.0
+version: 0.73.1
 lazyframe: |
   collects the lazyframe to the selected rows
 network: |
@@ -19,11 +19,7 @@ usage: |
 
 ## Signature
 
-```> fetch (rows)```
-
-## Parameters
-
- -  `rows`: number of rows to be fetched from lazyframe
+```> fetch ```
 
 ## Examples
 
@@ -38,7 +34,7 @@ Fetch a rows from the dataframe
 
 ## Signature
 
-```> fetch (URL) --user --password --timeout --headers --raw --output --bin --append```
+```> fetch (URL) --user --password --timeout --headers --raw```
 
 ## Parameters
 
@@ -48,9 +44,6 @@ Fetch a rows from the dataframe
  -  `--timeout {int}`: timeout period in seconds
  -  `--headers {any}`: custom headers you want to add
  -  `--raw`: fetch contents as text rather than a table
- -  `--output {path}`: save contents into a file
- -  `--bin`: if saving into a file, save as raw binary
- -  `--append`: if saving into a file, append to end of file
 
 ## Notes
 ```text
@@ -58,17 +51,17 @@ Performs HTTP GET operation.
 ```
 ## Examples
 
-Fetch content from url.com
+Fetch content from example.com
 ```shell
-> fetch url.com
+> fetch https://www.example.com
 ```
 
-Fetch content from url.com, with username and password
+Fetch content from example.com, with username and password
 ```shell
-> fetch -u myuser -p mypass url.com
+> fetch -u myuser -p mypass https://www.example.com
 ```
 
-Fetch content from url.com, with custom header
+Fetch content from example.com, with custom header
 ```shell
-> fetch -H [my-header-key my-header-value] url.com
+> fetch -H [my-header-key my-header-value] https://www.example.com
 ```

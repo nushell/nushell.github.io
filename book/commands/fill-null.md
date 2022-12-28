@@ -2,7 +2,7 @@
 title: fill-null
 categories: |
   lazyframe
-version: 0.71.0
+version: 0.73.1
 lazyframe: |
   Replaces NULL values with the given expression
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> fill-null (fill)```
-
-## Parameters
-
- -  `fill`: Expression to use to fill the null values
+```> fill-null ```
 
 ## Examples
 

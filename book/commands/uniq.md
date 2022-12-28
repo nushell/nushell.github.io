@@ -2,7 +2,7 @@
 title: uniq
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Return the distinct values in the input.
 usage: |
@@ -21,7 +21,7 @@ usage: |
 
  -  `--count`: Return a table containing the distinct input values together with their counts
  -  `--repeated`: Return the input values that occur more than once
- -  `--ignore-case`: Ignore differences in case when comparing input values
+ -  `--ignore-case`: Compare input values case-insensitively
  -  `--unique`: Return the input values that occur once only
 
 ## Examples

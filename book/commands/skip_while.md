@@ -2,7 +2,7 @@
 title: skip while
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Skip elements of the input while a predicate is true.
 usage: |
@@ -25,5 +25,15 @@ usage: |
 
 Skip while the element is negative
 ```shell
-> echo [-2 0 2 -1] | skip while $it < 0
+> [-2 0 2 -1] | skip while {|x| $x < 0 }
+```
+
+Skip while the element is negative using stored condition
+```shell
+> let cond = {|x| $x < 0 }; [-2 0 2 -1] | skip while $cond
+```
+
+Skip while the field value is negative
+```shell
+> [{a: -2} {a: 0} {a: 2} {a: -1}] | skip while {|x| $x.a < 0 }
 ```

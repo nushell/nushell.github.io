@@ -2,7 +2,7 @@
 title: melt
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Unpivot a DataFrame from wide to long format
 usage: |
@@ -15,14 +15,7 @@ usage: |
 
 ## Signature
 
-```> melt --columns --values --variable-name --value-name```
-
-## Parameters
-
- -  `--columns {table}`: column names for melting
- -  `--values {table}`: column names used as value columns
- -  `--variable-name {string}`: optional name for variable column
- -  `--value-name {string}`: optional name for value column
+```> melt ```
 
 ## Examples
 

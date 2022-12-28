@@ -3,14 +3,14 @@ title: columns
 categories: |
   dataframe
   filters
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Show dataframe columns
 filters: |
-  Show the columns in the input.
+  Given a record or table, produce a list of its columns' names.
 usage: |
   Show dataframe columns
-  Show the columns in the input.
+  Given a record or table, produce a list of its columns' names.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -36,7 +36,16 @@ Dataframe columns
 
 ```> columns ```
 
+## Notes
+```text
+This is a counterpart to `values`, which produces a list of columns' values.
+```
 ## Examples
+
+Get the columns from the record
+```shell
+> { acronym:PWD, meaning:'Print Working Directory' } | columns
+```
 
 Get the columns from the table
 ```shell

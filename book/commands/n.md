@@ -2,7 +2,7 @@
 title: n
 categories: |
   shells
-version: 0.71.0
+version: 0.73.1
 shells: |
   Switch to the next shell.
 usage: |

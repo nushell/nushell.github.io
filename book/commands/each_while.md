@@ -2,11 +2,11 @@
 title: each while
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
-  Run a block on each element of input until a null is found
+  Run a block on each row of the input list until a null is found, then create a new list with the results.
 usage: |
-  Run a block on each element of input until a null is found
+  Run a block on each row of the input list until a null is found, then create a new list with the results.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -15,26 +15,26 @@ usage: |
 
 ## Signature
 
-```> each while (block) --numbered```
+```> each while (closure) --numbered```
 
 ## Parameters
 
- -  `block`: the block to run
- -  `--numbered`: iterate with an index
+ -  `closure`: the closure to run
+ -  `--numbered`: iterate with an index (deprecated; use a two-parameter closure instead)
 
 ## Examples
 
-Multiplies elements below three by two
+Produces a list of each element before the 3, doubled
 ```shell
-> [1 2 3] | each while { |it| if $it < 3 { $it * 2 } else { null } }
+> [1 2 3 2 1] | each while {|e| if $e < 3 { $e * 2 } }
 ```
 
-Output elements till reaching 'stop'
+Output elements until reaching 'stop'
 ```shell
-> [1 2 stop 3 4] | each while { |it| if $it == 'stop' { null } else { $"Output: ($it)" } }
+> [1 2 stop 3 4] | each while {|e| if $e != 'stop' { $"Output: ($e)" } }
 ```
 
-Iterate over each element, print the matching value and its index
+Iterate over each element, printing the matching value and its index
 ```shell
-> [1 2 3] | each while -n { |it| if $it.item < 2 { $"value ($it.item) at ($it.index)!"} else { null } }
+> [1 2 3] | each while {|el ind| if $el < 2 { $"value ($el) at ($ind)!"} }
 ```
