@@ -66,7 +66,7 @@ def get-doc [command] {
       } else if $param.parameter_type == "named" {
         $"--($param.parameter_name)"
       } else if $param.parameter_type == "rest" {
-        $"...($param.parameter_name)"
+        $"...rest"
       }
     } | str join " ")
   }
@@ -82,7 +82,7 @@ def get-doc [command] {
       } else if $param.parameter_type == "named" {
         $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
       } else if $param.parameter_type == "rest" {
-        $" -  `...($param.parameter_name)`: ($param.description)"
+        $" -  `...rest`: ($param.description)"
       }
     } | str join (char nl))
   }
