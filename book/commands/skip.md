@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Skip the first several rows of the input. Counterpart of 'drop'. Opposite of 'first'.
 usage: |
@@ -27,12 +27,12 @@ To skip specific numbered rows, try 'drop nth'. To skip specific named columns, 
 ```
 ## Examples
 
-Skip two elements
+Skip the first value of a list
 ```shell
-> echo [[editions]; [2015] [2018] [2021]] | skip 2
+> [2 4 6 8] | skip 1
 ```
 
-Skip the first value
+Skip two rows of a table
 ```shell
-> echo [2 4 6 8] | skip
+> [[editions]; [2015] [2018] [2021]] | skip 2
 ```

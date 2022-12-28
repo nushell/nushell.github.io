@@ -2,7 +2,7 @@
 title: to arrow
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Saves dataframe to arrow file
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> to arrow (file)```
-
-## Parameters
-
- -  `file`: file path to save dataframe
+```> to arrow ```
 
 ## Examples
 

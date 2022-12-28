@@ -2,7 +2,7 @@
 title: path
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Explore and manipulate paths.
 usage: |
@@ -19,6 +19,8 @@ usage: |
 
 ## Notes
 ```text
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+
 There are three ways to represent a path:
 
 * As a path literal, e.g., '/home/viking/spam.txt'

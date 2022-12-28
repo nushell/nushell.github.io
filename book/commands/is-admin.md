@@ -2,7 +2,7 @@
 title: is-admin
 categories: |
   core
-version: 0.71.0
+version: 0.73.1
 core: |
   Check if nushell is running with administrator or root privileges
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Echo 'iamroot' if nushell is running with admin/root privileges, and 'iamnotroot' if not.
+Return 'iamroot' if nushell is running with admin/root privileges, and 'iamnotroot' if not.
 ```shell
-> if is-admin { echo "iamroot" } else { echo "iamnotroot" }
+> if is-admin { "iamroot" } else { "iamnotroot" }
 ```

@@ -2,7 +2,7 @@
 title: date humanize
 categories: |
   date
-version: 0.71.0
+version: 0.73.1
 date: |
   Print a 'humanized' format for the date, relative to now.
 usage: |
@@ -18,11 +18,6 @@ usage: |
 ```> date humanize ```
 
 ## Examples
-
-Print a 'humanized' format for the date, relative to now.
-```shell
-> date humanize
-```
 
 Print a 'humanized' format for the date, relative to now.
 ```shell

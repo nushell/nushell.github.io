@@ -2,7 +2,7 @@
 title: replace-all
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Replace all (sub)strings by a regex pattern
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> replace-all --pattern --replace```
-
-## Parameters
-
- -  `--pattern {string}`: Regex pattern to be matched
- -  `--replace {string}`: replacing string
+```> replace-all ```
 
 ## Examples
 

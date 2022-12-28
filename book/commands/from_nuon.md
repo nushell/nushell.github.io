@@ -2,7 +2,7 @@
 title: from nuon
 categories: |
   experimental
-version: 0.71.0
+version: 0.73.1
 experimental: |
   Convert from nuon to structured data
 usage: |

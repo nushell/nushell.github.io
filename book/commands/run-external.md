@@ -2,7 +2,7 @@
 title: run-external
 categories: |
   system
-version: 0.71.0
+version: 0.73.1
 system: |
   Runs external command
 usage: |
@@ -15,14 +15,15 @@ usage: |
 
 ## Signature
 
-```> run-external (command) ...args --redirect-stdout --redirect-stderr```
+```> run-external (command) ...rest --redirect-stdout --redirect-stderr --trim-end-newline```
 
 ## Parameters
 
  -  `command`: external command to run
- -  `...args`: arguments for external command
+ -  `...rest`: arguments for external command
  -  `--redirect-stdout`: redirect stdout to the pipeline
  -  `--redirect-stderr`: redirect stderr to the pipeline
+ -  `--trim-end-newline`: trimming end newlines
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: to text
 categories: |
   formats
-version: 0.71.0
+version: 0.73.1
 formats: |
   Converts data into simple text.
 usage: |
@@ -26,10 +26,10 @@ Outputs data as simple text
 
 Outputs external data as simple text
 ```shell
-> git help -a | lines | find -r '^ ' |  to text
+> git help -a | lines | find -r '^ ' | to text
 ```
 
 Outputs records as simple text
 ```shell
-> ls |  to text
+> ls | to text
 ```

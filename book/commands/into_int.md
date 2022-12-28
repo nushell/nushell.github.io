@@ -2,7 +2,7 @@
 title: into int
 categories: |
   conversions
-version: 0.71.0
+version: 0.73.1
 conversions: |
   Convert value to integer
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: column paths to convert to int (for table input)
+ -  `...rest`: for a data structure input, convert data at the given cell paths
  -  `--radix {number}`: radix of integer
  -  `--little-endian`: use little-endian byte decoding
 
@@ -27,7 +27,7 @@ usage: |
 
 Convert string to integer in table
 ```shell
-> echo [[num]; ['-5'] [4] [1.5]] | into int num
+> [[num]; ['-5'] [4] [1.5]] | into int num
 ```
 
 Convert string to integer

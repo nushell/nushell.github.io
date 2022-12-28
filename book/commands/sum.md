@@ -3,7 +3,7 @@ title: sum
 categories: |
   expression
   lazyframe
-version: 0.71.0
+version: 0.73.1
 expression: |
   Creates a sum expression for an aggregation
 lazyframe: |

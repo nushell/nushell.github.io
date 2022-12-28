@@ -3,7 +3,7 @@ title: append
 categories: |
   dataframe
   filters
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Appends a new dataframe
 filters: |
@@ -19,12 +19,7 @@ usage: |
 
 ## Signature
 
-```> append (other) --col```
-
-## Parameters
-
- -  `other`: dataframe to be appended
- -  `--col`: appends in col orientation
+```> append ```
 
 ## Examples
 

@@ -2,11 +2,11 @@
 title: par-each
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
-  Run a block on each element of input in parallel
+  Run a closure on each row of the input list in parallel, creating a new list with the results.
 usage: |
-  Run a block on each element of input in parallel
+  Run a closure on each row of the input list in parallel, creating a new list with the results.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -15,21 +15,21 @@ usage: |
 
 ## Signature
 
-```> par-each (block) --numbered```
+```> par-each (closure) --numbered```
 
 ## Parameters
 
- -  `block`: the block to run
- -  `--numbered`: iterate with an index
+ -  `closure`: the closure to run
+ -  `--numbered`: iterate with an index (deprecated; use a two-parameter closure instead)
 
 ## Examples
 
-Multiplies elements in list
+Multiplies each number. Note that the list will become arbitrarily disordered.
 ```shell
-> [1 2 3] | par-each { |it| 2 * $it }
+> [1 2 3] | par-each { 2 * $in }
 ```
 
 Iterate over each element, print the matching value and its index
 ```shell
-> [1 2 3] | par-each -n { |it| if $it.item == 2 { echo $"found 2 at ($it.index)!"} }
+> [1 2 3] | par-each -n { |it| if $it.item == 2 { $"found 2 at ($it.index)!"} }
 ```

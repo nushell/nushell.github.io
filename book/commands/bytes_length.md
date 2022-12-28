@@ -2,7 +2,7 @@
 title: bytes length
 categories: |
   bytes
-version: 0.71.0
+version: 0.73.1
 bytes: |
   Output the length of any bytes in the pipeline
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally find length of binary by column paths
+ -  `...rest`: for a data structure input, find the length of data at the given cell paths
 
 ## Examples
 

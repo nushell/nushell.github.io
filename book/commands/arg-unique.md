@@ -2,7 +2,7 @@
 title: arg-unique
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Returns indexes for unique values
 usage: |

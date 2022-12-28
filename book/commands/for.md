@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.71.0
+version: 0.73.1
 core: |
   Loop over a range
 usage: |
@@ -33,15 +33,15 @@ This command is a parser keyword. For details, check:
 
 Echo the square of each integer
 ```shell
-> for x in [1 2 3] { $x * $x }
+> for x in [1 2 3] { print ($x * $x) }
 ```
 
 Work with elements of a range
 ```shell
-> for $x in 1..3 { $x }
+> for $x in 1..3 { print $x }
 ```
 
 Number each item and echo a message
 ```shell
-> for $it in ['bob' 'fred'] --numbered { $"($it.index) is ($it.item)" }
+> for $it in ['bob' 'fred'] --numbered { print $"($it.index) is ($it.item)" }
 ```

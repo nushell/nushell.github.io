@@ -2,7 +2,7 @@
 title: char
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Output special characters (e.g., 'newline').
 usage: |

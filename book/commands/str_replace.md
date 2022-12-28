@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Find and replace text
 usage: |
@@ -21,7 +21,7 @@ usage: |
 
  -  `find`: the pattern to find
  -  `replace`: the replacement pattern
- -  `...rest`: optionally find and replace text by column paths
+ -  `...rest`: For a data structure input, operate on strings at the given cell paths
  -  `--all`: replace all occurrences of find string
  -  `--no-expand`: do not expand the replace parameter as a regular expression
  -  `--string`: do not use regular expressions for string find and replace

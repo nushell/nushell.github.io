@@ -2,7 +2,7 @@
 title: agg
 categories: |
   lazyframe
-version: 0.71.0
+version: 0.73.1
 lazyframe: |
   Performs a series of aggregations from a group-by
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> agg ...Group-by expressions```
-
-## Parameters
-
- -  `...Group-by expressions`: Expression(s) that define the aggregations to be applied
+```> agg ```
 
 ## Examples
 

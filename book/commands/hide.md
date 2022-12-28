@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.71.0
+version: 0.73.1
 core: |
   Hide definitions in the current scope
 usage: |
@@ -15,11 +15,12 @@ usage: |
 
 ## Signature
 
-```> hide (pattern)```
+```> hide (module) (members)```
 
 ## Parameters
 
- -  `pattern`: import pattern
+ -  `module`: Module or module file
+ -  `members`: Which members of the module to import
 
 ## Notes
 ```text

@@ -2,7 +2,7 @@
 title: roll right
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Roll table columns right
 usage: |
@@ -23,6 +23,11 @@ usage: |
  -  `--cells-only`: rotates columns leaving headers fixed
 
 ## Examples
+
+Rolls columns of a record to the right
+```shell
+> {a:1 b:2 c:3} | roll right
+```
 
 Rolls columns to the right
 ```shell

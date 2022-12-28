@@ -2,7 +2,7 @@
 title: into filesize
 categories: |
   conversions
-version: 0.71.0
+version: 0.73.1
 conversions: |
   Convert value to filesize
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: column paths to convert to filesize (for table input)
+ -  `...rest`: for a data structure input, convert data at the given cell paths
 
 ## Examples
 

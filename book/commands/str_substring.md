@@ -2,7 +2,7 @@
 title: str substring
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `range`: the indexes to substring [start end]
- -  `...rest`: optionally substring text by column paths
+ -  `...rest`: For a data structure input, turn strings at the given cell paths into substrings
 
 ## Examples
 

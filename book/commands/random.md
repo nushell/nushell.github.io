@@ -2,7 +2,7 @@
 title: random
 categories: |
   random
-version: 0.71.0
+version: 0.73.1
 random: |
   Generate a random value.
 usage: |
@@ -16,3 +16,8 @@ usage: |
 ## Signature
 
 ```> random ```
+
+## Notes
+```text
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+```

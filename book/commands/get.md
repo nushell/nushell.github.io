@@ -3,7 +3,7 @@ title: get
 categories: |
   dataframe
   filters
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Creates dataframe with the selected columns
 filters: |
@@ -19,11 +19,7 @@ usage: |
 
 ## Signature
 
-```> get ...rest```
-
-## Parameters
-
- -  `...rest`: column names to sort dataframe
+```> get ```
 
 ## Examples
 
@@ -48,6 +44,21 @@ Returns the selected column
  -  `--sensitive`: get path in a case sensitive manner
 
 ## Examples
+
+Get an item from a list
+```shell
+> [0 1 2] | get 1
+```
+
+Get a column from a table
+```shell
+> [{A: A0}] | get A
+```
+
+Get a cell from a table
+```shell
+> [{A: A0}] | get 0.A
+```
 
 Extract the name of files as a list
 ```shell

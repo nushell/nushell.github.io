@@ -2,7 +2,7 @@
 title: when
 categories: |
   expression
-version: 0.71.0
+version: 0.73.1
 expression: |
   Creates and modifies a when expression
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> when (when expression) (then expression)```
-
-## Parameters
-
- -  `when expression`: when expression used for matching
- -  `then expression`: expression that will be applied when predicate is true
+```> when ```
 
 ## Examples
 

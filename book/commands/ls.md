@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.71.0
+version: 0.73.1
 filesystem: |
   List the files in a directory.
 usage: |

@@ -2,7 +2,7 @@
 title: set-with-idx
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Sets value in the given index
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> set-with-idx (value) --indices```
-
-## Parameters
-
- -  `value`: value to be inserted in series
- -  `--indices {any}`: list of indices indicating where to set the value
+```> set-with-idx ```
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: slice
 categories: |
   dataframe
-version: 0.71.0
+version: 0.73.1
 dataframe: |
   Creates new dataframe from a slice of rows
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> slice (offset) (size)```
-
-## Parameters
-
- -  `offset`: start of slice
- -  `size`: size of slice
+```> slice ```
 
 ## Examples
 

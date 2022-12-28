@@ -2,7 +2,7 @@
 title: str pascal-case
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Convert a string to PascalCase
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally convert text to PascalCase by column paths
+ -  `...rest`: For a data structure input, convert strings at the given cell paths
 
 ## Examples
 

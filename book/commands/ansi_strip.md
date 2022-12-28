@@ -2,7 +2,7 @@
 title: ansi strip
 categories: |
   platform
-version: 0.71.0
+version: 0.73.1
 platform: |
   Strip ANSI escape sequences from a string
 usage: |
@@ -15,11 +15,11 @@ usage: |
 
 ## Signature
 
-```> ansi strip ...column path```
+```> ansi strip ...rest```
 
 ## Parameters
 
- -  `...column path`: optionally, remove ANSI sequences by column paths
+ -  `...rest`: for a data structure input, remove ANSI sequences from strings at the given cell paths
 
 ## Examples
 

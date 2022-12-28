@@ -2,7 +2,7 @@
 title: merge
 categories: |
   filters
-version: 0.71.0
+version: 0.73.1
 filters: |
   Merge the input with a record or table, overwriting values in matching columns.
 usage: |
@@ -15,16 +15,15 @@ usage: |
 
 ## Signature
 
-```> merge (block)```
+```> merge (value)```
 
 ## Parameters
 
- -  `block`: the new value to merge with, or a block that produces it
+ -  `value`: the new value to merge with
 
 ## Notes
 ```text
-You may provide a column structure to merge, or a block
-that generates a column structure.
+You may provide a column structure to merge
 
 When merging tables, row 0 of the input table is overwritten
 with values from row 0 of the provided table, then
@@ -34,7 +33,7 @@ repeating this process with row 1, and so on.
 
 Add an 'index' column to the input table
 ```shell
-> [a b c] | wrap name | merge { [1 2 3] | wrap index }
+> [a b c] | wrap name | merge ( [1 2 3] | wrap index )
 ```
 
 Merge two records
@@ -42,7 +41,7 @@ Merge two records
 > {a: 1, b: 2} | merge {c: 3}
 ```
 
-Merge records, overwriting overlapping values
+Merge two tables, overwriting overlapping columns
 ```shell
-> {a: 1, b: 3} | merge { { b: 2 } | merge { c: 4 } }
+> [{columnA: A0 columnB: B0}] | merge [{columnA: 'A0*'}]
 ```

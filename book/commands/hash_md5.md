@@ -2,7 +2,7 @@
 title: hash md5
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Hash a value using the md5 hash algorithm
 usage: |
@@ -24,17 +24,17 @@ usage: |
 
 ## Examples
 
-get a hexadecimaly encoded string of the md5 digest of a string
+Return the md5 hash of a string, hex-encoded
 ```shell
-> echo 'abcdefghijklmnopqrstuvwxyz' | hash md5
+> 'abcdefghijklmnopqrstuvwxyz' | hash md5
 ```
 
-get the md5 digest of a string in binary
+Return the md5 hash of a string, as binary
 ```shell
-> echo 'abcdefghijklmnopqrstuvwxyz' | hash md5 --binary
+> 'abcdefghijklmnopqrstuvwxyz' | hash md5 --binary
 ```
 
-md5 encode a file
+Return the md5 hash of a file's contents
 ```shell
 > open ./nu_0_24_1_windows.zip | hash md5
 ```

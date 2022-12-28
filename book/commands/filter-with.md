@@ -2,7 +2,7 @@
 title: filter-with
 categories: |
   dataframe or lazyframe
-version: 0.71.0
+version: 0.73.1
 dataframe_or_lazyframe: |
   Filters dataframe using a mask or expression as reference
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> filter-with (mask or expression)```
-
-## Parameters
-
- -  `mask or expression`: boolean mask used to filter data
+```> filter-with ```
 
 ## Examples
 

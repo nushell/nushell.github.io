@@ -2,7 +2,7 @@
 title: complete
 categories: |
   system
-version: 0.71.0
+version: 0.73.1
 system: |
   Complete the external piped in, collecting outputs and exit code
 usage: |

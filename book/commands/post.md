@@ -2,7 +2,7 @@
 title: post
 categories: |
   network
-version: 0.71.0
+version: 0.73.1
 network: |
   Post a body to a URL.
 usage: |

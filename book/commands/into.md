@@ -2,7 +2,7 @@
 title: into
 categories: |
   conversions
-version: 0.71.0
+version: 0.73.1
 conversions: |
   Commands to convert data from one type to another.
 usage: |
@@ -16,3 +16,8 @@ usage: |
 ## Signature
 
 ```> into ```
+
+## Notes
+```text
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+```

@@ -2,7 +2,7 @@
 title: into decimal
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Convert text into a decimal
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally convert text into decimal by column paths
+ -  `...rest`: for a data structure input, convert data at the given cell paths
 
 ## Examples
 

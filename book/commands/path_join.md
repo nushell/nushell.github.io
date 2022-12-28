@@ -2,7 +2,7 @@
 title: path join
 categories: |
   default
-version: 0.71.0
+version: 0.73.1
 default: |
   Join a structured path or a list of path parts.
 usage: |
@@ -15,12 +15,12 @@ usage: |
 
 ## Signature
 
-```> path join ...append --columns```
+```> path join ...rest --columns```
 
 ## Parameters
 
- -  `...append`: Path to append to the input
- -  `--columns {table}`: Optionally operate by column path
+ -  `...rest`: Path to append to the input
+ -  `--columns {table}`: For a record or table input, join strings at the given columns
 
 ## Notes
 ```text

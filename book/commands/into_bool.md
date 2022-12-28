@@ -2,7 +2,7 @@
 title: into bool
 categories: |
   conversions
-version: 0.71.0
+version: 0.73.1
 conversions: |
   Convert value to boolean
 usage: |
@@ -19,13 +19,13 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: column paths to convert to boolean (for table input)
+ -  `...rest`: for a data structure input, convert data at the given cell paths
 
 ## Examples
 
 Convert value to boolean in table
 ```shell
-> echo [[value]; ['false'] ['1'] [0] [1.0] [true]] | into bool value
+> [[value]; ['false'] ['1'] [0] [1.0] [true]] | into bool value
 ```
 
 Convert bool to boolean
@@ -36,6 +36,11 @@ Convert bool to boolean
 convert integer to boolean
 ```shell
 > 1 | into bool
+```
+
+convert decimal to boolean
+```shell
+> 0.3 | into bool
 ```
 
 convert decimal string to boolean

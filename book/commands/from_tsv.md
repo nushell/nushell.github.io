@@ -2,7 +2,7 @@
 title: from tsv
 categories: |
   formats
-version: 0.71.0
+version: 0.73.1
 formats: |
   Parse text as .tsv and create table.
 usage: |
@@ -24,6 +24,12 @@ usage: |
  -  `--trim {string}`: drop leading and trailing whitespaces around headers names and/or field values
 
 ## Examples
+
+Convert tab-separated data to a table
+```shell
+> "ColA	ColB
+1	2" | from tsv
+```
 
 Create a tsv file with header columns and open it
 ```shell

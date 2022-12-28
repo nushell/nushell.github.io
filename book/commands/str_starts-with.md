@@ -2,7 +2,7 @@
 title: str starts-with
 categories: |
   strings
-version: 0.71.0
+version: 0.73.1
 strings: |
   Check if an input starts with a string
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `string`: the string to match
- -  `...rest`: optionally matches prefix of text by column paths
+ -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
 
 ## Examples
 
