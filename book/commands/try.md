@@ -38,3 +38,8 @@ Try to run a missing command
 ```shell
 > try { asdfasdf } catch { echo 'missing' }
 ```
+
+Try to run a missing command, and parse the error
+```shell
+> try { asdfasdf } catch {|err| if ("executable was not found" in $"($err)") { print "Missing Command" } else { print "Unexpected Error" }}
+```
