@@ -37,7 +37,7 @@ alias lt = (ls | sort-by modified -r | sort-by type)
 ```
 
 ## List all loaded aliases
-You can list all aliases which you can currently use by executing `alias`.
+Your useable aliases can be seen in `$nu.scope.aliases`.
 
 ## Persisting
 
