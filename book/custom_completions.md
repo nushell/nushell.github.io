@@ -90,6 +90,7 @@ let carapace_completer = {|spans|
 let-env config = {
     # ... your config
     completions: {
+        partial: true  # set this to false to prevent partial filling of the prompt
         external: {
             enable: true
             max_results: 100
