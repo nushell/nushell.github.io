@@ -89,7 +89,13 @@ let carapace_completer = {|spans|
 # The default config record. This is where much of your global configuration is setup.
 let-env config = {
     # ... your config
-    external_completer: $carapace_completer
+    completions: {
+        external: {
+            enable: true
+            max_results: 100
+            completer: $carapace_completer
+        }
+    }
 }
 ```
 
