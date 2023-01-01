@@ -36,6 +36,9 @@ Here is an alias with more than one pipe:
 alias lt = (ls | sort-by modified -r | sort-by type)
 ```
 
+## List all loaded aliases
+You can list all aliases which you can currently use by executing `alias`.
+
 ## Persisting
 
 To make your alias persistent it must be added to your _config.nu_ file.
