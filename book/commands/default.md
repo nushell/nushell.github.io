@@ -4,9 +4,9 @@ categories: |
   filters
 version: 0.73.1
 filters: |
-  Sets a default row's column if missing.
+  Sets a default row's column if missing/null/nothing.
 usage: |
-  Sets a default row's column if missing.
+  Sets a default row's column if missing/null/nothing.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
