@@ -9,7 +9,7 @@ if $book_exists == false {
 }
 
 # Old commands are currently not deleted because some of them
-# are platform-specific, and a single run of this script will not regenerate
+# are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
 # all of them.
 #do -i { rm book/commands/*.md }
 
