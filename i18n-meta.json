@@ -20,10 +20,30 @@
     "pt-BR": "-"
   },
   {
+    "name": "advanced.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
     "name": "aliases.md",
     "en": "Completed",
     "zh-CN": "51522d5591@hustcer",
     "de": "translated by @sebastian-xyz",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "background_task.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
     "tr": "-",
     "ja": "-",
     "es": "-",
@@ -50,10 +70,40 @@
     "pt-BR": "-"
   },
   {
+    "name": "coming_from_cmd.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "coming_to_nu.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
     "name": "command_reference.md",
     "en": "Completed",
     "zh-CN": "-",
     "de": "translated by @sebastian-xyz",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "command_signature.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
     "tr": "-",
     "ja": "-",
     "es": "-",
@@ -130,9 +180,29 @@
     "pt-BR": "-"
   },
   {
+    "name": "explore.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
     "name": "externs.md",
     "en": "Completed",
     "zh-CN": "b6c91cabfa@hustcer",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "getting_started.md",
+    "en": "In progress",
+    "zh-CN": "-",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -154,6 +224,16 @@
     "en": "Completed",
     "zh-CN": "73ef7f3153@hustcer",
     "de": "translated by @sebastian-xyz",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "introduction.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
     "tr": "-",
     "ja": "-",
     "es": "-",
@@ -204,6 +284,26 @@
     "en": "Completed",
     "zh-CN": "1b7d01ac3b@hustcer",
     "de": "cfba017793@petrisch",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "nu_as_a_shell.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "nu_fundamentals.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
     "tr": "-",
     "ja": "-",
     "es": "-",
@@ -294,6 +394,26 @@
     "en": "Completed",
     "zh-CN": "ae23eeba3@hustcer",
     "de": "translated by @sebastian-xyz",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "programming_in_nu.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "quick_tour.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
     "tr": "-",
     "ja": "-",
     "es": "-",

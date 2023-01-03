@@ -52,7 +52,7 @@ def get-cell [
         } else if ($val | str contains '@') {
             let commit = ($val | split row '@')
             let id = ($commit | get 0)
-            if ($commit | length) > 1 && (has-ref $id) {
+            if ($commit | length) > 1 and (has-ref $id) {
                 $'($id)@($commit | get 1)'
             } else {
                 $val
@@ -78,7 +78,7 @@ def gen-i18n-meta [] {
         | upsert es {|it| get-cell $it.name es }
         | upsert pt-BR {|it| get-cell $it.name pt-BR }
         | to json -i 2
-        | save -r $META_FILE
+        | save -rf $META_FILE
 }
 
 def has-change [
@@ -96,13 +96,13 @@ def check-outdated-translation [
     let locale = if ($lng in $columns) { $columns | get $lng } else { $lng }
     open $META_FILE | select name $locale | insert outdated { |it|
         let val = ($it | get $locale)
-        if ($val | is-empty) || $val == '-' {
+        if ($val | is-empty) or $val == '-' {
             '-'
         # Handle data like: "c13a71d11@hustcer"
         } else if ($val | str contains '@') {
             let commit = ($val | split row '@')
             let id = ($commit | get 0)
-            if ($commit | length) > 1 && (has-ref $id) {
+            if ($commit | length) > 1 and (has-ref $id) {
                 has-change $it.name $id
             } else {
                 'N/A'
