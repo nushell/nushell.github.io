@@ -94,21 +94,10 @@ def get-doc [command] {
   let ex = $command.extra_usage
   # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
   # being interpreted as markdown. This is strictly hard-coded for now.
-  let extra_usage = if $ex == "" { "" } else if $command.command in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
-    $"## Notes(char nl)```text(char nl)($command.extra_usage)(char nl)```(char nl)"
+  let extra_usage = if $ex == "" { "" } else if $command.name in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
+    $"## Notes(char nl)```text(char nl)($ex)(char nl)```(char nl)"
   } else {
-    ""
-  }
-
-  let parameters = if $no_param { "" } else { $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)" }
-
-  let ex = $command.extra_usage
-  # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
-  # being interpreted as markdown. This is strictly hard-coded for now.
-  let extra_usage = if $ex == "" { "" } else if $command.command in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
-    $"## Notes(char nl)```text(char nl)($command.extra_usage)(char nl)```(char nl)"
-  } else {
-    $"## Notes(char nl)( $ex )(char nl)(char nl)"
+    $"## Notes(char nl)($ex)(char nl)"
   }
 
   let examples = if ($command.examples | length) > 0 {
