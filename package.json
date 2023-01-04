@@ -5,6 +5,7 @@
   "repository": "github:nushell/nushell.github.io",
   "type": "module",
   "scripts": {
+    "update": "nu book/make_docs.nu",
     "dev": "vuepress dev",
     "build": "vuepress build",
     "prepare": "husky install",
