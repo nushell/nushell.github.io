@@ -4,5 +4,5 @@ export const navbarEn: NavbarConfig = [
   { text: 'Book', link: '/book/' },
   // { text: "Contributor Book", link: "/contributor-book/" },
   { text: 'Cookbook', link: '/cookbook/' },
-  { text: 'Blog', link: '/blog/' },
+  { text: 'Changelog', link: '/blog/' },
 ];
