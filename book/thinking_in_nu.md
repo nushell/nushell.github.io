@@ -52,6 +52,8 @@ This would require the evaluator to run and evaluate the string, but unfortunate
 
 **Thinking in Nushell:** Nushell is designed to use a single compile step for all the source you send it, and this is separate from evaluation. This will allow for strong IDE support, accurate error messages, an easier language for third-party tools to work with, and in the future even fancier output like being able to compile Nushell directly to a binary file.
 
+For more in-depth explanation, check [How Nushell Code Gets Run](how_nushell_code_gets_run.md)
+
 ## Variables are immutable
 
 Another common surprise for folks coming from other languages is that Nushell variables are immutable (and indeed some people have started to call them "constants" to reflect this). Coming to Nushell you'll want to spend some time becoming familiar with working in a more functional style, as this tends to help write code that works best with immutable variables.
