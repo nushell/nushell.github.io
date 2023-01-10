@@ -80,6 +80,12 @@ export const sidebarEn: SidebarConfig = {
       ],
     },
     {
+      text: 'Design Notes',
+      link: '/book/design_notes.md',
+      collapsible: false,
+      children: ['/book/how_nushell_code_gets_run.md'],
+    },
+    {
       text: '(Not So) Advanced',
       link: '/book/advanced.md',
       collapsible: false,
