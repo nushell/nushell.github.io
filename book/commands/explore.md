@@ -25,7 +25,7 @@ usage: |
  -  `--peek`: When quitting, output the value of the cell the cursor was on
 
 ## Notes
-Press <:> then <h> to get a help menu.
+Press `:` then `h` to get a help menu.
 ## Examples
 
 Explore the system information record

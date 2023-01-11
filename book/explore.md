@@ -25,7 +25,7 @@ So the main point of `explore` is `:table` (Which you see on the above screensho
 
 You can interact with it via `<Left>`, `<Right>`, `<Up>`, `<Down>` _arrow keys_.
 
-You can inspect a underlying values by entrering into cursor mode. You can press either `<i>` or `<Enter>` to do so.
+You can inspect a underlying values by entering into cursor mode. You can press either `<i>` or `<Enter>` to do so.
 Then using _arrow keys_ you can chose a nessary cell.
 And you'll be able to see it's underlying structure.
 
