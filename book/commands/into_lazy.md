@@ -2,7 +2,7 @@
 title: into lazy
 categories: |
   lazyframe
-version: 0.73.1
+version: 0.74.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe
 usage: |

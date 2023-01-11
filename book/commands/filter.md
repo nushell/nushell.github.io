@@ -3,7 +3,7 @@ title: filter
 categories: |
   filters
   lazyframe
-version: 0.73.1
+version: 0.74.0
 filters: |
   Filter values based on a predicate closure.
 lazyframe: |
@@ -26,10 +26,8 @@ usage: |
  -  `closure`: Predicate closure
 
 ## Notes
-```text
 This command works similar to 'where' but allows reading the predicate closure from
 a variable. On the other hand, the "row condition" syntax is not supported.
-```
 ## Examples
 
 Filter items of a list according to a condition

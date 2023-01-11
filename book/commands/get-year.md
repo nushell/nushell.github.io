@@ -2,7 +2,7 @@
 title: get-year
 categories: |
   dataframe
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Gets year from date
 usage: |

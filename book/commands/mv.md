@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.73.1
+version: 0.74.0
 filesystem: |
   Move files or directories.
 usage: |

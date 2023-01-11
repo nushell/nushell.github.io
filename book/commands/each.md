@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.73.1
+version: 0.74.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -24,7 +24,6 @@ usage: |
  -  `--numbered`: iterate with an index (deprecated; use a two-parameter closure instead)
 
 ## Notes
-```text
 Since tables are lists of records, passing a table into 'each' will
 iterate over each record, not necessarily each cell within it.
 
@@ -32,7 +31,6 @@ Avoid passing single records to this command. Since a record is a
 one-row structure, 'each' will only run once, behaving similar to 'do'.
 To iterate over a record's values, try converting it to a table
 with 'transpose' first.
-```
 ## Examples
 
 Multiplies elements in the list

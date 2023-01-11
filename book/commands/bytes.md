@@ -2,7 +2,7 @@
 title: bytes
 categories: |
   bytes
-version: 0.73.1
+version: 0.74.0
 bytes: |
   Various commands for working with byte data
 usage: |
@@ -18,6 +18,4 @@ usage: |
 ```> bytes ```
 
 ## Notes
-```text
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
-```

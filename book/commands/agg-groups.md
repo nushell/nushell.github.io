@@ -2,7 +2,7 @@
 title: agg-groups
 categories: |
   expression
-version: 0.73.1
+version: 0.74.0
 expression: |
   creates an agg_groups expression
 usage: |

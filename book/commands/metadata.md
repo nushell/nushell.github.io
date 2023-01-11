@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
   Get the metadata for items in the stream
 usage: |
@@ -25,7 +25,7 @@ usage: |
 
 Get the metadata of a variable
 ```shell
-> metadata $a
+> let a = 42; metadata $a
 ```
 
 Get the metadata of the input

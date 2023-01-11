@@ -2,7 +2,7 @@
 title: str collect
 categories: |
   deprecated
-version: 0.73.1
+version: 0.74.0
 deprecated: |
   'str collect' is deprecated. Please use 'str join' instead.
 usage: |

@@ -2,7 +2,7 @@
 title: overlay hide
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
   Hide an active overlay
 usage: |
@@ -24,10 +24,8 @@ usage: |
  -  `--keep-env {list<string>}`: List of environment variables to keep in the next activated overlay
 
 ## Notes
-```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Keep a custom command after hiding the overlay

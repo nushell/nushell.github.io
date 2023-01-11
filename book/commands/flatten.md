@@ -3,7 +3,7 @@ title: flatten
 categories: |
   expression
   filters
-version: 0.73.1
+version: 0.74.0
 expression: |
   creates a flatten expression
 filters: |

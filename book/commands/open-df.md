@@ -2,7 +2,7 @@
 title: open-df
 categories: |
   dataframe
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Opens csv, json, arrow, or parquet file to create dataframe
 usage: |

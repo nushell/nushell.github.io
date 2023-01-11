@@ -2,7 +2,7 @@
 title: str rpad
 categories: |
   strings
-version: 0.73.1
+version: 0.74.0
 strings: |
   Right-pad a string to a specific length
 usage: |

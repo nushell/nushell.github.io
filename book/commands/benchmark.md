@@ -2,7 +2,7 @@
 title: benchmark
 categories: |
   system
-version: 0.73.1
+version: 0.74.0
 system: |
   Time the running time of a block
 usage: |

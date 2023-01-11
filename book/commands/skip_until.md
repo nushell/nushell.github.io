@@ -2,7 +2,7 @@
 title: skip until
 categories: |
   filters
-version: 0.73.1
+version: 0.74.0
 filters: |
   Skip elements of the input until a predicate is true.
 usage: |

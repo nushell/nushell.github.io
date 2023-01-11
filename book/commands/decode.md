@@ -2,7 +2,7 @@
 title: decode
 categories: |
   strings
-version: 0.73.1
+version: 0.74.0
 strings: |
   Decode bytes as a string.
 usage: |
@@ -22,13 +22,11 @@ usage: |
  -  `encoding`: the text encoding to use
 
 ## Notes
-```text
 Multiple encodings are supported, here is an example of a few:
 big5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5
 
 For a more complete list of encodings please refer to the encoding_rs
 documentation link at https://docs.rs/encoding_rs/0.8.28/encoding_rs/#statics
-```
 ## Examples
 
 Decode the output of an external command

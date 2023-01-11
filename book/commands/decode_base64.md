@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   hash
-version: 0.73.1
+version: 0.74.0
 hash: |
   Base64 decode a value
 usage: |
@@ -25,9 +25,7 @@ usage: |
  -  `--binary`: Output a binary value instead of decoding payload as UTF-8
 
 ## Notes
-```text
 Will attempt to decode binary payload as an UTF-8 string by default. Use the `--binary(-b)` argument to force binary output.
-```
 ## Examples
 
 Base64 decode a value and output as UTF-8 string

@@ -2,7 +2,7 @@
 title: from ini
 categories: |
   formats
-version: 0.73.1
+version: 0.74.0
 formats: |
   Parse text as .ini and create record
 usage: |

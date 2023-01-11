@@ -2,7 +2,7 @@
 title: echo
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
   Returns its arguments, ignoring the piped-in value.
 usage: |
@@ -22,11 +22,9 @@ usage: |
  -  `...rest`: the values to echo
 
 ## Notes
-```text
 When given no arguments, it returns an empty string. When given one argument,
 it returns it. Otherwise, it returns a list of the arguments. There is usually
 little reason to use this over just writing the values as-is.
-```
 ## Examples
 
 Put a list of numbers in the pipeline. This is the same as [1 2 3].

@@ -2,7 +2,7 @@
 title: into duration
 categories: |
   conversions
-version: 0.73.1
+version: 0.74.0
 conversions: |
   Convert value to duration
 usage: |
@@ -23,9 +23,7 @@ usage: |
  -  `--convert {string}`: convert duration into another duration
 
 ## Notes
-```text
 This command does not take leap years into account, and every month is assumed to have 30 days.
-```
 ## Examples
 
 Convert string to duration in table

@@ -2,7 +2,7 @@
 title: version
 categories: |
   default
-version: 0.73.1
+version: 0.74.0
 default: |
   Display Nu version.
 usage: |

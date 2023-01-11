@@ -2,7 +2,7 @@
 title: date
 categories: |
   date
-version: 0.73.1
+version: 0.74.0
 date: |
   Date-related commands
 usage: |
@@ -18,6 +18,4 @@ usage: |
 ```> date ```
 
 ## Notes
-```text
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
-```

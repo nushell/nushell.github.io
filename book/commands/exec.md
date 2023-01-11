@@ -2,7 +2,7 @@
 title: exec
 categories: |
   system
-version: 0.73.1
+version: 0.74.0
 system: |
   Execute a command, replacing the current process.
 usage: |
@@ -22,9 +22,7 @@ usage: |
  -  `command`: the command to execute
 
 ## Notes
-```text
 Currently supported only on Unix-based systems.
-```
 ## Examples
 
 Execute external 'ps aux' tool

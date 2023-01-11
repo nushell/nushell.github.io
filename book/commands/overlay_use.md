@@ -2,7 +2,7 @@
 title: overlay use
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
   Use definitions from a module as an overlay
 usage: |
@@ -25,10 +25,8 @@ usage: |
  -  `--reload`: If the overlay already exists, reload its definitions and environment.
 
 ## Notes
-```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Create an overlay from a module

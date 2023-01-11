@@ -2,7 +2,7 @@
 title: path relative-to
 categories: |
   default
-version: 0.73.1
+version: 0.74.0
 default: |
   Express a path as relative to another path.
 usage: |
@@ -23,11 +23,9 @@ usage: |
  -  `--columns {table}`: For a record or table input, convert strings at the given columns
 
 ## Notes
-```text
 Can be used only when the input and the argument paths are either both
 absolute or both relative. The argument path needs to be a parent of the input
 path.
-```
 ## Examples
 
 Find a relative path from two absolute paths

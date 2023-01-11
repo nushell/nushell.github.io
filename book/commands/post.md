@@ -2,7 +2,7 @@
 title: post
 categories: |
   network
-version: 0.73.1
+version: 0.74.0
 network: |
   Post a body to a URL.
 usage: |
@@ -30,9 +30,7 @@ usage: |
  -  `--insecure`: allow insecure server connections when using SSL
 
 ## Notes
-```text
 Performs HTTP POST operation.
-```
 ## Examples
 
 Post content to url.com

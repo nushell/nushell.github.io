@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
   Loop over a range
 usage: |
@@ -25,10 +25,8 @@ usage: |
  -  `--numbered`: returned a numbered item ($it.index and $it.item)
 
 ## Notes
-```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Echo the square of each integer

@@ -2,7 +2,7 @@
 title: math
 categories: |
   math
-version: 0.73.1
+version: 0.74.0
 math: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.
 usage: |
@@ -18,6 +18,4 @@ usage: |
 ```> math ```
 
 ## Notes
-```text
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
-```

@@ -2,7 +2,7 @@
 title: get-nanosecond
 categories: |
   dataframe
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Gets nanosecond from date
 usage: |

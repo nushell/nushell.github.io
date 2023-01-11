@@ -3,7 +3,7 @@ title: collect
 categories: |
   filters
   lazyframe
-version: 0.73.1
+version: 0.74.0
 filters: |
   Collect the stream and pass it to a block.
 lazyframe: |

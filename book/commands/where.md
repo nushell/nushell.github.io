@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.73.1
+version: 0.74.0
 filters: |
   Filter values based on a row condition.
 usage: |
@@ -23,11 +23,9 @@ usage: |
  -  `--closure {closure(any, int)}`: use with a closure instead (deprecated: use 'filter' command instead)
 
 ## Notes
-```text
 This command works similar to 'filter' but allows extra shorthands for working with
 tables, known as "row conditions". On the other hand, reading the condition from a variable is
 not supported.
-```
 ## Examples
 
 Filter rows of a table according to a condition

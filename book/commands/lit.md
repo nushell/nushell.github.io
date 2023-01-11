@@ -2,7 +2,7 @@
 title: lit
 categories: |
   expression
-version: 0.73.1
+version: 0.74.0
 expression: |
   Creates a literal expression
 usage: |

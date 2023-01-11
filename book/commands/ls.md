@@ -2,11 +2,11 @@
 title: ls
 categories: |
   filesystem
-version: 0.73.1
+version: 0.74.0
 filesystem: |
-  List the files in a directory.
+  List the filenames, sizes, and modification times of items in a directory.
 usage: |
-  List the files in a directory.
+  List the filenames, sizes, and modification times of items in a directory.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filesystem
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> ls (pattern) --all --long --short-names --full-paths --du --directory```
+```> ls (pattern) --all --long --short-names --full-paths --du --directory --mime-type```
 
 ## Parameters
 
@@ -24,8 +24,9 @@ usage: |
  -  `--long`: Get all available columns for each entry (slower; columns are platform-dependent)
  -  `--short-names`: Only print the file names, and not the path
  -  `--full-paths`: display paths as absolute paths
- -  `--du`: Display the apparent directory size in place of the directory metadata size
+ -  `--du`: Display the apparent directory size ("disk usage") in place of the directory metadata size
  -  `--directory`: List the specified directory itself instead of its contents
+ -  `--mime-type`: Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
 
 ## Examples
 
@@ -61,7 +62,7 @@ List all dirs in your home directory
 
 List all dirs in your home directory which have not been modified in 7 days
 ```shell
-> ls -as ~ | where type == dir && modified < ((date now) - 7day)
+> ls -as ~ | where type == dir and modified < ((date now) - 7day)
 ```
 
 List given paths and show directories themselves

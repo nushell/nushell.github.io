@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   default
-version: 0.73.1
+version: 0.74.0
 default: |
   Convert a path into structured data.
 usage: |
@@ -23,10 +23,8 @@ usage: |
  -  `--extension {string}`: Manually supply the extension (without the dot)
 
 ## Notes
-```text
 Each path is split into a table with 'parent', 'stem' and 'extension' fields.
 On Windows, an extra 'prefix' column is added.
-```
 ## Examples
 
 Parse a path
