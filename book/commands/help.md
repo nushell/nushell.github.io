@@ -2,11 +2,11 @@
 title: help
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
-  Display help information about commands.
+  Display help information about different parts of Nushell.
 usage: |
-  Display help information about commands.
+  Display help information about different parts of Nushell.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -19,22 +19,19 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: the name of command to get help on
+ -  `...rest`: the name of command, alias or module to get help on
  -  `--find {string}`: string to find in command names, usage, and search terms
 
+## Notes
+`help word` searches for "word" in commands, aliases and modules, in that order.
 ## Examples
 
-show all commands and sub-commands
-```shell
-> help commands
-```
-
-show help for single command
+show help for single command, alias, or module
 ```shell
 > help match
 ```
 
-show help for single sub-command
+show help for single sub-command, alias, or module
 ```shell
 > help str lpad
 ```

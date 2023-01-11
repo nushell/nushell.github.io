@@ -2,7 +2,7 @@
 title: help operators
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
   Show help on nushell operators.
 usage: |

@@ -2,7 +2,7 @@
 title: math tanh
 categories: |
   math
-version: 0.73.1
+version: 0.74.0
 math: |
   Returns the hyperbolic tangent of the number.
 usage: |

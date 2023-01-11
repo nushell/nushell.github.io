@@ -2,7 +2,7 @@
 title: export use
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
   Use definitions from a module and export them from this module
 usage: |
@@ -23,10 +23,8 @@ usage: |
  -  `members`: Which members of the module to import
 
 ## Notes
-```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Re-export a command from another module

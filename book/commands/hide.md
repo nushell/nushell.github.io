@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.73.1
+version: 0.74.0
 core: |
   Hide definitions in the current scope
 usage: |
@@ -23,12 +23,10 @@ usage: |
  -  `members`: Which members of the module to import
 
 ## Notes
-```text
 Definitions are hidden by priority: First aliases, then custom commands.
 
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Hide the alias just defined
@@ -39,9 +37,4 @@ Hide the alias just defined
 Hide a custom command
 ```shell
 > def say-hi [] { echo 'Hi!' }; hide say-hi
-```
-
-Hide an environment variable
-```shell
-> let-env HZ_ENV_ABC = 1; hide HZ_ENV_ABC; 'HZ_ENV_ABC' in (env).name
 ```

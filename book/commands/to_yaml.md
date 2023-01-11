@@ -2,7 +2,7 @@
 title: to yaml
 categories: |
   formats
-version: 0.73.1
+version: 0.74.0
 formats: |
   Convert table into .yaml/.yml text
 usage: |

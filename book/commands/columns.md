@@ -3,7 +3,7 @@ title: columns
 categories: |
   dataframe
   filters
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Show dataframe columns
 filters: |
@@ -37,9 +37,7 @@ Dataframe columns
 ```> columns ```
 
 ## Notes
-```text
 This is a counterpart to `values`, which produces a list of columns' values.
-```
 ## Examples
 
 Get the columns from the record

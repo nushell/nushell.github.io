@@ -3,7 +3,7 @@ title: get
 categories: |
   dataframe
   filters
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Creates dataframe with the selected columns
 filters: |
@@ -60,17 +60,12 @@ Get a cell from a table
 > [{A: A0}] | get 0.A
 ```
 
-Extract the name of files as a list
-```shell
-> ls | get name
-```
-
-Extract the name of the 3rd entry of a file list
+Extract the name of the 3rd record in a list (same as `ls | $in.name`)
 ```shell
 > ls | get name.2
 ```
 
-Extract the name of the 3rd entry of a file list (alternative)
+Extract the name of the 3rd record in a list
 ```shell
 > ls | get 2.name
 ```

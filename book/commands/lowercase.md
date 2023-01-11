@@ -2,7 +2,7 @@
 title: lowercase
 categories: |
   dataframe
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Lowercase the strings in the column
 usage: |

@@ -2,7 +2,7 @@
 title: to html
 categories: |
   formats
-version: 0.73.1
+version: 0.74.0
 formats: |
   Convert table into simple HTML
 usage: |
@@ -27,9 +27,7 @@ usage: |
  -  `--list`: produce a color table of all available themes
 
 ## Notes
-```text
 Screenshots of the themes can be browsed here: https://github.com/mbadolato/iTerm2-Color-Schemes
-```
 ## Examples
 
 Outputs an  HTML string representing the contents of this table

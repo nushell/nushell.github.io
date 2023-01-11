@@ -2,7 +2,7 @@
 title: reject
 categories: |
   filters
-version: 0.73.1
+version: 0.74.0
 filters: |
   Remove the given columns from the table. To remove rows, use 'drop'.
 usage: |

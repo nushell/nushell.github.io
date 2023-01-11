@@ -2,7 +2,7 @@
 title: str join
 categories: |
   strings
-version: 0.73.1
+version: 0.74.0
 strings: |
   Concatenate multiple strings into a single string, with an optional separator between each
 usage: |

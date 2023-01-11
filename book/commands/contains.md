@@ -2,7 +2,7 @@
 title: contains
 categories: |
   dataframe
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Checks if a pattern is contained in a string
 usage: |

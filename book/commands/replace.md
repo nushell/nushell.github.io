@@ -2,7 +2,7 @@
 title: replace
 categories: |
   dataframe
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern
 usage: |

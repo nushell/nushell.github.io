@@ -2,7 +2,7 @@
 title: to url
 categories: |
   formats
-version: 0.73.1
+version: 0.74.0
 formats: |
   Convert record or table into URL-encoded text
 usage: |

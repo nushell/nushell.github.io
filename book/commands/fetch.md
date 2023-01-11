@@ -3,7 +3,7 @@ title: fetch
 categories: |
   lazyframe
   network
-version: 0.73.1
+version: 0.74.0
 lazyframe: |
   collects the lazyframe to the selected rows
 network: |
@@ -46,9 +46,7 @@ Fetch a rows from the dataframe
  -  `--raw`: fetch contents as text rather than a table
 
 ## Notes
-```text
 Performs HTTP GET operation.
-```
 ## Examples
 
 Fetch content from example.com

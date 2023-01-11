@@ -2,7 +2,7 @@
 title: roll
 categories: |
   filters
-version: 0.73.1
+version: 0.74.0
 filters: |
   Rolling commands for tables
 usage: |
@@ -18,6 +18,4 @@ usage: |
 ```> roll ```
 
 ## Notes
-```text
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
-```

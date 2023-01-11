@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.73.1
+version: 0.74.0
 filters: |
   Skip the first several rows of the input. Counterpart of 'drop'. Opposite of 'first'.
 usage: |
@@ -22,9 +22,7 @@ usage: |
  -  `n`: the number of elements to skip
 
 ## Notes
-```text
 To skip specific numbered rows, try 'drop nth'. To skip specific named columns, try 'reject'.
-```
 ## Examples
 
 Skip the first value of a list

@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.73.1
+version: 0.74.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text
 usage: |
@@ -25,9 +25,7 @@ usage: |
  -  `--peek`: When quitting, output the value of the cell the cursor was on
 
 ## Notes
-```text
-Press <:> then <h> to get a help menu.
-```
+Press `:` then `h` to get a help menu.
 ## Examples
 
 Explore the system information record

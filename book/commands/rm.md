@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.73.1
+version: 0.74.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -53,5 +53,5 @@ Delete a file, ignoring 'file not found' errors
 
 Delete all 0KB files in the current directory
 ```shell
-> ls | where size == 0KB && type == file | each { rm $in.name } | null
+> ls | where size == 0KB and type == file | each { rm $in.name } | null
 ```

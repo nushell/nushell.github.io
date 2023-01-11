@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   default
-version: 0.73.1
+version: 0.74.0
 default: |
   Get the parent directory of a path
 usage: |

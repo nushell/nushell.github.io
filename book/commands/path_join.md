@@ -2,7 +2,7 @@
 title: path join
 categories: |
   default
-version: 0.73.1
+version: 0.74.0
 default: |
   Join a structured path or a list of path parts.
 usage: |
@@ -23,10 +23,8 @@ usage: |
  -  `--columns {table}`: For a record or table input, join strings at the given columns
 
 ## Notes
-```text
 Optionally, append an additional path to the result. It is designed to accept
 the output of 'path parse' and 'path split' subcommands.
-```
 ## Examples
 
 Append a filename to a path

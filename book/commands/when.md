@@ -2,7 +2,7 @@
 title: when
 categories: |
   expression
-version: 0.73.1
+version: 0.74.0
 expression: |
   Creates and modifies a when expression
 usage: |

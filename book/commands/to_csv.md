@@ -3,7 +3,7 @@ title: to csv
 categories: |
   dataframe
   formats
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Saves dataframe to csv file
 formats: |

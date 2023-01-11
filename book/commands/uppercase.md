@@ -2,7 +2,7 @@
 title: uppercase
 categories: |
   dataframe
-version: 0.73.1
+version: 0.74.0
 dataframe: |
   Uppercase the strings in the column
 usage: |

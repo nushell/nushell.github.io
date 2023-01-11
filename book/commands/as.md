@@ -2,7 +2,7 @@
 title: as
 categories: |
   expression
-version: 0.73.1
+version: 0.74.0
 expression: |
   Creates an alias expression
 usage: |

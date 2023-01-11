@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.73.1
+version: 0.74.0
 viewers: |
   Render the table.
 usage: |
@@ -25,14 +25,12 @@ usage: |
  -  `--expand`: expand the table structure in a light mode
  -  `--expand-deep {int}`: an expand limit of recursion which will take place
  -  `--flatten`: Flatten simple arrays
- -  `--flatten-separator {string}`: sets a seperator when 'flatten' used
+ -  `--flatten-separator {string}`: sets a separator when 'flatten' used
  -  `--collapse`: expand the table structure in colapse mode.
-Be aware collapse mode currently doesn't support width controll
+Be aware collapse mode currently doesn't support width control
 
 ## Notes
-```text
 If the table contains a column called 'index', this column is used as the table index instead of the usual continuous index
-```
 ## Examples
 
 List the files in current directory, with indexes starting from 1.

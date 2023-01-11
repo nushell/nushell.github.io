@@ -2,7 +2,7 @@
 title: path type
 categories: |
   default
-version: 0.73.1
+version: 0.74.0
 default: |
   Get the type of the object a path refers to (e.g., file, dir, symlink)
 usage: |
@@ -22,10 +22,8 @@ usage: |
  -  `--columns {table}`: For a record or table input, check strings at the given columns, and replace with result
 
 ## Notes
-```text
 This checks the file system to confirm the path's object type.
 If nothing is found, an empty string will be returned.
-```
 ## Examples
 
 Show type of a filepath

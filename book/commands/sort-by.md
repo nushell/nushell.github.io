@@ -3,7 +3,7 @@ title: sort-by
 categories: |
   filters
   lazyframe
-version: 0.73.1
+version: 0.74.0
 filters: |
   Sort by the given columns, in increasing order.
 lazyframe: |

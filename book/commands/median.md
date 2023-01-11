@@ -3,7 +3,7 @@ title: median
 categories: |
   expression
   lazyframe
-version: 0.73.1
+version: 0.74.0
 expression: |
   Creates a median expression for an aggregation
 lazyframe: |

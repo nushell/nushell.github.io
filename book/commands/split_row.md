@@ -2,7 +2,7 @@
 title: split row
 categories: |
   strings
-version: 0.73.1
+version: 0.74.0
 strings: |
   Split a string into multiple rows using a separator
 usage: |

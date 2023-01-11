@@ -2,7 +2,7 @@
 title: zip
 categories: |
   filters
-version: 0.73.1
+version: 0.74.0
 filters: |
   Combine a stream with the input
 usage: |
@@ -28,7 +28,12 @@ Zip two lists
 > [1 2] | zip [3 4]
 ```
 
-Zip two streams
+Zip two ranges
 ```shell
 > 1..3 | zip 4..6
+```
+
+Rename .ogg files to match an existing list of filenames
+```shell
+> glob *.ogg | zip ['bang.ogg', 'fanfare.ogg', 'laser.ogg'] | each { mv $in.0 $in.1 }
 ```

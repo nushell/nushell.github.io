@@ -2,7 +2,7 @@
 title: hash
 categories: |
   hash
-version: 0.73.1
+version: 0.74.0
 hash: |
   Apply hash function.
 usage: |
@@ -18,6 +18,4 @@ usage: |
 ```> hash ```
 
 ## Notes
-```text
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
-```
