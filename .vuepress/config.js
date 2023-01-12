@@ -81,6 +81,8 @@ export default defineUserConfig({
         str.replace(/^@snippets/, path.resolve(__dirname, '../snippets')),
     },
   },
+  // without this, we attempt to prefetch the whole site 😬
+  shouldPrefetch: false,
   theme: defaultTheme({
     repo: 'nushell/nushell',
     repoLabel: 'GitHub',
