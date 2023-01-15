@@ -312,7 +312,7 @@ That's right, we're in the file. Can we `cd`? Oh yes, we can:
 
 # Plugins
 
-Nu can't come with everything you might want to do with it, so we're releasing Nu with the ability to extend it with plugins. There's more information in the [plugins chapters](https://book.nushell.sh/en/plugins). Nu will look for these plugins in your path, and load them up on startup.
+Nu can't come with everything you might want to do with it, so we're releasing Nu with the ability to extend it with plugins. There's more information in the [plugins chapters](https://www.nushell.sh/book/plugins.html). Nu will look for these plugins in your path, and load them up on startup.
 
 # All because of Rust
 
