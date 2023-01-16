@@ -40,7 +40,7 @@ To find out the comprehensive list of commands you can type `:help`.
 ## Config
 
 You can configure many things (including styles and colors), via config.
-You can find an example configuration in `default-config.nu`.
+You can find an example configuration in [`default-config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_config.nu).
 
 ## Examples
 
