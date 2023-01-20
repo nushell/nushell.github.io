@@ -2,7 +2,7 @@
 title: char
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Output special characters (e.g., 'newline').
 usage: |
@@ -32,9 +32,9 @@ Output newline
 > char newline
 ```
 
-Output prompt character, newline and a hamburger character
+Output prompt character, newline and a hamburger menu character
 ```shell
-> echo [(char prompt) (char newline) (char hamburger)] | str join
+> (char prompt) + (char newline) + (char hamburger)
 ```
 
 Output Unicode character

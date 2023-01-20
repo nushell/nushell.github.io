@@ -20,7 +20,8 @@ You can click on the chapter headers to get more information about it.
 - [Programming in Nu](programming_in_nu.md) dives more deeply into the language features and shows several ways how to organize and structure your code.
 - [Nu as a Shell](nu_as_a_shell.md) focuses on the shell features, most notably the configuration and environment.
 - [Coming to Nu](coming_to_nu.md) is intended to give a quick start for users coming from other shells or languages.
-- [Advanced](advanced.md) includes some more advanced topics (they are not _so_ advanced, make sure to check them out, too!).
+- [Design Notes](design_notes.md) has in-depth explanation of some of the Nushell's design choices.
+- [(Not So) Advanced](advanced.md) includes some more advanced topics (they are not _so_ advanced, make sure to check them out, too!).
 
 ## The Many Parts of Nushell
 

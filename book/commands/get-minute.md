@@ -2,7 +2,7 @@
 title: get-minute
 categories: |
   dataframe
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Gets minute from date
 usage: |

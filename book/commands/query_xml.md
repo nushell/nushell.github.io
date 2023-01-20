@@ -1,6 +1,8 @@
 ---
 title: query xml
-version: 0.70.0
+categories: |
+  filters
+version: 0.74.0
 filters: |
   execute xpath query on xml
 usage: |
@@ -13,8 +15,4 @@ usage: |
 
 ## Signature
 
-```> query xml (query)```
-
-## Parameters
-
- -  `query`: xpath query
+```> query xml ```

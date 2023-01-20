@@ -3,7 +3,7 @@ title: sum
 categories: |
   expression
   lazyframe
-version: 0.70.0
+version: 0.74.0
 expression: |
   Creates a sum expression for an aggregation
 lazyframe: |
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Sum aggregation for a group by
+Sum aggregation for a group-by
 ```shell
 > [[a b]; [one 2] [one 4] [two 1]]
     | into df

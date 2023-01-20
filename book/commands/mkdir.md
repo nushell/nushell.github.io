@@ -2,7 +2,7 @@
 title: mkdir
 categories: |
   filesystem
-version: 0.70.0
+version: 0.74.0
 filesystem: |
   Make directories, creates intermediary directories as required.
 usage: |
@@ -15,12 +15,12 @@ usage: |
 
 ## Signature
 
-```> mkdir ...rest --show-created-paths```
+```> mkdir ...rest --verbose```
 
 ## Parameters
 
  -  `...rest`: the name(s) of the path(s) to create
- -  `--show-created-paths`: show the path(s) created.
+ -  `--verbose`: print created path(s).
 
 ## Examples
 
@@ -31,5 +31,5 @@ Make a directory named foo
 
 Make multiple directories and show the paths created
 ```shell
-> mkdir -s foo/bar foo2
+> mkdir -v foo/bar foo2
 ```

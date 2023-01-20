@@ -1,6 +1,8 @@
 ---
 title: exec
-version: 0.70.0
+categories: |
+  system
+version: 0.74.0
 system: |
   Execute a command, replacing the current process.
 usage: |
@@ -13,17 +15,14 @@ usage: |
 
 ## Signature
 
-```> exec (command) ...rest```
+```> exec (command)```
 
 ## Parameters
 
  -  `command`: the command to execute
- -  `...rest`: any additional arguments for the command
 
 ## Notes
-```text
 Currently supported only on Unix-based systems.
-```
 ## Examples
 
 Execute external 'ps aux' tool

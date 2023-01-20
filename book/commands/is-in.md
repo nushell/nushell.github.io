@@ -3,7 +3,7 @@ title: is-in
 categories: |
   dataframe
   expression
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Checks if elements from a series are contained in right series
 expression: |
@@ -19,11 +19,7 @@ usage: |
 
 ## Signature
 
-```> is-in (other)```
-
-## Parameters
-
- -  `other`: right series
+```> is-in ```
 
 ## Examples
 
@@ -39,11 +35,7 @@ Checks if elements from a series are contained in right series
 
 ## Signature
 
-```> is-in (list)```
-
-## Parameters
-
- -  `list`: List to check if values are in
+```> is-in ```
 
 ## Examples
 

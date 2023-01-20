@@ -2,7 +2,7 @@
 title: path
 categories: |
   default
-version: 0.70.0
+version: 0.74.0
 default: |
   Explore and manipulate paths.
 usage: |
@@ -18,7 +18,8 @@ usage: |
 ```> path ```
 
 ## Notes
-```text
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+
 There are three ways to represent a path:
 
 * As a path literal, e.g., '/home/viking/spam.txt'
@@ -31,4 +32,3 @@ There are three ways to represent a path:
 All subcommands accept all three variants as an input. Furthermore, the 'path
 join' subcommand can be used to join the structured path or path parts back into
 the path literal.
-```

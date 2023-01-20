@@ -2,7 +2,7 @@
 title: str capitalize
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Capitalize first letter of text
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally capitalize text by column paths
+ -  `...rest`: For a data structure input, convert strings at the given cell paths
 
 ## Examples
 

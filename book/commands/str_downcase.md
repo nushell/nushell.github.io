@@ -2,7 +2,7 @@
 title: str downcase
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Make text lowercase
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally downcase text by column paths
+ -  `...rest`: For a data structure input, convert strings at the given cell paths
 
 ## Examples
 

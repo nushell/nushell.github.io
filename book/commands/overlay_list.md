@@ -2,7 +2,7 @@
 title: overlay list
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
   List all active overlays
 usage: |
@@ -18,9 +18,7 @@ usage: |
 ```> overlay list ```
 
 ## Notes
-```text
 The overlays are listed in the order they were activated.
-```
 ## Examples
 
 Get the last activated overlay

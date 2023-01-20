@@ -2,11 +2,11 @@
 title: encode base64
 categories: |
   hash
-version: 0.70.0
+version: 0.74.0
 hash: |
-  Base64 encode a value
+  Encode a string or binary value using Base64
 usage: |
-  Base64 encode a value
+  Encode a string or binary value using Base64
 ---
 
 # <code>{{ $frontmatter.title }}</code> for hash
@@ -19,18 +19,23 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally base64 encode data by column paths
+ -  `...rest`: For a data structure input, encode data at the given cell paths
  -  `--character-set {string}`: specify the character rules for encoding the input.
 	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt'
 
 ## Examples
 
-Base64 encode a string with default settings
+Encode binary data
 ```shell
-> echo 'Some Data' | encode base64
+> 0x[09 F9 11 02 9D 74 E3 5B D8 41 56 C5 63 56 88 C0] | encode base64
 ```
 
-Base64 encode a string with the binhex character set
+Encode a string with default settings
 ```shell
-> echo 'Some Data' | encode base64 --character-set binhex
+> 'Some Data' | encode base64
+```
+
+Encode a string with the binhex character set
+```shell
+> 'Some Data' | encode base64 --character-set binhex
 ```

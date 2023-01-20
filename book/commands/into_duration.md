@@ -2,7 +2,7 @@
 title: into duration
 categories: |
   conversions
-version: 0.70.0
+version: 0.74.0
 conversions: |
   Convert value to duration
 usage: |
@@ -19,18 +19,16 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: column paths to convert to duration (for table input)
+ -  `...rest`: for a data structure input, convert data at the given cell paths
  -  `--convert {string}`: convert duration into another duration
 
 ## Notes
-```text
-into duration does not take leap years into account and every month is calculated with 30 days
-```
+This command does not take leap years into account, and every month is assumed to have 30 days.
 ## Examples
 
 Convert string to duration in table
 ```shell
-> echo [[value]; ['1sec'] ['2min'] ['3hr'] ['4day'] ['5wk']] | into duration value
+> [[value]; ['1sec'] ['2min'] ['3hr'] ['4day'] ['5wk']] | into duration value
 ```
 
 Convert string to duration
@@ -43,7 +41,12 @@ Convert string to the requested duration as a string
 > '7min' | into duration --convert sec
 ```
 
+Convert duration to duration
+```shell
+> 420sec | into duration
+```
+
 Convert duration to the requested duration as a string
 ```shell
-> 420sec | into duration --convert min
+> 420sec | into duration --convert ms
 ```

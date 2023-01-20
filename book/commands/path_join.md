@@ -2,7 +2,7 @@
 title: path join
 categories: |
   default
-version: 0.70.0
+version: 0.74.0
 default: |
   Join a structured path or a list of path parts.
 usage: |
@@ -15,28 +15,26 @@ usage: |
 
 ## Signature
 
-```> path join ...append --columns```
+```> path join ...rest --columns```
 
 ## Parameters
 
- -  `...append`: Path to append to the input
- -  `--columns {table}`: Optionally operate by column path
+ -  `...rest`: Path to append to the input
+ -  `--columns {table}`: For a record or table input, join strings at the given columns
 
 ## Notes
-```text
 Optionally, append an additional path to the result. It is designed to accept
 the output of 'path parse' and 'path split' subcommands.
-```
 ## Examples
 
 Append a filename to a path
 ```shell
-> 'C:\Users\viking' | path join spam.txt
+> '/home/viking' | path join spam.txt
 ```
 
 Append a filename to a path
 ```shell
-> 'C:\Users\viking' | path join spams this_spam.txt
+> '/home/viking' | path join spams this_spam.txt
 ```
 
 Append a filename to a path inside a column
@@ -46,10 +44,10 @@ Append a filename to a path inside a column
 
 Join a list of parts into a path
 ```shell
-> [ 'C:' '\' 'Users' 'viking' 'spam.txt' ] | path join
+> [ '/' 'home' 'viking' 'spam.txt' ] | path join
 ```
 
 Join a structured path into a path
 ```shell
-> [ [parent stem extension]; ['C:\Users\viking' 'spam' 'txt']] | path join
+> [[ parent stem extension ]; [ '/home/viking' 'spam' 'txt' ]] | path join
 ```

@@ -2,7 +2,7 @@
 title: concat-str
 categories: |
   expression
-version: 0.70.0
+version: 0.74.0
 expression: |
   Creates a concat string expression
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> concat-str (separator) (concat expressions)```
-
-## Parameters
-
- -  `separator`: Separator used during the concatenation
- -  `concat expressions`: Expression(s) that define the string concatenation
+```> concat-str ```
 
 ## Examples
 

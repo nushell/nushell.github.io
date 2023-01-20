@@ -2,7 +2,7 @@
 title: col
 categories: |
   expression
-version: 0.70.0
+version: 0.74.0
 expression: |
   Creates a named column expression
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> col (column name)```
-
-## Parameters
-
- -  `column name`: Name of column to be used
+```> col ```
 
 ## Examples
 

@@ -2,11 +2,11 @@
 title: bytes reverse
 categories: |
   bytes
-version: 0.70.0
+version: 0.74.0
 bytes: |
-  Reverse every bytes in the pipeline
+  Reverse the bytes in the pipeline
 usage: |
-  Reverse every bytes in the pipeline
+  Reverse the bytes in the pipeline
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally matches prefix of text by column paths
+ -  `...rest`: for a data structure input, reverse data at the given cell paths
 
 ## Examples
 

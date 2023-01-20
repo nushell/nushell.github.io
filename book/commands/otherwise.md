@@ -2,7 +2,7 @@
 title: otherwise
 categories: |
   expression
-version: 0.70.0
+version: 0.74.0
 expression: |
   completes a when expression
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> otherwise (otherwise expression)```
-
-## Parameters
-
- -  `otherwise expression`: expressioini to apply when no when predicate matches
+```> otherwise ```
 
 ## Examples
 

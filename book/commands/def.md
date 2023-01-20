@@ -2,7 +2,7 @@
 title: def
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
   Define a custom command
 usage: |
@@ -15,19 +15,17 @@ usage: |
 
 ## Signature
 
-```> def (def_name) (params) (block)```
+```> def (def_name) (params) (body)```
 
 ## Parameters
 
  -  `def_name`: definition name
  -  `params`: parameters
- -  `block`: body of the definition
+ -  `body`: body of the definition
 
 ## Notes
-```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Define a command and run it

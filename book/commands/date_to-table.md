@@ -2,7 +2,7 @@
 title: date to-table
 categories: |
   date
-version: 0.70.0
+version: 0.74.0
 date: |
   Convert the date into a structured table.
 usage: |
@@ -19,17 +19,17 @@ usage: |
 
 ## Examples
 
-Convert the date into a structured table.
+Convert the current date into a table.
 ```shell
 > date to-table
 ```
 
-Convert the date into a structured table.
+Convert the date into a table.
 ```shell
 > date now | date to-table
 ```
 
-Convert a given date into a structured table.
+Convert a given date into a table.
 ```shell
->  '2020-04-12 22:10:57 +0200' | date to-table
+> '2020-04-12 22:10:57 +0200' | date to-table
 ```

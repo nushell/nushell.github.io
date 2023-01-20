@@ -2,7 +2,7 @@
 title: wrap
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
   Wrap the value into a column.
 usage: |
@@ -25,5 +25,10 @@ usage: |
 
 Wrap a list into a table with a given column name
 ```shell
-> echo [1 2 3] | wrap num
+> [1 2 3] | wrap num
+```
+
+Wrap a range into a table with a given column name
+```shell
+> 1..3 | wrap num
 ```

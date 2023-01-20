@@ -1,53 +1,17 @@
 ---
 title: group-by
 categories: |
-  database
   default
   lazyframe
-version: 0.70.0
-database: |
-  Group by query
+version: 0.74.0
 default: |
-  Create a new table grouped.
+  Splits a list or table into groups, and returns a record containing those groups.
 lazyframe: |
-  Creates a groupby object that can be used for other aggregations
+  Creates a group-by object that can be used for other aggregations
 usage: |
-  Group by query
-  Create a new table grouped.
-  Creates a groupby object that can be used for other aggregations
+  Splits a list or table into groups, and returns a record containing those groups.
+  Creates a group-by object that can be used for other aggregations
 ---
-
-# <code>{{ $frontmatter.title }}</code> for database
-
-<div class='command-title'>{{ $frontmatter.database }}</div>
-
-## Signature
-
-```> group-by ...select```
-
-## Parameters
-
- -  `...select`: Select expression(s) on the table
-
-## Examples
-
-groups by column a and calculates the max
-```shell
-> open db.sqlite
-    | from table table_a
-    | select (fn max a)
-    | group-by a
-    | describe
-```
-
-groups by column column a and counts records
-```shell
-> open db.sqlite
-    | from table table_a
-    | select (fn count *)
-    | group-by a
-    | describe
-```
 
 # <code>{{ $frontmatter.title }}</code> for default
 
@@ -63,14 +27,14 @@ groups by column column a and counts records
 
 ## Examples
 
-group items by column named "type"
+Group items by the "type" column's values
 ```shell
 > ls | group-by type
 ```
 
-you can also group by raw values by leaving out the argument
+You can also group by raw values by leaving out the argument
 ```shell
-> echo ['1' '3' '1' '3' '2' '1' '1'] | group-by
+> ['1' '3' '1' '3' '2' '1' '1'] | group-by
 ```
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -79,11 +43,7 @@ you can also group by raw values by leaving out the argument
 
 ## Signature
 
-```> group-by ...Group by expressions```
-
-## Parameters
-
- -  `...Group by expressions`: Expression(s) that define the lazy group by
+```> group-by ```
 
 ## Examples
 

@@ -36,6 +36,9 @@ Here is an alias with more than one pipe:
 alias lt = (ls | sort-by modified -r | sort-by type)
 ```
 
+## List all loaded aliases
+Your useable aliases can be seen in `$nu.scope.aliases`.
+
 ## Persisting
 
 To make your alias persistent it must be added to your _config.nu_ file.

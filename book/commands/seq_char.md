@@ -2,11 +2,11 @@
 title: seq char
 categories: |
   generators
-version: 0.70.0
+version: 0.74.0
 generators: |
-  Print sequence of chars
+  Print a sequence of ASCII characters
 usage: |
-  Print sequence of chars
+  Print a sequence of ASCII characters
 ---
 
 # <code>{{ $frontmatter.title }}</code> for generators
@@ -15,22 +15,21 @@ usage: |
 
 ## Signature
 
-```> seq char ...rest --separator --terminator```
+```> seq char (start) (end)```
 
 ## Parameters
 
- -  `...rest`: sequence chars
- -  `--separator {string}`: separator character (defaults to \n)
- -  `--terminator {string}`: terminator character (defaults to \n)
+ -  `start`: start of character sequence (inclusive)
+ -  `end`: end of character sequence (inclusive)
 
 ## Examples
 
-sequence a to e with newline separator
+sequence a to e
 ```shell
 > seq char a e
 ```
 
-sequence a to e with pipe separator separator
+sequence a to e, and put the characters in a pipe-separated string
 ```shell
-> seq char -s '|' a e
+> seq char a e | str join '|'
 ```

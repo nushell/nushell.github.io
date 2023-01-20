@@ -71,3 +71,44 @@ def my_commits [] {
     ]
 }
 ```
+
+## External completions
+
+External completers can also be integrated, instead of relying solely on Nushell ones.
+For this set the `external_completer` field in `config.nu` to a block which will be evaluated if no Nushell completions were found.
+You can configure the block to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
+
+This example should enable carapace external completions:
+
+```nu
+# config.nu
+let carapace_completer = {|spans|
+    carapace $spans.0 nushell $spans | from json
+}
+
+# The default config record. This is where much of your global configuration is setup.
+let-env config = {
+    # ... your config
+    completions: {
+        external: {
+            enable: true
+            max_results: 100
+            completer: $carapace_completer
+        }
+    }
+}
+```
+
+Multiple completers can be defined as such:
+
+```nu
+let external_completer = {|spans| 
+  {
+    $spans.0: { default_completer $spans | from json } # default
+    ls: { ls_completer $spans | from json }
+    git: { git_completer $spans | from json }
+  } | get $spans.0 | each {|it| do $it}
+}
+```
+
+> When the block returns unparsable json (e.g. an empty string) it defaults to file completion.

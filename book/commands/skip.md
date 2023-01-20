@@ -2,11 +2,11 @@
 title: skip
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
-  Skip the first n elements of the input.
+  Skip the first several rows of the input. Counterpart of 'drop'. Opposite of 'first'.
 usage: |
-  Skip the first n elements of the input.
+  Skip the first several rows of the input. Counterpart of 'drop'. Opposite of 'first'.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -21,14 +21,16 @@ usage: |
 
  -  `n`: the number of elements to skip
 
+## Notes
+To skip specific numbered rows, try 'drop nth'. To skip specific named columns, try 'reject'.
 ## Examples
 
-Skip two elements
+Skip the first value of a list
 ```shell
-> echo [[editions]; [2015] [2018] [2021]] | skip 2
+> [2 4 6 8] | skip 1
 ```
 
-Skip the first value
+Skip two rows of a table
 ```shell
-> echo [2 4 6 8] | skip
+> [[editions]; [2015] [2018] [2021]] | skip 2
 ```

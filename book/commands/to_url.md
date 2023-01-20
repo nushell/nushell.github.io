@@ -2,11 +2,11 @@
 title: to url
 categories: |
   formats
-version: 0.70.0
+version: 0.74.0
 formats: |
-  Convert table into url-encoded text
+  Convert record or table into URL-encoded text
 usage: |
-  Convert table into url-encoded text
+  Convert record or table into URL-encoded text
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -19,7 +19,12 @@ usage: |
 
 ## Examples
 
-Outputs an URL string representing the contents of this table
+Outputs a URL string representing the contents of this record
+```shell
+> { mode:normal userid:31415 } | to url
+```
+
+Outputs a URL string representing the contents of this 1-row table
 ```shell
 > [[foo bar]; ["1" "2"]] | to url
 ```

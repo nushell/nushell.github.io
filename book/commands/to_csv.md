@@ -3,7 +3,7 @@ title: to csv
 categories: |
   dataframe
   formats
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Saves dataframe to csv file
 formats: |
@@ -19,13 +19,7 @@ usage: |
 
 ## Signature
 
-```> to csv (file) --delimiter --no-header```
-
-## Parameters
-
- -  `file`: file path to save dataframe
- -  `--delimiter {string}`: file delimiter character
- -  `--no-header`: Indicates if file doesn't have header
+```> to csv ```
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.70.0
+version: 0.74.0
 conversions: |
   Convert text into a datetime
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally convert text into datetime by column paths
+ -  `...rest`: for a data structure input, convert data at the given cell paths
  -  `--timezone {string}`: Specify timezone if the input is a Unix timestamp. Valid options: 'UTC' ('u') or 'LOCAL' ('l')
  -  `--offset {int}`: Specify timezone by offset from UTC if the input is a Unix timestamp, like '+8', '-4'
  -  `--format {string}`: Specify an expected format for parsing strings to datetimes. Use --list to see all possible options
@@ -52,7 +52,7 @@ Convert timestamp (no larger than 8e+12) to datetime using a specified timezone 
 > 1614434140 | into datetime -o +9
 ```
 
-Convert timestamps like the sqlite history t
+Convert a millisecond-precise timestamp
 ```shell
 > 1656165681720 | into datetime
 ```

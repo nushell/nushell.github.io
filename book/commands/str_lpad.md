@@ -2,7 +2,7 @@
 title: str lpad
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Left-pad a string to a specific length
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally check if string contains pattern by column paths
+ -  `...rest`: For a data structure input, pad strings at the given cell paths
  -  `--length {int}`: length to pad to
  -  `--character {string}`: character to pad with
 

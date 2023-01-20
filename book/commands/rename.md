@@ -3,7 +3,7 @@ title: rename
 categories: |
   dataframe or lazyframe
   filters
-version: 0.70.0
+version: 0.74.0
 dataframe_or_lazyframe: |
   Rename a dataframe column
 filters: |
@@ -19,12 +19,7 @@ usage: |
 
 ## Signature
 
-```> rename (columns) (new names)```
-
-## Parameters
-
- -  `columns`: Column(s) to be renamed. A string or list of strings
- -  `new names`: New names for the selected column(s). A string or list of strings
+```> rename ```
 
 ## Examples
 
@@ -71,4 +66,9 @@ Rename many columns
 Rename a specific column
 ```shell
 > [[a, b, c]; [1, 2, 3]] | rename -c [a ham]
+```
+
+Rename the fields of a record
+```shell
+> {a: 1 b: 2} | rename x y
 ```

@@ -1,40 +1,13 @@
 ---
 title: where
 categories: |
-  database
   filters
-version: 0.70.0
-database: |
-  Includes a where statement for a query
+version: 0.74.0
 filters: |
-  Filter values based on a condition.
+  Filter values based on a row condition.
 usage: |
-  Includes a where statement for a query
-  Filter values based on a condition.
+  Filter values based on a row condition.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for database
-
-<div class='command-title'>{{ $frontmatter.database }}</div>
-
-## Signature
-
-```> where (where)```
-
-## Parameters
-
- -  `where`: Where expression on the table
-
-## Examples
-
-selects a column from a database with a where clause
-```shell
-> open db.sqlite
-    | from table table_1
-    | select a
-    | where ((field a) > 1)
-    | describe
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 
@@ -42,14 +15,28 @@ selects a column from a database with a where clause
 
 ## Signature
 
-```> where (cond) --block```
+```> where (row_condition) --closure```
 
 ## Parameters
 
- -  `cond`: condition
- -  `--block {block}`: use where with a block or variable instead
+ -  `row_condition`: Filter condition
+ -  `--closure {closure(any, int)}`: use with a closure instead (deprecated: use 'filter' command instead)
 
+## Notes
+This command works similar to 'filter' but allows extra shorthands for working with
+tables, known as "row conditions". On the other hand, reading the condition from a variable is
+not supported.
 ## Examples
+
+Filter rows of a table according to a condition
+```shell
+> [{a: 1} {a: 2}] | where a > 1
+```
+
+Filter items of a list according to a condition
+```shell
+> [1 2] | where {|x| $x > 1}
+```
 
 List all files in the current directory with sizes greater than 2kb
 ```shell
@@ -69,9 +56,4 @@ List all files with names that contain "Car"
 List all files that were modified in the last two weeks
 ```shell
 > ls | where modified >= (date now) - 2wk
-```
-
-Get all numbers above 3 with an existing block condition
-```shell
-> let a = {$in > 3}; [1, 2, 5, 6] | where -b $a
 ```

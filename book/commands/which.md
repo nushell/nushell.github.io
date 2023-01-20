@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.70.0
+version: 0.74.0
 system: |
   Finds a program file, alias or custom command.
 usage: |

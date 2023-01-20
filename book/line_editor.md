@@ -599,7 +599,7 @@ modifying these values from the config object:
   let $config = {
     ...
 
-    menus = [
+    menus: [
       ...
       {
         name: completion_menu

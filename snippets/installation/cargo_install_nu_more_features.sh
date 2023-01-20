@@ -1,1 +1,1 @@
-> cargo install nu --features=extra
+> cargo install nu --features=dataframe

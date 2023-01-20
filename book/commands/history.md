@@ -2,7 +2,7 @@
 title: history
 categories: |
   misc
-version: 0.70.0
+version: 0.74.0
 misc: |
   Get the command history
 usage: |
@@ -15,11 +15,12 @@ usage: |
 
 ## Signature
 
-```> history --clear```
+```> history --clear --long```
 
 ## Parameters
 
  -  `--clear`: Clears out the history entries
+ -  `--long`: Show long listing of entries for sqlite history
 
 ## Examples
 

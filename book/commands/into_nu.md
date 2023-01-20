@@ -2,18 +2,14 @@
 title: into nu
 categories: |
   dataframe
-  db-expression
   expression
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Converts a section of the dataframe into nushell Table
-db_expression: |
-  Convert a db expression into a nu value for access and exploration
 expression: |
   Convert expression into a nu value for access and exploration
 usage: |
   Converts a section of the dataframe into nushell Table
-  Convert a db expression into a nu value for access and exploration
   Convert expression into a nu value for access and exploration
 ---
 
@@ -23,12 +19,7 @@ usage: |
 
 ## Signature
 
-```> into nu --rows --tail```
-
-## Parameters
-
- -  `--rows {number}`: number of rows to be shown
- -  `--tail`: shows tail rows
+```> into nu ```
 
 ## Examples
 
@@ -40,21 +31,6 @@ Shows head rows from dataframe
 Shows tail rows from dataframe
 ```shell
 > [[a b]; [1 2] [5 6] [3 4]] | into df | into nu -t -n 1
-```
-
-# <code>{{ $frontmatter.title }}</code> for db-expression
-
-<div class='command-title'>{{ $frontmatter.db_expression }}</div>
-
-## Signature
-
-```> into nu ```
-
-## Examples
-
-Convert a col expression into a nushell value
-```shell
-> field name_1 | into nu
 ```
 
 # <code>{{ $frontmatter.title }}</code> for expression

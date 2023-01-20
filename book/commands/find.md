@@ -2,11 +2,11 @@
 title: find
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
-  Searches terms in the input or for elements of the input that satisfies the predicate.
+  Searches terms in the input.
 usage: |
-  Searches terms in the input or for elements of the input that satisfies the predicate.
+  Searches terms in the input.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -15,16 +15,15 @@ usage: |
 
 ## Signature
 
-```> find ...rest --predicate --regex --insensitive --multiline --dotall --invert```
+```> find ...rest --regex --ignore-case --multiline --dotall --invert```
 
 ## Parameters
 
  -  `...rest`: terms to search
- -  `--predicate {block}`: the predicate to satisfy
  -  `--regex {string}`: regex to match with
- -  `--insensitive`: case-insensitive search for regex (?i)
- -  `--multiline`: multi-line mode: ^ and $ match begin/end of line for regex (?m)
- -  `--dotall`: dotall mode: allow a dot . to match newline character \n for regex (?s)
+ -  `--ignore-case`: case-insensitive regex mode; equivalent to (?i)
+ -  `--multiline`: multi-line regex mode: ^ and $ match begin/end of line; equivalent to (?m)
+ -  `--dotall`: dotall regex mode: allow a dot . to match newlines \n; equivalent to (?s)
  -  `--invert`: invert the match
 
 ## Examples
@@ -36,7 +35,7 @@ Search for multiple terms in a command output
 
 Search for a term in a string
 ```shell
-> echo Cargo.toml | find toml
+> 'Cargo.toml' | find toml
 ```
 
 Search a number or a file size in a list of numbers
@@ -47,16 +46,6 @@ Search a number or a file size in a list of numbers
 Search a char in a list of string
 ```shell
 > [moe larry curly] | find l
-```
-
-Find odd values
-```shell
-> [2 4 3 6 5 8] | find --predicate { |it| ($it mod 2) == 1 }
-```
-
-Find if a service is not running
-```shell
-> [[version patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | find -p { |it| $it.patch }
 ```
 
 Find using regex

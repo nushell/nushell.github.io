@@ -2,19 +2,11 @@
 title: describe
 categories: |
   core
-  database
-  dataframe
-version: 0.70.0
+version: 0.74.0
 core: |
   Describe the type and structure of the value(s) piped in.
-database: |
-  Describes connection and query of the DB object
-dataframe: |
-  Describes dataframes numeric columns
 usage: |
   Describe the type and structure of the value(s) piped in.
-  Describes connection and query of the DB object
-  Describes dataframes numeric columns
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -23,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> describe ```
+```> describe --no-collect```
+
+## Parameters
+
+ -  `--no-collect`: do not collect streams of structured data
 
 ## Examples
 
@@ -32,36 +28,12 @@ Describe the type of a string
 > 'hello' | describe
 ```
 
-# <code>{{ $frontmatter.title }}</code> for database
-
-<div class='command-title'>{{ $frontmatter.database }}</div>
-
-## Signature
-
-```> describe ```
-
-## Examples
-
-Describe SQLite database constructed query
+Describe a stream of data, collecting it first
 ```shell
-> open foo.db | from table table_1 | select col_1 | describe
+> [1 2 3] | each {|i| $i} | describe
 ```
 
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> describe --quantiles```
-
-## Parameters
-
- -  `--quantiles {table}`: optional quantiles for describe
-
-## Examples
-
-dataframe description
+Describe the input but do not collect streams
 ```shell
-> [[a b]; [1 1] [1 1]] | into df | describe
+> [1 2 3] | each {|i| $i} | describe --no-collect
 ```

@@ -2,7 +2,7 @@
 title: math min
 categories: |
   math
-version: 0.70.0
+version: 0.74.0
 math: |
   Finds the minimum within a list of numbers or tables
 usage: |
@@ -19,7 +19,12 @@ usage: |
 
 ## Examples
 
-Get the minimum of a list of numbers
+Compute the minimum of a list of numbers
 ```shell
 > [-50 100 25] | math min
+```
+
+Compute the minima of the columns of a table
+```shell
+> [{a: 1 b: 3} {a: 2 b: -1}] | math min
 ```

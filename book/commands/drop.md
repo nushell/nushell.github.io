@@ -3,14 +3,14 @@ title: drop
 categories: |
   dataframe
   filters
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Creates a new dataframe by dropping the selected columns
 filters: |
-  Remove the last number of rows or columns.
+  Remove items/rows from the end of the input list/table. Counterpart of 'skip'. Opposite of 'last'.
 usage: |
   Creates a new dataframe by dropping the selected columns
-  Remove the last number of rows or columns.
+  Remove items/rows from the end of the input list/table. Counterpart of 'skip'. Opposite of 'last'.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -19,11 +19,7 @@ usage: |
 
 ## Signature
 
-```> drop ...rest```
-
-## Parameters
-
- -  `...rest`: column names to be dropped
+```> drop ```
 
 ## Examples
 
@@ -42,21 +38,26 @@ drop column a
 
 ## Parameters
 
- -  `rows`: starting from the back, the number of rows to remove
+ -  `rows`: The number of items to remove
 
 ## Examples
 
-Remove the last item of a list/table
+Remove the last item of a list
 ```shell
 > [0,1,2,3] | drop
 ```
 
-Remove zero item of a list/table
+Remove zero item of a list
 ```shell
 > [0,1,2,3] | drop 0
 ```
 
-Remove the last two items of a list/table
+Remove the last two items of a list
 ```shell
 > [0,1,2,3] | drop 2
+```
+
+Remove the last row in a table
+```shell
+> [[a, b]; [1, 2] [3, 4]] | drop 1
 ```

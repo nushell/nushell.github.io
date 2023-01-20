@@ -2,7 +2,7 @@
 title: split-by
 categories: |
   default
-version: 0.70.0
+version: 0.74.0
 default: |
   Create a new table splitted.
 usage: |

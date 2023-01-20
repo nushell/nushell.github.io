@@ -2,11 +2,11 @@
 title: from toml
 categories: |
   formats
-version: 0.70.0
+version: 0.74.0
 formats: |
-  Parse text as .toml and create table.
+  Parse text as .toml and create record.
 usage: |
-  Parse text as .toml and create table.
+  Parse text as .toml and create record.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -19,12 +19,12 @@ usage: |
 
 ## Examples
 
-Converts toml formatted string to table
+Converts toml formatted string to record
 ```shell
 > 'a = 1' | from toml
 ```
 
-Converts toml formatted string to table
+Converts toml formatted string to record
 ```shell
 > 'a = 1
 b = [1, 2]' | from toml

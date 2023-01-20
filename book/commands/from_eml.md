@@ -2,11 +2,11 @@
 title: from eml
 categories: |
   formats
-version: 0.70.0
+version: 0.74.0
 formats: |
-  Parse text as .eml and create table.
+  Parse text as .eml and create record.
 usage: |
-  Parse text as .eml and create table.
+  Parse text as .eml and create record.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Convert eml structured data into table
+Convert eml structured data into record
 ```shell
 > 'From: test@email.com
 Subject: Welcome
@@ -32,7 +32,7 @@ To: someone@somewhere.com
 Test' | from eml
 ```
 
-Convert eml structured data into table
+Convert eml structured data into record
 ```shell
 > 'From: test@email.com
 Subject: Welcome

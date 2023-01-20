@@ -2,7 +2,7 @@
 title: headers
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
   Use the first row of the table as column names.
 usage: |
@@ -19,12 +19,12 @@ usage: |
 
 ## Examples
 
-Returns headers from table
+Sets the column names for a table created by `split column`
 ```shell
 > "a b c|1 2 3" | split row "|" | split column " " | headers
 ```
 
-Don't panic on rows with different headers
+Columns which don't have data in their first row are removed
 ```shell
 > "a b c|1 2 3|1 2 3 4" | split row "|" | split column " " | headers
 ```

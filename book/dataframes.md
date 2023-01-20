@@ -1,13 +1,7 @@
 # Dataframes
 
-::: tip
-The dataframe commands are available from version 0.33.1 onwards
-:::
-
 ::: warning
-To use the dataframe support you need a fully-featured build with `cargo build --features extra`.
-Most binary releases like the one provided via [GitHub](https://github.com/nushell/nushell/releases) should already include this.
-[See the installation instructions](/book/installation.md) for further details.
+To use the dataframe support you need a fully-featured build with `cargo build --features dataframe`. Starting with version 0.72, dataframes are *not* included with binary releases of Nushell. [See the installation instructions](/book/installation.md) for further details.
 :::
 
 As we have seen so far, Nushell makes working with data its main priority.
@@ -1205,8 +1199,8 @@ help you process data faster and natively.
 However, the future of these dataframes is still very experimental. New
 commands and tools that take advantage of these commands will be added as they
 mature. For example, the next step for dataframes is the introduction of Lazy
-Dataframes. These will allow you to define complex data operations that will be
-executed until you decide to "finish" the pipe. This will give Nushell the
+Dataframes. These will allow you to define complex data operations that will not
+be executed until you decide to "finish" the pipe. This will give Nushell the
 chance to select the optimal plan to query the data you would be asking for.
 
 Keep visiting this book in order to check the new things happening to

@@ -3,7 +3,7 @@ title: var
 categories: |
   expression
   lazyframe
-version: 0.70.0
+version: 0.74.0
 expression: |
   Create a var expression for an aggregation
 lazyframe: |
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Var aggregation for a group by
+Var aggregation for a group-by
 ```shell
 > [[a b]; [one 2] [one 2] [two 1] [two 1]]
     | into df

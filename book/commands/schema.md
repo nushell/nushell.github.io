@@ -2,11 +2,11 @@
 title: schema
 categories: |
   database
-version: 0.70.0
+version: 0.74.0
 database: |
-  Show sqlite database information, including its schema.
+  Show the schema of a SQLite database.
 usage: |
-  Show sqlite database information, including its schema.
+  Show the schema of a SQLite database.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for database

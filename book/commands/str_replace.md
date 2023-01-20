@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Find and replace text
 usage: |
@@ -20,11 +20,11 @@ usage: |
 ## Parameters
 
  -  `find`: the pattern to find
- -  `replace`: the replacement pattern
- -  `...rest`: optionally find and replace text by column paths
- -  `--all`: replace all occurrences of find string
- -  `--no-expand`: do not expand the replace parameter as a regular expression
- -  `--string`: do not use regular expressions for string find and replace
+ -  `replace`: the replacement string
+ -  `...rest`: For a data structure input, operate on strings at the given cell paths
+ -  `--all`: replace all occurrences of the pattern
+ -  `--no-expand`: do not expand capture groups (like $name) in the replacement string
+ -  `--string`: match the pattern as a substring of the input, instead of a regular expression
 
 ## Examples
 
@@ -48,19 +48,19 @@ Find and replace contents without using the replace parameter as a regular expre
 > 'dogs_$1_cats' | str replace '\$1' '$2' -n
 ```
 
-Find and replace the first occurence using string replacement *not* regular expressions
+Find and replace the first occurrence using string replacement *not* regular expressions
 ```shell
 > 'c:\some\cool\path' | str replace 'c:\some\cool' '~' -s
 ```
 
-Find and replace all occurences using string replacement *not* regular expressions
+Find and replace all occurrences using string replacement *not* regular expressions
 ```shell
 > 'abc abc abc' | str replace -a 'b' 'z' -s
 ```
 
 Find and replace with fancy-regex
 ```shell
-> 'a sucessful b' | str replace '\b([sS])uc(?:cs|s?)e(ed(?:ed|ing|s?)|ss(?:es|ful(?:ly)?|i(?:ons?|ve(?:ly)?)|ors?)?)\b' '${1}ucce$2'
+> 'a successful b' | str replace '\b([sS])uc(?:cs|s?)e(ed(?:ed|ing|s?)|ss(?:es|ful(?:ly)?|i(?:ons?|ve(?:ly)?)|ors?)?)\b' '${1}ucce$2'
 ```
 
 Find and replace with fancy-regex

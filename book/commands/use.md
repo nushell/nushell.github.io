@@ -2,7 +2,7 @@
 title: use
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
   Use definitions from a module
 usage: |
@@ -15,17 +15,16 @@ usage: |
 
 ## Signature
 
-```> use (pattern)```
+```> use (module) (members)```
 
 ## Parameters
 
- -  `pattern`: import pattern
+ -  `module`: Module or module file
+ -  `members`: Which members of the module to import
 
 ## Notes
-```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Define a custom command in a module and call it

@@ -2,7 +2,7 @@
 title: hide-env
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
   Hide environment variables in the current scope
 usage: |
@@ -15,11 +15,11 @@ usage: |
 
 ## Signature
 
-```> hide-env ...name --ignore-errors```
+```> hide-env ...rest --ignore-errors```
 
 ## Parameters
 
- -  `...name`: environment variable names to hide
+ -  `...rest`: environment variable names to hide
  -  `--ignore-errors`: do not throw an error if an environment variable was not found
 
 ## Examples

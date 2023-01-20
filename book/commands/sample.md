@@ -2,7 +2,7 @@
 title: sample
 categories: |
   dataframe
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Create sample dataframe
 usage: |
@@ -15,15 +15,7 @@ usage: |
 
 ## Signature
 
-```> sample --n-rows --fraction --seed --replace --shuffle```
-
-## Parameters
-
- -  `--n-rows {int}`: number of rows to be taken from dataframe
- -  `--fraction {number}`: fraction of dataframe to be taken
- -  `--seed {number}`: seed for the selection
- -  `--replace`: sample with replace
- -  `--shuffle`: shuffle sample
+```> sample ```
 
 ## Examples
 

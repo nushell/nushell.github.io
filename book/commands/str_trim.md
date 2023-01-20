@@ -2,7 +2,7 @@
 title: str trim
 categories: |
   default
-version: 0.70.0
+version: 0.74.0
 default: |
   Trim whitespace or specific character
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally trim text by column paths
+ -  `...rest`: For a data structure input, trim strings at the given cell paths
  -  `--char {string}`: character to trim (default: whitespace)
  -  `--left`: trims characters only from the beginning of the string (default: whitespace)
  -  `--right`: trims characters only from the end of the string (default: whitespace)

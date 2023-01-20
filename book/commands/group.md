@@ -2,7 +2,7 @@
 title: group
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
   Groups input into groups of `group_size`.
 usage: |
@@ -25,5 +25,5 @@ usage: |
 
 Group the a list by pairs
 ```shell
-> echo [1 2 3 4] | group 2
+> [1 2 3 4] | group 2
 ```

@@ -2,7 +2,7 @@
 title: from csv
 categories: |
   formats
-version: 0.70.0
+version: 0.74.0
 formats: |
   Parse text as .csv and create table.
 usage: |
@@ -28,7 +28,8 @@ usage: |
 
 Convert comma-separated data to a table
 ```shell
-> open data.txt | from csv
+> "ColA,ColB
+1,2" | from csv
 ```
 
 Convert comma-separated data to a table, ignoring headers

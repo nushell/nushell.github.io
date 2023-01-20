@@ -2,11 +2,11 @@
 title: roll left
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
-  Roll table columns left
+  Roll record or table columns left
 usage: |
-  Roll table columns left
+  Roll record or table columns left
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -24,12 +24,17 @@ usage: |
 
 ## Examples
 
-Rolls columns to the left
+Rolls columns of a record to the left
+```shell
+> {a:1 b:2 c:3} | roll left
+```
+
+Rolls columns of a table to the left
 ```shell
 > [[a b c]; [1 2 3] [4 5 6]] | roll left
 ```
 
-Rolls columns to the left with fixed headers
+Rolls columns to the left without changing column names
 ```shell
 > [[a b c]; [1 2 3] [4 5 6]] | roll left --cells-only
 ```

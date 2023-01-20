@@ -2,7 +2,7 @@
 title: any
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
   Tests if any element of the input fulfills a predicate expression.
 usage: |
@@ -19,16 +19,21 @@ usage: |
 
 ## Parameters
 
- -  `predicate`: the predicate expression that should return a boolean
+ -  `predicate`: a closure that must evaluate to a boolean
 
 ## Examples
 
-Find if a service is not running
+Check if any row's status is the string 'DOWN'
 ```shell
-> echo [[status]; [UP] [DOWN] [UP]] | any status == DOWN
+> [[status]; [UP] [DOWN] [UP]] | any {|el| $el.status == DOWN }
 ```
 
-Check if any of the values is odd
+Check if any value is equal to twice its own index
 ```shell
-> echo [2 4 1 6 8] | any ($it mod 2) == 1
+> [9 8 7 6] | any {|el ind| $el == $ind * 2 }
+```
+
+Check if any of the values are odd, using a stored closure
+```shell
+> let cond = {|e| $e mod 2 == 1 }; [2 4 1 6 8] | any $cond
 ```

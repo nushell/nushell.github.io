@@ -2,7 +2,7 @@
 title: env
 categories: |
   env
-version: 0.70.0
+version: 0.74.0
 env: |
   Display current environment variables
 usage: |
@@ -26,7 +26,7 @@ Display current path environment variable
 
 Check whether the env variable `MY_ENV_ABC` exists
 ```shell
-> env | any name == MY_ENV_ABC
+> env | any { |e| $e.name == MY_ENV_ABC }
 ```
 
 Another way to check whether the env variable `PATH` exists

@@ -2,7 +2,7 @@
 title: path basename
 categories: |
   default
-version: 0.70.0
+version: 0.74.0
 default: |
   Get the final component of a path
 usage: |
@@ -19,27 +19,22 @@ usage: |
 
 ## Parameters
 
- -  `--columns {table}`: Optionally operate by column path
+ -  `--columns {table}`: For a record or table input, convert strings in the given columns to their basename
  -  `--replace {string}`: Return original path with basename replaced by this string
 
 ## Examples
 
 Get basename of a path
 ```shell
-> 'C:\Users\joe\test.txt' | path basename
+> '/home/joe/test.txt' | path basename
 ```
 
-Get basename of a path in a column
+Get basename of a path by column
 ```shell
-> ls .. | path basename -c [ name ]
-```
-
-Get basename of a path in a column
-```shell
-> [[name];[C:\Users\Joe]] | path basename -c [ name ]
+> [[name];[/home/joe]] | path basename -c [ name ]
 ```
 
 Replace basename of a path
 ```shell
-> 'C:\Users\joe\test.txt' | path basename -r 'spam.png'
+> '/home/joe/test.txt' | path basename -r 'spam.png'
 ```

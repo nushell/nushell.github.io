@@ -56,10 +56,6 @@ You will need to install the "pkg-config" and "libssl-dev" package:
 
 @[code](@snippets/installation/install_pkg_config_libssl_dev.sh)
 
-Linux users who wish to use the `rawkey` or `clipboard` optional features will need to install the "libx11-dev" and "libxcb-composite0-dev" packages:
-
-@[code](@snippets/installation/use_rawkey_and_clipboard.sh)
-
 #### RHEL based distros
 
 You will need to install "libxcb", "openssl-devel" and "libX11-devel":
@@ -80,7 +76,7 @@ Nu releases are published as source to the popular Rust package registry [crates
 
 That's it! The `cargo` tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path so we can run it.
 
-If you want to install with more features, you can install using the `--features=extra` flag, which includes support for dataframes, and sqlite databases.
+If you want to install with support for [dataframes](dataframes.md), you can install using the `--features=dataframe` flag.
 
 @[code](@snippets/installation/cargo_install_nu_more_features.sh)
 

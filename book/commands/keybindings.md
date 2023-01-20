@@ -2,7 +2,7 @@
 title: keybindings
 categories: |
   platform
-version: 0.70.0
+version: 0.74.0
 platform: |
   Keybindings related commands
 usage: |
@@ -16,3 +16,6 @@ usage: |
 ## Signature
 
 ```> keybindings ```
+
+## Notes
+You must use one of the following subcommands. Using this command as-is will only produce this help message.

@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.70.0
+version: 0.74.0
 conversions: |
   Convert value to string
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: column paths to convert to string (for table input)
+ -  `...rest`: for a data structure input, convert data at the given cell paths
  -  `--decimals {int}`: decimal digits to which to round
 
 ## Examples
@@ -64,11 +64,6 @@ convert boolean to string
 > true | into string
 ```
 
-convert date to string
-```shell
-> date now | into string
-```
-
 convert filepath to string
 ```shell
 > ls Cargo.toml | get name | into string
@@ -76,5 +71,5 @@ convert filepath to string
 
 convert filesize to string
 ```shell
-> ls Cargo.toml | get size | into string
+> 1KiB | into string
 ```

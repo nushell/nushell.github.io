@@ -2,7 +2,7 @@
 title: set
 categories: |
   dataframe
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Sets value where given mask is true
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> set (value) --mask```
-
-## Parameters
-
- -  `value`: value to be inserted in series
- -  `--mask {any}`: mask indicating insertions
+```> set ```
 
 ## Examples
 

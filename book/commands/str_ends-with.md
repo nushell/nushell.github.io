@@ -2,7 +2,7 @@
 title: str ends-with
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Check if an input ends with a string
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `string`: the string to match
- -  `...rest`: optionally matches suffix of text by column paths
+ -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
 
 ## Examples
 

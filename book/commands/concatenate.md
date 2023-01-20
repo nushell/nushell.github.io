@@ -2,7 +2,7 @@
 title: concatenate
 categories: |
   dataframe
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Concatenates strings with other array
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> concatenate (other)```
-
-## Parameters
-
- -  `other`: Other array with string to be concatenated
+```> concatenate ```
 
 ## Examples
 

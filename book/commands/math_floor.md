@@ -2,11 +2,11 @@
 title: math floor
 categories: |
   math
-version: 0.70.0
+version: 0.74.0
 math: |
-  Applies the floor function to a list of numbers
+  Returns the floor of a number (largest integer less than or equal to that number)
 usage: |
-  Applies the floor function to a list of numbers
+  Returns the floor of a number (largest integer less than or equal to that number)
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

@@ -2,7 +2,7 @@
 title: ansi strip
 categories: |
   platform
-version: 0.70.0
+version: 0.74.0
 platform: |
   Strip ANSI escape sequences from a string
 usage: |
@@ -15,15 +15,15 @@ usage: |
 
 ## Signature
 
-```> ansi strip ...column path```
+```> ansi strip ...rest```
 
 ## Parameters
 
- -  `...column path`: optionally, remove ANSI sequences by column paths
+ -  `...rest`: for a data structure input, remove ANSI sequences from strings at the given cell paths
 
 ## Examples
 
 Strip ANSI escape sequences from a string
 ```shell
-> echo [ (ansi green) (ansi cursor_on) "hello" ] | str join | ansi strip
+> $'(ansi green)(ansi cursor_on)hello' | ansi strip
 ```

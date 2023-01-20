@@ -45,7 +45,7 @@ Nu currently supports the following formats for loading data directly into table
 - json
 - [nuon](#nuon)
 - ods
-- [SQLite databases](#sqlite) (requires `--features extra` build)
+- [SQLite databases](#sqlite)
 - ssv
 - toml
 - tsv
@@ -237,12 +237,6 @@ license = "MIT"
 ```
 
 ## SQLite
-
-::: warning
-To use the SQLite support you need a fully-featured build with `cargo build --features extra`.
-Most binary releases like the one provided via [GitHub](https://github.com/nushell/nushell/releases) should already include this.
-[See the installation instructions](/book/installation.md) for further details.
-:::
 
 SQLite databases are automatically detected by [`open`](commands/open.md), no matter what their file extension is. You can open a whole database:
 

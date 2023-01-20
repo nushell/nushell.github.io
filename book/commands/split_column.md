@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Split a string into multiple columns using a separator
 usage: |
@@ -27,10 +27,15 @@ usage: |
 
 Split a string into columns by the specified separator
 ```shell
-> echo 'a--b--c' | split column '--'
+> 'a--b--c' | split column '--'
 ```
 
 Split a string into columns of char and remove the empty columns
 ```shell
-> echo 'abc' | split column -c ''
+> 'abc' | split column -c ''
+```
+
+Split a list of strings into a table
+```shell
+> ['a-b' 'c-d'] | split column -
 ```

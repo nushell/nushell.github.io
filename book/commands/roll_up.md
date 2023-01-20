@@ -2,7 +2,7 @@
 title: roll up
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
   Roll table rows up
 usage: |

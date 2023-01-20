@@ -3,7 +3,7 @@ title: append
 categories: |
   dataframe
   filters
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Appends a new dataframe
 filters: |
@@ -19,12 +19,7 @@ usage: |
 
 ## Signature
 
-```> append (other) --col```
-
-## Parameters
-
- -  `other`: dataframe to be appended
- -  `--col`: appends in col orientation
+```> append ```
 
 ## Examples
 
@@ -52,6 +47,11 @@ Appends a dataframe merging at the end of columns
 
  -  `row`: the row, list, or table to append
 
+## Notes
+Be aware that this command 'unwraps' lists passed to it. So, if you pass a variable to it,
+and you want the variable's contents to be appended without being unwrapped, it's wise to
+pre-emptively wrap the variable in a list, like so: `append [$val]`. This way, `append` will
+only unwrap the outer list, and leave the variable's contents untouched.
 ## Examples
 
 Append one Int item

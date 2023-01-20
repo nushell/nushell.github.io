@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.70.0
+version: 0.74.0
 filesystem: |
   Save a file.
 usage: |
@@ -15,27 +15,39 @@ usage: |
 
 ## Signature
 
-```> save (filename) --raw --append```
+```> save (filename) --stderr --raw --append --force```
 
 ## Parameters
 
  -  `filename`: the filename to use
+ -  `--stderr {path}`: the filename used to save stderr, only works with `-r` flag
  -  `--raw`: save file as raw binary
  -  `--append`: append input to the end of the file
+ -  `--force`: overwrite the destination
 
 ## Examples
 
 Save a string to foo.txt in the current directory
 ```shell
-> echo 'save me' | save foo.txt
+> 'save me' | save foo.txt
 ```
 
 Append a string to the end of foo.txt
 ```shell
-> echo 'append me' | save --append foo.txt
+> 'append me' | save --append foo.txt
 ```
 
 Save a record to foo.json in the current directory
 ```shell
-> echo { a: 1, b: 2 } | save foo.json
+> { a: 1, b: 2 } | save foo.json
+```
+
+Save a running program's stderr to foo.txt
+```shell
+> do -i {} | save foo.txt --stderr foo.txt
+```
+
+Save a running program's stderr to separate file
+```shell
+> do -i {} | save foo.txt --stderr bar.txt
 ```

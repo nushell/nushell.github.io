@@ -2,7 +2,7 @@
 title: path expand
 categories: |
   default
-version: 0.70.0
+version: 0.74.0
 default: |
   Try to expand a path to its absolute form
 usage: |
@@ -21,13 +21,13 @@ usage: |
 
  -  `--strict`: Throw an error if the path could not be expanded
  -  `--no-symlink`: Do not resolve symbolic links
- -  `--columns {table}`: Optionally operate by column path
+ -  `--columns {table}`: For a record or table input, expand strings at the given columns
 
 ## Examples
 
 Expand an absolute path
 ```shell
-> 'C:\Users\joe\foo\..\bar' | path expand
+> '/home/joe/foo/../bar' | path expand
 ```
 
 Expand a path in a column
@@ -37,10 +37,5 @@ Expand a path in a column
 
 Expand a relative path
 ```shell
-> 'foo\..\bar' | path expand
-```
-
-Expand an absolute path without following symlink
-```shell
-> 'foo\..\bar' | path expand -n
+> 'foo/../bar' | path expand
 ```

@@ -2,7 +2,7 @@
 title: as-datetime
 categories: |
   dataframe
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> as-datetime (format) --not-exact```
-
-## Parameters
-
- -  `format`: formatting date time string
- -  `--not-exact`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
+```> as-datetime ```
 
 ## Notes
 ```text

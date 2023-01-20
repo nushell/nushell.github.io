@@ -3,13 +3,13 @@ title: reverse
 categories: |
   filters
   lazyframe
-version: 0.70.0
+version: 0.74.0
 filters: |
-  Reverses the table.
+  Reverses the input list or table.
 lazyframe: |
   Reverses the LazyFrame
 usage: |
-  Reverses the table.
+  Reverses the input list or table.
   Reverses the LazyFrame
 ---
 
@@ -23,9 +23,14 @@ usage: |
 
 ## Examples
 
-Reverse the items
+Reverse a list
 ```shell
 > [0,1,2,3] | reverse
+```
+
+Reverse a table
+```shell
+> [{a: 1} {a: 2}] | reverse
 ```
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe

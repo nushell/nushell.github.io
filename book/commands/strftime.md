@@ -2,7 +2,7 @@
 title: strftime
 categories: |
   dataframe
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Formats date based on string rule
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> strftime (fmt)```
-
-## Parameters
-
- -  `fmt`: Format rule
+```> strftime ```
 
 ## Examples
 

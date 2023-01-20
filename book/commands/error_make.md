@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
   Create an error.
 usage: |

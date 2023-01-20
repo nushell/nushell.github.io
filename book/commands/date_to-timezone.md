@@ -2,7 +2,7 @@
 title: date to-timezone
 categories: |
   date
-version: 0.70.0
+version: 0.74.0
 date: |
   Convert a date to a given time zone.
 usage: |
@@ -22,9 +22,7 @@ usage: |
  -  `time zone`: time zone description
 
 ## Notes
-```text
 Use 'date list-timezone' to list all supported time zones.
-```
 ## Examples
 
 Get the current date in UTC+05:00

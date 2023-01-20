@@ -2,7 +2,7 @@
 title: into binary
 categories: |
   conversions
-version: 0.70.0
+version: 0.74.0
 conversions: |
   Convert value to a binary primitive
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: column paths to convert to binary (for table input)
+ -  `...rest`: for a data structure input, convert data at the given cell paths
 
 ## Examples
 

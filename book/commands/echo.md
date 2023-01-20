@@ -2,11 +2,11 @@
 title: echo
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
-  Echo the arguments back to the user.
+  Returns its arguments, ignoring the piped-in value.
 usage: |
-  Echo the arguments back to the user.
+  Returns its arguments, ignoring the piped-in value.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -22,17 +22,17 @@ usage: |
  -  `...rest`: the values to echo
 
 ## Notes
-```text
-Unlike `print`, this command returns an actual value that will be passed to the next command of the pipeline.
-```
+When given no arguments, it returns an empty string. When given one argument,
+it returns it. Otherwise, it returns a list of the arguments. There is usually
+little reason to use this over just writing the values as-is.
 ## Examples
 
-Put a hello message in the pipeline
+Put a list of numbers in the pipeline. This is the same as [1 2 3].
 ```shell
-> echo 'hello'
+> echo 1 2 3
 ```
 
-Print the value of the special '$nu' variable
+Returns the piped-in value, by using the special $in variable to obtain it.
 ```shell
-> echo $nu
+> echo $in
 ```

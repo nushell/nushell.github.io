@@ -2,11 +2,11 @@
 title: math stddev
 categories: |
   math
-version: 0.70.0
+version: 0.74.0
 math: |
-  Finds the stddev of a list of numbers or tables
+  Returns the standard deviation of a list of numbers, or of each column in a table
 usage: |
-  Finds the stddev of a list of numbers or tables
+  Returns the standard deviation of a list of numbers, or of each column in a table
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math
@@ -19,16 +19,16 @@ usage: |
 
 ## Parameters
 
- -  `--sample`: calculate sample standard deviation
+ -  `--sample`: calculate sample standard deviation (i.e. using N-1 as the denominator)
 
 ## Examples
 
-Get the stddev of a list of numbers
+Compute the standard deviation of a list of numbers
 ```shell
 > [1 2 3 4 5] | math stddev
 ```
 
-Get the sample stddev of a list of numbers
+Compute the sample standard deviation of a list of numbers
 ```shell
 > [1 2 3 4 5] | math stddev -s
 ```

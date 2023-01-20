@@ -2,7 +2,7 @@
 title: str upcase
 categories: |
   default
-version: 0.70.0
+version: 0.74.0
 default: |
   Make text uppercase
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally upcase text by column paths
+ -  `...rest`: For a data structure input, convert strings at the given cell paths
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: roll down
 categories: |
   filters
-version: 0.70.0
+version: 0.74.0
 filters: |
   Roll table rows down
 usage: |
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Rolls rows down
+Rolls rows down of a table
 ```shell
 > [[a b]; [1 2] [3 4] [5 6]] | roll down
 ```

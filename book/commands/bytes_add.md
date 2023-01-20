@@ -2,7 +2,7 @@
 title: bytes add
 categories: |
   bytes
-version: 0.70.0
+version: 0.74.0
 bytes: |
   Add specified bytes to the input
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `data`: the binary to add
- -  `...rest`: optionally matches prefix of text by column paths
+ -  `...rest`: for a data structure input, add bytes to the data at the given cell paths
  -  `--index {int}`: index to insert binary data
  -  `--end`: add to the end of binary
 

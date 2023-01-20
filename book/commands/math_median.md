@@ -2,11 +2,11 @@
 title: math median
 categories: |
   math
-version: 0.70.0
+version: 0.74.0
 math: |
-  Gets the median of a list of numbers
+  Computes the median of a list of numbers
 usage: |
-  Gets the median of a list of numbers
+  Computes the median of a list of numbers
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math
@@ -19,7 +19,12 @@ usage: |
 
 ## Examples
 
-Get the median of a list of numbers
+Compute the median of a list of numbers
 ```shell
 > [3 8 9 12 12 15] | math median
+```
+
+Compute the medians of the columns of a table
+```shell
+> [{a: 1 b: 3} {a: 2 b: -1} {a: -3 b: 5}] | math median
 ```

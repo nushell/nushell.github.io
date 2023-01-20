@@ -2,7 +2,7 @@
 title: with-column
 categories: |
   dataframe or lazyframe
-version: 0.70.0
+version: 0.74.0
 dataframe_or_lazyframe: |
   Adds a series to the dataframe
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> with-column ...series or expressions --name```
-
-## Parameters
-
- -  `...series or expressions`: series to be added or expressions used to define the new columns
- -  `--name {string}`: new column name
+```> with-column ```
 
 ## Examples
 

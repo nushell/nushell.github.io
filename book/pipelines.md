@@ -83,3 +83,47 @@ And the pipeline:
 ```
 
 Are one and the same.
+
+## Output result to external commands 
+
+Sometimes you want to output Nushell structured data to an external command for further processing. However, Nushell's default formatting options for structured data may not be what you want.
+For example, you want to find a file named "tutor" under "/usr/share/vim/runtime" and check its ownership  
+
+```
+> ls /usr/share/nvim/runtime/
+╭────┬───────────────────────────────────────┬──────┬─────────┬───────────────╮
+│  # │                 name                  │ type │  size   │   modified    │
+├────┼───────────────────────────────────────┼──────┼─────────┼───────────────┤
+│  0 │ /usr/share/nvim/runtime/autoload      │ dir  │  4.1 KB │ 2 days ago    │
+..........
+..........
+..........
+
+│ 31 │ /usr/share/nvim/runtime/tools         │ dir  │  4.1 KB │ 2 days ago    │
+│ 32 │ /usr/share/nvim/runtime/tutor         │ dir  │  4.1 KB │ 2 days ago    │
+├────┼───────────────────────────────────────┼──────┼─────────┼───────────────┤
+│  # │                 name                  │ type │  size   │   modified    │
+╰────┴───────────────────────────────────────┴──────┴─────────┴───────────────╯
+```
+
+You decided to use `grep` and [pipe](https://www.nushell.sh/book/pipelines.html) the result to external `^ls`
+
+```
+> ls /usr/share/nvim/runtime/ | get name | ^grep tutor | ^ls -la $in 
+ls: cannot access ''$'\342\224\202'' 32 '$'\342\224\202'' /usr/share/nvim/runtime/tutor        '$'\342\224\202\n': No such file or directory
+```
+
+What's wrong? Nushell renders lists and tables (by adding a border with characters like `╭`,`─`,`┬`,`╮`) before piping them as text to external commands. If that's not the behavior you want, you must explicitly convert the data to a string before piping it to an external. For example, you can do so with [`to text`](commands/to_text.md):
+
+```
+> ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^ls -la $in 
+total 24
+drwxr-xr-x@  5 pengs  admin   160 14 Nov 13:12 .
+drwxr-xr-x@  4 pengs  admin   128 14 Nov 13:42 en
+-rw-r--r--@  1 pengs  admin  5514 14 Nov 13:42 tutor.tutor
+-rw-r--r--@  1 pengs  admin  1191 14 Nov 13:42 tutor.tutor.json
+```
+(Actually, for this simple usage you can just use [`find`](commands/find.md))
+```
+> ls /usr/share/nvim/runtime/ | get name | find tutor | ^ls -al $in
+```

@@ -2,7 +2,7 @@
 title: view-source
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
   View a block, module, or a definition
 usage: |

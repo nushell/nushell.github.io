@@ -2,7 +2,7 @@
 title: export def
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
   Define a custom command and export it from a module
 usage: |
@@ -24,10 +24,8 @@ usage: |
  -  `block`: body of the definition
 
 ## Notes
-```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Define a custom command in a module and call it

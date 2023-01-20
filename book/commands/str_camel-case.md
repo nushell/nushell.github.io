@@ -2,7 +2,7 @@
 title: str camel-case
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Convert a string to camelCase
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `...rest`: optionally convert text to camelCase by column paths
+ -  `...rest`: For a data structure input, convert strings at the given cell paths
 
 ## Examples
 

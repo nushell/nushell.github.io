@@ -190,6 +190,49 @@ export-env {
 Only `$env.TMP_LEN` and `$env.OTHER_ENV` are preserved after evaluating the `export-env` module.
 :::
 
+
+If you also want to keep your variables in separate modules and export its environment, you could try to `export use` it:
+```
+# purpose.nu
+export use greetings.nu
+export-env {let-env MYPURPOSE = "to build an empire."}
+
+export def greeting_purpose [] {
+    $"Hello ($env.MYNAME). My purpose is ($env.MYPURPOSE)"
+}
+
+```
+and then use it
+```
+> use purpose.nu
+> purpose greeeting_purpose
+```
+
+However, this won't work, because the module would not export its environment unless defined manually, like so:
+
+```
+# purpose.nu
+
+# preserves its environment
+export-env {
+    use greetings.nu
+    let-env MYPURPOSE = "to build an empire."
+}
+
+export def greeting_purpose [] {
+    $"Hello ($env.MYNAME). My purpose is ($env.MYPURPOSE)"
+}
+
+```
+
+Now, everything is exported properly
+```
+> use purpose.nu
+> purpose greeting_purpose
+Hello Arthur, King of the Britons. My purpose is to build an empire.
+```
+
+
 ## Exporting symbols
 
 Apart from `def` and `def-env`, you can also export `alias`es and `extern`s, giving you a way to only use these features when you need. Exporting externs also gives you the ability to hide custom completion commands in a module, so they don't have to be part of the global namespace.
@@ -200,6 +243,7 @@ Here's the full list of ways you can export:
 - `export def-env` - export a custom environment command
 - `export alias` - export an alias
 - `export extern` - export a known external definition
+- `export use` - use definitions from a module and export them from this module
 
 ## Hiding
 

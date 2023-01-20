@@ -2,7 +2,7 @@
 title: alias
 categories: |
   core
-version: 0.70.0
+version: 0.74.0
 core: |
   Alias a command (with optional flags) to a new name
 usage: |
@@ -23,13 +23,16 @@ usage: |
  -  `initial_value`: equals sign followed by value
 
 ## Notes
-```text
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
-```
 ## Examples
 
 Alias ll to ls -l
 ```shell
 > alias ll = ls -l
+```
+
+Make an alias that makes a list of all custom commands
+```shell
+> alias customs = ($nu.scope.commands | where is_custom | get command)
 ```

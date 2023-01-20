@@ -2,7 +2,7 @@
 title: hash
 categories: |
   hash
-version: 0.70.0
+version: 0.74.0
 hash: |
   Apply hash function.
 usage: |
@@ -16,3 +16,6 @@ usage: |
 ## Signature
 
 ```> hash ```
+
+## Notes
+You must use one of the following subcommands. Using this command as-is will only produce this help message.

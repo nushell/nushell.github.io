@@ -2,7 +2,7 @@
 title: cumulative
 categories: |
   dataframe
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Cumulative calculation for a series
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> cumulative (type) --reverse```
-
-## Parameters
-
- -  `type`: rolling operation
- -  `--reverse`: Reverse cumulative calculation
+```> cumulative ```
 
 ## Examples
 

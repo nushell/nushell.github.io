@@ -2,7 +2,7 @@
 title: str-slice
 categories: |
   dataframe
-version: 0.70.0
+version: 0.74.0
 dataframe: |
   Slices the string from the start position until the selected length
 usage: |
@@ -15,12 +15,7 @@ usage: |
 
 ## Signature
 
-```> str-slice (start) --length```
-
-## Parameters
-
- -  `start`: start of slice
- -  `--length {int}`: optional length
+```> str-slice ```
 
 ## Examples
 

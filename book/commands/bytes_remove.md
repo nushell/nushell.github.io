@@ -2,7 +2,7 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.70.0
+version: 0.74.0
 bytes: |
   Remove bytes
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `pattern`: the pattern to find
- -  `...rest`: optionally remove bytes by column paths
+ -  `...rest`: for a data structure input, remove bytes from data at the given cell paths
  -  `--end`: remove from end of binary
  -  `--all`: remove occurrences of finding binary
 

@@ -15,7 +15,7 @@ export const sidebarDe: SidebarConfig = {
         'working_with_strings',
         'working_with_lists',
         'working_with_tables',
-        'pipelines.md',
+        'pipeline.md',
         'konfiguration',
         'environment',
         '3rdpartyprompts',

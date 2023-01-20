@@ -2,7 +2,7 @@
 title: bytes ends-with
 categories: |
   bytes
-version: 0.70.0
+version: 0.74.0
 bytes: |
   Check if bytes ends with a pattern
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `pattern`: the pattern to match
- -  `...rest`: optionally matches prefix of text by column paths
+ -  `...rest`: for a data structure input, check if bytes at the given cell paths end with the pattern
 
 ## Examples
 

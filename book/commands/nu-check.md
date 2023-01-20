@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Validate and parse input content
 usage: |
@@ -53,7 +53,7 @@ Parse an internal stream as module by showing error message
 
 Parse a string as script
 ```shell
-> echo $'two(char nl)lines' | nu-check
+> $'two(char nl)lines' | nu-check
 ```
 
 Heuristically parse which begins with script first, if it sees a failure, try module afterwards

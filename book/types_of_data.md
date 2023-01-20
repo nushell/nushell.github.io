@@ -14,26 +14,26 @@ The [`describe`](commands/describe.md) command returns the type of a data value:
 
 ## Types at a glance
 
-| Type | Example
-|---|---|
-| Integers | `-65535` |
-| Decimals (floats) | `9.9999`, `Infinity` |
-| Strings | <code>"hole 18", 'hole 18', \`hole 18\`, hole18</code> |
-| Booleans | `true` |
-| Dates | `2000-01-01` |
-| Durations | `2min + 12sec` |
-| File sizes | `64mb` |
-| Ranges | `0..4`, `0..<5`, `0..`, `..4` |
-| Binary | `0x[FE FF]` |
-| Lists | `[0 1 'two' 3]` |
-| Records | `{name:"Nushell", lang: "Rust"}` |
-| Tables | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]` |
-| Blocks | <code>{\|e\| $e + 1 \| into string }</code>, <code>{ $in.name.0 \| path exists }</code>|
-| Null | `null` |
+| Type              | Example                                                                                 |
+| ----------------- | --------------------------------------------------------------------------------------- |
+| Integers          | `-65535`                                                                                |
+| Decimals (floats) | `9.9999`, `Infinity`                                                                    |
+| Strings           | <code>"hole 18", 'hole 18', \`hole 18\`, hole18</code>                                  |
+| Booleans          | `true`                                                                                  |
+| Dates             | `2000-01-01`                                                                            |
+| Durations         | `2min + 12sec`                                                                          |
+| File sizes        | `64mb`                                                                                  |
+| Ranges            | `0..4`, `0..<5`, `0..`, `..4`                                                           |
+| Binary            | `0x[FE FF]`                                                                             |
+| Lists             | `[0 1 'two' 3]`                                                                         |
+| Records           | `{name:"Nushell", lang: "Rust"}`                                                        |
+| Tables            | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`                              |
+| Blocks            | <code>{\|e\| $e + 1 \| into string }</code>, <code>{ $in.name.0 \| path exists }</code> |
+| Null              | `null`                                                                                  |
 
 ## Integers
 
-Examples of integers (i.e. "round numbers") include 1, 0, -5,  and 100.
+Examples of integers (i.e. "round numbers") include 1, 0, -5, and 100.
 You can parse a string into an integer with the `into int` command
 
 ```sh
@@ -69,6 +69,7 @@ See [Working with strings](working_with_strings.md) and [Handling Strings](https
 ## Booleans
 
 There are just two boolean values: `true` and `false`. Rather than writing the values directly, they often result from a comparison:
+
 ```sh
 > let mybool = 2 > 1
 > $mybool
@@ -95,24 +96,26 @@ Dates are in three forms, based on the RFC 3339 standard:
 
 Durations represent a length of time. This chart shows all durations currently supported:
 
-| Duration | Length                      |
-| -------- | --------------------------- |
-| `1ns`    | one nanosecond              |
-| `1us`    | one microsecond             |
-| `1ms`    | one millisecond             |
-| `1sec`   | one second                  |
-| `1min`   | one minute                  |
-| `1hr`    | one hour                    |
-| `1day`   | one day                     |
-| `1wk`    | one week                    |
+| Duration | Length          |
+| -------- | --------------- |
+| `1ns`    | one nanosecond  |
+| `1us`    | one microsecond |
+| `1ms`    | one millisecond |
+| `1sec`   | one second      |
+| `1min`   | one minute      |
+| `1hr`    | one hour        |
+| `1day`   | one day         |
+| `1wk`    | one week        |
 
 You can make fractional durations:
+
 ```sh
 > 3.14day
 3day 3hr 21min
 ```
 
 And you can do calculations with durations:
+
 ```sh
 > 30day / 1sec  # How many seconds in 30 days?
 2592000
@@ -141,6 +144,7 @@ The full list of filesize units are:
 - `zib`: zebibyte
 
 As with durations, you can make fractional file sizes, and do calculations:
+
 ```sh
 > 1Gb / 1b
 1000000000
@@ -177,7 +181,7 @@ You can write binary as a literal using any of the `0x[...]`, `0b[...]`, or `0o[
 ```sh
 > 0x[1F FF]  # Hexadecimal
 > 0b[1 1010] # Binary
-> 0o[777]    # Octal
+> 0o[377]    # Octal
 ```
 
 Incomplete bytes will be left-padded with zeros.
@@ -188,7 +192,7 @@ Structured data builds from the simple data. For example, instead of a single in
 
 ## Records
 
-Records hold key-value pairs, which associate string keys with various data values. Record syntax is very similar to objects in JSON. However, commas are *not* required to separate values if Nushell can easily distinguish them!
+Records hold key-value pairs, which associate string keys with various data values. Record syntax is very similar to objects in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
 
 ```sh
 > {name: sam rank: 10}
@@ -197,12 +201,14 @@ Records hold key-value pairs, which associate string keys with various data valu
 │ rank │ 10  │
 ╰──────┴─────╯
 ```
+
 As these can sometimes have many fields, a record is printed up-down rather than left-right.
 
 :::tip
 A record is identical to a single row of a table (see below). You can think of a record as essentially being a "one-row table", with each of its keys as a column (although a true one-row table is something distinct from a record).
 
-This means that any command that operates on a table's rows *also* operates on records. For instance, `insert`, which adds data to each of a table's rows, can be used with records:
+This means that any command that operates on a table's rows _also_ operates on records. For instance, `insert`, which adds data to each of a table's rows, can be used with records:
+
 ```sh
 > {x:3 y:1} | insert z 0
 ╭───┬───╮
@@ -211,6 +217,7 @@ This means that any command that operates on a table's rows *also* operates on r
 │ z │ 0 │
 ╰───┴───╯
 ```
+
 :::
 
 You can iterate over records by first transposing it into a table:
@@ -226,11 +233,14 @@ You can iterate over records by first transposing it into a table:
 ```
 
 Accessing records' data is done by placing a `.` before a string, which is usually a bare string:
+
 ```sh
 > {x:12 y:4}.x
 12
 ```
+
 However, if a record has a key name that can't be expressed as a bare string, or resembles an integer (see lists, below), you'll need to use more explicit string syntax, like so:
+
 ```sh
 > {"1":true " ":false}." "
 false
@@ -238,7 +248,8 @@ false
 
 ## Lists
 
-Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are *not* required to separate values if Nushell can easily distinguish them!
+Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
+
 ```sh
 > [sam fred george]
 ╭───┬────────╮
@@ -249,7 +260,8 @@ Lists are ordered sequences of data values. List syntax is very similar to array
 ```
 
 :::tip
-Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column *also* operates on a list. For instance, `where` can be used with lists:
+Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, `where` can be used with lists:
+
 ```sh
 > [bell book candle] | where ($it =~ 'b')
 ╭───┬──────╮
@@ -257,15 +269,18 @@ Lists are equivalent to the individual columns of tables. You can think of a lis
 │ 1 │ book │
 ╰───┴──────╯
 ```
+
 :::
 
 Accessing lists' data is done by placing a `.` before a bare integer:
+
 ```sh
 > [a b c].1
 b
 ```
 
 To get a sub-list from a list, you can use the `range` command:
+
 ```sh
 > [a b c d e f] | range 1..3
 ╭───┬───╮
@@ -305,6 +320,7 @@ You can also create a table as a list of records, JSON-style:
 
 :::tip
 Internally, tables are simply **lists of records**. This means that any command which extracts or isolates a specific row of a table will produce a record. For example, `get 0`, when used on a list, extracts the first value. But when used on a table (a list of records), it extracts a record:
+
 ```sh
 > [{x:12, y:5}, {x:3, y:6}] | get 0
 ╭───┬────╮
@@ -312,7 +328,9 @@ Internally, tables are simply **lists of records**. This means that any command 
 │ y │ 5  │
 ╰───┴────╯
 ```
+
 This is true regardless of which table syntax you use:
+
 ```sh
 [[x,y];[12,5],[3,6]] | get 0
 ╭───┬────╮
@@ -320,14 +338,15 @@ This is true regardless of which table syntax you use:
 │ y │ 5  │
 ╰───┴────╯
 ```
-:::
 
+:::
 
 ### Cell Paths
 
 You can combine list and record data access syntax to navigate tables. When used on tables, these access chains are called "cell paths".
 
 You can access individual rows by number to obtain records:
+
 ```sh
 > [{langs:[Rust JS Python], releases:60}].0
 ╭──────────┬────────────────╮
@@ -339,6 +358,7 @@ Python
 ```
 
 Moreover, you can also access entire columns of a table by name, to obtain lists:
+
 ```sh
 > [{x:12 y:5} {x:4 y:7} {x:2 y:2}].x
 ╭───┬────╮
@@ -349,6 +369,7 @@ Moreover, you can also access entire columns of a table by name, to obtain lists
 ```
 
 Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the `select` command with column names:
+
 ```sh
 > [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select y z
 ╭───┬───┬───╮
@@ -361,6 +382,7 @@ Of course, these resulting lists don't have the column names of the table. To re
 ```
 
 To remove rows from a table, you'll commonly use the `select` command with row numbers, as you would with a list:
+
 ```sh
 > [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select 1 2
 ╭───┬───┬───┬───╮
@@ -384,6 +406,7 @@ Blocks are a useful way to represent code that can be executed on each row of da
 Finally, there is `null` (also known as `$nothing`) which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like `save` or `cd`) produce `null`.
 
 You can place `null` at the end of a pipeline to replace the pipeline's output with it, and thus print nothing:
+
 ```sh
 git checkout featurebranch | null
 ```
@@ -391,6 +414,7 @@ git checkout featurebranch | null
 :::warning
 
 `null` is not the same as the absence of a value! It is possible for a table to be produced that has holes in some of its rows. Attempting to access this value will not produce `null`, but instead cause an error:
+
 ```sh
 > [{a:1 b:2} {b:1}]
 ╭───┬────┬───╮
@@ -410,5 +434,6 @@ Error: nu::shell::column_not_found
    ·              ╰── value originates here
    ╰────
 ```
+
 The absence of a value is (as of Nushell 0.71) printed as the ❎ emoji in interactive output.
-::: 
+:::

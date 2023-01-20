@@ -2,7 +2,7 @@
 title: split row
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
   Split a string into multiple rows using a separator
 usage: |
@@ -26,10 +26,15 @@ usage: |
 
 Split a string into rows of char
 ```shell
-> echo 'abc' | split row ''
+> 'abc' | split row ''
 ```
 
 Split a string into rows by the specified separator
 ```shell
-> echo 'a--b--c' | split row '--'
+> 'a--b--c' | split row '--'
+```
+
+Split a string by '-'
+```shell
+> '-a-b-c-' | split row '-'
 ```

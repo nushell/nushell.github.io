@@ -2,11 +2,11 @@
 title: split chars
 categories: |
   strings
-version: 0.70.0
+version: 0.74.0
 strings: |
-  Split a string's characters into separate rows
+  Split a string into a list of characters
 usage: |
-  Split a string's characters into separate rows
+  Split a string into a list of characters
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Split the string's characters into separate rows
+Split the string into a list of characters
 ```shell
 > 'hello' | split chars
 ```

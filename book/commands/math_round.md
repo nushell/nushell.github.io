@@ -2,11 +2,11 @@
 title: math round
 categories: |
   math
-version: 0.70.0
+version: 0.74.0
 math: |
-  Applies the round function to a list of numbers
+  Returns the input number rounded to the specified precision
 usage: |
-  Applies the round function to a list of numbers
+  Returns the input number rounded to the specified precision
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

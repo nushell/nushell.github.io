@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.70.0
+version: 0.74.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -36,7 +36,7 @@ Open a file, as raw bytes
 
 Open a file, using the input to get filename
 ```shell
-> echo 'myfile.txt' | open
+> 'myfile.txt' | open
 ```
 
 Open a file, and decode it by the specified encoding

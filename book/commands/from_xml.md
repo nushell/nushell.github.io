@@ -2,11 +2,11 @@
 title: from xml
 categories: |
   formats
-version: 0.70.0
+version: 0.74.0
 formats: |
-  Parse text as .xml and create table.
+  Parse text as .xml and create record.
 usage: |
-  Parse text as .xml and create table.
+  Parse text as .xml and create record.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Converts xml formatted string to table
+Converts xml formatted string to record
 ```shell
 > '<?xml version="1.0" encoding="UTF-8"?>
 <note>
