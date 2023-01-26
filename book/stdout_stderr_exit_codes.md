@@ -20,10 +20,10 @@ Without the pipeline, Nushell will not do any redirection, allowing it to print 
 
 Another common stream that external applications often use to print error messages is stderr. By default, Nushell does not do any redirection of stderr, which means that by default it will print to the screen.
 
-You can force Nushell to do a redirection by using `do -i { ... }`. For example, if we wanted to call the external above and redirect its stderr, we would write:
+You can force Nushell to do a redirection by using `do { ... } | complete`. For example, if we wanted to call the external above and redirect its stderr, we would write:
 
 ```
-> do -i { external }
+> do { external } | complete
 ```
 
 ## Exit code
@@ -33,7 +33,7 @@ Finally, external commands have an "exit code". These codes help give a hint to 
 Nushell tracks the last exit code of the recently completed external in one of two ways. The first way is with the `LAST_EXIT_CODE` environment variable.
 
 ```
-> do -i { external }
+> do { external }
 > $env.LAST_EXIT_CODE
 ```
 
@@ -46,12 +46,25 @@ The [`complete`](commands/complete.md) command allows you to run an external to 
 If we try to run the external `cat` on a file that doesn't exist, we can see what [`complete`](commands/complete.md) does with the streams, including the redirected stderr:
 
 ```
-> do -i { cat unknown.txt } | complete
+> do { cat unknown.txt } | complete
 ╭───────────┬─────────────────────────────────────────────╮
 │ stdout    │                                             │
 │ stderr    │ cat: unknown.txt: No such file or directory │
 │ exit_code │ 1                                           │
 ╰───────────┴─────────────────────────────────────────────╯
+```
+
+## Using `out>`, `err>` to redirect stdout and stderr to files
+If you want to redirect output to file, you can just types something like this:
+
+```
+cat unknown.txt out> out.log err> err.log
+```
+
+If you want to redirect both stdout and stderr to the same file, just types something like this:
+
+```
+cat unknown.txt out+err> log.log
 ```
 
 ## Raw streams
