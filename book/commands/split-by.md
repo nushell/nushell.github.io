@@ -4,9 +4,9 @@ categories: |
   default
 version: 0.74.0
 default: |
-  Create a new table splitted.
+  Create a new table split.
 usage: |
-  Create a new table splitted.
+  Create a new table split.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default
