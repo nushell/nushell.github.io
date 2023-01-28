@@ -38,7 +38,7 @@ Nushell 目前支持以下转义字符：
 - `\r` - 回车符
 - `\n` - 换行符 (line feed)
 - `\t` - 制表符
-- `\uXXXX` - Unicode 字符 (用 Unicode 字符的编号替换 XXXX)
+- `\u{X...}` - Unicode字符（将X...替换为1到6个十六进制数字）
 
 ## 字符串插值
 
