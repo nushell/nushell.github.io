@@ -1,0 +1,3 @@
+[default.extend-words]
+# Avoid the false positive in book/commands/str_replace.md
+ons = "ons"

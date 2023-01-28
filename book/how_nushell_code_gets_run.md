@@ -67,7 +67,7 @@ fn main() {
 }
 ```
 
-you first need to _compile_ the program into [machine code instructions](https://en.wikipedia.org/wiki/Machine_code) and store the binary file to a disk (`rustc main.rs`). Then, to produce a result, you need to run the binary (`./main`), which passes the instuctions to the CPU:
+you first need to _compile_ the program into [machine code instructions](https://en.wikipedia.org/wiki/Machine_code) and store the binary file to a disk (`rustc main.rs`). Then, to produce a result, you need to run the binary (`./main`), which passes the instructions to the CPU:
 
 ```
 1. source code --> compiler --> machine code

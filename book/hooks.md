@@ -39,7 +39,7 @@ let-env config = {
 }
 ```
 
-Try putting the above to your config, running Nushell and moving around your filesytem.
+Try putting the above to your config, running Nushell and moving around your filesystem.
 When you change a directory, the `PWD` environment variable changes and the change triggers the hook with the previous and the current values stored in `before` and `after` variables, respectively.
 
 Instead of defining just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
@@ -232,6 +232,7 @@ let-env config = ($env.config | upsert hooks.env_change.PWD {
     ]
 })
 ```
+
 ### Filtering or diverting command output
 
 You can use the `display_output` hook to redirect the output of commands.
@@ -239,15 +240,17 @@ You should define a block that works on all value types.
 The output of external commands is not filtered through `display_output`.
 
 This hook can display the output in a separate window,
-perhaps as rich HTML text.  Here is the basic idea of how to do that:
+perhaps as rich HTML text. Here is the basic idea of how to do that:
+
 ```
 let-env config = ($env.config | upsert hooks {
     display_output: { to html --partial --no-color | save --raw /tmp/nu-output.html }
 })
 ```
+
 You can view the result by opening `file:///tmp/nu-output.html` in
 a web browser.
 Of course this isn't very convenient unless you use
-a browser that automaticaly reloads when the file changes.
+a browser that automatically reloads when the file changes.
 Instead of the `save` command, you would normally customize this
 to send the HTML output to a desired window.
