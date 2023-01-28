@@ -99,27 +99,3 @@ You can also build and run Nu in release mode:
 @[code](@snippets/installation/build_nu_from_source_release.sh)
 
 People familiar with Rust may wonder why we do both a "build" and a "run" step if "run" does a build by default. This is to get around a shortcoming of the new `default-run` option in Cargo, and ensure that all plugins are built, though this may not be required in the future.
-
-## Setting the login shell (\*nix)
-
-**!!! Nu is still in development, and may not be stable for everyday use. !!!**
-
-To set the login shell you can use the [`chsh`](https://linux.die.net/man/1/chsh) command.
-Some Linux distributions have a list of valid shells located in `/etc/shells` and will disallow changing the shell until Nu is in the whitelist. You may see an error similar to the one below if you haven't updated the `shells` file:
-
-@[code](@snippets/installation/chsh_invalid_shell_error.sh)
-
-You can add Nu to the list of allowed shells by appending your Nu binary to the `shells` file.
-The path to add can be found with the command `which nu`, usually it is `$HOME/.cargo/bin/nu`.
-
-## Setting the default shell (Windows Terminal)
-
-If you are using [Windows Terminal](https://github.com/microsoft/terminal) you can set `nu` as your default shell by adding:
-
-@[code](@snippets/installation/windows_terminal_default_shell.sh)
-
-to `"profiles"` in your Terminal Settings (JSON-file). The last thing to do is to change the `"defaultProfile"` to:
-
-@[code](@snippets/installation/windows_change_default_profile.sh)
-
-Now, `nu` should load on startup of the Windows Terminal.

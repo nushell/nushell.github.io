@@ -13,6 +13,7 @@ export const sidebarEn: SidebarConfig = {
       collapsible: false,
       children: [
         '/book/installation.md',
+        '/book/default_shell.md',
         '/book/quick_tour.md',
         '/book/moving_around.md',
         '/book/thinking_in_nu.md',
