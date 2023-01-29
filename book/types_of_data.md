@@ -401,7 +401,7 @@ There are numerous other commands for selecting and reducing the data in tables,
 Closures are anonymous functions that can close over variables outside their scope and can be passed as a value.
 For example, in the command `each { |it| print $it }` the closure is the portion contained in curly braces, `{ |it| print $it }`.
 Closure parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary.
-You can also use `$in` in most closures instead of providing a parameter: `each { print $in }`
+You can also use a pipeline input as `$in` in most closures instead of providing an explicit parameter: `each { print $in }`
 
 Closures are a useful way to represent code that can be executed on each row of data.
 It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required;
