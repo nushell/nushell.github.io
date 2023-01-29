@@ -49,7 +49,7 @@ Nushell unterstützt aktuell folgende Escape Zeichen:
 - `\r` - Zeilenumschalt
 - `\n` - Neue Zeile (line feed)
 - `\t` - Tabulator
-- `\u{X...}` - Ein Unicode Zeichen, wobei X... 1-6 hexadezimale Ziffern sind (0-9, A-F)
+- `\u{X...}` - Ein Unicode Zeichen, wobei der Platzhalter `X...` für ein bis sechs hexadezimale Ziffern steht (0-9, A-F)
 
 ## Text Interpolation
 
