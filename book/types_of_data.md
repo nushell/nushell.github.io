@@ -14,22 +14,23 @@ The [`describe`](commands/describe.md) command returns the type of a data value:
 
 ## Types at a glance
 
-| Type              | Example                                                                                 |
-| ----------------- | --------------------------------------------------------------------------------------- |
-| Integers          | `-65535`                                                                                |
-| Decimals (floats) | `9.9999`, `Infinity`                                                                    |
-| Strings           | <code>"hole 18", 'hole 18', \`hole 18\`, hole18</code>                                  |
-| Booleans          | `true`                                                                                  |
-| Dates             | `2000-01-01`                                                                            |
-| Durations         | `2min + 12sec`                                                                          |
-| File sizes        | `64mb`                                                                                  |
-| Ranges            | `0..4`, `0..<5`, `0..`, `..4`                                                           |
-| Binary            | `0x[FE FF]`                                                                             |
-| Lists             | `[0 1 'two' 3]`                                                                         |
-| Records           | `{name:"Nushell", lang: "Rust"}`                                                        |
-| Tables            | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`                              |
-| Blocks            | <code>{\|e\| $e + 1 \| into string }</code>, <code>{ $in.name.0 \| path exists }</code> |
-| Null              | `null`                                                                                  |
+| Type              | Example                                                               |
+| ----------------- | --------------------------------------------------------------------- |
+| Integers          | `-65535`                                                              |
+| Decimals (floats) | `9.9999`, `Infinity`                                                  |
+| Strings           | <code>"hole 18", 'hole 18', \`hole 18\`, hole18</code>                |
+| Booleans          | `true`                                                                |
+| Dates             | `2000-01-01`                                                          |
+| Durations         | `2min + 12sec`                                                        |
+| File sizes        | `64mb`                                                                |
+| Ranges            | `0..4`, `0..<5`, `0..`, `..4`                                         |
+| Binary            | `0x[FE FF]`                                                           |
+| Lists             | `[0 1 'two' 3]`                                                       |
+| Records           | `{name:"Nushell", lang: "Rust"}`                                      |
+| Tables            | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`            |
+| Closures          | `{\|e\| $e + 1 \| into string }`, `{ $in.name.0 \| path exists }`     |
+| Blocks            | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
+| Null              | `null`                                                                |
 
 ## Integers
 
@@ -395,11 +396,30 @@ To remove rows from a table, you'll commonly use the `select` command with row n
 
 There are numerous other commands for selecting and reducing the data in tables, records and lists.
 
+## Closures
+
+Closures are anonymous functions that can close over variables outside their scope and can be passed as a value.
+For example, in the command `each { |it| print $it }` the closure is the portion contained in curly braces, `{ |it| print $it }`.
+Closure parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary.
+You can also use `$in` in most closures instead of providing a parameter: `each { print $in }`
+
+Closures are a useful way to represent code that can be executed on each row of data.
+It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required;
+`each { |x| print $x }` works the same way as `each { |it| print $it }`.
+
 ## Blocks
 
-Blocks represent a block of code in Nu. For example, in the command `each { |it| print $it }` the block is the portion contained in curly braces, `{ |it| print $it }`. Block parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary. You can also use `$in` in most blocks instead of providing a parameter: `each { print $in }`
+Blocks don't close over variables, don't have parameters, and can't be passed as a value.
+However, unlike closures, blocks can access mutable variable in the parent closure.
+For example, mutating a variable inside the block used in an `if` call is valid:
 
-Blocks are a useful way to represent code that can be executed on each row of data. It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required; `each { |x| print $x }` works the same way as `each { |it| print $it }`.
+```nu
+mut x = 1
+if true {
+    $x += 1000
+}
+print $x
+```
 
 ## Null
 
