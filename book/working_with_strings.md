@@ -70,7 +70,7 @@ Nushell currently supports the following escape characters:
 - `\r` - carriage return
 - `\n` - newline (line feed)
 - `\t` - tab
-- `\uXXXX` - a unicode character (replace XXXX with the number of the unicode character)
+- `\u{X...}` - a single unicode character, where X... is 1-6 hex digits (0-9, A-F)
 
 ## Bare strings
 
