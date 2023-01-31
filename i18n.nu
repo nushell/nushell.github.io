@@ -118,7 +118,7 @@ def check-outdated-translation [
 # Use `nu ./i18n.nu outdated zh-CN` to check outdated translations for zh-CN
 # Some helper commands for i18n related tasks
 def main [
-    task: string    # Avaliable task: `gen`, `update`, `outdated`
+    task: string    # Available task: `gen`, `update`, `outdated`
     lng?: string    # The locale to check outdated: zh-CN, de, etc.
 ] {
     let locales = ['zh-cn', 'de', 'tr', 'ja', 'es', 'pt-br']
