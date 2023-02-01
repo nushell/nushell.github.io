@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.74.0
+version: 0.75.0
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match
 usage: |
@@ -15,12 +15,14 @@ usage: |
 
 ## Signature
 
-```> str index-of (string) ...rest --range --end```
+```> str index-of (string) ...rest --grapheme-clusters --utf-8-bytes --range --end```
 
 ## Parameters
 
- -  `string`: the string to find index of
+ -  `string`: the string to find in the input
  -  `...rest`: For a data structure input, search strings at the given cell paths, and replace with result
+ -  `--grapheme-clusters`: count indexes using grapheme clusters (all visible chars have length 1)
+ -  `--utf-8-bytes`: count indexes using UTF-8 bytes (default; non-ASCII chars have length 2+)
  -  `--range {any}`: optional start and/or end index
  -  `--end`: search from the end of the input
 
@@ -29,6 +31,11 @@ usage: |
 Returns index of string in input
 ```shell
 >  'my_library.rb' | str index-of '.rb'
+```
+
+Count length using grapheme clusters
+```shell
+> '🇯🇵ほげ ふが ぴよ' | str index-of -g 'ふが'
 ```
 
 Returns index of string in input with start index

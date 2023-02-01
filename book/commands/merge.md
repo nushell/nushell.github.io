@@ -2,7 +2,7 @@
 title: merge
 categories: |
   filters
-version: 0.74.0
+version: 0.75.0
 filters: |
   Merge the input with a record or table, overwriting values in matching columns.
 usage: |

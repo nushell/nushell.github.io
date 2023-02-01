@@ -2,7 +2,7 @@
 title: start
 categories: |
   filesystem
-version: 0.74.0
+version: 0.75.0
 filesystem: |
   Open a folder or file in the default application or viewer.
 usage: |

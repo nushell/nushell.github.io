@@ -2,7 +2,7 @@
 title: concat-str
 categories: |
   expression
-version: 0.74.0
+version: 0.75.0
 expression: |
   Creates a concat string expression
 usage: |

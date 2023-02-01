@@ -2,7 +2,7 @@
 title: arg-true
 categories: |
   dataframe
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Returns indexes where values are true
 usage: |

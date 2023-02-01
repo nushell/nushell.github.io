@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.74.0
+version: 0.75.0
 filesystem: |
   Save a file.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> save (filename) --stderr --raw --append --force```
+```> save (filename) --stderr --raw --append --force --progress```
 
 ## Parameters
 
@@ -24,6 +24,7 @@ usage: |
  -  `--raw`: save file as raw binary
  -  `--append`: append input to the end of the file
  -  `--force`: overwrite the destination
+ -  `--progress`: enable progress bar
 
 ## Examples
 

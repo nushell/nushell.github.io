@@ -2,7 +2,7 @@
 title: all-true
 categories: |
   dataframe
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Returns true if all values are true
 usage: |

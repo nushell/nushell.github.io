@@ -2,7 +2,7 @@
 title: du
 categories: |
   core
-version: 0.74.0
+version: 0.75.0
 core: |
   Find disk usage sizes of specified items.
 usage: |

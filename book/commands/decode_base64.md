@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   hash
-version: 0.74.0
+version: 0.75.0
 hash: |
   Base64 decode a value
 usage: |
@@ -21,7 +21,7 @@ usage: |
 
  -  `...rest`: For a data structure input, decode data at the given cell paths
  -  `--character-set {string}`: specify the character rules for encoding the input.
-	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt'
+	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt', 'mutf7'
  -  `--binary`: Output a binary value instead of decoding payload as UTF-8
 
 ## Notes

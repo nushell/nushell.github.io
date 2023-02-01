@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.74.0
+version: 0.75.0
 viewers: |
   Render the table.
 usage: |
@@ -26,7 +26,7 @@ usage: |
  -  `--expand-deep {int}`: an expand limit of recursion which will take place
  -  `--flatten`: Flatten simple arrays
  -  `--flatten-separator {string}`: sets a separator when 'flatten' used
- -  `--collapse`: expand the table structure in colapse mode.
+ -  `--collapse`: expand the table structure in collapse mode.
 Be aware collapse mode currently doesn't support width control
 
 ## Notes

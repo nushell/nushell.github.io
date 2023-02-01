@@ -3,7 +3,7 @@ title: var
 categories: |
   expression
   lazyframe
-version: 0.74.0
+version: 0.75.0
 expression: |
   Create a var expression for an aggregation
 lazyframe: |

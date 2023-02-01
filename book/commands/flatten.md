@@ -3,7 +3,7 @@ title: flatten
 categories: |
   expression
   filters
-version: 0.74.0
+version: 0.75.0
 expression: |
   creates a flatten expression
 filters: |
@@ -39,7 +39,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: optionally flatten data by column
- -  `--all`: flatten inner table out
+ -  `--all`: flatten inner table one level out
 
 ## Examples
 

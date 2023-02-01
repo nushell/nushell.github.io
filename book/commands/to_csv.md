@@ -3,7 +3,7 @@ title: to csv
 categories: |
   dataframe
   formats
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Saves dataframe to csv file
 formats: |
@@ -56,4 +56,9 @@ Outputs an CSV string representing the contents of this table
 Outputs an CSV string representing the contents of this table
 ```shell
 > [[foo bar]; [1 2]] | to csv -s ';'
+```
+
+Outputs an CSV string representing the contents of this record
+```shell
+> {a: 1 b: 2} | to csv
 ```

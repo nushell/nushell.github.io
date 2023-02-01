@@ -2,11 +2,11 @@
 title: benchmark
 categories: |
   system
-version: 0.74.0
+version: 0.75.0
 system: |
-  Time the running time of a block
+  Time the running time of a closure
 usage: |
-  Time the running time of a block
+  Time the running time of a closure
 ---
 
 # <code>{{ $frontmatter.title }}</code> for system
@@ -15,15 +15,20 @@ usage: |
 
 ## Signature
 
-```> benchmark (block)```
+```> benchmark (closure)```
 
 ## Parameters
 
- -  `block`: the block to run
+ -  `closure`: the closure to run
 
 ## Examples
 
-Benchmarks a command within a block
+Benchmarks a command within a closure
 ```shell
 > benchmark { sleep 500ms }
+```
+
+Benchmark a command using an existing input
+```shell
+> fetch https://www.nushell.sh/book/ | benchmark { split chars }
 ```

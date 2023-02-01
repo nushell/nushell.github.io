@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.74.0
+version: 0.75.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -15,12 +15,15 @@ usage: |
 
 ## Signature
 
-```> glob (glob) --depth```
+```> glob (glob) --depth --no-dir --no-file --no-symlink```
 
 ## Parameters
 
  -  `glob`: the glob expression
  -  `--depth {int}`: directory depth to search
+ -  `--no-dir`: Whether to filter out directories from the returned paths
+ -  `--no-file`: Whether to filter out files from the returned paths
+ -  `--no-symlink`: Whether to filter out symlinks from the returned paths
 
 ## Notes
 For more glob pattern help, please refer to https://github.com/olson-sean-k/wax
@@ -64,4 +67,9 @@ Search for files or folders with 3 a's in a row in the name
 Search for files or folders with only a, b, c, or d in the file name between 1 and 10 times
 ```shell
 > glob <[a-d]:1,10>
+```
+
+Search for folders that begin with an uppercase ASCII letter, ignoring files and symlinks
+```shell
+> glob "[A-Z]*" --no-file --no-symlink
 ```

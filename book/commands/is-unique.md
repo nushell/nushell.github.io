@@ -2,7 +2,7 @@
 title: is-unique
 categories: |
   dataframe
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Creates mask indicating unique values
 usage: |

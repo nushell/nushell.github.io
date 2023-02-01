@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.74.0
+version: 0.75.0
 filters: |
   Filter values based on a row condition.
 usage: |
@@ -15,12 +15,11 @@ usage: |
 
 ## Signature
 
-```> where (row_condition) --closure```
+```> where (row_condition)```
 
 ## Parameters
 
  -  `row_condition`: Filter condition
- -  `--closure {closure(any, int)}`: use with a closure instead (deprecated: use 'filter' command instead)
 
 ## Notes
 This command works similar to 'filter' but allows extra shorthands for working with

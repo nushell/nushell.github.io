@@ -2,7 +2,7 @@
 title: str length
 categories: |
   strings
-version: 0.74.0
+version: 0.75.0
 strings: |
   Output the length of any strings in the pipeline
 usage: |
@@ -15,17 +15,24 @@ usage: |
 
 ## Signature
 
-```> str length ...rest```
+```> str length ...rest --grapheme-clusters --utf-8-bytes```
 
 ## Parameters
 
  -  `...rest`: For a data structure input, replace strings at the given cell paths with their length
+ -  `--grapheme-clusters`: count length using grapheme clusters (all visible chars have length 1)
+ -  `--utf-8-bytes`: count length using UTF-8 bytes (default; all non-ASCII chars have length 2+)
 
 ## Examples
 
-Return the lengths of multiple strings
+Return the lengths of a string
 ```shell
 > 'hello' | str length
+```
+
+Count length using grapheme clusters
+```shell
+> '🇯🇵ほげ ふが ぴよ' | str length -g
 ```
 
 Return the lengths of multiple strings
