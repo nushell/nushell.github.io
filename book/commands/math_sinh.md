@@ -2,7 +2,7 @@
 title: math sinh
 categories: |
   math
-version: 0.74.0
+version: 0.75.0
 math: |
   Returns the hyperbolic sine of the number.
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Apply the hyperpolic sine to 1
+Apply the hyperbolic sine to 1
 ```shell
 > 1 | math sinh
 ```

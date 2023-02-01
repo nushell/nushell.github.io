@@ -2,7 +2,7 @@
 title: bytes starts-with
 categories: |
   bytes
-version: 0.74.0
+version: 0.75.0
 bytes: |
   Check if bytes starts with a pattern
 usage: |

@@ -4,7 +4,7 @@ categories: |
   dataframe
   expression
   filters
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression
 expression: |

@@ -3,7 +3,7 @@ title: drop
 categories: |
   dataframe
   filters
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Creates a new dataframe by dropping the selected columns
 filters: |

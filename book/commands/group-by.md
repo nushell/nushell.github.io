@@ -3,7 +3,7 @@ title: group-by
 categories: |
   default
   lazyframe
-version: 0.74.0
+version: 0.75.0
 default: |
   Splits a list or table into groups, and returns a record containing those groups.
 lazyframe: |

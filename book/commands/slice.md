@@ -2,7 +2,7 @@
 title: slice
 categories: |
   dataframe
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Creates new dataframe from a slice of rows
 usage: |

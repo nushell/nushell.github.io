@@ -2,11 +2,11 @@
 title: decode
 categories: |
   strings
-version: 0.74.0
+version: 0.75.0
 strings: |
-  Decode bytes as a string.
+  Decode bytes into a string.
 usage: |
-  Decode bytes as a string.
+  Decode bytes into a string.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -22,11 +22,11 @@ usage: |
  -  `encoding`: the text encoding to use
 
 ## Notes
-Multiple encodings are supported, here is an example of a few:
+Multiple encodings are supported; here are a few:
 big5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5
 
 For a more complete list of encodings please refer to the encoding_rs
-documentation link at https://docs.rs/encoding_rs/0.8.28/encoding_rs/#statics
+documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
 ## Examples
 
 Decode the output of an external command

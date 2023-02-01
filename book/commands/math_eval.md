@@ -2,7 +2,7 @@
 title: math eval
 categories: |
   deprecated
-version: 0.74.0
+version: 0.75.0
 deprecated: |
   Deprecated command
 usage: |

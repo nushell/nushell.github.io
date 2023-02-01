@@ -2,11 +2,11 @@
 title: str collect
 categories: |
   deprecated
-version: 0.74.0
+version: 0.75.0
 deprecated: |
-  'str collect' is deprecated. Please use 'str join' instead.
+  Deprecated command
 usage: |
-  'str collect' is deprecated. Please use 'str join' instead.
+  Deprecated command
 ---
 
 # <code>{{ $frontmatter.title }}</code> for deprecated

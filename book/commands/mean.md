@@ -3,7 +3,7 @@ title: mean
 categories: |
   expression
   lazyframe
-version: 0.74.0
+version: 0.75.0
 expression: |
   Creates a mean expression for an aggregation
 lazyframe: |

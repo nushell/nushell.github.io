@@ -3,7 +3,7 @@ title: is-in
 categories: |
   dataframe
   expression
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Checks if elements from a series are contained in right series
 expression: |

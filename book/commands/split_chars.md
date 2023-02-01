@@ -2,7 +2,7 @@
 title: split chars
 categories: |
   strings
-version: 0.74.0
+version: 0.75.0
 strings: |
   Split a string into a list of characters
 usage: |
@@ -15,11 +15,21 @@ usage: |
 
 ## Signature
 
-```> split chars ```
+```> split chars --grapheme-clusters --code-points```
+
+## Parameters
+
+ -  `--grapheme-clusters`: split on grapheme clusters
+ -  `--code-points`: split on code points (default; splits combined characters)
 
 ## Examples
 
 Split the string into a list of characters
 ```shell
 > 'hello' | split chars
+```
+
+Split on grapheme clusters
+```shell
+> '🇯🇵ほげ' | split chars -g
 ```

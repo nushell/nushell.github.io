@@ -1,8 +1,8 @@
 ---
-title: post
+title: http post
 categories: |
   network
-version: 0.74.0
+version: 0.75.0
 network: |
   Post a body to a URL.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> post (path) (body) --user --password --content-type --content-length --headers --raw --insecure```
+```> http post (path) (body) --user --password --content-type --content-length --headers --raw --insecure```
 
 ## Parameters
 
@@ -35,20 +35,20 @@ Performs HTTP POST operation.
 
 Post content to url.com
 ```shell
-> post url.com 'body'
+> http post url.com 'body'
 ```
 
 Post content to url.com, with username and password
 ```shell
-> post -u myuser -p mypass url.com 'body'
+> http post -u myuser -p mypass url.com 'body'
 ```
 
 Post content to url.com, with custom header
 ```shell
-> post -H [my-header-key my-header-value] url.com
+> http post -H [my-header-key my-header-value] url.com
 ```
 
 Post content to url.com with a json body
 ```shell
-> post -t application/json url.com { field: value }
+> http post -t application/json url.com { field: value }
 ```

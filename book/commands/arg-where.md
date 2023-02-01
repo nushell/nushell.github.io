@@ -2,7 +2,7 @@
 title: arg-where
 categories: |
   expression
-version: 0.74.0
+version: 0.75.0
 expression: |
   Creates an expression that returns the arguments where expression is true
 usage: |

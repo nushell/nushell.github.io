@@ -3,7 +3,7 @@ title: filter
 categories: |
   filters
   lazyframe
-version: 0.74.0
+version: 0.75.0
 filters: |
   Filter values based on a predicate closure.
 lazyframe: |

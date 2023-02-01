@@ -2,7 +2,7 @@
 title: sample
 categories: |
   dataframe
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Create sample dataframe
 usage: |

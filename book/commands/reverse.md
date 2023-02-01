@@ -3,7 +3,7 @@ title: reverse
 categories: |
   filters
   lazyframe
-version: 0.74.0
+version: 0.75.0
 filters: |
   Reverses the input list or table.
 lazyframe: |

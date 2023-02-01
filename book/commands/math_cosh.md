@@ -2,7 +2,7 @@
 title: math cosh
 categories: |
   math
-version: 0.74.0
+version: 0.75.0
 math: |
   Returns the hyperbolic cosine of the number.
 usage: |
@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Apply the hyperpolic cosine to 1
+Apply the hyperbolic cosine to 1
 ```shell
 > 1 | math cosh
 ```

@@ -2,7 +2,7 @@
 title: url encode
 categories: |
   strings
-version: 0.74.0
+version: 0.75.0
 strings: |
   Converts a string to a percent encoded web safe string
 usage: |
@@ -34,7 +34,7 @@ Encode multiple urls with escape characters in list
 > ['https://example.com/foo bar' 'https://example.com/a>b' '中文字/eng/12 34'] | url encode
 ```
 
-Encode all non anphanumeric chars with all flag
+Encode all non alphanumeric chars with all flag
 ```shell
 > 'https://example.com/foo bar' | url encode --all
 ```

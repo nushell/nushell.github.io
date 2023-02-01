@@ -2,7 +2,7 @@
 title: expr-not
 categories: |
   expression
-version: 0.74.0
+version: 0.75.0
 expression: |
   creates a not expression
 usage: |

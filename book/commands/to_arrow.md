@@ -2,7 +2,7 @@
 title: to arrow
 categories: |
   dataframe
-version: 0.74.0
+version: 0.75.0
 dataframe: |
   Saves dataframe to arrow file
 usage: |
