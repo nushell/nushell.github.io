@@ -14,7 +14,7 @@ features:
     details: 強力なプラグインシステムを使って、Nuを簡単に拡張することができます。
 ---
 
-<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls command" class="hero"/>
 
 ### Nu は既存のデータとの連携が可能
 

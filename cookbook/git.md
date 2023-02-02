@@ -50,7 +50,7 @@ Output
 
 ---
 
-### View git comitter activity as a `histogram`
+### View git committer activity as a `histogram`
 
 _Note: the `histogram` command is not yet ported to the latest version_
 
