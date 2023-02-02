@@ -322,6 +322,6 @@ We also heavily leveraged [crates.io](https://crates.io). The ability to load nu
 
 # What's next?
 
-Nu is just getting started. In this release, we have a foundation to build on. Next, we'll work towards stability, the abilty to use Nu as your main shell, the ability to write functions and scripts in Nu, and much more.
+Nu is just getting started. In this release, we have a foundation to build on. Next, we'll work towards stability, the ability to use Nu as your main shell, the ability to write functions and scripts in Nu, and much more.
 
 If you want to give it a spin, the [installation instructions](https://book.nushell.sh/en/installation) will help you get started. If you want to chat come by our [discord](https://discord.gg/NtAbbGn) and [github](https://github.com/nushell/nushell)

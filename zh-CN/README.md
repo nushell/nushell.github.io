@@ -14,7 +14,7 @@ features:
     details: 具备强大的插件系统，Nu 可以轻松扩展。
 ---
 
-<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls command" class="hero"/>
 
 ### Nu 可以与现有数据一起工作
 

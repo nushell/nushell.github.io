@@ -14,7 +14,7 @@ features:
     details: It's easy to extend Nu using a powerful plugin system.
 ---
 
-<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls comman" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls command" class="hero"/>
 
 ### Nu works with existing data
 

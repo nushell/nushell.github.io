@@ -5,3 +5,4 @@ extend-exclude = ["pt-BR", "de", "ja", "es", "book/commands"]
 [default.extend-words]
 # Avoid the false positive in book/commands/str_replace.md
 ons = "ons"
+nushell = "nushell"
