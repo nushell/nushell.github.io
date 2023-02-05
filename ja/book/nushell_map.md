@@ -31,7 +31,6 @@
 | enter             | -                                                | -                                                    |                                            |                                                 |
 | evaluate_by       |                                                  |                                                      |                                            |                                                 |
 | exit              | -                                                |                                                      | exit                                       | exit                                            |
-| fetch(`*`)        | -                                                | HttpClient,WebClient, HttpWebRequest/Response        | Invoke-WebRequest                          | wget                                            |
 | first             | top, limit                                       | First, FirstOrDefault                                | Select-Object -First                       | head                                            |
 | format            |                                                  | String.Format                                        | String.Format                              |                                                 |
 | from              | import flatfile, openjson, cast(variable as xml) | -                                                    | Import/ConvertFrom-{Csv,Xml,Html,Json}     |                                                 |
@@ -41,6 +40,7 @@
 | help              | sp_help                                          | -                                                    | Get-Help, help, man                        | man                                             |
 | histogram         | -                                                | -                                                    |                                            |                                                 |
 | history           | -                                                | -                                                    | Get-History, history                       | history                                         |
+| http(`*`)         | -                                                | HttpClient,WebClient, HttpWebRequest/Response        | Invoke-WebRequest                          | wget                                            |
 | inc(`*`)          | -                                                |                                                      | -                                          | -                                               |
 | insert            |                                                  |                                                      | Add-Member                                 |                                                 |
 | is_empty          | is null                                          | String.InNullOrEmpty                                 | String.InNullOrEmpty                       |                                                 |

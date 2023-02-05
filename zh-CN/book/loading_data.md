@@ -198,10 +198,10 @@ license = "MIT"
 
 ## 获取 URLs
 
-除了从文件系统中加载文件，你还可以通过使用[`fetch`](/book/commands/fetch.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
+除了从文件系统中加载文件，你还可以通过使用[`http get`](/book/commands/fetch.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
 
 ```
-> fetch https://blog.rust-lang.org/feed.xml
+> http get https://blog.rust-lang.org/feed.xml
 ──────┬───────────────────
  feed │ {record 2 fields}
 ──────┴───────────────────

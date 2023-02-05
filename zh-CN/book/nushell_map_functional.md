@@ -29,7 +29,6 @@
 | echo                      | println                      |                                 | putStrLn, print          |     |
 | enter                     |                              |                                 |                          |     |
 | exit                      | System/exit                  |                                 |                          |     |
-| fetch(`*`)                |                              |                                 |                          |     |
 | first                     | first                        | head                            | head                     |     |
 | format                    | format                       |                                 | Text.Printf.printf       |     |
 | from                      |                              |                                 |                          |     |
@@ -39,6 +38,7 @@
 | help                      | doc                          |                                 |                          |     |
 | histogram                 |                              |                                 |                          |     |
 | history                   |                              |                                 |                          |     |
+| http(`*`)                 |                              |                                 |                          |     |
 | inc(`*`)                  | inc                          |                                 | succ                     |     |
 | insert                    |                              |                                 |                          |     |
 | is-empty                  | empty?                       | isEmpty                         |                          |     |
@@ -82,7 +82,7 @@
 | split column              |                              |                                 |                          |     |
 | split row                 |                              |                                 |                          |     |
 | str(`*`)                  | clojure.string functions     | String functions                |                          |     |
-| str join               | join                         | concat                          | intercalate              |     |
+| str join                  | join                         | concat                          | intercalate              |     |
 | str trim                  | trim, triml, trimr           | trim, trimLeft, trimRight       | strip                    |     |
 | sum                       | apply +                      | sum                             | sum                      |     |
 | sys                       |                              |                                 |                          |     |

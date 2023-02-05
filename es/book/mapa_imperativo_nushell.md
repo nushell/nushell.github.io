@@ -30,7 +30,7 @@ Nota: esta tabla asume Nu 0.14.1 o posterior.
 | enter           |                               |                                        |                         |                 |
 | evaluate_by     |                               |                                        |                         |                 |
 | exit            | exit                          | System.exit, kotlin.system.exitProcess | exit                    | exit            |
-| fetch(`*`)      | urllib.request.urlopen        |                                        |                         |                 |
+| http            | urllib.request.urlopen        |                                        |                         |                 |
 | first           | list[0]                       | List[0], peek                          | vector[0], top          | vec[0]          |
 | format          | format                        |                                        |                         |                 |
 | from bson       |                               |                                        |                         |                 |

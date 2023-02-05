@@ -30,7 +30,6 @@ Nota: Esta tabla asume Nu 0.14.1 o posterior.
 | enter           |                            |                          |                          |     |
 | evaluate_by     |                            |                          |                          |     |
 | exit            | System/exit                |                          |                          |     |
-| fetch(`*`)      |                            |                          |                          |     |
 | first           | first                      |                          | head                     |     |
 | format          | format                     |                          | Text.Printf.printf       |     |
 | from bson       |                            |                          |                          |     |
@@ -55,6 +54,7 @@ Nota: Esta tabla asume Nu 0.14.1 o posterior.
 | help            | doc                        |                          |                          |     |
 | histogram       |                            |                          |                          |     |
 | history         |                            |                          |                          |     |
+| http(`*`)       |                            |                          |                          |     |
 | inc(`*`)        | inc                        |                          | succ                     |     |
 | insert          |                            |                          |                          |     |
 | is-empty        | empty?                     |                          |                          |     |

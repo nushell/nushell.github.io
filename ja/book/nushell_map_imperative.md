@@ -30,7 +30,6 @@
 | enter             |                               |                                                     |                         |                                               |
 | evaluate_by       |                               |                                                     |                         |                                               |
 | exit              | exit                          | System.exit, kotlin.system.exitProcess              | exit                    | exit                                          |
-| fetch(`*`)        | urllib.request.urlopen        |                                                     |                         |                                               |
 | first             | list[0]                       | List[0], peek                                       | vector[0], top          | Vec[0]                                        |
 | format            | format                        | format                                              | format                  | format!                                       |
 | from              | csv, json, sqlite3            |                                                     |                         |                                               |
@@ -40,6 +39,7 @@
 | help              | help                          |                                                     |                         |                                               |
 | histogram         |                               |                                                     |                         |                                               |
 | history           |                               |                                                     |                         |                                               |
+| http(`*`)        | urllib.request.urlopen        |                                                     |                         |                                               |
 | inc(`*`)          | x += 1                        | x++                                                 | x++                     | x += 1                                        |
 | insert            | list.insert                   |                                                     |                         |                                               |
 | is_empty          | is None                       | isEmpty                                             | empty                   | is_empty                                      |

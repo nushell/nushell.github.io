@@ -30,7 +30,6 @@
 | enter             |                              |                                 |                          |     |
 | evaluate_by       |                              |                                 |                          |     |
 | exit              | System/exit                  |                                 |                          |     |
-| fetch(`*`)        |                              |                                 |                          |     |
 | first             | first                        | head                            | head                     |     |
 | format            | format                       |                                 | Text.Printf.printf       |     |
 | from              |                              |                                 |                          |     |
@@ -40,6 +39,7 @@
 | help              | doc                          |                                 |                          |     |
 | histogram         |                              |                                 |                          |     |
 | history           |                              |                                 |                          |     |
+| http(`*`)         |                              |                                 |                          |     |
 | inc(`*`)          | inc                          |                                 | succ                     |     |
 | insert            |                              |                                 |                          |     |
 | is-empty          | empty?                       | isEmpty                         |                          |     |

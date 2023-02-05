@@ -30,5 +30,5 @@ Benchmarks a command within a closure
 
 Benchmark a command using an existing input
 ```shell
-> fetch https://www.nushell.sh/book/ | benchmark { split chars }
+> http get https://www.nushell.sh/book/ | benchmark { split chars }
 ```
