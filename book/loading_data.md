@@ -131,7 +131,7 @@ The first thing we want to do when bringing in the file is to work with it a lin
 ───┴──────────────────────────────
 ```
 
-We can see that we're working with the lines because we're back into a table. Our next step is to see if we can split up the rows into something a little more useful. For that, we'll use the [`split`](commands/split.md) command. [`split`](commands/split.md), as the name implies, gives us a way to split a delimited string. We will use [`split`](commands/split.md)'s `column` subcommand to split the contents across multiple columns. We tell it what the delimiter is, and it does the rest:
+We can see that we're working with the lines because we're back into a list. Our next step is to see if we can split up the rows into something a little more useful. For that, we'll use the [`split`](commands/split.md) command. [`split`](commands/split.md), as the name implies, gives us a way to split a delimited string. We will use [`split`](commands/split.md)'s `column` subcommand to split the contents across multiple columns. We tell it what the delimiter is, and it does the rest:
 
 ```
 > open people.txt | lines | split column "|"

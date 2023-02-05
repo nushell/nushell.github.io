@@ -104,7 +104,7 @@ Zuerst wird die Datei so geladen, dass jede Zeile für sich verarbeitet werden k
 ───┴──────────────────────────────
 ```
 
-Dadurch wird bereits wieder eine Tabelle ausgegeben. Im nächsten Schritt sollen die Spalten
+Dadurch wird bereits wieder eine Liste ausgegeben. Im nächsten Schritt sollen die Zeilen
 in etwas brauchbares aufgeteilt werden.
 Dafür verwenden wir den [`split`](/book/commands/split.md) Befehl. Wie der Name schon verräht,
 kann damit ein String durch ein Trennzeichen aufgesplittet oder aufgetrennt werden.
