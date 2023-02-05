@@ -7,7 +7,7 @@ title: HTTP
 ### Fetching JSON from a url
 
 ```shell
-> fetch https://jsonplaceholder.typicode.com/posts | first 5
+> http get https://jsonplaceholder.typicode.com/posts | first 5
 ```
 
 Output
@@ -63,7 +63,7 @@ An example JSON file, `urls.json`, with the following contents:
 ```
 
 ```shell
-> open urls.json | get urls | each { |u| fetch $u }
+> open urls.json | get urls | each { |u| http get $u }
 ```
 
 Output
@@ -94,7 +94,7 @@ Output
 If you specify the `--raw` flag, you'll see 3 separate json objects, one in each row.
 
 ```shell
-> open urls.json | get urls | each { |u| fetch $u -r }
+> open urls.json | get urls | each { |u| http get $u -r }
 ```
 
 Output
@@ -132,7 +132,7 @@ Output
 To combine these responses together into a valid JSON array, you can turn the table into json.
 
 ```shell
-> open urls.json | get urls | each { |u| fetch $u } | to json
+> open urls.json | get urls | each { |u| http get $u } | to json
 ```
 
 Output
@@ -193,7 +193,7 @@ Output
 We can put this all together into a pipeline where we read data, manipulate it, and then send it back to the API. Lets `fetch` a post, `increment` the id, and `post` it back to the endpoint. In this particular example, the test endpoint gives back an arbitrary response which we can't actually mutate.
 
 ```shell
-> open urls.json | get urls | first | fetch $in | upsert id {|item| $item.id | inc} | to json | post https://jsonplaceholder.typicode.com/posts $in
+> open urls.json | get urls | first | http get $in | upsert id {|item| $item.id | inc} | to json | post https://jsonplaceholder.typicode.com/posts $in
 ```
 
 ```

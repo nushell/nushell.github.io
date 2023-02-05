@@ -224,11 +224,11 @@ license = "MIT"
 
 ## URLs abrufen
 
-Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`fetch`](/book/commands/fetch.md)
+Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`http get`](/book/commands/fetch.md)
 Befehl geladen werden. Dies wird den Inhalt der URL aus dem Netz abrufen und zurückgeben:
 
 ```
-> fetch https://blog.rust-lang.org/feed.xml
+> http get https://blog.rust-lang.org/feed.xml
 ──────┬───────────────────
  feed │ {record 2 fields}
 ──────┴───────────────────

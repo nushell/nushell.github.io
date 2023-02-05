@@ -16,7 +16,7 @@ Note: this table assumes Nu 0.43 or later.
 | du           | shutil.disk_usage             |                                                     |                         |                                               |
 | each         | for                           | for                                                 | for                     | for                                           |
 | exit         | exit                          | System.exit, kotlin.system.exitProcess              | exit                    | exit                                          |
-| fetch        | urllib.request.urlopen        |                                                     |                         |                                               |
+| http get     | urllib.request.urlopen        |                                                     |                         |                                               |
 | first        | list[:x]                      | List[0], peek                                       | vector[0], top          | Vec[0]                                        |
 | format       | format                        | format                                              | format                  | format!                                       |
 | from         | csv, json, sqlite3            |                                                     |                         |                                               |
@@ -40,7 +40,7 @@ Note: this table assumes Nu 0.43 or later.
 | get          | list[x]                       | List[x]                                             | vector[x]               | Vec[x]                                        |
 | open         | open                          |                                                     |                         |                                               |
 | transpose    | zip(\*matrix)                 |                                                     |                         |                                               |
-| post         | urllib.request.urlopen        |                                                     |                         |                                               |
+| http post    | urllib.request.urlopen        |                                                     |                         |                                               |
 | prepend      | deque.appendleft              |                                                     |                         |                                               |
 | print        | print                         | println                                             | printf                  | println!                                      |
 | ps           | os.listdir('/proc')           |                                                     |                         |                                               |
@@ -74,4 +74,3 @@ Note: this table assumes Nu 0.43 or later.
 | where        | filter                        | filter                                              | filter                  | filter                                        |
 | which        | shutil.which                  |                                                     |                         |                                               |
 | wrap         | { "key" : val }               |                                                     |                         |                                               |
-

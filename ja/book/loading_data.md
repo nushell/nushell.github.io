@@ -188,11 +188,11 @@ license = "MIT"
 
 ## URL からの取得
 
-ファイルシステムからファイルを読み込むことに加えて、`fetch`コマンドを利用して URL からリソースを取得できます。
+ファイルシステムからファイルを読み込むことに加えて、`http get`コマンドを利用して URL からリソースを取得できます。
 これはインターネットから URL の内容をフェッチして返してくれます。
 
 ```
-> fetch https://www.jonathanturner.org/feed.xml
+> http get https://www.jonathanturner.org/feed.xml
 ─────┬───────────────────────────
  rss │ [row attributes children]
 ─────┴───────────────────────────

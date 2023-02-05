@@ -19,7 +19,7 @@ Note: this table assumes Nu 0.43 or later.
 | du                     |                               |                                                      |                                            | du                                              |
 | each                   | cursor                        |                                                      | ForEach-Object, foreach, for               |                                                 |
 | exit                   |                               |                                                      | exit                                       | exit                                            |
-| fetch                  |                               | HttpClient,WebClient, HttpWebRequest/Response        | Invoke-WebRequest                          | wget                                            |
+| http                   |                               | HttpClient,WebClient, HttpWebRequest/Response        | Invoke-WebRequest                          | wget                                            |
 | first                  | top, limit                    | First, FirstOrDefault                                | Select-Object -First                       | head                                            |
 | format                 |                               | String.Format                                        | String.Format                              |                                                 |
 | from                   | import flatfile, openjson, cast(variable as xml) |                                   | Import/ConvertFrom-{Csv,Xml,Html,Json}     |                                                 |

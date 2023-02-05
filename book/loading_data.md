@@ -260,10 +260,10 @@ Or run any SQL query you like:
 
 ## Fetching URLs
 
-In addition to loading files from your filesystem, you can also load URLs by using the [`fetch`](commands/fetch.md) command. This will fetch the contents of the URL from the internet and return it:
+In addition to loading files from your filesystem, you can also load URLs by using the [`http get`](commands/fetch.md) command. This will fetch the contents of the URL from the internet and return it:
 
 ```
-> fetch https://blog.rust-lang.org/feed.xml
+> http get https://blog.rust-lang.org/feed.xml
 ──────┬───────────────────
  feed │ {record 2 fields}
 ──────┴───────────────────

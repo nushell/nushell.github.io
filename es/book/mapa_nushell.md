@@ -31,7 +31,6 @@ Nota: Esta tabla asume Nu 0.14.1 o posterior.
 | enter           | N/A                           | N/A                                                  |                                            |                                                 |
 | evaluate_by     |                               |                                                      |                                            |                                                 |
 | exit            | N/A                           |                                                      | exit                                       | exit                                            |
-| fetch(`*`)      | N/A                           | HttpClient,WebClient, HttpWebRequest/Response        | Invoke-WebRequest                          | wget                                            |
 | first           | top, limit                    | First, FirstOrDefault                                | Select-Object -First                       | head                                            |
 | format          |                               | String.Format()                                      | String.Format()                            |                                                 |
 | from bson       | N/A                           | N/A                                                  | N/A                                        |                                                 |
@@ -56,6 +55,7 @@ Nota: Esta tabla asume Nu 0.14.1 o posterior.
 | help            | sp_help                       | N/A                                                  | Get-Help, help, man                        | man                                             |
 | histogram       | N/A                           | N/A                                                  |                                            |                                                 |
 | history         | N/A                           | N/A                                                  | Get-History, history                       | history                                         |
+| http(`*`)       | N/A                           | HttpClient,WebClient, HttpWebRequest/Response        | Invoke-WebRequest                          | wget                                            |
 | inc(`*`)        | N/A                           |                                                      | N/A                                        | N/A                                             |
 | insert          |                               |                                                      | Add-Member                                 |                                                 |
 | is_empty        | is null                       | String.InNullOrEmpty()                               | String.InNullOrEmpty()                     |                                                 |
