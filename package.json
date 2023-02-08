@@ -13,17 +13,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@vuepress/plugin-git": "2.0.0-beta.54",
-    "@vuepress/plugin-back-to-top": "2.0.0-beta.54",
-    "@vuepress/plugin-docsearch": "2.0.0-beta.54",
-    "@vuepress/plugin-medium-zoom": "2.0.0-beta.54",
-    "@vuepress/theme-default": "2.0.0-beta.54",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.1.0",
-    "prettier": "^2.8.1",
-    "vuepress": "2.0.0-beta.54",
-    "vuepress-plugin-feed2": "2.0.0-beta.136",
-    "vuepress-plugin-sitemap2": "2.0.0-beta.136"
+    "@vuepress/plugin-git": "2.0.0-beta.60",
+    "@vuepress/plugin-back-to-top": "2.0.0-beta.60",
+    "@vuepress/plugin-docsearch": "2.0.0-beta.60",
+    "@vuepress/plugin-medium-zoom": "2.0.0-beta.60",
+    "@vuepress/theme-default": "2.0.0-beta.60",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
+    "prettier": "^2.8.3",
+    "vuepress": "2.0.0-beta.60",
+    "vuepress-plugin-feed2": "2.0.0-beta.172",
+    "vuepress-plugin-sitemap2": "2.0.0-beta.172"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
