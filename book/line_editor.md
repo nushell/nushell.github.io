@@ -628,7 +628,7 @@ liking.
 ### History menu
 
 The history menu is a handy way to access the editor history. When activating
-the menu (default `Ctrl+x`) the command history is presented in reverse
+the menu (default `Ctrl+r`) the command history is presented in reverse
 chronological order, making it extremely easy to select a previous command.
 
 The history menu can be configured by modifying these values from the config object:
