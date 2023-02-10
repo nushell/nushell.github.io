@@ -31,5 +31,5 @@ Multiplies each number. Note that the list will become arbitrarily disordered.
 
 Iterate over each element, print the matching value and its index
 ```shell
-> [1 2 3] | par-each -n { |it| if $it.item == 2 { $"found 2 at ($it.index)!"} }
+> [1 2 3] | enumerate | par-each { |it| if $it.item == 2 { $"found 2 at ($it.index)!"} }
 ```
