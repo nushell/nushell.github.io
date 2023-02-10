@@ -40,7 +40,7 @@ let names = [Mark Tami Amanda Jeremy]
 $names | each { |it| $"Hello, ($it)!" }
 # Outputs "Hello, Mark!" and three more similar lines.
 
-$names | each -n { |it| $"($it.index + 1) - ($it.item)" }
+$names | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 

@@ -71,7 +71,7 @@ This new `x` is visible to any code that follows this line. Careful use of shado
 Loop counters are another common pattern for mutable variables and are built into most iterating commands, for example you can get both each item and an index of each item using the `-n` flag on [`each`](commands/each.md):
 
 ```
-> ls | each -n { |it| $"Number ($it.index) is size ($it.item.size)" }
+> ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
 ```
 
 You can also use the [`reduce`](commands/reduce.md) command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:

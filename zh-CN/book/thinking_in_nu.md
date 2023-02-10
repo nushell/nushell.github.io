@@ -69,7 +69,7 @@ let x = $x + 1
 循环计数器是可变变量的另一种常见模式，它被内置于大多数迭代命令中，例如，你可以使用[`each`](/book/commands/each.md)上的`-n`标志同时获得每个元素的值和索引：
 
 ```bash
-> ls | each -n { |it| $"Number ($it.index) is size ($it.item.size)" }
+> ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
 ```
 
 你也可以使用[`reduce`](/book/commands/reduce.md)命令来达到上述目的，其方式与你在循环中修改一个变量相同。例如，如果你想在一个字符串列表中找到最长的字符串，你可以这样做：
