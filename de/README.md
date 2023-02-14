@@ -8,7 +8,7 @@ actionLink: /de/book/
 features:
   - title: Pipelines um jedes Betriebssystem zu steuern
     details: Nu läuft auf Linux, macOS und Windows. Einmal lernen - überall verwenden.
-  - title: Alles sind Daten.
+  - title: Alles ist Daten.
     details: Pipelines in Nu nutzen strukturierte Daten die einfach ausgewählt, gefiltert und sortiert werden können. Nie wieder Strings parsen, sondern direkt anfangen Probleme zu lösen.
   - title: Leistungsfähige Plugins
     details: Nu kann dank des leistungsfähigen Plugin-Systems einfach erweitert werden.
