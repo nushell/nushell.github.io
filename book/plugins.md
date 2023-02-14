@@ -24,7 +24,7 @@ Windows:
 
 When [`register`](commands/register.md) is called:
 
-1. Nu launches the plugin, and wait for plugin tell Nu which communication encoding it should use
+1. Nu launches the plugin, and waits for the plugin to tell Nu which communication encoding it should use
 2. Nu sends it a "Signature" message over stdin
 3. The plugin responds via stdout with a message containing its signature (name, description, arguments, flags, and more)
 4. Nu saves the plugin signature in the file at `$nu.plugin-path`, so registration is persisted across multiple launches
