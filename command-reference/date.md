@@ -1,6 +1,4 @@
-# Command Reference
-
-To see all commands in Nushell, run [`help commands`](commands/help.md).
+# Date
 
 <script>
   import pages from '@temp/pages'
@@ -8,8 +6,8 @@ To see all commands in Nushell, run [`help commands`](commands/help.md).
     computed: {
       commands() {
         return pages
-          .filter(p => p.path.indexOf('/book/commands/') >= 0)
-          .sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+          .filter(p => p.path.includes('/book/commands/'))
+          .filter(p => p.frontmatter.categories.includes('date'));
       }
     }
   }
@@ -18,12 +16,10 @@ To see all commands in Nushell, run [`help commands`](commands/help.md).
 <table>
   <tr>
     <th>Command</th>
-    <th>Categories</th>
     <th>Description</th>
   </tr>
   <tr v-for="command in commands">
    <td><a :href="command.path">{{ command.title }}</a></td>
-   <td style="white-space: pre-wrap;">{{ command.frontmatter.categories }}</td>
    <td style="white-space: pre-wrap;">{{ command.frontmatter.usage }}</td>
   </tr>
 </table>
