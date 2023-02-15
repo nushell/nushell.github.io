@@ -7,7 +7,8 @@
       commands() {
         return pages
           .filter(p => p.path.includes('/book/commands/'))
-          .filter(p => p.frontmatter.categories.includes('shells'));
+          .filter(p => p.frontmatter.categories.includes('shells'))
+          .sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
       }
     }
   }
