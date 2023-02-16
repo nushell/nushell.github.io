@@ -99,9 +99,9 @@ export const sidebarEn: SidebarConfig = {
       ],
     },
   ],
-  '/command-reference/': [
+  '/commands/': [
     {
-      text: 'Command Reference',
+      text: 'Commands',
       collapsible: false,
       children: [
         'bits.md',
@@ -126,6 +126,7 @@ export const sidebarEn: SidebarConfig = {
         'misc.md',
         'network.md',
         'platform.md',
+        'prompt.md',
         'random.md',
         'shells.md',
         'strings.md',
