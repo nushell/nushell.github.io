@@ -19,11 +19,11 @@
     "@vuepress/plugin-medium-zoom": "2.0.0-beta.60",
     "@vuepress/theme-default": "2.0.0-beta.60",
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.1",
-    "prettier": "^2.8.3",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4",
     "vuepress": "2.0.0-beta.60",
-    "vuepress-plugin-feed2": "2.0.0-beta.172",
-    "vuepress-plugin-sitemap2": "2.0.0-beta.172"
+    "vuepress-plugin-feed2": "2.0.0-beta.175",
+    "vuepress-plugin-sitemap2": "2.0.0-beta.175"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
