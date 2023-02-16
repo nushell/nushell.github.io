@@ -13,10 +13,10 @@ Eine Pipeline besteht aus drei Teilen: Dem Input, dem Filter und dem Output.
 
 Der erste Befehl, `open "Cargo.toml"`, ist der Input (manchmal auch als "source" oder "producer" bezeichnet).
 Dieser kreiert oder ladet Daten und speist sie in die Pipeline ein. Von hier aus hat Nu etwas zum damit arbeiten.
-Befehle wie [`ls`](/book/commands/ls.md) sind ebenfalls Inputs, da sie Daten aus dem Dateisystem ziehen und in die Pipeline einspeisen.
+Befehle wie [`ls`](/commands/commands/ls.md) sind ebenfalls Inputs, da sie Daten aus dem Dateisystem ziehen und in die Pipeline einspeisen.
 
 Der zweite Befehl, `inc package.version --minor`, ist ein Filter. Filter verarbeiten die Daten auf eine bestimmte Weise.
-Vielleicht ändern sie Teile (wie der [`inc`](/book/commands/inc.md) im Beispiel), oder sie führen eine andere Operation aus wie Loggen.
+Vielleicht ändern sie Teile (wie der [`inc`](/commands/commands/inc.md) im Beispiel), oder sie führen eine andere Operation aus wie Loggen.
 
 Der letzte Befehl, `save "Cargo_new.toml"`, ist ein Output (manchmal auch "sink" genannt). Ein Output nimmt die Daten aus der Pipeline entgegen und führt
 eine abschliessende Operation daran aus. Im Beispiel wird der Inhalt der Pipeline als letzten Schritt in eine Datei gespeichert.
@@ -58,7 +58,7 @@ so dass der externe Befehl diese von `stdin` lesen kann.
 Daten die von einem externen Befehl in Nu ankommen, werden als Bytes verarbeitet, die Nushell automatisch in UTF-8 konvertieren versucht.
 Wenn dies gelingt, wird ein Textstrom an den internen Befehl gesendet. Wenn nicht, wird ein Strom von binären Daten weitergeleitet.
 
-Befehle wie [`lines`](/book/commands/lines.md) helfen dabei, mit externen Daten zu arbeiten, da er diskrete Zeilen der Daten zurückgibt.
+Befehle wie [`lines`](/commands/commands/lines.md) helfen dabei, mit externen Daten zu arbeiten, da er diskrete Zeilen der Daten zurückgibt.
 
 `externer_befehl_1 | externer_befehl_2`
 
@@ -67,9 +67,9 @@ Der `stdout` des externen_befehl_1 wiird mit dem `stdin` des externen_befehl_2 v
 
 ## Hinter den Kulissen
 
-Warum gibt dann der [`ls`](/book/commands/ls.md) Befehl eine Tabelle zurück, wenn er doch ein Input ist und kein Output?
-Nu fügt diesen Output automatisch hinzu, indem sie den Befehl [`table`](/book/commands/table.md) verwendet.
-Der [`table`](/book/commands/table.md) Befehl wird an jede Pipeline angefügt, die keinen eigenen Output besitzen.
+Warum gibt dann der [`ls`](/commands/commands/ls.md) Befehl eine Tabelle zurück, wenn er doch ein Input ist und kein Output?
+Nu fügt diesen Output automatisch hinzu, indem sie den Befehl [`table`](/commands/commands/table.md) verwendet.
+Der [`table`](/commands/commands/table.md) Befehl wird an jede Pipeline angefügt, die keinen eigenen Output besitzen.
 Dies erlaubt es den Output in dieser Form zu sehen. Tatsächlich ist der Befehl:
 
 ```

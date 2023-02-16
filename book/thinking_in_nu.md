@@ -58,7 +58,7 @@ For more in-depth explanation, check [How Nushell Code Gets Run](how_nushell_cod
 
 Another common surprise for folks coming from other languages is that Nushell variables are immutable (and indeed some people have started to call them "constants" to reflect this). Coming to Nushell you'll want to spend some time becoming familiar with working in a more functional style, as this tends to help write code that works best with immutable variables.
 
-You might wonder why Nushell uses immutable variables. Early on in Nushell's development we decided to see how long we could go using a more data-focused, functional style in the language. More recently, we added a key bit of functionality into Nushell that made these early experiments show their value: parallelism. By switching from [`each`](commands/each.md) to [`par-each`](commands/par-each.md) in any Nushell script, you're able to run the corresponding block of code in parallel over the input. This is possible because Nushell's design leans heavily on immutability, composition, and pipelining.
+You might wonder why Nushell uses immutable variables. Early on in Nushell's development we decided to see how long we could go using a more data-focused, functional style in the language. More recently, we added a key bit of functionality into Nushell that made these early experiments show their value: parallelism. By switching from [`each`](/commands/commands/each.md) to [`par-each`](/commands/commands/par-each.md) in any Nushell script, you're able to run the corresponding block of code in parallel over the input. This is possible because Nushell's design leans heavily on immutability, composition, and pipelining.
 
 Just because Nushell variables are immutable doesn't mean things don't change. Nushell makes heavy use of the technique of "shadowing". Shadowing means creating a new variable with the same name as a previously declared variable. For example, say you had an `$x` in scope, and you wanted a new `$x` that was one greater:
 
@@ -68,13 +68,13 @@ let x = $x + 1
 
 This new `x` is visible to any code that follows this line. Careful use of shadowing can make for an easier time working with variables, though it's not required.
 
-Loop counters are another common pattern for mutable variables and are built into most iterating commands, for example you can get both each item and an index of each item using the `-n` flag on [`each`](commands/each.md):
+Loop counters are another common pattern for mutable variables and are built into most iterating commands, for example you can get both each item and an index of each item using the `-n` flag on [`each`](/commands/commands/each.md):
 
 ```
 > ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
 ```
 
-You can also use the [`reduce`](commands/reduce.md) command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:
+You can also use the [`reduce`](/commands/commands/reduce.md) command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:
 
 ```
 > [one, two, three, four, five, six] | reduce {|curr, max|
@@ -105,8 +105,8 @@ In practice, this lets you write some concise code for working with subdirectori
 
 The `cd` command changes the `PWD` environment variables, and this variable change does not escape the block, allowing each iteration to start from the current directory and enter the next subdirectory.
 
-Having the environment scoped like this makes commands more predictable, easier to read, and when the time comes, easier to debug. Nushell also provides helper commands like [`def-env`](commands/def-env.md), [`load-env`](commands/load-env.md), as convenient ways of doing batches of updates to the environment.
+Having the environment scoped like this makes commands more predictable, easier to read, and when the time comes, easier to debug. Nushell also provides helper commands like [`def-env`](/commands/commands/def-env.md), [`load-env`](/commands/commands/load-env.md), as convenient ways of doing batches of updates to the environment.
 
-`*` - there is one exception here, where [`def-env`](commands/def-env.md) allows you to create a command that participates in the caller's environment
+`*` - there is one exception here, where [`def-env`](/commands/commands/def-env.md) allows you to create a command that participates in the caller's environment
 
 **Thinking in Nushell:** - The coding best practice of no global mutable variables extends to the environment in Nushell. Using the built-in helper commands will let you more easily work with the environment in Nushell. Taking advantage of the fact that environments are scoped to blocks can also help you write more concise scripts and interact with external commands without adding things into a global environment you don't need.

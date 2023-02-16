@@ -318,7 +318,7 @@ Rest parameters can be used together with positional parameters:
 
 ```
 def greet [vip: string, ...name: string] {
-  $"hello to our VIP ($vip)" 
+  $"hello to our VIP ($vip)"
   "and hello to everybody else:"
   for $n in $name {
     $n
@@ -399,13 +399,13 @@ Custom commands stream their output just like built-in commands. For example, le
 > ls | get name
 ```
 
-Let's move [`ls`](commands/ls.md) into a command that we've written:
+Let's move [`ls`](/commands/commands/ls.md) into a command that we've written:
 
 ```nushell
 def my-ls [] { ls }
 ```
 
-We can use the output from this command just as we would [`ls`](commands/ls.md).
+We can use the output from this command just as we would [`ls`](/commands/commands/ls.md).
 
 ```
 > my-ls | get name

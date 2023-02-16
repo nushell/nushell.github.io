@@ -11,7 +11,7 @@ if $book_exists == false {
 # Old commands are currently not deleted because some of them
 # are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
 # all of them.
-#do -i { rm book/commands/*.md }
+#do -i { rm book//commands/commands/*.md }
 
 let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
 let cmds_group = ($commands | group-by name)

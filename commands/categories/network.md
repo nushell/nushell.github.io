@@ -1,4 +1,4 @@
-# System
+# Network
 
 <script>
   import pages from '@temp/pages'
@@ -6,8 +6,8 @@
     computed: {
       commands() {
         return pages
-          .filter(p => p.path.includes('/book/commands/'))
-          .filter(p => p.frontmatter.categories.includes('system'))
+          .filter(p => p.path.includes('/commands/commands/'))
+          .filter(p => p.frontmatter.categories.includes('network'))
           .sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
       }
     }

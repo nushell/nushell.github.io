@@ -6,7 +6,7 @@ Nu embraces this approach, and expands it to include other types of data, in add
 
 Like many programming languages, Nu models data using a set of simple, and structured data types. Simple data types include integers, floats, strings, booleans, dates. There are also special types for filesizes and time durations.
 
-The [`describe`](commands/describe.md) command returns the type of a data value:
+The [`describe`](/commands/commands/describe.md) command returns the type of a data value:
 
 ```sh
 > 42 | describe
@@ -405,7 +405,7 @@ Closure parameters are specified between a pair of pipe symbols (for example, `|
 You can also use a pipeline input as `$in` in most closures instead of providing an explicit parameter: `each { print $in }`
 
 Closures itself can be bound to a named variable and passed as a parameter.
-To call a closure directly in your code use the [`do`](commands/do.md) command.
+To call a closure directly in your code use the [`do`](/commands/commands/do.md) command.
 
 ```nu
 # Assign a closure to a variable
@@ -414,7 +414,7 @@ do $greet "Julian"
 ```
 
 Closures are a useful way to represent code that can be executed on each row of data.
-It is idiomatic to use `$it` as a parameter name in [`each`](commands/each.md) blocks, but not required;
+It is idiomatic to use `$it` as a parameter name in [`each`](/commands/commands/each.md) blocks, but not required;
 `each { |x| print $x }` works the same way as `each { |it| print $it }`.
 
 ## Blocks

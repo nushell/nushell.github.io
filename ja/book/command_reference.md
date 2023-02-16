@@ -6,7 +6,7 @@
     computed: {
       commands() {
         return pages
-          .filter(p => p.path.indexOf('/book/commands/') >= 0)
+          .filter(p => p.path.indexOf('/commands/commands/') >= 0)
           .sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
       }
     }

@@ -22,7 +22,7 @@ Um zu starten, wird eine Tabelle benötigt wie diese:
 
 ## Daten sortieren
 
-Um eine Tabelle zu sortieren, wird der [`sort-by`](/book/commands/sort-by.md) Befehl verwendet, dem mitgeteilt wird, nach welcher Spalte sortiert werden soll.
+Um eine Tabelle zu sortieren, wird der [`sort-by`](/commands/commands/sort-by.md) Befehl verwendet, dem mitgeteilt wird, nach welcher Spalte sortiert werden soll.
 Hier wird sortiert nach der Grösse der Dateien:
 
 ```
@@ -46,7 +46,7 @@ Das Beispiel oben hätte auch nach "name", "accessed" oder "modified" sortiert w
 ## Die benötigten Daten auswählen
 
 Von einer Tabelle können einzelne Spalten und Zeilen ausgewählt werden.
-Mit dem [`select`](/book/commands/select.md) Befehl werden hier einige Spalten gewählt.
+Mit dem [`select`](/commands/commands/select.md) Befehl werden hier einige Spalten gewählt.
 
 ```
 > ls | select name size
@@ -125,7 +125,7 @@ Im folgenden wird zuerst nach dem Namen sortiert, und dann die 5. Zeile mit dem 
 
 Bisher wurde die Tabelle auf die benötigten Inhalte getrimmt.
 Im nächsten Schritt soll angeschaut werden, wie wir den Inhalt anstelle der Tabelle herausziehen können.
-Zum Beispiel wenn eine Liste der Namen aller Dateien erstellt werden soll. Dafür steht der [`get`](/book/commands/get.md) Befehl bereit:
+Zum Beispiel wenn eine Liste der Namen aller Dateien erstellt werden soll. Dafür steht der [`get`](/commands/commands/get.md) Befehl bereit:
 
 ```
 > ls | get name
@@ -142,7 +142,7 @@ Zum Beispiel wenn eine Liste der Namen aller Dateien erstellt werden soll. Dafü
 
 Damit erhalten wir die Werte aller Dateinamen als Liste.
 
-Dies sieht fast so aus, wie der [`select`](/book/commands/select.md) Befehl weiter oben, deshalb hier die beiden nebeneinander:
+Dies sieht fast so aus, wie der [`select`](/commands/commands/select.md) Befehl weiter oben, deshalb hier die beiden nebeneinander:
 
 ```
 > ls | select name
@@ -161,11 +161,11 @@ Dies sieht fast so aus, wie der [`select`](/book/commands/select.md) Befehl weit
 
 Diese sehen wirklich sehr ähnlich aus! Was also ist der Unterschied:
 
-- [`select`](/book/commands/select.md) - generiert eine Tabelle, die nur die gewünschten Spalten enhält
-- [`get`](/book/commands/get.md) - gibt den Inhalt der angegebenen Spalte als Liste zurück
+- [`select`](/commands/commands/select.md) - generiert eine Tabelle, die nur die gewünschten Spalten enhält
+- [`get`](/commands/commands/get.md) - gibt den Inhalt der angegebenen Spalte als Liste zurück
 
 Einen Weg, diese zwei auseinander zu halten ist, dass die Spaltennamen fehlen, was bedeutet, es muss sich um eine Liste handeln.
-Der [`get`](/book/commands/get.md) geht noch einen Schritt weiter und verwendet Pfade um auf tiefer liegende Strukturen zugreifen zu können,
+Der [`get`](/commands/commands/get.md) geht noch einen Schritt weiter und verwendet Pfade um auf tiefer liegende Strukturen zugreifen zu können,
 wie man sie z.B. in einer .json Datei findet.
 
 ## Daten einer Tabelle ändern
@@ -176,7 +176,7 @@ In Nu wird dadurch nicht die Tabelle direkt geändert, sondern jeder Befehl gene
 
 ### Tabellen zusammenführen
 
-Mit [`append`](/book/commands/append.md) können Spalten gleichen Namens zusammengeführt werden:
+Mit [`append`](/commands/commands/append.md) können Spalten gleichen Namens zusammengeführt werden:
 
 ```
 > let $first = [[a b]; [1 2]]
@@ -192,7 +192,7 @@ Mit [`append`](/book/commands/append.md) können Spalten gleichen Namens zusamme
 
 ### Tabellen mergen
 
-Mit dem [`merge`](/book/commands/merge.md) Befehl werden zwei oder mehr Tabellen zusammengeführt.
+Mit dem [`merge`](/commands/commands/merge.md) Befehl werden zwei oder mehr Tabellen zusammengeführt.
 
 ```
 > let $first = [[a b]; [1 2]]
@@ -222,7 +222,7 @@ Können nun alle drei Tabellen zusammengeführt werden wie hier:
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-Oder mit dem [`reduce`](/book/commands/reduce.md) Befehl alle dynamisch gemerged:
+Oder mit dem [`reduce`](/commands/commands/reduce.md) Befehl alle dynamisch gemerged:
 
 ```
 > [$first $second $third] | reduce {|it, acc| $acc|merge { $it }}
@@ -235,7 +235,7 @@ Oder mit dem [`reduce`](/book/commands/reduce.md) Befehl alle dynamisch gemerged
 
 ### Eine Spalte hinzufügen
 
-Mit dem [`insert`](/book/commands/insert.md) Befehl wird eine neue Spalte hinzugefügt.
+Mit dem [`insert`](/commands/commands/insert.md) Befehl wird eine neue Spalte hinzugefügt.
 Wie zum Beispiel:
 
 ```
@@ -266,7 +266,7 @@ wird eine Spalte namens "next_edition" mit dem Wert 2021 hinzugefügt:
 
 Änderungen in Nu sind funktionale Änderungen, was bedeutet, dass Werte geändert werden, ohne permanente Änderungen zu bewirken.
 Es ist deshalb möglich, mehrere Änderungen in der Pipeline vorzunehmen, bevor diese bereit sind um gesichert zu werden.
-Zum Sichern können wir, wie in diesem Beispiel, den [`save`](/book/commands/save.md) Befehl verwenden:
+Zum Sichern können wir, wie in diesem Beispiel, den [`save`](/commands/commands/save.md) Befehl verwenden:
 
 ```
 > open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
@@ -279,7 +279,7 @@ Zum Sichern können wir, wie in diesem Beispiel, den [`save`](/book/commands/sav
 
 ### Eine Spalte updaten
 
-Ähnlich dem [`insert`](/book/commands/insert.md) Befehl, kann mit [`update`](/book/commands/update.md) der Inhalt einer Spalte geändert werden.
+Ähnlich dem [`insert`](/commands/commands/insert.md) Befehl, kann mit [`update`](/commands/commands/update.md) der Inhalt einer Spalte geändert werden.
 Auf die selbe Datei angewendet, sieht das so aus:
 
 ```
@@ -298,11 +298,11 @@ Und nun das Update auf die nächste Edition, die unterstützt werden soll:
 ─────────┴──────
 ```
 
-Mit dem [`upsert`](/book/commands/upsert.md) Befehl wird der Wert enweder eingefügt oder updatet abhängig davon, ob er bereits existriet.
+Mit dem [`upsert`](/commands/commands/upsert.md) Befehl wird der Wert enweder eingefügt oder updatet abhängig davon, ob er bereits existriet.
 
 ### Spalten verschieben
 
-Mit [`move`](/book/commands/move.md) werden Spalten in de Tabelle verschoben. Um zum Bespiel die Spalte "name" von "ls" nach der Spalte "size"
+Mit [`move`](/commands/commands/move.md) werden Spalten in de Tabelle verschoben. Um zum Bespiel die Spalte "name" von "ls" nach der Spalte "size"
 erschienen zu lassen, schreibt man:
 
 ```
@@ -320,7 +320,7 @@ erschienen zu lassen, schreibt man:
 
 ### Spalten umbenennen
 
-Um Spalten einen neuen Name zu geben, wird der Befehl [`rename`](/book/commands/rename.md) verwendet.
+Um Spalten einen neuen Name zu geben, wird der Befehl [`rename`](/commands/commands/rename.md) verwendet.
 Wie zum Beispiel hier nach der Verwendung von `ls`.
 
 ```

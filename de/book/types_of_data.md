@@ -286,7 +286,7 @@ Oder aus einer Liste von Wertepaaren:
 
 Unter einem Block versteht man einen Block aus Code. Wie im Befehl `each { |it| echo $it }` ist der Block der Teil in den geschweiften Klammern, also { |it| echo $it }`. Block Parameter werden zwischen zwei Pipe-Symbolen eingegeben (z.B. ` |it| `)
 
-Blöcke sind ein praktischer Weg Code einzugeben, der auf jeder Zeile der Daten ausgeführt wird. Es ist üblich `$it` als Parameter in [`each`](/book/commands/each.md)
+Blöcke sind ein praktischer Weg Code einzugeben, der auf jeder Zeile der Daten ausgeführt wird. Es ist üblich `$it` als Parameter in [`each`](/commands/commands/each.md)
 zu benutzen, aber nicht zwingend. `each { |x| echo $x }`funktioniert gleich wie `each { |it| echo $it }`.
 
 ## Gruppen (groups)

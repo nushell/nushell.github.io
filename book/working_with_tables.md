@@ -21,7 +21,7 @@ To start off, let's get a table that we can use:
 
 ## Sorting the data
 
-We can sort a table by calling the [`sort-by`](commands/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
+We can sort a table by calling the [`sort-by`](/commands/commands/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
 
 ```
 > ls | sort-by size
@@ -42,7 +42,7 @@ We can sort a table by any column that can be compared. For example, we could al
 
 ## Selecting the data you want
 
-We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](commands/select.md) a few columns from our table to use:
+We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](/commands/commands/select.md) a few columns from our table to use:
 
 ```
 > ls | select name size
@@ -117,7 +117,7 @@ Let's look at a few other commands for selecting data. You may have wondered why
 
 ## Getting data out of a table
 
-So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](commands/get.md) command:
+So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](/commands/commands/get.md) command:
 
 ```
 > ls | get name
@@ -134,7 +134,7 @@ So far, we've worked with tables by trimming the table down to only what we need
 
 We now have the values for each of the filenames.
 
-This might look like the [`select`](commands/select.md) command we saw earlier, so let's put that here as well to compare the two:
+This might look like the [`select`](/commands/commands/select.md) command we saw earlier, so let's put that here as well to compare the two:
 
 ```
 > ls | select name
@@ -153,12 +153,12 @@ This might look like the [`select`](commands/select.md) command we saw earlier, 
 
 These look very similar! Let's see if we can spell out the difference between these two commands to make it clear:
 
-- [`select`](commands/select.md) - creates a new table which includes only the columns specified
-- [`get`](commands/get.md) - returns the values inside the column specified as a list
+- [`select`](/commands/commands/select.md) - creates a new table which includes only the columns specified
+- [`get`](/commands/commands/get.md) - returns the values inside the column specified as a list
 
 The one way to tell these apart looking at the table is that the column names are missing, which lets us know that this is going to be a list of values we can work with.
 
-The [`get`](commands/get.md) command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
+The [`get`](/commands/commands/get.md) command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
 
 ## Changing data in a table
 
@@ -166,7 +166,7 @@ In addition to selecting data from a table, we can also update what the table ha
 
 ### Concatenating Tables
 
-We can concatenate tables with identical column names using [`append`](commands/append.md):
+We can concatenate tables with identical column names using [`append`](/commands/commands/append.md):
 
 ```
 > let $first = [[a b]; [1 2]]
@@ -182,12 +182,12 @@ We can concatenate tables with identical column names using [`append`](commands/
 
 ### Merging Tables
 
-We can use the [`merge`](commands/merge.md) command to merge two (or more) tables together
+We can use the [`merge`](/commands/commands/merge.md) command to merge two (or more) tables together
 
 ```
 > let $first = [[a b]; [1 2]]
 > let $second = [[c d]; [3 4]]
-> $first | merge $second 
+> $first | merge $second
 ───┬───┬───┬───┬───
  # │ a │ b │ c │ d
 ───┼───┼───┼───┼───
@@ -204,7 +204,7 @@ Let's add a third table:
 We could join all three tables together like this:
 
 ```
-> $first | merge $second  | merge $third 
+> $first | merge $second  | merge $third
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───
@@ -212,7 +212,7 @@ We could join all three tables together like this:
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-Or we could use the [`reduce`](commands/reduce.md) command to dynamically merge all tables:
+Or we could use the [`reduce`](/commands/commands/reduce.md) command to dynamically merge all tables:
 
 ```
 > [$first $second $third] | reduce {|it, acc| $acc | merge $it }
@@ -225,7 +225,7 @@ Or we could use the [`reduce`](commands/reduce.md) command to dynamically merge 
 
 ### Adding a new column
 
-We can use the [`insert`](commands/insert.md) command to add a new column to the table. Let's look at an example:
+We can use the [`insert`](/commands/commands/insert.md) command to add a new column to the table. Let's look at an example:
 
 ```
 > open rustfmt.toml
@@ -249,10 +249,10 @@ This visual may be slightly confusing, because it looks like what we've just don
 ```
 > open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_edition: 2024}
 ───┬─────────┬──────────────
- # │ edition │ next_edition 
+ # │ edition │ next_edition
 ───┼─────────┼──────────────
- 0 │    2018 │         2021 
- 1 │    2021 │         2024 
+ 0 │    2018 │         2021
+ 1 │    2021 │         2024
 ───┴─────────┴──────────────
 
 ```
@@ -266,7 +266,7 @@ Notice that if we open the original file, the contents have stayed the same:
 ─────────┴──────
 ```
 
-Changes in Nu are functional changes, meaning that they work on values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](commands/save.md) command:
+Changes in Nu are functional changes, meaning that they work on values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](/commands/commands/save.md) command:
 
 ```
 > open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
@@ -279,7 +279,7 @@ Changes in Nu are functional changes, meaning that they work on values themselve
 
 ### Updating a column
 
-In a similar way to the [`insert`](commands/insert.md) command, we can also use the [`update`](commands/update.md) command to change the contents of a column to a new value. To see it in action let's open the same file:
+In a similar way to the [`insert`](/commands/commands/insert.md) command, we can also use the [`update`](/commands/commands/update.md) command to change the contents of a column to a new value. To see it in action let's open the same file:
 
 ```
 > open rustfmt.toml
@@ -297,7 +297,7 @@ And now, let's update the edition to point at the next edition we hope to suppor
 ─────────┴──────
 ```
 
-You can also use the [`upsert`](commands/upsert.md) command to insert or update depending on whether the column already exists.
+You can also use the [`upsert`](/commands/commands/upsert.md) command to insert or update depending on whether the column already exists.
 
 ### Moving columns
 

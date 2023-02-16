@@ -70,7 +70,7 @@ da dies am besten funktioniert, wenn man mit unveränderlichen Variablen arbeite
 
 Was ist denn der Grund warum Nushell unveränderliche Variablen verwendet? Zu Beginn der Entwicklung von Nushell wurde entschieden, auf einen Daten fokusierten,
 funktionalen Stil zu setzen. Erst kürzlich wurde eine Funktionalität zu Nushell hinzugefügt, die den Vorteil dieser frühen Experimente zeigt: Parallelität
-Beim Wechsel von [`each`](/book/commands/each.md) zu [`par-each`](/book/commands/par-each.md) in jedem Nushell Skript, ist es nun mögliche jeden Block Code parallel auszuführen.
+Beim Wechsel von [`each`](/commands/commands/each.md) zu [`par-each`](/commands/commands/par-each.md) in jedem Nushell Skript, ist es nun mögliche jeden Block Code parallel auszuführen.
 Dies ist möglich, weil Nushells Design stark auf Unveränderbarkeit, Kompositionen und Pipelining.
 
 Nur weil in Nushell die Variablen unveränderbar sind bedeutet jedoch nicht, dass sich nicht verändern kann. Nushell macht starken Gebraucht der "Shadowing" Technik.
@@ -85,13 +85,13 @@ Dieses neue `x` ist sichtbar für allen Code, der nach dieser Zeile folgt. Vorsi
 auch wenn es keine Voraussetzung ist.
 
 Schleifenzähler sind ein anderes häufiges Muster für veränderliche Variablen und sind in die meisten iterativen Befehle eingebaut.
-Zum Beispiel kann sowohl jedes Element wie auch dessen Index mit dem `-n` Flag von [`each`](/book/commands/each.md) erreicht werden:
+Zum Beispiel kann sowohl jedes Element wie auch dessen Index mit dem `-n` Flag von [`each`](/commands/commands/each.md) erreicht werden:
 
 ```
 > ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
 ```
 
-Mit dem [`reduce`](/book/commands/reduce.md) kann eine ähnliche Funktionalität erreicht werden wie man es von Variablen in Schleifen kennt.
+Mit dem [`reduce`](/commands/commands/reduce.md) kann eine ähnliche Funktionalität erreicht werden wie man es von Variablen in Schleifen kennt.
 Zum Beispiel, wenn der längste Text in einer Liste von Texten gesucht wird:
 
 ```
@@ -129,9 +129,9 @@ Der `cd` Befehl wechselt die `PWD` Umgebungsvariable, was wiederum nur für den 
 Jede Iteration startet deshalb wieder im gleichen Start-Verzeichnis.
 
 Mit diesen Gültigkeitsbereichen, lassen sich besser vorhersehbare Befehle schreiben, welche einfacher zu lesen sind. Es erleichtert ebenfalls die Fehlersuche.
-Nushell stellt auch Hilfsbefehle zur Verfügung wie [`def-env`](/book/commands/def-env.md), [`load-env`](/book/commands/load-env.md)), als einfachen Weg ganze Stapel von Umgebungsupdates durch zu führen.
+Nushell stellt auch Hilfsbefehle zur Verfügung wie [`def-env`](/commands/commands/def-env.md), [`load-env`](/commands/commands/load-env.md)), als einfachen Weg ganze Stapel von Umgebungsupdates durch zu führen.
 
-`*` - Es gibt hier eine Ausnahme. [`def-env`](/book/commands/def-env.md) erlaubt es einem Befehl an der Umgebung teilzuhaben, von der aus er aufgerufen wurde.
+`*` - Es gibt hier eine Ausnahme. [`def-env`](/commands/commands/def-env.md) erlaubt es einem Befehl an der Umgebung teilzuhaben, von der aus er aufgerufen wurde.
 
 **Denken in Nushell** - Das bewährte Verfahren keine globalen veränderlichen Variablen zu benutzen, erweitert sich in Nushell auf die Umgebung.
 Die eingebauten Hilfs-Befehle helfen dabei, einfacher mit der Umgebung zu arbeiten.

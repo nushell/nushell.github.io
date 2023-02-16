@@ -36,7 +36,7 @@ echo $colors # [red yellow green purple]
 
 ## Durch Listen iterieren
 
-Um durch eine Liste zu iterieren, wird der [`each`](/book/commands/each.md) Befehl vewendet, dem ein [block](types_of_data.html#blocks)
+Um durch eine Liste zu iterieren, wird der [`each`](/commands/commands/each.md) Befehl vewendet, dem ein [block](types_of_data.html#blocks)
 mit Nu-Code folgt, der auf jedes Element der Liste angewendet wird. Der Block Parameter (z.B. `|it|` in `{ |it| echo $it }`)
 entspricht normalerweise dem Element der Liste, was jedoch mit dem `--numbered` (`-n`) Flag geändert werden kann in die zwei
 Parameter `index` und `item`. zum Beispiel:
@@ -50,7 +50,7 @@ $names | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 
-Der [`where`](/book/commands/where.md) Befehl kann verwendet werden um einen Filter auf eine Liste anzuwenden.
+Der [`where`](/commands/commands/where.md) Befehl kann verwendet werden um einen Filter auf eine Liste anzuwenden.
 Das folgende Beispiel gibt alle Farben zurück, deren Namen auf "e" enden.
 
 ```bash
@@ -68,7 +68,7 @@ let scores = [7 10 8 6 7]
 echo $scores | where $it > 7 # [10 8]
 ```
 
-Der [`reduce`](/book/commands/reduce.md) Befehl berechnet einen einfachen Wert aus einer Liste.
+Der [`reduce`](/commands/commands/reduce.md) Befehl berechnet einen einfachen Wert aus einer Liste.
 Der darauffolgende Block enthält 2 Parameter: Das momentane Element (üblicherweise `it` genannt)
 und einen Sammler (Akkumulator) (üblicherweise `acc`). Um einen initialen Wert für den Akkumulator zu setzen,
 wird das `--fold` (`-f`) Flag gesetzt. Um den Iterator `it` zu ändern nach `index` und `item`, wird wiederum
@@ -104,10 +104,10 @@ let index = 1
 $names | get $index # gives Tami
 ```
 
-Der [`length`](/book/commands/length.md) Befehl gibt die Anzahl Elemente in der Liste zurück.
+Der [`length`](/commands/commands/length.md) Befehl gibt die Anzahl Elemente in der Liste zurück.
 Zum Beispiel, `[red green blue] | length` ergibt `3`.
 
-Der [`is-empty`](/book/commands/is-empty.md) Befehl ermittelt, ob ein String, eine Liste oder eine Tabelle leer ist.
+Der [`is-empty`](/commands/commands/is-empty.md) Befehl ermittelt, ob ein String, eine Liste oder eine Tabelle leer ist.
 Mit einer Liste wird er so verwendet:
 
 ```bash
@@ -128,7 +128,7 @@ let colors = [red green blue]
 'gold' not-in $colors # true
 ```
 
-Der [`any`](/book/commands/any.md) Befehl ermittelt, ob irgend ein Element der Liste einer Bedingung entspricht.
+Der [`any`](/commands/commands/any.md) Befehl ermittelt, ob irgend ein Element der Liste einer Bedingung entspricht.
 Zum Beispiel:
 
 ```bash
@@ -145,7 +145,7 @@ echo $scores | any $it > 7 # true
 echo $scores | any $it mod 2 == 1 # true
 ```
 
-Der [`all`](/book/commands/all.md) Befehl wiederum ermittelt, ob jedes Element der Liste einer Bedingung entspricht.
+Der [`all`](/commands/commands/all.md) Befehl wiederum ermittelt, ob jedes Element der Liste einer Bedingung entspricht.
 Zum Beispiel:
 
 ```bash
@@ -164,7 +164,7 @@ echo $scores | all $it mod 2 == 0 # false
 
 ## Eine Liste konvertieren
 
-Der [`flatten`](/book/commands/flatten.md) Befehl generiert aus einer bestehenden Liste eine neue Liste,
+Der [`flatten`](/commands/commands/flatten.md) Befehl generiert aus einer bestehenden Liste eine neue Liste,
 indem eine verschachtelte Liste in die Top-Level Liste integriert werden.
 Dies kann mehrere Male aufgerufen werden, um verschachtelte Listen jeglicher Tiefe zu integrieren.
 Zum Beispiel:
@@ -175,7 +175,7 @@ echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-Der [`wrap`](/book/commands/wrap.md) Befehl konvertiert eine Liste in eine Tabelle.
+Der [`wrap`](/commands/commands/wrap.md) Befehl konvertiert eine Liste in eine Tabelle.
 Jedes Listen-Element wird in eine eigene Zeile mit einer einzigen Spalte überführt.
 
 ```bash

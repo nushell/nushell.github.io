@@ -38,7 +38,7 @@ Nushell 目前支持以下转义字符：
 - `\r` - 回车符
 - `\n` - 换行符 (line feed)
 - `\t` - 制表符
-- `\u{X...}` - Unicode字符, 其中X...为1到6位的十六进制数字
+- `\u{X...}` - Unicode 字符, 其中 X...为 1 到 6 位的十六进制数字
 
 ## 字符串插值
 
@@ -67,12 +67,12 @@ greetings, Alice
 
 ## 分割字符串
 
-[`split row`](/book/commands/split_row.md)命令从一个基于分隔符的字符串创建一个列表。
+[`split row`](/commands/commands/split_row.md)命令从一个基于分隔符的字符串创建一个列表。
 例如，`let colors = ("red,green,blue" | split row ",")` 创建列表`[red green blue]`。
 
-[`split column`](/book/commands/split_column.md)命令将从一个基于分隔符的字符串中创建一个表。例如，`let colors = ("red,green,blue" | split column ",")` 创建一个表格，并为每个元素添加一列。
+[`split column`](/commands/commands/split_column.md)命令将从一个基于分隔符的字符串中创建一个表。例如，`let colors = ("red,green,blue" | split column ",")` 创建一个表格，并为每个元素添加一列。
 
-最后, [`split chars`](/book/commands/split_chars.md)命令将一个字符串分割成一个字符列表。
+最后, [`split chars`](/commands/commands/split_chars.md)命令将一个字符串分割成一个字符列表。
 
 ## `str` 命令
 
@@ -87,7 +87,7 @@ true
 
 ### 修剪字符串
 
-你可以用 [`str trim`](/book/commands/str_trim.md) 命令修剪字符串的两侧。默认情况下，[`str trim`](/book/commands/str_trim.md) 命令会修剪字符串两边的空白。比如：
+你可以用 [`str trim`](/commands/commands/str_trim.md) 命令修剪字符串的两侧。默认情况下，[`str trim`](/commands/commands/str_trim.md) 命令会修剪字符串两边的空白。比如：
 
 ```sh
 > '       My   string   ' | str trim
@@ -120,7 +120,7 @@ o Wo
 
 ### 字符串填充
 
-使用 [`str lpad`](/book/commands/str_lpad.md) 和 [`str rpad`](/book/commands/str_rpad.md) 命令，你可以给字符串添加填充。填充会给字符串添加字符，直到它达到一定的长度。比如：
+使用 [`str lpad`](/commands/commands/str_lpad.md) 和 [`str rpad`](/commands/commands/str_rpad.md) 命令，你可以给字符串添加填充。填充会给字符串添加字符，直到它达到一定的长度。比如：
 
 ```sh
 > '1234' | str lpad -l 10 -c '0'
@@ -131,7 +131,7 @@ o Wo
 
 ### 反转字符串
 
-反转字符串可以通过 [`str reverse`](/book/commands/str_reverse.md) 命令轻松完成：
+反转字符串可以通过 [`str reverse`](/commands/commands/str_reverse.md) 命令轻松完成：
 
 ```sh
 > 'Nushell' | str reverse
@@ -146,7 +146,7 @@ llehsuN
 
 ## 解析字符串
 
-通过 [`parse`](/book/commands/parse.md) 命令，你可以将一个字符串解析成若干列。比如：
+通过 [`parse`](/commands/commands/parse.md) 命令，你可以将一个字符串解析成若干列。比如：
 
 ```sh
 > 'Nushell is the best' | parse '{shell} is {type}'
@@ -169,17 +169,17 @@ llehsuN
 
 ### 转换为字符串
 
-1. 使用 [`into string`](/book/commands/into_string.md)。例如：`123 | into string`
+1. 使用 [`into string`](/commands/commands/into_string.md)。例如：`123 | into string`
 2. 通过字符串插值。例如：`$'(123)'`
-3. 使用 [`build-string`](/book/commands/build-string.md)。例如：`build-string (123)`
+3. 使用 [`build-string`](/commands/commands/build-string.md)。例如：`build-string (123)`
 
 ### 字符串转换为其他类型
 
-1. 使用 [`into <type>`](/book/commands/into.md)。例如：`'123' | into int`
+1. 使用 [`into <type>`](/commands/commands/into.md)。例如：`'123' | into int`
 
 ## 字符串着色
 
-你可以通过 [`ansi`](/book/commands/ansi.md) 命令给字符串着色。例如：
+你可以通过 [`ansi`](/commands/commands/ansi.md) 命令给字符串着色。例如：
 
 ```sh
 > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'

@@ -6,7 +6,7 @@ matches your needs.
 
 ## String formats at a glance
 
-| Format of string            | Example                 | Escapes                   | Notes                                                                 |
+| Format of string            | Example                 | Escapes                   | Notes                                                                  |
 | --------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
 | Single-quoted string        | `'[^\n]+'`              | None                      | Cannot contain any `'`                                                 |
 | Backtick string             | <code>\`[^\n]+\`</code> | None                      | Cannot contain any backticks `                                         |
@@ -124,12 +124,14 @@ So, while bare strings are useful for informal command line usage, when programm
 ## Strings as external commands
 
 You can place the `^` sigil in front of any string (including a variable) to have Nushell execute the string as if it was an external command:
+
 ```sh
 ^'C:\Program Files\exiftool.exe'
 
 > let foo = 'C:\Program Files\exiftool.exe'
 > ^$foo
 ```
+
 You can also use the `run-external` command for this purpose, which provides additional flags and options.
 
 ## String interpolation
@@ -159,7 +161,7 @@ As of version 0.61, interpolated strings support escaping parentheses, so that t
 
 ## Splitting strings
 
-The [`split row`](commands/split_row.md) command creates a list from a string based on a delimiter.
+The [`split row`](/commands/commands/split_row.md) command creates a list from a string based on a delimiter.
 
 ```sh
 > "red,green,blue" | split row ","
@@ -170,7 +172,7 @@ The [`split row`](commands/split_row.md) command creates a list from a string ba
 ╰───┴───────╯
 ```
 
-The [`split column`](commands/split_column.md) command will create a table from a string based on a delimiter. This applies generic column names to the table.
+The [`split column`](/commands/commands/split_column.md) command will create a table from a string based on a delimiter. This applies generic column names to the table.
 
 ```sh
 > "red,green,blue" | split column ","
@@ -181,7 +183,7 @@ The [`split column`](commands/split_column.md) command will create a table from 
 ╰───┴─────────┴─────────┴─────────╯
 ```
 
-Finally, the [`split chars`](commands/split_chars.md) command will split a string into a list of characters.
+Finally, the [`split chars`](/commands/commands/split_chars.md) command will split a string into a list of characters.
 
 ```sh
 > 'aeiou' | split chars
@@ -209,7 +211,7 @@ true
 
 ### Trimming strings
 
-You can trim the sides of a string with the [`str trim`](commands/str_trim.md) command. By default, the [`str trim`](commands/str_trim.md) commands trims whitespace from both sides of the string. For example:
+You can trim the sides of a string with the [`str trim`](/commands/commands/str_trim.md) command. By default, the [`str trim`](/commands/commands/str_trim.md) commands trims whitespace from both sides of the string. For example:
 
 ```sh
 > '       My   string   ' | str trim
@@ -242,7 +244,7 @@ o Wo
 
 ### String padding
 
-With the [`str lpad`](commands/str_lpad.md) and [`str rpad`](commands/str_rpad.md) commands you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
+With the [`str lpad`](/commands/commands/str_lpad.md) and [`str rpad`](/commands/commands/str_rpad.md) commands you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
 
 ```sh
 > '1234' | str lpad -l 10 -c '0'
@@ -253,7 +255,7 @@ With the [`str lpad`](commands/str_lpad.md) and [`str rpad`](commands/str_rpad.m
 
 ### Reversing strings
 
-This can be done easily with the [`str reverse`](commands/str_reverse.md) command.
+This can be done easily with the [`str reverse`](/commands/commands/str_reverse.md) command.
 
 ```sh
 > 'Nushell' | str reverse
@@ -268,7 +270,7 @@ llehsuN
 
 ## String parsing
 
-With the [`parse`](commands/parse.md) command you can parse a string into columns. For example:
+With the [`parse`](/commands/commands/parse.md) command you can parse a string into columns. For example:
 
 ```sh
 > 'Nushell 0.80' | parse '{shell} {version}'
@@ -337,17 +339,17 @@ There are multiple ways to convert strings to and from other types.
 
 ### To string
 
-1. Using [`into string`](commands/into_string.md). e.g. `123 | into string`
+1. Using [`into string`](/commands/commands/into_string.md). e.g. `123 | into string`
 2. Using string interpolation. e.g. `$'(123)'`
-3. Using [`build-string`](commands/build-string.md). e.g. `build-string (123)`
+3. Using [`build-string`](/commands/commands/build-string.md). e.g. `build-string (123)`
 
 ### From string
 
-1. Using [`into <type>`](commands/into.md). e.g. `'123' | into int`
+1. Using [`into <type>`](/commands/commands/into.md). e.g. `'123' | into int`
 
 ## Coloring strings
 
-You can color strings with the [`ansi`](commands/ansi.md) command. For example:
+You can color strings with the [`ansi`](/commands/commands/ansi.md) command. For example:
 
 ```sh
 > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'

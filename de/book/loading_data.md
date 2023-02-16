@@ -1,14 +1,14 @@
 # Laden von Daten
 
-Im letzten Kapitel wurden Befehle wie [`ls`](/book/commands/ls.md), [`ps`](/book/commands/ps.md),
-[`date`](/book/commands/date.md), and [`sys`](/book/commands/sys.md) vorgestellt um Informationen
+Im letzten Kapitel wurden Befehle wie [`ls`](/commands/commands/ls.md), [`ps`](/commands/commands/ps.md),
+[`date`](/commands/commands/date.md), and [`sys`](/commands/commands/sys.md) vorgestellt um Informationen
 über Dateien, Prozesse, Zeiten und die Systemumgebung selber zu laden.
 Jeder Befehl ergibt eine Tabelle aus, mit der gearbeitet werden kann.
 Es gibt jedoch noch andere Möglichkeiten Tabellen aus Daten zu erhalten.
 
 ## Dateien öffnen
 
-Einer der mächtigsten Befehle in Nu um mir Daten zu arbeite ist der [`open`](/book/commands/open.md) Befehl.
+Einer der mächtigsten Befehle in Nu um mir Daten zu arbeite ist der [`open`](/commands/commands/open.md) Befehl.
 Er ist ein Multi-Werkzeug, welcher mit verschiedensten Datenformaten umgehen kann.
 Hier zum Beispiel was passiert, wenn eine json Datei geöffnet wird:
 
@@ -33,12 +33,12 @@ Hier zum Beispiel was passiert, wenn eine json Datei geöffnet wird:
 ──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
-Ähnlich wie beim [`ls`](/book/commands/ls.md) Befehl, bekommen wir mehr als nur Text
+Ähnlich wie beim [`ls`](/commands/commands/ls.md) Befehl, bekommen wir mehr als nur Text
 (oder einen Stream von bytes) zurück, wenn wir einen Dateityp öffnen, den Nu versteht.
 Hier wurde ein "package.json" von einem JavaScript Projekt geöffnet. Nu erkennt den json text
 und parst die Daten in eine Tabelle.
 
-Soll nur die Version aus dem Projekt angezeigt werden, kann mit dem [`get`](/book/commands/get.md)
+Soll nur die Version aus dem Projekt angezeigt werden, kann mit dem [`get`](/commands/commands/get.md)
 direkt diese Information herausgelesen werden.
 
 ```
@@ -106,7 +106,7 @@ Zuerst wird die Datei so geladen, dass jede Zeile für sich verarbeitet werden k
 
 Dadurch wird bereits wieder eine Liste ausgegeben. Im nächsten Schritt sollen die Zeilen
 in etwas brauchbares aufgeteilt werden.
-Dafür verwenden wir den [`split`](/book/commands/split.md) Befehl. Wie der Name schon verräht,
+Dafür verwenden wir den [`split`](/commands/commands/split.md) Befehl. Wie der Name schon verräht,
 kann damit ein String durch ein Trennzeichen aufgesplittet oder aufgetrennt werden.
 Mit dem `column` Unterbefehl wird der Inhalt über mehrere Spalten aufgeteilt.
 Als Parameter reicht das Trennzeichen, der Rest ist automatisch:
@@ -123,7 +123,7 @@ Als Parameter reicht das Trennzeichen, der Rest ist automatisch:
 ```
 
 Das sieht _fast_ korrekt aus.Es sieht so aus, als ob sich noch eine zusätzliche Lücke eingeschlichen hat.
-Mit dem [`trim`](/book/commands/str_trim.md) Befehl wird dieser beseitigt:
+Mit dem [`trim`](/commands/commands/str_trim.md) Befehl wird dieser beseitigt:
 
 ```
 > open people.txt | lines | split column "|" | str trim
@@ -136,7 +136,7 @@ Mit dem [`trim`](/book/commands/str_trim.md) Befehl wird dieser beseitigt:
 ───┴─────────┴─────────┴──────────
 ```
 
-Nicht schlecht. Der [`split`](/book/commands/split.md) Befehl gibt nicht nur brauchbare Daten zurück,
+Nicht schlecht. Der [`split`](/commands/commands/split.md) Befehl gibt nicht nur brauchbare Daten zurück,
 sondern bezeichnet auch noch standardmässig die Spaltennamen:
 
 ```
@@ -178,8 +178,8 @@ angewendet haben wiederverwenden:
 Weitere Befehle, mit denen Texte aus Strings bearbeitet werden können sind:
 
 - `str`
-- [`lines`](/book/commands/lines.md)
-- [`size`](/book/commands/size.md)
+- [`lines`](/commands/commands/lines.md)
+- [`size`](/commands/commands/size.md)
 
 Es gibt ausserdem einige Hilfsbefehle, die verwendet werden können um mit Daten umzugehen,
 die Nu eigentlich verstehen sollte. Zum Beispiel wenn eine Rust lock Datei geöffnet wird:
@@ -211,7 +211,7 @@ indem das Format als entsprechender Unterbefehl verwendet wird.
 
 Auch wenn es hilfreich ist, beim Öffnen einer Datei direkt eine Tabelle zu erhalten,
 ist dies nicht immer gewünscht. Um den darunter liegenden Text zu erhalten, kann dem
-[`open`](/book/commands/open.md) Befehl das Flag `--raw` mitgegeben werden:
+[`open`](/commands/commands/open.md) Befehl das Flag `--raw` mitgegeben werden:
 
 ```
 > open Cargo.toml --raw
@@ -224,7 +224,7 @@ license = "MIT"
 
 ## URLs abrufen
 
-Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`http get`](/book/commands/fetch.md)
+Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`http get`](/commands/commands/fetch.md)
 Befehl geladen werden. Dies wird den Inhalt der URL aus dem Netz abrufen und zurückgeben:
 
 ```

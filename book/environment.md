@@ -2,7 +2,7 @@
 
 A common task in a shell is to control the environment that external applications will use. This is often done automatically, as the environment is packaged up and given to the external application as it launches. Sometimes, though, we want to have more precise control over what environment variables an application sees.
 
-You can see the current environment variables using the [`env`](commands/env.html) command:
+You can see the current environment variables using the [`env`](/commands/commands/env.html) command:
 
 ```
    #           name                 type                value                 raw
@@ -25,7 +25,7 @@ The environment is initially created from the Nu [configuration file](configurat
 
 There are several ways to set an environment variable:
 
-### [`let-env`](commands/let-env.html)
+### [`let-env`](/commands/commands/let-env.html)
 
 Using the `let-env` command is the most straightforward method
 
@@ -44,7 +44,7 @@ let-env Path = ($env.Path | prepend 'C:\path\you\want\to\add')
 Here we've prepended our folder to the existing folders in the Path, so it will have the highest priority.
 If you want to give it the lowest priority instead, you can use the `append` command.
 
-### [`load-env`](commands/load-env.html)
+### [`load-env`](/commands/commands/load-env.html)
 
 If you have more than one environment variable you'd like to set, you can use `load-env` to create a table of name/value pairs and load multiple variables at the same time:
 
@@ -57,7 +57,7 @@ If you have more than one environment variable you'd like to set, you can use `l
 These are defined to be active only temporarily for a duration of executing a code block.
 See [Single-use environment variables](environment.md#single-use-environment-variables) for details.
 
-### Calling a command defined with [`def-env`](commands/def-env.md)
+### Calling a command defined with [`def-env`](/commands/commands/def-env.md)
 
 See [Defining environment from custom commands](environment.md#defining-environment-from-custom-commands) for details.
 
@@ -93,7 +93,7 @@ true
 
 ## Changing directory
 
-Common task in a shell is to change directory with the [`cd`](commands/cd.html) command.
+Common task in a shell is to change directory with the [`cd`](/commands/commands/cd.html) command.
 In Nushell, calling `cd` is equivalent to setting the `PWD` environment variable.
 Therefore, it follows the same rules as other environment variables (for example, scoping).
 
@@ -106,14 +106,14 @@ A common shorthand to set an environment variable once is available, inspired by
 BAR
 ```
 
-You can also use [`with-env`](commands/with-env.html) to do the same thing more explicitly:
+You can also use [`with-env`](/commands/commands/with-env.html) to do the same thing more explicitly:
 
 ```
 > with-env { FOO: BAR } { $env.FOO }
 BAR
 ```
 
-The [`with-env`](commands/with-env.html) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the [block](types_of_data.html#blocks) will run with this new environment variable set.
+The [`with-env`](/commands/commands/with-env.html) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the [block](types_of_data.html#blocks) will run with this new environment variable set.
 
 ## Permanent environment variables
 
@@ -129,7 +129,7 @@ let-env FOO = 'BAR'
 ## Defining environment from custom commands
 
 Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
-However, a command defined as [`def-env`](commands/def-env.html) instead of [`def`](commands/def.html) (it applies also to `export def`, see [Modules](modules.md)) will preserve the environment on the caller's side:
+However, a command defined as [`def-env`](/commands/commands/def-env.html) instead of [`def`](/commands/commands/def.html) (it applies also to `export def`, see [Modules](modules.md)) will preserve the environment on the caller's side:
 
 ```
 > def-env foo [] {
@@ -192,7 +192,7 @@ Because `nu` is an external program, Nushell translated the `[ a b c ]` list acc
 Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was successful.
 You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
-If we look back at the [`env`](commands/env.html) command, the `raw` column shows the value translated by `ENV_CONVERSIONS.<name>.to_string` and the `value` column shows the value used in Nushell (the result of `ENV_CONVERSIONS.<name>.from_string` in the case of `FOO`).
+If we look back at the [`env`](/commands/commands/env.html) command, the `raw` column shows the value translated by `ENV_CONVERSIONS.<name>.to_string` and the `value` column shows the value used in Nushell (the result of `ENV_CONVERSIONS.<name>.from_string` in the case of `FOO`).
 If the value is not a string and does not have `to_string` conversion, it is not passed to an external (see the `raw` column of `PROMPT_COMMAND`).
 One exception is `PATH` (`Path` on Windows): by default, it converts the string to a list on startup and from a list to a string when running externals if no manual conversions are specified.
 
@@ -200,7 +200,7 @@ _(Important! The environment conversion string -> value happens **after** the en
 
 ## Removing environment variables
 
-You can remove an environment variable only if it was set in the current scope via [`hide-env`](commands/hide_env.html):
+You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/commands/hide_env.html):
 
 ```
 > let-env FOO = 'BAR'

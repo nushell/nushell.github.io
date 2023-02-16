@@ -1,10 +1,10 @@
 # 加载数据
 
-之前我们使用了[`ls`](/book/commands/ls.md)、[`ps`](/book/commands/ps.md)、[`date`](/book/commands/date.md)和[`sys`](/book/commands/sys.md)等命令来加载关于文件、进程、日期时间和系统本身的信息。每条命令都会给我们提供一个信息表，以对其进行探索。我们也可以通过其他方式将数据载入表格以供使用。
+之前我们使用了[`ls`](/commands/commands/ls.md)、[`ps`](/commands/commands/ps.md)、[`date`](/commands/commands/date.md)和[`sys`](/commands/commands/sys.md)等命令来加载关于文件、进程、日期时间和系统本身的信息。每条命令都会给我们提供一个信息表，以对其进行探索。我们也可以通过其他方式将数据载入表格以供使用。
 
 ## 打开文件
 
-Nu 在处理数据方面最强大的能力之一是[`open`](/book/commands/open.md)命令。它是一个多功能命令，可以处理许多不同的数据格式。为了说明这一点让我们试着打开一个 JSON 文件：
+Nu 在处理数据方面最强大的能力之一是[`open`](/commands/commands/open.md)命令。它是一个多功能命令，可以处理许多不同的数据格式。为了说明这一点让我们试着打开一个 JSON 文件：
 
 ```
 > open editors/vscode/package.json
@@ -27,9 +27,9 @@ Nu 在处理数据方面最强大的能力之一是[`open`](/book/commands/open.
 ──────────────────┴───────────────────────────────────────────────────────────────────────────────
 ```
 
-与[`ls`](/book/commands/ls.md)类似，打开一个 Nu 支持的文件类型，会返回一些不仅仅是文本（或一个字节流）的东西。这里我们打开了一个来自 JavaScript 项目的 "package.json" 文件。Nu 可以识别 JSON 文本并将其解析为一个数据表。
+与[`ls`](/commands/commands/ls.md)类似，打开一个 Nu 支持的文件类型，会返回一些不仅仅是文本（或一个字节流）的东西。这里我们打开了一个来自 JavaScript 项目的 "package.json" 文件。Nu 可以识别 JSON 文本并将其解析为一个数据表。
 
-如果我们想查看当前项目的版本，我们可以使用[`get`](/book/commands/get.md)命令：
+如果我们想查看当前项目的版本，我们可以使用[`get`](/commands/commands/get.md)命令：
 
 ```
 > open editors/vscode/package.json | get version
@@ -90,7 +90,7 @@ Antonio | Vivaldi | Composer
 ───┴──────────────────────────────
 ```
 
-可以看到，我们正在处理这些行，因为我们又回到了一个表中。下一步是看看是否可以把行分割成更有用的东西。为此，我们将使用[`split`](/book/commands/split.md)命令。[`split`](/book/commands/split.md)，顾名思义，为我们提供了一种分割字符串的方法。我们将使用[`split`](/book/commands/split.md)的`column`子命令，将内容分成多列。我们会告诉它分隔符是什么，剩下的就由它来完成：
+可以看到，我们正在处理这些行，因为我们又回到了一个表中。下一步是看看是否可以把行分割成更有用的东西。为此，我们将使用[`split`](/commands/commands/split.md)命令。[`split`](/commands/commands/split.md)，顾名思义，为我们提供了一种分割字符串的方法。我们将使用[`split`](/commands/commands/split.md)的`column`子命令，将内容分成多列。我们会告诉它分隔符是什么，剩下的就由它来完成：
 
 ```
 > open people.txt | lines | split column "|"
@@ -103,7 +103,7 @@ Antonio | Vivaldi | Composer
 ───┴──────────┴───────────┴───────────
 ```
 
-这看起来差不多了，只是还有一些额外的空白字符，让我们 [`trim`](/book/commands/str_trim.md) 掉这些空格：
+这看起来差不多了，只是还有一些额外的空白字符，让我们 [`trim`](/commands/commands/str_trim.md) 掉这些空格：
 
 ```
 > open people.txt | lines | split column "|" | str trim
@@ -116,7 +116,7 @@ Antonio | Vivaldi | Composer
 ───┴─────────┴─────────┴──────────
 ```
 
-还不错，[`split`](/book/commands/split.md)命令返回给我们可以使用的数据，还预设了默认的列名：
+还不错，[`split`](/commands/commands/split.md)命令返回给我们可以使用的数据，还预设了默认的列名：
 
 ```
 > open people.txt | lines | split column "|" | str trim | get column1
@@ -156,8 +156,8 @@ Antonio | Vivaldi | Composer
 其他可用于字符串的命令有：
 
 - `str`
-- [`lines`](/book/commands/lines.md)
-- [`size`](/book/commands/size.md)
+- [`lines`](/commands/commands/lines.md)
+- [`size`](/commands/commands/size.md)
 
 如果我们已经知道待处理的数据具有 Nu 能够理解的格式，则可以使用一些辅助命令，例如，我们打开一个 Rust 的 Cargo.lock 文件：
 
@@ -184,7 +184,7 @@ version = "0.1.2"
 
 ## 以原始模式打开
 
-虽然能够打开一个文件并立即使用其数据表很有帮助，但这并不总是我们想要的。为了获得原始文本，[`open`](/book/commands/open.md)命令可以接受一个可选的`--raw`标志：
+虽然能够打开一个文件并立即使用其数据表很有帮助，但这并不总是我们想要的。为了获得原始文本，[`open`](/commands/commands/open.md)命令可以接受一个可选的`--raw`标志：
 
 ```toml
 > open Cargo.toml --raw
@@ -198,7 +198,7 @@ license = "MIT"
 
 ## 获取 URLs
 
-除了从文件系统中加载文件，你还可以通过使用[`http get`](/book/commands/fetch.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
+除了从文件系统中加载文件，你还可以通过使用[`http get`](/commands/commands/fetch.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
 
 ```
 > http get https://blog.rust-lang.org/feed.xml
