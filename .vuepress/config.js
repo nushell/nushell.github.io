@@ -150,7 +150,6 @@ export default defineUserConfig({
       atom: true,
       count: 30,
       hostname: 'https://www.nushell.sh',
-      atomOutputFilename: 'feed.atom',
       filter: ({ frontmatter, filePathRelative }) => {
         return (
           frontmatter.feed === true || filePathRelative?.indexOf('blog/') >= 0

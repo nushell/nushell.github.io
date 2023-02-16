@@ -1,5 +1,5 @@
 # Nu Blog
 
-[RSS](/rss.xml) / [Atom](/feed.atom)
+[RSS](/rss.xml) / [Atom](/atom.xml)
 
 <BlogPosts />
