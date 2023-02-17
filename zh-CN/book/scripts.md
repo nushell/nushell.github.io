@@ -6,7 +6,7 @@
 > nu myscript.nu
 ```
 
-这将在一个新的 Nu 实例中运行脚本直至完成。你也可以使用[`source`](/book/commands/source.md)在 Nu 的 **当前** 实例中运行脚本：
+这将在一个新的 Nu 实例中运行脚本直至完成。你也可以使用[`source`](/commands/docs/source.md)在 Nu 的 **当前** 实例中运行脚本：
 
 ```bash
 > source myscript.nu

@@ -87,17 +87,17 @@ auswerten will, was sich dazwischen befindet.
 
 ## Texte aufsplitten
 
-Der [`split row`](/book/commands/split_row.md) Befehl erstellt eine Liste aus einem Text,
+Der [`split row`](/commands/docs/split_row.md) Befehl erstellt eine Liste aus einem Text,
 getrennt durch das angegebene Trennzeichen.
 Zum Beispiel `let colors = ("red,green,blue" | split row ",")`
 erstellt die Liste `[red green blue]`.
 
-Der [`split column`](/book/commands/split_column.md) Befehl erstellt eine Tabelle aus einem Text,
+Der [`split column`](/commands/docs/split_column.md) Befehl erstellt eine Tabelle aus einem Text,
 getrennt durch ein angegebenes Trennzeichen.
 Zum Beispiel `let colors = ("red,green,blue" | split column ",")`
 erstellt eine Tabelle mit den Elementen als Spalte.
 
-Schliesslich trennt der [`split chars`](/book/commands/split_chars.md) Befehl
+Schliesslich trennt der [`split chars`](/commands/docs/split_chars.md) Befehl
 einen Text in seine Zeichen auf.
 
 ## Der `str` Befehl
@@ -114,8 +114,8 @@ true
 
 ### Texte schneiden
 
-Die Seiten eines Textes werden mit dem [`str trim`](/book/commands/str_trim.md) Befehl
-geschnitten. Standardmässig schneidet der [`str trim`](/book/commands/str_trim.md) Befehl
+Die Seiten eines Textes werden mit dem [`str trim`](/commands/docs/str_trim.md) Befehl
+geschnitten. Standardmässig schneidet der [`str trim`](/commands/docs/str_trim.md) Befehl
 Leerraum von beiden Seiten des Textes. Zum Beispiel:
 
 ```sh
@@ -150,7 +150,7 @@ o We
 
 ### Texte ausrichten (padding)
 
-Mit den Befehlen `[str lpad`](/book/commands/str_lpad.md) und [`str rpad`](/book/commands/str_rpad.md)
+Mit den Befehlen `[str lpad`](/commands/docs/str_lpad.md) und [`str rpad`](/commands/docs/str_rpad.md)
 können Texte der angegeben Ausrichtung nach erweitert werden.
 Dieses Padding erweitert den Text bis zur angegebenen Länge, zum Beispiel:
 
@@ -163,7 +163,7 @@ Dieses Padding erweitert den Text bis zur angegebenen Länge, zum Beispiel:
 
 ### Texte umkehren
 
-Dies kann mit dem [`str reverse`](/book/commands/str_reverse.md) Befehl ganz einfach erreicht werden.
+Dies kann mit dem [`str reverse`](/commands/docs/str_reverse.md) Befehl ganz einfach erreicht werden.
 
 ```sh
 > 'Nushell' | str reverse
@@ -178,7 +178,7 @@ llehsuN
 
 ## Texte parsen
 
-Mit dem [`parse`](/book/commands/parse.md) Befehl können Texte in Spalten geparst werden.
+Mit dem [`parse`](/commands/docs/parse.md) Befehl können Texte in Spalten geparst werden.
 Zum Beispiel:
 
 ```sh
@@ -202,17 +202,17 @@ Es gibt verschiedenste Wege Texte in und von anderen Typen zu konvertieren.
 
 ### In einen Text
 
-1. Mit [`into string`](/book/commands/into_string.md). e.g. `123 | into string`
+1. Mit [`into string`](/commands/docs/into_string.md). e.g. `123 | into string`
 2. Mit Text Interpolation. e.g. `$'(123)'`
-3. Mit [`build-string`](/book/commands/build-string.md). e.g. `build-string (123)`
+3. Mit [`build-string`](/commands/docs/build-string.md). e.g. `build-string (123)`
 
 ### Von einem Text
 
-1. Mit [`into <type>`](/book/commands/into.md). e.g. `'123' | into int`
+1. Mit [`into <type>`](/commands/docs/into.md). e.g. `'123' | into int`
 
 ## Texte einfärben
 
-Texte können eingefärbt werden mit dem [`ansi`](/book/commands/ansi.md) Befehl
+Texte können eingefärbt werden mit dem [`ansi`](/commands/docs/ansi.md) Befehl
 Zum Beispiel:
 
 ```sh

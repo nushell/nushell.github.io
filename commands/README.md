@@ -3,7 +3,7 @@
 Nushell provides commands for a variety of use cases.
 You can find the included categories in the sidebar.
 
-To see all commands in Nushell, run [`help commands`](../book/commands/help.md).
+To see all commands in Nushell, run [`help commands`](/commands/docs/help.md).
 
 <script>
   import pages from '@temp/pages'
@@ -11,7 +11,7 @@ To see all commands in Nushell, run [`help commands`](../book/commands/help.md).
     computed: {
       commands() {
         return pages
-          .filter(p => p.path.indexOf('/book/commands/') >= 0)
+          .filter(p => p.path.indexOf('/commands/docs/') >= 0)
           .sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
       }
     }

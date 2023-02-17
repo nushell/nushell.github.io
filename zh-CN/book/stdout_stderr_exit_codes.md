@@ -37,13 +37,13 @@ Nushell 通过两种方式之一跟踪最近完成的外部命令的最后退出
 > echo $env.LAST_EXIT_CODE
 ```
 
-第二种是使用一个叫做[`complete`](/book/commands/complete.md)的命令。
+第二种是使用一个叫做[`complete`](/commands/docs/complete.md)的命令。
 
-## 使用 [`complete`](/book/commands/complete.md) 命令
+## 使用 [`complete`](/commands/docs/complete.md) 命令
 
-[`complete`](/book/commands/complete.md)命令允许你运行一个外部程序直到完成，并将 stdout, stderr, 和退出代码收集在一条记录中。
+[`complete`](/commands/docs/complete.md)命令允许你运行一个外部程序直到完成，并将 stdout, stderr, 和退出代码收集在一条记录中。
 
-如果我们尝试在一个不存在的文件上运行外部的`cat`，我们可以看到[`complete`](/book/commands/complete.md)对流的处理，包括重定向的 stderr：
+如果我们尝试在一个不存在的文件上运行外部的`cat`，我们可以看到[`complete`](/commands/docs/complete.md)对流的处理，包括重定向的 stderr：
 
 ```bash
 > do -i { cat unknown.txt } | complete
@@ -62,7 +62,7 @@ Nushell 通过两种方式之一跟踪最近完成的外部命令的最后退出
 
 Nushell 试图将流转换为 UTF-8 文本，如果在任何时候转换失败，流的其余部分就会被假定为始终是字节。
 
-如果你想对字节流的解码有更多的控制，你可以使用 [`decode`](/book/commands/decode.md) 命令。[`decode`](/book/commands/decode.md)命令可以插入到外部或其他原始流创建命令之后的管道中，它将根据你给`decode`的参数来处理字节的解码。例如，你可以这样对 shift-jis 文本进行解码：
+如果你想对字节流的解码有更多的控制，你可以使用 [`decode`](/commands/docs/decode.md) 命令。[`decode`](/commands/docs/decode.md)命令可以插入到外部或其他原始流创建命令之后的管道中，它将根据你给`decode`的参数来处理字节的解码。例如，你可以这样对 shift-jis 文本进行解码：
 
 ```bash
 > 0x[8a 4c] | decode shift-jis

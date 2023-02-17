@@ -6,7 +6,7 @@ Nu plugins are executables; Nu launches them as needed and communicates with the
 
 ## Adding a plugin
 
-To add a plugin, call the [`register`](commands/register.md) command to tell Nu where to find it. As you do, you'll need to also tell Nushell what encoding the plugin uses.
+To add a plugin, call the [`register`](/commands/docs/register.md) command to tell Nu where to find it. As you do, you'll need to also tell Nushell what encoding the plugin uses.
 
 Please note that the plugin name needs to start with `nu_plugin_`, Nu uses the name prefix to detect plugins.
 
@@ -22,7 +22,7 @@ Windows:
 > register .\my_plugins\nu_plugin_cool.exe
 ```
 
-When [`register`](commands/register.md) is called:
+When [`register`](/commands/docs/register.md) is called:
 
 1. Nu launches the plugin, and waits for the plugin to tell Nu which communication encoding it should use
 2. Nu sends it a "Signature" message over stdin

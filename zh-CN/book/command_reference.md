@@ -1,6 +1,6 @@
 # 命令索引
 
-若要查看所有 Nushell 命令, 可以执行 [`help commands`](/book/commands/help.md)。
+若要查看所有 Nushell 命令, 可以执行 [`help commands`](/commands/docs/help.md)。
 
 译注：本页内容由于是从源码生成的暂不支持国际化，大家还是先看英文版的凑合下吧。
 
@@ -10,7 +10,7 @@
     computed: {
       commands() {
         return pages
-          .filter(p => p.path.indexOf('/book/commands/') >= 0)
+          .filter(p => p.path.indexOf('/commands/docs/') >= 0)
           .sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
       }
     }

@@ -37,11 +37,11 @@ We defined `hello` and `hi` custom commands inside a `greetings` module.
 
 The `export` keyword makes it possible to later import the commands from the module.
 
-Similar to [`def`](commands/def.md), it is also possible to mark [`def-env`](commands/def-env.md) with the `export` keyword (you can learn more about [`def-env`](commands/def-env.md) in the [Environment](environment.md) chapter).
+Similar to [`def`](/commands/docs/def.md), it is also possible to mark [`def-env`](/commands/docs/def-env.md) with the `export` keyword (you can learn more about [`def-env`](/commands/docs/def-env.md) in the [Environment](environment.md) chapter).
 
 ## Using modules
 
-By itself, the module does not do anything. To use what the module exports, we need to [`use`](commands/use.md) it.
+By itself, the module does not do anything. To use what the module exports, we need to [`use`](/commands/docs/use.md) it.
 
 ```
 > use greetings
@@ -57,7 +57,7 @@ The `hello` and `hi` commands are now available with the `greetings` prefix.
 
 ## Importing symbols
 
-In general, anything after the [`use`](commands/use.md) keyword forms an **import pattern** which controls how the symbols are imported.
+In general, anything after the [`use`](/commands/docs/use.md) keyword forms an **import pattern** which controls how the symbols are imported.
 The import pattern can be one of the following:
 
 `use greetings`
@@ -93,7 +93,7 @@ export def hi [where: string] {
 }
 ```
 
-Now, you can call [`use`](commands/use.md) directly on the file:
+Now, you can call [`use`](/commands/docs/use.md) directly on the file:
 
 ```
 > use greetings.nu
@@ -145,7 +145,7 @@ hi there!
 ## Environment Variables
 
 So far we used modules just to import custom commands.
-However, modules can also define an environment using [`export-env`](commands/export-env.md):
+However, modules can also define an environment using [`export-env`](/commands/docs/export-env.md):
 
 ```
 # greetings.nu
@@ -160,6 +160,7 @@ export def hello [] {
 ```
 
 `use` will run the code inside the `export-env` block and merge its environment into the current scope:
+
 ```
 > use greetings.nu
 
@@ -174,6 +175,7 @@ hello Arthur, King of the Britons!
 You might wonder why we can't just define `let-env` at the top of the module.
 The reason is that the `export-env {...}` block keeps its scope separate from the rest of the module which makes it more organized.
 You can put a complex code defining your environment without polluting the namespace of the module, for example:
+
 ```
 export-env {
     def tmp [] { "tmp" }
@@ -187,11 +189,12 @@ export-env {
     }
 }
 ```
+
 Only `$env.TMP_LEN` and `$env.OTHER_ENV` are preserved after evaluating the `export-env` module.
 :::
 
-
 If you also want to keep your variables in separate modules and export its environment, you could try to `export use` it:
+
 ```
 # purpose.nu
 export use greetings.nu
@@ -202,7 +205,9 @@ export def greeting_purpose [] {
 }
 
 ```
+
 and then use it
+
 ```
 > use purpose.nu
 > purpose greeeting_purpose
@@ -226,12 +231,12 @@ export def greeting_purpose [] {
 ```
 
 Now, everything is exported properly
+
 ```
 > use purpose.nu
 > purpose greeting_purpose
 Hello Arthur, King of the Britons. My purpose is to build an empire.
 ```
-
 
 ## Exporting symbols
 
@@ -248,7 +253,7 @@ Here's the full list of ways you can export:
 ## Hiding
 
 Any custom command or alias, imported from a module or not, can be "hidden", restoring the previous definition.
-We do this with the [`hide`](commands/hide.md) command:
+We do this with the [`hide`](/commands/docs/hide.md) command:
 
 ```
 > def foo [] { "foo" }
@@ -261,7 +266,7 @@ foo
 > foo  # error! command not found!
 ```
 
-The [`hide`](commands/hide.md) command also accepts import patterns, just like [`use`](commands/use.md).
+The [`hide`](/commands/docs/hide.md) command also accepts import patterns, just like [`use`](/commands/docs/use.md).
 The import pattern is interpreted slightly differently, though.
 It can be one of the following:
 
@@ -284,7 +289,8 @@ It can be one of the following:
 
 ## Hiding Environment Variables
 
-Environment variables can be hidden with [`hide-env`](commands/hide-env.md):
+Environment variables can be hidden with [`hide-env`](/commands/docs/hide-env.md):
+
 ```
 > let-env FOO = "FOO"
 

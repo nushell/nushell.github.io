@@ -34,7 +34,7 @@ By convention, this variable is defined in the `config.nu` file.
 
 ### Environment
 
-You can set environment variables for the duration of a Nushell session using [`let-env`](commands/let-env.html) calls inside the `env.nu` file. For example:
+You can set environment variables for the duration of a Nushell session using [`let-env`](/commands/docs/let-env.html) calls inside the `env.nu` file. For example:
 
 ```
 let-env FOO = 'BAR'
@@ -77,7 +77,7 @@ You can build the full set of environment variables by running Nu inside of anot
 > env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
-This will print out [`let-env`](commands/let-env.html) lines, one for each environment variable along with its setting.
+This will print out [`let-env`](/commands/docs/let-env.html) lines, one for each environment variable along with its setting.
 
 Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
@@ -106,7 +106,7 @@ There is an environment variable `$nu.loginshell-path` containing the path to th
 ### macOS: Keeping `/usr/bin/open` as `open`
 
 Some tools (e.g. Emacs) rely on an `open` command to open files on Mac.
-As Nushell has its own [`open`](commands/open.md) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
+As Nushell has its own [`open`](/commands/docs/open.md) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
 One way to work around this is to define a custom command for Nushell's `open` and create an alias for the system's `open` in your `config.nu` file like this:
 
 ```
@@ -116,13 +116,13 @@ alias open = ^open
 
 ## PATH configuration
 
-In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use [`let-env`](commands/let-env.html) and [`append`](commands/append.html) in `env.nu`:
+In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use [`let-env`](/commands/docs/let-env.html) and [`append`](/commands/docs/append.html) in `env.nu`:
 
 ```
 let-env PATH = ($env.PATH | split row (char esep) | append '/some/path')
 ```
 
-This will append `/some/path` to the end of PATH; you can also use [`prepend`](commands/prepend.html) to add entries to the start of PATH.
+This will append `/some/path` to the end of PATH; you can also use [`prepend`](/commands/docs/prepend.html) to add entries to the start of PATH.
 
 Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.html#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use `append`/`prepend` directly.
 

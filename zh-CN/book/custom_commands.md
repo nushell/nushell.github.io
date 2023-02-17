@@ -383,13 +383,13 @@ Flags:
 > ls | get name
 ```
 
-让我们把[`ls`](/book/commands/ls.md)移到我们编写的命令中：
+让我们把[`ls`](/commands/docs/ls.md)移到我们编写的命令中：
 
 ```bash
 def my-ls [] { ls }
 ```
 
-我们就可以像使用[`ls`](/book/commands/ls.md)一样使用这个命令的输出：
+我们就可以像使用[`ls`](/commands/docs/ls.md)一样使用这个命令的输出：
 
 ```
 > my-ls | get name

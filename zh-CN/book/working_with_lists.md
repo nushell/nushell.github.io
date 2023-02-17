@@ -33,7 +33,7 @@ $colors # [red yellow green purple]
 
 ## 迭代列表
 
-要遍历一个列表中的元素，可以使用[`each`](/book/commands/each.md)命令和 [Nu 代码块](types_of_data.html#块) 指定对每一个元素做什么操作。块参数（例如`{ |it| echo $it }`中的`|it|`）通常是当前的列表元素，但如果需要，通过 `--numbered`(`-n`) 标志可以将其改为包含`index`和`item`值的元素。比如：
+要遍历一个列表中的元素，可以使用[`each`](/commands/docs/each.md)命令和 [Nu 代码块](types_of_data.html#块) 指定对每一个元素做什么操作。块参数（例如`{ |it| echo $it }`中的`|it|`）通常是当前的列表元素，但如果需要，通过 `--numbered`(`-n`) 标志可以将其改为包含`index`和`item`值的元素。比如：
 
 ```bash
 let names = [Mark Tami Amanda Jeremy]
@@ -44,7 +44,7 @@ $names | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 
-[`where`](/book/commands/where.md)命令可以用来创建一个列表的子集，高效地根据一个条件过滤列表。
+[`where`](/commands/docs/where.md)命令可以用来创建一个列表的子集，高效地根据一个条件过滤列表。
 
 下面的例子得到所有名称以 "e" 结尾的颜色：
 
@@ -63,7 +63,7 @@ let scores = [7 10 8 6 7]
 $scores | where $it > 7 # [10 8]
 ```
 
-[`reduce`](/book/commands/reduce.md)命令从一个列表计算一个单一的值。
+[`reduce`](/commands/docs/reduce.md)命令从一个列表计算一个单一的值。
 它使用了一个代码块，该块有两个参数：当前元素（即 `it`）和一个累加器 (即 `acc`)。如果想要给累加器指定一个初始值，请使用 `--fold` (`-f`) 标志。
 若要改变`it`使其具有`index`和`item`两个值，请添加`--numbered`（`-n`）标志。
 例如：
@@ -98,9 +98,9 @@ let index = 1
 $names | get $index # gives Tami
 ```
 
-[`length`](/book/commands/length.md)命令返回列表中的元素个数。例如，`[red green blue] | length`输出`3`。
+[`length`](/commands/docs/length.md)命令返回列表中的元素个数。例如，`[red green blue] | length`输出`3`。
 
-[`is-empty`](/book/commands/is-empty.md) 命令确定一个字符串、列表或表格是否为空。它可以与列表一起使用，如下所示：
+[`is-empty`](/commands/docs/is-empty.md) 命令确定一个字符串、列表或表格是否为空。它可以与列表一起使用，如下所示：
 
 ```bash
 let colors = [red green blue]
@@ -119,7 +119,7 @@ let colors = [red green blue]
 'gold' not-in $colors # true
 ```
 
-[`any`](/book/commands/any.md)命令用于确定一个列表中是否有任意一个元素匹配给定的条件，例如：
+[`any`](/commands/docs/any.md)命令用于确定一个列表中是否有任意一个元素匹配给定的条件，例如：
 
 ```bash
 # Do any color names end with "e"?
@@ -135,7 +135,7 @@ $scores | any {|it| $it > 7 } # true
 $scores | any {|it| $it mod 2 == 1 } # true
 ```
 
-[`all`](/book/commands/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
+[`all`](/commands/docs/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
 
 ```bash
 # Do all color names end with "e"?
@@ -153,7 +153,7 @@ $scores | all {|it| $it mod 2 == 0 } # false
 
 ## 转换列表
 
-[`flatten`](/book/commands/flatten.md)命令通过将嵌套列表中的元素添加到顶层列表中来从现有的列表创建一个新列表。这条命令可以被多次调用，以使任意嵌套深度的列表变平。例如：
+[`flatten`](/commands/docs/flatten.md)命令通过将嵌套列表中的元素添加到顶层列表中来从现有的列表创建一个新列表。这条命令可以被多次调用，以使任意嵌套深度的列表变平。例如：
 
 ```bash
 [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
@@ -161,7 +161,7 @@ $scores | all {|it| $it mod 2 == 0 } # false
 [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-[`wrap`](/book/commands/wrap.md)命令将一个列表转换为一个表格。每个列表的值将都会被转换为一个单独的行和列：
+[`wrap`](/commands/docs/wrap.md)命令将一个列表转换为一个表格。每个列表的值将都会被转换为一个单独的行和列：
 
 ```bash
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]

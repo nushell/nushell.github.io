@@ -8,7 +8,7 @@ _Note: To understand overlays, make sure to check [Modules](modules.md) first as
 ## Basics
 
 First, Nushell comes with one default overlay called `zero`.
-You can inspect which overlays are active with the [`overlay list`](commands/overlay_list.md) command.
+You can inspect which overlays are active with the [`overlay list`](/commands/docs/overlay_list.md) command.
 You should see the default overlay listed there.
 
 To create a new overlay, you first need a module:
@@ -29,7 +29,7 @@ To create a new overlay, you first need a module:
 
 We'll use this module throughout the chapter, so whenever you see `overlay use spam`, assume `spam` is referring to this module.
 
-To create the overlay, call [`overlay use`](commands/overlay_use.md):
+To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
 
 ```
 > overlay use spam
@@ -59,7 +59,7 @@ In the following sections, the `>` prompt will be preceded by the name of the la
 
 ## Removing an Overlay
 
-If you don't need the overlay definitions anymore, call [`overlay hide`](commands/overlay_remove.md):
+If you don't need the overlay definitions anymore, call [`overlay hide`](/commands/docs/overlay_remove.md):
 
 ```
 (spam)> overlay hide spam
@@ -86,7 +86,7 @@ foo
 ───┴──────
 ```
 
-The last way to remove an overlay is to call [`overlay hide`](commands/overlay_remove.md) without an argument which will remove the last active overlay.
+The last way to remove an overlay is to call [`overlay hide`](/commands/docs/overlay_remove.md) without an argument which will remove the last active overlay.
 
 ## Overlays Are Recordable
 
@@ -136,7 +136,7 @@ The solution can be to create a new empty overlay that would be used just for re
 
 The `eggs` command is added into `scratchpad` while keeping `spam` intact.
 
-To make it less verbose, you can use the [`overlay new`](commands/overlay_new.md) command:
+To make it less verbose, you can use the [`overlay new`](/commands/docs/overlay_new.md) command:
 
 ```
 (zero)> overlay use spam

@@ -17,7 +17,7 @@ error: Expected a string from pipeline
 
 在 Nu 中流经管道的值通常有一些额外信息，或元数据，附加在它们身上。这些通常被称为标签，就像商店里商品上的标签一样。这些标签并不影响数据，但它们给了 Nu 一种方法来改善使用这些数据的体验。
 
-让我们再次运行[`open`](/book/commands/open.md)命令，但这一次，我们将看一下它所反馈的标签：
+让我们再次运行[`open`](/commands/docs/open.md)命令，但这一次，我们将看一下它所反馈的标签：
 
 ```
 > open Cargo.toml | metadata

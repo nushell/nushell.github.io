@@ -11,7 +11,7 @@ if $book_exists == false {
 # Old commands are currently not deleted because some of them
 # are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
 # all of them.
-#do -i { rm book/commands/*.md }
+#do -i { rm book/commands/docs/*.md }
 
 let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
 let cmds_group = ($commands | group-by name)
@@ -19,7 +19,7 @@ let uniq_cmds = ($cmds_group | columns)
 
 $uniq_cmds | each { |cname|
   let safe_name = ($cname| str replace '\?' '' | str replace ' ' '_')
-  let doc_path = (['.', 'book', 'commands', $'($safe_name).md'] | path join)
+  let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
   let cmd_list = ($cmds_group | get $cname)
   let indented_usage = ($cmd_list | get usage | each {|it| $"  ($it)"} | str join (char nl))
   let category_matter = ($cmd_list | get category | each { |cat|

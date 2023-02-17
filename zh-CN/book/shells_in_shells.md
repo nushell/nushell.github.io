@@ -18,7 +18,7 @@
   3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago
 ```
 
-进入(`enter`)类似于改变目录（正如我们在`cd`命令中看到的那样）。这允许你跳入一个目录，在其中工作。我们现在是在两个目录中，而不是改变目录。为了更清楚地看到这一点，我们可以使用[`shells`](/book/commands/shells.md)命令来列出我们当前的活动目录：
+进入(`enter`)类似于改变目录（正如我们在`cd`命令中看到的那样）。这允许你跳入一个目录，在其中工作。我们现在是在两个目录中，而不是改变目录。为了更清楚地看到这一点，我们可以使用[`shells`](/commands/docs/shells.md)命令来列出我们当前的活动目录：
 
 ```bash
 /home/jonathan/Source/book(main)> shells
@@ -32,7 +32,7 @@
 
 ```
 
-[`shells`](/book/commands/shells.md)命令显示目前有三个 Shells 处于活动状态：我们最初的 "nushell" 源目录和现在的新 "book" 目录。
+[`shells`](/commands/docs/shells.md)命令显示目前有三个 Shells 处于活动状态：我们最初的 "nushell" 源目录和现在的新 "book" 目录。
 
 我们可以用 `n`, `p` 和 `g` 的快捷命令在这些 Shell 之间跳转，这是 "next"、"previous" 和 "go" 的缩写：
 

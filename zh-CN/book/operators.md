@@ -76,13 +76,13 @@ ls | where name =~ ^nu # returns all files whose names start with "nu"
 "FOO" =~ "(?i)foo" # returns true
 ```
 
-2. 使用[`str contains`](/book/commands/str_contains.md) 命令的`--insensitive`标志：
+2. 使用[`str contains`](/commands/docs/str_contains.md) 命令的`--insensitive`标志：
 
 ```bash
 "FOO" | str contains --insensitive "foo"
 ```
 
-3. 在比较前用[`str downcase`](/book/commands/str_downcase.md)将字符串转换为小写：
+3. 在比较前用[`str downcase`](/commands/docs/str_downcase.md)将字符串转换为小写：
 
 ```bash
 ("FOO" | str downcase) == ("Foo" | str downcase)
