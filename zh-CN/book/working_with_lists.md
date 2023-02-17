@@ -123,32 +123,32 @@ let colors = [red green blue]
 
 ```bash
 # Do any color names end with "e"?
-$colors | any ($it | str ends-with "e") # true
+$colors | any {|it| $it | str ends-with "e" } # true
 
 # Is the length of any color name less than 3?
-$colors | any ($it | str length) < 3 # false
+$colors | any {|it| ($it | str length) < 3 } # false
 
 # Are any scores greater than 7?
-$scores | any $it > 7 # true
+$scores | any {|it| $it > 7 } # true
 
 # Are any scores odd?
-$scores | any $it mod 2 == 1 # true
+$scores | any {|it| $it mod 2 == 1 } # true
 ```
 
 [`all`](/book/commands/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
 
 ```bash
 # Do all color names end with "e"?
-$colors | all ($it | str ends-with "e") # false
+$colors | all {|it| $it | str ends-with "e" } # false
 
 # Is the length of all color names greater than or equal to 3?
-$colors | all ($it | str length) >= 3 # true
+$colors | all {|it| ($it | str length) >= 3 } # true
 
 # Are all scores greater than 7?
-$scores | all $it > 7 # false
+$scores | all {|it| $it > 7 } # false
 
 # Are all scores even?
-$scores | all $it mod 2 == 0 # false
+$scores | all {|it| $it mod 2 == 0 } # false
 ```
 
 ## 转换列表
