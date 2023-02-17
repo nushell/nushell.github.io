@@ -75,7 +75,7 @@ A primeira coisa que queremos fazer ao carregar o arquivo é trabalhar com ele l
 ---+------------------------------
 ```
 
-Podemos notar que estamos lidando com linhas porque voltamos a ver uma tabela. Nosso próximo passo é tentar dividir as linhas em algo um pouco mais útil. Para isso, vamos usar o comando `split column`. Como o nome implica, esse comando nos dá uma forma de dividir em colunas uma string delimitada. Informamos qual é o delimitador e o comando faz o resto:
+Podemos notar que estamos lidando com linhas porque voltamos a ver uma lista. Nosso próximo passo é tentar dividir as linhas em algo um pouco mais útil. Para isso, vamos usar o comando `split column`. Como o nome implica, esse comando nos dá uma forma de dividir em colunas uma string delimitada. Informamos qual é o delimitador e o comando faz o resto:
 
 ```shell
 > open people.txt | lines | split column "|"

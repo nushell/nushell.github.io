@@ -90,7 +90,7 @@ Antonio | Vivaldi | Composer
 ───┴──────────────────────────────
 ```
 
-可以看到，我们正在处理这些行，因为我们又回到了一个表中。下一步是看看是否可以把行分割成更有用的东西。为此，我们将使用[`split`](/commands/docs/split.md)命令。[`split`](/commands/docs/split.md)，顾名思义，为我们提供了一种分割字符串的方法。我们将使用[`split`](/commands/docs/split.md)的`column`子命令，将内容分成多列。我们会告诉它分隔符是什么，剩下的就由它来完成：
+可以看到，我们正在处理这些行，因为我们又回到了一个列表中。下一步是看看是否可以把行分割成更有用的东西。为此，我们将使用[`split`](/commands/docs/split.md)命令。[`split`](/commands/docs/split.md)，顾名思义，为我们提供了一种分割字符串的方法。我们将使用[`split`](/commands/docs/split.md)的`column`子命令，将内容分成多列。我们会告诉它分隔符是什么，剩下的就由它来完成：
 
 ```
 > open people.txt | lines | split column "|"

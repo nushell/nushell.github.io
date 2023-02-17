@@ -75,7 +75,7 @@ Lo primero que queremos hacer al cargar el archivo es trabajarlo línea por lín
 ---+------------------------------
 ```
 
-Podemos darnos cuenta que estamos trabajando con las líneas porque estamos de vuelta a una tabla. Nuestro próximo paso es mirar si podemos dividir las filas a algo más útil. Para eso, usaremos el comando `split`. `split`, como implica el nombre, nos da una manera de dividir una cadena delimitada. Usaremos el subcomando `column` para dividir el contenido a varias columnas. Indicamos cuál es el delimitador y se hace el resto:
+Podemos darnos cuenta que estamos trabajando con las líneas porque estamos de vuelta a una lista. Nuestro próximo paso es mirar si podemos dividir las filas a algo más útil. Para eso, usaremos el comando `split`. `split`, como implica el nombre, nos da una manera de dividir una cadena delimitada. Usaremos el subcomando `column` para dividir el contenido a varias columnas. Indicamos cuál es el delimitador y se hace el resto:
 
 ```
 > open gente.txt | lines | split column "|"
