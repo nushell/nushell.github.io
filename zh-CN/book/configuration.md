@@ -33,7 +33,7 @@ let-env config = ($env.config | upsert <field name> <field value>)
 
 ### 环境
 
-你可以在 Nushell 会话期间使用[`let-env`](/commands/commands/let-env.md)在`env.nu`文件中设置环境变量。比如：
+你可以在 Nushell 会话期间使用[`let-env`](/commands/docs/let-env.md)在`env.nu`文件中设置环境变量。比如：
 
 ```bash
 let-env FOO = 'BAR'
@@ -76,7 +76,7 @@ Nushell 遵循如下的规则来匹配编辑器:
 > env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
-这将打印出[`let-env`](/commands/commands/let-env.md)所有行，且包含每个环境变量及其设置。
+这将打印出[`let-env`](/commands/docs/let-env.md)所有行，且包含每个环境变量及其设置。
 
 接下来，在一些发行版上，你还需要确保 Nu 在`/etc/shells`列表中：
 
@@ -105,7 +105,7 @@ Nushell 遵循如下的规则来匹配编辑器:
 ### macOS: 保持 `open` 为 `/usr/bin/open`
 
 一些工具（例如 Emacs）依靠`open`命令来打开 Mac 上的文件。
-由于 Nushell 有自己的[`open`](/commands/commands/open.md)命令，它有不同的语义并隐藏了`/usr/bin/open`，这样某些工具在试图使用它时将出错。
+由于 Nushell 有自己的[`open`](/commands/docs/open.md)命令，它有不同的语义并隐藏了`/usr/bin/open`，这样某些工具在试图使用它时将出错。
 一个解决这个问题的方法是为 Nushell 的`open`定义一个自定义命令，并在你的`config.nu`文件中为系统的`open`创建一个别名，像这样：
 
 ```bash
@@ -115,10 +115,10 @@ alias open = ^open
 
 ## `PATH` 配置
 
-要在 [PATH 变量](<https://en.wikipedia.org/wiki/PATH_(variable)>) 中添加一个路径，你可以在`env.nu`中使用 [`let-env`](/commands/commands/let-env.html) 和 [`append`](/commands/commands/append.html) 完成，如下：
+要在 [PATH 变量](<https://en.wikipedia.org/wiki/PATH_(variable)>) 中添加一个路径，你可以在`env.nu`中使用 [`let-env`](/commands/docs/let-env.html) 和 [`append`](/commands/docs/append.html) 完成，如下：
 
 ```shell
 let-env PATH = ($env.PATH | append '/some/path')
 ```
 
-这将把`/some/path`追加到`PATH`的末尾；你也可以使用 [`prepend`](/commands/commands/prepend.html) 将该路径添加到`PATH`的开头。
+这将把`/some/path`追加到`PATH`的末尾；你也可以使用 [`prepend`](/commands/docs/prepend.html) 将该路径添加到`PATH`的开头。

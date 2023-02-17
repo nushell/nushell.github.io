@@ -17,7 +17,7 @@ The error message tells us not only that what we gave `from toml` wasn't a strin
 
 Values that flow through a pipeline in Nu often have a set of additional information, or metadata, attached to them. These are known as tags, like the tags on an item in a store. These tags don't affect the data, but they give Nu a way to improve the experience of working with that data.
 
-Let's run the [`open`](/commands/commands/open.md) command again, but this time, we'll look at the tags it gives back:
+Let's run the [`open`](/commands/docs/open.md) command again, but this time, we'll look at the tags it gives back:
 
 ```
 > open Cargo.toml | metadata

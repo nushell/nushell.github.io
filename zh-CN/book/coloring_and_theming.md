@@ -384,7 +384,7 @@ Nushell 的提示符可以通过这些环境变量进行配置：
 
 ## `ls` 命令的配色:`LS_COLORS`
 
-Nushell 将尊重并使用 Mac、Linux 和 Windows 上的 `LS_COLORS` 环境变量设置。这个设置允许你在做[`ls`](/commands/commands/ls.md)时定义文件类型的颜色。例如，你可以让目录变成一种颜色，`_.md` markdown 文件一种颜色，`_.toml` 文件变成另一种颜色，等等。有很多方法可以给你的文件类型着色。
+Nushell 将尊重并使用 Mac、Linux 和 Windows 上的 `LS_COLORS` 环境变量设置。这个设置允许你在做[`ls`](/commands/docs/ls.md)时定义文件类型的颜色。例如，你可以让目录变成一种颜色，`_.md` markdown 文件一种颜色，`_.toml` 文件变成另一种颜色，等等。有很多方法可以给你的文件类型着色。
 
 有一个详尽的清单可以在 [这里](https://github.com/trapd00r/LS_COLORS) 看到，不过它可能太多了，但可以让你初步了解如何创建一个`ls_colors`文件，而`dircolors`可以把它变成`LS_COLORS`环境变量。
 

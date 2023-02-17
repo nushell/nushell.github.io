@@ -37,13 +37,13 @@ Nushell tracks the last exit code of the recently completed external in one of t
 > $env.LAST_EXIT_CODE
 ```
 
-The second uses a command called [`complete`](/commands/commands/complete.md).
+The second uses a command called [`complete`](/commands/docs/complete.md).
 
-## Using the [`complete`](/commands/commands/complete.md) command
+## Using the [`complete`](/commands/docs/complete.md) command
 
-The [`complete`](/commands/commands/complete.md) command allows you to run an external to completion, and gather the stdout, stderr, and exit code together in one record.
+The [`complete`](/commands/docs/complete.md) command allows you to run an external to completion, and gather the stdout, stderr, and exit code together in one record.
 
-If we try to run the external `cat` on a file that doesn't exist, we can see what [`complete`](/commands/commands/complete.md) does with the streams, including the redirected stderr:
+If we try to run the external `cat` on a file that doesn't exist, we can see what [`complete`](/commands/docs/complete.md) does with the streams, including the redirected stderr:
 
 ```
 > do { cat unknown.txt } | complete
@@ -76,7 +76,7 @@ Because streams of bytes can be difficult to work with, especially given how com
 
 Nushell attempts to convert to text using UTF-8. If at any time the conversion fails, the rest of the stream is assumed to always be bytes.
 
-If you want more control over the decoding of the byte stream, you can use the [`decode`](/commands/commands/decode.md) command. The [`decode`](/commands/commands/decode.md) command can be inserted into the pipeline after the external, or other raw stream-creating command, and will handle decoding the bytes based on the argument you give decode. For example, you could decode shift-jis text this way:
+If you want more control over the decoding of the byte stream, you can use the [`decode`](/commands/docs/decode.md) command. The [`decode`](/commands/docs/decode.md) command can be inserted into the pipeline after the external, or other raw stream-creating command, and will handle decoding the bytes based on the argument you give decode. For example, you could decode shift-jis text this way:
 
 ```
 > 0x[8a 4c] | decode shift-jis

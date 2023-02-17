@@ -8,7 +8,7 @@ Nu 在其命令中采用了这种方法，并将其扩展到包括其他类型�
 
 像许多编程语言一样，Nu 使用一组简单和结构化的数据类型对数据进行建模。简单的数据类型包括整数、浮点数、字符串、布尔、日期和路径。它还包括一个用于表示文件大小的特殊类型。
 
-你可以通过 [`describe`](/commands/commands/describe.md) 命令获取一个值的类型：
+你可以通过 [`describe`](/commands/docs/describe.md) 命令获取一个值的类型：
 
 ```
 > 42 | describe
@@ -294,7 +294,7 @@ Eg) `1wk`是一个星期的时间间隔。
 
 块(Blocks)表示 Nu 中的一个代码块。例如，在命令 `each { |it| echo $it }` 中，块是包含在大括号中的部分，`{ |it| echo $it }`。如果有必要，可以在一对管道符号（例如，`|it|`）之间指定块参数。
 
-块是表示可以在每行数据上执行的代码的一种有效方法。在[`each`](/commands/commands/each.md)块中使用`$it`作为参数名是惯例，但并不是必须的：`each { |x| echo $x }`与`each { |it| echo $it }`的结果相同。
+块是表示可以在每行数据上执行的代码的一种有效方法。在[`each`](/commands/docs/each.md)块中使用`$it`作为参数名是惯例，但并不是必须的：`each { |x| echo $x }`与`each { |it| echo $it }`的结果相同。
 
 ## 组
 

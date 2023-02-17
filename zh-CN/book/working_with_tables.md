@@ -21,7 +21,7 @@
 
 ## 排序
 
-我们可以通过调用[`sort-by`](/commands/commands/sort-by.md)命令对一个表进行排序，并指定需要排序的列。比如，按照文件的大小对表格进行排序：
+我们可以通过调用[`sort-by`](/commands/docs/sort-by.md)命令对一个表进行排序，并指定需要排序的列。比如，按照文件的大小对表格进行排序：
 
 ```
 > ls | sort-by size
@@ -42,7 +42,7 @@
 
 ## 选取
 
-我们可以从表中通过选择特定的列或行来获得数据。让我们从表中选择（[`select`](/commands/commands/select.md)）几列吧：
+我们可以从表中通过选择特定的列或行来获得数据。让我们从表中选择（[`select`](/commands/docs/select.md)）几列吧：
 
 ```
 > ls | select name size
@@ -117,7 +117,7 @@
 
 ## 从表格提取数据
 
-到目前为止，我们在处理表格时都是将表格修剪成我们需要的样子。有时我们可能想更进一步，只看单元格本身的值，而不是取整列。比如，我们只想得到一个包含所有文件名的列表。在此，我们使用[`get`](/commands/commands/get.md) 命令：
+到目前为止，我们在处理表格时都是将表格修剪成我们需要的样子。有时我们可能想更进一步，只看单元格本身的值，而不是取整列。比如，我们只想得到一个包含所有文件名的列表。在此，我们使用[`get`](/commands/docs/get.md) 命令：
 
 ```
 > ls | get name
@@ -134,7 +134,7 @@
 
 现在我们获得了每一个文件的文件名。
 
-这可能看起来很像我们之前使用的[`select`](/commands/commands/select.md)命令，所以也把它放在这里以便于比较：
+这可能看起来很像我们之前使用的[`select`](/commands/docs/select.md)命令，所以也把它放在这里以便于比较：
 
 ```
 > ls | select name
@@ -153,12 +153,12 @@
 
 这看起来非常相似！让我们看看能不能把这两个命令的区别说清楚：
 
-- [`select`](/commands/commands/select.md) - 创建一个只包括指定列的新表；
-- [`get`](/commands/commands/get.md) - 以列表形式返回指定列内的值；
+- [`select`](/commands/docs/select.md) - 创建一个只包括指定列的新表；
+- [`get`](/commands/docs/get.md) - 以列表形式返回指定列内的值；
 
 区分这些表格的方法是 —— 列名没有了，也让我们知道这是一个我们可以处理的值的列表。
 
-[`get`](/commands/commands/get.md)命令可以更进一步，它可以接受表中更深的数据路径。这简化了对复杂数据的处理，比如那些你可能在.json 文件中发现的结构。
+[`get`](/commands/docs/get.md)命令可以更进一步，它可以接受表中更深的数据路径。这简化了对复杂数据的处理，比如那些你可能在.json 文件中发现的结构。
 
 ## 修改表格数据
 
@@ -166,7 +166,7 @@
 
 ### 拼接表格
 
-我们可以使用[`append`](/commands/commands/append.md)将列名相同的表拼接起来：
+我们可以使用[`append`](/commands/docs/append.md)将列名相同的表拼接起来：
 
 ```
 > let $first = [[a b]; [1 2]]
@@ -182,7 +182,7 @@
 
 ### 合并表格
 
-我们可以使用[`merge`](/commands/commands/merge.md)命令将两个（或多个）表格合并在一起：
+我们可以使用[`merge`](/commands/docs/merge.md)命令将两个（或多个）表格合并在一起：
 
 ```shell
 > let $first = [[a b]; [1 2]]
@@ -212,7 +212,7 @@
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-或者我们可以使用[`reduce`](/commands/commands/reduce.md)命令来动态地合并所有的表格：
+或者我们可以使用[`reduce`](/commands/docs/reduce.md)命令来动态地合并所有的表格：
 
 ```shell
 > [$first $second $third] | reduce {|it, acc| $acc | merge { $it }}
@@ -225,7 +225,7 @@
 
 ### 添加新列
 
-我们可以使用[`insert`](/commands/commands/insert.md)命令在表中增加新列，让我们看一个例子：
+我们可以使用[`insert`](/commands/docs/insert.md)命令在表中增加新列，让我们看一个例子：
 
 ```
 > open rustfmt.toml
@@ -253,7 +253,7 @@
 ─────────┴──────
 ```
 
-Nu 的更改是函数性更改，这意味着它们只在值上起作用，而不是试图引起永久性变更。这使我们可以在管道中进行许多不同类型的操作直到我们准备好将结果输出(如果我们选择这样做的话)。这里我们可以使用 [`save`](/commands/commands/save.md) 命令保存结果：
+Nu 的更改是函数性更改，这意味着它们只在值上起作用，而不是试图引起永久性变更。这使我们可以在管道中进行许多不同类型的操作直到我们准备好将结果输出(如果我们选择这样做的话)。这里我们可以使用 [`save`](/commands/docs/save.md) 命令保存结果：
 
 ```
 > open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
@@ -266,7 +266,7 @@ Nu 的更改是函数性更改，这意味着它们只在值上起作用，而�
 
 ### 更新一列
 
-与[`insert`](/commands/commands/insert.md)命令类似，我们也可以使用[`update`](/commands/commands/update.md)命令将某一列的内容修改为新值。为了看看效果，让我们打开同一个文件：
+与[`insert`](/commands/docs/insert.md)命令类似，我们也可以使用[`update`](/commands/docs/update.md)命令将某一列的内容修改为新值。为了看看效果，让我们打开同一个文件：
 
 ```
 > open rustfmt.toml
@@ -284,7 +284,7 @@ Nu 的更改是函数性更改，这意味着它们只在值上起作用，而�
 ─────────┴──────
 ```
 
-你也可以使用[`upsert`](/commands/commands/upsert.md)命令来插入或更新，这取决于该列是否已经存在。
+你也可以使用[`upsert`](/commands/docs/upsert.md)命令来插入或更新，这取决于该列是否已经存在。
 
 ### 移动列
 

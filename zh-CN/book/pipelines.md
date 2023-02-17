@@ -10,9 +10,9 @@ Nu 的核心设计之一是管道，这个设计思想可以追溯到几十年�
 > open "Cargo.toml" | inc package.version --minor | save "Cargo_new.toml"
 ```
 
-第一条命令：`open "Cargo.toml"` 是一个输入（有时也称为 "源" 或 "生产者"），它创建或加载数据，并将其送入管道。管道待处理的值正是来自于此输入。像[`ls`](/commands/commands/ls.md)这样的命令也是输入，因为它们从文件系统中获取数据，并通过管道发送以便能被后续使用。
+第一条命令：`open "Cargo.toml"` 是一个输入（有时也称为 "源" 或 "生产者"），它创建或加载数据，并将其送入管道。管道待处理的值正是来自于此输入。像[`ls`](/commands/docs/ls.md)这样的命令也是输入，因为它们从文件系统中获取数据，并通过管道发送以便能被后续使用。
 
-第二个命令：`inc package.version --minor` 是一个过滤器。过滤器获取输入的数据并对其进行处理。它们可能会修改它（如我们例子中的[`inc`](/commands/commands/inc.md)命令），或者在值通过时对其做其他操作，如记录。
+第二个命令：`inc package.version --minor` 是一个过滤器。过滤器获取输入的数据并对其进行处理。它们可能会修改它（如我们例子中的[`inc`](/commands/docs/inc.md)命令），或者在值通过时对其做其他操作，如记录。
 
 最后一条命令：`save "Cargo_new.toml"` 是一个输出（有时称为 "接收者"）。输出从管道中获取输入，并对其进行一些最终操作。在我们的例子中，我们在最后一步把通过管道的内容保存到一个文件中。还有一些其他类型的输出命令可以获取数值并供用户查看。
 
@@ -47,7 +47,7 @@ Nu 命令之间使用 Nu 的数据类型进行通信（见[数据类型](types_o
 
 `external_command | internal_command`
 
-从外部命令进入 Nu 的数据将以字节的形式流入，Nushell 将尝试自动将其转换为 UTF-8 文本。如果成功，一个文本数据流将被发送到`internal_command`；如果不成功，一个二进制数据流将被发送到`internal_command`。像[`lines`](/commands/commands/lines.md)这样的命令有助于从外部命令接收数据，因为它提供了分离的数据行以供后续使用。
+从外部命令进入 Nu 的数据将以字节的形式流入，Nushell 将尝试自动将其转换为 UTF-8 文本。如果成功，一个文本数据流将被发送到`internal_command`；如果不成功，一个二进制数据流将被发送到`internal_command`。像[`lines`](/commands/docs/lines.md)这样的命令有助于从外部命令接收数据，因为它提供了分离的数据行以供后续使用。
 
 `external_command_1 | external_command_2`
 
@@ -55,7 +55,7 @@ Nu 在两个外部命令之间以与其他 Shell 相同的方式处理数据管�
 
 ## 幕后解说
 
-你可能想知道，既然[`ls`](/commands/commands/ls.md)是一个输入而不是一个输出，我们为何能看到一个表格？其实 Nu 使用了另一个叫做[`table`](/commands/commands/table.md)的命令为我们自动添加了这个输出。[`table`](/commands/commands/table.md)命令被附加到任何没有输出的管道上，这使得我们可以看到结果。
+你可能想知道，既然[`ls`](/commands/docs/ls.md)是一个输入而不是一个输出，我们为何能看到一个表格？其实 Nu 使用了另一个叫做[`table`](/commands/docs/table.md)的命令为我们自动添加了这个输出。[`table`](/commands/docs/table.md)命令被附加到任何没有输出的管道上，这使得我们可以看到结果。
 
 实际上，该命令：
 

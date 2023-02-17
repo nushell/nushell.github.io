@@ -161,7 +161,7 @@ As of version 0.61, interpolated strings support escaping parentheses, so that t
 
 ## Splitting strings
 
-The [`split row`](/commands/commands/split_row.md) command creates a list from a string based on a delimiter.
+The [`split row`](/commands/docs/split_row.md) command creates a list from a string based on a delimiter.
 
 ```sh
 > "red,green,blue" | split row ","
@@ -172,7 +172,7 @@ The [`split row`](/commands/commands/split_row.md) command creates a list from a
 ╰───┴───────╯
 ```
 
-The [`split column`](/commands/commands/split_column.md) command will create a table from a string based on a delimiter. This applies generic column names to the table.
+The [`split column`](/commands/docs/split_column.md) command will create a table from a string based on a delimiter. This applies generic column names to the table.
 
 ```sh
 > "red,green,blue" | split column ","
@@ -183,7 +183,7 @@ The [`split column`](/commands/commands/split_column.md) command will create a t
 ╰───┴─────────┴─────────┴─────────╯
 ```
 
-Finally, the [`split chars`](/commands/commands/split_chars.md) command will split a string into a list of characters.
+Finally, the [`split chars`](/commands/docs/split_chars.md) command will split a string into a list of characters.
 
 ```sh
 > 'aeiou' | split chars
@@ -211,7 +211,7 @@ true
 
 ### Trimming strings
 
-You can trim the sides of a string with the [`str trim`](/commands/commands/str_trim.md) command. By default, the [`str trim`](/commands/commands/str_trim.md) commands trims whitespace from both sides of the string. For example:
+You can trim the sides of a string with the [`str trim`](/commands/docs/str_trim.md) command. By default, the [`str trim`](/commands/docs/str_trim.md) commands trims whitespace from both sides of the string. For example:
 
 ```sh
 > '       My   string   ' | str trim
@@ -244,7 +244,7 @@ o Wo
 
 ### String padding
 
-With the [`str lpad`](/commands/commands/str_lpad.md) and [`str rpad`](/commands/commands/str_rpad.md) commands you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
+With the [`str lpad`](/commands/docs/str_lpad.md) and [`str rpad`](/commands/docs/str_rpad.md) commands you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
 
 ```sh
 > '1234' | str lpad -l 10 -c '0'
@@ -255,7 +255,7 @@ With the [`str lpad`](/commands/commands/str_lpad.md) and [`str rpad`](/commands
 
 ### Reversing strings
 
-This can be done easily with the [`str reverse`](/commands/commands/str_reverse.md) command.
+This can be done easily with the [`str reverse`](/commands/docs/str_reverse.md) command.
 
 ```sh
 > 'Nushell' | str reverse
@@ -270,7 +270,7 @@ llehsuN
 
 ## String parsing
 
-With the [`parse`](/commands/commands/parse.md) command you can parse a string into columns. For example:
+With the [`parse`](/commands/docs/parse.md) command you can parse a string into columns. For example:
 
 ```sh
 > 'Nushell 0.80' | parse '{shell} {version}'
@@ -339,17 +339,17 @@ There are multiple ways to convert strings to and from other types.
 
 ### To string
 
-1. Using [`into string`](/commands/commands/into_string.md). e.g. `123 | into string`
+1. Using [`into string`](/commands/docs/into_string.md). e.g. `123 | into string`
 2. Using string interpolation. e.g. `$'(123)'`
-3. Using [`build-string`](/commands/commands/build-string.md). e.g. `build-string (123)`
+3. Using [`build-string`](/commands/docs/build-string.md). e.g. `build-string (123)`
 
 ### From string
 
-1. Using [`into <type>`](/commands/commands/into.md). e.g. `'123' | into int`
+1. Using [`into <type>`](/commands/docs/into.md). e.g. `'123' | into int`
 
 ## Coloring strings
 
-You can color strings with the [`ansi`](/commands/commands/ansi.md) command. For example:
+You can color strings with the [`ansi`](/commands/docs/ansi.md) command. For example:
 
 ```sh
 > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'

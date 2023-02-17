@@ -33,7 +33,7 @@ $colors # [red yellow green purple]
 
 ## Iterating over lists
 
-To iterate over the items in a list, use the [`each`](/commands/commands/each.md) command with a [block](types_of_data.html#blocks)
+To iterate over the items in a list, use the [`each`](/commands/docs/each.md) command with a [block](types_of_data.html#blocks)
 of Nu code that specifies what to do to each item. The block parameter (e.g. `|it|` in `{ |it| print $it }`) is normally the current list item, but the `--numbered` (`-n`) flag can change it to have `index` and `item` values if needed. For example:
 
 ```bash
@@ -45,7 +45,7 @@ $names | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 
-The [`where`](/commands/commands/where.md) command can be used to create a subset of a list, effectively filtering the list based on a condition.
+The [`where`](/commands/docs/where.md) command can be used to create a subset of a list, effectively filtering the list based on a condition.
 
 The following example gets all the colors whose names end in "e".
 
@@ -63,7 +63,7 @@ let scores = [7 10 8 6 7]
 $scores | where $it > 7 # [10 8]
 ```
 
-The [`reduce`](/commands/commands/reduce.md) command computes a single value from a list.
+The [`reduce`](/commands/docs/reduce.md) command computes a single value from a list.
 It uses a block which takes 2 parameters: the current item (conventionally named `it`) and an accumulator
 (conventionally named `acc`). To specify an initial value for the accumulator, use the `--fold` (`-f`) flag.
 To change `it` to have `index` and `item` values, add the `--numbered` (`-n`) flag.
@@ -99,10 +99,10 @@ let index = 1
 $names | get $index # gives Tami
 ```
 
-The [`length`](/commands/commands/length.md) command returns the number of items in a list.
+The [`length`](/commands/docs/length.md) command returns the number of items in a list.
 For example, `[red green blue] | length` outputs `3`.
 
-The [`is-empty`](/commands/commands/is-empty.md) command determines whether a string, list, or table is empty.
+The [`is-empty`](/commands/docs/is-empty.md) command determines whether a string, list, or table is empty.
 It can be used with lists as follows:
 
 ```bash
@@ -122,7 +122,7 @@ let colors = [red green blue]
 'gold' not-in $colors # true
 ```
 
-The [`any`](/commands/commands/any.md) command determines if any item in a list
+The [`any`](/commands/docs/any.md) command determines if any item in a list
 matches a given condition.
 For example:
 
@@ -140,7 +140,7 @@ $scores | any $it > 7 # true
 $scores | any $it mod 2 == 1 # true
 ```
 
-The [`all`](/commands/commands/all.md) command determines if every item in a list
+The [`all`](/commands/docs/all.md) command determines if every item in a list
 matches a given condition.
 For example:
 
@@ -160,7 +160,7 @@ $scores | all $it mod 2 == 0 # false
 
 ## Converting the list
 
-The [`flatten`](/commands/commands/flatten.md) command creates a new list from an existing list
+The [`flatten`](/commands/docs/flatten.md) command creates a new list from an existing list
 by adding items in nested lists to the top-level list.
 This can be called multiple times to flatten lists nested at any depth.
 For example:
@@ -171,7 +171,7 @@ For example:
 [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-The [`wrap`](/commands/commands/wrap.md) command converts a list to a table. Each list value will
+The [`wrap`](/commands/docs/wrap.md) command converts a list to a table. Each list value will
 be converted to a separate row with a single column:
 
 ```bash

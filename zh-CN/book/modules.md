@@ -37,11 +37,11 @@ export def hi [where: string] {
 
 我们在 `greetings` 模块中定义了 `hello` 和 `hi` 两个自定义命令。`export`关键字使得以后可以从模块中导入该命令。
 
-与[`def`](/commands/commands/def.md)类似，也可以用`export`关键字标记[`def-env`](/commands/commands/def-env.md)（你可以在[环境](environment.md)章节中了解更多关于[`def-env`](/commands/commands/def-env.md)的信息）。
+与[`def`](/commands/docs/def.md)类似，也可以用`export`关键字标记[`def-env`](/commands/docs/def-env.md)（你可以在[环境](environment.md)章节中了解更多关于[`def-env`](/commands/docs/def-env.md)的信息）。
 
 ## 使用模块
 
-模块本身并不做任何事情，要使用模块导出的定义，我们需要[`use`](/commands/commands/use.md)它：
+模块本身并不做任何事情，要使用模块导出的定义，我们需要[`use`](/commands/docs/use.md)它：
 
 ```bash
 > use greetings
@@ -57,7 +57,7 @@ hi there!
 
 ## 导入符号
 
-一般来说，[`use`](/commands/commands/use.md)关键词后面的任何内容都会形成一个**导入模式**，它控制着符号的导入方式。
+一般来说，[`use`](/commands/docs/use.md)关键词后面的任何内容都会形成一个**导入模式**，它控制着符号的导入方式。
 导入模式可以是以下的一种：
 
 `use greetings`
@@ -93,7 +93,7 @@ export def hi [where: string] {
 }
 ```
 
-现在，你可以直接在文件上调用[`use`](/commands/commands/use.md)：
+现在，你可以直接在文件上调用[`use`](/commands/docs/use.md)：
 
 ```bash
 > use greetings.nu
@@ -144,7 +144,7 @@ hi there!
 ## 环境变量
 
 到目前为止，我们只是用模块来导入自定义命令，用同样的方法导出环境变量也是可能的。
-其语法与你可能习惯的[`let-env`](/commands/commands/let-env.md)或[`load-env`](/commands/commands/load-env.md)等命令略有不同：
+其语法与你可能习惯的[`let-env`](/commands/docs/let-env.md)或[`load-env`](/commands/docs/load-env.md)等命令略有不同：
 
 ```bash
 # greetings.nu
@@ -168,7 +168,7 @@ Arthur, King of the Britons
 hello Arthur, King of the Britons!
 ```
 
-你可能注意到我们没有直接给`MYNAME`赋值，相反，我们给了它一个代码块（`{ ...}`），它在我们每次调用[`use`](/commands/commands/use.md)时都会被执行。例如，我们可以用[`random`](/commands/commands/random.md)命令来演示这一点：
+你可能注意到我们没有直接给`MYNAME`赋值，相反，我们给了它一个代码块（`{ ...}`），它在我们每次调用[`use`](/commands/docs/use.md)时都会被执行。例如，我们可以用[`random`](/commands/docs/random.md)命令来演示这一点：
 
 ```bash
 > module roll { export env ROLL { random dice | into string } }
@@ -208,7 +208,7 @@ hello Arthur, King of the Britons!
 
 任何自定义命令、别名或环境变量, 无论是否从模块中导入, 都可以被 "隐藏", 以恢复之前的定义。
 (注意，现在还不能从模块中导出别名，但它们仍然可以被隐藏。)
-我们用[`hide`](/commands/commands/hide.md)命令来实现隐藏：
+我们用[`hide`](/commands/docs/hide.md)命令来实现隐藏：
 
 ```bash
 > def foo [] { "foo" }
@@ -221,7 +221,7 @@ foo
 > foo  # error! command not found!
 ```
 
-[`hide`](/commands/commands/hide.md)命令也接受导入模式，就像[`use`](/commands/commands/use.md)那样。不过，导入模式的解释略有不同。它可以是下面中的一种：
+[`hide`](/commands/docs/hide.md)命令也接受导入模式，就像[`use`](/commands/docs/use.md)那样。不过，导入模式的解释略有不同。它可以是下面中的一种：
 
 `hide foo` 或者 `hide greetings`
 

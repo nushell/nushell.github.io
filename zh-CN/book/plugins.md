@@ -6,7 +6,7 @@ Nu 的插件是可执行的；Nu 在需要时启动它们，并通过 [stdin, st
 
 ## 添加一个插件
 
-要添加一个插件，请调用[`register`](/commands/commands/register.md)命令来告诉 Nu 在哪里可以找到它，与此同时，你还需要告诉 Nushell 这个插件使用什么方式进行编码。
+要添加一个插件，请调用[`register`](/commands/docs/register.md)命令来告诉 Nu 在哪里可以找到它，与此同时，你还需要告诉 Nushell 这个插件使用什么方式进行编码。
 
 Linux+macOS:
 
@@ -20,7 +20,7 @@ Windows:
 > register --encoding=capnp .\my_plugins\my-cool-plugin.exe
 ```
 
-当 [`register`](/commands/commands/register.md) 被调用时：
+当 [`register`](/commands/docs/register.md) 被调用时：
 
 1. Nu 启动该插件并通过 stdin 向其发送 "签名" 信息；
 2. 插件通过 stdout 响应，包含其签名（名称、描述、参数、标志等）的消息；

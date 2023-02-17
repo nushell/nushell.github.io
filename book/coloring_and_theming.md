@@ -392,7 +392,7 @@ Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where yo
 
 ## `LS_COLORS` colors for the `ls` command
 
-Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the color of file types when you do a [`ls`](/commands/commands/ls.md). For instance, you can make directories one color, _.md markdown files another color, _.toml files yet another color, etc. There are a variety of ways to color your file types.
+Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the color of file types when you do a [`ls`](/commands/docs/ls.md). For instance, you can make directories one color, _.md markdown files another color, _.toml files yet another color, etc. There are a variety of ways to color your file types.
 
 There's an exhaustive list [here](https://github.com/trapd00r/LS_COLORS), which is overkill, but gives you an rudimentary understanding of how to create a ls_colors file that `dircolors` can turn into a `LS_COLORS` environment variable.
 

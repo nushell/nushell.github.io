@@ -6,7 +6,7 @@ In Nushell, you can write and run scripts in the Nushell language. To run a scri
 > nu myscript.nu
 ```
 
-This will run the script to completion in a new instance of Nu. You can also run scripts inside the _current_ instance of Nu using [`source`](/commands/commands/source.md):
+This will run the script to completion in a new instance of Nu. You can also run scripts inside the _current_ instance of Nu using [`source`](/commands/docs/source.md):
 
 ```
 > source myscript.nu

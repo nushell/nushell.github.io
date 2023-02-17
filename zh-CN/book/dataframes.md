@@ -71,7 +71,7 @@ DataFrame 相关命令从 0.33.1 版本开始支持
 
 ### 加载文件
 
-让我们先来比较一下各种方法的加载时间。首先，我们将使用 Nushell 的[`open`](/commands/commands/open.md)命令加载数据：
+让我们先来比较一下各种方法的加载时间。首先，我们将使用 Nushell 的[`open`](/commands/docs/open.md)命令加载数据：
 
 ```shell
 > benchmark {open .\Data7602DescendingYearOrder.csv}

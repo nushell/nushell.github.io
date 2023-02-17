@@ -8,7 +8,7 @@ Um ein Skript auszuführen, wird es dem Befehl `nu` als Argument übergeben:
 ```
 
 Dies wird das Skript bis zum Ende in einer neuen Nuinstanz ausführen.
-Das Skript kann auch in der _aktuellen_ Instanz ausgeführt werden mit dem [`source`](/commands/commands/source.md) Befehl:
+Das Skript kann auch in der _aktuellen_ Instanz ausgeführt werden mit dem [`source`](/commands/docs/source.md) Befehl:
 
 ```
 > source myscript.nu
