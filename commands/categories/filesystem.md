@@ -6,7 +6,7 @@
     computed: {
       commands() {
         return pages
-          .filter(p => p.path.includes('/commands/commands/'))
+          .filter(p => p.path.includes('/commands/docs/'))
           .filter(p => p.frontmatter.categories.includes('filesystem'))
           .sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
       }

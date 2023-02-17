@@ -3,7 +3,7 @@
 Nushell provides commands for a variety of use cases.
 You can find the included categories in the sidebar.
 
-To see all commands in Nushell, run [`help commands`](../commands/docs/help.md).
+To see all commands in Nushell, run [`help commands`](/commands/docs/help.md).
 
 <script>
   import pages from '@temp/pages'
