@@ -31,7 +31,7 @@ usage: |
 ($indented_usage)
 ---"
 
-    let doc = ($cmds_group | get $cname | each { |command| generate-command-doc $command } | str join)
+    let doc = ($cmds_group | get $cname | each { |command| command-doc $command } | str join)
     [$frontmatter $doc] | str join | save --raw --force $doc_path
     $doc_path
   } | length)
@@ -39,7 +39,9 @@ usage: |
   print $"($number_generated_commands) commands written"
 }
 
-def generate-command-doc [command] {
+
+
+def command-doc [command] {
   let top = $"
 # <code>{{ $frontmatter.title }}</code> for ($command.category)
 
