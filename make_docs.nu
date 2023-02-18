@@ -8,7 +8,7 @@ def main [] {
   let cmds_group = ($commands | group-by name)
   let uniq_cmds = ($cmds_group | columns)
 
-  $uniq_cmds | each { |cname|
+  let number_generated_commands = ($uniq_cmds | each { |cname|
     let safe_name = ($cname| str replace '\?' '' | str replace ' ' '_')
     let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
     let cmd_list = ($cmds_group | get $cname)
@@ -21,7 +21,7 @@ def main [] {
     let category_list = "  " + ($cmd_list | get category | str join "\n  " )
 
     # this is going in the frontmatter as a multiline YAML string, so indentation matters
-    let top = $"---
+    let frontmatter = $"---
 title: ($cname)
 categories: |
 ($category_list)
@@ -31,13 +31,15 @@ usage: |
 ($indented_usage)
 ---"
 
-    let doc = ($cmds_group | get $cname | each { |command| get-doc $command } | str join)
-    [$top $doc] | str join | save --raw --force $doc_path
+    let doc = ($cmds_group | get $cname | each { |command| generate-command-doc $command } | str join)
+    [$frontmatter $doc] | str join | save --raw --force $doc_path
     $doc_path
-  } | length | $"($in) commands written"
+  } | length)
+
+  print $"($number_generated_commands) commands written"
 }
 
-def get-doc [command] {
+def generate-command-doc [command] {
   let top = $"
 # <code>{{ $frontmatter.title }}</code> for ($command.category)
 
