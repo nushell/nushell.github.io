@@ -28,13 +28,13 @@ def generate-command [commands_group command_name] {
 def command-frontmatter [commands_group, command_name] {
   let commands_list = ($commands_group | get $command_name)
 
-  let category_list = "  " + ($commands_list | get category | str join $"(char nl)  " )
+  let category_list = "  " + ($commands_list | get category | str join $"(char newline)  " )
   let nu_version = (version).version
   let category_matter = ($commands_list | get category | each { |category|
-    let usage = ($commands_list | where category == $category | get usage | str join (char nl))
-    $'($category | str snake-case): |(char nl)  ($usage)'
-  } | str join (char nl))
-  let indented_usage = ($commands_list | get usage | each {|it| $"  ($it)"} | str join (char nl))
+    let usage = ($commands_list | where category == $category | get usage | str join (char newline))
+    $'($category | str snake-case): |(char newline)  ($usage)'
+  } | str join (char newline))
+  let indented_usage = ($commands_list | get usage | each {|it| $"  ($it)"} | str join (char newline))
 
   # This is going in the frontmatter as a multiline YAML string, so indentation matters
   $"---
@@ -78,7 +78,7 @@ def command-doc [command] {
     } | str join " ")
   }
 
-  let signatures = $"## Signature(char nl)(char nl)```> ($command.name) ($sig)```(char nl)(char nl)"
+  let signatures = $"## Signature(char newline)(char newline)```> ($command.name) ($sig)```(char newline)(char newline)"
 
   let params = if $no_param { '' } else {
     ($command.signatures | get $columns.0 | each { |param|
@@ -91,10 +91,10 @@ def command-doc [command] {
       } else if $param.parameter_type == "rest" {
         $" -  `...rest`: ($param.description)"
       }
-    } | str join (char nl))
+    } | str join (char newline))
   }
 
-  let parameters = if $no_param { "" } else { $"## Parameters(char nl)(char nl)($params)(char nl)(char nl)" }
+  let parameters = if $no_param { "" } else { $"## Parameters(char newline)(char newline)($params)(char newline)(char newline)" }
 
   let ex = $command.extra_usage
   # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
@@ -102,13 +102,13 @@ def command-doc [command] {
   let extra_usage = if $ex == "" { 
     "" 
   } else if $command.name in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
-    $"## Notes(char nl)```text(char nl)($ex)(char nl)```(char nl)"
+    $"## Notes(char newline)```text(char newline)($ex)(char newline)```(char newline)"
   } else {
-    $"## Notes(char nl)($ex)(char nl)"
+    $"## Notes(char newline)($ex)(char newline)"
   }
 
   let examples = if ($command.examples | length) > 0 {
-    let example_top = $"## Examples(char nl)(char nl)"
+    let example_top = $"## Examples(char newline)(char newline)"
 
     let $examples = ($command.examples | each { |example|
 $"($example.description)
@@ -128,7 +128,7 @@ $"($example.description)
     ($top + $signatures + $parameters + $extra_usage + $examples ) |
     lines |
     each {|it| ($it | str trim -r) } |
-    str join (char nl)
+    str join (char newline)
   )
   $doc
 }
