@@ -5,40 +5,49 @@ def main [] {
   #do -i { rm book/commands/docs/*.md }
 
   let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
-  let cmds_group = ($commands | group-by name)
-  let uniq_cmds = ($cmds_group | columns)
+  let commands_group = ($commands | group-by name)
+  let unique_commands = ($commands_group | columns)
 
-  let number_generated_commands = ($uniq_cmds | each { |cname|
-    let safe_name = ($cname| str replace '\?' '' | str replace ' ' '_')
-    let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
-    let cmd_list = ($cmds_group | get $cname)
-    let indented_usage = ($cmd_list | get usage | each {|it| $"  ($it)"} | str join (char nl))
-    let category_matter = ($cmd_list | get category | each { |cat|
-    let usage = ($cmd_list | where category == $cat | get usage | str join (char nl))
-    $'($cat | str snake-case): |
-    ($usage)'
-    } | str join (char nl))
-    let category_list = "  " + ($cmd_list | get category | str join "\n  " )
-
-    # this is going in the frontmatter as a multiline YAML string, so indentation matters
-    let frontmatter = $"---
-title: ($cname)
-categories: |
-($category_list)
-version: ((version).version)
-($category_matter)
-usage: |
-($indented_usage)
----"
-
-    let doc = ($cmds_group | get $cname | each { |command| command-doc $command } | str join)
-    [$frontmatter $doc] | str join | save --raw --force $doc_path
-    $doc_path
+  let number_generated_commands = ($unique_commands | each { |command_name|
+    generate-command $commands_group $command_name
   } | length)
 
   print $"($number_generated_commands) commands written"
 }
 
+def generate-command [commands_group command_name] {
+  let safe_name = ($command_name| str replace '\?' '' | str replace ' ' '_')
+  let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
+
+  let frontmatter = (command-frontmatter $commands_group $command_name)
+  let doc = ($commands_group | get $command_name | each { |command| command-doc $command } | str join)
+  [$frontmatter $doc] | str join | save --raw --force $doc_path
+  $doc_path
+}
+
+def command-frontmatter [commands_group, command_name] {
+  let commands_list = ($commands_group | get $command_name)
+
+  let category_list = "  " + ($commands_list | get category | str join $"(char nl)  " )
+  let nu_version = (version).version
+  let category_matter = ($commands_list | get category | each { |category|
+    let usage = ($commands_list | where category == $category | get usage | str join (char nl))
+    $'($category | str snake-case): |(char nl)  ($usage)'
+  } | str join (char nl))
+  let indented_usage = ($commands_list | get usage | each {|it| $"  ($it)"} | str join (char nl))
+
+  # This is going in the frontmatter as a multiline YAML string, so indentation matters
+  $"---
+title: ($command_name)
+categories: |
+($category_list)
+version: ($nu_version)
+($category_matter)
+usage: |
+($indented_usage)
+---
+"
+}
 
 
 def command-doc [command] {
