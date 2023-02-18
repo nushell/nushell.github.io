@@ -82,7 +82,9 @@ def command-doc [command] {
 
   let signatures = $"## Signature(char newline)(char newline)```> ($command.name) ($sig)```(char newline)(char newline)"
 
-  let params = if $no_param { '' } else {
+  let params = if $no_param {
+    ''
+    } else {
     ($command.signatures | get $columns.0 | each { |param|
       if $param.parameter_type == "positional" {
         $" -  `($param.parameter_name)`: ($param.description)"
