@@ -1,49 +1,41 @@
-let vers = (version).version
+def main [] {
+  # Old commands are currently not deleted because some of them
+  # are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
+  # all of them.
+  #do -i { rm book/commands/docs/*.md }
 
-let book_exists = ('book' | path exists)
-if $book_exists == false {
-  print (error make {
-    msg: "please run this script from the root of the website repo",
-  })
-  exit --now
-}
+  let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
+  let cmds_group = ($commands | group-by name)
+  let uniq_cmds = ($cmds_group | columns)
 
-# Old commands are currently not deleted because some of them
-# are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
-# all of them.
-#do -i { rm book/commands/docs/*.md }
+  $uniq_cmds | each { |cname|
+    let safe_name = ($cname| str replace '\?' '' | str replace ' ' '_')
+    let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
+    let cmd_list = ($cmds_group | get $cname)
+    let indented_usage = ($cmd_list | get usage | each {|it| $"  ($it)"} | str join (char nl))
+    let category_matter = ($cmd_list | get category | each { |cat|
+    let usage = ($cmd_list | where category == $cat | get usage | str join (char nl))
+    $'($cat | str snake-case): |
+    ($usage)'
+    } | str join (char nl))
+    let category_list = "  " + ($cmd_list | get category | str join "\n  " )
 
-let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
-let cmds_group = ($commands | group-by name)
-let uniq_cmds = ($cmds_group | columns)
-
-$uniq_cmds | each { |cname|
-  let safe_name = ($cname| str replace '\?' '' | str replace ' ' '_')
-  let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
-  let cmd_list = ($cmds_group | get $cname)
-  let indented_usage = ($cmd_list | get usage | each {|it| $"  ($it)"} | str join (char nl))
-  let category_matter = ($cmd_list | get category | each { |cat|
-  let usage = ($cmd_list | where category == $cat | get usage | str join (char nl))
-  $'($cat | str snake-case): |
-  ($usage)'
-  } | str join (char nl))
-  let category_list = "  " + ($cmd_list | get category | str join "\n  " )
-
-  # this is going in the frontmatter as a multiline YAML string, so indentation matters
-  let top = $"---
+    # this is going in the frontmatter as a multiline YAML string, so indentation matters
+    let top = $"---
 title: ($cname)
 categories: |
 ($category_list)
-version: ($vers)
+version: ((version).version)
 ($category_matter)
 usage: |
 ($indented_usage)
----
-"
-  let doc = ($cmds_group | get $cname | each { |command| get-doc $command } | str join)
-  [$top $doc] | str join | save --raw --force $doc_path
-  $doc_path
-} | length | $"($in) commands written"
+---"
+
+    let doc = ($cmds_group | get $cname | each { |command| get-doc $command } | str join)
+    [$top $doc] | str join | save --raw --force $doc_path
+    $doc_path
+  } | length | $"($in) commands written"
+}
 
 def get-doc [command] {
   let top = $"
@@ -94,7 +86,9 @@ def get-doc [command] {
   let ex = $command.extra_usage
   # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
   # being interpreted as markdown. This is strictly hard-coded for now.
-  let extra_usage = if $ex == "" { "" } else if $command.name in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
+  let extra_usage = if $ex == "" { 
+    "" 
+  } else if $command.name in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
     $"## Notes(char nl)```text(char nl)($ex)(char nl)```(char nl)"
   } else {
     $"## Notes(char nl)($ex)(char nl)"
@@ -113,7 +107,9 @@ $"($example.description)
     } | str join)
 
     $example_top + $examples
-  } else { "" }
+  } else { 
+    "" 
+  }
 
   let doc = (
     ($top + $signatures + $parameters + $extra_usage + $examples ) |
