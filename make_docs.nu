@@ -15,6 +15,7 @@ def main [] {
   print $"($number_generated_commands) commands written"
 }
 
+
 def generate-command [commands_group command_name] {
   let safe_name = ($command_name| str replace '\?' '' | str replace ' ' '_')
   let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
@@ -24,6 +25,7 @@ def generate-command [commands_group command_name] {
   [$frontmatter $doc] | str join | save --raw --force $doc_path
   $doc_path
 }
+
 
 def command-frontmatter [commands_group, command_name] {
   let commands_list = ($commands_group | get $command_name)
