@@ -2,7 +2,7 @@
 title: all
 categories: |
   filters
-version: 0.75.0
+version: 0.76.0
 filters: |
   Test if every element of the input fulfills a predicate expression.
 usage: |
@@ -28,9 +28,14 @@ Check if each row's status is the string 'UP'
 > [[status]; [UP] [UP]] | all {|el| $el.status == UP }
 ```
 
+Check that each item is a string
+```shell
+> [foo bar 2 baz] | all { ($in | describe) == 'string' }
+```
+
 Check that all values are equal to twice their index
 ```shell
-> [0 2 4 6] | all {|el ind| $el == $ind * 2 }
+> [0 2 4 6] | enumerate | all {|i| $i.item == $i.index * 2 }
 ```
 
 Check that all of the values are even, using a stored closure

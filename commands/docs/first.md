@@ -1,56 +1,13 @@
 ---
 title: first
 categories: |
-  dataframe
-  expression
   filters
-version: 0.75.0
-dataframe: |
-  Show only the first number of rows.
-expression: |
-  creates a first expression
+version: 0.76.0
 filters: |
   Return only the first several rows of the input. Counterpart of 'last'. Opposite of 'skip'.
 usage: |
-  Show only the first number of rows.
-  creates a first expression
   Return only the first several rows of the input. Counterpart of 'last'. Opposite of 'skip'.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> first ```
-
-## Examples
-
-Return the first row of a dataframe
-```shell
-> [[a b]; [1 2] [3 4]] | into df | first
-```
-
-Return the first two rows of a dataframe
-```shell
-> [[a b]; [1 2] [3 4]] | into df | first 2
-```
-
-# <code>{{ $frontmatter.title }}</code> for expression
-
-<div class='command-title'>{{ $frontmatter.expression }}</div>
-
-## Signature
-
-```> first ```
-
-## Examples
-
-Creates a first expression from a column
-```shell
-> col a | first
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 

@@ -1,32 +1,13 @@
 ---
 title: drop
 categories: |
-  dataframe
   filters
-version: 0.75.0
-dataframe: |
-  Creates a new dataframe by dropping the selected columns
+version: 0.76.0
 filters: |
   Remove items/rows from the end of the input list/table. Counterpart of 'skip'. Opposite of 'last'.
 usage: |
-  Creates a new dataframe by dropping the selected columns
   Remove items/rows from the end of the input list/table. Counterpart of 'skip'. Opposite of 'last'.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> drop ```
-
-## Examples
-
-drop column a
-```shell
-> [[a b]; [1 2] [3 4]] | into df | drop a
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 

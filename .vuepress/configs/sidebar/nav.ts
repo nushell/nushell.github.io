@@ -6,6 +6,7 @@ export const commandCategories = [
   '/commands/categories/database.md',
   '/commands/categories/dataframe.md',
   '/commands/categories/date.md',
+  '/commands/categories/debug.md',
   '/commands/categories/default.md',
   '/commands/categories/deprecated.md',
   '/commands/categories/env.md',

@@ -2,11 +2,11 @@
 title: start
 categories: |
   filesystem
-version: 0.75.0
+version: 0.76.0
 filesystem: |
-  Open a folder or file in the default application or viewer.
+  Open a folder,file or website in the default application or viewer.
 usage: |
-  Open a folder or file in the default application or viewer.
+  Open a folder,file or website in the default application or viewer.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filesystem
@@ -15,11 +15,11 @@ usage: |
 
 ## Signature
 
-```> start (filepath)```
+```> start (path)```
 
 ## Parameters
 
- -  `filepath`: the filepath to open
+ -  `path`: path to open
 
 ## Examples
 
@@ -41,4 +41,9 @@ Open the current directory with the default file manager
 Open a pdf with the default pdf viewer
 ```shell
 > start file.pdf
+```
+
+Open a website with default browser
+```shell
+> start https://www.nushell.sh
 ```

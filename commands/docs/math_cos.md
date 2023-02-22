@@ -2,7 +2,7 @@
 title: math cos
 categories: |
   math
-version: 0.75.0
+version: 0.76.0
 math: |
   Returns the cosine of the number.
 usage: |
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Apply the cosine to pi
+Apply the cosine to π
 ```shell
 > math pi | math cos
 ```

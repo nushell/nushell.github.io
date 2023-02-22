@@ -1,0 +1,34 @@
+---
+title: dfr take
+categories: |
+  dataframe
+version: 0.76.0
+dataframe: |
+  Creates new dataframe using the given indices
+usage: |
+  Creates new dataframe using the given indices
+---
+
+# <code>{{ $frontmatter.title }}</code> for dataframe
+
+<div class='command-title'>{{ $frontmatter.dataframe }}</div>
+
+## Signature
+
+```> dfr take ```
+
+## Examples
+
+Takes selected rows from dataframe
+```shell
+> let df = ([[a b]; [4 1] [5 2] [4 3]] | dfr into-df);
+    let indices = ([0 2] | dfr into-df);
+    $df | dfr take $indices
+```
+
+Takes selected rows from series
+```shell
+> let series = ([4 1 5 2 4 3] | dfr into-df);
+    let indices = ([0 2] | dfr into-df);
+    $series | dfr take $indices
+```

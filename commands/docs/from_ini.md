@@ -2,11 +2,11 @@
 title: from ini
 categories: |
   formats
-version: 0.75.0
+version: 0.76.0
 formats: |
-  Parse text as .ini and create record
+  Parse text as .ini and create table.
 usage: |
-  Parse text as .ini and create record
+  Parse text as .ini and create table.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats

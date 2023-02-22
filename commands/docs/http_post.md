@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.75.0
+version: 0.76.0
 network: |
   Post a body to a URL.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> http post (path) (body) --user --password --content-type --content-length --headers --raw --insecure```
+```> http post (path) (body) --user --password --content-type --content-length --max-time --headers --raw --insecure```
 
 ## Parameters
 
@@ -25,6 +25,7 @@ usage: |
  -  `--password {any}`: the password when authenticating
  -  `--content-type {any}`: the MIME type of content to post
  -  `--content-length {any}`: the length of the content being posted
+ -  `--max-time {int}`: timeout period in seconds
  -  `--headers {any}`: custom headers you want to add
  -  `--raw`: return values as a string instead of a table
  -  `--insecure`: allow insecure server connections when using SSL

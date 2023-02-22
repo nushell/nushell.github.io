@@ -2,7 +2,7 @@
 title: overlay use
 categories: |
   core
-version: 0.75.0
+version: 0.76.0
 core: |
   Use definitions from a module as an overlay
 usage: |

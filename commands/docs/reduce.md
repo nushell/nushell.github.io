@@ -2,7 +2,7 @@
 title: reduce
 categories: |
   default
-version: 0.75.0
+version: 0.76.0
 default: |
   Aggregate a list to a single value using an accumulator closure.
 usage: |
@@ -15,13 +15,12 @@ usage: |
 
 ## Signature
 
-```> reduce (closure) --fold --numbered```
+```> reduce (closure) --fold```
 
 ## Parameters
 
  -  `closure`: reducing function
  -  `--fold {any}`: reduce with initial value
- -  `--numbered`: iterate with an index (deprecated; use a 3-parameter closure instead)
 
 ## Examples
 
@@ -32,7 +31,7 @@ Sum values of a list (same as 'math sum')
 
 Sum values of a list, plus their indexes
 ```shell
-> [ 8 7 6 ] | reduce {|it, acc, ind| $acc + $it + $ind }
+> [ 8 7 6 ] | enumerate | reduce -f 0 {|it, acc| $acc + $it.item + $it.index }
 ```
 
 Sum values with a starting value (fold)
@@ -47,5 +46,5 @@ Replace selected characters in a string with 'X'
 
 Add ascending numbers to each of the filenames, and join with semicolons.
 ```shell
-> ['foo.gz', 'bar.gz', 'baz.gz'] | reduce -f '' {|str all ind| $"($all)(if $ind != 0 {'; '})($ind + 1)-($str)" }
+> ['foo.gz', 'bar.gz', 'baz.gz'] | enumerate | reduce -f '' {|str all| $"($all)(if $str.index != 0 {'; '})($str.index + 1)-($str.item)" }
 ```

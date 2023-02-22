@@ -2,7 +2,7 @@
 title: touch
 categories: |
   filesystem
-version: 0.75.0
+version: 0.76.0
 filesystem: |
   Creates one or more files.
 usage: |

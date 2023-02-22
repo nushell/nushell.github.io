@@ -2,7 +2,7 @@
 title: each while
 categories: |
   filters
-version: 0.75.0
+version: 0.76.0
 filters: |
   Run a block on each row of the input list until a null is found, then create a new list with the results.
 usage: |
@@ -15,12 +15,11 @@ usage: |
 
 ## Signature
 
-```> each while (closure) --numbered```
+```> each while (closure)```
 
 ## Parameters
 
  -  `closure`: the closure to run
- -  `--numbered`: iterate with an index (deprecated; use a two-parameter closure instead)
 
 ## Examples
 
@@ -36,5 +35,5 @@ Output elements until reaching 'stop'
 
 Iterate over each element, printing the matching value and its index
 ```shell
-> [1 2 3] | each while {|el ind| if $el < 2 { $"value ($el) at ($ind)!"} }
+> [1 2 3] | enumerate | each while {|e| if $e.item < 2 { $"value ($e.item) at ($e.index)!"} }
 ```

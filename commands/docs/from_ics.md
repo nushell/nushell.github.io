@@ -2,7 +2,7 @@
 title: from ics
 categories: |
   formats
-version: 0.75.0
+version: 0.76.0
 formats: |
   Parse text as .ics and create table.
 usage: |
@@ -22,5 +22,5 @@ usage: |
 Converts ics formatted string to table
 ```shell
 > 'BEGIN:VCALENDAR
-END:VCALENDAR' | from ics
+            END:VCALENDAR' | from ics
 ```

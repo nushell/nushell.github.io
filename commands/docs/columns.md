@@ -1,32 +1,13 @@
 ---
 title: columns
 categories: |
-  dataframe
   filters
-version: 0.75.0
-dataframe: |
-  Show dataframe columns
+version: 0.76.0
 filters: |
   Given a record or table, produce a list of its columns' names.
 usage: |
-  Show dataframe columns
   Given a record or table, produce a list of its columns' names.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> columns ```
-
-## Examples
-
-Dataframe columns
-```shell
-> [[a b]; [1 2] [3 4]] | into df | columns
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 

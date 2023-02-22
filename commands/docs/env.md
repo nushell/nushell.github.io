@@ -2,7 +2,7 @@
 title: env
 categories: |
   env
-version: 0.75.0
+version: 0.76.0
 env: |
   Display current environment variables
 usage: |

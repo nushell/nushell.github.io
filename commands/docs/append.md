@@ -1,39 +1,13 @@
 ---
 title: append
 categories: |
-  dataframe
   filters
-version: 0.75.0
-dataframe: |
-  Appends a new dataframe
+version: 0.76.0
 filters: |
   Append any number of rows to a table.
 usage: |
-  Appends a new dataframe
   Append any number of rows to a table.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> append ```
-
-## Examples
-
-Appends a dataframe as new columns
-```shell
-> let a = ([[a b]; [1 2] [3 4]] | into df);
-    $a | append $a
-```
-
-Appends a dataframe merging at the end of columns
-```shell
-> let a = ([[a b]; [1 2] [3 4]] | into df);
-    $a | append $a --col
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 

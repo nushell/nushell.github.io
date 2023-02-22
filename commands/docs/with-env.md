@@ -2,7 +2,7 @@
 title: with-env
 categories: |
   env
-version: 0.75.0
+version: 0.76.0
 env: |
   Runs a block with an environment variable set.
 usage: |
@@ -39,7 +39,7 @@ Set by single row table
 > with-env [[X W]; [Y Z]] { $env.W }
 ```
 
-Set by row(e.g. `open x.json` or `from json`)
+Set by key-value record
 ```shell
-> '{"X":"Y","W":"Z"}'|from json|with-env $in { [$env.X $env.W] }
+> with-env {X: "Y", W: "Z"} { [$env.X $env.W] }
 ```

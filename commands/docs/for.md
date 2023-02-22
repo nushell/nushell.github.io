@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.75.0
+version: 0.76.0
 core: |
   Loop over a range
 usage: |
@@ -22,7 +22,7 @@ usage: |
  -  `var_name`: name of the looping variable
  -  `range`: range of the loop
  -  `block`: the block to run
- -  `--numbered`: returned a numbered item ($it.index and $it.item)
+ -  `--numbered`: return a numbered item ($it.index and $it.item)
 
 ## Notes
 This command is a parser keyword. For details, check:

@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.75.0
+version: 0.76.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -15,16 +15,17 @@ usage: |
 
 ## Signature
 
-```> http get (URL) --user --password --timeout --headers --raw```
+```> http get (URL) --user --password --max-time --headers --raw --insecure```
 
 ## Parameters
 
  -  `URL`: the URL to fetch the contents from
  -  `--user {any}`: the username when authenticating
  -  `--password {any}`: the password when authenticating
- -  `--timeout {int}`: timeout period in seconds
+ -  `--max-time {int}`: timeout period in seconds
  -  `--headers {any}`: custom headers you want to add
  -  `--raw`: fetch contents as text rather than a table
+ -  `--insecure`: allow insecure server connections when using SSL
 
 ## Notes
 Performs HTTP GET operation.

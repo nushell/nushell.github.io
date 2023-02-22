@@ -2,7 +2,7 @@
 title: any
 categories: |
   filters
-version: 0.75.0
+version: 0.76.0
 filters: |
   Tests if any element of the input fulfills a predicate expression.
 usage: |
@@ -28,9 +28,14 @@ Check if any row's status is the string 'DOWN'
 > [[status]; [UP] [DOWN] [UP]] | any {|el| $el.status == DOWN }
 ```
 
+Check that any item is a string
+```shell
+> [1 2 3 4] | any { ($in | describe) == 'string' }
+```
+
 Check if any value is equal to twice its own index
 ```shell
-> [9 8 7 6] | any {|el ind| $el == $ind * 2 }
+> [9 8 7 6] | enumerate | any {|i| $i.item == $i.index * 2 }
 ```
 
 Check if any of the values are odd, using a stored closure
