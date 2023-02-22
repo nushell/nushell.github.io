@@ -194,5 +194,5 @@ def generate-category [category] {
 }
 
 def safe-path [] {
-  $in | | str replace --all '\?' '' | str replace --all ' ' '_'
+  $in | str replace --all '\?' '' | str replace --all ' ' '_'
 }
