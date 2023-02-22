@@ -1,4 +1,4 @@
-# env
+# Env
 
 <script>
   import pages from '@temp/pages'

@@ -1,4 +1,4 @@
-# dataframe
+# Dataframe
 
 <script>
   import pages from '@temp/pages'

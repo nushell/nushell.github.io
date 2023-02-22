@@ -1,4 +1,4 @@
-# deprecated
+# Deprecated
 
 <script>
   import pages from '@temp/pages'

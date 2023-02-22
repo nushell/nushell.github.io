@@ -1,4 +1,4 @@
-# core
+# Core
 
 <script>
   import pages from '@temp/pages'

@@ -1,4 +1,4 @@
-# formats
+# Formats
 
 <script>
   import pages from '@temp/pages'

@@ -1,4 +1,4 @@
-# viewers
+# Viewers
 
 <script>
   import pages from '@temp/pages'

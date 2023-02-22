@@ -1,4 +1,4 @@
-# platform
+# Platform
 
 <script>
   import pages from '@temp/pages'

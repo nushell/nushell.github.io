@@ -1,4 +1,4 @@
-# filters
+# Filters
 
 <script>
   import pages from '@temp/pages'

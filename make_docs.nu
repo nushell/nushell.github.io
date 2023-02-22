@@ -25,7 +25,7 @@ def main [] {
 
 
 def generate-command [commands_group command_name] {
-  let safe_name = ($command_name| str replace '\?' '' | str replace ' ' '_')
+  let safe_name = ($command_name | safe-path)
   let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
 
   let frontmatter = (command-frontmatter $commands_group $command_name)
@@ -149,7 +149,7 @@ def generate-category-sidebar [unique_categories] {
   let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
   let list_content = (
     $unique_categories |
-    each { |category| $category | str replace '\?' '' | str replace ' ' '_' } |
+    each { safe-path } |
     each { |category| $"  '/commands/categories/($category).md',"} |
     str join (char newline)
   )
@@ -161,9 +161,9 @@ def generate-category-sidebar [unique_categories] {
 
 
 def generate-category [category] {
-  let safe_name = ($category | str replace '\?' '' | str replace ' ' '_')
+  let safe_name = ($category | safe-path)
   let doc_path = (['.', 'commands', 'categories', $'($safe_name).md'] | path join)
-  $"# ($category)
+  $"# ($category | str title-case)
 
 <script>
   import pages from '@temp/pages'
@@ -191,4 +191,8 @@ def generate-category [category] {
 </table>
 " | save --raw --force $doc_path
   $doc_path
+}
+
+def safe-path [] {
+  $in | | str replace --all '\?' '' | str replace --all ' ' '_'
 }

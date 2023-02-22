@@ -1,4 +1,4 @@
-# bits
+# Bits
 
 <script>
   import pages from '@temp/pages'

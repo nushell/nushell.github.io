@@ -1,4 +1,4 @@
-# random
+# Random
 
 <script>
   import pages from '@temp/pages'

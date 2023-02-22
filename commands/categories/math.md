@@ -1,4 +1,4 @@
-# math
+# Math
 
 <script>
   import pages from '@temp/pages'

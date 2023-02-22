@@ -1,4 +1,4 @@
-# expression
+# Expression
 
 <script>
   import pages from '@temp/pages'

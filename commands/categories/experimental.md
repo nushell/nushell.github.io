@@ -1,4 +1,4 @@
-# experimental
+# Experimental
 
 <script>
   import pages from '@temp/pages'

@@ -1,4 +1,4 @@
-# database
+# Database
 
 <script>
   import pages from '@temp/pages'
