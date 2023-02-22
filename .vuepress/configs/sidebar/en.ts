@@ -1,5 +1,5 @@
 import type { SidebarConfig } from '@vuepress/theme-default';
-import { commandCategories } from './nav';
+import { commandCategories } from './command_categories';
 
 export const sidebarEn: SidebarConfig = {
   '/book/': [
