@@ -13,6 +13,9 @@ def main [] {
   } | length)
 
   print $"($number_generated_commands) commands written"
+
+  let unique_categories = ($commands | get category | uniq)
+  generate-category-sidebar $unique_categories
 }
 
 
@@ -135,4 +138,13 @@ $"($example.description)
     str join (char newline)
   )
   $doc
+}
+
+def generate-category-sidebar [unique_categories] {
+  let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
+  let list_content = ($unique_categories | each { |category| $"  '/commands/categories/($category).md',"} | str join (char newline))
+  $"export const commandCategories = [
+($list_content)
+];
+" | save --raw --force $sidebar_path
 }
