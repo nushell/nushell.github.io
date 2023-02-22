@@ -1,4 +1,4 @@
-# Network
+# network
 
 <script>
   import pages from '@temp/pages'

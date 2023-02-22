@@ -1,4 +1,4 @@
-# Debug
+# debug
 
 <script>
   import pages from '@temp/pages'

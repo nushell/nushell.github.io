@@ -1,4 +1,4 @@
-# Hash
+# hash
 
 <script>
   import pages from '@temp/pages'

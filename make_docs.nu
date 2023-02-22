@@ -11,11 +11,16 @@ def main [] {
   let number_generated_commands = ($unique_commands | each { |command_name|
     generate-command $commands_group $command_name
   } | length)
-
   print $"($number_generated_commands) commands written"
 
   let unique_categories = ($commands | get category | uniq)
   generate-category-sidebar $unique_categories
+
+  let number_generated_categories = ($unique_categories | each { |category|
+    generate-category $category
+  } | length)
+  print $"($number_generated_categories) categories written"
+
 }
 
 
@@ -142,9 +147,48 @@ $"($example.description)
 
 def generate-category-sidebar [unique_categories] {
   let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
-  let list_content = ($unique_categories | each { |category| $"  '/commands/categories/($category).md',"} | str join (char newline))
+  let list_content = (
+    $unique_categories |
+    each { |category| $category | str replace '\?' '' | str replace ' ' '_' } |
+    each { |category| $"  '/commands/categories/($category).md',"} |
+    str join (char newline)
+  )
   $"export const commandCategories = [
 ($list_content)
 ];
 " | save --raw --force $sidebar_path
+}
+
+
+def generate-category [category] {
+  let safe_name = ($category | str replace '\?' '' | str replace ' ' '_')
+  let doc_path = (['.', 'commands', 'categories', $'($safe_name).md'] | path join)
+  $"# ($category)
+
+<script>
+  import pages from '@temp/pages'
+  export default {
+    computed: {
+      commands\(\) {
+        return pages
+          .filter\(p => p.path.includes\('/commands/docs/'\)\)
+          .filter\(p => p.frontmatter.categories.includes\('($category)'\)\)
+          .sort\(\(a,b\) => \(a.title > b.title\) ? 1 : \(\(b.title > a.title\) ? -1 : 0\)\);
+      }
+    }
+  }
+</script>
+
+<table>
+  <tr>
+    <th>Command</th>
+    <th>Description</th>
+  </tr>
+  <tr v-for=\"command in commands\">
+   <td><a :href="command.path">{{ command.title }}</a></td>
+   <td style=\"white-space: pre-wrap;\">{{ command.frontmatter.usage }}</td>
+  </tr>
+</table>
+" | save --raw --force $doc_path
+  $doc_path
 }

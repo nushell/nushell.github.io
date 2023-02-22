@@ -1,4 +1,4 @@
-# Shells
+# shells
 
 <script>
   import pages from '@temp/pages'

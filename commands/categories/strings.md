@@ -1,4 +1,4 @@
-# Strings
+# strings
 
 <script>
   import pages from '@temp/pages'

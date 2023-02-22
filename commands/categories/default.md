@@ -1,4 +1,4 @@
-# Default
+# default
 
 <script>
   import pages from '@temp/pages'

@@ -1,4 +1,4 @@
-# Generators
+# generators
 
 <script>
   import pages from '@temp/pages'

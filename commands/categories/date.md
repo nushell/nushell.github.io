@@ -1,4 +1,4 @@
-# Date
+# date
 
 <script>
   import pages from '@temp/pages'

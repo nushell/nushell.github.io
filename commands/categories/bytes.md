@@ -1,4 +1,4 @@
-# Bytes
+# bytes
 
 <script>
   import pages from '@temp/pages'

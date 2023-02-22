@@ -1,4 +1,4 @@
-# platform
+# dataframe or lazyframe
 
 <script>
   import pages from '@temp/pages'
@@ -7,7 +7,7 @@
       commands() {
         return pages
           .filter(p => p.path.includes('/commands/docs/'))
-          .filter(p => p.frontmatter.categories.includes('platform'))
+          .filter(p => p.frontmatter.categories.includes('dataframe or lazyframe'))
           .sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
       }
     }

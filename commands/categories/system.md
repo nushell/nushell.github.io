@@ -1,4 +1,4 @@
-# System
+# system
 
 <script>
   import pages from '@temp/pages'

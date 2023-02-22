@@ -1,4 +1,4 @@
-# Prompt
+# prompt
 
 <script>
   import pages from '@temp/pages'

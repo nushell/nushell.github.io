@@ -1,4 +1,4 @@
-# Lazyframe
+# lazyframe
 
 <script>
   import pages from '@temp/pages'
