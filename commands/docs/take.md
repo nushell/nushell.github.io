@@ -1,41 +1,13 @@
 ---
 title: take
 categories: |
-  dataframe
   filters
-version: 0.75.0
-dataframe: |
-  Creates new dataframe using the given indices
+version: 0.76.0
 filters: |
   Take only the first n elements of a list, or the first n bytes of a binary value.
 usage: |
-  Creates new dataframe using the given indices
   Take only the first n elements of a list, or the first n bytes of a binary value.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> take ```
-
-## Examples
-
-Takes selected rows from dataframe
-```shell
-> let df = ([[a b]; [4 1] [5 2] [4 3]] | into df);
-    let indices = ([0 2] | into df);
-    $df | take $indices
-```
-
-Takes selected rows from series
-```shell
-> let series = ([4 1 5 2 4 3] | into df);
-    let indices = ([0 2] | into df);
-    $series | take $indices
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 

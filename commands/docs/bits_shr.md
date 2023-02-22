@@ -2,7 +2,7 @@
 title: bits shr
 categories: |
   bits
-version: 0.75.0
+version: 0.76.0
 bits: |
   Bitwise shift right for integers
 usage: |

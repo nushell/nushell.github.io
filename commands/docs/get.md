@@ -1,32 +1,13 @@
 ---
 title: get
 categories: |
-  dataframe
   filters
-version: 0.75.0
-dataframe: |
-  Creates dataframe with the selected columns
+version: 0.76.0
 filters: |
   Extract data using a cell path.
 usage: |
-  Creates dataframe with the selected columns
   Extract data using a cell path.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> get ```
-
-## Examples
-
-Returns the selected column
-```shell
-> [[a b]; [1 2] [3 4]] | into df | get a
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 

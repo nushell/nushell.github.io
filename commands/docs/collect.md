@@ -2,15 +2,11 @@
 title: collect
 categories: |
   filters
-  lazyframe
-version: 0.75.0
+version: 0.76.0
 filters: |
   Collect the stream and pass it to a block.
-lazyframe: |
-  Collect lazy dataframe into eager dataframe
 usage: |
   Collect the stream and pass it to a block.
-  Collect lazy dataframe into eager dataframe
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -31,19 +27,4 @@ usage: |
 Use the second value in the stream
 ```shell
 > [1 2 3] | collect { |x| $x.1 }
-```
-
-# <code>{{ $frontmatter.title }}</code> for lazyframe
-
-<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
-
-## Signature
-
-```> collect ```
-
-## Examples
-
-drop duplicates
-```shell
-> [[a b]; [1 2] [3 4]] | into lazy | collect
 ```

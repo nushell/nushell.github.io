@@ -1,37 +1,13 @@
 ---
 title: to csv
 categories: |
-  dataframe
   formats
-version: 0.75.0
-dataframe: |
-  Saves dataframe to csv file
+version: 0.76.0
 formats: |
   Convert table into .csv text 
 usage: |
-  Saves dataframe to csv file
   Convert table into .csv text 
 ---
-
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> to csv ```
-
-## Examples
-
-Saves dataframe to csv file
-```shell
-> [[a b]; [1 2] [3 4]] | into df | to csv test.csv
-```
-
-Saves dataframe to csv file using other delimiter
-```shell
-> [[a b]; [1 2] [3 4]] | into df | to csv test.csv -d '|'
-```
 
 # <code>{{ $frontmatter.title }}</code> for formats
 

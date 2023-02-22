@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.75.0
+version: 0.76.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -29,6 +29,11 @@ Update a record's value
 > {'name': 'nu', 'stars': 5} | upsert name 'Nushell'
 ```
 
+Update each row of a table
+```shell
+> [[name lang]; [Nushell ''] [Reedline '']] | upsert lang 'Rust'
+```
+
 Insert a new entry into a single record
 ```shell
 > {'name': 'nu', 'stars': 5} | upsert language 'Rust'
@@ -36,7 +41,7 @@ Insert a new entry into a single record
 
 Use in closure form for more involved updating logic
 ```shell
-> [[count fruit]; [1 'apple']] | upsert count {|row index| ($row.fruit | str length) + $index }
+> [[count fruit]; [1 'apple']] | enumerate | upsert item.count {|e| ($e.item.fruit | str length) + $e.index } | get item
 ```
 
 Upsert an int into a list, updating an existing value based on the index

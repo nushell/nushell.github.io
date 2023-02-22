@@ -2,15 +2,11 @@
 title: select
 categories: |
   filters
-  lazyframe
-version: 0.75.0
+version: 0.76.0
 filters: |
   Down-select table to only these columns.
-lazyframe: |
-  Selects columns from lazyframe
 usage: |
   Down-select table to only these columns.
-  Selects columns from lazyframe
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -46,19 +42,4 @@ Select just the name column
 Select the name and size columns
 ```shell
 > ls | select name size
-```
-
-# <code>{{ $frontmatter.title }}</code> for lazyframe
-
-<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
-
-## Signature
-
-```> select ```
-
-## Examples
-
-Select a column from the dataframe
-```shell
-> [[a b]; [6 2] [4 2] [2 2]] | into df | select a
 ```

@@ -1,0 +1,44 @@
+---
+title: dfr last
+categories: |
+  dataframe
+  expression
+version: 0.76.0
+dataframe: |
+  Creates new dataframe with tail rows or creates a last expression
+expression: |
+  creates a last expression
+usage: |
+  Creates new dataframe with tail rows or creates a last expression
+  creates a last expression
+---
+
+# <code>{{ $frontmatter.title }}</code> for dataframe
+
+<div class='command-title'>{{ $frontmatter.dataframe }}</div>
+
+## Signature
+
+```> dfr last ```
+
+## Examples
+
+Create new dataframe with last rows
+```shell
+> [[a b]; [1 2] [3 4]] | dfr into-df | dfr last 1
+```
+
+# <code>{{ $frontmatter.title }}</code> for expression
+
+<div class='command-title'>{{ $frontmatter.expression }}</div>
+
+## Signature
+
+```> dfr last ```
+
+## Examples
+
+Creates a last expression from a column
+```shell
+> dfr col a | dfr last
+```

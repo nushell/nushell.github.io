@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.75.0
+version: 0.76.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -15,13 +15,12 @@ usage: |
 
 ## Signature
 
-```> each (closure) --keep-empty --numbered```
+```> each (closure) --keep-empty```
 
 ## Parameters
 
  -  `closure`: the closure to run
  -  `--keep-empty`: keep empty result cells
- -  `--numbered`: iterate with an index (deprecated; use a two-parameter closure instead)
 
 ## Notes
 Since tables are lists of records, passing a table into 'each' will
@@ -50,10 +49,10 @@ Produce a list that has "two" for each 2 in the input
 
 Iterate over each element, producing a list showing indexes of any 2s
 ```shell
-> [1 2 3] | each {|el ind| if $el == 2 { $"found 2 at ($ind)!"} }
+> [1 2 3] | enumerate | each {|e| if $e.item == 2 { $"found 2 at ($e.index)!"} }
 ```
 
-Iterate over each element, keeping all results
+Iterate over each element, keeping null results
 ```shell
 > [1 2 3] | each --keep-empty {|e| if $e == 2 { "found 2!"} }
 ```

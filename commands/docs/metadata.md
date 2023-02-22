@@ -1,17 +1,17 @@
 ---
 title: metadata
 categories: |
-  core
-version: 0.75.0
-core: |
+  debug
+version: 0.76.0
+debug: |
   Get the metadata for items in the stream
 usage: |
   Get the metadata for items in the stream
 ---
 
-# <code>{{ $frontmatter.title }}</code> for core
+# <code>{{ $frontmatter.title }}</code> for debug
 
-<div class='command-title'>{{ $frontmatter.core }}</div>
+<div class='command-title'>{{ $frontmatter.debug }}</div>
 
 ## Signature
 

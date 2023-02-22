@@ -2,7 +2,7 @@
 title: par-each
 categories: |
   filters
-version: 0.75.0
+version: 0.76.0
 filters: |
   Run a closure on each row of the input list in parallel, creating a new list with the results.
 usage: |
@@ -15,12 +15,11 @@ usage: |
 
 ## Signature
 
-```> par-each (closure) --numbered```
+```> par-each (closure)```
 
 ## Parameters
 
  -  `closure`: the closure to run
- -  `--numbered`: iterate with an index (deprecated; use a two-parameter closure instead)
 
 ## Examples
 
@@ -29,7 +28,17 @@ Multiplies each number. Note that the list will become arbitrarily disordered.
 > [1 2 3] | par-each { 2 * $in }
 ```
 
-Iterate over each element, print the matching value and its index
+Output can still be sorted afterward
 ```shell
-> [1 2 3] | enumerate | par-each { |it| if $it.item == 2 { $"found 2 at ($it.index)!"} }
+> [foo bar baz] | par-each {|e| $e + '!' } | sort
+```
+
+Enumerate and sort-by can be used to reconstruct the original order
+```shell
+> 1..3 | enumerate | par-each {|p| update item ($p.item * 2)} | sort-by item | get item
+```
+
+Iterate over each element, producing a list showing indexes of any 2s
+```shell
+> [1 2 3] | enumerate | par-each { |e| if $e.item == 2 { $"found 2 at ($e.index)!"} }
 ```

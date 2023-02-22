@@ -1,32 +1,13 @@
 ---
 title: flatten
 categories: |
-  expression
   filters
-version: 0.75.0
-expression: |
-  creates a flatten expression
+version: 0.76.0
 filters: |
   Flatten the table.
 usage: |
-  creates a flatten expression
   Flatten the table.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for expression
-
-<div class='command-title'>{{ $frontmatter.expression }}</div>
-
-## Signature
-
-```> flatten ```
-
-## Examples
-
-
-```shell
->
-```
 
 # <code>{{ $frontmatter.title }}</code> for filters
 

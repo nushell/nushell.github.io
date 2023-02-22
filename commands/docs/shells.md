@@ -2,7 +2,7 @@
 title: shells
 categories: |
   shells
-version: 0.75.0
+version: 0.76.0
 shells: |
   Lists all open shells.
 usage: |

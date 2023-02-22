@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.75.0
+version: 0.76.0
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -31,7 +31,7 @@ Update a column value
 
 Use in closure form for more involved updating logic
 ```shell
-> [[count fruit]; [1 'apple']] | update count {|row index| ($row.fruit | str length) + $index }
+> [[count fruit]; [1 'apple']] | enumerate | update item.count {|e| ($e.item.fruit | str length) + $e.index } | get item
 ```
 
 Alter each value in the 'authors' column to use a single string instead of a list

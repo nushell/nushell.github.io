@@ -2,7 +2,7 @@
 title: math e
 categories: |
   math
-version: 0.75.0
+version: 0.76.0
 math: |
   Returns the mathematical constant e (exp(1)/'1 | math exp').
 usage: |

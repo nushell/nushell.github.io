@@ -2,7 +2,7 @@
 title: from eml
 categories: |
   formats
-version: 0.75.0
+version: 0.76.0
 formats: |
   Parse text as .eml and create record.
 usage: |
@@ -28,7 +28,6 @@ Convert eml structured data into record
 > 'From: test@email.com
 Subject: Welcome
 To: someone@somewhere.com
-
 Test' | from eml
 ```
 
@@ -37,6 +36,5 @@ Convert eml structured data into record
 > 'From: test@email.com
 Subject: Welcome
 To: someone@somewhere.com
-
 Test' | from eml -b 1
 ```

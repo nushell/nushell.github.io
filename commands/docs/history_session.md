@@ -2,7 +2,7 @@
 title: history session
 categories: |
   misc
-version: 0.75.0
+version: 0.76.0
 misc: |
   Get the command history session
 usage: |
