@@ -97,7 +97,7 @@ def command-doc [command] {
       if $param.parameter_type == "positional" {
         $" -  `($param.parameter_name)`: ($param.description)"
       } else if $param.parameter_type == "switch" {
-        $" -  `--($param.parameter_name)`: ($param.description)"
+        $" -  `--($param.parameter_name)\(-($param.short_flag)\)`: ($param.description)"
       } else if $param.parameter_type == "named" {
         $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
       } else if $param.parameter_type == "rest" {
