@@ -21,9 +21,9 @@ usage: |
 
  -  `glob`: the glob expression
  -  `--depth {int}`: directory depth to search
- -  `--no-dir`: Whether to filter out directories from the returned paths
- -  `--no-file`: Whether to filter out files from the returned paths
- -  `--no-symlink`: Whether to filter out symlinks from the returned paths
+ -  `--no-dir` `(-D)`: Whether to filter out directories from the returned paths
+ -  `--no-file` `(-F)`: Whether to filter out files from the returned paths
+ -  `--no-symlink` `(-S)`: Whether to filter out symlinks from the returned paths
 
 ## Notes
 For more glob pattern help, please refer to https://github.com/olson-sean-k/wax

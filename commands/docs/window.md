@@ -21,7 +21,7 @@ usage: |
 
  -  `window_size`: the size of each window
  -  `--stride {int}`: the number of rows to slide over between windows
- -  `--remainder`: yield last chunks even if they have fewer elements than size
+ -  `--remainder` `(-r)`: yield last chunks even if they have fewer elements than size
 
 ## Examples
 

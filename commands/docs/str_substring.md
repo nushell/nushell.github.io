@@ -21,8 +21,8 @@ usage: |
 
  -  `range`: the indexes to substring [start end]
  -  `...rest`: For a data structure input, turn strings at the given cell paths into substrings
- -  `--grapheme-clusters`: count indexes and split using grapheme clusters (all visible chars have length 1)
- -  `--utf-8-bytes`: count indexes and split using UTF-8 bytes (default; non-ASCII chars have length 2+)
+ -  `--grapheme-clusters` `(-g)`: count indexes and split using grapheme clusters (all visible chars have length 1)
+ -  `--utf-8-bytes` `(-b)`: count indexes and split using UTF-8 bytes (default; non-ASCII chars have length 2+)
 
 ## Examples
 

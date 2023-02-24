@@ -21,8 +21,8 @@ usage: |
 
  -  `cell_path`: the cell path to the data
  -  `...rest`: additional cell paths
- -  `--ignore-errors`: when there are empty cells, instead of erroring out, replace them with nothing
- -  `--sensitive`: get path in a case sensitive manner
+ -  `--ignore-errors` `(-i)`: when there are empty cells, instead of erroring out, replace them with nothing
+ -  `--sensitive` `(-s)`: get path in a case sensitive manner
 
 ## Examples
 

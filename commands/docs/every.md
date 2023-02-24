@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `stride`: how many rows to skip between (and including) each row returned
- -  `--skip`: skip the rows that would be returned, instead of selecting them
+ -  `--skip` `(-s)`: skip the rows that would be returned, instead of selecting them
 
 ## Examples
 

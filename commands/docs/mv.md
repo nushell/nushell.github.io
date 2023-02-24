@@ -21,9 +21,9 @@ usage: |
 
  -  `source`: the location to move files/directories from
  -  `destination`: the location to move files/directories to
- -  `--verbose`: make mv to be verbose, showing files been moved.
- -  `--force`: overwrite the destination.
- -  `--interactive`: ask user to confirm action
+ -  `--verbose` `(-v)`: make mv to be verbose, showing files been moved.
+ -  `--force` `(-f)`: overwrite the destination.
+ -  `--interactive` `(-i)`: ask user to confirm action
 
 ## Examples
 

@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--long`: list all available columns for each entry
+ -  `--long` `(-l)`: list all available columns for each entry
 
 ## Examples
 

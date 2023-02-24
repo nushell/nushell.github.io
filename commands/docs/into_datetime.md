@@ -23,7 +23,7 @@ usage: |
  -  `--timezone {string}`: Specify timezone if the input is a Unix timestamp. Valid options: 'UTC' ('u') or 'LOCAL' ('l')
  -  `--offset {int}`: Specify timezone by offset from UTC if the input is a Unix timestamp, like '+8', '-4'
  -  `--format {string}`: Specify an expected format for parsing strings to datetimes. Use --list to see all possible options
- -  `--list`: Show all possible variables for use with the --format flag
+ -  `--list` `(-l)`: Show all possible variables for use with the --format flag
 
 ## Examples
 

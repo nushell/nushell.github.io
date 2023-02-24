@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--raw`: Prints the raw value representation
+ -  `--raw` `(-r)`: Prints the raw value representation
 
 ## Examples
 

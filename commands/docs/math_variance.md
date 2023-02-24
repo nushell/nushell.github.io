@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--sample`: calculate sample variance (i.e. using N-1 as the denominator)
+ -  `--sample` `(-s)`: calculate sample variance (i.e. using N-1 as the denominator)
 
 ## Examples
 

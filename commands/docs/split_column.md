@@ -21,7 +21,7 @@ usage: |
 
  -  `separator`: the character or string that denotes what separates columns
  -  `...rest`: column names to give the new columns
- -  `--collapse-empty`: remove empty columns
+ -  `--collapse-empty` `(-c)`: remove empty columns
 
 ## Examples
 

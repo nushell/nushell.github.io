@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `--by {int}`: Number of columns to roll
- -  `--cells-only`: rotates columns leaving headers fixed
+ -  `--cells-only` `(-c)`: rotates columns leaving headers fixed
 
 ## Examples
 

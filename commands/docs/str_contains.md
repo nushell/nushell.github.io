@@ -21,8 +21,8 @@ usage: |
 
  -  `string`: the substring to find
  -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
- -  `--ignore-case`: search is case insensitive
- -  `--not`: does not contain
+ -  `--ignore-case` `(-i)`: search is case insensitive
+ -  `--not` `(-n)`: does not contain
 
 ## Examples
 

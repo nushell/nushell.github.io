@@ -20,9 +20,9 @@ usage: |
 ## Parameters
 
  -  `code`: the name of the code to use like 'green' or 'reset' to reset the color
- -  `--escape`: escape sequence without the escape character(s)
- -  `--osc`: operating system command (ocs) escape sequence without the escape character(s)
- -  `--list`: list available ansi code names
+ -  `--escape` `(-e)`: escape sequence without the escape character(s)
+ -  `--osc` `(-o)`: operating system command (ocs) escape sequence without the escape character(s)
+ -  `--list` `(-l)`: list available ansi code names
 
 ## Notes
 ```text

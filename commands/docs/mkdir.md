@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: the name(s) of the path(s) to create
- -  `--verbose`: print created path(s).
+ -  `--verbose` `(-v)`: print created path(s).
 
 ## Examples
 

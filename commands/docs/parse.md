@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `pattern`: the pattern to match. Eg) "{foo}: {bar}"
- -  `--regex`: use full regex syntax for patterns
+ -  `--regex` `(-r)`: use full regex syntax for patterns
 
 ## Examples
 

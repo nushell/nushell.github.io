@@ -20,8 +20,8 @@ usage: |
 ## Parameters
 
  -  `--min-word-length {int}`: The minimum word length
- -  `--grapheme-clusters`: measure word length in grapheme clusters (requires -l)
- -  `--utf-8-bytes`: measure word length in UTF-8 bytes (default; requires -l; non-ASCII chars are length 2+)
+ -  `--grapheme-clusters` `(-g)`: measure word length in grapheme clusters (requires -l)
+ -  `--utf-8-bytes` `(-b)`: measure word length in UTF-8 bytes (default; requires -l; non-ASCII chars are length 2+)
 
 ## Examples
 

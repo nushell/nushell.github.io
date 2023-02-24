@@ -25,7 +25,7 @@ usage: |
  -  `--end-date {string}`: ending date
  -  `--increment {int}`: increment dates by this number
  -  `--days {int}`: number of days to print
- -  `--reverse`: print dates in reverse
+ -  `--reverse` `(-r)`: print dates in reverse
 
 ## Examples
 

@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `closure`: the closure to run once the stream is collected
- -  `--keep-env`: let the block affect environment variables
+ -  `--keep-env` `(-)`: let the block affect environment variables
 
 ## Examples
 

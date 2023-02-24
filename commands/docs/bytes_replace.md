@@ -22,7 +22,7 @@ usage: |
  -  `find`: the pattern to find
  -  `replace`: the replacement pattern
  -  `...rest`: for a data structure input, replace bytes in data at the given cell paths
- -  `--all`: replace all occurrences of find binary
+ -  `--all` `(-a)`: replace all occurrences of find binary
 
 ## Examples
 

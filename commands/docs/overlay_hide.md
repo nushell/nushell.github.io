@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `name`: Overlay to hide
- -  `--keep-custom`: Keep all newly added commands and aliases in the next activated overlay
+ -  `--keep-custom` `(-k)`: Keep all newly added commands and aliases in the next activated overlay
  -  `--keep-env {list<string>}`: List of environment variables to keep in the next activated overlay
 
 ## Notes

@@ -21,8 +21,8 @@ usage: |
 
  -  `pattern`: the pattern to find
  -  `...rest`: for a data structure input, remove bytes from data at the given cell paths
- -  `--end`: remove from end of binary
- -  `--all`: remove occurrences of finding binary
+ -  `--end` `(-e)`: remove from end of binary
+ -  `--all` `(-a)`: remove occurrences of finding binary
 
 ## Examples
 

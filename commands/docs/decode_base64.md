@@ -22,7 +22,7 @@ usage: |
  -  `...rest`: For a data structure input, decode data at the given cell paths
  -  `--character-set {string}`: specify the character rules for encoding the input.
 	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt', 'mutf7'
- -  `--binary`: Output a binary value instead of decoding payload as UTF-8
+ -  `--binary` `(-b)`: Output a binary value instead of decoding payload as UTF-8
 
 ## Notes
 Will attempt to decode binary payload as an UTF-8 string by default. Use the `--binary(-b)` argument to force binary output.

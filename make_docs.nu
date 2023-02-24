@@ -2,7 +2,7 @@ def main [] {
   # Old commands are currently not deleted because some of them
   # are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
   # all of them.
-  #do -i { rm book/commands/docs/*.md }
+  #do -i { rm commands/docs/*.md }
 
   let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
   let commands_group = ($commands | group-by name)
@@ -97,7 +97,7 @@ def command-doc [command] {
       if $param.parameter_type == "positional" {
         $" -  `($param.parameter_name)`: ($param.description)"
       } else if $param.parameter_type == "switch" {
-        $" -  `--($param.parameter_name)`: ($param.description)"
+        $" -  `--($param.parameter_name)` `\(-($param.short_flag)\)`: ($param.description)"
       } else if $param.parameter_type == "named" {
         $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
       } else if $param.parameter_type == "rest" {
@@ -111,8 +111,8 @@ def command-doc [command] {
   let ex = $command.extra_usage
   # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
   # being interpreted as markdown. This is strictly hard-coded for now.
-  let extra_usage = if $ex == "" { 
-    "" 
+  let extra_usage = if $ex == "" {
+    ""
   } else if $command.name in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
     $"## Notes(char newline)```text(char newline)($ex)(char newline)```(char newline)"
   } else {
@@ -132,8 +132,8 @@ $"($example.description)
     } | str join)
 
     $example_top + $examples
-  } else { 
-    "" 
+  } else {
+    ""
   }
 
   let doc = (
@@ -148,10 +148,10 @@ $"($example.description)
 def generate-category-sidebar [unique_categories] {
   let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
   let list_content = (
-    $unique_categories |
-    each { safe-path } |
-    each { |category| $"  '/commands/categories/($category).md',"} |
-    str join (char newline)
+    $unique_categories
+      | each { safe-path }
+      | each { |category| $"  '/commands/categories/($category).md',"}
+      | str join (char newline)
   )
   $"export const commandCategories = [
 ($list_content)

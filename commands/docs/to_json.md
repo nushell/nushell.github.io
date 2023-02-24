@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--raw`: remove all of the whitespace
+ -  `--raw` `(-r)`: remove all of the whitespace
  -  `--indent {number}`: specify indentation width
  -  `--tabs {number}`: specify indentation tab quantity
 

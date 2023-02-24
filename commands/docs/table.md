@@ -20,13 +20,13 @@ usage: |
 ## Parameters
 
  -  `--start-number {int}`: row number to start viewing from
- -  `--list`: list available table modes/themes
+ -  `--list` `(-l)`: list available table modes/themes
  -  `--width {int}`: number of terminal columns wide (not output columns)
- -  `--expand`: expand the table structure in a light mode
+ -  `--expand` `(-e)`: expand the table structure in a light mode
  -  `--expand-deep {int}`: an expand limit of recursion which will take place
- -  `--flatten`: Flatten simple arrays
+ -  `--flatten` `(-)`: Flatten simple arrays
  -  `--flatten-separator {string}`: sets a separator when 'flatten' used
- -  `--collapse`: expand the table structure in collapse mode.
+ -  `--collapse` `(-c)`: expand the table structure in collapse mode.
 Be aware collapse mode currently doesn't support width control
 
 ## Notes

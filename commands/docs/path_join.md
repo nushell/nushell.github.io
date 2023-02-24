@@ -29,12 +29,12 @@ the output of 'path parse' and 'path split' subcommands.
 
 Append a filename to a path
 ```shell
-> '/home/viking' | path join spam.txt
+> 'C:\Users\viking' | path join spam.txt
 ```
 
 Append a filename to a path
 ```shell
-> '/home/viking' | path join spams this_spam.txt
+> 'C:\Users\viking' | path join spams this_spam.txt
 ```
 
 Append a filename to a path inside a column
@@ -44,10 +44,10 @@ Append a filename to a path inside a column
 
 Join a list of parts into a path
 ```shell
-> [ '/' 'home' 'viking' 'spam.txt' ] | path join
+> [ 'C:' '\' 'Users' 'viking' 'spam.txt' ] | path join
 ```
 
 Join a structured path into a path
 ```shell
-> [[ parent stem extension ]; [ '/home/viking' 'spam' 'txt' ]] | path join
+> [ [parent stem extension]; ['C:\Users\viking' 'spam' 'txt']] | path join
 ```
