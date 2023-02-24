@@ -19,15 +19,15 @@ usage: |
 
 ## Parameters
 
- -  `--strict`: Throw an error if the path could not be expanded
- -  `--no-symlink`: Do not resolve symbolic links
+ -  `--strict` `(-s)`: Throw an error if the path could not be expanded
+ -  `--no-symlink` `(-n)`: Do not resolve symbolic links
  -  `--columns {table}`: For a record or table input, expand strings at the given columns
 
 ## Examples
 
 Expand an absolute path
 ```shell
-> '/home/joe/foo/../bar' | path expand
+> 'C:\Users\joe\foo\..\bar' | path expand
 ```
 
 Expand a path in a column
@@ -37,5 +37,10 @@ Expand a path in a column
 
 Expand a relative path
 ```shell
-> 'foo/../bar' | path expand
+> 'foo\..\bar' | path expand
+```
+
+Expand an absolute path without following symlink
+```shell
+> 'foo\..\bar' | path expand -n
 ```

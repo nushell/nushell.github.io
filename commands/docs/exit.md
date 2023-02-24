@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `exit_code`: Exit code to return immediately with
- -  `--now`: Exit out of all shells immediately (exiting Nu)
+ -  `--now` `(-n)`: Exit out of all shells immediately (exiting Nu)
 
 ## Examples
 

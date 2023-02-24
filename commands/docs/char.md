@@ -21,9 +21,9 @@ usage: |
 
  -  `character`: the name of the character to output
  -  `...rest`: multiple Unicode bytes
- -  `--list`: List all supported character names
- -  `--unicode`: Unicode string i.e. 1f378
- -  `--integer`: Create a codepoint from an integer
+ -  `--list` `(-l)`: List all supported character names
+ -  `--unicode` `(-u)`: Unicode string i.e. 1f378
+ -  `--integer` `(-i)`: Create a codepoint from an integer
 
 ## Examples
 

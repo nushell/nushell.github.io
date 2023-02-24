@@ -19,8 +19,8 @@ usage: |
 
 ## Parameters
 
- -  `--grapheme-clusters`: split on grapheme clusters
- -  `--code-points`: split on code points (default; splits combined characters)
+ -  `--grapheme-clusters` `(-g)`: split on grapheme clusters
+ -  `--code-points` `(-c)`: split on code points (default; splits combined characters)
 
 ## Examples
 

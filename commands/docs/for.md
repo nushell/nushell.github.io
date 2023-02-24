@@ -22,7 +22,7 @@ usage: |
  -  `var_name`: name of the looping variable
  -  `range`: range of the loop
  -  `block`: the block to run
- -  `--numbered`: return a numbered item ($it.index and $it.item)
+ -  `--numbered` `(-n)`: return a numbered item ($it.index and $it.item)
 
 ## Notes
 This command is a parser keyword. For details, check:

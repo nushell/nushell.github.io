@@ -27,8 +27,8 @@ usage: |
  -  `--content-length {any}`: the length of the content being posted
  -  `--max-time {int}`: timeout period in seconds
  -  `--headers {any}`: custom headers you want to add
- -  `--raw`: return values as a string instead of a table
- -  `--insecure`: allow insecure server connections when using SSL
+ -  `--raw` `(-r)`: return values as a string instead of a table
+ -  `--insecure` `(-k)`: allow insecure server connections when using SSL
 
 ## Notes
 Performs HTTP POST operation.

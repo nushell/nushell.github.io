@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--no-collect`: do not collect streams of structured data
+ -  `--no-collect` `(-n)`: do not collect streams of structured data
 
 ## Examples
 

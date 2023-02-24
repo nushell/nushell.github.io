@@ -21,8 +21,8 @@ usage: |
 
  -  `pattern`: the pattern to find index of
  -  `...rest`: for a data structure input, find the indexes at the given cell paths
- -  `--all`: returns all matched index
- -  `--end`: search from the end of the binary
+ -  `--all` `(-a)`: returns all matched index
+ -  `--end` `(-e)`: search from the end of the binary
 
 ## Examples
 

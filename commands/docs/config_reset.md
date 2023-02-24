@@ -19,9 +19,9 @@ usage: |
 
 ## Parameters
 
- -  `--nu`: reset only nu config, config.nu
- -  `--env`: reset only env config, env.nu
- -  `--without-backup`: do not make a backup
+ -  `--nu` `(-n)`: reset only nu config, config.nu
+ -  `--env` `(-e)`: reset only env config, env.nu
+ -  `--without-backup` `(-w)`: do not make a backup
 
 ## Examples
 

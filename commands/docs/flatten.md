@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: optionally flatten data by column
- -  `--all`: flatten inner table one level out
+ -  `--all` `(-a)`: flatten inner table one level out
 
 ## Examples
 

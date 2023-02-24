@@ -21,13 +21,13 @@ usage: |
 
  -  `filename`: the path of the file you want to remove
  -  `...rest`: additional file path(s) to remove
- -  `--trash`: move to the platform's trash instead of permanently deleting
- -  `--permanent`: delete permanently, ignoring the 'always_trash' config option
- -  `--recursive`: delete subdirectories recursively
- -  `--force`: suppress error when no file
- -  `--verbose`: print names of deleted files
- -  `--interactive`: ask user to confirm action
- -  `--interactive-once`: ask user to confirm action only once
+ -  `--trash` `(-t)`: move to the platform's trash instead of permanently deleting
+ -  `--permanent` `(-p)`: delete permanently, ignoring the 'always_trash' config option
+ -  `--recursive` `(-r)`: delete subdirectories recursively
+ -  `--force` `(-f)`: suppress error when no file
+ -  `--verbose` `(-v)`: print names of deleted files
+ -  `--interactive` `(-i)`: ask user to confirm action
+ -  `--interactive-once` `(-I)`: ask user to confirm action only once
 
 ## Examples
 

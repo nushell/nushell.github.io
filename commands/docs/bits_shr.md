@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `bits`: number of bits to shift right
- -  `--signed`: always treat input number as a signed number
+ -  `--signed` `(-s)`: always treat input number as a signed number
  -  `--number-bytes {string}`: the word size in number of bytes, it can be 1, 2, 4, 8, auto, default value `8`
 
 ## Examples

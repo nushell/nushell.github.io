@@ -20,9 +20,9 @@ usage: |
 ## Parameters
 
  -  `--head {bool}`: Show or hide column headers (default true)
- -  `--index`: Show row indexes when viewing a list
- -  `--reverse`: Start with the viewport scrolled to the bottom
- -  `--peek`: When quitting, output the value of the cell the cursor was on
+ -  `--index` `(-i)`: Show row indexes when viewing a list
+ -  `--reverse` `(-r)`: Start with the viewport scrolled to the bottom
+ -  `--peek` `(-p)`: When quitting, output the value of the cell the cursor was on
 
 ## Notes
 Press `:` then `h` to get a help menu.

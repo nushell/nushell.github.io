@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
- -  `--all`: encode all non-alphanumeric chars including `/`, `.`, `:`
+ -  `--all` `(-a)`: encode all non-alphanumeric chars including `/`, `.`, `:`
 
 ## Examples
 

@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: optionally md5 hash data by cell path
- -  `--binary`: Output binary instead of hexadecimal representation
+ -  `--binary` `(-b)`: Output binary instead of hexadecimal representation
 
 ## Examples
 

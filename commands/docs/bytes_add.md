@@ -22,7 +22,7 @@ usage: |
  -  `data`: the binary to add
  -  `...rest`: for a data structure input, add bytes to the data at the given cell paths
  -  `--index {int}`: index to insert binary data
- -  `--end`: add to the end of binary
+ -  `--end` `(-e)`: add to the end of binary
 
 ## Examples
 

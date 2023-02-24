@@ -22,9 +22,9 @@ usage: |
  -  `find`: the pattern to find
  -  `replace`: the replacement string
  -  `...rest`: For a data structure input, operate on strings at the given cell paths
- -  `--all`: replace all occurrences of the pattern
- -  `--no-expand`: do not expand capture groups (like $name) in the replacement string
- -  `--string`: match the pattern as a substring of the input, instead of a regular expression
+ -  `--all` `(-a)`: replace all occurrences of the pattern
+ -  `--no-expand` `(-n)`: do not expand capture groups (like $name) in the replacement string
+ -  `--string` `(-s)`: match the pattern as a substring of the input, instead of a regular expression
 
 ## Examples
 

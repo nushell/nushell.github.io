@@ -19,8 +19,8 @@ usage: |
 
 ## Parameters
 
- -  `--noheaders`: don't treat the first row as column names
- -  `--aligned-columns`: assume columns are aligned
+ -  `--noheaders` `(-n)`: don't treat the first row as column names
+ -  `--aligned-columns` `(-a)`: assume columns are aligned
  -  `--minimum-spaces {int}`: the minimum spaces to separate columns
 
 ## Examples

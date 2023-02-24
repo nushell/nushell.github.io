@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: the columns to select from the table
- -  `--ignore-errors`: when an error occurs, instead of erroring out, suppress the error message
+ -  `--ignore-errors` `(-i)`: when an error occurs, instead of erroring out, suppress the error message
 
 ## Examples
 

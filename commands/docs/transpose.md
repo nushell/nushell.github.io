@@ -20,11 +20,11 @@ usage: |
 ## Parameters
 
  -  `...rest`: the names to give columns once transposed
- -  `--header-row`: treat the first row as column names
- -  `--ignore-titles`: don't transpose the column names into values
- -  `--as-record`: transfer to record if the result is a table and contains only one row
- -  `--keep-last`: on repetition of record fields due to `header-row`, keep the last value obtained
- -  `--keep-all`: on repetition of record fields due to `header-row`, keep all the values obtained
+ -  `--header-row` `(-r)`: treat the first row as column names
+ -  `--ignore-titles` `(-i)`: don't transpose the column names into values
+ -  `--as-record` `(-d)`: transfer to record if the result is a table and contains only one row
+ -  `--keep-last` `(-l)`: on repetition of record fields due to `header-row`, keep the last value obtained
+ -  `--keep-all` `(-a)`: on repetition of record fields due to `header-row`, keep all the values obtained
 
 ## Examples
 

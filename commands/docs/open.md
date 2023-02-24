@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `filename`: the filename to use
- -  `--raw`: open file as raw binary
+ -  `--raw` `(-r)`: open file as raw binary
 
 ## Examples
 

@@ -21,8 +21,8 @@ usage: |
 
  -  `name`: Module name to use overlay for
  -  `as`: as keyword followed by a new name
- -  `--prefix`: Prepend module name to the imported commands and aliases
- -  `--reload`: If the overlay already exists, reload its definitions and environment.
+ -  `--prefix` `(-p)`: Prepend module name to the imported commands and aliases
+ -  `--reload` `(-r)`: If the overlay already exists, reload its definitions and environment.
 
 ## Notes
 This command is a parser keyword. For details, check:

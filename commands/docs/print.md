@@ -20,8 +20,8 @@ usage: |
 ## Parameters
 
  -  `...rest`: the values to print
- -  `--no-newline`: print without inserting a newline for the line ending
- -  `--stderr`: print to stderr instead of stdout
+ -  `--no-newline` `(-n)`: print without inserting a newline for the line ending
+ -  `--stderr` `(-e)`: print to stderr instead of stdout
 
 ## Notes
 Unlike `echo`, this command does not return any value (`print | describe` will return "nothing").

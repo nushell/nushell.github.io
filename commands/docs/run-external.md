@@ -21,9 +21,9 @@ usage: |
 
  -  `command`: external command to run
  -  `...rest`: arguments for external command
- -  `--redirect-stdout`: redirect stdout to the pipeline
- -  `--redirect-stderr`: redirect stderr to the pipeline
- -  `--trim-end-newline`: trimming end newlines
+ -  `--redirect-stdout` `(-)`: redirect stdout to the pipeline
+ -  `--redirect-stderr` `(-)`: redirect stderr to the pipeline
+ -  `--trim-end-newline` `(-)`: trimming end newlines
 
 ## Examples
 

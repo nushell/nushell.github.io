@@ -20,8 +20,8 @@ usage: |
 ## Parameters
 
  -  `--separator {string}`: a character to separate columns, defaults to ','
- -  `--noheaders`: don't treat the first row as column names
- -  `--no-infer`: no field type inferencing
+ -  `--noheaders` `(-n)`: don't treat the first row as column names
+ -  `--no-infer` `(-)`: no field type inferencing
  -  `--trim {string}`: drop leading and trailing whitespaces around headers names and/or field values
 
 ## Examples

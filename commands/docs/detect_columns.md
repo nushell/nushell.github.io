@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `--skip {int}`: number of rows to skip before detecting
- -  `--no-headers`: don't detect headers
+ -  `--no-headers` `(-n)`: don't detect headers
 
 ## Examples
 

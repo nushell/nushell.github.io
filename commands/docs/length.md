@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--column`: Show the number of columns in a table
+ -  `--column` `(-c)`: Show the number of columns in a table
 
 ## Examples
 

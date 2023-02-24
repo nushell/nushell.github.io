@@ -21,7 +21,7 @@ usage: |
 
  -  `prompt`: prompt to show the user
  -  `--bytes-until {string}`: read bytes (not text) until a stop byte
- -  `--suppress-output`: don't print keystroke values
+ -  `--suppress-output` `(-s)`: don't print keystroke values
 
 ## Examples
 

@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `error_struct`: the error to create
- -  `--unspanned`: remove the origin label from the error
+ -  `--unspanned` `(-u)`: remove the origin label from the error
 
 ## Examples
 

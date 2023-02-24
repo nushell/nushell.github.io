@@ -21,10 +21,10 @@ usage: |
 
  -  `closure`: the closure to run
  -  `...rest`: the parameter(s) for the closure
- -  `--ignore-errors`: ignore errors as the closure runs
- -  `--ignore-shell-errors`: ignore shell errors as the closure runs
- -  `--ignore-program-errors`: ignore external program errors as the closure runs
- -  `--capture-errors`: catch errors as the closure runs, and return them
+ -  `--ignore-errors` `(-i)`: ignore errors as the closure runs
+ -  `--ignore-shell-errors` `(-s)`: ignore shell errors as the closure runs
+ -  `--ignore-program-errors` `(-p)`: ignore external program errors as the closure runs
+ -  `--capture-errors` `(-c)`: catch errors as the closure runs, and return them
 
 ## Examples
 
