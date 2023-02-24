@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--skip-empty`: skip empty lines
+ -  `--skip-empty` `(-s)`: skip empty lines
 
 ## Examples
 

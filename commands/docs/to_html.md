@@ -19,12 +19,12 @@ usage: |
 
 ## Parameters
 
- -  `--html-color`: change ansi colors to html colors
- -  `--no-color`: remove all ansi colors in output
- -  `--dark`: indicate your background color is a darker color
- -  `--partial`: only output the html for the content itself
+ -  `--html-color` `(-c)`: change ansi colors to html colors
+ -  `--no-color` `(-n)`: remove all ansi colors in output
+ -  `--dark` `(-d)`: indicate your background color is a darker color
+ -  `--partial` `(-p)`: only output the html for the content itself
  -  `--theme {string}`: the name of the theme to use (github, blulocolight, ...)
- -  `--list`: produce a color table of all available themes
+ -  `--list` `(-l)`: produce a color table of all available themes
 
 ## Notes
 Screenshots of the themes can be browsed here: https://github.com/mbadolato/iTerm2-Color-Schemes

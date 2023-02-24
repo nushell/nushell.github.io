@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--degrees`: Use degrees instead of radians
+ -  `--degrees` `(-d)`: Use degrees instead of radians
 
 ## Examples
 

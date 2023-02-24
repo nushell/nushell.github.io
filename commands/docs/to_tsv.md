@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--noheaders`: do not output the column names as the first row
+ -  `--noheaders` `(-n)`: do not output the column names as the first row
 
 ## Examples
 

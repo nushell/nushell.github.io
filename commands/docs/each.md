@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `closure`: the closure to run
- -  `--keep-empty`: keep empty result cells
+ -  `--keep-empty` `(-k)`: keep empty result cells
 
 ## Notes
 Since tables are lists of records, passing a table into 'each' will

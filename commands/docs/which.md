@@ -21,7 +21,7 @@ usage: |
 
  -  `application`: application
  -  `...rest`: additional applications
- -  `--all`: list all executables
+ -  `--all` `(-a)`: list all executables
 
 ## Examples
 

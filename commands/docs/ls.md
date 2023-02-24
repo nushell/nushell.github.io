@@ -20,13 +20,13 @@ usage: |
 ## Parameters
 
  -  `pattern`: the glob pattern to use
- -  `--all`: Show hidden files
- -  `--long`: Get all available columns for each entry (slower; columns are platform-dependent)
- -  `--short-names`: Only print the file names, and not the path
- -  `--full-paths`: display paths as absolute paths
- -  `--du`: Display the apparent directory size ("disk usage") in place of the directory metadata size
- -  `--directory`: List the specified directory itself instead of its contents
- -  `--mime-type`: Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
+ -  `--all` `(-a)`: Show hidden files
+ -  `--long` `(-l)`: Get all available columns for each entry (slower; columns are platform-dependent)
+ -  `--short-names` `(-s)`: Only print the file names, and not the path
+ -  `--full-paths` `(-f)`: display paths as absolute paths
+ -  `--du` `(-d)`: Display the apparent directory size ("disk usage") in place of the directory metadata size
+ -  `--directory` `(-D)`: List the specified directory itself instead of its contents
+ -  `--mime-type` `(-m)`: Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
 
 ## Examples
 

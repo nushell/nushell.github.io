@@ -21,10 +21,10 @@ usage: |
 
  -  `source`: the place to copy from
  -  `destination`: the place to copy to
- -  `--recursive`: copy recursively through subdirectories
- -  `--verbose`: show successful copies in addition to failed copies (default:false)
- -  `--interactive`: ask user to confirm action
- -  `--no-symlink`: no symbolic links are followed, only works if -r is active
+ -  `--recursive` `(-r)`: copy recursively through subdirectories
+ -  `--verbose` `(-v)`: show successful copies in addition to failed copies (default:false)
+ -  `--interactive` `(-i)`: ask user to confirm action
+ -  `--no-symlink` `(-n)`: no symbolic links are followed, only works if -r is active
 
 ## Examples
 

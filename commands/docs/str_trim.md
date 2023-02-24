@@ -21,11 +21,11 @@ usage: |
 
  -  `...rest`: For a data structure input, trim strings at the given cell paths
  -  `--char {string}`: character to trim (default: whitespace)
- -  `--left`: trims characters only from the beginning of the string (default: whitespace)
- -  `--right`: trims characters only from the end of the string (default: whitespace)
- -  `--all`: trims all characters from both sides of the string *and* in the middle (default: whitespace)
- -  `--both`: trims all characters from left and right side of the string (default: whitespace)
- -  `--format`: trims spaces replacing multiple characters with singles in the middle (default: whitespace)
+ -  `--left` `(-l)`: trims characters only from the beginning of the string (default: whitespace)
+ -  `--right` `(-r)`: trims characters only from the end of the string (default: whitespace)
+ -  `--all` `(-a)`: trims all characters from both sides of the string *and* in the middle (default: whitespace)
+ -  `--both` `(-b)`: trims all characters from left and right side of the string (default: whitespace)
+ -  `--format` `(-f)`: trims spaces replacing multiple characters with singles in the middle (default: whitespace)
 
 ## Examples
 

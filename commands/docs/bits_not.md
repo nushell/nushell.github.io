@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--signed`: always treat input number as a signed number
+ -  `--signed` `(-s)`: always treat input number as a signed number
  -  `--number-bytes {string}`: the size of unsigned number in bytes, it can be 1, 2, 4, 8, auto
 
 ## Examples

@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: the names to give columns once rotated
- -  `--ccw`: rotate counter clockwise
+ -  `--ccw` `(-)`: rotate counter clockwise
 
 ## Examples
 

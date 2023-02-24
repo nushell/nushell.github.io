@@ -21,10 +21,10 @@ usage: |
 
  -  `filename`: the filename to use
  -  `--stderr {path}`: the filename used to save stderr, only works with `-r` flag
- -  `--raw`: save file as raw binary
- -  `--append`: append input to the end of the file
- -  `--force`: overwrite the destination
- -  `--progress`: enable progress bar
+ -  `--raw` `(-r)`: save file as raw binary
+ -  `--append` `(-a)`: append input to the end of the file
+ -  `--force` `(-f)`: overwrite the destination
+ -  `--progress` `(-p)`: enable progress bar
 
 ## Examples
 

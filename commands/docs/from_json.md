@@ -19,7 +19,7 @@ usage: |
 
 ## Parameters
 
- -  `--objects`: treat each line as a separate value
+ -  `--objects` `(-o)`: treat each line as a separate value
 
 ## Examples
 

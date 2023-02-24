@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: environment variable names to hide
- -  `--ignore-errors`: do not throw an error if an environment variable was not found
+ -  `--ignore-errors` `(-i)`: do not throw an error if an environment variable was not found
 
 ## Examples
 

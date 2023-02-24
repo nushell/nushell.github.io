@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `--separator {string}`: a character to separate columns, defaults to ','
- -  `--noheaders`: do not output the columns names as the first row
+ -  `--noheaders` `(-n)`: do not output the columns names as the first row
 
 ## Examples
 

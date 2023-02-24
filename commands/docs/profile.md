@@ -20,8 +20,8 @@ usage: |
 ## Parameters
 
  -  `closure`: the closure to run
- -  `--source`: Collect source code in the report
- -  `--values`: Collect values in the report
+ -  `--source` `(-)`: Collect source code in the report
+ -  `--values` `(-)`: Collect values in the report
  -  `--max-depth {int}`: How many levels of blocks to step into (default: 1)
 
 ## Notes

@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `format string`: the desired date format
- -  `--list`: lists strftime cheatsheet
+ -  `--list` `(-l)`: lists strftime cheatsheet
 
 ## Examples
 

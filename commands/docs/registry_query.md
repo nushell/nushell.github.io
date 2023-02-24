@@ -21,16 +21,16 @@ usage: |
 
  -  `key`: registry key to query
  -  `value`: optionally supply a registry value to query
- -  `--hkcr`: query the hkey_classes_root hive
- -  `--hkcu`: query the hkey_current_user hive
- -  `--hklm`: query the hkey_local_machine hive
- -  `--hku`: query the hkey_users hive
- -  `--hkpd`: query the hkey_performance_data hive
- -  `--hkpt`: query the hkey_performance_text hive
- -  `--hkpnls`: query the hkey_performance_nls_text hive
- -  `--hkcc`: query the hkey_current_config hive
- -  `--hkdd`: query the hkey_dyn_data hive
- -  `--hkculs`: query the hkey_current_user_local_settings hive
+ -  `--hkcr` `(-)`: query the hkey_classes_root hive
+ -  `--hkcu` `(-)`: query the hkey_current_user hive
+ -  `--hklm` `(-)`: query the hkey_local_machine hive
+ -  `--hku` `(-)`: query the hkey_users hive
+ -  `--hkpd` `(-)`: query the hkey_performance_data hive
+ -  `--hkpt` `(-)`: query the hkey_performance_text hive
+ -  `--hkpnls` `(-)`: query the hkey_performance_nls_text hive
+ -  `--hkcc` `(-)`: query the hkey_current_config hive
+ -  `--hkdd` `(-)`: query the hkey_dyn_data hive
+ -  `--hkculs` `(-)`: query the hkey_current_user_local_settings hive
 
 ## Notes
 Currently supported only on Windows systems.

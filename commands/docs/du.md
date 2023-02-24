@@ -20,8 +20,8 @@ usage: |
 ## Parameters
 
  -  `path`: starting directory
- -  `--all`: Output file sizes as well as directory sizes
- -  `--deref`: Dereference symlinks to their targets for size
+ -  `--all` `(-a)`: Output file sizes as well as directory sizes
+ -  `--deref` `(-r)`: Dereference symlinks to their targets for size
  -  `--exclude {glob}`: Exclude these file names
  -  `--max-depth {int}`: Directory recursion limit
  -  `--min-size {int}`: Exclude files below this size

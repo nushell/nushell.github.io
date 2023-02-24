@@ -20,9 +20,9 @@ usage: |
 ## Parameters
 
  -  `path`: File path to parse
- -  `--as-module`: Parse content as module
- -  `--debug`: Show error messages
- -  `--all`: Parse content as script first, returns result if success, otherwise, try with module
+ -  `--as-module` `(-m)`: Parse content as module
+ -  `--debug` `(-d)`: Show error messages
+ -  `--all` `(-a)`: Parse content as script first, returns result if success, otherwise, try with module
 
 ## Examples
 

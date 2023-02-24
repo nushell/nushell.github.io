@@ -19,8 +19,8 @@ usage: |
 
 ## Parameters
 
- -  `--pretty`: Formats the Markdown table to vertically align items
- -  `--per-element`: treat each row as markdown syntax element
+ -  `--pretty` `(-p)`: Formats the Markdown table to vertically align items
+ -  `--per-element` `(-e)`: treat each row as markdown syntax element
 
 ## Examples
 

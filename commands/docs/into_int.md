@@ -21,7 +21,7 @@ usage: |
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
  -  `--radix {number}`: radix of integer
- -  `--little-endian`: use little-endian byte decoding
+ -  `--little-endian` `(-)`: use little-endian byte decoding
 
 ## Examples
 

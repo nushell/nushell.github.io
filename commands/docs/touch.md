@@ -22,9 +22,9 @@ usage: |
  -  `filename`: the path of the file you want to create
  -  `...rest`: additional files to create
  -  `--reference {string}`: change the file or directory time to the time of the reference file/directory
- -  `--modified`: change the modification time of the file or directory. If no timestamp, date or reference file/directory is given, the current time is used
- -  `--access`: change the access time of the file or directory. If no timestamp, date or reference file/directory is given, the current time is used
- -  `--no-create`: do not create the file if it does not exist
+ -  `--modified` `(-m)`: change the modification time of the file or directory. If no timestamp, date or reference file/directory is given, the current time is used
+ -  `--access` `(-a)`: change the access time of the file or directory. If no timestamp, date or reference file/directory is given, the current time is used
+ -  `--no-create` `(-c)`: do not create the file if it does not exist
 
 ## Examples
 

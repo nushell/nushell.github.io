@@ -24,8 +24,8 @@ usage: |
  -  `--password {any}`: the password when authenticating
  -  `--max-time {int}`: timeout period in seconds
  -  `--headers {any}`: custom headers you want to add
- -  `--raw`: fetch contents as text rather than a table
- -  `--insecure`: allow insecure server connections when using SSL
+ -  `--raw` `(-r)`: fetch contents as text rather than a table
+ -  `--insecure` `(-k)`: allow insecure server connections when using SSL
 
 ## Notes
 Performs HTTP GET operation.

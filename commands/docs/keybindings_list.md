@@ -19,11 +19,11 @@ usage: |
 
 ## Parameters
 
- -  `--modifiers`: list of modifiers
- -  `--keycodes`: list of keycodes
- -  `--modes`: list of edit modes
- -  `--events`: list of reedline event
- -  `--edits`: list of edit commands
+ -  `--modifiers` `(-m)`: list of modifiers
+ -  `--keycodes` `(-k)`: list of keycodes
+ -  `--modes` `(-o)`: list of edit modes
+ -  `--events` `(-e)`: list of reedline event
+ -  `--edits` `(-d)`: list of edit commands
 
 ## Examples
 

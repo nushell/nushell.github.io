@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `encoding`: the text encoding to use
- -  `--ignore-errors`: when a character isn't in the given encoding, replace with a HTML entity (like `&#127880;`)
+ -  `--ignore-errors` `(-i)`: when a character isn't in the given encoding, replace with a HTML entity (like `&#127880;`)
 
 ## Notes
 Multiple encodings are supported; here are a few:

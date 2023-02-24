@@ -19,8 +19,8 @@ usage: |
 
 ## Parameters
 
- -  `--clear`: Clears out the history entries
- -  `--long`: Show long listing of entries for sqlite history
+ -  `--clear` `(-c)`: Clears out the history entries
+ -  `--long` `(-l)`: Show long listing of entries for sqlite history
 
 ## Examples
 
