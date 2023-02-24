@@ -1,7 +1,7 @@
 ---
 title: hash sha256
 categories: |
-  default
+  hash
 version: 0.76.0
 default: |
   Hash a value using the sha256 hash algorithm
