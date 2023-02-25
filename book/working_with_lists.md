@@ -19,7 +19,7 @@ We can also use `update` to replace the 2nd element with the value `10`.
 ```
 > [1, 2, 3, 4] | update 1 10
 ```
-
+## Removing or adding items from list
 In addition to `insert` and `update`, we also have `prepend` and `append`. These let you insert to the beginning of a list or at the end of the list, respectively.
 
 For example:
@@ -29,6 +29,26 @@ let colors = [yellow green]
 let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
 $colors # [red yellow green purple]
+```
+
+In case you want to remove items from list, there are many ways. `skip` allows you skip first rows from input, while `drop` allows you to skip specific numbered rows from end of list. 
+```bash
+let colors = [red yellow green purple]
+let colors = ($colors | skip 1)
+let colors = ($colors | drop 2)
+$colors # [yellow]
+```
+We also have `last` and `first` which allow you to `take` from the end or beginning of the list, respectively.
+```bash
+let colors = [red yellow green purple black magenta]
+let colors = ($colors | last 3)
+$colors # [purple black magenta]
+```
+And from the beginning of a list,
+```bash
+let colors = [yellow green purple]
+let colors = ($colors | first 2)
+$colors # [yellow green]
 ```
 
 ## Iterating over lists
@@ -180,3 +200,4 @@ let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 # Show world clock for selected time zones
 $zones | wrap 'Zone' | upsert Time {|it| (date now | date to-timezone $it.Zone | date format '%Y.%m.%d %H:%M')}
 ```
+
