@@ -27,9 +27,3 @@ You may see an error similar to the one below if you haven't updated the `shells
 
 You can add Nu to the list of allowed shells by appending your Nu binary to the `shells` file.
 The path to add can be found with the command `which nu`, usually it is `$HOME/.cargo/bin/nu`.
-
-## Remove Welcome Message
-
-To remove the welcome message, you need to edit your `config.nu`. Go to global configuration `let-env config` and set `show-banner` option to false, like this:
-
-@[code](@snippets/installation/remove_welcome_message.nu)
