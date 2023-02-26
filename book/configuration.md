@@ -69,7 +69,7 @@ You can learn more about setting up colors and theming in the [associated chapte
 
 ## Remove Welcome Message
 
-To remove the welcome message, you need to edit your `config.nu`. Go to global configuration `let-env config` and set `show-banner` option to false, like this:
+To remove the welcome message, you need to edit your `config.nu` by typing `config nu` in your terminal, then you go to the global configuration `let-env config` and set `show-banner` option to false, like this:
 
 @[code](@snippets/installation/remove_welcome_message.nu)
 
