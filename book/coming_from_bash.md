@@ -44,7 +44,7 @@ Note: this table assumes Nu 0.60.0 or later.
 | `stat $(which git)`                  | `stat (which git).path`                          | Use command output as argument for other command                  |
 | `echo /tmp/$RANDOM`                  | `$"/tmp/(random integer)"`                       | Use command output in a string                                    |
 | `cargo b --jobs=$(nproc)`            | `cargo b $"--jobs=(sys \| get cpu \| length)"`   | Use command output in an option                                   |
-| `echo $PATH`                         | `$env.PATH`                                      | See the current path                                              |
+| `echo $PATH`                         | `$env.PATH` (Non-Windows) or `$env.Path` (Windows) | See the current path                                            |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update PATH permanently                                           |
 | `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                      |
 | `export`                             | `$env`                                           | List the current environment variables                            |
