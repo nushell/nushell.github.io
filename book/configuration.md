@@ -67,6 +67,12 @@ Nushell follows underneath orders to locate the editor:
 
 You can learn more about setting up colors and theming in the [associated chapter](coloring_and_theming.md).
 
+## Remove Welcome Message
+
+To remove the welcome message, you need to edit your `config.nu` by typing `config nu` in your terminal, then you go to the global configuration `let-env config` and set `show-banner` option to false, like this:
+
+@[code](@snippets/installation/remove_welcome_message.nu)
+
 ## Configuring Nu as a login shell
 
 To use Nu as a login shell, you'll need to configure the `$env` variable. With this, you'll have enough support to run external commands as a login shell.
