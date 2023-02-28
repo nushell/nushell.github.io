@@ -20,5 +20,5 @@
 | /       | /        | /                  | /                    | /                      | /                  |
 | in      | in       | re, in, startswith | Contains, StartsWith | -In                    | case in            |
 | not-in  | not in   | not in             | Except               | -NotIn                 |                    |
-| &&      | and      | and                | &&                   | -And                   | -a, &&             |
-| \|\|    | or       | or                 | \|\|                 | -Or                    | -o, \|\|           |
+| and     | and      | and                | &&                   | -And                   | -a, &&             |
+| or      | or       | or                 | \|\|                 | -Or                    | -o, \|\|           |

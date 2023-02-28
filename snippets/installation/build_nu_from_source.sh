@@ -1,2 +1,2 @@
 > cd nushell
-nushell> cargo build --workspace && cargo run
+nushell> cargo build --workspace; cargo run

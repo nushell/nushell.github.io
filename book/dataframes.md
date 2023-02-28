@@ -728,7 +728,7 @@ The masks can also be created from Nushell lists, for example:
 To create complex masks, we have the `AND`
 
 ```shell
-> $mask && $mask1
+> $mask and $mask1
 
 ───┬──────────────────
  # │ and_new_col_mask
@@ -742,7 +742,7 @@ To create complex masks, we have the `AND`
 and `OR` operations
 
 ```shell
-> $mask || $mask1
+> $mask or $mask1
 
 ───┬─────────────────
  # │ or_new_col_mask

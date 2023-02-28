@@ -627,7 +627,7 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 为了创建复杂的掩码，我们可以使用`AND`：
 
 ```shell
-> $mask && $mask1
+> $mask and $mask1
 
 ───┬──────────────────
  # │ and_new_col_mask
@@ -641,7 +641,7 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 或者 `OR` 操作：
 
 ```shell
-> $mask || $mask1
+> $mask or $mask1
 
 ───┬─────────────────
  # │ or_new_col_mask
