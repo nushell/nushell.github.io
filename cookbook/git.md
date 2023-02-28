@@ -11,7 +11,7 @@ Nu can help with common `Git` tasks like removing all local branches which have 
 **Warning**: This command will hard delete the merged branches from your machine. You may want to check the branches selected for deletion by omitting the last git command.
 
 ```shell
-> git branch --merged | lines | where ($it != "* master" && $it != "* main") | each {|br| git branch -D ($br | str trim) } | str trim
+> git branch --merged | lines | where ($it != "* master" and $it != "* main") | each {|br| git branch -D ($br | str trim) } | str trim
 ```
 
 Output

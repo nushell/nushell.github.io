@@ -1,1 +1,1 @@
-nushell> cargo build --release --workspace && cargo run --release
+nushell> cargo build --release --workspace; cargo run --release

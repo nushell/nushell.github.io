@@ -127,13 +127,13 @@ O Git vai clonar o repositório principal do nushell e daí podemos fazer o buil
 
 ```bash
 > cd nushell
-nushell> cargo build --workspace --features=stable && cargo run --features=stable
+nushell> cargo build --workspace --features=stable; cargo run --features=stable
 ```
 
 Você também pode fazer o build e rodar o Nu em modo release:
 
 ```bash
-nushell> cargo build --release --workspace --features=stable && cargo run --release --features=stable
+nushell> cargo build --release --workspace --features=stable; cargo run --release --features=stable
 ```
 
 Pessoas mais acostumadas com Rust podem se perguntar por que fazemos tanto o "build" como o "run" se o "run" já faz o build por padrão. Isso serve para contornar uma falha da nova opção `default-run` no Cargo e assegurar que será feito o build de todos os plugins, embora possa não ser necessário no futuro.

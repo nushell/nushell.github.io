@@ -157,7 +157,7 @@ Git nos clonará el repositorio principal de Nu. Partiendo de ahí podemos contr
 ```
 
 > cd nushell
-> nushell> cargo build --workspace --features=stable && cargo run --features=stable
+> nushell> cargo build --workspace --features=stable; cargo run --features=stable
 
 ```
 
@@ -165,7 +165,7 @@ También puedes construir y arrancar Nu en modo release:
 
 ```
 
-nushell> cargo build --release --workspace --features=stable && cargo run --release --features=stable
+nushell> cargo build --release --workspace --features=stable; cargo run --release --features=stable
 
 ```
 Gente familiarizada con Rust se preguntará la razón por la que hacemos un paso "build" y otro paso "run" si "run" construye por defecto. Esto es para evitar una deficiencia de la nueva opción `default-run` en Cargo y asegurar que todos los plugins se construyan aunque puede que esto no sea necesario en el futuro.
