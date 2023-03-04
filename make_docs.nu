@@ -166,6 +166,17 @@ $"($example.description)
 }
 
 
+# generate the full documentation page of a given command
+#
+# this command will
+# 1. compute the frontmatter of the command, i.e. the YAML header
+# 2. compute the actual content of the documentation
+# 3. concatenate them
+# 4. save that to `commands/docs/<command>.md`
+#
+# # Examples
+# - the `bits` command at https://nushell.sh/commands/docs/bits.html
+# - the `bits and` subcommand at https://nushell.sh/commands/docs/bits_and.html
 def generate-command [commands_group command_name] {
     let safe_name = ($command_name | safe-path)
     let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
