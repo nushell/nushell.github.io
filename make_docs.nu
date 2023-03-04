@@ -142,17 +142,18 @@ def generate-command [commands_group command_name] {
 
 
 def generate-category-sidebar [unique_categories] {
-  let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
-  let list_content = (
-    $unique_categories
-      | each { safe-path }
-      | each { |category| $"  '/commands/categories/($category).md',"}
-      | str join (char newline)
-  )
-  $"export const commandCategories = [
+    let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
+    let list_content = (
+      $unique_categories
+        | each { safe-path }
+        | each { |category| $"  '/commands/categories/($category).md',"}
+        | str join (char newline)
+    )
+
+$"export const commandCategories = [
 ($list_content)
-];
-" | save --raw --force $sidebar_path
+];"
+    | save --raw --force $sidebar_path
 }
 
 
