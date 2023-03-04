@@ -170,9 +170,10 @@ $"export const commandCategories = [
 
 
 def generate-category [category] {
-  let safe_name = ($category | safe-path)
-  let doc_path = (['.', 'commands', 'categories', $'($safe_name).md'] | path join)
-  $"# ($category | str title-case)
+    let safe_name = ($category | safe-path)
+    let doc_path = (['.', 'commands', 'categories', $'($safe_name).md'] | path join)
+
+$"# ($category | str title-case)
 
 <script>
   import pages from '@temp/pages'
@@ -198,8 +199,10 @@ def generate-category [category] {
    <td style=\"white-space: pre-wrap;\">{{ command.frontmatter.usage }}</td>
   </tr>
 </table>
-" | save --raw --force $doc_path
-  $doc_path
+"
+    | save --raw --force $doc_path
+
+    $doc_path
 }
 
 
