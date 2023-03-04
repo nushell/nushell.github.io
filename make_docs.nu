@@ -175,6 +175,12 @@ $"export const commandCategories = [
 }
 
 
+# generate one category file in `commands/categories/`
+#
+# # Example
+# for the `bits` category, that might look, once rendered, like
+#
+#    https://nushell.sh/commands/categories/bits.html
 def generate-category [category] {
     let safe_name = ($category | safe-path)
     let doc_path = (['.', 'commands', 'categories', $'($safe_name).md'] | path join)
