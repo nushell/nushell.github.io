@@ -185,6 +185,7 @@ def main [] {
     )
     let commands_group = ($commands | group-by name)
     let unique_commands = ($commands_group | columns)
+    let unique_categories = ($commands | get category | uniq)
 
     let number_generated_commands = (
         $unique_commands
@@ -195,7 +196,6 @@ def main [] {
     )
     print $"($number_generated_commands) commands written"
 
-    let unique_categories = ($commands | get category | uniq)
     generate-category-sidebar $unique_categories
 
     let number_generated_categories = (
