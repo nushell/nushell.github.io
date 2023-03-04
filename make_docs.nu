@@ -141,6 +141,18 @@ def generate-command [commands_group command_name] {
 }
 
 
+# generate the list of all categories in a TS file used by `vuepress`
+#
+# # Example
+# the sidebar file has following format
+# ```typescript
+# export const commandCategories = [
+#   '/commands/categories/<categ_1>.md',
+#   '/commands/categories/<categ_2>.md',
+#   ...
+# ];
+# ```
+# and contains all the categories given by `$nu.scope.commands.category | uniq`
 def generate-category-sidebar [unique_categories] {
     let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
     let list_content = (
