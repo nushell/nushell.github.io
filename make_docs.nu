@@ -1,3 +1,13 @@
+# remove invalid characters from a path
+#
+# # Examples
+# using the standard library
+# ```nushell
+# use std.nu
+#
+# std assert eq ("foo/bar baz/foooo" | safe-path) "foo/bar_baz/foooo"
+# std assert eq ("invalid ? path" | safe-path) "invalid__path"
+# ```
 def safe-path [] {
   $in | str replace --all '\?' '' | str replace --all ' ' '_'
 }
