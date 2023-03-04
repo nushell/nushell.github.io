@@ -2,11 +2,11 @@
 title: split list
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Split a list into multiple lists using a separator
+  Split a list into multiple lists using a separator.
 usage: |
-  Split a list into multiple lists using a separator
+  Split a list into multiple lists using a separator.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

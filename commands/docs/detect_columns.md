@@ -2,11 +2,11 @@
 title: detect columns
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Attempt to automatically split text into multiple columns
+  Attempt to automatically split text into multiple columns.
 usage: |
-  Attempt to automatically split text into multiple columns
+  Attempt to automatically split text into multiple columns.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

@@ -2,11 +2,11 @@
 title: drop
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Remove items/rows from the end of the input list/table. Counterpart of 'skip'. Opposite of 'last'.
+  Remove items/rows from the end of the input list/table. Counterpart of `skip`. Opposite of `last`.
 usage: |
-  Remove items/rows from the end of the input list/table. Counterpart of 'skip'. Opposite of 'last'.
+  Remove items/rows from the end of the input list/table. Counterpart of `skip`. Opposite of `last`.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

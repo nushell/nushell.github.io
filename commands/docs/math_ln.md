@@ -2,11 +2,11 @@
 title: math ln
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Returns the natural logarithm. Base: (math e)
+  Returns the natural logarithm. Base: (math e).
 usage: |
-  Returns the natural logarithm. Base: (math e)
+  Returns the natural logarithm. Base: (math e).
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

@@ -2,11 +2,11 @@
 title: overlay hide
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Hide an active overlay
+  Hide an active overlay.
 usage: |
-  Hide an active overlay
+  Hide an active overlay.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

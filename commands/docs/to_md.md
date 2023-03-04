@@ -2,11 +2,11 @@
 title: to md
 categories: |
   formats
-version: 0.76.0
+version: 0.76.1
 formats: |
-  Convert table into simple Markdown
+  Convert table into simple Markdown.
 usage: |
-  Convert table into simple Markdown
+  Convert table into simple Markdown.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats

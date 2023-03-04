@@ -2,11 +2,11 @@
 title: url parse
 categories: |
   network
-version: 0.76.0
+version: 0.76.1
 network: |
-  Parses a url
+  Parses a url.
 usage: |
-  Parses a url
+  Parses a url.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for network

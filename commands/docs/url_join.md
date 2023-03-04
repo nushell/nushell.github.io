@@ -2,11 +2,11 @@
 title: url join
 categories: |
   network
-version: 0.76.0
+version: 0.76.1
 network: |
-  Converts a record to url
+  Converts a record to url.
 usage: |
-  Converts a record to url
+  Converts a record to url.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for network

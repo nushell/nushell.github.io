@@ -2,7 +2,7 @@
 title: reduce
 categories: |
   default
-version: 0.76.0
+version: 0.76.1
 default: |
   Aggregate a list to a single value using an accumulator closure.
 usage: |

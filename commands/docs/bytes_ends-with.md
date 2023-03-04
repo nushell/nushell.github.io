@@ -2,11 +2,11 @@
 title: bytes ends-with
 categories: |
   bytes
-version: 0.76.0
+version: 0.76.1
 bytes: |
-  Check if bytes ends with a pattern
+  Check if bytes ends with a pattern.
 usage: |
-  Check if bytes ends with a pattern
+  Check if bytes ends with a pattern.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

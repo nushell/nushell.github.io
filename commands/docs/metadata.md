@@ -2,11 +2,11 @@
 title: metadata
 categories: |
   debug
-version: 0.76.0
+version: 0.76.1
 debug: |
-  Get the metadata for items in the stream
+  Get the metadata for items in the stream.
 usage: |
-  Get the metadata for items in the stream
+  Get the metadata for items in the stream.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug

@@ -2,11 +2,11 @@
 title: random decimal
 categories: |
   random
-version: 0.76.0
+version: 0.76.1
 random: |
-  Generate a random decimal within a range [min..max]
+  Generate a random decimal within a range [min..max].
 usage: |
-  Generate a random decimal within a range [min..max]
+  Generate a random decimal within a range [min..max].
 ---
 
 # <code>{{ $frontmatter.title }}</code> for random

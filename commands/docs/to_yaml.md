@@ -2,11 +2,11 @@
 title: to yaml
 categories: |
   formats
-version: 0.76.0
+version: 0.76.1
 formats: |
-  Convert table into .yaml/.yml text
+  Convert table into .yaml/.yml text.
 usage: |
-  Convert table into .yaml/.yml text
+  Convert table into .yaml/.yml text.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats

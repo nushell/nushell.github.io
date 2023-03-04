@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
   Filter values based on a row condition.
 usage: |

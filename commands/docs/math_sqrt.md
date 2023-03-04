@@ -2,11 +2,11 @@
 title: math sqrt
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Returns the square root of the input number
+  Returns the square root of the input number.
 usage: |
-  Returns the square root of the input number
+  Returns the square root of the input number.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

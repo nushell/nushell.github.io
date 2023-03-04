@@ -2,7 +2,7 @@
 title: path relative-to
 categories: |
   default
-version: 0.76.0
+version: 0.76.1
 default: |
   Express a path as relative to another path.
 usage: |
@@ -30,7 +30,7 @@ path.
 
 Find a relative path from two absolute paths
 ```shell
-> 'C:\Users\viking' | path relative-to 'C:\Users'
+> '/home/viking' | path relative-to '/home'
 ```
 
 Find a relative path from two absolute paths in a column
@@ -40,5 +40,5 @@ Find a relative path from two absolute paths in a column
 
 Find a relative path from two relative paths
 ```shell
-> 'eggs\bacon\sausage\spam' | path relative-to 'eggs\bacon\sausage'
+> 'eggs/bacon/sausage/spam' | path relative-to 'eggs/bacon/sausage'
 ```

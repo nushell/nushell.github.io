@@ -2,11 +2,11 @@
 title: from json
 categories: |
   formats
-version: 0.76.0
+version: 0.76.1
 formats: |
-  Convert from json to structured data
+  Convert from json to structured data.
 usage: |
-  Convert from json to structured data
+  Convert from json to structured data.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats

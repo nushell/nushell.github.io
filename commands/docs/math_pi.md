@@ -2,7 +2,7 @@
 title: math pi
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
   Returns the mathematical constant π.
 usage: |

@@ -2,11 +2,11 @@
 title: config env
 categories: |
   env
-version: 0.76.0
+version: 0.76.1
 env: |
-  Edit nu environment configurations
+  Edit nu environment configurations.
 usage: |
-  Edit nu environment configurations
+  Edit nu environment configurations.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for env

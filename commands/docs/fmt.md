@@ -2,11 +2,11 @@
 title: fmt
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Format a number
+  Format a number.
 usage: |
-  Format a number
+  Format a number.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

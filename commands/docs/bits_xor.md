@@ -2,11 +2,11 @@
 title: bits xor
 categories: |
   bits
-version: 0.76.0
+version: 0.76.1
 bits: |
-  Performs bitwise xor for integers
+  Performs bitwise xor for integers.
 usage: |
-  Performs bitwise xor for integers
+  Performs bitwise xor for integers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits

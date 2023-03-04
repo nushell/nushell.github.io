@@ -2,7 +2,7 @@
 title: compact
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
   Creates a table with non-empty rows.
 usage: |
@@ -25,12 +25,12 @@ usage: |
 
 Filter out all records where 'Hello' is null (returns nothing)
 ```shell
-> [["Hello" "World"]; [null 3]]| compact Hello
+> [["Hello" "World"]; [null 3]] | compact Hello
 ```
 
 Filter out all records where 'World' is null (Returns the table)
 ```shell
-> [["Hello" "World"]; [null 3]]| compact World
+> [["Hello" "World"]; [null 3]] | compact World
 ```
 
 Filter out all instances of nothing from a list (Returns [1,2])

@@ -2,11 +2,11 @@
 title: lines
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Converts input to lines
+  Converts input to lines.
 usage: |
-  Converts input to lines
+  Converts input to lines.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

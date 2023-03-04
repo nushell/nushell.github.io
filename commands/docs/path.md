@@ -2,7 +2,7 @@
 title: path
 categories: |
   default
-version: 0.76.0
+version: 0.76.1
 default: |
   Explore and manipulate paths.
 usage: |

@@ -2,11 +2,11 @@
 title: math ceil
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Returns the ceil of a number (smallest integer greater than or equal to that number)
+  Returns the ceil of a number (smallest integer greater than or equal to that number).
 usage: |
-  Returns the ceil of a number (smallest integer greater than or equal to that number)
+  Returns the ceil of a number (smallest integer greater than or equal to that number).
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

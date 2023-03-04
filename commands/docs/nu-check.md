@@ -2,11 +2,11 @@
 title: nu-check
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Validate and parse input content
+  Validate and parse input content.
 usage: |
-  Validate and parse input content
+  Validate and parse input content.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

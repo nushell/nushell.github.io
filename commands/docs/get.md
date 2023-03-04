@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
   Extract data using a cell path.
 usage: |
@@ -24,6 +24,10 @@ usage: |
  -  `--ignore-errors` `(-i)`: when there are empty cells, instead of erroring out, replace them with nothing
  -  `--sensitive` `(-s)`: get path in a case sensitive manner
 
+## Notes
+This is equivalent to using the cell path access syntax: `$env.OS` is the same as `$env | get OS`.
+
+If multiple cell paths are given, this will produce a list of values.
 ## Examples
 
 Get an item from a list

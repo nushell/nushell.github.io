@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.76.0
+version: 0.76.1
 platform: |
   Output ANSI codes to change color.
 usage: |

@@ -2,11 +2,11 @@
 title: keybindings list
 categories: |
   platform
-version: 0.76.0
+version: 0.76.1
 platform: |
-  List available options that can be used to create keybindings
+  List available options that can be used to create keybindings.
 usage: |
-  List available options that can be used to create keybindings
+  List available options that can be used to create keybindings.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform

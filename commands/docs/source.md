@@ -2,7 +2,7 @@
 title: source
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
   Runs a script file in the current context.
 usage: |

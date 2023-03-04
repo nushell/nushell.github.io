@@ -2,11 +2,11 @@
 title: bytes add
 categories: |
   bytes
-version: 0.76.0
+version: 0.76.1
 bytes: |
-  Add specified bytes to the input
+  Add specified bytes to the input.
 usage: |
-  Add specified bytes to the input
+  Add specified bytes to the input.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

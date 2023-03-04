@@ -2,11 +2,11 @@
 title: do
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Run a closure, providing it with the pipeline input
+  Run a closure, providing it with the pipeline input.
 usage: |
-  Run a closure, providing it with the pipeline input
+  Run a closure, providing it with the pipeline input.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

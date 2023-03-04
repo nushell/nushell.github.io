@@ -2,11 +2,11 @@
 title: register
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Register a plugin
+  Register a plugin.
 usage: |
-  Register a plugin
+  Register a plugin.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

@@ -2,11 +2,11 @@
 title: to toml
 categories: |
   formats
-version: 0.76.0
+version: 0.76.1
 formats: |
-  Convert record into .toml text
+  Convert record into .toml text.
 usage: |
-  Convert record into .toml text
+  Convert record into .toml text.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats

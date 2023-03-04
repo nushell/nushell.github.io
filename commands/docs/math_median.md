@@ -2,11 +2,11 @@
 title: math median
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Computes the median of a list of numbers
+  Computes the median of a list of numbers.
 usage: |
-  Computes the median of a list of numbers
+  Computes the median of a list of numbers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

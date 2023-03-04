@@ -2,11 +2,11 @@
 title: str join
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Concatenate multiple strings into a single string, with an optional separator between each
+  Concatenate multiple strings into a single string, with an optional separator between each.
 usage: |
-  Concatenate multiple strings into a single string, with an optional separator between each
+  Concatenate multiple strings into a single string, with an optional separator between each.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

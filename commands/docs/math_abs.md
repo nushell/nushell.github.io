@@ -2,11 +2,11 @@
 title: math abs
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Returns the absolute value of a number
+  Returns the absolute value of a number.
 usage: |
-  Returns the absolute value of a number
+  Returns the absolute value of a number.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

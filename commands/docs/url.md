@@ -2,11 +2,11 @@
 title: url
 categories: |
   network
-version: 0.76.0
+version: 0.76.1
 network: |
-  Various commands for working with URLs
+  Various commands for working with URLs.
 usage: |
-  Various commands for working with URLs
+  Various commands for working with URLs.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for network

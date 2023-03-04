@@ -2,11 +2,11 @@
 title: explore
 categories: |
   viewers
-version: 0.76.0
+version: 0.76.1
 viewers: |
-  Explore acts as a table pager, just like `less` does for text
+  Explore acts as a table pager, just like `less` does for text.
 usage: |
-  Explore acts as a table pager, just like `less` does for text
+  Explore acts as a table pager, just like `less` does for text.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for viewers

@@ -2,11 +2,11 @@
 title: timeit
 categories: |
   debug
-version: 0.76.0
+version: 0.76.1
 debug: |
-  Time the running time of a closure
+  Time the running time of a closure.
 usage: |
-  Time the running time of a closure
+  Time the running time of a closure.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug

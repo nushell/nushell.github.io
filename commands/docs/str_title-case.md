@@ -2,11 +2,11 @@
 title: str title-case
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Convert a string to Title Case
+  Convert a string to Title Case.
 usage: |
-  Convert a string to Title Case
+  Convert a string to Title Case.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

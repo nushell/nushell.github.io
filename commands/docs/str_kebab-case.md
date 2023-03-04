@@ -2,11 +2,11 @@
 title: str kebab-case
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Convert a string to kebab-case
+  Convert a string to kebab-case.
 usage: |
-  Convert a string to kebab-case
+  Convert a string to kebab-case.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

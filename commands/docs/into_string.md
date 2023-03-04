@@ -2,11 +2,11 @@
 title: into string
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert value to string
+  Convert value to string.
 usage: |
-  Convert value to string
+  Convert value to string.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

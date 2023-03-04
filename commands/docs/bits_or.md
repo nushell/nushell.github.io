@@ -2,11 +2,11 @@
 title: bits or
 categories: |
   bits
-version: 0.76.0
+version: 0.76.1
 bits: |
-  Performs bitwise or for integers
+  Performs bitwise or for integers.
 usage: |
-  Performs bitwise or for integers
+  Performs bitwise or for integers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits

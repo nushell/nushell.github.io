@@ -2,11 +2,11 @@
 title: math min
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Finds the minimum within a list of numbers or tables
+  Finds the minimum within a list of numbers or tables.
 usage: |
-  Finds the minimum within a list of numbers or tables
+  Finds the minimum within a list of numbers or tables.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

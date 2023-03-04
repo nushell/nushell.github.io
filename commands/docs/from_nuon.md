@@ -2,11 +2,11 @@
 title: from nuon
 categories: |
   experimental
-version: 0.76.0
+version: 0.76.1
 experimental: |
-  Convert from nuon to structured data
+  Convert from nuon to structured data.
 usage: |
-  Convert from nuon to structured data
+  Convert from nuon to structured data.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for experimental

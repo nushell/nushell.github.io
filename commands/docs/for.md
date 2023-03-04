@@ -2,11 +2,11 @@
 title: for
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Loop over a range
+  Loop over a range.
 usage: |
-  Loop over a range
+  Loop over a range.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

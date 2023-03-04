@@ -2,11 +2,11 @@
 title: bytes index-of
 categories: |
   bytes
-version: 0.76.0
+version: 0.76.1
 bytes: |
-  Returns start index of first occurrence of pattern in bytes, or -1 if no match
+  Returns start index of first occurrence of pattern in bytes, or -1 if no match.
 usage: |
-  Returns start index of first occurrence of pattern in bytes, or -1 if no match
+  Returns start index of first occurrence of pattern in bytes, or -1 if no match.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

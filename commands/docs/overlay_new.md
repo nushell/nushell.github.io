@@ -2,11 +2,11 @@
 title: overlay new
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Create an empty overlay
+  Create an empty overlay.
 usage: |
-  Create an empty overlay
+  Create an empty overlay.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

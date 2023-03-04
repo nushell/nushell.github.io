@@ -2,11 +2,11 @@
 title: math sum
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Returns the sum of a list of numbers or of each column in a table
+  Returns the sum of a list of numbers or of each column in a table.
 usage: |
-  Returns the sum of a list of numbers or of each column in a table
+  Returns the sum of a list of numbers or of each column in a table.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

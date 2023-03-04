@@ -2,11 +2,11 @@
 title: into sqlite
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert table into a SQLite database
+  Convert table into a SQLite database.
 usage: |
-  Convert table into a SQLite database
+  Convert table into a SQLite database.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

@@ -2,11 +2,11 @@
 title: bits shr
 categories: |
   bits
-version: 0.76.0
+version: 0.76.1
 bits: |
-  Bitwise shift right for integers
+  Bitwise shift right for integers.
 usage: |
-  Bitwise shift right for integers
+  Bitwise shift right for integers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits

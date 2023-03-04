@@ -2,11 +2,11 @@
 title: break
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Break a loop
+  Break a loop.
 usage: |
-  Break a loop
+  Break a loop.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

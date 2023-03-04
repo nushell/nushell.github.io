@@ -2,11 +2,11 @@
 title: into duration
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert value to duration
+  Convert value to duration.
 usage: |
-  Convert value to duration
+  Convert value to duration.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

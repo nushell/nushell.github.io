@@ -2,11 +2,11 @@
 title: bits
 categories: |
   bits
-version: 0.76.0
+version: 0.76.1
 bits: |
-  Various commands for working with bits
+  Various commands for working with bits.
 usage: |
-  Various commands for working with bits
+  Various commands for working with bits.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits

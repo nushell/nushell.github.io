@@ -2,11 +2,11 @@
 title: str contains
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Checks if string input contains a substring
+  Checks if string input contains a substring.
 usage: |
-  Checks if string input contains a substring
+  Checks if string input contains a substring.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

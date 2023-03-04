@@ -2,11 +2,11 @@
 title: into int
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert value to integer
+  Convert value to integer.
 usage: |
-  Convert value to integer
+  Convert value to integer.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

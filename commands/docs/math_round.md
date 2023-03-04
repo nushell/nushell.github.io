@@ -2,11 +2,11 @@
 title: math round
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Returns the input number rounded to the specified precision
+  Returns the input number rounded to the specified precision.
 usage: |
-  Returns the input number rounded to the specified precision
+  Returns the input number rounded to the specified precision.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

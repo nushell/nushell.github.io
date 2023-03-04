@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.76.0
+version: 0.76.1
 filesystem: |
   Copy files.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> cp (source) (destination) --recursive --verbose --interactive --no-symlink```
+```> cp (source) (destination) --recursive --verbose --interactive --no-symlink --progress```
 
 ## Parameters
 
@@ -25,6 +25,7 @@ usage: |
  -  `--verbose` `(-v)`: show successful copies in addition to failed copies (default:false)
  -  `--interactive` `(-i)`: ask user to confirm action
  -  `--no-symlink` `(-n)`: no symbolic links are followed, only works if -r is active
+ -  `--progress` `(-p)`: enable progress bar
 
 ## Examples
 

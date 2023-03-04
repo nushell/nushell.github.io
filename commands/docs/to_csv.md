@@ -2,11 +2,11 @@
 title: to csv
 categories: |
   formats
-version: 0.76.0
+version: 0.76.1
 formats: |
-  Convert table into .csv text 
+  Convert table into .csv text .
 usage: |
-  Convert table into .csv text 
+  Convert table into .csv text .
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats

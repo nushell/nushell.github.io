@@ -2,11 +2,11 @@
 title: roll right
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Roll table columns right
+  Roll table columns right.
 usage: |
-  Roll table columns right
+  Roll table columns right.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

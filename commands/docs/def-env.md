@@ -2,11 +2,11 @@
 title: def-env
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Define a custom command, which participates in the caller environment
+  Define a custom command, which participates in the caller environment.
 usage: |
-  Define a custom command, which participates in the caller environment
+  Define a custom command, which participates in the caller environment.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

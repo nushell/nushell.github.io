@@ -2,11 +2,11 @@
 title: config reset
 categories: |
   env
-version: 0.76.0
+version: 0.76.1
 env: |
-  Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu
+  Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu.
 usage: |
-  Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu
+  Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for env

@@ -2,11 +2,11 @@
 title: zip
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Combine a stream with the input
+  Combine a stream with the input.
 usage: |
-  Combine a stream with the input
+  Combine a stream with the input.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

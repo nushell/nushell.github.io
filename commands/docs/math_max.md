@@ -2,11 +2,11 @@
 title: math max
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Returns the maximum of a list of numbers, or of columns in a table
+  Returns the maximum of a list of numbers, or of columns in a table.
 usage: |
-  Returns the maximum of a list of numbers, or of columns in a table
+  Returns the maximum of a list of numbers, or of columns in a table.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

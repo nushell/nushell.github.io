@@ -2,11 +2,11 @@
 title: roll down
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Roll table rows down
+  Roll table rows down.
 usage: |
-  Roll table rows down
+  Roll table rows down.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

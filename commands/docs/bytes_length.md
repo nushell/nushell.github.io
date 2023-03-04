@@ -2,11 +2,11 @@
 title: bytes length
 categories: |
   bytes
-version: 0.76.0
+version: 0.76.1
 bytes: |
-  Output the length of any bytes in the pipeline
+  Output the length of any bytes in the pipeline.
 usage: |
-  Output the length of any bytes in the pipeline
+  Output the length of any bytes in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

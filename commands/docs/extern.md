@@ -2,11 +2,11 @@
 title: extern
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Define a signature for an external command
+  Define a signature for an external command.
 usage: |
-  Define a signature for an external command
+  Define a signature for an external command.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

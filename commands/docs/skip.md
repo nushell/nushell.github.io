@@ -2,11 +2,11 @@
 title: skip
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Skip the first several rows of the input. Counterpart of 'drop'. Opposite of 'first'.
+  Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
 usage: |
-  Skip the first several rows of the input. Counterpart of 'drop'. Opposite of 'first'.
+  Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -22,7 +22,7 @@ usage: |
  -  `n`: the number of elements to skip
 
 ## Notes
-To skip specific numbered rows, try 'drop nth'. To skip specific named columns, try 'reject'.
+To skip specific numbered rows, try `drop nth`. To skip specific named columns, try `reject`.
 ## Examples
 
 Skip the first value of a list

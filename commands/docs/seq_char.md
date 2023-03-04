@@ -2,11 +2,11 @@
 title: seq char
 categories: |
   generators
-version: 0.76.0
+version: 0.76.1
 generators: |
-  Print a sequence of ASCII characters
+  Print a sequence of ASCII characters.
 usage: |
-  Print a sequence of ASCII characters
+  Print a sequence of ASCII characters.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for generators

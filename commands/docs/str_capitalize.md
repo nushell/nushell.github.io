@@ -2,11 +2,11 @@
 title: str capitalize
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Capitalize first letter of text
+  Capitalize first letter of text.
 usage: |
-  Capitalize first letter of text
+  Capitalize first letter of text.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

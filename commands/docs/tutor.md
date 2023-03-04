@@ -2,11 +2,11 @@
 title: tutor
 categories: |
   misc
-version: 0.76.0
+version: 0.76.1
 misc: |
-  Run the tutorial. To begin, run: tutor
+  Run the tutorial. To begin, run: tutor.
 usage: |
-  Run the tutorial. To begin, run: tutor
+  Run the tutorial. To begin, run: tutor.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for misc

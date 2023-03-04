@@ -2,11 +2,11 @@
 title: bytes replace
 categories: |
   bytes
-version: 0.76.0
+version: 0.76.1
 bytes: |
-  Find and replace binary
+  Find and replace binary.
 usage: |
-  Find and replace binary
+  Find and replace binary.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

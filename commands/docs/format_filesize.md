@@ -2,11 +2,11 @@
 title: format filesize
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Converts a column of filesizes to some specified format
+  Converts a column of filesizes to some specified format.
 usage: |
-  Converts a column of filesizes to some specified format
+  Converts a column of filesizes to some specified format.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

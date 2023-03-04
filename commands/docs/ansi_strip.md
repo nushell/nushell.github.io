@@ -2,11 +2,11 @@
 title: ansi strip
 categories: |
   platform
-version: 0.76.0
+version: 0.76.1
 platform: |
-  Strip ANSI escape sequences from a string
+  Strip ANSI escape sequences from a string.
 usage: |
-  Strip ANSI escape sequences from a string
+  Strip ANSI escape sequences from a string.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform

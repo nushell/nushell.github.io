@@ -2,11 +2,11 @@
 title: continue
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Continue a loop from the next iteration
+  Continue a loop from the next iteration.
 usage: |
-  Continue a loop from the next iteration
+  Continue a loop from the next iteration.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

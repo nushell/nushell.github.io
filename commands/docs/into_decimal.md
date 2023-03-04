@@ -2,11 +2,11 @@
 title: into decimal
 categories: |
   default
-version: 0.76.0
+version: 0.76.1
 default: |
-  Convert text into a decimal
+  Convert text into a decimal.
 usage: |
-  Convert text into a decimal
+  Convert text into a decimal.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default

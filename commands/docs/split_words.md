@@ -2,11 +2,11 @@
 title: split words
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Split a string's words into separate rows
+  Split a string's words into separate rows.
 usage: |
-  Split a string's words into separate rows
+  Split a string's words into separate rows.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

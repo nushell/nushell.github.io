@@ -2,11 +2,11 @@
 title: url encode
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Converts a string to a percent encoded web safe string
+  Converts a string to a percent encoded web safe string.
 usage: |
-  Converts a string to a percent encoded web safe string
+  Converts a string to a percent encoded web safe string.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

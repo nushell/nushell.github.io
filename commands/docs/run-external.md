@@ -2,11 +2,11 @@
 title: run-external
 categories: |
   system
-version: 0.76.0
+version: 0.76.1
 system: |
-  Runs external command
+  Runs external command.
 usage: |
-  Runs external command
+  Runs external command.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for system

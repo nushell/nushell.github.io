@@ -2,11 +2,11 @@
 title: str replace
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Find and replace text
+  Find and replace text.
 usage: |
-  Find and replace text
+  Find and replace text.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

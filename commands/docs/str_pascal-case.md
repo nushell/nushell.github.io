@@ -2,11 +2,11 @@
 title: str pascal-case
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Convert a string to PascalCase
+  Convert a string to PascalCase.
 usage: |
-  Convert a string to PascalCase
+  Convert a string to PascalCase.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

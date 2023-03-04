@@ -2,11 +2,11 @@
 title: term size
 categories: |
   platform
-version: 0.76.0
+version: 0.76.1
 platform: |
-  Returns a record containing the number of columns (width) and rows (height) of the terminal
+  Returns a record containing the number of columns (width) and rows (height) of the terminal.
 usage: |
-  Returns a record containing the number of columns (width) and rows (height) of the terminal
+  Returns a record containing the number of columns (width) and rows (height) of the terminal.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform

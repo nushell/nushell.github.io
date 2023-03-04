@@ -2,11 +2,11 @@
 title: roll left
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Roll record or table columns left
+  Roll record or table columns left.
 usage: |
-  Roll record or table columns left
+  Roll record or table columns left.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

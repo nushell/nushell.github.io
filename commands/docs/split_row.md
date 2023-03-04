@@ -2,11 +2,11 @@
 title: split row
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Split a string into multiple rows using a separator
+  Split a string into multiple rows using a separator.
 usage: |
-  Split a string into multiple rows using a separator
+  Split a string into multiple rows using a separator.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

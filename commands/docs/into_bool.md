@@ -2,11 +2,11 @@
 title: into bool
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert value to boolean
+  Convert value to boolean.
 usage: |
-  Convert value to boolean
+  Convert value to boolean.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

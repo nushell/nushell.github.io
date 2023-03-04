@@ -2,11 +2,11 @@
 title: str screaming-snake-case
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Convert a string to SCREAMING_SNAKE_CASE
+  Convert a string to SCREAMING_SNAKE_CASE.
 usage: |
-  Convert a string to SCREAMING_SNAKE_CASE
+  Convert a string to SCREAMING_SNAKE_CASE.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

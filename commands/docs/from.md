@@ -2,11 +2,11 @@
 title: from
 categories: |
   formats
-version: 0.76.0
+version: 0.76.1
 formats: |
-  Parse a string or binary data into structured data
+  Parse a string or binary data into structured data.
 usage: |
-  Parse a string or binary data into structured data
+  Parse a string or binary data into structured data.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats

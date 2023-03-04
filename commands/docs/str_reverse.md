@@ -2,11 +2,11 @@
 title: str reverse
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Reverse every string in the pipeline
+  Reverse every string in the pipeline.
 usage: |
-  Reverse every string in the pipeline
+  Reverse every string in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

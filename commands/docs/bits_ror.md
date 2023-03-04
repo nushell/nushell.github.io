@@ -2,11 +2,11 @@
 title: bits ror
 categories: |
   bits
-version: 0.76.0
+version: 0.76.1
 bits: |
-  Bitwise rotate right for integers
+  Bitwise rotate right for integers.
 usage: |
-  Bitwise rotate right for integers
+  Bitwise rotate right for integers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits

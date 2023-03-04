@@ -2,11 +2,11 @@
 title: decode base64
 categories: |
   hash
-version: 0.76.0
+version: 0.76.1
 hash: |
-  Base64 decode a value
+  Base64 decode a value.
 usage: |
-  Base64 decode a value
+  Base64 decode a value.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for hash

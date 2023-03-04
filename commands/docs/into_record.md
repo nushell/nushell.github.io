@@ -2,11 +2,11 @@
 title: into record
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert value to record
+  Convert value to record.
 usage: |
-  Convert value to record
+  Convert value to record.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

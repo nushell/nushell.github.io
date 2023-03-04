@@ -2,7 +2,7 @@
 title: random
 categories: |
   random
-version: 0.76.0
+version: 0.76.1
 random: |
   Generate a random value.
 usage: |

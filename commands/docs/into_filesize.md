@@ -2,11 +2,11 @@
 title: into filesize
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert value to filesize
+  Convert value to filesize.
 usage: |
-  Convert value to filesize
+  Convert value to filesize.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

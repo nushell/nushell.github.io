@@ -2,11 +2,11 @@
 title: roll
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Rolling commands for tables
+  Rolling commands for tables.
 usage: |
-  Rolling commands for tables
+  Rolling commands for tables.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

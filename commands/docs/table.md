@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.76.0
+version: 0.76.1
 viewers: |
   Render the table.
 usage: |
@@ -30,7 +30,7 @@ usage: |
 Be aware collapse mode currently doesn't support width control
 
 ## Notes
-If the table contains a column called 'index', this column is used as the table index instead of the usual continuous index
+If the table contains a column called 'index', this column is used as the table index instead of the usual continuous index.
 ## Examples
 
 List the files in current directory, with indexes starting from 1.

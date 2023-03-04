@@ -2,11 +2,11 @@
 title: str camel-case
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Convert a string to camelCase
+  Convert a string to camelCase.
 usage: |
-  Convert a string to camelCase
+  Convert a string to camelCase.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

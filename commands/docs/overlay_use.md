@@ -2,11 +2,11 @@
 title: overlay use
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Use definitions from a module as an overlay
+  Use definitions from a module as an overlay.
 usage: |
-  Use definitions from a module as an overlay
+  Use definitions from a module as an overlay.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

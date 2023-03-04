@@ -2,11 +2,11 @@
 title: math product
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
-  Returns the product of a list of numbers or the products of each column of a table
+  Returns the product of a list of numbers or the products of each column of a table.
 usage: |
-  Returns the product of a list of numbers or the products of each column of a table
+  Returns the product of a list of numbers or the products of each column of a table.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math

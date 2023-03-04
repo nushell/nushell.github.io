@@ -2,11 +2,11 @@
 title: bytes collect
 categories: |
   bytes
-version: 0.76.0
+version: 0.76.1
 bytes: |
-  Concatenate multiple binary into a single binary, with an optional separator between each
+  Concatenate multiple binary into a single binary, with an optional separator between each.
 usage: |
-  Concatenate multiple binary into a single binary, with an optional separator between each
+  Concatenate multiple binary into a single binary, with an optional separator between each.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

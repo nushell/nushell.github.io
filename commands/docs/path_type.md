@@ -2,11 +2,11 @@
 title: path type
 categories: |
   default
-version: 0.76.0
+version: 0.76.1
 default: |
-  Get the type of the object a path refers to (e.g., file, dir, symlink)
+  Get the type of the object a path refers to (e.g., file, dir, symlink).
 usage: |
-  Get the type of the object a path refers to (e.g., file, dir, symlink)
+  Get the type of the object a path refers to (e.g., file, dir, symlink).
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default

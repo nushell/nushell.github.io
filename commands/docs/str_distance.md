@@ -2,11 +2,11 @@
 title: str distance
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Compare two strings and return the edit distance/Levenshtein distance
+  Compare two strings and return the edit distance/Levenshtein distance.
 usage: |
-  Compare two strings and return the edit distance/Levenshtein distance
+  Compare two strings and return the edit distance/Levenshtein distance.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

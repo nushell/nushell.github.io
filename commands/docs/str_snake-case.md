@@ -2,11 +2,11 @@
 title: str snake-case
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Convert a string to snake_case
+  Convert a string to snake_case.
 usage: |
-  Convert a string to snake_case
+  Convert a string to snake_case.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

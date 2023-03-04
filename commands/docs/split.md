@@ -2,7 +2,7 @@
 title: split
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
   Split contents across desired subcommand (like row, column) via the separator.
 usage: |

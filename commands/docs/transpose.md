@@ -2,7 +2,7 @@
 title: transpose
 categories: |
   default
-version: 0.76.0
+version: 0.76.1
 default: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |

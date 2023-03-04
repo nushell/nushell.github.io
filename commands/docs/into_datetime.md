@@ -2,11 +2,11 @@
 title: into datetime
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert text into a datetime
+  Convert text into a datetime.
 usage: |
-  Convert text into a datetime
+  Convert text into a datetime.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

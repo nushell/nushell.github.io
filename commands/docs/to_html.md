@@ -2,11 +2,11 @@
 title: to html
 categories: |
   formats
-version: 0.76.0
+version: 0.76.1
 formats: |
-  Convert table into simple HTML
+  Convert table into simple HTML.
 usage: |
-  Convert table into simple HTML
+  Convert table into simple HTML.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -27,7 +27,7 @@ usage: |
  -  `--list` `(-l)`: produce a color table of all available themes
 
 ## Notes
-Screenshots of the themes can be browsed here: https://github.com/mbadolato/iTerm2-Color-Schemes
+Screenshots of the themes can be browsed here: https://github.com/mbadolato/iTerm2-Color-Schemes.
 ## Examples
 
 Outputs an  HTML string representing the contents of this table

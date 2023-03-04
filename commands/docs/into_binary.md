@@ -2,11 +2,11 @@
 title: into binary
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Convert value to a binary primitive
+  Convert value to a binary primitive.
 usage: |
-  Convert value to a binary primitive
+  Convert value to a binary primitive.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

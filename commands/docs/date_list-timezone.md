@@ -2,7 +2,7 @@
 title: date list-timezone
 categories: |
   date
-version: 0.76.0
+version: 0.76.1
 date: |
   List supported time zones.
 usage: |

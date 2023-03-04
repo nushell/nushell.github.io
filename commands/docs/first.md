@@ -2,11 +2,11 @@
 title: first
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Return only the first several rows of the input. Counterpart of 'last'. Opposite of 'skip'.
+  Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
 usage: |
-  Return only the first several rows of the input. Counterpart of 'last'. Opposite of 'skip'.
+  Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

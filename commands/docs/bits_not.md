@@ -2,11 +2,11 @@
 title: bits not
 categories: |
   bits
-version: 0.76.0
+version: 0.76.1
 bits: |
-  Performs logical negation on each bit
+  Performs logical negation on each bit.
 usage: |
-  Performs logical negation on each bit
+  Performs logical negation on each bit.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits

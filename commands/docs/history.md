@@ -2,11 +2,11 @@
 title: history
 categories: |
   misc
-version: 0.76.0
+version: 0.76.1
 misc: |
-  Get the command history
+  Get the command history.
 usage: |
-  Get the command history
+  Get the command history.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for misc

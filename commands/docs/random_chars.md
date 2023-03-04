@@ -2,11 +2,11 @@
 title: random chars
 categories: |
   random
-version: 0.76.0
+version: 0.76.1
 random: |
-  Generate random chars
+  Generate random chars.
 usage: |
-  Generate random chars
+  Generate random chars.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for random

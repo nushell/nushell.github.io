@@ -2,11 +2,11 @@
 title: encode base64
 categories: |
   hash
-version: 0.76.0
+version: 0.76.1
 hash: |
-  Encode a string or binary value using Base64
+  Encode a string or binary value using Base64.
 usage: |
-  Encode a string or binary value using Base64
+  Encode a string or binary value using Base64.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for hash

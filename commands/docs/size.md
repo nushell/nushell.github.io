@@ -2,7 +2,7 @@
 title: size
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
   Gather word count statistics on the text.
 usage: |

@@ -2,11 +2,11 @@
 title: bytes reverse
 categories: |
   bytes
-version: 0.76.0
+version: 0.76.1
 bytes: |
-  Reverse the bytes in the pipeline
+  Reverse the bytes in the pipeline.
 usage: |
-  Reverse the bytes in the pipeline
+  Reverse the bytes in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

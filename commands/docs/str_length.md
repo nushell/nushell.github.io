@@ -2,11 +2,11 @@
 title: str length
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Output the length of any strings in the pipeline
+  Output the length of any strings in the pipeline.
 usage: |
-  Output the length of any strings in the pipeline
+  Output the length of any strings in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

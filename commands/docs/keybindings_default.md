@@ -2,11 +2,11 @@
 title: keybindings default
 categories: |
   platform
-version: 0.76.0
+version: 0.76.1
 platform: |
-  List default keybindings
+  List default keybindings.
 usage: |
-  List default keybindings
+  List default keybindings.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform

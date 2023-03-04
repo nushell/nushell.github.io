@@ -2,11 +2,11 @@
 title: try
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Try to run a block, if it fails optionally run a catch block
+  Try to run a block, if it fails optionally run a catch block.
 usage: |
-  Try to run a block, if it fails optionally run a catch block
+  Try to run a block, if it fails optionally run a catch block.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

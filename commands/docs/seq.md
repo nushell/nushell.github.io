@@ -2,7 +2,7 @@
 title: seq
 categories: |
   generators
-version: 0.76.0
+version: 0.76.1
 generators: |
   Output sequences of numbers.
 usage: |

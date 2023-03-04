@@ -2,11 +2,11 @@
 title: ansi link
 categories: |
   platform
-version: 0.76.0
+version: 0.76.1
 platform: |
-  Add a link (using OSC 8 escape sequence) to the given string
+  Add a link (using OSC 8 escape sequence) to the given string.
 usage: |
-  Add a link (using OSC 8 escape sequence) to the given string
+  Add a link (using OSC 8 escape sequence) to the given string.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform

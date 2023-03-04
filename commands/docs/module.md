@@ -2,11 +2,11 @@
 title: module
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Define a custom module
+  Define a custom module.
 usage: |
-  Define a custom module
+  Define a custom module.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

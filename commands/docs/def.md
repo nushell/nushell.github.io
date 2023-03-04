@@ -2,11 +2,11 @@
 title: def
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Define a custom command
+  Define a custom command.
 usage: |
-  Define a custom command
+  Define a custom command.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

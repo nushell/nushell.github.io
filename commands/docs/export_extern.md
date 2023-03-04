@@ -2,11 +2,11 @@
 title: export extern
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Define an extern and export it from a module
+  Define an extern and export it from a module.
 usage: |
-  Define an extern and export it from a module
+  Define an extern and export it from a module.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

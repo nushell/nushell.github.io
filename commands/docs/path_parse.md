@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   default
-version: 0.76.0
+version: 0.76.1
 default: |
   Convert a path into structured data.
 usage: |
@@ -27,19 +27,19 @@ Each path is split into a table with 'parent', 'stem' and 'extension' fields.
 On Windows, an extra 'prefix' column is added.
 ## Examples
 
-Parse a single path
+Parse a path
 ```shell
-> 'C:\Users\viking\spam.txt' | path parse
+> '/home/viking/spam.txt' | path parse
 ```
 
 Replace a complex extension
 ```shell
-> 'C:\Users\viking\spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
+> '/home/viking/spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
 ```
 
 Ignore the extension
 ```shell
-> 'C:\Users\viking.d' | path parse -e ''
+> '/etc/conf.d' | path parse -e ''
 ```
 
 Parse all paths under the 'name' column

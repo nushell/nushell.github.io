@@ -2,11 +2,11 @@
 title: port
 categories: |
   network
-version: 0.76.0
+version: 0.76.1
 network: |
-  Get a free port from system
+  Get a free port from system.
 usage: |
-  Get a free port from system
+  Get a free port from system.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for network

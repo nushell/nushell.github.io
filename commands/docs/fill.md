@@ -2,11 +2,11 @@
 title: fill
 categories: |
   conversions
-version: 0.76.0
+version: 0.76.1
 conversions: |
-  Fill and Align
+  Fill and Align.
 usage: |
-  Fill and Align
+  Fill and Align.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions

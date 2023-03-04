@@ -2,11 +2,11 @@
 title: complete
 categories: |
   system
-version: 0.76.0
+version: 0.76.1
 system: |
-  Capture the outputs and exit code from an external piped in command in a nushell table
+  Capture the outputs and exit code from an external piped in command in a nushell table.
 usage: |
-  Capture the outputs and exit code from an external piped in command in a nushell table
+  Capture the outputs and exit code from an external piped in command in a nushell table.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for system

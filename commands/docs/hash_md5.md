@@ -1,17 +1,17 @@
 ---
 title: hash md5
 categories: |
-  default
-version: 0.76.0
-default: |
+  hash
+version: 0.76.1
+hash: |
   Hash a value using the md5 hash algorithm
 usage: |
   Hash a value using the md5 hash algorithm
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for hash
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.hash }}</div>
 
 ## Signature
 

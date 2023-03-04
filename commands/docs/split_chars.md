@@ -2,11 +2,11 @@
 title: split chars
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Split a string into a list of characters
+  Split a string into a list of characters.
 usage: |
-  Split a string into a list of characters
+  Split a string into a list of characters.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

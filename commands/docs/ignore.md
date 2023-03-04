@@ -2,11 +2,11 @@
 title: ignore
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Ignore the output of the previous command in the pipeline
+  Ignore the output of the previous command in the pipeline.
 usage: |
-  Ignore the output of the previous command in the pipeline
+  Ignore the output of the previous command in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

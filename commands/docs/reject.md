@@ -2,11 +2,11 @@
 title: reject
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Remove the given columns from the table. To remove rows, use 'drop'.
+  Remove the given columns or rows from the table. Opposite of `select`.
 usage: |
-  Remove the given columns from the table. To remove rows, use 'drop'.
+  Remove the given columns or rows from the table. Opposite of `select`.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -21,6 +21,8 @@ usage: |
 
  -  `...rest`: the names of columns to remove from the table
 
+## Notes
+To remove a quantity of rows or columns, use `skip`, `drop`, or `drop column`.
 ## Examples
 
 Reject a column in the `ls` table

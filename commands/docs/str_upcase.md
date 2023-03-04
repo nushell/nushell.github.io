@@ -2,11 +2,11 @@
 title: str upcase
 categories: |
   default
-version: 0.76.0
+version: 0.76.1
 default: |
-  Make text uppercase
+  Make text uppercase.
 usage: |
-  Make text uppercase
+  Make text uppercase.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default

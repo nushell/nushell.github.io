@@ -2,11 +2,11 @@
 title: random integer
 categories: |
   random
-version: 0.76.0
+version: 0.76.1
 random: |
-  Generate a random integer [min..max]
+  Generate a random integer [min..max].
 usage: |
-  Generate a random integer [min..max]
+  Generate a random integer [min..max].
 ---
 
 # <code>{{ $frontmatter.title }}</code> for random

@@ -2,11 +2,11 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.76.0
+version: 0.76.1
 bytes: |
-  Remove bytes
+  Remove bytes.
 usage: |
-  Remove bytes
+  Remove bytes.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

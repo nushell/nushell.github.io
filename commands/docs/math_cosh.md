@@ -2,7 +2,7 @@
 title: math cosh
 categories: |
   math
-version: 0.76.0
+version: 0.76.1
 math: |
   Returns the hyperbolic cosine of the number.
 usage: |

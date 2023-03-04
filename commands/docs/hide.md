@@ -2,11 +2,11 @@
 title: hide
 categories: |
   core
-version: 0.76.0
+version: 0.76.1
 core: |
-  Hide definitions in the current scope
+  Hide definitions in the current scope.
 usage: |
-  Hide definitions in the current scope
+  Hide definitions in the current scope.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core

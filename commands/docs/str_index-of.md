@@ -2,11 +2,11 @@
 title: str index-of
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Returns start index of first occurrence of string in input, or -1 if no match
+  Returns start index of first occurrence of string in input, or -1 if no match.
 usage: |
-  Returns start index of first occurrence of string in input, or -1 if no match
+  Returns start index of first occurrence of string in input, or -1 if no match.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

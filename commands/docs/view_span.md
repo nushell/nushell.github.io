@@ -2,11 +2,11 @@
 title: view span
 categories: |
   debug
-version: 0.76.0
+version: 0.76.1
 debug: |
-  View the contents of a span
+  View the contents of a span.
 usage: |
-  View the contents of a span
+  View the contents of a span.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug

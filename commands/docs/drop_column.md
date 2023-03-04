@@ -2,11 +2,11 @@
 title: drop column
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Remove N columns at the right-hand end of the input table. To remove columns by name, use 'reject'.
+  Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.
 usage: |
-  Remove N columns at the right-hand end of the input table. To remove columns by name, use 'reject'.
+  Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

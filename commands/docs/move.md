@@ -2,11 +2,11 @@
 title: move
 categories: |
   filters
-version: 0.76.0
+version: 0.76.1
 filters: |
-  Move columns before or after other columns
+  Move columns before or after other columns.
 usage: |
-  Move columns before or after other columns
+  Move columns before or after other columns.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters

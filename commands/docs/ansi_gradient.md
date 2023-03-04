@@ -2,11 +2,11 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.76.0
+version: 0.76.1
 platform: |
-  Add a color gradient (using ANSI color codes) to the given string
+  Add a color gradient (using ANSI color codes) to the given string.
 usage: |
-  Add a color gradient (using ANSI color codes) to the given string
+  Add a color gradient (using ANSI color codes) to the given string.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform

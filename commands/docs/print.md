@@ -2,11 +2,11 @@
 title: print
 categories: |
   strings
-version: 0.76.0
+version: 0.76.1
 strings: |
-  Print the given values to stdout
+  Print the given values to stdout.
 usage: |
-  Print the given values to stdout
+  Print the given values to stdout.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings

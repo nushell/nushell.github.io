@@ -2,11 +2,11 @@
 title: view source
 categories: |
   debug
-version: 0.76.0
+version: 0.76.1
 debug: |
-  View a block, module, or a definition
+  View a block, module, or a definition.
 usage: |
-  View a block, module, or a definition
+  View a block, module, or a definition.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug
