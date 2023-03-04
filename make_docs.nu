@@ -13,6 +13,39 @@ def safe-path [] {
 }
 
 
+# generate the YAML frontmatter of a command
+#
+# # Examples
+# - the `bits` command in `commands/docs/bits.md`
+# ```yaml
+# ---
+# title: bits
+# categories: |
+#   bits
+# version: 0.76.1
+# bits: |
+#   Various commands for working with bits.
+# usage: |
+#   Various commands for working with bits.
+# ---
+# ```
+# - the `dfr min` command in `commands/docs/dfr_min.md`
+# ```yaml
+# ---
+# title: dfr min
+# categories: |
+#   expression
+#   lazyframe
+# version: 0.76.0
+# expression: |
+#   Creates a min expression
+# lazyframe: |
+#   Aggregates columns to their min value
+# usage: |
+#   Creates a min expression
+#   Aggregates columns to their min value
+# ---
+# ```
 def command-frontmatter [commands_group, command_name] {
     let commands_list = ($commands_group | get $command_name)
 
