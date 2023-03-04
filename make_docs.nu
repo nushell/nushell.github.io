@@ -1,11 +1,17 @@
 def generate-command [commands_group command_name] {
-  let safe_name = ($command_name | safe-path)
-  let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
+    let safe_name = ($command_name | safe-path)
+    let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
 
-  let frontmatter = (command-frontmatter $commands_group $command_name)
-  let doc = ($commands_group | get $command_name | each { |command| command-doc $command } | str join)
-  [$frontmatter $doc] | str join | save --raw --force $doc_path
-  $doc_path
+    let frontmatter = (command-frontmatter $commands_group $command_name)
+    let doc = (
+        $commands_group
+        | get $command_name
+        | each { |command| command-doc $command }
+        | str join
+    )
+
+    [$frontmatter $doc] | str join | save --raw --force $doc_path
+    $doc_path
 }
 
 
