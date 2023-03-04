@@ -1,29 +1,3 @@
-def main [] {
-  # Old commands are currently not deleted because some of them
-  # are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
-  # all of them.
-  #do -i { rm commands/docs/*.md }
-
-  let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
-  let commands_group = ($commands | group-by name)
-  let unique_commands = ($commands_group | columns)
-
-  let number_generated_commands = ($unique_commands | each { |command_name|
-    generate-command $commands_group $command_name
-  } | length)
-  print $"($number_generated_commands) commands written"
-
-  let unique_categories = ($commands | get category | uniq)
-  generate-category-sidebar $unique_categories
-
-  let number_generated_categories = ($unique_categories | each { |category|
-    generate-category $category
-  } | length)
-  print $"($number_generated_categories) categories written"
-
-}
-
-
 def generate-command [commands_group command_name] {
   let safe_name = ($command_name | safe-path)
   let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
@@ -195,4 +169,30 @@ def generate-category [category] {
 
 def safe-path [] {
   $in | str replace --all '\?' '' | str replace --all ' ' '_'
+}
+
+
+def main [] {
+  # Old commands are currently not deleted because some of them
+  # are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
+  # all of them.
+  #do -i { rm commands/docs/*.md }
+
+  let commands = ($nu.scope.commands | where is_custom == false and is_extern == false | sort-by category)
+  let commands_group = ($commands | group-by name)
+  let unique_commands = ($commands_group | columns)
+
+  let number_generated_commands = ($unique_commands | each { |command_name|
+    generate-command $commands_group $command_name
+  } | length)
+  print $"($number_generated_commands) commands written"
+
+  let unique_categories = ($commands | get category | uniq)
+  generate-category-sidebar $unique_categories
+
+  let number_generated_categories = ($unique_categories | each { |category|
+    generate-category $category
+  } | length)
+  print $"($number_generated_categories) categories written"
+
 }
