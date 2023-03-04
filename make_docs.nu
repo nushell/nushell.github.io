@@ -1,17 +1,5 @@
-def generate-command [commands_group command_name] {
-    let safe_name = ($command_name | safe-path)
-    let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
-
-    let frontmatter = (command-frontmatter $commands_group $command_name)
-    let doc = (
-        $commands_group
-        | get $command_name
-        | each { |command| command-doc $command }
-        | str join
-    )
-
-    [$frontmatter $doc] | str join | save --raw --force $doc_path
-    $doc_path
+def safe-path [] {
+  $in | str replace --all '\?' '' | str replace --all ' ' '_'
 }
 
 
@@ -140,6 +128,23 @@ def generate-category-sidebar [unique_categories] {
 }
 
 
+def generate-command [commands_group command_name] {
+    let safe_name = ($command_name | safe-path)
+    let doc_path = (['.', 'commands', 'docs', $'($safe_name).md'] | path join)
+
+    let frontmatter = (command-frontmatter $commands_group $command_name)
+    let doc = (
+        $commands_group
+        | get $command_name
+        | each { |command| command-doc $command }
+        | str join
+    )
+
+    [$frontmatter $doc] | str join | save --raw --force $doc_path
+    $doc_path
+}
+
+
 def generate-category [category] {
   let safe_name = ($category | safe-path)
   let doc_path = (['.', 'commands', 'categories', $'($safe_name).md'] | path join)
@@ -171,10 +176,6 @@ def generate-category [category] {
 </table>
 " | save --raw --force $doc_path
   $doc_path
-}
-
-def safe-path [] {
-  $in | str replace --all '\?' '' | str replace --all ' ' '_'
 }
 
 
