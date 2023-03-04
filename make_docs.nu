@@ -80,6 +80,9 @@ usage: |
 }
 
 
+# generate the whole command documentation
+#
+# TODO: be more detailed here
 def command-doc [command] {
     let top = $"
 # <code>{{ $frontmatter.title }}</code> for ($command.category)
