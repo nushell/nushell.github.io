@@ -68,7 +68,7 @@ let x = $x + 1
 
 This new `x` is visible to any code that follows this line. Careful use of shadowing can make for an easier time working with variables, though it's not required.
 
-Loop counters are another common pattern for mutable variables and are built into most iterating commands, for example you can get both each item and an index of each item using the `-n` flag on [`each`](/commands/docs/each.md):
+Loop counters are another common pattern for mutable variables and are built into most iterating commands, for example you can get both each item and an index of each item using [`each`](/commands/docs/each.md):
 
 ```
 > ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
