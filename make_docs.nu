@@ -25,7 +25,7 @@ def command-frontmatter [commands_group, command_name] {
   let indented_usage = ($commands_list | get usage | each {|it| $"  ($it)"} | str join (char newline))
 
   # This is going in the frontmatter as a multiline YAML string, so indentation matters
-  $"---
+$"---
 title: ($command_name)
 categories: |
 ($category_list)
@@ -33,8 +33,7 @@ version: ($nu_version)
 ($category_matter)
 usage: |
 ($indented_usage)
----
-"
+---"
 }
 
 
@@ -136,7 +135,7 @@ def generate-command [commands_group command_name] {
         | str join
     )
 
-    [$frontmatter $doc] | str join | save --raw --force $doc_path
+    [$frontmatter $doc] | str join "\n" | save --raw --force $doc_path
     $doc_path
 }
 
