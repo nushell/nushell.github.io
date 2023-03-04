@@ -81,88 +81,107 @@ usage: |
 
 
 def command-doc [command] {
-  let top = $"
+    let top = $"
 # <code>{{ $frontmatter.title }}</code> for ($command.category)
 
 <div class='command-title'>{{ $frontmatter.($command.category | str snake-case) }}</div>
 
 "
 
-  let param_type = ['switch', 'named', 'rest', 'positional']
-  let columns = ($command.signatures | columns)
-  let no_sig = ($command | get signatures | is-empty)
-  let no_param = if $no_sig { true } else {
-    $command.signatures | get $columns.0 | where parameter_type in $param_type | is-empty
-  }
-  let sig = if $no_sig { '' } else {
-    ($command.signatures | get $columns.0 | each { |param|
-      if $param.parameter_type == "positional" {
-        $"('(')($param.parameter_name)(')')"
-      } else if $param.parameter_type == "switch" {
-        $"--($param.parameter_name)"
-      } else if $param.parameter_type == "named" {
-        $"--($param.parameter_name)"
-      } else if $param.parameter_type == "rest" {
-        $"...rest"
-      }
-    } | str join " ")
-  }
+    let param_type = ['switch', 'named', 'rest', 'positional']
+    let columns = ($command.signatures | columns)
+    let no_sig = ($command | get signatures | is-empty)
+    let no_param = if $no_sig { true } else {
+        $command.signatures | get $columns.0 | where parameter_type in $param_type | is-empty
+    }
+    let sig = if $no_sig { '' } else {
+        ($command.signatures | get $columns.0 | each { |param|
+            if $param.parameter_type == "positional" {
+                $"('(')($param.parameter_name)(')')"
+            } else if $param.parameter_type == "switch" {
+                $"--($param.parameter_name)"
+            } else if $param.parameter_type == "named" {
+                $"--($param.parameter_name)"
+            } else if $param.parameter_type == "rest" {
+                $"...rest"
+            }
+        } | str join " ")
+    }
 
-  let signatures = $"## Signature(char newline)(char newline)```> ($command.name) ($sig)```(char newline)(char newline)"
+  let signatures = $"## Signature
 
-  let params = if $no_param {
-    ''
+```> ($command.name) ($sig)```
+
+"
+
+    let params = if $no_param { '' } else {
+        ($command.signatures | get $columns.0 | each { |param|
+            if $param.parameter_type == "positional" {
+                $" -  `($param.parameter_name)`: ($param.description)"
+            } else if $param.parameter_type == "switch" {
+                $" -  `--($param.parameter_name)` `\(-($param.short_flag)\)`: ($param.description)"
+            } else if $param.parameter_type == "named" {
+                $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
+            } else if $param.parameter_type == "rest" {
+                $" -  `...rest`: ($param.description)"
+            }
+        } | str join (char newline))
+    }
+
+    let parameters = if $no_param { "" } else {
+$"## Parameters
+
+($params)
+
+"
+}
+
+    let ex = $command.extra_usage
+
+    # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
+    # being interpreted as markdown. This is strictly hard-coded for now.
+    let extra_usage = if $ex == "" {
+        ""
+    } else if $command.name in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
+$"## Notes
+```text
+($ex)
+```
+"
     } else {
-    ($command.signatures | get $columns.0 | each { |param|
-      if $param.parameter_type == "positional" {
-        $" -  `($param.parameter_name)`: ($param.description)"
-      } else if $param.parameter_type == "switch" {
-        $" -  `--($param.parameter_name)` `\(-($param.short_flag)\)`: ($param.description)"
-      } else if $param.parameter_type == "named" {
-        $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
-      } else if $param.parameter_type == "rest" {
-        $" -  `...rest`: ($param.description)"
-      }
-    } | str join (char newline))
-  }
+$"## Notes
+($ex)
+"
+    }
 
-  let parameters = if $no_param { "" } else { $"## Parameters(char newline)(char newline)($params)(char newline)(char newline)" }
+    let examples = if ($command.examples | length) > 0 {
+        let example_top = $"## Examples(char newline)(char newline)"
 
-  let ex = $command.extra_usage
-  # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
-  # being interpreted as markdown. This is strictly hard-coded for now.
-  let extra_usage = if $ex == "" {
-    ""
-  } else if $command.name in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
-    $"## Notes(char newline)```text(char newline)($ex)(char newline)```(char newline)"
-  } else {
-    $"## Notes(char newline)($ex)(char newline)"
-  }
-
-  let examples = if ($command.examples | length) > 0 {
-    let example_top = $"## Examples(char newline)(char newline)"
-
-    let $examples = ($command.examples | each { |example|
+        let $examples = (
+            $command.examples
+            | each { |example|
 $"($example.description)
 ```shell
 > ($example.example)
 ```
 
 "
-    } | str join)
+            } | str join
+        )
 
-    $example_top + $examples
-  } else {
-    ""
-  }
+        $example_top + $examples
+    } else {
+        ""
+    }
 
-  let doc = (
-    ($top + $signatures + $parameters + $extra_usage + $examples ) |
-    lines |
-    each {|it| ($it | str trim -r) } |
-    str join (char newline)
-  )
-  $doc
+    let doc = (
+        ($top + $signatures + $parameters + $extra_usage + $examples )
+        | lines
+        | each {|it| ($it | str trim -r) }
+        | str join (char newline)
+    )
+
+    $doc
 }
 
 
