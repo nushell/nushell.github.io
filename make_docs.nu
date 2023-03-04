@@ -14,21 +14,31 @@ def safe-path [] {
 
 
 def command-frontmatter [commands_group, command_name] {
-  let commands_list = ($commands_group | get $command_name)
+    let commands_list = ($commands_group | get $command_name)
 
-  let category_list = "  " + ($commands_list | get category | str join $"(char newline)  " )
-  let nu_version = (version).version
-  let category_matter = ($commands_list | get category | each { |category|
-    let usage = ($commands_list | where category == $category | get usage | str join (char newline))
-    $'($category | str snake-case): |(char newline)  ($usage)'
-  } | str join (char newline))
-  let indented_usage = ($commands_list | get usage | each {|it| $"  ($it)"} | str join (char newline))
+    let category_list = ($commands_list | get category | str join $"(char newline)  " )
+    let nu_version = (version).version
+    let category_matter = (
+        $commands_list
+        | get category
+        | each { |category|
+            let usage = ($commands_list | where category == $category | get usage | str join (char newline))
+            $'($category | str snake-case): |(char newline)  ($usage)'
+        }
+        | str join (char newline)
+    )
+    let indented_usage = (
+        $commands_list
+        | get usage
+        | each {|it| $"  ($it)"}
+        | str join (char newline)
+    )
 
   # This is going in the frontmatter as a multiline YAML string, so indentation matters
 $"---
 title: ($command_name)
 categories: |
-($category_list)
+  ($category_list)
 version: ($nu_version)
 ($category_matter)
 usage: |
