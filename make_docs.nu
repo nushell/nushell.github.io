@@ -143,6 +143,8 @@ def generate-command [commands_group command_name] {
 
 # generate the list of all categories in a TS file used by `vuepress`
 #
+# this will modify `.vuepress/configs/sidebar/command_categories.ts`
+#
 # # Example
 # the sidebar file has following format
 # ```typescript
@@ -153,6 +155,10 @@ def generate-command [commands_group command_name] {
 # ];
 # ```
 # and contains all the categories given by `$nu.scope.commands.category | uniq`
+#
+# this file is responsible for the sidebar containing the categories that one can see in
+#
+#    https://nushell.sh/commands/
 def generate-category-sidebar [unique_categories] {
     let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
     let list_content = (
