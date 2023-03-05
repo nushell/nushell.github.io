@@ -126,6 +126,7 @@ def command-doc [command] {
 $"($example.description)
 ```shell
 > ($example.example)
+($example.result | try { table --expand } catch { $in })
 ```
 
 "
