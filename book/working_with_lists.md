@@ -54,7 +54,8 @@ $colors # [yellow green]
 ## Iterating over lists
 
 To iterate over the items in a list, use the [`each`](/commands/docs/each.md) command with a [block](types_of_data.html#blocks)
-of Nu code that specifies what to do to each item. The block parameter (e.g. `|it|` in `{ |it| print $it }`) is normally the current list item, but the `--numbered` (`-n`) flag can change it to have `index` and `item` values if needed. For example:
+of Nu code that specifies what to do to each item. The block parameter (e.g. `|it|` in `{ |it| print $it }`) is the current list
+item, but the [`enumerate`](/commands/docs/enumerate.md) filter can be used to provide `index` and `item` values if needed. For example:
 
 ```bash
 let names = [Mark Tami Amanda Jeremy]
@@ -86,7 +87,7 @@ $scores | where $it > 7 # [10 8]
 The [`reduce`](/commands/docs/reduce.md) command computes a single value from a list.
 It uses a block which takes 2 parameters: the current item (conventionally named `it`) and an accumulator
 (conventionally named `acc`). To specify an initial value for the accumulator, use the `--fold` (`-f`) flag.
-To change `it` to have `index` and `item` values, add the `--numbered` (`-n`) flag.
+To change `it` to have `index` and `item` values, use the [`enumerate`](/commands/docs/enumerate.md) filter.
 For example:
 
 ```bash
@@ -97,7 +98,7 @@ $"total = ($scores | math sum)" # easier approach, same result
 
 $"product = ($scores | reduce --fold 1 { |it, acc| $acc * $it })" # total = 96
 
-$scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
+$scores | enumerate | reduce --fold 0 { |it, acc| $acc + $it.index * $it.item } # 0*3 + 1*8 + 2*4 = 16
 ```
 
 ## Accessing the list
