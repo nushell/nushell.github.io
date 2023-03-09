@@ -12,7 +12,7 @@ Stdout is the way that most external apps will send data into the pipeline or to
 > external | str join
 ```
 
-The above would call the external named `external` and would redirect the stdout output stream into the pipeline. With this redirection, Nushell can then pass the data to the next command in the pipeline, here `str join`.
+The above would call the external named `external` and would redirect the stdout output stream into the pipeline. With this redirection, Nushell can then pass the data to the next command in the pipeline, here [`str join`](/commands/docs/str_join.md).
 
 Without the pipeline, Nushell will not do any redirection, allowing it to print directly to the screen.
 

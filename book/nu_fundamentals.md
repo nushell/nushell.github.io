@@ -17,4 +17,4 @@ Some data types have interesting features that deserve their own sections: [stri
 Apart from explaining the features, these sections also show how to do some common operations, such as composing strings or updating values in a list.
 
 Finally, [Command Reference](command_reference.md) lists all the built-in commands with brief descriptions.
-Note that you can also access this info from within Nushell using the `help` command.
+Note that you can also access this info from within Nushell using the [`help`](/commands/docs/help.md) command.

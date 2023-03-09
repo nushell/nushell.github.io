@@ -18,7 +18,7 @@ To get started, let's enter a directory:
   3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago
 ```
 
-Entering is similar to changing directories (as we saw with the `cd` command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the [`shells`](/commands/docs/shells.md) command to list the current directories we have active:
+Entering is similar to changing directories (as we saw with the [`cd`](/commands/docs/cd.md) command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the [`shells`](/commands/docs/shells.md) command to list the current directories we have active:
 
 ```
 /home/jonathan/Source/book(main)> shells
@@ -34,7 +34,7 @@ Entering is similar to changing directories (as we saw with the `cd` command). T
 
 The [`shells`](/commands/docs/shells.md) command shows us there are three shells currently active: our original "nushell" source directory and now this new "book" directory.
 
-We can jump between these shells with the `n`, `p` and `g` shortcuts, short for "next", "previous" and "goto":
+We can jump between these shells with the [`n`](/commands/docs/n.md), [`p`](/commands/docs/p.md) and [`g`](/commands/docs/g.md) shortcuts, short for "next", "previous" and "goto":
 
 ```
 /home/jonathant/Source/book(main)> n
@@ -47,6 +47,6 @@ We can see the directory changing, but we're always able to get back to a previo
 
 ## Exiting the shell
 
-You can leave a shell you have `enter`ed using the `exit` command. If this is the last open shell, Nu will quit.
+You can leave a shell you have [`enter`](/commands/docs/enter.md)ed using the [`exit`](/commands/docs/exit.md) command. If this is the last open shell, Nu will quit.
 
 You can always quit Nu, even if multiple shells are active by passing the `--now` flag to the exit command. Like so: `exit --now`

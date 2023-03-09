@@ -32,7 +32,7 @@ Now, since this operation can be run in parallel, let's convert the above to par
 
 On this machine, it now runs in 6ms. That's quite a difference!
 
-As a side note: Because [environment variables are scoped](environment.md#scoping), you can use `par-each` to work in multiple directories in parallel (notice the `cd` command):
+As a side note: Because [environment variables are scoped](environment.md#scoping), you can use [`par-each`](/commands/docs/par-each.md) to work in multiple directories in parallel (notice the [`cd`](/commands/docs/cd.md) command):
 
 ```
 > ls | where type == dir | par-each { |it|

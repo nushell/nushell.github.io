@@ -35,9 +35,9 @@ export def hi [where: string] {
 
 We defined `hello` and `hi` custom commands inside a `greetings` module.
 
-The `export` keyword makes it possible to later import the commands from the module.
+The [`export`](/commands/docs/export.md) keyword makes it possible to later import the commands from the module.
 
-Similar to [`def`](/commands/docs/def.md), it is also possible to mark [`def-env`](/commands/docs/def-env.md) with the `export` keyword (you can learn more about [`def-env`](/commands/docs/def-env.md) in the [Environment](environment.md) chapter).
+Similar to [`def`](/commands/docs/def.md), it is also possible to mark [`def-env`](/commands/docs/def-env.md) with the [`export`](/commands/docs/export.md) keyword (you can learn more about [`def-env`](/commands/docs/def-env.md) in the [Environment](environment.md) chapter).
 
 ## Using modules
 
@@ -110,7 +110,7 @@ You can use any import patterns as described above with the file name instead of
 
 ## Local Custom Commands
 
-Any custom commands defined in a module without the `export` keyword will work only in the module's scope:
+Any custom commands defined in a module without the [`export`](/commands/docs/export.md) keyword will work only in the module's scope:
 
 ```
 # greetings.nu
@@ -159,7 +159,7 @@ export def hello [] {
 }
 ```
 
-`use` will run the code inside the `export-env` block and merge its environment into the current scope:
+[`use`](/commands/docs/use.md) will run the code inside the [`export-env`](/commands/docs/export-env.md) block and merge its environment into the current scope:
 
 ```
 > use greetings.nu
@@ -172,7 +172,7 @@ hello Arthur, King of the Britons!
 ```
 
 ::: tip
-You might wonder why we can't just define `let-env` at the top of the module.
+You might wonder why we can't just define [`let-env`](/commands/docs/let-env.md) at the top of the module.
 The reason is that the `export-env {...}` block keeps its scope separate from the rest of the module which makes it more organized.
 You can put a complex code defining your environment without polluting the namespace of the module, for example:
 
@@ -193,7 +193,7 @@ export-env {
 Only `$env.TMP_LEN` and `$env.OTHER_ENV` are preserved after evaluating the `export-env` module.
 :::
 
-If you also want to keep your variables in separate modules and export its environment, you could try to `export use` it:
+If you also want to keep your variables in separate modules and export its environment, you could try to [`export use`](/commands/docs/export_use.md) it:
 
 ```
 # purpose.nu
@@ -240,15 +240,15 @@ Hello Arthur, King of the Britons. My purpose is to build an empire.
 
 ## Exporting symbols
 
-Apart from `def` and `def-env`, you can also export `alias`es and `extern`s, giving you a way to only use these features when you need. Exporting externs also gives you the ability to hide custom completion commands in a module, so they don't have to be part of the global namespace.
+Apart from [`def`](/commands/docs/def.md) and [`def-env`](/commands/docs/def-env.md), you can also export [`alias`](/commands/docs/alias.md)es and [`extern`](/commands/docs/extern.md)s, giving you a way to only use these features when you need. Exporting externs also gives you the ability to hide custom completion commands in a module, so they don't have to be part of the global namespace.
 
 Here's the full list of ways you can export:
 
-- `export def` - export a custom command
-- `export def-env` - export a custom environment command
-- `export alias` - export an alias
-- `export extern` - export a known external definition
-- `export use` - use definitions from a module and export them from this module
+- [`export def`](/commands/docs/export_def.md) - export a custom command
+- [`export def-env`](/commands/docs/export_def-env.md) - export a custom environment command
+- [`export alias`](/commands/docs/export_alias.md) - export an alias
+- [`export extern`](/commands/docs/export_extern.md) - export a known external definition
+- [`export use`](/commands/docs/export_use.md) - use definitions from a module and export them from this module
 
 ## Hiding
 

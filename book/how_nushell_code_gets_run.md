@@ -139,7 +139,7 @@ _Before going into examples, one note about the "dynamic" and "static" terminolo
 
 By insisting on strict parse-evaluation separation, we lose much of a flexibility users expect from dynamic interpreted languages, especially other shells, such as bash, fish, zsh and others. This leads to the examples at the beginning of this page not working. Let's break them down one by one
 
-_Note: The following examples use `source`, but similar conclusions apply to other commands that parse Nushell source code, such as `use`, `overlay use`, `hide`, `register` or `source-env`._
+_Note: The following examples use [`source`](/commands/docs/source.md), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md), [`register`](/commands/docs/register.md) or [`source-env`](/commands/docs/source-env.md)._
 
 ### 1. Sourcing a dynamic path
 
@@ -212,7 +212,7 @@ if ('spam/foo.nu' | path exists) {
 }
 ```
 
-This one is similar to the previous example. `cd spam` changes the directory _during evaluation_ but `source-env` attempts to open and read `foo.nu` during parsing.
+This one is similar to the previous example. `cd spam` changes the directory _during evaluation_ but [`source-env`](/commands/docs/source-env.md) attempts to open and read `foo.nu` during parsing.
 
 ## REPL
 
@@ -236,7 +236,7 @@ means the following:
 
 1. Launch `nu`
 2. Type `print "Hello world!"`, press Enter
-3. Type `ls`, press Enter
+3. Type [`ls`](/commands/docs/ls.md), press Enter
 
 Hopefully, that's clear. Now, when you press Enter, these things happen:
 
@@ -254,7 +254,7 @@ cd spam
 source-env foo.nu
 ```
 
-does not work because the directory will be changed _after_ `source-env` attempts to read the file. Running these commands as separate REPL entries, however, works:
+does not work because the directory will be changed _after_ [`source-env`](/commands/docs/source-env.md) attempts to read the file. Running these commands as separate REPL entries, however, works:
 
 ```
 > cd spam
@@ -273,13 +273,13 @@ To see why, let's break down what happens in the example:
 6. Evaluate `source-env foo.nu`
 7. Merge environment (including the current directory) into the Nushell state
 
-When `source-env` tries to open `foo.nu` during the parsing in step 5., it can do so because the directory change from step 3. was merged into the Nushell state in step 4. and therefore is visible in the following parse-evaluation cycles.
+When [`source-env`](/commands/docs/source-env.md) tries to open `foo.nu` during the parsing in step 5., it can do so because the directory change from step 3. was merged into the Nushell state in step 4. and therefore is visible in the following parse-evaluation cycles.
 
 ### Parse-time Evaluation
 
 While it is impossible to add parsing into the evaluation, we can add _a little bit_ of evaluation into parsing. This feature has been added [only recently](https://github.com/nushell/nushell/pull/7436) and we're going to expand it as needed.
 
-One pattern that this unlocks is being able to `source`/`use`/etc. a path from a "variable". We've seen that
+One pattern that this unlocks is being able to [`source`](/commands/docs/source.md)/[`use`](/commands/docs/use.md)/etc. a path from a "variable". We've seen that
 
 ```
 let some_path = 'foo/common.nu'
@@ -316,4 +316,4 @@ Compiled ("static") languages also tend to have a way to convey some logic at co
 
 ## Conclusion
 
-Nushell operates in a scripting language space typically dominated by "dynamic" "interpreted" languages, such as Python, bash, zsh, fish, etc. While Nushell is also "interpreted" in a sense that it runs the code immediately, instead of storing the intermediate representation (IR) to a disk, one feature sets it apart from the pack: It does not have an **eval function**. In other words, Nushell cannot parse code and manipulate its IR during evaluation. This gives Nushell one characteristic typical for "static" "compiled" languages, such as C or Rust: All the source code must be visible to the parser beforehand, just like all the source code must be available to a C or Rust compiler. For example, you cannot `source` or `use` a path computed "dynamically" (during evaluation). This is surprising for users of more traditional scripting languages, but it helps to _think of Nushell as a compiled language_.
+Nushell operates in a scripting language space typically dominated by "dynamic" "interpreted" languages, such as Python, bash, zsh, fish, etc. While Nushell is also "interpreted" in a sense that it runs the code immediately, instead of storing the intermediate representation (IR) to a disk, one feature sets it apart from the pack: It does not have an **eval function**. In other words, Nushell cannot parse code and manipulate its IR during evaluation. This gives Nushell one characteristic typical for "static" "compiled" languages, such as C or Rust: All the source code must be visible to the parser beforehand, just like all the source code must be available to a C or Rust compiler. For example, you cannot [`source`](/commands/docs/source.md) or [`use`](/commands/docs/use.md) a path computed "dynamically" (during evaluation). This is surprising for users of more traditional scripting languages, but it helps to _think of Nushell as a compiled language_.

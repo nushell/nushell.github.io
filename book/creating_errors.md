@@ -5,7 +5,7 @@ Using the [metadata](metadata.md) information, you can create your own custom er
 - The title of the error
 - The label of error message, which includes both the text of the label and the span to underline
 
-You can use the `error make` command to create your own error messages. For example, let's say you had your own command called `my-command` and you wanted to give an error back to the caller about something wrong with a parameter that was passed in.
+You can use the [`error make`](/commands/docs/error_make.md) command to create your own error messages. For example, let's say you had your own command called `my-command` and you wanted to give an error back to the caller about something wrong with a parameter that was passed in.
 
 First, you can take the span of where the argument is coming from:
 
@@ -13,7 +13,7 @@ First, you can take the span of where the argument is coming from:
 let span = (metadata $x).span;
 ```
 
-Next, you can create an error using the `error make` command. This command takes in a record that describes the error to create:
+Next, you can create an error using the [`error make`](/commands/docs/error_make.md) command. This command takes in a record that describes the error to create:
 
 ```
 error make {msg: "this is fishy", label: {text: "fish right here", start: $span.start, end: $span.end } }
