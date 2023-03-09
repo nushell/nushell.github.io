@@ -163,10 +163,14 @@ $"## Notes
         let $examples = (
             $command.examples
             | each { |example|
+                let result = (
+                    $example.result
+                    | try { table --expand } catch { $in }
+                )
 $"($example.description)
 ```shell
 > ($example.example)
-($example.result | try { table --expand } catch { $in })
+($result | if ($result | describe) == "string" { ansi strip } else { $in })
 ```
 
 "
