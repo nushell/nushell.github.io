@@ -21,7 +21,7 @@ Here is a setup example to make nushell "support" background task:
 
 Then you will get some commands to schedule background tasks. (e.g: `job spawn`, `job status`, `job log`)
 
-Cons note: It spawned a fresh nushell to execute the given command, so it doesn't inherit current scope's variables, custom commands, alias definition, except env variables which can convert value to string.  Therefore, if you want to use custom commands or variables, you have to `use` or `define` them within the given block.
+Cons note: It spawned a fresh nushell to execute the given command, so it doesn't inherit current scope's variables, custom commands, alias definition, except env variables which can convert value to string.  Therefore, if you want to use custom commands or variables, you have to `use` or `def` them within the given block.
 
 ## Using nu with terminal multiplexer
 You can choose and install a terminal multiplexer and use it.

@@ -416,8 +416,8 @@ right dataframe
 ::: tip
 In `Nu` when a command has multiple arguments that are expecting
 multiple values we use brackets `[]` to enclose those values. In the case of
-`join` we can join on multiple columns as long as they have the
-same type, for example we could have done `$df | join $df_a [int_1 int_2] [int_1 int_2]`
+`dfr join` we can join on multiple columns as long as they have the
+same type, for example we could have done `$df | dfr join $df_a [int_1 int_2] [int_1 int_2]`
 :::
 
 By default, the join command does an inner join, meaning that it will keep the
