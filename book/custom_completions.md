@@ -111,4 +111,23 @@ let external_completer = {|spans|
 }
 ```
 
+This example shows an external completer that uses the `fish` shell's `complete` command. (You must have the fish shell installed for this example to work.)
+
+```nu
+let fish_completer = {|spans|
+    fish --command $'complete "--do-complete=($spans | str join " ")"' | str trim | split row "\n" | each { |line| $line | split column "\t" value description } | flatten
+}
+
+let-env config = {
+    # ... your config
+    completions: {
+        external: {
+            enable: true
+            max_results: 100
+            completer: $fish_completer
+        }
+    }
+}
+```
+
 > When the block returns unparsable json (e.g. an empty string) it defaults to file completion.
