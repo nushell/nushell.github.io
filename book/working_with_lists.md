@@ -8,19 +8,19 @@ For example, `[foo bar baz]` or `[foo, bar, baz]`.
 
 ## Updating lists
 
-You can `update` and `insert` values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
+You can [`update`](/commands/docs/update.md) and [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
 
 ```
 > [1, 2, 3, 4] | insert 2 10
 ```
 
-We can also use `update` to replace the 2nd element with the value `10`.
+We can also use [`update`](/commands/docs/update.md) to replace the 2nd element with the value `10`.
 
 ```
 > [1, 2, 3, 4] | update 1 10
 ```
 ## Removing or adding items from list
-In addition to `insert` and `update`, we also have `prepend` and `append`. These let you insert to the beginning of a list or at the end of the list, respectively.
+In addition to [`insert`](/commands/docs/insert.md) and [`update`](/commands/docs/update.md), we also have [`prepend`](/commands/docs/prepend.md) and [`append`](/commands/docs/append.md). These let you insert to the beginning of a list or at the end of the list, respectively.
 
 For example:
 
@@ -31,14 +31,14 @@ let colors = ($colors | append purple)
 $colors # [red yellow green purple]
 ```
 
-In case you want to remove items from list, there are many ways. `skip` allows you skip first rows from input, while `drop` allows you to skip specific numbered rows from end of list. 
+In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list. 
 ```bash
 let colors = [red yellow green purple]
 let colors = ($colors | skip 1)
 let colors = ($colors | drop 2)
 $colors # [yellow]
 ```
-We also have `last` and `first` which allow you to `take` from the end or beginning of the list, respectively.
+We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first.md) which allow you to [`take`](/commands/docs/take.md) from the end or beginning of the list, respectively.
 ```bash
 let colors = [red yellow green purple black magenta]
 let colors = ($colors | last 3)

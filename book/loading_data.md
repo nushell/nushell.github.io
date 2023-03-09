@@ -196,7 +196,7 @@ Now that our data is in a table, we can use all the commands we've used on table
 
 There are other commands you can use to work with strings:
 
-- `str`
+- [`str`](/commands/docs/str.md)
 - [`lines`](/commands/docs/lines.md)
 - [`size`](/commands/docs/size.md)
 
@@ -211,7 +211,7 @@ name = "adhoc_derive"
 version = "0.1.2"
 ```
 
-The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the `from` command using the `toml` subcommand:
+The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the [`from`](/commands/docs/from.md) command using the `toml` subcommand:
 
 ```
 > open Cargo.lock | from toml
@@ -221,7 +221,7 @@ The "Cargo.lock" file is actually a .toml file, but the file extension isn't .to
 ──────────┴───────────────────
 ```
 
-The `from` command can be used for each of the structured data text formats that Nu can open and understand by passing it the supported format as a subcommand.
+The [`from`](/commands/docs/from.md) command can be used for each of the structured data text formats that Nu can open and understand by passing it the supported format as a subcommand.
 
 ## Opening in raw mode
 

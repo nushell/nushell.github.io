@@ -21,7 +21,7 @@ ls | explore -i
 
 ![explore-ls-png](https://user-images.githubusercontent.com/20165848/207849604-421312e3-537f-4b2e-b83e-f1f83f2a79d5.png)
 
-So the main point of `explore` is `:table` (Which you see on the above screenshot).
+So the main point of [`explore`](/commands/docs/explore.md) is `:table` (Which you see on the above screenshot).
 
 You can interact with it via `<Left>`, `<Right>`, `<Up>`, `<Down>` _arrow keys_.
 
@@ -33,7 +33,7 @@ You can obtain more information about the various aspects of it by `:help`.
 
 ## Commands
 
-`explore` has a list of built in commands you can use. Commands are run through pressing `<:>` and then a command name.
+[`explore`](/commands/docs/explore.md) has a list of built in commands you can use. Commands are run through pressing `<:>` and then a command name.
 
 To find out the comprehensive list of commands you can type `:help`.
 

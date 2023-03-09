@@ -132,7 +132,7 @@ You can place the `^` sigil in front of any string (including a variable) to hav
 > ^$foo
 ```
 
-You can also use the `run-external` command for this purpose, which provides additional flags and options.
+You can also use the [`run-external`](/commands/docs/run-external.md) command for this purpose, which provides additional flags and options.
 
 ## String interpolation
 
@@ -196,11 +196,11 @@ Finally, the [`split chars`](/commands/docs/split_chars.md) command will split a
 ╰───┴───╯
 ```
 
-## The `str` command
+## The [`str`](/commands/docs/str.md) command
 
-Many string functions are subcommands of the `str` command. You can get a full list using `help str`.
+Many string functions are subcommands of the [`str`](/commands/docs/str.md) command. You can get a full list using `help str`.
 
-For example, you can look if a string contains a particular substring using `str contains`:
+For example, you can look if a string contains a particular substring using [`str contains`](/commands/docs/str_contains.md):
 
 ```sh
 > "hello world" | str contains "o wo"
@@ -287,7 +287,7 @@ With the [`parse`](/commands/docs/parse.md) command you can parse a string into 
 ╰───┴──────────┴────────────╯
 ```
 
-If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use `from csv`, `from tsv` or `from ssv`:
+If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use [`from csv`](/commands/docs/from_csv.md), [`from tsv`](/commands/docs/from_tsv.md) or [`from ssv`](/commands/docs/from_ssv.md):
 
 ```sh
 > "acronym,long\nAPL,A Programming Language" | from csv

@@ -15,7 +15,7 @@ Let's look at an example:
 cat                 dog                 eel
 ```
 
-In the first line, we create a custom command that will return a list of three different animals. These are the values we'd like to use in the completion. Once we've created this command, we can now use it to provide completions for other custom commands and `extern`s.
+In the first line, we create a custom command that will return a list of three different animals. These are the values we'd like to use in the completion. Once we've created this command, we can now use it to provide completions for other custom commands and [`extern`](/commands/docs/extern.md)s.
 
 In the second line, we use `string@animals`. This tells Nushell two things: the shape of the argument for type-checking and the custom completion to use if the user wants to complete values at that position.
 
@@ -43,7 +43,7 @@ In our module, we've chosen to export only the custom command `my-command` but n
 
 This is possible because custom completion tags using `@` are locked-in as the command is first parsed.
 
-## Custom completion and `extern`
+## Custom completion and [`extern`](/commands/docs/extern.md)
 
 A powerful combination is adding custom completions to [known `extern` commands](externs.md). These work the same way as adding a custom completion to a custom command: by creating the custom completion and then attaching it with a `@` to the type of one of the positional or flag arguments of the `extern`.
 

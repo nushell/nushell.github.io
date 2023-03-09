@@ -12,7 +12,7 @@ The first thing we'll do is to sort our table by size. To do this, we'll take th
 
 @[code](@snippets/introduction/ls_sort_by_reverse_example.sh)
 
-You can see that to make this work we didn't pass commandline arguments to [`ls`](/commands/docs/ls.md). Instead, we used the `sort-by` command that Nu provides to do the sorting of the output of the [`ls`](/commands/docs/ls.md) command. To see the biggest files on top, we also used [`reverse`](/commands/docs/reverse.md).
+You can see that to make this work we didn't pass commandline arguments to [`ls`](/commands/docs/ls.md). Instead, we used the [`sort-by`](/commands/docs/sort-by.md) command that Nu provides to do the sorting of the output of the [`ls`](/commands/docs/ls.md) command. To see the biggest files on top, we also used [`reverse`](/commands/docs/reverse.md).
 
 Nu provides many commands that can work on tables. For example, we could filter the contents of the [`ls`](/commands/docs/ls.md) table so that it only shows files over 1 kilobyte:
 
@@ -30,11 +30,11 @@ What if we wanted to show the processes that were actively using the CPU? Just l
 
 So far, we've been using [`ls`](/commands/docs/ls.md) and [`ps`](/commands/docs/ps.md) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore [`date`](/commands/docs/date.md) and [`sys`](/commands/docs/sys.md).
 
-Running `date now` gives us information about the current day and time:
+Running [`date now`](/commands/docs/date_now.md) gives us information about the current day and time:
 
 @[code](@snippets/introduction/date_example.sh)
 
-To get the date as a table we can feed it into `date to-table`
+To get the date as a table we can feed it into [`date to-table`](/commands/docs/date_to-table.md)
 
 @[code](@snippets/introduction/date_table_example.sh)
 
@@ -54,14 +54,14 @@ Right now, there's just one user on the system named "jt". You'll notice that we
 
 You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "jt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
 
-Let's see how strings work outside of Nu in action. We'll take our example from before and run the external `echo` command (the `^` tells Nu to not use the built-in [`echo`](/commands/docs/echo.md) command):
+Let's see how strings work outside of Nu in action. We'll take our example from before and run the external [`echo`](/commands/docs/echo.md) command (the `^` tells Nu to not use the built-in [`echo`](/commands/docs/echo.md) command):
 
 @[code](@snippets/introduction/sys_get_external_echo_example.sh)
 
-If this looks very similar to what we had before, you have a keen eye! It is similar, but with one important difference: we've called `^echo` with the value we saw earlier. This allows us to pass data out of Nu into `echo` (or any command outside of Nu, like `git` for example).
+If this looks very similar to what we had before, you have a keen eye! It is similar, but with one important difference: we've called `^echo` with the value we saw earlier. This allows us to pass data out of Nu into [`echo`](/commands/docs/echo.md) (or any command outside of Nu, like `git` for example).
 
 ### Getting Help
 
-Help text for any of Nu's built-in commands can be discovered with the [`help`](/commands/docs/help.md) command. To see all commands, run `help commands`. You can also search for a topic by doing `help -f <topic>`.
+Help text for any of Nu's built-in commands can be discovered with the [`help`](/commands/docs/help.md) command. To see all commands, run [`help commands`](/commands/docs/help_commands.md). You can also search for a topic by doing `help -f <topic>`.
 
 @[code](@snippets/introduction/help_example.sh)

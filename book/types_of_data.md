@@ -35,7 +35,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 ## Integers
 
 Examples of integers (i.e. "round numbers") include 1, 0, -5, and 100.
-You can parse a string into an integer with the `into int` command
+You can parse a string into an integer with the [`into int`](/commands/docs/into_int.md) command
 
 ```sh
 > "-5" | into int
@@ -44,7 +44,7 @@ You can parse a string into an integer with the `into int` command
 ## Decimals
 
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
-You can cast a string into an Decimal with the `into decimal` command
+You can cast a string into an Decimal with the [`into decimal`](/commands/docs/into_decimal.md) command
 
 ```sh
 > "1.2" | into decimal
@@ -169,7 +169,7 @@ Sometimes, you may want a range that is limited by a number but doesn't use that
 
 Ranges can also be open-ended. You can remove the start or the end of the range to make it open-ended.
 
-Let's say you wanted to start counting at 3, but you didn't have a specific end in mind. You could use the range `3..` to represent this. When you use a range that's open-ended on the right side, remember that this will continue counting for as long as possible, which could be a very long time! You'll often want to use open-ended ranges with commands like `take`, so you can take the number of elements you want from the range.
+Let's say you wanted to start counting at 3, but you didn't have a specific end in mind. You could use the range `3..` to represent this. When you use a range that's open-ended on the right side, remember that this will continue counting for as long as possible, which could be a very long time! You'll often want to use open-ended ranges with commands like [`take`](/commands/docs/take.md), so you can take the number of elements you want from the range.
 
 You can also make the start of the range open. In this case, Nushell will start counting with `0`. For example, the range `..2` is the numbers 0, 1, and 2.
 
@@ -208,7 +208,7 @@ As these can sometimes have many fields, a record is printed up-down rather than
 :::tip
 A record is identical to a single row of a table (see below). You can think of a record as essentially being a "one-row table", with each of its keys as a column (although a true one-row table is something distinct from a record).
 
-This means that any command that operates on a table's rows _also_ operates on records. For instance, `insert`, which adds data to each of a table's rows, can be used with records:
+This means that any command that operates on a table's rows _also_ operates on records. For instance, [`insert`](/commands/docs/insert.md), which adds data to each of a table's rows, can be used with records:
 
 ```sh
 > {x:3 y:1} | insert z 0
@@ -261,7 +261,7 @@ Lists are ordered sequences of data values. List syntax is very similar to array
 ```
 
 :::tip
-Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, `where` can be used with lists:
+Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where.md) can be used with lists:
 
 ```sh
 > [bell book candle] | where ($it =~ 'b')
@@ -280,7 +280,7 @@ Accessing lists' data is done by placing a `.` before a bare integer:
 b
 ```
 
-To get a sub-list from a list, you can use the `range` command:
+To get a sub-list from a list, you can use the [`range`](/commands/docs/range.md) command:
 
 ```sh
 > [a b c d e f] | range 1..3
@@ -369,7 +369,7 @@ Moreover, you can also access entire columns of a table by name, to obtain lists
 ╰───┴────╯
 ```
 
-Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the `select` command with column names:
+Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the [`select`](/commands/docs/select.md) command with column names:
 
 ```sh
 > [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select y z
@@ -382,7 +382,7 @@ Of course, these resulting lists don't have the column names of the table. To re
 ╰───┴───┴───╯
 ```
 
-To remove rows from a table, you'll commonly use the `select` command with row numbers, as you would with a list:
+To remove rows from a table, you'll commonly use the [`select`](/commands/docs/select.md) command with row numbers, as you would with a list:
 
 ```sh
 > [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select 1 2
@@ -421,7 +421,7 @@ It is idiomatic to use `$it` as a parameter name in [`each`](/commands/docs/each
 
 Blocks don't close over variables, don't have parameters, and can't be passed as a value.
 However, unlike closures, blocks can access mutable variable in the parent closure.
-For example, mutating a variable inside the block used in an `if` call is valid:
+For example, mutating a variable inside the block used in an [`if`](/commands/docs/if.md) call is valid:
 
 ```nu
 mut x = 1
@@ -433,7 +433,7 @@ print $x
 
 ## Null
 
-Finally, there is `null` (also known as `$nothing`) which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like `save` or `cd`) produce `null`.
+Finally, there is `null` (also known as `$nothing`) which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md)) produce `null`.
 
 You can place `null` at the end of a pipeline to replace the pipeline's output with it, and thus print nothing:
 

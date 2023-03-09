@@ -114,7 +114,7 @@ let-env config = ($env.config | upsert hooks {
 })
 ```
 
-This won't work because the environment will be active only within the `if` block.
+This won't work because the environment will be active only within the [`if`](/commands/docs/if.md) block.
 In this case, you could easily rewrite it as `load-env (if $after == ... { ... } else { {} })` but this pattern is fairly common and later we'll see that not all cases can be rewritten like this.
 
 To deal with the above problem, we introduce another way to define a hook -- **a record**:
@@ -252,5 +252,5 @@ You can view the result by opening `file:///tmp/nu-output.html` in
 a web browser.
 Of course this isn't very convenient unless you use
 a browser that automatically reloads when the file changes.
-Instead of the `save` command, you would normally customize this
+Instead of the [`save`](/commands/docs/save.md) command, you would normally customize this
 to send the HTML output to a desired window.

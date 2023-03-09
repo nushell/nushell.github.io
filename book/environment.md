@@ -27,7 +27,7 @@ There are several ways to set an environment variable:
 
 ### [`let-env`](/commands/docs/let-env.html)
 
-Using the `let-env` command is the most straightforward method
+Using the [`let-env`](/commands/docs/let-env.md) command is the most straightforward method
 
 ```
 > let-env FOO = 'BAR'
@@ -42,11 +42,11 @@ let-env Path = ($env.Path | prepend 'C:\path\you\want\to\add')
 ```
 
 Here we've prepended our folder to the existing folders in the Path, so it will have the highest priority.
-If you want to give it the lowest priority instead, you can use the `append` command.
+If you want to give it the lowest priority instead, you can use the [`append`](/commands/docs/append.md) command.
 
 ### [`load-env`](/commands/docs/load-env.html)
 
-If you have more than one environment variable you'd like to set, you can use `load-env` to create a table of name/value pairs and load multiple variables at the same time:
+If you have more than one environment variable you'd like to set, you can use [`load-env`](/commands/docs/load-env.md) to create a table of name/value pairs and load multiple variables at the same time:
 
 ```
 > load-env { "BOB": "FOO", "JAY": "BAR" }
@@ -94,7 +94,7 @@ true
 ## Changing directory
 
 Common task in a shell is to change directory with the [`cd`](/commands/docs/cd.html) command.
-In Nushell, calling `cd` is equivalent to setting the `PWD` environment variable.
+In Nushell, calling [`cd`](/commands/docs/cd.md) is equivalent to setting the `PWD` environment variable.
 Therefore, it follows the same rules as other environment variables (for example, scoping).
 
 ## Single-use environment variables
@@ -129,7 +129,7 @@ let-env FOO = 'BAR'
 ## Defining environment from custom commands
 
 Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
-However, a command defined as [`def-env`](/commands/docs/def-env.html) instead of [`def`](/commands/docs/def.html) (it applies also to `export def`, see [Modules](modules.md)) will preserve the environment on the caller's side:
+However, a command defined as [`def-env`](/commands/docs/def-env.html) instead of [`def`](/commands/docs/def.html) (it applies also to [`export def`](/commands/docs/export_def.md), see [Modules](modules.md)) will preserve the environment on the caller's side:
 
 ```
 > def-env foo [] {

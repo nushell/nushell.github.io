@@ -58,7 +58,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ───┴──────┴─────────┴─────────
 ```
 
-We can have a look at the first lines of the file using `first`:
+We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
 
 ```shell
 > $df | first
@@ -332,7 +332,7 @@ that exist in `df` by using the `aggregate` command
 
 As you can see, the aggregate function computes the sum for those columns where
 a sum makes sense. If you want to filter out the text column, you can select
-the columns you want by using the `select` command
+the columns you want by using the [`select`](/commands/docs/select.md) command
 
 ```shell
 $df | sum | select int_1 int_2 float_1 float_2
@@ -416,8 +416,8 @@ right dataframe
 ::: tip
 In `Nu` when a command has multiple arguments that are expecting
 multiple values we use brackets `[]` to enclose those values. In the case of
-`join` we can join on multiple columns as long as they have the
-same type, for example we could have done `$df | join $df_a [int_1 int_2] [int_1 int_2]`
+[`dfr join`](/commands/docs/dfr_join.md) we can join on multiple columns as long as they have the
+same type, for example we could have done `$df | dfr join $df_a [int_1 int_2] [int_1 int_2]`
 :::
 
 By default, the join command does an inner join, meaning that it will keep the
@@ -428,14 +428,14 @@ in order to use it for further operations.
 ## DataFrame group-by
 
 One of the most powerful operations that can be performed with a DataFrame is
-the `group-by`. This command will allow you to perform aggregation operations
+the [`group-by`](/commands/docs/group-by.md). This command will allow you to perform aggregation operations
 based on a grouping criteria. In Nushell, a `GroupBy` is a type of object that
 can be stored and reused for multiple aggregations. This is quite handy, since
 the creation of the grouped pairs is the most expensive operation while doing
 group-by and there is no need to repeat it if you are planning to do multiple
 operations with the same group condition.
 
-To create a `GroupBy` object you only need to use the `group-by` command
+To create a `GroupBy` object you only need to use the [`group-by`](/commands/docs/group-by.md) command
 
 ```shell
 > let group = ($df | group-by first)
@@ -794,7 +794,7 @@ and this new mask can be used to filter the dataframe
 ```
 
 Another operation that can be done with masks is setting or replacing a value
-from a series. For example, we can change the value in the column `first` where
+from a series. For example, we can change the value in the column [`first`](/commands/docs/first.md) where
 the value is equal to `a`
 
 ```shell
@@ -836,9 +836,9 @@ extract that information
 ───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────
 ```
 
-The command `take` is very handy, especially if we mix it with other commands.
+The command [`take`](/commands/docs/take.md) is very handy, especially if we mix it with other commands.
 Let's say that we want to extract all rows for the first duplicated element for
-column `first`. In order to do that, we can use the command `arg-unique` as
+column [`first`](/commands/docs/first.md). In order to do that, we can use the command `arg-unique` as
 shown in the next example
 
 ```shell
@@ -859,7 +859,7 @@ We can use the `arg-sort` to accomplish that. In the next example we
 can sort the dataframe by the column `word`
 
 ::: tip
-The same result could be accomplished using the command `sort`
+The same result could be accomplished using the command [`sort`](/commands/docs/sort.md)
 :::
 
 ```shell
@@ -914,7 +914,7 @@ these operations.
 The first and most common operation that we have is `value_counts`. This
 command calculates a count of the unique values that exist in a Series. For
 example, we can use it to count how many occurrences we have in the column
-`first`
+[`first`](/commands/docs/first.md)
 
 ```shell
 > $df.first | value-counts

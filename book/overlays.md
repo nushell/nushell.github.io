@@ -50,7 +50,7 @@ baz
 ───┴──────
 ```
 
-It brought the module's definitions into the current scope and evaluated the `export-env` block the same way as `use` command would (see [Modules](modules.md#environment-variables) chapter).
+It brought the module's definitions into the current scope and evaluated the [`export-env`](/commands/docs/export-env.md) block the same way as [`use`](/commands/docs/use.md) command would (see [Modules](modules.md#environment-variables) chapter).
 
 ::: tip
 In the following sections, the `>` prompt will be preceded by the name of the last active overlay.
@@ -150,7 +150,7 @@ To make it less verbose, you can use the [`overlay new`](/commands/docs/overlay_
 
 ## Prefixed Overlays
 
-The `overlay use` command would take all commands and aliases from the module and put them directly into the current namespace.
+The [`overlay use`](/commands/docs/overlay_use.md) command would take all commands and aliases from the module and put them directly into the current namespace.
 However, you might want to keep them as subcommands behind the module's name.
 That's what `--prefix` is for:
 
@@ -226,7 +226,7 @@ foo
 
 The overlays are arranged as a stack.
 If multiple overlays contain the same definition, say `foo`, the one from the last active one would take precedence.
-To bring an overlay to the top of the stack, you can call `overlay use` again:
+To bring an overlay to the top of the stack, you can call [`overlay use`](/commands/docs/overlay_use.md) again:
 
 ```
 (zero)> def foo [] { "foo-in-zero" }

@@ -390,7 +390,7 @@ config {
 
 Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/prompt/oh-my.nu).
 
-## `LS_COLORS` colors for the `ls` command
+## `LS_COLORS` colors for the [`ls`](/commands/docs/ls.md) command
 
 Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the color of file types when you do a [`ls`](/commands/docs/ls.md). For instance, you can make directories one color, _.md markdown files another color, _.toml files yet another color, etc. There are a variety of ways to color your file types.
 

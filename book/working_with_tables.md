@@ -76,7 +76,7 @@ This helps to create a table that's more focused on what we need. Next, let's sa
 
 You'll notice we first sort the table by size to get to the smallest file, and then we use the `first 5` to return the first 5 rows of the table.
 
-You can also `skip` rows that you don't want. Let's skip the first two of the 5 rows we returned above:
+You can also [`skip`](/commands/docs/skip.md) rows that you don't want. Let's skip the first two of the 5 rows we returned above:
 
 ```
 > ls | sort-by size | first 5 | skip 2
@@ -91,7 +91,7 @@ You can also `skip` rows that you don't want. Let's skip the first two of the 5 
 
 We've narrowed it to three rows we care about.
 
-Let's look at a few other commands for selecting data. You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row. Let's sort our table by the file name and then pick one of the rows with the `select` command using its row number:
+Let's look at a few other commands for selecting data. You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row. Let's sort our table by the file name and then pick one of the rows with the [`select`](/commands/docs/select.md) command using its row number:
 
 ```
 > ls | sort-by name
@@ -301,7 +301,7 @@ You can also use the [`upsert`](/commands/docs/upsert.md) command to insert or u
 
 ### Moving columns
 
-You can use `move` to move columns in the table. For example, if we wanted to move the "name" column from `ls` after the "size" column, we could do:
+You can use [`move`](/commands/docs/move.md) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls.md) after the "size" column, we could do:
 
 ```
 > ls | move name --after size
@@ -318,7 +318,7 @@ You can use `move` to move columns in the table. For example, if we wanted to mo
 
 ### Renaming columns
 
-You can also `rename` columns in a table by passing it through the rename command. If we wanted to run `ls` and rename the columns, we can use this example:
+You can also [`rename`](/commands/docs/rename.md) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls.md) and rename the columns, we can use this example:
 
 ```
 > ls | rename filename filetype filesize date

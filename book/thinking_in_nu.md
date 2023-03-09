@@ -40,7 +40,7 @@ source "output.nu"
 abc
 ```
 
-The `source` command will grow the source that is compiled, but the `save` from the earlier line won't have had a chance to run. Nushell runs the whole block as if it were a single file, rather than running one line at a time. In the example, since the output.nu file is not created until after the 'compilation' step, the `source` command is unable to read definitions from it during parse time.
+The [`source`](/commands/docs/source.md) command will grow the source that is compiled, but the [`save`](/commands/docs/save.md) from the earlier line won't have had a chance to run. Nushell runs the whole block as if it were a single file, rather than running one line at a time. In the example, since the output.nu file is not created until after the 'compilation' step, the [`source`](/commands/docs/source.md) command is unable to read definitions from it during parse time.
 
 Another common issue is trying to dynamically create the filename to source from:
 
@@ -103,7 +103,7 @@ In practice, this lets you write some concise code for working with subdirectori
 }
 ```
 
-The `cd` command changes the `PWD` environment variables, and this variable change does not escape the block, allowing each iteration to start from the current directory and enter the next subdirectory.
+The [`cd`](/commands/docs/cd.md) command changes the `PWD` environment variables, and this variable change does not escape the block, allowing each iteration to start from the current directory and enter the next subdirectory.
 
 Having the environment scoped like this makes commands more predictable, easier to read, and when the time comes, easier to debug. Nushell also provides helper commands like [`def-env`](/commands/docs/def-env.md), [`load-env`](/commands/docs/load-env.md), as convenient ways of doing batches of updates to the environment.
 

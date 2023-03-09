@@ -55,7 +55,7 @@ _Note: It's common practice in Nushell to separate the words of the command with
 
 ## Sub-commands
 
-You can also define subcommands to commands using a space. For example, if we wanted to add a new subcommand to `str`, we can create it by naming our subcommand to start with "str ". For example:
+You can also define subcommands to commands using a space. For example, if we wanted to add a new subcommand to [`str`](/commands/docs/str.md), we can create it by naming our subcommand to start with "str ". For example:
 
 ```nushell
 def "str mycommand" [] {
@@ -63,7 +63,7 @@ def "str mycommand" [] {
 }
 ```
 
-Now we can call our custom command as if it were a built-in subcommand of `str`:
+Now we can call our custom command as if it were a built-in subcommand of [`str`](/commands/docs/str.md):
 
 ```
 > str mycommand
@@ -309,7 +309,7 @@ greet earth mars jupiter venus
 ```
 
 ::: tip
-Each line of a command has its resulting value printed out when run, as long as it isn't `null`. Hence, `"hello all:"` above will be printed out despite not being the return value. To prevent this, you can place `null` (or the `ignore` command) at the end of the pipeline, like so: `"hello all:" | null`. Also note that most file system commands, such as `save` or `cd`, always output `null`.
+Each line of a command has its resulting value printed out when run, as long as it isn't `null`. Hence, `"hello all:"` above will be printed out despite not being the return value. To prevent this, you can place `null` (or the [`ignore`](/commands/docs/ignore.md) command) at the end of the pipeline, like so: `"hello all:" | null`. Also note that most file system commands, such as [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md), always output `null`.
 :::
 
 We could call the above definition of the `greet` command with any number of arguments, including none at all. All of the arguments are collected into `$name` as a list.
@@ -373,7 +373,7 @@ def greet [
 }
 ```
 
-The comments that we put on the definition and its parameters then appear as descriptions inside the `help` of the command.
+The comments that we put on the definition and its parameters then appear as descriptions inside the [`help`](/commands/docs/help.md) of the command.
 
 Now, if we run `help greet`, we're given a more helpful help text:
 
