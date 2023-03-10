@@ -1,6 +1,6 @@
 # Externs
 
-Calling external commands is a fundamental part of using Nushell as a shell (and often using Nushell as a language). There's a problem, though, commands outside of Nushell means that Nushell can't help with finding errors in the call, or completions, or syntax highlighting.
+Calling external commands is a fundamental part of using Nushell as a shell (and often using Nushell as a language). There's a problem, though: Nushell can't help with finding errors in the call, completions, or syntax highlighting with external commands.
 
 This is where `extern` comes in. The `extern` keyword allows you to write a full signature for the command that lives outside of Nushell so that you get all the benefits above. If you take a look at the default config, you'll notice that there are a few extern calls in there. Here's one of them:
 
