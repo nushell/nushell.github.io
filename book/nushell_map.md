@@ -27,7 +27,7 @@ Note: this table assumes Nu 0.43 or later.
 | group-by               | group by                      | GroupBy, group                                       | Group-Object, group                        |                                                 |
 | help                   | sp_help                       |                                                      | Get-Help, help, man                        | man                                             |
 | history                |                               |                                                      | Get-History, history                       | history                                         |
-| is_empty               | is null                       | String.InNullOrEmpty                                 | String.InNullOrEmpty                       |                                                 |
+| is-empty               | is null                       | String.InNullOrEmpty                                 | String.InNullOrEmpty                       |                                                 |
 | kill                   |                               |                                                      | Stop-Process, kill                         | kill                                            |
 | last                   |                               | Last, LastOrDefault                                  | Select-Object -Last                        | tail                                            |
 | length                 | count                         | Count                                                | Measure-Object, measure                    | wc                                              |
@@ -69,6 +69,6 @@ Note: this table assumes Nu 0.43 or later.
 | uniq                   | distinct                      | Distinct                                             | Get-Unique, gu                             | uniq                                            |
 | upsert                 | As                            |                                                      |                                            |                                                 |
 | version                | select @@version              |                                                      | $PSVersionTable                            |                                                 |
-| with_env               |                               |                                                      | $env:FOO = 'bar'                           | export foo = "bar"                              |
+| with-env               |                               |                                                      | $env:FOO = 'bar'                           | export foo = "bar"                              |
 | where                  | where                         | Where                                                | Where-Object, where, "?" operator          |                                                 |
 | which                  |                               |                                                      |                                            | which                                           |
