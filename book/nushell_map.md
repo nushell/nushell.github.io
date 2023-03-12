@@ -69,6 +69,6 @@ Note: this table assumes Nu 0.43 or later.
 | uniq                   | distinct                      | Distinct                                             | Get-Unique, gu                             | uniq                                            |
 | upsert                 | As                            |                                                      |                                            |                                                 |
 | version                | select @@version              |                                                      | $PSVersionTable                            |                                                 |
-| with_env               |                               |                                                      | $env:FOO = 'bar'                           | export foo = "bar"                              |
+| with-env               |                               |                                                      | $env:FOO = 'bar'                           | export foo = "bar"                              |
 | where                  | where                         | Where                                                | Where-Object, where, "?" operator          |                                                 |
 | which                  |                               |                                                      |                                            | which                                           |
