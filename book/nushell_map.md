@@ -27,7 +27,7 @@ Note: this table assumes Nu 0.43 or later.
 | group-by               | group by                      | GroupBy, group                                       | Group-Object, group                        |                                                 |
 | help                   | sp_help                       |                                                      | Get-Help, help, man                        | man                                             |
 | history                |                               |                                                      | Get-History, history                       | history                                         |
-| is_empty               | is null                       | String.InNullOrEmpty                                 | String.InNullOrEmpty                       |                                                 |
+| is-empty               | is null                       | String.InNullOrEmpty                                 | String.InNullOrEmpty                       |                                                 |
 | kill                   |                               |                                                      | Stop-Process, kill                         | kill                                            |
 | last                   |                               | Last, LastOrDefault                                  | Select-Object -Last                        | tail                                            |
 | length                 | count                         | Count                                                | Measure-Object, measure                    | wc                                              |
