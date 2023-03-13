@@ -6,7 +6,7 @@ The first thing you'll notice when you run a command like [`ls`](/commands/docs/
 
 @[code](@snippets/introduction/ls_example.sh)
 
-The table is more than just showing the directory in a different way. Just like tables in a spreadsheet, this table allows us to work with the data more interactively.
+The table does more than show the directory in a different way. Just like tables in a spreadsheet, this table allows us to work with the data more interactively.
 
 The first thing we'll do is to sort our table by size. To do this, we'll take the output from [`ls`](/commands/docs/ls.md) and feed it into a command that can sort tables based on the contents of a column.
 
@@ -14,7 +14,7 @@ The first thing we'll do is to sort our table by size. To do this, we'll take th
 
 You can see that to make this work we didn't pass commandline arguments to [`ls`](/commands/docs/ls.md). Instead, we used the [`sort-by`](/commands/docs/sort-by.md) command that Nu provides to do the sorting of the output of the [`ls`](/commands/docs/ls.md) command. To see the biggest files on top, we also used [`reverse`](/commands/docs/reverse.md).
 
-Nu provides many commands that can work on tables. For example, we could filter the contents of the [`ls`](/commands/docs/ls.md) table so that it only shows files over 1 kilobyte:
+Nu provides many commands that can work on tables. For example, we could use [`where`](/commands/docs/where.md) to filter the contents of the [`ls`](/commands/docs/ls.md) table so that it only shows files over 1 kilobyte:
 
 @[code](@snippets/introduction/ls_where_example.sh)
 
