@@ -1,5 +1,5 @@
 let-env config = {
   ...
-  show-banner: false,
+  show_banner: false,
   ...
 }
