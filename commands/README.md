@@ -1,9 +1,8 @@
 # Command Reference
 
-Nushell provides commands for a variety of use cases.
-You can find the included categories in the sidebar.
+If you're new to Nushell, [the quick tour](/book/quick_tour.md) can show you the most important commands. You don't need to know them all!
 
-To see all commands in Nushell, run [`help commands`](/commands/docs/help.md).
+To see all commands from inside Nushell, run [`help commands`](/commands/docs/help.md).
 
 <script>
   import pages from '@temp/pages'
