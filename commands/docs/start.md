@@ -4,9 +4,9 @@ categories: |
   filesystem
 version: 0.76.0
 filesystem: |
-  Open a folder,file or website in the default application or viewer.
+  Open a folder, file or website in the default application or viewer.
 usage: |
-  Open a folder,file or website in the default application or viewer.
+  Open a folder, file or website in the default application or viewer.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filesystem
