@@ -2,11 +2,11 @@
 title: export extern
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Define an extern and export it from a module
+  Define an extern and export it from a module.
 usage: |
-  Define an extern and export it from a module
+  Define an extern and export it from a module.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -30,4 +30,5 @@ This command is a parser keyword. For details, check:
 Export the signature for an external command
 ```shell
 > export extern echo [text: string]
+
 ```

@@ -2,11 +2,11 @@
 title: into decimal
 categories: |
   default
-version: 0.76.0
+version: 0.77.0
 default: |
-  Convert text into a decimal
+  Convert text into a decimal.
 usage: |
-  Convert text into a decimal
+  Convert text into a decimal.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default
@@ -26,19 +26,28 @@ usage: |
 Convert string to decimal in table
 ```shell
 > [[num]; ['5.01']] | into decimal num
+╭───┬────────╮
+│ # │  num   │
+├───┼────────┤
+│ 0 │ 5.0100 │
+╰───┴────────╯
+
 ```
 
 Convert string to decimal
 ```shell
 > '1.345' | into decimal
+1.345
 ```
 
 Convert decimal to decimal
 ```shell
 > '-5.9' | into decimal
+-5.9
 ```
 
 Convert boolean to decimal
 ```shell
 > true | into decimal
+1
 ```

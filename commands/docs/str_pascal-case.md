@@ -2,11 +2,11 @@
 title: str pascal-case
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Convert a string to PascalCase
+  Convert a string to PascalCase.
 usage: |
-  Convert a string to PascalCase
+  Convert a string to PascalCase.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -26,19 +26,28 @@ usage: |
 convert a string to PascalCase
 ```shell
 > 'nu-shell' | str pascal-case
+NuShell
 ```
 
 convert a string to PascalCase
 ```shell
 > 'this-is-the-first-case' | str pascal-case
+ThisIsTheFirstCase
 ```
 
 convert a string to PascalCase
 ```shell
 > 'this_is_the_second_case' | str pascal-case
+ThisIsTheSecondCase
 ```
 
 convert a column from a table to PascalCase
 ```shell
 > [[lang, gems]; [nu_test, 100]] | str pascal-case lang
+╭───┬────────┬──────╮
+│ # │  lang  │ gems │
+├───┼────────┼──────┤
+│ 0 │ NuTest │  100 │
+╰───┴────────┴──────╯
+
 ```

@@ -3,7 +3,7 @@ title: dfr min
 categories: |
   expression
   lazyframe
-version: 0.76.0
+version: 0.77.0
 expression: |
   Creates a min expression
 lazyframe: |
@@ -29,6 +29,13 @@ Min aggregation for a group-by
     | dfr into-df
     | dfr group-by a
     | dfr agg (dfr col b | dfr min)
+╭───┬─────┬───╮
+│ # │  a  │ b │
+├───┼─────┼───┤
+│ 0 │ one │ 2 │
+│ 1 │ two │ 1 │
+╰───┴─────┴───╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -44,4 +51,10 @@ Min aggregation for a group-by
 Min value from columns in a dataframe
 ```shell
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr min
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 1 │
+╰───┴───┴───╯
+
 ```

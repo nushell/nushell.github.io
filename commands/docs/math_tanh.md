@@ -2,7 +2,7 @@
 title: math tanh
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
   Returns the hyperbolic tangent of the number.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Apply the hyperbolic tangent to 10*π
 ```shell
 > (math pi) * 10 | math tanh
+1
 ```

@@ -2,11 +2,11 @@
 title: dfr collect
 categories: |
   lazyframe
-version: 0.76.0
+version: 0.77.0
 lazyframe: |
-  Collect lazy dataframe into eager dataframe
+  Collect lazy dataframe into eager dataframe.
 usage: |
-  Collect lazy dataframe into eager dataframe
+  Collect lazy dataframe into eager dataframe.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -22,4 +22,11 @@ usage: |
 drop duplicates
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-lazy | dfr collect
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
+
 ```

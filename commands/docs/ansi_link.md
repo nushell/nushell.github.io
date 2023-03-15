@@ -2,11 +2,11 @@
 title: ansi link
 categories: |
   platform
-version: 0.76.0
+version: 0.77.0
 platform: |
-  Add a link (using OSC 8 escape sequence) to the given string
+  Add a link (using OSC 8 escape sequence) to the given string.
 usage: |
-  Add a link (using OSC 8 escape sequence) to the given string
+  Add a link (using OSC 8 escape sequence) to the given string.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform
@@ -28,14 +28,17 @@ usage: |
 Create a link to open some file
 ```shell
 > 'file:///file.txt' | ansi link --text 'Open Me!'
+Open Me!
 ```
 
 Create a link without text
 ```shell
 > 'https://www.nushell.sh/' | ansi link
+https://www.nushell.sh/
 ```
 
 Format a table column into links
 ```shell
 > [[url text]; [https://example.com Text]] | ansi link url
+
 ```

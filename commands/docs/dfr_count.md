@@ -2,7 +2,7 @@
 title: dfr count
 categories: |
   expression
-version: 0.76.0
+version: 0.77.0
 expression: |
   creates a count expression
 usage: |
@@ -22,4 +22,5 @@ usage: |
 
 ```shell
 >
+
 ```

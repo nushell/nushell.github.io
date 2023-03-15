@@ -2,7 +2,7 @@
 title: collect
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Collect the stream and pass it to a block.
 usage: |
@@ -27,4 +27,5 @@ usage: |
 Use the second value in the stream
 ```shell
 > [1 2 3] | collect { |x| $x.1 }
+2
 ```

@@ -2,11 +2,11 @@
 title: dfr count-null
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Counts null values
+  Counts null values.
 usage: |
-  Counts null values
+  Counts null values.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -23,4 +23,10 @@ Counts null values
 ```shell
 > let s = ([1 1 0 0 3 3 4] | dfr into-df);
     ($s / $s) | dfr count-null
+╭───┬────────────╮
+│ # │ count_null │
+├───┼────────────┤
+│ 0 │          2 │
+╰───┴────────────╯
+
 ```

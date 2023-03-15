@@ -2,11 +2,11 @@
 title: dfr agg
 categories: |
   lazyframe
-version: 0.76.0
+version: 0.77.0
 lazyframe: |
-  Performs a series of aggregations from a group-by
+  Performs a series of aggregations from a group-by.
 usage: |
-  Performs a series of aggregations from a group-by
+  Performs a series of aggregations from a group-by.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -29,6 +29,13 @@ Group by and perform an aggregation
         (dfr col b | dfr max | dfr as "b_max")
         (dfr col b | dfr sum | dfr as "b_sum")
      ]
+╭───┬───┬───────┬───────┬───────╮
+│ # │ a │ b_min │ b_max │ b_sum │
+├───┼───┼───────┼───────┼───────┤
+│ 0 │ 1 │     2 │     4 │     6 │
+│ 1 │ 2 │     4 │     6 │    10 │
+╰───┴───┴───────┴───────┴───────╯
+
 ```
 
 Group by and perform an aggregation
@@ -42,4 +49,11 @@ Group by and perform an aggregation
         (dfr col b | dfr sum | dfr as "b_sum")
      ]
     | dfr collect
+╭───┬───┬───────┬───────┬───────╮
+│ # │ a │ b_min │ b_max │ b_sum │
+├───┼───┼───────┼───────┼───────┤
+│ 0 │ 1 │     2 │     4 │     6 │
+│ 1 │ 2 │     4 │     6 │    10 │
+╰───┴───┴───────┴───────┴───────╯
+
 ```

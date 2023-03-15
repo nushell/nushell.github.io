@@ -2,7 +2,7 @@
 title: help modules
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Show help on nushell modules.
 usage: |
@@ -31,14 +31,17 @@ are also available in the current scope. Commands/aliases that were imported und
 show all modules
 ```shell
 > help modules
+
 ```
 
 show help for single module
 ```shell
 > help modules my-module
+
 ```
 
 search for string in module names and usages
 ```shell
 > help modules --find my-module
+
 ```

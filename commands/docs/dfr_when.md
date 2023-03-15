@@ -2,11 +2,11 @@
 title: dfr when
 categories: |
   expression
-version: 0.76.0
+version: 0.77.0
 expression: |
-  Creates and modifies a when expression
+  Creates and modifies a when expression.
 usage: |
-  Creates and modifies a when expression
+  Creates and modifies a when expression.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for expression
@@ -22,11 +22,13 @@ usage: |
 Create a when conditions
 ```shell
 > dfr when ((dfr col a) > 2) 4
+
 ```
 
 Create a when conditions
 ```shell
 > dfr when ((dfr col a) > 2) 4 | dfr when ((dfr col a) < 0) 6
+
 ```
 
 Create a new column for the dataframe
@@ -40,4 +42,12 @@ Create a new column for the dataframe
     dfr when ((dfr col a) > 5) 10 | dfr when ((dfr col a) < 2) 6 | dfr otherwise 0 | dfr as d
      )
    | dfr collect
+╭───┬───┬───┬───┬────╮
+│ # │ a │ b │ c │ d  │
+├───┼───┼───┼───┼────┤
+│ 0 │ 6 │ 2 │ 4 │ 10 │
+│ 1 │ 1 │ 4 │ 5 │  6 │
+│ 2 │ 4 │ 1 │ 4 │  0 │
+╰───┴───┴───┴───┴────╯
+
 ```

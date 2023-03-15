@@ -2,11 +2,11 @@
 title: to toml
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
-  Convert record into .toml text
+  Convert record into .toml text.
 usage: |
-  Convert record into .toml text
+  Convert record into .toml text.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -22,4 +22,7 @@ usage: |
 Outputs an TOML string representing the contents of this record
 ```shell
 > {foo: 1 bar: 'qwe'} | to toml
+bar = "qwe"
+foo = 1
+
 ```

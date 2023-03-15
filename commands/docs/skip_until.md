@@ -2,7 +2,7 @@
 title: skip until
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Skip elements of the input until a predicate is true.
 usage: |
@@ -26,14 +26,31 @@ usage: |
 Skip until the element is positive
 ```shell
 > [-2 0 2 -1] | skip until {|x| $x > 0 }
+╭───┬────╮
+│ 0 │  2 │
+│ 1 │ -1 │
+╰───┴────╯
+
 ```
 
 Skip until the element is positive using stored condition
 ```shell
 > let cond = {|x| $x > 0 }; [-2 0 2 -1] | skip until $cond
+╭───┬────╮
+│ 0 │  2 │
+│ 1 │ -1 │
+╰───┴────╯
+
 ```
 
 Skip until the field value is positive
 ```shell
 > [{a: -2} {a: 0} {a: 2} {a: -1}] | skip until {|x| $x.a > 0 }
+╭───┬────╮
+│ # │ a  │
+├───┼────┤
+│ 0 │  2 │
+│ 1 │ -1 │
+╰───┴────╯
+
 ```

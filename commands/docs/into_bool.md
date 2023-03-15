@@ -2,11 +2,11 @@
 title: into bool
 categories: |
   conversions
-version: 0.76.0
+version: 0.77.0
 conversions: |
-  Convert value to boolean
+  Convert value to boolean.
 usage: |
-  Convert value to boolean
+  Convert value to boolean.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions
@@ -26,29 +26,44 @@ usage: |
 Convert value to boolean in table
 ```shell
 > [[value]; ['false'] ['1'] [0] [1.0] [true]] | into bool value
+╭───┬───────╮
+│ # │ value │
+├───┼───────┤
+│ 0 │ false │
+│ 1 │ true  │
+│ 2 │ false │
+│ 3 │ true  │
+│ 4 │ true  │
+╰───┴───────╯
+
 ```
 
 Convert bool to boolean
 ```shell
 > true | into bool
+true
 ```
 
 convert integer to boolean
 ```shell
 > 1 | into bool
+true
 ```
 
 convert decimal to boolean
 ```shell
 > 0.3 | into bool
+true
 ```
 
 convert decimal string to boolean
 ```shell
 > '0.0' | into bool
+false
 ```
 
 convert string to boolean
 ```shell
 > 'true' | into bool
+true
 ```

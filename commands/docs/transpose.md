@@ -2,7 +2,7 @@
 title: transpose
 categories: |
   default
-version: 0.76.0
+version: 0.77.0
 default: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |
@@ -31,19 +31,44 @@ usage: |
 Transposes the table contents with default column names
 ```shell
 > [[c1 c2]; [1 2]] | transpose
+╭───┬─────────┬─────────╮
+│ # │ column0 │ column1 │
+├───┼─────────┼─────────┤
+│ 0 │ c1      │       1 │
+│ 1 │ c2      │       2 │
+╰───┴─────────┴─────────╯
+
 ```
 
 Transposes the table contents with specified column names
 ```shell
 > [[c1 c2]; [1 2]] | transpose key val
+╭───┬─────┬─────╮
+│ # │ key │ val │
+├───┼─────┼─────┤
+│ 0 │ c1  │   1 │
+│ 1 │ c2  │   2 │
+╰───┴─────┴─────╯
+
 ```
 
 Transposes the table without column names and specify a new column name
 ```shell
 > [[c1 c2]; [1 2]] | transpose -i val
+╭───┬─────╮
+│ # │ val │
+├───┼─────┤
+│ 0 │   1 │
+│ 1 │   2 │
+╰───┴─────╯
+
 ```
 
 Transfer back to record with -d flag
 ```shell
 > {c1: 1, c2: 2} | transpose | transpose -i -r -d
+╭────┬───╮
+│ c1 │ 1 │
+│ c2 │ 2 │
+╰────┴───╯
 ```

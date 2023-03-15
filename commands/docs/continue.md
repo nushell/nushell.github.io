@@ -2,11 +2,11 @@
 title: continue
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Continue a loop from the next iteration
+  Continue a loop from the next iteration.
 usage: |
-  Continue a loop from the next iteration
+  Continue a loop from the next iteration.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -25,4 +25,5 @@ This command is a parser keyword. For details, check:
 Continue a loop from the next iteration
 ```shell
 > for i in 1..10 { if $i == 5 { continue }; print $i }
+
 ```

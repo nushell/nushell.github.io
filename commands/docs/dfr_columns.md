@@ -2,11 +2,11 @@
 title: dfr columns
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Show dataframe columns
+  Show dataframe columns.
 usage: |
-  Show dataframe columns
+  Show dataframe columns.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,4 +22,9 @@ usage: |
 Dataframe columns
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr columns
+╭───┬───╮
+│ 0 │ a │
+│ 1 │ b │
+╰───┴───╯
+
 ```

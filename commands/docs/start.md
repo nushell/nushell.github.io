@@ -2,7 +2,7 @@
 title: start
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   Open a folder,file or website in the default application or viewer.
 usage: |
@@ -26,24 +26,29 @@ usage: |
 Open a text file with the default text editor
 ```shell
 > start file.txt
+
 ```
 
 Open an image with the default image viewer
 ```shell
 > start file.jpg
+
 ```
 
 Open the current directory with the default file manager
 ```shell
 > start .
+
 ```
 
 Open a pdf with the default pdf viewer
 ```shell
 > start file.pdf
+
 ```
 
 Open a website with default browser
 ```shell
 > start https://www.nushell.sh
+
 ```

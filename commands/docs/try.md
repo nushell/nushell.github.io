@@ -2,11 +2,11 @@
 title: try
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Try to run a block, if it fails optionally run a catch block
+  Try to run a block, if it fails optionally run a catch block.
 usage: |
-  Try to run a block, if it fails optionally run a catch block
+  Try to run a block, if it fails optionally run a catch block.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -30,9 +30,11 @@ This command is a parser keyword. For details, check:
 Try to run a missing command
 ```shell
 > try { asdfasdf }
+
 ```
 
 Try to run a missing command
 ```shell
 > try { asdfasdf } catch { echo 'missing' }
+missing
 ```

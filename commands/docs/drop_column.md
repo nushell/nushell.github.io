@@ -2,11 +2,11 @@
 title: drop column
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
-  Remove N columns at the right-hand end of the input table. To remove columns by name, use 'reject'.
+  Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.
 usage: |
-  Remove N columns at the right-hand end of the input table. To remove columns by name, use 'reject'.
+  Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -26,4 +26,11 @@ usage: |
 Remove the last column of a table
 ```shell
 > [[lib, extension]; [nu-lib, rs] [nu-core, rb]] | drop column
+╭───┬─────────╮
+│ # │   lib   │
+├───┼─────────┤
+│ 0 │ nu-lib  │
+│ 1 │ nu-core │
+╰───┴─────────╯
+
 ```

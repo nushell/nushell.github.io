@@ -2,11 +2,11 @@
 title: roll left
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
-  Roll record or table columns left
+  Roll record or table columns left.
 usage: |
-  Roll record or table columns left
+  Roll record or table columns left.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -27,14 +27,33 @@ usage: |
 Rolls columns of a record to the left
 ```shell
 > {a:1 b:2 c:3} | roll left
+╭───┬───╮
+│ b │ 2 │
+│ c │ 3 │
+│ a │ 1 │
+╰───┴───╯
 ```
 
 Rolls columns of a table to the left
 ```shell
 > [[a b c]; [1 2 3] [4 5 6]] | roll left
+╭───┬───┬───┬───╮
+│ # │ b │ c │ a │
+├───┼───┼───┼───┤
+│ 0 │ 2 │ 3 │ 1 │
+│ 1 │ 5 │ 6 │ 4 │
+╰───┴───┴───┴───╯
+
 ```
 
 Rolls columns to the left without changing column names
 ```shell
 > [[a b c]; [1 2 3] [4 5 6]] | roll left --cells-only
+╭───┬───┬───┬───╮
+│ # │ a │ b │ c │
+├───┼───┼───┼───┤
+│ 0 │ 2 │ 3 │ 1 │
+│ 1 │ 5 │ 6 │ 4 │
+╰───┴───┴───┴───╯
+
 ```

@@ -2,11 +2,11 @@
 title: dfr drop
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Creates a new dataframe by dropping the selected columns
+  Creates a new dataframe by dropping the selected columns.
 usage: |
-  Creates a new dataframe by dropping the selected columns
+  Creates a new dataframe by dropping the selected columns.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,4 +22,11 @@ usage: |
 drop column a
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr drop a
+╭───┬───╮
+│ # │ b │
+├───┼───┤
+│ 0 │ 2 │
+│ 1 │ 4 │
+╰───┴───╯
+
 ```

@@ -2,7 +2,7 @@
 title: dfr as-datetime
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -35,4 +35,11 @@ Format example:
 Converts string to datetime
 ```shell
 > ["2021-12-30 00:00:00" "2021-12-31 00:00:00"] | dfr into-df | dfr as-datetime "%Y-%m-%d %H:%M:%S"
+╭───┬────────────╮
+│ # │  datetime  │
+├───┼────────────┤
+│ 0 │ a year ago │
+│ 1 │ a year ago │
+╰───┴────────────╯
+
 ```

@@ -2,7 +2,7 @@
 title: prepend
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Prepend any number of rows to a table.
 usage: |
@@ -31,14 +31,40 @@ only unwrap the outer list, and leave the variable's contents untouched.
 Prepend one Int item
 ```shell
 > [1,2,3,4] | prepend 0
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+│ 3 │ 3 │
+│ 4 │ 4 │
+╰───┴───╯
+
 ```
 
 Prepend two Int items
 ```shell
 > [2,3,4] | prepend [0,1]
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+│ 3 │ 3 │
+│ 4 │ 4 │
+╰───┴───╯
+
 ```
 
 Prepend Ints and Strings
 ```shell
 > [2,nu,4,shell] | prepend [0,1,rocks]
+╭───┬───────╮
+│ 0 │     0 │
+│ 1 │     1 │
+│ 2 │ rocks │
+│ 3 │     2 │
+│ 4 │ nu    │
+│ 5 │     4 │
+│ 6 │ shell │
+╰───┴───────╯
+
 ```

@@ -2,7 +2,7 @@
 title: ast
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |
@@ -26,14 +26,17 @@ usage: |
 Print the ast of a string
 ```shell
 > ast 'hello'
+
 ```
 
 Print the ast of a pipeline
 ```shell
 > ast 'ls | where name =~ README'
+
 ```
 
 Print the ast of a pipeline with an error
 ```shell
 > ast 'for x in 1..10 { echo $x '
+
 ```

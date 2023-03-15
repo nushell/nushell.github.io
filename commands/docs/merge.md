@@ -2,7 +2,7 @@
 title: merge
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Merge the input with a record or table, overwriting values in matching columns.
 usage: |
@@ -32,14 +32,33 @@ repeating this process with row 1, and so on.
 Add an 'index' column to the input table
 ```shell
 > [a b c] | wrap name | merge ( [1 2 3] | wrap index )
+╭───┬──────╮
+│ # │ name │
+├───┼──────┤
+│ 1 │ a    │
+│ 2 │ b    │
+│ 3 │ c    │
+╰───┴──────╯
+
 ```
 
 Merge two records
 ```shell
 > {a: 1, b: 2} | merge {c: 3}
+╭───┬───╮
+│ a │ 1 │
+│ b │ 2 │
+│ c │ 3 │
+╰───┴───╯
 ```
 
 Merge two tables, overwriting overlapping columns
 ```shell
 > [{columnA: A0 columnB: B0}] | merge [{columnA: 'A0*'}]
+╭───┬─────────┬─────────╮
+│ # │ columnA │ columnB │
+├───┼─────────┼─────────┤
+│ 0 │ A0*     │ B0      │
+╰───┴─────────┴─────────╯
+
 ```

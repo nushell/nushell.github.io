@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -27,19 +27,23 @@ usage: |
 Open a file, with structure (based on file extension or SQLite database header)
 ```shell
 > open myfile.json
+
 ```
 
 Open a file, as raw bytes
 ```shell
 > open myfile.json --raw
+
 ```
 
 Open a file, using the input to get filename
 ```shell
 > 'myfile.txt' | open
+
 ```
 
 Open a file, and decode it by the specified encoding
 ```shell
 > open myfile.txt --raw | decode utf-8
+
 ```

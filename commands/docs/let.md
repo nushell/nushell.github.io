@@ -2,7 +2,7 @@
 title: let
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Create a variable and give it a value.
 usage: |
@@ -30,14 +30,17 @@ This command is a parser keyword. For details, check:
 Set a variable to a value
 ```shell
 > let x = 10
+
 ```
 
 Set a variable to the result of an expression
 ```shell
 > let x = 10 + 100
+
 ```
 
 Set a variable based on the condition
 ```shell
 > let x = if false { -1 } else { 1 }
+
 ```

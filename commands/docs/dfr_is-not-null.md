@@ -3,13 +3,13 @@ title: dfr is-not-null
 categories: |
   dataframe
   expression
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Creates mask where value is not null
+  Creates mask where value is not null.
 expression: |
   creates a is not null expression
 usage: |
-  Creates mask where value is not null
+  Creates mask where value is not null.
   creates a is not null expression
 ---
 
@@ -28,6 +28,15 @@ Create mask where values are not null
 > let s = ([5 6 0 8] | dfr into-df);
     let res = ($s / $s);
     $res | dfr is-not-null
+╭───┬─────────────╮
+│ # │ is_not_null │
+├───┼─────────────┤
+│ 0 │ true        │
+│ 1 │ true        │
+│ 2 │ false       │
+│ 3 │ true        │
+╰───┴─────────────╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for expression
@@ -43,4 +52,5 @@ Create mask where values are not null
 Creates a is not null expression from a column
 ```shell
 > dfr col a | dfr is-not-null
+
 ```

@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -35,24 +35,51 @@ with 'transpose' first.
 Multiplies elements in the list
 ```shell
 > [1 2 3] | each {|e| 2 * $e }
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 4 │
+│ 2 │ 6 │
+╰───┴───╯
+
 ```
 
 Produce a list of values in the record, converted to string
 ```shell
 > {major:2, minor:1, patch:4} | values | each { into string }
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 1 │
+│ 2 │ 4 │
+╰───┴───╯
+
 ```
 
 Produce a list that has "two" for each 2 in the input
 ```shell
 > [1 2 3 2] | each {|e| if $e == 2 { "two" } }
+╭───┬─────╮
+│ 0 │ two │
+│ 1 │ two │
+╰───┴─────╯
+
 ```
 
 Iterate over each element, producing a list showing indexes of any 2s
 ```shell
 > [1 2 3] | enumerate | each {|e| if $e.item == 2 { $"found 2 at ($e.index)!"} }
+╭───┬───────────────╮
+│ 0 │ found 2 at 1! │
+╰───┴───────────────╯
+
 ```
 
 Iterate over each element, keeping null results
 ```shell
 > [1 2 3] | each --keep-empty {|e| if $e == 2 { "found 2!"} }
+╭───┬──────────╮
+│ 0 │          │
+│ 1 │ found 2! │
+│ 2 │          │
+╰───┴──────────╯
+
 ```

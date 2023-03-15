@@ -2,7 +2,7 @@
 title: dfr expr-not
 categories: |
   expression
-version: 0.76.0
+version: 0.77.0
 expression: |
   creates a not expression
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Creates a not expression
 ```shell
 > (dfr col a) > 2) | dfr expr-not
+
 ```

@@ -2,7 +2,7 @@
 title: sys
 categories: |
   system
-version: 0.76.0
+version: 0.77.0
 system: |
   View information about the system.
 usage: |
@@ -22,14 +22,17 @@ usage: |
 Show info about the system
 ```shell
 > sys
+
 ```
 
 Show the os system name with get
 ```shell
 > (sys).host | get name
+
 ```
 
 Show the os system name
 ```shell
 > (sys).host.name
+
 ```

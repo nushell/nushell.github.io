@@ -2,11 +2,11 @@
 title: run-external
 categories: |
   system
-version: 0.76.0
+version: 0.77.0
 system: |
-  Runs external command
+  Runs external command.
 usage: |
-  Runs external command
+  Runs external command.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for system
@@ -30,9 +30,11 @@ usage: |
 Run an external command
 ```shell
 > run-external "echo" "-n" "hello"
+
 ```
 
 Redirect stdout from an external command into the pipeline
 ```shell
 > run-external --redirect-stdout "echo" "-n" "hello" | split chars
+
 ```

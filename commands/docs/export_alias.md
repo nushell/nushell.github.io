@@ -2,11 +2,11 @@
 title: export alias
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Define an alias and export it from a module
+  Alias a command (with optional flags) to a new name and export it from a module.
 usage: |
-  Define an alias and export it from a module
+  Alias a command (with optional flags) to a new name and export it from a module.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -27,7 +27,8 @@ This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
 ## Examples
 
-export an alias of ll to ls -l, from a module
+Alias ll to ls -l and export it from a module
 ```shell
-> export alias ll = ls -l
+> module spam { export alias ll = ls -l }
+
 ```

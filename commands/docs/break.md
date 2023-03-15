@@ -2,11 +2,11 @@
 title: break
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Break a loop
+  Break a loop.
 usage: |
-  Break a loop
+  Break a loop.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -25,4 +25,5 @@ This command is a parser keyword. For details, check:
 Break out of a loop
 ```shell
 > loop { break }
+
 ```

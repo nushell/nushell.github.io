@@ -2,7 +2,7 @@
 title: values
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Given a record or table, produce a list of its columns' values.
 usage: |
@@ -24,14 +24,42 @@ This is a counterpart to `columns`, which produces a list of columns' names.
 Get the values from the record (produce a list)
 ```shell
 > { mode:normal userid:31415 } | values
+╭───┬────────╮
+│ 0 │ normal │
+│ 1 │  31415 │
+╰───┴────────╯
+
 ```
 
 Values are ordered by the column order of the record
 ```shell
 > { f:250 g:191 c:128 d:1024 e:2000 a:16 b:32 } | values
+╭───┬──────╮
+│ 0 │  250 │
+│ 1 │  191 │
+│ 2 │  128 │
+│ 3 │ 1024 │
+│ 4 │ 2000 │
+│ 5 │   16 │
+│ 6 │   32 │
+╰───┴──────╯
+
 ```
 
 Get the values from the table (produce a list of lists)
 ```shell
 > [[name meaning]; [ls list] [mv move] [cd 'change directory']] | values
+╭───┬──────────────────────────╮
+│ 0 │ ╭───┬────╮               │
+│   │ │ 0 │ ls │               │
+│   │ │ 1 │ mv │               │
+│   │ │ 2 │ cd │               │
+│   │ ╰───┴────╯               │
+│ 1 │ ╭───┬──────────────────╮ │
+│   │ │ 0 │ list             │ │
+│   │ │ 1 │ move             │ │
+│   │ │ 2 │ change directory │ │
+│   │ ╰───┴──────────────────╯ │
+╰───┴──────────────────────────╯
+
 ```

@@ -2,7 +2,7 @@
 title: math e
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
   Returns the mathematical constant e (exp(1)/'1 | math exp').
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Get the first three decimal digits of e
 ```shell
 > math e | math round --precision 3
+2.718
 ```

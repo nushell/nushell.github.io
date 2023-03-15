@@ -2,7 +2,7 @@
 title: dfr cache
 categories: |
   lazyframe
-version: 0.76.0
+version: 0.77.0
 lazyframe: |
   Caches operations in a new LazyFrame
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Caches the result into a new LazyFrame
 ```shell
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr reverse | dfr cache
+
 ```

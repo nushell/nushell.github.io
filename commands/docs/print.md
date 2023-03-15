@@ -2,11 +2,11 @@
 title: print
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Print the given values to stdout
+  Print the given values to stdout.
 usage: |
-  Print the given values to stdout
+  Print the given values to stdout.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -33,9 +33,11 @@ Since this command has no output, there is no point in piping it with other comm
 Print 'hello world'
 ```shell
 > print "hello world"
+
 ```
 
 Print the sum of 2 and 3
 ```shell
 > print (2 + 3)
+
 ```

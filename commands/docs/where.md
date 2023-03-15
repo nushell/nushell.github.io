@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Filter values based on a row condition.
 usage: |
@@ -30,34 +30,49 @@ not supported.
 Filter rows of a table according to a condition
 ```shell
 > [{a: 1} {a: 2}] | where a > 1
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 2 │
+╰───┴───╯
+
 ```
 
 Filter items of a list according to a condition
 ```shell
 > [1 2] | where {|x| $x > 1}
+╭───┬───╮
+│ 0 │ 2 │
+╰───┴───╯
+
 ```
 
 List all files in the current directory with sizes greater than 2kb
 ```shell
 > ls | where size > 2kb
+
 ```
 
 List only the files in the current directory
 ```shell
 > ls | where type == file
+
 ```
 
 List all files with names that contain "Car"
 ```shell
 > ls | where name =~ "Car"
+
 ```
 
 List all files that were modified in the last two weeks
 ```shell
 > ls | where modified >= (date now) - 2wk
+
 ```
 
 Find files whose filenames don't begin with the correct sequential number
 ```shell
 > ls | where type == file | sort-by name -n | enumerate | where {|e| $e.item.name !~ $'^($e.index + 1)' } | each { get item }
+
 ```

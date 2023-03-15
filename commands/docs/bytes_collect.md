@@ -2,11 +2,11 @@
 title: bytes collect
 categories: |
   bytes
-version: 0.76.0
+version: 0.77.0
 bytes: |
-  Concatenate multiple binary into a single binary, with an optional separator between each
+  Concatenate multiple binary into a single binary, with an optional separator between each.
 usage: |
-  Concatenate multiple binary into a single binary, with an optional separator between each
+  Concatenate multiple binary into a single binary, with an optional separator between each.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes
@@ -26,9 +26,15 @@ usage: |
 Create a byte array from input
 ```shell
 > [0x[11] 0x[13 15]] | bytes collect
+Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+00000000:   11 13 15                                             •••
+
 ```
 
 Create a byte array from input with a separator
 ```shell
 > [0x[11] 0x[33] 0x[44]] | bytes collect 0x[01]
+Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
+00000000:   11 01 33 01  44                                      ••3•D
+
 ```

@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.76.0
+version: 0.77.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -35,24 +35,34 @@ prints out the list properly.
 Render a simple list to a grid
 ```shell
 > [1 2 3 a b c] | grid
+1 │ 2 │ 3 │ a │ b │ c
+
 ```
 
 The above example is the same as:
 ```shell
 > [1 2 3 a b c] | wrap name | grid
+1 │ 2 │ 3 │ a │ b │ c
+
 ```
 
 Render a record to a grid
 ```shell
 > {name: 'foo', b: 1, c: 2} | grid
+foo
+
 ```
 
 Render a list of records to a grid
 ```shell
 > [{name: 'A', v: 1} {name: 'B', v: 2} {name: 'C', v: 3}] | grid
+A │ B │ C
+
 ```
 
 Render a table with 'name' column in it to a grid
 ```shell
 > [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid
+0.1.0 │ 0.1.1 │ 0.2.0
+
 ```

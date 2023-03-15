@@ -2,7 +2,7 @@
 title: dfr as-date
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
   Converts string to date.
 usage: |
@@ -27,4 +27,5 @@ Format example:
 Converts string to date
 ```shell
 > ["2021-12-30" "2021-12-31"] | dfr into-df | dfr as-datetime "%Y-%m-%d"
+
 ```

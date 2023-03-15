@@ -2,11 +2,11 @@
 title: dfr get-nanosecond
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Gets nanosecond from date
+  Gets nanosecond from date.
 usage: |
-  Gets nanosecond from date
+  Gets nanosecond from date.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -24,4 +24,11 @@ Returns nanosecond from a date
 > let dt = ('2020-08-04T16:39:18+00:00' | into datetime -z 'UTC');
     let df = ([$dt $dt] | dfr into-df);
     $df | dfr get-nanosecond
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 0 │
+│ 1 │ 0 │
+╰───┴───╯
+
 ```

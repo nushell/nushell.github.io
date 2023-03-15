@@ -2,11 +2,11 @@
 title: port
 categories: |
   network
-version: 0.76.0
+version: 0.77.0
 network: |
-  Get a free port from system
+  Get a free port from system.
 usage: |
-  Get a free port from system
+  Get a free port from system.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for network
@@ -27,9 +27,11 @@ usage: |
 get a free port between 3121 and 4000
 ```shell
 > port 3121 4000
+3121
 ```
 
 get a free port from system
 ```shell
 > port
+
 ```

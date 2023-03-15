@@ -2,7 +2,7 @@
 title: from xlsx
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse binary Excel(.xlsx) data and create table.
 usage: |
@@ -26,9 +26,11 @@ usage: |
 Convert binary .xlsx data to a table
 ```shell
 > open --raw test.xlsx | from xlsx
+
 ```
 
 Convert binary .xlsx data to a table, specifying the tables
 ```shell
 > open --raw test.xlsx | from xlsx -s [Spreadsheet1]
+
 ```

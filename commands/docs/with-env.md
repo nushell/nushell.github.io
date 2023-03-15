@@ -2,7 +2,7 @@
 title: with-env
 categories: |
   env
-version: 0.76.0
+version: 0.77.0
 env: |
   Runs a block with an environment variable set.
 usage: |
@@ -27,19 +27,27 @@ usage: |
 Set the MYENV environment variable
 ```shell
 > with-env [MYENV "my env value"] { $env.MYENV }
+my env value
 ```
 
 Set by primitive value list
 ```shell
 > with-env [X Y W Z] { $env.X }
+Y
 ```
 
 Set by single row table
 ```shell
 > with-env [[X W]; [Y Z]] { $env.W }
+Z
 ```
 
 Set by key-value record
 ```shell
 > with-env {X: "Y", W: "Z"} { [$env.X $env.W] }
+╭───┬───╮
+│ 0 │ Y │
+│ 1 │ Z │
+╰───┴───╯
+
 ```

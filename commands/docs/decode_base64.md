@@ -2,11 +2,11 @@
 title: decode base64
 categories: |
   hash
-version: 0.76.0
+version: 0.77.0
 hash: |
-  Base64 decode a value
+  Base64 decode a value.
 usage: |
-  Base64 decode a value
+  Base64 decode a value.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for hash
@@ -31,9 +31,13 @@ Will attempt to decode binary payload as an UTF-8 string by default. Use the `--
 Base64 decode a value and output as UTF-8 string
 ```shell
 > 'U29tZSBEYXRh' | decode base64
+Some Data
 ```
 
 Base64 decode a value and output as binary
 ```shell
 > 'U29tZSBEYXRh' | decode base64 --binary
+Length: 9 (0x9) bytes | printable whitespace ascii_other non_ascii
+00000000:   53 6f 6d 65  20 44 61 74  61                         Some Data
+
 ```

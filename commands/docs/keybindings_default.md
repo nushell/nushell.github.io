@@ -2,11 +2,11 @@
 title: keybindings default
 categories: |
   platform
-version: 0.76.0
+version: 0.77.0
 platform: |
-  List default keybindings
+  List default keybindings.
 usage: |
-  List default keybindings
+  List default keybindings.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform
@@ -22,4 +22,5 @@ usage: |
 Get list with default keybindings
 ```shell
 > keybindings default
+
 ```

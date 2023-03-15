@@ -2,11 +2,11 @@
 title: http
 categories: |
   network
-version: 0.76.0
+version: 0.77.0
 network: |
-  Various commands for working with http methods
+  Various commands for working with http methods.
 usage: |
-  Various commands for working with http methods
+  Various commands for working with http methods.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for network

@@ -2,7 +2,7 @@
 title: keybindings listen
 categories: |
   platform
-version: 0.76.0
+version: 0.77.0
 platform: |
   Get input from the user.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Type and see key event codes
 ```shell
 > keybindings listen
+
 ```

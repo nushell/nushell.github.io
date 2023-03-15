@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.76.0
+version: 0.77.0
 platform: |
   Output ANSI codes to change color.
 usage: |
@@ -74,24 +74,29 @@ Format: #
 Change color to green
 ```shell
 > ansi green
+
 ```
 
 Reset the color
 ```shell
 > ansi reset
+
 ```
 
 Use ansi to color text (rb = red bold, gb = green bold, pb = purple bold)
 ```shell
 > $'(ansi rb)Hello (ansi gb)Nu (ansi pb)World(ansi reset)'
+Hello Nu World
 ```
 
 Use ansi to color text (italic bright yellow on red 'Hello' with green bold 'Nu' and purple bold 'World')
 ```shell
 > [(ansi -e '3;93;41m') Hello (ansi reset) " " (ansi gb) Nu " " (ansi pb) World (ansi reset)] | str join
+Hello Nu World
 ```
 
 Use ansi to color text with a style (blue on red in bold)
 ```shell
 > $"(ansi -e { fg: '#0000ff' bg: '#ff0000' attr: b })Hello Nu World(ansi reset)"
+Hello Nu World
 ```

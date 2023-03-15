@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Create an error.
 usage: |
@@ -27,14 +27,16 @@ usage: |
 Create a custom error for a custom command
 ```shell
 > def foo [x] {
-      let span = (metadata $x).span;
-      error make {msg: "this is fishy", label: {text: "fish right here", start: $span.start, end: $span.end } }
+        let span = (metadata $x).span;
+        error make {msg: "this is fishy", label: {text: "fish right here", start: $span.start, end: $span.end } }
     }
+
 ```
 
 Create a simple custom error for a custom command
 ```shell
 > def foo [x] {
-      error make {msg: "this is fishy"}
+        error make {msg: "this is fishy"}
     }
+
 ```

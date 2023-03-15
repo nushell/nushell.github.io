@@ -2,7 +2,7 @@
 title: append
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Append any number of rows to a table.
 usage: |
@@ -31,14 +31,39 @@ only unwrap the outer list, and leave the variable's contents untouched.
 Append one Int item
 ```shell
 > [0,1,2,3] | append 4
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+│ 3 │ 3 │
+│ 4 │ 4 │
+╰───┴───╯
+
 ```
 
 Append three Int items
 ```shell
 > [0,1] | append [2,3,4]
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+│ 3 │ 3 │
+│ 4 │ 4 │
+╰───┴───╯
+
 ```
 
 Append Ints and Strings
 ```shell
 > [0,1] | append [2,nu,4,shell]
+╭───┬───────╮
+│ 0 │     0 │
+│ 1 │     1 │
+│ 2 │     2 │
+│ 3 │ nu    │
+│ 4 │     4 │
+│ 5 │ shell │
+╰───┴───────╯
+
 ```

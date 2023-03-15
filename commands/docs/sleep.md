@@ -2,7 +2,7 @@
 title: sleep
 categories: |
   platform
-version: 0.76.0
+version: 0.77.0
 platform: |
   Delay for a specified amount of time.
 usage: |
@@ -27,4 +27,5 @@ usage: |
 Sleep for 1sec
 ```shell
 > sleep 1sec
+
 ```

@@ -2,11 +2,11 @@
 title: random dice
 categories: |
   random
-version: 0.76.0
+version: 0.77.0
 random: |
-  Generate a random dice roll
+  Generate a random dice roll.
 usage: |
-  Generate a random dice roll
+  Generate a random dice roll.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for random
@@ -27,9 +27,11 @@ usage: |
 Roll 1 dice with 6 sides each
 ```shell
 > random dice
+
 ```
 
 Roll 10 dice with 12 sides each
 ```shell
 > random dice -d 10 -s 12
+
 ```

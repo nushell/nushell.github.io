@@ -2,7 +2,7 @@
 title: du
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Find disk usage sizes of specified items.
 usage: |
@@ -31,4 +31,5 @@ usage: |
 Disk usage of the current directory
 ```shell
 > du
+
 ```

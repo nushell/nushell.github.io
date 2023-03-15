@@ -2,7 +2,7 @@
 title: is-empty
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Check for empty values.
 usage: |
@@ -26,14 +26,17 @@ usage: |
 Check if a string is empty
 ```shell
 > '' | is-empty
+true
 ```
 
 Check if a list is empty
 ```shell
 > [] | is-empty
+true
 ```
 
 Check if more than one column are empty
 ```shell
 > [[meal size]; [arepa small] [taco '']] | is-empty meal size
+false
 ```

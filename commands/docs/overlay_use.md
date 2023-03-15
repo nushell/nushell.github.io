@@ -2,11 +2,11 @@
 title: overlay use
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Use definitions from a module as an overlay
+  Use definitions from a module as an overlay.
 usage: |
-  Use definitions from a module as an overlay
+  Use definitions from a module as an overlay.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -34,6 +34,7 @@ Create an overlay from a module
 > module spam { export def foo [] { "foo" } }
     overlay use spam
     foo
+
 ```
 
 Create an overlay from a module and rename it
@@ -41,6 +42,7 @@ Create an overlay from a module and rename it
 > module spam { export def foo [] { "foo" } }
     overlay use spam as spam_new
     foo
+
 ```
 
 Create an overlay with a prefix
@@ -48,6 +50,7 @@ Create an overlay with a prefix
 > 'export def foo { "foo" }'
     overlay use --prefix spam
     spam foo
+
 ```
 
 Create an overlay from a file
@@ -55,4 +58,5 @@ Create an overlay from a file
 > 'export-env { let-env FOO = "foo" }' | save spam.nu
     overlay use spam.nu
     $env.FOO
+
 ```

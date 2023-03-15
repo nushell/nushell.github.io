@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -26,14 +26,25 @@ usage: |
 Debug print a string
 ```shell
 > 'hello' | debug
+hello
 ```
 
 Debug print a list
 ```shell
 > ['hello'] | debug
+╭───┬───────╮
+│ 0 │ hello │
+╰───┴───────╯
+
 ```
 
 Debug print a table
 ```shell
 > [[version patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | debug
+╭───┬────────────────────────────────╮
+│ 0 │ {version: 0.1.0, patch: false} │
+│ 1 │ {version: 0.1.1, patch: true}  │
+│ 2 │ {version: 0.2.0, patch: false} │
+╰───┴────────────────────────────────╯
+
 ```

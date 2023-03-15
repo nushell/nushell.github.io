@@ -2,7 +2,7 @@
 title: explain
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
   Explain closure contents.
 usage: |
@@ -26,4 +26,5 @@ usage: |
 Explain a command within a closure
 ```shell
 > explain { ls | sort-by name type -i | get name } | table -e
+
 ```

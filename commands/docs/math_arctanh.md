@@ -2,7 +2,7 @@
 title: math arctanh
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
   Returns the inverse of the hyperbolic tangent function.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Get the arctanh of 1
 ```shell
 > 1 | math arctanh
+inf
 ```

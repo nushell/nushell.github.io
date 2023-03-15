@@ -2,7 +2,7 @@
 title: cal
 categories: |
   generators
-version: 0.76.0
+version: 0.77.0
 generators: |
   Display a calendar.
 usage: |
@@ -31,14 +31,17 @@ usage: |
 This month's calendar
 ```shell
 > cal
+
 ```
 
 The calendar for all of 2012
 ```shell
 > cal --full-year 2012
+
 ```
 
 This month's calendar with the week starting on monday
 ```shell
 > cal --week-start monday
+
 ```

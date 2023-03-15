@@ -2,11 +2,11 @@
 title: bits ror
 categories: |
   bits
-version: 0.76.0
+version: 0.77.0
 bits: |
-  Bitwise rotate right for integers
+  Bitwise rotate right for integers.
 usage: |
-  Bitwise rotate right for integers
+  Bitwise rotate right for integers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits
@@ -28,9 +28,16 @@ usage: |
 Rotate right a number with 60 bits
 ```shell
 > 17 | bits ror 60
+272
 ```
 
 Rotate right a list of numbers of one byte
 ```shell
 > [15 33 92] | bits ror 2 -n 1
+╭───┬─────╮
+│ 0 │ 195 │
+│ 1 │  72 │
+│ 2 │  23 │
+╰───┴─────╯
+
 ```

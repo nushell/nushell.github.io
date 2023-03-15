@@ -2,11 +2,11 @@
 title: dfr arg-unique
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Returns indexes for unique values
+  Returns indexes for unique values.
 usage: |
-  Returns indexes for unique values
+  Returns indexes for unique values.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,4 +22,12 @@ usage: |
 Returns indexes for unique values
 ```shell
 > [1 2 2 3 3] | dfr into-df | dfr arg-unique
+╭───┬────────────╮
+│ # │ arg_unique │
+├───┼────────────┤
+│ 0 │          0 │
+│ 1 │          1 │
+│ 2 │          3 │
+╰───┴────────────╯
+
 ```

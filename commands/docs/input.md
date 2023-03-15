@@ -2,7 +2,7 @@
 title: input
 categories: |
   platform
-version: 0.76.0
+version: 0.77.0
 platform: |
   Get input from the user.
 usage: |
@@ -28,4 +28,5 @@ usage: |
 Get input from the user, and assign to a variable
 ```shell
 > let user_input = (input)
+
 ```

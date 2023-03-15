@@ -2,11 +2,11 @@
 title: ansi strip
 categories: |
   platform
-version: 0.76.0
+version: 0.77.0
 platform: |
-  Strip ANSI escape sequences from a string
+  Strip ANSI escape sequences from a string.
 usage: |
-  Strip ANSI escape sequences from a string
+  Strip ANSI escape sequences from a string.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for platform
@@ -26,4 +26,5 @@ usage: |
 Strip ANSI escape sequences from a string
 ```shell
 > $'(ansi green)(ansi cursor_on)hello' | ansi strip
+hello
 ```

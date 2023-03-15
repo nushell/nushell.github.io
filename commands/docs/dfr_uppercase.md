@@ -2,11 +2,11 @@
 title: dfr uppercase
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Uppercase the strings in the column
+  Uppercase the strings in the column.
 usage: |
-  Uppercase the strings in the column
+  Uppercase the strings in the column.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,4 +22,12 @@ usage: |
 Modifies strings to uppercase
 ```shell
 > [Abc aBc abC] | dfr into-df | dfr uppercase
+╭───┬─────╮
+│ # │  0  │
+├───┼─────┤
+│ 0 │ ABC │
+│ 1 │ ABC │
+│ 2 │ ABC │
+╰───┴─────╯
+
 ```

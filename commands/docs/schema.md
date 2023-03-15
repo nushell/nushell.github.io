@@ -2,7 +2,7 @@
 title: schema
 categories: |
   database
-version: 0.76.0
+version: 0.77.0
 database: |
   Show the schema of a SQLite database.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Show the schema of a SQLite database
 ```shell
 > open foo.db | schema
+
 ```

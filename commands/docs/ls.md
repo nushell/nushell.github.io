@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -33,39 +33,47 @@ usage: |
 List visible files in the current directory
 ```shell
 > ls
+
 ```
 
 List visible files in a subdirectory
 ```shell
 > ls subdir
+
 ```
 
 List visible files with full path in the parent directory
 ```shell
 > ls -f ..
+
 ```
 
 List Rust files
 ```shell
 > ls *.rs
+
 ```
 
 List files and directories whose name do not contain 'bar'
 ```shell
 > ls -s | where name !~ bar
+
 ```
 
 List all dirs in your home directory
 ```shell
 > ls -a ~ | where type == dir
+
 ```
 
 List all dirs in your home directory which have not been modified in 7 days
 ```shell
 > ls -as ~ | where type == dir and modified < ((date now) - 7day)
+
 ```
 
 List given paths and show directories themselves
 ```shell
 > ['/path/to/directory' '/path/to/file'] | each { ls -D $in } | flatten
+
 ```

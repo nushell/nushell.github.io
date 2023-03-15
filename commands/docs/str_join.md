@@ -2,11 +2,11 @@
 title: str join
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Concatenate multiple strings into a single string, with an optional separator between each
+  Concatenate multiple strings into a single string, with an optional separator between each.
 usage: |
-  Concatenate multiple strings into a single string, with an optional separator between each
+  Concatenate multiple strings into a single string, with an optional separator between each.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -26,9 +26,11 @@ usage: |
 Create a string from input
 ```shell
 > ['nu', 'shell'] | str join
+nushell
 ```
 
 Create a string from input with a separator
 ```shell
 > ['nu', 'shell'] | str join '-'
+nu-shell
 ```

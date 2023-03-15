@@ -2,11 +2,11 @@
 title: overlay hide
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Hide an active overlay
+  Hide an active overlay.
 usage: |
-  Hide an active overlay
+  Hide an active overlay.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -36,6 +36,7 @@ Keep a custom command after hiding the overlay
     overlay hide spam --keep-custom
     bar
 
+
 ```
 
 Hide an overlay created from a file
@@ -43,6 +44,7 @@ Hide an overlay created from a file
 > 'export alias f = "foo"' | save spam.nu
     overlay use spam.nu
     overlay hide spam
+
 ```
 
 Hide the last activated overlay
@@ -50,6 +52,7 @@ Hide the last activated overlay
 > module spam { export-env { let-env FOO = "foo" } }
     overlay use spam
     overlay hide
+
 ```
 
 Keep the current working directory when removing an overlay
@@ -57,4 +60,5 @@ Keep the current working directory when removing an overlay
 > overlay new spam
     cd some-dir
     overlay hide --keep-env [ PWD ] spam
+
 ```

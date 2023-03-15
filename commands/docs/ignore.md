@@ -2,11 +2,11 @@
 title: ignore
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Ignore the output of the previous command in the pipeline
+  Ignore the output of the previous command in the pipeline.
 usage: |
-  Ignore the output of the previous command in the pipeline
+  Ignore the output of the previous command in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -22,4 +22,5 @@ usage: |
 Ignore the output of an echo command
 ```shell
 > echo done | ignore
+
 ```

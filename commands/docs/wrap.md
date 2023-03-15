@@ -2,7 +2,7 @@
 title: wrap
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Wrap the value into a column.
 usage: |
@@ -26,9 +26,25 @@ usage: |
 Wrap a list into a table with a given column name
 ```shell
 > [1 2 3] | wrap num
+╭───┬─────╮
+│ # │ num │
+├───┼─────┤
+│ 0 │   1 │
+│ 1 │   2 │
+│ 2 │   3 │
+╰───┴─────╯
+
 ```
 
 Wrap a range into a table with a given column name
 ```shell
 > 1..3 | wrap num
+╭───┬─────╮
+│ # │ num │
+├───┼─────┤
+│ 0 │   1 │
+│ 1 │   2 │
+│ 2 │   3 │
+╰───┴─────╯
+
 ```

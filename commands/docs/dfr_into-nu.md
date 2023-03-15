@@ -3,14 +3,14 @@ title: dfr into-nu
 categories: |
   dataframe
   expression
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Converts a section of the dataframe into nushell Table
+  Converts a section of the dataframe into nushell Table.
 expression: |
-  Convert expression into a nu value for access and exploration
+  Convert expression into a nu value for access and exploration.
 usage: |
-  Converts a section of the dataframe into nushell Table
-  Convert expression into a nu value for access and exploration
+  Converts a section of the dataframe into nushell Table.
+  Convert expression into a nu value for access and exploration.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -26,11 +26,24 @@ usage: |
 Shows head rows from dataframe
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr into-nu
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
+
 ```
 
 Shows tail rows from dataframe
 ```shell
 > [[a b]; [1 2] [5 6] [3 4]] | dfr into-df | dfr into-nu -t -n 1
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 2 │ 3 │ 4 │
+╰───┴───┴───╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for expression
@@ -46,4 +59,8 @@ Shows tail rows from dataframe
 Convert a col expression into a nushell value
 ```shell
 > dfr col a | dfr into-nu
+╭───────┬────────╮
+│ expr  │ column │
+│ value │ a      │
+╰───────┴────────╯
 ```

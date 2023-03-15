@@ -2,11 +2,11 @@
 title: view source
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
-  View a block, module, or a definition
+  View a block, module, or a definition.
 usage: |
-  View a block, module, or a definition
+  View a block, module, or a definition.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug
@@ -26,24 +26,29 @@ usage: |
 View the source of a code block
 ```shell
 > let abc = { echo 'hi' }; view source $abc
+{ echo 'hi' }
 ```
 
 View the source of a custom command
 ```shell
 > def hi [] { echo 'Hi!' }; view source hi
+{ echo 'Hi!' }
 ```
 
 View the source of a custom command, which participates in the caller environment
 ```shell
 > def-env foo [] { let-env BAR = 'BAZ' }; view source foo
+{ let-env BAR = 'BAZ' }
 ```
 
 View the source of a module
 ```shell
 > module mod-foo { export-env { let-env FOO_ENV = 'BAZ' } }; view source mod-foo
+ export-env { let-env FOO_ENV = 'BAZ' }
 ```
 
 View the source of an alias
 ```shell
 > alias hello = echo hi; view source hello
+echo hi
 ```

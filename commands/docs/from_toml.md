@@ -2,7 +2,7 @@
 title: from toml
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse text as .toml and create record.
 usage: |
@@ -22,10 +22,20 @@ usage: |
 Converts toml formatted string to record
 ```shell
 > 'a = 1' | from toml
+╭───┬───╮
+│ a │ 1 │
+╰───┴───╯
 ```
 
 Converts toml formatted string to record
 ```shell
 > 'a = 1
 b = [1, 2]' | from toml
+╭───┬───────────╮
+│ a │ 1         │
+│   │ ╭───┬───╮ │
+│ b │ │ 0 │ 1 │ │
+│   │ │ 1 │ 2 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
 ```

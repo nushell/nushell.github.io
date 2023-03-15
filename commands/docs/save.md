@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   Save a file.
 usage: |
@@ -31,24 +31,29 @@ usage: |
 Save a string to foo.txt in the current directory
 ```shell
 > 'save me' | save foo.txt
+
 ```
 
 Append a string to the end of foo.txt
 ```shell
 > 'append me' | save --append foo.txt
+
 ```
 
 Save a record to foo.json in the current directory
 ```shell
 > { a: 1, b: 2 } | save foo.json
+
 ```
 
 Save a running program's stderr to foo.txt
 ```shell
 > do -i {} | save foo.txt --stderr foo.txt
+
 ```
 
 Save a running program's stderr to separate file
 ```shell
 > do -i {} | save foo.txt --stderr bar.txt
+
 ```

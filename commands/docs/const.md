@@ -2,7 +2,7 @@
 title: const
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Create a parse-time constant.
 usage: |
@@ -30,9 +30,11 @@ This command is a parser keyword. For details, check:
 Create a new parse-time constant.
 ```shell
 > const x = 10
+
 ```
 
 Create a composite constant value
 ```shell
 > const x = { a: 10, b: 20 }
+
 ```

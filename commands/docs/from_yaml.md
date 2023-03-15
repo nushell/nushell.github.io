@@ -2,7 +2,7 @@
 title: from yaml
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse text as .yaml/.yml and create table.
 usage: |
@@ -22,9 +22,22 @@ usage: |
 Converts yaml formatted string to table
 ```shell
 > 'a: 1' | from yaml
+╭───┬───╮
+│ a │ 1 │
+╰───┴───╯
 ```
 
 Converts yaml formatted string to table
 ```shell
 > '[ a: 1, b: [1, 2] ]' | from yaml
+╭───┬────┬───────────╮
+│ # │ a  │     b     │
+├───┼────┼───────────┤
+│ 0 │  1 │    ❎     │
+│ 1 │ ❎ │ ╭───┬───╮ │
+│   │    │ │ 0 │ 1 │ │
+│   │    │ │ 1 │ 2 │ │
+│   │    │ ╰───┴───╯ │
+╰───┴────┴───────────╯
+
 ```

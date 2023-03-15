@@ -2,7 +2,7 @@
 title: date to-timezone
 categories: |
   date
-version: 0.76.0
+version: 0.77.0
 date: |
   Convert a date to a given time zone.
 usage: |
@@ -28,19 +28,23 @@ Use 'date list-timezone' to list all supported time zones.
 Get the current date in UTC+05:00
 ```shell
 > date now | date to-timezone +0500
+
 ```
 
 Get the current local date
 ```shell
 > date now | date to-timezone local
+
 ```
 
 Get the current date in Hawaii
 ```shell
 > date now | date to-timezone US/Hawaii
+
 ```
 
 Get the current date in Hawaii
 ```shell
 > "2020-10-10 10:00:00 +02:00" | date to-timezone "+0500"
+Sat, 10 Oct 2020 13:00:00 +0500 (2 years ago)
 ```

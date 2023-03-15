@@ -2,11 +2,11 @@
 title: dfr unique
 categories: |
   dataframe or lazyframe
-version: 0.76.0
+version: 0.77.0
 dataframe_or_lazyframe: |
-  Returns unique values from a dataframe
+  Returns unique values from a dataframe.
 usage: |
-  Returns unique values from a dataframe
+  Returns unique values from a dataframe.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe or lazyframe
@@ -22,9 +22,16 @@ usage: |
 Returns unique values from a series
 ```shell
 > [2 2 2 2 2] | dfr into-df | dfr unique
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 2 │
+╰───┴───╯
+
 ```
 
 Creates a is unique expression from a column
 ```shell
 > col a | unique
+
 ```

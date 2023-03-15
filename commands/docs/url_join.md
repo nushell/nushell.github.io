@@ -2,11 +2,11 @@
 title: url join
 categories: |
   network
-version: 0.76.0
+version: 0.77.0
 network: |
-  Converts a record to url
+  Converts a record to url.
 usage: |
-  Converts a record to url
+  Converts a record to url.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for network
@@ -36,6 +36,7 @@ Outputs a url representing the contents of this record
             "illust_id": "99260204"
         }
     } | url join
+http://www.pixiv.net/member_illust.php?mode=medium&illust_id=99260204
 ```
 
 Outputs a url representing the contents of this record
@@ -49,6 +50,7 @@ Outputs a url representing the contents of this record
         "query": "test=a",
         "fragment": ""
     } | url join
+http://user:pwd@www.pixiv.net:1234?test=a
 ```
 
 Outputs a url representing the contents of this record
@@ -60,4 +62,5 @@ Outputs a url representing the contents of this record
         "path": "user",
         "fragment": "frag"
     } | url join
+http://www.pixiv.net:1234/user#frag
 ```

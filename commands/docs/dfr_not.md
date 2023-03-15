@@ -2,11 +2,11 @@
 title: dfr not
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Inverts boolean mask
+  Inverts boolean mask.
 usage: |
-  Inverts boolean mask
+  Inverts boolean mask.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,4 +22,12 @@ usage: |
 Inverts boolean mask
 ```shell
 > [true false true] | dfr into-df | dfr not
+╭───┬───────╮
+│ # │   0   │
+├───┼───────┤
+│ 0 │ false │
+│ 1 │ true  │
+│ 2 │ false │
+╰───┴───────╯
+
 ```

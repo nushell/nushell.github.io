@@ -2,11 +2,11 @@
 title: dfr take
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Creates new dataframe using the given indices
+  Creates new dataframe using the given indices.
 usage: |
-  Creates new dataframe using the given indices
+  Creates new dataframe using the given indices.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -24,6 +24,13 @@ Takes selected rows from dataframe
 > let df = ([[a b]; [4 1] [5 2] [4 3]] | dfr into-df);
     let indices = ([0 2] | dfr into-df);
     $df | dfr take $indices
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 4 │ 1 │
+│ 1 │ 4 │ 3 │
+╰───┴───┴───╯
+
 ```
 
 Takes selected rows from series
@@ -31,4 +38,11 @@ Takes selected rows from series
 > let series = ([4 1 5 2 4 3] | dfr into-df);
     let indices = ([0 2] | dfr into-df);
     $series | dfr take $indices
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 4 │
+│ 1 │ 5 │
+╰───┴───╯
+
 ```

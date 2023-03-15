@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   Copy files.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> cp (source) (destination) --recursive --verbose --interactive --no-symlink```
+```> cp (source) (destination) --recursive --verbose --interactive --no-symlink --progress```
 
 ## Parameters
 
@@ -25,25 +25,30 @@ usage: |
  -  `--verbose` `(-v)`: show successful copies in addition to failed copies (default:false)
  -  `--interactive` `(-i)`: ask user to confirm action
  -  `--no-symlink` `(-n)`: no symbolic links are followed, only works if -r is active
+ -  `--progress` `(-p)`: enable progress bar
 
 ## Examples
 
 Copy myfile to dir_b
 ```shell
 > cp myfile dir_b
+
 ```
 
 Recursively copy dir_a to dir_b
 ```shell
 > cp -r dir_a dir_b
+
 ```
 
 Recursively copy dir_a to dir_b, and print the feedbacks
 ```shell
 > cp -r -v dir_a dir_b
+
 ```
 
 Move many files into a directory
 ```shell
 > cp *.txt dir_a
+
 ```

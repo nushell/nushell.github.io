@@ -2,11 +2,11 @@
 title: dfr select
 categories: |
   lazyframe
-version: 0.76.0
+version: 0.77.0
 lazyframe: |
-  Selects columns from lazyframe
+  Selects columns from lazyframe.
 usage: |
-  Selects columns from lazyframe
+  Selects columns from lazyframe.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -22,4 +22,12 @@ usage: |
 Select a column from the dataframe
 ```shell
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr select a
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 6 │
+│ 1 │ 4 │
+│ 2 │ 2 │
+╰───┴───╯
+
 ```

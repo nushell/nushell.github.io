@@ -2,11 +2,11 @@
 title: str reverse
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Reverse every string in the pipeline
+  Reverse every string in the pipeline.
 usage: |
-  Reverse every string in the pipeline
+  Reverse every string in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -26,9 +26,16 @@ usage: |
 Reverse a single string
 ```shell
 > 'Nushell' | str reverse
+llehsuN
 ```
 
 Reverse multiple strings in a list
 ```shell
 > ['Nushell' 'is' 'cool'] | str reverse
+╭───┬─────────╮
+│ 0 │ llehsuN │
+│ 1 │ si      │
+│ 2 │ looc    │
+╰───┴─────────╯
+
 ```

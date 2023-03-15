@@ -2,11 +2,11 @@
 title: bits or
 categories: |
   bits
-version: 0.76.0
+version: 0.77.0
 bits: |
-  Performs bitwise or for integers
+  Performs bitwise or for integers.
 usage: |
-  Performs bitwise or for integers
+  Performs bitwise or for integers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits
@@ -26,9 +26,16 @@ usage: |
 Apply bits or to two numbers
 ```shell
 > 2 | bits or 6
+6
 ```
 
 Apply logical or to a list of numbers
 ```shell
 > [8 3 2] | bits or 2
+╭───┬────╮
+│ 0 │ 10 │
+│ 1 │  3 │
+│ 2 │  2 │
+╰───┴────╯
+
 ```

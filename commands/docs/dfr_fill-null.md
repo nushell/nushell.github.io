@@ -2,11 +2,11 @@
 title: dfr fill-null
 categories: |
   lazyframe
-version: 0.76.0
+version: 0.77.0
 lazyframe: |
-  Replaces NULL values with the given expression
+  Replaces NULL values with the given expression.
 usage: |
-  Replaces NULL values with the given expression
+  Replaces NULL values with the given expression.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -22,4 +22,14 @@ usage: |
 Fills the null values by 0
 ```shell
 > [1 2 2 3 3] | dfr into-df | dfr shift 2 | dfr fill-null 0
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 0 │
+│ 1 │ 0 │
+│ 2 │ 1 │
+│ 3 │ 2 │
+│ 4 │ 2 │
+╰───┴───╯
+
 ```

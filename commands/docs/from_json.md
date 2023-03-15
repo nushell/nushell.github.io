@@ -2,11 +2,11 @@
 title: from json
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
-  Convert from json to structured data
+  Convert from json to structured data.
 usage: |
-  Convert from json to structured data
+  Convert from json to structured data.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -26,9 +26,19 @@ usage: |
 Converts json formatted string to table
 ```shell
 > '{ "a": 1 }' | from json
+╭───┬───╮
+│ a │ 1 │
+╰───┴───╯
 ```
 
 Converts json formatted string to table
 ```shell
 > '{ "a": 1, "b": [1, 2] }' | from json
+╭───┬───────────╮
+│ a │ 1         │
+│   │ ╭───┬───╮ │
+│ b │ │ 0 │ 1 │ │
+│   │ │ 1 │ 2 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
 ```

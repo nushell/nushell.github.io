@@ -2,11 +2,11 @@
 title: path expand
 categories: |
   default
-version: 0.76.0
+version: 0.77.0
 default: |
-  Try to expand a path to its absolute form
+  Try to expand a path to its absolute form.
 usage: |
-  Try to expand a path to its absolute form
+  Try to expand a path to its absolute form.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default
@@ -27,20 +27,18 @@ usage: |
 
 Expand an absolute path
 ```shell
-> 'C:\Users\joe\foo\..\bar' | path expand
+> '/home/joe/foo/../bar' | path expand
+/home/joe/bar
 ```
 
 Expand a path in a column
 ```shell
 > ls | path expand -c [ name ]
+
 ```
 
 Expand a relative path
 ```shell
-> 'foo\..\bar' | path expand
-```
+> 'foo/../bar' | path expand
 
-Expand an absolute path without following symlink
-```shell
-> 'foo\..\bar' | path expand -n
 ```

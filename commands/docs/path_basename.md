@@ -2,11 +2,11 @@
 title: path basename
 categories: |
   default
-version: 0.76.0
+version: 0.77.0
 default: |
-  Get the final component of a path
+  Get the final component of a path.
 usage: |
-  Get the final component of a path
+  Get the final component of a path.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default
@@ -26,20 +26,23 @@ usage: |
 
 Get basename of a path
 ```shell
-> 'C:\Users\joe\test.txt' | path basename
+> '/home/joe/test.txt' | path basename
+test.txt
 ```
 
-Get basename of a path in a column
+Get basename of a path by column
 ```shell
-> ls .. | path basename -c [ name ]
-```
+> [[name];[/home/joe]] | path basename -c [ name ]
+╭───┬──────╮
+│ # │ name │
+├───┼──────┤
+│ 0 │ joe  │
+╰───┴──────╯
 
-Get basename of a path in a column
-```shell
-> [[name];[C:\Users\Joe]] | path basename -c [ name ]
 ```
 
 Replace basename of a path
 ```shell
-> 'C:\Users\joe\test.txt' | path basename -r 'spam.png'
+> '/home/joe/test.txt' | path basename -r 'spam.png'
+/home/joe/spam.png
 ```

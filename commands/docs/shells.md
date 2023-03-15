@@ -2,7 +2,7 @@
 title: shells
 categories: |
   shells
-version: 0.76.0
+version: 0.77.0
 shells: |
   Lists all open shells.
 usage: |
@@ -22,9 +22,11 @@ usage: |
 Enter a new shell at parent path '..' and show all opened shells
 ```shell
 > enter ..; shells
+
 ```
 
 Show currently active shell
 ```shell
 > shells | where active == true
+
 ```

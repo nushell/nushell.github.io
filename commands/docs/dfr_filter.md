@@ -2,11 +2,11 @@
 title: dfr filter
 categories: |
   lazyframe
-version: 0.76.0
+version: 0.77.0
 lazyframe: |
-  Filter dataframe based in expression
+  Filter dataframe based in expression.
 usage: |
-  Filter dataframe based in expression
+  Filter dataframe based in expression.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -22,4 +22,11 @@ usage: |
 Filter dataframe using an expression
 ```shell
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr filter ((dfr col a) >= 4)
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 6 │ 2 │
+│ 1 │ 4 │ 2 │
+╰───┴───┴───╯
+
 ```

@@ -2,11 +2,11 @@
 title: dfr all-false
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Returns true if all values are false
+  Returns true if all values are false.
 usage: |
-  Returns true if all values are false
+  Returns true if all values are false.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,6 +22,12 @@ usage: |
 Returns true if all values are false
 ```shell
 > [false false false] | dfr into-df | dfr all-false
+╭───┬───────────╮
+│ # │ all_false │
+├───┼───────────┤
+│ 0 │ true      │
+╰───┴───────────╯
+
 ```
 
 Checks the result from a comparison
@@ -29,4 +35,10 @@ Checks the result from a comparison
 > let s = ([5 6 2 10] | dfr into-df);
     let res = ($s > 9);
     $res | dfr all-false
+╭───┬───────────╮
+│ # │ all_false │
+├───┼───────────┤
+│ 0 │ false     │
+╰───┴───────────╯
+
 ```

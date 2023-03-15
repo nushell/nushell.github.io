@@ -2,11 +2,11 @@
 title: str distance
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Compare two strings and return the edit distance/Levenshtein distance
+  Compare two strings and return the edit distance/Levenshtein distance.
 usage: |
-  Compare two strings and return the edit distance/Levenshtein distance
+  Compare two strings and return the edit distance/Levenshtein distance.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -27,9 +27,16 @@ usage: |
 get the edit distance between two strings
 ```shell
 > 'nushell' | str distance 'nutshell'
+1
 ```
 
 Compute edit distance between strings in record and another string, using cell paths
 ```shell
 > [{a: 'nutshell' b: 'numetal'}] | str distance 'nushell' 'a' 'b'
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 4 │
+╰───┴───┴───╯
+
 ```
