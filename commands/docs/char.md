@@ -72,8 +72,8 @@ Nushell | Equivalent
 `right_bracket`<br />`rbracket`<br /> | `[`
 `single_quote`<br />`squote`<br />`sq` | `\'`
 `double_quote`<br />`dquote`<br />`dq` | `\"`
-`path_sep`<br />`psep`<br />`separator` | TODO
-`esep`<br />`env_sep` | TODO
+`path_sep`<br />`psep`<br />`separator` | `/` on Unix, `\` on Windows
+`esep`<br />`env_sep` | `:` on Unix, `;` on Windows
 `tilde`<br />`twiddle`<br />`squiggly`<br />`home`<br />`pound_sign`<br />`sharp`<br />`root` | `~`
 `hash`<br />`hashtag` | `#`
 
