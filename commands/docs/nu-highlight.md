@@ -2,7 +2,7 @@
 title: nu-highlight
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
   Syntax highlight the input string.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Describe the type of a string
 ```shell
 > 'let x = 3' | nu-highlight
+
 ```

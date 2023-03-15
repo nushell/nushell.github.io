@@ -3,7 +3,7 @@ title: dfr first
 categories: |
   dataframe
   expression
-version: 0.76.0
+version: 0.77.0
 dataframe: |
   Show only the first number of rows.
 expression: |
@@ -26,11 +26,24 @@ usage: |
 Return the first row of a dataframe
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr first
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+╰───┴───┴───╯
+
 ```
 
 Return the first two rows of a dataframe
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr first 2
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for expression
@@ -46,4 +59,5 @@ Return the first two rows of a dataframe
 Creates a first expression from a column
 ```shell
 > dfr col a | dfr first
+
 ```

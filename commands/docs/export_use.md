@@ -2,11 +2,11 @@
 title: export use
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Use definitions from a module and export them from this module
+  Use definitions from a module and export them from this module.
 usage: |
-  Use definitions from a module and export them from this module
+  Use definitions from a module and export them from this module.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -34,4 +34,5 @@ Re-export a command from another module
     use eggs foo
     foo
 
+foo
 ```

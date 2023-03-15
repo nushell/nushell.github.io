@@ -2,7 +2,7 @@
 title: export
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Export definitions or environment variables from a module.
 usage: |
@@ -25,4 +25,5 @@ This command is a parser keyword. For details, check:
 Export a definition from a module
 ```shell
 > module utils { export def my-command [] { "hello" } }; use utils my-command; my-command
+hello
 ```

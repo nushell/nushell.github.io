@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.76.0
+version: 0.77.0
 system: |
   Finds a program file, alias or custom command.
 usage: |
@@ -28,4 +28,5 @@ usage: |
 Find if the 'myapp' application is available
 ```shell
 > which myapp
+
 ```

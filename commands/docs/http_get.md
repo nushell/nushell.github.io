@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.76.0
+version: 0.77.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -31,17 +31,20 @@ usage: |
 Performs HTTP GET operation.
 ## Examples
 
-http get content from example.com
+Get content from example.com
 ```shell
 > http get https://www.example.com
+
 ```
 
-http get content from example.com, with username and password
+Get content from example.com, with username and password
 ```shell
 > http get -u myuser -p mypass https://www.example.com
+
 ```
 
-http get content from example.com, with custom header
+Get content from example.com, with custom header
 ```shell
 > http get -H [my-header-key my-header-value] https://www.example.com
+
 ```

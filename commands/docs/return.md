@@ -2,11 +2,11 @@
 title: return
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Return early from a function
+  Return early from a function.
 usage: |
-  Return early from a function
+  Return early from a function.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -29,4 +29,5 @@ This command is a parser keyword. For details, check:
 Return early
 ```shell
 > def foo [] { return }
+
 ```

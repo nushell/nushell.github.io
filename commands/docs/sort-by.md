@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Sort by the given columns, in increasing order.
 usage: |
@@ -29,14 +29,24 @@ usage: |
 Sort files by modified date
 ```shell
 > ls | sort-by modified
+
 ```
 
 Sort files by name (case-insensitive)
 ```shell
 > ls | sort-by name -i
+
 ```
 
 Sort a table by a column (reversed order)
 ```shell
 > [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit -r
+╭───┬────────┬───────╮
+│ # │ fruit  │ count │
+├───┼────────┼───────┤
+│ 0 │ pear   │     3 │
+│ 1 │ orange │     7 │
+│ 2 │ apple  │     9 │
+╰───┴────────┴───────╯
+
 ```

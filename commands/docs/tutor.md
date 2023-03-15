@@ -2,11 +2,11 @@
 title: tutor
 categories: |
   misc
-version: 0.76.0
+version: 0.77.0
 misc: |
-  Run the tutorial. To begin, run: tutor
+  Run the tutorial. To begin, run: tutor.
 usage: |
-  Run the tutorial. To begin, run: tutor
+  Run the tutorial. To begin, run: tutor.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for misc
@@ -27,9 +27,11 @@ usage: |
 Begin the tutorial
 ```shell
 > tutor begin
+
 ```
 
 Search a tutorial by phrase
 ```shell
 > tutor -f "$in"
+
 ```

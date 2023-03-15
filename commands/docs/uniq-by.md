@@ -2,7 +2,7 @@
 title: uniq-by
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Return the distinct values in the input by the given column(s).
 usage: |
@@ -30,4 +30,12 @@ usage: |
 Get rows from table filtered by column uniqueness
 ```shell
 > [[fruit count]; [apple 9] [apple 2] [pear 3] [orange 7]] | uniq-by fruit
+╭───┬────────┬───────╮
+│ # │ fruit  │ count │
+├───┼────────┼───────┤
+│ 0 │ apple  │     9 │
+│ 1 │ pear   │     3 │
+│ 2 │ orange │     7 │
+╰───┴────────┴───────╯
+
 ```

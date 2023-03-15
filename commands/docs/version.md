@@ -2,11 +2,11 @@
 title: version
 categories: |
   default
-version: 0.76.0
+version: 0.77.0
 default: |
-  Display Nu version.
+  Display Nu version, and its build configuration.
 usage: |
-  Display Nu version.
+  Display Nu version, and its build configuration.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for default
@@ -22,4 +22,5 @@ usage: |
 Display Nu version
 ```shell
 > version
+
 ```

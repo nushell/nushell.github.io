@@ -2,11 +2,11 @@
 title: bits shr
 categories: |
   bits
-version: 0.76.0
+version: 0.77.0
 bits: |
-  Bitwise shift right for integers
+  Bitwise shift right for integers.
 usage: |
-  Bitwise shift right for integers
+  Bitwise shift right for integers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits
@@ -28,9 +28,16 @@ usage: |
 Shift right a number with 2 bits
 ```shell
 > 8 | bits shr 2
+2
 ```
 
 Shift right a list of numbers
 ```shell
 > [15 35 2] | bits shr 2
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 8 │
+│ 2 │ 0 │
+╰───┴───╯
+
 ```

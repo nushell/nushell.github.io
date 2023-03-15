@@ -2,11 +2,11 @@
 title: bytes
 categories: |
   bytes
-version: 0.76.0
+version: 0.77.0
 bytes: |
-  Various commands for working with byte data
+  Various commands for working with byte data.
 usage: |
-  Various commands for working with byte data
+  Various commands for working with byte data.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes

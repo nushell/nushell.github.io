@@ -2,11 +2,11 @@
 title: dfr dtypes
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Show dataframe data types
+  Show dataframe data types.
 usage: |
-  Show dataframe data types
+  Show dataframe data types.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,4 +22,11 @@ usage: |
 Dataframe dtypes
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr dtypes
+╭───┬────────┬───────╮
+│ # │ column │ dtype │
+├───┼────────┼───────┤
+│ 0 │ a      │ i64   │
+│ 1 │ b      │ i64   │
+╰───┴────────┴───────╯
+
 ```

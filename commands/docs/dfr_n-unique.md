@@ -3,13 +3,13 @@ title: dfr n-unique
 categories: |
   dataframe
   expression
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Counts unique values
+  Counts unique values.
 expression: |
   creates a n-unique expression
 usage: |
-  Counts unique values
+  Counts unique values.
   creates a n-unique expression
 ---
 
@@ -26,6 +26,12 @@ usage: |
 Counts unique values
 ```shell
 > [1 1 2 2 3 3 4] | dfr into-df | dfr n-unique
+╭───┬──────────────╮
+│ # │ count_unique │
+├───┼──────────────┤
+│ 0 │            4 │
+╰───┴──────────────╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for expression
@@ -41,4 +47,5 @@ Counts unique values
 Creates a is n-unique expression from a column
 ```shell
 > dfr col a | dfr n-unique
+
 ```

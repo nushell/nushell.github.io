@@ -2,11 +2,11 @@
 title: into datetime
 categories: |
   conversions
-version: 0.76.0
+version: 0.77.0
 conversions: |
-  Convert text into a datetime
+  Convert text or timestamp into a datetime.
 usage: |
-  Convert text into a datetime
+  Convert text or timestamp into a datetime.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions
@@ -22,37 +22,37 @@ usage: |
  -  `...rest`: for a data structure input, convert data at the given cell paths
  -  `--timezone {string}`: Specify timezone if the input is a Unix timestamp. Valid options: 'UTC' ('u') or 'LOCAL' ('l')
  -  `--offset {int}`: Specify timezone by offset from UTC if the input is a Unix timestamp, like '+8', '-4'
- -  `--format {string}`: Specify an expected format for parsing strings to datetimes. Use --list to see all possible options
- -  `--list` `(-l)`: Show all possible variables for use with the --format flag
+ -  `--format {string}`: Specify expected format of string input to parse to datetime. Use --list to see options
+ -  `--list` `(-l)`: Show all possible variables for use in --format flag
 
 ## Examples
 
-Convert to datetime
+Convert any standard timestamp string to datetime
 ```shell
 > '27.02.2021 1:55 pm +0000' | into datetime
+Sat, 27 Feb 2021 13:55:00 +0000 (2 years ago)
 ```
 
-Convert to datetime
+Convert any standard timestamp string to datetime
 ```shell
-> '2021-02-27T13:55:40+00:00' | into datetime
+> '2021-02-27T13:55:40.2246+00:00' | into datetime
+Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```
 
-Convert to datetime using a custom format
+Convert non-standard timestamp string to datetime using a custom format
 ```shell
 > '20210227_135540+0000' | into datetime -f '%Y%m%d_%H%M%S%z'
+Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```
 
-Convert timestamp (no larger than 8e+12) to a UTC datetime
+Convert nanosecond-precision unix timestamp to a datetime with offset from UTC
 ```shell
-> 1614434140 | into datetime
+> 1614434140123456789 | into datetime --offset -5
+Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```
 
-Convert timestamp (no larger than 8e+12) to datetime using a specified timezone offset (between -12 and 12)
+Convert standard (seconds) unix timestamp to a UTC datetime
 ```shell
-> 1614434140 | into datetime -o +9
-```
-
-Convert a millisecond-precise timestamp
-```shell
-> 1656165681720 | into datetime
+> 1614434140 * 1_000_000_000 | into datetime
+Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```

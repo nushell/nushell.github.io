@@ -2,7 +2,7 @@
 title: enter
 categories: |
   shells
-version: 0.76.0
+version: 0.77.0
 shells: |
   Enters a new shell at the given path.
 usage: |
@@ -26,4 +26,5 @@ usage: |
 Enter a new shell at path '../dir-foo'
 ```shell
 > enter ../dir-foo
+
 ```

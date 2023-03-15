@@ -2,7 +2,7 @@
 title: while
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Conditionally run a block in a loop.
 usage: |
@@ -30,4 +30,5 @@ This command is a parser keyword. For details, check:
 Loop while a condition is true
 ```shell
 > mut x = 0; while $x < 10 { $x = $x + 1 }
+
 ```

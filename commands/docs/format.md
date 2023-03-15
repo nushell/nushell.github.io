@@ -2,7 +2,7 @@
 title: format
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
   Format columns into a string using a simple pattern.
 usage: |
@@ -26,9 +26,15 @@ usage: |
 Print filenames with their sizes
 ```shell
 > ls | format '{name}: {size}'
+
 ```
 
 Print elements from some columns of a table
 ```shell
 > [[col1, col2]; [v1, v2] [v3, v4]] | format '{col2}'
+╭───┬────╮
+│ 0 │ v2 │
+│ 1 │ v4 │
+╰───┴────╯
+
 ```

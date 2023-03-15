@@ -2,11 +2,11 @@
 title: roll up
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
-  Roll table rows up
+  Roll table rows up.
 usage: |
-  Roll table rows up
+  Roll table rows up.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -26,4 +26,12 @@ usage: |
 Rolls rows up
 ```shell
 > [[a b]; [1 2] [3 4] [5 6]] | roll up
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 3 │ 4 │
+│ 1 │ 5 │ 6 │
+│ 2 │ 1 │ 2 │
+╰───┴───┴───╯
+
 ```

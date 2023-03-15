@@ -2,7 +2,7 @@
 title: from ssv
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
 usage: |
@@ -29,10 +29,23 @@ Converts ssv formatted string to table
 ```shell
 > 'FOO   BAR
 1   2' | from ssv
+╭───┬─────┬─────╮
+│ # │ FOO │ BAR │
+├───┼─────┼─────┤
+│ 0 │ 1   │ 2   │
+╰───┴─────┴─────╯
+
 ```
 
 Converts ssv formatted string to table but not treating the first row as column names
 ```shell
 > 'FOO   BAR
 1   2' | from ssv -n
+╭───┬─────────┬─────────╮
+│ # │ column1 │ column2 │
+├───┼─────────┼─────────┤
+│ 0 │ FOO     │ BAR     │
+│ 1 │ 1       │ 2       │
+╰───┴─────────┴─────────╯
+
 ```

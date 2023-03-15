@@ -2,7 +2,7 @@
 title: help aliases
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Show help on nushell aliases.
 usage: |
@@ -27,14 +27,17 @@ usage: |
 show all aliases
 ```shell
 > help aliases
+
 ```
 
 show help for single alias
 ```shell
 > help aliases my-alias
+
 ```
 
 search for string in alias names and usages
 ```shell
 > help aliases --find my-alias
+
 ```

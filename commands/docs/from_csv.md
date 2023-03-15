@@ -2,7 +2,7 @@
 title: from csv
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse text as .csv and create table.
 usage: |
@@ -30,34 +30,46 @@ Convert comma-separated data to a table
 ```shell
 > "ColA,ColB
 1,2" | from csv
+╭───┬──────┬──────╮
+│ # │ ColA │ ColB │
+├───┼──────┼──────┤
+│ 0 │    1 │    2 │
+╰───┴──────┴──────╯
+
 ```
 
 Convert comma-separated data to a table, ignoring headers
 ```shell
 > open data.txt | from csv --noheaders
+
 ```
 
 Convert comma-separated data to a table, ignoring headers
 ```shell
 > open data.txt | from csv -n
+
 ```
 
 Convert semicolon-separated data to a table
 ```shell
 > open data.txt | from csv --separator ';'
+
 ```
 
 Convert semicolon-separated data to a table, dropping all possible whitespaces around header names and field values
 ```shell
 > open data.txt | from csv --trim all
+
 ```
 
 Convert semicolon-separated data to a table, dropping all possible whitespaces around header names
 ```shell
 > open data.txt | from csv --trim headers
+
 ```
 
 Convert semicolon-separated data to a table, dropping all possible whitespaces around field values
 ```shell
 > open data.txt | from csv --trim fields
+
 ```

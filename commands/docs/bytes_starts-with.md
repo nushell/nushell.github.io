@@ -2,11 +2,11 @@
 title: bytes starts-with
 categories: |
   bytes
-version: 0.76.0
+version: 0.77.0
 bytes: |
-  Check if bytes starts with a pattern
+  Check if bytes starts with a pattern.
 usage: |
-  Check if bytes starts with a pattern
+  Check if bytes starts with a pattern.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes
@@ -27,14 +27,17 @@ usage: |
 Checks if binary starts with `0x[1F FF AA]`
 ```shell
 > 0x[1F FF AA AA] | bytes starts-with 0x[1F FF AA]
+true
 ```
 
 Checks if binary starts with `0x[1F]`
 ```shell
 > 0x[1F FF AA AA] | bytes starts-with 0x[1F]
+true
 ```
 
 Checks if binary starts with `0x[1F]`
 ```shell
 > 0x[1F FF AA AA] | bytes starts-with 0x[11]
+false
 ```

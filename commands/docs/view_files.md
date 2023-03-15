@@ -2,11 +2,11 @@
 title: view files
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
-  View the files registered in nushell's EngineState memory
+  View the files registered in nushell's EngineState memory.
 usage: |
-  View the files registered in nushell's EngineState memory
+  View the files registered in nushell's EngineState memory.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug
@@ -24,4 +24,5 @@ These are files parsed and loaded at runtime.
 View the files registered in nushell's EngineState memory
 ```shell
 > view files
+
 ```

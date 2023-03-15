@@ -2,7 +2,7 @@
 title: range
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Return only the selected rows.
 usage: |
@@ -26,14 +26,29 @@ usage: |
 Get the last 2 items
 ```shell
 > [0,1,2,3,4,5] | range 4..5
+╭───┬───╮
+│ 0 │ 4 │
+│ 1 │ 5 │
+╰───┴───╯
+
 ```
 
 Get the last 2 items
 ```shell
 > [0,1,2,3,4,5] | range (-2)..
+╭───┬───╮
+│ 0 │ 4 │
+│ 1 │ 5 │
+╰───┴───╯
+
 ```
 
 Get the next to last 2 items
 ```shell
 > [0,1,2,3,4,5] | range (-3)..-2
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 4 │
+╰───┴───╯
+
 ```

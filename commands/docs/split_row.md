@@ -2,11 +2,11 @@
 title: split row
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Split a string into multiple rows using a separator
+  Split a string into multiple rows using a separator.
 usage: |
-  Split a string into multiple rows using a separator
+  Split a string into multiple rows using a separator.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -27,14 +27,36 @@ usage: |
 Split a string into rows of char
 ```shell
 > 'abc' | split row ''
+╭───┬───╮
+│ 0 │   │
+│ 1 │ a │
+│ 2 │ b │
+│ 3 │ c │
+│ 4 │   │
+╰───┴───╯
+
 ```
 
 Split a string into rows by the specified separator
 ```shell
 > 'a--b--c' | split row '--'
+╭───┬───╮
+│ 0 │ a │
+│ 1 │ b │
+│ 2 │ c │
+╰───┴───╯
+
 ```
 
 Split a string by '-'
 ```shell
 > '-a-b-c-' | split row '-'
+╭───┬───╮
+│ 0 │   │
+│ 1 │ a │
+│ 2 │ b │
+│ 3 │ c │
+│ 4 │   │
+╰───┴───╯
+
 ```

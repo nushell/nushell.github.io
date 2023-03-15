@@ -3,14 +3,14 @@ title: dfr quantile
 categories: |
   expression
   lazyframe
-version: 0.76.0
+version: 0.77.0
 expression: |
-  Aggregates the columns to the selected quantile
+  Aggregates the columns to the selected quantile.
 lazyframe: |
-  Aggregates the columns to the selected quantile
+  Aggregates the columns to the selected quantile.
 usage: |
-  Aggregates the columns to the selected quantile
-  Aggregates the columns to the selected quantile
+  Aggregates the columns to the selected quantile.
+  Aggregates the columns to the selected quantile.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for expression
@@ -29,6 +29,13 @@ Quantile aggregation for a group-by
     | dfr into-df
     | dfr group-by a
     | dfr agg (dfr col b | dfr quantile 0.5)
+╭───┬─────┬────────╮
+│ # │  a  │   b    │
+├───┼─────┼────────┤
+│ 0 │ one │ 4.0000 │
+│ 1 │ two │ 1.0000 │
+╰───┴─────┴────────╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -44,4 +51,10 @@ Quantile aggregation for a group-by
 quantile value from columns in a dataframe
 ```shell
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr quantile 0.5
+╭───┬────────┬────────╮
+│ # │   a    │   b    │
+├───┼────────┼────────┤
+│ 0 │ 4.0000 │ 2.0000 │
+╰───┴────────┴────────╯
+
 ```

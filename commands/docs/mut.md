@@ -2,7 +2,7 @@
 title: mut
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Create a mutable variable and give it a value.
 usage: |
@@ -30,19 +30,23 @@ This command is a parser keyword. For details, check:
 Set a mutable variable to a value, then update it
 ```shell
 > mut x = 10; $x = 12
+
 ```
 
 Upsert a value inside a mutable data structure
 ```shell
 > mut a = {b:{c:1}}; $a.b.c = 2
+
 ```
 
 Set a mutable variable to the result of an expression
 ```shell
 > mut x = 10 + 100
+
 ```
 
 Set a mutable variable based on the condition
 ```shell
 > mut x = if false { -1 } else { 1 }
+
 ```

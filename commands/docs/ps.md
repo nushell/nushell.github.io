@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.76.0
+version: 0.77.0
 system: |
   View information about system processes.
 usage: |
@@ -26,19 +26,23 @@ usage: |
 List the system processes
 ```shell
 > ps
+
 ```
 
 List the top 5 system processes with the highest memory usage
 ```shell
 > ps | sort-by mem | last 5
+
 ```
 
 List the top 3 system processes with the highest CPU usage
 ```shell
 > ps | sort-by cpu | last 3
+
 ```
 
 List the system processes with 'nu' in their names
 ```shell
 > ps | where name =~ 'nu'
+
 ```

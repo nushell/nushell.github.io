@@ -2,7 +2,7 @@
 title: take until
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Take elements of the input until a predicate is true.
 usage: |
@@ -26,14 +26,31 @@ usage: |
 Take until the element is positive
 ```shell
 > [-1 -2 9 1] | take until {|x| $x > 0 }
+╭───┬────╮
+│ 0 │ -1 │
+│ 1 │ -2 │
+╰───┴────╯
+
 ```
 
 Take until the element is positive using stored condition
 ```shell
 > let cond = {|x| $x > 0 }; [-1 -2 9 1] | take until $cond
+╭───┬────╮
+│ 0 │ -1 │
+│ 1 │ -2 │
+╰───┴────╯
+
 ```
 
 Take until the field value is positive
 ```shell
 > [{a: -1} {a: -2} {a: 9} {a: 1}] | take until {|x| $x.a > 0 }
+╭───┬────╮
+│ # │ a  │
+├───┼────┤
+│ 0 │ -1 │
+│ 1 │ -2 │
+╰───┴────╯
+
 ```

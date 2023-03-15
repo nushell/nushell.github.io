@@ -2,11 +2,11 @@
 title: lines
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
-  Converts input to lines
+  Converts input to lines.
 usage: |
-  Converts input to lines
+  Converts input to lines.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -26,4 +26,9 @@ usage: |
 Split multi-line string into lines
 ```shell
 > $"two\nlines" | lines
+╭───┬───────╮
+│ 0 │ two   │
+│ 1 │ lines │
+╰───┴───────╯
+
 ```

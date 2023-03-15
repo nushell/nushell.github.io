@@ -2,11 +2,11 @@
 title: into int
 categories: |
   conversions
-version: 0.76.0
+version: 0.77.0
 conversions: |
-  Convert value to integer
+  Convert value to integer.
 usage: |
-  Convert value to integer
+  Convert value to integer.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for conversions
@@ -28,59 +28,75 @@ usage: |
 Convert string to integer in table
 ```shell
 > [[num]; ['-5'] [4] [1.5]] | into int num
+
 ```
 
 Convert string to integer
 ```shell
 > '2' | into int
+2
 ```
 
 Convert decimal to integer
 ```shell
 > 5.9 | into int
+5
 ```
 
 Convert decimal string to integer
 ```shell
 > '5.9' | into int
+5
 ```
 
 Convert file size to integer
 ```shell
 > 4KB | into int
+4000
 ```
 
 Convert bool to integer
 ```shell
 > [false, true] | into int
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+╰───┴───╯
+
 ```
 
-Convert date to integer (Unix timestamp)
+Convert date to integer (Unix nanosecond timestamp)
 ```shell
-> 2022-02-02 | into int
+> 1983-04-13T12:09:14.123456789-05:00 | into int
+419101754123456789
 ```
 
 Convert to integer from binary
 ```shell
 > '1101' | into int -r 2
+13
 ```
 
 Convert to integer from hex
 ```shell
 > 'FF' |  into int -r 16
+255
 ```
 
 Convert octal string to integer
 ```shell
 > '0o10132' | into int
+4186
 ```
 
 Convert 0 padded string to integer
 ```shell
 > '0010132' | into int
+10132
 ```
 
 Convert 0 padded string to integer with radix
 ```shell
 > '0010132' | into int -r 8
+4186
 ```

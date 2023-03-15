@@ -2,11 +2,11 @@
 title: inspect
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
-  Inspect pipeline results while running a pipeline
+  Inspect pipeline results while running a pipeline.
 usage: |
-  Inspect pipeline results while running a pipeline
+  Inspect pipeline results while running a pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug
@@ -22,4 +22,5 @@ usage: |
 Inspect pipeline results
 ```shell
 > ls | inspect | get name | inspect
+
 ```

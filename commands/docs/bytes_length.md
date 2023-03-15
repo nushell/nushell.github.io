@@ -2,11 +2,11 @@
 title: bytes length
 categories: |
   bytes
-version: 0.76.0
+version: 0.77.0
 bytes: |
-  Output the length of any bytes in the pipeline
+  Output the length of any bytes in the pipeline.
 usage: |
-  Output the length of any bytes in the pipeline
+  Output the length of any bytes in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bytes
@@ -26,9 +26,15 @@ usage: |
 Return the lengths of multiple strings
 ```shell
 > 0x[1F FF AA AB] | bytes length
+4
 ```
 
 Return the lengths of multiple strings
 ```shell
 > [0x[1F FF AA AB] 0x[1F]] | bytes length
+╭───┬───╮
+│ 0 │ 4 │
+│ 1 │ 1 │
+╰───┴───╯
+
 ```

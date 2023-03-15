@@ -2,11 +2,11 @@
 title: dfr shift
 categories: |
   dataframe or lazyframe
-version: 0.76.0
+version: 0.77.0
 dataframe_or_lazyframe: |
-  Shifts the values by a given period
+  Shifts the values by a given period.
 usage: |
-  Shifts the values by a given period
+  Shifts the values by a given period.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe or lazyframe
@@ -22,4 +22,12 @@ usage: |
 Shifts the values by a given period
 ```shell
 > [1 2 2 3 3] | dfr into-df | dfr shift 2 | dfr drop-nulls
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 2 │
+╰───┴───╯
+
 ```

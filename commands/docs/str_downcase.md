@@ -2,11 +2,11 @@
 title: str downcase
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Make text lowercase
+  Make text lowercase.
 usage: |
-  Make text lowercase
+  Make text lowercase.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -26,19 +26,33 @@ usage: |
 Downcase contents
 ```shell
 > 'NU' | str downcase
+nu
 ```
 
 Downcase contents
 ```shell
 > 'TESTa' | str downcase
+testa
 ```
 
 Downcase contents
 ```shell
 > [[ColA ColB]; [Test ABC]] | str downcase ColA
+╭───┬──────┬──────╮
+│ # │ ColA │ ColB │
+├───┼──────┼──────┤
+│ 0 │ test │ ABC  │
+╰───┴──────┴──────╯
+
 ```
 
 Downcase contents
 ```shell
 > [[ColA ColB]; [Test ABC]] | str downcase ColA ColB
+╭───┬──────┬──────╮
+│ # │ ColA │ ColB │
+├───┼──────┼──────┤
+│ 0 │ test │ abc  │
+╰───┴──────┴──────╯
+
 ```

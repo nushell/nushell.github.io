@@ -2,11 +2,11 @@
 title: to csv
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
-  Convert table into .csv text 
+  Convert table into .csv text .
 usage: |
-  Convert table into .csv text 
+  Convert table into .csv text .
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -27,14 +27,23 @@ usage: |
 Outputs an CSV string representing the contents of this table
 ```shell
 > [[foo bar]; [1 2]] | to csv
+foo,bar
+1,2
+
 ```
 
 Outputs an CSV string representing the contents of this table
 ```shell
 > [[foo bar]; [1 2]] | to csv -s ';'
+foo;bar
+1;2
+
 ```
 
 Outputs an CSV string representing the contents of this record
 ```shell
 > {a: 1 b: 2} | to csv
+a,b
+1,2
+
 ```

@@ -2,7 +2,7 @@
 title: math tau
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
   Returns the mathematical constant τ.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Get the first two decimal digits of τ
 ```shell
 > math tau | math round --precision 2
+6.28
 ```

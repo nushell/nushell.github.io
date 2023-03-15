@@ -2,7 +2,7 @@
 title: size
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
   Gather word count statistics on the text.
 usage: |
@@ -22,14 +22,35 @@ usage: |
 Count the number of words in a string
 ```shell
 > "There are seven words in this sentence" | size
+╭───────────┬────╮
+│ lines     │ 1  │
+│ words     │ 7  │
+│ bytes     │ 38 │
+│ chars     │ 38 │
+│ graphemes │ 38 │
+╰───────────┴────╯
 ```
 
 Counts unicode characters
 ```shell
 > '今天天气真好' | size
+╭───────────┬────╮
+│ lines     │ 1  │
+│ words     │ 6  │
+│ bytes     │ 18 │
+│ chars     │ 6  │
+│ graphemes │ 6  │
+╰───────────┴────╯
 ```
 
 Counts Unicode characters correctly in a string
 ```shell
 > "Amélie Amelie" | size
+╭───────────┬────╮
+│ lines     │ 1  │
+│ words     │ 2  │
+│ bytes     │ 15 │
+│ chars     │ 14 │
+│ graphemes │ 13 │
+╰───────────┴────╯
 ```

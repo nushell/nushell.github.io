@@ -2,7 +2,7 @@
 title: echo
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Returns its arguments, ignoring the piped-in value.
 usage: |
@@ -30,9 +30,16 @@ little reason to use this over just writing the values as-is.
 Put a list of numbers in the pipeline. This is the same as [1 2 3].
 ```shell
 > echo 1 2 3
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+╰───┴───╯
+
 ```
 
 Returns the piped-in value, by using the special $in variable to obtain it.
 ```shell
 > echo $in
+
 ```

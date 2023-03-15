@@ -2,11 +2,11 @@
 title: drop
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
-  Remove items/rows from the end of the input list/table. Counterpart of 'skip'. Opposite of 'last'.
+  Remove items/rows from the end of the input list/table. Counterpart of `skip`. Opposite of `last`.
 usage: |
-  Remove items/rows from the end of the input list/table. Counterpart of 'skip'. Opposite of 'last'.
+  Remove items/rows from the end of the input list/table. Counterpart of `skip`. Opposite of `last`.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -26,19 +26,43 @@ usage: |
 Remove the last item of a list
 ```shell
 > [0,1,2,3] | drop
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+╰───┴───╯
+
 ```
 
 Remove zero item of a list
 ```shell
 > [0,1,2,3] | drop 0
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+│ 3 │ 3 │
+╰───┴───╯
+
 ```
 
 Remove the last two items of a list
 ```shell
 > [0,1,2,3] | drop 2
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+╰───┴───╯
+
 ```
 
 Remove the last row in a table
 ```shell
 > [[a, b]; [1, 2] [3, 4]] | drop 1
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+╰───┴───┴───╯
+
 ```

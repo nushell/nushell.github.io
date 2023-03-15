@@ -2,11 +2,11 @@
 title: to tsv
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
-  Convert table into .tsv text
+  Convert table into .tsv text.
 usage: |
-  Convert table into .tsv text
+  Convert table into .tsv text.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for formats
@@ -26,9 +26,15 @@ usage: |
 Outputs an TSV string representing the contents of this table
 ```shell
 > [[foo bar]; [1 2]] | to tsv
+foobar
+12
+
 ```
 
 Outputs an TSV string representing the contents of this record
 ```shell
 > {a: 1 b: 2} | to tsv
+ab
+12
+
 ```

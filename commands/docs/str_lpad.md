@@ -2,11 +2,11 @@
 title: str lpad
 categories: |
   deprecated
-version: 0.76.0
+version: 0.77.0
 deprecated: |
-  Deprecated command
+  Deprecated command.
 usage: |
-  Deprecated command
+  Deprecated command.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for deprecated

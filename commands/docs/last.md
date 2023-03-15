@@ -2,11 +2,11 @@
 title: last
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
-  Return only the last several rows of the input. Counterpart of 'first'. Opposite of 'drop'.
+  Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
 usage: |
-  Return only the last several rows of the input. Counterpart of 'first'. Opposite of 'drop'.
+  Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for filters
@@ -26,9 +26,15 @@ usage: |
 Get the last 2 items
 ```shell
 > [1,2,3] | last 2
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 3 │
+╰───┴───╯
+
 ```
 
 Get the last item
 ```shell
 > [1,2,3] | last
+3
 ```

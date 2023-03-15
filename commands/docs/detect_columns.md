@@ -2,11 +2,11 @@
 title: detect columns
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Attempt to automatically split text into multiple columns
+  Attempt to automatically split text into multiple columns.
 usage: |
-  Attempt to automatically split text into multiple columns
+  Attempt to automatically split text into multiple columns.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -27,9 +27,16 @@ usage: |
 Splits string across multiple columns
 ```shell
 > 'a b c' | detect columns -n
+╭───┬─────────┬─────────┬─────────╮
+│ # │ column0 │ column1 │ column2 │
+├───┼─────────┼─────────┼─────────┤
+│ 0 │ a       │ b       │ c       │
+╰───┴─────────┴─────────┴─────────╯
+
 ```
 
 Splits a multi-line string into columns with headers detected
 ```shell
 > $'c1 c2 c3(char nl)a b c' | detect columns
+
 ```

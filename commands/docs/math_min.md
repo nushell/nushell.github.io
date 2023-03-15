@@ -2,11 +2,11 @@
 title: math min
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
-  Finds the minimum within a list of numbers or tables
+  Finds the minimum within a list of numbers or tables.
 usage: |
-  Finds the minimum within a list of numbers or tables
+  Finds the minimum within a list of numbers or tables.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math
@@ -22,9 +22,14 @@ usage: |
 Compute the minimum of a list of numbers
 ```shell
 > [-50 100 25] | math min
+-50
 ```
 
 Compute the minima of the columns of a table
 ```shell
 > [{a: 1 b: 3} {a: 2 b: -1}] | math min
+╭───┬────╮
+│ a │ 1  │
+│ b │ -1 │
+╰───┴────╯
 ```

@@ -2,7 +2,7 @@
 title: touch
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   Creates one or more files.
 usage: |
@@ -31,29 +31,35 @@ usage: |
 Creates "fixture.json"
 ```shell
 > touch fixture.json
+
 ```
 
 Creates files a, b and c
 ```shell
 > touch a b c
+
 ```
 
 Changes the last modified time of "fixture.json" to today's date
 ```shell
 > touch -m fixture.json
+
 ```
 
 Changes the last modified time of files a, b and c to a date
 ```shell
 > touch -m -d "yesterday" a b c
+
 ```
 
 Changes the last modified time of file d and e to "fixture.json"'s last modified time
 ```shell
 > touch -m -r fixture.json d e
+
 ```
 
 Changes the last accessed time of "fixture.json" to a date
 ```shell
 > touch -a -d "August 24, 2019; 12:30:30" fixture.json
+
 ```

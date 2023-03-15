@@ -2,7 +2,7 @@
 title: shuffle
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Shuffle rows randomly.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Shuffle rows randomly (execute it several times and see the difference)
 ```shell
 > [[version patch]; [1.0.0 false] [3.0.1 true] [2.0.0 false]] | shuffle
+
 ```

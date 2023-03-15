@@ -2,11 +2,11 @@
 title: split column
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Split a string into multiple columns using a separator
+  Split a string into multiple columns using a separator.
 usage: |
-  Split a string into multiple columns using a separator
+  Split a string into multiple columns using a separator.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -28,14 +28,33 @@ usage: |
 Split a string into columns by the specified separator
 ```shell
 > 'a--b--c' | split column '--'
+╭───┬─────────┬─────────┬─────────╮
+│ # │ column1 │ column2 │ column3 │
+├───┼─────────┼─────────┼─────────┤
+│ 0 │ a       │ b       │ c       │
+╰───┴─────────┴─────────┴─────────╯
+
 ```
 
 Split a string into columns of char and remove the empty columns
 ```shell
 > 'abc' | split column -c ''
+╭───┬─────────┬─────────┬─────────╮
+│ # │ column1 │ column2 │ column3 │
+├───┼─────────┼─────────┼─────────┤
+│ 0 │ a       │ b       │ c       │
+╰───┴─────────┴─────────┴─────────╯
+
 ```
 
 Split a list of strings into a table
 ```shell
 > ['a-b' 'c-d'] | split column -
+╭───┬─────────┬─────────╮
+│ # │ column1 │ column2 │
+├───┼─────────┼─────────┤
+│ 0 │ a       │ b       │
+│ 1 │ c       │ d       │
+╰───┴─────────┴─────────╯
+
 ```

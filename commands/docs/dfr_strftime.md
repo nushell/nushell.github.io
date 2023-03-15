@@ -2,11 +2,11 @@
 title: dfr strftime
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Formats date based on string rule
+  Formats date based on string rule.
 usage: |
-  Formats date based on string rule
+  Formats date based on string rule.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -24,4 +24,11 @@ Formats date
 > let dt = ('2020-08-04T16:39:18+00:00' | into datetime -z 'UTC');
     let df = ([$dt $dt] | dfr into-df);
     $df | dfr strftime "%Y/%m/%d"
+╭───┬────────────╮
+│ # │     0      │
+├───┼────────────┤
+│ 0 │ 2020/08/04 │
+│ 1 │ 2020/08/04 │
+╰───┴────────────╯
+
 ```

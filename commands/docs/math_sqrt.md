@@ -2,11 +2,11 @@
 title: math sqrt
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
-  Returns the square root of the input number
+  Returns the square root of the input number.
 usage: |
-  Returns the square root of the input number
+  Returns the square root of the input number.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math
@@ -22,4 +22,9 @@ usage: |
 Compute the square root of each number in a list
 ```shell
 > [9 16] | math sqrt
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 4 │
+╰───┴───╯
+
 ```

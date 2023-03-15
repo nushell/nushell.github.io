@@ -3,7 +3,7 @@ title: dfr median
 categories: |
   expression
   lazyframe
-version: 0.76.0
+version: 0.77.0
 expression: |
   Creates a median expression for an aggregation
 lazyframe: |
@@ -29,6 +29,13 @@ Median aggregation for a group-by
     | dfr into-df
     | dfr group-by a
     | dfr agg (dfr col b | dfr median)
+╭───┬─────┬────────╮
+│ # │  a  │   b    │
+├───┼─────┼────────┤
+│ 0 │ one │ 3.0000 │
+│ 1 │ two │ 1.0000 │
+╰───┴─────┴────────╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -44,4 +51,10 @@ Median aggregation for a group-by
 Median value from columns in a dataframe
 ```shell
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr median
+╭───┬────────┬────────╮
+│ # │   a    │   b    │
+├───┼────────┼────────┤
+│ 0 │ 4.0000 │ 2.0000 │
+╰───┴────────┴────────╯
+
 ```

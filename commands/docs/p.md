@@ -2,7 +2,7 @@
 title: p
 categories: |
   shells
-version: 0.76.0
+version: 0.77.0
 shells: |
   Switch to the previous shell.
 usage: |
@@ -22,9 +22,11 @@ usage: |
 Make two directories and enter new shells for them, use `p` to jump to the previous shell
 ```shell
 > mkdir foo bar; enter foo; enter ../bar; p
+
 ```
 
 Run `p` several times and note the changes of current directory
 ```shell
 > p
+
 ```

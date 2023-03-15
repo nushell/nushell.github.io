@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
   Encode a string into bytes.
 usage: |
@@ -35,9 +35,17 @@ documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
 Encode an UTF-8 string into Shift-JIS
 ```shell
 > "負けると知って戦うのが、遥かに美しいのだ" | encode shift-jis
+Length: 40 (0x28) bytes | printable whitespace ascii_other non_ascii
+00000000:   95 89 82 af  82 e9 82 c6  92 6d 82 c1  82 c4 90 ed   ×××××××××m××××××
+00000010:   82 a4 82 cc  82 aa 81 41  97 79 82 a9  82 c9 94 fc   ×××××××A×y××××××
+00000020:   82 b5 82 a2  82 cc 82 be                             ××××××××
+
 ```
 
 Replace characters with HTML entities if they can't be encoded
 ```shell
 > "🎈" | encode -i shift-jis
+Length: 9 (0x9) bytes | printable whitespace ascii_other non_ascii
+00000000:   26 23 31 32  37 38 38 30  3b                         &#127880;
+
 ```

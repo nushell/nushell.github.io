@@ -3,7 +3,7 @@ title: dfr sum
 categories: |
   expression
   lazyframe
-version: 0.76.0
+version: 0.77.0
 expression: |
   Creates a sum expression for an aggregation
 lazyframe: |
@@ -29,6 +29,13 @@ Sum aggregation for a group-by
     | dfr into-df
     | dfr group-by a
     | dfr agg (dfr col b | dfr sum)
+╭───┬─────┬───╮
+│ # │  a  │ b │
+├───┼─────┼───┤
+│ 0 │ one │ 6 │
+│ 1 │ two │ 1 │
+╰───┴─────┴───╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -44,4 +51,10 @@ Sum aggregation for a group-by
 Sums all columns in a dataframe
 ```shell
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr sum
+╭───┬────┬───╮
+│ # │ a  │ b │
+├───┼────┼───┤
+│ 0 │ 11 │ 7 │
+╰───┴────┴───╯
+
 ```

@@ -2,7 +2,7 @@
 title: from url
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse url-encoded string as a record.
 usage: |
@@ -22,4 +22,10 @@ usage: |
 Convert url encoded string into a record
 ```shell
 > 'bread=baguette&cheese=comt%C3%A9&meat=ham&fat=butter' | from url
+╭────────┬──────────╮
+│ bread  │ baguette │
+│ cheese │ comté    │
+│ meat   │ ham      │
+│ fat    │ butter   │
+╰────────┴──────────╯
 ```

@@ -2,7 +2,7 @@
 title: math pi
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
   Returns the mathematical constant π.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Get the first two decimal digits of π
 ```shell
 > math pi | math round --precision 2
+3.14
 ```

@@ -2,11 +2,11 @@
 title: dfr drop-nulls
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Drops null values in dataframe
+  Drops null values in dataframe.
 usage: |
-  Drops null values in dataframe
+  Drops null values in dataframe.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -25,10 +25,26 @@ drop null values in dataframe
     let res = ($df.b / $df.b);
     let a = ($df | dfr with-column $res --name res);
     $a | dfr drop-nulls
+╭───┬───┬───┬─────╮
+│ # │ a │ b │ res │
+├───┼───┼───┼─────┤
+│ 0 │ 1 │ 2 │   1 │
+│ 1 │ 1 │ 2 │   1 │
+╰───┴───┴───┴─────╯
+
 ```
 
 drop null values in dataframe
 ```shell
 > let s = ([1 2 0 0 3 4] | dfr into-df);
     ($s / $s) | dfr drop-nulls
+╭───┬─────────╮
+│ # │ div_0_0 │
+├───┼─────────┤
+│ 0 │       1 │
+│ 1 │       1 │
+│ 2 │       1 │
+│ 3 │       1 │
+╰───┴─────────╯
+
 ```

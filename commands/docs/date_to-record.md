@@ -2,7 +2,7 @@
 title: date to-record
 categories: |
   date
-version: 0.76.0
+version: 0.77.0
 date: |
   Convert the date into a record.
 usage: |
@@ -22,14 +22,26 @@ usage: |
 Convert the current date into a record.
 ```shell
 > date to-record
+
 ```
 
 Convert the current date into a record.
 ```shell
 > date now | date to-record
+
 ```
 
 Convert a date string into a record.
 ```shell
-> '2020-04-12 22:10:57 +0200' | date to-record
+> '2020-04-12T22:10:57.123+02:00' | date to-record
+╭────────────┬───────────╮
+│ year       │ 2020      │
+│ month      │ 4         │
+│ day        │ 12        │
+│ hour       │ 22        │
+│ minute     │ 10        │
+│ second     │ 57        │
+│ nanosecond │ 123000000 │
+│ timezone   │ +02:00    │
+╰────────────┴───────────╯
 ```

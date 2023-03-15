@@ -2,11 +2,11 @@
 title: view span
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
-  View the contents of a span
+  View the contents of a span.
 usage: |
-  View the contents of a span
+  View the contents of a span.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug
@@ -32,4 +32,5 @@ Then you can use the Span { start, end } values as the start and end values for 
 View the source of a span. 1 and 2 are just example values. Use the return of debug -r to get the actual values
 ```shell
 > some | pipeline | or | variable | debug -r; view span 1 2
+
 ```

@@ -3,7 +3,7 @@ title: dfr std
 categories: |
   expression
   lazyframe
-version: 0.76.0
+version: 0.77.0
 expression: |
   Creates a std expression for an aggregation
 lazyframe: |
@@ -29,6 +29,13 @@ Std aggregation for a group-by
     | dfr into-df
     | dfr group-by a
     | dfr agg (dfr col b | dfr std)
+╭───┬─────┬────────╮
+│ # │  a  │   b    │
+├───┼─────┼────────┤
+│ 0 │ one │ 0.0000 │
+│ 1 │ two │ 0.0000 │
+╰───┴─────┴────────╯
+
 ```
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
@@ -44,4 +51,10 @@ Std aggregation for a group-by
 Std value from columns in a dataframe
 ```shell
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr std
+╭───┬────────┬────────╮
+│ # │   a    │   b    │
+├───┼────────┼────────┤
+│ 0 │ 2.0000 │ 0.0000 │
+╰───┴────────┴────────╯
+
 ```

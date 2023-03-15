@@ -2,11 +2,11 @@
 title: dfr lowercase
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Lowercase the strings in the column
+  Lowercase the strings in the column.
 usage: |
-  Lowercase the strings in the column
+  Lowercase the strings in the column.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,4 +22,12 @@ usage: |
 Modifies strings to lowercase
 ```shell
 > [Abc aBc abC] | dfr into-df | dfr lowercase
+╭───┬─────╮
+│ # │  0  │
+├───┼─────┤
+│ 0 │ abc │
+│ 1 │ abc │
+│ 2 │ abc │
+╰───┴─────╯
+
 ```

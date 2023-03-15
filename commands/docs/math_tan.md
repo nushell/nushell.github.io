@@ -2,7 +2,7 @@
 title: math tan
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
   Returns the tangent of the number.
 usage: |
@@ -26,9 +26,16 @@ usage: |
 Apply the tangent to π/4
 ```shell
 > (math pi) / 4 | math tan
+1
 ```
 
 Apply the tangent to a list of angles in degrees
 ```shell
 > [-45 0 45] | math tan -d
+╭───┬─────────╮
+│ 0 │ -1.0000 │
+│ 1 │  0.0000 │
+│ 2 │  1.0000 │
+╰───┴─────────╯
+
 ```

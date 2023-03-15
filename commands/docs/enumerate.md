@@ -2,7 +2,7 @@
 title: enumerate
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Enumerate the elements in a stream.
 usage: |
@@ -22,4 +22,12 @@ usage: |
 Add an index to each element of a list
 ```shell
 > [a, b, c] | enumerate
+╭───┬──────╮
+│ # │ item │
+├───┼──────┤
+│ 0 │ a    │
+│ 1 │ b    │
+│ 2 │ c    │
+╰───┴──────╯
+
 ```

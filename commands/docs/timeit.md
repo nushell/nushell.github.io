@@ -2,11 +2,11 @@
 title: timeit
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
-  Time the running time of a closure
+  Time the running time of a closure.
 usage: |
-  Time the running time of a closure
+  Time the running time of a closure.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug
@@ -26,9 +26,11 @@ usage: |
 Times a command within a closure
 ```shell
 > timeit { sleep 500ms }
+
 ```
 
 Times a command using an existing input
 ```shell
 > http get https://www.nushell.sh/book/ | timeit { split chars }
+
 ```

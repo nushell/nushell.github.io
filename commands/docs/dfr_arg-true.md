@@ -2,11 +2,11 @@
 title: dfr arg-true
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Returns indexes where values are true
+  Returns indexes where values are true.
 usage: |
-  Returns indexes where values are true
+  Returns indexes where values are true.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -22,4 +22,10 @@ usage: |
 Returns indexes where values are true
 ```shell
 > [false true false] | dfr into-df | dfr arg-true
+╭───┬──────────╮
+│ # │ arg_true │
+├───┼──────────┤
+│ 0 │        1 │
+╰───┴──────────╯
+
 ```

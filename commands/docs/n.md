@@ -2,7 +2,7 @@
 title: n
 categories: |
   shells
-version: 0.76.0
+version: 0.77.0
 shells: |
   Switch to the next shell.
 usage: |
@@ -22,9 +22,11 @@ usage: |
 Make two directories and enter new shells for them, use `n` to jump to the next shell
 ```shell
 > mkdir foo bar; enter foo; enter ../bar; n
+
 ```
 
 Run `n` several times and note the changes of current directory
 ```shell
 > n
+
 ```

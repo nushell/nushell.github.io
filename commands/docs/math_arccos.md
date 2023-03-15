@@ -2,7 +2,7 @@
 title: math arccos
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
   Returns the arccosine of the number.
 usage: |
@@ -26,9 +26,11 @@ usage: |
 Get the arccosine of 1
 ```shell
 > 1 | math arccos
+0
 ```
 
 Get the arccosine of -1 in degrees
 ```shell
 > -1 | math arccos -d
+180
 ```

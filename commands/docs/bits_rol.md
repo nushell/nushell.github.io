@@ -2,11 +2,11 @@
 title: bits rol
 categories: |
   bits
-version: 0.76.0
+version: 0.77.0
 bits: |
-  Bitwise rotate left for integers
+  Bitwise rotate left for integers.
 usage: |
-  Bitwise rotate left for integers
+  Bitwise rotate left for integers.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for bits
@@ -28,9 +28,16 @@ usage: |
 Rotate left a number with 2 bits
 ```shell
 > 17 | bits rol 2
+68
 ```
 
 Rotate left a list of numbers with 2 bits
 ```shell
 > [5 3 2] | bits rol 2
+╭───┬────╮
+│ 0 │ 20 │
+│ 1 │ 12 │
+│ 2 │  8 │
+╰───┴────╯
+
 ```

@@ -2,11 +2,11 @@
 title: split chars
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Split a string into a list of characters
+  Split a string into a list of characters.
 usage: |
-  Split a string into a list of characters
+  Split a string into a list of characters.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -27,9 +27,23 @@ usage: |
 Split the string into a list of characters
 ```shell
 > 'hello' | split chars
+╭───┬───╮
+│ 0 │ h │
+│ 1 │ e │
+│ 2 │ l │
+│ 3 │ l │
+│ 4 │ o │
+╰───┴───╯
+
 ```
 
 Split on grapheme clusters
 ```shell
 > '🇯🇵ほげ' | split chars -g
+╭───┬────╮
+│ 0 │ 🇯🇵 │
+│ 1 │ ほ │
+│ 2 │ げ │
+╰───┴────╯
+
 ```

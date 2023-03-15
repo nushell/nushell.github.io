@@ -2,11 +2,11 @@
 title: overlay list
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  List all active overlays
+  List all active overlays.
 usage: |
-  List all active overlays
+  List all active overlays.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -26,4 +26,5 @@ Get the last activated overlay
 > module spam { export def foo [] { "foo" } }
     overlay use spam
     overlay list | last
+spam
 ```

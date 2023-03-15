@@ -2,11 +2,11 @@
 title: config nu
 categories: |
   env
-version: 0.76.0
+version: 0.77.0
 env: |
-  Edit nu configurations
+  Edit nu configurations.
 usage: |
-  Edit nu configurations
+  Edit nu configurations.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for env
@@ -22,4 +22,5 @@ usage: |
 allow user to open and update nu config
 ```shell
 > config nu
+
 ```

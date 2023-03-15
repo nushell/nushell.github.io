@@ -2,11 +2,11 @@
 title: date
 categories: |
   date
-version: 0.76.0
+version: 0.77.0
 date: |
-  Date-related commands
+  Date-related commands.
 usage: |
-  Date-related commands
+  Date-related commands.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for date

@@ -2,11 +2,11 @@
 title: math variance
 categories: |
   math
-version: 0.76.0
+version: 0.77.0
 math: |
-  Returns the variance of a list of numbers or of each column in a table
+  Returns the variance of a list of numbers or of each column in a table.
 usage: |
-  Returns the variance of a list of numbers or of each column in a table
+  Returns the variance of a list of numbers or of each column in a table.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for math
@@ -26,9 +26,11 @@ usage: |
 Get the variance of a list of numbers
 ```shell
 > [1 2 3 4 5] | math variance
+2
 ```
 
 Get the sample variance of a list of numbers
 ```shell
 > [1 2 3 4 5] | math variance -s
+2.5
 ```

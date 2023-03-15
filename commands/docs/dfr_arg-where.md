@@ -2,11 +2,11 @@
 title: dfr arg-where
 categories: |
   expression
-version: 0.76.0
+version: 0.77.0
 expression: |
-  Creates an expression that returns the arguments where expression is true
+  Creates an expression that returns the arguments where expression is true.
 usage: |
-  Creates an expression that returns the arguments where expression is true
+  Creates an expression that returns the arguments where expression is true.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for expression
@@ -23,4 +23,11 @@ Return a dataframe where the value match the expression
 ```shell
 > let df = ([[a b]; [one 1] [two 2] [three 3]] | dfr into-df);
     $df | dfr select (dfr arg-where ((dfr col b) >= 2) | dfr as b_arg)
+╭───┬───────╮
+│ # │ b_arg │
+├───┼───────┤
+│ 0 │     1 │
+│ 1 │     2 │
+╰───┴───────╯
+
 ```

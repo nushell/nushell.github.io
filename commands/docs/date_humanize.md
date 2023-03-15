@@ -2,7 +2,7 @@
 title: date humanize
 categories: |
   date
-version: 0.76.0
+version: 0.77.0
 date: |
   Print a 'humanized' format for the date, relative to now.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Print a 'humanized' format for the date, relative to now.
 ```shell
 > "2021-10-22 20:00:12 +01:00" | date humanize
+
 ```

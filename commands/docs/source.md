@@ -2,7 +2,7 @@
 title: source
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Runs a script file in the current context.
 usage: |
@@ -29,9 +29,11 @@ This command is a parser keyword. For details, check:
 Runs foo.nu in the current context
 ```shell
 > source foo.nu
+
 ```
 
 Runs foo.nu in current context and call the command defined, suppose foo.nu has content: `def say-hi [] { echo 'Hi!' }`
 ```shell
 > source ./foo.nu; say-hi
+
 ```

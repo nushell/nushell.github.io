@@ -2,11 +2,11 @@
 title: encode base64
 categories: |
   hash
-version: 0.76.0
+version: 0.77.0
 hash: |
-  Encode a string or binary value using Base64
+  Encode a string or binary value using Base64.
 usage: |
-  Encode a string or binary value using Base64
+  Encode a string or binary value using Base64.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for hash
@@ -28,14 +28,17 @@ usage: |
 Encode binary data
 ```shell
 > 0x[09 F9 11 02 9D 74 E3 5B D8 41 56 C5 63 56 88 C0] | encode base64
+CfkRAp1041vYQVbFY1aIwA==
 ```
 
 Encode a string with default settings
 ```shell
 > 'Some Data' | encode base64
+U29tZSBEYXRh
 ```
 
 Encode a string with the binhex character set
 ```shell
 > 'Some Data' | encode base64 --character-set binhex
+7epXB5"%A@4J
 ```

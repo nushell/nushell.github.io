@@ -2,7 +2,7 @@
 title: if
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Conditionally run a block.
 usage: |
@@ -31,14 +31,17 @@ This command is a parser keyword. For details, check:
 Output a value if a condition matches, otherwise return nothing
 ```shell
 > if 2 < 3 { 'yes!' }
+yes!
 ```
 
 Output a value if a condition matches, else return another value
 ```shell
 > if 5 < 3 { 'yes!' } else { 'no!' }
+no!
 ```
 
 Chain multiple if's together
 ```shell
 > if 5 < 3 { 'yes!' } else if 4 < 5 { 'no!' } else { 'okay!' }
+no!
 ```

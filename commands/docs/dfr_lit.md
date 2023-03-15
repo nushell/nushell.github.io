@@ -2,11 +2,11 @@
 title: dfr lit
 categories: |
   expression
-version: 0.76.0
+version: 0.77.0
 expression: |
-  Creates a literal expression
+  Creates a literal expression.
 usage: |
-  Creates a literal expression
+  Creates a literal expression.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for expression
@@ -22,4 +22,8 @@ usage: |
 Created a literal expression and converts it to a nu object
 ```shell
 > dfr lit 2 | dfr into-nu
+╭───────┬─────────╮
+│ expr  │ literal │
+│ value │ 2i64    │
+╰───────┴─────────╯
 ```

@@ -2,11 +2,11 @@
 title: complete
 categories: |
   system
-version: 0.76.0
+version: 0.77.0
 system: |
-  Capture the outputs and exit code from an external piped in command in a nushell table
+  Capture the outputs and exit code from an external piped in command in a nushell table.
 usage: |
-  Capture the outputs and exit code from an external piped in command in a nushell table
+  Capture the outputs and exit code from an external piped in command in a nushell table.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for system
@@ -24,9 +24,11 @@ In order to capture stdout, stderr, and exit_code, externally piped in commands 
 Run the external command to completion, capturing stdout and exit_code
 ```shell
 > ^external arg1 | complete
+
 ```
 
 Run external command to completion, capturing, stdout, stderr and exit_code
 ```shell
 > do { ^external arg1 } | complete
+
 ```

@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
   Display help information about different parts of Nushell.
 usage: |
@@ -29,14 +29,17 @@ usage: |
 show help for single command, alias, or module
 ```shell
 > help match
+
 ```
 
 show help for single sub-command, alias, or module
 ```shell
 > help str lpad
+
 ```
 
 search for string in command names, usage and search terms
 ```shell
 > help --find char
+
 ```

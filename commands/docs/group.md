@@ -2,7 +2,7 @@
 title: group
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Groups input into groups of `group_size`.
 usage: |
@@ -26,4 +26,15 @@ usage: |
 Group the a list by pairs
 ```shell
 > [1 2 3 4] | group 2
+╭───┬───────────╮
+│ 0 │ ╭───┬───╮ │
+│   │ │ 0 │ 1 │ │
+│   │ │ 1 │ 2 │ │
+│   │ ╰───┴───╯ │
+│ 1 │ ╭───┬───╮ │
+│   │ │ 0 │ 3 │ │
+│   │ │ 1 │ 4 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
+
 ```

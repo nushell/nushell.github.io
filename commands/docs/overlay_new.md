@@ -2,11 +2,11 @@
 title: overlay new
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Create an empty overlay
+  Create an empty overlay.
 usage: |
-  Create an empty overlay
+  Create an empty overlay.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -31,4 +31,5 @@ This command is a parser keyword. For details, check:
 Create an empty overlay
 ```shell
 > overlay new spam
+
 ```

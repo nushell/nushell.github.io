@@ -2,11 +2,11 @@
 title: def-env
 categories: |
   core
-version: 0.76.0
+version: 0.77.0
 core: |
-  Define a custom command, which participates in the caller environment
+  Define a custom command, which participates in the caller environment.
 usage: |
-  Define a custom command, which participates in the caller environment
+  Define a custom command, which participates in the caller environment.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for core
@@ -34,4 +34,5 @@ This command is a parser keyword. For details, check:
 Set environment variable by call a custom command
 ```shell
 > def-env foo [] { let-env BAR = "BAZ" }; foo; $env.BAR
+BAZ
 ```

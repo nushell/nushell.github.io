@@ -2,7 +2,7 @@
 title: every
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Show (or skip) every n-th row, starting from the first one.
 usage: |
@@ -27,9 +27,20 @@ usage: |
 Get every second row
 ```shell
 > [1 2 3 4 5] | every 2
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 3 │
+│ 2 │ 5 │
+╰───┴───╯
+
 ```
 
 Skip every second row
 ```shell
 > [1 2 3 4 5] | every 2 --skip
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 4 │
+╰───┴───╯
+
 ```

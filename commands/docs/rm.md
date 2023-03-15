@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -34,24 +34,29 @@ usage: |
 Delete, or move a file to the trash (based on the 'always_trash' config option)
 ```shell
 > rm file.txt
+
 ```
 
 Move a file to the trash
 ```shell
 > rm --trash file.txt
+
 ```
 
 Delete a file permanently, even if the 'always_trash' config option is true
 ```shell
 > rm --permanent file.txt
+
 ```
 
 Delete a file, ignoring 'file not found' errors
 ```shell
 > rm --force file.txt
+
 ```
 
 Delete all 0KB files in the current directory
 ```shell
 > ls | where size == 0KB and type == file | each { rm $in.name } | null
+
 ```

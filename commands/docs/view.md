@@ -2,11 +2,11 @@
 title: view
 categories: |
   debug
-version: 0.76.0
+version: 0.77.0
 debug: |
-  Various commands for viewing debug information
+  Various commands for viewing debug information.
 usage: |
-  Various commands for viewing debug information
+  Various commands for viewing debug information.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug

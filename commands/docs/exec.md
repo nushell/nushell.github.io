@@ -2,7 +2,7 @@
 title: exec
 categories: |
   system
-version: 0.76.0
+version: 0.77.0
 system: |
   Execute a command, replacing the current process.
 usage: |
@@ -28,9 +28,11 @@ Currently supported only on Unix-based systems.
 Execute external 'ps aux' tool
 ```shell
 > exec ps aux
+
 ```
 
 Execute 'nautilus'
 ```shell
 > exec nautilus
+
 ```

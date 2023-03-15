@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   experimental
-version: 0.76.0
+version: 0.77.0
 experimental: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -22,4 +22,5 @@ usage: |
 Outputs a nuon string representing the contents of this list
 ```shell
 > [1 2 3] | to nuon
+[1, 2, 3]
 ```

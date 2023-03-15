@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   Change directory.
 usage: |
@@ -26,14 +26,17 @@ usage: |
 Change to your home directory
 ```shell
 > cd ~
+
 ```
 
 Change to a directory via abbreviations
 ```shell
 > cd d/s/9
+
 ```
 
 Change to the previous working directory ($OLDPWD)
 ```shell
 > cd -
+
 ```

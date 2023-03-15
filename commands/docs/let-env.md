@@ -2,7 +2,7 @@
 title: let-env
 categories: |
   env
-version: 0.76.0
+version: 0.77.0
 env: |
   Create an environment variable and give it a value.
 usage: |
@@ -27,4 +27,5 @@ usage: |
 Create an environment variable and display it
 ```shell
 > let-env MY_ENV_VAR = 1; $env.MY_ENV_VAR
+1
 ```

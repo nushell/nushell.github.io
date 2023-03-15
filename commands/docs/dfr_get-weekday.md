@@ -2,11 +2,11 @@
 title: dfr get-weekday
 categories: |
   dataframe
-version: 0.76.0
+version: 0.77.0
 dataframe: |
-  Gets weekday from date
+  Gets weekday from date.
 usage: |
-  Gets weekday from date
+  Gets weekday from date.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -24,4 +24,11 @@ Returns weekday from a date
 > let dt = ('2020-08-04T16:39:18+00:00' | into datetime -z 'UTC');
     let df = ([$dt $dt] | dfr into-df);
     $df | dfr get-weekday
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 2 │
+│ 1 │ 2 │
+╰───┴───╯
+
 ```

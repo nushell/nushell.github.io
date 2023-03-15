@@ -2,11 +2,11 @@
 title: str length
 categories: |
   strings
-version: 0.76.0
+version: 0.77.0
 strings: |
-  Output the length of any strings in the pipeline
+  Output the length of any strings in the pipeline.
 usage: |
-  Output the length of any strings in the pipeline
+  Output the length of any strings in the pipeline.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for strings
@@ -28,14 +28,21 @@ usage: |
 Return the lengths of a string
 ```shell
 > 'hello' | str length
+5
 ```
 
 Count length using grapheme clusters
 ```shell
 > '🇯🇵ほげ ふが ぴよ' | str length -g
+9
 ```
 
 Return the lengths of multiple strings
 ```shell
 > ['hi' 'there'] | str length
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 5 │
+╰───┴───╯
+
 ```

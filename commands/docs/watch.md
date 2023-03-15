@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.76.0
+version: 0.77.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -31,14 +31,17 @@ usage: |
 Run `cargo test` whenever a Rust file changes
 ```shell
 > watch . --glob=**/*.rs { cargo test }
+
 ```
 
 Watch all changes in the current directory
 ```shell
 > watch . { |op, path, new_path| $"($op) ($path) ($new_path)"}
+
 ```
 
 Log all changes in a directory
 ```shell
 > watch /foo/bar { |op, path| $"($op) - ($path)(char nl)" | save --append changes_in_bar.log }
+
 ```

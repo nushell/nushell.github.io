@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.76.0
+version: 0.77.0
 filters: |
   Filter values based on a predicate closure.
 usage: |
@@ -29,14 +29,30 @@ a variable. On the other hand, the "row condition" syntax is not supported.
 Filter items of a list according to a condition
 ```shell
 > [1 2] | filter {|x| $x > 1}
+╭───┬───╮
+│ 0 │ 2 │
+╰───┴───╯
+
 ```
 
 Filter rows of a table according to a condition
 ```shell
 > [{a: 1} {a: 2}] | filter {|x| $x.a > 1}
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 2 │
+╰───┴───╯
+
 ```
 
 Filter rows of a table according to a stored condition
 ```shell
 > let cond = {|x| $x.a > 1}; [{a: 1} {a: 2}] | filter $cond
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 2 │
+╰───┴───╯
+
 ```
