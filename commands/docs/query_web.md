@@ -19,7 +19,7 @@ usage: |
 
 ## Examples
 
-Retrieve all <header> elements from phoronix.com website
+Retrieve all `<header>` elements from phoronix.com website
 ```shell
 > http get https://phoronix.com | query web -q 'header'
 
