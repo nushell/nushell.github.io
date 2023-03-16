@@ -2,7 +2,7 @@
 title: from vcf
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse text as .vcf and create table.
 usage: |
@@ -26,4 +26,16 @@ N:Foo
 FN:Bar
 EMAIL:foo@bar.com
 END:VCARD' | from vcf
+╭───┬──────────────────────────────────────╮
+│ # │              properties              │
+├───┼──────────────────────────────────────┤
+│ 0 │ ╭───┬───────┬─────────────┬────────╮ │
+│   │ │ # │ name  │    value    │ params │ │
+│   │ ├───┼───────┼─────────────┼────────┤ │
+│   │ │ 0 │ N     │ Foo         │        │ │
+│   │ │ 1 │ FN    │ Bar         │        │ │
+│   │ │ 2 │ EMAIL │ foo@bar.com │        │ │
+│   │ ╰───┴───────┴─────────────┴────────╯ │
+╰───┴──────────────────────────────────────╯
+
 ```
