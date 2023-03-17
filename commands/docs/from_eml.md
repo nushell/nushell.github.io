@@ -2,7 +2,7 @@
 title: from eml
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse text as .eml and create record.
 usage: |
@@ -29,6 +29,18 @@ Convert eml structured data into record
 Subject: Welcome
 To: someone@somewhere.com
 Test' | from eml
+╭─────────┬─────────────────────────────────────╮
+│ Subject │ Welcome                             │
+│         │ ╭─────────┬────────────────╮        │
+│ From    │ │ Name    │                │        │
+│         │ │ Address │ test@email.com │        │
+│         │ ╰─────────┴────────────────╯        │
+│         │ ╭─────────┬───────────────────────╮ │
+│ To      │ │ Name    │                       │ │
+│         │ │ Address │ someone@somewhere.com │ │
+│         │ ╰─────────┴───────────────────────╯ │
+│ Body    │ Test                                │
+╰─────────┴─────────────────────────────────────╯
 ```
 
 Convert eml structured data into record
@@ -37,4 +49,16 @@ Convert eml structured data into record
 Subject: Welcome
 To: someone@somewhere.com
 Test' | from eml -b 1
+╭─────────┬─────────────────────────────────────╮
+│ Subject │ Welcome                             │
+│         │ ╭─────────┬────────────────╮        │
+│ From    │ │ Name    │                │        │
+│         │ │ Address │ test@email.com │        │
+│         │ ╰─────────┴────────────────╯        │
+│         │ ╭─────────┬───────────────────────╮ │
+│ To      │ │ Name    │                       │ │
+│         │ │ Address │ someone@somewhere.com │ │
+│         │ ╰─────────┴───────────────────────╯ │
+│ Body    │ T                                   │
+╰─────────┴─────────────────────────────────────╯
 ```

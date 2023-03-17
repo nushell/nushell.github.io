@@ -2,7 +2,7 @@
 title: from ini
 categories: |
   formats
-version: 0.76.0
+version: 0.77.0
 formats: |
   Parse text as .ini and create table.
 usage: |
@@ -24,4 +24,10 @@ Converts ini formatted string to record
 > '[foo]
 a=1
 b=2' | from ini
+╭─────┬───────────╮
+│     │ ╭───┬───╮ │
+│ foo │ │ a │ 1 │ │
+│     │ │ b │ 2 │ │
+│     │ ╰───┴───╯ │
+╰─────┴───────────╯
 ```
