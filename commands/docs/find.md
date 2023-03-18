@@ -90,3 +90,13 @@ Find value in records
 ╰───┴─────────┴─────────╯
 
 ```
+
+### Removing ANSI Escape Sequences
+
+When using find in Nushell, you may notice ANSI escape sequences for coloring the matches. To remove these, use the ansi strip command.
+
+Remove ANSI Sequences from a Single Item
+```shell
+> ls | find Car | get 0.name | ansi strip
+
+```
