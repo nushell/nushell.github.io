@@ -26,6 +26,8 @@ Note: this table assumes Nu 0.60.0 or later.
 | `touch test.txt`                     | `touch test.txt`                                 | Create a file                                                     |
 | `> <path>`                           | `\| save --raw <path>`                           | Save string into a file                                           |
 | `>> <path>`                          | `\| save --raw --append <path>`                  | Append string to a file                                           |
+| `> /dev/null`                        | `\| ignore`                                      | Discard command output                                            |
+| `> /dev/null 2>&1`                   | `out+err> /dev/null`                             | Discard command output, including stderr                                            |
 | `cat <path>`                         | `open --raw <path>`                              | Display the contents of the given file                            |
 |                                      | `open <path>`                                    | Read a file as structured data                                    |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                             | Move file to new location                                         |
