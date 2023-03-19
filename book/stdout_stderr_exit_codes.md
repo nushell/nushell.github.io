@@ -56,13 +56,13 @@ If we try to run the external `cat` on a file that doesn't exist, we can see wha
 
 ## Using `out>`, `err>` to redirect stdout and stderr to files
 
-If you want to redirect output to file, you can just types something like this:
+If you want to redirect output to file, you can just type something like this:
 
 ```
 cat unknown.txt out> out.log err> err.log
 ```
 
-If you want to redirect both stdout and stderr to the same file, just types something like this:
+If you want to redirect both stdout and stderr to the same file, just type something like this:
 
 ```
 cat unknown.txt out+err> log.log
