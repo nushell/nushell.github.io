@@ -43,6 +43,48 @@ In our module, we've chosen to export only the custom command `my-command` but n
 
 This is possible because custom completion tags using `@` are locked-in as the command is first parsed.
 
+## Context aware custom completions
+
+It is possible to pass the context to the custom completion command. This is useful in situations where it is necessary to know previous arguments or flags to generate accurate completions.
+
+Let's apply this concept to the previous example:
+
+```
+module commands {
+    def animals [] {
+        ["cat", "dog", "eel" ]
+    }
+    
+    def animal-names [context: string] {
+        {
+            cat: ["Missy", "Phoebe"]
+            dog: ["Lulu", "Enzo"]
+            eel: ["Eww", "Slippy"]
+        } | get -i ($context | split words | last)
+    }
+
+    export def my-command [
+        animal: string@animals
+        name: string@animal-names
+    ] {
+        print $"The ($animal) is named ($name)."
+    }
+}
+```
+
+Here, the command `animal-names` returns the appropriate list of names. This is because `$context` is a string with where the value is the command that has been typed until now.
+
+```
+>| my-command
+cat                 dog                 eel
+>| my-command dog
+Lulu                Enzo
+>my-command dog enzo
+The dog is named Enzo
+```
+
+On the second line, once we press the `<tab>` key, the argument `"my-command dog"` is passed to the `animal-names` command as context.
+
 ## Custom completion and [`extern`](/commands/docs/extern.md)
 
 A powerful combination is adding custom completions to [known `extern` commands](externs.md). These work the same way as adding a custom completion to a custom command: by creating the custom completion and then attaching it with a `@` to the type of one of the positional or flag arguments of the `extern`.
