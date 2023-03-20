@@ -29,6 +29,8 @@ export const sidebarDe: SidebarConfig = {
         'von_bash_kommend',
         'command_reference',
         'coloring_and_theming',
+        'overlays',
+        'command_signature',
       ],
     },
   ],
