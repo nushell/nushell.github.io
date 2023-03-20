@@ -114,6 +114,26 @@ def my_commits [] {
 }
 ```
 
+> **Note**
+>
+> with the following snippet
+>
+> ```nu
+> def my-command [commit: string@my_commits] {
+>     print $commit
+> }
+> ```
+>
+> be aware that, even though the completion menu will show you something like
+>
+> ```nu
+> >_ my-command <TAB>
+> 5c2464  Add .gitignore
+> f3a377  Initial commit
+> ```
+>
+> only the value, i.e. "5c2464" or "f3a377", will be used in the command arguments!
+
 ## External completions
 
 External completers can also be integrated, instead of relying solely on Nushell ones.
