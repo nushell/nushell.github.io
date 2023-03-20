@@ -115,6 +115,7 @@ def my_commits [] {
 ```
 
 > **Note**
+>
 > with the following snippet
 >
 > ```nu
