@@ -1,4 +1,4 @@
-# Testing in Nushell
+# Testing in Nushell (preview)
 
 ## Assert commands
 
