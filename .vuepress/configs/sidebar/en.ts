@@ -91,6 +91,7 @@ export const sidebarEn: SidebarConfig = {
       link: '/book/advanced.md',
       collapsible: false,
       children: [
+        '/book/standard_library.md',
         '/book/dataframes.md',
         '/book/metadata.md',
         '/book/creating_errors.md',
