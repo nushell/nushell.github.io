@@ -26,3 +26,5 @@ By defining an overlay, you bring in module's definitions into its own swappable
 This enables features like activating virtual environments or overriding sets of default commands with custom variants.
 
 The help message of some built-in commands shows a [signature](command_signature.md).  You can take a look at it to get general rules how the command can be used.
+
+The standard library also has a [testing framework](testing.md) if you want to prove your reusable code works perfectly.
