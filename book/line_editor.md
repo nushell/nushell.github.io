@@ -216,8 +216,14 @@ Each keybinding requires the next elements:
   - control
   - alt
   - shift
-  - control | alt
-  - control | alt | shift
+  - shift_alt
+  - alt_shift
+  - control_alt
+  - alt_control
+  - control_shift
+  - shift_control
+  - control_alt_shift
+  - control_shift_alt
 - keycode: This represent the key to be pressed
 - mode: emacs, vi_insert, vi_normal (a single string or a list. e.g.
   [`vi_insert` `vi_normal`])
