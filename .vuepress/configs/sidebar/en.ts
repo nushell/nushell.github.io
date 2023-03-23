@@ -46,6 +46,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/modules.md',
         '/book/overlays.md',
         '/book/command_signature.md',
+        '/book/testing.md',
       ],
     },
     {
@@ -91,6 +92,7 @@ export const sidebarEn: SidebarConfig = {
       link: '/book/advanced.md',
       collapsible: false,
       children: [
+        '/book/standard_library.md',
         '/book/dataframes.md',
         '/book/metadata.md',
         '/book/creating_errors.md',
