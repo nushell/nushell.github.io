@@ -9,6 +9,7 @@ Currently, we support these types of hooks:
 - `pre_execution` : Triggered before the line input starts executing
 - `env_change` : Triggered when an environment variable changes
 - `display_output` : A block that the output is passed to (experimental).
+- `command_not_found` : Triggered when a command is not found.
 
 To make it clearer, we can break down Nushell's execution cycle.
 The steps to evaluate one line in the REPL mode are as follows:
@@ -18,6 +19,7 @@ The steps to evaluate one line in the REPL mode are as follows:
 1. Display prompt and wait for user input
 1. After user typed something and pressed "Enter": Check for `pre_execution` hooks and run them
 1. Parse and evaluate user input
+1. If a command is not found: Run the `command_not_found` hook. If it returns a string, show it.
 1. If `display_output` is defined, use it to print command output
 1. Return to 1.
 
@@ -254,3 +256,31 @@ Of course this isn't very convenient unless you use
 a browser that automatically reloads when the file changes.
 Instead of the [`save`](/commands/docs/save.md) command, you would normally customize this
 to send the HTML output to a desired window.
+
+### `command_not_found` hook in *Arch Linux*
+The following hook uses the `pkgfile` command, to find which packages commands belong to in *Arch Linux*.
+
+```
+let-env config = {
+    ...other config...
+
+    hooks: {
+        ...other hooks...
+
+        command_not_found: {
+            |cmd_name| (
+                try {
+                    let pkgs = (pkgfile --binaries --verbose $cmd_name)
+                    if ($pkgs | is-empty) {
+                        return null
+                    }
+                    (
+                        $"(ansi $env.config.color_config.shape_external)($cmd_name)(ansi reset) " +
+                        $"may be found in the following packages:\n($pkgs)"
+                    )
+                }
+            )
+        }
+    }
+}
+```
