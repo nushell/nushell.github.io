@@ -15,7 +15,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 表的边框由`config.nu`中的`table_mode`设置来控制。下面是一个例子：
 
 ```shell
-> let $config = {
+> let-env config = {
     table_mode: rounded
 }
 ```
@@ -348,7 +348,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 这里有一个小例子，说明如何对这些项目应用颜色。任何没有显示指定的都会被设置为默认的颜色。
 
 ```shell
-> let $config = {
+> let-env config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
         shape_bool: green

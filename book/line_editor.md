@@ -17,7 +17,7 @@ mode.
 For example:
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
     edit_mode: emacs
     ...
@@ -126,7 +126,7 @@ edited and sent to Nushell. To configure the max number of records that
 Reedline should store you will need to adjust this value in your config file:
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
     max_history_size: 1000
     ...
@@ -188,7 +188,7 @@ For example, let's say that you would like to map the completion menu to the
 config file.
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -273,7 +273,7 @@ The next keybinding is an example of a series of events sent to the engine. It
 first clears the prompt, inserts a string and then enters that value
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -304,7 +304,7 @@ example does the same as the previous one in a simpler way, sending a single
 event to the engine
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -449,7 +449,7 @@ one is successful, the event processing is stopped.
 The next keybinding represents this case.
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -486,7 +486,7 @@ For example, the next keybinding will always send a `down` because that event
 is always successful
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -516,7 +516,7 @@ If you want to remove a certain default keybinding without replacing it with a d
 e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -561,7 +561,7 @@ the line the available command examples.
 The help menu can be configured by modifying the next parameters
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     menus = [
@@ -602,7 +602,7 @@ The completion menu by default is accessed by pressing `tab` and it can be confi
 modifying these values from the config object:
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     menus: [
@@ -640,7 +640,7 @@ chronological order, making it extremely easy to select a previous command.
 The history menu can be configured by modifying these values from the config object:
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     menus = [
@@ -738,7 +738,7 @@ true).
 With that in mind, the desired menu would look like this
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     menus = [
@@ -814,7 +814,7 @@ change that by defining new keybindings. For example, the next two keybindings
 assign the completion and history menu to `Ctrl+t` and `Ctrl+y` respectively
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [

@@ -11,7 +11,7 @@ Ein Beispiel für eine Nushell `config.nu` kann [hier](https://github.com/nushel
 Die zentralen Konfigurationen von Nushell sind in der globalen `$config` Variable festgehalten. Dieser Eintrag kann wie folgt erstellt werden:
 
 ```
-let $config = {
+let-env config = {
   ...
 }
 ```
@@ -19,7 +19,7 @@ let $config = {
 Es ist auch möglich `$config` zu überschreiben und zu ändern:
 
 ```
-let $config = ($config | update <field name> <field value>)
+let-env config = ($config | update <field name> <field value>)
 ```
 
 ### Umgebung
