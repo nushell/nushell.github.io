@@ -17,7 +17,7 @@ Tabellen Rahmen werden mit der Einstellung `table_mode` in der `config.nu` konfi
 Hier ein Beispiel:
 
 ```shell
-> let $config = {
+> let-env config = {
     table_mode: rounded
 }
 ```
@@ -352,7 +352,7 @@ Hier die aktuelle Formen Liste.
 Hier ein kleines Beispiel wie Farben auf diese Teile angewendet werden. Was nicht spezifiziert wird, erhält die Standardfarbe.
 
 ```shell
-> let $config = {
+> let-env config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
         shape_bool: green

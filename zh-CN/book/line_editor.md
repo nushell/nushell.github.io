@@ -9,7 +9,7 @@ Nushell 的行编辑器 [Reedline](https://github.com/nushell/reedline) 是一�
 Reedline 允许你使用两种模式来编辑文本：vi 和 emacs。如果没有指定，默认的编辑模式是 emacs 模式。若要自行设置喜欢的模式，你可以修改配置文件为相应模式。比如：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
     edit_mode: emacs
     ...
@@ -114,7 +114,7 @@ Vi 正常操作快捷键
 如前所述，Reedline 管理并存储所有被编辑并发送给 Nushell 的命令。要配置 Reedline 可以存储的最大记录数，你需要在配置文件中调整这个值：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
     max_history_size: 1000
     ...
@@ -169,7 +169,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 例如，我们假设你想把补全菜单绑定到 `Ctrl + t` 这组快捷键上（默认是`tab`）。你可以添加下面的条目到你的配置文件：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -237,7 +237,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 后一个按键绑定的例子是向引擎发送一系列的事件。它首先清除提示，插入一个字符串，然后输入该值。
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -263,7 +263,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 上面按键绑定的缺点是，插入的文本将被验证处理并保存在历史记录中，这使得按键绑定的执行速度有点慢，而且会用相同的命令来填充命令历史。出于这个原因，可以采用 `ExecuteHostCommand` 类型的事件。下一个例子以更简单的方式做了与前一个相同的事情，发送了一个单一的事件给引擎：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -380,7 +380,7 @@ keybindings list | where type == edits
 下一个键盘绑定就是这种情况：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -409,7 +409,7 @@ keybindings list | where type == edits
 例如，下一个按键绑定将总是发送一个`down`，因为该事件总是成功的。
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -439,7 +439,7 @@ keybindings list | where type == edits
 例如，在所有的编辑模式下，禁用 `Ctrl + l` 清除屏幕：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [
@@ -474,7 +474,7 @@ keybindings list | where type == edits
 帮助菜单可以通过修改以下参数进行配置：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     menus = [
@@ -509,7 +509,7 @@ keybindings list | where type == edits
 默认情况下，补全菜单是通过按`tab`访问的，它可以通过修改配置对象中的这些值来进行配置：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     menus = [
@@ -544,7 +544,7 @@ keybindings list | where type == edits
 历史菜单可以通过修改配置对象中的这些值进行配置：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     menus = [
@@ -617,7 +617,7 @@ let a = (ls | where size > 10MiB)
 满足这些所需的菜单将看起来像这样：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     menus = [
@@ -674,7 +674,7 @@ let a = (ls | where size > 10MiB)
 如果你想改变两个菜单的默认激活方式，可以通过定义新的按键绑定来实现。例如，接下来的两个按键绑定设置分别将`Ctrl+t`和`Ctrl+y`定义为触发自动补全和历史菜单：
 
 ```bash
-  let $config = {
+  let-env config = {
     ...
 
     keybindings: [

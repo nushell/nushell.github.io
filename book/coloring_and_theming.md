@@ -13,7 +13,7 @@ Many parts of Nushell's interface can have their color customized. All of these 
 Table borders are controlled by the `table_mode` setting in `config.nu`. Here is an example:
 
 ```shell
-> let $config = {
+> let-env config = {
     table_mode: rounded
 }
 ```
@@ -346,7 +346,7 @@ Here's the current list of flat shapes.
 Here's a small example of how to apply color to these items. Anything not specified will receive the default color.
 
 ```shell
-> let $config = {
+> let-env config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
         shape_bool: green
