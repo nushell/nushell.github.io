@@ -73,6 +73,13 @@ To remove the welcome message, you need to edit your `config.nu` by typing `conf
 
 @[code](@snippets/installation/remove_welcome_message.nu)
 
+> **Warning**  
+> be careful, the default config file already contains the `show_banner` setting and it is set to `true`.
+> leaving the default `show_banner: true` line after your personal `show_banner: false` will not disable the banner.
+
+> **Note**  
+> throwing a warning or an error for this kind of error is planned in [#8699](https://github.com/nushell/nushell/issues/8699).
+
 ## Configuring Nu as a login shell
 
 To use Nu as a login shell, you'll need to configure the `$env` variable. With this, you'll have enough support to run external commands as a login shell.
