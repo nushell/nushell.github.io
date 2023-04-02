@@ -163,10 +163,7 @@ $"## Notes
         let $examples = (
             $command.examples
             | each { |example|
-                let result = (
-                    $example.result
-                    | try { table --expand } catch { $in }
-                )
+                let result = (do -i { $example.result | try { table --expand } catch { $in } } )
 $"($example.description)
 ```shell
 > ($example.example)
@@ -243,7 +240,7 @@ def generate-category-sidebar [unique_categories] {
     let sidebar_path = (['.', '.vuepress', 'configs', "sidebar", "command_categories.ts"] | path join)
     let list_content = (
       $unique_categories
-        | each { safe-path }
+        | each { || safe-path }
         | each { |category| $"  '/commands/categories/($category).md',"}
         | str join (char newline)
     )
