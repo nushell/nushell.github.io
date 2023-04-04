@@ -2,16 +2,25 @@
 
 A common task in a shell is to control the environment that external applications will use. This is often done automatically, as the environment is packaged up and given to the external application as it launches. Sometimes, though, we want to have more precise control over what environment variables an application sees.
 
-You can see the current environment variables using the [`env`](/commands/docs/env.html) command:
+You can see the current environment variables in the $env variable:
 
 ```
-   #           name                 type                value                 raw
-──────────────────────────────────────────────────────────────────────────────────────────
-  16   DISPLAY              string               :0                   :0
-  17   EDITOR               string               nvim                 nvim
-  28   LANG                 string               en_US.UTF-8          en_US.UTF-8
-  35   PATH                 list<unknown>        [list 16 items]      /path1:/path2:/...
-  36   PROMPT_COMMAND       block                <Block 197>
+~> $env
+╭──────────────────────────────────┬───────────────────────────────────────────╮
+│                                  │ ╭──────┬────────────────────────────────╮ │
+│ ENV_CONVERSIONS                  │ │      │ ╭─────────────┬──────────────╮ │ │
+│                                  │ │ PATH │ │ from_string │ <Closure 32> │ │ │
+│                                  │ │      │ │ to_string   │ <Closure 34> │ │ │
+│                                  │ │      │ ╰─────────────┴──────────────╯ │ │
+│                                  │ │      │ ╭─────────────┬──────────────╮ │ │
+│                                  │ │ Path │ │ from_string │ <Closure 36> │ │ │
+│                                  │ │      │ │ to_string   │ <Closure 38> │ │ │
+│                                  │ │      │ ╰─────────────┴──────────────╯ │ │
+│                                  │ ╰──────┴────────────────────────────────╯ │
+│ HOME                             │ /Users/jelle                              │
+│ LSCOLORS                         │ GxFxCxDxBxegedabagaced                    │
+| ...                              | ...                                       |
+╰──────────────────────────────────┴───────────────────────────────────────────╯
 ```
 
 In Nushell, environment variables can be any value and have any type (see the `type` column).
