@@ -93,8 +93,8 @@ If you look closely at the examples in the default config, you'll see this:
 
 ```
 export extern "git push" [
-    remote?: string@"nu-complete git remotes", # the name of the remote
-    refspec?: string@"nu-complete git branches"# the branch / refspec
+    remote?: string@"nu-complete git remotes",  # the name of the remote
+    refspec?: string@"nu-complete git branches" # the branch / refspec
     ...
 ]
 ```
