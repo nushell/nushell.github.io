@@ -5,7 +5,7 @@ A common task in a shell is to control the environment that external application
 You can see the current environment variables in the $env variable:
 
 ```
-~> $env
+~> $env | table -e
 ╭──────────────────────────────────┬───────────────────────────────────────────╮
 │                                  │ ╭──────┬────────────────────────────────╮ │
 │ ENV_CONVERSIONS                  │ │      │ ╭─────────────┬──────────────╮ │ │
