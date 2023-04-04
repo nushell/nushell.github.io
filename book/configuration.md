@@ -75,15 +75,17 @@ To remove the welcome message, you need to edit your `config.nu` by typing `conf
 
 ## Configuring Nu as a login shell
 
-To use Nu as a login shell, you'll need to configure the `$env` variable. With this, you'll have enough support to run external commands as a login shell.
+To use Nu as a login shell, you'll need to configure the `$env` variable. This sets up the environment for external programs.
 
-You can build the full set of environment variables by running Nu inside of another shell, like Bash. Once you're in Nu, you can run a command like this:
+To get an idea of which environment variables are set up by your current login shell, start a new shell session, then run nu in that shell.
 
+You can then configure `let-env` commands that setup the same environment variables in your nu login shell. Use this command to generate `let-env` commands for all the environment variables:
+
+```nu
+$env | reject config | transpose key val | each {|r| echo $"let-env ($r.key) = '($r.val)'"} | str join (char nl)
 ```
-> env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str join (char nl)
-```
 
-This will print out [`let-env`](/commands/docs/let-env.html) lines, one for each environment variable along with its setting.
+This will print out [`let-env`](/commands/docs/let-env.html) lines, one for each environment variable along with its setting. You may not need all of them, for instance the `PS1` variable is bash specific.
 
 Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
