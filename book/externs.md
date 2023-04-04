@@ -6,33 +6,33 @@ This is where `extern` comes in. The `extern` keyword allows you to write a full
 
 ```
   export extern "git push" [
-    remote?: string@"nu-complete git remotes", # the name of the remote
-    refspec?: string@"nu-complete git branches"# the branch / refspec
-    --verbose(-v)                              # be more verbose
-    --quiet(-q)                                # be more quiet
-    --repo: string                             # repository
-    --all                                      # push all refs
-    --mirror                                   # mirror all refs
-    --delete(-d)                               # delete refs
-    --tags                                     # push tags (can't be used with --all or --mirror)
-    --dry-run(-n)                              # dry run
-    --porcelain                                # machine-readable output
-    --force(-f)                                # force updates
-    --force-with-lease: string                 # require old value of ref to be at this value
-    --recurse-submodules: string               # control recursive pushing of submodules
-    --thin                                     # use thin pack
-    --receive-pack: string                     # receive pack program
-    --exec: string                             # receive pack program
-    --set-upstream(-u)                         # set upstream for git pull/status
-    --progress                                 # force progress reporting
-    --prune                                    # prune locally removed refs
-    --no-verify                                # bypass pre-push hook
-    --follow-tags                              # push missing but relevant tags
-    --signed: string                           # GPG sign the push
-    --atomic                                   # request atomic transaction on remote side
-    --push-option(-o): string                  # option to transmit
-    --ipv4(-4)                                 # use IPv4 addresses only
-    --ipv6(-6)                                 # use IPv6 addresses only
+    remote?: string@"nu-complete git remotes",  # the name of the remote
+    refspec?: string@"nu-complete git branches" # the branch / refspec
+    --verbose(-v)                               # be more verbose
+    --quiet(-q)                                 # be more quiet
+    --repo: string                              # repository
+    --all                                       # push all refs
+    --mirror                                    # mirror all refs
+    --delete(-d)                                # delete refs
+    --tags                                      # push tags (can't be used with --all or --mirror)
+    --dry-run(-n)                               # dry run
+    --porcelain                                 # machine-readable output
+    --force(-f)                                 # force updates
+    --force-with-lease: string                  # require old value of ref to be at this value
+    --recurse-submodules: string                # control recursive pushing of submodules
+    --thin                                      # use thin pack
+    --receive-pack: string                      # receive pack program
+    --exec: string                              # receive pack program
+    --set-upstream(-u)                          # set upstream for git pull/status
+    --progress                                  # force progress reporting
+    --prune                                     # prune locally removed refs
+    --no-verify                                 # bypass pre-push hook
+    --follow-tags                               # push missing but relevant tags
+    --signed: string                            # GPG sign the push
+    --atomic                                    # request atomic transaction on remote side
+    --push-option(-o): string                   # option to transmit
+    --ipv4(-4)                                  # use IPv4 addresses only
+    --ipv6(-6)                                  # use IPv6 addresses only
   ]
 ```
 
