@@ -38,6 +38,10 @@ This is where `extern` comes in. The `extern` keyword allows you to write a full
 
 You'll notice this gives you all the same descriptive syntax that internal commands do, letting you describe flags, short flags, positional parameters, types, and more.
 
+::: warning Note
+A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign. 
+:::
+
 ## Types and custom completions
 
 In the above example, you'll notice some types are followed by `@` followed by the name of a command. We talk more about [custom completions](custom_completions.md) in their own section.
