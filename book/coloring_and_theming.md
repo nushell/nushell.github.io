@@ -298,7 +298,7 @@ Here's another small example using multiple color syntaxes with some comments.
         leading_trailing_space_bg: white # this sets only the foreground color in the original style
         header: { # this is like PR #489
             fg: "#B01455", # note, quotes are required on the values with hex colors
-            bg: "#ffb900",# note, commas are not required, it could also be all on one line
+            bg: "#ffb900", # note, commas are not required, it could also be all on one line
             attr: bli # note, there are no quotes around this value. it works with or without quotes
         }
         date: "#75507B"
