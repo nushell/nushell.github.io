@@ -23,12 +23,11 @@ You can see the current environment variables in the $env variable:
 ╰──────────────────────────────────┴───────────────────────────────────────────╯
 ```
 
-In Nushell, environment variables can be any value and have any type (see the `type` column).
-The actual value of the env. variable used within Nushell is under the `value` column.
-You can query the value directly using the `$env` variable, for example, `$env.PATH | length`.
-The last `raw` column shows the actual value that will be sent to external applications (see [Environment variable conversions](#environment-variable-conversions) for details).
+In Nushell, environment variables can be any value and have any type. You can see the type of an env variable with the describe command, for example: `$env.PROMPT_COMMAND | describe`.
 
-The environment is initially created from the Nu [configuration file](configuration.md) and from the environment that Nu is run inside of.
+To send environment variables to external applications, the values will need to be converted to strings. See [Environment variable conversions](#environment-variable-conversions) on how this works.
+
+The environment is initially created from the Nu [configuration files](configuration.md) and from the environment that Nu is run inside of.
 
 ## Setting environment variables
 
