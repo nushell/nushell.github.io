@@ -2,7 +2,7 @@
 title: dfr get-year
 categories: |
   dataframe
-version: 0.77.0
+version: 0.78.0
 dataframe: |
   Gets year from date.
 usage: |

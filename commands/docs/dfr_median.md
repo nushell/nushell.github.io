@@ -3,7 +3,7 @@ title: dfr median
 categories: |
   expression
   lazyframe
-version: 0.77.0
+version: 0.78.0
 expression: |
   Creates a median expression for an aggregation
 lazyframe: |

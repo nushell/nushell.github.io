@@ -2,7 +2,7 @@
 title: path basename
 categories: |
   default
-version: 0.77.0
+version: 0.78.0
 default: |
   Get the final component of a path.
 usage: |
@@ -26,23 +26,29 @@ usage: |
 
 Get basename of a path
 ```shell
-> '/home/joe/test.txt' | path basename
+> 'C:\Users\joe\test.txt' | path basename
 test.txt
 ```
 
-Get basename of a path by column
+Get basename of a path in a column
 ```shell
-> [[name];[/home/joe]] | path basename -c [ name ]
+> ls .. | path basename -c [ name ]
+
+```
+
+Get basename of a path in a column
+```shell
+> [[name];[C:\Users\Joe]] | path basename -c [ name ]
 ╭───┬──────╮
 │ # │ name │
 ├───┼──────┤
-│ 0 │ joe  │
+│ 0 │ Joe  │
 ╰───┴──────╯
 
 ```
 
 Replace basename of a path
 ```shell
-> '/home/joe/test.txt' | path basename -r 'spam.png'
-/home/joe/spam.png
+> 'C:\Users\joe\test.txt' | path basename -r 'spam.png'
+C:\Users\joe\spam.png
 ```

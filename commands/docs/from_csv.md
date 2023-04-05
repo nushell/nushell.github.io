@@ -2,7 +2,7 @@
 title: from csv
 categories: |
   formats
-version: 0.77.0
+version: 0.78.0
 formats: |
   Parse text as .csv and create table.
 usage: |
@@ -15,12 +15,16 @@ usage: |
 
 ## Signature
 
-```> from csv --separator --noheaders --no-infer --trim```
+```> from csv --separator --comment --quote --escape --noheaders --flexible --no-infer --trim```
 
 ## Parameters
 
  -  `--separator {string}`: a character to separate columns, defaults to ','
+ -  `--comment {string}`: a comment character to ignore lines starting with it
+ -  `--quote {string}`: a quote character to ignore separators in strings, defaults to '"'
+ -  `--escape {string}`: an escape character for strings containing the quote character
  -  `--noheaders` `(-n)`: don't treat the first row as column names
+ -  `--flexible` `(-)`: allow the number of fields in records to be variable
  -  `--no-infer` `(-)`: no field type inferencing
  -  `--trim {string}`: drop leading and trailing whitespaces around headers names and/or field values
 
@@ -44,31 +48,31 @@ Convert comma-separated data to a table, ignoring headers
 
 ```
 
-Convert comma-separated data to a table, ignoring headers
-```shell
-> open data.txt | from csv -n
-
-```
-
 Convert semicolon-separated data to a table
 ```shell
 > open data.txt | from csv --separator ';'
 
 ```
 
-Convert semicolon-separated data to a table, dropping all possible whitespaces around header names and field values
+Convert comma-separated data to a table, ignoring lines starting with '#'
+```shell
+> open data.txt | from csv --comment '#'
+
+```
+
+Convert comma-separated data to a table, dropping all possible whitespaces around header names and field values
 ```shell
 > open data.txt | from csv --trim all
 
 ```
 
-Convert semicolon-separated data to a table, dropping all possible whitespaces around header names
+Convert comma-separated data to a table, dropping all possible whitespaces around header names
 ```shell
 > open data.txt | from csv --trim headers
 
 ```
 
-Convert semicolon-separated data to a table, dropping all possible whitespaces around field values
+Convert comma-separated data to a table, dropping all possible whitespaces around field values
 ```shell
 > open data.txt | from csv --trim fields
 

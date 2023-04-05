@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.77.0
+version: 0.78.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -15,11 +15,12 @@ usage: |
 
 ## Signature
 
-```> open (filename) --raw```
+```> open (filename) ...rest --raw```
 
 ## Parameters
 
  -  `filename`: the filename to use
+ -  `...rest`: optional additional files to open
  -  `--raw` `(-r)`: open file as raw binary
 
 ## Examples

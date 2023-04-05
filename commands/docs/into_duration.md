@@ -2,7 +2,7 @@
 title: into duration
 categories: |
   conversions
-version: 0.77.0
+version: 0.78.0
 conversions: |
   Convert value to duration.
 usage: |
@@ -63,4 +63,22 @@ Convert duration to the requested duration as a string
 ```shell
 > 420sec | into duration --convert ms
 420000 ms
+```
+
+Convert µs duration to the requested duration as a string
+```shell
+> 1000000µs | into duration --convert sec
+1 sec
+```
+
+Convert duration to the µs duration as a string
+```shell
+> 1sec | into duration --convert µs
+1000000 µs
+```
+
+Convert duration to µs as a string if unit asked for was us
+```shell
+> 1sec | into duration --convert us
+1000000 µs
 ```

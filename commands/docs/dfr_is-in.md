@@ -3,7 +3,7 @@ title: dfr is-in
 categories: |
   dataframe
   expression
-version: 0.77.0
+version: 0.78.0
 dataframe: |
   Checks if elements from a series are contained in right series.
 expression: |

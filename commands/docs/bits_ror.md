@@ -2,7 +2,7 @@
 title: bits ror
 categories: |
   bits
-version: 0.77.0
+version: 0.78.0
 bits: |
   Bitwise rotate right for integers.
 usage: |
@@ -33,7 +33,7 @@ Rotate right a number with 60 bits
 
 Rotate right a list of numbers of one byte
 ```shell
-> [15 33 92] | bits ror 2 -n 1
+> [15 33 92] | bits ror 2 -n '1'
 ╭───┬─────╮
 │ 0 │ 195 │
 │ 1 │  72 │

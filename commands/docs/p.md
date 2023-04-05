@@ -2,7 +2,7 @@
 title: p
 categories: |
   shells
-version: 0.77.0
+version: 0.78.0
 shells: |
   Switch to the previous shell.
 usage: |

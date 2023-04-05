@@ -2,7 +2,7 @@
 title: bits rol
 categories: |
   bits
-version: 0.77.0
+version: 0.78.0
 bits: |
   Bitwise rotate left for integers.
 usage: |

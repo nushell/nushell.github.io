@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.77.0
+version: 0.78.0
 conversions: |
   Fill and Align.
 usage: |
@@ -45,18 +45,18 @@ Fill a string on both sides to a width of 15 with the character '─'
 
 Fill a number on the left side to a width of 5 with the character '0'
 ```shell
-> 1 | fill --alignment right --character 0 --width 5
+> 1 | fill --alignment right --character '0' --width 5
 00001
 ```
 
 Fill a number on both sides to a width of 5 with the character '0'
 ```shell
-> 1.1 | fill --alignment center --character 0 --width 5
+> 1.1 | fill --alignment center --character '0' --width 5
 01.10
 ```
 
 Fill a filesize on the left side to a width of 5 with the character '0'
 ```shell
-> 1kib | fill --alignment middle --character 0 --width 10
+> 1kib | fill --alignment middle --character '0' --width 10
 0001024000
 ```

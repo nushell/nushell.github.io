@@ -2,7 +2,7 @@
 title: overlay
 categories: |
   core
-version: 0.77.0
+version: 0.78.0
 core: |
   Commands for manipulating overlays.
 usage: |

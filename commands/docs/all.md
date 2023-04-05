@@ -2,7 +2,7 @@
 title: all
 categories: |
   filters
-version: 0.77.0
+version: 0.78.0
 filters: |
   Test if every element of the input fulfills a predicate expression.
 usage: |
@@ -31,7 +31,7 @@ true
 
 Check that each item is a string
 ```shell
-> [foo bar 2 baz] | all { ($in | describe) == 'string' }
+> [foo bar 2 baz] | all {|| ($in | describe) == 'string' }
 false
 ```
 

@@ -2,7 +2,7 @@
 title: bytes index-of
 categories: |
   bytes
-version: 0.77.0
+version: 0.78.0
 bytes: |
   Returns start index of first occurrence of pattern in bytes, or -1 if no match.
 usage: |

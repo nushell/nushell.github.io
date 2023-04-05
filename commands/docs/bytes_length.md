@@ -2,7 +2,7 @@
 title: bytes length
 categories: |
   bytes
-version: 0.77.0
+version: 0.78.0
 bytes: |
   Output the length of any bytes in the pipeline.
 usage: |
@@ -23,13 +23,13 @@ usage: |
 
 ## Examples
 
-Return the lengths of multiple strings
+Return the length of a binary
 ```shell
 > 0x[1F FF AA AB] | bytes length
 4
 ```
 
-Return the lengths of multiple strings
+Return the lengths of multiple binaries
 ```shell
 > [0x[1F FF AA AB] 0x[1F]] | bytes length
 ╭───┬───╮

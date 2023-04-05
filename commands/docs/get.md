@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.77.0
+version: 0.78.0
 filters: |
   Extract data using a cell path.
 usage: |
@@ -21,7 +21,7 @@ usage: |
 
  -  `cell_path`: the cell path to the data
  -  `...rest`: additional cell paths
- -  `--ignore-errors` `(-i)`: when there are empty cells, instead of erroring out, replace them with nothing
+ -  `--ignore-errors` `(-i)`: ignore missing data (make all cell path members optional)
  -  `--sensitive` `(-s)`: get path in a case sensitive manner
 
 ## Notes

@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.77.0
+version: 0.78.0
 network: |
   Various commands for working with http methods.
 usage: |

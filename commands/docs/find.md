@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.77.0
+version: 0.78.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -82,7 +82,7 @@ Find using regex case insensitive
 
 Find value in records
 ```shell
-> [[version name]; [0.1.0 nushell] [0.1.1 fish] [0.2.0 zsh]] | find -r "nu"
+> [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find -r "nu"
 ╭───┬─────────┬─────────╮
 │ # │ version │  name   │
 ├───┼─────────┼─────────┤

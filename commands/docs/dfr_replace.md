@@ -2,7 +2,7 @@
 title: dfr replace
 categories: |
   dataframe
-version: 0.77.0
+version: 0.78.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern.
 usage: |

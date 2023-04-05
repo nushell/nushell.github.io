@@ -2,7 +2,7 @@
 title: select
 categories: |
   filters
-version: 0.77.0
+version: 0.78.0
 filters: |
   Select only these columns or rows from the input. Opposite of `reject`.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 ## Parameters
 
  -  `...rest`: the columns to select from the table
- -  `--ignore-errors` `(-i)`: when an error occurs, instead of erroring out, suppress the error message
+ -  `--ignore-errors` `(-i)`: ignore missing data (make all cell path members optional)
 
 ## Notes
 This differs from `get` in that, rather than accessing the given value in the data structure,

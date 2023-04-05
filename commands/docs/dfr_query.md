@@ -2,7 +2,7 @@
 title: dfr query
 categories: |
   dataframe
-version: 0.77.0
+version: 0.78.0
 dataframe: |
   Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause.
 usage: |

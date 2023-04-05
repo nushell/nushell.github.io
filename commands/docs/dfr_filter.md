@@ -2,7 +2,7 @@
 title: dfr filter
 categories: |
   lazyframe
-version: 0.77.0
+version: 0.78.0
 lazyframe: |
   Filter dataframe based in expression.
 usage: |
