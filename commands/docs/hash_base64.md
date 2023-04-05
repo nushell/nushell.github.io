@@ -2,7 +2,7 @@
 title: hash base64
 categories: |
   deprecated
-version: 0.77.0
+version: 0.78.0
 deprecated: |
   Deprecated command.
 usage: |

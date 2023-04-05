@@ -2,7 +2,7 @@
 title: dfr shift
 categories: |
   dataframe or lazyframe
-version: 0.77.0
+version: 0.78.0
 dataframe_or_lazyframe: |
   Shifts the values by a given period.
 usage: |

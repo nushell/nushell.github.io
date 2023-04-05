@@ -2,7 +2,7 @@
 title: register
 categories: |
   core
-version: 0.77.0
+version: 0.78.0
 core: |
   Register a plugin.
 usage: |
@@ -34,7 +34,7 @@ Register `nu_plugin_query` plugin from ~/.cargo/bin/ dir
 
 ```
 
-Register `nu_plugin_query` plugin from `nu -c`(plugin will be available in that nu session only)
+Register `nu_plugin_query` plugin from `nu -c` (writes/updates $nu.plugin-path)
 ```shell
 > let plugin = ((which nu).path.0 | path dirname | path join 'nu_plugin_query'); nu -c $'register ($plugin); version'
 

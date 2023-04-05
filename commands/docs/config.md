@@ -2,7 +2,7 @@
 title: config
 categories: |
   env
-version: 0.77.0
+version: 0.78.0
 env: |
   Edit nushell configuration files.
 usage: |

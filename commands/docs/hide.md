@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.77.0
+version: 0.78.0
 core: |
   Hide definitions in the current scope.
 usage: |

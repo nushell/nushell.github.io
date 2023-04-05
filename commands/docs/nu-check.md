@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.77.0
+version: 0.78.0
 strings: |
   Validate and parse input content.
 usage: |

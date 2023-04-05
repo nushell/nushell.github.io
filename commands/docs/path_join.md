@@ -2,7 +2,7 @@
 title: path join
 categories: |
   default
-version: 0.77.0
+version: 0.78.0
 default: |
   Join a structured path or a list of path parts.
 usage: |
@@ -29,14 +29,14 @@ the output of 'path parse' and 'path split' subcommands.
 
 Append a filename to a path
 ```shell
-> '/home/viking' | path join spam.txt
-/home/viking/spam.txt
+> 'C:\Users\viking' | path join spam.txt
+C:\Users\viking\spam.txt
 ```
 
 Append a filename to a path
 ```shell
-> '/home/viking' | path join spams this_spam.txt
-/home/viking/spams/this_spam.txt
+> 'C:\Users\viking' | path join spams this_spam.txt
+C:\Users\viking\spams\this_spam.txt
 ```
 
 Append a filename to a path inside a column
@@ -47,15 +47,15 @@ Append a filename to a path inside a column
 
 Join a list of parts into a path
 ```shell
-> [ '/' 'home' 'viking' 'spam.txt' ] | path join
-/home/viking/spam.txt
+> [ 'C:' '\' 'Users' 'viking' 'spam.txt' ] | path join
+C:\Users\viking\spam.txt
 ```
 
 Join a structured path into a path
 ```shell
-> [[ parent stem extension ]; [ '/home/viking' 'spam' 'txt' ]] | path join
-╭───┬───────────────────────╮
-│ 0 │ /home/viking/spam.txt │
-╰───┴───────────────────────╯
+> [ [parent stem extension]; ['C:\Users\viking' 'spam' 'txt']] | path join
+╭───┬──────────────────────────╮
+│ 0 │ C:\Users\viking\spam.txt │
+╰───┴──────────────────────────╯
 
 ```

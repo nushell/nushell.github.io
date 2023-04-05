@@ -2,11 +2,11 @@
 title: timeit
 categories: |
   debug
-version: 0.77.0
+version: 0.78.0
 debug: |
-  Time the running time of a closure.
+  Time the running time of a block.
 usage: |
-  Time the running time of a closure.
+  Time the running time of a block.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for debug
@@ -15,11 +15,11 @@ usage: |
 
 ## Signature
 
-```> timeit (closure)```
+```> timeit (command)```
 
 ## Parameters
 
- -  `closure`: the closure to run
+ -  `command`: the command or block to run
 
 ## Examples
 
@@ -32,5 +32,11 @@ Times a command within a closure
 Times a command using an existing input
 ```shell
 > http get https://www.nushell.sh/book/ | timeit { split chars }
+
+```
+
+Times a command invocation
+```shell
+> timeit ls -la
 
 ```

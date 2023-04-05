@@ -2,7 +2,7 @@
 title: registry query
 categories: |
   system
-version: 0.76.0
+version: 0.78.0
 system: |
   Query the Windows registry.
 usage: |
@@ -39,9 +39,11 @@ Currently supported only on Windows systems.
 Query the HKEY_CURRENT_USER hive
 ```shell
 > registry query --hkcu environment
+
 ```
 
 Query the HKEY_LOCAL_MACHINE hive
 ```shell
 > registry query --hklm 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
+
 ```

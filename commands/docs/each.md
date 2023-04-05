@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.77.0
+version: 0.78.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -45,7 +45,7 @@ Multiplies elements in the list
 
 Produce a list of values in the record, converted to string
 ```shell
-> {major:2, minor:1, patch:4} | values | each { into string }
+> {major:2, minor:1, patch:4} | values | each {|| into string }
 ╭───┬───╮
 │ 0 │ 2 │
 │ 1 │ 1 │

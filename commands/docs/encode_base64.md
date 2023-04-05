@@ -2,7 +2,7 @@
 title: encode base64
 categories: |
   hash
-version: 0.77.0
+version: 0.78.0
 hash: |
   Encode a string or binary value using Base64.
 usage: |

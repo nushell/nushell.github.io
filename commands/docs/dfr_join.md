@@ -2,7 +2,7 @@
 title: dfr join
 categories: |
   lazyframe
-version: 0.77.0
+version: 0.78.0
 lazyframe: |
   Joins a lazy frame with other lazy frame.
 usage: |

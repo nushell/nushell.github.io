@@ -2,7 +2,7 @@
 title: str substring
 categories: |
   default
-version: 0.77.0
+version: 0.78.0
 default: |
   Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 usage: |
@@ -30,36 +30,6 @@ Get a substring "nushell" from the text "good nushell" using a range
 ```shell
 >  'good nushell' | str substring 5..12
 nushell
-```
-
-Alternately, you can pass in a list
-```shell
->  'good nushell' | str substring [5 12]
-nushell
-```
-
-Or a simple comma-separated string
-```shell
->  'good nushell' | str substring '5,12'
-nushell
-```
-
-Drop the last `n` characters from the string
-```shell
->  'good nushell' | str substring ',-5'
-good nu
-```
-
-Get the remaining characters from a starting index
-```shell
->  'good nushell' | str substring '5,'
-nushell
-```
-
-Get the characters from the beginning until ending index
-```shell
->  'good nushell' | str substring ',7'
-good nu
 ```
 
 Count indexes and split using grapheme clusters

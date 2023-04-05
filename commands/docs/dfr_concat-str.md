@@ -2,7 +2,7 @@
 title: dfr concat-str
 categories: |
   expression
-version: 0.77.0
+version: 0.78.0
 expression: |
   Creates a concat string expression.
 usage: |

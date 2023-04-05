@@ -2,7 +2,7 @@
 title: dfr replace-all
 categories: |
   dataframe
-version: 0.77.0
+version: 0.78.0
 dataframe: |
   Replace all (sub)strings by a regex pattern.
 usage: |

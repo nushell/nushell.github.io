@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.77.0
+version: 0.78.0
 network: |
   Post a body to a URL.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> http post (URL) (data) --user --password --content-type --max-time --headers --raw --insecure```
+```> http post (URL) (data) --user --password --content-type --max-time --headers --raw --insecure --full --allow-errors```
 
 ## Parameters
 
@@ -28,6 +28,8 @@ usage: |
  -  `--headers {any}`: custom headers you want to add
  -  `--raw` `(-r)`: return values as a string instead of a table
  -  `--insecure` `(-k)`: allow insecure server connections when using SSL
+ -  `--full` `(-f)`: returns the full response instead of only the body
+ -  `--allow-errors` `(-e)`: do not fail if the server returns an error code
 
 ## Notes
 Performs HTTP POST operation.

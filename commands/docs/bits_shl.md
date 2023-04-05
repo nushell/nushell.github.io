@@ -2,7 +2,7 @@
 title: bits shl
 categories: |
   bits
-version: 0.77.0
+version: 0.78.0
 bits: |
   Bitwise shift left for integers.
 usage: |
@@ -33,7 +33,7 @@ Shift left a number by 7 bits
 
 Shift left a number with 1 byte by 7 bits
 ```shell
-> 2 | bits shl 7 -n 1
+> 2 | bits shl 7 -n '1'
 0
 ```
 

@@ -2,7 +2,7 @@
 title: help commands
 categories: |
   core
-version: 0.77.0
+version: 0.78.0
 core: |
   Show help on nushell commands.
 usage: |

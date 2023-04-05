@@ -2,7 +2,7 @@
 title: any
 categories: |
   filters
-version: 0.77.0
+version: 0.78.0
 filters: |
   Tests if any element of the input fulfills a predicate expression.
 usage: |
@@ -31,7 +31,7 @@ true
 
 Check that any item is a string
 ```shell
-> [1 2 3 4] | any { ($in | describe) == 'string' }
+> [1 2 3 4] | any {|| ($in | describe) == 'string' }
 false
 ```
 

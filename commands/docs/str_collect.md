@@ -2,7 +2,7 @@
 title: str collect
 categories: |
   deprecated
-version: 0.77.0
+version: 0.78.0
 deprecated: |
   Deprecated command.
 usage: |
@@ -15,22 +15,4 @@ usage: |
 
 ## Signature
 
-```> str collect (separator)```
-
-## Parameters
-
- -  `separator`: optional separator to use when creating string
-
-## Examples
-
-Create a string from input
-```shell
-> ['nu', 'shell'] | str collect
-nushell
-```
-
-Create a string from input with a separator
-```shell
-> ['nu', 'shell'] | str collect '-'
-nu-shell
-```
+```> str collect ```

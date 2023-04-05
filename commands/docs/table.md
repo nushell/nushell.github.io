@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.77.0
+version: 0.78.0
 viewers: |
   Render the table.
 usage: |

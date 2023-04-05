@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   default
-version: 0.77.0
+version: 0.78.0
 default: |
   Check whether a path exists.
 usage: |
@@ -28,7 +28,7 @@ If you need to distinguish dirs and files, please use `path type`.
 
 Check if a file exists
 ```shell
-> '/home/joe/todo.txt' | path exists
+> 'C:\Users\joe\todo.txt' | path exists
 false
 ```
 

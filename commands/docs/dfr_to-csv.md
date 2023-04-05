@@ -2,11 +2,11 @@
 title: dfr to-csv
 categories: |
   dataframe
-version: 0.77.0
+version: 0.78.0
 dataframe: |
-  Saves dataframe to csv file.
+  Saves dataframe to CSV file.
 usage: |
-  Saves dataframe to csv file.
+  Saves dataframe to CSV file.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -19,13 +19,13 @@ usage: |
 
 ## Examples
 
-Saves dataframe to csv file
+Saves dataframe to CSV file
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv
 
 ```
 
-Saves dataframe to csv file using other delimiter
+Saves dataframe to CSV file using other delimiter
 ```shell
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv -d '|'
 

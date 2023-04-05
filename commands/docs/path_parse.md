@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   default
-version: 0.77.0
+version: 0.78.0
 default: |
   Convert a path into structured data.
 usage: |
@@ -27,30 +27,32 @@ Each path is split into a table with 'parent', 'stem' and 'extension' fields.
 On Windows, an extra 'prefix' column is added.
 ## Examples
 
-Parse a path
+Parse a single path
 ```shell
-> '/home/viking/spam.txt' | path parse
-╭───────────┬──────────────╮
-│ parent    │ /home/viking │
-│ stem      │ spam         │
-│ extension │ txt          │
-╰───────────┴──────────────╯
+> 'C:\Users\viking\spam.txt' | path parse
+╭───────────┬─────────────────╮
+│ prefix    │ C:              │
+│ parent    │ C:\Users\viking │
+│ stem      │ spam            │
+│ extension │ txt             │
+╰───────────┴─────────────────╯
 ```
 
 Replace a complex extension
 ```shell
-> '/home/viking/spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
+> 'C:\Users\viking\spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
 
 ```
 
 Ignore the extension
 ```shell
-> '/etc/conf.d' | path parse -e ''
-╭───────────┬────────╮
-│ parent    │ /etc   │
-│ stem      │ conf.d │
-│ extension │        │
-╰───────────┴────────╯
+> 'C:\Users\viking.d' | path parse -e ''
+╭───────────┬──────────╮
+│ prefix    │ C:       │
+│ parent    │ C:\Users │
+│ stem      │ viking.d │
+│ extension │          │
+╰───────────┴──────────╯
 ```
 
 Parse all paths under the 'name' column

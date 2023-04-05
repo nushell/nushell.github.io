@@ -2,7 +2,7 @@
 title: par-each
 categories: |
   filters
-version: 0.77.0
+version: 0.78.0
 filters: |
   Run a closure on each row of the input list in parallel, creating a new list with the results.
 usage: |
@@ -15,11 +15,12 @@ usage: |
 
 ## Signature
 
-```> par-each (closure)```
+```> par-each (closure) --threads```
 
 ## Parameters
 
  -  `closure`: the closure to run
+ -  `--threads {int}`: the number of threads to use
 
 ## Examples
 

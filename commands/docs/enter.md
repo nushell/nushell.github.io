@@ -2,7 +2,7 @@
 title: enter
 categories: |
   shells
-version: 0.77.0
+version: 0.78.0
 shells: |
   Enters a new shell at the given path.
 usage: |
