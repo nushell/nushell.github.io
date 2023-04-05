@@ -244,12 +244,12 @@ o Wo
 
 ### String padding
 
-With the [`str lpad`](/commands/docs/str_lpad.md) and [`str rpad`](/commands/docs/str_rpad.md) commands you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
+With the [`fill`](/commands/docs/fill.md) command you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
 
 ```sh
-> '1234' | str lpad -l 10 -c '0'
+> '1234' | fill -a right -c '0' -w 10
 0000001234
-> '1234' | str rpad -l 10 -c '0' | str length
+> '1234' | fill -a left -c '0' -w 10 | str length
 10
 ```
 
