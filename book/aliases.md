@@ -1,6 +1,6 @@
 # Aliases
 
-Aliases in Nushell offer a way of doing a simple, textual replacement. This allows you to create a shorthand name for a longer command, including its default arguments.
+Aliases in Nushell offer a way of doing a simple replacement of command calls (both external and internal commands). This allows you to create a shorthand name for a longer command, including its default arguments.
 
 For example, let's create an alias called `ll` which will expand to `ls -l`.
 
@@ -21,22 +21,9 @@ Once we do, it's as if we typed `ls -l`. This also allows us to pass in flags or
 ```
 
 And get the equivalent to having typed `ls -l -a`.
-
-## How to write an alias with Pipes
-
-If you want to add a pipe to your alias you must enclose it with parentheses which are a pair of round brackets ( ) used to mark off your set of commands with pipes.
-
 ```
-alias lsname = (ls | get name)
-```
-
-Here is an alias with more than one pipe:
-
-```
-alias lt = (ls | sort-by modified -r | sort-by type)
-```
-
 ## List all loaded aliases
+
 Your useable aliases can be seen in `$nu.scope.aliases`.
 
 ## Persisting
