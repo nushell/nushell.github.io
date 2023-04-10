@@ -11,17 +11,15 @@ Configuring direnv to work with nushell requires nushell version 0.66 or later.
 
 ### Configuring direnv
 
-To make direnv work with nushell the way it does with other shells requires us to use the hooks functionality in nushell:
+To make direnv work with nushell the way it does with other shells, we can use the "hooks" functionality:
 
 ```shell
 let-env config = {
   hooks: {
-    pre_prompt: [{
-      code: "
-        let direnv = (direnv export json | from json)
-        let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-        $direnv | load-env
-      "
+    pre_prompt: [{ ||
+      let direnv = (direnv export json | from json)
+      let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+      $direnv | load-env
     }]
   }
 }
