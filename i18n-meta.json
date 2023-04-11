@@ -90,16 +90,6 @@
     "pt-BR": "-"
   },
   {
-    "name": "command_reference.md",
-    "en": "Completed",
-    "zh-CN": "-",
-    "de": "translated by @sebastian-xyz",
-    "tr": "-",
-    "ja": "-",
-    "es": "-",
-    "pt-BR": "-"
-  },
-  {
     "name": "command_signature.md",
     "en": "In progress",
     "zh-CN": "-",
@@ -160,6 +150,26 @@
     "pt-BR": "-"
   },
   {
+    "name": "default_shell.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "design_notes.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
     "name": "environment.md",
     "en": "Completed",
     "zh-CN": "d6efb9a35a@hustcer",
@@ -213,6 +223,16 @@
     "name": "hooks.md",
     "en": "In progress",
     "zh-CN": "562cad2fb5@hustcer",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "how_nushell_code_gets_run.md",
+    "en": "In progress",
+    "zh-CN": "-",
     "de": "-",
     "tr": "-",
     "ja": "-",
@@ -450,6 +470,16 @@
     "pt-BR": "-"
   },
   {
+    "name": "standard_library.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
     "name": "stdout_stderr_exit_codes.md",
     "en": "Completed",
     "zh-CN": "73ef7f3153@hustcer",
@@ -463,6 +493,16 @@
     "name": "table_of_contents.md",
     "en": "Completed",
     "zh-CN": "1b7d01ac3b@hustcer",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-"
+  },
+  {
+    "name": "testing.md",
+    "en": "In progress",
+    "zh-CN": "-",
     "de": "-",
     "tr": "-",
     "ja": "-",
