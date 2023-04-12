@@ -1,8 +1,61 @@
-# Testing in Nushell (preview)
+# Testing in Nushell
+
+The [standard library](standard_library.md) has a unit testing framework to ensure that your code works as expected.
+
+## Quick start
+
+Have a file, called `test_math.nu`:
+
+```nushell
+use std "assert"
+use std "assert equal"
+use std "assert skip"
+
+export def test_addition [] {
+    assert equal (1 + 2) 3
+}
+
+export def test_skip [] {
+    assert skip
+}
+
+export def test_failing [] {
+    assert false "This is just for testing"
+}
+```
+
+Run the tests:
+
+```
+❯ use std
+❯ std run-tests
+INF|2023-04-12T10:42:29.099|Running tests in test_math
+Error:
+  × This is just for testing
+    ╭─[C:\wip\test_math.nu:13:1]
+ 13 │ export def test_failing [] {
+ 14 │     assert false "This is just for testing"
+    ·            ──┬──
+    ·              ╰── It is not true.
+ 15 │ }
+    ╰────
+
+
+WRN|2023-04-12T10:42:31.086|Test case test_skip is skipped
+Error:
+  × some tests did not pass (see complete errors above):
+  │
+  │       test_math test_addition
+  │     ⨯ test_math test_failing
+  │     s test_math test_skip
+  │
+```
+
 
 ## Assert commands
 
-The [standard library](standard_library.md) has assert commands to verify your code. The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error. For example:
+The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error. For example:
+
 
 ```
 ❯ std assert (1 == 2)
@@ -84,55 +137,20 @@ Error:
 
 ## Test modules & test cases
 
-The naming convention for test modules is `test_<your_module>.nu`. This module will be sourced many times during testing, so it is strongly discouraged to put any _main_ code there.
+The naming convention for test modules is `test_<your_module>.nu`.
 
 The test case commands must be exported commands with `test_<test name>` naming convention, without any required parameters.
 
-For example, `test_math.nu`:
+You also can define `setup` and `teardown` methods, which will be executed before and after every test case, even if they are failed or skipped. A context can be created in the setup command, which will be the input (`$in` variable) in the test case and the `teardown` command.
 
-```nushell
-use std.nu *
+The standard library itself is tested with this framework, so you can find many examples in the [Nushell repository](https://github.com/nushell/nushell/blob/main/crates/nu-std/tests/).
 
-export def test_addition [] {
-    assert equal (1 + 2) 3
-}
+## Setting verbosity
 
-export def test_multiplication [] {
-    assert equal (2 * 3) 6
-}
-
-export def test_failing [] {
-    assert false "This is just for testing"
-}
-```
-
-## Test runner
-
-You can find a test runner in the [standard library folder in Git repository](https://github.com/nushell/nushell/tree/main/crates/nu-utils/standard_library).
-
-You can run tests in a given folder, including subfolders. You can run tests in a specified module, and you can run a specified test command, too.
+The unit testing framework uses the `log` commands from the standard library to display information, so you can set `NU_LOG_LEVEL` if you want more or less details:
 
 ```
-❯ nu tests.nu --help
-Test executor
-
-It executes exported "test_*" commands in "test_*" modules
-
-Usage:
-  > main {flags}
-
-Flags:
-  --path <Filepath> - Path to look for tests. Default: directory of this file.
-  --module <String> - Module to run tests. Default: all test modules found.
-  --command <String> - Test command to run. Default: all test command found in the files.
-  --list - Do not run any tests, just list them (dry run)
-  -h, --help - Display the help message for this command
-```
-
-The test runner uses the log commands from standard library to display information, so you can set `NU_LOG_LEVEL` if you want more or less details:
-
-```
-❯ nu tests.nu --path .
-❯ NU_LOG_LEVEL=DEBUG nu /path/to/tests.nu --path .
-❯ NU_LOG_LEVEL=WARNING nu /path/to/tests.nu --path .
+❯ std run-tests
+❯ NU_LOG_LEVEL=DEBUG std run-tests
+❯ NU_LOG_LEVEL=WARNING std run-tests
 ```
