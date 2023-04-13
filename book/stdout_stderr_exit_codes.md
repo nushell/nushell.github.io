@@ -58,9 +58,9 @@ If we try to run the external `cat` on a file that doesn't exist, we can see wha
 
 The [`echo`](/commands/docs/echo.md) command is mainly for _pipes_. It returns its arguments, ignoring the piped-in value. There is usually little reason to use this over just writing the values as-is.
 
-In contrast, the [`print`](/commands/docs/print.md) command prints the given values to stdout as plain text. It can be used to write to standard error output, as well.
+In contrast, the [`print`](/commands/docs/print.md) command prints the given values to stdout as plain text. It can be used to write to standard error output, as well. Unlike [`echo`](/commands/docs/echo.md), this command does not return any value (`print | describe` will return "nothing"). Since this command has no output, there is no point in piping it with other commands.
 
-The [standard library](/book/standard_library.md) has commands to write out messages in different levels. For example:
+The [standard library](/book/standard_library.md) has commands to write out messages in different logging levels. For example:
 
 @[code](@snippets/book/std_log.nu)
 
