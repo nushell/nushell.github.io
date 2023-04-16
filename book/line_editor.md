@@ -549,7 +549,7 @@ when using Nushell
 The help menu is there to ease your transition into Nushell. Say you are
 putting together an amazing pipeline and then you forgot the internal command
 that would reverse a string for you. Instead of deleting your pipe, you can
-activate the help menu with `ctr+q`. Once active just type keywords for the
+activate the help menu with `F1`. Once active just type keywords for the
 command you are looking for and the menu will show you commands that match your
 input. The matching is done on the name of the commands or the commands
 description.
