@@ -332,3 +332,23 @@ You can also [`rename`](/commands/docs/rename.md) columns in a table by passing 
 │  4 │ Documents         │ dir      │    416 B │ 4 days ago   │
 ...
 ```
+
+### Rejecting/Deleting columns
+
+You can also [`reject`](/commands/docs/reject.md) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls.md) and delete the columns, we can use this example:
+
+```
+> ls -l / |reject readonly num_links inode created accessed modified
+╭────┬────────┬─────────┬─────────┬───────────┬──────┬───────┬────────╮
+│  # │  name  │  type   │ target  │   mode    │ uid  │ group │  size  │
+├────┼────────┼─────────┼─────────┼───────────┼──────┼───────┼────────┤
+│  0 │ /bin   │ symlink │ usr/bin │ rwxrwxrwx │ root │ root  │    7 B │
+│  1 │ /boot  │ dir     │         │ rwxr-xr-x │ root │ root  │ 1.0 KB │
+│  2 │ /dev   │ dir     │         │ rwxr-xr-x │ root │ root  │ 4.1 KB │
+│  3 │ /etc   │ dir     │         │ rwxr-xr-x │ root │ root  │ 3.6 KB │
+│  4 │ /home  │ dir     │         │ rwxr-xr-x │ root │ root  │   12 B │
+│  5 │ /lib   │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
+│  6 │ /lib64 │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
+│  7 │ /mnt   │ dir     │         │ rwxr-xr-x │ root │ root  │    0 B │
+...
+```
