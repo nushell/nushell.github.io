@@ -29,7 +29,7 @@ processing data.
 For this little benchmark exercise we will be comparing native Nushell
 commands, dataframe Nushell commands and [Python
 Pandas](https://pandas.pydata.org/) commands. For the time being don't pay too
-much attention to the `dataframe` commands. They will be explained in later
+much attention to the [`Dataframe` commands](/commands/categories/dataframe.md). They will be explained in later
 sections of this page.
 
 > System Details: The benchmarks presented in this section were run using a
@@ -224,7 +224,7 @@ and the benchmark with dataframes is:
 
 Luckily Nushell dataframes managed to halve the time again. Isn't that great?
 
-As you can see, Nushell's `Dataframe` commands are as fast as the most common
+As you can see, Nushell's [`Dataframe` commands](/commands/categories/dataframe.md) are as fast as the most common
 tools that exist today to do data analysis. The commands that are included in
 this release have the potential to become your go-to tool for doing data
 analysis. By composing complex Nushell pipelines, you can extract information
@@ -232,8 +232,8 @@ from data in a reliable way.
 
 ## Working with Dataframes
 
-After seeing a glimpse of the things that can be done with `Dataframe`
-commands, now it is time to start testing them. To begin let's create a sample
+After seeing a glimpse of the things that can be done with [`Dataframe` commands](/commands/categories/dataframe.md),
+now it is time to start testing them. To begin let's create a sample
 CSV file that will become our sample dataframe that we will be using along with
 the examples. In your favorite file editor paste the next lines to create out
 sample csv file.
