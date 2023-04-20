@@ -1,4 +1,4 @@
-# Testing in Nushell
+# Testing your Nushell code
 
 The [standard library](standard_library.md) has a unit testing framework to ensure that your code works as expected.
 
