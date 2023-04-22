@@ -9,7 +9,7 @@ A dataframe example based on https://studioterabyte.nl/en/blog/polars-vs-pandas
 ## 1. Opening the file and show the shape of the DataFrame
 
 ```console
-> let df = (open-df NYCTaxi.csv)
+> let df = (dfr open NYCTaxi.csv)
 ```
 
 ```console

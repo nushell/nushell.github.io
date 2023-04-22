@@ -24,11 +24,11 @@ DataFrame 相关命令从 0.33.1 版本开始支持
 我们将用于性能测试的文件是 [新西兰商业人口统计](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) 数据集。
 如果你想尝试这些测试，请下载该文件。
 
-该数据集有 5 列，5,429,252 行。我们可以通过使用`ls-df`命令来检查：
+该数据集有 5 列，5,429,252 行。我们可以通过使用`dfr ls`命令来检查：
 
 ```shell
-> let df = (open-df .\Data7602DescendingYearOrder.csv)
-> ls-df
+> let df = (dfr open .\Data7602DescendingYearOrder.csv)
+> dfr ls
 
 ───┬──────┬─────────┬─────────
  # │ name │  rows   │ columns
@@ -107,10 +107,10 @@ df = pd.read_csv("Data7602DescendingYearOrder.csv")
 
 这是一个很大的进步，从 30 秒到 2 秒。干得好，Pandas!
 
-也许我们加载数据可以再快一点，这一次我们将使用 Nushell 的 `open-df` 命令：
+也许我们加载数据可以再快一点，这一次我们将使用 Nushell 的 `dfr open` 命令：
 
 ```shell
-> benchmark {open-df .\Data7602DescendingYearOrder.csv}
+> benchmark {dfr open .\Data7602DescendingYearOrder.csv}
 
 ───┬───────────────────
  # │     real time
@@ -176,7 +176,7 @@ print(res)
 为了进行比较，让我们试试 Nushell DataFrames。我们要把所有的操作放在一个`nu`文件中，以确保我们做的是类似的操作：
 
 ```shell
-let df = open-df Data7602DescendingYearOrder.csv
+let df = (dfr open Data7602DescendingYearOrder.csv)
 let res = ($df | group-by year | agg (col geo_count | sum))
 $res
 ```
@@ -217,22 +217,22 @@ int_1,int_2,float_1,float_2,first,second,third,word
 
 保存该文件并随意命名，在这些例子中，该文件将被称为 `test_small.csv`。
 
-现在，要将该文件作为 DataFrame 进行读取，请使用 `open-df` 命令，如下所示：
+现在，要将该文件作为 DataFrame 进行读取，请使用 `dfr open` 命令，如下所示：
 
 ```shell
-> let df = open-df test_small.csv
+> let df = (dfr open test_small.csv)
 ```
 
 这应该会在内存中创建一个值 `$df`，用来存放我们刚刚创建的数据。
 
 ::: tip
-`open-df` 命令可以读取 **csv** 或 **parquet** 文件。
+`dfr open` 命令可以读取 **csv** 或 **parquet** 文件。
 :::
 
 要查看存储在内存中的所有 DataFrames，你可以使用：
 
 ```shell
-> ls-df
+> dfr ls
 
 ───┬──────┬──────┬─────────
  # │ name │ rows │ columns
@@ -309,7 +309,7 @@ $df | sum | select int_1 int_2 float_1 float_2
 现在我们有两个 DataFrame 存储在内存中：
 
 ```shell
-> ls-df
+> dfr ls
 
 ───┬──────┬──────┬─────────
  # │ name │ rows │ columns
@@ -335,10 +335,10 @@ int_1,int_2,float_1,float_2,first
 6,11,0.1,0.0,b
 ```
 
-我们使用 `open-df` 命令来创建新的变量：
+我们使用 `dfr open` 命令来创建新的变量：
 
 ```shell
-> let df_a = open-df test_small_a.csv
+> let df_a = (dfr open test_small_a.csv)
 ```
 
 现在，当第二个 DataFrame 加载到内存中时，我们可以使用左边 DataFrame 的`int_1`列和右边 DataFrame 的`int_1`列来连接它们。
@@ -448,7 +448,7 @@ $group | agg [
 Nushell 强大的管道语法允许我们通过从其他 DataFrame 中获取数据并将其附加到这些 DataFrame 中来创建新的 DataFrame。现在，如果你列出你的 DataFrame，你会看到总共有四个：
 
 ```shell
-> ls-df
+> dfr ls
 
 ───┬───────┬──────┬─────────
  # │  name │ rows │ columns

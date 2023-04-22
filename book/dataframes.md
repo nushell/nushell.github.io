@@ -46,7 +46,7 @@ The file that we will be using for the benchmarks is the
 Feel free to download it if you want to follow these tests.
 
 The dataset has 5 columns and 5,429,252 rows. We can check that by using the
-`ls-df` command:
+`dfr ls` command:
 
 ```shell
 ❯ let df = (dfr open .\Data7602DescendingYearOrder.csv)
@@ -115,7 +115,7 @@ And the benchmark for it is:
 That is a great improvement, from 30 seconds to 2 seconds. Nicely done, Pandas!
 
 Probably we can load the data a bit faster. This time we will use Nushell's
-`open-df` command:
+`dfr open` command:
 
 ```shell
 ❯ timeit {dfr open .\Data7602DescendingYearOrder.csv}
@@ -176,7 +176,7 @@ all the operations in one `nu` file, to make sure we are doing similar
 operations:
 
 ```shell
-let df = dfr open Data7602DescendingYearOrder.csv
+let df = (dfr open Data7602DescendingYearOrder.csv)
 let res = ($df | dfr group-by year | dfr agg (dfr col geo_count | dfr sum))
 $res
 ```
@@ -352,7 +352,7 @@ int_1,int_2,float_1,float_2,first
 6,11,0.1,0.0,b
 ```
 
-We use the `open-df` command to create the new variable
+We use the `dfr open` command to create the new variable
 
 ```shell
 ❯ let df_a = (dfr open test_small_a.csv)
