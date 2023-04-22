@@ -238,7 +238,7 @@ Substrings are slices of a string. They have a startpoint and an endpoint. Here'
 4
 > 'Hello World!' | str index-of 'r'
 8
-> 'Hello World!' | str substring '4,8'
+> 'Hello World!' | str substring 4..8
 o Wo
 ```
 

@@ -144,7 +144,7 @@ Hier ein Beispiel eines Substrings:
 4
 > 'Hallo Welt!' | str index-of 'l'
 8
-> 'Hallo Welt!' | str substring '4,8'
+> 'Hallo Welt!' | str substring 4..8
 o We
 ```
 
