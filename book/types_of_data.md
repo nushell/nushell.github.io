@@ -394,7 +394,19 @@ To remove rows from a table, you'll commonly use the [`select`](/commands/docs/s
 ╰───┴───┴───┴───╯
 ```
 
-There are numerous other commands for selecting and reducing the data in tables, records and lists.
+#### Optional cell paths
+
+By default, cell path access will fail if it can't access the requested row or column. To suppress these errors, you can add `?` to a cell path member to mark it as _optional_:
+
+```sh
+> [{foo: 123}, {}].foo?
+╭───┬─────╮
+│ 0 │ 123 │
+│ 1 │     │
+╰───┴─────╯
+```
+
+When using optional cell path members, missing data is replaced with `null`.
 
 ## Closures
 
@@ -464,6 +476,8 @@ Error: nu::shell::column_not_found
    ·              ╰── value originates here
    ╰────
 ```
+
+If you would prefer this to return `null`, mark the cell path member as _optional_ like `.1.a?`.
 
 The absence of a value is (as of Nushell 0.71) printed as the ❎ emoji in interactive output.
 :::
