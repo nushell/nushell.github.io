@@ -120,7 +120,7 @@ let val = 42 | math sin
 
 This is an error, because the pipe command is used to separate pipeline elements, so
 nushell will see this as a pipeline with two elements, one of which is not allowed
-in pipleines because it doesn't return a value (`let val = 42`). The correct way to
+in pipelines because it doesn't return a value (`let val = 42`). The correct way to
 declare using a pipeline is to wrap the pipeline in parentheses
 
 ```nu
