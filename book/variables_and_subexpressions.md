@@ -80,13 +80,13 @@ register $plugin
 
 ### Variable Names
 
-Variable names in nushell come with a few restrictions as to what characters they can contain. In particular, they cannot contain these characters
+Variable names in Nushell come with a few restrictions as to what characters they can contain. In particular, they cannot contain these characters:
 
 ```
 .  [  (  {  +  -  *  ^  /  =  !  <  >  &  |
 ```
 
-It is common for some scripts to declare variables that start with `$`. This is allowed.
+It is common for some scripts to declare variables that start with `$`. This is allowed, and it is equivalent to the `$` not being there at all.
 
 ```nu
 > let $var = 42
@@ -101,7 +101,7 @@ A common issue that users run into is trying to declare a variable using a pipel
 let val = 42 | math sin
 ```
 
-This is an error, because the pipe command is used to separate pipeline elements, so nushell will see this as a pipeline with two elements, one of which is not allowed in pipelines because it doesn't return a value (`let val = 42`). The correct way to declare using a pipeline is to wrap the pipeline in parentheses
+This is an error, because the pipe command is used to separate pipeline elements, so Nushell will see this as a pipeline with two elements, one of which is not allowed in pipelines because it doesn't return a value (`let val = 42`). The correct way to declare using a pipeline is to wrap the pipeline in parentheses
 
 ```nu
 let val = (42 | math sin)
@@ -122,7 +122,7 @@ We can use a variable path to evaluate the variable `$my_value` and get the valu
 testuser
 ```
 
-Sometimes, we don't really know the contents of a variable. Accessing values as shown above can result to errors if the path used does not exist. To more robustly handle this, we can use the question mark operator to return `null` incase the path does not exist, instead of an error, then we would write custom logic to handle the `null`
+Sometimes, we don't really know the contents of a variable. Accessing values as shown above can result to errors if the path used does not exist. To more robustly handle this, we can use the question mark operator to return `null` in case the path does not exist, instead of an error, then we would write custom logic to handle the `null`.
 
 For example, here, if row `0` does not exist on `name`, then `null` is returned. Without the question mark operator, an error would have been raised instead
 
