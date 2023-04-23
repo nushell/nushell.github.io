@@ -1,24 +1,16 @@
 # Variables and Subexpressions
 
-There are two types of evaluation expressions in Nushell: variables and subexpressions.
-You know that you're looking at an evaluation expression because it begins with a dollar
-sign (`$`). This indicates that when Nushell gets the value in this position, it will
-need to run an evaluation step to process the expression and then use the resulting 
-value. Both evaluation expression forms support a simple form and a 'path' form for
-working with more complex data.
+There are two types of evaluation expressions in Nushell: variables and subexpressions. You know that you're looking at an evaluation expression because it begins with a dollar sign (`$`). This indicates that when Nushell gets the value in this position, it will need to run an evaluation step to process the expression and then use the resulting value. Both evaluation expression forms support a simple form and a 'path' form for working with more complex data.
 
 ## Variables
 
-The simpler of the two evaluation expressions is the variable. During evaluation, a
-variable is replaced by its value. After creating a variable, we can refer to it using
-`$` followed by its name.
+The simpler of the two evaluation expressions is the variable. During evaluation, a variable is replaced by its value. After creating a variable, we can refer to it using `$` followed by its name.
 
 ### Types of Variables
 
 #### Immutable Variables
 
-An immutable variable cannot change its value after declaration. They are declared
-using the `let` keyword,
+An immutable variable cannot change its value after declaration. They are declared using the `let` keyword,
 
 ```
 > let val = 42
@@ -26,8 +18,7 @@ using the `let` keyword,
 42
 ```
 
-However, they can be 'shadowed'. Shadowing means that they are redeclared and their
-initial value cannot be used anymore within the same scope.
+However, they can be 'shadowed'. Shadowing means that they are redeclared and their initial value cannot be used anymore within the same scope.
 
 ```
 > let val = 42                   # declare a variable
@@ -39,8 +30,7 @@ initial value cannot be used anymore within the same scope.
 
 #### Mutable Variables
 
-A mutable variable is allowed to change its value by assignment. These are declared
-using the `mut` keyword.
+A mutable variable is allowed to change its value by assignment. These are declared using the `mut` keyword.
 
 ```
 > mut val = 42 
@@ -58,7 +48,7 @@ There are a couple of assignment operators used with mutable variables
 | `-=`        | Subtracts a value from the variable and makes the difference its new value |
 | `*=`        | Multiplies the variable by a value and makes the product its new value     |
 | `/=`        | Divides the variable by a value and makes the quotient its new value       |
-| `**=`       | Concatenates the variable with a list making the new list its new value   |
+| `**=`       | Concatenates the variable with a list making the new list its new value    |
 
 > **Note**
 > 1. `+=`, `-=`, `*=` and `/=` are only valid in the contexts where their root operations
@@ -68,8 +58,7 @@ There are a couple of assignment operators used with mutable variables
 
 ###### More on Mutability
 
-Closures and nested `def`s cannot capture mutable variables from their environment. For
-example
+Closures and nested `def`s cannot capture mutable variables from their environment. For example
 
 ```
 # naive method to count number of elements in a list
@@ -82,10 +71,7 @@ To use mutable variables for such behaviour, you are encouraged to use the loops
 
 #### Constant Variables
 
-A constant variable is an immutable variable that can be fully evaluated at parse-time. These
-are useful with commands that need to know the value of an argument at parse time,
-like [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md) and [`register`](/commands/docs/register.md). See [how nushell code gets run](how_nushell_code_gets_run.md)
-for a deeper explanation. They are declared using the `const` keyword
+A constant variable is an immutable variable that can be fully evaluated at parse-time. These are useful with commands that need to know the value of an argument at parse time, like [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md) and [`register`](/commands/docs/register.md). See [how nushell code gets run](how_nushell_code_gets_run.md) for a deeper explanation. They are declared using the `const` keyword
 
 ```
 const plugin = 'path/to/plugin'
@@ -94,15 +80,13 @@ register $plugin
 
 ### Variable Names
 
-Variable names in nushell come with a few restrictions as to what characters they
-can contain. In particular, they cannot contain these characters
+Variable names in nushell come with a few restrictions as to what characters they can contain. In particular, they cannot contain these characters
 
 ```
 .  [  (  {  +  -  *  ^  /  =  !  <  >  &  |
 ```
 
-It is common for some scripts to declare variables that start with `$`. This is
-allowed.
+It is common for some scripts to declare variables that start with `$`. This is allowed.
 
 ```nu
 > let $var = 42
@@ -111,17 +95,13 @@ allowed.
 
 ### Variable Values
 
-A common issue that users run into is trying to declare a variable using a pipeline
-as the value like so:
+A common issue that users run into is trying to declare a variable using a pipeline as the value like so:
 
 ```nu
 let val = 42 | math sin
 ```
 
-This is an error, because the pipe command is used to separate pipeline elements, so
-nushell will see this as a pipeline with two elements, one of which is not allowed
-in pipelines because it doesn't return a value (`let val = 42`). The correct way to
-declare using a pipeline is to wrap the pipeline in parentheses
+This is an error, because the pipe command is used to separate pipeline elements, so nushell will see this as a pipeline with two elements, one of which is not allowed in pipelines because it doesn't return a value (`let val = 42`). The correct way to declare using a pipeline is to wrap the pipeline in parentheses
 
 ```nu
 let val = (42 | math sin)
