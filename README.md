@@ -44,7 +44,7 @@ $ brew install nushell
 $ winget install nushell
 ```
 
-# Cross Platform installation
+#### Cross Platform installation
 
 ```shell
 # Note that nu plugins were not included if you install in this way
