@@ -287,7 +287,7 @@ def greet [
 
 ```bash
 def greet [...name: string] {
-  echo "hello all:"
+  print "hello all:"
   for $n in $name {
     echo $n
   }
@@ -302,8 +302,8 @@ greet earth mars jupiter venus
 
 ```bash
 def greet [vip: string, ...name: string] {
-  echo "hello to our VIP " $vip | str join
-  echo "and hello to everybody else:"
+  print $"hello to our VIP ($vip)"
+  print "and hello to everybody else:"
   for $n in $name {
     echo $n
   }
