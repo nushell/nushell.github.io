@@ -44,6 +44,13 @@ $ brew install nushell
 $ winget install nushell
 ```
 
+# Cross Platform installation
+
+```shell
+# Note that nu plugins were not included if you install in this way
+npm install -g nushell
+```
+
 After installing, launch Nu by typing `nu`.
 
 ## Community
