@@ -10,15 +10,18 @@ For example, `[foo bar baz]` or `[foo, bar, baz]`.
 
 You can [`update`](/commands/docs/update.md) and [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
 
-```
+```bash
 > [1, 2, 3, 4] | insert 2 10
+# [1, 2, 10, 3, 4]
 ```
 
 We can also use [`update`](/commands/docs/update.md) to replace the 2nd element with the value `10`.
 
-```
+```bash
 > [1, 2, 3, 4] | update 1 10
+# [1, 10, 3, 4]
 ```
+
 ## Removing or adding items from list
 In addition to [`insert`](/commands/docs/insert.md) and [`update`](/commands/docs/update.md), we also have [`prepend`](/commands/docs/prepend.md) and [`append`](/commands/docs/append.md). These let you insert to the beginning of a list or at the end of the list, respectively.
 
