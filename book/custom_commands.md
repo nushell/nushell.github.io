@@ -13,7 +13,7 @@ def greet [name] {
 ```
 
 ::: tip
-The value produced by the last line of a command becomes the command's returned value. In this case, a list containing the string `'hello'` and `$name` is returned.
+The value produced by the last line of a command becomes the command's returned value. In this case, a list containing the string `'hello'` and `$name` is returned. To prevent this, you can place `null` (or the [`ignore`](/commands/docs/ignore.md) command) at the end of the pipeline, like so: `['hello' $name] | null`. Also note that most file system commands, such as [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md), always output `null`.
 :::
 
 In this definition, we define the `greet` command, which takes a single parameter `name`. Following this parameter is the block that represents what will happen when the custom command runs. When called, the custom command will set the value passed for `name` as the `$name` variable, which will be available to the block.
@@ -299,7 +299,7 @@ There may be cases when you want to define a command which takes any number of p
 
 ```nushell
 def greet [...name: string] {
-  "hello all:"
+  print "hello all:"
   for $n in $name {
     $n
   }
@@ -308,18 +308,14 @@ def greet [...name: string] {
 greet earth mars jupiter venus
 ```
 
-::: tip
-Each line of a command has its resulting value printed out when run, as long as it isn't `null`. Hence, `"hello all:"` above will be printed out despite not being the return value. To prevent this, you can place `null` (or the [`ignore`](/commands/docs/ignore.md) command) at the end of the pipeline, like so: `"hello all:" | null`. Also note that most file system commands, such as [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md), always output `null`.
-:::
-
 We could call the above definition of the `greet` command with any number of arguments, including none at all. All of the arguments are collected into `$name` as a list.
 
 Rest parameters can be used together with positional parameters:
 
 ```
 def greet [vip: string, ...name: string] {
-  $"hello to our VIP ($vip)"
-  "and hello to everybody else:"
+  print $"hello to our VIP ($vip)"
+  print "and hello to everybody else:"
   for $n in $name {
     $n
   }
