@@ -2,7 +2,7 @@
 title: from ini
 categories: |
   formats
-version: 0.78.0
+version: 0.79.0
 formats: |
   Parse text as .ini and create table.
 usage: |

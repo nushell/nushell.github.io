@@ -2,7 +2,7 @@
 title: dfr fetch
 categories: |
   lazyframe
-version: 0.78.0
+version: 0.79.0
 lazyframe: |
   collects the lazyframe to the selected rows.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr fetch ```
+```> dfr fetch (rows)```
+
+## Parameters
+
+ -  `rows`: number of rows to be fetched from lazyframe
 
 ## Examples
 

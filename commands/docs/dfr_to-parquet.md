@@ -2,7 +2,7 @@
 title: dfr to-parquet
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Saves dataframe to parquet file.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr to-parquet ```
+```> dfr to-parquet (file)```
+
+## Parameters
+
+ -  `file`: file path to save dataframe
 
 ## Examples
 

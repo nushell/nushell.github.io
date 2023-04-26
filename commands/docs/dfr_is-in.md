@@ -3,7 +3,7 @@ title: dfr is-in
 categories: |
   dataframe
   expression
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Checks if elements from a series are contained in right series.
 expression: |
@@ -19,7 +19,11 @@ usage: |
 
 ## Signature
 
-```> dfr is-in ```
+```> dfr is-in (other)```
+
+## Parameters
+
+ -  `other`: right series
 
 ## Examples
 
@@ -47,7 +51,11 @@ Checks if elements from a series are contained in right series
 
 ## Signature
 
-```> dfr is-in ```
+```> dfr is-in (list)```
+
+## Parameters
+
+ -  `list`: List to check if values are in
 
 ## Examples
 

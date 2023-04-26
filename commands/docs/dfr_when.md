@@ -2,7 +2,7 @@
 title: dfr when
 categories: |
   expression
-version: 0.78.0
+version: 0.79.0
 expression: |
   Creates and modifies a when expression.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr when ```
+```> dfr when (when expression) (then expression)```
+
+## Parameters
+
+ -  `when expression`: when expression used for matching
+ -  `then expression`: expression that will be applied when predicate is true
 
 ## Examples
 

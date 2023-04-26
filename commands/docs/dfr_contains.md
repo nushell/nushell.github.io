@@ -2,7 +2,7 @@
 title: dfr contains
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Checks if a pattern is contained in a string.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr contains ```
+```> dfr contains (pattern)```
+
+## Parameters
+
+ -  `pattern`: Regex pattern to be searched
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: dfr arg-where
 categories: |
   expression
-version: 0.78.0
+version: 0.79.0
 expression: |
   Creates an expression that returns the arguments where expression is true.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr arg-where ```
+```> dfr arg-where (column name)```
+
+## Parameters
+
+ -  `column name`: Expression to evaluate
 
 ## Examples
 

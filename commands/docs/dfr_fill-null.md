@@ -2,7 +2,7 @@
 title: dfr fill-null
 categories: |
   lazyframe
-version: 0.78.0
+version: 0.79.0
 lazyframe: |
   Replaces NULL values with the given expression.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr fill-null ```
+```> dfr fill-null (fill)```
+
+## Parameters
+
+ -  `fill`: Expression to use to fill the null values
 
 ## Examples
 

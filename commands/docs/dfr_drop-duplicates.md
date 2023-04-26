@@ -2,7 +2,7 @@
 title: dfr drop-duplicates
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Drops duplicate values in dataframe.
 usage: |
@@ -15,7 +15,13 @@ usage: |
 
 ## Signature
 
-```> dfr drop-duplicates ```
+```> dfr drop-duplicates (subset) --maintain --last```
+
+## Parameters
+
+ -  `subset`: subset of columns to drop duplicates
+ -  `--maintain` `(-m)`: maintain order
+ -  `--last` `(-l)`: keeps last duplicate value (by default keeps first)
 
 ## Examples
 

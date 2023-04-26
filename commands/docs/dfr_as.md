@@ -2,7 +2,7 @@
 title: dfr as
 categories: |
   expression
-version: 0.78.0
+version: 0.79.0
 expression: |
   Creates an alias expression.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr as ```
+```> dfr as (Alias name)```
+
+## Parameters
+
+ -  `Alias name`: Alias name for the expression
 
 ## Examples
 

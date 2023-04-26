@@ -2,7 +2,7 @@
 title: profile
 categories: |
   debug
-version: 0.78.0
+version: 0.79.0
 debug: |
   Profile each pipeline element in a closure.
 usage: |
@@ -35,6 +35,6 @@ Current known limitations are:
 
 Profile some code, stepping into the `spam` command and collecting source.
 ```shell
-> def spam [] { "spam" }; profile { spam | str length } -d 2 --source
+> def spam [] { "spam" }; profile {|| spam | str length } -d 2 --source
 
 ```

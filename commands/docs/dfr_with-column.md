@@ -2,7 +2,7 @@
 title: dfr with-column
 categories: |
   dataframe or lazyframe
-version: 0.78.0
+version: 0.79.0
 dataframe_or_lazyframe: |
   Adds a series to the dataframe.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr with-column ```
+```> dfr with-column ...rest --name```
+
+## Parameters
+
+ -  `...rest`: series to be added or expressions used to define the new columns
+ -  `--name {string}`: new column name
 
 ## Examples
 

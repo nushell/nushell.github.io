@@ -2,7 +2,7 @@
 title: str to-int
 categories: |
   deprecated
-version: 0.78.0
+version: 0.79.0
 deprecated: |
   Deprecated command.
 usage: |

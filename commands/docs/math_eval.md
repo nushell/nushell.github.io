@@ -2,7 +2,7 @@
 title: math eval
 categories: |
   deprecated
-version: 0.78.0
+version: 0.79.0
 deprecated: |
   Deprecated command.
 usage: |
@@ -15,4 +15,8 @@ usage: |
 
 ## Signature
 
-```> math eval ```
+```> math eval ...rest```
+
+## Parameters
+
+ -  `...rest`: arguments to deprecated command are ignored

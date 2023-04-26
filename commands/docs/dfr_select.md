@@ -2,7 +2,7 @@
 title: dfr select
 categories: |
   lazyframe
-version: 0.78.0
+version: 0.79.0
 lazyframe: |
   Selects columns from lazyframe.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr select ```
+```> dfr select ...rest```
+
+## Parameters
+
+ -  `...rest`: Expression(s) that define the column selection
 
 ## Examples
 

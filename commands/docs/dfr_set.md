@@ -2,7 +2,7 @@
 title: dfr set
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Sets value where given mask is true.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr set ```
+```> dfr set (value) --mask```
+
+## Parameters
+
+ -  `value`: value to be inserted in series
+ -  `--mask {any}`: mask indicating insertions
 
 ## Examples
 

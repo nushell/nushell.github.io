@@ -2,7 +2,7 @@
 title: const
 categories: |
   core
-version: 0.78.0
+version: 0.79.0
 core: |
   Create a parse-time constant.
 usage: |

@@ -2,7 +2,7 @@
 title: dfr expr-not
 categories: |
   expression
-version: 0.78.0
+version: 0.79.0
 expression: |
   creates a not expression
 usage: |

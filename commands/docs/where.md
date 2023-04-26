@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.78.0
+version: 0.79.0
 filters: |
   Filter values based on a row condition.
 usage: |
@@ -73,6 +73,6 @@ List all files that were modified in the last two weeks
 
 Find files whose filenames don't begin with the correct sequential number
 ```shell
-> ls | where type == file | sort-by name -n | enumerate | where {|e| $e.item.name !~ $'^($e.index + 1)' } | each { get item }
+> ls | where type == file | sort-by name -n | enumerate | where {|e| $e.item.name !~ $'^($e.index + 1)' } | each {|| get item }
 
 ```

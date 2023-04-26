@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.78.0
+version: 0.79.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> find ...rest --regex --ignore-case --multiline --dotall --invert```
+```> find ...rest --regex --ignore-case --multiline --dotall --columns --invert```
 
 ## Parameters
 
@@ -24,6 +24,7 @@ usage: |
  -  `--ignore-case` `(-i)`: case-insensitive regex mode; equivalent to (?i)
  -  `--multiline` `(-m)`: multi-line regex mode: ^ and $ match begin/end of line; equivalent to (?m)
  -  `--dotall` `(-s)`: dotall regex mode: allow a dot . to match newlines \n; equivalent to (?s)
+ -  `--columns {list<string>}`: column names to be searched (with rest parameter, not regex yet)
  -  `--invert` `(-v)`: invert the match
 
 ## Examples
@@ -88,5 +89,23 @@ Find value in records
 ├───┼─────────┼─────────┤
 │ 0 │ 0.1.0   │ nushell │
 ╰───┴─────────┴─────────╯
+
+```
+
+Remove ANSI sequences from result
+```shell
+> [[foo bar]; [abc 123] [def 456]] | find 123 | get bar | ansi strip
+
+```
+
+Find and highlight text in specific columns
+```shell
+> [[col1 col2 col3]; [moe larry curly] [larry curly moe]] | find moe -c [col1 col3]
+╭───┬───────┬───────┬───────╮
+│ # │ col1  │ col2  │ col3  │
+├───┼───────┼───────┼───────┤
+│ 0 │ moe   │ larry │ curly │
+│ 1 │ larry │ curly │ moe   │
+╰───┴───────┴───────┴───────╯
 
 ```

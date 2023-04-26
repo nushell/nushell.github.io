@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.78.0
+version: 0.79.0
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match.
 usage: |
@@ -23,7 +23,7 @@ usage: |
  -  `...rest`: For a data structure input, search strings at the given cell paths, and replace with result
  -  `--grapheme-clusters` `(-g)`: count indexes using grapheme clusters (all visible chars have length 1)
  -  `--utf-8-bytes` `(-b)`: count indexes using UTF-8 bytes (default; non-ASCII chars have length 2+)
- -  `--range {any}`: optional start and/or end index
+ -  `--range {range}`: optional start and/or end index
  -  `--end` `(-e)`: search from the end of the input
 
 ## Examples
@@ -40,27 +40,21 @@ Count length using grapheme clusters
 4
 ```
 
-Returns index of string in input with start index
+Returns index of string in input within a`rhs open range`
 ```shell
->  '.rb.rb' | str index-of '.rb' -r '1,'
+>  '.rb.rb' | str index-of '.rb' -r 1..
 3
 ```
 
-Returns index of string in input with end index
+Returns index of string in input within a lhs open range
 ```shell
->  '123456' | str index-of '6' -r ',4'
+>  '123456' | str index-of '6' -r ..4
 -1
 ```
 
-Returns index of string in input with start and end index
+Returns index of string in input within a range
 ```shell
->  '123456' | str index-of '3' -r '1,4'
-2
-```
-
-Alternatively you can use this form
-```shell
->  '123456' | str index-of '3' -r [1 4]
+>  '123456' | str index-of '3' -r 1..4
 2
 ```
 

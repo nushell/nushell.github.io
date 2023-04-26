@@ -2,7 +2,7 @@
 title: dfr otherwise
 categories: |
   expression
-version: 0.78.0
+version: 0.79.0
 expression: |
   completes a when expression.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr otherwise ```
+```> dfr otherwise (otherwise expression)```
+
+## Parameters
+
+ -  `otherwise expression`: expression to apply when no when predicate matches
 
 ## Examples
 

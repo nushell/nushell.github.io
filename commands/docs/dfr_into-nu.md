@@ -3,7 +3,7 @@ title: dfr into-nu
 categories: |
   dataframe
   expression
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Converts a section of the dataframe into nushell Table.
 expression: |
@@ -19,7 +19,12 @@ usage: |
 
 ## Signature
 
-```> dfr into-nu ```
+```> dfr into-nu --rows --tail```
+
+## Parameters
+
+ -  `--rows {number}`: number of rows to be shown
+ -  `--tail` `(-t)`: shows tail rows
 
 ## Examples
 

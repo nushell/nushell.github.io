@@ -2,7 +2,7 @@
 title: dfr rename
 categories: |
   dataframe or lazyframe
-version: 0.78.0
+version: 0.79.0
 dataframe_or_lazyframe: |
   Rename a dataframe column.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr rename ```
+```> dfr rename (columns) (new names)```
+
+## Parameters
+
+ -  `columns`: Column(s) to be renamed. A string or list of strings
+ -  `new names`: New names for the selected column(s). A string or list of strings
 
 ## Examples
 

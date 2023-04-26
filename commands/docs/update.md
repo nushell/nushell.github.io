@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.78.0
+version: 0.79.0
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -47,6 +47,17 @@ Use in closure form for more involved updating logic
 Alter each value in the 'authors' column to use a single string instead of a list
 ```shell
 > [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|row| $row.authors | str join ','}
+╭───┬─────────┬──────────────────╮
+│ # │ project │     authors      │
+├───┼─────────┼──────────────────┤
+│ 0 │ nu      │ Andrés,JT,Yehuda │
+╰───┴─────────┴──────────────────╯
+
+```
+
+You can also use a simple command to update 'authors' to a single string
+```shell
+> [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|| str join ','}
 ╭───┬─────────┬──────────────────╮
 │ # │ project │     authors      │
 ├───┼─────────┼──────────────────┤

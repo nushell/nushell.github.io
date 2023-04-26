@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.78.0
+version: 0.79.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -62,7 +62,7 @@ A │ B │ C
 
 Render a table with 'name' column in it to a grid
 ```shell
-> [[name patch]; ['0.1.0' false] ['0.1.1' true] ['0.2.0' false]] | grid
+> [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid
 0.1.0 │ 0.1.1 │ 0.2.0
 
 ```

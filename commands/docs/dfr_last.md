@@ -3,7 +3,7 @@ title: dfr last
 categories: |
   dataframe
   expression
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression.
 expression: |
@@ -19,7 +19,11 @@ usage: |
 
 ## Signature
 
-```> dfr last ```
+```> dfr last (rows)```
+
+## Parameters
+
+ -  `rows`: Number of rows for tail
 
 ## Examples
 

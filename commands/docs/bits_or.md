@@ -2,7 +2,7 @@
 title: bits or
 categories: |
   bits
-version: 0.78.0
+version: 0.79.0
 bits: |
   Performs bitwise or for integers.
 usage: |

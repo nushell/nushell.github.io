@@ -2,7 +2,7 @@
 title: path split
 categories: |
   default
-version: 0.78.0
+version: 0.79.0
 default: |
   Split a path into a list based on the system's path separator.
 usage: |
@@ -25,10 +25,10 @@ usage: |
 
 Split a path into parts
 ```shell
-> 'C:\Users\viking\spam.txt' | path split
+> '/home/viking/spam.txt' | path split
 ╭───┬──────────╮
-│ 0 │ C:\      │
-│ 1 │ Users    │
+│ 0 │ /        │
+│ 1 │ home     │
 │ 2 │ viking   │
 │ 3 │ spam.txt │
 ╰───┴──────────╯

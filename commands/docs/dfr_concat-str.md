@@ -2,7 +2,7 @@
 title: dfr concat-str
 categories: |
   expression
-version: 0.78.0
+version: 0.79.0
 expression: |
   Creates a concat string expression.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr concat-str ```
+```> dfr concat-str (separator) (concat expressions)```
+
+## Parameters
+
+ -  `separator`: Separator used during the concatenation
+ -  `concat expressions`: Expression(s) that define the string concatenation
 
 ## Examples
 
