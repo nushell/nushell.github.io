@@ -2,7 +2,7 @@
 title: dfr unique
 categories: |
   dataframe or lazyframe
-version: 0.78.0
+version: 0.79.0
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe.
 usage: |
@@ -15,7 +15,13 @@ usage: |
 
 ## Signature
 
-```> dfr unique ```
+```> dfr unique --subset --last --maintain-order```
+
+## Parameters
+
+ -  `--subset {any}`: Subset of column(s) to use to maintain rows (lazy df)
+ -  `--last` `(-l)`: Keeps last unique value. Default keeps first value (lazy df)
+ -  `--maintain-order` `(-k)`: Keep the same order as the original DataFrame (lazy df)
 
 ## Examples
 

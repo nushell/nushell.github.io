@@ -2,7 +2,7 @@
 title: while
 categories: |
   core
-version: 0.78.0
+version: 0.79.0
 core: |
   Conditionally run a block in a loop.
 usage: |
@@ -22,9 +22,6 @@ usage: |
  -  `cond`: condition to check
  -  `block`: block to loop if check succeeds
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
 ## Examples
 
 Loop while a condition is true

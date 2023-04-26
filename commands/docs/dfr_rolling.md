@@ -2,7 +2,7 @@
 title: dfr rolling
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Rolling calculation for a series.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr rolling ```
+```> dfr rolling (type) (window)```
+
+## Parameters
+
+ -  `type`: rolling operation
+ -  `window`: Window size for rolling
 
 ## Examples
 

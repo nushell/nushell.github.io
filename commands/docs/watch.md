@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.78.0
+version: 0.79.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -30,7 +30,7 @@ usage: |
 
 Run `cargo test` whenever a Rust file changes
 ```shell
-> watch . --glob=**/*.rs { cargo test }
+> watch . --glob=**/*.rs {|| cargo test }
 
 ```
 

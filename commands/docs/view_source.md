@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.78.0
+version: 0.79.0
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -25,7 +25,7 @@ usage: |
 
 View the source of a code block
 ```shell
-> let abc = { echo 'hi' }; view source $abc
+> let abc = {|| echo 'hi' }; view source $abc
 { echo 'hi' }
 ```
 

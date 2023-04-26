@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   default
-version: 0.78.0
+version: 0.79.0
 default: |
   Get the parent directory of a path.
 usage: |
@@ -27,8 +27,8 @@ usage: |
 
 Get dirname of a path
 ```shell
-> 'C:\Users\joe\code\test.txt' | path dirname
-C:\Users\joe\code
+> '/home/joe/code/test.txt' | path dirname
+/home/joe/code
 ```
 
 Get dirname of a path in a column
@@ -39,12 +39,12 @@ Get dirname of a path in a column
 
 Walk up two levels
 ```shell
-> 'C:\Users\joe\code\test.txt' | path dirname -n 2
-C:\Users\joe
+> '/home/joe/code/test.txt' | path dirname -n 2
+/home/joe
 ```
 
 Replace the part that would be returned with a custom path
 ```shell
-> 'C:\Users\joe\code\test.txt' | path dirname -n 2 -r C:\Users\viking
-C:\Users\viking\code\test.txt
+> '/home/joe/code/test.txt' | path dirname -n 2 -r /home/viking
+/home/viking/code/test.txt
 ```

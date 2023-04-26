@@ -2,7 +2,7 @@
 title: dfr replace-all
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Replace all (sub)strings by a regex pattern.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr replace-all ```
+```> dfr replace-all --pattern --replace```
+
+## Parameters
+
+ -  `--pattern {string}`: Regex pattern to be matched
+ -  `--replace {string}`: replacing string
 
 ## Examples
 

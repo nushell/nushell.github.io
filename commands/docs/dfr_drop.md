@@ -2,7 +2,7 @@
 title: dfr drop
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Creates a new dataframe by dropping the selected columns.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr drop ```
+```> dfr drop ...rest```
+
+## Parameters
+
+ -  `...rest`: column names to be dropped
 
 ## Examples
 

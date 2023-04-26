@@ -2,7 +2,7 @@
 title: collect
 categories: |
   filters
-version: 0.78.0
+version: 0.79.0
 filters: |
   Collect the stream and pass it to a block.
 usage: |

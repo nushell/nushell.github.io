@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.78.0
+version: 0.79.0
 strings: |
   Split a string into multiple columns using a separator.
 usage: |
@@ -15,13 +15,14 @@ usage: |
 
 ## Signature
 
-```> split column (separator) ...rest --collapse-empty```
+```> split column (separator) ...rest --collapse-empty --regex```
 
 ## Parameters
 
  -  `separator`: the character or string that denotes what separates columns
  -  `...rest`: column names to give the new columns
  -  `--collapse-empty` `(-c)`: remove empty columns
+ -  `--regex` `(-r)`: separator is a regular expression
 
 ## Examples
 
@@ -50,6 +51,18 @@ Split a string into columns of char and remove the empty columns
 Split a list of strings into a table
 ```shell
 > ['a-b' 'c-d'] | split column -
+╭───┬─────────┬─────────╮
+│ # │ column1 │ column2 │
+├───┼─────────┼─────────┤
+│ 0 │ a       │ b       │
+│ 1 │ c       │ d       │
+╰───┴─────────┴─────────╯
+
+```
+
+Split a list of strings into a table, ignoring padding
+```shell
+> ['a -  b' 'c  -    d'] | split column -r '\s*-\s*'
 ╭───┬─────────┬─────────╮
 │ # │ column1 │ column2 │
 ├───┼─────────┼─────────┤

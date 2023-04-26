@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.78.0
+version: 0.79.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -21,8 +21,8 @@ usage: |
 
  -  `filename`: the path of the file you want to remove
  -  `...rest`: additional file path(s) to remove
- -  `--trash` `(-t)`: move to the platform's trash instead of permanently deleting
- -  `--permanent` `(-p)`: delete permanently, ignoring the 'always_trash' config option
+ -  `--trash` `(-t)`: move to the platform's trash instead of permanently deleting. not used on android and ios
+ -  `--permanent` `(-p)`: delete permanently, ignoring the 'always_trash' config option. always enabled on android and ios
  -  `--recursive` `(-r)`: delete subdirectories recursively
  -  `--force` `(-f)`: suppress error when no file
  -  `--verbose` `(-v)`: print names of deleted files

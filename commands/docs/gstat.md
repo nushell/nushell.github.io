@@ -2,7 +2,7 @@
 title: gstat
 categories: |
   prompt
-version: 0.78.0
+version: 0.79.0
 prompt: |
   Get the git status of a repo
 usage: |
@@ -15,4 +15,8 @@ usage: |
 
 ## Signature
 
-```> gstat ```
+```> gstat (path)```
+
+## Parameters
+
+ -  `path`: path to repo

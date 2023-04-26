@@ -2,7 +2,7 @@
 title: dfr take
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Creates new dataframe using the given indices.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr take ```
+```> dfr take (indices)```
+
+## Parameters
+
+ -  `indices`: list of indices used to take data
 
 ## Examples
 

@@ -3,7 +3,7 @@ title: dfr first
 categories: |
   dataframe
   expression
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Show only the first number of rows.
 expression: |
@@ -19,7 +19,11 @@ usage: |
 
 ## Signature
 
-```> dfr first ```
+```> dfr first (rows)```
+
+## Parameters
+
+ -  `rows`: starting from the front, the number of rows to return
 
 ## Examples
 

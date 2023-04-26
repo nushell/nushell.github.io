@@ -2,7 +2,7 @@
 title: dfr cumulative
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Cumulative calculation for a series.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr cumulative ```
+```> dfr cumulative (type) --reverse```
+
+## Parameters
+
+ -  `type`: rolling operation
+ -  `--reverse` `(-r)`: Reverse cumulative calculation
 
 ## Examples
 

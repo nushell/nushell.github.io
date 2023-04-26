@@ -1,17 +1,17 @@
 ---
 title: into decimal
 categories: |
-  default
-version: 0.78.0
-default: |
+  conversions
+version: 0.79.0
+conversions: |
   Convert text into a decimal.
 usage: |
   Convert text into a decimal.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for conversions
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.conversions }}</div>
 
 ## Signature
 

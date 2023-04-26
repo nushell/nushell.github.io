@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.78.0
+version: 0.79.0
 system: |
   View information about system processes.
 usage: |
@@ -44,5 +44,11 @@ List the top 3 system processes with the highest CPU usage
 List the system processes with 'nu' in their names
 ```shell
 > ps | where name =~ 'nu'
+
+```
+
+Get the parent process id of the current nu process
+```shell
+> ps | where pid == $nu.pid | get ppid
 
 ```

@@ -2,7 +2,7 @@
 title: dfr as-date
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Converts string to date.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr as-date ```
+```> dfr as-date (format) --not-exact```
+
+## Parameters
+
+ -  `format`: formatting date string
+ -  `--not-exact` `(-n)`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
 
 ## Notes
 Format example:

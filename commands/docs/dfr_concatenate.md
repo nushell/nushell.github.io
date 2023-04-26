@@ -2,7 +2,7 @@
 title: dfr concatenate
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Concatenates strings with other array.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr concatenate ```
+```> dfr concatenate (other)```
+
+## Parameters
+
+ -  `other`: Other array with string to be concatenated
 
 ## Examples
 

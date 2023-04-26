@@ -2,7 +2,7 @@
 title: dfr agg
 categories: |
   lazyframe
-version: 0.78.0
+version: 0.79.0
 lazyframe: |
   Performs a series of aggregations from a group-by.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr agg ```
+```> dfr agg ...rest```
+
+## Parameters
+
+ -  `...rest`: Expression(s) that define the aggregations to be applied
 
 ## Examples
 

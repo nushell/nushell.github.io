@@ -2,7 +2,7 @@
 title: dfr replace
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr replace ```
+```> dfr replace --pattern --replace```
+
+## Parameters
+
+ -  `--pattern {string}`: Regex pattern to be matched
+ -  `--replace {string}`: replacing string
 
 ## Examples
 

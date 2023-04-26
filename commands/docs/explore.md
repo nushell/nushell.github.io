@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.78.0
+version: 0.79.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |
@@ -42,7 +42,7 @@ Explore the output of `ls` without column names
 
 Explore a list of Markdown files' contents, with row indexes
 ```shell
-> glob *.md | each { open } | explore -i
+> glob *.md | each {|| open } | explore -i
 
 ```
 

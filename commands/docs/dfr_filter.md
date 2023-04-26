@@ -2,7 +2,7 @@
 title: dfr filter
 categories: |
   lazyframe
-version: 0.78.0
+version: 0.79.0
 lazyframe: |
   Filter dataframe based in expression.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr filter ```
+```> dfr filter (filter expression)```
+
+## Parameters
+
+ -  `filter expression`: Expression that define the column selection
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: par-each
 categories: |
   filters
-version: 0.78.0
+version: 0.79.0
 filters: |
   Run a closure on each row of the input list in parallel, creating a new list with the results.
 usage: |
@@ -26,7 +26,7 @@ usage: |
 
 Multiplies each number. Note that the list will become arbitrarily disordered.
 ```shell
-> [1 2 3] | par-each { 2 * $in }
+> [1 2 3] | par-each {|| 2 * $in }
 
 ```
 

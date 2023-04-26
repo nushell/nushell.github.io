@@ -2,7 +2,7 @@
 title: char
 categories: |
   strings
-version: 0.78.0
+version: 0.79.0
 strings: |
   Output special characters (e.g., 'newline').
 usage: |
@@ -49,7 +49,7 @@ Output prompt character, newline and a hamburger menu character
 
 Output Unicode character
 ```shell
-> char -u '1f378'
+> char -u 1f378
 🍸
 ```
 
@@ -61,6 +61,6 @@ ab
 
 Output multi-byte Unicode character
 ```shell
-> char -u '1F468' '200D' '1F466' '200D' '1F466'
+> char -u 1F468 200D 1F466 200D 1F466
 👨‍👦‍👦
 ```

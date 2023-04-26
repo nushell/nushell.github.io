@@ -2,7 +2,7 @@
 title: dfr to-csv
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Saves dataframe to CSV file.
 usage: |
@@ -15,7 +15,13 @@ usage: |
 
 ## Signature
 
-```> dfr to-csv ```
+```> dfr to-csv (file) --delimiter --no-header```
+
+## Parameters
+
+ -  `file`: file path to save dataframe
+ -  `--delimiter {string}`: file delimiter character
+ -  `--no-header` `(-)`: Indicates if file doesn't have header
 
 ## Examples
 

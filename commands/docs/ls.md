@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.78.0
+version: 0.79.0
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -74,6 +74,6 @@ List all dirs in your home directory which have not been modified in 7 days
 
 List given paths and show directories themselves
 ```shell
-> ['/path/to/directory' '/path/to/file'] | each { ls -D $in } | flatten
+> ['/path/to/directory' '/path/to/file'] | each {|| ls -D $in } | flatten
 
 ```

@@ -2,7 +2,7 @@
 title: dfr append
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Appends a new dataframe.
 usage: |
@@ -15,7 +15,12 @@ usage: |
 
 ## Signature
 
-```> dfr append ```
+```> dfr append (other) --col```
+
+## Parameters
+
+ -  `other`: dataframe to be appended
+ -  `--col` `(-c)`: appends in col orientation
 
 ## Examples
 

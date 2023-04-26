@@ -2,7 +2,7 @@
 title: dfr melt
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Unpivot a DataFrame from wide to long format.
 usage: |
@@ -15,7 +15,14 @@ usage: |
 
 ## Signature
 
-```> dfr melt ```
+```> dfr melt --columns --values --variable-name --value-name```
+
+## Parameters
+
+ -  `--columns {table}`: column names for melting
+ -  `--values {table}`: column names used as value columns
+ -  `--variable-name {string}`: optional name for variable column
+ -  `--value-name {string}`: optional name for value column
 
 ## Examples
 

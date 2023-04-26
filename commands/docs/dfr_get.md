@@ -2,7 +2,7 @@
 title: dfr get
 categories: |
   dataframe
-version: 0.78.0
+version: 0.79.0
 dataframe: |
   Creates dataframe with the selected columns.
 usage: |
@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> dfr get ```
+```> dfr get ...rest```
+
+## Parameters
+
+ -  `...rest`: column names to sort dataframe
 
 ## Examples
 

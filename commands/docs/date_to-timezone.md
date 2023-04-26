@@ -2,7 +2,7 @@
 title: date to-timezone
 categories: |
   date
-version: 0.78.0
+version: 0.79.0
 date: |
   Convert a date to a given time zone.
 usage: |
@@ -27,7 +27,7 @@ Use 'date list-timezone' to list all supported time zones.
 
 Get the current date in UTC+05:00
 ```shell
-> date now | date to-timezone +0500
+> date now | date to-timezone '+0500'
 
 ```
 
