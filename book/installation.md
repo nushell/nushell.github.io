@@ -20,6 +20,10 @@ For Windows:
 - [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 
+Cross Platform installation:
+
+- [npm](https://www.npmjs.com/) (`npm install -g nushell` Note that nu plugins were not included if you install in this way)
+
 The main Nushell binary is named `nu` (or `nu.exe` on Windows). After installation, you can launch it by typing `nu`.
 
 ## Build from source
