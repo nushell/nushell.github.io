@@ -21,7 +21,7 @@ Once we do, it's as if we typed `ls -l`. This also allows us to pass in flags or
 ```
 
 And get the equivalent to having typed `ls -l -a`.
-```
+
 ## List all loaded aliases
 
 Your useable aliases can be seen in `$nu.scope.aliases`.
