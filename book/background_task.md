@@ -15,7 +15,7 @@ Here we provide a [nushell module](https://github.com/nushell/nu_scripts/tree/ma
 Here is a setup example to make nushell "support" background task:
 1. install pueue
 2. run `pueued` with default config, you can refer to [start-the-daemon page](https://github.com/Nukesor/pueue/wiki/Get-started#start-the-daemon) for more information.
-3. put the [job.nu](https://github.com/nushell/nu_scripts/blob/main/background_task/job.nu) file under `$env.NU_LIB_DIRS`.
+3. put the [job.nu](https://github.com/nushell/nu_scripts/blob/main/modules/background_task/job.nu) file under `$env.NU_LIB_DIRS`.
 4. add a line to the `$nu.config-path` file: `use job.nu`
 5. restart nu.
 
