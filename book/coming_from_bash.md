@@ -54,7 +54,7 @@ Note: this table assumes Nu 0.60.0 or later.
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | Update environment temporarily                                    |
 | `export FOO=BAR`                     | `let-env FOO = BAR`                              | Set environment variable for current session                      |
 | `echo $FOO`                          | `$env.FOO`                                       | Use environment variables                                         |
-| `unset FOO`                          | `hide FOO`                                       | Unset environment variable for current session                    |
+| `unset FOO`                          | `hide-env FOO`                                   | Unset environment variable for current session                    |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                       | Define an alias temporarily                                       |
 | `type FOO`                           | `which FOO`                                      | Display information about a command (builtin, alias, or executable) |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Add and edit alias permanently (for new shells)                   |
