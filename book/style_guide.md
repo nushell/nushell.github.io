@@ -155,13 +155,37 @@ Incorrect:
 - **It's recommended to** default to short format in scripts for lists unless they more than 80 characters long.
 - **It's recommended to** use long format for pipelines more than 80 characters long.
 
+Correct (in scripts):
+
 ```nushell
-export def "log ERROR_LEVEL_PREFIX" [
---short (-s)  # incorrect: "--short (-s)" indent should be one \t; fix: add \t before "--short (-s)"
-] {
-    if $short { "E" # incorrect: `{}` content should be on it's own lines; fix: move "E" on a separate line
-    } else {
-        "ERR" } # incorrect: `{}` content should be on it's own lines; fix: move "}" on a separate line
+[1, 2, 3, 4] | reduce {|it, acc|
+    $it + $acc
+}
+
+[1 2 3 4] | reduce {|it acc|
+    $it + $acc
+}
+```
+
+Incorrect (in scripts):
+
+```nushell
+[
+   1,
+   2,
+   3,
+   4
+] | reduce {|it, acc|
+    $it + $acc
+}
+
+[
+   1
+   2
+   3
+   4
+] | reduce {|it acc|
+    $it + $acc
 }
 ```
 
