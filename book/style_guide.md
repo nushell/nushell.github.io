@@ -65,6 +65,8 @@ and modifies them slightly. When not stated explicitly, rule is inherited withou
 - **Always** put no space before and one `\n` after pipe `|` symbol denoting block or closure parameter list end.
 - **Always** put one `\n\t` before first record key and `\n` after last record key value.
   Keep this indentation for all record keys.
+- **Always** put one `\n\t` before first list value and `\n` after last list value.
+  Keep this indentation for all list values.
 
 When referring to `\t` it's supposed that it's done relatively to the current indentation level.
 
