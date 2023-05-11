@@ -12,7 +12,8 @@ but please be consistent and follow your rules.
 
 ### Basic
 
-**It's recommended to** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
+- **It's recommended to** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
+- **It's recommended to** omit commas between list items.
 
 Correct:
 
