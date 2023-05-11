@@ -1,5 +1,9 @@
 # Best practices
 
+This page lists our best practices we advice to follow. Keep in mind that they are not required to be
+used in external repositories (not ours), you can change them in the way you want,
+but please be consistent and follow your rules.
+
 ## Formatting
 
 ### Defaults
@@ -24,7 +28,7 @@ Incorrect:
 
 #### One-line format
 
-One-line format is a format for writting all commands in one line.
+One-line format is a format for writing all commands in one line.
 
 - **It's recommended to** put no spaces before and after pipe `|` symbol denoting block or closure parameter list beginning,
 - **It's recommended to** put one space after comma `,` after block, closure parameter or record key.
@@ -57,7 +61,7 @@ Incorrect:
 
 #### Multi-line format
 
-Multi-line format is a format for writting all commands in several lines. It inherits all rules from one-line format
+Multi-line format is a format for writing all commands in several lines. It inherits all rules from one-line format
 and modifies them slightly. When not stated explicitly, rule is inherited without change.
 
 - **It's recommended to** put zero trailing spaces after pipe `|` symbol when `\n\t` follows it.
@@ -113,7 +117,7 @@ Incorrect:
 
 ### Spreading long lines
 
-- **It's recommended to** default to short format unless you are writting scripts.
+- **It's recommended to** default to short format unless you are writing scripts.
 - **It's recommended to** default to short format in scripts for lists unless they more than 80 characters long.
 - **It's recommended to** use long format for pipelines more than 80 characters long.
 
