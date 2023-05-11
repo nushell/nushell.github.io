@@ -10,6 +10,18 @@
 
 - **Always** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
 
+Correct:
+
+```nushell
+'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
+```
+
+Incorrect:
+
+```nushell
+'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff' # two many spaces after "|"
+```
+
 #### One-line format
 
 One-line format is a format for writting all commands in one line.
@@ -19,9 +31,29 @@ One-line format is a format for writting all commands in one line.
 - **Always** put no space before and one space after pipe `|` symbol denoting block or closure parameter list end.
 - **Always** put one space before first record key and after last record key value.
 - **Always** put one space after `:` after record key.
-- **Always** put one space before opening square `[` or curly brace `{`.
+- **Always** put one space before opening square `[` or curly brace `{` if preceding symbol is not the same.
 - **Always** put one space after closing square `]` or curly brace `{`.
 - **Always** put no spaces between square `[]` or curly brackets `{}` with nothing between them.
+
+Correct:
+
+```nushell
+[[status]; [UP] [UP]] | all {|el| $el.status == UP }
+[1 2 3 4] | reduce {|it, acc| $it + $acc }
+{ x: 1, y: 2 }
+[1 2] | zip [3 4]
+[]
+```
+
+Incorrect:
+
+```nushell
+[[status]; [UP] [UP]] | all { |el| $el.status == UP } # two many spaces before "|el|"
+[1 2 3 4] | reduce {|it , acc | $it + $acc } # two many spaces after "it"; two many spaces before "| $it + $acc"
+{x: 1, y : 2 } # two few spaces before "x: 1"; two many spaces before ": 2"
+[1 2] | zip  [3 4] # two many spaces before "[3 4]"
+[ ] # two many spaces before "]"
+```
 
 #### Multi-line format
 
@@ -34,6 +66,47 @@ and modifies them slightly. When not stated explicitly, rule is inherited withou
 - **Always** put `\t` before list value or record key.
 
 When referring to `\t` it's supposed that it's done relatively to the current indentation level.
+
+Correct:
+
+```nushell
+[[status]; [UP] [UP]] | all {|el|
+    $el.status == UP
+}
+
+[
+    1
+    2
+    3
+    4
+] | reduce {|it, acc|
+    $it + $acc
+}
+
+{
+    x: 1,
+    y: 2
+}
+```
+
+Incorrect:
+
+```nushell
+[[status]; [UP] [UP]] | all {|el|
+    $el.status == UP } # two many spaces before "}"; two few "\n" before "}"
+
+[ 1 # two many spaces before "}"; two few "\n" before "}"
+    2
+    3
+    4
+] | reduce {|it, acc|
+    $it + $acc
+}
+
+{ x: 1, # two many spaces before "x: 1"; two few "\n" before "x: 1"
+    y: 2
+}
+```
 
 ### Spreading long lines
 
