@@ -1,5 +1,15 @@
 # Best practices
 
+## Formatting
+
+- **Always** put one space before and after pipe `|` symbol.
+- **Always** put pipe `|` symbol before `\n` and indent next command one level more first command in pipeline
+  when dealing with long pipelines. By long pipeline here we mean a such one that takes more than 80 characters counting
+  from the first character of the first command name of this pipeline.
+- **Always** spread blocks and closures over several lines putting first brace `}` on a separate line.
+- **Always** put zero spaces between square brackets `[]` for custom commands without parameters.
+- **Always** put all custom command parameters on separate lines indented one level more than `def`.
+
 ## Options and parameters of custom commands
 
 - **Always** keep count of all positional parameters less than or equal to 4, for remaining inputs use options.
