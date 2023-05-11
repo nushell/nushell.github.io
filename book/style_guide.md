@@ -61,9 +61,10 @@ Multi-line format is a format for writting all commands in several lines. It inh
 and modifies them slightly. When not stated explicitly, rule is inherited without change.
 
 - **Always** put zero trailing spaces after pipe `|` symbol when `\n\t` follows it.
+  Keep this indentation for all pipeline commands.
 - **Always** put no space before and one `\n` after pipe `|` symbol denoting block or closure parameter list end.
 - **Always** put one `\n\t` before first record key and `\n` after last record key value.
-- **Always** put `\t` before list value or record key.
+  Keep this indentation for all record keys.
 
 When referring to `\t` it's supposed that it's done relatively to the current indentation level.
 
