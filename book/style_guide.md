@@ -8,11 +8,11 @@ but please be consistent and follow your rules.
 
 ### Defaults
 
-- **It's recommended to** assume that by default no spaces or tabs allowed, but the following rules define where they are allowed.
+**It's recommended to** assume that by default no spaces or tabs allowed, but the following rules define where they are allowed.
 
 ### Basic
 
-- **It's recommended to** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
+**It's recommended to** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
 
 Correct:
 
@@ -30,14 +30,23 @@ Incorrect:
 
 One-line format is a format for writing all commands in one line.
 
-- **It's recommended to** put no spaces before and after pipe `|` symbol denoting block or closure parameter list beginning,
-- **It's recommended to** put one space after comma `,` after block, closure parameter or record key.
-- **It's recommended to** put no space before and one space after pipe `|` symbol denoting block or closure parameter list end.
-- **It's recommended to** put one space before first record key and after last record key value.
-- **It's recommended to** put one space after `:` after record key.
-- **It's recommended to** put one space before opening square `[` or curly brace `{` if preceding symbol is not the same.
-- **It's recommended to** put one space after closing square `]` or curly brace `}` if following symbol is not the same.
-- **It's recommended to** put no spaces between square `[]` or curly brackets `{}` with nothing between them.
+1. parameters:
+   1. **It's recommended to** put no spaces before and after pipe `|` symbol denoting block or closure parameter list beginning.
+   2. **It's recommended to** put one space after comma `,` after block or closure parameter parameter.
+   3. **It's recommended to** put no space before and one space after pipe `|` symbol denoting block or closure parameter list end.
+2. block and closure bodies:
+   1. **It's recommended to** put one space before closing block or closure curly brace `}`.
+3. records:
+   1. **It's recommended to** put one space before first record key and after last record key value.
+   2. **It's recommended to** put one space after `:` after record key.
+   3. **It's recommended to** put one space after comma `,` after key value.
+4. lists:
+   1. **It's recommended to** put no spaces before first list value and after last list value.
+   2. **It's recommended to** put one space after comma `,` after list value.
+5. surrounding constructs:
+   1. **It's recommended to** put one space before opening square `[` or curly brace `{` if preceding symbol is not the same.
+   2. **It's recommended to** put one space after closing square `]` or curly brace `}` if following symbol is not the same.
+   3. **It's recommended to** put no spaces between square `[]` or curly brackets `{}` with nothing between them.
 
 Correct:
 
@@ -64,17 +73,20 @@ Incorrect:
 #### Multi-line format
 
 Multi-line format is a format for writing all commands in several lines. It inherits all rules from one-line format
-and modifies them slightly. When not stated explicitly, rule is inherited without change.
+and modifies them slightly.
 
-- **It's recommended to** put zero trailing spaces after pipe `|` symbol when `\n\t` follows it.
-  Keep this indentation for all pipeline commands.
-- **It's recommended to** put no space before and one `\n` after pipe `|` symbol denoting block or closure parameter list end.
-- **It's recommended to** put one `\n\t` before first record key and `\n` after last record key value.
-  Keep this indentation for all record keys.
-- **It's recommended to** put one `\n\t` before first list value and `\n` after last list value.
-  Keep this indentation for all list values.
-
-When referring to `\t` it's supposed that it's done relatively to the current indentation level.
+1. general:
+   1. **It's recommended to omit** trailing spaces.
+2. block and closure bodies:
+   1. **It's recommended to** put each body pipeline on a separate line.
+   2. **It's recommended to** put each body pipeline on a separate line.
+3. records:
+   1. **It's recommended to** put each record key-value pair on separate line.
+4. lists:
+   1. **It's recommended to** put each list item on separate line.
+5. surrounding constructs:
+   1. **It's recommended to** put one `\n` before opening square `[` or curly brace `{` if preceding symbol is not the same.
+   2. **It's recommended to** put one `\n` after closing square `]` or curly brace `}` if following symbol is not the same.
 
 Correct:
 
@@ -96,15 +108,26 @@ Correct:
     x: 1,
     y: 2
 }
+
+[
+  {
+    name: "Teresa",
+    age: 24
+  },
+  {
+    name: "Thomas",
+    age: 26
+  }
+]
 ```
 
 Incorrect:
 
 ```nushell
 [[status]; [UP] [UP]] | all {|el|
-    $el.status == UP } # two many spaces before "}"; two few "\n" before "}"
+    $el.status == UP } # two many spaces before "}": 1 instead of "\n"
 
-[ 1 # two many spaces before "}"; two few "\n" before "}"
+[ 1 # two many spaces before "1": 1 instead of "\n"
     2
     3
     4
@@ -112,9 +135,19 @@ Incorrect:
     $it + $acc
 }
 
-{ x: 1, # two many spaces before "x: 1"; two few "\n" before "x: 1"
+{ x: 1, # two many spaces before "x: 1": 1 instead of "\n"
     y: 2
 }
+
+[{ # two few "\n" before "{": 0 instead of 1
+    name: "Teresa",
+    age: 24
+  } , # two many spaces before ",": 1 instead of 0
+  {
+    name: "Thomas",
+    age: 26
+  }
+]
 ```
 
 ### Spreading long lines
