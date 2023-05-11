@@ -4,11 +4,11 @@
 
 ### Defaults
 
-- **Always** assume that by default no spaces or tabs allowed, but the following rules define where they are allowed.
+- **It's recommended to** assume that by default no spaces or tabs allowed, but the following rules define where they are allowed.
 
 ### Basic
 
-- **Always** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
+- **It's recommended to** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
 
 Correct:
 
@@ -26,14 +26,14 @@ Incorrect:
 
 One-line format is a format for writting all commands in one line.
 
-- **Always** put no spaces before and after pipe `|` symbol denoting block or closure parameter list beginning,
-- **Always** put one space after comma `,` after block, closure parameter or record key.
-- **Always** put no space before and one space after pipe `|` symbol denoting block or closure parameter list end.
-- **Always** put one space before first record key and after last record key value.
-- **Always** put one space after `:` after record key.
-- **Always** put one space before opening square `[` or curly brace `{` if preceding symbol is not the same.
-- **Always** put one space after closing square `]` or curly brace `{`.
-- **Always** put no spaces between square `[]` or curly brackets `{}` with nothing between them.
+- **It's recommended to** put no spaces before and after pipe `|` symbol denoting block or closure parameter list beginning,
+- **It's recommended to** put one space after comma `,` after block, closure parameter or record key.
+- **It's recommended to** put no space before and one space after pipe `|` symbol denoting block or closure parameter list end.
+- **It's recommended to** put one space before first record key and after last record key value.
+- **It's recommended to** put one space after `:` after record key.
+- **It's recommended to** put one space before opening square `[` or curly brace `{` if preceding symbol is not the same.
+- **It's recommended to** put one space after closing square `]` or curly brace `{`.
+- **It's recommended to** put no spaces between square `[]` or curly brackets `{}` with nothing between them.
 
 Correct:
 
@@ -60,12 +60,12 @@ Incorrect:
 Multi-line format is a format for writting all commands in several lines. It inherits all rules from one-line format
 and modifies them slightly. When not stated explicitly, rule is inherited without change.
 
-- **Always** put zero trailing spaces after pipe `|` symbol when `\n\t` follows it.
+- **It's recommended to** put zero trailing spaces after pipe `|` symbol when `\n\t` follows it.
   Keep this indentation for all pipeline commands.
-- **Always** put no space before and one `\n` after pipe `|` symbol denoting block or closure parameter list end.
-- **Always** put one `\n\t` before first record key and `\n` after last record key value.
+- **It's recommended to** put no space before and one `\n` after pipe `|` symbol denoting block or closure parameter list end.
+- **It's recommended to** put one `\n\t` before first record key and `\n` after last record key value.
   Keep this indentation for all record keys.
-- **Always** put one `\n\t` before first list value and `\n` after last list value.
+- **It's recommended to** put one `\n\t` before first list value and `\n` after last list value.
   Keep this indentation for all list values.
 
 When referring to `\t` it's supposed that it's done relatively to the current indentation level.
@@ -113,9 +113,9 @@ Incorrect:
 
 ### Spreading long lines
 
-- **Always** default to short format unless you are writting scripts.
-- **Always** default to short format in scripts for lists unless they more than 80 characters long.
-- **Always** use long format for pipelines more than 80 characters long.
+- **It's recommended to** default to short format unless you are writting scripts.
+- **It's recommended to** default to short format in scripts for lists unless they more than 80 characters long.
+- **It's recommended to** use long format for pipelines more than 80 characters long.
 
 ```nushell
 export def "log ERROR_LEVEL_PREFIX" [
@@ -129,13 +129,13 @@ export def "log ERROR_LEVEL_PREFIX" [
 
 ## Options and parameters of custom commands
 
-- **Always** keep count of all positional parameters less than or equal to 4, for remaining inputs use options.
-- **Always** use positional parameters unless they can't be used due to rules listed here or technical restrictions.
+- **It's recommended to** keep count of all positional parameters less than or equal to 4, for remaining inputs use options.
+- **It's recommended to** use positional parameters unless they can't be used due to rules listed here or technical restrictions.
   For instance, when there are several kinds of optional parameters (but at least one parameter should be provided)
   use options. Great example of this is `ansi gradient` command where at least foreground or background must be passed.
-- **Always** provide both long and short options.
+- **It's recommended to** provide both long and short options.
 
 ## Documentation
 
-- **Always** provide documentation for all exported entities (like custom commands) and their
+- **It's recommended to** provide documentation for all exported entities (like custom commands) and their
   inputs (like custom command parameters and options).
