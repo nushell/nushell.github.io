@@ -153,7 +153,8 @@ Incorrect:
 ### Spreading long lines
 
 - **It's recommended to** default to short format unless you are writing scripts.
-- **It's recommended to** default to short format in scripts for lists unless they more than 80 characters long.
+- **It's recommended to** default to short format in scripts for lists and records unless they more than 80 characters long
+  or contain nested lists or records.
 - **It's recommended to** use long format for pipelines more than 80 characters long.
 
 Correct (in scripts):
@@ -166,6 +167,11 @@ Correct (in scripts):
 [1 2 3 4] | reduce {|it acc|
     $it + $acc
 }
+
+[
+  { name: "Teresa", age: 24 },
+  { name: "Thomas", age: 26 }
+]
 ```
 
 Incorrect (in scripts):
@@ -188,6 +194,17 @@ Incorrect (in scripts):
 ] | reduce {|it acc|
     $it + $acc
 }
+
+[
+  {
+    name: "Teresa",
+    age: 24
+  },
+  {
+    name: "Thomas",
+    age: 26
+  }
+]
 ```
 
 ## Options and parameters of custom commands
