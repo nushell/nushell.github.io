@@ -23,7 +23,7 @@ Correct:
 Incorrect:
 
 ```nushell
-'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff' # two many spaces after "|"
+'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff' # two many spaces after "|": 2 instead of 1
 ```
 
 #### One-line format
@@ -36,7 +36,7 @@ One-line format is a format for writing all commands in one line.
 - **It's recommended to** put one space before first record key and after last record key value.
 - **It's recommended to** put one space after `:` after record key.
 - **It's recommended to** put one space before opening square `[` or curly brace `{` if preceding symbol is not the same.
-- **It's recommended to** put one space after closing square `]` or curly brace `{`.
+- **It's recommended to** put one space after closing square `]` or curly brace `}` if following symbol is not the same.
 - **It's recommended to** put no spaces between square `[]` or curly brackets `{}` with nothing between them.
 
 Correct:
@@ -52,11 +52,13 @@ Correct:
 Incorrect:
 
 ```nushell
-[[status]; [UP] [UP]] | all { |el| $el.status == UP } # two many spaces before "|el|"
-[1 2 3 4] | reduce {|it , acc | $it + $acc } # two many spaces after "it"; two many spaces before "| $it + $acc"
-{x: 1, y : 2 } # two few spaces before "x: 1"; two many spaces before ": 2"
-[1 2] | zip  [3 4] # two many spaces before "[3 4]"
-[ ] # two many spaces before "]"
+[[status]; [UP] [UP]] | all { |el| $el.status == UP } # two many spaces before "|el|": 2 instead of 0
+[1 2 3 4] | reduce {|it , acc | $it + $acc } # two many spaces after "it": 1 instead of 0
+                                             # two many spaces before "| $it + $acc": 1 instead of 0
+{x: 1, y : 2 } # two few spaces before "x: 1": 0 instead of 1
+               # two many spaces before ": 2": 1 instead of 0
+[1 2] | zip  [3 4] # two many spaces before "[3 4]": 2 instead of 1
+[ ] # two many spaces before "]": 1 instead of 0
 ```
 
 #### Multi-line format
