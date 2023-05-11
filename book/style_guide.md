@@ -79,7 +79,6 @@ and modifies them slightly.
    1. **It's recommended to omit** trailing spaces.
 2. block and closure bodies:
    1. **It's recommended to** put each body pipeline on a separate line.
-   2. **It's recommended to** put each body pipeline on a separate line.
 3. records:
    1. **It's recommended to** put each record key-value pair on separate line.
 4. lists:
