@@ -56,7 +56,8 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 │ # │  name  │ columns │  rows   │
 ├───┼────────┼─────────┼─────────┤
 │ 0 │ $df    │       5 │ 5429252 │
-╰───┴────────┴─────────┴─────────╯```
+╰───┴────────┴─────────┴─────────╯
+```
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
 
