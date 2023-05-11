@@ -2,7 +2,7 @@
 
 ## Formatting
 
-- **Always** put one space before and after pipe `|` symbol.
+- **Always** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
 - **Always** put pipe `|` symbol before `\n` and indent next command one level more first command in pipeline
   when dealing with long pipelines. By long pipeline here we mean a such one that takes more than 80 characters counting
   from the first character of the first command name of this pipeline.
