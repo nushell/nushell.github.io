@@ -93,7 +93,7 @@ Multi-line format is a format for writing all commands in several lines. It inhe
 and modifies them slightly.
 
 1. general:
-   1. **It's recommended to omit** trailing spaces.
+   1. **It's required to omit** trailing spaces.
 2. block and closure bodies:
    1. **It's recommended to** put each body pipeline on a separate line.
 3. records:
