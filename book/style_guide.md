@@ -230,7 +230,7 @@ Incorrect (in scripts):
 
 ## Options and parameters of custom commands
 
-- **It's recommended to** keep count of all positional parameters less than or equal to 4, for remaining inputs use options.
+- **It's recommended to** keep count of all positional parameters less than or equal to 2, for remaining inputs use options. Assume that command can expect source and destination parameter, like `mv`: source and target file or directory.
 - **It's recommended to** use positional parameters unless they can't be used due to rules listed here or technical restrictions.
   For instance, when there are several kinds of optional parameters (but at least one parameter should be provided)
   use options. Great example of this is `ansi gradient` command where at least foreground or background must be passed.
