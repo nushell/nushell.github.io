@@ -7,6 +7,9 @@ progress and subject to change. We welcome discussion and contributions.
 Keep in mind that they are not required to be used in external repositories (not ours), you can change them in the
 way you want, but please be consistent and follow your rules.
 
+All escape sequences should not be interpreted literally, unless it's told to do so. In other words,
+treat something like `\n` like new line character and not literal slash followed by `n`.
+
 ## Formatting
 
 ### Defaults
