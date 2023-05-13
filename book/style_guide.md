@@ -45,7 +45,7 @@ One-line format is a format for writing all commands in one line.
 2. block and closure bodies:
    1. **It's recommended to** put one space before closing block or closure curly brace `}`.
 3. records:
-   1. **It's recommended to** put one space before first record key and after last record key value.
+   1. **It's recommended to** put no spaces before first record key and after last record key value.
    2. **It's recommended to** put one space after `:` after record key.
    3. **It's recommended to** put one space after comma `,` after key value.
 4. lists:
@@ -61,7 +61,7 @@ Correct:
 ```nushell
 [[status]; [UP] [UP]] | all {|el| $el.status == UP }
 [1 2 3 4] | reduce {|it, acc| $it + $acc }
-{ x: 1, y: 2 }
+{x: 1, y: 2}
 [1 2] | zip [3 4]
 []
 ```
@@ -76,9 +76,9 @@ Incorrect:
 # - two many spaces before "| $it + $acc": 1 instead of 0
 [1 2 3 4] | reduce {|it , acc | $it + $acc }
 
-# - two few spaces before "x: 1": 0 instead of 1
+# - two many spaces before "x: 1": 1 instead of 0
 # - two many spaces before ": 2": 1 instead of 0
-{x: 1, y : 2 }
+{ x: 1, y : 2}
 
 # - two many spaces before "[3 4]": 2 instead of 1
 [1 2] | zip  [3 4]
@@ -190,8 +190,8 @@ Correct (in scripts):
 }
 
 [
-  { name: "Teresa", age: 24 },
-  { name: "Thomas", age: 26 }
+  {name: "Teresa", age: 24},
+  {name: "Thomas", age: 26}
 ]
 ```
 
