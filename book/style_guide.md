@@ -40,7 +40,7 @@ One-line format is a format for writing all commands in one line.
 
 1. parameters:
    1. **It's recommended to** put no spaces before and after pipe `|` symbol denoting block or closure parameter list beginning.
-   2. **It's recommended to** put one space after comma `,` after block or closure parameter parameter.
+   2. **It's recommended to** put one space after comma `,` after block or closure parameter.
    3. **It's recommended to** put no space before and one space after pipe `|` symbol denoting block or closure parameter list end.
 2. block and closure bodies:
    1. **It's recommended to** put one space before closing block or closure curly brace `}`.
