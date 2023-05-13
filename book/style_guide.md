@@ -1,8 +1,11 @@
 # Best practices
 
-This page lists our best practices we advice to follow. Keep in mind that they are not required to be
-used in external repositories (not ours), you can change them in the way you want,
-but please be consistent and follow your rules.
+This page is a working document collecting syntax guidelines and best practices we have discovered so far.
+The goal of this document is to eventually land on a canonical Nushell code style, but as for now it is still work in
+progress and subject to change. We welcome discussion and contributions.
+
+Keep in mind that they are not required to be used in external repositories (not ours), you can change them in the
+way you want, but please be consistent and follow your rules.
 
 ## Formatting
 
