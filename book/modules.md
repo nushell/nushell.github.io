@@ -1,27 +1,58 @@
 # Modules
 
-Similar to many other programming languages, Nushell also has modules that let you import custom commands into a current scope.
-However, since Nushell is also a shell, modules allow you to import environment variables which can be used to conveniently activate/deactivate various environments.
+Similar to many other programming languages, Nushell also has modules that let you organize your code into "bags". Each module is a "bag" containing a bunch of commands that you can export (take out or the bag) and use in your current scope. Since Nushell is also a shell, modules allow you to modify environment variables when importing the module.
 
-## Basics
+## Quick Overview
 
-A simple module can be defined like this:
+There are three ways to define a module in Nushell:
 
-```
-> module greetings {
-     export def hello [name: string] {
-         $"hello ($name)!"
-     }
+1. "inline"
+2. from a file
+3. from a directory
+   - directory must contain `mod.nu` file (can be empty)
 
-     export def hi [where: string] {
-         $"hi ($where)!"
-     }
+In Nushell, creating a module and importing definitions from a module are two different actions. The former is done using the `module` keyword. The latter using the `use` keyword. You can think of `module` as "wrapping definitions into a bag" and `use` as "opening a bag and taking definitions from it".
+
+You can define the following things inside a module:
+
+- Commands (`def`, `def-env`)
+- Aliases (`alias`)
+- Known externals (`extern`)
+- Submodules (`module`)
+- Imported symbols from other modules (`use`)
+- Environment setup (`export-env`)
+
+Only definitions marked with `export` are available to import from the module ("take out of the bag"). Definitions not marked with `export` are allowed but are visible only inside the module (private). (_`export-env` is special and does not require `export`._)
+
+## "Inline" modules
+
+The simplest (and probably least useful) way to define a module is an "inline" module can be defined like this:
+
+```nushell
+module greetings {
+    export def hello [name: string] {
+        $"hello ($name)!"
+    }
+
+    export def hi [where: string] {
+        $"hi ($where)!"
+    }
 }
+
+use greetings hello
+
+hello "world"
 ```
+
+_You can paste the code into a file and run it with `nu`, or type into the REPL._
+
+First, we create a module (wrap `hello` and `hi` commands into a "bag" called `greetings`), then we import the `hello` command from the module (find a "bag" called `greetings` and take `hello` command from it) using `use`.
+
+## Modules from files
 
 or in a file named the same as the module you want to create:
 
-```
+```nushell
 # greetings.nu
 
 export def hello [name: string] {
@@ -33,11 +64,23 @@ export def hi [where: string] {
 }
 ```
 
-We defined `hello` and `hi` custom commands inside a `greetings` module.
+then
 
-The [`export`](/commands/docs/export.md) keyword makes it possible to later import the commands from the module.
+```nushell
+# in another file or REPL
 
-Similar to [`def`](/commands/docs/def.md), it is also possible to mark [`def-env`](/commands/docs/def-env.md) with the [`export`](/commands/docs/export.md) keyword (you can learn more about [`def-env`](/commands/docs/def-env.md) in the [Environment](environment.md) chapter).
+use greetings.nu hello
+
+hello
+```
+
+The result should be similar as in the previous section.
+
+## Modules from directories
+
+Using `/` at the end but it's not required
+
+## `main`
 
 ## Using modules
 
@@ -250,7 +293,33 @@ Here's the full list of ways you can export:
 - [`export extern`](/commands/docs/export_extern.md) - export a known external definition
 - [`export use`](/commands/docs/export_use.md) - use definitions from a module and export them from this module
 
-## Hiding
+## What is possible to export?
+
+Similar to [`def`](/commands/docs/def.md), it is also possible to mark [`def-env`](/commands/docs/def-env.md) with the [`export`](/commands/docs/export.md) keyword (you can learn more about [`def-env`](/commands/docs/def-env.md) in the [Environment](environment.md) chapter).
+
+## Caveats
+
+Like most programming language designs, even our modules are a product of a tradeoff and there are limitations:
+
+- `export-env` runs only when the `use` call is _evaluated_.
+- Module directory cannot contain .nu file named after the directory (`spam/spam.nu`)
+  - Consider a `spam` directory containing both `spam.nu` and `mod.nu`, calling `use spam *` would create an ambiguous situation where the `spam` module would be defined twice.
+- Module cannot contain file named after the module
+  - Same case as above: Module `spam` containg both `main` and `spam` commands would create an ambiguous situation when exported as `use spam *`.
+
+## Examples
+
+### Re-exporting with `use` (files)
+
+- `export module` vs. `export use`
+
+### Directory structure as subcommad tree
+
+### Dumping files into directory (completions, extern)
+
+### Setting environment + aliases (conda style)
+
+## Hiding (move away)
 
 Any custom command or alias, imported from a module or not, can be "hidden", restoring the previous definition.
 We do this with the [`hide`](/commands/docs/hide.md) command:
@@ -287,7 +356,7 @@ It can be one of the following:
 
 - Hides all of the module's exports, without the prefix
 
-## Hiding Environment Variables
+## Hiding Environment Variables (move away)
 
 Environment variables can be hidden with [`hide-env`](/commands/docs/hide-env.md):
 
