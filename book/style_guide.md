@@ -41,7 +41,11 @@ One-line format is a format for writing all commands in one line.
 **It's recommended to** default to this format:
 
 1. unless you are writing scripts
-2. in scripts for lists and records unless they more than 80 characters long or contain nested lists or records
+2. in scripts for lists and records unless they either:
+   1. more than 80 characters long
+   2. contain nested lists or records
+3. for pipelines less than 80 characters long not containing items should be formatted with
+   a long format
 
 Rules:
 
@@ -104,8 +108,10 @@ and modifies them slightly.
 **It's recommended to** default to this format:
 
 1. while you are writing scripts
-2. in scripts for lists and records while they more than 80 characters long or contain nested lists or records
-3. for pipelines more than 80 characters long.
+2. in scripts for lists and records while they either:
+   1. more than 80 characters long
+   2. contain nested lists or records
+3. for pipelines more 80 characters long
 
 Rules:
 
