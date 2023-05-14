@@ -4,11 +4,11 @@ This page is a working document collecting syntax guidelines and best practices 
 The goal of this document is to eventually land on a canonical Nushell code style, but as for now it is still work in
 progress and subject to change. We welcome discussion and contributions.
 
-Keep in mind that they are not required to be used in external repositories (not ours), you can change them in the
+Keep in mind that these guidelines are not required to be used in external repositories (not ours), you can change them in the
 way you want, but please be consistent and follow your rules.
 
-All escape sequences should not be interpreted literally, unless it's told to do so. In other words,
-treat something like `\n` like new line character and not literal slash followed by `n`.
+All escape sequences should not be interpreted literally, unless directed to do so. In other words,
+treat something like `\n` like the new line character and not a literal slash followed by `n`.
 
 ## Formatting
 
@@ -68,7 +68,9 @@ Correct:
 ```nushell
 [[status]; [UP] [UP]] | all {|el| $el.status == UP }
 [1 2 3 4] | reduce {|it, acc| $it + $acc }
+[1 2 3 4] | reduce {|it acc| $it + $acc }
 {x: 1, y: 2}
+{x: 1 y: 2}
 [1 2] | zip [3 4]
 []
 ```
@@ -200,6 +202,11 @@ Correct (in scripts):
 [
   {name: "Teresa", age: 24},
   {name: "Thomas", age: 26}
+]
+
+[
+  {name: "Teresa" age: 24},
+  {name: "Thomas" age: 26}
 ]
 ```
 
