@@ -38,6 +38,13 @@ Incorrect:
 
 One-line format is a format for writing all commands in one line.
 
+**It's recommended to** default to this format:
+
+1. unless you are writing scripts
+2. in scripts for lists and records unless they more than 80 characters long or contain nested lists or records
+
+Rules:
+
 1. parameters:
    1. **It's recommended to** put no spaces before and after pipe `|` symbol denoting block or closure parameter list beginning.
    2. **It's recommended to** put one space after comma `,` after block or closure parameter.
@@ -91,6 +98,14 @@ Incorrect:
 
 Multi-line format is a format for writing all commands in several lines. It inherits all rules from one-line format
 and modifies them slightly.
+
+**It's recommended to** default to this format:
+
+1. while you are writing scripts
+2. in scripts for lists and records while they more than 80 characters long or contain nested lists or records
+3. for pipelines more than 80 characters long.
+
+Rules:
 
 1. general:
    1. **It's required to omit** trailing spaces.
@@ -170,13 +185,6 @@ Incorrect:
   }
 ]
 ```
-
-### Spreading long lines
-
-- **It's recommended to** default to short format unless you are writing scripts.
-- **It's recommended to** default to short format in scripts for lists and records unless they more than 80 characters long
-  or contain nested lists or records.
-- **It's recommended to** use long format for pipelines more than 80 characters long.
 
 Correct (in scripts):
 
