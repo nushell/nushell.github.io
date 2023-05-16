@@ -356,7 +356,9 @@ Calling `use purpose.nu` ran the `export-env` block inside `purpose.nu` which in
 
 ## Examples
 
-### Local Custom Commands
+This section describes some useful patterns using modules.
+
+### Local Definitions
 
 Anything defined in a module without the [`export`](/commands/docs/export.md) keyword will work only in the module's scope.
 
@@ -395,18 +397,59 @@ hi there!
 > generate-prefix  # fails because the command is imported only locally inside the module
 ```
 
-### Re-exporting with `use` (files)
-
-- `export module` vs. `export use`
-  ate
-
 ### Directory structure as subcommad tree
 
-### Dumping files into directory (completions, extern)
+Since directories can be imported as submodules and submodules can naturally form subcommands it is easy to build even complex command line applications with a simple file structure.
+
+_WIP_
+
+### Dumping files into directory
+
+A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, similar effect can be achieved via module directories.
+
+1. Create a directory (e.g., `mkdir ($nu.default-config-dir | path join completions)`) and create empty `mod.nu` inside
+2. Add the directory to your NU_LIB_DIRS inside `env.nu`
+3. Put `use completions *` into your `config.nu`
+
+Now you've set up a directory where you can put your completion files. For example:
+
+```
+# git.nu
+
+export extern main [
+    --version(-v)
+    -C: string
+    # ... etc.
+]
+
+export extern add [
+    --verbose(-v)
+    --dry-run(-n)
+    # ... etc.
+]
+
+export extern checkout [
+    branch: string@complete-git-branch
+]
+
+def complete-git-branch [] {
+    # ... code to list git branches
+}
+```
+
+If you put this file into the `completions` directory and reload config/Nushell, you should see the `git`, `git add` and `git checkout` commands highlighted with flag completions working.
 
 ### Setting environment + aliases (conda style)
 
-## Hiding (move away)
+`def-env` commands, `export-env` block and aliases can be used to dynamically manipulate "virtual environments" (a concept well known from Python).
+
+We use it in our official virtualenv integration https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu
+
+Another example could be our unofficial Conda module: https://github.com/nushell/nu_scripts/blob/f86a060c10f132407694e9ba0f536bfe3ee51efc/modules/virtual_environments/conda.nu
+
+_WIP_
+
+## Hiding
 
 Any custom command or alias, imported from a module or not, can be "hidden", restoring the previous definition.
 We do this with the [`hide`](/commands/docs/hide.md) command:
@@ -443,17 +486,4 @@ It can be one of the following:
 
 - Hides all of the module's exports, without the prefix
 
-## Hiding Environment Variables (move away)
-
-Environment variables can be hidden with [`hide-env`](/commands/docs/hide-env.md):
-
-```
-> let-env FOO = "FOO"
-
-> $env.FOO
-FOO
-
-> hide-env FOO
-
-> $env.FOO  # error! environment variable not found!
-```
+_Note: `hide` is not a supported keyword at the root of the module (unlike `def` etc.)_
