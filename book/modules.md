@@ -82,7 +82,7 @@ Note that the `use greetings.nu hello` call here first implicitly creates the `g
 
 ## Modules from directories
 
-Finally, a directory can be imported as a module. The only condition is that it needs to contain a `mod.nu` file (even emoty). The `mod.nu` file defines the root module. All .nu files inside the module directory are added as submodules (more about submodules later). We could write our `greetings` module like this:
+Finally, a directory can be imported as a module. The only condition is that it needs to contain a `mod.nu` file (even empty). The `mod.nu` file defines the root module. All .nu files inside the module directory are added as submodules (more about submodules later). We could write our `greetings` module like this:
 
 _In the following examples, `/` is used at the end to denote that we're importing a directory but it is not required._
 
@@ -352,7 +352,7 @@ Calling `use purpose.nu` ran the `export-env` block inside `purpose.nu` which in
 - Module directory cannot contain .nu file named after the directory (`spam/spam.nu`)
   - Consider a `spam` directory containing both `spam.nu` and `mod.nu`, calling `use spam *` would create an ambiguous situation where the `spam` module would be defined twice.
 - Module cannot contain file named after the module
-  - Same case as above: Module `spam` containg both `main` and `spam` commands would create an ambiguous situation when exported as `use spam *`.
+  - Same case as above: Module `spam` containing both `main` and `spam` commands would create an ambiguous situation when exported as `use spam *`.
 
 ## Examples
 
