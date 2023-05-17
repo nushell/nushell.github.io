@@ -2,7 +2,7 @@
 title: module
 categories: |
   core
-version: 0.79.0
+version: 0.80.0
 core: |
   Define a custom module.
 usage: |
@@ -15,12 +15,12 @@ usage: |
 
 ## Signature
 
-```> module (module_name) (block)```
+```> module (module) (block)```
 
 ## Parameters
 
- -  `module_name`: module name
- -  `block`: body of the module
+ -  `module`: module name or module path
+ -  `block`: body of the module if 'module' parameter is not a module path
 
 ## Notes
 This command is a parser keyword. For details, check:

@@ -3,7 +3,7 @@ title: dfr into-nu
 categories: |
   dataframe
   expression
-version: 0.79.0
+version: 0.80.0
 dataframe: |
   Converts a section of the dataframe into nushell Table.
 expression: |

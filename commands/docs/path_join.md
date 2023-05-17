@@ -2,7 +2,7 @@
 title: path join
 categories: |
   default
-version: 0.79.0
+version: 0.80.0
 default: |
   Join a structured path or a list of path parts.
 usage: |

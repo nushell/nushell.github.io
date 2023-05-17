@@ -2,7 +2,7 @@
 title: roll
 categories: |
   filters
-version: 0.79.0
+version: 0.80.0
 filters: |
   Rolling commands for tables.
 usage: |
