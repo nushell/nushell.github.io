@@ -123,8 +123,8 @@ Rules:
 4. lists:
    1. **It's recommended to** put each list item on separate line.
 5. surrounding constructs:
-   1. **It's recommended to** put one `\n` before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol (one out of these: `[`, `{`, `(`, `]`, `}`, `)`) is not the same.
-   2. **It's recommended to** put one `\n` after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol (one out of these: `[`, `{`, `(`, `]`, `}`, `)`) is not the same.
+   1. **It's recommended to** put one `\n` before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol is not the and applying this rule produce line with a singular parenthesis.
+   2. **It's recommended to** put one `\n` after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol is not the same and applying this rule produce line with a singular parenthesis.
 
 Correct:
 
