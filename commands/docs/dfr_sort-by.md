@@ -2,7 +2,7 @@
 title: dfr sort-by
 categories: |
   lazyframe
-version: 0.79.0
+version: 0.80.0
 lazyframe: |
   sorts a lazy dataframe based on expression(s).
 usage: |

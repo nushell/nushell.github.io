@@ -2,7 +2,7 @@
 title: into filesize
 categories: |
   conversions
-version: 0.79.0
+version: 0.80.0
 conversions: |
   Convert value to filesize.
 usage: |

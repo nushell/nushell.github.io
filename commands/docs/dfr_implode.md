@@ -1,8 +1,8 @@
 ---
-title: dfr list
+title: dfr implode
 categories: |
   expression
-version: 0.79.0
+version: 0.80.0
 expression: |
   Aggregates a group to a Series
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> dfr list ```
+```> dfr implode ```
 
 ## Examples
 
