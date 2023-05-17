@@ -64,8 +64,8 @@ Rules:
    1. **It's recommended to** put no spaces before first list value and after last list value.
    2. **It's recommended to** put one space after comma `,` after list value.
 5. surrounding constructs:
-   1. **It's recommended to** put one space before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol (one out of mentioned in this sentence) is not the same.
-   2. **It's recommended to** put one space after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol (one out of mentioned in this sentence) is not the same.
+   1. **It's recommended to** put one space before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol (one out of these: `[`, `{`, `(`, `]`, `}`, `)`) is not the same.
+   2. **It's recommended to** put one space after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol (one out of these: `[`, `{`, `(`, `]`, `}`, `)`) is not the same.
    3. **It's recommended to** put no spaces between square `[]`, curly brackets `{}`, parenthesis `()` with nothing between them.
 
 Correct:
@@ -127,8 +127,8 @@ Rules:
 4. lists:
    1. **It's recommended to** put each list item on separate line.
 5. surrounding constructs:
-   1. **It's recommended to** put one `\n` before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol (one out of mentioned in this sentence) is not the same.
-   2. **It's recommended to** put one `\n` after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol (one out of mentioned in this sentence) is not the same.
+   1. **It's recommended to** put one `\n` before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol (one out of these: `[`, `{`, `(`, `]`, `}`, `)`) is not the same.
+   2. **It's recommended to** put one `\n` after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol (one out of these: `[`, `{`, `(`, `]`, `}`, `)`) is not the same.
 
 Correct:
 
