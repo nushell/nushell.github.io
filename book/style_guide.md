@@ -51,22 +51,18 @@ One-line format is a format for writing all commands in one line.
 Rules:
 
 1. parameters:
-   1. **It's recommended to** put no spaces before and after pipe `|` symbol denoting block or closure parameter list beginning.
-   2. **It's recommended to** put one space after comma `,` after block or closure parameter.
-   3. **It's recommended to** put no space before and one space after pipe `|` symbol denoting block or closure parameter list end.
+   1. **It's recommended to** put one space after comma `,` after block or closure parameter.
+   2. **It's recommended to** put one space after pipe `|` symbol denoting block or closure parameter list end.
 2. block and closure bodies:
    1. **It's recommended to** put one space before closing block or closure curly brace `}`.
 3. records:
-   1. **It's recommended to** put no spaces before first record key and after last record key value.
-   2. **It's recommended to** put one space after `:` after record key.
-   3. **It's recommended to** put one space after comma `,` after key value.
+   1. **It's recommended to** put one space after `:` after record key.
+   2. **It's recommended to** put one space after comma `,` after key value.
 4. lists:
-   1. **It's recommended to** put no spaces before first list value and after last list value.
-   2. **It's recommended to** put one space after comma `,` after list value.
+   1. **It's recommended to** put one space after comma `,` after list value.
 5. surrounding constructs:
-   1. **It's recommended to** put one space before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol (one out of these: `[`, `{`, `(`, `]`, `}`, `)`) is not the same.
-   2. **It's recommended to** put one space after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol (one out of these: `[`, `{`, `(`, `]`, `}`, `)`) is not the same.
-   3. **It's recommended to** put no spaces between square `[]`, curly brackets `{}`, parenthesis `()` with nothing between them.
+   1. **It's recommended to** put one space before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol is not the same.
+   2. **It's recommended to** put one space after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol is not the same.
 
 Correct:
 
