@@ -372,7 +372,7 @@ def greet [
 The comments that we put on the definition and its parameters then appear as descriptions inside the [`help`](/commands/docs/help.md) of the command.
 
 ::: warning Note
-A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign. 
+A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
 :::
 
 Now, if we run `help greet`, we're given a more helpful help text:

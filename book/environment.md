@@ -223,5 +223,3 @@ The hiding is also scoped which both allows you to remove an environment variabl
 > $env.FOO
 BAR
 ```
-
-You can check [Modules](modules.md) for more details about hiding.
