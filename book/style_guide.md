@@ -63,9 +63,9 @@ Rules:
    1. **It's recommended to** put no spaces before first list value and after last list value.
    2. **It's recommended to** put one space after comma `,` after list value.
 5. surrounding constructs:
-   1. **It's recommended to** put one space before opening square `[` or curly brace `{` if preceding symbol is not the same.
-   2. **It's recommended to** put one space after closing square `]` or curly brace `}` if following symbol is not the same.
-   3. **It's recommended to** put no spaces between square `[]` or curly brackets `{}` with nothing between them.
+   1. **It's recommended to** put one space before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol (one out of mentioned in this sentence) is not the same.
+   2. **It's recommended to** put one space after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol (one out of mentioned in this sentence) is not the same.
+   3. **It's recommended to** put no spaces between square `[]`, curly brackets `{}`, parenthesis `()` with nothing between them.
 
 Correct:
 
@@ -77,25 +77,29 @@ Correct:
 {x: 1 y: 2}
 [1 2] | zip [3 4]
 []
+(1 + 2) * 3
 ```
 
 Incorrect:
 
 ```nushell
-# two many spaces before "|el|": no space is allowed
+# too many spaces before "|el|": no space is allowed
 [[status]; [UP] [UP]] | all { |el| $el.status == UP }
 
-# two many spaces before ",": no space is allowed
+# too many spaces before ",": no space is allowed
 [1 2 3 4] | reduce {|it , acc| $it + $acc }
 
-# two many spaces before "x": no space is allowed
+# too many spaces before "x": no space is allowed
 { x: 1, y: 2}
 
-# two many spaces before "[3": one space is required
+# too many spaces before "[3": one space is required
 [1 2] | zip  [3 4]
 
-# two many spaces before "]": no space is allowed
+# too many spaces before "]": no space is allowed
 [ ]
+
+# too many spaces before ")": no space is allowed
+(1 + 2 ) * 3
 ```
 
 #### Multi-line format
@@ -122,8 +126,8 @@ Rules:
 4. lists:
    1. **It's recommended to** put each list item on separate line.
 5. surrounding constructs:
-   1. **It's recommended to** put one `\n` before opening square `[` or curly brace `{` if preceding symbol is not the same.
-   2. **It's recommended to** put one `\n` after closing square `]` or curly brace `}` if following symbol is not the same.
+   1. **It's recommended to** put one `\n` before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol (one out of mentioned in this sentence) is not the same.
+   2. **It's recommended to** put one `\n` after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol (one out of mentioned in this sentence) is not the same.
 
 Correct:
 
@@ -142,6 +146,10 @@ Correct:
   {name: "Teresa", age: 24},
   {name: "Thomas", age: 26}
 ]
+
+let selectedProfile = (for it in ($credentials | transpose name credentials) {
+    echo $it.name
+})
 ```
 
 Incorrect:
@@ -166,6 +174,12 @@ Incorrect:
 # too few "\n" before "{": multi-line format required as there are two nested records
 [{name: "Teresa", age: 24},
   {name: "Thomas", age: 26}]
+
+let selectedProfile = (
+    # too many "\n" before "foo": no "\n" is allowed
+    for it in ($credentials | transpose name credentials) {
+        echo $it.name
+})
 ```
 
 ## Options and parameters of custom commands
