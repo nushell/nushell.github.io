@@ -82,21 +82,19 @@ Correct:
 Incorrect:
 
 ```nushell
-# - two many spaces before "|el|": 2 instead of 0:
+# two many spaces before "|el|": no space is allowed
 [[status]; [UP] [UP]] | all { |el| $el.status == UP }
 
-# - two many spaces after "it": 1 instead of 0
-# - two many spaces before "| $it + $acc": 1 instead of 0
-[1 2 3 4] | reduce {|it , acc | $it + $acc }
+# two many spaces before ",": no space is allowed
+[1 2 3 4] | reduce {|it , acc| $it + $acc }
 
-# - two many spaces before "x: 1": 1 instead of 0
-# - two many spaces before ": 2": 1 instead of 0
-{ x: 1, y : 2}
+# two many spaces before "x": no space is allowed
+{ x: 1, y: 2}
 
-# - two many spaces before "[3 4]": 2 instead of 1
+# two many spaces before "[3": one space is required
 [1 2] | zip  [3 4]
 
-# - two many spaces before "]": 1 instead of 0
+# two many spaces before "]": no space is allowed
 [ ]
 ```
 
@@ -134,119 +132,40 @@ Correct:
     $el.status == UP
 }
 
-[
-    1
-    2
-    3
-    4
-] | reduce {|it, acc|
+[1 2 3 4] | reduce {|it, acc|
     $it + $acc
 }
 
-{
-    x: 1,
-    y: 2
-}
+{x: 1, y: 2}
 
 [
-  {
-    name: "Teresa",
-    age: 24
-  },
-  {
-    name: "Thomas",
-    age: 26
-  }
+  {name: "Teresa", age: 24},
+  {name: "Thomas", age: 26}
 ]
 ```
 
 Incorrect:
 
 ```nushell
-# - two many spaces before "}": 1 instead of "\n"
-[[status]; [UP] [UP]] | all {|el|
-    $el.status == UP }
+# too many spaces before "|el|": no space is allowed (like in one-line format) 
+[[status]; [UP] [UP]] | all { |el|
+    # too few "\n" before "}": one "\n" is required
+    $el.status == UP}
 
-# - two many spaces before "1": 1 instead of "\n"
-[ 1
-    2
-    3
-    4
-] | reduce {|it, acc|
+# too many spaces before "2": one space is required (like in one-line format)
+[1  2 3 4] | reduce {|it, acc|
     $it + $acc
 }
 
-# - two many spaces before "x: 1": 1 instead of "\n"
-{ x: 1,
-    y: 2
+{
+   # too many "\n" before "x": one-line format required as no nested lists or record exist
+   x: 1, 
+   y: 2
 }
 
-# - two few "\n" before "{": 0 instead of 1
-[{
-    name: "Teresa",
-    age: 24
-   # - two many spaces before ",": 1 instead of 0
-  } ,
-  {
-    name: "Thomas",
-    age: 26
-  }
-]
-```
-
-Correct (in scripts):
-
-```nushell
-[1, 2, 3, 4] | reduce {|it, acc|
-    $it + $acc
-}
-
-[1 2 3 4] | reduce {|it acc|
-    $it + $acc
-}
-
-[
-  {name: "Teresa", age: 24},
-  {name: "Thomas", age: 26}
-]
-
-[
-  {name: "Teresa" age: 24},
-  {name: "Thomas" age: 26}
-]
-```
-
-Incorrect (in scripts):
-
-```nushell
-[
-   1,
-   2,
-   3,
-   4
-] | reduce {|it, acc|
-    $it + $acc
-}
-
-[
-   1
-   2
-   3
-   4
-] | reduce {|it acc|
-    $it + $acc
-}
-
-[
-  {
-    name: "Teresa",
-    age: 24
-  },
-  {
-    name: "Thomas",
-    age: 26
-  }
-]
+# too few "\n" before "{": multi-line format required as there are two nested records
+[{name: "Teresa", age: 24},
+  {name: "Thomas", age: 26}]
 ```
 
 ## Options and parameters of custom commands
