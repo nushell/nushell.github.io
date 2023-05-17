@@ -19,6 +19,7 @@ treat something like `\n` like the new line character and not a literal slash fo
 ### Basic
 
 - **It's recommended to** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
+- **It's recommended to** never put several consecutive spaces unless they are part of string.
 - **It's recommended to** omit commas between list items.
 
 Correct:
