@@ -54,7 +54,8 @@ Rules:
    1. **It's recommended to** put one space after comma `,` after block or closure parameter.
    2. **It's recommended to** put one space after pipe `|` symbol denoting block or closure parameter list end.
 2. block and closure bodies:
-   1. **It's recommended to** put one space before closing block or closure curly brace `}`.
+   1. **It's recommended to** put one space after opening block or closure curly brace `{` if no explicit parameters defined.
+   2. **It's recommended to** put one space before closing block or closure curly brace `}`.
 3. records:
    1. **It's recommended to** put one space after `:` after record key.
    2. **It's recommended to** put one space after comma `,` after key value.
