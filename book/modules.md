@@ -108,7 +108,9 @@ then
 
 The name of the module follows the same rule as module created from a file: Stem of the directory name, i.e., the directory name, is used as the module name. Again, you could do this as a two-step action using `module` and `use` separately, as explained in the previous section.
 
-::: tip You can define `main` command inside `mod.nu` to create a command named after the module directory. :::
+::: tip
+You can define `main` command inside `mod.nu` to create a command named after the module directory.
+:::
 
 ## Import Pattern
 
