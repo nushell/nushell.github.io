@@ -78,7 +78,11 @@ then
 
 The result should be similar as in the previous section.
 
-Note that the `use greetings.nu hello` call here first implicitly creates the `greetings` module, then takes `hello` from it. You could also write it as `module greetings.nu`, `use greetings hello`. Using `module` can be useful if you're not interested in any definitions from the module but want to, e.g., re-export the module (`export module greetings.nu`).
+> **Note**  
+> that the `use greetings.nu hello` call here first implicitly creates the `greetings` module,
+> then takes `hello` from it. You could also write it as `module greetings.nu`, `use greetings hello`.
+> Using `module` can be useful if you're not interested in any definitions from the module but want to,
+> e.g., re-export the module (`export module greetings.nu`).
 
 ## Modules from directories
 
@@ -119,21 +123,29 @@ The import pattern has the following structure `use head members...` where `head
 
 Using our `greetings` example:
 
-`use greetings`
+```
+use greetings
+```
 
-Imports all symbols with prefixed with the `greetings` namespace (can call `greetings hello` and `greetings hi`).
+imports all symbols prefixed with the `greetings` namespace (can call `greetings hello` and `greetings hi`).
 
-`use greetings hello`
+```
+use greetings hello
+```
 
-The `hello` command will be imported directly without any prefix.
+will import the `hello` command directly without any prefix.
 
-`use greetings [ hello, hi ]`
+```
+use greetings [hello, hi]
+```
 
-Imports multiple definitions<> directly without any prefix.
+imports multiple definitions<> directly without any prefix.
 
-`use greetings *`
+```
+use greetings *
+```
 
-You can also use the module name and the `*` glob to import all names directly without any prefix.
+will import all names directly without any prefix.
 
 ## `main`
 
@@ -185,7 +197,8 @@ Submodules are modules inside modules. They are automatically created when you c
 
 The difference is that `export module some-module` _only_ adds the module as a submodule, while `export use some-module` _also_ re-exports the submodule's definitions. Since definitions of submodules are available when importing from a module, `export use some-module` is typically redundant, unless you want to re-export its definitions without the namespace prefix.
 
-_Note: `module` without `export` defines only a local module, it does not export a submodule._
+> **Note**  
+> `module` without `export` defines only a local module, it does not export a submodule.
 
 Let's illustrate this with an example. Assume three files:
 
@@ -403,7 +416,8 @@ hi there!
 
 Since directories can be imported as submodules and submodules can naturally form subcommands it is easy to build even complex command line applications with a simple file structure.
 
-_WIP_
+> **Warning**  
+> Work In Progress
 
 ### Dumping files into directory
 
@@ -449,7 +463,8 @@ We use it in our official virtualenv integration https://github.com/pypa/virtual
 
 Another example could be our unofficial Conda module: https://github.com/nushell/nu_scripts/blob/f86a060c10f132407694e9ba0f536bfe3ee51efc/modules/virtual_environments/conda.nu
 
-_WIP_
+> **Warning**  
+> Work In Progress
 
 ## Hiding
 
@@ -488,4 +503,5 @@ It can be one of the following:
 
 - Hides all of the module's exports, without the prefix
 
-_Note: `hide` is not a supported keyword at the root of the module (unlike `def` etc.)_
+> **Note**  
+> `hide` is not a supported keyword at the root of the module (unlike `def` etc.)
