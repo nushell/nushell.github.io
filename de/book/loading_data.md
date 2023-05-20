@@ -12,26 +12,7 @@ Einer der mächtigsten Befehle in Nu um mir Daten zu arbeite ist der [`open`](/c
 Er ist ein Multi-Werkzeug, welcher mit verschiedensten Datenformaten umgehen kann.
 Hier zum Beispiel was passiert, wenn eine json Datei geöffnet wird:
 
-```
-> open editors/vscode/package.json
-──────────────────┬───────────────────────────────────────────────────────────────────────────────
- name             │ lark
- description      │ Lark support for VS Code
- author           │ Lark developers
- license          │ MIT
- version          │ 1.0.0
- repository       │ [row type url]
- publisher        │ vscode
- categories       │ [table 0 rows]
- keywords         │ [table 1 rows]
- engines          │ [row vscode]
- activationEvents │ [table 1 rows]
- main             │ ./out/extension
- contributes      │ [row configuration grammars languages]
- scripts          │ [row compile postinstall test vscode:prepublish watch]
- devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient]
-──────────────────┴───────────────────────────────────────────────────────────────────────────────
-```
+@[code](@snippets/loading_data/vscode.sh)
 
 Ähnlich wie beim [`ls`](/commands/docs/ls.md) Befehl, bekommen wir mehr als nur Text
 (oder einen Stream von bytes) zurück, wenn wir einen Dateityp öffnen, den Nu versteht.
@@ -196,13 +177,7 @@ version = "0.1.2"
 Eine "Cargo.lock" Datei ist eigentlich eine .toml Datei, aber die Dateiendung ist nicht .toml.
 Das ist ok, denn mit dem `from` und seinem Unterbefehl `toml` können wir dies explizit angeben:
 
-```
-> open Cargo.lock | from toml
-──────────┬───────────────────
- metadata │ [row 107 columns]
- package  │ [table 130 rows]
-──────────┴───────────────────
-```
+@[code](@snippets/loading_data/cargo-toml.sh)
 
 Der `from` Befehl kann für jedes strukturierte Datenformat, welches Nu versteht, verwendet werden,
 indem das Format als entsprechender Unterbefehl verwendet wird.
@@ -227,11 +202,4 @@ license = "MIT"
 Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`http get`](/commands/docs/fetch.md)
 Befehl geladen werden. Dies wird den Inhalt der URL aus dem Netz abrufen und zurückgeben:
 
-```
-> http get https://blog.rust-lang.org/feed.xml | table
-╭────────────┬──────────────────╮
-│ tag        │ feed             │
-│ attributes │ {record 1 field} │
-│ content    │ [table 18 rows]  │
-╰────────────┴──────────────────╯
-```
+@[code](@snippets/loading_data/rust-lang-feed.sh)

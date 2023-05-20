@@ -6,26 +6,7 @@ Earlier, we saw how you can use commands like [`ls`](/commands/docs/ls.md), [`ps
 
 One of Nu's most powerful assets in working with data is the [`open`](/commands/docs/open.md) command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
 
-```
-> open editors/vscode/package.json | table
-──────────────────┬───────────────────────────────────────────────────────────────────────────────
- name             │ lark
- description      │ Lark support for VS Code
- author           │ Lark developers
- license          │ MIT
- version          │ 1.0.0
- repository       │ [row type url]
- publisher        │ vscode
- categories       │ [table 0 rows]
- keywords         │ [table 1 rows]
- engines          │ [row vscode]
- activationEvents │ [table 1 rows]
- main             │ ./out/extension
- contributes      │ [row configuration grammars languages]
- scripts          │ [row compile postinstall test vscode:prepublish watch]
- devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient]
-──────────────────┴───────────────────────────────────────────────────────────────────────────────
-```
+@[code](@snippets/loading_data/vscode.sh)
 
 In a similar way to [`ls`](/commands/docs/ls.md), opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
 
@@ -213,13 +194,7 @@ version = "0.1.2"
 
 The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the [`from`](/commands/docs/from.md) command using the `toml` subcommand:
 
-```
-> open Cargo.lock | from toml | table
-──────────┬───────────────────
- metadata │ [row 107 columns]
- package  │ [table 130 rows]
-──────────┴───────────────────
-```
+@[code](@snippets/loading_data/cargo-toml.sh)
 
 The [`from`](/commands/docs/from.md) command can be used for each of the structured data text formats that Nu can open and understand by passing it the supported format as a subcommand.
 
@@ -262,11 +237,4 @@ Or run any SQL query you like:
 
 In addition to loading files from your filesystem, you can also load URLs by using the [`http get`](/commands/docs/fetch.md) command. This will fetch the contents of the URL from the internet and return it:
 
-```
-> http get https://blog.rust-lang.org/feed.xml | table
-╭────────────┬──────────────────╮
-│ tag        │ feed             │
-│ attributes │ {record 1 field} │
-│ content    │ [table 18 rows]  │
-╰────────────┴──────────────────╯
-```
+@[code](@snippets/loading_data/rust-lang-feed.sh)
