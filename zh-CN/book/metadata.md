@@ -20,20 +20,20 @@ error: Expected a string from pipeline
 让我们再次运行[`open`](/commands/docs/open.md)命令，但这一次，我们将看一下它所反馈的标签：
 
 ```
-> open Cargo.toml | metadata
-────────┬───────────────────────────────────────────
- span   │ {record 2 fields}
-────────┴───────────────────────────────────────────
+> metadata (open Cargo.toml) | table
+╭──────┬───────────────────╮
+│ span │ {record 2 fields} │
+╰──────┴───────────────────╯
 ```
 
 目前，我们只追踪值来自何处的起止范围(span)。让我们进一步仔细看看：
 
 ```bash
-> open Cargo.toml | metadata | get span
-───────┬────
- start │ 5
- end   │ 15
-───────┴────
+> metadata (open Cargo.toml) | get span
+╭───────┬────────╮
+│ start │ 212970 │
+│ end   │ 212987 │
+╰───────┴────────╯
 ```
 
 这里的范围 "start" 和 "end" 指的是下划线将标记在行中的位置。如果你数到 5，然后再数到 15，就会看到它与 "Cargo.toml" 文件名一致。这就是我们之前看到的错误是如何知道在何处标注下划线的。

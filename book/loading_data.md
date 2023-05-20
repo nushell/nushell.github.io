@@ -7,7 +7,7 @@ Earlier, we saw how you can use commands like [`ls`](/commands/docs/ls.md), [`ps
 One of Nu's most powerful assets in working with data is the [`open`](/commands/docs/open.md) command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
 
 ```
-> open editors/vscode/package.json
+> open editors/vscode/package.json | table
 ──────────────────┬───────────────────────────────────────────────────────────────────────────────
  name             │ lark
  description      │ Lark support for VS Code
@@ -214,7 +214,7 @@ version = "0.1.2"
 The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the [`from`](/commands/docs/from.md) command using the `toml` subcommand:
 
 ```
-> open Cargo.lock | from toml
+> open Cargo.lock | from toml | table
 ──────────┬───────────────────
  metadata │ [row 107 columns]
  package  │ [table 130 rows]
@@ -263,8 +263,10 @@ Or run any SQL query you like:
 In addition to loading files from your filesystem, you can also load URLs by using the [`http get`](/commands/docs/fetch.md) command. This will fetch the contents of the URL from the internet and return it:
 
 ```
-> http get https://blog.rust-lang.org/feed.xml
-──────┬───────────────────
- feed │ {record 2 fields}
-──────┴───────────────────
+> http get https://blog.rust-lang.org/feed.xml | table
+╭────────────┬──────────────────╮
+│ tag        │ feed             │
+│ attributes │ {record 1 field} │
+│ content    │ [table 18 rows]  │
+╰────────────┴──────────────────╯
 ```

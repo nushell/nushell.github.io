@@ -228,8 +228,10 @@ Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`h
 Befehl geladen werden. Dies wird den Inhalt der URL aus dem Netz abrufen und zurückgeben:
 
 ```
-> http get https://blog.rust-lang.org/feed.xml
-──────┬───────────────────
- feed │ {record 2 fields}
-──────┴───────────────────
+> http get https://blog.rust-lang.org/feed.xml | table
+╭────────────┬──────────────────╮
+│ tag        │ feed             │
+│ attributes │ {record 1 field} │
+│ content    │ [table 18 rows]  │
+╰────────────┴──────────────────╯
 ```

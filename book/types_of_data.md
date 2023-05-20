@@ -349,7 +349,7 @@ You can combine list and record data access syntax to navigate tables. When used
 You can access individual rows by number to obtain records:
 
 ```sh
-> [{langs:[Rust JS Python], releases:60}].0
+> [{langs:[Rust JS Python], releases:60}].0 | table
 ╭──────────┬────────────────╮
 │ langs    │ [list 3 items] │
 │ releases │ 60             │

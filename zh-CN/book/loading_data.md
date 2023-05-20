@@ -201,8 +201,10 @@ license = "MIT"
 除了从文件系统中加载文件，你还可以通过使用[`http get`](/commands/docs/fetch.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
 
 ```
-> http get https://blog.rust-lang.org/feed.xml
-──────┬───────────────────
- feed │ {record 2 fields}
-──────┴───────────────────
+> http get https://blog.rust-lang.org/feed.xml | table
+╭────────────┬──────────────────╮
+│ tag        │ feed             │
+│ attributes │ {record 1 field} │
+│ content    │ [table 18 rows]  │
+╰────────────┴──────────────────╯
 ```
