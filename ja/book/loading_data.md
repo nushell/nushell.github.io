@@ -6,26 +6,7 @@
 
 データを操作するための Nu の最も強力なコマンドのひとつが`open`コマンドです。これは様々なデータ形式に対応したマルチツールです。これがなにを意味するかをみるために、json ファイルを開いてみましょう。
 
-```
-> open editors/vscode/package.json
-──────────────────┬───────────────────────────────────────────────────────────────────────────────
- name             │ lark
- description      │ Lark support for VS Code
- author           │ Lark developers
- license          │ MIT
- version          │ 1.0.0
- repository       │ [row type url]
- publisher        │ vscode
- categories       │ [table 0 rows]
- keywords         │ [table 1 rows]
- engines          │ [row vscode]
- activationEvents │ [table 1 rows]
- main             │ ./out/extension
- contributes      │ [row configuration grammars languages]
- scripts          │ [row compile postinstall test vscode:prepublish watch]
- devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient]
-──────────────────┴───────────────────────────────────────────────────────────────────────────────
-```
+@[code](@snippets/loading_data/vscode.sh)
 
 `ls`と同様、Nu が理解できるタイプのファイルを開くと、単なるテキスト(またはバイトストリーム)以上のものが返ってきます。ここでは、JavaScript プロジェクト内の"package.json"ファイルを開いています。Nu は JSON テキストを認識し、テーブルデータを返すことができます。
 
@@ -163,13 +144,7 @@ version = "0.1.2"
 
 "Cargo.lock"ファイルは実際には.toml ファイルですが、ファイル拡張子が.toml ではありません。でも大丈夫です、`from toml`コマンドが使えます。
 
-```
-> open Cargo.lock | from toml
-──────────┬───────────────────
- metadata │ [row 107 columns]
- package  │ [table 130 rows]
-──────────┴───────────────────
-```
+@[code](@snippets/loading_data/cargo-toml.sh)
 
 `from`コマンドはサポートされているテキストフォーマットをサブコマンドとして渡すことで Nu が扱える構造化データごとに利用できます。
 
@@ -191,9 +166,4 @@ license = "MIT"
 ファイルシステムからファイルを読み込むことに加えて、`http get`コマンドを利用して URL からリソースを取得できます。
 これはインターネットから URL の内容をフェッチして返してくれます。
 
-```
-> http get https://www.jonathanturner.org/feed.xml
-─────┬───────────────────────────
- rss │ [row attributes children]
-─────┴───────────────────────────
-```
+@[code](@snippets/loading_data/rust-lang-feed.sh)

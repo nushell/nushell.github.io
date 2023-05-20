@@ -348,15 +348,7 @@ You can combine list and record data access syntax to navigate tables. When used
 
 You can access individual rows by number to obtain records:
 
-```sh
-> [{langs:[Rust JS Python], releases:60}].0
-╭──────────┬────────────────╮
-│ langs    │ [list 3 items] │
-│ releases │ 60             │
-╰──────────┴────────────────╯
-> [{langs:[Rust JS Python], releases:60}].0.langs.2
-Python
-```
+@[code](@snippets/types_of_data/cell-paths.sh)
 
 Moreover, you can also access entire columns of a table by name, to obtain lists:
 
