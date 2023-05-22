@@ -33,7 +33,7 @@ Note: this table assumes Nu 0.43 or later.
 | last         | list[-x:]                     |                                                     |                         | &Vec[Vec.len()-1]                             |
 | lines        | split, splitlines             | split                                               | views::split            | split, split_whitespace, rsplit, lines        |
 | ls           | os.listdir                    |                                                     |                         |                                               |
-| match        | re.findall                    | Regex.matches                                       | regex_match             |                                               |
+| match        | match                         | when                                                |                         | match                                         |
 | merge        | dict.append                   |                                                     |                         |                                               |
 | mkdir        | os.mkdir                      |                                                     |                         |                                               |
 | mv           | shutil.move                   |                                                     |                         |                                               |
