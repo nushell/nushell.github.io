@@ -169,7 +169,7 @@ let external_completer = {|spans|
     $spans.0: { default_completer $spans | from json } # default
     ls: { ls_completer $spans | from json }
     git: { git_completer $spans | from json }
-  } | get $spans.0 | each {|it| do $it}
+  } | each {|it| do $it}
 }
 ```
 
