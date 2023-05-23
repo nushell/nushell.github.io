@@ -19,7 +19,7 @@ In each directory, Nu is looking for executable files that match the pattern `nu
 On Windows, this has a similar pattern of `nu_plugin_*.exe` or `nu_plugin_*.bat`.
 
 Once a matching file has been discovered, Nu will invoke the file and pass to it the first JSON-RPC command: Signature.
-The plugin then replies with the signature of the plugin, which, once deserialize, is identical to the signature commands use.
+The plugin then replies with the signature of the plugin, which, once deserialized, is identical to the signature commands use.
 
 Nu continues in this way until it has traveled across all directories in the path.
 
@@ -133,8 +133,8 @@ impl Plugin for Len {
 }
 ```
 
-There are two methods required for this implementation. The first is the `signature` part, which is run by Nu when it first starts up. This tells Nu the basic information about the plugin: its name, the parameters it takes, the description, what kind of plugin it is, and defines the input and output types..
-Here, we tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an int.
+There are two methods required for this implementation. The first is the `signature` part, which is run by Nu when it first starts up. This tells Nu the basic information about the plugin: its name, the parameters it takes, the description, what kind of plugin it is, and defines the input and output types.
+Here, we tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
 
 Next, in the `run` implementation, we describe how to do work as values flow into this plugin. Here, we receive a `Value` type that we expect to be a string.
 We also return either `Value` or an error.
