@@ -157,11 +157,11 @@ Multiple completers can be defined as such:
 
 ```nu
 {|spans|
-  {
-    $spans.0: { default_completer $spans | from json } # default
-    ls: { ls_completer $spans | from json }
-    git: { git_completer $spans | from json }
-  } | each {|it| do $it}
+    {
+        $spans.0: { default_completer $spans | from json } # default
+        ls: { ls_completer $spans | from json }
+        git: { git_completer $spans | from json }
+    } | each {|it| do $it}
 }
 ```
 
