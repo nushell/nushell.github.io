@@ -18,8 +18,8 @@ Nu discovers plugins by checking all directories specified by `plugin_dirs` conf
 In each directory, Nu is looking for executable files that match the pattern `nu_plugin_*` where `*` is a minimum of one alphanumeric character.
 On Windows, this has a similar pattern of `nu_plugin_*.exe` or `nu_plugin_*.bat`.
 
-Once a matching file has been discovered, Nu will invoke the file and pass to it the first JSON-RPC command: config.
-Config replies with the signature of the plugin, which is identical to the signature commands use.
+Once a matching file has been discovered, Nu will invoke the file and pass to it the first JSON-RPC command: Signature.
+The plugin then replies with the signature of the plugin, which, once deserialized, is identical to the signature commands use.
 
 Nu continues in this way until it has traveled across all directories in the path.
 
@@ -33,68 +33,75 @@ Let's create our project. For this example, we'll create a simple `len` command 
 
 First off, we'll create our plugin:
 
-```
+```sh
 > cargo new nu_plugin_len
 > cd nu_plugin_len
 ```
 
-Next, we'll add `nu` to the list of dependencies to the Cargo.toml directory. At the bottom of the new Cargo.toml file, add this new dependency on the `nu` crate:
+Next, we'll add `nu` to our project's dependencies.
 
+```sh
+> cargo add nu-plugin nu-protocol
 ```
+
+The `Cargo.toml` file should now look something like the following.
+
+```toml
+[package]
+name = "nu_plugin_len"
+version = "0.1.0"
+edition = "2021"
+
 [dependencies]
-nu-plugin = "~0"
-nu-protocol = "~0"
-nu-source = "~0"
-nu-errors = "~0"
+nu-plugin = "0.80.0" # These version numbers may differ
+nu-protocol = "0.80.0"
 ```
 
-With this, we can open up src/main.rs and create our plugin.
+With this, we can open up `src/main.rs` and create our plugin.
 
 ```rust
-use nu_errors::ShellError;
-use nu_plugin::{serve_plugin, Plugin};
-use nu_protocol::{
-    CallInfo, Primitive, ReturnSuccess, ReturnValue, Signature, UntaggedValue, Value,
-};
+use nu_plugin::{serve_plugin, LabeledError, Plugin, JsonSerializer, EvaluatedCall};
+use nu_protocol::{Value, PluginSignature, Type};
 
 struct Len;
 
 impl Len {
-    fn new() -> Len {
-        Len
-    }
-
-    fn len(&mut self, value: Value) -> Result<Value, ShellError> {
-        match &value.value {
-            UntaggedValue::Primitive(Primitive::String(s)) => Ok(Value {
-                value: UntaggedValue::int(s.len() as i64),
-                tag: value.tag,
-            }),
-            _ => Err(ShellError::labeled_error(
-                "Unrecognized type in stream",
-                "'len' given non-string info by this",
-                value.tag.span,
-            )),
-        }
+    fn new() -> Self {
+        Self
     }
 }
 
 impl Plugin for Len {
-    fn config(&mut self) -> Result<Signature, ShellError> {
-        Ok(Signature::build("len").desc("My custom len plugin").filter())
+    fn signature(&self) -> Vec<PluginSignature> {
+        vec![PluginSignature::build("len")
+            .usage("calculates the length of its input")
+            .input_type(Type::String)
+            .output_type(Type::Int)
+        ]
     }
 
-    fn begin_filter(&mut self, _: CallInfo) -> Result<Vec<ReturnValue>, ShellError> {
-        Ok(vec![])
-    }
-
-    fn filter(&mut self, input: Value) -> Result<Vec<ReturnValue>, ShellError> {
-        Ok(vec![ReturnSuccess::value(self.len(input)?)])
+    fn run(
+        &mut self,
+        name: &str,
+        call: &EvaluatedCall,
+        input: &Value,
+    ) -> Result<Value, LabeledError> {
+        assert_eq!(name, "len");
+        match input {
+            Value::String{ val, span } => Ok(
+                Value::Int { val: val.len() as i64, span: span.clone() }
+            ),
+            _ => Err(LabeledError {
+                label: "Expected String input from pipeline".to_string(),
+                msg: format!("requires string input; got {}", input.get_type()),
+                span: Some(call.head),
+            }),
+        }
     }
 }
 
 fn main() {
-    serve_plugin(&mut Len::new());
+    serve_plugin(&mut Len::new(), JsonSerializer)
 }
 ```
 
@@ -104,60 +111,62 @@ First off, let's look at main:
 
 ```rust
 fn main() {
-    serve_plugin(&mut Len::new());
+    serve_plugin(&mut Len::new(), JsonSerializer)
 }
 ```
 
-In main, we just call a single function `serve_plugin`. This will do the work of calling into our plugin, handling the JSON serialization/deserialization, and sending values and errors back to Nu for us. To start it up, we pass it something that implements the `Plugin` trait.
+In main, we just call a single function `serve_plugin`. This will do the work of calling into our plugin, handling the JSON serialization/deserialization, and sending values and errors back to Nu for us. To start it up, we pass it something that implements the `Plugin` trait and something that implements the `PluginEncoder` trait. We're given a choice of serialization formats that Nu supports. Here, we select JSON.
 
 Next, above main, is this implementation of the `Plugin` trait for our particular plugin. Here, we'll implement the Plugin trait for our type, Len, which we'll see more of soon. Let's take a look at how we implement this trait:
 
 ```rust
 impl Plugin for Len {
-    fn config(&mut self) -> Result<Signature, ShellError> {
-        Ok(Signature::build("len").desc("My custom len plugin").filter())
+    fn signature(&self) -> Vec<PluginSignature> {
+        vec![PluginSignature::build("len")
+            .usage("calculates the length of its input")
+            .input_type(Type::String)
+            .output_type(Type::Int)
+        ]
     }
 
-    fn begin_filter(&mut self, _: CallInfo) -> Result<Vec<ReturnValue>, ShellError> {
-        Ok(vec![])
-    }
-
-    fn filter(&mut self, input: Value) -> Result<Vec<ReturnValue>, ShellError> {
-        Ok(vec![ReturnSuccess::value(self.len(input)?)])
-    }
+    // ...
 }
 ```
 
-The two most important parts of this implementation are the `config` part, which is run by Nu when it first starts up. This tells Nu the basic information about the plugin: its name, the parameters it takes, the description, and what kind of plugin it is.
-Here, we tell Nu that the name is "len", give it a basic description for `help` to display and that we are a filter plugin (rather than a sink plugin).
+There are two methods required for this implementation. The first is the `signature` part, which is run by Nu when it first starts up. This tells Nu the basic information about the plugin: its name, the parameters it takes, the description, what kind of plugin it is, and defines the input and output types.
+Here, we tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
 
-Next, in the `filter` implementation, we describe how to do work as values flow into this plugin. Here, we receive one value (a `Value`) at a time.
-We also return either a Vec of values or an error.
-Returning a Vec instead of a single value allows us to remove values, or add new ones, in addition to working with the single value coming in.
-
-Because `begin_filter` doesn't do anything, we can remove it. This would make the above:
+Next, in the `run` implementation, we describe how to do work as values flow into this plugin. Here, we receive a `Value` type that we expect to be a string.
+We also return either `Value` or an error.
 
 ```rust
 impl Plugin for Len {
-    fn config(&mut self) -> Result<Signature, ShellError> {
-        Ok(Signature::build("len").desc("My custom len plugin").filter())
-    }
+    // ...
 
-    fn filter(&mut self, input: Value) -> Result<Vec<ReturnValue>, ShellError> {
-        Ok(vec![ReturnSuccess::value(self.len(input)?)])
+    fn run(
+        &mut self,
+        name: &str,
+        call: &EvaluatedCall,
+        input: &Value,
+    ) -> Result<Value, LabeledError> {
+        assert_eq!(name, "len");
+        match input {
+            Value::String{ val, span } => Ok(
+                Value::Int { val: val.len() as i64, span: span.clone() }
+            ),
+            _ => Err(LabeledError {
+                label: "Expected String input from pipeline".to_string(),
+                msg: format!("requires string input; got {}", input.get_type()),
+                span: Some(call.head),
+            }),
+        }
     }
 }
 ```
 
-If that's the case, why have a `begin_filter`? Let's look at the signature of `begin_filter` a little closer:
+We use Rust's pattern matching to check the type of the `Value` coming in, and then operate with it if it's a string. The value also contains a `span` so it carries with it where the value came from. If the value isn't a string, we give an error and let the user know where the value came from that is causing the problem. On error, we use `call.head` as the span so that Nu can underline the offending command name in the error message.
 
-```rust
-fn begin_filter(&mut self, _: CallInfo) -> Result<Vec<ReturnValue>, ShellError> {
-    Ok(vec![])
-}
-```
-
-Our `Len` command doesn't require any parameters, but if it did this is where we'd get them. From here, we could configure our filter, and then use that with each step in of the `filter` command over the input.
+Our `Len` command doesn't require any parameters, but if it did we'd get them from the `EvaluatedCall`.
 
 Next, let's look at `Len` itself to see what it's doing:
 
@@ -165,148 +174,138 @@ Next, let's look at `Len` itself to see what it's doing:
 struct Len;
 
 impl Len {
-    fn new() -> Len {
-        Len
-    }
-
-    fn len(&mut self, value: Value) -> Result<Value, ShellError> {
-        match &value.value {
-            UntaggedValue::Primitive(Primitive::String(s)) => Ok(Value {
-                value: UntaggedValue::int(s.len() as i64),
-                tag: value.tag,
-            }),
-            _ => Err(ShellError::labeled_error(
-                "Unrecognized type in stream",
-                "'len' given non-string info by this",
-                value.tag.span,
-            )),
-        }
+    fn new() -> Self {
+        Self
     }
 }
 ```
 
 We create a very simple `Len`, in fact, it has no structure at all. Instead, it's just a placeholder that will let us implement the plugin.
 
-From here, we create two methods:
-
-```rust
-impl Len {
-    fn new() -> Len {
-        Len
-    }
-    // ...
-}
-```
-
-The first method is optional, it's just a convenient way to create a new value of the `Len` type. The real work is done in the second method:
-
-```rust
-impl Len {
-    // ...
-
-    fn len(&mut self, value: Value) -> Result<Value, ShellError> {
-        match &value.value {
-            UntaggedValue::Primitive(Primitive::String(s)) => Ok(Value {
-                value: UntaggedValue::int(s.len() as i64),
-                tag: value.tag,
-            }),
-            _ => Err(ShellError::labeled_error(
-                "Unrecognized type in stream",
-                "'len' given non-string info by this",
-                value.tag.span,
-            )),
-        }
-    }
-}
-```
-
-This method will act over each element in the pipeline as it flows into our plugin. For our plugin, we really only care about strings so that we can return their length.
-
-We use Rust's pattern matching to check the type of the Value coming in, and then operate with it if it's a string. The value is a `Tagged<Value>` so it carries with it where the value came from. If the value isn't a string, we give an error and let the user know where the value came from that is causing the problem. (Note, if we had wanted to also put an error underline under the command name, we could get the `name_span` from the CallInfo given to `begin_filter`)
+The `new` method is optional, it's just a convenient way to create a new value of the `Len` type to pass into `serve_plugin` later.
 
 Lastly, let's look at the top of the file:
 
 ```rust
-use nu_errors::ShellError;
-use nu_plugin::{serve_plugin, Plugin};
-use nu_protocol::{
-    CallInfo, Primitive, ReturnSuccess, ReturnValue, Signature, UntaggedValue, Value,
-};
+use nu_plugin::{serve_plugin, LabeledError, Plugin, JsonSerializer, EvaluatedCall};
+use nu_protocol::{Value, PluginSignature, Type};
 ```
 
 Here we import everything we need -- types and functions -- to be able to create our plugin.
 
 Once we have finished our plugin, to use it all we need to do is install it.
 
-```
+```sh
 > cargo install --path .
 ```
 
 Once `nu` starts up, it will discover the plugin and register it as a command.
-If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load and register your plugin.
+If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load and register your plugin or register it manually with `register ./target/release/nu_plugin_len`.
 
 ```
 > nu
-> hello | len
+> "hello" | len
 5
 > help len
-This is my custom len plugin
+calculates the length of its input
 
 Usage:
-  > len {flags}
+  > len
 
-flags:
-  -h, --help: Display this help message
+Flags:
+  -h, --help - Display the help message for this command
+
+Signatures:
+  <string> | len -> <int>
 ```
-
-**Provides executing regular expressions**
-
-We basically use the [regex]<https://github.com/rust-lang/regex> crate. Unless there is a specific reason, it is recommended to use it.
 
 ## Creating a plugin (in Python)
 
-We can also create plugins in other programming languages. In this section, we'll write the same `len` plugin in Python.
+We can also create plugins in other programming languages, although you will not benefit from the plugin interface libraries that ship with Nu. In this section, we'll write the same `len` plugin in Python.
 
 First, let's look at the full plugin:
 
 ```python
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 import json
-import fileinput
 import sys
 
 
-def print_good_response(response):
-    json_response = {"jsonrpc": "2.0", "method": "response", "params": {"Ok": response}}
-    print(json.dumps(json_response))
+def signature():
+    return {
+        "sig": {
+            "name": "len",
+            "usage": "calculates the length of its input",
+            "extra_usage": "",
+            "search_terms": [],
+            "required_positional": [],
+            "optional_positional": [],
+            "rest_positional": None,
+            "vectorizes_over_list": False,
+            "named": [],
+            "input_type": "String",
+            "output_type":"Int",
+            "input_output_types":[],
+            "allow_variants_without_examples": True,
+            "is_filter": False,
+            "creates_scope": False,
+            "allows_unknown_args":False,
+            "category":"Default"
+        },
+        "examples": []
+    }
+
+
+def send_encoder():
+    sys.stdout.write(chr(4))
+    for ch in "json":
+        sys.stdout.write(chr(ord(ch)))
     sys.stdout.flush()
 
 
-def get_length(string_value):
-    string_len = len(string_value["item"]["Primitive"]["String"])
-    int_item = {"Primitive": {"Int": string_len}}
-    int_value = string_value
-    int_value["item"] = int_item
-    return int_value
+def send_error(error_msg, span):
+        error = {
+            "Error": {
+                "label": "Len Error",
+                "msg": error_msg,
+                "span": span,
+            }
+        }
+        sys.stdout.write(json.dumps(error))
+        sys.stdout.flush()
 
 
-for line in fileinput.input():
-    x = json.loads(line)
-    method = x.get("method", None)
-    if method == "config":
-        config = {"name": "len", "usage": "Return the length of a string", "positional": [], "named": {}, "is_filter": True}
-        print_good_response(config)
-        break
-    elif method == "begin_filter":
-        print_good_response([])
-    elif method == "filter":
-        int_item = get_length(x["params"])
-        print_good_response([{"Ok": {"Value": int_item}}])
-    elif method == "end_filter":
-        print_good_response([])
-        break
+def handle_call(call_info):
+    try:
+        input = call_info["input"]["Value"]["String"]
+        output = json.dumps({
+            "Value": {
+                "Int": {
+                    "val": len(input["val"]),
+                    "span": input["span"]
+                }
+            }
+        })
+        sys.stdout.writelines([output])
+        sys.stdout.flush()
+    except:
+        send_error(
+            "Could not process input",
+            call_info["call"]["head"]["span"]
+        )
+
+
+if __name__ == "__main__":
+    send_encoder()
+    input = "".join(sys.stdin.readlines())
+    command = json.loads(input)
+
+    if command == "Signature":
+        sys.stdout.write(json.dumps({"Signature":[signature()]}))
+    elif "CallInfo" in command:
+        handle_call(command["CallInfo"])
     else:
-        break
+        send_error("Unknown command passed to plugin", {"start": 0, "end": 1})
 ```
 
 Note: there are ways to make the python more robust, but here we've left it simple to help with explanations.
@@ -314,75 +313,64 @@ Note: there are ways to make the python more robust, but here we've left it simp
 Let's look at how this plugin works, from the bottom to the top:
 
 ```python
-for line in fileinput.input():
-    x = json.loads(line)
-    method = x.get("method", None)
-    if method == "config":
-        config = {"name": "len", "usage": "Return the length of a string", "positional": [], "named": {}, "is_filter": True}
-        print_good_response(config)
-        break
-    elif method == "begin_filter":
-        print_good_response([])
-    elif method == "filter":
-        int_item = get_length(x["params"])
-        print_good_response([{"Ok": {"Value": int_item}}])
-    elif method == "end_filter":
-        print_good_response([])
-        break
+if __name__ == "__main__":
+    send_encoder()
+    input = "".join(sys.stdin.readlines())
+    command = json.loads(input)
+
+    if command == "Signature":
+        sys.stdout.write(json.dumps({"Signature":[signature()]}))
+    elif "CallInfo" in command:
+        handle_call(command["CallInfo"])
     else:
-        break
+        send_error("Unknown command passed to plugin", {"start": 0, "end": 1})
 ```
 
-For this plugin, we have to serve two basic roles: responding to a request for the plugin configuration, and doing the actual filtering. This code acts as our main loop, responding to messages from Nu by doing some work and then returning a response. Each JSON message is sent to the plugin on a single line, so we need only to read the line and then parse the json it contains.
+For this plugin, we have to serve two basic roles: responding to a request for the plugin configuration, and doing the actual filtering. This code acts as our main routine, responding to a message from Nu by doing some work and then returning a response: either returning with the plugin signature or handling input.
 
-From there, we look at what method is being invoked. For this plugin, there are four methods we care about: config, begin_filter, filter, and end_filter. When we're sent a 'config' request, we respond with the signature of this plugin, which is a bit of information to tell Nu how the command should be called. Once sent, we break out of the loop so that the plugin can exit and be later called when filtering begins.
+The first thing our plugin must do is write out the desired serialization format, in this case JSON. We do that with the `send_encoder` method. Then we read the JSON serialized command that Nu sends us.
 
-The other three methods -- begin_filter, filter, and end_filter -- all work together to do the work of filtering the data coming in. As this plugin will work 1-to-1 with each bit of data, turning strings into their string lengths, we do most of our work in the `filter` method. The 'end_filter' method here tells us it's time for the plugin to shut down, so we go ahead and break out of the loop.
+When we're sent a 'Signature' request, we respond with the signature of this plugin, which is a bit of information to tell Nu how the command should be called.
+
+When sent a `CallInfo` request, we parse the supplied JSON and respond to the request
 
 ```python
-def get_length(string_value):
-    string_len = len(string_value["item"]["Primitive"]["String"])
-    int_item = {"Primitive": {"Int": string_len}}
-    int_value = string_value
-    int_value["item"] = int_item
-    return int_value
+def handle_call(call_info):
+    try:
+        input = call_info["input"]["Value"]["String"]
+        output = json.dumps({
+            "Value": {
+                "Int": {
+                    "val": len(input["val"]),
+                    "span": input["span"]
+                }
+            }
+        })
+        sys.stdout.writelines([output])
+        sys.stdout.flush
+    except:
+        send_error(
+            "Could not process input",
+            call_info["call"]["head"]["span"]
+        )
 ```
 
-The work of filtering is done by the `get_length` function. Here, we assume we're given strings (we could make this more robust in the future and return errors otherwise), and then we extract the string we're given. From there, we measure the length of the string and create a new `Int` value for that length.
+The work of processing input is done by this `handle_call` function. Here, we assume we're given strings (we could make this more robust in the future and return meaningful errors otherwise), and then we extract the string we're given. From there, we measure the length of the string and create a new `Int` value for that length.
 
-Finally, we use the same item we were given and replace the payload with this new Int. We do this to reuse the metadata that was passed to us with the string, though this is an optional step. We could have instead opted to create new metadata and passed that out instead.
-
-```python
-def print_good_response(response):
-    json_response = {"jsonrpc": "2.0", "method": "response", "params": {"Ok": response}}
-    print(json.dumps(json_response))
-    sys.stdout.flush()
-```
-
-Each response from the plugin back to Nu is also a json message that is sent on a single line. We convert the response to json and send it out with this helper function.
+Finally, we use the same item we were given and replace the payload with this new Int. We do this to reuse the `span` that was passed to us with the string, though this is an optional step. We could have instead opted to create new metadata and passed that out instead.
 
 ```python
 import json
-import fileinput
 import sys
 ```
 
 All of this takes a few imports to accomplish, so we make sure to include them.
 
 ```python
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 ```
 
-Finally, to make it easier to run our Python, we make this file executable (using something like `chmod +x nu_plugin_len`) and add the path to our python at the top. This trick works for Unix-based platforms, for Windows we would need to create an .exe or .bat file that would invoke the python code for us.
-
-We are using Python 3 because Python 2 will not be maintained past 2020. However our script works accordingly with Python 2 and with Python 3.
-Just change the first line into:
-
-```python
-#!/usr/bin/python
-```
-
-and you are good to go.
+Finally, to make it easier to run our Python, we make this file executable (using something like `chmod +x nu_plugin_len.py`) and add the path to our python at the top. This trick works for Unix-based platforms, for Windows we would need to create an .exe or .bat file that would invoke the python code for us.
 
 ## Creating a plugin (in C#)
 
