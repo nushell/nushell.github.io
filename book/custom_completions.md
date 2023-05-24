@@ -140,23 +140,31 @@ External completers can also be integrated, instead of relying solely on Nushell
 For this set the `external_completer` field in `config.nu` to a block which will be evaluated if no Nushell completions were found.
 You can configure the block to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
 
+> **Note**  
+> in the following, we define a bunch of different completers.
+>
+> one can configure them in `$nu.config-path` as follows:
+>
+> ```nu
+> $env.config.completions.external = {
+>     enable: true
+>     max_results: 100
+>     completer: $completer
+> }
+> ```
+
 This example should enable carapace external completions:
 
 ```nu
-# config.nu
-$env.config.completions.external = {
-    enable: true
-    max_results: 100
-    completer: {|spans|
-        carapace $spans.0 nushell $spans | from json
-    }
+let carapace_completer = {|spans|
+    carapace $spans.0 nushell $spans | from json
 }
 ```
 
 Multiple completers can be defined as such:
 
 ```nu
-{|spans|
+let multiple_completers = {|spans|
     {
         $spans.0: { default_completer $spans | from json } # default
         ls: { ls_completer $spans | from json }
@@ -168,7 +176,7 @@ Multiple completers can be defined as such:
 This example shows an external completer that uses the `fish` shell's `complete` command. (You must have the fish shell installed for this example to work.)
 
 ```nu
-$env.config.completions.external.completer = {|spans|
+let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
     | str trim
     | split row "\n"
