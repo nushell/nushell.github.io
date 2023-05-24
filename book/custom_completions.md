@@ -54,7 +54,7 @@ module commands {
     def animals [] {
         ["cat", "dog", "eel" ]
     }
-    
+
     def animal-names [context: string] {
         {
             cat: ["Missy", "Phoebe"]
@@ -140,36 +140,36 @@ External completers can also be integrated, instead of relying solely on Nushell
 For this set the `external_completer` field in `config.nu` to a block which will be evaluated if no Nushell completions were found.
 You can configure the block to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
 
+> **Note**  
+> in the following, we define a bunch of different completers.
+>
+> one can configure them in `$nu.config-path` as follows:
+>
+> ```nu
+> $env.config.completions.external = {
+>     enable: true
+>     max_results: 100
+>     completer: $completer
+> }
+> ```
+
 This example should enable carapace external completions:
 
 ```nu
-# config.nu
 let carapace_completer = {|spans|
     carapace $spans.0 nushell $spans | from json
-}
-
-# The default config record. This is where much of your global configuration is setup.
-let-env config = {
-    # ... your config
-    completions: {
-        external: {
-            enable: true
-            max_results: 100
-            completer: $carapace_completer
-        }
-    }
 }
 ```
 
 Multiple completers can be defined as such:
 
 ```nu
-let external_completer = {|spans| 
-  {
-    $spans.0: { default_completer $spans | from json } # default
-    ls: { ls_completer $spans | from json }
-    git: { git_completer $spans | from json }
-  } | get $spans.0 | each {|it| do $it}
+let multiple_completers = {|spans|
+    {
+        $spans.0: { default_completer $spans | from json } # default
+        ls: { ls_completer $spans | from json }
+        git: { git_completer $spans | from json }
+    } | each {|it| do $it}
 }
 ```
 
@@ -177,18 +177,11 @@ This example shows an external completer that uses the `fish` shell's `complete`
 
 ```nu
 let fish_completer = {|spans|
-    fish --command $'complete "--do-complete=($spans | str join " ")"' | str trim | split row "\n" | each { |line| $line | split column "\t" value description } | flatten
-}
-
-let-env config = {
-    # ... your config
-    completions: {
-        external: {
-            enable: true
-            max_results: 100
-            completer: $fish_completer
-        }
-    }
+    fish --command $'complete "--do-complete=($spans | str join " ")"'
+    | str trim
+    | split row "\n"
+    | each { |line| $line | split column "\t" value description }
+    | flatten
 }
 ```
 
