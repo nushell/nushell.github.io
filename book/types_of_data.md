@@ -44,7 +44,7 @@ You can parse a string into an integer with the [`into int`](/commands/docs/into
 ## Decimals
 
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
-You can cast a string into an Decimal with the [`into decimal`](/commands/docs/into_decimal.md) command
+You can cast a string into a Decimal with the [`into decimal`](/commands/docs/into_decimal.md) command
 
 ```sh
 > "1.2" | into decimal
