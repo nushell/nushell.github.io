@@ -11,7 +11,7 @@ Examples shown in [`Working with tables`](../book/working_with_tables.md) work f
 ```
 > let first = [[a b]; [1 2] [3 4]]
 > let second = [[c d]; [5 6]]
-> $first | merge { $second }
+> $first | merge $second
 ───┬───┬───┬───┬───
  # │ a │ b │ c │ d
 ───┼───┼───┼───┼───
@@ -28,7 +28,7 @@ Second row in columns `c` and `d` is empty because our `second` table only conta
 > let second = [[c d]; [3 4]]
 > $first | group ($second | length)
   | each {|it|
-    merge {$second}
+    merge $second
   } | flatten
 ───┬───┬───┬───┬───
  # │ a │ b │ c │ d
@@ -50,12 +50,12 @@ We could join all three tables like this:
 ```
 > $first | group ($second|length)
    | each {|it|
-     merge { $second  }
+     merge $second
    }
    | flatten
    | group ($third | length)
    | each {|it|
-     merge { $third }
+     merge $third
    }
    | flatten
 ───┬───┬───┬───┬───┬───┬───
@@ -74,7 +74,7 @@ Or just like last time we could use the [`reduce`](../book/docs/reduce.md) comma
     $acc
     | group ($it | length)
     | each {|x|
-        merge {$it}
+        merge $it
     }
     | flatten
 }
