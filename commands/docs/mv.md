@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.80.0
+version: 0.81.0
 filesystem: |
   Move files or directories.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> mv (source) (destination) --verbose --force --interactive```
+```> mv (source) (destination) --verbose --force --interactive --update```
 
 ## Parameters
 
@@ -24,6 +24,7 @@ usage: |
  -  `--verbose` `(-v)`: make mv to be verbose, showing files been moved.
  -  `--force` `(-f)`: overwrite the destination.
  -  `--interactive` `(-i)`: ask user to confirm action
+ -  `--update` `(-u)`: move only when the SOURCE file is newer than the destination file(with -f) or when the destination file is missing
 
 ## Examples
 

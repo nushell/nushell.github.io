@@ -2,7 +2,7 @@
 title: dfr col
 categories: |
   expression
-version: 0.80.0
+version: 0.81.0
 expression: |
   Creates a named column expression.
 usage: |

@@ -2,7 +2,7 @@
 title: math max
 categories: |
   math
-version: 0.80.0
+version: 0.81.0
 math: |
   Returns the maximum of a list of numbers, or of columns in a table.
 usage: |

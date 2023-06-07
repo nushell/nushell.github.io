@@ -3,7 +3,7 @@ title: dfr last
 categories: |
   dataframe
   expression
-version: 0.80.0
+version: 0.81.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression.
 expression: |

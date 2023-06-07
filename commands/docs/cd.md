@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.80.0
+version: 0.81.0
 filesystem: |
   Change directory.
 usage: |

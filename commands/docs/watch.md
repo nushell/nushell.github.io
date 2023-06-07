@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.80.0
+version: 0.81.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -43,5 +43,11 @@ Watch all changes in the current directory
 Log all changes in a directory
 ```shell
 > watch /foo/bar { |op, path| $"($op) - ($path)(char nl)" | save --append changes_in_bar.log }
+
+```
+
+Note: if you are looking to run a command every N units of time, this can be accomplished with a loop and sleep
+```shell
+> loop { command; sleep duration }
 
 ```

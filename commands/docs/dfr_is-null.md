@@ -3,7 +3,7 @@ title: dfr is-null
 categories: |
   dataframe
   expression
-version: 0.80.0
+version: 0.81.0
 dataframe: |
   Creates mask where value is null.
 expression: |

@@ -2,7 +2,7 @@
 title: dfr get-second
 categories: |
   dataframe
-version: 0.80.0
+version: 0.81.0
 dataframe: |
   Gets second from date.
 usage: |
