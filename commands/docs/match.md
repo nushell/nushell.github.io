@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.80.0
+version: 0.81.0
 core: |
   Conditionally run a block on a matched value.
 usage: |

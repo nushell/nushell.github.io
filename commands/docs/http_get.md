@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.80.0
+version: 0.81.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -48,5 +48,11 @@ Get content from example.com, with username and password
 Get content from example.com, with custom header
 ```shell
 > http get -H [my-header-key my-header-value] https://www.example.com
+
+```
+
+Get content from example.com, with custom headers
+```shell
+> http get -H [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```

@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.80.0
+version: 0.81.0
 viewers: |
   Render the table.
 usage: |
@@ -54,29 +54,23 @@ Render data in table view
 Render data in table view (expanded)
 ```shell
 > [[a b]; [1 2] [2 [4 4]]] | table --expand
-╭───┬───┬───────────╮
-│ # │ a │     b     │
-├───┼───┼───────────┤
-│ 0 │ 1 │         2 │
-│ 1 │ 2 │ ╭───┬───╮ │
-│   │   │ │ 0 │ 4 │ │
-│   │   │ │ 1 │ 4 │ │
-│   │   │ ╰───┴───╯ │
-╰───┴───┴───────────╯
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
 
 ```
 
 Render data in table view (collapsed)
 ```shell
 > [[a b]; [1 2] [2 [4 4]]] | table --collapse
-╭───┬───╮
-│ a │ b │
-├───┼───┤
-│ 1 │ 2 │
-├───┼───┤
-│ 2 │ 4 │
-│   ├───┤
-│   │ 4 │
-╰───┴───╯
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
 
 ```
