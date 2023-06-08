@@ -301,7 +301,7 @@ There may be cases when you want to define a command which takes any number of p
 def greet [...name: string] {
   print "hello all:"
   for $n in $name {
-    $n
+    print $n
   }
 }
 
@@ -317,7 +317,7 @@ def greet [vip: string, ...name: string] {
   print $"hello to our VIP ($vip)"
   print "and hello to everybody else:"
   for $n in $name {
-    $n
+    print $n
   }
 }
 
