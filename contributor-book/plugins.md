@@ -14,19 +14,7 @@ The second stage is the actual doing of work. Here the plugins are executed and 
 
 ## Discovery
 
-Nu discovers plugins by checking all directories specified by `plugin_dirs` config entry and the directory where `nu` executable lies. You can change the configuration by executing `config set plugin_dirs ["/path","/to","/search"]` in Nu.
-In each directory, Nu is looking for executable files that match the pattern `nu_plugin_*` where `*` is a minimum of one alphanumeric character.
-
-On Windows, this has a similar pattern of `nu_plugin_*.exe` or `nu_plugin_*.bat`.
-
-Once a matching file has been discovered, Nu will invoke the file and pass to it the first command: `Signature`.
-The plugin then replies with the signature of the plugin, which, once deserialized, is identical to the signature commands use.
-
-Nu continues in this way until it has traveled across all directories in the path.
-
-After it has traversed the path, it will look in two more directories: the target/debug and the target/release directories. It will pick one or the other depending whether Nu was compiled in debug mode or release mode, respectively. This allows for easier testing of plugins during development.
-
-Additionally you may manually register a plugin by executing `register <path_to_plugin_executable>`.
+Nu keeps a registry of plugins at the file system location defined by configuration variable `$nu.plugin-path`. To register a plugin, execute `register <path_to_plugin_executable>` in a Nu shell.
 
 ## Creating a plugin (in Rust)
 
