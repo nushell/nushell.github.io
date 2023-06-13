@@ -6,24 +6,27 @@ title: Plugins
 
 ## Protocol
 
-Plugins use JSON-RPC over stdin/stdout (much in the same way VSCode plugins do). The protocol is split into two stages.
+Plugins are executable applications that communicate with Nu by exchanging serialized data over stdin and stdout (much in the same way VSCode plugins do). The protocol is split into two stages.
 
-The first stage of the protocol deals with the initial discovery of the plugin. A plugin is started up and then asked to reply with its configuration. Much the same was as commands, plugins have a signature that they respond to Nu with. Once Nu has this signature, it knows how to later invoke the plugin to do work.
+The first stage of the protocol deals with the initial discovery of the plugin. When a plugin is registered the plugin executed and asked to reply with its configuration. Much the same was as commands, plugins have a signature that they respond to Nu with. Once Nu has this signature, it knows how to later invoke the plugin to do work.
 
-The second stage is the actual doing of work. Here the plugins are sent either a stream of data where they act over the stream element-wise as a filter, or they take all the elements at once in a final processing step as a sink.
+The second stage is the actual doing of work. Here the plugins are executed and sent serialized input data. The plugin then replies with the serialized output data.
 
 ## Discovery
 
 Nu discovers plugins by checking all directories specified by `plugin_dirs` config entry and the directory where `nu` executable lies. You can change the configuration by executing `config set plugin_dirs ["/path","/to","/search"]` in Nu.
 In each directory, Nu is looking for executable files that match the pattern `nu_plugin_*` where `*` is a minimum of one alphanumeric character.
+
 On Windows, this has a similar pattern of `nu_plugin_*.exe` or `nu_plugin_*.bat`.
 
-Once a matching file has been discovered, Nu will invoke the file and pass to it the first JSON-RPC command: Signature.
+Once a matching file has been discovered, Nu will invoke the file and pass to it the first command: `Signature`.
 The plugin then replies with the signature of the plugin, which, once deserialized, is identical to the signature commands use.
 
 Nu continues in this way until it has traveled across all directories in the path.
 
 After it has traversed the path, it will look in two more directories: the target/debug and the target/release directories. It will pick one or the other depending whether Nu was compiled in debug mode or release mode, respectively. This allows for easier testing of plugins during development.
+
+Additionally you may manually register a plugin by executing `register <path_to_plugin_executable>`.
 
 ## Creating a plugin (in Rust)
 
@@ -115,7 +118,7 @@ fn main() {
 }
 ```
 
-In main, we just call a single function `serve_plugin`. This will do the work of calling into our plugin, handling the JSON serialization/deserialization, and sending values and errors back to Nu for us. To start it up, we pass it something that implements the `Plugin` trait and something that implements the `PluginEncoder` trait. We're given a choice of serialization formats that Nu supports. Here, we select JSON.
+In main, we just call a single function `serve_plugin`. This will do the work of calling into our plugin, handling the JSON serialization/deserialization, and sending values and errors back to Nu for us. To start it up, we pass it something that implements the `Plugin` trait and something that implements the `PluginEncoder` trait. We're given a choice of serialization formats that Nu supports. Ordinarily plugins written in Rust should use `MsgPackSerializer`, but here we select JSON to demonstrate how the communication protocol works further on in this tutorial.
 
 Next, above main, is this implementation of the `Plugin` trait for our particular plugin. Here, we'll implement the Plugin trait for our type, Len, which we'll see more of soon. Let's take a look at how we implement this trait:
 
@@ -200,6 +203,7 @@ Once we have finished our plugin, to use it all we need to do is install it.
 ```
 
 Once `nu` starts up, it will discover the plugin and register it as a command.
+
 If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load and register your plugin or register it manually with `register ./target/release/nu_plugin_len`.
 
 ```
@@ -219,9 +223,135 @@ Signatures:
   <string> | len -> <int>
 ```
 
+## Under the hood
+
+Writing Nu plugins in Rust is convenient because we can make use of the `nu-plugin` and `nu-protocl` crates, which are part of Nu itself and define the interface protocol. To write a plugin in another language you will need to implement that protocol yourself. If you're goal is to write Nu plugins in Rust you can stop here. If you'd like to explore the low level plugin interface or write plugins in other languages such as Python, keep reading.
+
+Ordinarily, Nu will execute the plugin and knows what data to pass to it and how to interpret the responses. Here we'll be doing it manually. Note that we'll be playing with our plugin using a conventional shell (like bash or zsh) as in Nu all of this happens under the hood.
+
+Assuming you've built the Rust plugin described above let's now run it:
+
+```sh
+$ ./target/release/nu_plugin_len
+json
+```
+
+The application on start up prints the keyword `json` and blocks for input on STDIN. This tells Nu that the plugin wants to communicate via the JSON protocol rather than MsgPack. You can simulate a plugin initiation request by typing `"Signature"` followed by a newline character and an EoF character. Typically, in Unix-like environments, these can be sent by hitting `enter` followed by `ctrl-d`, although that may vary depending on the terminal and shell you use.
+
+```sh
+$ ./target/release/nu_plugin_len
+json"Signature"
+{"Signature":[{"sig":{"name":"len","usage":"calculates the length of its input","extra_usage":"","search_terms":[],"required_positional":[],"optional_positional":[],"rest_positional":null,"vectorizes_over_list":false,"named":[{"long":"help","short":"h","arg":null,"required":false,"desc":"Display the help message for this command","var_id":null,"default_value":null}],"input_type":"String","output_type":"Int","input_output_types":[],"allow_variants_without_examples":false,"is_filter":false,"creates_scope":false,"allows_unknown_args":false,"category":"Default"},"examples":[]}]}
+```
+
+The plugin prints its signature serialized as JSON. We'll reformat for readability.
+
+```json
+{
+  "Signature": [
+    {
+      "sig": {
+        "name": "len",
+        "usage": "calculates the length of its input",
+        "extra_usage": "",
+        "search_terms": [],
+        "required_positional": [],
+        "optional_positional": [],
+        "rest_positional": null,
+        "vectorizes_over_list": false,
+        "named": [
+          {
+            "long": "help",
+            "short": "h",
+            "arg": null,
+            "required": false,
+            "desc": "Display the help message for this command",
+            "var_id": null,
+            "default_value": null
+          }
+        ],
+        "input_type": "String",
+        "output_type": "Int",
+        "input_output_types": [],
+        "allow_variants_without_examples": false,
+        "is_filter": false,
+        "creates_scope": false,
+        "allows_unknown_args": false,
+        "category": "Default"
+      },
+      "examples": []
+    }
+  ]
+}
+```
+
+This signature tells Nu everything it needs to pass data in and out of the plugin as well as format the help message and support type aware tab completion. A full description of these fields is beyond the scope of this tutorial, but the response is simply a serialized form of the `PluginSignature` trait in the `nu-plugin` crate.
+
+<!--
+    Note that we don't link PluginSignature anywhere because the rust docs for
+    PluginSignature do not currently exist. Once the API docs are updated we can link to
+    https://docs.rs/nu-protocol/latest/nu_protocol/plugin_signature/struct.PluginSignature.html
+-->
+
+Now let's try simulating an invocation. Above we tested the plugin within Nu by executing the command `"hello" | len` and we got the response `5`. Of course this hides all of the typed data handling that makes Nu so powerful.
+
+```sh
+$ echo '{"CallInfo":{"name":"len","call":{"head":{"start":100953,"end":100957},"positional":[],"named":[]},"input":{"Value":{"String":{"val":"hello","span":{"start":100953,"end":100957}}}}}}' | target/release/nu_plugin_len
+json{"Value":{"Int":{"val":5,"span":{"start":100953,"end":100957}}}}
+```
+
+We invoked our plugin and passed a serialized `CallInfo` object that looks like the following on stdin:
+
+```json
+{
+  "CallInfo": {
+    "name": "len",
+    "call": {
+      "head": {
+        "start": 100953,
+        "end": 100957
+      },
+      "positional": [],
+      "named": []
+    },
+    "input": {
+      "Value": {
+        "String": {
+          "val": "hello",
+          "span": {
+            "start": 100953,
+            "end": 100957
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+That is, we passed len the string "hello" and it replied:
+
+```json
+{
+  "Value": {
+    "Int": {
+      "val": 5,
+      "span": {
+        "start": 100953,
+        "end": 100957
+      }
+    }
+  }
+}
+```
+
+with the integer 5 along with preserving source span information that may be useful for error messages later.
+
+When implementing a plugin in a non-Rust language like Python, you must manage this input and output serialization.
+
 ## Creating a plugin (in Python)
 
-We can also create plugins in other programming languages, although you will not benefit from the plugin interface libraries that ship with Nu. In this section, we'll write the same `len` plugin in Python.
+Using our knowledge from the previous section, we can also create plugins in other programming languages, although you will not benefit from the plugin interface libraries that ship with Nu. In this section, we'll write the same `len` plugin in Python.
 
 First, let's look at the full plugin:
 
@@ -371,9 +501,3 @@ All of this takes a few imports to accomplish, so we make sure to include them.
 ```
 
 Finally, to make it easier to run our Python, we make this file executable (using something like `chmod +x nu_plugin_len.py`) and add the path to our python at the top. This trick works for Unix-based platforms, for Windows we would need to create an .exe or .bat file that would invoke the python code for us.
-
-## Creating a plugin (in C#)
-
-You can learn about creating a Nu plugin with C# here:
-
-- [.Net Core nu-plugin-lib](https://github.com/myty/nu-plugin-lib)
