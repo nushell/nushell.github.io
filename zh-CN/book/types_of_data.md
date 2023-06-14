@@ -185,14 +185,12 @@ Eg) `1wk`是一个星期的时间间隔。
 - `tb`: terabytes
 - `pb`: petabytes
 - `eb`: exabytes
-- `zb`: zettabyte
 - `kib`: kibibytes (aka 1024 bytes)
 - `mib`: mebibytes
 - `gib`: gibibytes
 - `tib`: tebibytes
 - `pib`: pebibytes
 - `eib`: exbibyte
-- `zib`: zebibyte
 
 ## 二进制数据
 
