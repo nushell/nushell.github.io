@@ -30,3 +30,14 @@ Die verfügbaren Aliase können mit `$nu.scope.aliases` aufgelistet werden.
 
 Um Aliase dauerhaft zu speichern muss man sie nur in die Datei _config.nu_ einfügen, das Kommando `config nu` öffnet einen Editor zum Einfügen.
 Dann kann man mit `exec nu` in Linux/Mac die nushell neu laden oder in Windows startet man einfach die nushell neu.
+
+## Shell pipes in Aliases
+
+Achtung: Der Alias `alias uuidgen = uuidgen | tr A-F a-f` (um das verhalten von `uuidgen` auf Mac an Linux anzugleichen) funktioniert nicht.
+Die Lösung ist einen parameterlosen Befehl zu definieren, der das Systemprogramm `uuidgen`  mit Hilfe von `^` aufruft.
+
+```
+def uuidgen [] { ^uuidgen | tr A-F a-f }
+```
+
+Mehr dazu im Kapitel [Eigene Befehle](eigene_befehle.md).

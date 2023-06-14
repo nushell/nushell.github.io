@@ -30,3 +30,14 @@ Your useable aliases can be seen in `$nu.scope.aliases`.
 
 To make your aliases persistent they must be added to your _config.nu_ file by running `config nu` to open an editor and inserting them.
 Then run `exec nu` on linux/mac to reload your nushell or on windows just restart your nushell.
+
+## Piping in aliases
+
+Note that `alias uuidgen = uuidgen | tr A-F a-f` (to make uuidgen on mac behave like linux) won't work.
+The solution is to define a command without parameters that calls the system program `uuidgen` via `^`.
+
+```
+def uuidgen [] { ^uuidgen | tr A-F a-f }
+```
+
+See more in the [custom commands](custom_commands.md) section of this book.
