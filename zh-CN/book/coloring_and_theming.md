@@ -475,7 +475,7 @@ let config = {
   animate_prompt: false
   float_precision: 2
   use_ansi_coloring: true
-  filesize_format: "b" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
+  filesize_format: "b" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
   edit_mode: emacs # vi
   max_history_size: 10000
   log_level: error

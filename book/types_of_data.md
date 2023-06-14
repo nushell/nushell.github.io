@@ -135,14 +135,12 @@ The full list of filesize units are:
 - `tb`: terabytes
 - `pb`: petabytes
 - `eb`: exabytes
-- `zb`: zettabyte
 - `kib`: kibibytes (aka 1024 bytes)
 - `mib`: mebibytes
 - `gib`: gibibytes
 - `tib`: tebibytes
 - `pib`: pebibytes
 - `eib`: exbibyte
-- `zib`: zebibyte
 
 As with durations, you can make fractional file sizes, and do calculations:
 
