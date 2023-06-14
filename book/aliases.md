@@ -30,4 +30,4 @@ Your useable aliases can be seen in `$nu.scope.aliases`.
 
 To make your alias persistent it must be added to your _config.nu_ file.
 
-For more details about how to persist aliases so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md).
+Just put them in your _config.nu_ by running `config nu` and `exec nu` to reload your nushell.
