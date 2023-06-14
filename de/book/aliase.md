@@ -22,6 +22,11 @@ Wenn das getan wird, wirkt es, als sei `ls -l` aufgerufen worden. Das bietet auc
 
 Das ist äquivalent zu `ls -l -a`. Deutlich kürzer.
 
+## Alle Aliase auflisten
+
+Die verfügbaren Aliase können mit `$nu.scope.aliases` aufgelistet werden.
+
 ## Persistenz
 
-Für Informationen, um Aliase dauerhaft zu speichern, damit diese immer in Nushell nutzbar sind, kann ein Blick auf das [Konfigurationskapitel](konfiguration.md) geworfen werden.
+Um Aliase dauerhaft zu speichern muss man sie nur in die Datei _config.nu_ einfügen, das Kommando `config nu` öffnet einen Editor zum Einfügen.
+Dann kann man mit `exec nu` in Linux/Mac die nushell neu laden oder in Windows startet man einfach die nushell neu.

@@ -91,7 +91,7 @@ let-env EDITOR = vim
 ```
 
 or `emacs`, `vscode` or whatever editor you like. Don't forget that the program needs to be accessible on the `PATH`
-and to reload your configuration with `exec nu`.
+and to reload your configuration with `exec nu` on linux/mac or restart your nushell on windows.
 
 You should now be able to run `config nu` or `config env` and edit those files easily.
 
