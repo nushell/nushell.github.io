@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> n ```
+```> n (N)```
+
+## Parameters
+
+ -  `N`: the number of shells to jump forward
 
 ## Examples
 
@@ -28,5 +32,11 @@ Make two directories and enter new shells for them, use `n` to jump to the next 
 Run `n` several times and note the changes of current directory
 ```shell
 > n
+
+```
+
+Jump 2 shells forward
+```shell
+> n 2
 
 ```

@@ -1,17 +1,17 @@
 ---
 title: exit
 categories: |
-  shells
+  core
 version: 0.81.0
-shells: |
-  Exit a Nu shell or exit Nu entirely.
+core: |
+  Exit Nu.
 usage: |
-  Exit a Nu shell or exit Nu entirely.
+  Exit Nu.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for shells
 
-<div class='command-title'>{{ $frontmatter.shells }}</div>
+<div class='command-title'>{{ $frontmatter.core }}</div>
 
 ## Signature
 
@@ -23,8 +23,12 @@ usage: |
 
 ## Examples
 
-Exit the current shell
+Exit Nu
 ```shell
 > exit
 
 ```
+
+## Notes
+
+This command used to leave a shell. This function has been taken over by [dexit](dexit.md).

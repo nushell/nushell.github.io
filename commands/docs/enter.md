@@ -15,11 +15,12 @@ usage: |
 
 ## Signature
 
-```> enter (path)```
+```> enter (path)...```
 
 ## Parameters
 
  -  `path`: the path to enter as a new shell
+ -  `...rest`: other paths to add as new shells after this one, but not enter
 
 ## Examples
 
@@ -28,3 +29,7 @@ Enter a new shell at path '../dir-foo'
 > enter ../dir-foo
 
 ```
+
+## Notes
+
+To leave this shell again, use [dexit](dexit.md).

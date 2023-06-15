@@ -15,7 +15,11 @@ usage: |
 
 ## Signature
 
-```> p ```
+```> p (N)```
+
+## Parameters
+
+ -  `N`: the number of shells to jump backward
 
 ## Examples
 
@@ -28,5 +32,11 @@ Make two directories and enter new shells for them, use `p` to jump to the previ
 Run `p` several times and note the changes of current directory
 ```shell
 > p
+
+```
+
+Jump 2 shells backward
+```shell
+> p 2
 
 ```
