@@ -2,11 +2,11 @@
 title: dfr open
 categories: |
   dataframe
-version: 0.79.0
+version: 0.81.0
 dataframe: |
-  Opens CSV, JSON, arrow, or parquet file to create dataframe.
+  Opens CSV, JSON, JSON lines, arrow, or parquet file to create dataframe.
 usage: |
-  Opens CSV, JSON, arrow, or parquet file to create dataframe.
+  Opens CSV, JSON, JSON lines, arrow, or parquet file to create dataframe.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe

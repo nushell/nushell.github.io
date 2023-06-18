@@ -4,7 +4,7 @@
 
 注: Nu が 0.14.1 以降であることを想定しています。
 
-| Nushell           | Clojure                      | Tablecloth (Ocaml / Elm)        | Haskell                  |
+| Nushell           | Clojure                      | Tablecloth (Ocaml / Elm)        | Haskell                  |     |
 | ----------------- | ---------------------------- | ------------------------------- | ------------------------ | --- |
 | alias             |                              |                                 |                          |     |
 | append            | conj, into, concat           | append, (++), concat, concatMap | (++)                     |     |

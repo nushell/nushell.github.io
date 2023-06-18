@@ -61,7 +61,8 @@ Nushell follows underneath orders to locate the editor:
 1. `$config.buffer_editor`
 2. `$env.EDITOR`
 3. `$env.VISUAL`
-4. If 1~3 not found, then launch `notepad` for windows, otherwise run `nano`
+
+Note: Previous versions of Nushell were launching `notepad` on windows, otherwise `nano` when these variables weren't found. We removed defaulting to `notepad` on Windows since `notepad` is now distributed via the Windows Store and there will be a possibility of not having `notepad` at all.
 
 ### Color Config section
 

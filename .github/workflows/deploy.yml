@@ -1,11 +1,13 @@
-name: deploy
+# REF:
+#   1. https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch
+name: Deploy Docs from Workflow Action
 on:
   push:
     branches:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     steps:
@@ -25,9 +27,23 @@ jobs:
           NODE_OPTIONS: '--max_old_space_size=8192'
         run: npm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v1.0.8
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./.vuepress/dist
-          cname: www.nushell.sh
+          path: ./.vuepress/dist
+
+  # Deployment job
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy pages
+      id-token: write # to verify the originates from an appropriate source
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2.0.1

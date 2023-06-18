@@ -2,7 +2,7 @@
 home: true
 heroImage: null
 heroText: Nushell
-tagline: A new type of shell.
+tagline: A new type of shell
 actionText: Get Started →
 actionLink: /book/
 features:

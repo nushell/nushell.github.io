@@ -2,7 +2,7 @@
 title: dfr get
 categories: |
   dataframe
-version: 0.79.0
+version: 0.81.0
 dataframe: |
   Creates dataframe with the selected columns.
 usage: |

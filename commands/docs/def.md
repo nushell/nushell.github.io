@@ -2,7 +2,7 @@
 title: def
 categories: |
   core
-version: 0.79.0
+version: 0.81.0
 core: |
   Define a custom command.
 usage: |

@@ -2,7 +2,7 @@
 title: extern
 categories: |
   core
-version: 0.79.0
+version: 0.81.0
 core: |
   Define a signature for an external command.
 usage: |
@@ -15,12 +15,13 @@ usage: |
 
 ## Signature
 
-```> extern (def_name) (params)```
+```> extern (def_name) (params) (body)```
 
 ## Parameters
 
  -  `def_name`: definition name
  -  `params`: parameters
+ -  `body`: wrapper function block
 
 ## Notes
 This command is a parser keyword. For details, check:

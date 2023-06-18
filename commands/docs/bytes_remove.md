@@ -2,7 +2,7 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.79.0
+version: 0.81.0
 bytes: |
   Remove bytes.
 usage: |

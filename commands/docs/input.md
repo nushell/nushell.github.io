@@ -2,7 +2,7 @@
 title: input
 categories: |
   platform
-version: 0.79.0
+version: 0.81.0
 platform: |
   Get input from the user.
 usage: |
@@ -15,12 +15,13 @@ usage: |
 
 ## Signature
 
-```> input (prompt) --bytes-until --suppress-output```
+```> input (prompt) --bytes-until --numchar --suppress-output```
 
 ## Parameters
 
  -  `prompt`: prompt to show the user
  -  `--bytes-until {string}`: read bytes (not text) until a stop byte
+ -  `--numchar {int}`: number of characters to read; suppresses output
  -  `--suppress-output` `(-s)`: don't print keystroke values
 
 ## Examples
@@ -28,5 +29,11 @@ usage: |
 Get input from the user, and assign to a variable
 ```shell
 > let user_input = (input)
+
+```
+
+Get two characters from the user, and assign to a variable
+```shell
+> let user_input = (input --numchar 2)
 
 ```

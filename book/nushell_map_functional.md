@@ -19,8 +19,8 @@ Note: this table assumes Nu 0.43 or later.
 | is-empty                  | empty?                       | isEmpty                         |                          |     |
 | last                      | last, peek, take-last        | last                            | last                     |     |
 | lines                     |                              |                                 | lines, words, split-with |     |
-| match                     | re-matches, re-seq, re-find  |                                 |                          |     |
- nth                       | nth                          | Array.get                       | lookup                   |     |
+| match                     |                              | match (Ocaml), case (Elm)       | case                     |     |
+|nth                        | nth                          | Array.get                       | lookup                   |     |
 | open                      | with-open                    |                                 |                          |     |
 | transpose                 | (apply mapv vector matrix)   |                                 | transpose                |     |
 | prepend                   | cons                         | cons, ::                        | ::                       |     |

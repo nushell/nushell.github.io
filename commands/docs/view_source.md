@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.79.0
+version: 0.81.0
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -26,19 +26,25 @@ usage: |
 View the source of a code block
 ```shell
 > let abc = {|| echo 'hi' }; view source $abc
-{ echo 'hi' }
+{|| echo 'hi' }
 ```
 
 View the source of a custom command
 ```shell
 > def hi [] { echo 'Hi!' }; view source hi
-{ echo 'Hi!' }
+def hi [] { echo 'Hi!' }
 ```
 
 View the source of a custom command, which participates in the caller environment
 ```shell
 > def-env foo [] { let-env BAR = 'BAZ' }; view source foo
-{ let-env BAR = 'BAZ' }
+def foo [] { let-env BAR = 'BAZ' }
+```
+
+View the source of a custom command with flags and arguments
+```shell
+> def test [a?:any --b:int ...rest:string] { echo 'test' }; view source test
+def test [ a?: any --b: int ...rest: string] { echo 'test' }
 ```
 
 View the source of a module

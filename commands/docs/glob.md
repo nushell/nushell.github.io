@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.79.0
+version: 0.81.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> glob (glob) --depth --no-dir --no-file --no-symlink```
+```> glob (glob) --depth --no-dir --no-file --no-symlink --not```
 
 ## Parameters
 
@@ -24,6 +24,7 @@ usage: |
  -  `--no-dir` `(-D)`: Whether to filter out directories from the returned paths
  -  `--no-file` `(-F)`: Whether to filter out files from the returned paths
  -  `--no-symlink` `(-S)`: Whether to filter out symlinks from the returned paths
+ -  `--not {list<string>}`: Patterns to exclude from the results
 
 ## Notes
 For more glob pattern help, please refer to https://github.com/olson-sean-k/wax
@@ -80,5 +81,17 @@ Search for files or folders with only a, b, c, or d in the file name between 1 a
 Search for folders that begin with an uppercase ASCII letter, ignoring files and symlinks
 ```shell
 > glob "[A-Z]*" --no-file --no-symlink
+
+```
+
+Search for files named tsconfig.json that are not in node_modules directories
+```shell
+> glob **/tsconfig.json --not [**/node_modules/**]
+
+```
+
+Search for all files that are not in the target nor .git directories
+```shell
+> glob **/* --not [**/target/** **/.git/** */]
 
 ```

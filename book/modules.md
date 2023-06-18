@@ -1,27 +1,62 @@
 # Modules
 
-Similar to many other programming languages, Nushell also has modules that let you import custom commands into a current scope.
-However, since Nushell is also a shell, modules allow you to import environment variables which can be used to conveniently activate/deactivate various environments.
+Similar to many other programming languages, Nushell also has modules to organize your code. Each module is a "bag" containing a bunch of definitions (typically commands) that you can export (take out or the bag) and use in your current scope. Since Nushell is also a shell, modules allow you to modify environment variables when importing them.
 
-## Basics
+## Quick Overview
 
-A simple module can be defined like this:
+There are three ways to define a module in Nushell:
 
-```
-> module greetings {
-     export def hello [name: string] {
-         $"hello ($name)!"
-     }
+1. "inline"
+   - `module spam { ... }`
+2. from a file
+   - using a .nu file as a module
+3. from a directory
+   - directory must contain `mod.nu` file (can be empty)
 
-     export def hi [where: string] {
-         $"hi ($where)!"
-     }
+In Nushell, creating a module and importing definitions from a module are two different actions. The former is done using the `module` keyword. The latter using the `use` keyword. You can think of `module` as "wrapping definitions into a bag" and `use` as "opening a bag and taking definitions from it". In most cases, calling `use` will create the module implicitly, so you typically don't need to use `module` that much.
+
+You can define the following things inside a module:
+
+- Commands\* (`def`, `def-env`)
+- Aliases (`alias`)
+- Known externals\* (`extern`)
+- Submodules (`module`)
+- Imported symbols from other modules (`use`)
+- Environment setup (`export-env`)
+
+Only definitions marked with `export` are possible to access from outside of the module ("take out of the bag"). Definitions not marked with `export` are allowed but are visible only inside the module (you could call them private). (_`export-env` is special and does not require `export`._)
+
+_\*These definitions can also be defined as `main` (see below)._
+
+## "Inline" modules
+
+The simplest (and probably least useful) way to define a module is an "inline" module can be defined like this:
+
+```nushell
+module greetings {
+    export def hello [name: string] {
+        $"hello ($name)!"
+    }
+
+    export def hi [where: string] {
+        $"hi ($where)!"
+    }
 }
+
+use greetings hello
+
+hello "world"
 ```
 
-or in a file named the same as the module you want to create:
+_You can paste the code into a file and run it with `nu`, or type into the REPL._
 
-```
+First, we create a module (put `hello` and `hi` commands into a "bag" called `greetings`), then we import the `hello` command from the module (find a "bag" called `greetings` and take `hello` command from it) with `use`.
+
+## Modules from files
+
+A .nu file can be a module. Just take the contents of the module block from the example above and save it to a file `greetings.nu`. The module name is automatically inferred as the stem of the file ("greetings").
+
+```nushell
 # greetings.nu
 
 export def hello [name: string] {
@@ -33,56 +68,30 @@ export def hi [where: string] {
 }
 ```
 
-We defined `hello` and `hi` custom commands inside a `greetings` module.
+then
 
-The [`export`](/commands/docs/export.md) keyword makes it possible to later import the commands from the module.
+```nushell
+> use greetings.nu hello
 
-Similar to [`def`](/commands/docs/def.md), it is also possible to mark [`def-env`](/commands/docs/def-env.md) with the [`export`](/commands/docs/export.md) keyword (you can learn more about [`def-env`](/commands/docs/def-env.md) in the [Environment](environment.md) chapter).
-
-## Using modules
-
-By itself, the module does not do anything. To use what the module exports, we need to [`use`](/commands/docs/use.md) it.
-
-```
-> use greetings
-
-> greetings hello "world"
-hello world!
-
-> greetings hi "there"
-hi there!
+> hello
 ```
 
-The `hello` and `hi` commands are now available with the `greetings` prefix.
+The result should be similar as in the previous section.
 
-## Importing symbols
+> **Note**  
+> that the `use greetings.nu hello` call here first implicitly creates the `greetings` module,
+> then takes `hello` from it. You could also write it as `module greetings.nu`, `use greetings hello`.
+> Using `module` can be useful if you're not interested in any definitions from the module but want to,
+> e.g., re-export the module (`export module greetings.nu`).
 
-In general, anything after the [`use`](/commands/docs/use.md) keyword forms an **import pattern** which controls how the symbols are imported.
-The import pattern can be one of the following:
+## Modules from directories
 
-`use greetings`
+Finally, a directory can be imported as a module. The only condition is that it needs to contain a `mod.nu` file (even empty). The `mod.nu` file defines the root module. All .nu files inside the module directory are added as submodules (more about submodules later). We could write our `greetings` module like this:
 
-Imports all symbols with the module name as a prefix (we saw this in the previous example).
+_In the following examples, `/` is used at the end to denote that we're importing a directory but it is not required._
 
-`use greetings hello`
-
-The `hello` symbol will be imported directly without any prefix.
-
-`use greetings [ hello, hi ]`
-
-Imports multiple symbols directly without any prefix.
-
-`use greetings *`
-
-You can also use the module name and the `*` glob to import all names directly without any prefix.
-
-## Module Files
-
-Nushell lets you implicitly treat a source file as a module.
-Let's start by saving the body of the module definition into a file:
-
-```
-# greetings.nu
+```nushell
+# greetings/mod.nu
 
 export def hello [name: string] {
     $"hello ($name)!"
@@ -93,59 +102,170 @@ export def hi [where: string] {
 }
 ```
 
-Now, you can call [`use`](/commands/docs/use.md) directly on the file:
+then
+
+```nushell
+> use greetings/ hello
+
+> hello
+```
+
+The name of the module follows the same rule as module created from a file: Stem of the directory name, i.e., the directory name, is used as the module name. Again, you could do this as a two-step action using `module` and `use` separately, as explained in the previous section.
+
+::: tip
+You can define `main` command inside `mod.nu` to create a command named after the module directory.
+:::
+
+## Import Pattern
+
+Anything after the [`use`](/commands/docs/use.md) keyword forms an **import pattern** which controls how the definitions are imported.
+The import pattern has the following structure `use head members...` where `head` defines the module (name of an existing module, file, or directory). The members are optional and specify what exactly should be imported from th emodule.
+
+Using our `greetings` example:
+
+```
+use greetings
+```
+
+imports all symbols prefixed with the `greetings` namespace (can call `greetings hello` and `greetings hi`).
+
+```
+use greetings hello
+```
+
+will import the `hello` command directly without any prefix.
+
+```
+use greetings [hello, hi]
+```
+
+imports multiple definitions<> directly without any prefix.
+
+```
+use greetings *
+```
+
+will import all names directly without any prefix.
+
+## `main`
+
+Exporting a command called `main` from a module defines a command named as the module. Let's extend our `greetings` example:
+
+```nushell
+# greetings.nu
+
+export def hello [name: string] {
+    $"hello ($name)!"
+}
+
+export def hi [where: string] {
+    $"hi ($where)!"
+}
+
+export def main [] {
+    "greetings and salutations!"
+}
+```
+
+then
 
 ```
 > use greetings.nu
 
-> greetings hello "world"
+> greetings
+greetings and salutations!
+
+> greetings hello world
 hello world!
-
-> greetings hi "there"
-hi there!
 ```
 
-Nushell automatically infers the module's name from the stem of the file ("greetings" without the ".nu" extension).
-You can use any import patterns as described above with the file name instead of the module name.
+The `main` is exported only when
 
-## Local Custom Commands
+- no import pattern members are used (`use greetings.nu`)
+- glob member is used (`use greetings.nu *`)
 
-Any custom commands defined in a module without the [`export`](/commands/docs/export.md) keyword will work only in the module's scope:
+Importing definitions selectively (`use greetings.nu hello` or `use greetings.nu [hello hi]`) does not define the `greetings` command from `main`. You can, however, selectively import `main` using `use greetings main` (or `[main]`) which defines _only_ the `greetings` command without pulling in `hello` or `hi`.
 
-```
+Apart from commands (`def`, `def-env`), known externals (`extern`) can also be named `main`.
+
+## Submodules and subcommands
+
+Submodules are modules inside modules. They are automatically created when you call `use` on a directory: Any .nu files inside the directory are implicitly added as submodules of the main module. There are two more ways to add a submodule to a module:
+
+1. Using `export module`
+2. Using `export use`
+
+The difference is that `export module some-module` _only_ adds the module as a submodule, while `export use some-module` _also_ re-exports the submodule's definitions. Since definitions of submodules are available when importing from a module, `export use some-module` is typically redundant, unless you want to re-export its definitions without the namespace prefix.
+
+> **Note**  
+> `module` without `export` defines only a local module, it does not export a submodule.
+
+Let's illustrate this with an example. Assume three files:
+
+```nushell
 # greetings.nu
 
 export def hello [name: string] {
-    greetings-helper "hello" "world"
+    $"hello ($name)!"
 }
 
 export def hi [where: string] {
-    greetings-helper "hi" "there"
+    $"hi ($where)!"
 }
 
-def greetings-helper [greeting: string, subject: string] {
-    $"($greeting) ($subject)!"
+export def main [] {
+    "greetings and salutations!"
 }
 ```
 
-Then, in Nushell we import all definitions from the "greetings.nu":
+```nushell
+# animals.nu
+
+export def dog [] {
+    "haf"
+}
+
+export def cat [] {
+    "meow"
+}
+```
+
+```nushell
+# voice.nu
+
+export use greetings.nu *
+
+export module animals.nu
 
 ```
-> use greetings.nu *
 
-> hello "world"
-hello world!
+Then:
 
-> hi "there"
+```
+> use voice.nu
+
+> voice animals dog
+haf
+
+> voice animals cat
+meow
+
+> voice hello world
+hello world
+
+> voice hi there
 hi there!
 
-> greetings-helper "foo" "bar"  # fails because 'greetings-helper' is not exported
+> voice greetings
+greetings and salutations!
+
 ```
+
+As you can see, defining the submodule structure also shapes the command line API. In Nushell, namespaces directly folds into subcommands. This is true for all definitions: aliases, commands, known externals, modules.
 
 ## Environment Variables
 
-So far we used modules just to import custom commands.
-However, modules can also define an environment using [`export-env`](/commands/docs/export-env.md):
+Modules can also define an environment using [`export-env`](/commands/docs/export-env.md):
 
 ```
 # greetings.nu
@@ -159,7 +279,7 @@ export def hello [] {
 }
 ```
 
-[`use`](/commands/docs/use.md) will run the code inside the [`export-env`](/commands/docs/export-env.md) block and merge its environment into the current scope:
+When [`use`](/commands/docs/use.md) is evaluated, it will run the code inside the [`export-env`](/commands/docs/export-env.md) block and merge its environment into the current scope:
 
 ```
 > use greetings.nu
@@ -172,12 +292,9 @@ hello Arthur, King of the Britons!
 ```
 
 ::: tip
-You might wonder why we can't just define [`let-env`](/commands/docs/let-env.md) at the top of the module.
-The reason is that the `export-env {...}` block keeps its scope separate from the rest of the module which makes it more organized.
 You can put a complex code defining your environment without polluting the namespace of the module, for example:
 
-```
-export-env {
+```nushell
     def tmp [] { "tmp" }
     def other [] { "other" }
 
@@ -193,32 +310,37 @@ export-env {
 Only `$env.TMP_LEN` and `$env.OTHER_ENV` are preserved after evaluating the `export-env` module.
 :::
 
-If you also want to keep your variables in separate modules and export its environment, you could try to [`export use`](/commands/docs/export_use.md) it:
+## Caveats
 
-```
+Like any programming language, Nushell is also a product of a tradeoff and there are limitations to our module system.
+
+### `export-env` runs only when the `use` call is _evaluated_
+
+If you also want to keep your variables in separate modules and export their environment, you could try to [`export use`](/commands/docs/export_use.md) it:
+
+```nushell
 # purpose.nu
-export use greetings.nu
-export-env {let-env MYPURPOSE = "to build an empire."}
+export-env {
+    let-env MYPURPOSE = "to build an empire."
+}
 
 export def greeting_purpose [] {
     $"Hello ($env.MYNAME). My purpose is ($env.MYPURPOSE)"
 }
-
 ```
 
 and then use it
 
-```
+```nushell
 > use purpose.nu
+
 > purpose greeeting_purpose
 ```
 
-However, this won't work, because the module would not export its environment unless defined manually, like so:
+However, this won't work, because the code inside the module is not _evaluated_, only _parsed_ (only the `export-env` block is evaluated when you call `use purpose.nu`). To export the environment of `greetings.nu`, you need to add it to the `export-env` module:
 
-```
+```nushell
 # purpose.nu
-
-# preserves its environment
 export-env {
     use greetings.nu
     let-env MYPURPOSE = "to build an empire."
@@ -227,28 +349,122 @@ export-env {
 export def greeting_purpose [] {
     $"Hello ($env.MYNAME). My purpose is ($env.MYPURPOSE)"
 }
-
 ```
 
-Now, everything is exported properly
+then
 
 ```
 > use purpose.nu
+
 > purpose greeting_purpose
 Hello Arthur, King of the Britons. My purpose is to build an empire.
 ```
 
-## Exporting symbols
+Calling `use purpose.nu` ran the `export-env` block inside `purpose.nu` which in run ran `use greetings.nu` which in turn ran the `export-env` block inside `greetings.nu`, preserving the environment changes.
 
-Apart from [`def`](/commands/docs/def.md) and [`def-env`](/commands/docs/def-env.md), you can also export [`alias`](/commands/docs/alias.md)es and [`extern`](/commands/docs/extern.md)s, giving you a way to only use these features when you need. Exporting externs also gives you the ability to hide custom completion commands in a module, so they don't have to be part of the global namespace.
+### Module file / command cannot be named after parent module
 
-Here's the full list of ways you can export:
+- Module directory cannot contain .nu file named after the directory (`spam/spam.nu`)
+  - Consider a `spam` directory containing both `spam.nu` and `mod.nu`, calling `use spam *` would create an ambiguous situation where the `spam` module would be defined twice.
+- Module cannot contain file named after the module
+  - Same case as above: Module `spam` containing both `main` and `spam` commands would create an ambiguous situation when exported as `use spam *`.
 
-- [`export def`](/commands/docs/export_def.md) - export a custom command
-- [`export def-env`](/commands/docs/export_def-env.md) - export a custom environment command
-- [`export alias`](/commands/docs/export_alias.md) - export an alias
-- [`export extern`](/commands/docs/export_extern.md) - export a known external definition
-- [`export use`](/commands/docs/export_use.md) - use definitions from a module and export them from this module
+## Examples
+
+This section describes some useful patterns using modules.
+
+### Local Definitions
+
+Anything defined in a module without the [`export`](/commands/docs/export.md) keyword will work only in the module's scope.
+
+```nushell
+# greetings.nu
+
+use tools/utils.nu generate-prefix  # visible only locally (we assume the file exists)
+
+export def hello [name: string] {
+    greetings-helper "hello" "world"
+}
+
+export def hi [where: string] {
+    greetings-helper "hi" "there"
+}
+
+def greetings-helper [greeting: string, subject: string] {
+    $"(generate-prefix)($greeting) ($subject)!"
+}
+```
+
+then
+
+```nushell
+> use greetings.nu *
+
+
+> hello "world"
+hello world!
+
+> hi "there"
+hi there!
+
+> greetings-helper "foo" "bar"  # fails because 'greetings-helper' is not exported
+
+> generate-prefix  # fails because the command is imported only locally inside the module
+```
+
+### Directory structure as subcommad tree
+
+Since directories can be imported as submodules and submodules can naturally form subcommands it is easy to build even complex command line applications with a simple file structure.
+
+> **Warning**  
+> Work In Progress
+
+### Dumping files into directory
+
+A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, similar effect can be achieved via module directories.
+
+1. Create a directory (e.g., `mkdir ($nu.default-config-dir | path join completions)`) and create empty `mod.nu` inside
+2. Add the directory to your NU_LIB_DIRS inside `env.nu`
+3. Put `use completions *` into your `config.nu`
+
+Now you've set up a directory where you can put your completion files. For example:
+
+```
+# git.nu
+
+export extern main [
+    --version(-v)
+    -C: string
+    # ... etc.
+]
+
+export extern add [
+    --verbose(-v)
+    --dry-run(-n)
+    # ... etc.
+]
+
+export extern checkout [
+    branch: string@complete-git-branch
+]
+
+def complete-git-branch [] {
+    # ... code to list git branches
+}
+```
+
+If you put this file into the `completions` directory and reload config/Nushell, you should see the `git`, `git add` and `git checkout` commands highlighted with flag completions working.
+
+### Setting environment + aliases (conda style)
+
+`def-env` commands, `export-env` block and aliases can be used to dynamically manipulate "virtual environments" (a concept well known from Python).
+
+We use it in our official virtualenv integration https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu
+
+Another example could be our unofficial Conda module: https://github.com/nushell/nu_scripts/blob/f86a060c10f132407694e9ba0f536bfe3ee51efc/modules/virtual_environments/conda.nu
+
+> **Warning**  
+> Work In Progress
 
 ## Hiding
 
@@ -287,17 +503,5 @@ It can be one of the following:
 
 - Hides all of the module's exports, without the prefix
 
-## Hiding Environment Variables
-
-Environment variables can be hidden with [`hide-env`](/commands/docs/hide-env.md):
-
-```
-> let-env FOO = "FOO"
-
-> $env.FOO
-FOO
-
-> hide-env FOO
-
-> $env.FOO  # error! environment variable not found!
-```
+> **Note**  
+> `hide` is not a supported keyword at the root of the module (unlike `def` etc.)

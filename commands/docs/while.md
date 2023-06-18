@@ -2,7 +2,7 @@
 title: while
 categories: |
   core
-version: 0.79.0
+version: 0.81.0
 core: |
   Conditionally run a block in a loop.
 usage: |

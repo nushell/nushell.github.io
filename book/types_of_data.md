@@ -44,7 +44,7 @@ You can parse a string into an integer with the [`into int`](/commands/docs/into
 ## Decimals
 
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
-You can cast a string into an Decimal with the [`into decimal`](/commands/docs/into_decimal.md) command
+You can cast a string into a Decimal with the [`into decimal`](/commands/docs/into_decimal.md) command
 
 ```sh
 > "1.2" | into decimal
@@ -135,14 +135,12 @@ The full list of filesize units are:
 - `tb`: terabytes
 - `pb`: petabytes
 - `eb`: exabytes
-- `zb`: zettabyte
 - `kib`: kibibytes (aka 1024 bytes)
 - `mib`: mebibytes
 - `gib`: gibibytes
 - `tib`: tebibytes
 - `pib`: pebibytes
 - `eib`: exbibyte
-- `zib`: zebibyte
 
 As with durations, you can make fractional file sizes, and do calculations:
 
@@ -348,15 +346,7 @@ You can combine list and record data access syntax to navigate tables. When used
 
 You can access individual rows by number to obtain records:
 
-```sh
-> [{langs:[Rust JS Python], releases:60}].0
-╭──────────┬────────────────╮
-│ langs    │ [list 3 items] │
-│ releases │ 60             │
-╰──────────┴────────────────╯
-> [{langs:[Rust JS Python], releases:60}].0.langs.2
-Python
-```
+@[code](@snippets/types_of_data/cell-paths.sh)
 
 Moreover, you can also access entire columns of a table by name, to obtain lists:
 

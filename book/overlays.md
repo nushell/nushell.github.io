@@ -29,6 +29,12 @@ To create a new overlay, you first need a module:
 
 We'll use this module throughout the chapter, so whenever you see `overlay use spam`, assume `spam` is referring to this module.
 
+:::tip The module can be created by any of the three methods described in [Modules](modules.md):
+
+- "inline" modules (used in this example)
+- file
+- directory :::
+
 To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
 
 ```

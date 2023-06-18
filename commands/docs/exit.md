@@ -2,7 +2,7 @@
 title: exit
 categories: |
   shells
-version: 0.79.0
+version: 0.81.0
 shells: |
   Exit a Nu shell or exit Nu entirely.
 usage: |
@@ -15,23 +15,16 @@ usage: |
 
 ## Signature
 
-```> exit (exit_code) --now```
+```> exit (exit_code)```
 
 ## Parameters
 
  -  `exit_code`: Exit code to return immediately with
- -  `--now` `(-n)`: Exit out of all shells immediately (exiting Nu)
 
 ## Examples
 
 Exit the current shell
 ```shell
 > exit
-
-```
-
-Exit all shells (exiting Nu)
-```shell
-> exit --now
 
 ```

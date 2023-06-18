@@ -2,7 +2,7 @@
 title: flatten
 categories: |
   filters
-version: 0.79.0
+version: 0.81.0
 filters: |
   Flatten the table.
 usage: |

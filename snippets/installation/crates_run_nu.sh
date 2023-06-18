@@ -1,2 +1,0 @@
-$ nu
-/home/jt/Source>

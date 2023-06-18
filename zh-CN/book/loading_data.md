@@ -6,26 +6,7 @@
 
 Nu 在处理数据方面最强大的能力之一是[`open`](/commands/docs/open.md)命令。它是一个多功能命令，可以处理许多不同的数据格式。为了说明这一点让我们试着打开一个 JSON 文件：
 
-```
-> open editors/vscode/package.json
-──────────────────┬───────────────────────────────────────────────────────────────────────────────
- name             │ lark
- description      │ Lark support for VS Code
- author           │ Lark developers
- license          │ MIT
- version          │ 1.0.0
- repository       │ [row type url]
- publisher        │ vscode
- categories       │ [table 0 rows]
- keywords         │ [table 1 rows]
- engines          │ [row vscode]
- activationEvents │ [table 1 rows]
- main             │ ./out/extension
- contributes      │ [row configuration grammars languages]
- scripts          │ [row compile postinstall test vscode:prepublish watch]
- devDependencies  │ [row @types/mocha @types/node tslint typescript vscode vscode-languageclient]
-──────────────────┴───────────────────────────────────────────────────────────────────────────────
-```
+@[code](@snippets/loading_data/vscode.sh)
 
 与[`ls`](/commands/docs/ls.md)类似，打开一个 Nu 支持的文件类型，会返回一些不仅仅是文本（或一个字节流）的东西。这里我们打开了一个来自 JavaScript 项目的 "package.json" 文件。Nu 可以识别 JSON 文本并将其解析为一个数据表。
 
@@ -172,13 +153,7 @@ version = "0.1.2"
 
 "Cargo.lock" 实际上是一个 .toml 文件，但是文件扩展名不是 .toml。没关系，我们可以使用 `from toml` 命令：
 
-```
-> open Cargo.lock | from toml
-──────────┬───────────────────
- metadata │ [row 107 columns]
- package  │ [table 130 rows]
-──────────┴───────────────────
-```
+@[code](@snippets/loading_data/cargo-toml.sh)
 
 每种 Nu 能打开并理解的结构化数据文本格式都有对应的 `from` 命令可以使用，只需要把支持的格式作为子命令传给 `from` 就可以了。
 
@@ -200,9 +175,4 @@ license = "MIT"
 
 除了从文件系统中加载文件，你还可以通过使用[`http get`](/commands/docs/fetch.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
 
-```
-> http get https://blog.rust-lang.org/feed.xml
-──────┬───────────────────
- feed │ {record 2 fields}
-──────┴───────────────────
-```
+@[code](@snippets/loading_data/rust-lang-feed.sh)

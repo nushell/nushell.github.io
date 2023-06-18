@@ -301,7 +301,7 @@ There may be cases when you want to define a command which takes any number of p
 def greet [...name: string] {
   print "hello all:"
   for $n in $name {
-    $n
+    print $n
   }
 }
 
@@ -317,7 +317,7 @@ def greet [vip: string, ...name: string] {
   print $"hello to our VIP ($vip)"
   print "and hello to everybody else:"
   for $n in $name {
-    $n
+    print $n
   }
 }
 
@@ -372,7 +372,7 @@ def greet [
 The comments that we put on the definition and its parameters then appear as descriptions inside the [`help`](/commands/docs/help.md) of the command.
 
 ::: warning Note
-A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign. 
+A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
 :::
 
 Now, if we run `help greet`, we're given a more helpful help text:

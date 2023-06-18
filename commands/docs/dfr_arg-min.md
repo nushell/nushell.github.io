@@ -2,7 +2,7 @@
 title: dfr arg-min
 categories: |
   dataframe
-version: 0.79.0
+version: 0.81.0
 dataframe: |
   Return index for min value in series.
 usage: |

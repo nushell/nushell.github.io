@@ -131,12 +131,12 @@ def main [
         'outdated' => {
             if ($lng | is-empty) {
                 print $'(ansi r)A locale code required, available locales: ($locales), Please try again!(ansi reset)(char nl)'
-                exit --now
+                exit
             }
             let available = ($lng | str downcase) in $locales
             if (not $available) {
                 print $'(ansi r)Unsupported locale, available locales: ($locales), Please try again!(ansi reset)(char nl)'
-                exit --now
+                exit
             }
             check-outdated-translation $lng
         }

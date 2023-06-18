@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.79.0
+version: 0.81.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -81,7 +81,7 @@ Find using regex case insensitive
 
 ```
 
-Find value in records
+Find value in records using regex
 ```shell
 > [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find -r "nu"
 ╭───┬─────────┬─────────╮
@@ -89,6 +89,42 @@ Find value in records
 ├───┼─────────┼─────────┤
 │ 0 │ 0.1.0   │ nushell │
 ╰───┴─────────┴─────────╯
+
+```
+
+Find inverted values in records using regex
+```shell
+> [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find -r "nu" --invert
+╭───┬─────────┬──────╮
+│ # │ version │ name │
+├───┼─────────┼──────┤
+│ 0 │ 0.1.1   │ fish │
+│ 1 │ 0.2.0   │ zsh  │
+╰───┴─────────┴──────╯
+
+```
+
+Find value in list using regex
+```shell
+> [["Larry", "Moe"], ["Victor", "Marina"]] | find -r "rr"
+╭───┬───────────────╮
+│ 0 │ ╭───┬───────╮ │
+│   │ │ 0 │ Larry │ │
+│   │ │ 1 │ Moe   │ │
+│   │ ╰───┴───────╯ │
+╰───┴───────────────╯
+
+```
+
+Find inverted values in records using regex
+```shell
+> [["Larry", "Moe"], ["Victor", "Marina"]] | find -r "rr" --invert
+╭───┬────────────────╮
+│ 0 │ ╭───┬────────╮ │
+│   │ │ 0 │ Victor │ │
+│   │ │ 1 │ Marina │ │
+│   │ ╰───┴────────╯ │
+╰───┴────────────────╯
 
 ```
 
@@ -100,12 +136,11 @@ Remove ANSI sequences from result
 
 Find and highlight text in specific columns
 ```shell
-> [[col1 col2 col3]; [moe larry curly] [larry curly moe]] | find moe -c [col1 col3]
-╭───┬───────┬───────┬───────╮
-│ # │ col1  │ col2  │ col3  │
-├───┼───────┼───────┼───────┤
-│ 0 │ moe   │ larry │ curly │
-│ 1 │ larry │ curly │ moe   │
-╰───┴───────┴───────┴───────╯
+> [[col1 col2 col3]; [moe larry curly] [larry curly moe]] | find moe -c [col1]
+╭───┬──────┬───────┬───────╮
+│ # │ col1 │ col2  │ col3  │
+├───┼──────┼───────┼───────┤
+│ 0 │ moe  │ larry │ curly │
+╰───┴──────┴───────┴───────╯
 
 ```
