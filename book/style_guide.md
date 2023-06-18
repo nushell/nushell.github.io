@@ -31,7 +31,7 @@ Correct:
 Incorrect:
 
 ```nushell
-# - two many spaces after "|": 2 instead of 1
+# - too many spaces after "|": 2 instead of 1
 'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
 ```
 
