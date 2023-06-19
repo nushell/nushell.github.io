@@ -28,8 +28,7 @@ Your useable aliases can be seen in `$nu.scope.aliases`.
 
 ## Persisting
 
-To make your aliases persistent they must be added to your _config.nu_ file by running `config nu` to open an editor and inserting them.
-Then run `exec nu` on linux/mac to reload your nushell or on windows just restart your nushell.
+To make your aliases persistent they must be added to your _config.nu_ file by running `config nu` to open an editor and inserting them, and then restarting nushell.
 
 ## Piping in aliases
 
