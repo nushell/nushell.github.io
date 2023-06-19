@@ -17,7 +17,7 @@ Commands use a light typechecking pass to ensure that arguments passed to them c
 - The name of the command
 - The positional arguments (e.g. in `start x y` the `x` and `y` are positional arguments)
 - If the command takes an unbounded number of additional positional arguments (e.g. `start a1 a2 a3 ... a99 a100`)
-- The named arguments (e.g. `start --now`)
+- The named arguments (e.g. `ansi gradient --fgstart '0x40c9ff'`)
 - If the command is a filter or a sink
 
 With this information, a pipeline can be checked for potential problems before it's executed.
