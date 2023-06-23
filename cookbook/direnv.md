@@ -19,6 +19,12 @@ $env.config = {
     pre_prompt: [{ ||
         let direnv = (direnv export json | from json | default {})
         let env_to_convert = ($direnv | transpose key value | where key in ($env.ENV_CONVERSIONS | columns))
+        let converted_values = ($env_to_convert | each {|it|
+            let convert = ($env.ENV_CONVERSIONS | get $it.key | get from_string)
+            let value = (do $convert $it.value)
+            { $it.key: $value }
+        } | into record)
+        $direnv | merge $converted_values | load-env
     }]
   }
 }
