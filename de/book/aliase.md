@@ -28,8 +28,7 @@ Die verfügbaren Aliase können mit `$nu.scope.aliases` aufgelistet werden.
 
 ## Persistenz
 
-Um Aliase dauerhaft zu speichern muss man sie nur in die Datei _config.nu_ einfügen, das Kommando `config nu` öffnet einen Editor zum Einfügen.
-Dann kann man mit `exec nu` in Linux/Mac die nushell neu laden oder in Windows startet man einfach die nushell neu.
+Um Aliase dauerhaft zu speichern muss man sie nur in die Datei _config.nu_ einfügen, das Kommando `config nu` öffnet einen Editor zum Einfügen, und dann die Nushell neu starten.
 
 ## Shell pipes in Aliases
 
@@ -41,3 +40,11 @@ def uuidgen [] { ^uuidgen | tr A-F a-f }
 ```
 
 Mehr dazu im Kapitel [Eigene Befehle](eigene_befehle.md).
+
+Oder ein etwas idiomatischeres Beispiel von nushell internen Befehlen
+
+```
+def lsg [] { ls | sort-by type name -i | grid -c | str trim }
+```
+
+das alle Dateien und Ordner in Zeilen und Spalten darstellt.
