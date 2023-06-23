@@ -178,10 +178,8 @@ This example shows an external completer that uses the `fish` shell's `complete`
 ```nu
 let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
-    | str trim
-    | split row "\n"
-    | each { |line| $line | split column "\t" value description }
-    | flatten
+    | from tsv --noheaders --no-infer
+    | rename value description
 }
 ```
 
