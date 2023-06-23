@@ -17,8 +17,7 @@ To make direnv work with nushell the way it does with other shells, we can use t
 $env.config = {
   hooks: {
     pre_prompt: [{ ||
-      let direnv = (direnv export json | from json)
-      let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+      let direnv = (direnv export json | from json | default {})
       $direnv | load-env
     }]
   }
