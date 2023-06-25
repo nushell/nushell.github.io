@@ -76,6 +76,25 @@ Output
  11 │ CARGO_PKG_REPOSITORY        │ string                      │ https://github.com/nushell/ │ https://github.com/nushell/
 ```
 
+Let's practise that and set `$EDITOR` in our `env.nu` file using `vim` (or an editor of your choice)
+
+```
+vim $nu.env-path
+```
+
+Note: if you've never used `vim` before and you want to leave typing `:q!` will close without saving.
+
+Go to the end of the file and add
+
+```
+let-env EDITOR = vim
+```
+
+or `emacs`, `vscode` or whatever editor you like. Don't forget that the program needs to be accessible on the `PATH`
+and to reload your configuration with `exec nu` on linux/mac or restart your nushell on windows.
+
+You should now be able to run `config nu` or `config env` and edit those files easily.
+
 ---
 
 ### How to get a single environment variable's value

@@ -28,6 +28,23 @@ Your useable aliases can be seen in `$nu.scope.aliases`.
 
 ## Persisting
 
-To make your alias persistent it must be added to your _config.nu_ file.
+To make your aliases persistent they must be added to your _config.nu_ file by running `config nu` to open an editor and inserting them, and then restarting nushell.
 
-For more details about how to persist aliases so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md).
+## Piping in aliases
+
+Note that `alias uuidgen = uuidgen | tr A-F a-f` (to make uuidgen on mac behave like linux) won't work.
+The solution is to define a command without parameters that calls the system program `uuidgen` via `^`.
+
+```
+def uuidgen [] { ^uuidgen | tr A-F a-f }
+```
+
+See more in the [custom commands](custom_commands.md) section of this book.
+
+Or a more idiomatic example with nushell internal commands
+
+```
+def lsg [] { ls | sort-by type name -i | grid -c | str trim }
+```
+
+displaying all listed files and folders in a grid.
