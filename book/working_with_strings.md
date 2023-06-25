@@ -341,7 +341,6 @@ There are multiple ways to convert strings to and from other types.
 
 1. Using [`into string`](/commands/docs/into_string.md). e.g. `123 | into string`
 2. Using string interpolation. e.g. `$'(123)'`
-3. Using [`build-string`](/commands/docs/build-string.md). e.g. `build-string (123)`
 
 ### From string
 
