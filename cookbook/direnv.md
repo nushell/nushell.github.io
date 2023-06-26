@@ -18,13 +18,20 @@ $env.config = {
   hooks: {
     pre_prompt: [{ ||
         let direnv = (direnv export json | from json | default {})
-        let env_to_convert = ($direnv | transpose key value | where key in $env.ENV_CONVERSIONS)
-        let converted_values = ($env_to_convert | each {|it|
-            let convert = ($env.ENV_CONVERSIONS | get $it.key | get from_string)
-            let value = (do $convert $it.value)
-            { $it.key: $value }
-        } | into record)
-        $direnv | merge $converted_values | load-env
+        if ($direnv | is-empty) {
+            return
+        }
+        $direnv
+        | items {|key, value|
+           {
+              key: $key
+              value: (if $key in $env.ENV_CONVERSIONS {
+                do ($env.ENV_CONVERSIONS | get $key | get from_string) $value
+              } else {
+                  $value
+              })
+            }
+        } | transpose -ird | load-env
     }]
   }
 }
