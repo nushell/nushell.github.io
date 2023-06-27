@@ -177,8 +177,8 @@ This example shows an external completer that uses the `fish` shell's `complete`
 ```nu
 let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
-    | from tsv --noheaders --no-infer
-    | rename value description
+    | $"value(char tab)description(char newline)" + $in
+    | from tsv --flexible --no-infer
 }
 ```
 
