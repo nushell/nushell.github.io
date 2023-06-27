@@ -293,6 +293,22 @@ Or just without the switch flag:
 > greet -a 10 hello
 ```
 
+Flags can contain dashes. They can be accessed by replacing the dash with an underscore: 
+
+```nushell
+def greet [
+  name: string
+  --age (-a): int
+  --two-times
+] {
+  if $two_times {
+    [$name $name $age $age]
+  } else {
+    [$name $age]
+  }
+}
+```
+
 ## Rest parameters
 
 There may be cases when you want to define a command which takes any number of positional arguments. We can do this with a rest parameter, using the following `...` syntax:
