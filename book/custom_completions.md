@@ -166,10 +166,9 @@ Multiple completers can be defined as such:
 ```nu
 let multiple_completers = {|spans|
     {
-        $spans.0: { default_completer $spans | from json } # default
-        ls: { ls_completer $spans | from json }
-        git: { git_completer $spans | from json }
-    } | each {|it| do $it}
+        ls: $ls_completer
+        git: $git_completer
+    } | get -i $spans.0 | default $default_completer | do $in $spans
 }
 ```
 
@@ -178,10 +177,8 @@ This example shows an external completer that uses the `fish` shell's `complete`
 ```nu
 let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
-    | str trim
-    | split row "\n"
-    | each { |line| $line | split column "\t" value description }
-    | flatten
+    | $"value(char tab)description(char newline)" + $in
+    | from tsv --flexible --no-infer
 }
 ```
 
