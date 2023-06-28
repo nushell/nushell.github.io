@@ -3,7 +3,7 @@ title: dfr var
 categories: |
   expression
   lazyframe
-version: 0.82.1
+version: 0.82.0
 expression: |
   Create a var expression for an aggregation
 lazyframe: |

@@ -2,7 +2,7 @@
 title: gstat
 categories: |
   prompt
-version: 0.82.1
+version: 0.82.0
 prompt: |
   Get the git status of a repo
 usage: |

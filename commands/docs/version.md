@@ -2,7 +2,7 @@
 title: version
 categories: |
   default
-version: 0.82.1
+version: 0.82.0
 default: |
   Display Nu version, and its build configuration.
 usage: |

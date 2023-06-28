@@ -2,7 +2,7 @@
 title: dfr get-nanosecond
 categories: |
   dataframe
-version: 0.82.1
+version: 0.82.0
 dataframe: |
   Gets nanosecond from date.
 usage: |

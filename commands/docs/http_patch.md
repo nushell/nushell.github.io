@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.82.1
+version: 0.82.0
 network: |
   Patch a body to a URL.
 usage: |

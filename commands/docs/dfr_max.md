@@ -3,7 +3,7 @@ title: dfr max
 categories: |
   expression
   lazyframe
-version: 0.82.1
+version: 0.82.0
 expression: |
   Creates a max expression
 lazyframe: |

@@ -2,7 +2,7 @@
 title: scope variables
 categories: |
   filters
-version: 0.82.1
+version: 0.82.0
 filters: |
   Output info on the variables in the current scope.
 usage: |

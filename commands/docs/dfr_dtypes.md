@@ -2,7 +2,7 @@
 title: dfr dtypes
 categories: |
   dataframe
-version: 0.82.1
+version: 0.82.0
 dataframe: |
   Show dataframe data types.
 usage: |

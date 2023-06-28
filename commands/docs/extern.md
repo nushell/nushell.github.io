@@ -2,7 +2,7 @@
 title: extern
 categories: |
   core
-version: 0.82.1
+version: 0.82.0
 core: |
   Define a signature for an external command.
 usage: |

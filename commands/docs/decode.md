@@ -2,7 +2,7 @@
 title: decode
 categories: |
   strings
-version: 0.82.1
+version: 0.82.0
 strings: |
   Decode bytes into a string.
 usage: |

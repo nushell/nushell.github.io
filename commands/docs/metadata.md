@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   debug
-version: 0.82.1
+version: 0.82.0
 debug: |
   Get the metadata for items in the stream.
 usage: |

@@ -2,7 +2,7 @@
 title: dfr unique
 categories: |
   dataframe or lazyframe
-version: 0.82.1
+version: 0.82.0
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe.
 usage: |

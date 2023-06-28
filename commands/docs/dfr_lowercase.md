@@ -2,7 +2,7 @@
 title: dfr lowercase
 categories: |
   dataframe
-version: 0.82.1
+version: 0.82.0
 dataframe: |
   Lowercase the strings in the column.
 usage: |

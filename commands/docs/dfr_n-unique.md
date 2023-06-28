@@ -3,7 +3,7 @@ title: dfr n-unique
 categories: |
   dataframe
   expression
-version: 0.82.1
+version: 0.82.0
 dataframe: |
   Counts unique values.
 expression: |

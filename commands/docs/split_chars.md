@@ -2,7 +2,7 @@
 title: split chars
 categories: |
   strings
-version: 0.82.1
+version: 0.82.0
 strings: |
   Split a string into a list of characters.
 usage: |

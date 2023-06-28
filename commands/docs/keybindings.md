@@ -2,7 +2,7 @@
 title: keybindings
 categories: |
   platform
-version: 0.82.1
+version: 0.82.0
 platform: |
   Keybindings related commands.
 usage: |

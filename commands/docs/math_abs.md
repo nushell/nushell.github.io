@@ -2,7 +2,7 @@
 title: math abs
 categories: |
   math
-version: 0.82.1
+version: 0.82.0
 math: |
   Returns the absolute value of a number.
 usage: |

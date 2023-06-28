@@ -2,7 +2,7 @@
 title: url join
 categories: |
   network
-version: 0.82.1
+version: 0.82.0
 network: |
   Converts a record to url.
 usage: |

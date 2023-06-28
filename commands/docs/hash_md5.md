@@ -2,7 +2,7 @@
 title: hash md5
 categories: |
   hash
-version: 0.82.1
+version: 0.82.0
 hash: |
   Hash a value using the md5 hash algorithm
 usage: |

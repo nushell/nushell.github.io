@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.82.1
+version: 0.82.0
 system: |
   View information about system processes.
 usage: |

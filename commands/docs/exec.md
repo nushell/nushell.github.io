@@ -2,7 +2,7 @@
 title: exec
 categories: |
   system
-version: 0.82.1
+version: 0.82.0
 system: |
   Execute a command, replacing the current process.
 usage: |

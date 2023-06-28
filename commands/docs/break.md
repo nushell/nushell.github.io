@@ -2,7 +2,7 @@
 title: break
 categories: |
   core
-version: 0.82.1
+version: 0.82.0
 core: |
   Break a loop.
 usage: |

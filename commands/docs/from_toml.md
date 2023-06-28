@@ -2,7 +2,7 @@
 title: from toml
 categories: |
   formats
-version: 0.82.1
+version: 0.82.0
 formats: |
   Parse text as .toml and create record.
 usage: |

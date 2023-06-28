@@ -2,7 +2,7 @@
 title: dfr when
 categories: |
   expression
-version: 0.82.1
+version: 0.82.0
 expression: |
   Creates and modifies a when expression.
 usage: |

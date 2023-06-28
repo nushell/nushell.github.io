@@ -2,7 +2,7 @@
 title: move
 categories: |
   filters
-version: 0.82.1
+version: 0.82.0
 filters: |
   Move columns before or after other columns.
 usage: |

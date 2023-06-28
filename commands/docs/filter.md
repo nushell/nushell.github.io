@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.82.1
+version: 0.82.0
 filters: |
   Filter values based on a predicate closure.
 usage: |

@@ -2,7 +2,7 @@
 title: from xml
 categories: |
   formats
-version: 0.82.1
+version: 0.82.0
 formats: |
   Parse text as .xml and create record.
 usage: |

@@ -2,7 +2,7 @@
 title: math arctan
 categories: |
   math
-version: 0.82.1
+version: 0.82.0
 math: |
   Returns the arctangent of the number.
 usage: |

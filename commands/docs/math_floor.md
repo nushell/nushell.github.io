@@ -2,7 +2,7 @@
 title: math floor
 categories: |
   math
-version: 0.82.1
+version: 0.82.0
 math: |
   Returns the floor of a number (largest integer less than or equal to that number).
 usage: |

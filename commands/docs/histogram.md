@@ -2,7 +2,7 @@
 title: histogram
 categories: |
   default
-version: 0.82.1
+version: 0.82.0
 default: |
   Creates a new table with a histogram based on the column name passed in.
 usage: |

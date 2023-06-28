@@ -2,7 +2,7 @@
 title: dfr get-month
 categories: |
   dataframe
-version: 0.82.1
+version: 0.82.0
 dataframe: |
   Gets month from date.
 usage: |

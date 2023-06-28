@@ -2,7 +2,7 @@
 title: dfr sample
 categories: |
   dataframe
-version: 0.82.1
+version: 0.82.0
 dataframe: |
   Create sample dataframe.
 usage: |

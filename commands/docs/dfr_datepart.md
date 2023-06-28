@@ -2,7 +2,7 @@
 title: dfr datepart
 categories: |
   expression
-version: 0.82.1
+version: 0.82.0
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |

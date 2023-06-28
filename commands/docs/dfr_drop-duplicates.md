@@ -2,7 +2,7 @@
 title: dfr drop-duplicates
 categories: |
   dataframe
-version: 0.82.1
+version: 0.82.0
 dataframe: |
   Drops duplicate values in dataframe.
 usage: |

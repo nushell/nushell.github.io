@@ -2,7 +2,7 @@
 title: range
 categories: |
   filters
-version: 0.82.1
+version: 0.82.0
 filters: |
   Return only the selected rows.
 usage: |

@@ -2,7 +2,7 @@
 title: dfr cumulative
 categories: |
   dataframe
-version: 0.82.1
+version: 0.82.0
 dataframe: |
   Cumulative calculation for a series.
 usage: |

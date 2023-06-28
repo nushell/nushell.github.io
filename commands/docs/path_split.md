@@ -2,7 +2,7 @@
 title: path split
 categories: |
   default
-version: 0.82.1
+version: 0.82.0
 default: |
   Split a path into a list based on the system's path separator.
 usage: |
