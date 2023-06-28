@@ -2,7 +2,7 @@
 title: math variance
 categories: |
   math
-version: 0.81.0
+version: 0.82.1
 math: |
   Returns the variance of a list of numbers or of each column in a table.
 usage: |

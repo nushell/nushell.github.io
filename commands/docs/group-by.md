@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   default
-version: 0.81.0
+version: 0.82.1
 default: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |

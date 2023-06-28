@@ -2,7 +2,7 @@
 title: dfr collect
 categories: |
   lazyframe
-version: 0.81.0
+version: 0.82.1
 lazyframe: |
   Collect lazy dataframe into eager dataframe.
 usage: |

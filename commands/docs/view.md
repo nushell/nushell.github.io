@@ -2,7 +2,7 @@
 title: view
 categories: |
   debug
-version: 0.81.0
+version: 0.82.1
 debug: |
   Various commands for viewing debug information.
 usage: |

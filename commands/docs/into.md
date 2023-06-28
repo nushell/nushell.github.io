@@ -2,7 +2,7 @@
 title: into
 categories: |
   conversions
-version: 0.81.0
+version: 0.82.1
 conversions: |
   Commands to convert data from one type to another.
 usage: |

@@ -2,7 +2,7 @@
 title: config nu
 categories: |
   env
-version: 0.81.0
+version: 0.82.1
 env: |
   Edit nu configurations.
 usage: |

@@ -2,7 +2,7 @@
 title: dfr take
 categories: |
   dataframe
-version: 0.81.0
+version: 0.82.1
 dataframe: |
   Creates new dataframe using the given indices.
 usage: |

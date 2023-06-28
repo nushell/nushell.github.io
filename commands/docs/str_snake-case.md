@@ -2,7 +2,7 @@
 title: str snake-case
 categories: |
   strings
-version: 0.81.0
+version: 0.82.1
 strings: |
   Convert a string to snake_case.
 usage: |

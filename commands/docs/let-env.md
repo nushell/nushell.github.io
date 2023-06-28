@@ -2,7 +2,7 @@
 title: let-env
 categories: |
   env
-version: 0.81.0
+version: 0.82.1
 env: |
   Create an environment variable and give it a value.
 usage: |

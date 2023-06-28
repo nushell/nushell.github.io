@@ -2,11 +2,11 @@
 title: exit
 categories: |
   shells
-version: 0.81.0
+version: 0.82.1
 shells: |
-  Exit a Nu shell or exit Nu entirely.
+  Exit Nu.
 usage: |
-  Exit a Nu shell or exit Nu entirely.
+  Exit Nu.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for shells

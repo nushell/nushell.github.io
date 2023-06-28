@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.81.0
+version: 0.82.1
 strings: |
   Find and replace text.
 usage: |
@@ -15,7 +15,7 @@ usage: |
 
 ## Signature
 
-```> str replace (find) (replace) ...rest --all --no-expand --string```
+```> str replace (find) (replace) ...rest --all --no-expand --string --multiline```
 
 ## Parameters
 
@@ -25,6 +25,7 @@ usage: |
  -  `--all` `(-a)`: replace all occurrences of the pattern
  -  `--no-expand` `(-n)`: do not expand capture groups (like $name) in the replacement string
  -  `--string` `(-s)`: match the pattern as a substring of the input, instead of a regular expression
+ -  `--multiline` `(-m)`: multi-line regex mode: ^ and $ match begin/end of line; equivalent to (?m)
 
 ## Examples
 
@@ -69,6 +70,12 @@ Find and replace all occurrences using string replacement *not* regular expressi
 azc azc azc
 ```
 
+Use captures to manipulate the input text
+```shell
+> "abc-def" | str replace "(.+)-(.+)" "${2}_${1}"
+def_abc
+```
+
 Find and replace with fancy-regex
 ```shell
 > 'a successful b' | str replace '\b([sS])uc(?:cs|s?)e(ed(?:ed|ing|s?)|ss(?:es|ful(?:ly)?|i(?:ons?|ve(?:ly)?)|ors?)?)\b' '${1}ucce$2'
@@ -79,4 +86,13 @@ Find and replace with fancy-regex
 ```shell
 > 'GHIKK-9+*' | str replace '[*[:xdigit:]+]' 'z'
 GHIKK-z+*
+```
+
+Find and replace on individual lines (multiline)
+```shell
+> "non-matching line\n123. one line\n124. another line\n" | str replace -am '^[0-9]+\. ' ''
+non-matching line
+one line
+another line
+
 ```

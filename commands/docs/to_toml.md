@@ -2,7 +2,7 @@
 title: to toml
 categories: |
   formats
-version: 0.81.0
+version: 0.82.1
 formats: |
   Convert record into .toml text.
 usage: |

@@ -2,7 +2,7 @@
 title: dfr all-true
 categories: |
   dataframe
-version: 0.81.0
+version: 0.82.1
 dataframe: |
   Returns true if all values are true.
 usage: |

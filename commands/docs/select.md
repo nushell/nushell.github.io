@@ -2,7 +2,7 @@
 title: select
 categories: |
   filters
-version: 0.81.0
+version: 0.82.1
 filters: |
   Select only these columns or rows from the input. Opposite of `reject`.
 usage: |

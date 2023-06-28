@@ -2,7 +2,7 @@
 title: loop
 categories: |
   core
-version: 0.81.0
+version: 0.82.1
 core: |
   Run a block in a loop.
 usage: |

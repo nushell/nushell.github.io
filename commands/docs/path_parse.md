@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   default
-version: 0.81.0
+version: 0.82.1
 default: |
   Convert a path into structured data.
 usage: |

@@ -2,7 +2,7 @@
 title: from vcf
 categories: |
   formats
-version: 0.81.0
+version: 0.82.1
 formats: |
   Parse text as .vcf and create table.
 usage: |

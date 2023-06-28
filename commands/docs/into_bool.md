@@ -2,7 +2,7 @@
 title: into bool
 categories: |
   conversions
-version: 0.81.0
+version: 0.82.1
 conversions: |
   Convert value to boolean.
 usage: |

@@ -2,7 +2,7 @@
 title: dfr str-lengths
 categories: |
   dataframe
-version: 0.81.0
+version: 0.82.1
 dataframe: |
   Get lengths of all strings.
 usage: |

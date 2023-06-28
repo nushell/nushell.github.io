@@ -2,7 +2,7 @@
 title: values
 categories: |
   filters
-version: 0.81.0
+version: 0.82.1
 filters: |
   Given a record or table, produce a list of its columns' values.
 usage: |

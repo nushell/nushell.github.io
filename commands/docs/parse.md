@@ -2,7 +2,7 @@
 title: parse
 categories: |
   strings
-version: 0.81.0
+version: 0.82.1
 strings: |
   Parse columns from string data using a simple pattern.
 usage: |

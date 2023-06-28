@@ -3,7 +3,7 @@ title: dfr quantile
 categories: |
   expression
   lazyframe
-version: 0.81.0
+version: 0.82.1
 expression: |
   Aggregates the columns to the selected quantile.
 lazyframe: |

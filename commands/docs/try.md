@@ -2,7 +2,7 @@
 title: try
 categories: |
   core
-version: 0.81.0
+version: 0.82.1
 core: |
   Try to run a block, if it fails optionally run a catch block.
 usage: |
