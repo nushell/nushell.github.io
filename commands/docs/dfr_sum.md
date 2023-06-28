@@ -3,7 +3,7 @@ title: dfr sum
 categories: |
   expression
   lazyframe
-version: 0.81.0
+version: 0.82.0
 expression: |
   Creates a sum expression for an aggregation
 lazyframe: |

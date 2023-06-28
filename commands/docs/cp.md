@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.81.0
+version: 0.82.0
 filesystem: |
   Copy files.
 usage: |

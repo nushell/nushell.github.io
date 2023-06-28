@@ -2,7 +2,7 @@
 title: dfr as-date
 categories: |
   dataframe
-version: 0.81.0
+version: 0.82.0
 dataframe: |
   Converts string to date.
 usage: |

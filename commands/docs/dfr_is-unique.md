@@ -2,7 +2,7 @@
 title: dfr is-unique
 categories: |
   dataframe
-version: 0.81.0
+version: 0.82.0
 dataframe: |
   Creates mask indicating unique values.
 usage: |

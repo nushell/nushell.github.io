@@ -2,7 +2,7 @@
 title: dfr columns
 categories: |
   dataframe
-version: 0.81.0
+version: 0.82.0
 dataframe: |
   Show dataframe columns.
 usage: |

@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.81.0
+version: 0.82.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -15,12 +15,13 @@ usage: |
 
 ## Signature
 
-```> detect columns --skip --no-headers```
+```> detect columns --skip --no-headers --combine-columns```
 
 ## Parameters
 
  -  `--skip {int}`: number of rows to skip before detecting
  -  `--no-headers` `(-n)`: don't detect headers
+ -  `--combine-columns {range}`: columns to be combined; listed as a range
 
 ## Examples
 
@@ -38,5 +39,11 @@ Splits string across multiple columns
 Splits a multi-line string into columns with headers detected
 ```shell
 > $'c1 c2 c3(char nl)a b c' | detect columns
+
+```
+
+Parse external ls command and combine columns for datetime
+```shell
+> ^ls -lh | detect columns --no-headers --skip 1 --combine-columns 5..7
 
 ```

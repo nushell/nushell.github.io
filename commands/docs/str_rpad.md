@@ -2,7 +2,7 @@
 title: str rpad
 categories: |
   deprecated
-version: 0.81.0
+version: 0.82.0
 deprecated: |
   Deprecated command.
 usage: |

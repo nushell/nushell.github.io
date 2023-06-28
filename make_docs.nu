@@ -302,7 +302,7 @@ def main [] {
     #do -i { rm commands/docs/*.md }
 
     let commands = (
-        $nu.scope.commands
+        scope commands
         | where is_custom == false and is_extern == false
         | sort-by category
     )

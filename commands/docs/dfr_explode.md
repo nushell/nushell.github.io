@@ -2,7 +2,7 @@
 title: dfr explode
 categories: |
   expression
-version: 0.81.0
+version: 0.82.0
 expression: |
   creates an explode expression
 usage: |

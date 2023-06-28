@@ -2,7 +2,7 @@
 title: to json
 categories: |
   formats
-version: 0.81.0
+version: 0.82.0
 formats: |
   Converts table data into JSON text.
 usage: |

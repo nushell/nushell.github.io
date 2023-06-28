@@ -2,7 +2,7 @@
 title: use
 categories: |
   core
-version: 0.81.0
+version: 0.82.0
 core: |
   Use definitions from a module, making them available in your shell.
 usage: |
@@ -38,7 +38,7 @@ foo
 
 Define a custom command that participates in the environment in a module and call it
 ```shell
-> module foo { export def-env bar [] { let-env FOO_BAR = "BAZ" } }; use foo bar; bar; $env.FOO_BAR
+> module foo { export def-env bar [] { $env.FOO_BAR = "BAZ" } }; use foo bar; bar; $env.FOO_BAR
 BAZ
 ```
 

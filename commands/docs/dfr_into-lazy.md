@@ -2,7 +2,7 @@
 title: dfr into-lazy
 categories: |
   lazyframe
-version: 0.81.0
+version: 0.82.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe.
 usage: |

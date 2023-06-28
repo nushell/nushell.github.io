@@ -3,7 +3,7 @@ title: dfr std
 categories: |
   expression
   lazyframe
-version: 0.81.0
+version: 0.82.0
 expression: |
   Creates a std expression for an aggregation
 lazyframe: |

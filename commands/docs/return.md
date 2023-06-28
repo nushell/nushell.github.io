@@ -2,7 +2,7 @@
 title: return
 categories: |
   core
-version: 0.81.0
+version: 0.82.0
 core: |
   Return early from a function.
 usage: |
