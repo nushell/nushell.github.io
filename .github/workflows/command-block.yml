@@ -1,0 +1,26 @@
+name: Comment on manual command changes
+on:
+  pull_request:
+    paths:
+      - 'commands/docs/**'
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Awesome that you are trying to improve the documentation of a nushell command!
+                As we autogenerate these command pages from the help information defined with the command after each release:
+                  - If you already updated the command help, you are already done!
+                  - Else, please look for the command in the [source tree](https://github.com/nushell/nushell/tree/main/crates) and make your changes directly there.
+                
+                Thanks for helping out!`
+            })
+
+
