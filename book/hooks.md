@@ -28,7 +28,7 @@ The steps to evaluate one line in the REPL mode are as follows:
 To enable hooks, define them in your [config](configuration.md):
 
 ```
-let-env config = {
+$env.config = {
     # ...other config...
 
     hooks: {
@@ -47,7 +47,7 @@ When you change a directory, the `PWD` environment variable changes and the chan
 Instead of defining just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
 
 ```
-let-env config = {
+$env.config = {
     ...other config...
 
     hooks: {
@@ -72,7 +72,7 @@ let-env config = {
 Also, it might be more practical to update the existing config with new hooks, instead of defining the whole config from scratch:
 
 ```
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: ...
     pre_execution: ...
     env_change: {
@@ -88,8 +88,8 @@ Environment variables defined inside the hook **block** will be preserved in a s
 You can test it with the following example:
 
 ```
-> let-env config = ($env.config | upsert hooks {
-    pre_prompt: { let-env SPAM = "eggs" }
+> $env.config = ($env.config | upsert hooks {
+    pre_prompt: { $env.SPAM = "eggs" }
 })
 
 > $env.SPAM
@@ -103,7 +103,7 @@ The hook blocks otherwise follow the general scoping rules, i.e., commands, alia
 One thing you might be tempted to do is to activate an environment whenever you enter a directory:
 
 ```
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
             {|before, after|
@@ -122,7 +122,7 @@ In this case, you could easily rewrite it as `load-env (if $after == ... { ... }
 To deal with the above problem, we introduce another way to define a hook -- **a record**:
 
 ```
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
             {
@@ -150,8 +150,8 @@ You can think of it as if you typed the string into the REPL and hit Enter.
 So, the hook from the previous section can be also written as
 
 ```
-> let-env config = ($env.config | upsert hooks {
-    pre_prompt: 'let-env SPAM = "eggs"'
+> $env.config = ($env.config | upsert hooks {
+    pre_prompt: '$env.SPAM = "eggs"'
 })
 
 > $env.SPAM
@@ -161,7 +161,7 @@ eggs
 This feature can be used, for example, to conditionally bring in definitions based on the current directory:
 
 ```
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
             {
@@ -180,7 +180,7 @@ let-env config = ($env.config | upsert hooks {
 When defining a hook as a string, the `$before` and `$after` variables are set to the previous and current environment variable value, respectively, similarly to the previous examples:
 
 ```
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: {
             code: 'print $"changing directory from ($before) to ($after)"'
@@ -196,7 +196,7 @@ let-env config = ($env.config | upsert hooks {
 An example for PWD env change hook:
 
 ```
-let-env config = ($env.config | upsert hooks.env_change.PWD {|config|
+$env.config = ($env.config | upsert hooks.env_change.PWD {|config|
     let val = ($config | get -i hooks.env_change.PWD)
 
     if $val == $nothing {
@@ -214,7 +214,7 @@ let-env config = ($env.config | upsert hooks.env_change.PWD {|config|
 This one looks for `test-env.nu` in a directory
 
 ```
-let-env config = ($env.config | upsert hooks.env_change.PWD {
+$env.config = ($env.config | upsert hooks.env_change.PWD {
     [
         {
             condition: {|_, after|
@@ -245,7 +245,7 @@ This hook can display the output in a separate window,
 perhaps as rich HTML text. Here is the basic idea of how to do that:
 
 ```
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     display_output: { to html --partial --no-color | save --raw /tmp/nu-output.html }
 })
 ```
@@ -257,11 +257,12 @@ a browser that automatically reloads when the file changes.
 Instead of the [`save`](/commands/docs/save.md) command, you would normally customize this
 to send the HTML output to a desired window.
 
-### `command_not_found` hook in *Arch Linux*
-The following hook uses the `pkgfile` command, to find which packages commands belong to in *Arch Linux*.
+### `command_not_found` hook in _Arch Linux_
+
+The following hook uses the `pkgfile` command, to find which packages commands belong to in _Arch Linux_.
 
 ```
-let-env config = {
+$env.config = {
     ...other config...
 
     hooks: {

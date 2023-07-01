@@ -4,7 +4,7 @@ If you're coming from `Git Bash` on Windows, then the external commands you're u
 To make these commands available in `nu` as well, add the following line to your `config.nu` with either `append` or `prepend`.
 
 ```
-let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
+$env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 
 Note: this table assumes Nu 0.60.0 or later.
@@ -48,11 +48,11 @@ Note: this table assumes Nu 0.60.0 or later.
 | `cargo b --jobs=$(nproc)`            | `cargo b $"--jobs=(sys \| get cpu \| length)"`   | Use command output in an option                                   |
 | `echo $PATH`                         | `$env.PATH` (Non-Windows) or `$env.Path` (Windows) | See the current path                                            |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update PATH permanently                                           |
-| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                      |
+| `export PATH = $PATH:/usr/other/bin` | `$env.PATH = ($env.PATH \| append /usr/other/bin)` | Update PATH temporarily                                      |
 | `export`                             | `$env`                                           | List the current environment variables                            |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Update environment variables permanently                          |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | Update environment temporarily                                    |
-| `export FOO=BAR`                     | `let-env FOO = BAR`                              | Set environment variable for current session                      |
+| `export FOO=BAR`                     | `$env.FOO = BAR`                              | Set environment variable for current session                      |
 | `echo $FOO`                          | `$env.FOO`                                       | Use environment variables                                         |
 | `unset FOO`                          | `hide-env FOO`                                   | Unset environment variable for current session                    |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                       | Define an alias temporarily                                       |

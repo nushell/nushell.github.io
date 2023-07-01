@@ -271,7 +271,7 @@ Modules can also define an environment using [`export-env`](/commands/docs/expor
 # greetings.nu
 
 export-env {
-    let-env MYNAME = "Arthur, King of the Britons"
+    $env.MYNAME = "Arthur, King of the Britons"
 }
 
 export def hello [] {
@@ -321,7 +321,7 @@ If you also want to keep your variables in separate modules and export their env
 ```nushell
 # purpose.nu
 export-env {
-    let-env MYPURPOSE = "to build an empire."
+    $env.MYPURPOSE = "to build an empire."
 }
 
 export def greeting_purpose [] {
@@ -343,7 +343,7 @@ However, this won't work, because the code inside the module is not _evaluated_,
 # purpose.nu
 export-env {
     use greetings.nu
-    let-env MYPURPOSE = "to build an empire."
+    $env.MYPURPOSE = "to build an empire."
 }
 
 export def greeting_purpose [] {
