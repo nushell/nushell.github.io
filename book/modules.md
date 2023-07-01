@@ -119,7 +119,7 @@ You can define `main` command inside `mod.nu` to create a command named after th
 ## Import Pattern
 
 Anything after the [`use`](/commands/docs/use.md) keyword forms an **import pattern** which controls how the definitions are imported.
-The import pattern has the following structure `use head members...` where `head` defines the module (name of an existing module, file, or directory). The members are optional and specify what exactly should be imported from th emodule.
+The import pattern has the following structure `use head members...` where `head` defines the module (name of an existing module, file, or directory). The members are optional and specify what exactly should be imported from the module.
 
 Using our `greetings` example:
 
