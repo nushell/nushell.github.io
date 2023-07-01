@@ -46,3 +46,5 @@ Check if any of the values are odd, using a stored closure
 > let cond = {|e| $e mod 2 == 1 }; [2 4 1 6 8] | any $cond
 true
 ```
+
+one should never change these files manually :smirk:
