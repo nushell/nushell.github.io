@@ -2,37 +2,37 @@
 
 Nushell supports the following operators for common math, logic, and string operations:
 
-| Operator | Description                                             |
-| -------- | ------------------------------------------------------- |
-| `+`      | add                                                     |
-| `-`      | subtract                                                |
-| `*`      | multiply                                                |
-| `/`      | divide                                                  |
-| `//`     | floor division                                          |
-| `mod`    | modulo                                                  |
-| `**`     | exponentiation (power)                                  |
-| `==`     | equal                                                   |
-| `!=`     | not equal                                               |
-| `<`      | less than                                               |
-| `<=`     | less than or equal                                      |
-| `>`      | greater than                                            |
-| `>=`     | greater than or equal                                   |
-| `=~`     | regex match / string contains another                   |
-| `!~`     | inverse regex match / string does *not* contain another |
-| `in`     | value in list                                           |
-| `not-in` | value not in list                                       |
-| `not`    | logical not                                             |
-| `&&`, `and`   | and two Boolean expressions (short-circuits)       |
-| `\|\|`, `or`  | or two Boolean expressions (short-circuits)        |
-| `xor`         | exclusive or two boolean expressions               |
-| `bit-or`      | bitwise or                                         |
-| `bit-xor`     | bitwise xor                                        |
-| `bit-and`     | bitwise and                                        |
-| `bit-shl`     | bitwise shift left                                 |
-| `bit-shr`     | bitwise shift right                                |
-| `starts-with` | string starts with                                 |
-| `ends-with`   | string ends with                                   |
-| `++`          | append lists                                       |
+| Operator      | Description                                             |
+| ------------- | ------------------------------------------------------- |
+| `+`           | add                                                     |
+| `-`           | subtract                                                |
+| `*`           | multiply                                                |
+| `/`           | divide                                                  |
+| `//`          | floor division                                          |
+| `mod`         | modulo                                                  |
+| `**`          | exponentiation (power)                                  |
+| `==`          | equal                                                   |
+| `!=`          | not equal                                               |
+| `<`           | less than                                               |
+| `<=`          | less than or equal                                      |
+| `>`           | greater than                                            |
+| `>=`          | greater than or equal                                   |
+| `=~`          | regex match / string contains another                   |
+| `!~`          | inverse regex match / string does *not* contain another |
+| `in`          | value in list                                           |
+| `not-in`      | value not in list                                       |
+| `not`         | logical not                                             |
+| `and`         | and two Boolean expressions (short-circuits)            |
+| `or`          | or two Boolean expressions (short-circuits)             |
+| `xor`         | exclusive or two boolean expressions                    |
+| `bit-or`      | bitwise or                                              |
+| `bit-xor`     | bitwise xor                                             |
+| `bit-and`     | bitwise and                                             |
+| `bit-shl`     | bitwise shift left                                      |
+| `bit-shr`     | bitwise shift right                                     |
+| `starts-with` | string starts with                                      |
+| `ends-with`   | string ends with                                        |
+| `++`          | append lists                                            |
 
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.

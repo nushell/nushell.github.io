@@ -56,7 +56,7 @@ Die folgenden Vergleichsoperatoren sind ebenfalls verfügbar:
 
 ## Verknüpfungsoperatoren
 
-Nushell unterstützt auch die Operatoren `&&` ("und") und `||` ("oder") um zwei Operationen die Bool-Werte zurückgeben zu verbinden. Zum Beispiel: `ls | where name in ["one" "two" "three"] && size > 10kb`
+Nushell unterstützt auch die Operatoren `and` ("und") und `or` ("oder") um zwei Operationen die Bool-Werte zurückgeben zu verbinden. Zum Beispiel: `ls | where name in ["one" "two" "three"] && size > 10kb`
 
 ## Reihenfolge von Operationen
 
