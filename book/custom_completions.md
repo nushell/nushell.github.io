@@ -137,10 +137,13 @@ def my_commits [] {
 ## External completions
 
 External completers can also be integrated, instead of relying solely on Nushell ones.
-For this set the `external_completer` field in `config.nu` to a block which will be evaluated if no Nushell completions were found.
-You can configure the block to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
+For this set the `external_completer` field in `config.nu` to a [closure](types_of_data.md#closures) which will be evaluated if no Nushell completions were found.
+You can configure the closure to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
 
-> **Note**  
+> **Note**
+> This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.
+
+> **Note**
 > in the following, we define a bunch of different completers.
 >
 > one can configure them in `$nu.config-path` as follows:
