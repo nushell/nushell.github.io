@@ -37,7 +37,7 @@ Windows:
 Nu 的主版本中包含了一些插件的例子，这些例子对学习插件协议的工作方式很有帮助：
 
 - [Rust](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_example)
-- [Python](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_python/plugin.py)
+- [Python](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_python)
 
 ## 调试
 
