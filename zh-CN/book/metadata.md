@@ -20,7 +20,7 @@ error: Expected a string from pipeline
 让我们再次运行[`open`](/commands/docs/open.md)命令，但这一次，我们将看一下它所反馈的标签：
 
 ```
-> metadata (open Cargo.toml) | table
+> metadata (open Cargo.toml)
 ╭──────┬───────────────────╮
 │ span │ {record 2 fields} │
 ╰──────┴───────────────────╯

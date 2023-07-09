@@ -1,4 +1,4 @@
-> [{langs:[Rust JS Python], releases:60}].0 | table
+> [{langs:[Rust JS Python], releases:60}].0
 ╭──────────┬────────────────╮
 │ langs    │ [list 3 items] │
 │ releases │ 60             │

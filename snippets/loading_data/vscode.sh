@@ -1,4 +1,4 @@
-> open editors/vscode/package.json | table
+> open editors/vscode/package.json
 ──────────────────┬───────────────────────────────────────────────────────────────────────────────
  name             │ lark
  description      │ Lark support for VS Code
