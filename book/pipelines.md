@@ -84,6 +84,15 @@ And the pipeline:
 
 Are one and the same.
 
+> **Note**
+> the sentence *are one and the same* above only applies for the graphical output in the shell,
+> it does not mean the two data structures are them same
+> ```nushell
+> > (ls) == (ls | table)
+> false
+> ```
+> `ls | table` is not even structured data!
+
 ## Output result to external commands
 
 Sometimes you want to output Nushell structured data to an external command for further processing. However, Nushell's default formatting options for structured data may not be what you want.
