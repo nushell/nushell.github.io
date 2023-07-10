@@ -79,7 +79,7 @@ In effect, the command:
 And the pipeline:
 
 ```
-> ls
+> ls | table
 ```
 
 Are one and the same.
