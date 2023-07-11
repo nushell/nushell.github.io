@@ -360,7 +360,7 @@ then
 Hello Arthur, King of the Britons. My purpose is to build an empire.
 ```
 
-Calling `use purpose.nu` ran the `export-env` block inside `purpose.nu` which in run ran `use greetings.nu` which in turn ran the `export-env` block inside `greetings.nu`, preserving the environment changes.
+Calling `use purpose.nu` ran the `export-env` block inside `purpose.nu` which in turn ran `use greetings.nu` which in turn ran the `export-env` block inside `greetings.nu`, preserving the environment changes.
 
 ### Module file / command cannot be named after parent module
 
