@@ -1,6 +1,6 @@
 # Command signature
 
-nu commands contains a signature section, take [`str distance`](/commands/docs/str_distance.md) as example, the signature is like this:
+nu commands contain a signature section, take [`str distance`](/commands/docs/str_distance.md) as example, the signature is like this:
 
 ```
 Signatures(Cell paths are supported):
