@@ -1,0 +1,34 @@
+# EXAMPLE USAGE
+# Refer for explanation to following link:
+# https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+#
+# pre-push:
+#   commands:
+#     packages-audit:
+#       tags: frontend security
+#       run: yarn audit
+#     gems-audit:
+#       tags: backend security
+#       run: bundle audit
+#
+min_version: 1.4.3
+no_tty: false
+skip_output:
+  - meta              # Skips lefthook version printing
+  - skips             # Skips "skip" printing (i.e. no files matched)
+  - summary           # Skips summary block (successful and failed steps) printing
+  - success           # Skips successful steps printing
+  - failure           # Skips failed steps printing
+  # - execution       # I want to skip all execution printing
+  - execution_info    # Skips printing `EXECUTE > ...` logging
+  # - execution_out   # I don't want to Skip printing successfully executed commands' output
+pre-commit:
+  parallel: true
+  commands:
+    fmt:
+      skip:
+        - merge
+        - rebase
+      stage_fixed: true
+      glob: "**/*"
+      run: prettier --write --ignore-unknown
