@@ -109,7 +109,7 @@ Error:
    ╰────
 ```
 
-In general for base `assert` command it is encouraged to always provide the additional message to show what went wrong. If you cannot use any built-in assert command, you can create a custom one with passing the label for [`error make`](error_make.md) for the `assert` command:
+In general for base `assert` command it is encouraged to always provide the additional message to show what went wrong. If you cannot use any built-in assert command, you can create a custom one with passing the label for [`error make`](/commands/docs/error_make.md) for the `assert` command:
 
 ```
 def "assert even" [number: int] {
