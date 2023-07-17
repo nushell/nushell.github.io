@@ -17,8 +17,6 @@ ssh-agent -c
 > **Note**  
 > `transpose -i -r -d` can also be replaced with `transpose --header-row | into record`
 
-Then `ssh-add` will enable to only type your SSH passphrase once.
-
 # Miscellaneous
 
 - To finish or "accept" an autocomplete command, press the right arrow key. This can also be changed by changing the keybindings in the `config.nu` file.
