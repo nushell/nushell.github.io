@@ -31,3 +31,18 @@ A couple of things to note on this command:
 - The fish completer will return lines of text, each one holding the `value` and `description` separated by a tab. The `description` can be missing, and in that case there won't be a tab after the `value`. If that happens, `from tsv` will fail, so we add the `--flexible` flag.
 - `$"value(char tab)description(char newline)" + $in` exists to fix another edge case. Even with the `--flexible` flag, if the first line of the input doesn't have a second column the parser will skip that column for **all** the input. This is fixed adding a header to the input before-hand.
 - `--no-infer` is optional. `from tsv` will infer the data type of the result, so a numeric value like some git hashes will be inferred as a number. `--no-infer` will keep everything as a string. It doesn't make a difference in practice but it will print a more consistent output if the completer is ran on it's own.
+
+## Autocomplete aliases
+
+Nushell currently has a [bug where autocompletions won't work for aliases](https://github.com/nushell/nushell/issues/8483). This can be worked around adding with the following snippet at the beginning of the completer:
+
+```nu
+# if the current command is an alias, get it's expansion
+let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
+let spans = (if $expanded_alias != null  {
+    # put the first word of the expanded alias first in the span
+    $spans | skip 1 | prepend ($expanded_alias split words)
+} else { $spans })
+```
+
+This will effectively replace the command with the alias.
