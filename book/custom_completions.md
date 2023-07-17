@@ -150,7 +150,9 @@ For this, set the `external_completer` field in `config.nu` to a [closure](types
 
 You can configure the closure to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
 
-An external completer is a function that takes the current command as a string list, and outputs a list of records with a `value` and `description` keys, like custom completion functions.
+When the closure returns unparsable json (e.g. an empty string) it defaults to file completion.
+
+An external completer is a function that takes the current command as a string list, and outputs a list of records with `value` and `description` keys, like custom completion functions.
 
 > **Note**
 > This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.
@@ -163,35 +165,4 @@ let carapace_completer = {|spans|
 }
 ```
 
-### Handling multiple completers
-
-Sometimes, a single external completer is not flexible enough for everyday usage. However, as many as needed can be combined into a single one. The following example uses `$default_completer` for all commands except the ones explicitly defined in the record:
-
-```nu
-let multiple_completers = {|spans|
-    {
-        ls: $ls_completer
-        git: $git_completer
-    } | get -i $spans.0 | default $default_completer | do $in $spans
-}
-```
-
-> **Note**
-> In the example above, `$spans.0` is the command being run at the time. The completer will try to `get` the desired completer in the record, and fallback to `$default_completer`.
->
-> - If we try to autocomplete `git <tab>`, `spans` will be `[git ""]`. `{ ... } | get -i git` will return the `$git_completer`
-> - If we try to autocomplete `other_command <tab>`, `spans` will be `[other_command ""]`. `{ ... } | get -i other_command` will return null, and `default` will return the default completer.
-
-More examples of custom completers can be found [in the cookbook](../cookbook/external_completers.md).
-
-This example shows an external completer that uses the `fish` shell's `complete` command. (You must have the fish shell installed for this example to work.)
-
-```nu
-let fish_completer = {|spans|
-    fish --command $'complete "--do-complete=($spans | str join " ")"'
-    | $"value(char tab)description(char newline)" + $in
-    | from tsv --flexible --no-infer
-}
-```
-
-> When the block returns unparsable json (e.g. an empty string) it defaults to file completion.
+[More examples of custom completers can be found in the cookbook](../cookbook/external_completers.md).
