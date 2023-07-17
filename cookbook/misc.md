@@ -14,6 +14,8 @@ ssh-agent -c
     | transpose -i -r -d
     | load-env
 ```
+> **Note**  
+> `transpose -i -r -d` can also be replaced with `transpose --header-row | into record`
 
 Then `ssh-add` will enable to only type your SSH passphrase once.
 
