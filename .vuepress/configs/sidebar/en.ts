@@ -136,6 +136,7 @@ export const sidebarEn: SidebarConfig = {
         'system',
         'parsing',
         'native_shell_programs',
+        'external_completers',
         'files',
         'git',
         'parsing_git_log',
