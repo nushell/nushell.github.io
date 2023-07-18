@@ -20,7 +20,7 @@ Values that flow through a pipeline in Nu often have a set of additional informa
 Let's run the [`open`](/commands/docs/open.md) command again, but this time, we'll look at the tags it gives back:
 
 ```
-> metadata (open Cargo.toml) | table
+> metadata (open Cargo.toml)
 ╭──────┬───────────────────╮
 │ span │ {record 2 fields} │
 ╰──────┴───────────────────╯

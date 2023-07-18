@@ -1,4 +1,4 @@
-> http get https://blog.rust-lang.org/feed.xml | table
+> http get https://blog.rust-lang.org/feed.xml
 ╭────────────┬──────────────────╮
 │ tag        │ feed             │
 │ attributes │ {record 1 field} │

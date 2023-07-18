@@ -79,7 +79,7 @@ Dies erlaubt es den Output in dieser Form zu sehen. Tatsächlich ist der Befehl:
 und die Pipeline,
 
 ```
-> ls | table
+> ls
 ```
 
 ein und dasselbe.

@@ -1,4 +1,4 @@
-> sys | table
+> sys
 ╭───────┬───────────────────╮
 │ host  │ {record 6 fields} │
 │ cpu   │ [table 4 rows]    │
