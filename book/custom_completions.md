@@ -137,23 +137,27 @@ def my_commits [] {
 ## External completions
 
 External completers can also be integrated, instead of relying solely on Nushell ones.
-For this set the `external_completer` field in `config.nu` to a block which will be evaluated if no Nushell completions were found.
-You can configure the block to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
 
-> **Note**  
-> in the following, we define a bunch of different completers.
->
-> one can configure them in `$nu.config-path` as follows:
->
-> ```nu
+For this, set the `external_completer` field in `config.nu` to a [closure](types_of_data.md#closures) which will be evaluated if no Nushell completions were found.
+
+```nu
 > $env.config.completions.external = {
 >     enable: true
 >     max_results: 100
 >     completer: $completer
 > }
-> ```
+```
 
-This example should enable carapace external completions:
+You can configure the closure to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
+
+When the closure returns unparsable json (e.g. an empty string) it defaults to file completion.
+
+An external completer is a function that takes the current command as a string list, and outputs a list of records with `value` and `description` keys, like custom completion functions.
+
+> **Note**
+> This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.
+
+This example will enable carapace external completions:
 
 ```nu
 let carapace_completer = {|spans|
@@ -161,25 +165,4 @@ let carapace_completer = {|spans|
 }
 ```
 
-Multiple completers can be defined as such:
-
-```nu
-let multiple_completers = {|spans|
-    {
-        ls: $ls_completer
-        git: $git_completer
-    } | get -i $spans.0 | default $default_completer | do $in $spans
-}
-```
-
-This example shows an external completer that uses the `fish` shell's `complete` command. (You must have the fish shell installed for this example to work.)
-
-```nu
-let fish_completer = {|spans|
-    fish --command $'complete "--do-complete=($spans | str join " ")"'
-    | $"value(char tab)description(char newline)" + $in
-    | from tsv --flexible --no-infer
-}
-```
-
-> When the block returns unparsable json (e.g. an empty string) it defaults to file completion.
+[More examples of custom completers can be found in the cookbook](../cookbook/external_completers.md).
