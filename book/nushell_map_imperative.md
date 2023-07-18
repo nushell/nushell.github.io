@@ -10,7 +10,7 @@ Note: this table assumes Nu 0.43 or later.
 | math avg     | statistics.mean               |                                                     |                         |                                               |
 | calc, = math | math operators                | math operators                                      | math operators          | math operators                                |
 | count        | len                           | size, length                                        | length                  | len                                           |
-| cp           | shutil.copy                   |                                                     |                         |                                               |
+| cp           | shutil.copy                   |                                                     |                         | fs::copy                                      |
 | date         | datetime.date.today           | java.time.LocalDate.now                             |                         |                                               |
 | drop         | list[:-3]                     |                                                     |                         |                                               |
 | du           | shutil.disk_usage             |                                                     |                         |                                               |
@@ -24,7 +24,7 @@ Note: this table assumes Nu 0.43 or later.
 | group-by     | itertools.groupby             | groupBy                                             |                         | group_by                                      |
 | headers      | keys                          |                                                     |                         |                                               |
 | help         | help                          |                                                     |                         |                                               |
-| insert       | dict[\"key\"] = val           |                                                     |                         |                                               |
+| insert       | dict[\"key\"] = val           |                                                     | map.insert({ 20, 130 }) | map.insert(\"key\", val)                      |
 | is-empty     | is None, is []                | isEmpty                                             | empty                   | is_empty                                      |
 | take         | list[:x]                      |                                                     |                         | &Vec[..x]                                     |
 | take until   | itertools.takewhile           |                                                     |                         |                                               |
@@ -32,11 +32,11 @@ Note: this table assumes Nu 0.43 or later.
 | kill         | os.kill                       |                                                     |                         |                                               |
 | last         | list[-x:]                     |                                                     |                         | &Vec[Vec.len()-1]                             |
 | lines        | split, splitlines             | split                                               | views::split            | split, split_whitespace, rsplit, lines        |
-| ls           | os.listdir                    |                                                     |                         |                                               |
+| ls           | os.listdir                    |                                                     |                         | fs::read_dir                                  |
 | match        | match                         | when                                                |                         | match                                         |
-| merge        | dict.append                   |                                                     |                         |                                               |
-| mkdir        | os.mkdir                      |                                                     |                         |                                               |
-| mv           | shutil.move                   |                                                     |                         |                                               |
+| merge        | dict.append                   |                                                     |                         | map.extend                                    |
+| mkdir        | os.mkdir                      |                                                     |                         | fs::create_dir                                |
+| mv           | shutil.move                   |                                                     |                         | fs::rename                                    |
 | get          | list[x]                       | List[x]                                             | vector[x]               | Vec[x]                                        |
 | open         | open                          |                                                     |                         |                                               |
 | transpose    | zip(\*matrix)                 |                                                     |                         |                                               |
@@ -44,17 +44,17 @@ Note: this table assumes Nu 0.43 or later.
 | prepend      | deque.appendleft              |                                                     |                         |                                               |
 | print        | print                         | println                                             | printf                  | println!                                      |
 | ps           | os.listdir('/proc')           |                                                     |                         |                                               |
-| pwd          | os.getcwd                     |                                                     |                         |                                               |
+| pwd          | os.getcwd                     |                                                     |                         | env::current_dir                              |
 | range        | range                         | .., until, downTo, step                             | iota                    | ..                                            |
 | reduce       | functools.reduce              | reduce                                              | reduce                  | fold, rfold, scan                             |
 | reject       | del                           |                                                     |                         |                                               |
-| rename       | shutil.move                   |                                                     |                         |                                               |
+| rename       | shutil.move                   |                                                     |                         | fs::rename                                    |
 | reverse      | reversed, list.reverse        | reverse, reversed, asReversed                       | reverse                 | rev                                           |
 | rm           | os.remove                     |                                                     |                         |                                               |
 | save         | io.TextIOWrapper.write        |                                                     |                         |                                               |
 | select       | {k:dict[k] for k in keys}     |                                                     |                         |                                               |
 | shuffle      | random.shuffle                |                                                     |                         |                                               |
-| size         | len                           |                                                     |                         |                                               |
+| size         | len                           |                                                     |                         | len                                           |
 | skip         | list[x:]                      |                                                     |                         | &Vec[x..],skip                                |
 | skip until   | itertools.dropwhile           |                                                     |                         |                                               |
 | skip while   | itertools.dropwhile           |                                                     |                         | skip_while                                    |
