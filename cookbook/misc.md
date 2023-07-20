@@ -11,11 +11,10 @@ ssh-agent -c
     | lines
     | first 2
     | parse "setenv {name} {value};"
-    | transpose -i -r -d
+    | transpose -r
+    | into record
     | load-env
 ```
-> **Note**  
-> `transpose -i -r -d` can also be replaced with `transpose --header-row | into record`
 
 # Miscellaneous
 
