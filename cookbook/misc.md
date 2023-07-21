@@ -6,11 +6,15 @@ title: Miscellaneous
 
 `eval` is not available in nushell, so run:
 
+```nushell
+ssh-agent -c
+    | lines
+    | first 2
+    | parse "setenv {name} {value};"
+    | transpose -r
+    | into record
+    | load-env
 ```
-ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
-```
-
-Then `ssh-add` will enable to only type your SSH passphrase once.
 
 # Miscellaneous
 
