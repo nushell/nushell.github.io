@@ -19,7 +19,7 @@ You can browse the default files for default values of environment variables and
 Nushell's main settings are kept in the `config` environment variable as a record. This record can be created using:
 
 ```
-let-env config = {
+$env.config = {
   ...
 }
 ```
@@ -27,7 +27,7 @@ let-env config = {
 You can also shadow `$env.config` and update it:
 
 ```
-let-env config = ($env.config | upsert <field name> <field value>)
+$env.config = ($env.config | upsert <field name> <field value>)
 ```
 
 By convention, this variable is defined in the `config.nu` file.
@@ -37,7 +37,7 @@ By convention, this variable is defined in the `config.nu` file.
 You can set environment variables for the duration of a Nushell session using [`let-env`](/commands/docs/let-env.html) calls inside the `env.nu` file. For example:
 
 ```
-let-env FOO = 'BAR'
+$env.FOO = 'BAR'
 ```
 
 _(Although $env.config is an environment variable, it is still defined by convention inside config.nu.)_
@@ -70,7 +70,7 @@ You can learn more about setting up colors and theming in the [associated chapte
 
 ## Remove Welcome Message
 
-To remove the welcome message, you need to edit your `config.nu` by typing `config nu` in your terminal, then you go to the global configuration `let-env config` and set `show_banner` option to false, like this:
+To remove the welcome message, you need to edit your `config.nu` by typing `config nu` in your terminal, then you go to the global configuration `$env.config` and set `show_banner` option to false, like this:
 
 @[code](@snippets/installation/remove_welcome_message.nu)
 
@@ -83,7 +83,7 @@ To get an idea of which environment variables are set up by your current login s
 You can then configure `let-env` commands that setup the same environment variables in your nu login shell. Use this command to generate `let-env` commands for all the environment variables:
 
 ```nu
-$env | reject config | transpose key val | each {|r| echo $"let-env ($r.key) = '($r.val)'"} | str join (char nl)
+$env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r.val)'"} | str join (char nl)
 ```
 
 This will print out [`let-env`](/commands/docs/let-env.html) lines, one for each environment variable along with its setting. You may not need all of them, for instance the `PS1` variable is bash specific.
@@ -128,7 +128,7 @@ alias open = ^open
 In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use [`let-env`](/commands/docs/let-env.html) and [`append`](/commands/docs/append.html) in `env.nu`:
 
 ```
-let-env PATH = ($env.PATH | split row (char esep) | append '/some/path')
+$env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
 ```
 
 This will append `/some/path` to the end of PATH; you can also use [`prepend`](/commands/docs/prepend.html) to add entries to the start of PATH.
@@ -141,8 +141,8 @@ Note the `split row (char esep)` step. We need to add it because in `env.nu`, th
 
 ```
 # macOS ARM64 (Apple Silicon)
-let-env PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
+$env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
 
 # Linux
-let-env PATH = ($env.PATH | split row (char esep) | prepend '/home/linuxbrew/.linuxbrew/bin')
+$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/linuxbrew/.linuxbrew/bin')
 ```

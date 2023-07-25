@@ -13,7 +13,7 @@ Many parts of Nushell's interface can have their color customized. All of these 
 Table borders are controlled by the `table_mode` setting in `config.nu`. Here is an example:
 
 ```shell
-> let-env config = {
+> $env.config = {
     table_mode: rounded
 }
 ```
@@ -346,7 +346,7 @@ Here's the current list of flat shapes.
 Here's a small example of how to apply color to these items. Anything not specified will receive the default color.
 
 ```shell
-> let-env config = {
+> $env.config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
         shape_bool: green
@@ -370,13 +370,13 @@ The Nushell prompt is configurable through these environment variables and confi
 Example: For a simple prompt one could do this. Note that `PROMPT_COMMAND` requires a `block` whereas the others require a `string`.
 
 ```shell
-> let-env PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
+> $env.PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 If you don't like the default `PROMPT_INDICATOR` you could change it like this.
 
 ```shell
-> let-env PROMPT_INDICATOR = "> "
+> $env.PROMPT_INDICATOR = "> "
 ```
 
 If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
@@ -400,7 +400,7 @@ There's an exhaustive list [here](https://github.com/trapd00r/LS_COLORS), which 
 
 I like the `vivid` application and currently have it configured in my `config.nu` like this. You can find `vivid` [here](https://github.com/sharkdp/vivid).
 
-`let-env LS_COLORS = (vivid generate molokai | str trim)`
+`$env.LS_COLORS = (vivid generate molokai | str trim)`
 
 If `LS_COLORS` is not set, nushell will default to a built-in `LS_COLORS` setting, based on 8-bit (extended) ANSI colors.
 
@@ -498,7 +498,7 @@ Nushell's default config file contains a light theme definition, if you are work
 
 ```shell
 # in $nu.config-file
-let-env config = {
+$env.config = {
   ...
   color_config: $dark_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
   ...
@@ -509,7 +509,7 @@ You can just change it to light theme by replacing `$dark_theme` to `$light_them
 
 ```shell
 # in $nu.config-file
-let-env config = {
+$env.config = {
   ...
   color_config: $light_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
   ...

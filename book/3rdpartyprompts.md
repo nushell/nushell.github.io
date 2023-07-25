@@ -21,7 +21,7 @@ If you like [oh-my-posh](https://ohmyposh.dev/), you can use oh-my-posh with Nus
 3. Set the PROMPT_COMMAND in ~/.config/nushell/config.nu(or the path output by `$nu.config-path`), change `M365Princess.omp.json` to whatever you like [Themes demo](https://ohmyposh.dev/docs/themes).
 
 ```shell
-> let-env PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
+> $env.PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
 ```
 
 For MacOS users:
@@ -36,9 +36,9 @@ let posh_theme = $'($posh_dir)/share/oh-my-posh/themes/'
 # Change the theme names to: zash/space/robbyrussel/powerline/powerlevel10k_lean/
 # material/half-life/lambda Or double lines theme: amro/pure/spaceship, etc.
 # For more [Themes demo](https://ohmyposh.dev/docs/themes)
-let-env PROMPT_COMMAND = { || oh-my-posh prompt print primary --config $'($posh_theme)/zash.omp.json' }
+$env.PROMPT_COMMAND = { || oh-my-posh prompt print primary --config $'($posh_theme)/zash.omp.json' }
 # Optional
-let-env PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
+$env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 ```
 
 ## Starship
@@ -54,22 +54,22 @@ let-env PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 Here's an example config section for Starship:
 
 ```
-let-env STARSHIP_SHELL = "nu"
+$env.STARSHIP_SHELL = "nu"
 
 def create_left_prompt [] {
     starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)'
 }
 
 # Use nushell functions to define your right and left prompt
-let-env PROMPT_COMMAND = { || create_left_prompt }
-let-env PROMPT_COMMAND_RIGHT = ""
+$env.PROMPT_COMMAND = { || create_left_prompt }
+$env.PROMPT_COMMAND_RIGHT = ""
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
-let-env PROMPT_INDICATOR = ""
-let-env PROMPT_INDICATOR_VI_INSERT = ": "
-let-env PROMPT_INDICATOR_VI_NORMAL = "〉"
-let-env PROMPT_MULTILINE_INDICATOR = "::: "
+$env.PROMPT_INDICATOR = ""
+$env.PROMPT_INDICATOR_VI_INSERT = ": "
+$env.PROMPT_INDICATOR_VI_NORMAL = "〉"
+$env.PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
 Now restart Nu.

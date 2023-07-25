@@ -214,7 +214,7 @@ One can also keep a list of environment variables that were defined inside an ov
 ```
 (zero)> module spam {
     export def foo [] { "foo" }
-    export-env { let-env FOO = "foo" }
+    export-env { $env.FOO = "foo" }
 }
 
 (zero)> overlay use spam
