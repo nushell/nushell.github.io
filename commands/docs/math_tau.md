@@ -2,7 +2,7 @@
 title: math tau
 categories: |
   math
-version: 0.82.0
+version: 0.83.0
 math: |
   Returns the mathematical constant τ.
 usage: |

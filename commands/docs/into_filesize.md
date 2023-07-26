@@ -2,7 +2,7 @@
 title: into filesize
 categories: |
   conversions
-version: 0.82.0
+version: 0.83.0
 conversions: |
   Convert value to filesize.
 usage: |
@@ -25,7 +25,13 @@ usage: |
 
 Convert string to filesize in table
 ```shell
-> [[bytes]; ['5'] [3.2] [4] [2kb]] | into filesize bytes
+> [[device size]; ["/dev/sda1" "200"] ["/dev/loop0" "50"]] | into filesize size
+╭───┬────────────┬───────╮
+│ # │   device   │ size  │
+├───┼────────────┼───────┤
+│ 0 │ /dev/sda1  │ 200 B │
+│ 1 │ /dev/loop0 │  50 B │
+╰───┴────────────┴───────╯
 
 ```
 

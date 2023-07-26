@@ -2,7 +2,7 @@
 title: rename
 categories: |
   filters
-version: 0.82.0
+version: 0.83.0
 filters: |
   Creates a new table with columns renamed.
 usage: |
@@ -15,12 +15,13 @@ usage: |
 
 ## Signature
 
-```> rename ...rest --column```
+```> rename ...rest --column --block```
 
 ## Parameters
 
  -  `...rest`: the new names for the columns
  -  `--column {list<string>}`: column name to be changed
+ -  `--block {closure(any)}`: A closure to apply changes on each column
 
 ## Examples
 
@@ -64,4 +65,13 @@ Rename the fields of a record
 │ x │ 1 │
 │ y │ 2 │
 ╰───┴───╯
+```
+
+Rename fields based on a given closure
+```shell
+> {abc: 1, bbc: 2} | rename -b {str replace -a 'b' 'z'}
+╭─────┬───╮
+│ azc │ 1 │
+│ zzc │ 2 │
+╰─────┴───╯
 ```

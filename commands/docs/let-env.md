@@ -1,17 +1,17 @@
 ---
 title: let-env
 categories: |
-  env
-version: 0.82.0
-env: |
-  Create an environment variable and give it a value.
+  deprecated
+version: 0.83.0
+deprecated: |
+  `let-env FOO = ...` is deprecated, use `$env.FOO = ...` instead.
 usage: |
-  Create an environment variable and give it a value.
+  `let-env FOO = ...` is deprecated, use `$env.FOO = ...` instead.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for env
+# <code>{{ $frontmatter.title }}</code> for deprecated
 
-<div class='command-title'>{{ $frontmatter.env }}</div>
+<div class='command-title'>{{ $frontmatter.deprecated }}</div>
 
 ## Signature
 
@@ -21,11 +21,3 @@ usage: |
 
  -  `var_name`: variable name
  -  `initial_value`: equals sign followed by value
-
-## Examples
-
-Create an environment variable and display it
-```shell
-> let-env MY_ENV_VAR = 1; $env.MY_ENV_VAR
-1
-```

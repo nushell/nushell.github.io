@@ -2,7 +2,7 @@
 title: dfr fill-null
 categories: |
   lazyframe
-version: 0.82.0
+version: 0.83.0
 lazyframe: |
   Replaces NULL values with the given expression.
 usage: |

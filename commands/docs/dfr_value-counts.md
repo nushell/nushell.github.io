@@ -2,7 +2,7 @@
 title: dfr value-counts
 categories: |
   dataframe
-version: 0.82.0
+version: 0.83.0
 dataframe: |
   Returns a dataframe with the counts for unique values in series.
 usage: |

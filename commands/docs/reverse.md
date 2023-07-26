@@ -2,7 +2,7 @@
 title: reverse
 categories: |
   filters
-version: 0.82.0
+version: 0.83.0
 filters: |
   Reverses the input list or table.
 usage: |

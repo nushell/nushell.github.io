@@ -2,7 +2,7 @@
 title: reduce
 categories: |
   default
-version: 0.82.0
+version: 0.83.0
 default: |
   Aggregate a list to a single value using an accumulator closure.
 usage: |
@@ -52,4 +52,10 @@ Add ascending numbers to each of the filenames, and join with semicolons.
 ```shell
 > ['foo.gz', 'bar.gz', 'baz.gz'] | enumerate | reduce -f '' {|str all| $"($all)(if $str.index != 0 {'; '})($str.index + 1)-($str.item)" }
 1-foo.gz; 2-bar.gz; 3-baz.gz
+```
+
+Concatenate a string with itself, using a range to determine the number of times.
+```shell
+> let s = "Str"; 0..2 | reduce -f '' {|it, acc| $acc + $s}
+StrStrStr
 ```

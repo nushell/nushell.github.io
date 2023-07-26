@@ -1,49 +1,13 @@
 ---
 title: dfr is-in
 categories: |
-  dataframe
   expression
-version: 0.82.0
-dataframe: |
-  Checks if elements from a series are contained in right series.
+version: 0.83.0
 expression: |
   Creates an is-in expression.
 usage: |
-  Checks if elements from a series are contained in right series.
   Creates an is-in expression.
 ---
-
-# <code>{{ $frontmatter.title }}</code> for dataframe
-
-<div class='command-title'>{{ $frontmatter.dataframe }}</div>
-
-## Signature
-
-```> dfr is-in (other)```
-
-## Parameters
-
- -  `other`: right series
-
-## Examples
-
-Checks if elements from a series are contained in right series
-```shell
-> let other = ([1 3 6] | dfr into-df);
-    [5 6 6 6 8 8 8] | dfr into-df | dfr is-in $other
-╭───┬───────╮
-│ # │ is_in │
-├───┼───────┤
-│ 0 │ false │
-│ 1 │ true  │
-│ 2 │ true  │
-│ 3 │ true  │
-│ 4 │ false │
-│ 5 │ false │
-│ 6 │ false │
-╰───┴───────╯
-
-```
 
 # <code>{{ $frontmatter.title }}</code> for expression
 

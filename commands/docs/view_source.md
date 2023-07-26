@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.82.0
+version: 0.83.0
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -37,8 +37,8 @@ def hi [] { echo 'Hi!' }
 
 View the source of a custom command, which participates in the caller environment
 ```shell
-> def-env foo [] { let-env BAR = 'BAZ' }; view source foo
-def foo [] { let-env BAR = 'BAZ' }
+> def-env foo [] { $env.BAR = 'BAZ' }; view source foo
+def foo [] { $env.BAR = 'BAZ' }
 ```
 
 View the source of a custom command with flags and arguments
@@ -49,8 +49,8 @@ def test [ a?: any --b: int ...rest: string] { echo 'test' }
 
 View the source of a module
 ```shell
-> module mod-foo { export-env { let-env FOO_ENV = 'BAZ' } }; view source mod-foo
- export-env { let-env FOO_ENV = 'BAZ' }
+> module mod-foo { export-env { $env.FOO_ENV = 'BAZ' } }; view source mod-foo
+ export-env { $env.FOO_ENV = 'BAZ' }
 ```
 
 View the source of an alias

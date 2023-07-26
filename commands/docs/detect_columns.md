@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.82.0
+version: 0.83.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -36,9 +36,21 @@ Splits string across multiple columns
 
 ```
 
+
+```shell
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c 0..1
+
+```
+
 Splits a multi-line string into columns with headers detected
 ```shell
-> $'c1 c2 c3(char nl)a b c' | detect columns
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c -2..-1
+
+```
+
+Splits a multi-line string into columns with headers detected
+```shell
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c 2..
 
 ```
 

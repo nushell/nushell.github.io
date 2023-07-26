@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   default
-version: 0.82.0
+version: 0.83.0
 default: |
   Convert a path into structured data.
 usage: |
@@ -15,11 +15,10 @@ usage: |
 
 ## Signature
 
-```> path parse --columns --extension```
+```> path parse --extension```
 
 ## Parameters
 
- -  `--columns {table}`: For a record or table input, convert strings at the given columns
  -  `--extension {string}`: Manually supply the extension (without the dot)
 
 ## Notes
@@ -53,8 +52,14 @@ Ignore the extension
 ╰───────────┴────────╯
 ```
 
-Parse all paths under the 'name' column
+Parse all paths in a list
 ```shell
-> ls | path parse -c [ name ]
+> [ /home/viking.d /home/spam.txt ] | path parse
+╭───┬────────┬────────┬───────────╮
+│ # │ parent │  stem  │ extension │
+├───┼────────┼────────┼───────────┤
+│ 0 │ /home  │ viking │ d         │
+│ 1 │ /home  │ spam   │ txt       │
+╰───┴────────┴────────┴───────────╯
 
 ```

@@ -2,7 +2,7 @@
 title: overlay hide
 categories: |
   core
-version: 0.82.0
+version: 0.83.0
 core: |
   Hide an active overlay.
 usage: |
@@ -49,7 +49,7 @@ Hide an overlay created from a file
 
 Hide the last activated overlay
 ```shell
-> module spam { export-env { let-env FOO = "foo" } }
+> module spam { export-env { $env.FOO = "foo" } }
     overlay use spam
     overlay hide
 

@@ -2,7 +2,7 @@
 title: dfr fill-nan
 categories: |
   lazyframe
-version: 0.82.0
+version: 0.83.0
 lazyframe: |
   Replaces NaN values with the given expression.
 usage: |
@@ -41,11 +41,11 @@ Fills the NaN values with 0
 Fills the NaN values of a whole dataframe
 ```shell
 > [[a b]; [0.2 1] [0.1 NaN]] | dfr into-df | dfr fill-nan 0
-╭───┬────────┬───╮
-│ # │   a    │ b │
-├───┼────────┼───┤
-│ 0 │ 0.2000 │ 1 │
-│ 1 │ 0.1000 │ 0 │
-╰───┴────────┴───╯
+╭───┬──────┬───╮
+│ # │  a   │ b │
+├───┼──────┼───┤
+│ 0 │ 0.20 │ 1 │
+│ 1 │ 0.10 │ 0 │
+╰───┴──────┴───╯
 
 ```

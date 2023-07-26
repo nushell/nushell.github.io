@@ -2,7 +2,7 @@
 title: export-env
 categories: |
   env
-version: 0.82.0
+version: 0.83.0
 env: |
   Run a block and preserve its environment in a current scope.
 usage: |
@@ -25,12 +25,12 @@ usage: |
 
 Set an environment variable
 ```shell
-> export-env { let-env SPAM = 'eggs' }
+> export-env { $env.SPAM = 'eggs' }
 
 ```
 
 Set an environment variable and examine its value
 ```shell
-> export-env { let-env SPAM = 'eggs' }; $env.SPAM
+> export-env { $env.SPAM = 'eggs' }; $env.SPAM
 eggs
 ```

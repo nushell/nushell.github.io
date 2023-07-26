@@ -1,42 +1,13 @@
 ---
 title: dfr max
 categories: |
-  expression
   lazyframe
-version: 0.82.0
-expression: |
-  Creates a max expression
+version: 0.83.0
 lazyframe: |
   Aggregates columns to their max value
 usage: |
-  Creates a max expression
   Aggregates columns to their max value
 ---
-
-# <code>{{ $frontmatter.title }}</code> for expression
-
-<div class='command-title'>{{ $frontmatter.expression }}</div>
-
-## Signature
-
-```> dfr max ```
-
-## Examples
-
-Max aggregation for a group-by
-```shell
-> [[a b]; [one 2] [one 4] [two 1]]
-    | dfr into-df
-    | dfr group-by a
-    | dfr agg (dfr col b | dfr max)
-╭───┬─────┬───╮
-│ # │  a  │ b │
-├───┼─────┼───┤
-│ 0 │ one │ 4 │
-│ 1 │ two │ 1 │
-╰───┴─────┴───╯
-
-```
 
 # <code>{{ $frontmatter.title }}</code> for lazyframe
 

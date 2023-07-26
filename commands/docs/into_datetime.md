@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.82.0
+version: 0.83.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -55,4 +55,15 @@ Convert standard (seconds) unix timestamp to a UTC datetime
 ```shell
 > 1614434140 * 1_000_000_000 | into datetime
 Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
+```
+
+Convert list of timestamps to datetimes
+```shell
+> ["2023-03-30 10:10:07 -05:00", "2023-05-05 13:43:49 -05:00", "2023-06-05 01:37:42 -05:00"] | into datetime
+╭───┬──────────────╮
+│ 0 │ 3 months ago │
+│ 1 │ 2 months ago │
+│ 2 │ 2 months ago │
+╰───┴──────────────╯
+
 ```

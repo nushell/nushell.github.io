@@ -2,7 +2,7 @@
 title: path join
 categories: |
   default
-version: 0.82.0
+version: 0.83.0
 default: |
   Join a structured path or a list of path parts.
 usage: |
@@ -15,12 +15,11 @@ usage: |
 
 ## Signature
 
-```> path join ...rest --columns```
+```> path join ...rest```
 
 ## Parameters
 
  -  `...rest`: Path to append to the input
- -  `--columns {table}`: For a record or table input, join strings at the given columns
 
 ## Notes
 Optionally, append an additional path to the result. It is designed to accept
@@ -39,12 +38,6 @@ Append a filename to a path
 /home/viking/spams/this_spam.txt
 ```
 
-Append a filename to a path inside a column
-```shell
-> ls | path join spam.txt -c [ name ]
-
-```
-
 Join a list of parts into a path
 ```shell
 > [ '/' 'home' 'viking' 'spam.txt' ] | path join
@@ -52,6 +45,12 @@ Join a list of parts into a path
 ```
 
 Join a structured path into a path
+```shell
+> { parent: '/home/viking', stem: 'spam', extension: 'txt' } | path join
+/home/viking/spam.txt
+```
+
+Join a table of structured paths into a list of paths
 ```shell
 > [[ parent stem extension ]; [ '/home/viking' 'spam' 'txt' ]] | path join
 ╭───┬───────────────────────╮

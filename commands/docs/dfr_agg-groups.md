@@ -2,7 +2,7 @@
 title: dfr agg-groups
 categories: |
   expression
-version: 0.82.0
+version: 0.83.0
 expression: |
   creates an agg_groups expression
 usage: |
