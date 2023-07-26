@@ -2,7 +2,7 @@
 title: split chars
 categories: |
   strings
-version: 0.82.0
+version: 0.83.0
 strings: |
   Split a string into a list of characters.
 usage: |
@@ -45,5 +45,27 @@ Split on grapheme clusters
 │ 1 │ ほ │
 │ 2 │ げ │
 ╰───┴────╯
+
+```
+
+Split multiple strings into lists of characters
+```shell
+> ['hello', 'world'] | split chars
+╭───┬───────────╮
+│ 0 │ ╭───┬───╮ │
+│   │ │ 0 │ h │ │
+│   │ │ 1 │ e │ │
+│   │ │ 2 │ l │ │
+│   │ │ 3 │ l │ │
+│   │ │ 4 │ o │ │
+│   │ ╰───┴───╯ │
+│ 1 │ ╭───┬───╮ │
+│   │ │ 0 │ w │ │
+│   │ │ 1 │ o │ │
+│   │ │ 2 │ r │ │
+│   │ │ 3 │ l │ │
+│   │ │ 4 │ d │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
 
 ```

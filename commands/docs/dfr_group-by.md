@@ -2,7 +2,7 @@
 title: dfr group-by
 categories: |
   lazyframe
-version: 0.82.0
+version: 0.83.0
 lazyframe: |
   Creates a group-by object that can be used for other aggregations.
 usage: |

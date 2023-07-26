@@ -2,7 +2,7 @@
 title: math abs
 categories: |
   math
-version: 0.82.0
+version: 0.83.0
 math: |
   Returns the absolute value of a number.
 usage: |
@@ -22,10 +22,10 @@ usage: |
 Compute absolute value of each number in a list of numbers
 ```shell
 > [-50 -100.0 25] | math abs
-╭───┬──────────╮
-│ 0 │       50 │
-│ 1 │ 100.0000 │
-│ 2 │       25 │
-╰───┴──────────╯
+╭───┬────────╮
+│ 0 │     50 │
+│ 1 │ 100.00 │
+│ 2 │     25 │
+╰───┴────────╯
 
 ```

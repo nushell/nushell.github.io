@@ -2,7 +2,7 @@
 title: random decimal
 categories: |
   random
-version: 0.82.0
+version: 0.83.0
 random: |
   Generate a random decimal within a range [min..max].
 usage: |

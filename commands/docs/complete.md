@@ -2,7 +2,7 @@
 title: complete
 categories: |
   system
-version: 0.82.0
+version: 0.83.0
 system: |
   Capture the outputs and exit code from an external piped in command in a nushell table.
 usage: |

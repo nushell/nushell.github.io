@@ -2,7 +2,7 @@
 title: into decimal
 categories: |
   conversions
-version: 0.82.0
+version: 0.83.0
 conversions: |
   Convert text into a decimal.
 usage: |
@@ -26,11 +26,11 @@ usage: |
 Convert string to decimal in table
 ```shell
 > [[num]; ['5.01']] | into decimal num
-╭───┬────────╮
-│ # │  num   │
-├───┼────────┤
-│ 0 │ 5.0100 │
-╰───┴────────╯
+╭───┬──────╮
+│ # │ num  │
+├───┼──────┤
+│ 0 │ 5.01 │
+╰───┴──────╯
 
 ```
 

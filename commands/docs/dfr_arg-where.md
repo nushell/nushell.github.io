@@ -2,7 +2,7 @@
 title: dfr arg-where
 categories: |
   expression
-version: 0.82.0
+version: 0.83.0
 expression: |
   Creates an expression that returns the arguments where expression is true.
 usage: |

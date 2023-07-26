@@ -2,7 +2,7 @@
 title: module
 categories: |
   core
-version: 0.82.0
+version: 0.83.0
 core: |
   Define a custom module.
 usage: |
@@ -35,12 +35,12 @@ foo
 
 Define an environment variable in a module
 ```shell
-> module foo { export-env { let-env FOO = "BAZ" } }; use foo; $env.FOO
+> module foo { export-env { $env.FOO = "BAZ" } }; use foo; $env.FOO
 BAZ
 ```
 
 Define a custom command that participates in the environment in a module and call it
 ```shell
-> module foo { export def-env bar [] { let-env FOO_BAR = "BAZ" } }; use foo bar; bar; $env.FOO_BAR
+> module foo { export def-env bar [] { $env.FOO_BAR = "BAZ" } }; use foo bar; bar; $env.FOO_BAR
 BAZ
 ```

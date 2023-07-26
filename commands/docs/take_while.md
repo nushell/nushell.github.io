@@ -2,7 +2,7 @@
 title: take while
 categories: |
   filters
-version: 0.82.0
+version: 0.83.0
 filters: |
   Take elements of the input while a predicate is true.
 usage: |

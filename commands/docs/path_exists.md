@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   default
-version: 0.82.0
+version: 0.83.0
 default: |
   Check whether a path exists.
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> path exists --columns```
-
-## Parameters
-
- -  `--columns {table}`: For a record or table input, check strings at the given columns, and replace with result
+```> path exists ```
 
 ## Notes
 This only checks if it is possible to either `open` or `cd` to the given path.
@@ -32,8 +28,12 @@ Check if a file exists
 false
 ```
 
-Check if a file exists in a column
+Check if files in list exist
 ```shell
-> ls | path exists -c [ name ]
+> [ /home/joe/todo.txt, /home/doe/todo.txt ] | path exists
+╭───┬───────╮
+│ 0 │ false │
+│ 1 │ false │
+╰───┴───────╯
 
 ```

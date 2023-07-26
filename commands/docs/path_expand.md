@@ -2,7 +2,7 @@
 title: path expand
 categories: |
   default
-version: 0.82.0
+version: 0.83.0
 default: |
   Try to expand a path to its absolute form.
 usage: |
@@ -15,13 +15,12 @@ usage: |
 
 ## Signature
 
-```> path expand --strict --no-symlink --columns```
+```> path expand --strict --no-symlink```
 
 ## Parameters
 
  -  `--strict` `(-s)`: Throw an error if the path could not be expanded
  -  `--no-symlink` `(-n)`: Do not resolve symbolic links
- -  `--columns {table}`: For a record or table input, expand strings at the given columns
 
 ## Examples
 
@@ -31,14 +30,18 @@ Expand an absolute path
 /home/joe/bar
 ```
 
-Expand a path in a column
-```shell
-> ls | path expand -c [ name ]
-
-```
-
 Expand a relative path
 ```shell
 > 'foo/../bar' | path expand
+
+```
+
+Expand a list of paths
+```shell
+> [ /foo/../bar, /foo/../baz ] | path expand
+╭───┬──────╮
+│ 0 │ /bar │
+│ 1 │ /baz │
+╰───┴──────╯
 
 ```

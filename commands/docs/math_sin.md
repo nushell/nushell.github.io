@@ -2,7 +2,7 @@
 title: math sin
 categories: |
   math
-version: 0.82.0
+version: 0.83.0
 math: |
   Returns the sine of the number.
 usage: |
@@ -32,12 +32,12 @@ Apply the sine to π/2
 Apply the sine to a list of angles in degrees
 ```shell
 > [0 90 180 270 360] | math sin -d | math round --precision 4
-╭───┬─────────╮
-│ 0 │  0.0000 │
-│ 1 │  1.0000 │
-│ 2 │  0.0000 │
-│ 3 │ -1.0000 │
-│ 4 │  0.0000 │
-╰───┴─────────╯
+╭───┬───────╮
+│ 0 │  0.00 │
+│ 1 │  1.00 │
+│ 2 │  0.00 │
+│ 3 │ -1.00 │
+│ 4 │  0.00 │
+╰───┴───────╯
 
 ```

@@ -2,7 +2,7 @@
 title: dfr summary
 categories: |
   dataframe
-version: 0.82.0
+version: 0.83.0
 dataframe: |
   For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.
 usage: |
@@ -29,16 +29,16 @@ list dataframe descriptives
 ╭───┬────────────┬─────────┬─────────╮
 │ # │ descriptor │ a (i64) │ b (i64) │
 ├───┼────────────┼─────────┼─────────┤
-│ 0 │ count      │  2.0000 │  2.0000 │
-│ 1 │ sum        │  2.0000 │  2.0000 │
-│ 2 │ mean       │  1.0000 │  1.0000 │
-│ 3 │ median     │  1.0000 │  1.0000 │
-│ 4 │ std        │  0.0000 │  0.0000 │
-│ 5 │ min        │  1.0000 │  1.0000 │
-│ 6 │ 25%        │  1.0000 │  1.0000 │
-│ 7 │ 50%        │  1.0000 │  1.0000 │
-│ 8 │ 75%        │  1.0000 │  1.0000 │
-│ 9 │ max        │  1.0000 │  1.0000 │
+│ 0 │ count      │    2.00 │    2.00 │
+│ 1 │ sum        │    2.00 │    2.00 │
+│ 2 │ mean       │    1.00 │    1.00 │
+│ 3 │ median     │    1.00 │    1.00 │
+│ 4 │ std        │    0.00 │    0.00 │
+│ 5 │ min        │    1.00 │    1.00 │
+│ 6 │ 25%        │    1.00 │    1.00 │
+│ 7 │ 50%        │    1.00 │    1.00 │
+│ 8 │ 75%        │    1.00 │    1.00 │
+│ 9 │ max        │    1.00 │    1.00 │
 ╰───┴────────────┴─────────┴─────────╯
 
 ```

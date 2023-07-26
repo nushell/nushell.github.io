@@ -2,7 +2,7 @@
 title: dfr get-weekday
 categories: |
   dataframe
-version: 0.82.0
+version: 0.83.0
 dataframe: |
   Gets weekday from date.
 usage: |

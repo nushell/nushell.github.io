@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.82.0
+version: 0.83.0
 filters: |
   Count the number of elements in the input.
 usage: |

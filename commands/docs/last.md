@@ -2,7 +2,7 @@
 title: last
 categories: |
   filters
-version: 0.82.0
+version: 0.83.0
 filters: |
   Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
 usage: |
@@ -23,7 +23,7 @@ usage: |
 
 ## Examples
 
-Get the last 2 items
+Return the last 2 items of a list/table
 ```shell
 > [1,2,3] | last 2
 ╭───┬───╮
@@ -33,8 +33,16 @@ Get the last 2 items
 
 ```
 
-Get the last item
+Return the last item of a list/table
 ```shell
 > [1,2,3] | last
 3
+```
+
+Return the last 2 bytes of a binary value
+```shell
+> 0x[01 23 45] | last 2
+Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+00000000:   23 45                                                #E
+
 ```

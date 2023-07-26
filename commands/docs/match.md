@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.82.0
+version: 0.83.0
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -52,4 +52,15 @@ Match against pipeline input
 ```shell
 > {a: {b: 3}} | match $in {{a: { $b }} => ($b + 10) }
 13
+```
+
+Match with a guard
+```shell
+>
+                    match [1 2 3] {
+                        [$x, ..$y] if $x == 1 => { 'good list' },
+                        _ => { 'not a very good list' }
+                    }
+
+good list
 ```

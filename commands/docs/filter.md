@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.82.0
+version: 0.83.0
 filters: |
   Filter values based on a predicate closure.
 usage: |
@@ -54,5 +54,16 @@ Filter rows of a table according to a stored condition
 ├───┼───┤
 │ 0 │ 2 │
 ╰───┴───╯
+
+```
+
+Filter items of a range according to a condition
+```shell
+> 9..13 | filter {|el| $el mod 2 != 0}
+╭───┬────╮
+│ 0 │  9 │
+│ 1 │ 11 │
+│ 2 │ 13 │
+╰───┴────╯
 
 ```

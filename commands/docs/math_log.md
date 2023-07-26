@@ -2,7 +2,7 @@
 title: math log
 categories: |
   math
-version: 0.82.0
+version: 0.83.0
 math: |
   Returns the logarithm for an arbitrary base.
 usage: |
@@ -32,10 +32,10 @@ Get the logarithm of 100 to the base 10
 Get the log2 of a list of values
 ```shell
 > [16 8 4] | math log 2
-╭───┬────────╮
-│ 0 │ 4.0000 │
-│ 1 │ 3.0000 │
-│ 2 │ 2.0000 │
-╰───┴────────╯
+╭───┬──────╮
+│ 0 │ 4.00 │
+│ 1 │ 3.00 │
+│ 2 │ 2.00 │
+╰───┴──────╯
 
 ```

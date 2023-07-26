@@ -2,7 +2,7 @@
 title: math round
 categories: |
   math
-version: 0.82.0
+version: 0.83.0
 math: |
   Returns the input number rounded to the specified precision.
 usage: |
@@ -37,11 +37,11 @@ Apply the round function to a list of numbers
 Apply the round function with precision specified
 ```shell
 > [1.555 2.333 -3.111] | math round -p 2
-╭───┬─────────╮
-│ 0 │  1.5600 │
-│ 1 │  2.3300 │
-│ 2 │ -3.1100 │
-╰───┴─────────╯
+╭───┬───────╮
+│ 0 │  1.56 │
+│ 1 │  2.33 │
+│ 2 │ -3.11 │
+╰───┴───────╯
 
 ```
 

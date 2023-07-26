@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   default
-version: 0.82.0
+version: 0.83.0
 default: |
   Get the parent directory of a path.
 usage: |
@@ -15,11 +15,10 @@ usage: |
 
 ## Signature
 
-```> path dirname --columns --replace --num-levels```
+```> path dirname --replace --num-levels```
 
 ## Parameters
 
- -  `--columns {table}`: For a record or table input, convert strings at the given columns to their dirname
  -  `--replace {string}`: Return original path with dirname replaced by this string
  -  `--num-levels {int}`: Number of directories to walk up
 
@@ -31,9 +30,13 @@ Get dirname of a path
 /home/joe/code
 ```
 
-Get dirname of a path in a column
+Get dirname of a list of paths
 ```shell
-> ls ('.' | path expand) | path dirname -c [ name ]
+> [ /home/joe/test.txt, /home/doe/test.txt ] | path dirname
+╭───┬───────────╮
+│ 0 │ /home/joe │
+│ 1 │ /home/doe │
+╰───┴───────────╯
 
 ```
 

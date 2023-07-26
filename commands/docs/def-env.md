@@ -2,7 +2,7 @@
 title: def-env
 categories: |
   core
-version: 0.82.0
+version: 0.83.0
 core: |
   Define a custom command, which participates in the caller environment.
 usage: |
@@ -33,6 +33,6 @@ This command is a parser keyword. For details, check:
 
 Set environment variable by call a custom command
 ```shell
-> def-env foo [] { let-env BAR = "BAZ" }; foo; $env.BAR
+> def-env foo [] { $env.BAR = "BAZ" }; foo; $env.BAR
 BAZ
 ```

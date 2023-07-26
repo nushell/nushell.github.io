@@ -2,7 +2,7 @@
 title: sleep
 categories: |
   platform
-version: 0.82.0
+version: 0.83.0
 platform: |
   Delay for a specified amount of time.
 usage: |

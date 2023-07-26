@@ -2,7 +2,7 @@
 title: path type
 categories: |
   default
-version: 0.82.0
+version: 0.83.0
 default: |
   Get the type of the object a path refers to (e.g., file, dir, symlink).
 usage: |
@@ -15,11 +15,7 @@ usage: |
 
 ## Signature
 
-```> path type --columns```
-
-## Parameters
-
- -  `--columns {table}`: For a record or table input, check strings at the given columns, and replace with result
+```> path type ```
 
 ## Notes
 This checks the file system to confirm the path's object type.
@@ -32,8 +28,8 @@ Show type of a filepath
 dir
 ```
 
-Show type of a filepath in a column
+Show type of a filepaths in a list
 ```shell
-> ls | path type -c [ name ]
+> ls | get name | path type
 
 ```

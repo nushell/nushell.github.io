@@ -2,7 +2,7 @@
 title: path relative-to
 categories: |
   default
-version: 0.82.0
+version: 0.83.0
 default: |
   Express a path as relative to another path.
 usage: |
@@ -15,12 +15,11 @@ usage: |
 
 ## Signature
 
-```> path relative-to (path) --columns```
+```> path relative-to (path)```
 
 ## Parameters
 
  -  `path`: Parent shared with the input path
- -  `--columns {table}`: For a record or table input, convert strings at the given columns
 
 ## Notes
 Can be used only when the input and the argument paths are either both
@@ -34,9 +33,13 @@ Find a relative path from two absolute paths
 viking
 ```
 
-Find a relative path from two absolute paths in a column
+Find a relative path from absolute paths in list
 ```shell
-> ls ~ | path relative-to ~ -c [ name ]
+> [ /home/viking, /home/spam ] | path relative-to '/home'
+╭───┬────────╮
+│ 0 │ viking │
+│ 1 │ spam   │
+╰───┴────────╯
 
 ```
 
