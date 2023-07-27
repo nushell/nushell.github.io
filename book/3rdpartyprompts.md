@@ -19,13 +19,13 @@ If you like [oh-my-posh](https://ohmyposh.dev/), you can use oh-my-posh with Nus
 1. Install Oh My Posh and download oh-my-posh's themes following [guide](https://ohmyposh.dev/docs/installation/linux).
 2. Download and install a [nerd font](https://github.com/ryanoasis/nerd-fonts).
 3. Generate the .oh-my-posh.nu file. By default it will be generated to your home directory. You can use `--config` to specify a theme, other wise, oh-my-posh comes with a default theme.
-4. Initilize oh-my-posh prompt by adding in ~/.config/nushell/config.nu(or the path output by `$nu.config-path`) to source ~/.oh-my-posh.nu.
+4. Initialize oh-my-posh prompt by adding in ~/.config/nushell/config.nu(or the path output by `$nu.config-path`) to source ~/.oh-my-posh.nu.
 
 ```shell
 # Generate the .oh-my-posh.nu file
 > oh-my-posh init nu --config ~/.poshthemes/M365Princess.omp.json 
 
-# Initilize oh-my-posh.nu at shell startup by adding this line in your config.nu file
+# Initialize oh-my-posh.nu at shell startup by adding this line in your config.nu file
 > source ~/.oh-my-posh.nu
 ```
 
