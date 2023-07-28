@@ -33,15 +33,13 @@ The environment is initially created from the Nu [configuration files](configura
 
 There are several ways to set an environment variable:
 
-### [`let-env`](/commands/docs/let-env.html)
+### $env.VAR assignment
 
-Using the [`let-env`](/commands/docs/let-env.md) command is the most straightforward method
+Using the `$env.VAR = "val"` is the most straightforward method
 
 ```
 > $env.FOO = 'BAR'
 ```
-
-'let-env' is similar to the **export** command in Bash.
 
 So, if you want to extend the Windows `Path` variable, for example, you could do that as follows.
 
