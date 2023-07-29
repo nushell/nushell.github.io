@@ -16,5 +16,5 @@ Just like Unix shells, Nushell commands can be composed into [pipelines](pipelin
 Some data types have interesting features that deserve their own sections: [strings](working_with_strings.md), [lists](working_with_lists.md), and [tables](working_with_tables.md).
 Apart from explaining the features, these sections also show how to do some common operations, such as composing strings or updating values in a list.
 
-Finally, [Command Reference](/commands/README.md) lists all the built-in commands with brief descriptions.
+Finally, [Command Reference](/commands/) lists all the built-in commands with brief descriptions.
 Note that you can also access this info from within Nushell using the [`help`](/commands/docs/help.md) command.
