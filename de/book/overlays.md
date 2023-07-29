@@ -132,7 +132,7 @@ Die Lösung dafür ist, eine leere Überlagerung zu erstellen und die Definition
 
 (spam)> module scratchpad { }
 
-(spam)> overlay new scratchpad
+(spam)> overlay use scratchpad
 
 (scratchpad)> def eggs [] { "eggs" }
 ```

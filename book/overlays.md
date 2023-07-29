@@ -135,7 +135,7 @@ The solution can be to create a new empty overlay that would be used just for re
 
 (spam)> module scratchpad { }
 
-(spam)> overlay new scratchpad
+(spam)> overlay use scratchpad
 
 (scratchpad)> def eggs [] { "eggs" }
 ```
