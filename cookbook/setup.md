@@ -21,7 +21,7 @@ If you want to append a folder to your `PATH` environment variable you can do th
 > let-env PATH = ($env.PATH | append "some/other/path")
 ```
 
-For more detailed instructions, see the environment variables documentation [here](https://github.com/nushell/nushell/blob/main/docs/Environment_Variables.md)
+For more detailed instructions, see the environment variables documentation [here](/book/environment.html#setting-environment-variables)
 
 ### How to list your environment variables
 
