@@ -105,7 +105,7 @@ cargo は Nu とそのソースの依存関係をダウンロードし、ビル�
 上で示したすべての依存関係がシステムにあることを確認してください。
 インストールが完了すると、`nu`コマンドで Nu を実行できます。
 
-@[code](@snippets/installation/crates_run_nu.sh)
+@[code](@snippets/installation/run_nu.sh)
 
 ## ソースからビルド
 
