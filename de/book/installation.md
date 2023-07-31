@@ -98,7 +98,7 @@ Damit das funktioniert, sollte sichergestellt werden, dass alle oben genannten A
 
 Wenn Nu schließlich installiert ist, kann die Shell mit dem `nu`-Befehl gestartet werden:
 
-@[code](@snippets/installation/crates_run_nu.sh)
+@[code](@snippets/installation/run_nu.sh)
 
 ## Kompilieren von Quelldateien
 

@@ -86,7 +86,7 @@ Nu 发行版会作为源码发布到流行的 Rust 包仓库 [crates.io](https:/
 
 安装完毕后，我们可以使用 `nu` 命令运行 Nu：
 
-@[code](@snippets/installation/crates_run_nu.sh)
+@[code](@snippets/installation/run_nu.sh)
 
 ### 从 GitHub 仓库构建
 
