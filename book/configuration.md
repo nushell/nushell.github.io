@@ -34,7 +34,7 @@ By convention, this variable is defined in the `config.nu` file.
 
 ### Environment
 
-You can set environment variables for the duration of a Nushell session using [`let-env`](/commands/docs/let-env.html) calls inside the `env.nu` file. For example:
+You can set environment variables for the duration of a Nushell session using the `$env.<var> = <val>` structure inside the `env.nu` file. For example:
 
 ```
 $env.FOO = 'BAR'
@@ -80,13 +80,13 @@ To use Nu as a login shell, you'll need to configure the `$env` variable. This s
 
 To get an idea of which environment variables are set up by your current login shell, start a new shell session, then run nu in that shell.
 
-You can then configure `let-env` commands that setup the same environment variables in your nu login shell. Use this command to generate `let-env` commands for all the environment variables:
+You can then configure some `$env.<var> = <val>` that setup the same environment variables in your nu login shell. Use this command to generate some `$env.<var> = <val>` for all the environment variables:
 
 ```nu
 $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r.val)'"} | str join (char nl)
 ```
 
-This will print out [`let-env`](/commands/docs/let-env.html) lines, one for each environment variable along with its setting. You may not need all of them, for instance the `PS1` variable is bash specific.
+This will print out `$env.<var> = <val>` lines, one for each environment variable along with its setting. You may not need all of them, for instance the `PS1` variable is bash specific.
 
 Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
@@ -125,7 +125,7 @@ alias open = ^open
 
 ## PATH configuration
 
-In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use [`let-env`](/commands/docs/let-env.html) and [`append`](/commands/docs/append.html) in `env.nu`:
+In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use `$env.<var> = <val>` and [`append`](/commands/docs/append.html) in `env.nu`:
 
 ```
 $env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
