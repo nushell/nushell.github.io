@@ -243,7 +243,7 @@ foo
 让我们看几个例子。前面已经看到了直接隐藏一个自定义命令的例子，现在让我们试试环境变量：
 
 ```bash
-> let-env FOO = "FOO"
+> $env.FOO = "FOO"
 
 > $env.FOO
 FOO

@@ -37,11 +37,11 @@ Hinweis: Diese Tabelle geht von Nu 0.59 oder neuer aus.
 | `stat $(which git)`                  | `stat (which git).path`                          | Ausgabe eines Befehls als Eingabe für einen anderen Befehl verwenden                                          |
 | `echo $PATH`                         | `echo $env.PATH`                                 | Aktuelle PATH-Variable anzeigen                                                                               |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | PATH permanent ändern                                                                                         |
-| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)`  | PATH temporär ändern                                                                                    |
+| `export PATH = $PATH:/usr/other/bin` | `$env.PATH = ($env.PATH \| append /usr/other/bin)`  | PATH temporär ändern                                                                                    |
 | `export`                             | `echo $env`                                      | Anzeigen der aktuellen Umgebungsvariablen                                                                     |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | Umgebungsvariablen permanent ändern                                                                           |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | Umgebungsvariablen temporär ändern                                                                            |
-| `export FOO=BAR`                     | `let-env FOO = BAR`                              | Umgebungsvariable für aktuelle Sitzung setzen                                                                 |
+| `export FOO=BAR`                     | `$env.FOO = BAR`                              | Umgebungsvariable für aktuelle Sitzung setzen                                                                 |
 | `echo $FOO`                          | `echo $env.FOO`                                  | Umgebungsvariablen nutzen                                                                                     |
 | `unset FOO`                          | `hide FOO`                                       | Umgebungsvariable für aktuelle Sitzung verbergen                                                              |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                       | Alias temporär definieren                                                                                     |

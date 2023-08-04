@@ -32,7 +32,7 @@ Es gibt mehrere Möglichkeiten eine Umgebungsvariable zu setzen:
 Der `let-env` Befehl ist der direkteste Weg:
 
 ```
-> let-env FOO = 'BAR'
+> $env.FOO = 'BAR'
 ```
 
 `let-env` ist ähnlich wie der **export** Befehl in der bash.
@@ -40,7 +40,7 @@ Der `let-env` Befehl ist der direkteste Weg:
 Um zum Beispiel die `PATH` Variable zu ergänzen, wird folgendes eingegeben:
 
 ```
-let-env PATH = ($env.PATH | prepend '/pfad/der/hinzu/kommt')
+$env.PATH = ($env.PATH | prepend '/pfad/der/hinzu/kommt')
 ```
 
 Mit `prepend` wird der Ordner an den Anfang von PATH gestellt und hat damit die höchste Priorität.
@@ -75,9 +75,9 @@ Wenn eine Umgebungsvariable gesetzt wird, ist sie nur in ihrem Gültigkeitsberei
 Hier ein kleines Beispiel um den Gültigkeitsbereich zu demonstrieren:
 
 ```
-> let-env FOO = "BAR"
+> $env.FOO = "BAR"
 > do {
-    let-env FOO = "BAZ"
+    $env.FOO = "BAZ"
     $env.FOO == "BAZ"
 }
 true
@@ -117,7 +117,7 @@ Zum Beispiel:
 
 ```
 # In config.nu
-let-env FOO = 'BAR'
+$env.FOO = 'BAR'
 ```
 
 ## Definition einer Umgebungsvariablen für selbst definierten Befehl
@@ -128,7 +128,7 @@ Wird sie jedoch mit [`dev-env`](/commands/docs/def-env.html) anstatt [`def`](/co
 
 ```
 > def-env foo [] {
-    let-env FOO = 'BAR'
+    $env.FOO = 'BAR'
 }
 
 > foo
@@ -152,7 +152,7 @@ Zur Illustration hier ein Beispiel.
 Diese Zeilen gehören in config.nu:
 
 ```
-let-env ENV_CONVERSIONS = {
+$env.ENV_CONVERSIONS = {
     # ... you might have Path and PATH already there, add:
     FOO : {
         from_string: { |s| $s | split row '-' }
@@ -206,7 +206,7 @@ Alle Umgebungsvariablen in env.nu und config.nu sind immer noch Strings solange 
 Umgebungsvariablen können im aktuellen Gültigkeitsbereich entfernt werden via [`hide`](/commands/docs/hide.html):
 
 ```
-> let-env FOO = 'BAR'
+> $env.FOO = 'BAR'
 ...
 > hide FOO
 ```
@@ -214,7 +214,7 @@ Umgebungsvariablen können im aktuellen Gültigkeitsbereich entfernt werden via 
 Dieses Verstecken im Gültigkeitsbereich erlaubt es gleichzeitig temporär eine Variabel zu entfernen ohne dass man die höher gelegene Umgebung modifiziert wird:
 
 ```
-> let-env FOO = 'BAR'
+> $env.FOO = 'BAR'
 > do {
     hide FOO
     # $env.FOO does not exist

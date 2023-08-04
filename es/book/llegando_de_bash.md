@@ -39,8 +39,8 @@ Nota: Esta tabla asume Nushell 0.14.1 or posterior.
 | `export`                             | `echo $nu.env`                                                    | List the current environment variables                                                     |
 | `<update ~/.bashrc>`                 | `echo $nu.env \| insert var value \| config set_into env`         | Update environment variables permanently                                                   |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                                   | Update environment temporarily                                                             |
-| `export FOO=BAR`                     | `let-env FOO = BAR`                                               | Set environment variable for current session                                               |
-| `unset FOO`                          | `let-env FOO = $nothing`                                          | Unset environment variable for current session                                             |
+| `export FOO=BAR`                     | `$env.FOO = BAR`                                               | Set environment variable for current session                                               |
+| `unset FOO`                          | `$env.FOO = $nothing`                                          | Unset environment variable for current session                                             |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                                        | Define an alias temporarily                                                                |
 | `<update ~/.bashrc>`                 | `config set [startup ["alias myecho [msg] { echo Hello $msg }"]]` | Add a first alias permanently (for new shells)                                             |
 | `<update ~/.bashrc>`                 | `config get startup \| append "alias s [] { git status -sb }" \| config set_into startup`  | Add an additional alias permanently (for new shells)              |

@@ -17,7 +17,7 @@ Tabellen Rahmen werden mit der Einstellung `table_mode` in der `config.nu` konfi
 Hier ein Beispiel:
 
 ```shell
-> let-env config = {
+> $env.config = {
     table_mode: rounded
 }
 ```
@@ -352,7 +352,7 @@ Hier die aktuelle Formen Liste.
 Hier ein kleines Beispiel wie Farben auf diese Teile angewendet werden. Was nicht spezifiziert wird, erhält die Standardfarbe.
 
 ```shell
-> let-env config = {
+> $env.config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
         shape_bool: green
@@ -375,13 +375,13 @@ Der Nushell Prompt ist konfigurierbar mit diesen Umgebungsvariablen:
 Beispiel: Für einen einfachen Prompt wäre folgendes mögllich. Hinweis `PROMPT_COMMAND` benötigt einen `block` wogegen die anderen einen `string` erwarten.
 
 ```shell
-> let-env PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
+> $env.PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 Soll der standard `PROMPT_INDICATOR` geändert werden, sieht das so aus.
 
 ```shell
-> let-env PROMPT_INDICATOR = "> "
+> $env.PROMPT_INDICATOR = "> "
 ```
 
 Den Prompt einfärben wird duch den `block` `PROMPT_COMMAND` kontrolliert und individualisiert.
@@ -403,7 +403,7 @@ Es finden sich sicher noch viele mehr im Internet.
 
 Freunde der `vivid` Anwendung finden Informationen [hier](https://github.com/sharkdp/vivid). Die Konfiguration in `config.nu` erfolgt so:
 
-`let-env LS_COLORS = (vivid generate molokai | str trim)`
+`$env.LS_COLORS = (vivid generate molokai | str trim)`
 
 Ist `LS_COLORS` nicht gesetzt, wird Nushell auf die eingebaute `LS_COLORS` Einstellung zurückgreifen, welche auf den erweiterten 8-bit ANSI Farben aufbaut.
 

@@ -30,7 +30,7 @@ Nushell 中使用的环境变量的实际值在`value`列下。
 使用`let-env`命令是最直接的方法：
 
 ```bash
-> let-env FOO = 'BAR'
+> $env.FOO = 'BAR'
 ```
 
 `let-env` 类似于 bash 中的 **export** 命令。
@@ -38,7 +38,7 @@ Nushell 中使用的环境变量的实际值在`value`列下。
 因此，如果你想扩展`PATH`变量，你可以这样做：
 
 ```bash
-let-env PATH = ($env.PATH | prepend '/path/you/want/to/add')
+$env.PATH = ($env.PATH | prepend '/path/you/want/to/add')
 ```
 
 在这里，我们把指定文件夹前置添加到`PATH`中的现有路径中，所以它将有最高的优先级。
@@ -81,9 +81,9 @@ BAR
 这里有一个小例子来演示环境变量作用域：
 
 ```bash
-> let-env FOO = "BAR"
+> $env.FOO = "BAR"
 > do {
-    let-env FOO = "BAZ"
+    $env.FOO = "BAZ"
     $env.FOO == "BAZ"
 }
 true
@@ -123,7 +123,7 @@ BAR
 
 ```bash
 # In config.nu
-let-env FOO = 'BAR'
+$env.FOO = 'BAR'
 ```
 
 ## 从自定义命令中定义环境变量
@@ -133,7 +133,7 @@ let-env FOO = 'BAR'
 
 ```bash
 > def-env foo [] {
-    let-env FOO = 'BAR'
+    $env.FOO = 'BAR'
 }
 
 > foo
@@ -154,7 +154,7 @@ BAR
 把以下内容放在你的`config.nu`中：
 
 ```bash
-let-env ENV_CONVERSIONS = {
+$env.ENV_CONVERSIONS = {
     # ... you might have Path and PATH already there, add:
     FOO : {
         from_string: { |s| $s | split row '-' }
@@ -203,7 +203,7 @@ _(重要! 环境转换字符串->值发生在 `env.nu` 和 `config.nu` 被运行
 只有当一个环境变量被设置在当前作用域中时，你才能通过 [`hide`](/commands/docs/hide.html) 命令“删除”它：
 
 ```bash
-> let-env FOO = 'BAR'
+> $env.FOO = 'BAR'
 ...
 > hide FOO
 ```
@@ -211,7 +211,7 @@ _(重要! 环境转换字符串->值发生在 `env.nu` 和 `config.nu` 被运行
 隐藏也是有作用域的，这既允许你暂时删除一个环境变量，又可以防止你从子作用域内修改父环境：
 
 ```bash
-> let-env FOO = 'BAR'
+> $env.FOO = 'BAR'
 > do {
     hide FOO
     # $env.FOO does not exist

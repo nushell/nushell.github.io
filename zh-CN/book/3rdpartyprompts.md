@@ -21,7 +21,7 @@ Nerdfonts 并不是必需的，但它们能使呈现效果更好。
 3. 在`~/.config/nushell/config.nu`（或由`$nu.config-path`输出的路径）中设置`PROMPT_COMMAND`，将`M365Princess.mp.json`改为你喜欢的任何 [主题](https://ohmyposh.dev/docs/themes)。
 
 ```shell
-> let-env PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
+> $env.PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
 ```
 
 MacOS 用户配置步骤：
@@ -36,9 +36,9 @@ let posh_theme = $'($posh_dir)/share/oh-my-posh/themes/'
 # Change the theme names to: zash/space/robbyrussel/powerline/powerlevel10k_lean/
 # material/half-life/lambda Or double lines theme: amro/pure/spaceship, etc.
 # For more [Themes demo](https://ohmyposh.dev/docs/themes)
-let-env PROMPT_COMMAND = { oh-my-posh prompt print primary --config $'($posh_theme)/zash.omp.json' }
+$env.PROMPT_COMMAND = { oh-my-posh prompt print primary --config $'($posh_theme)/zash.omp.json' }
 # Optional
-let-env PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
+$env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 ```
 
 ## Starship
@@ -54,22 +54,22 @@ let-env PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 下面是一个关于 Starship 的配置示例：
 
 ```bash
-let-env STARSHIP_SHELL = "nu"
+$env.STARSHIP_SHELL = "nu"
 
 def create_left_prompt [] {
     starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)'
 }
 
 # Use nushell functions to define your right and left prompt
-let-env PROMPT_COMMAND = { create_left_prompt }
-let-env PROMPT_COMMAND_RIGHT = ""
+$env.PROMPT_COMMAND = { create_left_prompt }
+$env.PROMPT_COMMAND_RIGHT = ""
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
-let-env PROMPT_INDICATOR = ""
-let-env PROMPT_INDICATOR_VI_INSERT = ": "
-let-env PROMPT_INDICATOR_VI_NORMAL = "〉"
-let-env PROMPT_MULTILINE_INDICATOR = "::: "
+$env.PROMPT_INDICATOR = ""
+$env.PROMPT_INDICATOR_VI_INSERT = ": "
+$env.PROMPT_INDICATOR_VI_NORMAL = "〉"
+$env.PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
 然后重启 Nushell：
