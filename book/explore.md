@@ -4,7 +4,7 @@ Explore is a table pager, just like `less` but for table structured data.
 
 ## Signature
 
-`> table --head --index --reverse --peek`
+`> explore --head --index --reverse --peek`
 
 ### Parameters
 
