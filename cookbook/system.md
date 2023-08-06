@@ -4,7 +4,7 @@ title: System
 
 # System
 
-Nu offers many commands and plugins that help navigate a command-line interface, interface with the filesystem, and monitor your system.
+Nu offers many commands that help interface with the filesystem and control your operating system.
 
 ### View all files in the current directory
 
@@ -89,7 +89,7 @@ Output
 
 ### Find and kill a hanging process
 
-Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process.
+Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process:
 
 ```shell
 > ps | where name == Notepad2.exe
@@ -108,7 +108,7 @@ Output
 This process can be sent the kill signal in a one-liner:
 
 ```shell
-> ps | where name == Notepad2.exe | get pid.0 | kill -9 $in
+> ps | where name == Notepad2.exe | get pid.0 | kill $in
 ```
 
 Output
@@ -121,5 +121,5 @@ Output
 
 Notes:
 
-- `kill` is Linux/Unix specific command, it is not built-in to nu.
-- filtering with the `where` command, as shown above, is case-sensitive.
+- `kill` is a built-in Nu command that works on all platforms. If you wish to use the classic Unix `kill` command, you can do so with `^kill`.
+- Filtering with the `where` command as shown above is case-sensitive.
