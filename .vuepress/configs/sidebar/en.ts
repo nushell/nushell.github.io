@@ -141,7 +141,7 @@ export const sidebarEn: SidebarConfig = {
         'parsing_git_log',
         'http',
         'direnv',
-        'misc',
+        'ssh_agent',
         'tables',
         'polars_v_pandas_v_nushell',
       ],

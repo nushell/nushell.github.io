@@ -1,5 +1,5 @@
 ---
-title: Miscellaneous
+title: ssh-agent
 ---
 
 # Manage SSH passphrases
@@ -15,7 +15,3 @@ ssh-agent -c
     | into record
     | load-env
 ```
-
-# Miscellaneous
-
-- To finish or "accept" an autocomplete command, press the right arrow key. This can also be changed by changing the keybindings in the `config.nu` file.
