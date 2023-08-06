@@ -4,44 +4,25 @@ title: Help
 
 # Help
 
-A good way to become familiar with all that nu has to offer is by utilizing the `help` command.
+The `help` command is a good way to become familiar with all that Nu has to offer.
 
 ### How to see all supported commands:
 
 ```shell
-> help commands | where command_type != builtin | first 10 | drop column 2
-```
-
-Output
-
-```
-───┬─────────────────────┬──────────┬──────────────┬───────────────────────────────────────────────────────────────────────
- # │        name         │ category │ command_type │                                 usage                                 
-───┼─────────────────────┼──────────┼──────────────┼───────────────────────────────────────────────────────────────────────
- 0 │ alias               │ core     │ keyword      │ Alias a command (with optional flags) to a new name                   
- 1 │ break               │ core     │ keyword      │ Break a loop                                                          
- 2 │ continue            │ core     │ keyword      │ Continue a loop from the next iteration                               
- 3 │ create_left_prompt  │ default  │ custom       │                                                                       
- 4 │ create_right_prompt │ default  │ custom       │                                                                       
- 5 │ def                 │ core     │ keyword      │ Define a custom command                                               
- 6 │ def-env             │ core     │ keyword      │ Define a custom command, which participates in the caller environment 
- 7 │ export              │ core     │ keyword      │ Export definitions or environment variables from a module.            
- 8 │ export alias        │ core     │ keyword      │ Define an alias and export it from a module                           
- 9 │ export def          │ core     │ keyword      │ Define a custom command and export it from a module                   
-───┴─────────────────────┴──────────┴──────────────┴───────────────────────────────────────────────────────────────────────
+> help commands
 ```
 
 ---
 
 ### Specific information on a command
 
-To find more specific information on a command, use `help <COMMAND>`.
+To find more specific information on a command, use `help <COMMAND>`. This works for regular commands (i.e. `http`) and subcommands (i.e. `http get`):
 
 ```shell
 > help http get
 ```
 
-Output
+Output:
 
 ```
 Fetch the contents from a URL.
@@ -76,34 +57,4 @@ Examples:
 
   http get content from example.com, with custom header
   > http get -H [my-header-key my-header-value] https://www.example.com
-```
-
----
-
-### Specific information on a command subcommand
-
-To find more specific information on a command subcommand, use `help <COMMAND> <SUBCOMMAND>`.
-
-```shell
-> help str reverse
-```
-
-Output
-
-```
-outputs the reversals of the strings in the pipeline
-
-Usage:
-  > str reverse ...(rest)
-
-Flags:
-  -h, --help
-      Display this help message
-
-Parameters:
-  ...rest: optionally reverse text by column paths
-
-Examples:
-  Return the reversals of multiple strings
-  > 'Nushell' | str reverse
 ```
