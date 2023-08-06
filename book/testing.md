@@ -7,19 +7,20 @@ The [standard library](standard_library.md) has a unit testing framework to ensu
 Have a file, called `test_math.nu`:
 
 ```nushell
-use std "assert"
-use std "assert equal"
-use std "assert skip"
+use std assert
 
-export def test_addition [] {
+#[test]
+def test_addition [] {
     assert equal (1 + 2) 3
 }
 
-export def test_skip [] {
+#[test]
+def test_skip [] {
     assert skip
 }
 
-export def test_failing [] {
+#[test]
+def test_failing [] {
     assert false "This is just for testing"
 }
 ```
@@ -27,13 +28,13 @@ export def test_failing [] {
 Run the tests:
 
 ```
-❯ use std
-❯ std run-tests
+❯ use std testing run-tests
+❯ run-tests
 INF|2023-04-12T10:42:29.099|Running tests in test_math
 Error:
   × This is just for testing
     ╭─[C:\wip\test_math.nu:13:1]
- 13 │ export def test_failing [] {
+ 13 │ def test_failing [] {
  14 │     assert false "This is just for testing"
     ·            ──┬──
     ·              ╰── It is not true.
@@ -137,11 +138,18 @@ Error:
 
 ## Test modules & test cases
 
-The naming convention for test modules is `test_<your_module>.nu`.
+The naming convention for test modules is `test_<your_module>.nu` and `test_<test name>` for test cases.
 
-The test case commands must be exported commands with `test_<test name>` naming convention, without any required parameters.
+In order for a function to be recognized as a test by the test runner it needs to be annotated with `#[test]`.
 
-You also can define `setup` and `teardown` methods, which will be executed before and after every test case, even if they are failed or skipped. A context can be created in the setup command, which will be the input (`$in` variable) in the test case and the `teardown` command.
+The following annotations are supported by the test runner:
+
+* test        - test case to be executed during test run
+* test-skip   - test case to be skipped during test run
+* before-all  - function to run at the beginning of test run. Returns a global context record that is piped into every test function
+* before-each - function to run before every test case. Returns a per-test context record that is merged with global context and piped into test functions
+* after-each  - function to run after every test case. Receives the context record just like the test cases
+* after-all   - function to run after all test cases have been executed. Receives the global context record
 
 The standard library itself is tested with this framework, so you can find many examples in the [Nushell repository](https://github.com/nushell/nushell/blob/main/crates/nu-std/tests/).
 
