@@ -4,7 +4,7 @@ categories: |
   deprecated
 version: 0.83.0
 deprecated: |
-  Deprecated command.
+  Deprecated command. Use `str join` instead.
 usage: |
   Deprecated command.
 ---
