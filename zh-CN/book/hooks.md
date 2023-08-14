@@ -24,7 +24,7 @@
 要想使用钩子需要先在 [配置](configuration.md) 中定义它们：
 
 ```shell
-let-env config = {
+$env.config = {
     # ...other config...
 
     hooks: {
@@ -43,7 +43,7 @@ let-env config = {
 可以为每个触发器只定义一个钩子，也可以定义一个**钩子列表**，让其依次运行：
 
 ```shell
-let-env config = {
+$env.config = {
     ...other config...
 
     hooks: {
@@ -68,7 +68,7 @@ let-env config = {
 另外，用新的钩子更新现有的配置，而不是从头开始定义整个配置可能更实用：
 
 ```shell
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: ...
     pre_execution: ...
     env_change: {
@@ -84,8 +84,8 @@ let-env config = ($env.config | upsert hooks {
 你可以用下面的例子测试一下：
 
 ```shell
-> let-env config = ($env.config | upsert hooks {
-    pre_prompt: { let-env SPAM = "eggs" }
+> $env.config = ($env.config | upsert hooks {
+    pre_prompt: { $env.SPAM = "eggs" }
 })
 
 > $env.SPAM
@@ -99,7 +99,7 @@ eggs
 你可能很想做的一件事是，每当你进入一个目录时，就激活一个环境：
 
 ```
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
             {|before, after|
@@ -118,7 +118,7 @@ let-env config = ($env.config | upsert hooks {
 为了处理上述问题，我们引入了另一种定义钩子的方式 -- **记录**：
 
 ```shell
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
             {
@@ -146,8 +146,8 @@ let-env config = ($env.config | upsert hooks {
 所以，上一节中的钩子也可以写成：
 
 ```shell
-> let-env config = ($env.config | upsert hooks {
-    pre_prompt: 'let-env SPAM = "eggs"'
+> $env.config = ($env.config | upsert hooks {
+    pre_prompt: '$env.SPAM = "eggs"'
 })
 
 > $env.SPAM
@@ -157,7 +157,7 @@ eggs
 这个功能可以用来，例如，根据当前目录有条件地引入定义：
 
 ```shell
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
             {
@@ -176,7 +176,7 @@ let-env config = ($env.config | upsert hooks {
 当把钩子定义为字符串时，`$before` 和 `$after` 变量分别被设置为之前和当前的环境变量值，这与前面的例子类似：
 
 ```shell
-let-env config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: {
             code: 'print $"changing directory from ($before) to ($after)"'
@@ -192,7 +192,7 @@ let-env config = ($env.config | upsert hooks {
 一个关于 `PWD` 环境变化的例子：
 
 ```shell
-let-env config = ($env.config | upsert hooks.env_change.PWD {|config|
+$env.config = ($env.config | upsert hooks.env_change.PWD {|config|
     let val = ($config | get -i hooks.env_change.PWD)
 
     if $val == $nothing {
@@ -210,7 +210,7 @@ let-env config = ($env.config | upsert hooks.env_change.PWD {|config|
 以下代码将在进入一个目录（'/path/to/target/dir'）后寻找 `test-env.nu` 并加载，而在离开该目录的时候移除相关定义（除了 `PWD` 环境变量）：
 
 ```shell
-let-env config = ($env.config | upsert hooks.env_change.PWD {
+$env.config = ($env.config | upsert hooks.env_change.PWD {
     [
         {
             condition: {|_, after|

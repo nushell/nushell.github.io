@@ -4,7 +4,7 @@
 要使这些命令在`nu`中可用，请在你的`config.nu`中添加以下一行，用`append`或`prepend`。
 
 ```bash
-let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
+$env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 
 注意：本表针对 Nu 0.60.0 或更高版本。
@@ -44,11 +44,11 @@ let-env Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `stat $(which git)`                  | `stat (which git).path`                          | 使用命令输出作为其他命令的参数             |
 | `echo $PATH`                         | `echo $env.PATH`                                 | 查看当前路径                               |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | 永久地更新 PATH                            |
-| `export PATH = $PATH:/usr/other/bin` | `let-env PATH = ($env.PATH \| append /usr/other/bin)` | 临时更新 PATH                          |
+| `export PATH = $PATH:/usr/other/bin` | `$env.PATH = ($env.PATH \| append /usr/other/bin)` | 临时更新 PATH                          |
 | `export`                             | `echo $env`                                      | 列出当前的环境变量                         |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                            | 永久地更新环境变量                         |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                  | 临时修改环境变量                           |
-| `export FOO=BAR`                     | `let-env FOO = BAR`                              | 为当前会话设置环境变量                     |
+| `export FOO=BAR`                     | `$env.FOO = BAR`                              | 为当前会话设置环境变量                     |
 | `echo $FOO`                          | `echo $env.FOO`                                  | 使用环境变量                               |
 | `unset FOO`                          | `hide FOO`                                       | 取消对当前会话的环境变量设置               |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                       | 临时定义一个别名                           |

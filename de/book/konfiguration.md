@@ -11,7 +11,7 @@ Ein Beispiel für eine Nushell `config.nu` kann [hier](https://github.com/nushel
 Die zentralen Konfigurationen von Nushell sind in der globalen `$config` Variable festgehalten. Dieser Eintrag kann wie folgt erstellt werden:
 
 ```
-let-env config = {
+$env.config = {
   ...
 }
 ```
@@ -19,7 +19,7 @@ let-env config = {
 Es ist auch möglich `$config` zu überschreiben und zu ändern:
 
 ```
-let-env config = ($config | update <field name> <field value>)
+$env.config = ($config | update <field name> <field value>)
 ```
 
 ### Umgebung
@@ -45,7 +45,7 @@ Um Nushell als Login-Shell zu verwenden, muss die `$env` Variable konfiguriert w
 Der komplette Satz an Umgebungsvariablen kann erzeugt werden, wenn Nu in einer anderen Shell, wie beispielsweise Bash, ausgeführt wird. In diese Nu-Sitzung kann ein Befehl wie der folgende verwendet werden, um `$env` zu setzen:
 
 ```
-> env | each { echo $"let-env ($it.name) = '($it.raw)'" } | str join (char nl)
+> env | each { echo $"$env.($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
 Das wird `let-env` Zeilen ausgeben - eine für jede Umgebungsvariable - inklusive der nötigen Werte.
@@ -91,8 +91,8 @@ Die Konfiguration der Prompt wird durch das Setzen der Umgebungsvariable `PROMPT
 Diese akzeptieren entweder einen String oder einen Codeblock der ausgeführt wird.
 
 ```
-let-env PROMPT_COMMAND = "Hallo Nu"  # Die Hauptprompt auf einen festen String setzen
-let-env PROMPT_COMMAND_RIGHT = {pwd} # Den rechte Promptteil mit dem aktuellen Verzeichnis anzeigen
+$env.PROMPT_COMMAND = "Hallo Nu"  # Die Hauptprompt auf einen festen String setzen
+$env.PROMPT_COMMAND_RIGHT = {pwd} # Den rechte Promptteil mit dem aktuellen Verzeichnis anzeigen
 ```
 
 Darüber hinaus wird als Markierung ein Promptindikator gesetzt, welcher den aktuellen Modus oder einen Zeilenumbruch anzeigt:

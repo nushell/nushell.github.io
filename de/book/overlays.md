@@ -213,7 +213,7 @@ Dafür wird das `--keep-env` Argument verwendet:
 ```
 (zero)> module spam {
     export def foo [] { "foo" }
-    export-env { let-env FOO = "foo" }
+    export-env { $env.FOO = "foo" }
 }
 
 (zero)> overlay use spam

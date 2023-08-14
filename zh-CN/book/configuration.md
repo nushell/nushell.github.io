@@ -18,7 +18,7 @@ _(你可以把 Nushell 的配置加载顺序想象成在启动时执行两行 [R
 Nushell 的主要设置是以记录的形式保存在 `config` 环境变量中。这个记录可以用以下方式创建：
 
 ```bash
-let-env config = {
+$env.config = {
   ...
 }
 ```
@@ -26,7 +26,7 @@ let-env config = {
 你也可以隐藏(shadow)`$env.config`并更新它：
 
 ```bash
-let-env config = ($env.config | upsert <field name> <field value>)
+$env.config = ($env.config | upsert <field name> <field value>)
 ```
 
 按照约定，这个变量被定义在`config.nu`文件中。
@@ -36,7 +36,7 @@ let-env config = ($env.config | upsert <field name> <field value>)
 你可以在 Nushell 会话期间使用[`let-env`](/commands/docs/let-env.md)在`env.nu`文件中设置环境变量。比如：
 
 ```bash
-let-env FOO = 'BAR'
+$env.FOO = 'BAR'
 ```
 
 _(尽管 `$env.config` 是一个环境变量，按照惯例它仍然在 `config.nu` 中定义。)_
@@ -73,7 +73,7 @@ Nushell 遵循如下的规则来匹配编辑器:
 你可以通过在另一个 Shell（如 Bash）中运行 Nu 来建立完整的环境变量集。一旦你进入 Nu，你可以运行这样的命令：
 
 ```bash
-> env | each { |it| echo $"let-env ($it.name) = '($it.raw)'" } | str join (char nl)
+> env | each { |it| echo $"$env.($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
 这将打印出[`let-env`](/commands/docs/let-env.md)所有行，且包含每个环境变量及其设置。
@@ -118,7 +118,7 @@ alias open = ^open
 要在 [PATH 变量](<https://en.wikipedia.org/wiki/PATH_(variable)>) 中添加一个路径，你可以在`env.nu`中使用 [`let-env`](/commands/docs/let-env.html) 和 [`append`](/commands/docs/append.html) 完成，如下：
 
 ```shell
-let-env PATH = ($env.PATH | append '/some/path')
+$env.PATH = ($env.PATH | append '/some/path')
 ```
 
 这将把`/some/path`追加到`PATH`的末尾；你也可以使用 [`prepend`](/commands/docs/prepend.html) 将该路径添加到`PATH`的开头。
