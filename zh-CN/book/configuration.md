@@ -33,7 +33,7 @@ $env.config = ($env.config | upsert <field name> <field value>)
 
 ### 环境
 
-你可以在 Nushell 会话期间使用[`let-env`](/commands/docs/let-env.md)在`env.nu`文件中设置环境变量。比如：
+你可以在 Nushell 会话期间使用 `$env.<var> = <val>` 在 `env.nu` 文件中设置环境变量。比如：
 
 ```bash
 $env.FOO = 'BAR'
@@ -73,10 +73,10 @@ Nushell 遵循如下的规则来匹配编辑器:
 你可以通过在另一个 Shell（如 Bash）中运行 Nu 来建立完整的环境变量集。一旦你进入 Nu，你可以运行这样的命令：
 
 ```bash
-> env | each { |it| echo $"$env.($it.name) = '($it.raw)'" } | str join (char nl)
+$env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r.val)'"} | str join (char nl)
 ```
 
-这将打印出[`let-env`](/commands/docs/let-env.md)所有行，且包含每个环境变量及其设置。
+这将打印出 `$env.<var> = <val>` 行，每个环境变量一行包含其设置。您可能不需要所有这些变量，例如，`PS1` 变量是 `bash` 特有的。
 
 接下来，在一些发行版上，你还需要确保 Nu 在`/etc/shells`列表中：
 
@@ -115,10 +115,10 @@ alias open = ^open
 
 ## `PATH` 配置
 
-要在 [PATH 变量](<https://en.wikipedia.org/wiki/PATH_(variable)>) 中添加一个路径，你可以在`env.nu`中使用 [`let-env`](/commands/docs/let-env.html) 和 [`append`](/commands/docs/append.html) 完成，如下：
+要在 [PATH 变量](<https://en.wikipedia.org/wiki/PATH_(variable)>) 中添加一个路径，你可以在 `env.nu` 中使用 `$env.<var> = <val>` 和 [`append`](/commands/docs/append.md) 完成，如下：
 
 ```shell
-$env.PATH = ($env.PATH | append '/some/path')
+$env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
 ```
 
-这将把`/some/path`追加到`PATH`的末尾；你也可以使用 [`prepend`](/commands/docs/prepend.html) 将该路径添加到`PATH`的开头。
+这将把 `/some/path` 追加到 `PATH` 的末尾；你也可以使用 [`prepend`](/commands/docs/prepend.md) 将该路径添加到`PATH`的开头。

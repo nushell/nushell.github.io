@@ -25,15 +25,13 @@ Nushell 中使用的环境变量的实际值在`value`列下。
 
 有几种方法可以设置环境变量：
 
-### [`let-env`](/commands/docs/let-env.html)
+### $env.VAR 赋值
 
-使用`let-env`命令是最直接的方法：
+使用`$env.VAR = "val"`命令是最直接的方法：
 
 ```bash
 > $env.FOO = 'BAR'
 ```
-
-`let-env` 类似于 bash 中的 **export** 命令。
 
 因此，如果你想扩展`PATH`变量，你可以这样做：
 
