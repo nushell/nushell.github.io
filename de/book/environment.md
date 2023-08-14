@@ -25,17 +25,13 @@ Die Umgebung wird erstellt durch Nus [Konfigurations-Datei](configuration.md) un
 
 ## Setzen von Umgebungsvariablen
 
-Es gibt mehrere Möglichkeiten eine Umgebungsvariable zu setzen:
+Umgebungsvariablen werden als Felder der Variable `$env` gesetzt.
 
-### [`let-env`](/commands/docs/let-env.html)
-
-Der `let-env` Befehl ist der direkteste Weg:
+Um die Umgebungsvariable `FOO` zu setzen kann direkt der Wert zu `$env.FOO` zugewiesen werden.
 
 ```
 > $env.FOO = 'BAR'
 ```
-
-`let-env` ist ähnlich wie der **export** Befehl in der bash.
 
 Um zum Beispiel die `PATH` Variable zu ergänzen, wird folgendes eingegeben:
 
