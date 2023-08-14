@@ -48,7 +48,7 @@ Der komplette Satz an Umgebungsvariablen kann erzeugt werden, wenn Nu in einer a
 > env | each { echo $"$env.($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
-Das wird `let-env` Zeilen ausgeben - eine für jede Umgebungsvariable - inklusive der nötigen Werte.
+Das gibt Zeilen aus um `$env` in `env.nu` zu setzen - eine für jede Umgebungsvariable - inklusive der nötigen Werte.
 
 Als nächstes, muss auf manchen Distributionen sichergestellt werden, dass Nu in der Liste der Shells in /etc/shells ist:
 
