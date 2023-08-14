@@ -144,7 +144,7 @@ hi there!
 ## 环境变量
 
 到目前为止，我们只是用模块来导入自定义命令，用同样的方法导出环境变量也是可能的。
-其语法与你可能习惯的[`let-env`](/commands/docs/let-env.md)或[`load-env`](/commands/docs/load-env.md)等命令略有不同：
+其语法与你可能习惯的直接修改 `$env` 或 [`load-env`](/commands/docs/load-env.md)等命令略有不同：
 
 ```bash
 # greetings.nu
