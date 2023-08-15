@@ -24,7 +24,7 @@ And get the equivalent to having typed `ls -l -a`.
 
 ## List all loaded aliases
 
-Your useable aliases can be seen in `$nu.scope.aliases`.
+Your useable aliases can be seen in `help aliases`.
 
 ## Persisting
 
