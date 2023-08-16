@@ -24,7 +24,7 @@ And get the equivalent to having typed `ls -l -a`.
 
 ## List all loaded aliases
 
-Your useable aliases can be seen in `help aliases`.
+Your useable aliases can be seen in `scope aliases` and `help aliases`.
 
 ## Persisting
 
