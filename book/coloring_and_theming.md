@@ -10,15 +10,17 @@ Many parts of Nushell's interface can have their color customized. All of these 
 
 ## `Table borders`
 
-Table borders are controlled by the `table_mode` setting in `config.nu`. Here is an example:
+Table borders are controlled by the `$env.config.table.mode` setting in `config.nu`. Here is an example:
 
 ```shell
 > $env.config = {
-    table_mode: rounded
+    table: {
+        mode: rounded
+    }
 }
 ```
 
-Here are the current options for `table_mode`:
+Here are the current options for `$env.config.table.mode`:
 
 - `rounded` # of course, this is the best one :)
 - `basic`
