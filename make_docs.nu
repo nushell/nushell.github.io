@@ -198,8 +198,12 @@ $"($example.description)
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }
 
+    let tips = if $command.name =~ '^dfr' {
+        '**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag'
+    } else { '' }
+
     let doc = (
-        ($top + $signatures + $parameters + $extra_usage + $in_out + $examples + $sub_commands)
+        ($top + $signatures + $parameters + $extra_usage + $in_out + $examples + $sub_commands + $tips)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)
