@@ -12,6 +12,21 @@ def safe-path [] {
   $in | str replace --all '\?' '' | str replace --all ' ' '_'
 }
 
+# NOTE: You should have nushell source code directory sit along with the docs' directory to make it work
+# Get commands in `extra` crate by parsing the source code
+def get-extra-cmds [] {
+    if ('../nushell/crates/nu-cmd-extra/src' | path exists) {
+        cd ..
+        glob nushell/crates/nu-cmd-extra/src/**/*.rs
+            | each { $in | open -r | parse -r 'fn name\(&self\) -> &str \{\n\s+"(?P<name>[^"]+)"\n\s+\}' }
+            | flatten
+            | get name
+    } else {
+        []
+    }
+}
+
+let extra_cmds = get-extra-cmds
 
 # generate the YAML frontmatter of a command
 #
@@ -206,7 +221,9 @@ $"($example.description)
     } else { '' }
 
     let tips = if $command.name =~ '^dfr' {
-        '**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag'
+        $'(char nl)**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl)'
+    } else if $command.name in $extra_cmds {
+        $'(char nl)**Tips:** This command was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl)'
     } else { '' }
 
     let doc = (
