@@ -193,8 +193,14 @@ $"($example.description)
     # Typically a root command that has sub commands should be one word command
     let one_word_cmd = ($command.name | split row ' ' | length) == 1
     let sub_commands = if $one_word_cmd { scope commands | where name =~ $'^($command.name) ' } else { [] }
+    let type_mapping = {is_builtin: 'Builtin', is_plugin: 'Plugin', is_custom: 'Custom'}
     let sub_commands = if $one_word_cmd and ($sub_commands | length) > 0 {
-        let commands = $sub_commands | select name usage | update name { $"[`($in)`]\(/commands/docs/($in | safe-path).md\)" } | to md --pretty
+        let commands = $sub_commands
+            | select name usage is_builtin is_plugin is_custom
+            | upsert type {|it| $type_mapping | columns | each {|t| if ($it | get $t) { $type_mapping | get $t } } | str join ',' }
+            | update name { $"[`($in)`]\(/commands/docs/($in | safe-path).md\)" }
+            | select name type usage
+            | to md --pretty
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }
 
