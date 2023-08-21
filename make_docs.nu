@@ -181,7 +181,8 @@ $"## Notes
         $input_output = ($input_output | append [[input output]; [$input $output]])
     }
     let in_out = if ($input_output | length) > 0 {
-        ['', '## Input/output types:', '', ($input_output | sort-by input | to md --pretty), ''] | str join (char newline)
+        let markdown = ($input_output | sort-by input | to md --pretty | str replace -a '<' '\<' | str replace -a '>' '\>')
+        ['', '## Input/output types:', '', $markdown, ''] | str join (char newline)
     } else { '' }
 
     let examples = if ($command.examples | length) > 0 {

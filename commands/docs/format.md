@@ -27,7 +27,7 @@ usage: |
 | input  | output       |
 | ------ | ------------ |
 | record | any          |
-| table  | list<string> |
+| table  | list\<string\> |
 ## Examples
 
 Print filenames with their sizes
