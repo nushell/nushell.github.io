@@ -183,7 +183,7 @@ $"($example.description)
     let one_word_cmd = ($command.name | split row ' ' | length) == 1
     let sub_commands = if $one_word_cmd { scope commands | where name =~ $'^($command.name) ' } else { [] }
     let sub_commands = if $one_word_cmd and ($sub_commands | length) > 0 {
-        let commands = $sub_commands | select name usage | update name { $"[`($in)`]\(/commands/docs/($in).md\)" } | to md --pretty
+        let commands = $sub_commands | select name usage | update name { $"[`($in)`]\(/commands/docs/($in | safe-path).md\)" } | to md --pretty
         ['', '## Subcommands:', $commands, ''] | str join (char newline)
     } else { '' }
 
