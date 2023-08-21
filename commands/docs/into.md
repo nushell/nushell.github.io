@@ -28,6 +28,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 
 ## Subcommands:
+
 | name                                               | usage                                      |
 | -------------------------------------------------- | ------------------------------------------ |
 | [`into binary`](/commands/docs/into_binary.md)     | Convert value to a binary primitive.       |
