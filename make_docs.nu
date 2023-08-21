@@ -157,6 +157,17 @@ $"## Notes
 "
     }
 
+    let sigs = scope commands | where name == $command.name | select signatures | get 0 | get signatures | values
+    mut input_output = []
+    for s in $sigs {
+        let input = $s | where parameter_type == 'input' | get 0 | get syntax_shape
+        let output = $s | where parameter_type == 'output' | get 0 | get syntax_shape
+        $input_output = ($input_output | append [[input output]; [$input $output]])
+    }
+    let in_out = if ($input_output | length) > 0 {
+        ['', '## Input/output types:', '', ($input_output | sort-by input | to md --pretty), ''] | str join (char newline)
+    } else { '' }
+
     let examples = if ($command.examples | length) > 0 {
         let example_top = $"## Examples(char newline)(char newline)"
 
@@ -188,7 +199,7 @@ $"($example.description)
     } else { '' }
 
     let doc = (
-        ($top + $signatures + $parameters + $extra_usage + $examples + $sub_commands)
+        ($top + $signatures + $parameters + $extra_usage + $in_out + $examples + $sub_commands)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)
