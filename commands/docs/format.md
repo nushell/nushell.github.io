@@ -55,4 +55,4 @@ Print elements from some columns of a table
 | [`format duration`](/commands/docs/format_duration.md) | Builtin | Outputs duration with a specified unit of time.          |
 | [`format filesize`](/commands/docs/format_filesize.md) | Builtin | Converts a column of filesizes to some specified format. |
 
-**Tips:** This command was not included in the official binaries by default, you have to build it with `--features=extra` flag
+**Tips:** Command `format` was not included in the official binaries by default, you have to build it with `--features=extra` flag

@@ -223,7 +223,7 @@ $"($example.description)
     let tips = if $command.name =~ '^dfr' {
         $'(char nl)**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl)'
     } else if $command.name in $extra_cmds {
-        $'(char nl)**Tips:** This command was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl)'
+        $'(char nl)**Tips:** Command `($command.name)` was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl)'
     } else { '' }
 
     let doc = (
