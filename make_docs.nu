@@ -179,8 +179,16 @@ $"($example.description)
         ""
     }
 
+    # Typically a root command that has sub commands should be one word command
+    let one_word_cmd = ($command.name | split row ' ' | length) == 1
+    let sub_commands = if $one_word_cmd { scope commands | where name =~ $'^($command.name) ' } else { [] }
+    let sub_commands = if $one_word_cmd and ($sub_commands | length) > 0 {
+        let commands = $sub_commands | select name usage | update name { $"[`($in)`]\(/commands/docs/($in).md\)" } | to md --pretty
+        ['', '## Subcommands:', $commands, ''] | str join (char newline)
+    } else { '' }
+
     let doc = (
-        ($top + $signatures + $parameters + $extra_usage + $examples )
+        ($top + $signatures + $parameters + $extra_usage + $examples + $sub_commands)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)
