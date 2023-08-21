@@ -162,6 +162,7 @@ $"## Notes
     for s in $sigs {
         let input = $s | where parameter_type == 'input' | get 0 | get syntax_shape
         let output = $s | where parameter_type == 'output' | get 0 | get syntax_shape
+        # FIXME: Parentheses are required here to mutate $input_output, otherwise it won't work, maybe a bug?
         $input_output = ($input_output | append [[input output]; [$input $output]])
     }
     let in_out = if ($input_output | length) > 0 {
