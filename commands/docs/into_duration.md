@@ -21,8 +21,6 @@ usage: |
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
 
-## Notes
-Max duration value is i64::MAX nanoseconds; max duration time unit is wk (weeks).
 
 ## Input/output types:
 
@@ -65,3 +63,6 @@ Convert duration to duration
 > 420sec | into duration
 7min
 ```
+
+## Notes
+Max duration value is i64::MAX nanoseconds; max duration time unit is wk (weeks).

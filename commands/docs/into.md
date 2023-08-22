@@ -17,8 +17,6 @@ usage: |
 
 ```> into ```
 
-## Notes
-You must use one of the following subcommands. Using this command as-is will only produce this help message.
 
 ## Input/output types:
 
@@ -26,6 +24,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 | ------- | ------ |
 | nothing | string |
 
+## Notes
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
 
 ## Subcommands:
 

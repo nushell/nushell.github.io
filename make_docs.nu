@@ -18,7 +18,7 @@ def get-extra-cmds [] {
     if ('../nushell/crates/nu-cmd-extra/src' | path exists) {
         cd ..
         glob nushell/crates/nu-cmd-extra/src/**/*.rs
-            | each { $in | open -r | parse -r 'fn name\(&self\) -> &str \{\n\s+"(?P<name>[^"]+)"\n\s+\}' }
+            | each { $in | open -r | parse -r 'fn name\(&self\) -> &str \{[\r|\n]\s+\"(?P<name>.+)\"[\r|\n]\s+\}' }
             | flatten
             | get name
     } else {
@@ -228,7 +228,7 @@ $"($example.description)
     } else { '' }
 
     let doc = (
-        ($top + $signatures + $parameters + $extra_usage + $in_out + $examples + $sub_commands + $tips)
+        ($top + $signatures + $parameters + $in_out + $examples + $extra_usage + $sub_commands + $tips)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)
