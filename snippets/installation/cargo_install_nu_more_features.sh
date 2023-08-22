@@ -1,1 +1,1 @@
-> cargo install nu --features=dataframe
+> cargo install nu --locked --features=dataframe
