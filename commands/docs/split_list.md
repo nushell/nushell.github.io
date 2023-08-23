@@ -2,7 +2,7 @@
 title: split list
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Split a list into multiple lists using a separator.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `separator`: the value that denotes what separates the list
  -  `--regex` `(-r)`: separator is a regular expression, matching values that can be coerced into a string
+
+
+## Input/output types:
+
+| input     | output          |
+| --------- | --------------- |
+| list\<any\> | list\<list\<any\>\> |
 
 ## Examples
 

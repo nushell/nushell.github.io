@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Loop over a range.
 usage: |
@@ -24,9 +24,13 @@ usage: |
  -  `block`: the block to run
  -  `--numbered` `(-n)`: return a numbered item ($it.index and $it.item)
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Echo the square of each integer
@@ -46,3 +50,7 @@ Number each item and echo a message
 > for $it in ['bob' 'fred'] --numbered { print $"($it.index) is ($it.item)" }
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

@@ -2,7 +2,7 @@
 title: bytes reverse
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Reverse the bytes in the pipeline.
 usage: |
@@ -21,6 +21,14 @@ usage: |
 
  -  `...rest`: for a data structure input, reverse data at the given cell paths
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| binary | binary |
+| record | record |
+| table  | table  |
 ## Examples
 
 Reverse bytes `0x[1F FF AA AA]`

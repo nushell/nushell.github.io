@@ -2,7 +2,7 @@
 title: roll down
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Roll table rows down.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--by {int}`: Number of rows to roll
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| table | table  |
+
 ## Examples
 
 Rolls rows down of a table
@@ -35,3 +42,6 @@ Rolls rows down of a table
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Command `roll down` was not included in the official binaries by default, you have to build it with `--features=extra` flag

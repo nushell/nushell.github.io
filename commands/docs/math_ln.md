@@ -2,7 +2,7 @@
 title: math ln
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the natural logarithm. Base: (math e).
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> math ln ```
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Get the natural logarithm of e
@@ -24,3 +31,6 @@ Get the natural logarithm of e
 > math e | math ln
 1
 ```
+
+
+**Tips:** Command `math ln` was not included in the official binaries by default, you have to build it with `--features=extra` flag

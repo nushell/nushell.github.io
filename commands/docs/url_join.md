@@ -2,7 +2,7 @@
 title: url join
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Converts a record to url.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> url join ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | string |
 
 ## Examples
 

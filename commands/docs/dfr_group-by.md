@@ -2,7 +2,7 @@
 title: dfr group-by
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Creates a group-by object that can be used for other aggregations.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `...rest`: Expression(s) that define the lazy group-by
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -61,3 +68,6 @@ Group by and perform an aggregation
 ╰───┴───┴───────┴───────┴───────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

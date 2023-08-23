@@ -2,7 +2,7 @@
 title: overlay hide
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Hide an active overlay.
 usage: |
@@ -23,9 +23,13 @@ usage: |
  -  `--keep-custom` `(-k)`: Keep all newly added commands and aliases in the next activated overlay
  -  `--keep-env {list<string>}`: List of environment variables to keep in the next activated overlay
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Keep a custom command after hiding the overlay
@@ -62,3 +66,7 @@ Keep the current working directory when removing an overlay
     overlay hide --keep-env [ PWD ] spam
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

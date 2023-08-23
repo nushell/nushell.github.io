@@ -2,7 +2,7 @@
 title: ansi link
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   Add a link (using OSC 8 escape sequence) to the given string.
 usage: |
@@ -23,6 +23,15 @@ usage: |
  -  `--text {string}`: Link text. Uses uri as text if absent. In case of
                 tables, records and lists applies this text to all elements
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 Create a link to open some file
@@ -42,3 +51,6 @@ Format a table column into links
 > [[url text]; [https://example.com Text]] | ansi link url
 
 ```
+
+
+**Tips:** Command `ansi link` was not included in the official binaries by default, you have to build it with `--features=extra` flag

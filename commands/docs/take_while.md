@@ -2,7 +2,7 @@
 title: take while
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Take elements of the input while a predicate is true.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `predicate`: the predicate that element(s) must match
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| table     | table     |
 ## Examples
 
 Take while the element is negative

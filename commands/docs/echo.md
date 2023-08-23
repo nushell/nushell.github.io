@@ -2,7 +2,7 @@
 title: echo
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Returns its arguments, ignoring the piped-in value.
 usage: |
@@ -21,10 +21,13 @@ usage: |
 
  -  `...rest`: the values to echo
 
-## Notes
-When given no arguments, it returns an empty string. When given one argument,
-it returns it. Otherwise, it returns a list of the arguments. There is usually
-little reason to use this over just writing the values as-is.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+
 ## Examples
 
 Put a list of numbers in the pipeline. This is the same as [1 2 3].
@@ -43,3 +46,8 @@ Returns the piped-in value, by using the special $in variable to obtain it.
 > echo $in
 
 ```
+
+## Notes
+When given no arguments, it returns an empty string. When given one argument,
+it returns it. Otherwise, it returns a list of the arguments. There is usually
+little reason to use this over just writing the values as-is.

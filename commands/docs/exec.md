@@ -2,7 +2,7 @@
 title: exec
 categories: |
   system
-version: 0.83.0
+version: 0.84.0
 system: |
   Execute a command, replacing the current process.
 usage: |
@@ -21,8 +21,13 @@ usage: |
 
  -  `command`: the command to execute
 
-## Notes
-Currently supported only on Unix-based systems.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+
 ## Examples
 
 Execute external 'ps aux' tool
@@ -36,3 +41,6 @@ Execute 'nautilus'
 > exec nautilus
 
 ```
+
+## Notes
+Currently supported only on Unix-based systems.

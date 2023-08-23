@@ -2,7 +2,7 @@
 title: math cosh
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the hyperbolic cosine of the number.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> math cosh ```
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Apply the hyperbolic cosine to 1
@@ -24,3 +31,6 @@ Apply the hyperbolic cosine to 1
 > 1 | math cosh
 1.5430806348152435
 ```
+
+
+**Tips:** Command `math cosh` was not included in the official binaries by default, you have to build it with `--features=extra` flag

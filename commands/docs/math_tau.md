@@ -2,7 +2,7 @@
 title: math tau
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the mathematical constant τ.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> math tau ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | number |
+
 ## Examples
 
 Get the first two decimal digits of τ
@@ -24,3 +31,6 @@ Get the first two decimal digits of τ
 > math tau | math round --precision 2
 6.28
 ```
+
+
+**Tips:** Command `math tau` was not included in the official binaries by default, you have to build it with `--features=extra` flag

@@ -2,7 +2,7 @@
 title: math exp
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns e raised to the power of x.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> math exp ```
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Get e raised to the power of zero
@@ -30,3 +37,6 @@ Get e (same as 'math e')
 > 1 | math exp
 2.718281828459045
 ```
+
+
+**Tips:** Command `math exp` was not included in the official binaries by default, you have to build it with `--features=extra` flag

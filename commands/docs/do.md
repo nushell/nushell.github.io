@@ -2,7 +2,7 @@
 title: do
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Run a closure, providing it with the pipeline input.
 usage: |
@@ -25,6 +25,13 @@ usage: |
  -  `--ignore-shell-errors` `(-s)`: ignore shell errors as the closure runs
  -  `--ignore-program-errors` `(-p)`: ignore external program errors as the closure runs
  -  `--capture-errors` `(-c)`: catch errors as the closure runs, and return them
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

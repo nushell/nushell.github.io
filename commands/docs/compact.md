@@ -2,7 +2,7 @@
 title: compact
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Creates a table with non-empty rows.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `...rest`: the columns to compact from the table
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| table     | table     |
 ## Examples
 
 Filter out all records where 'Hello' is null (returns nothing)

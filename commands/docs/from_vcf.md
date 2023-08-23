@@ -2,7 +2,7 @@
 title: from vcf
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Parse text as .vcf and create table.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> from vcf ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | table  |
 
 ## Examples
 

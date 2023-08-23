@@ -2,7 +2,7 @@
 title: scope engine-stats
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Output stats on the engine in the current state.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> scope engine-stats ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
 
 ## Examples
 

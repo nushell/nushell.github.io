@@ -2,7 +2,7 @@
 title: while
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Conditionally run a block in a loop.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `cond`: condition to check
  -  `block`: block to loop if check succeeds
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

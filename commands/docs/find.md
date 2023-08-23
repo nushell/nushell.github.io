@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -27,6 +27,14 @@ usage: |
  -  `--columns {list<string>}`: column names to be searched (with rest parameter, not regex yet)
  -  `--invert` `(-v)`: invert the match
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| string    | any       |
+| table     | table     |
 ## Examples
 
 Search for multiple terms in a command output

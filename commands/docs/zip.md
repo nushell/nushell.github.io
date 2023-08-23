@@ -2,7 +2,7 @@
 title: zip
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Combine a stream with the input.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `other`: the other input
 
+
+## Input/output types:
+
+| input     | output          |
+| --------- | --------------- |
+| list\<any\> | list\<list\<any\>\> |
+| range     | list\<list\<any\>\> |
 ## Examples
 
 Zip two lists

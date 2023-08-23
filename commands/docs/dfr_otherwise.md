@@ -2,7 +2,7 @@
 title: dfr otherwise
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   completes a when expression.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `otherwise expression`: expression to apply when no when predicate matches
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -55,3 +62,6 @@ Create a new column for the dataframe
 ╰───┴───┴───┴───┴────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

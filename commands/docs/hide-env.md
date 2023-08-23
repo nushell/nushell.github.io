@@ -2,7 +2,7 @@
 title: hide-env
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Hide environment variables in the current scope.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `...rest`: environment variable names to hide
  -  `--ignore-errors` `(-i)`: do not throw an error if an environment variable was not found
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

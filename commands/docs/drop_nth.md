@@ -2,7 +2,7 @@
 title: drop nth
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Drop the selected rows.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `row number or row range`: the number of the row to drop or a range to drop consecutive rows
  -  `...rest`: the number of the row to drop
+
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
 
 ## Examples
 

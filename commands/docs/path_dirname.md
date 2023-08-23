@@ -1,17 +1,17 @@
 ---
 title: path dirname
 categories: |
-  default
-version: 0.83.0
-default: |
+  path
+version: 0.84.0
+path: |
   Get the parent directory of a path.
 usage: |
   Get the parent directory of a path.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for path
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.path }}</div>
 
 ## Signature
 
@@ -22,6 +22,13 @@ usage: |
  -  `--replace {string}`: Return original path with dirname replaced by this string
  -  `--num-levels {int}`: Number of directories to walk up
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| string       | string       |
 ## Examples
 
 Get dirname of a path

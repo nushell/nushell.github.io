@@ -2,7 +2,7 @@
 title: dfr quantile
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Aggregates the columns to the selected quantile.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `quantile`: quantile value for quantile operation
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 quantile value from columns in a dataframe
@@ -33,3 +40,6 @@ quantile value from columns in a dataframe
 ╰───┴──────┴──────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

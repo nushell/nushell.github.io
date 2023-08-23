@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |
@@ -27,8 +27,13 @@ usage: |
  -  `--insecure` `(-k)`: allow insecure server connections when using SSL
  -  `--allow-errors` `(-e)`: do not fail if the server returns an error code
 
-## Notes
-Performs an HTTP OPTIONS request. Most commonly used for making CORS preflight requests.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+
 ## Examples
 
 Get options from example.com
@@ -60,3 +65,6 @@ Simulate a browser cross-origin preflight request from www.example.com to media.
 > http options https://media.example.com/api/ -H [Origin https://www.example.com Access-Control-Request-Headers "Content-Type, X-Custom-Header" Access-Control-Request-Method GET]
 
 ```
+
+## Notes
+Performs an HTTP OPTIONS request. Most commonly used for making CORS preflight requests.

@@ -2,7 +2,7 @@
 title: dfr filter
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Filter dataframe based in expression.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `filter expression`: Expression that define the column selection
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Filter dataframe using an expression
@@ -34,3 +41,6 @@ Filter dataframe using an expression
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

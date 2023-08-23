@@ -2,7 +2,7 @@
 title: dfr not
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Inverts boolean mask.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> dfr not ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -31,3 +38,6 @@ Inverts boolean mask
 ╰───┴───────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

@@ -1,17 +1,17 @@
 ---
 title: group-by
 categories: |
-  default
-version: 0.83.0
-default: |
+  filters
+version: 0.84.0
+filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
   Splits a list or table into groups, and returns a record containing those groups.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `grouper`: the path to the column to group on
+
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | record |
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: to tsv
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Convert table into .tsv text.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--noheaders` `(-n)`: do not output the column names as the first row
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | string |
+| table  | string |
 ## Examples
 
 Outputs an TSV string representing the contents of this table

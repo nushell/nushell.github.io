@@ -2,7 +2,7 @@
 title: dfr melt
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Unpivot a DataFrame from wide to long format.
 usage: |
@@ -24,6 +24,13 @@ usage: |
  -  `--variable-name {string}`: optional name for variable column
  -  `--value-name {string}`: optional name for value column
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 melt dataframe
@@ -41,3 +48,6 @@ melt dataframe
 ╰───┴───┴───┴──────────┴───────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

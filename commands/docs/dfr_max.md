@@ -1,21 +1,28 @@
 ---
 title: dfr max
 categories: |
-  lazyframe
-version: 0.83.0
-lazyframe: |
-  Aggregates columns to their max value
+  expression
+version: 0.84.0
+expression: |
+  Creates a max expression or aggregates columns to their max value
 usage: |
-  Aggregates columns to their max value
+  Creates a max expression or aggregates columns to their max value
 ---
 
-# <code>{{ $frontmatter.title }}</code> for lazyframe
+# <code>{{ $frontmatter.title }}</code> for expression
 
-<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
+<div class='command-title'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 
 ```> dfr max ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -29,3 +36,21 @@ Max value from columns in a dataframe
 ╰───┴───┴───╯
 
 ```
+
+Max aggregation for a group-by
+```shell
+> [[a b]; [one 2] [one 4] [two 1]]
+    | dfr into-df
+    | dfr group-by a
+    | dfr agg (dfr col b | dfr max)
+╭───┬─────┬───╮
+│ # │  a  │ b │
+├───┼─────┼───┤
+│ 0 │ one │ 4 │
+│ 1 │ two │ 1 │
+╰───┴─────┴───╯
+
+```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

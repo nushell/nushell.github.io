@@ -2,7 +2,7 @@
 title: all
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Test if every element of the input fulfills a predicate expression.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `predicate`: a closure that must evaluate to a boolean
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | bool   |
+| table     | bool   |
 ## Examples
 
 Check if each row's status is the string 'UP'

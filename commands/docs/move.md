@@ -2,7 +2,7 @@
 title: move
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Move columns before or after other columns.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--after {string}`: the column that will precede the columns moved
  -  `--before {string}`: the column that will be the next after the columns moved
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | record |
+| table  | table  |
 ## Examples
 
 Move a column before the first column

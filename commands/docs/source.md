@@ -2,7 +2,7 @@
 title: source
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Runs a script file in the current context.
 usage: |
@@ -21,9 +21,13 @@ usage: |
 
  -  `filename`: the filepath to the script file to source
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Runs foo.nu in the current context
@@ -37,3 +41,7 @@ Runs foo.nu in current context and call the command defined, suppose foo.nu has 
 > source ./foo.nu; say-hi
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

@@ -2,7 +2,7 @@
 title: dfr concat-str
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   Creates a concat string expression.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `separator`: Separator used during the concatenation
  -  `concat expressions`: Expression(s) that define the string concatenation
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Creates a concat string expression
@@ -36,3 +43,6 @@ Creates a concat string expression
 ╰───┴───────┴──────┴───┴──────────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

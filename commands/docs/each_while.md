@@ -2,7 +2,7 @@
 title: each while
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Run a block on each row of the input list until a null is found, then create a new list with the results.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `closure`: the closure to run
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| table     | list\<any\> |
 ## Examples
 
 Produces a list of each element before the 3, doubled
@@ -51,3 +58,6 @@ Iterate over each element, printing the matching value and its index
 ╰───┴───────────────╯
 
 ```
+
+
+**Tips:** Command `each while` was not included in the official binaries by default, you have to build it with `--features=extra` flag

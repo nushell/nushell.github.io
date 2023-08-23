@@ -2,7 +2,7 @@
 title: alias
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Alias a command (with optional flags) to a new name.
 usage: |
@@ -22,9 +22,13 @@ usage: |
  -  `name`: name of the alias
  -  `initial_value`: equals sign followed by value
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Alias ll to ls -l
@@ -32,3 +36,7 @@ Alias ll to ls -l
 > alias ll = ls -l
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

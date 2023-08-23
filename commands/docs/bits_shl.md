@@ -2,7 +2,7 @@
 title: bits shl
 categories: |
   bits
-version: 0.83.0
+version: 0.84.0
 bits: |
   Bitwise shift left for integers.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--signed` `(-s)`: always treat input number as a signed number
  -  `--number-bytes {string}`: the word size in number of bytes, it can be 1, 2, 4, 8, auto, default value `8`
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| int       | int       |
+| list\<int\> | list\<int\> |
 ## Examples
 
 Shift left a number by 7 bits
@@ -53,3 +60,6 @@ Shift left a list of numbers
 ╰───┴────╯
 
 ```
+
+
+**Tips:** Command `bits shl` was not included in the official binaries by default, you have to build it with `--features=extra` flag

@@ -2,7 +2,7 @@
 title: from ini
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Parse text as .ini and create table.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> from ini ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | record |
 
 ## Examples
 

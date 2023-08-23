@@ -2,7 +2,7 @@
 title: bytes at
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Get bytes defined by a range
 usage: |
@@ -22,6 +22,15 @@ usage: |
  -  `range`: the range to get bytes
  -  `...rest`: for a data structure input, get bytes from data at the given cell paths
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| binary       | binary       |
+| list\<binary\> | list\<binary\> |
+| record       | record       |
+| table        | table        |
 ## Examples
 
 Get a subbytes `0x[10 01]` from the bytes `0x[33 44 55 10 01 13]`
@@ -42,10 +51,10 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 
 Get the remaining characters from a starting index
 ```shell
->  0x[33 44 55 10 01 13] | bytes at 3..
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
-00000000:   10 01 13                                             •••
-
+>  { data: 0x[33 44 55 10 01 13] } | bytes at 3.. data
+╭──────┬─────────────╮
+│ data │ [16, 1, 19] │
+╰──────┴─────────────╯
 ```
 
 Get the characters from the beginning until ending index

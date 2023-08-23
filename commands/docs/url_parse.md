@@ -2,7 +2,7 @@
 title: url parse
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Parses a url.
 usage: |
@@ -21,6 +21,14 @@ usage: |
 
  -  `...rest`: optionally operate by cell path
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | record |
+| string | record |
+| table  | table  |
 ## Examples
 
 Parses a url

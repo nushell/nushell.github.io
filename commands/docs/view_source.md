@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `item`: name or block to view
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | string |
 
 ## Examples
 

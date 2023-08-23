@@ -1,17 +1,17 @@
 ---
 title: str trim
 categories: |
-  default
-version: 0.83.0
-default: |
+  strings
+version: 0.84.0
+strings: |
   Trim whitespace or specific character.
 usage: |
   Trim whitespace or specific character.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 
@@ -24,6 +24,15 @@ usage: |
  -  `--left` `(-l)`: trims characters only from the beginning of the string
  -  `--right` `(-r)`: trims characters only from the end of the string
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 Trim whitespace

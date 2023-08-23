@@ -2,7 +2,7 @@
 title: math tanh
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the hyperbolic tangent of the number.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> math tanh ```
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Apply the hyperbolic tangent to 10*π
@@ -24,3 +31,6 @@ Apply the hyperbolic tangent to 10*π
 > (math pi) * 10 | math tanh
 1
 ```
+
+
+**Tips:** Command `math tanh` was not included in the official binaries by default, you have to build it with `--features=extra` flag

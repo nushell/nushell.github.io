@@ -2,7 +2,7 @@
 title: scope commands
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Output info on the commands in the current scope.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> scope commands ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
 
 ## Examples
 

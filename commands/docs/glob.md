@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -26,8 +26,13 @@ usage: |
  -  `--no-symlink` `(-S)`: Whether to filter out symlinks from the returned paths
  -  `--not {list<string>}`: Patterns to exclude from the results
 
-## Notes
-For more glob pattern help, please refer to https://github.com/olson-sean-k/wax
+
+## Input/output types:
+
+| input   | output       |
+| ------- | ------------ |
+| nothing | list\<string\> |
+
 ## Examples
 
 Search for *.rs files
@@ -95,3 +100,6 @@ Search for all files that are not in the target nor .git directories
 > glob **/* --not [**/target/** **/.git/** */]
 
 ```
+
+## Notes
+For more glob pattern help, please refer to https://github.com/olson-sean-k/wax

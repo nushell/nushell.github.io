@@ -2,7 +2,7 @@
 title: split row
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Split a string into multiple rows using a separator.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--number {int}`: Split into maximum number of items
  -  `--regex` `(-r)`: use regex syntax for separator
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| string       | list\<string\> |
 ## Examples
 
 Split a string into rows of char

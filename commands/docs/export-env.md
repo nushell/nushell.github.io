@@ -2,7 +2,7 @@
 title: export-env
 categories: |
   env
-version: 0.83.0
+version: 0.84.0
 env: |
   Run a block and preserve its environment in a current scope.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `block`: the block to run to set the environment
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

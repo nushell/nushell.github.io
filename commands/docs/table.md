@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.83.0
+version: 0.84.0
 viewers: |
   Render the table.
 usage: |
@@ -29,8 +29,13 @@ usage: |
  -  `--collapse` `(-c)`: expand the table structure in collapse mode.
 Be aware collapse mode currently doesn't support width control
 
-## Notes
-If the table contains a column called 'index', this column is used as the table index instead of the usual continuous index.
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 List the files in current directory, with indexes starting from 1.
@@ -74,3 +79,6 @@ Render data in table view (collapsed)
 ╰───┴───┴───╯
 
 ```
+
+## Notes
+If the table contains a column called 'index', this column is used as the table index instead of the usual continuous index.

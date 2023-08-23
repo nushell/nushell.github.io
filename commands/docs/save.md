@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Save a file.
 usage: |
@@ -25,6 +25,13 @@ usage: |
  -  `--append` `(-a)`: append input to the end of the file
  -  `--force` `(-f)`: overwrite the destination
  -  `--progress` `(-p)`: enable progress bar
+
+
+## Input/output types:
+
+| input | output  |
+| ----- | ------- |
+| any   | nothing |
 
 ## Examples
 

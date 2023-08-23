@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.83.0
+version: 0.84.0
 conversions: |
   Fill and Align.
 usage: |
@@ -23,6 +23,20 @@ usage: |
  -  `--alignment {string}`: The alignment of the output. Defaults to Left (Left(l), Right(r), Center(c/m), MiddleRight(cr/mr))
  -  `--character {string}`: The character to fill with. Defaults to ' ' (space)
 
+
+## Input/output types:
+
+| input          | output       |
+| -------------- | ------------ |
+| filesize       | string       |
+| int            | string       |
+| list\<any\>      | list\<string\> |
+| list\<filesize\> | list\<string\> |
+| list\<int\>      | list\<string\> |
+| list\<number\>   | list\<string\> |
+| list\<string\>   | list\<string\> |
+| number         | string       |
+| string         | string       |
 ## Examples
 
 Fill a string on the left side to a width of 15 with the character '─'

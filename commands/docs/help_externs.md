@@ -2,7 +2,7 @@
 title: help externs
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Show help on nushell externs.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `...rest`: the name of extern to get help on
  -  `--find {string}`: string to find in extern names and usage
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: str contains
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Checks if string input contains a substring.
 usage: |
@@ -24,6 +24,15 @@ usage: |
  -  `--ignore-case` `(-i)`: search is case insensitive
  -  `--not` `(-n)`: does not contain
 
+
+## Input/output types:
+
+| input        | output     |
+| ------------ | ---------- |
+| list\<string\> | list\<bool\> |
+| record       | record     |
+| string       | bool       |
+| table        | table      |
 ## Examples
 
 Check if input contains string
@@ -38,15 +47,13 @@ Check if input contains string case insensitive
 true
 ```
 
-Check if input contains string in a table
+Check if input contains string in a record
 ```shell
->  [[ColA ColB]; [test 100]] | str contains 'e' ColA
-╭───┬──────┬──────╮
-│ # │ ColA │ ColB │
-├───┼──────┼──────┤
-│ 0 │ true │  100 │
-╰───┴──────┴──────╯
-
+> { ColA: test, ColB: 100 } | str contains 'e' ColA
+╭──────┬──────╮
+│ ColA │ true │
+│ ColB │ 100  │
+╰──────┴──────╯
 ```
 
 Check if input contains string in a table

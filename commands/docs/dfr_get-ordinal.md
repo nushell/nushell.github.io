@@ -2,7 +2,7 @@
 title: dfr get-ordinal
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Gets ordinal from date.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> dfr get-ordinal ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -32,3 +39,6 @@ Returns ordinal from a date
 ╰───┴─────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

@@ -2,7 +2,7 @@
 title: headers
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Use the first row of the table as column names.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> headers ```
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | table  |
+| table     | table  |
 ## Examples
 
 Sets the column names for a table created by `split column`

@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.83.0
+version: 0.84.0
 conversions: |
   Convert value to string.
 usage: |
@@ -22,6 +22,22 @@ usage: |
  -  `...rest`: for a data structure input, convert data at the given cell paths
  -  `--decimals {int}`: decimal digits to which to round
 
+
+## Input/output types:
+
+| input     | output       |
+| --------- | ------------ |
+| binary    | string       |
+| bool      | string       |
+| datetime  | string       |
+| duration  | string       |
+| filesize  | string       |
+| int       | string       |
+| list\<any\> | list\<string\> |
+| number    | string       |
+| record    | record       |
+| string    | string       |
+| table     | table        |
 ## Examples
 
 convert integer to string and append three decimal places
@@ -72,6 +88,12 @@ convert boolean to string
 true
 ```
 
+convert date to string
+```shell
+> '2020-10-10 10:00:00 +02:00' | into datetime | into string
+Sat Oct 10 10:00:00 2020
+```
+
 convert filepath to string
 ```shell
 > ls Cargo.toml | get name | into string
@@ -82,4 +104,10 @@ convert filesize to string
 ```shell
 > 1KiB | into string
 1,024 B
+```
+
+convert duration to string
+```shell
+> 9day | into string
+1wk 2day
 ```

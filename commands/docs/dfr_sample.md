@@ -2,7 +2,7 @@
 title: dfr sample
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Create sample dataframe.
 usage: |
@@ -25,6 +25,13 @@ usage: |
  -  `--replace` `(-e)`: sample with replace
  -  `--shuffle` `(-u)`: shuffle sample
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Sample rows from dataframe
@@ -38,3 +45,6 @@ Shows sample row using fraction and replace
 > [[a b]; [1 2] [3 4] [5 6]] | dfr into-df | dfr sample -f 0.5 -e
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

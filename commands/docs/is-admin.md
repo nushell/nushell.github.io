@@ -2,7 +2,7 @@
 title: is-admin
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Check if nushell is running with administrator or root privileges.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> is-admin ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | bool   |
 
 ## Examples
 

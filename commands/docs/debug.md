@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -21,6 +21,14 @@ usage: |
 
  -  `--raw` `(-r)`: Prints the raw value representation
 
+
+## Input/output types:
+
+| input     | output       |
+| --------- | ------------ |
+| any       | string       |
+| list\<any\> | list\<string\> |
+| table     | list\<string\> |
 ## Examples
 
 Debug print a string

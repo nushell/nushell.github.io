@@ -2,7 +2,7 @@
 title: dfr lit
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   Creates a literal expression.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `literal`: literal to construct the expression
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Created a literal expression and converts it to a nu object
@@ -31,3 +38,6 @@ Created a literal expression and converts it to a nu object
 │ value │ 2       │
 ╰───────┴─────────╯
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

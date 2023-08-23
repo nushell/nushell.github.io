@@ -2,7 +2,7 @@
 title: dfr count-null
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Counts null values.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr count-null ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Counts null values
@@ -30,3 +37,6 @@ Counts null values
 ╰───┴────────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match.
 usage: |
@@ -26,6 +26,15 @@ usage: |
  -  `--range {range}`: optional start and/or end index
  -  `--end` `(-e)`: search from the end of the input
 
+
+## Input/output types:
+
+| input        | output    |
+| ------------ | --------- |
+| list\<string\> | list\<int\> |
+| record       | record    |
+| string       | int       |
+| table        | table     |
 ## Examples
 
 Returns index of string in input

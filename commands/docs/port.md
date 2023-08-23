@@ -2,7 +2,7 @@
 title: port
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Get a free port from system.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `start`: The start port to scan (inclusive)
  -  `end`: The end port to scan (inclusive)
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | int    |
 
 ## Examples
 

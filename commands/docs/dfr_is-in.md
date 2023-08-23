@@ -2,7 +2,7 @@
 title: dfr is-in
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   Creates an is-in expression.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `list`: List to check if values are in
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Creates a is-in expression
@@ -36,3 +43,6 @@ Creates a is-in expression
 ╰───┴───────┴───┴───────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

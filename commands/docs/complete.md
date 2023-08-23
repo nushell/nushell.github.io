@@ -2,7 +2,7 @@
 title: complete
 categories: |
   system
-version: 0.83.0
+version: 0.84.0
 system: |
   Capture the outputs and exit code from an external piped in command in a nushell table.
 usage: |
@@ -17,8 +17,13 @@ usage: |
 
 ```> complete ```
 
-## Notes
-In order to capture stdout, stderr, and exit_code, externally piped in commands need to be wrapped with `do`
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | record |
+
 ## Examples
 
 Run the external command to completion, capturing stdout and exit_code
@@ -32,3 +37,6 @@ Run external command to completion, capturing, stdout, stderr and exit_code
 > do { ^external arg1 } | complete
 
 ```
+
+## Notes
+In order to capture stdout, stderr, and exit_code, externally piped in commands need to be wrapped with `do`

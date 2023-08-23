@@ -2,7 +2,7 @@
 title: skip until
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Skip elements of the input until a predicate is true.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `predicate`: the predicate that skipped element must not match
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| table     | table     |
 ## Examples
 
 Skip until the element is positive

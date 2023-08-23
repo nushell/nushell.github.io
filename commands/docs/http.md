@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Various commands for working with http methods.
 usage: |
@@ -17,5 +17,24 @@ usage: |
 
 ```> http ```
 
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | string |
+
 ## Notes
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
+
+## Subcommands:
+
+| name                                             | type    | usage                                                     |
+| ------------------------------------------------ | ------- | --------------------------------------------------------- |
+| [`http delete`](/commands/docs/http_delete.md)   | Builtin | Delete the specified resource.                            |
+| [`http get`](/commands/docs/http_get.md)         | Builtin | Fetch the contents from a URL.                            |
+| [`http head`](/commands/docs/http_head.md)       | Builtin | Get the headers from a URL.                               |
+| [`http options`](/commands/docs/http_options.md) | Builtin | Requests permitted communication options for a given URL. |
+| [`http patch`](/commands/docs/http_patch.md)     | Builtin | Patch a body to a URL.                                    |
+| [`http post`](/commands/docs/http_post.md)       | Builtin | Post a body to a URL.                                     |
+| [`http put`](/commands/docs/http_put.md)         | Builtin | Put a body to a URL.                                      |

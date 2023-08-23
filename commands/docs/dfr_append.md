@@ -2,7 +2,7 @@
 title: dfr append
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Appends a new dataframe.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `other`: dataframe to be appended
  -  `--col` `(-c)`: appends in col orientation
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -51,3 +58,6 @@ Appends a dataframe merging at the end of columns
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

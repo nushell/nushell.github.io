@@ -2,7 +2,7 @@
 title: first
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
 usage: |
@@ -21,6 +21,14 @@ usage: |
 
  -  `rows`: starting from the front, the number of rows to return
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| binary    | binary    |
+| list\<any\> | list\<any\> |
+| range     | any       |
 ## Examples
 
 Return the first item of a list/table

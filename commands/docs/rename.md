@@ -2,7 +2,7 @@
 title: rename
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Creates a new table with columns renamed.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--column {list<string>}`: column name to be changed
  -  `--block {closure(any)}`: A closure to apply changes on each column
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | record |
+| table  | table  |
 ## Examples
 
 Rename a column

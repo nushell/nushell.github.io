@@ -2,7 +2,7 @@
 title: reject
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Remove the given columns or rows from the table. Opposite of `select`.
 usage: |
@@ -21,8 +21,13 @@ usage: |
 
  -  `...rest`: the names of columns to remove from the table
 
-## Notes
-To remove a quantity of rows or columns, use `skip`, `drop`, or `drop column`.
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | record |
+| table  | table  |
 ## Examples
 
 Reject a column in the `ls` table
@@ -59,3 +64,6 @@ Reject a nested field in a record
 │   │ ╰───┴───╯ │
 ╰───┴───────────╯
 ```
+
+## Notes
+To remove a quantity of rows or columns, use `skip`, `drop`, or `drop column`.

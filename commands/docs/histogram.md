@@ -1,17 +1,17 @@
 ---
 title: histogram
 categories: |
-  default
-version: 0.83.0
-default: |
+  chart
+version: 0.84.0
+chart: |
   Creates a new table with a histogram based on the column name passed in.
 usage: |
   Creates a new table with a histogram based on the column name passed in.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for chart
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.chart }}</div>
 
 ## Signature
 
@@ -22,6 +22,13 @@ usage: |
  -  `column-name`: column name to calc frequency, no need to provide if input is just a list
  -  `frequency-column-name`: histogram's frequency column, default to be frequency column output
  -  `--percentage-type {string}`: percentage calculate method, can be 'normalize' or 'relative', in 'normalize', defaults to be 'normalize'
+
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | table  |
 
 ## Examples
 

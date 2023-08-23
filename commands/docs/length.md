@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Count the number of elements in the input.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--column` `(-c)`: Show the number of columns in a table
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | int    |
+| table     | int    |
 ## Examples
 
 Count the number of items in a list

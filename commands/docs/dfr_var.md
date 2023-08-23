@@ -2,7 +2,7 @@
 title: dfr var
 categories: |
   expression
-version: 0.83.2
+version: 0.84.0
 expression: |
   Create a var expression for an aggregation
 usage: |

@@ -2,7 +2,7 @@
 title: into duration
 categories: |
   conversions
-version: 0.83.2
+version: 0.84.0
 conversions: |
   Convert value to duration.
 usage: |

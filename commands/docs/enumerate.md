@@ -2,7 +2,7 @@
 title: enumerate
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Enumerate the elements in a stream.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> enumerate ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | table  |
 
 ## Examples
 

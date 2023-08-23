@@ -2,7 +2,7 @@
 title: flatten
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Flatten the table.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `...rest`: optionally flatten data by column
  -  `--all` `(-a)`: flatten inner table one level out
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| record    | table     |
 ## Examples
 
 flatten a table

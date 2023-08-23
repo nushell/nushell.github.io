@@ -2,7 +2,7 @@
 title: dfr into-lazy
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr into-lazy ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Takes a dictionary and creates a lazy dataframe
@@ -24,3 +31,6 @@ Takes a dictionary and creates a lazy dataframe
 > [[a b];[1 2] [3 4]] | dfr into-lazy
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

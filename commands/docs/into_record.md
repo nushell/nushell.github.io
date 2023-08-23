@@ -2,7 +2,7 @@
 title: into record
 categories: |
   conversions
-version: 0.83.0
+version: 0.84.0
 conversions: |
   Convert value to record.
 usage: |
@@ -17,6 +17,17 @@ usage: |
 
 ```> into record ```
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| datetime  | record |
+| duration  | record |
+| list\<any\> | record |
+| range     | record |
+| record    | record |
+| table     | record |
 ## Examples
 
 Convert from one row table to record
@@ -47,16 +58,16 @@ Convert from range to record
 ╰───┴───╯
 ```
 
-convert duration to record
+convert duration to record (weeks max)
 ```shell
-> -500day | into record
-╭───────┬───╮
-│ year  │ 1 │
-│ month │ 4 │
-│ week  │ 2 │
-│ day   │ 1 │
-│ sign  │ - │
-╰───────┴───╯
+> (-500day - 4hr - 5sec) | into record
+╭────────┬────╮
+│ week   │ 71 │
+│ day    │ 3  │
+│ hour   │ 4  │
+│ second │ 5  │
+│ sign   │ -  │
+╰────────┴────╯
 ```
 
 convert record to record

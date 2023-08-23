@@ -2,7 +2,7 @@
 title: keybindings default
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   List default keybindings.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> keybindings default ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 

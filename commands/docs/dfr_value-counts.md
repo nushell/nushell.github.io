@@ -2,7 +2,7 @@
 title: dfr value-counts
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Returns a dataframe with the counts for unique values in series.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr value-counts ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Calculates value counts
@@ -30,3 +37,6 @@ Calculates value counts
 ╰───┴───┴────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

@@ -2,7 +2,7 @@
 title: encode hex
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Encode a binary value using hex.
 usage: |
@@ -21,6 +21,15 @@ usage: |
 
  -  `...rest`: For a data structure input, encode data at the given cell paths
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| binary       | string       |
+| list\<binary\> | list\<string\> |
+| record       | record       |
+| table        | table        |
 ## Examples
 
 Encode binary data
@@ -28,3 +37,6 @@ Encode binary data
 > 0x[09 F9 11 02 9D 74 E3 5B D8 41 56 C5 63 56 88 C0] | encode hex
 09F911029D74E35BD84156C5635688C0
 ```
+
+
+**Tips:** Command `encode hex` was not included in the official binaries by default, you have to build it with `--features=extra` flag

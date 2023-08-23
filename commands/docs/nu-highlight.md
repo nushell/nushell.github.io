@@ -2,7 +2,7 @@
 title: nu-highlight
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Syntax highlight the input string.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> nu-highlight ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | string |
 
 ## Examples
 

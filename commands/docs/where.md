@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Filter values based on a row condition.
 usage: |
@@ -21,10 +21,14 @@ usage: |
 
  -  `row_condition`: Filter condition
 
-## Notes
-This command works similar to 'filter' but allows extra shorthands for working with
-tables, known as "row conditions". On the other hand, reading the condition from a variable is
-not supported.
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| range     | any       |
+| table     | table     |
 ## Examples
 
 Filter rows of a table according to a condition
@@ -76,3 +80,8 @@ Find files whose filenames don't begin with the correct sequential number
 > ls | where type == file | sort-by name -n | enumerate | where {|e| $e.item.name !~ $'^($e.index + 1)' } | each {|| get item }
 
 ```
+
+## Notes
+This command works similar to 'filter' but allows extra shorthands for working with
+tables, known as "row conditions". On the other hand, reading the condition from a variable is
+not supported.

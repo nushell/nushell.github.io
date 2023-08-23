@@ -2,7 +2,7 @@
 title: overlay new
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Create an empty overlay.
 usage: |
@@ -21,11 +21,13 @@ usage: |
 
  -  `name`: Name of the overlay
 
-## Notes
-The command will first create an empty module, then add it as an overlay.
 
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Create an empty overlay
@@ -33,3 +35,9 @@ Create an empty overlay
 > overlay new spam
 
 ```
+
+## Notes
+The command will first create an empty module, then add it as an overlay.
+
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

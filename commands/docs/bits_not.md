@@ -2,7 +2,7 @@
 title: bits not
 categories: |
   bits
-version: 0.83.0
+version: 0.84.0
 bits: |
   Performs logical negation on each bit.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `--signed` `(-s)`: always treat input number as a signed number
  -  `--number-bytes {string}`: the size of unsigned number in bytes, it can be 1, 2, 4, 8, auto
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| int       | int       |
+| list\<int\> | list\<int\> |
 ## Examples
 
 Apply logical negation to a list of numbers
@@ -56,3 +63,6 @@ Apply logical negation to a list of numbers, treat input as signed number
 ╰───┴────╯
 
 ```
+
+
+**Tips:** Command `bits not` was not included in the official binaries by default, you have to build it with `--features=extra` flag

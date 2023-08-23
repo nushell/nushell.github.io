@@ -2,11 +2,11 @@
 title: dfr open
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
-  Opens CSV, JSON, JSON lines, arrow, or parquet file to create dataframe.
+  Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.
 usage: |
-  Opens CSV, JSON, JSON lines, arrow, or parquet file to create dataframe.
+  Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.
 ---
 
 # <code>{{ $frontmatter.title }}</code> for dataframe
@@ -21,12 +21,19 @@ usage: |
 
  -  `file`: file path to load values from
  -  `--lazy` `(-l)`: creates a lazy dataframe
- -  `--type {string}`: File type: csv, tsv, json, parquet, arrow. If omitted, derive from file extension
+ -  `--type {string}`: File type: csv, tsv, json, parquet, arrow, avro. If omitted, derive from file extension
  -  `--delimiter {string}`: file delimiter character. CSV file
  -  `--no-header` `(-)`: Indicates if file doesn't have header. CSV file
  -  `--infer-schema {number}`: Number of rows to infer the schema of the file. CSV file
  -  `--skip-rows {number}`: Number of rows to skip from file. CSV file
  -  `--columns {list<string>}`: Columns to be selected from csv file. CSV and Parquet file
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -35,3 +42,6 @@ Takes a file name and creates a dataframe
 > dfr open test.csv
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

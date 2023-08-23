@@ -2,7 +2,7 @@
 title: dfr reverse
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Reverses the LazyFrame
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> dfr reverse ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -31,3 +38,6 @@ Reverses the dataframe
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

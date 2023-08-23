@@ -2,7 +2,7 @@
 title: dfr ls
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Lists stored dataframes.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr ls ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Creates a new dataframe and shows it in the dataframe list
@@ -25,3 +32,6 @@ Creates a new dataframe and shows it in the dataframe list
     ls
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

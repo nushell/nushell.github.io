@@ -2,7 +2,7 @@
 title: schema
 categories: |
   database
-version: 0.83.0
+version: 0.84.0
 database: |
   Show the schema of a SQLite database.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> schema ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

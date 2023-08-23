@@ -2,7 +2,7 @@
 title: with-env
 categories: |
   env
-version: 0.83.0
+version: 0.84.0
 env: |
   Runs a block with an environment variable set.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `variable`: the environment variable to temporarily set
  -  `block`: the block to run once the variable is set
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

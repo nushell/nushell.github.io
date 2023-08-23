@@ -2,7 +2,7 @@
 title: date now
 categories: |
   date
-version: 0.83.0
+version: 0.84.0
 date: |
   Get the current date.
 usage: |
@@ -17,11 +17,18 @@ usage: |
 
 ```> date now ```
 
+
+## Input/output types:
+
+| input   | output   |
+| ------- | -------- |
+| nothing | datetime |
+
 ## Examples
 
 Get the current date and display it in a given format string.
 ```shell
-> date now | date format "%Y-%m-%d %H:%M:%S"
+> date now | format date "%Y-%m-%d %H:%M:%S"
 
 ```
 

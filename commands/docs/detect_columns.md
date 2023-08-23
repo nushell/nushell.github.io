@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `--skip {int}`: number of rows to skip before detecting
  -  `--no-headers` `(-n)`: don't detect headers
  -  `--combine-columns {range}`: columns to be combined; listed as a range
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | table  |
 
 ## Examples
 

@@ -1,22 +1,29 @@
 ---
 title: path split
 categories: |
-  default
-version: 0.83.0
-default: |
+  path
+version: 0.84.0
+path: |
   Split a path into a list based on the system's path separator.
 usage: |
   Split a path into a list based on the system's path separator.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for path
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.path }}</div>
 
 ## Signature
 
 ```> path split ```
 
+
+## Input/output types:
+
+| input        | output             |
+| ------------ | ------------------ |
+| list\<string\> | list\<list\<string\>\> |
+| string       | list\<string\>       |
 ## Examples
 
 Split a path into parts

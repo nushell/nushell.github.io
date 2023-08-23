@@ -2,7 +2,7 @@
 title: parse
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Parse columns from string data using a simple pattern.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `pattern`: the pattern to match. Eg) "{foo}: {bar}"
  -  `--regex` `(-r)`: use full regex syntax for patterns
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | table  |
+| string    | table  |
 ## Examples
 
 Parse a string into two named columns

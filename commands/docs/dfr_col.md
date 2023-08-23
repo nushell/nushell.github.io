@@ -2,7 +2,7 @@
 title: dfr col
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   Creates a named column expression.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `column name`: Name of column to be used
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Creates a named column expression and converts it to a nu object
@@ -31,3 +38,6 @@ Creates a named column expression and converts it to a nu object
 │ value │ a      │
 ╰───────┴────────╯
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

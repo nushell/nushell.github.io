@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -28,6 +28,13 @@ usage: |
  -  `--verbose` `(-v)`: print names of deleted files
  -  `--interactive` `(-i)`: ask user to confirm action
  -  `--interactive-once` `(-I)`: ask user to confirm action only once
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

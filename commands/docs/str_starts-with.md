@@ -2,7 +2,7 @@
 title: str starts-with
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Check if an input starts with a string.
 usage: |
@@ -23,6 +23,15 @@ usage: |
  -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
  -  `--ignore-case` `(-i)`: search is case insensitive
 
+
+## Input/output types:
+
+| input        | output     |
+| ------------ | ---------- |
+| list\<string\> | list\<bool\> |
+| record       | record     |
+| string       | bool       |
+| table        | table      |
 ## Examples
 
 Checks if input string starts with 'my'

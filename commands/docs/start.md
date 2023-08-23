@@ -2,7 +2,7 @@
 title: start
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Open a folder, file or website in the default application or viewer.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `path`: path to open
 
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+| string  | any    |
 ## Examples
 
 Open a text file with the default text editor

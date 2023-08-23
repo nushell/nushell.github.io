@@ -2,7 +2,7 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Remove bytes.
 usage: |
@@ -24,6 +24,14 @@ usage: |
  -  `--end` `(-e)`: remove from end of binary
  -  `--all` `(-a)`: remove occurrences of finding binary
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| binary | binary |
+| record | record |
+| table  | table  |
 ## Examples
 
 Remove contents
@@ -34,12 +42,12 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Remove all occurrences of find binary
+Remove all occurrences of find binary in record field
 ```shell
-> 0x[10 AA 10 BB 10] | bytes remove -a 0x[10]
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
-00000000:   aa bb                                                ××
-
+> { data: 0x[10 AA 10 BB 10] } | bytes remove -a 0x[10] data
+╭──────┬────────────╮
+│ data │ [170, 187] │
+╰──────┴────────────╯
 ```
 
 Remove occurrences of find binary from end

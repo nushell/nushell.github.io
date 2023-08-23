@@ -2,7 +2,7 @@
 title: from ssv
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `--noheaders` `(-n)`: don't treat the first row as column names
  -  `--aligned-columns` `(-a)`: assume columns are aligned
  -  `--minimum-spaces {int}`: the minimum spaces to separate columns
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | table  |
 
 ## Examples
 

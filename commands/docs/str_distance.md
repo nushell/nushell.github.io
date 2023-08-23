@@ -2,7 +2,7 @@
 title: str distance
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Compare two strings and return the edit distance/Levenshtein distance.
 usage: |
@@ -22,6 +22,14 @@ usage: |
  -  `compare-string`: the first string to compare
  -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | record |
+| string | int    |
+| table  | table  |
 ## Examples
 
 get the edit distance between two strings
@@ -30,7 +38,7 @@ get the edit distance between two strings
 1
 ```
 
-Compute edit distance between strings in record and another string, using cell paths
+Compute edit distance between strings in table and another string, using cell paths
 ```shell
 > [{a: 'nutshell' b: 'numetal'}] | str distance 'nushell' 'a' 'b'
 ╭───┬───┬───╮
@@ -39,4 +47,13 @@ Compute edit distance between strings in record and another string, using cell p
 │ 0 │ 1 │ 4 │
 ╰───┴───┴───╯
 
+```
+
+Compute edit distance between strings in record and another string, using cell paths
+```shell
+> {a: 'nutshell' b: 'numetal'} | str distance 'nushell' a b
+╭───┬───╮
+│ a │ 1 │
+│ b │ 4 │
+╰───┴───╯
 ```

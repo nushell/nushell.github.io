@@ -2,7 +2,7 @@
 title: dfr agg-groups
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   creates an agg_groups expression
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr agg-groups ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 
@@ -24,3 +31,6 @@ usage: |
 >
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

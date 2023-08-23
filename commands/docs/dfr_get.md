@@ -2,7 +2,7 @@
 title: dfr get
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Creates dataframe with the selected columns.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `...rest`: column names to sort dataframe
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Returns the selected column
@@ -34,3 +41,6 @@ Returns the selected column
 ╰───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

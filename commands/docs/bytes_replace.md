@@ -2,7 +2,7 @@
 title: bytes replace
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Find and replace binary.
 usage: |
@@ -24,6 +24,14 @@ usage: |
  -  `...rest`: for a data structure input, replace bytes in data at the given cell paths
  -  `--all` `(-a)`: replace all occurrences of find binary
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| binary | binary |
+| record | record |
+| table  | table  |
 ## Examples
 
 Find and replace contents

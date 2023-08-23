@@ -2,7 +2,7 @@
 title: bytes ends-with
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Check if bytes ends with a pattern.
 usage: |
@@ -22,6 +22,14 @@ usage: |
  -  `pattern`: the pattern to match
  -  `...rest`: for a data structure input, check if bytes at the given cell paths end with the pattern
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| binary | bool   |
+| record | record |
+| table  | table  |
 ## Examples
 
 Checks if binary ends with `0x[AA]`

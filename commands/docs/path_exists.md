@@ -1,25 +1,29 @@
 ---
 title: path exists
 categories: |
-  default
-version: 0.83.0
-default: |
+  path
+version: 0.84.0
+path: |
   Check whether a path exists.
 usage: |
   Check whether a path exists.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for path
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.path }}</div>
 
 ## Signature
 
 ```> path exists ```
 
-## Notes
-This only checks if it is possible to either `open` or `cd` to the given path.
-If you need to distinguish dirs and files, please use `path type`.
+
+## Input/output types:
+
+| input        | output     |
+| ------------ | ---------- |
+| list\<string\> | list\<bool\> |
+| string       | bool       |
 ## Examples
 
 Check if a file exists
@@ -37,3 +41,7 @@ Check if files in list exist
 ╰───┴───────╯
 
 ```
+
+## Notes
+This only checks if it is possible to either `open` or `cd` to the given path.
+If you need to distinguish dirs and files, please use `path type`.

@@ -2,7 +2,7 @@
 title: bits xor
 categories: |
   bits
-version: 0.83.0
+version: 0.84.0
 bits: |
   Performs bitwise xor for integers.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `target`: target integer to perform bit xor
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| int       | int       |
+| list\<int\> | list\<int\> |
 ## Examples
 
 Apply bits xor to two numbers
@@ -39,3 +46,6 @@ Apply logical xor to a list of numbers
 ╰───┴────╯
 
 ```
+
+
+**Tips:** Command `bits xor` was not included in the official binaries by default, you have to build it with `--features=extra` flag

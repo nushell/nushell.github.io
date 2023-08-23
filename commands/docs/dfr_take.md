@@ -2,7 +2,7 @@
 title: dfr take
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Creates new dataframe using the given indices.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `indices`: list of indices used to take data
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -50,3 +57,6 @@ Takes selected rows from series
 ╰───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

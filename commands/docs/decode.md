@@ -2,7 +2,7 @@
 title: decode
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Decode bytes into a string.
 usage: |
@@ -21,12 +21,13 @@ usage: |
 
  -  `encoding`: the text encoding to use
 
-## Notes
-Multiple encodings are supported; here are a few:
-big5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5
 
-For a more complete list of encodings please refer to the encoding_rs
-documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| binary | string |
+
 ## Examples
 
 Decode the output of an external command
@@ -40,3 +41,17 @@ Decode an UTF-16 string into nushell UTF-8 string
 > 0x[00 53 00 6F 00 6D 00 65 00 20 00 44 00 61 00 74 00 61] | decode utf-16be
 Some Data
 ```
+
+## Notes
+Multiple encodings are supported; here are a few:
+big5, euc-jp, euc-kr, gbk, iso-8859-1, utf-16, cp1252, latin5
+
+For a more complete list of encodings please refer to the encoding_rs
+documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
+
+## Subcommands:
+
+| name                                               | type    | usage                  |
+| -------------------------------------------------- | ------- | ---------------------- |
+| [`decode base64`](/commands/docs/decode_base64.md) | Builtin | Base64 decode a value. |
+| [`decode hex`](/commands/docs/decode_hex.md)       | Builtin | Hex decode a value.    |

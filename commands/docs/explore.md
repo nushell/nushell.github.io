@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.83.0
+version: 0.84.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |
@@ -24,8 +24,13 @@ usage: |
  -  `--reverse` `(-r)`: Start with the viewport scrolled to the bottom
  -  `--peek` `(-p)`: When quitting, output the value of the cell the cursor was on
 
-## Notes
-Press `:` then `h` to get a help menu.
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Explore the system information record
@@ -51,3 +56,6 @@ Explore a JSON file, then save the last visited sub-structure to a file
 > open file.json | explore -p | to json | save part.json
 
 ```
+
+## Notes
+Press `:` then `h` to get a help menu.

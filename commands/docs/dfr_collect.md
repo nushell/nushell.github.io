@@ -2,7 +2,7 @@
 title: dfr collect
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Collect lazy dataframe into eager dataframe.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr collect ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 drop duplicates
@@ -30,3 +37,6 @@ drop duplicates
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

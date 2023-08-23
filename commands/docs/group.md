@@ -2,7 +2,7 @@
 title: group
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Groups input into groups of `group_size`.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `group_size`: the size of each group
+
+
+## Input/output types:
+
+| input     | output          |
+| --------- | --------------- |
+| list\<any\> | list\<list\<any\>\> |
 
 ## Examples
 

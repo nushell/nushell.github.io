@@ -2,7 +2,7 @@
 title: help aliases
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Show help on nushell aliases.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `...rest`: the name of alias to get help on
  -  `--find {string}`: string to find in alias names and usage
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 

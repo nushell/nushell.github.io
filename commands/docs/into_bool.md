@@ -2,7 +2,7 @@
 title: into bool
 categories: |
   conversions
-version: 0.83.0
+version: 0.84.0
 conversions: |
   Convert value to boolean.
 usage: |
@@ -21,6 +21,18 @@ usage: |
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| bool      | bool   |
+| int       | bool   |
+| list\<any\> | table  |
+| number    | bool   |
+| record    | record |
+| string    | bool   |
+| table     | table  |
 ## Examples
 
 Convert value to boolean in table

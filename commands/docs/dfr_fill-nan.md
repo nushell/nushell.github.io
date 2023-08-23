@@ -2,7 +2,7 @@
 title: dfr fill-nan
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Replaces NaN values with the given expression.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `fill`: Expression to use to fill the NAN values
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -49,3 +56,6 @@ Fills the NaN values of a whole dataframe
 ╰───┴──────┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

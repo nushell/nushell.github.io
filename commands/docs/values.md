@@ -2,7 +2,7 @@
 title: values
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Given a record or table, produce a list of its columns' values.
 usage: |
@@ -17,8 +17,13 @@ usage: |
 
 ```> values ```
 
-## Notes
-This is a counterpart to `columns`, which produces a list of columns' names.
+
+## Input/output types:
+
+| input  | output    |
+| ------ | --------- |
+| record | list\<any\> |
+| table  | list\<any\> |
 ## Examples
 
 Get the values from the record (produce a list)
@@ -63,3 +68,6 @@ Get the values from the table (produce a list of lists)
 ╰───┴──────────────────────────╯
 
 ```
+
+## Notes
+This is a counterpart to `columns`, which produces a list of columns' names.

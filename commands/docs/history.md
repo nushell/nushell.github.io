@@ -2,7 +2,7 @@
 title: history
 categories: |
   misc
-version: 0.83.0
+version: 0.84.0
 misc: |
   Get the command history.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--clear` `(-c)`: Clears out the history entries
  -  `--long` `(-l)`: Show long listing of entries for sqlite history
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 
@@ -41,3 +48,10 @@ Search all the commands from history that contains 'cargo'
 > history | wrap cmd | where cmd =~ cargo
 
 ```
+
+
+## Subcommands:
+
+| name                                                   | type    | usage                            |
+| ------------------------------------------------------ | ------- | -------------------------------- |
+| [`history session`](/commands/docs/history_session.md) | Builtin | Get the command history session. |

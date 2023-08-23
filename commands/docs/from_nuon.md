@@ -1,21 +1,28 @@
 ---
 title: from nuon
 categories: |
-  experimental
-version: 0.83.0
-experimental: |
+  formats
+version: 0.84.0
+formats: |
   Convert from nuon to structured data.
 usage: |
   Convert from nuon to structured data.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for experimental
+# <code>{{ $frontmatter.title }}</code> for formats
 
-<div class='command-title'>{{ $frontmatter.experimental }}</div>
+<div class='command-title'>{{ $frontmatter.formats }}</div>
 
 ## Signature
 
 ```> from nuon ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | any    |
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: overlay use
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Use definitions from a module as an overlay.
 usage: |
@@ -24,9 +24,13 @@ usage: |
  -  `--prefix` `(-p)`: Prepend module name to the imported commands and aliases
  -  `--reload` `(-r)`: If the overlay already exists, reload its definitions and environment.
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Create an overlay from a module
@@ -60,3 +64,7 @@ Create an overlay from a file
     $env.FOO
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

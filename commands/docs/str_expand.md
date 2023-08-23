@@ -2,7 +2,7 @@
 title: str expand
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Generates all possible combinations defined in brace expansion syntax.
 usage: |
@@ -15,10 +15,19 @@ usage: |
 
 ## Signature
 
-```> str expand ```
+```> str expand --path```
 
-## Notes
-This syntax may seem familiar with `glob {A,B}.C`. The difference is glob relies on filesystem, but str expand is not. Inside braces, we put variants. Then basically we're creating all possible outcomes.
+## Parameters
+
+ -  `--path` `(-)`: Replaces all backslashes with double backslashes, useful for Path.
+
+
+## Input/output types:
+
+| input        | output             |
+| ------------ | ------------------ |
+| list\<string\> | list\<list\<string\>\> |
+| string       | list\<string\>       |
 ## Examples
 
 Define a range inside braces to produce a list of string.
@@ -32,6 +41,36 @@ Define a range inside braces to produce a list of string.
 
 ```
 
+Ignore the next character after the backslash ('\')
+```shell
+> 'A{B\,,C}' | str expand
+╭───┬─────╮
+│ 0 │ AB, │
+│ 1 │ AC  │
+╰───┴─────╯
+
+```
+
+Commas that are not inside any braces need to be skipped.
+```shell
+> 'Welcome\, {home,mon ami}!' | str expand
+╭───┬───────────────────╮
+│ 0 │ Welcome, home!    │
+│ 1 │ Welcome, mon ami! │
+╰───┴───────────────────╯
+
+```
+
+Use double backslashes to add a backslash.
+```shell
+> 'A{B\\,C}' | str expand
+╭───┬─────╮
+│ 0 │ AB\ │
+│ 1 │ AC  │
+╰───┴─────╯
+
+```
+
 Export comma separated values inside braces (`{}`) to a string list.
 ```shell
 > "{apple,banana,cherry}" | str expand
@@ -40,6 +79,16 @@ Export comma separated values inside braces (`{}`) to a string list.
 │ 1 │ banana │
 │ 2 │ cherry │
 ╰───┴────────╯
+
+```
+
+If the piped data is path, you may want to use --path flag, or else manually replace the backslashes with double backslashes.
+```shell
+> 'C:\{Users,Windows}' | str expand --path
+╭───┬────────────╮
+│ 0 │ C:\Users   │
+│ 1 │ C:\Windows │
+╰───┴────────────╯
 
 ```
 
@@ -99,3 +148,6 @@ Also, it is possible to use one inside another. Here is a real-world example, th
 ╰───┴──────╯
 
 ```
+
+## Notes
+This syntax may seem familiar with `glob {A,B}.C`. The difference is glob relies on filesystem, but str expand is not. Inside braces, we put variants. Then basically we're creating all possible outcomes.

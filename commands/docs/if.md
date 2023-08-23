@@ -2,7 +2,7 @@
 title: if
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Conditionally run a block.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `cond`: condition to check
  -  `then_block`: block to run if check succeeds
  -  `else_expression`: expression or block to run if check fails
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

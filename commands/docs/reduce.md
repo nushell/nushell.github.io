@@ -1,17 +1,17 @@
 ---
 title: reduce
 categories: |
-  default
-version: 0.83.0
-default: |
+  filters
+version: 0.84.0
+filters: |
   Aggregate a list to a single value using an accumulator closure.
 usage: |
   Aggregate a list to a single value using an accumulator closure.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 
@@ -22,6 +22,14 @@ usage: |
  -  `closure`: reducing function
  -  `--fold {any}`: reduce with initial value
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | any    |
+| range     | any    |
+| table     | any    |
 ## Examples
 
 Sum values of a list (same as 'math sum')

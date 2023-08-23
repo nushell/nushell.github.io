@@ -2,7 +2,7 @@
 title: dfr arg-sort
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Returns indexes for a sorted series.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--reverse` `(-r)`: reverse order
  -  `--nulls-last` `(-n)`: nulls ordered last
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -53,3 +60,6 @@ Returns indexes for a sorted series
 ╰───┴──────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

@@ -2,7 +2,7 @@
 title: load-env
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Loads an environment update from a record.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `update`: the record to use for updates
 
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+| record  | nothing |
 ## Examples
 
 Load variables from an input stream

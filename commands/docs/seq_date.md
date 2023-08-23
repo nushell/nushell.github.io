@@ -2,7 +2,7 @@
 title: seq date
 categories: |
   generators
-version: 0.83.0
+version: 0.84.0
 generators: |
   Print sequences of dates.
 usage: |
@@ -26,6 +26,13 @@ usage: |
  -  `--increment {int}`: increment dates by this number
  -  `--days {int}`: number of days to print
  -  `--reverse` `(-r)`: print dates in reverse
+
+
+## Input/output types:
+
+| input   | output       |
+| ------- | ------------ |
+| nothing | list\<string\> |
 
 ## Examples
 

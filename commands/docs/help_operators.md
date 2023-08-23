@@ -2,7 +2,7 @@
 title: help operators
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Show help on nushell operators.
 usage: |
@@ -16,3 +16,10 @@ usage: |
 ## Signature
 
 ```> help operators ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |

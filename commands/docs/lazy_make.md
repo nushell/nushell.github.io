@@ -2,7 +2,7 @@
 title: lazy make
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Create a lazy record.
 usage: |
@@ -22,12 +22,13 @@ usage: |
  -  `--columns {list<string>}`: Closure that gets called when the LazyRecord needs to list the available column names
  -  `--get-value {closure(string)}`: Closure to call when a value needs to be produced on demand
 
-## Notes
-Lazy records are special records that only evaluate their values once the property is requested.
-        For example, when printing a lazy record, all of its fields will be collected. But when accessing
-        a specific property, only it will be evaluated.
 
-        Note that this is unrelated to the lazyframes feature bundled with dataframes.
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | record |
+
 ## Examples
 
 Create a lazy record
@@ -41,3 +42,10 @@ Test the laziness of lazy records
 > lazy make -c ["hello"] -g { |key| print $"getting ($key)!"; $key | str upcase }
 
 ```
+
+## Notes
+Lazy records are special records that only evaluate their values once the property is requested.
+        For example, when printing a lazy record, all of its fields will be collected. But when accessing
+        a specific property, only it will be evaluated.
+
+        Note that this is unrelated to the lazyframes feature bundled with dataframes.

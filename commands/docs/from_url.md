@@ -2,7 +2,7 @@
 title: from url
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Parse url-encoded string as a record.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> from url ```
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | record |
+
 ## Examples
 
 Convert url encoded string into a record
@@ -29,3 +36,6 @@ Convert url encoded string into a record
 │ fat    │ butter   │
 ╰────────┴──────────╯
 ```
+
+
+**Tips:** Command `from url` was not included in the official binaries by default, you have to build it with `--features=extra` flag

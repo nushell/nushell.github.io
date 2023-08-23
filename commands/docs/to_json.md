@@ -2,7 +2,7 @@
 title: to json
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Converts table data into JSON text.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `--raw` `(-r)`: remove all of the whitespace
  -  `--indent {number}`: specify indentation width
  -  `--tabs {number}`: specify indentation tab quantity
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | string |
 
 ## Examples
 

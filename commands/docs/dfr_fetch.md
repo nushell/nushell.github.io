@@ -2,7 +2,7 @@
 title: dfr fetch
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   collects the lazyframe to the selected rows.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `rows`: number of rows to be fetched from lazyframe
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Fetch a rows from the dataframe
@@ -34,3 +41,6 @@ Fetch a rows from the dataframe
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

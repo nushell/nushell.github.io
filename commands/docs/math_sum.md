@@ -2,7 +2,7 @@
 title: math sum
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the sum of a list of numbers or of each column in a table.
 usage: |
@@ -17,6 +17,16 @@ usage: |
 
 ```> math sum ```
 
+
+## Input/output types:
+
+| input          | output   |
+| -------------- | -------- |
+| list\<duration\> | duration |
+| list\<filesize\> | filesize |
+| list\<number\>   | number   |
+| range          | number   |
+| table          | table    |
 ## Examples
 
 Sum a list of numbers

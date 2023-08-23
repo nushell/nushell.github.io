@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   Get the metadata for items in the stream.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `expression`: the expression you want metadata for
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | record |
 
 ## Examples
 

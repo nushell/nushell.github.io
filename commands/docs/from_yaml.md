@@ -2,7 +2,7 @@
 title: from yaml
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Parse text as .yaml/.yml and create table.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> from yaml ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | any    |
 
 ## Examples
 

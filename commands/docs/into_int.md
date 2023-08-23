@@ -2,7 +2,7 @@
 title: into int
 categories: |
   conversions
-version: 0.83.0
+version: 0.84.0
 conversions: |
   Convert value to integer.
 usage: |
@@ -23,6 +23,26 @@ usage: |
  -  `--radix {number}`: radix of integer
  -  `--little-endian` `(-)`: use little-endian byte decoding
 
+
+## Input/output types:
+
+| input          | output    |
+| -------------- | --------- |
+| bool           | int       |
+| datetime       | int       |
+| duration       | int       |
+| filesize       | int       |
+| list\<any\>      | list\<int\> |
+| list\<bool\>     | list\<int\> |
+| list\<datetime\> | list\<int\> |
+| list\<duration\> | list\<int\> |
+| list\<filesize\> | list\<int\> |
+| list\<number\>   | list\<int\> |
+| list\<string\>   | list\<int\> |
+| number         | int       |
+| record         | record    |
+| string         | int       |
+| table          | table     |
 ## Examples
 
 Convert string to integer in table

@@ -2,7 +2,7 @@
 title: dfr as
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   Creates an alias expression.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `Alias name`: Alias name for the expression
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Creates and alias expression
@@ -34,3 +41,6 @@ Creates and alias expression
 │ alias │ new_a              │
 ╰───────┴────────────────────╯
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

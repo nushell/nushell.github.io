@@ -2,7 +2,7 @@
 title: lines
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Converts input to lines.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--skip-empty` `(-s)`: skip empty lines
+
+
+## Input/output types:
+
+| input | output       |
+| ----- | ------------ |
+| any   | list\<string\> |
 
 ## Examples
 

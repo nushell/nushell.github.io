@@ -2,7 +2,7 @@
 title: math arccosh
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the inverse of the hyperbolic cosine function.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> math arccosh ```
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Get the arccosh of 1
@@ -24,3 +31,6 @@ Get the arccosh of 1
 > 1 | math arccosh
 0
 ```
+
+
+**Tips:** Command `math arccosh` was not included in the official binaries by default, you have to build it with `--features=extra` flag

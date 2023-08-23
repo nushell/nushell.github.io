@@ -2,7 +2,7 @@
 title: random bool
 categories: |
   random
-version: 0.83.0
+version: 0.84.0
 random: |
   Generate a random boolean value.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--bias {number}`: Adjusts the probability of a "true" outcome
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | bool   |
 
 ## Examples
 

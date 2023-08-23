@@ -2,7 +2,7 @@
 title: split words
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Split a string's words into separate rows.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--grapheme-clusters` `(-g)`: measure word length in grapheme clusters (requires -l)
  -  `--utf-8-bytes` `(-b)`: measure word length in UTF-8 bytes (default; requires -l; non-ASCII chars are length 2+)
 
+
+## Input/output types:
+
+| input        | output             |
+| ------------ | ------------------ |
+| list\<string\> | list\<list\<string\>\> |
+| string       | list\<string\>       |
 ## Examples
 
 Split the string's words into separate rows

@@ -2,7 +2,7 @@
 title: bytes collect
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Concatenate multiple binary into a single binary, with an optional separator between each.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `separator`: optional separator to use when creating binary
+
+
+## Input/output types:
+
+| input        | output |
+| ------------ | ------ |
+| list\<binary\> | binary |
 
 ## Examples
 

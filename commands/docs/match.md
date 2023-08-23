@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `value`: value to check
  -  `match_block`: block to run if check succeeds
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -56,11 +63,10 @@ Match against pipeline input
 
 Match with a guard
 ```shell
->
-                    match [1 2 3] {
-                        [$x, ..$y] if $x == 1 => { 'good list' },
-                        _ => { 'not a very good list' }
-                    }
+> match [1 2 3] {
+        [$x, ..$y] if $x == 1 => { 'good list' },
+        _ => { 'not a very good list' }
+    }
 
 good list
 ```

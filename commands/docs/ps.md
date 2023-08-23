@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.83.0
+version: 0.84.0
 system: |
   View information about system processes.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--long` `(-l)`: list all available columns for each entry
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 

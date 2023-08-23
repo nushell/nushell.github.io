@@ -2,7 +2,7 @@
 title: fmt
 categories: |
   conversions
-version: 0.83.0
+version: 0.84.0
 conversions: |
   Format a number.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> fmt ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| number | record |
 
 ## Examples
 
@@ -33,3 +40,6 @@ Get a record containing multiple formats for the number 42
 │ upperhex │ 0x2A     │
 ╰──────────┴──────────╯
 ```
+
+
+**Tips:** Command `fmt` was not included in the official binaries by default, you have to build it with `--features=extra` flag

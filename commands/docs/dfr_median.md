@@ -2,7 +2,7 @@
 title: dfr median
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Aggregates columns to their median value
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr median ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Median value from columns in a dataframe
@@ -29,3 +36,6 @@ Median value from columns in a dataframe
 ╰───┴──────┴──────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

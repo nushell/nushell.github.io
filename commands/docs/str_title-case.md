@@ -2,7 +2,7 @@
 title: str title-case
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Convert a string to Title Case.
 usage: |
@@ -21,6 +21,15 @@ usage: |
 
  -  `...rest`: For a data structure input, convert strings at the given cell paths
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 convert a string to Title Case
@@ -45,3 +54,6 @@ convert a column from a table to Title Case
 ╰───┴─────────┴───────╯
 
 ```
+
+
+**Tips:** Command `str title-case` was not included in the official binaries by default, you have to build it with `--features=extra` flag

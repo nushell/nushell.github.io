@@ -2,7 +2,7 @@
 title: dfr strftime
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Formats date based on string rule.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `fmt`: Format rule
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Formats date
@@ -36,3 +43,6 @@ Formats date
 ╰───┴────────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

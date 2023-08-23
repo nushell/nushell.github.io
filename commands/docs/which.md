@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.83.0
+version: 0.84.0
 system: |
   Finds a program file, alias or custom command.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `application`: application
  -  `...rest`: additional applications
  -  `--all` `(-a)`: list all executables
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 

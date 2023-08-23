@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--no-collect` `(-n)`: do not collect streams of structured data
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | string |
 
 ## Examples
 

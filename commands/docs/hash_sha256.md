@@ -2,7 +2,7 @@
 title: hash sha256
 categories: |
   hash
-version: 0.83.0
+version: 0.84.0
 hash: |
   Hash a value using the sha256 hash algorithm
 usage: |
@@ -22,6 +22,14 @@ usage: |
  -  `...rest`: optionally sha256 hash data by cell path
  -  `--binary` `(-b)`: Output binary instead of hexadecimal representation
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | record |
+| string | string |
+| table  | table  |
 ## Examples
 
 Return the sha256 hash of a string, hex-encoded

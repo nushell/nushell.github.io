@@ -2,7 +2,7 @@
 title: dfr dummies
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Creates a new dataframe with dummy variables.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> dfr dummies ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -45,3 +52,6 @@ Create new dataframe with dummy variables from a series
 ╰───┴─────┴─────┴─────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

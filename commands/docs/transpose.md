@@ -1,17 +1,17 @@
 ---
 title: transpose
 categories: |
-  default
-version: 0.83.0
-default: |
+  filters
+version: 0.84.0
+filters: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |
   Transposes the table contents so rows become columns and columns become rows.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 
@@ -26,6 +26,13 @@ usage: |
  -  `--keep-last` `(-l)`: on repetition of record fields due to `header-row`, keep the last value obtained
  -  `--keep-all` `(-a)`: on repetition of record fields due to `header-row`, keep all the values obtained
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | table  |
+| table  | any    |
 ## Examples
 
 Transposes the table contents with default column names

@@ -2,7 +2,7 @@
 title: seq char
 categories: |
   generators
-version: 0.83.0
+version: 0.84.0
 generators: |
   Print a sequence of ASCII characters.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `start`: start of character sequence (inclusive)
  -  `end`: end of character sequence (inclusive)
+
+
+## Input/output types:
+
+| input   | output       |
+| ------- | ------------ |
+| nothing | list\<string\> |
 
 ## Examples
 

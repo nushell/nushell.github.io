@@ -2,7 +2,7 @@
 title: uniq
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Return the distinct values in the input.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--repeated` `(-d)`: Return the input values that occur more than once
  -  `--ignore-case` `(-i)`: Compare input values case-insensitively
  -  `--unique` `(-u)`: Return the input values that occur once only
+
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
 
 ## Examples
 

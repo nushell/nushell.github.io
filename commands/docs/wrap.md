@@ -2,7 +2,7 @@
 title: wrap
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Wrap the value into a column.
 usage: |
@@ -21,6 +21,14 @@ usage: |
 
  -  `name`: the name of the column
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| any       | record |
+| list\<any\> | table  |
+| range     | table  |
 ## Examples
 
 Wrap a list into a table with a given column name

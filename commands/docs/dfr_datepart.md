@@ -2,7 +2,7 @@
 title: dfr datepart
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `Datepart name`: Part of the date to capture.  Possible values are year, quarter, month, week, weekday, day, hour, minute, second, millisecond, microsecond, nanosecond
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -51,3 +58,6 @@ Creates an expression to capture multiple date parts
 ╰───┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴─────────────────┴─────────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

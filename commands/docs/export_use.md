@@ -2,7 +2,7 @@
 title: export use
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Use definitions from a module and export them from this module.
 usage: |
@@ -22,9 +22,13 @@ usage: |
  -  `module`: Module or module file
  -  `members`: Which members of the module to import
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Re-export a command from another module
@@ -36,3 +40,7 @@ Re-export a command from another module
 
 foo
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

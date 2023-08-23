@@ -2,7 +2,7 @@
 title: timeit
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   Time the running time of a block.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `command`: the command or block to run
 
+
+## Input/output types:
+
+| input   | output   |
+| ------- | -------- |
+| any     | duration |
+| nothing | duration |
 ## Examples
 
 Times a command within a closure

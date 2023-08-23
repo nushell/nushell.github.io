@@ -1,17 +1,17 @@
 ---
 title: split-by
 categories: |
-  default
-version: 0.83.0
-default: |
+  filters
+version: 0.84.0
+filters: |
   Create a new table split.
 usage: |
   Create a new table split.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `splitter`: the splitter value to use
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | record |
 
 ## Examples
 
