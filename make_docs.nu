@@ -214,8 +214,9 @@ $"($example.description)
     let sub_commands = if $one_word_cmd and ($sub_commands | length) > 0 {
         let commands = $sub_commands
             | select name usage is_builtin is_plugin is_custom
-            | upsert type {|it| $type_mapping | columns | each {|t| if ($it | get $t) { $type_mapping | get $t } } | str join ',' }
             | update name { $"[`($in)`]\(/commands/docs/($in | safe-path).md\)" }
+            | upsert usage { $in.usage | str replace -a '<' '\<' | str replace -a '>' '\>' }
+            | upsert type {|it| $type_mapping | columns | each {|t| if ($it | get $t) { $type_mapping | get $t } } | str join ',' }
             | select name type usage
             | to md --pretty
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
