@@ -128,12 +128,13 @@ alias open = ^open
 In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use `$env.<var> = <val>` and [`append`](/commands/docs/append.html) in `env.nu`:
 
 ```
-$env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
+$env.PATH = ($env.PATH | split row (char esep))
+$env.PATH = ($env.PATH | append '/some/path')
 ```
 
 This will append `/some/path` to the end of PATH; you can also use [`prepend`](/commands/docs/prepend.html) to add entries to the start of PATH.
 
-Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.html#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append.md)/[`prepend`](/commands/docs/prepend.md) directly.
+Note the `$env.PATH = ($env.PATH | split row (char esep))` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.html#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append.md)/[`prepend`](/commands/docs/prepend.md) directly.
 
 ### Homebrew
 
