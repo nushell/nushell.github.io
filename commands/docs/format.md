@@ -2,7 +2,7 @@
 title: format
 categories: |
   strings
-version: 0.83.0
+version: 0.83.2
 strings: |
   Format columns into a string using a simple pattern.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `pattern`: the pattern to output. e.g.) "{foo}: {bar}"
 
+
+## Input/output types:
+
+| input  | output       |
+| ------ | ------------ |
+| record | any          |
+| table  | list\<string\> |
 ## Examples
 
 Print filenames with their sizes
@@ -38,3 +45,14 @@ Print elements from some columns of a table
 ╰───┴────╯
 
 ```
+
+
+## Subcommands:
+
+| name                                                   | type    | usage                                                    |
+| ------------------------------------------------------ | ------- | -------------------------------------------------------- |
+| [`format date`](/commands/docs/format_date.md)         | Builtin | Format a given date using a format string.               |
+| [`format duration`](/commands/docs/format_duration.md) | Builtin | Outputs duration with a specified unit of time.          |
+| [`format filesize`](/commands/docs/format_filesize.md) | Builtin | Converts a column of filesizes to some specified format. |
+
+**Tips:** Command `format` was not included in the official binaries by default, you have to build it with `--features=extra` flag

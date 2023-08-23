@@ -12,6 +12,21 @@ def safe-path [] {
   $in | str replace --all '\?' '' | str replace --all ' ' '_'
 }
 
+# NOTE: You should have nushell source code directory sit along with the docs' directory to make it work
+# Get commands in `extra` crate by parsing the source code
+def get-extra-cmds [] {
+    if ('../nushell/crates/nu-cmd-extra/src' | path exists) {
+        cd ..
+        glob nushell/crates/nu-cmd-extra/src/**/*.rs
+            | each { $in | open -r | parse -r 'fn name\(&self\) -> &str \{[\r|\n]\s+\"(?P<name>.+)\"[\r|\n]\s+\}' }
+            | flatten
+            | get name
+    } else {
+        []
+    }
+}
+
+let extra_cmds = get-extra-cmds
 
 # generate the YAML frontmatter of a command
 #
@@ -157,6 +172,19 @@ $"## Notes
 "
     }
 
+    let sigs = scope commands | where name == $command.name | select signatures | get 0 | get signatures | values
+    mut input_output = []
+    for s in $sigs {
+        let input = $s | where parameter_type == 'input' | get 0 | get syntax_shape
+        let output = $s | where parameter_type == 'output' | get 0 | get syntax_shape
+        # FIXME: Parentheses are required here to mutate $input_output, otherwise it won't work, maybe a bug?
+        $input_output = ($input_output | append [[input output]; [$input $output]])
+    }
+    let in_out = if ($input_output | length) > 0 {
+        let markdown = ($input_output | sort-by input | to md --pretty | str replace -a '<' '\<' | str replace -a '>' '\>')
+        ['', '## Input/output types:', '', $markdown, ''] | str join (char newline)
+    } else { '' }
+
     let examples = if ($command.examples | length) > 0 {
         let example_top = $"## Examples(char newline)(char newline)"
 
@@ -179,8 +207,28 @@ $"($example.description)
         ""
     }
 
+    # Typically a root command that has sub commands should be one word command
+    let one_word_cmd = ($command.name | split row ' ' | length) == 1
+    let sub_commands = if $one_word_cmd { scope commands | where name =~ $'^($command.name) ' } else { [] }
+    let type_mapping = {is_builtin: 'Builtin', is_plugin: 'Plugin', is_custom: 'Custom'}
+    let sub_commands = if $one_word_cmd and ($sub_commands | length) > 0 {
+        let commands = $sub_commands
+            | select name usage is_builtin is_plugin is_custom
+            | upsert type {|it| $type_mapping | columns | each {|t| if ($it | get $t) { $type_mapping | get $t } } | str join ',' }
+            | update name { $"[`($in)`]\(/commands/docs/($in | safe-path).md\)" }
+            | select name type usage
+            | to md --pretty
+        ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
+    } else { '' }
+
+    let tips = if $command.name =~ '^dfr' {
+        $'(char nl)**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl)'
+    } else if $command.name in $extra_cmds {
+        $'(char nl)**Tips:** Command `($command.name)` was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl)'
+    } else { '' }
+
     let doc = (
-        ($top + $signatures + $parameters + $extra_usage + $examples )
+        ($top + $signatures + $parameters + $in_out + $examples + $extra_usage + $sub_commands + $tips)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)

@@ -2,7 +2,7 @@
 title: into duration
 categories: |
   conversions
-version: 0.83.0
+version: 0.83.2
 conversions: |
   Convert value to duration.
 usage: |
@@ -15,42 +15,47 @@ usage: |
 
 ## Signature
 
-```> into duration ...rest --convert```
+```> into duration ...rest```
 
 ## Parameters
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
- -  `--convert {string}`: convert duration into another duration
 
-## Notes
-This command does not take leap years into account, and every month is assumed to have 30 days.
+
+## Input/output types:
+
+| input    | output   |
+| -------- | -------- |
+| duration | duration |
+| string   | duration |
+| table    | table    |
 ## Examples
 
-Convert string to duration in table
-```shell
-> [[value]; ['1sec'] ['2min'] ['3hr'] ['4day'] ['5wk']] | into duration value
-╭───┬─────────────╮
-│ # │    value    │
-├───┼─────────────┤
-│ 0 │        1sec │
-│ 1 │        2min │
-│ 2 │         3hr │
-│ 3 │        4day │
-│ 4 │ 1month 5day │
-╰───┴─────────────╯
-
-```
-
-Convert string to duration
+Convert duration string to duration value
 ```shell
 > '7min' | into duration
 7min
 ```
 
-Convert string to the requested duration as a string
+Convert compound duration string to duration value
 ```shell
-> '7min' | into duration --convert sec
-420 sec
+> '1day 2hr 3min 4sec' | into duration
+1day 2hr 3min 4sec
+```
+
+Convert table of duration strings to table of duration values
+```shell
+> [[value]; ['1sec'] ['2min'] ['3hr'] ['4day'] ['5wk']] | into duration value
+╭───┬───────╮
+│ # │ value │
+├───┼───────┤
+│ 0 │  1sec │
+│ 1 │  2min │
+│ 2 │   3hr │
+│ 3 │  4day │
+│ 4 │   5wk │
+╰───┴───────╯
+
 ```
 
 Convert duration to duration
@@ -59,26 +64,5 @@ Convert duration to duration
 7min
 ```
 
-Convert duration to the requested duration as a string
-```shell
-> 420sec | into duration --convert ms
-420000 ms
-```
-
-Convert µs duration to the requested duration as a string
-```shell
-> 1000000µs | into duration --convert sec
-1 sec
-```
-
-Convert duration to the µs duration as a string
-```shell
-> 1sec | into duration --convert µs
-1000000 µs
-```
-
-Convert duration to µs as a string if unit asked for was us
-```shell
-> 1sec | into duration --convert us
-1000000 µs
-```
+## Notes
+Max duration value is i64::MAX nanoseconds; max duration time unit is wk (weeks).
