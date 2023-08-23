@@ -2,7 +2,7 @@
 title: dfr slice
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Creates new dataframe from a slice of rows.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `offset`: start of slice
  -  `size`: size of slice
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Create new dataframe from a slice of the rows
@@ -34,3 +41,6 @@ Create new dataframe from a slice of the rows
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

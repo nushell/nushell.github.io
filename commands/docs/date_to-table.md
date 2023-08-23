@@ -2,7 +2,7 @@
 title: date to-table
 categories: |
   date
-version: 0.83.0
+version: 0.84.0
 date: |
   Convert the date into a structured table.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> date to-table ```
 
+
+## Input/output types:
+
+| input    | output |
+| -------- | ------ |
+| datetime | table  |
+| string   | table  |
 ## Examples
 
 Convert the current date into a table.
@@ -38,6 +45,17 @@ Convert a given date into a table.
 │ # │ year │ month │ day │ hour │ minute │ second │ nanosecond │ timezone │
 ├───┼──────┼───────┼─────┼──────┼────────┼────────┼────────────┼──────────┤
 │ 0 │ 2020 │     4 │  12 │   22 │     10 │     57 │        789 │ +02:00   │
+╰───┴──────┴───────┴─────┴──────┴────────┴────────┴────────────┴──────────╯
+
+```
+
+Convert a given date into a table.
+```shell
+> '2020-04-12 22:10:57 +0200' | into datetime | date to-table
+╭───┬──────┬───────┬─────┬──────┬────────┬────────┬────────────┬──────────╮
+│ # │ year │ month │ day │ hour │ minute │ second │ nanosecond │ timezone │
+├───┼──────┼───────┼─────┼──────┼────────┼────────┼────────────┼──────────┤
+│ 0 │ 2020 │     4 │  12 │   22 │     10 │     57 │          0 │ +02:00   │
 ╰───┴──────┴───────┴─────┴──────┴────────┴────────┴────────────┴──────────╯
 
 ```

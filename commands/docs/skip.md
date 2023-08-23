@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
 usage: |
@@ -21,8 +21,13 @@ usage: |
 
  -  `n`: the number of elements to skip
 
-## Notes
-To skip specific numbered rows, try `drop nth`. To skip specific named columns, try `reject`.
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| table     | table     |
 ## Examples
 
 Skip the first value of a list
@@ -46,3 +51,13 @@ Skip two rows of a table
 ╰───┴──────────╯
 
 ```
+
+## Notes
+To skip specific numbered rows, try `drop nth`. To skip specific named columns, try `reject`.
+
+## Subcommands:
+
+| name                                         | type    | usage                                                 |
+| -------------------------------------------- | ------- | ----------------------------------------------------- |
+| [`skip until`](/commands/docs/skip_until.md) | Builtin | Skip elements of the input until a predicate is true. |
+| [`skip while`](/commands/docs/skip_while.md) | Builtin | Skip elements of the input while a predicate is true. |

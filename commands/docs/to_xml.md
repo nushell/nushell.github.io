@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Convert special record structure into .xml text.
 usage: |
@@ -21,15 +21,13 @@ usage: |
 
  -  `--pretty {int}`: Formats the XML text with the provided indentation setting
 
-## Notes
-Every XML entry is represented via a record with tag, attribute and content fields.
-To represent different types of entries different values must be written to this fields:
-1. Tag entry: `{tag: <tag name> attrs: {<attr name>: "<string value>" ...} content: [<entries>]}`
-2. Comment entry: `{tag: '!' attrs: null content: "<comment string>"}`
-3. Processing instruction (PI): `{tag: '?<pi name>' attrs: null content: "<pi content string>"}`
-4. Text: `{tag: null attrs: null content: "<text>"}`. Or as plain `<text>` instead of record.
 
-Additionally any field which is: empty record, empty list or null, can be omitted.
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | string |
+
 ## Examples
 
 Outputs an XML string representing the contents of this table
@@ -51,3 +49,13 @@ Optionally, formats the text with a custom indentation setting
    <remember>Event</remember>
 </note>
 ```
+
+## Notes
+Every XML entry is represented via a record with tag, attribute and content fields.
+To represent different types of entries different values must be written to this fields:
+1. Tag entry: `{tag: <tag name> attrs: {<attr name>: "<string value>" ...} content: [<entries>]}`
+2. Comment entry: `{tag: '!' attrs: null content: "<comment string>"}`
+3. Processing instruction (PI): `{tag: '?<pi name>' attrs: null content: "<pi content string>"}`
+4. Text: `{tag: null attrs: null content: "<text>"}`. Or as plain `<text>` instead of record.
+
+Additionally any field which is: empty record, empty list or null, can be omitted.

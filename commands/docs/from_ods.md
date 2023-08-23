@@ -2,7 +2,7 @@
 title: from ods
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--sheets {list<string>}`: Only convert specified sheets
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | table  |
 
 ## Examples
 

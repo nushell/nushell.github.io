@@ -2,7 +2,7 @@
 title: bytes length
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Output the length of any bytes in the pipeline.
 usage: |
@@ -21,6 +21,15 @@ usage: |
 
  -  `...rest`: for a data structure input, find the length of data at the given cell paths
 
+
+## Input/output types:
+
+| input        | output    |
+| ------------ | --------- |
+| binary       | int       |
+| list\<binary\> | list\<int\> |
+| record       | record    |
+| table        | table     |
 ## Examples
 
 Return the length of a binary

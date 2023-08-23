@@ -2,7 +2,7 @@
 title: explain
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   Explain closure contents.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `closure`: the closure to run
 
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| any     | any    |
+| nothing | any    |
 ## Examples
 
 Explain a command within a closure

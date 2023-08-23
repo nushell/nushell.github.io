@@ -2,7 +2,7 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   Add a color gradient (using ANSI color codes) to the given string.
 usage: |
@@ -25,6 +25,15 @@ usage: |
  -  `--bgstart {string}`: background gradient start color in hex
  -  `--bgend {string}`: background gradient end color in hex
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 draw text in a gradient with foreground start and end colors
@@ -50,3 +59,6 @@ draw text in a gradient by specifying foreground end color - start color is assu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgend '0xe81cff'
 
 ```
+
+
+**Tips:** Command `ansi gradient` was not included in the official binaries by default, you have to build it with `--features=extra` flag

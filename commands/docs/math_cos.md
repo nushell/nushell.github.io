@@ -2,7 +2,7 @@
 title: math cos
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the cosine of the number.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--degrees` `(-d)`: Use degrees instead of radians
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Apply the cosine to π
@@ -41,3 +48,6 @@ Apply the cosine to a list of angles in degrees
 ╰───┴───────╯
 
 ```
+
+
+**Tips:** Command `math cos` was not included in the official binaries by default, you have to build it with `--features=extra` flag

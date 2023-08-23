@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   hash
-version: 0.83.0
+version: 0.84.0
 hash: |
   Base64 decode a value.
 usage: |
@@ -24,8 +24,15 @@ usage: |
 	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt', 'mutf7'
  -  `--binary` `(-b)`: Output a binary value instead of decoding payload as UTF-8
 
-## Notes
-Will attempt to decode binary payload as an UTF-8 string by default. Use the `--binary(-b)` argument to force binary output.
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 Base64 decode a value and output as UTF-8 string
@@ -41,3 +48,6 @@ Length: 9 (0x9) bytes | printable whitespace ascii_other non_ascii
 00000000:   53 6f 6d 65  20 44 61 74  61                         Some Data
 
 ```
+
+## Notes
+Will attempt to decode binary payload as an UTF-8 string by default. Use the `--binary(-b)` argument to force binary output.

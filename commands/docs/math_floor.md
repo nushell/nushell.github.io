@@ -2,7 +2,7 @@
 title: math floor
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the floor of a number (largest integer less than or equal to that number).
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> math floor ```
 
+
+## Input/output types:
+
+| input        | output    |
+| ------------ | --------- |
+| list\<number\> | list\<int\> |
+| number       | int       |
 ## Examples
 
 Apply the floor function to a list of numbers

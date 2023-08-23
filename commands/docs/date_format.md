@@ -1,17 +1,17 @@
 ---
 title: date format
 categories: |
-  date
-version: 0.83.0
-date: |
-  Format a given date using a format string.
+  removed
+version: 0.84.0
+removed: |
+  Removed command: use `format date` instead
 usage: |
-  Format a given date using a format string.
+  Removed command: use `format date` instead
 ---
 
-# <code>{{ $frontmatter.title }}</code> for date
+# <code>{{ $frontmatter.title }}</code> for removed
 
-<div class='command-title'>{{ $frontmatter.date }}</div>
+<div class='command-title'>{{ $frontmatter.removed }}</div>
 
 ## Signature
 
@@ -22,28 +22,10 @@ usage: |
  -  `format string`: the desired date format
  -  `--list` `(-l)`: lists strftime cheatsheet
 
-## Examples
 
-Format a given date-time as a string using the default format (RFC 2822).
-```shell
-> "2021-10-22 20:00:12 +01:00" | date format
-Fri, 22 Oct 2021 20:00:12 +0100
-```
+## Input/output types:
 
-Format the current date-time using a given format string.
-```shell
-> date now | date format "%Y-%m-%d %H:%M:%S"
-
-```
-
-Format the current date using a given format string.
-```shell
-> date now | date format "%Y-%m-%d %H:%M:%S"
-
-```
-
-Format a given date using a given format string.
-```shell
-> "2021-10-22 20:00:12 +01:00" | date format "%Y-%m-%d"
-2021-10-22
-```
+| input    | output |
+| -------- | ------ |
+| datetime | string |
+| string   | string |

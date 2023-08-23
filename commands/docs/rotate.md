@@ -2,7 +2,7 @@
 title: rotate
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Rotates a table or record clockwise (default) or counter-clockwise (use --ccw flag).
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `...rest`: the names to give columns once rotated
  -  `--ccw` `(-)`: rotate counter clockwise
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | table  |
+| table  | table  |
 ## Examples
 
 Rotate a record clockwise, producing a table (like `transpose` but with column order reversed)
@@ -95,3 +102,6 @@ Rotate table counter-clockwise and change columns names
 ╰───┴───────┴───────╯
 
 ```
+
+
+**Tips:** Command `rotate` was not included in the official binaries by default, you have to build it with `--features=extra` flag

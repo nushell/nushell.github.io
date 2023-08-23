@@ -2,7 +2,7 @@
 title: update cells
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Update the table cells.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `closure`: the closure to run an update for each cell
  -  `--columns {table}`: list of columns to update
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| table | table  |
 
 ## Examples
 
@@ -63,3 +70,6 @@ Update the zero value cells to empty strings in 2 last columns.
 ╰───┴────────────┴────────────┴────────────┴────────────┴────────────┴────────────┴────────────╯
 
 ```
+
+
+**Tips:** Command `update cells` was not included in the official binaries by default, you have to build it with `--features=extra` flag

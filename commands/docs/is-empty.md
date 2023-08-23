@@ -2,7 +2,7 @@
 title: is-empty
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Check for empty values.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `...rest`: the names of the columns to check emptiness
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | bool   |
 
 ## Examples
 

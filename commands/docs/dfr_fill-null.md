@@ -2,7 +2,7 @@
 title: dfr fill-null
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Replaces NULL values with the given expression.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `fill`: Expression to use to fill the null values
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Fills the null values by 0
@@ -37,3 +44,6 @@ Fills the null values by 0
 ╰───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

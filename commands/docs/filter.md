@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Filter values based on a predicate closure.
 usage: |
@@ -21,9 +21,14 @@ usage: |
 
  -  `closure`: Predicate closure
 
-## Notes
-This command works similar to 'where' but allows reading the predicate closure from
-a variable. On the other hand, the "row condition" syntax is not supported.
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| range     | list\<any\> |
+| table     | table     |
 ## Examples
 
 Filter items of a list according to a condition
@@ -67,3 +72,13 @@ Filter items of a range according to a condition
 ╰───┴────╯
 
 ```
+
+List all numbers above 3, using an existing closure condition
+```shell
+> let a = {$in > 3}; [1, 2, 5, 6] | filter $a
+
+```
+
+## Notes
+This command works similar to 'where' but allows reading the predicate closure from
+a variable. On the other hand, the "row condition" syntax is not supported.

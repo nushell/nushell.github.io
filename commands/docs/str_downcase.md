@@ -2,7 +2,7 @@
 title: str downcase
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Make text lowercase.
 usage: |
@@ -21,6 +21,15 @@ usage: |
 
  -  `...rest`: For a data structure input, convert strings at the given cell paths
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 Downcase contents

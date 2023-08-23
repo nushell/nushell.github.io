@@ -1,17 +1,17 @@
 ---
 title: to nuon
 categories: |
-  experimental
-version: 0.83.0
-experimental: |
+  formats
+version: 0.84.0
+formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
   Converts table data into Nuon (Nushell Object Notation) text.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for experimental
+# <code>{{ $frontmatter.title }}</code> for formats
 
-<div class='command-title'>{{ $frontmatter.experimental }}</div>
+<div class='command-title'>{{ $frontmatter.formats }}</div>
 
 ## Signature
 
@@ -22,6 +22,13 @@ usage: |
  -  `--raw` `(-r)`: remove all of the whitespace (default behaviour and overwrites -i and -t)
  -  `--indent {number}`: specify indentation width
  -  `--tabs {number}`: specify indentation tab quantity
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | string |
 
 ## Examples
 

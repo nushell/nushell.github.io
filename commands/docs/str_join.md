@@ -2,7 +2,7 @@
 title: str join
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Concatenate multiple strings into a single string, with an optional separator between each.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `separator`: optional separator to use when creating string
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | string |
+| string    | string |
 ## Examples
 
 Create a string from input

@@ -2,7 +2,7 @@
 title: dfr select
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Selects columns from lazyframe.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `...rest`: Expression(s) that define the column selection
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Select a column from the dataframe
@@ -35,3 +42,6 @@ Select a column from the dataframe
 ╰───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

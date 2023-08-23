@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Move files or directories.
 usage: |
@@ -25,6 +25,13 @@ usage: |
  -  `--force` `(-f)`: overwrite the destination.
  -  `--interactive` `(-i)`: ask user to confirm action
  -  `--update` `(-u)`: move only when the SOURCE file is newer than the destination file(with -f) or when the destination file is missing
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

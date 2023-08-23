@@ -2,7 +2,7 @@
 title: mkdir
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Make directories, creates intermediary directories as required.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `...rest`: the name(s) of the path(s) to create
  -  `--verbose` `(-v)`: print created path(s).
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

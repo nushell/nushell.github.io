@@ -2,7 +2,7 @@
 title: range
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Return only the selected rows.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `rows`: range of rows to return: Eg) 4..7 (=> from 4 to 7)
+
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
 
 ## Examples
 

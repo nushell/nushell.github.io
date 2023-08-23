@@ -2,7 +2,7 @@
 title: str screaming-snake-case
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Convert a string to SCREAMING_SNAKE_CASE.
 usage: |
@@ -21,6 +21,15 @@ usage: |
 
  -  `...rest`: For a data structure input, convert strings at the given cell paths
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 convert a string to SCREAMING_SNAKE_CASE
@@ -51,3 +60,6 @@ convert a column from a table to SCREAMING_SNAKE_CASE
 ╰───┴─────────┴──────╯
 
 ```
+
+
+**Tips:** Command `str screaming-snake-case` was not included in the official binaries by default, you have to build it with `--features=extra` flag

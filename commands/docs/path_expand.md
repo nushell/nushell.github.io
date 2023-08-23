@@ -1,17 +1,17 @@
 ---
 title: path expand
 categories: |
-  default
-version: 0.83.0
-default: |
+  path
+version: 0.84.0
+path: |
   Try to expand a path to its absolute form.
 usage: |
   Try to expand a path to its absolute form.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for path
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.path }}</div>
 
 ## Signature
 
@@ -22,6 +22,13 @@ usage: |
  -  `--strict` `(-s)`: Throw an error if the path could not be expanded
  -  `--no-symlink` `(-n)`: Do not resolve symbolic links
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| string       | string       |
 ## Examples
 
 Expand an absolute path

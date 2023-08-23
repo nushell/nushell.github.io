@@ -2,7 +2,7 @@
 title: history session
 categories: |
   misc
-version: 0.83.0
+version: 0.84.0
 misc: |
   Get the command history session.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> history session ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | int    |
 
 ## Examples
 

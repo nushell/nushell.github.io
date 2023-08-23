@@ -2,7 +2,7 @@
 title: view files
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   View the files registered in nushell's EngineState memory.
 usage: |
@@ -17,8 +17,13 @@ usage: |
 
 ```> view files ```
 
-## Notes
-These are files parsed and loaded at runtime.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | string |
+
 ## Examples
 
 View the files registered in nushell's EngineState memory
@@ -26,3 +31,6 @@ View the files registered in nushell's EngineState memory
 > view files
 
 ```
+
+## Notes
+These are files parsed and loaded at runtime.

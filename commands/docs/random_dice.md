@@ -2,7 +2,7 @@
 title: random dice
 categories: |
   random
-version: 0.83.0
+version: 0.84.0
 random: |
   Generate a random dice roll.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--dice {int}`: The amount of dice being rolled
  -  `--sides {int}`: The amount of sides a die has
+
+
+## Input/output types:
+
+| input   | output    |
+| ------- | --------- |
+| nothing | list\<any\> |
 
 ## Examples
 

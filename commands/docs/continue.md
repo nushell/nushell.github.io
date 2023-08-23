@@ -2,7 +2,7 @@
 title: continue
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Continue a loop from the next iteration.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> continue ```
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

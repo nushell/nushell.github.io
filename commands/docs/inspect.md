@@ -2,7 +2,7 @@
 title: inspect
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   Inspect pipeline results while running a pipeline.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> inspect ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

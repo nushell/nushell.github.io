@@ -2,7 +2,7 @@
 title: profile
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   Profile each pipeline element in a closure.
 usage: |
@@ -24,13 +24,13 @@ usage: |
  -  `--values` `(-)`: Collect values in the report
  -  `--max-depth {int}`: How many levels of blocks to step into (default: 1)
 
-## Notes
-The command collects run time of every pipeline element, recursively stepping into child closures
-until a maximum depth. Optionally, it also collects the source code and intermediate values.
 
-Current known limitations are:
-* profiling data from subexpressions is not tracked
-* it does not step into loop iterations
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | table  |
+
 ## Examples
 
 Profile some code, stepping into the `spam` command and collecting source.
@@ -38,3 +38,11 @@ Profile some code, stepping into the `spam` command and collecting source.
 > def spam [] { "spam" }; profile {|| spam | str length } -d 2 --source
 
 ```
+
+## Notes
+The command collects run time of every pipeline element, recursively stepping into child closures
+until a maximum depth. Optionally, it also collects the source code and intermediate values.
+
+Current known limitations are:
+* profiling data from subexpressions is not tracked
+* it does not step into loop iterations

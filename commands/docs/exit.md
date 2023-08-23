@@ -2,7 +2,7 @@
 title: exit
 categories: |
   shells
-version: 0.83.0
+version: 0.84.0
 shells: |
   Exit Nu.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `exit_code`: Exit code to return immediately with
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

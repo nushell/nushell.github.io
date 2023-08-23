@@ -2,7 +2,7 @@
 title: input listen
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   Listen for user interface event
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--types {list<string>}`: Listen for event of specified types only (can be one of: focus, key, mouse, paste, resize)
  -  `--raw` `(-r)`: Add raw_code field with numeric value of keycode and raw_flags with bit mask flags
+
+
+## Input/output types:
+
+| input   | output                                           |
+| ------- | ------------------------------------------------ |
+| nothing | record\<keycode: string, modifiers: list\<string\>\> |
 
 ## Notes
 There are 5 different type of events: focus, key, mouse, paste, resize. Each will produce a

@@ -2,7 +2,7 @@
 title: str length
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Output the length of any strings in the pipeline.
 usage: |
@@ -23,6 +23,15 @@ usage: |
  -  `--grapheme-clusters` `(-g)`: count length using grapheme clusters (all visible chars have length 1)
  -  `--utf-8-bytes` `(-b)`: count length using UTF-8 bytes (default; all non-ASCII chars have length 2+)
 
+
+## Input/output types:
+
+| input        | output    |
+| ------------ | --------- |
+| list\<string\> | list\<int\> |
+| record       | record    |
+| string       | int       |
+| table        | table     |
 ## Examples
 
 Return the lengths of a string

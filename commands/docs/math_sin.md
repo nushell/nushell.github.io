@@ -2,7 +2,7 @@
 title: math sin
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the sine of the number.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--degrees` `(-d)`: Use degrees instead of radians
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Apply the sine to π/2
@@ -41,3 +48,6 @@ Apply the sine to a list of angles in degrees
 ╰───┴───────╯
 
 ```
+
+
+**Tips:** Command `math sin` was not included in the official binaries by default, you have to build it with `--features=extra` flag

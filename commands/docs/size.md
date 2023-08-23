@@ -2,7 +2,7 @@
 title: size
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Gather word count statistics on the text.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> size ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | record |
 
 ## Examples
 

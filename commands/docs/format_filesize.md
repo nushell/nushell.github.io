@@ -2,7 +2,7 @@
 title: format filesize
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Converts a column of filesizes to some specified format.
 usage: |
@@ -22,6 +22,14 @@ usage: |
  -  `format value`: the format into which convert the file sizes
  -  `...rest`: For a data structure input, format filesizes at the given cell paths
 
+
+## Input/output types:
+
+| input    | output |
+| -------- | ------ |
+| filesize | string |
+| record   | record |
+| table    | table  |
 ## Examples
 
 Convert the size column to KB

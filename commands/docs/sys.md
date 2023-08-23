@@ -2,7 +2,7 @@
 title: sys
 categories: |
   system
-version: 0.83.0
+version: 0.84.0
 system: |
   View information about the system.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> sys ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | record |
 
 ## Examples
 

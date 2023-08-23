@@ -2,7 +2,7 @@
 title: to toml
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Convert record into .toml text.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> to toml ```
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | string |
 
 ## Examples
 

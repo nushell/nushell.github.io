@@ -2,7 +2,7 @@
 title: dfr summary
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--quantiles {table}`: provide optional quantiles
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -42,3 +49,6 @@ list dataframe descriptives
 ╰───┴────────────┴─────────┴─────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

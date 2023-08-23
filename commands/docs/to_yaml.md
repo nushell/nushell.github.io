@@ -2,7 +2,7 @@
 title: to yaml
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Convert table into .yaml/.yml text.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> to yaml ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | string |
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Create an error.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `error_struct`: the error to create
  -  `--unspanned` `(-u)`: remove the origin label from the error
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
 
 ## Examples
 

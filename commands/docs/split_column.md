@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Split a string into multiple columns using a separator.
 usage: |
@@ -24,6 +24,13 @@ usage: |
  -  `--collapse-empty` `(-c)`: remove empty columns
  -  `--regex` `(-r)`: separator is a regular expression
 
+
+## Input/output types:
+
+| input        | output |
+| ------------ | ------ |
+| list\<string\> | table  |
+| string       | table  |
 ## Examples
 
 Split a string into columns by the specified separator

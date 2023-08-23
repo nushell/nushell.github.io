@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Sets a default row's column if missing.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `default value`: the value to use as a default
  -  `column name`: the name of the column
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

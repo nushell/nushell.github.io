@@ -2,7 +2,7 @@
 title: use
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Use definitions from a module, making them available in your shell.
 usage: |
@@ -22,12 +22,13 @@ usage: |
  -  `module`: Module or module file
  -  `...rest`: Which members of the module to import
 
-## Notes
-See `help std` for the standard library module.
-See `help modules` to list all available modules.
 
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Define a custom command in a module and call it
@@ -65,3 +66,10 @@ To use multiple definitions from a module, wrap them in a list
 > module spam { export def foo [] { "foo" }; export def 'foo bar' [] { "baz" } }; use spam ['foo', 'foo bar']; (foo) + (foo bar)
 foobaz
 ```
+
+## Notes
+See `help std` for the standard library module.
+See `help modules` to list all available modules.
+
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

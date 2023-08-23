@@ -2,7 +2,7 @@
 title: dfr cumulative
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Cumulative calculation for a series.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `type`: rolling operation
  -  `--reverse` `(-r)`: Reverse cumulative calculation
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Cumulative sum for a series
@@ -38,3 +45,6 @@ Cumulative sum for a series
 ╰───┴──────────────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

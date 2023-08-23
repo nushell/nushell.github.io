@@ -2,7 +2,7 @@
 title: dfr to-parquet
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Saves dataframe to parquet file.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `file`: file path to save dataframe
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Saves dataframe to parquet file
@@ -28,3 +35,6 @@ Saves dataframe to parquet file
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-parquet test.parquet
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

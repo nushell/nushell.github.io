@@ -2,7 +2,7 @@
 title: every
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Show (or skip) every n-th row, starting from the first one.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `stride`: how many rows to skip between (and including) each row returned
  -  `--skip` `(-s)`: skip the rows that would be returned, instead of selecting them
+
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
 
 ## Examples
 

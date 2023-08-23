@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `...rest`: optional additional files to open
  -  `--raw` `(-r)`: open file as raw binary
 
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+| string  | any    |
 ## Examples
 
 Open a file, with structure (based on file extension or SQLite database header)

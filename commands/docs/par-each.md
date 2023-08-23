@@ -2,7 +2,7 @@
 title: par-each
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Run a closure on each row of the input list in parallel, creating a new list with the results.
 usage: |
@@ -22,6 +22,14 @@ usage: |
  -  `closure`: the closure to run
  -  `--threads {int}`: the number of threads to use
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| range     | list\<any\> |
+| table     | list\<any\> |
 ## Examples
 
 Multiplies each number. Note that the list will become arbitrarily disordered.

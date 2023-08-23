@@ -1,17 +1,17 @@
 ---
 title: path parse
 categories: |
-  default
-version: 0.83.0
-default: |
+  path
+version: 0.84.0
+path: |
   Convert a path into structured data.
 usage: |
   Convert a path into structured data.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for path
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.path }}</div>
 
 ## Signature
 
@@ -21,9 +21,13 @@ usage: |
 
  -  `--extension {string}`: Manually supply the extension (without the dot)
 
-## Notes
-Each path is split into a table with 'parent', 'stem' and 'extension' fields.
-On Windows, an extra 'prefix' column is added.
+
+## Input/output types:
+
+| input        | output |
+| ------------ | ------ |
+| list\<string\> | table  |
+| string       | record |
 ## Examples
 
 Parse a path
@@ -63,3 +67,7 @@ Parse all paths in a list
 ╰───┴────────┴────────┴───────────╯
 
 ```
+
+## Notes
+Each path is split into a table with 'parent', 'stem' and 'extension' fields.
+On Windows, an extra 'prefix' column is added.

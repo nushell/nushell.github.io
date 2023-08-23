@@ -2,7 +2,7 @@
 title: dfr arg-min
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Return index for min value in series.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr arg-min ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Returns index for min value
@@ -29,3 +36,6 @@ Returns index for min value
 ╰───┴─────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

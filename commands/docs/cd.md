@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Change directory.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `path`: the path to change to
 
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+| string  | nothing |
 ## Examples
 
 Change to your home directory

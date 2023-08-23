@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Patch a body to a URL.
 usage: |
@@ -31,8 +31,13 @@ usage: |
  -  `--full` `(-f)`: returns the full response instead of only the body
  -  `--allow-errors` `(-e)`: do not fail if the server returns an error code
 
-## Notes
-Performs HTTP PATCH operation.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+
 ## Examples
 
 Patch content to example.com
@@ -58,3 +63,6 @@ Patch content to example.com, with JSON body
 > http patch -t application/json https://www.example.com { field: value }
 
 ```
+
+## Notes
+Performs HTTP PATCH operation.

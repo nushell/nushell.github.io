@@ -2,7 +2,7 @@
 title: dfr contains
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Checks if a pattern is contained in a string.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `pattern`: Regex pattern to be searched
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Returns boolean indicating if pattern was found
@@ -35,3 +42,6 @@ Returns boolean indicating if pattern was found
 ╰───┴───────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

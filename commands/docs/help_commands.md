@@ -2,7 +2,7 @@
 title: help commands
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Show help on nushell commands.
 usage: |
@@ -21,3 +21,10 @@ usage: |
 
  -  `...rest`: the name of command to get help on
  -  `--find {string}`: string to find in command names, usage, and search terms
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |

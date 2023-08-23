@@ -2,7 +2,7 @@
 title: to html
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Convert table into simple HTML.
 usage: |
@@ -26,8 +26,13 @@ usage: |
  -  `--theme {string}`: the name of the theme to use (github, blulocolight, ...)
  -  `--list` `(-l)`: produce a color table of all available themes
 
-## Notes
-Screenshots of the themes can be browsed here: https://github.com/mbadolato/iTerm2-Color-Schemes.
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | string |
+
 ## Examples
 
 Outputs an  HTML string representing the contents of this table
@@ -47,3 +52,8 @@ Optionally, output the string with a dark background
 > [[foo bar]; [1 2]] | to html --dark
 <html><style>body { background-color:black;color:white; }</style><body><table><thead><tr><th>foo</th><th>bar</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table></body></html>
 ```
+
+## Notes
+Screenshots of the themes can be browsed here: https://github.com/mbadolato/iTerm2-Color-Schemes.
+
+**Tips:** Command `to html` was not included in the official binaries by default, you have to build it with `--features=extra` flag

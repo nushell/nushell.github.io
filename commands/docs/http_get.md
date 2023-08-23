@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -29,8 +29,13 @@ usage: |
  -  `--full` `(-f)`: returns the full response instead of only the body
  -  `--allow-errors` `(-e)`: do not fail if the server returns an error code
 
-## Notes
-Performs HTTP GET operation.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+
 ## Examples
 
 Get content from example.com
@@ -56,3 +61,6 @@ Get content from example.com, with custom headers
 > http get -H [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
+
+## Notes
+Performs HTTP GET operation.

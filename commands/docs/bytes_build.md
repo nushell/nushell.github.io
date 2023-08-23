@@ -2,7 +2,7 @@
 title: bytes build
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Create bytes from the arguments.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `...rest`: list of bytes
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | binary |
 
 ## Examples
 

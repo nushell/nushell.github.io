@@ -2,7 +2,7 @@
 title: insert
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Insert a new column, using an expression or closure to create each row's values.
 usage: |
@@ -22,6 +22,14 @@ usage: |
  -  `field`: the name of the column to insert
  -  `new value`: the new value to give the cell(s)
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| record    | record    |
+| table     | table     |
 ## Examples
 
 Insert a new entry into a single record

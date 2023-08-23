@@ -2,7 +2,7 @@
 title: math tan
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the tangent of the number.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--degrees` `(-d)`: Use degrees instead of radians
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Apply the tangent to π/4
@@ -39,3 +46,6 @@ Apply the tangent to a list of angles in degrees
 ╰───┴───────╯
 
 ```
+
+
+**Tips:** Command `math tan` was not included in the official binaries by default, you have to build it with `--features=extra` flag

@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Copy files.
 usage: |
@@ -27,6 +27,13 @@ usage: |
  -  `--interactive` `(-i)`: ask user to confirm action
  -  `--no-symlink` `(-n)`: no symbolic links are followed, only works if -r is active
  -  `--progress` `(-p)`: enable progress bar
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

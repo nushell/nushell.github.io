@@ -2,7 +2,7 @@
 title: let
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Create a variable and give it a value.
 usage: |
@@ -22,9 +22,13 @@ usage: |
  -  `var_name`: variable name
  -  `initial_value`: equals sign followed by value
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input | output  |
+| ----- | ------- |
+| any   | nothing |
+
 ## Examples
 
 Set a variable to a value
@@ -44,3 +48,7 @@ Set a variable based on the condition
 > let x = if false { -1 } else { 1 }
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

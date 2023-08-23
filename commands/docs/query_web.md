@@ -2,7 +2,7 @@
 title: query web
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   execute selector query on html/web
 usage: |
@@ -24,6 +24,13 @@ usage: |
  -  `--attribute {string}`: downselect based on the given attribute
  -  `--as-table {table}`: find table based on column header list
  -  `--inspect` `(-i)`: run in inspect mode to provide more information for determining column headers
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

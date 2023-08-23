@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Get the headers from a URL.
 usage: |
@@ -26,8 +26,13 @@ usage: |
  -  `--headers {any}`: custom headers you want to add
  -  `--insecure` `(-k)`: allow insecure server connections when using SSL
 
-## Notes
-Performs HTTP HEAD operation.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+
 ## Examples
 
 Get headers from example.com
@@ -47,3 +52,6 @@ Get headers from example.com, with custom header
 > http head -H [my-header-key my-header-value] https://www.example.com
 
 ```
+
+## Notes
+Performs HTTP HEAD operation.

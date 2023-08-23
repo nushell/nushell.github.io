@@ -2,7 +2,7 @@
 title: keybindings list
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   List available options that can be used to create keybindings.
 usage: |
@@ -24,6 +24,13 @@ usage: |
  -  `--modes` `(-o)`: list of edit modes
  -  `--events` `(-e)`: list of reedline event
  -  `--edits` `(-d)`: list of edit commands
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 

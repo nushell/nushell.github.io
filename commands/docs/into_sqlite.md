@@ -2,7 +2,7 @@
 title: into sqlite
 categories: |
   conversions
-version: 0.83.0
+version: 0.84.0
 conversions: |
   Convert table into a SQLite database.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `file_name`: Specify the filename to save the database to
  -  `--table_name {string}`: Specify table name to store the data in
+
+
+## Input/output types:
+
+| input | output  |
+| ----- | ------- |
+| any   | nothing |
 
 ## Examples
 

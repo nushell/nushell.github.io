@@ -2,7 +2,7 @@
 title: sort
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Sort in increasing order.
 usage: |
@@ -24,6 +24,13 @@ usage: |
  -  `--values` `(-v)`: If input is a single record, sort the record by values; ignored if input is not a single record
  -  `--natural` `(-n)`: Sort alphanumeric string-based values naturally (1, 9, 10, 99, 100, ...)
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| record    | record    |
 ## Examples
 
 sort the list by increasing value

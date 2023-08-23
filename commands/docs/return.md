@@ -2,7 +2,7 @@
 title: return
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Return early from a function.
 usage: |
@@ -21,9 +21,13 @@ usage: |
 
  -  `return_value`: optional value to return
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+
 ## Examples
 
 Return early
@@ -31,3 +35,7 @@ Return early
 > def foo [] { return }
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

@@ -2,7 +2,7 @@
 title: ast
 categories: |
   debug
-version: 0.83.0
+version: 0.84.0
 debug: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `pipeline`: the pipeline to print the ast for
  -  `--json` `(-j)`: serialize to json
  -  `--minify` `(-m)`: minify the nuon or json output
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | record |
 
 ## Examples
 

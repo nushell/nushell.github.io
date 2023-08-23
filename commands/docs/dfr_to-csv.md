@@ -2,7 +2,7 @@
 title: dfr to-csv
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Saves dataframe to CSV file.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--delimiter {string}`: file delimiter character
  -  `--no-header` `(-)`: Indicates if file doesn't have header
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Saves dataframe to CSV file
@@ -36,3 +43,6 @@ Saves dataframe to CSV file using other delimiter
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv -d '|'
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

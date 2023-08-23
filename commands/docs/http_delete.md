@@ -2,7 +2,7 @@
 title: http delete
 categories: |
   network
-version: 0.83.0
+version: 0.84.0
 network: |
   Delete the specified resource.
 usage: |
@@ -31,8 +31,13 @@ usage: |
  -  `--full` `(-f)`: returns the full response instead of only the body
  -  `--allow-errors` `(-e)`: do not fail if the server returns an error code
 
-## Notes
-Performs HTTP DELETE operation.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
+
 ## Examples
 
 http delete from example.com
@@ -64,3 +69,6 @@ http delete from example.com, with JSON body
 > http delete -t application/json -d { field: value } https://www.example.com
 
 ```
+
+## Notes
+Performs HTTP DELETE operation.

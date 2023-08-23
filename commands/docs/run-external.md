@@ -2,7 +2,7 @@
 title: run-external
 categories: |
   system
-version: 0.83.0
+version: 0.84.0
 system: |
   Runs external command.
 usage: |
@@ -25,6 +25,13 @@ usage: |
  -  `--redirect-stderr` `(-)`: redirect stderr to the pipeline
  -  `--redirect-combine` `(-)`: redirect both stdout and stderr combined to the pipeline (collected in stdout)
  -  `--trim-end-newline` `(-)`: trimming end newlines
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

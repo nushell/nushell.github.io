@@ -2,7 +2,7 @@
 title: from
 categories: |
   formats
-version: 0.83.2
+version: 0.84.0
 formats: |
   Parse a string or binary data into structured data.
 usage: |

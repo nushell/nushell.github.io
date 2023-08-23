@@ -2,7 +2,7 @@
 title: collect
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Collect the stream and pass it to a block.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `closure`: the closure to run once the stream is collected
  -  `--keep-env` `(-)`: let the block affect environment variables
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

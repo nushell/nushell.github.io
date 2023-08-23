@@ -2,7 +2,7 @@
 title: input list
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   Interactive list selection.
 usage: |
@@ -23,8 +23,13 @@ usage: |
  -  `--multi` `(-m)`: Use multiple results, you can press a to toggle all options on/off
  -  `--fuzzy` `(-f)`: Use a fuzzy select.
 
-## Notes
-Abort with esc or q.
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+
 ## Examples
 
 Return a single value from a list
@@ -44,3 +49,6 @@ Return a single record from a table with fuzzy search
 > ls | input list -f 'Select the target'
 
 ```
+
+## Notes
+Abort with esc or q.

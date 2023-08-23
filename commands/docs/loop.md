@@ -2,7 +2,7 @@
 title: loop
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Run a block in a loop.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `block`: block to loop
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

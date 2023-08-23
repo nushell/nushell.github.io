@@ -1,21 +1,28 @@
 ---
 title: version
 categories: |
-  default
-version: 0.83.0
-default: |
+  core
+version: 0.84.0
+core: |
   Display Nu version, and its build configuration.
 usage: |
   Display Nu version, and its build configuration.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for core
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.core }}</div>
 
 ## Signature
 
 ```> version ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | record |
 
 ## Examples
 

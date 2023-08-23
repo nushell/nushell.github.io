@@ -2,7 +2,7 @@
 title: prepend
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Prepend any number of rows to a table.
 usage: |
@@ -21,14 +21,38 @@ usage: |
 
  -  `row`: the row, list, or table to prepend
 
-## Notes
-Be aware that this command 'unwraps' lists passed to it. So, if you pass a variable to it,
-and you want the variable's contents to be prepended without being unwrapped, it's wise to
-pre-emptively wrap the variable in a list, like so: `prepend [$val]`. This way, `prepend` will
-only unwrap the outer list, and leave the variable's contents untouched.
+
+## Input/output types:
+
+| input | output    |
+| ----- | --------- |
+| any   | list\<any\> |
+
 ## Examples
 
-Prepend one Int item
+prepend a list to an item
+```shell
+> 0 | prepend [1 2 3]
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+│ 3 │ 0 │
+╰───┴───╯
+
+```
+
+Prepend a list of strings to a string
+```shell
+> "a" | prepend ["b"]
+╭───┬───╮
+│ 0 │ b │
+│ 1 │ a │
+╰───┴───╯
+
+```
+
+Prepend one integer item
 ```shell
 > [1,2,3,4] | prepend 0
 ╭───┬───╮
@@ -41,7 +65,7 @@ Prepend one Int item
 
 ```
 
-Prepend two Int items
+Prepend two integer items
 ```shell
 > [2,3,4] | prepend [0,1]
 ╭───┬───╮
@@ -54,7 +78,7 @@ Prepend two Int items
 
 ```
 
-Prepend Ints and Strings
+Prepend integers and strings
 ```shell
 > [2,nu,4,shell] | prepend [0,1,rocks]
 ╭───┬───────╮
@@ -68,3 +92,9 @@ Prepend Ints and Strings
 ╰───┴───────╯
 
 ```
+
+## Notes
+Be aware that this command 'unwraps' lists passed to it. So, if you pass a variable to it,
+and you want the variable's contents to be prepended without being unwrapped, it's wise to
+pre-emptively wrap the variable in a list, like so: `prepend [$val]`. This way, `prepend` will
+only unwrap the outer list, and leave the variable's contents untouched.

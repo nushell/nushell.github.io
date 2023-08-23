@@ -2,7 +2,7 @@
 title: bits ror
 categories: |
   bits
-version: 0.83.0
+version: 0.84.0
 bits: |
   Bitwise rotate right for integers.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--signed` `(-s)`: always treat input number as a signed number
  -  `--number-bytes {string}`: the word size in number of bytes, it can be 1, 2, 4, 8, auto, default value `8`
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| int       | int       |
+| list\<int\> | list\<int\> |
 ## Examples
 
 Rotate right a number with 60 bits
@@ -41,3 +48,6 @@ Rotate right a list of numbers of one byte
 ╰───┴─────╯
 
 ```
+
+
+**Tips:** Command `bits ror` was not included in the official binaries by default, you have to build it with `--features=extra` flag

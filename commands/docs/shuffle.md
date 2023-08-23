@@ -2,7 +2,7 @@
 title: shuffle
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Shuffle rows randomly.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> shuffle ```
+
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
 
 ## Examples
 

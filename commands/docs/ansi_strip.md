@@ -2,7 +2,7 @@
 title: ansi strip
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   Strip ANSI escape sequences from a string.
 usage: |
@@ -21,6 +21,15 @@ usage: |
 
  -  `...rest`: for a data structure input, remove ANSI sequences from strings at the given cell paths
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 Strip ANSI escape sequences from a string

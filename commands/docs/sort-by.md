@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Sort by the given columns, in increasing order.
 usage: |
@@ -24,6 +24,13 @@ usage: |
  -  `--ignore-case` `(-i)`: Sort string-based columns case-insensitively
  -  `--natural` `(-n)`: Sort alphanumeric string-based columns naturally (1, 9, 10, 99, 100, ...)
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| table     | table     |
 ## Examples
 
 Sort files by modified date

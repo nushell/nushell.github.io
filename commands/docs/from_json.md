@@ -2,7 +2,7 @@
 title: from json
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Convert from json to structured data.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--objects` `(-o)`: treat each line as a separate value
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | any    |
 
 ## Examples
 

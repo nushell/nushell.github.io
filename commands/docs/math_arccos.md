@@ -2,7 +2,7 @@
 title: math arccos
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the arccosine of the number.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--degrees` `(-d)`: Return degrees instead of radians
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Get the arccosine of 1
@@ -34,3 +41,6 @@ Get the arccosine of -1 in degrees
 > -1 | math arccos -d
 180
 ```
+
+
+**Tips:** Command `math arccos` was not included in the official binaries by default, you have to build it with `--features=extra` flag

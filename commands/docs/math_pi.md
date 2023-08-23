@@ -2,7 +2,7 @@
 title: math pi
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the mathematical constant π.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> math pi ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | number |
+
 ## Examples
 
 Get the first two decimal digits of π
@@ -24,3 +31,6 @@ Get the first two decimal digits of π
 > math pi | math round --precision 2
 3.14
 ```
+
+
+**Tips:** Command `math pi` was not included in the official binaries by default, you have to build it with `--features=extra` flag

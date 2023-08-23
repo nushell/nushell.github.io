@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -22,6 +22,14 @@ usage: |
  -  `field`: the name of the column to update
  -  `replacement value`: the new value to give the cell(s), or a closure to create the value
 
+
+## Input/output types:
+
+| input     | output    |
+| --------- | --------- |
+| list\<any\> | list\<any\> |
+| record    | record    |
+| table     | table     |
 ## Examples
 
 Update a column value
@@ -65,3 +73,10 @@ You can also use a simple command to update 'authors' to a single string
 ╰───┴─────────┴──────────────────╯
 
 ```
+
+
+## Subcommands:
+
+| name                                             | type    | usage                   |
+| ------------------------------------------------ | ------- | ----------------------- |
+| [`update cells`](/commands/docs/update_cells.md) | Builtin | Update the table cells. |

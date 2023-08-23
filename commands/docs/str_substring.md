@@ -1,17 +1,17 @@
 ---
 title: str substring
 categories: |
-  default
-version: 0.83.0
-default: |
+  strings
+version: 0.84.0
+strings: |
   Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 usage: |
   Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for strings
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.strings }}</div>
 
 ## Signature
 
@@ -24,6 +24,15 @@ usage: |
  -  `--grapheme-clusters` `(-g)`: count indexes and split using grapheme clusters (all visible chars have length 1)
  -  `--utf-8-bytes` `(-b)`: count indexes and split using UTF-8 bytes (default; non-ASCII chars have length 2+)
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 Get a substring "nushell" from the text "good nushell" using a range

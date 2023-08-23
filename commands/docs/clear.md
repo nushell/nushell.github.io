@@ -2,7 +2,7 @@
 title: clear
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   Clear the terminal.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> clear ```
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

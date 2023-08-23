@@ -2,7 +2,7 @@
 title: to csv
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Convert table into .csv text .
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `--separator {string}`: a character to separate columns, defaults to ','
  -  `--noheaders` `(-n)`: do not output the columns names as the first row
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | string |
+| table  | string |
 ## Examples
 
 Outputs an CSV string representing the contents of this table

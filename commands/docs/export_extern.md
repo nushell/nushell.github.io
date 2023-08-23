@@ -2,7 +2,7 @@
 title: export extern
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Define an extern and export it from a module.
 usage: |
@@ -22,9 +22,13 @@ usage: |
  -  `def_name`: definition name
  -  `params`: parameters
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Export the signature for an external command
@@ -32,3 +36,7 @@ Export the signature for an external command
 > export extern echo [text: string]
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

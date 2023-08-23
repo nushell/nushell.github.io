@@ -2,7 +2,7 @@
 title: dfr unique
 categories: |
   dataframe or lazyframe
-version: 0.83.0
+version: 0.84.0
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--last` `(-l)`: Keeps last unique value. Default keeps first value (lazy df)
  -  `--maintain-order` `(-k)`: Keep the same order as the original DataFrame (lazy df)
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Returns unique values from a series
@@ -41,3 +48,6 @@ Creates a is unique expression from a column
 > col a | unique
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

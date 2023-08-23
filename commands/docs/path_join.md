@@ -1,17 +1,17 @@
 ---
 title: path join
 categories: |
-  default
-version: 0.83.0
-default: |
+  path
+version: 0.84.0
+path: |
   Join a structured path or a list of path parts.
 usage: |
   Join a structured path or a list of path parts.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for path
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.path }}</div>
 
 ## Signature
 
@@ -21,9 +21,15 @@ usage: |
 
  -  `...rest`: Path to append to the input
 
-## Notes
-Optionally, append an additional path to the result. It is designed to accept
-the output of 'path parse' and 'path split' subcommands.
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | string       |
+| record       | string       |
+| string       | string       |
+| table        | list\<string\> |
 ## Examples
 
 Append a filename to a path
@@ -58,3 +64,7 @@ Join a table of structured paths into a list of paths
 ╰───┴───────────────────────╯
 
 ```
+
+## Notes
+Optionally, append an additional path to the result. It is designed to accept
+the output of 'path parse' and 'path split' subcommands.

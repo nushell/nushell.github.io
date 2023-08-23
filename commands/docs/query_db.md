@@ -2,7 +2,7 @@
 title: query db
 categories: |
   database
-version: 0.83.0
+version: 0.84.0
 database: |
   Query a database using SQL.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `SQL`: SQL to execute against the database
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

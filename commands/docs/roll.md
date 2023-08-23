@@ -2,7 +2,7 @@
 title: roll
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Rolling commands for tables.
 usage: |
@@ -17,5 +17,23 @@ usage: |
 
 ```> roll ```
 
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | string |
+
 ## Notes
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
+
+## Subcommands:
+
+| name                                         | type    | usage                              |
+| -------------------------------------------- | ------- | ---------------------------------- |
+| [`roll down`](/commands/docs/roll_down.md)   | Builtin | Roll table rows down.              |
+| [`roll left`](/commands/docs/roll_left.md)   | Builtin | Roll record or table columns left. |
+| [`roll right`](/commands/docs/roll_right.md) | Builtin | Roll table columns right.          |
+| [`roll up`](/commands/docs/roll_up.md)       | Builtin | Roll table rows up.                |
+
+**Tips:** Command `roll` was not included in the official binaries by default, you have to build it with `--features=extra` flag

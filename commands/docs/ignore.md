@@ -2,7 +2,7 @@
 title: ignore
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Ignore the output of the previous command in the pipeline.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> ignore ```
+
+
+## Input/output types:
+
+| input | output  |
+| ----- | ------- |
+| any   | nothing |
 
 ## Examples
 

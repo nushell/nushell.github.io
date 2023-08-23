@@ -2,7 +2,7 @@
 title: from tsv
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Parse text as .tsv and create table.
 usage: |
@@ -26,6 +26,13 @@ usage: |
  -  `--flexible` `(-)`: allow the number of fields in records to be variable
  -  `--no-infer` `(-)`: no field type inferencing
  -  `--trim {string}`: drop leading and trailing whitespaces around headers names and/or field values
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | table  |
 
 ## Examples
 

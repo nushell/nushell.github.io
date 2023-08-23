@@ -2,7 +2,7 @@
 title: def
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Define a custom command.
 usage: |
@@ -23,9 +23,13 @@ usage: |
  -  `params`: parameters
  -  `body`: body of the definition
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Define a command and run it
@@ -39,3 +43,7 @@ Define a command and run it with parameter(s)
 > def say-sth [sth: string] { echo $sth }; say-sth hi
 hi
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

@@ -2,7 +2,7 @@
 title: str reverse
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Reverse every string in the pipeline.
 usage: |
@@ -21,6 +21,15 @@ usage: |
 
  -  `...rest`: For a data structure input, reverse strings at the given cell paths
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 Reverse a single string

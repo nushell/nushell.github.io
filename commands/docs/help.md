@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Display help information about different parts of Nushell.
 usage: |
@@ -22,8 +22,13 @@ usage: |
  -  `...rest`: the name of command, alias or module to get help on
  -  `--find {string}`: string to find in command names, usage, and search terms
 
-## Notes
-`help word` searches for "word" in commands, aliases and modules, in that order.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | string |
+
 ## Examples
 
 show help for single command, alias, or module
@@ -43,3 +48,16 @@ search for string in command names, usage and search terms
 > help --find char
 
 ```
+
+## Notes
+`help word` searches for "word" in commands, aliases and modules, in that order.
+
+## Subcommands:
+
+| name                                                 | type    | usage                           |
+| ---------------------------------------------------- | ------- | ------------------------------- |
+| [`help aliases`](/commands/docs/help_aliases.md)     | Builtin | Show help on nushell aliases.   |
+| [`help commands`](/commands/docs/help_commands.md)   | Builtin | Show help on nushell commands.  |
+| [`help externs`](/commands/docs/help_externs.md)     | Builtin | Show help on nushell externs.   |
+| [`help modules`](/commands/docs/help_modules.md)     | Builtin | Show help on nushell modules.   |
+| [`help operators`](/commands/docs/help_operators.md) | Builtin | Show help on nushell operators. |

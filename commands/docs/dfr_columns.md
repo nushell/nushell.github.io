@@ -2,7 +2,7 @@
 title: dfr columns
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Show dataframe columns.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> dfr columns ```
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Dataframe columns
@@ -28,3 +35,6 @@ Dataframe columns
 ╰───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

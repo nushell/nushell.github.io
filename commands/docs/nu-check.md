@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Validate and parse input content.
 usage: |
@@ -24,6 +24,13 @@ usage: |
  -  `--debug` `(-d)`: Show error messages
  -  `--all` `(-a)`: Parse content as script first, returns result if success, otherwise, try with module
 
+
+## Input/output types:
+
+| input     | output |
+| --------- | ------ |
+| list\<any\> | bool   |
+| string    | bool   |
 ## Examples
 
 Parse a input file as script(Default)

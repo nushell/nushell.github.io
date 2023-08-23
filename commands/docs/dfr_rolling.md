@@ -2,7 +2,7 @@
 title: dfr rolling
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Rolling calculation for a series.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `type`: rolling operation
  -  `window`: Window size for rolling
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -51,3 +58,6 @@ Rolling max for a series
 ╰───┴───────────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

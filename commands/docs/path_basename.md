@@ -1,17 +1,17 @@
 ---
 title: path basename
 categories: |
-  default
-version: 0.83.0
-default: |
+  path
+version: 0.84.0
+path: |
   Get the final component of a path.
 usage: |
   Get the final component of a path.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for path
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.path }}</div>
 
 ## Signature
 
@@ -21,6 +21,13 @@ usage: |
 
  -  `--replace {string}`: Return original path with basename replaced by this string
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| string       | string       |
 ## Examples
 
 Get basename of a path

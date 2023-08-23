@@ -2,7 +2,7 @@
 title: dfr filter-with
 categories: |
   dataframe or lazyframe
-version: 0.83.0
+version: 0.84.0
 dataframe_or_lazyframe: |
   Filters dataframe using a mask or expression as reference.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `mask or expression`: boolean mask used to filter data
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -45,3 +52,6 @@ Filter dataframe using an expression
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

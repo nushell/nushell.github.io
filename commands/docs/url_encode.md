@@ -2,7 +2,7 @@
 title: url encode
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Converts a string to a percent encoded web safe string.
 usage: |
@@ -22,6 +22,15 @@ usage: |
  -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
  -  `--all` `(-a)`: encode all non-alphanumeric chars including `/`, `.`, `:`
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<string\> | list\<string\> |
+| record       | record       |
+| string       | string       |
+| table        | table        |
 ## Examples
 
 Encode a url with escape characters

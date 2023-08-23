@@ -2,7 +2,7 @@
 title: du
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Find disk usage sizes of specified items.
 usage: |
@@ -25,6 +25,13 @@ usage: |
  -  `--exclude {glob}`: Exclude these file names
  -  `--max-depth {int}`: Directory recursion limit
  -  `--min-size {int}`: Exclude files below this size
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 

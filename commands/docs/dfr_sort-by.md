@@ -2,7 +2,7 @@
 title: dfr sort-by
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   sorts a lazy dataframe based on expression(s).
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `...rest`: sort expression for the dataframe
  -  `--reverse {list<bool>}`: Reverse sorting. Default is false
  -  `--nulls-last` `(-n)`: nulls are shown last in the dataframe
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -51,3 +58,6 @@ Sort column using two columns
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

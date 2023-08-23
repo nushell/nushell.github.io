@@ -2,7 +2,7 @@
 title: into bits
 categories: |
   conversions
-version: 0.83.0
+version: 0.84.0
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -21,6 +21,20 @@ usage: |
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
 
+
+## Input/output types:
+
+| input    | output |
+| -------- | ------ |
+| binary   | string |
+| bool     | string |
+| datetime | string |
+| duration | string |
+| filesize | string |
+| int      | string |
+| record   | record |
+| string   | string |
+| table    | table  |
 ## Examples
 
 convert a binary value into a string, padded to 8 places with 0s
@@ -64,3 +78,6 @@ convert a string into a raw binary string, padded with 0s to 8 places
 > 'nushell.sh' | into bits
 01101110 01110101 01110011 01101000 01100101 01101100 01101100 00101110 01110011 01101000
 ```
+
+
+**Tips:** Command `into bits` was not included in the official binaries by default, you have to build it with `--features=extra` flag

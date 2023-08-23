@@ -2,7 +2,7 @@
 title: query xml
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   execute xpath query on xml
 usage: |
@@ -20,3 +20,10 @@ usage: |
 ## Parameters
 
  -  `query`: xpath query
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |

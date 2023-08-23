@@ -2,7 +2,7 @@
 title: date humanize
 categories: |
   date
-version: 0.83.0
+version: 0.84.0
 date: |
   Print a 'humanized' format for the date, relative to now.
 usage: |
@@ -17,6 +17,13 @@ usage: |
 
 ```> date humanize ```
 
+
+## Input/output types:
+
+| input    | output |
+| -------- | ------ |
+| datetime | string |
+| string   | string |
 ## Examples
 
 Print a 'humanized' format for the date, relative to now.

@@ -2,7 +2,7 @@
 title: dfr replace-all
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Replace all (sub)strings by a regex pattern.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `--pattern {string}`: Regex pattern to be matched
  -  `--replace {string}`: replacing string
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Replaces string
@@ -36,3 +43,6 @@ Replaces string
 ╰───┴──────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

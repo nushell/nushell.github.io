@@ -2,7 +2,7 @@
 title: math arctan
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the arctangent of the number.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--degrees` `(-d)`: Return degrees instead of radians
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Get the arctangent of 1
@@ -34,3 +41,6 @@ Get the arctangent of -1 in degrees
 > -1 | math arctan -d
 -45
 ```
+
+
+**Tips:** Command `math arctan` was not included in the official binaries by default, you have to build it with `--features=extra` flag

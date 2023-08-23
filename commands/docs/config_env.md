@@ -2,7 +2,7 @@
 title: config env
 categories: |
   env
-version: 0.83.0
+version: 0.84.0
 env: |
   Edit nu environment configurations.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> config env ```
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

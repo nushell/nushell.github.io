@@ -2,7 +2,7 @@
 title: help modules
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Show help on nushell modules.
 usage: |
@@ -22,10 +22,13 @@ usage: |
  -  `...rest`: the name of module to get help on
  -  `--find {string}`: string to find in module names and usage
 
-## Notes
-When requesting help for a single module, its commands and aliases will be highlighted if they
-are also available in the current scope. Commands/aliases that were imported under a different name
-(such as with a prefix after `use some-module`) will be highlighted in parentheses.
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
+
 ## Examples
 
 show all modules
@@ -45,3 +48,8 @@ search for string in module names and usages
 > help modules --find my-module
 
 ```
+
+## Notes
+When requesting help for a single module, its commands and aliases will be highlighted if they
+are also available in the current scope. Commands/aliases that were imported under a different name
+(such as with a prefix after `use some-module`) will be highlighted in parentheses.

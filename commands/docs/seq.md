@@ -2,7 +2,7 @@
 title: seq
 categories: |
   generators
-version: 0.83.0
+version: 0.84.0
 generators: |
   Output sequences of numbers.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `...rest`: sequence values
+
+
+## Input/output types:
+
+| input   | output       |
+| ------- | ------------ |
+| nothing | list\<number\> |
 
 ## Examples
 
@@ -65,3 +72,11 @@ sequence 1 to 5, then convert to a string with a pipe separator
 > seq 1 5 | str join '|'
 
 ```
+
+
+## Subcommands:
+
+| name                                     | type    | usage                                 |
+| ---------------------------------------- | ------- | ------------------------------------- |
+| [`seq char`](/commands/docs/seq_char.md) | Builtin | Print a sequence of ASCII characters. |
+| [`seq date`](/commands/docs/seq_date.md) | Builtin | Print sequences of dates.             |

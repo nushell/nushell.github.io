@@ -2,7 +2,7 @@
 title: overlay list
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   List all active overlays.
 usage: |
@@ -17,8 +17,13 @@ usage: |
 
 ```> overlay list ```
 
-## Notes
-The overlays are listed in the order they were activated.
+
+## Input/output types:
+
+| input   | output       |
+| ------- | ------------ |
+| nothing | list\<string\> |
+
 ## Examples
 
 Get the last activated overlay
@@ -28,3 +33,6 @@ Get the last activated overlay
     overlay list | last
 spam
 ```
+
+## Notes
+The overlays are listed in the order they were activated.

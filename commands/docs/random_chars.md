@@ -2,7 +2,7 @@
 title: random chars
 categories: |
   random
-version: 0.83.0
+version: 0.84.0
 random: |
   Generate random chars.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--length {int}`: Number of chars
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | string |
 
 ## Examples
 

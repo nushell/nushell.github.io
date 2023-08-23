@@ -2,7 +2,7 @@
 title: dfr join
 categories: |
   lazyframe
-version: 0.83.0
+version: 0.84.0
 lazyframe: |
   Joins a lazy frame with other lazy frame.
 usage: |
@@ -27,6 +27,13 @@ usage: |
  -  `--outer` `(-o)`: outer join between lazyframes
  -  `--cross` `(-c)`: cross join between lazyframes
  -  `--suffix {string}`: Suffix to use on columns with same name
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -61,3 +68,6 @@ Join one eager dataframe with a lazy dataframe
 ╰───┴───┴───┴───┴─────┴─────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

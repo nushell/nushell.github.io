@@ -2,7 +2,7 @@
 title: math stddev
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the standard deviation of a list of numbers, or of each column in a table.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `--sample` `(-s)`: calculate sample standard deviation (i.e. using N-1 as the denominator)
+
+
+## Input/output types:
+
+| input        | output |
+| ------------ | ------ |
+| list\<number\> | number |
 
 ## Examples
 

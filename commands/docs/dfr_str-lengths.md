@@ -2,7 +2,7 @@
 title: dfr str-lengths
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Get lengths of all strings.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> dfr str-lengths ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -31,3 +38,6 @@ Returns string lengths
 ╰───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

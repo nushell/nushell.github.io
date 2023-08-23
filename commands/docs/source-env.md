@@ -2,7 +2,7 @@
 title: source-env
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Source the environment from a source file into the current environment.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `filename`: the filepath to the script file to source the environment from
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 

@@ -1,17 +1,17 @@
 ---
 title: join
 categories: |
-  default
-version: 0.83.0
-default: |
+  filters
+version: 0.84.0
+filters: |
   Join two tables
 usage: |
   Join two tables
 ---
 
-# <code>{{ $frontmatter.title }}</code> for default
+# <code>{{ $frontmatter.title }}</code> for filters
 
-<div class='command-title'>{{ $frontmatter.default }}</div>
+<div class='command-title'>{{ $frontmatter.filters }}</div>
 
 ## Signature
 
@@ -26,6 +26,13 @@ usage: |
  -  `--left` `(-l)`: Left-outer join
  -  `--right` `(-r)`: Right-outer join
  -  `--outer` `(-o)`: Outer join
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| table | table  |
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: dfr drop-nulls
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Drops null values in dataframe.
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `subset`: subset of columns to drop nulls
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -52,3 +59,6 @@ drop null values in dataframe
 ╰───┴─────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

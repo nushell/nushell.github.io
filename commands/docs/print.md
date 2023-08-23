@@ -2,7 +2,7 @@
 title: print
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Print the given values to stdout.
 usage: |
@@ -23,11 +23,13 @@ usage: |
  -  `--no-newline` `(-n)`: print without inserting a newline for the line ending
  -  `--stderr` `(-e)`: print to stderr instead of stdout
 
-## Notes
-Unlike `echo`, this command does not return any value (`print | describe` will return "nothing").
-Since this command has no output, there is no point in piping it with other commands.
 
-`print` may be used inside blocks of code (e.g.: hooks) to display text during execution without interfering with the pipeline.
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| any     | nothing |
+| nothing | nothing |
 ## Examples
 
 Print 'hello world'
@@ -41,3 +43,9 @@ Print the sum of 2 and 3
 > print (2 + 3)
 
 ```
+
+## Notes
+Unlike `echo`, this command does not return any value (`print | describe` will return "nothing").
+Since this command has no output, there is no point in piping it with other commands.
+
+`print` may be used inside blocks of code (e.g.: hooks) to display text during execution without interfering with the pipeline.

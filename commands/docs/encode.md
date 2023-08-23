@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Encode a string into bytes.
 usage: |
@@ -22,14 +22,13 @@ usage: |
  -  `encoding`: the text encoding to use
  -  `--ignore-errors` `(-i)`: when a character isn't in the given encoding, replace with a HTML entity (like `&#127880;`)
 
-## Notes
-Multiple encodings are supported; here are a few:
-big5, euc-jp, euc-kr, gbk, iso-8859-1, cp1252, latin5
 
-Note that since the Encoding Standard doesn't specify encoders for utf-16le and utf-16be, these are not yet supported.
+## Input/output types:
 
-For a more complete list of encodings, please refer to the encoding_rs
-documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
+| input  | output |
+| ------ | ------ |
+| string | binary |
+
 ## Examples
 
 Encode an UTF-8 string into Shift-JIS
@@ -49,3 +48,19 @@ Length: 9 (0x9) bytes | printable whitespace ascii_other non_ascii
 00000000:   26 23 31 32  37 38 38 30  3b                         &#127880;
 
 ```
+
+## Notes
+Multiple encodings are supported; here are a few:
+big5, euc-jp, euc-kr, gbk, iso-8859-1, cp1252, latin5
+
+Note that since the Encoding Standard doesn't specify encoders for utf-16le and utf-16be, these are not yet supported.
+
+For a more complete list of encodings, please refer to the encoding_rs
+documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
+
+## Subcommands:
+
+| name                                               | type    | usage                                         |
+| -------------------------------------------------- | ------- | --------------------------------------------- |
+| [`encode base64`](/commands/docs/encode_base64.md) | Builtin | Encode a string or binary value using Base64. |
+| [`encode hex`](/commands/docs/encode_hex.md)       | Builtin | Encode a binary value using hex.              |

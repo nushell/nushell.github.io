@@ -2,7 +2,7 @@
 title: dfr all-false
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Returns true if all values are false.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> dfr all-false ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -42,3 +49,6 @@ Checks the result from a comparison
 ╰───┴───────────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

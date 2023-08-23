@@ -2,7 +2,7 @@
 title: math log
 categories: |
   math
-version: 0.83.0
+version: 0.84.0
 math: |
   Returns the logarithm for an arbitrary base.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `base`: Base for which the logarithm should be computed
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<number\> |
+| number       | number       |
 ## Examples
 
 Get the logarithm of 100 to the base 10

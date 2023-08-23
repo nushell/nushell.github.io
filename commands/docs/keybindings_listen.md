@@ -2,7 +2,7 @@
 title: keybindings listen
 categories: |
   platform
-version: 0.83.0
+version: 0.84.0
 platform: |
   Get input from the user.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> keybindings listen ```
+
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: append
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Append any number of rows to a table.
 usage: |
@@ -21,14 +21,16 @@ usage: |
 
  -  `row`: the row, list, or table to append
 
-## Notes
-Be aware that this command 'unwraps' lists passed to it. So, if you pass a variable to it,
-and you want the variable's contents to be appended without being unwrapped, it's wise to
-pre-emptively wrap the variable in a list, like so: `append [$val]`. This way, `append` will
-only unwrap the outer list, and leave the variable's contents untouched.
+
+## Input/output types:
+
+| input | output    |
+| ----- | --------- |
+| any   | list\<any\> |
+
 ## Examples
 
-Append one Int item
+Append one integer to a list
 ```shell
 > [0,1,2,3] | append 4
 ╭───┬───╮
@@ -41,7 +43,29 @@ Append one Int item
 
 ```
 
-Append three Int items
+Append a list to an item
+```shell
+> 0 | append [1 2 3]
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+│ 3 │ 3 │
+╰───┴───╯
+
+```
+
+Append a list of string to a string
+```shell
+> "a" | append ["b"]
+╭───┬───╮
+│ 0 │ a │
+│ 1 │ b │
+╰───┴───╯
+
+```
+
+Append three integer items
 ```shell
 > [0,1] | append [2,3,4]
 ╭───┬───╮
@@ -54,7 +78,7 @@ Append three Int items
 
 ```
 
-Append Ints and Strings
+Append integers and strings
 ```shell
 > [0,1] | append [2,nu,4,shell]
 ╭───┬───────╮
@@ -67,3 +91,9 @@ Append Ints and Strings
 ╰───┴───────╯
 
 ```
+
+## Notes
+Be aware that this command 'unwraps' lists passed to it. So, if you pass a variable to it,
+and you want the variable's contents to be appended without being unwrapped, it's wise to
+pre-emptively wrap the variable in a list, like so: `append [$val]`. This way, `append` will
+only unwrap the outer list, and leave the variable's contents untouched.

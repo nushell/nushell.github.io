@@ -2,7 +2,7 @@
 title: export def
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Define a custom command and export it from a module.
 usage: |
@@ -23,9 +23,13 @@ usage: |
  -  `params`: parameters
  -  `block`: body of the definition
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Define a custom command in a module and call it
@@ -33,3 +37,7 @@ Define a custom command in a module and call it
 > module spam { export def foo [] { "foo" } }; use spam foo; foo
 foo
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

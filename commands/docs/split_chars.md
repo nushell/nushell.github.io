@@ -2,7 +2,7 @@
 title: split chars
 categories: |
   strings
-version: 0.83.0
+version: 0.84.0
 strings: |
   Split a string into a list of characters.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `--grapheme-clusters` `(-g)`: split on grapheme clusters
  -  `--code-points` `(-c)`: split on code points (default; splits combined characters)
 
+
+## Input/output types:
+
+| input        | output             |
+| ------------ | ------------------ |
+| list\<string\> | list\<list\<string\>\> |
+| string       | list\<string\>       |
 ## Examples
 
 Split the string into a list of characters

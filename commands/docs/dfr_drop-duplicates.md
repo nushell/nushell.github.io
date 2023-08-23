@@ -2,7 +2,7 @@
 title: dfr drop-duplicates
 categories: |
   dataframe
-version: 0.83.0
+version: 0.84.0
 dataframe: |
   Drops duplicate values in dataframe.
 usage: |
@@ -23,6 +23,13 @@ usage: |
  -  `--maintain` `(-m)`: maintain order
  -  `--last` `(-l)`: keeps last duplicate value (by default keeps first)
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 drop duplicates
@@ -36,3 +43,6 @@ drop duplicates
 ╰───┴───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

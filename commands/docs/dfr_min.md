@@ -1,21 +1,28 @@
 ---
 title: dfr min
 categories: |
-  lazyframe
-version: 0.83.0
-lazyframe: |
-  Aggregates columns to their min value
+  expression
+version: 0.84.0
+expression: |
+  Creates a min expression or aggregates columns to their min value
 usage: |
-  Aggregates columns to their min value
+  Creates a min expression or aggregates columns to their min value
 ---
 
-# <code>{{ $frontmatter.title }}</code> for lazyframe
+# <code>{{ $frontmatter.title }}</code> for expression
 
-<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
+<div class='command-title'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 
 ```> dfr min ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -29,3 +36,21 @@ Min value from columns in a dataframe
 ╰───┴───┴───╯
 
 ```
+
+Min aggregation for a group-by
+```shell
+> [[a b]; [one 2] [one 4] [two 1]]
+    | dfr into-df
+    | dfr group-by a
+    | dfr agg (dfr col b | dfr min)
+╭───┬─────┬───╮
+│ # │  a  │ b │
+├───┼─────┼───┤
+│ 0 │ one │ 2 │
+│ 1 │ two │ 1 │
+╰───┴─────┴───╯
+
+```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

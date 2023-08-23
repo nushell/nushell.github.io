@@ -2,7 +2,7 @@
 title: dfr shift
 categories: |
   dataframe or lazyframe
-version: 0.83.0
+version: 0.84.0
 dataframe_or_lazyframe: |
   Shifts the values by a given period.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `period`: shift period
  -  `--fill {any}`: Expression used to fill the null values (lazy df)
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Shifts the values by a given period
@@ -36,3 +43,6 @@ Shifts the values by a given period
 ╰───┴───╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

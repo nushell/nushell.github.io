@@ -2,7 +2,7 @@
 title: random uuid
 categories: |
   random
-version: 0.83.0
+version: 0.84.0
 random: |
   Generate a random uuid4 string.
 usage: |
@@ -16,6 +16,13 @@ usage: |
 ## Signature
 
 ```> random uuid ```
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | string |
 
 ## Examples
 

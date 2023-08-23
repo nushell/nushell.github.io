@@ -1,21 +1,28 @@
 ---
 title: dfr std
 categories: |
-  lazyframe
-version: 0.83.0
-lazyframe: |
-  Aggregates columns to their std value
+  expression
+version: 0.84.0
+expression: |
+  Creates a std expression for an aggregation of std value from columns in a dataframe
 usage: |
-  Aggregates columns to their std value
+  Creates a std expression for an aggregation of std value from columns in a dataframe
 ---
 
-# <code>{{ $frontmatter.title }}</code> for lazyframe
+# <code>{{ $frontmatter.title }}</code> for expression
 
-<div class='command-title'>{{ $frontmatter.lazyframe }}</div>
+<div class='command-title'>{{ $frontmatter.expression }}</div>
 
 ## Signature
 
 ```> dfr std ```
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -29,3 +36,21 @@ Std value from columns in a dataframe
 ╰───┴──────┴──────╯
 
 ```
+
+Std aggregation for a group-by
+```shell
+> [[a b]; [one 2] [one 2] [two 1] [two 1]]
+    | dfr into-df
+    | dfr group-by a
+    | dfr agg (dfr col b | dfr std)
+╭───┬─────┬──────╮
+│ # │  a  │  b   │
+├───┼─────┼──────┤
+│ 0 │ one │ 0.00 │
+│ 1 │ two │ 0.00 │
+╰───┴─────┴──────╯
+
+```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag

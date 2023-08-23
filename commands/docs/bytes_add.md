@@ -2,7 +2,7 @@
 title: bytes add
 categories: |
   bytes
-version: 0.83.0
+version: 0.84.0
 bytes: |
   Add specified bytes to the input.
 usage: |
@@ -24,6 +24,15 @@ usage: |
  -  `--index {int}`: index to insert binary data
  -  `--end` `(-e)`: add to the end of binary
 
+
+## Input/output types:
+
+| input        | output       |
+| ------------ | ------------ |
+| binary       | binary       |
+| list\<binary\> | list\<binary\> |
+| record       | record       |
+| table        | table        |
 ## Examples
 
 Add bytes `0x[AA]` to `0x[1F FF AA AA]`

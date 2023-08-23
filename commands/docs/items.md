@@ -2,7 +2,7 @@
 title: items
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Given a record, iterate on each pair of column name and associated value.
 usage: |
@@ -21,8 +21,13 @@ usage: |
 
  -  `closure`: the closure to run
 
-## Notes
-This is a the fusion of `columns`, `values` and `each`.
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | any    |
+
 ## Examples
 
 Iterate over each key-value pair of a record
@@ -34,3 +39,6 @@ Iterate over each key-value pair of a record
 ╰───┴───────────────╯
 
 ```
+
+## Notes
+This is a the fusion of `columns`, `values` and `each`.

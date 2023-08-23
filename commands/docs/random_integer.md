@@ -2,7 +2,7 @@
 title: random integer
 categories: |
   random
-version: 0.83.0
+version: 0.84.0
 random: |
   Generate a random integer [min..max].
 usage: |
@@ -20,6 +20,13 @@ usage: |
 ## Parameters
 
  -  `range`: Range of values
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | int    |
 
 ## Examples
 

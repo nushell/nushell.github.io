@@ -2,7 +2,7 @@
 title: const
 categories: |
   core
-version: 0.83.0
+version: 0.84.0
 core: |
   Create a parse-time constant.
 usage: |
@@ -22,9 +22,13 @@ usage: |
  -  `const_name`: constant name
  -  `initial_value`: equals sign followed by constant value
 
-## Notes
-This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+
+## Input/output types:
+
+| input   | output  |
+| ------- | ------- |
+| nothing | nothing |
+
 ## Examples
 
 Create a new parse-time constant.
@@ -38,3 +42,7 @@ Create a composite constant value
 > const x = { a: 10, b: 20 }
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

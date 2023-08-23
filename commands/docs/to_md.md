@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.83.0
+version: 0.84.0
 formats: |
   Convert table into simple Markdown.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `--pretty` `(-p)`: Formats the Markdown table to vertically align items
  -  `--per-element` `(-e)`: treat each row as markdown syntax element
+
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | string |
 
 ## Examples
 

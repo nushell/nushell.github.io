@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.83.0
+version: 0.84.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -25,6 +25,13 @@ usage: |
  -  `--glob {string}`: Only report changes for files that match this glob pattern (default: all files)
  -  `--recursive {bool}`: Watch all directories under `<path>` recursively. Will be ignored if `<path>` is a file (default: true)
  -  `--verbose` `(-v)`: Operate in verbose mode (default: false)
+
+
+## Input/output types:
+
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 

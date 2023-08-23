@@ -2,7 +2,7 @@
 title: roll right
 categories: |
   filters
-version: 0.83.0
+version: 0.84.0
 filters: |
   Roll table columns right.
 usage: |
@@ -22,6 +22,13 @@ usage: |
  -  `--by {int}`: Number of columns to roll
  -  `--cells-only` `(-c)`: rotates columns leaving headers fixed
 
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| record | record |
+| table  | table  |
 ## Examples
 
 Rolls columns of a record to the right
@@ -57,3 +64,6 @@ Rolls columns to the right with fixed headers
 ╰───┴───┴───┴───╯
 
 ```
+
+
+**Tips:** Command `roll right` was not included in the official binaries by default, you have to build it with `--features=extra` flag

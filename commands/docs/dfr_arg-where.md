@@ -2,7 +2,7 @@
 title: dfr arg-where
 categories: |
   expression
-version: 0.83.0
+version: 0.84.0
 expression: |
   Creates an expression that returns the arguments where expression is true.
 usage: |
@@ -21,6 +21,13 @@ usage: |
 
  -  `column name`: Expression to evaluate
 
+
+## Input/output types:
+
+| input | output |
+| ----- | ------ |
+| any   | any    |
+
 ## Examples
 
 Return a dataframe where the value match the expression
@@ -35,3 +42,6 @@ Return a dataframe where the value match the expression
 ╰───┴───────╯
 
 ```
+
+
+**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag
