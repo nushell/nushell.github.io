@@ -61,3 +61,34 @@ def "main" [] {
 
 It even comes with its own help
 ![automated help generated for the script subcommand](../assets/images/bday_4_subcommand_help.png)
+
+## Crossplatform simlinks (Kubouch)
+
+"Here is my favorite: Cross-platform symlink:"
+
+```nushell
+# Create a symlink
+export def symlink [
+    existing: path   # The existing file
+    link_name: path  # The name of the symlink
+] {
+    let existing = ($existing | path expand -s)
+    let link_name = ($link_name | path expand)
+
+    if $nu.os-info.family == 'windows' {
+        if ($existing | path type) == 'dir' {
+            mklink /D $link_name $existing
+        } else {
+            mklink $link_name $existing
+        }
+    } else {
+        ln -s $existing $link_name | ignore
+    }
+}
+```
+
+## Giving your hex values some color (fdncred)
+
+add `string: {|x| if $x =~ '^#[a-fA-F\d]+' { $x } else { 'white' } }` to your `$env.config.color_config` and you'll get:
+
+![screenshot showing each hex value colored to match the color of that hex value](../assets/images/bday_4_hex_colours.png)
