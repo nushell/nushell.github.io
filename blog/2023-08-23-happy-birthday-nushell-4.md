@@ -23,7 +23,7 @@ To celebrate, we thought we'd share stories of how people are using Nushell toda
 
 ## Using a `grid` when you `cd` (fdncred)
 
-"I have it in a custom command name lsg and then in my env_change hook on the PWD env var, I call print (lsg). So, every time I cd, lsg gets ran for whatever directory I'm cd'ing to, automatically."
+"I have it in a custom command name `lsg` and then in my `env_change` hook on the `PWD` env var, I call `print (lsg)`. So, every time I `cd`, `lsg` gets ran for whatever directory I'm `cd`'ing to, automatically."
 
 Using `ls | sort-by type name -i | grid -c`, it looks like this:
 
@@ -66,7 +66,7 @@ def "main" [] {
 It even comes with its own help
 ![automated help generated for the script subcommand](../assets/images/bday_4_subcommand_help.png)
 
-## Crossplatform simlinks (Kubouch)
+## Crossplatform symlinks (Kubouch)
 
 "Here is my favorite: Cross-platform symlink:"
 
