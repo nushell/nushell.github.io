@@ -14,8 +14,12 @@ To celebrate, we thought we'd share stories of how people are using Nushell toda
 
 ## Watching for database changes (Reilly)
 
-- in a loop, clear the screen, do something like `open app.db | get some_table`, and then `sleep` a few seconds to provide an auto-updating "dashboard" of what's going on in a SQLite database
-- use `watch` to run a SQLite command whenever a .sql file changes - kinda like a poor man's SQLite IDE
+> I like how easy it is to hack together ad-hoc dev tools with Nushell. For example:
+> - In a loop: clear the screen, do something like `open app.db | get some_table`, and then `sleep` a few seconds
+>   - Now I've got an auto-updating "dashboard" of what's going on in a SQLite database
+> - Use `watch` to run a SQLite command whenever a .sql file changes - suddenly I've got a little SQLite IDE
+>
+> Nu's useful in a lot of situations like this because it's great at displaying tabular data and working with external data.
 
 ## Using a `grid` when you `cd` (fdncred)
 
