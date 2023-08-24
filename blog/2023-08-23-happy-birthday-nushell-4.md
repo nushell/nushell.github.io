@@ -92,3 +92,7 @@ export def symlink [
 add `string: {|x| if $x =~ '^#[a-fA-F\d]+' { $x } else { 'white' } }` to your `$env.config.color_config` and you'll get:
 
 ![screenshot showing each hex value colored to match the color of that hex value](../assets/images/bday_4_hex_colours.png)
+
+# And many more
+
+We've hope you all have enjoyed using Nushell as much as we've enjoyed making. Here's to many more happy birthdays to come!
