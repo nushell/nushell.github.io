@@ -517,3 +517,20 @@ $env.config = {
   ...
 }
 ```
+
+## Accessibility
+
+It's often desired to have the minimum amount of decorations when using a screen reader. In those cases, it's possible to disable borders and other decorations for both table and errors with the following options:
+
+```shell
+# in $nu.config-file
+...
+  table: {
+    mode: "none"
+  }
+  errors: {
+    style: "narratable"
+  }
+...
+
+```
