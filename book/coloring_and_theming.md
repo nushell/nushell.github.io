@@ -524,13 +524,15 @@ It's often desired to have the minimum amount of decorations when using a screen
 
 ```shell
 # in $nu.config-path
-...
+$env.config = {
+  ...
   table: {
+   ...
     mode: "none"
+   ...
   }
-  errors: {
-    style: "narratable"
-  }
-...
+  error_style: "plain"
+  ...
+}
 
 ```
