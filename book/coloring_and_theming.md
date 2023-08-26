@@ -496,7 +496,7 @@ if you want to go full-tilt on theming, you'll want to theme all the items I men
 
 ### Working on light background terminal
 
-Nushell's default config file contains a light theme definition, if you are working on a light background terminal, you can applied light theme easily.
+Nushell's default config file contains a light theme definition, if you are working on a light background terminal, you can apply the light theme easily.
 
 ```shell
 # in $nu.config-file
