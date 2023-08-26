@@ -1,4 +1,4 @@
-# Nushell cheat sheat
+# Nushell cheat sheet
 
 ## Data types
 
@@ -356,7 +356,7 @@
 ---
 
 ```shell
-    def greet [name = "­nus­hel­l"] {
+    def greet [name = "nushell"] {
         $"hello ($name­)"
     }
 ```
@@ -420,7 +420,7 @@
     42
 ```
 
-> **an immutable variable cannot change its value after declar­ation**
+> **an immutable variable cannot change its value after declaration**
 
 ---
 
@@ -491,7 +491,7 @@
         }
 
         export def hi [where: string] {
-            $"hi ($wher­e)!­"
+            $"hi ($where)!­"
         }
     }
 
@@ -530,7 +530,7 @@
     }
 
     export def hi [where: string] {
-        $"hi ($wher­e)!­"
+        $"hi ($where)!­"
     }
 
     export def main [] {
