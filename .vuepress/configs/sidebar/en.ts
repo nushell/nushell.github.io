@@ -18,6 +18,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/quick_tour.md',
         '/book/moving_around.md',
         '/book/thinking_in_nu.md',
+        '/book/cheat_sheet.md',
       ],
     },
     {
