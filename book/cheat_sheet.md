@@ -87,7 +87,7 @@
 
 ```shell
     let str_list = [zero one two]
-    $str_list str join ','
+    $str_list | str join ','
 ```
 
 > **joins the list of strings using provided delimiter**
