@@ -496,10 +496,10 @@ if you want to go full-tilt on theming, you'll want to theme all the items I men
 
 ### Working on light background terminal
 
-Nushell's default config file contains a light theme definition, if you are working on a light background terminal, you can applied light theme easily.
+Nushell's default config file contains a light theme definition, if you are working on a light background terminal, you can apply the light theme easily.
 
 ```shell
-# in $nu.config-file
+# in $nu.config-path
 $env.config = {
   ...
   color_config: $dark_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
@@ -510,10 +510,29 @@ $env.config = {
 You can just change it to light theme by replacing `$dark_theme` to `$light_theme`
 
 ```shell
-# in $nu.config-file
+# in $nu.config-path
 $env.config = {
   ...
   color_config: $light_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
   ...
 }
+```
+
+## Accessibility
+
+It's often desired to have the minimum amount of decorations when using a screen reader. In those cases, it's possible to disable borders and other decorations for both table and errors with the following options:
+
+```shell
+# in $nu.config-path
+$env.config = {
+  ...
+  table: {
+   ...
+    mode: "none"
+   ...
+  }
+  error_style: "plain"
+  ...
+}
+
 ```
