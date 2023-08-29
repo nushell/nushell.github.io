@@ -4,7 +4,7 @@
 
 Nushell uses a configuration system that loads+runs two Nushell script files at launch time:
 First, `env.nu`, then `config.nu`.
-Paths to these files can be found by calling `echo $nu.env-path` and `echo $nu.config-path`.
+You can check where Nushell is reading these config files from by running `echo $nu.env-path` and `echo $nu.config-path`.
 `env.nu` is meant to define the environment variables which are then available within `config.nu`.
 `config.nu` can be used to add definitions, aliases, and more to the global namespace.
 
