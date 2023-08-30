@@ -2,9 +2,9 @@
 
 ## Nushell Configuration with `env.nu` and `config.nu`
 
-Nushell uses a configuration system that loads+runs two Nushell script files at launch time:
+Nushell uses a configuration system that loads and runs two Nushell script files at launch time:
 
- - `env.nu` is used to define environment variables.
+ - `env.nu` is used to define environment variables. These typically get used in the second config file, which is...
  - `config.nu` is used to add definitions, aliases, and more to the global namespace. It can use the environment variables defined in `env.nu`, which is why there's two separate files.
 
 You can check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`. 
