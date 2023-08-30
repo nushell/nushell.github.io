@@ -123,6 +123,9 @@ def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
 
+The `^` symbol _escapes_ the Nushell `open` command, which invokes the operating system's `open` command.
+For more about escape and `^` see the [chapter about escapes](escaping.md).
+
 ## PATH configuration
 
 In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use `$env.<var> = <val>` and [`append`](/commands/docs/append.html) in `env.nu`:
