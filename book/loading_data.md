@@ -235,6 +235,6 @@ Or run any SQL query you like:
 
 ## Fetching URLs
 
-In addition to loading files from your filesystem, you can also load URLs by using the [`http get`](/commands/docs/fetch.md) command. This will fetch the contents of the URL from the internet and return it:
+In addition to loading files from your filesystem, you can also load URLs by using the [`http get`](/commands/docs/http.md) command. This will fetch the contents of the URL from the internet and return it:
 
 @[code](@snippets/loading_data/rust-lang-feed.sh)
