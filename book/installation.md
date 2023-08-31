@@ -2,6 +2,10 @@
 
 There are lots of ways to get Nu up and running. You can download pre-built binaries from our [release page](https://github.com/nushell/nushell/releases), [use your favourite package manager](https://repology.org/project/nushell/versions), or build from source.
 
+The main Nushell binary is named `nu` (or `nu.exe` on Windows). After installation, you can launch it by typing `nu`.
+
+@[code](@snippets/installation/run_nu.sh)
+
 ## Pre-built binaries
 
 Nu binaries are published for Linux, macOS, and Windows [with each GitHub release](https://github.com/nushell/nushell/releases). Just download, extract the binaries, then copy them to a location on your PATH.
@@ -23,10 +27,6 @@ For Windows:
 Cross Platform installation:
 
 - [npm](https://www.npmjs.com/) (`npm install -g nushell` Note that nu plugins are not included if you install in this way)
-
-The main Nushell binary is named `nu` (or `nu.exe` on Windows). After installation, you can launch it by typing `nu`.
-
-@[code](@snippets/installation/run_nu.sh)
 
 ## Build from source
 
