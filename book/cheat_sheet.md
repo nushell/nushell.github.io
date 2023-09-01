@@ -210,7 +210,7 @@
     > $"total = ($scores | reduce --fold 1 { |it, acc| $acc * $it })"
 ```
 
-> **initial value for accamulator value can be set with `--fold`**
+> **initial value for accumulator value can be set with `--fold`**
 
 ---
 
