@@ -334,7 +334,7 @@ and then use it
 ```nushell
 > use purpose.nu
 
-> purpose greeeting_purpose
+> purpose greeting_purpose
 ```
 
 However, this won't work, because the code inside the module is not _evaluated_, only _parsed_ (only the `export-env` block is evaluated when you call `use purpose.nu`). To export the environment of `greetings.nu`, you need to add it to the `export-env` module:
