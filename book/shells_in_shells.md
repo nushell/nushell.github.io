@@ -47,6 +47,6 @@ We can see the directory changing, but we're always able to get back to a previo
 
 ## Exiting the shell
 
-You can leave a shell you have [`enter`](/commands/docs/enter.md)ed using the [`exit`](/commands/docs/exit.md) command. If this is the last open shell, Nu will quit.
+You can leave a shell you have [`enter`](/commands/docs/enter.md)ed using the `dexit` command. If this is the last open shell, Nu will quit.
 
-You can always quit Nu, even if multiple shells are active by passing the `--now` flag to the exit command. Like so: `exit --now`
+You can always quit Nu, even if multiple shells are active, using `exit`.
