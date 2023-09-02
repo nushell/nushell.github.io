@@ -27,6 +27,8 @@ usage: |
 ## Notes
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
 
+For more information on input and keybindings, read the [Reedline chapter of the Nushell book](https://www.nushell.sh/book/line_editor.html).
+
 ## Subcommands:
 
 | name                                                           | type    | usage                                                          |
