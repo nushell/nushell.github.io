@@ -49,3 +49,7 @@ The simplest way to debug a plugin is to print to stderr; plugins' standard erro
 ## Help
 
 Nu's plugin documentation is a work in progress. If you're unsure about something, the #plugins channel on [the Nu Discord](https://discord.gg/NtAbbGn) is a great place to ask questions!
+
+## More details
+
+The [plugin chapter in the contributor book](/contributor-book/plugins.html) offers more details on the intricacies of how plugins work from a software developer point of view.
