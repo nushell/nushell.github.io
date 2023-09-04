@@ -45,7 +45,7 @@ Show last 5 commands you have ran
 
 Search all the commands from history that contains 'cargo'
 ```shell
-> history | wrap cmd | where cmd =~ cargo
+> history | wrap record | where record.command =~ cargo | get record.command
 
 ```
 
