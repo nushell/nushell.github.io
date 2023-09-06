@@ -36,6 +36,11 @@ Nu currently supports the following formats for loading data directly into table
 - xml
 - yaml / yml
 
+::: tip Did you know?
+Under the hood `open` will look for a `from ...` subcommand in your scope which matches the extension of your file.
+You can thus simply extend the set of supported file types of `open` by creating your own `from ...` subcommand.
+:::
+
 But what happens if you load a text file that isn't one of these? Let's try it:
 
 ```
