@@ -68,10 +68,12 @@ Sometimes, a single external completer is not flexible enough. Luckily, as many 
 
 ```nu
 let multiple_completers = {|spans|
+    match $spans.0
     {
-        ls: $ls_completer
-        git: $git_completer
-    } | get -i $spans.0 | default $default_completer | do $in $spans
+        ls => $ls_completer
+        git => $git_completer
+        _ => $default_completer
+    } | do $in $spans
 }
 ```
 
@@ -79,7 +81,7 @@ let multiple_completers = {|spans|
 > In the example above, `$spans.0` is the command being run at the time. The completer will try to `get` the desired completer in the record, and fallback to `$default_completer`.
 >
 > - If we try to autocomplete `git <tab>`, `spans` will be `[git ""]`. `{ ... } | get -i git` will return the `$git_completer`
-> - If we try to autocomplete `other_command <tab>`, `spans` will be `[other_command ""]`. `{ ... } | get -i other_command` will return null, and `default` will return the default completer.
+> - If we try to autocomplete `other_command <tab>`, `spans` will be `[other_command ""]`. The match will fallback to the default case (`_`) and return the `$default_completer`.
 
 ## Troubleshooting
 
@@ -134,20 +136,27 @@ let carapace_completer = {|spans: list<string>|
 
 # This completer will use carapace by default
 let external_completer = {|spans|
-    let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
-    let spans = (if $expanded_alias != null  {
-        $spans | skip 1 | prepend ($expanded_alias | split words)
-    } else { $spans })
+    let expanded_alias = scope alias-completions
+    | where name == $spans.0
+    | get -i 0.expansion
 
-    {
+    let spans = if $expanded_alias != null {
+        $spans
+        | skip 1
+        | prepend ($expanded_alias | split row ' ')
+    } else {
+        $spans
+    }
+
+    match {
         # carapace completions are incorrect for nu
-        nu: $fish_completer
+        nu => $fish_completer
         # fish completes commits and branch names in a nicer way
-        git: $fish_completer
+        git => $fish_completer
         # carapace doesn't have completions for asdf
-        asdf: $fish_completer
-    } | get -i $spans.0 | default $carapace_completer | do $in $spans
-
+        asdf => $fish_completer
+        _ => $carapace_completer
+    } | do $in $spans
 }
 
 $env.config = {
