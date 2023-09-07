@@ -78,9 +78,9 @@ let multiple_completers = {|spans|
 ```
 
 > **Note**
-> In the example above, `$spans.0` is the command being run at the time. The completer will try to `get` the desired completer in the record, and fallback to `$default_completer`.
+> In the example above, `$spans.0` is the command being run at the time. The completer will match the desired completer in the record, and fallback to `$default_completer`.
 >
-> - If we try to autocomplete `git <tab>`, `spans` will be `[git ""]`. `{ ... } | get -i git` will return the `$git_completer`
+> - If we try to autocomplete `git <tab>`, `spans` will be `[git ""]`. `match $spans.0 { ... }` will return the `$git_completer`.
 > - If we try to autocomplete `other_command <tab>`, `spans` will be `[other_command ""]`. The match will fallback to the default case (`_`) and return the `$default_completer`.
 
 ## Troubleshooting
