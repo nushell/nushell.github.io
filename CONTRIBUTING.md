@@ -6,7 +6,7 @@ This website is based on Vuepress.
 
 ## Running Vuepress locally
 
-1. [Install Node.js](https://nodejs.org/en/download/)
+1. [Install Node.js](https://nodejs.org/en/download/), the minimum version required: v18.12.0
 2. Run `npm install`
 3. Run `npm run dev`
 
