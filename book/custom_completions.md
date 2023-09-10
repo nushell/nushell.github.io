@@ -1,6 +1,6 @@
 # Custom completions
 
-Custom completions allow you to mix together two features of Nushell: custom commands and completions. With them, you're able to create commands that handle the completions for positional parameters and flag parameters. These custom completions work both custom commands and [known external, or `extern`, commands](externs.md).
+Custom completions allow you to mix together two features of Nushell: custom commands and completions. With them, you're able to create commands that handle the completions for positional parameters and flag parameters. These custom completions work both for [custom commands](custom_commands.md) and [known external, or `extern`, commands](externs.md).
 
 There are two parts to a custom command: the command that handles a completion and attaching this command to the type of another command using `@`.
 
@@ -39,7 +39,7 @@ module commands {
 }
 ```
 
-In our module, we've chosen to export only the custom command `my-command` but not the custom completion `animals`. This allows users of this module to call the command, and even use the custom completion logic, without having access the the custom completion. This keeps the API cleaner, while still offering all the same benefits.
+In our module, we've chosen to export only the custom command `my-command` but not the custom completion `animals`. This allows users of this module to call the command, and even use the custom completion logic, without having access to the custom completion. This keeps the API cleaner, while still offering all the same benefits.
 
 This is possible because custom completion tags using `@` are locked-in as the command is first parsed.
 
