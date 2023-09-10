@@ -94,20 +94,6 @@ It is common for some scripts to declare variables that start with `$`. This is 
 # identical to `let var = 42`
 ```
 
-### Variable Values
-
-A common issue that users run into is trying to declare a variable using a pipeline as the value like so:
-
-```nu
-let val = 42 | math sqrt
-```
-
-This is an error, because the pipe command is used to separate pipeline elements, so Nushell will see this as a pipeline with two elements, one of which is not allowed in pipelines because it doesn't return a value (`let val = 42`). The correct way to declare using a pipeline is to wrap the pipeline in parentheses
-
-```nu
-let val = (42 | math sqrt)
-```
-
 ### Variable Paths
 
 A variable path works by reaching inside of the contents of a variable, navigating columns inside of it, to reach a final value. Let's say instead of `4`, we had assigned a table value:
