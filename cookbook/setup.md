@@ -13,15 +13,13 @@ There are other ways to view these values and variables, however setting up your
 
 In order to configure your path in nushell you'll need to modify your `PATH` environment variable in your `config.nu` file. Open your `config.nu` file and put an entry in it like `$env.PATH = "path1;path2;path3"` ensuring that you use the proper path separation character, which is different by platform.
 
-Alternately, if you want to change your path temporarily, you can do the same command at the prompt.
-
-If you want to append a folder to your `PATH` environment variable you can do that too using the `append` or `prepend` command like this:
+Alternately, if you want to append a folder to your `PATH` environment variable you can do that too using the `append` or `prepend` command like this:
 
 ```shell
-> $env.PATH = ($env.PATH | append "some/other/path")
+$env.PATH = ($env.PATH | split row (char esep) | append "some/other/path")
 ```
 
-For more detailed instructions, see the environment variables documentation [here](/book/environment.html#setting-environment-variables)
+For more detailed instructions, see the documentation about [environment variables](/book/environment.html#setting-environment-variables) and [PATH configuration](/book/configuration.html#path-configuration).
 
 ### How to list your environment variables
 
