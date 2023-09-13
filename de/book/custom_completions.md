@@ -3,10 +3,10 @@
 Eigene Vervollständigungen kombinieren zwei Merkmale von Nushell:
 Eigene Befehle und Vervollständigungen. Mit ihnen können Befehle erzeugt werden,
 die Vervollständigungen für Positions- sowie Markierungs-Argumente enthalten.
-Die eigenen Vervollständigungen funktionieren für eigene Befehle und [known external, or `extern`, commands](externs.md).
+Die eigenen Vervollständigungen funktionieren für eigene Befehle und [bekannt gemachte externe Befehle (via `extern`)](externs.md).
 
 Eigene Vervollständigungen bestehen aus zwei Teilen:
-Dem Befehl der sich um die Vervollständigung kümmert und die Verbindung dieses Befehls mit einem anderne Befehl mit Hilfe von `@`.
+Dem Befehl, der die Vervollständigung bereitstellt, und die Verknüpfung mit dem Argument des Befehls, der die Vervollständigung bekommt, mit Hilfe von `@`.
 
 ## Beispiel eigene Vervollständigung
 
@@ -26,7 +26,8 @@ In der zweiten Zeile, wird `string@tiere` verwendet.
 Dies sagt Nushell zwei Dinge:
 Die Form des Arguments um den Typ überprüfen zu können, sowie die Vervollständigung, falls der Benutzer diese an der Stelle verwenden möchte.
 
-Auf der dritten Zeile wird der Name der Vervollständigung `my-command` eingegeben gefolgt von der `<tab>` Taste. Dies führt die Vervollständigung aus. Eigene Vervollständigungen funktionieren identisch zu anderen Vervollständigungen. Wird `a` gefolgt von der `<tab>` Taste gedrückt, wird automatisch "aal" ausgegeben.
+Auf der dritten Zeile wird der Name des zu vevollständigenden Befehls `my-command` eingegeben gefolgt von der `<tab>` Taste. Dies führt die Vervollständigung aus. Eigene Vervollständigungen funktionieren identisch zu anderen Vervollständigungen. Wird `a` gefolgt von der `<tab>` Taste gedrückt, wird automatisch "aal" ausgegeben.
+
 
 ## Module und eigene Vervollständigung
 
@@ -46,12 +47,12 @@ module commands {
 }
 ```
 
-In diesem Modul wird nur der Befehl `my-command`, aber nicht die Vervollständigung `tiere` exportiert. Dies erlaubt es den Befehl auszuführen, sowie die Vervollständigung zu verwenden, ohne auf die eignene Vervollständigung Zugriff zu haben.
+In diesem Modul wird nur der Befehl `my-command`, aber nicht die Vervollständigung `tiere` exportiert. Dies erlaubt es den Befehl auszuführen, sowie die Vervollständigung zu verwenden, ohne auf die eigene Vervollständigung Zugriff zu haben.
 Dies hält die API sauberer und bietet dennoch alle Funktionen an.
 
 Dies ist möglich, weil die Vervollständigungen mit dem Marker `@` zusammen mit dem Befehl eingeschlossen werden.
 
-## Kontext bewusste eigene Vervollständigungen
+## Kontextsensitive eigene Vervollständigungen
 
 Es ist möglich den Kontext einer Vervollständigung mit zu geben. Dies ist nützlich, wenn vorangehende Argumente in die Vervollständigung mit einbezogen werden müssen.
 
@@ -107,7 +108,7 @@ export extern "git push" [
 ]
 ```
 
-Die Vervollständigung erfüllt hier die gleich Rolle wie in den Beispielen zuvor. Es werden zwei verschiedene Vervollständigungen verwendet, abhängig von der Position, die bisher eingegeben wurde.
+Die Vervollständigung erfüllt hier die gleiche Rolle wie in den Beispielen zuvor. Es werden zwei verschiedene Vervollständigungen verwendet, abhängig von der Position, die bisher eingegeben wurde.
 
 ## Eigene Beschreibungen
 
@@ -146,7 +147,7 @@ def my_commits [] {
 
 Externe Vervollständigungen können ebenfalls integriert werden, anstatt derer von Nushell.
 
-Dafür muss das Feld `external_completer` in `config.nu` auf einen [closure](/book/types_of_data.md#closures)) gesetzt werden, welcher ausgewertet wird, wenn keine Nushell Vervollständigungen gefunden werden.
+Dafür muss dem Feld `external_completer` in `config.nu` eine [closure](/book/types_of_data.md#closures)) übergeben werden, welche ausgewertet wird, wenn keine Nushell Vervollständigungen gefunden werden.
 
 ```nu
 > $env.config.completions.external = {
@@ -156,14 +157,14 @@ Dafür muss das Feld `external_completer` in `config.nu` auf einen [closure](/bo
 > }
 ```
 
-Der Closure kann konfiguriert werden, einen externen Vervollständiger wie [carapace](https://github.com/rsteube/carapace-bin) zu verwenden.
+Die Closure kann konfiguriert werden, einen externen Vervollständiger wie [carapace](https://github.com/rsteube/carapace-bin) zu verwenden.
 
-Wenn der Closure einen nicht lesbaren json (z.B. einen leeren String) zurückgibt, fällt Nushell auf die Datei Vervollständigung zurück.
+Wenn die Closure einen nicht lesbaren Wert (z.B. einen leeren String) zurückgibt, fällt Nushell auf die Datei Vervollständigung zurück.
 
 Ein externer Vervollständiger ist eine Funktion, die den aktuellen Befehl als String Liste entgegennimmt, und eine Liste von Records mit `value` und `description` zurückgibt. Wie bei eigenen Nushell Vervollständigungen.
 
 > **Notiz**
-> Dieser Closure nimmt den aktuellen Befehl als Liste entgegen. Zum Beispiel, wird `my-command --arg1 <tab>` als Vervollständigung `[my-command --arg1 " "]` erhalten.
+> Diese Closure nimmt den aktuellen Befehl als Liste entgegen. Zum Beispiel, wird `my-command --arg1 <tab>` als Vervollständigung `[my-command --arg1 " "]` erhalten.
 
 Dieses Beispiel wird die externe Vervollständigung für carapace erstellen:
 
