@@ -344,7 +344,7 @@ Using our knowledge from the previous section, we can also create plugins in oth
 First, let's look at the full plugin:
 
 ```python
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 import json
 import sys
 
