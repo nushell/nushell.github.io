@@ -22,7 +22,7 @@ $env.config = {
       let changes = not $no_changes
 
       if not ($direnv | is-empty) {
-        let direnv = $direnv | upsert PATH {|direnv_result| ($direnv_result.PATH | split row ":") }
+        let direnv = $direnv | upsert PATH {|it| $it.PATH | split row ":" }
         $direnv | load-env
       }
     }]
