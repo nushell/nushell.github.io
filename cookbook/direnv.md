@@ -18,8 +18,6 @@ $env.config = {
   hooks: {
     pre_prompt: [{ ||
       let direnv = (direnv export json | from json)
-      let no_changes = $direnv | is-empty
-      let changes = not $no_changes
 
       if not ($direnv | is-empty) {
         let direnv = $direnv | upsert PATH {|it| $it.PATH | split row ":" }
