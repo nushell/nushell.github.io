@@ -30,6 +30,8 @@ export const sidebarDe: SidebarConfig = {
         'command_reference',
         'custom_completions',
         'coloring_and_theming',
+        'hooks',
+        'background_task.md',
         'overlays',
         'command_signature',
       ],
