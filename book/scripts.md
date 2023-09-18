@@ -86,3 +86,13 @@ On Linux and macOS you can optionally use a [shebang](<https://en.wikipedia.org/
 > ./myscript
 Hello World!
 ```
+For script to have access to standard input, `nu` should be invoked with `--stdin` flag:
+```
+#!/usr/bin/env -S nu --stdin
+echo $"stdin: ($in)"
+```
+
+```
+> echo "Hello World!" | ./myscript
+stdin: Hello World!
+```

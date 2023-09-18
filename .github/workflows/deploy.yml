@@ -17,9 +17,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v3.2.0
+        uses: actions/setup-node@v3.8.1
         with:
-          node-version: '16'
+          node-version: '18'
 
       - run: npm install
       - name: Build Static Docs
@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v1.0.8
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./.vuepress/dist
 
@@ -46,4 +46,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2.0.1
+        uses: actions/deploy-pages@v2.0.4
