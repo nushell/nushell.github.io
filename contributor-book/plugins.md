@@ -44,8 +44,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-nu-plugin = "0.80.0" # These version numbers may differ
-nu-protocol = "0.80.0"
+nu-plugin = "0.85.0" # These version numbers may differ
+nu-protocol = "0.85.0"
 ```
 
 With this, we can open up `src/main.rs` and create our plugin.
@@ -66,8 +66,7 @@ impl Plugin for Len {
     fn signature(&self) -> Vec<PluginSignature> {
         vec![PluginSignature::build("len")
             .usage("calculates the length of its input")
-            .input_type(Type::String)
-            .output_type(Type::Int)
+            .input_output_type(Type::String, Type::Int)
         ]
     }
 
