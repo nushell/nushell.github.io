@@ -85,7 +85,7 @@ $env.config = ($env.config | upsert hooks {
 ## Changing Environment
 
 Eine Besonderheit der Hooks ist, dass sie die Umgebung bewahren.
-Umgebungsvariablen im Hook **block** werden in ähnlicher Weise wie [def-env`](environment.md#defining-environment-from-custom-commands) erhalten.
+Umgebungsvariablen im Hook **Block** werden in ähnlicher Weise wie [`def-env`](environment.md#defining-environment-from-custom-commands) erhalten.
 Folgendes Beispiel zeigt dies:
 
 ```
@@ -119,7 +119,7 @@ $env.config = ($env.config | upsert hooks {
 ```
 
 Dies wird jedoch nicht funktionieren, weil die Umgebung nur innerhalb des Blocks [`if`](/Befehle/docs/if.md) aktiv ist.
-In diesem Fall könnte es als "load-env" neu geschrieben werden `load-env (if $after == ... { ... } else { {} })`,
+In diesem Fall könnte es als `load-env` neu geschrieben werden (`load-env (if $after == ... { ... } else { {} })`),
 aber dieses Muster ist ziemlich häufig und später werden wir sehen, dass nicht alle Fälle so geschrieben werden können.
 
 Um das obige Problem zu lösen, führen wir eine neue Möglichkeit ein, einen Hook zu definieren -- **einen record**:
