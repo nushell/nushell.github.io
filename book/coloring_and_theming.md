@@ -404,12 +404,10 @@ For example, if you want to make past prompts show up without a left prompt enti
 > $env.TRANSIENT_PROMPT_COMMAND = ""
 ```
 
-TODO see what the preferred way to unset environment variables is
-
-If you want to go back to the normal left prompt, you'll have to set `TRANSIENT_PROMPT_COMMAND` to something that isn't a string, closure, or block, such as `null`:
+If you want to go back to the normal left prompt, you'll have to unset `TRANSIENT_PROMPT_COMMAND`:
 
 ```shell
-> $env.TRANSIENT_PROMPT_COMMAND = null
+> hide-env TRANSIENT_PROMPT_COMMAND
 ```
 
 ## `LS_COLORS` colors for the [`ls`](/commands/docs/ls.md) command
