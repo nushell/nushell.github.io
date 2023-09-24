@@ -282,4 +282,4 @@ Wenn dieser neue Befehl nun in einer Pipeline aufgerufen wird, sieht die Ausgabe
 
 ## Persistenz
 
-Um Informationen darüber zu erhalten, wie eigene Befehle bei jedem Start von Nushell verfügbar bleiben, sei auf das [Konfigurationskapitel](konfiguration.md) verwiesen.
+Um Informationen darüber zu erhalten, wie eigene Befehle bei jedem Start von Nushell verfügbar bleiben, sei auf das [Konfigurationskapitel](configuration.md) verwiesen.
