@@ -38,6 +38,7 @@ export const sidebarDe: SidebarConfig = {
       children: [
         '/book/de/eigene_befehle',
         '/book/de/aliase',
+        '/book/de/operators',
         '/book/de/variablen_und_unterausdruecke',
         '/book/de/scripts',
         '/book/de/overlays',
@@ -65,7 +66,6 @@ export const sidebarDe: SidebarConfig = {
       collapsible: false,
       children: [
         '/book/de/von_bash_kommend',
-        '/book/de/mathematik',
         '/book/de/command_reference',
       ],
     },
