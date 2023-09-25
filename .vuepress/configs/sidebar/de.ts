@@ -36,10 +36,10 @@ export const sidebarDe: SidebarConfig = {
       link: '/book/de/programming_in_nu.md',
       collapsible: false,
       children: [
-        '/book/de/eigene_befehle',
-        '/book/de/aliase',
+        '/book/de/custom_commands',
+        '/book/de/aliases',
         '/book/de/operators',
-        '/book/de/variablen_und_unterausdruecke',
+        '/book/de/variables_and_subexpressions.md',
         '/book/de/scripts',
         '/book/de/overlays',
         '/book/de/command_signature',
@@ -50,7 +50,7 @@ export const sidebarDe: SidebarConfig = {
       link: '/book/de/nu_as_a_shell.md',
       collapsible: false,
       children: [
-        '/book/de/konfiguration',
+        '/book/de/configuration',
         '/book/de/environment',
         '/book/de/escaping',
         '/book/de/3rdpartyprompts',
@@ -65,7 +65,7 @@ export const sidebarDe: SidebarConfig = {
       link: '/book/de/coming_to_nu.md',
       collapsible: false,
       children: [
-        '/book/de/von_bash_kommend',
+        '/book/de/coming_from_bash',
         '/book/de/command_reference',
       ],
     },
