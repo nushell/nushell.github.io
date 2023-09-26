@@ -163,7 +163,7 @@ $env.config = {
     # ...
     completions: {
         external: {
-            enabled: true
+            enable: true
             completer: $external_completer
         }
     }
