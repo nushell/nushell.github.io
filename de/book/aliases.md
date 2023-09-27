@@ -39,7 +39,7 @@ Die Lösung ist einen parameterlosen Befehl zu definieren, der das Systemprogram
 def uuidgen [] { ^uuidgen | tr A-F a-f }
 ```
 
-Mehr dazu im Kapitel [Eigene Befehle](eigene_befehle.md).
+Mehr dazu im Kapitel [Eigene Befehle](custom_commands.md).
 
 Oder ein etwas idiomatischeres Beispiel von nushell internen Befehlen
 
