@@ -2,7 +2,7 @@
 
 Der Titel "Fortgeschritten" mag abschrecken und zum Überspringen des Kapitels animieren, doch tatsächlich sind einige der interessantesten und mächtigsten Merkmale hier zu finden.
 
-Abgesehen von den eingebauten Befehlen, besitzt Nushell einen [Standard ibliothek](standard_library.md).
+Abgesehen von den eingebauten Befehlen, besitzt Nushell eine [Standard Bibliothek](standard_library.md) aus in Nu geschriebenen Befehlen.
 
 Nushell arbeitet mit _strukturierten Daten_.
 Nushell ist eine "Daten orientierte" Shell und Programmiersprache.
