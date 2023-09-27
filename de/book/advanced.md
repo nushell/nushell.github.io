@@ -10,9 +10,9 @@ Diese Daten zentrierte Sicht zeigt sich auch in [Polars](https://github.com/pola
 Im Kapitel [Dataframes documentation](dataframes.md) wird erklärt, wie grosse Datenmengen effizient in Nushell verarbeitet werden können.
 
 Werte in Nusehll enthalten einige [Metadaten](metadata.md).
-Diese können verwendet werden, um z.B. [eigene Fehlermedlungen](creating_errors.md) erstellen zu können.
+Diese können verwendet werden, um z.B. [eigene Fehlermeldungen](creating_errors.md) erstellen zu können.
 
-Dank Nushells strikten Gültigkeits Regeln, ist es sehr einfach durch Sammlungen [parall zu iterieren](parallelism.md), was mit wenig Aufwand lange laufende Skripte verschnellern kann.
+Dank Nushells strikten Gültigkeitsregeln, ist es sehr einfach durch Sammlungen [parallel zu iterieren](parallelism.md), was mit wenig Aufwand lange laufende Skripte beschleunigen kann.
 
 Mit dem [`explore`](/commands/docs/explore.md) Befehl können Daten [interaktiv erkundet](explore.md) werden.
 
