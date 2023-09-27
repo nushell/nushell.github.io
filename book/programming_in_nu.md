@@ -11,7 +11,7 @@ Nushell's aliases work in a similar way and are a part of the programming langua
 Common operations can, such as addition or regex search, be done with [operators](operators.md).
 Not all operations are supported for all data types and Nushell will make sure to let you know.
 
-You can store intermediate results to [variables](variables_and_subexpressions.md) and immediately evaluate subrountines with [subexpressions](variables_and_subexpressions.html#subexpressions).
+You can store intermediate results to [variables](variables_and_subexpressions.md) and immediately evaluate subroutines with [subexpressions](variables_and_subexpressions.html#subexpressions).
 
 The last three sections are aimed at organizing your code:
 
