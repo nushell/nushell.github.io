@@ -9,7 +9,7 @@ Nushell ist eine "Daten orientierte" Shell und Programmiersprache.
 Diese Daten zentrierte Sicht zeigt sich auch in [Polars](https://github.com/pola-rs/polars), dem eingebauten vollständigen Datenpaket Verarbeiter.
 Im Kapitel [Dataframes documentation](dataframes.md) wird erklärt, wie grosse Datenmengen effizient in Nushell verarbeitet werden können.
 
-Werte in Nusehll enthalten einige [Metadaten](metadata.md).
+Werte in Nushell enthalten einige [Metadaten](metadata.md).
 Diese können verwendet werden, um z.B. [eigene Fehlermeldungen](creating_errors.md) erstellen zu können.
 
 Dank Nushells strikten Gültigkeitsregeln, ist es sehr einfach durch Sammlungen [parallel zu iterieren](parallelism.md), was mit wenig Aufwand lange laufende Skripte beschleunigen kann.
