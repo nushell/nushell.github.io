@@ -154,6 +154,8 @@ let external_completer = {|spans|
         git => $fish_completer
         # carapace doesn't have completions for asdf
         asdf => $fish_completer
+        # use zoxide completions for zoxide commands
+        __zoxide_z | __zoxide_zi => $zoxide_completer
         _ => $carapace_completer
     } | do $in $spans
 }
