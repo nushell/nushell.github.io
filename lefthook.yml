@@ -31,4 +31,4 @@ pre-commit:
         - rebase
       stage_fixed: true
       glob: "**/*"
-      run: prettier --write --ignore-unknown {staged_files}
+      run: npx prettier --write --ignore-unknown {staged_files}
