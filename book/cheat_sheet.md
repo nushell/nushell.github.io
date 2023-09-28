@@ -2,7 +2,7 @@
 
 ## Data types
 
-```shell
+```nushell
     > "12" | into int
 ```
 
@@ -10,7 +10,7 @@
 
 ---
 
-```shell
+```nu
     > date now | date to-timezone "Europe/London"
 ```
 
