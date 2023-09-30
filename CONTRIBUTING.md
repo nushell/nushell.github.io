@@ -10,7 +10,7 @@ This website is based on Vuepress.
 2. Run `npm install`
 3. Run `npm run dev`
 
-If you're adding a new page to the book, to make it appear, put it also to `.vuepress/config.js`.
+If you're adding a new page to the book, to make it appear, put it also to `.vuepress/configs/sidebar/{locale}.ts`.
 
 ## Translation Guide
 
