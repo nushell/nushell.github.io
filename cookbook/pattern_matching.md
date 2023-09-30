@@ -59,7 +59,7 @@ record<one: int, two: int>
 table<a: int, b: int>
 ```
 
-Together with `match` and some clever regex use you can do quite powerful type matching. For example, let's say we wanted to implement a `str append` function that would work on both strings and lists. On strings it would work as expected, on lists of strings, it should append the same string to each list. Using `match` one might do that like so:
+Together with `match` and some clever regex use you can do quite powerful type matching. For example, let's say we wanted to implement a `str append` function that would work on both strings and lists. On strings it would work as expected, on lists of strings, it should append the same string to each element of the list. Using `match` one might do that like so:
 
 ```nu
 def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
