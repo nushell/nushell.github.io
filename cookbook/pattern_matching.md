@@ -45,7 +45,7 @@ The equivalent in `if-else` statements would be:
 }
 ```
 
-As you can see you can also use comound expressions in match statements (in this case used with `|`). Also notice the `_` case at the end, this is called the default arm and is used.
+As you can see you can also use command expressions in match statements (in this case used with `|`). Also notice the `_` case at the end, this is called the default arm and is used.
 
 ## Pattern matching on types
 

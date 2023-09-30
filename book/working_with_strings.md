@@ -136,7 +136,7 @@ You can also use the [`run-external`](/commands/docs/run-external.md) command fo
 
 ## Appending and Prepending to strings
 
-There are various ways to pre, or append strings. If you want to add something to teh beginning of each string closures are a good option:
+There are various ways to pre, or append strings. If you want to add something to the beginning of each string closures are a good option:
 
 ```sh
 ['foo', 'bar'] | each {|s| '~/' ++ $s} # ~/foo, ~/bar
@@ -163,7 +163,7 @@ You can also use reduce:
 ```
 
 
-Though in the cases of strings, especially if you don't have to opperate on the strings, it's usually easier and more correct (notice the extra + at the end in the example above) to use `str join`.
+Though in the cases of strings, especially if you don't have to operate on the strings, it's usually easier and more correct (notice the extra + at the end in the example above) to use `str join`.
 
 Finally you could also use string interpolation, but that is complex enough that it is covered in it's own subsection below.
 
@@ -179,7 +179,7 @@ For example, let's say we have a variable called `$name` and we want to greet th
 > let name = "Alice"
 > $"greetings, ($name)"
 greetings, Alice
-````
+```
 
 By wrapping expressions in `()`, we can run them to completion and use the results to help build the string.
 
