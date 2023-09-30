@@ -163,7 +163,7 @@ You can also use reduce:
 ```
 
 
-though in the cases of strings, especially if you don't have to opperate on the strings, it's usually easier and more correct (notice the extra + at the end in the example above) to use `str join`.
+Though in the cases of strings, especially if you don't have to opperate on the strings, it's usually easier and more correct (notice the extra + at the end in the example above) to use `str join`.
 
 Finally you could also use string interpolation, but that is complex enough that it is covered in it's own subsection below.
 
