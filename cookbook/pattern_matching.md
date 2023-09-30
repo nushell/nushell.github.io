@@ -45,7 +45,20 @@ The equivalent in `if-else` statements would be:
 }
 ```
 
-As you can see you can also use command expressions in match statements (in this case used with `|`). Also notice the `_` case at the end, this is called the default arm and is used.
+As you can see you can also use command expressions in match statements (in this case used with `|`). Also notice the `_` case at the end, this is called the default arm and is used in case none of the other patterns match. Note also that in the case that cases overlap the first matching pattern will be used (just like with `if-else` statements): 
+
+```nu
+ [yellow green] | each {|c|
+  match $c {
+   "green" => "fundamental"
+   "yellow" | "green" => "vibrant"
+  }
+ }
+───┬────────────
+ 0 │ vibrant
+ 1 │ funamental
+───┴────────────
+```
 
 ## Pattern matching on types
 
