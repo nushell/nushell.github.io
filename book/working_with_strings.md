@@ -139,7 +139,7 @@ You can also use the [`run-external`](/commands/docs/run-external.md) command fo
 There are various ways to pre, or append strings. If you want to add something to teh beginning of each string closures are a good option:
 
 ```sh
- ['foo', 'bar'] | each {|s| '~/' ++ $s} # ~/foo, ~/bar
+['foo', 'bar'] | each {|s| '~/' ++ $s} # ~/foo, ~/bar
 ['foo', 'bar'] | each {|s| '~/' + $s} # ~/foo, ~/bar
 ```
 
@@ -158,9 +158,9 @@ If you want to get one string out of the end then `str join` is your friend:
 
 You can also use reduce:
 
-````sh
+```sh
 1..10 | reduce -f "" {|it, acc| $acc + ($it | into string) + " + "} # 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 +
-``
+```
 
 
 though in the cases of strings, especially if you don't have to opperate on the strings, it's usually easier and more correct (notice the extra + at the end in the example above) to use `str join`.
