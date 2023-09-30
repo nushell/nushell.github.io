@@ -166,12 +166,12 @@ In addition to selecting data from a table, we can also update what the table ha
 
 ### Concatenating Tables
 
-We can concatenate tables with identical column names using [`append`](/commands/docs/append.md):
+We can concatenate tables using [`append`](/commands/docs/append.md):
 
-```
-> let $first = [[a b]; [1 2]]
-> let $second = [[a b]; [3 4]]
-> $first | append $second
+```nu
+let first = [[a b]; [1 2]]
+let second = [[a b]; [3 4]]
+$first | append $second
 ───┬───┬───
  # │ a │ b
 ───┼───┼───
@@ -180,14 +180,43 @@ We can concatenate tables with identical column names using [`append`](/commands
 ───┴───┴───
 ```
 
+If the column names are not identical then additionally columns and values will be created as necessary:
+
+```sh
+let first = [[a b]; [1 2]]
+let second = [[a b]; [3 4]]
+let second = [[a c]; [3 4]]
+$first | append $second | append $third
+───┬───┬────┬────
+ # │ a │ b  │ c
+───┼───┼────┼────
+ 0 │ 1 │  2 │ ❎
+ 1 │ 3 │  4 │ ❎
+ 2 │ 3 │ ❎ │  4
+───┴───┴────┴────
+```
+
+You can also use the `++` operator as an inline replacement for `append`:
+
+```sh
+$first ++ $second ++ $third
+───┬───┬────┬────
+ # │ a │ b  │ c
+───┼───┼────┼────
+ 0 │ 1 │  2 │ ❎
+ 1 │ 3 │  4 │ ❎
+ 2 │ 3 │ ❎ │  4
+───┴───┴────┴───
+```
+
 ### Merging Tables
 
 We can use the [`merge`](/commands/docs/merge.md) command to merge two (or more) tables together
 
-```
-> let $first = [[a b]; [1 2]]
-> let $second = [[c d]; [3 4]]
-> $first | merge $second
+```nu
+let first = [[a b]; [1 2]]
+let second = [[c d]; [3 4]]
+$first | merge $second
 ───┬───┬───┬───┬───
  # │ a │ b │ c │ d
 ───┼───┼───┼───┼───
@@ -197,8 +226,8 @@ We can use the [`merge`](/commands/docs/merge.md) command to merge two (or more)
 
 Let's add a third table:
 
-```
-> let $third = [[e f]; [5 6]]
+```nu
+> let third = [[e f]; [5 6]]
 ```
 
 We could join all three tables together like this:

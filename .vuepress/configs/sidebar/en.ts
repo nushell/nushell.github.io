@@ -136,6 +136,7 @@ export const sidebarEn: SidebarConfig = {
         'help',
         'system',
         'parsing',
+        'pattern_matching',
         'external_completers',
         'files',
         'git',

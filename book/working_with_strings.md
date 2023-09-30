@@ -134,6 +134,39 @@ You can place the `^` sigil in front of any string (including a variable) to hav
 
 You can also use the [`run-external`](/commands/docs/run-external.md) command for this purpose, which provides additional flags and options.
 
+## Appending and Prepending to strings
+
+There are various ways to pre, or append strings. If you want to add something to the beginning of each string closures are a good option:
+
+```sh
+['foo', 'bar'] | each {|s| '~/' ++ $s} # ~/foo, ~/bar
+['foo', 'bar'] | each {|s| '~/' + $s} # ~/foo, ~/bar
+```
+
+You can also use a regex to replace the beginning or end of a string:
+
+```sh
+['foo', 'bar'] | str replace -r '^' '~/'# ~/foo, ~/bar
+['foo', 'bar'] | str replace -r '$' '~/'# foo~/, bar~/
+```
+
+If you want to get one string out of the end then `str join` is your friend:
+
+```sh
+"hello" | append "world!" | str join " " # hello world!
+```
+
+You can also use reduce:
+
+```sh
+1..10 | reduce -f "" {|it, acc| $acc + ($it | into string) + " + "} # 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 +
+```
+
+
+Though in the cases of strings, especially if you don't have to operate on the strings, it's usually easier and more correct (notice the extra + at the end in the example above) to use `str join`.
+
+Finally you could also use string interpolation, but that is complex enough that it is covered in it's own subsection below.
+
 ## String interpolation
 
 More complex string use cases also need a new form of string: string interpolation. This is a way of building text from both raw text and the result of running expressions. String interpolation combines the results together, giving you a new string.

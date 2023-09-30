@@ -23,6 +23,7 @@ We can also use [`update`](/commands/docs/update.md) to replace the 2nd element 
 ```
 
 ## Removing or adding items from list
+
 In addition to [`insert`](/commands/docs/insert.md) and [`update`](/commands/docs/update.md), we also have [`prepend`](/commands/docs/prepend.md) and [`append`](/commands/docs/append.md). These let you insert to the beginning of a list or at the end of the list, respectively.
 
 For example:
@@ -31,23 +32,30 @@ For example:
 let colors = [yellow green]
 let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
-$colors # [red yellow green purple]
+let colors = ($colors ++ "blue")
+let colors = ("black" ++ $colors)
+$colors # [black red yellow green purple blue]
 ```
 
-In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list. 
+In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list.
+
 ```bash
 let colors = [red yellow green purple]
 let colors = ($colors | skip 1)
 let colors = ($colors | drop 2)
 $colors # [yellow]
 ```
+
 We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first.md) which allow you to [`take`](/commands/docs/take.md) from the end or beginning of the list, respectively.
+
 ```bash
 let colors = [red yellow green purple black magenta]
 let colors = ($colors | last 3)
 $colors # [purple black magenta]
 ```
+
 And from the beginning of a list,
+
 ```bash
 let colors = [yellow green purple]
 let colors = ($colors | first 2)
@@ -204,4 +212,3 @@ let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 # Show world clock for selected time zones
 $zones | wrap 'Zone' | upsert Time {|it| (date now | date to-timezone $it.Zone | format date '%Y.%m.%d %H:%M')}
 ```
-
