@@ -43,7 +43,7 @@ Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von d
 
 - Klammern (`()`)
 - Potenzieren (`**`)
-- Multiplizieren (`*`), Dividieren (`/`), Abrundungs Division (`//`), und Modulo (`mod`) 
+- Multiplizieren (`*`), Dividieren (`/`), Abrundungs Division (`//`), und Modulo (`mod`)
 - Addieren (`+`) and Subtrahieren (`-`)
 - Bit Shiften (`bit-shl`, `bit-shr`)
 - Vergleich Operations (`==`, `!=`, `<`, `>`, `<=`, `>=`), Mitglieds Tests (`in`, `not-in`, `starts-with`, `ends-with`), regex Übereinstimmungen (`=~`, `!~`), und Listen anfügen (`++`)
@@ -91,7 +91,7 @@ Fundierte Kenntnisse in Regluären Ausdrücke werdne dafür nicht benötigt - es
 
 Zum Beispiel:
 
-```bash
+```nu
 foobarbaz =~ bar # gibt true zurück
 foobarbaz !~ bar # gibt false zurück
 ls | where name =~ ^nu # Gibt alle Dateien zurück, deren Namen mit "nu" beginnen.
@@ -105,19 +105,19 @@ Operatoren beachten grundsätzlich die Gross- Kleinschreibung bei Textoperatione
 
 1. Beim regulären Ausdruck Operator, kann die `(?i)` Modifikation angewendet werden:
 
-```bash
+```nu
 "FOO" =~ "foo" # gibt false zurück
 "FOO" =~ "(?i)foo" # gibt true zurück
 ```
 
 2. Verwenden des `--insensitive` Parameters für den [`str contains`](/commands/docs/str_contains.md) Befehl:
 
-```bash
+```nu
 "FOO" | str contains --insensitive "foo"
 ```
 
 3. Konvertieren von allen Zeichen in einem Text zu Kleinbuchstaben mittels [`str downcase`](/commands/docs/str_downcase.md) vor einem Vergleich:
 
-```bash
+```nu
 ("FOO" | str downcase) == ("Foo" | str downcase)
 ```

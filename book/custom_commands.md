@@ -423,7 +423,7 @@ def my-ls [] { ls }
 
 We can use the output from this command just as we would [`ls`](/commands/docs/ls.md).
 
-```
+```nu
 > my-ls | get name
 ───┬───────────────────────
  0 │ myscript.nu

@@ -8,7 +8,7 @@
 
 Nushell 既是一种编程语言，也是一种 Shell，正因为如此，它有自己的方式来处理文件、目录、网站等等。我们对其进行了建模，以使其与你可能熟悉的其他 Shell 的工作方式接近。其中管道用于将两个命令连接在一起：
 
-```bash
+```nu
 > ls | length
 ```
 
@@ -16,13 +16,13 @@ Nushell 也支持其他常见的功能，例如从之前运行的命令中获取
 
 虽然它确实有这些功能，但 Nushell 并不是 Bash。Bash 的工作方式以及一般的 POSIX 风格，并不是 Nushell 所支持的。例如，在 Bash 中你可以使用：
 
-```bash
+```nu
 > echo "hello" > output.txt
 ```
 
 在 Nushell 中，我们使用`>`作为大于运算符，这与 Nushell 的语言特质比较吻合。取而代之的是，你需要用管道将其连接到一个可以保存内容的命令：
 
-```bash
+```nu
 > echo "hello" | save output.txt
 ```
 
@@ -34,7 +34,7 @@ Nushell 设计的一个重要部分，特别是它与许多动态语言不同的
 
 例如，下面的代码在 Nushell 中是没有意义的，如果作为脚本将无法执行：
 
-```bash
+```nu
 echo "def abc [] { 1 + 2 }" | save output.nu
 source "output.nu"
 abc
@@ -44,7 +44,7 @@ abc
 
 另一个常见的问题是试图动态地创建文件名并`source`，如下：
 
-```bash
+```nu
 > source $"($my_path)/common.nu"
 ```
 
@@ -60,7 +60,7 @@ abc
 
 Nushell 的变量是不可变的，但这并不意味着无法表达变化。Nushell 大量使用了 "Shadowing" 技术（变量隐藏）。变量隐藏是指创建一个与之前声明的变量同名的新变量，例如，假设你有一个`$x`在当前作用域内，而你想要一个新的`$x`并将其加 1：
 
-```bash
+```nu
 let x = $x + 1
 ```
 
@@ -68,13 +68,13 @@ let x = $x + 1
 
 循环计数器是可变变量的另一种常见模式，它被内置于大多数迭代命令中，例如，你可以使用[`each`](/commands/docs/each.md)上的`-n`标志同时获得每个元素的值和索引：
 
-```bash
+```nu
 > ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
 ```
 
 你也可以使用[`reduce`](/commands/docs/reduce.md)命令来达到上述目的，其方式与你在循环中修改一个变量相同。例如，如果你想在一个字符串列表中找到最长的字符串，你可以这样做：
 
-```bash
+```nu
 > [one, two, three, four, five, six] | reduce {|curr, max|
     if ($curr | str length) > ($max | str length) {
         $curr
@@ -94,7 +94,7 @@ Nushell 从编译型语言中获得了很多设计灵感，其中一个是语言
 
 在实践中，这可以让你用更简洁的代码来处理子目录，例如，如果你想在当前目录下构建每个子项目，你可以运行：
 
-```bash
+```nu
 > ls | each { |it|
     cd $it.name
     make

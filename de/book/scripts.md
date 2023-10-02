@@ -66,7 +66,7 @@ Argumente werden an ein Skript übergeben indem sie nach dem Skriptnamen angefü
 
 Zum Beispiel:
 
-```bash
+```nu
 # myscript.nu
 
 def main [x: int] {

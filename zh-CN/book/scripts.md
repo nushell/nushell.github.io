@@ -2,19 +2,19 @@
 
 在 Nushell 中，你可以用 Nushell 语言编写和运行脚本。要运行一个脚本，你可以把它作为一个参数传递给`nu`命令行程序：
 
-```bash
+```nu
 > nu myscript.nu
 ```
 
 这将在一个新的 Nu 实例中运行脚本直至完成。你也可以使用[`source`](/commands/docs/source.md)在 Nu 的 **当前** 实例中运行脚本：
 
-```bash
+```nu
 > source myscript.nu
 ```
 
 我们来看一个脚本文件的例子吧：
 
-```bash
+```nu
 # myscript.nu
 def greet [name] {
   echo "hello" $name
@@ -27,7 +27,7 @@ greet "world"
 
 在上面的例子中，首先`greet`是由 Nushell 解释器定义的，这使得我们之后可以调用这个定义，我们可以把上面的内容写成：
 
-```bash
+```nu
 greet "world"
 
 def greet [name] {
@@ -47,7 +47,7 @@ Nushell 并不要求定义必须放在脚本中调用该定义之前，你可以
 
 为了更好地理解 Nushell 是如何看待代码行的, 我们来看一个脚本的例子：
 
-```bash
+```nu
 a
 b; c | d
 ```
@@ -58,7 +58,7 @@ b; c | d
 
 脚本文件可以选择性地包含一个特殊的 "main" 命令。`main`将在任何其他 Nu 代码之后运行，主要用于向脚本添加参数。你可以在脚本名称后面传递参数（`nu <script name> <script args>`）。比如：
 
-```bash
+```nu
 # myscript.nu
 
 def main [x: int] {
@@ -75,14 +75,14 @@ def main [x: int] {
 
 在 Linux 和 macOS 上，你可以选择使用 [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>)来告诉操作系统一个文件应该被 `Nu` 解释。例如，在一个名为 `myscript` 的文件中包含以下内容：
 
-```bash
+```nu
 #!/usr/bin/env nu
 echo "Hello World!"
 ```
 
 此时你可以直接运行该脚本(注意：前面并没有加`nu`)：
 
-```bash
+```nu
 > ./myscript
 Hello World!
 ```

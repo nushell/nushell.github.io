@@ -57,7 +57,7 @@ Nushell 支持以下常见的数学、逻辑和字符串操作的运算符：
 
 例如:
 
-```bash
+```nu
 foobarbaz =~ bar # returns true
 foobarbaz !~ bar # returns false
 ls | where name =~ ^nu # returns all files whose names start with "nu"
@@ -71,19 +71,19 @@ ls | where name =~ ^nu # returns all files whose names start with "nu"
 
 1. 在正则表达式运算符中，指定`(?i)`不区分大小写的模式修饰器：
 
-```bash
+```nu
 "FOO" =~ "foo" # returns false
 "FOO" =~ "(?i)foo" # returns true
 ```
 
 2. 使用[`str contains`](/commands/docs/str_contains.md) 命令的`--insensitive`标志：
 
-```bash
+```nu
 "FOO" | str contains --insensitive "foo"
 ```
 
 3. 在比较前用[`str downcase`](/commands/docs/str_downcase.md)将字符串转换为小写：
 
-```bash
+```nu
 ("FOO" | str downcase) == ("Foo" | str downcase)
 ```

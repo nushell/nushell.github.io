@@ -53,7 +53,7 @@ $env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 
 下面是一个关于 Starship 的配置示例：
 
-```bash
+```nu
 $env.STARSHIP_SHELL = "nu"
 
 def create_left_prompt [] {

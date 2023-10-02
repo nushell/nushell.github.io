@@ -298,7 +298,7 @@ Eg) `1wk`是一个星期的时间间隔。
 
 以此为例：
 
-```bash
+```nu
 foo {
   line1
   line2; line3 | line4

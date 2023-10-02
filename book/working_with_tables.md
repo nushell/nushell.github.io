@@ -232,7 +232,7 @@ Let's add a third table:
 
 We could join all three tables together like this:
 
-```
+```nu
 > $first | merge $second  | merge $third
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f

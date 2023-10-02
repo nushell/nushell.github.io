@@ -28,7 +28,7 @@ error: Expected a string from pipeline
 
 目前，我们只追踪值来自何处的起止范围(span)。让我们进一步仔细看看：
 
-```bash
+```nu
 > metadata (open Cargo.toml) | get span
 ╭───────┬────────╮
 │ start │ 212970 │

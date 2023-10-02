@@ -12,14 +12,14 @@ Zum Beispiel, `[foo bar baz]` oder `[foo, bar, baz]`,
 Mit den zwei Befehlen `update` und `insert` können Listen in einer Pipeline verändert werden,
 zum Beispiel fügt folgende Zeile den Wert `10` in der Mitte, also an Stelle 2 ein.
 
-```bash
+```nu
 > [1, 2, 3, 4] | insert 2 10
 # [1, 2, 10, 3, 4]
 ```
 
 Mit dem Befehl `update` ersetzen wir hingegen das 2. Element mit dem Wert `10`.
 
-```bash
+```nu
 > [1, 2, 3, 4] | update 1 10
 # [1, 10, 3, 4]
 ```
@@ -29,7 +29,7 @@ Diese fügen Werte am Anfang einer Liste oder am Ende ein.
 
 Zum Beispiel:
 
-```bash
+```nu
 let colors = [yellow green]
 let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
@@ -43,7 +43,7 @@ mit Nu-Code folgt, der auf jedes Element der Liste angewendet wird. Der Block Pa
 entspricht normalerweise dem Element der Liste, was jedoch mit dem `--numbered` (`-n`) Flag geändert werden kann in die zwei
 Parameter `index` und `item`. zum Beispiel:
 
-```bash
+```nu
 let names = [Mark Tami Amanda Jeremy]
 $names | each { |it| $"Hello, ($it)!" }
 # Outputs "Hello, Mark!" and three more similar lines.
@@ -55,14 +55,14 @@ $names | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
 Der [`where`](/commands/docs/where.md) Befehl kann verwendet werden um einen Filter auf eine Liste anzuwenden.
 Das folgende Beispiel gibt alle Farben zurück, deren Namen auf "e" enden.
 
-```bash
+```nu
 let colors = [red orange yellow green blue purple]
 echo $colors | where ($it | str ends-with 'e')
 ```
 
 In diesem Beispiel werden nur Werte behalten, die höher als `7` sind.
 
-```bash
+```nu
 # The block passed to where must evaluate to a boolean.
 # This outputs the list [orange blue purple].
 
@@ -77,7 +77,7 @@ wird das `--fold` (`-f`) Flag gesetzt. Um den Iterator `it` zu ändern nach `ind
 das `--numbered` (`-n`) Flag verwendet.
 Zum Beispiel:
 
-```bash
+```nu
 let scores = [3 8 4]
 echo "total =" ($scores | reduce { |it, acc| $acc + $it }) # 15
 
@@ -93,14 +93,14 @@ echo $scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*
 Um auf ein Element einer Liste zuzugreifen, wird `$name.index` verwendet, wobei in der `$name` Variablen eine Liste enthalten sein muss.
 Zum Beispiel kann in folgender Liste das 2. Element mit `$names.1` verwendet werden.
 
-```bash
+```nu
 let names = [Mark Tami Amanda Jeremy]
 $names.1 # gives Tami
 ```
 
 Wenn der Index in einer Variablen wie `$index` enthalten ist, kann dieser mit dem `get` Befehl extrahiert werden.
 
-```bash
+```nu
 let names = [Mark Tami Amanda Jeremy]
 let index = 1
 $names | get $index # gives Tami
@@ -112,7 +112,7 @@ Zum Beispiel, `[red green blue] | length` ergibt `3`.
 Der [`is-empty`](/commands/docs/is-empty.md) Befehl ermittelt, ob ein String, eine Liste oder eine Tabelle leer ist.
 Mit einer Liste wird er so verwendet:
 
-```bash
+```nu
 let colors = [red green blue]
 $colors | is-empty # false
 
@@ -123,7 +123,7 @@ $colors | is-empty # true
 Der `in` und `not-in` Operator wird verwendet, um zu testen, ob ein Wert in einer Liste vorhanden ist oder nicht.
 Zum Beispiel:
 
-```bash
+```nu
 let colors = [red green blue]
 'blue' in $colors # true
 'yellow' in $colors # false
@@ -133,7 +133,7 @@ let colors = [red green blue]
 Der [`any`](/commands/docs/any.md) Befehl ermittelt, ob irgend ein Element der Liste einer Bedingung entspricht.
 Zum Beispiel:
 
-```bash
+```nu
 # Do any color names end with "e"?
 $colors | any {|it| $it | str ends-with "e" } # true
 
@@ -150,7 +150,7 @@ $scores | any {|it| $it mod 2 == 1 } # true
 Der [`all`](/commands/docs/all.md) Befehl wiederum ermittelt, ob jedes Element der Liste einer Bedingung entspricht.
 Zum Beispiel:
 
-```bash
+```nu
 # Do all color names end with "e"?
 $colors | all {|it| $it | str ends-with "e" } # false
 
@@ -171,7 +171,7 @@ indem eine verschachtelte Liste in die Top-Level Liste integriert werden.
 Dies kann mehrere Male aufgerufen werden, um verschachtelte Listen jeglicher Tiefe zu integrieren.
 Zum Beispiel:
 
-```bash
+```nu
 echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 
 echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
@@ -180,7 +180,7 @@ echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 Der [`wrap`](/commands/docs/wrap.md) Befehl konvertiert eine Liste in eine Tabelle.
 Jedes Listen-Element wird in eine eigene Zeile mit einer einzigen Spalte überführt.
 
-```bash
+```nu
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 
 # Show world clock for selected time zones

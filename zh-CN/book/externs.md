@@ -4,7 +4,7 @@
 
 这就是 `extern` 的作用。`extern`关键字允许你为 Nushell 之外的命令写一个完整的签名，这样你就能得到上述所有的好处。如果你看一下默认配置，你会发现其中有一些`extern`调用。下面是其中之一：
 
-```bash
+```nu
   export extern "git push" [
     remote?: string@"nu-complete git remotes",   # the name of the remote
     refspec?: string@"nu-complete git branches"  # the branch / refspec

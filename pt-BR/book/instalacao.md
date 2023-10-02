@@ -132,7 +132,7 @@ nushell> cargo build --workspace --features=stable; cargo run --features=stable
 
 Você também pode fazer o build e rodar o Nu em modo release:
 
-```bash
+```nu
 nushell> cargo build --release --workspace --features=stable; cargo run --release --features=stable
 ```
 
