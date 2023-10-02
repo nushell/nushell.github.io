@@ -2,7 +2,7 @@
 
 ## Data types
 
-```nushell
+```nu
     > "12" | into int
 ```
 
@@ -18,7 +18,7 @@
 
 ---
 
-```shell
+```nu
     > {'name': 'nu', 'stars': 5, 'language': 'Python'} | upsert language 'Rust'
 ```
 
@@ -26,7 +26,7 @@
 
 ---
 
-```shell
+```nu
     > [one two three] | to yaml
 ```
 
@@ -34,7 +34,7 @@
 
 ---
 
-```shell
+```nu
     > [[framework, language]; [Django, Python] [Lavarel, PHP]]
 ```
 
@@ -42,7 +42,7 @@
 
 ---
 
-```shell
+```nu
     > [{name: 'Robert' age: 34 position: 'Designer'}
      {name: 'Margaret' age: 30 position: 'Software Developer'}
      {name: 'Natalie' age: 50 position: 'Accountant'}
@@ -53,7 +53,7 @@
 
 ## Strings
 
-```shell
+```nu
     > let name = "Alice"
     > $"greetings, ($name)!"
 ```
@@ -62,7 +62,7 @@
 
 ---
 
-```shell
+```nu
     > let string_list = "one,two,three" | split row ","
     $string_list
 
@@ -77,7 +77,7 @@
 
 ---
 
-```shell
+```nu
     "Hello, world!" | str contains "o, w"
 ```
 
@@ -85,7 +85,7 @@
 
 ---
 
-```shell
+```nu
     let str_list = [zero one two]
     $str_list | str join ','
 ```
@@ -94,7 +94,7 @@
 
 ---
 
-```shell
+```nu
     > 'Hello World!' | str substring 4..8
 ```
 
@@ -102,7 +102,7 @@
 
 ---
 
-```shell
+```nu
     > 'Nushell 0.80' | parse '{shell} {version}'
 
     ╭───┬─────────┬─────────╮
@@ -114,13 +114,13 @@
 
 > **parses the string to columns**
 
-```shell
+```nu
     > "acronym,long\nAPL,A Programming Language" | from csv
 ```
 
 > **parses comma separated values (csv)**
 
-```shell
+```nu
     > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 
@@ -128,7 +128,7 @@
 
 ## Lists
 
-```shell
+```nu
     > [foo bar baz] | insert 1 'beeze'
 
     ╭───┬───────╮
@@ -143,7 +143,7 @@
 
 ---
 
-```shell
+```nu
     > [1, 2, 3, 4] | update 1 10
 ```
 
@@ -151,7 +151,7 @@
 
 ---
 
-```shell
+```nu
     > let numbers = [1, 2, 3, 4, 5]
     > $numbers | prepend 0
 ```
@@ -160,7 +160,7 @@
 
 ---
 
-```shell
+```nu
     > let numbers = [1, 2, 3, 4, 5]
     > $numbers | append 6
 ```
@@ -169,7 +169,7 @@
 
 ---
 
-```shell
+```nu
     > let flowers = [cammomile marigold rose forget-me-not]
     > let flowers = ($flowers | first 2)
     > $flowers
@@ -179,7 +179,7 @@
 
 ---
 
-```shell
+```nu
     > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
     > $planets | each { |it| $"($it) is a planet of solar system" }
 ```
@@ -188,7 +188,7 @@
 
 ---
 
-```shell
+```nu
     > $planets | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
 ```
 
@@ -196,7 +196,7 @@
 
 ---
 
-```shell
+```nu
     > let scores = [3 8 4]
     > $"total = ($scores | reduce { |it, acc| $acc + $it })"
 ```
@@ -206,7 +206,7 @@
 
 ---
 
-```shell
+```nu
     > $"total = ($scores | reduce --fold 1 { |it, acc| $acc * $it })"
 ```
 
@@ -214,7 +214,7 @@
 
 ---
 
-```shell
+```nu
     > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
     > $planets.2
     > Earth
@@ -224,7 +224,7 @@
 
 ---
 
-```shell
+```nu
     > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
     > $planets | any {|it| $it | str starts-with "E" }
     > true
@@ -234,7 +234,7 @@
 
 ---
 
-```shell
+```nu
     > let cond = {|x| $x < 0 }; [-1 -2 9 1] | take while $cond
     ╭───┬────╮
     │ 0 │ -1 │
@@ -246,7 +246,7 @@
 
 ## Tables
 
-```shell
+```nu
     > ls | sort-by size
 ```
 
@@ -254,7 +254,7 @@
 
 ---
 
-```shell
+```nu
     > ls | sort-by size | first 5
 ```
 
@@ -262,7 +262,7 @@
 
 ---
 
-```shell
+```nu
     > let $a = [[first_column second_column third_column]; [foo bar snooze]]
     > let $b = [[first_column second_column third_column]; [hex seeze feeze]]
     > $a | append $b
@@ -279,7 +279,7 @@
 
 ---
 
-```shell
+```nu
     > let teams_scores = [[team score plays]; ['Boston Celtics' 311 3] ['Golden State Warriors', 245 2]]
     > $teams_scores | drop column
 
@@ -295,7 +295,7 @@
 
 ## Files & Filesystem
 
-```shell
+```nu
     > start file.txt
 ```
 
@@ -303,7 +303,7 @@
 
 ---
 
-```shell
+```nu
     > 'lorem ipsum ' | save file.txt
 ```
 
@@ -311,7 +311,7 @@
 
 ---
 
-```shell
+```nu
     > 'dolor sit amet' | save --append file.txt
 ```
 
@@ -319,7 +319,7 @@
 
 ---
 
-```shell
+```nu
     > { a: 1, b: 2 } | save file.json
 ```
 
@@ -327,7 +327,7 @@
 
 ---
 
-```shell
+```nu
     > glob **/*.{rs,toml} --depth 2
 ```
 
@@ -335,7 +335,7 @@
 
 ---
 
-```shell
+```nu
     > watch . --glob=**/*.rs {|| cargo test }
 ```
 
@@ -345,7 +345,7 @@
 
 ## Custom Commands
 
-```shell
+```nu
     def greet [name: string] {
         $"hello ($name­)"
     }
@@ -355,7 +355,7 @@
 
 ---
 
-```shell
+```nu
     def greet [name = "nushell"] {
         $"hello ($name­)"
     }
@@ -365,7 +365,7 @@
 
 ---
 
-```shell
+```nu
     def greet [
         name: string
         --age: int
@@ -380,7 +380,7 @@
 
 ---
 
-```shell
+```nu
     def greet [
         name: string
         --age (-a): int
@@ -399,7 +399,7 @@
 
 ---
 
-```shell
+```nu
     def greet [...name: string] {
         print "­hello all:"
         for $n in $name {
@@ -414,7 +414,7 @@
 
 ## Variables & Subexpressions
 
-```shell
+```nu
     > let val = 42
     > print $val
     42
@@ -424,7 +424,7 @@
 
 ---
 
-```shell
+```nu
     > let val = 42
     > do { let val = 101;  $val }
     101
@@ -436,7 +436,7 @@
 
 ---
 
-```shell
+```nu
     > mut val = 42
     > $val += 27
     > $val
@@ -447,7 +447,7 @@
 
 ---
 
-```shell
+```nu
     > mut x = 0
     > [1 2 3] | each { $x += 1 }
 ```
@@ -455,7 +455,7 @@
 > **closures and nested defs cannot capture mutable variables from their enviro­nment.
 > This expression results in error.**
 
-```shell
+```nu
     > const plugin = 'path/­to/­plugin'
     > register $plugin
 ```
@@ -464,7 +464,7 @@
 
 ---
 
-```shell
+```nu
     > let files = (ls)
     > $files.na­me?.0?
 ```
@@ -473,7 +473,7 @@
 
 ---
 
-```shell
+```nu
     > let big_files = (ls | where size > 10kb)
     >  $big_files
 ```
@@ -484,7 +484,7 @@
 
 ## Modules
 
-```shell
+```nu
     > module greetings {
         export def hello [name: string] {
             $"hello ($name­)!"
@@ -503,7 +503,7 @@
 
 ---
 
-```shell
+```nu
     # greeti­ngs.nu
     export-env {
         $env.M­YNAME = "­Arthur, King of the Briton­s"
@@ -523,7 +523,7 @@
 
 ---
 
-```shell
+```nu
     # greeti­ngs.nu
     export def hello [name: string] {
         $"hello ($name­)!"
