@@ -15,6 +15,7 @@ To celebrate, we thought we'd share stories of how people are using Nushell toda
 ## Watching for database changes (Reilly)
 
 > I like how easy it is to hack together ad-hoc dev tools with Nushell. For example:
+>
 > - In a loop: clear the screen, do something like `open app.db | get some_table`, and then `sleep` a few seconds
 >   - Now I've got an auto-updating "dashboard" of what's going on in a SQLite database
 > - Use `watch` to run a SQLite command whenever a .sql file changes - suddenly I've got a little SQLite IDE
@@ -45,7 +46,7 @@ Using `ls | sort-by type name -i | grid -c`, it looks like this:
 
 "Turns out, we already support subcommands in scripts."
 
-```
+```nu
 # adds 100 to the argument
 def "main foo" [
   x: int # the amount to start with
@@ -58,7 +59,7 @@ def "main" [] {
 }
 ```
 
-```
+```nu
 > nu ../maintest.nu foo 123
 223
 ```
