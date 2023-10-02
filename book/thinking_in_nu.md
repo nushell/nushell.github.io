@@ -22,7 +22,7 @@ While it does have these amenities, Nushell isn't bash. The bash way of working,
 
 In Nushell, we use the `>` as the greater-than operator. This fits better with the language aspect of Nushell. Instead, you pipe to a command that has the job of saving content:
 
-```
+```nu
 > "hello" | save output.txt
 ```
 
@@ -34,7 +34,7 @@ An important part of Nushell's design and specifically where it differs from man
 
 For example, the following doesn't make sense in Nushell, and will fail to execute if run as a script:
 
-```
+```nu
 "def abc [] { 1 + 2 }" | save output.nu
 source "output.nu"
 abc
@@ -44,7 +44,7 @@ The [`source`](/commands/docs/source.md) command will grow the source that is co
 
 Another common issue is trying to dynamically create the filename to source from:
 
-```
+```nu
 > source $"($my_path)/common.nu"
 ```
 
@@ -62,7 +62,7 @@ You might wonder why Nushell uses immutable variables. Early on in Nushell's dev
 
 Just because Nushell variables are immutable doesn't mean things don't change. Nushell makes heavy use of the technique of "shadowing". Shadowing means creating a new variable with the same name as a previously declared variable. For example, say you had an `$x` in scope, and you wanted a new `$x` that was one greater:
 
-```
+```nu
 let x = $x + 1
 ```
 
@@ -70,13 +70,13 @@ This new `x` is visible to any code that follows this line. Careful use of shado
 
 Loop counters are another common pattern for mutable variables and are built into most iterating commands, for example you can get both each item and an index of each item using [`each`](/commands/docs/each.md):
 
-```
+```nu
 > ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
 ```
 
 You can also use the [`reduce`](/commands/docs/reduce.md) command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:
 
-```
+```nu
 > [one, two, three, four, five, six] | reduce {|curr, max|
     if ($curr | str length) > ($max | str length) {
         $curr
@@ -96,7 +96,7 @@ In Nushell, blocks control their own environment. Changes to the environment are
 
 In practice, this lets you write some concise code for working with subdirectories, for example, if you wanted to build each sub-project in the current directory, you could run:
 
-```
+```nu
 > ls | each { |it|
     cd $it.name
     make
