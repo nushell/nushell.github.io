@@ -2,6 +2,7 @@ import path from 'path';
 import { defineUserConfig } from '@vuepress/cli';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { feedPlugin } from 'vuepress-plugin-feed2';
+import { shikiPlugin } from '@vuepress/plugin-shiki';
 import { defaultTheme } from '@vuepress/theme-default';
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
 import { docsearchPlugin } from '@vuepress/plugin-docsearch';
@@ -139,6 +140,21 @@ export default defineUserConfig({
     gitPlugin(),
     backToTopPlugin(),
     mediumZoomPlugin(),
+    shikiPlugin({
+      theme: 'dark-plus',
+      langs: [
+        'nushell',
+        'rust',
+        'bash',
+        'shell',
+        'sh',
+        'toml',
+        'json',
+        'python',
+        'cpp',
+        'powershell',
+      ],
+    }),
     docsearchPlugin({
       appId: 'GHCTOYCW6T',
       indexName: 'nushell',
@@ -162,7 +178,7 @@ export default defineUserConfig({
             : a.frontmatter.date,
           b.data.git?.createdTime
             ? new Date(b.data.git?.createdTime)
-            : b.frontmatter.date
+            : b.frontmatter.date,
         );
       },
     }),
@@ -173,7 +189,7 @@ export default defineUserConfig({
   onPrepared: async (app) => {
     await app.writeTemp(
       'pages.js',
-      `export default ${JSON.stringify(app.pages.map(({ data }) => data))}`
+      `export default ${JSON.stringify(app.pages.map(({ data }) => data))}`,
     );
   },
 });

@@ -26,13 +26,13 @@ Nushell 中的别名提供了一种简单的文本替换方式，这允许你为
 
 如果你想在别名中添加管道，你必须用小括号把它括起来，小括号是一对圆括号`()`，用来标记你的一组带有管道命令：
 
-```shell
+```nu
 alias lsname = (ls | get name)
 ```
 
 下面是一个带有多个管道的别名：
 
-```shell
+```nu
 alias lt = (ls | sort-by modified -r | sort-by type)
 ```
 

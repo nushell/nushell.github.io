@@ -8,7 +8,7 @@ There are two parts to a custom command: the command that handles a completion a
 
 Let's look at an example:
 
-```
+```nu
 > def animals [] { ["cat", "dog", "eel" ] }
 > def my-command [animal: string@animals] { print $animal }
 >| my-command
@@ -27,7 +27,7 @@ You may prefer to keep your custom completions away from the public API for your
 
 Let's take the example above and put it into a module:
 
-```
+```nu
 module commands {
     def animals [] {
         ["cat", "dog", "eel" ]
@@ -49,7 +49,7 @@ It is possible to pass the context to the custom completion command. This is use
 
 Let's apply this concept to the previous example:
 
-```
+```nu
 module commands {
     def animals [] {
         ["cat", "dog", "eel" ]
@@ -74,7 +74,7 @@ module commands {
 
 Here, the command `animal-names` returns the appropriate list of names. This is because `$context` is a string with where the value is the command that has been typed until now.
 
-```
+```nu
 >| my-command
 cat                 dog                 eel
 >| my-command dog
@@ -91,7 +91,7 @@ A powerful combination is adding custom completions to [known `extern` commands]
 
 If you look closely at the examples in the default config, you'll see this:
 
-```
+```nu
 export extern "git push" [
     remote?: string@"nu-complete git remotes",  # the name of the remote
     refspec?: string@"nu-complete git branches" # the branch / refspec
@@ -105,7 +105,7 @@ Custom completions will serve the same role in this example as in the previous e
 
 As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` and `description` field.
 
-```
+```nu
 def my_commits [] {
     [
         { value: "5c2464", description: "Add .gitignore" },

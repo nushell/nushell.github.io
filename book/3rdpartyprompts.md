@@ -21,9 +21,9 @@ If you like [oh-my-posh](https://ohmyposh.dev/), you can use oh-my-posh with Nus
 3. Generate the .oh-my-posh.nu file. By default it will be generated to your home directory. You can use `--config` to specify a theme, other wise, oh-my-posh comes with a default theme.
 4. Initialize oh-my-posh prompt by adding in ~/.config/nushell/config.nu(or the path output by `$nu.config-path`) to source ~/.oh-my-posh.nu.
 
-```shell
+```nu
 # Generate the .oh-my-posh.nu file
-> oh-my-posh init nu --config ~/.poshthemes/M365Princess.omp.json 
+> oh-my-posh init nu --config ~/.poshthemes/M365Princess.omp.json
 
 # Initialize oh-my-posh.nu at shell startup by adding this line in your config.nu file
 > source ~/.oh-my-posh.nu
@@ -35,7 +35,7 @@ For MacOS users:
 2. Download and install a [nerd font](https://github.com/ryanoasis/nerd-fonts).
 3. Set the PROMPT_COMMAND in the file output by `$nu.config-path`, here is a code snippet:
 
-```shell
+```nu
 let posh_dir = (brew --prefix oh-my-posh | str trim)
 let posh_theme = $'($posh_dir)/share/oh-my-posh/themes/'
 # Change the theme names to: zash/space/robbyrussel/powerline/powerlevel10k_lean/
@@ -58,7 +58,7 @@ $env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 
 Here's an example config section for Starship:
 
-```
+```nu
 $env.STARSHIP_SHELL = "nu"
 
 def create_left_prompt [] {

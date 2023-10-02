@@ -6,7 +6,7 @@ Nushell 中的字符串用于保存文本数据以便后续使用，其中可以
 
 Nushell 中最简单的字符串是单引号字符串。这种字符串使用`'`字符来包裹文本。下面是作为单引号字符串的`hello world`示例：
 
-```sh
+```nu
 > 'hello world'
 hello world
 ```
@@ -19,7 +19,7 @@ hello world
 
 例如，我们可以用转义字符和双引号字符串写出文字 hello，然后换行，再写上 world：
 
-```sh
+```nu
 > "hello\nworld"
 hello
 world
@@ -48,7 +48,7 @@ Nushell 目前支持以下转义字符：
 
 例如，假设我们有一个叫做`$name`的变量，我们想问候这个变量中所包含的人：
 
-```sh
+```nu
 > let name = "Alice"
 > $"greetings, ($name)"
 greetings, Alice
@@ -60,7 +60,7 @@ greetings, Alice
 
 从 0.61 版开始，字符串插值支持转义小括号，所以`(`和`)`字符可以在一个字符串中使用，而 Nushell 不会试图计算它们之间出现的内容：
 
-```sh
+```nu
 > $"2 + 2 is (2 + 2) \(you guessed it!)"
 2 + 2 is 4 (you guessed it!)
 ```
@@ -80,7 +80,7 @@ greetings, Alice
 
 例如, 你可以使用`str contains`来检查一个字符串是否包含某个特定的字符：
 
-```sh
+```nu
 > "hello world" | str contains "w"
 true
 ```
@@ -89,7 +89,7 @@ true
 
 你可以用 [`str trim`](/commands/docs/str_trim.md) 命令修剪字符串的两侧。默认情况下，[`str trim`](/commands/docs/str_trim.md) 命令会修剪字符串两边的空白。比如：
 
-```sh
+```nu
 > '       My   string   ' | str trim
 My   string
 ```
@@ -100,7 +100,7 @@ My   string
 
 下面是一个传入了所有选项的例子：
 
-```sh
+```nu
 > '=== Nu shell ===' | str trim -r -c '='
 === Nu shell
 ```
@@ -109,7 +109,7 @@ My   string
 
 子字符串是一个字符串的切片，它们有起始点和结束点。下面是一个使用子串的例子：
 
-```sh
+```nu
 > 'Hello World!' | str index-of 'o'
 4
 > 'Hello World!' | str index-of 'r'
@@ -122,7 +122,7 @@ o Wo
 
 使用 [`str lpad`](/commands/docs/str_lpad.md) 和 [`str rpad`](/commands/docs/str_rpad.md) 命令，你可以给字符串添加填充。填充会给字符串添加字符，直到它达到一定的长度。比如：
 
-```sh
+```nu
 > '1234' | str lpad -l 10 -c '0'
 0000001234
 > '1234' | str rpad -l 10 -c '0' | str length
@@ -133,7 +133,7 @@ o Wo
 
 反转字符串可以通过 [`str reverse`](/commands/docs/str_reverse.md) 命令轻松完成：
 
-```sh
+```nu
 > 'Nushell' | str reverse
 llehsuN
 > ['Nushell' 'is' 'cool'] | str reverse
@@ -148,7 +148,7 @@ llehsuN
 
 通过 [`parse`](/commands/docs/parse.md) 命令，你可以将一个字符串解析成若干列。比如：
 
-```sh
+```nu
 > 'Nushell is the best' | parse '{shell} is {type}'
 ╭───┬─────────┬──────────╮
 │ # │  shell  │   type   │
@@ -181,7 +181,7 @@ llehsuN
 
 你可以通过 [`ansi`](/commands/docs/ansi.md) 命令给字符串着色。例如：
 
-```sh
+```nu
 > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 

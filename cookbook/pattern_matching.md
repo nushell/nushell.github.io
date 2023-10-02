@@ -8,7 +8,7 @@ title: Pattern Matching
 
 Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands/docs/match.html#frontmatter-title-for-core) keyword. Usually this is used as a slightly more ergonomic version of `if-else` statements if you have many branches
 
-```shell
+```nu
 > [black red yellow green purple blue indigo] | each {|c|
  match $c {
   "black" => "classy"
@@ -30,7 +30,7 @@ Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands
 
 The equivalent in `if-else` statements would be:
 
-```shell
+```nu
 > [black red yellow green purple blue] | each {|c|
  if ($c == "black") {
   "classy"
@@ -45,7 +45,7 @@ The equivalent in `if-else` statements would be:
 }
 ```
 
-As you can see you can also use command expressions in match statements (in this case used with `|`). Also notice the `_` case at the end, this is called the default arm and is used in case none of the other patterns match. Note also that in the case that cases overlap the first matching pattern will be used (just like with `if-else` statements): 
+As you can see you can also use command expressions in match statements (in this case used with `|`). Also notice the `_` case at the end, this is called the default arm and is used in case none of the other patterns match. Note also that in the case that cases overlap the first matching pattern will be used (just like with `if-else` statements):
 
 ```nu
  [yellow green] | each {|c|
@@ -64,7 +64,7 @@ As you can see you can also use command expressions in match statements (in this
 
 You can use the [`describe`](https://www.nushell.sh/commands/docs/describe.html) command to get more info about the types of values. For example:
 
-```sh
+```nu
 {one: 1 two: 2} | describe
 record<one: int, two: int>
 

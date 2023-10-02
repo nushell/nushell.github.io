@@ -24,13 +24,13 @@ treat something like `\n` like the new line character and not a literal slash fo
 
 Correct:
 
-```nushell
+```nu
 'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
 ```
 
 Incorrect:
 
-```nushell
+```nu
 # - too many spaces after "|": 2 instead of 1
 'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
 ```
@@ -67,7 +67,7 @@ Rules:
 
 Correct:
 
-```nushell
+```nu
 [[status]; [UP] [UP]] | all {|el| $el.status == UP }
 [1 2 3 4] | reduce {|it, acc| $it + $acc }
 [1 2 3 4] | reduce {|it acc| $it + $acc }
@@ -80,7 +80,7 @@ Correct:
 
 Incorrect:
 
-```nushell
+```nu
 # too many spaces before "|el|": no space is allowed
 [[status]; [UP] [UP]] | all { |el| $el.status == UP }
 
@@ -129,7 +129,7 @@ Rules:
 
 Correct:
 
-```nushell
+```nu
 [[status]; [UP] [UP]] | all {|el|
     $el.status == UP
 }
@@ -152,8 +152,8 @@ let selectedProfile = (for it in ($credentials | transpose name credentials) {
 
 Incorrect:
 
-```nushell
-# too many spaces before "|el|": no space is allowed (like in one-line format) 
+```nu
+# too many spaces before "|el|": no space is allowed (like in one-line format)
 [[status]; [UP] [UP]] | all { |el|
     # too few "\n" before "}": one "\n" is required
     $el.status == UP}
@@ -165,7 +165,7 @@ Incorrect:
 
 {
    # too many "\n" before "x": one-line format required as no nested lists or record exist
-   x: 1, 
+   x: 1,
    y: 2
 }
 

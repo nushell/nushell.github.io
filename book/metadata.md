@@ -2,7 +2,7 @@
 
 In using Nu, you may have come across times where you felt like there was something extra going on behind the scenes. For example, let's say that you try to open a file that Nu supports only to forget and try to convert again:
 
-```
+```nu
 > open Cargo.toml | from toml
 error: Expected a string from pipeline
 - shell:1:18
@@ -19,7 +19,7 @@ Values that flow through a pipeline in Nu often have a set of additional informa
 
 Let's run the [`open`](/commands/docs/open.md) command again, but this time, we'll look at the tags it gives back:
 
-```
+```nu
 > metadata (open Cargo.toml)
 ╭──────┬───────────────────╮
 │ span │ {record 2 fields} │
@@ -28,7 +28,7 @@ Let's run the [`open`](/commands/docs/open.md) command again, but this time, we'
 
 Currently, we track only the span of where values come from. Let's take a closer look at that:
 
-```
+```nu
 > metadata (open Cargo.toml) | get span
 ╭───────┬────────╮
 │ start │ 212970 │

@@ -4,7 +4,7 @@ Uma forma comum de ver os dados no Nu é por meio de uma tabela. O Nu traz um co
 
 Para começar, vamos usar a seguinte tabela:
 
-```shell
+```nu
 > ls
 ---+---------------+------+----------+---------+------------+------------
  # | name          | type | readonly | size    | accessed   | modified
@@ -26,7 +26,7 @@ Para começar, vamos usar a seguinte tabela:
 
 Podemos ordenar uma tabela chamando o comando `sort-by` e informando quais colunas queremos usar na ordenação. Digamos que queremos ordenar nossa tabela pelo tamanho do arquivo:
 
-```shell
+```nu
 > ls | sort-by size
 ---+---------------+------+----------+---------+------------+------------
  # | name          | type | readonly | size    | accessed   | modified
@@ -50,7 +50,7 @@ Podemos ordenar uma tabela por qualquer coluna que possa ser comparada. Por exem
 
 Podemos selecionar dados de uma tabela escolhendo colunas ou linhas específicas. Vamos escolher algumas colunas da nossa tabela:
 
-```shell
+```nu
 > ls | select name size
 ---+---------------+---------
  # | name          | size
@@ -70,7 +70,7 @@ Podemos selecionar dados de uma tabela escolhendo colunas ou linhas específicas
 
 Isso ajuda a criar uma tabela mais focada no que precisamos. A seguir, digamos que queremos ver apenas os 5 menores arquivos do diretório:
 
-```shell
+```nu
 > ls | sort-by size | first 5
 ---+---------+------+----------+--------+------------+------------
  # | name    | type | readonly | size   | accessed   | modified
@@ -87,7 +87,7 @@ Note que primeiro ordenamos a tabela por tamanho e depois usamos o `first 5` par
 
 Você também pode usar `skip` para pular as linhas que não quiser. Vamos pular as duas primeiras das 5 linhas que retornamos acima:
 
-```shell
+```nu
 > ls | sort-by size | first 5 | skip 2
 ---+---------+------+----------+--------+------------+------------
  # | name    | type | readonly | size   | accessed   | modified
@@ -102,7 +102,7 @@ Restringimos os dados às 3 linhas que nos interessam.
 
 Vamos examinar alguns outros comandos para selecionar dados. Você pode ter se perguntado por que as linhas da tabela são numeradas. Isso serve como uma maneira prática de acessar uma linha específica. Vamos ordenar nossa tabela pelo nome do arquivo e então escolher uma das linhas com o comando `nth`, usando o número da linha:
 
-```shell
+```nu
 > ls | sort-by name
 ---+---------------+------+----------+---------+------------+------------
  # | name          | type | readonly | size    | accessed   | modified
@@ -131,7 +131,7 @@ Vamos examinar alguns outros comandos para selecionar dados. Você pode ter se p
 
 Até agora, trabalhamos as tabelas reduzindo-as para somente o que precisamos. Às vezes queremos ir um passo além e só ver os valores das células e não de uma coluna toda. Digamos, por exemplo, que queremos somente uma lista com os nomes do arquivos. Para isso, usamos o comando `get`:
 
-```shell
+```nu
 > ls | get name
 ---+---------------
  # | value
@@ -153,7 +153,7 @@ Agora temos os valores para cada um dos nomes de arquivo.
 
 Parece muito com o comando `select` que vimos antes, então vamos colocá-lo aqui de novo para compararmos os dois:
 
-```shell
+```nu
 > ls | select name
 ---+---------------
  # | name
@@ -188,7 +188,7 @@ Além de selecionar dados de uma tabela, podemos também alterar o que a tabela 
 
 Podemos usar o comando `add` para adicionar uma nova coluna na tabela. Vejamos um exemplo:
 
-```shell
+```nu
 > open rustfmt.toml
 ---------
  edition
@@ -199,7 +199,7 @@ Podemos usar o comando `add` para adicionar uma nova coluna na tabela. Vejamos u
 
 Vamos adicionar uma coluna chamada "next_edition" com o valor 2021:
 
-```shell
+```nu
 > open rustfmt.toml | add next_edition 2021
 ---------+--------------
  edition | next_edition
@@ -210,7 +210,7 @@ Vamos adicionar uma coluna chamada "next_edition" com o valor 2021:
 
 Note que, se abrirmos o arquivo original, seu conteúdo permanece o mesmo:
 
-```shell
+```nu
 > open rustfmt.toml
 ---------
  edition
@@ -221,7 +221,7 @@ Note que, se abrirmos o arquivo original, seu conteúdo permanece o mesmo:
 
 Alterações no Nu são alterações funcionais, isto é, atuam sobre os valores em si ao invés de tentar causar uma alteração permanente, o que nos permite executar muitos tipos diferentes de ações no nosso pipeline até que estejamos prontos para escrever o resultado com quaisquer mudanças, se assim quisermos. Aqui poderíamos salvar o resultado usando o comando `save`:
 
-```shell
+```nu
 > open rustfmt.toml | add next_edition 2021 | save rustfmt2.toml
 > open rustfmt2.toml
 ---------+--------------
@@ -235,7 +235,7 @@ Alterações no Nu são alterações funcionais, isto é, atuam sobre os valores
 
 Semelhante ao comando `add`, podemos usar o comando `edit` para alterar o conteúdo de uma coluna para um novo valor. Para ver isso funcionando, vamos abrir o mesmo arquivo:
 
-```shell
+```nu
 open rustfmt.toml
 ---------
  edition
@@ -246,7 +246,7 @@ open rustfmt.toml
 
 E agora vamos alterar a coluna `edition` para mostrar a próxima edição à qual esperamos dar suporte:
 
-```shell
+```nu
 > open rustfmt.toml | edit edition 2021
 ---------
  edition
@@ -259,7 +259,7 @@ E agora vamos alterar a coluna `edition` para mostrar a próxima edição à qua
 
 Existe mais um comando do Nu que nos ajudará a trabalhar com números e versões: `inc`.
 
-```shell
+```nu
 > open rustfmt.toml
 ---------
  edition
@@ -276,7 +276,7 @@ Existe mais um comando do Nu que nos ajudará a trabalhar com números e versõe
 
 Como o valor em "edition" é um número, podemos usar `inc` para alterá-lo. Onde `inc` realmente se destaca é trabalhando com versões:
 
-```shell
+```nu
 > open Cargo.toml | get package.version
 0.1.3
 > open Cargo.toml | inc package.version --minor | get package.version

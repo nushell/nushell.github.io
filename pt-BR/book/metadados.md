@@ -2,7 +2,7 @@
 
 Usando o Nu vocë pode se deparar com momentos em que sente como se houvesse algo a mais acontecendo nos bastidores. Por exemplo, digamos que vocë vai tentar abrir um arquivo mas se esquece que ele é suportado pelo Nu e tenta convertê-lo novamente:
 
-```shell
+```nu
 > open Cargo.toml | from toml
 error: Expected a string from pipeline
 - shell:1:18
@@ -19,7 +19,7 @@ Valores que fluem pelo pipeline do Nu normalmente trazem consigo um conjunto adi
 
 Vamos executar o comando `open` de novo, mas, dessa vez, vamos olhar as tags que ele retorna:
 
-```shell
+```nu
 > open Cargo.toml | tags
 ----------+------------------------------------------
  span     | origin
@@ -32,7 +32,7 @@ Atualmente, rastreamos dois pedaços de metadados dos valores no pipeline. Você
 
 Há também um coluna intervalo (span). Vamos ver mais de perto:
 
-```shell
+```nu
 > open Cargo.toml | tags | get span
 -------+-----
  start | end

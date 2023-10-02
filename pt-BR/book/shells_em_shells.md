@@ -6,7 +6,7 @@ Embora seja comum trabalhar em um único diretório, pode ser útil trabalhar em
 
 Para começar, vamos entrar num diretório:
 
-```shell
+```nu
 /home/jonathan/Source/nushell(master)> enter ../lark
 /home/jonathan/Source/lark(master)> ls
 ----+----------------+-----------+----------+---------+---------------+---------------
@@ -19,7 +19,7 @@ Para começar, vamos entrar num diretório:
 
 Entrar é semlhante a mudar de diretório (como vimos com o comando `cd`), permitindo que você salte para o diretório dentro do qual vai trabalhar. Ao invés de mudar de diretório, nós agora estamos em dois diretórios. Para ver isso mais claramente, podemos usar o comando `shells` para listar os diretórios ativos agora:
 
-```shell
+```nu
 /home/jonathan/Source/lark(master)> shells
 ---+---+------------+-------------------------------
  # |   | name       | path
@@ -55,7 +55,7 @@ Para ver como isso funciona, vamos fazer o seguinte exercício. Atualmente, list
 
 Vamos entrar no arquivo "Cargo.toml" do código fonte do Nu:
 
-```shell
+```nu
 /Users/andresrobalino/Code/nushell(master)> enter Cargo.toml
 /> ls
 ------------+--------------+------------------+----------+----------
@@ -69,7 +69,7 @@ Até o momento, apenas entramos no arquivo (usando o comando `enter`) e podemos 
 
 Antes de continuarmos, vamos checar os shells ativos:
 
-```shell
+```nu
 /> shells
 ---+---+-------------------------------------------------+------------------------------------
  # |   | name                                            | path
@@ -82,7 +82,7 @@ Antes de continuarmos, vamos checar os shells ativos:
 
 Podemos observar que temos dois shells ativos e que estamos agora dentro do arquivo "Cargo.toml" com um caminho raíz padrão "/". Vamos ver seu contéudo novamente:
 
-```shell
+```nu
 /> ls
 ------------+--------------+------------------+----------+----------
  bin        | dependencies | dev-dependencies | lib      | package
@@ -93,7 +93,7 @@ Podemos observar que temos dois shells ativos e que estamos agora dentro do arqu
 
 O que estamos procurando pode estar dentro da coluna "bin", então vamos entrar lá:
 
-```shell
+```nu
 > cd bin
 /bin> ls
 ----+----------------------+---------------------------
@@ -115,13 +115,13 @@ O que estamos procurando pode estar dentro da coluna "bin", então vamos entrar 
 
 Daqui, sempre podemos voltar para o diretório em que estávamos trabalhando antes usando p (de prévio, anterior).
 
-```shell
+```nu
 /bin> p
 ```
 
 Vamos verificar os shells de novo:
 
-```shell
+```nu
 /Users/andresrobalino/Code/nushell(master)> shells
 ---+---+-------------------------------------------------+------------------------------------
  # |   | name                                            | path
@@ -134,7 +134,7 @@ Vamos verificar os shells de novo:
 
 Estamos de volta ao diretório onde estávamos trabalhando antes de entrar no arquivo "Cargo.toml". Agora vamos mudar para o diretório onde então os códigos fonte dos plugins e rastreá-los:
 
-```shell
+```nu
 /Users/andresrobalino/Code/nushell(master)> cd src/plugins/
 /Users/andresrobalino/Code/nushell/src/plugins(master)> ls
 ----+---------------+------+----------+---------+------------+------------

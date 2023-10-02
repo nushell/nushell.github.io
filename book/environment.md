@@ -4,7 +4,7 @@ A common task in a shell is to control the environment that external application
 
 You can see the current environment variables in the $env variable:
 
-```
+```nu
 ~> $env | table -e
 ╭──────────────────────────────────┬───────────────────────────────────────────╮
 │                                  │ ╭──────┬────────────────────────────────╮ │
@@ -37,13 +37,13 @@ There are several ways to set an environment variable:
 
 Using the `$env.VAR = "val"` is the most straightforward method
 
-```
+```nu
 > $env.FOO = 'BAR'
 ```
 
 So, if you want to extend the Windows `Path` variable, for example, you could do that as follows.
 
-```
+```nu
 $env.Path = ($env.Path | prepend 'C:\path\you\want\to\add')
 ```
 
@@ -54,7 +54,7 @@ If you want to give it the lowest priority instead, you can use the [`append`](/
 
 If you have more than one environment variable you'd like to set, you can use [`load-env`](/commands/docs/load-env.md) to create a table of name/value pairs and load multiple variables at the same time:
 
-```
+```nu
 > load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
@@ -75,7 +75,7 @@ See [Modules](modules.md) for details.
 
 Individual environment variables are fields of a record that is stored in the `$env` variable and can be read with `$env.VARIABLE`:
 
-```
+```nu
 > $env.FOO
 BAR
 ```
@@ -86,7 +86,7 @@ When you set an environment variable, it will be available only in the current s
 
 Here is a small example to demonstrate the environment scoping:
 
-```
+```nu
 > $env.FOO = "BAR"
 > do {
     $env.FOO = "BAZ"
@@ -107,14 +107,14 @@ Therefore, it follows the same rules as other environment variables (for example
 
 A common shorthand to set an environment variable once is available, inspired by Bash and others:
 
-```
+```nu
 > FOO=BAR $env.FOO
 BAR
 ```
 
 You can also use [`with-env`](/commands/docs/with-env.html) to do the same thing more explicitly:
 
-```
+```nu
 > with-env { FOO: BAR } { $env.FOO }
 BAR
 ```
@@ -127,7 +127,7 @@ You can also set environment variables at startup so they are available for the 
 To do this, set an environment variable inside [the Nu configuration file](configuration.md).
 For example:
 
-```
+```nu
 # In config.nu
 $env.FOO = 'BAR'
 ```
@@ -137,7 +137,7 @@ $env.FOO = 'BAR'
 Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
 However, a command defined as [`def-env`](/commands/docs/def-env.html) instead of [`def`](/commands/docs/def.html) (it applies also to [`export def`](/commands/docs/export_def.md), see [Modules](modules.md)) will preserve the environment on the caller's side:
 
-```
+```nu
 > def-env foo [] {
     $env.FOO = 'BAR'
 }
@@ -159,7 +159,7 @@ The conversion of value -> string is set by the `to_string` field of `ENV_CONVER
 Let's illustrate the conversions with an example.
 Put the following in your config.nu:
 
-```
+```nu
 $env.ENV_CONVERSIONS = {
     # ... you might have Path and PATH already there, add:
     FOO : {
@@ -171,7 +171,7 @@ $env.ENV_CONVERSIONS = {
 
 Now, within a Nushell instance:
 
-```
+```nu
 > with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
 
 > $env.FOO
@@ -183,13 +183,13 @@ Now, within a Nushell instance:
 You can see the `$env.FOO` is now a list in a new Nushell instance with the updated config.
 You can also test the conversion manually by
 
-```
+```nu
 > do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
 ```
 
 Now, to test the conversion list -> string, run:
 
-```
+```nu
 > nu -c '$env.FOO'
 a-b-c
 ```
@@ -204,7 +204,7 @@ _(Important! The environment conversion string -> value happens **after** the en
 
 You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide_env.html):
 
-```
+```nu
 > $env.FOO = 'BAR'
 ...
 > hide-env FOO
@@ -212,7 +212,7 @@ You can remove an environment variable only if it was set in the current scope v
 
 The hiding is also scoped which both allows you to remove an environment variable temporarily and prevents you from modifying a parent environment from within a child scope:
 
-```
+```nu
 > $env.FOO = 'BAR'
 > do {
     hide-env FOO

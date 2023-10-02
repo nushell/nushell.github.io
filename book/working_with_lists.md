@@ -10,14 +10,14 @@ For example, `[foo bar baz]` or `[foo, bar, baz]`.
 
 You can [`update`](/commands/docs/update.md) and [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
 
-```bash
+```nu
 > [1, 2, 3, 4] | insert 2 10
 # [1, 2, 10, 3, 4]
 ```
 
 We can also use [`update`](/commands/docs/update.md) to replace the 2nd element with the value `10`.
 
-```bash
+```nu
 > [1, 2, 3, 4] | update 1 10
 # [1, 10, 3, 4]
 ```
@@ -28,7 +28,7 @@ In addition to [`insert`](/commands/docs/insert.md) and [`update`](/commands/doc
 
 For example:
 
-```bash
+```nu
 let colors = [yellow green]
 let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
@@ -39,7 +39,7 @@ $colors # [black red yellow green purple blue]
 
 In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list.
 
-```bash
+```nu
 let colors = [red yellow green purple]
 let colors = ($colors | skip 1)
 let colors = ($colors | drop 2)
@@ -48,7 +48,7 @@ $colors # [yellow]
 
 We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first.md) which allow you to [`take`](/commands/docs/take.md) from the end or beginning of the list, respectively.
 
-```bash
+```nu
 let colors = [red yellow green purple black magenta]
 let colors = ($colors | last 3)
 $colors # [purple black magenta]
@@ -56,7 +56,7 @@ $colors # [purple black magenta]
 
 And from the beginning of a list,
 
-```bash
+```nu
 let colors = [yellow green purple]
 let colors = ($colors | first 2)
 $colors # [yellow green]
@@ -68,7 +68,7 @@ To iterate over the items in a list, use the [`each`](/commands/docs/each.md) co
 of Nu code that specifies what to do to each item. The block parameter (e.g. `|it|` in `{ |it| print $it }`) is the current list
 item, but the [`enumerate`](/commands/docs/enumerate.md) filter can be used to provide `index` and `item` values if needed. For example:
 
-```bash
+```nu
 let names = [Mark Tami Amanda Jeremy]
 $names | each { |it| $"Hello, ($it)!" }
 # Outputs "Hello, Mark!" and three more similar lines.
@@ -81,7 +81,7 @@ The [`where`](/commands/docs/where.md) command can be used to create a subset of
 
 The following example gets all the colors whose names end in "e".
 
-```bash
+```nu
 let colors = [red orange yellow green blue purple]
 $colors | where ($it | str ends-with 'e')
 # The block passed to `where` must evaluate to a boolean.
@@ -90,7 +90,7 @@ $colors | where ($it | str ends-with 'e')
 
 In this example, we keep only values higher than `7`.
 
-```bash
+```nu
 let scores = [7 10 8 6 7]
 $scores | where $it > 7 # [10 8]
 ```
@@ -101,7 +101,7 @@ It uses a block which takes 2 parameters: the current item (conventionally named
 To change `it` to have `index` and `item` values, use the [`enumerate`](/commands/docs/enumerate.md) filter.
 For example:
 
-```bash
+```nu
 let scores = [3 8 4]
 $"total = ($scores | reduce { |it, acc| $acc + $it })" # total = 15
 
@@ -118,14 +118,14 @@ To access a list item at a given index, use the `$name.index` form where `$name`
 
 For example, the second element in the list below can be accessed with `$names.1`.
 
-```bash
+```nu
 let names = [Mark Tami Amanda Jeremy]
 $names.1 # gives Tami
 ```
 
 If the index is in some variable `$index` we can use the `get` command to extract the item from the list.
 
-```bash
+```nu
 let names = [Mark Tami Amanda Jeremy]
 let index = 1
 $names | get $index # gives Tami
@@ -137,7 +137,7 @@ For example, `[red green blue] | length` outputs `3`.
 The [`is-empty`](/commands/docs/is-empty.md) command determines whether a string, list, or table is empty.
 It can be used with lists as follows:
 
-```bash
+```nu
 let colors = [red green blue]
 $colors | is-empty # false
 
@@ -147,7 +147,7 @@ $colors | is-empty # true
 
 The `in` and `not-in` operators are used to test whether a value is in a list. For example:
 
-```bash
+```nu
 let colors = [red green blue]
 'blue' in $colors # true
 'yellow' in $colors # false
@@ -158,7 +158,7 @@ The [`any`](/commands/docs/any.md) command determines if any item in a list
 matches a given condition.
 For example:
 
-```bash
+```nu
 # Do any color names end with "e"?
 $colors | any {|it| $it | str ends-with "e" } # true
 
@@ -176,7 +176,7 @@ The [`all`](/commands/docs/all.md) command determines if every item in a list
 matches a given condition.
 For example:
 
-```bash
+```nu
 # Do all color names end with "e"?
 $colors | all {|it| $it | str ends-with "e" } # false
 
@@ -197,7 +197,7 @@ by adding items in nested lists to the top-level list.
 This can be called multiple times to flatten lists nested at any depth.
 For example:
 
-```bash
+```nu
 [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 
 [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
@@ -206,7 +206,7 @@ For example:
 The [`wrap`](/commands/docs/wrap.md) command converts a list to a table. Each list value will
 be converted to a separate row with a single column:
 
-```bash
+```nu
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 
 # Show world clock for selected time zones

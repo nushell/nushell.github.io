@@ -10,7 +10,7 @@ ihnen zu arbeiten. Der Anwendungsfall entscheidet, welches am besten passt.
 Der einfachste Text in Nushell ist der in einfachen Anführungszeichen.
 Er wird mit dem `'` Zeichen umgeben. Hier der Text als Hallo Welt.
 
-```sh
+```nu
 > 'Hallo Welt'
 Hallo Welt
 ```
@@ -29,7 +29,7 @@ Zum Beispiel kann das Hallo Welt von vorhin geschrieben werden als,
 Hallo gefolgt von einen `\n` um eine neue Linie zu erzeugen, dann Welt.
 Das ganze in doppelten Anführungszeichen.
 
-```sh
+```nu
 > "Hallo\nWelt"
 Hallo
 Welt
@@ -63,7 +63,7 @@ Die Text Interpolation wird mit `$" "` und `$" "` gebildet.
 Soll zum Beispiel eine Person per Namen gegrüsst werden, deren Namen in einer Variablen steht,
 dann sieht das so aus:
 
-```sh
+```nu
 > let name = "Alice"
 > $"greetings, ($name)"
 greetings, Alice
@@ -80,7 +80,7 @@ Seit Version 0.61 unterstützt Nushell Escape Zeichen für Klammern.
 So können die Zeichen `(` und `)` in einem Text verwendet werden, ohne dass Nushell
 auswerten will, was sich dazwischen befindet.
 
-```sh
+```nu
 > $"2 + 2 is (2 + 2) \(you guessed it!)"
 2 + 2 is 4 (you guessed it!)
 ```
@@ -107,7 +107,7 @@ Mit `help str` wirden alle Sub-Befehle ausgegeben.
 
 Zum Beispiel kann geprüft werden, ob sich ein Zeichen in einem Text befindet mit `str contains`:
 
-```sh
+```nu
 > "Hallo Welt" | str contains "W"
 true
 ```
@@ -118,7 +118,7 @@ Die Seiten eines Textes werden mit dem [`str trim`](/commands/docs/str_trim.md) 
 geschnitten. Standardmässig schneidet der [`str trim`](/commands/docs/str_trim.md) Befehl
 Leerraum von beiden Seiten des Textes. Zum Beispiel:
 
-```sh
+```nu
 > '       My   string   ' | str trim
 My   string
 ```
@@ -129,7 +129,7 @@ auf der geschnitten werden soll.
 Um ein spezifisches Zeichen weg zu schneiden, wird `--char <Character>` verwendet.
 Hier ein Beispiel mit dieser Option:
 
-```sh
+```nu
 > '=== Nu shell ===' | str trim -r -c '='
 === Nu shell
 ```
@@ -139,7 +139,7 @@ Hier ein Beispiel mit dieser Option:
 Subtexte sind Stücke von Texten. Sie haben einen Start- und einen Endpunkt.
 Hier ein Beispiel eines Substrings:
 
-```sh
+```nu
 > 'Hallo Welt!' | str index-of 'o'
 4
 > 'Hallo Welt!' | str index-of 'l'
@@ -154,7 +154,7 @@ Mit den Befehlen `[str lpad`](/commands/docs/str_lpad.md) und [`str rpad`](/comm
 können Texte der angegeben Ausrichtung nach erweitert werden.
 Dieses Padding erweitert den Text bis zur angegebenen Länge, zum Beispiel:
 
-```sh
+```nu
 > '1234' | str lpad -l 10 -c '0'
 0000001234
 > '1234' | str rpad -l 10 -c '0' | str length
@@ -165,7 +165,7 @@ Dieses Padding erweitert den Text bis zur angegebenen Länge, zum Beispiel:
 
 Dies kann mit dem [`str reverse`](/commands/docs/str_reverse.md) Befehl ganz einfach erreicht werden.
 
-```sh
+```nu
 > 'Nushell' | str reverse
 llehsuN
 > ['Nushell' 'is' 'cool'] | str reverse
@@ -181,7 +181,7 @@ llehsuN
 Mit dem [`parse`](/commands/docs/parse.md) Befehl können Texte in Spalten geparst werden.
 Zum Beispiel:
 
-```sh
+```nu
 > 'Nushell is the best' | parse '{shell} is {type}'
 ╭───┬─────────┬──────────╮
 │ # │  shell  │   type   │
@@ -215,7 +215,7 @@ Es gibt verschiedenste Wege Texte in und von anderen Typen zu konvertieren.
 Texte können eingefärbt werden mit dem [`ansi`](/commands/docs/ansi.md) Befehl
 Zum Beispiel:
 
-```sh
+```nu
 > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 

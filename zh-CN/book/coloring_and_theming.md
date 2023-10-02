@@ -14,7 +14,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 
 表的边框由`config.nu`中的`table_mode`设置来控制。下面是一个例子：
 
-```shell
+```nu
 > $env.config = {
     table_mode: rounded
 }
@@ -268,7 +268,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 
 下面是一个改变其中一些数值的小例子。
 
-```shell
+```nu
 > let config = {
     color_config: {
         separator: purple
@@ -293,7 +293,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 
 下面是另一个使用多种颜色语法的小例子，其中有一些注释：
 
-```shell
+```nu
 > let config = {
     color_config: {
         separator: "#88b719" # this sets only the foreground color like PR #486
@@ -347,7 +347,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 
 这里有一个小例子，说明如何对这些项目应用颜色。任何没有显示指定的都会被设置为默认的颜色。
 
-```shell
+```nu
 > $env.config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
@@ -370,13 +370,13 @@ Nushell 的提示符可以通过这些环境变量进行配置：
 
 例如：对于一个简单的提示，我们可以这样做。注意`PROMPT_COMMAND`需要一个`block`而其他的需要一个`string`。
 
-```shell
+```nu
 > $env.PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 如果你不喜欢默认的`PROMPT_INDICATOR`，你可以这样改变它：
 
-```shell
+```nu
 > $env.PROMPT_INDICATOR = "> "
 ```
 
@@ -402,7 +402,7 @@ Nushell 将尊重并使用 Mac、Linux 和 Windows 上的 `LS_COLORS` 环境变�
 
 使主题生效的关键是确保你在声明 `let config =` 行 _之前_，在`config.nu`文件中指定你要使用的所有主题和颜色：
 
-```shell
+```nu
 # let's define some colors
 
 let base00 = "#181818" # Default Background
@@ -488,7 +488,7 @@ let config = {
 
 Nushell 的默认配置文件包含一个浅色主题定义，如果你在浅色背景的终端上工作，你可以很容易地应用浅色主题：
 
-```shell
+```nu
 # in $nu.config-file
 $env.config = {
   ...
@@ -499,7 +499,7 @@ $env.config = {
 
 你只需要将 `$dark_theme` 替换为 `$light_theme` 就可以切换到浅色主题了：
 
-```shell
+```nu
 # in $nu.config-file
 $env.config = {
   ...

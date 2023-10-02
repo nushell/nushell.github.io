@@ -48,7 +48,7 @@ Feel free to download it if you want to follow these tests.
 The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 `dfr ls` command:
 
-```shell
+```nu
 ❯ let df = (dfr open .\Data7602DescendingYearOrder.csv)
 ❯ dfr ls
 
@@ -61,7 +61,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
 
-```shell
+```nu
 ❯ $df | dfr first
 ╭───┬──────────┬─────────┬──────┬───────────┬──────────╮
 │ # │ anzsic06 │  Area   │ year │ geo_count │ ec_count │
@@ -72,7 +72,7 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 
 ...and finally, we can get an idea of the inferred data types:
 
-```shell
+```nu
 ❯ $df | dfr dtypes
 ╭───┬───────────┬───────╮
 │ # │  column   │ dtype │
@@ -90,7 +90,7 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 Let's start by comparing loading times between the various methods. First, we
 will load the data using Nushell's [`open`](/commands/docs/open.md) command:
 
-```shell
+```nu
 ❯ timeit {open .\Data7602DescendingYearOrder.csv}
 30sec 479ms 614us 400ns
 ```
@@ -108,7 +108,7 @@ df = pd.read_csv("Data7602DescendingYearOrder.csv")
 
 And the benchmark for it is:
 
-```shell
+```nu
 ❯ timeit {python load.py}
 2sec 91ms 872us 900ns
 ```
@@ -118,7 +118,7 @@ That is a great improvement, from 30 seconds to 2 seconds. Nicely done, Pandas!
 Probably we can load the data a bit faster. This time we will use Nushell's
 `dfr open` command:
 
-```shell
+```nu
 ❯ timeit {dfr open .\Data7602DescendingYearOrder.csv}
 601ms 700us 700ns
 ```
@@ -138,7 +138,7 @@ use a large amount of memory. This may affect the performance of your system
 while this is being executed.
 :::
 
-```shell
+```nu
 ❯ timeit {
 	open .\Data7602DescendingYearOrder.csv
 	| group-by year
@@ -164,7 +164,7 @@ print(res)
 
 And the result from the benchmark is:
 
-```shell
+```nu
 ❯ timeit {python .\load.py}
 
 1sec 966ms 954us 800ns
@@ -176,7 +176,7 @@ To finish the comparison, let's try Nushell dataframes. We are going to put
 all the operations in one `nu` file, to make sure we are doing similar
 operations:
 
-```shell
+```nu
 let df = (dfr open Data7602DescendingYearOrder.csv)
 let res = ($df | dfr group-by year | dfr agg (dfr col geo_count | dfr sum))
 $res
@@ -184,7 +184,7 @@ $res
 
 and the benchmark with dataframes is:
 
-```shell
+```nu
 ❯ timeit {source load.nu}
 
 557ms 658us 500ns
@@ -206,7 +206,7 @@ CSV file that will become our sample dataframe that we will be using along with
 the examples. In your favorite file editor paste the next lines to create out
 sample csv file.
 
-```csv
+```
 int_1,int_2,float_1,float_2,first,second,third,word
 1,11,0.1,1.0,a,b,c,first
 2,12,0.2,1.0,a,b,c,second
@@ -226,7 +226,7 @@ the file will be called `test_small.csv`.
 Now, to read that file as a dataframe use the `dfr open` command like
 this:
 
-```shell
+```nu
 ❯ let df = (dfr open test_small.csv)
 ```
 
@@ -240,7 +240,7 @@ files.
 
 To see all the dataframes that are stored in memory you can use
 
-```shell
+```nu
 ❯ dfr ls
 ╭───┬──────┬─────────┬──────╮
 │ # │ name │ columns │ rows │
@@ -255,7 +255,7 @@ information about them.
 And if you want to see a preview of the loaded dataframe you can send the
 dataframe variable to the stream
 
-```shell
+```nu
 ❯ $df
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
@@ -286,7 +286,7 @@ can use `$nu.scope.commands | where category =~ dataframe`
 Let's start with basic aggregations on the dataframe. Let's sum all the columns
 that exist in `df` by using the `aggregate` command
 
-```shell
+```nu
 ❯ $df | dfr sum
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬──────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word │
@@ -299,7 +299,7 @@ As you can see, the aggregate function computes the sum for those columns where
 a sum makes sense. If you want to filter out the text column, you can select
 the columns you want by using the [`dfr select`](/commands/docs/dfr_select.md) command
 
-```shell
+```nu
 ❯ $df | dfr sum | dfr select int_1 int_2 float_1 float_2
 ╭───┬───────┬───────┬─────────┬─────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │
@@ -311,7 +311,7 @@ the columns you want by using the [`dfr select`](/commands/docs/dfr_select.md) c
 You can even store the result from this aggregation as you would store any
 other Nushell variable
 
-```shell
+```nu
 ❯ let res = ($df | dfr sum | dfr select int_1 int_2 float_1 float_2)
 ```
 
@@ -322,7 +322,7 @@ executed command. Note the space between ( and !!.
 
 And now we have two dataframes stored in memory
 
-```shell
+```nu
 ❯ dfr ls
 ╭───┬──────┬─────────┬──────╮
 │ # │ name │ columns │ rows │
@@ -355,7 +355,7 @@ int_1,int_2,float_1,float_2,first
 
 We use the `dfr open` command to create the new variable
 
-```shell
+```nu
 ❯ let df_a = (dfr open test_small_a.csv)
 ```
 
@@ -363,7 +363,7 @@ Now, with the second dataframe loaded in memory we can join them using the
 column called `int_1` from the left dataframe and the column `int_1` from the
 right dataframe
 
-```shell
+```nu
 ❯ $df | dfr join $df_a int_1 int_1
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────┬─────────┬───────────┬───────────┬─────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │ int_2_x │ float_1_x │ float_2_x │ first_x │
@@ -384,7 +384,7 @@ as long as they have the same type.
 
 For example:
 
-```
+```nu
 ❯ $df | dfr join $df_a [int_1 first] [int_1 first]
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────┬─────────┬───────────┬───────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │ int_2_x │ float_1_x │ float_2_x │
@@ -410,7 +410,7 @@ operations with the same group condition.
 
 To create a `GroupBy` object you only need to use the [`dfr_group-by`](/commands/docs/dfr_group-by.md) command
 
-```shell
+```nu
 ❯ let group = ($df | dfr group-by first)
 ❯ $group
 ╭─────────────┬──────────────────────────────────────────────╮
@@ -422,7 +422,7 @@ When printing the `GroupBy` object we can see that it is in the background a
 lazy operation waiting to be completed by adding an aggregation. Using the
 `GroupBy` we can create aggregations on a column
 
-```shell
+```nu
 ❯ $group | dfr agg (dfr col int_1 | dfr sum)
 ╭───┬───────┬───────╮
 │ # │ first │ int_1 │
@@ -435,7 +435,7 @@ lazy operation waiting to be completed by adding an aggregation. Using the
 
 or we can define multiple aggregations on the same or different columns
 
-```shell
+```nu
 ❯ $group | dfr agg [
 ∙ (dfr col int_1 | dfr n-unique)
 ∙ (dfr col int_2 | dfr min)
@@ -460,7 +460,7 @@ It is also possible to construct dataframes from basic Nushell primitives, such
 as integers, decimals, or strings. Let's create a small dataframe using the
 command `dfr into-df`.
 
-```shell
+```nu
 ❯ let a = ([[a b]; [1 2] [3 4] [5 6]] | dfr into-df)
 ❯ $a
 ```
@@ -473,7 +473,7 @@ a dataframe. This will change in the future, as the dataframe feature matures
 We can append columns to a dataframe in order to create a new variable. As an
 example, let's append two columns to our mini dataframe `$a`
 
-```shell
+```nu
 ❯ let a2 = ($a | dfr with-column $a.a --name a2 | dfr with-column $a.a --name a3)
 ❯ $a2
 ╭───┬───┬───┬────┬────╮
@@ -489,7 +489,7 @@ Nushell's powerful piping syntax allows us to create new dataframes by
 taking data from other dataframes and appending it to them. Now, if you list your
 dataframes you will see in total four dataframes
 
-```shell
+```nu
 ❯ dfr ls
 ╭───┬───────┬─────────┬──────╮
 │ # │ name  │ columns │ rows │
@@ -524,7 +524,7 @@ types, such as float, int or string.
 Let's start our exploration with Series by creating one using the `dfr into-df`
 command:
 
-```shell
+```nu
 ❯ let new = ([9 8 4] | dfr into-df)
 ❯ $new
 ╭───┬───╮
@@ -543,7 +543,7 @@ Series have their own basic operations defined, and they can be used to create
 other Series. Let's create a new Series by doing some arithmetic on the
 previously created column.
 
-```shell
+```nu
 ❯ let new_2 = ($new * 3 + 10)
 ❯ $new_2
 ╭───┬────╮
@@ -565,7 +565,7 @@ use `$nu.scope.vars`
 
 Let's rename our previous Series so it has a memorable name
 
-```shell
+```nu
 ❯ let new_2 = ($new_2 | dfr rename "0" memorable)
 ❯ $new_2
 ╭───┬───────────╮
@@ -580,7 +580,7 @@ Let's rename our previous Series so it has a memorable name
 We can also do basic operations with two Series as long as they have the same
 data type
 
-```shell
+```nu
 ❯ $new - $new_2
 ╭───┬─────────────────╮
 │ # │ sub_0_memorable │
@@ -593,7 +593,7 @@ data type
 
 And we can add them to previously defined dataframes
 
-```shell
+```nu
 ❯ let new_df = ($a | dfr with-column $new --name new_col)
 ❯ $new_df
 ╭───┬───┬───┬─────────╮
@@ -608,7 +608,7 @@ And we can add them to previously defined dataframes
 The Series stored in a Dataframe can also be used directly, for example,
 we can multiply columns `a` and `b` to create a new Series
 
-```shell
+```nu
 ❯ $new_df.a * $new_df.b
 ╭───┬─────────╮
 │ # │ mul_a_b │
@@ -621,7 +621,7 @@ we can multiply columns `a` and `b` to create a new Series
 
 and we can start piping things in order to create new columns and dataframes
 
-```shell
+```nu
 ❯ let $new_df = ($new_df | dfr with-column ($new_df.a * $new_df.b / $new_df.new_col) --name my_sum)
 ❯ $new_df
 ╭───┬───┬───┬─────────┬────────╮
@@ -641,7 +641,7 @@ Series have another key use in when working with `DataFrames`, and it is the fac
 that we can build boolean masks out of them. Let's start by creating a simple
 mask using the equality operator
 
-```shell
+```nu
 ❯ let mask = ($new == 8)
 ❯ $mask
 ╭───┬───────╮
@@ -655,7 +655,7 @@ mask using the equality operator
 
 and with this mask we can now filter a dataframe, like this
 
-```shell
+```nu
 ❯ $new_df | dfr filter-with $mask
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
@@ -668,7 +668,7 @@ Now we have a new dataframe with only the values where the mask was true.
 
 The masks can also be created from Nushell lists, for example:
 
-```shell
+```nu
 ❯ let mask1 = ([true true false] | dfr into-df)
 ❯ $new_df | dfr filter-with $mask1
 ╭───┬───┬───┬─────────┬────────╮
@@ -681,7 +681,7 @@ The masks can also be created from Nushell lists, for example:
 
 To create complex masks, we have the `AND`
 
-```shell
+```nu
 ❯ $mask and $mask1
 ╭───┬─────────╮
 │ # │ and_0_0 │
@@ -694,7 +694,7 @@ To create complex masks, we have the `AND`
 
 and `OR` operations
 
-```shell
+```nu
 ❯ $mask or $mask1
 ╭───┬────────╮
 │ # │ or_0_0 │
@@ -708,7 +708,7 @@ and `OR` operations
 We can also create a mask by checking if some values exist in other Series.
 Using the first dataframe that we created we can do something like this
 
-```shell
+```nu
 ❯ let mask3 = ($df | dfr col first | dfr is-in [b c])
 ❯ $mask3
 ╭──────────┬─────────────────────────────────────────────────────────────────────────────────────────────────╮
@@ -726,7 +726,7 @@ Using the first dataframe that we created we can do something like this
 
 and this new mask can be used to filter the dataframe
 
-```shell
+```nu
 ❯ $df | dfr filter-with $mask3
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
@@ -749,7 +749,7 @@ the value is equal to `a`
 This is example is not updated to recent Nushell versions.
 :::
 
-```shell
+```nu
 ❯ $df | dfr get first | dfr set new --mask ($df.first =~ a)
 ╭───┬────────╮
 │ # │ string │
@@ -774,7 +774,7 @@ list of indices. For example, let's say that we want to get rows 1, 4, and 6
 from our original dataframe. With that in mind, we can use the next command to
 extract that information
 
-```shell
+```nu
 ❯ let indices = ([1 4 6] | dfr into-df)
 ❯  $df | dfr take $indices
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
@@ -791,7 +791,7 @@ Let's say that we want to extract all rows for the first duplicated element for
 column `first`. In order to do that, we can use the command `dfr arg-unique` as
 shown in the next example
 
-```shell
+```nu
 ❯ let indices = ($df | dfr get first | dfr arg-unique)
 ❯ $df | dfr take $indices
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
@@ -811,7 +811,7 @@ can sort the dataframe by the column `word`
 The same result could be accomplished using the command [`sort`](/commands/docs/sort.md)
 :::
 
-```shell
+```nu
 ❯ let indices = ($df | dfr get word | dfr arg-sort)
 ❯ $df | dfr take $indices
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
@@ -833,7 +833,7 @@ The same result could be accomplished using the command [`sort`](/commands/docs/
 And finally, we can create new Series by setting a new value in the marked
 indices. Have a look at the next command
 
-```shell
+```nu
 ❯ let indices = ([0 2] | dfr into-df);
 ❯ $df | dfr get int_1 | dfr set-with-idx 123 --indices $indices
 ╭───┬───────╮
@@ -863,7 +863,7 @@ command calculates a count of the unique values that exist in a Series. For
 example, we can use it to count how many occurrences we have in the column
 `first`
 
-```shell
+```nu
 ❯ $df | dfr get first | dfr value-counts
 ╭───┬───────┬────────╮
 │ # │ first │ counts │
@@ -880,7 +880,7 @@ queries.
 Continuing with our exploration of `Series`, the next thing that we can do is
 to only get the unique unique values from a series, like this
 
-```shell
+```nu
 ❯ $df | dfr get first | dfr unique
 ╭───┬───────╮
 │ # │ first │
@@ -895,7 +895,7 @@ Or we can get a mask that we can use to filter out the rows where data is
 unique or duplicated. For example, we can select the rows for unique values
 in column `word`
 
-```shell
+```nu
 ❯ $df | dfr filter-with ($df | dfr get word | dfr is-unique)
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
@@ -907,7 +907,7 @@ in column `word`
 
 Or all the duplicated ones
 
-```shell
+```nu
 ❯ $df | dfr filter-with ($df | dfr get word | dfr is-duplicated)
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
@@ -933,7 +933,7 @@ operations.
 
 Let's create a small example of a lazy dataframe
 
-```shell
+```nu
 ❯ let a = ([[a b]; [1 a] [2 b] [3 c] [4 d]] | dfr into-lazy)
 ❯ $a
 ╭────────────────┬─────────────────────────────────────────────────────────╮
@@ -948,7 +948,7 @@ As you can see, the resulting dataframe is not yet evaluated, it stays as a
 set of instructions that can be done on the data. If you were to collect that
 dataframe you would get the next result
 
-```shell
+```nu
 ❯ $a | dfr collect
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -970,14 +970,14 @@ dataframes.
 
 To find all lazy dataframe operations you can use
 
-```shell
+```nu
 $nu.scope.commands | where category =~ lazyframe
 ```
 
 With your lazy frame defined we can start chaining operations on it. For
 example this
 
-```shell
+```nu
 ❯ $a |
 ∙ dfr reverse |
 ∙ dfr with-column [
@@ -1005,7 +1005,7 @@ frame. When put together they create the whole set of instructions used by the
 lazy commands to query the data. To list all the commands that generate an
 expression you can use
 
-```shell
+```nu
 $nu.scope.commands | where category =~ expression
 ```
 
@@ -1014,20 +1014,20 @@ will be multiplied by 2 and then it will be aliased to the name `double_a`.
 In some cases the use of the `dfr col` command can be inferred. For example,
 using the `dfr select` command we can use only a string
 
-```shell
+```nu
 > $a | dfr select a | dfr collect
 ```
 
 or the `dfr col` command
 
-```shell
+```nu
 > $a | dfr select (dfr col a) | dfr collect
 ```
 
 Let's try something more complicated and create aggregations from a lazy
 dataframe
 
-```shell
+```nu
 ❯ let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | dfr into-lazy )
 ❯ $a |
 ∙ dfr group-by name |
@@ -1046,7 +1046,7 @@ dataframe
 And we could join on a lazy dataframe that hasn't being collected. Let's join
 the resulting group by to the original lazy frame
 
-```shell
+```nu
 ❯ let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | dfr into-lazy )
 ❯ let group = ($a
 ∙ | dfr group-by name

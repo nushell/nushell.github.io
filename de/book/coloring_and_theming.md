@@ -16,7 +16,7 @@ Ein Hashtag in der Konfigurationsdatei kommentiert den danach folgenden Text aus
 Tabellen Rahmen werden mit der Einstellung `table_mode` in der `config.nu` konfiguriert.
 Hier ein Beispiel:
 
-```shell
+```nu
 > $env.config = {
     table_mode: rounded
 }
@@ -272,7 +272,7 @@ Hier die aktuelle Liste von Primitiven Typen. Nicht alle davon sind konfigurierb
 
 Hier ein kleines Beispiel, wie diese Werte angewendet werden können.
 
-```shell
+```nu
 > let config = {
     color_config: {
         separator: purple
@@ -297,7 +297,7 @@ Hier ein kleines Beispiel, wie diese Werte angewendet werden können.
 
 Hier ein anderes Beispiel, welches mehrere Farben Schreibweisen sowie Kommentare verwendet.
 
-```shell
+```nu
 > let config = {
     color_config: {
         separator: "#88b719" # Dies setzt nur die Vordergrundsfarbe wie in PR #486
@@ -351,7 +351,7 @@ Hier die aktuelle Formen Liste.
 
 Hier ein kleines Beispiel wie Farben auf diese Teile angewendet werden. Was nicht spezifiziert wird, erhält die Standardfarbe.
 
-```shell
+```nu
 > $env.config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
@@ -374,13 +374,13 @@ Der Nushell Prompt ist konfigurierbar mit diesen Umgebungsvariablen:
 
 Beispiel: Für einen einfachen Prompt wäre folgendes mögllich. Hinweis `PROMPT_COMMAND` benötigt einen `block` wogegen die anderen einen `string` erwarten.
 
-```shell
+```nu
 > $env.PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 Soll der standard `PROMPT_INDICATOR` geändert werden, sieht das so aus.
 
-```shell
+```nu
 > $env.PROMPT_INDICATOR = "> "
 ```
 
@@ -414,7 +414,7 @@ Dies ist nur ein Ausschnitt der `base16` Themes, welche im Internet weit verbrei
 
 Entscheidend damit Theming funktioniert ist, dass alle Farben und Themen in der `config.nu` definiert werden _bevor_ die `let config =` Zeile definiert wird.
 
-```shell
+```nu
 # Definition von einigen Farben
 
 let base00 = "#181818" # Standard Hinergrund

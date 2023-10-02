@@ -8,7 +8,7 @@ The `help` command is a good way to become familiar with all that Nu has to offe
 
 ### How to see all supported commands:
 
-```shell
+```nu
 > help commands
 ```
 
@@ -18,7 +18,7 @@ The `help` command is a good way to become familiar with all that Nu has to offe
 
 To find more specific information on a command, use `help <COMMAND>`. This works for regular commands (i.e. `http`) and subcommands (i.e. `http get`):
 
-```shell
+```nu
 > help http get
 ```
 

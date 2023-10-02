@@ -12,7 +12,7 @@ Many parts of Nushell's interface can have their color customized. All of these 
 
 Table borders are controlled by the `$env.config.table.mode` setting in `config.nu`. Here is an example:
 
-```shell
+```nu
 > $env.config = {
     table: {
         mode: rounded
@@ -268,7 +268,7 @@ This is the current list of primitives. Not all of these are configurable. The c
 
 Here's a small example of changing some of these values.
 
-```shell
+```nu
 > let config = {
     color_config: {
         separator: purple
@@ -293,7 +293,7 @@ Here's a small example of changing some of these values.
 
 Here's another small example using multiple color syntaxes with some comments.
 
-```shell
+```nu
 > let config = {
     color_config: {
         separator: "#88b719" # this sets only the foreground color like PR #486
@@ -347,7 +347,7 @@ Here's the current list of flat shapes.
 
 Here's a small example of how to apply color to these items. Anything not specified will receive the default color.
 
-```shell
+```nu
 > $env.config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
@@ -371,19 +371,19 @@ The Nushell prompt is configurable through these environment variables and confi
 
 Example: For a simple prompt one could do this. Note that `PROMPT_COMMAND` requires a `block` whereas the others require a `string`.
 
-```shell
+```nu
 > $env.PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 If you don't like the default `PROMPT_INDICATOR` you could change it like this.
 
-```shell
+```nu
 > $env.PROMPT_INDICATOR = "> "
 ```
 
 If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
 
-```
+```nu
 config {
     render_right_prompt_on_last_line = true
     ...
@@ -400,13 +400,13 @@ Each of the `PROMPT_*` variables has a corresponding `TRANSIENT_PROMPT_*` variab
 
 For example, if you want to make past prompts show up without a left prompt entirely and leave only the indicator, you can use:
 
-```shell
+```nu
 > $env.TRANSIENT_PROMPT_COMMAND = ""
 ```
 
 If you want to go back to the normal left prompt, you'll have to unset `TRANSIENT_PROMPT_COMMAND`:
 
-```shell
+```nu
 > hide-env TRANSIENT_PROMPT_COMMAND
 ```
 
@@ -430,7 +430,7 @@ Theming combines all the coloring above. Here's a quick example of one we put to
 
 The key to making theming work is to make sure you specify all themes and colors you're going to use in the `config.nu` file _before_ you declare the `let config = ` line.
 
-```shell
+```nu
 # let's define some colors
 
 let base00 = "#181818" # Default Background
@@ -516,7 +516,7 @@ if you want to go full-tilt on theming, you'll want to theme all the items I men
 
 Nushell's default config file contains a light theme definition, if you are working on a light background terminal, you can apply the light theme easily.
 
-```shell
+```nu
 # in $nu.config-path
 $env.config = {
   ...
@@ -527,7 +527,7 @@ $env.config = {
 
 You can just change it to light theme by replacing `$dark_theme` to `$light_theme`
 
-```shell
+```nu
 # in $nu.config-path
 $env.config = {
   ...
@@ -540,7 +540,7 @@ $env.config = {
 
 It's often desired to have the minimum amount of decorations when using a screen reader. In those cases, it's possible to disable borders and other decorations for both table and errors with the following options:
 
-```shell
+```nu
 # in $nu.config-path
 $env.config = {
   ...

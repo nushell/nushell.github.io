@@ -13,7 +13,7 @@ You should see the default overlay listed there.
 
 To create a new overlay, you first need a module:
 
-```
+```nu
 > module spam {
     export def foo [] {
         "foo"
@@ -37,7 +37,7 @@ We'll use this module throughout the chapter, so whenever you see `overlay use s
 
 To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
 
-```
+```nu
 > overlay use spam
 
 > foo
@@ -67,7 +67,7 @@ In the following sections, the `>` prompt will be preceded by the name of the la
 
 If you don't need the overlay definitions anymore, call [`overlay hide`](/commands/docs/overlay_remove.md):
 
-```
+```nu
 (spam)> overlay hide spam
 
 (zero)> foo
@@ -82,7 +82,7 @@ Error: Can't run executable...
 The overlays are also scoped.
 Any added overlays are removed at the end of the scope:
 
-```
+```nu
 (zero)> do { overlay use spam; foo }  # overlay is active only inside the block
 foo
 
@@ -98,7 +98,7 @@ The last way to remove an overlay is to call [`overlay hide`](/commands/docs/ove
 
 Any new definition (command, alias, environment variable) is recorded into the last active overlay:
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> def eggs [] { "eggs" }
@@ -107,7 +107,7 @@ Any new definition (command, alias, environment variable) is recorded into the l
 Now, the `eggs` command belongs to the `spam` overlay.
 If we remove the overlay, we can't call it anymore:
 
-```
+```nu
 (spam)> overlay hide spam
 
 (zero)> eggs
@@ -116,7 +116,7 @@ Error: Can't run executable...
 
 But we can bring it back!
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> eggs
@@ -130,7 +130,7 @@ This can let you repeatedly swap between different contexts.
 Sometimes, after adding an overlay, you might not want custom definitions to be added into it.
 The solution can be to create a new empty overlay that would be used just for recording the custom changes:
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> module scratchpad { }
@@ -144,7 +144,7 @@ The `eggs` command is added into `scratchpad` while keeping `spam` intact.
 
 To make it less verbose, you can use the [`overlay new`](/commands/docs/overlay_new.md) command:
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> overlay new scratchpad
@@ -160,7 +160,7 @@ The [`overlay use`](/commands/docs/overlay_use.md) command would take all comman
 However, you might want to keep them as subcommands behind the module's name.
 That's what `--prefix` is for:
 
-```
+```nu
 (zero)> module spam {
     export def foo [] { "foo" }
 }
@@ -177,7 +177,7 @@ Note that this does not apply for environment variables.
 
 You can change the name of the added overlay with the `as` keyword:
 
-```
+```nu
 (zero)> module spam { export def foo [] { "foo" } }
 
 (zero)> overlay use spam as eggs
@@ -196,7 +196,7 @@ This can be useful if you have a generic script name, such as virtualenv's `acti
 
 Sometimes, you might want to remove an overlay, but keep all the custom definitions you added without having to redefine them in the next active overlay:
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> def eggs [] { "eggs" }
@@ -211,7 +211,7 @@ The `--keep-custom` flag does exactly that.
 
 One can also keep a list of environment variables that were defined inside an overlay, but remove the rest, using the `--keep-env` flag:
 
-```
+```nu
 (zero)> module spam {
     export def foo [] { "foo" }
     export-env { $env.FOO = "foo" }
@@ -234,7 +234,7 @@ The overlays are arranged as a stack.
 If multiple overlays contain the same definition, say `foo`, the one from the last active one would take precedence.
 To bring an overlay to the top of the stack, you can call [`overlay use`](/commands/docs/overlay_use.md) again:
 
-```
+```nu
 (zero)> def foo [] { "foo-in-zero" }
 
 (zero)> overlay use spam

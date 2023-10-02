@@ -184,7 +184,7 @@
 
 我们可以使用[`merge`](/commands/docs/merge.md)命令将两个（或多个）表格合并在一起：
 
-```shell
+```nu
 > let $first = [[a b]; [1 2]]
 > let $second = [[c d]; [3 4]]
 > $first | merge { $second }
@@ -197,13 +197,13 @@
 
 让我们再加一个表格吧：
 
-```shell
+```nu
 > let $third = [[e f]; [5 6]]
 ```
 
 我们可以将以上三个表格合并在一起，操作如下：
 
-```shell
+```nu
 > $first | merge { $second } | merge { $third }
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
@@ -214,7 +214,7 @@
 
 或者我们可以使用[`reduce`](/commands/docs/reduce.md)命令来动态地合并所有的表格：
 
-```shell
+```nu
 > [$first $second $third] | reduce {|it, acc| $acc | merge { $it }}
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f

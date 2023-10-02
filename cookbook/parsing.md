@@ -8,7 +8,7 @@ Nu offers the ability to do some basic parsing.
 
 How to parse an arbitrary pattern from a string of text into a multi-column table.
 
-```shell
+```nu
 > cargo search shells --limit 10 | lines | parse "{crate_name} = {version} #{description}" | str trim
 ```
 

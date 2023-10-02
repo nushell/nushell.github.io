@@ -43,7 +43,7 @@ Operations are evaluated in the following order (from highest precedence to lowe
 
 - Parentheses (`()`)
 - Exponentiation/Power (`**`)
-- Multiply (`*`), Divide (`/`), Integer/Floor Division (`//`), and Modulo (`mod`) 
+- Multiply (`*`), Divide (`/`), Integer/Floor Division (`//`), and Modulo (`mod`)
 - Add (`+`) and Subtract (`-`)
 - Bit shifting (`bit-shl`, `bit-shr`)
 - Comparison operations (`==`, `!=`, `<`, `>`, `<=`, `>=`), membership tests (`in`, `not-in`, `starts-with`, `ends-with`), regex matching (`=~`, `!~`), and list appending (`++`)
@@ -64,7 +64,7 @@ Operations are evaluated in the following order (from highest precedence to lowe
 
 Not all operations make sense for all data types.
 If you attempt to perform an operation on non-compatible data types, you will be met with an error message that should explain what went wrong:
-```
+```nu
 > "spam" - 1
 Error: nu::parser::unsupported_operation (link)
 
@@ -90,7 +90,7 @@ The `=~` and `!~` operators provide a convenient way to evaluate [regular expres
 
 For example:
 
-```bash
+```nu
 foobarbaz =~ bar # returns true
 foobarbaz !~ bar # returns false
 ls | where name =~ ^nu # returns all files whose names start with "nu"
@@ -104,19 +104,19 @@ Operators are usually case-sensitive when operating on strings. There are a few 
 
 1. In the regular expression operators, specify the `(?i)` case-insensitive mode modifier:
 
-```bash
+```nu
 "FOO" =~ "foo" # returns false
 "FOO" =~ "(?i)foo" # returns true
 ```
 
 2. Use the [`str contains`](/commands/docs/str_contains.md) command's `--insensitive` flag:
 
-```bash
+```nu
 "FOO" | str contains --insensitive "foo"
 ```
 
 3. Convert strings to lowercase with [`str downcase`](/commands/docs/str_downcase.md) before comparing:
 
-```bash
+```nu
 ("FOO" | str downcase) == ("Foo" | str downcase)
 ```

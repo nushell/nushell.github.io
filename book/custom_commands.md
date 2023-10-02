@@ -6,7 +6,7 @@ This is where custom commands come in.
 
 An example definition of a custom command:
 
-```nushell
+```nu
 def greet [name] {
   ['hello' $name]
 }
@@ -20,7 +20,7 @@ In this definition, we define the `greet` command, which takes a single paramete
 
 To run the above, we can call it like we would call built-in commands:
 
-```
+```nu
 > greet "world"
 ```
 
@@ -36,7 +36,7 @@ As we do, we also get output just as we would with built-in commands:
 ::: tip
 If you want to generate a single string, you can use the string interpolation syntax to embed $name in it:
 
-```nushell
+```nu
 def greet [name] {
   $"hello ($name)"
 }
@@ -57,7 +57,7 @@ _Note: It's common practice in Nushell to separate the words of the command with
 
 You can also define subcommands to commands using a space. For example, if we wanted to add a new subcommand to [`str`](/commands/docs/str.md), we can create it by naming our subcommand to start with "str ". For example:
 
-```nushell
+```nu
 def "str mycommand" [] {
   "hello"
 }
@@ -65,13 +65,13 @@ def "str mycommand" [] {
 
 Now we can call our custom command as if it were a built-in subcommand of [`str`](/commands/docs/str.md):
 
-```
+```nu
 > str mycommand
 ```
 
 Of course, commands with spaces in their names are defined in the same way:
 
-```nushell
+```nu
 def "custom command" [] {
   "this is a custom command with a space in the name!"
 }
@@ -81,7 +81,7 @@ def "custom command" [] {
 
 When defining custom commands, you can name and optionally set the type for each parameter. For example, you can write the above as:
 
-```nushell
+```nu
 def greet [name: string] {
   $"hello ($name)"
 }
@@ -91,7 +91,7 @@ The types of parameters are optional. Nushell supports leaving them off and trea
 
 For example, let's say you wanted to take in an `int` instead:
 
-```nushell
+```nu
 def greet [name: int] {
   $"hello ($name)"
 }
@@ -140,7 +140,7 @@ The currently accepted types are (as of version 0.65.0):
 
 To make a parameter optional and directly provide a default value for it you can provide a default value in the command definition.
 
-```nushell
+```nu
 def greet [name = "nushell"] {
   $"hello ($name)"
 }
@@ -148,7 +148,7 @@ def greet [name = "nushell"] {
 
 You can call this command either without the parameter or with a value to override the default value:
 
-```
+```nu
 > greet
 hello nushell
 > greet world
@@ -157,7 +157,7 @@ hello world
 
 You can also combine a default value with a [type requirement](#parameter-types):
 
-```
+```nu
 def congratulate [age: int = 18] {
   $"Happy birthday! You are ($age) years old now!"
 }
@@ -169,7 +169,7 @@ If you want to check if an optional parameter is present or not and not just rel
 
 By default, positional parameters are required. If a positional parameter is not passed, we will encounter an error:
 
-```
+```nu
   × Missing required positional argument.
    ╭─[entry #23:1:1]
  1 │ greet
@@ -181,7 +181,7 @@ By default, positional parameters are required. If a positional parameter is not
 
 We can instead mark a positional parameter as optional by putting a question mark (`?`) after its name. For example:
 
-```nushell
+```nu
 def greet [name?: string] {
   $"hello ($name)"
 }
@@ -193,7 +193,7 @@ Making a positional parameter optional does not change its name when accessed in
 
 When an optional parameter is not passed, its value in the command body is equal to `null`. We can use this to act on the case where a parameter was not passed:
 
-```nushell
+```nu
 def greet [name?: string] {
   if ($name == null) {
     "hello, I don't know your name!"
@@ -215,7 +215,7 @@ In addition to passing positional parameters, you can also pass named parameters
 
 For example:
 
-```nushell
+```nu
 def greet [
   name: string
   --age: int
@@ -228,19 +228,19 @@ In the `greet` definition above, we define the `name` positional parameter as we
 
 You can call the above using:
 
-```
+```nu
 > greet world --age 10
 ```
 
 Or:
 
-```
+```nu
 > greet --age 10 world
 ```
 
 Or even leave the flag off altogether:
 
-```
+```nu
 > greet world
 ```
 
@@ -248,7 +248,7 @@ Flags can also be defined to have a shorthand version. This allows you to pass a
 
 Let's extend the previous example to use a shorthand flag for the `age` value:
 
-```nushell
+```nu
 def greet [
   name: string
   --age (-a): int
@@ -261,13 +261,13 @@ _Note:_ Flags are named by their longhand name, so the above example would need 
 
 Now, we can call this updated definition using the shorthand flag:
 
-```
+```nu
 > greet -a 10 hello
 ```
 
 Flags can also be used as basic switches. This means that their presence or absence is taken as an argument for the definition. Extending the previous example:
 
-```nushell
+```nu
 def greet [
   name: string
   --age (-a): int
@@ -283,19 +283,19 @@ def greet [
 
 And the definition can be either called as:
 
-```
+```nu
 > greet -a 10 --twice hello
 ```
 
 Or just without the switch flag:
 
-```
+```nu
 > greet -a 10 hello
 ```
 
-Flags can contain dashes. They can be accessed by replacing the dash with an underscore: 
+Flags can contain dashes. They can be accessed by replacing the dash with an underscore:
 
-```nushell
+```nu
 def greet [
   name: string
   --age (-a): int
@@ -313,7 +313,7 @@ def greet [
 
 There may be cases when you want to define a command which takes any number of positional arguments. We can do this with a rest parameter, using the following `...` syntax:
 
-```nushell
+```nu
 def greet [...name: string] {
   print "hello all:"
   for $n in $name {
@@ -328,7 +328,7 @@ We could call the above definition of the `greet` command with any number of arg
 
 Rest parameters can be used together with positional parameters:
 
-```
+```nu
 def greet [vip: string, ...name: string] {
   print $"hello to our VIP ($vip)"
   print "and hello to everybody else:"
@@ -348,7 +348,7 @@ In order to best help users of your custom commands, you can also document them 
 
 Taking our previous example:
 
-```nushell
+```nu
 def greet [
   name: string
   --age (-a): int
@@ -359,7 +359,7 @@ def greet [
 
 Once defined, we can run `help greet` to get the help information for the command:
 
-```
+```nu
 Usage:
   > greet <name> {flags}
 
@@ -375,7 +375,7 @@ You can see the parameter and flag that we defined, as well as the `-h` help fla
 
 To improve this help, we can add descriptions to our definition that will show up in the help:
 
-```nushell
+```nu
 # A greeting command that can greet the caller
 def greet [
   name: string      # The name of the person to greet
@@ -411,13 +411,13 @@ Flags:
 
 Custom commands stream their output just like built-in commands. For example, let's say we wanted to refactor this pipeline:
 
-```nushell
+```nu
 > ls | get name
 ```
 
 Let's move [`ls`](/commands/docs/ls.md) into a command that we've written:
 
-```nushell
+```nu
 def my-ls [] { ls }
 ```
 
@@ -440,7 +440,7 @@ Custom commands can also take input from the pipeline, just like other commands.
 
 Let's make our own command that doubles every value it receives as input:
 
-```nushell
+```nu
 def double [] {
   each { |it| 2 * $it }
 }
@@ -448,7 +448,7 @@ def double [] {
 
 Now, if we call the above command later in a pipeline, we can see what it does with the input:
 
-```
+```nu
 > [1 2 3] | double
 ───┬─────
  0 │ 2
@@ -459,7 +459,7 @@ Now, if we call the above command later in a pipeline, we can see what it does w
 
 We can also store the input for later use using the `$in` variable:
 
-```nushell
+```nu
 def nullify [...cols] {
   let start = $in
   $cols | reduce --fold $start { |col, df|
