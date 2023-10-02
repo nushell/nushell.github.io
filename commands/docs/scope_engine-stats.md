@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Show the stats on the current engine state
-```shell
+```nu
 > scope engine-stats
 
 ```

@@ -35,7 +35,7 @@ usage: |
 ## Examples
 
 Get a subbytes `0x[10 01]` from the bytes `0x[33 44 55 10 01 13]`
-```shell
+```nu
 >  0x[33 44 55 10 01 13] | bytes at 3..<4
 Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
 00000000:   10                                                   •
@@ -43,7 +43,7 @@ Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
 ```
 
 Get a subbytes `0x[10 01 13]` from the bytes `0x[33 44 55 10 01 13]`
-```shell
+```nu
 >  0x[33 44 55 10 01 13] | bytes at 3..6
 Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 00000000:   10 01 13                                             •••
@@ -51,7 +51,7 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 ```
 
 Get the remaining characters from a starting index
-```shell
+```nu
 >  { data: 0x[33 44 55 10 01 13] } | bytes at 3.. data
 ╭──────┬─────────────╮
 │ data │ [16, 1, 19] │
@@ -59,7 +59,7 @@ Get the remaining characters from a starting index
 ```
 
 Get the characters from the beginning until ending index
-```shell
+```nu
 >  0x[33 44 55 10 01 13] | bytes at ..<4
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 00000000:   33 44 55 10                                          3DU•
@@ -67,7 +67,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 ```
 
 Or the characters from the beginning until ending index inside a table
-```shell
+```nu
 >  [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes at 1.. ColB ColC
 ╭───┬──────────────┬──────────┬──────────╮
 │ # │     ColA     │   ColB   │   ColC   │

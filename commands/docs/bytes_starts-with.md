@@ -34,19 +34,19 @@ usage: |
 ## Examples
 
 Checks if binary starts with `0x[1F FF AA]`
-```shell
+```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[1F FF AA]
 true
 ```
 
 Checks if binary starts with `0x[1F]`
-```shell
+```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[1F]
 true
 ```
 
 Checks if binary starts with `0x[1F]`
-```shell
+```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[11]
 false
 ```

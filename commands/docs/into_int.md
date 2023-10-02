@@ -48,37 +48,37 @@ usage: |
 ## Examples
 
 Convert string to integer in table
-```shell
+```nu
 > [[num]; ['-5'] [4] [1.5]] | into int num
 
 ```
 
 Convert string to integer
-```shell
+```nu
 > '2' | into int
 2
 ```
 
 Convert float to integer
-```shell
+```nu
 > 5.9 | into int
 5
 ```
 
 Convert decimal string to integer
-```shell
+```nu
 > '5.9' | into int
 5
 ```
 
 Convert file size to integer
-```shell
+```nu
 > 4KB | into int
 4000
 ```
 
 Convert bool to integer
-```shell
+```nu
 > [false, true] | into int
 ╭───┬───╮
 │ 0 │ 0 │
@@ -88,37 +88,37 @@ Convert bool to integer
 ```
 
 Convert date to integer (Unix nanosecond timestamp)
-```shell
+```nu
 > 1983-04-13T12:09:14.123456789-05:00 | into int
 419101754123456789
 ```
 
 Convert to integer from binary
-```shell
+```nu
 > '1101' | into int -r 2
 13
 ```
 
 Convert to integer from hex
-```shell
+```nu
 > 'FF' |  into int -r 16
 255
 ```
 
 Convert octal string to integer
-```shell
+```nu
 > '0o10132' | into int
 4186
 ```
 
 Convert 0 padded string to integer
-```shell
+```nu
 > '0010132' | into int
 10132
 ```
 
 Convert 0 padded string to integer with radix
-```shell
+```nu
 > '0010132' | into int -r 8
 4186
 ```

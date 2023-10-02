@@ -32,19 +32,19 @@ usage: |
 ## Examples
 
 Outputs an XML string representing the contents of this table
-```shell
+```nu
 > {tag: note attributes: {} content : [{tag: remember attributes: {} content : [{tag: null attrs: null content : Event}]}]} | to xml
 <note><remember>Event</remember></note>
 ```
 
 When formatting xml null and empty record fields can be omitted and strings can be written without a wrapping record
-```shell
+```nu
 > {tag: note content : [{tag: remember content : [Event]}]} | to xml
 <note><remember>Event</remember></note>
 ```
 
 Optionally, formats the text with a custom indentation setting
-```shell
+```nu
 > {tag: note content : [{tag: remember content : [Event]}]} | to xml -p 3
 <note>
    <remember>Event</remember>

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Inverts boolean mask
-```shell
+```nu
 > [true false true] | dfr into-df | dfr not
 ╭───┬───────╮
 │ # │   0   │

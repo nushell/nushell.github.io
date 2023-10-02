@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Drop the first, second, and third row
-```shell
+```nu
 > [sam,sarah,2,3,4,5] | drop nth 0 1 2
 ╭───┬───╮
 │ 0 │ 3 │
@@ -44,7 +44,7 @@ Drop the first, second, and third row
 ```
 
 Drop the first, second, and third row
-```shell
+```nu
 > [0,1,2,3,4,5] | drop nth 0 1 2
 ╭───┬───╮
 │ 0 │ 3 │
@@ -55,7 +55,7 @@ Drop the first, second, and third row
 ```
 
 Drop rows 0 2 4
-```shell
+```nu
 > [0,1,2,3,4,5] | drop nth 0 2 4
 ╭───┬───╮
 │ 0 │ 1 │
@@ -66,7 +66,7 @@ Drop rows 0 2 4
 ```
 
 Drop rows 2 0 4
-```shell
+```nu
 > [0,1,2,3,4,5] | drop nth 2 0 4
 ╭───┬───╮
 │ 0 │ 1 │
@@ -77,7 +77,7 @@ Drop rows 2 0 4
 ```
 
 Drop range rows from second to fourth
-```shell
+```nu
 > [first second third fourth fifth] | drop nth (1..3)
 ╭───┬───────╮
 │ 0 │ first │
@@ -87,7 +87,7 @@ Drop range rows from second to fourth
 ```
 
 Drop all rows except first row
-```shell
+```nu
 > [0,1,2,3,4,5] | drop nth 1..
 ╭───┬───╮
 │ 0 │ 0 │
@@ -96,7 +96,7 @@ Drop all rows except first row
 ```
 
 Drop rows 3,4,5
-```shell
+```nu
 > [0,1,2,3,4,5] | drop nth 3..
 ╭───┬───╮
 │ 0 │ 0 │

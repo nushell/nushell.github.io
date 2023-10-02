@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Min value from columns in a dataframe
-```shell
+```nu
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr min
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -39,7 +39,7 @@ Min value from columns in a dataframe
 ```
 
 Min aggregation for a group-by
-```shell
+```nu
 > [[a b]; [one 2] [one 4] [two 1]]
     | dfr into-df
     | dfr group-by a

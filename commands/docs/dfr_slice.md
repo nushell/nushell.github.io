@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Create new dataframe from a slice of the rows
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr slice 0 1
 ╭───┬───┬───╮
 │ # │ a │ b │

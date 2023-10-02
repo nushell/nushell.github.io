@@ -34,13 +34,13 @@ usage: |
 ## Examples
 
 Reverse a single string
-```shell
+```nu
 > 'Nushell' | str reverse
 llehsuN
 ```
 
 Reverse multiple strings in a list
-```shell
+```nu
 > ['Nushell' 'is' 'cool'] | str reverse
 ╭───┬─────────╮
 │ 0 │ llehsuN │

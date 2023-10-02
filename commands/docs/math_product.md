@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Compute the product of a list of numbers
-```shell
+```nu
 > [2 3 3 4] | math product
 72
 ```

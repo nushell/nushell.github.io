@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Created a literal expression and converts it to a nu object
-```shell
+```nu
 > dfr lit 2 | dfr into-nu
 ╭───────┬─────────╮
 │ expr  │ literal │

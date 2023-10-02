@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Rename a column
-```shell
+```nu
 > [[a, b]; [1, 2]] | rename my_column
 ╭───┬───────────┬───╮
 │ # │ my_column │ b │
@@ -45,7 +45,7 @@ Rename a column
 ```
 
 Rename many columns
-```shell
+```nu
 > [[a, b, c]; [1, 2, 3]] | rename eggs ham bacon
 ╭───┬──────┬─────┬───────╮
 │ # │ eggs │ ham │ bacon │
@@ -56,7 +56,7 @@ Rename many columns
 ```
 
 Rename a specific column
-```shell
+```nu
 > [[a, b, c]; [1, 2, 3]] | rename -c [a ham]
 ╭───┬─────┬───┬───╮
 │ # │ ham │ b │ c │
@@ -67,7 +67,7 @@ Rename a specific column
 ```
 
 Rename the fields of a record
-```shell
+```nu
 > {a: 1 b: 2} | rename x y
 ╭───┬───╮
 │ x │ 1 │
@@ -76,7 +76,7 @@ Rename the fields of a record
 ```
 
 Rename fields based on a given closure
-```shell
+```nu
 > {abc: 1, bbc: 2} | rename -b {str replace -a 'b' 'z'}
 ╭─────┬───╮
 │ azc │ 1 │

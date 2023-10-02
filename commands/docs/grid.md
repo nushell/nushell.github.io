@@ -35,35 +35,35 @@ usage: |
 ## Examples
 
 Render a simple list to a grid
-```shell
+```nu
 > [1 2 3 a b c] | grid
 1 │ 2 │ 3 │ a │ b │ c
 
 ```
 
 The above example is the same as:
-```shell
+```nu
 > [1 2 3 a b c] | wrap name | grid
 1 │ 2 │ 3 │ a │ b │ c
 
 ```
 
 Render a record to a grid
-```shell
+```nu
 > {name: 'foo', b: 1, c: 2} | grid
 foo
 
 ```
 
 Render a list of records to a grid
-```shell
+```nu
 > [{name: 'A', v: 1} {name: 'B', v: 2} {name: 'C', v: 3}] | grid
 A │ B │ C
 
 ```
 
 Render a table with 'name' column in it to a grid
-```shell
+```nu
 > [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid
 0.1.0 │ 0.1.1 │ 0.2.0
 

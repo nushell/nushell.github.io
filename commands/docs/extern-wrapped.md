@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Define a custom wrapper for an external command
-```shell
+```nu
 > extern-wrapped my-echo [...rest] { echo $rest }; my-echo spam
 ╭───┬──────╮
 │ 0 │ spam │

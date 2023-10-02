@@ -37,31 +37,31 @@ usage: |
 ## Examples
 
 Save a string to foo.txt in the current directory
-```shell
+```nu
 > 'save me' | save foo.txt
 
 ```
 
 Append a string to the end of foo.txt
-```shell
+```nu
 > 'append me' | save --append foo.txt
 
 ```
 
 Save a record to foo.json in the current directory
-```shell
+```nu
 > { a: 1, b: 2 } | save foo.json
 
 ```
 
 Save a running program's stderr to foo.txt
-```shell
+```nu
 > do -i {} | save foo.txt --stderr foo.txt
 
 ```
 
 Save a running program's stderr to separate file
-```shell
+```nu
 > do -i {} | save foo.txt --stderr bar.txt
 
 ```

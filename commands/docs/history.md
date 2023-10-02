@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 Get current history length
-```shell
+```nu
 > history | length
 
 ```
 
 Show last 5 commands you have ran
-```shell
+```nu
 > history | last 5
 
 ```
 
 Search all the commands from history that contains 'cargo'
-```shell
+```nu
 > history | where command =~ cargo | get command
 
 ```

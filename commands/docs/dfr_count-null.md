@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Counts null values
-```shell
+```nu
 > let s = ([1 1 0 0 3 3 4] | dfr into-df);
     ($s / $s) | dfr count-null
 ╭───┬────────────╮

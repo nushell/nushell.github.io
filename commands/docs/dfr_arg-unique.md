@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Returns indexes for unique values
-```shell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr arg-unique
 ╭───┬────────────╮
 │ # │ arg_unique │

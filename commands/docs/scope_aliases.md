@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Show the aliases in the current scope
-```shell
+```nu
 > scope aliases
 
 ```

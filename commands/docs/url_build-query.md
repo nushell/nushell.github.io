@@ -28,19 +28,19 @@ usage: |
 ## Examples
 
 Outputs a query string representing the contents of this record
-```shell
+```nu
 > { mode:normal userid:31415 } | url build-query
 mode=normal&userid=31415
 ```
 
 Outputs a query string representing the contents of this 1-row table
-```shell
+```nu
 > [[foo bar]; ["1" "2"]] | url build-query
 foo=1&bar=2
 ```
 
 Outputs a query string representing the contents of this record
-```shell
+```nu
 > {a:"AT&T", b: "AT T"} | url build-query
 a=AT%26T&b=AT+T
 ```

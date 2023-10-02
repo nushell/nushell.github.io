@@ -32,31 +32,31 @@ usage: |
 ## Examples
 
 Open a text file with the default text editor
-```shell
+```nu
 > start file.txt
 
 ```
 
 Open an image with the default image viewer
-```shell
+```nu
 > start file.jpg
 
 ```
 
 Open the current directory with the default file manager
-```shell
+```nu
 > start .
 
 ```
 
 Open a pdf with the default pdf viewer
-```shell
+```nu
 > start file.pdf
 
 ```
 
 Open a website with default browser
-```shell
+```nu
 > start https://www.nushell.sh
 
 ```

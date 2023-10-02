@@ -34,31 +34,31 @@ usage: |
 ## Examples
 
 Append a filename to a path
-```shell
+```nu
 > '/home/viking' | path join spam.txt
 /home/viking/spam.txt
 ```
 
 Append a filename to a path
-```shell
+```nu
 > '/home/viking' | path join spams this_spam.txt
 /home/viking/spams/this_spam.txt
 ```
 
 Join a list of parts into a path
-```shell
+```nu
 > [ '/' 'home' 'viking' 'spam.txt' ] | path join
 /home/viking/spam.txt
 ```
 
 Join a structured path into a path
-```shell
+```nu
 > { parent: '/home/viking', stem: 'spam', extension: 'txt' } | path join
 /home/viking/spam.txt
 ```
 
 Join a table of structured paths into a list of paths
-```shell
+```nu
 > [[ parent stem extension ]; [ '/home/viking' 'spam' 'txt' ]] | path join
 ╭───┬───────────────────────╮
 │ 0 │ /home/viking/spam.txt │

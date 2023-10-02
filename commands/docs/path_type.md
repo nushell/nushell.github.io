@@ -28,13 +28,13 @@ usage: |
 ## Examples
 
 Show type of a filepath
-```shell
+```nu
 > '.' | path type
 dir
 ```
 
 Show type of a filepaths in a list
-```shell
+```nu
 > ls | get name | path type
 
 ```

@@ -35,7 +35,7 @@ usage: |
 ## Examples
 
 Return the distinct values of a list/table (remove duplicates so that each value occurs once only)
-```shell
+```nu
 > [2 3 3 4] | uniq
 ╭───┬───╮
 │ 0 │ 2 │
@@ -46,7 +46,7 @@ Return the distinct values of a list/table (remove duplicates so that each value
 ```
 
 Return the input values that occur more than once
-```shell
+```nu
 > [1 2 2] | uniq -d
 ╭───┬───╮
 │ 0 │ 2 │
@@ -55,7 +55,7 @@ Return the input values that occur more than once
 ```
 
 Return the input values that occur once only
-```shell
+```nu
 > [1 2 2] | uniq -u
 ╭───┬───╮
 │ 0 │ 1 │
@@ -64,7 +64,7 @@ Return the input values that occur once only
 ```
 
 Ignore differences in case when comparing input values
-```shell
+```nu
 > ['hello' 'goodbye' 'Hello'] | uniq -i
 ╭───┬─────────╮
 │ 0 │ hello   │
@@ -74,7 +74,7 @@ Ignore differences in case when comparing input values
 ```
 
 Return a table containing the distinct input values together with their counts
-```shell
+```nu
 > [1 2 2] | uniq -c
 ╭───┬───────┬───────╮
 │ # │ value │ count │

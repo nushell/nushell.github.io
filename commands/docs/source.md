@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Runs foo.nu in the current context
-```shell
+```nu
 > source foo.nu
 
 ```
 
 Runs foo.nu in current context and call the command defined, suppose foo.nu has content: `def say-hi [] { echo 'Hi!' }`
-```shell
+```nu
 > source ./foo.nu; say-hi
 
 ```

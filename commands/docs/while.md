@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Loop while a condition is true
-```shell
+```nu
 > mut x = 0; while $x < 10 { $x = $x + 1 }
 
 ```

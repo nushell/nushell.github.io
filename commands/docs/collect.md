@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Use the second value in the stream
-```shell
+```nu
 > [1 2 3] | collect { |x| $x.1 }
 2
 ```

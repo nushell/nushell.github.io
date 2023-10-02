@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Create a new parse-time constant.
-```shell
+```nu
 > const x = 10
 
 ```
 
 Create a composite constant value
-```shell
+```nu
 > const x = { a: 10, b: 20 }
 
 ```

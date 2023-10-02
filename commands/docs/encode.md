@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Encode an UTF-8 string into Shift-JIS
-```shell
+```nu
 > "負けると知って戦うのが、遥かに美しいのだ" | encode shift-jis
 Length: 40 (0x28) bytes | printable whitespace ascii_other non_ascii
 00000000:   95 89 82 af  82 e9 82 c6  92 6d 82 c1  82 c4 90 ed   ×××××××××m××××××
@@ -43,7 +43,7 @@ Length: 40 (0x28) bytes | printable whitespace ascii_other non_ascii
 ```
 
 Replace characters with HTML entities if they can't be encoded
-```shell
+```nu
 > "🎈" | encode -i shift-jis
 Length: 9 (0x9) bytes | printable whitespace ascii_other non_ascii
 00000000:   26 23 31 32  37 38 38 30  3b                         &#127880;

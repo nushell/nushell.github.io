@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Roll 1 dice with 6 sides each
-```shell
+```nu
 > random dice
 
 ```
 
 Roll 10 dice with 12 sides each
-```shell
+```nu
 > random dice -d 10 -s 12
 
 ```

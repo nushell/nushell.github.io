@@ -32,19 +32,19 @@ usage: |
 ## Examples
 
 Change to your home directory
-```shell
+```nu
 > cd ~
 
 ```
 
 Change to a directory via abbreviations
-```shell
+```nu
 > cd d/s/9
 
 ```
 
 Change to the previous working directory ($OLDPWD)
-```shell
+```nu
 > cd -
 
 ```

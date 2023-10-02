@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 show all externs
-```shell
+```nu
 > help externs
 
 ```
 
 show help for single extern
-```shell
+```nu
 > help externs smth
 
 ```
 
 search for string in extern names and usages
-```shell
+```nu
 > help externs --find smth
 
 ```

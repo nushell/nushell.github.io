@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Query dataframe using SQL
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr query 'select a from df'
 ╭───┬───╮
 │ # │ a │

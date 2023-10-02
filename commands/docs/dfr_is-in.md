@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Creates a is-in expression
-```shell
+```nu
 > let df = ([[a b]; [one 1] [two 2] [three 3]] | dfr into-df);
     $df | dfr with-column (dfr col a | dfr is-in [one two] | dfr as a_in)
 ╭───┬───────┬───┬───────╮

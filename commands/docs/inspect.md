@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Inspect pipeline results
-```shell
+```nu
 > ls | inspect | get name | inspect
 
 ```

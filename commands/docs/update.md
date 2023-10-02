@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Update a column value
-```shell
+```nu
 > {'name': 'nu', 'stars': 5} | update name 'Nushell'
 ╭───────┬─────────╮
 │ name  │ Nushell │
@@ -43,7 +43,7 @@ Update a column value
 ```
 
 Use in closure form for more involved updating logic
-```shell
+```nu
 > [[count fruit]; [1 'apple']] | enumerate | update item.count {|e| ($e.item.fruit | str length) + $e.index } | get item
 ╭───┬───────┬───────╮
 │ # │ count │ fruit │
@@ -54,7 +54,7 @@ Use in closure form for more involved updating logic
 ```
 
 Alter each value in the 'authors' column to use a single string instead of a list
-```shell
+```nu
 > [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|row| $row.authors | str join ','}
 ╭───┬─────────┬──────────────────╮
 │ # │ project │     authors      │
@@ -65,7 +65,7 @@ Alter each value in the 'authors' column to use a single string instead of a lis
 ```
 
 You can also use a simple command to update 'authors' to a single string
-```shell
+```nu
 > [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|| str join ','}
 ╭───┬─────────┬──────────────────╮
 │ # │ project │     authors      │

@@ -35,25 +35,25 @@ usage: |
 ## Examples
 
 Explore the system information record
-```shell
+```nu
 > sys | explore
 
 ```
 
 Explore the output of `ls` without column names
-```shell
+```nu
 > ls | explore --head false
 
 ```
 
 Explore a list of Markdown files' contents, with row indexes
-```shell
+```nu
 > glob *.md | each {|| open } | explore -i
 
 ```
 
 Explore a JSON file, then save the last visited sub-structure to a file
-```shell
+```nu
 > open file.json | explore -p | to json | save part.json
 
 ```

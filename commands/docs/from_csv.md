@@ -39,7 +39,7 @@ usage: |
 ## Examples
 
 Convert comma-separated data to a table
-```shell
+```nu
 > "ColA,ColB
 1,2" | from csv
 ╭───┬──────┬──────╮
@@ -51,37 +51,37 @@ Convert comma-separated data to a table
 ```
 
 Convert comma-separated data to a table, ignoring headers
-```shell
+```nu
 > open data.txt | from csv --noheaders
 
 ```
 
 Convert semicolon-separated data to a table
-```shell
+```nu
 > open data.txt | from csv --separator ';'
 
 ```
 
 Convert comma-separated data to a table, ignoring lines starting with '#'
-```shell
+```nu
 > open data.txt | from csv --comment '#'
 
 ```
 
 Convert comma-separated data to a table, dropping all possible whitespaces around header names and field values
-```shell
+```nu
 > open data.txt | from csv --trim all
 
 ```
 
 Convert comma-separated data to a table, dropping all possible whitespaces around header names
-```shell
+```nu
 > open data.txt | from csv --trim headers
 
 ```
 
 Convert comma-separated data to a table, dropping all possible whitespaces around field values
-```shell
+```nu
 > open data.txt | from csv --trim fields
 
 ```

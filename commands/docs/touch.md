@@ -37,37 +37,37 @@ usage: |
 ## Examples
 
 Creates "fixture.json"
-```shell
+```nu
 > touch fixture.json
 
 ```
 
 Creates files a, b and c
-```shell
+```nu
 > touch a b c
 
 ```
 
 Changes the last modified time of "fixture.json" to today's date
-```shell
+```nu
 > touch -m fixture.json
 
 ```
 
 Changes the last modified time of files a, b and c to a date
-```shell
+```nu
 > touch -m -d "yesterday" a b c
 
 ```
 
 Changes the last modified time of file d and e to "fixture.json"'s last modified time
-```shell
+```nu
 > touch -m -r fixture.json d e
 
 ```
 
 Changes the last accessed time of "fixture.json" to a date
-```shell
+```nu
 > touch -a -d "August 24, 2019; 12:30:30" fixture.json
 
 ```

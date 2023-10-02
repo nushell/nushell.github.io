@@ -37,13 +37,13 @@ usage: |
 ## Examples
 
 Get a substring "nushell" from the text "good nushell" using a range
-```shell
+```nu
 >  'good nushell' | str substring 5..12
 nushell
 ```
 
 Count indexes and split using grapheme clusters
-```shell
+```nu
 >  '🇯🇵ほげ ふが ぴよ' | str substring -g 4..6
 ふが
 ```

@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Get the arctangent of 1
-```shell
+```nu
 > 1 | math arctan
 0.7853981633974483
 ```
 
 Get the arctangent of -1 in degrees
-```shell
+```nu
 > -1 | math arctan -d
 -45
 ```

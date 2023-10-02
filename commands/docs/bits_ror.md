@@ -34,13 +34,13 @@ usage: |
 ## Examples
 
 Rotate right a number with 60 bits
-```shell
+```nu
 > 17 | bits ror 60
 272
 ```
 
 Rotate right a list of numbers of one byte
-```shell
+```nu
 > [15 33 92] | bits ror 2 -n '1'
 ╭───┬─────╮
 │ 0 │ 195 │

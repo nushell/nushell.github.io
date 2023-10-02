@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Returns string lengths
-```shell
+```nu
 > [a ab abc] | dfr into-df | dfr str-lengths
 ╭───┬───╮
 │ # │ 0 │

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Add an index to each element of a list
-```shell
+```nu
 > [a, b, c] | enumerate
 ╭───┬──────╮
 │ # │ item │

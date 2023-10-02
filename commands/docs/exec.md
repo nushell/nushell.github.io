@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Execute external 'ps aux' tool
-```shell
+```nu
 > exec ps aux
 
 ```
 
 Execute 'nautilus'
-```shell
+```nu
 > exec nautilus
 
 ```

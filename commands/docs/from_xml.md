@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Converts xml formatted string to record
-```shell
+```nu
 > '<?xml version="1.0" encoding="UTF-8"?>
 <note>
   <remember>Event</remember>

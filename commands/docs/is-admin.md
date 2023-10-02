@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Return 'iamroot' if nushell is running with admin/root privileges, and 'iamnotroot' if not.
-```shell
+```nu
 > if (is-admin) { "iamroot" } else { "iamnotroot" }
 iamnotroot
 ```

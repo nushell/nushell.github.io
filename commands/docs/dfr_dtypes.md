@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Dataframe dtypes
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr dtypes
 ╭───┬────────┬───────╮
 │ # │ column │ dtype │

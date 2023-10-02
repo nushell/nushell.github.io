@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Compute the square root of each number in a list
-```shell
+```nu
 > [9 16] | math sqrt
 ╭───┬───╮
 │ 0 │ 3 │

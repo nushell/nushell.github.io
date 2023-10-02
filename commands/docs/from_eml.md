@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Convert eml structured data into record
-```shell
+```nu
 > 'From: test@email.com
 Subject: Welcome
 To: someone@somewhere.com
@@ -52,7 +52,7 @@ Test' | from eml
 ```
 
 Convert eml structured data into record
-```shell
+```nu
 > 'From: test@email.com
 Subject: Welcome
 To: someone@somewhere.com

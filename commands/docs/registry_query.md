@@ -37,13 +37,13 @@ Currently supported only on Windows systems.
 ## Examples
 
 Query the HKEY_CURRENT_USER hive
-```shell
+```nu
 > registry query --hkcu environment
 
 ```
 
 Query the HKEY_LOCAL_MACHINE hive
-```shell
+```nu
 > registry query --hklm 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
 
 ```

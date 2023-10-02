@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Show the schema of a SQLite database
-```shell
+```nu
 > open foo.db | schema
 
 ```

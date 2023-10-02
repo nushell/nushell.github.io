@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Find if the 'myapp' application is available
-```shell
+```nu
 > which myapp
 
 ```

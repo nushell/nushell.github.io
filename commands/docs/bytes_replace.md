@@ -36,7 +36,7 @@ usage: |
 ## Examples
 
 Find and replace contents
-```shell
+```nu
 > 0x[10 AA FF AA FF] | bytes replace 0x[10 AA] 0x[FF]
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 00000000:   ff ff aa ff                                          ××××
@@ -44,7 +44,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 ```
 
 Find and replace all occurrences of find binary
-```shell
+```nu
 > 0x[10 AA 10 BB 10] | bytes replace -a 0x[10] 0x[A0]
 Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
 00000000:   a0 aa a0 bb  a0                                      ×××××
@@ -52,7 +52,7 @@ Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
 ```
 
 Find and replace all occurrences of find binary in table
-```shell
+```nu
 > [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes replace -a 0x[11] 0x[13] ColA ColC
 ╭───┬──────────────┬──────────────┬──────────────╮
 │ # │     ColA     │     ColB     │     ColC     │

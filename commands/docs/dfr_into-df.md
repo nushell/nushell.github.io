@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Takes a dictionary and creates a dataframe
-```shell
+```nu
 > [[a b];[1 2] [3 4]] | dfr into-df
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -40,7 +40,7 @@ Takes a dictionary and creates a dataframe
 ```
 
 Takes a list of tables and creates a dataframe
-```shell
+```nu
 > [[1 2 a] [3 4 b] [5 6 c]] | dfr into-df
 ╭───┬───┬───┬───╮
 │ # │ 0 │ 1 │ 2 │
@@ -53,7 +53,7 @@ Takes a list of tables and creates a dataframe
 ```
 
 Takes a list and creates a dataframe
-```shell
+```nu
 > [a b c] | dfr into-df
 ╭───┬───╮
 │ # │ 0 │
@@ -66,7 +66,7 @@ Takes a list and creates a dataframe
 ```
 
 Takes a list of booleans and creates a dataframe
-```shell
+```nu
 > [true true false] | dfr into-df
 ╭───┬───────╮
 │ # │   0   │

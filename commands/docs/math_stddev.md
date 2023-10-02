@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Compute the standard deviation of a list of numbers
-```shell
+```nu
 > [1 2 3 4 5] | math stddev
 1.4142135623730951
 ```
 
 Compute the sample standard deviation of a list of numbers
-```shell
+```nu
 > [1 2 3 4 5] | math stddev -s
 1.5811388300841898
 ```

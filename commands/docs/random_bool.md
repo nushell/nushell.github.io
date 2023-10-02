@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Generate a random boolean value
-```shell
+```nu
 > random bool
 
 ```
 
 Generate a random boolean value with a 75% chance of "true"
-```shell
+```nu
 > random bool --bias 0.75
 
 ```

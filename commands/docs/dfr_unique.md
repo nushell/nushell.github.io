@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Returns unique values from a series
-```shell
+```nu
 > [2 2 2 2 2] | dfr into-df | dfr unique
 ╭───┬───╮
 │ # │ 0 │
@@ -45,7 +45,7 @@ Returns unique values from a series
 ```
 
 Creates a is unique expression from a column
-```shell
+```nu
 > col a | unique
 
 ```

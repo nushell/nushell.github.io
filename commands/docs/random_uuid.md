@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Generate a random uuid4 string
-```shell
+```nu
 > random uuid
 
 ```

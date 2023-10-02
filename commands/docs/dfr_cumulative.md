@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Cumulative sum for a series
-```shell
+```nu
 > [1 2 3 4 5] | dfr into-df | dfr cumulative sum
 ╭───┬──────────────────╮
 │ # │ 0_cumulative_sum │

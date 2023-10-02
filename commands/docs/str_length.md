@@ -36,19 +36,19 @@ usage: |
 ## Examples
 
 Return the lengths of a string
-```shell
+```nu
 > 'hello' | str length
 5
 ```
 
 Count length using grapheme clusters
-```shell
+```nu
 > '🇯🇵ほげ ふが ぴよ' | str length -g
 9
 ```
 
 Return the lengths of multiple strings
-```shell
+```nu
 > ['hi' 'there'] | str length
 ╭───┬───╮
 │ 0 │ 2 │

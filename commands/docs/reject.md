@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Reject a column in the `ls` table
-```shell
+```nu
 > ls | reject modified
 
 ```
 
 Reject a column in a table
-```shell
+```nu
 > [[a, b]; [1, 2]] | reject a
 ╭───┬───╮
 │ # │ b │
@@ -49,7 +49,7 @@ Reject a column in a table
 ```
 
 Reject a row in a table
-```shell
+```nu
 > [[a, b]; [1, 2] [3, 4]] | reject 1
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -60,7 +60,7 @@ Reject a row in a table
 ```
 
 Reject the specified field in a record
-```shell
+```nu
 > {a: 1, b: 2} | reject a
 ╭───┬───╮
 │ b │ 2 │
@@ -68,7 +68,7 @@ Reject the specified field in a record
 ```
 
 Reject a nested field in a record
-```shell
+```nu
 > {a: {b: 3, c: 5}} | reject a.b
 ╭───┬───────────╮
 │   │ ╭───┬───╮ │
@@ -78,13 +78,13 @@ Reject a nested field in a record
 ```
 
 Reject columns by a provided list of columns
-```shell
+```nu
 > let cols = [size type];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject $cols
 
 ```
 
 Reject rows by a provided list of rows
-```shell
+```nu
 > let rows = [0 2];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb] [file.json json 3kb]] | reject $rows
 
 ```

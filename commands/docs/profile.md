@@ -35,7 +35,7 @@ usage: |
 ## Examples
 
 Profile some code, stepping into the `spam` command and collecting source.
-```shell
+```nu
 > def spam [] { "spam" }; profile {|| spam | str length } -d 2 --source
 
 ```

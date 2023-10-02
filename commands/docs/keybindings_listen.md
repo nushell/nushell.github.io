@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Type and see key event codes
-```shell
+```nu
 > keybindings listen
 
 ```

@@ -41,37 +41,37 @@ usage: |
 ## Examples
 
 Fill a string on the left side to a width of 15 with the character '─'
-```shell
+```nu
 > 'nushell' | fill -a l -c '─' -w 15
 nushell────────
 ```
 
 Fill a string on the right side to a width of 15 with the character '─'
-```shell
+```nu
 > 'nushell' | fill -a r -c '─' -w 15
 ────────nushell
 ```
 
 Fill a string on both sides to a width of 15 with the character '─'
-```shell
+```nu
 > 'nushell' | fill -a m -c '─' -w 15
 ────nushell────
 ```
 
 Fill a number on the left side to a width of 5 with the character '0'
-```shell
+```nu
 > 1 | fill --alignment right --character '0' --width 5
 00001
 ```
 
 Fill a number on both sides to a width of 5 with the character '0'
-```shell
+```nu
 > 1.1 | fill --alignment center --character '0' --width 5
 01.10
 ```
 
 Fill a filesize on the left side to a width of 5 with the character '0'
-```shell
+```nu
 > 1kib | fill --alignment middle --character '0' --width 10
 0001024000
 ```

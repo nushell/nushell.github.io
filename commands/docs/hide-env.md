@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Hide an environment variable
-```shell
+```nu
 > $env.HZ_ENV_ABC = 1; hide-env HZ_ENV_ABC; 'HZ_ENV_ABC' in (env).name
 false
 ```

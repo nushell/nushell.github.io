@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Fetch a rows from the dataframe
-```shell
+```nu
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr fetch 2
 ╭───┬───┬───╮
 │ # │ a │ b │

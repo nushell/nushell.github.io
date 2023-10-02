@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Creates slices from the strings
-```shell
+```nu
 > [abcded abc321 abc123] | dfr into-df | dfr str-slice 1 -l 2
 ╭───┬────╮
 │ # │ 0  │

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get the arcsinh of 0
-```shell
+```nu
 > 0 | math arcsinh
 0
 ```

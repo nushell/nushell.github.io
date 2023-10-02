@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Set environment variable by call a custom command
-```shell
+```nu
 > def-env foo [] { $env.BAR = "BAZ" }; foo; $env.BAR
 BAZ
 ```

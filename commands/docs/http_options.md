@@ -38,31 +38,31 @@ usage: |
 ## Examples
 
 Get options from example.com
-```shell
+```nu
 > http options https://www.example.com
 
 ```
 
 Get options from example.com, with username and password
-```shell
+```nu
 > http options -u myuser -p mypass https://www.example.com
 
 ```
 
 Get options from example.com, with custom header
-```shell
+```nu
 > http options -H [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Get options from example.com, with custom headers
-```shell
+```nu
 > http options -H [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 
 Simulate a browser cross-origin preflight request from www.example.com to media.example.com
-```shell
+```nu
 > http options https://media.example.com/api/ -H [Origin https://www.example.com Access-Control-Request-Headers "Content-Type, X-Custom-Header" Access-Control-Request-Method GET]
 
 ```

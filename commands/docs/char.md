@@ -36,39 +36,39 @@ usage: |
 ## Examples
 
 Output newline
-```shell
+```nu
 > char newline
 
 
 ```
 
 List available characters
-```shell
+```nu
 > char --list
 
 ```
 
 Output prompt character, newline and a hamburger menu character
-```shell
+```nu
 > (char prompt) + (char newline) + (char hamburger)
 ▶
 ≡
 ```
 
 Output Unicode character
-```shell
+```nu
 > char -u 1f378
 🍸
 ```
 
 Create Unicode from integer codepoint values
-```shell
+```nu
 > char -i (0x60 + 1) (0x60 + 2)
 ab
 ```
 
 Output multi-byte Unicode character
-```shell
+```nu
 > char -u 1F468 200D 1F466 200D 1F466
 👨‍👦‍👦
 ```

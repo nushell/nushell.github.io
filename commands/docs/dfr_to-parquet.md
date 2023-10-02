@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Saves dataframe to parquet file
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-parquet test.parquet
 
 ```

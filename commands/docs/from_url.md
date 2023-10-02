@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Convert url encoded string into a record
-```shell
+```nu
 > 'bread=baguette&cheese=comt%C3%A9&meat=ham&fat=butter' | from url
 ╭────────┬──────────╮
 │ bread  │ baguette │

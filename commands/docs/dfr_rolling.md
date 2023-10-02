@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Rolling sum for a series
-```shell
+```nu
 > [1 2 3 4 5] | dfr into-df | dfr rolling sum 2 | dfr drop-nulls
 ╭───┬───────────────╮
 │ # │ 0_rolling_sum │
@@ -47,7 +47,7 @@ Rolling sum for a series
 ```
 
 Rolling max for a series
-```shell
+```nu
 > [1 2 3 4 5] | dfr into-df | dfr rolling max 2 | dfr drop-nulls
 ╭───┬───────────────╮
 │ # │ 0_rolling_max │

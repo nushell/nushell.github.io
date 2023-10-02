@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Create a string from input
-```shell
+```nu
 > ['nu', 'shell'] | str join
 nushell
 ```
 
 Create a string from input with a separator
-```shell
+```nu
 > ['nu', 'shell'] | str join '-'
 nu-shell
 ```

@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Group the a list by pairs
-```shell
+```nu
 > [1 2 3 4] | group 2
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │

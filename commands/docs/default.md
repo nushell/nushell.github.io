@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 Give a default 'target' column to all file entries
-```shell
+```nu
 > ls -la | default 'nothing' target
 
 ```
 
 Get the env value of `MY_ENV` with a default value 'abc' if not present
-```shell
+```nu
 > $env | get -i MY_ENV | default 'abc'
 
 ```
 
 Replace the `null` value in a list
-```shell
+```nu
 > [1, 2, null, 4] | default 3
 ╭───┬───╮
 │ 0 │ 1 │

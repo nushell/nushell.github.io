@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Fills the null values by 0
-```shell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr shift 2 | dfr fill-null 0
 ╭───┬───╮
 │ # │ 0 │

@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Converts json formatted string to table
-```shell
+```nu
 > '{ "a": 1 }' | from json
 ╭───┬───╮
 │ a │ 1 │
@@ -40,7 +40,7 @@ Converts json formatted string to table
 ```
 
 Converts json formatted string to table
-```shell
+```nu
 > '{ "a": 1, "b": [1, 2] }' | from json
 ╭───┬───────────╮
 │ a │ 1         │

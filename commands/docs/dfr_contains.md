@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Returns boolean indicating if pattern was found
-```shell
+```nu
 > [abc acb acb] | dfr into-df | dfr contains ab
 ╭───┬───────╮
 │ # │   0   │

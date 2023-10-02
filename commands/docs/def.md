@@ -34,13 +34,13 @@ usage: |
 ## Examples
 
 Define a command and run it
-```shell
+```nu
 > def say-hi [] { echo 'hi' }; say-hi
 hi
 ```
 
 Define a command and run it with parameter(s)
-```shell
+```nu
 > def say-sth [sth: string] { echo $sth }; say-sth hi
 hi
 ```

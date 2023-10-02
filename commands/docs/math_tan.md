@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Apply the tangent to π/4
-```shell
+```nu
 > 3.141592 / 4 | math tan | math round --precision 4
 1
 ```
 
 Apply the tangent to a list of angles in degrees
-```shell
+```nu
 > [-45 0 45] | math tan -d
 ╭───┬───────╮
 │ 0 │ -1.00 │

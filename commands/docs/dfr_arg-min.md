@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Returns index for min value
-```shell
+```nu
 > [1 3 2] | dfr into-df | dfr arg-min
 ╭───┬─────────╮
 │ # │ arg_min │

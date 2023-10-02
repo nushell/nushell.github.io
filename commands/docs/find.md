@@ -39,19 +39,19 @@ usage: |
 ## Examples
 
 Search for multiple terms in a command output
-```shell
+```nu
 > ls | find toml md sh
 
 ```
 
 Search for a term in a string
-```shell
+```nu
 > 'Cargo.toml' | find toml
 Cargo.toml
 ```
 
 Search a number or a file size in a list of numbers
-```shell
+```nu
 > [1 5 3kb 4 3Mb] | find 5 3kb
 ╭───┬─────────╮
 │ 0 │       5 │
@@ -61,7 +61,7 @@ Search a number or a file size in a list of numbers
 ```
 
 Search a char in a list of string
-```shell
+```nu
 > [moe larry curly] | find l
 ╭───┬───────╮
 │ 0 │ larry │
@@ -71,7 +71,7 @@ Search a char in a list of string
 ```
 
 Find using regex
-```shell
+```nu
 > [abc bde arc abf] | find --regex "ab"
 ╭───┬─────╮
 │ 0 │ abc │
@@ -81,7 +81,7 @@ Find using regex
 ```
 
 Find using regex case insensitive
-```shell
+```nu
 > [aBc bde Arc abf] | find --regex "ab" -i
 ╭───┬─────╮
 │ 0 │ aBc │
@@ -91,7 +91,7 @@ Find using regex case insensitive
 ```
 
 Find value in records using regex
-```shell
+```nu
 > [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find -r "nu"
 ╭───┬─────────┬─────────╮
 │ # │ version │  name   │
@@ -102,7 +102,7 @@ Find value in records using regex
 ```
 
 Find inverted values in records using regex
-```shell
+```nu
 > [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find -r "nu" --invert
 ╭───┬─────────┬──────╮
 │ # │ version │ name │
@@ -114,7 +114,7 @@ Find inverted values in records using regex
 ```
 
 Find value in list using regex
-```shell
+```nu
 > [["Larry", "Moe"], ["Victor", "Marina"]] | find -r "rr"
 ╭───┬───────────────╮
 │ 0 │ ╭───┬───────╮ │
@@ -126,7 +126,7 @@ Find value in list using regex
 ```
 
 Find inverted values in records using regex
-```shell
+```nu
 > [["Larry", "Moe"], ["Victor", "Marina"]] | find -r "rr" --invert
 ╭───┬────────────────╮
 │ 0 │ ╭───┬────────╮ │
@@ -138,13 +138,13 @@ Find inverted values in records using regex
 ```
 
 Remove ANSI sequences from result
-```shell
+```nu
 > [[foo bar]; [abc 123] [def 456]] | find 123 | get bar | ansi strip
 
 ```
 
 Find and highlight text in specific columns
-```shell
+```nu
 > [[col1 col2 col3]; [moe larry curly] [larry curly moe]] | find moe -c [col1]
 ╭───┬──────┬───────┬───────╮
 │ # │ col1 │ col2  │ col3  │

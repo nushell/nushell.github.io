@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Describe the type of a string
-```shell
+```nu
 > 'let x = 3' | nu-highlight
 
 ```

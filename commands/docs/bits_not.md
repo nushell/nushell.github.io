@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Apply logical negation to a list of numbers
-```shell
+```nu
 > [4 3 2] | bits not
 ╭───┬─────────────────╮
 │ 0 │ 140737488355323 │
@@ -44,7 +44,7 @@ Apply logical negation to a list of numbers
 ```
 
 Apply logical negation to a list of numbers, treat input as 2 bytes number
-```shell
+```nu
 > [4 3 2] | bits not -n '2'
 ╭───┬───────╮
 │ 0 │ 65531 │
@@ -55,7 +55,7 @@ Apply logical negation to a list of numbers, treat input as 2 bytes number
 ```
 
 Apply logical negation to a list of numbers, treat input as signed number
-```shell
+```nu
 > [4 3 2] | bits not -s
 ╭───┬────╮
 │ 0 │ -5 │

@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Insert a new entry into a single record
-```shell
+```nu
 > {'name': 'nu', 'stars': 5} | insert alias 'Nushell'
 ╭───────┬─────────╮
 │ name  │ nu      │
@@ -44,7 +44,7 @@ Insert a new entry into a single record
 ```
 
 Insert a new column into a table, populating all rows
-```shell
+```nu
 > [[project, lang]; ['Nushell', 'Rust']] | insert type 'shell'
 ╭───┬─────────┬──────┬───────╮
 │ # │ project │ lang │ type  │
@@ -55,7 +55,7 @@ Insert a new column into a table, populating all rows
 ```
 
 Insert a column with values equal to their row index, plus the value of 'foo' in each row
-```shell
+```nu
 > [[foo]; [7] [8] [9]] | enumerate | insert bar {|e| $e.item.foo + $e.index } | flatten
 ╭───┬─────┬─────╮
 │ # │ foo │ bar │

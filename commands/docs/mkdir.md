@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Make a directory named foo
-```shell
+```nu
 > mkdir foo
 
 ```
 
 Make multiple directories and show the paths created
-```shell
+```nu
 > mkdir -v foo/bar foo2
 
 ```

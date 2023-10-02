@@ -39,37 +39,37 @@ usage: |
 ## Examples
 
 Returns index of string in input
-```shell
+```nu
 >  'my_library.rb' | str index-of '.rb'
 10
 ```
 
 Count length using grapheme clusters
-```shell
+```nu
 > '🇯🇵ほげ ふが ぴよ' | str index-of -g 'ふが'
 4
 ```
 
 Returns index of string in input within a`rhs open range`
-```shell
+```nu
 >  '.rb.rb' | str index-of '.rb' -r 1..
 3
 ```
 
 Returns index of string in input within a lhs open range
-```shell
+```nu
 >  '123456' | str index-of '6' -r ..4
 -1
 ```
 
 Returns index of string in input within a range
-```shell
+```nu
 >  '123456' | str index-of '3' -r 1..4
 2
 ```
 
 Returns index of string in input
-```shell
+```nu
 >  '/this/is/some/path/file.txt' | str index-of '/' -e
 18
 ```

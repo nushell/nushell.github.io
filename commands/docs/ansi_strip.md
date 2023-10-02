@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Strip ANSI escape sequences from a string
-```shell
+```nu
 > $'(ansi green)(ansi cursor_on)hello' | ansi strip
 hello
 ```

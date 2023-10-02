@@ -37,13 +37,13 @@ usage: |
 ## Examples
 
 Run an external command
-```shell
+```nu
 > run-external "echo" "-n" "hello"
 
 ```
 
 Redirect stdout from an external command into the pipeline
-```shell
+```nu
 > run-external --redirect-stdout "echo" "-n" "hello" | split chars
 
 ```

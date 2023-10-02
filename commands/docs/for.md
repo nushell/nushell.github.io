@@ -35,19 +35,19 @@ usage: |
 ## Examples
 
 Echo the square of each integer
-```shell
+```nu
 > for x in [1 2 3] { print ($x * $x) }
 
 ```
 
 Work with elements of a range
-```shell
+```nu
 > for $x in 1..3 { print $x }
 
 ```
 
 Number each item and echo a message
-```shell
+```nu
 > for $it in ['bob' 'fred'] --numbered { print $"($it.index) is ($it.item)" }
 
 ```

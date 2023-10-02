@@ -35,7 +35,7 @@ usage: |
 ## Examples
 
 Sort dataframe by one column
-```shell
+```nu
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr sort-by a
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -48,7 +48,7 @@ Sort dataframe by one column
 ```
 
 Sort column using two columns
-```shell
+```nu
 > [[a b]; [6 2] [1 1] [1 4] [2 4]] | dfr into-df | dfr sort-by [a b] -r [false true]
 ╭───┬───┬───╮
 │ # │ a │ b │

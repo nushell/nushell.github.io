@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 drop null values in dataframe
-```shell
+```nu
 > let df = ([[a b]; [1 2] [3 0] [1 2]] | dfr into-df);
     let res = ($df.b / $df.b);
     let a = ($df | dfr with-column $res --name res);
@@ -47,7 +47,7 @@ drop null values in dataframe
 ```
 
 drop null values in dataframe
-```shell
+```nu
 > let s = ([1 2 0 0 3 4] | dfr into-df);
     ($s / $s) | dfr drop-nulls
 ╭───┬─────────╮

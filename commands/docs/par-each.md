@@ -35,13 +35,13 @@ usage: |
 ## Examples
 
 Multiplies each number. Note that the list will become arbitrarily disordered.
-```shell
+```nu
 > [1 2 3] | par-each {|e| $e * 2 }
 
 ```
 
 Multiplies each number, keeping an original order
-```shell
+```nu
 > [1 2 3] | par-each --keep-order {|e| $e * 2 }
 ╭───┬───╮
 │ 0 │ 2 │
@@ -52,7 +52,7 @@ Multiplies each number, keeping an original order
 ```
 
 Enumerate and sort-by can be used to reconstruct the original order
-```shell
+```nu
 > 1..3 | enumerate | par-each {|p| update item ($p.item * 2)} | sort-by item | get item
 ╭───┬───╮
 │ 0 │ 2 │
@@ -63,7 +63,7 @@ Enumerate and sort-by can be used to reconstruct the original order
 ```
 
 Output can still be sorted afterward
-```shell
+```nu
 > [foo bar baz] | par-each {|e| $e + '!' } | sort
 ╭───┬──────╮
 │ 0 │ bar! │
@@ -74,7 +74,7 @@ Output can still be sorted afterward
 ```
 
 Iterate over each element, producing a list showing indexes of any 2s
-```shell
+```nu
 > [1 2 3] | enumerate | par-each { |e| if $e.item == 2 { $"found 2 at ($e.index)!"} }
 ╭───┬───────────────╮
 │ 0 │ found 2 at 1! │

@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Appends a dataframe as new columns
-```shell
+```nu
 > let a = ([[a b]; [1 2] [3 4]] | dfr into-df);
     $a | dfr append $a
 ╭───┬───┬───┬─────┬─────╮
@@ -46,7 +46,7 @@ Appends a dataframe as new columns
 ```
 
 Appends a dataframe merging at the end of columns
-```shell
+```nu
 > let a = ([[a b]; [1 2] [3 4]] | dfr into-df);
     $a | dfr append $a --col
 ╭───┬───┬───╮

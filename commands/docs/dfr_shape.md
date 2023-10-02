@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Shows row and column shape
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr shape
 ╭───┬──────┬─────────╮
 │ # │ rows │ columns │

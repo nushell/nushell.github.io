@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Modifies strings to lowercase
-```shell
+```nu
 > [Abc aBc abC] | dfr into-df | dfr lowercase
 ╭───┬─────╮
 │ # │  0  │

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Calculates value counts
-```shell
+```nu
 > [5 5 5 5 6 6] | dfr into-df | dfr value-counts
 ╭───┬───┬────────╮
 │ # │ 0 │ counts │

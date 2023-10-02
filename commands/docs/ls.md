@@ -39,49 +39,49 @@ usage: |
 ## Examples
 
 List visible files in the current directory
-```shell
+```nu
 > ls
 
 ```
 
 List visible files in a subdirectory
-```shell
+```nu
 > ls subdir
 
 ```
 
 List visible files with full path in the parent directory
-```shell
+```nu
 > ls -f ..
 
 ```
 
 List Rust files
-```shell
+```nu
 > ls *.rs
 
 ```
 
 List files and directories whose name do not contain 'bar'
-```shell
+```nu
 > ls -s | where name !~ bar
 
 ```
 
 List all dirs in your home directory
-```shell
+```nu
 > ls -a ~ | where type == dir
 
 ```
 
 List all dirs in your home directory which have not been modified in 7 days
-```shell
+```nu
 > ls -as ~ | where type == dir and modified < ((date now) - 7day)
 
 ```
 
 List given paths and show directories themselves
-```shell
+```nu
 > ['/path/to/directory' '/path/to/file'] | each {|| ls -D $in } | flatten
 
 ```

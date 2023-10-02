@@ -37,49 +37,49 @@ usage: |
 ## Examples
 
 Run the closure
-```shell
+```nu
 > do { echo hello }
 hello
 ```
 
 Run a stored first-class closure
-```shell
+```nu
 > let text = "I am enclosed"; let hello = {|| echo $text}; do $hello
 I am enclosed
 ```
 
 Run the closure and ignore both shell and external program errors
-```shell
+```nu
 > do -i { thisisnotarealcommand }
 
 ```
 
 Run the closure and ignore shell errors
-```shell
+```nu
 > do -s { thisisnotarealcommand }
 
 ```
 
 Run the closure and ignore external program errors
-```shell
+```nu
 > do -p { nu -c 'exit 1' }; echo "I'll still run"
 
 ```
 
 Abort the pipeline if a program returns a non-zero exit code
-```shell
+```nu
 > do -c { nu -c 'exit 1' } | myscarycommand
 
 ```
 
 Run the closure, with a positional parameter
-```shell
+```nu
 > do {|x| 100 + $x } 77
 177
 ```
 
 Run the closure, with input
-```shell
+```nu
 > 77 | do {|x| 100 + $in }
 
 ```

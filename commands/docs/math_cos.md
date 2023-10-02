@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Apply the cosine to π
-```shell
+```nu
 > 3.141592 | math cos | math round --precision 4
 -1
 ```
 
 Apply the cosine to a list of angles in degrees
-```shell
+```nu
 > [0 90 180 270 360] | math cos -d
 ╭───┬───────╮
 │ 0 │  1.00 │

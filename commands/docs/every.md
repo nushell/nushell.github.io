@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Get every second row
-```shell
+```nu
 > [1 2 3 4 5] | every 2
 ╭───┬───╮
 │ 0 │ 1 │
@@ -44,7 +44,7 @@ Get every second row
 ```
 
 Skip every second row
-```shell
+```nu
 > [1 2 3 4 5] | every 2 --skip
 ╭───┬───╮
 │ 0 │ 2 │

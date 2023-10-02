@@ -34,19 +34,19 @@ usage: |
 ## Examples
 
 Return a single value from a list
-```shell
+```nu
 > [1 2 3 4 5] | input list 'Rate it'
 
 ```
 
 Return multiple values from a list
-```shell
+```nu
 > [Banana Kiwi Pear Peach Strawberry] | input list -m 'Add fruits to the basket'
 
 ```
 
 Return a single record from a table with fuzzy search
-```shell
+```nu
 > ls | input list -f 'Select the target'
 
 ```

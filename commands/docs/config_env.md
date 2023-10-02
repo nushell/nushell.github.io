@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 allow user to open and update nu env
-```shell
+```nu
 > config env
 
 ```

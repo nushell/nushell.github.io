@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Splits string across multiple columns
-```shell
+```nu
 > 'a b c' | detect columns -n
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column0 │ column1 │ column2 │
@@ -45,25 +45,25 @@ Splits string across multiple columns
 ```
 
 
-```shell
+```nu
 > $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c 0..1
 
 ```
 
 Splits a multi-line string into columns with headers detected
-```shell
+```nu
 > $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c -2..-1
 
 ```
 
 Splits a multi-line string into columns with headers detected
-```shell
+```nu
 > $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c 2..
 
 ```
 
 Parse external ls command and combine columns for datetime
-```shell
+```nu
 > ^ls -lh | detect columns --no-headers --skip 1 --combine-columns 5..7
 
 ```

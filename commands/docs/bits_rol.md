@@ -34,13 +34,13 @@ usage: |
 ## Examples
 
 Rotate left a number with 2 bits
-```shell
+```nu
 > 17 | bits rol 2
 68
 ```
 
 Rotate left a list of numbers with 2 bits
-```shell
+```nu
 > [5 3 2] | bits rol 2
 ╭───┬────╮
 │ 0 │ 20 │

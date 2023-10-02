@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Filter out all records where 'Hello' is null (returns nothing)
-```shell
+```nu
 > [["Hello" "World"]; [null 3]] | compact Hello
 ╭────────────╮
 │ empty list │
@@ -40,7 +40,7 @@ Filter out all records where 'Hello' is null (returns nothing)
 ```
 
 Filter out all records where 'World' is null (Returns the table)
-```shell
+```nu
 > [["Hello" "World"]; [null 3]] | compact World
 ╭───┬───────┬───────╮
 │ # │ Hello │ World │
@@ -51,7 +51,7 @@ Filter out all records where 'World' is null (Returns the table)
 ```
 
 Filter out all instances of nothing from a list (Returns [1,2])
-```shell
+```nu
 > [1, null, 2] | compact
 ╭───┬───╮
 │ 0 │ 1 │

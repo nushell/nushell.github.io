@@ -35,19 +35,19 @@ usage: |
 ## Examples
 
 Convert duration string to duration value
-```shell
+```nu
 > '7min' | into duration
 7min
 ```
 
 Convert compound duration string to duration value
-```shell
+```nu
 > '1day 2hr 3min 4sec' | into duration
 1day 2hr 3min 4sec
 ```
 
 Convert table of duration strings to table of duration values
-```shell
+```nu
 > [[value]; ['1sec'] ['2min'] ['3hr'] ['4day'] ['5wk']] | into duration value
 ╭───┬───────╮
 │ # │ value │
@@ -62,19 +62,19 @@ Convert table of duration strings to table of duration values
 ```
 
 Convert duration to duration
-```shell
+```nu
 > 420sec | into duration
 7min
 ```
 
 Convert a number of ns to duration
-```shell
+```nu
 > 1_234_567 | into duration
 1ms 234µs 567ns
 ```
 
 Convert a number of an arbitrary unit to duration
-```shell
+```nu
 > 1_234 | into duration --unit ms
 1sec 234ms
 ```

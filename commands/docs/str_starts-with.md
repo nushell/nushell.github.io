@@ -36,25 +36,25 @@ usage: |
 ## Examples
 
 Checks if input string starts with 'my'
-```shell
+```nu
 > 'my_library.rb' | str starts-with 'my'
 true
 ```
 
 Checks if input string starts with 'Car'
-```shell
+```nu
 > 'Cargo.toml' | str starts-with 'Car'
 true
 ```
 
 Checks if input string starts with '.toml'
-```shell
+```nu
 > 'Cargo.toml' | str starts-with '.toml'
 false
 ```
 
 Checks if input string starts with 'cargo', case-insensitive
-```shell
+```nu
 > 'Cargo.toml' | str starts-with -i 'cargo'
 true
 ```

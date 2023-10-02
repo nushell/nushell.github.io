@@ -33,25 +33,25 @@ usage: |
 ## Examples
 
 Set the MYENV environment variable
-```shell
+```nu
 > with-env [MYENV "my env value"] { $env.MYENV }
 my env value
 ```
 
 Set by primitive value list
-```shell
+```nu
 > with-env [X Y W Z] { $env.X }
 Y
 ```
 
 Set by single row table
-```shell
+```nu
 > with-env [[X W]; [Y Z]] { $env.W }
 Z
 ```
 
 Set by key-value record
-```shell
+```nu
 > with-env {X: "Y", W: "Z"} { [$env.X $env.W] }
 ╭───┬───╮
 │ 0 │ Y │

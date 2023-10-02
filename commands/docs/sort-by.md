@@ -35,19 +35,19 @@ usage: |
 ## Examples
 
 Sort files by modified date
-```shell
+```nu
 > ls | sort-by modified
 
 ```
 
 Sort files by name (case-insensitive)
-```shell
+```nu
 > ls | sort-by name -i
 
 ```
 
 Sort a table by a column (reversed order)
-```shell
+```nu
 > [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit -r
 ╭───┬────────┬───────╮
 │ # │ fruit  │ count │

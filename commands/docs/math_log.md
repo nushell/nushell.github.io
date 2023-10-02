@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Get the logarithm of 100 to the base 10
-```shell
+```nu
 > 100 | math log 10
 2
 ```
 
 Get the log2 of a list of values
-```shell
+```nu
 > [16 8 4] | math log 2
 ╭───┬──────╮
 │ 0 │ 4.00 │

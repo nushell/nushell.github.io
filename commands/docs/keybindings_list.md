@@ -36,19 +36,19 @@ usage: |
 ## Examples
 
 Get list of key modifiers
-```shell
+```nu
 > keybindings list -m
 
 ```
 
 Get list of reedline events and edit commands
-```shell
+```nu
 > keybindings list -e -d
 
 ```
 
 Get list with all the available options
-```shell
+```nu
 > keybindings list
 
 ```

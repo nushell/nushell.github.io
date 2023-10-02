@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Listen for a keyboard shortcut and find out how nu receives it
-```shell
+```nu
 > input listen --types [key]
 
 ```

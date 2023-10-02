@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Converts yaml formatted string to table
-```shell
+```nu
 > 'a: 1' | from yaml
 ╭───┬───╮
 │ a │ 1 │
@@ -36,7 +36,7 @@ Converts yaml formatted string to table
 ```
 
 Converts yaml formatted string to table
-```shell
+```nu
 > '[ a: 1, b: [1, 2] ]' | from yaml
 ╭───┬────┬───────────╮
 │ # │ a  │     b     │

@@ -34,13 +34,13 @@ usage: |
 ## Examples
 
 Shift right a number with 2 bits
-```shell
+```nu
 > 8 | bits shr 2
 2
 ```
 
 Shift right a list of numbers
-```shell
+```nu
 > [15 35 2] | bits shr 2
 ╭───┬───╮
 │ 0 │ 3 │

@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Convert binary .xlsx data to a table
-```shell
+```nu
 > open --raw test.xlsx | from xlsx
 
 ```
 
 Convert binary .xlsx data to a table, specifying the tables
-```shell
+```nu
 > open --raw test.xlsx | from xlsx -s [Spreadsheet1]
 
 ```

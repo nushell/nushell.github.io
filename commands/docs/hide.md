@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Hide the alias just defined
-```shell
+```nu
 > alias lll = ls -l; hide lll
 
 ```
 
 Hide a custom command
-```shell
+```nu
 > def say-hi [] { echo 'Hi!' }; hide say-hi
 
 ```

@@ -29,7 +29,7 @@ usage: |
 ## Examples
 
 Compute the average of a list of numbers
-```shell
+```nu
 > [-50 100.0 25] | math avg
 25
 ```

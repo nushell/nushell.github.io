@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Saves dataframe to avro file
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-avro test.avro
 
 ```

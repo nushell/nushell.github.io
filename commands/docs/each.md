@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Multiplies elements in the list
-```shell
+```nu
 > [1 2 3] | each {|e| 2 * $e }
 ╭───┬───╮
 │ 0 │ 2 │
@@ -45,7 +45,7 @@ Multiplies elements in the list
 ```
 
 Produce a list of values in the record, converted to string
-```shell
+```nu
 > {major:2, minor:1, patch:4} | values | each {|| into string }
 ╭───┬───╮
 │ 0 │ 2 │
@@ -56,7 +56,7 @@ Produce a list of values in the record, converted to string
 ```
 
 Produce a list that has "two" for each 2 in the input
-```shell
+```nu
 > [1 2 3 2] | each {|e| if $e == 2 { "two" } }
 ╭───┬─────╮
 │ 0 │ two │
@@ -66,7 +66,7 @@ Produce a list that has "two" for each 2 in the input
 ```
 
 Iterate over each element, producing a list showing indexes of any 2s
-```shell
+```nu
 > [1 2 3] | enumerate | each {|e| if $e.item == 2 { $"found 2 at ($e.index)!"} }
 ╭───┬───────────────╮
 │ 0 │ found 2 at 1! │
@@ -75,7 +75,7 @@ Iterate over each element, producing a list showing indexes of any 2s
 ```
 
 Iterate over each element, keeping null results
-```shell
+```nu
 > [1 2 3] | each --keep-empty {|e| if $e == 2 { "found 2!"} }
 ╭───┬──────────╮
 │ 0 │          │

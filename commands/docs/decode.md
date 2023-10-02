@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Decode the output of an external command
-```shell
+```nu
 > ^cat myfile.q | decode utf-8
 
 ```
 
 Decode an UTF-16 string into nushell UTF-8 string
-```shell
+```nu
 > 0x[00 53 00 6F 00 6D 00 65 00 20 00 44 00 61 00 74 00 61] | decode utf-16be
 Some Data
 ```

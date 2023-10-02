@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Show the modules in the current scope
-```shell
+```nu
 > scope modules
 
 ```

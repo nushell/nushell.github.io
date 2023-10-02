@@ -42,25 +42,25 @@ usage: |
 ## Examples
 
 Post content to example.com
-```shell
+```nu
 > http post https://www.example.com 'body'
 
 ```
 
 Post content to example.com, with username and password
-```shell
+```nu
 > http post -u myuser -p mypass https://www.example.com 'body'
 
 ```
 
 Post content to example.com, with custom header
-```shell
+```nu
 > http post -H [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Post content to example.com, with JSON body
-```shell
+```nu
 > http post -t application/json https://www.example.com { field: value }
 
 ```

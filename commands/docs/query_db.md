@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Execute SQL against a SQLite database
-```shell
+```nu
 > open foo.db | query db "SELECT * FROM Bar"
 
 ```

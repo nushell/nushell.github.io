@@ -37,19 +37,19 @@ usage: |
 ## Examples
 
 Check if input contains string
-```shell
+```nu
 > 'my_library.rb' | str contains '.rb'
 true
 ```
 
 Check if input contains string case insensitive
-```shell
+```nu
 > 'my_library.rb' | str contains -i '.RB'
 true
 ```
 
 Check if input contains string in a record
-```shell
+```nu
 > { ColA: test, ColB: 100 } | str contains 'e' ColA
 ╭──────┬──────╮
 │ ColA │ true │
@@ -58,7 +58,7 @@ Check if input contains string in a record
 ```
 
 Check if input contains string in a table
-```shell
+```nu
 >  [[ColA ColB]; [test 100]] | str contains -i 'E' ColA
 ╭───┬──────┬──────╮
 │ # │ ColA │ ColB │
@@ -69,7 +69,7 @@ Check if input contains string in a table
 ```
 
 Check if input contains string in a table
-```shell
+```nu
 >  [[ColA ColB]; [test hello]] | str contains 'e' ColA ColB
 ╭───┬──────┬──────╮
 │ # │ ColA │ ColB │
@@ -80,13 +80,13 @@ Check if input contains string in a table
 ```
 
 Check if input string contains 'banana'
-```shell
+```nu
 > 'hello' | str contains 'banana'
 false
 ```
 
 Check if list contains string
-```shell
+```nu
 > [one two three] | str contains o
 ╭───┬───────╮
 │ 0 │ true  │
@@ -97,7 +97,7 @@ Check if list contains string
 ```
 
 Check if list does not contain string
-```shell
+```nu
 > [one two three] | str contains -n o
 ╭───┬───────╮
 │ 0 │ false │

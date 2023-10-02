@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Reverse bytes `0x[1F FF AA AA]`
-```shell
+```nu
 > 0x[1F FF AA AA] | bytes reverse
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 00000000:   aa aa ff 1f                                          ×××•
@@ -41,7 +41,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 ```
 
 Reverse bytes `0x[FF AA AA]`
-```shell
+```nu
 > 0x[FF AA AA] | bytes reverse
 Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 00000000:   aa aa ff                                             ×××

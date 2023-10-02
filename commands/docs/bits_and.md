@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Apply bits and to two numbers
-```shell
+```nu
 > 2 | bits and 2
 2
 ```
 
 Apply logical and to a list of numbers
-```shell
+```nu
 > [4 3 2] | bits and 2
 ╭───┬───╮
 │ 0 │ 0 │

@@ -32,19 +32,19 @@ usage: |
 ## Examples
 
 Times a command within a closure
-```shell
+```nu
 > timeit { sleep 500ms }
 
 ```
 
 Times a command using an existing input
-```shell
+```nu
 > http get https://www.nushell.sh/book/ | timeit { split chars }
 
 ```
 
 Times a command invocation
-```shell
+```nu
 > timeit ls -la
 
 ```

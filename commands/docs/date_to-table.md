@@ -28,19 +28,19 @@ usage: |
 ## Examples
 
 Convert the current date into a table.
-```shell
+```nu
 > date to-table
 
 ```
 
 Convert the date into a table.
-```shell
+```nu
 > date now | date to-table
 
 ```
 
 Convert a given date into a table.
-```shell
+```nu
 > 2020-04-12T22:10:57.000000789+02:00 | date to-table
 ╭───┬──────┬───────┬─────┬──────┬────────┬────────┬────────────┬──────────╮
 │ # │ year │ month │ day │ hour │ minute │ second │ nanosecond │ timezone │
@@ -51,7 +51,7 @@ Convert a given date into a table.
 ```
 
 Convert a given date into a table.
-```shell
+```nu
 > '2020-04-12 22:10:57 +0200' | into datetime | date to-table
 ╭───┬──────┬───────┬─────┬──────┬────────┬────────┬────────────┬──────────╮
 │ # │ year │ month │ day │ hour │ minute │ second │ nanosecond │ timezone │

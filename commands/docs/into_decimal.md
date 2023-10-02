@@ -37,7 +37,7 @@ usage: |
 ## Examples
 
 Convert string to float in table
-```shell
+```nu
 > [[num]; ['5.01']] | into decimal num
 ╭───┬──────╮
 │ # │ num  │
@@ -48,13 +48,13 @@ Convert string to float in table
 ```
 
 Convert string to float
-```shell
+```nu
 > '1.345' | into decimal
 1.345
 ```
 
 Coerce list of ints and floats to float
-```shell
+```nu
 > [4 -5.9] | into decimal
 ╭───┬───────╮
 │ 0 │  4.00 │
@@ -64,7 +64,7 @@ Coerce list of ints and floats to float
 ```
 
 Convert boolean to float
-```shell
+```nu
 > true | into decimal
 1
 ```

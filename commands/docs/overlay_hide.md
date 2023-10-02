@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Keep a custom command after hiding the overlay
-```shell
+```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam
     def bar [] { "bar" }
@@ -45,7 +45,7 @@ Keep a custom command after hiding the overlay
 ```
 
 Hide an overlay created from a file
-```shell
+```nu
 > 'export alias f = "foo"' | save spam.nu
     overlay use spam.nu
     overlay hide spam
@@ -53,7 +53,7 @@ Hide an overlay created from a file
 ```
 
 Hide the last activated overlay
-```shell
+```nu
 > module spam { export-env { $env.FOO = "foo" } }
     overlay use spam
     overlay hide
@@ -61,7 +61,7 @@ Hide the last activated overlay
 ```
 
 Keep the current working directory when removing an overlay
-```shell
+```nu
 > overlay new spam
     cd some-dir
     overlay hide --keep-env [ PWD ] spam

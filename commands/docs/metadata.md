@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Get the metadata of a variable
-```shell
+```nu
 > let a = 42; metadata $a
 
 ```
 
 Get the metadata of the input
-```shell
+```nu
 > ls | metadata
 
 ```

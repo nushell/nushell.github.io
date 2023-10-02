@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Filter items of a list according to a condition
-```shell
+```nu
 > [1 2] | filter {|x| $x > 1}
 ╭───┬───╮
 │ 0 │ 2 │
@@ -42,7 +42,7 @@ Filter items of a list according to a condition
 ```
 
 Filter rows of a table according to a condition
-```shell
+```nu
 > [{a: 1} {a: 2}] | filter {|x| $x.a > 1}
 ╭───┬───╮
 │ # │ a │
@@ -53,7 +53,7 @@ Filter rows of a table according to a condition
 ```
 
 Filter rows of a table according to a stored condition
-```shell
+```nu
 > let cond = {|x| $x.a > 1}; [{a: 1} {a: 2}] | filter $cond
 ╭───┬───╮
 │ # │ a │
@@ -64,7 +64,7 @@ Filter rows of a table according to a stored condition
 ```
 
 Filter items of a range according to a condition
-```shell
+```nu
 > 9..13 | filter {|el| $el mod 2 != 0}
 ╭───┬────╮
 │ 0 │  9 │
@@ -75,7 +75,7 @@ Filter items of a range according to a condition
 ```
 
 List all numbers above 3, using an existing closure condition
-```shell
+```nu
 > let a = {$in > 3}; [1, 2, 5, 6] | filter $a
 
 ```

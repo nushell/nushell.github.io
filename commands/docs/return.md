@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Return early
-```shell
+```nu
 > def foo [] { return }
 
 ```

@@ -36,13 +36,13 @@ usage: |
 ## Examples
 
 Sample rows from dataframe
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr sample -n 1
 
 ```
 
 Shows sample row using fraction and replace
-```shell
+```nu
 > [[a b]; [1 2] [3 4] [5 6]] | dfr into-df | dfr sample -f 0.5 -e
 
 ```

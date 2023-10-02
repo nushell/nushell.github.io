@@ -37,19 +37,19 @@ usage: |
 ## Examples
 
 This month's calendar
-```shell
+```nu
 > cal
 
 ```
 
 The calendar for all of 2012
-```shell
+```nu
 > cal --full-year 2012
 
 ```
 
 This month's calendar with the week starting on monday
-```shell
+```nu
 > cal --week-start monday
 
 ```

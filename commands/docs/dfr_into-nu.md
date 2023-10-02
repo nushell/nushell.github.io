@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Shows head rows from dataframe
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr into-nu
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -45,7 +45,7 @@ Shows head rows from dataframe
 ```
 
 Shows tail rows from dataframe
-```shell
+```nu
 > [[a b]; [1 2] [5 6] [3 4]] | dfr into-df | dfr into-nu -t -n 1
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -56,7 +56,7 @@ Shows tail rows from dataframe
 ```
 
 Convert a col expression into a nushell value
-```shell
+```nu
 > dfr col a | dfr into-nu
 ╭───────┬────────╮
 │ expr  │ column │

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Count the number of words in a string
-```shell
+```nu
 > "There are seven words in this sentence" | size
 ╭───────────┬────╮
 │ lines     │ 1  │
@@ -40,7 +40,7 @@ Count the number of words in a string
 ```
 
 Counts unicode characters
-```shell
+```nu
 > '今天天气真好' | size
 ╭───────────┬────╮
 │ lines     │ 1  │
@@ -52,7 +52,7 @@ Counts unicode characters
 ```
 
 Counts Unicode characters correctly in a string
-```shell
+```nu
 > "Amélie Amelie" | size
 ╭───────────┬────╮
 │ lines     │ 1  │

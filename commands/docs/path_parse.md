@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Parse a path
-```shell
+```nu
 > '/home/viking/spam.txt' | path parse
 ╭───────────┬──────────────╮
 │ parent    │ /home/viking │
@@ -42,13 +42,13 @@ Parse a path
 ```
 
 Replace a complex extension
-```shell
+```nu
 > '/home/viking/spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
 
 ```
 
 Ignore the extension
-```shell
+```nu
 > '/etc/conf.d' | path parse -e ''
 ╭───────────┬────────╮
 │ parent    │ /etc   │
@@ -58,7 +58,7 @@ Ignore the extension
 ```
 
 Parse all paths in a list
-```shell
+```nu
 > [ /home/viking.d /home/spam.txt ] | path parse
 ╭───┬────────┬────────┬───────────╮
 │ # │ parent │  stem  │ extension │

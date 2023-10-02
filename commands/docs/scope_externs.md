@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Show the known externals in the current scope
-```shell
+```nu
 > scope externs
 
 ```

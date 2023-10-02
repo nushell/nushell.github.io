@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Split a list of chars into two lists
-```shell
+```nu
 > [a, b, c, d, e, f, g] | split list d
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
@@ -51,7 +51,7 @@ Split a list of chars into two lists
 ```
 
 Split a list of lists into two lists of lists
-```shell
+```nu
 > [[1,2], [2,3], [3,4]] | split list [2,3]
 ╭───┬───────────────────╮
 │ 0 │ ╭───┬───────────╮ │
@@ -71,7 +71,7 @@ Split a list of lists into two lists of lists
 ```
 
 Split a list of chars into two lists
-```shell
+```nu
 > [a, b, c, d, a, e, f, g] | split list a
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
@@ -89,7 +89,7 @@ Split a list of chars into two lists
 ```
 
 Split a list of chars into lists based on multiple characters
-```shell
+```nu
 > [a, b, c, d, a, e, f, g] | split list -r '(b|e)'
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │

@@ -37,37 +37,37 @@ usage: |
 ## Examples
 
 Trim whitespace
-```shell
+```nu
 > 'Nu shell ' | str trim
 Nu shell
 ```
 
 Trim a specific character
-```shell
+```nu
 > '=== Nu shell ===' | str trim -c '=' | str trim
 Nu shell
 ```
 
 Trim whitespace from the beginning of string
-```shell
+```nu
 > ' Nu shell ' | str trim -l
 Nu shell
 ```
 
 Trim a specific character
-```shell
+```nu
 > '=== Nu shell ===' | str trim -c '='
  Nu shell
 ```
 
 Trim whitespace from the end of string
-```shell
+```nu
 > ' Nu shell ' | str trim -r
  Nu shell
 ```
 
 Trim a specific character
-```shell
+```nu
 > '=== Nu shell ===' | str trim -r -c '='
 === Nu shell
 ```

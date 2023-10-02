@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get the arccosh of 1
-```shell
+```nu
 > 1 | math arccosh
 0
 ```

@@ -30,7 +30,7 @@ usage: |
 ## Examples
 
 Compute absolute value of each number in a list of numbers
-```shell
+```nu
 > [-50 -100.0 25] | math abs
 ╭───┬────────╮
 │ 0 │     50 │

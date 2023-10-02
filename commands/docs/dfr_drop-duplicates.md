@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 drop duplicates
-```shell
+```nu
 > [[a b]; [1 2] [3 4] [1 2]] | dfr into-df | dfr drop-duplicates
 ╭───┬───┬───╮
 │ # │ a │ b │

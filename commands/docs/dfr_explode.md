@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Explode the specified dataframe
-```shell
+```nu
 > [[id name hobbies]; [1 Mercy [Cycling Knitting]] [2 Bob [Skiing Football]]] | dfr into-df | dfr explode hobbies | dfr collect
 ╭───┬────┬───────┬──────────╮
 │ # │ id │ name  │ hobbies  │
@@ -46,7 +46,7 @@ Explode the specified dataframe
 ```
 
 Select a column and explode the values
-```shell
+```nu
 > [[id name hobbies]; [1 Mercy [Cycling Knitting]] [2 Bob [Skiing Football]]] | dfr into-df | dfr select (dfr col hobbies | dfr explode)
 ╭───┬──────────╮
 │ # │ hobbies  │

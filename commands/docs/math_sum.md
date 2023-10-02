@@ -31,13 +31,13 @@ usage: |
 ## Examples
 
 Sum a list of numbers
-```shell
+```nu
 > [1 2 3] | math sum
 6
 ```
 
 Get the disk usage for the current directory
-```shell
+```nu
 > ls | get size | math sum
 
 ```

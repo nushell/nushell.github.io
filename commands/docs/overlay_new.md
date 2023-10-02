@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Create an empty overlay
-```shell
+```nu
 > overlay new spam
 
 ```

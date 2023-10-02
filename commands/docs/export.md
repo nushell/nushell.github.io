@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Export a definition from a module
-```shell
+```nu
 > module utils { export def my-command [] { "hello" } }; use utils my-command; my-command
 hello
 ```

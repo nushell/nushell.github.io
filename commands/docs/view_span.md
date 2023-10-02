@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 View the source of a span. 1 and 2 are just example values. Use the return of debug -r to get the actual values
-```shell
+```nu
 > some | pipeline | or | variable | debug -r; view span 1 2
 
 ```

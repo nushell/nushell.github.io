@@ -37,67 +37,67 @@ usage: |
 ## Examples
 
 Search for *.rs files
-```shell
+```nu
 > glob *.rs
 
 ```
 
 Search for *.rs and *.toml files recursively up to 2 folders deep
-```shell
+```nu
 > glob **/*.{rs,toml} --depth 2
 
 ```
 
 Search for files and folders that begin with uppercase C and lowercase c
-```shell
+```nu
 > glob "[Cc]*"
 
 ```
 
 Search for files and folders like abc or xyz substituting a character for ?
-```shell
+```nu
 > glob "{a?c,x?z}"
 
 ```
 
 A case-insensitive search for files and folders that begin with c
-```shell
+```nu
 > glob "(?i)c*"
 
 ```
 
 Search for files for folders that do not begin with c, C, b, M, or s
-```shell
+```nu
 > glob "[!cCbMs]*"
 
 ```
 
 Search for files or folders with 3 a's in a row in the name
-```shell
+```nu
 > glob <a*:3>
 
 ```
 
 Search for files or folders with only a, b, c, or d in the file name between 1 and 10 times
-```shell
+```nu
 > glob <[a-d]:1,10>
 
 ```
 
 Search for folders that begin with an uppercase ASCII letter, ignoring files and symlinks
-```shell
+```nu
 > glob "[A-Z]*" --no-file --no-symlink
 
 ```
 
 Search for files named tsconfig.json that are not in node_modules directories
-```shell
+```nu
 > glob **/tsconfig.json --not [**/node_modules/**]
 
 ```
 
 Search for all files that are not in the target nor .git directories
-```shell
+```nu
 > glob **/* --not [**/target/** **/.git/** */]
 
 ```

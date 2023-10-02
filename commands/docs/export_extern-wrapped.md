@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Export the signature for an external command
-```shell
+```nu
 > export extern-wrapped my-echo [...rest] { echo $rest }
 
 ```

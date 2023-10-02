@@ -20,13 +20,13 @@ usage: |
 ## Examples
 
 Make two directories and enter new shells for them, use `n` to jump to the next shell
-```shell
+```nu
 > mkdir foo bar; enter foo; enter ../bar; n
 
 ```
 
 Run `n` several times and note the changes of current directory
-```shell
+```nu
 > n
 
 ```

@@ -28,19 +28,19 @@ usage: |
 ## Examples
 
 Show info about the system
-```shell
+```nu
 > sys
 
 ```
 
 Show the os system name with get
-```shell
+```nu
 > (sys).host | get name
 
 ```
 
 Show the os system name
-```shell
+```nu
 > (sys).host.name
 
 ```

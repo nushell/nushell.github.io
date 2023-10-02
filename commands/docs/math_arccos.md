@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Get the arccosine of 1
-```shell
+```nu
 > 1 | math arccos
 0
 ```
 
 Get the arccosine of -1 in degrees
-```shell
+```nu
 > -1 | math arccos -d
 180
 ```
