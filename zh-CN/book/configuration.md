@@ -117,7 +117,7 @@ alias open = ^open
 
 要在 [PATH 变量](<https://en.wikipedia.org/wiki/PATH_(variable)>) 中添加一个路径，你可以在 `env.nu` 中使用 `$env.<var> = <val>` 和 [`append`](/commands/docs/append.md) 完成，如下：
 
-```shell
+```nu
 $env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
 ```
 

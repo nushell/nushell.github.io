@@ -8,7 +8,7 @@ Nu offers many commands that help interface with the filesystem and control your
 
 ### View all files in the current directory
 
-```shell
+```nu
 > ls | where type == file
 ```
 
@@ -40,7 +40,7 @@ Output
 
 ### View all directories in the current directory
 
-```shell
+```nu
 > ls | where type == dir
 ```
 
@@ -69,7 +69,7 @@ Output
 
 ### Find processes sorted by greatest cpu utilization.
 
-```shell
+```nu
 > ps | where cpu > 0 | sort-by cpu | reverse
 ```
 
@@ -91,7 +91,7 @@ Output
 
 Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process:
 
-```shell
+```nu
 > ps | where name == Notepad2.exe
 ```
 
@@ -107,7 +107,7 @@ Output
 
 This process can be sent the kill signal in a one-liner:
 
-```shell
+```nu
 > ps | where name == Notepad2.exe | get pid.0 | kill $in
 ```
 

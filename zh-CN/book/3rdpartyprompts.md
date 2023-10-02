@@ -20,7 +20,7 @@ Nerdfonts 并不是必需的，但它们能使呈现效果更好。
 2. 下载并安装一个 [Nerdfonts 字体](https://github.com/ryanoasis/nerd-fonts)。
 3. 在`~/.config/nushell/config.nu`（或由`$nu.config-path`输出的路径）中设置`PROMPT_COMMAND`，将`M365Princess.mp.json`改为你喜欢的任何 [主题](https://ohmyposh.dev/docs/themes)。
 
-```shell
+```nu
 > $env.PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
 ```
 
@@ -30,7 +30,7 @@ MacOS 用户配置步骤：
 2. 下载并安装一个 [Nerdfonts 字体](https://github.com/ryanoasis/nerd-fonts)；
 3. 在`$nu.config-path`输出的文件中设置`PROMPT_COMMAND`，可以参考下面的代码片段：
 
-```shell
+```nu
 let posh_dir = (brew --prefix oh-my-posh | str trim)
 let posh_theme = $'($posh_dir)/share/oh-my-posh/themes/'
 # Change the theme names to: zash/space/robbyrussel/powerline/powerlevel10k_lean/

@@ -6,7 +6,7 @@ Um dos principais designs do Nu é o pipeline, uma ideia de design que tem suas 
 
 Um pipeline é construído com três partes: a entrada, o filtro e a saída.
 
-```shell
+```nu
 > open "Cargo.toml" | inc package.version | save "Cargo_new.toml"
 ```
 
@@ -38,13 +38,13 @@ Você pode ter se perguntado como vemos uma tabela se o `ls` é uma entrada e n�
 
 Com efeito, o comando:
 
-```shell
+```nu
 > ls
 ```
 
 E o pipeline:
 
-```shell
+```nu
 > ls | autoview
 ```
 

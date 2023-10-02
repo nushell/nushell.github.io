@@ -16,7 +16,7 @@ Se ainda não tivermos o Rust instalado no sistema, a melhor maneira de instalar
 
 O Nu atualmente requer a versão **nightly** do Rust. Quando você abrir o "rustup" pela primeira vez, ele vai perguntar qual versão do Rust você quer instalar:
 
-```shell
+```nu
 Current installation options:
 
    default host triple: x86_64-unknown-linux-gnu
@@ -30,25 +30,25 @@ Current installation options:
 
 Selecione a opção #2 para customizar a instalação.
 
-```shell
+```nu
 Default host triple?
 ```
 
 Aperte enter aqui para selecionar o default.
 
-```shell
+```nu
 Default toolchain? (stable/beta/nightly/none)
 ```
 
 Certifique-se de digitar "nightly" aqui e pressionar enter. Isso vai levar à configuração seguinte:
 
-```shell
+```nu
 Modify PATH variable? (y/n)
 ```
 
 Você pode opcionalmente atualizar o seu _path_. Normalmente é uma boa ideia, pois torna os passos seguintes mais fáceis.
 
-```shell
+```nu
 Current installation options:
 
    default host triple: x86_64-unknown-linux-gnu
@@ -94,7 +94,7 @@ brew install openssl cmake
 
 Quando tivermos todas as dependências de que o Nu precisa, podemos instalá-lo usando o comando `cargo`, que vem junto com o compilador Rust.
 
-```shell
+```nu
 > cargo install nu
 ```
 
@@ -102,7 +102,7 @@ Pronto! A ferramenta cargo fará o download do Nu e das dependências do fonte, 
 
 Se quiser instalar todas as funcionalidades, inclusive algumas opcionais divertidas, você pode usar:
 
-```shell
+```nu
 > cargo install nu --features=stable
 ```
 
@@ -119,7 +119,7 @@ $ nu
 
 Também podemos fazer o build do código fonte diretamente do GitHub. Isso nos dá acesso imediato às últimas funcionalidades e correções do Nu.
 
-```shell
+```nu
 > git clone https://github.com/nushell/nushell.git
 ```
 

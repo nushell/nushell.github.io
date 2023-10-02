@@ -15,7 +15,7 @@ In order to configure your path in nushell you'll need to modify your `PATH` env
 
 Alternately, if you want to append a folder to your `PATH` environment variable you can do that too using the `append` or `prepend` command like this:
 
-```shell
+```nu
 $env.PATH = ($env.PATH | split row (char esep) | append "some/other/path")
 ```
 
@@ -23,7 +23,7 @@ For more detailed instructions, see the documentation about [environment variabl
 
 ### How to list your environment variables
 
-```shell
+```nu
 > $env
 ```
 
@@ -45,7 +45,7 @@ Output
 
 or for a more detailed view, use our new `env` command.
 
-```shell
+```nu
 > env
 ```
 
@@ -97,13 +97,13 @@ You should now be able to run `config nu` or `config env` and edit those files e
 
 ### How to get a single environment variable's value
 
-```shell
+```nu
 > $env.APPDATA
 ```
 
 or
 
-```shell
+```nu
 > env | where name == APPDATA
 ```
 

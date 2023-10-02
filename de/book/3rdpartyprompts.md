@@ -21,7 +21,7 @@ Wenn [oh-my-posh](https://ohmyposh.dev/) verwendet werden soll, kann dies in wen
 2. Herunterladen und installieren einer [nerd font](https://github.com/ryanoasis/nerd-fonts).
 3. Die Umgebungsvariable `PROMPT_COMMAND` durch hinzufügen der folgenden Zeile in `~/.config/nushell/config.nu` setzen. Den Style `M365Princess.omp.json` kann man entsprechend der [Demo](https://ohmyposh.dev/docs/themes) beliebig ändern .
 
-```shell
+```nu
 > $env.PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
 ```
 

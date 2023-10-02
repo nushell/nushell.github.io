@@ -4,12 +4,12 @@ O Nu fornece um conjunto de comandos que você pode usar entre diferentes SOs e 
 
 Comando Nu:
 
-```shell
+```nu
 > ls
 ```
 
 Escapando para o comando local:
 
-```shell
+```nu
 > ^ls
 ```

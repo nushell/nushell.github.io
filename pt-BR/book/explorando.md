@@ -10,7 +10,7 @@ Como vimos em outros capítulos, `ls` é um comando para visualizar o conteúdo 
 
 O comando `ls` também recebe um parâmetro opcional para mudar o que você gostaria de ver. Por exemplo, podemos listar os arquivos cujo nome termina em ".txt".
 
-```shell
+```nu
 > ls *.txt
 ---+--------------+------+----------+---------+--------------+--------------
  # | name         | type | readonly | size    | accessed     | modified
@@ -24,7 +24,7 @@ O asterisco (\*) usado no parâmetro opcional acima "\*.txt" é chamado de corin
 
 Nu também usa coringas modernos, que permitem acesso a diretórios mais profundos.
 
-```shell
+```nu
 > ls **/*.rs
 -----+-----------------------------------------------------+------+----------+----------+----------------+----------------
  #   | name                                                | type | readonly | size     | accessed       | modified
@@ -41,7 +41,7 @@ Aqui estamos procurando qualquer arquivo cujo nome termine com ".rs" e os dois a
 
 ## Mudando o diretório atual
 
-```shell
+```nu
 > cd new_directory
 ```
 
@@ -53,19 +53,19 @@ Nu também fornece alguns comandos básicos de sistemas de arquivos que funciona
 
 Podemos mover um item de um lugar para outro usando o comando `mv`.
 
-```shell
+```nu
 > mv item location
 ```
 
 Podemos copiar um item de um local para outro:
 
-```shell
+```nu
 > cp item location
 ```
 
 Podemos remover um item:
 
-```shell
+```nu
 > rm item
 ```
 
@@ -73,6 +73,6 @@ Os três comandos também podem usar os coringas que vimos anteriormente com `ls
 
 Por fim, podemos criar um novo diretório usando o comando `mkdir`:
 
-```shell
+```nu
 > mkdir new_directory
 ```

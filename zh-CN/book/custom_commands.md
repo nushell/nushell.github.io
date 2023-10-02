@@ -32,7 +32,7 @@ def greet [name] {
 ::: tip
 `echo`将其参数分别返回给管道。如果你想用它来生成一个单一的字符串，请在管道中添加` | str join`：
 
-```shell
+```nu
 def greet [name] {
   echo "hello " $name | str join
 }
@@ -128,7 +128,7 @@ error: Type Error
 
 若要使一个参数成为可选的，并具有默认值，你可以在命令定义中指定该默认值：
 
-```shell
+```nu
 def greet [name = "nushell"] {
   echo "hello " $name | str join
 }
@@ -255,7 +255,7 @@ _注意：_ 标志是以其全称命名的，所以上面的例子的命令体�
 
 标志也可以作为基本开关使用，这意味着它们的存在或不存在被当作定义的参数。延伸前面的例子：
 
-```shell
+```nu
 def greet [
   name: string
   --age (-a): int
@@ -427,7 +427,7 @@ def double [] {
 
 我们还可以使用`$in`变量来存储输入，以便在后面使用：
 
-```shell
+```nu
 def nullify [...cols] {
   let start = $in
   $cols | reduce --fold $start { |col, df|

@@ -12,7 +12,7 @@ O jeito mais fácil de ver o que o Nu pode fazer é começar com alguns exemplos
 
 A primeira coisa que você vai perceber quando rodar um comando como `ls` é que ao invés de um bloco de texto, você recebe de volta uma tabela estruturada.
 
-```shell
+```nu
 > ls
 ----+------------------+-----------+----------+----------+----------------+----------------
  #  | name             | type      | readonly | size     | accessed       | modified
@@ -30,7 +30,7 @@ Essa tabela faz mais do que somente mostrar o diretório de um jeito diferente. 
 
 A primeira coisa que vamos fazer é ordenar a tabela por nome. Para isso, vamos direcionar a saída do `ls` para um comando capaz de ordenar tabelas com base no conteúdo de uma coluna.
 
-```shell
+```nu
 > ls | sort-by name
 ----+------------------+-----------+----------+----------+----------------+----------------
  #  | name             | type      | readonly | size     | accessed       | modified
@@ -48,7 +48,7 @@ Você pode ver que, para fazer isso funcionar, não passamos parâmetros de linh
 
 O Nu fornece muitos comandos que trabalham com tabelas. Por exemplo, podemos filtrar o conteúdo da tabela do `ls` para que ela mostre apenas os arquivos com mais de 4 kilobytes:
 
-```shell
+```nu
 > ls | where size > 4kb
 ----+----------------+------+----------+----------+----------------+----------------
  #  | name           | type | readonly | size     | accessed       | modified
@@ -63,7 +63,7 @@ O Nu fornece muitos comandos que trabalham com tabelas. Por exemplo, podemos fil
 
 Assim como na filosofia Unix, fazer os comandos conversarem uns com os outros nos permite combiná-los de muitas maneiras diferentes. Vamos ver outro comando:
 
-```shell
+```nu
 > ps
 -----+-------+----------+------+--------------------------------------------------------------------------------
  #   | pid   | status   | cpu  | name
@@ -80,7 +80,7 @@ Você deve conhecer o comando `ps` se já usou Linux. Com ele, vemos uma lista c
 
 E se quiséssemos mostrar somente os processos que estão usando a CPU de fato? Exatamente como fizemos com o comando `ls` anteriormente, podemos também manipular a tabela que o comando `ps` nos retorna:
 
-```shell
+```nu
 > ps | where cpu > 10
 ---+-------+----------+-------+-----------------------------
  # | pid   | status   | cpu   | name
@@ -95,7 +95,7 @@ Até agora vimos como usar `ls` e `ps` para listar arquivos e processos. O Nu ta
 
 Ao executar `date` obtemos informações sobre a data e hora correntes:
 
-```shell
+```nu
 > date
 ------+-------+-----+------+--------+--------+----------
  year | month | day | hour | minute | second | timezone
@@ -106,7 +106,7 @@ Ao executar `date` obtemos informações sobre a data e hora correntes:
 
 E ao executar `sys` obtemos informações sobre o sistema em que o Nu está rodando:
 
-```shell
+```nu
 > sys
 ----------+----------+-----------+----------+-----------+-----------
  host     | cpu      | disks     | mem      | temp      | net
@@ -117,7 +117,7 @@ E ao executar `sys` obtemos informações sobre o sistema em que o Nu está roda
 
 Essa tabela é um pouco diferente das que vimos antes. O comando `sys` retorna uma tabela que contém tabelas estruturadas em suas células, ao invés de valores simples. Para dar uma olhada nesses dados, precisamos selecionar a coluna que queremos ver:
 
-```shell
+```nu
 > sys | get host
 -------+------------------+----------+--------+----------+----------
  name  | release          | hostname | arch   | uptime   | users
@@ -128,7 +128,7 @@ Essa tabela é um pouco diferente das que vimos antes. O comando `sys` retorna u
 
 O comando `get` permite que tenhamos acesso ao conteúdo de uma coluna da tabela. Aqui, estamos olhando para dentro da coluna `host`, que contém informações a respeito da máquina host em que o Nu está rodando, como nome do SO (sistema operacional), o nome de host, a CPU e outros dados mais. Vamos ver os nomes dos usuários do sistema:
 
-```shell
+```nu
 > sys | get host.users
 jonathan
 ```
@@ -139,7 +139,7 @@ Talvez você tenha notado mais alguma coisa de diferente. Ao invés de uma tabel
 
 Vejamos como as strings funcionam fora do Nu. Vamos usar nosso exemplo anterior e executar o comando externo `echo`, presente na maioria dos SOs:
 
-```shell
+```nu
 > sys | get host.users | echo $it
 jonathan
 ```
@@ -148,7 +148,7 @@ Se isso lhe parece bastante similar ao que tínhamos anteriormente, você tem um
 
 _Nota: você pode obter um texto de ajuda para quaisquer comandos embutidos do Nu usando o comando `help`_:
 
-```shell
+```nu
 > help config
 Configuration management.
 Usage:

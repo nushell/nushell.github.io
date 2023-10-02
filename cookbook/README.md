@@ -10,7 +10,7 @@ where you will find interesting scripts written for Nushell.
 
 And if you are looking for cool oneliners like this one
 
-```shell
+```nu
 > (http get https://api.chucknorris.io/jokes/random).value
 ```
 
