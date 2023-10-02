@@ -206,7 +206,7 @@ CSV file that will become our sample dataframe that we will be using along with
 the examples. In your favorite file editor paste the next lines to create out
 sample csv file.
 
-```csv
+```
 int_1,int_2,float_1,float_2,first,second,third,word
 1,11,0.1,1.0,a,b,c,first
 2,12,0.2,1.0,a,b,c,second

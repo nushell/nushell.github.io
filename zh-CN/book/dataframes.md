@@ -201,7 +201,7 @@ $res
 
 在看到了可以用`DataFrame`命令完成的事情之后，现在是时候开始测试它们了。首先，让我们创建一个样本 CSV 文件，该文件将成为我们的样本 DataFrame，并与示例一起使用。在你喜欢的编辑器中粘贴下面几行来创建样本 csv 文件：
 
-```csv
+```
 int_1,int_2,float_1,float_2,first,second,third,word
 1,11,0.1,1.0,a,b,c,first
 2,12,0.2,1.0,a,b,c,second

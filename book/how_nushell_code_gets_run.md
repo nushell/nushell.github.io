@@ -176,7 +176,7 @@ std::string my_path("foo");
 
 or Rust
 
-```rust!
+```rust
 let my_path = "foo";
 use format!("{}::common", my_path);
 ```
