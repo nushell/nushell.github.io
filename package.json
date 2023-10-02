@@ -8,6 +8,7 @@
     "update": "nu make_docs.nu",
     "dev": "vuepress dev",
     "build": "vuepress build",
+    "postinstall": "patch-package",
     "prepare": "git config --unset core.hooksPath && rm -rf .husky || true; lefthook install",
     "pretty": "prettier --write ."
   },
@@ -20,6 +21,7 @@
     "@vuepress/plugin-shiki": "^2.0.0-beta.67",
     "@vuepress/theme-default": "2.0.0-beta.67",
     "lefthook": "^1.4.10",
+    "patch-package": "^8.0.0",
     "prettier": "^3.0.3",
     "shiki": "^0.14.4",
     "vuepress": "2.0.0-beta.67",
