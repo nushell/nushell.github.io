@@ -8,7 +8,7 @@ Nushell 的行编辑器 [Reedline](https://github.com/nushell/reedline) 是一�
 
 Reedline 允许你使用两种模式来编辑文本：vi 和 emacs。如果没有指定，默认的编辑模式是 emacs 模式。若要自行设置喜欢的模式，你可以修改配置文件为相应模式。比如：
 
-```bash
+```nu
   $env.config = {
     ...
     edit_mode: emacs
@@ -113,7 +113,7 @@ Vi 正常操作快捷键
 
 如前所述，Reedline 管理并存储所有被编辑并发送给 Nushell 的命令。要配置 Reedline 可以存储的最大记录数，你需要在配置文件中调整这个值：
 
-```bash
+```nu
   $env.config = {
     ...
     max_history_size: 1000
@@ -125,7 +125,7 @@ Vi 正常操作快捷键
 
 Reedline 的提示语也是高度可定制的。为了构建你的完美提示符，你可以在配置文件中定义下面的环境变量：
 
-```bash
+```nu
 # Use nushell functions to define your right and left prompt
 def create_left_prompt [] {
     let path_segment = ($env.PWD)
@@ -151,7 +151,7 @@ $env.PROMPT_COMMAND_RIGHT = { create_right_prompt }
 
 你也可以通过修改以下环境变量来定制行编辑器的提示符：
 
-```bash
+```nu
 $env.PROMPT_INDICATOR = "〉"
 $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
@@ -168,7 +168,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 
 例如，我们假设你想把补全菜单绑定到 `Ctrl + t` 这组快捷键上（默认是`tab`）。你可以添加下面的条目到你的配置文件：
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -215,7 +215,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 
 键盘绑定条目的事件部分是定义要执行的动作的地方。在这个字段，你可以使用一个记录或一个记录列表。比如这样：
 
-```bash
+```nu
   ...
   event: { send: Enter }
   ...
@@ -223,7 +223,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 
 或者
 
-```bash
+```nu
   ...
   event: [
     { edit: Clear }
@@ -236,7 +236,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 
 后一个按键绑定的例子是向引擎发送一系列的事件。它首先清除提示，插入一个字符串，然后输入该值。
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -262,7 +262,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 
 上面按键绑定的缺点是，插入的文本将被验证处理并保存在历史记录中，这使得按键绑定的执行速度有点慢，而且会用相同的命令来填充命令历史。出于这个原因，可以采用 `ExecuteHostCommand` 类型的事件。下一个例子以更简单的方式做了与前一个相同的事情，发送了一个单一的事件给引擎：
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -289,13 +289,13 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
 
 要找到 `send` 的所有可用选项，你可以使用：
 
-```bash
+```nu
 keybindings list | where type == events
 ```
 
 而 `send` 事件的语法如下：
 
-```bash
+```nu
     ...
       event: { send: <NAME OF EVENT FROM LIST> }
     ...
@@ -307,7 +307,7 @@ keybindings list | where type == events
 
 这条规则有两个例外：`Menu`和`ExecuteHostCommand`。这两个事件需要一个额外的字段来完成，`Menu` 需要有一个菜单的名称才能触发（自动补全菜单或历史命令菜单）：
 
-```bash
+```nu
     ...
       event: {
         send: menu
@@ -318,7 +318,7 @@ keybindings list | where type == events
 
 而 `ExecuteHostCommand` 需要一个有效的命令，它将被发送到引擎：
 
-```bash
+```nu
     ...
       event: {
         send: ExecuteHostCommand
@@ -333,13 +333,13 @@ keybindings list | where type == events
 
 `edit`类型是`Edit([])`事件的简化。`event`类型简化了定义复杂编辑事件的按键绑定。要列出可用的选项，你可以使用下面的命令：
 
-```bash
+```nu
 keybindings list | where type == edits
 ```
 
 以下是编辑的常用语法：
 
-```bash
+```nu
     ...
       event: { edit: <NAME OF EDIT FROM LIST> }
     ...
@@ -347,7 +347,7 @@ keybindings list | where type == edits
 
 列表中带有 `()` 的编辑的语法有一点变化，因为这些编辑需要一个额外的值来进行完全定义。例如，如果我们想在提示符所在的位置插入一个字符串，那么你将不得不使用如下方式：
 
-```bash
+```nu
     ...
       event: {
         edit: InsertString
@@ -358,7 +358,7 @@ keybindings list | where type == edits
 
 或者说你想向右移动，直到第一个`S`：
 
-```bash
+```nu
     ...
       event: {
         edit: MoveRightUntil
@@ -379,7 +379,7 @@ keybindings list | where type == edits
 
 下一个键盘绑定就是这种情况：
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -408,7 +408,7 @@ keybindings list | where type == edits
 
 例如，下一个按键绑定将总是发送一个`down`，因为该事件总是成功的。
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -438,7 +438,7 @@ keybindings list | where type == edits
 
 例如，在所有的编辑模式下，禁用 `Ctrl + l` 清除屏幕：
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -473,7 +473,7 @@ keybindings list | where type == edits
 
 帮助菜单可以通过修改以下参数进行配置：
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -508,7 +508,7 @@ keybindings list | where type == edits
 
 默认情况下，补全菜单是通过按`tab`访问的，它可以通过修改配置对象中的这些值来进行配置：
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -543,7 +543,7 @@ keybindings list | where type == edits
 
 历史菜单可以通过修改配置对象中的这些值进行配置：
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -574,13 +574,13 @@ keybindings list | where type == edits
 
 要在你的命令历史中搜索，你可以开始输入你要找的命令的关键词。一旦菜单被激活，你输入的任何内容都会被历史记录中选定的命令所取代。例如，假设你已经输入了以下内容：
 
-```bash
+```nu
 let a = ()
 ```
 
 你可以把光标放在 `()` 内并激活菜单，你可以通过输入关键词来过滤历史记录，一旦你选择了一个条目，输入的词就会被替换：
 
-```bash
+```nu
 let a = (ls | where size > 10MiB)
 ```
 
@@ -588,7 +588,7 @@ let a = (ls | where size > 10MiB)
 
 菜单的另一个很好的特性是能够快速选择其中的内容。假设你已经激活了你的菜单，它看起来像这样：
 
-```bash
+```nu
 >
 0: ls | where size > 10MiB
 1: ls | where size > 20MiB
@@ -616,7 +616,7 @@ let a = (ls | where size > 10MiB)
 
 满足这些所需的菜单将看起来像这样：
 
-```bash
+```nu
   $env.config = {
     ...
 
@@ -651,7 +651,7 @@ let a = (ls | where size > 10MiB)
 
 记录所需的结构如下：
 
-```bash
+```nu
 {
   value:       # The value that will be inserted in the buffer
   description: # Optional. Description that will be display with the selected value
@@ -673,7 +673,7 @@ let a = (ls | where size > 10MiB)
 
 如果你想改变两个菜单的默认激活方式，可以通过定义新的按键绑定来实现。例如，接下来的两个按键绑定设置分别将`Ctrl+t`和`Ctrl+y`定义为触发自动补全和历史菜单：
 
-```bash
+```nu
   $env.config = {
     ...
 

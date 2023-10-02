@@ -9,7 +9,7 @@ _注意! 目前对模块的实现是相当基本的，并将在未来进一步�
 
 一个简单的模块可以像这样定义：
 
-```bash
+```nu
 > module greetings {
      export def hello [name: string] {
          $"hello ($name)!"
@@ -23,7 +23,7 @@ _注意! 目前对模块的实现是相当基本的，并将在未来进一步�
 
 或者在一个与你要创建的模块名相同的文件中：
 
-```bash
+```nu
 # greetings.nu
 
 export def hello [name: string] {
@@ -43,7 +43,7 @@ export def hi [where: string] {
 
 模块本身并不做任何事情，要使用模块导出的定义，我们需要[`use`](/commands/docs/use.md)它：
 
-```bash
+```nu
 > use greetings
 
 > greetings hello "world"
@@ -81,7 +81,7 @@ hi there!
 Nushell 让你隐含地把一个源文件当作一个模块。
 让我们先把模块定义的主体保存到一个文件中：
 
-```bash
+```nu
 # greetings.nu
 
 export def hello [name: string] {
@@ -95,7 +95,7 @@ export def hi [where: string] {
 
 现在，你可以直接在文件上调用[`use`](/commands/docs/use.md)：
 
-```bash
+```nu
 > use greetings.nu
 
 > greetings hello "world"
@@ -111,7 +111,7 @@ Nushell 会自动从文件名（"greetings"，没有".nu"扩展名）推断出�
 
 任何在模块中定义的自定义命令，如果没有`export`关键字，将只在该模块的作用域内工作：
 
-```bash
+```nu
 # greetings.nu
 
 export def hello [name: string] {
@@ -129,7 +129,7 @@ def greetings-helper [greeting: string, subject: string] {
 
 然后，在 Nushell 里我们可以从 "greetings.nu" 中导入所有定义：
 
-```bash
+```nu
 > use greetings.nu *
 
 > hello "world"
@@ -146,7 +146,7 @@ hi there!
 到目前为止，我们只是用模块来导入自定义命令，用同样的方法导出环境变量也是可能的。
 其语法与你可能习惯的直接修改 `$env` 或 [`load-env`](/commands/docs/load-env.md)等命令略有不同：
 
-```bash
+```nu
 # greetings.nu
 
 export env MYNAME { "Arthur, King of the Britons" }
@@ -158,7 +158,7 @@ export def hello [name: string] {
 
 `use` 的工作方式与自定义命令相同：
 
-```bash
+```nu
 > use greetings.nu
 
 > $env."greetings MYNAME"
@@ -170,7 +170,7 @@ hello Arthur, King of the Britons!
 
 你可能注意到我们没有直接给`MYNAME`赋值，相反，我们给了它一个代码块（`{ ...}`），它在我们每次调用[`use`](/commands/docs/use.md)时都会被执行。例如，我们可以用[`random`](/commands/docs/random.md)命令来演示这一点：
 
-```bash
+```nu
 > module roll { export env ROLL { random dice | into string } }
 
 > use roll ROLL
@@ -210,7 +210,7 @@ hello Arthur, King of the Britons!
 (注意，现在还不能从模块中导出别名，但它们仍然可以被隐藏。)
 我们用[`hide`](/commands/docs/hide.md)命令来实现隐藏：
 
-```bash
+```nu
 > def foo [] { "foo" }
 
 > foo
@@ -242,7 +242,7 @@ foo
 
 让我们看几个例子。前面已经看到了直接隐藏一个自定义命令的例子，现在让我们试试环境变量：
 
-```bash
+```nu
 > $env.FOO = "FOO"
 
 > $env.FOO
@@ -255,7 +255,7 @@ FOO
 
 第一种情况也适用于从一个模块导入的命令/环境变量（使用上面定义的 "greetings.nu" 文件）：
 
-```bash
+```nu
 > use greetings.nu *
 
 > $env.MYNAME
@@ -275,7 +275,7 @@ hello world!
 
 最后，当名称为模块名时（假设是之前的`greetings`模块）：
 
-```bash
+```nu
 > use greetings.nu
 
 > $env."greetings MYNAME"

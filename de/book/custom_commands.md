@@ -243,7 +243,7 @@ def my-ls [] { ls }
 
 Die Ausgabe dieses Befehls, kann identisch zur Ausgabe von `ls` verwendet werden.
 
-```
+```nu
 > my-ls | get name
 ───┬───────────────────────
  0 │ myscript.nu

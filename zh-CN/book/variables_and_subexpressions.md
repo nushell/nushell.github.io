@@ -8,7 +8,7 @@
 
 如果我们创建了一个变量，我们可以通过使用`$`来引用它并打印其内容：
 
-```bash
+```nu
 > let my_value = 4
 > echo $my_value
 4
@@ -17,7 +17,7 @@
 Nushell 中的变量是不可变的，这意味着你不能在声明后修改它的值。
 不过它们可以在嵌套块中被隐藏，这导致：
 
-```bash
+```nu
 > let my_value = 4
 > do { let my_value = 5; echo $my_value }
 5
@@ -29,13 +29,13 @@ Nushell 中的变量是不可变的，这意味着你不能在声明后修改它
 
 变量路径通过深入变量的内容，找到其中的列，并最终获得一个值。比如，对于前面的例子如果我们不是赋值`4`，而是赋值了一个表的值：
 
-```bash
+```nu
 > let my_value = [[name]; [testuser]]
 ```
 
 我们可以使用一个变量路径来访问变量`$my_value`并只用一步从`name`列获得数值：
 
-```bash
+```nu
 > echo $my_value.name
 testuser
 ```
@@ -48,7 +48,7 @@ testuser
 
 子表达式也可以是管道，而不仅仅是单个命令。如果我们想得到一个大于 10KB 的文件名列表，我们可以使用子表达式来运行一个管道，并将其赋值给一个变量：
 
-```bash
+```nu
 > let names_of_big_files = (ls | where size > 10kb)
 > echo $names_of_big_files
 ───┬────────────┬──────┬──────────┬──────────────
@@ -63,13 +63,13 @@ testuser
 
 子表达式也支持路径，例如，假设我们想获得当前目录下的文件名列表，其中一个办法是使用管道：
 
-```bash
+```nu
 > ls | get name
 ```
 
 我们也可以使用子表达式路径只需一步即可：
 
-```bash
+```nu
 > echo (ls).name
 ```
 
@@ -79,13 +79,13 @@ testuser
 
 Nushell 支持使用一种简化的方式访问子表达式中的列，你可能已经使用过这个功能了。例如，如果我们想只看到[`ls`](/commands/docs/ls.md)中大小至少为 10KB 的行，我们可以通过：
 
-```bash
+```nu
 > ls | where size > 10kb
 ```
 
 `where size > 10kb`是一个由两部分组成的命令：命令名[`where`](/commands/docs/where.md)和简化的表达式`size > 10kb`。我们说简化是因为这里的`size`是`$it.size`的简洁版。也可以用以下任何一种方式来写：
 
-```bash
+```nu
 > ls | where $it.size > 10kb
 > ls | where ($it.size > 10kb)
 > ls | where {|$x| $x.size > 10kb }

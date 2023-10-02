@@ -6,7 +6,7 @@
 
 作为开始，让我们进入一个目录：
 
-```bash
+```nu
 /home/jonathant/Source/nushell(main)> enter ../book
 /home/jonathant/Source/book(main)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
@@ -20,7 +20,7 @@
 
 进入(`enter`)类似于改变目录（正如我们在`cd`命令中看到的那样）。这允许你跳入一个目录，在其中工作。我们现在是在两个目录中，而不是改变目录。为了更清楚地看到这一点，我们可以使用[`shells`](/commands/docs/shells.md)命令来列出我们当前的活动目录：
 
-```bash
+```nu
 /home/jonathan/Source/book(main)> shells
 ───┬────────┬────────────┬─────────────────────────
  # │ active │    name    │          path

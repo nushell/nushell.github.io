@@ -8,7 +8,7 @@
 
 我们来看一个例子：
 
-```bash
+```nu
 > def animals [] { ["cat", "dog", "eel" ] }
 > def my-command [animal: string@animals] { print $animal }
 >| my-command
@@ -27,7 +27,7 @@ cat                 dog                 eel
 
 让我们把上面的例子放在一个模块中：
 
-```bash
+```nu
 module commands {
     def animals [] {
         ["cat", "dog", "eel" ]
@@ -49,7 +49,7 @@ module commands {
 
 如果你仔细看一下默认配置中的例子，你会看到这个：
 
-```bash
+```nu
 export extern "git push" [
     remote?: string@"nu-complete git remotes", # the name of the remote
     refspec?: string@"nu-complete git branches"# the branch / refspec

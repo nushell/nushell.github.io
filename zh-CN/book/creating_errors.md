@@ -9,19 +9,19 @@
 
 首先，你可以从参数的来源中获取标注范围：
 
-```bash
+```nu
 let span = (metadata $x).span;
 ```
 
 接下来你可以通过 `error make` 命令来创建一个错误，该命令需要一个可以描述待创建错误的记录作为输入：
 
-```bash
+```nu
 error make {msg: "this is fishy", label: {text: "fish right here", start: $span.start, end: $span.end } }
 ```
 
 与你的自定义命令放在一起后，它可能看起来像这样：
 
-```bash
+```nu
 def my-command [x] {
     let span = (metadata $x).span;
     error make {
@@ -37,7 +37,7 @@ def my-command [x] {
 
 现在当传入一个值调用时，我们会看到一个错误信息返回：
 
-```bash
+```nu
 > my-command 100
 
 Error:

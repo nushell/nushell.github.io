@@ -17,7 +17,7 @@ _(你可以把 Nushell 的配置加载顺序想象成在启动时执行两行 [R
 
 Nushell 的主要设置是以记录的形式保存在 `config` 环境变量中。这个记录可以用以下方式创建：
 
-```bash
+```nu
 $env.config = {
   ...
 }
@@ -25,7 +25,7 @@ $env.config = {
 
 你也可以隐藏(shadow)`$env.config`并更新它：
 
-```bash
+```nu
 $env.config = ($env.config | upsert <field name> <field value>)
 ```
 
@@ -35,7 +35,7 @@ $env.config = ($env.config | upsert <field name> <field value>)
 
 你可以在 Nushell 会话期间使用 `$env.<var> = <val>` 在 `env.nu` 文件中设置环境变量。比如：
 
-```bash
+```nu
 $env.FOO = 'BAR'
 ```
 
@@ -72,7 +72,7 @@ Nushell 遵循如下的规则来匹配编辑器:
 
 你可以通过在另一个 Shell（如 Bash）中运行 Nu 来建立完整的环境变量集。一旦你进入 Nu，你可以运行这样的命令：
 
-```bash
+```nu
 $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r.val)'"} | str join (char nl)
 ```
 
@@ -80,7 +80,7 @@ $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r
 
 接下来，在一些发行版上，你还需要确保 Nu 在`/etc/shells`列表中：
 
-```bash
+```nu
 > cat /etc/shells
 # /etc/shells: valid login shells
 /bin/sh
@@ -108,7 +108,7 @@ $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r
 由于 Nushell 有自己的[`open`](/commands/docs/open.md)命令，它有不同的语义并隐藏了`/usr/bin/open`，这样某些工具在试图使用它时将出错。
 一个解决这个问题的方法是为 Nushell 的`open`定义一个自定义命令，并在你的`config.nu`文件中为系统的`open`创建一个别名，像这样：
 
-```bash
+```nu
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
