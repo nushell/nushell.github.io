@@ -384,7 +384,7 @@ as long as they have the same type.
 
 For example:
 
-```
+```nu
 ❯ $df | dfr join $df_a [int_1 first] [int_1 first]
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────┬─────────┬───────────┬───────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │ int_2_x │ float_1_x │ float_2_x │

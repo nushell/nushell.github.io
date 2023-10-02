@@ -12,7 +12,7 @@ In a similar way to [`ls`](/commands/docs/ls.md), opening a file type that Nu un
 
 If we wanted to check the version of the project we were looking at, we can use the [`get`](/commands/docs/get.md) command.
 
-```
+```nu
 > open editors/vscode/package.json | get version
 1.0.0
 ```
@@ -43,7 +43,7 @@ You can thus simply extend the set of supported file types of `open` by creating
 
 But what happens if you load a text file that isn't one of these? Let's try it:
 
-```
+```nu
 > open README.md
 ```
 

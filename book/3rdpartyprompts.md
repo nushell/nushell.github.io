@@ -58,7 +58,7 @@ $env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 
 Here's an example config section for Starship:
 
-```
+```nu
 $env.STARSHIP_SHELL = "nu"
 
 def create_left_prompt [] {

@@ -4,19 +4,19 @@ Aliases in Nushell offer a way of doing a simple replacement of command calls (b
 
 For example, let's create an alias called `ll` which will expand to `ls -l`.
 
-```
+```nu
 > alias ll = ls -l
 ```
 
 We can now call this alias:
 
-```
+```nu
 > ll
 ```
 
 Once we do, it's as if we typed `ls -l`. This also allows us to pass in flags or positional parameters. For example, we can now also write:
 
-```
+```nu
 > ll -a
 ```
 
@@ -31,7 +31,7 @@ Your useable aliases can be seen in `scope aliases` and `help aliases`.
 To make your aliases persistent they must be added to your _config.nu_ file by running `config nu` to open an editor and inserting them, and then restarting nushell.
 e.g. with the above `ll` alias, you can add `alias ll = ls -l` anywhere in _config.nu_
 
-```nushell
+```nu
 $env.config = {
     # main configuration
 }
@@ -46,7 +46,7 @@ alias ll = ls -l
 Note that `alias uuidgen = uuidgen | tr A-F a-f` (to make uuidgen on mac behave like linux) won't work.
 The solution is to define a command without parameters that calls the system program `uuidgen` via `^`.
 
-```
+```nu
 def uuidgen [] { ^uuidgen | tr A-F a-f }
 ```
 
@@ -54,7 +54,7 @@ See more in the [custom commands](custom_commands.md) section of this book.
 
 Or a more idiomatic example with nushell internal commands
 
-```
+```nu
 def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 ```
 

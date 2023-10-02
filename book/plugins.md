@@ -12,13 +12,13 @@ Please note that the plugin name needs to start with `nu_plugin_`, Nu uses the n
 
 Linux+macOS:
 
-```
+```nu
 > register ./my_plugins/nu_plugin_cool
 ```
 
 Windows:
 
-```
+```nu
 > register .\my_plugins\nu_plugin_cool.exe
 ```
 
@@ -31,7 +31,7 @@ When [`register`](/commands/docs/register.md) is called:
 
 Once registered, the plugin is available as part of your set of commands:
 
-```
+```nu
 > help commands | where command_type == "plugin"
 ```
 

@@ -6,7 +6,7 @@ The [standard library](standard_library.md) has a unit testing framework to ensu
 
 Have a file, called `test_math.nu`:
 
-```nushell
+```nu
 use std assert
 
 #[test]
@@ -27,7 +27,7 @@ def test_failing [] {
 
 Run the tests:
 
-```
+```nu
 ❯ use std testing run-tests
 ❯ run-tests
 INF|2023-04-12T10:42:29.099|Running tests in test_math
@@ -58,7 +58,7 @@ Error:
 The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error. For example:
 
 
-```
+```nu
 ❯ std assert (1 == 2)
 Error:
   × Assertion failed.
@@ -71,7 +71,7 @@ Error:
 
 Optionally, a message can be set to show the intention of the assert command, what went wrong or what was expected:
 
-```nushell
+```nu
 ❯ std assert ($a == 19) $"The lockout code is wrong, received: ($a)"
 Error:
   × The lockout code is wrong, received: 13
@@ -86,7 +86,7 @@ There are many assert commands, which behave exactly as the base one with the pr
 
 For example this is not so helpful without additional message:
 
-```
+```nu
 ❯ std assert ($b | str contains $a)
 Error:
   × Assertion failed.
@@ -99,7 +99,7 @@ Error:
 
 While with using `assert str contains`:
 
-```
+```nu
 ❯ std assert str contains $b $a
 Error:
   × Assertion failed.
@@ -112,7 +112,7 @@ Error:
 
 In general for base `assert` command it is encouraged to always provide the additional message to show what went wrong. If you cannot use any built-in assert command, you can create a custom one with passing the label for [`error make`](/commands/docs/error_make.md) for the `assert` command:
 
-```
+```nu
 def "assert even" [number: int] {
     std assert ($number mod 2 == 0) --error-label {
         start: (metadata $number).span.start,
@@ -124,7 +124,7 @@ def "assert even" [number: int] {
 
 Then you'll have your detailed custom error message:
 
-```
+```nu
 ❯ let $a = 13
 ❯ assert even $a
 Error:
@@ -157,7 +157,7 @@ The standard library itself is tested with this framework, so you can find many 
 
 The unit testing framework uses the `log` commands from the standard library to display information, so you can set `NU_LOG_LEVEL` if you want more or less details:
 
-```
+```nu
 ❯ std run-tests
 ❯ NU_LOG_LEVEL=DEBUG std run-tests
 ❯ NU_LOG_LEVEL=WARNING std run-tests

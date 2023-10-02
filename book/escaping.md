@@ -4,13 +4,13 @@ Nu provides a set of commands that you can use across different OSes ("internal"
 
 Nu internal command:
 
-```
+```nu
 > ls
 ```
 
 Escape to external command:
 
-```
+```nu
 > ^ls
 ```
 

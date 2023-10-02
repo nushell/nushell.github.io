@@ -383,7 +383,7 @@ If you don't like the default `PROMPT_INDICATOR` you could change it like this.
 
 If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
 
-```
+```nu
 config {
     render_right_prompt_on_last_line = true
     ...

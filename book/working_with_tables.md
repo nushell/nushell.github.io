@@ -4,7 +4,7 @@ One of the common ways of seeing data in Nu is through a table. Nu comes with a 
 
 To start off, let's get a table that we can use:
 
-```
+```nu
 > ls
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -23,7 +23,7 @@ To start off, let's get a table that we can use:
 
 We can sort a table by calling the [`sort-by`](/commands/docs/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
 
-```
+```nu
 > ls | sort-by size
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -44,7 +44,7 @@ We can sort a table by any column that can be compared. For example, we could al
 
 We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](/commands/docs/select.md) a few columns from our table to use:
 
-```
+```nu
 > ls | select name size
 ───┬───────────────┬─────────
  # │ name          │ size
@@ -61,7 +61,7 @@ We can select data from a table by choosing to select specific columns or specif
 
 This helps to create a table that's more focused on what we need. Next, let's say we want to only look at the 5 smallest files in this directory:
 
-```
+```nu
 > ls | sort-by size | first 5
 ───┬──────────────┬──────┬────────┬────────────
  # │ name         │ type │ size   │ modified
@@ -78,7 +78,7 @@ You'll notice we first sort the table by size to get to the smallest file, and t
 
 You can also [`skip`](/commands/docs/skip.md) rows that you don't want. Let's skip the first two of the 5 rows we returned above:
 
-```
+```nu
 > ls | sort-by size | first 5 | skip 2
 ───┬───────────┬──────┬────────┬────────────
  # │ name      │ type │ size   │ modified
@@ -93,7 +93,7 @@ We've narrowed it to three rows we care about.
 
 Let's look at a few other commands for selecting data. You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row. Let's sort our table by the file name and then pick one of the rows with the [`select`](/commands/docs/select.md) command using its row number:
 
-```
+```nu
 > ls | sort-by name
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -119,7 +119,7 @@ Let's look at a few other commands for selecting data. You may have wondered why
 
 So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](/commands/docs/get.md) command:
 
-```
+```nu
 > ls | get name
 ───┬───────────────
  0 │ files.rs
@@ -136,7 +136,7 @@ We now have the values for each of the filenames.
 
 This might look like the [`select`](/commands/docs/select.md) command we saw earlier, so let's put that here as well to compare the two:
 
-```
+```nu
 > ls | select name
 ───┬───────────────
  # │ name
@@ -243,7 +243,7 @@ We could join all three tables together like this:
 
 Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically merge all tables:
 
-```
+```nu
 > [$first $second $third] | reduce {|it, acc| $acc | merge $it }
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
@@ -256,7 +256,7 @@ Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically 
 
 We can use the [`insert`](/commands/docs/insert.md) command to add a new column to the table. Let's look at an example:
 
-```
+```nu
 > open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -265,7 +265,7 @@ We can use the [`insert`](/commands/docs/insert.md) command to add a new column 
 
 Let's add a column called "next_edition" with the value 2021:
 
-```
+```nu
 > open rustfmt.toml | insert next_edition 2021
 ──────────────┬──────
  edition      │ 2018
@@ -275,7 +275,7 @@ Let's add a column called "next_edition" with the value 2021:
 
 This visual may be slightly confusing, because it looks like what we've just done is add a row. In this case, remember: rows have numbers, columns have names. If it still is confusing, note that appending one more row will make the table render as expected:
 
-```
+```nu
 > open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_edition: 2024}
 ───┬─────────┬──────────────
  # │ edition │ next_edition
@@ -288,7 +288,7 @@ This visual may be slightly confusing, because it looks like what we've just don
 
 Notice that if we open the original file, the contents have stayed the same:
 
-```
+```nu
 > open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -297,7 +297,7 @@ Notice that if we open the original file, the contents have stayed the same:
 
 Changes in Nu are functional changes, meaning that they work on values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](/commands/docs/save.md) command:
 
-```
+```nu
 > open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
 > open rustfmt2.toml
 ──────────────┬──────
@@ -310,7 +310,7 @@ Changes in Nu are functional changes, meaning that they work on values themselve
 
 In a similar way to the [`insert`](/commands/docs/insert.md) command, we can also use the [`update`](/commands/docs/update.md) command to change the contents of a column to a new value. To see it in action let's open the same file:
 
-```
+```nu
 > open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -319,7 +319,7 @@ In a similar way to the [`insert`](/commands/docs/insert.md) command, we can als
 
 And now, let's update the edition to point at the next edition we hope to support:
 
-```
+```nu
 > open rustfmt.toml | update edition 2021
 ─────────┬──────
  edition │ 2021
@@ -332,7 +332,7 @@ You can also use the [`upsert`](/commands/docs/upsert.md) command to insert or u
 
 You can use [`move`](/commands/docs/move.md) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls.md) after the "size" column, we could do:
 
-```
+```nu
 > ls | move name --after size
 ╭────┬──────┬─────────┬───────────────────┬──────────────╮
 │ #  │ type │  size   │       name        │   modified   │
@@ -349,7 +349,7 @@ You can use [`move`](/commands/docs/move.md) to move columns in the table. For e
 
 You can also [`rename`](/commands/docs/rename.md) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls.md) and rename the columns, we can use this example:
 
-```
+```nu
 > ls | rename filename filetype filesize date
 ╭────┬───────────────────┬──────────┬──────────┬──────────────╮
 │ #  │     filename      │ filetype │ filesize │     date     │
@@ -366,7 +366,7 @@ You can also [`rename`](/commands/docs/rename.md) columns in a table by passing 
 
 You can also [`reject`](/commands/docs/reject.md) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls.md) and delete the columns, we can use this example:
 
-```
+```nu
 > ls -l / |reject readonly num_links inode created accessed modified
 ╭────┬────────┬─────────┬─────────┬───────────┬──────┬───────┬────────╮
 │  # │  name  │  type   │ target  │   mode    │ uid  │ group │  size  │

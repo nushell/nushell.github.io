@@ -12,7 +12,7 @@ The simpler of the two evaluation expressions is the variable. During evaluation
 
 An immutable variable cannot change its value after declaration. They are declared using the `let` keyword,
 
-```
+```nu
 > let val = 42
 > print $val
 42
@@ -20,7 +20,7 @@ An immutable variable cannot change its value after declaration. They are declar
 
 However, they can be 'shadowed'. Shadowing means that they are redeclared and their initial value cannot be used anymore within the same scope.
 
-```
+```nu
 > let val = 42                   # declare a variable
 > do { let val = 101;  $val }    # in an inner scope, shadow the variable
 101
@@ -32,7 +32,7 @@ However, they can be 'shadowed'. Shadowing means that they are redeclared and th
 
 A mutable variable is allowed to change its value by assignment. These are declared using the `mut` keyword.
 
-```
+```nu
 > mut val = 42
 > $val += 27
 > $val
@@ -61,7 +61,7 @@ There are a couple of assignment operators used with mutable variables
 
 Closures and nested `def`s cannot capture mutable variables from their environment. For example
 
-```
+```nu
 # naive method to count number of elements in a list
 mut x = 0
 
@@ -98,13 +98,13 @@ It is common for some scripts to declare variables that start with `$`. This is 
 
 A variable path works by reaching inside of the contents of a variable, navigating columns inside of it, to reach a final value. Let's say instead of `4`, we had assigned a table value:
 
-```
+```nu
 > let my_value = [[name]; [testuser]]
 ```
 
 We can use a variable path to evaluate the variable `$my_value` and get the value from the `name` column in a single step:
 
-```
+```nu
 > $my_value.name.0
 testuser
 ```
@@ -133,7 +133,7 @@ The parentheses contain a pipeline that will run to completion, and the resultin
 
 Subexpressions can also be pipelines and not just single commands. If we wanted to get a table of files larger than ten kilobytes, we could use a subexpression to run a pipeline and assign its result to a variable:
 
-```
+```nu
 > let big_files = (ls | where size > 10kb)
 > $big_files
 ───┬────────────┬──────┬──────────┬──────────────
@@ -148,13 +148,13 @@ Subexpressions can also be pipelines and not just single commands. If we wanted 
 
 Subexpressions also support paths. For example, let's say we wanted to get a list of the filenames in the current directory. One way to do this is to use a pipeline:
 
-```
+```nu
 > ls | get name
 ```
 
 We can do a very similar action in a single step using a subexpression path:
 
-```
+```nu
 > (ls).name
 ```
 
@@ -164,13 +164,13 @@ It depends on the needs of the code and your particular style which form works b
 
 Nushell supports accessing columns in a subexpression using a simple short-hand. You may have already used this functionality before. If, for example, we wanted to only see rows from [`ls`](/commands/docs/ls.md) where the entry is at least ten kilobytes we could write:
 
-```
+```nu
 > ls | where size > 10kb
 ```
 
 The `where size > 10kb` is a command with two parts: the command name [`where`](/commands/docs/where.md) and the short-hand expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`. This could also be written in any of the following ways:
 
-```
+```nu
 > ls | where $it.size > 10kb
 > ls | where ($it.size > 10kb)
 > ls | where {|$x| $x.size > 10kb }

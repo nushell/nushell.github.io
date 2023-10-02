@@ -9,7 +9,7 @@ Nushell uses a configuration system that loads and runs two Nushell script files
 
 You can check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`.
 
-```
+```nu
 > $nu.env-path
 /Users/FirstNameLastName/Library/Application Support/nushell/env.nu
 ```
@@ -24,7 +24,7 @@ You can browse the default files for default values of environment variables and
 
 Nushell's main settings are kept in the `config` environment variable as a record. This record can be created using:
 
-```
+```nu
 $env.config = {
   ...
 }
@@ -32,7 +32,7 @@ $env.config = {
 
 You can also shadow `$env.config` and update it:
 
-```
+```nu
 $env.config = ($env.config | upsert <field name> <field value>)
 ```
 
@@ -42,7 +42,7 @@ By convention, this variable is defined in the `config.nu` file.
 
 You can set environment variables for the duration of a Nushell session using the `$env.<var> = <val>` structure inside the `env.nu` file. For example:
 
-```
+```nu
 $env.FOO = 'BAR'
 ```
 
@@ -96,7 +96,7 @@ This will print out `$env.<var> = <val>` lines, one for each environment variabl
 
 Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
-```
+```sh
 > cat /etc/shells
 # /etc/shells: valid login shells
 /bin/sh
@@ -124,7 +124,7 @@ Some tools (e.g. Emacs) rely on an [`open`](/commands/docs/open.md) command to o
 As Nushell has its own [`open`](/commands/docs/open.md) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
 One way to work around this is to define a custom command for Nushell's [`open`](/commands/docs/open.md) and create an alias for the system's [`open`](/commands/docs/open.md) in your `config.nu` file like this:
 
-```
+```nu
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
@@ -136,7 +136,7 @@ For more about escape and `^` see the [chapter about escapes](escaping.md).
 
 In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use `$env.<var> = <val>` and [`append`](/commands/docs/append.html) in `env.nu`:
 
-```
+```nu
 $env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
 ```
 
@@ -148,7 +148,7 @@ Note the `split row (char esep)` step. We need to add it because in `env.nu`, th
 
 [Homebrew](https://brew.sh/) is a popular package manager that often requires PATH configuration. To add it to your Nushell PATH:
 
-```
+```nu
 # macOS ARM64 (Apple Silicon)
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
 

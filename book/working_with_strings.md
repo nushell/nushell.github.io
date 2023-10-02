@@ -85,7 +85,7 @@ list<string>
 
 But be careful - if you use a bare word plainly on the command line (that is, not inside a data structure or used as a command parameter) or inside round brackets `(` `)`, it will be interpreted as an external command:
 
-```
+```nu
 > hello
 Error: nu::shell::external_command
 
@@ -100,7 +100,7 @@ Error: nu::shell::external_command
 
 Also, many bare words have special meaning in nu, and so will not be interpreted as a string:
 
-```
+```nu
 > true | describe
 bool
 > [true] | describe

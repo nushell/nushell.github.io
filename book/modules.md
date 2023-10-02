@@ -32,7 +32,7 @@ _\*These definitions can also be defined as `main` (see below)._
 
 The simplest (and probably least useful) way to define a module is an "inline" module can be defined like this:
 
-```nushell
+```nu
 module greetings {
     export def hello [name: string] {
         $"hello ($name)!"
@@ -56,7 +56,7 @@ First, we create a module (put `hello` and `hi` commands into a "bag" called `gr
 
 A .nu file can be a module. Just take the contents of the module block from the example above and save it to a file `greetings.nu`. The module name is automatically inferred as the stem of the file ("greetings").
 
-```nushell
+```nu
 # greetings.nu
 
 export def hello [name: string] {
@@ -70,7 +70,7 @@ export def hi [where: string] {
 
 then
 
-```nushell
+```nu
 > use greetings.nu hello
 
 > hello
@@ -78,7 +78,7 @@ then
 
 The result should be similar as in the previous section.
 
-> **Note**  
+> **Note**
 > that the `use greetings.nu hello` call here first implicitly creates the `greetings` module,
 > then takes `hello` from it. You could also write it as `module greetings.nu`, `use greetings hello`.
 > Using `module` can be useful if you're not interested in any definitions from the module but want to,
@@ -90,7 +90,7 @@ Finally, a directory can be imported as a module. The only condition is that it 
 
 _In the following examples, `/` is used at the end to denote that we're importing a directory but it is not required._
 
-```nushell
+```nu
 # greetings/mod.nu
 
 export def hello [name: string] {
@@ -104,7 +104,7 @@ export def hi [where: string] {
 
 then
 
-```nushell
+```nu
 > use greetings/ hello
 
 > hello
@@ -123,25 +123,25 @@ The import pattern has the following structure `use head members...` where `head
 
 Using our `greetings` example:
 
-```
+```nu
 use greetings
 ```
 
 imports all symbols prefixed with the `greetings` namespace (can call `greetings hello` and `greetings hi`).
 
-```
+```nu
 use greetings hello
 ```
 
 will import the `hello` command directly without any prefix.
 
-```
+```nu
 use greetings [hello, hi]
 ```
 
 imports multiple definitions<> directly without any prefix.
 
-```
+```nu
 use greetings *
 ```
 
@@ -151,7 +151,7 @@ will import all names directly without any prefix.
 
 Exporting a command called `main` from a module defines a command named as the module. Let's extend our `greetings` example:
 
-```nushell
+```nu
 # greetings.nu
 
 export def hello [name: string] {
@@ -169,7 +169,7 @@ export def main [] {
 
 then
 
-```
+```nu
 > use greetings.nu
 
 > greetings
@@ -197,12 +197,12 @@ Submodules are modules inside modules. They are automatically created when you c
 
 The difference is that `export module some-module` _only_ adds the module as a submodule, while `export use some-module` _also_ re-exports the submodule's definitions. Since definitions of submodules are available when importing from a module, `export use some-module` is typically redundant, unless you want to re-export its definitions without the namespace prefix.
 
-> **Note**  
+> **Note**
 > `module` without `export` defines only a local module, it does not export a submodule.
 
 Let's illustrate this with an example. Assume three files:
 
-```nushell
+```nu
 # greetings.nu
 
 export def hello [name: string] {
@@ -218,7 +218,7 @@ export def main [] {
 }
 ```
 
-```nushell
+```nu
 # animals.nu
 
 export def dog [] {
@@ -230,7 +230,7 @@ export def cat [] {
 }
 ```
 
-```nushell
+```nu
 # voice.nu
 
 export use greetings.nu *
@@ -241,7 +241,7 @@ export module animals.nu
 
 Then:
 
-```
+```nu
 > use voice.nu
 
 > voice animals dog
@@ -267,7 +267,7 @@ As you can see, defining the submodule structure also shapes the command line AP
 
 Modules can also define an environment using [`export-env`](/commands/docs/export-env.md):
 
-```
+```nu
 # greetings.nu
 
 export-env {
@@ -281,7 +281,7 @@ export def hello [] {
 
 When [`use`](/commands/docs/use.md) is evaluated, it will run the code inside the [`export-env`](/commands/docs/export-env.md) block and merge its environment into the current scope:
 
-```
+```nu
 > use greetings.nu
 
 > $env.MYNAME
@@ -294,7 +294,7 @@ hello Arthur, King of the Britons!
 ::: tip
 You can put a complex code defining your environment without polluting the namespace of the module, for example:
 
-```nushell
+```nu
     def tmp [] { "tmp" }
     def other [] { "other" }
 
@@ -318,7 +318,7 @@ Like any programming language, Nushell is also a product of a tradeoff and there
 
 If you also want to keep your variables in separate modules and export their environment, you could try to [`export use`](/commands/docs/export_use.md) it:
 
-```nushell
+```nu
 # purpose.nu
 export-env {
     $env.MYPURPOSE = "to build an empire."
@@ -331,7 +331,7 @@ export def greeting_purpose [] {
 
 and then use it
 
-```nushell
+```nu
 > use purpose.nu
 
 > purpose greeting_purpose
@@ -339,7 +339,7 @@ and then use it
 
 However, this won't work, because the code inside the module is not _evaluated_, only _parsed_ (only the `export-env` block is evaluated when you call `use purpose.nu`). To export the environment of `greetings.nu`, you need to add it to the `export-env` module:
 
-```nushell
+```nu
 # purpose.nu
 export-env {
     use greetings.nu
@@ -353,7 +353,7 @@ export def greeting_purpose [] {
 
 then
 
-```
+```nu
 > use purpose.nu
 
 > purpose greeting_purpose
@@ -377,7 +377,7 @@ This section describes some useful patterns using modules.
 
 Anything defined in a module without the [`export`](/commands/docs/export.md) keyword will work only in the module's scope.
 
-```nushell
+```nu
 # greetings.nu
 
 use tools/utils.nu generate-prefix  # visible only locally (we assume the file exists)
@@ -397,7 +397,7 @@ def greetings-helper [greeting: string, subject: string] {
 
 then
 
-```nushell
+```nu
 > use greetings.nu *
 
 
@@ -416,7 +416,7 @@ hi there!
 
 Since directories can be imported as submodules and submodules can naturally form subcommands it is easy to build even complex command line applications with a simple file structure.
 
-> **Warning**  
+> **Warning**
 > Work In Progress
 
 ### Dumping files into directory
@@ -429,7 +429,7 @@ A common pattern in traditional shells is dumping and auto-sourcing files from a
 
 Now you've set up a directory where you can put your completion files. For example:
 
-```
+```nu
 # git.nu
 
 export extern main [
@@ -463,7 +463,7 @@ We use it in our official virtualenv integration https://github.com/pypa/virtual
 
 Another example could be our unofficial Conda module: https://github.com/nushell/nu_scripts/blob/f86a060c10f132407694e9ba0f536bfe3ee51efc/modules/virtual_environments/conda.nu
 
-> **Warning**  
+> **Warning**
 > Work In Progress
 
 ## Hiding
@@ -471,7 +471,7 @@ Another example could be our unofficial Conda module: https://github.com/nushell
 Any custom command or alias, imported from a module or not, can be "hidden", restoring the previous definition.
 We do this with the [`hide`](/commands/docs/hide.md) command:
 
-```
+```nu
 > def foo [] { "foo" }
 
 > foo
@@ -503,5 +503,5 @@ It can be one of the following:
 
 - Hides all of the module's exports, without the prefix
 
-> **Note**  
+> **Note**
 > `hide` is not a supported keyword at the root of the module (unlike `def` etc.)
