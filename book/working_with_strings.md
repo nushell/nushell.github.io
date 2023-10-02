@@ -19,7 +19,7 @@ matches your needs.
 
 The simplest string in Nushell is the single-quoted string. This string uses the `'` character to surround some text. Here's the text for hello world as a single-quoted string:
 
-```sh
+```nu
 > 'hello world'
 hello world
 > 'The
@@ -34,7 +34,7 @@ Single-quoted strings don't do anything to the text they're given, making them i
 
 Single-quoted strings, due to not supporting any escapes, cannot contain any single-quote characters themselves. As an alternative, backtick strings using the <code>`</code> character also exist:
 
-```sh
+```nu
 > `no man's land`
 no man's land
 > `no man's
@@ -51,7 +51,7 @@ For more complex strings, Nushell also offers double-quoted strings. These strin
 
 For example, we could write the text hello followed by a new line and then world, using escape characters and a double-quoted string:
 
-```sh
+```nu
 > "hello\nworld"
 hello
 world
@@ -76,7 +76,7 @@ Nushell currently supports the following escape characters:
 
 Like other shell languages (but unlike most other programming languages) strings consisting of a single 'word' can also be written without any quotes:
 
-```sh
+```nu
 > print hello
 hello
 > [hello] | describe
@@ -125,7 +125,7 @@ So, while bare strings are useful for informal command line usage, when programm
 
 You can place the `^` sigil in front of any string (including a variable) to have Nushell execute the string as if it was an external command:
 
-```sh
+```nu
 ^'C:\Program Files\exiftool.exe'
 
 > let foo = 'C:\Program Files\exiftool.exe'
@@ -138,30 +138,29 @@ You can also use the [`run-external`](/commands/docs/run-external.md) command fo
 
 There are various ways to pre, or append strings. If you want to add something to the beginning of each string closures are a good option:
 
-```sh
+```nu
 ['foo', 'bar'] | each {|s| '~/' ++ $s} # ~/foo, ~/bar
 ['foo', 'bar'] | each {|s| '~/' + $s} # ~/foo, ~/bar
 ```
 
 You can also use a regex to replace the beginning or end of a string:
 
-```sh
+```nu
 ['foo', 'bar'] | str replace -r '^' '~/'# ~/foo, ~/bar
 ['foo', 'bar'] | str replace -r '$' '~/'# foo~/, bar~/
 ```
 
 If you want to get one string out of the end then `str join` is your friend:
 
-```sh
+```nu
 "hello" | append "world!" | str join " " # hello world!
 ```
 
 You can also use reduce:
 
-```sh
+```nu
 1..10 | reduce -f "" {|it, acc| $acc + ($it | into string) + " + "} # 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 +
 ```
-
 
 Though in the cases of strings, especially if you don't have to operate on the strings, it's usually easier and more correct (notice the extra + at the end in the example above) to use `str join`.
 
@@ -175,7 +174,7 @@ String interpolation uses `$" "` and `$' '` as ways to wrap interpolated text.
 
 For example, let's say we have a variable called `$name` and we want to greet the name of the person contained in this variable:
 
-```sh
+```nu
 > let name = "Alice"
 > $"greetings, ($name)"
 greetings, Alice
@@ -187,7 +186,7 @@ String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" 
 
 As of version 0.61, interpolated strings support escaping parentheses, so that the `(` and `)` characters may be used in a string without Nushell trying to evaluate what appears between them:
 
-```sh
+```nu
 > $"2 + 2 is (2 + 2) \(you guessed it!)"
 2 + 2 is 4 (you guessed it!)
 ```
@@ -196,7 +195,7 @@ As of version 0.61, interpolated strings support escaping parentheses, so that t
 
 The [`split row`](/commands/docs/split_row.md) command creates a list from a string based on a delimiter.
 
-```sh
+```nu
 > "red,green,blue" | split row ","
 ╭───┬───────╮
 │ 0 │ red   │
@@ -207,7 +206,7 @@ The [`split row`](/commands/docs/split_row.md) command creates a list from a str
 
 The [`split column`](/commands/docs/split_column.md) command will create a table from a string based on a delimiter. This applies generic column names to the table.
 
-```sh
+```nu
 > "red,green,blue" | split column ","
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column1 │ column2 │ column3 │
@@ -218,7 +217,7 @@ The [`split column`](/commands/docs/split_column.md) command will create a table
 
 Finally, the [`split chars`](/commands/docs/split_chars.md) command will split a string into a list of characters.
 
-```sh
+```nu
 > 'aeiou' | split chars
 ╭───┬───╮
 │ 0 │ a │
@@ -235,7 +234,7 @@ Many string functions are subcommands of the [`str`](/commands/docs/str.md) comm
 
 For example, you can look if a string contains a particular substring using [`str contains`](/commands/docs/str_contains.md):
 
-```sh
+```nu
 > "hello world" | str contains "o wo"
 true
 ```
@@ -246,7 +245,7 @@ true
 
 You can trim the sides of a string with the [`str trim`](/commands/docs/str_trim.md) command. By default, the [`str trim`](/commands/docs/str_trim.md) commands trims whitespace from both sides of the string. For example:
 
-```sh
+```nu
 > '       My   string   ' | str trim
 My   string
 ```
@@ -257,7 +256,7 @@ To trim a specific character, use `--char <Character>` or `-c <Character>` to sp
 
 Here's an example of all the options in action:
 
-```sh
+```nu
 > '=== Nu shell ===' | str trim -r -c '='
 === Nu shell
 ```
@@ -266,7 +265,7 @@ Here's an example of all the options in action:
 
 Substrings are slices of a string. They have a startpoint and an endpoint. Here's an example of using a substring:
 
-```sh
+```nu
 > 'Hello World!' | str index-of 'o'
 4
 > 'Hello World!' | str index-of 'r'
@@ -279,7 +278,7 @@ o Wo
 
 With the [`fill`](/commands/docs/fill.md) command you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
 
-```sh
+```nu
 > '1234' | fill -a right -c '0' -w 10
 0000001234
 > '1234' | fill -a left -c '0' -w 10 | str length
@@ -290,7 +289,7 @@ With the [`fill`](/commands/docs/fill.md) command you can add padding to a strin
 
 This can be done easily with the [`str reverse`](/commands/docs/str_reverse.md) command.
 
-```sh
+```nu
 > 'Nushell' | str reverse
 llehsuN
 > ['Nushell' 'is' 'cool'] | str reverse
@@ -305,7 +304,7 @@ llehsuN
 
 With the [`parse`](/commands/docs/parse.md) command you can parse a string into columns. For example:
 
-```sh
+```nu
 > 'Nushell 0.80' | parse '{shell} {version}'
 ╭───┬─────────┬─────────╮
 │ # │  shell  │ version │
@@ -322,7 +321,7 @@ With the [`parse`](/commands/docs/parse.md) command you can parse a string into 
 
 If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use [`from csv`](/commands/docs/from_csv.md), [`from tsv`](/commands/docs/from_tsv.md) or [`from ssv`](/commands/docs/from_ssv.md):
 
-```sh
+```nu
 > "acronym,long\nAPL,A Programming Language" | from csv
 ╭───┬─────────┬────────────────────────╮
 │ # │ acronym │          long          │
@@ -350,7 +349,7 @@ In addition to the standard `==` and `!=` operators, a few operators exist for s
 
 Those familiar with Bash and Perl will recognise the regex comparison operators:
 
-```sh
+```nu
 > 'APL' =~ '^\w{0,3}$'
 true
 > 'FORTRAN' !~ '^\w{0,3}$'
@@ -359,7 +358,7 @@ true
 
 Two other operators exist for simpler comparisons:
 
-```sh
+```nu
 > 'JavaScript' starts-with 'Java'
 true
 > 'OCaml' ends-with 'Caml'
@@ -383,7 +382,7 @@ There are multiple ways to convert strings to and from other types.
 
 You can color strings with the [`ansi`](/commands/docs/ansi.md) command. For example:
 
-```sh
+```nu
 > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 

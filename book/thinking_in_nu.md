@@ -8,7 +8,7 @@ So what does it mean to think in Nushell? Here are some common topics that come 
 
 Nushell is both a programming language and a shell and because of this has its own way of working with files, directories, websites, and more. We've modeled this to work closely with what you may be familiar with other shells. Pipelines work by attaching two commands together:
 
-```
+```nu
 > ls | length
 ```
 
@@ -107,6 +107,6 @@ The [`cd`](/commands/docs/cd.md) command changes the `PWD` environment variables
 
 Having the environment scoped like this makes commands more predictable, easier to read, and when the time comes, easier to debug. Nushell also provides helper commands like [`def-env`](/commands/docs/def-env.md), [`load-env`](/commands/docs/load-env.md), as convenient ways of doing batches of updates to the environment.
 
-*There is one exception here, where [`def-env`](/commands/docs/def-env.md) allows you to create a command that participates in the caller's environment.*
+_There is one exception here, where [`def-env`](/commands/docs/def-env.md) allows you to create a command that participates in the caller's environment._
 
 **Thinking in Nushell:** - The coding best practice of no global mutable variables extends to the environment in Nushell. Using the built-in helper commands will let you more easily work with the environment in Nushell. Taking advantage of the fact that environments are scoped to blocks can also help you write more concise scripts and interact with external commands without adding things into a global environment you don't need.

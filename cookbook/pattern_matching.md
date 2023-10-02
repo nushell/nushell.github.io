@@ -64,7 +64,7 @@ As you can see you can also use command expressions in match statements (in this
 
 You can use the [`describe`](https://www.nushell.sh/commands/docs/describe.html) command to get more info about the types of values. For example:
 
-```sh
+```nu
 {one: 1 two: 2} | describe
 record<one: int, two: int>
 
