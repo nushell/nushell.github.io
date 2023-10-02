@@ -36,19 +36,19 @@ usage: |
 ## Examples
 
 Create a link to open some file
-```shell
+```nu
 > 'file:///file.txt' | ansi link --text 'Open Me!'
 Open Me!
 ```
 
 Create a link without text
-```shell
+```nu
 > 'https://www.nushell.sh/' | ansi link
 https://www.nushell.sh/
 ```
 
 Format a table column into links
-```shell
+```nu
 > [[url text]; [https://example.com Text]] | ansi link url
 
 ```

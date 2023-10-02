@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Select a column in a table
-```shell
+```nu
 > [{a: a b: b}] | select a
 ╭───┬───╮
 │ # │ a │
@@ -45,7 +45,7 @@ Select a column in a table
 ```
 
 Select a field in a record
-```shell
+```nu
 > {a: a b: b} | select a
 ╭───┬───╮
 │ a │ a │
@@ -53,25 +53,25 @@ Select a field in a record
 ```
 
 Select just the `name` column
-```shell
+```nu
 > ls | select name
 
 ```
 
 Select the first four rows (this is the same as `first 4`)
-```shell
+```nu
 > ls | select 0 1 2 3
 
 ```
 
 Select columns by a provided list of columns
-```shell
+```nu
 > let cols = [name type];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | select $cols
 
 ```
 
 Select rows by a provided list of rows
-```shell
+```nu
 > let rows = [0 2];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb] [file.json json 3kb]] | select $rows
 
 ```

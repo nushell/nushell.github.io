@@ -34,31 +34,31 @@ usage: |
 ## Examples
 
 Print the ast of a string
-```shell
+```nu
 > ast 'hello'
 
 ```
 
 Print the ast of a pipeline
-```shell
+```nu
 > ast 'ls | where name =~ README'
 
 ```
 
 Print the ast of a pipeline with an error
-```shell
+```nu
 > ast 'for x in 1..10 { echo $x '
 
 ```
 
 Print the ast of a pipeline with an error, as json, in a nushell table
-```shell
+```nu
 > ast 'for x in 1..10 { echo $x ' --json | get block | from json
 
 ```
 
 Print the ast of a pipeline with an error, as json, minified
-```shell
+```nu
 > ast 'for x in 1..10 { echo $x ' -j -m
 
 ```

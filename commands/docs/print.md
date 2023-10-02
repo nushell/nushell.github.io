@@ -34,13 +34,13 @@ usage: |
 ## Examples
 
 Print 'hello world'
-```shell
+```nu
 > print "hello world"
 
 ```
 
 Print the sum of 2 and 3
-```shell
+```nu
 > print (2 + 3)
 
 ```

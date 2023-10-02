@@ -37,13 +37,13 @@ usage: |
 ## Examples
 
 Base64 decode a value and output as UTF-8 string
-```shell
+```nu
 > 'U29tZSBEYXRh' | decode base64
 Some Data
 ```
 
 Base64 decode a value and output as binary
-```shell
+```nu
 > 'U29tZSBEYXRh' | decode base64 --binary
 Length: 9 (0x9) bytes | printable whitespace ascii_other non_ascii
 00000000:   53 6f 6d 65  20 44 61 74  61                         Some Data

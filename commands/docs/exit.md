@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Exit the current shell
-```shell
+```nu
 > exit
 
 ```

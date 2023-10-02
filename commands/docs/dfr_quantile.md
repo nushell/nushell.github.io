@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 quantile value from columns in a dataframe
-```shell
+```nu
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr quantile 0.5
 ╭───┬──────┬──────╮
 │ # │  a   │  b   │

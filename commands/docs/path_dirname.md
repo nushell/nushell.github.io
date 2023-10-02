@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Get dirname of a path
-```shell
+```nu
 > '/home/joe/code/test.txt' | path dirname
 /home/joe/code
 ```
 
 Get dirname of a list of paths
-```shell
+```nu
 > [ /home/joe/test.txt, /home/doe/test.txt ] | path dirname
 ╭───┬───────────╮
 │ 0 │ /home/joe │
@@ -49,13 +49,13 @@ Get dirname of a list of paths
 ```
 
 Walk up two levels
-```shell
+```nu
 > '/home/joe/code/test.txt' | path dirname -n 2
 /home/joe
 ```
 
 Replace the part that would be returned with a custom path
-```shell
+```nu
 > '/home/joe/code/test.txt' | path dirname -n 2 -r /home/viking
 /home/viking/code/test.txt
 ```

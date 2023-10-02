@@ -30,13 +30,13 @@ usage: |
 ## Examples
 
 Compute the median of a list of numbers
-```shell
+```nu
 > [3 8 9 12 12 15] | math median
 10.5
 ```
 
 Compute the medians of the columns of a table
-```shell
+```nu
 > [{a: 1 b: 3} {a: 2 b: -1} {a: -3 b: 5}] | math median
 ╭───┬───╮
 │ a │ 1 │

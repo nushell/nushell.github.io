@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Saves dataframe to JSON lines file
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-jsonl test.jsonl
 
 ```

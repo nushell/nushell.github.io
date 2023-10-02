@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Return the first row of a dataframe
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr first
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -43,7 +43,7 @@ Return the first row of a dataframe
 ```
 
 Return the first two rows of a dataframe
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr first 2
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -55,7 +55,7 @@ Return the first two rows of a dataframe
 ```
 
 Creates a first expression from a column
-```shell
+```nu
 > dfr col a | dfr first
 
 ```

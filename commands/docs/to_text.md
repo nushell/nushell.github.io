@@ -28,19 +28,19 @@ usage: |
 ## Examples
 
 Outputs data as simple text
-```shell
+```nu
 > 1 | to text
 1
 ```
 
 Outputs external data as simple text
-```shell
+```nu
 > git help -a | lines | find -r '^ ' | to text
 
 ```
 
 Outputs records as simple text
-```shell
+```nu
 > ls | to text
 
 ```

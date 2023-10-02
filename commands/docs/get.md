@@ -36,13 +36,13 @@ usage: |
 ## Examples
 
 Get an item from a list
-```shell
+```nu
 > [0 1 2] | get 1
 1
 ```
 
 Get a column from a table
-```shell
+```nu
 > [{A: A0}] | get A
 ╭───┬────╮
 │ 0 │ A0 │
@@ -51,37 +51,37 @@ Get a column from a table
 ```
 
 Get a cell from a table
-```shell
+```nu
 > [{A: A0}] | get 0.A
 A0
 ```
 
 Extract the name of the 3rd record in a list (same as `ls | $in.name`)
-```shell
+```nu
 > ls | get name.2
 
 ```
 
 Extract the name of the 3rd record in a list
-```shell
+```nu
 > ls | get 2.name
 
 ```
 
 Extract the cpu list from the sys information record
-```shell
+```nu
 > sys | get cpu
 
 ```
 
 Getting Path/PATH in a case insensitive way
-```shell
+```nu
 > $env | get paTH
 
 ```
 
 Getting Path in a case sensitive way, won't work for 'PATH'
-```shell
+```nu
 > $env | get -s Path
 
 ```

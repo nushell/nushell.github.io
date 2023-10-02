@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Returns indexes for a sorted series
-```shell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr arg-sort
 ╭───┬──────────╮
 │ # │ arg_sort │
@@ -49,7 +49,7 @@ Returns indexes for a sorted series
 ```
 
 Returns indexes for a sorted series
-```shell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr arg-sort -r
 ╭───┬──────────╮
 │ # │ arg_sort │

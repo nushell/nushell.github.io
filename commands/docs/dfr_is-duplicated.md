@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Create mask indicating duplicated values
-```shell
+```nu
 > [5 6 6 6 8 8 8] | dfr into-df | dfr is-duplicated
 ╭───┬───────────────╮
 │ # │ is_duplicated │
@@ -45,7 +45,7 @@ Create mask indicating duplicated values
 ```
 
 Create mask indicating duplicated rows in a dataframe
-```shell
+```nu
 > [[a, b]; [1 2] [1 2] [3 3] [3 3] [1 1]] | dfr into-df | dfr is-duplicated
 ╭───┬───────────────╮
 │ # │ is_duplicated │

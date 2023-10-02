@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Begin the tutorial
-```shell
+```nu
 > tutor begin
 
 ```
 
 Search a tutorial by phrase
-```shell
+```nu
 > tutor -f "$in"
 
 ```

@@ -37,7 +37,7 @@ usage: |
 ## Examples
 
 Convert value to boolean in table
-```shell
+```nu
 > [[value]; ['false'] ['1'] [0] [1.0] [true]] | into bool value
 ╭───┬───────╮
 │ # │ value │
@@ -52,31 +52,31 @@ Convert value to boolean in table
 ```
 
 Convert bool to boolean
-```shell
+```nu
 > true | into bool
 true
 ```
 
 convert integer to boolean
-```shell
+```nu
 > 1 | into bool
 true
 ```
 
 convert float to boolean
-```shell
+```nu
 > 0.3 | into bool
 true
 ```
 
 convert float string to boolean
-```shell
+```nu
 > '0.0' | into bool
 false
 ```
 
 convert string to boolean
-```shell
+```nu
 > 'true' | into bool
 true
 ```

@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Alias ll to ls -l
-```shell
+```nu
 > alias ll = ls -l
 
 ```

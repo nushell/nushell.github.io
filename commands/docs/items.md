@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Iterate over each key-value pair of a record
-```shell
+```nu
 > { new: york, san: francisco } | items {|key, value| echo $'($key) ($value)' }
 ╭───┬───────────────╮
 │ 0 │ new york      │

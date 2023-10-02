@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Upcase contents
-```shell
+```nu
 > 'nu' | str upcase
 NU
 ```

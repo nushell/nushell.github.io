@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Skip the first value of a list
-```shell
+```nu
 > [2 4 6 8] | skip 1
 ╭───┬───╮
 │ 0 │ 4 │
@@ -43,7 +43,7 @@ Skip the first value of a list
 ```
 
 Skip two rows of a table
-```shell
+```nu
 > [[editions]; [2015] [2018] [2021]] | skip 2
 ╭───┬──────────╮
 │ # │ editions │

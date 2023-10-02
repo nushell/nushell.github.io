@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Apply the hyperbolic sine to 1
-```shell
+```nu
 > 1 | math sinh
 1.1752011936438014
 ```

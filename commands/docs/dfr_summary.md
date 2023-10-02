@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 list dataframe descriptives
-```shell
+```nu
 > [[a b]; [1 1] [1 1]] | dfr into-df | dfr summary
 ╭───┬────────────┬─────────┬─────────╮
 │ # │ descriptor │ a (i64) │ b (i64) │

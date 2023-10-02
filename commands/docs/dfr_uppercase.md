@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Modifies strings to uppercase
-```shell
+```nu
 > [Abc aBc abC] | dfr into-df | dfr uppercase
 ╭───┬─────╮
 │ # │  0  │

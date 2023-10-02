@@ -32,25 +32,25 @@ usage: |
 ## Examples
 
 Generate an unconstrained random integer
-```shell
+```nu
 > random integer
 
 ```
 
 Generate a random integer less than or equal to 500
-```shell
+```nu
 > random integer ..500
 
 ```
 
 Generate a random integer greater than or equal to 100000
-```shell
+```nu
 > random integer 100000..
 
 ```
 
 Generate a random integer between 1 and 10
-```shell
+```nu
 > random integer 1..10
 
 ```

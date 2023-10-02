@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Converts nuon formatted string to table
-```shell
+```nu
 > '{ a:1 }' | from nuon
 ╭───┬───╮
 │ a │ 1 │
@@ -36,7 +36,7 @@ Converts nuon formatted string to table
 ```
 
 Converts nuon formatted string to table
-```shell
+```nu
 > '{ a:1, b: [1, 2] }' | from nuon
 ╭───┬───────────╮
 │ a │ 1         │

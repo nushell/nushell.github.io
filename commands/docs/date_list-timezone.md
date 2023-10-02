@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Show timezone(s) that contains 'Shanghai'
-```shell
+```nu
 > date list-timezone | where timezone =~ Shanghai
 ╭───┬───────────────╮
 │ # │   timezone    │

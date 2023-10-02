@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 drop column a
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr drop a
 ╭───┬───╮
 │ # │ b │

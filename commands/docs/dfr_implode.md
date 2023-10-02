@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 
-```shell
+```nu
 >
 
 ```

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Returns true if all values are true
-```shell
+```nu
 > [true true true] | dfr into-df | dfr all-true
 ╭───┬──────────╮
 │ # │ all_true │
@@ -39,7 +39,7 @@ Returns true if all values are true
 ```
 
 Checks the result from a comparison
-```shell
+```nu
 > let s = ([5 6 2 8] | dfr into-df);
     let res = ($s > 9);
     $res | dfr all-true

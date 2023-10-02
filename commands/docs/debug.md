@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Debug print a string
-```shell
+```nu
 > 'hello' | debug
 hello
 ```
 
 Debug print a list
-```shell
+```nu
 > ['hello'] | debug
 ╭───┬───────╮
 │ 0 │ hello │
@@ -48,7 +48,7 @@ Debug print a list
 ```
 
 Debug print a table
-```shell
+```nu
 > [[version patch]; ['0.1.0' false] ['0.1.1' true] ['0.2.0' false]] | debug
 ╭───┬────────────────────────────────╮
 │ 0 │ {version: 0.1.0, patch: false} │

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Apply the hyperbolic cosine to 1
-```shell
+```nu
 > 1 | math cosh
 1.5430806348152435
 ```

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Converts ini formatted string to record
-```shell
+```nu
 > '[foo]
 a=1
 b=2' | from ini

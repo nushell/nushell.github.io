@@ -35,7 +35,7 @@ usage: |
 ## Examples
 
 Split a string into columns by the specified separator
-```shell
+```nu
 > 'a--b--c' | split column '--'
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column1 │ column2 │ column3 │
@@ -46,7 +46,7 @@ Split a string into columns by the specified separator
 ```
 
 Split a string into columns of char and remove the empty columns
-```shell
+```nu
 > 'abc' | split column -c ''
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column1 │ column2 │ column3 │
@@ -57,7 +57,7 @@ Split a string into columns of char and remove the empty columns
 ```
 
 Split a list of strings into a table
-```shell
+```nu
 > ['a-b' 'c-d'] | split column -
 ╭───┬─────────┬─────────╮
 │ # │ column1 │ column2 │
@@ -69,7 +69,7 @@ Split a list of strings into a table
 ```
 
 Split a list of strings into a table, ignoring padding
-```shell
+```nu
 > ['a -  b' 'c  -    d'] | split column -r '\s*-\s*'
 ╭───┬─────────┬─────────╮
 │ # │ column1 │ column2 │

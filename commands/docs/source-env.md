@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Sources the environment from foo.nu in the current context
-```shell
+```nu
 > source-env foo.nu
 
 ```

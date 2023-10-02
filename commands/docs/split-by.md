@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 split items by column named "lang"
-```shell
+```nu
 > {
         '2019': [
           { name: 'andres', lang: 'rb', year: '2019' },

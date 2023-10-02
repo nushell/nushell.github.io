@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Creates a not expression
-```shell
+```nu
 > (dfr col a) > 2) | dfr expr-not
 
 ```

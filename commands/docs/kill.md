@@ -36,19 +36,19 @@ usage: |
 ## Examples
 
 Kill the pid using the most memory
-```shell
+```nu
 > ps | sort-by mem | last | kill $in.pid
 
 ```
 
 Force kill a given pid
-```shell
+```nu
 > kill --force 12345
 
 ```
 
 Send INT signal
-```shell
+```nu
 > kill -s 2 12345
 
 ```

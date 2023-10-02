@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get a record containing multiple formats for the number 42
-```shell
+```nu
 > 42 | fmt
 ╭──────────┬──────────╮
 │ binary   │ 0b101010 │

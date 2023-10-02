@@ -40,13 +40,13 @@ Be aware collapse mode currently doesn't support width control
 ## Examples
 
 List the files in current directory, with indexes starting from 1.
-```shell
+```nu
 > ls | table -n 1
 
 ```
 
 Render data in table view
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | table
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -58,7 +58,7 @@ Render data in table view
 ```
 
 Render data in table view (expanded)
-```shell
+```nu
 > [[a b]; [1 2] [2 [4 4]]] | table --expand
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -70,7 +70,7 @@ Render data in table view (expanded)
 ```
 
 Render data in table view (collapsed)
-```shell
+```nu
 > [[a b]; [1 2] [2 [4 4]]] | table --collapse
 ╭───┬───┬───╮
 │ # │ a │ b │

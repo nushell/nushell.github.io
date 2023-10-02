@@ -37,25 +37,25 @@ usage: |
 ## Examples
 
 Run `cargo test` whenever a Rust file changes
-```shell
+```nu
 > watch . --glob=**/*.rs {|| cargo test }
 
 ```
 
 Watch all changes in the current directory
-```shell
+```nu
 > watch . { |op, path, new_path| $"($op) ($path) ($new_path)"}
 
 ```
 
 Log all changes in a directory
-```shell
+```nu
 > watch /foo/bar { |op, path| $"($op) - ($path)(char nl)" | save --append changes_in_bar.log }
 
 ```
 
 Note: if you are looking to run a command every N units of time, this can be accomplished with a loop and sleep
-```shell
+```nu
 > loop { command; sleep duration }
 
 ```

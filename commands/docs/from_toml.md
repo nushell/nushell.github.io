@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Converts toml formatted string to record
-```shell
+```nu
 > 'a = 1' | from toml
 ╭───┬───╮
 │ a │ 1 │
@@ -36,7 +36,7 @@ Converts toml formatted string to record
 ```
 
 Converts toml formatted string to record
-```shell
+```nu
 > 'a = 1
 b = [1, 2]' | from toml
 ╭───┬───────────╮

@@ -34,13 +34,13 @@ usage: |
 ## Examples
 
 Saves dataframe to CSV file
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv
 
 ```
 
 Saves dataframe to CSV file using other delimiter
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv -d '|'
 
 ```

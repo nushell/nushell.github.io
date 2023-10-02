@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Returns indexes where values are true
-```shell
+```nu
 > [false true false] | dfr into-df | dfr arg-true
 ╭───┬──────────╮
 │ # │ arg_true │

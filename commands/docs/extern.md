@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Write a signature for an external command
-```shell
+```nu
 > extern echo [text: string]
 
 ```

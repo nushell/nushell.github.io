@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 Expand an absolute path
-```shell
+```nu
 > '/home/joe/foo/../bar' | path expand
 /home/joe/bar
 ```
 
 Expand a relative path
-```shell
+```nu
 > 'foo/../bar' | path expand
 
 ```
 
 Expand a list of paths
-```shell
+```nu
 > [ /foo/../bar, /foo/../baz ] | path expand
 ╭───┬──────╮
 │ 0 │ /bar │

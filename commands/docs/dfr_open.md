@@ -39,7 +39,7 @@ usage: |
 ## Examples
 
 Takes a file name and creates a dataframe
-```shell
+```nu
 > dfr open test.csv
 
 ```

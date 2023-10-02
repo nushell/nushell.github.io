@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Update a record's value
-```shell
+```nu
 > {'name': 'nu', 'stars': 5} | upsert name 'Nushell'
 ╭───────┬─────────╮
 │ name  │ Nushell │
@@ -43,7 +43,7 @@ Update a record's value
 ```
 
 Update each row of a table
-```shell
+```nu
 > [[name lang]; [Nushell ''] [Reedline '']] | upsert lang 'Rust'
 ╭───┬──────────┬──────╮
 │ # │   name   │ lang │
@@ -55,7 +55,7 @@ Update each row of a table
 ```
 
 Insert a new entry into a single record
-```shell
+```nu
 > {'name': 'nu', 'stars': 5} | upsert language 'Rust'
 ╭──────────┬──────╮
 │ name     │ nu   │
@@ -65,7 +65,7 @@ Insert a new entry into a single record
 ```
 
 Use in closure form for more involved updating logic
-```shell
+```nu
 > [[count fruit]; [1 'apple']] | enumerate | upsert item.count {|e| ($e.item.fruit | str length) + $e.index } | get item
 ╭───┬───────┬───────╮
 │ # │ count │ fruit │
@@ -76,7 +76,7 @@ Use in closure form for more involved updating logic
 ```
 
 Upsert an int into a list, updating an existing value based on the index
-```shell
+```nu
 > [1 2 3] | upsert 0 2
 ╭───┬───╮
 │ 0 │ 2 │
@@ -87,7 +87,7 @@ Upsert an int into a list, updating an existing value based on the index
 ```
 
 Upsert an int into a list, inserting a new value based on the index
-```shell
+```nu
 > [1 2 3] | upsert 3 4
 ╭───┬───╮
 │ 0 │ 1 │

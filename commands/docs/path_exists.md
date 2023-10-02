@@ -28,13 +28,13 @@ usage: |
 ## Examples
 
 Check if a file exists
-```shell
+```nu
 > '/home/joe/todo.txt' | path exists
 false
 ```
 
 Check if files in list exist
-```shell
+```nu
 > [ /home/joe/todo.txt, /home/doe/todo.txt ] | path exists
 ╭───┬───────╮
 │ 0 │ false │

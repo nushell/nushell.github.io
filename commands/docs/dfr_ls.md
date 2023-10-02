@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Creates a new dataframe and shows it in the dataframe list
-```shell
+```nu
 > let test = ([[a b];[1 2] [3 4]] | dfr into-df);
     ls
 

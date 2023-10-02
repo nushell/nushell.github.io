@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 View the files registered in nushell's EngineState memory
-```shell
+```nu
 > view files
 
 ```

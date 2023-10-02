@@ -28,13 +28,13 @@ usage: |
 ## Examples
 
 Get e raised to the power of zero
-```shell
+```nu
 > 0 | math exp
 1
 ```
 
 Get e (same as 'math e')
-```shell
+```nu
 > 1 | math exp
 2.718281828459045
 ```

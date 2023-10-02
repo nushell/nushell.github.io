@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 show help for single command, alias, or module
-```shell
+```nu
 > help match
 
 ```
 
 show help for single sub-command, alias, or module
-```shell
+```nu
 > help str lpad
 
 ```
 
 search for string in command names, usage and search terms
-```shell
+```nu
 > help --find char
 
 ```

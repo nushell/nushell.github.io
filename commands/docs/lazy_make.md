@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Create a lazy record
-```shell
+```nu
 > lazy make --columns ["haskell", "futures", "nushell"] --get-value { |lazything| $lazything + "!" }
 
 ```
 
 Test the laziness of lazy records
-```shell
+```nu
 > lazy make -c ["hello"] -g { |key| print $"getting ($key)!"; $key | str upcase }
 
 ```

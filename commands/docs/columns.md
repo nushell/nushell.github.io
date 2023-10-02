@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get the columns from the record
-```shell
+```nu
 > { acronym:PWD, meaning:'Print Working Directory' } | columns
 ╭───┬─────────╮
 │ 0 │ acronym │
@@ -38,7 +38,7 @@ Get the columns from the record
 ```
 
 Get the columns from the table
-```shell
+```nu
 > [[name,age,grade]; [bill,20,a]] | columns
 ╭───┬───────╮
 │ 0 │ name  │
@@ -49,13 +49,13 @@ Get the columns from the table
 ```
 
 Get the first column from the table
-```shell
+```nu
 > [[name,age,grade]; [bill,20,a]] | columns | first
 
 ```
 
 Get the second column from the table
-```shell
+```nu
 > [[name,age,grade]; [bill,20,a]] | columns | select 1
 
 ```

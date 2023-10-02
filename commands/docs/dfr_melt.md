@@ -35,7 +35,7 @@ usage: |
 ## Examples
 
 melt dataframe
-```shell
+```nu
 > [[a b c d]; [x 1 4 a] [y 2 5 b] [z 3 6 c]] | dfr into-df | dfr melt -c [b c] -v [a d]
 ╭───┬───┬───┬──────────┬───────╮
 │ # │ b │ c │ variable │ value │

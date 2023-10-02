@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Skip while the element is negative
-```shell
+```nu
 > [-2 0 2 -1] | skip while {|x| $x < 0 }
 ╭───┬────╮
 │ 0 │  0 │
@@ -43,7 +43,7 @@ Skip while the element is negative
 ```
 
 Skip while the element is negative using stored condition
-```shell
+```nu
 > let cond = {|x| $x < 0 }; [-2 0 2 -1] | skip while $cond
 ╭───┬────╮
 │ 0 │  0 │
@@ -54,7 +54,7 @@ Skip while the element is negative using stored condition
 ```
 
 Skip while the field value is negative
-```shell
+```nu
 > [{a: -2} {a: 0} {a: 2} {a: -1}] | skip while {|x| $x.a < 0 }
 ╭───┬────╮
 │ # │ a  │

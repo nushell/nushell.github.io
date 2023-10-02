@@ -32,19 +32,19 @@ usage: |
 ## Examples
 
 Check if a string is empty
-```shell
+```nu
 > '' | is-empty
 true
 ```
 
 Check if a list is empty
-```shell
+```nu
 > [] | is-empty
 true
 ```
 
 Check if more than one column are empty
-```shell
+```nu
 > [[meal size]; [arepa small] [taco '']] | is-empty meal size
 false
 ```

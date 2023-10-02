@@ -32,19 +32,19 @@ usage: |
 ## Examples
 
 Group items by the "type" column's values
-```shell
+```nu
 > ls | group-by type
 
 ```
 
 Group items by the "foo" column's values, ignoring records without a "foo" column
-```shell
+```nu
 > open cool.json | group-by foo?
 
 ```
 
 Group using a block which is evaluated against each input value
-```shell
+```nu
 > [foo.txt bar.csv baz.txt] | group-by { path parse | get extension }
 ╭─────┬─────────────────╮
 │     │ ╭───┬─────────╮ │
@@ -58,7 +58,7 @@ Group using a block which is evaluated against each input value
 ```
 
 You can also group by raw values by leaving out the argument
-```shell
+```nu
 > ['1' '3' '1' '3' '2' '1' '1'] | group-by
 ╭───┬───────────╮
 │   │ ╭───┬───╮ │

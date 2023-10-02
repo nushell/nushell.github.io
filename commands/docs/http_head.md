@@ -37,19 +37,19 @@ usage: |
 ## Examples
 
 Get headers from example.com
-```shell
+```nu
 > http head https://www.example.com
 
 ```
 
 Get headers from example.com, with username and password
-```shell
+```nu
 > http head -u myuser -p mypass https://www.example.com
 
 ```
 
 Get headers from example.com, with custom header
-```shell
+```nu
 > http head -H [my-header-key my-header-value] https://www.example.com
 
 ```

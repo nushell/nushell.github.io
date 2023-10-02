@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get list with default keybindings
-```shell
+```nu
 > keybindings default
 
 ```

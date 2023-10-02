@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 get a free port between 3121 and 4000
-```shell
+```nu
 > port 3121 4000
 3121
 ```
 
 get a free port from system
-```shell
+```nu
 > port
 
 ```

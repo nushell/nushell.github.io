@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Set an environment variable
-```shell
+```nu
 > export-env { $env.SPAM = 'eggs' }
 
 ```
 
 Set an environment variable and examine its value
-```shell
+```nu
 > export-env { $env.SPAM = 'eggs' }; $env.SPAM
 eggs
 ```

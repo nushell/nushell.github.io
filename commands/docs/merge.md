@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Add an 'index' column to the input table
-```shell
+```nu
 > [a b c] | wrap name | merge ( [1 2 3] | wrap index )
 ╭───┬──────╮
 │ # │ name │
@@ -45,7 +45,7 @@ Add an 'index' column to the input table
 ```
 
 Merge two records
-```shell
+```nu
 > {a: 1, b: 2} | merge {c: 3}
 ╭───┬───╮
 │ a │ 1 │
@@ -55,7 +55,7 @@ Merge two records
 ```
 
 Merge two tables, overwriting overlapping columns
-```shell
+```nu
 > [{columnA: A0 columnB: B0}] | merge [{columnA: 'A0*'}]
 ╭───┬─────────┬─────────╮
 │ # │ columnA │ columnB │

@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Converts ssv formatted string to table
-```shell
+```nu
 > 'FOO   BAR
 1   2' | from ssv
 ╭───┬─────┬─────╮
@@ -46,7 +46,7 @@ Converts ssv formatted string to table
 ```
 
 Converts ssv formatted string to table but not treating the first row as column names
-```shell
+```nu
 > 'FOO   BAR
 1   2' | from ssv -n
 ╭───┬─────────┬─────────╮

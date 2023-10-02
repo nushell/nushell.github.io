@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Remove the last column of a table
-```shell
+```nu
 > [[lib, extension]; [nu-lib, rs] [nu-core, rb]] | drop column
 ╭───┬─────────╮
 │ # │   lib   │

@@ -38,7 +38,7 @@ usage: |
 ## Examples
 
 Convert tab-separated data to a table
-```shell
+```nu
 > "ColA	ColB
 1	2" | from tsv
 ╭───┬──────┬──────╮
@@ -50,31 +50,31 @@ Convert tab-separated data to a table
 ```
 
 Create a tsv file with header columns and open it
-```shell
+```nu
 > $'c1(char tab)c2(char tab)c3(char nl)1(char tab)2(char tab)3' | save tsv-data | open tsv-data | from tsv
 
 ```
 
 Create a tsv file without header columns and open it
-```shell
+```nu
 > $'a1(char tab)b1(char tab)c1(char nl)a2(char tab)b2(char tab)c2' | save tsv-data | open tsv-data | from tsv -n
 
 ```
 
 Create a tsv file without header columns and open it, removing all unnecessary whitespaces
-```shell
+```nu
 > $'a1(char tab)b1(char tab)c1(char nl)a2(char tab)b2(char tab)c2' | save tsv-data | open tsv-data | from tsv --trim all
 
 ```
 
 Create a tsv file without header columns and open it, removing all unnecessary whitespaces in the header names
-```shell
+```nu
 > $'a1(char tab)b1(char tab)c1(char nl)a2(char tab)b2(char tab)c2' | save tsv-data | open tsv-data | from tsv --trim headers
 
 ```
 
 Create a tsv file without header columns and open it, removing all unnecessary whitespaces in the field values
-```shell
+```nu
 > $'a1(char tab)b1(char tab)c1(char nl)a2(char tab)b2(char tab)c2' | save tsv-data | open tsv-data | from tsv --trim fields
 
 ```

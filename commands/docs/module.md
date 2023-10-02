@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 Define a custom command in a module and call it
-```shell
+```nu
 > module spam { export def foo [] { "foo" } }; use spam foo; foo
 foo
 ```
 
 Define an environment variable in a module
-```shell
+```nu
 > module foo { export-env { $env.FOO = "BAZ" } }; use foo; $env.FOO
 BAZ
 ```
 
 Define a custom command that participates in the environment in a module and call it
-```shell
+```nu
 > module foo { export def-env bar [] { $env.FOO_BAR = "BAZ" } }; use foo bar; bar; $env.FOO_BAR
 BAZ
 ```

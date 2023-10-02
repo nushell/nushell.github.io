@@ -42,31 +42,31 @@ usage: |
 ## Examples
 
 http delete from example.com
-```shell
+```nu
 > http delete https://www.example.com
 
 ```
 
 http delete from example.com, with username and password
-```shell
+```nu
 > http delete -u myuser -p mypass https://www.example.com
 
 ```
 
 http delete from example.com, with custom header
-```shell
+```nu
 > http delete -H [my-header-key my-header-value] https://www.example.com
 
 ```
 
 http delete from example.com, with body
-```shell
+```nu
 > http delete -d 'body' https://www.example.com
 
 ```
 
 http delete from example.com, with JSON body
-```shell
+```nu
 > http delete -t application/json -d { field: value } https://www.example.com
 
 ```

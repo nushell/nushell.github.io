@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Ignore the output of an echo command
-```shell
+```nu
 > echo done | ignore
 
 ```

@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Creates and alias expression
-```shell
+```nu
 > dfr col a | dfr as new_a | dfr into-nu
 ╭───────┬────────────────────╮
 │       │ ╭───────┬────────╮ │

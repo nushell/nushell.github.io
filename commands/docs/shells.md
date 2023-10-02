@@ -20,13 +20,13 @@ usage: |
 ## Examples
 
 Enter a new shell at parent path '..' and show all opened shells
-```shell
+```nu
 > enter ..; shells
 
 ```
 
 Show currently active shell
-```shell
+```nu
 > shells | where active == true
 
 ```

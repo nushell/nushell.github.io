@@ -34,19 +34,19 @@ usage: |
 ## Examples
 
 Convert the size column to KB
-```shell
+```nu
 > ls | format filesize KB size
 
 ```
 
 Convert the apparent column to B
-```shell
+```nu
 > du | format filesize B apparent
 
 ```
 
 Convert the size data to MB
-```shell
+```nu
 > 4Gb | format filesize MB
 4000.0 MB
 ```

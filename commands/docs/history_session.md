@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get current history session
-```shell
+```nu
 > history session
 
 ```

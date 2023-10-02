@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Display Nu version
-```shell
+```nu
 > version
 
 ```

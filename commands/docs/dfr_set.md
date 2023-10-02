@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Shifts the values by a given period
-```shell
+```nu
 > let s = ([1 2 2 3 3] | dfr into-df | dfr shift 2);
     let mask = ($s | dfr is-null);
     $s | dfr set 0 --mask $mask

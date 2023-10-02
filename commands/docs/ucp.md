@@ -41,25 +41,25 @@ usage: |
 ## Examples
 
 Copy myfile to dir_b
-```shell
+```nu
 > ucp myfile dir_b
 
 ```
 
 Recursively copy dir_a to dir_b
-```shell
+```nu
 > ucp -r dir_a dir_b
 
 ```
 
 Recursively copy dir_a to dir_b, and print the feedbacks
-```shell
+```nu
 > ucp -r -v dir_a dir_b
 
 ```
 
 Move many files into a directory
-```shell
+```nu
 > ucp *.txt dir_a
 
 ```

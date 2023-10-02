@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Re-export a command from another module
-```shell
+```nu
 > module spam { export def foo [] { "foo" } }
     module eggs { export use spam foo }
     use eggs foo

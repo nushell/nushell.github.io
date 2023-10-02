@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 drop duplicates
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-lazy | dfr collect
 ╭───┬───┬───╮
 │ # │ a │ b │

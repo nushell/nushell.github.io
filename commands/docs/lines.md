@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Split multi-line string into lines
-```shell
+```nu
 > $"two\nlines" | lines
 ╭───┬───────╮
 │ 0 │ two   │

@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Get basename of a path
-```shell
+```nu
 > '/home/joe/test.txt' | path basename
 test.txt
 ```
 
 Get basename of a list of paths
-```shell
+```nu
 > [ /home/joe, /home/doe ] | path basename
 ╭───┬─────╮
 │ 0 │ joe │
@@ -48,7 +48,7 @@ Get basename of a list of paths
 ```
 
 Replace basename of a path
-```shell
+```nu
 > '/home/joe/test.txt' | path basename -r 'spam.png'
 /home/joe/spam.png
 ```

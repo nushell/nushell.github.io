@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Returns index for max value
-```shell
+```nu
 > [1 3 2] | dfr into-df | dfr arg-max
 ╭───┬─────────╮
 │ # │ arg_max │

@@ -193,7 +193,7 @@ $"## Notes
             | each { |example|
                 let result = (do -i { $example.result | try { table --expand } catch { $in } } )
 $"($example.description)
-```shell
+```nu
 > ($example.example)
 ($result | if ($result | describe) == "string" { ansi strip } else { $in })
 ```

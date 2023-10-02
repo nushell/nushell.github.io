@@ -34,19 +34,19 @@ usage: |
 ## Examples
 
 Capitalize contents
-```shell
+```nu
 > 'good day' | str capitalize
 Good day
 ```
 
 Capitalize contents
-```shell
+```nu
 > 'anton' | str capitalize
 Anton
 ```
 
 Capitalize a column in a table
-```shell
+```nu
 > [[lang, gems]; [nu_test, 100]] | str capitalize lang
 ╭───┬─────────┬──────╮
 │ # │  lang   │ gems │

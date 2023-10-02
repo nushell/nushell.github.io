@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 A sliding window of two elements
-```shell
+```nu
 > [1 2 3 4] | window 2
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
@@ -54,7 +54,7 @@ A sliding window of two elements
 ```
 
 A sliding window of two elements, with a stride of 3
-```shell
+```nu
 > [1, 2, 3, 4, 5, 6, 7, 8] | window 2 --stride 3
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
@@ -74,7 +74,7 @@ A sliding window of two elements, with a stride of 3
 ```
 
 A sliding window of equal stride that includes remainder. Equivalent to chunking
-```shell
+```nu
 > [1, 2, 3, 4, 5] | window 3 --stride 3 --remainder
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │

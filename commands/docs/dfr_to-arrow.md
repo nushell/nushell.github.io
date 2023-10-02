@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Saves dataframe to arrow file
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-arrow test.arrow
 
 ```

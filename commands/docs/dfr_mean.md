@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Mean value from columns in a dataframe
-```shell
+```nu
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr mean
 ╭───┬──────┬──────╮
 │ # │  a   │  b   │
@@ -39,7 +39,7 @@ Mean value from columns in a dataframe
 ```
 
 Mean aggregation for a group-by
-```shell
+```nu
 > [[a b]; [one 2] [one 4] [two 1]]
     | dfr into-df
     | dfr group-by a

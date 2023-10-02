@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Shifts the values by a given period
-```shell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr shift 2 | dfr drop-nulls
 ╭───┬───╮
 │ # │ 0 │

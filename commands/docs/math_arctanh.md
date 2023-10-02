@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get the arctanh of 1
-```shell
+```nu
 > 1 | math arctanh
 inf
 ```

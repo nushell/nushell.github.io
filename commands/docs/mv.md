@@ -37,19 +37,19 @@ usage: |
 ## Examples
 
 Rename a file
-```shell
+```nu
 > mv before.txt after.txt
 
 ```
 
 Move a file into a directory
-```shell
+```nu
 > mv test.txt my/subdirectory
 
 ```
 
 Move many files into a directory
-```shell
+```nu
 > mv *.txt my/subdirectory
 
 ```

@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get the last activated overlay
-```shell
+```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam
     overlay list | last

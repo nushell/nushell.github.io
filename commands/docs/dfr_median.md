@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Median value from columns in a dataframe
-```shell
+```nu
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr median
 ╭───┬──────┬──────╮
 │ # │  a   │  b   │

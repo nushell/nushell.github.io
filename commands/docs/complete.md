@@ -28,13 +28,13 @@ usage: |
 ## Examples
 
 Run the external command to completion, capturing stdout and exit_code
-```shell
+```nu
 > ^external arg1 | complete
 
 ```
 
 Run external command to completion, capturing, stdout, stderr and exit_code
-```shell
+```nu
 > do { ^external arg1 } | complete
 
 ```

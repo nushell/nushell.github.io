@@ -36,13 +36,13 @@ usage: |
 ## Examples
 
 Checks if string ends with '.rb'
-```shell
+```nu
 > 'my_library.rb' | str ends-with '.rb'
 true
 ```
 
 Checks if strings end with '.txt'
-```shell
+```nu
 > ['my_library.rb', 'README.txt'] | str ends-with '.txt'
 ╭───┬───────╮
 │ 0 │ false │
@@ -52,7 +52,7 @@ Checks if strings end with '.txt'
 ```
 
 Checks if string ends with '.RB', case-insensitive
-```shell
+```nu
 > 'my_library.rb' | str ends-with -i '.RB'
 true
 ```

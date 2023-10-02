@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Create a simple custom error
-```shell
+```nu
 > error make {msg: "my custom error message"}
 {msg: my custom error message, debug: GenericError("my custom error message", "", None, None, []), raw: GenericError("my custom error message", "", None, None, [])}
 ```
 
 Create a more complex custom error
-```shell
+```nu
 > error make {
         msg: "my custom error message"
         label: {
@@ -52,7 +52,7 @@ Create a more complex custom error
 ```
 
 Create a custom error for a custom command that shows the span of the argument
-```shell
+```nu
 > def foo [x] {
         let span = (metadata $x).span;
         error make {

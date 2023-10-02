@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Take until the element is positive
-```shell
+```nu
 > [-1 -2 9 1] | take until {|x| $x > 0 }
 ╭───┬────╮
 │ 0 │ -1 │
@@ -42,7 +42,7 @@ Take until the element is positive
 ```
 
 Take until the element is positive using stored condition
-```shell
+```nu
 > let cond = {|x| $x > 0 }; [-1 -2 9 1] | take until $cond
 ╭───┬────╮
 │ 0 │ -1 │
@@ -52,7 +52,7 @@ Take until the element is positive using stored condition
 ```
 
 Take until the field value is positive
-```shell
+```nu
 > [{a: -1} {a: -2} {a: 9} {a: 1}] | take until {|x| $x.a > 0 }
 ╭───┬────╮
 │ # │ a  │

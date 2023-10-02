@@ -38,7 +38,7 @@ usage: |
 ## Examples
 
 Join two tables
-```shell
+```nu
 > [{a: 1 b: 2}] | join [{a: 1 c: 3}] a
 ╭───┬───┬───┬───╮
 │ # │ a │ b │ c │

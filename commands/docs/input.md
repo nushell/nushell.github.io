@@ -35,13 +35,13 @@ usage: |
 ## Examples
 
 Get input from the user, and assign to a variable
-```shell
+```nu
 > let user_input = (input)
 
 ```
 
 Get two characters from the user, and assign to a variable
-```shell
+```nu
 > let user_input = (input --numchar 2)
 
 ```

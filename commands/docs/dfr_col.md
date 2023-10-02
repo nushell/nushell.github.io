@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Creates a named column expression and converts it to a nu object
-```shell
+```nu
 > dfr col a | dfr into-nu
 ╭───────┬────────╮
 │ expr  │ column │

@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Replaces string
-```shell
+```nu
 > [abac abac abac] | dfr into-df | dfr replace-all -p a -r A
 ╭───┬──────╮
 │ # │  0   │

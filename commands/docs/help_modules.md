@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 show all modules
-```shell
+```nu
 > help modules
 
 ```
 
 show help for single module
-```shell
+```nu
 > help modules my-module
 
 ```
 
 search for string in module names and usages
-```shell
+```nu
 > help modules --find my-module
 
 ```

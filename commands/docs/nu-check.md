@@ -35,49 +35,49 @@ usage: |
 ## Examples
 
 Parse a input file as script(Default)
-```shell
+```nu
 > nu-check script.nu
 
 ```
 
 Parse a input file as module
-```shell
+```nu
 > nu-check --as-module module.nu
 
 ```
 
 Parse a input file by showing error message
-```shell
+```nu
 > nu-check -d script.nu
 
 ```
 
 Parse an external stream as script by showing error message
-```shell
+```nu
 > open foo.nu | nu-check -d script.nu
 
 ```
 
 Parse an internal stream as module by showing error message
-```shell
+```nu
 > open module.nu | lines | nu-check -d --as-module module.nu
 
 ```
 
 Parse a string as script
-```shell
+```nu
 > $'two(char nl)lines' | nu-check
 
 ```
 
 Heuristically parse which begins with script first, if it sees a failure, try module afterwards
-```shell
+```nu
 > nu-check -a script.nu
 
 ```
 
 Heuristically parse by showing error message
-```shell
+```nu
 > open foo.nu | lines | nu-check -ad
 
 ```

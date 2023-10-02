@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Renames a series
-```shell
+```nu
 > [5 6 7 8] | dfr into-df | dfr rename '0' new_name
 ╭───┬──────────╮
 │ # │ new_name │
@@ -47,7 +47,7 @@ Renames a series
 ```
 
 Renames a dataframe column
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr rename a a_new
 ╭───┬───────┬───╮
 │ # │ a_new │ b │
@@ -59,7 +59,7 @@ Renames a dataframe column
 ```
 
 Renames two dataframe columns
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr rename [a b] [a_new b_new]
 ╭───┬───────┬───────╮
 │ # │ a_new │ b_new │

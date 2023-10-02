@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 reset nushell configuration files
-```shell
+```nu
 > config reset
 
 ```

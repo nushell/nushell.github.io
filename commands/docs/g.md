@@ -24,25 +24,25 @@ usage: |
 ## Examples
 
 Lists all open shells
-```shell
+```nu
 > g
 
 ```
 
 Make two directories and enter new shells for them, use `g` to jump to the specific shell
-```shell
+```nu
 > mkdir foo bar; enter foo; enter ../bar; g 1
 
 ```
 
 Use `shells` to show all the opened shells and run `g 2` to jump to the third one
-```shell
+```nu
 > shells; g 2
 
 ```
 
 Make two directories and enter new shells for them, use `g -` to jump to the last used shell
-```shell
+```nu
 > mkdir foo bar; enter foo; enter ../bar; g -
 
 ```

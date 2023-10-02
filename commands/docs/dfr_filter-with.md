@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Filter dataframe using a bool mask
-```shell
+```nu
 > let mask = ([true false] | dfr into-df);
     [[a b]; [1 2] [3 4]] | dfr into-df | dfr filter-with $mask
 ╭───┬───┬───╮
@@ -44,7 +44,7 @@ Filter dataframe using a bool mask
 ```
 
 Filter dataframe using an expression
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr filter-with ((dfr col a) > 1)
 ╭───┬───┬───╮
 │ # │ a │ b │

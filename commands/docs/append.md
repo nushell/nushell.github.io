@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Append one integer to a list
-```shell
+```nu
 > [0 1 2 3] | append 4
 ╭───┬───╮
 │ 0 │ 0 │
@@ -45,7 +45,7 @@ Append one integer to a list
 ```
 
 Append a list to an item
-```shell
+```nu
 > 0 | append [1 2 3]
 ╭───┬───╮
 │ 0 │ 0 │
@@ -57,7 +57,7 @@ Append a list to an item
 ```
 
 Append a list of string to a string
-```shell
+```nu
 > "a" | append ["b"]
 ╭───┬───╮
 │ 0 │ a │
@@ -67,7 +67,7 @@ Append a list of string to a string
 ```
 
 Append three integer items
-```shell
+```nu
 > [0 1] | append [2 3 4]
 ╭───┬───╮
 │ 0 │ 0 │
@@ -80,7 +80,7 @@ Append three integer items
 ```
 
 Append integers and strings
-```shell
+```nu
 > [0 1] | append [2 nu 4 shell]
 ╭───┬───────╮
 │ 0 │     0 │
@@ -94,7 +94,7 @@ Append integers and strings
 ```
 
 Append a range of integers to a list
-```shell
+```nu
 > [0 1] | append 2..4
 ╭───┬───╮
 │ 0 │ 0 │

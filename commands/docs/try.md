@@ -33,13 +33,13 @@ usage: |
 ## Examples
 
 Try to run a missing command
-```shell
+```nu
 > try { asdfasdf }
 
 ```
 
 Try to run a missing command
-```shell
+```nu
 > try { asdfasdf } catch { 'missing' }
 missing
 ```

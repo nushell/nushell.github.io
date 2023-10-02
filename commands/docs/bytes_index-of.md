@@ -36,19 +36,19 @@ usage: |
 ## Examples
 
 Returns index of pattern in bytes
-```shell
+```nu
 >  0x[33 44 55 10 01 13 44 55] | bytes index-of 0x[44 55]
 1
 ```
 
 Returns index of pattern, search from end
-```shell
+```nu
 >  0x[33 44 55 10 01 13 44 55] | bytes index-of -e 0x[44 55]
 6
 ```
 
 Returns all matched index
-```shell
+```nu
 >  0x[33 44 55 10 01 33 44 33 44] | bytes index-of -a 0x[33 44]
 ╭───┬───╮
 │ 0 │ 0 │
@@ -59,7 +59,7 @@ Returns all matched index
 ```
 
 Returns all matched index, searching from end
-```shell
+```nu
 >  0x[33 44 55 10 01 33 44 33 44] | bytes index-of -a -e 0x[33 44]
 ╭───┬───╮
 │ 0 │ 7 │
@@ -70,7 +70,7 @@ Returns all matched index, searching from end
 ```
 
 Returns index of pattern for specific column
-```shell
+```nu
 >  [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes index-of 0x[11] ColA ColC
 ╭───┬──────┬──────────────┬──────╮
 │ # │ ColA │     ColB     │ ColC │

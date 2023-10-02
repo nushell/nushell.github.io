@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Concatenate string
-```shell
+```nu
 > let other = ([za xs cd] | dfr into-df);
     [abc abc abc] | dfr into-df | dfr concatenate $other
 ╭───┬───────╮

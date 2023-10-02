@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Print filenames with their sizes
-```shell
+```nu
 > ls | format '{name}: {size}'
 
 ```
 
 Print elements from some columns of a table
-```shell
+```nu
 > [[col1, col2]; [v1, v2] [v3, v4]] | format '{col2}'
 ╭───┬────╮
 │ 0 │ v2 │

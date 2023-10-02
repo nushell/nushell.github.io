@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Define a custom command in a submodule of a module and call it
-```shell
+```nu
 > module spam {
         export module eggs {
             export def foo [] { "foo" }

@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 Set a variable to a value
-```shell
+```nu
 > let x = 10
 
 ```
 
 Set a variable to the result of an expression
-```shell
+```nu
 > let x = 10 + 100
 
 ```
 
 Set a variable based on the condition
-```shell
+```nu
 > let x = if false { -1 } else { 1 }
 
 ```

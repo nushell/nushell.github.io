@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Load variables from an input stream
-```shell
+```nu
 > {NAME: ABE, AGE: UNKNOWN} | load-env; $env.NAME
 ABE
 ```
 
 Load variables from an argument
-```shell
+```nu
 > load-env {NAME: ABE, AGE: UNKNOWN}; $env.NAME
 ABE
 ```

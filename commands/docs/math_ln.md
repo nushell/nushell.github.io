@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Get the natural logarithm of e
-```shell
+```nu
 > 2.7182818 | math ln | math round --precision 4
 1
 ```

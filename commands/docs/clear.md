@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Clear the terminal
-```shell
+```nu
 > clear
 
 ```

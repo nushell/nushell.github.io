@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 show all aliases
-```shell
+```nu
 > help aliases
 
 ```
 
 show help for single alias
-```shell
+```nu
 > help aliases my-alias
 
 ```
 
 search for string in alias names and usages
-```shell
+```nu
 > help aliases --find my-alias
 
 ```

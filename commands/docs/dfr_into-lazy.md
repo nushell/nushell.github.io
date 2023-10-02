@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Takes a dictionary and creates a lazy dataframe
-```shell
+```nu
 > [[a b];[1 2] [3 4]] | dfr into-lazy
 
 ```

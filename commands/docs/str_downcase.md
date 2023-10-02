@@ -34,19 +34,19 @@ usage: |
 ## Examples
 
 Downcase contents
-```shell
+```nu
 > 'NU' | str downcase
 nu
 ```
 
 Downcase contents
-```shell
+```nu
 > 'TESTa' | str downcase
 testa
 ```
 
 Downcase contents
-```shell
+```nu
 > [[ColA ColB]; [Test ABC]] | str downcase ColA
 ╭───┬──────┬──────╮
 │ # │ ColA │ ColB │
@@ -57,7 +57,7 @@ Downcase contents
 ```
 
 Downcase contents
-```shell
+```nu
 > [[ColA ColB]; [Test ABC]] | str downcase ColA ColB
 ╭───┬──────┬──────╮
 │ # │ ColA │ ColB │

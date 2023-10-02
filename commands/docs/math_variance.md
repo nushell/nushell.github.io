@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Get the variance of a list of numbers
-```shell
+```nu
 > [1 2 3 4 5] | math variance
 2
 ```
 
 Get the sample variance of a list of numbers
-```shell
+```nu
 > [1 2 3 4 5] | math variance -s
 2.5
 ```

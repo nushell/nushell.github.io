@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Parse a string into two named columns
-```shell
+```nu
 > "hi there" | parse "{foo} {bar}"
 ╭───┬─────┬───────╮
 │ # │ foo │  bar  │
@@ -44,7 +44,7 @@ Parse a string into two named columns
 ```
 
 Parse a string using regex pattern
-```shell
+```nu
 > "hi there" | parse -r '(?P<foo>\w+) (?P<bar>\w+)'
 ╭───┬─────┬───────╮
 │ # │ foo │  bar  │
@@ -55,7 +55,7 @@ Parse a string using regex pattern
 ```
 
 Parse a string using fancy-regex named capture group pattern
-```shell
+```nu
 > "foo bar." | parse -r '\s*(?<name>\w+)(?=\.)'
 ╭───┬──────╮
 │ # │ name │
@@ -66,7 +66,7 @@ Parse a string using fancy-regex named capture group pattern
 ```
 
 Parse a string using fancy-regex capture group pattern
-```shell
+```nu
 > "foo! bar." | parse -r '(\w+)(?=\.)|(\w+)(?=!)'
 ╭───┬──────────┬──────────╮
 │ # │ capture0 │ capture1 │
@@ -78,7 +78,7 @@ Parse a string using fancy-regex capture group pattern
 ```
 
 Parse a string using fancy-regex look behind pattern
-```shell
+```nu
 > " @another(foo bar)   " | parse -r '\s*(?<=[() ])(@\w+)(\([^)]*\))?\s*'
 ╭───┬──────────┬───────────╮
 │ # │ capture0 │ capture1  │
@@ -89,7 +89,7 @@ Parse a string using fancy-regex look behind pattern
 ```
 
 Parse a string using fancy-regex look ahead atomic group pattern
-```shell
+```nu
 > "abcd" | parse -r '^a(bc(?=d)|b)cd$'
 ╭───┬──────────╮
 │ # │ capture0 │

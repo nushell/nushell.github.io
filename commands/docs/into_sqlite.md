@@ -33,25 +33,25 @@ usage: |
 ## Examples
 
 Convert ls entries into a SQLite database with 'main' as the table name
-```shell
+```nu
 > ls | into sqlite my_ls.db
 
 ```
 
 Convert ls entries into a SQLite database with 'my_table' as the table name
-```shell
+```nu
 > ls | into sqlite my_ls.db -t my_table
 
 ```
 
 Convert table literal into a SQLite database with 'main' as the table name
-```shell
+```nu
 > [[name]; [-----] [someone] [=====] [somename] ['(((((']] | into sqlite filename.db
 
 ```
 
 Convert a variety of values in table literal form into a SQLite database
-```shell
+```nu
 > [one 2 5.2 six true 100mib 25sec] | into sqlite variety.db
 
 ```

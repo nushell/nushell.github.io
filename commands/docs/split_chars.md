@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Split the string into a list of characters
-```shell
+```nu
 > 'hello' | split chars
 ╭───┬───╮
 │ 0 │ h │
@@ -46,7 +46,7 @@ Split the string into a list of characters
 ```
 
 Split on grapheme clusters
-```shell
+```nu
 > '🇯🇵ほげ' | split chars -g
 ╭───┬────╮
 │ 0 │ 🇯🇵 │
@@ -57,7 +57,7 @@ Split on grapheme clusters
 ```
 
 Split multiple strings into lists of characters
-```shell
+```nu
 > ['hello', 'world'] | split chars
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │

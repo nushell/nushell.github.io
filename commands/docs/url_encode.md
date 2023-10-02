@@ -35,13 +35,13 @@ usage: |
 ## Examples
 
 Encode a url with escape characters
-```shell
+```nu
 > 'https://example.com/foo bar' | url encode
 https://example.com/foo%20bar
 ```
 
 Encode multiple urls with escape characters in list
-```shell
+```nu
 > ['https://example.com/foo bar' 'https://example.com/a>b' '中文字/eng/12 34'] | url encode
 ╭───┬─────────────────────────────────────────╮
 │ 0 │ https://example.com/foo%20bar           │
@@ -52,7 +52,7 @@ Encode multiple urls with escape characters in list
 ```
 
 Encode all non alphanumeric chars with all flag
-```shell
+```nu
 > 'https://example.com/foo bar' | url encode --all
 https%3A%2F%2Fexample%2Ecom%2Ffoo%20bar
 ```

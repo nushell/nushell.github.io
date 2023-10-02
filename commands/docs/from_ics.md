@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Converts ics formatted string to table
-```shell
+```nu
 > 'BEGIN:VCALENDAR
             END:VCALENDAR' | from ics
 ╭───┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮

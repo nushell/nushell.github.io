@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Get the arcsine of 1
-```shell
+```nu
 > 1 | math arcsin
 1.5707963267948966
 ```
 
 Get the arcsine of 1 in degrees
-```shell
+```nu
 > 1 | math arcsin -d
 90
 ```

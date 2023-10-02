@@ -24,7 +24,7 @@ usage: |
 ## Examples
 
 Enter a new shell at path '../dir-foo'
-```shell
+```nu
 > enter ../dir-foo
 
 ```

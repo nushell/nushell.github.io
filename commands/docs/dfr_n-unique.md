@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Counts unique values
-```shell
+```nu
 > [1 1 2 2 3 3 4] | dfr into-df | dfr n-unique
 ╭───┬──────────────╮
 │ # │ count_unique │
@@ -39,7 +39,7 @@ Counts unique values
 ```
 
 Creates a is n-unique expression from a column
-```shell
+```nu
 > dfr col a | dfr n-unique
 
 ```

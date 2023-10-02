@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Rolls columns of a record to the left
-```shell
+```nu
 > {a:1 b:2 c:3} | roll left
 ╭───┬───╮
 │ b │ 2 │
@@ -43,7 +43,7 @@ Rolls columns of a record to the left
 ```
 
 Rolls columns of a table to the left
-```shell
+```nu
 > [[a b c]; [1 2 3] [4 5 6]] | roll left
 ╭───┬───┬───┬───╮
 │ # │ b │ c │ a │
@@ -55,7 +55,7 @@ Rolls columns of a table to the left
 ```
 
 Rolls columns to the left without changing column names
-```shell
+```nu
 > [[a b c]; [1 2 3] [4 5 6]] | roll left --cells-only
 ╭───┬───┬───┬───╮
 │ # │ a │ b │ c │

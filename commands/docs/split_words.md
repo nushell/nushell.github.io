@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Split the string's words into separate rows
-```shell
+```nu
 > 'hello world' | split words
 ╭───┬───────╮
 │ 0 │ hello │
@@ -44,7 +44,7 @@ Split the string's words into separate rows
 ```
 
 Split the string's words, of at least 3 characters, into separate rows
-```shell
+```nu
 > 'hello to the world' | split words -l 3
 ╭───┬───────╮
 │ 0 │ hello │
@@ -55,7 +55,7 @@ Split the string's words, of at least 3 characters, into separate rows
 ```
 
 A real-world example of splitting words
-```shell
+```nu
 > http get https://www.gutenberg.org/files/11/11-0.txt | str downcase | split words -l 2 | uniq -c | sort-by count --reverse | first 10
 
 ```

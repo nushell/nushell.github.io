@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Convert from one row table to record
-```shell
+```nu
 > [[value]; [false]] | into record
 ╭───────┬───────╮
 │ value │ false │
@@ -40,7 +40,7 @@ Convert from one row table to record
 ```
 
 Convert from list to record
-```shell
+```nu
 > [1 2 3] | into record
 ╭───┬───╮
 │ 0 │ 1 │
@@ -50,7 +50,7 @@ Convert from list to record
 ```
 
 Convert from range to record
-```shell
+```nu
 > 0..2 | into record
 ╭───┬───╮
 │ 0 │ 0 │
@@ -60,7 +60,7 @@ Convert from range to record
 ```
 
 convert duration to record (weeks max)
-```shell
+```nu
 > (-500day - 4hr - 5sec) | into record
 ╭────────┬────╮
 │ week   │ 71 │
@@ -72,7 +72,7 @@ convert duration to record (weeks max)
 ```
 
 convert record to record
-```shell
+```nu
 > {a: 1, b: 2} | into record
 ╭───┬───╮
 │ a │ 1 │
@@ -81,7 +81,7 @@ convert record to record
 ```
 
 convert date to record
-```shell
+```nu
 > 2020-04-12T22:10:57+02:00 | into record
 ╭──────────┬────────╮
 │ year     │ 2020   │

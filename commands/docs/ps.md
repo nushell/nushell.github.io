@@ -32,31 +32,31 @@ usage: |
 ## Examples
 
 List the system processes
-```shell
+```nu
 > ps
 
 ```
 
 List the top 5 system processes with the highest memory usage
-```shell
+```nu
 > ps | sort-by mem | last 5
 
 ```
 
 List the top 3 system processes with the highest CPU usage
-```shell
+```nu
 > ps | sort-by cpu | last 3
 
 ```
 
 List the system processes with 'nu' in their names
-```shell
+```nu
 > ps | where name =~ 'nu'
 
 ```
 
 Get the parent process id of the current nu process
-```shell
+```nu
 > ps | where pid == $nu.pid | get ppid
 
 ```

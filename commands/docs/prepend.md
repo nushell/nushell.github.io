@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 prepend a list to an item
-```shell
+```nu
 > 0 | prepend [1 2 3]
 ╭───┬───╮
 │ 0 │ 1 │
@@ -44,7 +44,7 @@ prepend a list to an item
 ```
 
 Prepend a list of strings to a string
-```shell
+```nu
 > "a" | prepend ["b"]
 ╭───┬───╮
 │ 0 │ b │
@@ -54,7 +54,7 @@ Prepend a list of strings to a string
 ```
 
 Prepend one integer item
-```shell
+```nu
 > [1 2 3 4] | prepend 0
 ╭───┬───╮
 │ 0 │ 0 │
@@ -67,7 +67,7 @@ Prepend one integer item
 ```
 
 Prepend two integer items
-```shell
+```nu
 > [2 3 4] | prepend [0 1]
 ╭───┬───╮
 │ 0 │ 0 │
@@ -80,7 +80,7 @@ Prepend two integer items
 ```
 
 Prepend integers and strings
-```shell
+```nu
 > [2 nu 4 shell] | prepend [0 1 rocks]
 ╭───┬───────╮
 │ 0 │     0 │
@@ -95,7 +95,7 @@ Prepend integers and strings
 ```
 
 Prepend a range
-```shell
+```nu
 > [3 4] | prepend 0..2
 ╭───┬───╮
 │ 0 │ 0 │

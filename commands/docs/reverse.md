@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Reverse a list
-```shell
+```nu
 > [0,1,2,3] | reverse
 ╭───┬───╮
 │ 0 │ 3 │
@@ -40,7 +40,7 @@ Reverse a list
 ```
 
 Reverse a table
-```shell
+```nu
 > [{a: 1} {a: 2}] | reverse
 ╭───┬───╮
 │ # │ a │

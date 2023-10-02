@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Rolls rows up
-```shell
+```nu
 > [[a b]; [1 2] [3 4] [5 6]] | roll up
 ╭───┬───┬───╮
 │ # │ a │ b │

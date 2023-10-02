@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Define a range inside braces to produce a list of string.
-```shell
+```nu
 > "{3..5}" | str expand
 ╭───┬───╮
 │ 0 │ 3 │
@@ -43,7 +43,7 @@ Define a range inside braces to produce a list of string.
 ```
 
 Ignore the next character after the backslash ('\')
-```shell
+```nu
 > 'A{B\,,C}' | str expand
 ╭───┬─────╮
 │ 0 │ AB, │
@@ -53,7 +53,7 @@ Ignore the next character after the backslash ('\')
 ```
 
 Commas that are not inside any braces need to be skipped.
-```shell
+```nu
 > 'Welcome\, {home,mon ami}!' | str expand
 ╭───┬───────────────────╮
 │ 0 │ Welcome, home!    │
@@ -63,7 +63,7 @@ Commas that are not inside any braces need to be skipped.
 ```
 
 Use double backslashes to add a backslash.
-```shell
+```nu
 > 'A{B\\,C}' | str expand
 ╭───┬─────╮
 │ 0 │ AB\ │
@@ -73,7 +73,7 @@ Use double backslashes to add a backslash.
 ```
 
 Export comma separated values inside braces (`{}`) to a string list.
-```shell
+```nu
 > "{apple,banana,cherry}" | str expand
 ╭───┬────────╮
 │ 0 │ apple  │
@@ -84,7 +84,7 @@ Export comma separated values inside braces (`{}`) to a string list.
 ```
 
 If the piped data is path, you may want to use --path flag, or else manually replace the backslashes with double backslashes.
-```shell
+```nu
 > 'C:\{Users,Windows}' | str expand --path
 ╭───┬────────────╮
 │ 0 │ C:\Users   │
@@ -94,7 +94,7 @@ If the piped data is path, you may want to use --path flag, or else manually rep
 ```
 
 Brace expressions can be used one after another.
-```shell
+```nu
 > "A{b,c}D{e,f}G" | str expand
 ╭───┬───────╮
 │ 0 │ AbDeG │
@@ -106,7 +106,7 @@ Brace expressions can be used one after another.
 ```
 
 Collection may include an empty item. It can be put at the start of the list.
-```shell
+```nu
 > "A{,B,C}" | str expand
 ╭───┬────╮
 │ 0 │ A  │
@@ -117,7 +117,7 @@ Collection may include an empty item. It can be put at the start of the list.
 ```
 
 Empty item can be at the end of the collection.
-```shell
+```nu
 > "A{B,C,}" | str expand
 ╭───┬────╮
 │ 0 │ AB │
@@ -128,7 +128,7 @@ Empty item can be at the end of the collection.
 ```
 
 Empty item can be in the middle of the collection.
-```shell
+```nu
 > "A{B,,C}" | str expand
 ╭───┬────╮
 │ 0 │ AB │
@@ -139,7 +139,7 @@ Empty item can be in the middle of the collection.
 ```
 
 Also, it is possible to use one inside another. Here is a real-world example, that creates files:
-```shell
+```nu
 > "A{B{1,3},C{2,5}}D" | str expand
 ╭───┬──────╮
 │ 0 │ AB1D │

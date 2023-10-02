@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Describe the type of a string
-```shell
+```nu
 > 'hello' | describe
 string
 ```

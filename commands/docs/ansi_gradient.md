@@ -38,25 +38,25 @@ usage: |
 ## Examples
 
 draw text in a gradient with foreground start and end colors
-```shell
+```nu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
 
 ```
 
 draw text in a gradient with foreground start and end colors and background start and end colors
-```shell
+```nu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff' --bgstart '0xe81cff' --bgend '0x40c9ff'
 
 ```
 
 draw text in a gradient by specifying foreground start color - end color is assumed to be black
-```shell
+```nu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff'
 
 ```
 
 draw text in a gradient by specifying foreground end color - start color is assumed to be black
-```shell
+```nu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgend '0xe81cff'
 
 ```

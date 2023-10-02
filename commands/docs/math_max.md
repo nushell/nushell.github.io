@@ -28,13 +28,13 @@ usage: |
 ## Examples
 
 Find the maximum of list of numbers
-```shell
+```nu
 > [-50 100 25] | math max
 100
 ```
 
 Find the maxima of the columns of a table
-```shell
+```nu
 > [{a: 1 b: 3} {a: 2 b: -1}] | math max
 ╭───┬───╮
 │ a │ 2 │

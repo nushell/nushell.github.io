@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Create mask where values are null
-```shell
+```nu
 > let s = ([5 6 0 8] | dfr into-df);
     let res = ($s / $s);
     $res | dfr is-null
@@ -44,7 +44,7 @@ Create mask where values are null
 ```
 
 Creates a is null expression from a column
-```shell
+```nu
 > dfr col a | dfr is-null
 
 ```

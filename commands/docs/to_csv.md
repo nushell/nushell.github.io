@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Outputs an CSV string representing the contents of this table
-```shell
+```nu
 > [[foo bar]; [1 2]] | to csv
 foo,bar
 1,2
@@ -41,7 +41,7 @@ foo,bar
 ```
 
 Outputs an CSV string representing the contents of this table
-```shell
+```nu
 > [[foo bar]; [1 2]] | to csv -s ';'
 foo;bar
 1;2
@@ -49,7 +49,7 @@ foo;bar
 ```
 
 Outputs an CSV string representing the contents of this record
-```shell
+```nu
 > {a: 1 b: 2} | to csv
 a,b
 1,2

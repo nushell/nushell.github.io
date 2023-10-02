@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Creates an expression to capture the year date part
-```shell
+```nu
 > [["2021-12-30T01:02:03.123456789"]] | dfr into-df | dfr as-datetime "%Y-%m-%dT%H:%M:%S.%9f" | dfr with-column [(dfr col datetime | dfr datepart year | dfr as datetime_year )]
 ╭───┬─────────────┬───────────────╮
 │ # │  datetime   │ datetime_year │
@@ -43,7 +43,7 @@ Creates an expression to capture the year date part
 ```
 
 Creates an expression to capture multiple date parts
-```shell
+```nu
 > [["2021-12-30T01:02:03.123456789"]] | dfr into-df | dfr as-datetime "%Y-%m-%dT%H:%M:%S.%9f" |
                 dfr with-column [ (dfr col datetime | dfr datepart year | dfr as datetime_year ),
                 (dfr col datetime | dfr datepart month | dfr as datetime_month ),

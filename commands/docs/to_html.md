@@ -37,19 +37,19 @@ usage: |
 ## Examples
 
 Outputs an  HTML string representing the contents of this table
-```shell
+```nu
 > [[foo bar]; [1 2]] | to html
 <html><style>body { background-color:white;color:black; }</style><body><table><thead><tr><th>foo</th><th>bar</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table></body></html>
 ```
 
 Optionally, only output the html for the content itself
-```shell
+```nu
 > [[foo bar]; [1 2]] | to html --partial
 <div style="background-color:white;color:black;"><table><thead><tr><th>foo</th><th>bar</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table></div>
 ```
 
 Optionally, output the string with a dark background
-```shell
+```nu
 > [[foo bar]; [1 2]] | to html --dark
 <html><style>body { background-color:black;color:white; }</style><body><table><thead><tr><th>foo</th><th>bar</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table></body></html>
 ```

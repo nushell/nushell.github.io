@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Apply bits xor to two numbers
-```shell
+```nu
 > 2 | bits xor 2
 0
 ```
 
 Apply logical xor to a list of numbers
-```shell
+```nu
 > [8 3 2] | bits xor 2
 ╭───┬────╮
 │ 0 │ 10 │

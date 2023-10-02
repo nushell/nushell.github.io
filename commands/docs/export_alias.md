@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Alias ll to ls -l and export it from a module
-```shell
+```nu
 > module spam { export alias ll = ls -l }
 
 ```

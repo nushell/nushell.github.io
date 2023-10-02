@@ -33,19 +33,19 @@ usage: |
 ## Examples
 
 Create a when conditions
-```shell
+```nu
 > dfr when ((dfr col a) > 2) 4
 
 ```
 
 Create a when conditions
-```shell
+```nu
 > dfr when ((dfr col a) > 2) 4 | dfr when ((dfr col a) < 0) 6
 
 ```
 
 Create a new column for the dataframe
-```shell
+```nu
 > [[a b]; [6 2] [1 4] [4 1]]
    | dfr into-lazy
    | dfr with-column (

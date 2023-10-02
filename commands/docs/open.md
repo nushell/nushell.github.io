@@ -34,31 +34,31 @@ usage: |
 ## Examples
 
 Open a file, with structure (based on file extension or SQLite database header)
-```shell
+```nu
 > open myfile.json
 
 ```
 
 Open a file, as raw bytes
-```shell
+```nu
 > open myfile.json --raw
 
 ```
 
 Open a file, using the input to get filename
-```shell
+```nu
 > 'myfile.txt' | open
 
 ```
 
 Open a file, and decode it by the specified encoding
-```shell
+```nu
 > open myfile.txt --raw | decode utf-8
 
 ```
 
 Create a custom `from` parser to open newline-delimited JSON files with `open`
-```shell
+```nu
 > def "from ndjson" [] { from json -o }; open myfile.ndjson
 
 ```

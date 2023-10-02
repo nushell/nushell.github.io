@@ -37,7 +37,7 @@ usage: |
 ## Examples
 
 Disk usage of the current directory
-```shell
+```nu
 > du
 
 ```

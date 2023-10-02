@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Rolls rows down of a table
-```shell
+```nu
 > [[a b]; [1 2] [3 4] [5 6]] | roll down
 ╭───┬───┬───╮
 │ # │ a │ b │

@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Skip until the element is positive
-```shell
+```nu
 > [-2 0 2 -1] | skip until {|x| $x > 0 }
 ╭───┬────╮
 │ 0 │  2 │
@@ -42,7 +42,7 @@ Skip until the element is positive
 ```
 
 Skip until the element is positive using stored condition
-```shell
+```nu
 > let cond = {|x| $x > 0 }; [-2 0 2 -1] | skip until $cond
 ╭───┬────╮
 │ 0 │  2 │
@@ -52,7 +52,7 @@ Skip until the element is positive using stored condition
 ```
 
 Skip until the field value is positive
-```shell
+```nu
 > [{a: -2} {a: 0} {a: 2} {a: -1}] | skip until {|x| $x.a > 0 }
 ╭───┬────╮
 │ # │ a  │

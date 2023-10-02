@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Break out of a loop
-```shell
+```nu
 > loop { break }
 
 ```

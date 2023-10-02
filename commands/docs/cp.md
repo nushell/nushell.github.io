@@ -39,31 +39,31 @@ usage: |
 ## Examples
 
 Copy myfile to dir_b
-```shell
+```nu
 > cp myfile dir_b
 
 ```
 
 Recursively copy dir_a to dir_b
-```shell
+```nu
 > cp -r dir_a dir_b
 
 ```
 
 Recursively copy dir_a to dir_b, and print the feedbacks
-```shell
+```nu
 > cp -r -v dir_a dir_b
 
 ```
 
 Move many files into a directory
-```shell
+```nu
 > cp *.txt dir_a
 
 ```
 
 Copy only if source file is newer than target file
-```shell
+```nu
 > cp -u a b
 
 ```

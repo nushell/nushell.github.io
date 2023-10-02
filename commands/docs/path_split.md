@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Split a path into parts
-```shell
+```nu
 > '/home/viking/spam.txt' | path split
 ╭───┬──────────╮
 │ 0 │ /        │
@@ -40,7 +40,7 @@ Split a path into parts
 ```
 
 Split paths in list into parts
-```shell
+```nu
 > [ /home/viking/spam.txt /home/viking/eggs.txt ] | path split
 ╭───┬──────────────────╮
 │ 0 │ ╭───┬──────────╮ │

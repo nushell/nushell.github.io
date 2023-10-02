@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Returns the selected column
-```shell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr get a
 ╭───┬───╮
 │ # │ a │

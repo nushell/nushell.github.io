@@ -41,7 +41,7 @@ usage: |
 ## Examples
 
 Convert string to filesize in table
-```shell
+```nu
 > [[device size]; ["/dev/sda1" "200"] ["/dev/loop0" "50"]] | into filesize size
 ╭───┬────────────┬───────╮
 │ # │   device   │ size  │
@@ -53,25 +53,25 @@ Convert string to filesize in table
 ```
 
 Convert string to filesize
-```shell
+```nu
 > '2' | into filesize
 2 B
 ```
 
 Convert float to filesize
-```shell
+```nu
 > 8.3 | into filesize
 8 B
 ```
 
 Convert int to filesize
-```shell
+```nu
 > 5 | into filesize
 5 B
 ```
 
 Convert file size to filesize
-```shell
+```nu
 > 4KB | into filesize
 3.9 KiB
 ```

@@ -32,13 +32,13 @@ usage: |
 ## Examples
 
 Generate random chars
-```shell
+```nu
 > random chars
 
 ```
 
 Generate random chars with specified length
-```shell
+```nu
 > random chars -l 20
 
 ```

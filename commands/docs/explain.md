@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Explain a command within a closure
-```shell
+```nu
 > explain {|| ls | sort-by name type -i | get name } | table -e
 
 ```

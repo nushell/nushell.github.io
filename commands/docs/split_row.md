@@ -34,7 +34,7 @@ usage: |
 ## Examples
 
 Split a string into rows of char
-```shell
+```nu
 > 'abc' | split row ''
 ╭───┬───╮
 │ 0 │   │
@@ -47,7 +47,7 @@ Split a string into rows of char
 ```
 
 Split a string into rows by the specified separator
-```shell
+```nu
 > 'a--b--c' | split row '--'
 ╭───┬───╮
 │ 0 │ a │
@@ -58,7 +58,7 @@ Split a string into rows by the specified separator
 ```
 
 Split a string by '-'
-```shell
+```nu
 > '-a-b-c-' | split row '-'
 ╭───┬───╮
 │ 0 │   │
@@ -71,7 +71,7 @@ Split a string by '-'
 ```
 
 Split a string by regex
-```shell
+```nu
 > 'a   b       c' | split row -r '\s+'
 ╭───┬───╮
 │ 0 │ a │

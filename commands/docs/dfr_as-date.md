@@ -33,7 +33,7 @@ usage: |
 ## Examples
 
 Converts string to date
-```shell
+```nu
 > ["2021-12-30" "2021-12-31"] | dfr into-df | dfr as-datetime "%Y-%m-%d"
 
 ```

@@ -32,7 +32,7 @@ usage: |
 ## Examples
 
 Takes selected rows from dataframe
-```shell
+```nu
 > let df = ([[a b]; [4 1] [5 2] [4 3]] | dfr into-df);
     let indices = ([0 2] | dfr into-df);
     $df | dfr take $indices
@@ -46,7 +46,7 @@ Takes selected rows from dataframe
 ```
 
 Takes selected rows from series
-```shell
+```nu
 > let series = ([4 1 5 2 4 3] | dfr into-df);
     let indices = ([0 2] | dfr into-df);
     $series | dfr take $indices

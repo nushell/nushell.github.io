@@ -32,25 +32,25 @@ usage: |
 ## Examples
 
 Check if each row's status is the string 'UP'
-```shell
+```nu
 > [[status]; [UP] [UP]] | all {|el| $el.status == UP }
 true
 ```
 
 Check that each item is a string
-```shell
+```nu
 > [foo bar 2 baz] | all {|| ($in | describe) == 'string' }
 false
 ```
 
 Check that all values are equal to twice their index
-```shell
+```nu
 > [0 2 4 6] | enumerate | all {|i| $i.item == $i.index * 2 }
 true
 ```
 
 Check that all of the values are even, using a stored closure
-```shell
+```nu
 > let cond = {|el| ($el mod 2) == 0 }; [2 4 6 8] | all $cond
 true
 ```

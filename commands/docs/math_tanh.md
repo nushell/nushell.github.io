@@ -28,7 +28,7 @@ usage: |
 ## Examples
 
 Apply the hyperbolic tangent to 10*π
-```shell
+```nu
 > 3.141592 * 10 | math tanh | math round --precision 4
 1
 ```
