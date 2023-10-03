@@ -20,7 +20,7 @@
     "@vuepress/plugin-medium-zoom": "2.0.0-beta.67",
     "@vuepress/plugin-shiki": "^2.0.0-beta.67",
     "@vuepress/theme-default": "2.0.0-beta.67",
-    "lefthook": "^1.4.10",
+    "lefthook": "^1.5.0",
     "patch-package": "^8.0.0",
     "prettier": "^3.0.3",
     "shiki": "^0.14.4",
