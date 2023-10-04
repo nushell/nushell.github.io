@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> math arcsin --degrees```
+```> math arcsin {flags} ```
 
-## Parameters
+## Flags
 
- -  `--degrees` `(-d)`: Return degrees instead of radians
+ -  `--degrees, -d`: Return degrees instead of radians
 
 
 ## Input/output types:

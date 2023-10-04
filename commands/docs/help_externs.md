@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> help externs ...rest --find```
+```> help externs {flags} ...rest```
+
+## Flags
+
+ -  `--find, -f {string}`: string to find in extern names and usage
 
 ## Parameters
 
  -  `...rest`: the name of extern to get help on
- -  `--find {string}`: string to find in extern names and usage
 
 
 ## Input/output types:

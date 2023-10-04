@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> bytes starts-with (pattern) ...rest```
+```> bytes starts-with {flags} (pattern) ...rest```
 
 ## Parameters
 

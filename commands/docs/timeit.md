@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> timeit (command)```
+```> timeit {flags} (command)```
 
 ## Parameters
 

@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> path dirname --replace --num-levels```
+```> path dirname {flags} ```
 
-## Parameters
+## Flags
 
- -  `--replace {string}`: Return original path with dirname replaced by this string
- -  `--num-levels {int}`: Number of directories to walk up
+ -  `--replace, -r {string}`: Return original path with dirname replaced by this string
+ -  `--num-levels, -n {int}`: Number of directories to walk up
 
 
 ## Input/output types:

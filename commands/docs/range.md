@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> range (rows)```
+```> range {flags} (rows)```
 
 ## Parameters
 

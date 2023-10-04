@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> export alias (name) (initial_value)```
+```> export alias {flags} (name) (initial_value)```
 
 ## Parameters
 

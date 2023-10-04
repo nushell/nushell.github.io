@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr drop ...rest```
+```> dfr drop {flags} ...rest```
 
 ## Parameters
 

@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> str index-of (string) ...rest --grapheme-clusters --utf-8-bytes --range --end```
+```> str index-of {flags} (string) ...rest```
+
+## Flags
+
+ -  `--grapheme-clusters, -g`: count indexes using grapheme clusters (all visible chars have length 1)
+ -  `--utf-8-bytes, -b`: count indexes using UTF-8 bytes (default; non-ASCII chars have length 2+)
+ -  `--range, -r {range}`: optional start and/or end index
+ -  `--end, -e`: search from the end of the input
 
 ## Parameters
 
  -  `string`: the string to find in the input
  -  `...rest`: For a data structure input, search strings at the given cell paths, and replace with result
- -  `--grapheme-clusters` `(-g)`: count indexes using grapheme clusters (all visible chars have length 1)
- -  `--utf-8-bytes` `(-b)`: count indexes using UTF-8 bytes (default; non-ASCII chars have length 2+)
- -  `--range {range}`: optional start and/or end index
- -  `--end` `(-e)`: search from the end of the input
 
 
 ## Input/output types:

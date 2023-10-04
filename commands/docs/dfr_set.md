@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr set (value) --mask```
+```> dfr set {flags} (value)```
+
+## Flags
+
+ -  `--mask, -m {any}`: mask indicating insertions
 
 ## Parameters
 
  -  `value`: value to be inserted in series
- -  `--mask {any}`: mask indicating insertions
 
 
 ## Input/output types:

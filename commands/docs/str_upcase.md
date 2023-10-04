@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str upcase ...rest```
+```> str upcase {flags} ...rest```
 
 ## Parameters
 

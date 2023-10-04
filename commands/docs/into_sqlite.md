@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> into sqlite (file_name) --table_name```
+```> into sqlite {flags} (file_name)```
+
+## Flags
+
+ -  `--table_name, -t {string}`: Specify table name to store the data in
 
 ## Parameters
 
  -  `file_name`: Specify the filename to save the database to
- -  `--table_name {string}`: Specify table name to store the data in
 
 
 ## Input/output types:

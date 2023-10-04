@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> math variance --sample```
+```> math variance {flags} ```
 
-## Parameters
+## Flags
 
- -  `--sample` `(-s)`: calculate sample variance (i.e. using N-1 as the denominator)
+ -  `--sample, -s`: calculate sample variance (i.e. using N-1 as the denominator)
 
 
 ## Input/output types:

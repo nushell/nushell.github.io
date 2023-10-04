@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> print ...rest --no-newline --stderr```
+```> print {flags} ...rest```
+
+## Flags
+
+ -  `--no-newline, -n`: print without inserting a newline for the line ending
+ -  `--stderr, -e`: print to stderr instead of stdout
 
 ## Parameters
 
  -  `...rest`: the values to print
- -  `--no-newline` `(-n)`: print without inserting a newline for the line ending
- -  `--stderr` `(-e)`: print to stderr instead of stdout
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math sinh ```
+```> math sinh {flags} ```
 
 
 ## Input/output types:

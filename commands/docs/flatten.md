@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> flatten ...rest --all```
+```> flatten {flags} ...rest```
+
+## Flags
+
+ -  `--all, -a`: flatten inner table one level out
 
 ## Parameters
 
  -  `...rest`: optionally flatten data by column
- -  `--all` `(-a)`: flatten inner table one level out
 
 
 ## Input/output types:

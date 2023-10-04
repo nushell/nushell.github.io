@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str camel-case ...rest```
+```> str camel-case {flags} ...rest```
 
 ## Parameters
 

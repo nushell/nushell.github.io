@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-hour ```
+```> dfr get-hour {flags} ```
 
 
 ## Input/output types:

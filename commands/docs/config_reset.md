@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> config reset --nu --env --without-backup```
+```> config reset {flags} ```
 
-## Parameters
+## Flags
 
- -  `--nu` `(-n)`: reset only nu config, config.nu
- -  `--env` `(-e)`: reset only env config, env.nu
- -  `--without-backup` `(-w)`: do not make a backup
+ -  `--nu, -n`: reset only nu config, config.nu
+ -  `--env, -e`: reset only env config, env.nu
+ -  `--without-backup, -w`: do not make a backup
 
 
 ## Input/output types:

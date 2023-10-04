@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> all (predicate)```
+```> all {flags} (predicate)```
 
 ## Parameters
 

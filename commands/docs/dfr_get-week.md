@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-week ```
+```> dfr get-week {flags} ```
 
 
 ## Input/output types:

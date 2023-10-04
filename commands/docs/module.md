@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> module (module) (block)```
+```> module {flags} (module) (block)```
 
 ## Parameters
 

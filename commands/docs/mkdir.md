@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> mkdir ...rest --verbose```
+```> mkdir {flags} ...rest```
+
+## Flags
+
+ -  `--verbose, -v`: print created path(s).
 
 ## Parameters
 
  -  `...rest`: the name(s) of the path(s) to create
- -  `--verbose` `(-v)`: print created path(s).
 
 
 ## Input/output types:

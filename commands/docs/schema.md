@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> schema ```
+```> schema {flags} ```
 
 
 ## Input/output types:

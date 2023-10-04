@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr query (sql)```
+```> dfr query {flags} (sql)```
 
 ## Parameters
 

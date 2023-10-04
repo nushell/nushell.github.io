@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str join (separator)```
+```> str join {flags} (separator)```
 
 ## Parameters
 

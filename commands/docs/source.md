@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> source (filename)```
+```> source {flags} (filename)```
 
 ## Parameters
 

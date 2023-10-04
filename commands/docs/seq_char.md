@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> seq char (start) (end)```
+```> seq char {flags} (start) (end)```
 
 ## Parameters
 

@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> register (plugin) (signature) --shell```
+```> register {flags} (plugin) (signature)```
+
+## Flags
+
+ -  `--shell, -s {path}`: path of shell used to run plugin (cmd, sh, python, etc)
 
 ## Parameters
 
  -  `plugin`: path of executable for plugin
  -  `signature`: Block with signature description as json object
- -  `--shell {path}`: path of shell used to run plugin (cmd, sh, python, etc)
 
 
 ## Input/output types:

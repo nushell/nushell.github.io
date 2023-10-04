@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> reduce (closure) --fold```
+```> reduce {flags} (closure)```
+
+## Flags
+
+ -  `--fold, -f {any}`: reduce with initial value
 
 ## Parameters
 
  -  `closure`: reducing function
- -  `--fold {any}`: reduce with initial value
 
 
 ## Input/output types:

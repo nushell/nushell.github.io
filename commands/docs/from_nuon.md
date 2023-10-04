@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> from nuon ```
+```> from nuon {flags} ```
 
 
 ## Input/output types:

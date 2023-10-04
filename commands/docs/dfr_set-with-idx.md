@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr set-with-idx (value) --indices```
+```> dfr set-with-idx {flags} (value)```
+
+## Flags
+
+ -  `--indices, -i {any}`: list of indices indicating where to set the value
 
 ## Parameters
 
  -  `value`: value to be inserted in series
- -  `--indices {any}`: list of indices indicating where to set the value
 
 
 ## Input/output types:

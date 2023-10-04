@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> date to-table ```
+```> date to-table {flags} ```
 
 
 ## Input/output types:

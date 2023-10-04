@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> transpose ...rest --header-row --ignore-titles --as-record --keep-last --keep-all```
+```> transpose {flags} ...rest```
+
+## Flags
+
+ -  `--header-row, -r`: treat the first row as column names
+ -  `--ignore-titles, -i`: don't transpose the column names into values
+ -  `--as-record, -d`: transfer to record if the result is a table and contains only one row
+ -  `--keep-last, -l`: on repetition of record fields due to `header-row`, keep the last value obtained
+ -  `--keep-all, -a`: on repetition of record fields due to `header-row`, keep all the values obtained
 
 ## Parameters
 
  -  `...rest`: the names to give columns once transposed
- -  `--header-row` `(-r)`: treat the first row as column names
- -  `--ignore-titles` `(-i)`: don't transpose the column names into values
- -  `--as-record` `(-d)`: transfer to record if the result is a table and contains only one row
- -  `--keep-last` `(-l)`: on repetition of record fields due to `header-row`, keep the last value obtained
- -  `--keep-all` `(-a)`: on repetition of record fields due to `header-row`, keep all the values obtained
 
 
 ## Input/output types:

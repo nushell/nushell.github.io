@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> compact ...rest```
+```> compact {flags} ...rest```
 
 ## Parameters
 

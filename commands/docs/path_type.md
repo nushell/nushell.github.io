@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> path type ```
+```> path type {flags} ```
 
 
 ## Input/output types:

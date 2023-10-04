@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> bytes remove (pattern) ...rest --end --all```
+```> bytes remove {flags} (pattern) ...rest```
+
+## Flags
+
+ -  `--end, -e`: remove from end of binary
+ -  `--all, -a`: remove occurrences of finding binary
 
 ## Parameters
 
  -  `pattern`: the pattern to find
  -  `...rest`: for a data structure input, remove bytes from data at the given cell paths
- -  `--end` `(-e)`: remove from end of binary
- -  `--all` `(-a)`: remove occurrences of finding binary
 
 
 ## Input/output types:

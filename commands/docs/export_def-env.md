@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> export def-env (name) (params) (block)```
+```> export def-env {flags} (name) (params) (block)```
 
 ## Parameters
 

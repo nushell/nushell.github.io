@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> load-env (update)```
+```> load-env {flags} (update)```
 
 ## Parameters
 

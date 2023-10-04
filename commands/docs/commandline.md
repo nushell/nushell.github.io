@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> commandline (cmd) --cursor --cursor-end --append --insert --replace```
+```> commandline {flags} (cmd)```
+
+## Flags
+
+ -  `--cursor, -c`: Set or get the current cursor position
+ -  `--cursor-end, -e`: Set the current cursor position to the end of the buffer
+ -  `--append, -a`: appends the string to the end of the buffer
+ -  `--insert, -i`: inserts the string into the buffer at the cursor position
+ -  `--replace, -r`: replaces the current contents of the buffer (default)
 
 ## Parameters
 
  -  `cmd`: the string to perform the operation with
- -  `--cursor` `(-c)`: Set or get the current cursor position
- -  `--cursor-end` `(-e)`: Set the current cursor position to the end of the buffer
- -  `--append` `(-a)`: appends the string to the end of the buffer
- -  `--insert` `(-i)`: inserts the string into the buffer at the cursor position
- -  `--replace` `(-r)`: replaces the current contents of the buffer (default)
 
 
 ## Input/output types:

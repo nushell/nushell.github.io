@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> while (cond) (block)```
+```> while {flags} (cond) (block)```
 
 ## Parameters
 

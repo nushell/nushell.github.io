@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> with-env (variable) (block)```
+```> with-env {flags} (variable) (block)```
 
 ## Parameters
 

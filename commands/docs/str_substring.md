@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> str substring (range) ...rest --grapheme-clusters --utf-8-bytes```
+```> str substring {flags} (range) ...rest```
+
+## Flags
+
+ -  `--grapheme-clusters, -g`: count indexes and split using grapheme clusters (all visible chars have length 1)
+ -  `--utf-8-bytes, -b`: count indexes and split using UTF-8 bytes (default; non-ASCII chars have length 2+)
 
 ## Parameters
 
  -  `range`: the indexes to substring [start end]
  -  `...rest`: For a data structure input, turn strings at the given cell paths into substrings
- -  `--grapheme-clusters` `(-g)`: count indexes and split using grapheme clusters (all visible chars have length 1)
- -  `--utf-8-bytes` `(-b)`: count indexes and split using UTF-8 bytes (default; non-ASCII chars have length 2+)
 
 
 ## Input/output types:

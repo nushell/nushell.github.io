@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> url build-query ```
+```> url build-query {flags} ```
 
 
 ## Input/output types:

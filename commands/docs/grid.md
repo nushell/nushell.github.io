@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> grid --width --color --separator```
+```> grid {flags} ```
 
-## Parameters
+## Flags
 
- -  `--width {int}`: number of terminal columns wide (not output columns)
- -  `--color` `(-c)`: draw output with color
- -  `--separator {string}`: character to separate grid with
+ -  `--width, -w {int}`: number of terminal columns wide (not output columns)
+ -  `--color, -c`: draw output with color
+ -  `--separator, -s {string}`: character to separate grid with
 
 
 ## Input/output types:

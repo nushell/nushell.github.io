@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> loop (block)```
+```> loop {flags} (block)```
 
 ## Parameters
 

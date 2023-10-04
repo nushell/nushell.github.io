@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> every (stride) --skip```
+```> every {flags} (stride)```
+
+## Flags
+
+ -  `--skip, -s`: skip the rows that would be returned, instead of selecting them
 
 ## Parameters
 
  -  `stride`: how many rows to skip between (and including) each row returned
- -  `--skip` `(-s)`: skip the rows that would be returned, instead of selecting them
 
 
 ## Input/output types:

@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> math stddev --sample```
+```> math stddev {flags} ```
 
-## Parameters
+## Flags
 
- -  `--sample` `(-s)`: calculate sample standard deviation (i.e. using N-1 as the denominator)
+ -  `--sample, -s`: calculate sample standard deviation (i.e. using N-1 as the denominator)
 
 
 ## Input/output types:

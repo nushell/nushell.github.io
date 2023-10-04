@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> dfr replace --pattern --replace```
+```> dfr replace {flags} ```
 
-## Parameters
+## Flags
 
- -  `--pattern {string}`: Regex pattern to be matched
- -  `--replace {string}`: replacing string
+ -  `--pattern, -p {string}`: Regex pattern to be matched
+ -  `--replace, -r {string}`: replacing string
 
 
 ## Input/output types:

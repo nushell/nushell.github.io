@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> first (rows)```
+```> first {flags} (rows)```
 
 ## Parameters
 

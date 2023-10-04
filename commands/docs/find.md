@@ -16,17 +16,20 @@ usage: |
 
 ## Signature
 
-```> find ...rest --regex --ignore-case --multiline --dotall --columns --invert```
+```> find {flags} ...rest```
+
+## Flags
+
+ -  `--regex, -r {string}`: regex to match with
+ -  `--ignore-case, -i`: case-insensitive regex mode; equivalent to (?i)
+ -  `--multiline, -m`: multi-line regex mode: ^ and $ match begin/end of line; equivalent to (?m)
+ -  `--dotall, -s`: dotall regex mode: allow a dot . to match newlines \n; equivalent to (?s)
+ -  `--columns, -c {list<string>}`: column names to be searched (with rest parameter, not regex yet)
+ -  `--invert, -v`: invert the match
 
 ## Parameters
 
  -  `...rest`: terms to search
- -  `--regex {string}`: regex to match with
- -  `--ignore-case` `(-i)`: case-insensitive regex mode; equivalent to (?i)
- -  `--multiline` `(-m)`: multi-line regex mode: ^ and $ match begin/end of line; equivalent to (?m)
- -  `--dotall` `(-s)`: dotall regex mode: allow a dot . to match newlines \n; equivalent to (?s)
- -  `--columns {list<string>}`: column names to be searched (with rest parameter, not regex yet)
- -  `--invert` `(-v)`: invert the match
 
 
 ## Input/output types:

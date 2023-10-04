@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> to yaml ```
+```> to yaml {flags} ```
 
 
 ## Input/output types:

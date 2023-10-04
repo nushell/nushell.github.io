@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> dfr to-csv (file) --delimiter --no-header```
+```> dfr to-csv {flags} (file)```
+
+## Flags
+
+ -  `--delimiter, -d {string}`: file delimiter character
+ -  `--no-header, -`: Indicates if file doesn't have header
 
 ## Parameters
 
  -  `file`: file path to save dataframe
- -  `--delimiter {string}`: file delimiter character
- -  `--no-header` `(-)`: Indicates if file doesn't have header
 
 
 ## Input/output types:

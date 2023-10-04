@@ -16,15 +16,18 @@ usage: |
 
 ## Signature
 
-```> kill (pid) ...rest --force --quiet --signal```
+```> kill {flags} (pid) ...rest```
+
+## Flags
+
+ -  `--force, -f`: forcefully kill the process
+ -  `--quiet, -q`: won't print anything to the console
+ -  `--signal, -s {int}`: signal decimal number to be sent instead of the default 15 (unsupported on Windows)
 
 ## Parameters
 
  -  `pid`: process id of process that is to be killed
  -  `...rest`: rest of processes to kill
- -  `--force` `(-f)`: forcefully kill the process
- -  `--quiet` `(-q)`: won't print anything to the console
- -  `--signal {int}`: signal decimal number to be sent instead of the default 15 (unsupported on Windows)
 
 
 ## Input/output types:

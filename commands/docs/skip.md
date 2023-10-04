@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> skip (n)```
+```> skip {flags} (n)```
 
 ## Parameters
 

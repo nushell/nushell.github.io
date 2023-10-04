@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> mv (source) (destination) --verbose --force --interactive --update```
+```> mv {flags} (source) (destination)```
+
+## Flags
+
+ -  `--verbose, -v`: make mv to be verbose, showing files been moved.
+ -  `--force, -f`: overwrite the destination.
+ -  `--interactive, -i`: ask user to confirm action
+ -  `--update, -u`: move only when the SOURCE file is newer than the destination file(with -f) or when the destination file is missing
 
 ## Parameters
 
  -  `source`: the location to move files/directories from
  -  `destination`: the location to move files/directories to
- -  `--verbose` `(-v)`: make mv to be verbose, showing files been moved.
- -  `--force` `(-f)`: overwrite the destination.
- -  `--interactive` `(-i)`: ask user to confirm action
- -  `--update` `(-u)`: move only when the SOURCE file is newer than the destination file(with -f) or when the destination file is missing
 
 
 ## Input/output types:

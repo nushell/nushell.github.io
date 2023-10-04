@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> sleep (duration) ...rest```
+```> sleep {flags} (duration) ...rest```
 
 ## Parameters
 

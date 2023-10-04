@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> date to-timezone (time zone)```
+```> date to-timezone {flags} (time zone)```
 
 ## Parameters
 

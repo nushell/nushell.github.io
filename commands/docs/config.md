@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> config ```
+```> config {flags} ```
 
 
 ## Input/output types:

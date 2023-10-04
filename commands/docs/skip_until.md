@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> skip until (predicate)```
+```> skip until {flags} (predicate)```
 
 ## Parameters
 

@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr str-slice (start) --length```
+```> dfr str-slice {flags} (start)```
+
+## Flags
+
+ -  `--length, -l {int}`: optional length
 
 ## Parameters
 
  -  `start`: start of slice
- -  `--length {int}`: optional length
 
 
 ## Input/output types:

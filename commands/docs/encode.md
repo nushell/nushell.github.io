@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> encode (encoding) --ignore-errors```
+```> encode {flags} (encoding)```
+
+## Flags
+
+ -  `--ignore-errors, -i`: when a character isn't in the given encoding, replace with a HTML entity (like `&#127880;`)
 
 ## Parameters
 
  -  `encoding`: the text encoding to use
- -  `--ignore-errors` `(-i)`: when a character isn't in the given encoding, replace with a HTML entity (like `&#127880;`)
 
 
 ## Input/output types:

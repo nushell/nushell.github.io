@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr group-by ...rest```
+```> dfr group-by {flags} ...rest```
 
 ## Parameters
 

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-year ```
+```> dfr get-year {flags} ```
 
 
 ## Input/output types:

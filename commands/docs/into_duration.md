@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> into duration ...rest --unit```
+```> into duration {flags} ...rest```
+
+## Flags
+
+ -  `--unit, -u {string}`: Unit to convert number into (will have an effect only with integer input)
 
 ## Parameters
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
- -  `--unit {string}`: Unit to convert number into (will have an effect only with integer input)
 
 
 ## Input/output types:

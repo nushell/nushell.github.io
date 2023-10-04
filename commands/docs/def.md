@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> def (def_name) (params) (body)```
+```> def {flags} (def_name) (params) (body)```
 
 ## Parameters
 

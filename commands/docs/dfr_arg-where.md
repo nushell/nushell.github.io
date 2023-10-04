@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr arg-where (column name)```
+```> dfr arg-where {flags} (column name)```
 
 ## Parameters
 

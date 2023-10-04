@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr is-unique ```
+```> dfr is-unique {flags} ```
 
 
 ## Input/output types:

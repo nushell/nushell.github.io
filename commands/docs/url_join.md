@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> url join ```
+```> url join {flags} ```
 
 
 ## Input/output types:

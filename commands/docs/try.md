@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> try (try_block) (catch_block)```
+```> try {flags} (try_block) (catch_block)```
 
 ## Parameters
 

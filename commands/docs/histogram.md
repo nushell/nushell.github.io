@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> histogram (column-name) (frequency-column-name) --percentage-type```
+```> histogram {flags} (column-name) (frequency-column-name)```
+
+## Flags
+
+ -  `--percentage-type, -t {string}`: percentage calculate method, can be 'normalize' or 'relative', in 'normalize', defaults to be 'normalize'
 
 ## Parameters
 
  -  `column-name`: column name to calc frequency, no need to provide if input is just a list
  -  `frequency-column-name`: histogram's frequency column, default to be frequency column output
- -  `--percentage-type {string}`: percentage calculate method, can be 'normalize' or 'relative', in 'normalize', defaults to be 'normalize'
 
 
 ## Input/output types:
@@ -48,12 +51,12 @@ Compute a histogram for the types of files, with frequency column named freq
 Compute a histogram for a list of numbers
 ```nu
 > [1 2 1] | histogram
-╭───┬───────┬───────┬──────────┬────────────┬────────────────────────────────────────────────────────────────────╮
-│ # │ value │ count │ quantile │ percentage │                             frequency                              │
-├───┼───────┼───────┼──────────┼────────────┼────────────────────────────────────────────────────────────────────┤
-│ 0 │     1 │     2 │     0.67 │ 66.67%     │ ****************************************************************** │
-│ 1 │     2 │     1 │     0.33 │ 33.33%     │ *********************************                                  │
-╰───┴───────┴───────┴──────────┴────────────┴────────────────────────────────────────────────────────────────────╯
+╭────┬────────┬────────┬──────────┬────────────┬────────────────────────────────────────────────────────────────────╮
+│  # │ value  │ count  │ quantile │ percentage │                             frequency                              │
+├────┼────────┼────────┼──────────┼────────────┼────────────────────────────────────────────────────────────────────┤
+│  0 │      1 │      2 │     0.67 │ 66.67%     │ ****************************************************************** │
+│  1 │      2 │      1 │     0.33 │ 33.33%     │ *********************************                                  │
+╰────┴────────┴────────┴──────────┴────────────┴────────────────────────────────────────────────────────────────────╯
 
 ```
 

@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> which (application) ...rest --all```
+```> which {flags} (application) ...rest```
+
+## Flags
+
+ -  `--all, -a`: list all executables
 
 ## Parameters
 
  -  `application`: application
  -  `...rest`: additional applications
- -  `--all` `(-a)`: list all executables
 
 
 ## Input/output types:

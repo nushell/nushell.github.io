@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr median ```
+```> dfr median {flags} ```
 
 
 ## Input/output types:

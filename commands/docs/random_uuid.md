@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> random uuid ```
+```> random uuid {flags} ```
 
 
 ## Input/output types:

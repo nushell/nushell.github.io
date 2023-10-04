@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> random ```
+```> random {flags} ```
 
 
 ## Input/output types:

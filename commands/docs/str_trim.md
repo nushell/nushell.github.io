@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> str trim ...rest --char --left --right```
+```> str trim {flags} ...rest```
+
+## Flags
+
+ -  `--char, -c {string}`: character to trim (default: whitespace)
+ -  `--left, -l`: trims characters only from the beginning of the string
+ -  `--right, -r`: trims characters only from the end of the string
 
 ## Parameters
 
  -  `...rest`: For a data structure input, trim strings at the given cell paths
- -  `--char {string}`: character to trim (default: whitespace)
- -  `--left` `(-l)`: trims characters only from the beginning of the string
- -  `--right` `(-r)`: trims characters only from the end of the string
 
 
 ## Input/output types:

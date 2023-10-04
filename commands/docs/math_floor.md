@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math floor ```
+```> math floor {flags} ```
 
 
 ## Input/output types:

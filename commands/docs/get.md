@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> get (cell_path) ...rest --ignore-errors --sensitive```
+```> get {flags} (cell_path) ...rest```
+
+## Flags
+
+ -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional)
+ -  `--sensitive, -s`: get path in a case sensitive manner
 
 ## Parameters
 
  -  `cell_path`: the cell path to the data
  -  `...rest`: additional cell paths
- -  `--ignore-errors` `(-i)`: ignore missing data (make all cell path members optional)
- -  `--sensitive` `(-s)`: get path in a case sensitive manner
 
 
 ## Input/output types:

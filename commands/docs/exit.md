@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> exit (exit_code)```
+```> exit {flags} (exit_code)```
 
 ## Parameters
 

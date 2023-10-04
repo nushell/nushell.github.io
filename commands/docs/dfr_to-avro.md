@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr to-avro (file) --compression```
+```> dfr to-avro {flags} (file)```
+
+## Flags
+
+ -  `--compression, -c {string}`: use compression, supports deflate or snappy
 
 ## Parameters
 
  -  `file`: file path to save dataframe
- -  `--compression {string}`: use compression, supports deflate or snappy
 
 
 ## Input/output types:

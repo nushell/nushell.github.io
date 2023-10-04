@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> overlay new (name)```
+```> overlay new {flags} (name)```
 
 ## Parameters
 

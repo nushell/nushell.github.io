@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> explain (closure)```
+```> explain {flags} (closure)```
 
 ## Parameters
 

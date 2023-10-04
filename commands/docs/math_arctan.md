@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> math arctan --degrees```
+```> math arctan {flags} ```
 
-## Parameters
+## Flags
 
- -  `--degrees` `(-d)`: Return degrees instead of radians
+ -  `--degrees, -d`: Return degrees instead of radians
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr filter (filter expression)```
+```> dfr filter {flags} (filter expression)```
 
 ## Parameters
 

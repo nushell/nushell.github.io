@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr uppercase ```
+```> dfr uppercase {flags} ```
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> port (start) (end)```
+```> port {flags} (start) (end)```
 
 ## Parameters
 

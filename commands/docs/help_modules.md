@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> help modules ...rest --find```
+```> help modules {flags} ...rest```
+
+## Flags
+
+ -  `--find, -f {string}`: string to find in module names and usage
 
 ## Parameters
 
  -  `...rest`: the name of module to get help on
- -  `--find {string}`: string to find in module names and usage
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr implode ```
+```> dfr implode {flags} ```
 
 
 ## Input/output types:

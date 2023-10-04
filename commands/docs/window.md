@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> window (window_size) --stride --remainder```
+```> window {flags} (window_size)```
+
+## Flags
+
+ -  `--stride, -s {int}`: the number of rows to slide over between windows
+ -  `--remainder, -r`: yield last chunks even if they have fewer elements than size
 
 ## Parameters
 
  -  `window_size`: the size of each window
- -  `--stride {int}`: the number of rows to slide over between windows
- -  `--remainder` `(-r)`: yield last chunks even if they have fewer elements than size
 
 
 ## Input/output types:

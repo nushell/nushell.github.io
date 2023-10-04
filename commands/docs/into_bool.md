@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> into bool ...rest```
+```> into bool {flags} ...rest```
 
 ## Parameters
 

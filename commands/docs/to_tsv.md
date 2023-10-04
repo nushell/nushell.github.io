@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> to tsv --noheaders```
+```> to tsv {flags} ```
 
-## Parameters
+## Flags
 
- -  `--noheaders` `(-n)`: do not output the column names as the first row
+ -  `--noheaders, -n`: do not output the column names as the first row
 
 
 ## Input/output types:

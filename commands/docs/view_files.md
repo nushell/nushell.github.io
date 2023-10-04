@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> view files ```
+```> view files {flags} ```
 
 
 ## Input/output types:

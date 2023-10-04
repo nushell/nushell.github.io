@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> run-external (command) ...rest --redirect-stdout --redirect-stderr --redirect-combine --trim-end-newline```
+```> run-external {flags} (command) ...rest```
+
+## Flags
+
+ -  `--redirect-stdout, -`: redirect stdout to the pipeline
+ -  `--redirect-stderr, -`: redirect stderr to the pipeline
+ -  `--redirect-combine, -`: redirect both stdout and stderr combined to the pipeline (collected in stdout)
+ -  `--trim-end-newline, -`: trimming end newlines
 
 ## Parameters
 
  -  `command`: external command to run
  -  `...rest`: arguments for external command
- -  `--redirect-stdout` `(-)`: redirect stdout to the pipeline
- -  `--redirect-stderr` `(-)`: redirect stderr to the pipeline
- -  `--redirect-combine` `(-)`: redirect both stdout and stderr combined to the pipeline (collected in stdout)
- -  `--trim-end-newline` `(-)`: trimming end newlines
 
 
 ## Input/output types:

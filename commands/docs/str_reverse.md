@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str reverse ...rest```
+```> str reverse {flags} ...rest```
 
 ## Parameters
 

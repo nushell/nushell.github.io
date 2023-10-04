@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> roll right --by --cells-only```
+```> roll right {flags} ```
 
-## Parameters
+## Flags
 
- -  `--by {int}`: Number of columns to roll
- -  `--cells-only` `(-c)`: rotates columns leaving headers fixed
+ -  `--by, -b {int}`: Number of columns to roll
+ -  `--cells-only, -c`: rotates columns leaving headers fixed
 
 
 ## Input/output types:

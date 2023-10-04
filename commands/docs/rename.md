@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> rename ...rest --column --block```
+```> rename {flags} ...rest```
+
+## Flags
+
+ -  `--column, -c {list<string>}`: column name to be changed
+ -  `--block, -b {closure(any)}`: A closure to apply changes on each column
 
 ## Parameters
 
  -  `...rest`: the new names for the columns
- -  `--column {list<string>}`: column name to be changed
- -  `--block {closure(any)}`: A closure to apply changes on each column
 
 
 ## Input/output types:

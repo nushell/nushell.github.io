@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> date list-timezone ```
+```> date list-timezone {flags} ```
 
 
 ## Input/output types:

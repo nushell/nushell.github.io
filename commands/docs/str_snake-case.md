@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str snake-case ...rest```
+```> str snake-case {flags} ...rest```
 
 ## Parameters
 

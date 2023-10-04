@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> roll ```
+```> roll {flags} ```
 
 
 ## Input/output types:

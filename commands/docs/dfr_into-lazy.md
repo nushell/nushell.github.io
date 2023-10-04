@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr into-lazy ```
+```> dfr into-lazy {flags} ```
 
 
 ## Input/output types:

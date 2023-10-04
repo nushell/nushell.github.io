@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> split row (separator) --number --regex```
+```> split row {flags} (separator)```
+
+## Flags
+
+ -  `--number, -n {int}`: Split into maximum number of items
+ -  `--regex, -r`: use regex syntax for separator
 
 ## Parameters
 
  -  `separator`: a character or regex that denotes what separates rows
- -  `--number {int}`: Split into maximum number of items
- -  `--regex` `(-r)`: use regex syntax for separator
 
 
 ## Input/output types:

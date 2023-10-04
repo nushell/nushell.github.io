@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr to-parquet (file)```
+```> dfr to-parquet {flags} (file)```
 
 ## Parameters
 

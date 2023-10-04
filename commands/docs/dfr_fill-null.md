@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr fill-null (fill)```
+```> dfr fill-null {flags} (fill)```
 
 ## Parameters
 

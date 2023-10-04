@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> take until (predicate)```
+```> take until {flags} (predicate)```
 
 ## Parameters
 

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> shuffle ```
+```> shuffle {flags} ```
 
 
 ## Input/output types:

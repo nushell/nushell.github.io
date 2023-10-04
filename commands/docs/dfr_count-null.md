@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr count-null ```
+```> dfr count-null {flags} ```
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr slice (offset) (size)```
+```> dfr slice {flags} (offset) (size)```
 
 ## Parameters
 

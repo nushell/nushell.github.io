@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> let-env (var_name) (initial_value)```
+```> let-env {flags} (var_name) (initial_value)```
 
 ## Parameters
 

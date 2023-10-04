@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> filter (closure)```
+```> filter {flags} (closure)```
 
 ## Parameters
 

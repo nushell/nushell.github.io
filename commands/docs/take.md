@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> take (n)```
+```> take {flags} (n)```
 
 ## Parameters
 

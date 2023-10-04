@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr agg-groups ```
+```> dfr agg-groups {flags} ```
 
 
 ## Input/output types:

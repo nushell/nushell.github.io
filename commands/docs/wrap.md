@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> wrap (name)```
+```> wrap {flags} (name)```
 
 ## Parameters
 

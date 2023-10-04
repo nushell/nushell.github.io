@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr append (other) --col```
+```> dfr append {flags} (other)```
+
+## Flags
+
+ -  `--col, -c`: appends in col orientation
 
 ## Parameters
 
  -  `other`: dataframe to be appended
- -  `--col` `(-c)`: appends in col orientation
 
 
 ## Input/output types:

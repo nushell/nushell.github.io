@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> extern-wrapped (def_name) (params) (body)```
+```> extern-wrapped {flags} (def_name) (params) (body)```
 
 ## Parameters
 

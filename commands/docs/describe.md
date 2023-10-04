@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> describe --no-collect```
+```> describe {flags} ```
 
-## Parameters
+## Flags
 
- -  `--no-collect` `(-n)`: do not collect streams of structured data
+ -  `--no-collect, -n`: do not collect streams of structured data
 
 
 ## Input/output types:

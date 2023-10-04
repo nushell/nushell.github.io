@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> math tan --degrees```
+```> math tan {flags} ```
 
-## Parameters
+## Flags
 
- -  `--degrees` `(-d)`: Use degrees instead of radians
+ -  `--degrees, -d`: Use degrees instead of radians
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> query db (SQL)```
+```> query db {flags} (SQL)```
 
 ## Parameters
 

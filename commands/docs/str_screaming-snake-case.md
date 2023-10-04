@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str screaming-snake-case ...rest```
+```> str screaming-snake-case {flags} ...rest```
 
 ## Parameters
 

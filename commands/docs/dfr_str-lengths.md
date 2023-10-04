@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr str-lengths ```
+```> dfr str-lengths {flags} ```
 
 
 ## Input/output types:

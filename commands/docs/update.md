@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> update (field) (replacement value)```
+```> update {flags} (field) (replacement value)```
 
 ## Parameters
 

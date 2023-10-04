@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> from ssv --noheaders --aligned-columns --minimum-spaces```
+```> from ssv {flags} ```
 
-## Parameters
+## Flags
 
- -  `--noheaders` `(-n)`: don't treat the first row as column names
- -  `--aligned-columns` `(-a)`: assume columns are aligned
- -  `--minimum-spaces {int}`: the minimum spaces to separate columns
+ -  `--noheaders, -n`: don't treat the first row as column names
+ -  `--aligned-columns, -a`: assume columns are aligned
+ -  `--minimum-spaces, -m {int}`: the minimum spaces to separate columns
 
 
 ## Input/output types:

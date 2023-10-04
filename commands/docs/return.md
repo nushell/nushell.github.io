@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> return (return_value)```
+```> return {flags} (return_value)```
 
 ## Parameters
 

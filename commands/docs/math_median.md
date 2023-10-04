@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math median ```
+```> math median {flags} ```
 
 
 ## Input/output types:

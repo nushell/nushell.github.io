@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> enumerate ```
+```> enumerate {flags} ```
 
 
 ## Input/output types:

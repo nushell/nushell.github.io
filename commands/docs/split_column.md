@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> split column (separator) ...rest --collapse-empty --regex```
+```> split column {flags} (separator) ...rest```
+
+## Flags
+
+ -  `--collapse-empty, -c`: remove empty columns
+ -  `--regex, -r`: separator is a regular expression
 
 ## Parameters
 
  -  `separator`: the character or string that denotes what separates columns
  -  `...rest`: column names to give the new columns
- -  `--collapse-empty` `(-c)`: remove empty columns
- -  `--regex` `(-r)`: separator is a regular expression
 
 
 ## Input/output types:

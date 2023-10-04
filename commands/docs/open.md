@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> open (filename) ...rest --raw```
+```> open {flags} (filename) ...rest```
+
+## Flags
+
+ -  `--raw, -r`: open file as raw binary
 
 ## Parameters
 
  -  `filename`: the filename to use
  -  `...rest`: optional additional files to open
- -  `--raw` `(-r)`: open file as raw binary
 
 
 ## Input/output types:

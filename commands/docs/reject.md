@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> reject ...rest```
+```> reject {flags} ...rest```
 
 ## Parameters
 

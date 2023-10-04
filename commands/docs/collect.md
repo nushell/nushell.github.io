@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> collect (closure) --keep-env```
+```> collect {flags} (closure)```
+
+## Flags
+
+ -  `--keep-env, -`: let the block affect environment variables
 
 ## Parameters
 
  -  `closure`: the closure to run once the stream is collected
- -  `--keep-env` `(-)`: let the block affect environment variables
 
 
 ## Input/output types:

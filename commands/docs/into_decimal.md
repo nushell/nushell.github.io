@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> into decimal ...rest```
+```> into decimal {flags} ...rest```
 
 ## Parameters
 

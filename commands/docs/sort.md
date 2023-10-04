@@ -16,14 +16,14 @@ usage: |
 
 ## Signature
 
-```> sort --reverse --ignore-case --values --natural```
+```> sort {flags} ```
 
-## Parameters
+## Flags
 
- -  `--reverse` `(-r)`: Sort in reverse order
- -  `--ignore-case` `(-i)`: Sort string-based data case-insensitively
- -  `--values` `(-v)`: If input is a single record, sort the record by values; ignored if input is not a single record
- -  `--natural` `(-n)`: Sort alphanumeric string-based values naturally (1, 9, 10, 99, 100, ...)
+ -  `--reverse, -r`: Sort in reverse order
+ -  `--ignore-case, -i`: Sort string-based data case-insensitively
+ -  `--values, -v`: If input is a single record, sort the record by values; ignored if input is not a single record
+ -  `--natural, -n`: Sort alphanumeric string-based values naturally (1, 9, 10, 99, 100, ...)
 
 
 ## Input/output types:

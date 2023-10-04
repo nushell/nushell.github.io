@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> scope commands ```
+```> scope commands {flags} ```
 
 
 ## Input/output types:

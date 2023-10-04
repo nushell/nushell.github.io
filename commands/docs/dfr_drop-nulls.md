@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr drop-nulls (subset)```
+```> dfr drop-nulls {flags} (subset)```
 
 ## Parameters
 

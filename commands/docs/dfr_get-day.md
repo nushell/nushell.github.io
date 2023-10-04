@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-day ```
+```> dfr get-day {flags} ```
 
 
 ## Input/output types:

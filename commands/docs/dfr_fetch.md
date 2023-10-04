@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr fetch (rows)```
+```> dfr fetch {flags} (rows)```
 
 ## Parameters
 

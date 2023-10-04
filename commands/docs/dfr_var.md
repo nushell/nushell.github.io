@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr var ```
+```> dfr var {flags} ```
 
 
 ## Input/output types:

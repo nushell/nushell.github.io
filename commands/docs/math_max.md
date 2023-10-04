@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math max ```
+```> math max {flags} ```
 
 
 ## Input/output types:

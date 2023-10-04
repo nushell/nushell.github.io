@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr shape ```
+```> dfr shape {flags} ```
 
 
 ## Input/output types:

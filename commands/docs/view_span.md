@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> view span (start) (end)```
+```> view span {flags} (start) (end)```
 
 ## Parameters
 

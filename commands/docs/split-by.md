@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> split-by (splitter)```
+```> split-by {flags} (splitter)```
 
 ## Parameters
 

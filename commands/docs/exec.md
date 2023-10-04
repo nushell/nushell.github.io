@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> exec (command)```
+```> exec {flags} (command)```
 
 ## Parameters
 

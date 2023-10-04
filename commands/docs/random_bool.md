@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> random bool --bias```
+```> random bool {flags} ```
 
-## Parameters
+## Flags
 
- -  `--bias {number}`: Adjusts the probability of a "true" outcome
+ -  `--bias, -b {number}`: Adjusts the probability of a "true" outcome
 
 
 ## Input/output types:

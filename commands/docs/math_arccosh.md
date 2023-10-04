@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math arccosh ```
+```> math arccosh {flags} ```
 
 
 ## Input/output types:

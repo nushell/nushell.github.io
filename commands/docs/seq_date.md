@@ -16,17 +16,17 @@ usage: |
 
 ## Signature
 
-```> seq date --output-format --input-format --begin-date --end-date --increment --days --reverse```
+```> seq date {flags} ```
 
-## Parameters
+## Flags
 
- -  `--output-format {string}`: prints dates in this format (defaults to %Y-%m-%d)
- -  `--input-format {string}`: give argument dates in this format (defaults to %Y-%m-%d)
- -  `--begin-date {string}`: beginning date range
- -  `--end-date {string}`: ending date
- -  `--increment {int}`: increment dates by this number
- -  `--days {int}`: number of days to print
- -  `--reverse` `(-r)`: print dates in reverse
+ -  `--output-format, -o {string}`: prints dates in this format (defaults to %Y-%m-%d)
+ -  `--input-format, -i {string}`: give argument dates in this format (defaults to %Y-%m-%d)
+ -  `--begin-date, -b {string}`: beginning date range
+ -  `--end-date, -e {string}`: ending date
+ -  `--increment, -n {int}`: increment dates by this number
+ -  `--days, -d {int}`: number of days to print
+ -  `--reverse, -r`: print dates in reverse
 
 
 ## Input/output types:

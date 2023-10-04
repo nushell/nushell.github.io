@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> date format (format string) --list```
+```> date format {flags} (format string)```
+
+## Flags
+
+ -  `--list, -l`: lists strftime cheatsheet
 
 ## Parameters
 
  -  `format string`: the desired date format
- -  `--list` `(-l)`: lists strftime cheatsheet
 
 
 ## Input/output types:

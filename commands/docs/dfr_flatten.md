@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr flatten ...rest```
+```> dfr flatten {flags} ...rest```
 
 ## Parameters
 

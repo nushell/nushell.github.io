@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> glob (glob) --depth --no-dir --no-file --no-symlink --not```
+```> glob {flags} (glob)```
+
+## Flags
+
+ -  `--depth, -d {int}`: directory depth to search
+ -  `--no-dir, -D`: Whether to filter out directories from the returned paths
+ -  `--no-file, -F`: Whether to filter out files from the returned paths
+ -  `--no-symlink, -S`: Whether to filter out symlinks from the returned paths
+ -  `--not, -n {list<string>}`: Patterns to exclude from the results
 
 ## Parameters
 
  -  `glob`: the glob expression
- -  `--depth {int}`: directory depth to search
- -  `--no-dir` `(-D)`: Whether to filter out directories from the returned paths
- -  `--no-file` `(-F)`: Whether to filter out files from the returned paths
- -  `--no-symlink` `(-S)`: Whether to filter out symlinks from the returned paths
- -  `--not {list<string>}`: Patterns to exclude from the results
 
 
 ## Input/output types:

@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> ansi link ...rest --text```
+```> ansi link {flags} ...rest```
+
+## Flags
+
+ -  `--text, -t {string}`: Link text. Uses uri as text if absent. In case of
+                tables, records and lists applies this text to all elements
 
 ## Parameters
 
  -  `...rest`: for a data structure input, add links to all strings at the given cell paths
- -  `--text {string}`: Link text. Uses uri as text if absent. In case of
-                tables, records and lists applies this text to all elements
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> bytes build ...rest```
+```> bytes build {flags} ...rest```
 
 ## Parameters
 

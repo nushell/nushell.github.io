@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> detect columns --skip --no-headers --combine-columns```
+```> detect columns {flags} ```
 
-## Parameters
+## Flags
 
- -  `--skip {int}`: number of rows to skip before detecting
- -  `--no-headers` `(-n)`: don't detect headers
- -  `--combine-columns {range}`: columns to be combined; listed as a range
+ -  `--skip, -s {int}`: number of rows to skip before detecting
+ -  `--no-headers, -n`: don't detect headers
+ -  `--combine-columns, -c {range}`: columns to be combined; listed as a range
 
 
 ## Input/output types:

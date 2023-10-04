@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr concatenate (other)```
+```> dfr concatenate {flags} (other)```
 
 ## Parameters
 

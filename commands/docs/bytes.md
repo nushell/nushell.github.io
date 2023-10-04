@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> bytes ```
+```> bytes {flags} ```
 
 
 ## Input/output types:

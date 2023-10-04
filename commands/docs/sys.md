@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> sys ```
+```> sys {flags} ```
 
 
 ## Input/output types:

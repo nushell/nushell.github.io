@@ -16,17 +16,20 @@ usage: |
 
 ## Signature
 
-```> http options (URL) --user --password --max-time --headers --insecure --allow-errors```
+```> http options {flags} (URL)```
+
+## Flags
+
+ -  `--user, -u {any}`: the username when authenticating
+ -  `--password, -p {any}`: the password when authenticating
+ -  `--max-time, -m {int}`: timeout period in seconds
+ -  `--headers, -H {any}`: custom headers you want to add
+ -  `--insecure, -k`: allow insecure server connections when using SSL
+ -  `--allow-errors, -e`: do not fail if the server returns an error code
 
 ## Parameters
 
  -  `URL`: the URL to fetch the options from
- -  `--user {any}`: the username when authenticating
- -  `--password {any}`: the password when authenticating
- -  `--max-time {int}`: timeout period in seconds
- -  `--headers {any}`: custom headers you want to add
- -  `--insecure` `(-k)`: allow insecure server connections when using SSL
- -  `--allow-errors` `(-e)`: do not fail if the server returns an error code
 
 
 ## Input/output types:

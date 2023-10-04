@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str distance (compare-string) ...rest```
+```> str distance {flags} (compare-string) ...rest```
 
 ## Parameters
 

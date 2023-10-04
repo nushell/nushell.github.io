@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> upsert (field) (replacement value)```
+```> upsert {flags} (field) (replacement value)```
 
 ## Parameters
 

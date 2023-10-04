@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math min ```
+```> math min {flags} ```
 
 
 ## Input/output types:

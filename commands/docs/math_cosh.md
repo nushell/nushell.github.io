@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math cosh ```
+```> math cosh {flags} ```
 
 
 ## Input/output types:

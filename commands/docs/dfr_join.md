@@ -16,18 +16,21 @@ usage: |
 
 ## Signature
 
-```> dfr join (other) (left_on) (right_on) --inner --left --outer --cross --suffix```
+```> dfr join {flags} (other) (left_on) (right_on)```
+
+## Flags
+
+ -  `--inner, -i`: inner joing between lazyframes (default)
+ -  `--left, -l`: left join between lazyframes
+ -  `--outer, -o`: outer join between lazyframes
+ -  `--cross, -c`: cross join between lazyframes
+ -  `--suffix, -s {string}`: Suffix to use on columns with same name
 
 ## Parameters
 
  -  `other`: LazyFrame to join with
  -  `left_on`: Left column(s) to join on
  -  `right_on`: Right column(s) to join on
- -  `--inner` `(-i)`: inner joing between lazyframes (default)
- -  `--left` `(-l)`: left join between lazyframes
- -  `--outer` `(-o)`: outer join between lazyframes
- -  `--cross` `(-c)`: cross join between lazyframes
- -  `--suffix {string}`: Suffix to use on columns with same name
 
 
 ## Input/output types:

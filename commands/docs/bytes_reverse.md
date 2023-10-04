@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> bytes reverse ...rest```
+```> bytes reverse {flags} ...rest```
 
 ## Parameters
 

@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> save (filename) --stderr --raw --append --force --progress```
+```> save {flags} (filename)```
+
+## Flags
+
+ -  `--stderr, -e {path}`: the filename used to save stderr, only works with `-r` flag
+ -  `--raw, -r`: save file as raw binary
+ -  `--append, -a`: append input to the end of the file
+ -  `--force, -f`: overwrite the destination
+ -  `--progress, -p`: enable progress bar
 
 ## Parameters
 
  -  `filename`: the filename to use
- -  `--stderr {path}`: the filename used to save stderr, only works with `-r` flag
- -  `--raw` `(-r)`: save file as raw binary
- -  `--append` `(-a)`: append input to the end of the file
- -  `--force` `(-f)`: overwrite the destination
- -  `--progress` `(-p)`: enable progress bar
 
 
 ## Input/output types:

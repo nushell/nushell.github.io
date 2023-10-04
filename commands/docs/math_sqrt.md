@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math sqrt ```
+```> math sqrt {flags} ```
 
 
 ## Input/output types:

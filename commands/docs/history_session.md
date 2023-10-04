@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> history session ```
+```> history session {flags} ```
 
 
 ## Input/output types:

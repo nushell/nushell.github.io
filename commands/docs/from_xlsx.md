@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> from xlsx --sheets```
+```> from xlsx {flags} ```
 
-## Parameters
+## Flags
 
- -  `--sheets {list<string>}`: Only convert specified sheets
+ -  `--sheets, -s {list<string>}`: Only convert specified sheets
 
 
 ## Input/output types:

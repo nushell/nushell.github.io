@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> math cos --degrees```
+```> math cos {flags} ```
 
-## Parameters
+## Flags
 
- -  `--degrees` `(-d)`: Use degrees instead of radians
+ -  `--degrees, -d`: Use degrees instead of radians
 
 
 ## Input/output types:

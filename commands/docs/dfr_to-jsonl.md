@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr to-jsonl (file)```
+```> dfr to-jsonl {flags} (file)```
 
 ## Parameters
 

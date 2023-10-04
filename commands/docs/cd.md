@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> cd (path)```
+```> cd {flags} (path)```
 
 ## Parameters
 

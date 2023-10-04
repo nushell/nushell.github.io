@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> encode base64 ...rest --character-set```
+```> encode base64 {flags} ...rest```
+
+## Flags
+
+ -  `--character-set, -c {string}`: specify the character rules for encoding the input.
+	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt', 'mutf7'
 
 ## Parameters
 
  -  `...rest`: For a data structure input, encode data at the given cell paths
- -  `--character-set {string}`: specify the character rules for encoding the input.
-	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt', 'mutf7'
 
 
 ## Input/output types:

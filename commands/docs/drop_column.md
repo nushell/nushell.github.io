@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> drop column (columns)```
+```> drop column {flags} (columns)```
 
 ## Parameters
 

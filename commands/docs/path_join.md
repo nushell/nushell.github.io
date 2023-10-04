@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> path join ...rest```
+```> path join {flags} ...rest```
 
 ## Parameters
 

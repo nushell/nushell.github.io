@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr concat-str (separator) (concat expressions)```
+```> dfr concat-str {flags} (separator) (concat expressions)```
 
 ## Parameters
 

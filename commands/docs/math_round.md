@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> math round --precision```
+```> math round {flags} ```
 
-## Parameters
+## Flags
 
- -  `--precision {number}`: digits of precision
+ -  `--precision, -p {number}`: digits of precision
 
 
 ## Input/output types:

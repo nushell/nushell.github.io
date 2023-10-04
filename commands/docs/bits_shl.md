@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> bits shl (bits) --signed --number-bytes```
+```> bits shl {flags} (bits)```
+
+## Flags
+
+ -  `--signed, -s`: always treat input number as a signed number
+ -  `--number-bytes, -n {string}`: the word size in number of bytes, it can be 1, 2, 4, 8, auto, default value `8`
 
 ## Parameters
 
  -  `bits`: number of bits to shift left
- -  `--signed` `(-s)`: always treat input number as a signed number
- -  `--number-bytes {string}`: the word size in number of bytes, it can be 1, 2, 4, 8, auto, default value `8`
 
 
 ## Input/output types:

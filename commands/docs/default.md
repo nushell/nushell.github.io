@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> default (default value) (column name)```
+```> default {flags} (default value) (column name)```
 
 ## Parameters
 

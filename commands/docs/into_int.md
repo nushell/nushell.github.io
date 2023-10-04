@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> into int ...rest --radix --endian```
+```> into int {flags} ...rest```
+
+## Flags
+
+ -  `--radix, -r {number}`: radix of integer
+ -  `--endian, -e {string}`: byte encode endian, available options: native(default), little, big
 
 ## Parameters
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
- -  `--radix {number}`: radix of integer
- -  `--endian {string}`: byte encode endian, available options: native(default), little, big
 
 
 ## Input/output types:

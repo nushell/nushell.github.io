@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> input list (prompt) --multi --fuzzy```
+```> input list {flags} (prompt)```
+
+## Flags
+
+ -  `--multi, -m`: Use multiple results, you can press a to toggle all options on/off
+ -  `--fuzzy, -f`: Use a fuzzy select.
 
 ## Parameters
 
  -  `prompt`: the prompt to display
- -  `--multi` `(-m)`: Use multiple results, you can press a to toggle all options on/off
- -  `--fuzzy` `(-f)`: Use a fuzzy select.
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> from toml ```
+```> from toml {flags} ```
 
 
 ## Input/output types:

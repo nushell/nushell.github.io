@@ -106,40 +106,55 @@ def command-doc [command] {
 
 "
 
-    let param_type = ['switch', 'named', 'rest', 'positional']
     let columns = ($command.signatures | columns)
     let no_sig = ($command | get signatures | is-empty)
-    let no_param = if $no_sig { true } else {
-        $command.signatures | get $columns.0 | where parameter_type in $param_type | is-empty
-    }
     let sig = if $no_sig { '' } else {
         ($command.signatures | get $columns.0 | each { |param|
             if $param.parameter_type == "positional" {
                 $"('(')($param.parameter_name)(')')"
-            } else if $param.parameter_type == "switch" {
-                $"--($param.parameter_name)"
-            } else if $param.parameter_type == "named" {
-                $"--($param.parameter_name)"
             } else if $param.parameter_type == "rest" {
                 $"...rest"
             }
         } | str join " ")
     }
 
-  let signatures = $"## Signature
+    let signatures = $"## Signature
 
-```> ($command.name) ($sig)```
+```> ($command.name) {flags} ($sig)```
 
 "
+    let flag_types = ['named', 'switch']
+    let no_flags = if $no_sig { true } else {
+        $command.signatures | get $columns.0 | where parameter_type in $flag_types | is-empty
+    }
+
+    let flags = if $no_flags { '' } else {
+        ($command.signatures | get $columns.0 | each { |param|
+            if $param.parameter_type == "switch" {
+                $" -  `--($param.parameter_name), -($param.short_flag)`: ($param.description)"
+            } else if $param.parameter_type == "named" {
+                $" -  `--($param.parameter_name), -($param.short_flag) {($param.syntax_shape)}`: ($param.description)"
+            }
+        } | str join (char newline))
+    }
+
+    let flags = if $no_flags { "" } else {
+$"## Flags
+
+($flags)
+
+"
+    }
+
+    let param_types = ['rest', 'positional']
+    let no_param = if $no_sig { true } else {
+        $command.signatures | get $columns.0 | where parameter_type in $param_types | is-empty
+    }
 
     let params = if $no_param { '' } else {
         ($command.signatures | get $columns.0 | each { |param|
             if $param.parameter_type == "positional" {
                 $" -  `($param.parameter_name)`: ($param.description)"
-            } else if $param.parameter_type == "switch" {
-                $" -  `--($param.parameter_name)` `\(-($param.short_flag)\)`: ($param.description)"
-            } else if $param.parameter_type == "named" {
-                $" -  `--($param.parameter_name) {($param.syntax_shape)}`: ($param.description)"
             } else if $param.parameter_type == "rest" {
                 $" -  `...rest`: ($param.description)"
             }
@@ -152,7 +167,7 @@ $"## Parameters
 ($params)
 
 "
-}
+    }
 
     let ex = $command.extra_usage
 
@@ -229,7 +244,7 @@ $"($example.description)
     } else { '' }
 
     let doc = (
-        ($top + $signatures + $parameters + $in_out + $examples + $extra_usage + $sub_commands + $tips)
+        ($top + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands + $tips)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)

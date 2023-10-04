@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> rotate ...rest --ccw```
+```> rotate {flags} ...rest```
+
+## Flags
+
+ -  `--ccw, -`: rotate counter clockwise
 
 ## Parameters
 
  -  `...rest`: the names to give columns once rotated
- -  `--ccw` `(-)`: rotate counter clockwise
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> bytes collect (separator)```
+```> bytes collect {flags} (separator)```
 
 ## Parameters
 

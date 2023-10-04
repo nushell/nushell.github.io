@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> dfr summary --quantiles```
+```> dfr summary {flags} ```
 
-## Parameters
+## Flags
 
- -  `--quantiles {table}`: provide optional quantiles
+ -  `--quantiles, -q {table}`: provide optional quantiles
 
 
 ## Input/output types:

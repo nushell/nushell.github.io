@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> skip while (predicate)```
+```> skip while {flags} (predicate)```
 
 ## Parameters
 

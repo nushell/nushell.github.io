@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-ordinal ```
+```> dfr get-ordinal {flags} ```
 
 
 ## Input/output types:

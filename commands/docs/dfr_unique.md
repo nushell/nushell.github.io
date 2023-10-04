@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> dfr unique --subset --last --maintain-order```
+```> dfr unique {flags} ```
 
-## Parameters
+## Flags
 
- -  `--subset {any}`: Subset of column(s) to use to maintain rows (lazy df)
- -  `--last` `(-l)`: Keeps last unique value. Default keeps first value (lazy df)
- -  `--maintain-order` `(-k)`: Keep the same order as the original DataFrame (lazy df)
+ -  `--subset, -s {any}`: Subset of column(s) to use to maintain rows (lazy df)
+ -  `--last, -l`: Keeps last unique value. Default keeps first value (lazy df)
+ -  `--maintain-order, -k`: Keep the same order as the original DataFrame (lazy df)
 
 
 ## Input/output types:

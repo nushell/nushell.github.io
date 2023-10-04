@@ -16,17 +16,20 @@ usage: |
 
 ## Signature
 
-```> join (right-table) (left-on) (right-on) --inner --left --right --outer```
+```> join {flags} (right-table) (left-on) (right-on)```
+
+## Flags
+
+ -  `--inner, -i`: Inner join (default)
+ -  `--left, -l`: Left-outer join
+ -  `--right, -r`: Right-outer join
+ -  `--outer, -o`: Outer join
 
 ## Parameters
 
  -  `right-table`: The right table in the join
  -  `left-on`: Name of column in input (left) table to join on
  -  `right-on`: Name of column in right table to join on. Defaults to same column as left table.
- -  `--inner` `(-i)`: Inner join (default)
- -  `--left` `(-l)`: Left-outer join
- -  `--right` `(-r)`: Right-outer join
- -  `--outer` `(-o)`: Outer join
 
 
 ## Input/output types:
