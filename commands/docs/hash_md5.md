@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> hash md5 ...rest --binary```
+```> hash md5 {flags} ...rest```
+
+## Flags
+
+ -  `--binary, -b`: Output binary instead of hexadecimal representation
 
 ## Parameters
 
  -  `...rest`: optionally md5 hash data by cell path
- -  `--binary` `(-b)`: Output binary instead of hexadecimal representation
 
 
 ## Input/output types:

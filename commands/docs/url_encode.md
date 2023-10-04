@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> url encode ...rest --all```
+```> url encode {flags} ...rest```
+
+## Flags
+
+ -  `--all, -a`: encode all non-alphanumeric chars including `/`, `.`, `:`
 
 ## Parameters
 
  -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
- -  `--all` `(-a)`: encode all non-alphanumeric chars including `/`, `.`, `:`
 
 
 ## Input/output types:

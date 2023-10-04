@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> metadata (expression)```
+```> metadata {flags} (expression)```
 
 ## Parameters
 

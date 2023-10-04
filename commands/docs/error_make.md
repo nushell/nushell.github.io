@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> error make (error_struct) --unspanned```
+```> error make {flags} (error_struct)```
+
+## Flags
+
+ -  `--unspanned, -u`: remove the origin label from the error
 
 ## Parameters
 
  -  `error_struct`: the error to create
- -  `--unspanned` `(-u)`: remove the origin label from the error
 
 
 ## Input/output types:

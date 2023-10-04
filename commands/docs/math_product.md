@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math product ```
+```> math product {flags} ```
 
 
 ## Input/output types:

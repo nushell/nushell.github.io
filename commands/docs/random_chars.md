@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> random chars --length```
+```> random chars {flags} ```
 
-## Parameters
+## Flags
 
- -  `--length {int}`: Number of chars
+ -  `--length, -l {int}`: Number of chars
 
 
 ## Input/output types:

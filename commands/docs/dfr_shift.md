@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr shift (period) --fill```
+```> dfr shift {flags} (period)```
+
+## Flags
+
+ -  `--fill, -f {any}`: Expression used to fill the null values (lazy df)
 
 ## Parameters
 
  -  `period`: shift period
- -  `--fill {any}`: Expression used to fill the null values (lazy df)
 
 
 ## Input/output types:

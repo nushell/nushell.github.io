@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> split words --min-word-length --grapheme-clusters --utf-8-bytes```
+```> split words {flags} ```
 
-## Parameters
+## Flags
 
- -  `--min-word-length {int}`: The minimum word length
- -  `--grapheme-clusters` `(-g)`: measure word length in grapheme clusters (requires -l)
- -  `--utf-8-bytes` `(-b)`: measure word length in UTF-8 bytes (default; requires -l; non-ASCII chars are length 2+)
+ -  `--min-word-length, -l {int}`: The minimum word length
+ -  `--grapheme-clusters, -g`: measure word length in grapheme clusters (requires -l)
+ -  `--utf-8-bytes, -b`: measure word length in UTF-8 bytes (default; requires -l; non-ASCII chars are length 2+)
 
 
 ## Input/output types:

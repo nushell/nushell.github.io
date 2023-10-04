@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> to xml --pretty```
+```> to xml {flags} ```
 
-## Parameters
+## Flags
 
- -  `--pretty {int}`: Formats the XML text with the provided indentation setting
+ -  `--pretty, -p {int}`: Formats the XML text with the provided indentation setting
 
 
 ## Input/output types:

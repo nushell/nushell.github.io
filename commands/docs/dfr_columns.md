@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr columns ```
+```> dfr columns {flags} ```
 
 
 ## Input/output types:

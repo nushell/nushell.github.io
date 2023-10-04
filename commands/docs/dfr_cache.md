@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr cache ```
+```> dfr cache {flags} ```
 
 
 ## Input/output types:

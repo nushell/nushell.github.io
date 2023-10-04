@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr sum ```
+```> dfr sum {flags} ```
 
 
 ## Input/output types:

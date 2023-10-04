@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> bits not --signed --number-bytes```
+```> bits not {flags} ```
 
-## Parameters
+## Flags
 
- -  `--signed` `(-s)`: always treat input number as a signed number
- -  `--number-bytes {string}`: the size of unsigned number in bytes, it can be 1, 2, 4, 8, auto
+ -  `--signed, -s`: always treat input number as a signed number
+ -  `--number-bytes, -n {string}`: the size of unsigned number in bytes, it can be 1, 2, 4, 8, auto
 
 
 ## Input/output types:

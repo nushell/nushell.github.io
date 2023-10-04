@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> random dice --dice --sides```
+```> random dice {flags} ```
 
-## Parameters
+## Flags
 
- -  `--dice {int}`: The amount of dice being rolled
- -  `--sides {int}`: The amount of sides a die has
+ -  `--dice, -d {int}`: The amount of dice being rolled
+ -  `--sides, -s {int}`: The amount of sides a die has
 
 
 ## Input/output types:

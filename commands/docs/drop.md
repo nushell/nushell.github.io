@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> drop (rows)```
+```> drop {flags} (rows)```
 
 ## Parameters
 

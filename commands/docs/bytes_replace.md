@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> bytes replace (find) (replace) ...rest --all```
+```> bytes replace {flags} (find) (replace) ...rest```
+
+## Flags
+
+ -  `--all, -a`: replace all occurrences of find binary
 
 ## Parameters
 
  -  `find`: the pattern to find
  -  `replace`: the replacement pattern
  -  `...rest`: for a data structure input, replace bytes in data at the given cell paths
- -  `--all` `(-a)`: replace all occurrences of find binary
 
 
 ## Input/output types:

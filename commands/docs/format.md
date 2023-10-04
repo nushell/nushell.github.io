@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> format (pattern)```
+```> format {flags} (pattern)```
 
 ## Parameters
 

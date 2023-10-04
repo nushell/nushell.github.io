@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> is-empty ...rest```
+```> is-empty {flags} ...rest```
 
 ## Parameters
 

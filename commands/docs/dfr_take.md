@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr take (indices)```
+```> dfr take {flags} (indices)```
 
 ## Parameters
 

@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> to nuon --raw --indent --tabs```
+```> to nuon {flags} ```
 
-## Parameters
+## Flags
 
- -  `--raw` `(-r)`: remove all of the whitespace (default behaviour and overwrites -i and -t)
- -  `--indent {number}`: specify indentation width
- -  `--tabs {number}`: specify indentation tab quantity
+ -  `--raw, -r`: remove all of the whitespace (default behaviour and overwrites -i and -t)
+ -  `--indent, -i {number}`: specify indentation width
+ -  `--tabs, -t {number}`: specify indentation tab quantity
 
 
 ## Input/output types:

@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> str starts-with (string) ...rest --ignore-case```
+```> str starts-with {flags} (string) ...rest```
+
+## Flags
+
+ -  `--ignore-case, -i`: search is case insensitive
 
 ## Parameters
 
  -  `string`: the string to match
  -  `...rest`: For a data structure input, check strings at the given cell paths, and replace with result
- -  `--ignore-case` `(-i)`: search is case insensitive
 
 
 ## Input/output types:

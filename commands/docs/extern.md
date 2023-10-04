@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> extern (def_name) (params)```
+```> extern {flags} (def_name) (params)```
 
 ## Parameters
 

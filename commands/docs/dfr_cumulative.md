@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr cumulative (type) --reverse```
+```> dfr cumulative {flags} (type)```
+
+## Flags
+
+ -  `--reverse, -r`: Reverse cumulative calculation
 
 ## Parameters
 
  -  `type`: rolling operation
- -  `--reverse` `(-r)`: Reverse cumulative calculation
 
 
 ## Input/output types:

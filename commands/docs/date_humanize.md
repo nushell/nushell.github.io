@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> date humanize ```
+```> date humanize {flags} ```
 
 
 ## Input/output types:

@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> roll down --by```
+```> roll down {flags} ```
 
-## Parameters
+## Flags
 
- -  `--by {int}`: Number of rows to roll
+ -  `--by, -b {int}`: Number of rows to roll
 
 
 ## Input/output types:

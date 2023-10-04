@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr otherwise (otherwise expression)```
+```> dfr otherwise {flags} (otherwise expression)```
 
 ## Parameters
 

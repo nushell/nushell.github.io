@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> into string ...rest --decimals```
+```> into string {flags} ...rest```
+
+## Flags
+
+ -  `--decimals, -d {int}`: decimal digits to which to round
 
 ## Parameters
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
- -  `--decimals {int}`: decimal digits to which to round
 
 
 ## Input/output types:

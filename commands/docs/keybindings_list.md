@@ -16,15 +16,15 @@ usage: |
 
 ## Signature
 
-```> keybindings list --modifiers --keycodes --modes --events --edits```
+```> keybindings list {flags} ```
 
-## Parameters
+## Flags
 
- -  `--modifiers` `(-m)`: list of modifiers
- -  `--keycodes` `(-k)`: list of keycodes
- -  `--modes` `(-o)`: list of edit modes
- -  `--events` `(-e)`: list of reedline event
- -  `--edits` `(-d)`: list of edit commands
+ -  `--modifiers, -m`: list of modifiers
+ -  `--keycodes, -k`: list of keycodes
+ -  `--modes, -o`: list of edit modes
+ -  `--events, -e`: list of reedline event
+ -  `--edits, -d`: list of edit commands
 
 
 ## Input/output types:

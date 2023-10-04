@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> append (row)```
+```> append {flags} (row)```
 
 ## Parameters
 

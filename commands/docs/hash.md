@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> hash ```
+```> hash {flags} ```
 
 
 ## Input/output types:

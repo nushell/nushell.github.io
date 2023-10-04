@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> ansi strip ...rest```
+```> ansi strip {flags} ...rest```
 
 ## Parameters
 

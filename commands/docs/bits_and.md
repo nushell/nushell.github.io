@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> bits and (target)```
+```> bits and {flags} (target)```
 
 ## Parameters
 

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> encode hex ...rest```
+```> encode hex {flags} ...rest```
 
 ## Parameters
 

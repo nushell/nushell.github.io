@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> merge (value)```
+```> merge {flags} (value)```
 
 ## Parameters
 

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> fmt ```
+```> fmt {flags} ```
 
 
 ## Input/output types:

@@ -16,21 +16,24 @@ usage: |
 
 ## Signature
 
-```> http post (URL) (data) --user --password --content-type --max-time --headers --raw --insecure --full --allow-errors```
+```> http post {flags} (URL) (data)```
+
+## Flags
+
+ -  `--user, -u {any}`: the username when authenticating
+ -  `--password, -p {any}`: the password when authenticating
+ -  `--content-type, -t {any}`: the MIME type of content to post
+ -  `--max-time, -m {int}`: timeout period in seconds
+ -  `--headers, -H {any}`: custom headers you want to add
+ -  `--raw, -r`: return values as a string instead of a table
+ -  `--insecure, -k`: allow insecure server connections when using SSL
+ -  `--full, -f`: returns the full response instead of only the body
+ -  `--allow-errors, -e`: do not fail if the server returns an error code
 
 ## Parameters
 
  -  `URL`: the URL to post to
  -  `data`: the contents of the post body
- -  `--user {any}`: the username when authenticating
- -  `--password {any}`: the password when authenticating
- -  `--content-type {any}`: the MIME type of content to post
- -  `--max-time {int}`: timeout period in seconds
- -  `--headers {any}`: custom headers you want to add
- -  `--raw` `(-r)`: return values as a string instead of a table
- -  `--insecure` `(-k)`: allow insecure server connections when using SSL
- -  `--full` `(-f)`: returns the full response instead of only the body
- -  `--allow-errors` `(-e)`: do not fail if the server returns an error code
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr strftime (fmt)```
+```> dfr strftime {flags} (fmt)```
 
 ## Parameters
 

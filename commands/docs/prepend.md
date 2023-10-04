@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> prepend (row)```
+```> prepend {flags} (row)```
 
 ## Parameters
 

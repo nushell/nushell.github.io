@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> each while (closure)```
+```> each while {flags} (closure)```
 
 ## Parameters
 

@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> profile (closure) --source --values --max-depth```
+```> profile {flags} (closure)```
+
+## Flags
+
+ -  `--source, -`: Collect source code in the report
+ -  `--values, -`: Collect values in the report
+ -  `--max-depth, -d {int}`: How many levels of blocks to step into (default: 1)
 
 ## Parameters
 
  -  `closure`: the closure to run
- -  `--source` `(-)`: Collect source code in the report
- -  `--values` `(-)`: Collect values in the report
- -  `--max-depth {int}`: How many levels of blocks to step into (default: 1)
 
 
 ## Input/output types:

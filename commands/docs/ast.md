@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> ast (pipeline) --json --minify```
+```> ast {flags} (pipeline)```
+
+## Flags
+
+ -  `--json, -j`: serialize to json
+ -  `--minify, -m`: minify the nuon or json output
 
 ## Parameters
 
  -  `pipeline`: the pipeline to print the ast for
- -  `--json` `(-j)`: serialize to json
- -  `--minify` `(-m)`: minify the nuon or json output
 
 
 ## Input/output types:

@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> to md --pretty --per-element```
+```> to md {flags} ```
 
-## Parameters
+## Flags
 
- -  `--pretty` `(-p)`: Formats the Markdown table to vertically align items
- -  `--per-element` `(-e)`: treat each row as markdown syntax element
+ -  `--pretty, -p`: Formats the Markdown table to vertically align items
+ -  `--per-element, -e`: treat each row as markdown syntax element
 
 
 ## Input/output types:

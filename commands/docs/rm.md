@@ -16,19 +16,22 @@ usage: |
 
 ## Signature
 
-```> rm (filename) ...rest --trash --permanent --recursive --force --verbose --interactive --interactive-once```
+```> rm {flags} (filename) ...rest```
+
+## Flags
+
+ -  `--trash, -t`: move to the platform's trash instead of permanently deleting. not used on android and ios
+ -  `--permanent, -p`: delete permanently, ignoring the 'always_trash' config option. always enabled on android and ios
+ -  `--recursive, -r`: delete subdirectories recursively
+ -  `--force, -f`: suppress error when no file
+ -  `--verbose, -v`: print names of deleted files
+ -  `--interactive, -i`: ask user to confirm action
+ -  `--interactive-once, -I`: ask user to confirm action only once
 
 ## Parameters
 
  -  `filename`: the path of the file you want to remove
  -  `...rest`: additional file path(s) to remove
- -  `--trash` `(-t)`: move to the platform's trash instead of permanently deleting. not used on android and ios
- -  `--permanent` `(-p)`: delete permanently, ignoring the 'always_trash' config option. always enabled on android and ios
- -  `--recursive` `(-r)`: delete subdirectories recursively
- -  `--force` `(-f)`: suppress error when no file
- -  `--verbose` `(-v)`: print names of deleted files
- -  `--interactive` `(-i)`: ask user to confirm action
- -  `--interactive-once` `(-I)`: ask user to confirm action only once
 
 
 ## Input/output types:

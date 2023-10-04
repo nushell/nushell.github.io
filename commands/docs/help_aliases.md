@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> help aliases ...rest --find```
+```> help aliases {flags} ...rest```
+
+## Flags
+
+ -  `--find, -f {string}`: string to find in alias names and usage
 
 ## Parameters
 
  -  `...rest`: the name of alias to get help on
- -  `--find {string}`: string to find in alias names and usage
 
 
 ## Input/output types:

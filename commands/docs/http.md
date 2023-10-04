@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> http ```
+```> http {flags} ```
 
 
 ## Input/output types:

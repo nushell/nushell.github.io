@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> path relative-to (path)```
+```> path relative-to {flags} (path)```
 
 ## Parameters
 

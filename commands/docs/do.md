@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> do (closure) ...rest --ignore-errors --ignore-shell-errors --ignore-program-errors --capture-errors```
+```> do {flags} (closure) ...rest```
+
+## Flags
+
+ -  `--ignore-errors, -i`: ignore errors as the closure runs
+ -  `--ignore-shell-errors, -s`: ignore shell errors as the closure runs
+ -  `--ignore-program-errors, -p`: ignore external program errors as the closure runs
+ -  `--capture-errors, -c`: catch errors as the closure runs, and return them
 
 ## Parameters
 
  -  `closure`: the closure to run
  -  `...rest`: the parameter(s) for the closure
- -  `--ignore-errors` `(-i)`: ignore errors as the closure runs
- -  `--ignore-shell-errors` `(-s)`: ignore shell errors as the closure runs
- -  `--ignore-program-errors` `(-p)`: ignore external program errors as the closure runs
- -  `--capture-errors` `(-c)`: catch errors as the closure runs, and return them
 
 
 ## Input/output types:

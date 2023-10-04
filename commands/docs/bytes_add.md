@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> bytes add (data) ...rest --index --end```
+```> bytes add {flags} (data) ...rest```
+
+## Flags
+
+ -  `--index, -i {int}`: index to insert binary data
+ -  `--end, -e`: add to the end of binary
 
 ## Parameters
 
  -  `data`: the binary to add
  -  `...rest`: for a data structure input, add bytes to the data at the given cell paths
- -  `--index {int}`: index to insert binary data
- -  `--end` `(-e)`: add to the end of binary
 
 
 ## Input/output types:

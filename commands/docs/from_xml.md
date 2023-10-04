@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> from xml --keep-comments --keep-pi```
+```> from xml {flags} ```
 
-## Parameters
+## Flags
 
- -  `--keep-comments` `(-)`: add comment nodes to result
- -  `--keep-pi` `(-)`: add processing instruction nodes to result
+ -  `--keep-comments, -`: add comment nodes to result
+ -  `--keep-pi, -`: add processing instruction nodes to result
 
 
 ## Input/output types:

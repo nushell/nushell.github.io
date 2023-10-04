@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-month ```
+```> dfr get-month {flags} ```
 
 
 ## Input/output types:

@@ -16,16 +16,16 @@ usage: |
 
 ## Signature
 
-```> cal --year --quarter --month --full-year --week-start --month-names```
+```> cal {flags} ```
 
-## Parameters
+## Flags
 
- -  `--year` `(-y)`: Display the year column
- -  `--quarter` `(-q)`: Display the quarter column
- -  `--month` `(-m)`: Display the month column
- -  `--full-year {int}`: Display a year-long calendar for the specified year
- -  `--week-start {string}`: Display the calendar with the specified day as the first day of the week
- -  `--month-names` `(-)`: Display the month names instead of integers
+ -  `--year, -y`: Display the year column
+ -  `--quarter, -q`: Display the quarter column
+ -  `--month, -m`: Display the month column
+ -  `--full-year, - {int}`: Display a year-long calendar for the specified year
+ -  `--week-start, - {string}`: Display the calendar with the specified day as the first day of the week
+ -  `--month-names, -`: Display the month names instead of integers
 
 
 ## Input/output types:

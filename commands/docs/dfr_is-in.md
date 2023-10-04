@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr is-in (list)```
+```> dfr is-in {flags} (list)```
 
 ## Parameters
 

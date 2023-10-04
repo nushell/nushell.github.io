@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> decode (encoding)```
+```> decode {flags} (encoding)```
 
 ## Parameters
 

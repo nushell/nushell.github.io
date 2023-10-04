@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr collect ```
+```> dfr collect {flags} ```
 
 
 ## Input/output types:

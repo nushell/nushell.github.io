@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> lazy make --columns --get-value```
+```> lazy make {flags} ```
 
-## Parameters
+## Flags
 
- -  `--columns {list<string>}`: Closure that gets called when the LazyRecord needs to list the available column names
- -  `--get-value {closure(string)}`: Closure to call when a value needs to be produced on demand
+ -  `--columns, -c {list<string>}`: Closure that gets called when the LazyRecord needs to list the available column names
+ -  `--get-value, -g {closure(string)}`: Closure to call when a value needs to be produced on demand
 
 
 ## Input/output types:

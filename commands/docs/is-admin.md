@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> is-admin ```
+```> is-admin {flags} ```
 
 
 ## Input/output types:

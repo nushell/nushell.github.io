@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> http head (URL) --user --password --max-time --headers --insecure```
+```> http head {flags} (URL)```
+
+## Flags
+
+ -  `--user, -u {any}`: the username when authenticating
+ -  `--password, -p {any}`: the password when authenticating
+ -  `--max-time, -m {int}`: timeout period in seconds
+ -  `--headers, -H {any}`: custom headers you want to add
+ -  `--insecure, -k`: allow insecure server connections when using SSL
 
 ## Parameters
 
  -  `URL`: the URL to fetch the contents from
- -  `--user {any}`: the username when authenticating
- -  `--password {any}`: the password when authenticating
- -  `--max-time {int}`: timeout period in seconds
- -  `--headers {any}`: custom headers you want to add
- -  `--insecure` `(-k)`: allow insecure server connections when using SSL
 
 
 ## Input/output types:

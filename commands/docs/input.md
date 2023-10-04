@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> input (prompt) --bytes-until-any --numchar --suppress-output```
+```> input {flags} (prompt)```
+
+## Flags
+
+ -  `--bytes-until-any, -u {string}`: read bytes (not text) until any of the given stop bytes is seen
+ -  `--numchar, -n {int}`: number of characters to read; suppresses output
+ -  `--suppress-output, -s`: don't print keystroke values
 
 ## Parameters
 
  -  `prompt`: prompt to show the user
- -  `--bytes-until-any {string}`: read bytes (not text) until any of the given stop bytes is seen
- -  `--numchar {int}`: number of characters to read; suppresses output
- -  `--suppress-output` `(-s)`: don't print keystroke values
 
 
 ## Input/output types:

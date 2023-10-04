@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> dfr drop-duplicates (subset) --maintain --last```
+```> dfr drop-duplicates {flags} (subset)```
+
+## Flags
+
+ -  `--maintain, -m`: maintain order
+ -  `--last, -l`: keeps last duplicate value (by default keeps first)
 
 ## Parameters
 
  -  `subset`: subset of columns to drop duplicates
- -  `--maintain` `(-m)`: maintain order
- -  `--last` `(-l)`: keeps last duplicate value (by default keeps first)
 
 
 ## Input/output types:

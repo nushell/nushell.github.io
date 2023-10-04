@@ -16,14 +16,14 @@ usage: |
 
 ## Signature
 
-```> dfr melt --columns --values --variable-name --value-name```
+```> dfr melt {flags} ```
 
-## Parameters
+## Flags
 
- -  `--columns {table}`: column names for melting
- -  `--values {table}`: column names used as value columns
- -  `--variable-name {string}`: optional name for variable column
- -  `--value-name {string}`: optional name for value column
+ -  `--columns, -c {table}`: column names for melting
+ -  `--values, -v {table}`: column names used as value columns
+ -  `--variable-name, -r {string}`: optional name for variable column
+ -  `--value-name, -l {string}`: optional name for value column
 
 
 ## Input/output types:

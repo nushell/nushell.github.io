@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> each (closure) --keep-empty```
+```> each {flags} (closure)```
+
+## Flags
+
+ -  `--keep-empty, -k`: keep empty result cells
 
 ## Parameters
 
  -  `closure`: the closure to run
- -  `--keep-empty` `(-k)`: keep empty result cells
 
 
 ## Input/output types:

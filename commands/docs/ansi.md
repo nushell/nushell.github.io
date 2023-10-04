@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> ansi (code) --escape --osc --list```
+```> ansi {flags} (code)```
+
+## Flags
+
+ -  `--escape, -e`: escape sequence without the escape character(s) ('\x1b[' is not required)
+ -  `--osc, -o`: operating system command (osc) escape sequence without the escape character(s) ('\x1b]' is not required)
+ -  `--list, -l`: list available ansi code names
 
 ## Parameters
 
  -  `code`: the name of the code to use like 'green' or 'reset' to reset the color
- -  `--escape` `(-e)`: escape sequence without the escape character(s) ('\x1b[' is not required)
- -  `--osc` `(-o)`: operating system command (osc) escape sequence without the escape character(s) ('\x1b]' is not required)
- -  `--list` `(-l)`: list available ansi code names
 
 
 ## Input/output types:

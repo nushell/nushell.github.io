@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> take while (predicate)```
+```> take while {flags} (predicate)```
 
 ## Parameters
 

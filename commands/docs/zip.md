@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> zip (other)```
+```> zip {flags} (other)```
 
 ## Parameters
 

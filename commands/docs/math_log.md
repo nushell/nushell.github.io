@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math log (base)```
+```> math log {flags} (base)```
 
 ## Parameters
 

@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> from ods --sheets```
+```> from ods {flags} ```
 
-## Parameters
+## Flags
 
- -  `--sheets {list<string>}`: Only convert specified sheets
+ -  `--sheets, -s {list<string>}`: Only convert specified sheets
 
 
 ## Input/output types:

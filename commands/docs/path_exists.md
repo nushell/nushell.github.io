@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> path exists ```
+```> path exists {flags} ```
 
 
 ## Input/output types:

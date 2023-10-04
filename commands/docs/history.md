@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> history --clear --long```
+```> history {flags} ```
 
-## Parameters
+## Flags
 
- -  `--clear` `(-c)`: Clears out the history entries
- -  `--long` `(-l)`: Show long listing of entries for sqlite history
+ -  `--clear, -c`: Clears out the history entries
+ -  `--long, -l`: Show long listing of entries for sqlite history
 
 
 ## Input/output types:

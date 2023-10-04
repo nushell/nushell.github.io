@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> bytes index-of (pattern) ...rest --all --end```
+```> bytes index-of {flags} (pattern) ...rest```
+
+## Flags
+
+ -  `--all, -a`: returns all matched index
+ -  `--end, -e`: search from the end of the binary
 
 ## Parameters
 
  -  `pattern`: the pattern to find index of
  -  `...rest`: for a data structure input, find the indexes at the given cell paths
- -  `--all` `(-a)`: returns all matched index
- -  `--end` `(-e)`: search from the end of the binary
 
 
 ## Input/output types:

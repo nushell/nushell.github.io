@@ -16,20 +16,23 @@ usage: |
 
 ## Signature
 
-```> ucp ...rest --recursive --verbose --force --interactive --progress --no-clobber --debug```
+```> ucp {flags} ...rest```
+
+## Flags
+
+ -  `--recursive, -r`: copy directories recursively
+ -  `--verbose, -v`: explicitly state what is being done
+ -  `--force, -f`: if an existing destination file cannot be opened, remove it and try
+                    again (this option is ignored when the -n option is also used).
+                    currently not implemented for windows
+ -  `--interactive, -i`: ask before overwriting files
+ -  `--progress, -p`: display a progress bar
+ -  `--no-clobber, -n`: do not overwrite an existing file
+ -  `--debug, -`: explain how a file is copied. Implies -v
 
 ## Parameters
 
  -  `...rest`: Copy SRC file/s to DEST
- -  `--recursive` `(-r)`: copy directories recursively
- -  `--verbose` `(-v)`: explicitly state what is being done
- -  `--force` `(-f)`: if an existing destination file cannot be opened, remove it and try
-                    again (this option is ignored when the -n option is also used).
-                    currently not implemented for windows
- -  `--interactive` `(-i)`: ask before overwriting files
- -  `--progress` `(-p)`: display a progress bar
- -  `--no-clobber` `(-n)`: do not overwrite an existing file
- -  `--debug` `(-)`: explain how a file is copied. Implies -v
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr contains (pattern)```
+```> dfr contains {flags} (pattern)```
 
 ## Parameters
 

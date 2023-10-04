@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-nanosecond ```
+```> dfr get-nanosecond {flags} ```
 
 
 ## Input/output types:

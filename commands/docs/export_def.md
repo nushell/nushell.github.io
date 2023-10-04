@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> export def (name) (params) (block)```
+```> export def {flags} (name) (params) (block)```
 
 ## Parameters
 

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> group (group_size)```
+```> group {flags} (group_size)```
 
 ## Parameters
 

@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> to json --raw --indent --tabs```
+```> to json {flags} ```
 
-## Parameters
+## Flags
 
- -  `--raw` `(-r)`: remove all of the whitespace
- -  `--indent {number}`: specify indentation width
- -  `--tabs {number}`: specify indentation tab quantity
+ -  `--raw, -r`: remove all of the whitespace
+ -  `--indent, -i {number}`: specify indentation width
+ -  `--tabs, -t {number}`: specify indentation tab quantity
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> start (path)```
+```> start {flags} (path)```
 
 ## Parameters
 

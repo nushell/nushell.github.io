@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> into float ...rest```
+```> into float {flags} ...rest```
 
 ## Parameters
 

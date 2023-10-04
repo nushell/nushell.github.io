@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str pascal-case ...rest```
+```> str pascal-case {flags} ...rest```
 
 ## Parameters
 

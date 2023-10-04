@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr when (when expression) (then expression)```
+```> dfr when {flags} (when expression) (then expression)```
 
 ## Parameters
 

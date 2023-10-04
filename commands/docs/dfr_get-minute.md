@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-minute ```
+```> dfr get-minute {flags} ```
 
 
 ## Input/output types:

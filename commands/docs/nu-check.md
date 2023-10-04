@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> nu-check (path) --as-module --debug --all```
+```> nu-check {flags} (path)```
+
+## Flags
+
+ -  `--as-module, -m`: Parse content as module
+ -  `--debug, -d`: Show error messages
+ -  `--all, -a`: Parse content as script first, returns result if success, otherwise, try with module
 
 ## Parameters
 
  -  `path`: File path to parse
- -  `--as-module` `(-m)`: Parse content as module
- -  `--debug` `(-d)`: Show error messages
- -  `--all` `(-a)`: Parse content as script first, returns result if success, otherwise, try with module
 
 
 ## Input/output types:

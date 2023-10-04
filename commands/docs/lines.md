@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> lines --skip-empty```
+```> lines {flags} ```
 
-## Parameters
+## Flags
 
- -  `--skip-empty` `(-s)`: skip empty lines
+ -  `--skip-empty, -s`: skip empty lines
 
 
 ## Input/output types:

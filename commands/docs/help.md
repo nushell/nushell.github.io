@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> help ...rest --find```
+```> help {flags} ...rest```
+
+## Flags
+
+ -  `--find, -f {string}`: string to find in command names, usage, and search terms
 
 ## Parameters
 
  -  `...rest`: the name of command, alias or module to get help on
- -  `--find {string}`: string to find in command names, usage, and search terms
 
 
 ## Input/output types:

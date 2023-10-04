@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> from json --objects```
+```> from json {flags} ```
 
-## Parameters
+## Flags
 
- -  `--objects` `(-o)`: treat each line as a separate value
+ -  `--objects, -o`: treat each line as a separate value
 
 
 ## Input/output types:

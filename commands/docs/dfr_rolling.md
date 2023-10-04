@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr rolling (type) (window)```
+```> dfr rolling {flags} (type) (window)```
 
 ## Parameters
 

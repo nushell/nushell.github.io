@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> path expand --strict --no-symlink```
+```> path expand {flags} ```
 
-## Parameters
+## Flags
 
- -  `--strict` `(-s)`: Throw an error if the path could not be expanded
- -  `--no-symlink` `(-n)`: Do not resolve symbolic links
+ -  `--strict, -s`: Throw an error if the path could not be expanded
+ -  `--no-symlink, -n`: Do not resolve symbolic links
 
 
 ## Input/output types:

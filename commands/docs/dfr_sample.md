@@ -16,15 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr sample --n-rows --fraction --seed --replace --shuffle```
+```> dfr sample {flags} ```
 
-## Parameters
+## Flags
 
- -  `--n-rows {int}`: number of rows to be taken from dataframe
- -  `--fraction {number}`: fraction of dataframe to be taken
- -  `--seed {number}`: seed for the selection
- -  `--replace` `(-e)`: sample with replace
- -  `--shuffle` `(-u)`: shuffle sample
+ -  `--n-rows, -n {int}`: number of rows to be taken from dataframe
+ -  `--fraction, -f {number}`: fraction of dataframe to be taken
+ -  `--seed, -s {number}`: seed for the selection
+ -  `--replace, -e`: sample with replace
+ -  `--shuffle, -u`: shuffle sample
 
 
 ## Input/output types:

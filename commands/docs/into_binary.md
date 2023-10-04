@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> into binary ...rest --compact```
+```> into binary {flags} ...rest```
+
+## Flags
+
+ -  `--compact, -c`: output without padding zeros
 
 ## Parameters
 
  -  `...rest`: for a data structure input, convert data at the given cell paths
- -  `--compact` `(-c)`: output without padding zeros
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr explode ...rest```
+```> dfr explode {flags} ...rest```
 
 ## Parameters
 

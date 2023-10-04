@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr as-date (format) --not-exact```
+```> dfr as-date {flags} (format)```
+
+## Flags
+
+ -  `--not-exact, -n`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
 
 ## Parameters
 
  -  `format`: formatting date string
- -  `--not-exact` `(-n)`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
 
 
 ## Input/output types:

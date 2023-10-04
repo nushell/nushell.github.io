@@ -16,15 +16,18 @@ usage: |
 
 ## Signature
 
-```> char (character) ...rest --list --unicode --integer```
+```> char {flags} (character) ...rest```
+
+## Flags
+
+ -  `--list, -l`: List all supported character names
+ -  `--unicode, -u`: Unicode string i.e. 1f378
+ -  `--integer, -i`: Create a codepoint from an integer
 
 ## Parameters
 
  -  `character`: the name of the character to output
  -  `...rest`: multiple Unicode bytes
- -  `--list` `(-l)`: List all supported character names
- -  `--unicode` `(-u)`: Unicode string i.e. 1f378
- -  `--integer` `(-i)`: Create a codepoint from an integer
 
 
 ## Input/output types:

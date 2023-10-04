@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> for (var_name) (range) (block) --numbered```
+```> for {flags} (var_name) (range) (block)```
+
+## Flags
+
+ -  `--numbered, -n`: return a numbered item ($it.index and $it.item)
 
 ## Parameters
 
  -  `var_name`: name of the looping variable
  -  `range`: range of the loop
  -  `block`: the block to run
- -  `--numbered` `(-n)`: return a numbered item ($it.index and $it.item)
 
 
 ## Input/output types:

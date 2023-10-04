@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> date now ```
+```> date now {flags} ```
 
 
 ## Input/output types:

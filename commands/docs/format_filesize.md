@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> format filesize (format value) ...rest```
+```> format filesize {flags} (format value) ...rest```
 
 ## Parameters
 

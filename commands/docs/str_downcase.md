@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str downcase ...rest```
+```> str downcase {flags} ...rest```
 
 ## Parameters
 

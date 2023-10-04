@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> group-by (grouper)```
+```> group-by {flags} (grouper)```
 
 ## Parameters
 

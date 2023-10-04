@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr get-second ```
+```> dfr get-second {flags} ```
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math sum ```
+```> math sum {flags} ```
 
 
 ## Input/output types:

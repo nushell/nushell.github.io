@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr fill-nan (fill)```
+```> dfr fill-nan {flags} (fill)```
 
 ## Parameters
 

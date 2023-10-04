@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr arg-max ```
+```> dfr arg-max {flags} ```
 
 
 ## Input/output types:

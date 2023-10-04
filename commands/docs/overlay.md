@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> overlay ```
+```> overlay {flags} ```
 
 
 ## Input/output types:

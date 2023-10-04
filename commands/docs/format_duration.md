@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> format duration (format value) ...rest```
+```> format duration {flags} (format value) ...rest```
 
 ## Parameters
 

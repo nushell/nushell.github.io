@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> dfr arg-sort --reverse --nulls-last --maintain-order```
+```> dfr arg-sort {flags} ```
 
-## Parameters
+## Flags
 
- -  `--reverse` `(-r)`: reverse order
- -  `--nulls-last` `(-n)`: nulls ordered last
- -  `--maintain-order` `(-m)`: maintain order on sorted items
+ -  `--reverse, -r`: reverse order
+ -  `--nulls-last, -n`: nulls ordered last
+ -  `--maintain-order, -m`: maintain order on sorted items
 
 
 ## Input/output types:

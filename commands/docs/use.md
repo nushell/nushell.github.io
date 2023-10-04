@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> use (module) ...rest```
+```> use {flags} (module) ...rest```
 
 ## Parameters
 

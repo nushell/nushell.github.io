@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> inspect ```
+```> inspect {flags} ```
 
 
 ## Input/output types:

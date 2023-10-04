@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> dfr sort-by ...rest --reverse --nulls-last --maintain-order```
+```> dfr sort-by {flags} ...rest```
+
+## Flags
+
+ -  `--reverse, -r {list<bool>}`: Reverse sorting. Default is false
+ -  `--nulls-last, -n`: nulls are shown last in the dataframe
+ -  `--maintain-order, -m`: Maintains order during sort
 
 ## Parameters
 
  -  `...rest`: sort expression for the dataframe
- -  `--reverse {list<bool>}`: Reverse sorting. Default is false
- -  `--nulls-last` `(-n)`: nulls are shown last in the dataframe
- -  `--maintain-order` `(-m)`: Maintains order during sort
 
 
 ## Input/output types:

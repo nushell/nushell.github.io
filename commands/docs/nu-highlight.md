@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> nu-highlight ```
+```> nu-highlight {flags} ```
 
 
 ## Input/output types:

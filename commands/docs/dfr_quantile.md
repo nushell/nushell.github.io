@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr quantile (quantile)```
+```> dfr quantile {flags} (quantile)```
 
 ## Parameters
 

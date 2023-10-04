@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> overlay use (name) (as) --prefix --reload```
+```> overlay use {flags} (name) (as)```
+
+## Flags
+
+ -  `--prefix, -p`: Prepend module name to the imported commands and aliases
+ -  `--reload, -r`: If the overlay already exists, reload its definitions and environment.
 
 ## Parameters
 
  -  `name`: Module name to use overlay for
  -  `as`: as keyword followed by a new name
- -  `--prefix` `(-p)`: Prepend module name to the imported commands and aliases
- -  `--reload` `(-r)`: If the overlay already exists, reload its definitions and environment.
 
 
 ## Input/output types:

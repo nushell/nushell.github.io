@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> reverse ```
+```> reverse {flags} ```
 
 
 ## Input/output types:

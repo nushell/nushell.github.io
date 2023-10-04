@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> url parse ...rest```
+```> url parse {flags} ...rest```
 
 ## Parameters
 

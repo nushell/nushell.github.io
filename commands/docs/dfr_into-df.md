@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr into-df ```
+```> dfr into-df {flags} ```
 
 
 ## Input/output types:

@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> split list (separator) --regex```
+```> split list {flags} (separator)```
+
+## Flags
+
+ -  `--regex, -r`: separator is a regular expression, matching values that can be coerced into a string
 
 ## Parameters
 
  -  `separator`: the value that denotes what separates the list
- -  `--regex` `(-r)`: separator is a regular expression, matching values that can be coerced into a string
 
 
 ## Input/output types:

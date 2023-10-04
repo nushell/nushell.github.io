@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math tanh ```
+```> math tanh {flags} ```
 
 
 ## Input/output types:

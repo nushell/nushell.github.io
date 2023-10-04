@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> sort-by ...rest --reverse --ignore-case --natural```
+```> sort-by {flags} ...rest```
+
+## Flags
+
+ -  `--reverse, -r`: Sort in reverse order
+ -  `--ignore-case, -i`: Sort string-based columns case-insensitively
+ -  `--natural, -n`: Sort alphanumeric string-based columns naturally (1, 9, 10, 99, 100, ...)
 
 ## Parameters
 
  -  `...rest`: the column(s) to sort by
- -  `--reverse` `(-r)`: Sort in reverse order
- -  `--ignore-case` `(-i)`: Sort string-based columns case-insensitively
- -  `--natural` `(-n)`: Sort alphanumeric string-based columns naturally (1, 9, 10, 99, 100, ...)
 
 
 ## Input/output types:

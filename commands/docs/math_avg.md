@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math avg ```
+```> math avg {flags} ```
 
 
 ## Input/output types:

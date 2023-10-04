@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> move ...rest --after --before```
+```> move {flags} ...rest```
+
+## Flags
+
+ -  `--after, - {string}`: the column that will precede the columns moved
+ -  `--before, - {string}`: the column that will be the next after the columns moved
 
 ## Parameters
 
  -  `...rest`: the columns to move
- -  `--after {string}`: the column that will precede the columns moved
- -  `--before {string}`: the column that will be the next after the columns moved
 
 
 ## Input/output types:

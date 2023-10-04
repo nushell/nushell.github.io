@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> dfr dummies --drop-first```
+```> dfr dummies {flags} ```
 
-## Parameters
+## Flags
 
- -  `--drop-first` `(-d)`: Drop first row
+ -  `--drop-first, -d`: Drop first row
 
 
 ## Input/output types:

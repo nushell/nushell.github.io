@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr as (Alias name)```
+```> dfr as {flags} (Alias name)```
 
 ## Parameters
 

@@ -16,13 +16,13 @@ usage: |
 
 ## Signature
 
-```> fill --width --alignment --character```
+```> fill {flags} ```
 
-## Parameters
+## Flags
 
- -  `--width {int}`: The width of the output. Defaults to 1
- -  `--alignment {string}`: The alignment of the output. Defaults to Left (Left(l), Right(r), Center(c/m), MiddleRight(cr/mr))
- -  `--character {string}`: The character to fill with. Defaults to ' ' (space)
+ -  `--width, -w {int}`: The width of the output. Defaults to 1
+ -  `--alignment, -a {string}`: The alignment of the output. Defaults to Left (Left(l), Right(r), Center(c/m), MiddleRight(cr/mr))
+ -  `--character, -c {string}`: The character to fill with. Defaults to ' ' (space)
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> source-env (filename)```
+```> source-env {flags} (filename)```
 
 ## Parameters
 

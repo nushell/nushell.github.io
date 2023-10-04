@@ -16,18 +16,18 @@ usage: |
 
 ## Signature
 
-```> from csv --separator --comment --quote --escape --noheaders --flexible --no-infer --trim```
+```> from csv {flags} ```
 
-## Parameters
+## Flags
 
- -  `--separator {string}`: a character to separate columns (either single char or 4 byte unicode sequence), defaults to ','
- -  `--comment {string}`: a comment character to ignore lines starting with it
- -  `--quote {string}`: a quote character to ignore separators in strings, defaults to '"'
- -  `--escape {string}`: an escape character for strings containing the quote character
- -  `--noheaders` `(-n)`: don't treat the first row as column names
- -  `--flexible` `(-)`: allow the number of fields in records to be variable
- -  `--no-infer` `(-)`: no field type inferencing
- -  `--trim {string}`: drop leading and trailing whitespaces around headers names and/or field values
+ -  `--separator, -s {string}`: a character to separate columns (either single char or 4 byte unicode sequence), defaults to ','
+ -  `--comment, -c {string}`: a comment character to ignore lines starting with it
+ -  `--quote, -q {string}`: a quote character to ignore separators in strings, defaults to '"'
+ -  `--escape, -e {string}`: an escape character for strings containing the quote character
+ -  `--noheaders, -n`: don't treat the first row as column names
+ -  `--flexible, -`: allow the number of fields in records to be variable
+ -  `--no-infer, -`: no field type inferencing
+ -  `--trim, -t {string}`: drop leading and trailing whitespaces around headers names and/or field values
 
 
 ## Input/output types:

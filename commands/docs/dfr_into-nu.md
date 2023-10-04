@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> dfr into-nu --rows --tail```
+```> dfr into-nu {flags} ```
 
-## Parameters
+## Flags
 
- -  `--rows {number}`: number of rows to be shown
- -  `--tail` `(-t)`: shows tail rows
+ -  `--rows, -n {number}`: number of rows to be shown
+ -  `--tail, -t`: shows tail rows
 
 
 ## Input/output types:

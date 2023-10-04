@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> scope aliases ```
+```> scope aliases {flags} ```
 
 
 ## Input/output types:

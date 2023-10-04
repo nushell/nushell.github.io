@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr dtypes ```
+```> dfr dtypes {flags} ```
 
 
 ## Input/output types:

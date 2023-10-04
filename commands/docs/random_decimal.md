@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> random decimal (range)```
+```> random decimal {flags} (range)```
 
 ## Parameters
 

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr select ...rest```
+```> dfr select {flags} ...rest```
 
 ## Parameters
 

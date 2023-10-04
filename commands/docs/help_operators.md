@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> help operators ```
+```> help operators {flags} ```
 
 
 ## Input/output types:

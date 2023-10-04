@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr to-arrow (file)```
+```> dfr to-arrow {flags} (file)```
 
 ## Parameters
 

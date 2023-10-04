@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr col (column name)```
+```> dfr col {flags} (column name)```
 
 ## Parameters
 

@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> hash sha256 ...rest --binary```
+```> hash sha256 {flags} ...rest```
+
+## Flags
+
+ -  `--binary, -b`: Output binary instead of hexadecimal representation
 
 ## Parameters
 
  -  `...rest`: optionally sha256 hash data by cell path
- -  `--binary` `(-b)`: Output binary instead of hexadecimal representation
 
 
 ## Input/output types:

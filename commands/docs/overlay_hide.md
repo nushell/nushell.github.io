@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> overlay hide (name) --keep-custom --keep-env```
+```> overlay hide {flags} (name)```
+
+## Flags
+
+ -  `--keep-custom, -k`: Keep all newly added commands and aliases in the next activated overlay
+ -  `--keep-env, -e {list<string>}`: List of environment variables to keep in the next activated overlay
 
 ## Parameters
 
  -  `name`: Overlay to hide
- -  `--keep-custom` `(-k)`: Keep all newly added commands and aliases in the next activated overlay
- -  `--keep-env {list<string>}`: List of environment variables to keep in the next activated overlay
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> where (row_condition)```
+```> where {flags} (row_condition)```
 
 ## Parameters
 

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str capitalize ...rest```
+```> str capitalize {flags} ...rest```
 
 ## Parameters
 

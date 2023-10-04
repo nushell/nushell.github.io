@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> par-each (closure) --threads --keep-order```
+```> par-each {flags} (closure)```
+
+## Flags
+
+ -  `--threads, -t {int}`: the number of threads to use
+ -  `--keep-order, -k`: keep sequence of output same as the order of input
 
 ## Parameters
 
  -  `closure`: the closure to run
- -  `--threads {int}`: the number of threads to use
- -  `--keep-order` `(-k)`: keep sequence of output same as the order of input
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> match (value) (match_block)```
+```> match {flags} (value) (match_block)```
 
 ## Parameters
 

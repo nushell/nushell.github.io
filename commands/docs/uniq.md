@@ -16,14 +16,14 @@ usage: |
 
 ## Signature
 
-```> uniq --count --repeated --ignore-case --unique```
+```> uniq {flags} ```
 
-## Parameters
+## Flags
 
- -  `--count` `(-c)`: Return a table containing the distinct input values together with their counts
- -  `--repeated` `(-d)`: Return the input values that occur more than once
- -  `--ignore-case` `(-i)`: Compare input values case-insensitively
- -  `--unique` `(-u)`: Return the input values that occur once only
+ -  `--count, -c`: Return a table containing the distinct input values together with their counts
+ -  `--repeated, -d`: Return the input values that occur more than once
+ -  `--ignore-case, -i`: Compare input values case-insensitively
+ -  `--unique, -u`: Return the input values that occur once only
 
 
 ## Input/output types:

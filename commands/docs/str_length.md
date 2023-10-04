@@ -16,13 +16,16 @@ usage: |
 
 ## Signature
 
-```> str length ...rest --grapheme-clusters --utf-8-bytes```
+```> str length {flags} ...rest```
+
+## Flags
+
+ -  `--grapheme-clusters, -g`: count length using grapheme clusters (all visible chars have length 1)
+ -  `--utf-8-bytes, -b`: count length using UTF-8 bytes (default; all non-ASCII chars have length 2+)
 
 ## Parameters
 
  -  `...rest`: For a data structure input, replace strings at the given cell paths with their length
- -  `--grapheme-clusters` `(-g)`: count length using grapheme clusters (all visible chars have length 1)
- -  `--utf-8-bytes` `(-b)`: count length using UTF-8 bytes (default; all non-ASCII chars have length 2+)
 
 
 ## Input/output types:

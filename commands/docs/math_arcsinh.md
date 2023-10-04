@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math arcsinh ```
+```> math arcsinh {flags} ```
 
 
 ## Input/output types:

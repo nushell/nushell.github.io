@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> hide-env ...rest --ignore-errors```
+```> hide-env {flags} ...rest```
+
+## Flags
+
+ -  `--ignore-errors, -i`: do not throw an error if an environment variable was not found
 
 ## Parameters
 
  -  `...rest`: environment variable names to hide
- -  `--ignore-errors` `(-i)`: do not throw an error if an environment variable was not found
 
 
 ## Input/output types:

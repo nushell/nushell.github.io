@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> split chars --grapheme-clusters --code-points```
+```> split chars {flags} ```
 
-## Parameters
+## Flags
 
- -  `--grapheme-clusters` `(-g)`: split on grapheme clusters
- -  `--code-points` `(-c)`: split on code points (default; splits combined characters)
+ -  `--grapheme-clusters, -g`: split on grapheme clusters
+ -  `--code-points, -c`: split on code points (default; splits combined characters)
 
 
 ## Input/output types:

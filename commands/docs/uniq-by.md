@@ -16,15 +16,18 @@ usage: |
 
 ## Signature
 
-```> uniq-by ...rest --count --repeated --ignore-case --unique```
+```> uniq-by {flags} ...rest```
+
+## Flags
+
+ -  `--count, -c`: Return a table containing the distinct input values together with their counts
+ -  `--repeated, -d`: Return the input values that occur more than once
+ -  `--ignore-case, -i`: Ignore differences in case when comparing input values
+ -  `--unique, -u`: Return the input values that occur once only
 
 ## Parameters
 
  -  `...rest`: the column(s) to filter by
- -  `--count` `(-c)`: Return a table containing the distinct input values together with their counts
- -  `--repeated` `(-d)`: Return the input values that occur more than once
- -  `--ignore-case` `(-i)`: Ignore differences in case when comparing input values
- -  `--unique` `(-u)`: Return the input values that occur once only
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> export-env (block)```
+```> export-env {flags} (block)```
 
 ## Parameters
 

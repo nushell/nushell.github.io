@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr agg ...rest```
+```> dfr agg {flags} ...rest```
 
 ## Parameters
 

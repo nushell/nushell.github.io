@@ -16,17 +16,20 @@ usage: |
 
 ## Signature
 
-```> str replace (find) (replace) ...rest --all --no-expand --regex --multiline```
+```> str replace {flags} (find) (replace) ...rest```
+
+## Flags
+
+ -  `--all, -a`: replace all occurrences of the pattern
+ -  `--no-expand, -n`: do not expand capture groups (like $name) in the replacement string
+ -  `--regex, -r`: match the pattern as a regular expression in the input, instead of a substring
+ -  `--multiline, -m`: multi-line regex mode (implies --regex): ^ and $ match begin/end of line; equivalent to (?m)
 
 ## Parameters
 
  -  `find`: the pattern to find
  -  `replace`: the replacement string
  -  `...rest`: For a data structure input, operate on strings at the given cell paths
- -  `--all` `(-a)`: replace all occurrences of the pattern
- -  `--no-expand` `(-n)`: do not expand capture groups (like $name) in the replacement string
- -  `--regex` `(-r)`: match the pattern as a regular expression in the input, instead of a substring
- -  `--multiline` `(-m)`: multi-line regex mode (implies --regex): ^ and $ match begin/end of line; equivalent to (?m)
 
 
 ## Input/output types:

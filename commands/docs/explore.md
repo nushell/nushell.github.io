@@ -16,14 +16,14 @@ usage: |
 
 ## Signature
 
-```> explore --head --index --reverse --peek```
+```> explore {flags} ```
 
-## Parameters
+## Flags
 
- -  `--head {bool}`: Show or hide column headers (default true)
- -  `--index` `(-i)`: Show row indexes when viewing a list
- -  `--reverse` `(-r)`: Start with the viewport scrolled to the bottom
- -  `--peek` `(-p)`: When quitting, output the value of the cell the cursor was on
+ -  `--head, - {bool}`: Show or hide column headers (default true)
+ -  `--index, -i`: Show row indexes when viewing a list
+ -  `--reverse, -r`: Start with the viewport scrolled to the bottom
+ -  `--peek, -p`: When quitting, output the value of the cell the cursor was on
 
 
 ## Input/output types:

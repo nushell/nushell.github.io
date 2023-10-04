@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr first (rows)```
+```> dfr first {flags} (rows)```
 
 ## Parameters
 

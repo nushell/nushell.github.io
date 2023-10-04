@@ -16,18 +16,18 @@ usage: |
 
 ## Signature
 
-```> table --start-number --list --width --expand --expand-deep --flatten --flatten-separator --collapse```
+```> table {flags} ```
 
-## Parameters
+## Flags
 
- -  `--start-number {int}`: row number to start viewing from
- -  `--list` `(-l)`: list available table modes/themes
- -  `--width {int}`: number of terminal columns wide (not output columns)
- -  `--expand` `(-e)`: expand the table structure in a light mode
- -  `--expand-deep {int}`: an expand limit of recursion which will take place
- -  `--flatten` `(-)`: Flatten simple arrays
- -  `--flatten-separator {string}`: sets a separator when 'flatten' used
- -  `--collapse` `(-c)`: expand the table structure in collapse mode.
+ -  `--start-number, -n {int}`: row number to start viewing from
+ -  `--list, -l`: list available table modes/themes
+ -  `--width, -w {int}`: number of terminal columns wide (not output columns)
+ -  `--expand, -e`: expand the table structure in a light mode
+ -  `--expand-deep, -d {int}`: an expand limit of recursion which will take place
+ -  `--flatten, -`: Flatten simple arrays
+ -  `--flatten-separator, - {string}`: sets a separator when 'flatten' used
+ -  `--collapse, -c`: expand the table structure in collapse mode.
 Be aware collapse mode currently doesn't support width control
 
 

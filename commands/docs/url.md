@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> url ```
+```> url {flags} ```
 
 
 ## Input/output types:

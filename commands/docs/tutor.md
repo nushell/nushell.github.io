@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> tutor (search) --find```
+```> tutor {flags} (search)```
+
+## Flags
+
+ -  `--find, -f {string}`: Search tutorial for a phrase
 
 ## Parameters
 
  -  `search`: item to search for, or 'list' to list available tutorials
- -  `--find {string}`: Search tutorial for a phrase
 
 
 ## Input/output types:

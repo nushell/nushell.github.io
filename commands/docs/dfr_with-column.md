@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> dfr with-column ...rest --name```
+```> dfr with-column {flags} ...rest```
+
+## Flags
+
+ -  `--name, -n {string}`: new column name
 
 ## Parameters
 
  -  `...rest`: series to be added or expressions used to define the new columns
- -  `--name {string}`: new column name
 
 
 ## Input/output types:

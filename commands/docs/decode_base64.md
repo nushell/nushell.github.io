@@ -16,14 +16,17 @@ usage: |
 
 ## Signature
 
-```> decode base64 ...rest --character-set --binary```
+```> decode base64 {flags} ...rest```
+
+## Flags
+
+ -  `--character-set, -c {string}`: specify the character rules for encoding the input.
+	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt', 'mutf7'
+ -  `--binary, -b`: Output a binary value instead of decoding payload as UTF-8
 
 ## Parameters
 
  -  `...rest`: For a data structure input, decode data at the given cell paths
- -  `--character-set {string}`: specify the character rules for encoding the input.
-	Valid values are 'standard', 'standard-no-padding', 'url-safe', 'url-safe-no-padding','binhex', 'bcrypt', 'crypt', 'mutf7'
- -  `--binary` `(-b)`: Output a binary value instead of decoding payload as UTF-8
 
 
 ## Input/output types:

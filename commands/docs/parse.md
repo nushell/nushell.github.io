@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> parse (pattern) --regex```
+```> parse {flags} (pattern)```
+
+## Flags
+
+ -  `--regex, -r`: use full regex syntax for patterns
 
 ## Parameters
 
  -  `pattern`: the pattern to match. Eg) "{foo}: {bar}"
- -  `--regex` `(-r)`: use full regex syntax for patterns
 
 
 ## Input/output types:

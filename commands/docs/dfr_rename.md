@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr rename (columns) (new names)```
+```> dfr rename {flags} (columns) (new names)```
 
 ## Parameters
 

@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> path parse --extension```
+```> path parse {flags} ```
 
-## Parameters
+## Flags
 
- -  `--extension {string}`: Manually supply the extension (without the dot)
+ -  `--extension, -e {string}`: Manually supply the extension (without the dot)
 
 
 ## Input/output types:

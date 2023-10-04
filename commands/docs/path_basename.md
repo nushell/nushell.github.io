@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> path basename --replace```
+```> path basename {flags} ```
 
-## Parameters
+## Flags
 
- -  `--replace {string}`: Return original path with basename replaced by this string
+ -  `--replace, -r {string}`: Return original path with basename replaced by this string
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> bytes length ...rest```
+```> bytes length {flags} ...rest```
 
 ## Parameters
 

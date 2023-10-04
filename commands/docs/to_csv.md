@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> to csv --separator --noheaders```
+```> to csv {flags} ```
 
-## Parameters
+## Flags
 
- -  `--separator {string}`: a character to separate columns, defaults to ','
- -  `--noheaders` `(-n)`: do not output the columns names as the first row
+ -  `--separator, -s {string}`: a character to separate columns, defaults to ','
+ -  `--noheaders, -n`: do not output the columns names as the first row
 
 
 ## Input/output types:

@@ -16,12 +16,15 @@ usage: |
 
 ## Signature
 
-```> select ...rest --ignore-errors```
+```> select {flags} ...rest```
+
+## Flags
+
+ -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional)
 
 ## Parameters
 
  -  `...rest`: the columns to select from the table
- -  `--ignore-errors` `(-i)`: ignore missing data (make all cell path members optional)
 
 
 ## Input/output types:

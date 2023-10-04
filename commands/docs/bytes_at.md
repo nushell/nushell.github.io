@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> bytes at (range) ...rest```
+```> bytes at {flags} (range) ...rest```
 
 ## Parameters
 

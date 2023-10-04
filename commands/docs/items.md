@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> items (closure)```
+```> items {flags} (closure)```
 
 ## Parameters
 

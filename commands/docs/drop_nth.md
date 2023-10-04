@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> drop nth (row number or row range) ...rest```
+```> drop nth {flags} (row number or row range) ...rest```
 
 ## Parameters
 

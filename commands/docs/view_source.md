@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> view source (item)```
+```> view source {flags} (item)```
 
 ## Parameters
 

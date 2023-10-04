@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> hide (module) (members)```
+```> hide {flags} (module) (members)```
 
 ## Parameters
 

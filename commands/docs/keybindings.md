@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> keybindings ```
+```> keybindings {flags} ```
 
 
 ## Input/output types:

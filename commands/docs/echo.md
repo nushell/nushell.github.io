@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> echo ...rest```
+```> echo {flags} ...rest```
 
 ## Parameters
 

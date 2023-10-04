@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> columns ```
+```> columns {flags} ```
 
 
 ## Input/output types:

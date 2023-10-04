@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> ps --long```
+```> ps {flags} ```
 
-## Parameters
+## Flags
 
- -  `--long` `(-l)`: list all available columns for each entry
+ -  `--long, -l`: list all available columns for each entry
 
 
 ## Input/output types:

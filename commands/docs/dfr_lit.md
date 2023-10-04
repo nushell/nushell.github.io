@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> dfr lit (literal)```
+```> dfr lit {flags} (literal)```
 
 ## Parameters
 

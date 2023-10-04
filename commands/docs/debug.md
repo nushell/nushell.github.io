@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> debug --raw```
+```> debug {flags} ```
 
-## Parameters
+## Flags
 
- -  `--raw` `(-r)`: Prints the raw value representation
+ -  `--raw, -r`: Prints the raw value representation
 
 
 ## Input/output types:

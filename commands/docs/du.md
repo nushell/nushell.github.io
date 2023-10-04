@@ -16,16 +16,19 @@ usage: |
 
 ## Signature
 
-```> du (path) --all --deref --exclude --max-depth --min-size```
+```> du {flags} (path)```
+
+## Flags
+
+ -  `--all, -a`: Output file sizes as well as directory sizes
+ -  `--deref, -r`: Dereference symlinks to their targets for size
+ -  `--exclude, -x {glob}`: Exclude these file names
+ -  `--max-depth, -d {int}`: Directory recursion limit
+ -  `--min-size, -m {int}`: Exclude files below this size
 
 ## Parameters
 
  -  `path`: starting directory
- -  `--all` `(-a)`: Output file sizes as well as directory sizes
- -  `--deref` `(-r)`: Dereference symlinks to their targets for size
- -  `--exclude {glob}`: Exclude these file names
- -  `--max-depth {int}`: Directory recursion limit
- -  `--min-size {int}`: Exclude files below this size
 
 
 ## Input/output types:

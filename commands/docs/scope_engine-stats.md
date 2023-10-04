@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> scope engine-stats ```
+```> scope engine-stats {flags} ```
 
 
 ## Input/output types:

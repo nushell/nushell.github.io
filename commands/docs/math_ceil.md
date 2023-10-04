@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> math ceil ```
+```> math ceil {flags} ```
 
 
 ## Input/output types:

@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> mut (var_name) (initial_value)```
+```> mut {flags} (var_name) (initial_value)```
 
 ## Parameters
 

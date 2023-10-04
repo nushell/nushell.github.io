@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> headers ```
+```> headers {flags} ```
 
 
 ## Input/output types:

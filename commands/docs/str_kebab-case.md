@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> str kebab-case ...rest```
+```> str kebab-case {flags} ...rest```
 
 ## Parameters
 
