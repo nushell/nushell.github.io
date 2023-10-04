@@ -362,7 +362,7 @@ def main [] {
 
     let number_generated_commands = (
         $unique_commands
-        | each { |command_name|
+        | par-each { |command_name|
             generate-command $commands_group $command_name
         }
         | length
