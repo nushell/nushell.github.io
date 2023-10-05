@@ -96,7 +96,7 @@ let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i
 # overwrite
 let spans = (if $expanded_alias != null  {
     # put the first word of the expanded alias first in the span
-    $spans | skip 1 | prepend ($expanded_alias | split words)
+    $spans | skip 1 | prepend ($expanded_alias | split row " ")
 } else { $spans })
 ```
 
