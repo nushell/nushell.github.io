@@ -278,7 +278,7 @@ With the dataframe in memory we can start doing column operations with the
 
 ::: tip
 If you want to see all the dataframe commands that are available you
-can use `$nu.scope.commands | where category =~ dataframe`
+can use `scope commands | where category =~ dataframe`
 :::
 
 ## Basic aggregations
@@ -560,7 +560,7 @@ previous variable.
 
 ::: tip
 If you want to see how many variables you have stored in memory you can
-use `$nu.scope.vars`
+use `scope variables`
 :::
 
 Let's rename our previous Series so it has a memorable name
@@ -1006,7 +1006,7 @@ lazy commands to query the data. To list all the commands that generate an
 expression you can use
 
 ```nu
-$nu.scope.commands | where category =~ expression
+scope commands | where category =~ expression
 ```
 
 In our previous example, we use the `dfr col` command to indicate that column `a`
