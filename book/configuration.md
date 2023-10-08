@@ -149,7 +149,7 @@ To prepend a new path only if not already listed, one can add to `env.nu`:
 # create a new string holding the desired path
 let my_path = ( $nu.home-path | path join "bin" )
 # return $env.PATH if $env.my_path is already listed, return $env.PATH with $env.my_path prepended otherwise
-$env.PATH = ( if ( $env.PATH | split row (char esep) | any { |p| $p == $env.my_path } ) { $env.PATH } else { $env.PATH | prepend $env.my_path } )
+$env.PATH = ( if $my_path in $env.PATH { $env.PATH } else { $env.PATH | prepend $my_path } )
 ```
 
 ### Homebrew
