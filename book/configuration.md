@@ -147,7 +147,7 @@ Note the `split row (char esep)` step. We need to add it because in `env.nu`, th
 To prepend a new path only if not already listed, one can add to `env.nu`:
 ```nu
 # create a new string holding the desired path
-$env.my_path = ( [ $env.HOME, "bin" ] | str join (char psep) )
+let my_path = ( $nu.home-path | path join "bin" )
 # return $env.PATH if $env.my_path is already listed, return $env.PATH with $env.my_path prepended otherwise
 $env.PATH = ( if ( $env.PATH | split row (char esep) | any { |p| $p == $env.my_path } ) { $env.PATH } else { $env.PATH | prepend $env.my_path } )
 ```
