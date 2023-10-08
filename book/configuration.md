@@ -144,6 +144,14 @@ This will append `/some/path` to the end of PATH; you can also use [`prepend`](/
 
 Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.html#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append.md)/[`prepend`](/commands/docs/prepend.md) directly.
 
+To prepend a new path only if not already listed, one can add to `env.nu`:
+```nu
+# create a new string holding the desired path
+$env.my_path = ( [ $env.HOME, "bin" ] | str join (char psep) )
+# return $env.PATH if $env.my_path is already listed, return $env.PATH with $env.my_path prepended otherwise
+$env.PATH = ( if ( $env.PATH | split row (char esep) | any { |p| $p == $env.my_path } ) { $env.PATH } else { $env.PATH | prepend $env.my_path } )
+```
+
 ### Homebrew
 
 [Homebrew](https://brew.sh/) is a popular package manager that often requires PATH configuration. To add it to your Nushell PATH:
