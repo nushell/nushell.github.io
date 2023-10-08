@@ -136,9 +136,9 @@ currently activated.
 ```nu
 # set NU_OVERLAYS with overlay list, useful for starship prompt
 $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | append {||
-  let nu_overlays = (overlay list | range 1.. | str join ", ")
-  if ($nu_overlays | str length | into bool) {
-    $env.NU_OVERLAYS = $nu_overlays
+  let overlays = overlay list | range 1..
+  if not ($overlays | is-empty) {
+    $env.NU_OVERLAYS = $overlays | str join ", "
   } else {
     $env.NU_OVERLAYS = null
   }
