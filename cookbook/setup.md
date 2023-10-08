@@ -114,3 +114,43 @@ or
  0 │ APPDATA │ string │ C:\Users\someuser10\AppData\Roaming │ C:\Users\someuser10\AppData\Roaming
 ───┴─────────┴────────┴─────────────────────────────────────┴─────────────────────────────────────
 ```
+
+---
+
+### Use hooks to export state via environment variables
+
+Additional tools like starship run with every prompt showing up in nushell.
+[`starship`](https://starship.rs) in particular replaces the default prompt with
+its own.
+To be most compatible, the `starship` binary will run every prompt render and
+is absolute stateless.
+Nushell, however, is very stateful in a single instance.
+
+[Hooks](https://www.nushell.sh/book/hooks.html#hooks) allow registration of
+custom callback functions.
+In this case, the `pre_prompt` hook is very useful.
+With it, we can export state information as an environment variable, for
+example, what [overlays](https://www.nushell.sh/book/overlays.html) are
+currently activated.
+
+```nu
+# set NU_OVERLAYS with overlay list, useful for starship prompt
+$env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | append {||
+  let overlays = overlay list | range 1..
+  if not ($overlays | is-empty) {
+    $env.NU_OVERLAYS = $overlays | str join ", "
+  } else {
+    $env.NU_OVERLAYS = null
+  }
+})
+```
+
+Now in `starship`, we can use this environment variable to display what modules
+are active.
+
+```toml
+[env_var.NU_OVERLAYS]
+symbol = '📌 '
+format = 'with [$symbol($env_value )]($style)'
+style = 'red'
+```
