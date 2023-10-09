@@ -107,7 +107,7 @@ $"total = ($scores | reduce { |it, acc| $acc + $it })" # total = 15
 
 $"total = ($scores | math sum)" # easier approach, same result
 
-$"product = ($scores | reduce --fold 1 { |it, acc| $acc * $it })" # total = 96
+$"product = ($scores | reduce --fold 1 { |it, acc| $acc * $it })" # product = 96
 
 $scores | enumerate | reduce --fold 0 { |it, acc| $acc + $it.index * $it.item } # 0*3 + 1*8 + 2*4 = 16
 ```
