@@ -185,7 +185,7 @@ If the column names are not identical then additionally columns and values will 
 ```nu
 let first = [[a b]; [1 2]]
 let second = [[a b]; [3 4]]
-let second = [[a c]; [3 4]]
+let third = [[a c]; [3 4]]
 $first | append $second | append $third
 ───┬───┬────┬────
  # │ a │ b  │ c
