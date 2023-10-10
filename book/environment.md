@@ -50,7 +50,7 @@ $env.Path = ($env.Path | prepend 'C:\path\you\want\to\add')
 Here we've prepended our folder to the existing folders in the Path, so it will have the highest priority.
 If you want to give it the lowest priority instead, you can use the [`append`](/commands/docs/append.md) command.
 
-### [`load-env`](/commands/docs/load-env.html)
+### [`load-env`](/commands/docs/load-env.md)
 
 If you have more than one environment variable you'd like to set, you can use [`load-env`](/commands/docs/load-env.md) to create a table of name/value pairs and load multiple variables at the same time:
 
@@ -99,7 +99,7 @@ true
 
 ## Changing directory
 
-Common task in a shell is to change directory with the [`cd`](/commands/docs/cd.html) command.
+Common task in a shell is to change directory with the [`cd`](/commands/docs/cd.md) command.
 In Nushell, calling [`cd`](/commands/docs/cd.md) is equivalent to setting the `PWD` environment variable.
 Therefore, it follows the same rules as other environment variables (for example, scoping).
 
@@ -112,14 +112,14 @@ A common shorthand to set an environment variable once is available, inspired by
 BAR
 ```
 
-You can also use [`with-env`](/commands/docs/with-env.html) to do the same thing more explicitly:
+You can also use [`with-env`](/commands/docs/with-env.md) to do the same thing more explicitly:
 
 ```nu
 > with-env { FOO: BAR } { $env.FOO }
 BAR
 ```
 
-The [`with-env`](/commands/docs/with-env.html) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the [block](types_of_data.html#blocks) will run with this new environment variable set.
+The [`with-env`](/commands/docs/with-env.md) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the [block](types_of_data.md#blocks) will run with this new environment variable set.
 
 ## Permanent environment variables
 
@@ -135,7 +135,7 @@ $env.FOO = 'BAR'
 ## Defining environment from custom commands
 
 Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
-However, a command defined as [`def-env`](/commands/docs/def-env.html) instead of [`def`](/commands/docs/def.html) (it applies also to [`export def`](/commands/docs/export_def.md), see [Modules](modules.md)) will preserve the environment on the caller's side:
+However, a command defined as [`def-env`](/commands/docs/def-env.md) instead of [`def`](/commands/docs/def.md) (it applies also to [`export def`](/commands/docs/export_def.md), see [Modules](modules.md)) will preserve the environment on the caller's side:
 
 ```nu
 > def-env foo [] {
@@ -202,7 +202,7 @@ _(Important! The environment conversion string -> value happens **after** the en
 
 ## Removing environment variables
 
-You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide_env.html):
+You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide_env.md):
 
 ```nu
 > $env.FOO = 'BAR'

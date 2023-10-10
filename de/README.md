@@ -18,7 +18,7 @@ features:
 
 ### Nu funktioniert mit existierenden Daten
 
-Nu versteht [JSON, YAML, XML, Excel und noch mehr](/book/loading_data.html). Es ist einfach Daten in eine Nu Pipeline zu laden ganz egal ob diese in einer Datei, einer Datenbank oder einer Web-API liegen:
+Nu versteht [JSON, YAML, XML, Excel und noch mehr](/book/loading_data.md). Es ist einfach Daten in eine Nu Pipeline zu laden ganz egal ob diese in einer Datei, einer Datenbank oder einer Web-API liegen:
 
 <img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot zeigt das Laden von Daten von einer Web-API" class="hero"/>
 
@@ -30,7 +30,7 @@ Nu arbeitet mit typisierten Daten, wodurch Fehler abgefangen werden, die andere 
 
 ## Nu installieren
 
-Nushell ist verfügbar [als kompiliertes Programm](https://github.com/nushell/nushell/releases), [von einem Packetmanager](https://repology.org/project/nushell/versions), und als [Source Code](https://github.com/nushell/nushell). Die detaillierten Installationsanweisungen sind [hier](/de/book/installation.html) zu finden. Oder direkt loslegen:
+Nushell ist verfügbar [als kompiliertes Programm](https://github.com/nushell/nushell/releases), [von einem Packetmanager](https://repology.org/project/nushell/versions), und als [Source Code](https://github.com/nushell/nushell). Die detaillierten Installationsanweisungen sind [hier](/de/book/installation.md) zu finden. Oder direkt loslegen:
 
 #### macOS / Linux:
 

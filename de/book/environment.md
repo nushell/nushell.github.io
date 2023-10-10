@@ -4,7 +4,7 @@ Eine häufige Aufgabe in einer Shell ist die Kontrolle der Umgebung, in der die 
 da die Umgebung dem externen programm mitgegeben wird, wenn es gestartet wird. Manchmal jedoch will man eine genauere Kontrolle darüber,
 welche Umgebungsvariablen ein Programm sehen kann.
 
-Die aktuellen Umbegungsvariablen werden mit dem [`env`](/commands/docs/env.html) Befehl ausgegeben:
+Die aktuellen Umbegungsvariablen werden mit dem [`env`](/commands/docs/env.md) Befehl ausgegeben:
 
 ```
    #           name                 type                value                 raw
@@ -42,7 +42,7 @@ $env.PATH = ($env.PATH | prepend '/pfad/der/hinzu/kommt')
 Mit `prepend` wird der Ordner an den Anfang von PATH gestellt und hat damit die höchste Priorität.
 Soll der Pfad ans Ende angehängt werden, so wird `append` verwendet.
 
-### [`load-env`](/commands/docs/load-env.html)
+### [`load-env`](/commands/docs/load-env.md)
 
 Wenn mehrere Umgebungsvariablen gesetzt werden sollen, so kann `load-env` eine ganze Tabelle mitgegeben werden.
 Diese besteht aus name/value Paaren, welche alle auf einmal geladen werden:
@@ -83,7 +83,7 @@ true
 
 ## Verzeichnis Wechsel
 
-Etwas was in einer Shell häufig vorkommt ist das wechseln des Verzeichnisses mit dem [`cd`](/commands/docs/cd.html) Befehl.
+Etwas was in einer Shell häufig vorkommt ist das wechseln des Verzeichnisses mit dem [`cd`](/commands/docs/cd.md) Befehl.
 In der Nushell ist dies identisch mit dem setzen der `PWD` Umgebungsvariablen.
 Dies wiederum folgt den gleichen Regeln wie das setzen anderer Umgebungsvariablen (wie z.B. Gültigkeitsbereich)
 
@@ -96,14 +96,14 @@ Eine praktische Möglichkeit eine Umgebungsvariable einmalig zu setzen, ist insp
 BAR
 ```
 
-Es kann auch [`with-env`](/commands/docs/with-env.html) verwendet werden um expliziter zu sein:
+Es kann auch [`with-env`](/commands/docs/with-env.md) verwendet werden um expliziter zu sein:
 
 ```
 > with-env { FOO: BAR } { echo $env.FOO }
 BAR
 ```
 
-Der [`with-env`](/commands/docs/with-env.html) Befehl setzt die Umgebungsvariable temporär (hier wird die Variable "FOO" auf den Wert "BAR" gesetzt)
+Der [`with-env`](/commands/docs/with-env.md) Befehl setzt die Umgebungsvariable temporär (hier wird die Variable "FOO" auf den Wert "BAR" gesetzt)
 
 ## Permanente Umgebungsvariablen
 
@@ -119,7 +119,7 @@ $env.FOO = 'BAR'
 ## Definition einer Umgebungsvariablen für selbst definierten Befehl
 
 Aufgrund der Gültigkeitsregeln ist eine Umgebungsvariable, welche innerhalb eines selbstdefinierten Befehls gesetzt ist, auch nur in dessen Block gültig.
-Wird sie jedoch mit [`dev-env`](/commands/docs/def-env.html) anstatt [`def`](/commands/docs/def.html) gesetzt, so wird sie beim verlassen des Blocks erhalten bleiben.
+Wird sie jedoch mit [`dev-env`](/commands/docs/def-env.md) anstatt [`def`](/commands/docs/def.md) gesetzt, so wird sie beim verlassen des Blocks erhalten bleiben.
 (Gilt auch für `export def`, siehe [Modules](modules.md))
 
 ```
@@ -188,7 +188,7 @@ So können wir überprüfen, ob die Konvertierung erfolgreich war.
 
 Dieser Schritt kann auch manuell ausgelöst werden mit `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
-Zurückschauend auf den [`env`](/commands/docs/env.html) Befehl, die `raw` Spalte zeigt die Werte, die mit `ENV_CONVERSIONS.<name>.to_string` übersetzt wurden.
+Zurückschauend auf den [`env`](/commands/docs/env.md) Befehl, die `raw` Spalte zeigt die Werte, die mit `ENV_CONVERSIONS.<name>.to_string` übersetzt wurden.
 Die `value` Spalte zeigt die Werte, die Nushell benutzt (Das Resultat von `ENV_CONVERSIONS.<name>.from_string` wie bei `FOO`)
 Wenn der Wert kein String ist und keine `to_string` Konvertierung angewendet wird, wird er nicht an einen externen Befehl weitergeleitet (siehe die `raw` Spalte von `PROMPT_COMMAND`)
 Eine Ausnahme ist die `PATH` Variable (`Path` in Windows): Standardmässig wird diese von einem String in eine Liste konvertiert beim Start
@@ -199,7 +199,7 @@ Alle Umgebungsvariablen in env.nu und config.nu sind immer noch Strings solange 
 
 ## Entfernen von Umgebungsvariablen
 
-Umgebungsvariablen können im aktuellen Gültigkeitsbereich entfernt werden via [`hide`](/commands/docs/hide.html):
+Umgebungsvariablen können im aktuellen Gültigkeitsbereich entfernt werden via [`hide`](/commands/docs/hide.md):
 
 ```
 > $env.FOO = 'BAR'

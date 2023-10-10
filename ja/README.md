@@ -18,7 +18,7 @@ features:
 
 ### Nu は既存のデータとの連携が可能
 
-Nu はでは[JSON, YAML, XML, Excel and more](/book/loading_data.html)を標準サポートしています。ファイル、データベース、Web API など、どのようなデータでも簡単に Nu パイプラインに取り込むことができます。
+Nu はでは[JSON, YAML, XML, Excel and more](/book/loading_data.md)を標準サポートしています。ファイル、データベース、Web API など、どのようなデータでも簡単に Nu パイプラインに取り込むことができます。
 
 <img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
@@ -30,7 +30,7 @@ Nu は型付けされたデータを操作するので、他のシェルでは�
 
 ## Nu をインストールする
 
-Nushell は、[バイナリのダウンロード](https://github.com/nushell/nushell/releases)、[パッケージマネージャによるインストール](https://repology.org/project/nushell/versions)、[ソースコードによるインストール](https://github.com/nushell/nushell)を提供しています。 [詳細なインストール方法](/book/installation.html)を読むかもしくは、下記のようにインストールすることもできます。
+Nushell は、[バイナリのダウンロード](https://github.com/nushell/nushell/releases)、[パッケージマネージャによるインストール](https://repology.org/project/nushell/versions)、[ソースコードによるインストール](https://github.com/nushell/nushell)を提供しています。 [詳細なインストール方法](/book/installation.md)を読むかもしくは、下記のようにインストールすることもできます。
 
 #### macOS / Linux:
 
