@@ -2,7 +2,7 @@
 title: to csv
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Convert table into .csv text .
 usage: |
@@ -42,7 +42,7 @@ foo,bar
 
 Outputs an CSV string representing the contents of this table
 ```nu
-> [[foo bar]; [1 2]] | to csv -s ';'
+> [[foo bar]; [1 2]] | to csv --separator ';'
 foo;bar
 1;2
 

@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Extract data using a cell path.
 usage: |
@@ -85,7 +85,7 @@ Getting Path/PATH in a case insensitive way
 
 Getting Path in a case sensitive way, won't work for 'PATH'
 ```nu
-> $env | get -s Path
+> $env | get --sensitive Path
 
 ```
 

@@ -2,7 +2,7 @@
 title: path join
 categories: |
   path
-version: 0.85.0
+version: 0.86.0
 path: |
   Join a structured path or a list of path parts.
 usage: |
@@ -35,34 +35,46 @@ usage: |
 
 Append a filename to a path
 ```nu
-> '/home/viking' | path join spam.txt
-/home/viking/spam.txt
+> 'C:\Users\viking' | path join spam.txt
+C:\Users\viking\spam.txt
 ```
 
 Append a filename to a path
 ```nu
-> '/home/viking' | path join spams this_spam.txt
-/home/viking/spams/this_spam.txt
+> 'C:\Users\viking' | path join spams this_spam.txt
+C:\Users\viking\spams\this_spam.txt
+```
+
+Use relative paths, e.g. '..' will go up one directory
+```nu
+> 'C:\Users\viking' | path join .. folder
+C:\Users\viking\..\folder
+```
+
+Use absolute paths, e.g. '/' will bring you to the top level directory
+```nu
+> 'C:\Users\viking' | path join / folder
+C:/folder
 ```
 
 Join a list of parts into a path
 ```nu
-> [ '/' 'home' 'viking' 'spam.txt' ] | path join
-/home/viking/spam.txt
+> [ 'C:' '\' 'Users' 'viking' 'spam.txt' ] | path join
+C:\Users\viking\spam.txt
 ```
 
 Join a structured path into a path
 ```nu
-> { parent: '/home/viking', stem: 'spam', extension: 'txt' } | path join
-/home/viking/spam.txt
+> { parent: 'C:\Users\viking', stem: 'spam', extension: 'txt' } | path join
+C:\Users\viking\spam.txt
 ```
 
 Join a table of structured paths into a list of paths
 ```nu
-> [[ parent stem extension ]; [ '/home/viking' 'spam' 'txt' ]] | path join
-╭───┬───────────────────────╮
-│ 0 │ /home/viking/spam.txt │
-╰───┴───────────────────────╯
+> [ [parent stem extension]; ['C:\Users\viking' 'spam' 'txt']] | path join
+╭───┬──────────────────────────╮
+│ 0 │ C:\Users\viking\spam.txt │
+╰───┴──────────────────────────╯
 
 ```
 

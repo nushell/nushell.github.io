@@ -2,7 +2,7 @@
 title: config env
 categories: |
   env
-version: 0.85.0
+version: 0.86.0
 env: |
   Edit nu environment configurations.
 usage: |
@@ -18,6 +18,10 @@ usage: |
 
 ```> config env {flags} ```
 
+## Flags
+
+ -  `--default, -d`: Print default `env.nu` file instead.
+
 
 ## Input/output types:
 
@@ -30,5 +34,17 @@ usage: |
 allow user to open and update nu env
 ```nu
 > config env
+
+```
+
+allow user to print default `env.nu` file
+```nu
+> config env --default,
+
+```
+
+allow saving the default `env.nu` locally
+```nu
+> config env --default | save -f ~/.config/nushell/default_env.nu
 
 ```

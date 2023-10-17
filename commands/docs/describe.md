@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.85.0
+version: 0.86.0
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |

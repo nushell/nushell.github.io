@@ -2,7 +2,7 @@
 title: dfr to-csv
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Saves dataframe to CSV file.
 usage: |
@@ -44,7 +44,7 @@ Saves dataframe to CSV file
 
 Saves dataframe to CSV file using other delimiter
 ```nu
-> [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv -d '|'
+> [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv --delimiter '|'
 
 ```
 

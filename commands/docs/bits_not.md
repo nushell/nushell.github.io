@@ -2,7 +2,7 @@
 title: bits not
 categories: |
   bits
-version: 0.85.0
+version: 0.86.0
 bits: |
   Performs logical negation on each bit.
 usage: |
@@ -45,7 +45,7 @@ Apply logical negation to a list of numbers
 
 Apply logical negation to a list of numbers, treat input as 2 bytes number
 ```nu
-> [4 3 2] | bits not -n '2'
+> [4 3 2] | bits not --number-bytes '2'
 ╭───┬───────╮
 │ 0 │ 65531 │
 │ 1 │ 65532 │
@@ -56,7 +56,7 @@ Apply logical negation to a list of numbers, treat input as 2 bytes number
 
 Apply logical negation to a list of numbers, treat input as signed number
 ```nu
-> [4 3 2] | bits not -s
+> [4 3 2] | bits not --signed
 ╭───┬────╮
 │ 0 │ -5 │
 │ 1 │ -4 │

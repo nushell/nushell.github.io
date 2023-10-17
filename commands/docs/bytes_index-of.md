@@ -2,7 +2,7 @@
 title: bytes index-of
 categories: |
   bytes
-version: 0.85.0
+version: 0.86.0
 bytes: |
   Returns start index of first occurrence of pattern in bytes, or -1 if no match.
 usage: |
@@ -46,13 +46,13 @@ Returns index of pattern in bytes
 
 Returns index of pattern, search from end
 ```nu
->  0x[33 44 55 10 01 13 44 55] | bytes index-of -e 0x[44 55]
+>  0x[33 44 55 10 01 13 44 55] | bytes index-of --end 0x[44 55]
 6
 ```
 
 Returns all matched index
 ```nu
->  0x[33 44 55 10 01 33 44 33 44] | bytes index-of -a 0x[33 44]
+>  0x[33 44 55 10 01 33 44 33 44] | bytes index-of --all 0x[33 44]
 ╭───┬───╮
 │ 0 │ 0 │
 │ 1 │ 5 │
@@ -63,7 +63,7 @@ Returns all matched index
 
 Returns all matched index, searching from end
 ```nu
->  0x[33 44 55 10 01 33 44 33 44] | bytes index-of -a -e 0x[33 44]
+>  0x[33 44 55 10 01 33 44 33 44] | bytes index-of --all --end 0x[33 44]
 ╭───┬───╮
 │ 0 │ 7 │
 │ 1 │ 5 │

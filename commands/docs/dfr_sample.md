@@ -2,7 +2,7 @@
 title: dfr sample
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Create sample dataframe.
 usage: |
@@ -37,13 +37,13 @@ usage: |
 
 Sample rows from dataframe
 ```nu
-> [[a b]; [1 2] [3 4]] | dfr into-df | dfr sample -n 1
+> [[a b]; [1 2] [3 4]] | dfr into-df | dfr sample --n-rows 1
 
 ```
 
 Shows sample row using fraction and replace
 ```nu
-> [[a b]; [1 2] [3 4] [5 6]] | dfr into-df | dfr sample -f 0.5 -e
+> [[a b]; [1 2] [3 4] [5 6]] | dfr into-df | dfr sample --fraction 0.5 --replace
 
 ```
 

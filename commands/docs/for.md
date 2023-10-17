@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.85.0
+version: 0.86.0
 core: |
   Loop over a range.
 usage: |
@@ -37,7 +37,7 @@ usage: |
 
 ## Examples
 
-Echo the square of each integer
+Print the square of each integer
 ```nu
 > for x in [1 2 3] { print ($x * $x) }
 
@@ -49,7 +49,7 @@ Work with elements of a range
 
 ```
 
-Number each item and echo a message
+Number each item and print a message
 ```nu
 > for $it in ['bob' 'fred'] --numbered { print $"($it.index) is ($it.item)" }
 

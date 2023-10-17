@@ -2,7 +2,7 @@
 title: history
 categories: |
   misc
-version: 0.85.0
+version: 0.86.0
 misc: |
   Get the command history.
 usage: |

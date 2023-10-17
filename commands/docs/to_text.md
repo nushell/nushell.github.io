@@ -2,7 +2,7 @@
 title: to text
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Converts data into simple text.
 usage: |

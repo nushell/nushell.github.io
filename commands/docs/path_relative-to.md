@@ -2,7 +2,7 @@
 title: path relative-to
 categories: |
   path
-version: 0.85.0
+version: 0.86.0
 path: |
   Express a path as relative to another path.
 usage: |
@@ -33,13 +33,13 @@ usage: |
 
 Find a relative path from two absolute paths
 ```nu
-> '/home/viking' | path relative-to '/home'
+> 'C:\Users\viking' | path relative-to 'C:\Users'
 viking
 ```
 
 Find a relative path from absolute paths in list
 ```nu
-> [ /home/viking, /home/spam ] | path relative-to '/home'
+> [ C:\Users\viking, C:\Users\spam ] | path relative-to C:\Users
 ╭───┬────────╮
 │ 0 │ viking │
 │ 1 │ spam   │
@@ -49,7 +49,7 @@ Find a relative path from absolute paths in list
 
 Find a relative path from two relative paths
 ```nu
-> 'eggs/bacon/sausage/spam' | path relative-to 'eggs/bacon/sausage'
+> 'eggs\bacon\sausage\spam' | path relative-to 'eggs\bacon\sausage'
 spam
 ```
 

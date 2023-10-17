@@ -2,7 +2,7 @@
 title: do
 categories: |
   core
-version: 0.85.0
+version: 0.86.0
 core: |
   Run a closure, providing it with the pipeline input.
 usage: |
@@ -24,6 +24,7 @@ usage: |
  -  `--ignore-shell-errors, -s`: ignore shell errors as the closure runs
  -  `--ignore-program-errors, -p`: ignore external program errors as the closure runs
  -  `--capture-errors, -c`: catch errors as the closure runs, and return them
+ -  `--env, -`: keep the environment defined inside the command
 
 ## Parameters
 
@@ -53,25 +54,25 @@ I am enclosed
 
 Run the closure and ignore both shell and external program errors
 ```nu
-> do -i { thisisnotarealcommand }
+> do --ignore-errors { thisisnotarealcommand }
 
 ```
 
 Run the closure and ignore shell errors
 ```nu
-> do -s { thisisnotarealcommand }
+> do --ignore-shell-errors { thisisnotarealcommand }
 
 ```
 
 Run the closure and ignore external program errors
 ```nu
-> do -p { nu -c 'exit 1' }; echo "I'll still run"
+> do --ignore-program-errors { nu --commands 'exit 1' }; echo "I'll still run"
 
 ```
 
 Abort the pipeline if a program returns a non-zero exit code
 ```nu
-> do -c { nu -c 'exit 1' } | myscarycommand
+> do --capture-errors { nu --commands 'exit 1' } | myscarycommand
 
 ```
 
@@ -85,4 +86,10 @@ Run the closure, with input
 ```nu
 > 77 | do {|x| 100 + $in }
 
+```
+
+Run the closure and keep changes to the environment
+```nu
+> do --env { $env.foo = 'bar' }; $env.foo
+bar
 ```

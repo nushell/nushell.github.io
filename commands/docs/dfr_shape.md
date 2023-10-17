@@ -2,7 +2,7 @@
 title: dfr shape
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Shows column and row size for a dataframe.
 usage: |

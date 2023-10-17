@@ -2,7 +2,7 @@
 title: path expand
 categories: |
   path
-version: 0.85.0
+version: 0.86.0
 path: |
   Try to expand a path to its absolute form.
 usage: |
@@ -34,22 +34,22 @@ usage: |
 
 Expand an absolute path
 ```nu
-> '/home/joe/foo/../bar' | path expand
-/home/joe/bar
+> 'C:\Users\joe\foo\..\bar' | path expand
+C:\Users\joe\bar
 ```
 
 Expand a relative path
 ```nu
-> 'foo/../bar' | path expand
+> 'foo\..\bar' | path expand
 
 ```
 
 Expand a list of paths
 ```nu
-> [ /foo/../bar, /foo/../baz ] | path expand
-╭───┬──────╮
-│ 0 │ /bar │
-│ 1 │ /baz │
-╰───┴──────╯
+> [ C:\foo\..\bar, C:\foo\..\baz ] | path expand
+╭───┬────────╮
+│ 0 │ C:\bar │
+│ 1 │ C:\baz │
+╰───┴────────╯
 
 ```

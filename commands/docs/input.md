@@ -2,7 +2,7 @@
 title: input
 categories: |
   platform
-version: 0.85.0
+version: 0.86.0
 platform: |
   Get input from the user.
 usage: |

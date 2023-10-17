@@ -2,7 +2,7 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.85.0
+version: 0.86.0
 bytes: |
   Remove bytes.
 usage: |
@@ -48,7 +48,7 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 
 Remove all occurrences of find binary in record field
 ```nu
-> { data: 0x[10 AA 10 BB 10] } | bytes remove -a 0x[10] data
+> { data: 0x[10 AA 10 BB 10] } | bytes remove --all 0x[10] data
 ╭──────┬────────────╮
 │ data │ [170, 187] │
 ╰──────┴────────────╯
@@ -56,7 +56,7 @@ Remove all occurrences of find binary in record field
 
 Remove occurrences of find binary from end
 ```nu
-> 0x[10 AA 10 BB CC AA 10] | bytes remove -e 0x[10]
+> 0x[10 AA 10 BB CC AA 10] | bytes remove --end 0x[10]
 Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 00000000:   10 aa 10 bb  cc aa                                   •×•×××
 

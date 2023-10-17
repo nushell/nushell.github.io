@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.85.0
+version: 0.86.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -106,4 +106,4 @@ Search for all files that are not in the target nor .git directories
 ```
 
 ## Notes
-For more glob pattern help, please refer to https://github.com/olson-sean-k/wax
+For more glob pattern help, please refer to https://docs.rs/crate/wax/latest

@@ -2,7 +2,7 @@
 title: from ics
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Parse text as .ics and create table.
 usage: |
@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> from ics ```
+```> from ics {flags} ```
 
 
 ## Input/output types:
@@ -31,10 +31,10 @@ Converts ics formatted string to table
 ```nu
 > 'BEGIN:VCALENDAR
             END:VCALENDAR' | from ics
-╭───┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮
-│ # │   properties   │     events     │     alarms     │     to-Dos     │    journals    │   free-busys   │   timezones    │
-├───┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤
-│ 0 │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │
-╰───┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────╯
+╭────┬─────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮
+│  # │   properties    │     events     │     alarms     │     to-Dos     │    journals    │   free-busys   │   timezones    │
+├────┼─────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤
+│  0 │ [list 0 items]  │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │
+╰────┴─────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────╯
 
 ```

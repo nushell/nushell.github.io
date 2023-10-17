@@ -2,7 +2,7 @@
 title: str length
 categories: |
   strings
-version: 0.85.0
+version: 0.86.0
 strings: |
   Output the length of any strings in the pipeline.
 usage: |

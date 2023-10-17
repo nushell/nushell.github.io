@@ -2,7 +2,7 @@
 title: dfr into-nu
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Converts a dataframe or an expression into into nushell value for access and exploration.
 usage: |
@@ -46,7 +46,7 @@ Shows head rows from dataframe
 
 Shows tail rows from dataframe
 ```nu
-> [[a b]; [1 2] [5 6] [3 4]] | dfr into-df | dfr into-nu -t -n 1
+> [[a b]; [1 2] [5 6] [3 4]] | dfr into-df | dfr into-nu --tail --rows 1
 ╭───┬───┬───╮
 │ # │ a │ b │
 ├───┼───┼───┤

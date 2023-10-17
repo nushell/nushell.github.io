@@ -2,7 +2,7 @@
 title: rotate
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Rotates a table or record clockwise (default) or counter-clockwise (use --ccw flag).
 usage: |

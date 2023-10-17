@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -95,7 +95,7 @@ Find using regex case insensitive
 
 Find value in records using regex
 ```nu
-> [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find -r "nu"
+> [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find --regex "nu"
 ╭───┬─────────┬─────────╮
 │ # │ version │  name   │
 ├───┼─────────┼─────────┤
@@ -106,7 +106,7 @@ Find value in records using regex
 
 Find inverted values in records using regex
 ```nu
-> [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find -r "nu" --invert
+> [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find --regex "nu" --invert
 ╭───┬─────────┬──────╮
 │ # │ version │ name │
 ├───┼─────────┼──────┤
@@ -118,7 +118,7 @@ Find inverted values in records using regex
 
 Find value in list using regex
 ```nu
-> [["Larry", "Moe"], ["Victor", "Marina"]] | find -r "rr"
+> [["Larry", "Moe"], ["Victor", "Marina"]] | find --regex "rr"
 ╭───┬───────────────╮
 │ 0 │ ╭───┬───────╮ │
 │   │ │ 0 │ Larry │ │
@@ -130,7 +130,7 @@ Find value in list using regex
 
 Find inverted values in records using regex
 ```nu
-> [["Larry", "Moe"], ["Victor", "Marina"]] | find -r "rr" --invert
+> [["Larry", "Moe"], ["Victor", "Marina"]] | find --regex "rr" --invert
 ╭───┬────────────────╮
 │ 0 │ ╭───┬────────╮ │
 │   │ │ 0 │ Victor │ │
@@ -148,7 +148,7 @@ Remove ANSI sequences from result
 
 Find and highlight text in specific columns
 ```nu
-> [[col1 col2 col3]; [moe larry curly] [larry curly moe]] | find moe -c [col1]
+> [[col1 col2 col3]; [moe larry curly] [larry curly moe]] | find moe --columns [col1]
 ╭───┬──────┬───────┬───────╮
 │ # │ col1 │ col2  │ col3  │
 ├───┼──────┼───────┼───────┤

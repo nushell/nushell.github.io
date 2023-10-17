@@ -2,7 +2,7 @@
 title: ast
 categories: |
   debug
-version: 0.85.0
+version: 0.86.0
 debug: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |
@@ -62,6 +62,6 @@ Print the ast of a pipeline with an error, as json, in a nushell table
 
 Print the ast of a pipeline with an error, as json, minified
 ```nu
-> ast 'for x in 1..10 { echo $x ' -j -m
+> ast 'for x in 1..10 { echo $x ' --json --minify
 
 ```

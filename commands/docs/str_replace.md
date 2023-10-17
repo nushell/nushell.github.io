@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.85.0
+version: 0.86.0
 strings: |
   Find and replace text.
 usage: |
@@ -50,7 +50,7 @@ Find and replace the first occurrence of a substring
 
 Find and replace all occurrences of a substring
 ```nu
-> 'abc abc abc' | str replace -a 'b' 'z'
+> 'abc abc abc' | str replace --all 'b' 'z'
 azc azc azc
 ```
 
@@ -62,13 +62,13 @@ my_library.nu
 
 Find and replace all occurrences of find string using regular expression
 ```nu
-> 'abc abc abc' | str replace -ar 'b' 'z'
+> 'abc abc abc' | str replace --all --regex 'b' 'z'
 azc azc azc
 ```
 
 Find and replace all occurrences of find string in table using regular expression
 ```nu
-> [[ColA ColB ColC]; [abc abc ads]] | str replace -ar 'b' 'z' ColA ColC
+> [[ColA ColB ColC]; [abc abc ads]] | str replace --all --regex 'b' 'z' ColA ColC
 ╭───┬──────┬──────┬──────╮
 │ # │ ColA │ ColB │ ColC │
 ├───┼──────┼──────┼──────┤
@@ -79,7 +79,7 @@ Find and replace all occurrences of find string in table using regular expressio
 
 Find and replace all occurrences of find string in record using regular expression
 ```nu
-> { KeyA: abc, KeyB: abc, KeyC: ads } | str replace -ar 'b' 'z' KeyA KeyC
+> { KeyA: abc, KeyB: abc, KeyC: ads } | str replace --all --regex 'b' 'z' KeyA KeyC
 ╭──────┬─────╮
 │ KeyA │ azc │
 │ KeyB │ abc │
@@ -113,7 +113,7 @@ GHIKK-z+*
 
 Find and replace on individual lines using multiline regular expression
 ```nu
-> "non-matching line\n123. one line\n124. another line\n" | str replace -am '^[0-9]+\. ' ''
+> "non-matching line\n123. one line\n124. another line\n" | str replace --all --multiline '^[0-9]+\. ' ''
 non-matching line
 one line
 another line

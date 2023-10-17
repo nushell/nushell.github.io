@@ -2,7 +2,7 @@
 title: str reverse
 categories: |
   strings
-version: 0.85.0
+version: 0.86.0
 strings: |
   Reverse every string in the pipeline.
 usage: |

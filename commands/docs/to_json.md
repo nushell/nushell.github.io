@@ -2,7 +2,7 @@
 title: to json
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Converts table data into JSON text.
 usage: |
@@ -45,7 +45,7 @@ Outputs a JSON string, with default indentation, representing the contents of th
 
 Outputs a JSON string, with 4-space indentation, representing the contents of this table
 ```nu
-> [Joe Bob Sam] | to json -i 4
+> [Joe Bob Sam] | to json --indent 4
 [
     "Joe",
     "Bob",

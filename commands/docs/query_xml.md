@@ -2,7 +2,7 @@
 title: query xml
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   execute xpath query on xml
 usage: |
@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> query xml (query)```
+```> query xml {flags} (query)```
 
 ## Parameters
 

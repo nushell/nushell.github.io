@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.85.0
+version: 0.86.0
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -45,7 +45,7 @@ def hi [] { echo 'Hi!' }
 
 View the source of a custom command, which participates in the caller environment
 ```nu
-> def-env foo [] { $env.BAR = 'BAZ' }; view source foo
+> def --env foo [] { $env.BAR = 'BAZ' }; view source foo
 def foo [] { $env.BAR = 'BAZ' }
 ```
 

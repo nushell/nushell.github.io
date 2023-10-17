@@ -2,7 +2,7 @@
 title: sort
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Sort in increasing order.
 usage: |
@@ -47,7 +47,7 @@ sort the list by increasing value
 
 sort the list by decreasing value
 ```nu
-> [2 0 1] | sort -r
+> [2 0 1] | sort --reverse
 ╭───┬───╮
 │ 0 │ 2 │
 │ 1 │ 1 │
@@ -69,7 +69,7 @@ sort a list of strings
 
 sort a list of strings in reverse
 ```nu
-> [betty amy sarah] | sort -r
+> [betty amy sarah] | sort --reverse
 ╭───┬───────╮
 │ 0 │ sarah │
 │ 1 │ betty │

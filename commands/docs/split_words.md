@@ -2,7 +2,7 @@
 title: split words
 categories: |
   strings
-version: 0.85.0
+version: 0.86.0
 strings: |
   Split a string's words into separate rows.
 usage: |
@@ -56,6 +56,6 @@ Split the string's words, of at least 3 characters, into separate rows
 
 A real-world example of splitting words
 ```nu
-> http get https://www.gutenberg.org/files/11/11-0.txt | str downcase | split words -l 2 | uniq -c | sort-by count --reverse | first 10
+> http get https://www.gutenberg.org/files/11/11-0.txt | str downcase | split words -l 2 | uniq --count | sort-by count --reverse | first 10
 
 ```

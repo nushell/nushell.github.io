@@ -2,7 +2,7 @@
 title: query web
 categories: |
   network
-version: 0.85.0
+version: 0.86.0
 network: |
   execute selector query on html/web
 usage: |
@@ -16,15 +16,15 @@ usage: |
 
 ## Signature
 
-```> query web --query --as-html --attribute --as-table --inspect```
+```> query web {flags} ```
 
-## Parameters
+## Flags
 
- -  `--query {string}`: selector query
- -  `--as-html` `(-m)`: return the query output as html
- -  `--attribute {string}`: downselect based on the given attribute
- -  `--as-table {table}`: find table based on column header list
- -  `--inspect` `(-i)`: run in inspect mode to provide more information for determining column headers
+ -  `--query, -q {string}`: selector query
+ -  `--as-html, -m`: return the query output as html
+ -  `--attribute, -a {string}`: downselect based on the given attribute
+ -  `--as-table, -t {table}`: find table based on column header list
+ -  `--inspect, -i`: run in inspect mode to provide more information for determining column headers
 
 
 ## Input/output types:

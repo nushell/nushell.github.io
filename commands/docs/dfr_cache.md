@@ -2,7 +2,7 @@
 title: dfr cache
 categories: |
   lazyframe
-version: 0.85.0
+version: 0.86.0
 lazyframe: |
   Caches operations in a new LazyFrame
 usage: |

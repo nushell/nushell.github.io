@@ -2,7 +2,7 @@
 title: from ods
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 usage: |
@@ -39,6 +39,6 @@ Convert binary .ods data to a table
 
 Convert binary .ods data to a table, specifying the tables
 ```nu
-> open --raw test.ods | from ods -s [Spreadsheet1]
+> open --raw test.ods | from ods --sheets [Spreadsheet1]
 
 ```

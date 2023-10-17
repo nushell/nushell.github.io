@@ -2,7 +2,7 @@
 title: config nu
 categories: |
   env
-version: 0.85.0
+version: 0.86.0
 env: |
   Edit nu configurations.
 usage: |
@@ -18,6 +18,10 @@ usage: |
 
 ```> config nu {flags} ```
 
+## Flags
+
+ -  `--default, -d`: Print default `config.nu` file instead.
+
 
 ## Input/output types:
 
@@ -30,5 +34,17 @@ usage: |
 allow user to open and update nu config
 ```nu
 > config nu
+
+```
+
+allow user to print default `config.nu` file
+```nu
+> config nu --default,
+
+```
+
+allow saving the default `config.nu` locally
+```nu
+> config nu --default | save -f ~/.config/nushell/default_config.nu
 
 ```

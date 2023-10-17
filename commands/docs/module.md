@@ -2,7 +2,7 @@
 title: module
 categories: |
   core
-version: 0.85.0
+version: 0.86.0
 core: |
   Define a custom module.
 usage: |
@@ -46,7 +46,7 @@ BAZ
 
 Define a custom command that participates in the environment in a module and call it
 ```nu
-> module foo { export def-env bar [] { $env.FOO_BAR = "BAZ" } }; use foo bar; bar; $env.FOO_BAR
+> module foo { export def --env bar [] { $env.FOO_BAR = "BAZ" } }; use foo bar; bar; $env.FOO_BAR
 BAZ
 ```
 

@@ -2,7 +2,7 @@
 title: path basename
 categories: |
   path
-version: 0.85.0
+version: 0.86.0
 path: |
   Get the final component of a path.
 usage: |
@@ -33,13 +33,13 @@ usage: |
 
 Get basename of a path
 ```nu
-> '/home/joe/test.txt' | path basename
+> 'C:\Users\joe\test.txt' | path basename
 test.txt
 ```
 
 Get basename of a list of paths
 ```nu
-> [ /home/joe, /home/doe ] | path basename
+> [ C:\Users\joe, C:\Users\doe ] | path basename
 ╭───┬─────╮
 │ 0 │ joe │
 │ 1 │ doe │
@@ -49,6 +49,6 @@ Get basename of a list of paths
 
 Replace basename of a path
 ```nu
-> '/home/joe/test.txt' | path basename -r 'spam.png'
-/home/joe/spam.png
+> 'C:\Users\joe\test.txt' | path basename -r 'spam.png'
+C:\Users\joe\spam.png
 ```

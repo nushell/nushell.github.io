@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.85.0
+version: 0.86.0
 filesystem: |
   Change directory.
 usage: |
@@ -34,12 +34,6 @@ usage: |
 Change to your home directory
 ```nu
 > cd ~
-
-```
-
-Change to a directory via abbreviations
-```nu
-> cd d/s/9
 
 ```
 

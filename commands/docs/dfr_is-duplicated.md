@@ -2,7 +2,7 @@
 title: dfr is-duplicated
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Creates mask indicating duplicated values.
 usage: |

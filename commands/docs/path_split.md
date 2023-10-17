@@ -2,7 +2,7 @@
 title: path split
 categories: |
   path
-version: 0.85.0
+version: 0.86.0
 path: |
   Split a path into a list based on the system's path separator.
 usage: |
@@ -29,10 +29,10 @@ usage: |
 
 Split a path into parts
 ```nu
-> '/home/viking/spam.txt' | path split
+> 'C:\Users\viking\spam.txt' | path split
 ╭───┬──────────╮
-│ 0 │ /        │
-│ 1 │ home     │
+│ 0 │ C:\      │
+│ 1 │ Users    │
 │ 2 │ viking   │
 │ 3 │ spam.txt │
 ╰───┴──────────╯
@@ -41,17 +41,17 @@ Split a path into parts
 
 Split paths in list into parts
 ```nu
-> [ /home/viking/spam.txt /home/viking/eggs.txt ] | path split
+> [ C:\Users\viking\spam.txt C:\Users\viking\eggs.txt ] | path split
 ╭───┬──────────────────╮
 │ 0 │ ╭───┬──────────╮ │
-│   │ │ 0 │ /        │ │
-│   │ │ 1 │ home     │ │
+│   │ │ 0 │ C:\      │ │
+│   │ │ 1 │ Users    │ │
 │   │ │ 2 │ viking   │ │
 │   │ │ 3 │ spam.txt │ │
 │   │ ╰───┴──────────╯ │
 │ 1 │ ╭───┬──────────╮ │
-│   │ │ 0 │ /        │ │
-│   │ │ 1 │ home     │ │
+│   │ │ 0 │ C:\      │ │
+│   │ │ 1 │ Users    │ │
 │   │ │ 2 │ viking   │ │
 │   │ │ 3 │ eggs.txt │ │
 │   │ ╰───┴──────────╯ │

@@ -2,7 +2,7 @@
 title: dfr replace
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern.
 usage: |
@@ -34,7 +34,7 @@ usage: |
 
 Replaces string
 ```nu
-> [abc abc abc] | dfr into-df | dfr replace -p ab -r AB
+> [abc abc abc] | dfr into-df | dfr replace --pattern ab --replace AB
 ╭───┬─────╮
 │ # │  0  │
 ├───┼─────┤

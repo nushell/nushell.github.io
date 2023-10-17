@@ -2,7 +2,7 @@
 title: from eml
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Parse text as .eml and create record.
 usage: |
@@ -16,11 +16,11 @@ usage: |
 
 ## Signature
 
-```> from eml --preview-body```
+```> from eml {flags} ```
 
-## Parameters
+## Flags
 
- -  `--preview-body {int}`: How many bytes of the body to preview
+ -  `--preview-body, -b {int}`: How many bytes of the body to preview
 
 
 ## Input/output types:

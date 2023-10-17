@@ -2,7 +2,7 @@
 title: bits
 categories: |
   bits
-version: 0.85.0
+version: 0.86.0
 bits: |
   Various commands for working with bits.
 usage: |
@@ -32,13 +32,13 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                     | type    | usage                                  |
 | ---------------------------------------- | ------- | -------------------------------------- |
-| [`bits and`](/commands/docs/bits_and.md) | Builtin | Performs bitwise and for integers.     |
+| [`bits and`](/commands/docs/bits_and.md) | Builtin | Performs bitwise and for ints.         |
 | [`bits not`](/commands/docs/bits_not.md) | Builtin | Performs logical negation on each bit. |
-| [`bits or`](/commands/docs/bits_or.md)   | Builtin | Performs bitwise or for integers.      |
-| [`bits rol`](/commands/docs/bits_rol.md) | Builtin | Bitwise rotate left for integers.      |
-| [`bits ror`](/commands/docs/bits_ror.md) | Builtin | Bitwise rotate right for integers.     |
-| [`bits shl`](/commands/docs/bits_shl.md) | Builtin | Bitwise shift left for integers.       |
-| [`bits shr`](/commands/docs/bits_shr.md) | Builtin | Bitwise shift right for integers.      |
-| [`bits xor`](/commands/docs/bits_xor.md) | Builtin | Performs bitwise xor for integers.     |
+| [`bits or`](/commands/docs/bits_or.md)   | Builtin | Performs bitwise or for ints.          |
+| [`bits rol`](/commands/docs/bits_rol.md) | Builtin | Bitwise rotate left for ints.          |
+| [`bits ror`](/commands/docs/bits_ror.md) | Builtin | Bitwise rotate right for ints.         |
+| [`bits shl`](/commands/docs/bits_shl.md) | Builtin | Bitwise shift left for ints.           |
+| [`bits shr`](/commands/docs/bits_shr.md) | Builtin | Bitwise shift right for ints.          |
+| [`bits xor`](/commands/docs/bits_xor.md) | Builtin | Performs bitwise xor for ints.         |
 
 **Tips:** Command `bits` was not included in the official binaries by default, you have to build it with `--features=extra` flag

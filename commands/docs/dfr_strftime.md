@@ -2,7 +2,7 @@
 title: dfr strftime
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Formats date based on string rule.
 usage: |
@@ -33,7 +33,7 @@ usage: |
 
 Formats date
 ```nu
-> let dt = ('2020-08-04T16:39:18+00:00' | into datetime -z 'UTC');
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
     let df = ([$dt $dt] | dfr into-df);
     $df | dfr strftime "%Y/%m/%d"
 ╭───┬────────────╮

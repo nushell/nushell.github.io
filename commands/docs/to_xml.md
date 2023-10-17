@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Convert special record structure into .xml text.
 usage: |
@@ -20,7 +20,8 @@ usage: |
 
 ## Flags
 
- -  `--pretty, -p {int}`: Formats the XML text with the provided indentation setting
+ -  `--pretty, -p {int}`: DEPRECATED option, will be removed in 0.87. Please use `--indent {int}` instead.
+ -  `--indent, -i {int}`: Formats the XML text with the provided indentation setting
 
 
 ## Input/output types:
@@ -45,7 +46,7 @@ When formatting xml null and empty record fields can be omitted and strings can 
 
 Optionally, formats the text with a custom indentation setting
 ```nu
-> {tag: note content : [{tag: remember content : [Event]}]} | to xml -p 3
+> {tag: note content : [{tag: remember content : [Event]}]} | to xml --indent 3
 <note>
    <remember>Event</remember>
 </note>

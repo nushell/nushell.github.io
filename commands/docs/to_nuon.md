@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -39,7 +39,7 @@ Outputs a NUON string representing the contents of this list, compact by default
 [1, 2, 3]
 ```
 
-Outputs a NUON array of integers, with pretty indentation
+Outputs a NUON array of ints, with pretty indentation
 ```nu
 > [1 2 3] | to nuon --indent 2
 [
