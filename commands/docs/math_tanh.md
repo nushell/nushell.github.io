@@ -2,7 +2,7 @@
 title: math tanh
 categories: |
   math
-version: 0.85.0
+version: 0.86.0
 math: |
   Returns the hyperbolic tangent of the number.
 usage: |
@@ -21,10 +21,10 @@ usage: |
 
 ## Input/output types:
 
-| input        | output       |
-| ------------ | ------------ |
-| list\<number\> | list\<number\> |
-| number       | number       |
+| input        | output      |
+| ------------ | ----------- |
+| list\<number\> | list\<float\> |
+| number       | float       |
 ## Examples
 
 Apply the hyperbolic tangent to 10*π

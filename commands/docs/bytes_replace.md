@@ -2,7 +2,7 @@
 title: bytes replace
 categories: |
   bytes
-version: 0.85.0
+version: 0.86.0
 bytes: |
   Find and replace binary.
 usage: |
@@ -48,7 +48,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 
 Find and replace all occurrences of find binary
 ```nu
-> 0x[10 AA 10 BB 10] | bytes replace -a 0x[10] 0x[A0]
+> 0x[10 AA 10 BB 10] | bytes replace --all 0x[10] 0x[A0]
 Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
 00000000:   a0 aa a0 bb  a0                                      ×××××
 
@@ -56,7 +56,7 @@ Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
 
 Find and replace all occurrences of find binary in table
 ```nu
-> [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes replace -a 0x[11] 0x[13] ColA ColC
+> [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes replace --all 0x[11] 0x[13] ColA ColC
 ╭───┬──────────────┬──────────────┬──────────────╮
 │ # │     ColA     │     ColB     │     ColC     │
 ├───┼──────────────┼──────────────┼──────────────┤

@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.85.0
+version: 0.86.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -55,7 +55,7 @@ Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 
 Convert non-standard timestamp string to datetime using a custom format
 ```nu
-> '20210227_135540+0000' | into datetime -f '%Y%m%d_%H%M%S%z'
+> '20210227_135540+0000' | into datetime --format '%Y%m%d_%H%M%S%z'
 Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```
 

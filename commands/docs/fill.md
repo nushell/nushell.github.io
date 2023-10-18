@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.85.0
+version: 0.86.0
 conversions: |
   Fill and Align.
 usage: |
@@ -30,31 +30,31 @@ usage: |
 | input          | output       |
 | -------------- | ------------ |
 | filesize       | string       |
+| float          | string       |
 | int            | string       |
 | list\<any\>      | list\<string\> |
 | list\<filesize\> | list\<string\> |
+| list\<float\>    | list\<string\> |
 | list\<int\>      | list\<string\> |
-| list\<number\>   | list\<string\> |
 | list\<string\>   | list\<string\> |
-| number         | string       |
 | string         | string       |
 ## Examples
 
 Fill a string on the left side to a width of 15 with the character '─'
 ```nu
-> 'nushell' | fill -a l -c '─' -w 15
+> 'nushell' | fill --alignment l --character '─' --width 15
 nushell────────
 ```
 
 Fill a string on the right side to a width of 15 with the character '─'
 ```nu
-> 'nushell' | fill -a r -c '─' -w 15
+> 'nushell' | fill --alignment r --character '─' --width 15
 ────────nushell
 ```
 
 Fill a string on both sides to a width of 15 with the character '─'
 ```nu
-> 'nushell' | fill -a m -c '─' -w 15
+> 'nushell' | fill --alignment m --character '─' --width 15
 ────nushell────
 ```
 

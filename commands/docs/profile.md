@@ -2,7 +2,7 @@
 title: profile
 categories: |
   debug
-version: 0.85.0
+version: 0.86.0
 debug: |
   Profile each pipeline element in a closure.
 usage: |
@@ -20,8 +20,8 @@ usage: |
 
 ## Flags
 
- -  `--source, -`: Collect source code in the report
- -  `--values, -`: Collect values in the report
+ -  `--source, -s`: Collect source code in the report
+ -  `--values, -v`: Collect values in the report
  -  `--max-depth, -d {int}`: How many levels of blocks to step into (default: 1)
 
 ## Parameters
@@ -39,7 +39,7 @@ usage: |
 
 Profile some code, stepping into the `spam` command and collecting source.
 ```nu
-> def spam [] { "spam" }; profile {|| spam | str length } -d 2 --source
+> def spam [] { "spam" }; profile {|| spam | str length } --max-depth 2 --source
 
 ```
 

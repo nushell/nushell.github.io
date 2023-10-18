@@ -2,7 +2,7 @@
 title: path join
 categories: |
   path
-version: 0.85.0
+version: 0.86.0
 path: |
   Join a structured path or a list of path parts.
 usage: |
@@ -43,6 +43,18 @@ Append a filename to a path
 ```nu
 > '/home/viking' | path join spams this_spam.txt
 /home/viking/spams/this_spam.txt
+```
+
+Use relative paths, e.g. '..' will go up one directory
+```nu
+> '/home/viking' | path join .. folder
+/home/viking/../folder
+```
+
+Use absolute paths, e.g. '/' will bring you to the top level directory
+```nu
+> '/home/viking' | path join / folder
+/folder
 ```
 
 Join a list of parts into a path

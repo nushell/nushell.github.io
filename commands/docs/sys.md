@@ -2,7 +2,7 @@
 title: sys
 categories: |
   system
-version: 0.85.0
+version: 0.86.0
 system: |
   View information about the system.
 usage: |

@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.85.0
+version: 0.86.0
 conversions: |
   Convert value to string.
 usage: |
@@ -44,34 +44,28 @@ usage: |
 | table     | table        |
 ## Examples
 
-convert integer to string and append three decimal places
+convert int to string and append three decimal places
 ```nu
-> 5 | into string -d 3
+> 5 | into string --decimals 3
 5.000
 ```
 
 convert float to string and round to nearest integer
 ```nu
-> 1.7 | into string -d 0
+> 1.7 | into string --decimals 0
 2
 ```
 
 convert float to string
 ```nu
-> 1.7 | into string -d 1
+> 1.7 | into string --decimals 1
 1.7
 ```
 
 convert float to string and limit to 2 decimals
 ```nu
-> 1.734 | into string -d 2
+> 1.734 | into string --decimals 2
 1.73
-```
-
-try to convert float to string and provide negative decimal points
-```nu
-> 1.734 | into string -d -2
-
 ```
 
 convert float to string

@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Sort by the given columns, in increasing order.
 usage: |
@@ -45,13 +45,13 @@ Sort files by modified date
 
 Sort files by name (case-insensitive)
 ```nu
-> ls | sort-by name -i
+> ls | sort-by name --ignore-case
 
 ```
 
 Sort a table by a column (reversed order)
 ```nu
-> [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit -r
+> [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit --reverse
 ╭───┬────────┬───────╮
 │ # │ fruit  │ count │
 ├───┼────────┼───────┤

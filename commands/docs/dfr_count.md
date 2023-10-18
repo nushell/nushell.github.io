@@ -2,7 +2,7 @@
 title: dfr count
 categories: |
   expression
-version: 0.85.0
+version: 0.86.0
 expression: |
   creates a count expression
 usage: |

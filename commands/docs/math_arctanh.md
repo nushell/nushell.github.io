@@ -2,7 +2,7 @@
 title: math arctanh
 categories: |
   math
-version: 0.85.0
+version: 0.86.0
 math: |
   Returns the inverse of the hyperbolic tangent function.
 usage: |
@@ -21,10 +21,10 @@ usage: |
 
 ## Input/output types:
 
-| input        | output       |
-| ------------ | ------------ |
-| list\<number\> | list\<number\> |
-| number       | number       |
+| input        | output      |
+| ------------ | ----------- |
+| list\<number\> | list\<float\> |
+| number       | float       |
 ## Examples
 
 Get the arctanh of 1

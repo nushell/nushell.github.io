@@ -2,7 +2,7 @@
 title: from ics
 categories: |
   formats
-version: 0.85.0
+version: 0.86.0
 formats: |
   Parse text as .ics and create table.
 usage: |
@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> from ics ```
+```> from ics {flags} ```
 
 
 ## Input/output types:

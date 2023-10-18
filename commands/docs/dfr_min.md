@@ -2,7 +2,7 @@
 title: dfr min
 categories: |
   expression
-version: 0.85.0
+version: 0.86.0
 expression: |
   Creates a min expression or aggregates columns to their min value
 usage: |

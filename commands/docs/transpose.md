@@ -2,7 +2,7 @@
 title: transpose
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |
@@ -65,7 +65,7 @@ Transposes the table contents with specified column names
 
 Transposes the table without column names and specify a new column name
 ```nu
-> [[c1 c2]; [1 2]] | transpose -i val
+> [[c1 c2]; [1 2]] | transpose --ignore-titles val
 ╭───┬─────╮
 │ # │ val │
 ├───┼─────┤
@@ -77,7 +77,7 @@ Transposes the table without column names and specify a new column name
 
 Transfer back to record with -d flag
 ```nu
-> {c1: 1, c2: 2} | transpose | transpose -i -r -d
+> {c1: 1, c2: 2} | transpose | transpose --ignore-titles -r -d
 ╭────┬───╮
 │ c1 │ 1 │
 │ c2 │ 2 │

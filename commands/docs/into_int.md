@@ -2,7 +2,7 @@
 title: into int
 categories: |
   conversions
-version: 0.85.0
+version: 0.86.0
 conversions: |
   Convert value to integer.
 usage: |
@@ -50,37 +50,37 @@ usage: |
 | table          | table     |
 ## Examples
 
-Convert string to integer in table
+Convert string to int in table
 ```nu
 > [[num]; ['-5'] [4] [1.5]] | into int num
 
 ```
 
-Convert string to integer
+Convert string to int
 ```nu
 > '2' | into int
 2
 ```
 
-Convert float to integer
+Convert float to int
 ```nu
 > 5.9 | into int
 5
 ```
 
-Convert decimal string to integer
+Convert decimal string to int
 ```nu
 > '5.9' | into int
 5
 ```
 
-Convert file size to integer
+Convert file size to int
 ```nu
 > 4KB | into int
 4000
 ```
 
-Convert bool to integer
+Convert bool to int
 ```nu
 > [false, true] | into int
 ╭───┬───╮
@@ -90,38 +90,38 @@ Convert bool to integer
 
 ```
 
-Convert date to integer (Unix nanosecond timestamp)
+Convert date to int (Unix nanosecond timestamp)
 ```nu
 > 1983-04-13T12:09:14.123456789-05:00 | into int
 419101754123456789
 ```
 
-Convert to integer from binary
+Convert to int from binary data (radix: 2)
 ```nu
-> '1101' | into int -r 2
+> '1101' | into int --radix 2
 13
 ```
 
-Convert to integer from hex
+Convert to int from hex
 ```nu
-> 'FF' |  into int -r 16
+> 'FF' |  into int --radix 16
 255
 ```
 
-Convert octal string to integer
+Convert octal string to int
 ```nu
 > '0o10132' | into int
 4186
 ```
 
-Convert 0 padded string to integer
+Convert 0 padded string to int
 ```nu
 > '0010132' | into int
 10132
 ```
 
-Convert 0 padded string to integer with radix
+Convert 0 padded string to int with radix 8
 ```nu
-> '0010132' | into int -r 8
+> '0010132' | into int --radix 8
 4186
 ```

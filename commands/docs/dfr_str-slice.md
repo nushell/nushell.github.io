@@ -2,7 +2,7 @@
 title: dfr str-slice
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Slices the string from the start position until the selected length.
 usage: |
@@ -37,7 +37,7 @@ usage: |
 
 Creates slices from the strings
 ```nu
-> [abcded abc321 abc123] | dfr into-df | dfr str-slice 1 -l 2
+> [abcded abc321 abc123] | dfr into-df | dfr str-slice 1 --length 2
 ╭───┬────╮
 │ # │ 0  │
 ├───┼────┤

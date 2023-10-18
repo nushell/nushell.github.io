@@ -2,7 +2,7 @@
 title: dfr replace-all
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Replace all (sub)strings by a regex pattern.
 usage: |
@@ -34,7 +34,7 @@ usage: |
 
 Replaces string
 ```nu
-> [abac abac abac] | dfr into-df | dfr replace-all -p a -r A
+> [abac abac abac] | dfr into-df | dfr replace-all --pattern a --replace A
 ╭───┬──────╮
 │ # │  0   │
 ├───┼──────┤

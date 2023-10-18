@@ -2,7 +2,7 @@
 title: with-env
 categories: |
   env
-version: 0.85.0
+version: 0.86.0
 env: |
   Runs a block with an environment variable set.
 usage: |

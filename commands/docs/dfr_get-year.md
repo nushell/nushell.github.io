@@ -2,7 +2,7 @@
 title: dfr get-year
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Gets year from date.
 usage: |
@@ -29,7 +29,7 @@ usage: |
 
 Returns year from a date
 ```nu
-> let dt = ('2020-08-04T16:39:18+00:00' | into datetime -z 'UTC');
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
     let df = ([$dt $dt] | dfr into-df);
     $df | dfr get-year
 ╭───┬──────╮

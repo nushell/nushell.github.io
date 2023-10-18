@@ -2,7 +2,7 @@
 title: dfr first
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Show only the first number of rows or create a first expression
 usage: |

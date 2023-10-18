@@ -2,7 +2,7 @@
 title: kill
 categories: |
   platform
-version: 0.85.0
+version: 0.86.0
 platform: |
   Kill a process using the process id.
 usage: |

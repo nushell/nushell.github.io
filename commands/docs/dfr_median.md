@@ -2,7 +2,7 @@
 title: dfr median
 categories: |
   lazyframe
-version: 0.85.0
+version: 0.86.0
 lazyframe: |
   Aggregates columns to their median value
 usage: |

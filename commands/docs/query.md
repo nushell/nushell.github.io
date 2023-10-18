@@ -2,7 +2,7 @@
 title: query
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Show all the query commands
 usage: |
@@ -16,7 +16,7 @@ usage: |
 
 ## Signature
 
-```> query ```
+```> query {flags} ```
 
 
 ## Input/output types:

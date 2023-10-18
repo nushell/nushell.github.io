@@ -2,7 +2,7 @@
 title: into binary
 categories: |
   conversions
-version: 0.85.0
+version: 0.86.0
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -89,7 +89,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-convert an integer to a nushell binary primitive with compact enabled
+convert an int to a nushell binary primitive with compact enabled
 ```nu
 > 10 | into binary --compact
 Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii

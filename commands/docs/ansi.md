@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.85.0
+version: 0.86.0
 platform: |
   Output ANSI codes to change color and style of text.
 usage: |
@@ -93,6 +93,7 @@ Escape sequences usual values:
 │  3 │ foreground │     33 │     93 │ yellow  │
 │  4 │ foreground │     34 │     94 │ blue    │
 │  5 │ foreground │     35 │     95 │ magenta │
+│  5 │ foreground │     35 │     95 │ purple  │
 │  6 │ foreground │     36 │     96 │ cyan    │
 │  7 │ foreground │     37 │     97 │ white   │
 │  8 │ foreground │     39 │        │ default │
@@ -102,6 +103,7 @@ Escape sequences usual values:
 │ 12 │ background │     43 │    103 │ yellow  │
 │ 13 │ background │     44 │    104 │ blue    │
 │ 14 │ background │     45 │    105 │ magenta │
+│ 14 │ background │     45 │    105 │ purple  │
 │ 15 │ background │     46 │    106 │ cyan    │
 │ 16 │ background │     47 │    107 │ white   │
 │ 17 │ background │     49 │        │ default │

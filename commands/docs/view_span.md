@@ -2,7 +2,7 @@
 title: view span
 categories: |
   debug
-version: 0.85.0
+version: 0.86.0
 debug: |
   View the contents of a span.
 usage: |
@@ -32,9 +32,9 @@ usage: |
 
 ## Examples
 
-View the source of a span. 1 and 2 are just example values. Use the return of debug -r to get the actual values
+View the source of a span. 1 and 2 are just example values. Use the return of debug --raw to get the actual values
 ```nu
-> some | pipeline | or | variable | debug -r; view span 1 2
+> some | pipeline | or | variable | debug --raw; view span 1 2
 
 ```
 

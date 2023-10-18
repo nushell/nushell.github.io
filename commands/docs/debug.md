@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.85.0
+version: 0.86.0
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -57,3 +57,10 @@ Debug print a table
 ╰───┴────────────────────────────────╯
 
 ```
+
+
+## Subcommands:
+
+| name                                         | type    | usage                     |
+| -------------------------------------------- | ------- | ------------------------- |
+| [`debug info`](/commands/docs/debug_info.md) | Builtin | View process memory info. |

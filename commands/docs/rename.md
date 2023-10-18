@@ -2,7 +2,7 @@
 title: rename
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Creates a new table with columns renamed.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--column, -c {list<string>}`: column name to be changed
+ -  `--column, -c {record}`: column name to be changed
  -  `--block, -b {closure(any)}`: A closure to apply changes on each column
 
 ## Parameters
@@ -60,7 +60,7 @@ Rename many columns
 
 Rename a specific column
 ```nu
-> [[a, b, c]; [1, 2, 3]] | rename -c [a ham]
+> [[a, b, c]; [1, 2, 3]] | rename --column { a: ham }
 ╭───┬─────┬───┬───╮
 │ # │ ham │ b │ c │
 ├───┼─────┼───┼───┤
@@ -80,7 +80,7 @@ Rename the fields of a record
 
 Rename fields based on a given closure
 ```nu
-> {abc: 1, bbc: 2} | rename -b {str replace -a 'b' 'z'}
+> {abc: 1, bbc: 2} | rename --block {str replace --all 'b' 'z'}
 ╭─────┬───╮
 │ azc │ 1 │
 │ zzc │ 2 │

@@ -2,7 +2,7 @@
 title: first
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
 usage: |

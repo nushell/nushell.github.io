@@ -2,7 +2,7 @@
 title: export def
 categories: |
   core
-version: 0.85.0
+version: 0.86.0
 core: |
   Define a custom command and export it from a module.
 usage: |
@@ -16,11 +16,16 @@ usage: |
 
 ## Signature
 
-```> export def {flags} (name) (params) (block)```
+```> export def {flags} (def_name) (params) (block)```
+
+## Flags
+
+ -  `--env, -`: keep the environment defined inside the command
+ -  `--wrapped, -`: treat unknown flags and arguments as strings (requires ...rest-like parameter in signature)
 
 ## Parameters
 
- -  `name`: definition name
+ -  `def_name`: command name
  -  `params`: parameters
  -  `block`: body of the definition
 

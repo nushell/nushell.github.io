@@ -2,7 +2,7 @@
 title: def
 categories: |
   core
-version: 0.85.0
+version: 0.86.0
 core: |
   Define a custom command.
 usage: |
@@ -16,13 +16,18 @@ usage: |
 
 ## Signature
 
-```> def {flags} (def_name) (params) (body)```
+```> def {flags} (def_name) (params) (block)```
+
+## Flags
+
+ -  `--env, -`: keep the environment defined inside the command
+ -  `--wrapped, -`: treat unknown flags and arguments as strings (requires ...rest-like parameter in signature)
 
 ## Parameters
 
- -  `def_name`: definition name
+ -  `def_name`: command name
  -  `params`: parameters
- -  `body`: body of the definition
+ -  `block`: body of the definition
 
 
 ## Input/output types:
@@ -43,6 +48,21 @@ Define a command and run it with parameter(s)
 ```nu
 > def say-sth [sth: string] { echo $sth }; say-sth hi
 hi
+```
+
+Set environment variable by call a custom command
+```nu
+> def --env foo [] { $env.BAR = "BAZ" }; foo; $env.BAR
+BAZ
+```
+
+Define a custom wrapper for an external command
+```nu
+> def --wrapped my-echo [...rest] { echo $rest }; my-echo spam
+╭───┬──────╮
+│ 0 │ spam │
+╰───┴──────╯
+
 ```
 
 ## Notes

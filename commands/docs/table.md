@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.85.0
+version: 0.86.0
 viewers: |
   Render the table.
 usage: |
@@ -29,6 +29,7 @@ usage: |
  -  `--flatten-separator, - {string}`: sets a separator when 'flatten' used
  -  `--collapse, -c`: expand the table structure in collapse mode.
 Be aware collapse mode currently doesn't support width control
+ -  `--abbreviated, -a {int}`: abbreviate the data in the table by truncating the middle part and only showing amount provided on top and bottom
 
 
 ## Input/output types:
@@ -60,30 +61,24 @@ Render data in table view
 Render data in table view (expanded)
 ```nu
 > [[a b]; [1 2] [2 [4 4]]] | table --expand
-╭───┬───┬───────────╮
-│ # │ a │     b     │
-├───┼───┼───────────┤
-│ 0 │ 1 │         2 │
-│ 1 │ 2 │ ╭───┬───╮ │
-│   │   │ │ 0 │ 4 │ │
-│   │   │ │ 1 │ 4 │ │
-│   │   │ ╰───┴───╯ │
-╰───┴───┴───────────╯
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
 
 ```
 
 Render data in table view (collapsed)
 ```nu
 > [[a b]; [1 2] [2 [4 4]]] | table --collapse
-╭───┬───╮
-│ a │ b │
-├───┼───┤
-│ 1 │ 2 │
-├───┼───┤
-│ 2 │ 4 │
-│   ├───┤
-│   │ 4 │
-╰───┴───╯
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
 
 ```
 

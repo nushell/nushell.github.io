@@ -2,7 +2,7 @@
 title: split list
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Split a list into multiple lists using a separator.
 usage: |
@@ -93,7 +93,7 @@ Split a list of chars into two lists
 
 Split a list of chars into lists based on multiple characters
 ```nu
-> [a, b, c, d, a, e, f, g] | split list -r '(b|e)'
+> [a, b, c, d, a, e, f, g] | split list --regex '(b|e)'
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
 │   │ │ 0 │ a │ │

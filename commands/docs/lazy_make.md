@@ -2,7 +2,7 @@
 title: lazy make
 categories: |
   core
-version: 0.85.0
+version: 0.86.0
 core: |
   Create a lazy record.
 usage: |
@@ -40,7 +40,7 @@ Create a lazy record
 
 Test the laziness of lazy records
 ```nu
-> lazy make -c ["hello"] -g { |key| print $"getting ($key)!"; $key | str upcase }
+> lazy make --columns ["hello"] --get-value { |key| print $"getting ($key)!"; $key | str upcase }
 
 ```
 

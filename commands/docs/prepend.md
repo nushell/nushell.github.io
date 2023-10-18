@@ -2,7 +2,7 @@
 title: prepend
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Prepend any number of rows to a table.
 usage: |
@@ -53,7 +53,7 @@ Prepend a list of strings to a string
 
 ```
 
-Prepend one integer item
+Prepend one int item
 ```nu
 > [1 2 3 4] | prepend 0
 ╭───┬───╮
@@ -66,7 +66,7 @@ Prepend one integer item
 
 ```
 
-Prepend two integer items
+Prepend two int items
 ```nu
 > [2 3 4] | prepend [0 1]
 ╭───┬───╮
@@ -79,7 +79,7 @@ Prepend two integer items
 
 ```
 
-Prepend integers and strings
+Prepend ints and strings
 ```nu
 > [2 nu 4 shell] | prepend [0 1 rocks]
 ╭───┬───────╮

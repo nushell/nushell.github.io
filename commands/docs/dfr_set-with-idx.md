@@ -2,7 +2,7 @@
 title: dfr set-with-idx
 categories: |
   dataframe
-version: 0.85.0
+version: 0.86.0
 dataframe: |
   Sets value in the given index.
 usage: |
@@ -39,7 +39,7 @@ Set value in selected rows from series
 ```nu
 > let series = ([4 1 5 2 4 3] | dfr into-df);
     let indices = ([0 2] | dfr into-df);
-    $series | dfr set-with-idx 6 -i $indices
+    $series | dfr set-with-idx 6 --indices $indices
 ╭───┬───╮
 │ # │ 0 │
 ├───┼───┤

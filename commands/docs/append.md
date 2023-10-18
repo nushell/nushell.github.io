@@ -2,7 +2,7 @@
 title: append
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Append any number of rows to a table.
 usage: |
@@ -31,7 +31,7 @@ usage: |
 
 ## Examples
 
-Append one integer to a list
+Append one int to a list
 ```nu
 > [0 1 2 3] | append 4
 ╭───┬───╮
@@ -66,7 +66,7 @@ Append a list of string to a string
 
 ```
 
-Append three integer items
+Append three int items
 ```nu
 > [0 1] | append [2 3 4]
 ╭───┬───╮
@@ -79,7 +79,7 @@ Append three integer items
 
 ```
 
-Append integers and strings
+Append ints and strings
 ```nu
 > [0 1] | append [2 nu 4 shell]
 ╭───┬───────╮
@@ -93,7 +93,7 @@ Append integers and strings
 
 ```
 
-Append a range of integers to a list
+Append a range of ints to a list
 ```nu
 > [0 1] | append 2..4
 ╭───┬───╮

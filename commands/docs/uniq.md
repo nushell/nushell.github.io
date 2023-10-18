@@ -2,7 +2,7 @@
 title: uniq
 categories: |
   filters
-version: 0.85.0
+version: 0.86.0
 filters: |
   Return the distinct values in the input.
 usage: |
@@ -56,7 +56,7 @@ Return the input values that occur more than once
 
 Return the input values that occur once only
 ```nu
-> [1 2 2] | uniq -u
+> [1 2 2] | uniq --unique
 ╭───┬───╮
 │ 0 │ 1 │
 ╰───┴───╯
@@ -65,7 +65,7 @@ Return the input values that occur once only
 
 Ignore differences in case when comparing input values
 ```nu
-> ['hello' 'goodbye' 'Hello'] | uniq -i
+> ['hello' 'goodbye' 'Hello'] | uniq --ignore-case
 ╭───┬─────────╮
 │ 0 │ hello   │
 │ 1 │ goodbye │
@@ -75,7 +75,7 @@ Ignore differences in case when comparing input values
 
 Return a table containing the distinct input values together with their counts
 ```nu
-> [1 2 2] | uniq -c
+> [1 2 2] | uniq --count
 ╭───┬───────┬───────╮
 │ # │ value │ count │
 ├───┼───────┼───────┤
