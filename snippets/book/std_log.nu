@@ -1,8 +1,4 @@
-use std 'log debug'
-use std 'log info'
-use std 'log warning'
-use std 'log error'
-use std 'log critical'
+use std log
 
 def main [] {
     log debug "Debug message"
