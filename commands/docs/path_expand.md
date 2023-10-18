@@ -34,22 +34,22 @@ usage: |
 
 Expand an absolute path
 ```nu
-> 'C:\Users\joe\foo\..\bar' | path expand
-C:\Users\joe\bar
+> '/home/joe/foo/../bar' | path expand
+/home/joe/bar
 ```
 
 Expand a relative path
 ```nu
-> 'foo\..\bar' | path expand
+> 'foo/../bar' | path expand
 
 ```
 
 Expand a list of paths
 ```nu
-> [ C:\foo\..\bar, C:\foo\..\baz ] | path expand
-╭───┬────────╮
-│ 0 │ C:\bar │
-│ 1 │ C:\baz │
-╰───┴────────╯
+> [ /foo/../bar, /foo/../baz ] | path expand
+╭───┬──────╮
+│ 0 │ /bar │
+│ 1 │ /baz │
+╰───┴──────╯
 
 ```

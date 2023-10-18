@@ -22,6 +22,7 @@ usage: |
 
  -  `--force, -f`: forcefully kill the process
  -  `--quiet, -q`: won't print anything to the console
+ -  `--signal, -s {int}`: signal decimal number to be sent instead of the default 15 (unsupported on Windows)
 
 ## Parameters
 
@@ -46,5 +47,11 @@ Kill the pid using the most memory
 Force kill a given pid
 ```nu
 > kill --force 12345
+
+```
+
+Send INT signal
+```nu
+> kill -s 2 12345
 
 ```

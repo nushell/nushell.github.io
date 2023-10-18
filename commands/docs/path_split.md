@@ -29,10 +29,10 @@ usage: |
 
 Split a path into parts
 ```nu
-> 'C:\Users\viking\spam.txt' | path split
+> '/home/viking/spam.txt' | path split
 ╭───┬──────────╮
-│ 0 │ C:\      │
-│ 1 │ Users    │
+│ 0 │ /        │
+│ 1 │ home     │
 │ 2 │ viking   │
 │ 3 │ spam.txt │
 ╰───┴──────────╯
@@ -41,17 +41,17 @@ Split a path into parts
 
 Split paths in list into parts
 ```nu
-> [ C:\Users\viking\spam.txt C:\Users\viking\eggs.txt ] | path split
+> [ /home/viking/spam.txt /home/viking/eggs.txt ] | path split
 ╭───┬──────────────────╮
 │ 0 │ ╭───┬──────────╮ │
-│   │ │ 0 │ C:\      │ │
-│   │ │ 1 │ Users    │ │
+│   │ │ 0 │ /        │ │
+│   │ │ 1 │ home     │ │
 │   │ │ 2 │ viking   │ │
 │   │ │ 3 │ spam.txt │ │
 │   │ ╰───┴──────────╯ │
 │ 1 │ ╭───┬──────────╮ │
-│   │ │ 0 │ C:\      │ │
-│   │ │ 1 │ Users    │ │
+│   │ │ 0 │ /        │ │
+│   │ │ 1 │ home     │ │
 │   │ │ 2 │ viking   │ │
 │   │ │ 3 │ eggs.txt │ │
 │   │ ╰───┴──────────╯ │

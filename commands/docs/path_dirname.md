@@ -34,28 +34,28 @@ usage: |
 
 Get dirname of a path
 ```nu
-> 'C:\Users\joe\code\test.txt' | path dirname
-C:\Users\joe\code
+> '/home/joe/code/test.txt' | path dirname
+/home/joe/code
 ```
 
 Get dirname of a list of paths
 ```nu
-> [ C:\Users\joe\test.txt, C:\Users\doe\test.txt ] | path dirname
-╭───┬──────────────╮
-│ 0 │ C:\Users\joe │
-│ 1 │ C:\Users\doe │
-╰───┴──────────────╯
+> [ /home/joe/test.txt, /home/doe/test.txt ] | path dirname
+╭───┬───────────╮
+│ 0 │ /home/joe │
+│ 1 │ /home/doe │
+╰───┴───────────╯
 
 ```
 
 Walk up two levels
 ```nu
-> 'C:\Users\joe\code\test.txt' | path dirname -n 2
-C:\Users\joe
+> '/home/joe/code/test.txt' | path dirname -n 2
+/home/joe
 ```
 
 Replace the part that would be returned with a custom path
 ```nu
-> 'C:\Users\joe\code\test.txt' | path dirname -n 2 -r C:\Users\viking
-C:\Users\viking\code\test.txt
+> '/home/joe/code/test.txt' | path dirname -n 2 -r /home/viking
+/home/viking/code/test.txt
 ```
