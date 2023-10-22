@@ -342,6 +342,26 @@ def greet [vip: string, ...name: string] {
 greet moon earth mars jupiter venus
 ```
 
+>>> MY BIT STARTS HERE
+
+If you have many flags, or conditional flags and options, "wrap" the call with the `--wrapped` modifier.
+
+```nu
+def --wrapped greeting [...rest: string] {
+  $rest | split row " "
+}
+
+greeting first-name=taylor last-name=swift --age=33
+
+╭───┬───────────────────╮
+│ 0 │ first-name=taylor │
+│ 1 │ last-name=swift   │
+│ 2 │ --age=33          │
+╰───┴───────────────────╯
+```
+
+>>> AND ENDS HERE
+
 ## Documenting your command
 
 In order to best help users of your custom commands, you can also document them with additional descriptions for the commands and parameters.
