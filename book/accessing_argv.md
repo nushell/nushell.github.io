@@ -15,7 +15,7 @@ def main [
 ```
 
 ```nu
-nu supercar.nu manuf ferrari model F40 -f
+nu supercar.nu manuf=ferrari model=F40 -f
 
 ╭───┬───────────────╮
 │ 0 │ manuf=ferrari │

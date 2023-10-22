@@ -342,8 +342,6 @@ def greet [vip: string, ...name: string] {
 greet moon earth mars jupiter venus
 ```
 
->>> MY BIT STARTS HERE
-
 If you have many flags, or conditional flags and options, "wrap" the call with the `--wrapped` modifier.
 
 ```nu
@@ -359,8 +357,6 @@ greeting first-name=taylor last-name=swift --age=33
 │ 2 │ --age=33          │
 ╰───┴───────────────────╯
 ```
-
->>> AND ENDS HERE
 
 ## Documenting your command
 
