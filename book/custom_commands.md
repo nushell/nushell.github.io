@@ -111,30 +111,29 @@ error: Type Error
 
 This can help you guide users of your definitions to call them with only the supported types.
 
-The currently accepted types are (as of version 0.65.0):
+The currently accepted types are (as of version 0.86.0):
 
 - `any`
-- `block`
+- `binary`
+- `bool`
 - `cell-path`
+- `closure`
+- `datetime`
+- `directory`
 - `duration`
-- `path`
-- `expr`
+- `error`
 - `filesize`
+- `float`
 - `glob`
 - `int`
-- `math`
-- `number`
-- `operator`
-- `range`
-- `cond`
-- `bool`
-- `signature`
-- `string`
-- `variable`
-- `record`
 - `list`
+- `nothing`
+- `number`
+- `path`
+- `range`
+- `record`
+- `string`
 - `table`
-- `error`
 
 ## Parameters with a default value
 
