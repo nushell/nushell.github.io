@@ -24,7 +24,11 @@ In Nushell, we also support double `*` to talk about traversing deeper paths tha
 
 Here, we're looking for any file that ends with ".md", and the two asterisks further say "in any directory starting from here".
 
-In addition to `*`, there is also the `?` pattern which will match a single character. For example, you can match the word "port" by using the pattern `p???`.
+In other shells (like bash), glob expansion happens in the shell and the invoked program (`ls` in the example above) receives a list of matched files. In Nushell however, the string you enter is passed "as is" to the command, and some commands (like `ls`, `mv`, `cp` and `rm`) interpret their input string as a glob pattern. For example the [`ls` command's help page](https://www.nushell.sh/commands/docs/ls.html) shows that it takes the parameter: `pattern: the glob pattern to use (optional)`.
+
+Globbing syntax in these commands not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html). Note that this is a more limited syntax than what the dedicated [`glob` Nushell command](https://www.nushell.sh/commands/docs/glob.html) supports.
+
+Escaping `*` or `?` [currently](https://github.com/nushell/nushell/issues/9558) works by wrapping them in brackets (e.g. `[?]`). And to show the contents of a directory named `[slug]`, use `ls [[]slug]`.
 
 ## Changing the current directory
 
