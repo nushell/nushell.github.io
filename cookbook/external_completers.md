@@ -42,7 +42,7 @@ let zoxide_completer = {|spans|
 }
 ```
 
-This completer is not usable for allmost every other command, so it's recommended to add it as an override in the [multiple completer](#multiple-completer):
+This completer is not usable for almost every other command, so it's recommended to add it as an override in the [multiple completer](#multiple-completer):
 
 ```nu
 {
