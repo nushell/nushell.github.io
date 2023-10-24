@@ -15,7 +15,7 @@ def main [
 ```
 
 ```nu
-nu supercar.nu manuf=ferrari model=F40 -f
+nu supercar.nu manuf ferrari model F40 -f
 
 ╭───┬───────────────╮
 │ 0 │ manuf=ferrari │
@@ -54,19 +54,19 @@ nu supercar.nu manuf=ferrari model=F40 -f --color=red
 │ 4 │ red           │
 ╰───┴───────────────╯
 
-nu supercar.nu manuf=citroen model=2cv --num-cylinders=2
+nu supercar.nu manuf=citroen model=2cv --num-cylinders=2 --color=yellow
 ╭───┬───────────────╮
 │ 0 │ manuf=citroen │
 │ 1 │ model=2cv     │
 │ 2 │ false         │
 │ 3 │             2 │
-│ 4 │               │
+│ 4 │ yellow        │
 ╰───┴───────────────╯
 ```
 
-If your CLI requires subcommands the parameter list becomes very cumbersome. If you *wrap* your `main` command with the `--wrapped` modifier, Nushell will wrap the additional parameters.
+If your CLI requires subcommands the parameter list becomes very cumbersome. If you _wrap_ your `main` command with the `--wrapped` modifier, Nushell will wrap the additional parameters.
 
-```nu
+````nu
 def --wrapped main [
   manuf: string
   model: string
@@ -81,18 +81,16 @@ nu supercar.nu manuf=ferrari model=F40 -f --color=red --description="Rare Italia
 │ 0 │ manuf=ferrari                          │
 │ 1 │ model=F40                              │
 │ 2 │ true                                   │
-│ 3 │                                        │
 │ 4 │ red                                    │
 │ 5 │ --description=`Rare Italian sportscar` │
 ╰───┴────────────────────────────────────────╯
 
 nu supercar.nu manuf=citroen model=2cv --num-cylinders=2 --color=yellow --description="Delightful but slow to drive"
-╭───┬──────────────────────────────────────────────╮
-│ 0 │ manuf=citroen                                │
-│ 1 │ model=2cv                                    │
-│ 2 │ false                                        │
-│ 3 │                                            2 │
-│ 4 │ yellow                                       │
-│ 5 │ --description=`Delightful but slow to drive` │
-╰───┴──────────────────────────────────────────────╯
-```
+╭───┬───────────────────╮
+│ 0 │ manuf=citroen     │
+│ 1 │ model=2cv         │
+│ 2 │ false             │
+│ 3 │ --num-cylinders=2 │
+│ 4 │ --color=yellow    │
+╰───┴───────────────────╯```
+````

@@ -45,6 +45,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/variables_and_subexpressions.md',
         '/book/scripts.md',
         '/book/modules.md',
+        '/book/accessing_argv.md',
         '/book/overlays.md',
         '/book/command_signature.md',
         '/book/testing.md',
