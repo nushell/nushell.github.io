@@ -348,13 +348,16 @@ def --wrapped greeting [...rest: string] {
   $rest | split row " "
 }
 
-greeting first-name=taylor last-name=swift --age=33
+greeting first-name taylor last-name swift --age 33
 
-╭───┬───────────────────╮
-│ 0 │ first-name=taylor │
-│ 1 │ last-name=swift   │
-│ 2 │ --age=33          │
-╰───┴───────────────────╯
+╭───┬────────────╮
+│ 0 │ first-name │
+│ 1 │ taylor     │
+│ 2 │ last-name  │
+│ 3 │ swift      │
+│ 4 │ --age      │
+│ 5 │ 33         │
+╰───┴────────────╯
 ```
 
 ## Documenting your command
