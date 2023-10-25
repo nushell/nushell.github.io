@@ -554,3 +554,9 @@ $env.config = {
 }
 
 ```
+
+## Line editor menus (completion, history, help…)
+
+Reedline (Nu’s line editor) style is not using the `color_config` key.
+Instead, each menu has its own style to be configured separately.
+See the [section dedicated to Reedline’s menus configuration](line_editor.md#menus) to learn more on this.
