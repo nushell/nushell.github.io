@@ -73,6 +73,33 @@ def main [x: int] {
 110
 ```
 
+## Subcommands
+
+A script can have multiple sub-commands like `run`, `build`, etc. which allows to execute a specific main sub-function. The important part is to expose them correctly with `def main [] {}`. See more details in the [Custom Command](custom_commands.html#sub-commands) section.
+
+For example:
+
+```nu
+# myscript.nu
+def "main run" [] {
+    print "running"
+}
+
+def "main build" [] {
+    print "building"
+}
+
+# important for the command to be exposed to the outside
+def main [] {}
+```
+
+```nu
+> nu myscript.nu build
+building
+> nu myscript.nu run
+running
+```
+
 ## Shebangs (`#!`)
 
 On Linux and macOS you can optionally use a [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) to tell the OS that a file should be interpreted by Nu. For example, with the following in a file named `myscript`:
