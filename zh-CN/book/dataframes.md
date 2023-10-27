@@ -1,7 +1,7 @@
 # DataFrames
 
 ::: warning
-要使用数据框支持，您需要使用 `cargo build --features dataframe` 构建一个具有完整功能的版本。从版本 0.72 开始，Nushell 的二进制发布版本中 *不* 包含数据框。[请参阅安装说明](/book/installation.md) 以获取更多详细信息。
+要使用`DataFrame`支持，您需要使用 `cargo build --features dataframe` 构建一个具有完整功能的版本。从版本 0.72 开始，Nushell 的二进制发布版本中 *不* 包含`DataFrame`。[请参阅安装说明](/book/installation.md) 以获取更多详细信息。
 :::
 
 正如我们到目前为止所看到的，Nushell 把数据处理作为其主要任务。`Lists` 和 `Tables`的存在是为了帮助你循环处理值，以便执行多种操作或轻而易举地找到数据。然而，在某些操作中，基于行的数据布局并不是处理数据的最有效方式，特别是在处理极其庞大的文件时。对于大型数据集的`group-by`或`join`等操作，如果不使用适当的数据格式，会占用大量的内存，并可能耗费大量的计算时间。
