@@ -38,20 +38,20 @@ usage: |
 
 Select a column in a table
 ```nu
-> [{a: a b: b}] | select a
+> [{a: 1 b: 2}] | select a
 ╭───┬───╮
 │ # │ a │
 ├───┼───┤
-│ 0 │ a │
+│ 0 │ 1 │
 ╰───┴───╯
 
 ```
 
 Select a field in a record
 ```nu
-> {a: a b: b} | select a
+> {a: 1 b: 2} | select a
 ╭───┬───╮
-│ a │ a │
+│ a │ 1 │
 ╰───┴───╯
 ```
 
