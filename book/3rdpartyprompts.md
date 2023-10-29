@@ -56,6 +56,16 @@ $env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 2. Install nerdfonts depending on your preferences.
 3. Use the config example below. Make sure to set the `STARSHIP_SHELL` environment variable.
 
+::: tip
+An alternate way to enable Starship is described in the [Starship Quick Install](https://starship.rs/#nushell) instructions.
+
+The link above is the official integration of Starship and Nushell and is the simplest way to get
+Starship running without doing anything manual:
+
+- Starship will create its own configuration / environment setup script
+- you simply have to create it in `env.nu` and `use` it in `config.nu`
+  :::
+
 Here's an example config section for Starship:
 
 ```nu
@@ -83,10 +93,6 @@ Now restart Nu.
 nushell on 📙 main is 📦 v0.60.0 via 🦀 v1.59.0
 ❯
 ```
-
-You can learn more about configuring Starship in the [official starship configuration documentation](https://github.com/starship/starship#step-2-setup-your-shell-to-use-starship).
-
-An alternate way to enable Starship is described in the [Starship Quick Install](https://starship.rs/#nushell) instructions.
 
 ## Purs
 
