@@ -520,18 +520,18 @@ Nushell's default config file contains a light theme definition, if you are work
 # in $nu.config-path
 $env.config = {
   ...
-  color_config: $dark_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  color_config: $env.DARK_THEME   # if you want a light theme, replace `$env.DARK_THEME` to `$env.LIGHT_THEME`
   ...
 }
 ```
 
-You can just change it to light theme by replacing `$dark_theme` to `$light_theme`
+You can just change it to light theme by replacing `$env.DARK_THEME` to `$env.LIGHT_THEME`
 
 ```nu
 # in $nu.config-path
 $env.config = {
   ...
-  color_config: $light_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  color_config: $env.LIGHT_THEME   # if you want a light theme, replace `$env.DARK_THEME` to `$env.LIGHT_THEME`
   ...
 }
 ```

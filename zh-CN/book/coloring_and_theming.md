@@ -492,18 +492,18 @@ Nushell 的默认配置文件包含一个浅色主题定义，如果你在浅色
 # in $nu.config-file
 $env.config = {
   ...
-  color_config: $dark_theme   # 如果你需要浅色主题, 可以将 `$dark_theme` 替换为 `$light_theme`
+  color_config: $env.DARK_THEME   # 如果你需要浅色主题, 可以将 `$env.DARK_THEME` 替换为 `$env.LIGHT_THEME`
   ...
 }
 ```
 
-你只需要将 `$dark_theme` 替换为 `$light_theme` 就可以切换到浅色主题了：
+你只需要将 `$env.DARK_THEME` 替换为 `$env.LIGHT_THEME` 就可以切换到浅色主题了：
 
 ```nu
 # in $nu.config-file
 $env.config = {
   ...
-  color_config: $light_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  color_config: $env.LIGHT_THEME   # if you want a light theme, replace `$dark_theme` to `$env.LIGHT_THEME`
   ...
 }
 ```
