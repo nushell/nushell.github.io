@@ -73,6 +73,34 @@ def main [x: int] {
 110
 ```
 
+## Argument Type Interpretation
+
+By default, arguments provided to a script are interpreted with the type `Type::Any`, implying that they are not constrained to a specific data type and can be dynamically interpreted as fitting any of the available data types during script execution. 
+
+In the previous example, `main [x: int]` denotes that the argument x should possess an integer data type. However, if arguments are not explicitly typed, they will be parsed according to their apparent data type. 
+
+For example:
+
+```nu
+# implicit_type.nu
+def main [x] {
+  $"Hello ($x | describe) ($x)"
+}
+
+# explicit_type.nu
+def main [x: string] {
+  $"Hello ($x | describe) ($x)"
+}
+```
+
+```nu
+> nu implicit_type.nu +1
+Hello int 1
+
+> nu explicit_type.nu +1
+Hello string +1
+```
+
 ## Subcommands
 
 A script can have multiple sub-commands like `run`, `build`, etc. which allows to execute a specific main sub-function. The important part is to expose them correctly with `def main [] {}`. See more details in the [Custom Command](custom_commands.html#sub-commands) section.
