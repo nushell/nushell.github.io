@@ -165,7 +165,7 @@ For instance, the above example sets the `$env.config.table.mode` configuration 
 ```
 
 Because Nushell `$env` variables are [scoped](http://localhost:8080/book/environment.html#scoping), this means that the `table` command in the example is not affected by the
-environemnt modification inside the `do` block and the data will not be shown with the applied configuration.
+environment modification inside the `do` block and the data will not be shown with the applied configuration.
 
 When displaying data early is desired, one may use `print` command:
 
