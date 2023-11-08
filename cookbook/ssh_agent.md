@@ -27,11 +27,11 @@ You can work around this behavior by checking if a ssh-agent is already running 
 
 ```nushell
 # exemple for env.nu
-let sshAgentTmpFile = $"/tmp/ssh-agent-($env.USER).nuon"
+let sshAgentFilePath = $"/tmp/ssh-agent-($env.USER).nuon"
 
-if ($sshAgentTmpFile | path exists) {
+if ($sshAgentFilePath | path exists) and ($"/proc/((open $sshAgentFilePath).SSH_AGENT_PID)" | path exists) {
     # loading it
-    load-env (open $sshAgentTmpFile)
+    load-env (open $sshAgentFilePath)
 } else {
     # creating it
     ^ssh-agent -c
@@ -40,8 +40,8 @@ if ($sshAgentTmpFile | path exists) {
         | parse "setenv {name} {value};"
         | transpose -r
         | into record
-        | save $sshAgentTmpFile
-    load-env (open $sshAgentTmpFile)
+        | save --force $sshAgentFilePath
+    load-env (open $sshAgentFilePath)
 }
 ```
 
