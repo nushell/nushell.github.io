@@ -85,12 +85,14 @@ And the pipeline:
 Are one and the same.
 
 > **Note**
-> the sentence *are one and the same* above only applies for the graphical output in the shell,
+> the sentence _are one and the same_ above only applies for the graphical output in the shell,
 > it does not mean the two data structures are them same
+>
 > ```nushell
 > > (ls) == (ls | table)
 > false
 > ```
+>
 > `ls | table` is not even structured data!
 
 ## Output result to external commands
@@ -137,4 +139,36 @@ drwxr-xr-x@  4 pengs  admin   128 14 Nov 13:42 en
 
 ```nu
 > ls /usr/share/nvim/runtime/ | get name | find tutor | ^ls -al $in
+```
+
+## Command Output in Nushell
+
+Unlike external commands, Nushell commands are akin to functions. Most Nushell commands do not print anything to `stdout` and instead just return data.
+
+```nu
+> do { ls; ls; ls; "What?!" }
+```
+
+This means that the above code will not display the files under the current directory three times.
+In fact, running this in the shell will only display `"What?!"` because that is the value returned by the `do` command in this example. However, using the system `^ls` command instead of `ls` would indeed print the directory thrice because `^ls` does print its result once it runs.
+
+Knowing when data is displayed is important when using configuration variables that affect the display output of commands such as `table`.
+
+```nu
+> do { $env.config.table.mode = none; ls }
+```
+
+For instance, the above example sets the `$env.config.table.mode` configuration variable to `none`, which causes the `table` command to render data without additional borders. However, as it was shown earlier, the command is effectively equivalent to
+
+```nu
+> do { $env.config.table.mode = none; ls } | table
+```
+
+Because Nushell `$env` variables are [scoped](http://localhost:8080/book/environment.html#scoping), this means that the `table` command in the example is not affected by the
+environemnt modification inside the `do` block and the data will not be shown with the applied configuration.
+
+When displaying data early is desired, one may use `print` command:
+
+```nu
+> do { $env.config.table.mode = none; print(ls) }
 ```
