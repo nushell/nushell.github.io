@@ -17,24 +17,19 @@ To make direnv work with nushell the way it does with other shells, we can use t
 $env.config = {
   hooks: {
     pre_prompt: [{ ||
-        let direnv = (direnv export json | from json | default {})
-        if ($direnv | is-empty) {
-            return
-        }
-        $direnv
-        | items {|key, value|
-           {
-              key: $key
-              value: (if $key in $env.ENV_CONVERSIONS {
-                do ($env.ENV_CONVERSIONS | get $key | get from_string) $value
-              } else {
-                  $value
-              })
-            }
-        } | transpose -ird | load-env
+      if (which direnv | is-empty) {
+        return
+      }
+
+      direnv export json | from json | default {} | load-env
     }]
   }
 }
 ```
+
+::: tip Note
+you can follow the [`nu_scripts` of Nushell](https://github.com/nushell/nu_scripts/blob/main/hooks/direnv/config.nu)
+for the always up-to-date version of the hook above
+:::
 
 With that configuration in place, direnv should now work with nushell.
