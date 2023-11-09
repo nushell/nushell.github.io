@@ -424,7 +424,7 @@ Since directories can be imported as submodules and submodules can naturally for
 A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, similar effect can be achieved via module directories.
 
 1. Create a directory (e.g., `mkdir ($nu.default-config-dir | path join completions)`) and create empty `mod.nu` inside
-2. Add the directory to your NU_LIB_DIRS inside `env.nu`
+2. Add the directory containing the new directory to your NU_LIB_DIRS inside env.nu. For the example in 1. that would be $nu.default-config-dir
 3. Put `use completions *` into your `config.nu`
 
 Now you've set up a directory where you can put your completion files. For example:
