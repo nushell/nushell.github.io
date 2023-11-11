@@ -463,8 +463,9 @@ $env.NU_LIB_DIRS = [
 Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
 
 > **Note**
-> This will use the file name (in our example `git` from `git.nu`) as the modules name. This means completions like the ones found in the [nu scripts](https://github.com/nushell/nu_scripts) repo won't work
-> as you will end up with completions like `git-completions git ...`. You should instead do `use completions git-completions *` which will import the exported definitions of the submodule `git-completions` 
+> This will use the file name (in our example `git` from `git.nu`) as the modules name. This means some completions might not work if the definition has the base command in it's name.
+> For example a complition like this `export extern 'git push' [] {}` in our `git.nu` will result in a completion like this `git git push`. If you have this style of completion you must instead
+> import like this `use completions git *` which will import the exported definitions of the submoudule `git`. 
 
 ### Setting environment + aliases (conda style)
 
