@@ -427,9 +427,9 @@ Here we'll create a simple completion module with a submodule dedicated to some 
 
 1. Create the completion directory
 `mkdir ($nu.default-config-dir | path join completions)`
-2. Create an empty mod.nu for it
+2. Create an empty `mod.nu` for it
 `touch ($nu.default-config-dir | path join completions mod.nu)`
-3. Put the following snippet in git.nu under the completion directory
+3. Put the following snippet in `git.nu` under the completion directory
 ```nu
 export extern main [
     --version(-v)
@@ -451,14 +451,14 @@ def complete-git-branch [] {
     # ... code to list git branches
 }
 ```
-4. Add the parent of the completion directory to your NU_LIB_DIRS inside env.nu
+4. Add the parent of the completion directory to your NU_LIB_DIRS inside `env.nu`
 ```nu
 $env.NU_LIB_DIRS = [
     ...
     $nu.default-config-dir
 ]
 ```
-5. import the completions to Nushell in your config.nu
+5. import the completions to Nushell in your `config.nu`
 `use completions *`
 Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
 
