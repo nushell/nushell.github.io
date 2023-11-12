@@ -464,8 +464,8 @@ Now you've set up a directory where you can put your completion files and you sh
 
 > **Note**
 > This will use the file name (in our example `git` from `git.nu`) as the modules name. This means some completions might not work if the definition has the base command in it's name.
-> For example a completion like this `export extern 'git push' [] {}` in our `git.nu` will result in a completion like this `git git push`. If you have this style of completion you must instead
-> import like this `use completions git *` which will import the exported definitions of the submoudule `git`. 
+> For example a completion like this `export extern 'git push' []` in our `git.nu` will result in a completion like this `git git push`. If you have this style of completion you must instead
+> import like this `use completions git *` which will import the exported definitions of the submoudule `git`. Or simply rename `git push` to just `push`.
 
 ### Setting environment + aliases (conda style)
 
