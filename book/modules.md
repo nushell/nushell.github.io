@@ -423,15 +423,14 @@ Since directories can be imported as submodules and submodules can naturally for
 
 A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, similar effect can be achieved via module directories.
 
-1. Create a directory (e.g., `mkdir ($nu.default-config-dir | path join completions)`) and create empty `mod.nu` inside
-2. Add the directory to your NU_LIB_DIRS inside `env.nu`
-3. Put `use completions *` into your `config.nu`
+Here we'll create a simple completion module with a submodule dedicated to some Git completions:
 
-Now you've set up a directory where you can put your completion files. For example:
-
+1. Create the completion directory
+`mkdir ($nu.default-config-dir | path join completions)`
+2. Create an empty `mod.nu` for it
+`touch ($nu.default-config-dir | path join completions mod.nu)`
+3. Put the following snippet in `git.nu` under the completion directory
 ```nu
-# git.nu
-
 export extern main [
     --version(-v)
     -C: string
@@ -452,8 +451,21 @@ def complete-git-branch [] {
     # ... code to list git branches
 }
 ```
+4. Add the parent of the completion directory to your NU_LIB_DIRS inside `env.nu`
+```nu
+$env.NU_LIB_DIRS = [
+    ...
+    $nu.default-config-dir
+]
+```
+5. import the completions to Nushell in your `config.nu`
+`use completions *`
+Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
 
-If you put this file into the `completions` directory and reload config/Nushell, you should see the `git`, `git add` and `git checkout` commands highlighted with flag completions working.
+> **Note**
+> This will use the file name (in our example `git` from `git.nu`) as the modules name. This means some completions might not work if the definition has the base command in it's name.
+> For example a completion like this `export extern 'git push' []` in our `git.nu` will result in a completion like this `git git push`. If you have this style of completion you must instead
+> import like this `use completions git *` which will import the exported definitions of the submoudule `git`. Or simply rename `git push` to just `push`.
 
 ### Setting environment + aliases (conda style)
 
