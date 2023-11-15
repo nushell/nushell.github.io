@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.86.0
+version: 0.87.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |
@@ -48,13 +48,13 @@ Explore the output of `ls` without column names
 
 Explore a list of Markdown files' contents, with row indexes
 ```nu
-> glob *.md | each {|| open } | explore -i
+> glob *.md | each {|| open } | explore --index
 
 ```
 
 Explore a JSON file, then save the last visited sub-structure to a file
 ```nu
-> open file.json | explore -p | to json | save part.json
+> open file.json | explore --peek | to json | save part.json
 
 ```
 

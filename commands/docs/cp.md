@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.86.0
+version: 0.87.0
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |
@@ -26,6 +26,7 @@ usage: |
                     again (this option is ignored when the -n option is also used).
                     currently not implemented for windows
  -  `--interactive, -i`: ask before overwriting files
+ -  `--update, -u`: copy only when the SOURCE file is newer than the destination file or when the destination file is missing
  -  `--progress, -p`: display a progress bar
  -  `--no-clobber, -n`: do not overwrite an existing file
  -  `--debug, -`: explain how a file is copied. Implies -v
@@ -64,5 +65,11 @@ Recursively copy dir_a to dir_b, and print the feedbacks
 Move many files into a directory
 ```nu
 > cp *.txt dir_a
+
+```
+
+Copy only if source file is newer than target file
+```nu
+> cp -u a b
 
 ```

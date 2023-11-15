@@ -2,7 +2,7 @@
 title: query web
 categories: |
   network
-version: 0.86.0
+version: 0.87.0
 network: |
   execute selector query on html/web
 usage: |
@@ -37,20 +37,20 @@ usage: |
 
 Retrieve all `<header>` elements from phoronix.com website
 ```nu
-> http get https://phoronix.com | query web -q 'header'
+> http get https://phoronix.com | query web --query 'header'
 
 ```
 
 Retrieve a html table from Wikipedia and parse it into a nushell table using table headers as guides
 ```nu
 > http get https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population
-    | query web -t [Rank City 'Population(2011)[3]' 'Population(2001)[3][a]' 'State or union territory']
+    | query web --as-table [Rank City 'Population(2011)[3]' 'Population(2001)[3][a]' 'State or union territory']
 
 ```
 
 Pass multiple css selectors to extract several elements within single query, group the query results together and rotate them to create a table
 ```nu
-> http get https://www.nushell.sh | query web -q 'h2, h2 + p' | group 2 | each {rotate --ccw tagline description} | flatten
+> http get https://www.nushell.sh | query web --query 'h2, h2 + p' | group 2 | each {rotate --ccw tagline description} | flatten
 
 ```
 

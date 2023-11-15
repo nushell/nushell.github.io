@@ -2,7 +2,7 @@
 title: random chars
 categories: |
   random
-version: 0.86.0
+version: 0.87.0
 random: |
   Generate random chars.
 usage: |
@@ -39,6 +39,6 @@ Generate random chars
 
 Generate random chars with specified length
 ```nu
-> random chars -l 20
+> random chars --length 20
 
 ```

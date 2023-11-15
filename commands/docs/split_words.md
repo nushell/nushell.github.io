@@ -2,7 +2,7 @@
 title: split words
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Split a string's words into separate rows.
 usage: |
@@ -45,7 +45,7 @@ Split the string's words into separate rows
 
 Split the string's words, of at least 3 characters, into separate rows
 ```nu
-> 'hello to the world' | split words -l 3
+> 'hello to the world' | split words --min-word-length 3
 ╭───┬───────╮
 │ 0 │ hello │
 │ 1 │ the   │
@@ -56,6 +56,6 @@ Split the string's words, of at least 3 characters, into separate rows
 
 A real-world example of splitting words
 ```nu
-> http get https://www.gutenberg.org/files/11/11-0.txt | str downcase | split words -l 2 | uniq --count | sort-by count --reverse | first 10
+> http get https://www.gutenberg.org/files/11/11-0.txt | str downcase | split words --min-word-length 2 | uniq --count | sort-by count --reverse | first 10
 
 ```

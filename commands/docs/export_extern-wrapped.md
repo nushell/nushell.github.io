@@ -2,7 +2,7 @@
 title: export extern-wrapped
 categories: |
   core
-version: 0.86.0
+version: 0.87.0
 core: |
   Define an extern with a custom code block and export it from a module.
 usage: |

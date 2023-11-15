@@ -2,7 +2,7 @@
 title: str trim
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Trim whitespace or specific character.
 usage: |
@@ -47,30 +47,30 @@ Nu shell
 
 Trim a specific character
 ```nu
-> '=== Nu shell ===' | str trim -c '=' | str trim
+> '=== Nu shell ===' | str trim --char '=' | str trim
 Nu shell
 ```
 
 Trim whitespace from the beginning of string
 ```nu
-> ' Nu shell ' | str trim -l
+> ' Nu shell ' | str trim --left
 Nu shell
 ```
 
 Trim a specific character
 ```nu
-> '=== Nu shell ===' | str trim -c '='
+> '=== Nu shell ===' | str trim --char '='
  Nu shell
 ```
 
 Trim whitespace from the end of string
 ```nu
-> ' Nu shell ' | str trim -r
+> ' Nu shell ' | str trim --right
  Nu shell
 ```
 
 Trim a specific character
 ```nu
-> '=== Nu shell ===' | str trim -r -c '='
+> '=== Nu shell ===' | str trim --right --char '='
 === Nu shell
 ```

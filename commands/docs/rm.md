@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.86.0
+version: 0.87.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -30,7 +30,7 @@ usage: |
 
 ## Parameters
 
- -  `filename`: the path of the file you want to remove
+ -  `filename`: the file or files you want to remove
  -  `...rest`: additional file path(s) to remove
 
 

@@ -2,7 +2,7 @@
 title: select
 categories: |
   filters
-version: 0.86.0
+version: 0.87.0
 filters: |
   Select only these columns or rows from the input. Opposite of `reject`.
 usage: |
@@ -70,6 +70,18 @@ Select the first four rows (this is the same as `first 4`)
 Select columns by a provided list of columns
 ```nu
 > let cols = [name type];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | select $cols
+
+```
+
+Select columns by a provided list of columns
+```nu
+> [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | select ["name", "type"]
+╭───┬────────────┬──────╮
+│ # │    name    │ type │
+├───┼────────────┼──────┤
+│ 0 │ Cargo.toml │ toml │
+│ 1 │ Cargo.lock │ toml │
+╰───┴────────────┴──────╯
 
 ```
 

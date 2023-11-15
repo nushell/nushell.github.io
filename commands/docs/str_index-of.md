@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match.
 usage: |
@@ -49,25 +49,25 @@ Returns index of string in input
 
 Count length using grapheme clusters
 ```nu
-> '🇯🇵ほげ ふが ぴよ' | str index-of -g 'ふが'
+> '🇯🇵ほげ ふが ぴよ' | str index-of --grapheme-clusters 'ふが'
 4
 ```
 
 Returns index of string in input within a`rhs open range`
 ```nu
->  '.rb.rb' | str index-of '.rb' -r 1..
+>  '.rb.rb' | str index-of '.rb' --range 1..
 3
 ```
 
 Returns index of string in input within a lhs open range
 ```nu
->  '123456' | str index-of '6' -r ..4
+>  '123456' | str index-of '6' --range ..4
 -1
 ```
 
 Returns index of string in input within a range
 ```nu
->  '123456' | str index-of '3' -r 1..4
+>  '123456' | str index-of '3' --range 1..4
 2
 ```
 

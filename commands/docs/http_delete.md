@@ -2,7 +2,7 @@
 title: http delete
 categories: |
   network
-version: 0.86.0
+version: 0.87.0
 network: |
   Delete the specified resource.
 usage: |
@@ -52,25 +52,25 @@ http delete from example.com
 
 http delete from example.com, with username and password
 ```nu
-> http delete -u myuser -p mypass https://www.example.com
+> http delete --user myuser --password mypass https://www.example.com
 
 ```
 
 http delete from example.com, with custom header
 ```nu
-> http delete -H [my-header-key my-header-value] https://www.example.com
+> http delete --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 http delete from example.com, with body
 ```nu
-> http delete -d 'body' https://www.example.com
+> http delete --data 'body' https://www.example.com
 
 ```
 
 http delete from example.com, with JSON body
 ```nu
-> http delete -t application/json -d { field: value } https://www.example.com
+> http delete --content-type application/json --data { field: value } https://www.example.com
 
 ```
 

@@ -2,7 +2,7 @@
 title: str ends-with
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Check if an input ends with a string.
 usage: |
@@ -56,6 +56,6 @@ Checks if strings end with '.txt'
 
 Checks if string ends with '.RB', case-insensitive
 ```nu
-> 'my_library.rb' | str ends-with -i '.RB'
+> 'my_library.rb' | str ends-with --ignore-case '.RB'
 true
 ```

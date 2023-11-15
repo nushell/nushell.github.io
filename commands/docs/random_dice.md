@@ -2,7 +2,7 @@
 title: random dice
 categories: |
   random
-version: 0.86.0
+version: 0.87.0
 random: |
   Generate a random dice roll.
 usage: |
@@ -40,6 +40,6 @@ Roll 1 dice with 6 sides each
 
 Roll 10 dice with 12 sides each
 ```nu
-> random dice -d 10 -s 12
+> random dice --dice 10 --sides 12
 
 ```

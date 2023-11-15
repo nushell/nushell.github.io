@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.86.0
+version: 0.87.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -50,19 +50,19 @@ Get content from example.com
 
 Get content from example.com, with username and password
 ```nu
-> http get -u myuser -p mypass https://www.example.com
+> http get --user myuser --password mypass https://www.example.com
 
 ```
 
 Get content from example.com, with custom header
 ```nu
-> http get -H [my-header-key my-header-value] https://www.example.com
+> http get --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Get content from example.com, with custom headers
 ```nu
-> http get -H [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
+> http get --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 

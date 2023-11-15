@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.86.0
+version: 0.87.0
 filters: |
   Sort by the given columns, in increasing order.
 usage: |
@@ -34,6 +34,7 @@ usage: |
 | input     | output    |
 | --------- | --------- |
 | list\<any\> | list\<any\> |
+| record    | table     |
 | table     | table     |
 ## Examples
 

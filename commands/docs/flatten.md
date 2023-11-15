@@ -2,7 +2,7 @@
 title: flatten
 categories: |
   filters
-version: 0.86.0
+version: 0.87.0
 filters: |
   Flatten the table.
 usage: |
@@ -70,7 +70,7 @@ restrict the flattening by passing column names
 
 Flatten inner table
 ```nu
-> { a: b, d: [ 1 2 3 4 ],  e: [ 4 3  ] } | flatten d --all
+> { a: b, d: [ 1 2 3 4 ], e: [ 4 3 ] } | flatten d --all
 ╭───┬───┬───┬───────────╮
 │ # │ a │ d │     e     │
 ├───┼───┼───┼───────────┤

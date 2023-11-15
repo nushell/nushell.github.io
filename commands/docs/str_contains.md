@@ -2,7 +2,7 @@
 title: str contains
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Checks if string input contains a substring.
 usage: |
@@ -47,7 +47,7 @@ true
 
 Check if input contains string case insensitive
 ```nu
-> 'my_library.rb' | str contains -i '.RB'
+> 'my_library.rb' | str contains --ignore-case '.RB'
 true
 ```
 
@@ -62,7 +62,7 @@ Check if input contains string in a record
 
 Check if input contains string in a table
 ```nu
->  [[ColA ColB]; [test 100]] | str contains -i 'E' ColA
+>  [[ColA ColB]; [test 100]] | str contains --ignore-case 'E' ColA
 ╭───┬──────┬──────╮
 │ # │ ColA │ ColB │
 ├───┼──────┼──────┤
@@ -101,7 +101,7 @@ Check if list contains string
 
 Check if list does not contain string
 ```nu
-> [one two three] | str contains -n o
+> [one two three] | str contains --not o
 ╭───┬───────╮
 │ 0 │ false │
 │ 1 │ false │

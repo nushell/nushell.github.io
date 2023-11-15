@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.86.0
+version: 0.87.0
 platform: |
   Output ANSI codes to change color and style of text.
 usage: |
@@ -63,7 +63,7 @@ Hello Nu World
 
 Use escape codes, without the '\x1b['
 ```nu
-> $"(ansi -e '3;93;41m')Hello(ansi reset)"  # italic bright yellow on red background
+> $"(ansi --escape '3;93;41m')Hello(ansi reset)"  # italic bright yellow on red background
 Hello
 ```
 
@@ -74,7 +74,7 @@ Use structured escape codes
         bg: '#ff0000'
         attr: b
     }
-    $"(ansi -e $bold_blue_on_red)Hello Nu World(ansi reset)"
+    $"(ansi --escape $bold_blue_on_red)Hello Nu World(ansi reset)"
 Hello Nu World
 ```
 

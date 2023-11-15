@@ -2,7 +2,7 @@
 title: reject
 categories: |
   filters
-version: 0.86.0
+version: 0.87.0
 filters: |
   Remove the given columns or rows from the table. Opposite of `select`.
 usage: |
@@ -17,6 +17,10 @@ usage: |
 ## Signature
 
 ```> reject {flags} ...rest```
+
+## Flags
+
+ -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional)
 
 ## Parameters
 
@@ -80,6 +84,18 @@ Reject a nested field in a record
 Reject columns by a provided list of columns
 ```nu
 > let cols = [size type];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject $cols
+
+```
+
+Reject columns by a list of columns directly
+```nu
+> [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject ["size", "type"]
+╭───┬────────────╮
+│ # │    name    │
+├───┼────────────┤
+│ 0 │ Cargo.toml │
+│ 1 │ Cargo.lock │
+╰───┴────────────╯
 
 ```
 

@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.86.0
+version: 0.87.0
 formats: |
   Convert special record structure into .xml text.
 usage: |
@@ -20,7 +20,6 @@ usage: |
 
 ## Flags
 
- -  `--pretty, -p {int}`: DEPRECATED option, will be removed in 0.87. Please use `--indent {int}` instead.
  -  `--indent, -i {int}`: Formats the XML text with the provided indentation setting
 
 

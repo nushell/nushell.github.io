@@ -2,7 +2,7 @@
 title: ansi link
 categories: |
   platform
-version: 0.86.0
+version: 0.87.0
 platform: |
   Add a link (using OSC 8 escape sequence) to the given string.
 usage: |
@@ -55,6 +55,3 @@ Format a table column into links
 > [[url text]; [https://example.com Text]] | ansi link url
 
 ```
-
-
-**Tips:** Command `ansi link` was not included in the official binaries by default, you have to build it with `--features=extra` flag

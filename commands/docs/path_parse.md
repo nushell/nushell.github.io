@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   path
-version: 0.86.0
+version: 0.87.0
 path: |
   Convert a path into structured data.
 usage: |
@@ -43,13 +43,13 @@ Parse a path
 
 Replace a complex extension
 ```nu
-> '/home/viking/spam.tar.gz' | path parse -e tar.gz | upsert extension { 'txt' }
+> '/home/viking/spam.tar.gz' | path parse --extension tar.gz | upsert extension { 'txt' }
 
 ```
 
 Ignore the extension
 ```nu
-> '/etc/conf.d' | path parse -e ''
+> '/etc/conf.d' | path parse --extension ''
 ╭───────────┬────────╮
 │ parent    │ /etc   │
 │ stem      │ conf.d │

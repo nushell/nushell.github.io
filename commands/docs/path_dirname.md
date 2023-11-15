@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   path
-version: 0.86.0
+version: 0.87.0
 path: |
   Get the parent directory of a path.
 usage: |
@@ -50,12 +50,12 @@ Get dirname of a list of paths
 
 Walk up two levels
 ```nu
-> '/home/joe/code/test.txt' | path dirname -n 2
+> '/home/joe/code/test.txt' | path dirname --num-levels 2
 /home/joe
 ```
 
 Replace the part that would be returned with a custom path
 ```nu
-> '/home/joe/code/test.txt' | path dirname -n 2 -r /home/viking
+> '/home/joe/code/test.txt' | path dirname --num-levels 2 --replace /home/viking
 /home/viking/code/test.txt
 ```

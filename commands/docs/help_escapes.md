@@ -2,7 +2,7 @@
 title: help escapes
 categories: |
   core
-version: 0.86.0
+version: 0.87.0
 core: |
   Show help on nushell string escapes.
 usage: |

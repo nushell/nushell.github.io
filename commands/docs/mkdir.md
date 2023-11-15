@@ -2,7 +2,7 @@
 title: mkdir
 categories: |
   filesystem
-version: 0.86.0
+version: 0.87.0
 filesystem: |
   Make directories, creates intermediary directories as required.
 usage: |

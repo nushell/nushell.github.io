@@ -2,7 +2,7 @@
 title: input list
 categories: |
   platform
-version: 0.86.0
+version: 0.87.0
 platform: |
   Interactive list selection.
 usage: |
@@ -44,13 +44,13 @@ Return a single value from a list
 
 Return multiple values from a list
 ```nu
-> [Banana Kiwi Pear Peach Strawberry] | input list -m 'Add fruits to the basket'
+> [Banana Kiwi Pear Peach Strawberry] | input list --multi 'Add fruits to the basket'
 
 ```
 
 Return a single record from a table with fuzzy search
 ```nu
-> ls | input list -f 'Select the target'
+> ls | input list --fuzzy 'Select the target'
 
 ```
 

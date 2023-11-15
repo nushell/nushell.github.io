@@ -2,7 +2,7 @@
 title: format date
 categories: |
   date
-version: 0.86.0
+version: 0.87.0
 date: |
   Format a given date using a format string.
 usage: |
