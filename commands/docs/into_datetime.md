@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.86.0
+version: 0.87.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -75,9 +75,9 @@ Convert list of timestamps to datetimes
 ```nu
 > ["2023-03-30 10:10:07 -05:00", "2023-05-05 13:43:49 -05:00", "2023-06-05 01:37:42 -05:00"] | into datetime
 ╭───┬──────────────╮
-│ 0 │ 6 months ago │
-│ 1 │ 5 months ago │
-│ 2 │ 4 months ago │
+│ 0 │ 7 months ago │
+│ 1 │ 6 months ago │
+│ 2 │ 5 months ago │
 ╰───┴──────────────╯
 
 ```

@@ -2,7 +2,7 @@
 title: char
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Output special characters (e.g., 'newline').
 usage: |
@@ -60,18 +60,18 @@ Output prompt character, newline and a hamburger menu character
 
 Output Unicode character
 ```nu
-> char -u 1f378
+> char --unicode 1f378
 🍸
 ```
 
 Create Unicode from integer codepoint values
 ```nu
-> char -i (0x60 + 1) (0x60 + 2)
+> char --integer (0x60 + 1) (0x60 + 2)
 ab
 ```
 
 Output multi-byte Unicode character
 ```nu
-> char -u 1F468 200D 1F466 200D 1F466
+> char --unicode 1F468 200D 1F466 200D 1F466
 👨‍👦‍👦
 ```

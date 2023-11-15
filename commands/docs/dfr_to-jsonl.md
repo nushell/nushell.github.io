@@ -2,7 +2,7 @@
 title: dfr to-jsonl
 categories: |
   dataframe
-version: 0.86.0
+version: 0.87.0
 dataframe: |
   Saves dataframe to a JSON lines file.
 usage: |

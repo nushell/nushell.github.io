@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.86.0
+version: 0.87.0
 viewers: |
   Render the table.
 usage: |
@@ -42,7 +42,7 @@ Be aware collapse mode currently doesn't support width control
 
 List the files in current directory, with indexes starting from 1.
 ```nu
-> ls | table -n 1
+> ls | table --start-number 1
 
 ```
 

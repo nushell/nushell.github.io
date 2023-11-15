@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -35,7 +35,7 @@ usage: |
 
 Splits string across multiple columns
 ```nu
-> 'a b c' | detect columns -n
+> 'a b c' | detect columns --no-headers
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column0 │ column1 │ column2 │
 ├───┼─────────┼─────────┼─────────┤
@@ -46,19 +46,19 @@ Splits string across multiple columns
 
 
 ```nu
-> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c 0..1
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns 0..1
 
 ```
 
 Splits a multi-line string into columns with headers detected
 ```nu
-> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c -2..-1
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns -2..-1
 
 ```
 
 Splits a multi-line string into columns with headers detected
 ```nu
-> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns -c 2..
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns 2..
 
 ```
 

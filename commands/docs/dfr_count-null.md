@@ -2,7 +2,7 @@
 title: dfr count-null
 categories: |
   dataframe
-version: 0.86.0
+version: 0.87.0
 dataframe: |
   Counts null values.
 usage: |

@@ -2,7 +2,7 @@
 title: hash sha256
 categories: |
   hash
-version: 0.86.0
+version: 0.87.0
 hash: |
   Hash a value using the sha256 hash algorithm
 usage: |

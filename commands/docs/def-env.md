@@ -2,7 +2,7 @@
 title: def-env
 categories: |
   core
-version: 0.86.0
+version: 0.87.0
 core: |
   Define a custom command, which participates in the caller environment.
 usage: |

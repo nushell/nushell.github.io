@@ -2,7 +2,7 @@
 title: path basename
 categories: |
   path
-version: 0.86.0
+version: 0.87.0
 path: |
   Get the final component of a path.
 usage: |
@@ -49,6 +49,6 @@ Get basename of a list of paths
 
 Replace basename of a path
 ```nu
-> '/home/joe/test.txt' | path basename -r 'spam.png'
+> '/home/joe/test.txt' | path basename --replace 'spam.png'
 /home/joe/spam.png
 ```

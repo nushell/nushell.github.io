@@ -2,7 +2,7 @@
 title: http put
 categories: |
   network
-version: 0.86.0
+version: 0.87.0
 network: |
   Put a body to a URL.
 usage: |
@@ -52,19 +52,19 @@ Put content to example.com
 
 Put content to example.com, with username and password
 ```nu
-> http put -u myuser -p mypass https://www.example.com 'body'
+> http put --user myuser --password mypass https://www.example.com 'body'
 
 ```
 
 Put content to example.com, with custom header
 ```nu
-> http put -H [my-header-key my-header-value] https://www.example.com
+> http put --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Put content to example.com, with JSON body
 ```nu
-> http put -t application/json https://www.example.com { field: value }
+> http put --content-type application/json https://www.example.com { field: value }
 
 ```
 

@@ -2,7 +2,7 @@
 title: bytes ends-with
 categories: |
   bytes
-version: 0.86.0
+version: 0.87.0
 bytes: |
   Check if bytes ends with a pattern.
 usage: |

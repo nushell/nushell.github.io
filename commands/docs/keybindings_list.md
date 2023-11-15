@@ -2,7 +2,7 @@
 title: keybindings list
 categories: |
   platform
-version: 0.86.0
+version: 0.87.0
 platform: |
   List available options that can be used to create keybindings.
 usage: |
@@ -37,7 +37,7 @@ usage: |
 
 Get list of key modifiers
 ```nu
-> keybindings list -m
+> keybindings list --modifiers
 
 ```
 

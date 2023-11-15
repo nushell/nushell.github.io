@@ -2,7 +2,7 @@
 title: dfr is-not-null
 categories: |
   dataframe
-version: 0.86.0
+version: 0.87.0
 dataframe: |
   Creates mask where value is not null.
 usage: |

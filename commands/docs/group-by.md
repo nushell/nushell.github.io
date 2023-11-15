@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.86.0
+version: 0.87.0
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
@@ -17,6 +17,10 @@ usage: |
 ## Signature
 
 ```> group-by {flags} (grouper)```
+
+## Flags
+
+ -  `--to-table, -`: Return a table with "groups" and "items" columns
 
 ## Parameters
 
@@ -75,4 +79,27 @@ You can also group by raw values by leaving out the argument
 │ 2 │ │ 0 │ 2 │ │
 │   │ ╰───┴───╯ │
 ╰───┴───────────╯
+```
+
+You can also output a table instead of a record
+```nu
+> ['1' '3' '1' '3' '2' '1' '1'] | group-by --to-table
+╭───┬───────┬───────────╮
+│ # │ group │   items   │
+├───┼───────┼───────────┤
+│ 0 │ 1     │ ╭───┬───╮ │
+│   │       │ │ 0 │ 1 │ │
+│   │       │ │ 1 │ 1 │ │
+│   │       │ │ 2 │ 1 │ │
+│   │       │ │ 3 │ 1 │ │
+│   │       │ ╰───┴───╯ │
+│ 1 │ 3     │ ╭───┬───╮ │
+│   │       │ │ 0 │ 3 │ │
+│   │       │ │ 1 │ 3 │ │
+│   │       │ ╰───┴───╯ │
+│ 2 │ 2     │ ╭───┬───╮ │
+│   │       │ │ 0 │ 2 │ │
+│   │       │ ╰───┴───╯ │
+╰───┴───────┴───────────╯
+
 ```

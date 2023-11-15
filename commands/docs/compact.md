@@ -2,7 +2,7 @@
 title: compact
 categories: |
   filters
-version: 0.86.0
+version: 0.87.0
 filters: |
   Creates a table with non-empty rows.
 usage: |
@@ -18,6 +18,10 @@ usage: |
 
 ```> compact {flags} ...rest```
 
+## Flags
+
+ -  `--empty, -e`: also compact empty items like "", {}, and []
+
 ## Parameters
 
  -  `...rest`: the columns to compact from the table
@@ -31,7 +35,7 @@ usage: |
 | table     | table     |
 ## Examples
 
-Filter out all records where 'Hello' is null (returns nothing)
+Filter out all records where 'Hello' is null
 ```nu
 > [["Hello" "World"]; [null 3]] | compact Hello
 ╭────────────╮
@@ -39,7 +43,7 @@ Filter out all records where 'Hello' is null (returns nothing)
 ╰────────────╯
 ```
 
-Filter out all records where 'World' is null (Returns the table)
+Filter out all records where 'World' is null
 ```nu
 > [["Hello" "World"]; [null 3]] | compact World
 ╭───┬───────┬───────╮
@@ -50,12 +54,25 @@ Filter out all records where 'World' is null (Returns the table)
 
 ```
 
-Filter out all instances of nothing from a list (Returns [1,2])
+Filter out all instances of null from a list
 ```nu
 > [1, null, 2] | compact
 ╭───┬───╮
 │ 0 │ 1 │
 │ 1 │ 2 │
+╰───┴───╯
+
+```
+
+Filter out all instances of null and empty items from a list
+```nu
+> [1, null, 2, "", 3, [], 4, {}, 5] | compact --empty
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+│ 3 │ 4 │
+│ 4 │ 5 │
 ╰───┴───╯
 
 ```

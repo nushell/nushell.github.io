@@ -2,7 +2,7 @@
 title: str starts-with
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Check if an input starts with a string.
 usage: |
@@ -58,6 +58,6 @@ false
 
 Checks if input string starts with 'cargo', case-insensitive
 ```nu
-> 'Cargo.toml' | str starts-with -i 'cargo'
+> 'Cargo.toml' | str starts-with --ignore-case 'cargo'
 true
 ```

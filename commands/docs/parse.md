@@ -2,7 +2,7 @@
 title: parse
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Parse columns from string data using a simple pattern.
 usage: |
@@ -48,7 +48,7 @@ Parse a string into two named columns
 
 Parse a string using regex pattern
 ```nu
-> "hi there" | parse -r '(?P<foo>\w+) (?P<bar>\w+)'
+> "hi there" | parse --regex '(?P<foo>\w+) (?P<bar>\w+)'
 ╭───┬─────┬───────╮
 │ # │ foo │  bar  │
 ├───┼─────┼───────┤
@@ -59,7 +59,7 @@ Parse a string using regex pattern
 
 Parse a string using fancy-regex named capture group pattern
 ```nu
-> "foo bar." | parse -r '\s*(?<name>\w+)(?=\.)'
+> "foo bar." | parse --regex '\s*(?<name>\w+)(?=\.)'
 ╭───┬──────╮
 │ # │ name │
 ├───┼──────┤
@@ -70,7 +70,7 @@ Parse a string using fancy-regex named capture group pattern
 
 Parse a string using fancy-regex capture group pattern
 ```nu
-> "foo! bar." | parse -r '(\w+)(?=\.)|(\w+)(?=!)'
+> "foo! bar." | parse --regex '(\w+)(?=\.)|(\w+)(?=!)'
 ╭───┬──────────┬──────────╮
 │ # │ capture0 │ capture1 │
 ├───┼──────────┼──────────┤
@@ -82,7 +82,7 @@ Parse a string using fancy-regex capture group pattern
 
 Parse a string using fancy-regex look behind pattern
 ```nu
-> " @another(foo bar)   " | parse -r '\s*(?<=[() ])(@\w+)(\([^)]*\))?\s*'
+> " @another(foo bar)   " | parse --regex '\s*(?<=[() ])(@\w+)(\([^)]*\))?\s*'
 ╭───┬──────────┬───────────╮
 │ # │ capture0 │ capture1  │
 ├───┼──────────┼───────────┤
@@ -93,7 +93,7 @@ Parse a string using fancy-regex look behind pattern
 
 Parse a string using fancy-regex look ahead atomic group pattern
 ```nu
-> "abcd" | parse -r '^a(bc(?=d)|b)cd$'
+> "abcd" | parse --regex '^a(bc(?=d)|b)cd$'
 ╭───┬──────────╮
 │ # │ capture0 │
 ├───┼──────────┤

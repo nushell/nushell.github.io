@@ -2,7 +2,7 @@
 title: extern-wrapped
 categories: |
   core
-version: 0.86.0
+version: 0.87.0
 core: |
   Define a signature for an external command with a custom code block.
 usage: |

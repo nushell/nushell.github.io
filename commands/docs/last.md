@@ -2,7 +2,7 @@
 title: last
 categories: |
   filters
-version: 0.86.0
+version: 0.87.0
 filters: |
   Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
 usage: |

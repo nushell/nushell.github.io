@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Encode a string into bytes.
 usage: |
@@ -47,7 +47,7 @@ Length: 40 (0x28) bytes | printable whitespace ascii_other non_ascii
 
 Replace characters with HTML entities if they can't be encoded
 ```nu
-> "🎈" | encode -i shift-jis
+> "🎈" | encode --ignore-errors shift-jis
 Length: 9 (0x9) bytes | printable whitespace ascii_other non_ascii
 00000000:   26 23 31 32  37 38 38 30  3b                         &#127880;
 

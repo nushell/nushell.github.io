@@ -2,7 +2,7 @@
 title: dfr into-df
 categories: |
   dataframe
-version: 0.86.0
+version: 0.87.0
 dataframe: |
   Converts a list, table or record into a dataframe.
 usage: |

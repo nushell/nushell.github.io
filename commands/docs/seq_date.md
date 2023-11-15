@@ -2,7 +2,7 @@
 title: seq date
 categories: |
   generators
-version: 0.86.0
+version: 0.87.0
 generators: |
   Print sequences of dates.
 usage: |
@@ -45,19 +45,19 @@ print the next 10 days in YYYY-MM-DD format with newline separator
 
 print the previous 10 days in YYYY-MM-DD format with newline separator
 ```nu
-> seq date --days 10 -r
+> seq date --days 10 --reverse
 
 ```
 
 print the previous 10 days starting today in MM/DD/YYYY format with newline separator
 ```nu
-> seq date --days 10 -o '%m/%d/%Y' -r
+> seq date --days 10 -o '%m/%d/%Y' --reverse
 
 ```
 
 print the first 10 days in January, 2020
 ```nu
-> seq date -b '2020-01-01' -e '2020-01-10'
+> seq date --begin-date '2020-01-01' --end-date '2020-01-10'
 ╭───┬────────────╮
 │ 0 │ 2020-01-01 │
 │ 1 │ 2020-01-02 │
@@ -75,7 +75,7 @@ print the first 10 days in January, 2020
 
 print every fifth day between January 1st 2020 and January 31st 2020
 ```nu
-> seq date -b '2020-01-01' -e '2020-01-31' -n 5
+> seq date --begin-date '2020-01-01' --end-date '2020-01-31' --increment 5
 ╭───┬────────────╮
 │ 0 │ 2020-01-01 │
 │ 1 │ 2020-01-06 │

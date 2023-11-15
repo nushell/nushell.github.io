@@ -2,7 +2,7 @@
 title: split chars
 categories: |
   strings
-version: 0.86.0
+version: 0.87.0
 strings: |
   Split a string into a list of characters.
 usage: |
@@ -47,7 +47,7 @@ Split the string into a list of characters
 
 Split on grapheme clusters
 ```nu
-> '🇯🇵ほげ' | split chars -g
+> '🇯🇵ほげ' | split chars --grapheme-clusters
 ╭───┬────╮
 │ 0 │ 🇯🇵 │
 │ 1 │ ほ │

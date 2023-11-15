@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.86.0
+version: 0.87.0
 network: |
   Patch a body to a URL.
 usage: |
@@ -52,19 +52,19 @@ Patch content to example.com
 
 Patch content to example.com, with username and password
 ```nu
-> http patch -u myuser -p mypass https://www.example.com 'body'
+> http patch --user myuser --password mypass https://www.example.com 'body'
 
 ```
 
 Patch content to example.com, with custom header
 ```nu
-> http patch -H [my-header-key my-header-value] https://www.example.com
+> http patch --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Patch content to example.com, with JSON body
 ```nu
-> http patch -t application/json https://www.example.com { field: value }
+> http patch --content-type application/json https://www.example.com { field: value }
 
 ```
 

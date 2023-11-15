@@ -2,7 +2,7 @@
 title: export use
 categories: |
   core
-version: 0.86.0
+version: 0.87.0
 core: |
   Use definitions from a module and export them from this module.
 usage: |

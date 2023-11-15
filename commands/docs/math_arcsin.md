@@ -2,7 +2,7 @@
 title: math arcsin
 categories: |
   math
-version: 0.86.0
+version: 0.87.0
 math: |
   Returns the arcsine of the number.
 usage: |
@@ -39,7 +39,7 @@ Get the arcsine of 1
 
 Get the arcsine of 1 in degrees
 ```nu
-> 1 | math arcsin -d
+> 1 | math arcsin --degrees
 90
 ```
 

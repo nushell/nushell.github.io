@@ -2,7 +2,7 @@
 title: math cos
 categories: |
   math
-version: 0.86.0
+version: 0.87.0
 math: |
   Returns the cosine of the number.
 usage: |
@@ -39,7 +39,7 @@ Apply the cosine to π
 
 Apply the cosine to a list of angles in degrees
 ```nu
-> [0 90 180 270 360] | math cos -d
+> [0 90 180 270 360] | math cos --degrees
 ╭───┬───────╮
 │ 0 │  1.00 │
 │ 1 │  0.00 │

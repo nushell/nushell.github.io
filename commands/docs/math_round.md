@@ -2,7 +2,7 @@
 title: math round
 categories: |
   math
-version: 0.86.0
+version: 0.87.0
 math: |
   Returns the input number rounded to the specified precision.
 usage: |
@@ -44,7 +44,7 @@ Apply the round function to a list of numbers
 
 Apply the round function with precision specified
 ```nu
-> [1.555 2.333 -3.111] | math round -p 2
+> [1.555 2.333 -3.111] | math round --precision 2
 ╭───┬───────╮
 │ 0 │  1.56 │
 │ 1 │  2.33 │
@@ -55,7 +55,7 @@ Apply the round function with precision specified
 
 Apply negative precision to a list of numbers
 ```nu
-> [123, 123.3, -123.4] | math round -p -1
+> [123, 123.3, -123.4] | math round --precision -1
 ╭───┬──────╮
 │ 0 │  120 │
 │ 1 │  120 │

@@ -2,7 +2,7 @@
 title: lazy make
 categories: |
   core
-version: 0.86.0
+version: 0.87.0
 core: |
   Create a lazy record.
 usage: |
