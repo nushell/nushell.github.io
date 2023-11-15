@@ -9,6 +9,7 @@ export const commandCategories = [
   '/commands/categories/dataframe_or_lazyframe.md',
   '/commands/categories/date.md',
   '/commands/categories/debug.md',
+  '/commands/categories/default.md',
   '/commands/categories/env.md',
   '/commands/categories/expression.md',
   '/commands/categories/filesystem.md',
