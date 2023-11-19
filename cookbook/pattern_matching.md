@@ -9,14 +9,19 @@ title: Pattern Matching
 Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands/docs/match.html#frontmatter-title-for-core) keyword. Usually this is used as a slightly more ergonomic version of `if-else` statements if you have many branches
 
 ```nu
-> [black red yellow green purple blue indigo] | each {|c|
- match $c {
-  "black" => "classy"
-  "red" | "green" | "blue" => "fundamental"
-  "yellow" | "purple" => "vibrant"
-  _ => "innovative"
- }
+[black red yellow green purple blue indigo] | each {|c|
+  match $c {
+    "black" => "classy"
+    "red" | "green" | "blue" => "fundamental"
+    "yellow" | "purple" => "vibrant"
+    _ => "innovative"
+  }
 }
+```
+
+Output:
+
+```
 ───┬────────────
  0 │ classy
  1 │ funamental
@@ -31,29 +36,33 @@ Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands
 The equivalent in `if-else` statements would be:
 
 ```nu
-> [black red yellow green purple blue] | each {|c|
- if ($c == "black") {
-  "classy"
-  } else if ( $c in ["red", "green", "blue"]) {
-   "fundamental"
-  } else if ( $c in ['yellow', "purple"]){
-   "vibrant"
-  }  else {
-   "innovative"
+[black red yellow green purple blue] | each {|c|
+  if ($c == "black") {
+   "classy"
+  } else if ($c in ["red", "green", "blue"]) {
+    "fundamental"
+  } else if ($c in ['yellow', "purple"]) {
+    "vibrant"
+  } else {
+    "innovative"
   }
- }
 }
 ```
 
 As you can see you can also use command expressions in match statements (in this case used with `|`). Also notice the `_` case at the end, this is called the default arm and is used in case none of the other patterns match. Note also that in the case that cases overlap the first matching pattern will be used (just like with `if-else` statements):
 
 ```nu
- [yellow green] | each {|c|
+[yellow green] | each {|c|
   match $c {
-   "green" => "fundamental"
-   "yellow" | "green" => "vibrant"
+    "green" => "fundamental"
+    "yellow" | "green" => "vibrant"
   }
- }
+}
+```
+
+Output:
+
+```
 ───┬────────────
  0 │ vibrant
  1 │ funamental
@@ -66,9 +75,21 @@ You can use the [`describe`](https://www.nushell.sh/commands/docs/describe.html)
 
 ```nu
 {one: 1 two: 2} | describe
-record<one: int, two: int>
+```
 
+Output:
+
+```
+record<one: int, two: int>
+```
+
+```nu
 [{a: 1 b: 2} {a: 2 b:3 }] | describe
+```
+
+Output:
+
+```
 table<a: int, b: int>
 ```
 
