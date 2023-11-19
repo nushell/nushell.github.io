@@ -9,13 +9,13 @@ title: Parsing Git Log
 This `git log` command is interesting but you can't do a lot with it like this.
 
 ```nu
-> git log
+git log
 ```
 
 Let's make it more parsable
 
 ```nu
-> git log --pretty="%h|%s|%aN|%aE|%aD" -n 25
+git log --pretty="%h|%s|%aN|%aE|%aD" -n 25
 ```
 
 This will work but I've been burnt by this in the past when a pipe `|` gets injected in the commits.
@@ -23,7 +23,7 @@ This will work but I've been burnt by this in the past when a pipe `|` gets inje
 So, let's try again with something that most likely won't show up in commits, `»¦«`. Also, since we're not using a pipe now we don't have to use quotes around the pretty format string. Notice that the output is just a bunch of strings.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5
 ```
 
 ```
@@ -39,7 +39,7 @@ Ahh, much better. Now that we have the raw data, let's try to parse it with nu.
 First we need to get it in lines or rows. Notice that the output is now in a table format.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines
 ```
 
 ```
@@ -62,7 +62,7 @@ That's more like nushell, but it would be nice to have some columns.
 We used the delimiter `»¦«` specifically so we can create columns so let's use it like this.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«"
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«"
 ```
 
 ```
@@ -90,7 +90,7 @@ Yay, for columns! But wait, it would really be nice if those columns had somethi
 Let's try adding the columns names to `split column` like this.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date
 ```
 
 Ahhh, that looks much better.
@@ -118,7 +118,7 @@ Ahhh, that looks much better.
 Hmmm, that date string is a string. If it were a date vs a string it could be used for sorting by date. The way we do that is we have to convert the datetime to a real datetime and update the column. Try this.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime}
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime}
 ```
 
 Now this looks more nu-ish
@@ -146,7 +146,7 @@ Now this looks more nu-ish
 If we want to revert back to a date string we can do something like this with the `nth` command and the `get` command.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | select 3 | get date | date format | get 0
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | select 3 | get date | date format | get 0
 ```
 
 ```
@@ -157,7 +157,7 @@ Cool! Now that we have a real datetime we can do some interesting things with it
 Let's try `sort-by` first
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | sort-by date
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | sort-by date
 ```
 
 ```
@@ -229,7 +229,7 @@ Let's try `sort-by` first
 That's neat but what if I want it sorted in the opposite order? Try the `reverse` command and notice the newest commits are at the top.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | sort-by date | reverse
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | sort-by date | reverse
 ```
 
 ```
@@ -301,7 +301,7 @@ That's neat but what if I want it sorted in the opposite order? Try the `reverse
 Now let's try `group-by` and see what happens. This is a tiny bit tricky because dates are tricky. When you use `group-by` on dates you have to remember to use the `group-by date` subcommand so it's `group-by date date_column_name`.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | date format '%Y-%m-%d'} | group-by date
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | date format '%Y-%m-%d'} | group-by date
 ```
 
 ```
@@ -317,7 +317,7 @@ Now let's try `group-by` and see what happens. This is a tiny bit tricky because
 This would look better if we transpose the data and name the columns
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | date format '%Y-%m-%d'} | group-by date | transpose date count
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | date format '%Y-%m-%d'} | group-by date | transpose date count
 ```
 
 ```
@@ -335,7 +335,7 @@ This would look better if we transpose the data and name the columns
 How about `where` now? Show only the records that are less than a year old.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day))
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day))
 ```
 
 ```
@@ -408,7 +408,7 @@ How about `where` now? Show only the records that are less than a year old.
 Or even show me all the commits in the last 7 days.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 7day))
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 7day))
 ```
 
 ```
@@ -480,7 +480,7 @@ Or even show me all the commits in the last 7 days.
 Now, with the 365 day slice of data, let's `group-by` name where the commits are less than a year old. This table has a lot of columns so it's unreadable. However, if we `group-by` name and `transpose` the table things will look much cleaner. `Pivot` takes rows and turns them into columns or turns columns into rows.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose
 ```
 
 ```
@@ -517,14 +517,14 @@ error: Unknown column
 Here's one tip for dealing with this error. We have a `do` command that has an `--ignore_errors` parameter. This is how you'd use it in the above example, if it were giving errors.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | do -i { split column "»¦«" commit subject name email date } | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | do -i { split column "»¦«" commit subject name email date } | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose
 ```
 
 Now, back to parsing.
 What if we throw in the `sort-by` and `reverse` commands for good measure? Also, while we're in there, let's get rid of the `[table 21 rows]` thing too. We do that by using the `length` command on each row of column1.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | reverse
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | where ($it.date > ((date now) - 365day)) | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | reverse
 ```
 
 ```
@@ -550,7 +550,7 @@ What if we throw in the `sort-by` and `reverse` commands for good measure? Also,
 This is still a lot of data so let's just look at the top 10 and use the `rename` command to name the columns. We could've also provided the column names with the `transpose` command.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10
 ```
 
 ```
@@ -575,7 +575,7 @@ And there you have it. The top 10 committers and we learned a little bit of pars
 Here's one last little known command. Perhaps you don't want your table numbered starting with 0. Here's a way to change that with the `table` command.
 
 ```nu
-> git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10 | table -n 1
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10 | table -n 1
 ```
 
 ```

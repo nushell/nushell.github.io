@@ -9,11 +9,16 @@ A dataframe example based on https://studioterabyte.nl/en/blog/polars-vs-pandas
 ## 1. Opening the file and show the shape of the DataFrame
 
 ```nu
-> let df = (dfr open NYCTaxi.csv)
+let df = (dfr open NYCTaxi.csv)
 ```
 
 ```nu
-> $df | shape
+$df | shape
+```
+
+Output:
+
+```
 ╭───┬─────────┬─────────╮
 │ # │  rows   │ columns │
 ├───┼─────────┼─────────┤
@@ -26,7 +31,12 @@ A dataframe example based on https://studioterabyte.nl/en/blog/polars-vs-pandas
 ## 2. Opening the file and show the first 5 rows
 
 ```nu
-> $df | first 5
+$df | first 5
+```
+
+Output:
+
+```
 ╭───┬───────────┬───────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬──────────────┬──────────────╮
 │ # │    id     │ vendor_id │ pickup_dateti │ dropoff_datet │ passenger_cou │ pickup_longit │ pickup_latitu │ dropoff_longi │ dropoff_latit │ store_and_fw │ trip_duratio │
 │   │           │           │ me            │ ime           │ nt            │ ude           │ de            │ tude          │ ude           │ d_flag       │ n            │
@@ -50,8 +60,13 @@ A dataframe example based on https://studioterabyte.nl/en/blog/polars-vs-pandas
 ## 3. Opening the file and get the length of all strings in the "id" column
 
 ```nu
-> let ids = ($df | first 5 | get id | str-lengths)
-> $df | first 5 | append $ids | rename id_x vendor_id_length
+let ids = ($df | first 5 | get id | str-lengths)
+$df | first 5 | append $ids | rename id_x vendor_id_length
+```
+
+Output:
+
+```
 ╭───┬───────────┬───────────┬──────────────┬──────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
 │ # │    id     │ vendor_id │ pickup_datet │ dropoff_date │ passenger_c │ pickup_long │ pickup_lati │ dropoff_lon │ dropoff_lat │ store_and_f │ trip_durati │ vendor_id_l │
 │   │           │           │ ime          │ time         │ ount        │ itude       │ tude        │ gitude      │ itude       │ wd_flag     │ on          │ ength       │
@@ -75,7 +90,12 @@ A dataframe example based on https://studioterabyte.nl/en/blog/polars-vs-pandas
 Here's an alternate approach using `with-column`
 
 ```nu
-> $df | first 5 | with-column ($df | first 5 | get id | str-lengths) --name vendor_id_length
+$df | first 5 | with-column ($df | first 5 | get id | str-lengths) --name vendor_id_length
+```
+
+Output:
+
+```
 ╭───┬───────────┬───────────┬──────────────┬──────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
 │ # │    id     │ vendor_id │ pickup_datet │ dropoff_date │ passenger_c │ pickup_long │ pickup_lati │ dropoff_lon │ dropoff_lat │ store_and_f │ trip_durati │ vendor_id_l │
 │   │           │           │ ime          │ time         │ ount        │ itude       │ tude        │ gitude      │ itude       │ wd_flag     │ on          │ ength       │
@@ -99,7 +119,12 @@ Here's an alternate approach using `with-column`
 ## 4. Opening the file and apply a function to the "trip_duration" to divide the number by 60 to go from the second value to a minute value
 
 ```nu
-> $df | first 5 | with-column ((col trip_duration) / 60.0)
+$df | first 5 | with-column ((col trip_duration) / 60.0)
+```
+
+Output:
+
+```
 ╭───┬───────────┬───────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬──────────────┬──────────────╮
 │ # │    id     │ vendor_id │ pickup_dateti │ dropoff_datet │ passenger_cou │ pickup_longit │ pickup_latitu │ dropoff_longi │ dropoff_latit │ store_and_fw │ trip_duratio │
 │   │           │           │ me            │ ime           │ nt            │ ude           │ de            │ tude          │ ude           │ d_flag       │ n            │
@@ -123,7 +148,12 @@ Here's an alternate approach using `with-column`
 ## 5. Opening the file and filtering out all rows with a trip duration shorther than 500 seconds
 
 ```nu
-> $df | filter-with ((col trip_duration) >= 500) | first 5
+$df | filter-with ((col trip_duration) >= 500) | first 5
+```
+
+Output:
+
+```
 ╭───┬───────────┬───────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬──────────────┬──────────────╮
 │ # │    id     │ vendor_id │ pickup_dateti │ dropoff_datet │ passenger_cou │ pickup_longit │ pickup_latitu │ dropoff_longi │ dropoff_latit │ store_and_fw │ trip_duratio │
 │   │           │           │ me            │ ime           │ nt            │ ude           │ de            │ tude          │ ude           │ d_flag       │ n            │
@@ -147,7 +177,12 @@ Here's an alternate approach using `with-column`
 ## 6. Opening the file, filtering out all the rows with a "Y" store_and_fwd_flag value, group by ID and calculate the mean duration time
 
 ```nu
-> $df | filter-with ((col store_and_fwd_flag) == "N") | group-by id | agg (col trip_duration | mean) | sort-by id | first 5
+$df | filter-with ((col store_and_fwd_flag) == "N") | group-by id | agg (col trip_duration | mean) | sort-by id | first 5
+```
+
+Output:
+
+```
 ╭───┬───────────┬───────────────╮
 │ # │    id     │ trip_duration │
 ├───┼───────────┼───────────────┤

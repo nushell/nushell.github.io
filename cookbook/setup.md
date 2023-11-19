@@ -24,7 +24,7 @@ For more detailed instructions, see the documentation about [environment variabl
 ### How to list your environment variables
 
 ```nu
-> $env
+$env
 ```
 
 Output
@@ -46,7 +46,7 @@ Output
 or for a more detailed view, use our new `env` command.
 
 ```nu
-> env
+env
 ```
 
 Output
@@ -98,13 +98,13 @@ You should now be able to run `config nu` or `config env` and edit those files e
 ### How to get a single environment variable's value
 
 ```nu
-> $env.APPDATA
+$env.APPDATA
 ```
 
 or
 
 ```nu
-> env | where name == APPDATA
+env | where name == APPDATA
 ```
 
 ```
