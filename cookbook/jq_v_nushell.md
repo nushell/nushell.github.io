@@ -4,7 +4,7 @@ title: jq vs Nushell
 
 # jq vs Nushell
 
-Both [`jq`](https://jqlang.github.io/jq/) and `nu` have the ability to transform data in a composable way. This cookbook will walk you through common data manipulation tasks with the aim of building a solid mental model for using Nushell effectively. To that effect, we'll use Nushell concepts.
+Both [`jq`](https://jqlang.github.io/jq/) and `nu` have the ability to transform data in a composable way. This cookbook will walk you through common data manipulation tasks with the aim of building a solid mental model for using Nushell effectively.
 
 All examples will stick to JSON to keep parity between examples.
 
@@ -21,7 +21,7 @@ echo '{"title": "jq vs Nushell", publication_date: "2023-11-20"}' | jq -r '.'
 In `nu`, we need to be explicit because Nushell has a wider range of input choices:
 
 ```nu
-> '{"title": "jq vs Nushell", publication_date: "2023-11-20"}'
+'{"title": "jq vs Nushell", publication_date: "2023-11-20"}'
 | from json
 ```
 
@@ -37,14 +37,14 @@ Output:
 The output for `jq` is a JSON string whereas in `nu` it's a Nushell value. To get the output of any pipeline as JSON, simply apply a [`to json`](/commands/docs/to_json.html) at the end:
 
 ```nu
-> '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
+'[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
 | from json
 | to json
 ```
 
 Output:
 
-```
+```json
 {
   "title": "jq vs Nushell",
   "publication_date": "2023-11-20"
@@ -53,7 +53,7 @@ Output:
 
 When your JSON data is stored in a file, you can use [open](/commands/docs/open.html) instead of [from json](/commands/docs/from_json.html).
 
-Before we get into the examples, the following glossary can help familiarise yourself with the Nushell concepts used in this cookbook:
+Before we get into the examples, the following glossary can help familiarise yourself with how Nushell data types map to jq data types.
 
 | Nushell | jq             |
 | ------- | -------------- |
@@ -80,7 +80,7 @@ echo '{"name": "Alice", "age": 30}' | jq -r '.name'
 In `nu` we do:
 
 ```nu
-> '{"name": "Alice", "age": 30}' | from json | get name
+'{"name": "Alice", "age": 30}' | from json | get name
 ```
 
 Output:
@@ -101,7 +101,7 @@ jq -r '.[] | select(.age > 28)'
 In `nu` we do:
 
 ```nu
-> '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
+'[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
 | from json
 | where age > 28
 ```
@@ -126,7 +126,7 @@ jq -r 'map(. * 2)'
 In `nu` we do:
 
 ```nu
-> '[1, 2, 3, 4, 5]'
+'[1, 2, 3, 4, 5]'
 | from json
 | each { |x| $x * 2 }
 ```
@@ -146,7 +146,7 @@ Output:
 Note that you can rely on the `$in` auto-binding for a slightly more compact block:
 
 ```nu
-> '[1, 2, 3, 4, 5]'
+'[1, 2, 3, 4, 5]'
 | from json
 | each { $in * 2 }
 ```
@@ -163,7 +163,7 @@ jq -r '.items | map({(.name): (.price * 2)}) | add'
 In `nu` we do:
 
 ```nu
-> '{"items": [{"name": "Apple", "price": 1}, {"name": "Banana", "price": 0.5}]}'
+'{"items": [{"name": "Apple", "price": 1}, {"name": "Banana", "price": 0.5}]}'
 | from json
 | get items
 | update price {|row| $row.price * 2}
@@ -194,7 +194,7 @@ jq -r 'sort'
 In `nu` we do:
 
 ```nu
-> '[3, 1, 4, 2, 5]'
+'[3, 1, 4, 2, 5]'
 | from json
 | sort
 ```
@@ -223,7 +223,7 @@ jq -r 'unique'
 In `nu` we do:
 
 ```nu
-> '[1, 2, 2, 3, 4, 4, 5]'
+'[1, 2, 2, 3, 4, 4, 5]'
 | from json
 | uniq
 ```
@@ -252,7 +252,7 @@ jq -r '.[] | select(.age > 28) | .name'
 In `nu` we do:
 
 ```nu
-> '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
+'[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
 | from json
 | where age > 28
 | get name
@@ -278,7 +278,7 @@ jq -r '.name | split(" ") | .[0]'
 In `nu` we do:
 
 ```nu
-> '{"name": "Alice Smith"}'
+'{"name": "Alice Smith"}'
 | from json
 | get name
 | split words
@@ -303,7 +303,7 @@ jq -r 'if .age > 18 then "Adult" else "Child" end'
 In `nu` we do:
 
 ```nu
-> '{"name": "Alice", "age": 30}'
+'{"name": "Alice", "age": 30}'
 | from json
 | if $in.age > 18 { "Adult" } else { "Child" }
 ```
@@ -324,7 +324,7 @@ jq -r 'map(select(. != null))'
 In `nu` we do:
 
 ```nu
-> '[1, null, 3, null, 5]'
+'[1, null, 3, null, 5]'
 | from json
 | where { $in != null }
 ```
@@ -342,7 +342,7 @@ Output:
 Alternatively, you can use [`compact`](/commands/docs/compact.html):
 
 ```nu
-> '[1, null, 3, null, 5]'
+'[1, null, 3, null, 5]'
 | from json
 | compact
 ```
@@ -359,7 +359,7 @@ jq -r "Name: \(.name), Age: \(.age)"
 In `nu` we do:
 
 ```nu
-> '{"name": "Alice", "age": 30}'
+'{"name": "Alice", "age": 30}'
 | from json
 | items { |key, value| ["Name" $value] | str join ": " }
 | str join ", "
@@ -374,7 +374,7 @@ Name: Alice, Name: 30
 This approach is a bit involved but if we [install the full version](https://github.com/nushell/nushell/releases) which includes the _extra commands_ we can benefit from the [`format`](/commands/docs/format.html):
 
 ```nu
-> '{"name": "Alice", "age": 30}'
+'{"name": "Alice", "age": 30}'
 | from json
 | format "Name: {name}, Age: {age}"
 ```
@@ -391,7 +391,7 @@ jq -r '{name: .name, age: (.age + 5)}'
 In `nu` we do:
 
 ```nu
-> '{"name": "Alice", "age": 30}'
+'{"name": "Alice", "age": 30}'
 | from json
 | {name: $in.name, age: ($in.age + 5)}
 ```
@@ -419,7 +419,7 @@ jq -r '.. | .value?'
 In `nu`, there is no built-in command to achieve this, however, we can define our own reusable commands. See the [Appendix: Custom commands](#appendix-custom-commands) for an implementation of the command `cherry-pick` shown in the example below.
 
 ```nu
-> '{"data": {"value": 42, "nested": {"value": 24}}}'
+'{"data": {"value": 42, "nested": {"value": 24}}}'
 | from json
 | cherry-pick { |x| $x.value? }
 ```
@@ -446,7 +446,7 @@ jq -r '.data[].values[] | select(. > 3)'
 In `nu` we can take advantage of the fact that [a list of records is in fact a table](/book/types_of_data.html#tables) and simply do:
 
 ```nu
-> '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}'
+'{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}'
 | from json
 | get data.values
 | flatten
@@ -475,7 +475,7 @@ jq -r 'paths as $p | select(getpath($p) | type != "object") | ($p | join(".")) +
 In `nu`, there is no built-in command to achieve this. See the [Appendix: Custom commands](#appendix-custom-commands) for an implementation of the command `flatten record-paths` shown in the example below.
 
 ```nu
-> '{"person": {"name": {"first": "Alice", "last": "Smith"}, "age": 30}}'
+'{"person": {"name": {"first": "Alice", "last": "Smith"}, "age": 30}}'
 | from json
 | flatten record-paths
 ```
@@ -504,7 +504,7 @@ jq -r 'recurse | .value? | select(. != null) | { value: (. * 5) } | add'
 In `nu`, there is no built-in function equivalent to `recurse`. However, we can reuse the solution from [Filtering nested items](#filtering-nested-items) to extract the values to manipulate:
 
 ```nu
-> '{"data": {"value": 42, "nested": {"value": 24}}}'
+'{"data": {"value": 42, "nested": {"value": 24}}}'
 | from json
 | cherry-pick { |x| $x.value? }
 | compact
@@ -532,7 +532,7 @@ jq -r 'walk(if type == "number" then . * 2 else . end)'
 In `nu`, there is no built-in function to achieve this. See the [Appendix: Custom commands](#appendix-custom-commands) for an implementation of the command `filter-map` shown in the example below.
 
 ```nu
-> '{"data": {"values": [1, 2, 3], "nested": {"values": [4, 5, 6]}}}'
+'{"data": {"values": [1, 2, 3], "nested": {"values": [4, 5, 6]}}}'
 | from json
 | filter-map {|value| if ($value | describe) == "int" { $value * 2 } else { $value }}
 ```
@@ -572,7 +572,7 @@ jq -r 'group_by(.category)'
 In `nu` we do:
 
 ```nu
-> '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
+'[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
 ```
@@ -611,7 +611,7 @@ jq -r 'group_by(.category) | map({category: .[0].category, sum: map(.value) | ad
 In `nu` we do:
 
 ```nu
-> '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
+'[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
 | update items { |row| $row.items.value | math sum }
@@ -630,7 +630,7 @@ jq -r 'group_by(.category) | map({category: .[0].category, sum: (map(.value) | a
 In `nu` we do:
 
 ```nu
-> '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
+'[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
 | update items { |row| $row.items.value | math sum }
@@ -660,7 +660,7 @@ jq -r 'reduce .[] as $item (0; . + $item.value)'
 In `nu` we do:
 
 ```nu
-> '[{"value": 10}, {"value": 20}, {"value": 30}]'
+'[{"value": 10}, {"value": 20}, {"value": 30}]'
 | from json
 | reduce -f 0 { |item, acc| $acc + $item.value }
 ```
@@ -685,7 +685,7 @@ jq -r 'map(.score) | add / length'
 In `nu` we do:
 
 ```nu
-> '[{"score": 90}, {"score": 85}, {"score": 95}]'
+'[{"score": 90}, {"score": 85}, {"score": 95}]'
 | from json
 | get score
 | math avg
@@ -709,7 +709,7 @@ jq -r 'group_by(. / 5 | floor * 5) | map({ bin: .[0], count: length })'
 In `nu` we do:
 
 ```nu
-> '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]'
+'[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]'
 | from json
 | group-by --to-table { $in // 5 * 5 }
 | each { |row| {bin: $row.items.0, count: ($row.items | length)} }
