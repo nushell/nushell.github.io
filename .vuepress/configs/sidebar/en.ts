@@ -147,6 +147,7 @@ export const sidebarEn: SidebarConfig = {
         'ssh_agent',
         'tables',
         'polars_v_pandas_v_nushell',
+        'jq_v_nushell',
       ],
     },
   ],
