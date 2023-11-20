@@ -4,7 +4,42 @@ title: Parsing
 
 # Parsing
 
-Nu offers the ability to do some basic parsing.
+Nu offers the ability to do some basic parsing, with different ways to achieve the same goal.
+
+Builtin-functions that can be used include:
+
+- `lines`
+- `detect columns`
+- `parse`
+- `str ...`
+- `from ssv`
+
+A few illustrative examples follow.
+
+## Examples
+
+### `detect columns` (pretty automatic)
+
+```nu
+df -h | str replace "Mounted on" Mounted_On | detect columns
+```
+
+For an output like from `df` this is probably the most compact way to achieve a nice tabular output.
+The `str replace` is needed here because one of the column headers has a space in it.
+
+### Using `from ssv`
+
+Also the the builtin `from` data parser for `ssv` (*s*pace *s*eparated *v*alues) can be used:
+
+```
+df -h | str replace "Mounted on" Mounted_On | from ssv --aligned-columns --minimum-spaces 1
+```
+
+`from ssv` supports several modifying flags to tweak its behaviour.
+
+Note we still need to fix the column headers if they have unexpected spaces.
+
+### Using `parse`
 
 How to parse an arbitrary pattern from a string of text into a multi-column table.
 
