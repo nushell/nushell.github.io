@@ -8,8 +8,10 @@ Hello and welcome to the Nushell Contributor Book. Nushell, or Nu as its often c
 
 Contributing to Nu will require at least some basic programmer experience, and it's helpful to have some experience with Rust. That said, we've had people contribute to Nu who have never written a line of Rust before writing their submission. If you are interested in contributing, there's a growing community of people who would like to help you succeed.
 
-This covers three separate areas:
+This aims to cover three separate areas:
 
 1. The Design Philosophy of Nu
 1. The Implementation of Nu
-1. Best practices of coding for Nu
+1. Best practices for coding for Nu
+
+The latter two topics are primarily covered directly in the [Nushell repository](https://github.com/nushell/nushell) in developer documentation crossreferenced from its [`CONTRIBUTING.md` file](https://github.com/nushell/nushell/blob/main/CONTRIBUTING.md).
