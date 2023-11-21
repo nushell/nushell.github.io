@@ -8,17 +8,16 @@ Commands are the building blocks for pipelines in Nu. They do the action of the 
 
 ## Internal commands
 
-All commands inside of Nu, including plugins, are internal commands. Internal commands communicate with each other using streams of [Tagged&lt;Value&gt;](https://github.com/nushell/nushell/blob/d30c40b40ebfbb411a503ad7c7bceae8029c6689/crates/nu-source/src/meta.rs#L91) and [ShellError](https://github.com/nushell/nushell/blob/main/crates/nu-errors/src/lib.rs#L179).
+All commands inside of Nu, including plugins, are internal commands. Internal commands communicate with each other using [`PipelineData`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.PipelineData.html).
 
 ### Signature
 
-Commands use a light typechecking pass to ensure that arguments passed to them can be handled correctly. To enable this, each command provides a Signature which tells Nu:
+Commands use a light typechecking pass to ensure that arguments passed to them can be handled correctly. To enable this, each [`Command`](https://docs.rs/nu-protocol/latest/nu_protocol/engine/trait.Command.html) provides a [`Signature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Signature.html) which tells Nu:
 
 - The name of the command
 - The positional arguments (e.g. in `start x y` the `x` and `y` are positional arguments)
 - If the command takes an unbounded number of additional positional arguments (e.g. `start a1 a2 a3 ... a99 a100`)
 - The named arguments (e.g. `ansi gradient --fgstart '0x40c9ff'`)
-- If the command is a filter or a sink
 
 With this information, a pipeline can be checked for potential problems before it's executed.
 
@@ -34,7 +33,7 @@ Internal commands communicate with each other using the complete value stream th
 
 ### Internal to external
 
-Internal commands that send text to external commands need to have prepared text strings ahead of time. If an object is sent directly to an external command, that is considered an error as there is no way to infer how the structured data should be represented for the external command. The user is expected to either narrow down to a simple data cell or to use one of the file type converters (like `to-json`) to convert the table into a string representation.
+Internal commands that send text to external commands need to have prepared text strings ahead of time. If an object is sent directly to an external command, that is considered an error as there is no way to infer how the structured data should be represented for the external command. The user is expected to either narrow down to a simple data cell or to use one of the file type converters (like `to json`) to convert the table into a string representation.
 
 The external command is opened so that its `stdin` is redirected, so that the data can be sent to it.
 

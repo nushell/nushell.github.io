@@ -30,17 +30,4 @@ export const sidebarEs: SidebarConfig = {
       ],
     },
   ],
-  // "/es/contributor-book/": [
-  //   {
-  //     text: "Contributor Book",
-  //     collapsable: false,
-  //     children: [
-  //       "introduccion",
-  //       "filosofia",
-  //       "valores",
-  //       "comandos",
-  //       "metadatos",
-  //     ],
-  //   },
-  // ],
 };

@@ -111,22 +111,20 @@ export const sidebarEn: SidebarConfig = {
       children: commandCategories,
     },
   ],
-  // "/contributor-book/": [
-  //   {
-  //     text: "Contributor Book",
-  //     collapsible: false,
-  //     children: [
-  //       "",
-  //       "philosophy",
-  //       "values",
-  //       "commands",
-  //       "streams",
-  //       "metadata",
-  //       "plugins",
-  //       "shells",
-  //     ],
-  //   },
-  // ],
+  '/contributor-book/': [
+    {
+      text: 'Contributor Book',
+      link: '/contributor-book/README.md',
+      collapsible: false,
+      children: [
+        'README.md',
+        'philosophy',
+        'philosophy_0_80',
+        'commands',
+        'plugins',
+      ],
+    },
+  ],
   '/cookbook/': [
     {
       text: 'Cookbook',

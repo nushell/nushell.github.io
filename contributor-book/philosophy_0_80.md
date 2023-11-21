@@ -1,3 +1,7 @@
+---
+title: Philosophy (0.80)
+---
+
 # Nushell design philosophy
 
 ## Core philosophy
