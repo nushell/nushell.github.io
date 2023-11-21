@@ -21,20 +21,4 @@ export const sidebarPtBR: SidebarConfig = {
       ],
     },
   ],
-  // "/pt-BR/contributor-book/": [
-  //   {
-  //     text: "Contributor Book",
-  //     collapsable: false,
-  //     children: [
-  //       "introdução",
-  //       "filosofia",
-  //       "valores",
-  //       "comandos",
-  //       "streams",
-  //       "metadados",
-  //       "plugins",
-  //       "shells",
-  //     ],
-  //   },
-  // ],
 };
