@@ -95,6 +95,21 @@ Error: nu::shell::column_not_found
 
 > $env.FOO? | describe
 nothing
+
+> $env.FOO? | default "BAR"
+BAR
+```
+
+Alternatively, you can check for the presence of an environmental variable with `in`:
+
+```
+> $env.FOO
+BAR
+
+> if "FOO" in $env {
+>     echo $env.FOO
+> }
+BAR
 ```
 
 ## Scoping
