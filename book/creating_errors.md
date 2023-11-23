@@ -16,7 +16,7 @@ let span = (metadata $x).span;
 Next, you can create an error using the [`error make`](/commands/docs/error_make.md) command. This command takes in a record that describes the error to create:
 
 ```nu
-error make {msg: "this is fishy", label: {text: "fish right here", start: $span.start, end: $span.end } }
+error make {msg: "this is fishy", label: {text: "fish right here", span: $span } }
 ```
 
 Together with your custom command, it might look like this:
@@ -28,8 +28,7 @@ def my-command [x] {
         msg: "this is fishy",
         label: {
             text: "fish right here",
-            start: $span.start,
-            end: $span.end
+            span: (metadata $x).span
         }
     }
 }
