@@ -56,7 +56,7 @@ Diese besteht aus name/value Paaren, welche alle auf einmal geladen werden:
 Dies sind Variablen, welche nur innerhalb eines Blocks gültig sind.
 Siehe [Einmalig verwendete Umgebungsvariablen](environment.md#single-use-environment-variables) für Details.
 
-### Aufruf eines Befehls mit [`def-env`](/commands/docs/def-env.md)
+### Aufruf eines Befehls mit [`def --env`](/commands/docs/def.md)
 
 Siehe [Definiere Umgebung aus eigenen Befehlen](environment.md#defining-environment-from-custom-commands) für Details.
 
@@ -119,11 +119,11 @@ $env.FOO = 'BAR'
 ## Definition einer Umgebungsvariablen für selbst definierten Befehl
 
 Aufgrund der Gültigkeitsregeln ist eine Umgebungsvariable, welche innerhalb eines selbstdefinierten Befehls gesetzt ist, auch nur in dessen Block gültig.
-Wird sie jedoch mit [`dev-env`](/commands/docs/def-env.md) anstatt [`def`](/commands/docs/def.md) gesetzt, so wird sie beim verlassen des Blocks erhalten bleiben.
+Wird sie jedoch mit [`def --env`](/commands/docs/def.md) anstatt [`def`](/commands/docs/def.md) gesetzt, so wird sie beim verlassen des Blocks erhalten bleiben.
 (Gilt auch für `export def`, siehe [Modules](modules.md))
 
 ```
-> def-env foo [] {
+> def --env foo [] {
     $env.FOO = 'BAR'
 }
 
