@@ -84,7 +84,7 @@ $env.config = ($env.config | upsert hooks {
 ## Changing Environment
 
 One feature of the hooks is that they preserve the environment.
-Environment variables defined inside the hook **block** will be preserved in a similar way as [`def-env`](environment.md#defining-environment-from-custom-commands).
+Environment variables defined inside the hook **block** will be preserved in a similar way as [`def --env`](environment.md#defining-environment-from-custom-commands).
 You can test it with the following example:
 
 ```nu

@@ -63,7 +63,7 @@ If you have more than one environment variable you'd like to set, you can use [`
 These are defined to be active only temporarily for a duration of executing a code block.
 See [Single-use environment variables](environment.md#single-use-environment-variables) for details.
 
-### Calling a command defined with [`def-env`](/commands/docs/def-env.md)
+### Calling a command defined with [`def --env`](/commands/docs/def.md)
 
 See [Defining environment from custom commands](environment.md#defining-environment-from-custom-commands) for details.
 
@@ -167,10 +167,10 @@ $env.FOO = 'BAR'
 ## Defining environment from custom commands
 
 Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
-However, a command defined as [`def-env`](/commands/docs/def-env.md) instead of [`def`](/commands/docs/def.md) (it applies also to [`export def`](/commands/docs/export_def.md), see [Modules](modules.md)) will preserve the environment on the caller's side:
+However, a command defined as [`def --env`](/commands/docs/def.md) instead of [`def`](/commands/docs/def.md) (it applies also to [`export def`](/commands/docs/export_def.md), see [Modules](modules.md)) will preserve the environment on the caller's side:
 
 ```nu
-> def-env foo [] {
+> def --env foo [] {
     $env.FOO = 'BAR'
 }
 

@@ -17,7 +17,7 @@ In Nushell, creating a module and importing definitions from a module are two di
 
 You can define the following things inside a module:
 
-- Commands\* (`def`, `def-env`)
+- Commands\* (`def`)
 - Aliases (`alias`)
 - Known externals\* (`extern`)
 - Submodules (`module`)
@@ -186,7 +186,7 @@ The `main` is exported only when
 
 Importing definitions selectively (`use greetings.nu hello` or `use greetings.nu [hello hi]`) does not define the `greetings` command from `main`. You can, however, selectively import `main` using `use greetings main` (or `[main]`) which defines _only_ the `greetings` command without pulling in `hello` or `hi`.
 
-Apart from commands (`def`, `def-env`), known externals (`extern`) can also be named `main`.
+Apart from commands (`def`, `def --env`), known externals (`extern`) can also be named `main`.
 
 ## Submodules and subcommands
 
@@ -469,7 +469,7 @@ Now you've set up a directory where you can put your completion files and you sh
 
 ### Setting environment + aliases (conda style)
 
-`def-env` commands, `export-env` block and aliases can be used to dynamically manipulate "virtual environments" (a concept well known from Python).
+`def --env` commands, `export-env` block and aliases can be used to dynamically manipulate "virtual environments" (a concept well known from Python).
 
 We use it in our official virtualenv integration https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu
 
