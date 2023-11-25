@@ -37,7 +37,7 @@ export def hi [where: string] {
 
 我们在 `greetings` 模块中定义了 `hello` 和 `hi` 两个自定义命令。`export`关键字使得以后可以从模块中导入该命令。
 
-与[`def`](/commands/docs/def.md)类似，也可以用`export`关键字标记[`def-env`](/commands/docs/def-env.md)（你可以在[环境](environment.md)章节中了解更多关于[`def-env`](/commands/docs/def-env.md)的信息）。
+与[`def`](/commands/docs/def.md)类似，也可以用`export`关键字标记[`def --env`](/commands/docs/def.md)（你可以在[环境](environment.md)章节中了解更多关于[`def --env`](/commands/docs/def.md)的信息）。
 
 ## 使用模块
 
@@ -199,7 +199,7 @@ hello Arthur, King of the Britons!
 下面是所有你可以导出的列表：
 
 - `export def` - 导出一个自定义命令
-- `export def-env` - 导出一个自定义环境命令
+- `export def --env` - 导出一个自定义环境命令
 - `export env` - 导出一个环境变量
 - `export alias` - 导出一个别名
 - `export extern` - 导出一个已知外部命令的定义
