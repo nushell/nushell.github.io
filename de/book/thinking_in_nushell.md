@@ -129,9 +129,9 @@ Der `cd` Befehl wechselt die `PWD` Umgebungsvariable, was wiederum nur für den 
 Jede Iteration startet deshalb wieder im gleichen Start-Verzeichnis.
 
 Mit diesen Gültigkeitsbereichen, lassen sich besser vorhersehbare Befehle schreiben, welche einfacher zu lesen sind. Es erleichtert ebenfalls die Fehlersuche.
-Nushell stellt auch Hilfsbefehle zur Verfügung wie [`def-env`](/commands/docs/def-env.md), [`load-env`](/commands/docs/load-env.md)), als einfachen Weg ganze Stapel von Umgebungsupdates durch zu führen.
+Nushell stellt auch Hilfsbefehle zur Verfügung wie [`def --env`](/commands/docs/def.md), [`load-env`](/commands/docs/load-env.md)), als einfachen Weg ganze Stapel von Umgebungsupdates durch zu führen.
 
-`*` - Es gibt hier eine Ausnahme. [`def-env`](/commands/docs/def-env.md) erlaubt es einem Befehl an der Umgebung teilzuhaben, von der aus er aufgerufen wurde.
+`*` - Es gibt hier eine Ausnahme. [`def --env`](/commands/docs/def.md) erlaubt es einem Befehl an der Umgebung teilzuhaben, von der aus er aufgerufen wurde.
 
 **Denken in Nushell** - Das bewährte Verfahren keine globalen veränderlichen Variablen zu benutzen, erweitert sich in Nushell auf die Umgebung.
 Die eingebauten Hilfs-Befehle helfen dabei, einfacher mit der Umgebung zu arbeiten.

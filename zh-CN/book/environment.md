@@ -55,7 +55,7 @@ $env.PATH = ($env.PATH | prepend '/path/you/want/to/add')
 这些变量被定义为只在执行代码块的过程中临时有效。
 详情请看 [一次性环境变量](environment.md#一次性环境变量) 。
 
-### 调用[`def-env`](/commands/docs/def-env.md)定义的命令
+### 调用[`def --env`](/commands/docs/def.md)定义的命令
 
 详情见 [从自定义命令中定义环境](environment.md#从自定义命令中定义环境变量)。
 
@@ -127,10 +127,10 @@ $env.FOO = 'BAR'
 ## 从自定义命令中定义环境变量
 
 由于作用域规则，在自定义命令中定义的任何环境变量都只存在于该命令的作用域内。
-然而，用[`def-env`](/commands/docs/def-env.md)而不是[`def`](/commands/docs/def.md)定义的命令（它也适用于`export def`，见 [模块](modules.md)）将在调用者一方保留环境设置：
+然而，用[`def --env`](/commands/docs/def.md)而不是[`def`](/commands/docs/def.md)定义的命令（它也适用于`export def`，见 [模块](modules.md)）将在调用者一方保留环境设置：
 
 ```nu
-> def-env foo [] {
+> def --env foo [] {
     $env.FOO = 'BAR'
 }
 

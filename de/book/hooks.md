@@ -85,7 +85,7 @@ $env.config = ($env.config | upsert hooks {
 ## Changing Environment
 
 Eine Besonderheit der Hooks ist, dass sie die Umgebung bewahren.
-Umgebungsvariablen im Hook **Block** werden in ähnlicher Weise wie [`def-env`](environment.md#defining-environment-from-custom-commands) erhalten.
+Umgebungsvariablen im Hook **Block** werden in ähnlicher Weise wie [`def --env`](environment.md#defining-environment-from-custom-commands) erhalten.
 Folgendes Beispiel zeigt dies:
 
 ```
