@@ -48,7 +48,7 @@ This table was last updated for Nu 0.67.0.
 | `SET <var>=<string>`                 | `$env.<var> = <string>`                                                             | Set environment variables                                             |
 | `SETLOCAL`                           | (default behavior)                                                                  | Localize environment changes to a script                              |
 | `START <path>`                       | `explorer <path>`                                                                   | Open a file as if double-clicked in File Explorer                     |
-| `TIME /T`                            | `date now \| date format "%H:%M:%S"`                                                | Get the current time                                                  |
+| `TIME /T`                            | `date now \| format date "%H:%M:%S"`                                                | Get the current time                                                  |
 | `TIME`                               |                                                                                     | Set the current time                                                  |
 | `TITLE`                              |                                                                                     | Set the cmd.exe window name                                           |
 | `TYPE`                               | `open --raw`                                                                        | Display the contents of a text file                                   |

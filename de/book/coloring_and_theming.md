@@ -375,7 +375,7 @@ Der Nushell Prompt ist konfigurierbar mit diesen Umgebungsvariablen:
 Beispiel: Für einen einfachen Prompt wäre folgendes mögllich. Hinweis `PROMPT_COMMAND` benötigt einen `block` wogegen die anderen einen `string` erwarten.
 
 ```nu
-> $env.PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
+> $env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 Soll der standard `PROMPT_INDICATOR` geändert werden, sieht das so aus.
