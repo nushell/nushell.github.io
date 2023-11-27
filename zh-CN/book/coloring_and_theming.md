@@ -371,7 +371,7 @@ Nushell 的提示符可以通过这些环境变量进行配置：
 例如：对于一个简单的提示，我们可以这样做。注意`PROMPT_COMMAND`需要一个`block`而其他的需要一个`string`。
 
 ```nu
-> $env.PROMPT_COMMAND = { build-string (date now | date format '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
+> $env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 如果你不喜欢默认的`PROMPT_INDICATOR`，你可以这样改变它：

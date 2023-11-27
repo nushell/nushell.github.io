@@ -171,7 +171,7 @@ $zones | wrap 'Zone' | upsert Time {|it|
     (
         date now
             | date to-timezone $it.Zone
-            | date format '%Y.%m.%d %H:%M'
+            | format date '%Y.%m.%d %H:%M'
     )
 }
 ```

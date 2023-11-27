@@ -146,7 +146,7 @@ Now this looks more nu-ish
 If we want to revert back to a date string we can do something like this with the `nth` command and the `get` command.
 
 ```nu
-git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | select 3 | get date | date format | get 0
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | select 3 | get date | format date | get 0
 ```
 
 ```
@@ -301,7 +301,7 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
 Now let's try `group-by` and see what happens. This is a tiny bit tricky because dates are tricky. When you use `group-by` on dates you have to remember to use the `group-by date` subcommand so it's `group-by date date_column_name`.
 
 ```nu
-git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | date format '%Y-%m-%d'} | group-by date
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | format date '%Y-%m-%d'} | group-by date
 ```
 
 ```
@@ -317,7 +317,7 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
 This would look better if we transpose the data and name the columns
 
 ```nu
-git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | date format '%Y-%m-%d'} | group-by date | transpose date count
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime | format date '%Y-%m-%d'} | group-by date | transpose date count
 ```
 
 ```
