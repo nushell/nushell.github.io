@@ -63,3 +63,5 @@ Note: this table assumes Nu 0.60.0 or later.
 | `bash <script file>`                 | `nu <script file>`                                            | Run a script file                                                 |
 | `\`                                  | `( <command> )`                                               | A command can span multiple lines when wrapped with `(` and `)`   |
 | `pwd`                                | `$env.PWD`                                                    | Display the current directory                                     |
+| `read var`                           | `let var = input`                                             | Get input from the user. |
+
