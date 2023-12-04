@@ -15,13 +15,13 @@ Let's start with the basics: consuming a JSON string.
 In `jq`, inputs are always expected to be JSON so we simply do:
 
 ```sh
-echo '{"title": "jq vs Nushell", publication_date: "2023-11-20"}' | jq -r '.'
+echo '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}' | jq -r '.'
 ```
 
 In `nu`, we need to be explicit because Nushell has a wider range of input choices:
 
 ```nu
-'{"title": "jq vs Nushell", publication_date: "2023-11-20"}'
+'{"title": "jq vs Nushell", "publication_date": "2023-11-20"}'
 | from json
 ```
 
