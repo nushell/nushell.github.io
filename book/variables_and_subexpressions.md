@@ -48,14 +48,15 @@ There are a couple of assignment operators used with mutable variables
 | `-=`     | Subtracts a value from the variable and makes the difference its new value |
 | `*=`     | Multiplies the variable by a value and makes the product its new value     |
 | `/=`     | Divides the variable by a value and makes the quotient its new value       |
-| `**=`    | Concatenates the variable with a list making the new list its new value    |
+| `++=`    | Appends a list or a value to a variable                                    |
 
 > **Note**
 >
 > 1. `+=`, `-=`, `*=` and `/=` are only valid in the contexts where their root operations
 >    are expected to work. For example, `+=` uses addition, so it can not be used for contexts
 >    where addition would normally fail
-> 2. `**=` requires a variable representing a list **and** a list argument
+> 2. `++=` requires that either the variable **or** the argument is a
+>    list.
 
 ##### More on Mutability
 
