@@ -1,6 +1,6 @@
-# Background task in Nu
+# Background tasks with Nu
 
-Currently Nushell doesn't have built-in background task management feature, but you can make it "support" background task with some tools, here are some examples:
+Currently, Nushell doesn't have built-in background task management feature, but you can make it "support" background task with some tools, here are some examples:
 
 1. Using a third-party task management tools, like [pueue](https://github.com/Nukesor/pueue)
 2. Using a terminal multiplexer, like [tmux](https://github.com/tmux/tmux/wiki) or [zellij](https://zellij.dev/)
