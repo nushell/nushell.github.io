@@ -1,16 +1,12 @@
 # Command signature
 
-nu commands can be given explicit signatures; take [`histogram`](/commands/docs/histogram.md) as an example, the signature is like this:
+nu commands can be given explicit signatures; take [`str stats`](/commands/docs/str_stats.md) as an example, the signature is like this:
 
 ```nu
-def histogram [
-  column-name?: string,
-  frequency-column-name?: string,
-  --percentage-type (-t): string = "normalize"
-]: list<any> -> table { }
+def "str stats" []: string -> record { }
 ```
 
-The type names between the `:` and the opening curly brace `{` describe the command's input/output pipeline types. The input type for a given pipeline, in this case `list<any>`, is given before the `->`; and the output type `table` is given after `->`. There can be multiple input/output types. If there are multiple input/output types, they can be placed within brackets and separated with commas, as in [`str join`](/commands/docs/str_join.md):
+The type names between the `:` and the opening curly brace `{` describe the command's input/output pipeline types. The input type for a given pipeline, in this case `string`, is given before the `->`; and the output type `record` is given after `->`. There can be multiple input/output types. If there are multiple input/output types, they can be placed within brackets and separated with commas, as in [`str join`](/commands/docs/str_join.md):
 
 ```nu
 def "str join" [separator?: string]: [list -> string, string -> string] { }
