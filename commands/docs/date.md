@@ -2,7 +2,7 @@
 title: date
 categories: |
   date
-version: 0.87.0
+version: 0.88.0
 date: |
   Date-related commands.
 usage: |
@@ -32,7 +32,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                                         | type    | usage                                                     |
 | ------------------------------------------------------------ | ------- | --------------------------------------------------------- |
-| [`date format`](/commands/docs/date_format.md)               | Builtin | Removed command: use `format date` instead                |
+| [`date format`](/commands/docs/date_format.md)               | Builtin | Removed command: use `format date` instead.               |
 | [`date humanize`](/commands/docs/date_humanize.md)           | Builtin | Print a 'humanized' format for the date, relative to now. |
 | [`date list-timezone`](/commands/docs/date_list-timezone.md) | Builtin | List supported time zones.                                |
 | [`date now`](/commands/docs/date_now.md)                     | Builtin | Get the current date.                                     |

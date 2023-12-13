@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.87.0
+version: 0.88.0
 strings: |
   Split a string into multiple columns using a separator.
 usage: |

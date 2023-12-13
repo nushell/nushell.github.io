@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.87.0
+version: 0.88.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -24,6 +24,7 @@ usage: |
  -  `--offset, -o {int}`: Specify timezone by offset from UTC if the input is a Unix timestamp, like '+8', '-4'
  -  `--format, -f {string}`: Specify expected format of INPUT string to parse to datetime. Use --list to see options
  -  `--list, -l`: Show all possible variables for use in --format flag
+ -  `--list-human, -n`: Show human-readable datetime parsing examples
 
 ## Parameters
 
@@ -75,9 +76,27 @@ Convert list of timestamps to datetimes
 ```nu
 > ["2023-03-30 10:10:07 -05:00", "2023-05-05 13:43:49 -05:00", "2023-06-05 01:37:42 -05:00"] | into datetime
 ╭───┬──────────────╮
-│ 0 │ 7 months ago │
-│ 1 │ 6 months ago │
-│ 2 │ 5 months ago │
+│ 0 │ 8 months ago │
+│ 1 │ 7 months ago │
+│ 2 │ 6 months ago │
 ╰───┴──────────────╯
+
+```
+
+Parsing human readable datetimes
+```nu
+> 'Today at 18:30' | into datetime
+
+```
+
+Parsing human readable datetimes
+```nu
+> 'Last Friday at 19:45' | into datetime
+
+```
+
+Parsing human readable datetimes
+```nu
+> 'In 5 minutes and 30 seconds' | into datetime
 
 ```

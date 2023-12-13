@@ -2,7 +2,7 @@
 title: dfr rename
 categories: |
   dataframe or lazyframe
-version: 0.87.0
+version: 0.88.0
 dataframe_or_lazyframe: |
   Rename a dataframe column.
 usage: |

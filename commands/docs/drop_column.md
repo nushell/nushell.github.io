@@ -2,7 +2,7 @@
 title: drop column
 categories: |
   filters
-version: 0.87.0
+version: 0.88.0
 filters: |
   Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.
 usage: |

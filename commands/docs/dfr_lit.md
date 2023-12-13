@@ -2,7 +2,7 @@
 title: dfr lit
 categories: |
   expression
-version: 0.87.0
+version: 0.88.0
 expression: |
   Creates a literal expression.
 usage: |

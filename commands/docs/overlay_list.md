@@ -2,7 +2,7 @@
 title: overlay list
 categories: |
   core
-version: 0.87.0
+version: 0.88.0
 core: |
   List all active overlays.
 usage: |

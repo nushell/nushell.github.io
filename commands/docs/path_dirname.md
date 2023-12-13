@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   path
-version: 0.87.0
+version: 0.88.0
 path: |
   Get the parent directory of a path.
 usage: |
@@ -34,28 +34,28 @@ usage: |
 
 Get dirname of a path
 ```nu
-> '/home/joe/code/test.txt' | path dirname
-/home/joe/code
+> 'C:\Users\joe\code\test.txt' | path dirname
+C:\Users\joe\code
 ```
 
 Get dirname of a list of paths
 ```nu
-> [ /home/joe/test.txt, /home/doe/test.txt ] | path dirname
-╭───┬───────────╮
-│ 0 │ /home/joe │
-│ 1 │ /home/doe │
-╰───┴───────────╯
+> [ C:\Users\joe\test.txt, C:\Users\doe\test.txt ] | path dirname
+╭───┬──────────────╮
+│ 0 │ C:\Users\joe │
+│ 1 │ C:\Users\doe │
+╰───┴──────────────╯
 
 ```
 
 Walk up two levels
 ```nu
-> '/home/joe/code/test.txt' | path dirname --num-levels 2
-/home/joe
+> 'C:\Users\joe\code\test.txt' | path dirname --num-levels 2
+C:\Users\joe
 ```
 
 Replace the part that would be returned with a custom path
 ```nu
-> '/home/joe/code/test.txt' | path dirname --num-levels 2 --replace /home/viking
-/home/viking/code/test.txt
+> 'C:\Users\joe\code\test.txt' | path dirname --num-levels 2 --replace C:\Users\viking
+C:\Users\viking\code\test.txt
 ```

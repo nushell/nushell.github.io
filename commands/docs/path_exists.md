@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   path
-version: 0.87.0
+version: 0.88.0
 path: |
   Check whether a path exists.
 usage: |
@@ -29,13 +29,13 @@ usage: |
 
 Check if a file exists
 ```nu
-> '/home/joe/todo.txt' | path exists
+> 'C:\Users\joe\todo.txt' | path exists
 false
 ```
 
 Check if files in list exist
 ```nu
-> [ /home/joe/todo.txt, /home/doe/todo.txt ] | path exists
+> [ C:\joe\todo.txt, C:\Users\doe\todo.txt ] | path exists
 ╭───┬───────╮
 │ 0 │ false │
 │ 1 │ false │

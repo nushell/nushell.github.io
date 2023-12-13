@@ -2,7 +2,7 @@
 title: random bool
 categories: |
   random
-version: 0.87.0
+version: 0.88.0
 random: |
   Generate a random boolean value.
 usage: |

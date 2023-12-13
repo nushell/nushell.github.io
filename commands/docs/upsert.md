@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.87.0
+version: 0.88.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -42,6 +42,16 @@ Update a record's value
 ╰───────┴─────────╯
 ```
 
+Insert a new entry into a record
+```nu
+> {'name': 'nu', 'stars': 5} | upsert language 'Rust'
+╭──────────┬──────╮
+│ name     │ nu   │
+│ stars    │ 5    │
+│ language │ Rust │
+╰──────────┴──────╯
+```
+
 Update each row of a table
 ```nu
 > [[name lang]; [Nushell ''] [Reedline '']] | upsert lang 'Rust'
@@ -54,28 +64,20 @@ Update each row of a table
 
 ```
 
-Insert a new entry into a single record
+Insert a new column with values computed based off the other columns
 ```nu
-> {'name': 'nu', 'stars': 5} | upsert language 'Rust'
-╭──────────┬──────╮
-│ name     │ nu   │
-│ stars    │ 5    │
-│ language │ Rust │
-╰──────────┴──────╯
-```
-
-Use in closure form for more involved updating logic
-```nu
-> [[count fruit]; [1 'apple']] | enumerate | upsert item.count {|e| ($e.item.fruit | str length) + $e.index } | get item
-╭───┬───────┬───────╮
-│ # │ count │ fruit │
-├───┼───────┼───────┤
-│ 0 │     5 │ apple │
-╰───┴───────┴───────╯
+> [[foo]; [7] [8] [9]] | upsert bar {|row| $row.foo * 2 }
+╭───┬─────┬─────╮
+│ # │ foo │ bar │
+├───┼─────┼─────┤
+│ 0 │   7 │  14 │
+│ 1 │   8 │  16 │
+│ 2 │   9 │  18 │
+╰───┴─────┴─────╯
 
 ```
 
-Upsert an int into a list, updating an existing value based on the index
+Upsert into a list, updating an existing value at an index
 ```nu
 > [1 2 3] | upsert 0 2
 ╭───┬───╮
@@ -86,7 +88,7 @@ Upsert an int into a list, updating an existing value based on the index
 
 ```
 
-Upsert an int into a list, inserting a new value based on the index
+Upsert into a list, inserting a new value at the end
 ```nu
 > [1 2 3] | upsert 3 4
 ╭───┬───╮

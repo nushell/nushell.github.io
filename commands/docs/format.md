@@ -2,7 +2,7 @@
 title: format
 categories: |
   strings
-version: 0.87.0
+version: 0.88.0
 strings: |
   Format columns into a string using a simple pattern.
 usage: |

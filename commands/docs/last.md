@@ -2,7 +2,7 @@
 title: last
 categories: |
   filters
-version: 0.87.0
+version: 0.88.0
 filters: |
   Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
 usage: |
@@ -25,10 +25,10 @@ usage: |
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| binary    | binary    |
-| list\<any\> | list\<any\> |
+| input     | output |
+| --------- | ------ |
+| binary    | binary |
+| list\<any\> | any    |
 ## Examples
 
 Return the last 2 items of a list/table

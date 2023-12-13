@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.87.0
+version: 0.88.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |

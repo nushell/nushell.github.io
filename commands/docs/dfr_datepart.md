@@ -2,7 +2,7 @@
 title: dfr datepart
 categories: |
   expression
-version: 0.87.0
+version: 0.88.0
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |
@@ -52,11 +52,11 @@ Creates an expression to capture multiple date parts
                 (dfr col datetime | dfr datepart minute | dfr as datetime_minute ),
                 (dfr col datetime | dfr datepart second | dfr as datetime_second ),
                 (dfr col datetime | dfr datepart nanosecond | dfr as datetime_ns ) ]
-╭───┬─────────────┬───────────────┬────────────────┬──────────────┬───────────────┬─────────────────┬─────────────────┬─────────────╮
-│ # │  datetime   │ datetime_year │ datetime_month │ datetime_day │ datetime_hour │ datetime_minute │ datetime_second │ datetime_ns │
-├───┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼─────────────────┼─────────────┤
-│ 0 │ 2 years ago │          2021 │             12 │           30 │             1 │               2 │               3 │   123456789 │
-╰───┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴─────────────────┴─────────────╯
+╭────┬─────────────┬───────────────┬────────────────┬──────────────┬───────────────┬─────────────────┬─────────────────┬─────╮
+│  # │  datetime   │ datetime_year │ datetime_month │ datetime_day │ datetime_hour │ datetime_minute │ datetime_second │ ... │
+├────┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼─────────────────┼─────┤
+│  0 │ 2 years ago │          2021 │             12 │           30 │             1 │               2 │               3 │ ... │
+╰────┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴─────────────────┴─────╯
 
 ```
 

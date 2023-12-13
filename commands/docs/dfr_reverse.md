@@ -2,7 +2,7 @@
 title: dfr reverse
 categories: |
   lazyframe
-version: 0.87.0
+version: 0.88.0
 lazyframe: |
   Reverses the LazyFrame
 usage: |
@@ -27,7 +27,7 @@ usage: |
 
 ## Examples
 
-Reverses the dataframe
+Reverses the dataframe.
 ```nu
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr reverse
 ╭───┬───┬───╮

@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.87.0
+version: 0.88.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -24,7 +24,6 @@ usage: |
  -  `--no-dir, -D`: Whether to filter out directories from the returned paths
  -  `--no-file, -F`: Whether to filter out files from the returned paths
  -  `--no-symlink, -S`: Whether to filter out symlinks from the returned paths
- -  `--not, -n {list<string>}`: DEPRECATED OPTION: Patterns to exclude from the results
  -  `--exclude, -e {list<string>}`: Patterns to exclude from the search: `glob` will not walk the inside of directories matching the excluded patterns.
 
 ## Parameters
@@ -52,7 +51,7 @@ Search for *.rs and *.toml files recursively up to 2 folders deep
 
 ```
 
-Search for files and folders that begin with uppercase C and lowercase c
+Search for files and folders that begin with uppercase C or lowercase c
 ```nu
 > glob "[Cc]*"
 
