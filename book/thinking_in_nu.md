@@ -6,7 +6,7 @@ So what does it mean to think in Nushell? Here are some common topics that come 
 
 ## Nushell isn't bash
 
-Nushell is both a programming language and a shell and because of this has its own way of working with files, directories, websites, and more. We've modeled this to work closely with what you may be familiar with other shells. Pipelines work by attaching two commands together:
+Nushell is both a programming language and a shell. Because of this, it has its own way of working with files, directories, websites, and more. We've modeled this to work closely with what you may be familiar with other shells. Pipelines work by attaching two commands together:
 
 ```nu
 > ls | length
