@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.87.0
+version: 0.88.0
 network: |
   Fetch the contents from a URL.
 usage: |

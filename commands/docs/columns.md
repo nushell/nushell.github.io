@@ -2,7 +2,7 @@
 title: columns
 categories: |
   filters
-version: 0.87.0
+version: 0.88.0
 filters: |
   Given a record or table, produce a list of its columns' names.
 usage: |

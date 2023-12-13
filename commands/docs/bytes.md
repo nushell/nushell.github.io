@@ -2,7 +2,7 @@
 title: bytes
 categories: |
   bytes
-version: 0.87.0
+version: 0.88.0
 bytes: |
   Various commands for working with byte data.
 usage: |
@@ -33,7 +33,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                                       | type    | usage                                                                                      |
 | ---------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
 | [`bytes add`](/commands/docs/bytes_add.md)                 | Builtin | Add specified bytes to the input.                                                          |
-| [`bytes at`](/commands/docs/bytes_at.md)                   | Builtin | Get bytes defined by a range                                                               |
+| [`bytes at`](/commands/docs/bytes_at.md)                   | Builtin | Get bytes defined by a range.                                                              |
 | [`bytes build`](/commands/docs/bytes_build.md)             | Builtin | Create bytes from the arguments.                                                           |
 | [`bytes collect`](/commands/docs/bytes_collect.md)         | Builtin | Concatenate multiple binary into a single binary, with an optional separator between each. |
 | [`bytes ends-with`](/commands/docs/bytes_ends-with.md)     | Builtin | Check if bytes ends with a pattern.                                                        |

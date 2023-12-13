@@ -2,7 +2,7 @@
 title: ansi link
 categories: |
   platform
-version: 0.87.0
+version: 0.88.0
 platform: |
   Add a link (using OSC 8 escape sequence) to the given string.
 usage: |

@@ -2,7 +2,7 @@
 title: each while
 categories: |
   filters
-version: 0.87.0
+version: 0.88.0
 filters: |
   Run a block on each row of the input list until a null is found, then create a new list with the results.
 usage: |

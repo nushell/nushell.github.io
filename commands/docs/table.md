@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.87.0
+version: 0.88.0
 viewers: |
   Render the table.
 usage: |
@@ -20,16 +20,17 @@ usage: |
 
 ## Flags
 
- -  `--start-number, -n {int}`: row number to start viewing from
- -  `--list, -l`: list available table modes/themes
+ -  `--theme, -t {string}`: set a table mode/theme
+ -  `--index, -i {any}`: enable (true) or disable (false) the #/index column or set the starting index
  -  `--width, -w {int}`: number of terminal columns wide (not output columns)
  -  `--expand, -e`: expand the table structure in a light mode
- -  `--expand-deep, -d {int}`: an expand limit of recursion which will take place
+ -  `--expand-deep, -d {int}`: an expand limit of recursion which will take place, must be used with --expand
  -  `--flatten, -`: Flatten simple arrays
  -  `--flatten-separator, - {string}`: sets a separator when 'flatten' used
  -  `--collapse, -c`: expand the table structure in collapse mode.
 Be aware collapse mode currently doesn't support width control
  -  `--abbreviated, -a {int}`: abbreviate the data in the table by truncating the middle part and only showing amount provided on top and bottom
+ -  `--list, -l`: list available table modes/themes
 
 
 ## Input/output types:
@@ -40,9 +41,9 @@ Be aware collapse mode currently doesn't support width control
 
 ## Examples
 
-List the files in current directory, with indexes starting from 1.
+List the files in current directory, with indexes starting from 1
 ```nu
-> ls | table --start-number 1
+> ls | table --index 1
 
 ```
 
@@ -79,6 +80,30 @@ Render data in table view (collapsed)
 │ 0 │ 1 │ 2 │
 │ 1 │ 3 │ 4 │
 ╰───┴───┴───╯
+
+```
+
+Change the table theme to the specified theme for a single run
+```nu
+> [[a b]; [1 2] [2 [4 4]]] | table --theme basic
+
+```
+
+Force showing of the #/index column for a single run
+```nu
+> [[a b]; [1 2] [2 [4 4]]] | table -i true
+
+```
+
+Set the starting number of the #/index column to 100 for a single run
+```nu
+> [[a b]; [1 2] [2 [4 4]]] | table -i 100
+
+```
+
+Force hiding of the #/index column for a single run
+```nu
+> [[a b]; [1 2] [2 [4 4]]] | table -i false
 
 ```
 

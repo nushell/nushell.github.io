@@ -2,7 +2,7 @@
 title: input list
 categories: |
   platform
-version: 0.87.0
+version: 0.88.0
 platform: |
   Interactive list selection.
 usage: |
@@ -33,7 +33,7 @@ usage: |
 | input     | output    |
 | --------- | --------- |
 | list\<any\> | list\<any\> |
-
+| range     | int       |
 ## Examples
 
 Return a single value from a list
@@ -51,6 +51,12 @@ Return multiple values from a list
 Return a single record from a table with fuzzy search
 ```nu
 > ls | input list --fuzzy 'Select the target'
+
+```
+
+Choose an item from a range
+```nu
+> 1..10 | input list
 
 ```
 

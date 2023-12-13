@@ -2,7 +2,7 @@
 title: dfr uppercase
 categories: |
   dataframe
-version: 0.87.0
+version: 0.88.0
 dataframe: |
   Uppercase the strings in the column.
 usage: |

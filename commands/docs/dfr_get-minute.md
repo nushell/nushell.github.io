@@ -2,7 +2,7 @@
 title: dfr get-minute
 categories: |
   dataframe
-version: 0.87.0
+version: 0.88.0
 dataframe: |
   Gets minute from date.
 usage: |

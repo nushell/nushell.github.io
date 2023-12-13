@@ -2,7 +2,7 @@
 title: dfr contains
 categories: |
   dataframe
-version: 0.87.0
+version: 0.88.0
 dataframe: |
   Checks if a pattern is contained in a string.
 usage: |

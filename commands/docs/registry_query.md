@@ -2,7 +2,7 @@
 title: registry query
 categories: |
   system
-version: 0.86.0
+version: 0.88.0
 system: |
   Query the Windows registry.
 usage: |
@@ -30,6 +30,7 @@ usage: |
  -  `--hkcc, -`: query the hkey_current_config hive
  -  `--hkdd, -`: query the hkey_dyn_data hive
  -  `--hkculs, -`: query the hkey_current_user_local_settings hive
+ -  `--no-expand, -u`: do not expand %ENV% placeholders in REG_EXPAND_SZ
 
 ## Parameters
 

@@ -2,7 +2,7 @@
 title: dfr filter-with
 categories: |
   dataframe or lazyframe
-version: 0.87.0
+version: 0.88.0
 dataframe_or_lazyframe: |
   Filters dataframe using a mask or expression as reference.
 usage: |

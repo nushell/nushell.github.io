@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.87.0
+version: 0.88.0
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -42,20 +42,9 @@ Update a column value
 ╰───────┴─────────╯
 ```
 
-Use in closure form for more involved updating logic
+Use a closure to alter each value in the 'authors' column to a single string
 ```nu
-> [[count fruit]; [1 'apple']] | enumerate | update item.count {|e| ($e.item.fruit | str length) + $e.index } | get item
-╭───┬───────┬───────╮
-│ # │ count │ fruit │
-├───┼───────┼───────┤
-│ 0 │     5 │ apple │
-╰───┴───────┴───────╯
-
-```
-
-Alter each value in the 'authors' column to use a single string instead of a list
-```nu
-> [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|row| $row.authors | str join ','}
+> [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|row| $row.authors | str join ',' }
 ╭───┬─────────┬──────────────────╮
 │ # │ project │     authors      │
 ├───┼─────────┼──────────────────┤
@@ -66,12 +55,34 @@ Alter each value in the 'authors' column to use a single string instead of a lis
 
 You can also use a simple command to update 'authors' to a single string
 ```nu
-> [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|| str join ','}
+> [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors { str join ',' }
 ╭───┬─────────┬──────────────────╮
 │ # │ project │     authors      │
 ├───┼─────────┼──────────────────┤
 │ 0 │ nu      │ Andrés,JT,Yehuda │
 ╰───┴─────────┴──────────────────╯
+
+```
+
+Update a value at an index in a list
+```nu
+> [1 2 3] | update 1 4
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 4 │
+│ 2 │ 3 │
+╰───┴───╯
+
+```
+
+Use a closure to compute a new value at an index
+```nu
+> [1 2 3] | update 1 {|i| $i + 2 }
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 4 │
+│ 2 │ 3 │
+╰───┴───╯
 
 ```
 

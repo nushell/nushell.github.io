@@ -2,7 +2,7 @@
 title: term size
 categories: |
   platform
-version: 0.87.0
+version: 0.88.0
 platform: |
   Returns a record containing the number of columns (width) and rows (height) of the terminal.
 usage: |

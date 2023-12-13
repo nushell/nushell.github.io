@@ -2,7 +2,7 @@
 title: view files
 categories: |
   debug
-version: 0.87.0
+version: 0.88.0
 debug: |
   View the files registered in nushell's EngineState memory.
 usage: |
@@ -21,15 +21,21 @@ usage: |
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | string |
+| input   | output                                                   |
+| ------- | -------------------------------------------------------- |
+| nothing | table\<filename: string, start: int, end: int, size: int\> |
 
 ## Examples
 
-View the files registered in nushell's EngineState memory
+View the files registered in Nushell's EngineState memory
 ```nu
 > view files
+
+```
+
+View how Nushell was originally invoked
+```nu
+> view files | get 0
 
 ```
 

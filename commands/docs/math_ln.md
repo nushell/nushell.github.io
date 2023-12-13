@@ -2,7 +2,7 @@
 title: math ln
 categories: |
   math
-version: 0.87.0
+version: 0.88.0
 math: |
   Returns the natural logarithm. Base: (math e).
 usage: |
