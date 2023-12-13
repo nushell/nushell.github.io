@@ -33,13 +33,13 @@ usage: |
 
 Get basename of a path
 ```nu
-> 'C:\Users\joe\test.txt' | path basename
+> '/home/joe/test.txt' | path basename
 test.txt
 ```
 
 Get basename of a list of paths
 ```nu
-> [ C:\Users\joe, C:\Users\doe ] | path basename
+> [ /home/joe, /home/doe ] | path basename
 ╭───┬─────╮
 │ 0 │ joe │
 │ 1 │ doe │
@@ -49,6 +49,6 @@ Get basename of a list of paths
 
 Replace basename of a path
 ```nu
-> 'C:\Users\joe\test.txt' | path basename --replace 'spam.png'
-C:\Users\joe\spam.png
+> '/home/joe/test.txt' | path basename --replace 'spam.png'
+/home/joe/spam.png
 ```

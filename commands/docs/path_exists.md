@@ -29,13 +29,13 @@ usage: |
 
 Check if a file exists
 ```nu
-> 'C:\Users\joe\todo.txt' | path exists
+> '/home/joe/todo.txt' | path exists
 false
 ```
 
 Check if files in list exist
 ```nu
-> [ C:\joe\todo.txt, C:\Users\doe\todo.txt ] | path exists
+> [ /home/joe/todo.txt, /home/doe/todo.txt ] | path exists
 ╭───┬───────╮
 │ 0 │ false │
 │ 1 │ false │

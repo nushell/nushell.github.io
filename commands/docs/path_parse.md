@@ -31,43 +31,41 @@ usage: |
 | string       | record |
 ## Examples
 
-Parse a single path
+Parse a path
 ```nu
-> 'C:\Users\viking\spam.txt' | path parse
-╭───────────┬─────────────────╮
-│ prefix    │ C:              │
-│ parent    │ C:\Users\viking │
-│ stem      │ spam            │
-│ extension │ txt             │
-╰───────────┴─────────────────╯
+> '/home/viking/spam.txt' | path parse
+╭───────────┬──────────────╮
+│ parent    │ /home/viking │
+│ stem      │ spam         │
+│ extension │ txt          │
+╰───────────┴──────────────╯
 ```
 
 Replace a complex extension
 ```nu
-> 'C:\Users\viking\spam.tar.gz' | path parse --extension tar.gz | upsert extension { 'txt' }
+> '/home/viking/spam.tar.gz' | path parse --extension tar.gz | upsert extension { 'txt' }
 
 ```
 
 Ignore the extension
 ```nu
-> 'C:\Users\viking.d' | path parse --extension ''
-╭───────────┬──────────╮
-│ prefix    │ C:       │
-│ parent    │ C:\Users │
-│ stem      │ viking.d │
-│ extension │          │
-╰───────────┴──────────╯
+> '/etc/conf.d' | path parse --extension ''
+╭───────────┬────────╮
+│ parent    │ /etc   │
+│ stem      │ conf.d │
+│ extension │        │
+╰───────────┴────────╯
 ```
 
 Parse all paths in a list
 ```nu
-> [ C:\Users\viking.d C:\Users\spam.txt ] | path parse
-╭───┬────────┬──────────┬────────┬───────────╮
-│ # │ prefix │  parent  │  stem  │ extension │
-├───┼────────┼──────────┼────────┼───────────┤
-│ 0 │ C:     │ C:\Users │ viking │ d         │
-│ 1 │ C:     │ C:\Users │ spam   │ txt       │
-╰───┴────────┴──────────┴────────┴───────────╯
+> [ /home/viking.d /home/spam.txt ] | path parse
+╭───┬────────┬────────┬───────────╮
+│ # │ parent │  stem  │ extension │
+├───┼────────┼────────┼───────────┤
+│ 0 │ /home  │ viking │ d         │
+│ 1 │ /home  │ spam   │ txt       │
+╰───┴────────┴────────┴───────────╯
 
 ```
 
