@@ -64,6 +64,7 @@ Note: this table assumes Nu 0.43 or later.
 | take                   | top, limit                    | Take                                                 | Select-Object -First                       | head                                            |
 | take until             |                               | TakeWhile                                            |                                            |                                                 |
 | take while             |                               | TakeWhile                                            |                                            |                                                 |
+| timeit                 |                               |                                                      | Measure-Command                            | time                                            |
 | to                     |                               |                                                      | Export/ConvertTo-{Csv,Xml,Html,Json}       |                                                 |
 | touch                  |                               |                                                      | Set-Content                                | touch                                           |
 | uniq                   | distinct                      | Distinct                                             | Get-Unique, gu                             | uniq                                            |
