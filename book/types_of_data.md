@@ -245,6 +245,21 @@ However, if a record has a key name that can't be expressed as a bare string, or
 false
 ```
 
+To make a copy of a record with new fields, you can use the spread operator (`...`):
+
+```nu
+> let x = { a: 1 }
+> { ...$x ...{ b: 2 } ...([foo bar] | into record) }
+╭───┬─────╮
+│ a │ 1   │
+│ b │ 2   │
+│ 0 │ foo │
+│ 1 │ bar │
+╰───┴─────╯
+```
+
+Note that there must be no whitespace between the spread operator and its argument.
+
 ## Lists
 
 Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
