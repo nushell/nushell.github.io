@@ -47,6 +47,6 @@
 
 ## 退出 Shell
 
-你可以使用 `exit` 命令离开一个你已经 "进入(`enter`)" 的 Shell。如果这是最后一个打开的 Shell，Nu 将退出。
+你可以使用 `dexit` 命令离开一个你已经 "进入(`enter`)" 的 Shell。如果这是最后一个打开的 Shell，Nu 将退出。
 
-你可以随时退出 Nu，即使有多个 Shell 处于活动状态，只需要在`exit`命令中传递`--now`标志。像这样：`exit --now`
+你随时可以使用`exit`退出 Nu，即使有多个 Shell 处于活动状态。
