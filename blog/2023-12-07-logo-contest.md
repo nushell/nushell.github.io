@@ -26,7 +26,7 @@ For this and to reflect as best as we can our community, we would like to get
 YOU involved in this endeavour :smirk:
 
 In the following weeks, we will be organizing a contest where YOU can submit
-your creations and have them compete in a fierce battle where only one will
+your creations and have them compete in a fierce battle where only one logo and one mascot will
 stand by the end of the event, also known as a vote :wink:
 
 Let us explain the rules, what you'll be asked exactly, how to submit your work
@@ -37,9 +37,7 @@ and how all this will unfold :yum:
   - shell (as with Bash, Fish and Nushell, not necessarilly the animal)
   - friendly
   - colorful
-- your submitted files should be in the SVG format, including the signature of
-    the software you used or any other proof that you are indeed the author of
-    the artwork <!-- QUESTION: is that something that exists? the signature of an SVG software -->
+- your submitted files should be in the SVG format
 - any offensive or out-of-topic content will obviously be removed during the
     preselection
 
@@ -49,9 +47,11 @@ Nushell, we want to have a certain level of confidence in the fact that you are
 indeed the author of the artworks you submit and thus are able to fully, and
 legally, give us the ownership of the winning logo and mascot.
 
-This is why we ask you to give us proof that you created the images and **NOT TO
+This is why we ask you **NOT TO
 USE ANY GENERATIVE ALGORITHMS** such as _MidJourney_ or
 _Dall-E_ :pray:
+
+By submitting artworks by sending us an email, you implicitely certify that you fully own the rights of your submissions and that you give then entirely to the Nushell project.
 
 Any work that can be proven to be from one of these algorithms and that we can't
 legally own will be immediately discarded...
@@ -77,9 +77,9 @@ following the themes detailed above:
 ## Submissions
 In order to submit your work, please follow the instructions below:
 - send an email to [the.nushell@gmail.com](mailto:the.nushell@gmail.com)
-- it should contain your Discord name so that we can contact you easily <!-- QUESTION: do we want the Discord login? -->
+- it should contain your Discord name so that we can contact you easily
 - your creations should be called `logo.svg` and `mascot.svg`
-- you can submit only a logo, only a mascot or multiple ideas for each <!-- QUESTION: do we allow multiple submissions? -->
+- you can submit any number of images, as long as we can clearly know which ones are logos or mascots :wink:
 
 ## Course of events
 Below are the four main phases of this event:
@@ -92,8 +92,8 @@ Below are the four main phases of this event:
 The results and the _winners_ will be announced shortly in March 2024.
 
 ::: tip Note
-details on the vote will be given in time, but will likely happen either on
-Discord and / or with a _Google Form_
+details on the vote will be given in due time, but will likely happen either on
+Discord and/or with a _Google Form_
 :::
 
 With all this in mind, we are very excited to find the official look of
