@@ -650,7 +650,7 @@ The history menu can be configured by modifying these values from the config obj
     menus = [
       ...
       {
-        name: help_menu
+        name: history_menu
         only_buffer_difference: true # Search is done on the text written after activating the menu
         marker: "? "                 # Indicator that appears with the menu is active
         type: {
