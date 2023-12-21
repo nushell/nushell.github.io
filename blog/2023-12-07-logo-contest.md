@@ -33,10 +33,8 @@ Let us explain the rules, what you'll be asked exactly, how to submit your work
 and how all this will unfold :yum:
 
 ## Rules
-- your creation will have to follow a few required themes:
-  - shell (as with Bash, Fish and Nushell, not necessarilly the animal)
-  - friendly
-  - colorful
+- there is one theme to follow: _your logo or mascot should evoke the idea of
+    Nushell_
 - your submitted files should be in the SVG format
 - any offensive or out-of-topic content will obviously be removed during the
     preselection
