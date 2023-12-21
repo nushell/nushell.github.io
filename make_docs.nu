@@ -82,6 +82,14 @@ def command-frontmatter [commands_group, command_name] {
         | str join (char newline)
     )
 
+    let feature = if $command_name =~ '^dfr' {
+        "dataframe"
+    } else if $command_name in $extra_cmds {
+        "extra"
+    } else {
+        "default"
+    }
+
   # This is going in the frontmatter as a multiline YAML string, so indentation matters
 $"---
 title: ($command_name)
@@ -91,6 +99,7 @@ version: ($nu_version)
 ($category_matter)
 usage: |
 ($indented_usage)
+feature: ($feature)
 ---"
 }
 
