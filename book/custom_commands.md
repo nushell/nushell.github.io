@@ -301,7 +301,7 @@ You can also assign it to true/false to enable/disable the flag too:
 
 But note that this is not the behavior you want: `> greet -a 10 --switch false`, here the value `false` will pass as a positional argument.
 
-To avoid confusing, it's not allowed to annotate a boolean type on a flag:
+To avoid confusion, it's not allowed to annotate a boolean type on a flag:
 
 ```nu
 def greet [
