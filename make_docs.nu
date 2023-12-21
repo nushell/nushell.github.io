@@ -237,14 +237,14 @@ $"($example.description)
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }
 
-    let tips = if $command.name =~ '^dfr' {
-        $'(char nl)**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl)'
+    let features = if $command.name =~ '^dfr' {
+        $'(char nl)::: warning(char nl)Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl):::(char nl)'
     } else if $command.name in $extra_cmds {
-        $'(char nl)**Tips:** Command `($command.name)` was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl)'
+        $'(char nl)::: warning(char nl) Command `($command.name)` was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl):::(char nl)'
     } else { '' }
 
     let doc = (
-        ($top + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands + $tips)
+        ($top + $features + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)
