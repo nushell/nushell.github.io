@@ -81,11 +81,18 @@ In order to submit your work, please follow the instructions below:
 
 ## Course of events
 Below are the four main phases of this event:
-| phase          | start      | deadline       |
-| -------------- | ---------- | -------------- |
-| _submission_   | now        | **2024-02-01** |
-| _preselection_ | 2024-02-01 | **2024-02-15** |
-| _vote_         | 2024-02-15 | **2024-03-01** |
+| phase          | start (from 0AM) | deadline (to 12PM) |
+| -------------- | ---------------- | ------------------ |
+| _submission_   | now              | **2024-01-31**     |
+| _preselection_ | 2024-02-01       | **2024-02-14**     |
+| _vote_         | 2024-02-15       | **2024-02-29**     |
+
+::: tip Note
+precise dates might change at some point, e.g. if submissions keep coming even
+close to the submission deadline.
+
+you'll be the first to be updated on that!
+:::
 
 The results and the _winners_ will be announced shortly in March 2024.
 
