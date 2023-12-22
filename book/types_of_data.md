@@ -245,20 +245,17 @@ However, if a record has a key name that can't be expressed as a bare string, or
 false
 ```
 
-To make a copy of a record with new fields, you can use the spread operator (`...`):
+To make a copy of a record with new fields, you can use the [spread operator](todo) (`...`):
 
 ```nu
-> let x = { a: 1 }
-> { ...$x ...{ b: 2 } ...([foo bar] | into record) }
-╭───┬─────╮
-│ a │ 1   │
-│ b │ 2   │
-│ 0 │ foo │
-│ 1 │ bar │
-╰───┴─────╯
+> let data = { name: alice, age: 50 }
+> { ...$data, hobby: cricket }
+╭───────┬─────────╮
+│ name  │ alice   │
+│ age   │ 50      │
+│ hobby │ cricket │
+╰───────┴─────────╯
 ```
-
-Note that there must be no whitespace between the spread operator and its argument.
 
 ## Lists
 
