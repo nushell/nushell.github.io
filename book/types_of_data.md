@@ -140,7 +140,7 @@ The full list of filesize units are:
 - `gib`: gibibytes
 - `tib`: tebibytes
 - `pib`: pebibytes
-- `eib`: exbibyte
+- `eib`: exbibytes
 
 As with durations, you can make fractional file sizes, and do calculations:
 
