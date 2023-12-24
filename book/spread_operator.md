@@ -67,9 +67,44 @@ This is mainly so that `...` won't be confused for the spread operator in comman
 
 ## In record literals
 
-Similarly, you can use the spread operator to merge multiple records together. For example:
+Let's say you have a record with some configuration information and you want to add more fields to
+this record:
 
-Inside list literals, it can only be used before variables (`...$foo`), subexpressions (`...(foo)`), and record literals (`...{foo:bar}`).
+```nushell
+> let config = { path: /tmp, limit: 5 }
+```
+
+You can make a new record with all the fields of `$config` and some new additions using the spread
+operator. You can use the spread multiple records inside a single record literal.
+
+```nushell
+> {
+    ...$config,
+    users: [alice bob],
+    ...{ url: example.com },
+    ...(sys | get mem)
+  }
+╭────────────┬───────────────╮
+│ path       │ /tmp          │
+│ limit      │ 5             │
+│            │ ╭───┬───────╮ │
+│ users      │ │ 0 │ alice │ │
+│            │ │ 1 │ bob   │ │
+│            │ ╰───┴───────╯ │
+│ url        │ example.com   │
+│ total      │ 8.3 GB        │
+│ free       │ 2.6 GB        │
+│ used       │ 5.7 GB        │
+│ available  │ 2.6 GB        │
+│ swap total │ 2.1 GB        │
+│ swap free  │ 18.0 MB       │
+│ swap used  │ 2.1 GB        │
+╰────────────┴───────────────╯
+```
+
+Similarly to lists, inside record literals, the spread operator can only be used before variables (`...$foo`),
+subexpressions (`...(foo)`), and record literals (`...{foo:bar}`). Here too, there needs to be no
+whitespace between the `...` and the next expression for it to be recognized as the spread operator.
 
 ## In command calls
 
