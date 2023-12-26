@@ -104,49 +104,4 @@ export const sidebarJa: SidebarConfig = {
       ],
     },
   ],
-  // '/commands/': [
-  //   {
-  //     text: 'Categories',
-  //     collapsible: false,
-  //     children: commandCategories,
-  //   },
-  // ],
-  // '/ja/contributor-book/': [
-  //   {
-  //     text: 'Contributor Book',
-  //     link: '/contributor-book/README.md',
-  //     collapsible: false,
-  //     children: [
-  //       'README.md',
-  //       'philosophy',
-  //       'philosophy_0_80',
-  //       'commands',
-  //       'plugins',
-  //     ],
-  //   },
-  // ],
-  // '/ja/cookbook/': [
-  //   {
-  //     text: 'Cookbook',
-  //     collapsible: false,
-  //     children: [
-  //       'README.md',
-  //       'setup',
-  //       'help',
-  //       'system',
-  //       'parsing',
-  //       'pattern_matching',
-  //       'external_completers',
-  //       'files',
-  //       'git',
-  //       'parsing_git_log',
-  //       'http',
-  //       'direnv',
-  //       'ssh_agent',
-  //       'tables',
-  //       'polars_v_pandas_v_nushell',
-  //       'jq_v_nushell',
-  //     ],
-  //   },
-  // ],
 };
