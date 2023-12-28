@@ -301,6 +301,21 @@ To get a sub-list from a list, you can use the [`range`](/commands/docs/range.md
 ╰───┴───╯
 ```
 
+To append one or more lists together, optionally with values interspersed in between, you can use the
+[spread operator](/book/operators#spread-operator) (`...`):
+
+```nu
+> let x = [1 2]
+> [...$x 3 ...(4..7 | take 2)]
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+│ 3 │ 4 │
+│ 4 │ 5 │
+╰───┴───╯
+```
+
 ## Tables
 
 The table is a core data structure in Nushell. As you run commands, you'll see that many of them return tables as output. A table has both rows and columns.
