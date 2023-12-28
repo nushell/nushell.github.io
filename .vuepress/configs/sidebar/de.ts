@@ -70,7 +70,7 @@ export const sidebarDe: SidebarConfig = {
       text: '(Nicht nur für) Fortgeschrittene',
       link: '/de/book/advanced.md',
       collapsible: false,
-      children: ['/de/book/plugins'],
+      children: ['/de/book/plugins', '/de/book/metadata.md'],
     },
   ],
 };
