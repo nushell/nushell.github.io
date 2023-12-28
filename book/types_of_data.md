@@ -245,7 +245,7 @@ However, if a record has a key name that can't be expressed as a bare string, or
 false
 ```
 
-To make a copy of a record with new fields, you can use the [spread operator](todo) (`...`):
+To make a copy of a record with new fields, you can use the [spread operator](/book/operators#spread-operator) (`...`):
 
 ```nu
 > let data = { name: alice, age: 50 }
