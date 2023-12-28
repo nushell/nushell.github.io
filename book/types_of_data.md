@@ -245,6 +245,18 @@ However, if a record has a key name that can't be expressed as a bare string, or
 false
 ```
 
+To make a copy of a record with new fields, you can use the [spread operator](/book/operators#spread-operator) (`...`):
+
+```nu
+> let data = { name: alice, age: 50 }
+> { ...$data, hobby: cricket }
+╭───────┬─────────╮
+│ name  │ alice   │
+│ age   │ 50      │
+│ hobby │ cricket │
+╰───────┴─────────╯
+```
+
 ## Lists
 
 Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
@@ -286,6 +298,21 @@ To get a sub-list from a list, you can use the [`range`](/commands/docs/range.md
 │ 0 │ b │
 │ 1 │ c │
 │ 2 │ d │
+╰───┴───╯
+```
+
+To append one or more lists together, optionally with values interspersed in between, you can use the
+[spread operator](/book/operators#spread-operator) (`...`):
+
+```nu
+> let x = [1 2]
+> [...$x 3 ...(4..7 | take 2)]
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+│ 3 │ 4 │
+│ 4 │ 5 │
 ╰───┴───╯
 ```
 

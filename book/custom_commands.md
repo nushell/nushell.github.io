@@ -360,6 +360,13 @@ def greet [vip: string, ...name: string] {
 greet moon earth mars jupiter venus
 ```
 
+To pass a list to a rest parameter, you can use the [spread operator](/book/operators#spread-operator) (`...`):
+
+```nu
+> let planets = [earth mars jupiter venus] # This is equivalent to the previous example
+> greet moon ...$planets
+```
+
 ## Documenting your command
 
 In order to best help users of your custom commands, you can also document them with additional descriptions for the commands and parameters.
