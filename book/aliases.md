@@ -69,3 +69,25 @@ alias ls = do { ls | sort-by type name -i} # Needs to be below other alias like 
 ```
 The reason why `ls` needs to be below alias `ll` is because we are "overriding" the normal `ls` with this function that does not take any arguments.
 And the ls is used with flag `ls -l` in the `ll` alias.
+
+Another way to do it is to shadow the `ls` command. This way you do not use the "hacky" way using `do` command.
+
+```nu
+# An escape hatch to have access to the original ls command
+alias core-ls = ls
+
+# Call the built-in ls command with a path parameter
+def old-ls [path] {
+  core-ls $path | sort-by type name -i
+}
+
+# Shadow the ls command so that you always have the sort type you want
+def ls [path?] {
+  if $path == null {
+    old-ls .
+  } else {
+    old-ls $path
+  }
+}
+```
+
