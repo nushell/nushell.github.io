@@ -59,3 +59,13 @@ def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 ```
 
 displaying all listed files and folders in a grid.
+
+## Replacing aliases
+> Caution! When replacing commands like below, it is not possible to pass flags to the command.
+
+```nu
+alias ll = do { ls -l | sort-by type name -i}
+alias ls = do { ls | sort-by type name -i} # Needs to be below other alias like `ll` when using ls
+```
+The reason why `ls` needs to be below alias `ll` is because we are "overriding" the normal `ls` with this function that does not take any arguments.
+And the ls is used with flag `ls -l` in the `ll` alias.
