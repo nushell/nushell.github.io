@@ -71,7 +71,7 @@ alias core-ls = ls    # This will create a new alias core-ls for ls
 Now you can use `core-ls` as `ls` in your nu-programming. You will see further down how to use `core-ls`.
 
 The reason you need to use alias is because, unlike `def`, aliases are position-dependent. So, you need to "back up" the old command first with an alias, before re-defining it.
-If you do not backup the command and you replace the command using `def` you can end up gtting a recursion error.
+If you do not backup the command and you replace the command using `def` you get a recursion error.
 
 ```nu
 def ls [] { ls }; ls    # Do *NOT* do this! This will throw a recursion error
