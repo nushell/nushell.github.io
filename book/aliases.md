@@ -60,17 +60,36 @@ def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 
 displaying all listed files and folders in a grid.
 
-## Replacing aliases
-> Caution! When replacing commands like below, it is not possible to pass flags to the command.
+## Replacing existing commands using aliases
+
+> Caution! When replacing commands it is best to "back up" the command first and avoid recursion error.
+
+How to back up a command like `ls`:
+```nu
+alias core-ls = ls    # This will create a new alias core-ls for ls
+```
+Now you can use `core-ls` as `ls` in your nu-programming. You will see further down how to use `core-ls`.
+
+The reason you need to use alias is because, unlike `def`, aliases are position-dependent. So, you need to "back up" the old command first with an alias, before re-defining it.
+If you do not backup the command and you replace the command using `def` you can end up gtting a recursion error.
 
 ```nu
-alias ll = do { ls -l | sort-by type name -i}
-alias ls = do { ls | sort-by type name -i} # Needs to be below other alias like `ll` when using ls
-```
-The reason why `ls` needs to be below alias `ll` is because we are "overriding" the normal `ls` with this function that does not take any arguments.
-And the ls is used with flag `ls -l` in the `ll` alias.
+def ls [] { ls }; ls    # Do *NOT* do this! This will throw a recursion error
 
-Another way to do it is to shadow the `ls` command. This way you do not use the "hacky" way using `do` command.
+#output:
+#Error: nu::shell::recursion_limit_reached
+#
+#  × Recursion limit (50) reached
+#     ╭─[C:\Users\zolodev\AppData\Roaming\nushell\config.nu:807:1]
+# 807 │
+# 808 │ def ls [] { ls }; ls
+#     ·           ───┬──
+#     ·              ╰── This called itself too many times
+#     ╰────
+```
+
+The recommended way to replace an existing command is to shadow the command.
+Here is an example shadowing the `ls` command.
 
 ```nu
 # An escape hatch to have access to the original ls command
