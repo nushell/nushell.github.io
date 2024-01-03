@@ -3,7 +3,7 @@ import type { SidebarConfig } from '@vuepress/theme-default';
 export const sidebarJa: SidebarConfig = {
   '/ja/book/': [
     {
-      text: 'Nu 本',
+      text: 'Nu Book',
       collapsible: false,
       children: [
         'installation',
