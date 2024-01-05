@@ -7,8 +7,8 @@ While it's common to work in one directory, it can be handy to work in multiple 
 To get started, let's enter a directory:
 
 ```nu
-/home/jonathant/Source/nushell(main)> enter ../book
-/home/jonathant/Source/book(main)> ls
+/home/jonathan/Source/nushell(main)> enter ../book
+/home/jonathan/Source/book(main)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
  #  │ name               │ type │ size   │ modified
 ────┼────────────────────┼──────┼────────┼─────────────
@@ -37,10 +37,10 @@ The [`shells`](/commands/docs/shells.md) command shows us there are three shells
 We can jump between these shells with the [`n`](/commands/docs/n.md), [`p`](/commands/docs/p.md) and [`g`](/commands/docs/g.md) shortcuts, short for "next", "previous" and "goto":
 
 ```nu
-/home/jonathant/Source/book(main)> n
-/home/jonathant/Source/nushell(main)> p
-/home/jonathant/Source/book(main)> g 2
-/home/jonathant/Source/music(main)>
+/home/jonathan/Source/book(main)> n
+/home/jonathan/Source/nushell(main)> p
+/home/jonathan/Source/book(main)> g 2
+/home/jonathan/Source/music(main)>
 ```
 
 We can see the directory changing, but we're always able to get back to a previous directory we were working on. This allows us to work in multiple directories in the same session.
