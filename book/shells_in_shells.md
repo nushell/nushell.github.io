@@ -32,7 +32,7 @@ Entering is similar to changing directories (as we saw with the [`cd`](/commands
 ───┴────────┴───────────────────────────────
 ```
 
-The [`shells`](/commands/docs/shells.md) command shows us there are three shells currently active: our original "nushell" source directory and now this new "book" directory.
+The [`shells`](/commands/docs/shells.md) command shows us there are three shells: our original "nushell" source directory, "book" directory and "music" directory which is currently active.
 
 We can jump between these shells with the [`n`](/commands/docs/n.md), [`p`](/commands/docs/p.md) and [`g`](/commands/docs/g.md) shortcuts, short for "next", "previous" and "goto":
 
