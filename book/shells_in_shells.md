@@ -7,8 +7,8 @@ While it's common to work in one directory, it can be handy to work in multiple 
 To get started, let's enter a directory:
 
 ```nu
-/home/jonathant/Source/nushell(main)> enter ../book
-/home/jonathant/Source/book(main)> ls
+/home/jonathan/Source/nushell(main)> enter ../book
+/home/jonathan/Source/book(main)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
  #  │ name               │ type │ size   │ modified
 ────┼────────────────────┼──────┼────────┼─────────────
@@ -21,15 +21,15 @@ To get started, let's enter a directory:
 Entering is similar to changing directories (as we saw with the [`cd`](/commands/docs/cd.md) command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the [`shells`](/commands/docs/shells.md) command to list the current directories we have active:
 
 ```nu
-/home/jonathan/Source/book(main)> shells
-───┬────────┬────────────┬─────────────────────────
- # │ active │    name    │          path
-───┼────────┼────────────┼─────────────────────────
- 0 │ false  │ filesystem │ /home/jt/Source/nushell
- 1 │ true   │ filesystem │ /home/jt/Source/book
- 2 │ false  │ filesystem │ /home/jt/Source/music
-───┴────────┴────────────┴─────────────────────────
-
+/home/jonathan/Source/book(main)> enter ../music
+/home/jonathan/Source/music(main)> shells
+───┬────────┬───────────────────────────────
+ # │ active │             path
+───┼────────┼───────────────────────────────
+ 0 │ false  │ /home/jonathan/Source/nushell
+ 1 │ false  │ /home/jonathan/Source/book
+ 2 │ true   │ /home/jonathan/Source/music
+───┴────────┴───────────────────────────────
 ```
 
 The [`shells`](/commands/docs/shells.md) command shows us there are three shells currently active: our original "nushell" source directory and now this new "book" directory.
@@ -37,16 +37,16 @@ The [`shells`](/commands/docs/shells.md) command shows us there are three shells
 We can jump between these shells with the [`n`](/commands/docs/n.md), [`p`](/commands/docs/p.md) and [`g`](/commands/docs/g.md) shortcuts, short for "next", "previous" and "goto":
 
 ```nu
-/home/jonathant/Source/book(main)> n
-/home/jonathant/Source/nushell(main)> p
-/home/jonathant/Source/book(main)> g 2
-/home/jonathant/Source/music(main)>
+/home/jonathan/Source/music(main)> p
+/home/jonathan/Source/book(main)> n
+/home/jonathan/Source/music(main)> g 0
+/home/jonathan/Source/nushell(main)>
 ```
 
 We can see the directory changing, but we're always able to get back to a previous directory we were working on. This allows us to work in multiple directories in the same session.
 
 ## Exiting the shell
 
-You can leave a shell you have [`enter`](/commands/docs/enter.md)ed using the `dexit` command. If this is the last open shell, Nu will quit.
+You can leave a shell you have [`enter`](/commands/docs/enter.md)ed using the `dexit` command.
 
 You can always quit Nu, even if multiple shells are active, using `exit`.
