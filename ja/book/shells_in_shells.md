@@ -7,8 +7,8 @@
 まずはじめに、ディレクトリを入力しましょう。
 
 ```
-/home/jonathant/Source/nushell(master)> enter ../book
-/home/jonathant/Source/book(master)> ls
+/home/jonathan/Source/nushell(main)> enter ../book
+/home/jonathan/Source/book(main)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
  #  │ name               │ type │ size   │ modified
 ────┼────────────────────┼──────┼────────┼─────────────
@@ -18,121 +18,35 @@
   3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago
 ```
 
-`enter`はディレクトリの変更に似ています(`cd`コマンドでみたように)。これによりディレクトリにジャンプして作業することができます。ディレクトリを変更するかわりに、２つのディレクトリに移動しました。このことをより明確にするために、`shells`コマンドを実行して、アクティブな現在のディレクトリの一覧を表示してみましょう。
+`enter`はディレクトリの変更に似ています(`cd`コマンドでみたように)。これによりディレクトリにジャンプして作業することができます。ディレクトリを変更するかわりに、今２つのディレクトリの中にいます。このことをより明確にするために、`shells`コマンドを実行して、アクティブな現在のディレクトリの一覧を表示してみましょう。
 
 ```
-/home/jonathan/Source/book(master)> shells
-───┬────────┬────────────┬─────────────────────────────────
- # │ active │ name       │ path
-───┼────────┼────────────┼─────────────────────────────────
- 0 │        │ filesystem │ /home/jonathant/Source/nushell/
- 1 │ X      │ filesystem │ /home/jonathant/Source/book
-───┴────────┴────────────┴─────────────────────────────────
+/home/jonathan/Source/book(main)> enter ../music
+/home/jonathan/Source/music(main)> shells
+───┬────────┬───────────────────────────────
+ # │ active │             path
+───┼────────┼───────────────────────────────
+ 0 │ false  │ /home/jonathan/Source/nushell
+ 1 │ false  │ /home/jonathan/Source/book
+ 2 │ true   │ /home/jonathan/Source/music
+───┴────────┴───────────────────────────────
 ```
 
-`shells`コマンドは現在２つのシェルがアクティブであることを示しています。もともといた"nushell"のソースディレクトリと新しい"book"ディレクトリです。
+`shells`コマンドは現在３つのシェルが存在していることを示しています。もともといた"nushell"のソースディレクトリと、"book"ディレクトリ、それに現在アクティブになっている"musick"ディレクトリです。
 
-"next"と"previous"のショートカットである`n`と`p`を利用して、両者のシェルを行き来できます。
+"next"、"previous"、"goto"のショートカットである`n`、`p`、`g`を利用して、これらのシェルを行き来できます。
 
 ```
-/home/jonathant/Source/book(master)> n
-/home/jonathant/Source/nushell(master)> p
-/home/jonathant/Source/book(master)>
+/home/jonathan/Source/music(main)> p
+/home/jonathan/Source/book(main)> n
+/home/jonathan/Source/music(main)> g 0
+/home/jonathan/Source/nushell(main)>
 ```
 
 ディレクトリを変更できることがわかります。そしていつでも元いた作業ディレクトリに戻ることができるのです。これにより、同じセッションにいながら複数のディレクトリで作業できます。
 
 ## シェルを終了する
 
-`exit`コマンドを利用して`enter`したシェルを終了することができます。もし最後のシェルを終了したときは Nu が終了します。
+`dexit`コマンドを利用して`enter`したシェルを終了することができます。
 
-`exit --now`のように、`--now`フラグを`exit`コマンドに渡すことで、複数のシェルがアクティブな場合でもすぐに Nu を終了することができます。 こんなふうに: `exit --now`
-
-## ディレクトリを超えて
-
-Nu はファイルシステムのパスとは別に、他のものからシェルを作ることもできます。たとえば、大規模なデータセットを使用していて、その中の場所を失いたくないとしましょう。
-
-これがどのように機能するかを見るために、次の演習を行いましょう。現在、"Cargo.toml"ファイルの中に開発した[Nu プラグイン](plugins.md)をリストしています。src/plugins ディレクトリの中に"doc.rs"とよばれる新しいプラグインを作成したので、正しくコンパイルされインストールされるか確認したいので"Cargo.toml"にリストされているか知りたいとしましょう。
-
-Nu のソースコードから"Cargo.toml"ファイルに`enter`してみましょう。
-
-```
-/home/jonathant/Source/nushell(master)> enter Cargo.toml
-/> ls
-────────────────────┬───────────────────────────
- bin                │ [table 18 rows]
- build-dependencies │ [row nu-build serde toml]
- dependencies       │ [row 29 columns]
- dev-dependencies   │ [row nu-test-support]
- features           │ [row 19 columns]
- package            │ [row 12 columns]
- workspace          │ [row members]
-────────────────────┴───────────────────────────
-```
-
-今のところ、ファイルに`enter`し、`ls`から得られたテーブルで中身を確認できます。注意深くみてみると、今回は Nu が理解できる(.toml)ファイル形式にエンターしていることがわかります。Nu はファイルの中身をファイルシステムのように表示するので、あたかも通常のファイルシステムのように内容を確認することができます。
-
-続きを始める前に、アクティブなシェルを確認しておきましょう。
-
-```
-> shells
-───┬────────┬─────────────────────────────────────────────┬─────────────────────────────────
- # │ active │ name                                        │ path
-───┼────────┼─────────────────────────────────────────────┼─────────────────────────────────
- 0 │        │ filesystem                                  │ /home/jonathant/Source/nushell/
- 1 │ X      │ {/home/jonathant/Source/nushell/Cargo.toml} │ /
-───┴────────┴─────────────────────────────────────────────┴─────────────────────────────────
-```
-
-２つのアクティブなシェルがあり、"Cargo.toml"内のデフォルトのルートパスである"/"にいることがわかります。内容をもう一度表示してみましょう。
-
-```
-/> ls
-────────────────────┬───────────────────────────
- bin                │ [table 18 rows]
- build-dependencies │ [row nu-build serde toml]
- dependencies       │ [row 29 columns]
- dev-dependencies   │ [row nu-test-support]
- features           │ [row 19 columns]
- package            │ [row 12 columns]
- workspace          │ [row members]
-────────────────────┴───────────────────────────
-```
-
-今探しているのは、"bin"列の中なので、そこにいってみましょう。
-
-```
-> cd bin
-/bin> ls
-────┬─────────────────────────────┬────────────────────────────────────────────┬───────────────────
- #  │ name                        │ path                                       │ required-features
-────┼─────────────────────────────┼────────────────────────────────────────────┼───────────────────
-  0 │ fail                        │ crates/nu-test-support/src/bins/fail.rs    │ [table 1 rows]
-  1 │ chop                        │ crates/nu-test-support/src/bins/chop.rs    │ [table 1 rows]
-  2 │ cococo                      │ crates/nu-test-support/src/bins/cococo.rs  │ [table 1 rows]
-  3 │ nonu                        │ crates/nu-test-support/src/bins/nonu.rs    │ [table 1 rows]
-  4 │ iecho                       │ crates/nu-test-support/src/bins/iecho.rs   │ [table 1 rows]
-  5 │ nu_plugin_core_textview     │ src/plugins/nu_plugin_core_textview.rs     │ [table 1 rows]
-```
-
-ここから、`p`(previous)を使うことでいつでも以前の作業ディレクトリに戻ることができます。
-
-```
-/bin> p
-```
-
-シェルをもう一度確認しましょう。
-
-```
-/home/jonathant/Source/nushell/(simple_list_view)> shells
-───┬────────┬─────────────────────────────────────────────┬─────────────────────────────────
- # │ active │ name                                        │ path
-───┼────────┼─────────────────────────────────────────────┼─────────────────────────────────
- 0 │ X      │ filesystem                                  │ /home/jonathant/Source/nushell/
- 1 │        │ {/home/jonathant/Source/nushell/Cargo.toml} │ /bin
-───┴────────┴─────────────────────────────────────────────┴─────────────────────────────────
-
-
-```
-
-"Cargo.toml"ファイルにエンターする前の作業ディレクトリにもどっていることがわかります。
+複数のシェルが存在しているときでも、`exit`を使用すればいつでもNuを終了することができます。
