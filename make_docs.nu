@@ -252,8 +252,12 @@ $"($example.description)
         $'(char nl)::: warning(char nl) Command `($command.name)` was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl):::(char nl)'
     } else { '' }
 
+    let plugins = if $command.name in ['from ini', 'from ics', 'from eml', 'from vcf'] {
+        $"(char nl)::: warning(char nl)Command `($command.name)` resides in [plugin]\(/book/plugins.html) [`nu_plugin_formats`]\(https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats(char nl):::(char nl)"
+    } else { '' }
+
     let doc = (
-        ($top + $features + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
+        ($top + $plugins + $features + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)

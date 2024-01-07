@@ -292,6 +292,25 @@ Or just without the switch flag:
 > greet -a 10 hello
 ```
 
+You can also assign it to true/false to enable/disable the flag too:
+
+```nu
+> greet -a 10 --switch=false
+> greet -a 10 --switch=true
+```
+
+But note that this is not the behavior you want: `> greet -a 10 --switch false`, here the value `false` will pass as a positional argument.
+
+To avoid confusion, it's not allowed to annotate a boolean type on a flag:
+
+```nu
+def greet [
+    --twice: bool   # Not allowed
+] { ... }
+```
+
+instead, you should define it as a basic switch: `def greet [--twice] { ... }`
+
 Flags can contain dashes. They can be accessed by replacing the dash with an underscore:
 
 ```nu
@@ -339,6 +358,13 @@ def greet [vip: string, ...name: string] {
 #     $vip          $name
 #     ---- ------------------------
 greet moon earth mars jupiter venus
+```
+
+To pass a list to a rest parameter, you can use the [spread operator](/book/operators#spread-operator) (`...`):
+
+```nu
+> let planets = [earth mars jupiter venus] # This is equivalent to the previous example
+> greet moon ...$planets
 ```
 
 ## Documenting your command
