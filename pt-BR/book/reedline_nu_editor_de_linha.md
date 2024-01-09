@@ -17,7 +17,7 @@ $env.config = {
 ```
 ### Padrão da combinação de teclas
 
-Cada modo de edição vem com uma combinação de teclas usual para edição de texto no vi e emacs.
+Cada modo de edição vem com teclas de atalho usuais para edição de texto no vi e emacs.
 
 ### Combinação de teclas para Emacs e Vi
 | Tecla         | Evento                       |
