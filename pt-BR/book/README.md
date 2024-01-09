@@ -12,4 +12,3 @@
 - [Escapando comandos](escapando.md) - Escapando para comandos nativos com o mesmo nome
 - [Plugins](plugins.md) - Melhorando o nushell com mais funcionalidades usando plugins
 - [Command Reference](command_reference.md) - A list of all Nushell's commands.
-- [Reedline, o editor de linha do Nu](reedline_nu_editor_de_linha.md) - Leitor de linha multiplataforma que controla histórico de comandos, validações, preenchimentos, dicas e pintura da tela.
