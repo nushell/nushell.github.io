@@ -670,6 +670,3 @@ $env.config = {
     ...
   }
 ```
-**Edit this page on <a href=https://github.com/nushell/nushell.github.io/edit/main/book/line_editor.md>GitHub**</a>
-
-**Contributors**: Justin Ma, Darren Schroeder, Fernando Herrera, chtenb, Antoine Stevan, Brad Dunbar, Dan Davison, Jiahao Li, Joel Afriyie, Marika Chlebowska, Máté FARKAS, Reilly Wood, Stefan Holderbach, TornaxO7, Zhora Trush, uselesspseudo, me15degrees
