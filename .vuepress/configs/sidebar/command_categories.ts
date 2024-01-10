@@ -17,6 +17,7 @@ export const commandCategories = [
   '/commands/categories/formats.md',
   '/commands/categories/generators.md',
   '/commands/categories/hash.md',
+  '/commands/categories/history.md',
   '/commands/categories/lazyframe.md',
   '/commands/categories/math.md',
   '/commands/categories/misc.md',
