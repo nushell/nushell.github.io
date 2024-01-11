@@ -15,7 +15,7 @@ export const sidebarJa: SidebarConfig = {
       children: [
         '/ja/book/installation.md',
         '/book/default_shell.md',
-        '/ja/book/quick_tour.md',
+        '/book/quick_tour.md',
         '/ja/book/moving_around.md',
         '/book/thinking_in_nu.md',
         '/book/cheat_sheet.md',
@@ -28,7 +28,7 @@ export const sidebarJa: SidebarConfig = {
       children: [
         '/ja/book/types_of_data.md',
         '/ja/book/loading_data.md',
-        '/ja/book/pipelines.md',
+        '/ja/book/pipeline.md',
         '/book/working_with_strings.md',
         '/book/working_with_lists.md',
         '/ja/book/working_with_tables.md',
