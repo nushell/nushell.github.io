@@ -1,6 +1,6 @@
 # Modules
 
-Similar to many other programming languages, Nushell also has modules to organize your code. Each module is a "bag" containing a bunch of definitions (typically commands) that you can export (take out or the bag) and use in your current scope. Since Nushell is also a shell, modules allow you to modify environment variables when importing them.
+Similar to many other programming languages, Nushell also has modules to organize your code. Each module is a "bag" containing a bunch of definitions (typically commands) that you can export (take out of the bag) and use in your current scope. Since Nushell is also a shell, modules allow you to modify environment variables when importing them.
 
 ## Quick Overview
 

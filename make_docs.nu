@@ -82,6 +82,14 @@ def command-frontmatter [commands_group, command_name] {
         | str join (char newline)
     )
 
+    let feature = if $command_name =~ '^dfr' {
+        "dataframe"
+    } else if $command_name in $extra_cmds {
+        "extra"
+    } else {
+        "default"
+    }
+
   # This is going in the frontmatter as a multiline YAML string, so indentation matters
 $"---
 title: ($command_name)
@@ -91,6 +99,7 @@ version: ($nu_version)
 ($category_matter)
 usage: |
 ($indented_usage)
+feature: ($feature)
 ---"
 }
 
@@ -237,14 +246,18 @@ $"($example.description)
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }
 
-    let tips = if $command.name =~ '^dfr' {
-        $'(char nl)**Tips:** Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl)'
+    let features = if $command.name =~ '^dfr' {
+        $'(char nl)::: warning(char nl)Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl):::(char nl)'
     } else if $command.name in $extra_cmds {
-        $'(char nl)**Tips:** Command `($command.name)` was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl)'
+        $'(char nl)::: warning(char nl) Command `($command.name)` was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl):::(char nl)'
+    } else { '' }
+
+    let plugins = if $command.name in ['from ini', 'from ics', 'from eml', 'from vcf'] {
+        $"(char nl)::: warning(char nl)Command `($command.name)` resides in [plugin]\(/book/plugins.html) [`nu_plugin_formats`]\(https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats(char nl):::(char nl)"
     } else { '' }
 
     let doc = (
-        ($top + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands + $tips)
+        ($top + $plugins + $features + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)
