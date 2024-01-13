@@ -17,7 +17,7 @@ Let's look at an example script file:
 ```nu
 # myscript.nu
 def greet [name] {
-  ["hello" $name]
+  print ["hello" $name]
 }
 
 greet "world"
@@ -31,7 +31,7 @@ In the above, first `greet` is defined by the Nushell interpreter. This allows u
 greet "world"
 
 def greet [name] {
-  ["hello" $name]
+  print ["hello" $name]
 }
 ```
 
