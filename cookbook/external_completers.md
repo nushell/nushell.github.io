@@ -129,7 +129,7 @@ This is an example of how an external completer definition might look like:
 let fish_completer = ...
 
 let carapace_completer = {|spans: list<string>|
-    carapace $spans.0 nushell $spans
+    carapace $spans.0 nushell ...$spans
     | from json
     | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
 }
