@@ -17,7 +17,7 @@ feature: default
 
 ## Signature
 
-```> exec {flags} (command)```
+```> exec (command)```
 
 ## Parameters
 
