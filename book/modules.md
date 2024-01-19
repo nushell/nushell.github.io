@@ -11,7 +11,7 @@ There are three ways to define a module in Nushell:
 2. from a file
    - using a .nu file as a module
 3. from a directory
-   - directory must contain `mod.nu` file (can be empty)
+   - directory must contain a `mod.nu` file
 
 In Nushell, creating a module and importing definitions from a module are two different actions. The former is done using the `module` keyword. The latter using the `use` keyword. You can think of `module` as "wrapping definitions into a bag" and `use` as "opening a bag and taking definitions from it". In most cases, calling `use` will create the module implicitly, so you typically don't need to use `module` that much.
 
@@ -26,7 +26,7 @@ You can define the following things inside a module:
 
 Only definitions marked with `export` are possible to access from outside of the module ("take out of the bag"). Definitions not marked with `export` are allowed but are visible only inside the module (you could call them private). (_`export-env` is special and does not require `export`._)
 
-_\*These definitions can also be defined as `main` (see below)._
+_\*These definitions can also be named `main` (see below)._
 
 ## "Inline" modules
 
@@ -86,7 +86,7 @@ The result should be similar as in the previous section.
 
 ## Modules from directories
 
-Finally, a directory can be imported as a module. The only condition is that it needs to contain a `mod.nu` file (even empty). The `mod.nu` file defines the root module. All .nu files inside the module directory are added as submodules (more about submodules later). We could write our `greetings` module like this:
+Finally, a directory can be imported as a module. The only condition is that it needs to contain a `mod.nu` file (even empty, which is not particularly useful, however). The `mod.nu` file defines the root module. Any submodules (`export module`) or re-exports (`export use`) must be declared inside the `mod.nu` file. We could write our `greetings` module like this:
 
 _In the following examples, `/` is used at the end to denote that we're importing a directory but it is not required._
 
@@ -412,16 +412,9 @@ hi there!
 > generate-prefix  # fails because the command is imported only locally inside the module
 ```
 
-### Directory structure as subcommad tree
-
-Since directories can be imported as submodules and submodules can naturally form subcommands it is easy to build even complex command line applications with a simple file structure.
-
-> **Warning**
-> Work In Progress
-
 ### Dumping files into directory
 
-A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, similar effect can be achieved via module directories.
+A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, doing this directly is currently not possible, but directory modules can still be used.
 
 Here we'll create a simple completion module with a submodule dedicated to some Git completions:
 
@@ -429,7 +422,7 @@ Here we'll create a simple completion module with a submodule dedicated to some 
 `mkdir ($nu.default-config-dir | path join completions)`
 2. Create an empty `mod.nu` for it
 `touch ($nu.default-config-dir | path join completions mod.nu)`
-3. Put the following snippet in `git.nu` under the completion directory
+3. Put the following snippet in `git.nu` under the `completions` directory
 ```nu
 export extern main [
     --version(-v)
@@ -451,21 +444,22 @@ def complete-git-branch [] {
     # ... code to list git branches
 }
 ```
-4. Add the parent of the completion directory to your NU_LIB_DIRS inside `env.nu`
+4. Add `export module git.nu` to `mod.nu`
+5. Add the parent of the `completions` directory to your NU_LIB_DIRS inside `env.nu`
 ```nu
 $env.NU_LIB_DIRS = [
     ...
     $nu.default-config-dir
 ]
 ```
-5. import the completions to Nushell in your `config.nu`
+6. import the completions to Nushell in your `config.nu`
 `use completions *`
 Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
 
 > **Note**
-> This will use the file name (in our example `git` from `git.nu`) as the modules name. This means some completions might not work if the definition has the base command in it's name.
-> For example a completion like this `export extern 'git push' []` in our `git.nu` will result in a completion like this `git git push`. If you have this style of completion you must instead
-> import like this `use completions git *` which will import the exported definitions of the submoudule `git`. Or simply rename `git push` to just `push`.
+> This will use the file name (in our example `git` from `git.nu`) as the module name. This means some completions might not work if the definition has the base command in it's name.
+> For example, if you defined our known externals in our `git.nu` as `export extern 'git push' []`, etc. and followed the rest of the steps, you would get subcommands like `git git push`, etc. 
+> You would need to call `use completions git *` to get the desired subcommands. For this reason, using `main` as outlined in the step above is the preferred way to define subcommands.
 
 ### Setting environment + aliases (conda style)
 
@@ -516,4 +510,4 @@ It can be one of the following:
 - Hides all of the module's exports, without the prefix
 
 > **Note**
-> `hide` is not a supported keyword at the root of the module (unlike `def` etc.)
+> `hide` is not a supported keyword at the root of a module (unlike `def` etc.)
