@@ -136,7 +136,7 @@ let carapace_completer = {|spans: list<string>|
 
 # This completer will use carapace by default
 let external_completer = {|spans|
-    let expanded_alias = scope alias-completions
+    let expanded_alias = scope aliases
     | where name == $spans.0
     | get -i 0.expansion
 
