@@ -63,26 +63,3 @@ There's an interactive environment which you can use to navigate through data us
 Remember you can combine it with `--peek`.
 
 ![explore-try-nu-gif](https://user-images.githubusercontent.com/20165848/208161203-96b51209-726d-449a-959a-48b205c6f55a.gif)
-
-### `:tweak` command
-
-The `tweak` command can be used to set config options right inside.
-For example run
-
-```
-:tweak table.split_line red
-```
-
-![explore-tweak-gif](https://user-images.githubusercontent.com/20165848/207865839-992476b1-1bdb-44eb-92ce-19a761beaebf.gif)
-
-### Interactive configuration
-
-```nu
-explore -i
-```
-
-![explore-config-gif](https://user-images.githubusercontent.com/20165848/207876962-18a1b8b4-a1a9-4024-8ca4-efb7beabc431.gif)
-
-### `:config-show` command
-
-You can use `:config-show` to inspect currently used config.
