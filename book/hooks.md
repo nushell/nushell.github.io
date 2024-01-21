@@ -257,6 +257,17 @@ a browser that automatically reloads when the file changes.
 Instead of the [`save`](/commands/docs/save.md) command, you would normally customize this
 to send the HTML output to a desired window.
 
+### Changing how output is displayed
+
+You can change to default behavior of how output is displayed by using the `display_output` hook.
+Here is an example that changes the default display behavior to show a table 1 layer deep if the terminal is wide enough, or collapse otherwise:
+
+```nu
+$env.config = ($env.config | upsert hooks {
+    display_output: {if (term size).columns >= 100 { table -ed 1 } else { table }}
+})
+```
+
 ### `command_not_found` hook in _Arch Linux_
 
 The following hook uses the `pkgfile` command, to find which packages commands belong to in _Arch Linux_.

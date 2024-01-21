@@ -19,6 +19,11 @@ To start off, let's get a table that we can use:
 ───┴───────────────┴──────┴─────────┴────────────
 ```
 
+::: tip Changing how tables are displayed
+Nu will try to expands all table's structure by default. You can change this behavior by changing the `display_output` hook.
+See [hooks](/book/hooks.md#changing-how-output-is-displayed) for more information.
+:::
+
 ## Sorting the data
 
 We can sort a table by calling the [`sort-by`](/commands/docs/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
