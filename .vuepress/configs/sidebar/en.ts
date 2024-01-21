@@ -43,6 +43,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/aliases.md',
         '/book/operators.md',
         '/book/variables_and_subexpressions.md',
+        '/book/control_flow.md',
         '/book/scripts.md',
         '/book/modules.md',
         '/book/overlays.md',
