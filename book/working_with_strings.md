@@ -164,7 +164,7 @@ You can also use reduce:
 
 Though in the cases of strings, especially if you don't have to operate on the strings, it's usually easier and more correct (notice the extra + at the end in the example above) to use `str join`.
 
-Finally you could also use string interpolation, but that is complex enough that it is covered in it's own subsection below.
+Finally you could also use string interpolation, but that is complex enough that it is covered in its own subsection below.
 
 ## String interpolation
 
@@ -189,6 +189,15 @@ As of version 0.61, interpolated strings support escaping parentheses, so that t
 ```nu
 > $"2 + 2 is (2 + 2) \(you guessed it!)"
 2 + 2 is 4 (you guessed it!)
+```
+
+Interpolated strings can be evaluated at parse time, but if they include values whose formatting depends
+on your configuration and your `config.nu` hasn't been loaded yet, they will use the default configuration.
+So if you have something like this in your `config.nu`, `x` will be `"2.0 KB"` even if your config says to use
+`MB` for all file sizes (datetimes will similarly use the default config).
+
+```nu
+> const x = $"(2kb)"
 ```
 
 ## Splitting strings
