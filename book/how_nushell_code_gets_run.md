@@ -149,7 +149,7 @@ let my_path = 'foo'
 source $"($my_path)/common.nu"
 ```
 
-Let's break down what would need to happen for this to work (assuming `$my_path` is set somewhere):
+Let's break down what would need to happen for this to work:
 
 1. Parse `let my_path = 'foo'` and `source $"($my_path)/config.nu"`
 2. To evaluate `source $"($my_path)/common.nu"`:
