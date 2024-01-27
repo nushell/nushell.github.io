@@ -9,7 +9,7 @@ export const sidebarRU: SidebarConfig = {
       collapsible: false,
     },
     // {
-    //   text: 'Приступая к работе',
+    //   text: 'Начало работы',
     //   link: '/ru/book/getting_started.md',
     //   collapsible: false,
     //   children: [

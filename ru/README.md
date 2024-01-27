@@ -2,35 +2,35 @@
 home: true
 heroImage: null
 heroText: Nushell
-tagline: A new type of shell
-actionText: Get Started →
+tagline: Новый тип оболочки
+actionText: Начать →
 actionLink: /book/
 features:
-  - title: Pipelines to control any OS
-    details: Nu works on Linux, macOS, BSD, and Windows. Learn it once, then use it anywhere.
-  - title: Everything is data
-    details: Nu pipelines use structured data so you can safely select, filter, and sort the same way every time. Stop parsing strings and start solving problems.
-  - title: Powerful plugins
-    details: It's easy to extend Nu using a powerful plugin system.
+  - title: Конвейеры для управления любой ОС
+    details: Nu работает на Linux, macOS, BSD и Windows. Выучите его один раз, а затем используйте везде.
+  - title: Все есть данные
+    details: Конвейеры Nu используют структурированные данные, поэтому вы можете спокойно выбирать, фильтровать и сортировать их каждый раз одним и тем же способом. Перестаньте парсить строки и начните решать проблемы.
+  - title: Мощные плагины
+    details: Nu легко расширяется с помощью мощной системы плагинов.
 ---
 
-<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls command" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Снимок экрана, показывающий использование команды ls" class="hero"/>
 
-### Nu works with existing data
+### Nu работает с существующими данными
 
-Nu speaks [JSON, YAML, SQLite, Excel, and more](/book/loading_data.html) out of the box. It's easy to bring data into a Nu pipeline whether it's in a file, a database, or a web API:
+Nu говорит на языках [JSON, YAML, SQLite, Excel, и других](/book/loading_data.html) из коробки. В конвейер Nu легко внести данные, будь они в файле, базе данных или веб-API:
 
-<img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Снимок экрана, показывающий выборку с помощью веб-API" class="hero"/>
 
-### Nu has great error messages
+### Nu имеет отличные сообщения об ошибках
 
-Nu operates on typed data, so it catches bugs that other shells don't. And when things break, Nu tells you exactly where and why:
+Nu оперирует типизированными данными, поэтому отлавливает ошибки, которые другие оболочки не могут. А когда что-то ломается, Nu точно сообщает, где и почему:
 
-<img src="https://www.nushell.sh/frontpage/miette-example.png" alt="Screenshot showing Nu catching a type error" class="hero"/>
+<img src="https://www.nushell.sh/frontpage/miette-example.png" alt="Снимок экрана, показывающий, как Nu ловит ошибку типа" class="hero"/>
 
-## Get Nu
+## Получить Nu
 
-Nushell is available as [downloadable binaries](https://github.com/nushell/nushell/releases), [via your favourite package manager](https://repology.org/project/nushell/versions), in [a GitHub Action](https://github.com/marketplace/actions/setup-nu), and as [source code](https://github.com/nushell/nushell). Read [the detailed installation instructions](/book/installation.html) or dive right in:
+Nushell доступен в виде [загружаемых двоичных файлов](https://github.com/nushell/nushell/releases), [через ваш любимый менеджер пакетов](https://repology.org/project/nushell/versions), в [Действие GitHub](https://github.com/marketplace/actions/setup-nu), а также в виде [исходного кода](https://github.com/nushell/nushell). Прочитайте [подробные инструкции по установке](/book/installation.html) или сразу приступайте к работе:
 
 #### macOS / Linux:
 
@@ -44,10 +44,10 @@ $ brew install nushell
 $ winget install nushell
 ```
 
-After installing, launch Nu by typing `nu`.
+После установки запустите Nu, набрав `nu`.
 
-## Community
+## Сообщество
 
-Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!
+Присоединяйтесь к нам [в Discord](https://discord.gg/NtAbbGn), если у вас есть вопросы о Nu!
 
-You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls).
+Вы можете помочь улучшить этот сайт, [оставив отзыв](https://github.com/nushell/nushell.github.io/issues) или [отправив PR](https://github.com/nushell/nushell.github.io/pulls).
