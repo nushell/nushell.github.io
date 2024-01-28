@@ -150,4 +150,12 @@ export const sidebarEn: SidebarConfig = {
       ],
     },
   ],
+  '/lang-guide/': [
+    {
+      text: 'Language Reference Guide',
+      link: '/lang-guide/README.md',
+      collapsible: false,
+      children: ['README.md', 'lang-guide.md'],
+    },
+  ],
 };

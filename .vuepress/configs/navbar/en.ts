@@ -6,4 +6,5 @@ export const navbarEn: NavbarConfig = [
   { text: 'Commands', link: '/commands/' },
   { text: 'Cookbook', link: '/cookbook/' },
   { text: 'Blog', link: '/blog/' },
+  { text: 'Ref', link: '/lang-guide/' },
 ];
