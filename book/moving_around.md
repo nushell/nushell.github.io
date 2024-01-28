@@ -29,7 +29,7 @@ In other shells (like bash), glob expansion happens in the shell and the invoked
 Globbing syntax in these commands not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html). Note that this is a more limited syntax than what the dedicated [`glob` Nushell command](https://www.nushell.sh/commands/docs/glob.html) supports.
 
 Escaping `*`, `?`, `[]` works by quoting them with single quotes or double quotes.  To show the contents of a directory named `[slug]`, use `ls "[slug]"` or `ls '[slug]'`.
-Note that backtick quote doesn't escape glob, for example: <code>cp `test dir/*` .</code> will copy all files inside `test dir` to current direcroty.
+Note that backtick quote doesn't escape glob, for example: <code>cp `test dir/*`</code> will copy all files inside `test dir` to current direcroty.
 
 ## Changing the current directory
 
