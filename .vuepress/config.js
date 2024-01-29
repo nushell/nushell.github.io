@@ -15,12 +15,14 @@ import {
   navbarEs,
   navbarJa,
   navbarPtBR,
+  navbarRU,
   navbarZhCN,
   sidebarDe,
   sidebarEn,
   sidebarEs,
   sidebarJa,
   sidebarPtBR,
+  sidebarRU,
   sidebarZhCN,
 } from './configs/index.js';
 
@@ -62,6 +64,11 @@ export default defineUserConfig({
       lang: 'pt-BR',
       title: 'Nushell',
       description: 'Um novo tipo de shell.',
+    },
+    '/ru': {
+      lang: 'ru',
+      title: 'Nushell',
+      description: 'Новый тип оболочки.',
     },
   },
   head: [
@@ -126,6 +133,13 @@ export default defineUserConfig({
         editLinkText: 'Edite esta página no GitHub',
         navbar: navbarPtBR,
         sidebar: sidebarPtBR,
+      },
+      '/ru': {
+        selectText: 'Языки',
+        selectLanguageName: 'Русский язык',
+        editLinkText: 'Отредактируйте эту страницу на GitHub',
+        navbar: navbarRU,
+        sidebar: sidebarRU,
       },
       '/zh-CN/': {
         selectText: '语言',
