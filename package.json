@@ -20,10 +20,10 @@
     "@vuepress/plugin-medium-zoom": "2.0.0-rc.0",
     "@vuepress/plugin-shiki": "^2.0.0-rc.0",
     "@vuepress/theme-default": "2.0.0-rc.0",
-    "lefthook": "^1.5.2",
+    "lefthook": "^1.6.1",
     "patch-package": "^8.0.0",
-    "prettier": "^3.1.1",
-    "shiki": "^0.14.7",
+    "prettier": "^3.2.4",
+    "shiki": "^1.0.0-beta.2",
     "vuepress": "2.0.0-rc.0",
     "vuepress-plugin-feed2": "2.0.0-rc.10",
     "vuepress-plugin-sitemap2": "2.0.0-rc.10"
