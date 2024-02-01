@@ -51,7 +51,7 @@ Retrieve a html table from Wikipedia and parse it into a nushell table using tab
 
 Pass multiple css selectors to extract several elements within single query, group the query results together and rotate them to create a table
 ```nu
-> http get https://www.nushell.sh | query web --query 'h2, h2 + p' | group 2 | each {rotate --ccw tagline description} | flatten
+> http get https://www.nushell.sh | query web --query 'h2, h2 + p'  | each {str join} | group 2 | each {rotate --ccw tagline description} | flatten
 
 ```
 
