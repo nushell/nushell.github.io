@@ -38,7 +38,7 @@ feature: default
 
 Retrieve all `<header>` elements from phoronix.com website
 ```nu
-> http get https://phoronix.com | query web --query 'header'
+> http get https://phoronix.com | query web --query 'header' | flatten
 
 ```
 
