@@ -173,7 +173,7 @@ The second syntax is simply a list of records. This plays on the Nushell data mo
 
 ### Nothing
 
-The type or value `$nothing` is to be used to represent the absence of another value. Commands that explicitly do not return a value return `$nothing`
+The type `nothing` is to be used to represent the absence of another value. Commands that explicitly do not return a value return `null`.
 Use as a missing value indicator.
 
 ### Error
@@ -271,7 +271,7 @@ if false {
 }
 ```
 
-The `else` part of `if` is optional. If not provided, if a condition is false, the `if` expression returns `$nothing`.
+The `else` part of `if` is optional. If not provided, if a condition is false, the `if` expression returns `null`.
 
 The code that follows the `else` is an expression rather than a block, allowing any number of follow-on `if` expressions as well as other types of expressions. For example, this expression returns 100: `if false { 1 } else 100`.
 

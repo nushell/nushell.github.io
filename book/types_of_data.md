@@ -480,7 +480,7 @@ print $x
 
 ## Null
 
-Finally, there is `null` (also known as `$nothing`) which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md)) produce `null`.
+Finally, there is `null` which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md)) produce `null`.
 
 You can place `null` at the end of a pipeline to replace the pipeline's output with it, and thus print nothing:
 
