@@ -46,8 +46,8 @@ This completer is not usable for almost every other command, so it's recommended
 
 ```nu
 {
-    z: $zoxide_completer
-    zi: $zoxide_completer
+    z => $zoxide_completer
+    zi => $zoxide_completer
 }
 ```
 
@@ -57,8 +57,8 @@ This completer is not usable for almost every other command, so it's recommended
 >
 > ```nu
 > {
->     __zoxide_z: $zoxide_completer
->     __zoxide_zi: $zoxide_completer
+>     __zoxide_z => $zoxide_completer
+>     __zoxide_zi => $zoxide_completer
 > }
 > ```
 
@@ -68,8 +68,7 @@ Sometimes, a single external completer is not flexible enough. Luckily, as many 
 
 ```nu
 let multiple_completers = {|spans|
-    match $spans.0
-    {
+    match $spans.0 {
         ls => $ls_completer
         git => $git_completer
         _ => $default_completer
@@ -155,6 +154,8 @@ let external_completer = {|spans|
         git => $fish_completer
         # carapace doesn't have completions for asdf
         asdf => $fish_completer
+        # use zoxide completions for zoxide commands
+        __zoxide_z | __zoxide_zi => $zoxide_completer
         _ => $carapace_completer
     } | do $in $spans
 }
