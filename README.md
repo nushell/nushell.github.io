@@ -34,8 +34,16 @@ Nushell is available as [downloadable binaries](https://github.com/nushell/nushe
 
 #### macOS / Linux:
 
+##### Homebrew
+
 ```shell
 $ brew install nushell
+```
+
+##### Nix profile
+
+```shell
+$ nix profile install nixpkgs#nushell
 ```
 
 #### Windows:
