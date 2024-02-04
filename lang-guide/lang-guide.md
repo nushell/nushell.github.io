@@ -476,17 +476,26 @@ nu --testbin echo_env_mixed out-err FOO BAR
 
 The following table illustrates the difference between all of them:
 
+Pipes:
+
 | type |  command  | result  |
 | --------- | --------- | ------  |
-| ***output to next command*** |
 | \| |  <code>let result = nu --testbin echo_env_mixed out-err FOO BAR \| str upcase</code> | `result` get value `foo`, and `barbar` is outputed. |
 | e>\| | <code>let result = nu --testbin echo_env_mixed out-err FOO BAR e>\| str upcase</code> | `result` get value `barbar`, and `foo` is outputed. |
 | o+e>\| | <code>let result = nu --testbin echo_env_mixed out-err FOO BAR e+o>\| str upcase</code> | `result` get value `FOO\nBARBAR`, and nothing is outputed. |
-| ***redirect output to file*** |
+
+Redirection:
+
+| type |  command  | result  |
+| --------- | --------- | ------  |
 | o> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR o> file.txt </code> | a file named `file.txt` is created, with content `foo`, and `barbar` is outputed
 | e> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR e> file.txt </code> | a file named `file.txt` is created, with content `barbar`, and `foo` is outputed
 | o+e> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR o+e> file.txt </code> | a file named `file.txt` is created, with content `foo/nbarbar`, and nothing is outputed
-| ***pipe output to complete*** |
+
+Complete:
+
+| type |  command  | result  |
+| --------- | --------- | ------  |
 | use `complete` | <code>let result = do -i { nu --testbin echo_env_mixed out-err FOO BAR } | complete</code> | `result` get a structured value
 
 Note that `e>|` and `o+e>|` only works with external command, if you pipe internal commands' output through, `e>|` and `o+e>|`, nothing changed.  It means the following three commands do the same things:
