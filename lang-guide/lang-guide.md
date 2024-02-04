@@ -498,15 +498,28 @@ Complete:
 | --------- | --------- | ------  |
 | use `complete` | <code>let result = do -i { nu --testbin echo_env_mixed out-err FOO BAR } | complete</code> | `result` get a structured value
 
-Note that `e>|` and `o+e>|` only works with external command, if you pipe internal commands' output through, `e>|` and `o+e>|`, nothing changed.  It means the following three commands do the same things:
+Note that `e>|` and `o+e>|` only works with external command, if you pipe internal commands' output through `e>|` and `o+e>|`, you will get an error
 
 ```
-ls | str uppercase name
-ls e>| str uppercase name
-ls o+e>| str uppercase name
+❯ ls e>| str length
+Error:   × `e>|` only works with external streams
+   ╭─[entry #1:1:1]
+ 1 │ ls e>| str length
+   ·    ─┬─
+   ·     ╰── `e>|` only works on external streams
+   ╰────
+
+❯ ls e+o>| str length
+Error:   × `o+e>|` only works with external streams
+   ╭─[entry #2:1:1]
+ 1 │ ls e+o>| str length
+   ·    ──┬──
+   ·      ╰── `o+e>|` only works on external streams
+   ╰────
 ```
 
 You can also redirect `stdout` to a file, and pipe `stderr` to next command:
+
 ```
 nu --testbin echo_env_mixed out-err FOO BAR o> file.txt e>| str upper
 nu --testbin echo_env_mixed out-err FOO BAR e> file.txt | str upper
