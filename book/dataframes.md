@@ -1110,7 +1110,7 @@ command categories.
 | is-duplicated   | Series                      | Creates mask indicating duplicated values                                  |                               |
 | is-in           | Series                      | Checks if elements from a series are contained in right series             | in                            |
 | is-not-null     | Series                      | Creates mask where value is not null                                       |                               |
-| is-null         | Series                      | Creates mask where value is null                                           | `<column_name> == $nothing`   |
+| is-null         | Series                      | Creates mask where value is null                                           | `<column_name> == null`       |
 | is-unique       | Series                      | Creates mask indicating unique values                                      |                               |
 | join            | DataFrame                   | Joins a dataframe using columns as reference                               |                               |
 | last            | DataFrame                   | Creates new dataframe with last rows                                       | last                          |

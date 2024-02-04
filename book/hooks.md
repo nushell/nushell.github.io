@@ -199,7 +199,7 @@ An example for PWD env change hook:
 $env.config = ($env.config | upsert hooks.env_change.PWD {|config|
     let val = ($config | get -i hooks.env_change.PWD)
 
-    if $val == $nothing {
+    if $val == null {
         $val | append {|before, after| print $"changing directory from ($before) to ($after)" }
     } else {
         [
