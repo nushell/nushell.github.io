@@ -457,6 +457,55 @@ It doesn't work because it sees `\P` and `\s` as escapes that are not recognized
 ### Interaction with unix pipes
 
 ### Handling stderr
+You can do the following things to stderr:
+1. do nothing, it will be output to stderr directly
+2. pipeline stderr to next commands, using `e>|` or `e+o>|`
+3. redirect stderr to a file, using `e> file_path`, or `e+o> file_path`
+4. use `do -i { cmd } | complete` to capture both stdout and stderr in structure data
+
+Let's see the difference between them all of them:
+
+Assume that we have following code:
+
+```nushell
+$env.FOO = "foo"
+$env.BAR = "barbar"
+# output FOO variable to stdout, BAR variable to stderr
+nu --testbin echo_env_mixed out-err FOO BAR
+```
+
+The following table illustrates the difference between all of them:
+
+| type |  command  | result  |
+| --------- | --------- | ------  |
+| ***output to next command*** |
+| \| |  <code>let result = nu --testbin echo_env_mixed out-err FOO BAR \| str upcase</code> | `result` get value `foo`, and `barbar` is outputed. |
+| e>\| | <code>let result = nu --testbin echo_env_mixed out-err FOO BAR e>\| str upcase</code> | `result` get value `barbar`, and `foo` is outputed. |
+| o+e>\| | <code>let result = nu --testbin echo_env_mixed out-err FOO BAR e+o>\| str upcase</code> | `result` get value `FOO\nBARBAR`, and nothing is outputed. |
+| ***redirect output to file*** |
+| o> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR o> file.txt </code> | a file named `file.txt` is created, with content `foo`, and `barbar` is outputed
+| e> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR e> file.txt </code> | a file named `file.txt` is created, with content `barbar`, and `foo` is outputed
+| o+e> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR o+e> file.txt </code> | a file named `file.txt` is created, with content `foo/nbarbar`, and nothing is outputed
+| ***pipe output to complete*** |
+| use `complete` | <code>let result = do -i { nu --testbin echo_env_mixed out-err FOO BAR } | complete</code> | `result` get a structured value
+
+Note that `e>|` and `o+e>|` only works with external command, if you pipe internal commands' output through, `e>|` and `o+e>|`, nothing changed.  It means the following three commands do the same things:
+
+```
+ls | str uppercase name
+ls e>| str uppercase name
+ls o+e>| str uppercase name
+```
+
+You can also redirect `stdout` to a file, and pipe `stderr` to next command:
+```
+nu --testbin echo_env_mixed out-err FOO BAR o> file.txt e>| str upper
+nu --testbin echo_env_mixed out-err FOO BAR e> file.txt | str upper
+# But you can't use redirection along with `o+e>|`, because it's ambiguous.
+nu --testbin echo_env_mixed out-err FOO BAR o> file.txt o+e>| str upper
+```
+
+Also note that `complete` is special, it doesn't work with `e>|`, `o+e>|` pipe.
 
 ## Nu as a shell
 
