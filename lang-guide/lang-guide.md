@@ -393,7 +393,7 @@ Recognized nushell escapes:
 
 Double quotes work within string interpolation as well.
 
-### Single qotes
+### Single quotes
 
 The single quote character should work identicaly to the double quote _except_ that escape characters will not be recognized and interpreted.
 
