@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.89.0
+version: 0.90.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -32,7 +32,6 @@ feature: default
 | --------- | ------ |
 | list\<any\> | string |
 | record    | string |
-| table     | string |
 ## Examples
 
 Render a simple list to a grid

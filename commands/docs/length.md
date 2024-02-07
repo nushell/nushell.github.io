@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.89.0
+version: 0.90.0
 filters: |
   Count the number of items in an input list or rows in a table.
 usage: |
@@ -25,7 +25,7 @@ feature: default
 | input     | output |
 | --------- | ------ |
 | list\<any\> | int    |
-| table     | int    |
+
 ## Examples
 
 Count the number of items in a list

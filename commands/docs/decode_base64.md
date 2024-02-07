@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   hash
-version: 0.89.0
+version: 0.90.0
 hash: |
   Base64 decode a value.
 usage: |
@@ -32,12 +32,12 @@ feature: default
 
 ## Input/output types:
 
-| input        | output       |
-| ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
-| string       | string       |
-| table        | table        |
+| input        | output    |
+| ------------ | --------- |
+| list\<string\> | list\<any\> |
+| record       | record    |
+| string       | any       |
+| table        | table     |
 ## Examples
 
 Base64 decode a value and output as UTF-8 string

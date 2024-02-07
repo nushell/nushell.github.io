@@ -2,7 +2,7 @@
 title: input
 categories: |
   platform
-version: 0.89.0
+version: 0.90.0
 platform: |
   Get input from the user.
 usage: |
@@ -34,7 +34,7 @@ feature: default
 
 | input   | output |
 | ------- | ------ |
-| nothing | string |
+| nothing | any    |
 
 ## Examples
 

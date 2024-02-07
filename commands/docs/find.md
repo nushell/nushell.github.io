@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.89.0
+version: 0.90.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -39,7 +39,6 @@ feature: default
 | --------- | --------- |
 | list\<any\> | list\<any\> |
 | string    | any       |
-| table     | table     |
 ## Examples
 
 Search for multiple terms in a command output
@@ -48,7 +47,7 @@ Search for multiple terms in a command output
 
 ```
 
-Search for a term in a string
+Search and highlight text for a term in a string
 ```nu
 > 'Cargo.toml' | find toml
 Cargo.toml

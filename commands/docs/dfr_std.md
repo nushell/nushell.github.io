@@ -2,7 +2,7 @@
 title: dfr std
 categories: |
   expression
-version: 0.89.0
+version: 0.90.0
 expression: |
   Creates a std expression for an aggregation of std value from columns in a dataframe.
 usage: |

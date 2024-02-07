@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.89.0
+version: 0.90.0
 conversions: |
   Convert value to string.
 usage: |
@@ -102,7 +102,7 @@ convert filepath to string
 convert filesize to string
 ```nu
 > 1KiB | into string
-1,024 B
+1.0 KiB
 ```
 
 convert duration to string

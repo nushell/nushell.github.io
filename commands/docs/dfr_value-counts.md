@@ -2,7 +2,7 @@
 title: dfr value-counts
 categories: |
   dataframe
-version: 0.89.0
+version: 0.90.0
 dataframe: |
   Returns a dataframe with the counts for unique values in series.
 usage: |
@@ -35,11 +35,11 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 Calculates value counts
 ```nu
 > [5 5 5 5 6 6] | dfr into-df | dfr value-counts
-╭───┬───┬────────╮
-│ # │ 0 │ counts │
-├───┼───┼────────┤
-│ 0 │ 5 │      4 │
-│ 1 │ 6 │      2 │
-╰───┴───┴────────╯
+╭───┬───┬───────╮
+│ # │ 0 │ count │
+├───┼───┼───────┤
+│ 0 │ 5 │     4 │
+│ 1 │ 6 │     2 │
+╰───┴───┴───────╯
 
 ```

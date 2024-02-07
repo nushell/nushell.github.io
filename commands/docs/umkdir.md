@@ -2,7 +2,7 @@
 title: umkdir
 categories: |
   filesystem
-version: 0.89.0
+version: 0.90.0
 filesystem: |
   Create directories, with intermediary directories if required using uutils/coreutils mkdir.
 usage: |
