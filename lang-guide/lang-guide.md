@@ -311,7 +311,7 @@ The code that follows the `else` is an expression rather than a block, allowing 
 
 - Maybe it's the backtick quote?
 - Should we have a `r"some\nliteral\tstring"` ala rust?
-- Should we have something like python's triple double quotes like `"""` which helps with multi-line strings and also does sring literal thigns?
+- Should we have something like python's triple double quotes like `"""` which helps with multi-line strings and also does string literal things?
 
 ## String interpolation
 
@@ -473,29 +473,29 @@ print "foo"
 print -e "barbar"
 ```
 
-It prints `foo` to stdout and `barbar` to stderr.  The following table illustrates the differences between the different redirection styles:
+It prints `foo` to stdout and `barbar` to stderr. The following table illustrates the differences between the different redirection styles:
 
 Redirection to a pipeline:
 
-| type |  command  | `$result` contents | printed to terminal |
-| --------- | --------- | ------  | ---- |
-| \| |  `let result = nu demo.nu \| str upcase` | "FOO" | "barbar" |
-| e>\| | `let result = nu demo.nu e>\| str upcase` | "BARBAR" | "foo" |
-| o+e>\| | `let result = nu demo.nu e+o>\| str upcase` | "FOO\nBARBAR" | nothing |
+| type   | command                                     | `$result` contents | printed to terminal |
+| ------ | ------------------------------------------- | ------------------ | ------------------- |
+| \|     | `let result = nu demo.nu \| str upcase`     | "FOO"              | "barbar"            |
+| e>\|   | `let result = nu demo.nu e>\| str upcase`   | "BARBAR"           | "foo"               |
+| o+e>\| | `let result = nu demo.nu e+o>\| str upcase` | "FOO\nBARBAR"      | nothing             |
 
 Redirection to a file:
 
-| type |  command  | `file.txt` contents | printed to terminal |
-| --------- | --------- | ------  | ---- |
-| o> file_path | ` nu demo.nu o> file.txt ` | "foo" | "barbar" |
-| e> file_path | ` nu demo.nu e> file.txt ` | "barbar" | "foo" |
-| o+e> file_path | ` nu demo.nu o+e> file.txt ` | "foo/nbarbar" | nothing |
+| type           | command                    | `file.txt` contents | printed to terminal |
+| -------------- | -------------------------- | ------------------- | ------------------- |
+| o> file_path   | `nu demo.nu o> file.txt`   | "foo"               | "barbar"            |
+| e> file_path   | `nu demo.nu e> file.txt`   | "barbar"            | "foo"               |
+| o+e> file_path | `nu demo.nu o+e> file.txt` | "foo/nbarbar"       | nothing             |
 
 `complete` command:
 
-| type |  command  | `$result` contents  |
-| --------- | --------- | ------  |
-| use `complete` | `let result = do { nu demo.nu } \| complete` | record containing both stdout and stderr
+| type           | command                                      | `$result` contents                       |
+| -------------- | -------------------------------------------- | ---------------------------------------- |
+| use `complete` | `let result = do { nu demo.nu } \| complete` | record containing both stdout and stderr |
 
 Note that `e>|` and `o+e>|` only work with external command, if you pipe internal commands' output through `e>|` and `o+e>|`, you will get an error:
 
