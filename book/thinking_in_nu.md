@@ -48,7 +48,16 @@ Another common issue is trying to dynamically create the filename to source from
 > source $"($my_path)/common.nu"
 ```
 
-This would require the evaluator to run and evaluate the string, but unfortunately Nushell needs this information at compile-time.
+This doesn't work if `my_path` is a regular runtime variable declared with `let`. This would require the
+evaluator to run and evaluate the string, but unfortunately Nushell needs this information at compile-time.
+
+However, if `my_path` is a [constant](/book/variables_and_subexpressions#constant-variables), then this
+would work, since the string can be evaluated at compile-time:
+
+```nu
+> const my_path = ([$nu.home-path nushell] | path join)
+> source $"($my_path)/common.nu" # sources /home/user/nushell/common.nu
+```
 
 **Thinking in Nushell:** Nushell is designed to use a single compile step for all the source you send it, and this is separate from evaluation. This will allow for strong IDE support, accurate error messages, an easier language for third-party tools to work with, and in the future even fancier output like being able to compile Nushell directly to a binary file.
 
