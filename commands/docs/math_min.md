@@ -2,7 +2,7 @@
 title: math min
 categories: |
   math
-version: 0.89.0
+version: 0.90.0
 math: |
   Finds the minimum within a list of values or tables.
 usage: |
@@ -22,10 +22,15 @@ feature: default
 
 ## Input/output types:
 
-| input     | output |
-| --------- | ------ |
-| list\<any\> | any    |
-| table     | record |
+| input          | output   |
+| -------------- | -------- |
+| list\<any\>      | any      |
+| list\<duration\> | duration |
+| list\<filesize\> | filesize |
+| list\<number\>   | number   |
+| range          | number   |
+| record         | record   |
+| table          | record   |
 ## Examples
 
 Compute the minimum of a list of numbers

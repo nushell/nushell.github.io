@@ -2,7 +2,7 @@
 title: history
 categories: |
   history
-version: 0.89.0
+version: 0.90.0
 history: |
   Get the command history.
 usage: |
@@ -29,7 +29,7 @@ feature: default
 
 | input   | output |
 | ------- | ------ |
-| nothing | table  |
+| nothing | any    |
 
 ## Examples
 

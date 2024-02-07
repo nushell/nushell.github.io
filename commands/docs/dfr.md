@@ -2,7 +2,7 @@
 title: dfr
 categories: |
   dataframe
-version: 0.89.0
+version: 0.90.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -119,6 +119,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`dfr reverse`](/commands/docs/dfr_reverse.md)                 | Builtin | Reverses the LazyFrame                                                                           |
 | [`dfr rolling`](/commands/docs/dfr_rolling.md)                 | Builtin | Rolling calculation for a series.                                                                |
 | [`dfr sample`](/commands/docs/dfr_sample.md)                   | Builtin | Create sample dataframe.                                                                         |
+| [`dfr schema`](/commands/docs/dfr_schema.md)                   | Builtin | Show schema for a dataframe.                                                                     |
 | [`dfr select`](/commands/docs/dfr_select.md)                   | Builtin | Selects columns from lazyframe.                                                                  |
 | [`dfr set`](/commands/docs/dfr_set.md)                         | Builtin | Sets value where given mask is true.                                                             |
 | [`dfr set-with-idx`](/commands/docs/dfr_set-with-idx.md)       | Builtin | Sets value in the given index.                                                                   |

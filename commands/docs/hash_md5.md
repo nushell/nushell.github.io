@@ -2,7 +2,7 @@
 title: hash md5
 categories: |
   hash
-version: 0.89.0
+version: 0.90.0
 hash: |
   Hash a value using the md5 hash algorithm.
 usage: |
@@ -33,7 +33,7 @@ feature: default
 | input  | output |
 | ------ | ------ |
 | record | record |
-| string | string |
+| string | any    |
 | table  | table  |
 ## Examples
 

@@ -2,7 +2,7 @@
 title: into record
 categories: |
   conversions
-version: 0.89.0
+version: 0.90.0
 conversions: |
   Convert value to record.
 usage: |
@@ -29,7 +29,6 @@ feature: default
 | list\<any\> | record |
 | range     | record |
 | record    | record |
-| table     | record |
 ## Examples
 
 Convert from one row table to record

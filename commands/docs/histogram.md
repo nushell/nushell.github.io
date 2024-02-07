@@ -2,7 +2,7 @@
 title: histogram
 categories: |
   chart
-version: 0.89.0
+version: 0.90.0
 chart: |
   Creates a new table with a histogram based on the column name passed in.
 usage: |

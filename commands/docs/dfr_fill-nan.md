@@ -2,7 +2,7 @@
 title: dfr fill-nan
 categories: |
   lazyframe
-version: 0.89.0
+version: 0.90.0
 lazyframe: |
   Replaces NaN values with the given expression.
 usage: |

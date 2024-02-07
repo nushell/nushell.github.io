@@ -2,7 +2,7 @@
 title: each while
 categories: |
   filters
-version: 0.89.0
+version: 0.90.0
 filters: |
   Run a block on each row of the input list until a null is found, then create a new list with the results.
 usage: |
@@ -33,7 +33,7 @@ feature: extra
 | input     | output    |
 | --------- | --------- |
 | list\<any\> | list\<any\> |
-| table     | list\<any\> |
+
 ## Examples
 
 Produces a list of each element before the 3, doubled

@@ -2,7 +2,7 @@
 title: math avg
 categories: |
   math
-version: 0.89.0
+version: 0.90.0
 math: |
   Returns the average of a list of numbers.
 usage: |
@@ -24,13 +24,34 @@ feature: default
 
 | input          | output   |
 | -------------- | -------- |
+| duration       | duration |
+| filesize       | filesize |
 | list\<duration\> | duration |
 | list\<filesize\> | filesize |
 | list\<number\>   | number   |
+| number         | number   |
+| range          | number   |
+| record         | record   |
+| table          | record   |
 ## Examples
 
 Compute the average of a list of numbers
 ```nu
 > [-50 100.0 25] | math avg
 25
+```
+
+Compute the average of a list of durations
+```nu
+> [2sec 1min] | math avg
+31sec
+```
+
+Compute the average of each column in a table
+```nu
+> [[a b]; [1 2] [3 4]] | math avg
+╭───┬───╮
+│ a │ 2 │
+│ b │ 3 │
+╰───┴───╯
 ```

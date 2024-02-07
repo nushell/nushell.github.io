@@ -2,7 +2,7 @@
 title: uniq-by
 categories: |
   filters
-version: 0.89.0
+version: 0.90.0
 filters: |
   Return the distinct values in the input by the given column(s).
 usage: |

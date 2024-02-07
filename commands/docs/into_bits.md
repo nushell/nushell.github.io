@@ -2,7 +2,7 @@
 title: into bits
 categories: |
   conversions
-version: 0.89.0
+version: 0.90.0
 conversions: |
   Convert value to a binary primitive.
 usage: |

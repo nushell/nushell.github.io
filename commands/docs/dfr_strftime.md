@@ -2,7 +2,7 @@
 title: dfr strftime
 categories: |
   dataframe
-version: 0.89.0
+version: 0.90.0
 dataframe: |
   Formats date based on string rule.
 usage: |

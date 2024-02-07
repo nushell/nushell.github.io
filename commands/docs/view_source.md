@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.89.0
+version: 0.90.0
 debug: |
   View a block, module, or a definition.
 usage: |

@@ -2,7 +2,7 @@
 title: compact
 categories: |
   filters
-version: 0.89.0
+version: 0.90.0
 filters: |
   Creates a table with non-empty rows.
 usage: |
@@ -33,7 +33,7 @@ feature: default
 | input     | output    |
 | --------- | --------- |
 | list\<any\> | list\<any\> |
-| table     | table     |
+
 ## Examples
 
 Filter out all records where 'Hello' is null
