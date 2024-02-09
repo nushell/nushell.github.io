@@ -456,7 +456,7 @@ It doesn't work because it sees `\P` and `\s` as escapes that are not recognized
 
 ### Interaction with unix pipes
 
-### Handling stderr
+### Handling stdout and stderr
 You can do the following things to stderr:
 1. do nothing, it will be output to stderr directly
 2. pipeline stderr to next commands, using `e>|` or `e+o>|`
@@ -465,7 +465,7 @@ You can do the following things to stderr:
 
 Let's see the difference between them all of them:
 
-Assume that we have following code:
+Assume that we have following code
 
 ```nushell
 # demo.nu
@@ -473,7 +473,7 @@ print "foo"
 print -e "barbar"
 ```
 
-The following table illustrates the difference between all of them:
+It print `foo` to stdout and `barbar` to stderr.  The following table illustrates the difference between all of them:
 
 Pipes:
 
