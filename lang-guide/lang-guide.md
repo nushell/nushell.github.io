@@ -468,10 +468,9 @@ Let's see the difference between them all of them:
 Assume that we have following code:
 
 ```nushell
-$env.FOO = "foo"
-$env.BAR = "barbar"
-# output FOO variable to stdout, BAR variable to stderr
-nu --testbin echo_env_mixed out-err FOO BAR
+# demo.nu
+print "foo"
+print -e "barbar"
 ```
 
 The following table illustrates the difference between all of them:
@@ -480,23 +479,23 @@ Pipes:
 
 | type |  command  | result  |
 | --------- | --------- | ------  |
-| \| |  <code>let result = nu --testbin echo_env_mixed out-err FOO BAR \| str upcase</code> | `result` get value `foo`, and `barbar` is outputed. |
-| e>\| | <code>let result = nu --testbin echo_env_mixed out-err FOO BAR e>\| str upcase</code> | `result` get value `barbar`, and `foo` is outputed. |
-| o+e>\| | <code>let result = nu --testbin echo_env_mixed out-err FOO BAR e+o>\| str upcase</code> | `result` get value `FOO\nBARBAR`, and nothing is outputed. |
+| \| |  `let result = nu demo.nu \| str upcase` | `result` get value `foo`, and `barbar` is outputed. |
+| e>\| | `let result = nu demo.nu e>\| str upcase` | `result` get value `barbar`, and `foo` is outputed. |
+| o+e>\| | `let result = nu demo.nu e+o>\| str upcase` | `result` get value `FOO\nBARBAR`, and nothing is outputed. |
 
 Redirection:
 
 | type |  command  | result  |
 | --------- | --------- | ------  |
-| o> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR o> file.txt </code> | a file named `file.txt` is created, with content `foo`, and `barbar` is outputed
-| e> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR e> file.txt </code> | a file named `file.txt` is created, with content `barbar`, and `foo` is outputed
-| o+e> file_path | <code> nu --testbin echo_env_mixed out-err FOO BAR o+e> file.txt </code> | a file named `file.txt` is created, with content `foo/nbarbar`, and nothing is outputed
+| o> file_path | ` nu demo.nu o> file.txt ` | a file named `file.txt` is created, with content `foo`, and `barbar` is outputed
+| e> file_path | ` nu demo.nu e> file.txt ` | a file named `file.txt` is created, with content `barbar`, and `foo` is outputed
+| o+e> file_path | ` nu demo.nu o+e> file.txt ` | a file named `file.txt` is created, with content `foo/nbarbar`, and nothing is outputed
 
 Complete:
 
 | type |  command  | result  |
 | --------- | --------- | ------  |
-| use `complete` | <code>let result = do -i { nu --testbin echo_env_mixed out-err FOO BAR } | complete</code> | `result` get a structured value
+| use `complete` | `let result = do -i { nu demo.nu } | complete` | `result` get a structured value
 
 Note that `e>|` and `o+e>|` only works with external command, if you pipe internal commands' output through, `e>|` and `o+e>|`, nothing changed.  It means the following three commands do the same things:
 
@@ -508,10 +507,10 @@ ls o+e>| str uppercase name
 
 You can also redirect `stdout` to a file, and pipe `stderr` to next command:
 ```
-nu --testbin echo_env_mixed out-err FOO BAR o> file.txt e>| str upper
-nu --testbin echo_env_mixed out-err FOO BAR e> file.txt | str upper
+nu demo.nu o> file.txt e>| str upper
+nu demo.nu e> file.txt | str upper
 # But you can't use redirection along with `o+e>|`, because it's ambiguous.
-nu --testbin echo_env_mixed out-err FOO BAR o> file.txt o+e>| str upper
+nu demo.nu o> file.txt o+e>| str upper
 ```
 
 Also note that `complete` is special, it doesn't work with `e>|`, `o+e>|` pipe.
