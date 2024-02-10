@@ -1,7 +1,7 @@
-import starlight from "@astrojs/starlight";
-import { defineConfig } from "astro/config";
-import { ExpressiveCodeTheme } from "@astrojs/starlight/expressive-code";
 import fs from "node:fs";
+import starlight from "@astrojs/starlight";
+import { ExpressiveCodeTheme } from "@astrojs/starlight/expressive-code";
+import { defineConfig } from "astro/config";
 
 const jsoncString = fs.readFileSync(
   new URL("./public/nushell_minimal_dark_theme.json", import.meta.url),
