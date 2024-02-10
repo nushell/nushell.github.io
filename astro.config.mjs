@@ -74,7 +74,7 @@ export default defineConfig({
             { label: "Control Flow", link: "/book/control_flow/" },
             { label: "Scripts", link: "/book/scripts/" },
             { label: "Modules", link: "/book/modules/" },
-            { label: "Overlays", link: "/book/overflows/" },
+            { label: "Overlays", link: "/book/overlays/" },
             { label: "Command signature", link: "/book/command_signatures/" },
             { label: "Testing", link: "/book/testing/" },
             { label: "Best Practices", link: "/book/style_guide/" },
