@@ -215,22 +215,19 @@ operator. You can use the spread multiple records inside a single record literal
     ...{ url: example.com },
     ...(sys | get mem)
   }
-╭────────────┬───────────────╮
-│ path       │ /tmp          │
-│ limit      │ 5             │
-│            │ ╭───┬───────╮ │
-│ users      │ │ 0 │ alice │ │
-│            │ │ 1 │ bob   │ │
-│            │ ╰───┴───────╯ │
-│ url        │ example.com   │
-│ total      │ 8.3 GB        │
-│ free       │ 2.6 GB        │
-│ used       │ 5.7 GB        │
-│ available  │ 2.6 GB        │
-│ swap total │ 2.1 GB        │
-│ swap free  │ 18.0 MB       │
-│ swap used  │ 2.1 GB        │
-╰────────────┴───────────────╯
+╭────────────┬────────────────╮
+│ path       │ /tmp           │
+│ limit      │ 5              │
+│ users      │ [list 2 items] │
+│ url        │ example.com    │
+│ total      │ 16.0 GiB       │
+│ free       │ 360.9 MiB      │
+│ used       │ 9.3 GiB        │
+│ available  │ 4.4 GiB        │
+│ swap total │ 0 B            │
+│ swap free  │ 0 B            │
+│ swap used  │ 0 B            │
+╰────────────┴────────────────╯
 ```
 
 Similarly to lists, inside record literals, the spread operator can only be used before variables (`...$foo`),

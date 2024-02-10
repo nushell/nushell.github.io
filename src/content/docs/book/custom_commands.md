@@ -388,14 +388,21 @@ Once defined, we can run `help greet` to get the help information for the comman
 
 ```nushell frame="terminal"
 Usage:
-  > greet <name> {flags}
-
-Parameters:
-  <name>
+  > greet {flags} <name>
 
 Flags:
-  -h, --help: Display this help message
-  -a, --age <integer>
+  -a, --age <Int> -
+  -h, --help - Display the help message for this command
+
+Parameters:
+  name <string>:
+
+Input/output types:
+  ╭───┬───────┬────────╮
+  │ # │ input │ output │
+  ├───┼───────┼────────┤
+  │ 0 │ any   │ any    │
+  ╰───┴───────┴────────╯
 ```
 
 You can see the parameter and flag that we defined, as well as the `-h` help flag that all commands get.
@@ -421,17 +428,22 @@ A Nushell comment that continues on the same line for argument documentation pur
 Now, if we run `help greet`, we're given a more helpful help text:
 
 ```nushell frame="terminal"
-A greeting command that can greet the caller
-
 Usage:
-  > greet <name> {flags}
-
-Parameters:
-  <name> The name of the person to greet
+  > greet {flags} <name>
 
 Flags:
-  -h, --help: Display this help message
-  -a, --age <integer>: The age of the person
+  -a, --age <Int> - The age of the person
+  -h, --help - Display the help message for this command
+
+Parameters:
+  name <string>: The name of the person to greet
+
+Input/output types:
+  ╭───┬───────┬────────╮
+  │ # │ input │ output │
+  ├───┼───────┼────────┤
+  │ 0 │ any   │ any    │
+  ╰───┴───────┴────────╯
 ```
 
 ## Pipeline Output

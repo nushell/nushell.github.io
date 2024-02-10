@@ -210,17 +210,17 @@ open Cargo.lock
 # It is not intended for manual editing.
 [[package]]
 name = "adhoc_derive"
-version = "0.1.2"
+version = "0.7.20"
 ```
 
 The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the [`from`](/commands/docs/from.md) command using the `toml` subcommand:
 
 ```nushell frame="terminal"
 open Cargo.lock | from toml
-──────────┬───────────────────
- metadata │ [row 107 columns]
- package  │ [table 130 rows]
-──────────┴───────────────────
+╭─────────┬──────────────────╮
+│ package │ [table 102 rows] │
+│ version │ 3                │
+╰─────────┴──────────────────╯
 ```
 
 The [`from`](/commands/docs/from.md) command can be used for each of the structured data text formats that Nu can open and understand by passing it the supported format as a subcommand.
@@ -230,12 +230,15 @@ The [`from`](/commands/docs/from.md) command can be used for each of the structu
 While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the [`open`](/commands/docs/open.md) command can take an optional `--raw` flag:
 
 ```nushell frame="terminal"
-open Cargo.toml --raw
-[package]                                                                                        name = "nu"
-version = "0.1.3"
-authors = ["Yehuda Katz <wycats@gmail.com>", "Jonathan Turner <jonathan.d.turner@gmail.com>"]
-description = "A shell for the GitHub era"
-license = "MIT"
+[package]
+name = "rustlings"
+description = "Small exercises to get you used to reading and writing Rust code!"
+version = "5.6.1"
+authors = [
+  "Liv <mokou@fastmail.com>",
+  "Carol (Nichols || Goulding) <carol.nichols@gmail.com>",
+]
+edition = "2021"
 ```
 
 ## SQLite

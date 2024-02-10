@@ -88,18 +88,18 @@ Running [`date now`](/commands/docs/date_now.md) gives us information about the 
 
 ```nushell frame='terminal'
 date now
-2022-03-07 14:14:51.684619600 -08:00
+Fri, 9 Feb 2024 22:32:19 -0800 (now)
 ```
 
 To get the date as a table we can feed it into [`date to-table`](/commands/docs/date_to-table.md)
 
 ```nushell frame='terminal'
 date now | date to-table
-╭───┬──────┬───────┬─────┬──────┬────────┬────────┬──────────╮
-│ # │ year │ month │ day │ hour │ minute │ second │ timezone │
-├───┼──────┼───────┼─────┼──────┼────────┼────────┼──────────┤
-│ 0 │ 2022 │     3 │   7 │   14 │     45 │      3 │ -08:00   │
-╰───┴──────┴───────┴─────┴──────┴────────┴────────┴──────────╯
+╭───┬──────┬───────┬─────┬──────┬────────┬────────┬────────────┬──────────╮
+│ # │ year │ month │ day │ hour │ minute │ second │ nanosecond │ timezone │
+├───┼──────┼───────┼─────┼──────┼────────┼────────┼────────────┼──────────┤
+│ 0 │ 2024 │     2 │   9 │   22 │     35 │     46 │  759272000 │ -08:00   │
+╰───┴──────┴───────┴─────┴──────┴────────┴────────┴────────────┴──────────╯
 ```
 
 Running [`sys`](/commands/docs/sys.md) gives information about the system that Nu is running on:
@@ -107,12 +107,12 @@ Running [`sys`](/commands/docs/sys.md) gives information about the system that N
 ```nushell frame='terminal'
 sys
 ╭───────┬───────────────────╮
-│ host  │ {record 6 fields} │
-│ cpu   │ [table 4 rows]    │
-│ disks │ [table 3 rows]    │
-│ mem   │ {record 4 fields} │
-│ temp  │ [table 1 row]     │
-│ net   │ [table 4 rows]    │
+│ host  │ {record 8 fields} │
+│ cpu   │ [table 8 rows]    │
+│ disks │ [table 2 rows]    │
+│ mem   │ {record 7 fields} │
+│ temp  │ [table 38 rows]   │
+│ net   │ [table 21 rows]   │
 ╰───────┴───────────────────╯
 ```
 
@@ -120,23 +120,26 @@ This is a bit different than the tables we saw before. The [`sys`](/commands/doc
 
 ```nushell frame='terminal'
 sys | get host
-╭────────────────┬────────────────────────╮
-│ name           │ Debian GNU/Linux       │
-│ os version     │ 11                     │
-│ kernel version │ 5.10.92-v8+            │
-│ hostname       │ lifeless               │
-│ uptime         │ 19day 21hr 34min 45sec │
-│ sessions       │ [table 1 row]          │
-╰────────────────┴────────────────────────╯
+╭─────────────────┬───────────────────────────╮
+│ name            │ Darwin                    │
+│ os_version      │ 14.3.1                    │
+│ long_os_version │ MacOS 14.3.1              │
+│ kernel_version  │ 23.3.0                    │
+│ hostname        │ Johns-MacBook-Air.local   │
+│ uptime          │ 3hr 9min 32sec            │
+│ boot_time       │ 2024-02-09T19:27:03-08:00 │
+│ sessions        │ [table 3 rows]            │
+╰─────────────────┴───────────────────────────╯
 ```
 
 The [`get`](/commands/docs/get.md) command lets us jump into the contents of a column of the table. Here, we're looking into the "host" column, which contains information about the host that Nu is running on. The name of the OS, the hostname, the CPU, and more. Let's get the name of the users on the system:
 
 ```nushell frame='terminal'
  sys | get host.sessions.name
-╭───┬────╮
-│ 0 │ jt │
-╰───┴────╯
+╭───┬──────────────╮
+│ 0 │ root         │
+│ 1 │ jt           │
+╰───┴──────────────╯
 ```
 
 Right now, there's just one user on the system named "jt". You'll notice that we can pass a column path (the `host.sessions.name` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
@@ -147,7 +150,11 @@ Let's see how strings work outside of Nu in action. We'll take our example from 
 
 ```nushell frame='terminal'
 sys | get host.sessions.name | each { |it| ^echo $it }
+root
 jt
+╭────────────╮
+│ empty list │
+╰────────────╯
 ```
 
 If this looks very similar to what we had before, you have a keen eye! It is similar, but with one important difference: we've called `^echo` with the value we saw earlier. This allows us to pass data out of Nu into [`echo`](/commands/docs/echo.md) (or any command outside of Nu, like `git` for example).

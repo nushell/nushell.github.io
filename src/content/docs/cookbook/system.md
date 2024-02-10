@@ -75,14 +75,14 @@ ps | where cpu > 0 | sort-by cpu | reverse
 
 Output
 
-```
-───┬───────┬────────────────────┬───────┬─────────┬─────────
- # │  pid  │        name        │  cpu  │   mem   │ virtual
-───┼───────┼────────────────────┼───────┼─────────┼─────────
- 0 │ 11928 │ nu.exe             │ 32.12 │ 47.7 MB │ 20.9 MB
- 1 │ 11728 │ Teams.exe          │ 10.71 │ 53.8 MB │ 50.8 MB
- 2 │ 21460 │ msedgewebview2.exe │  8.43 │ 54.0 MB │ 36.8 MB
-───┴───────┴────────────────────┴───────┴─────────┴─────────
+```nushell frame="terminal"
+╭────┬──────┬──────┬─────────────────────────────────┬─────────┬──────┬───────────┬───────────╮
+│  # │ pid  │ ppid │              name               │ status  │ cpu  │    mem    │  virtual  │
+├────┼──────┼──────┼─────────────────────────────────┼─────────┼──────┼───────────┼───────────┤
+│  0 │ 4677 │ 4675 │ nu                              │ Running │ 9.17 │  31.0 MiB │ 391.4 GiB │
+│  1 │ 4674 │    1 │ Terminal                        │ Sleep   │ 8.34 │  87.5 MiB │ 391.0 GiB │
+│  2 │ 5783 │ 1811 │ Arc Helper (Renderer)           │ Sleep   │ 2.55 │ 231.1 MiB │   1.5 TiB │
+
 ```
 
 ---
@@ -92,31 +92,23 @@ Output
 Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process:
 
 ```nushell
-ps | where name == Notepad2.exe
+ps | where name == Notes
 ```
 
 Output
 
-```
-───┬──────┬──────────────┬──────┬─────────┬─────────
- # │ pid  │     name     │ cpu  │   mem   │ virtual
-───┼──────┼──────────────┼──────┼─────────┼─────────
- 0 │ 9268 │ Notepad2.exe │ 0.00 │ 32.0 MB │  9.8 MB
-───┴──────┴──────────────┴──────┴─────────┴─────────
+```nushell
+╭───┬──────┬──────┬───────┬────────┬──────┬───────────┬───────────╮
+│ # │ pid  │ ppid │ name  │ status │ cpu  │    mem    │  virtual  │
+├───┼──────┼──────┼───────┼────────┼──────┼───────────┼───────────┤
+│ 0 │ 1306 │    1 │ Notes │ Sleep  │ 0.00 │ 108.4 MiB │ 395.3 GiB │
+╰───┴──────┴──────┴───────┴────────┴──────┴───────────┴───────────╯
 ```
 
 This process can be sent the kill signal in a one-liner:
 
 ```nushell
-ps | where name == Notepad2.exe | get pid.0 | kill $in
-```
-
-Output
-
-```
-───┬────────────────────────────────────────────────────────────────
- 0 │ SUCCESS: Sent termination signal to the process with PID 9268.
-───┴────────────────────────────────────────────────────────────────
+ps | where name == Notes | get pid.0 | kill $in
 ```
 
 Notes:

@@ -45,10 +45,16 @@ The output for `jq` is a JSON string whereas in `nu` it's a Nushell value. To ge
 Output:
 
 ```json
-{
-  "title": "jq vs Nushell",
-  "publication_date": "2023-11-20"
-}
+[
+  {
+    "name": "Alice",
+    "age": 30
+  },
+  {
+    "name": "Bob",
+    "age": 25
+  }
+]
 ```
 
 When your JSON data is stored in a file, you can use [open](/commands/docs/open.html) instead of [from json](/commands/docs/from_json.html).
