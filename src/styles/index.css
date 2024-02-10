@@ -1,0 +1,32 @@
+@media (min-width: 50rem) {
+  .hero {
+    grid-template-columns: unset;
+
+    > img {
+      order: unset;
+      margin-inline: unset;
+    }
+  }
+}
+
+:where(p) {
+  text-wrap: pretty;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  text-wrap: balance;
+}
+
+/* Dark mode colors. */
+:root {
+  --sl-color-accent: #3aa675;
+  --sl-color-accent-high: #3aa675;
+  --sl-color-gray-3: #8b9eb0;
+  --sl-color-black: #22272e;
+}
+
+/* Light mode colors. */
+:root[data-theme="light"] {
+  --sl-color-accent: #3eaf7c;
+  --sl-color-white: #17181c;
+}

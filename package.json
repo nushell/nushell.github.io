@@ -1,35 +1,37 @@
 {
   "name": "nushell.github.io",
+  "type": "module",
   "version": "0.0.0",
   "description": "The Nushell website (nushell.sh)",
   "repository": "github:nushell/nushell.github.io",
-  "type": "module",
-  "scripts": {
-    "update": "nu make_docs.nu",
-    "dev": "vuepress dev",
-    "build": "vuepress build",
-    "postinstall": "patch-package",
-    "prepare": "git config --unset core.hooksPath && rm -rf .husky || true; npx lefthook install",
-    "pretty": "prettier --write ."
-  },
   "license": "MIT",
-  "devDependencies": {
-    "@vuepress/plugin-back-to-top": "2.0.0-rc.0",
-    "@vuepress/plugin-docsearch": "2.0.0-rc.0",
-    "@vuepress/plugin-git": "2.0.0-rc.0",
-    "@vuepress/plugin-medium-zoom": "2.0.0-rc.0",
-    "@vuepress/plugin-shiki": "^2.0.0-rc.0",
-    "@vuepress/theme-default": "2.0.0-rc.0",
-    "lefthook": "^1.6.1",
-    "patch-package": "^8.0.0",
-    "prettier": "^3.2.4",
-    "shiki": "^1.0.0-beta.2",
-    "vuepress": "2.0.0-rc.0",
-    "vuepress-plugin-feed2": "2.0.0-rc.10",
-    "vuepress-plugin-sitemap2": "2.0.0-rc.10"
-  },
   "engines": {
     "npm": ">=9.0.0",
     "node": ">=18.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier -w . --plugin=prettier-plugin-astro && biome format --write .",
+    "lint": "biome lint . && astro check",
+    "lint:fix": "biome lint --apply .",
+    "check-format": "prettier --check . && biome check .",
+    "check-format:fix": "biome check --apply .",
+    "precommit": "pnpm run check-format && pnpm run lint"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.0",
+    "@astrojs/starlight": "^0.17.3",
+    "astro": "^4.3.4",
+    "sharp": "^0.32.5",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.3",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0"
   }
 }
