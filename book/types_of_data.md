@@ -336,21 +336,7 @@ To append one or more lists together, optionally with values interspersed in bet
 
 ## Tables
 
-The table is a core data structure in Nushell. As you run commands, you'll see that many of them return tables as output. A table has both rows and columns.
-
-We can create our own tables similarly to how we create a list. Because tables also contain columns and not just values, we pass in the name of the column values:
-
-```nu
-> [[column1, column2]; [Value1, Value2] [Value3, Value4]]
-╭───┬─────────┬─────────╮
-│ # │ column1 │ column2 │
-├───┼─────────┼─────────┤
-│ 0 │ Value1  │ Value2  │
-│ 1 │ Value3  │ Value4  │
-╰───┴─────────┴─────────╯
-```
-
-You can also create a table as a list of records, JSON-style:
+A table is a list of records. Each record is a row and each key-value pair is a column.
 
 ```nu
 > [{name: sam, rank: 10}, {name: bob, rank: 7}]
@@ -362,28 +348,94 @@ You can also create a table as a list of records, JSON-style:
 ╰───┴──────┴──────╯
 ```
 
-:::tip
-Internally, tables are simply **lists of records**. This means that any command which extracts or isolates a specific row of a table will produce a record. For example, `get 0`, when used on a list, extracts the first value. But when used on a table (a list of records), it extracts a record:
+A row can also be written as list of values. Then, the first element in the list is a list of column names and separated by a semicolon.
 
 ```nu
-> [{x:12, y:5}, {x:3, y:6}] | get 0
-╭───┬────╮
-│ x │ 12 │
-│ y │ 5  │
-╰───┴────╯
+> [[name, rank]; [sam, 10] [bob, 7]]
+╭───┬──────┬──────╮
+│ # │ name │ rank │
+├───┼──────┼──────┤
+│ 0 │ sam  │   10 │
+│ 1 │ bob  │    7 │
+╰───┴──────┴──────╯
 ```
 
-This is true regardless of which table syntax you use:
+To access a row or a column, you can use the [`get`](/commands/docs/get.md) command or cell path access:
 
 ```nu
-[[x,y];[12,5],[3,6]] | get 0
-╭───┬────╮
-│ x │ 12 │
-│ y │ 5  │
-╰───┴────╯
+> [{name: sam, rank: 10}, {name: bob, rank: 7}] | get 1
+╭──────┬─────╮
+│ name │ bob │
+│ rank │ 7   │
+╰──────┴─────╯
+> [{name: sam, rank: 10}, {name: bob, rank: 7}].1
+╭──────┬─────╮
+│ name │ bob │
+│ rank │ 7   │
+╰──────┴─────╯
+> [{name: sam, rank: 10}, {name: bob, rank: 7}] | get name
+╭───┬─────╮
+│ 0 │ sam │
+│ 1 │ bob │
+╰───┴─────╯
+> [{name: sam, rank: 10}, {name: bob, rank: 7}].name
+╭───┬─────╮
+│ 0 │ sam │
+│ 1 │ bob │
+╰───┴─────╯
 ```
+
+Note, the records in a table don't necessarily need to have matching keys. If a record lacks a key, the table will lack a value for that column. You can think of the table having a hole.
+
+```nu
+> [{name: sam, rank: 10}, {name: bob, rank: 7, age: 21}]
+╭───┬──────┬──────┬─────╮
+│ # │ name │ rank │ age │
+├───┼──────┼──────┼─────┤
+│ 0 │ sam  │   10 │  ❎ │
+│ 1 │ bob  │    7 │  21 │
+╰───┴──────┴──────┴─────╯
+```
+
+:::warning
+
+A missing value isn't the same as the `null` value! Attempting to access this column will cause an error:
+
+```nu
+> [{name: sam, rank: 10}, {name: bob, rank: 7, age: 21}] | get 0.age
+Error: nu::shell::column_not_found
+
+  × Cannot find column
+   ╭─[entry #14:1:1]
+ 1 │ [{name: sam, rank: 10}, {name: bob, rank: 7, age: 21}] | get 0.age
+   ·  ──────────┬──────────                                         ─┬─
+   ·            │                                                    ╰── cannot find column 'age'
+   ·            ╰── value originates here
+   ╰────
+```
+
+You can use optional [Cell path access](/book/operators#cell-path-access) to avoid the error.
 
 :::
+
+To filter rows or columns in a table, you can use the [`select`](/commands/docs/select.md) command:
+
+```nu
+> [{name: sam, rank: 10}, {name: bob, rank: 7}, {name: john, rank: 12}] | select 1 2
+╭───┬──────┬──────╮
+│ # │ name │ rank │
+├───┼──────┼──────┤
+│ 0 │ sam  │   10 │
+│ 1 │ bob  │    7 │
+╰───┴──────┴──────╯
+> [{name: sam, rank: 10, age: 21}, {name: bob, rank: 7, age: 32} | select name rank
+╭───┬──────┬──────╮
+│ # │ name │ rank │
+├───┼──────┼──────┤
+│ 0 │ sam  │   10 │
+│ 1 │ bob  │    7 │
+╰───┴──────┴──────╯
+```
 
 ### Cell Paths
 
@@ -402,31 +454,6 @@ Moreover, you can also access entire columns of a table by name, to obtain lists
 │ 1 │  4 │
 │ 2 │  2 │
 ╰───┴────╯
-```
-
-Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the [`select`](/commands/docs/select.md) command with column names:
-
-```nu
-> [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select y z
-╭───┬───┬───╮
-│ # │ y │ z │
-├───┼───┼───┤
-│ 0 │ 5 │ 1 │
-│ 1 │ 7 │ 3 │
-│ 2 │ 2 │ 0 │
-╰───┴───┴───╯
-```
-
-To remove rows from a table, you'll commonly use the [`select`](/commands/docs/select.md) command with row numbers, as you would with a list:
-
-```nu
-> [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select 1 2
-╭───┬───┬───┬───╮
-│ # │ x │ y │ z │
-├───┼───┼───┼───┤
-│ 0 │ 4 │ 7 │ 3 │
-│ 1 │ 2 │ 2 │ 0 │
-╰───┴───┴───┴───╯
 ```
 
 #### Optional cell paths
@@ -487,32 +514,3 @@ You can place `null` at the end of a pipeline to replace the pipeline's output w
 ```nu
 git checkout featurebranch | null
 ```
-
-:::warning
-
-`null` is not the same as the absence of a value! It is possible for a table to be produced that has holes in some of its rows. Attempting to access this value will not produce `null`, but instead cause an error:
-
-```nu
-> [{a:1 b:2} {b:1}]
-╭───┬────┬───╮
-│ # │ a  │ b │
-├───┼────┼───┤
-│ 0 │  1 │ 2 │
-│ 1 │ ❎ │ 1 │
-╰───┴────┴───╯
-> [{a:1 b:2} {b:1}].1.a
-Error: nu::shell::column_not_found
-
-  × Cannot find column
-   ╭─[entry #15:1:1]
- 1 │ [{a:1 b:2} {b:1}].1.a
-   ·            ──┬──    ┬
-   ·              │      ╰── cannot find column
-   ·              ╰── value originates here
-   ╰────
-```
-
-If you would prefer this to return `null`, mark the cell path member as _optional_ like `.1.a?`.
-
-The absence of a value is (as of Nushell 0.71) printed as the ❎ emoji in interactive output.
-:::
