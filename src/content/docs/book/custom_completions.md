@@ -118,6 +118,7 @@ def my_commits [] {
 
 :::note
 with the following snippet
+
 ```nushell
 def my-command [commit: string@my_commits] {
     print $commit
@@ -126,11 +127,11 @@ def my-command [commit: string@my_commits] {
 
 be aware that, even though the completion menu will show you something like
 
- ```nushell
- >_ my-command <TAB>
- 5c2464  Add .gitignore
- f3a377  Initial commit
- ```
+```nushell
+>_ my-command <TAB>
+5c2464  Add .gitignore
+f3a377  Initial commit
+```
 
 only the value, i.e. "5c2464" or "f3a377", will be used in the command arguments!
 :::
