@@ -1,0 +1,52 @@
+---
+title: Command Reference
+author: Jonathan Turner
+author_site: https://twitter.com/jntrnr
+author_image: https://www.nushell.sh/blog/images/jonathandturner.jpg
+excerpt: Today, we're introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.
+---
+
+If you're new to Nushell, [the quick tour](/book/quick_tour.md) can show you the most important commands. You don't need to know them all!
+
+To see all commands from inside Nushell, run [`help commands`](/commands/docs/help.md).
+
+import fs from 'fs';
+import path from 'path';
+
+export default function PostList() {
+  const postsDirectory = path.join(process.cwd(), 'src/content/docs/commands/docs/');
+  const filenames = fs.readdirSync(postsDirectory);
+
+  return (
+  <div>
+  If you're new to Nushell, [the quick tour](/book/quick_tour.md) can show you the most important commands. You don't need to know them all!
+
+  To see all commands from inside Nushell, run [`help commands`](/commands/docs/help.md).
+
+  <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filenames.map((filename) => {
+            const slug = filename.replace('.mdx', '');
+
+            return (
+              <tr key={slug}>
+                <td>{slug}</td>
+                <td>
+                  <a href={`/posts/${slug}`}>
+                    <a>Go to Post</a>
+                  </a>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+ </div>
+  );
+}
