@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Externs
 ---
-
-# Externs
 
 Calling external commands is a fundamental part of using Nushell as a shell (and often using Nushell as a language). There's a problem, though: Nushell can't help with finding errors in the call, completions, or syntax highlighting with external commands.
 
@@ -42,7 +40,7 @@ This is where `extern` comes in. The `extern` keyword allows you to write a full
 
 You'll notice this gives you all the same descriptive syntax that internal commands do, letting you describe flags, short flags, positional parameters, types, and more.
 
-::: warning Note
+:::note
 A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
 :::
 

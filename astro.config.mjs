@@ -75,9 +75,9 @@ export default defineConfig({
             { label: "Scripts", link: "/book/scripts/" },
             { label: "Modules", link: "/book/modules/" },
             { label: "Overlays", link: "/book/overlays/" },
-            { label: "Command signature", link: "/book/command_signatures/" },
+            { label: "Command signature", link: "/book/command_signature/" },
             { label: "Testing", link: "/book/testing/" },
-            { label: "Best Practices", link: "/book/style_guide/" },
+            { label: "Best Practices", link: "/book/best_practices/" },
           ],
         },
         {

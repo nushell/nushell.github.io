@@ -1,8 +1,6 @@
 ---
-title: Community
+title: explore
 ---
-
-# `explore`
 
 Explore is a table pager, just like `less` but for table structured data.
 

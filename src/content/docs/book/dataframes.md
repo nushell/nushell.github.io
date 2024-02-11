@@ -1,10 +1,8 @@
 ---
-title: Community
+title: Dataframes
 ---
 
-# Dataframes
-
-::: warning
+:::caution[WARNING]
 To use the dataframe support you need a fully-featured build with `cargo build --features dataframe`. Starting with version 0.72, dataframes are _not_ included with binary releases of Nushell. [See the installation instructions](/book/installation.md) for further details.
 :::
 
@@ -104,7 +102,7 @@ loading five million records! But we can do a bit better than that.
 
 Let's now use Pandas. We are going to use the next script to load the file:
 
-```python
+```py
 import pandas as pd
 
 df = pd.read_csv("Data7602DescendingYearOrder.csv")
@@ -136,7 +134,7 @@ data by year, and add groups using the column `geo_count`.
 
 Again, we are going to start with a Nushell native command.
 
-::: tip
+:::tip
 If you want to run this example, be aware that the next command will
 use a large amount of memory. This may affect the performance of your system
 while this is being executed.
@@ -158,7 +156,7 @@ So, six minutes to perform this aggregated operation.
 
 Let's try the same operation in pandas:
 
-```python
+```py
 import pandas as pd
 
 df = pd.read_csv("Data7602DescendingYearOrder.csv")
@@ -210,7 +208,7 @@ CSV file that will become our sample dataframe that we will be using along with
 the examples. In your favorite file editor paste the next lines to create out
 sample csv file.
 
-```
+```csv
 int_1,int_2,float_1,float_2,first,second,third,word
 1,11,0.1,1.0,a,b,c,first
 2,12,0.2,1.0,a,b,c,second
@@ -237,7 +235,7 @@ this:
 This should create the value `$df` in memory which holds the data we just
 created.
 
-::: tip
+:::tip
 The command `dfr open` can read either **csv** or **parquet**
 files.
 :::
@@ -280,7 +278,7 @@ dataframe variable to the stream
 With the dataframe in memory we can start doing column operations with the
 `DataFrame`
 
-::: tip
+:::tip
 If you want to see all the dataframe commands that are available you
 can use `scope commands | where category =~ dataframe`
 :::
@@ -319,7 +317,7 @@ other Nushell variable
 ❯ let res = ($df | dfr sum | dfr select int_1 int_2 float_1 float_2)
 ```
 
-::: tip
+:::tip
 Type `let res = ( !! )` and press enter. This will auto complete the previously
 executed command. Note the space between ( and !!.
 :::
@@ -349,7 +347,7 @@ going to join our mini dataframe with another mini dataframe. Copy these lines
 in another file and create the corresponding dataframe (for these examples we
 are going to call it `test_small_a.csv`)
 
-```
+```csv title="test_small_a.csv"
 int_1,int_2,float_1,float_2,first
 9,14,0.4,3.0,a
 8,13,0.3,2.0,a
@@ -379,7 +377,7 @@ right dataframe
 ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────┴─────────┴───────────┴───────────┴─────────╯
 ```
 
-::: tip
+:::tip
 In `Nu` when a command has multiple arguments that are expecting
 multiple values we use brackets `[]` to enclose those values. In the case of
 [`dfr join`](/commands/docs/dfr_join.md) we can join on multiple columns
@@ -469,7 +467,7 @@ command `dfr into-df`.
 ❯ $a
 ```
 
-::: tip
+:::tip
 For the time being, not all of Nushell primitives can be converted into
 a dataframe. This will change in the future, as the dataframe feature matures
 :::
@@ -562,7 +560,7 @@ previously created column.
 Now we have a new Series that was constructed by doing basic operations on the
 previous variable.
 
-::: tip
+:::tip
 If you want to see how many variables you have stored in memory you can
 use `scope variables`
 :::
@@ -749,7 +747,7 @@ Another operation that can be done with masks is setting or replacing a value
 from a series. For example, we can change the value in the column `first` where
 the value is equal to `a`
 
-::: warning
+:::caution[WARNING]
 This is example is not updated to recent Nushell versions.
 :::
 
@@ -811,7 +809,7 @@ Or what if we want to create a new sorted dataframe using a column in specific.
 We can use the `arg-sort` to accomplish that. In the next example we
 can sort the dataframe by the column `word`
 
-::: tip
+:::tip
 The same result could be accomplished using the command [`sort`](/commands/docs/sort.md)
 :::
 
@@ -1082,7 +1080,7 @@ feature becomes more stable.
 The next list shows the available dataframe commands with their descriptions, and
 whenever possible, their analogous Nushell command.
 
-::: warning
+:::caution[WARNING]
 This list may be outdated. To get the up-to-date command list, see
 [Dataframe](/commands/categories/dataframe.md)
 [Lazyframe](/commands/categories/lazyframe.md) and

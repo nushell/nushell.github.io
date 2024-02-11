@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Line editor
 ---
-
-# Reedline, Nu's line editor
 
 Nushell's line editor [Reedline](https://github.com/nushell/reedline) is a
 cross-platform line reader designed to be modular and flexible. The engine is
@@ -166,7 +164,7 @@ $env.PROMPT_COMMAND = { create_left_prompt }
 $env.PROMPT_COMMAND_RIGHT = { create_right_prompt }
 ```
 
-::: tip
+:::tip
 You don't have to define the environment variables using Nushell
 functions. You can use simple strings to define them.
 :::
@@ -181,7 +179,7 @@ $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
-::: tip
+:::tip
 The prompt indicators are environment variables that represent the
 state of the prompt
 :::
@@ -241,12 +239,12 @@ Each keybinding requires the next elements:
   - edit
   - until
 
-::: tip
+:::tip
 All of the available modifiers, keycodes and events can be found with
 the command [`keybindings list`](/commands/docs/keybindings_list.md)
 :::
 
-::: tip
+:::tip
 The keybindings added to `vi_insert` mode will be available when the
 line editor is in insert mode (when you can write text), and the keybindings
 marked with `vi_normal` mode will be available when in normal (when the cursor
@@ -353,7 +351,7 @@ And the syntax for `send` events is the next one
     ...
 ```
 
-::: tip
+:::tip
 You can write the name of the events with capital letters. The
 keybinding parser is case insensitive
 :::

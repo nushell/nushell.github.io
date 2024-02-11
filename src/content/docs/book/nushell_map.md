@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Nushell map
 ---
-
-# Nu map from other shells and domain specific languages
 
 The idea behind this table is to help you understand how Nu builtins and plugins relate to other known shells and domain specific languages. We've tried to produce a map of relevant Nu commands and what their equivalents are in other languages. Contributions are welcome.
 

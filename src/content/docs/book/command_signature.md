@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Command signature
 ---
-
-# Command signature
 
 nu commands can be given explicit signatures; take [`str stats`](/commands/docs/str_stats.md) as an example, the signature is like this:
 

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Shells in shells
 ---
-
-# Shells in shells
 
 ## Working in multiple directories
 

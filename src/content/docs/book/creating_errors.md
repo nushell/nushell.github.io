@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Creating your own errors
 ---
-
-# Creating your own errors
 
 Using the [metadata](metadata.md) information, you can create your own custom error messages. Error messages are built of multiple parts:
 

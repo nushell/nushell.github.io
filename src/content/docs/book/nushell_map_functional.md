@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Nushell map from functional languages
 ---
-
-# Nu map from functional languages
 
 The idea behind this table is to help you understand how Nu builtins and plugins relate to functional languages. We've tried to produce a map of relevant Nu commands and what their equivalents are in other languages. Contributions are welcome.
 

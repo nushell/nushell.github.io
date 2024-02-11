@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Overlays
 ---
-
-# Overlays
 
 Overlays act as "layers" of definitions (custom commands, aliases, environment variables) that can be activated and deactivated on demand.
 They resemble virtual environments found in some languages, such as Python.
@@ -18,7 +16,7 @@ You should see the default overlay listed there.
 To create a new overlay, you first need a module:
 
 ```nushell
-> module spam {
+module spam {
     export def foo [] {
         "foo"
     }
@@ -33,7 +31,7 @@ To create a new overlay, you first need a module:
 
 We'll use this module throughout the chapter, so whenever you see `overlay use spam`, assume `spam` is referring to this module.
 
-::: tip
+:::tip
 The module can be created by any of the three methods described in [Modules](modules.md):
 
 - "inline" modules (used in this example)
@@ -44,18 +42,18 @@ The module can be created by any of the three methods described in [Modules](mod
 To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
 
 ```nushell
-> overlay use spam
+overlay use spam
 
-> foo
 foo
+# foo
 
-> bar
 bar
+# bar
 
-> $env.BAZ
-baz
+$env.BAZ
+# baz
 
-> overlay list
+overlay list
 ───┬──────
  0 │ zero
  1 │ spam
@@ -64,7 +62,7 @@ baz
 
 It brought the module's definitions into the current scope and evaluated the [`export-env`](/commands/docs/export-env.md) block the same way as [`use`](/commands/docs/use.md) command would (see [Modules](modules.md#environment-variables) chapter).
 
-::: tip
+:::tip
 In the following sections, the `>` prompt will be preceded by the name of the last active overlay.
 `(spam)> some-command` means the `spam` overlay is the last active overlay when the command was typed.
 :::
@@ -132,7 +130,7 @@ eggs
 Overlays remember what you add to them and store that information even if you remove them.
 This can let you repeatedly swap between different contexts.
 
-::: tip
+:::tip
 Sometimes, after adding an overlay, you might not want custom definitions to be added into it.
 The solution can be to create a new empty overlay that would be used just for recording the custom changes:
 

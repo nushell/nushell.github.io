@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Stdout, Stderr, and Exit Codes
 ---
-
-# Stdout, Stderr, and Exit Codes
 
 An important piece of interop between Nushell and external commands is working with the standard streams of data coming from the external.
 
@@ -66,9 +64,19 @@ In contrast, the [`print`](/commands/docs/print.md) command prints the given val
 
 The [standard library](/book/standard_library.md) has commands to write out messages in different logging levels. For example:
 
-@[code](@snippets/book/std_log.nu)
+```nushell
+use std log
 
-![Log message examples](../assets/images/0_79_std_log.png)
+def main [] {
+    log debug "Debug message"
+    log info "Info message"
+    log warning "Warning message"
+    log error "Error message"
+    log critical "Critical message"
+}
+```
+
+![Log message examples](../../../assets/images/0_79_std_log.png)
 
 The log level for output can be set with the `NU_LOG_LEVEL` environment variable:
 

@@ -1,8 +1,8 @@
 ---
-title: Community
+title: Plugins
 ---
 
-# Plugins
+import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
 
 Nu can be extended using plugins. Plugins behave much like Nu's built-in commands, with the added benefit that they can be added separately from Nu itself.
 
@@ -14,17 +14,14 @@ To add a plugin, call the [`register`](/commands/docs/register.md) command to te
 
 Please note that the plugin name needs to start with `nu_plugin_`, Nu uses the name prefix to detect plugins.
 
-Linux+macOS:
-
-```nushell
-> register ./my_plugins/nu_plugin_cool
-```
-
-Windows:
-
-```nushell
-> register .\my_plugins\nu_plugin_cool.exe
-```
+<Tabs>
+  <TabItem label="Linux/MacOS">
+    <Code code="register ./my_plugins/nu_plugin_cool" lang="nushell" />
+  </TabItem>
+  <TabItem label="Windows">
+    <Code code="register .\my_plugins\nu_plugin_cool.exe" lang="nushell" />
+  </TabItem>
+</Tabs>
 
 When [`register`](/commands/docs/register.md) is called:
 

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Environment
 ---
-
-# Environment
 
 A common task in a shell is to control the environment that external applications will use. This is often done automatically, as the environment is packaged up and given to the external application as it launches. Sometimes, though, we want to have more precise control over what environment variables an application sees.
 
@@ -10,21 +8,25 @@ You can see the current environment variables in the $env variable:
 
 ```nushell
 ~> $env | table -e
-╭──────────────────────────────────┬───────────────────────────────────────────╮
-│                                  │ ╭──────┬────────────────────────────────╮ │
-│ ENV_CONVERSIONS                  │ │      │ ╭─────────────┬──────────────╮ │ │
-│                                  │ │ PATH │ │ from_string │ <Closure 32> │ │ │
-│                                  │ │      │ │ to_string   │ <Closure 34> │ │ │
-│                                  │ │      │ ╰─────────────┴──────────────╯ │ │
-│                                  │ │      │ ╭─────────────┬──────────────╮ │ │
-│                                  │ │ Path │ │ from_string │ <Closure 36> │ │ │
-│                                  │ │      │ │ to_string   │ <Closure 38> │ │ │
-│                                  │ │      │ ╰─────────────┴──────────────╯ │ │
-│                                  │ ╰──────┴────────────────────────────────╯ │
-│ HOME                             │ /Users/jelle                              │
-│ LSCOLORS                         │ GxFxCxDxBxegedabagaced                    │
-| ...                              | ...                                       |
-╰──────────────────────────────────┴───────────────────────────────────────────╯
+╭────────────────────────────┬─────────────────────────────────────────────────╮
+│ CMD_DURATION_MS            │ 0823                                            │
+│                            │ ╭───┬──────────────────╮                        │
+│ DIRS_LIST                  │ │ 0 │ /Users/name      │                        │
+│                            │ ╰───┴──────────────────╯                        │
+│ DIRS_POSITION              │ 0                                               │
+│                            │ ╭──────┬──────────────────────────────────────╮ │
+│ ENV_CONVERSIONS            │ │      │ ╭───────────────┬──────────────────╮ │ │
+│                            │ │ PATH │ │ from_string   │ <Closure 1212>   │ │ │
+│                            │ │      │ │ to_string     │ <Closure 1214>   │ │ │
+│                            │ │      │ ╰───────────────┴──────────────────╯ │ │
+│                            │ │      │ ╭───────────────┬──────────────────╮ │ │
+│                            │ │ Path │ │ from_string   │ <Closure 1216>   │ │ │
+│                            │ │      │ │ to_string     │ <Closure 1218>   │ │ │
+│                            │ │      │ ╰───────────────┴──────────────────╯ │ │
+│                            │ ╰──────┴──────────────────────────────────────╯ │
+│ HOME                       │ /Users/name                                     │
+| ...                        | ...                                             |
+╰────────────────────────────┴─────────────────────────────────────────────────╯
 ```
 
 In Nushell, environment variables can be any value and have any type. You can see the type of an env variable with the describe command, for example: `$env.PROMPT_COMMAND | describe`.
@@ -107,7 +109,7 @@ BAR
 
 Alternatively, you can check for the presence of an environmental variable with `in`:
 
-```
+```nushell
 > $env.FOO
 BAR
 
@@ -164,8 +166,7 @@ You can also set environment variables at startup so they are available for the 
 To do this, set an environment variable inside [the Nu configuration file](configuration.md).
 For example:
 
-```nushell
-# In config.nu
+```nushell title="config.nu"
 $env.FOO = 'BAR'
 ```
 

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Nushell operator map
 ---
-
-# Nushell operator map
 
 The idea behind this table is to help you understand how Nu operators relate to other language operators. We've tried to produce a map of all the nushell operators and what their equivalents are in other languages. Contributions are welcome.
 

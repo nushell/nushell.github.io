@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Parallelism
 ---
-
-# Parallelism
 
 Nushell now has early support for running code in parallel. This allows you to process elements of a stream using more hardware resources of your computer.
 

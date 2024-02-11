@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Coloring and Theming
 ---
-
-# Coloring and Theming in Nu
 
 Many parts of Nushell's interface can have their color customized. All of these can be set in the `config.nu` configuration file. If you see the hash/hashtag/pound mark `#` in the config file it means the text after it is commented out.
 

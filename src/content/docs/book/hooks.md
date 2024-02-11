@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Hooks
 ---
-
-# Hooks
 
 Hooks allow you to run a code snippet at some predefined situations.
 They are only available in the interactive mode ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)), they do not work if you run a Nushell with a script (`nu script.nu`) or commands (`nu -c "print foo"`) arguments.

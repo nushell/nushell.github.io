@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Configuration
 ---
-
-# Configuration
 
 ## Nushell Configuration with `env.nu` and `config.nu`
 
@@ -13,9 +11,9 @@ Nushell uses a configuration system that loads and runs two Nushell script files
 
 You can check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`.
 
-```nushell
-> $nu.env-path
-/Users/FirstNameLastName/Library/Application Support/nushell/env.nu
+```nushell frame="terminal"
+$nu.env-path
+# /Users/FirstNameLastName/Library/Application Support/nushell/env.nu
 ```
 
 _(You can think of the Nushell config loading sequence as executing two [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) lines on startup: `source /path/to/env.nu` and `source /path/to/config.nu`. Therefore, using `env.nu` for environment and `config.nu` for other config is just a convention.)_
@@ -82,7 +80,13 @@ You can learn more about setting up colors and theming in the [associated chapte
 
 To remove the welcome message, you need to edit your `config.nu` by typing `config nu` in your terminal, then you go to the global configuration `$env.config` and set `show_banner` option to false, like this:
 
-@[code](@snippets/installation/remove_welcome_message.nu)
+```nushell title="config.nu"
+$env.config = {
+  ...
+  show_banner: false,
+  ...
+}
+```
 
 ## Configuring Nu as a login shell
 
@@ -102,7 +106,9 @@ Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 
 ```sh
 > cat /etc/shells
-# /etc/shells: valid login shells
+# List of acceptable shells for chpass(1).
+# Ftpd will not allow users to connect who are not using
+# one of these shells.
 /bin/sh
 /bin/dash
 /bin/bash

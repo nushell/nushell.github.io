@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Custom completions
 ---
-
-# Custom completions
 
 Custom completions allow you to mix together two features of Nushell: custom commands and completions. With them, you're able to create commands that handle the completions for positional parameters and flag parameters. These custom completions work both for [custom commands](custom_commands.md) and [known external, or `extern`, commands](externs.md).
 
@@ -118,25 +116,24 @@ def my_commits [] {
 }
 ```
 
-> **Note**
->
-> with the following snippet
->
-> ```nushell
-> def my-command [commit: string@my_commits] {
->     print $commit
-> }
-> ```
->
-> be aware that, even though the completion menu will show you something like
->
-> ```nushell
-> >_ my-command <TAB>
-> 5c2464  Add .gitignore
-> f3a377  Initial commit
-> ```
->
-> only the value, i.e. "5c2464" or "f3a377", will be used in the command arguments!
+:::note
+with the following snippet
+```nushell
+def my-command [commit: string@my_commits] {
+    print $commit
+}
+```
+
+be aware that, even though the completion menu will show you something like
+
+ ```nushell
+ >_ my-command <TAB>
+ 5c2464  Add .gitignore
+ f3a377  Initial commit
+ ```
+
+only the value, i.e. "5c2464" or "f3a377", will be used in the command arguments!
+:::
 
 ## External completions
 
@@ -158,8 +155,9 @@ When the closure returns unparsable json (e.g. an empty string) it defaults to f
 
 An external completer is a function that takes the current command as a string list, and outputs a list of records with `value` and `description` keys, like custom completion functions.
 
-> **Note**
-> This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.
+:::note
+This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.
+:::
 
 This example will enable carapace external completions:
 

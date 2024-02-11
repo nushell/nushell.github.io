@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Testing
 ---
-
-# Testing your Nushell code
 
 The [standard library](standard_library.md) has a unit testing framework to ensure that your code works as expected.
 
@@ -10,7 +8,7 @@ The [standard library](standard_library.md) has a unit testing framework to ensu
 
 Have a file, called `test_math.nu`:
 
-```nushell
+```nushell title="test_math.nu"
 use std assert
 
 #[test]
@@ -31,7 +29,7 @@ def test_failing [] {
 
 Run the tests:
 
-```nushell
+```nushell frame="terminal"
 ❯ use std testing run-tests
 ❯ run-tests
 INF|2023-04-12T10:42:29.099|Running tests in test_math

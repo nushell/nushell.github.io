@@ -1,8 +1,6 @@
 ---
-title: Community
+title: 3rd party prompts
 ---
-
-# How to configure 3rd party prompts
 
 ## nerdfonts
 
@@ -60,7 +58,7 @@ $env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 2. Install nerdfonts depending on your preferences.
 3. Use the config example below. Make sure to set the `STARSHIP_SHELL` environment variable.
 
-::: tip
+:::tip
 An alternate way to enable Starship is described in the [Starship Quick Install](https://starship.rs/#nushell) instructions.
 
 The link above is the official integration of Starship and Nushell and is the simplest way to get
