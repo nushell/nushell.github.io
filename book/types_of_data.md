@@ -209,35 +209,45 @@ Structured data builds from the simple data. For example, instead of a single in
 
 ## Records
 
-Records hold key-value pairs, which associate string keys with various data values. Record syntax is very similar to objects in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
+A record is a collection of key-value pairs. Unlike most languages, comma separators are optional.
 
 ```nu
-> {name: sam rank: 10}
+> {name: sam, rank: 10}
 ╭──────┬─────╮
 │ name │ sam │
 │ rank │ 10  │
 ╰──────┴─────╯
 ```
 
-As these can sometimes have many fields, a record is printed up-down rather than left-right.
+You can think of a record as a table row. Any command which operates on a table row also works with a record.
 
 :::tip
-A record is identical to a single row of a table (see below). You can think of a record as essentially being a "one-row table", with each of its keys as a column (although a true one-row table is something distinct from a record).
 
-This means that any command that operates on a table's rows _also_ operates on records. For instance, [`insert`](/commands/docs/insert.md), which adds data to each of a table's rows, can be used with records:
-
-```nu
-> {x:3 y:1} | insert z 0
-╭───┬───╮
-│ x │ 3 │
-│ y │ 1 │
-│ z │ 0 │
-╰───┴───╯
-```
+Unlike a table row, a record is printed vertically rather than horizontally.
 
 :::
 
-You can iterate over records by first transposing it into a table:
+To access a value, you can use the [`get`](/commands/docs/get.md) command or cell path access:
+
+```nu
+> {name: sam, rank: 10} | get name
+sam
+> {name: sam, rank: 10}.name
+sam
+```
+
+To add data to a record, you can use the [`insert`](/commands/docs/insert.md) command:
+
+```nu
+> {name: sam, rank: 10} | insert age 21
+╭──────┬─────╮
+│ name │ sam │
+│ rank │ 10  │
+│ age  │ 21  │
+╰──────┴─────╯
+```
+
+To transform a record into a table, you can use the [`transpose`](/commands/docs/insert.md) command:
 
 ```nu
 > {name: sam, rank: 10} | transpose key value
@@ -247,32 +257,6 @@ You can iterate over records by first transposing it into a table:
 │ 0 │ name │  sam  │
 │ 1 │ rank │   10  │
 ╰───┴──────┴───────╯
-```
-
-Accessing records' data is done by placing a `.` before a string, which is usually a bare string:
-
-```nu
-> {x:12 y:4}.x
-12
-```
-
-However, if a record has a key name that can't be expressed as a bare string, or resembles an integer (see lists, below), you'll need to use more explicit string syntax, like so:
-
-```nu
-> {"1":true " ":false}." "
-false
-```
-
-To make a copy of a record with new fields, you can use the [spread operator](/book/operators#spread-operator) (`...`):
-
-```nu
-> let data = { name: alice, age: 50 }
-> { ...$data, hobby: cricket }
-╭───────┬─────────╮
-│ name  │ alice   │
-│ age   │ 50      │
-│ hobby │ cricket │
-╰───────┴─────────╯
 ```
 
 ## Lists
