@@ -277,10 +277,10 @@ To make a copy of a record with new fields, you can use the [spread operator](/b
 
 ## Lists
 
-Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
+A list is an ordered sequence of values. Unlike most languages, comma separators are optional.
 
 ```nu
-> [sam fred george]
+> [sam, fred, george]
 ╭───┬────────╮
 │ 0 │ sam    │
 │ 1 │ fred   │
@@ -288,30 +288,31 @@ Lists are ordered sequences of data values. List syntax is very similar to array
 ╰───┴────────╯
 ```
 
-:::tip
-Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where.md) can be used with lists:
+You can think of a list as a table column without the column name. Any command which operates on a table column also works with a list.
+
+To access a value, you can use the [`get`](/commands/docs/get.md) command or cell path access:
 
 ```nu
-> [bell book candle] | where ($it =~ 'b')
-╭───┬──────╮
-│ 0 │ bell │
-│ 1 │ book │
-╰───┴──────╯
+> [sam, fred, george] | get 1
+fred
+> [sam, fred, george].1
+fred
 ```
 
-:::
-
-Accessing lists' data is done by placing a `.` before a bare integer:
+To filter a list, you can use the [`where`](/commands/docs/where.md) command:
 
 ```nu
-> [a b c].1
-b
+> [sam, fred, george] | where ($it =~ 'e')
+╭───┬────────╮
+│ 0 │ fred   │
+│ 1 │ george │
+╰───┴────────╯
 ```
 
 To get a sub-list from a list, you can use the [`range`](/commands/docs/range.md) command:
 
 ```nu
-> [a b c d e f] | range 1..3
+> [a, b, c, d, e, f] | range 1..3
 ╭───┬───╮
 │ 0 │ b │
 │ 1 │ c │
@@ -323,8 +324,8 @@ To append one or more lists together, optionally with values interspersed in bet
 [spread operator](/book/operators#spread-operator) (`...`):
 
 ```nu
-> let x = [1 2]
-> [...$x 3 ...(4..7 | take 2)]
+> let x = [1, 2]
+> [...$x, 3, ...(4..7 | take 2)]
 ╭───┬───╮
 │ 0 │ 1 │
 │ 1 │ 2 │
