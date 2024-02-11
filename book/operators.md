@@ -289,3 +289,53 @@ as being omitted:
 > foo "bar" ...[1 2] "not opt" # The null means no argument was given for opt
 [false, bar, null, [1, 2, "not opt"]]
 ```
+
+## Cell path access
+
+To access a value in a list or record in the output of a command, we can pipe it into `get` and specify the index or key. However, if we have a literal or variable this would often require a separate subexpression. Instead, we can use cell path access like this:
+
+```nu
+> [sam, fred, george].1
+fred
+> {name: sam, rank: 10}.name
+sam
+```
+
+:::tip
+
+If the key isn't a bare string, it needs quotes:
+
+```nu
+> {"first name": sam, rank: 10}."first name"
+sam
+> {"1": sam, 2: fred}."1"
+sam
+```
+
+:::
+
+To access nested values, we can chain cell path access members:
+
+```nu
+> [{name: sam, rank: 10}, {name: bob, rank: 7}].1.name
+bob
+```
+
+Since this is much shorter than chaining multiple `get`s, `get` also accepts a cell path:
+
+```nu
+> [{name: sam, rank: 10}, {name: bob, rank: 7}] | get 1.name
+bob
+```
+
+One advantage over `get` is that cell path members can be optional using `?`. If the value doesn't exist it returns `null` instead of an error:
+
+```nu
+> [sam, fred, george].3?
+> {name: sam, rank: 10}.age?
+> [{name: sam, rank: 10}, {rank: 7}] | get name?
+╭───┬─────╮
+│ 0 │ sam │
+│ 1 │     │
+╰───┴─────╯
+```

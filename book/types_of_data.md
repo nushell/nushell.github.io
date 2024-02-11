@@ -418,39 +418,6 @@ To filter rows or columns in a table, you can use the [`select`](/commands/docs/
 ╰───┴──────┴──────╯
 ```
 
-### Cell Paths
-
-You can combine list and record data access syntax to navigate tables. When used on tables, these access chains are called "cell paths".
-
-You can access individual rows by number to obtain records:
-
-@[code](@snippets/types_of_data/cell-paths.sh)
-
-Moreover, you can also access entire columns of a table by name, to obtain lists:
-
-```nu
-> [{x:12 y:5} {x:4 y:7} {x:2 y:2}].x
-╭───┬────╮
-│ 0 │ 12 │
-│ 1 │  4 │
-│ 2 │  2 │
-╰───┴────╯
-```
-
-#### Optional cell paths
-
-By default, cell path access will fail if it can't access the requested row or column. To suppress these errors, you can add `?` to a cell path member to mark it as _optional_:
-
-```nu
-> [{foo: 123}, {}].foo?
-╭───┬─────╮
-│ 0 │ 123 │
-│ 1 │     │
-╰───┴─────╯
-```
-
-When using optional cell path members, missing data is replaced with `null`.
-
 ## Closures
 
 Closures are anonymous functions that can be passed a value through parameters and _close over_ (i.e. use) a variable outside their scope.
