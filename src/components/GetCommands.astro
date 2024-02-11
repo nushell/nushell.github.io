@@ -1,6 +1,7 @@
 ---
-const posts = await Astro.glob('../content/docs/commands/docs/*.md'); // returns an array of posts that live at ./src/pages/post/*.md
+const posts = await Astro.glob("../content/docs/commands/docs/*.md"); // returns an array of posts that live at ./src/pages/post/*.md
 ---
+
 <table>
   <tr>
     <th>Command</th>
@@ -8,12 +9,16 @@ const posts = await Astro.glob('../content/docs/commands/docs/*.md'); // returns
     <th>Description</th>
     <th>Feature</th>
   </tr>
-{posts.map((post) => (
-  <tr>
-   <td><a href={post.url}>{post.frontmatter.title}</a></td>
-   <td>{post.frontmatter.categories}</td>
-   <td>{post.frontmatter.usage}</td>
-   <td>{post.frontmatter.feature}</td>
-    </tr>
-))}
+  {
+    posts.map((post) => (
+      <tr>
+        <td>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </td>
+        <td>{post.frontmatter.categories}</td>
+        <td>{post.frontmatter.usage}</td>
+        <td>{post.frontmatter.feature}</td>
+      </tr>
+    ))
+  }
 </table>
