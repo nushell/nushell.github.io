@@ -203,10 +203,6 @@ You can write binary as a literal using any of the `0x[...]`, `0b[...]`, or `0o[
 
 Incomplete bytes will be left-padded with zeros.
 
-## Structured data
-
-Structured data builds from the simple data. For example, instead of a single integer, structured data gives us a way to represent multiple integers in the same value. Here's a list of the currently supported structured data types: records, lists and tables.
-
 ## Records
 
 A record is a collection of key-value pairs. Unlike most languages, comma separators are optional.
