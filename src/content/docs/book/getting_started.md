@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Getting Started
 ---
-
-# Getting Started
 
 Let's get started! :elephant:
 
