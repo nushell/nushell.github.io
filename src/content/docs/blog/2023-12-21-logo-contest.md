@@ -67,15 +67,15 @@ following the themes detailed above:
 
 - Ellie the friendly and yet powerful mascot
 
-<img src="../assets/images/logo-contest/ellie-mascot.png" alt="ellie-mascot" width="200">
+<img src="/assets/images/logo-contest/ellie-mascot.png" alt="ellie-mascot" width="200">
 
 - a minimalist font-like logo, featuring "nu" and an abstract elephant
 
-<img src="../assets/images/logo-contest/font-logo.png" alt="font-logo" width="200">
+<img src="/assets/images/logo-contest/font-logo.png" alt="font-logo" width="200">
 
 - a blue and friendly shell mascot
 
-<img src="../assets/images/logo-contest/shell-mascot.png" alt="shell-mascot" width="200">
+<img src="/assets/images/logo-contest/shell-mascot.png" alt="shell-mascot" width="200">
 
 ## Submissions
 

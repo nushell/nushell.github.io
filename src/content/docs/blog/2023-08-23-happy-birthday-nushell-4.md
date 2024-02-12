@@ -28,13 +28,13 @@ To celebrate, we thought we'd share stories of how people are using Nushell toda
 
 Using `ls | sort-by type name -i | grid -c`, it looks like this:
 
-![Grid showing pretty sorted items with pretty colours](../assets/images/bday_4_grid.png)
+![Grid showing pretty sorted items with pretty colours](/assets/images/bday_4_grid.png)
 
 ## Converting SVG to PDF in bulk (sholderbach)
 
 "Converting SVG drawings and figures to PDFs in bulk. I like how explicit and clean that is compared to a solution with xargs in bash"
 
-![Highlighted source converting files using path parse, where, and inkspace](../assets/images/bday_4_bulk_convert.jpeg)
+![Highlighted source converting files using path parse, where, and inkspace](/assets/images/bday_4_bulk_convert.jpeg)
 
 ## Gotta have a Chuck Norris joke
 
@@ -65,7 +65,7 @@ def "main" [] {
 ```
 
 It even comes with its own help
-![automated help generated for the script subcommand](../assets/images/bday_4_subcommand_help.png)
+![automated help generated for the script subcommand](/assets/images/bday_4_subcommand_help.png)
 
 ## Crossplatform symlinks (Kubouch)
 
@@ -96,7 +96,7 @@ export def symlink [
 
 add `string: {|x| if $x =~ '^#[a-fA-F\d]+' { $x } else { 'white' } }` to your `$env.config.color_config` and you'll get:
 
-![screenshot showing each hex value colored to match the color of that hex value](../assets/images/bday_4_hex_colours.png)
+![screenshot showing each hex value colored to match the color of that hex value](/assets/images/bday_4_hex_colours.png)
 
 # And many more
 

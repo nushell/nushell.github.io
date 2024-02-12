@@ -14,7 +14,7 @@ It's called Nushell, or just Nu for short. We have a [book](https://book.nushell
 
 This release was made by Jonathan Turner (me), Yehuda Katz, and Andrés Robalino, with contributions from Odin Dutton.
 
-![Nu in action](../assets/images/nushell-autocomplete4.gif)
+![Nu in action](/assets/images/nushell-autocomplete4.gif)
 
 # But why?
 
@@ -28,19 +28,19 @@ In this post, I'll talk about how a few simple ideas drive how Nu works, what Nu
 
 To Nu, everything is data. When you type `ls`, you're given a table of information about the directory you're listing:
 
-![ls command](../assets/images/nu_ls.png)
+![ls command](/assets/images/nu_ls.png)
 
 Rather than having to remember different flags to `ls`, we can just work with the data it gives back. We can find the files greater than a certain size:
 
-![ls with filtering](../assets/images/nu_ls_filter.png)
+![ls with filtering](/assets/images/nu_ls_filter.png)
 
 Or we could choose to sort it by a column, or only show directories, or more. That by itself is fun but perhaps not compelling enough.
 
-![ps with filtering](../assets/images/nu_ps_filter.png)
+![ps with filtering](/assets/images/nu_ps_filter.png)
 
 Where this simple concept - that everything in Nu is data - starts to shine when we try other commands and realize that we're using the same commands to filter, to sort, etc. Rather than having the need to remember all the parameters to all the commands, we can just use the same verbs to act over our data, regardless of where the data came from. Nu pushes this idea even further.
 
-![opening toml file](../assets/images/open_cargo.png)
+![opening toml file](/assets/images/open_cargo.png)
 
 Nu also understands structured text files like JSON, TOML, YAML, and more. Opening these files gives us the same tables we saw with `ls` and `ps`. Again, this lets us use the same commands to filter our data, explore it, and use it.
 
@@ -216,19 +216,19 @@ You can see that we can mix-and-match commands that are inside of Nu with those 
 
 As we built Nu, we realized we could experiment with other parts of how a shell works. The first of these experiments lead us to an observation: if everything is data in Nu, we should be able to view this data.
 
-![viewing source file](../assets/images/view_source.png)
+![viewing source file](/assets/images/view_source.png)
 
 We've seen the tables. Nu also supports opening and looking at text and binary data. If we open a source file, we can scroll around in a syntax-highlighted file. If we open an xml, we can look at its data. We can even open a binary file and look at what's inside (hint: there's even a fun easter egg if you open certain kinds binary files, especially if you've installed Nu with the optional `rawkey` feature).
 
 Being able to view data is helpful, and this kind of polish extends to other aspects, like error messages:
 
-![simple error](../assets/images/nu_error2.png)
+![simple error](/assets/images/nu_error2.png)
 
 Nu takes heavy inspiration from the [error messages in Rust](https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come). As much as possible, draw your eyes to the problem.
 
 Combined with the pipeline, some pretty interesting errors are possible:
 
-![error with metadata](../assets/images/nu_error_metadata.png)
+![error with metadata](/assets/images/nu_error_metadata.png)
 
 You might wonder how does that even work. Nu has a metadata system (still early!) that you can read about in the [Metadata chapter](https://book.nushell.sh/en/metadata) of the [Nu book](https://book.nushell.sh). Let's just take a quick peek at it:
 

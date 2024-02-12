@@ -160,10 +160,7 @@ export default defineConfig({
         },
         {
           label: "Blog",
-          items: [
-            { label: "Introduction", link: "/introduction/" },
-            { label: "Getting Started", link: "/book/getting_started/" },
-          ],
+          link: "/blog/",
         },
       ],
     }),

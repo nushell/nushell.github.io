@@ -14,7 +14,7 @@ The survey had 451 responses, nearly triple what our 2019 survey had.
 
 ## Do you use Nushell?
 
-![graph showing over half of respondents using Nushell](../assets/images/nushell_survey_2023_use_nushell.png)
+![graph showing over half of respondents using Nushell](/assets/images/nushell_survey_2023_use_nushell.png)
 
 Heart-warmingly, over half of the respondents say they're using Nushell. This gives us both a good view of how Nushell is being used, as well as good info about why it isn't.
 
@@ -22,7 +22,7 @@ Let's first look at how Nushell is being used.
 
 ## Where are you running Nushell?
 
-![graph showing 93% personal machine, 52.9% work, 13.1% server, 3.7% cloud](../assets/images/nushell_survey_2023_running_nushell.png)
+![graph showing 93% personal machine, 52.9% work, 13.1% server, 3.7% cloud](/assets/images/nushell_survey_2023_running_nushell.png)
 
 While the vast majority of Nushell users use Nushell on their personal machines, we couldn't help but notice over 50%(!) of users are using Nushell at work.
 
@@ -30,7 +30,7 @@ That's a great vote of confidence for Nushell as a tool in the toolbox.
 
 ## What area(s) should Nushell prioritize?
 
-![graph showing a variety of different topics including file operations, completions, GUI and more](../assets/images/nushell_survey_2023_priorities.png)
+![graph showing a variety of different topics including file operations, completions, GUI and more](/assets/images/nushell_survey_2023_priorities.png)
 
 The four main areas people wanted the Nushell project to focus on are:
 
@@ -77,7 +77,7 @@ People coming to Nushell from shells like Bash mentioned the difficulty in makin
 
 ## What platform(s) are you running Nushell on?
 
-![graph showing different platforms (described below)](../assets/images/nushell_survey_2023_platforms.png)
+![graph showing different platforms (described below)](/assets/images/nushell_survey_2023_platforms.png)
 
 Our top four platforms for Nushell area:
 
@@ -88,7 +88,7 @@ Our top four platforms for Nushell area:
 
 ## How did you install Nushell
 
-![graph showing how people install Nushell (described below)](../assets/images/nushell_survey_2023_how_install.png)
+![graph showing how people install Nushell (described below)](/assets/images/nushell_survey_2023_how_install.png)
 
 - cargo install nu (44.7%)
 - native package manager (37.7%)

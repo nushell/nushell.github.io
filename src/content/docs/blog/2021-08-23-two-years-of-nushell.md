@@ -8,7 +8,7 @@ excerpt: Happy birthday, Nushell! Today mark's the second year for Nushell.
 
 # Two years of Nushell
 
-![Stock cake photo with a 2](../assets/images/two_year_cake.png)
+![Stock cake photo with a 2](/assets/images/two_year_cake.png)
 
 _Happy birthday, Nushell!_
 
@@ -26,7 +26,7 @@ Nushell (sometimes shortened to just Nu) is a language that allows you to easily
 
 We've started collecting examples to share with each other as Nushell grows and our skill with it grows with it. You can check them out in the [Nu Scripts repo](https://github.com/nushell/nu_scripts).
 
-![Dark theme vscode showing Nushell](../assets/images/two_year_vscode.png)
+![Dark theme vscode showing Nushell](/assets/images/two_year_vscode.png)
 
 To work with Nushell, we also published a [vscode extension](https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang).
 
@@ -54,19 +54,19 @@ One example that shows this off is the script we use every week to create the Th
 
 We're seeing a growing amount of love for Nushell as more people try it and share their experiences. Here are some tweets from the last few weeks:
 
-![Oh damn @nu_shell is awesome. It's a really powerful advancement over existing shells on unix!](../assets/images/two_year_tweet1.png)
+![Oh damn @nu_shell is awesome. It's a really powerful advancement over existing shells on unix!](/assets/images/two_year_tweet1.png)
 
-![The pandas style dataframe feature in nushell is Exploding head♥](../assets/images/two_year_tweet2.png)
+![The pandas style dataframe feature in nushell is Exploding head♥](/assets/images/two_year_tweet2.png)
 
-![@nu_shell has fundamentally changed the way I interact with data on my computer. It's no longer a process to get anything out of a csv, etc. It's just... there. however I want it served up.](../assets/images/two_year_tweet3.png)
+![@nu_shell has fundamentally changed the way I interact with data on my computer. It's no longer a process to get anything out of a csv, etc. It's just... there. however I want it served up.](/assets/images/two_year_tweet3.png)
 
-![Acabo de probar el @nu_shell y estoy enamorao](../assets/images/two_year_tweet4.png)
+![Acabo de probar el @nu_shell y estoy enamorao](/assets/images/two_year_tweet4.png)
 
-![Nu Shell is amazing. I can’t believe it took me this long to find it.](../assets/images/two_year_tweet5.png)
+![Nu Shell is amazing. I can’t believe it took me this long to find it.](/assets/images/two_year_tweet5.png)
 
 The Nushell repo has also felt a recent surge of interest. Since this time last year, the number of stars has nearly doubled!
 
-![image of with the number of GitHub stars doubling over the last year](../assets/images/two_year_stars.png)
+![image of with the number of GitHub stars doubling over the last year](/assets/images/two_year_stars.png)
 
 _Growing interest in Nushell (shown: number of GitHub stars)_
 

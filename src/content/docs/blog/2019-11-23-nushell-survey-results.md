@@ -14,7 +14,7 @@ In total, **160** people responded. An impressive amount for a project still in 
 
 # Do you use Nu?
 
-![63.1% don't use, 24.4% use but stopped, 12.5% use](../assets/images/nushell_survey_2019_percent.png)
+![63.1% don't use, 24.4% use but stopped, 12.5% use](/assets/images/nushell_survey_2019_percent.png)
 
 The survey welcomed both users and non-users of Nu. In our first question, we wanted to see how many folks are using Nu already. Perhaps unsurprising for a project still missing major functionality, most respondents aren't users, yet. As we'll see, there are themes around what people are waiting for before they jump in.
 
@@ -24,7 +24,7 @@ But first, let's take a look at the responses from folks how are currently using
 
 ## What do you like? (20 responses)
 
-![favorite features (tables #1 by a long margin)](../assets/images/nushell_survey_2019_fave_features.png)
+![favorite features (tables #1 by a long margin)](/assets/images/nushell_survey_2019_fave_features.png)
 
 Overwhelmingly, Nu users love tables! People currently using Nushell felt that tables and Nu's structured approach were their favorite features.
 
@@ -40,7 +40,7 @@ Other topics mentioned: syntax highlighting, good plugins, shells feature, tags 
 
 ## Where should Nushell improve? (20 responses)
 
-![needs work: top ones are autocomplete, shortcuts, tool integration](../assets/images/nushell_survey_2019_needs_work.png)
+![needs work: top ones are autocomplete, shortcuts, tool integration](/assets/images/nushell_survey_2019_needs_work.png)
 
 Nu users also pointed out a few areas where they hoped Nu would improve over time. Top of mind were improvements around auto-completion, improving the keyboard shortcuts, and better integration with existing shells and tools.
 
@@ -57,7 +57,7 @@ There were also a batch of additional improvements people wished for: full scrip
 
 ## What's stopping you from using Nu? (100 responses)
 
-![blocked adoption: top ones are time and maturity](../assets/images/nushell_survey_2019_blockers.png)
+![blocked adoption: top ones are time and maturity](/assets/images/nushell_survey_2019_blockers.png)
 
 We also asked for feedback from people not using Nu what their thoughts were. What are the kinds of things that block them from using Nu?
 
@@ -74,7 +74,7 @@ We also heard from many people who were perfectly comfortable in their current s
 
 ## Used Nu but stopped (38 responses)
 
-![made me stop: top ones are maturity, time, and don't need it](../assets/images/nushell_survey_2019_stoppers.png)
+![made me stop: top ones are maturity, time, and don't need it](/assets/images/nushell_survey_2019_stoppers.png)
 
 For those folks who tried Nu, but decided it wasn't for them, we also gave them a chance to tell us why. Similarly to the previous question, "stability" and "time" were at the top of the list.
 
@@ -90,7 +90,7 @@ Other topics that came up: needing better autocomplete, needing aliases, better 
 
 # Anything else we should know? (68 responses)
 
-![so much love](../assets/images/nushell_survey_2019_anything_else.png)
+![so much love](/assets/images/nushell_survey_2019_anything_else.png)
 
 As our final question, we gave responders a chance to give us any last thoughts they felt we should know.
 

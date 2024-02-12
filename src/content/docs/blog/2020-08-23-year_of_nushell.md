@@ -196,7 +196,7 @@ In addition to kebab case, you can use `?` as part of the identifier, allowing n
 
 Nushell currently sits at just over 55k lines of code, built from almost 1300 merged pull requests.
 
-![image of a Nu growing from under 20000 lines of code to over 55000 lines of code](../assets/images/year_1_kloc.png)
+![image of a Nu growing from under 20000 lines of code to over 55000 lines of code](/assets/images/year_1_kloc.png)
 
 _Growth in code size with each version_
 
