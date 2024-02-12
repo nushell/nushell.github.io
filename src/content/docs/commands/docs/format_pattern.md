@@ -16,7 +16,7 @@ feature: extra
 
 <div class='command-title'>{{ $frontmatter.strings }}</div>
 
-::: warning
+:::caution[warning]
 Command `format pattern` was not included in the official binaries by default, you have to build it with `--features=extra` flag
 :::
 

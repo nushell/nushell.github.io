@@ -16,7 +16,7 @@ feature: extra
 
 <div class='command-title'>{{ $frontmatter.bits }}</div>
 
-::: warning
+:::caution[warning]
 Command `bits shl` was not included in the official binaries by default, you have to build it with `--features=extra` flag
 :::
 

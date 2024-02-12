@@ -16,7 +16,7 @@ feature: extra
 
 <div class='command-title'>{{ $frontmatter.math }}</div>
 
-::: warning
+:::caution[warning]
 Command `math ln` was not included in the official binaries by default, you have to build it with `--features=extra` flag
 :::
 

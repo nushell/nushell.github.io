@@ -16,7 +16,7 @@ title: ssh-agent
     | load-env
 ```
 
-::: warning
+:::caution[warning]
 Adding this to your `env.nu` will however start a new ssh-agent process every time you start a new terminal.
 See the workarounds.
 :::

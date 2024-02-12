@@ -16,7 +16,7 @@ feature: extra
 
 <div class='command-title'>{{ $frontmatter.conversions }}</div>
 
-::: warning
+:::caution[warning]
 Command `into bits` was not included in the official binaries by default, you have to build it with `--features=extra` flag
 :::
 

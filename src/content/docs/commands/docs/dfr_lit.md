@@ -16,7 +16,7 @@ feature: dataframe
 
 <div class='command-title'>{{ $frontmatter.expression }}</div>
 
-::: warning
+:::caution[warning]
 Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag
 :::
 
