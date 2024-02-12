@@ -464,17 +464,15 @@ You can handle stderr in multiple ways:
 3. redirect stderr to a file, using `e> file_path`, or `e+o> file_path`
 4. use `do -i { cmd } | complete` to capture both stdout and stderr as structured data
 
-Let's see the difference between them:
 
-Assume that we have following code
-
+For the next examples, let's assume this file:
 ```nushell
 # demo.nu
 print "foo"
 print -e "barbar"
 ```
 
-It prints `foo` to stdout and `barbar` to stderr.  The following table illustrates the difference between them:
+It prints `foo` to stdout and `barbar` to stderr.  The following table illustrates the differences between the different redirection styles:
 
 Redirection to a pipeline:
 
