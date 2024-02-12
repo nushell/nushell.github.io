@@ -27,7 +27,7 @@ Then you will get some commands to schedule background tasks. (e.g: `task spawn`
 
 Cons: It spawns a new Nushell interpreter to execute every single task, so it doesn't inherit current scope's variables, custom commands, alias definition.
 It only inherits environment variables whose value can be converted to a string.
-Therefore, if you want to use custom commands or variables, you have to [`use`](/commands/docs/use.md) or [`def`](/commands/docs/def.md) them within the given block.
+Therefore, if you want to use custom commands or variables, you have to [`use`](/commands/docs/use) or [`def`](/commands/docs/def) them within the given block.
 
 ## Using nu with terminal multiplexer
 

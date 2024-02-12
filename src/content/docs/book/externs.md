@@ -46,7 +46,7 @@ A Nushell comment that continues on the same line for argument documentation pur
 
 ## Types and custom completions
 
-In the above example, you'll notice some types are followed by `@` followed by the name of a command. We talk more about [custom completions](custom_completions.md) in their own section.
+In the above example, you'll notice some types are followed by `@` followed by the name of a command. We talk more about [custom completions](custom_completions) in their own section.
 
 Both the type (or shape) of the argument and the custom completion tell Nushell about how to complete values for that flag or position. For example, setting a shape to `path` allows Nushell to complete the value to a filepath for you. Using the `@` with a custom completion overrides this default behavior, letting the custom completion give you full completion list.
 

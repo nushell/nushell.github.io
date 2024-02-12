@@ -8,7 +8,7 @@ Nu embraces this approach, and expands it to include other types of data, in add
 
 Like many programming languages, Nu models data using a set of simple, and structured data types. Simple data types include integers, floats, strings, booleans, dates. There are also special types for filesizes and time durations.
 
-The [`describe`](/commands/docs/describe.md) command returns the type of a data value:
+The [`describe`](/commands/docs/describe) command returns the type of a data value:
 
 ```nushell frame="terminal"
 42 | describe
@@ -37,7 +37,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 ## Integers
 
 Examples of integers (i.e. "round numbers") include 1, 0, -5, and 100.
-You can parse a string into an integer with the [`into int`](/commands/docs/into_int.md) command
+You can parse a string into an integer with the [`into int`](/commands/docs/into_int) command
 
 ```nushell frame="terminal"
 "-5" | into int
@@ -46,7 +46,7 @@ You can parse a string into an integer with the [`into int`](/commands/docs/into
 ## Decimals (floats)
 
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
-You can cast a string into a Float with the [`into float`](/commands/docs/into_float.md) command
+You can cast a string into a Float with the [`into float`](/commands/docs/into_float) command
 
 ```nushell frame="terminal"
 "1.2" | into float
@@ -67,7 +67,7 @@ A string of characters that represents text. There are a few ways these can be c
   - `print hello`
   - `[foo bar baz]`
 
-See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
+See [Working with strings](working_with_strings) and [Handling Strings](https://www.nushell.sh/book/loading_data#handling-strings) for details.
 
 ## Booleans
 
@@ -161,14 +161,14 @@ As with durations, you can make fractional file sizes, and do calculations:
 A range is a way of expressing a sequence of integer or float values from start to finish. They take the form \<start\>..\<end\>. For example, the range `1..3` means the numbers 1, 2, and 3.
 
 :::tip
-You can also easily create lists of characters with a form similar to ranges with the command [`seq char`](/commands/docs/seq_char.html) as well as with dates using the [`seq date`](/commands/docs/seq_date.html) command.
+You can also easily create lists of characters with a form similar to ranges with the command [`seq char`](/commands/docs/seq_char) as well as with dates using the [`seq date`](/commands/docs/seq_date) command.
 :::
 
 ### Specifying the step
 
 You can specify the step of a range with the form \<start\>..\<second\>..\<end\>, where the step between values in the range is the distance between the \<start\> and \<second\> values, which numerically is \<second\> - \<start\>. For example, the range `2..5..11` means the numbers 2, 5, 8, and 11 because the step is \<second\> - \<first\> = 5 - 2 = 3. The third value is 5 + 3 = 8 and the fourth value is 8 + 3 = 11.
 
-[`seq`](/commands/docs/seq.md) can also create sequences of numbers, and provides an alternate way of specifying the step with three parameters. It's called with `seq $start $step $end` where the step amount is the second parameter rather than being the second parameter minus the first parameter. So `2..5..9` would be equivalent to `seq 2 3 9`.
+[`seq`](/commands/docs/seq) can also create sequences of numbers, and provides an alternate way of specifying the step with three parameters. It's called with `seq $start $step $end` where the step amount is the second parameter rather than being the second parameter minus the first parameter. So `2..5..9` would be equivalent to `seq 2 3 9`.
 
 ### Inclusive and non-inclusive ranges
 
@@ -180,7 +180,7 @@ Sometimes, you may want a range that is limited by a number but doesn't use that
 
 Ranges can also be open-ended. You can remove the start or the end of the range to make it open-ended.
 
-Let's say you wanted to start counting at 3, but you didn't have a specific end in mind. You could use the range `3..` to represent this. When you use a range that's open-ended on the right side, remember that this will continue counting for as long as possible, which could be a very long time! You'll often want to use open-ended ranges with commands like [`take`](/commands/docs/take.md), so you can take the number of elements you want from the range.
+Let's say you wanted to start counting at 3, but you didn't have a specific end in mind. You could use the range `3..` to represent this. When you use a range that's open-ended on the right side, remember that this will continue counting for as long as possible, which could be a very long time! You'll often want to use open-ended ranges with commands like [`take`](/commands/docs/take), so you can take the number of elements you want from the range.
 
 You can also make the start of the range open. In this case, Nushell will start counting with `0`. For example, the range `..2` is the numbers 0, 1, and 2.
 
@@ -222,7 +222,7 @@ As these can sometimes have many fields, a record is printed up-down rather than
 :::tip
 A record is identical to a single row of a table (see below). You can think of a record as essentially being a "one-row table", with each of its keys as a column (although a true one-row table is something distinct from a record).
 
-This means that any command that operates on a table's rows _also_ operates on records. For instance, [`insert`](/commands/docs/insert.md), which adds data to each of a table's rows, can be used with records:
+This means that any command that operates on a table's rows _also_ operates on records. For instance, [`insert`](/commands/docs/insert), which adds data to each of a table's rows, can be used with records:
 
 ```nushell frame="terminal"
 {x:3 y:1} | insert z 0
@@ -264,7 +264,7 @@ Lists are ordered sequences of data values. List syntax is very similar to array
 ```
 
 :::tip
-Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where.md) can be used with lists:
+Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where) can be used with lists:
 
 ```nushell frame="terminal"
 [bell book candle] | where ($it =~ 'b')
@@ -278,7 +278,7 @@ Accessing lists' data is done by placing a `.` before a bare integer:
 [a b c].1
 ```
 
-To get a sub-list from a list, you can use the [`range`](/commands/docs/range.md) command:
+To get a sub-list from a list, you can use the [`range`](/commands/docs/range) command:
 
 ```nushell frame="terminal"
 [a b c d e f] | range 1..3
@@ -340,13 +340,13 @@ Moreover, you can also access entire columns of a table by name, to obtain lists
 [{x:12 y:5} {x:4 y:7} {x:2 y:2}].x
 ```
 
-Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the [`select`](/commands/docs/select.md) command with column names:
+Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the [`select`](/commands/docs/select) command with column names:
 
 ```nushell frame="terminal"
 [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select y z
 ```
 
-To remove rows from a table, you'll commonly use the [`select`](/commands/docs/select.md) command with row numbers, as you would with a list:
+To remove rows from a table, you'll commonly use the [`select`](/commands/docs/select) command with row numbers, as you would with a list:
 
 ```nushell frame="terminal"
 [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select 1 2
@@ -371,7 +371,7 @@ Closure parameters are specified between a pair of pipe symbols (for example, `|
 You can also use a pipeline input as `$in` in most closures instead of providing an explicit parameter: `each { print $in }`
 
 Closures itself can be bound to a named variable and passed as a parameter.
-To call a closure directly in your code use the [`do`](/commands/docs/do.md) command.
+To call a closure directly in your code use the [`do`](/commands/docs/do) command.
 
 ```nushell frame="terminal"
 # Assign a closure to a variable
@@ -380,14 +380,14 @@ do $greet "Julian"
 ```
 
 Closures are a useful way to represent code that can be executed on each row of data.
-It is idiomatic to use `$it` as a parameter name in [`each`](/commands/docs/each.md) blocks, but not required;
+It is idiomatic to use `$it` as a parameter name in [`each`](/commands/docs/each) blocks, but not required;
 `each { |x| print $x }` works the same way as `each { |it| print $it }`.
 
 ## Blocks
 
 Blocks don't close over variables, don't have parameters, and can't be passed as a value.
 However, unlike closures, blocks can access mutable variable in the parent closure.
-For example, mutating a variable inside the block used in an [`if`](/commands/docs/if.md) call is valid:
+For example, mutating a variable inside the block used in an [`if`](/commands/docs/if) call is valid:
 
 ```nushell frame="terminal"
 mut x = 1
@@ -399,7 +399,7 @@ print $x
 
 ## Null
 
-Finally, there is `null` which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md)) produce `null`.
+Finally, there is `null` which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like [`save`](/commands/docs/save) or [`cd`](/commands/docs/cd)) produce `null`.
 
 You can place `null` at the end of a pipeline to replace the pipeline's output with it, and thus print nothing:
 

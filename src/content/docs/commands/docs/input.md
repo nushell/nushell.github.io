@@ -56,5 +56,5 @@ Get two characters from the user, and assign to a variable
 
 | name                                             | type    | usage                            |
 | ------------------------------------------------ | ------- | -------------------------------- |
-| [`input list`](/commands/docs/input_list.md)     | Builtin | Interactive list selection.      |
-| [`input listen`](/commands/docs/input_listen.md) | Builtin | Listen for user interface event. |
+| [`input list`](/commands/docs/input_list)     | Builtin | Interactive list selection.      |
+| [`input listen`](/commands/docs/input_listen) | Builtin | Listen for user interface event. |

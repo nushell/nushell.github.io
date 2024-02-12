@@ -3,7 +3,7 @@ title: Dataframes
 ---
 
 :::caution[WARNING]
-To use the dataframe support you need a fully-featured build with `cargo build --features dataframe`. Starting with version 0.72, dataframes are _not_ included with binary releases of Nushell. [See the installation instructions](/book/installation.md) for further details.
+To use the dataframe support you need a fully-featured build with `cargo build --features dataframe`. Starting with version 0.72, dataframes are _not_ included with binary releases of Nushell. [See the installation instructions](/book/installation) for further details.
 :::
 
 As we have seen so far, Nushell makes working with data its main priority.
@@ -31,7 +31,7 @@ processing data.
 For this little benchmark exercise we will be comparing native Nushell
 commands, dataframe Nushell commands and [Python
 Pandas](https://pandas.pydata.org/) commands. For the time being don't pay too
-much attention to the [`Dataframe` commands](/commands/categories/dataframe.md). They will be explained in later
+much attention to the [`Dataframe` commands](/commands/categories/dataframe). They will be explained in later
 sections of this page.
 
 > System Details: The benchmarks presented in this section were run using a
@@ -61,7 +61,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ╰───┴────────┴─────────┴─────────╯
 ```
 
-We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
+We can have a look at the first lines of the file using [`first`](/commands/docs/first):
 
 ```nushell
 ❯ $df | dfr first
@@ -90,7 +90,7 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 ### Loading the file
 
 Let's start by comparing loading times between the various methods. First, we
-will load the data using Nushell's [`open`](/commands/docs/open.md) command:
+will load the data using Nushell's [`open`](/commands/docs/open) command:
 
 ```nushell
 ❯ timeit {open .\Data7602DescendingYearOrder.csv}
@@ -194,7 +194,7 @@ and the benchmark with dataframes is:
 
 Luckily Nushell dataframes managed to halve the time again. Isn't that great?
 
-As you can see, Nushell's [`Dataframe` commands](/commands/categories/dataframe.md)
+As you can see, Nushell's [`Dataframe` commands](/commands/categories/dataframe)
 are as fast as the most common tools that exist today to do data analysis. The commands
 that are included in this release have the potential to become your go-to tool for
 doing data analysis. By composing complex Nushell pipelines, you can extract information
@@ -202,7 +202,7 @@ from data in a reliable way.
 
 ## Working with Dataframes
 
-After seeing a glimpse of the things that can be done with [`Dataframe` commands](/commands/categories/dataframe.md),
+After seeing a glimpse of the things that can be done with [`Dataframe` commands](/commands/categories/dataframe),
 now it is time to start testing them. To begin let's create a sample
 CSV file that will become our sample dataframe that we will be using along with
 the examples. In your favorite file editor paste the next lines to create out
@@ -299,7 +299,7 @@ that exist in `df` by using the `aggregate` command
 
 As you can see, the aggregate function computes the sum for those columns where
 a sum makes sense. If you want to filter out the text column, you can select
-the columns you want by using the [`dfr select`](/commands/docs/dfr_select.md) command
+the columns you want by using the [`dfr select`](/commands/docs/dfr_select) command
 
 ```nushell
 ❯ $df | dfr sum | dfr select int_1 int_2 float_1 float_2
@@ -380,7 +380,7 @@ right dataframe
 :::tip
 In `Nu` when a command has multiple arguments that are expecting
 multiple values we use brackets `[]` to enclose those values. In the case of
-[`dfr join`](/commands/docs/dfr_join.md) we can join on multiple columns
+[`dfr join`](/commands/docs/dfr_join) we can join on multiple columns
 as long as they have the same type.
 :::
 
@@ -403,14 +403,14 @@ in order to use it for further operations.
 ## DataFrame group-by
 
 One of the most powerful operations that can be performed with a DataFrame is
-the [`dfr group-by`](/commands/docs/dfr_group-by.md). This command will allow you to perform aggregation operations
+the [`dfr group-by`](/commands/docs/dfr_group-by). This command will allow you to perform aggregation operations
 based on a grouping criteria. In Nushell, a `GroupBy` is a type of object that
 can be stored and reused for multiple aggregations. This is quite handy, since
 the creation of the grouped pairs is the most expensive operation while doing
 group-by and there is no need to repeat it if you are planning to do multiple
 operations with the same group condition.
 
-To create a `GroupBy` object you only need to use the [`dfr_group-by`](/commands/docs/dfr_group-by.md) command
+To create a `GroupBy` object you only need to use the [`dfr_group-by`](/commands/docs/dfr_group-by) command
 
 ```nushell
 ❯ let group = ($df | dfr group-by first)
@@ -509,7 +509,7 @@ while working with dataframes, and this is thanks to **Apache Arrow** and
 **Polars**. In a very simple representation, each column in a DataFrame is an
 Arrow Array, which is using several memory specifications in order to maintain
 the data as packed as possible (check [Arrow columnar
-format](https://arrow.apache.org/docs/format/Columnar.html)). The other
+format](https://arrow.apache.org/docs/format/Columnar)). The other
 optimization trick is the fact that whenever possible, the columns from the
 dataframes are shared between dataframes, avoiding memory duplication for the
 same data. This means that dataframes `$a` and `$a2` are sharing the same two
@@ -788,7 +788,7 @@ extract that information
 ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
-The command [`dfr take`](/commands/docs/dfr_take.md) is very handy, especially if we mix it with other commands.
+The command [`dfr take`](/commands/docs/dfr_take) is very handy, especially if we mix it with other commands.
 Let's say that we want to extract all rows for the first duplicated element for
 column `first`. In order to do that, we can use the command `dfr arg-unique` as
 shown in the next example
@@ -810,7 +810,7 @@ We can use the `arg-sort` to accomplish that. In the next example we
 can sort the dataframe by the column `word`
 
 :::tip
-The same result could be accomplished using the command [`sort`](/commands/docs/sort.md)
+The same result could be accomplished using the command [`sort`](/commands/docs/sort)
 :::
 
 ```nushell
@@ -1082,9 +1082,9 @@ whenever possible, their analogous Nushell command.
 
 :::caution[WARNING]
 This list may be outdated. To get the up-to-date command list, see
-[Dataframe](/commands/categories/dataframe.md)
-[Lazyframe](/commands/categories/lazyframe.md) and
-[Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md)
+[Dataframe](/commands/categories/dataframe)
+[Lazyframe](/commands/categories/lazyframe) and
+[Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe)
 command categories.
 :::
 

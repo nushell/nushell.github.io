@@ -5,12 +5,12 @@ title: Overlays
 Overlays act as "layers" of definitions (custom commands, aliases, environment variables) that can be activated and deactivated on demand.
 They resemble virtual environments found in some languages, such as Python.
 
-_Note: To understand overlays, make sure to check [Modules](modules.md) first as overlays build on top of modules._
+_Note: To understand overlays, make sure to check [Modules](modules) first as overlays build on top of modules._
 
 ## Basics
 
 First, Nushell comes with one default overlay called `zero`.
-You can inspect which overlays are active with the [`overlay list`](/commands/docs/overlay_list.md) command.
+You can inspect which overlays are active with the [`overlay list`](/commands/docs/overlay_list) command.
 You should see the default overlay listed there.
 
 To create a new overlay, you first need a module:
@@ -32,14 +32,14 @@ module spam {
 We'll use this module throughout the chapter, so whenever you see `overlay use spam`, assume `spam` is referring to this module.
 
 :::tip
-The module can be created by any of the three methods described in [Modules](modules.md):
+The module can be created by any of the three methods described in [Modules](modules):
 
 - "inline" modules (used in this example)
 - file
 - directory
   :::
 
-To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
+To create the overlay, call [`overlay use`](/commands/docs/overlay_use):
 
 ```nushell
 overlay use spam
@@ -60,7 +60,7 @@ overlay list
 ───┴──────
 ```
 
-It brought the module's definitions into the current scope and evaluated the [`export-env`](/commands/docs/export-env.md) block the same way as [`use`](/commands/docs/use.md) command would (see [Modules](modules.md#environment-variables) chapter).
+It brought the module's definitions into the current scope and evaluated the [`export-env`](/commands/docs/export-env) block the same way as [`use`](/commands/docs/use) command would (see [Modules](modules#environment-variables) chapter).
 
 :::tip
 In the following sections, the `>` prompt will be preceded by the name of the last active overlay.
@@ -69,7 +69,7 @@ In the following sections, the `>` prompt will be preceded by the name of the la
 
 ## Removing an Overlay
 
-If you don't need the overlay definitions anymore, call [`overlay hide`](/commands/docs/overlay_remove.md):
+If you don't need the overlay definitions anymore, call [`overlay hide`](/commands/docs/overlay_remove):
 
 ```nushell
 (spam)> overlay hide spam
@@ -96,7 +96,7 @@ foo
 ───┴──────
 ```
 
-The last way to remove an overlay is to call [`overlay hide`](/commands/docs/overlay_remove.md) without an argument which will remove the last active overlay.
+The last way to remove an overlay is to call [`overlay hide`](/commands/docs/overlay_remove) without an argument which will remove the last active overlay.
 
 ## Overlays Are Recordable
 
@@ -146,7 +146,7 @@ The solution can be to create a new empty overlay that would be used just for re
 
 The `eggs` command is added into `scratchpad` while keeping `spam` intact.
 
-To make it less verbose, you can use the [`overlay new`](/commands/docs/overlay_new.md) command:
+To make it less verbose, you can use the [`overlay new`](/commands/docs/overlay_new) command:
 
 ```nushell
 (zero)> overlay use spam
@@ -160,7 +160,7 @@ To make it less verbose, you can use the [`overlay new`](/commands/docs/overlay_
 
 ## Prefixed Overlays
 
-The [`overlay use`](/commands/docs/overlay_use.md) command would take all commands and aliases from the module and put them directly into the current namespace.
+The [`overlay use`](/commands/docs/overlay_use) command would take all commands and aliases from the module and put them directly into the current namespace.
 However, you might want to keep them as subcommands behind the module's name.
 That's what `--prefix` is for:
 
@@ -236,7 +236,7 @@ foo
 
 The overlays are arranged as a stack.
 If multiple overlays contain the same definition, say `foo`, the one from the last active one would take precedence.
-To bring an overlay to the top of the stack, you can call [`overlay use`](/commands/docs/overlay_use.md) again:
+To bring an overlay to the top of the stack, you can call [`overlay use`](/commands/docs/overlay_use) again:
 
 ```nushell
 (zero)> def foo [] { "foo-in-zero" }

@@ -15,6 +15,12 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["dist/", ".vercel/", ".astro/", "./public/*json"]
+    "ignore": [
+      "dist/",
+      ".vercel/",
+      ".astro/",
+      "./public/*json",
+      "./src/content/docs/book/coming_from_bash.md"
+    ]
   }
 }

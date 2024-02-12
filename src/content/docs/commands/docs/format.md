@@ -34,7 +34,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                                   | type    | usage                                                    |
 | ------------------------------------------------------ | ------- | -------------------------------------------------------- |
-| [`format date`](/commands/docs/format_date.md)         | Builtin | Format a given date using a format string.               |
-| [`format duration`](/commands/docs/format_duration.md) | Builtin | Outputs duration with a specified unit of time.          |
-| [`format filesize`](/commands/docs/format_filesize.md) | Builtin | Converts a column of filesizes to some specified format. |
-| [`format pattern`](/commands/docs/format_pattern.md)   | Builtin | Format columns into a string using a simple pattern.     |
+| [`format date`](/commands/docs/format_date)         | Builtin | Format a given date using a format string.               |
+| [`format duration`](/commands/docs/format_duration) | Builtin | Outputs duration with a specified unit of time.          |
+| [`format filesize`](/commands/docs/format_filesize) | Builtin | Converts a column of filesizes to some specified format. |
+| [`format pattern`](/commands/docs/format_pattern)   | Builtin | Format columns into a string using a simple pattern.     |

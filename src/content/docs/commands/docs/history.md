@@ -58,4 +58,4 @@ Search all the commands from history that contains 'cargo'
 
 | name                                                   | type    | usage                            |
 | ------------------------------------------------------ | ------- | -------------------------------- |
-| [`history session`](/commands/docs/history_session.md) | Builtin | Get the command history session. |
+| [`history session`](/commands/docs/history_session) | Builtin | Get the command history session. |

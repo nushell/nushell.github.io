@@ -2,11 +2,11 @@
 title: Loading Data
 ---
 
-Earlier, we saw how you can use commands like [`ls`](/commands/docs/ls.md), [`ps`](/commands/docs/ps.md), [`date`](/commands/docs/date.md), and [`sys`](/commands/docs/sys.md) to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
+Earlier, we saw how you can use commands like [`ls`](/commands/docs/ls), [`ps`](/commands/docs/ps), [`date`](/commands/docs/date), and [`sys`](/commands/docs/sys) to load information about your files, processes, time of date, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
 
 ## Opening files
 
-One of Nu's most powerful assets in working with data is the [`open`](/commands/docs/open.md) command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
+One of Nu's most powerful assets in working with data is the [`open`](/commands/docs/open) command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
 
 ```nushell frame="terminal"
 open package.json
@@ -24,9 +24,9 @@ open package.json
 ╰─────────────────┴──────────────────────────────────╯
 ```
 
-In a similar way to [`ls`](/commands/docs/ls.md), opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
+In a similar way to [`ls`](/commands/docs/ls), opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
 
-If we wanted to check the version of the project we were looking at, we can use the [`get`](/commands/docs/get.md) command.
+If we wanted to check the version of the project we were looking at, we can use the [`get`](/commands/docs/get) command.
 
 ```nushell frame="terminal"
 open editors/vscode/package.json | get version
@@ -104,7 +104,7 @@ That is, any JSON code is a valid NUON code, therefore a valid Nushell code.
 Compared to JSON, NUON is more "human-friendly".
 For example, comments are allowed and commas are not required.
 
-One limitation of NUON currently is that it cannot represent all of the Nushell [data types](types_of_data.md).
+One limitation of NUON currently is that it cannot represent all of the Nushell [data types](types_of_data).
 Most notably, NUON does not allow to serialize blocks.
 
 ## Handling Strings
@@ -133,7 +133,7 @@ open people.txt | lines
 ───┴──────────────────────────────
 ```
 
-We can see that we're working with the lines because we're back into a list. Our next step is to see if we can split up the rows into something a little more useful. For that, we'll use the [`split`](/commands/docs/split.md) command. [`split`](/commands/docs/split.md), as the name implies, gives us a way to split a delimited string. We will use [`split`](/commands/docs/split.md)'s `column` subcommand to split the contents across multiple columns. We tell it what the delimiter is, and it does the rest:
+We can see that we're working with the lines because we're back into a list. Our next step is to see if we can split up the rows into something a little more useful. For that, we'll use the [`split`](/commands/docs/split) command. [`split`](/commands/docs/split), as the name implies, gives us a way to split a delimited string. We will use [`split`](/commands/docs/split)'s `column` subcommand to split the contents across multiple columns. We tell it what the delimiter is, and it does the rest:
 
 ```nushell frame="terminal"
 open people.txt | lines | split column "|"
@@ -146,7 +146,7 @@ open people.txt | lines | split column "|"
 ───┴──────────┴───────────┴───────────
 ```
 
-That _almost_ looks correct. It looks like there's an extra space there. Let's [`trim`](/commands/docs/str_trim.md) that extra space:
+That _almost_ looks correct. It looks like there's an extra space there. Let's [`trim`](/commands/docs/str_trim) that extra space:
 
 ```nushell frame="terminal"
 open people.txt | lines | split column "|" | str trim
@@ -159,7 +159,7 @@ open people.txt | lines | split column "|" | str trim
 ───┴─────────┴─────────┴──────────
 ```
 
-Not bad. The [`split`](/commands/docs/split.md) command gives us data we can use. It also goes ahead and gives us default column names:
+Not bad. The [`split`](/commands/docs/split) command gives us data we can use. It also goes ahead and gives us default column names:
 
 ```nushell frame="terminal"
 open people.txt | lines | split column "|" | str trim | get column1
@@ -198,9 +198,9 @@ open people.txt | lines | split column "|" first_name last_name job | str trim |
 
 There are other commands you can use to work with strings:
 
-- [`str`](/commands/docs/str.md)
-- [`lines`](/commands/docs/lines.md)
-- [`size`](/commands/docs/size.md)
+- [`str`](/commands/docs/str)
+- [`lines`](/commands/docs/lines)
+- [`size`](/commands/docs/size)
 
 There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:
 
@@ -213,7 +213,7 @@ name = "adhoc_derive"
 version = "0.7.20"
 ```
 
-The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the [`from`](/commands/docs/from.md) command using the `toml` subcommand:
+The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the [`from`](/commands/docs/from) command using the `toml` subcommand:
 
 ```nushell frame="terminal"
 open Cargo.lock | from toml
@@ -223,11 +223,11 @@ open Cargo.lock | from toml
 ╰─────────┴──────────────────╯
 ```
 
-The [`from`](/commands/docs/from.md) command can be used for each of the structured data text formats that Nu can open and understand by passing it the supported format as a subcommand.
+The [`from`](/commands/docs/from) command can be used for each of the structured data text formats that Nu can open and understand by passing it the supported format as a subcommand.
 
 ## Opening in raw mode
 
-While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the [`open`](/commands/docs/open.md) command can take an optional `--raw` flag:
+While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the [`open`](/commands/docs/open) command can take an optional `--raw` flag:
 
 ```nushell frame="terminal"
 [package]
@@ -243,13 +243,13 @@ edition = "2021"
 
 ## SQLite
 
-SQLite databases are automatically detected by [`open`](/commands/docs/open.md), no matter what their file extension is. You can open a whole database:
+SQLite databases are automatically detected by [`open`](/commands/docs/open), no matter what their file extension is. You can open a whole database:
 
 ```nushell frame="terminal"
 open foo.db
 ```
 
-Or [`get`](/commands/docs/get.md) a specific table:
+Or [`get`](/commands/docs/get) a specific table:
 
 ```nushell frame="terminal"
 open foo.db | get some_table
@@ -265,7 +265,7 @@ open foo.db | query db "select * from some_table"
 
 ## Fetching URLs
 
-In addition to loading files from your filesystem, you can also load URLs by using the [`http get`](/commands/docs/http.md) command. This will fetch the contents of the URL from the internet and return it:
+In addition to loading files from your filesystem, you can also load URLs by using the [`http get`](/commands/docs/http) command. This will fetch the contents of the URL from the internet and return it:
 
 ```nushell frame="terminal"
 http get https://blog.rust-lang.org/feed.xml

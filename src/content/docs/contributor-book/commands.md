@@ -8,11 +8,11 @@ Commands are the building blocks for pipelines in Nu. They do the action of the 
 
 ## Internal commands
 
-All commands inside of Nu, including plugins, are internal commands. Internal commands communicate with each other using [`PipelineData`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.PipelineData.html).
+All commands inside of Nu, including plugins, are internal commands. Internal commands communicate with each other using [`PipelineData`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.PipelineData).
 
 ### Signature
 
-Commands use a light typechecking pass to ensure that arguments passed to them can be handled correctly. To enable this, each [`Command`](https://docs.rs/nu-protocol/latest/nu_protocol/engine/trait.Command.html) provides a [`Signature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Signature.html) which tells Nu:
+Commands use a light typechecking pass to ensure that arguments passed to them can be handled correctly. To enable this, each [`Command`](https://docs.rs/nu-protocol/latest/nu_protocol/engine/trait.Command) provides a [`Signature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Signature) which tells Nu:
 
 - The name of the command
 - The positional arguments (e.g. in `start x y` the `x` and `y` are positional arguments)

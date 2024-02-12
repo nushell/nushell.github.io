@@ -17,13 +17,13 @@ Nu takes cues from a lot of familiar territory: traditional shells like bash, ob
 The book is split into chapters which are further broken down into sections.
 You can click on the chapter headers to get more information about it.
 
-- [Getting Started](getting_started.md) teaches you how to install Nushell and shows you the ropes. It also explains some of the design principles where Nushell differs from typical shells, such as bash.
-- [Nu Fundamentals](nu_fundamentals.md) explains basic concepts of the Nushell language.
-- [Programming in Nu](programming_in_nu.md) dives more deeply into the language features and shows several ways how to organize and structure your code.
-- [Nu as a Shell](nu_as_a_shell.md) focuses on the shell features, most notably the configuration and environment.
-- [Coming to Nu](coming_to_nu.md) is intended to give a quick start for users coming from other shells or languages.
-- [Design Notes](design_notes.md) has in-depth explanation of some of the Nushell's design choices.
-- [(Not So) Advanced](advanced.md) includes some more advanced topics (they are not _so_ advanced, make sure to check them out, too!).
+- [Getting Started](/book/getting_started) teaches you how to install Nushell and shows you the ropes. It also explains some of the design principles where Nushell differs from typical shells, such as bash.
+- [Nu Fundamentals](/book/nu_fundamentals) explains basic concepts of the Nushell language.
+- [Programming in Nu](/book/programming_in_nu) dives more deeply into the language features and shows several ways how to organize and structure your code.
+- [Nu as a Shell](/book/nu_as_a_shell) focuses on the shell features, most notably the configuration and environment.
+- [Coming to Nu](/book/coming_to_nu) is intended to give a quick start for users coming from other shells or languages.
+- [Design Notes](/book/design_notes) has in-depth explanation of some of the Nushell's design choices.
+- [(Not So) Advanced](/book/advanced) includes some more advanced topics (they are not _so_ advanced, make sure to check them out, too!).
 
 ## The Many Parts of Nushell
 
@@ -48,7 +48,7 @@ Most repositories contain `CONTRIBUTING.md` file with tips and details that shou
 Nushell itself is written in [Rust](https://www.rust-lang.org).
 However, you do not have to be a Rust programmer to help.
 If you know some web development, you can contribute to improving this website or the Nana project.
-[Dataframes](dataframes.md) can use your data processing expertise.
+[Dataframes](/book/dataframes) can use your data processing expertise.
 
 If you wrote a cool script, plugin or integrated Nushell somewhere, we'd welcome your contribution to `nu_scripts` or Awesome Nu.
 Discovering bugs with reproduction steps and filing GitHub issues for them is a valuable help, too!

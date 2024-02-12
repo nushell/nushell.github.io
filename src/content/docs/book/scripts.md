@@ -8,7 +8,7 @@ In Nushell, you can write and run scripts in the Nushell language. To run a scri
 nu myscript.nu
 ```
 
-This will run the script to completion in a new instance of Nu. You can also run scripts inside the _current_ instance of Nu using [`source`](/commands/docs/source.md):
+This will run the script to completion in a new instance of Nu. You can also run scripts inside the _current_ instance of Nu using [`source`](/commands/docs/source):
 
 ```nushell frame="terminal"
 source myscript.nu
@@ -53,7 +53,7 @@ a
 b; c | d
 ```
 
-When this script is run, Nushell will first run the `a` command to completion and view its results. Next, Nushell will run `b; c | d` following the rules in the ["Semicolons" section](pipelines.html#semicolons).
+When this script is run, Nushell will first run the `a` command to completion and view its results. Next, Nushell will run `b; c | d` following the rules in the ["Semicolons" section](/book/pipelines#semicolons).
 
 ## Parameterizing Scripts
 
@@ -103,7 +103,7 @@ nu explicit_type.nu +1
 
 ## Subcommands
 
-A script can have multiple sub-commands like `run`, `build`, etc. which allows to execute a specific main sub-function. The important part is to expose them correctly with `def main [] {}`. See more details in the [Custom Command](custom_commands.html#sub-commands) section.
+A script can have multiple sub-commands like `run`, `build`, etc. which allows to execute a specific main sub-function. The important part is to expose them correctly with `def main [] {}`. See more details in the [Custom Command](/book/custom_commands#sub-commands) section.
 
 For example:
 

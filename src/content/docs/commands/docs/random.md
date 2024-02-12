@@ -34,9 +34,9 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                             | type    | usage                                              |
 | ------------------------------------------------ | ------- | -------------------------------------------------- |
-| [`random bool`](/commands/docs/random_bool.md)   | Builtin | Generate a random boolean value.                   |
-| [`random chars`](/commands/docs/random_chars.md) | Builtin | Generate random chars.                             |
-| [`random dice`](/commands/docs/random_dice.md)   | Builtin | Generate a random dice roll.                       |
-| [`random float`](/commands/docs/random_float.md) | Builtin | Generate a random float within a range [min..max]. |
-| [`random int`](/commands/docs/random_int.md)     | Builtin | Generate a random integer [min..max].              |
-| [`random uuid`](/commands/docs/random_uuid.md)   | Builtin | Generate a random uuid4 string.                    |
+| [`random bool`](/commands/docs/random_bool)   | Builtin | Generate a random boolean value.                   |
+| [`random chars`](/commands/docs/random_chars) | Builtin | Generate random chars.                             |
+| [`random dice`](/commands/docs/random_dice)   | Builtin | Generate a random dice roll.                       |
+| [`random float`](/commands/docs/random_float) | Builtin | Generate a random float within a range [min..max]. |
+| [`random int`](/commands/docs/random_int)     | Builtin | Generate a random integer [min..max].              |
+| [`random uuid`](/commands/docs/random_uuid)   | Builtin | Generate a random uuid4 string.                    |

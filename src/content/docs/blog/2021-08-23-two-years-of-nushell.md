@@ -38,7 +38,7 @@ We've spent a lot of time this year steadily improving areas that make Nushell -
 
 ### Nushell, the data analysis tool
 
-A relatively new aspect of being an interactive tool for working with data is Nushell's recent adoption of supporting dataframes. Dataframes allow users to work with large datasets in an efficient way. Recent versions of Nushell, using dataframes, are able to process and aggregate data from [5 million line csv files in less than a second](https://www.nushell.sh/blog/2021-07-13-nushell_0_34.html#dataframes-elferherrera). Did we mention dataframes are fast?
+A relatively new aspect of being an interactive tool for working with data is Nushell's recent adoption of supporting dataframes. Dataframes allow users to work with large datasets in an efficient way. Recent versions of Nushell, using dataframes, are able to process and aggregate data from [5 million line csv files in less than a second](https://www.nushell.sh/blog/2021-07-13-nushell_0_34#dataframes-elferherrera). Did we mention dataframes are fast?
 
 We'll be exploring how best to more-fully integrate dataframes with the rest of the Nushell features in the coming year.
 
@@ -46,7 +46,7 @@ We'll be exploring how best to more-fully integrate dataframes with the rest of 
 
 ### Seeing what Nushell will become
 
-With 0.32, we first [got a glimpse of what the Nushell language will become](https://www.nushell.sh/blog/2021-06-01-nushell_0_32.html#new-expression-syntax-jt). With 0.34, we saw [what data processing could be](https://www.nushell.sh/blog/2021-07-13-nushell_0_34.html#dataframes-elferherrera). These recent releases help to sketch where Nushell will feel like when it hits 1.0.
+With 0.32, we first [got a glimpse of what the Nushell language will become](https://www.nushell.sh/blog/2021-06-01-nushell_0_32#new-expression-syntax-jt). With 0.34, we saw [what data processing could be](https://www.nushell.sh/blog/2021-07-13-nushell_0_34#dataframes-elferherrera). These recent releases help to sketch where Nushell will feel like when it hits 1.0.
 
 One example that shows this off is the script we use every week to create the This Week in Nu newsletter. As you can see, [it's a full script](https://github.com/nushell/nu_scripts/blob/main/make_release/this_week_in_nu_release.nu) of the sort you might write in Python or Ruby.
 

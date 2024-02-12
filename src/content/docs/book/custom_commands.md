@@ -15,7 +15,7 @@ def greet [name] {
 ```
 
 :::tip
-The value produced by the last line of a command becomes the command's returned value. In this case, a list containing the string `'hello'` and `$name` is returned. To prevent this, you can place `null` (or the [`ignore`](/commands/docs/ignore.md) command) at the end of the pipeline, like so: `['hello' $name] | null`. Also note that most file system commands, such as [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md), always output `null`.
+The value produced by the last line of a command becomes the command's returned value. In this case, a list containing the string `'hello'` and `$name` is returned. To prevent this, you can place `null` (or the [`ignore`](/commands/docs/ignore) command) at the end of the pipeline, like so: `['hello' $name] | null`. Also note that most file system commands, such as [`save`](/commands/docs/save) or [`cd`](/commands/docs/cd), always output `null`.
 :::
 
 In this definition, we define the `greet` command, which takes a single parameter `name`. Following this parameter is the block that represents what will happen when the custom command runs. When called, the custom command will set the value passed for `name` as the `$name` variable, which will be available to the block.
@@ -57,7 +57,7 @@ _Note: It's common practice in Nushell to separate the words of the command with
 
 ## Sub-commands
 
-You can also define subcommands to commands using a space. For example, if we wanted to add a new subcommand to [`str`](/commands/docs/str.md), we can create it by naming our subcommand to start with "str ". For example:
+You can also define subcommands to commands using a space. For example, if we wanted to add a new subcommand to [`str`](/commands/docs/str), we can create it by naming our subcommand to start with "str ". For example:
 
 ```nushell frame="terminal"
 def "str mycommand" [] {
@@ -65,7 +65,7 @@ def "str mycommand" [] {
 }
 ```
 
-Now we can call our custom command as if it were a built-in subcommand of [`str`](/commands/docs/str.md):
+Now we can call our custom command as if it were a built-in subcommand of [`str`](/commands/docs/str):
 
 ```nushell frame="terminal"
 str mycommand
@@ -419,7 +419,7 @@ def greet [
 }
 ```
 
-The comments that we put on the definition and its parameters then appear as descriptions inside the [`help`](/commands/docs/help.md) of the command.
+The comments that we put on the definition and its parameters then appear as descriptions inside the [`help`](/commands/docs/help) of the command.
 
 :::caution[Note]
 A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
@@ -454,13 +454,13 @@ Custom commands stream their output just like built-in commands. For example, le
 ls | get name
 ```
 
-Let's move [`ls`](/commands/docs/ls.md) into a command that we've written:
+Let's move [`ls`](/commands/docs/ls) into a command that we've written:
 
 ```nushell frame="terminal"
 def my-ls [] { ls }
 ```
 
-We can use the output from this command just as we would [`ls`](/commands/docs/ls.md).
+We can use the output from this command just as we would [`ls`](/commands/docs/ls).
 
 ```nushell frame="terminal"
 my-ls | get name
@@ -509,4 +509,4 @@ def nullify [...cols] {
 
 ## Persisting
 
-For information about how to persist custom commands so that they're visible when you start up Nushell, see the [configuration chapter](configuration.md) and add your startup script.
+For information about how to persist custom commands so that they're visible when you start up Nushell, see the [configuration chapter](configuration) and add your startup script.

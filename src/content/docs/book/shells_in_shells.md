@@ -15,12 +15,12 @@ To get started, let's enter a directory:
  #  │ name               │ type │ size   │ modified
 ────┼────────────────────┼──────┼────────┼─────────────
   0 │ 404.html           │ File │  429 B │ 2 hours ago
-  1 │ CONTRIBUTING.md    │ File │  955 B │ 2 hours ago
+  1 │ CONTRIBUTING    │ File │  955 B │ 2 hours ago
   2 │ Gemfile            │ File │ 1.1 KB │ 2 hours ago
   3 │ Gemfile.lock       │ File │ 6.9 KB │ 2 hours ago
 ```
 
-Entering is similar to changing directories (as we saw with the [`cd`](/commands/docs/cd.md) command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the [`shells`](/commands/docs/shells.md) command to list the current directories we have active:
+Entering is similar to changing directories (as we saw with the [`cd`](/commands/docs/cd) command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the [`shells`](/commands/docs/shells) command to list the current directories we have active:
 
 ```nushell
 /home/jonathan/Source/book(main)> enter ../music
@@ -34,9 +34,9 @@ Entering is similar to changing directories (as we saw with the [`cd`](/commands
 ───┴────────┴───────────────────────────────
 ```
 
-The [`shells`](/commands/docs/shells.md) command shows us there are three shells: our original "nushell" source directory, "book" directory and "music" directory which is currently active.
+The [`shells`](/commands/docs/shells) command shows us there are three shells: our original "nushell" source directory, "book" directory and "music" directory which is currently active.
 
-We can jump between these shells with the [`n`](/commands/docs/n.md), [`p`](/commands/docs/p.md) and [`g`](/commands/docs/g.md) shortcuts, short for "next", "previous" and "goto":
+We can jump between these shells with the [`n`](/commands/docs/n), [`p`](/commands/docs/p) and [`g`](/commands/docs/g) shortcuts, short for "next", "previous" and "goto":
 
 ```nushell
 /home/jonathan/Source/music(main)> p
@@ -49,6 +49,6 @@ We can see the directory changing, but we're always able to get back to a previo
 
 ## Exiting the shell
 
-You can leave a shell you have [`enter`](/commands/docs/enter.md)ed using the `dexit` command.
+You can leave a shell you have [`enter`](/commands/docs/enter)ed using the `dexit` command.
 
 You can always quit Nu, even if multiple shells are active, using `exit`.

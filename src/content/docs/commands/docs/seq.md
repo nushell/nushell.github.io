@@ -82,5 +82,5 @@ sequence 1 to 5, then convert to a string with a pipe separator
 
 | name                                     | type    | usage                                 |
 | ---------------------------------------- | ------- | ------------------------------------- |
-| [`seq char`](/commands/docs/seq_char.md) | Builtin | Print a sequence of ASCII characters. |
-| [`seq date`](/commands/docs/seq_date.md) | Builtin | Print sequences of dates.             |
+| [`seq char`](/commands/docs/seq_char) | Builtin | Print a sequence of ASCII characters. |
+| [`seq date`](/commands/docs/seq_date) | Builtin | Print sequences of dates.             |

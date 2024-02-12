@@ -58,5 +58,5 @@ documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
 
 | name                                               | type    | usage                  |
 | -------------------------------------------------- | ------- | ---------------------- |
-| [`decode base64`](/commands/docs/decode_base64.md) | Builtin | Base64 decode a value. |
-| [`decode hex`](/commands/docs/decode_hex.md)       | Builtin | Hex decode a value.    |
+| [`decode base64`](/commands/docs/decode_base64) | Builtin | Base64 decode a value. |
+| [`decode hex`](/commands/docs/decode_hex)       | Builtin | Hex decode a value.    |

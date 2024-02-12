@@ -6,7 +6,7 @@ title: Advanced table workflows
 
 ### Merging tables of different size
 
-Examples shown in [`Working with tables`](../book/working_with_tables.md) work fine when our tables have equal amount of rows but what if we want to merge tables of different sizes?
+Examples shown in [`Working with tables`](../book/working_with_tables) work fine when our tables have equal amount of rows but what if we want to merge tables of different sizes?
 
 ```nushell
 let first = [[a b]; [1 2] [3 4]]
@@ -26,7 +26,7 @@ Output:
 ───┴───┴───┴───┴───
 ```
 
-Second row in columns `c` and `d` is empty because our `second` table only contained a single row so nushell has nothing to fill the remaining rows with. But what if we wanted the smaller table to 'wrap around' and keep filling the rows? For that we can use the [`group`](/commands/docs/group.md) command to split the larger table into subtables, merge each of them with the smaller table and then combine the merged tables together using [`flatten`](/commands/docs/flatten.md) command like this:
+Second row in columns `c` and `d` is empty because our `second` table only contained a single row so nushell has nothing to fill the remaining rows with. But what if we wanted the smaller table to 'wrap around' and keep filling the rows? For that we can use the [`group`](/commands/docs/group) command to split the larger table into subtables, merge each of them with the smaller table and then combine the merged tables together using [`flatten`](/commands/docs/flatten) command like this:
 
 ```nushell
 let first = [[a b]; [1 2] [3 4]]
@@ -79,7 +79,7 @@ Output:
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-Or just like last time we could use the [`reduce`](../book/docs/reduce.md) command to merge tables together recursively:
+Or just like last time we could use the [`reduce`](../book/docs/reduce) command to merge tables together recursively:
 
 ```nushell
 [$first_table $second_table $third_table]

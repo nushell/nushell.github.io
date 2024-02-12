@@ -17,7 +17,7 @@ feature: default
 <div class='command-title'>{{ $frontmatter.formats }}</div>
 
 ::: warning
-Command `from ics` resides in [plugin](/book/plugins.html) [`nu_plugin_formats`](https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats
+Command `from ics` resides in [plugin](/book/plugins) [`nu_plugin_formats`](https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats
 :::
 
 ## Signature

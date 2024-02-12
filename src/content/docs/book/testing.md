@@ -2,7 +2,7 @@
 title: Testing
 ---
 
-The [standard library](standard_library.md) has a unit testing framework to ensure that your code works as expected.
+The [standard library](standard_library) has a unit testing framework to ensure that your code works as expected.
 
 ## Quick start
 
@@ -110,7 +110,7 @@ Error:
    ╰────
 ```
 
-In general for base `assert` command it is encouraged to always provide the additional message to show what went wrong. If you cannot use any built-in assert command, you can create a custom one with passing the label for [`error make`](/commands/docs/error_make.md) for the `assert` command:
+In general for base `assert` command it is encouraged to always provide the additional message to show what went wrong. If you cannot use any built-in assert command, you can create a custom one with passing the label for [`error make`](/commands/docs/error_make) for the `assert` command:
 
 ```nushell
 def "assert even" [number: int] {

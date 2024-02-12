@@ -37,7 +37,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                             | type    | usage                                        |
 | ------------------------------------------------ | ------- | -------------------------------------------- |
-| [`overlay hide`](/commands/docs/overlay_hide.md) | Builtin | Hide an active overlay.                      |
-| [`overlay list`](/commands/docs/overlay_list.md) | Builtin | List all active overlays.                    |
-| [`overlay new`](/commands/docs/overlay_new.md)   | Builtin | Create an empty overlay.                     |
-| [`overlay use`](/commands/docs/overlay_use.md)   | Builtin | Use definitions from a module as an overlay. |
+| [`overlay hide`](/commands/docs/overlay_hide) | Builtin | Hide an active overlay.                      |
+| [`overlay list`](/commands/docs/overlay_list) | Builtin | List all active overlays.                    |
+| [`overlay new`](/commands/docs/overlay_new)   | Builtin | Create an empty overlay.                     |
+| [`overlay use`](/commands/docs/overlay_use)   | Builtin | Use definitions from a module as an overlay. |

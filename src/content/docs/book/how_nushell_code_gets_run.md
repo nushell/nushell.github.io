@@ -4,7 +4,7 @@ title: Community
 
 # How Nushell Code Gets Run
 
-As you probably noticed, Nushell behaves quite differently from other shells and dynamic languages. In [Thinking in Nu](thinking_in_nu.md#think-of-nushell-as-a-compiled-language), we advise you to _think of Nushell as a compiled language_ but we do not give much insight into why. This section hopefully fills the gap.
+As you probably noticed, Nushell behaves quite differently from other shells and dynamic languages. In [Thinking in Nu](/book/thinking_in_nu#think-of-nushell-as-a-compiled-language), we advise you to _think of Nushell as a compiled language_ but we do not give much insight into why. This section hopefully fills the gap.
 
 First, let's give a few example which you might intuitively try but which do not work in Nushell.
 
@@ -62,7 +62,7 @@ First, the source code is analyzed by the parser and converted into an intermedi
 
 ### Compiled Languages
 
-On the other side are languages that are typically "compiled", such as C, C++, or Rust. Assuming a simple ["hello world"](https://doc.rust-lang.org/stable/book/ch01-02-hello-world.html) in Rust
+On the other side are languages that are typically "compiled", such as C, C++, or Rust. Assuming a simple ["hello world"](https://doc.rust-lang.org/stable/book/ch01-02-hello-world) in Rust
 
 ```rust
 // main.rs
@@ -85,7 +85,7 @@ One big difference, however, between interpreted and compiled languages is that 
 
 ### Eval Function
 
-Most languages considered as "dynamic" or "interpreted" have an eval function, for example Python (it has two, [eval](https://docs.python.org/3/library/functions.html#eval) and [exec](https://docs.python.org/3/library/functions.html#exec)) or [Bash](https://linux.die.net/man/1/bash). It is used to take source code and interpret it within a running interpreter. This can get a bit confusing, so let's give a Python example:
+Most languages considered as "dynamic" or "interpreted" have an eval function, for example Python (it has two, [eval](https://docs.python.org/3/library/functions#eval) and [exec](https://docs.python.org/3/library/functions#exec)) or [Bash](https://linux.die.net/man/1/bash). It is used to take source code and interpret it within a running interpreter. This can get a bit confusing, so let's give a Python example:
 
 ```python
 # hello_eval.py
@@ -106,7 +106,7 @@ Of course, you can have more fun and try `eval("eval(\"print('Hello eval!')\")")
 
 You can see the eval function adds a new "meta" layer into the code execution. Instead of parsing the whole source code, then evaluating it, there is an extra parse-eval step during the evaluation. This means that the IR produced by the parser (whatever it is) can be further modified during the evaluation.
 
-We've seen that without `eval`, the difference between compiled and interpreted languages is actually not that big. This is exactly what we mean by [thinking of Nushell as a compiled language](https://www.nushell.sh/book/thinking_in_nu.html#think-of-nushell-as-a-compiled-language): Despite Nushell being an interpreted language, its lack of `eval` gives it characteristics and limitations typical for traditional compiled languages like C or Rust. We'll dig deeper into what it means in the next section.
+We've seen that without `eval`, the difference between compiled and interpreted languages is actually not that big. This is exactly what we mean by [thinking of Nushell as a compiled language](https://www.nushell.sh/book/thinking_in_nu#think-of-nushell-as-a-compiled-language): Despite Nushell being an interpreted language, its lack of `eval` gives it characteristics and limitations typical for traditional compiled languages like C or Rust. We'll dig deeper into what it means in the next section.
 
 ## Implications
 
@@ -138,13 +138,13 @@ This is the complete parse-eval sequence.
 
 Not having `eval`-like functionality prevents `eval`-related bugs from happening. Calling a non-existent function is 100% guaranteed parse-time error in Nushell. Furthermore, after the parse step, we have a deep insight into the program and we're 100% sure it is not going to change during evaluation. This trivially allows for powerful and reliable static analysis and IDE integration which is challenging to achieve with more dynamic languages. In general, you have more peace of mind when scaling Nushell programs to bigger applications.
 
-_Before going into examples, one note about the "dynamic" and "static" terminology. Stuff that happens at runtime (during evaluation, after parsing) is considered "dynamic". Stuff that happens before running (during parsing / compilation) is called "static". Languages that have more stuff (such as `eval`, type checking, etc.) happening at runtime are sometimes called "dynamic". Languages that analyze most of the information (type checking, [data ownership](https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership.html), etc.) before evaluating the program are sometimes called "static". The whole debate can get quite confusing, but for the purpose of this text, the main difference between a "static" and "dynamic" language is whether it has or has not the eval function._
+_Before going into examples, one note about the "dynamic" and "static" terminology. Stuff that happens at runtime (during evaluation, after parsing) is considered "dynamic". Stuff that happens before running (during parsing / compilation) is called "static". Languages that have more stuff (such as `eval`, type checking, etc.) happening at runtime are sometimes called "dynamic". Languages that analyze most of the information (type checking, [data ownership](https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership), etc.) before evaluating the program are sometimes called "static". The whole debate can get quite confusing, but for the purpose of this text, the main difference between a "static" and "dynamic" language is whether it has or has not the eval function._
 
 ## Common Mistakes
 
 By insisting on strict parse-evaluation separation, we lose much of a flexibility users expect from dynamic interpreted languages, especially other shells, such as bash, fish, zsh and others. This leads to the examples at the beginning of this page not working. Let's break them down one by one
 
-_Note: The following examples use [`source`](/commands/docs/source.md), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md), [`register`](/commands/docs/register.md) or [`source-env`](/commands/docs/source-env.md)._
+_Note: The following examples use [`source`](/commands/docs/source), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use), [`overlay use`](/commands/docs/overlay_use), [`hide`](/commands/docs/hide), [`register`](/commands/docs/register) or [`source-env`](/commands/docs/source-env)._
 
 ### 1. Sourcing a dynamic path
 
@@ -218,7 +218,7 @@ if ('spam/foo.nu' | path exists) {
 }
 ```
 
-This one is similar to the previous example. `cd spam` changes the directory _during evaluation_ but [`source-env`](/commands/docs/source-env.md) attempts to open and read `foo.nu` during parsing.
+This one is similar to the previous example. `cd spam` changes the directory _during evaluation_ but [`source-env`](/commands/docs/source-env) attempts to open and read `foo.nu` during parsing.
 
 ## REPL
 
@@ -242,7 +242,7 @@ means the following:
 
 1. Launch `nu`
 2. Type `print "Hello world!"`, press Enter
-3. Type [`ls`](/commands/docs/ls.md), press Enter
+3. Type [`ls`](/commands/docs/ls), press Enter
 
 Hopefully, that's clear. Now, when you press Enter, these things happen:
 
@@ -260,7 +260,7 @@ cd spam
 source-env foo.nu
 ```
 
-does not work because the directory will be changed _after_ [`source-env`](/commands/docs/source-env.md) attempts to read the file. Running these commands as separate REPL entries, however, works:
+does not work because the directory will be changed _after_ [`source-env`](/commands/docs/source-env) attempts to read the file. Running these commands as separate REPL entries, however, works:
 
 ```nushell
 > cd spam
@@ -279,13 +279,13 @@ To see why, let's break down what happens in the example:
 6. Evaluate `source-env foo.nu`
 7. Merge environment (including the current directory) into the Nushell state
 
-When [`source-env`](/commands/docs/source-env.md) tries to open `foo.nu` during the parsing in step 5., it can do so because the directory change from step 3. was merged into the Nushell state in step 4. and therefore is visible in the following parse-evaluation cycles.
+When [`source-env`](/commands/docs/source-env) tries to open `foo.nu` during the parsing in step 5., it can do so because the directory change from step 3. was merged into the Nushell state in step 4. and therefore is visible in the following parse-evaluation cycles.
 
 ### Parse-time Evaluation
 
 While it is impossible to add parsing into the evaluation, we can add _a little bit_ of evaluation into parsing. This feature has been added [only recently](https://github.com/nushell/nushell/pull/7436) and we're going to expand it as needed.
 
-One pattern that this unlocks is being able to [`source`](/commands/docs/source.md)/[`use`](/commands/docs/use.md)/etc. a path from a "variable". We've seen that
+One pattern that this unlocks is being able to [`source`](/commands/docs/source)/[`use`](/commands/docs/use)/etc. a path from a "variable". We've seen that
 
 ```nushell
 let some_path = $nu.default-config-dir
@@ -326,4 +326,4 @@ Compiled ("static") languages also tend to have a way to convey some logic at co
 
 ## Conclusion
 
-Nushell operates in a scripting language space typically dominated by "dynamic" "interpreted" languages, such as Python, bash, zsh, fish, etc. While Nushell is also "interpreted" in a sense that it runs the code immediately, instead of storing the intermediate representation (IR) to a disk, one feature sets it apart from the pack: It does not have an **eval function**. In other words, Nushell cannot parse code and manipulate its IR during evaluation. This gives Nushell one characteristic typical for "static" "compiled" languages, such as C or Rust: All the source code must be visible to the parser beforehand, just like all the source code must be available to a C or Rust compiler. For example, you cannot [`source`](/commands/docs/source.md) or [`use`](/commands/docs/use.md) a path computed "dynamically" (during evaluation). This is surprising for users of more traditional scripting languages, but it helps to _think of Nushell as a compiled language_.
+Nushell operates in a scripting language space typically dominated by "dynamic" "interpreted" languages, such as Python, bash, zsh, fish, etc. While Nushell is also "interpreted" in a sense that it runs the code immediately, instead of storing the intermediate representation (IR) to a disk, one feature sets it apart from the pack: It does not have an **eval function**. In other words, Nushell cannot parse code and manipulate its IR during evaluation. This gives Nushell one characteristic typical for "static" "compiled" languages, such as C or Rust: All the source code must be visible to the parser beforehand, just like all the source code must be available to a C or Rust compiler. For example, you cannot [`source`](/commands/docs/source) or [`use`](/commands/docs/use) a path computed "dynamically" (during evaluation). This is surprising for users of more traditional scripting languages, but it helps to _think of Nushell as a compiled language_.

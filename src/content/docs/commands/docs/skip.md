@@ -65,5 +65,5 @@ To skip specific numbered rows, try `drop nth`. To skip specific named columns, 
 
 | name                                         | type    | usage                                                 |
 | -------------------------------------------- | ------- | ----------------------------------------------------- |
-| [`skip until`](/commands/docs/skip_until.md) | Builtin | Skip elements of the input until a predicate is true. |
-| [`skip while`](/commands/docs/skip_while.md) | Builtin | Skip elements of the input while a predicate is true. |
+| [`skip until`](/commands/docs/skip_until) | Builtin | Skip elements of the input until a predicate is true. |
+| [`skip while`](/commands/docs/skip_while) | Builtin | Skip elements of the input while a predicate is true. |

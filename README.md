@@ -18,7 +18,7 @@ features:
 
 ### Nu works with existing data
 
-Nu speaks [JSON, YAML, SQLite, Excel, and more](/book/loading_data.html) out of the box. It's easy to bring data into a Nu pipeline whether it's in a file, a database, or a web API:
+Nu speaks [JSON, YAML, SQLite, Excel, and more](/book/loading_data) out of the box. It's easy to bring data into a Nu pipeline whether it's in a file, a database, or a web API:
 
 <img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
@@ -30,7 +30,7 @@ Nu operates on typed data, so it catches bugs that other shells don't. And when 
 
 ## Get Nu
 
-Nushell is available as [downloadable binaries](https://github.com/nushell/nushell/releases), [via your favourite package manager](https://repology.org/project/nushell/versions), in [a GitHub Action](https://github.com/marketplace/actions/setup-nu), and as [source code](https://github.com/nushell/nushell). Read [the detailed installation instructions](/book/installation.html) or dive right in:
+Nushell is available as [downloadable binaries](https://github.com/nushell/nushell/releases), [via your favourite package manager](https://repology.org/project/nushell/versions), in [a GitHub Action](https://github.com/marketplace/actions/setup-nu), and as [source code](https://github.com/nushell/nushell). Read [the detailed installation instructions](/book/installation) or dive right in:
 
 #### macOS / Linux:
 

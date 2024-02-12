@@ -65,9 +65,9 @@ search for string in command names, usage and search terms
 
 | name                                                 | type    | usage                                |
 | ---------------------------------------------------- | ------- | ------------------------------------ |
-| [`help aliases`](/commands/docs/help_aliases.md)     | Builtin | Show help on nushell aliases.        |
-| [`help commands`](/commands/docs/help_commands.md)   | Builtin | Show help on nushell commands.       |
-| [`help escapes`](/commands/docs/help_escapes.md)     | Builtin | Show help on nushell string escapes. |
-| [`help externs`](/commands/docs/help_externs.md)     | Builtin | Show help on nushell externs.        |
-| [`help modules`](/commands/docs/help_modules.md)     | Builtin | Show help on nushell modules.        |
-| [`help operators`](/commands/docs/help_operators.md) | Builtin | Show help on nushell operators.      |
+| [`help aliases`](/commands/docs/help_aliases)     | Builtin | Show help on nushell aliases.        |
+| [`help commands`](/commands/docs/help_commands)   | Builtin | Show help on nushell commands.       |
+| [`help escapes`](/commands/docs/help_escapes)     | Builtin | Show help on nushell string escapes. |
+| [`help externs`](/commands/docs/help_externs)     | Builtin | Show help on nushell externs.        |
+| [`help modules`](/commands/docs/help_modules)     | Builtin | Show help on nushell modules.        |
+| [`help operators`](/commands/docs/help_operators) | Builtin | Show help on nushell operators.      |

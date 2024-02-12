@@ -5,19 +5,19 @@ title: Control Flow
 Nushell provides several commands that help determine how different groups of code are executed. In programming languages this functionality is often referred to as _control flow_.
 
 :::tip
-One thing to note is that all of the commands discussed on this page use [blocks](/book/types_of_data.html#blocks). This means you can mutate [environmental variables](/book/environment.html) and other [mutable variables](http://localhost:8080/book/variables_and_subexpressions.html#mutable-variables) in them.
+One thing to note is that all of the commands discussed on this page use [blocks](/book/types_of_data#blocks). This means you can mutate [environmental variables](/book/environment) and other [mutable variables](/book/variables_and_subexpressions#mutable-variables) in them.
 :::
 
 ## Already covered
 
 Below we cover some commands related to control flow, but before we get to them, it's worthwhile to note there are several pieces of functionality and concepts that have already been covered in other sections that are also related to control flow or that can be used in the same situations. These include:
 
-- Pipes on the [pipelines](/book/pipelines.html) page.
-- Closures on the [types of data](/book/types_of_data.html) page.
-- Iteration commands on the [working with lists](/book/working_with_lists.html) page. Such as:
-  - [`each`](/commands/docs/each.html)
-  - [`where`](/commands/docs/where.html)
-  - [`reduce`](/commands/docs/reduce.html)
+- Pipes on the [pipelines](/book/pipelines) page.
+- Closures on the [types of data](/book/types_of_data) page.
+- Iteration commands on the [working with lists](/book/working_with_lists) page. Such as:
+  - [`each`](/commands/docs/each)
+  - [`where`](/commands/docs/where)
+  - [`reduce`](/commands/docs/reduce)
 
 ## Choice (Conditionals)
 
@@ -35,7 +35,7 @@ The choice/conditional commands are expressions so they return values, unlike th
 
 ### `if`
 
-[`if`](/commands/docs/if.html) evaluates branching [blocks](/book/types_of_data.html#blocks) of code based on the results of one or more conditions similar to the "if" functionality in other programming languages. For example:
+[`if`](/commands/docs/if) evaluates branching [blocks](/book/types_of_data#blocks) of code based on the results of one or more conditions similar to the "if" functionality in other programming languages. For example:
 
 ```nushell frame="terminal"
 if $x > 0 { 'positive' }
@@ -61,9 +61,9 @@ When the first condition is `true` (`$x` is greater than zero) it will return `'
 
 ### `match`
 
-[`match`](/commands/docs/match.html) executes one of several conditional branches based on the value given to match. You can also do some [pattern matching](/cookbook/pattern_matching.html) to unpack values in composite types like lists and records.
+[`match`](/commands/docs/match) executes one of several conditional branches based on the value given to match. You can also do some [pattern matching](/cookbook/pattern_matching) to unpack values in composite types like lists and records.
 
-Basic usage of [`match`](/commands/docs/match.html) can conditionally run different code like a "switch" statement common in other languages. [`match`](/commands/docs/match.html) checks if the value after the word [`match`](/commands/docs/match.html) is equal to the value at the start of each branch before the `=>` and if it does, it executes the code after that branch's `=>`.
+Basic usage of [`match`](/commands/docs/match) can conditionally run different code like a "switch" statement common in other languages. [`match`](/commands/docs/match) checks if the value after the word [`match`](/commands/docs/match) is equal to the value at the start of each branch before the `=>` and if it does, it executes the code after that branch's `=>`.
 
 ```nushell frame="terminal"
 match 3 {
@@ -78,7 +78,7 @@ match 3 {
 # three
 ```
 
-The branches can either return a single value or, as shown in the second branch, can return the results of a [block](/book/types_of_data.html#blocks).
+The branches can either return a single value or, as shown in the second branch, can return the results of a [block](/book/types_of_data#blocks).
 
 #### Catch all branch
 
@@ -95,11 +95,11 @@ $foo
 # other number
 ```
 
-(Reminder, [`match`](/commands/docs/match.html) is an expression which is why we can assign the result to `$foo` here).
+(Reminder, [`match`](/commands/docs/match) is an expression which is why we can assign the result to `$foo` here).
 
 #### Pattern Matching
 
-You can "unpack" values from types like lists and records with [pattern matching](/cookbook/pattern_matching.html). You can then assign variables to the parts you want to unpack and use them in the matched expressions.
+You can "unpack" values from types like lists and records with [pattern matching](/cookbook/pattern_matching). You can then assign variables to the parts you want to unpack and use them in the matched expressions.
 
 ```nushell frame="terminal"
 let foo = { name: 'bar', count: 7 }
@@ -129,7 +129,7 @@ match $foo {
 
 ---
 
-You can find more details about [`match`](/commands/docs/match.html) in the [pattern matching cookbook page](https://www.nushell.sh/cookbook/pattern_matching.html).
+You can find more details about [`match`](/commands/docs/match) in the [pattern matching cookbook page](/cookbook/pattern_matching).
 
 ## Loops
 
@@ -137,7 +137,7 @@ The loop commands allow you to repeat a block of code multiple times.
 
 ### Loops and other iterating commands
 
-The functionality of the loop commands is similar to commands that apply a closure over elements in a list or table like [`each`](/commands/docs/each.html) or [`where`](/commands/docs/where.html) and many times you can accomplish the same thing with either. For example:
+The functionality of the loop commands is similar to commands that apply a closure over elements in a list or table like [`each`](/commands/docs/each) or [`where`](/commands/docs/where) and many times you can accomplish the same thing with either. For example:
 
 ```nushell frame="terminal"
 mut result = []
@@ -158,13 +158,13 @@ $result
 ╰───┴───╯
 ```
 
-While it may be tempting to use loops if you're familiar with them in other languages, it is considered more in the [Nushell-style](book/thinking_in_nu.html) (idiomatic) to use commands that apply closures when you can solve a problem either way. The reason for this is because of a pretty big downside with using loops.
+While it may be tempting to use loops if you're familiar with them in other languages, it is considered more in the [Nushell-style](/book/thinking_in_nu) (idiomatic) to use commands that apply closures when you can solve a problem either way. The reason for this is because of a pretty big downside with using loops.
 
 #### Loop disadvantages
 
-The biggest downside of loops is that they are statements, unlike [`each`](/commands/docs/each.html) which is an expression. Expressions, like [`each`](/commands/docs/each.html) always result in some output value, however statements do not.
+The biggest downside of loops is that they are statements, unlike [`each`](/commands/docs/each) which is an expression. Expressions, like [`each`](/commands/docs/each) always result in some output value, however statements do not.
 
-This means that they don't work well with immutable variables and using immutable variables is considered a more [Nushell-style](/book/thinking_in_nu.html#variables-are-immutable). Without a mutable variable declared beforehand in the example in the previous section, it would be impossible to use [`for`](/commands/docs/each.html) to get the list of numbers with incremented numbers, or any value at all.
+This means that they don't work well with immutable variables and using immutable variables is considered a more [Nushell-style](/book/thinking_in_nu#variables-are-immutable). Without a mutable variable declared beforehand in the example in the previous section, it would be impossible to use [`for`](/commands/docs/each) to get the list of numbers with incremented numbers, or any value at all.
 
 Statements also don't work in Nushell pipelines which require some output. In fact Nushell will give an error if you try:
 
@@ -181,11 +181,11 @@ Error: nu::parser::unexpected_keyword
   help: 'for' keyword is not allowed in pipeline. Use 'for' by itself, outside of a pipeline.
 ```
 
-Because Nushell is very pipeline oriented, this means using expression commands like [`each`](/commands/docs/each.html) is typically more natural than loop statements.
+Because Nushell is very pipeline oriented, this means using expression commands like [`each`](/commands/docs/each) is typically more natural than loop statements.
 
 #### Loop advantages
 
-If loops have such a big disadvantage, why do they exist? Well, one reason is that closures, like [`each`](/commands/docs/each.html) uses, can't modify mutable variables in the surrounding environment. If you try to modify a mutable variable in a closure you will get an error:
+If loops have such a big disadvantage, why do they exist? Well, one reason is that closures, like [`each`](/commands/docs/each) uses, can't modify mutable variables in the surrounding environment. If you try to modify a mutable variable in a closure you will get an error:
 
 ```nushell frame="terminal"
 mut foo = []
@@ -200,7 +200,7 @@ Error: nu::parser::expected_keyword
    ╰────
 ```
 
-If you modify an environmental variable in a closure, you can, but it will only modify it within the scope of the closure, leaving it unchanged everywhere else. Loops, however, use [blocks](/book/types_of_data.html#blocks) which means they can modify a regular mutable variable or an environmental variable within the larger scope.
+If you modify an environmental variable in a closure, you can, but it will only modify it within the scope of the closure, leaving it unchanged everywhere else. Loops, however, use [blocks](/book/types_of_data#blocks) which means they can modify a regular mutable variable or an environmental variable within the larger scope.
 
 ```nushell frame="terminal"
 mut result = []
@@ -215,7 +215,7 @@ $result
 
 ### `for`
 
-[`for`](/commands/docs/for.html) loops over a range or collection like a list or a table.
+[`for`](/commands/docs/for) loops over a range or collection like a list or a table.
 
 ```nushell frame="terminal"
 for x in [1 2 3] { $x * $x | print }
@@ -226,14 +226,14 @@ for x in [1 2 3] { $x * $x | print }
 
 #### Expression command alternatives
 
-- [`each`](/commands/docs/each.html)
-- [`par-each`](/commands/docs/par-each.html)
-- [`where`](/commands/docs/where.html)/[`filter`](/commands/docs/filter.html)
-- [`reduce`](/commands/docs/reduce.html)
+- [`each`](/commands/docs/each)
+- [`par-each`](/commands/docs/par-each)
+- [`where`](/commands/docs/where)/[`filter`](/commands/docs/filter)
+- [`reduce`](/commands/docs/reduce)
 
 ### `while`
 
-[`while`](/commands/docs/while.html) loops the same block of code until the given condition is `false`.
+[`while`](/commands/docs/while) loops the same block of code until the given condition is `false`.
 
 ```nushell frame="terminal"
 mut x = 0; while $x < 10 { $x = $x + 1 }; $x
@@ -244,14 +244,14 @@ mut x = 0; while $x < 10 { $x = $x + 1 }; $x
 
 The "until" and other "while" commands
 
-- [`take until`](/commands/docs/take_until.html)
-- [`take while`](/commands/docs/take_while.html)
-- [`skip until`](/commands/docs/skip_until.html)
-- [`skip while`](/commands/docs/skip_while.html)
+- [`take until`](/commands/docs/take_until)
+- [`take while`](/commands/docs/take_while)
+- [`skip until`](/commands/docs/skip_until)
+- [`skip while`](/commands/docs/skip_while)
 
 ### `loop`
 
-[`loop`](/commands/docs/loop.html) loops a block infinitely. You can use [`break`](/commands/docs/break.html) (as described in the next section) to limit how many times it loops. It can also be handy for continuously running scripts, like an interactive prompt.
+[`loop`](/commands/docs/loop) loops a block infinitely. You can use [`break`](/commands/docs/break) (as described in the next section) to limit how many times it loops. It can also be handy for continuously running scripts, like an interactive prompt.
 
 ```nushell frame="terminal"
 mut x = 0; loop { if $x > 10 { break }; $x = $x + 1 }; $x
@@ -260,7 +260,7 @@ mut x = 0; loop { if $x > 10 { break }; $x = $x + 1 }; $x
 
 ### `break`
 
-[`break`](/commands/docs/break.html) will stop executing the code in a loop and resume execution after the loop. Effectively "break"ing out of the loop.
+[`break`](/commands/docs/break) will stop executing the code in a loop and resume execution after the loop. Effectively "break"ing out of the loop.
 
 ```nushell frame="terminal"
 for x in 1..10 { if $x > 3 { break }; print $x }
@@ -271,7 +271,7 @@ for x in 1..10 { if $x > 3 { break }; print $x }
 
 ### `continue`
 
-[`continue`](/commands/docs/continue.html) will stop execution of the current loop, skipping the rest of the code in the loop, and will go to the next loop. If the loop would normally end, like if [`for`](/commands/docs/for.html) has iterated through all the given elements, or if [`while`](/commands/docs/while.html)'s condition is now false, it won't loop again and execution will continue after the loop block.
+[`continue`](/commands/docs/continue) will stop execution of the current loop, skipping the rest of the code in the loop, and will go to the next loop. If the loop would normally end, like if [`for`](/commands/docs/for) has iterated through all the given elements, or if [`while`](/commands/docs/while)'s condition is now false, it won't loop again and execution will continue after the loop block.
 
 ```nushell frame="terminal"
 mut x = -1; while $x <= 6 { $x = $x + 1; if $x mod 3 == 0 { continue }; print $x }
@@ -286,7 +286,7 @@ mut x = -1; while $x <= 6 { $x = $x + 1; if $x mod 3 == 0 { continue }; print $x
 
 ### `error make`
 
-[`error make`](/commands/docs/error_make.html) creates an error that stops execution of the code and any code that called it, until either it is handled by a [`try`](/commands/docs/try.html) block, or it ends the script and outputs the error message. This functionality is the same as "exceptions" in other languages.
+[`error make`](/commands/docs/error_make) creates an error that stops execution of the code and any code that called it, until either it is handled by a [`try`](/commands/docs/try) block, or it ends the script and outputs the error message. This functionality is the same as "exceptions" in other languages.
 
 ```nushell frame="terminal"
 print 'printed'; error make { msg: 'Some error info' }; print 'unprinted'
@@ -301,11 +301,11 @@ Error:   × Some error info
 
 The record passed to it provides some information to the code that catches it or the resulting error message.
 
-You can find more information about [`error make`](/commands/docs/error_make.html) and error concepts on the [Creating your own errors page](/book/creating_errors.html).
+You can find more information about [`error make`](/commands/docs/error_make) and error concepts on the [Creating your own errors page](/book/creating_errors).
 
 ### `try`
 
-[`try`](/commands/docs/try.html) will catch errors created anywhere in the [`try`](/commands/docs/try.html)'s code block and resume execution of the code after the block.
+[`try`](/commands/docs/try) will catch errors created anywhere in the [`try`](/commands/docs/try)'s code block and resume execution of the code after the block.
 
 ```nushell frame="terminal"
 try { error make { msg: 'Some error info' }}; print 'Resuming'
@@ -321,7 +321,7 @@ try { 1 / 0 }; print 'Resuming'
 
 The resulting value will be `nothing` if an error occurs and the returned value of the block if an error did not occur.
 
-If you include a `catch` block after the [`try`](/commands/docs/try.html) block, it will execute the code in the `catch` block if an error occurred in the [`try`](/commands/docs/try.html) block.
+If you include a `catch` block after the [`try`](/commands/docs/try) block, it will execute the code in the `catch` block if an error occurred in the [`try`](/commands/docs/try) block.
 
 ```nushell frame="terminal"
 try { 1 / 0 } catch { 'An error happened!' } | $in ++ ' And now I am resuming.'
@@ -334,7 +334,7 @@ It will not execute the `catch` block if an error did not occur.
 
 ### `return`
 
-[`return`](/commands/docs/return.html) Ends a closure or command early where it is called, without running the rest of the command/closure, and returns the given value. Not often necessary since the last value in a closure or command is also returned, but it can sometimes be convenient.
+[`return`](/commands/docs/return) Ends a closure or command early where it is called, without running the rest of the command/closure, and returns the given value. Not often necessary since the last value in a closure or command is also returned, but it can sometimes be convenient.
 
 ```nushell frame="terminal"
 def 'positive-check' [it] {

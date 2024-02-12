@@ -412,9 +412,9 @@ If you want to go back to the normal left prompt, you'll have to unset `TRANSIEN
 > hide-env TRANSIENT_PROMPT_COMMAND
 ```
 
-## `LS_COLORS` colors for the [`ls`](/commands/docs/ls.md) command
+## `LS_COLORS` colors for the [`ls`](/commands/docs/ls) command
 
-Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the color of file types when you do a [`ls`](/commands/docs/ls.md). For instance, you can make directories one color, _.md markdown files another color, _.toml files yet another color, etc. There are a variety of ways to color your file types.
+Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the color of file types when you do a [`ls`](/commands/docs/ls). For instance, you can make directories one color, _.md markdown files another color, _.toml files yet another color, etc. There are a variety of ways to color your file types.
 
 There's an exhaustive list [here](https://github.com/trapd00r/LS_COLORS), which is overkill, but gives you an rudimentary understanding of how to create a ls_colors file that `dircolors` can turn into a `LS_COLORS` environment variable.
 
@@ -561,4 +561,4 @@ $env.config = {
 
 Reedline (Nu’s line editor) style is not using the `color_config` key.
 Instead, each menu has its own style to be configured separately.
-See the [section dedicated to Reedline’s menus configuration](line_editor.md#menus) to learn more on this.
+See the [section dedicated to Reedline’s menus configuration](/book/line_editor#menus) to learn more on this.

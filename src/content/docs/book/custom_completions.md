@@ -2,7 +2,7 @@
 title: Custom completions
 ---
 
-Custom completions allow you to mix together two features of Nushell: custom commands and completions. With them, you're able to create commands that handle the completions for positional parameters and flag parameters. These custom completions work both for [custom commands](custom_commands.md) and [known external, or `extern`, commands](externs.md).
+Custom completions allow you to mix together two features of Nushell: custom commands and completions. With them, you're able to create commands that handle the completions for positional parameters and flag parameters. These custom completions work both for [custom commands](custom_commands) and [known external, or `extern`, commands](externs).
 
 There are two parts to a custom command: the command that handles a completion and attaching this command to the type of another command using `@`.
 
@@ -17,7 +17,7 @@ Let's look at an example:
 cat                 dog                 eel
 ```
 
-In the first line, we create a custom command that will return a list of three different animals. These are the values we'd like to use in the completion. Once we've created this command, we can now use it to provide completions for other custom commands and [`extern`](/commands/docs/extern.md)s.
+In the first line, we create a custom command that will return a list of three different animals. These are the values we'd like to use in the completion. Once we've created this command, we can now use it to provide completions for other custom commands and [`extern`](/commands/docs/extern)s.
 
 In the second line, we use `string@animals`. This tells Nushell two things: the shape of the argument for type-checking and the custom completion to use if the user wants to complete values at that position.
 
@@ -87,9 +87,9 @@ The dog is named Enzo
 
 On the second line, once we press the `<tab>` key, the argument `"my-command dog"` is passed to the `animal-names` command as context.
 
-## Custom completion and [`extern`](/commands/docs/extern.md)
+## Custom completion and [`extern`](/commands/docs/extern)
 
-A powerful combination is adding custom completions to [known `extern` commands](externs.md). These work the same way as adding a custom completion to a custom command: by creating the custom completion and then attaching it with a `@` to the type of one of the positional or flag arguments of the `extern`.
+A powerful combination is adding custom completions to [known `extern` commands](externs). These work the same way as adding a custom completion to a custom command: by creating the custom completion and then attaching it with a `@` to the type of one of the positional or flag arguments of the `extern`.
 
 If you look closely at the examples in the default config, you'll see this:
 
@@ -140,7 +140,7 @@ only the value, i.e. "5c2464" or "f3a377", will be used in the command arguments
 
 External completers can also be integrated, instead of relying solely on Nushell ones.
 
-For this, set the `external_completer` field in `config.nu` to a [closure](types_of_data.md#closures) which will be evaluated if no Nushell completions were found.
+For this, set the `external_completer` field in `config.nu` to a [closure](types_of_data#closures) which will be evaluated if no Nushell completions were found.
 
 ```nushell
 > $env.config.completions.external = {
@@ -168,4 +168,4 @@ let carapace_completer = {|spans|
 }
 ```
 
-[More examples of custom completers can be found in the cookbook](../cookbook/external_completers.md).
+[More examples of custom completers can be found in the cookbook](../cookbook/external_completers).

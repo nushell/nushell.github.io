@@ -130,7 +130,7 @@ let foo = 'C:\Program Files\exiftool.exe'
 ^$foo
 ```
 
-You can also use the [`run-external`](/commands/docs/run-external.md) command for this purpose, which provides additional flags and options.
+You can also use the [`run-external`](/commands/docs/run-external) command for this purpose, which provides additional flags and options.
 
 ## Appending and Prepending to strings
 
@@ -200,7 +200,7 @@ const x = $"(2kb)"
 
 ## Splitting strings
 
-The [`split row`](/commands/docs/split_row.md) command creates a list from a string based on a delimiter.
+The [`split row`](/commands/docs/split_row) command creates a list from a string based on a delimiter.
 
 ```nushell frame="terminal"
 "red,green,blue" | split row ","
@@ -211,7 +211,7 @@ The [`split row`](/commands/docs/split_row.md) command creates a list from a str
 ╰───┴───────╯
 ```
 
-The [`split column`](/commands/docs/split_column.md) command will create a table from a string based on a delimiter. This applies generic column names to the table.
+The [`split column`](/commands/docs/split_column) command will create a table from a string based on a delimiter. This applies generic column names to the table.
 
 ```nushell frame="terminal"
 "red,green,blue" | split column ","
@@ -222,7 +222,7 @@ The [`split column`](/commands/docs/split_column.md) command will create a table
 ╰───┴─────────┴─────────┴─────────╯
 ```
 
-Finally, the [`split chars`](/commands/docs/split_chars.md) command will split a string into a list of characters.
+Finally, the [`split chars`](/commands/docs/split_chars) command will split a string into a list of characters.
 
 ```nushell frame="terminal"
 'aeiou' | split chars
@@ -235,11 +235,11 @@ Finally, the [`split chars`](/commands/docs/split_chars.md) command will split a
 ╰───┴───╯
 ```
 
-## The [`str`](/commands/docs/str.md) command
+## The [`str`](/commands/docs/str) command
 
-Many string functions are subcommands of the [`str`](/commands/docs/str.md) command. You can get a full list using `help str`.
+Many string functions are subcommands of the [`str`](/commands/docs/str) command. You can get a full list using `help str`.
 
-For example, you can look if a string contains a particular substring using [`str contains`](/commands/docs/str_contains.md):
+For example, you can look if a string contains a particular substring using [`str contains`](/commands/docs/str_contains):
 
 ```nushell frame="terminal"
 "hello world" | str contains "o wo"
@@ -250,7 +250,7 @@ For example, you can look if a string contains a particular substring using [`st
 
 ### Trimming strings
 
-You can trim the sides of a string with the [`str trim`](/commands/docs/str_trim.md) command. By default, the [`str trim`](/commands/docs/str_trim.md) commands trims whitespace from both sides of the string. For example:
+You can trim the sides of a string with the [`str trim`](/commands/docs/str_trim) command. By default, the [`str trim`](/commands/docs/str_trim) commands trims whitespace from both sides of the string. For example:
 
 ```nushell frame="terminal"
 '       My   string   ' | str trim
@@ -283,7 +283,7 @@ Substrings are slices of a string. They have a startpoint and an endpoint. Here'
 
 ### String padding
 
-With the [`fill`](/commands/docs/fill.md) command you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
+With the [`fill`](/commands/docs/fill) command you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
 
 ```nushell frame="terminal"
 '1234' | fill -a right -c '0' -w 10
@@ -294,7 +294,7 @@ With the [`fill`](/commands/docs/fill.md) command you can add padding to a strin
 
 ### Reversing strings
 
-This can be done easily with the [`str reverse`](/commands/docs/str_reverse.md) command.
+This can be done easily with the [`str reverse`](/commands/docs/str_reverse) command.
 
 ```nushell frame="terminal"
 'Nushell' | str reverse
@@ -309,7 +309,7 @@ This can be done easily with the [`str reverse`](/commands/docs/str_reverse.md) 
 
 ## String parsing
 
-With the [`parse`](/commands/docs/parse.md) command you can parse a string into columns. For example:
+With the [`parse`](/commands/docs/parse) command you can parse a string into columns. For example:
 
 ```nushell frame="terminal"
 'Nushell 0.80' | parse '{shell} {version}'
@@ -326,7 +326,7 @@ With the [`parse`](/commands/docs/parse.md) command you can parse a string into 
 ╰───┴──────────┴────────────╯
 ```
 
-If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use [`from csv`](/commands/docs/from_csv.md), [`from tsv`](/commands/docs/from_tsv.md) or [`from ssv`](/commands/docs/from_ssv.md):
+If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use [`from csv`](/commands/docs/from_csv), [`from tsv`](/commands/docs/from_tsv) or [`from ssv`](/commands/docs/from_ssv):
 
 ```nushell frame="terminal"
 "acronym,long\nAPL,A Programming Language" | from csv
@@ -378,16 +378,16 @@ There are multiple ways to convert strings to and from other types.
 
 ### To string
 
-1. Using [`into string`](/commands/docs/into_string.md). e.g. `123 | into string`
+1. Using [`into string`](/commands/docs/into_string). e.g. `123 | into string`
 2. Using string interpolation. e.g. `$'(123)'`
 
 ### From string
 
-1. Using [`into <type>`](/commands/docs/into.md). e.g. `'123' | into int`
+1. Using [`into <type>`](/commands/docs/into). e.g. `'123' | into int`
 
 ## Coloring strings
 
-You can color strings with the [`ansi`](/commands/docs/ansi.md) command. For example:
+You can color strings with the [`ansi`](/commands/docs/ansi) command. For example:
 
 ```nushell frame="terminal"
 $'(ansi purple_bold)This text is a bold purple!(ansi reset)'

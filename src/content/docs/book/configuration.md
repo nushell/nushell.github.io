@@ -62,7 +62,7 @@ These are some important variables to look at for Nushell-specific settings:
 
 ### Configurations with built-in commands
 
-Starting with release v0.64 of Nushell, we have introduced two new commands([`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/docs/config_env.md)) which help you quickly edit nu configurations with your preferred text editor/IDE
+Starting with release v0.64 of Nushell, we have introduced two new commands([`config nu`](/commands/docs/config_nu) and [`config env`](/commands/docs/config_env)) which help you quickly edit nu configurations with your preferred text editor/IDE
 
 Nushell follows underneath orders to locate the editor:
 
@@ -74,7 +74,7 @@ Note: Previous versions of Nushell were launching `notepad` on windows, otherwis
 
 ### Color Config section
 
-You can learn more about setting up colors and theming in the [associated chapter](coloring_and_theming.md).
+You can learn more about setting up colors and theming in the [associated chapter](/book/coloring_and_theming).
 
 ## Remove Welcome Message
 
@@ -130,9 +130,9 @@ There is an environment variable `$nu.loginshell-path` containing the path to th
 
 ### macOS: Keeping `/usr/bin/open` as `open`
 
-Some tools (e.g. Emacs) rely on an [`open`](/commands/docs/open.md) command to open files on Mac.
-As Nushell has its own [`open`](/commands/docs/open.md) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
-One way to work around this is to define a custom command for Nushell's [`open`](/commands/docs/open.md) and create an alias for the system's [`open`](/commands/docs/open.md) in your `config.nu` file like this:
+Some tools (e.g. Emacs) rely on an [`open`](/commands/docs/open) command to open files on Mac.
+As Nushell has its own [`open`](/commands/docs/open) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
+One way to work around this is to define a custom command for Nushell's [`open`](/commands/docs/open) and create an alias for the system's [`open`](/commands/docs/open) in your `config.nu` file like this:
 
 ```nushell
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
@@ -140,19 +140,19 @@ alias open = ^open
 ```
 
 The `^` symbol _escapes_ the Nushell `open` command, which invokes the operating system's `open` command.
-For more about escape and `^` see the [chapter about escapes](escaping.md).
+For more about escape and `^` see the [chapter about escapes](/book/escaping).
 
 ## PATH configuration
 
-In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use `$env.<var> = <val>` and [`append`](/commands/docs/append.md) in `env.nu`:
+In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use `$env.<var> = <val>` and [`append`](/commands/docs/append) in `env.nu`:
 
 ```nushell
 $env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
 ```
 
-This will append `/some/path` to the end of PATH; you can also use [`prepend`](/commands/docs/prepend.md) to add entries to the start of PATH.
+This will append `/some/path` to the end of PATH; you can also use [`prepend`](/commands/docs/prepend) to add entries to the start of PATH.
 
-Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.html#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append.md)/[`prepend`](/commands/docs/prepend.md) directly.
+Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](/book/environment#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append)/[`prepend`](/commands/docs/prepend) directly.
 
 To prepend a new path only if not already listed, one can add to `env.nu`:
 

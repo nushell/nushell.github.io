@@ -145,10 +145,24 @@ export default defineConfig({
                 { label: "Explore", link: "/book/explore/" },
               ],
             },
-            {
-              label: "Reference",
-              autogenerate: { directory: "reference" },
-            },
+          ],
+        },
+        {
+          label: "Command Reference",
+          link: "/commands/",
+        },
+        {
+          label: "Cookbook",
+          items: [
+            { label: "Introduction", link: "/introduction/" },
+            { label: "Getting Started", link: "/book/getting_started/" },
+          ],
+        },
+        {
+          label: "Blog",
+          items: [
+            { label: "Introduction", link: "/introduction/" },
+            { label: "Getting Started", link: "/book/getting_started/" },
           ],
         },
       ],

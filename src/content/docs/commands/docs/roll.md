@@ -38,7 +38,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                         | type    | usage                              |
 | -------------------------------------------- | ------- | ---------------------------------- |
-| [`roll down`](/commands/docs/roll_down.md)   | Builtin | Roll table rows down.              |
-| [`roll left`](/commands/docs/roll_left.md)   | Builtin | Roll record or table columns left. |
-| [`roll right`](/commands/docs/roll_right.md) | Builtin | Roll table columns right.          |
-| [`roll up`](/commands/docs/roll_up.md)       | Builtin | Roll table rows up.                |
+| [`roll down`](/commands/docs/roll_down)   | Builtin | Roll table rows down.              |
+| [`roll left`](/commands/docs/roll_left)   | Builtin | Roll record or table columns left. |
+| [`roll right`](/commands/docs/roll_right) | Builtin | Roll table columns right.          |
+| [`roll up`](/commands/docs/roll_up)       | Builtin | Roll table rows up.                |

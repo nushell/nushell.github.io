@@ -12,9 +12,9 @@ A pipeline is composed of three parts: the input, the filter, and the output.
 open "Cargo.toml" | inc package.version --minor | save "Cargo_new.toml"
 ```
 
-The first command, `open "Cargo.toml"`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with. Commands like [`ls`](/commands/docs/ls.md) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
+The first command, `open "Cargo.toml"`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with. Commands like [`ls`](/commands/docs/ls) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
 
-The second command, `inc package.version --minor`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the [`inc`](/commands/docs/inc.md) command in our example), or they may do another operation, like logging, as the values pass through.
+The second command, `inc package.version --minor`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the [`inc`](/commands/docs/inc) command in our example), or they may do another operation, like logging, as the values pass through.
 
 The last command, `save "Cargo_new.toml"`, is an output (sometimes called a "sink"). An output takes input from the pipeline and does some final operation on it. In our example, we save what comes through the pipeline to a file as the final step. Other types of output commands may take the values and view them for the user.
 
@@ -37,7 +37,7 @@ If a pipeline is getting a bit long for one line, you can enclose it within `(` 
 )
 ```
 
-Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
+Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions#subexpressions)
 
 ## Semicolons
 
@@ -54,7 +54,7 @@ Here, semicolons are used in conjunction with pipelines. When a semicolon is use
 
 ## Working with external commands
 
-Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data.md)), but what about commands outside of Nu? Let's look at some examples of working with external commands:
+Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data)), but what about commands outside of Nu? Let's look at some examples of working with external commands:
 
 `internal_command | external_command`
 
@@ -62,7 +62,7 @@ Data will flow from the internal_command to the external_command. This data will
 
 `external_command | internal_command`
 
-Data coming from an external command into Nu will come in as bytes that Nushell will try to automatically convert to UTF-8 text. If successful, a stream of text data will be sent to internal_command. If unsuccessful, a stream of binary data will be sent to internal command. Commands like [`lines`](/commands/docs/lines.md) help make it easier to bring in data from external commands, as it gives discrete lines of data to work with.
+Data coming from an external command into Nu will come in as bytes that Nushell will try to automatically convert to UTF-8 text. If successful, a stream of text data will be sent to internal_command. If unsuccessful, a stream of binary data will be sent to internal command. Commands like [`lines`](/commands/docs/lines) help make it easier to bring in data from external commands, as it gives discrete lines of data to work with.
 
 `external_command_1 | external_command_2`
 
@@ -70,7 +70,7 @@ Nu works with data piped between two external commands in the same way as other 
 
 ## Behind the scenes
 
-You may have wondered how we see a table if [`ls`](/commands/docs/ls.md) is an input and not an output. Nu adds this output for us automatically using another command called [`table`](/commands/docs/table.md). The [`table`](/commands/docs/table.md) command is appended to any pipeline that doesn't have an output. This allows us to see the result.
+You may have wondered how we see a table if [`ls`](/commands/docs/ls) is an input and not an output. Nu adds this output for us automatically using another command called [`table`](/commands/docs/table). The [`table`](/commands/docs/table) command is appended to any pipeline that doesn't have an output. This allows us to see the result.
 
 In effect, the command:
 
@@ -120,14 +120,14 @@ ls /usr/share/nvim/runtime/
 ╰────┴───────────────────────────────────────┴──────┴─────────┴───────────────╯
 ```
 
-You decided to use `grep` and [pipe](https://www.nushell.sh/book/pipelines.html) the result to external `^ls`
+You decided to use `grep` and [pipe](https://www.nushell.sh/book/pipelines) the result to external `^ls`
 
 ```nushell frame="terminal"
 ls /usr/share/nvim/runtime/ | get name | ^grep tutor | ^ls -la $in
 ls: cannot access ''$'\342\224\202'' 32 '$'\342\224\202'' /usr/share/nvim/runtime/tutor        '$'\342\224\202\n': No such file or directory
 ```
 
-What's wrong? Nushell renders lists and tables (by adding a border with characters like `╭`,`─`,`┬`,`╮`) before piping them as text to external commands. If that's not the behavior you want, you must explicitly convert the data to a string before piping it to an external. For example, you can do so with [`to text`](/commands/docs/to_text.md):
+What's wrong? Nushell renders lists and tables (by adding a border with characters like `╭`,`─`,`┬`,`╮`) before piping them as text to external commands. If that's not the behavior you want, you must explicitly convert the data to a string before piping it to an external. For example, you can do so with [`to text`](/commands/docs/to_text):
 
 ```nushell frame="terminal"
 ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^ls -la $in
@@ -138,7 +138,7 @@ drwxr-xr-x@  4 pengs  admin   128 14 Nov 13:42 en
 -rw-r--r--@  1 pengs  admin  1191 14 Nov 13:42 tutor.tutor.json
 ```
 
-(Actually, for this simple usage you can just use [`find`](/commands/docs/find.md))
+(Actually, for this simple usage you can just use [`find`](/commands/docs/find))
 
 ```nushell frame="terminal"
 ls /usr/share/nvim/runtime/ | get name | find tutor | ^ls -al $in
@@ -167,7 +167,7 @@ For instance, the above example sets the `$env.config.table.mode` configuration 
 do { $env.config.table.mode = none; ls } | table
 ```
 
-Because Nushell `$env` variables are [scoped](https://www.nushell.sh/book/environment.html#scoping), this means that the `table` command in the example is not affected by the
+Because Nushell `$env` variables are [scoped](https://www.nushell.sh/book/environment#scoping), this means that the `table` command in the example is not affected by the
 environment modification inside the `do` block and the data will not be shown with the applied configuration.
 
 When displaying data early is desired, it is possible to explicitly apply `| table` inside the scope, or use the `print` command.

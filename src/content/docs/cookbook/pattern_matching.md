@@ -6,7 +6,7 @@ title: Pattern Matching
 
 ## Using the `match` keyword
 
-Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands/docs/match.html#frontmatter-title-for-core) keyword. Usually this is used as a slightly more ergonomic version of `if-else` statements if you have many branches
+Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands/docs/match#frontmatter-title-for-core) keyword. Usually this is used as a slightly more ergonomic version of `if-else` statements if you have many branches
 
 ```nushell
 [black red yellow green purple blue indigo] | each {|c|
@@ -71,7 +71,7 @@ Output:
 
 ## Pattern matching on types
 
-You can use the [`describe`](https://www.nushell.sh/commands/docs/describe.html) command to get more info about the types of values. For example:
+You can use the [`describe`](https://www.nushell.sh/commands/docs/describe) command to get more info about the types of values. For example:
 
 ```nushell
 {one: 1 two: 2} | describe

@@ -34,7 +34,7 @@ Output:
 ╰──────────────────┴───────────────╯
 ```
 
-The output for `jq` is a JSON string whereas in `nu` it's a Nushell value. To get the output of any pipeline as JSON, simply apply a [`to json`](/commands/docs/to_json.html) at the end:
+The output for `jq` is a JSON string whereas in `nu` it's a Nushell value. To get the output of any pipeline as JSON, simply apply a [`to json`](/commands/docs/to_json) at the end:
 
 ```nushell
 '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
@@ -57,7 +57,7 @@ Output:
 ]
 ```
 
-When your JSON data is stored in a file, you can use [open](/commands/docs/open.html) instead of [from json](/commands/docs/from_json.html).
+When your JSON data is stored in a file, you can use [open](/commands/docs/open) instead of [from json](/commands/docs/from_json).
 
 Before we get into the examples, the following glossary can help familiarise yourself with how Nushell data types map to jq data types.
 
@@ -345,7 +345,7 @@ Output:
 ╰───┴───╯
 ```
 
-Alternatively, you can use [`compact`](/commands/docs/compact.html):
+Alternatively, you can use [`compact`](/commands/docs/compact):
 
 ```nushell
 '[1, null, 3, null, 5]'
@@ -377,7 +377,7 @@ Output:
 Name: Alice, Name: 30
 ```
 
-This approach is a bit involved but if we [install the full version](https://github.com/nushell/nushell/releases) which includes the _extra commands_ we can benefit from the [`format`](/commands/docs/format.html):
+This approach is a bit involved but if we [install the full version](https://github.com/nushell/nushell/releases) which includes the _extra commands_ we can benefit from the [`format`](/commands/docs/format):
 
 ```nushell
 '{"name": "Alice", "age": 30}'
@@ -449,7 +449,7 @@ echo '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}' |
 jq -r '.data[].values[] | select(. > 3)'
 ```
 
-In `nu` we can take advantage of the fact that [a list of records is in fact a table](/book/types_of_data.html#tables) and simply do:
+In `nu` we can take advantage of the fact that [a list of records is in fact a table](/book/types_of_data#tables) and simply do:
 
 ```nushell
 '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}'
@@ -583,7 +583,7 @@ In `nu` we do:
 | group-by --to-table category
 ```
 
-Note that `--to-table` was added to Nushell in [version 0.87.0](blog/2023-11-14-nushell_0_87_0.html). Before that you had to [`transpose`](/commands/docs/transpose) the record resulting from `group-by` which was substantially slower for large sets.
+Note that `--to-table` was added to Nushell in [version 0.87.0](blog/2023-11-14-nushell_0_87_0). Before that you had to [`transpose`](/commands/docs/transpose) the record resulting from `group-by` which was substantially slower for large sets.
 
 Output:
 
@@ -738,7 +738,7 @@ Note that if what you are after is computing a histogram, you can benefit from t
 
 ## Appendix: Custom commands
 
-This section provides the implementation of the custom commands used in this cookbook. Note that they are illustrative and in no way optimised for large inputs. If you are interested in that, [plugins](/book/plugins.html) will likely be the answer as they can be written in general purpose languages such as Rust or Python.
+This section provides the implementation of the custom commands used in this cookbook. Note that they are illustrative and in no way optimised for large inputs. If you are interested in that, [plugins](/book/plugins) will likely be the answer as they can be written in general purpose languages such as Rust or Python.
 
 ```nushell
 > use toolbox.nu *

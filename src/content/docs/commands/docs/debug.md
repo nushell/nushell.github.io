@@ -66,4 +66,4 @@ Debug print a table
 
 | name                                         | type    | usage                     |
 | -------------------------------------------- | ------- | ------------------------- |
-| [`debug info`](/commands/docs/debug_info.md) | Builtin | View process memory info. |
+| [`debug info`](/commands/docs/debug_info) | Builtin | View process memory info. |

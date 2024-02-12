@@ -10,9 +10,9 @@ Early shells allow you to move around your filesystem and run commands, and mode
 
 <Code code="ls" lang="nushell" frame="terminal" />
 
-As we've seen in other chapters, [`ls`](/commands/docs/ls.md) is a command for viewing the contents of a path. Nu will return the contents as a table that we can use.
+As we've seen in other chapters, [`ls`](/commands/docs/ls) is a command for viewing the contents of a path. Nu will return the contents as a table that we can use.
 
-The [`ls`](/commands/docs/ls.md) command also takes an optional argument, to change what you'd like to view. For example, we can list the files that end in ".md"
+The [`ls`](/commands/docs/ls) command also takes an optional argument, to change what you'd like to view. For example, we can list the files that end in ""
 
 ```nushell frame="terminal"
 ls *.md
@@ -52,9 +52,9 @@ ls **/*.md
 
 Here, we're looking for any file that ends with ".md", and the two asterisks further say "in any directory starting from here".
 
-In other shells (like bash), glob expansion happens in the shell and the invoked program (`ls` in the example above) receives a list of matched files. In Nushell however, the string you enter is passed "as is" to the command, and some commands (like `ls`, `mv`, `cp` and `rm`) interpret their input string as a glob pattern. For example the [`ls` command's help page](https://www.nushell.sh/commands/docs/ls.html) shows that it takes the parameter: `pattern: the glob pattern to use (optional)`.
+In other shells (like bash), glob expansion happens in the shell and the invoked program (`ls` in the example above) receives a list of matched files. In Nushell however, the string you enter is passed "as is" to the command, and some commands (like `ls`, `mv`, `cp` and `rm`) interpret their input string as a glob pattern. For example the [`ls` command's help page](https://www.nushell.sh/commands/docs/ls) shows that it takes the parameter: `pattern: the glob pattern to use (optional)`.
 
-Globbing syntax in these commands not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html). Note that this is a more limited syntax than what the dedicated [`glob` Nushell command](https://www.nushell.sh/commands/docs/glob.html) supports.
+Globbing syntax in these commands not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern). Note that this is a more limited syntax than what the dedicated [`glob` Nushell command](https://www.nushell.sh/commands/docs/glob) supports.
 
 Escaping `*`, `?`, `[]` works by quoting them with single quotes or double quotes. To show the contents of a directory named `[slug]`, use `ls "[slug]"` or `ls '[slug]'`.
 Note that backtick quote doesn't escape glob, for example: <code>cp `test dir/*`</code> will copy all files inside `test dir` to current direcroty.
@@ -63,32 +63,32 @@ Note that backtick quote doesn't escape glob, for example: <code>cp `test dir/*`
 
 <Code code="cd new_directory" lang="nushell" frame="terminal" />
 
-To change from the current directory to a new one, we use the [`cd`](/commands/docs/cd.md) command. Just as in other shells, we can use either the name of the directory, or if we want to go up a directory we can use the `..` shortcut.
+To change from the current directory to a new one, we use the [`cd`](/commands/docs/cd) command. Just as in other shells, we can use either the name of the directory, or if we want to go up a directory we can use the `..` shortcut.
 
-Changing the current working directory can also be done if [`cd`](/commands/docs/cd.md) is omitted and a path by itself is given:
+Changing the current working directory can also be done if [`cd`](/commands/docs/cd) is omitted and a path by itself is given:
 
 <Code code="./new_directory" lang="nushell" frame="terminal" />
 
-**Note:** changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of a directory is kept to the current block. Once you exit the block, you'll return to the previous directory. You can learn more about working with this in the [environment chapter](./environment.md).
+**Note:** changing the directory with [`cd`](/commands/docs/cd) changes the `PWD` environment variable. This means that a change of a directory is kept to the current block. Once you exit the block, you'll return to the previous directory. You can learn more about working with this in the [environment chapter](./environment).
 
 ## Filesystem commands
 
 Nu also provides some basic filesystem commands that work cross-platform.
 
-We can move an item from one place to another using the [`mv`](/commands/docs/mv.md) command:
+We can move an item from one place to another using the [`mv`](/commands/docs/mv) command:
 
 <Code code="mv new location" lang="nushell" frame="terminal" />
 
-We can copy an item from one location to another with the [`cp`](/commands/docs/cp.md) command:
+We can copy an item from one location to another with the [`cp`](/commands/docs/cp) command:
 
 <Code code="cp item location" lang="nushell" frame="terminal" />
 
-We can remove an item with the [`rm`](/commands/docs/rm.md) command:
+We can remove an item with the [`rm`](/commands/docs/rm) command:
 
 <Code code="rm item" lang="nushell" frame="terminal" />
 
-The three commands also can use the glob capabilities we saw earlier with [`ls`](/commands/docs/ls.md).
+The three commands also can use the glob capabilities we saw earlier with [`ls`](/commands/docs/ls).
 
-Finally, we can create a new directory using the [`mkdir`](/commands/docs/mkdir.md) command:
+Finally, we can create a new directory using the [`mkdir`](/commands/docs/mkdir) command:
 
 <Code code="mkdir new_directory" lang="nushell" frame="terminal" />

@@ -4,7 +4,7 @@ title: Quick Tour
 
 The easiest way to see what Nu can do is to start with some examples, so let's dive in.
 
-The first thing you'll notice when you run a command like [`ls`](/commands/docs/ls.md) is that instead of a block of text coming back, you get a structured table.
+The first thing you'll notice when you run a command like [`ls`](/commands/docs/ls) is that instead of a block of text coming back, you get a structured table.
 
 ```nushell frame='terminal'
 ls
@@ -12,16 +12,16 @@ ls
 │ #  │         name          │ type │   size    │  modified   │
 ├────┼───────────────────────┼──────┼───────────┼─────────────┤
 │  0 │ 404.html              │ file │     429 B │ 3 days ago  │
-│  1 │ CONTRIBUTING.md       │ file │     955 B │ 8 mins ago  │
+│  1 │ CONTRIBUTING       │ file │     955 B │ 8 mins ago  │
 │  2 │ Gemfile               │ file │   1.1 KiB │ 3 days ago  │
 │  3 │ Gemfile.lock          │ file │   6.9 KiB │ 3 days ago  │
 │  4 │ LICENSE               │ file │   1.1 KiB │ 3 days ago  │
-│  5 │ README.md             │ file │     213 B │ 3 days ago  │
+│  5 │ README             │ file │     213 B │ 3 days ago  │
 ```
 
 The table does more than show the directory in a different way. Just like tables in a spreadsheet, this table allows us to work with the data more interactively.
 
-The first thing we'll do is to sort our table by size. To do this, we'll take the output from [`ls`](/commands/docs/ls.md) and feed it into a command that can sort tables based on the contents of a column.
+The first thing we'll do is to sort our table by size. To do this, we'll take the output from [`ls`](/commands/docs/ls) and feed it into a command that can sort tables based on the contents of a column.
 
 ```nushell frame='terminal'
 ls | sort-by size | reverse
@@ -29,16 +29,16 @@ ls | sort-by size | reverse
 │ #  │         name          │ type │   size    │  modified   │
 ├────┼───────────────────────┼──────┼───────────┼─────────────┤
 │  0 │ Gemfile.lock          │ file │   6.9 KiB │ 3 days ago  │
-│  1 │ SUMMARY.md            │ file │   3.7 KiB │ 3 days ago  │
+│  1 │ SUMMARY            │ file │   3.7 KiB │ 3 days ago  │
 │  2 │ Gemfile               │ file │   1.1 KiB │ 3 days ago  │
 │  3 │ LICENSE               │ file │   1.1 KiB │ 3 days ago  │
-│  4 │ CONTRIBUTING.md       │ file │     955 B │ 9 mins ago  │
-│  5 │ books.md              │ file │     687 B │ 3 days ago  │
+│  4 │ CONTRIBUTING       │ file │     955 B │ 9 mins ago  │
+│  5 │ books              │ file │     687 B │ 3 days ago  │
 ```
 
-You can see that to make this work we didn't pass commandline arguments to [`ls`](/commands/docs/ls.md). Instead, we used the [`sort-by`](/commands/docs/sort-by.md) command that Nu provides to do the sorting of the output of the [`ls`](/commands/docs/ls.md) command. To see the biggest files on top, we also used [`reverse`](/commands/docs/reverse.md).
+You can see that to make this work we didn't pass commandline arguments to [`ls`](/commands/docs/ls). Instead, we used the [`sort-by`](/commands/docs/sort-by) command that Nu provides to do the sorting of the output of the [`ls`](/commands/docs/ls) command. To see the biggest files on top, we also used [`reverse`](/commands/docs/reverse).
 
-Nu provides many commands that can work on tables. For example, we could use [`where`](/commands/docs/where.md) to filter the contents of the [`ls`](/commands/docs/ls.md) table so that it only shows files over 1 kilobyte:
+Nu provides many commands that can work on tables. For example, we could use [`where`](/commands/docs/where) to filter the contents of the [`ls`](/commands/docs/ls) table so that it only shows files over 1 kilobyte:
 
 ```nushell frame='terminal'
 ls | where size > 1kb
@@ -48,7 +48,7 @@ ls | where size > 1kb
 │ 0 │ Gemfile           │ file │ 1.1 KiB │ 3 days ago │
 │ 1 │ Gemfile.lock      │ file │ 6.9 KiB │ 3 days ago │
 │ 2 │ LICENSE           │ file │ 1.1 KiB │ 3 days ago │
-│ 3 │ SUMMARY.md        │ file │ 3.7 KiB │ 3 days ago │
+│ 3 │ SUMMARY        │ file │ 3.7 KiB │ 3 days ago │
 ╰───┴───────────────────┴──────┴─────────┴────────────╯
 ```
 
@@ -65,9 +65,9 @@ ps
 │   3 │ 87156 │ 87105 │ Code Helper (Plugin)                         │ Sleep   │  0.00 │  56.0 MB │ 457.4 GB │
 ```
 
-You may be familiar with the [`ps`](/commands/docs/ps.md) command if you've used Linux. With it, we can get a list of all the current processes that the system is running, what their status is, and what their name is. We can also see the CPU load for the processes.
+You may be familiar with the [`ps`](/commands/docs/ps) command if you've used Linux. With it, we can get a list of all the current processes that the system is running, what their status is, and what their name is. We can also see the CPU load for the processes.
 
-What if we wanted to show the processes that were actively using the CPU? Just like we did with the [`ls`](/commands/docs/ls.md) command earlier, we can also work with the table that the [`ps`](/commands/docs/ps.md) command gives back to us:
+What if we wanted to show the processes that were actively using the CPU? Just like we did with the [`ls`](/commands/docs/ls) command earlier, we can also work with the table that the [`ps`](/commands/docs/ps) command gives back to us:
 
 ```nushell frame='terminal'
 ps | where cpu > 5
@@ -82,16 +82,16 @@ ps | where cpu > 5
 ╰───┴───────┴───────┴─────────────────────────────────────────┴─────────┴───────┴──────────┴──────────╯
 ```
 
-So far, we've been using [`ls`](/commands/docs/ls.md) and [`ps`](/commands/docs/ps.md) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore [`date`](/commands/docs/date.md) and [`sys`](/commands/docs/sys.md).
+So far, we've been using [`ls`](/commands/docs/ls) and [`ps`](/commands/docs/ps) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore [`date`](/commands/docs/date) and [`sys`](/commands/docs/sys).
 
-Running [`date now`](/commands/docs/date_now.md) gives us information about the current day and time:
+Running [`date now`](/commands/docs/date_now) gives us information about the current day and time:
 
 ```nushell frame='terminal'
 date now
 Fri, 9 Feb 2024 22:32:19 -0800 (now)
 ```
 
-To get the date as a table we can feed it into [`date to-table`](/commands/docs/date_to-table.md)
+To get the date as a table we can feed it into [`date to-table`](/commands/docs/date_to-table)
 
 ```nushell frame='terminal'
 date now | date to-table
@@ -102,7 +102,7 @@ date now | date to-table
 ╰───┴──────┴───────┴─────┴──────┴────────┴────────┴────────────┴──────────╯
 ```
 
-Running [`sys`](/commands/docs/sys.md) gives information about the system that Nu is running on:
+Running [`sys`](/commands/docs/sys) gives information about the system that Nu is running on:
 
 ```nushell frame='terminal'
 sys
@@ -116,7 +116,7 @@ sys
 ╰───────┴───────────────────╯
 ```
 
-This is a bit different than the tables we saw before. The [`sys`](/commands/docs/sys.md) command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to _get_ the column to view:
+This is a bit different than the tables we saw before. The [`sys`](/commands/docs/sys) command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to _get_ the column to view:
 
 ```nushell frame='terminal'
 sys | get host
@@ -132,7 +132,7 @@ sys | get host
 ╰─────────────────┴───────────────────────────╯
 ```
 
-The [`get`](/commands/docs/get.md) command lets us jump into the contents of a column of the table. Here, we're looking into the "host" column, which contains information about the host that Nu is running on. The name of the OS, the hostname, the CPU, and more. Let's get the name of the users on the system:
+The [`get`](/commands/docs/get) command lets us jump into the contents of a column of the table. Here, we're looking into the "host" column, which contains information about the host that Nu is running on. The name of the OS, the hostname, the CPU, and more. Let's get the name of the users on the system:
 
 ```nushell frame='terminal'
  sys | get host.sessions.name
@@ -146,7 +146,7 @@ Right now, there's just one user on the system named "jt". You'll notice that we
 
 You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "jt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
 
-Let's see how strings work outside of Nu in action. We'll take our example from before and run the external [`echo`](/commands/docs/echo.md) command (the `^` tells Nu to not use the built-in [`echo`](/commands/docs/echo.md) command):
+Let's see how strings work outside of Nu in action. We'll take our example from before and run the external [`echo`](/commands/docs/echo) command (the `^` tells Nu to not use the built-in [`echo`](/commands/docs/echo) command):
 
 ```nushell frame='terminal'
 sys | get host.sessions.name | each { |it| ^echo $it }
@@ -157,11 +157,11 @@ jt
 ╰────────────╯
 ```
 
-If this looks very similar to what we had before, you have a keen eye! It is similar, but with one important difference: we've called `^echo` with the value we saw earlier. This allows us to pass data out of Nu into [`echo`](/commands/docs/echo.md) (or any command outside of Nu, like `git` for example).
+If this looks very similar to what we had before, you have a keen eye! It is similar, but with one important difference: we've called `^echo` with the value we saw earlier. This allows us to pass data out of Nu into [`echo`](/commands/docs/echo) (or any command outside of Nu, like `git` for example).
 
 ### Getting Help
 
-Help text for any of Nu's built-in commands can be discovered with the [`help`](/commands/docs/help.md) command. To see all commands, run [`help commands`](/commands/docs/help_commands.md). You can also search for a topic by doing `help -f <topic>`.
+Help text for any of Nu's built-in commands can be discovered with the [`help`](/commands/docs/help) command. To see all commands, run [`help commands`](/commands/docs/help_commands). You can also search for a topic by doing `help -f <topic>`.
 
 ```nushell frame='terminal'
 help path

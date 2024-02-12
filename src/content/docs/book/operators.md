@@ -98,7 +98,7 @@ foobarbaz !~ bar # returns false
 ls | where name =~ ^nu # returns all files whose names start with "nu"
 ```
 
-Both operators use [the Rust regex crate's `is_match()` function](https://docs.rs/regex/latest/regex/struct.Regex.html#method.is_match).
+Both operators use [the Rust regex crate's `is_match()` function](https://docs.rs/regex/latest/regex/struct.Regex#method.is_match).
 
 ## Case Sensitivity
 
@@ -111,13 +111,13 @@ Operators are usually case-sensitive when operating on strings. There are a few 
 "FOO" =~ "(?i)foo" # returns true
 ```
 
-2. Use the [`str contains`](/commands/docs/str_contains.md) command's `--insensitive` flag:
+2. Use the [`str contains`](/commands/docs/str_contains) command's `--insensitive` flag:
 
 ```nushell frame="terminal"
 "FOO" | str contains --insensitive "foo"
 ```
 
-3. Convert strings to lowercase with [`str downcase`](/commands/docs/str_downcase.md) before comparing:
+3. Convert strings to lowercase with [`str downcase`](/commands/docs/str_downcase) before comparing:
 
 ```nushell frame="terminal"
 ("FOO" | str downcase) == ("Foo" | str downcase)

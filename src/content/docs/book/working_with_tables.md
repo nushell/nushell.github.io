@@ -23,12 +23,12 @@ ls
 
 :::tip[Changing how tables are displayed]
 Nu will try to expands all table's structure by default. You can change this behavior by changing the `display_output` hook.
-See [hooks](/book/hooks.md#changing-how-output-is-displayed) for more information.
+See [hooks](/book/hooks#changing-how-output-is-displayed) for more information.
 :::
 
 ## Sorting the data
 
-We can sort a table by calling the [`sort-by`](/commands/docs/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
+We can sort a table by calling the [`sort-by`](/commands/docs/sort-by) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
 
 ```nushell frame="terminal"
 ls | sort-by size
@@ -49,7 +49,7 @@ We can sort a table by any column that can be compared. For example, we could al
 
 ## Selecting the data you want
 
-We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](/commands/docs/select.md) a few columns from our table to use:
+We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](/commands/docs/select) a few columns from our table to use:
 
 ```nushell frame="terminal"
 ls | select name size
@@ -83,7 +83,7 @@ ls | sort-by size | first 5
 
 You'll notice we first sort the table by size to get to the smallest file, and then we use the `first 5` to return the first 5 rows of the table.
 
-You can also [`skip`](/commands/docs/skip.md) rows that you don't want. Let's skip the first two of the 5 rows we returned above:
+You can also [`skip`](/commands/docs/skip) rows that you don't want. Let's skip the first two of the 5 rows we returned above:
 
 ```nushell frame="terminal"
 ls | sort-by size | first 5 | skip 2
@@ -98,7 +98,7 @@ ls | sort-by size | first 5 | skip 2
 
 We've narrowed it to three rows we care about.
 
-Let's look at a few other commands for selecting data. You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row. Let's sort our table by the file name and then pick one of the rows with the [`select`](/commands/docs/select.md) command using its row number:
+Let's look at a few other commands for selecting data. You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row. Let's sort our table by the file name and then pick one of the rows with the [`select`](/commands/docs/select) command using its row number:
 
 ```nushell frame="terminal"
 ls | sort-by name
@@ -124,7 +124,7 @@ ls | sort-by name | select 5
 
 ## Getting data out of a table
 
-So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](/commands/docs/get.md) command:
+So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](/commands/docs/get) command:
 
 ```nushell frame="terminal"
 ls | get name
@@ -141,7 +141,7 @@ ls | get name
 
 We now have the values for each of the filenames.
 
-This might look like the [`select`](/commands/docs/select.md) command we saw earlier, so let's put that here as well to compare the two:
+This might look like the [`select`](/commands/docs/select) command we saw earlier, so let's put that here as well to compare the two:
 
 ```nushell frame="terminal"
 ls | select name
@@ -160,12 +160,12 @@ ls | select name
 
 These look very similar! Let's see if we can spell out the difference between these two commands to make it clear:
 
-- [`select`](/commands/docs/select.md) - creates a new table which includes only the columns specified
-- [`get`](/commands/docs/get.md) - returns the values inside the column specified as a list
+- [`select`](/commands/docs/select) - creates a new table which includes only the columns specified
+- [`get`](/commands/docs/get) - returns the values inside the column specified as a list
 
 The one way to tell these apart looking at the table is that the column names are missing, which lets us know that this is going to be a list of values we can work with.
 
-The [`get`](/commands/docs/get.md) command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
+The [`get`](/commands/docs/get) command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
 
 ## Changing data in a table
 
@@ -173,7 +173,7 @@ In addition to selecting data from a table, we can also update what the table ha
 
 ### Concatenating Tables
 
-We can concatenate tables using [`append`](/commands/docs/append.md):
+We can concatenate tables using [`append`](/commands/docs/append):
 
 ```nushell frame="terminal"
 let first = [[a b]; [1 2]]
@@ -218,7 +218,7 @@ $first ++ $second ++ $third
 
 ### Merging Tables
 
-We can use the [`merge`](/commands/docs/merge.md) command to merge two (or more) tables together
+We can use the [`merge`](/commands/docs/merge) command to merge two (or more) tables together
 
 ```nushell frame="terminal"
 let first = [[a b]; [1 2]]
@@ -248,7 +248,7 @@ $first | merge $second  | merge $third
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically merge all tables:
+Or we could use the [`reduce`](/commands/docs/reduce) command to dynamically merge all tables:
 
 ```nushell frame="terminal"
 [$first $second $third] | reduce {|it, acc| $acc | merge $it }
@@ -261,7 +261,7 @@ Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically 
 
 ### Adding a new column
 
-We can use the [`insert`](/commands/docs/insert.md) command to add a new column to the table. Let's look at an example:
+We can use the [`insert`](/commands/docs/insert) command to add a new column to the table. Let's look at an example:
 
 ```nushell frame="terminal"
 open rustfmt.toml
@@ -302,7 +302,7 @@ open rustfmt.toml
 ─────────┴──────
 ```
 
-Changes in Nu are functional changes, meaning that they work on values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](/commands/docs/save.md) command:
+Changes in Nu are functional changes, meaning that they work on values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](/commands/docs/save) command:
 
 ```nushell frame="terminal"
 >open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
@@ -315,7 +315,7 @@ open rustfmt2.toml
 
 ### Updating a column
 
-In a similar way to the [`insert`](/commands/docs/insert.md) command, we can also use the [`update`](/commands/docs/update.md) command to change the contents of a column to a new value. To see it in action let's open the same file:
+In a similar way to the [`insert`](/commands/docs/insert) command, we can also use the [`update`](/commands/docs/update) command to change the contents of a column to a new value. To see it in action let's open the same file:
 
 ```nushell frame="terminal"
 open rustfmt.toml
@@ -333,11 +333,11 @@ open rustfmt.toml | update edition 2021
 ─────────┴──────
 ```
 
-You can also use the [`upsert`](/commands/docs/upsert.md) command to insert or update depending on whether the column already exists.
+You can also use the [`upsert`](/commands/docs/upsert) command to insert or update depending on whether the column already exists.
 
 ### Moving columns
 
-You can use [`move`](/commands/docs/move.md) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls.md) after the "size" column, we could do:
+You can use [`move`](/commands/docs/move) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls) after the "size" column, we could do:
 
 ```nushell frame="terminal"
 ls | move name --after size
@@ -354,7 +354,7 @@ ls | move name --after size
 
 ### Renaming columns
 
-You can also [`rename`](/commands/docs/rename.md) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls.md) and rename the columns, we can use this example:
+You can also [`rename`](/commands/docs/rename) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls) and rename the columns, we can use this example:
 
 ```nushell frame="terminal"
 ls | rename filename filetype filesize date
@@ -371,7 +371,7 @@ ls | rename filename filetype filesize date
 
 ### Rejecting/Deleting columns
 
-You can also [`reject`](/commands/docs/reject.md) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls.md) and delete the columns, we can use this example:
+You can also [`reject`](/commands/docs/reject) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls) and delete the columns, we can use this example:
 
 ```nushell frame="terminal"
 ls -l / |reject readonly num_links inode created accessed modified

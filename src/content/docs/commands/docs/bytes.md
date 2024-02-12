@@ -34,14 +34,14 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                                       | type    | usage                                                                                      |
 | ---------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
-| [`bytes add`](/commands/docs/bytes_add.md)                 | Builtin | Add specified bytes to the input.                                                          |
-| [`bytes at`](/commands/docs/bytes_at.md)                   | Builtin | Get bytes defined by a range.                                                              |
-| [`bytes build`](/commands/docs/bytes_build.md)             | Builtin | Create bytes from the arguments.                                                           |
-| [`bytes collect`](/commands/docs/bytes_collect.md)         | Builtin | Concatenate multiple binary into a single binary, with an optional separator between each. |
-| [`bytes ends-with`](/commands/docs/bytes_ends-with.md)     | Builtin | Check if bytes ends with a pattern.                                                        |
-| [`bytes index-of`](/commands/docs/bytes_index-of.md)       | Builtin | Returns start index of first occurrence of pattern in bytes, or -1 if no match.            |
-| [`bytes length`](/commands/docs/bytes_length.md)           | Builtin | Output the length of any bytes in the pipeline.                                            |
-| [`bytes remove`](/commands/docs/bytes_remove.md)           | Builtin | Remove bytes.                                                                              |
-| [`bytes replace`](/commands/docs/bytes_replace.md)         | Builtin | Find and replace binary.                                                                   |
-| [`bytes reverse`](/commands/docs/bytes_reverse.md)         | Builtin | Reverse the bytes in the pipeline.                                                         |
-| [`bytes starts-with`](/commands/docs/bytes_starts-with.md) | Builtin | Check if bytes starts with a pattern.                                                      |
+| [`bytes add`](/commands/docs/bytes_add)                 | Builtin | Add specified bytes to the input.                                                          |
+| [`bytes at`](/commands/docs/bytes_at)                   | Builtin | Get bytes defined by a range.                                                              |
+| [`bytes build`](/commands/docs/bytes_build)             | Builtin | Create bytes from the arguments.                                                           |
+| [`bytes collect`](/commands/docs/bytes_collect)         | Builtin | Concatenate multiple binary into a single binary, with an optional separator between each. |
+| [`bytes ends-with`](/commands/docs/bytes_ends-with)     | Builtin | Check if bytes ends with a pattern.                                                        |
+| [`bytes index-of`](/commands/docs/bytes_index-of)       | Builtin | Returns start index of first occurrence of pattern in bytes, or -1 if no match.            |
+| [`bytes length`](/commands/docs/bytes_length)           | Builtin | Output the length of any bytes in the pipeline.                                            |
+| [`bytes remove`](/commands/docs/bytes_remove)           | Builtin | Remove bytes.                                                                              |
+| [`bytes replace`](/commands/docs/bytes_replace)         | Builtin | Find and replace binary.                                                                   |
+| [`bytes reverse`](/commands/docs/bytes_reverse)         | Builtin | Reverse the bytes in the pipeline.                                                         |
+| [`bytes starts-with`](/commands/docs/bytes_starts-with) | Builtin | Check if bytes starts with a pattern.                                                      |

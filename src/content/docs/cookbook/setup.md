@@ -19,7 +19,7 @@ Alternately, if you want to append a folder to your `PATH` environment variable 
 $env.PATH = ($env.PATH | split row (char esep) | append "some/other/path")
 ```
 
-For more detailed instructions, see the documentation about [environment variables](/book/environment.html#setting-environment-variables) and [PATH configuration](/book/configuration.html#path-configuration).
+For more detailed instructions, see the documentation about [environment variables](/book/environment#setting-environment-variables) and [PATH configuration](/book/configuration#path-configuration).
 
 ### How to list your environment variables
 
@@ -126,11 +126,11 @@ To be most compatible, the `starship` binary will run every prompt render and
 is absolute stateless.
 Nushell, however, is very stateful in a single instance.
 
-[Hooks](https://www.nushell.sh/book/hooks.html#hooks) allow registration of
+[Hooks](https://www.nushell.sh/book/hooks#hooks) allow registration of
 custom callback functions.
 In this case, the `pre_prompt` hook is very useful.
 With it, we can export state information as an environment variable, for
-example, what [overlays](https://www.nushell.sh/book/overlays.html) are
+example, what [overlays](https://www.nushell.sh/book/overlays) are
 currently activated.
 
 ```nushell

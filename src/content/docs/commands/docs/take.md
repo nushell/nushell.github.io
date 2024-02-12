@@ -94,5 +94,5 @@ Return the first 3 elements of a range
 
 | name                                         | type    | usage                                                 |
 | -------------------------------------------- | ------- | ----------------------------------------------------- |
-| [`take until`](/commands/docs/take_until.md) | Builtin | Take elements of the input until a predicate is true. |
-| [`take while`](/commands/docs/take_while.md) | Builtin | Take elements of the input while a predicate is true. |
+| [`take until`](/commands/docs/take_until) | Builtin | Take elements of the input until a predicate is true. |
+| [`take while`](/commands/docs/take_while) | Builtin | Take elements of the input while a predicate is true. |

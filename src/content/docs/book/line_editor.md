@@ -241,7 +241,7 @@ Each keybinding requires the next elements:
 
 :::tip
 All of the available modifiers, keycodes and events can be found with
-the command [`keybindings list`](/commands/docs/keybindings_list.md)
+the command [`keybindings list`](/commands/docs/keybindings_list)
 :::
 
 :::tip
@@ -542,7 +542,7 @@ e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 ### Troubleshooting keybinding problems
 
 Your terminal environment may not always propagate your key combinations on to nushell the way you expect it to.
-You can use the command [`keybindings listen`](/commands/docs/keybindings_listen.md) to figure out if certain keypresses are actually received by nushell, and how.
+You can use the command [`keybindings listen`](/commands/docs/keybindings_listen) to figure out if certain keypresses are actually received by nushell, and how.
 
 ## Menus
 
@@ -775,8 +775,8 @@ With that in mind, the desired menu would look like this
 ```
 
 As you can see, the new menu is identical to the `history_menu` previously
-described. The only huge difference is the new field called [`source`](/commands/docs/source.md). The
-[`source`](/commands/docs/source.md) field is a nushell definition of the values you want to display in the
+described. The only huge difference is the new field called [`source`](/commands/docs/source). The
+[`source`](/commands/docs/source) field is a nushell definition of the values you want to display in the
 menu. For this menu we are extracting the data from `$nu.scope.vars` and we
 are using it to create records that will be used to populate the menu.
 

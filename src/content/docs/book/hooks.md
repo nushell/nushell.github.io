@@ -27,7 +27,7 @@ The steps to evaluate one line in the REPL mode are as follows:
 
 ## Basic Hooks
 
-To enable hooks, define them in your [config](configuration.md):
+To enable hooks, define them in your [config](configuration):
 
 ```nushell
 $env.config = {
@@ -86,7 +86,7 @@ $env.config = ($env.config | upsert hooks {
 ## Changing Environment
 
 One feature of the hooks is that they preserve the environment.
-Environment variables defined inside the hook **block** will be preserved in a similar way as [`def --env`](environment.md#defining-environment-from-custom-commands).
+Environment variables defined inside the hook **block** will be preserved in a similar way as [`def --env`](environment#defining-environment-from-custom-commands).
 You can test it with the following example:
 
 ```nushell
@@ -118,7 +118,7 @@ $env.config = ($env.config | upsert hooks {
 })
 ```
 
-This won't work because the environment will be active only within the [`if`](/commands/docs/if.md) block.
+This won't work because the environment will be active only within the [`if`](/commands/docs/if) block.
 In this case, you could easily rewrite it as `load-env (if $after == ... { ... } else { {} })` but this pattern is fairly common and later we'll see that not all cases can be rewritten like this.
 
 To deal with the above problem, we introduce another way to define a hook -- **a record**:
@@ -256,7 +256,7 @@ You can view the result by opening `file:///tmp/nu-output.html` in
 a web browser.
 Of course this isn't very convenient unless you use
 a browser that automatically reloads when the file changes.
-Instead of the [`save`](/commands/docs/save.md) command, you would normally customize this
+Instead of the [`save`](/commands/docs/save) command, you would normally customize this
 to send the HTML output to a desired window.
 
 ### Changing how output is displayed

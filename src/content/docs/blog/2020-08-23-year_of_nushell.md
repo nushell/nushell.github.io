@@ -106,7 +106,7 @@ Something we attached to early on was the idea that Nu should be fun. It should 
 
 Nu is really about play. You play with your data, you play with the structures that make up your files and filesystem, you play with what web services give back to you. Everything about Nu is made to invite you to explore how things work and how data is put together. As you play, you learn more about Nu works and how to better use it. We firmly believe that learning doesn't have to hurt. At its best, the pleasure of exploration over time yields expertise without punishing you along the way. Humans just get better at something when we love to pick it up day after day, experimenting as we go. With Nu, we can ask questions like "what if I do this?" because the system is built to let us ask the question and answer it ourselves.
 
-Nu takes this one step further. The error reporting system comes from the design of [Rust's error messages](https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come.html), with clear messages to help guide you to success.
+Nu takes this one step further. The error reporting system comes from the design of [Rust's error messages](https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come), with clear messages to help guide you to success.
 
 The goal for Nu is that it won't require you to be a wiz with the commandline or with complex programming practices. Instead, you start where you feel comfortable, and grow a line at a time. With Nu, as your comfort grows, single lines easily grow to multiple lines, and (eventually) to larger programs. You don't need separate styles of thinking when experimenting and another for building your application. In Nu, these are (or will be) one and the same.
 

@@ -34,6 +34,6 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                             | type    | usage                                                                                                                                 |
 | ------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| [`config env`](/commands/docs/config_env.md)     | Builtin | Edit nu environment configurations.                                                                                                   |
-| [`config nu`](/commands/docs/config_nu.md)       | Builtin | Edit nu configurations.                                                                                                               |
-| [`config reset`](/commands/docs/config_reset.md) | Builtin | Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu. |
+| [`config env`](/commands/docs/config_env)     | Builtin | Edit nu environment configurations.                                                                                                   |
+| [`config nu`](/commands/docs/config_nu)       | Builtin | Edit nu configurations.                                                                                                               |
+| [`config reset`](/commands/docs/config_reset) | Builtin | Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu. |

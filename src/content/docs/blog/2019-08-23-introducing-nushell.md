@@ -224,7 +224,7 @@ Being able to view data is helpful, and this kind of polish extends to other asp
 
 ![simple error](../assets/images/nu_error2.png)
 
-Nu takes heavy inspiration from the [error messages in Rust](https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come.html). As much as possible, draw your eyes to the problem.
+Nu takes heavy inspiration from the [error messages in Rust](https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come). As much as possible, draw your eyes to the problem.
 
 Combined with the pipeline, some pretty interesting errors are possible:
 
@@ -312,7 +312,7 @@ That's right, we're in the file. Can we `cd`? Oh yes, we can:
 
 # Plugins
 
-Nu can't come with everything you might want to do with it, so we're releasing Nu with the ability to extend it with plugins. There's more information in the [plugins chapters](https://www.nushell.sh/book/plugins.html). Nu will look for these plugins in your path, and load them up on startup.
+Nu can't come with everything you might want to do with it, so we're releasing Nu with the ability to extend it with plugins. There's more information in the [plugins chapters](https://www.nushell.sh/book/plugins). Nu will look for these plugins in your path, and load them up on startup.
 
 # All because of Rust
 

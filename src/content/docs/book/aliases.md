@@ -52,7 +52,7 @@ The solution is to define a command without parameters that calls the system pro
 def uuidgen [] { ^uuidgen | tr A-F a-f }
 ```
 
-See more in the [custom commands](custom_commands.md) section of this book.
+See more in the [custom commands](custom_commands) section of this book.
 
 Or a more idiomatic example with nushell internal commands
 

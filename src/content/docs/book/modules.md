@@ -118,7 +118,7 @@ You can define `main` command inside `mod.nu` to create a command named after th
 
 ## Import Pattern
 
-Anything after the [`use`](/commands/docs/use.md) keyword forms an **import pattern** which controls how the definitions are imported.
+Anything after the [`use`](/commands/docs/use) keyword forms an **import pattern** which controls how the definitions are imported.
 The import pattern has the following structure `use head members...` where `head` defines the module (name of an existing module, file, or directory). The members are optional and specify what exactly should be imported from the module.
 
 Using our `greetings` example:
@@ -260,7 +260,7 @@ As you can see, defining the submodule structure also shapes the command line AP
 
 ## Environment Variables
 
-Modules can also define an environment using [`export-env`](/commands/docs/export-env.md):
+Modules can also define an environment using [`export-env`](/commands/docs/export-env):
 
 ```nushell title="greetings.nu"
 
@@ -273,7 +273,7 @@ export def hello [] {
 }
 ```
 
-When [`use`](/commands/docs/use.md) is evaluated, it will run the code inside the [`export-env`](/commands/docs/export-env.md) block and merge its environment into the current scope:
+When [`use`](/commands/docs/use) is evaluated, it will run the code inside the [`export-env`](/commands/docs/export-env) block and merge its environment into the current scope:
 
 ```nushell frame="terminal"
 use greetings.nu
@@ -310,7 +310,7 @@ Like any programming language, Nushell is also a product of a tradeoff and there
 
 ### `export-env` runs only when the `use` call is _evaluated_
 
-If you also want to keep your variables in separate modules and export their environment, you could try to [`export use`](/commands/docs/export_use.md) it:
+If you also want to keep your variables in separate modules and export their environment, you could try to [`export use`](/commands/docs/export_use) it:
 
 ```nushell title="purpose.nu"
 export-env {
@@ -367,7 +367,7 @@ This section describes some useful patterns using modules.
 
 ### Local Definitions
 
-Anything defined in a module without the [`export`](/commands/docs/export.md) keyword will work only in the module's scope.
+Anything defined in a module without the [`export`](/commands/docs/export) keyword will work only in the module's scope.
 
 ```nushell title="greetings.nu"
 
@@ -470,7 +470,7 @@ Another example could be our unofficial Conda module: https://github.com/nushell
 ## Hiding
 
 Any custom command or alias, imported from a module or not, can be "hidden", restoring the previous definition.
-We do this with the [`hide`](/commands/docs/hide.md) command:
+We do this with the [`hide`](/commands/docs/hide) command:
 
 ```nushell frame="terminal"
 def foo [] { "foo" }
@@ -484,7 +484,7 @@ hide foo
 # error! command not found!
 ```
 
-The [`hide`](/commands/docs/hide.md) command also accepts import patterns, just like [`use`](/commands/docs/use.md).
+The [`hide`](/commands/docs/hide) command also accepts import patterns, just like [`use`](/commands/docs/use).
 The import pattern is interpreted slightly differently, though.
 It can be one of the following:
 

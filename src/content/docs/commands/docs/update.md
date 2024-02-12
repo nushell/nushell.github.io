@@ -97,4 +97,4 @@ Use a closure to compute a new value at an index
 
 | name                                             | type    | usage                   |
 | ------------------------------------------------ | ------- | ----------------------- |
-| [`update cells`](/commands/docs/update_cells.md) | Builtin | Update the table cells. |
+| [`update cells`](/commands/docs/update_cells) | Builtin | Update the table cells. |

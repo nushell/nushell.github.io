@@ -34,10 +34,10 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                             | type    | usage                                                     |
 | ------------------------------------------------ | ------- | --------------------------------------------------------- |
-| [`http delete`](/commands/docs/http_delete.md)   | Builtin | Delete the specified resource.                            |
-| [`http get`](/commands/docs/http_get.md)         | Builtin | Fetch the contents from a URL.                            |
-| [`http head`](/commands/docs/http_head.md)       | Builtin | Get the headers from a URL.                               |
-| [`http options`](/commands/docs/http_options.md) | Builtin | Requests permitted communication options for a given URL. |
-| [`http patch`](/commands/docs/http_patch.md)     | Builtin | Patch a body to a URL.                                    |
-| [`http post`](/commands/docs/http_post.md)       | Builtin | Post a body to a URL.                                     |
-| [`http put`](/commands/docs/http_put.md)         | Builtin | Put a body to a URL.                                      |
+| [`http delete`](/commands/docs/http_delete)   | Builtin | Delete the specified resource.                            |
+| [`http get`](/commands/docs/http_get)         | Builtin | Fetch the contents from a URL.                            |
+| [`http head`](/commands/docs/http_head)       | Builtin | Get the headers from a URL.                               |
+| [`http options`](/commands/docs/http_options) | Builtin | Requests permitted communication options for a given URL. |
+| [`http patch`](/commands/docs/http_patch)     | Builtin | Patch a body to a URL.                                    |
+| [`http post`](/commands/docs/http_post)       | Builtin | Post a body to a URL.                                     |
+| [`http put`](/commands/docs/http_put)         | Builtin | Put a body to a URL.                                      |
