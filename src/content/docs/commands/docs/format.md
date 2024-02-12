@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                   | type    | usage                                                    |
-| ------------------------------------------------------ | ------- | -------------------------------------------------------- |
+| name                                                | type    | usage                                                    |
+| --------------------------------------------------- | ------- | -------------------------------------------------------- |
 | [`format date`](/commands/docs/format_date)         | Builtin | Format a given date using a format string.               |
 | [`format duration`](/commands/docs/format_duration) | Builtin | Outputs duration with a specified unit of time.          |
 | [`format filesize`](/commands/docs/format_filesize) | Builtin | Converts a column of filesizes to some specified format. |

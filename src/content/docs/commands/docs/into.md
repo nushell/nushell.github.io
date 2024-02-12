@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                 | type    | usage                                      |
-| ---------------------------------------------------- | ------- | ------------------------------------------ |
+| name                                              | type    | usage                                      |
+| ------------------------------------------------- | ------- | ------------------------------------------ |
 | [`into binary`](/commands/docs/into_binary)       | Builtin | Convert value to a binary primitive.       |
 | [`into bits`](/commands/docs/into_bits)           | Builtin | Convert value to a binary primitive.       |
 | [`into bool`](/commands/docs/into_bool)           | Builtin | Convert value to boolean.                  |

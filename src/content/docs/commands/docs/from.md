@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                       | type           | usage                                                                                                                      |
-| ------------------------------------------ | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| name                                    | type           | usage                                                                                                                      |
+| --------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | [`from csv`](/commands/docs/from_csv)   | Builtin        | Parse text as .csv and create table.                                                                                       |
 | [`from eml`](/commands/docs/from_eml)   | Builtin,Plugin | Parse text as .eml and create record.                                                                                      |
 | [`from ics`](/commands/docs/from_ics)   | Builtin,Plugin | Parse text as .ics and create table.                                                                                       |

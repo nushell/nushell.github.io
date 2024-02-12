@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                   | type    | usage                                                                 |
-| ------------------------------------------------------ | ------- | --------------------------------------------------------------------- |
+| name                                                | type    | usage                                                                 |
+| --------------------------------------------------- | ------- | --------------------------------------------------------------------- |
 | [`url build-query`](/commands/docs/url_build-query) | Builtin | Converts record or table into query string applying percent-encoding. |
 | [`url decode`](/commands/docs/url_decode)           | Builtin | Converts a percent-encoded web safe string to a string.               |
 | [`url encode`](/commands/docs/url_encode)           | Builtin | Converts a string to a percent encoded web safe string.               |

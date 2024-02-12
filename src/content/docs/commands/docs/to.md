@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                   | type    | usage                                                         |
-| -------------------------------------- | ------- | ------------------------------------------------------------- |
+| name                                | type    | usage                                                         |
+| ----------------------------------- | ------- | ------------------------------------------------------------- |
 | [`to csv`](/commands/docs/to_csv)   | Builtin | Convert table into .csv text .                                |
 | [`to html`](/commands/docs/to_html) | Builtin | Convert table into simple HTML.                               |
 | [`to json`](/commands/docs/to_json) | Builtin | Converts table data into JSON text.                           |

@@ -35,8 +35,8 @@ https://www.nushell.sh/book/line_editor.html
 
 ## Subcommands:
 
-| name                                                           | type    | usage                                                          |
-| -------------------------------------------------------------- | ------- | -------------------------------------------------------------- |
+| name                                                        | type    | usage                                                          |
+| ----------------------------------------------------------- | ------- | -------------------------------------------------------------- |
 | [`keybindings default`](/commands/docs/keybindings_default) | Builtin | List default keybindings.                                      |
 | [`keybindings list`](/commands/docs/keybindings_list)       | Builtin | List available options that can be used to create keybindings. |
 | [`keybindings listen`](/commands/docs/keybindings_listen)   | Builtin | Get input from the user.                                       |

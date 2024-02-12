@@ -35,8 +35,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | type    | usage                                        |
-| ------------------------------------------------ | ------- | -------------------------------------------- |
+| name                                          | type    | usage                                        |
+| --------------------------------------------- | ------- | -------------------------------------------- |
 | [`overlay hide`](/commands/docs/overlay_hide) | Builtin | Hide an active overlay.                      |
 | [`overlay list`](/commands/docs/overlay_list) | Builtin | List all active overlays.                    |
 | [`overlay new`](/commands/docs/overlay_new)   | Builtin | Create an empty overlay.                     |

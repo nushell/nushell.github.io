@@ -36,8 +36,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                                     | type    | usage                                                                                                                               |
-| ------------------------------------------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| name                                                                  | type    | usage                                                                                                                               |
+| --------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | [`str camel-case`](/commands/docs/str_camel-case)                     | Builtin | Convert a string to camelCase.                                                                                                      |
 | [`str capitalize`](/commands/docs/str_capitalize)                     | Builtin | Capitalize first letter of text.                                                                                                    |
 | [`str contains`](/commands/docs/str_contains)                         | Builtin | Checks if string input contains a substring.                                                                                        |

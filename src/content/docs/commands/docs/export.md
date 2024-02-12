@@ -42,8 +42,8 @@ https://www.nushell.sh/book/thinking_in_nu.html
 
 ## Subcommands:
 
-| name                                               | type    | usage                                                                            |
-| -------------------------------------------------- | ------- | -------------------------------------------------------------------------------- |
+| name                                            | type    | usage                                                                            |
+| ----------------------------------------------- | ------- | -------------------------------------------------------------------------------- |
 | [`export alias`](/commands/docs/export_alias)   | Builtin | Alias a command (with optional flags) to a new name and export it from a module. |
 | [`export const`](/commands/docs/export_const)   | Builtin | Use parse-time constant from a module and export them from this module.          |
 | [`export def`](/commands/docs/export_def)       | Builtin | Define a custom command and export it from a module.                             |

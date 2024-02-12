@@ -63,8 +63,8 @@ search for string in command names, usage and search terms
 
 ## Subcommands:
 
-| name                                                 | type    | usage                                |
-| ---------------------------------------------------- | ------- | ------------------------------------ |
+| name                                              | type    | usage                                |
+| ------------------------------------------------- | ------- | ------------------------------------ |
 | [`help aliases`](/commands/docs/help_aliases)     | Builtin | Show help on nushell aliases.        |
 | [`help commands`](/commands/docs/help_commands)   | Builtin | Show help on nushell commands.       |
 | [`help escapes`](/commands/docs/help_escapes)     | Builtin | Show help on nushell string escapes. |

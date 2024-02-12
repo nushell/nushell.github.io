@@ -150,8 +150,8 @@ Operating system commands:
 
 ## Subcommands:
 
-| name                                               | type    | usage                                                              |
-| -------------------------------------------------- | ------- | ------------------------------------------------------------------ |
+| name                                            | type    | usage                                                              |
+| ----------------------------------------------- | ------- | ------------------------------------------------------------------ |
 | [`ansi gradient`](/commands/docs/ansi_gradient) | Builtin | Add a color gradient (using ANSI color codes) to the given string. |
 | [`ansi link`](/commands/docs/ansi_link)         | Builtin | Add a link (using OSC 8 escape sequence) to the given string.      |
 | [`ansi strip`](/commands/docs/ansi_strip)       | Builtin | Strip ANSI escape sequences from a string.                         |

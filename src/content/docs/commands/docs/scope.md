@@ -28,8 +28,8 @@ feature: default
 
 ## Subcommands:
 
-| name                                                         | type    | usage                                                    |
-| ------------------------------------------------------------ | ------- | -------------------------------------------------------- |
+| name                                                      | type    | usage                                                    |
+| --------------------------------------------------------- | ------- | -------------------------------------------------------- |
 | [`scope aliases`](/commands/docs/scope_aliases)           | Builtin | Output info on the aliases in the current scope.         |
 | [`scope commands`](/commands/docs/scope_commands)         | Builtin | Output info on the commands in the current scope.        |
 | [`scope engine-stats`](/commands/docs/scope_engine-stats) | Builtin | Output stats on the engine in the current state.         |

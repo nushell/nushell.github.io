@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                               | type    | usage                                                                                 |
-| -------------------------------------------------- | ------- | ------------------------------------------------------------------------------------- |
+| name                                            | type    | usage                                                                                 |
+| ----------------------------------------------- | ------- | ------------------------------------------------------------------------------------- |
 | [`math abs`](/commands/docs/math_abs)           | Builtin | Returns the absolute value of a number.                                               |
 | [`math arccos`](/commands/docs/math_arccos)     | Builtin | Returns the arccosine of the number.                                                  |
 | [`math arccosh`](/commands/docs/math_arccosh)   | Builtin | Returns the inverse of the hyperbolic cosine function.                                |

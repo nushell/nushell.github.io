@@ -107,6 +107,6 @@ with 'transpose' first.
 
 ## Subcommands:
 
-| name                                         | type    | usage                                                                                                     |
-| -------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------- |
+| name                                      | type    | usage                                                                                                     |
+| ----------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------- |
 | [`each while`](/commands/docs/each_while) | Builtin | Run a block on each row of the input list until a null is found, then create a new list with the results. |

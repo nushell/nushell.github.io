@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | type    | usage                                              |
-| ------------------------------------------------ | ------- | -------------------------------------------------- |
+| name                                          | type    | usage                                              |
+| --------------------------------------------- | ------- | -------------------------------------------------- |
 | [`random bool`](/commands/docs/random_bool)   | Builtin | Generate a random boolean value.                   |
 | [`random chars`](/commands/docs/random_chars) | Builtin | Generate random chars.                             |
 | [`random dice`](/commands/docs/random_dice)   | Builtin | Generate a random dice roll.                       |

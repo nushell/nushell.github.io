@@ -54,7 +54,7 @@ Get two characters from the user, and assign to a variable
 
 ## Subcommands:
 
-| name                                             | type    | usage                            |
-| ------------------------------------------------ | ------- | -------------------------------- |
+| name                                          | type    | usage                            |
+| --------------------------------------------- | ------- | -------------------------------- |
 | [`input list`](/commands/docs/input_list)     | Builtin | Interactive list selection.      |
 | [`input listen`](/commands/docs/input_listen) | Builtin | Listen for user interface event. |

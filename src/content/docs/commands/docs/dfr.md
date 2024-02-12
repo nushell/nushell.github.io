@@ -36,8 +36,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                           | type    | usage                                                                                            |
-| -------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------ |
+| name                                                        | type    | usage                                                                                            |
+| ----------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------ |
 | [`dfr agg`](/commands/docs/dfr_agg)                         | Builtin | Performs a series of aggregations from a group-by.                                               |
 | [`dfr agg-groups`](/commands/docs/dfr_agg-groups)           | Builtin | Creates an agg_groups expression.                                                                |
 | [`dfr all-false`](/commands/docs/dfr_all-false)             | Builtin | Returns true if all values are false.                                                            |

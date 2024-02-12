@@ -83,7 +83,7 @@ Remove the last row in a table
 
 ## Subcommands:
 
-| name                                           | type    | usage                                                                                               |
-| ---------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------- |
+| name                                        | type    | usage                                                                                               |
+| ------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------- |
 | [`drop column`](/commands/docs/drop_column) | Builtin | Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`. |
 | [`drop nth`](/commands/docs/drop_nth)       | Builtin | Drop the selected rows.                                                                             |

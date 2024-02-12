@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                       | type    | usage                                                                                      |
-| ---------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
+| name                                                    | type    | usage                                                                                      |
+| ------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
 | [`bytes add`](/commands/docs/bytes_add)                 | Builtin | Add specified bytes to the input.                                                          |
 | [`bytes at`](/commands/docs/bytes_at)                   | Builtin | Get bytes defined by a range.                                                              |
 | [`bytes build`](/commands/docs/bytes_build)             | Builtin | Create bytes from the arguments.                                                           |

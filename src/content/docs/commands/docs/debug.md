@@ -64,6 +64,6 @@ Debug print a table
 
 ## Subcommands:
 
-| name                                         | type    | usage                     |
-| -------------------------------------------- | ------- | ------------------------- |
+| name                                      | type    | usage                     |
+| ----------------------------------------- | ------- | ------------------------- |
 | [`debug info`](/commands/docs/debug_info) | Builtin | View process memory info. |

@@ -95,6 +95,6 @@ Use a closure to compute a new value at an index
 
 ## Subcommands:
 
-| name                                             | type    | usage                   |
-| ------------------------------------------------ | ------- | ----------------------- |
+| name                                          | type    | usage                   |
+| --------------------------------------------- | ------- | ----------------------- |
 | [`update cells`](/commands/docs/update_cells) | Builtin | Update the table cells. |

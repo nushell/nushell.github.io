@@ -92,7 +92,7 @@ Return the first 3 elements of a range
 
 ## Subcommands:
 
-| name                                         | type    | usage                                                 |
-| -------------------------------------------- | ------- | ----------------------------------------------------- |
+| name                                      | type    | usage                                                 |
+| ----------------------------------------- | ------- | ----------------------------------------------------- |
 | [`take until`](/commands/docs/take_until) | Builtin | Take elements of the input until a predicate is true. |
 | [`take while`](/commands/docs/take_while) | Builtin | Take elements of the input while a predicate is true. |

@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | type    | usage                                                                       |
-| ---------------------------------------------- | ------- | --------------------------------------------------------------------------- |
+| name                                        | type    | usage                                                                       |
+| ------------------------------------------- | ------- | --------------------------------------------------------------------------- |
 | [`stor create`](/commands/docs/stor_create) | Builtin | Create a table in the in-memory sqlite database.                            |
 | [`stor delete`](/commands/docs/stor_delete) | Builtin | Delete a table or specified rows in the in-memory sqlite database.          |
 | [`stor export`](/commands/docs/stor_export) | Builtin | Export the in-memory sqlite database to a sqlite database file.             |

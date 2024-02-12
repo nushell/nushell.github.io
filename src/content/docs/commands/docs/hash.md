@@ -32,7 +32,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | type    | usage                                         |
-| ---------------------------------------------- | ------- | --------------------------------------------- |
+| name                                        | type    | usage                                         |
+| ------------------------------------------- | ------- | --------------------------------------------- |
 | [`hash md5`](/commands/docs/hash_md5)       | Builtin | Hash a value using the md5 hash algorithm.    |
 | [`hash sha256`](/commands/docs/hash_sha256) | Builtin | Hash a value using the sha256 hash algorithm. |

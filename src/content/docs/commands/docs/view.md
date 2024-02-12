@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | type    | usage                                                      |
-| ---------------------------------------------- | ------- | ---------------------------------------------------------- |
+| name                                        | type    | usage                                                      |
+| ------------------------------------------- | ------- | ---------------------------------------------------------- |
 | [`view files`](/commands/docs/view_files)   | Builtin | View the files registered in nushell's EngineState memory. |
 | [`view source`](/commands/docs/view_source) | Builtin | View a block, module, or a definition.                     |
 | [`view span`](/commands/docs/view_span)     | Builtin | View the contents of a span.                               |

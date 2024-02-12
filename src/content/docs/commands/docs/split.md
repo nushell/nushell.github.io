@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | type    | usage                                                   |
-| ------------------------------------------------ | ------- | ------------------------------------------------------- |
+| name                                          | type    | usage                                                   |
+| --------------------------------------------- | ------- | ------------------------------------------------------- |
 | [`split chars`](/commands/docs/split_chars)   | Builtin | Split a string into a list of characters.               |
 | [`split column`](/commands/docs/split_column) | Builtin | Split a string into multiple columns using a separator. |
 | [`split list`](/commands/docs/split_list)     | Builtin | Split a list into multiple lists using a separator.     |

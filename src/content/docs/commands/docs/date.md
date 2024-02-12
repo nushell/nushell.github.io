@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                         | type    | usage                                                     |
-| ------------------------------------------------------------ | ------- | --------------------------------------------------------- |
+| name                                                      | type    | usage                                                     |
+| --------------------------------------------------------- | ------- | --------------------------------------------------------- |
 | [`date format`](/commands/docs/date_format)               | Builtin | Removed command: use `format date` instead.               |
 | [`date humanize`](/commands/docs/date_humanize)           | Builtin | Print a 'humanized' format for the date, relative to now. |
 | [`date list-timezone`](/commands/docs/date_list-timezone) | Builtin | List supported time zones.                                |

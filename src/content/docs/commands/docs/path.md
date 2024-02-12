@@ -45,8 +45,8 @@ the path literal.
 
 ## Subcommands:
 
-| name                                                     | type    | usage                                                                   |
-| -------------------------------------------------------- | ------- | ----------------------------------------------------------------------- |
+| name                                                  | type    | usage                                                                   |
+| ----------------------------------------------------- | ------- | ----------------------------------------------------------------------- |
 | [`path basename`](/commands/docs/path_basename)       | Builtin | Get the final component of a path.                                      |
 | [`path dirname`](/commands/docs/path_dirname)         | Builtin | Get the parent directory of a path.                                     |
 | [`path exists`](/commands/docs/path_exists)           | Builtin | Check whether a path exists.                                            |

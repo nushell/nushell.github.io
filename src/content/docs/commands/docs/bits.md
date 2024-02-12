@@ -36,8 +36,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                     | type    | usage                                  |
-| ---------------------------------------- | ------- | -------------------------------------- |
+| name                                  | type    | usage                                  |
+| ------------------------------------- | ------- | -------------------------------------- |
 | [`bits and`](/commands/docs/bits_and) | Builtin | Performs bitwise and for ints.         |
 | [`bits not`](/commands/docs/bits_not) | Builtin | Performs logical negation on each bit. |
 | [`bits or`](/commands/docs/bits_or)   | Builtin | Performs bitwise or for ints.          |

@@ -32,8 +32,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | type    | usage                                                     |
-| ------------------------------------------------ | ------- | --------------------------------------------------------- |
+| name                                          | type    | usage                                                     |
+| --------------------------------------------- | ------- | --------------------------------------------------------- |
 | [`http delete`](/commands/docs/http_delete)   | Builtin | Delete the specified resource.                            |
 | [`http get`](/commands/docs/http_get)         | Builtin | Fetch the contents from a URL.                            |
 | [`http head`](/commands/docs/http_head)       | Builtin | Get the headers from a URL.                               |

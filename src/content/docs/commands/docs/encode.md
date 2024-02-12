@@ -68,7 +68,7 @@ documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
 
 ## Subcommands:
 
-| name                                               | type    | usage                                         |
-| -------------------------------------------------- | ------- | --------------------------------------------- |
+| name                                            | type    | usage                                         |
+| ----------------------------------------------- | ------- | --------------------------------------------- |
 | [`encode base64`](/commands/docs/encode_base64) | Builtin | Encode a string or binary value using Base64. |
 | [`encode hex`](/commands/docs/encode_hex)       | Builtin | Encode a binary value using hex.              |
