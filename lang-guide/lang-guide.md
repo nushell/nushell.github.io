@@ -457,13 +457,14 @@ It doesn't work because it sees `\P` and `\s` as escapes that are not recognized
 ### Interaction with unix pipes
 
 ### Handling stdout and stderr
-You can do the following things to stderr:
-1. do nothing, it will be output to stderr directly
-2. pipeline stderr to next commands, using `e>|` or `e+o>|`
-3. redirect stderr to a file, using `e> file_path`, or `e+o> file_path`
-4. use `do -i { cmd } | complete` to capture both stdout and stderr in structure data
 
-Let's see the difference between them all of them:
+You can handle stderr in multiple ways:
+1. do nothing, stderr will be printed directly
+2. pipe stderr to the next command, using `e>|` or `e+o>|`
+3. redirect stderr to a file, using `e> file_path`, or `e+o> file_path`
+4. use `do -i { cmd } | complete` to capture both stdout and stderr as structured data
+
+Let's see the difference between them:
 
 Assume that we have following code
 
@@ -473,32 +474,31 @@ print "foo"
 print -e "barbar"
 ```
 
-It print `foo` to stdout and `barbar` to stderr.  The following table illustrates the difference between all of them:
+It prints `foo` to stdout and `barbar` to stderr.  The following table illustrates the difference between them:
 
-Pipes:
+Redirection to a pipeline:
 
-| type |  command  | result  |
+| type |  command  | `$result` contents | printed to terminal |
+| --------- | --------- | ------  | ---- |
+| \| |  `let result = nu demo.nu \| str upcase` | "foo" | "barbar" |
+| e>\| | `let result = nu demo.nu e>\| str upcase` | "barbar" | "foo" |
+| o+e>\| | `let result = nu demo.nu e+o>\| str upcase` | "FOO\nBARBAR" | nothing |
+
+Redirection to a file:
+
+| type |  command  | `file.txt` contents | printed to terminal |
+| --------- | --------- | ------  | ---- |
+| o> file_path | ` nu demo.nu o> file.txt ` | "foo" | "barbar" |
+| e> file_path | ` nu demo.nu e> file.txt ` | "barbar" | "foo" |
+| o+e> file_path | ` nu demo.nu o+e> file.txt ` | "foo/nbarbar" | nothing |
+
+`complete` command:
+
+| type |  command  | `$result` contents  |
 | --------- | --------- | ------  |
-| \| |  `let result = nu demo.nu \| str upcase` | `result` get value `foo`, and `barbar` is outputed. |
-| e>\| | `let result = nu demo.nu e>\| str upcase` | `result` get value `barbar`, and `foo` is outputed. |
-| o+e>\| | `let result = nu demo.nu e+o>\| str upcase` | `result` get value `FOO\nBARBAR`, and nothing is outputed. |
+| use `complete` | `let result = do { nu demo.nu } \| complete` | record containing both stdout and stderr
 
-Redirection:
-
-| type |  command  | result  |
-| --------- | --------- | ------  |
-| o> file_path | ` nu demo.nu o> file.txt ` | a file named `file.txt` is created, with content `foo`, and `barbar` is outputed
-| e> file_path | ` nu demo.nu e> file.txt ` | a file named `file.txt` is created, with content `barbar`, and `foo` is outputed
-| o+e> file_path | ` nu demo.nu o+e> file.txt ` | a file named `file.txt` is created, with content `foo/nbarbar`, and nothing is outputed
-
-Complete:
-
-| type |  command  | result  |
-| --------- | --------- | ------  |
-| use `complete` | `let result = do -i { nu demo.nu } | complete` | `result` get a structured value
-
-Note that `e>|` and `o+e>|` only works with external command, if you pipe internal commands' output through `e>|` and `o+e>|`, you will get an error
-
+Note that `e>|` and `o+e>|` only work with external command, if you pipe internal commands' output through `e>|` and `o+e>|`, you will get an error:
 ```
 ❯ ls e>| str length
 Error:   × `e>|` only works with external streams
@@ -518,15 +518,17 @@ Error:   × `o+e>|` only works with external streams
 ```
 
 You can also redirect `stdout` to a file, and pipe `stderr` to next command:
-
 ```
-nu demo.nu o> file.txt e>| str upper
-nu demo.nu e> file.txt | str upper
-# But you can't use redirection along with `o+e>|`, because it's ambiguous.
-nu demo.nu o> file.txt o+e>| str upper
+nu demo.nu o> file.txt e>| str upcase
+nu demo.nu e> file.txt | str upcase
 ```
 
-Also note that `complete` is special, it doesn't work with `e>|`, `o+e>|` pipe.
+But you can't use redirection along with `o+e>|`, because it's ambiguous:
+```
+nu demo.nu o> file.txt o+e>| str upcase
+```
+
+Also note that `complete` is special, it doesn't work with `e>|`, `o+e>|`.
 
 ## Nu as a shell
 
