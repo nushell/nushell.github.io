@@ -15,14 +15,14 @@ hero:
 ---
 
 import { LinkCard } from "@astrojs/starlight/components";
-import { getCollection } from 'astro:content';
-export const blogEntries = await getCollection('docs');
+import { getCollection } from "astro:content";
+export const blogEntries = await getCollection("docs");
 
-  {
-    blogEntries
-      .filter(blogPostEntry => blogPostEntry.slug.includes('blog'))
-      .map(filteredBlogPostEntry => (
-        <LinkCard title={filteredBlogPostEntry.data.title} href={`${filteredBlogPostEntry.slug.replace('blog', '/blog')}`} description={filteredBlogPostEntry.data.description}>
-        </LinkCard>
-    ))
-  }
+{
+blogEntries
+.filter(blogPostEntry => blogPostEntry.slug.includes('blog'))
+.map(filteredBlogPostEntry => (
+<LinkCard title={filteredBlogPostEntry.data.title} href={`${filteredBlogPostEntry.slug.replace('blog', '/blog')}`} description={filteredBlogPostEntry.data.description}>
+</LinkCard>
+))
+}
