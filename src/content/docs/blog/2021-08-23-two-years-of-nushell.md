@@ -3,7 +3,7 @@ title: Two years of Nushell
 author: The Nu Authors
 author_site: https://twitter.com/nu_shell
 author_image: https://www.nushell.sh/blog/images/nu_logo.png
-excerpt: Happy birthday, Nushell! Today mark's the second year for Nushell.
+description: Happy birthday, Nushell! Today mark's the second year for Nushell.
 ---
 
 # Two years of Nushell

@@ -1,0 +1,28 @@
+---
+title: Nu Blog
+description: A new type of shell
+template: splash
+editUrl: true
+lastUpdated: false
+hero:
+  actions:
+    - text: RSS
+      link: /introduction/
+      icon: rss
+    - text: Atom
+      link: https://github.com/nushell/nushell.github.io
+      icon: external
+---
+
+import { LinkCard } from "@astrojs/starlight/components";
+import { getCollection } from 'astro:content';
+export const blogEntries = await getCollection('docs');
+
+  {
+    blogEntries
+      .filter(blogPostEntry => blogPostEntry.slug.includes('blog'))
+      .map(filteredBlogPostEntry => (
+        <LinkCard title={filteredBlogPostEntry.data.title} href={`${filteredBlogPostEntry.slug.replace('blog', '/blog')}`} description={filteredBlogPostEntry.data.description}>
+        </LinkCard>
+    ))
+  }

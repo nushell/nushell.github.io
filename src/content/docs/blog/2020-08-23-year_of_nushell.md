@@ -3,7 +3,7 @@ title: One year of Nushell
 author: The Nu Authors
 author_site: https://twitter.com/nu_shell
 author_image: https://www.nushell.sh/blog/images/nu_logo.png
-excerpt: Hard to imagine that it's already been a year since Nu first went public. A year later and we've learned a lot, and made a few mistakes along the way. In this post, we look back over the year and see how we did and where we might be going in the future.
+description: Hard to imagine that it's already been a year since Nu first went public. A year later and we've learned a lot, and made a few mistakes along the way. In this post, we look back over the year and see how we did and where we might be going in the future.
 ---
 
 # One year of Nushell

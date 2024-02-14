@@ -3,7 +3,7 @@ title: Nushell 2023 Survey Results
 author: The Nu Authors
 author_site: https://twitter.com/nu_shell
 author_image: https://www.nushell.sh/blog/images/nu_logo.png
-excerpt: Let's take a look at the results of the 2023 Nushell survey
+description: Let's take a look at the results of the 2023 Nushell survey
 ---
 
 ## Nushell Survey 2023

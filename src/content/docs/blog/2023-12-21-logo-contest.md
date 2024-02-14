@@ -3,7 +3,7 @@ title: Who's got talent?
 author: The Nu Authors
 author_site: https://twitter.com/nu_shell
 author_image: https://www.nushell.sh/blog/images/nu_logo.png
-excerpt: "We are looking for a logo and a mascot: WE NEED YOU!"
+description: "We are looking for a logo and a mascot: WE NEED YOU!"
 ---
 
 ## Who's got talent?

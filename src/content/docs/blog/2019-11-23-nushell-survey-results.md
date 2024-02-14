@@ -3,7 +3,7 @@ title: Nushell 2019 Survey Results
 author: Jonathan Turner
 author_site: https://twitter.com/jntrnr
 author_image: https://www.nushell.sh/blog/images/jonathandturner.jpg
-excerpt: Recently, we ran a short survey to see how you were feeling about nushell. Here are the results.
+description: Recently, we ran a short survey to see how you were feeling about nushell. Here are the results.
 ---
 
 # Nushell 2019 Survey Results
