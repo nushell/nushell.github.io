@@ -1,6 +1,6 @@
 ---
 title: Nu Blog
-description: A new type of shell
+description: The latest news and updates from the Nu team.
 template: splash
 editUrl: true
 lastUpdated: false
@@ -20,9 +20,22 @@ export const blogEntries = await getCollection("docs");
 
 {
 blogEntries
-.filter(blogPostEntry => blogPostEntry.slug.includes('blog'))
+.filter(blogPostEntry => {
+const parts = blogPostEntry.slug.split('-');
+return parts.length > 3 && !isNaN(Date.parse(parts.slice(0, 3).join('-')));
+})
+.sort((a, b) => {
+const dateA = new Date(a.slug.split('-').slice(0, 3).join('-'));
+const dateB = new Date(b.slug.split('-').slice(0, 3).join('-'));
+return dateB - dateA;
+})
 .map(filteredBlogPostEntry => (
-<LinkCard title={filteredBlogPostEntry.data.title} href={`${filteredBlogPostEntry.slug.replace('blog', '/blog')}`} description={filteredBlogPostEntry.data.description}>
-</LinkCard>
-))
-}
+
+{" "}
+
+<LinkCard
+  title={filteredBlogPostEntry.data.title}
+  href={`${filteredBlogPostEntry.slug.replace("blog", "/blog")}`}
+  description={filteredBlogPostEntry.data.description}
+></LinkCard>
+)) }

@@ -6,8 +6,6 @@ author_image: https://www.nushell.sh/blog/images/jonathandturner.jpg
 description: Recently, we ran a short survey to see how you were feeling about nushell. Here are the results.
 ---
 
-# Nushell 2019 Survey Results
-
 Recently, we ran a short survey to see how you were feeling about [Nushell](https://github.com/nushell/nushell). We wanted to give a very hearty "thank you!" to everyone who participated. These surveys are a great way to gather information about how people are feeling, where they're happy, and where they feel there are pain points.
 
 In total, **160** people responded. An impressive amount for a project still in its first few months in the public.

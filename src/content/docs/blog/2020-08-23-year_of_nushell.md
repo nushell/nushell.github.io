@@ -6,8 +6,6 @@ author_image: https://www.nushell.sh/blog/images/nu_logo.png
 description: Hard to imagine that it's already been a year since Nu first went public. A year later and we've learned a lot, and made a few mistakes along the way. In this post, we look back over the year and see how we did and where we might be going in the future.
 ---
 
-# One year of Nushell
-
 Hard to imagine that it's already been a year since Nu first went public. At the time, it was largely a demo of what could be possible, but still needed quite a bit of work to make it ready for everyday use. A year later and we've learned a lot, and made a few mistakes along the way. In this post, we look back over the year and see how we did and where we might be going in the future.
 
 # History

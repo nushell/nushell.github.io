@@ -6,8 +6,6 @@ author_image: https://www.nushell.sh/blog/images/nu_logo.png
 description: Happy birthday, Nushell! Today mark's the second year for Nushell.
 ---
 
-# Two years of Nushell
-
 ![Stock cake photo with a 2](/assets/images/two_year_cake.png)
 
 _Happy birthday, Nushell!_

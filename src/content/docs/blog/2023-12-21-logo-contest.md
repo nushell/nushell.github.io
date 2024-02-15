@@ -6,8 +6,6 @@ author_image: https://www.nushell.sh/blog/images/nu_logo.png
 description: "We are looking for a logo and a mascot: WE NEED YOU!"
 ---
 
-## Who's got talent?
-
 Quite often the community asks us what the logo and the mascot of Nushell are.
 Unfortunately, as of today, we do not have a fully satisfying and official
 answer to this :open_mouth:

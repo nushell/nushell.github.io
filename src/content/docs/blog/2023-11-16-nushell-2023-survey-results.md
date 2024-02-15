@@ -6,8 +6,6 @@ author_image: https://www.nushell.sh/blog/images/nu_logo.png
 description: Let's take a look at the results of the 2023 Nushell survey
 ---
 
-## Nushell Survey 2023
-
 In August/September of this year, we put out a survey to learn about how Nushell was being used and to learn what was holding people back from using Nushell. In this post, we'll detail the results of that survey.
 
 The survey had 451 responses, nearly triple what our 2019 survey had.
