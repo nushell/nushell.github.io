@@ -36,7 +36,7 @@ Using `ls | sort-by type name -i | grid -c`, it looks like this:
 
 ## Gotta have a Chuck Norris joke
 
-```nushellshell
+```nushell
 > (http get https://api.chucknorris.io/jokes/random).value
 ```
 
@@ -69,7 +69,7 @@ It even comes with its own help
 
 "Here is my favorite: Cross-platform symlink:"
 
-```nushellshell
+```nushell
 # Create a symlink
 export def symlink [
     existing: path   # The existing file
