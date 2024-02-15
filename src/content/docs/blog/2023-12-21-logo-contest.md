@@ -93,7 +93,7 @@ Below are the four main phases of this event:
 | _preselection_ | 2024-02-01 | **2024-02-14** |
 | _vote_ | 2024-02-15 | **2024-02-29** |
 
-:::tip Note
+:::note
 precise dates might change at some point, e.g. if submissions keep coming even
 close to the submission deadline.
 
@@ -102,7 +102,7 @@ you'll be the first to be updated on that!
 
 The results and the _winners_ will be announced shortly in March 2024.
 
-:::tip Note
+:::note
 details on the vote will be given in due time, but will likely happen either on
 Discord and/or with a _Google Form_
 :::
