@@ -31,8 +31,6 @@ return dateB - dateA;
 })
 .map(filteredBlogPostEntry => (
 
-{" "}
-
 <LinkCard
   title={filteredBlogPostEntry.data.title}
   href={`${filteredBlogPostEntry.slug.replace("blog", "/blog")}`}
