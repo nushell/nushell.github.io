@@ -2,8 +2,6 @@
 title: Setup
 ---
 
-# Setup
-
 To get the most out of nu, it is important to setup your path and env for easy access.
 There are other ways to view these values and variables, however setting up your nu configuration will make it much easier as these have cross-platform support.
 

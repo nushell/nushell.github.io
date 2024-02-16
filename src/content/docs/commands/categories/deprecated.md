@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Deprecated
 ---
-
-# Deprecated
 
 <script>
   import pages from '@temp/pages'

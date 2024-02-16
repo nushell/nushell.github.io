@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Math
 ---
-
-# Math
 
 <script>
   import pages from '@temp/pages'

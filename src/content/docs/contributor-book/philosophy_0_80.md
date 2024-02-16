@@ -2,8 +2,6 @@
 title: Philosophy (0.80)
 ---
 
-# Nushell design philosophy
-
 ## Core philosophy
 
 Nushell is "A shell-first scripting language for working with structured data flowing through pipelines".

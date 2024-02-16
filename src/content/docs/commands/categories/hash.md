@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Hash
 ---
-
-# Hash
 
 <script>
   import pages from '@temp/pages'

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Nu as a Shell
 ---
-
-# Nu as a Shell
 
 The [Nu Fundamentals](nu_fundamentals) and [Programming in Nu](programming_in_nu) chapter focused mostly on the language aspects of Nushell.
 This chapter sheds the light on the parts of Nushell that are related to the Nushell interpreter (the Nushell [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)).

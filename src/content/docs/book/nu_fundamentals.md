@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Nu Fundamentals
 ---
-
-# Nu Fundamentals
 
 This chapter explains some of the fundamentals of the Nushell programming language.
 After going through it, you should have an idea how to write simple Nushell programs.

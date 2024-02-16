@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Platform
 ---
-
-# Platform
 
 <script>
   import pages from '@temp/pages'

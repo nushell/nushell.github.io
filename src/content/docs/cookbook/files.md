@@ -2,8 +2,6 @@
 title: Files
 ---
 
-# Files
-
 ### Editing a file and then saving the changes
 
 Here we are making edits to `Cargo.toml`. We increase the patch version of the crate using `inc` and then save it back to the file.

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Experimental
 ---
-
-# Experimental
 
 <script>
   import pages from '@temp/pages'

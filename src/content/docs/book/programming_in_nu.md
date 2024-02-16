@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Programming in Nu
 ---
-
-# Programming in Nu
 
 This chapter goes into more detail of Nushell as a programming language.
 Each major language feature has its own section.

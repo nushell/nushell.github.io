@@ -2,8 +2,6 @@
 title: HTTP
 ---
 
-# HTTP
-
 ### Fetching JSON from a url
 
 ```nushell

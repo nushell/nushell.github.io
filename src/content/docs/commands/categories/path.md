@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Path
 ---
-
-# Path
 
 <script>
   import pages from '@temp/pages'

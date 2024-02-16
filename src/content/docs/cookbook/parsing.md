@@ -2,8 +2,6 @@
 title: Parsing
 ---
 
-# Parsing
-
 _Nu_ offers the ability to do some basic parsing, with different ways to achieve the same goal.
 
 Builtin-functions that can be used include:

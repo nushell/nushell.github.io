@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Prompt
 ---
-
-# Prompt
 
 <script>
   import pages from '@temp/pages'

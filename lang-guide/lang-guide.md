@@ -1,4 +1,6 @@
-# The Nushell Language
+---
+title: The Nushell Language
+---
 
 ## Basic Types
 

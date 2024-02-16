@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Misc
 ---
-
-# Misc
 
 <script>
   import pages from '@temp/pages'

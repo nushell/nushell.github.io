@@ -79,11 +79,12 @@ hello
 
 The result should be similar as in the previous section.
 
-> **Note**
-> that the `use greetings.nu hello` call here first implicitly creates the `greetings` module,
-> then takes `hello` from it. You could also write it as `module greetings.nu`, `use greetings hello`.
-> Using `module` can be useful if you're not interested in any definitions from the module but want to,
-> e.g., re-export the module (`export module greetings.nu`).
+:::note
+that the `use greetings.nu hello` call here first implicitly creates the `greetings` module,
+then takes `hello` from it. You could also write it as `module greetings.nu`, `use greetings hello`.
+Using `module` can be useful if you're not interested in any definitions from the module but want to,
+e.g., re-export the module (`export module greetings.nu`).
+:::
 
 ## Modules from directories
 
@@ -196,7 +197,9 @@ Submodules are modules inside modules. They are automatically created when you c
 
 The difference is that `export module some-module` _only_ adds the module as a submodule, while `export use some-module` _also_ re-exports the submodule's definitions. Since definitions of submodules are available when importing from a module, `export use some-module` is typically redundant, unless you want to re-export its definitions without the namespace prefix.
 
-> **Note** > `module` without `export` defines only a local module, it does not export a submodule.
+:::note
+`module` without `export` defines only a local module, it does not export a submodule.
+:::
 
 Let's illustrate this with an example. Assume three files:
 
@@ -451,10 +454,11 @@ $env.NU_LIB_DIRS = [
    `use completions *`
    Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
 
-> **Note**
-> This will use the file name (in our example `git` from `git.nu`) as the module name. This means some completions might not work if the definition has the base command in it's name.
-> For example, if you defined our known externals in our `git.nu` as `export extern 'git push' []`, etc. and followed the rest of the steps, you would get subcommands like `git git push`, etc.
-> You would need to call `use completions git *` to get the desired subcommands. For this reason, using `main` as outlined in the step above is the preferred way to define subcommands.
+:::note
+This will use the file name (in our example `git` from `git.nu`) as the module name. This means some completions might not work if the definition has the base command in it's name.
+For example, if you defined our known externals in our `git.nu` as `export extern 'git push' []`, etc. and followed the rest of the steps, you would get subcommands like `git git push`, etc.
+You would need to call `use completions git *` to get the desired subcommands. For this reason, using `main` as outlined in the step above is the preferred way to define subcommands.
+:::
 
 ### Setting environment + aliases (conda style)
 
@@ -505,4 +509,6 @@ It can be one of the following:
 
 - Hides all of the module's exports, without the prefix
 
-> **Note** > `hide` is not a supported keyword at the root of a module (unlike `def` etc.)
+:::note
+`hide` is not a supported keyword at the root of a module (unlike `def` etc.)
+:::

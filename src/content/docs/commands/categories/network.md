@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Network
 ---
-
-# Network
 
 <script>
   import pages from '@temp/pages'

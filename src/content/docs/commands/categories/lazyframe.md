@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Lazyframe
 ---
-
-# Lazyframe
 
 <script>
   import pages from '@temp/pages'

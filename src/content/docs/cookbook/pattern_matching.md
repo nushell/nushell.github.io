@@ -2,8 +2,6 @@
 title: Pattern Matching
 ---
 
-# Pattern Matching
-
 ## Using the `match` keyword
 
 Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands/docs/match#frontmatter-title-for-core) keyword. Usually this is used as a slightly more ergonomic version of `if-else` statements if you have many branches

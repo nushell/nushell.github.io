@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Expression
 ---
-
-# Expression
 
 <script>
   import pages from '@temp/pages'

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Strings
 ---
-
-# Strings
 
 <script>
   import pages from '@temp/pages'

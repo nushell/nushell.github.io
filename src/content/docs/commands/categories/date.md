@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Date
 ---
-
-# Date
 
 <script>
   import pages from '@temp/pages'

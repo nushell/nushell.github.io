@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Removed
 ---
-
-# Removed
 
 <script>
   import pages from '@temp/pages'

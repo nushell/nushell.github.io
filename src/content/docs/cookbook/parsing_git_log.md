@@ -2,9 +2,7 @@
 title: Parsing Git Log
 ---
 
-# Parsing Git Log
-
-# Let's parse git log
+## Let's parse git log
 
 This `git log` command is interesting but you can't do a lot with it like this.
 

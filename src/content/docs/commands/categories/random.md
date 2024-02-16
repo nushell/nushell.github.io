@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Random
 ---
-
-# Random
 
 <script>
   import pages from '@temp/pages'

@@ -2,8 +2,6 @@
 title: Polars vs Pandas vs Nushell
 ---
 
-# Polars vs Pandas vs Nushell
-
 A dataframe example based on https://studioterabyte.nl/en/blog/polars-vs-pandas
 
 ## 1. Opening the file and show the shape of the DataFrame

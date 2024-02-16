@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Bits
 ---
-
-# Bits
 
 <script>
   import pages from '@temp/pages'

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Conversions
 ---
-
-# Conversions
 
 <script>
   import pages from '@temp/pages'

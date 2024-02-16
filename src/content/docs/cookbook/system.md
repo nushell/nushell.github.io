@@ -2,8 +2,6 @@
 title: System
 ---
 
-# System
-
 Nu offers many commands that help interface with the filesystem and control your operating system.
 
 ### View all files in the current directory

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Viewers
 ---
-
-# Viewers
 
 <script>
   import pages from '@temp/pages'

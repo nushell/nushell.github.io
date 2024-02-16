@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Chart
 ---
-
-# Chart
 
 <script>
   import pages from '@temp/pages'

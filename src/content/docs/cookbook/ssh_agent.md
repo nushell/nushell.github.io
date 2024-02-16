@@ -2,8 +2,6 @@
 title: ssh-agent
 ---
 
-# Manage SSH passphrases
-
 `eval` is not available in nushell, so run:
 
 ```nushell

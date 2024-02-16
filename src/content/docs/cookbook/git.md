@@ -2,8 +2,6 @@
 title: Git
 ---
 
-# Git
-
 Nu can help with common `Git` tasks like removing all local branches which have been merged into master.
 
 ### Delete git merged branches

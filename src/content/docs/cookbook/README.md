@@ -1,12 +1,10 @@
 ---
-title: Introducing nushell
+title: Cookbook
 author: Jonathan Turner
 author_site: https://twitter.com/jntrnr
 author_image: https://www.nushell.sh/blog/images/jonathandturner.jpg
 description: Today, we're introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.
 ---
-
-# Cookbook
 
 In this section we have put together a bunch of useful tips to get you
 started with Nushell. These are simple commands that will help you ease your

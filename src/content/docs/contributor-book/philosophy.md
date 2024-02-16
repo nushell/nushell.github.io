@@ -2,8 +2,6 @@
 title: Philosophy
 ---
 
-# Philosophy
-
 ## Core Values
 
 Nu's core value is that working in a shell should be fun. To support this, we believe that:

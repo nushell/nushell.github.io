@@ -10,7 +10,7 @@ Recently, we ran a short survey to see how you were feeling about [Nushell](http
 
 In total, **160** people responded. An impressive amount for a project still in its first few months in the public.
 
-# Do you use Nu?
+## Do you use Nu?
 
 ![63.1% don't use, 24.4% use but stopped, 12.5% use](/assets/images/nushell_survey_2019_percent.png)
 
@@ -18,9 +18,9 @@ The survey welcomed both users and non-users of Nu. In our first question, we wa
 
 But first, let's take a look at the responses from folks how are currently using Nu.
 
-# Nu users
+## Nu users
 
-## What do you like? (20 responses)
+### What do you like? (20 responses)
 
 ![favorite features (tables #1 by a long margin)](/assets/images/nushell_survey_2019_fave_features.png)
 
@@ -51,9 +51,9 @@ There were also a batch of additional improvements people wished for: full scrip
 - _"Compatibility with other shells. It's annoying that I often have to add quotes when copying a command from a website."_
 - _"Honestly, I wish I knew enough about Nu that I could add a bunch of documentation to show others what it could do."_
 
-# Nu non-users
+## Nu non-users
 
-## What's stopping you from using Nu? (100 responses)
+### What's stopping you from using Nu? (100 responses)
 
 ![blocked adoption: top ones are time and maturity](/assets/images/nushell_survey_2019_blockers.png)
 
@@ -86,7 +86,7 @@ Other topics that came up: needing better autocomplete, needing aliases, better 
 - _"Also the lack of documentation around the different commands is a major impediment."_
 - _"Lack of middle-of-the-word completion, mostly. Also all the aliases I have defined that I’d need to port over."_
 
-# Anything else we should know? (68 responses)
+## Anything else we should know? (68 responses)
 
 ![so much love](/assets/images/nushell_survey_2019_anything_else.png)
 
@@ -105,7 +105,7 @@ Overwhelming, people sent us love and encouragement. Lots of it. We wanted to ta
 
 And thank _you_ for responding to our survey!
 
-# Conclusions
+## Conclusions
 
 The astute reader may already see some of the changes we've done recently were directly inspired by comments in this survey, and more are planned. This has been a great help, and we're looking forward to growing Nu with you in the coming months.
 

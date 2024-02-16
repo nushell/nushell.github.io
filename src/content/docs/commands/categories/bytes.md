@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Bytes
 ---
-
-# Bytes
 
 <script>
   import pages from '@temp/pages'

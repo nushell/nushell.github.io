@@ -1,8 +1,6 @@
 ---
-title: Community
+title: History
 ---
-
-# History
 
 <script>
   import pages from '@temp/pages'

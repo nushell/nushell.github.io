@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Dataframe Or Lazyframe
 ---
-
-# Dataframe Or Lazyframe
 
 <script>
   import pages from '@temp/pages'

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Formats
 ---
-
-# Formats
 
 <script>
   import pages from '@temp/pages'

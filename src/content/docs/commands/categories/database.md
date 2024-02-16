@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Database
 ---
-
-# Database
 
 <script>
   import pages from '@temp/pages'

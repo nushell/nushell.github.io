@@ -14,7 +14,7 @@ This release was made by Jonathan Turner (me), Yehuda Katz, and Andrés Robalino
 
 ![Nu in action](/assets/images/nushell-autocomplete4.gif)
 
-# But why?
+## But why?
 
 Many of us have gotten used to bash (or zsh/fish/etc), and don't understand why you would need another kind of shell. That was me, too, a few months ago before I started working on this. My friend Yehuda had discovered PowerShell and was going on and on about how amazing it was to do more with the shell, but until he actually gave me a demo, I didn't really believe him.
 
@@ -22,7 +22,7 @@ Then he talked me into joining him on an idea he had. What if we could take the 
 
 In this post, I'll talk about how a few simple ideas drive how Nu works, what Nu can do with them, and where we hope to go in the future.
 
-# Simple ideas
+## Simple ideas
 
 To Nu, everything is data. When you type `ls`, you're given a table of information about the directory you're listing:
 
@@ -42,7 +42,7 @@ Where this simple concept - that everything in Nu is data - starts to shine when
 
 Nu also understands structured text files like JSON, TOML, YAML, and more. Opening these files gives us the same tables we saw with `ls` and `ps`. Again, this lets us use the same commands to filter our data, explore it, and use it.
 
-# Working with the outside world
+## Working with the outside world
 
 The above approach could be fun, but if we're not careful, it could become a walled garden. What happens outside of the commands Nu comes with?
 
@@ -210,7 +210,7 @@ Oh, before I forget - I wanted to quickly show how to get data from Nu back out 
 
 You can see that we can mix-and-match commands that are inside of Nu with those that are outside, and data will still flow between them as expected. But Nu is more than just a pipeline.
 
-# More than a pipeline
+## More than a pipeline
 
 As we built Nu, we realized we could experiment with other parts of how a shell works. The first of these experiments lead us to an observation: if everything is data in Nu, we should be able to view this data.
 
@@ -247,7 +247,7 @@ You might wonder how does that even work. Nu has a metadata system (still early!
 
 Data that flows through the pipeline gets a set of additional metadata tagged to it. We can use this later to figure out how to display the contents, show a better error message, and more.
 
-# Shells, plural
+## Shells, plural
 
 Let's say you're in a directory, but you'd really like to flip back and forth between it and one or two others. You could open up multiple tabs, multiple terminals, if you're on a Unix system you could use "screen", and probably even more than that. What if the shells were just built in?
 
@@ -308,17 +308,17 @@ That's right, we're in the file. Can we `cd`? Oh yes, we can:
 ----+----------------------+---------------------------
 ```
 
-# Plugins
+## Plugins
 
 Nu can't come with everything you might want to do with it, so we're releasing Nu with the ability to extend it with plugins. There's more information in the [plugins chapters](https://www.nushell.sh/book/plugins). Nu will look for these plugins in your path, and load them up on startup.
 
-# All because of Rust
+## All because of Rust
 
 Nu would not have been possible without Rust. Internally, it uses async/await, async streams, and liberal use of "serde" to manage serializing and deserializing into the common data format and to communicate with plugins.
 
 We also heavily leveraged [crates.io](https://crates.io). The ability to load numerous file formats, display messages, draw tables, and more all came from the hundreds (thousands?) of generous developers who wrote the crates we use in Nu. A **huge** thank you to everyone who contributed to Nu without ever knowing it.
 
-# What's next?
+## What's next?
 
 Nu is just getting started. In this release, we have a foundation to build on. Next, we'll work towards stability, the ability to use Nu as your main shell, the ability to write functions and scripts in Nu, and much more.
 

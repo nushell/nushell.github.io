@@ -2,8 +2,6 @@
 title: Plugins
 ---
 
-# Plugins
-
 ## Protocol
 
 Plugins are executable applications that communicate with Nu by exchanging serialized data over stdin and stdout (much in the same way VSCode plugins do). The protocol is split into two stages.

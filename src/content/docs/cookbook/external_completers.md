@@ -2,8 +2,6 @@
 title: External Completers
 ---
 
-# External Completers
-
 ## Completers
 
 ### Carapace completer
@@ -51,16 +49,18 @@ This completer is not usable for almost every other command, so it's recommended
 }
 ```
 
-> **Note**
-> Zoxide sets an alias (`z` by default) that calls the `__zoxide_z` function.
-> If [alias completions](#alias-completions) are supported, the following snippet can be used instead:
->
-> ```nushell
-> {
->     __zoxide_z => $zoxide_completer
->     __zoxide_zi => $zoxide_completer
-> }
-> ```
+:::note
+Zoxide sets an alias (`z` by default) that calls the `__zoxide_z` function.
+If [alias completions](#alias-completions) are supported, the following snippet can be used instead:
+
+```nushell
+{
+     __zoxide_z => $zoxide_completer
+     __zoxide_zi => $zoxide_completer
+}
+```
+
+:::
 
 ### Multiple completer
 
@@ -76,11 +76,13 @@ let multiple_completers = {|spans|
 }
 ```
 
-> **Note**
-> In the example above, `$spans.0` is the command being run at the time. The completer will match the desired completer, and fallback to `$default_completer`.
->
-> - If we try to autocomplete `git <tab>`, `spans` will be `[git ""]`. `match $spans.0 { ... }` will return the `$git_completer`.
-> - If we try to autocomplete `other_command <tab>`, `spans` will be `[other_command ""]`. The match will fallback to the default case (`_`) and return the `$default_completer`.
+:::note
+In the example above, `$spans.0` is the command being run at the time. The completer will match the desired completer, and fallback to `$default_completer`.
+
+- If we try to autocomplete `git <tab>`, `spans` will be `[git ""]`. `match $spans.0 { ... }` will return the `$git_completer`.
+- If we try to autocomplete `other_command <tab>`, `spans` will be `[other_command ""]`. The match will fallback to the default case (`_`) and return the `$default_completer`.
+
+:::
 
 ## Troubleshooting
 

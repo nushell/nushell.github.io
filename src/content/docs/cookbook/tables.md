@@ -2,8 +2,6 @@
 title: Advanced table workflows
 ---
 
-# Advanced table workflows
-
 ### Merging tables of different size
 
 Examples shown in [`Working with tables`](../book/working_with_tables) work fine when our tables have equal amount of rows but what if we want to merge tables of different sizes?

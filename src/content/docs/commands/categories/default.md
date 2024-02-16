@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Default
 ---
-
-# Default
 
 <script>
   import pages from '@temp/pages'

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Filesystem
 ---
-
-# Filesystem
 
 <script>
   import pages from '@temp/pages'

@@ -2,8 +2,6 @@
 title: jq vs Nushell
 ---
 
-# jq vs Nushell
-
 Both [`jq`](https://jqlang.github.io/jq/) and `nu` have the ability to transform data in a composable way. This cookbook will walk you through common data manipulation tasks with the aim of building a solid mental model for using Nushell effectively.
 
 All examples will stick to JSON to keep parity between examples.
@@ -755,8 +753,7 @@ This section provides the implementation of the custom commands used in this coo
 ╰──────┴─────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-```nushell
-# toolbox.nu
+```nushell title="toolbox.nu"
 use std assert
 
 # A command for cherry-picking values from a record key recursively

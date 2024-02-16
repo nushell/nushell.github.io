@@ -1,8 +1,6 @@
 ---
-title: Community
+title: DataFrame
 ---
-
-# Dataframe
 
 <script>
   import pages from '@temp/pages'

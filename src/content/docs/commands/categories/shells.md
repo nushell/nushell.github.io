@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Shells
 ---
-
-# Shells
 
 <script>
   import pages from '@temp/pages'

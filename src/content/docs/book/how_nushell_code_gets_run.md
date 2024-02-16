@@ -1,8 +1,6 @@
 ---
-title: Community
+title: How Nushell Code Gets Run
 ---
-
-# How Nushell Code Gets Run
 
 As you probably noticed, Nushell behaves quite differently from other shells and dynamic languages. In [Thinking in Nu](/book/thinking_in_nu#think-of-nushell-as-a-compiled-language), we advise you to _think of Nushell as a compiled language_ but we do not give much insight into why. This section hopefully fills the gap.
 

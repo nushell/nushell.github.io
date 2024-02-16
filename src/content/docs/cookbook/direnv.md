@@ -2,8 +2,6 @@
 title: Direnv
 ---
 
-# Direnv
-
 Many people use [direnv](https://direnv.net) to load an environment upon entering a directory as well as unloading it when exiting the directory.
 Configuring direnv to work with nushell requires nushell version 0.66 or later.
 

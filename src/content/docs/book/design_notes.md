@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Design Notes
 ---
-
-# Design Notes
 
 This chapter intends to give more in-depth overview of certain aspects of Nushell's design. The topics are not necessary for a basic usage, but reading them will help you understand how Nushell works and why.
 

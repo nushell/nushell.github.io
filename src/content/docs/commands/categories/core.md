@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Core
 ---
-
-# Core
 
 <script>
   import pages from '@temp/pages'

@@ -1,8 +1,6 @@
 ---
-title: Community
+title: Generators
 ---
-
-# Generators
 
 <script>
   import pages from '@temp/pages'
