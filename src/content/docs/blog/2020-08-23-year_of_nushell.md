@@ -8,25 +8,25 @@ description: Hard to imagine that it's already been a year since Nu first went p
 
 Hard to imagine that it's already been a year since Nu first went public. At the time, it was largely a demo of what could be possible, but still needed quite a bit of work to make it ready for everyday use. A year later and we've learned a lot, and made a few mistakes along the way. In this post, we look back over the year and see how we did and where we might be going in the future.
 
-# History
+## History
 
 When Nu first started, it started with a simple idea: the output of `ls`, `ps`, and `sysinfo` should all output the same thing. Taking a page from PowerShell, we explored outputting structured data and quickly settled on a table design that would support the output of each of the three commands, with the added ability of streaming the output as it became available.
 
 Around this idea, we then built a set of "filters", like the `where` clause, borrowed from SQL, and a growing set of data types we would support natively. Soon, we were able to write more complex statements like `ls | where size > 10kb`. This became the crux of the idea - commands that output values from a core set of data types into a stream, composed together with the traditional UNIX pipe (`|`), so that you could build up a complex set of commands that work over the data as it streams through.
 
-# Nushell today
+## Nushell today
 
-## Contributors
+### Contributors
 
 Before we got started talking about Nushell today, we wanted to give a _big_ "thank you!" to everyone who has contributed to Nu to get us to this point. Nu is what it is because of your help.
 
 1ntEgr8, AaronC81, AdminXVII, aeosynth, aeshirey, aidanharris, almindor, Aloso, Amanita-muscaria, amousa11, andrasio, Andrew-Webb, arashout, arnaldo2792, avandesa, avranju, bailey-layzer, BatmanAoD, bndbsh, Bocom, boisgera, Borimino, BradyBromley, BurNiinTRee, Byron, candostdagdeviren, casidiablo, charlespierce, chhetripradeep, cjpearce, coolshaurya, cristicismas, DangerFunPants, daschl, daveremy, davidrobertmason, Delapouite, dependabot[bot], Detegr, devnought, Dimagog, djc, drmason13, DrSensor, elichai, eltonlaw, EmNudge, eoinkelly, equal-l2, est31, fdncred, filalex77, Flare576, gilesv, gorogoroumaru, GuillaumeGomez, hdhoang, he4d, hilias, HiranmayaGundu, hirschenberger, homburg, iamcodemaker, incrop, ineol, Jacobious52, jankoprowski, JCavallo, jdvr, jerodsanto, JesterOrNot, johnae, johnterickson, jonathandturner, JonnyWalker81, jonstodle, JosephTLyons, jzaefferer, k-brk, Kelli314, klnusbaum, kloun, kornelski, kubouch, kvrhdn, landaire, lesichkovm, LhKipp, lightclient, lincis, lord, luccasmmg, marcelocg, matsuu, mattclarke, mattyhall, max-sixty, mfarberbrodsky, mhmdanas, mike-morr, miller-time, mistydemeo, mlbright, mlh758, morrme, nalshihabi, naufraghi, nespera, neuronull, nickgerace, nmandery, notryanb, oknozor, orf, orientnab, oskarskog, oylenshpeegul, pag4k, Paradiesstaub, philip-peterson, piotrek-szczygiel, pizzafox, pka, pmeredit, pontaoski, Porges, pulpdrew, q-b, quebin31, rabisg0, ramonsnir, rimathia, ritobanrc, rnxpyke, romanlevin, routrohan, rrichardson, rtlechow, rutrum, ryuichi1208, Samboy218, samhedin, sandorex, sdfnz, sebastian-xyz, shaaraddalvi, shiena, siedentop, Sosthene-Guedon, Southclaws, svartalf, taiki-e, Tauheed-Elahee, tchak, thegedge, tim77, Tiwalun, twe4ked, twitu, u5surf, UltraWelfare, uma0317, utam0k, vsoch, vthriller, waldyrious, warrenseine, wycats, yaahc, yahsinhuangtw, yanganto, ymgyt, zombie110year
 
-# What is Nushell?
+## What is Nushell?
 
 Nushell is an interactive programming language for working with your files, your system, and your data as a shell, a notebook, and more.
 
-## Nu is more than a shell
+### Nu is more than a shell
 
 It's easy to think of Nushell as just a shell. It's even got 'shell' in the name. It's the first and probably main way you'll interact with it. So why say it's "more than a shell"?
 
@@ -40,17 +40,17 @@ When we say that "Nu is more than a shell", does that imply that Nu can be used 
 
 The idea of Nu runs deeper than just the shell, to being a language that's relatively easy to learn, yet powerful enough to do real work with your system, to process large amounts of data, to interactively let you iterate quickly on an idea, to invite exploration by building up a pipeline one piece at a time. There's really no shortage of ambition for where we hope to go.
 
-# The design of Nu
+## The design of Nu
 
 Nu's original design has proven surprisingly robust thus far. Some of its core ideas are continuing to pay dividends a year later. Let's look at the designs that still feel right.
 
-## Pipelines are infinite
+### Pipelines are infinite
 
 When we first started writing Nu, we took a few shortcuts that had us processing all the data in a pipeline at once. Very quickly, we realize this wasn't going to work. External commands (think `cat /dev/random`) can output an infinite stream of data, and the system needs to be able to handle it. Understanding this, we transitioned to a different model: data flows between command as infinite streams of structured data. As the data is processed, we avoid collecting the data whenever possible to allow this streaming to happen.
 
 Because the streams can be infinite, even the printing out of tables is done a batch at a time.
 
-## Separating viewing data from the data itself
+### Separating viewing data from the data itself
 
 Coming from other shells, the idea of running `echo` or `ls` goes hand-in-hand with printing something to the terminal. It's difficult to see that there two steps going on behind the scenes: creating the information and then displaying it to the screen.
 
@@ -60,7 +60,7 @@ That's because both `echo` and `ls` are lazy commands. They'll only do the work 
 
 Behind the scenes, Nu converts a standalone `ls` to be the pipeline `ls | autoview`. The work of viewing comes from `autoview` and it handles working with the data and calling the proper viewer. In this way, we're able to keep things as structured data for as long as possible, and only convert it to be displayed as the final step before being shown to the user. (note: the wasm-based demo and jupyter do a similar step, but instead of adding `autoview`, they add `to html`)
 
-## Rich data types
+### Rich data types
 
 In a similar way to working with structured data, rather than only plain text, Nu takes a different approach to data types as well. Nu takes the traditional set of basic types, like strings and numbers, and extends them into a richer set of basic data primitives.
 
@@ -198,17 +198,17 @@ Nushell currently sits at just over 55k lines of code, built from almost 1300 me
 
 _Growth in code size with each version_
 
-# Surprises?
+## Surprises?
 
 It's funny, when you start working on a shell it's easy to think "it'll be like a REPL". In fact, it's closer to creating an interactive IDE for the terminal. As people came to Nu from other shells, including shells like fish, there was a strong assumption that completions would be stellar, that it will integrate well with existing workflows, and it will support configuring the prompt, the keybindings, and more.
 
 It also turns out that getting a shell correct is a lot more experimentation and a lot less following what the textbooks say. In practice, things like 'stdout' and 'stderr' are used in a variety of ways, as are the exit codes output by programs. Our initial designs started with a stricter view of these ideas, and softened over time as we saw that the real world is a much fuzzier place than we realized.
 
-# Quirks
+## Quirks
 
 Nu hasn't been without a few quirks. Like any awkward growth spurt, we've had our awkward times and still have a few "curious" areas.
 
-## No variables, yet
+### No variables, yet
 
 Had you a time machine and told us a year ago that we still wouldn't have variables today, we probably wouldn't have believed you. Isn't that an important part of a language?
 
@@ -221,7 +221,7 @@ That, of course, has its limits. At some point you want to take the result of on
 
 There are other questions we still need to answer as well, like how do variables and function definitions play together? How do variables shadow each other (or even if they're allowed)?
 
-## To view or not to view
+### To view or not to view
 
 Nushell, being a language focused on working on structured data, has a few quirks with how and when the data is viewed. For one, Nushell has multiple types of data, and different types of data may have different viewing needs. To help with this, we created `autoview`, a command that will look at the data and detect a variety of different cases. Once it's identified the shape of the data, it will call out to the viewing command that handles viewing that particular kind of data.
 
@@ -233,7 +233,7 @@ In the current version of Nu, we don't. We treat anything to the left of `;` as 
 
 This seems reasonable until you see something like `echo "hello"; echo "world"` and only see the output "world" and then have to stop and think through all the steps that led to that output.
 
-## Getting turned around
+### Getting turned around
 
 As it turns out, the terminal is small. Want to view a few columns? Generally not a problem. Want to open that random CSV file from work with 30 columns? Well, now we might have a problem. How does that 30 column file actually look when you print it out in the terminal, with a nicely drawn table?
 
@@ -241,27 +241,27 @@ For some cases, we found we could be helpful by rotating the table so that the c
 
 That being said, it's not without its trade-offs. To some folks, rotating the table when they aren't expecting it can be very disorienting. We're still working to figure out the best defaults and heuristics.
 
-# Future work
+## Future work
 
-## Focus
+### Focus
 
 Nushell is in the stage of the project where we're still experimenting with what the language should be, how it works in practice, and finding out what its most important core values are. Rust, the language Nushell is written in, went through a similar stage. As it found its most important values, it tried on others. Once people started to create real projects in Rust, and show what was possible with this core part of the language, the design began to gel and then solidify as it arrived at 1.0. As part of that, early ideas were modified or discarded altogether.
 
 Nushell will go through a similar stage. As it grows, it will find its sweet spot, its niche that it naturally fills. The design will come from features built to solve real problems, and we'll polish these features, improving their utility, error messages, documentation, and overall flow. The end result will be a sharper, more focused Nushell that feels like the tool you want in your toolbox. Some early adopters are already giving us feedback that Nushell is well on its way of meeting this role, and we're excited to continue to explore and refine as we go.
 
-## Exploring the data model
+### Exploring the data model
 
 There are some really juicy open questions that we'll work on in the coming year. We already have a fairly rich set of data primitives, like strings, dates, file sizes, durations, and more. Figuring out what makes sense to be built-in vs what should be added from outside of the core Nu data model will take a bit of time and finesse as we get more experience working with Nu in the real world.
 
-## Shifting to being a full language
+### Shifting to being a full language
 
 Looking at Nu today, you can see some common parts of languages like `if` or `open`, but it doesn't yet feel like there's enough syntax to build up full programs. You can't define your own commands, your own variables, and you can't build out a project across multiple files. We're working to address all of these limitations so that Nu can function not only for one-liners, but also for much more.
 
-## Getting completions _really_ good
+### Getting completions _really_ good
 
 A regular point of feedback is that people want completions where possible. We've got some ideas here that will allow us to have completions in far more places, including external commands (think `git checkout <TAB>`). We're laying the groundwork for this now, and looking forward to rolling out more functionality as we go.
 
-# Conclusion
+## Conclusion
 
 We had far more support and made far more progress than we could have ever predicted a year ago. Today's Nu is something many people use as their daily driver, and it gets stronger with each release. We're excited to bring Nu to a broader audience as we continue to improve usability, grow its feature set, and refine its internals.
 
