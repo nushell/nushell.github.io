@@ -40,7 +40,7 @@ and how all this will unfold :yum:
 - any offensive or out-of-topic content will obviously be removed during the
   preselection
 
-:::caution[warning] IMPORTANT NOTE: On the use of generative algorithms
+:::caution[IMPORTANT NOTE: On the use of generative algorithms]
 Because we (as in the Nushell project) want to fully own the logo and mascot of
 Nushell, we want to have a certain level of confidence in the fact that you are
 indeed the author of the artworks you submit and thus are able to fully, and
