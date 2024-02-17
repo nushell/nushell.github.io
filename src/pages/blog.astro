@@ -1,0 +1,30 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { LinkCard } from "@astrojs/starlight/components";
+import { getCollection } from "astro:content";
+const blogEntries = await getCollection("docs");
+---
+
+<StarlightPage frontmatter={{ title: "Nu Blog", template: "splash" }}>
+  {
+    blogEntries
+      .filter((blogPostEntry) => {
+        const parts = blogPostEntry.slug.split("-");
+        return (
+          parts.length > 3 && !isNaN(Date.parse(parts.slice(0, 3).join("-")))
+        );
+      })
+      .sort((a, b) => {
+        const dateA = new Date(a.slug.split("-").slice(0, 3).join("-"));
+        const dateB = new Date(b.slug.split("-").slice(0, 3).join("-"));
+        return dateB - dateA;
+      })
+      .map((filteredBlogPostEntry) => (
+        <LinkCard
+          title={filteredBlogPostEntry.data.title}
+          href={`${filteredBlogPostEntry.slug.replace("blog", "/blog")}`}
+          description={filteredBlogPostEntry.data.description}
+        />
+      ))
+  }
+</StarlightPage>
