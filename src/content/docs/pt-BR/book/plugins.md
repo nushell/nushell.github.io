@@ -1,4 +1,6 @@
-# Plugins
+---
+title: Plugins
+---
 
 A funcionalidade do Nu pode ser extendida usando plugins. Os plugins podem desenpenhar muitas das mesmas operações que os comandos embutidos do Nu, com o benefício adicional de que eles podem ser incluídos separadamente do Nu em si.
 

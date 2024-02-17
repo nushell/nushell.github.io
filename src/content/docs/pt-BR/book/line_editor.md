@@ -1,4 +1,6 @@
-# Reedline, o editor de linha do Nu
+---
+title: Reedline, o editor de linha do Nu
+---
 
 O editor de linha Reedline do Nushell é um leitor de linha multiplataforma projetado para ser modular e flexível. O motor é responsável por controlar o histórico de comandos, validações, preenchimentos, dicas e pintura da tela.
 

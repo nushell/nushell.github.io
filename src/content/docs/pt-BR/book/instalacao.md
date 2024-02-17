@@ -1,4 +1,6 @@
-# Instalando Nu
+---
+title: Instalandu Nu
+---
 
 Atualmente, as melhores maneiras de instalar o Nu são a partir do [crates.io](https://crates.io), fazer o download dos binários da nossa [página de releases](https://github.com/nushell/nushell/releases), fazer o build a partir dos fontes ou baixar um container pronto com o Docker.
 

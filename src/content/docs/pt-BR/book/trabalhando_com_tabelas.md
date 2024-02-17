@@ -1,4 +1,6 @@
-# Trabalhando com tabelas
+---
+title: Trabalhando com tabelas
+---
 
 Uma forma comum de ver os dados no Nu é por meio de uma tabela. O Nu traz um conjunto de comandos para se trabalhar com tabelas, facilitar a localização do que você procura e restringir os dados apenas ao que você precisa.
 

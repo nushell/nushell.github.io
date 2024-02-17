@@ -1,4 +1,6 @@
-# Carregando dados
+---
+title: Carregando dados
+---
 
 Anteriormente vimos como você pode usar comandos como `ls`, `ps`, `date` e `sys` para carregar informações sobre seus arquivos, processos, data e hora e sobre o sistema em si. Cada comando retorna uma tabela de informações que podemos explorar. Há outras maneiras de se carregar uma tabela de dados com a qual trabalhar.
 
