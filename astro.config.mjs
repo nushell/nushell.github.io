@@ -15,6 +15,31 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Nushell Docs",
+      defaultLocale: "en",
+      locales: {
+        en: {
+          label: "English",
+        },
+        "zh-cn": {
+          label: "简体中文",
+          lang: "zh-CN",
+        },
+        es: {
+          label: "Español",
+        },
+        ja: {
+          label: "日本語",
+        },
+        pt: {
+          label: "Português",
+        },
+        ru: {
+          label: "Русский",
+        },
+        de: {
+          label: "Deutsch",
+        },
+      },
       expressiveCode: {
         themes: [nushellTheme],
         shiki: {
@@ -39,9 +64,11 @@ export default defineConfig({
       sidebar: [
         {
           label: "Book",
+          collapsed: true,
           items: [
             {
               label: "Start Here",
+              collapsed: true,
               items: [
                 { label: "Introduction", link: "/introduction/" },
                 { label: "Getting Started", link: "/book/getting_started/" },
@@ -149,10 +176,12 @@ export default defineConfig({
         },
         {
           label: "Command Reference",
+          collapsed: true,
           link: "/commands/",
         },
         {
           label: "Cookbook",
+          collapsed: true,
           items: [
             { label: "Introduction", link: "/introduction/" },
             { label: "Getting Started", link: "/book/getting_started/" },
