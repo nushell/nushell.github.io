@@ -1,4 +1,6 @@
-# 命令索引
+---
+title: 命令索引
+---
 
 若要查看所有 Nushell 命令, 可以执行 [`help commands`](/commands/docs/help.md)。
 

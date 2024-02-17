@@ -1,4 +1,6 @@
-# 加载数据
+---
+title: 加载数据
+---
 
 之前我们使用了[`ls`](/commands/docs/ls.md)、[`ps`](/commands/docs/ps.md)、[`date`](/commands/docs/date.md)和[`sys`](/commands/docs/sys.md)等命令来加载关于文件、进程、日期时间和系统本身的信息。每条命令都会给我们提供一个信息表，以对其进行探索。我们也可以通过其他方式将数据载入表格以供使用。
 

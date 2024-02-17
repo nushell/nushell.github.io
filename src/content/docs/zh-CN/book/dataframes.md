@@ -1,4 +1,6 @@
-# DataFrames
+---
+title: 数据框
+---
 
 ::: warning
 要使用`DataFrame`支持，您需要使用 `cargo build --features dataframe` 构建一个具有完整功能的版本。从版本 0.72 开始，Nushell 的二进制发布版本中 _不_ 包含`DataFrame`。[请参阅安装说明](/book/installation.md) 以获取更多详细信息。

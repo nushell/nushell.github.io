@@ -1,4 +1,6 @@
-# 从 Bash 到 Nu
+---
+title: 从 Bash 到 Nu
+---
 
 如果你是来自 Windows 上的`Git Bash`用户，那么你习惯的外部命令（bash、grep 等）在`nu`中默认是不可用的（除非你在 Windows 路径环境变量中明确包含了它们）。
 要使这些命令在`nu`中可用，请在你的`config.nu`中添加以下一行，用`append`或`prepend`。

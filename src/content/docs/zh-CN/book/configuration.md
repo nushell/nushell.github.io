@@ -1,4 +1,6 @@
-# 配置
+---
+title: 配置
+---
 
 ## Nushell 配置与`env.nu`和`config.nu`
 

@@ -1,4 +1,6 @@
-# 安装 Nu
+---
+title: 安装 Nu
+---
 
 有很多方法可以获取并使用 Nu。你可以从我们的 [发布页面](https://github.com/nushell/nushell/releases) 下载预编译的二进制文件，也可以 [使用你喜欢的软件包管理器](https://repology.org/project/nushell/versions)，或者从源码构建。
 

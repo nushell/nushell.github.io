@@ -1,4 +1,6 @@
-# Shell 中的 Shell
+---
+title: Shell 中的 Shell
+---
 
 ## 在多个目录下工作
 

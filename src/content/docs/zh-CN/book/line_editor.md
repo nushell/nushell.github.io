@@ -1,4 +1,6 @@
-# Reedline，Nu 的行编辑器
+---
+title: Reedline，Nu 的行编辑器
+---
 
 Nushell 的行编辑器 [Reedline](https://github.com/nushell/reedline) 是一个跨平台的行读取器，它被设计为模块化且颇具灵活性的。该引擎的作用是负责控制命令历史，验证，自动补全，提示以及屏幕绘制。
 

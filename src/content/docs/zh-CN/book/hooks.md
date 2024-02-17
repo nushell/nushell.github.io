@@ -1,4 +1,6 @@
-# 钩子
+---
+title: 钩子
+---
 
 钩子允许你在一些预定义的情况下运行一个代码片段。
 它们只在交互式模式下可用（[REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)），如果你用脚本（`nu script.nu`）或命令（`nu -c "echo foo"`）参数运行 Nushell 则不起作用。
