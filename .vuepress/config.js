@@ -1,5 +1,6 @@
 import path from 'path';
 import { defineUserConfig } from '@vuepress/cli';
+import { viteBundler } from '@vuepress/bundler-vite';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { feedPlugin } from 'vuepress-plugin-feed2';
 import { shikiPlugin } from '@vuepress/plugin-shiki';
@@ -42,6 +43,7 @@ export default defineUserConfig({
   // set the base URL to ciRepo dir if it's a fork
   // keep the default root if not
   base: ciRepo && ciUser !== 'nushell' ? `/${ciRepo}/` : '/',
+  bundler: viteBundler(),
   locales: {
     '/': {
       lang: 'English',
@@ -99,6 +101,7 @@ export default defineUserConfig({
   },
   // without this, we attempt to prefetch the whole site 😬
   shouldPrefetch: false,
+  colorMode: 'auto',
   theme: defaultTheme({
     repo: 'nushell/nushell',
     repoLabel: 'GitHub',
