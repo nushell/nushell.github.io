@@ -1,4 +1,6 @@
-# Nu のインストール
+---
+title: Nu のインストール
+---
 
 Nu を入手して実行するには多くの方法があります。[リリースページ](https://github.com/nushell/nushell/releases) からビルド済みのバイナリーをダウンロードすることもできますし、 [あなたの好きなパッケージマネージャーを使う](https://repology.org/project/nushell/versions) ことも、あるいはソースからビルドする方法もあります。
 
