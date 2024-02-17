@@ -1,4 +1,6 @@
-# Trabajando con tablas
+---
+title: Trabajando con tablas
+---
 
 Una de las maneras comunes de mirar datos en Nu es a través de una tabla. Nu viene con una serie de comandos que trabajan con tablas para que pueda ser más conveniente encontrar lo que estás buscando y para limitar los datos a solo lo que necesites.
 

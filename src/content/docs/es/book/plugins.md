@@ -1,4 +1,6 @@
-# Complementos (plugins)
+---
+title: Complementos (plugins)
+---
 
 Se puede ampliar la funcionalidad de Nu a través de complementos. Los complementos pueden realizar muchas de las mismas operaciones que los comandos integrados de Nu con el beneficio adicional de que se pueden agregar separado de Nu.
 

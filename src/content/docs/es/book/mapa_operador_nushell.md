@@ -1,4 +1,6 @@
-# Mapa de operadores en Nushell
+---
+title: Mapa de operadores en Nushell
+---
 
 La idea detrás de esta tabla is ayudarte a entender como los operadores en Nu se relacionan con operadores de otros lenguajes. Hemos intentado producir un mapa de los operadores y sus equivalentes en otros lenguajes. Contribuciones son bienvenidas.
 

@@ -1,4 +1,6 @@
-# Metadatos
+---
+title: Metadatos
+---
 
 Al usar Nu es posible que hayan momentos que has encontrado como si algo extra sucediera detrás de escenas. Por ejemplo digamos que intentas abrir un archivo soportado por Nu para luego olvidarte e intentar convertir nuevamente:
 

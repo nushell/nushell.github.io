@@ -1,4 +1,6 @@
-# Mapa nushell de lenguajes imperativos
+---
+title: Mapa nushell de lenguajes imperativos
+---
 
 La idea detrás de esta tabla is ayudarte a entender como los comandos internos y plugins en Nu se relacionan con lenguajes imperativos. Hemos intentado producir un mapa de los comandos internos y sus equivalentes en otros lenguajes. Contribuciones son bienvenidas.
 

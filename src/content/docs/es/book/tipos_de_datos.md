@@ -1,4 +1,6 @@
-# Tipos de datos
+---
+title: Tipos de datos
+---
 
 Tradicionalmente, comandos shell de Unix se han comunidado entre ellos usando cadenas de texto. Un comando generaría de salida texto a través de la salida estándar (comúnmente abreviada 'stdout') y el otro leer texto a través de la entrada estándar (o 'stdin').
 

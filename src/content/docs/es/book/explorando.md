@@ -1,4 +1,6 @@
-# Explorando en el sistema
+---
+title: Explorando el sistema
+---
 
 Shells de antes permiten explorar el sistema de archivos y ejecutar comandos. Shells modernas como Nu permiten hacer lo mismo. Miremos algunos comandos comunes que puedas usar cuando interactues con el sistema.
 

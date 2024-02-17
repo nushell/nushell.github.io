@@ -1,4 +1,6 @@
-# Variables y Subexpresiones
+---
+title: Variables y Subexpresiones
+---
 
 En Nushell hay dos tipos de expresiones de evaluación: variables y subexpresiones. Cuando lees expresiones que empiezan con el signo dólar (`$`) sabes que trabajas con una expresión de evaluación. Esto indica que cuando Nushell toma el valor en esta posición, necesitará ejecutar un paso de evaluación para procesar la expresión y posterioremente usar el valor del resultado. Ambas formas de expresión de evaluación soportan un modo simple y una forma ruta (`path`) para trabajar con datos más complejos.
 

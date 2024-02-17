@@ -1,4 +1,6 @@
-# Matemáticas
+---
+title: Matemáticas
+---
 
 Hay veces que simplemente necesitas sumar un par de números cuando te encuentras resolviendo problemas. Nu ofrece un conjunto de operaciones matemáticas básicas que puedes utilizar. Expresiones matemáticas se encuentran disponibles cuando llamas a un comando.
 

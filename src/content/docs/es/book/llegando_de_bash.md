@@ -1,4 +1,6 @@
-# Llegando desde Bash
+---
+title: Llegando desde Bash
+---
 
 Nota: Esta tabla asume Nushell 0.14.1 or posterior.
 

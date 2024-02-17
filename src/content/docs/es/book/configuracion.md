@@ -1,4 +1,6 @@
-# Configuración
+---
+title: Configuración
+---
 
 Nu tiene un número pequeño, pero creciente, de variables internas que puedes establecer cambios en su aspecto y funcionamiento. A continuación una lista de las variables actuales, sus tipos, y una descripción de cómo se utilizan:
 

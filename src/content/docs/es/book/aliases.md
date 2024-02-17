@@ -1,3 +1,7 @@
+---
+title: Aliases
+---
+
 # Aliases
 
 La habilidad de Nu para componer tuberías largas permite tener bastante control de su sistema y datos, pero a costas de tipear mucho. Sería ideal que puedas grabar las tuberías bien elaboradas para hacer uso de esas las veces que quieras.

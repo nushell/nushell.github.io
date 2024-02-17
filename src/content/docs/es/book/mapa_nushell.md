@@ -1,4 +1,6 @@
-# Mapa nushell de otras shells y lenguajes DSLs
+---
+title: Mapa nushell de otras shells y lenguajes DSLs
+---
 
 La idea detrás de esta tabla is ayudarte a entender como los comandos internos y plugins en Nu se relacionan con otras shells conocidas y lenguajes de dominio específicos. Hemos intentado producir un mapa de los comandos internos y sus equivalentes en otros lenguajes. Contribuciones son bienvenidas.
 

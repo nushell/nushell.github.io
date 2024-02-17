@@ -1,4 +1,6 @@
-# Shells en shells
+---
+title: Shells en shells
+---
 
 ## Trabajando con múltiples directorios
 
