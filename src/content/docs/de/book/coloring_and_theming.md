@@ -1,4 +1,6 @@
-# Farben und Themen in Nu
+---
+title: Farben und Themen in Nu
+---
 
 In vielen Teilen von Nushells Oberfläche sind die Farben anpassbar. Dies wird in der Konfigurationsdatei `config.nu` erstellt.
 Ein Hashtag in der Konfigurationsdatei kommentiert den danach folgenden Text aus.

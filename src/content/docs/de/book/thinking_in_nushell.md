@@ -1,4 +1,6 @@
-# Denken in Nushell
+---
+title: Denken in Nushell
+---
 
 Um Nushell besser zu verstehen und das Beste aus ihr herauszuholen, ist dieses Kapitel "Denken in Nushell" zusammengestellt worden.
 Denken in Nushell und Verstehen ihres zugrundeliegenden Modells, hilft beim Einstieg und auf dem Weg zum Erfolg.

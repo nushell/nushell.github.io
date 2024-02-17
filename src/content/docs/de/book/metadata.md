@@ -1,4 +1,6 @@
-# Metadaten
+---
+title: Metadaten
+---
 
 Bei der Verwendung von Nu ist es Ihnen vielleicht schon einmal passiert, dass Sie das Gefühl hatten, dass hinter den Kulissen noch etwas anderes vor sich geht. Nehmen wir zum Beispiel an, Sie versuchen, eine Datei zu öffnen, die Nu unterstützt, und vergessen es dann und versuchen erneut, sie zu konvertieren:
 

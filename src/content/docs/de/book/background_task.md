@@ -1,4 +1,6 @@
-# Hintergrund-Tasks in Nu
+---
+title: Hintergrund-Tasks in Nu
+---
 
 Aktuell besitzt Nushell kein eingebautes Hintergrund-Task Feature.
 Mit einigen Werkzeugen kann sie jedoch Hintergrund-Tasks unterstützen.

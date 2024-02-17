@@ -1,4 +1,6 @@
-# Eigene Vervollständigungen
+---
+title: Eigene Vervollständigungen
+---
 
 Eigene Vervollständigungen kombinieren zwei Merkmale von Nushell:
 Eigene Befehle und Vervollständigungen. Mit ihnen können Befehle erzeugt werden,

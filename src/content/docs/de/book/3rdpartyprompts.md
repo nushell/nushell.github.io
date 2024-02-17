@@ -1,4 +1,6 @@
-# Konfiguration von Drittanbieter-Prompts
+---
+title: Konfiguration von Drittanbieter-Prompts
+---
 
 ## nerdfonts
 

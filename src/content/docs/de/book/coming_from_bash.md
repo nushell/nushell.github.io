@@ -1,4 +1,6 @@
-# Vergleich zu Bash
+---
+title: Vergleich zu Bash
+---
 
 Hinweis: Diese Tabelle geht von Nu 0.59 oder neuer aus.
 

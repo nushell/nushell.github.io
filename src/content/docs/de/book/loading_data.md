@@ -1,4 +1,6 @@
-# Laden von Daten
+---
+title: Laden von Daten
+---
 
 Im letzten Kapitel wurden Befehle wie [`ls`](/commands/docs/ls.md), [`ps`](/commands/docs/ps.md),
 [`date`](/commands/docs/date.md), and [`sys`](/commands/docs/sys.md) vorgestellt um Informationen

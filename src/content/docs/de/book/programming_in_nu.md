@@ -1,4 +1,6 @@
-# Programmieren in Nu
+---
+title: Programmieren in Nu
+---
 
 Dieses Kapitel geht mehr ins Detail, wie mit Nushell programmiert werden kann.
 Jedes grössere Sprach-Merkmal hat sein eigenes Kapitel.

@@ -1,4 +1,6 @@
-# Im System navigieren
+---
+title: Im System navigieren
+---
 
 Traditionelle Shells erlauben es im Dateisystem zu navigieren und Befehle auszuführen. So auch Nu. Hier die gängigsten Befehle, die beim Interagieren mit dem System am häufigsten benutzt werden.
 

@@ -1,4 +1,6 @@
-# Nu als Shell
+---
+title: Nushell als Shell
+---
 
 Die Kapitel [Nu Grundlagen](nu_fundamentals.md) und [Programmieren in Nu](programming_in_nu.md) fokusieren sich vor allem auf den Programmiersprach-Aspekt von Nushell.
 

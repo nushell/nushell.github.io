@@ -1,4 +1,6 @@
-# Befehls Signatur
+---
+title: Befehls Signatur
+---
 
 Nu Befehle enthalten einen Signatur Abschnitt. Zum Beispiel wie hier in [`str distance`](/commands/docs/str_distance.md):
 

@@ -1,4 +1,6 @@
-# Datentypen
+---
+title: Datentypen
+---
 
 Traditionellerweise haben Unix Shell Befehle immer über Text Zeichenketten kommuniziert. Eine Befehlsausgabe erfolgte als Text an den Standard Output (oft als `stout` bezeichnet),
 der nächste Befehl hat wiederum von Standard Input gelesen (oder `stdin`), was den beiden Befehlen die Kommunikation ermöglicht hat.

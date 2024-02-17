@@ -1,4 +1,6 @@
-# Eigene Befehle
+---
+title: Eigene Befehle
+---
 
 Die Fähigkeit von Nu, lange Pipelines zu verarbeiten, erlauben es große Kontrolle über Daten und das System zu haben. Das Ganze kommt allerdings zum Preis von viel Tipparbeit. Idealerweise sollte es eine Möglichkeit geben, mühsam gebaute Pipelines zu speichern und wieder und wieder auszuführen.
 

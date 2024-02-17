@@ -1,4 +1,6 @@
-# Mit Text arbeiten
+---
+title: Mit Text arbeiten
+---
 
 Texte können ganz verschiedene Formen von Daten annehmen.
 Es können Dateinamen, Verzeichniss-Pfade, Spaltennamen und vieles mehr sein.

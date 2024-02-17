@@ -1,4 +1,6 @@
-# Pipelines
+---
+title: Pipelines
+---
 
 Eine der grundlegenden Funktionen in Nu ist die Pipeline. Ein Konzept, welches seine Wurzeln tief in der Unix Philosophie hat.
 So wie Nu die Arbeit mit Texten als dem Basis Datentyp in Unix erweitert, erweitert sie auch die Idee der Pipeline, um mehr als nur Text zu verarbeiten.

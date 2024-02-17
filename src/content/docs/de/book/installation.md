@@ -1,4 +1,6 @@
-# Nu installieren
+---
+title: Nu installieren
+---
 
 Der aktuell beste Weg Nu zu bekommen ist, es von [crates.io](https://crates.io) zu installieren, Binärdateien von unserer [Release-Seite](https://github.com/nushell/nushell/releases) herunterzuladen oder es selbst zu kompilieren.
 

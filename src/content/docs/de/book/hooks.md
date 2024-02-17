@@ -1,4 +1,6 @@
-# Hooks
+---
+title: Hooks
+---
 
 Hooks ermöglichen es, einen Code-Snippet in vordefinierten Situationen auszuführen.
 Sie sind nur im interaktiven Modus verfügbar [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), sie funktionieren nicht, wenn eine Nushell mit einem Skript `(nu script.nu`) oder dem Befehl `(nu -c "print foo`") Argument ausgefüht wird.

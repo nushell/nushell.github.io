@@ -1,4 +1,6 @@
-# Plugins
+---
+title: Plugins
+---
 
 Die Funktionen von Nushell können mittels Plugins erweitert werden. Diese Plugins können einen Großteil der selben Operationen ausführen, wie die internen Befehle. Noch dazu haben Plugins den Vorteil, dass sie separat und flexibel zu Nushell hinzugefügt werden können.
 

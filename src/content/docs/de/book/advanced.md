@@ -1,4 +1,6 @@
-# (Nicht nur für) Fortgeschrittene
+---
+title: (Nicht nur für) Fortgeschrittene
+---
 
 Der Titel "Fortgeschritten" mag abschrecken und zum Überspringen des Kapitels animieren, doch tatsächlich sind einige der interessantesten und mächtigsten Merkmale hier zu finden.
 

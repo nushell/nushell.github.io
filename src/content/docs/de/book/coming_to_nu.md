@@ -1,4 +1,6 @@
-# Wechsel zu Nu
+---
+title: Wechsel zu Nu
+---
 
 Sind andere Shells oder Programmiersprachen ein Begriff, so finden sich in diesem Kapitel einige Informationen um schneller Fuss zu fassen in Nu.
 

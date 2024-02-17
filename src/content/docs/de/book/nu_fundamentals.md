@@ -1,4 +1,6 @@
-# Nu Grundlagen
+---
+title: Nu Grundlagen
+---
 
 In diesem Kapitel sind die Grundlagen der Nushell Programmiersprache erklärt.
 Damit sollte es möglich sein, einfache Nushell Programme zu schreiben.

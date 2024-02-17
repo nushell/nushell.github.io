@@ -1,4 +1,6 @@
-# Mit Tabellen arbeiten
+---
+title: Mit Tabellen arbeiten
+---
 
 Eine der häufigsten Arten mit Daten zu arbeiten geschieht in Nu durch Tabelle. Nu stellt diverse Befehle zur Verfügung,
 um mit Tabelle auf einfache Art die Daten zu finden und zu filtern, die benötigt werden.

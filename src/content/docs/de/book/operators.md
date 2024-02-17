@@ -1,4 +1,6 @@
-# Operatoren
+---
+title: Operatoren
+---
 
 Nushell unterstützt folgende Operatoren für gängige Mathematik, Logik und Text Operationen:
 

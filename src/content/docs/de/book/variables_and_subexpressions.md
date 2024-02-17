@@ -1,4 +1,6 @@
-# Variablen und Unterausdrücke
+---
+title: Variablen und Unterausdrücke
+---
 
 Es gibt zwei Arten von auszuwertenden Ausdrücken in Nushell: Variablen und Unterausdrücke. Diese werden durch das Dollar Symbol (`$`) eingeleitet. Das gibt den Hinweis, dass Nushell an dieser Stelle einen Ausdruck auswerten muss, um einen Wert zu erhalten, der für die Ausführung eines gesamten Befehls benötigt wird. Beide Formen des Ausdrucks haben eine einfache Variante und eine 'Pfad'-Variante, wenn mit komplexeren Daten gearbeitet wird.
 

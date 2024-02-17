@@ -1,4 +1,6 @@
-# Environment
+---
+title: Environment
+---
 
 Eine häufige Aufgabe in einer Shell ist die Kontrolle der Umgebung, in der die externen Programme laufen. Dies wird meist automatisch geschehen,
 da die Umgebung dem externen programm mitgegeben wird, wenn es gestartet wird. Manchmal jedoch will man eine genauere Kontrolle darüber,

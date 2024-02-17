@@ -1,4 +1,6 @@
-# Command Reference
+---
+title: Befehlsreferenz
+---
 
 <script>
   import pages from '@temp/pages'

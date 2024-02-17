@@ -1,4 +1,6 @@
-# Mit Listen arbeiten
+---
+title: Mit Listen arbeiten
+---
 
 ## Listen erstellen
 

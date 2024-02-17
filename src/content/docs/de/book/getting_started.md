@@ -1,4 +1,6 @@
-# Fangen wir an
+---
+title: Fangen wir an
+---
 
 Lasst uns anfangen! :elephant:
 

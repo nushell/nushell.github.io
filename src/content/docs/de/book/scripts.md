@@ -1,4 +1,6 @@
-# Skripte
+---
+title: Skripte
+---
 
 In Nushell können Skripte geschrieben und ausgeführt werden, welche in der Nushell Sprache geschrieben sind.
 Um ein Skript auszuführen, wird es dem Befehl `nu` als Argument übergeben:

@@ -1,4 +1,6 @@
-# Konfiguration
+---
+title: Konfiguration
+---
 
 ## Nushell Konfiguration mittels `config.nu`
 

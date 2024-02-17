@@ -1,4 +1,6 @@
-# Einführung
+---
+title: Einführung
+---
 
 Hallo und herzlich Willkommen beim Nushell Projekt. Das Ziel diese Projekts ist es, die Philosophie von Unix Shells, wo Pipes einfache Befehle miteinander verbinden, mit modernen Ansätzen zu verbinden.
 

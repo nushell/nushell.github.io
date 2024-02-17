@@ -1,4 +1,6 @@
-# Aliase
+---
+title: Aliase
+---
 
 Aliase in Nushell bieten eine einfache Möglichkeit, um Texte zur ersetzen. Damit ist es möglich, einen Kurznamen für längere Befehle zu definieren - inklusive der Argumente.
 
