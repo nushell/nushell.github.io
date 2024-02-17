@@ -478,8 +478,8 @@ Redirection to a pipeline:
 
 | type |  command  | `$result` contents | printed to terminal |
 | --------- | --------- | ------  | ---- |
-| \| |  `let result = nu demo.nu \| str upcase` | "foo" | "barbar" |
-| e>\| | `let result = nu demo.nu e>\| str upcase` | "barbar" | "foo" |
+| \| |  `let result = nu demo.nu \| str upcase` | "FOO" | "barbar" |
+| e>\| | `let result = nu demo.nu e>\| str upcase` | "BARBAR" | "foo" |
 | o+e>\| | `let result = nu demo.nu e+o>\| str upcase` | "FOO\nBARBAR" | nothing |
 
 Redirection to a file:
