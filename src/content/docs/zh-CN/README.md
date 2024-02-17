@@ -1,4 +1,5 @@
 ---
+title: Nushell
 home: true
 heroImage: null
 heroText: Nushell
