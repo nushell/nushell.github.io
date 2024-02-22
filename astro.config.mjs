@@ -15,10 +15,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Nushell Docs",
-      defaultLocale: "en",
+      defaultLocale: "root",
       locales: {
-        en: {
+        root: {
           label: "English",
+          lang: "en",
         },
         "zh-cn": {
           label: "简体中文",
@@ -68,10 +69,15 @@ export default defineConfig({
           items: [
             {
               label: "Start Here",
+              translations: { "pt-BR": "Comece Aqui" },
               collapsed: true,
               items: [
                 { label: "Introduction", link: "/introduction/" },
-                { label: "Getting Started", link: "/book/getting_started/" },
+                {
+                  label: "Getting Started",
+                  link: "/book/getting_started/",
+                  translations: { "pt-BR": "Introdução" },
+                },
                 { label: "Installation", link: "/book/installation/" },
                 { label: "Default Shell", link: "/book/default_shell/" },
                 { label: "Quick Tour", link: "/book/quick_tour/" },
