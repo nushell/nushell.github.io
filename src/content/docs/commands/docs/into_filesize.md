@@ -44,7 +44,7 @@ feature: default
 
 Convert string to filesize in table
 
-```nushell
+```nu
 > [[device size]; ["/dev/sda1" "200"] ["/dev/loop0" "50"]] | into filesize size
 ╭───┬────────────┬───────╮
 │ # │   device   │ size  │
@@ -57,28 +57,28 @@ Convert string to filesize in table
 
 Convert string to filesize
 
-```nushell
+```nu
 > '2' | into filesize
 2 B
 ```
 
 Convert float to filesize
 
-```nushell
+```nu
 > 8.3 | into filesize
 8 B
 ```
 
 Convert int to filesize
 
-```nushell
+```nu
 > 5 | into filesize
 5 B
 ```
 
 Convert file size to filesize
 
-```nushell
+```nu
 > 4KB | into filesize
 3.9 KiB
 ```

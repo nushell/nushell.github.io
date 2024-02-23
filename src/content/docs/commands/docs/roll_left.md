@@ -40,7 +40,7 @@ Command `roll left` was not included in the official binaries by default, you ha
 
 Rolls columns of a record to the left
 
-```nushell
+```nu
 > {a:1 b:2 c:3} | roll left
 ╭───┬───╮
 │ b │ 2 │
@@ -51,7 +51,7 @@ Rolls columns of a record to the left
 
 Rolls columns of a table to the left
 
-```nushell
+```nu
 > [[a b c]; [1 2 3] [4 5 6]] | roll left
 ╭───┬───┬───┬───╮
 │ # │ b │ c │ a │
@@ -64,7 +64,7 @@ Rolls columns of a table to the left
 
 Rolls columns to the left without changing column names
 
-```nushell
+```nu
 > [[a b c]; [1 2 3] [4 5 6]] | roll left --cells-only
 ╭───┬───┬───┬───╮
 │ # │ a │ b │ c │

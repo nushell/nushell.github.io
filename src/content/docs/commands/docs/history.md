@@ -35,21 +35,21 @@ feature: default
 
 Get current history length
 
-```nushell
+```nu
 > history | length
 
 ```
 
 Show last 5 commands you have ran
 
-```nushell
+```nu
 > history | last 5
 
 ```
 
 Search all the commands from history that contains 'cargo'
 
-```nushell
+```nu
 > history | where command =~ cargo | get command
 
 ```

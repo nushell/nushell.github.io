@@ -45,35 +45,35 @@ feature: default
 
 Delete, or move a file to the trash (based on the 'always_trash' config option)
 
-```nushell
+```nu
 > rm file.txt
 
 ```
 
 Move a file to the trash
 
-```nushell
+```nu
 > rm --trash file.txt
 
 ```
 
 Delete a file permanently, even if the 'always_trash' config option is true
 
-```nushell
+```nu
 > rm --permanent file.txt
 
 ```
 
 Delete a file, ignoring 'file not found' errors
 
-```nushell
+```nu
 > rm --force file.txt
 
 ```
 
 Delete all 0KB files in the current directory
 
-```nushell
+```nu
 > ls | where size == 0KB and type == file | each { rm $in.name } | null
 
 ```

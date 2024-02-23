@@ -30,7 +30,7 @@ feature: default
 
 Ignore the output of an echo command
 
-```nushell
+```nu
 > echo done | ignore
 
 ```

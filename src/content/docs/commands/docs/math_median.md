@@ -35,14 +35,14 @@ feature: default
 
 Compute the median of a list of numbers
 
-```nushell
+```nu
 > [3 8 9 12 12 15] | math median
 10.5
 ```
 
 Compute the medians of the columns of a table
 
-```nushell
+```nu
 > [{a: 1 b: 3} {a: 2 b: -1} {a: -3 b: 5}] | math median
 ╭───┬───╮
 │ a │ 1 │
@@ -52,7 +52,7 @@ Compute the medians of the columns of a table
 
 Find the median of a list of file sizes
 
-```nushell
+```nu
 > [5KB 10MB 200B] | math median
 4.9 KiB
 ```

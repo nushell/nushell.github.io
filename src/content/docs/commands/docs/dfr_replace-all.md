@@ -39,7 +39,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Replaces string
 
-```nushell
+```nu
 > [abac abac abac] | dfr into-df | dfr replace-all --pattern a --replace A
 ╭───┬──────╮
 │ # │  0   │

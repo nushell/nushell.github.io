@@ -39,14 +39,14 @@ feature: default
 
 Register `nu_plugin_query` plugin from ~/.cargo/bin/ dir
 
-```nushell
+```nu
 > register ~/.cargo/bin/nu_plugin_query
 
 ```
 
 Register `nu_plugin_query` plugin from `nu -c` (writes/updates $nu.plugin-path)
 
-```nushell
+```nu
 > let plugin = ((which nu).path.0 | path dirname | path join 'nu_plugin_query'); nu -c $'register ($plugin); version'
 
 ```

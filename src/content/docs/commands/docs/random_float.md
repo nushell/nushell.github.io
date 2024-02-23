@@ -34,28 +34,28 @@ feature: default
 
 Generate a default float value between 0 and 1
 
-```nushell
+```nu
 > random float
 
 ```
 
 Generate a random float less than or equal to 500
 
-```nushell
+```nu
 > random float ..500
 
 ```
 
 Generate a random float greater than or equal to 100000
 
-```nushell
+```nu
 > random float 100000..
 
 ```
 
 Generate a random float between 1.0 and 1.1
 
-```nushell
+```nu
 > random float 1.0..1.1
 
 ```

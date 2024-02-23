@@ -34,7 +34,7 @@ feature: default
 
 Exit the current shell
 
-```nushell
+```nu
 > exit
 
 ```

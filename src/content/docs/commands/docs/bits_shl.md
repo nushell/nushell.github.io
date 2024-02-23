@@ -44,28 +44,28 @@ Command `bits shl` was not included in the official binaries by default, you hav
 
 Shift left a number by 7 bits
 
-```nushell
+```nu
 > 2 | bits shl 7
 256
 ```
 
 Shift left a number with 1 byte by 7 bits
 
-```nushell
+```nu
 > 2 | bits shl 7 --number-bytes '1'
 0
 ```
 
 Shift left a signed number by 1 bit
 
-```nushell
+```nu
 > 0x7F | bits shl 1 --signed
 254
 ```
 
 Shift left a list of numbers
 
-```nushell
+```nu
 > [5 3 2] | bits shl 2
 ╭───┬────╮
 │ 0 │ 20 │

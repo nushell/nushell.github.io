@@ -35,21 +35,21 @@ feature: default
 
 Sleep for 1sec
 
-```nushell
+```nu
 > sleep 1sec
 
 ```
 
 Sleep for 3sec
 
-```nushell
+```nu
 > sleep 1sec 1sec 1sec
 
 ```
 
 Send output after 1sec
 
-```nushell
+```nu
 > sleep 1sec; echo done
 
 ```

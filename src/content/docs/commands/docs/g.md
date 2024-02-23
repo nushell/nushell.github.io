@@ -25,28 +25,28 @@ usage: |
 
 Lists all open shells
 
-```nushell
+```nu
 > g
 
 ```
 
 Make two directories and enter new shells for them, use `g` to jump to the specific shell
 
-```nushell
+```nu
 > mkdir foo bar; enter foo; enter ../bar; g 1
 
 ```
 
 Use `shells` to show all the opened shells and run `g 2` to jump to the third one
 
-```nushell
+```nu
 > shells; g 2
 
 ```
 
 Make two directories and enter new shells for them, use `g -` to jump to the last used shell
 
-```nushell
+```nu
 > mkdir foo bar; enter foo; enter ../bar; g -
 
 ```

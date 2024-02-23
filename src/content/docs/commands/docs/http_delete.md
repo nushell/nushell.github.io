@@ -48,35 +48,35 @@ feature: default
 
 http delete from example.com
 
-```nushell
+```nu
 > http delete https://www.example.com
 
 ```
 
 http delete from example.com, with username and password
 
-```nushell
+```nu
 > http delete --user myuser --password mypass https://www.example.com
 
 ```
 
 http delete from example.com, with custom header
 
-```nushell
+```nu
 > http delete --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 http delete from example.com, with body
 
-```nushell
+```nu
 > http delete --data 'body' https://www.example.com
 
 ```
 
 http delete from example.com, with JSON body
 
-```nushell
+```nu
 > http delete --content-type application/json --data { field: value } https://www.example.com
 
 ```

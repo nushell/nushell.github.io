@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Min value from columns in a dataframe
 
-```nushell
+```nu
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr min
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -46,7 +46,7 @@ Min value from columns in a dataframe
 
 Min aggregation for a group-by
 
-```nushell
+```nu
 > [[a b]; [one 2] [one 4] [two 1]]
     | dfr into-df
     | dfr group-by a

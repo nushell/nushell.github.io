@@ -44,14 +44,14 @@ Command `bits rol` was not included in the official binaries by default, you hav
 
 Rotate left a number with 2 bits
 
-```nushell
+```nu
 > 17 | bits rol 2
 68
 ```
 
 Rotate left a list of numbers with 2 bits
 
-```nushell
+```nu
 > [5 3 2] | bits rol 2
 ╭───┬────╮
 │ 0 │ 20 │

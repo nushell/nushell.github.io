@@ -37,21 +37,21 @@ feature: default
 
 Checks if binary starts with `0x[1F FF AA]`
 
-```nushell
+```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[1F FF AA]
 true
 ```
 
 Checks if binary starts with `0x[1F]`
 
-```nushell
+```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[1F]
 true
 ```
 
 Checks if binary starts with `0x[1F]`
 
-```nushell
+```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[11]
 false
 ```

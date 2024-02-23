@@ -31,7 +31,7 @@ feature: default
 
 Print a 'humanized' format for the date, relative to now.
 
-```nushell
+```nu
 > "2021-10-22 20:00:12 +01:00" | date humanize
 
 ```

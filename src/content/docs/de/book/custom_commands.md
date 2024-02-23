@@ -8,7 +8,7 @@ Hier kommen eigene Befehle ins Spiel.
 
 Eine beispielhafte Definition eines eigenen Befehls sieht wie folgt aus:
 
-```nushell
+```nu
 def greet [name] {
   echo "hello" $name
 }
@@ -41,7 +41,7 @@ _Hinweis: Es wird empfohlen Worte in Befehlen mit `-` zur besseren Lesbarkeit zu
 
 Es ist auch möglich Unterbefehle zu definieren. Dazu wird der Unterbefehl vom Superbefehl durch ein Leerzeichen getrennt. Wenn beispielsweise der Befehl `str` durch einen Unterbefehl `mycommand` erweitert werden soll, funktioniert das wie folgt:
 
-```nushell
+```nu
 def "str mycommand" [] {
   echo hello
 }
@@ -57,7 +57,7 @@ Jetzt kann der eigene Unterbefehl aufgerufen werden, als ob er ein eingebauter B
 
 Wenn eigene Befehle definiert werden, kann optional auch der Typ jedes Parameters angegeben werden. Das obige Beispiel kann beispielsweise wie folgt abgeändert werden:
 
-```nushell
+```nu
 def greet [name: string] {
   echo "hello" $name
 }
@@ -67,7 +67,7 @@ Die Typen der Parameter anzugeben ist optional. Nushell erlaubt es diese wegzula
 
 Beispielhaft soll nur noch ein `int` als Typ erlaubt sein:
 
-```nushell
+```nu
 def greet [name: int] {
   echo "hello" $name
 }
@@ -118,7 +118,7 @@ Zusätzlich zu den obigen Parametern, können auch namenabhängige Parameter ver
 
 Zum Beispiel:
 
-```nushell
+```nu
 def greet [
   name: string
   --age: int
@@ -151,7 +151,7 @@ Flags können auch so definiert werden, dass es eine Kurzform gibt. Das erlaubt 
 
 Das Beispiel wird hier, um eine Kurzform für die Flag `age` erweitert:
 
-```nushell
+```nu
 def greet [
   name: string
   --age (-a): int
@@ -174,7 +174,7 @@ Um Nutzern eines eigenen Befehls zu helfen, können diese und ihre Parameter mit
 
 Es wird weiterhin das obige Beispiel verwendet:
 
-```nushell
+```nu
 def greet [
   name: string
   --age (-a): int
@@ -201,7 +201,7 @@ Wie zu sehen ist, werden der Parameter und die Flag, die definiert wurden, aufge
 
 Um diese Hilfe zu verbessern, können Beschreibungen zur Definition hinzugefügt werden:
 
-```nushell
+```nu
 # A greeting command that can greet the caller
 def greet [
   name: string      # The name of the person to greet
@@ -233,13 +233,13 @@ Flags:
 
 Eigene Befehle streamen ihre Ausgabe gleich wie eingebaute Befehle. Beispielsweise soll die folgende Pipeline umgebaut werden:
 
-```nushell
+```nu
 > ls | get name
 ```
 
 `ls` soll jetzt in einen neuen, eigenen Befehl verschoben werden:
 
-```nushell
+```nu
 def my-ls [] { ls }
 ```
 
@@ -262,7 +262,7 @@ Eigene Befehle können, wie andere Befehle, auch Eingaben verarbeiten. Diese Ein
 
 Hier soll nun beispielhaft ein eigener echo-Befehl definiert werden, der eine weitere Zeile nach jeder Zeile der Eingabe ausgibt:
 
-```nushell
+```nu
 def my-echo [] {
   each {
     echo $it "--"

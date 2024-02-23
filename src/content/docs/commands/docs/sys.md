@@ -30,21 +30,21 @@ feature: default
 
 Show info about the system
 
-```nushell
+```nu
 > sys
 
 ```
 
 Show the os system name with get
 
-```nushell
+```nu
 > (sys).host | get name
 
 ```
 
 Show the os system name
 
-```nushell
+```nu
 > (sys).host.name
 
 ```

@@ -41,28 +41,28 @@ Command `str pascal-case` was not included in the official binaries by default, 
 
 convert a string to PascalCase
 
-```nushell
+```nu
 > 'nu-shell' | str pascal-case
 NuShell
 ```
 
 convert a string to PascalCase
 
-```nushell
+```nu
 > 'this-is-the-first-case' | str pascal-case
 ThisIsTheFirstCase
 ```
 
 convert a string to PascalCase
 
-```nushell
+```nu
 > 'this_is_the_second_case' | str pascal-case
 ThisIsTheSecondCase
 ```
 
 convert a column from a table to PascalCase
 
-```nushell
+```nu
 > [[lang, gems]; [nu_test, 100]] | str pascal-case lang
 ╭───┬────────┬──────╮
 │ # │  lang  │ gems │

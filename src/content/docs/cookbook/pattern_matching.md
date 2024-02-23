@@ -6,7 +6,7 @@ title: Pattern Matching
 
 Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands/docs/match#frontmatter-title-for-core) keyword. Usually this is used as a slightly more ergonomic version of `if-else` statements if you have many branches
 
-```nushell
+```nu
 [black red yellow green purple blue indigo] | each {|c|
   match $c {
     "black" => "classy"
@@ -33,7 +33,7 @@ Output:
 
 The equivalent in `if-else` statements would be:
 
-```nushell
+```nu
 [black red yellow green purple blue] | each {|c|
   if ($c == "black") {
    "classy"
@@ -49,7 +49,7 @@ The equivalent in `if-else` statements would be:
 
 As you can see you can also use command expressions in match statements (in this case used with `|`). Also notice the `_` case at the end, this is called the default arm and is used in case none of the other patterns match. Note also that in the case that cases overlap the first matching pattern will be used (just like with `if-else` statements):
 
-```nushell
+```nu
 [yellow green] | each {|c|
   match $c {
     "green" => "fundamental"
@@ -71,7 +71,7 @@ Output:
 
 You can use the [`describe`](https://www.nushell.sh/commands/docs/describe) command to get more info about the types of values. For example:
 
-```nushell
+```nu
 {one: 1 two: 2} | describe
 ```
 
@@ -81,7 +81,7 @@ Output:
 record<one: int, two: int>
 ```
 
-```nushell
+```nu
 [{a: 1 b: 2} {a: 2 b:3 }] | describe
 ```
 
@@ -93,7 +93,7 @@ table<a: int, b: int>
 
 Together with `match` and some clever regex use you can do quite powerful type matching. For example, let's say we wanted to implement a `str append` function that would work on both strings and lists. On strings it would work as expected, on lists of strings, it should append the same string to each element of the list. Using `match` one might do that like so:
 
-```nushell
+```nu
 def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
     let input = $in
     match ($input | describe | str replace --regex '<.*' '') {
@@ -111,7 +111,7 @@ Also note that we have to capture the `$in` variable on the first statement of t
 
 With this implementation we can check that the command works as expected:
 
-```nushell
+```nu
 use std assert
 assert equal ("foo" | str append "/") "foo/"
 assert equal (["foo", "bar", "baz"] | str append "/") ["foo/", "bar/", "baz/"]

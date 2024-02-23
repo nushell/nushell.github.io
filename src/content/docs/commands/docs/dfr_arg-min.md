@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns index for min value
 
-```nushell
+```nu
 > [1 3 2] | dfr into-df | dfr arg-min
 ╭───┬─────────╮
 │ # │ arg_min │

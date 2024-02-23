@@ -34,28 +34,28 @@ feature: default
 
 Generate an unconstrained random integer
 
-```nushell
+```nu
 > random int
 
 ```
 
 Generate a random integer less than or equal to 500
 
-```nushell
+```nu
 > random int ..500
 
 ```
 
 Generate a random integer greater than or equal to 100000
 
-```nushell
+```nu
 > random int 100000..
 
 ```
 
 Generate a random integer between 1 and 10
 
-```nushell
+```nu
 > random int 1..10
 
 ```

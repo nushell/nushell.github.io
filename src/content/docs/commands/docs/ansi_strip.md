@@ -37,7 +37,7 @@ feature: default
 
 Strip ANSI escape sequences from a string
 
-```nushell
+```nu
 > $'(ansi green)(ansi cursor_on)hello' | ansi strip
 hello
 ```

@@ -35,28 +35,28 @@ feature: default
 
 Set a mutable variable to a value, then update it
 
-```nushell
+```nu
 > mut x = 10; $x = 12
 
 ```
 
 Upsert a value inside a mutable data structure
 
-```nushell
+```nu
 > mut a = {b:{c:1}}; $a.b.c = 2
 
 ```
 
 Set a mutable variable to the result of an expression
 
-```nushell
+```nu
 > mut x = 10 + 100
 
 ```
 
 Set a mutable variable based on the condition
 
-```nushell
+```nu
 > mut x = if false { -1 } else { 1 }
 
 ```

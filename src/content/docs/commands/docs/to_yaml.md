@@ -30,7 +30,7 @@ feature: default
 
 Outputs an YAML string representing the contents of this table
 
-```nushell
+```nu
 > [[foo bar]; ["1" "2"]] | to yaml
 - foo: '1'
   bar: '2'

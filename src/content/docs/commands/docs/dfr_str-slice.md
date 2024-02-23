@@ -42,7 +42,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Creates slices from the strings
 
-```nushell
+```nu
 > [abcded abc321 abc123] | dfr into-df | dfr str-slice 1 --length 2
 ╭───┬────╮
 │ # │ 0  │

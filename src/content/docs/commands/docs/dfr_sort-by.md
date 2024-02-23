@@ -44,7 +44,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Sort dataframe by one column
 
-```nushell
+```nu
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr sort-by a
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -58,7 +58,7 @@ Sort dataframe by one column
 
 Sort column using two columns
 
-```nushell
+```nu
 > [[a b]; [6 2] [1 1] [1 4] [2 4]] | dfr into-df | dfr sort-by [a b] -r [false true]
 ╭───┬───┬───╮
 │ # │ a │ b │

@@ -35,7 +35,7 @@ feature: default
 
 Alias ll to ls -l
 
-```nushell
+```nu
 > alias ll = ls -l
 
 ```

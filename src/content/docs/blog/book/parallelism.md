@@ -14,7 +14,7 @@ Like [`each`](/commands/docs/each), [`par-each`](/commands/docs/par-each) works 
 
 Let's say you wanted to count the number of files in each sub-directory of the current directory. Using [`each`](/commands/docs/each), you could write this as:
 
-```nushell
+```nu
 > ls | where type == dir | each { |it|
     { name: $it.name, len: (ls $it.name | length) }
 }
@@ -26,7 +26,7 @@ On your machine, the times may vary. For this machine, it took 21 milliseconds f
 
 Now, since this operation can be run in parallel, let's convert the above to parallel by changing [`each`](/commands/docs/each) to [`par-each`](/commands/docs/par-each):
 
-```nushell
+```nu
 > ls | where type == dir | par-each { |it|
     { name: $it.name, len: (ls $it.name | length) }
 }
@@ -36,7 +36,7 @@ On this machine, it now runs in 6ms. That's quite a difference!
 
 As a side note: Because [environment variables are scoped](environment#scoping), you can use [`par-each`](/commands/docs/par-each) to work in multiple directories in parallel (notice the [`cd`](/commands/docs/cd) command):
 
-```nushell
+```nu
 > ls | where type == dir | par-each { |it|
     { name: $it.name, len: (cd $it.name; ls | length) }
 }

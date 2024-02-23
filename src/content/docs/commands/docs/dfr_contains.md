@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns boolean indicating if pattern was found
 
-```nushell
+```nu
 > [abc acb acb] | dfr into-df | dfr contains ab
 ╭───┬───────╮
 │ # │   0   │

@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Flatten the specified dataframe
 
-```nushell
+```nu
 > [[id name hobbies]; [1 Mercy [Cycling Knitting]] [2 Bob [Skiing Football]]] | dfr into-df | dfr flatten hobbies | dfr collect
 ╭───┬────┬───────┬──────────╮
 │ # │ id │ name  │ hobbies  │
@@ -53,7 +53,7 @@ Flatten the specified dataframe
 
 Select a column and flatten the values
 
-```nushell
+```nu
 > [[id name hobbies]; [1 Mercy [Cycling Knitting]] [2 Bob [Skiing Football]]] | dfr into-df | dfr select (dfr col hobbies | dfr flatten)
 ╭───┬──────────╮
 │ # │ hobbies  │

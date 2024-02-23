@@ -35,14 +35,14 @@ feature: default
 
 Debug print a string
 
-```nushell
+```nu
 > 'hello' | debug
 hello
 ```
 
 Debug print a list
 
-```nushell
+```nu
 > ['hello'] | debug
 ╭───┬───────╮
 │ 0 │ hello │
@@ -52,7 +52,7 @@ Debug print a list
 
 Debug print a table
 
-```nushell
+```nu
 > [[version patch]; ['0.1.0' false] ['0.1.1' true] ['0.2.0' false]] | debug
 ╭───┬────────────────────────────────╮
 │ 0 │ {version: 0.1.0, patch: false} │

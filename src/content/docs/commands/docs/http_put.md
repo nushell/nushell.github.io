@@ -48,28 +48,28 @@ feature: default
 
 Put content to example.com
 
-```nushell
+```nu
 > http put https://www.example.com 'body'
 
 ```
 
 Put content to example.com, with username and password
 
-```nushell
+```nu
 > http put --user myuser --password mypass https://www.example.com 'body'
 
 ```
 
 Put content to example.com, with custom header
 
-```nushell
+```nu
 > http put --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Put content to example.com, with JSON body
 
-```nushell
+```nu
 > http put --content-type application/json https://www.example.com { field: value }
 
 ```

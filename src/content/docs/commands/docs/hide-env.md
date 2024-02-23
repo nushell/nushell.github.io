@@ -38,7 +38,7 @@ feature: default
 
 Hide an environment variable
 
-```nushell
+```nu
 > $env.HZ_ENV_ABC = 1; hide-env HZ_ENV_ABC; 'HZ_ENV_ABC' in (env).name
 false
 ```

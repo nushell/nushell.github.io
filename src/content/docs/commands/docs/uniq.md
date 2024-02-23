@@ -37,7 +37,7 @@ feature: default
 
 Return the distinct values of a list/table (remove duplicates so that each value occurs once only)
 
-```nushell
+```nu
 > [2 3 3 4] | uniq
 ╭───┬───╮
 │ 0 │ 2 │
@@ -49,7 +49,7 @@ Return the distinct values of a list/table (remove duplicates so that each value
 
 Return the input values that occur more than once
 
-```nushell
+```nu
 > [1 2 2] | uniq -d
 ╭───┬───╮
 │ 0 │ 2 │
@@ -59,7 +59,7 @@ Return the input values that occur more than once
 
 Return the input values that occur once only
 
-```nushell
+```nu
 > [1 2 2] | uniq --unique
 ╭───┬───╮
 │ 0 │ 1 │
@@ -69,7 +69,7 @@ Return the input values that occur once only
 
 Ignore differences in case when comparing input values
 
-```nushell
+```nu
 > ['hello' 'goodbye' 'Hello'] | uniq --ignore-case
 ╭───┬─────────╮
 │ 0 │ hello   │
@@ -80,7 +80,7 @@ Ignore differences in case when comparing input values
 
 Return a table containing the distinct input values together with their counts
 
-```nushell
+```nu
 > [1 2 2] | uniq --count
 ╭───┬───────┬───────╮
 │ # │ value │ count │

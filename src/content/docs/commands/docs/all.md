@@ -34,28 +34,28 @@ feature: default
 
 Check if each row's status is the string 'UP'
 
-```nushell
+```nu
 > [[status]; [UP] [UP]] | all {|el| $el.status == UP }
 true
 ```
 
 Check that each item is a string
 
-```nushell
+```nu
 > [foo bar 2 baz] | all {|| ($in | describe) == 'string' }
 false
 ```
 
 Check that all values are equal to twice their index
 
-```nushell
+```nu
 > [0 2 4 6] | enumerate | all {|i| $i.item == $i.index * 2 }
 true
 ```
 
 Check that all of the values are even, using a stored closure
 
-```nushell
+```nu
 > let cond = {|el| ($el mod 2) == 0 }; [2 4 6 8] | all $cond
 true
 ```

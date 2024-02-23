@@ -39,28 +39,28 @@ feature: default
 
 Convert ls entries into a SQLite database with 'main' as the table name
 
-```nushell
+```nu
 > ls | into sqlite my_ls.db
 
 ```
 
 Convert ls entries into a SQLite database with 'my_table' as the table name
 
-```nushell
+```nu
 > ls | into sqlite my_ls.db -t my_table
 
 ```
 
 Convert table literal into a SQLite database with 'main' as the table name
 
-```nushell
+```nu
 > [[name]; [-----] [someone] [=====] [somename] ['(((((']] | into sqlite filename.db
 
 ```
 
 Insert a single record into a SQLite database
 
-```nushell
+```nu
 > { foo: bar, baz: quux } | into sqlite filename.db
 
 ```

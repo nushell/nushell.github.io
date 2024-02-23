@@ -35,7 +35,7 @@ feature: default
 
 Return the last 2 items of a list/table
 
-```nushell
+```nu
 > [1,2,3] | last 2
 ╭───┬───╮
 │ 0 │ 2 │
@@ -46,14 +46,14 @@ Return the last 2 items of a list/table
 
 Return the last item of a list/table
 
-```nushell
+```nu
 > [1,2,3] | last
 3
 ```
 
 Return the last 2 bytes of a binary value
 
-```nushell
+```nu
 > 0x[01 23 45] | last 2
 Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 00000000:   23 45                                                #E

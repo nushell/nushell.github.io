@@ -30,7 +30,7 @@ feature: default
 
 Count the number of words in a string
 
-```nushell
+```nu
 > "There are seven words in this sentence" | str stats
 ╭───────────┬────╮
 │ lines     │ 1  │
@@ -43,7 +43,7 @@ Count the number of words in a string
 
 Counts unicode characters
 
-```nushell
+```nu
 > '今天天气真好' | str stats
 ╭───────────┬────╮
 │ lines     │ 1  │
@@ -56,7 +56,7 @@ Counts unicode characters
 
 Counts Unicode characters correctly in a string
 
-```nushell
+```nu
 > "Amélie Amelie" | str stats
 ╭───────────┬────╮
 │ lines     │ 1  │

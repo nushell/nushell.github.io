@@ -35,35 +35,35 @@ feature: default
 
 Open a text file with the default text editor
 
-```nushell
+```nu
 > start file.txt
 
 ```
 
 Open an image with the default image viewer
 
-```nushell
+```nu
 > start file.jpg
 
 ```
 
 Open the current directory with the default file manager
 
-```nushell
+```nu
 > start .
 
 ```
 
 Open a pdf with the default pdf viewer
 
-```nushell
+```nu
 > start file.pdf
 
 ```
 
 Open a website with default browser
 
-```nushell
+```nu
 > start https://www.nushell.sh
 
 ```

@@ -34,7 +34,7 @@ feature: default
 
 prepend a list to an item
 
-```nushell
+```nu
 > 0 | prepend [1 2 3]
 ╭───┬───╮
 │ 0 │ 1 │
@@ -47,7 +47,7 @@ prepend a list to an item
 
 Prepend a list of strings to a string
 
-```nushell
+```nu
 > "a" | prepend ["b"]
 ╭───┬───╮
 │ 0 │ b │
@@ -58,7 +58,7 @@ Prepend a list of strings to a string
 
 Prepend one int item
 
-```nushell
+```nu
 > [1 2 3 4] | prepend 0
 ╭───┬───╮
 │ 0 │ 0 │
@@ -72,7 +72,7 @@ Prepend one int item
 
 Prepend two int items
 
-```nushell
+```nu
 > [2 3 4] | prepend [0 1]
 ╭───┬───╮
 │ 0 │ 0 │
@@ -86,7 +86,7 @@ Prepend two int items
 
 Prepend ints and strings
 
-```nushell
+```nu
 > [2 nu 4 shell] | prepend [0 1 rocks]
 ╭───┬───────╮
 │ 0 │     0 │
@@ -102,7 +102,7 @@ Prepend ints and strings
 
 Prepend a range
 
-```nushell
+```nu
 > [3 4] | prepend 0..2
 ╭───┬───╮
 │ 0 │ 0 │

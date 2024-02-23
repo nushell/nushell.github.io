@@ -6,7 +6,7 @@ The easiest way to see what Nu can do is to start with some examples, so let's d
 
 The first thing you'll notice when you run a command like [`ls`](/commands/docs/ls) is that instead of a block of text coming back, you get a structured table.
 
-```nushell frame='terminal'
+```nu frame='terminal'
 ls
 ╭────┬───────────────────────┬──────┬───────────┬─────────────╮
 │ #  │         name          │ type │   size    │  modified   │
@@ -23,7 +23,7 @@ The table does more than show the directory in a different way. Just like tables
 
 The first thing we'll do is to sort our table by size. To do this, we'll take the output from [`ls`](/commands/docs/ls) and feed it into a command that can sort tables based on the contents of a column.
 
-```nushell frame='terminal'
+```nu frame='terminal'
 ls | sort-by size | reverse
 ╭────┬───────────────────────┬──────┬───────────┬─────────────╮
 │ #  │         name          │ type │   size    │  modified   │
@@ -40,7 +40,7 @@ You can see that to make this work we didn't pass commandline arguments to [`ls`
 
 Nu provides many commands that can work on tables. For example, we could use [`where`](/commands/docs/where) to filter the contents of the [`ls`](/commands/docs/ls) table so that it only shows files over 1 kilobyte:
 
-```nushell frame='terminal'
+```nu frame='terminal'
 ls | where size > 1kb
 ╭───┬───────────────────┬──────┬─────────┬────────────╮
 │ # │       name        │ type │  size   │  modified  │
@@ -54,7 +54,7 @@ ls | where size > 1kb
 
 Just as in the Unix philosophy, being able to have commands talk to each other gives us ways to mix-and-match in many different combinations. Let's look at a different command:
 
-```nushell frame='terminal'
+```nu frame='terminal'
 ps
 ╭─────┬───────┬───────┬──────────────────────────────────────────────┬─────────┬───────┬──────────┬──────────╮
 │   # │  pid  │ ppid  │                     name                     │ status  │  cpu  │   mem    │ virtual  │
@@ -69,7 +69,7 @@ You may be familiar with the [`ps`](/commands/docs/ps) command if you've used Li
 
 What if we wanted to show the processes that were actively using the CPU? Just like we did with the [`ls`](/commands/docs/ls) command earlier, we can also work with the table that the [`ps`](/commands/docs/ps) command gives back to us:
 
-```nushell frame='terminal'
+```nu frame='terminal'
 ps | where cpu > 5
 ╭───┬───────┬───────┬─────────────────────────────────────────┬─────────┬───────┬──────────┬──────────╮
 │ # │  pid  │ ppid  │                  name                   │ status  │  cpu  │   mem    │ virtual  │
@@ -86,14 +86,14 @@ So far, we've been using [`ls`](/commands/docs/ls) and [`ps`](/commands/docs/ps)
 
 Running [`date now`](/commands/docs/date_now) gives us information about the current day and time:
 
-```nushell frame='terminal'
+```nu frame='terminal'
 date now
 Fri, 9 Feb 2024 22:32:19 -0800 (now)
 ```
 
 To get the date as a table we can feed it into [`date to-table`](/commands/docs/date_to-table)
 
-```nushell frame='terminal'
+```nu frame='terminal'
 date now | date to-table
 ╭───┬──────┬───────┬─────┬──────┬────────┬────────┬────────────┬──────────╮
 │ # │ year │ month │ day │ hour │ minute │ second │ nanosecond │ timezone │
@@ -104,7 +104,7 @@ date now | date to-table
 
 Running [`sys`](/commands/docs/sys) gives information about the system that Nu is running on:
 
-```nushell frame='terminal'
+```nu frame='terminal'
 sys
 ╭───────┬───────────────────╮
 │ host  │ {record 8 fields} │
@@ -118,7 +118,7 @@ sys
 
 This is a bit different than the tables we saw before. The [`sys`](/commands/docs/sys) command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to _get_ the column to view:
 
-```nushell frame='terminal'
+```nu frame='terminal'
 sys | get host
 ╭─────────────────┬───────────────────────────╮
 │ name            │ Darwin                    │
@@ -134,7 +134,7 @@ sys | get host
 
 The [`get`](/commands/docs/get) command lets us jump into the contents of a column of the table. Here, we're looking into the "host" column, which contains information about the host that Nu is running on. The name of the OS, the hostname, the CPU, and more. Let's get the name of the users on the system:
 
-```nushell frame='terminal'
+```nu frame='terminal'
  sys | get host.sessions.name
 ╭───┬──────────────╮
 │ 0 │ root         │
@@ -148,7 +148,7 @@ You might have noticed something else that's different. Rather than having a tab
 
 Let's see how strings work outside of Nu in action. We'll take our example from before and run the external [`echo`](/commands/docs/echo) command (the `^` tells Nu to not use the built-in [`echo`](/commands/docs/echo) command):
 
-```nushell frame='terminal'
+```nu frame='terminal'
 sys | get host.sessions.name | each { |it| ^echo $it }
 root
 jt
@@ -163,7 +163,7 @@ If this looks very similar to what we had before, you have a keen eye! It is sim
 
 Help text for any of Nu's built-in commands can be discovered with the [`help`](/commands/docs/help) command. To see all commands, run [`help commands`](/commands/docs/help_commands). You can also search for a topic by doing `help -f <topic>`.
 
-```nushell frame='terminal'
+```nu frame='terminal'
 help path
 * As a list of path parts, e.g., '[ / home viking spam.txt ]'. Splitting into
   parts is done by the `path split` command.

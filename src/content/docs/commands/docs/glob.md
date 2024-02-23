@@ -42,77 +42,77 @@ feature: default
 
 Search for \*.rs files
 
-```nushell
+```nu
 > glob *.rs
 
 ```
 
 Search for _.rs and _.toml files recursively up to 2 folders deep
 
-```nushell
+```nu
 > glob **/*.{rs,toml} --depth 2
 
 ```
 
 Search for files and folders that begin with uppercase C or lowercase c
 
-```nushell
+```nu
 > glob "[Cc]*"
 
 ```
 
 Search for files and folders like abc or xyz substituting a character for ?
 
-```nushell
+```nu
 > glob "{a?c,x?z}"
 
 ```
 
 A case-insensitive search for files and folders that begin with c
 
-```nushell
+```nu
 > glob "(?i)c*"
 
 ```
 
 Search for files for folders that do not begin with c, C, b, M, or s
 
-```nushell
+```nu
 > glob "[!cCbMs]*"
 
 ```
 
 Search for files or folders with 3 a's in a row in the name
 
-```nushell
+```nu
 > glob <a*:3>
 
 ```
 
 Search for files or folders with only a, b, c, or d in the file name between 1 and 10 times
 
-```nushell
+```nu
 > glob <[a-d]:1,10>
 
 ```
 
 Search for folders that begin with an uppercase ASCII letter, ignoring files and symlinks
 
-```nushell
+```nu
 > glob "[A-Z]*" --no-file --no-symlink
 
 ```
 
 Search for files named tsconfig.json that are not in node_modules directories
 
-```nushell
+```nu
 > glob **/tsconfig.json --exclude [**/node_modules/**]
 
 ```
 
 Search for all files that are not in the target nor .git directories
 
-```nushell
+```nu
 > glob **/* --exclude [**/target/** **/.git/** */]
 
 ```

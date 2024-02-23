@@ -41,28 +41,28 @@ Command `str camel-case` was not included in the official binaries by default, y
 
 convert a string to camelCase
 
-```nushell
+```nu
 >  'NuShell' | str camel-case
 nuShell
 ```
 
 convert a string to camelCase
 
-```nushell
+```nu
 > 'this-is-the-first-case' | str camel-case
 thisIsTheFirstCase
 ```
 
 convert a string to camelCase
 
-```nushell
+```nu
 >  'this_is_the_second_case' | str camel-case
 thisIsTheSecondCase
 ```
 
 convert a column from a table to camelCase
 
-```nushell
+```nu
 > [[lang, gems]; [nu_test, 100]] | str camel-case lang
 ╭───┬────────┬──────╮
 │ # │  lang  │ gems │

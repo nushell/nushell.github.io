@@ -18,7 +18,7 @@ A few illustrative examples follow.
 
 ### `detect columns` (pretty automatic)
 
-```nushell
+```nu
 df -h | str replace "Mounted on" Mounted_On | detect columns
 ```
 
@@ -51,7 +51,7 @@ The `str replace` is needed here because one of the column headers has a space i
 
 Also the builtin `from` data parser for `ssv` (*s*pace *s*eparated *v*alues) can be used:
 
-```nushell
+```nu
 df -h | str replace "Mounted on" Mounted_On | from ssv --aligned-columns --minimum-spaces 1
 ```
 
@@ -65,7 +65,7 @@ Note we still need to fix the column headers if they contain unexpected spaces.
 
 How to parse an arbitrary pattern from a string of text into a multi-column table.
 
-```nushell
+```nu
 cargo search shells --limit 10 | lines | parse "{crate_name} = {version} #{description}" | str trim
 ```
 

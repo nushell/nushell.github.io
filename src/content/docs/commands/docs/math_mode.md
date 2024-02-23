@@ -33,7 +33,7 @@ feature: default
 
 Compute the mode(s) of a list of numbers
 
-```nushell
+```nu
 > [3 3 9 12 12 15] | math mode
 ╭───┬────╮
 │ 0 │  3 │
@@ -44,7 +44,7 @@ Compute the mode(s) of a list of numbers
 
 Compute the mode(s) of the columns of a table
 
-```nushell
+```nu
 > [{a: 1 b: 3} {a: 2 b: -1} {a: 1 b: 5}] | math mode
 ╭───┬────────────╮
 │   │ ╭───┬───╮  │

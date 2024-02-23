@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Dataframe columns
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr columns
 ╭───┬───╮
 │ 0 │ a │

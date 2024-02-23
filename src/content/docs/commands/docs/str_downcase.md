@@ -37,21 +37,21 @@ feature: default
 
 Downcase contents
 
-```nushell
+```nu
 > 'NU' | str downcase
 nu
 ```
 
 Downcase contents
 
-```nushell
+```nu
 > 'TESTa' | str downcase
 testa
 ```
 
 Downcase contents
 
-```nushell
+```nu
 > [[ColA ColB]; [Test ABC]] | str downcase ColA
 ╭───┬──────┬──────╮
 │ # │ ColA │ ColB │
@@ -63,7 +63,7 @@ Downcase contents
 
 Downcase contents
 
-```nushell
+```nu
 > [[ColA ColB]; [Test ABC]] | str downcase ColA ColB
 ╭───┬──────┬──────╮
 │ # │ ColA │ ColB │

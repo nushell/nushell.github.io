@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Creates a not expression
 
-```nushell
+```nu
 > (dfr col a) > 2) | dfr expr-not
 
 ```

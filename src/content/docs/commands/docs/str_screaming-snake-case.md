@@ -41,28 +41,28 @@ Command `str screaming-snake-case` was not included in the official binaries by 
 
 convert a string to SCREAMING_SNAKE_CASE
 
-```nushell
+```nu
 >  "NuShell" | str screaming-snake-case
 NU_SHELL
 ```
 
 convert a string to SCREAMING_SNAKE_CASE
 
-```nushell
+```nu
 >  "this_is_the_second_case" | str screaming-snake-case
 THIS_IS_THE_SECOND_CASE
 ```
 
 convert a string to SCREAMING_SNAKE_CASE
 
-```nushell
+```nu
 > "this-is-the-first-case" | str screaming-snake-case
 THIS_IS_THE_FIRST_CASE
 ```
 
 convert a column from a table to SCREAMING_SNAKE_CASE
 
-```nushell
+```nu
 > [[lang, gems]; [nu_test, 100]] | str screaming-snake-case lang
 ╭───┬─────────┬──────╮
 │ # │  lang   │ gems │

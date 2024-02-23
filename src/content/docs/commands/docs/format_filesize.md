@@ -37,21 +37,21 @@ feature: default
 
 Convert the size column to KB
 
-```nushell
+```nu
 > ls | format filesize KB size
 
 ```
 
 Convert the apparent column to B
 
-```nushell
+```nu
 > du | format filesize B apparent
 
 ```
 
 Convert the size data to MB
 
-```nushell
+```nu
 > 4Gb | format filesize MB
 4000.0 MB
 ```

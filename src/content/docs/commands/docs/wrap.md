@@ -36,7 +36,7 @@ feature: default
 
 Wrap a list into a table with a given column name
 
-```nushell
+```nu
 > [1 2 3] | wrap num
 ╭───┬─────╮
 │ # │ num │
@@ -50,7 +50,7 @@ Wrap a list into a table with a given column name
 
 Wrap a range into a table with a given column name
 
-```nushell
+```nu
 > 1..3 | wrap num
 ╭───┬─────╮
 │ # │ num │

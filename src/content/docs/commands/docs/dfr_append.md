@@ -42,7 +42,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Appends a dataframe as new columns
 
-```nushell
+```nu
 > let a = ([[a b]; [1 2] [3 4]] | dfr into-df);
     $a | dfr append $a
 ╭───┬───┬───┬─────┬─────╮
@@ -56,7 +56,7 @@ Appends a dataframe as new columns
 
 Appends a dataframe merging at the end of columns
 
-```nushell
+```nu
 > let a = ([[a b]; [1 2] [3 4]] | dfr into-df);
     $a | dfr append $a --col
 ╭───┬───┬───╮

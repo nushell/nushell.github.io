@@ -30,7 +30,7 @@ feature: default
 
 Show the schema of a SQLite database
 
-```nushell
+```nu
 > open foo.db | schema
 
 ```

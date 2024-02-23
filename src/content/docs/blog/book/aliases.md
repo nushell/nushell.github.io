@@ -6,19 +6,19 @@ Aliases in Nushell offer a way of doing a simple replacement of command calls (b
 
 For example, let's create an alias called `ll` which will expand to `ls -l`.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 alias ll = ls -l
 ```
 
 We can now call this alias:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ll
 ```
 
 Once we do, it's as if we typed `ls -l`. This also allows us to pass in flags or positional parameters. For example, we can now also write:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ll -a
 ```
 
@@ -33,7 +33,7 @@ Your useable aliases can be seen in `scope aliases` and `help aliases`.
 To make your aliases persistent they must be added to your _config.nu_ file by running `config nu` to open an editor and inserting them, and then restarting nushell.
 e.g. with the above `ll` alias, you can add `alias ll = ls -l` anywhere in _config.nu_
 
-```nushell title="config.nu"
+```nu title="config.nu"
 $env.config = {
     # main configuration
 }
@@ -48,7 +48,7 @@ alias ll = ls -l
 Note that `alias uuidgen = uuidgen | tr A-F a-f` (to make uuidgen on mac behave like linux) won't work.
 The solution is to define a command without parameters that calls the system program `uuidgen` via `^`.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 def uuidgen [] { ^uuidgen | tr A-F a-f }
 ```
 
@@ -56,7 +56,7 @@ See more in the [custom commands](custom_commands) section of this book.
 
 Or a more idiomatic example with nushell internal commands
 
-```nushell frame="terminal"
+```nu frame="terminal"
 def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 ```
 
@@ -68,7 +68,7 @@ displaying all listed files and folders in a grid.
 
 How to back up a command like `ls`:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 alias core-ls = ls    # This will create a new alias core-ls for ls
 ```
 
@@ -77,7 +77,7 @@ Now you can use `core-ls` as `ls` in your nu-programming. You will see further d
 The reason you need to use alias is because, unlike `def`, aliases are position-dependent. So, you need to "back up" the old command first with an alias, before re-defining it.
 If you do not backup the command and you replace the command using `def` you get a recursion error.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 def ls [] { ls }; ls    # Do *NOT* do this! This will throw a recursion error
 
 #output:
@@ -95,7 +95,7 @@ def ls [] { ls }; ls    # Do *NOT* do this! This will throw a recursion error
 The recommended way to replace an existing command is to shadow the command.
 Here is an example shadowing the `ls` command.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 # An escape hatch to have access to the original ls command
 alias core-ls = ls
 

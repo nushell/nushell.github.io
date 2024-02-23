@@ -35,7 +35,7 @@ feature: default
 
 Converts json formatted string to table
 
-```nushell
+```nu
 > '{ "a": 1 }' | from json
 ╭───┬───╮
 │ a │ 1 │
@@ -44,7 +44,7 @@ Converts json formatted string to table
 
 Converts json formatted string to table
 
-```nushell
+```nu
 > '{ "a": 1, "b": [1, 2] }' | from json
 ╭───┬───────────╮
 │ a │ 1         │
@@ -57,7 +57,7 @@ Converts json formatted string to table
 
 Parse json strictly which will error on comments and trailing commas
 
-```nushell
+```nu
 > '{ "a": 1, "b": 2 }' | from json -s
 ╭───┬───╮
 │ a │ 1 │

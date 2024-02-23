@@ -42,35 +42,35 @@ feature: default
 
 Save a string to foo.txt in the current directory
 
-```nushell
+```nu
 > 'save me' | save foo.txt
 
 ```
 
 Append a string to the end of foo.txt
 
-```nushell
+```nu
 > 'append me' | save --append foo.txt
 
 ```
 
 Save a record to foo.json in the current directory
 
-```nushell
+```nu
 > { a: 1, b: 2 } | save foo.json
 
 ```
 
 Save a running program's stderr to foo.txt
 
-```nushell
+```nu
 > do -i {} | save foo.txt --stderr foo.txt
 
 ```
 
 Save a running program's stderr to separate file
 
-```nushell
+```nu
 > do -i {} | save foo.txt --stderr bar.txt
 
 ```

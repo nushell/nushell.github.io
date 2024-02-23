@@ -39,14 +39,14 @@ Command `format pattern` was not included in the official binaries by default, y
 
 Print filenames with their sizes
 
-```nushell
+```nu
 > ls | format pattern '{name}: {size}'
 
 ```
 
 Print elements from some columns of a table
 
-```nushell
+```nu
 > [[col1, col2]; [v1, v2] [v3, v4]] | format pattern '{col2}'
 ╭───┬────╮
 │ 0 │ v2 │

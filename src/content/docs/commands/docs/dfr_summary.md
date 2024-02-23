@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 list dataframe descriptives
 
-```nushell
+```nu
 > [[a b]; [1 1] [1 1]] | dfr into-df | dfr summary
 ╭───┬────────────┬─────────┬─────────╮
 │ # │ descriptor │ a (i64) │ b (i64) │

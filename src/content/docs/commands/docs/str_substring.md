@@ -43,14 +43,14 @@ feature: default
 
 Get a substring "nushell" from the text "good nushell" using a range
 
-```nushell
+```nu
 >  'good nushell' | str substring 5..12
 nushell
 ```
 
 Count indexes and split using grapheme clusters
 
-```nushell
+```nu
 >  '🇯🇵ほげ ふが ぴよ' | str substring --grapheme-clusters 4..6
 ふが
 ```

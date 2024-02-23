@@ -30,21 +30,21 @@ feature: default
 
 Outputs data as simple text
 
-```nushell
+```nu
 > 1 | to text
 1
 ```
 
 Outputs external data as simple text
 
-```nushell
+```nu
 > git help -a | lines | find -r '^ ' | to text
 
 ```
 
 Outputs records as simple text
 
-```nushell
+```nu
 > ls | to text
 
 ```

@@ -40,21 +40,21 @@ feature: default
 
 Print the square of each integer
 
-```nushell
+```nu
 > for x in [1 2 3] { print ($x * $x) }
 
 ```
 
 Work with elements of a range
 
-```nushell
+```nu
 > for $x in 1..3 { print $x }
 
 ```
 
 Number each item and print a message
 
-```nushell
+```nu
 > for $it in ['bob' 'fred'] --numbered { print $"($it.index) is ($it.item)" }
 
 ```

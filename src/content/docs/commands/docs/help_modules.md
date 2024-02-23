@@ -38,21 +38,21 @@ feature: default
 
 show all modules
 
-```nushell
+```nu
 > help modules
 
 ```
 
 show help for single module
 
-```nushell
+```nu
 > help modules my-module
 
 ```
 
 search for string in module names and usages
 
-```nushell
+```nu
 > help modules --find my-module
 
 ```

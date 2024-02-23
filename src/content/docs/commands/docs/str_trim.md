@@ -43,35 +43,35 @@ feature: default
 
 Trim whitespace
 
-```nushell
+```nu
 > 'Nu shell ' | str trim
 Nu shell
 ```
 
 Trim a specific character (not the whitespace)
 
-```nushell
+```nu
 > '=== Nu shell ===' | str trim --char '='
  Nu shell
 ```
 
 Trim whitespace from the beginning of string
 
-```nushell
+```nu
 > ' Nu shell ' | str trim --left
 Nu shell
 ```
 
 Trim whitespace from the end of string
 
-```nushell
+```nu
 > ' Nu shell ' | str trim --right
  Nu shell
 ```
 
 Trim a specific character only from the end of the string
 
-```nushell
+```nu
 > '=== Nu shell ===' | str trim --right --char '='
 === Nu shell
 ```

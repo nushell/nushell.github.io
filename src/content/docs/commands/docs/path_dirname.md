@@ -36,14 +36,14 @@ feature: default
 
 Get dirname of a path
 
-```nushell
+```nu
 > '/home/joe/code/test.txt' | path dirname
 /home/joe/code
 ```
 
 Get dirname of a list of paths
 
-```nushell
+```nu
 > [ /home/joe/test.txt, /home/doe/test.txt ] | path dirname
 ╭───┬───────────╮
 │ 0 │ /home/joe │
@@ -54,14 +54,14 @@ Get dirname of a list of paths
 
 Walk up two levels
 
-```nushell
+```nu
 > '/home/joe/code/test.txt' | path dirname --num-levels 2
 /home/joe
 ```
 
 Replace the part that would be returned with a custom path
 
-```nushell
+```nu
 > '/home/joe/code/test.txt' | path dirname --num-levels 2 --replace /home/viking
 /home/viking/code/test.txt
 ```

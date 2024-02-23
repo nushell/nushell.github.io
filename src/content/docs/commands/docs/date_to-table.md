@@ -31,21 +31,21 @@ feature: default
 
 Convert the current date into a table.
 
-```nushell
+```nu
 > date to-table
 
 ```
 
 Convert the date into a table.
 
-```nushell
+```nu
 > date now | date to-table
 
 ```
 
 Convert a given date into a table.
 
-```nushell
+```nu
 > 2020-04-12T22:10:57.000000789+02:00 | date to-table
 ╭───┬──────┬───────┬─────┬──────┬────────┬────────┬────────────┬──────────╮
 │ # │ year │ month │ day │ hour │ minute │ second │ nanosecond │ timezone │
@@ -57,7 +57,7 @@ Convert a given date into a table.
 
 Convert a given date into a table.
 
-```nushell
+```nu
 > '2020-04-12 22:10:57 +0200' | into datetime | date to-table
 ╭───┬──────┬───────┬─────┬──────┬────────┬────────┬────────────┬──────────╮
 │ # │ year │ month │ day │ hour │ minute │ second │ nanosecond │ timezone │

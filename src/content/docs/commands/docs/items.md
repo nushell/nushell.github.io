@@ -34,7 +34,7 @@ feature: default
 
 Iterate over each key-value pair of a record
 
-```nushell
+```nu
 > { new: york, san: francisco } | items {|key, value| echo $'($key) ($value)' }
 ╭───┬───────────────╮
 │ 0 │ new york      │

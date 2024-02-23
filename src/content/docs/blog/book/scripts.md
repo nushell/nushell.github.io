@@ -4,19 +4,19 @@ title: Scripts
 
 In Nushell, you can write and run scripts in the Nushell language. To run a script, you can pass it as an argument to the `nu` commandline application:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 nu myscript.nu
 ```
 
 This will run the script to completion in a new instance of Nu. You can also run scripts inside the _current_ instance of Nu using [`source`](/commands/docs/source):
 
-```nushell frame="terminal"
+```nu frame="terminal"
 source myscript.nu
 ```
 
 Let's look at an example script file:
 
-```nushell title="myscript.nu"
+```nu title="myscript.nu"
 def greet [name] {
   ["hello" $name]
 }
@@ -28,7 +28,7 @@ A script file defines the definitions for custom commands as well as the main sc
 
 In the above, first `greet` is defined by the Nushell interpreter. This allows us to later call this definition. We could have written the above as:
 
-```nushell title="myscript.nu"
+```nu title="myscript.nu"
 greet "world"
 
 def greet [name] {
@@ -48,7 +48,7 @@ After the definitions run, we start at the top of the script file and run each g
 
 To better understand how Nushell sees lines of code, let's take a look at an example script:
 
-```nushell title="myscript.nu"
+```nu title="myscript.nu"
 a
 b; c | d
 ```
@@ -61,14 +61,14 @@ Script files can optionally contain a special "main" command. `main` will be run
 
 For example:
 
-```nushell title="myscript.nu"
+```nu title="myscript.nu"
 
 def main [x: int] {
   $x + 10
 }
 ```
 
-```nushell frame="terminal"
+```nu frame="terminal"
 nu myscript.nu 100
 # 110
 ```
@@ -81,19 +81,19 @@ In the previous example, `main [x: int]` denotes that the argument x should poss
 
 For example:
 
-```nushell title="implicit_type.nu"
+```nu title="implicit_type.nu"
 def main [x] {
   $"Hello ($x | describe) ($x)"
 }
 ```
 
-```nushell title="explicit_type.nu"
+```nu title="explicit_type.nu"
 def main [x: string] {
   $"Hello ($x | describe) ($x)"
 }
 ```
 
-```nushell frame="terminal"
+```nu frame="terminal"
 nu implicit_type.nu +1
 # Hello int 1
 
@@ -107,7 +107,7 @@ A script can have multiple sub-commands like `run`, `build`, etc. which allows t
 
 For example:
 
-```nushell title="myscript.nu"
+```nu title="myscript.nu"
 def "main run" [] {
     print "running"
 }
@@ -120,7 +120,7 @@ def "main build" [] {
 def main [] {}
 ```
 
-```nushell frame="terminal"
+```nu frame="terminal"
 nu myscript.nu build
 # building
 nu myscript.nu run
@@ -131,24 +131,24 @@ nu myscript.nu run
 
 On Linux and macOS you can optionally use a [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) to tell the OS that a file should be interpreted by Nu. For example, with the following in a file named `myscript`:
 
-```nushell title="myscript"
+```nu title="myscript"
 #!/usr/bin/env nu
 "Hello World!"
 ```
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ./myscript
 # Hello World!
 ```
 
 For script to have access to standard input, `nu` should be invoked with `--stdin` flag:
 
-```nushell title="myscript"
+```nu title="myscript"
 #!/usr/bin/env -S nu --stdin
 echo $"stdin: ($in)"
 ```
 
-```nushell frame="terminal"
+```nu frame="terminal"
 echo "Hello World!" | ./myscript
 # stdin: Hello World!
 ```

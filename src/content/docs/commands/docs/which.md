@@ -39,7 +39,7 @@ feature: default
 
 Find if the 'myapp' application is available
 
-```nushell
+```nu
 > which myapp
 
 ```

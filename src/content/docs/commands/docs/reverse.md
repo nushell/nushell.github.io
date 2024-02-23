@@ -30,7 +30,7 @@ feature: default
 
 Reverse a list
 
-```nushell
+```nu
 > [0,1,2,3] | reverse
 ╭───┬───╮
 │ 0 │ 3 │
@@ -43,7 +43,7 @@ Reverse a list
 
 Reverse a table
 
-```nushell
+```nu
 > [{a: 1} {a: 2}] | reverse
 ╭───┬───╮
 │ # │ a │

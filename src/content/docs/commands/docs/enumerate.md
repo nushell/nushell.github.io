@@ -30,7 +30,7 @@ feature: default
 
 Add an index to each element of a list
 
-```nushell
+```nu
 > [a, b, c] | enumerate
 ╭───┬──────╮
 │ # │ item │

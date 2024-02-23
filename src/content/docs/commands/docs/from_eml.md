@@ -38,7 +38,7 @@ Command `from eml` resides in [plugin](/book/plugins) [`nu_plugin_formats`](http
 
 Convert eml structured data into record
 
-```nushell
+```nu
 > 'From: test@email.com
 Subject: Welcome
 To: someone@somewhere.com
@@ -59,7 +59,7 @@ Test' | from eml
 
 Convert eml structured data into record
 
-```nushell
+```nu
 > 'From: test@email.com
 Subject: Welcome
 To: someone@somewhere.com

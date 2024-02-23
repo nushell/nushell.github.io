@@ -39,7 +39,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Creates a concat string expression
 
-```nushell
+```nu
 > let df = ([[a b c]; [one two 1] [three four 2]] | dfr into-df);
     $df | dfr with-column ((dfr concat-str "-" [(dfr col a) (dfr col b) ((dfr col c) * 2)]) | dfr as concat)
 ╭───┬───────┬──────┬───┬──────────────╮

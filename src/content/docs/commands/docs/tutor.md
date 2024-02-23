@@ -38,14 +38,14 @@ feature: default
 
 Begin the tutorial
 
-```nushell
+```nu
 > tutor begin
 
 ```
 
 Search a tutorial by phrase
 
-```nushell
+```nu
 > tutor --find "$in"
 
 ```

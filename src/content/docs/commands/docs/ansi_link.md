@@ -42,21 +42,21 @@ feature: default
 
 Create a link to open some file
 
-```nushell
+```nu
 > 'file:///file.txt' | ansi link --text 'Open Me!'
 Open Me!
 ```
 
 Create a link without text
 
-```nushell
+```nu
 > 'https://www.nushell.sh/' | ansi link
 https://www.nushell.sh/
 ```
 
 Format a table column into links
 
-```nushell
+```nu
 > [[url text]; [https://example.com Text]] | ansi link url
 
 ```

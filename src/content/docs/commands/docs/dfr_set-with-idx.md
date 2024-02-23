@@ -42,7 +42,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Set value in selected rows from series
 
-```nushell
+```nu
 > let series = ([4 1 5 2 4 3] | dfr into-df);
     let indices = ([0 2] | dfr into-df);
     $series | dfr set-with-idx 6 --indices $indices

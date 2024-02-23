@@ -35,7 +35,7 @@ feature: default
 
 Write a signature for an external command
 
-```nushell
+```nu
 > extern echo [text: string]
 
 ```

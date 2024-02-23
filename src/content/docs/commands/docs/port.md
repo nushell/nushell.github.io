@@ -35,14 +35,14 @@ feature: default
 
 get a free port between 3121 and 4000
 
-```nushell
+```nu
 > port 3121 4000
 3121
 ```
 
 get a free port from system
 
-```nushell
+```nu
 > port
 
 ```

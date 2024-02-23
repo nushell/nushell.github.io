@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Return the first row of a dataframe
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr first
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -50,7 +50,7 @@ Return the first row of a dataframe
 
 Return the first two rows of a dataframe
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr first 2
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -63,7 +63,7 @@ Return the first two rows of a dataframe
 
 Creates a first expression from a column
 
-```nushell
+```nu
 > dfr col a | dfr first
 
 ```

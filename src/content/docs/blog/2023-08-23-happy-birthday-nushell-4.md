@@ -36,7 +36,7 @@ Using `ls | sort-by type name -i | grid -c`, it looks like this:
 
 ## Gotta have a Chuck Norris joke
 
-```nushell
+```nu
 > (http get https://api.chucknorris.io/jokes/random).value
 ```
 
@@ -44,7 +44,7 @@ Using `ls | sort-by type name -i | grid -c`, it looks like this:
 
 "Turns out, we already support subcommands in scripts."
 
-```nushell
+```nu
 # adds 100 to the argument
 def "main foo" [
   x: int # the amount to start with
@@ -57,7 +57,7 @@ def "main" [] {
 }
 ```
 
-```nushell
+```nu
 > nu ../maintest.nu foo 123
 223
 ```
@@ -69,7 +69,7 @@ It even comes with its own help
 
 "Here is my favorite: Cross-platform symlink:"
 
-```nushell
+```nu
 # Create a symlink
 export def symlink [
     existing: path   # The existing file

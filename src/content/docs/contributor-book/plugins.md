@@ -280,7 +280,7 @@ This signature tells Nu everything it needs to pass data in and out of the plugi
 
 Now let's try simulating an invocation. Above we tested the plugin within Nu by executing the command `"hello" | len` and we got the response `5`. Of course this hides all of the typed data handling that makes Nu so powerful.
 
-```nushell
+```nu
 $ echo '{"CallInfo":{"name":"len","call":{"head":{"start":100953,"end":100957},"positional":[],"named":[]},"input":{"Value":{"String":{"val":"hello","span":{"start":100953,"end":100957}}}}}}' | target/release/nu_plugin_len
 json{"Value":{"Int":{"val":5,"span":{"start":100953,"end":100957}}}}
 ```

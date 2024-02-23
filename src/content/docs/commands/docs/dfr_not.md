@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Inverts boolean mask
 
-```nushell
+```nu
 > [true false true] | dfr into-df | dfr not
 ╭───┬───────╮
 │ # │   0   │

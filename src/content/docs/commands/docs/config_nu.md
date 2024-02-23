@@ -34,21 +34,21 @@ feature: default
 
 allow user to open and update nu config
 
-```nushell
+```nu
 > config nu
 
 ```
 
 allow user to print default `config.nu` file
 
-```nushell
+```nu
 > config nu --default,
 
 ```
 
 allow saving the default `config.nu` locally
 
-```nushell
+```nu
 > config nu --default | save -f ~/.config/nushell/default_config.nu
 
 ```

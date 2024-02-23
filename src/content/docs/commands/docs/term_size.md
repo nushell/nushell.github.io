@@ -30,21 +30,21 @@ feature: default
 
 Return the columns (width) and rows (height) of the terminal
 
-```nushell
+```nu
 > term size
 
 ```
 
 Return the columns (width) of the terminal
 
-```nushell
+```nu
 > (term size).columns
 
 ```
 
 Return the rows (height) of the terminal
 
-```nushell
+```nu
 > (term size).rows
 
 ```

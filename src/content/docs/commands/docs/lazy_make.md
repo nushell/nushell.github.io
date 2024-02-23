@@ -35,14 +35,14 @@ feature: default
 
 Create a lazy record
 
-```nushell
+```nu
 > lazy make --columns ["haskell", "futures", "nushell"] --get-value { |lazything| $lazything + "!" }
 
 ```
 
 Test the laziness of lazy records
 
-```nushell
+```nu
 > lazy make --columns ["hello"] --get-value { |key| print $"getting ($key)!"; $key | str upcase }
 
 ```

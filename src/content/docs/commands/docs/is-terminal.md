@@ -36,7 +36,7 @@ feature: default
 
 Return "terminal attached" if standard input is attached to a terminal, and "no terminal" if not.
 
-```nushell
+```nu
 > if (is-terminal --stdin) { "terminal attached" } else { "no terminal" }
 terminal attached
 ```

@@ -30,7 +30,7 @@ feature: default
 
 Converts nuon formatted string to table
 
-```nushell
+```nu
 > '{ a:1 }' | from nuon
 ╭───┬───╮
 │ a │ 1 │
@@ -39,7 +39,7 @@ Converts nuon formatted string to table
 
 Converts nuon formatted string to table
 
-```nushell
+```nu
 > '{ a:1, b: [1, 2] }' | from nuon
 ╭───┬───────────╮
 │ a │ 1         │

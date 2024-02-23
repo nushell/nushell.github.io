@@ -37,7 +37,7 @@ feature: default
 
 Upcase contents
 
-```nushell
+```nu
 > 'nu' | str upcase
 NU
 ```

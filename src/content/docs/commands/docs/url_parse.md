@@ -36,7 +36,7 @@ feature: default
 
 Parses a url
 
-```nushell
+```nu
 > 'http://user123:pass567@www.example.com:8081/foo/bar?param1=section&p2=&f[name]=vldc#hello' | url parse
 ╭──────────┬─────────────────────────────────╮
 │ scheme   │ http                            │

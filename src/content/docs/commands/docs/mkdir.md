@@ -38,14 +38,14 @@ feature: default
 
 Make a directory named foo
 
-```nushell
+```nu
 > mkdir foo
 
 ```
 
 Make multiple directories and show the paths created
 
-```nushell
+```nu
 > mkdir -v foo/bar foo2
 
 ```

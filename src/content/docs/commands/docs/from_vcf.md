@@ -34,7 +34,7 @@ Command `from vcf` resides in [plugin](/book/plugins) [`nu_plugin_formats`](http
 
 Converts ics formatted string to table
 
-```nushell
+```nu
 > 'BEGIN:VCARD
 N:Foo
 FN:Bar

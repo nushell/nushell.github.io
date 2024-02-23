@@ -6,7 +6,7 @@ The `help` command is a good way to become familiar with all that Nu has to offe
 
 ### How to see all supported commands:
 
-```nushell
+```nu
 help commands
 ```
 
@@ -16,13 +16,13 @@ help commands
 
 To find more specific information on a command, use `help <COMMAND>`. This works for regular commands (i.e. `http`) and subcommands (i.e. `http get`):
 
-```nushell
+```nu
 help http get
 ```
 
 Output:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 Fetch the contents from a URL.
 
 Performs HTTP GET operation.

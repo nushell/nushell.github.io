@@ -36,14 +36,14 @@ feature: default
 
 Outputs a NUON string representing the contents of this list, compact by default
 
-```nushell
+```nu
 > [1 2 3] | to nuon
 [1, 2, 3]
 ```
 
 Outputs a NUON array of ints, with pretty indentation
 
-```nushell
+```nu
 > [1 2 3] | to nuon --indent 2
 [
   1,
@@ -54,14 +54,14 @@ Outputs a NUON array of ints, with pretty indentation
 
 Overwrite any set option with --raw
 
-```nushell
+```nu
 > [1 2 3] | to nuon --indent 2 --raw
 [1, 2, 3]
 ```
 
 A more complex record with multiple data types
 
-```nushell
+```nu
 > {date: 2000-01-01, data: [1 [2 3] 4.56]} | to nuon --indent 2
 {
   date: 2000-01-01T00:00:00+00:00,

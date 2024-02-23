@@ -30,7 +30,7 @@ feature: default
 
 Show the known externals in the current scope
 
-```nushell
+```nu
 > scope externs
 
 ```

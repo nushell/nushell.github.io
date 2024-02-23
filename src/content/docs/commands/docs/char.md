@@ -41,7 +41,7 @@ feature: default
 
 Output newline
 
-```nushell
+```nu
 > char newline
 
 
@@ -49,14 +49,14 @@ Output newline
 
 List available characters
 
-```nushell
+```nu
 > char --list
 
 ```
 
 Output prompt character, newline and a hamburger menu character
 
-```nushell
+```nu
 > (char prompt) + (char newline) + (char hamburger)
 ▶
 ≡
@@ -64,21 +64,21 @@ Output prompt character, newline and a hamburger menu character
 
 Output Unicode character
 
-```nushell
+```nu
 > char --unicode 1f378
 🍸
 ```
 
 Create Unicode from integer codepoint values
 
-```nushell
+```nu
 > char --integer (0x60 + 1) (0x60 + 2)
 ab
 ```
 
 Output multi-byte Unicode character
 
-```nushell
+```nu
 > char --unicode 1F468 200D 1F466 200D 1F466
 👨‍👦‍👦
 ```

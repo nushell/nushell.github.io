@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Create new dataframe with dummy variables from a dataframe
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr dummies
 ╭───┬─────┬─────┬─────┬─────╮
 │ # │ a_1 │ a_3 │ b_2 │ b_4 │
@@ -51,7 +51,7 @@ Create new dataframe with dummy variables from a dataframe
 
 Create new dataframe with dummy variables from a series
 
-```nushell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr dummies
 ╭───┬─────┬─────┬─────╮
 │ # │ 0_1 │ 0_2 │ 0_3 │

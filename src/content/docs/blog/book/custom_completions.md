@@ -10,7 +10,7 @@ There are two parts to a custom command: the command that handles a completion a
 
 Let's look at an example:
 
-```nushell
+```nu
 > def animals [] { ["cat", "dog", "eel" ] }
 > def my-command [animal: string@animals] { print $animal }
 >| my-command
@@ -29,7 +29,7 @@ You may prefer to keep your custom completions away from the public API for your
 
 Let's take the example above and put it into a module:
 
-```nushell
+```nu
 module commands {
     def animals [] {
         ["cat", "dog", "eel" ]
@@ -51,7 +51,7 @@ It is possible to pass the context to the custom completion command. This is use
 
 Let's apply this concept to the previous example:
 
-```nushell
+```nu
 module commands {
     def animals [] {
         ["cat", "dog", "eel" ]
@@ -76,7 +76,7 @@ module commands {
 
 Here, the command `animal-names` returns the appropriate list of names. This is because `$context` is a string with where the value is the command that has been typed until now.
 
-```nushell
+```nu
 >| my-command
 cat                 dog                 eel
 >| my-command dog
@@ -93,7 +93,7 @@ A powerful combination is adding custom completions to [known `extern` commands]
 
 If you look closely at the examples in the default config, you'll see this:
 
-```nushell
+```nu
 export extern "git push" [
     remote?: string@"nu-complete git remotes",  # the name of the remote
     refspec?: string@"nu-complete git branches" # the branch / refspec
@@ -107,7 +107,7 @@ Custom completions will serve the same role in this example as in the previous e
 
 As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` and `description` field.
 
-```nushell
+```nu
 def my_commits [] {
     [
         { value: "5c2464", description: "Add .gitignore" },
@@ -119,7 +119,7 @@ def my_commits [] {
 :::note
 with the following snippet
 
-```nushell
+```nu
 def my-command [commit: string@my_commits] {
     print $commit
 }
@@ -127,7 +127,7 @@ def my-command [commit: string@my_commits] {
 
 be aware that, even though the completion menu will show you something like
 
-```nushell
+```nu
 >_ my-command <TAB>
 5c2464  Add .gitignore
 f3a377  Initial commit
@@ -142,7 +142,7 @@ External completers can also be integrated, instead of relying solely on Nushell
 
 For this, set the `external_completer` field in `config.nu` to a [closure](types_of_data#closures) which will be evaluated if no Nushell completions were found.
 
-```nushell
+```nu
 > $env.config.completions.external = {
 >     enable: true
 >     max_results: 100
@@ -162,7 +162,7 @@ This closure will accept the current command as a list. For example, typing `my-
 
 This example will enable carapace external completions:
 
-```nushell
+```nu
 let carapace_completer = {|spans|
     carapace $spans.0 nushell ...$spans | from json
 }

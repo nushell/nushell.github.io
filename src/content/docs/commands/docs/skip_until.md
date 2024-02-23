@@ -35,7 +35,7 @@ feature: default
 
 Skip until the element is positive
 
-```nushell
+```nu
 > [-2 0 2 -1] | skip until {|x| $x > 0 }
 ╭───┬────╮
 │ 0 │  2 │
@@ -46,7 +46,7 @@ Skip until the element is positive
 
 Skip until the element is positive using stored condition
 
-```nushell
+```nu
 > let cond = {|x| $x > 0 }; [-2 0 2 -1] | skip until $cond
 ╭───┬────╮
 │ 0 │  2 │
@@ -57,7 +57,7 @@ Skip until the element is positive using stored condition
 
 Skip until the field value is positive
 
-```nushell
+```nu
 > [{a: -2} {a: 0} {a: 2} {a: -1}] | skip until {|x| $x.a > 0 }
 ╭───┬────╮
 │ # │ a  │

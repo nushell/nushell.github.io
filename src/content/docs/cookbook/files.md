@@ -9,7 +9,7 @@ Use `help inc` to get more information.
 
 Read the file's initial contents
 
-```nushell
+```nu
 open Cargo.toml | get package.version
 ```
 
@@ -21,7 +21,7 @@ Make the edit to the version number and save it.
 
 _Note: running this command should work but it will reorder the toml file alphabetically by section._
 
-```nushell
+```nu
 open Cargo.toml | upsert package.version { |p| $p | get package.version | inc --patch } | save Cargo.toml
 ```
 
@@ -30,7 +30,7 @@ _none_
 
 View the changes we made to the file.
 
-```nushell
+```nu
 open Cargo.toml | get package.version
 ```
 
@@ -55,7 +55,7 @@ Fugazi:In On The Kill Taker:1993
 
 You can parse it into a table.
 
-```nushell
+```nu
 open bands.txt | lines | split column ":" Band Album Year | skip 1 | sort-by Year
 ```
 
@@ -75,13 +75,13 @@ Output
 
 You can alternatively do this using `parse`.
 
-```nushell
+```nu
 open bands.txt | lines | parse "{Band}:{Album}:{Year}" | skip 1 | sort-by Year
 ```
 
 Or, you can utilize the `headers` command to use the first row as a header row. The only difference would be the headers would match the case of the text file. So, in this case, the headers would be lowercase.
 
-```nushell
+```nu
 open bands.txt | lines | split column ":" | headers | sort-by year
 ```
 
@@ -91,7 +91,7 @@ open bands.txt | lines | split column ":" | headers | sort-by year
 
 Suppose you would like to check the number of lines the string "Value" appears per file in the nushell project, then sort those files by largest line count.
 
-```nushell
+```nu
 rg -c Value | lines | split column ":" file line_count | into int line_count | sort-by line_count | reverse
 ```
 

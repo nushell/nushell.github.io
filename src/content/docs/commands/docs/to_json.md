@@ -36,7 +36,7 @@ feature: default
 
 Outputs a JSON string, with default indentation, representing the contents of this table
 
-```nushell
+```nu
 > [a b c] | to json
 [
   "a",
@@ -47,7 +47,7 @@ Outputs a JSON string, with default indentation, representing the contents of th
 
 Outputs a JSON string, with 4-space indentation, representing the contents of this table
 
-```nushell
+```nu
 > [Joe Bob Sam] | to json --indent 4
 [
     "Joe",
@@ -58,7 +58,7 @@ Outputs a JSON string, with 4-space indentation, representing the contents of th
 
 Outputs an unformatted JSON string representing the contents of this table
 
-```nushell
+```nu
 > [1 2 3] | to json -r
 [1,2,3]
 ```

@@ -35,7 +35,7 @@ feature: default
 
 Explain a command within a closure
 
-```nushell
+```nu
 > explain {|| ls | sort-by name type --ignore-case | get name } | table --expand
 
 ```

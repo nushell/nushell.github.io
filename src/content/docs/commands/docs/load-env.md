@@ -35,14 +35,14 @@ feature: default
 
 Load variables from an input stream
 
-```nushell
+```nu
 > {NAME: ABE, AGE: UNKNOWN} | load-env; $env.NAME
 ABE
 ```
 
 Load variables from an argument
 
-```nushell
+```nu
 > load-env {NAME: ABE, AGE: UNKNOWN}; $env.NAME
 ABE
 ```

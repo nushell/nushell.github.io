@@ -35,7 +35,7 @@ feature: default
 
 Export the signature for an external command
 
-```nushell
+```nu
 > export extern echo [text: string]
 
 ```

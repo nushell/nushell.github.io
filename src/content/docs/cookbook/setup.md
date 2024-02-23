@@ -13,7 +13,7 @@ In order to configure your path in nushell you'll need to modify your `PATH` env
 
 Alternately, if you want to append a folder to your `PATH` environment variable you can do that too using the `append` or `prepend` command like this:
 
-```nushell
+```nu
 $env.PATH = ($env.PATH | split row (char esep) | append "some/other/path")
 ```
 
@@ -21,7 +21,7 @@ For more detailed instructions, see the documentation about [environment variabl
 
 ### How to list your environment variables
 
-```nushell
+```nu
 $env
 ```
 
@@ -43,7 +43,7 @@ Output
 
 or for a more detailed view, use our new `env` command.
 
-```nushell
+```nu
 env
 ```
 
@@ -95,13 +95,13 @@ You should now be able to run `config nu` or `config env` and edit those files e
 
 ### How to get a single environment variable's value
 
-```nushell
+```nu
 $env.APPDATA
 ```
 
 or
 
-```nushell
+```nu
 env | where name == APPDATA
 ```
 
@@ -131,7 +131,7 @@ With it, we can export state information as an environment variable, for
 example, what [overlays](https://www.nushell.sh/book/overlays) are
 currently activated.
 
-```nushell
+```nu
 # set NU_OVERLAYS with overlay list, useful for starship prompt
 $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | append {||
   let overlays = overlay list | range 1..

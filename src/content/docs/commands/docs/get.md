@@ -42,14 +42,14 @@ feature: default
 
 Get an item from a list
 
-```nushell
+```nu
 > [0 1 2] | get 1
 1
 ```
 
 Get a column from a table
 
-```nushell
+```nu
 > [{A: A0}] | get A
 ╭───┬────╮
 │ 0 │ A0 │
@@ -59,42 +59,42 @@ Get a column from a table
 
 Get a cell from a table
 
-```nushell
+```nu
 > [{A: A0}] | get 0.A
 A0
 ```
 
 Extract the name of the 3rd record in a list (same as `ls | $in.name`)
 
-```nushell
+```nu
 > ls | get name.2
 
 ```
 
 Extract the name of the 3rd record in a list
 
-```nushell
+```nu
 > ls | get 2.name
 
 ```
 
 Extract the cpu list from the sys information record
 
-```nushell
+```nu
 > sys | get cpu
 
 ```
 
 Getting Path/PATH in a case insensitive way
 
-```nushell
+```nu
 > $env | get paTH
 
 ```
 
 Getting Path in a case sensitive way, won't work for 'PATH'
 
-```nushell
+```nu
 > $env | get --sensitive Path
 
 ```

@@ -37,7 +37,7 @@ feature: default
 
 Return the first item of a list/table
 
-```nushell
+```nu
 > [1 2 3] | take 1
 ╭───┬───╮
 │ 0 │ 1 │
@@ -47,7 +47,7 @@ Return the first item of a list/table
 
 Return the first 2 items of a list/table
 
-```nushell
+```nu
 > [1 2 3] | take 2
 ╭───┬───╮
 │ 0 │ 1 │
@@ -58,7 +58,7 @@ Return the first 2 items of a list/table
 
 Return the first two rows of a table
 
-```nushell
+```nu
 > [[editions]; [2015] [2018] [2021]] | take 2
 ╭───┬──────────╮
 │ # │ editions │
@@ -71,7 +71,7 @@ Return the first two rows of a table
 
 Return the first 2 bytes of a binary value
 
-```nushell
+```nu
 > 0x[01 23 45] | take 2
 Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 00000000:   01 23                                                •#
@@ -80,7 +80,7 @@ Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 
 Return the first 3 elements of a range
 
-```nushell
+```nu
 > 1..10 | take 3
 ╭───┬───╮
 │ 0 │ 1 │

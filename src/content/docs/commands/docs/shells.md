@@ -21,14 +21,14 @@ usage: |
 
 Enter a new shell at parent path '..' and show all opened shells
 
-```nushell
+```nu
 > enter ..; shells
 
 ```
 
 Show currently active shell
 
-```nushell
+```nu
 > shells | where active == true
 
 ```

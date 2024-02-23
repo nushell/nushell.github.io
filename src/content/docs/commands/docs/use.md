@@ -35,42 +35,42 @@ feature: default
 
 Define a custom command in a module and call it
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" } }; use spam foo; foo
 foo
 ```
 
 Define a custom command that participates in the environment in a module and call it
 
-```nushell
+```nu
 > module foo { export def --env bar [] { $env.FOO_BAR = "BAZ" } }; use foo bar; bar; $env.FOO_BAR
 BAZ
 ```
 
 Use a plain module name to import its definitions qualified by the module name
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" }; export def bar [] { "bar" } }; use spam; (spam foo) + (spam bar)
 foobar
 ```
 
 Specify \* to use all definitions in a module
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" }; export def bar [] { "bar" } }; use spam *; (foo) + (bar)
 foobar
 ```
 
 To use commands with spaces, like subcommands, surround them with quotes
 
-```nushell
+```nu
 > module spam { export def 'foo bar' [] { "baz" } }; use spam 'foo bar'; foo bar
 baz
 ```
 
 To use multiple definitions from a module, wrap them in a list
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" }; export def 'foo bar' [] { "baz" } }; use spam ['foo', 'foo bar']; (foo) + (foo bar)
 foobaz
 ```

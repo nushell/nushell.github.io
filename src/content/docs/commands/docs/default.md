@@ -35,21 +35,21 @@ feature: default
 
 Give a default 'target' column to all file entries
 
-```nushell
+```nu
 > ls -la | default 'nothing' target
 
 ```
 
 Get the env value of `MY_ENV` with a default value 'abc' if not present
 
-```nushell
+```nu
 > $env | get --ignore-errors MY_ENV | default 'abc'
 
 ```
 
 Replace the `null` value in a list
 
-```nushell
+```nu
 > [1, 2, null, 4] | default 3
 ╭───┬───╮
 │ 0 │ 1 │

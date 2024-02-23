@@ -35,7 +35,7 @@ feature: default
 
 Listen for a keyboard shortcut and find out how nu receives it
 
-```nushell
+```nu
 > input listen --types [key]
 
 ```

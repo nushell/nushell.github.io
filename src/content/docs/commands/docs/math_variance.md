@@ -36,21 +36,21 @@ feature: default
 
 Get the variance of a list of numbers
 
-```nushell
+```nu
 > [1 2 3 4 5] | math variance
 2
 ```
 
 Get the sample variance of a list of numbers
 
-```nushell
+```nu
 > [1 2 3 4 5] | math variance --sample
 2.5
 ```
 
 Compute the variance of each column in a table
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | math variance
 ╭───┬───╮
 │ a │ 1 │

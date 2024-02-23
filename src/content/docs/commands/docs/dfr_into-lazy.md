@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Takes a dictionary and creates a lazy dataframe
 
-```nushell
+```nu
 > [[a b];[1 2] [3 4]] | dfr into-lazy
 
 ```

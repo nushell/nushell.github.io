@@ -8,7 +8,7 @@ Nu can help with common `Git` tasks like removing all local branches which have 
 
 **Warning**: This command will hard delete the merged branches from your machine. You may want to check the branches selected for deletion by omitting the last git command.
 
-```nushell
+```nu
 git branch --merged | lines | where ($it != "* master" and $it != "* main") | each {|br| git branch -D ($br | str trim) } | str trim
 ```
 
@@ -22,7 +22,7 @@ Output
 
 Parse formatted commit messages (more details in the parsing git log section)
 
-```nushell
+```nu
 git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | first 10
 ```
 
@@ -52,7 +52,7 @@ Output
 
 _Note: the `histogram` command is not yet ported to the latest version_
 
-```nushell
+```nu
 git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | histogram committer merger | sort-by merger | reverse
 ```
 

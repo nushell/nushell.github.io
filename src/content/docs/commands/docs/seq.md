@@ -34,7 +34,7 @@ feature: default
 
 sequence 1 to 10
 
-```nushell
+```nu
 > seq 1 10
 ╭───┬────╮
 │ 0 │  1 │
@@ -53,7 +53,7 @@ sequence 1 to 10
 
 sequence 1.0 to 2.0 by 0.1s
 
-```nushell
+```nu
 > seq 1.0 0.1 2.0
 ╭────┬──────╮
 │  0 │ 1.00 │
@@ -73,7 +73,7 @@ sequence 1.0 to 2.0 by 0.1s
 
 sequence 1 to 5, then convert to a string with a pipe separator
 
-```nushell
+```nu
 > seq 1 5 | str join '|'
 
 ```

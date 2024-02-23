@@ -32,28 +32,28 @@ feature: default
 
 Convert integer into cell path
 
-```nushell
+```nu
 > 5 | into cell-path
 5
 ```
 
 Convert string into cell path
 
-```nushell
+```nu
 > 'some.path' | split row '.' | into cell-path
 some.path
 ```
 
 Convert list into cell path
 
-```nushell
+```nu
 > [5 c 7 h] | into cell-path
 5.c.7.h
 ```
 
 Convert table into cell path
 
-```nushell
+```nu
 > [[value, optional]; [5 true] [c false]] | into cell-path
 5.c
 ```

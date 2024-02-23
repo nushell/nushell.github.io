@@ -35,14 +35,14 @@ feature: default
 
 Find a relative path from two absolute paths
 
-```nushell
+```nu
 > '/home/viking' | path relative-to '/home'
 viking
 ```
 
 Find a relative path from absolute paths in list
 
-```nushell
+```nu
 > [ /home/viking, /home/spam ] | path relative-to '/home'
 ╭───┬────────╮
 │ 0 │ viking │
@@ -53,7 +53,7 @@ Find a relative path from absolute paths in list
 
 Find a relative path from two relative paths
 
-```nushell
+```nu
 > 'eggs/bacon/sausage/spam' | path relative-to 'eggs/bacon/sausage'
 spam
 ```

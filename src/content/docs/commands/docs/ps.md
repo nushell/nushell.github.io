@@ -34,35 +34,35 @@ feature: default
 
 List the system processes
 
-```nushell
+```nu
 > ps
 
 ```
 
 List the top 5 system processes with the highest memory usage
 
-```nushell
+```nu
 > ps | sort-by mem | last 5
 
 ```
 
 List the top 3 system processes with the highest CPU usage
 
-```nushell
+```nu
 > ps | sort-by cpu | last 3
 
 ```
 
 List the system processes with 'nu' in their names
 
-```nushell
+```nu
 > ps | where name =~ 'nu'
 
 ```
 
 Get the parent process id of the current nu process
 
-```nushell
+```nu
 > ps | where pid == $nu.pid | get ppid
 
 ```

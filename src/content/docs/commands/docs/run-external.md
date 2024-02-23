@@ -42,14 +42,14 @@ feature: default
 
 Run an external command
 
-```nushell
+```nu
 > run-external "echo" "-n" "hello"
 
 ```
 
 Redirect stdout from an external command into the pipeline
 
-```nushell
+```nu
 > run-external --redirect-stdout "echo" "-n" "hello" | split chars
 
 ```

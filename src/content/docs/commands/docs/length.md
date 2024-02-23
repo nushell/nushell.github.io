@@ -30,14 +30,14 @@ feature: default
 
 Count the number of items in a list
 
-```nushell
+```nu
 > [1 2 3 4 5] | length
 5
 ```
 
 Count the number of rows in a table
 
-```nushell
+```nu
 > [{a:1 b:2}, {a:2 b:3}] | length
 2
 ```

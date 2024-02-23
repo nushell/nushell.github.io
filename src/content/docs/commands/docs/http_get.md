@@ -46,28 +46,28 @@ feature: default
 
 Get content from example.com
 
-```nushell
+```nu
 > http get https://www.example.com
 
 ```
 
 Get content from example.com, with username and password
 
-```nushell
+```nu
 > http get --user myuser --password mypass https://www.example.com
 
 ```
 
 Get content from example.com, with custom header
 
-```nushell
+```nu
 > http get --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Get content from example.com, with custom headers
 
-```nushell
+```nu
 > http get --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```

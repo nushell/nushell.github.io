@@ -34,14 +34,14 @@ feature: default
 
 Infer Nushell values for each cell.
 
-```nushell
+```nu
 > $table | into value
 
 ```
 
 Infer Nushell values for each cell in the given columns.
 
-```nushell
+```nu
 > $table | into value -c [column1, column5]
 
 ```

@@ -37,21 +37,21 @@ feature: default
 
 Capitalize contents
 
-```nushell
+```nu
 > 'good day' | str capitalize
 Good day
 ```
 
 Capitalize contents
 
-```nushell
+```nu
 > 'anton' | str capitalize
 Anton
 ```
 
 Capitalize a column in a table
 
-```nushell
+```nu
 > [[lang, gems]; [nu_test, 100]] | str capitalize lang
 ╭───┬─────────┬──────╮
 │ # │  lang   │ gems │

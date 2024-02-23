@@ -31,7 +31,7 @@ feature: default
 
 Sets the column names for a table created by `split column`
 
-```nushell
+```nu
 > "a b c|1 2 3" | split row "|" | split column " " | headers
 ╭───┬───┬───┬───╮
 │ # │ a │ b │ c │
@@ -43,7 +43,7 @@ Sets the column names for a table created by `split column`
 
 Columns which don't have data in their first row are removed
 
-```nushell
+```nu
 > "a b c|1 2 3|1 2 3 4" | split row "|" | split column " " | headers
 ╭───┬───┬───┬───╮
 │ # │ a │ b │ c │

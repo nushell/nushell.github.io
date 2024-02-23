@@ -37,7 +37,7 @@ feature: default
 
 Render a simple list to a grid
 
-```nushell
+```nu
 > [1 2 3 a b c] | grid
 1 │ 2 │ 3 │ a │ b │ c
 
@@ -45,7 +45,7 @@ Render a simple list to a grid
 
 The above example is the same as:
 
-```nushell
+```nu
 > [1 2 3 a b c] | wrap name | grid
 1 │ 2 │ 3 │ a │ b │ c
 
@@ -53,7 +53,7 @@ The above example is the same as:
 
 Render a record to a grid
 
-```nushell
+```nu
 > {name: 'foo', b: 1, c: 2} | grid
 foo
 
@@ -61,7 +61,7 @@ foo
 
 Render a list of records to a grid
 
-```nushell
+```nu
 > [{name: 'A', v: 1} {name: 'B', v: 2} {name: 'C', v: 3}] | grid
 A │ B │ C
 
@@ -69,7 +69,7 @@ A │ B │ C
 
 Render a table with 'name' column in it to a grid
 
-```nushell
+```nu
 > [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid
 0.1.0 │ 0.1.1 │ 0.2.0
 

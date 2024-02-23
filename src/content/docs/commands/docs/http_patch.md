@@ -48,28 +48,28 @@ feature: default
 
 Patch content to example.com
 
-```nushell
+```nu
 > http patch https://www.example.com 'body'
 
 ```
 
 Patch content to example.com, with username and password
 
-```nushell
+```nu
 > http patch --user myuser --password mypass https://www.example.com 'body'
 
 ```
 
 Patch content to example.com, with custom header
 
-```nushell
+```nu
 > http patch --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Patch content to example.com, with JSON body
 
-```nushell
+```nu
 > http patch --content-type application/json https://www.example.com { field: value }
 
 ```

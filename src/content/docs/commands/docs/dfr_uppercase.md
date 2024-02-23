@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Modifies strings to uppercase
 
-```nushell
+```nu
 > [Abc aBc abC] | dfr into-df | dfr uppercase
 ╭───┬─────╮
 │ # │  0  │

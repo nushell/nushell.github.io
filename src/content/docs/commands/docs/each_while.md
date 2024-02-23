@@ -38,7 +38,7 @@ Command `each while` was not included in the official binaries by default, you h
 
 Produces a list of each element before the 3, doubled
 
-```nushell
+```nu
 > [1 2 3 2 1] | each while {|e| if $e < 3 { $e * 2 } }
 ╭───┬───╮
 │ 0 │ 2 │
@@ -49,7 +49,7 @@ Produces a list of each element before the 3, doubled
 
 Output elements until reaching 'stop'
 
-```nushell
+```nu
 > [1 2 stop 3 4] | each while {|e| if $e != 'stop' { $"Output: ($e)" } }
 ╭───┬───────────╮
 │ 0 │ Output: 1 │
@@ -60,7 +60,7 @@ Output elements until reaching 'stop'
 
 Iterate over each element, printing the matching value and its index
 
-```nushell
+```nu
 > [1 2 3] | enumerate | each while {|e| if $e.item < 2 { $"value ($e.item) at ($e.index)!"} }
 ╭───┬───────────────╮
 │ 0 │ value 1 at 0! │

@@ -43,35 +43,35 @@ feature: default
 
 Get options from example.com
 
-```nushell
+```nu
 > http options https://www.example.com
 
 ```
 
 Get options from example.com, with username and password
 
-```nushell
+```nu
 > http options --user myuser --password mypass https://www.example.com
 
 ```
 
 Get options from example.com, with custom header
 
-```nushell
+```nu
 > http options --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Get options from example.com, with custom headers
 
-```nushell
+```nu
 > http options --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 
 Simulate a browser cross-origin preflight request from www.example.com to media.example.com
 
-```nushell
+```nu
 > http options https://media.example.com/api/ --headers [Origin https://www.example.com Access-Control-Request-Headers "Content-Type, X-Custom-Header" Access-Control-Request-Method GET]
 
 ```

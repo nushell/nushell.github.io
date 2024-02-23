@@ -45,21 +45,21 @@ feature: default
 
 Encode binary data
 
-```nushell
+```nu
 > 0x[09 F9 11 02 9D 74 E3 5B D8 41 56 C5 63 56 88 C0] | encode base64
 CfkRAp1041vYQVbFY1aIwA==
 ```
 
 Encode a string with default settings
 
-```nushell
+```nu
 > 'Some Data' | encode base64
 U29tZSBEYXRh
 ```
 
 Encode a string with the binhex character set
 
-```nushell
+```nu
 > 'Some Data' | encode base64 --character-set binhex
 7epXB5"%A@4J
 ```

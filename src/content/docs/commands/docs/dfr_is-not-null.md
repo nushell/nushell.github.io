@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Create mask where values are not null
 
-```nushell
+```nu
 > let s = ([5 6 0 8] | dfr into-df);
     let res = ($s / $s);
     $res | dfr is-not-null
@@ -51,7 +51,7 @@ Create mask where values are not null
 
 Creates a is not null expression from a column
 
-```nushell
+```nu
 > dfr col a | dfr is-not-null
 
 ```

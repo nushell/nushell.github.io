@@ -41,28 +41,28 @@ Command `str kebab-case` was not included in the official binaries by default, y
 
 convert a string to kebab-case
 
-```nushell
+```nu
 > 'NuShell' | str kebab-case
 nu-shell
 ```
 
 convert a string to kebab-case
 
-```nushell
+```nu
 > 'thisIsTheFirstCase' | str kebab-case
 this-is-the-first-case
 ```
 
 convert a string to kebab-case
 
-```nushell
+```nu
 > 'THIS_IS_THE_SECOND_CASE' | str kebab-case
 this-is-the-second-case
 ```
 
 convert a column from a table to kebab-case
 
-```nushell
+```nu
 > [[lang, gems]; [nuTest, 100]] | str kebab-case lang
 ╭───┬─────────┬──────╮
 │ # │  lang   │ gems │

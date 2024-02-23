@@ -30,7 +30,7 @@ feature: default
 
 Get the current username
 
-```nushell
+```nu
 > whoami
 
 ```

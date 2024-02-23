@@ -40,7 +40,7 @@ feature: default
 
 Convert value to boolean in table
 
-```nushell
+```nu
 > [[value]; ['false'] ['1'] [0] [1.0] [true]] | into bool value
 ╭───┬───────╮
 │ # │ value │
@@ -56,35 +56,35 @@ Convert value to boolean in table
 
 Convert bool to boolean
 
-```nushell
+```nu
 > true | into bool
 true
 ```
 
 convert int to boolean
 
-```nushell
+```nu
 > 1 | into bool
 true
 ```
 
 convert float to boolean
 
-```nushell
+```nu
 > 0.3 | into bool
 true
 ```
 
 convert float string to boolean
 
-```nushell
+```nu
 > '0.0' | into bool
 false
 ```
 
 convert string to boolean
 
-```nushell
+```nu
 > 'true' | into bool
 true
 ```

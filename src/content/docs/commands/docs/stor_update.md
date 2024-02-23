@@ -36,14 +36,14 @@ feature: default
 
 Update the in-memory sqlite database
 
-```nushell
+```nu
 > stor update --table-name nudb --update-record {str1: nushell datetime1: 2020-04-17}
 
 ```
 
 Update the in-memory sqlite database with a where clause
 
-```nushell
+```nu
 > stor update --table-name nudb --update-record {str1: nushell datetime1: 2020-04-17} --where-clause "bool1 = 1"
 
 ```

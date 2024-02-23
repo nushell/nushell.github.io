@@ -36,21 +36,21 @@ feature: default
 
 Compute the standard deviation of a list of numbers
 
-```nushell
+```nu
 > [1 2 3 4 5] | math stddev
 1.4142135623730951
 ```
 
 Compute the sample standard deviation of a list of numbers
 
-```nushell
+```nu
 > [1 2 3 4 5] | math stddev --sample
 1.5811388300841898
 ```
 
 Compute the standard deviation of each column in a table
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | math stddev
 ╭───┬───╮
 │ a │ 1 │

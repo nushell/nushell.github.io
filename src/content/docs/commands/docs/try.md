@@ -35,14 +35,14 @@ feature: default
 
 Try to run a missing command
 
-```nushell
+```nu
 > try { asdfasdf }
 
 ```
 
 Try to run a missing command
 
-```nushell
+```nu
 > try { asdfasdf } catch { 'missing' }
 missing
 ```

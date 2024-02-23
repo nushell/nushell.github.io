@@ -30,7 +30,7 @@ feature: default
 
 Continue a loop from the next iteration
 
-```nushell
+```nu
 > for i in 1..10 { if $i == 5 { continue }; print $i }
 
 ```

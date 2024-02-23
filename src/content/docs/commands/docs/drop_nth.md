@@ -35,7 +35,7 @@ feature: default
 
 Drop the first, second, and third row
 
-```nushell
+```nu
 > [sam,sarah,2,3,4,5] | drop nth 0 1 2
 ╭───┬───╮
 │ 0 │ 3 │
@@ -47,7 +47,7 @@ Drop the first, second, and third row
 
 Drop the first, second, and third row
 
-```nushell
+```nu
 > [0,1,2,3,4,5] | drop nth 0 1 2
 ╭───┬───╮
 │ 0 │ 3 │
@@ -59,7 +59,7 @@ Drop the first, second, and third row
 
 Drop rows 0 2 4
 
-```nushell
+```nu
 > [0,1,2,3,4,5] | drop nth 0 2 4
 ╭───┬───╮
 │ 0 │ 1 │
@@ -71,7 +71,7 @@ Drop rows 0 2 4
 
 Drop rows 2 0 4
 
-```nushell
+```nu
 > [0,1,2,3,4,5] | drop nth 2 0 4
 ╭───┬───╮
 │ 0 │ 1 │
@@ -83,7 +83,7 @@ Drop rows 2 0 4
 
 Drop range rows from second to fourth
 
-```nushell
+```nu
 > [first second third fourth fifth] | drop nth (1..3)
 ╭───┬───────╮
 │ 0 │ first │
@@ -94,7 +94,7 @@ Drop range rows from second to fourth
 
 Drop all rows except first row
 
-```nushell
+```nu
 > [0,1,2,3,4,5] | drop nth 1..
 ╭───┬───╮
 │ 0 │ 0 │
@@ -104,7 +104,7 @@ Drop all rows except first row
 
 Drop rows 3,4,5
 
-```nushell
+```nu
 > [0,1,2,3,4,5] | drop nth 3..
 ╭───┬───╮
 │ 0 │ 0 │

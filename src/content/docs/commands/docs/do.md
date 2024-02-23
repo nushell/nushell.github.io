@@ -43,63 +43,63 @@ feature: default
 
 Run the closure
 
-```nushell
+```nu
 > do { echo hello }
 hello
 ```
 
 Run a stored first-class closure
 
-```nushell
+```nu
 > let text = "I am enclosed"; let hello = {|| echo $text}; do $hello
 I am enclosed
 ```
 
 Run the closure and ignore both shell and external program errors
 
-```nushell
+```nu
 > do --ignore-errors { thisisnotarealcommand }
 
 ```
 
 Run the closure and ignore shell errors
 
-```nushell
+```nu
 > do --ignore-shell-errors { thisisnotarealcommand }
 
 ```
 
 Run the closure and ignore external program errors
 
-```nushell
+```nu
 > do --ignore-program-errors { nu --commands 'exit 1' }; echo "I'll still run"
 
 ```
 
 Abort the pipeline if a program returns a non-zero exit code
 
-```nushell
+```nu
 > do --capture-errors { nu --commands 'exit 1' } | myscarycommand
 
 ```
 
 Run the closure, with a positional parameter
 
-```nushell
+```nu
 > do {|x| 100 + $x } 77
 177
 ```
 
 Run the closure, with input
 
-```nushell
+```nu
 > 77 | do {|x| 100 + $in }
 
 ```
 
 Run the closure and keep changes to the environment
 
-```nushell
+```nu
 > do --env { $env.foo = 'bar' }; $env.foo
 bar
 ```

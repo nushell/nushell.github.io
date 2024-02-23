@@ -35,7 +35,7 @@ feature: default
 
 Outputs an MD string representing the contents of this table
 
-```nushell
+```nu
 > [[foo bar]; [1 2]] | to md
 |foo|bar|
 |-|-|
@@ -45,7 +45,7 @@ Outputs an MD string representing the contents of this table
 
 Optionally, output a formatted markdown string
 
-```nushell
+```nu
 > [[foo bar]; [1 2]] | to md --pretty
 | foo | bar |
 | --- | --- |
@@ -55,7 +55,7 @@ Optionally, output a formatted markdown string
 
 Treat each row as a markdown element
 
-```nushell
+```nu
 > [{"H1": "Welcome to Nushell" } [[foo bar]; [1 2]]] | to md --per-element --pretty
 # Welcome to Nushell
 | foo | bar |
@@ -65,7 +65,7 @@ Treat each row as a markdown element
 
 Render a list
 
-```nushell
+```nu
 > [0 1 2] | to md --pretty
 0
 1

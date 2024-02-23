@@ -30,7 +30,7 @@ feature: default
 
 Clear the terminal
 
-```nushell
+```nu
 > clear
 
 ```

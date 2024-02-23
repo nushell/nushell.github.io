@@ -41,28 +41,28 @@ Command `str snake-case` was not included in the official binaries by default, y
 
 convert a string to snake_case
 
-```nushell
+```nu
 >  "NuShell" | str snake-case
 nu_shell
 ```
 
 convert a string to snake_case
 
-```nushell
+```nu
 >  "this_is_the_second_case" | str snake-case
 this_is_the_second_case
 ```
 
 convert a string to snake_case
 
-```nushell
+```nu
 > "this-is-the-first-case" | str snake-case
 this_is_the_first_case
 ```
 
 convert a column from a table to snake_case
 
-```nushell
+```nu
 > [[lang, gems]; [nuTest, 100]] | str snake-case lang
 ╭───┬─────────┬──────╮
 │ # │  lang   │ gems │

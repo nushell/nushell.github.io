@@ -37,7 +37,7 @@ feature: default
 
 Split the string's words into separate rows
 
-```nushell
+```nu
 > 'hello world' | split words
 ╭───┬───────╮
 │ 0 │ hello │
@@ -48,7 +48,7 @@ Split the string's words into separate rows
 
 Split the string's words, of at least 3 characters, into separate rows
 
-```nushell
+```nu
 > 'hello to the world' | split words --min-word-length 3
 ╭───┬───────╮
 │ 0 │ hello │
@@ -60,7 +60,7 @@ Split the string's words, of at least 3 characters, into separate rows
 
 A real-world example of splitting words
 
-```nushell
+```nu
 > http get https://www.gutenberg.org/files/11/11-0.txt | str downcase | split words --min-word-length 2 | uniq --count | sort-by count --reverse | first 10
 
 ```

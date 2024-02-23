@@ -39,14 +39,14 @@ Command `math cos` was not included in the official binaries by default, you hav
 
 Apply the cosine to π
 
-```nushell
+```nu
 > 3.141592 | math cos | math round --precision 4
 -1
 ```
 
 Apply the cosine to a list of angles in degrees
 
-```nushell
+```nu
 > [0 90 180 270 360] | math cos --degrees
 ╭───┬───────╮
 │ 0 │  1.00 │

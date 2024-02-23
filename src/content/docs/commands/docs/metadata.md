@@ -34,14 +34,14 @@ feature: default
 
 Get the metadata of a variable
 
-```nushell
+```nu
 > let a = 42; metadata $a
 
 ```
 
 Get the metadata of the input
 
-```nushell
+```nu
 > ls | metadata
 
 ```

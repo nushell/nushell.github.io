@@ -40,14 +40,14 @@ feature: default
 
 Return the sha256 hash of a string, hex-encoded
 
-```nushell
+```nu
 > 'abcdefghijklmnopqrstuvwxyz' | hash sha256
 71c480df93d6ae2f1efad1447c66c9525e316218cf51fc8d9ed832f2daf18b73
 ```
 
 Return the sha256 hash of a string, as binary
 
-```nushell
+```nu
 > 'abcdefghijklmnopqrstuvwxyz' | hash sha256 --binary
 Length: 32 (0x20) bytes | printable whitespace ascii_other non_ascii
 00000000:   71 c4 80 df  93 d6 ae 2f  1e fa d1 44  7c 66 c9 52   q××××××/•××D|f×R
@@ -57,7 +57,7 @@ Length: 32 (0x20) bytes | printable whitespace ascii_other non_ascii
 
 Return the sha256 hash of a file's contents
 
-```nushell
+```nu
 > open ./nu_0_24_1_windows.zip | hash sha256
 
 ```

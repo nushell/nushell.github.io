@@ -34,14 +34,14 @@ feature: default
 
 Convert binary .ods data to a table
 
-```nushell
+```nu
 > open --raw test.ods | from ods
 
 ```
 
 Convert binary .ods data to a table, specifying the tables
 
-```nushell
+```nu
 > open --raw test.ods | from ods --sheets [Spreadsheet1]
 
 ```

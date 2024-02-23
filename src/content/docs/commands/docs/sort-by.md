@@ -42,21 +42,21 @@ feature: default
 
 Sort files by modified date
 
-```nushell
+```nu
 > ls | sort-by modified
 
 ```
 
 Sort files by name (case-insensitive)
 
-```nushell
+```nu
 > ls | sort-by name --ignore-case
 
 ```
 
 Sort a table by a column (reversed order)
 
-```nushell
+```nu
 > [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit --reverse
 ╭───┬────────┬───────╮
 │ # │ fruit  │ count │

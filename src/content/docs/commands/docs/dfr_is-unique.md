@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Create mask indicating unique values
 
-```nushell
+```nu
 > [5 6 6 6 8 8 8] | dfr into-df | dfr is-unique
 ╭───┬───────────╮
 │ # │ is_unique │
@@ -52,7 +52,7 @@ Create mask indicating unique values
 
 Create mask indicating duplicated rows in a dataframe
 
-```nushell
+```nu
 > [[a, b]; [1 2] [1 2] [3 3] [3 3] [1 1]] | dfr into-df | dfr is-unique
 ╭───┬───────────╮
 │ # │ is_unique │

@@ -34,7 +34,7 @@ feature: default
 
 Split multi-line string into lines
 
-```nushell
+```nu
 > $"two\nlines" | lines
 ╭───┬───────╮
 │ 0 │ two   │

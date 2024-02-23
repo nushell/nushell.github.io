@@ -30,7 +30,7 @@ feature: default
 
 Converts yaml formatted string to table
 
-```nushell
+```nu
 > 'a: 1' | from yaml
 ╭───┬───╮
 │ a │ 1 │
@@ -39,7 +39,7 @@ Converts yaml formatted string to table
 
 Converts yaml formatted string to table
 
-```nushell
+```nu
 > '[ a: 1, b: [1, 2] ]' | from yaml
 ╭───┬────┬───────────╮
 │ # │ a  │     b     │

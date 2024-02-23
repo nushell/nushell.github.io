@@ -14,9 +14,9 @@ If you're adding a new page to the book, to make it appear, put it also to `.vue
 
 ## Display Nu Code Snippets With Syntax Highlighting
 
-To display Nushell code snippets with syntax highlighting support you can wrap the Nu codes with \```nushell \``` or \```nushell \```, for example:
+To display Nushell code snippets with syntax highlighting support you can wrap the Nu codes with \```nu \``` or \```nu \```, for example:
 
-```nushell
+```nu
 # List the top five largest files
 ls | where type == file | sort-by -r size | first 5
 ```

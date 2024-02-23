@@ -14,14 +14,14 @@ What are possible values: `true` or `false`
 
 Example 1:
 
-```nushell
+```nu
 > if true { print hello }
 hello
 ```
 
 Example 2:
 
-```nushell
+```nu
 > let truth = true
 > echo $truth
 true
@@ -55,7 +55,7 @@ Specialized numeric type to represent the size of files or a number of bytes.
 
 The literals and display representations support both metric prefixes with a base of `1000` and the binary compatible kibibytes, mebibytes, etc. with a base of `1024`
 
-```nushell
+```nu
 1 kb
 0.2 gb
 20 mib
@@ -86,7 +86,7 @@ Ranges can range over int or float values.
 
 Ranges can also work backward. For example, the values from 10 to 1 in reverse could be created with:
 
-```nushell
+```nu
 10..1
 ```
 
@@ -94,19 +94,19 @@ Ranges can exclude either the `from` or the `to` side of the range:
 
 Numbers from 0 to 10:
 
-```nushell
+```nu
 ..10
 ```
 
 Numbers starting from 1:
 
-```nushell
+```nu
 1..
 ```
 
 Ranges are lazy. They do not generate their values until needed. You can use a range with no specified end point and combine it with a command that takes only the first n elements. For example, you could generate the numbers from 1 to 10 using:
 
-```nushell
+```nu
 1.. | take 10
 ```
 
@@ -147,7 +147,7 @@ Effectively, commas in the above are treated like spaces.
 
 Lists can span multiple lines to enumerate values. For example, this is equivalent to `[1, 2, 3]`:
 
-```nushell
+```nu
 [
 1
 2
@@ -159,11 +159,11 @@ Lists can span multiple lines to enumerate values. For example, this is equivale
 
 A table is a two-dimensional container with both columns and rows. There are two ways to write a table. These two examples are equivalent:
 
-```nushell
+```nu
 [[a, b]; [1, 2], [3, 4]]
 ```
 
-```nushell
+```nu
 [{a: 1, b: 2}, {a: 3, b: 4}]
 ```
 
@@ -255,7 +255,7 @@ The`if` expression evaluates a condition and then chooses to run a block based o
 
 For example, you can print "yes", based on a true condition:
 
-```nushell
+```nu
 if true {
   print yes
 } else {
@@ -265,7 +265,7 @@ if true {
 
 Alternately, you can print "no", based on a false condition:
 
-```nushell
+```nu
 if false {
   print yes
 } else {
@@ -321,7 +321,7 @@ String interpolation uses either double quotes or single quotes with a preceedin
 
 Example:
 
-```nushell
+```nu
 let name = "nushell"
 print $"My favorite shell is ($name)"
 ```
@@ -338,7 +338,7 @@ Sometimes you need to build a path to execute external commands.
 
 Example:
 
-```nushell
+```nu
 let path1 = "/part1"
 let path2 = "/part2"
 let fn = "filename"
@@ -356,7 +356,7 @@ Double quotes are used as you would think normal quotes should be used except fo
 
 Example:
 
-```nushell
+```nu
 "\e[31mHello\e[35m Nushell\e[0m"
 ```
 
@@ -418,14 +418,14 @@ Sometimes you need to nest quotes. I think this could use some work because some
 
 Example:
 
-```nushell
+```nu
 "This is just a string 'that needs an inner part quoted'"
 'This is also a string "that needs an inner part quoted"'
 ```
 
 The key to always remember is that double quotes recognize and interpret escapes so if you have any `\` characters in your string, they will be interpreted as excapes. The following is an example of a question we get frequently on Discord.
 
-```nushell
+```nu
 Why doesn't this work?
 > cd "C:\Program Files\somedir"
 ```

@@ -30,28 +30,28 @@ feature: default
 
 Get the current date and display it in a given format string.
 
-```nushell
+```nu
 > date now | format date "%Y-%m-%d %H:%M:%S"
 
 ```
 
 Get the time duration from 2019-04-30 to now
 
-```nushell
+```nu
 > (date now) - 2019-05-01
 
 ```
 
 Get the time duration since a more accurate time
 
-```nushell
+```nu
 > (date now) - 2019-05-01T04:12:05.20+08:00
 
 ```
 
 Get current time in full RFC3339 format with timezone
 
-```nushell
+```nu
 > date now | debug
 
 ```

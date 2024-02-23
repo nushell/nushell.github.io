@@ -30,7 +30,7 @@ feature: default
 
 Type and see key event codes
 
-```nushell
+```nu
 > keybindings listen
 
 ```

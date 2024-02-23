@@ -40,7 +40,7 @@ Command `roll right` was not included in the official binaries by default, you h
 
 Rolls columns of a record to the right
 
-```nushell
+```nu
 > {a:1 b:2 c:3} | roll right
 ╭───┬───╮
 │ c │ 3 │
@@ -51,7 +51,7 @@ Rolls columns of a record to the right
 
 Rolls columns to the right
 
-```nushell
+```nu
 > [[a b c]; [1 2 3] [4 5 6]] | roll right
 ╭───┬───┬───┬───╮
 │ # │ c │ a │ b │
@@ -64,7 +64,7 @@ Rolls columns to the right
 
 Rolls columns to the right with fixed headers
 
-```nushell
+```nu
 > [[a b c]; [1 2 3] [4 5 6]] | roll right --cells-only
 ╭───┬───┬───┬───╮
 │ # │ a │ b │ c │

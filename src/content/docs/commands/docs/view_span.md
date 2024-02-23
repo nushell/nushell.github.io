@@ -35,7 +35,7 @@ feature: default
 
 View the source of a span. 1 and 2 are just example values. Use the return of debug --raw to get the actual values
 
-```nushell
+```nu
 > some | pipeline | or | variable | debug --raw; view span 1 2
 
 ```

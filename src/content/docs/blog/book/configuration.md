@@ -11,7 +11,7 @@ Nushell uses a configuration system that loads and runs two Nushell script files
 
 You can check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 $nu.env-path
 # /Users/FirstNameLastName/Library/Application Support/nushell/env.nu
 ```
@@ -26,7 +26,7 @@ You can browse the default files for default values of environment variables and
 
 Nushell's main settings are kept in the `config` environment variable as a record. This record can be created using:
 
-```nushell
+```nu
 $env.config = {
   ...
 }
@@ -34,7 +34,7 @@ $env.config = {
 
 You can also shadow `$env.config` and update it:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert <field name> <field value>)
 ```
 
@@ -44,7 +44,7 @@ By convention, this variable is defined in the `config.nu` file.
 
 You can set environment variables for the duration of a Nushell session using the `$env.<var> = <val>` structure inside the `env.nu` file. For example:
 
-```nushell
+```nu
 $env.FOO = 'BAR'
 ```
 
@@ -80,7 +80,7 @@ You can learn more about setting up colors and theming in the [associated chapte
 
 To remove the welcome message, you need to edit your `config.nu` by typing `config nu` in your terminal, then you go to the global configuration `$env.config` and set `show_banner` option to false, like this:
 
-```nushell title="config.nu"
+```nu title="config.nu"
 $env.config = {
   ...
   show_banner: false,
@@ -96,7 +96,7 @@ To get an idea of which environment variables are set up by your current login s
 
 You can then configure some `$env.<var> = <val>` that setup the same environment variables in your nu login shell. Use this command to generate some `$env.<var> = <val>` for all the environment variables:
 
-```nushell
+```nu
 $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r.val)'"} | str join (char nl)
 ```
 
@@ -134,7 +134,7 @@ Some tools (e.g. Emacs) rely on an [`open`](/commands/docs/open) command to open
 As Nushell has its own [`open`](/commands/docs/open) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
 One way to work around this is to define a custom command for Nushell's [`open`](/commands/docs/open) and create an alias for the system's [`open`](/commands/docs/open) in your `config.nu` file like this:
 
-```nushell
+```nu
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
@@ -146,7 +146,7 @@ For more about escape and `^` see the [chapter about escapes](/book/escaping).
 
 In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use `$env.<var> = <val>` and [`append`](/commands/docs/append) in `env.nu`:
 
-```nushell
+```nu
 $env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
 ```
 
@@ -156,7 +156,7 @@ Note the `split row (char esep)` step. We need to add it because in `env.nu`, th
 
 To prepend a new path only if not already listed, one can add to `env.nu`:
 
-```nushell
+```nu
 # create a new string holding the desired path
 let my_path = ( $nu.home-path | path join "bin" )
 # return $env.PATH if $my_path is already listed, return $env.PATH with $my_path prepended otherwise
@@ -167,7 +167,7 @@ $env.PATH = ( if $my_path in $env.PATH { $env.PATH } else { $env.PATH | prepend 
 
 [Homebrew](https://brew.sh/) is a popular package manager that often requires PATH configuration. To add it to your Nushell PATH:
 
-```nushell
+```nu
 # macOS ARM64 (Apple Silicon)
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
 

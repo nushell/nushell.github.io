@@ -37,14 +37,14 @@ feature: default
 
 Return the length of a binary
 
-```nushell
+```nu
 > 0x[1F FF AA AB] | bytes length
 4
 ```
 
 Return the lengths of multiple binaries
 
-```nushell
+```nu
 > [0x[1F FF AA AB] 0x[1F]] | bytes length
 ╭───┬───╮
 │ 0 │ 4 │

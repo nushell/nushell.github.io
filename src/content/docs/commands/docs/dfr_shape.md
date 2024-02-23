@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Shows row and column shape
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr shape
 ╭───┬──────┬─────────╮
 │ # │ rows │ columns │

@@ -30,7 +30,7 @@ feature: default
 
 Generate a random uuid4 string
 
-```nushell
+```nu
 > random uuid
 
 ```

@@ -40,42 +40,42 @@ feature: default
 
 Sum values of a list (same as 'math sum')
 
-```nushell
+```nu
 > [ 1 2 3 4 ] | reduce {|it, acc| $it + $acc }
 10
 ```
 
 Sum values of a list, plus their indexes
 
-```nushell
+```nu
 > [ 8 7 6 ] | enumerate | reduce --fold 0 {|it, acc| $acc + $it.item + $it.index }
 24
 ```
 
 Sum values with a starting value (fold)
 
-```nushell
+```nu
 > [ 1 2 3 4 ] | reduce --fold 10 {|it, acc| $acc + $it }
 20
 ```
 
 Replace selected characters in a string with 'X'
 
-```nushell
+```nu
 > [ i o t ] | reduce --fold "Arthur, King of the Britons" {|it, acc| $acc | str replace --all $it "X" }
 ArXhur, KXng Xf Xhe BrXXXns
 ```
 
 Add ascending numbers to each of the filenames, and join with semicolons.
 
-```nushell
+```nu
 > ['foo.gz', 'bar.gz', 'baz.gz'] | enumerate | reduce --fold '' {|str all| $"($all)(if $str.index != 0 {'; '})($str.index + 1)-($str.item)" }
 1-foo.gz; 2-bar.gz; 3-baz.gz
 ```
 
 Concatenate a string with itself, using a range to determine the number of times.
 
-```nushell
+```nu
 > let s = "Str"; 0..2 | reduce --fold '' {|it, acc| $acc + $s}
 StrStrStr
 ```

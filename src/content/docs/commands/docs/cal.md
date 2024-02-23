@@ -39,21 +39,21 @@ feature: default
 
 This month's calendar
 
-```nushell
+```nu
 > cal
 
 ```
 
 The calendar for all of 2012
 
-```nushell
+```nu
 > cal --full-year 2012
 
 ```
 
 This month's calendar with the week starting on monday
 
-```nushell
+```nu
 > cal --week-start monday
 
 ```

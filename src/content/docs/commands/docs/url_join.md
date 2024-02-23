@@ -30,7 +30,7 @@ feature: default
 
 Outputs a url representing the contents of this record
 
-```nushell
+```nu
 > {
         "scheme": "http",
         "username": "",
@@ -51,7 +51,7 @@ http://www.pixiv.net/member_illust.php?mode=medium&illust_id=99260204
 
 Outputs a url representing the contents of this record
 
-```nushell
+```nu
 > {
         "scheme": "http",
         "username": "user",
@@ -66,7 +66,7 @@ http://user:pwd@www.pixiv.net:1234?test=a
 
 Outputs a url representing the contents of this record
 
-```nushell
+```nu
 > {
         "scheme": "http",
         "host": "www.pixiv.net",

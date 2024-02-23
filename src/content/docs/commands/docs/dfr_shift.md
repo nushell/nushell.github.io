@@ -42,7 +42,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Shifts the values by a given period
 
-```nushell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr shift 2 | dfr drop-nulls
 ╭───┬───╮
 │ # │ 0 │

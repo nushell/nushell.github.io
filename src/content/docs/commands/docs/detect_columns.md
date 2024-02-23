@@ -36,7 +36,7 @@ feature: default
 
 Splits string across multiple columns
 
-```nushell
+```nu
 > 'a b c' | detect columns --no-headers
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column0 │ column1 │ column2 │
@@ -46,28 +46,28 @@ Splits string across multiple columns
 
 ```
 
-```nushell
+```nu
 > $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns 0..1
 
 ```
 
 Splits a multi-line string into columns with headers detected
 
-```nushell
+```nu
 > $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns -2..-1
 
 ```
 
 Splits a multi-line string into columns with headers detected
 
-```nushell
+```nu
 > $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns 2..
 
 ```
 
 Parse external ls command and combine columns for datetime
 
-```nushell
+```nu
 > ^ls -lh | detect columns --no-headers --skip 1 --combine-columns 5..7
 
 ```

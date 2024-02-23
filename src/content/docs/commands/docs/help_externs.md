@@ -38,21 +38,21 @@ feature: default
 
 show all externs
 
-```nushell
+```nu
 > help externs
 
 ```
 
 show help for single extern
 
-```nushell
+```nu
 > help externs smth
 
 ```
 
 search for string in extern names and usages
 
-```nushell
+```nu
 > help externs --find smth
 
 ```

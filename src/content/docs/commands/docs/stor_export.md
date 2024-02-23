@@ -34,7 +34,7 @@ feature: default
 
 Export the in-memory sqlite database
 
-```nushell
+```nu
 > stor export --file-name nudb.sqlite
 
 ```

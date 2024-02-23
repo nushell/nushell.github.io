@@ -30,7 +30,7 @@ feature: default
 
 Export a definition from a module
 
-```nushell
+```nu
 > module utils { export def my-command [] { "hello" } }; use utils my-command; my-command
 hello
 ```

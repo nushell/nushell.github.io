@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Created a literal expression and converts it to a nu object
 
-```nushell
+```nu
 > dfr lit 2 | dfr into-nu
 ╭───────┬─────────╮
 │ expr  │ literal │

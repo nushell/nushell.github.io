@@ -40,42 +40,42 @@ feature: default
 
 Change color to green (see how the next example text will be green!)
 
-```nushell
+```nu
 > ansi green
 
 ```
 
 Reset the color
 
-```nushell
+```nu
 > ansi reset
 
 ```
 
 Use different colors and styles in the same text
 
-```nushell
+```nu
 > $'(ansi red_bold)Hello(ansi reset) (ansi green_dimmed)Nu(ansi reset) (ansi purple_italic)World(ansi reset)'
 Hello Nu World
 ```
 
 The same example as above with short names
 
-```nushell
+```nu
 > $'(ansi rb)Hello(ansi reset) (ansi gd)Nu(ansi reset) (ansi pi)World(ansi reset)'
 Hello Nu World
 ```
 
 Use escape codes, without the '\x1b['
 
-```nushell
+```nu
 > $"(ansi --escape '3;93;41m')Hello(ansi reset)"  # italic bright yellow on red background
 Hello
 ```
 
 Use structured escape codes
 
-```nushell
+```nu
 > let bold_blue_on_red = {  # `fg`, `bg`, `attr` are the acceptable keys, all other keys are considered invalid and will throw errors.
         fg: '#0000ff'
         bg: '#ff0000'

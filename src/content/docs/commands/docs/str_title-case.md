@@ -41,21 +41,21 @@ Command `str title-case` was not included in the official binaries by default, y
 
 convert a string to Title Case
 
-```nushell
+```nu
 > 'nu-shell' | str title-case
 Nu Shell
 ```
 
 convert a string to Title Case
 
-```nushell
+```nu
 > 'this is a test case' | str title-case
 This Is A Test Case
 ```
 
 convert a column from a table to Title Case
 
-```nushell
+```nu
 > [[title, count]; ['nu test', 100]] | str title-case title
 ╭───┬─────────┬───────╮
 │ # │  title  │ count │

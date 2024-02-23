@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Takes a dictionary and creates a dataframe
 
-```nushell
+```nu
 > [[a b];[1 2] [3 4]] | dfr into-df
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -51,7 +51,7 @@ Takes a dictionary and creates a dataframe
 
 Takes a list of tables and creates a dataframe
 
-```nushell
+```nu
 > [[1 2 a] [3 4 b] [5 6 c]] | dfr into-df
 ╭───┬───┬───┬───╮
 │ # │ 0 │ 1 │ 2 │
@@ -65,7 +65,7 @@ Takes a list of tables and creates a dataframe
 
 Takes a list and creates a dataframe
 
-```nushell
+```nu
 > [a b c] | dfr into-df
 ╭───┬───╮
 │ # │ 0 │
@@ -79,7 +79,7 @@ Takes a list and creates a dataframe
 
 Takes a list of booleans and creates a dataframe
 
-```nushell
+```nu
 > [true true false] | dfr into-df
 ╭───┬───────╮
 │ # │   0   │
@@ -93,7 +93,7 @@ Takes a list of booleans and creates a dataframe
 
 Convert to a dataframe and provide a schema
 
-```nushell
+```nu
 > {a: 1, b: {a: [1 2 3]}, c: [a b c]}| dfr into-df -s {a: u8, b: {a: list<u64>}, c: list<str>}
 ╭───┬───┬───────────────────┬───────────╮
 │ # │ a │         b         │     c     │

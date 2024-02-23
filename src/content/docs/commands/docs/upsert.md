@@ -37,7 +37,7 @@ feature: default
 
 Update a record's value
 
-```nushell
+```nu
 > {'name': 'nu', 'stars': 5} | upsert name 'Nushell'
 ╭───────┬─────────╮
 │ name  │ Nushell │
@@ -47,7 +47,7 @@ Update a record's value
 
 Insert a new entry into a record
 
-```nushell
+```nu
 > {'name': 'nu', 'stars': 5} | upsert language 'Rust'
 ╭──────────┬──────╮
 │ name     │ nu   │
@@ -58,7 +58,7 @@ Insert a new entry into a record
 
 Update each row of a table
 
-```nushell
+```nu
 > [[name lang]; [Nushell ''] [Reedline '']] | upsert lang 'Rust'
 ╭───┬──────────┬──────╮
 │ # │   name   │ lang │
@@ -71,7 +71,7 @@ Update each row of a table
 
 Insert a new column with values computed based off the other columns
 
-```nushell
+```nu
 > [[foo]; [7] [8] [9]] | upsert bar {|row| $row.foo * 2 }
 ╭───┬─────┬─────╮
 │ # │ foo │ bar │
@@ -85,7 +85,7 @@ Insert a new column with values computed based off the other columns
 
 Upsert into a list, updating an existing value at an index
 
-```nushell
+```nu
 > [1 2 3] | upsert 0 2
 ╭───┬───╮
 │ 0 │ 2 │
@@ -97,7 +97,7 @@ Upsert into a list, updating an existing value at an index
 
 Upsert into a list, inserting a new value at the end
 
-```nushell
+```nu
 > [1 2 3] | upsert 3 4
 ╭───┬───╮
 │ 0 │ 1 │

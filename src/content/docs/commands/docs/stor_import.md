@@ -34,7 +34,7 @@ feature: default
 
 Import a sqlite database file into the in-memory sqlite database
 
-```nushell
+```nu
 > stor import --file-name nudb.sqlite
 
 ```

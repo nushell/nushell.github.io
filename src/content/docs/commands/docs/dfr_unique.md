@@ -40,7 +40,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns unique values from a series
 
-```nushell
+```nu
 > [2 2 2 2 2] | dfr into-df | dfr unique
 ╭───┬───╮
 │ # │ 0 │
@@ -52,7 +52,7 @@ Returns unique values from a series
 
 Creates a is unique expression from a column
 
-```nushell
+```nu
 > col a | unique
 
 ```

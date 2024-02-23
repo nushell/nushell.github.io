@@ -35,21 +35,21 @@ feature: default
 
 Set a variable to a value
 
-```nushell
+```nu
 > let x = 10
 
 ```
 
 Set a variable to the result of an expression
 
-```nushell
+```nu
 > let x = 10 + 100
 
 ```
 
 Set a variable based on the condition
 
-```nushell
+```nu
 > let x = if false { -1 } else { 1 }
 
 ```

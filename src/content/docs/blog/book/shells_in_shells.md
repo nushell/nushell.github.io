@@ -8,7 +8,7 @@ While it's common to work in one directory, it can be handy to work in multiple 
 
 To get started, let's enter a directory:
 
-```nushell
+```nu
 /home/jonathan/Source/nushell(main)> enter ../book
 /home/jonathan/Source/book(main)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
@@ -22,7 +22,7 @@ To get started, let's enter a directory:
 
 Entering is similar to changing directories (as we saw with the [`cd`](/commands/docs/cd) command). This allows you to jump into a directory to work in it. Instead of changing the directory, we now are in two directories. To see this more clearly, we can use the [`shells`](/commands/docs/shells) command to list the current directories we have active:
 
-```nushell
+```nu
 /home/jonathan/Source/book(main)> enter ../music
 /home/jonathan/Source/music(main)> shells
 ───┬────────┬───────────────────────────────
@@ -38,7 +38,7 @@ The [`shells`](/commands/docs/shells) command shows us there are three shells: o
 
 We can jump between these shells with the [`n`](/commands/docs/n), [`p`](/commands/docs/p) and [`g`](/commands/docs/g) shortcuts, short for "next", "previous" and "goto":
 
-```nushell
+```nu
 /home/jonathan/Source/music(main)> p
 /home/jonathan/Source/book(main)> n
 /home/jonathan/Source/music(main)> g 0

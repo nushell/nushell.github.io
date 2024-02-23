@@ -48,7 +48,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Join two lazy dataframes
 
-```nushell
+```nu
 > let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | dfr into-lazy);
     let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | dfr into-lazy);
     $df_a | dfr join $df_b a foo | dfr collect
@@ -65,7 +65,7 @@ Join two lazy dataframes
 
 Join one eager dataframe with a lazy dataframe
 
-```nushell
+```nu
 > let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | dfr into-df);
     let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | dfr into-lazy);
     $df_a | dfr join $df_b a foo

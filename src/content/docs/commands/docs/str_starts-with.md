@@ -42,28 +42,28 @@ feature: default
 
 Checks if input string starts with 'my'
 
-```nushell
+```nu
 > 'my_library.rb' | str starts-with 'my'
 true
 ```
 
 Checks if input string starts with 'Car'
 
-```nushell
+```nu
 > 'Cargo.toml' | str starts-with 'Car'
 true
 ```
 
 Checks if input string starts with '.toml'
 
-```nushell
+```nu
 > 'Cargo.toml' | str starts-with '.toml'
 false
 ```
 
 Checks if input string starts with 'cargo', case-insensitive
 
-```nushell
+```nu
 > 'Cargo.toml' | str starts-with --ignore-case 'cargo'
 true
 ```

@@ -43,7 +43,7 @@ feature: default
 
 Join two tables
 
-```nushell
+```nu
 > [{a: 1 b: 2}] | join [{a: 1 c: 3}] a
 ╭───┬───┬───┬───╮
 │ # │ a │ b │ c │

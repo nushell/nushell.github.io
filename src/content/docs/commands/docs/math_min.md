@@ -36,14 +36,14 @@ feature: default
 
 Compute the minimum of a list of numbers
 
-```nushell
+```nu
 > [-50 100 25] | math min
 -50
 ```
 
 Compute the minima of the columns of a table
 
-```nushell
+```nu
 > [{a: 1 b: 3} {a: 2 b: -1}] | math min
 ╭───┬────╮
 │ a │ 1  │
@@ -53,7 +53,7 @@ Compute the minima of the columns of a table
 
 Find the minimum of a list of arbitrary values (Warning: Weird)
 
-```nushell
+```nu
 > [-50 'hello' true] | math min
 true
 ```

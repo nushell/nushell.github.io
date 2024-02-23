@@ -42,42 +42,42 @@ feature: default
 
 Creates "fixture.json"
 
-```nushell
+```nu
 > touch fixture.json
 
 ```
 
 Creates files a, b and c
 
-```nushell
+```nu
 > touch a b c
 
 ```
 
 Changes the last modified time of "fixture.json" to today's date
 
-```nushell
+```nu
 > touch -m fixture.json
 
 ```
 
 Changes the last modified time of files a, b and c to a date
 
-```nushell
+```nu
 > touch -m -d "yesterday" a b c
 
 ```
 
 Changes the last modified time of file d and e to "fixture.json"'s last modified time
 
-```nushell
+```nu
 > touch -m -r fixture.json d e
 
 ```
 
 Changes the last accessed time of "fixture.json" to a date
 
-```nushell
+```nu
 > touch -a -d "August 24, 2019; 12:30:30" fixture.json
 
 ```

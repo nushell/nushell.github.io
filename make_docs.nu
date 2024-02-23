@@ -2,7 +2,7 @@
 #
 # # Examples
 # using the standard library
-# ```nushell
+# ```nu
 # use std.nu
 #
 # std assert eq ("foo/bar baz/foooo" | safe-path) "foo/bar_baz/foooo"

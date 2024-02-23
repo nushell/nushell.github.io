@@ -6,7 +6,7 @@ Nu offers many commands that help interface with the filesystem and control your
 
 ### View all files in the current directory
 
-```nushell
+```nu
 ls | where type == file
 ```
 
@@ -38,7 +38,7 @@ Output
 
 ### View all directories in the current directory
 
-```nushell
+```nu
 ls | where type == dir
 ```
 
@@ -67,13 +67,13 @@ Output
 
 ### Find processes sorted by greatest cpu utilization.
 
-```nushell
+```nu
 ps | where cpu > 0 | sort-by cpu | reverse
 ```
 
 Output
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ╭────┬──────┬──────┬─────────────────────────────────┬─────────┬──────┬───────────┬───────────╮
 │  # │ pid  │ ppid │              name               │ status  │ cpu  │    mem    │  virtual  │
 ├────┼──────┼──────┼─────────────────────────────────┼─────────┼──────┼───────────┼───────────┤
@@ -89,13 +89,13 @@ Output
 
 Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process:
 
-```nushell
+```nu
 ps | where name == Notes
 ```
 
 Output
 
-```nushell
+```nu
 ╭───┬──────┬──────┬───────┬────────┬──────┬───────────┬───────────╮
 │ # │ pid  │ ppid │ name  │ status │ cpu  │    mem    │  virtual  │
 ├───┼──────┼──────┼───────┼────────┼──────┼───────────┼───────────┤
@@ -105,7 +105,7 @@ Output
 
 This process can be sent the kill signal in a one-liner:
 
-```nushell
+```nu
 ps | where name == Notes | get pid.0 | kill $in
 ```
 

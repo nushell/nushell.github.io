@@ -46,7 +46,7 @@ feature: default
 
 convert string to a nushell binary primitive
 
-```nushell
+```nu
 > 'This is a string that is exactly 52 characters long.' | into binary
 Length: 52 (0x34) bytes | printable whitespace ascii_other non_ascii
 00000000:   54 68 69 73  20 69 73 20  61 20 73 74  72 69 6e 67   This is a string
@@ -58,7 +58,7 @@ Length: 52 (0x34) bytes | printable whitespace ascii_other non_ascii
 
 convert a number to a nushell binary primitive
 
-```nushell
+```nu
 > 1 | into binary
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 00000000:   01 00 00 00  00 00 00 00                             •0000000
@@ -67,7 +67,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 convert a boolean to a nushell binary primitive
 
-```nushell
+```nu
 > true | into binary
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 00000000:   01 00 00 00  00 00 00 00                             •0000000
@@ -76,21 +76,21 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 convert a filesize to a nushell binary primitive
 
-```nushell
+```nu
 > ls | where name == LICENSE | get size | into binary
 
 ```
 
 convert a filepath to a nushell binary primitive
 
-```nushell
+```nu
 > ls | where name == LICENSE | get name | path expand | into binary
 
 ```
 
 convert a float to a nushell binary primitive
 
-```nushell
+```nu
 > 1.234 | into binary
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 00000000:   58 39 b4 c8  76 be f3 3f                             X9××v××?
@@ -99,7 +99,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 convert an int to a nushell binary primitive with compact enabled
 
-```nushell
+```nu
 > 10 | into binary --compact
 Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
 00000000:   0a                                                   _

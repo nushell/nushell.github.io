@@ -4,7 +4,7 @@ title: ssh-agent
 
 `eval` is not available in nushell, so run:
 
-```nushell
+```nu
 ^ssh-agent -c
     | lines
     | first 2
@@ -23,7 +23,7 @@ See the workarounds.
 
 You can work around this behavior by checking if a ssh-agent is already running on your user, and start one if none is:
 
-```nushell
+```nu
 do --env {
     let ssh_agent_file = (
         $nu.temp-path | path join $"ssh-agent-($env.USER? | default $env.USERNAME).nuon"
@@ -75,6 +75,6 @@ However, if you're using a different service manager, please refer its own docum
 
 To enable Nushell to access this socket, you need to add its path as `$env.SSH_AUTH_SOCK` like so:
 
-```nushell
+```nu
 $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent.socket"
 ```

@@ -38,7 +38,7 @@ feature: default
 
 Split a list of chars into two lists
 
-```nushell
+```nu
 > [a, b, c, d, e, f, g] | split list d
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
@@ -57,7 +57,7 @@ Split a list of chars into two lists
 
 Split a list of lists into two lists of lists
 
-```nushell
+```nu
 > [[1,2], [2,3], [3,4]] | split list [2,3]
 ╭───┬───────────────────╮
 │ 0 │ ╭───┬───────────╮ │
@@ -78,7 +78,7 @@ Split a list of lists into two lists of lists
 
 Split a list of chars into two lists
 
-```nushell
+```nu
 > [a, b, c, d, a, e, f, g] | split list a
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
@@ -97,7 +97,7 @@ Split a list of chars into two lists
 
 Split a list of chars into lists based on multiple characters
 
-```nushell
+```nu
 > [a, b, c, d, a, e, f, g] | split list --regex '(b|e)'
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │

@@ -39,7 +39,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Renames a series
 
-```nushell
+```nu
 > [5 6 7 8] | dfr into-df | dfr rename '0' new_name
 ╭───┬──────────╮
 │ # │ new_name │
@@ -54,7 +54,7 @@ Renames a series
 
 Renames a dataframe column
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr rename a a_new
 ╭───┬───────┬───╮
 │ # │ a_new │ b │
@@ -67,7 +67,7 @@ Renames a dataframe column
 
 Renames two dataframe columns
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr rename [a b] [a_new b_new]
 ╭───┬───────┬───────╮
 │ # │ a_new │ b_new │

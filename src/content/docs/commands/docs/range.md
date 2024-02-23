@@ -34,7 +34,7 @@ feature: default
 
 Get the last 2 items
 
-```nushell
+```nu
 > [0,1,2,3,4,5] | range 4..5
 ╭───┬───╮
 │ 0 │ 4 │
@@ -45,7 +45,7 @@ Get the last 2 items
 
 Get the last 2 items
 
-```nushell
+```nu
 > [0,1,2,3,4,5] | range (-2)..
 ╭───┬───╮
 │ 0 │ 4 │
@@ -56,7 +56,7 @@ Get the last 2 items
 
 Get the next to last 2 items
 
-```nushell
+```nu
 > [0,1,2,3,4,5] | range (-3)..-2
 ╭───┬───╮
 │ 0 │ 3 │

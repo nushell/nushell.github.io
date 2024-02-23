@@ -35,7 +35,7 @@ feature: default
 
 Loop while a condition is true
 
-```nushell
+```nu
 > mut x = 0; while $x < 10 { $x = $x + 1 }
 
 ```

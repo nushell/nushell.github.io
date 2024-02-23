@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns indexes for unique values
 
-```nushell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr arg-unique
 ╭───┬────────────╮
 │ # │ arg_unique │

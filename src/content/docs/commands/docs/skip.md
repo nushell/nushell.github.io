@@ -35,7 +35,7 @@ feature: default
 
 Skip the first value of a list
 
-```nushell
+```nu
 > [2 4 6 8] | skip 1
 ╭───┬───╮
 │ 0 │ 4 │
@@ -47,7 +47,7 @@ Skip the first value of a list
 
 Skip two rows of a table
 
-```nushell
+```nu
 > [[editions]; [2015] [2018] [2021]] | skip 2
 ╭───┬──────────╮
 │ # │ editions │

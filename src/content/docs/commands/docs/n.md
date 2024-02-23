@@ -21,14 +21,14 @@ usage: |
 
 Make two directories and enter new shells for them, use `n` to jump to the next shell
 
-```nushell
+```nu
 > mkdir foo bar; enter foo; enter ../bar; n
 
 ```
 
 Run `n` several times and note the changes of current directory
 
-```nushell
+```nu
 > n
 
 ```

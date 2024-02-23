@@ -35,28 +35,28 @@ feature: default
 
 Set the MYENV environment variable
 
-```nushell
+```nu
 > with-env [MYENV "my env value"] { $env.MYENV }
 my env value
 ```
 
 Set by primitive value list
 
-```nushell
+```nu
 > with-env [X Y W Z] { $env.X }
 Y
 ```
 
 Set by single row table
 
-```nushell
+```nu
 > with-env [[X W]; [Y Z]] { $env.W }
 Z
 ```
 
 Set by key-value record
 
-```nushell
+```nu
 > with-env {X: "Y", W: "Z"} { [$env.X $env.W] }
 ╭───┬───╮
 │ 0 │ Y │

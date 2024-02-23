@@ -34,14 +34,14 @@ feature: default
 
 Generate a random boolean value
 
-```nushell
+```nu
 > random bool
 
 ```
 
 Generate a random boolean value with a 75% chance of "true"
 
-```nushell
+```nu
 > random bool --bias 0.75
 
 ```

@@ -42,21 +42,21 @@ feature: default
 
 Rename a file
 
-```nushell
+```nu
 > umv before.txt after.txt
 
 ```
 
 Move a file into a directory
 
-```nushell
+```nu
 > umv test.txt my/subdirectory
 
 ```
 
 Move many files into a directory
 
-```nushell
+```nu
 > umv *.txt my/subdirectory
 
 ```

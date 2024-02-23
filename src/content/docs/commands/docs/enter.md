@@ -25,7 +25,7 @@ usage: |
 
 Enter a new shell at path '../dir-foo'
 
-```nushell
+```nu
 > enter ../dir-foo
 
 ```

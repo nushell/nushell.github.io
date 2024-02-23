@@ -72,7 +72,7 @@ For example, in Nu it's possible to write `= 1min + 1sec` to create a duration t
 
 Nu also can help if you try to mix types that shouldn't. For example, if you had written: `= 1min + 1kb` it seems you didn't mean to add time and file sizes together, and Nu gives you an error if you do:
 
-```nushell
+```nu
 error: Coercion error
   ┌─ shell:1:3
   │
@@ -86,7 +86,7 @@ _note: we'll be making this error better in the future_
 
 Data in Nu also isn't just the value, but it's also a set of metadata that comes with the value. For example, if you load data from a file using the `open` command, we track the place that it's loaded along with the data that's loaded. We can see this metadata using the `tags` command:
 
-```nushell
+```nu
 open package.json | tags
 ───┬─────────────────┬──────────────────────────────────────────────────────────────────────────────
  # │      span       │                                    anchor
@@ -120,19 +120,19 @@ Early on, when we were first brainstorming how something like Nushell might work
 
 The simplest version is:
 
-```nushell
+```nu
 ls | echo $it
 ```
 
 To `echo $it` doesn't really do anything interesting, it just passes along the value it was handed. It's when we combine this with variable paths that things get a little more interesting:
 
-```nushell
+```nu
 ls | echo $it.name
 ```
 
 Now, in 4 words we've asked Nu to list all the files in the current directory and output only the names. This pipeline, if there are 100s of thousands of files, will happily stream out its results as it finds new files. As in this case:
 
-```nushell
+```nu
 ls **/* | echo $it.name
 ```
 
@@ -142,13 +142,13 @@ A note for those wondering how this works under the hood: if an `$it` is found a
 
 This turns:
 
-```nushell
+```nu
 ls | echo $it.name
 ```
 
 Into:
 
-```nushell
+```nu
 ls | each { echo $it.name }
 ```
 
@@ -160,7 +160,7 @@ In Nu, a command has the form `<cmd> <arg1> <arg2>`. To the lisp-lovers among yo
 
 You may be wondering - if you choose a cmd-arg-arg form, how do you write something like:
 
-```nushell
+```nu
 where size > 10kb
 ```
 
@@ -178,7 +178,7 @@ That is, the `where` command takes a single parameter, a `condition`, which has 
 
 In math mode, we can now parse an expression using operator precedence. The `where` command tells the parser to treat all of the free parameters as a single expression, to parse that expression, and to pass it as the single argument. The canonical form is more precise, though a bit more cumbersome:
 
-```nushell
+```nu
 where { = $it.size > 10kb }
 ```
 

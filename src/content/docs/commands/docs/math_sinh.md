@@ -35,7 +35,7 @@ Command `math sinh` was not included in the official binaries by default, you ha
 
 Apply the hyperbolic sine to 1
 
-```nushell
+```nu
 > 1 | math sinh
 1.1752011936438014
 ```

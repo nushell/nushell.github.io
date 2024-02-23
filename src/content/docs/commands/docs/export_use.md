@@ -35,7 +35,7 @@ feature: default
 
 Re-export a command from another module
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" } }
     module eggs { export use spam foo }
     use eggs foo

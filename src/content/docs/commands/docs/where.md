@@ -36,7 +36,7 @@ feature: default
 
 Filter rows of a table according to a condition
 
-```nushell
+```nu
 > [{a: 1} {a: 2}] | where a > 1
 ╭───┬───╮
 │ # │ a │
@@ -48,7 +48,7 @@ Filter rows of a table according to a condition
 
 Filter items of a list according to a condition
 
-```nushell
+```nu
 > [1 2] | where {|x| $x > 1}
 ╭───┬───╮
 │ 0 │ 2 │
@@ -58,49 +58,49 @@ Filter items of a list according to a condition
 
 List all files in the current directory with sizes greater than 2kb
 
-```nushell
+```nu
 > ls | where size > 2kb
 
 ```
 
 List only the files in the current directory
 
-```nushell
+```nu
 > ls | where type == file
 
 ```
 
 List all files with names that contain "Car"
 
-```nushell
+```nu
 > ls | where name =~ "Car"
 
 ```
 
 List all files that were modified in the last two weeks
 
-```nushell
+```nu
 > ls | where modified >= (date now) - 2wk
 
 ```
 
 Find files whose filenames don't begin with the correct sequential number
 
-```nushell
+```nu
 > ls | where type == file | sort-by name --natural | enumerate | where {|e| $e.item.name !~ $'^($e.index + 1)' } | each {|| get item }
 
 ```
 
 Find case-insensitively files called "readme", without an explicit closure
 
-```nushell
+```nu
 > ls | where ($it.name | str downcase) =~ readme
 
 ```
 
 same as above but with regex only
 
-```nushell
+```nu
 > ls | where name =~ '(?i)readme'
 
 ```

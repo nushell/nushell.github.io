@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns string lengths
 
-```nushell
+```nu
 > [a ab abc] | dfr into-df | dfr str-lengths
 ╭───┬───╮
 │ # │ 0 │

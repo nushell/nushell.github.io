@@ -39,14 +39,14 @@ Command `bits and` was not included in the official binaries by default, you hav
 
 Apply bits and to two numbers
 
-```nushell
+```nu
 > 2 | bits and 2
 2
 ```
 
 Apply logical and to a list of numbers
 
-```nushell
+```nu
 > [4 3 2] | bits and 2
 ╭───┬───╮
 │ 0 │ 0 │

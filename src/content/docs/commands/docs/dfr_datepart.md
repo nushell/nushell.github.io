@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Creates an expression to capture the year date part
 
-```nushell
+```nu
 > [["2021-12-30T01:02:03.123456789"]] | dfr into-df | dfr as-datetime "%Y-%m-%dT%H:%M:%S.%9f" | dfr with-column [(dfr col datetime | dfr datepart year | dfr as datetime_year )]
 ╭───┬─────────────┬───────────────╮
 │ # │  datetime   │ datetime_year │
@@ -50,7 +50,7 @@ Creates an expression to capture the year date part
 
 Creates an expression to capture multiple date parts
 
-```nushell
+```nu
 > [["2021-12-30T01:02:03.123456789"]] | dfr into-df | dfr as-datetime "%Y-%m-%dT%H:%M:%S.%9f" |
                 dfr with-column [ (dfr col datetime | dfr datepart year | dfr as datetime_year ),
                 (dfr col datetime | dfr datepart month | dfr as datetime_month ),

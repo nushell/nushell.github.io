@@ -39,14 +39,14 @@ Command `math arccos` was not included in the official binaries by default, you 
 
 Get the arccosine of 1
 
-```nushell
+```nu
 > 1 | math arccos
 0
 ```
 
 Get the arccosine of -1 in degrees
 
-```nushell
+```nu
 > -1 | math arccos --degrees
 180
 ```

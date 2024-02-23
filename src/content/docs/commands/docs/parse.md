@@ -39,7 +39,7 @@ feature: default
 
 Parse a string into two named columns
 
-```nushell
+```nu
 > "hi there" | parse "{foo} {bar}"
 ╭───┬─────┬───────╮
 │ # │ foo │  bar  │
@@ -51,7 +51,7 @@ Parse a string into two named columns
 
 Parse a string using regex pattern
 
-```nushell
+```nu
 > "hi there" | parse --regex '(?P<foo>\w+) (?P<bar>\w+)'
 ╭───┬─────┬───────╮
 │ # │ foo │  bar  │
@@ -63,7 +63,7 @@ Parse a string using regex pattern
 
 Parse a string using fancy-regex named capture group pattern
 
-```nushell
+```nu
 > "foo bar." | parse --regex '\s*(?<name>\w+)(?=\.)'
 ╭───┬──────╮
 │ # │ name │
@@ -75,7 +75,7 @@ Parse a string using fancy-regex named capture group pattern
 
 Parse a string using fancy-regex capture group pattern
 
-```nushell
+```nu
 > "foo! bar." | parse --regex '(\w+)(?=\.)|(\w+)(?=!)'
 ╭───┬──────────┬──────────╮
 │ # │ capture0 │ capture1 │
@@ -88,7 +88,7 @@ Parse a string using fancy-regex capture group pattern
 
 Parse a string using fancy-regex look behind pattern
 
-```nushell
+```nu
 > " @another(foo bar)   " | parse --regex '\s*(?<=[() ])(@\w+)(\([^)]*\))?\s*'
 ╭───┬──────────┬───────────╮
 │ # │ capture0 │ capture1  │
@@ -100,7 +100,7 @@ Parse a string using fancy-regex look behind pattern
 
 Parse a string using fancy-regex look ahead atomic group pattern
 
-```nushell
+```nu
 > "abcd" | parse --regex '^a(bc(?=d)|b)cd$'
 ╭───┬──────────╮
 │ # │ capture0 │

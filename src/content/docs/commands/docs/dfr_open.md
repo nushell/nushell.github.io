@@ -49,7 +49,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Takes a file name and creates a dataframe
 
-```nushell
+```nu
 > dfr open test.csv
 
 ```

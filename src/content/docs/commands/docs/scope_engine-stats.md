@@ -30,7 +30,7 @@ feature: default
 
 Show the stats on the current engine state
 
-```nushell
+```nu
 > scope engine-stats
 
 ```

@@ -34,7 +34,7 @@ Command `fmt` was not included in the official binaries by default, you have to 
 
 Get a record containing multiple formats for the number 42
 
-```nushell
+```nu
 > 42 | fmt
 ╭──────────┬──────────╮
 │ binary   │ 0b101010 │

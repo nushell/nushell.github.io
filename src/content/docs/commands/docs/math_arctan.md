@@ -39,14 +39,14 @@ Command `math arctan` was not included in the official binaries by default, you 
 
 Get the arctangent of 1
 
-```nushell
+```nu
 > 1 | math arctan
 0.7853981633974483
 ```
 
 Get the arctangent of -1 in degrees
 
-```nushell
+```nu
 > -1 | math arctan --degrees
 -45
 ```

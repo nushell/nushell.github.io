@@ -17,7 +17,7 @@ Explore is a table pager, just like `less` but for table structured data.
 
 ## Get Started
 
-```nushell
+```nu
 ls | explore -i
 ```
 
@@ -48,7 +48,7 @@ You can find an example configuration in [`default-config.nu`](https://github.co
 
 ### Peeking a value
 
-```nushell
+```nu
 $nu | explore --peek
 ```
 

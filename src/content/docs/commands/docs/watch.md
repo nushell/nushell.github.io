@@ -42,28 +42,28 @@ feature: default
 
 Run `cargo test` whenever a Rust file changes
 
-```nushell
+```nu
 > watch . --glob=**/*.rs {|| cargo test }
 
 ```
 
 Watch all changes in the current directory
 
-```nushell
+```nu
 > watch . { |op, path, new_path| $"($op) ($path) ($new_path)"}
 
 ```
 
 Log all changes in a directory
 
-```nushell
+```nu
 > watch /foo/bar { |op, path| $"($op) - ($path)(char nl)" | save --append changes_in_bar.log }
 
 ```
 
 Note: if you are looking to run a command every N units of time, this can be accomplished with a loop and sleep
 
-```nushell
+```nu
 > loop { command; sleep duration }
 
 ```

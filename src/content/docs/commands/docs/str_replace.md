@@ -46,35 +46,35 @@ feature: default
 
 Find and replace the first occurrence of a substring
 
-```nushell
+```nu
 > 'c:\some\cool\path' | str replace 'c:\some\cool' '~'
 ~\path
 ```
 
 Find and replace all occurrences of a substring
 
-```nushell
+```nu
 > 'abc abc abc' | str replace --all 'b' 'z'
 azc azc azc
 ```
 
 Find and replace contents with capture group using regular expression
 
-```nushell
+```nu
 > 'my_library.rb' | str replace -r '(.+).rb' '$1.nu'
 my_library.nu
 ```
 
 Find and replace all occurrences of find string using regular expression
 
-```nushell
+```nu
 > 'abc abc abc' | str replace --all --regex 'b' 'z'
 azc azc azc
 ```
 
 Find and replace all occurrences of find string in table using regular expression
 
-```nushell
+```nu
 > [[ColA ColB ColC]; [abc abc ads]] | str replace --all --regex 'b' 'z' ColA ColC
 ╭───┬──────┬──────┬──────╮
 │ # │ ColA │ ColB │ ColC │
@@ -86,7 +86,7 @@ Find and replace all occurrences of find string in table using regular expressio
 
 Find and replace all occurrences of find string in record using regular expression
 
-```nushell
+```nu
 > { KeyA: abc, KeyB: abc, KeyC: ads } | str replace --all --regex 'b' 'z' KeyA KeyC
 ╭──────┬─────╮
 │ KeyA │ azc │
@@ -97,35 +97,35 @@ Find and replace all occurrences of find string in record using regular expressi
 
 Find and replace contents without using the replace parameter as a regular expression
 
-```nushell
+```nu
 > 'dogs_$1_cats' | str replace -r '\$1' '$2' -n
 dogs_$2_cats
 ```
 
 Use captures to manipulate the input text using regular expression
 
-```nushell
+```nu
 > "abc-def" | str replace -r "(.+)-(.+)" "${2}_${1}"
 def_abc
 ```
 
 Find and replace with fancy-regex using regular expression
 
-```nushell
+```nu
 > 'a successful b' | str replace -r '\b([sS])uc(?:cs|s?)e(ed(?:ed|ing|s?)|ss(?:es|ful(?:ly)?|i(?:ons?|ve(?:ly)?)|ors?)?)\b' '${1}ucce$2'
 a successful b
 ```
 
 Find and replace with fancy-regex using regular expression
 
-```nushell
+```nu
 > 'GHIKK-9+*' | str replace -r '[*[:xdigit:]+]' 'z'
 GHIKK-z+*
 ```
 
 Find and replace on individual lines using multiline regular expression
 
-```nushell
+```nu
 > "non-matching line\n123. one line\n124. another line\n" | str replace --all --multiline '^[0-9]+\. ' ''
 non-matching line
 one line

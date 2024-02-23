@@ -41,35 +41,35 @@ feature: default
 
 Return a single value from a list
 
-```nushell
+```nu
 > [1 2 3 4 5] | input list 'Rate it'
 
 ```
 
 Return multiple values from a list
 
-```nushell
+```nu
 > [Banana Kiwi Pear Peach Strawberry] | input list --multi 'Add fruits to the basket'
 
 ```
 
 Return a single record from a table with fuzzy search
 
-```nushell
+```nu
 > ls | input list --fuzzy 'Select the target'
 
 ```
 
 Choose an item from a range
 
-```nushell
+```nu
 > 1..10 | input list
 
 ```
 
 Return the index of a selected item
 
-```nushell
+```nu
 > [Banana Kiwi Pear Peach Strawberry] | input list --index
 
 ```

@@ -34,7 +34,7 @@ feature: default
 
 Sources the environment from foo.nu in the current context
 
-```nushell
+```nu
 > source-env foo.nu
 
 ```

@@ -40,7 +40,7 @@ Command `bits not` was not included in the official binaries by default, you hav
 
 Apply logical negation to a list of numbers
 
-```nushell
+```nu
 > [4 3 2] | bits not
 ╭───┬─────────────────╮
 │ 0 │ 140737488355323 │
@@ -52,7 +52,7 @@ Apply logical negation to a list of numbers
 
 Apply logical negation to a list of numbers, treat input as 2 bytes number
 
-```nushell
+```nu
 > [4 3 2] | bits not --number-bytes '2'
 ╭───┬───────╮
 │ 0 │ 65531 │
@@ -64,7 +64,7 @@ Apply logical negation to a list of numbers, treat input as 2 bytes number
 
 Apply logical negation to a list of numbers, treat input as signed number
 
-```nushell
+```nu
 > [4 3 2] | bits not --signed
 ╭───┬────╮
 │ 0 │ -5 │

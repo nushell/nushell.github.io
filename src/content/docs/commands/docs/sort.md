@@ -38,7 +38,7 @@ feature: default
 
 sort the list by increasing value
 
-```nushell
+```nu
 > [2 0 1] | sort
 ╭───┬───╮
 │ 0 │ 0 │
@@ -50,7 +50,7 @@ sort the list by increasing value
 
 sort the list by decreasing value
 
-```nushell
+```nu
 > [2 0 1] | sort --reverse
 ╭───┬───╮
 │ 0 │ 2 │
@@ -62,7 +62,7 @@ sort the list by decreasing value
 
 sort a list of strings
 
-```nushell
+```nu
 > [betty amy sarah] | sort
 ╭───┬───────╮
 │ 0 │ amy   │
@@ -74,7 +74,7 @@ sort a list of strings
 
 sort a list of strings in reverse
 
-```nushell
+```nu
 > [betty amy sarah] | sort --reverse
 ╭───┬───────╮
 │ 0 │ sarah │
@@ -86,7 +86,7 @@ sort a list of strings in reverse
 
 Sort strings (case-insensitive)
 
-```nushell
+```nu
 > [airplane Truck Car] | sort -i
 ╭───┬──────────╮
 │ 0 │ airplane │
@@ -98,7 +98,7 @@ Sort strings (case-insensitive)
 
 Sort strings (reversed case-insensitive)
 
-```nushell
+```nu
 > [airplane Truck Car] | sort -i -r
 ╭───┬──────────╮
 │ 0 │ Truck    │
@@ -110,7 +110,7 @@ Sort strings (reversed case-insensitive)
 
 Sort record by key (case-insensitive)
 
-```nushell
+```nu
 > {b: 3, a: 4} | sort
 ╭───┬───╮
 │ a │ 4 │
@@ -120,7 +120,7 @@ Sort record by key (case-insensitive)
 
 Sort record by value
 
-```nushell
+```nu
 > {b: 4, a: 3, c:1} | sort -v
 ╭───┬───╮
 │ c │ 1 │

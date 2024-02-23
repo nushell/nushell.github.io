@@ -35,42 +35,42 @@ feature: default
 
 Match on a value in range
 
-```nushell
+```nu
 > match 3 { 1..10 => 'yes!' }
 yes!
 ```
 
 Match on a field in a record
 
-```nushell
+```nu
 > match {a: 100} { {a: $my_value} => { $my_value } }
 100
 ```
 
 Match with a catch-all
 
-```nushell
+```nu
 > match 3 { 1 => { 'yes!' }, _ => { 'no!' } }
 no!
 ```
 
 Match against a list
 
-```nushell
+```nu
 > match [1, 2, 3] { [$a, $b, $c] => { $a + $b + $c }, _ => 0 }
 6
 ```
 
 Match against pipeline input
 
-```nushell
+```nu
 > {a: {b: 3}} | match $in {{a: { $b }} => ($b + 10) }
 13
 ```
 
 Match with a guard
 
-```nushell
+```nu
 > match [1 2 3] {
         [$x, ..$y] if $x == 1 => { 'good list' },
         _ => { 'not a very good list' }

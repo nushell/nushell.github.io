@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Dataframe schema
 
-```nushell
+```nu
 > [[a b]; [1 "foo"] [3 "bar"]] | dfr into-df | dfr schema
 ╭───┬─────╮
 │ a │ i64 │

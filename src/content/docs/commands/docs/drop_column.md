@@ -35,7 +35,7 @@ feature: default
 
 Remove the last column of a table
 
-```nushell
+```nu
 > [[lib, extension]; [nu-lib, rs] [nu-core, rb]] | drop column
 ╭───┬─────────╮
 │ # │   lib   │
@@ -48,7 +48,7 @@ Remove the last column of a table
 
 Remove the last column of a record
 
-```nushell
+```nu
 > {lib: nu-lib, extension: rs} | drop column
 ╭─────┬────────╮
 │ lib │ nu-lib │

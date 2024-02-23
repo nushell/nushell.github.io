@@ -40,7 +40,7 @@ feature: default
 
 Convert string to float in table
 
-```nushell
+```nu
 > [[num]; ['5.01']] | into float num
 ╭───┬──────╮
 │ # │ num  │
@@ -52,14 +52,14 @@ Convert string to float in table
 
 Convert string to floating point number
 
-```nushell
+```nu
 > '1.345' | into float
 1.345
 ```
 
 Coerce list of ints and floats to float
 
-```nushell
+```nu
 > [4 -5.9] | into float
 ╭───┬───────╮
 │ 0 │  4.00 │
@@ -70,7 +70,7 @@ Coerce list of ints and floats to float
 
 Convert boolean to float
 
-```nushell
+```nu
 > true | into float
 1
 ```

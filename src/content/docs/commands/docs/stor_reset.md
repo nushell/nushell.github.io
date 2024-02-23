@@ -30,7 +30,7 @@ feature: default
 
 Reset the in-memory sqlite database
 
-```nushell
+```nu
 > stor reset
 
 ```

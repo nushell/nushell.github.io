@@ -38,7 +38,7 @@ feature: default
 
 Get every second row
 
-```nushell
+```nu
 > [1 2 3 4 5] | every 2
 ╭───┬───╮
 │ 0 │ 1 │
@@ -50,7 +50,7 @@ Get every second row
 
 Skip every second row
 
-```nushell
+```nu
 > [1 2 3 4 5] | every 2 --skip
 ╭───┬───╮
 │ 0 │ 2 │

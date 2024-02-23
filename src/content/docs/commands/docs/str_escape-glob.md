@@ -37,7 +37,7 @@ feature: default
 
 escape glob pattern before list
 
-```nushell
+```nu
 > let f = 'test[a]'; ls ($f | str escape-glob)
 
 ```

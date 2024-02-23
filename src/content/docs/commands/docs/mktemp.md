@@ -41,28 +41,28 @@ feature: default
 
 Make a temporary file with the given suffix in the current working directory.
 
-```nushell
+```nu
 > mktemp --suffix .txt
 <WORKING_DIR>/tmp.lekjbhelyx.txt
 ```
 
 Make a temporary file named testfile.XXX with the 'X's as random characters in the current working directory.
 
-```nushell
+```nu
 > mktemp testfile.XXX
 <WORKING_DIR>/testfile.4kh
 ```
 
 Make a temporary file with a template in the system temp directory.
 
-```nushell
+```nu
 > mktemp -t testfile.XXX
 /tmp/testfile.4kh
 ```
 
 Make a temporary directory with randomly generated name in the temporary directory.
 
-```nushell
+```nu
 > mktemp -d
 /tmp/tmp.NMw9fJr8K0
 ```

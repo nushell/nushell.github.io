@@ -35,14 +35,14 @@ feature: default
 
 Create a new parse-time constant.
 
-```nushell
+```nu
 > const x = 10
 
 ```
 
 Create a composite constant value
 
-```nushell
+```nu
 > const x = { a: 10, b: 20 }
 
 ```

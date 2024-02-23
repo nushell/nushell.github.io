@@ -41,21 +41,21 @@ feature: default
 
 Kill the pid using the most memory
 
-```nushell
+```nu
 > ps | sort-by mem | last | kill $in.pid
 
 ```
 
 Force kill a given pid
 
-```nushell
+```nu
 > kill --force 12345
 
 ```
 
 Send INT signal
 
-```nushell
+```nu
 > kill -s 2 12345
 
 ```

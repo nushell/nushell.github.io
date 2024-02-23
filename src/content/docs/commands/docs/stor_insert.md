@@ -35,7 +35,7 @@ feature: default
 
 Insert data the in-memory sqlite database using a data-record of column-name and column-value pairs
 
-```nushell
+```nu
 > stor insert --table-name nudb --data-record {bool1: true, int1: 5, float1: 1.1, str1: fdncred, datetime1: 2023-04-17}
 
 ```

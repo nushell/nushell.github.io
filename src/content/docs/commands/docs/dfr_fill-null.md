@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Fills the null values by 0
 
-```nushell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr shift 2 | dfr fill-null 0
 ╭───┬───╮
 │ # │ 0 │

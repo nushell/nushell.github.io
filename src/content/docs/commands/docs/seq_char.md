@@ -35,7 +35,7 @@ feature: default
 
 sequence a to e
 
-```nushell
+```nu
 > seq char a e
 ╭───┬───╮
 │ 0 │ a │
@@ -49,7 +49,7 @@ sequence a to e
 
 sequence a to e, and put the characters in a pipe-separated string
 
-```nushell
+```nu
 > seq char a e | str join '|'
 
 ```

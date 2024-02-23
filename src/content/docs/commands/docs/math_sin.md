@@ -39,14 +39,14 @@ Command `math sin` was not included in the official binaries by default, you hav
 
 Apply the sine to π/2
 
-```nushell
+```nu
 > 3.141592 / 2 | math sin | math round --precision 4
 1
 ```
 
 Apply the sine to a list of angles in degrees
 
-```nushell
+```nu
 > [0 90 180 270 360] | math sin -d | math round --precision 4
 ╭───┬───────╮
 │ 0 │  0.00 │

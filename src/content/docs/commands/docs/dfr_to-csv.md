@@ -43,14 +43,14 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Saves dataframe to CSV file
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv
 
 ```
 
 Saves dataframe to CSV file using other delimiter
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-csv test.csv --delimiter '|'
 
 ```

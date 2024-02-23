@@ -30,7 +30,7 @@ feature: default
 
 Show the variables in the current scope
 
-```nushell
+```nu
 > scope variables
 
 ```

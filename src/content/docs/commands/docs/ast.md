@@ -39,35 +39,35 @@ feature: default
 
 Print the ast of a string
 
-```nushell
+```nu
 > ast 'hello'
 
 ```
 
 Print the ast of a pipeline
 
-```nushell
+```nu
 > ast 'ls | where name =~ README'
 
 ```
 
 Print the ast of a pipeline with an error
 
-```nushell
+```nu
 > ast 'for x in 1..10 { echo $x '
 
 ```
 
 Print the ast of a pipeline with an error, as json, in a nushell table
 
-```nushell
+```nu
 > ast 'for x in 1..10 { echo $x ' --json | get block | from json
 
 ```
 
 Print the ast of a pipeline with an error, as json, minified
 
-```nushell
+```nu
 > ast 'for x in 1..10 { echo $x ' --json --minify
 
 ```

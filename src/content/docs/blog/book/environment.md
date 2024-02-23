@@ -6,7 +6,7 @@ A common task in a shell is to control the environment that external application
 
 You can see the current environment variables in the $env variable:
 
-```nushell
+```nu
 ~> $env | table -e
 ╭────────────────────────────┬─────────────────────────────────────────────────╮
 │ CMD_DURATION_MS            │ 0823                                            │
@@ -43,13 +43,13 @@ There are several ways to set an environment variable:
 
 Using the `$env.VAR = "val"` is the most straightforward method
 
-```nushell
+```nu
 > $env.FOO = 'BAR'
 ```
 
 So, if you want to extend the Windows `Path` variable, for example, you could do that as follows.
 
-```nushell
+```nu
 $env.Path = ($env.Path | prepend 'C:\path\you\want\to\add')
 ```
 
@@ -60,7 +60,7 @@ If you want to give it the lowest priority instead, you can use the [`append`](/
 
 If you have more than one environment variable you'd like to set, you can use [`load-env`](/commands/docs/load-env) to create a table of name/value pairs and load multiple variables at the same time:
 
-```nushell
+```nu
 > load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
@@ -81,14 +81,14 @@ See [Modules](modules) for details.
 
 Individual environment variables are fields of a record that is stored in the `$env` variable and can be read with `$env.VARIABLE`:
 
-```nushell
+```nu
 > $env.FOO
 BAR
 ```
 
 Sometimes, you may want to access an environmental variable which might be unset. Consider using the [question mark operator](variables_and_subexpressions#variable-paths) to avoid an error:
 
-```nushell
+```nu
 > $env.FOO | describe
 Error: nu::shell::column_not_found
 
@@ -109,7 +109,7 @@ BAR
 
 Alternatively, you can check for the presence of an environmental variable with `in`:
 
-```nushell
+```nu
 > $env.FOO
 BAR
 
@@ -125,7 +125,7 @@ When you set an environment variable, it will be available only in the current s
 
 Here is a small example to demonstrate the environment scoping:
 
-```nushell
+```nu
 > $env.FOO = "BAR"
 > do {
     $env.FOO = "BAZ"
@@ -146,14 +146,14 @@ Therefore, it follows the same rules as other environment variables (for example
 
 A common shorthand to set an environment variable once is available, inspired by Bash and others:
 
-```nushell
+```nu
 > FOO=BAR $env.FOO
 BAR
 ```
 
 You can also use [`with-env`](/commands/docs/with-env) to do the same thing more explicitly:
 
-```nushell
+```nu
 > with-env { FOO: BAR } { $env.FOO }
 BAR
 ```
@@ -166,7 +166,7 @@ You can also set environment variables at startup so they are available for the 
 To do this, set an environment variable inside [the Nu configuration file](configuration).
 For example:
 
-```nushell title="config.nu"
+```nu title="config.nu"
 $env.FOO = 'BAR'
 ```
 
@@ -175,7 +175,7 @@ $env.FOO = 'BAR'
 Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
 However, a command defined as [`def --env`](/commands/docs/def) instead of [`def`](/commands/docs/def) (it applies also to [`export def`](/commands/docs/export_def), see [Modules](modules)) will preserve the environment on the caller's side:
 
-```nushell
+```nu
 > def --env foo [] {
     $env.FOO = 'BAR'
 }
@@ -197,7 +197,7 @@ The conversion of value -> string is set by the `to_string` field of `ENV_CONVER
 Let's illustrate the conversions with an example.
 Put the following in your config.nu:
 
-```nushell
+```nu
 $env.ENV_CONVERSIONS = {
     # ... you might have Path and PATH already there, add:
     FOO : {
@@ -209,7 +209,7 @@ $env.ENV_CONVERSIONS = {
 
 Now, within a Nushell instance:
 
-```nushell
+```nu
 > with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
 
 > $env.FOO
@@ -221,13 +221,13 @@ Now, within a Nushell instance:
 You can see the `$env.FOO` is now a list in a new Nushell instance with the updated config.
 You can also test the conversion manually by
 
-```nushell
+```nu
 > do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
 ```
 
 Now, to test the conversion list -> string, run:
 
-```nushell
+```nu
 > nu -c '$env.FOO'
 a-b-c
 ```
@@ -242,7 +242,7 @@ _(Important! The environment conversion string -> value happens **after** the en
 
 You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide_env):
 
-```nushell
+```nu
 > $env.FOO = 'BAR'
 ...
 > hide-env FOO
@@ -250,7 +250,7 @@ You can remove an environment variable only if it was set in the current scope v
 
 The hiding is also scoped which both allows you to remove an environment variable temporarily and prevents you from modifying a parent environment from within a child scope:
 
-```nushell
+```nu
 > $env.FOO = 'BAR'
 > do {
     hide-env FOO

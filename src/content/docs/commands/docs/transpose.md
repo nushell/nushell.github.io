@@ -43,7 +43,7 @@ feature: default
 
 Transposes the table contents with default column names
 
-```nushell
+```nu
 > [[c1 c2]; [1 2]] | transpose
 ╭───┬─────────┬─────────╮
 │ # │ column0 │ column1 │
@@ -56,7 +56,7 @@ Transposes the table contents with default column names
 
 Transposes the table contents with specified column names
 
-```nushell
+```nu
 > [[c1 c2]; [1 2]] | transpose key val
 ╭───┬─────┬─────╮
 │ # │ key │ val │
@@ -69,7 +69,7 @@ Transposes the table contents with specified column names
 
 Transposes the table without column names and specify a new column name
 
-```nushell
+```nu
 > [[c1 c2]; [1 2]] | transpose --ignore-titles val
 ╭───┬─────╮
 │ # │ val │
@@ -82,7 +82,7 @@ Transposes the table without column names and specify a new column name
 
 Transfer back to record with -d flag
 
-```nushell
+```nu
 > {c1: 1, c2: 2} | transpose | transpose --ignore-titles -r -d
 ╭────┬───╮
 │ c1 │ 1 │

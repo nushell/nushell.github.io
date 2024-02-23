@@ -42,7 +42,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Cumulative sum for a series
 
-```nushell
+```nu
 > [1 2 3 4 5] | dfr into-df | dfr cumulative sum
 ╭───┬──────────────────╮
 │ # │ 0_cumulative_sum │

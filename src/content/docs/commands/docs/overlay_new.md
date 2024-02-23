@@ -34,7 +34,7 @@ feature: default
 
 Create an empty overlay
 
-```nushell
+```nu
 > overlay new spam
 
 ```

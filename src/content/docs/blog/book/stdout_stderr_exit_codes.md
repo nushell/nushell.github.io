@@ -10,7 +10,7 @@ The first of these important streams is stdout.
 
 Stdout is the way that most external apps will send data into the pipeline or to the screen. Data sent by an external app to its stdout is received by Nushell by default if it's part of a pipeline:
 
-```nushell
+```nu
 > external | str join
 ```
 
@@ -24,7 +24,7 @@ Another common stream that external applications often use to print error messag
 
 You can force Nushell to do a redirection by using `do { ... } | complete`. For example, if we wanted to call the external above and redirect its stderr, we would write:
 
-```nushell
+```nu
 > do { external } | complete
 ```
 
@@ -34,7 +34,7 @@ Finally, external commands have an "exit code". These codes help give a hint to 
 
 Nushell tracks the last exit code of the recently completed external in one of two ways. The first way is with the `LAST_EXIT_CODE` environment variable.
 
-```nushell
+```nu
 > do { external }
 > $env.LAST_EXIT_CODE
 ```
@@ -47,7 +47,7 @@ The [`complete`](/commands/docs/complete) command allows you to run an external 
 
 If we try to run the external `cat` on a file that doesn't exist, we can see what [`complete`](/commands/docs/complete) does with the streams, including the redirected stderr:
 
-```nushell
+```nu
 > do { cat unknown.txt } | complete
 ╭───────────┬─────────────────────────────────────────────╮
 │ stdout    │                                             │
@@ -64,7 +64,7 @@ In contrast, the [`print`](/commands/docs/print) command prints the given values
 
 The [standard library](/book/standard_library) has commands to write out messages in different logging levels. For example:
 
-```nushell
+```nu
 use std log
 
 def main [] {
@@ -80,7 +80,7 @@ def main [] {
 
 The log level for output can be set with the `NU_LOG_LEVEL` environment variable:
 
-```nushell
+```nu
 NU_LOG_LEVEL=DEBUG nu std_log.nu
 ```
 
@@ -88,13 +88,13 @@ NU_LOG_LEVEL=DEBUG nu std_log.nu
 
 If you want to redirect output to file, you can just type something like this:
 
-```nushell
+```nu
 cat unknown.txt out> out.log err> err.log
 ```
 
 If you want to redirect both stdout and stderr to the same file, just type something like this:
 
-```nushell
+```nu
 cat unknown.txt out+err> log.log
 ```
 
@@ -108,7 +108,7 @@ Nushell attempts to convert to text using UTF-8. If at any time the conversion f
 
 If you want more control over the decoding of the byte stream, you can use the [`decode`](/commands/docs/decode) command. The [`decode`](/commands/docs/decode) command can be inserted into the pipeline after the external, or other raw stream-creating command, and will handle decoding the bytes based on the argument you give decode. For example, you could decode shift-jis text this way:
 
-```nushell
+```nu
 > 0x[8a 4c] | decode shift-jis
 貝
 ```

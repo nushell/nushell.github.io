@@ -39,7 +39,7 @@ feature: default
 
 Keep a custom command after hiding the overlay
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam
     def bar [] { "bar" }
@@ -51,7 +51,7 @@ Keep a custom command after hiding the overlay
 
 Hide an overlay created from a file
 
-```nushell
+```nu
 > 'export alias f = "foo"' | save spam.nu
     overlay use spam.nu
     overlay hide spam
@@ -60,7 +60,7 @@ Hide an overlay created from a file
 
 Hide the last activated overlay
 
-```nushell
+```nu
 > module spam { export-env { $env.FOO = "foo" } }
     overlay use spam
     overlay hide
@@ -69,7 +69,7 @@ Hide the last activated overlay
 
 Keep the current working directory when removing an overlay
 
-```nushell
+```nu
 > overlay new spam
     cd some-dir
     overlay hide --keep-env [ PWD ] spam

@@ -35,14 +35,14 @@ feature: default
 
 Delete a table from the in-memory sqlite database
 
-```nushell
+```nu
 > stor delete --table-name nudb
 
 ```
 
 Delete some rows from the in-memory sqlite database with a where clause
 
-```nushell
+```nu
 > stor delete --table-name nudb --where-clause "int1 == 5"
 
 ```

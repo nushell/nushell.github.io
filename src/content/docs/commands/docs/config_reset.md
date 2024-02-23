@@ -36,7 +36,7 @@ feature: default
 
 reset nushell configuration files
 
-```nushell
+```nu
 > config reset
 
 ```

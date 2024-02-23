@@ -38,7 +38,7 @@ feature: default
 
 Filter out all records where 'Hello' is null
 
-```nushell
+```nu
 > [["Hello" "World"]; [null 3]] | compact Hello
 ╭────────────╮
 │ empty list │
@@ -47,7 +47,7 @@ Filter out all records where 'Hello' is null
 
 Filter out all records where 'World' is null
 
-```nushell
+```nu
 > [["Hello" "World"]; [null 3]] | compact World
 ╭───┬───────┬───────╮
 │ # │ Hello │ World │
@@ -59,7 +59,7 @@ Filter out all records where 'World' is null
 
 Filter out all instances of null from a list
 
-```nushell
+```nu
 > [1, null, 2] | compact
 ╭───┬───╮
 │ 0 │ 1 │
@@ -70,7 +70,7 @@ Filter out all instances of null from a list
 
 Filter out all instances of null and empty items from a list
 
-```nushell
+```nu
 > [1, null, 2, "", 3, [], 4, {}, 5] | compact --empty
 ╭───┬───╮
 │ 0 │ 1 │

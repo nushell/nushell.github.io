@@ -18,7 +18,7 @@ mode.
 
 For example:
 
-```nushell
+```nu
   $env.config = {
     ...
     edit_mode: emacs
@@ -127,7 +127,7 @@ As mentioned before, Reedline manages and stores all the commands that are
 edited and sent to Nushell. To configure the max number of records that
 Reedline should store you will need to adjust this value in your config file:
 
-```nushell
+```nu
   $env.config = {
     ...
     history: {
@@ -144,7 +144,7 @@ Reedline should store you will need to adjust this value in your config file:
 Reedline prompt is also highly customizable. In order to construct your perfect
 prompt, you could define the next environment variables in your config file:
 
-```nushell
+```nu
 # Use nushell functions to define your right and left prompt
 def create_left_prompt [] {
     let path_segment = ($env.PWD)
@@ -172,7 +172,7 @@ functions. You can use simple strings to define them.
 You can also customize the prompt indicator for the line editor by modifying
 the next env variables.
 
-```nushell
+```nu
 $env.PROMPT_INDICATOR = "〉"
 $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
@@ -193,7 +193,7 @@ For example, let's say that you would like to map the completion menu to the
 `Ctrl + t` keybinding (default is `tab`). You can add the next entry to your
 config file.
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -255,7 +255,7 @@ The event section of the keybinding entry is where the actions to be performed
 are defined. In this field you can use either a record or a list of records.
 Something like this
 
-```nushell
+```nu
   ...
   event: { send: Enter }
   ...
@@ -263,7 +263,7 @@ Something like this
 
 or
 
-```nushell
+```nu
   ...
   event: [
     { edit: Clear }
@@ -278,7 +278,7 @@ single event is sent to the engine.
 The next keybinding is an example of a series of events sent to the engine. It
 first clears the prompt, inserts a string and then enters that value
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -309,7 +309,7 @@ For that reason there is the `executehostcommand` type of event. The next
 example does the same as the previous one in a simpler way, sending a single
 event to the engine
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -339,13 +339,13 @@ are all the `EditCommands` that can be processed by the engine.
 
 To find all the available options for `send` you can use
 
-```nushell
+```nu
 keybindings list | where type == events
 ```
 
 And the syntax for `send` events is the next one
 
-```nushell
+```nu
     ...
       event: { send: <NAME OF EVENT FROM LIST> }
     ...
@@ -360,7 +360,7 @@ There are two exceptions to this rule: the `Menu` and `ExecuteHostCommand`.
 Those two events require an extra field to be complete. The `Menu` needs the
 name of the menu to be activated (completion_menu or history_menu)
 
-```nushell
+```nu
     ...
       event: {
         send: menu
@@ -372,7 +372,7 @@ name of the menu to be activated (completion_menu or history_menu)
 and the `ExecuteHostCommand` requires a valid command that will be sent to the
 engine
 
-```nushell
+```nu
     ...
       event: {
         send: executehostcommand
@@ -395,13 +395,13 @@ The `edit` type is the simplification of the `Edit([])` event. The `event` type
 simplifies defining complex editing events for the keybindings. To list the
 available options you can use the next command
 
-```nushell
+```nu
 keybindings list | where type == edits
 ```
 
 The usual syntax for an `edit` is the next one
 
-```nushell
+```nu
     ...
       event: { edit: <NAME OF EDIT FROM LIST> }
     ...
@@ -412,7 +412,7 @@ Since those edits require an extra value to be fully defined. For example, if
 we would like to insert a string where the prompt is located, then you will
 have to use
 
-```nushell
+```nu
     ...
       event: {
         edit: insertstring
@@ -423,7 +423,7 @@ have to use
 
 or say you want to move right until the first `S`
 
-```nushell
+```nu
     ...
       event: {
         edit: moverightuntil
@@ -454,7 +454,7 @@ one is successful, the event processing is stopped.
 
 The next keybinding represents this case.
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -491,7 +491,7 @@ meaning that the `until` event will stop as soon as it reaches the command.
 For example, the next keybinding will always send a `down` because that event
 is always successful
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -521,7 +521,7 @@ If you want to remove a certain default keybinding without replacing it with a d
 
 e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -566,7 +566,7 @@ the line the available command examples.
 
 The help menu can be configured by modifying the next parameters
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -607,7 +607,7 @@ menu as well.
 The completion menu by default is accessed by pressing `tab` and it can be configured by
 modifying these values from the config object:
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -645,7 +645,7 @@ chronological order, making it extremely easy to select a previous command.
 
 The history menu can be configured by modifying these values from the config object:
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -684,7 +684,7 @@ are looking for. Once the menu is activated, anything that you type will be
 replaced by the selected command from your history. for example, say that you
 have already typed this
 
-```nushell
+```nu
 let a = ()
 ```
 
@@ -692,7 +692,7 @@ you can place the cursor inside the `()` and activate the menu. You can filter
 the history by typing key words and as soon as you select an entry, the typed
 words will be replaced
 
-```nushell
+```nu
 let a = (ls | where size > 10MiB)
 ```
 
@@ -701,7 +701,7 @@ let a = (ls | where size > 10MiB)
 Another nice feature of the menu is the ability to quick select something from
 it. Say you have activated your menu and it looks like this
 
-```nushell
+```nu
 >
 0: ls | where size > 10MiB
 1: ls | where size > 20MiB
@@ -743,7 +743,7 @@ true).
 
 With that in mind, the desired menu would look like this
 
-```nushell
+```nu
   $env.config = {
     ...
 
@@ -782,7 +782,7 @@ are using it to create records that will be used to populate the menu.
 
 The required structure for the record is the next one
 
-```nushell
+```nu
 {
   value:       # The value that will be inserted in the buffer
   description: # Optional. Description that will be display with the selected value
@@ -819,7 +819,7 @@ In case you want to change the default way both menus are activated, you can
 change that by defining new keybindings. For example, the next two keybindings
 assign the completion and history menu to `Ctrl+t` and `Ctrl+y` respectively
 
-```nushell
+```nu
   $env.config = {
     ...
 

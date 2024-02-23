@@ -41,7 +41,7 @@ Command `encode hex` was not included in the official binaries by default, you h
 
 Encode binary data
 
-```nushell
+```nu
 > 0x[09 F9 11 02 9D 74 E3 5B D8 41 56 C5 63 56 88 C0] | encode hex
 09F911029D74E35BD84156C5635688C0
 ```

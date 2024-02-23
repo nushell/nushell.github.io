@@ -30,7 +30,7 @@ feature: default
 
 Break out of a loop
 
-```nushell
+```nu
 > loop { break }
 
 ```

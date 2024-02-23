@@ -30,7 +30,7 @@ feature: default
 
 Inspect pipeline results
 
-```nushell
+```nu
 > ls | inspect | get name | inspect
 
 ```

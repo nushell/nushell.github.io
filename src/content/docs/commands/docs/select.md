@@ -40,7 +40,7 @@ feature: default
 
 Select a column in a table
 
-```nushell
+```nu
 > [{a: a b: b}] | select a
 ╭───┬───╮
 │ # │ a │
@@ -52,7 +52,7 @@ Select a column in a table
 
 Select a field in a record
 
-```nushell
+```nu
 > {a: a b: b} | select a
 ╭───┬───╮
 │ a │ a │
@@ -61,28 +61,28 @@ Select a field in a record
 
 Select just the `name` column
 
-```nushell
+```nu
 > ls | select name
 
 ```
 
 Select the first four rows (this is the same as `first 4`)
 
-```nushell
+```nu
 > ls | select 0 1 2 3
 
 ```
 
 Select columns by a provided list of columns
 
-```nushell
+```nu
 > let cols = [name type];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | select $cols
 
 ```
 
 Select columns by a provided list of columns
 
-```nushell
+```nu
 > [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | select ["name", "type"]
 ╭───┬────────────┬──────╮
 │ # │    name    │ type │
@@ -95,7 +95,7 @@ Select columns by a provided list of columns
 
 Select rows by a provided list of rows
 
-```nushell
+```nu
 > let rows = [0 2];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb] [file.json json 3kb]] | select $rows
 
 ```

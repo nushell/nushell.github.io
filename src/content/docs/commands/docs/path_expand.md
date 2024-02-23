@@ -36,21 +36,21 @@ feature: default
 
 Expand an absolute path
 
-```nushell
+```nu
 > '/home/joe/foo/../bar' | path expand
 /home/joe/bar
 ```
 
 Expand a relative path
 
-```nushell
+```nu
 > 'foo/../bar' | path expand
 
 ```
 
 Expand a list of paths
 
-```nushell
+```nu
 > [ /foo/../bar, /foo/../baz ] | path expand
 ╭───┬──────╮
 │ 0 │ /bar │

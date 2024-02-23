@@ -30,7 +30,7 @@ feature: default
 
 View process information
 
-```nushell
+```nu
 > debug info
 
 ```

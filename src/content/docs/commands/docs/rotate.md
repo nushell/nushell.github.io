@@ -43,7 +43,7 @@ Command `rotate` was not included in the official binaries by default, you have 
 
 Rotate a record clockwise, producing a table (like `transpose` but with column order reversed)
 
-```nushell
+```nu
 > {a:1, b:2} | rotate
 ╭───┬─────────┬─────────╮
 │ # │ column0 │ column1 │
@@ -56,7 +56,7 @@ Rotate a record clockwise, producing a table (like `transpose` but with column o
 
 Rotate 2x3 table clockwise
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4] [5 6]] | rotate
 ╭───┬─────────┬─────────┬─────────┬─────────╮
 │ # │ column0 │ column1 │ column2 │ column3 │
@@ -69,7 +69,7 @@ Rotate 2x3 table clockwise
 
 Rotate table clockwise and change columns names
 
-```nushell
+```nu
 > [[a b]; [1 2]] | rotate col_a col_b
 ╭───┬───────┬───────╮
 │ # │ col_a │ col_b │
@@ -82,7 +82,7 @@ Rotate table clockwise and change columns names
 
 Rotate table counter clockwise
 
-```nushell
+```nu
 > [[a b]; [1 2]] | rotate --ccw
 ╭───┬─────────┬─────────╮
 │ # │ column0 │ column1 │
@@ -95,7 +95,7 @@ Rotate table counter clockwise
 
 Rotate table counter-clockwise
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4] [5 6]] | rotate --ccw
 ╭───┬─────────┬─────────┬─────────┬─────────╮
 │ # │ column0 │ column1 │ column2 │ column3 │
@@ -108,7 +108,7 @@ Rotate table counter-clockwise
 
 Rotate table counter-clockwise and change columns names
 
-```nushell
+```nu
 > [[a b]; [1 2]] | rotate --ccw col_a col_b
 ╭───┬───────┬───────╮
 │ # │ col_a │ col_b │

@@ -35,7 +35,7 @@ Command `math arctanh` was not included in the official binaries by default, you
 
 Get the arctanh of 1
 
-```nushell
+```nu
 > 1 | math arctanh
 inf
 ```

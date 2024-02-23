@@ -40,7 +40,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns indexes for a sorted series
 
-```nushell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr arg-sort
 ╭───┬──────────╮
 │ # │ arg_sort │
@@ -56,7 +56,7 @@ Returns indexes for a sorted series
 
 Returns indexes for a sorted series
 
-```nushell
+```nu
 > [1 2 2 3 3] | dfr into-df | dfr arg-sort --reverse
 ╭───┬──────────╮
 │ # │ arg_sort │

@@ -37,14 +37,14 @@ feature: default
 
 Decode a url with escape characters
 
-```nushell
+```nu
 > 'https://example.com/foo%20bar' | url decode
 https://example.com/foo bar
 ```
 
 Decode multiple urls with escape characters in list
 
-```nushell
+```nu
 > ['https://example.com/foo%20bar' 'https://example.com/a%3Eb' '%E4%B8%AD%E6%96%87%E5%AD%97/eng/12%2034'] | url decode
 ╭───┬─────────────────────────────╮
 │ 0 │ https://example.com/foo bar │

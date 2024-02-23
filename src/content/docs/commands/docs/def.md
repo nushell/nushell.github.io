@@ -41,28 +41,28 @@ feature: default
 
 Define a command and run it
 
-```nushell
+```nu
 > def say-hi [] { echo 'hi' }; say-hi
 hi
 ```
 
 Define a command and run it with parameter(s)
 
-```nushell
+```nu
 > def say-sth [sth: string] { echo $sth }; say-sth hi
 hi
 ```
 
 Set environment variable by call a custom command
 
-```nushell
+```nu
 > def --env foo [] { $env.BAR = "BAZ" }; foo; $env.BAR
 BAZ
 ```
 
 Define a custom wrapper for an external command
 
-```nushell
+```nu
 > def --wrapped my-echo [...rest] { echo $rest }; my-echo spam
 ╭───┬──────╮
 │ 0 │ spam │

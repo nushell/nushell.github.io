@@ -39,14 +39,14 @@ Command `math arcsin` was not included in the official binaries by default, you 
 
 Get the arcsine of 1
 
-```nushell
+```nu
 > 1 | math arcsin
 1.5707963267948966
 ```
 
 Get the arcsine of 1 in degrees
 
-```nushell
+```nu
 > 1 | math arcsin --degrees
 90
 ```

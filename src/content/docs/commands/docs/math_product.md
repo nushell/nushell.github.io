@@ -33,14 +33,14 @@ feature: default
 
 Compute the product of a list of numbers
 
-```nushell
+```nu
 > [2 3 3 4] | math product
 72
 ```
 
 Compute the product of each column in a table
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | math product
 ╭───┬───╮
 │ a │ 3 │

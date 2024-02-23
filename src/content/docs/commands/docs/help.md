@@ -38,21 +38,21 @@ feature: default
 
 show help for single command, alias, or module
 
-```nushell
+```nu
 > help match
 
 ```
 
 show help for single sub-command, alias, or module
 
-```nushell
+```nu
 > help str lpad
 
 ```
 
 search for string in command names, usage and search terms
 
-```nushell
+```nu
 > help --find char
 
 ```

@@ -46,42 +46,42 @@ feature: default
 
 Convert any standard timestamp string to datetime
 
-```nushell
+```nu
 > '27.02.2021 1:55 pm +0000' | into datetime
 Sat, 27 Feb 2021 13:55:00 +0000 (2 years ago)
 ```
 
 Convert any standard timestamp string to datetime
 
-```nushell
+```nu
 > '2021-02-27T13:55:40.2246+00:00' | into datetime
 Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```
 
 Convert non-standard timestamp string to datetime using a custom format
 
-```nushell
+```nu
 > '20210227_135540+0000' | into datetime --format '%Y%m%d_%H%M%S%z'
 Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```
 
 Convert nanosecond-precision unix timestamp to a datetime with offset from UTC
 
-```nushell
+```nu
 > 1614434140123456789 | into datetime --offset -5
 Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```
 
 Convert standard (seconds) unix timestamp to a UTC datetime
 
-```nushell
+```nu
 > 1614434140 * 1_000_000_000 | into datetime
 Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
 ```
 
 Convert list of timestamps to datetimes
 
-```nushell
+```nu
 > ["2023-03-30 10:10:07 -05:00", "2023-05-05 13:43:49 -05:00", "2023-06-05 01:37:42 -05:00"] | into datetime
 ╭───┬───────────────╮
 │ 0 │ 10 months ago │
@@ -93,21 +93,21 @@ Convert list of timestamps to datetimes
 
 Parsing human readable datetimes
 
-```nushell
+```nu
 > 'Today at 18:30' | into datetime
 
 ```
 
 Parsing human readable datetimes
 
-```nushell
+```nu
 > 'Last Friday at 19:45' | into datetime
 
 ```
 
 Parsing human readable datetimes
 
-```nushell
+```nu
 > 'In 5 minutes and 30 seconds' | into datetime
 
 ```

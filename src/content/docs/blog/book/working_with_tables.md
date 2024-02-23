@@ -6,7 +6,7 @@ One of the common ways of seeing data in Nu is through a table. Nu comes with a 
 
 To start off, let's get a table that we can use:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -30,7 +30,7 @@ See [hooks](/book/hooks#changing-how-output-is-displayed) for more information.
 
 We can sort a table by calling the [`sort-by`](/commands/docs/sort-by) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | sort-by size
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -51,7 +51,7 @@ We can sort a table by any column that can be compared. For example, we could al
 
 We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](/commands/docs/select) a few columns from our table to use:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | select name size
 ───┬───────────────┬─────────
  # │ name          │ size
@@ -68,7 +68,7 @@ ls | select name size
 
 This helps to create a table that's more focused on what we need. Next, let's say we want to only look at the 5 smallest files in this directory:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | sort-by size | first 5
 ───┬──────────────┬──────┬────────┬────────────
  # │ name         │ type │ size   │ modified
@@ -85,7 +85,7 @@ You'll notice we first sort the table by size to get to the smallest file, and t
 
 You can also [`skip`](/commands/docs/skip) rows that you don't want. Let's skip the first two of the 5 rows we returned above:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | sort-by size | first 5 | skip 2
 ───┬───────────┬──────┬────────┬────────────
  # │ name      │ type │ size   │ modified
@@ -100,7 +100,7 @@ We've narrowed it to three rows we care about.
 
 Let's look at a few other commands for selecting data. You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row. Let's sort our table by the file name and then pick one of the rows with the [`select`](/commands/docs/select) command using its row number:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | sort-by name
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -126,7 +126,7 @@ ls | sort-by name | select 5
 
 So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](/commands/docs/get) command:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | get name
 ───┬───────────────
  0 │ files.rs
@@ -143,7 +143,7 @@ We now have the values for each of the filenames.
 
 This might look like the [`select`](/commands/docs/select) command we saw earlier, so let's put that here as well to compare the two:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | select name
 ───┬───────────────
  # │ name
@@ -175,7 +175,7 @@ In addition to selecting data from a table, we can also update what the table ha
 
 We can concatenate tables using [`append`](/commands/docs/append):
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let first = [[a b]; [1 2]]
 let second = [[a b]; [3 4]]
 $first | append $second
@@ -189,7 +189,7 @@ $first | append $second
 
 If the column names are not identical then additionally columns and values will be created as necessary:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let first = [[a b]; [1 2]]
 let second = [[a b]; [3 4]]
 let third = [[a c]; [3 4]]
@@ -205,7 +205,7 @@ $first | append $second | append $third
 
 You can also use the `++` operator as an inline replacement for `append`:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 $first ++ $second ++ $third
 ───┬───┬────┬────
  # │ a │ b  │ c
@@ -220,7 +220,7 @@ $first ++ $second ++ $third
 
 We can use the [`merge`](/commands/docs/merge) command to merge two (or more) tables together
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let first = [[a b]; [1 2]]
 let second = [[c d]; [3 4]]
 $first | merge $second
@@ -233,13 +233,13 @@ $first | merge $second
 
 Let's add a third table:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 > let third = [[e f]; [5 6]]
 ```
 
 We could join all three tables together like this:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 $first | merge $second  | merge $third
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
@@ -250,7 +250,7 @@ $first | merge $second  | merge $third
 
 Or we could use the [`reduce`](/commands/docs/reduce) command to dynamically merge all tables:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [$first $second $third] | reduce {|it, acc| $acc | merge $it }
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
@@ -263,7 +263,7 @@ Or we could use the [`reduce`](/commands/docs/reduce) command to dynamically mer
 
 We can use the [`insert`](/commands/docs/insert) command to add a new column to the table. Let's look at an example:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -272,7 +272,7 @@ open rustfmt.toml
 
 Let's add a column called "next_edition" with the value 2021:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 open rustfmt.toml | insert next_edition 2021
 ──────────────┬──────
  edition      │ 2018
@@ -282,7 +282,7 @@ open rustfmt.toml | insert next_edition 2021
 
 This visual may be slightly confusing, because it looks like what we've just done is add a row. In this case, remember: rows have numbers, columns have names. If it still is confusing, note that appending one more row will make the table render as expected:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_edition: 2024}
 ───┬─────────┬──────────────
  # │ edition │ next_edition
@@ -295,7 +295,7 @@ open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_editio
 
 Notice that if we open the original file, the contents have stayed the same:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -304,7 +304,7 @@ open rustfmt.toml
 
 Changes in Nu are functional changes, meaning that they work on values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](/commands/docs/save) command:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 >open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
 open rustfmt2.toml
 ──────────────┬──────
@@ -317,7 +317,7 @@ open rustfmt2.toml
 
 In a similar way to the [`insert`](/commands/docs/insert) command, we can also use the [`update`](/commands/docs/update) command to change the contents of a column to a new value. To see it in action let's open the same file:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -326,7 +326,7 @@ open rustfmt.toml
 
 And now, let's update the edition to point at the next edition we hope to support:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 open rustfmt.toml | update edition 2021
 ─────────┬──────
  edition │ 2021
@@ -339,7 +339,7 @@ You can also use the [`upsert`](/commands/docs/upsert) command to insert or upda
 
 You can use [`move`](/commands/docs/move) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls) after the "size" column, we could do:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | move name --after size
 ╭────┬──────┬─────────┬───────────────────┬──────────────╮
 │ #  │ type │  size   │       name        │   modified   │
@@ -356,7 +356,7 @@ ls | move name --after size
 
 You can also [`rename`](/commands/docs/rename) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls) and rename the columns, we can use this example:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | rename filename filetype filesize date
 ╭────┬───────────────────┬──────────┬──────────┬──────────────╮
 │ #  │     filename      │ filetype │ filesize │     date     │
@@ -373,7 +373,7 @@ ls | rename filename filetype filesize date
 
 You can also [`reject`](/commands/docs/reject) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls) and delete the columns, we can use this example:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls -l / |reject readonly num_links inode created accessed modified
 ╭────┬────────┬─────────┬─────────┬───────────┬──────┬───────┬────────╮
 │  # │  name  │  type   │ target  │   mode    │ uid  │ group │  size  │

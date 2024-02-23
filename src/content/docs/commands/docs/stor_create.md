@@ -35,7 +35,7 @@ feature: default
 
 Create an in-memory sqlite database with specified table name, column names, and column data types
 
-```nushell
+```nu
 > stor create --table-name nudb --columns {bool1: bool, int1: int, float1: float, str1: str, datetime1: datetime}
 
 ```

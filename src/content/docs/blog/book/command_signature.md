@@ -4,13 +4,13 @@ title: Command signature
 
 nu commands can be given explicit signatures; take [`str stats`](/commands/docs/str_stats) as an example, the signature is like this:
 
-```nushell
+```nu
 def "str stats" []: string -> record { }
 ```
 
 The type names between the `:` and the opening curly brace `{` describe the command's input/output pipeline types. The input type for a given pipeline, in this case `string`, is given before the `->`; and the output type `record` is given after `->`. There can be multiple input/output types. If there are multiple input/output types, they can be placed within brackets and separated with commas, as in [`str join`](/commands/docs/str_join):
 
-```nushell
+```nu
 def "str join" [separator?: string]: [list -> string, string -> string] { }
 ```
 
@@ -19,6 +19,6 @@ It says that the [`str join`](/commands/docs/str_join) command takes an optional
 Some commands don't accept or require data through the input pipeline, thus the input type will be `<nothing>`.
 The same is true for the output type if the command returns `null` (e.g. [`rm`](/commands/docs/rm) or [`hide`](/commands/docs/hide)):
 
-```nushell
+```nu
 def hide [module: string, members?]: nothing -> nothing { }
 ```

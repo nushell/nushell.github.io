@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns true if all values are false
 
-```nushell
+```nu
 > [false false false] | dfr into-df | dfr all-false
 ╭───┬───────────╮
 │ # │ all_false │
@@ -46,7 +46,7 @@ Returns true if all values are false
 
 Checks the result from a comparison
 
-```nushell
+```nu
 > let s = ([5 6 2 10] | dfr into-df);
     let res = ($s > 9);
     $res | dfr all-false

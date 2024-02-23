@@ -44,56 +44,56 @@ feature: default
 
 List visible files in the current directory
 
-```nushell
+```nu
 > ls
 
 ```
 
 List visible files in a subdirectory
 
-```nushell
+```nu
 > ls subdir
 
 ```
 
 List visible files with full path in the parent directory
 
-```nushell
+```nu
 > ls -f ..
 
 ```
 
 List Rust files
 
-```nushell
+```nu
 > ls *.rs
 
 ```
 
 List files and directories whose name do not contain 'bar'
 
-```nushell
+```nu
 > ls -s | where name !~ bar
 
 ```
 
 List all dirs in your home directory
 
-```nushell
+```nu
 > ls -a ~ | where type == dir
 
 ```
 
 List all dirs in your home directory which have not been modified in 7 days
 
-```nushell
+```nu
 > ls -as ~ | where type == dir and modified < ((date now) - 7day)
 
 ```
 
 List given paths and show directories themselves
 
-```nushell
+```nu
 > ['/path/to/directory' '/path/to/file'] | each {|| ls -D $in } | flatten
 
 ```

@@ -37,7 +37,7 @@ feature: default
 
 Insert a new entry into a single record
 
-```nushell
+```nu
 > {'name': 'nu', 'stars': 5} | insert alias 'Nushell'
 ╭───────┬─────────╮
 │ name  │ nu      │
@@ -48,7 +48,7 @@ Insert a new entry into a single record
 
 Insert a new column into a table, populating all rows
 
-```nushell
+```nu
 > [[project, lang]; ['Nushell', 'Rust']] | insert type 'shell'
 ╭───┬─────────┬──────┬───────╮
 │ # │ project │ lang │ type  │
@@ -60,7 +60,7 @@ Insert a new column into a table, populating all rows
 
 Insert a new column with values computed based off the other columns
 
-```nushell
+```nu
 > [[foo]; [7] [8] [9]] | insert bar {|row| $row.foo * 2 }
 ╭───┬─────┬─────╮
 │ # │ foo │ bar │
@@ -74,7 +74,7 @@ Insert a new column with values computed based off the other columns
 
 Insert a new value into a list at an index
 
-```nushell
+```nu
 > [1 2 4] | insert 2 3
 ╭───┬───╮
 │ 0 │ 1 │
@@ -87,7 +87,7 @@ Insert a new value into a list at an index
 
 Insert a new value at the end of a list
 
-```nushell
+```nu
 > [1 2 3] | insert 3 4
 ╭───┬───╮
 │ 0 │ 1 │

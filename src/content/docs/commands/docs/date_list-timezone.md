@@ -30,7 +30,7 @@ feature: default
 
 Show timezone(s) that contains 'Shanghai'
 
-```nushell
+```nu
 > date list-timezone | where timezone =~ Shanghai
 ╭───┬───────────────╮
 │ # │   timezone    │

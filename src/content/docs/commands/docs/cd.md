@@ -35,14 +35,14 @@ feature: default
 
 Change to your home directory
 
-```nushell
+```nu
 > cd ~
 
 ```
 
 Change to the previous working directory ($OLDPWD)
 
-```nushell
+```nu
 > cd -
 
 ```

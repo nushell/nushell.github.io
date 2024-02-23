@@ -40,7 +40,7 @@ feature: default
 
 Rename a column
 
-```nushell
+```nu
 > [[a, b]; [1, 2]] | rename my_column
 ╭───┬───────────┬───╮
 │ # │ my_column │ b │
@@ -52,7 +52,7 @@ Rename a column
 
 Rename many columns
 
-```nushell
+```nu
 > [[a, b, c]; [1, 2, 3]] | rename eggs ham bacon
 ╭───┬──────┬─────┬───────╮
 │ # │ eggs │ ham │ bacon │
@@ -64,7 +64,7 @@ Rename many columns
 
 Rename a specific column
 
-```nushell
+```nu
 > [[a, b, c]; [1, 2, 3]] | rename --column { a: ham }
 ╭───┬─────┬───┬───╮
 │ # │ ham │ b │ c │
@@ -76,7 +76,7 @@ Rename a specific column
 
 Rename the fields of a record
 
-```nushell
+```nu
 > {a: 1 b: 2} | rename x y
 ╭───┬───╮
 │ x │ 1 │
@@ -86,7 +86,7 @@ Rename the fields of a record
 
 Rename fields based on a given closure
 
-```nushell
+```nu
 > {abc: 1, bbc: 2} | rename --block {str replace --all 'b' 'z'}
 ╭─────┬───╮
 │ azc │ 1 │

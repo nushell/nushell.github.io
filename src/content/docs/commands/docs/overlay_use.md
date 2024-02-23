@@ -40,7 +40,7 @@ feature: default
 
 Create an overlay from a module
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam
     foo
@@ -49,7 +49,7 @@ Create an overlay from a module
 
 Create an overlay from a module and rename it
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam as spam_new
     foo
@@ -58,7 +58,7 @@ Create an overlay from a module and rename it
 
 Create an overlay with a prefix
 
-```nushell
+```nu
 > 'export def foo { "foo" }'
     overlay use --prefix spam
     spam foo
@@ -67,7 +67,7 @@ Create an overlay with a prefix
 
 Create an overlay from a file
 
-```nushell
+```nu
 > 'export-env { $env.FOO = "foo" }' | save spam.nu
     overlay use spam.nu
     $env.FOO

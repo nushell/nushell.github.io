@@ -37,21 +37,21 @@ feature: default
 
 Checks if binary ends with `0x[AA]`
 
-```nushell
+```nu
 > 0x[1F FF AA AA] | bytes ends-with 0x[AA]
 true
 ```
 
 Checks if binary ends with `0x[FF AA AA]`
 
-```nushell
+```nu
 > 0x[1F FF AA AA] | bytes ends-with 0x[FF AA AA]
 true
 ```
 
 Checks if binary ends with `0x[11]`
 
-```nushell
+```nu
 > 0x[1F FF AA AA] | bytes ends-with 0x[11]
 false
 ```

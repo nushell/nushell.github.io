@@ -30,7 +30,7 @@ feature: default
 
 Get the last activated overlay
 
-```nushell
+```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam
     overlay list | last

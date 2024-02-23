@@ -35,14 +35,14 @@ feature: default
 
 Create a string from input
 
-```nushell
+```nu
 > ['nu', 'shell'] | str join
 nushell
 ```
 
 Create a string from input with a separator
 
-```nushell
+```nu
 > ['nu', 'shell'] | str join '-'
 nu-shell
 ```

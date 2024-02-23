@@ -39,14 +39,14 @@ Command `bits or` was not included in the official binaries by default, you have
 
 Apply bits or to two numbers
 
-```nushell
+```nu
 > 2 | bits or 6
 6
 ```
 
 Apply logical or to a list of numbers
 
-```nushell
+```nu
 > [8 3 2] | bits or 2
 ╭───┬────╮
 │ 0 │ 10 │

@@ -35,7 +35,7 @@ Command `math arcsinh` was not included in the official binaries by default, you
 
 Get the arcsinh of 0
 
-```nushell
+```nu
 > 0 | math arcsinh
 0
 ```

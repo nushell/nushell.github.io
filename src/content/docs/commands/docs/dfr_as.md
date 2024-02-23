@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Creates and alias expression
 
-```nushell
+```nu
 > dfr col a | dfr as new_a | dfr into-nu
 ╭───────┬────────────────────╮
 │       │ ╭───────┬────────╮ │

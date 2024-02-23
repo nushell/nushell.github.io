@@ -14,7 +14,7 @@ The simpler of the two evaluation expressions is the variable. During evaluation
 
 An immutable variable cannot change its value after declaration. They are declared using the `let` keyword,
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let val = 42
 print $val
 # 42
@@ -22,7 +22,7 @@ print $val
 
 However, they can be 'shadowed'. Shadowing means that they are redeclared and their initial value cannot be used anymore within the same scope.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let val = 42
 do { let val = 101;  $val }
 # 101
@@ -34,7 +34,7 @@ $val
 
 A mutable variable is allowed to change its value by assignment. These are declared using the `mut` keyword.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 mut val = 42
 $val += 27
 $val
@@ -63,7 +63,7 @@ There are a couple of assignment operators used with mutable variables
 
 Closures and nested `def`s cannot capture mutable variables from their environment. For example
 
-```nushell frame="terminal"
+```nu frame="terminal"
 # naive method to count number of elements in a list
 mut x = 0
 
@@ -77,7 +77,7 @@ To use mutable variables for such behavior, you are encouraged to use the loops
 
 A constant variable is an immutable variable that can be fully evaluated at parse-time. These are useful with commands that need to know the value of an argument at parse time, like [`source`](/commands/docs/source), [`use`](/commands/docs/use) and [`register`](/commands/docs/register). See [how nushell code gets run](how_nushell_code_gets_run) for a deeper explanation. They are declared using the `const` keyword
 
-```nushell frame="terminal"
+```nu frame="terminal"
 const plugin = 'path/to/plugin'
 register $plugin
 ```
@@ -86,13 +86,13 @@ register $plugin
 
 Variable names in Nushell come with a few restrictions as to what characters they can contain. In particular, they cannot contain these characters:
 
-```nushell
+```nu
 .  [  (  {  +  -  *  ^  /  =  !  <  >  &  |
 ```
 
 It is common for some scripts to declare variables that start with `$`. This is allowed, and it is equivalent to the `$` not being there at all.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let $var = 42
 # identical to `let var = 42`
 ```
@@ -101,13 +101,13 @@ let $var = 42
 
 A variable path works by reaching inside of the contents of a variable, navigating columns inside of it, to reach a final value. Let's say instead of `4`, we had assigned a table value:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let my_value = [[name]; [testuser]]
 ```
 
 We can use a variable path to evaluate the variable `$my_value` and get the value from the `name` column in a single step:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 $my_value.name.0
 # testuser
 ```
@@ -116,14 +116,14 @@ Sometimes, we don't really know the contents of a variable. Accessing values as 
 
 For example, here, if row `0` does not exist on `name`, then `null` is returned. Without the question mark operator, an error would have been raised instead
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let files = (ls)
 $files.name.0?
 ```
 
 The question mark operator can be used to 'guard' any path
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let files = (ls)
 $files.name?.0?
 ```
@@ -136,7 +136,7 @@ The parentheses contain a pipeline that will run to completion, and the resultin
 
 Subexpressions can also be pipelines and not just single commands. If we wanted to get a table of files larger than ten kilobytes, we could use a subexpression to run a pipeline and assign its result to a variable:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let big_files = (ls | where size > 10kb)
 $big_files
 ───┬────────────┬──────┬──────────┬──────────────
@@ -151,13 +151,13 @@ $big_files
 
 Subexpressions also support paths. For example, let's say we wanted to get a list of the filenames in the current directory. One way to do this is to use a pipeline:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | get name
 ```
 
 We can do a very similar action in a single step using a subexpression path:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 (ls).name
 ```
 
@@ -167,13 +167,13 @@ It depends on the needs of the code and your particular style which form works b
 
 Nushell supports accessing columns in a subexpression using a simple short-hand. You may have already used this functionality before. If, for example, we wanted to only see rows from [`ls`](/commands/docs/ls) where the entry is at least ten kilobytes we could write:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | where size > 10kb
 ```
 
 The `where size > 10kb` is a command with two parts: the command name [`where`](/commands/docs/where) and the short-hand expression `size > 10kb`. We say short-hand because `size` here is the shortened version of writing `$it.size`. This could also be written in any of the following ways:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | where $it.size > 10kb
 ls | where ($it.size > 10kb)
 ls | where {|$x| $x.size > 10kb }

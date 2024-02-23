@@ -6,7 +6,7 @@ title: External Completers
 
 ### Carapace completer
 
-```nushell
+```nu
 let carapace_completer = {|spans|
     carapace $spans.0 nushell ...$spans | from json
 }
@@ -16,7 +16,7 @@ let carapace_completer = {|spans|
 
 This completer will use [the fish shell](https://fishshell.com/) to handle completions. Fish handles out of the box completions for many popular tools and commands.
 
-```nushell
+```nu
 let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
     | $"value(char tab)description(char newline)" + $in
@@ -34,7 +34,7 @@ A couple of things to note on this command:
 
 [Zoxide](https://github.com/ajeetdsouza/zoxide) allows easily jumping between visited folders in the system. It's possible to autocomplete matching folders with this completer:
 
-```nushell
+```nu
 let zoxide_completer = {|spans|
     $spans | skip 1 | zoxide query -l $in | lines | where {|x| $x != $env.PWD}
 }
@@ -42,7 +42,7 @@ let zoxide_completer = {|spans|
 
 This completer is not usable for almost every other command, so it's recommended to add it as an override in the [multiple completer](#multiple-completer):
 
-```nushell
+```nu
 {
     z => $zoxide_completer
     zi => $zoxide_completer
@@ -53,7 +53,7 @@ This completer is not usable for almost every other command, so it's recommended
 Zoxide sets an alias (`z` by default) that calls the `__zoxide_z` function.
 If [alias completions](#alias-completions) are supported, the following snippet can be used instead:
 
-```nushell
+```nu
 {
      __zoxide_z => $zoxide_completer
      __zoxide_zi => $zoxide_completer
@@ -66,7 +66,7 @@ If [alias completions](#alias-completions) are supported, the following snippet 
 
 Sometimes, a single external completer is not flexible enough. Luckily, as many as needed can be combined into a single one. The following example uses `$default_completer` for all commands except the ones explicitly defined in the record:
 
-```nushell
+```nu
 let multiple_completers = {|spans|
     match $spans.0 {
         ls => $ls_completer
@@ -90,7 +90,7 @@ In the example above, `$spans.0` is the command being run at the time. The compl
 
 Nushell currently has a [bug where autocompletions won't work for aliases](https://github.com/nushell/nushell/issues/8483). This can be worked around adding the following snippet at the beginning of the completer:
 
-```nushell
+```nu
 # if the current command is an alias, get it's expansion
 let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
 
@@ -114,7 +114,7 @@ Carapace will return this error when a non-supported flag is provided. For examp
 
 The solution to this involves manually checking the value to filter it out:
 
-```nushell
+```nu
 let carapace_completer = {|spans: list<string>|
     carapace $spans.0 nushell $spans
     | from json
@@ -126,7 +126,7 @@ let carapace_completer = {|spans: list<string>|
 
 This is an example of how an external completer definition might look like:
 
-```nushell
+```nu
 let fish_completer = ...
 
 let carapace_completer = {|spans: list<string>|

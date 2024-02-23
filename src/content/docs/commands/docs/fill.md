@@ -44,42 +44,42 @@ feature: default
 
 Fill a string on the left side to a width of 15 with the character '─'
 
-```nushell
+```nu
 > 'nushell' | fill --alignment l --character '─' --width 15
 nushell────────
 ```
 
 Fill a string on the right side to a width of 15 with the character '─'
 
-```nushell
+```nu
 > 'nushell' | fill --alignment r --character '─' --width 15
 ────────nushell
 ```
 
 Fill a string on both sides to a width of 15 with the character '─'
 
-```nushell
+```nu
 > 'nushell' | fill --alignment m --character '─' --width 15
 ────nushell────
 ```
 
 Fill a number on the left side to a width of 5 with the character '0'
 
-```nushell
+```nu
 > 1 | fill --alignment right --character '0' --width 5
 00001
 ```
 
 Fill a number on both sides to a width of 5 with the character '0'
 
-```nushell
+```nu
 > 1.1 | fill --alignment center --character '0' --width 5
 01.10
 ```
 
 Fill a filesize on the left side to a width of 5 with the character '0'
 
-```nushell
+```nu
 > 1kib | fill --alignment middle --character '0' --width 10
 0001024000
 ```

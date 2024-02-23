@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Return a dataframe where the value match the expression
 
-```nushell
+```nu
 > let df = ([[a b]; [one 1] [two 2] [three 3]] | dfr into-df);
     $df | dfr select (dfr arg-where ((dfr col b) >= 2) | dfr as b_arg)
 ╭───┬───────╮

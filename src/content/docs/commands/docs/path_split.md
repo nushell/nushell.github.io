@@ -31,7 +31,7 @@ feature: default
 
 Split a path into parts
 
-```nushell
+```nu
 > '/home/viking/spam.txt' | path split
 ╭───┬──────────╮
 │ 0 │ /        │
@@ -44,7 +44,7 @@ Split a path into parts
 
 Split paths in list into parts
 
-```nushell
+```nu
 > [ /home/viking/spam.txt /home/viking/eggs.txt ] | path split
 ╭───┬──────────────────╮
 │ 0 │ ╭───┬──────────╮ │

@@ -54,42 +54,42 @@ feature: default
 
 Convert string to int in table
 
-```nushell
+```nu
 > [[num]; ['-5'] [4] [1.5]] | into int num
 
 ```
 
 Convert string to int
 
-```nushell
+```nu
 > '2' | into int
 2
 ```
 
 Convert float to int
 
-```nushell
+```nu
 > 5.9 | into int
 5
 ```
 
 Convert decimal string to int
 
-```nushell
+```nu
 > '5.9' | into int
 5
 ```
 
 Convert file size to int
 
-```nushell
+```nu
 > 4KB | into int
 4000
 ```
 
 Convert bool to int
 
-```nushell
+```nu
 > [false, true] | into int
 ╭───┬───╮
 │ 0 │ 0 │
@@ -100,42 +100,42 @@ Convert bool to int
 
 Convert date to int (Unix nanosecond timestamp)
 
-```nushell
+```nu
 > 1983-04-13T12:09:14.123456789-05:00 | into int
 419101754123456789
 ```
 
 Convert to int from binary data (radix: 2)
 
-```nushell
+```nu
 > '1101' | into int --radix 2
 13
 ```
 
 Convert to int from hex
 
-```nushell
+```nu
 > 'FF' |  into int --radix 16
 255
 ```
 
 Convert octal string to int
 
-```nushell
+```nu
 > '0o10132' | into int
 4186
 ```
 
 Convert 0 padded string to int
 
-```nushell
+```nu
 > '0010132' | into int
 10132
 ```
 
 Convert 0 padded string to int with radix 8
 
-```nushell
+```nu
 > '0010132' | into int --radix 8
 4186
 ```

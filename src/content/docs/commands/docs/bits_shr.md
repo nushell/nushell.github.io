@@ -44,14 +44,14 @@ Command `bits shr` was not included in the official binaries by default, you hav
 
 Shift right a number with 2 bits
 
-```nushell
+```nu
 > 8 | bits shr 2
 2
 ```
 
 Shift right a list of numbers
 
-```nushell
+```nu
 > [15 35 2] | bits shr 2
 ╭───┬───╮
 │ 0 │ 3 │

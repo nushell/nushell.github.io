@@ -34,21 +34,21 @@ feature: default
 
 allow user to open and update nu env
 
-```nushell
+```nu
 > config env
 
 ```
 
 allow user to print default `env.nu` file
 
-```nushell
+```nu
 > config env --default,
 
 ```
 
 allow saving the default `env.nu` locally
 
-```nushell
+```nu
 > config env --default | save -f ~/.config/nushell/default_env.nu
 
 ```

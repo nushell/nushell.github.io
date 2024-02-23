@@ -36,21 +36,21 @@ feature: default
 
 Output a value if a condition matches, otherwise return nothing
 
-```nushell
+```nu
 > if 2 < 3 { 'yes!' }
 yes!
 ```
 
 Output a value if a condition matches, else return another value
 
-```nushell
+```nu
 > if 5 < 3 { 'yes!' } else { 'no!' }
 no!
 ```
 
 Chain multiple if's together
 
-```nushell
+```nu
 > if 5 < 3 { 'yes!' } else if 4 < 5 { 'no!' } else { 'okay!' }
 no!
 ```

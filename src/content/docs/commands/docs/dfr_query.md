@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Query dataframe using SQL
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr query 'select a from df'
 ╭───┬───╮
 │ # │ a │

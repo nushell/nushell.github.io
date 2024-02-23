@@ -35,14 +35,14 @@ Command `math exp` was not included in the official binaries by default, you hav
 
 Get e raised to the power of zero
 
-```nushell
+```nu
 > 0 | math exp
 1
 ```
 
 Get e (same as 'math e')
 
-```nushell
+```nu
 > 1 | math exp
 2.718281828459045
 ```

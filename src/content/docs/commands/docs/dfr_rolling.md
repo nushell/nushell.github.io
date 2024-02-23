@@ -39,7 +39,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Rolling sum for a series
 
-```nushell
+```nu
 > [1 2 3 4 5] | dfr into-df | dfr rolling sum 2 | dfr drop-nulls
 ╭───┬───────────────╮
 │ # │ 0_rolling_sum │
@@ -54,7 +54,7 @@ Rolling sum for a series
 
 Rolling max for a series
 
-```nushell
+```nu
 > [1 2 3 4 5] | dfr into-df | dfr rolling max 2 | dfr drop-nulls
 ╭───┬───────────────╮
 │ # │ 0_rolling_max │

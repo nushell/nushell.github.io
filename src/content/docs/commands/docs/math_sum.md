@@ -35,21 +35,21 @@ feature: default
 
 Sum a list of numbers
 
-```nushell
+```nu
 > [1 2 3] | math sum
 6
 ```
 
 Get the disk usage for the current directory
 
-```nushell
+```nu
 > ls | get size | math sum
 
 ```
 
 Compute the sum of each column in a table
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | math sum
 ╭───┬───╮
 │ a │ 4 │

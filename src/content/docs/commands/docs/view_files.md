@@ -30,14 +30,14 @@ feature: default
 
 View the files registered in Nushell's EngineState memory
 
-```nushell
+```nu
 > view files
 
 ```
 
 View how Nushell was originally invoked
 
-```nushell
+```nu
 > view files | get 0
 
 ```

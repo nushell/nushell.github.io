@@ -38,7 +38,7 @@ Command `roll up` was not included in the official binaries by default, you have
 
 Rolls rows up
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4] [5 6]] | roll up
 ╭───┬───┬───╮
 │ # │ a │ b │

@@ -40,7 +40,7 @@ feature: default
 
 Move a column before the first column
 
-```nushell
+```nu
 > [[name value index]; [foo a 1] [bar b 2] [baz c 3]] | move index --before name
 ╭───┬──────┬───────╮
 │ # │ name │ value │
@@ -54,7 +54,7 @@ Move a column before the first column
 
 Move multiple columns after the last column and reorder them
 
-```nushell
+```nu
 > [[name value index]; [foo a 1] [bar b 2] [baz c 3]] | move value name --after index
 ╭───┬───────┬──────╮
 │ # │ value │ name │
@@ -68,7 +68,7 @@ Move multiple columns after the last column and reorder them
 
 Move columns of a record
 
-```nushell
+```nu
 > { name: foo, value: a, index: 1 } | move name --before index
 ╭───────┬─────╮
 │ value │ a   │

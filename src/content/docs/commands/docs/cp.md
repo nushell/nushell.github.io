@@ -50,49 +50,49 @@ feature: default
 
 Copy myfile to dir_b
 
-```nushell
+```nu
 > cp myfile dir_b
 
 ```
 
 Recursively copy dir_a to dir_b
 
-```nushell
+```nu
 > cp -r dir_a dir_b
 
 ```
 
 Recursively copy dir_a to dir_b, and print the feedbacks
 
-```nushell
+```nu
 > cp -r -v dir_a dir_b
 
 ```
 
 Move many files into a directory
 
-```nushell
+```nu
 > cp *.txt dir_a
 
 ```
 
 Copy only if source file is newer than target file
 
-```nushell
+```nu
 > cp -u a b
 
 ```
 
 Copy file preserving mode and timestamps attributes
 
-```nushell
+```nu
 > cp --preserve [ mode timestamps ] a b
 
 ```
 
 Copy file erasing all attributes
 
-```nushell
+```nu
 > cp --preserve [] a b
 
 ```

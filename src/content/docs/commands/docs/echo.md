@@ -34,7 +34,7 @@ feature: default
 
 Put a list of numbers in the pipeline. This is the same as [1 2 3].
 
-```nushell
+```nu
 > echo 1 2 3
 ╭───┬───╮
 │ 0 │ 1 │
@@ -46,7 +46,7 @@ Put a list of numbers in the pipeline. This is the same as [1 2 3].
 
 Returns the piped-in value, by using the special $in variable to obtain it.
 
-```nushell
+```nu
 > echo $in
 
 ```

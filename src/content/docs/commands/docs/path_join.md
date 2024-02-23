@@ -37,49 +37,49 @@ feature: default
 
 Append a filename to a path
 
-```nushell
+```nu
 > '/home/viking' | path join spam.txt
 /home/viking/spam.txt
 ```
 
 Append a filename to a path
 
-```nushell
+```nu
 > '/home/viking' | path join spams this_spam.txt
 /home/viking/spams/this_spam.txt
 ```
 
 Use relative paths, e.g. '..' will go up one directory
 
-```nushell
+```nu
 > '/home/viking' | path join .. folder
 /home/viking/../folder
 ```
 
 Use absolute paths, e.g. '/' will bring you to the top level directory
 
-```nushell
+```nu
 > '/home/viking' | path join / folder
 /folder
 ```
 
 Join a list of parts into a path
 
-```nushell
+```nu
 > [ '/' 'home' 'viking' 'spam.txt' ] | path join
 /home/viking/spam.txt
 ```
 
 Join a structured path into a path
 
-```nushell
+```nu
 > { parent: '/home/viking', stem: 'spam', extension: 'txt' } | path join
 /home/viking/spam.txt
 ```
 
 Join a table of structured paths into a list of paths
 
-```nushell
+```nu
 > [[ parent stem extension ]; [ '/home/viking' 'spam' 'txt' ]] | path join
 ╭───┬───────────────────────╮
 │ 0 │ /home/viking/spam.txt │

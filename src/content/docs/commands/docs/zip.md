@@ -35,7 +35,7 @@ feature: default
 
 Zip two lists
 
-```nushell
+```nu
 > [1 2] | zip [3 4]
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
@@ -52,7 +52,7 @@ Zip two lists
 
 Zip two ranges
 
-```nushell
+```nu
 > 1..3 | zip 4..6
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
@@ -73,7 +73,7 @@ Zip two ranges
 
 Rename .ogg files to match an existing list of filenames
 
-```nushell
+```nu
 > glob *.ogg | zip ['bang.ogg', 'fanfare.ogg', 'laser.ogg'] | each {|| mv $in.0 $in.1 }
 
 ```

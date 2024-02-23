@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Takes selected rows from dataframe
 
-```nushell
+```nu
 > let df = ([[a b]; [4 1] [5 2] [4 3]] | dfr into-df);
     let indices = ([0 2] | dfr into-df);
     $df | dfr take $indices
@@ -53,7 +53,7 @@ Takes selected rows from dataframe
 
 Takes selected rows from series
 
-```nushell
+```nu
 > let series = ([4 1 5 2 4 3] | dfr into-df);
     let indices = ([0 2] | dfr into-df);
     $series | dfr take $indices

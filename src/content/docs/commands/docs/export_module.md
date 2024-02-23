@@ -35,7 +35,7 @@ feature: default
 
 Define a custom command in a submodule of a module and call it
 
-```nushell
+```nu
 > module spam {
         export module eggs {
             export def foo [] { "foo" }

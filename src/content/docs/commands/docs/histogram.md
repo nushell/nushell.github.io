@@ -39,21 +39,21 @@ feature: default
 
 Compute a histogram of file types
 
-```nushell
+```nu
 > ls | histogram type
 
 ```
 
 Compute a histogram for the types of files, with frequency column named freq
 
-```nushell
+```nu
 > ls | histogram type freq
 
 ```
 
 Compute a histogram for a list of numbers
 
-```nushell
+```nu
 > [1 2 1] | histogram
 ╭───┬───────┬───────┬──────────┬────────────┬────────────────────────────────────────────────────────────────────╮
 │ # │ value │ count │ quantile │ percentage │                             frequency                              │
@@ -66,7 +66,7 @@ Compute a histogram for a list of numbers
 
 Compute a histogram for a list of numbers, and percentage is based on the maximum value
 
-```nushell
+```nu
 > [1 2 3 1 1 1 2 2 1 1] | histogram --percentage-type relative
 
 ```

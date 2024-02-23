@@ -34,14 +34,14 @@ feature: default
 
 Convert binary .xlsx data to a table
 
-```nushell
+```nu
 > open --raw test.xlsx | from xlsx
 
 ```
 
 Convert binary .xlsx data to a table, specifying the tables
 
-```nushell
+```nu
 > open --raw test.xlsx | from xlsx --sheets [Spreadsheet1]
 
 ```

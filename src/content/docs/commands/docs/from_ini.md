@@ -34,7 +34,7 @@ Command `from ini` resides in [plugin](/book/plugins) [`nu_plugin_formats`](http
 
 Converts ini formatted string to record
 
-```nushell
+```nu
 > '[foo]
 a=1
 b=2' | from ini

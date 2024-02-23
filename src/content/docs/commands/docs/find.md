@@ -44,21 +44,21 @@ feature: default
 
 Search for multiple terms in a command output
 
-```nushell
+```nu
 > ls | find toml md sh
 
 ```
 
 Search and highlight text for a term in a string
 
-```nushell
+```nu
 > 'Cargo.toml' | find toml
 Cargo.toml
 ```
 
 Search a number or a file size in a list of numbers
 
-```nushell
+```nu
 > [1 5 3kb 4 3Mb] | find 5 3kb
 ╭───┬─────────╮
 │ 0 │       5 │
@@ -69,7 +69,7 @@ Search a number or a file size in a list of numbers
 
 Search a char in a list of string
 
-```nushell
+```nu
 > [moe larry curly] | find l
 ╭───┬───────╮
 │ 0 │ larry │
@@ -80,7 +80,7 @@ Search a char in a list of string
 
 Find using regex
 
-```nushell
+```nu
 > [abc bde arc abf] | find --regex "ab"
 ╭───┬─────╮
 │ 0 │ abc │
@@ -91,7 +91,7 @@ Find using regex
 
 Find using regex case insensitive
 
-```nushell
+```nu
 > [aBc bde Arc abf] | find --regex "ab" -i
 ╭───┬─────╮
 │ 0 │ aBc │
@@ -102,7 +102,7 @@ Find using regex case insensitive
 
 Find value in records using regex
 
-```nushell
+```nu
 > [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find --regex "nu"
 ╭───┬─────────┬─────────╮
 │ # │ version │  name   │
@@ -114,7 +114,7 @@ Find value in records using regex
 
 Find inverted values in records using regex
 
-```nushell
+```nu
 > [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find --regex "nu" --invert
 ╭───┬─────────┬──────╮
 │ # │ version │ name │
@@ -127,7 +127,7 @@ Find inverted values in records using regex
 
 Find value in list using regex
 
-```nushell
+```nu
 > [["Larry", "Moe"], ["Victor", "Marina"]] | find --regex "rr"
 ╭───┬───────────────╮
 │ 0 │ ╭───┬───────╮ │
@@ -140,7 +140,7 @@ Find value in list using regex
 
 Find inverted values in records using regex
 
-```nushell
+```nu
 > [["Larry", "Moe"], ["Victor", "Marina"]] | find --regex "rr" --invert
 ╭───┬────────────────╮
 │ 0 │ ╭───┬────────╮ │
@@ -153,14 +153,14 @@ Find inverted values in records using regex
 
 Remove ANSI sequences from result
 
-```nushell
+```nu
 > [[foo bar]; [abc 123] [def 456]] | find 123 | get bar | ansi strip
 
 ```
 
 Find and highlight text in specific columns
 
-```nushell
+```nu
 > [[col1 col2 col3]; [moe larry curly] [larry curly moe]] | find moe --columns [col1]
 ╭───┬──────┬───────┬───────╮
 │ # │ col1 │ col2  │ col3  │

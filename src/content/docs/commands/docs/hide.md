@@ -35,14 +35,14 @@ feature: default
 
 Hide the alias just defined
 
-```nushell
+```nu
 > alias lll = ls -l; hide lll
 
 ```
 
 Hide a custom command
 
-```nushell
+```nu
 > def say-hi [] { echo 'Hi!' }; hide say-hi
 
 ```

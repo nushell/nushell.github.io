@@ -37,28 +37,28 @@ feature: default
 
 Explore the system information record
 
-```nushell
+```nu
 > sys | explore
 
 ```
 
 Explore the output of `ls` without column names
 
-```nushell
+```nu
 > ls | explore --head false
 
 ```
 
 Explore a list of Markdown files' contents, with row indexes
 
-```nushell
+```nu
 > glob *.md | each {|| open } | explore --index
 
 ```
 
 Explore a JSON file, then save the last visited sub-structure to a file
 
-```nushell
+```nu
 > open file.json | explore --peek | to json | save part.json
 
 ```

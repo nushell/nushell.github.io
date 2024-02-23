@@ -35,21 +35,21 @@ feature: default
 
 Times a command within a closure
 
-```nushell
+```nu
 > timeit { sleep 500ms }
 
 ```
 
 Times a command using an existing input
 
-```nushell
+```nu
 > http get https://www.nushell.sh/book/ | timeit { split chars }
 
 ```
 
 Times a command invocation
 
-```nushell
+```nu
 > timeit ls -la
 
 ```

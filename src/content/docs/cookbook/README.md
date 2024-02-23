@@ -19,7 +19,7 @@ written for Nushell.
 
 And if you are looking for cool oneliners like this one
 
-```nushell
+```nu
 (http get https://api.chucknorris.io/jokes/random).value
 ```
 

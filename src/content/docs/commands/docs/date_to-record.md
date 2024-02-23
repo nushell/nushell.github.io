@@ -31,21 +31,21 @@ feature: default
 
 Convert the current date into a record.
 
-```nushell
+```nu
 > date to-record
 
 ```
 
 Convert the current date into a record.
 
-```nushell
+```nu
 > date now | date to-record
 
 ```
 
 Convert a date string into a record.
 
-```nushell
+```nu
 > '2020-04-12T22:10:57.123+02:00' | date to-record
 ╭────────────┬───────────╮
 │ year       │ 2020      │
@@ -61,7 +61,7 @@ Convert a date string into a record.
 
 Convert a date into a record.
 
-```nushell
+```nu
 > '2020-04-12 22:10:57 +0200' | into datetime | date to-record
 ╭────────────┬────────╮
 │ year       │ 2020   │

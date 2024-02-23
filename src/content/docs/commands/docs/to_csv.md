@@ -36,7 +36,7 @@ feature: default
 
 Outputs an CSV string representing the contents of this table
 
-```nushell
+```nu
 > [[foo bar]; [1 2]] | to csv
 foo,bar
 1,2
@@ -45,7 +45,7 @@ foo,bar
 
 Outputs an CSV string representing the contents of this table
 
-```nushell
+```nu
 > [[foo bar]; [1 2]] | to csv --separator ';'
 foo;bar
 1;2
@@ -54,7 +54,7 @@ foo;bar
 
 Outputs an CSV string representing the contents of this record
 
-```nushell
+```nu
 > {a: 1 b: 2} | to csv
 a,b
 1,2

@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Counts unique values
 
-```nushell
+```nu
 > [1 1 2 2 3 3 4] | dfr into-df | dfr n-unique
 ╭───┬──────────────╮
 │ # │ count_unique │
@@ -46,7 +46,7 @@ Counts unique values
 
 Creates a is n-unique expression from a column
 
-```nushell
+```nu
 > dfr col a | dfr n-unique
 
 ```

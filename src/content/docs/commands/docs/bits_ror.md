@@ -44,14 +44,14 @@ Command `bits ror` was not included in the official binaries by default, you hav
 
 Rotate right a number with 60 bits
 
-```nushell
+```nu
 > 17 | bits ror 60
 272
 ```
 
 Rotate right a list of numbers of one byte
 
-```nushell
+```nu
 > [15 33 92] | bits ror 2 --number-bytes '1'
 ╭───┬─────╮
 │ 0 │ 195 │

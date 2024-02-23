@@ -43,21 +43,21 @@ feature: default
 
 Get headers from example.com
 
-```nushell
+```nu
 > http head https://www.example.com
 
 ```
 
 Get headers from example.com, with username and password
 
-```nushell
+```nu
 > http head --user myuser --password mypass https://www.example.com
 
 ```
 
 Get headers from example.com, with custom header
 
-```nushell
+```nu
 > http head --headers [my-header-key my-header-value] https://www.example.com
 
 ```

@@ -42,14 +42,14 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Sample rows from dataframe
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr sample --n-rows 1
 
 ```
 
 Shows sample row using fraction and replace
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4] [5 6]] | dfr into-df | dfr sample --fraction 0.5 --replace
 
 ```

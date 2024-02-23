@@ -34,21 +34,21 @@ feature: default
 
 Check if a string is empty
 
-```nushell
+```nu
 > '' | is-empty
 true
 ```
 
 Check if a list is empty
 
-```nushell
+```nu
 > [] | is-empty
 true
 ```
 
 Check if more than one column are empty
 
-```nushell
+```nu
 > [[meal size]; [arepa small] [taco '']] | is-empty meal size
 false
 ```

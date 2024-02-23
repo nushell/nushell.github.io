@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Creates a named column expression and converts it to a nu object
 
-```nushell
+```nu
 > dfr col a | dfr into-nu
 ╭───────┬────────╮
 │ expr  │ column │

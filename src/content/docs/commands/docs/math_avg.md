@@ -38,21 +38,21 @@ feature: default
 
 Compute the average of a list of numbers
 
-```nushell
+```nu
 > [-50 100.0 25] | math avg
 25
 ```
 
 Compute the average of a list of durations
 
-```nushell
+```nu
 > [2sec 1min] | math avg
 31sec
 ```
 
 Compute the average of each column in a table
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | math avg
 ╭───┬───╮
 │ a │ 2 │

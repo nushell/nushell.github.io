@@ -41,7 +41,7 @@ Command `decode hex` was not included in the official binaries by default, you h
 
 Hex decode a value and output as binary
 
-```nushell
+```nu
 > '0102030A0a0B' | decode hex
 Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 00000000:   01 02 03 0a  0a 0b                                   •••__•
@@ -50,7 +50,7 @@ Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 
 Whitespaces are allowed to be between hex digits
 
-```nushell
+```nu
 > '01 02  03 0A 0a 0B' | decode hex
 Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 00000000:   01 02 03 0a  0a 0b                                   •••__•

@@ -37,14 +37,14 @@ feature: default
 
 get the edit distance between two strings
 
-```nushell
+```nu
 > 'nushell' | str distance 'nutshell'
 1
 ```
 
 Compute edit distance between strings in table and another string, using cell paths
 
-```nushell
+```nu
 > [{a: 'nutshell' b: 'numetal'}] | str distance 'nushell' 'a' 'b'
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -56,7 +56,7 @@ Compute edit distance between strings in table and another string, using cell pa
 
 Compute edit distance between strings in record and another string, using cell paths
 
-```nushell
+```nu
 > {a: 'nutshell' b: 'numetal'} | str distance 'nushell' a b
 ╭───┬───╮
 │ a │ 1 │

@@ -30,7 +30,7 @@ feature: default
 
 Get current history session
 
-```nushell
+```nu
 > history session
 
 ```

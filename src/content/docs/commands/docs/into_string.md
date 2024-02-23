@@ -48,77 +48,77 @@ feature: default
 
 convert int to string and append three decimal places
 
-```nushell
+```nu
 > 5 | into string --decimals 3
 5.000
 ```
 
 convert float to string and round to nearest integer
 
-```nushell
+```nu
 > 1.7 | into string --decimals 0
 2
 ```
 
 convert float to string
 
-```nushell
+```nu
 > 1.7 | into string --decimals 1
 1.7
 ```
 
 convert float to string and limit to 2 decimals
 
-```nushell
+```nu
 > 1.734 | into string --decimals 2
 1.73
 ```
 
 convert float to string
 
-```nushell
+```nu
 > 4.3 | into string
 4.3
 ```
 
 convert string to string
 
-```nushell
+```nu
 > '1234' | into string
 1234
 ```
 
 convert boolean to string
 
-```nushell
+```nu
 > true | into string
 true
 ```
 
 convert date to string
 
-```nushell
+```nu
 > '2020-10-10 10:00:00 +02:00' | into datetime | into string
 Sat Oct 10 10:00:00 2020
 ```
 
 convert filepath to string
 
-```nushell
+```nu
 > ls Cargo.toml | get name | into string
 
 ```
 
 convert filesize to string
 
-```nushell
+```nu
 > 1KiB | into string
 1.0 KiB
 ```
 
 convert duration to string
 
-```nushell
+```nu
 > 9day | into string
 1wk 2day
 ```

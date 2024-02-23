@@ -42,7 +42,7 @@ feature: default
 
 Disk usage of the current directory
 
-```nushell
+```nu
 > du
 
 ```

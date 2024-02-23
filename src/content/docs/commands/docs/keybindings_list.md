@@ -38,21 +38,21 @@ feature: default
 
 Get list of key modifiers
 
-```nushell
+```nu
 > keybindings list --modifiers
 
 ```
 
 Get list of reedline events and edit commands
 
-```nushell
+```nu
 > keybindings list -e -d
 
 ```
 
 Get list with all the available options
 
-```nushell
+```nu
 > keybindings list
 
 ```

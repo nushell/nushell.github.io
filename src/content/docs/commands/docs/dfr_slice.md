@@ -39,7 +39,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Create new dataframe from a slice of the rows
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr slice 0 1
 ╭───┬───┬───╮
 │ # │ a │ b │

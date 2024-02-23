@@ -30,7 +30,7 @@ feature: default
 
 Display Nu version
 
-```nushell
+```nu
 > version
 
 ```

@@ -30,7 +30,7 @@ feature: default
 
 Describe the type of a string
 
-```nushell
+```nu
 > 'let x = 3' | nu-highlight
 
 ```

@@ -31,7 +31,7 @@ feature: default
 
 Apply the floor function to a list of numbers
 
-```nushell
+```nu
 > [1.5 2.3 -3.1] | math floor
 ╭───┬────╮
 │ 0 │  1 │

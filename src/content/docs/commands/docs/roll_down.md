@@ -38,7 +38,7 @@ Command `roll down` was not included in the official binaries by default, you ha
 
 Rolls rows down of a table
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4] [5 6]] | roll down
 ╭───┬───┬───╮
 │ # │ a │ b │

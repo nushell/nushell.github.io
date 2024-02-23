@@ -30,7 +30,7 @@ feature: default
 
 Show the aliases in the current scope
 
-```nushell
+```nu
 > scope aliases
 
 ```

@@ -18,7 +18,7 @@ echo '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}' | jq -r '.'
 
 In `nu`, we need to be explicit because Nushell has a wider range of input choices:
 
-```nushell
+```nu
 '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}'
 | from json
 ```
@@ -34,7 +34,7 @@ Output:
 
 The output for `jq` is a JSON string whereas in `nu` it's a Nushell value. To get the output of any pipeline as JSON, simply apply a [`to json`](/commands/docs/to_json) at the end:
 
-```nushell
+```nu
 '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
 | from json
 | to json
@@ -83,7 +83,7 @@ echo '{"name": "Alice", "age": 30}' | jq -r '.name'
 
 In `nu` we do:
 
-```nushell
+```nu
 '{"name": "Alice", "age": 30}' | from json | get name
 ```
 
@@ -104,7 +104,7 @@ jq -r '.[] | select(.age > 28)'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
 | from json
 | where age > 28
@@ -129,7 +129,7 @@ jq -r 'map(. * 2)'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[1, 2, 3, 4, 5]'
 | from json
 | each { |x| $x * 2 }
@@ -149,7 +149,7 @@ Output:
 
 Note that you can rely on the `$in` auto-binding for a slightly more compact block:
 
-```nushell
+```nu
 '[1, 2, 3, 4, 5]'
 | from json
 | each { $in * 2 }
@@ -166,7 +166,7 @@ jq -r '.items | map({(.name): (.price * 2)}) | add'
 
 In `nu` we do:
 
-```nushell
+```nu
 '{"items": [{"name": "Apple", "price": 1}, {"name": "Banana", "price": 0.5}]}'
 | from json
 | get items
@@ -197,7 +197,7 @@ jq -r 'sort'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[3, 1, 4, 2, 5]'
 | from json
 | sort
@@ -226,7 +226,7 @@ jq -r 'unique'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[1, 2, 2, 3, 4, 4, 5]'
 | from json
 | uniq
@@ -255,7 +255,7 @@ jq -r '.[] | select(.age > 28) | .name'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
 | from json
 | where age > 28
@@ -281,7 +281,7 @@ jq -r '.name | split(" ") | .[0]'
 
 In `nu` we do:
 
-```nushell
+```nu
 '{"name": "Alice Smith"}'
 | from json
 | get name
@@ -306,7 +306,7 @@ jq -r 'if .age > 18 then "Adult" else "Child" end'
 
 In `nu` we do:
 
-```nushell
+```nu
 '{"name": "Alice", "age": 30}'
 | from json
 | if $in.age > 18 { "Adult" } else { "Child" }
@@ -327,7 +327,7 @@ jq -r 'map(select(. != null))'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[1, null, 3, null, 5]'
 | from json
 | where { $in != null }
@@ -345,7 +345,7 @@ Output:
 
 Alternatively, you can use [`compact`](/commands/docs/compact):
 
-```nushell
+```nu
 '[1, null, 3, null, 5]'
 | from json
 | compact
@@ -362,7 +362,7 @@ jq -r "Name: \(.name), Age: \(.age)"
 
 In `nu` we do:
 
-```nushell
+```nu
 '{"name": "Alice", "age": 30}'
 | from json
 | items { |key, value| ["Name" $value] | str join ": " }
@@ -377,7 +377,7 @@ Name: Alice, Name: 30
 
 This approach is a bit involved but if we [install the full version](https://github.com/nushell/nushell/releases) which includes the _extra commands_ we can benefit from the [`format`](/commands/docs/format):
 
-```nushell
+```nu
 '{"name": "Alice", "age": 30}'
 | from json
 | format "Name: {name}, Age: {age}"
@@ -394,7 +394,7 @@ jq -r '{name: .name, age: (.age + 5)}'
 
 In `nu` we do:
 
-```nushell
+```nu
 '{"name": "Alice", "age": 30}'
 | from json
 | {name: $in.name, age: ($in.age + 5)}
@@ -422,7 +422,7 @@ jq -r '.. | .value?'
 
 In `nu`, there is no built-in command to achieve this, however, we can define our own reusable commands. See the [Appendix: Custom commands](#appendix-custom-commands) for an implementation of the command `cherry-pick` shown in the example below.
 
-```nushell
+```nu
 '{"data": {"value": 42, "nested": {"value": 24}}}'
 | from json
 | cherry-pick { |x| $x.value? }
@@ -449,7 +449,7 @@ jq -r '.data[].values[] | select(. > 3)'
 
 In `nu` we can take advantage of the fact that [a list of records is in fact a table](/book/types_of_data#tables) and simply do:
 
-```nushell
+```nu
 '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}'
 | from json
 | get data.values
@@ -478,7 +478,7 @@ jq -r 'paths as $p | select(getpath($p) | type != "object") | ($p | join(".")) +
 
 In `nu`, there is no built-in command to achieve this. See the [Appendix: Custom commands](#appendix-custom-commands) for an implementation of the command `flatten record-paths` shown in the example below.
 
-```nushell
+```nu
 '{"person": {"name": {"first": "Alice", "last": "Smith"}, "age": 30}}'
 | from json
 | flatten record-paths
@@ -507,7 +507,7 @@ jq -r 'recurse | .value? | select(. != null) | { value: (. * 5) } | add'
 
 In `nu`, there is no built-in function equivalent to `recurse`. However, we can reuse the solution from [Filtering nested items](#filtering-nested-items) to extract the values to manipulate:
 
-```nushell
+```nu
 '{"data": {"value": 42, "nested": {"value": 24}}}'
 | from json
 | cherry-pick { |x| $x.value? }
@@ -535,7 +535,7 @@ jq -r 'walk(if type == "number" then . * 2 else . end)'
 
 In `nu`, there is no built-in function to achieve this. See the [Appendix: Custom commands](#appendix-custom-commands) for an implementation of the command `filter-map` shown in the example below.
 
-```nushell
+```nu
 '{"data": {"values": [1, 2, 3], "nested": {"values": [4, 5, 6]}}}'
 | from json
 | filter-map {|value| if ($value | describe) == "int" { $value * 2 } else { $value }}
@@ -575,7 +575,7 @@ jq -r 'group_by(.category)'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
@@ -614,7 +614,7 @@ jq -r 'group_by(.category) | map({category: .[0].category, sum: map(.value) | ad
 
 In `nu` we do:
 
-```nushell
+```nu
 '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
@@ -633,7 +633,7 @@ jq -r 'group_by(.category) | map({category: .[0].category, sum: (map(.value) | a
 
 In `nu` we do:
 
-```nushell
+```nu
 '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
@@ -663,7 +663,7 @@ jq -r 'reduce .[] as $item (0; . + $item.value)'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[{"value": 10}, {"value": 20}, {"value": 30}]'
 | from json
 | reduce -f 0 { |item, acc| $acc + $item.value }
@@ -688,7 +688,7 @@ jq -r 'map(.score) | add / length'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[{"score": 90}, {"score": 85}, {"score": 95}]'
 | from json
 | get score
@@ -712,7 +712,7 @@ jq -r 'group_by(. / 5 | floor * 5) | map({ bin: .[0], count: length })'
 
 In `nu` we do:
 
-```nushell
+```nu
 '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]'
 | from json
 | group-by --to-table { $in // 5 * 5 }
@@ -738,7 +738,7 @@ Note that if what you are after is computing a histogram, you can benefit from t
 
 This section provides the implementation of the custom commands used in this cookbook. Note that they are illustrative and in no way optimised for large inputs. If you are interested in that, [plugins](/book/plugins) will likely be the answer as they can be written in general purpose languages such as Rust or Python.
 
-```nushell
+```nu
 > use toolbox.nu *
 > help commands | where command_type == "custom"
 ```
@@ -753,7 +753,7 @@ This section provides the implementation of the custom commands used in this coo
 ╰──────┴─────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-```nushell title="toolbox.nu"
+```nu title="toolbox.nu"
 use std assert
 
 # A command for cherry-picking values from a record key recursively

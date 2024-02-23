@@ -36,21 +36,21 @@ feature: default
 
 Outputs an XML string representing the contents of this table
 
-```nushell
+```nu
 > {tag: note attributes: {} content : [{tag: remember attributes: {} content : [{tag: null attributes: null content : Event}]}]} | to xml
 <note><remember>Event</remember></note>
 ```
 
 When formatting xml null and empty record fields can be omitted and strings can be written without a wrapping record
 
-```nushell
+```nu
 > {tag: note content : [{tag: remember content : [Event]}]} | to xml
 <note><remember>Event</remember></note>
 ```
 
 Optionally, formats the text with a custom indentation setting
 
-```nushell
+```nu
 > {tag: note content : [{tag: remember content : [Event]}]} | to xml --indent 3
 <note>
    <remember>Event</remember>
@@ -59,14 +59,14 @@ Optionally, formats the text with a custom indentation setting
 
 Produce less escaping sequences in resulting xml
 
-```nushell
+```nu
 > {tag: note attributes: {a: "'qwe'\\"} content: ["\"'"]} | to xml --partial-escape
 <note a="'qwe'\">"'</note>
 ```
 
 Save space using self-closed tags
 
-```nushell
+```nu
 > {tag: root content: [[tag]; [a] [b] [c]]} | to xml --self-closed
 <root><a/><b/><c/></root>
 ```

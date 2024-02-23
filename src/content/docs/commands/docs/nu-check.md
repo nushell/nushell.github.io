@@ -41,56 +41,56 @@ feature: default
 
 Parse a input file as script(Default)
 
-```nushell
+```nu
 > nu-check script.nu
 
 ```
 
 Parse a input file as module
 
-```nushell
+```nu
 > nu-check --as-module module.nu
 
 ```
 
 Parse a input file by showing error message
 
-```nushell
+```nu
 > nu-check --debug script.nu
 
 ```
 
 Parse an external stream as script by showing error message
 
-```nushell
+```nu
 > open foo.nu | nu-check --debug script.nu
 
 ```
 
 Parse an internal stream as module by showing error message
 
-```nushell
+```nu
 > open module.nu | lines | nu-check --debug --as-module module.nu
 
 ```
 
 Parse a string as script
 
-```nushell
+```nu
 > $'two(char nl)lines' | nu-check
 
 ```
 
 Heuristically parse which begins with script first, if it sees a failure, try module afterwards
 
-```nushell
+```nu
 > nu-check -a script.nu
 
 ```
 
 Heuristically parse by showing error message
 
-```nushell
+```nu
 > open foo.nu | lines | nu-check --all --debug
 
 ```

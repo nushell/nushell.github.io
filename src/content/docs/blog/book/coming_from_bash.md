@@ -5,7 +5,7 @@ title: Coming from Bash
 If you're coming from `Git Bash` on Windows, then the external commands you're used to (bash, grep, etc) will not be available in `nu` by default (unless you had explicitly made them available in the Windows Path environment variable).
 To make these commands available in `nu` as well, add the following line to your `config.nu` with either `append` or `prepend`.
 
-```nushell title="config.nu"
+```nu title="config.nu"
 $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 

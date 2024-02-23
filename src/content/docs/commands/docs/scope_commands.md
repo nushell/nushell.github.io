@@ -30,7 +30,7 @@ feature: default
 
 Show the commands in the current scope
 
-```nushell
+```nu
 > scope commands
 
 ```

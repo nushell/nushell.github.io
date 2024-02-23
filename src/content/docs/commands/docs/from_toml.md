@@ -30,7 +30,7 @@ feature: default
 
 Converts toml formatted string to record
 
-```nushell
+```nu
 > 'a = 1' | from toml
 ╭───┬───╮
 │ a │ 1 │
@@ -39,7 +39,7 @@ Converts toml formatted string to record
 
 Converts toml formatted string to record
 
-```nushell
+```nu
 > 'a = 1
 b = [1, 2]' | from toml
 ╭───┬───────────╮

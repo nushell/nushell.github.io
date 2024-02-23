@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Reverses the dataframe.
 
-```nushell
+```nu
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr reverse
 ╭───┬───┬───╮
 │ # │ a │ b │

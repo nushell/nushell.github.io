@@ -39,14 +39,14 @@ feature: default
 
 Reject a column in the `ls` table
 
-```nushell
+```nu
 > ls | reject modified
 
 ```
 
 Reject a column in a table
 
-```nushell
+```nu
 > [[a, b]; [1, 2]] | reject a
 ╭───┬───╮
 │ # │ b │
@@ -58,7 +58,7 @@ Reject a column in a table
 
 Reject a row in a table
 
-```nushell
+```nu
 > [[a, b]; [1, 2] [3, 4]] | reject 1
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -70,7 +70,7 @@ Reject a row in a table
 
 Reject the specified field in a record
 
-```nushell
+```nu
 > {a: 1, b: 2} | reject a
 ╭───┬───╮
 │ b │ 2 │
@@ -79,7 +79,7 @@ Reject the specified field in a record
 
 Reject a nested field in a record
 
-```nushell
+```nu
 > {a: {b: 3, c: 5}} | reject a.b
 ╭───┬───────────╮
 │   │ ╭───┬───╮ │
@@ -90,14 +90,14 @@ Reject a nested field in a record
 
 Reject columns by a provided list of columns
 
-```nushell
+```nu
 > let cols = [size type];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject $cols
 
 ```
 
 Reject columns by a list of columns directly
 
-```nushell
+```nu
 > [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject ["size", "type"]
 ╭───┬────────────╮
 │ # │    name    │
@@ -110,7 +110,7 @@ Reject columns by a list of columns directly
 
 Reject rows by a provided list of rows
 
-```nushell
+```nu
 > let rows = [0 2];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb] [file.json json 3kb]] | reject $rows
 
 ```

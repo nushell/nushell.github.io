@@ -34,42 +34,42 @@ feature: default
 
 View the source of a code block
 
-```nushell
+```nu
 > let abc = {|| echo 'hi' }; view source $abc
 {|| echo 'hi' }
 ```
 
 View the source of a custom command
 
-```nushell
+```nu
 > def hi [] { echo 'Hi!' }; view source hi
 def hi [] { echo 'Hi!' }
 ```
 
 View the source of a custom command, which participates in the caller environment
 
-```nushell
+```nu
 > def --env foo [] { $env.BAR = 'BAZ' }; view source foo
 def foo [] { $env.BAR = 'BAZ' }
 ```
 
 View the source of a custom command with flags and arguments
 
-```nushell
+```nu
 > def test [a?:any --b:int ...rest:string] { echo 'test' }; view source test
 def test [ a?: any --b: int ...rest: string] { echo 'test' }
 ```
 
 View the source of a module
 
-```nushell
+```nu
 > module mod-foo { export-env { $env.FOO_ENV = 'BAZ' } }; view source mod-foo
  export-env { $env.FOO_ENV = 'BAZ' }
 ```
 
 View the source of an alias
 
-```nushell
+```nu
 > alias hello = echo hi; view source hello
 echo hi
 ```

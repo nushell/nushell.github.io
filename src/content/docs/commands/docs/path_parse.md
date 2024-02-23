@@ -35,7 +35,7 @@ feature: default
 
 Parse a path
 
-```nushell
+```nu
 > '/home/viking/spam.txt' | path parse
 ╭───────────┬──────────────╮
 │ parent    │ /home/viking │
@@ -46,14 +46,14 @@ Parse a path
 
 Replace a complex extension
 
-```nushell
+```nu
 > '/home/viking/spam.tar.gz' | path parse --extension tar.gz | upsert extension { 'txt' }
 
 ```
 
 Ignore the extension
 
-```nushell
+```nu
 > '/etc/conf.d' | path parse --extension ''
 ╭───────────┬────────╮
 │ parent    │ /etc   │
@@ -64,7 +64,7 @@ Ignore the extension
 
 Parse all paths in a list
 
-```nushell
+```nu
 > [ /home/viking.d /home/spam.txt ] | path parse
 ╭───┬────────┬────────┬───────────╮
 │ # │ parent │  stem  │ extension │

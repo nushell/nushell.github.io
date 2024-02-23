@@ -35,7 +35,7 @@ Command `math cosh` was not included in the official binaries by default, you ha
 
 Apply the hyperbolic cosine to 1
 
-```nushell
+```nu
 > 1 | math cosh
 1.5430806348152435
 ```

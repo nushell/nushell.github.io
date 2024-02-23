@@ -34,7 +34,7 @@ feature: default
 
 Execute SQL against a SQLite database
 
-```nushell
+```nu
 > open foo.db | query db "SELECT * FROM Bar"
 
 ```

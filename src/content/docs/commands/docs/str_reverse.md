@@ -37,14 +37,14 @@ feature: default
 
 Reverse a single string
 
-```nushell
+```nu
 > 'Nushell' | str reverse
 llehsuN
 ```
 
 Reverse multiple strings in a list
 
-```nushell
+```nu
 > ['Nushell' 'is' 'cool'] | str reverse
 ╭───┬─────────╮
 │ 0 │ llehsuN │

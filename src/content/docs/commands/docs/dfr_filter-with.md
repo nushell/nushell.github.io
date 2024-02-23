@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Filter dataframe using a bool mask
 
-```nushell
+```nu
 > let mask = ([true false] | dfr into-df);
     [[a b]; [1 2] [3 4]] | dfr into-df | dfr filter-with $mask
 ╭───┬───┬───╮
@@ -51,7 +51,7 @@ Filter dataframe using a bool mask
 
 Filter dataframe using an expression
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr filter-with ((dfr col a) > 1)
 ╭───┬───┬───╮
 │ # │ a │ b │

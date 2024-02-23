@@ -42,7 +42,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Converts string to datetime
 
-```nushell
+```nu
 > ["2021-12-30 00:00:00" "2021-12-31 00:00:00"] | dfr into-df | dfr as-datetime "%Y-%m-%d %H:%M:%S"
 ╭───┬─────────────╮
 │ # │  datetime   │
@@ -55,7 +55,7 @@ Converts string to datetime
 
 Converts string to datetime with high resolutions
 
-```nushell
+```nu
 > ["2021-12-30 00:00:00.123456789" "2021-12-31 00:00:00.123456789"] | dfr into-df | dfr as-datetime "%Y-%m-%d %H:%M:%S.%9f"
 ╭───┬─────────────╮
 │ # │  datetime   │

@@ -35,7 +35,7 @@ Command `math ln` was not included in the official binaries by default, you have
 
 Get the natural logarithm of e
 
-```nushell
+```nu
 > 2.7182818 | math ln | math round --precision 4
 1
 ```

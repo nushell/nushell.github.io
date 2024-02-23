@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Create new dataframe with last rows
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr last 1
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -50,7 +50,7 @@ Create new dataframe with last rows
 
 Creates a last expression from a column
 
-```nushell
+```nu
 > dfr col a | dfr last
 
 ```

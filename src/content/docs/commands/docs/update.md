@@ -37,7 +37,7 @@ feature: default
 
 Update a column value
 
-```nushell
+```nu
 > {'name': 'nu', 'stars': 5} | update name 'Nushell'
 ╭───────┬─────────╮
 │ name  │ Nushell │
@@ -47,7 +47,7 @@ Update a column value
 
 Use a closure to alter each value in the 'authors' column to a single string
 
-```nushell
+```nu
 > [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|row| $row.authors | str join ',' }
 ╭───┬─────────┬──────────────────╮
 │ # │ project │     authors      │
@@ -59,7 +59,7 @@ Use a closure to alter each value in the 'authors' column to a single string
 
 You can also use a simple command to update 'authors' to a single string
 
-```nushell
+```nu
 > [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors { str join ',' }
 ╭───┬─────────┬──────────────────╮
 │ # │ project │     authors      │
@@ -71,7 +71,7 @@ You can also use a simple command to update 'authors' to a single string
 
 Update a value at an index in a list
 
-```nushell
+```nu
 > [1 2 3] | update 1 4
 ╭───┬───╮
 │ 0 │ 1 │
@@ -83,7 +83,7 @@ Update a value at an index in a list
 
 Use a closure to compute a new value at an index
 
-```nushell
+```nu
 > [1 2 3] | update 1 {|i| $i + 2 }
 ╭───┬───╮
 │ 0 │ 1 │

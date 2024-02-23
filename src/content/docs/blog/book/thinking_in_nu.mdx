@@ -32,7 +32,7 @@ An important part of Nushell's design and specifically where it differs from man
 
 For example, the following doesn't make sense in Nushell, and will fail to execute if run as a script:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 "def abc [] { 1 + 2 }" | save output.nu
 source "output.nu"
 abc
@@ -50,7 +50,7 @@ evaluator to run and evaluate the string, but unfortunately Nushell needs this i
 However, if `my_path` is a [constant](/book/variables_and_subexpressions#constant-variables), then this
 would work, since the string can be evaluated at compile-time:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 const my_path = ([$nu.home-path nushell] | path join)
 source $"($my_path)/common.nu" # sources /home/user/nushell/common.nu
 ```
@@ -81,7 +81,7 @@ Loop counters are another common pattern for mutable variables and are built int
 
 You can also use the [`reduce`](/commands/docs/reduce) command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [one, two, three, four, five, six] | reduce {|curr, max|
     if ($curr | str length) > ($max | str length) {
         $curr
@@ -101,7 +101,7 @@ In Nushell, blocks control their own environment. Changes to the environment are
 
 In practice, this lets you write some concise code for working with subdirectories, for example, if you wanted to build each sub-project in the current directory, you could run:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 ls | each { |it|
     cd $it.name
     make

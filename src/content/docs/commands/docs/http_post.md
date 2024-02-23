@@ -48,28 +48,28 @@ feature: default
 
 Post content to example.com
 
-```nushell
+```nu
 > http post https://www.example.com 'body'
 
 ```
 
 Post content to example.com, with username and password
 
-```nushell
+```nu
 > http post --user myuser --password mypass https://www.example.com 'body'
 
 ```
 
 Post content to example.com, with custom header
 
-```nushell
+```nu
 > http post --headers [my-header-key my-header-value] https://www.example.com
 
 ```
 
 Post content to example.com, with JSON body
 
-```nushell
+```nu
 > http post --content-type application/json https://www.example.com { field: value }
 
 ```

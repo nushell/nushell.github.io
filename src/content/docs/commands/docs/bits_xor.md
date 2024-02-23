@@ -39,14 +39,14 @@ Command `bits xor` was not included in the official binaries by default, you hav
 
 Apply bits xor to two numbers
 
-```nushell
+```nu
 > 2 | bits xor 2
 0
 ```
 
 Apply logical xor to a list of numbers
 
-```nushell
+```nu
 > [8 3 2] | bits xor 2
 ╭───┬────╮
 │ 0 │ 10 │

@@ -8,21 +8,21 @@ First, let's give a few example which you might intuitively try but which do not
 
 1. Sourcing a dynamic path (note that a constant would work, see [parse-time evaluation](#parse-time-evaluation))
 
-```nushell
+```nu
 let my_path = 'foo'
 source $"($my_path)/common.nu"
 ```
 
 2. Write to a file and source it in a single script
 
-```nushell
+```nu
 "def abc [] { 1 + 2 }" | save output.nu
 source "output.nu"
 ```
 
 3. Change a directory and source a path within (even though the file exists)
 
-```nushell
+```nu
 if ('spam/foo.nu' | path exists) {
     cd spam
     source-env foo.nu
@@ -37,7 +37,7 @@ The underlying reason why all of the above examples won't work is a strict separ
 
 Let's start with a simple "hello world" Nushell program:
 
-```nushell
+```nu
 # hello.nu
 
 print "Hello world!"
@@ -146,7 +146,7 @@ _Note: The following examples use [`source`](/commands/docs/source), but similar
 
 ### 1. Sourcing a dynamic path
 
-```nushell
+```nu
 let my_path = 'foo'
 source $"($my_path)/common.nu"
 ```
@@ -164,7 +164,7 @@ You can see the process is similar to the `eval` functionality we talked about e
 
 To give another perspective, here is why it is helpful to _think of Nushell as a compiled language_. Instead of
 
-```nushell
+```nu
 let my_path = 'foo'
 source $"($my_path)/common.nu"
 ```
@@ -189,7 +189,7 @@ If you've ever written a simple program in any of these languages, you can see t
 
 ### 2. Write to a file and source it in a single script
 
-```nushell
+```nu
 "def abc [] { 1 + 2 }" | save output.nu
 source "output.nu"
 ```
@@ -209,7 +209,7 @@ We're asking Nushell to read `output.nu` before it even exists. All the source c
 
 (We assume the `spam/foo.nu` file exists.)
 
-```nushell
+```nu
 if ('spam/foo.nu' | path exists) {
     cd spam
     source-env foo.nu
@@ -222,13 +222,13 @@ This one is similar to the previous example. `cd spam` changes the directory _du
 
 [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) is what happens when you run `nu` without any file. You launch an interactive prompt. By
 
-```nushell
+```nu
 > some code...
 ```
 
 we denote a REPL entry followed by pressing Enter. For example
 
-```nushell
+```nu
 > print "Hello world!"
 Hello world!
 
@@ -253,14 +253,14 @@ In other words, each REPL invocation is its own separate parse-evaluation sequen
 
 To give an example, we showed that
 
-```nushell
+```nu
 cd spam
 source-env foo.nu
 ```
 
 does not work because the directory will be changed _after_ [`source-env`](/commands/docs/source-env) attempts to read the file. Running these commands as separate REPL entries, however, works:
 
-```nushell
+```nu
 > cd spam
 
 > source-env foo.nu
@@ -285,14 +285,14 @@ While it is impossible to add parsing into the evaluation, we can add _a little 
 
 One pattern that this unlocks is being able to [`source`](/commands/docs/source)/[`use`](/commands/docs/use)/etc. a path from a "variable". We've seen that
 
-```nushell
+```nu
 let some_path = $nu.default-config-dir
 source $"($some_path)/common.nu"
 ```
 
 does not work, but we can do the following:
 
-```nushell
+```nu
 const some_path = $nu.default-config-dir
 source $"($some_path)/config.nu"
 ```
@@ -314,7 +314,7 @@ This still does not violate our rule of not having an eval function, because an 
 
 Also, note the \* in steps 1.1.1. and 1.2.1. The evaluation happening during parsing is very restricted and limited to only a small subset of what is normally allowed during a regular evaluation. For example, the following is not allowed:
 
-```nushell
+```nu
 const foo_contents = (open foo.nu)
 ```
 

@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Counts null values
 
-```nushell
+```nu
 > let s = ([1 1 0 0 3 3 4] | dfr into-df);
     ($s / $s) | dfr count-null
 ╭───┬────────────╮

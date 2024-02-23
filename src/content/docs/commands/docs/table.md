@@ -44,14 +44,14 @@ feature: default
 
 List the files in current directory, with indexes starting from 1
 
-```nushell
+```nu
 > ls | table --index 1
 
 ```
 
 Render data in table view
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | table
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -64,7 +64,7 @@ Render data in table view
 
 Render data in table view (expanded)
 
-```nushell
+```nu
 > [[a b]; [1 2] [2 [4 4]]] | table --expand
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -77,7 +77,7 @@ Render data in table view (expanded)
 
 Render data in table view (collapsed)
 
-```nushell
+```nu
 > [[a b]; [1 2] [2 [4 4]]] | table --collapse
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -90,28 +90,28 @@ Render data in table view (collapsed)
 
 Change the table theme to the specified theme for a single run
 
-```nushell
+```nu
 > [[a b]; [1 2] [2 [4 4]]] | table --theme basic
 
 ```
 
 Force showing of the #/index column for a single run
 
-```nushell
+```nu
 > [[a b]; [1 2] [2 [4 4]]] | table -i true
 
 ```
 
 Set the starting number of the #/index column to 100 for a single run
 
-```nushell
+```nu
 > [[a b]; [1 2] [2 [4 4]]] | table -i 100
 
 ```
 
 Force hiding of the #/index column for a single run
 
-```nushell
+```nu
 > [[a b]; [1 2] [2 [4 4]]] | table -i false
 
 ```

@@ -45,42 +45,42 @@ feature: default
 
 Returns index of string in input
 
-```nushell
+```nu
 >  'my_library.rb' | str index-of '.rb'
 10
 ```
 
 Count length using grapheme clusters
 
-```nushell
+```nu
 > '🇯🇵ほげ ふが ぴよ' | str index-of --grapheme-clusters 'ふが'
 4
 ```
 
 Returns index of string in input within a`rhs open range`
 
-```nushell
+```nu
 >  '.rb.rb' | str index-of '.rb' --range 1..
 3
 ```
 
 Returns index of string in input within a lhs open range
 
-```nushell
+```nu
 >  '123456' | str index-of '6' --range ..4
 -1
 ```
 
 Returns index of string in input within a range
 
-```nushell
+```nu
 >  '123456' | str index-of '3' --range 1..4
 2
 ```
 
 Returns index of string in input
 
-```nushell
+```nu
 >  '/this/is/some/path/file.txt' | str index-of '/' -e
 18
 ```

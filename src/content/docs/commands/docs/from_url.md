@@ -34,7 +34,7 @@ Command `from url` was not included in the official binaries by default, you hav
 
 Convert url encoded string into a record
 
-```nushell
+```nu
 > 'bread=baguette&cheese=comt%C3%A9&meat=ham&fat=butter' | from url
 ╭────────┬──────────╮
 │ bread  │ baguette │

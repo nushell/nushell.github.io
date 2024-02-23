@@ -42,7 +42,7 @@ feature: default
 
 Remove contents
 
-```nushell
+```nu
 > 0x[10 AA FF AA FF] | bytes remove 0x[10 AA]
 Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 00000000:   ff aa ff                                             ×××
@@ -51,7 +51,7 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 
 Remove all occurrences of find binary in record field
 
-```nushell
+```nu
 > { data: 0x[10 AA 10 BB 10] } | bytes remove --all 0x[10] data
 ╭──────┬────────────╮
 │ data │ [170, 187] │
@@ -60,7 +60,7 @@ Remove all occurrences of find binary in record field
 
 Remove occurrences of find binary from end
 
-```nushell
+```nu
 > 0x[10 AA 10 BB CC AA 10] | bytes remove --end 0x[10]
 Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 00000000:   10 aa 10 bb  cc aa                                   •×•×××
@@ -69,7 +69,7 @@ Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 
 Remove find binary from end not found
 
-```nushell
+```nu
 > 0x[10 AA 10 BB CC AA 10] | bytes remove --end 0x[11]
 Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
 00000000:   10 aa 10 bb  cc aa 10                                •×•×××•
@@ -78,7 +78,7 @@ Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
 
 Remove all occurrences of find binary in table
 
-```nushell
+```nu
 > [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes remove 0x[11] ColA ColC
 ╭───┬──────────┬──────────────┬──────────────╮
 │ # │   ColA   │     ColB     │     ColC     │

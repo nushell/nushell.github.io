@@ -36,7 +36,7 @@ feature: default
 
 Generate a sequence of numbers
 
-```nushell
+```nu
 > generate 0 {|i| if $i <= 10 { {out: $i, next: ($i + 2)} }}
 ╭───┬────╮
 │ 0 │  0 │
@@ -51,7 +51,7 @@ Generate a sequence of numbers
 
 Generate a stream of fibonacci numbers
 
-```nushell
+```nu
 > generate [0, 1] {|fib| {out: $fib.0, next: [$fib.1, ($fib.0 + $fib.1)]} } | first 10
 ╭───┬────╮
 │ 0 │  0 │

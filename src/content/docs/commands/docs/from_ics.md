@@ -34,7 +34,7 @@ Command `from ics` resides in [plugin](/book/plugins) [`nu_plugin_formats`](http
 
 Converts ics formatted string to table
 
-```nushell
+```nu
 > 'BEGIN:VCALENDAR
             END:VCALENDAR' | from ics
 ╭───┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮

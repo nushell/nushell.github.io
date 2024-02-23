@@ -11,19 +11,19 @@ You can use the [`error make`](/commands/docs/error_make) command to create your
 
 First, you can take the span of where the argument is coming from:
 
-```nushell
+```nu
 let span = (metadata $x).span;
 ```
 
 Next, you can create an error using the [`error make`](/commands/docs/error_make) command. This command takes in a record that describes the error to create:
 
-```nushell
+```nu
 error make {msg: "this is fishy", label: {text: "fish right here", span: $span } }
 ```
 
 Together with your custom command, it might look like this:
 
-```nushell
+```nu
 def my-command [x] {
     let span = (metadata $x).span;
     error make {
@@ -38,7 +38,7 @@ def my-command [x] {
 
 When called with a value, we'll now see an error message returned:
 
-```nushell
+```nu
 > my-command 100
 
 Error:

@@ -6,13 +6,13 @@ Nu provides a set of commands that you can use across different OSes ("internal"
 
 Nu internal command:
 
-```nushell
+```nu
 > ls
 ```
 
 Escape to external command:
 
-```nushell
+```nu
 > ^ls
 ```
 

@@ -34,7 +34,7 @@ feature: default
 
 Return early
 
-```nushell
+```nu
 > def foo [] { return }
 
 ```

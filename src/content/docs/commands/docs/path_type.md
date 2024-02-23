@@ -31,14 +31,14 @@ feature: default
 
 Show type of a filepath
 
-```nushell
+```nu
 > '.' | path type
 dir
 ```
 
 Show type of a filepaths in a list
 
-```nushell
+```nu
 > ls | get name | path type
 
 ```

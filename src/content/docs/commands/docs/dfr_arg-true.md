@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns indexes where values are true
 
-```nushell
+```nu
 > [false true false] | dfr into-df | dfr arg-true
 ╭───┬──────────╮
 │ # │ arg_true │

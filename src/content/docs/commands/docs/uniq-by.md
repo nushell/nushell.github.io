@@ -42,7 +42,7 @@ feature: default
 
 Get rows from table filtered by column uniqueness
 
-```nushell
+```nu
 > [[fruit count]; [apple 9] [apple 2] [pear 3] [orange 7]] | uniq-by fruit
 ╭───┬────────┬───────╮
 │ # │ fruit  │ count │

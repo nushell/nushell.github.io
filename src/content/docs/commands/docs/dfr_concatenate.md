@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Concatenate string
 
-```nushell
+```nu
 > let other = ([za xs cd] | dfr into-df);
     [abc abc abc] | dfr into-df | dfr concatenate $other
 ╭───┬───────╮

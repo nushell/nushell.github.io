@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Calculates value counts
 
-```nushell
+```nu
 > [5 5 5 5 6 6] | dfr into-df | dfr value-counts
 ╭───┬───┬───────╮
 │ # │ 0 │ count │

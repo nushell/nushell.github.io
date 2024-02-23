@@ -48,14 +48,14 @@ usage: |
 
 Query the HKEY_CURRENT_USER hive
 
-```nushell
+```nu
 > registry query --hkcu environment
 
 ```
 
 Query the HKEY_LOCAL_MACHINE hive
 
-```nushell
+```nu
 > registry query --hklm 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
 
 ```

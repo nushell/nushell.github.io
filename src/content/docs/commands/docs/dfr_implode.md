@@ -32,7 +32,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 ## Examples
 
-```nushell
+```nu
 >
 
 ```

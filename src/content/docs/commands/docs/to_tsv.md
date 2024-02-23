@@ -35,7 +35,7 @@ feature: default
 
 Outputs an TSV string representing the contents of this table
 
-```nushell
+```nu
 > [[foo bar]; [1 2]] | to tsv
 foobar
 12
@@ -44,7 +44,7 @@ foobar
 
 Outputs an TSV string representing the contents of this record
 
-```nushell
+```nu
 > {a: 1 b: 2} | to tsv
 ab
 12

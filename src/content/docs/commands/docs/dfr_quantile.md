@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 quantile value from columns in a dataframe
 
-```nushell
+```nu
 > [[a b]; [6 2] [1 4] [4 1]] | dfr into-df | dfr quantile 0.5
 ╭───┬──────┬──────╮
 │ # │  a   │  b   │

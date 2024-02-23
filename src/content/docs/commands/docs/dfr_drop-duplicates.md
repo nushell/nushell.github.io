@@ -43,7 +43,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 drop duplicates
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4] [1 2]] | dfr into-df | dfr drop-duplicates
 ╭───┬───┬───╮
 │ # │ a │ b │

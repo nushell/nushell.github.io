@@ -34,7 +34,7 @@ feature: default
 
 Append one int to a list
 
-```nushell
+```nu
 > [0 1 2 3] | append 4
 ╭───┬───╮
 │ 0 │ 0 │
@@ -48,7 +48,7 @@ Append one int to a list
 
 Append a list to an item
 
-```nushell
+```nu
 > 0 | append [1 2 3]
 ╭───┬───╮
 │ 0 │ 0 │
@@ -61,7 +61,7 @@ Append a list to an item
 
 Append a list of string to a string
 
-```nushell
+```nu
 > "a" | append ["b"]
 ╭───┬───╮
 │ 0 │ a │
@@ -72,7 +72,7 @@ Append a list of string to a string
 
 Append three int items
 
-```nushell
+```nu
 > [0 1] | append [2 3 4]
 ╭───┬───╮
 │ 0 │ 0 │
@@ -86,7 +86,7 @@ Append three int items
 
 Append ints and strings
 
-```nushell
+```nu
 > [0 1] | append [2 nu 4 shell]
 ╭───┬───────╮
 │ 0 │     0 │
@@ -101,7 +101,7 @@ Append ints and strings
 
 Append a range of ints to a list
 
-```nushell
+```nu
 > [0 1] | append 2..4
 ╭───┬───╮
 │ 0 │ 0 │

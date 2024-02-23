@@ -35,14 +35,14 @@ feature: default
 
 Check if a file exists
 
-```nushell
+```nu
 > '/home/joe/todo.txt' | path exists
 false
 ```
 
 Check if files in list exist
 
-```nushell
+```nu
 > [ /home/joe/todo.txt, /home/doe/todo.txt ] | path exists
 ╭───┬───────╮
 │ 0 │ false │

@@ -36,14 +36,14 @@ feature: default
 
 Find the maximum of a list of numbers
 
-```nushell
+```nu
 > [-50 100 25] | math max
 100
 ```
 
 Find the maxima of the columns of a table
 
-```nushell
+```nu
 > [{a: 1 b: 3} {a: 2 b: -1}] | math max
 ╭───┬───╮
 │ a │ 2 │
@@ -53,7 +53,7 @@ Find the maxima of the columns of a table
 
 Find the maximum of a list of dates
 
-```nushell
+```nu
 > [2022-02-02 2022-12-30 2012-12-12] | math max
 Fri, 30 Dec 2022 00:00:00 +0000 (a year ago)
 ```

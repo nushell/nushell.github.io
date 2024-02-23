@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Returns index for max value
 
-```nushell
+```nu
 > [1 3 2] | dfr into-df | dfr arg-max
 ╭───┬─────────╮
 │ # │ arg_max │

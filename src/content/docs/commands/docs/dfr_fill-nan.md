@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Fills the NaN values with 0
 
-```nushell
+```nu
 > [1 2 NaN 3 NaN] | dfr into-df | dfr fill-nan 0
 ╭───┬───╮
 │ # │ 0 │
@@ -54,7 +54,7 @@ Fills the NaN values with 0
 
 Fills the NaN values of a whole dataframe
 
-```nushell
+```nu
 > [[a b]; [0.2 1] [0.1 NaN]] | dfr into-df | dfr fill-nan 0
 ╭───┬──────┬───╮
 │ # │  a   │ b │

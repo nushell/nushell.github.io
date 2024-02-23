@@ -26,7 +26,7 @@ Andere Arten von Output geben die Daten aus der Pipeline zum Beispiel auf der Ko
 
 Die `$in` Variable sammelt die Daten in der Pipeline in einen Wert, um den ganzen Strom als Parameter verwenden zu können:
 
-```nushell
+```nu
 > echo 1 2 3 | $in.1 * $in.2
 6
 ```
@@ -35,7 +35,7 @@ Die `$in` Variable sammelt die Daten in der Pipeline in einen Wert, um den ganze
 
 Wenn eine Pipeline etwas lange wird für eine Zeile, kann sie mit `(` und `)` zu Unterausdrücken unterteilt werden:
 
-```nushell
+```nu
 (
     "01/22/2021" |
     parse "{month}/{day}/{year}" |

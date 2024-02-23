@@ -38,14 +38,14 @@ feature: default
 
 Create a simple custom error
 
-```nushell
+```nu
 > error make {msg: "my custom error message"}
 {msg: my custom error message, debug: GenericError { error: "my custom error message", msg: "", span: None, help: None, inner: [] }, raw: GenericError { error: "my custom error message", msg: "", span: None, help: None, inner: [] }}
 ```
 
 Create a more complex custom error
 
-```nushell
+```nu
 > error make {
         msg: "my custom error message"
         label: {
@@ -64,7 +64,7 @@ Create a more complex custom error
 
 Create a custom error for a custom command that shows the span of the argument
 
-```nushell
+```nu
 > def foo [x] {
         error make {
             msg: "this is fishy"

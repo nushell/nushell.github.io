@@ -42,7 +42,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Adds a series to the dataframe
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]]
     | dfr into-df
     | dfr with-column ([5 6] | dfr into-df) --name c
@@ -57,7 +57,7 @@ Adds a series to the dataframe
 
 Adds a series to the dataframe
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]]
     | dfr into-lazy
     | dfr with-column [

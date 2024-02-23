@@ -6,11 +6,11 @@ A dataframe example based on https://studioterabyte.nl/en/blog/polars-vs-pandas
 
 ## 1. Opening the file and show the shape of the DataFrame
 
-```nushell
+```nu
 let df = (dfr open NYCTaxi.csv)
 ```
 
-```nushell
+```nu
 $df | shape
 ```
 
@@ -28,7 +28,7 @@ Output:
 
 ## 2. Opening the file and show the first 5 rows
 
-```nushell
+```nu
 $df | first 5
 ```
 
@@ -57,7 +57,7 @@ Output:
 
 ## 3. Opening the file and get the length of all strings in the "id" column
 
-```nushell
+```nu
 let ids = ($df | first 5 | get id | str-lengths)
 $df | first 5 | append $ids | rename id_x vendor_id_length
 ```
@@ -87,7 +87,7 @@ Output:
 
 Here's an alternate approach using `with-column`
 
-```nushell
+```nu
 $df | first 5 | with-column ($df | first 5 | get id | str-lengths) --name vendor_id_length
 ```
 
@@ -116,7 +116,7 @@ Output:
 
 ## 4. Opening the file and apply a function to the "trip_duration" to divide the number by 60 to go from the second value to a minute value
 
-```nushell
+```nu
 $df | first 5 | with-column ((col trip_duration) / 60.0)
 ```
 
@@ -145,7 +145,7 @@ Output:
 
 ## 5. Opening the file and filtering out all rows with a trip duration shorther than 500 seconds
 
-```nushell
+```nu
 $df | filter-with ((col trip_duration) >= 500) | first 5
 ```
 
@@ -174,7 +174,7 @@ Output:
 
 ## 6. Opening the file, filtering out all the rows with a "Y" store_and_fwd_flag value, group by ID and calculate the mean duration time
 
-```nushell
+```nu
 $df | filter-with ((col store_and_fwd_flag) == "N") | group-by id | agg (col trip_duration | mean) | sort-by id | first 5
 ```
 

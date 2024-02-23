@@ -30,14 +30,14 @@ feature: default
 
 Run the external command to completion, capturing stdout and exit_code
 
-```nushell
+```nu
 > ^external arg1 | complete
 
 ```
 
 Run external command to completion, capturing, stdout, stderr and exit_code
 
-```nushell
+```nu
 > do { ^external arg1 } | complete
 
 ```

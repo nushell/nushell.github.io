@@ -42,21 +42,21 @@ feature: default
 
 Return the lengths of a string
 
-```nushell
+```nu
 > 'hello' | str length
 5
 ```
 
 Count length using grapheme clusters
 
-```nushell
+```nu
 > '🇯🇵ほげ ふが ぴよ' | str length  --grapheme-clusters
 9
 ```
 
 Return the lengths of multiple strings
 
-```nushell
+```nu
 > ['hi' 'there'] | str length
 ╭───┬───╮
 │ 0 │ 2 │

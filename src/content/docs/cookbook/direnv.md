@@ -11,7 +11,7 @@ Configuring direnv to work with nushell requires nushell version 0.66 or later.
 
 To make direnv work with nushell the way it does with other shells, we can use the "hooks" functionality:
 
-```nushell
+```nu
 $env.config = {
   hooks: {
     pre_prompt: [{ ||

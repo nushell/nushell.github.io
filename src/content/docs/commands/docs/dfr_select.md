@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Select a column from the dataframe
 
-```nushell
+```nu
 > [[a b]; [6 2] [4 2] [2 2]] | dfr into-df | dfr select a
 ╭───┬───╮
 │ # │ a │

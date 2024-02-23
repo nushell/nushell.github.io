@@ -35,7 +35,7 @@ feature: default
 
 Converts xml formatted string to record
 
-```nushell
+```nu
 > '<?xml version="1.0" encoding="UTF-8"?>
 <note>
   <remember>Event</remember>

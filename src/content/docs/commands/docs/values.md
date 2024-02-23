@@ -31,7 +31,7 @@ feature: default
 
 Get the values from the record (produce a list)
 
-```nushell
+```nu
 > { mode:normal userid:31415 } | values
 ╭───┬────────╮
 │ 0 │ normal │
@@ -42,7 +42,7 @@ Get the values from the record (produce a list)
 
 Values are ordered by the column order of the record
 
-```nushell
+```nu
 > { f:250 g:191 c:128 d:1024 e:2000 a:16 b:32 } | values
 ╭───┬──────╮
 │ 0 │  250 │
@@ -58,7 +58,7 @@ Values are ordered by the column order of the record
 
 Get the values from the table (produce a list of lists)
 
-```nushell
+```nu
 > [[name meaning]; [ls list] [mv move] [cd 'change directory']] | values
 ╭───┬──────────────────────────╮
 │ 0 │ ╭───┬────╮               │

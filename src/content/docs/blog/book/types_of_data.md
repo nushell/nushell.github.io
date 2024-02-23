@@ -10,7 +10,7 @@ Like many programming languages, Nu models data using a set of simple, and struc
 
 The [`describe`](/commands/docs/describe) command returns the type of a data value:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 42 | describe
 ```
 
@@ -39,7 +39,7 @@ The [`describe`](/commands/docs/describe) command returns the type of a data val
 Examples of integers (i.e. "round numbers") include 1, 0, -5, and 100.
 You can parse a string into an integer with the [`into int`](/commands/docs/into_int) command
 
-```nushell frame="terminal"
+```nu frame="terminal"
 "-5" | into int
 ```
 
@@ -48,7 +48,7 @@ You can parse a string into an integer with the [`into int`](/commands/docs/into
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
 You can cast a string into a Float with the [`into float`](/commands/docs/into_float) command
 
-```nushell frame="terminal"
+```nu frame="terminal"
 "1.2" | into float
 ```
 
@@ -73,7 +73,7 @@ See [Working with strings](working_with_strings) and [Handling Strings](https://
 
 There are just two boolean values: `true` and `false`. Rather than writing the values directly, they often result from a comparison:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let mybool = 2 > 1
 $mybool
 # outputs: true
@@ -112,14 +112,14 @@ Durations represent a length of time. This chart shows all durations currently s
 
 You can make fractional durations:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 3.14day
 # outputs: 3day 3hr 21min
 ```
 
 And you can do calculations with durations:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 # How many seconds in 30 days?
 30day / 1sec
 # outputs: 2592000
@@ -147,7 +147,7 @@ The full list of filesize units are:
 
 As with durations, you can make fractional file sizes, and do calculations:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 1Gb / 1b
 # 1000000000
 1Gib / 1b
@@ -194,7 +194,7 @@ Binary data, like the data from an image file, is a group of raw bytes.
 
 You can write binary as a literal using any of the `0x[...]`, `0b[...]`, or `0o[...]` forms:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 # Hexadecimal
 0x[1F FF]
 # Binary
@@ -213,7 +213,7 @@ Structured data builds from the simple data. For example, instead of a single in
 
 Records hold key-value pairs, which associate string keys with various data values. Record syntax is very similar to objects in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
 
-```nushell frame="terminal"
+```nu frame="terminal"
 {name: sam rank: 10}
 ```
 
@@ -224,7 +224,7 @@ A record is identical to a single row of a table (see below). You can think of a
 
 This means that any command that operates on a table's rows _also_ operates on records. For instance, [`insert`](/commands/docs/insert), which adds data to each of a table's rows, can be used with records:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 {x:3 y:1} | insert z 0
 ```
 
@@ -232,25 +232,25 @@ This means that any command that operates on a table's rows _also_ operates on r
 
 You can iterate over records by first transposing it into a table:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 {name: sam, rank: 10} | transpose key value
 ```
 
 Accessing records' data is done by placing a `.` before a string, which is usually a bare string:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 {x:12 y:4}.x
 ```
 
 However, if a record has a key name that can't be expressed as a bare string, or resembles an integer (see lists, below), you'll need to use more explicit string syntax, like so:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 {"1":true " ":false}." "
 ```
 
 To make a copy of a record with new fields, you can use the [spread operator](/book/operators#spread-operator) (`...`):
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let data = { name: alice, age: 50 }
 { ...$data, hobby: cricket }
 ```
@@ -259,14 +259,14 @@ let data = { name: alice, age: 50 }
 
 Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [sam fred george]
 ```
 
 :::tip
 Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where) can be used with lists:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [bell book candle] | where ($it =~ 'b')
 ```
 
@@ -274,20 +274,20 @@ Lists are equivalent to the individual columns of tables. You can think of a lis
 
 Accessing lists' data is done by placing a `.` before a bare integer:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [a b c].1
 ```
 
 To get a sub-list from a list, you can use the [`range`](/commands/docs/range) command:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [a b c d e f] | range 1..3
 ```
 
 To append one or more lists together, optionally with values interspersed in between, you can use the
 [spread operator](/book/operators#spread-operator) (`...`):
 
-```nushell frame="terminal"
+```nu frame="terminal"
 let x = [1 2]
 [...$x 3 ...(4..7 | take 2)]
 ```
@@ -298,26 +298,26 @@ The table is a core data structure in Nushell. As you run commands, you'll see t
 
 We can create our own tables similarly to how we create a list. Because tables also contain columns and not just values, we pass in the name of the column values:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [[column1, column2]; [Value1, Value2] [Value3, Value4]]
 ```
 
 You can also create a table as a list of records, JSON-style:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{name: sam, rank: 10}, {name: bob, rank: 7}]
 ```
 
 :::tip
 Internally, tables are simply **lists of records**. This means that any command which extracts or isolates a specific row of a table will produce a record. For example, `get 0`, when used on a list, extracts the first value. But when used on a table (a list of records), it extracts a record:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{x:12, y:5}, {x:3, y:6}] | get 0
 ```
 
 This is true regardless of which table syntax you use:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [[x,y];[12,5],[3,6]] | get 0
 ```
 
@@ -329,26 +329,26 @@ You can combine list and record data access syntax to navigate tables. When used
 
 You can access individual rows by number to obtain records:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{langs:[Rust JS Python], releases:60}].0
 [{langs:[Rust JS Python], releases:60}].0.langs.2
 ```
 
 Moreover, you can also access entire columns of a table by name, to obtain lists:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{x:12 y:5} {x:4 y:7} {x:2 y:2}].x
 ```
 
 Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the [`select`](/commands/docs/select) command with column names:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select y z
 ```
 
 To remove rows from a table, you'll commonly use the [`select`](/commands/docs/select) command with row numbers, as you would with a list:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select 1 2
 ```
 
@@ -356,7 +356,7 @@ To remove rows from a table, you'll commonly use the [`select`](/commands/docs/s
 
 By default, cell path access will fail if it can't access the requested row or column. To suppress these errors, you can add `?` to a cell path member to mark it as _optional_:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{foo: 123}, {}].foo?
 ```
 
@@ -373,7 +373,7 @@ You can also use a pipeline input as `$in` in most closures instead of providing
 Closures itself can be bound to a named variable and passed as a parameter.
 To call a closure directly in your code use the [`do`](/commands/docs/do) command.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 # Assign a closure to a variable
 let greet = { |name| print $"Hello ($name)"}
 do $greet "Julian"
@@ -389,7 +389,7 @@ Blocks don't close over variables, don't have parameters, and can't be passed as
 However, unlike closures, blocks can access mutable variable in the parent closure.
 For example, mutating a variable inside the block used in an [`if`](/commands/docs/if) call is valid:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 mut x = 1
 if true {
     $x += 1000
@@ -403,14 +403,14 @@ Finally, there is `null` which is the language's "nothing" value, similar to JSO
 
 You can place `null` at the end of a pipeline to replace the pipeline's output with it, and thus print nothing:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 git checkout featurebranch | null
 ```
 
 :::caution[warning]
 `null` is not the same as the absence of a value! It is possible for a table to be produced that has holes in some of its rows.
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{a:1 b:2} {b:1}]
 ```
 
@@ -418,7 +418,7 @@ As of Nushell 0.71, the absence of a value is printed as the ❎ emoji.
 
 Attempting to access this value will not produce `null`, but instead cause an error:
 
-```nushell frame="terminal"
+```nu frame="terminal"
 [{a:1 b:2} {b:1}].1.a
 Error: nu::shell::column_not_found
 

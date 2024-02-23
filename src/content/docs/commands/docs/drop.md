@@ -35,7 +35,7 @@ feature: default
 
 Remove the last item of a list
 
-```nushell
+```nu
 > [0,1,2,3] | drop
 ╭───┬───╮
 │ 0 │ 0 │
@@ -47,7 +47,7 @@ Remove the last item of a list
 
 Remove zero item of a list
 
-```nushell
+```nu
 > [0,1,2,3] | drop 0
 ╭───┬───╮
 │ 0 │ 0 │
@@ -60,7 +60,7 @@ Remove zero item of a list
 
 Remove the last two items of a list
 
-```nushell
+```nu
 > [0,1,2,3] | drop 2
 ╭───┬───╮
 │ 0 │ 0 │
@@ -71,7 +71,7 @@ Remove the last two items of a list
 
 Remove the last row in a table
 
-```nushell
+```nu
 > [[a, b]; [1, 2] [3, 4]] | drop 1
 ╭───┬───┬───╮
 │ # │ a │ b │

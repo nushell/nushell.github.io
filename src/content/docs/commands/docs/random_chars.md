@@ -34,14 +34,14 @@ feature: default
 
 Generate random chars
 
-```nushell
+```nu
 > random chars
 
 ```
 
 Generate random chars with specified length
 
-```nushell
+```nu
 > random chars --length 20
 
 ```

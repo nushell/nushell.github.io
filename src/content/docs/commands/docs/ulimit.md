@@ -47,42 +47,42 @@ feature: default
 
 Print all current limits
 
-```nushell
+```nu
 > ulimit -a
 
 ```
 
 Print specified limits
 
-```nushell
+```nu
 > ulimit --core-size --data-size --file-size
 
 ```
 
 Set limit
 
-```nushell
+```nu
 > ulimit --core-size 102400
 
 ```
 
 Set stack size soft limit
 
-```nushell
+```nu
 > ulimit -s -S 10240
 
 ```
 
 Set virtual memory size hard limit
 
-```nushell
+```nu
 > ulimit -v -H 10240
 
 ```
 
 Set core size limit to unlimited
 
-```nushell
+```nu
 > ulimit -c unlimited
 
 ```

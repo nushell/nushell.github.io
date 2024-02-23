@@ -35,7 +35,7 @@ Command `math tanh` was not included in the official binaries by default, you ha
 
 Apply the hyperbolic tangent to 10\*π
 
-```nushell
+```nu
 > 3.141592 * 10 | math tanh | math round --precision 4
 1
 ```

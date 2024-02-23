@@ -34,7 +34,7 @@ feature: default
 
 split items by column named "lang"
 
-```nushell
+```nu
 > {
     '2019': [
         { name: 'andres', lang: 'rb', year: '2019' },

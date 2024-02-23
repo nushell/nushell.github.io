@@ -34,7 +34,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Creates a new dataframe and shows it in the dataframe list
 
-```nushell
+```nu
 > let test = ([[a b];[1 2] [3 4]] | dfr into-df);
     ls
 

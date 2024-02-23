@@ -34,14 +34,14 @@ feature: default
 
 Set an environment variable
 
-```nushell
+```nu
 > export-env { $env.SPAM = 'eggs' }
 
 ```
 
 Set an environment variable and examine its value
 
-```nushell
+```nu
 > export-env { $env.SPAM = 'eggs' }; $env.SPAM
 eggs
 ```

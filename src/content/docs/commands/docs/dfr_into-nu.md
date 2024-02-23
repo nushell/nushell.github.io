@@ -39,7 +39,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Shows head rows from dataframe
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr into-nu
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -52,7 +52,7 @@ Shows head rows from dataframe
 
 Shows tail rows from dataframe
 
-```nushell
+```nu
 > [[a b]; [1 2] [5 6] [3 4]] | dfr into-df | dfr into-nu --tail --rows 1
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -64,7 +64,7 @@ Shows tail rows from dataframe
 
 Convert a col expression into a nushell value
 
-```nushell
+```nu
 > dfr col a | dfr into-nu
 ╭───────┬────────╮
 │ expr  │ column │

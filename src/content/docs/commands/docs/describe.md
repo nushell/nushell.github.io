@@ -36,14 +36,14 @@ feature: default
 
 Describe the type of a string
 
-```nushell
+```nu
 > 'hello' | describe
 string
 ```
 
 Describe the type of a record in a detailed way
 
-```nushell
+```nu
 > {shell:'true', uwu:true, features: {bugs:false, multiplatform:true, speed: 10}, fib: [1 1 2 3 5 8], on_save: {|x| print $'Saving ($x)'}, first_commit: 2019-05-10, my_duration: (4min + 20sec)} | describe -d
 ╭─────────┬───────────────────────────────────────────────────────────╮
 │ type    │ record                                                    │
@@ -87,21 +87,21 @@ Describe the type of a record in a detailed way
 
 Describe the type of a stream with detailed information
 
-```nushell
+```nu
 > [1 2 3] | each {|i| echo $i} | describe -d
 
 ```
 
 Describe a stream of data, collecting it first
 
-```nushell
+```nu
 > [1 2 3] | each {|i| echo $i} | describe
 
 ```
 
 Describe the input but do not collect streams
 
-```nushell
+```nu
 > [1 2 3] | each {|i| echo $i} | describe --no-collect
 
 ```

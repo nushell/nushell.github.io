@@ -40,14 +40,14 @@ feature: default
 
 Return the md5 hash of a string, hex-encoded
 
-```nushell
+```nu
 > 'abcdefghijklmnopqrstuvwxyz' | hash md5
 c3fcd3d76192e4007dfb496cca67e13b
 ```
 
 Return the md5 hash of a string, as binary
 
-```nushell
+```nu
 > 'abcdefghijklmnopqrstuvwxyz' | hash md5 --binary
 Length: 16 (0x10) bytes | printable whitespace ascii_other non_ascii
 00000000:   c3 fc d3 d7  61 92 e4 00  7d fb 49 6c  ca 67 e1 3b   ××××a××0}×Il×g×;
@@ -56,7 +56,7 @@ Length: 16 (0x10) bytes | printable whitespace ascii_other non_ascii
 
 Return the md5 hash of a file's contents
 
-```nushell
+```nu
 > open ./nu_0_24_1_windows.zip | hash md5
 
 ```

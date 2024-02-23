@@ -30,7 +30,7 @@ feature: default
 
 Outputs an TOML string representing the contents of this record
 
-```nushell
+```nu
 > {foo: 1 bar: 'qwe'} | to toml
 bar = "qwe"
 foo = 1

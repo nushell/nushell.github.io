@@ -35,7 +35,7 @@ feature: default
 
 Alias ll to ls -l and export it from a module
 
-```nushell
+```nu
 > module spam { export alias ll = ls -l }
 
 ```

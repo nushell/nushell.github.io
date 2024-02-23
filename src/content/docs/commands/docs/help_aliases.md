@@ -38,21 +38,21 @@ feature: default
 
 show all aliases
 
-```nushell
+```nu
 > help aliases
 
 ```
 
 show help for single alias
 
-```nushell
+```nu
 > help aliases my-alias
 
 ```
 
 search for string in alias names and usages
 
-```nushell
+```nu
 > help aliases --find my-alias
 
 ```

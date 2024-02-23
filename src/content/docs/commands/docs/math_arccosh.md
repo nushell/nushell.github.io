@@ -35,7 +35,7 @@ Command `math arccosh` was not included in the official binaries by default, you
 
 Get the arccosh of 1
 
-```nushell
+```nu
 > 1 | math arccosh
 0
 ```

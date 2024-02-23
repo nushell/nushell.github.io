@@ -39,14 +39,14 @@ Command `math tan` was not included in the official binaries by default, you hav
 
 Apply the tangent to π/4
 
-```nushell
+```nu
 > 3.141592 / 4 | math tan | math round --precision 4
 1
 ```
 
 Apply the tangent to a list of angles in degrees
 
-```nushell
+```nu
 > [-45 0 45] | math tan --degrees
 ╭───┬───────╮
 │ 0 │ -1.00 │

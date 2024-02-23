@@ -29,7 +29,7 @@ The steps to evaluate one line in the REPL mode are as follows:
 
 To enable hooks, define them in your [config](configuration):
 
-```nushell
+```nu
 $env.config = {
     # ...other config...
 
@@ -48,7 +48,7 @@ When you change a directory, the `PWD` environment variable changes and the chan
 
 Instead of defining just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
 
-```nushell
+```nu
 $env.config = {
     ...other config...
 
@@ -73,7 +73,7 @@ $env.config = {
 
 Also, it might be more practical to update the existing config with new hooks, instead of defining the whole config from scratch:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks {
     pre_prompt: ...
     pre_execution: ...
@@ -89,7 +89,7 @@ One feature of the hooks is that they preserve the environment.
 Environment variables defined inside the hook **block** will be preserved in a similar way as [`def --env`](environment#defining-environment-from-custom-commands).
 You can test it with the following example:
 
-```nushell
+```nu
 > $env.config = ($env.config | upsert hooks {
     pre_prompt: { $env.SPAM = "eggs" }
 })
@@ -104,7 +104,7 @@ The hook blocks otherwise follow the general scoping rules, i.e., commands, alia
 
 One thing you might be tempted to do is to activate an environment whenever you enter a directory:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
@@ -123,7 +123,7 @@ In this case, you could easily rewrite it as `load-env (if $after == ... { ... }
 
 To deal with the above problem, we introduce another way to define a hook -- **a record**:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
@@ -151,7 +151,7 @@ To be able to define commands or aliases, it is possible to define the `code` fi
 You can think of it as if you typed the string into the REPL and hit Enter.
 So, the hook from the previous section can be also written as
 
-```nushell
+```nu
 > $env.config = ($env.config | upsert hooks {
     pre_prompt: '$env.SPAM = "eggs"'
 })
@@ -162,7 +162,7 @@ eggs
 
 This feature can be used, for example, to conditionally bring in definitions based on the current directory:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
@@ -181,7 +181,7 @@ $env.config = ($env.config | upsert hooks {
 
 When defining a hook as a string, the `$before` and `$after` variables are set to the previous and current environment variable value, respectively, similarly to the previous examples:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: {
@@ -197,7 +197,7 @@ $env.config = ($env.config | upsert hooks {
 
 An example for PWD env change hook:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks.env_change.PWD {|config|
     let val = ($config | get -i hooks.env_change.PWD)
 
@@ -215,7 +215,7 @@ $env.config = ($env.config | upsert hooks.env_change.PWD {|config|
 
 This one looks for `test-env.nu` in a directory
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks.env_change.PWD {
     [
         {
@@ -246,7 +246,7 @@ The output of external commands is not filtered through `display_output`.
 This hook can display the output in a separate window,
 perhaps as rich HTML text. Here is the basic idea of how to do that:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks {
     display_output: { to html --partial --no-color | save --raw /tmp/nu-output.html }
 })
@@ -264,7 +264,7 @@ to send the HTML output to a desired window.
 You can change to default behavior of how output is displayed by using the `display_output` hook.
 Here is an example that changes the default display behavior to show a table 1 layer deep if the terminal is wide enough, or collapse otherwise:
 
-```nushell
+```nu
 $env.config = ($env.config | upsert hooks {
     display_output: {if (term size).columns >= 100 { table -ed 1 } else { table }}
 })
@@ -274,7 +274,7 @@ $env.config = ($env.config | upsert hooks {
 
 The following hook uses the `pkgfile` command, to find which packages commands belong to in _Arch Linux_.
 
-```nushell
+```nu
 $env.config = {
     ...other config...
 

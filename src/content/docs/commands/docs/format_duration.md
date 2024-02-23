@@ -37,14 +37,14 @@ feature: default
 
 Convert µs duration to the requested second duration as a string
 
-```nushell
+```nu
 > 1000000µs | format duration sec
 1 sec
 ```
 
 Convert durations to µs duration as strings
 
-```nushell
+```nu
 > [1sec 2sec] | format duration µs
 ╭───┬────────────╮
 │ 0 │ 1000000 µs │
@@ -55,7 +55,7 @@ Convert durations to µs duration as strings
 
 Convert duration to µs as a string if unit asked for was us
 
-```nushell
+```nu
 > 1sec | format duration us
 1000000 µs
 ```

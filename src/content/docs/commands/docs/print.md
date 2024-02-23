@@ -40,14 +40,14 @@ feature: default
 
 Print 'hello world'
 
-```nushell
+```nu
 > print "hello world"
 
 ```
 
 Print the sum of 2 and 3
 
-```nushell
+```nu
 > print (2 + 3)
 
 ```

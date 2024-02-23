@@ -31,7 +31,7 @@ feature: default
 
 Compute the square root of each number in a list
 
-```nushell
+```nu
 > [9 16] | math sqrt
 ╭───┬──────╮
 │ 0 │ 3.00 │

@@ -34,14 +34,14 @@ feature: default
 
 Execute external 'ps aux' tool
 
-```nushell
+```nu
 > exec ps aux
 
 ```
 
 Execute 'nautilus'
 
-```nushell
+```nu
 > exec nautilus
 
 ```

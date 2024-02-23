@@ -42,14 +42,14 @@ feature: default
 
 Checks if string ends with '.rb'
 
-```nushell
+```nu
 > 'my_library.rb' | str ends-with '.rb'
 true
 ```
 
 Checks if strings end with '.txt'
 
-```nushell
+```nu
 > ['my_library.rb', 'README.txt'] | str ends-with '.txt'
 ╭───┬───────╮
 │ 0 │ false │
@@ -60,7 +60,7 @@ Checks if strings end with '.txt'
 
 Checks if string ends with '.RB', case-insensitive
 
-```nushell
+```nu
 > 'my_library.rb' | str ends-with --ignore-case '.RB'
 true
 ```

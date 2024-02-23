@@ -33,7 +33,7 @@ feature: default
 
 Compute absolute value of each number in a list of numbers
 
-```nushell
+```nu
 > [-50 -100.0 25] | math abs
 ╭───┬────────╮
 │ 0 │     50 │

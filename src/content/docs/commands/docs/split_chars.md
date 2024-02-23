@@ -36,7 +36,7 @@ feature: default
 
 Split the string into a list of characters
 
-```nushell
+```nu
 > 'hello' | split chars
 ╭───┬───╮
 │ 0 │ h │
@@ -50,7 +50,7 @@ Split the string into a list of characters
 
 Split on grapheme clusters
 
-```nushell
+```nu
 > '🇯🇵ほげ' | split chars --grapheme-clusters
 ╭───┬────╮
 │ 0 │ 🇯🇵 │
@@ -62,7 +62,7 @@ Split on grapheme clusters
 
 Split multiple strings into lists of characters
 
-```nushell
+```nu
 > ['hello', 'world'] | split chars
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │

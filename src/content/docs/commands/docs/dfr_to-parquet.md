@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Saves dataframe to parquet file
 
-```nushell
+```nu
 > [[a b]; [1 2] [3 4]] | dfr into-df | dfr to-parquet test.parquet
 
 ```

@@ -38,7 +38,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 Group by and perform an aggregation
 
-```nushell
+```nu
 > [[a b]; [1 2] [1 4] [2 6] [2 4]]
     | dfr into-df
     | dfr group-by a
@@ -58,7 +58,7 @@ Group by and perform an aggregation
 
 Group by and perform an aggregation
 
-```nushell
+```nu
 > [[a b]; [1 2] [1 4] [2 6] [2 4]]
     | dfr into-lazy
     | dfr group-by a

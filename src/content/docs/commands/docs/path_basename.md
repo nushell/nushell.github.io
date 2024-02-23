@@ -35,14 +35,14 @@ feature: default
 
 Get basename of a path
 
-```nushell
+```nu
 > '/home/joe/test.txt' | path basename
 test.txt
 ```
 
 Get basename of a list of paths
 
-```nushell
+```nu
 > [ /home/joe, /home/doe ] | path basename
 ╭───┬─────╮
 │ 0 │ joe │
@@ -53,7 +53,7 @@ Get basename of a list of paths
 
 Replace basename of a path
 
-```nushell
+```nu
 > '/home/joe/test.txt' | path basename --replace 'spam.png'
 /home/joe/spam.png
 ```

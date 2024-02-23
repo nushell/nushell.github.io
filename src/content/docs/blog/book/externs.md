@@ -6,7 +6,7 @@ Calling external commands is a fundamental part of using Nushell as a shell (and
 
 This is where `extern` comes in. The `extern` keyword allows you to write a full signature for the command that lives outside of Nushell so that you get all the benefits above. If you take a look at the default config, you'll notice that there are a few extern calls in there. Here's one of them:
 
-```nushell
+```nu
   export extern "git push" [
     remote?: string@"nu-complete git remotes",  # the name of the remote
     refspec?: string@"nu-complete git branches" # the branch / refspec
@@ -54,7 +54,7 @@ Both the type (or shape) of the argument and the custom completion tell Nushell 
 
 Positional parameters can be made optional with a `?` (as seen above) the remaining parameters can be matched with `...` before the parameter name, which will return a list of arguments.
 
-```nushell
+```nu
   export extern "git add" [
     ...pathspecs: glob
     # …

@@ -30,7 +30,7 @@ feature: default
 
 Get list with default keybindings
 
-```nushell
+```nu
 > keybindings default
 
 ```
