@@ -6,42 +6,42 @@ import { Code } from "@astrojs/starlight/components";
 
 ## Data types
 
-```nu frame="terminal"
+```nu
 # converts string to integer
 "12" | into int
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # converts present date to provided time zone
 date now | date to-timezone "Europe/London"
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # updates a record's language and if none is specified inserts provided value
 {'name': 'nu', 'stars': 5, 'language': 'Python'} | upsert language 'Rust'
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # converts list of strings to yaml
 [one two three] | to yaml
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # prints the table
 [[framework, language]; [Django, Python] [Lavarel, PHP]]
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # selects two columns from the table and prints their values
 [{name: 'Robert' age: 34 position: 'Designer'}
      {name: 'Margaret' age: 30 position: 'Software Developer'}
@@ -51,7 +51,7 @@ date now | date to-timezone "Europe/London"
 
 ## Strings
 
-```nu frame="terminal"
+```nu
 # prints `greetings, Alice!`
 let name = "Alice"
 $"greetings, ($name)!"
@@ -59,7 +59,7 @@ $"greetings, ($name)!"
 
 ---
 
-```nu frame="terminal"
+```nu
 # splits the string with specified delimiter and saves the list to `string_list` variable
 let string_list = "one,two,three" | split row ","
 $string_list
@@ -67,14 +67,14 @@ $string_list
 
 ---
 
-```nu frame="terminal"
+```nu
 # checks if a string contains a substring and returns `boolean`
 "Hello, world!" | str contains "o, w"
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # joins the list of strings using provided delimiter
 let str_list = [zero one two]
 $str_list | str join ','
@@ -82,45 +82,45 @@ $str_list | str join ','
 
 ---
 
-```nu frame="terminal"
+```nu
 # created a slice from a given string with start (4) and end (8) indices
 'Hello World!' | str substring 4..8
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # parses the string to columns
 'Nushell 0.80' | parse '{shell} {version}'
 ```
 
-```nu frame="terminal"
+```nu
 # parses comma separated values (csv)
 "acronym,long\nAPL,A Programming Language" | from csv
 ```
 
-```nu frame="terminal"
+```nu
 # ansi command colors the text (alsways end with `ansi reset` to reset color to default)
 $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 
 ## Lists
 
-```nu frame="terminal"
+```nu
 # inserts `beeze` value at st index in the list
 [foo bar baz] | insert 1 'beeze'
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # updates 2nd value to 10
 [1, 2, 3, 4] | update 1 10
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # adds value at the beginning of the list
 let numbers = [1, 2, 3, 4, 5]
 $numbers | prepend 0
@@ -128,7 +128,7 @@ $numbers | prepend 0
 
 ---
 
-```nu frame="terminal"
+```nu
 # adds value at the end of the list
 let numbers = [1, 2, 3, 4, 5]
 $numbers | append 6
@@ -136,7 +136,7 @@ $numbers | append 6
 
 ---
 
-```nu frame="terminal"
+```nu
 # creates slice of first two values from `flowers` list
 let flowers = [cammomile marigold rose forget-me-not]
 let flowers = ($flowers | first 2)
@@ -145,7 +145,7 @@ $flowers
 
 ---
 
-```nu frame="terminal"
+```nu
 # iterates over a list; `it` is current list value
 let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
 $planets | each { |it| $"($it) is a planet of solar system" }
@@ -153,14 +153,14 @@ $planets | each { |it| $"($it) is a planet of solar system" }
 
 ---
 
-```nu frame="terminal"
+```nu
 # iterates over a list and provides index and value in `it`
 $planets | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # reduces the list to a single value, `reduce` gives access to accumulator that is applied
 # to each element in the list
 let scores = [3 8 4]
@@ -169,14 +169,14 @@ $"total = ($scores | reduce { |it, acc| $acc + $it })"
 
 ---
 
-```nu frame="terminal"
+```nu
 # initial value for accumulator value can be set with `--fold`
 $"total = ($scores | reduce --fold 1 { |it, acc| $acc * $it })"
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # gives access to the 3rd item in the list
 let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
 $planets.2
@@ -184,7 +184,7 @@ $planets.2
 
 ---
 
-```nu frame="terminal"
+```nu
 # checks if any string in the list starts with `E`
 let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
 $planets | any {|it| $it | str starts-with "E" }
@@ -192,28 +192,28 @@ $planets | any {|it| $it | str starts-with "E" }
 
 ---
 
-```nu frame="terminal"
+```nu
 # creates slice of items that satisfy provided condition
 let cond = {|x| $x < 0 }; [-1 -2 9 1] | take while $cond
 ```
 
 ## Tables
 
-```nu frame="terminal"
+```nu
 # sorting table by size of files
 ls | sort-by size
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # sorting table by size of files and show first 5 entries
 ls | sort-by size | first 5
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # concatenate two tables with same columns
 let $a = [[first_column second_column third_column]; [foo bar snooze]]
 let $b = [[first_column second_column third_column]; [hex seeze feeze]]
@@ -222,7 +222,7 @@ $a | append $b
 
 ---
 
-```nu frame="terminal"
+```nu
 # remove the last column of a table
 let teams_scores = [[team score plays]; ['Boston Celtics' 311 3] ['Golden State Warriors', 245 2]]
 $teams_scores | drop column
@@ -230,42 +230,42 @@ $teams_scores | drop column
 
 ## Files & Filesystem
 
-```nu frame="terminal"
+```nu
 # opens a text file with the default text editor
 start file.txt
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # saves a string to text file
 'lorem ipsum ' | save file.txt
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # appends a string to the end of file.txt
 'dolor sit amet' | save --append file.txt
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # saves a record to file.json
 { a: 1, b: 2 } | save file.json
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # searches for `.rs` and `.toml` files recursively up to 2 folders deep
 glob **/*.{rs,toml} --depth 2
 ```
 
 ---
 
-```nu frame="terminal"
+```nu
 # runs cargo test whenever a Rust file changes
 watch . --glob=**/*.rs {|| cargo test }
 ```
@@ -274,7 +274,7 @@ watch . --glob=**/*.rs {|| cargo test }
 
 ## Custom Commands
 
-```nu frame="terminal"
+```nu
 # custom command with parameter type set to string
     def greet [name: string] {
         $"hello ($name­)"
@@ -283,7 +283,7 @@ watch . --glob=**/*.rs {|| cargo test }
 
 ---
 
-```nu frame="terminal"
+```nu
 # custom command with default parameter set to nushell
     def greet [name = "nushell"] {
         $"hello ($name­)"
@@ -292,7 +292,7 @@ watch . --glob=**/*.rs {|| cargo test }
 
 ---
 
-```nu frame="terminal"
+```nu
 # passing named parameter by defining flag for custom commands
     def greet [
         name: string
@@ -306,7 +306,7 @@ watch . --glob=**/*.rs {|| cargo test }
 
 ---
 
-```nu frame="terminal"
+```nu
 # using flag as a switch with a shorthand flag (-a) for the age
     def greet [
         name: string
@@ -324,7 +324,7 @@ watch . --glob=**/*.rs {|| cargo test }
 
 ---
 
-```nu frame="terminal"
+```nu
 #custom command which takes any number of positional arguments using rest params
     def greet [...name: string] {
         print "­hello all:"
@@ -338,7 +338,7 @@ watch . --glob=**/*.rs {|| cargo test }
 
 ## Variables & Subexpressions
 
-```nu frame="terminal"
+```nu
 # an immutable variable cannot change its value after declaration
 let val = 42
 print $val
@@ -346,7 +346,7 @@ print $val
 
 ---
 
-```nu frame="terminal"
+```nu
 # shadowing variable (declaring variable with the same name in a different scope)
 let val = 42
 do { let val = 101;  $val }
@@ -357,7 +357,7 @@ $val
 
 ---
 
-```nu frame="terminal"
+```nu
 # declaring a mutable variable with mut key word
 mut val = 42
 $val += 27
@@ -366,7 +366,7 @@ $val
 
 ---
 
-```nu frame="terminal"
+```nu
 # closures and nested defs cannot capture mutable variables from their enviro­nment.
 # this expression results in error.
 mut x = 0
@@ -375,7 +375,7 @@ mut x = 0
 
 ---
 
-```nu frame="terminal"
+```nu
 # a constant variable is immutable value which is fully evaluated at parse-time
 const plugin = 'path/­to/­plugin'
 register $plugin
@@ -383,7 +383,7 @@ register $plugin
 
 ---
 
-```nu frame="terminal"
+```nu
 # using question mark operator to return null instead of error if provided path is incorrect
 let files = (ls)
 $files.na­me?.0?
@@ -391,7 +391,7 @@ $files.na­me?.0?
 
 ---
 
-```nu frame="terminal"
+```nu
 # using subexp­ression by wrapping the expression with parent­heses ()
 let big_files = (ls | where size > 10kb)
 $big_files
@@ -401,7 +401,7 @@ $big_files
 
 ## Modules
 
-```nu frame="terminal"
+```nu
 # using inline module
     module greetings {
         export def hello [name: string] {

@@ -4,13 +4,13 @@ title: Scripts
 
 In Nushell, you can write and run scripts in the Nushell language. To run a script, you can pass it as an argument to the `nu` commandline application:
 
-```nu frame="terminal"
+```nu
 nu myscript.nu
 ```
 
 This will run the script to completion in a new instance of Nu. You can also run scripts inside the _current_ instance of Nu using [`source`](/commands/docs/source):
 
-```nu frame="terminal"
+```nu
 source myscript.nu
 ```
 
@@ -68,7 +68,7 @@ def main [x: int] {
 }
 ```
 
-```nu frame="terminal"
+```nu
 nu myscript.nu 100
 # 110
 ```
@@ -93,7 +93,7 @@ def main [x: string] {
 }
 ```
 
-```nu frame="terminal"
+```nu
 nu implicit_type.nu +1
 # Hello int 1
 
@@ -120,7 +120,7 @@ def "main build" [] {
 def main [] {}
 ```
 
-```nu frame="terminal"
+```nu
 nu myscript.nu build
 # building
 nu myscript.nu run
@@ -136,7 +136,7 @@ On Linux and macOS you can optionally use a [shebang](<https://en.wikipedia.org/
 "Hello World!"
 ```
 
-```nu frame="terminal"
+```nu
 ./myscript
 # Hello World!
 ```
@@ -148,7 +148,7 @@ For script to have access to standard input, `nu` should be invoked with `--stdi
 echo $"stdin: ($in)"
 ```
 
-```nu frame="terminal"
+```nu
 echo "Hello World!" | ./myscript
 # stdin: Hello World!
 ```

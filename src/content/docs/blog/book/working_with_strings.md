@@ -21,7 +21,7 @@ matches your needs.
 
 The simplest string in Nushell is the single-quoted string. This string uses the `'` character to surround some text. Here's the text for hello world as a single-quoted string:
 
-```nu frame="terminal"
+```nu
 'hello world'
 # hello world
 'The end'
@@ -34,7 +34,7 @@ Single-quoted strings don't do anything to the text they're given, making them i
 
 Single-quoted strings, due to not supporting any escapes, cannot contain any single-quote characters themselves. As an alternative, backtick strings using the <code>`</code> character also exist:
 
-```nu frame="terminal"
+```nu
 `no man's land`
 # no man's land
 `no man's land`
@@ -74,7 +74,7 @@ Nushell currently supports the following escape characters:
 
 Like other shell languages (but unlike most other programming languages) strings consisting of a single 'word' can also be written without any quotes:
 
-```nu frame="terminal"
+```nu
 print hello
 # hello
 [hello] | describe
@@ -83,7 +83,7 @@ print hello
 
 But be careful - if you use a bare word plainly on the command line (that is, not inside a data structure or used as a command parameter) or inside round brackets `(` `)`, it will be interpreted as an external command:
 
-```nu frame="terminal"
+```nu
 hello
 Error: nu::shell::external_command
 
@@ -98,7 +98,7 @@ Error: nu::shell::external_command
 
 Also, many bare words have special meaning in nu, and so will not be interpreted as a string:
 
-```nu frame="terminal"
+```nu
 true | describe
 # bool
 [true] | describe
@@ -123,7 +123,7 @@ So, while bare strings are useful for informal command line usage, when programm
 
 You can place the `^` sigil in front of any string (including a variable) to have Nushell execute the string as if it was an external command:
 
-```nu frame="terminal"
+```nu
 ^'C:\Program Files\exiftool.exe'
 
 let foo = 'C:\Program Files\exiftool.exe'
@@ -136,27 +136,27 @@ You can also use the [`run-external`](/commands/docs/run-external) command for t
 
 There are various ways to pre, or append strings. If you want to add something to the beginning of each string closures are a good option:
 
-```nu frame="terminal"
+```nu
 ['foo', 'bar'] | each {|s| '~/' ++ $s} # ~/foo, ~/bar
 ['foo', 'bar'] | each {|s| '~/' + $s} # ~/foo, ~/bar
 ```
 
 You can also use a regex to replace the beginning or end of a string:
 
-```nu frame="terminal"
+```nu
 ['foo', 'bar'] | str replace -r '^' '~/'# ~/foo, ~/bar
 ['foo', 'bar'] | str replace -r '$' '~/'# foo~/, bar~/
 ```
 
 If you want to get one string out of the end then `str join` is your friend:
 
-```nu frame="terminal"
+```nu
 "hello" | append "world!" | str join " " # hello world!
 ```
 
 You can also use reduce:
 
-```nu frame="terminal"
+```nu
 1..10 | reduce -f "" {|it, acc| $acc + ($it | into string) + " + "} # 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 +
 ```
 
@@ -172,7 +172,7 @@ String interpolation uses `$" "` and `$' '` as ways to wrap interpolated text.
 
 For example, let's say we have a variable called `$name` and we want to greet the name of the person contained in this variable:
 
-```nu frame="terminal"
+```nu
 let name = "Alice"
 $"greetings, ($name)"
 # greetings, Alice
@@ -184,7 +184,7 @@ String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" 
 
 As of version 0.61, interpolated strings support escaping parentheses, so that the `(` and `)` characters may be used in a string without Nushell trying to evaluate what appears between them:
 
-```nu frame="terminal"
+```nu
 $"2 + 2 is (2 + 2) \(you guessed it!)"
 # 2 + 2 is 4 (you guessed it!)
 ```
@@ -194,7 +194,7 @@ on your configuration and your `config.nu` hasn't been loaded yet, they will use
 So if you have something like this in your `config.nu`, `x` will be `"2.0 KB"` even if your config says to use
 `MB` for all file sizes (datetimes will similarly use the default config).
 
-```nu frame="terminal"
+```nu
 const x = $"(2kb)"
 ```
 
@@ -202,7 +202,7 @@ const x = $"(2kb)"
 
 The [`split row`](/commands/docs/split_row) command creates a list from a string based on a delimiter.
 
-```nu frame="terminal"
+```nu
 "red,green,blue" | split row ","
 ╭───┬───────╮
 │ 0 │ red   │
@@ -213,7 +213,7 @@ The [`split row`](/commands/docs/split_row) command creates a list from a string
 
 The [`split column`](/commands/docs/split_column) command will create a table from a string based on a delimiter. This applies generic column names to the table.
 
-```nu frame="terminal"
+```nu
 "red,green,blue" | split column ","
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column1 │ column2 │ column3 │
@@ -224,7 +224,7 @@ The [`split column`](/commands/docs/split_column) command will create a table fr
 
 Finally, the [`split chars`](/commands/docs/split_chars) command will split a string into a list of characters.
 
-```nu frame="terminal"
+```nu
 'aeiou' | split chars
 ╭───┬───╮
 │ 0 │ a │
@@ -241,7 +241,7 @@ Many string functions are subcommands of the [`str`](/commands/docs/str) command
 
 For example, you can look if a string contains a particular substring using [`str contains`](/commands/docs/str_contains):
 
-```nu frame="terminal"
+```nu
 "hello world" | str contains "o wo"
 # true
 ```
@@ -252,7 +252,7 @@ For example, you can look if a string contains a particular substring using [`st
 
 You can trim the sides of a string with the [`str trim`](/commands/docs/str_trim) command. By default, the [`str trim`](/commands/docs/str_trim) commands trims whitespace from both sides of the string. For example:
 
-```nu frame="terminal"
+```nu
 '       My   string   ' | str trim
 # My   string
 ```
@@ -263,7 +263,7 @@ To trim a specific character, use `--char <Character>` or `-c <Character>` to sp
 
 Here's an example of all the options in action:
 
-```nu frame="terminal"
+```nu
 '=== Nu shell ===' | str trim -r -c '='
 # === Nu shell
 ```
@@ -272,7 +272,7 @@ Here's an example of all the options in action:
 
 Substrings are slices of a string. They have a startpoint and an endpoint. Here's an example of using a substring:
 
-```nu frame="terminal"
+```nu
 'Hello World!' | str index-of 'o'
 # 4
 'Hello World!' | str index-of 'r'
@@ -285,7 +285,7 @@ Substrings are slices of a string. They have a startpoint and an endpoint. Here'
 
 With the [`fill`](/commands/docs/fill) command you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
 
-```nu frame="terminal"
+```nu
 '1234' | fill -a right -c '0' -w 10
 # 0000001234
 '1234' | fill -a left -c '0' -w 10 | str length
@@ -296,7 +296,7 @@ With the [`fill`](/commands/docs/fill) command you can add padding to a string. 
 
 This can be done easily with the [`str reverse`](/commands/docs/str_reverse) command.
 
-```nu frame="terminal"
+```nu
 'Nushell' | str reverse
 # llehsuN
 ['Nushell' 'is' 'cool'] | str reverse
@@ -311,7 +311,7 @@ This can be done easily with the [`str reverse`](/commands/docs/str_reverse) com
 
 With the [`parse`](/commands/docs/parse) command you can parse a string into columns. For example:
 
-```nu frame="terminal"
+```nu
 'Nushell 0.80' | parse '{shell} {version}'
 ╭───┬─────────┬─────────╮
 │ # │  shell  │ version │
@@ -328,7 +328,7 @@ With the [`parse`](/commands/docs/parse) command you can parse a string into col
 
 If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use [`from csv`](/commands/docs/from_csv), [`from tsv`](/commands/docs/from_tsv) or [`from ssv`](/commands/docs/from_ssv):
 
-```nu frame="terminal"
+```nu
 "acronym,long\nAPL,A Programming Language" | from csv
 ╭───┬─────────┬────────────────────────╮
 │ # │ acronym │          long          │
@@ -356,7 +356,7 @@ In addition to the standard `==` and `!=` operators, a few operators exist for s
 
 Those familiar with Bash and Perl will recognise the regex comparison operators:
 
-```nu frame="terminal"
+```nu
 'APL' =~ '^\w{0,3}$'
 # true
 'FORTRAN' !~ '^\w{0,3}$'
@@ -365,7 +365,7 @@ Those familiar with Bash and Perl will recognise the regex comparison operators:
 
 Two other operators exist for simpler comparisons:
 
-```nu frame="terminal"
+```nu
 'JavaScript' starts-with 'Java'
 # true
 'OCaml' ends-with 'Caml'
@@ -389,7 +389,7 @@ There are multiple ways to convert strings to and from other types.
 
 You can color strings with the [`ansi`](/commands/docs/ansi) command. For example:
 
-```nu frame="terminal"
+```nu
 $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 

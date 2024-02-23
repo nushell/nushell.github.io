@@ -22,7 +22,7 @@ help http get
 
 Output:
 
-```nu frame="terminal"
+```nu
 Fetch the contents from a URL.
 
 Performs HTTP GET operation.

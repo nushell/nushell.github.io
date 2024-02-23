@@ -11,7 +11,7 @@ Nushell uses a configuration system that loads and runs two Nushell script files
 
 You can check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`.
 
-```nu frame="terminal"
+```nu
 $nu.env-path
 # /Users/FirstNameLastName/Library/Application Support/nushell/env.nu
 ```

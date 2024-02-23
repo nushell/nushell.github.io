@@ -29,7 +29,7 @@ def test_failing [] {
 
 Run the tests:
 
-```nu frame="terminal"
+```nu
 ❯ use std testing run-tests
 ❯ run-tests
 INF|2023-04-12T10:42:29.099|Running tests in test_math

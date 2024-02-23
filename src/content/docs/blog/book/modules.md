@@ -71,7 +71,7 @@ export def hi [where: string] {
 
 then
 
-```nu frame="terminal"
+```nu
 use greetings.nu hello
 
 hello
@@ -105,7 +105,7 @@ export def hi [where: string] {
 
 then
 
-```nu frame="terminal"
+```nu
 use greetings/ hello
 
 hello
@@ -169,7 +169,7 @@ export def main [] {
 
 then
 
-```nu frame="terminal"
+```nu
 use greetings.nu
 
 greetings
@@ -239,7 +239,7 @@ export module animals.nu
 
 Then:
 
-```nu frame="terminal"
+```nu
 use voice.nu
 
 voice animals dog
@@ -278,7 +278,7 @@ export def hello [] {
 
 When [`use`](/commands/docs/use) is evaluated, it will run the code inside the [`export-env`](/commands/docs/export-env) block and merge its environment into the current scope:
 
-```nu frame="terminal"
+```nu
 use greetings.nu
 
 $env.MYNAME
@@ -291,7 +291,7 @@ greetings hello
 :::tip
 You can put a complex code defining your environment without polluting the namespace of the module, for example:
 
-```nu frame="terminal"
+```nu
     def tmp [] { "tmp" }
     def other [] { "other" }
 
@@ -327,7 +327,7 @@ export def greeting_purpose [] {
 
 and then use it
 
-```nu frame="terminal"
+```nu
 use purpose.nu
 
 purpose greeting_purpose
@@ -348,7 +348,7 @@ export def greeting_purpose [] {
 
 then
 
-```nu frame="terminal"
+```nu
 use purpose.nu
 
 purpose greeting_purpose
@@ -391,7 +391,7 @@ def greetings-helper [greeting: string, subject: string] {
 
 then
 
-```nu frame="terminal"
+```nu
 use greetings.nu *
 
 
@@ -476,7 +476,7 @@ Another example could be our unofficial Conda module: https://github.com/nushell
 Any custom command or alias, imported from a module or not, can be "hidden", restoring the previous definition.
 We do this with the [`hide`](/commands/docs/hide) command:
 
-```nu frame="terminal"
+```nu
 def foo [] { "foo" }
 
 foo

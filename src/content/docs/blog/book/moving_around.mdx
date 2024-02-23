@@ -14,7 +14,7 @@ As we've seen in other chapters, [`ls`](/commands/docs/ls) is a command for view
 
 The [`ls`](/commands/docs/ls) command also takes an optional argument, to change what you'd like to view. For example, we can list the files that end in ""
 
-```nu frame="terminal"
+```nu
 ls *.md
 ───┬────────────────────┬──────┬─────────┬────────────
  # │ name               │ type │ size    │ modified
@@ -34,7 +34,7 @@ The most general glob is `*`, which will match all paths. More often, you'll see
 
 In Nushell, we also support double `*` to talk about traversing deeper paths that are nested inside of other directories. For example, `ls **/*` will list all the non-hidden paths nested under the current directory.
 
-```nu frame="terminal"
+```nu
 ls **/*.md
 ───┬───────────────────────────────────────────┬──────┬─────────┬───────────
  # │ name                                      │ type │ size    │ modified
