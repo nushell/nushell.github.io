@@ -163,3 +163,25 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
 # Linux
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/home/linuxbrew/.linuxbrew/bin')
 ```
+
+### Pyenv
+[Pyenv](https://github.com/pyenv/pyenv) is a popular Python version manager. To add it to your Nushell PATH:
+
+#### MacOS or Linux
+```nu
+# MacOS or Linux
+$env.PATH = ($env.PATH | split row (char esep) | prepend $"(pyenv root)/shims")
+```
+
+#### Windows
+Windows users need to install [pyenv-win](https://github.com/pyenv-win/pyenv-win)
+and execute the `Get-Command pyenv` command in PowerShell to get the path of `pyenv.ps1` after the installation.
+
+The result usually looks like: `C:\Users\<your-username>\.pyenv\pyenv-win\bin\pyenv.ps1`
+
+Then add the path of pyenv to your Nushell PATH:
+```nu
+# Windows
+$env.Path = ($env.Path | split row (char esep) | prepend $"~/.pyenv/pyenv-win/bin/pyenv.ps1")
+```
+
