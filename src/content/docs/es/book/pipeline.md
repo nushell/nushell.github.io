@@ -8,7 +8,7 @@ Uno de los diseños centrales de Nu es la tubería (pipeline), una idea de dise�
 
 Una tubería (pipeline) es construída con tres partes: la entrada, el filtro, y la salida.
 
-```
+```nu
 > open "Cargo.toml" | inc package.version | save "Cargo_new.toml"
 ```
 
@@ -40,13 +40,13 @@ Es posible que te hayas preguntado como miramos una tabla si `ls` es una entrada
 
 En efecto, el comando:
 
-```
+```nu
 > ls
 ```
 
 y la tubería:
 
-```
+```nu
 > ls | autoview
 ```
 

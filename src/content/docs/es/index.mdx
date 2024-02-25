@@ -1,0 +1,49 @@
+---
+title: Nushell
+description: Un nuevo tipo de shell.
+template: splash
+editUrl: true
+lastUpdated: false
+hero:
+  tagline: Un nuevo tipo de shell
+  actions:
+    - text: Empezar
+      link: /introduction/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/nushell/nushell.github.io
+      icon: external
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <Card title="Pipelines potentes para controlar tu sistema">
+  Pipelines permiten trabajar con tu sistema como nunca antes. Tienes el control del sistema, listo para tu siguiente comando.
+  </Card>
+  <Card title="Todo es data">
+   En lugar de tener la necesidad de recordar todos los parámetros de todos los comandos, podemos usar los mismos, independientemente de su procedencia.
+  </Card>
+  <Card title="Plugins">
+  Nu no puede incluir todo lo que quieras hacer con él, por lo que puedes extenderlo usando su sistema fuerte de plugins.
+  </Card>
+</CardGrid>
+
+<br />
+
+![Screenshot showing using the ls command](../../../assets/images/ls-example.png)
+
+## Nu works with existing data
+
+Nu speaks [JSON, YAML, SQLite, Excel, and more](https://www.nushell.sh/book/loading_data) out of the box. It's easy to bring data into a Nu pipeline whether it's in a file, a database, or a web API:
+
+![Screenshot showing fetch with a web API](../../../assets/images/fetch-example.png)
+
+## Nu has great error messages
+
+Nu operates on typed data, so it catches bugs that other shells don't. And when things break, Nu tells you exactly where and why:
+
+![Screenshot showing Nu catching a type error](../../../assets/images/0_60_miette.png)
+
+Sugerencias o propuestas de cambios son bienvenidas. Escríbenos

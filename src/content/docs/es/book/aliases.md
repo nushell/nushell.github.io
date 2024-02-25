@@ -2,8 +2,6 @@
 title: Aliases
 ---
 
-# Aliases
-
 La habilidad de Nu para componer tuberías largas permite tener bastante control de su sistema y datos, pero a costas de tipear mucho. Sería ideal que puedas grabar las tuberías bien elaboradas para hacer uso de esas las veces que quieras.
 
 Aquí es donde aparecen los aliases.
@@ -12,7 +10,7 @@ Un alias te permite crear un nombre corto para un bloque de comandos. Cuando se 
 
 Ejemplo:
 
-```
+```nu
 > alias ls-nombres [] { ls | select name }
 > ls-nombres
 ────┬────────────────────
@@ -29,7 +27,7 @@ Ejemplo:
 
 También pueden tomar parámetros opcionales que son pasadas al bloque. Cada parámetro se convierte en una variable en el bloque.
 
-```
+```nu
 > alias decir [mensaje] { echo $mensaje }
 > decir "¡hola!"
 ¡hola!

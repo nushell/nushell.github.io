@@ -10,7 +10,7 @@ La variable es el más simple de ambas expresiones de evaluación. Durante la ev
 
 Si creamos una variable, podemos imprimir su contenido al usar `$` para referir a la misma:
 
-```
+```nu
 > let mi_valor = 4
 > echo $mi_valor
 4
@@ -20,13 +20,13 @@ Si creamos una variable, podemos imprimir su contenido al usar `$` para referir 
 
 Una variable ruta funciona al llegar dentro del contenido de una variable, navegando columnas dentro de la misma para alcanzar un valor final. Supongamos que en vez de `4`, hayamos asignado una tabla como valor:
 
-```
+```nu
 > let mi_valor = [[nombre]; [pruebausuario]]
 ```
 
 Podemos usar variables ruta para evaluar la variable `$mi_valor` y obtener el valor de la columna `nombre` con un solo paso:
 
-```
+```nu
 > echo $mi_valor.nombre
 pruebausuario
 ```
@@ -39,7 +39,7 @@ Los paréntesis contienen una tubería que se ejecutará hasta completar, y su v
 
 Subexpresiones también pueden ser tuberías y no solamente comandos individuales. Si desearamos una lista de nombres de archivos superiores a diez kilobytes, podemos utilizar subexpresiones para ejecutar una tubería y asignar el resultado a una variable:
 
-```
+```nu
 > let nombres_de_archivos_grandes = (ls | where size > 10kb)
 > echo $nombres_de_archivos_grandes
 ───┬────────────┬──────┬──────────┬──────────────
@@ -54,13 +54,13 @@ Subexpresiones también pueden ser tuberías y no solamente comandos individuale
 
 Subexpresiones también soportan rutas. Por ejemplo, supongamos que queremos una lista de nombres de archivos en el directorio actual. Una manera de hacerlo es con una tubería:
 
-```
+```nu
 > ls | get name
 ```
 
 Pero también podemos hacer una acción similar con un solo paso usando una subexpresión de ruta:
 
-```
+```nu
 > echo (ls).name
 ```
 

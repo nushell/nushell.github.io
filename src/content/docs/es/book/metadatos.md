@@ -4,7 +4,7 @@ title: Metadatos
 
 Al usar Nu es posible que hayan momentos que has encontrado como si algo extra sucediera detrás de escenas. Por ejemplo digamos que intentas abrir un archivo soportado por Nu para luego olvidarte e intentar convertir nuevamente:
 
-```
+```nu
 > open Cargo.toml | from toml
 error: Expected a string from pipeline
 - shell:1:18
@@ -21,7 +21,7 @@ Valores que fluyen a través de la tubería en Nu comúnmente disponen de inform
 
 Nuevamente ejecutemos el comando `open` pero esta vez observaremos las etiquetas que nos devuelve:
 
-```
+```nu
 > open Cargo.toml | tags
 ----------+------------------------------------------
  span     | anchor
@@ -34,7 +34,7 @@ Actualmente rastreamos dos pedazos de metadatos de los valores en la tubería. P
 
 También hay lapso (span). Miremos más de cerca a eso:
 
-```
+```nu
 > open Cargo.toml | tags | get span
 -------+-----
  start | end

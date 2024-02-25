@@ -6,12 +6,12 @@ Nu proporciona una serie de comandos que puedes utilitar en diferentes sistemas 
 
 Comando de Nu:
 
-```
+```nu
 > ls
 ```
 
 Escapa al comando local:
 
-```
+```nu
 > ^ls
 ```
