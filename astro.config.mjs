@@ -3,10 +3,6 @@ import starlight from "@astrojs/starlight";
 import { ExpressiveCodeTheme } from "@astrojs/starlight/expressive-code";
 import { defineConfig } from "astro/config";
 
-const jsoncString = fs.readFileSync(
-  new URL("./public/nushell_minimal_dark_theme.json", import.meta.url),
-  "utf-8",
-);
 const nushellTheme = ExpressiveCodeTheme.fromJSONString(jsoncString);
 
 // https://astro.build/config
@@ -43,13 +39,6 @@ export default defineConfig({
       },
       expressiveCode: {
         themes: [nushellTheme],
-        shiki: {
-          langs: [
-            JSON.parse(
-              fs.readFileSync("./public/nushell-grammar.json", "utf-8"),
-            ),
-          ],
-        },
       },
       editLink: {
         baseUrl: "https://github.com/nushell/nushell.github.io/edit/master/",
