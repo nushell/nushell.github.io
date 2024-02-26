@@ -151,7 +151,7 @@ $env.PROMPT_COMMAND = { create_left_prompt }
 $env.PROMPT_COMMAND_RIGHT = { create_right_prompt }
 ```
 
-::: tip
+:::tip
 你并非必须要用 Nushell 的函数来定义环境变量，也可以使用简单的字符串来定义它们。
 :::
 
@@ -164,7 +164,7 @@ $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 ```
 
-::: tip
+:::tip
 提示符是环境变量，它代表了提示的状态
 :::
 
@@ -211,11 +211,11 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
   - edit
   - until
 
-::: tip
+:::tip
 所有可用的修饰键、键码和事件都可以通过`keybindings list`命令找到。
 :::
 
-::: tip
+:::tip
 添加到 `vi_insert` 模式中的按键绑定将在行编辑器处于插入模式（可以写入文本）时可用，而标有 `vi_normal` 模式的按键绑定将在正常模式下（当光标使用 h、j、k 或 l 移动时）可用。
 :::
 
@@ -307,7 +307,7 @@ keybindings list | where type == events
     ...
 ```
 
-::: tip
+:::tip
 你可以用大写字母来命名事件的名称，键盘绑定解析器是不区分大小写的。
 :::
 

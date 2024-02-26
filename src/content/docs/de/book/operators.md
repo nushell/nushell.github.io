@@ -56,7 +56,7 @@ Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von d
 - Logisches oder (`||`, `or`)
 - Zuweisungs Operationen
 
-```
+```nu
 > 3 * (1 + 2)
 9
 ```
@@ -66,7 +66,7 @@ Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von d
 Nicht alle Operationen ergeben für alle Datentypen Sinn.
 Wenn eine Operation auf einen nicht kompatiblen Datentyp angewendet werden soll, wird ein Fehler ausgegeben, der erklären soll, was falsch gelaufen ist:
 
-```
+```nu
 > "spam" - 1
 Error: nu::parser::unsupported_operation (link)
 

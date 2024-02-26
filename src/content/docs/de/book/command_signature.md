@@ -4,7 +4,7 @@ title: Befehls Signatur
 
 Nu Befehle enthalten einen Signatur Abschnitt. Zum Beispiel wie hier in [`str distance`](/commands/docs/str_distance.md):
 
-```
+```nu
 Signatures(Cell paths are supported):
   <string> | str distance <string> -> <int>
 ```
@@ -14,7 +14,7 @@ Der erste Typenname vor dem `|` beschreibt den Typ der Eingangs-Pipeline. Nach d
 
 Hier ein weiteres Beispiel, [`str join`](/commands/docs/str_join.md):
 
-```
+```nu
 Signatures:
   list<string> | str join <string?> -> <string>
 ```

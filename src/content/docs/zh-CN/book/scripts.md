@@ -16,8 +16,7 @@ title: 脚本
 
 我们来看一个脚本文件的例子吧：
 
-```nu
-# myscript.nu
+```nu title="myscript.nu"
 def greet [name] {
   echo "hello" $name
 }
@@ -60,15 +59,13 @@ b; c | d
 
 脚本文件可以选择性地包含一个特殊的 "main" 命令。`main`将在任何其他 Nu 代码之后运行，主要用于向脚本添加参数。你可以在脚本名称后面传递参数（`nu <script name> <script args>`）。比如：
 
-```nu
-# myscript.nu
-
+```nu title="myscript.nu"
 def main [x: int] {
   $x + 10
 }
 ```
 
-```
+```nu
 > nu myscript.nu 100
 110
 ```

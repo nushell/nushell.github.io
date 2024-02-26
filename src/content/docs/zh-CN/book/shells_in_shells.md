@@ -38,7 +38,7 @@ title: Shell 中的 Shell
 
 我们可以用 `n`, `p` 和 `g` 的快捷命令在这些 Shell 之间跳转，这是 "next"、"previous" 和 "go" 的缩写：
 
-```
+```nu
 /home/jonathant/Source/book(main)> n
 /home/jonathant/Source/nushell(main)> p
 /home/jonathant/Source/book(main)> g 2

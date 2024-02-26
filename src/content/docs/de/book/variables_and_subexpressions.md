@@ -10,7 +10,7 @@ Die einfachere Variante der auszuwertenden Ausdrücke ist die Variable. Während
 
 Wenn eine Variable erzeugt wurde, kann der Inhalt dieser Variable ausgegeben werden, indem `$` vor dem Variablennamen verwendet wird:
 
-```
+```nu
 > let my_value = 4
 > echo $my_value
 4
@@ -20,13 +20,13 @@ Wenn eine Variable erzeugt wurde, kann der Inhalt dieser Variable ausgegeben wer
 
 Ein Pfad einer Variable funktioniert ähnlich wie ein strukturierter Datentyp. Es kann mittels Referenzen auf den Inhalt der Variable beziehungsweise die Spalten in der Variable zugegriffen werden, um final bei einem bestimmten Wert zu landen. Wenn beispielsweise anstatt der `4` im obigen Beispiel, der Variablen eine Tabelle zugewiesen wurde:
 
-```
+```nu
 > let my_value = [[name]; [testuser]]
 ```
 
 Hier kann ein Pfad der Variable `$my_value` verwendet werden, um den Wert der Spalte `name` in nur einem Schritt zu bekommen:
 
-```
+```nu
 > echo $my_value.name
 testuser
 ```
@@ -39,7 +39,7 @@ Die Klammern enthalten eine Pipeline, die bis zum Ende durchlaufen wird und dere
 
 Unterausdrücke können auch ganze Pipelines statt nur einzelner Befehle enthalten. Um eine Liste von Dateien mit einer Größe größer als 10 Kilobytes zu bekommen, kann die folgende Pipeline verwendet und einer Variable zugewiesen werden:
 
-```
+```nu
 > let names_of_big_files = (ls | where size > 10kb)
 > echo $names_of_big_files
 ───┬────────────┬──────┬──────────┬──────────────
@@ -54,13 +54,13 @@ Unterausdrücke können auch ganze Pipelines statt nur einzelner Befehle enthalt
 
 Unterausdrücke unterstützen auch Pfade. Um beispielsweise eine Liste der Dateinamen im aktuellen Ordner zu bekommen, kann diese Pipeline verwendet werden:
 
-```
+```nu
 > ls | get name
 ```
 
 Dasselbe Ergebnis kann auch in nur einem Schritt erreicht werden, indem ein Unterausdruck mit Pfad verwendet wird:
 
-```
+```nu
 > echo (ls).name
 ```
 
@@ -70,13 +70,13 @@ Welcher Stil gewählt wird, hängt vom Anwendungsfall und den persönlichen Vorl
 
 Nushell erlaubt den Zugriff auf Spalten in Tabellen in Unterausdrücken durch einfache Short-Hands. Wenn beispielsweise nur Zeilen in `ls` angezeigt werden sollen, in der die Größe der Datei größer als 10 Kilobytes ist, kann der folgende Befehl verwendet werden:
 
-```
+```nu
 > ls | where size > 10kb
 ```
 
 `where size > 10kb` ist ein Befehl mit zwei Teilen: Dem Befehlsnamen `where` und dem short-hand Ausdruck `size > 10kb`. Hier wird auch klar, warum das Ganze short-hand heißt: `size` ist hier die gekürzte Version von `$it.size`. Das Ganze könnte auch mit einer der folgenden ausführlicheren Varianten erreicht werden:
 
-```
+```nu
 > ls | where $it.size > 10kb
 > ls | where ($it.size > 10kb)
 > ls | where {|$it| $it.size > 10kb }

@@ -134,7 +134,7 @@ Si deseas instalar con más funcionalidades, puedes hacer:
 
 Para todas las funcionalidades disponibles, la manera más fácil es descargar la fuente de Nu y construírlo usted mismo usando las herramientas de Rust:
 
-```nu
+````nu
 > git clone https://github.com/nushell/nushell.git
 > cd nushell
 nushell> cargo install --path . --force --features=stable
@@ -146,7 +146,7 @@ Finalizada la instalación podemos ejecutar Nu usando el comando `nu`:
 ```nu
 $ nu
 /home/jonathan/Source>
-```
+````
 
 ## Construyendo desde la fuente
 
@@ -168,6 +168,7 @@ También puedes construir y arrancar Nu en modo release:
 ```nu
 nushell> cargo build --release --workspace --features=stable; cargo run --release --features=stable
 ```
+
 Gente familiarizada con Rust se preguntará la razón por la que hacemos un paso "build" y otro paso "run" si "run" construye por defecto. Esto es para evitar una deficiencia de la nueva opción `default-run` en Cargo y asegurar que todos los plugins se construyan aunque puede que esto no sea necesario en el futuro.
 
 **Nota:** Si te encuentras trabajando tanto en modo debug y release, asegúrate de ejecutar `cargo clean` cuando cambies entre ellas. Nu buscará plugins en los directorios tanto de debug así como release y puede suceder que cargue versiones de un plugin que no tienes intenciones de usar.

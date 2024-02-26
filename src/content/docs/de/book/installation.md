@@ -14,19 +14,34 @@ Von der [Release-Seite](https://github.com/nushell/nushell/releases) kann Nushel
 
 Die aktuelle, veröffentlichte `.zip`-Datei von der [Release-Seite](https://github.com/nushell/nushell/releases) herunterladen und den Inhalt extrahieren nach:
 
-@[code](@snippets/installation/windows_example_extraction_location.sh)
+```nu
+C:\Program Files
+```
 
 Danach den `nu` beinhaltenden Ordner der Umgebungsvariable PATH hinzufügen. Wenn das passiert ist, kann `nu` wie folgt gestartet werden:
 
-@[code](@snippets/installation/windows_run_nu.sh)
+```nu
+> nu
+C:\Users\user>
+```
 
 Für Nutzer des [Windows Terminal](https://github.com/microsoft/terminal) kann `nu` als Standard-Shell gesetzt werden, indem:
 
-@[code](@snippets/installation/windows_terminal_default_shell.sh)
+```nu
+{
+  "guid": "{2b372ca1-1ee2-403d-a839-6d63077ad871}",
+  "hidden": false,
+  "icon": "https://www.nushell.sh/icon.png",
+  "name": "Nu Shell",
+  "commandline": "nu.exe"
+}
+```
 
 zu `"profiles"` in den Terminal Einstellungen (JSON-Datei) hinzufügt wird. Zu guter Letzt, muss nur noch `"defaultProfile"` angepasst werden:
 
-@[code](@snippets/installation/windows_change_default_profile.sh)
+```nu
+"defaultProfile": "{2b372ca1-1ee2-403d-a839-6d63077ad871}",
+```
 
 Jetzt sollte sich `nu` beim Start von Windows Terminal öffnen.
 
@@ -50,7 +65,18 @@ Wenn Rust noch nicht auf dem System installiert ist, ist [rustup](https://rustup
 
 Nu benötigt aktuell die **latest stable (1.55 oder neuer)** Version von Rust. Der einfachste Weg ist es, `rustup` die korrekte Version für finden zu lassen. Wenn `rustup` zum ersten Mal gestartet wird, wird nachgefragt, welche Version installiert werden soll:
 
-@[code](@snippets/installation/rustup_choose_rust_version.sh)
+```nu
+Current installation options:
+
+default host triple: x86_64-unknown-linux-gnu
+default toolchain: stable
+profile: default
+modify PATH variable: yes
+
+1) Proceed with installation (default)
+2) Customize installation
+3) Cancel installation
+```
 
 Wenn Sie bereit sind, drücken Sie `1` und dann `Enter`.
 
@@ -62,59 +88,85 @@ Wenn Rust nicht via `rustup` installiert werden soll, können auch andere Method
 
 Es müssen die Pakete `pkg-config` und `libssl-dev` installiert werden:
 
-@[code](@snippets/installation/install_pkg_config_libssl_dev.sh)
+```nu
+apt install pkg-config libssl-dev
+```
 
 Linux-Nutzer die die optionalen Funktionen `rawkey` und `clipboard` verwenden möchten, müssen außerdem die Pakete `libx11-dev` und `libxcb-composite0-dev` installieren:
 
-@[code](@snippets/installation/use_rawkey_and_clipboard.sh)
+```nu
+apt install libxcb-composite0-dev libx11-dev
+```
 
 ### RHEL basierte Distributionen
 
 Für RHEL basierte Distributionen müssen die Pakete `libxcb`, `openssl-devel` und `libX11-devel` installiert werden:
 
-@[code](@snippets/installation/install_rhel_dependencies.sh)
+```nu
+yum install libxcb openssl-devel libX11-devel
+```
 
 ### macOS
 
 Mittels [Homebrew](https://brew.sh/), müssen die Pakete `openssl` und `cmake` über folgenden Befehl installiert werden:
 
-@[code](@snippets/installation/macos_deps.sh)
+```nu
+brew install openssl cmake
+```
 
 ## Installieren von [crates.io](https://crates.io)
 
 Wenn alle die Abhängigkeitenn, die für Nu benötigt werden, installiert sind, kann `cargo` verwendet werden um Nu zu installieren.
 
-@[code](@snippets/installation/cargo_install_nu.sh)
+```nu
+cargo install nu
+```
 
 Das war's! Cargo wird Nu und seine anderen Abhängigkeiten herunterladen, kompilieren und schließlich im cargo `bin` Pfad installieren, damit es benutzt werden kann.
 
 Wenn mehr Funktionalitäten installiert werden sollen, kann der folgende Befehl verwendet werden:
 
-@[code](@snippets/installation/cargo_install_nu_more_features.sh)
+```nu
+cargo install nu --locked --features=dataframe
+```
 
 Um alle verfügbaren Funktionalitäten zu bekommen, ist es am einfachsten einen Checkout durchzuführen und es selbst mit Hilfe der Rust-Tools zu kompilieren:
 
-@[code](@snippets/installation/build_nu_yourself.sh)
+```nu
+> git clone https://github.com/nushell/nushell.git
+> cd nushell
+nushell> cargo install --path .
+```
 
 Damit das funktioniert, sollte sichergestellt werden, dass alle oben genannten Abhängigkeiten auf dem System installiert sind.
 
 Wenn Nu schließlich installiert ist, kann die Shell mit dem `nu`-Befehl gestartet werden:
 
-@[code](@snippets/installation/run_nu.sh)
+```nu
+$ nu
+/home/jt/Source>
+```
 
 ## Kompilieren von Quelldateien
 
 Nu kann auch direkt aus den Quelldateien, die auf GitHub verfügbar sind, kompiliert werden. Das stellt unmittelbar die neuesten Funktionen und Fehlerbehebungen von Nu zur Verfügung.
 
-@[code](@snippets/installation/git_clone_nu.sh)
+```nu
+git clone https://github.com/nushell/nushell.git
+```
 
 Git clont das main nushell Repo. Von da aus, kann Nu, wenn `rustup` verwendet wird, wie folgt kompiliert und gestartet werden:
 
-@[code](@snippets/installation/build_nu_from_source.sh)
+```nu
+> cd nushell
+nushell> cargo build --workspace; cargo run
+```
 
 Nu kann auch in "release" Modus kompiliert und gestartet werden:
 
-@[code](@snippets/installation/build_nu_from_source_release.sh)
+```nu
+nushell> cargo build --release --workspace; cargo run --release
+```
 
 Leute, die sich mit Rust auskennen, wundern sich womöglich, warum hier sowohl ein `build` als auch ein `run` durchgeführt wird, obwohl `run` standardmäßig auch einen Build durchführt. Das ist nötig, um ein Problem mit der neuen `default-run`-Option von Cargo zu umgehen, damit alle Plugins kompiliert werden. Dies wird unter Umständen in Zukunft nicht mehr nötig sein.
 
@@ -125,7 +177,9 @@ Leute, die sich mit Rust auskennen, wundern sich womöglich, warum hier sowohl e
 Um die Login-Shell festzulegen, kann der Befehl [`chsh`](https://linux.die.net/man/1/chsh) verwendet werden.
 Manche Linux-Distributionen haben eine Liste von erlaubten Shells in `/etc/shells` und verbieten es die Shell zu ändern, bis Nu in der Whitelist ist. Wenn die `shells`-Datei nicht abgeändert wurde, erscheint vielleicht einen ähnlichen Fehler, wie:
 
-@[code](@snippets/installation/chsh_invalid_shell_error.sh)
+```nu
+chsh: /home/username/.cargo/bin/nu is an invalid shell
+```
 
 Nu kann zur Liste der erlaubte Shells hinzugefügt werden, indem der Pfad von `nu` der `shells`-Datei angefügt wird.
 Der Pfad, der hinzugefügt werden muss, kann mit dem Befehl `which nu` herausgefunden werden. Normalerweise ist es `$HOME/.cargo/bin/nu`.

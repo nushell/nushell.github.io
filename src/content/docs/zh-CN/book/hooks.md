@@ -100,7 +100,7 @@ eggs
 
 你可能很想做的一件事是，每当你进入一个目录时，就激活一个环境：
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [

@@ -12,21 +12,21 @@ Was bedeutet denn nun Denken in Nushell? Hier einige Themen, die für neue Benut
 Nushell ist sowohl eine Programmiersprache, als auch eine Shell. Deswegen hat sie ihre eigene Art mit Dateien, Verzeichnissen, Webseite und mehr umzugehen.
 Einiges ist jedoch so modelliert, wie es auch von anderen Shells her bekannt ist. Zum Beispiel Pipelines verbinden zwei Befehle:
 
-```
+```nu
 > ls | length
 ```
 
 Nushell hat auch andere Fähigkeiten, wie, aufnehmen des exit codes eines zuvor ausgeführten Befehls.
 Trotz dieser Vorzüge ist Nushell nicht Bash. In einer Bash, oder bei POSIX kompatiblen Shells ganz generell, verwendet man z.B.:
 
-```
+```nu
 > echo "hello" > output.txt
 ```
 
 In Nushell is das `>` ein grösser-als Operator, was eher dem Programmiersprachen Aspekt von Nushell entspricht.
 Stattdessen wird eine Pipe zu einem Befehl geführt, der die Aufgabe des Speicherns übernimmt:
 
-```
+```nu
 > echo "hello" | save output.txt
 ```
 
@@ -41,7 +41,7 @@ Das heisst alle Befehle, aber auch Dateien müssen bekannte Pfade sein, ähnlich
 
 Zum Beispiel macht folgendes in Nushell keinen Sinn und wird einen Fehler erzeugen:
 
-```
+```nu
 echo "def abc [] { 1 + 2 }" | save output.nu
 source "output.nu"
 abc
@@ -53,7 +53,7 @@ bevor sie ausgeführt werden kann, können die drei Zeilen nicht im voraus `komp
 
 Ein anderes Problem ist, einen Dateinamen dynamisch erzeugen zu wollen um ihn auszuführen:
 
-```
+```nu
 > source $"($my_path)/common.nu"
 ```
 
@@ -79,7 +79,7 @@ Nur weil in Nushell die Variablen unveränderbar sind bedeutet jedoch nicht, das
 Shadowing oder "Beschattung" bedeutet, eine neue Variable erstellen, mit dem gleichen Namen einer zuvor deklarierten Variablen.
 Zum Beispiel wenn eine Variable `$x` in den Gültigkeitsbereich geholt wird, und eine neue `$x` um 1 grösser definiert werden soll:
 
-```
+```nu
 let x = $x + 1
 ```
 
@@ -89,14 +89,14 @@ auch wenn es keine Voraussetzung ist.
 Schleifenzähler sind ein anderes häufiges Muster für veränderliche Variablen und sind in die meisten iterativen Befehle eingebaut.
 Zum Beispiel kann sowohl jedes Element wie auch dessen Index mit dem `-n` Flag von [`each`](/commands/docs/each.md) erreicht werden:
 
-```
+```nu
 > ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
 ```
 
 Mit dem [`reduce`](/commands/docs/reduce.md) kann eine ähnliche Funktionalität erreicht werden wie man es von Variablen in Schleifen kennt.
 Zum Beispiel, wenn der längste Text in einer Liste von Texten gesucht wird:
 
-```
+```nu
 > [one, two, three, four, five, six] | reduce {|curr, max|
     if ($curr | str length) > ($max | str length) {
         $curr
@@ -120,7 +120,7 @@ In Nushell kontrollieren Blöcke die Umgebung. Änderungen an der Umgebung gelte
 In der Praxis ist damit präziserer Code möglich, um zum Beispiel mit Unterverzeichnissen zu arbeiten. Wie hier, wenn jedes Sub-Projekt des aktuellen Verzeichnisses
 erstellt werden soll:
 
-```
+```nu
 > ls | each { |it|
     cd $it.name
     make

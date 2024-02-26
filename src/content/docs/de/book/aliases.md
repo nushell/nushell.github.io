@@ -6,19 +6,19 @@ Aliase in Nushell bieten eine einfache Möglichkeit, um Texte zur ersetzen. Dami
 
 Beispielsweise kann ein Alias namens `ll` definiert werden, der den längeren Befehl `ls -l` ersetzt:
 
-```
+```nu
 > alias ll = ls -l
 ```
 
 Nun kann der Alias aufgerufen werden:
 
-```
+```nu
 > ll
 ```
 
 Wenn das getan wird, wirkt es, als sei `ls -l` aufgerufen worden. Das bietet auch die Möglichkeit weitere Parameter anzugeben. So kann auch geschrieben werden:
 
-```
+```nu
 > ll -a
 ```
 
@@ -37,7 +37,7 @@ Um Aliase dauerhaft zu speichern muss man sie nur in die Datei _config.nu_ einf�
 Achtung: Der Alias `alias uuidgen = uuidgen | tr A-F a-f` (um das verhalten von `uuidgen` auf Mac an Linux anzugleichen) funktioniert nicht.
 Die Lösung ist einen parameterlosen Befehl zu definieren, der das Systemprogramm `uuidgen` mit Hilfe von `^` aufruft.
 
-```
+```nu
 def uuidgen [] { ^uuidgen | tr A-F a-f }
 ```
 
@@ -45,7 +45,7 @@ Mehr dazu im Kapitel [Eigene Befehle](custom_commands.md).
 
 Oder ein etwas idiomatischeres Beispiel von nushell internen Befehlen
 
-```
+```nu
 def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 ```
 

@@ -2,35 +2,46 @@
 title: システム内の移動
 ---
 
+import { Code } from "@astrojs/starlight/components";
+import lsExample from "../snippets/moving_around/ls_example.nu?raw";
+import lsShallowGlobExample from "../snippets/moving_around/ls_shallow_glob_example.nu?raw";
+import lsDeepGlobExample from "../snippets/moving_around/ls_deep_glob_example.nu?raw";
+import cdExample from "../snippets/moving_around/cd_example.nu?raw";
+import cdWithoutCommandExample from "../snippets/moving_around/cd_with_command_example.nu?raw";
+import mvExample from "../snippets/moving_around/mv_example.nu?raw";
+import cpExample from "../snippets/moving_around/cp_example.nu?raw";
+import rmExample from "../snippets/moving_around/rm_example.nu?raw";
+import mkdirExample from "../snippets/moving_around/mkdir_example.nu?raw";
+
 初期のシェルを使うとシステム内を移動してコマンドを実行することができますが、Nu のような現代的なシェルでも同じことができます。システムを操作する際によく使われるコマンドをいくつか見てみましょう。
 
 ## ディレクトリの内容を確認する
 
-@[code](@snippets/moving_around/ls_example.sh)
+<Code code={lsExample} lang="nu" />
 
 他の章でみてきたように、`ls`はパスの内容を表示するためのコマンドです。Nu はパスの内容をテーブルとして返してくれます。
 
 `ls`コマンドには表示する内容を変更するためにオプションで引数を渡すことができます。例えば".md"で終わるファイルの一覧を表示することができます。glob"\*.md"はファイルが'.md'で終わっていればマッチすると読むことができます。
 
-@[code](@snippets/moving_around/ls_shallow_glob_example.sh)
+<Code code={lsShallowGlobExample} lang="nu" />
 
 上記のオプション引数"\*.txt"の中で利用されているアスタリスク(\*)はしばしばワイルドカードやグロブと呼ばれ、何にでもマッチします。グロブ"\*.txt"は"'.txt'で終わる任意のファイルにマッチする"と読むことができます。
 
 Nu はより深いディレクトリにアクセスできる最新のグロブも利用します。
 
-@[code](@snippets/moving_around/ls_deep_glob_example.sh)
+<Code code={lsDeepGlobExample} lang="nu" />
 
 ここでは".md"で終わるファイルを探していますが、２つのアスタリスクはさらに"ここから始まる任意のディレクトリにある"という意味です。
 
 ## 現在のディレクトリを変更する
 
-@[code](@snippets/moving_around/cd_example.sh)
+<Code code={cdExample} lang="nu" />
 
 現在のディレクトリを変更するには`cd`コマンドを使います。他のシェルと同じように、ディレクトリの名前か上の階層に移動する場合は`..`ショートカットを利用します。
 
 `cd`を省略してパスだけを指定することでも現在の作業ディレクトリを変更することができます。
 
-@[code](@snippets/moving_around/cd_without_command_example.sh)
+<Code code={cdWithoutCommandExample} lang="nu" />
 
 ## ファイルシステムのコマンド
 
@@ -38,18 +49,18 @@ Nu はクロスプラットフォームで動作するいくつかの基本的�
 
 `mv`コマンドを利用すればアイテムをある場所から別の場所へ移動できます。
 
-@[code](@snippets/moving_around/mv_example.sh)
+<Code code={mvExample} lang="nu" />
 
 ある場所から別の場所へアイテムのコピーができます。
 
-@[code](@snippets/moving_around/cp_example.sh)
+<Code code={cpExample} lang="nu" />
 
 アイテムの削除ができます。
 
-@[code](@snippets/moving_around/rm_example.sh)
+<Code code={rmExample} lang="nu" />
 
 ３つのコマンドは`ls`コマンドでみたグロブ機能も利用できます。
 
 最後に、`mkdir`コマンドで新しいディレクトリを作成できます。
 
-@[code](@snippets/moving_around/mkdir_example.sh)
+<Code code={mkdirExample} lang="nu" />

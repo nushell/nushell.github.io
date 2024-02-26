@@ -7,7 +7,7 @@ um mit Tabelle auf einfache Art die Daten zu finden und zu filtern, die benötig
 
 Um zu starten, wird eine Tabelle benötigt wie diese:
 
-```
+```nu
 > ls
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -27,7 +27,7 @@ Um zu starten, wird eine Tabelle benötigt wie diese:
 Um eine Tabelle zu sortieren, wird der [`sort-by`](/commands/docs/sort-by.md) Befehl verwendet, dem mitgeteilt wird, nach welcher Spalte sortiert werden soll.
 Hier wird sortiert nach der Grösse der Dateien:
 
-```
+```nu
 > ls | sort-by size
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -50,7 +50,7 @@ Das Beispiel oben hätte auch nach "name", "accessed" oder "modified" sortiert w
 Von einer Tabelle können einzelne Spalten und Zeilen ausgewählt werden.
 Mit dem [`select`](/commands/docs/select.md) Befehl werden hier einige Spalten gewählt.
 
-```
+```nu
 > ls | select name size
 ───┬───────────────┬─────────
  # │ name          │ size
@@ -68,7 +68,7 @@ Mit dem [`select`](/commands/docs/select.md) Befehl werden hier einige Spalten g
 Damit wird eine Tabelle kreiert, die sich auf das Wesentliche beschränkt.
 Als nächstes sollen nur die 5 kleinsten Dateien aus diesem Verzeichnis enthalten sein:
 
-```
+```nu
 > ls | sort-by size | first 5
 ───┬──────────────┬──────┬────────┬────────────
  # │ name         │ type │ size   │ modified
@@ -85,7 +85,7 @@ Zuerst wird die Tabelle nach grösse sortiert, um die kleinsten Dateien zuoberst
 
 Mit `skip` können ebenfalls Zeilen entfernt werden, die unerwünscht sind. Hier die ersten 2 der 5 aus dem obigen Beispiel:
 
-```
+```nu
 > ls | sort-by size | first 5 | skip 2
 ───┬───────────┬──────┬────────┬────────────
  # │ name      │ type │ size   │ modified
@@ -101,7 +101,7 @@ So konnten die 3 Zeilen extrahiert werden, die uns interessieren.
 In allen Tabellen sind die Zeilen nummeriert. Dies ermöglicht eine einfache Art, die einzelnen Zeilen verwenden zu können.
 Im folgenden wird zuerst nach dem Namen sortiert, und dann die 5. Zeile mit dem `select` Befehl über die Zeilennummer ausgewählt:
 
-```
+```nu
 > ls | sort-by name
 ───┬───────────────┬──────┬─────────┬────────────
  # │ name          │ type │ size    │ modified
@@ -129,7 +129,7 @@ Bisher wurde die Tabelle auf die benötigten Inhalte getrimmt.
 Im nächsten Schritt soll angeschaut werden, wie wir den Inhalt anstelle der Tabelle herausziehen können.
 Zum Beispiel wenn eine Liste der Namen aller Dateien erstellt werden soll. Dafür steht der [`get`](/commands/docs/get.md) Befehl bereit:
 
-```
+```nu
 > ls | get name
 ───┬───────────────
  0 │ files.rs
@@ -146,7 +146,7 @@ Damit erhalten wir die Werte aller Dateinamen als Liste.
 
 Dies sieht fast so aus, wie der [`select`](/commands/docs/select.md) Befehl weiter oben, deshalb hier die beiden nebeneinander:
 
-```
+```nu
 > ls | select name
 ───┬───────────────
  # │ name
@@ -180,7 +180,7 @@ In Nu wird dadurch nicht die Tabelle direkt geändert, sondern jeder Befehl gene
 
 Mit [`append`](/commands/docs/append.md) können Spalten gleichen Namens zusammengeführt werden:
 
-```
+```nu
 > let $first = [[a b]; [1 2]]
 > let $second = [[a b]; [3 4]]
 > $first | append $second
@@ -196,7 +196,7 @@ Mit [`append`](/commands/docs/append.md) können Spalten gleichen Namens zusamme
 
 Mit dem [`merge`](/commands/docs/merge.md) Befehl werden zwei oder mehr Tabellen zusammengeführt.
 
-```
+```nu
 > let $first = [[a b]; [1 2]]
 > let $second = [[c d]; [3 4]]
 > $first | merge { $second }
@@ -209,13 +209,13 @@ Mit dem [`merge`](/commands/docs/merge.md) Befehl werden zwei oder mehr Tabellen
 
 Wird eine dritte Tabelle generiert:
 
-```
+```nu
 > let $third = [[e f]; [5 6]]
 ```
 
 Können nun alle drei Tabellen zusammengeführt werden wie hier:
 
-```
+```nu
 > $first | merge { $second } | merge { $third }
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
@@ -226,7 +226,7 @@ Können nun alle drei Tabellen zusammengeführt werden wie hier:
 
 Oder mit dem [`reduce`](/commands/docs/reduce.md) Befehl alle dynamisch gemerged:
 
-```
+```nu
 > [$first $second $third] | reduce {|it, acc| $acc|merge { $it }}
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
@@ -240,7 +240,7 @@ Oder mit dem [`reduce`](/commands/docs/reduce.md) Befehl alle dynamisch gemerged
 Mit dem [`insert`](/commands/docs/insert.md) Befehl wird eine neue Spalte hinzugefügt.
 Wie zum Beispiel:
 
-```
+```nu
 > open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -249,7 +249,7 @@ Wie zum Beispiel:
 
 wird eine Spalte namens "next_edition" mit dem Wert 2021 hinzugefügt:
 
-```
+```nu
 > open rustfmt.toml | insert next_edition 2021
 ──────────────┬──────
  edition      │ 2018
@@ -259,7 +259,7 @@ wird eine Spalte namens "next_edition" mit dem Wert 2021 hinzugefügt:
 
 Öffnen wir die originale Datei erneut, bleibt der Inhalt der alte:
 
-```
+```nu
 > open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -270,7 +270,7 @@ wird eine Spalte namens "next_edition" mit dem Wert 2021 hinzugefügt:
 Es ist deshalb möglich, mehrere Änderungen in der Pipeline vorzunehmen, bevor diese bereit sind um gesichert zu werden.
 Zum Sichern können wir, wie in diesem Beispiel, den [`save`](/commands/docs/save.md) Befehl verwenden:
 
-```
+```nu
 > open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
 > open rustfmt2.toml
 ──────────────┬──────
@@ -284,7 +284,7 @@ Zum Sichern können wir, wie in diesem Beispiel, den [`save`](/commands/docs/sav
 Ähnlich dem [`insert`](/commands/docs/insert.md) Befehl, kann mit [`update`](/commands/docs/update.md) der Inhalt einer Spalte geändert werden.
 Auf die selbe Datei angewendet, sieht das so aus:
 
-```
+```nu
 > open rustfmt.toml
 ─────────┬──────
  edition │ 2018
@@ -293,7 +293,7 @@ Auf die selbe Datei angewendet, sieht das so aus:
 
 Und nun das Update auf die nächste Edition, die unterstützt werden soll:
 
-```
+```nu
 > open rustfmt.toml | update edition 2021
 ─────────┬──────
  edition │ 2021
@@ -307,7 +307,7 @@ Mit dem [`upsert`](/commands/docs/upsert.md) Befehl wird der Wert enweder eingef
 Mit [`move`](/commands/docs/move.md) werden Spalten in de Tabelle verschoben. Um zum Bespiel die Spalte "name" von "ls" nach der Spalte "size"
 erschienen zu lassen, schreibt man:
 
-```
+```nu
 > ls | move name --after size
 ╭────┬──────┬─────────┬───────────────────┬──────────────╮
 │ #  │ type │  size   │       name        │   modified   │
@@ -325,7 +325,7 @@ erschienen zu lassen, schreibt man:
 Um Spalten einen neuen Name zu geben, wird der Befehl [`rename`](/commands/docs/rename.md) verwendet.
 Wie zum Beispiel hier nach der Verwendung von `ls`.
 
-```
+```nu
 > ls | rename filename filetype filesize date
 ╭────┬───────────────────┬──────────┬──────────┬──────────────╮
 │ #  │     filename      │ filetype │ filesize │     date     │

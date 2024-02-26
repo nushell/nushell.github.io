@@ -14,7 +14,7 @@ Dem Befehl, der die Vervollständigung bereitstellt, und die Verknüpfung mit de
 
 Hier ein Beispiel:
 
-```
+```nu
 > def tiere [] { ["katze", "hund", "aal" ] }
 > def my-command [tier: string@tiere] { print $tier }
 >| my-command
@@ -36,7 +36,7 @@ Es empfiehlt sich die eigenen Vervollständigungen von der öffentlichen API zu 
 
 Hier das Beispiel von oben in einem Modul:
 
-```
+```nu
 module commands {
     def tiere [] {
         ["katze", "hund", "aal" ]
@@ -59,7 +59,7 @@ Es ist möglich den Kontext einer Vervollständigung mit zu geben. Dies ist nüt
 
 Bezogen auf das obige Beispiel sieht dies so aus:
 
-```
+```nu
 module commands {
     def tiere [] {
         ["katze", "hund", "aal" ]
@@ -84,7 +84,7 @@ module commands {
 
 Der Befehl `tier-name` gibt die entsprechende Liste der Namen zurück. Dies funktioniert, weil der Wert der `$context` Variablen, dem Text entspricht, der bis zu dem Zeitpunkt eingegeben wurde.
 
-```
+```nu
 >| my-command
 katze                 hund                 aal
 >| my-command hund
@@ -102,7 +102,7 @@ Erstellen der Vervollständigung und anbinden an ein Positions- oder Markierungs
 
 In der Default Konfiguration finden sich ebenfalls Vervollständigungen:
 
-```
+```nu
 export extern "git push" [
     remote?: string@"nu-complete git remotes",  # the name of the remote
     refspec?: string@"nu-complete git branches" # the branch / refspec
@@ -116,7 +116,7 @@ Die Vervollständigung erfüllt hier die gleiche Rolle wie in den Beispielen zuv
 
 Alternativ zu einer Liste von Strings, kann eine Vervollständigung auch einen Record aus einem `value` und einer `description` zurückgeben.
 
-```
+```nu
 def my_commits [] {
     [
         { value: "5c2464", description: "Add .gitignore" },

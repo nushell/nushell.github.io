@@ -2,11 +2,14 @@
 title: Explorando seu sistema
 ---
 
+import { Code } from "@astrojs/starlight/components";
+import lsExample from "../snippets/introduction/ls_example.nu?raw";
+
 Shells mais antigos permitem que você navegue pelo sistema de arquivos e execute comandos. Shells modernos como o Nu permitem que você faça o mesmo. Vamos dar uma olhada em alguns dos comandos comuns que você vai usar quando estiver interagindo com seu sistema.
 
 ## Visualizando o conteúdo de directórios
 
-@[code](@snippets/moving_around/ls_example.sh)
+<Code code={lsExample} lang="nu" />
 
 Como vimos em outros capítulos, `ls` é um comando para visualizar o conteúdo de um caminho. Nu retorna o conteúdo como uma tabela que podemos usar adiante.
 

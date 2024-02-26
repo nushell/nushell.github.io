@@ -25,9 +25,7 @@ _注意! 目前对模块的实现是相当基本的，并将在未来进一步�
 
 或者在一个与你要创建的模块名相同的文件中：
 
-```nu
-# greetings.nu
-
+```nu title="greetings.nu"
 export def hello [name: string] {
     $"hello ($name)!"
 }
@@ -83,9 +81,7 @@ hi there!
 Nushell 让你隐含地把一个源文件当作一个模块。
 让我们先把模块定义的主体保存到一个文件中：
 
-```nu
-# greetings.nu
-
+```nu title="greetings.nu"
 export def hello [name: string] {
     $"hello ($name)!"
 }
@@ -113,9 +109,7 @@ Nushell 会自动从文件名（"greetings"，没有".nu"扩展名）推断出�
 
 任何在模块中定义的自定义命令，如果没有`export`关键字，将只在该模块的作用域内工作：
 
-```nu
-# greetings.nu
-
+```nu title="greetings.nu"
 export def hello [name: string] {
     greetings-helper "hello" "world"
 }
@@ -148,9 +142,7 @@ hi there!
 到目前为止，我们只是用模块来导入自定义命令，用同样的方法导出环境变量也是可能的。
 其语法与你可能习惯的直接修改 `$env` 或 [`load-env`](/commands/docs/load-env.md)等命令略有不同：
 
-```nu
-# greetings.nu
-
+```nu title="greetings.nu"
 export env MYNAME { "Arthur, King of the Britons" }
 
 export def hello [name: string] {

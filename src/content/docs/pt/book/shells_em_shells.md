@@ -35,7 +35,7 @@ O comando `shells` nos mostra que há dois diretórios ativos agora: nosso diret
 
 Podemos saltar entre esses shells com os atalhos `n` e `p`, abrevisções para "next" (próximo) e "previous" (anterior):
 
-```
+```nu
 /home/jonathan/Source/lark(master)> n
 /home/jonathan/Source/nushell(master)> p
 /home/jonathan/Source/lark(master)>

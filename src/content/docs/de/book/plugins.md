@@ -8,12 +8,12 @@ Um ein Plugin hinzuzufügen, muss es erstellt werden und dann der Befehl `regist
 
 Ein Beispiel:
 
-```
+```nu
 > register ./my_plugins/nu-plugin-inc -e capnp
 ```
 
 Wenn der Befehl registriert wurde, kann er als Teil der internen Befehle verwendet werden.
 
-```
+```nu
 > inc --help
 ```

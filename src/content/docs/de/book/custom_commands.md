@@ -18,13 +18,13 @@ In dieser Definition, wird ein Befehl `greet` beschrieben, der einen Parameter `
 
 Um den obigen Befehl auszuführen wird er wie ein eingebauter Befehl aufgerufen:
 
-```
+```nu
 > greet "world"
 ```
 
 Wenn das getan wird, wird eine Ausgabe erzeugt, die wie die der eingebauten Befehle aussieht:
 
-```
+```nu
 ───┬───────
  0 │ hello
  1 │ world
@@ -49,7 +49,7 @@ def "str mycommand" [] {
 
 Jetzt kann der eigene Unterbefehl aufgerufen werden, als ob er ein eingebauter Befehl von `str` wäre:
 
-```
+```nu
 > str mycommand
 ```
 
@@ -77,7 +77,7 @@ greet world
 
 Wenn versucht wird, den oberen Code auszuführen, wird Nu darauf aufmerksam machen, dass die Typen nicht passen und die Ausführung stoppen:
 
-```
+```nu
 error: Type Error
   ┌─ shell:6:7
   │
@@ -131,19 +131,19 @@ In der obigen Definition von `greet`, werden ein fester Parameter `name` und ein
 
 Das obige Beispiel kann wie folgt aufgerufen werden:
 
-```
+```nu
 > greet world --age 10
 ```
 
 Oder:
 
-```
+```nu
 > greet --age 10 world
 ```
 
 Oder gleich ganz ohne Flag:
 
-```
+```nu
 > greet world
 ```
 
@@ -164,7 +164,7 @@ _Hinweis:_ Flags sind benannt nach der langen Form des Namens. Im obigen Beispie
 
 Nun kann diese neue Version von `greet` wie folgt aufgerufen werden:
 
-```
+```nu
 > greet -a 10 hello
 ```
 
@@ -185,7 +185,7 @@ def greet [
 
 Wenn der Befehl definiert ist kann `help greet` aufgerufen werden, um Informationen zum Befehl zu erhalten:
 
-```
+```nu
 Usage:
   > greet <name> {flags}
 
@@ -215,7 +215,7 @@ Diese Kommentare, die zur Definition und den Parametern hinzugefügt wurden, wer
 
 Wenn jetzt `help greet` ausgeführt wird, wird ein hilfreicherer Text angezeigt:
 
-```
+```nu
 A greeting command that can greet the caller
 
 Usage:
@@ -272,7 +272,7 @@ def my-echo [] {
 
 Wenn dieser neue Befehl nun in einer Pipeline aufgerufen wird, sieht die Ausgabe wie folgt aus:
 
-```
+```nu
 > echo foo bar | my-echo
 ───┬─────
  0 │ foo

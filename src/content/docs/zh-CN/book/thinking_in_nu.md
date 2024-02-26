@@ -36,8 +36,7 @@ Nushell 设计的一个重要部分，特别是它与许多动态语言不同的
 
 例如，下面的代码作为 **[脚本](/zh-CN/book/scripts.md)** 将无法执行（当然，在**交互式模式**里一句句运行是可以的）：
 
-```nu
-# compiled.nu
+```nu title="compiled.nu"
 "def abc [] { 1 + 2 }" | save output.nu
 sleep 1sec # 延时 1 秒，但是并没有作用，因为是整体编译的。
 source "output.nu"

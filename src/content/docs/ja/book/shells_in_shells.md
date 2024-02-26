@@ -8,7 +8,7 @@ title: シェルの中のシェル
 
 まずはじめに、ディレクトリを入力しましょう。
 
-```
+```nu
 /home/jonathan/Source/nushell(main)> enter ../book
 /home/jonathan/Source/book(main)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
@@ -22,7 +22,7 @@ title: シェルの中のシェル
 
 `enter`はディレクトリの変更に似ています(`cd`コマンドでみたように)。これによりディレクトリにジャンプして作業することができます。ディレクトリを変更するかわりに、今２つのディレクトリの中にいます。このことをより明確にするために、`shells`コマンドを実行して、アクティブな現在のディレクトリの一覧を表示してみましょう。
 
-```
+```nu
 /home/jonathan/Source/book(main)> enter ../music
 /home/jonathan/Source/music(main)> shells
 ───┬────────┬───────────────────────────────
@@ -38,7 +38,7 @@ title: シェルの中のシェル
 
 "next"、"previous"、"goto"のショートカットである`n`、`p`、`g`を利用して、これらのシェルを行き来できます。
 
-```
+```nu
 /home/jonathan/Source/music(main)> p
 /home/jonathan/Source/book(main)> n
 /home/jonathan/Source/music(main)> g 0

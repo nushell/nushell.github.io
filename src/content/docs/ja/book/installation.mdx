@@ -2,11 +2,23 @@
 title: Nu のインストール
 ---
 
+import { Code } from "@astrojs/starlight/components";
+import runNu from "../snippets/installation/run_nu.nu?raw";
+import rustupChooseRustVersion from "../snippets/installation/rustup_choose_rust_version.nu?raw";
+import installPkgConfigLibsslDiv from "../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
+import installRhelDependencies from "../snippets/installation/install_rhel_dependencies.nu?raw";
+import macosDeps from "../snippets/installation/macos_deps.nu?raw";
+import cargoInstallNu from "../snippets/installation/cargo_install_nu.nu?raw";
+import cargoInstallNuMoreFeatures from "../snippets/installation/cargo_install_nu_more_features.nu?raw";
+import gitCloneNu from "../snippets/installation/git_clone_nu.nu?raw";
+import buildNuFromSource from "../snippets/installation/build_nu_from_source.nu?raw";
+import buildNuFromSourceRelease from "../snippets/installation/build_nu_from_source_release.nu?raw";
+
 Nu を入手して実行するには多くの方法があります。[リリースページ](https://github.com/nushell/nushell/releases) からビルド済みのバイナリーをダウンロードすることもできますし、 [あなたの好きなパッケージマネージャーを使う](https://repology.org/project/nushell/versions) ことも、あるいはソースからビルドする方法もあります。
 
 Nushell のメインのバイナリーは `nu` (Windowsでは `nu.exe`) という名前です。インストールが済めば、 `nu` と打って起動することができます。
 
-@[code](@snippets/installation/run_nu.sh)
+<Code code={runNu} lang="nu" />
 
 ## ビルド済みのバイナリー
 
@@ -52,7 +64,7 @@ Nu は現在、 **最新の stable (1.66.1 or later)** バージョンの Rust �
 `rustup`で正しい version を選択するのが良い方法です。
 最初に"rustup"を実行すると、インストールする Rust のバージョンを尋ねられます。
 
-@[code](@snippets/installation/rustup_choose_rust_version.sh)
+<Code code={rustupChooseRustVersion} lang="nu" />
 
 準備ができたら、1 を押してからエンターを押します。
 
@@ -65,45 +77,45 @@ Nu は現在、 **最新の stable (1.66.1 or later)** バージョンの Rust �
 
 "pkg-config"および"libssl-dev"パッケージをインストールしてください。
 
-@[code](@snippets/installation/install_pkg_config_libssl_dev.sh)
+<Code code={installPkgConfigLibsslDiv} lang="nu" />
 
 #### RHEL ベースのディストロ
 
 "libxcb", "openssl-devel"および"libX11-devel"パッケージをインストールする必要があります。
 
-@[code](@snippets/installation/install_rhel_dependencies.sh)
+<Code code={installRhelDependencies} lang="nu" />
 
 #### macOS
 
 [Homebrew](https://brew.sh/)を利用して、"openssl"と"cmake"をインストールしてください。
 
-@[code](@snippets/installation/macos_deps.sh)
+<Code code={macosDeps} lang="nu" />
 
 ### [crates.io](https://crates.io) を利用してのビルド
 
 Nu はソースの形で、Rust で人気のパッケージレジストリ [crates.io](https://crates.io/) にリリースされています。これにより、`cargo` を使って簡単に最新の Nu リリースをビルド、インストールすることができます。
 
-@[code](@snippets/installation/cargo_install_nu.sh)
+<Code code={cargoInstallNu} lang="nu" />
 
 これでおしまいです！`cargo`は Nu のソースコードとその依存関係をダウンロードしてビルドし、`cargo`のバイナリーパスにインストールすることで Nu を実行できるようにします。
 
 もし [dataframes](book/dataframes.md) サポートをともにインストールしたいなら、 `--features=dataframe` フラグを使ってインストールすることができます。
 
-@[code](@snippets/installation/cargo_install_nu_more_features.sh)
+<Code code={cargoInstallNuMoreFeatures} lang="nu" />
 
 ### GitHub リポジトリからのビルド
 
 GitHub の最新のソースから直接ビルドすることもできます。こうすることで、最新の機能やバグ修正にすぐにアクセスすることができます。まず、リポジトリをクローンします。
 
-@[code](@snippets/installation/git_clone_nu.sh)
+<Code code={gitCloneNu} lang="nu" />
 
 これで、Nu をビルドして実行できます。
 
-@[code](@snippets/installation/build_nu_from_source.sh)
+<Code code={buildNuFromSource} lang="nu" />
 
 さらに最適化されたリリースモードで Nu をビルドし実行することもできます。
 
-@[code](@snippets/installation/build_nu_from_source_release.sh)
+<Code code={buildNuFromSourceRelease} lang="nu" />
 
 Rust に慣れている人は、"run"がデフォルトでビルドを行うのに、なぜ"build"と"run"の両方を行うのか疑問に思うかもしれません。
 これは Cargo の新しい`default-run`オプションの欠点を回避し、全てのプラグインがビルドされるようにするためですが、将来的には必要なくなるかもしれません。
