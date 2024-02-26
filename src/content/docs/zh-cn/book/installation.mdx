@@ -3,20 +3,20 @@ title: 安装 Nu
 ---
 
 import { Code } from "@astrojs/starlight/components";
-import runNu from "../snippets/installation/run_nu.nu?raw";
-import rustupChooseRustVersion from "../snippets/installation/rustup_choose_rust_version.nu?raw";
-import installPkgConfigLibsslDiv from "../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
-import installRhelDependencies from "../snippets/installation/install_rhel_dependencies.nu?raw";
-import macosDeps from "../snippets/installation/macos_deps.nu?raw";
-import cargoInstall from "../snippets/installation/cargo_install_nu.nu?raw";
-import cargoInstallNuMoreFeatures from "../snippets/installation/cargo_install_nu_more_features.nu?raw";
-import gitCloneNu from "../snippets/installation/git_clone_nu.nu?raw";
-import buildNuFromSource from "../snippets/installation/build_nu_from_source.nu?raw";
-import buildNuFromSourceRelease from "../snippets/installation/build_nu_from_source_release.nu?raw";
-import useRawKeyAndClipboard from "../snippets/installation/use_rawkey_and_clipboard.nu?raw";
-import chshInvalidShellError from "../snippets/installation/chsh_invalid_shell_error.nu?raw";
-import windowsTerminalDefaultShell from "../snippets/installation/windows_terminal_default_shell.nu?raw";
-import windowsChangeDefaultProfile from "../snippets/installation/windows_change_default_profile.nu?raw";
+import runNu from "../../snippets/installation/run_nu.nu?raw";
+import rustupChooseRustVersion from "../../snippets/installation/rustup_choose_rust_version.nu?raw";
+import installPkgConfigLibsslDiv from "../../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
+import installRhelDependencies from "../../snippets/installation/install_rhel_dependencies.nu?raw";
+import macosDeps from "../../snippets/installation/macos_deps.nu?raw";
+import cargoInstallNu from "../../snippets/installation/cargo_install_nu.nu?raw";
+import cargoInstallNuMoreFeatures from "../../snippets/installation/cargo_install_nu_more_features.nu?raw";
+import gitCloneNu from "../../snippets/installation/git_clone_nu.nu?raw";
+import buildNuFromSource from "../../snippets/installation/build_nu_from_source.nu?raw";
+import buildNuFromSourceRelease from "../../snippets/installation/build_nu_from_source_release.nu?raw";
+import useRawkeyAndClipboard from "../../snippets/installation/use_rawkey_and_clipboard.nu?raw";
+import chshInvalidShellError from "../../snippets/installation/chsh_invalid_shell_error.nu?raw";
+import windowsTerminalDefaultShell from "../../snippets/installation/windows_terminal_default_shell.nu?raw";
+import windowsChangeDefaultProfile from "../../snippets/installation/windows_change_default_profile.nu?raw";
 
 有很多方法可以获取并使用 Nu。你可以从我们的 [发布页面](https://github.com/nushell/nushell/releases) 下载预编译的二进制文件，也可以 [使用你喜欢的软件包管理器](https://repology.org/project/nushell/versions)，或者从源码构建。
 
@@ -82,7 +82,7 @@ Nu 目前需要 **最新（1.66.1 或更高）的稳定** 版本的 Rust。最�
 
 对于希望使用 "rawkey" 或 "clipboard" 可选功能的 Linux 用户，需要安装 "libx11-dev" 和 "libxcb-composite0-dev" 软件包。
 
-<Code code={useRaykeyAndClipboard} lang="nu" />
+<Code code={useRawkeyAndClipboard} lang="nu" />
 
 #### 基于 RHEL 的发行版
 

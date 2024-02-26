@@ -3,15 +3,15 @@ title: 在系统中四处移动
 ---
 
 import { Code } from "@astrojs/starlight/components";
-import lsExample from "../snippets/moving_around/ls_example.nu?raw";
-import lsShallowGlobExample from "../snippets/moving_around/ls_shallow_glob_example.nu?raw";
-import lsDeepGlobExample from "../snippets/moving_around/ls_deep_glob_example.nu?raw";
-import cdExample from "../snippets/moving_around/cd_example.nu?raw";
-import cdWithoutCommandExample from "../snippets/moving_around/cd_with_command_example.nu?raw";
-import mvExample from "../snippets/moving_around/mv_example.nu?raw";
-import cpExample from "../snippets/moving_around/cp_example.nu?raw";
-import rmExample from "../snippets/moving_around/rm_example.nu?raw";
-import mkdirExample from "../snippets/moving_around/mkdir_example.nu?raw";
+import lsExample from "../../snippets/moving_around/ls_example.nu?raw";
+import lsShallowGlobExample from "../../snippets/moving_around/ls_shallow_glob_example.nu?raw";
+import lsDeepGlobExample from "../../snippets/moving_around/ls_deep_glob_example.nu?raw";
+import cdExample from "../../snippets/moving_around/cd_example.nu?raw";
+import cdWithoutCommandExample from "../../snippets/moving_around/cd_without_command_example.nu?raw";
+import mvExample from "../../snippets/moving_around/mv_example.nu?raw";
+import cpExample from "../../snippets/moving_around/cp_example.nu?raw";
+import rmExample from "../../snippets/moving_around/rm_example.nu?raw";
+import mkdirExample from "../../snippets/moving_around/mkdir_example.nu?raw";
 
 早期的 Shell 允许你在文件系统中进行目录跳转并运行命令，而现代的 Shell 如 Nu 也允许你这样做。让我们来看看你在与系统交互时可能会用到的一些常用命令。
 
@@ -49,7 +49,7 @@ Nu 也使用现代 Globs，它允许你访问更深的目录。比如，`ls **/*
 
 如果 [`cd`](/commands/docs/cd.md) 被省略，只给出一个路径本身，也可以改变当前工作目录：
 
-<Code code={cdEWithoutCommandExample} lang="nu" />
+<Code code={cdWithoutCommandExample} lang="nu" />
 
 :::caution
 用 [`cd`](/commands/docs/cd.md) 改变目录会改变 `PWD` 环境变量。这意味着目录的改变会保留到当前代码块中，一旦你退出这个代码块，你就会返回到以前的目录。你可以在 [环境篇](environment.md) 中了解更多关于这方面的信息。

@@ -76,7 +76,7 @@ def main [] {
 }
 ```
 
-![Log message examples](../../assets/images/0_79_std_log.png)
+![Log message examples](../../../assets/images/0_79_std_log.png)
 
 The log level for output can be set with the `NU_LOG_LEVEL` environment variable:
 

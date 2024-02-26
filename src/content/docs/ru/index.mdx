@@ -1,0 +1,50 @@
+---
+title: Nushell
+description: Новый тип оболочки
+template: splash
+editUrl: true
+lastUpdated: false
+hero:
+  tagline: Новый тип оболочки
+  actions:
+    - text: Get Started
+      link: /introduction/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/nushell/nushell.github.io
+      icon: external
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <Card title="Конвейеры для управления любой ОС">
+    Nu работает на Linux, macOS, BSD и Windows. Выучите его один раз, а затем
+    используйте везде.
+  </Card>
+  <Card title="Все есть данные">
+    Конвейеры Nu используют структурированные данные, поэтому вы можете спокойно
+    выбирать, фильтровать и сортировать их каждый раз одним и тем же способом.
+    Перестаньте парсить строки и начните решать проблемы.
+  </Card>
+  <Card title="Мощные плагины">
+    Nu легко расширяется с помощью мощной системы плагинов.
+  </Card>
+</CardGrid>
+
+<br />
+
+![Снимок экрана, показывающий использование команды ls](../../../assets/images/ls-example.png)
+
+### Nu работает с существующими данными
+
+Nu говорит на языках [JSON, YAML, SQLite, Excel, и других](/book/loading_data.html) из коробки. В конвейер Nu легко внести данные, будь они в файле, базе данных или веб-API:
+
+![Снимок экрана, показывающий выборку с помощью веб-API](../../../assets/images/fetch-example.png)
+
+### Nu имеет отличные сообщения об ошибках
+
+Nu оперирует типизированными данными, поэтому отлавливает ошибки, которые другие оболочки не могут. А когда что-то ломается, Nu точно сообщает, где и почему:
+
+![Снимок экрана, показывающий, как Nu ловит ошибку типа](../../../assets/images/0_60_miette.png)
