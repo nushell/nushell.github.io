@@ -62,48 +62,134 @@ export default defineConfig({
           items: [
             {
               label: "Start Here",
-              translations: { "pt-BR": "Comece Aqui" },
+              translations: { pt: "Comece Aqui" },
               collapsed: true,
               items: [
-                { label: "Introduction", link: "/introduction/" },
+                {
+                  label: "Introduction",
+                  link: "/introduction/",
+                  translations: {
+                    pt: "Introdução",
+                    es: "Introducción",
+                    "zh-CN": "介绍",
+                  },
+                },
                 {
                   label: "Getting Started",
                   link: "/book/getting_started/",
-                  translations: { "pt-BR": "Introdução" },
+                  translations: { pt: "Introdução" },
                 },
-                { label: "Installation", link: "/book/installation/" },
+                {
+                  label: "Installation",
+                  link: "/book/installation/",
+                  translations: { "zh-CN": "安装 Nu" },
+                },
                 { label: "Default Shell", link: "/book/default_shell/" },
                 { label: "Quick Tour", link: "/book/quick_tour/" },
-                { label: "Moving Around", link: "/book/moving_around/" },
-                { label: "Thinking in Nu", link: "/book/thinking_in_nu/" },
+                {
+                  label: "Moving Around",
+                  link: "/book/moving_around/",
+                  translations: { "zh-CN": "在系统中四处移动" },
+                },
+                {
+                  label: "Thinking in Nu",
+                  link: "/book/thinking_in_nu/",
+                  translations: { "zh-CN": "以 Nushell 的方式思考" },
+                },
                 { label: "Cheat Sheet", link: "/book/cheat_sheet/" },
               ],
             },
             {
               label: "Nu Fundamentals",
+              collapsed: true,
               items: [
-                { label: "Data Types", link: "/book/types_of_data/" },
-                { label: "Loading Data", link: "/book/loading_data" },
-                { label: "Pipelines", link: "/book/pipelines/" },
-                { label: "Strings", link: "/book/working_with_strings/" },
-                { label: "Lists", link: "/book/working_with_lists/" },
-                { label: "Tables", link: "/book/working_with_tables/" },
+                {
+                  label: "Data Types",
+                  link: "/book/types_of_data/",
+                  translations: {
+                    pt: "Tipos de Dados",
+                    es: "Tipos de Datos",
+                    "zh-CN": "数据类型",
+                  },
+                },
+                {
+                  label: "Loading Data",
+                  link: "/book/loading_data",
+                  translations: {
+                    pt: "Carregando Dados",
+                    es: "Cargando datos",
+                    "zh-CN": "加载数据",
+                  },
+                },
+                {
+                  label: "Pipelines",
+                  link: "/book/pipelines/",
+                  translations: { "zh-CN": "管道" },
+                },
+                {
+                  label: "Strings",
+                  link: "/book/working_with_strings/",
+                  translations: { "zh-CN": "处理字符串" },
+                },
+                {
+                  label: "Lists",
+                  link: "/book/working_with_lists/",
+                  translations: { "zh-CN": "处理列表" },
+                },
+                {
+                  label: "Tables",
+                  link: "/book/working_with_tables/",
+                  translations: {
+                    pt: "Tabelas",
+                    es: "Tablas",
+                    "zh-CN": "处理表格",
+                  },
+                },
               ],
             },
             {
               label: "Programming in Nu",
+              collapsed: true,
               items: [
-                { label: "Custom commands", link: "/book/custom_commands/" },
-                { label: "Aliases", link: "/book/aliases/" },
-                { label: "Operators", link: "/book/operators/" },
+                {
+                  label: "Custom commands",
+                  link: "/book/custom_commands/",
+                  translations: { "zh-CN": "自定义命令" },
+                },
+                {
+                  label: "Aliases",
+                  link: "/book/aliases/",
+                  translations: { "zh-CN": "别名" },
+                },
+                {
+                  label: "Operators",
+                  link: "/book/operators/",
+                  translations: { "zh-CN": "运算符" },
+                },
                 {
                   label: "Variables and Subexpressions",
                   link: "/book/variables_and_subexpressions/",
+                  translations: {
+                    es: "Variables y Subexpresiones",
+                    "zh-CN": "变量和子表达式",
+                  },
                 },
                 { label: "Control Flow", link: "/book/control_flow/" },
-                { label: "Scripts", link: "/book/scripts/" },
-                { label: "Modules", link: "/book/modules/" },
-                { label: "Overlays", link: "/book/overlays/" },
+                {
+                  label: "Scripts",
+                  link: "/book/scripts/",
+                  translations: { "zh-CN": "脚本" },
+                },
+                {
+                  label: "Modules",
+                  link: "/book/modules/",
+                  translations: { "zh-CN": "模块" },
+                },
+                {
+                  label: "Overlays",
+                  link: "/book/overlays/",
+                  translations: { "zh-CN": "覆层" },
+                },
                 {
                   label: "Command signature",
                   link: "/book/command_signature/",
@@ -115,15 +201,48 @@ export default defineConfig({
             {
               label: "Nu Shell",
               items: [
-                { label: "Configuration", link: "/book/configuration/" },
-                { label: "Environment", link: "/book/environment/" },
+                {
+                  label: "Configuration",
+                  link: "/book/configuration/",
+                  translations: {
+                    pt: "Configuração",
+                    es: "Configuración",
+                    "zh-CN": "配置",
+                  },
+                },
+                {
+                  label: "Environment",
+                  link: "/book/environment/",
+                  translations: {
+                    pt: "Ambiente",
+                    es: "Entorno",
+                    "zh-CN": "环境",
+                  },
+                },
                 {
                   label: "Stout, Stderr, and Exit Codes",
                   link: "/book/stdout_stderr_exit_codes/",
+                  translations: {
+                    "zh-CN": "标准输入、输出和退出码",
+                  },
                 },
-                { label: "Escaping to the system", link: "/book/escaping/" },
+                {
+                  label: "Escaping to the system",
+                  link: "/book/escaping/",
+                  translations: {
+                    pt: "Escapando para o sistema",
+                    es: "Escapando al sistema",
+                  },
+                },
                 { label: "3rd party prompts", link: "/book/3rdpartyprompts/" },
-                { label: "Shells in shells", link: "/book/shells_in_shells/" },
+                {
+                  label: "Shells in shells",
+                  link: "/book/shells_in_shells/",
+                  translations: {
+                    pt: "Shells em shells",
+                    es: "Shells en shells",
+                  },
+                },
                 {
                   label: "Reedline (Nu's line editor)",
                   link: "/book/line_editor/",
@@ -144,7 +263,14 @@ export default defineConfig({
             {
               label: "Coming to Nu from...",
               items: [
-                { label: "Coming from Bash", link: "/book/coming_from_bash/" },
+                {
+                  label: "Coming from Bash",
+                  link: "/book/coming_from_bash/",
+                  translations: {
+                    pt: "Vindo do Bash",
+                    es: "Llegando desde Bash",
+                  },
+                },
                 {
                   label: "Coming from CMD.EXE",
                   link: "/book/coming_from_cmd/",
@@ -164,11 +290,22 @@ export default defineConfig({
                   badge: { text: "Preview", variant: "caution" },
                 },
                 { label: "Dataframes", link: "/book/dataframes/" },
-                { label: "Metadata", link: "/book/metadata/" },
+                {
+                  label: "Metadata",
+                  link: "/book/metadata/",
+                  translations: { pt: "Metadados", es: "Metadatos" },
+                },
                 { label: "Errors", link: "/book/creating_errors/" },
                 { label: "Parallelism", link: "/book/parallelism/" },
-                { label: "Plugins", link: "/book/plugins/" },
-                { label: "Explore", link: "/book/explore/" },
+                {
+                  label: "Plugins",
+                  link: "/book/plugins/",
+                },
+                {
+                  label: "Explore",
+                  link: "/book/explore/",
+                  translations: { pt: "Explorar", es: "Explorar" },
+                },
               ],
             },
           ],
