@@ -1,0 +1,47 @@
+---
+title: Nushell
+description: 新しいタイプのシェル
+template: splash
+editUrl: true
+lastUpdated: false
+hero:
+  tagline: 新しいタイプのシェル
+  actions:
+    - text: Get Started
+      link: /introduction/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/nushell/nushell.github.io
+      icon: external
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <Card title="あらゆるOSを制御するパイプライン">
+     Nuは、Linux、macOS、Windowsで動作します。一度身に付ければ、どこでも使えるようになります。
+  </Card>
+  <Card title=" すべてはデータである">
+   Nuパイプラインは構造化されたデータを使用するため、毎回同じ方法で安全に選択、フィルタリング、ソートを行うことができます。文字列をパースするのをやめて、問題を解決しましょう。
+  </Card>
+  <Card title="強力なプラグイン">
+    強力なプラグインシステムを使って、Nuを簡単に拡張することができます。
+  </Card>
+</CardGrid>
+
+<br />
+
+![Screenshot showing using the ls command](../../assets/images/ls-example.png)
+
+### Nu は既存のデータとの連携が可能
+
+Nu はでは[JSON, YAML, XML, Excel and more](/book/loading_data.md)を標準サポートしています。ファイル、データベース、Web API など、どのようなデータでも簡単に Nu パイプラインに取り込むことができます。
+
+![Screenshot showing fetch with a web API](../../assets/images/fetch-example.png)
+
+### Nu のエラーメッセージは非常に分かりやすい
+
+Nu は型付けされたデータを操作するので、他のシェルでは見つけられないバグを発見することができます。そして、壊れたときには、どこで、なぜ壊れたかを正確に教えてくれます。
+
+![Screenshot showing Nu catching a type error](../../assets/images/0_60_miette.png)
