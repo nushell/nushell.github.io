@@ -123,6 +123,7 @@ export const sidebarEn: SidebarConfig = {
         'philosophy_0_80',
         'commands',
         'plugins',
+        'plugin_protocol_reference',
       ],
     },
   ],
