@@ -183,7 +183,7 @@ These are messages sent from the plugin to the engine. [`Hello`](#hello) and [`S
 
 #### `Error` plugin call response
 
-An error occured while attempting to fulfill the request.
+An error occurred while attempting to fulfill the request.
 
 | Field     | Type                    | Usage                                                                                |
 | --------- | ----------------------- | ------------------------------------------------------------------------------------ |
