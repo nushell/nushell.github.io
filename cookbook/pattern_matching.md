@@ -106,7 +106,7 @@ def "str append" [tail: string]: [string -> string, list<string> -> list<string>
 }
 ```
 
-The `$input | describe` would output for example `string` if the input was a string, and for example `list<any>` for a list contianing multiple different types. The regex, removes everying after the first `<` leaving us just with `list`.
+The `$input | describe` would output for example `string` if the input was a string, and for example `list<any>` for a list containing multiple different types. The regex, removes everying after the first `<` leaving us just with `list`.
 
 Then with the `match` statement we can handle the different types separately. Finally in the default case we just return the input unaltered so that other types can simply pass through this filter without issue.
 Also note that we have to capture the `$in` variable on the first statement of the function to still have access to it in each `match` arm.
