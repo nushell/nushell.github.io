@@ -116,7 +116,7 @@ Example:
             {
               "String": {
                 "val": "0.1.2",
-                "internal_span": {
+                "span": {
                   "start": 40407,
                   "end": 40415
                 }
@@ -129,9 +129,9 @@ Example:
               {
                 "Bool": {
                   "val": true,
-                  "internal_span": {
-                    40404,
-                    40406
+                  "span": {
+                    "start": 40404,
+                    "end": 40406
                   }
                 }
               }
@@ -275,7 +275,7 @@ Example:
       "Value": {
         "Int": {
           "val": 42,
-          "internal_span": {
+          "span": {
             "start": 12,
             "end": 14
           }
@@ -308,7 +308,7 @@ Examples:
       "List": {
         "String": {
           "val": "Hello, world!",
-          "internal_span": {
+          "span": {
             "start": 40000,
             "end": 40015
           }
@@ -475,7 +475,7 @@ Example:
 {
   "Int": {
     "val": 5,
-    "internal_span": {
+    "span": {
       "start": 90960,
       "end": 90963
     }
@@ -550,7 +550,7 @@ Example:
   "Value": {
     "Int": {
       "val": 2,
-      "internal_span": {
+      "span": {
         "start": 9090,
         "end": 9093
       }
