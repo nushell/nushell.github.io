@@ -23,9 +23,9 @@
     "precommit": "npm run check-format && npm run lint"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.5",
+    "@astrojs/check": "^0.5.6",
     "@astrojs/starlight": "^0.20.1",
-    "astro": "^4.4.4",
+    "astro": "^4.4.5",
     "sharp": "^0.33.2",
     "typescript": "^5.3.3"
   },
