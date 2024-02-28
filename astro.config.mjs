@@ -61,10 +61,10 @@ export default defineConfig({
           collapsed: true,
           items: [
             {
-              label: "Start Here",
+              label: "Getting Started",
               translations: { pt: "Comece Aqui" },
               collapsed: true,
-              autogenerate: { directory: "/book/start-here" },
+              autogenerate: { directory: "/book/getting-started" },
             },
             {
               label: "Nu Fundamentals",
