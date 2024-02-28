@@ -19,6 +19,9 @@ feature: default
 
 ```> clear {flags} ```
 
+## Flags
+
+ -  `--all, -a`: Clear the terminal and its history
 
 ## Input/output types:
 
@@ -31,5 +34,11 @@ feature: default
 Clear the terminal
 ```nu
 > clear
+
+```
+
+Clear the terminal and its history
+```nu
+> clear --all
 
 ```
