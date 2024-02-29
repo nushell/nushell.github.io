@@ -95,8 +95,8 @@ When you run the file (`python hello_eval.py`), you'll see two messages: "Hello 
 1. Parse the whole source code
 2. Evaluate `print("Hello world!")`
 3. To evaluate `eval("print('Hello eval!')")`:
-   3.1. Parse `print('Hello eval!')`
-   3.2. Evaluate `print('Hello eval!')`
+    1. Parse `print('Hello eval!')`
+    2. Evaluate `print('Hello eval!')`
 
 Of course, you can have more fun and try `eval("eval(\"print('Hello eval!')\")")` and so on...
 
@@ -113,14 +113,14 @@ exec("def hello(): print('Hello eval!')")
 hello()
 ```
 
-_Note: We're using `exec` instead of `eval` because it can execute all valid Python code, not just expressions. The principle is similar, though._
+_Note: We're using `exec` instead of `eval` because it can execute any valid Python code, not just expressions. The principle is similar, though._
 
 What happens:
 
 1. Parse the whole source code
 2. To evaluate `exec("def hello(): print('Hello eval!')")`:
-   2.1. Parse `def hello(): print('Hello eval!')`
-   2.2 Evaluate `def hello(): print('Hello eval!')`
+   1. Parse `def hello(): print('Hello eval!')`
+   2. Evaluate `def hello(): print('Hello eval!')`
 3. Evaluate `hello()`
 
 Note, that until step 2.2, the interpreter has no idea a function `hello` exists! This makes static analysis of dynamic languages challenging. In the example, the existence of `hello` function cannot be checked just by parsing (compiling) the source code. You actually need to go and evaluate (run) the code to find out. While in a compiled language, missing function is a guaranteed compile error, in a dynamic interpreted language, it is a runtime error (which can slip unnoticed if the line calling `hello()` is, for example, behind an `if` condition and does not get executed).
