@@ -568,6 +568,8 @@ if __name__ == "__main__":
         input = json.loads(line)
         if "Hello" in input:
             pass
+        elif input == "Goodbye":
+            break
         elif "Call" in input:
             [id, call] = input["Call"]
             if call == "Signature":
@@ -593,6 +595,8 @@ if __name__ == "__main__":
         input = json.loads(line)
         if "Hello" in input:
             pass
+        elif input == "Goodbye":
+            break
         elif "Call" in input:
             [id, call] = input["Call"]
             if call == "Signature":
