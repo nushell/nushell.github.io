@@ -25,6 +25,8 @@ Typical plugin interaction after the initial handshake looks like this:
 
 The plugin **should** respond to further plugin calls. The engine **may** send additional plugin calls before responses have been received, and it is up to the plugin to decide whether to handle each call immediately as it is received, or to process only one at a time and hold on to them for later. In any case, sending another plugin call before a response has been received **should not** cause an error.
 
+The engine **may** send a [`Goodbye`](#goodbye) message to the plugin indicating that it will no longer send any more plugin calls. Upon receiving this message, the plugin **may** choose not to accept any more plugin calls, and **should** exit after any in-progress plugin calls have finished.
+
 ## `Hello`
 
 After the encoding type has been decided, both the engine and plugin **must** send a `Hello` message containing relevant version and protocol support information.
@@ -173,6 +175,18 @@ There is currently one supported operation: `ToBaseValue`, which **should** retu
     }
   ]
 }
+```
+
+### `Goodbye`
+
+Indicate that no further plugin calls are expected, and that the plugin **should** exit as soon as it is finished processing any in-progress plugin calls.
+
+This message is not a map, it is just a bare string, as it takes no arguments.
+
+Example:
+
+```json
+"Goodbye"
 ```
 
 ## Output messages
