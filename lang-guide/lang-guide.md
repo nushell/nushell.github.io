@@ -206,7 +206,7 @@ Column names also double as fields in structs. `$x.bar` will return the value in
 
 ### Glob
 
-Nu supports creating a value as a glob, it's similar to string, but if you pass it to some commands that suport glob pattern(e.g: `open`), it will be expanded.  It's best to see difference between `glob` and `string` by example:
+Nu supports creating a value as a glob, it's similar to string, but if you pass it to some commands that support glob pattern(e.g: `open`), it will be expanded.  It's best to see difference between `glob` and `string` by example:
 
 ```nushell
 let f = "a*c.txt"   # a string type.
