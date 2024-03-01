@@ -204,6 +204,47 @@ Column names also double as fields in structs. `$x.bar` will return the value in
 
 ### CustomValue
 
+### Glob
+
+Nu supports creating a value as a glob, it's similar to string, but if you pass it to some commands that suport glob pattern(e.g: `open`), it will get expanded.  To see a difference between `glob` and `string`, its best to see the following example:
+
+```nushell
+let f = "a*c.txt"   # a string type.
+open $f   # opens a file names `a*c.txt`
+
+let g: glob = "a*c.txt"   # a glob type.
+open $g   # opens files matches the glob pattern, e.g: `abc.txt`, `aac.txt`
+```
+
+The same rules happened if you are using custom command:
+
+```nushell
+# open files which match a given glob pattern
+def open-files [g: glob] {
+    open $g
+}
+
+# open one file
+def open-one-file [g: string] {
+    open $g
+}
+
+# open one file
+def open-one-file2 [g] {
+    open $g
+}
+```
+
+You can use `into glob` and `into string` to convert values between `glob` and `string`.
+
+If you pass a `string` or a `bare word` to `builtin commands` which support glob pattern directly(not passing a variable or subexpression etc.), it follows some rules, let's see them by examples:
+```nushell
+open *.txt    # opens all files which ends with `.txt`
+open `*.txt`  # it's backtick quoted, it's a bare word, so nu opens all files which ends with `.txt`
+open "*.txt"  # it's quoted, opens a file named `*.txt`
+open '*.txt"  # it's quoted, opens a file named `*.txt`
+```
+
 ## Numbers and Arithmetic
 
 ### Arithmetic Operators
