@@ -35,7 +35,7 @@ If you pass a variable to a command that support globbing like this: `let f = "a
 
 1. using spread operator along with `glob` command: `let f = "a[bc]d.txt"; rm ...(glob $f)`. This way is recommended because it's expressed most explicitly, but it doesn't work with `ls` and `du` command, for the case, you can
 2. using `into glob` command: `let f = "a[bc]d.txt"; ls ($f | into glob)`.  It's useful for `ls` and `du` commands.
-3. annotate variable with `glob` type: `let f: glob = "a[bc]d.txt"; rm $f`. It's simple to write, but doesn't work with external command yet.
+3. annotate variable with `glob` type: `let f: glob = "a[bc]d.txt"; rm $f`. It's simple to write, but doesn't work with external command like `^rm $f`.
 
 ## Changing the current directory
 
