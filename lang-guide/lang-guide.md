@@ -222,11 +222,15 @@ The same rules happened if you are using custom command:
 # open files which match a given glob pattern
 def open-files [g: glob] {
     open $g
+    # In case if you want to open one file only
+    # open ($g | into string)
 }
 
 # open one file
 def open-one-file [g: string] {
     open $g
+    # In case if you want to open with glob pattern
+    # open ($g | into glob)
 }
 
 # open one file
