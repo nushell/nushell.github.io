@@ -144,13 +144,20 @@ This will append `/some/path` to the end of PATH; you can also use [`prepend`](/
 
 Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.html#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append.md)/[`prepend`](/commands/docs/prepend.md) directly.
 
-To prepend a new path only if not already listed, one can add to `env.nu`:
+To add multiple paths only if not already listed, one can add to `env.nu`:
+
 ```nu
-# create a new string holding the desired path
-let my_path = ( $nu.home-path | path join "bin" )
-# return $env.PATH if $my_path is already listed, return $env.PATH with $my_path prepended otherwise
-$env.PATH = ( if $my_path in $env.PATH { $env.PATH } else { $env.PATH | prepend $my_path } )
+$env.PATH = ($env.PATH | 
+    split row (char esep) |
+    append /usr/local/bin |
+    append ($env.CARGO_HOME | path join "bin") |
+    append ($env.HOME | path join ".local" "bin")
+)
+# filter so the paths are unique
+$env.PATH = ($env.PATH | uniq)
 ```
+
+This will add `/some/path`, the `bin` directory of CARGO_HOME, the `.local/bin` of HOME to PATH. It will also remove duplicates from PATH.
 
 ### Homebrew
 
