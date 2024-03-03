@@ -49,6 +49,16 @@ Returns the piped-in value, by using the special $in variable to obtain it.
 
 ```
 
+To do string interpolation, and evaluation inside a string:
+```nu
+> let name = "Alice"
+> echo $"greetings, ($name)" $"(2 + 2)"
+╭───┬──────────────────╮
+│ 0 │ greetings, Alice │
+│ 1 │ 4                │
+╰───┴──────────────────╯
+```
+
 ## Notes
 When given no arguments, it returns an empty string. When given one argument,
 it returns it. Otherwise, it returns a list of the arguments. There is usually
