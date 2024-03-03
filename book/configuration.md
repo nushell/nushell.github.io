@@ -157,7 +157,7 @@ $env.PATH = ($env.PATH |
 $env.PATH = ($env.PATH | uniq)
 ```
 
-This will add `/some/path`, the `bin` directory of CARGO_HOME, the `.local/bin` of HOME to PATH. It will also remove duplicates from PATH.
+This will add `/usr/local/bin`, the `bin` directory of CARGO_HOME, the `.local/bin` of HOME to PATH. It will also remove duplicates from PATH.
 
 ### Homebrew
 
