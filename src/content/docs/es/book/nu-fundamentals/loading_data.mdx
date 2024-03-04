@@ -2,24 +2,16 @@
 title: Cargando datos
 ---
 
+import { Code } from "@astrojs/starlight/components";
+import lsExample from "../../../snippets/loading_data/vscode.nu?raw";
+
 Hemos visto como puedes usar comandos como `ls`, `ps`, `date`, y `sys` para cargar información sobre los archivos, procesos, hora de fecha, y del mismo sistema. Cada comando nos entrega una tabla de información que podemos explorar. Hay otras maneras de cargar datos en una tabla de datos para trabajar.
 
 ## Abriendo archivos
 
 Una de las funciones más destacadas de Nu para trabajar con datos es el comando `open`. Es una multi-herramienta que puede trabajar con varios formatos de datos. Para ver qué significa esto intentemos abrir un archivo en formato json:
 
-```nu
-> open editors/vscode/package.json
-------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
- name | descript | author   | license | version | reposito | publishe | categori | keywords | engines  | activati | main     | contribu | scripts  | devDepen
-      | ion      |          |         |         | ry       | r        | es       |          |          | onEvents |          | tes      |          | dencies
-------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
- lark | Lark     | Lark     | MIT     | 1.0.0   | [object] | vscode   | [0       | [1 item] | [object] | [1 item] | ./out/ex | [object] | [object] | [object]
-      | support  | develope |         |         |          |          | items]   |          |          |          | tension  |          |          |
-      | for VS   | rs       |         |         |          |          |          |          |          |          |          |          |          |
-      | Code     |          |         |         |          |          |          |          |          |          |          |          |          |
-------+----------+----------+---------+---------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------
-```
+<Code code={vscode} lang="nu">
 
 De manera similar a `ls`, abrir un tipo de archivo que Nu entienda nos devolverá algo más que solo texto (o una secuencia de bytes). Aquí abrimos el archivo "package.json" de un proyecto de JavaScript. Nu puede reconocer y abrir el texto en JSON y devolvernos una tabla de datos.
 

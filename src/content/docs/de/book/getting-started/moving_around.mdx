@@ -2,65 +2,46 @@
 title: Im System navigieren
 ---
 
+import { Code } from "@astrojs/starlight/components";
+import lsExample from "../../../snippets/moving_around/ls_example.nu?raw";
+import lsShallowGlobExample from "../../../snippets/moving_around/ls_shallow_glob_example.nu?raw";
+import lsDeepGlobExample from "../../../snippets/moving_around/ls_deep_glob_example.nu?raw";
+import cdExample from "../../../snippets/moving_around/cd_example.nu?raw";
+import cdWithoutCommandExample from "../../../snippets/moving_around/cd_without_command_example.nu?raw";
+import mvExample from "../../../snippets/moving_around/mv_example.nu?raw";
+import cpExample from "../../../snippets/moving_around/cp_example.nu?raw";
+import rmExample from "../../../snippets/moving_around/rm_example.nu?raw";
+import mkdirExample from "../../../snippets/moving_around/mkdir_example.nu?raw";
+
 Traditionelle Shells erlauben es im Dateisystem zu navigieren und Befehle auszuführen. So auch Nu. Hier die gängigsten Befehle, die beim Interagieren mit dem System am häufigsten benutzt werden.
 
 ## Verzeichnisinhalt ansehen
 
-```nu
-ls
-```
+<Code code={lsExample} lang="nu" />
 
 Wie im anderen Kapitel bereits gezeigt wurde, ist [`ls`](/commands/docs/ls.md) der Befehl um den Inhalt eines Pfades anzuzeigen. Der Output wird als Tabelle dargestellt.
 
 Der [`ls`](/commands/docs/ls.md) Befehl nimmt auch ein optionales Argument entgegen, um die Ansicht zu verändern. Zum Beispiel um nur ".md" Dateien an zu zeigen.
 
-```nu
-> ls *.md
-───┬────────────────────┬──────┬─────────┬────────────
- # │ name               │ type │ size    │ modified
-───┼────────────────────┼──────┼─────────┼────────────
- 0 │ CODE_OF_CONDUCT.md │ File │  3.4 KB │ 5 days ago
- 1 │ CONTRIBUTING.md    │ File │   886 B │ 5 days ago
- 2 │ README.md          │ File │ 15.0 KB │ 5 days ago
- 3 │ TODO.md            │ File │  1.6 KB │ 5 days ago
-───┴────────────────────┴──────┴─────────┴────────────
-```
+<Code code={lsShallowGlobExample} lang="nu">
 
 Der Asterisk (\*) im obigen Beispiel "\*.md" wird auch als Wildcard oder glob bezeichnet. Es kann für jedes Zeichen stehen. Man kann "\*.md" auch als "entspricht jeder Datei, die mit '.md' aufhört" lesen.
 
 Nu verwendet auch moderne globs, mit welchen man auch tiefer liegende Verzeichnisse erreichen kann.
 
-```nu
-ls **/*.md
-───┬───────────────────────────────────────────┬──────┬─────────┬───────────
-# │ name                                      │ type │ size    │ modified
-───┼───────────────────────────────────────────┼──────┼─────────┼───────────
-0 │ CODE_OF_CONDUCT.md                        │ File │  3.4 KB │ 5 days ago
-1 │ CONTRIBUTING.md                           │ File │   886 B │ 5 days ago
-2 │ README.md                                 │ File │ 15.0 KB │ 5 days ago
-3 │ TODO.md                                   │ File │  1.6 KB │ 5 days ago
-4 │ crates/nu-source/README.md                │ File │  1.7 KB │ 5 days ago
-5 │ docker/packaging/README.md                │ File │  1.5 KB │ 5 days ago
-6 │ docs/commands/README.md                   │ File │   929 B │ 5 days ago
-7 │ docs/commands/alias.md                    │ File │  1.7 KB │ 5 days ago
-8 │ docs/commands/append.md                   │ File │  1.4 KB │ 5 days ago
-```
+<Code code={lsDeepGlobExample} lang="nu">
 
 Hier werden alle ".md" Dateien ausgegeben, die "in jedem tiefer liegenden Verzeichnis" von hier aus liegen.
 
 ## Wechseln des aktuellen Verzeichnisses
 
-```nu
-cd new_directory
-```
+<Code code={cdExample} lang="nu" />
 
 Um vom aktuellen Verzeichnis in ein neues zu gelangen, wird der [`cd`](/commands/docs/cd.md) Befehl verwendet. Wie in jeder anderen Shell, kann entweder der Name des Verzeichnisses angeben, oder mit `..` ein Verzeichnis hochgesprungen werden.
 
 Es kann jedoch auch das Verzeichnis gewechselt werden ohne [`cd`](/commands/docs/cd.md) angeben zu müssen, indem einfach der neue Pfad angegeben wird:
 
-```nu
-./new_directory
-```
+<Code code={cdWithoutCommandExample} lang="nu" />
 
 **Hinweis** wenn mit [`cd`](/commands/docs/cd.md) das Verzeichnis gewechselt wird, ändert sich die `PWD` Umgebungsvariable. Das heisst der Wechsel bleibt für den aktuellen Block bestehen. Beim Verlassen des Blocks, wird wieder ins vorherige Verzeichnis gewechselt.
 Mehr zu dieser Funktionsweise findet sich im Kapitel [environment chapter](./environment.md).
@@ -71,26 +52,18 @@ Nu stellt auch einige Dateisystem Basis-Befehle zur Verfügung, die auf allen Pl
 
 Ein Objekt von einem Ort an einen anderen verschieben mit [`mv`](/commands/docs/mv.md):
 
-```nu
-mv item location
-```
+<Code code={mvExample} lang="nu" />
 
 Ein Objekt kopieren von einem an den nächsten Ort:
 
-```nu
-cp item location
-```
+<Code code={cpExample} lang="nu" />
 
 Ein Objekt löschen:
 
-```nu
-rm item
-```
+<Code code={rmExample} lang="nu" />
 
 Diese drei Befehle können auch von der glob Fähigkeit profitieren, wie beim [`ls`](/commands/docs/ls.md).
 
 Zu guter Letzt wird ein neues Verzeichnis angelegt mit dem [`mkdir`](/commands/docs/mkdir.md) Befehl:
 
-```nu
-mkdir new_directory
-```
+<Code code={mkdirExample} lang="nu" />

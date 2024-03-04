@@ -5,12 +5,26 @@ sidebar:
 ---
 
 import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
+import runNu from "../../../snippets/installation/run_nu.nu?raw";
+import rustupChooseRustVersion from "../../../snippets/installation/rustup_choose_rust_version.nu?raw";
+import installPkgConfigLibsslDiv from "../../../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
+import installRhelDependencies from "../../../snippets/installation/install_rhel_dependencies.nu?raw";
+import macosDeps from "../../../snippets/installation/macos_deps.nu?raw";
+import cargoInstallNu from "../../../snippets/installation/cargo_install_nu.nu?raw";
+import cargoInstallNuMoreFeatures from "../../../snippets/installation/cargo_install_nu_more_features.nu?raw";
+import gitCloneNu from "../../../snippets/installation/git_clone_nu.nu?raw";
+import buildNuFromSource from "../../../snippets/installation/build_nu_from_source.nu?raw";
+import buildNuFromSourceRelease from "../../../snippets/installation/build_nu_from_source_release.nu?raw";
+import useRawkeyAndClipboard from "../../../snippets/installation/use_rawkey_and_clipboard.nu?raw";
+import chshInvalidShellError from "../../../snippets/installation/chsh_invalid_shell_error.nu?raw";
+import windowsTerminalDefaultShell from "../../../snippets/installation/windows_terminal_default_shell.nu?raw";
+import windowsChangeDefaultProfile from "../../../snippets/installation/windows_change_default_profile.nu?raw";
 
 There are lots of ways to get Nu up and running. You can download pre-built binaries from our [release page](https://github.com/nushell/nushell/releases), [use your favourite package manager](https://repology.org/project/nushell/versions), or build from source.
 
 The main Nushell binary is named `nu` (or `nu.exe` on Windows). After installation, you can launch it by typing `nu`.
 
-<Code code="nu" lang="nushell" />
+<Code code="nu" lang="nu" />
 
 ## Pre-built binaries
 
@@ -67,18 +81,7 @@ If you don't already have Rust on our system, the best way to install it is via 
 
 Nu currently requires the **latest stable (1.66.1 or later)** version of Rust. The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
 
-```sh
-Current installation options:
-
-default host triple: x86_64-unknown-linux-gnu
-default toolchain: stable
-profile: default
-modify PATH variable: yes
-
-1) Proceed with installation (default)
-2) Customize installation
-3) Cancel installation
-```
+<Code code={rustupChooseRustVersion} lang="sh" />
 
 Once you are ready, press 1 and then enter.
 
@@ -90,50 +93,44 @@ If you'd rather not install Rust via `rustup`, you can also install it via other
 
 You will need to install the "pkg-config" and "libssl-dev" package:
 
-<Code code="apt install pkg-config libssl-dev" lang="sh" />
+<Code code={installPkgConfigLibsslDiv} lang="sh" />
 
 #### RHEL based distros
 
 You will need to install "libxcb", "openssl-devel" and "libX11-devel":
 
-<Code code="yum install libxcb openssl-devel libX11-devel" lang="sh" />
+<Code code={installRhelDependencies} lang="sh" />
 
 #### macOS
 
 Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmake" using:
 
-<Code code="brew install openssl cmake" lang="sh" />
+<Code code={macosDeps} lang="sh" />
 
 ### Build using [crates.io](https://crates.io)
 
 Nu releases are published as source to the popular Rust package registry [crates.io](https://crates.io/). This makes it easy to build and install the latest Nu release with `cargo`:
 
-<Code code="cargo install nu" lang="sh" />
+<Code code={cargoInstallNu} lang="sh" />
 
 That's it! The `cargo` tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path.
 
 If you want to install with support for [dataframes](/book/dataframes), you can install using the `--features=dataframe` flag.
 
-<Code code="cargo install nu --locked --features=dataframe" lang="sh" />
+<Code code={cargoInstallNuMoreFeatures} lang="sh" />
 
 ### Building from the GitHub repository
 
 You can also build Nu from the latest source on GitHub. This gives you immediate access to the latest features and bug fixes. First, clone the repo:
 
-<Code code="git clone https://github.com/nushell/nushell.git" lang="sh" />
+<Code code={gitCloneNu} lang="sh" />
 
 From there, we can build and run Nu with:
 
-```sh
-cd nushell
-nushell> cargo build --workspace; cargo run
-```
+<Code code={buildNuFromSource} lang="sh" />
 
 You can also build and run Nu in release mode, which enables more optimizations:
 
-<Code
-  code="nushell> cargo build --release --workspace; cargo run --release"
-  lang="sh"
-/>
+<Code code={buildNuFromSourceRelease} lang="sh" />
 
 People familiar with Rust may wonder why we do both a "build" and a "run" step if "run" does a build by default. This is to get around a shortcoming of the new `default-run` option in Cargo, and ensure that all plugins are built, though this may not be required in the future.

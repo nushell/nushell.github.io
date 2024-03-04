@@ -2,6 +2,23 @@
 title: Instalando Nu
 ---
 
+import { Code } from "@astrojs/starlight/components";
+import runNu from "../../../snippets/installation/run_nu.nu?raw";
+import rustupChooseRustVersion from "../../../snippets/installation/rustup_choose_rust_version.nu?raw";
+import installPkgConfigLibsslDiv from "../../../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
+import installRhelDependencies from "../../../snippets/installation/install_rhel_dependencies.nu?raw";
+import macosDeps from "../../../snippets/installation/macos_deps.nu?raw";
+import cargoInstallNu from "../../../snippets/installation/cargo_install_nu.nu?raw";
+import cargoInstallNuMoreFeatures from "../../../snippets/installation/cargo_install_nu_more_features.nu?raw";
+import gitCloneNu from "../../../snippets/installation/git_clone_nu.nu?raw";
+import buildNuFromSource from "../../../snippets/installation/build_nu_from_source.nu?raw";
+import buildNuFromSourceRelease from "../../../snippets/installation/build_nu_from_source_release.nu?raw";
+import useRawkeyAndClipboard from "../../../snippets/installation/use_rawkey_and_clipboard.nu?raw";
+import chshInvalidShellError from "../../../snippets/installation/chsh_invalid_shell_error.nu?raw";
+import windowsTerminalDefaultShell from "../../../snippets/installation/windows_terminal_default_shell.nu?raw";
+import windowsChangeDefaultProfile from "../../../snippets/installation/windows_change_default_profile.nu?raw";
+import windowsExampleExtractionLocation from "../../../snippets/installation/windows_example_extraction_location.nu?raw";
+
 La mejor manera actualmente para poner en marcha Nu es instalándolo a través de [crates.io](https://crates.io), descargando desde [nuestra página](https://github.com/nushell/nushell/releases), y compilar desde la fuente.
 
 ## Binarios
@@ -14,9 +31,7 @@ Puedes descargar Nu compilado desde [nuestra página](https://github.com/nushell
 
 Descarga el archivo actual `.zip` [de la página de releases](https://github.com/nushell/nushell/releases) y extráelo por ejemplo a:
 
-```nu
- C:\Program Files
-```
+<Code {windowsExampleExtractionLocation} lang="sh">
 
 y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos eso, podemos ejecutar Nu usando el comando `nu`:
 
@@ -27,20 +42,11 @@ y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos 
 
 Si te encuentras usando [Windows Terminal](https://github.com/microsoft/terminal) puedes establecer `nu` como la shell por defecto añadiendo:
 
-```nu
-{
- "guid": "{2b372ca1-1ee2-403d-a839-6d63077ad871}",
- "hidden": false,
- "name": "Nu Shell",
- "commandline": "nu.exe"
-}
-```
+<Code {windowsTerminalDefaultShell} lang="sh">
 
 a `"profiles"` en las preferencias de tu Terminal (archivo JSON). Lo último que tienes que hacer es cambiar `"defaultProfile"` a:
 
-```nu
-"defaultProfile": "{2b372ca1-1ee2-403d-a839-6d63077ad871}",
-```
+<Code {windowsChangeDefaultShell} lang="sh">
 
 Ahora `nu` debería cargar al inicio de la Terminal de Windows.
 
@@ -68,17 +74,7 @@ En el caso de que no dispongamos de Rust en nuestro sistema la mejor manera de i
 
 Nu actualmente requiere la versión **estable más reciente (1.55 o posterior)** de Rust. La mejor manera de `rustup` inferir la versión correcta para ti. En el momento de abrir `rustup` te solicitará qué versión de Rust deseas instalar:
 
-```nu
-Current installation options:
-
-   default host triple: x86_64-unknown-linux-gnu
-     default toolchain: stable
-  modify PATH variable: yes
-
-1) Proceed with installation (default)
-2) Customize installation
-3) Cancel installation
-```
+<Code code={RustupChooseRustVersion} lang="sh">
 
 Una vez que estamos listos, presionamos 1 y luego enter.
 
@@ -90,37 +86,29 @@ Si prefieres no instalar Rust mediante `rustup`, también puedes instalar a trav
 
 Vas a necesitar instalar "pkg-config" y "libssl-dev":
 
-```nu
-apt install pkg-config libssl-dev
-```
+<Code code={installPkgConfigLibsslDev} lang="sh">
 
 Usuarios de Linux que desean usar las funcionalidades opcionales `rawkey` o `clipboard` necesitarán instalar los paquetes "libx11-dev" y "libxcb-composite0-dev":
 
-<<< @/snippets/installation/use_rawkey_and_clipboard.sh
+<Code code={useRawkeyAndClipboard} lang="sh">
 
 ### Distribuciones basadas en RHEL
 
 Vas a necesitar instalar "libxcb", "openssl-devel" and "libX11-devel":
 
-```nu
-yum install libxcb openssl-devel libX11-devel
-```
+<Code code={installRhelDependencies} lang="sh">
 
 ### macOS
 
 Usando [homebrew](https://brew.sh/), vas a necesitar instalar la fórmula "openssl":
 
-```nu
-brew install openssl cmake
-```
+<Code code={macosDeps} lang="sh">
 
 ## Instalando desde [crates.io](https://crates.io)
 
 Una vez instaladas las depependencias que Nu necesita, podemos instalarla usando el comando `cargo` que viene con el compilador Rust.
 
-```nu
-> cargo install nu
-```
+<Code code={cargoInstallNuMoreFeatures} lang="sh">
 
 ¡Eso es todo! Cargo hará el trabajo de descarga Nu junto con sus dependencias, construirla e instalarla en el bin path de cargo para que podamos arrancarlo.
 
@@ -132,10 +120,11 @@ Si deseas instalar con más funcionalidades, puedes hacer:
 
 Para todas las funcionalidades disponibles, la manera más fácil es descargar la fuente de Nu y construírlo usted mismo usando las herramientas de Rust:
 
-````nu
+```nu
 > git clone https://github.com/nushell/nushell.git
 > cd nushell
 nushell> cargo install --path . --force --features=stable
+```
 
 Para que esto funcione, asegúrate de tener todas las dependencias instaladas (que se muestran arriba) en el sistema.
 
@@ -144,15 +133,13 @@ Finalizada la instalación podemos ejecutar Nu usando el comando `nu`:
 ```nu
 $ nu
 /home/jonathan/Source>
-````
+```
 
 ## Construyendo desde la fuente
 
 También podemos contruir nuestro propio Nu directamente desde github. Esto nos da acceso inmediato a las últimas funcionalidades y corrección de bugs.
 
-```nu
-> git clone https://github.com/nushell/nushell.git
-```
+<Code code={gitCloneNu} lang="sh">
 
 Git nos clonará el repositorio principal de Nu. Partiendo de ahí podemos contruir y arrancar Nu si estamos usando `rustup` con:
 
@@ -178,8 +165,6 @@ Gente familiarizada con Rust se preguntará la razón por la que hacemos un paso
 Para configurar la shell de inicio de sesión, puedes usra el comando [`chsh`](https://linux.die.net/man/1/chsh).
 En algunas distribuciones de Linux se encuentra una lista válida de shells en `/etc/shells` y no permitirá cambiar la shell hasta que Nu esté en la lista blanca. Es posible que vea un error similar al siguiente si no ha actualizado el archivo `shells`:
 
-```nu
-chsh: /home/username/.cargo/bin/nu is an invalid shell
-```
+<Code code={chshInvalidShellError} lang="sh">
 
 Puedes agregar Nu a la lista de shells válidas añadiendo el binario al archivo `shells`. La ruta para agregar puedes encontrarla con el comando `which nu`, usualmente es `$HOME/.cargo/bin/nu`.

@@ -4,6 +4,9 @@ title: Explorando seu sistema
 
 import { Code } from "@astrojs/starlight/components";
 import lsExample from "../../../snippets/introduction/ls_example.nu?raw";
+import cdExample from "../../../snippets/introduction/cd_example.nu?raw";
+import cdExample from "../../../snippets/introduction/cp_example.nu?raw";
+import cdExample from "../../../snippets/introduction/mv_example.nu?raw";
 
 Shells mais antigos permitem que você navegue pelo sistema de arquivos e execute comandos. Shells modernos como o Nu permitem que você faça o mesmo. Vamos dar uma olhada em alguns dos comandos comuns que você vai usar quando estiver interagindo com seu sistema.
 
@@ -46,9 +49,7 @@ Aqui estamos procurando qualquer arquivo cujo nome termine com ".rs" e os dois a
 
 ## Mudando o diretório atual
 
-```nu
-> cd new_directory
-```
+<Code code={cdExample} lang="nu" />
 
 Para mudar do diretório atual para um outro, usamos o comando `cd`. Assim como em outros shells, podemos usar o nome do diretório ou, se quisermos ir para um diretório acima, podemos usar o atalho `..`.
 
@@ -58,15 +59,11 @@ Nu também fornece alguns comandos básicos de sistemas de arquivos que funciona
 
 Podemos mover um item de um lugar para outro usando o comando `mv`.
 
-```nu
-> mv item location
-```
+<Code code={mvExample} lang="nu" />
 
 Podemos copiar um item de um local para outro:
 
-```nu
-> cp item location
-```
+<Code code={cpExample} lang="nu" />
 
 Podemos remover um item:
 
