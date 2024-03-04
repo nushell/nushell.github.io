@@ -14,7 +14,7 @@ So what does it mean to think in Nushell? Here are some common topics that come 
 
 Nushell is both a programming language and a shell. Because of this, it has its own way of working with files, directories, websites, and more. We've modeled this to work closely with what you may be familiar with other shells. Pipelines work by attaching two commands together:
 
-<Code code="ls | length" lang="nushell" frame="terminal" />
+<Code code="ls | length" lang="nu" />
 
 Nushell, for example, also has support for other common capabilities like getting the exit code from previously run commands.
 
@@ -24,7 +24,7 @@ While it does have these amenities, Nushell isn't bash. The bash way of working,
 
 In Nushell, we use the `>` as the greater-than operator. This fits better with the language aspect of Nushell. Instead, you pipe to a command that has the job of saving content:
 
-<Code code="'hello' | save output.txt" lang="nushell" frame="terminal" />
+<Code code="'hello' | save output.txt" lang="nu" />
 
 **Thinking in Nushell:** The way Nushell views data is that data flows through the pipeline until it reaches the user or is handled by a final command. You can simply type data, from strings to JSON-style lists and records, and follow it with `|` to send it through the pipeline. Nushell uses commands to do work and produce more data. Learning these commands and when to use them helps you compose many kinds of pipelines.
 
@@ -44,7 +44,7 @@ The [`source`](/commands/docs/source) command will grow the source that is compi
 
 Another common issue is trying to dynamically create the filename to source from:
 
-<Code code="source $'($my_path)/common.nu'" lang="nushell" frame="terminal" />
+<Code code="source $'($my_path)/common.nu'" lang="nu" />
 
 This doesn't work if `my_path` is a regular runtime variable declared with `let`. This would require the
 evaluator to run and evaluate the string, but unfortunately Nushell needs this information at compile-time.
@@ -69,7 +69,7 @@ You might wonder why Nushell uses immutable variables. Early on in Nushell's dev
 
 Just because Nushell variables are immutable doesn't mean things don't change. Nushell makes heavy use of the technique of "shadowing". Shadowing means creating a new variable with the same name as a previously declared variable. For example, say you had an `$x` in scope, and you wanted a new `$x` that was one greater:
 
-<Code code="let x = $x + 1" lang="nushell" frame="terminal" />
+<Code code="let x = $x + 1" lang="nu" />
 
 This new `x` is visible to any code that follows this line. Careful use of shadowing can make for an easier time working with variables, though it's not required.
 
