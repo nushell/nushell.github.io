@@ -51,7 +51,7 @@ For more complex strings, Nushell also offers double-quoted strings. These strin
 
 For example, we could write the text hello followed by a new line and then world, using escape characters and a double-quoted string:
 
-```nu nu frame="terminal"
+```nu
 "hello\nworld"
 # hello
 # world
