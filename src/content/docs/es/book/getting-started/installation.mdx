@@ -5,7 +5,7 @@ title: Instalando Nu
 import { Code } from "@astrojs/starlight/components";
 import runNu from "../../../snippets/installation/run_nu.nu?raw";
 import rustupChooseRustVersion from "../../../snippets/installation/rustup_choose_rust_version.nu?raw";
-import installPkgConfigLibsslDiv from "../../../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
+import installPkgConfigLibsslDev from "../../../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
 import installRhelDependencies from "../../../snippets/installation/install_rhel_dependencies.nu?raw";
 import macosDeps from "../../../snippets/installation/macos_deps.nu?raw";
 import cargoInstallNu from "../../../snippets/installation/cargo_install_nu.nu?raw";
@@ -31,7 +31,7 @@ Puedes descargar Nu compilado desde [nuestra página](https://github.com/nushell
 
 Descarga el archivo actual `.zip` [de la página de releases](https://github.com/nushell/nushell/releases) y extráelo por ejemplo a:
 
-<Code {windowsExampleExtractionLocation} lang="sh" />
+<Code code={windowsExampleExtractionLocation} lang="sh" />
 
 y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos eso, podemos ejecutar Nu usando el comando `nu`:
 
@@ -42,11 +42,11 @@ y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos 
 
 Si te encuentras usando [Windows Terminal](https://github.com/microsoft/terminal) puedes establecer `nu` como la shell por defecto añadiendo:
 
-<Code {windowsTerminalDefaultShell} lang="sh" />
+<Code code={windowsTerminalDefaultShell} lang="sh" />
 
 a `"profiles"` en las preferencias de tu Terminal (archivo JSON). Lo último que tienes que hacer es cambiar `"defaultProfile"` a:
 
-<Code {windowsChangeDefaultShell} lang="sh" />
+<Code code={windowsChangeDefaultProfile} lang="sh" />
 
 Ahora `nu` debería cargar al inicio de la Terminal de Windows.
 
