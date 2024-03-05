@@ -5,7 +5,7 @@ title: Nu installieren
 import { Code } from "@astrojs/starlight/components";
 import runNu from "../../../snippets/installation/run_nu.nu?raw";
 import rustupChooseRustVersion from "../../../snippets/installation/rustup_choose_rust_version.nu?raw";
-import installPkgConfigLibsslDiv from "../../../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
+import installPkgConfigLibsslDev from "../../../snippets/installation/install_pkg_config_libssl_dev.nu?raw";
 import installRhelDependencies from "../../../snippets/installation/install_rhel_dependencies.nu?raw";
 import macosDeps from "../../../snippets/installation/macos_deps.nu?raw";
 import cargoInstallNu from "../../../snippets/installation/cargo_install_nu.nu?raw";
@@ -18,6 +18,8 @@ import chshInvalidShellError from "../../../snippets/installation/chsh_invalid_s
 import windowsTerminalDefaultShell from "../../../snippets/installation/windows_terminal_default_shell.nu?raw";
 import windowsChangeDefaultProfile from "../../../snippets/installation/windows_change_default_profile.nu?raw";
 import windowsExampleExtractionLocation from "../../../snippets/installation/windows_example_extraction_location.nu?raw";
+import windowsRunNu from "../../../snippets/installation/windows_run_nu.nu?raw";
+import buildNuYourself from "../../../snippets/installation/build_nu_yourself.nu?raw";
 
 Der aktuell beste Weg Nu zu bekommen ist, es von [crates.io](https://crates.io) zu installieren, Binärdateien von unserer [Release-Seite](https://github.com/nushell/nushell/releases) herunterzuladen oder es selbst zu kompilieren.
 
@@ -39,7 +41,7 @@ Danach den `nu` beinhaltenden Ordner der Umgebungsvariable PATH hinzufügen. Wen
 
 Für Nutzer des [Windows Terminal](https://github.com/microsoft/terminal) kann `nu` als Standard-Shell gesetzt werden, indem:
 
-<Code code={windowsDefaultShellNu} lang="sh" />
+<Code code={windowsTerminalDefaultShell} lang="sh" />
 
 zu `"profiles"` in den Terminal Einstellungen (JSON-Datei) hinzufügt wird. Zu guter Letzt, muss nur noch `"defaultProfile"` angepasst werden:
 
