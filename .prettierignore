@@ -30,3 +30,4 @@ pnpm-debug.log*
 **/*.yml
 !package.json
 !tsconfig.json
+!src/content/docs/book/coming-to-nu/coming_from_bash.md
