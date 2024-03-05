@@ -3,10 +3,12 @@ title: Explorando seu sistema
 ---
 
 import { Code } from "@astrojs/starlight/components";
-import lsExample from "../../../snippets/introduction/ls_example.nu?raw";
-import cdExample from "../../../snippets/introduction/cd_example.nu?raw";
-import cdExample from "../../../snippets/introduction/cp_example.nu?raw";
-import cdExample from "../../../snippets/introduction/mv_example.nu?raw";
+import lsExample from "../../../snippets/moving_around/ls_example.nu?raw";
+import cdExample from "../../../snippets/moving_around/cd_example.nu?raw";
+import cpExample from "../../../snippets/moving_around/cp_example.nu?raw";
+import mvExample from "../../../snippets/moving_around/mv_example.nu?raw";
+import rmExample from "../../../snippets/moving_around/rm_example.nu?raw";
+import mkdirExample from "../../../snippets/moving_around/mkdir_example.nu?raw";
 
 Shells mais antigos permitem que você navegue pelo sistema de arquivos e execute comandos. Shells modernos como o Nu permitem que você faça o mesmo. Vamos dar uma olhada em alguns dos comandos comuns que você vai usar quando estiver interagindo com seu sistema.
 
@@ -67,14 +69,10 @@ Podemos copiar um item de um local para outro:
 
 Podemos remover um item:
 
-```nu
-> rm item
-```
+<Code code={rmExample} lang="nu" />
 
 Os três comandos também podem usar os coringas que vimos anteriormente com `ls`.
 
 Por fim, podemos criar um novo diretório usando o comando `mkdir`:
 
-```nu
-> mkdir new_directory
-```
+<Code code={mkdirExample} lang="nu" />
