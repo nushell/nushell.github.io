@@ -5,15 +5,15 @@ sidebar:
 ---
 
 import { Code } from "@astrojs/starlight/components";
-import lsExample from "../../../snippets/moving_around/ls_example.nu?raw";
-import lsShallowGlobExample from "../../../snippets/moving_around/ls_shallow_glob_example.nu?raw";
-import lsDeepGlobExample from "../../../snippets/moving_around/ls_deep_glob_example.nu?raw";
-import cdExample from "../../../snippets/moving_around/cd_example.nu?raw";
-import cdWithoutCommandExample from "../../../snippets/moving_around/cd_without_command_example.nu?raw";
-import mvExample from "../../../snippets/moving_around/mv_example.nu?raw";
-import cpExample from "../../../snippets/moving_around/cp_example.nu?raw";
-import rmExample from "../../../snippets/moving_around/rm_example.nu?raw";
-import mkdirExample from "../../../snippets/moving_around/mkdir_example.nu?raw";
+import lsExample from "../../snippets/moving_around/ls_example.nu?raw";
+import lsShallowGlobExample from "../../snippets/moving_around/ls_shallow_glob_example.nu?raw";
+import lsDeepGlobExample from "../../snippets/moving_around/ls_deep_glob_example.nu?raw";
+import cdExample from "../../snippets/moving_around/cd_example.nu?raw";
+import cdWithoutCommandExample from "../../snippets/moving_around/cd_without_command_example.nu?raw";
+import mvExample from "../../snippets/moving_around/mv_example.nu?raw";
+import cpExample from "../../snippets/moving_around/cp_example.nu?raw";
+import rmExample from "../../snippets/moving_around/rm_example.nu?raw";
+import mkdirExample from "../../snippets/moving_around/mkdir_example.nu?raw";
 
 Early shells allow you to move around your filesystem and run commands, and modern shells like Nu allow you to do the same. Let's take a look at some of the common commands you might use when interacting with your system.
 
@@ -25,7 +25,7 @@ As we've seen in other chapters, [`ls`](/commands/docs/ls) is a command for view
 
 The [`ls`](/commands/docs/ls) command also takes an optional argument, to change what you'd like to view. For example, we can list the files that end in ""
 
-<Code code={lsShallowGlobExample} lang="nu">
+<Code code={lsShallowGlobExample} lang="nu" />
 
 ## Glob patterns (wildcards)
 
@@ -35,7 +35,7 @@ The most general glob is `*`, which will match all paths. More often, you'll see
 
 In Nushell, we also support double `*` to talk about traversing deeper paths that are nested inside of other directories. For example, `ls **/*` will list all the non-hidden paths nested under the current directory.
 
-<Code code={lsDeepGlobExample} lang="nu">
+<Code code={lsDeepGlobExample} lang="nu" />
 
 Here, we're looking for any file that ends with ".md", and the two asterisks further say "in any directory starting from here".
 
