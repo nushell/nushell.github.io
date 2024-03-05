@@ -101,10 +101,7 @@ export default defineConfig({
         {
           label: "Cookbook",
           collapsed: true,
-          items: [
-            { label: "Introduction", link: "/introduction/" },
-            { label: "Getting Started", link: "/book/getting_started/" },
-          ],
+          autogenerate: { directory: "/cookbook/" },
         },
         {
           label: "Blog",
