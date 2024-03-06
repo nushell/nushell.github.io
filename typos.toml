@@ -1,5 +1,5 @@
 [files]
-extend-exclude = ["es", "de", "ja", "ru", "zh-CN"]
+extend-exclude = ["es", "de", "ja", "ru", "zh-CN", "pt-BR", "blog/*.md"]
 
 [default.extend-words]
 ba = "ba"
