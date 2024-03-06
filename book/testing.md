@@ -1,8 +1,10 @@
 # Testing your Nushell code
 
-The [standard library](standard_library.md) has a unit testing framework to ensure that your code works as expected.
+To ensure that your code works as expected, you can use the [testing module](https://github.com/nushell/nushell/blob/main/crates/nu-std/testing.nu).
 
 ## Quick start
+
+Download the [testing module](https://raw.githubusercontent.com/nushell/nushell/main/crates/nu-std/testing.nu) and save it as `testing.nu` in the folder with your project.
 
 Have a file, called `test_math.nu`:
 
@@ -28,7 +30,7 @@ def test_failing [] {
 Run the tests:
 
 ```nu
-❯ use std testing run-tests
+❯ use testing.nu run-tests
 ❯ run-tests
 INF|2023-04-12T10:42:29.099|Running tests in test_math
 Error:
@@ -59,6 +61,7 @@ The foundation for every assertion is the `std assert` command. If the condition
 
 
 ```nu
+❯ use std assert
 ❯ std assert (1 == 2)
 Error:
   × Assertion failed.
@@ -155,10 +158,10 @@ The standard library itself is tested with this framework, so you can find many 
 
 ## Setting verbosity
 
-The unit testing framework uses the `log` commands from the standard library to display information, so you can set `NU_LOG_LEVEL` if you want more or less details:
+The `testing.nu` module uses the `log` commands from the standard library to display information, so you can set `NU_LOG_LEVEL` if you want more or less details:
 
 ```nu
-❯ std run-tests
-❯ NU_LOG_LEVEL=DEBUG std run-tests
-❯ NU_LOG_LEVEL=WARNING std run-tests
+❯ use testing.nu run-tests
+❯ NU_LOG_LEVEL=DEBUG run-tests
+❯ NU_LOG_LEVEL=WARNING run-tests
 ```
