@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.90.0
+version: 0.91.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -75,6 +75,19 @@ Insert a new column with values computed based off the other columns
 │ 1 │   8 │  16 │
 │ 2 │   9 │  18 │
 ╰───┴─────┴─────╯
+
+```
+
+Update null values in a column to a default value
+```nu
+> [[foo]; [2] [null] [4]] | upsert foo { default 0 }
+╭───┬─────╮
+│ # │ foo │
+├───┼─────┤
+│ 0 │   2 │
+│ 1 │   0 │
+│ 2 │   4 │
+╰───┴─────╯
 
 ```
 

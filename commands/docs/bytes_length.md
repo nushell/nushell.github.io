@@ -2,7 +2,7 @@
 title: bytes length
 categories: |
   bytes
-version: 0.90.0
+version: 0.91.0
 bytes: |
   Output the length of any bytes in the pipeline.
 usage: |

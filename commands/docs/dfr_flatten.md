@@ -2,7 +2,7 @@
 title: dfr flatten
 categories: |
   lazyframe
-version: 0.90.0
+version: 0.91.0
 lazyframe: |
   An alias for dfr explode.
 usage: |

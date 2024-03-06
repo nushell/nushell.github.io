@@ -2,7 +2,7 @@
 title: dfr into-nu
 categories: |
   dataframe
-version: 0.90.0
+version: 0.91.0
 dataframe: |
   Converts a dataframe or an expression into into nushell value for access and exploration.
 usage: |

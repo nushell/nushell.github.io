@@ -2,7 +2,7 @@
 title: url
 categories: |
   network
-version: 0.90.0
+version: 0.91.0
 network: |
   Various commands for working with URLs.
 usage: |

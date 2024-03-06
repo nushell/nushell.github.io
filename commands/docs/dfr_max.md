@@ -2,7 +2,7 @@
 title: dfr max
 categories: |
   expression
-version: 0.90.0
+version: 0.91.0
 expression: |
   Creates a max expression or aggregates columns to their max value.
 usage: |

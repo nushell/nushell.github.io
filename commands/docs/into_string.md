@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.90.0
+version: 0.91.0
 conversions: |
   Convert value to string.
 usage: |
@@ -37,6 +37,7 @@ feature: default
 | datetime  | string       |
 | duration  | string       |
 | filesize  | string       |
+| glob      | string       |
 | int       | string       |
 | list\<any\> | list\<string\> |
 | number    | string       |

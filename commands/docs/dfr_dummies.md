@@ -2,7 +2,7 @@
 title: dfr dummies
 categories: |
   dataframe
-version: 0.90.0
+version: 0.91.0
 dataframe: |
   Creates a new dataframe with dummy variables.
 usage: |

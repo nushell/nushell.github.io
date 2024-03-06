@@ -2,7 +2,7 @@
 title: dfr
 categories: |
   dataframe
-version: 0.90.0
+version: 0.91.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -52,6 +52,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`dfr as-date`](/commands/docs/dfr_as-date.md)                 | Builtin | Converts string to date.                                                                         |
 | [`dfr as-datetime`](/commands/docs/dfr_as-datetime.md)         | Builtin | Converts string to datetime.                                                                     |
 | [`dfr cache`](/commands/docs/dfr_cache.md)                     | Builtin | Caches operations in a new LazyFrame.                                                            |
+| [`dfr cast`](/commands/docs/dfr_cast.md)                       | Builtin | Cast a column to a different dtype.                                                              |
 | [`dfr col`](/commands/docs/dfr_col.md)                         | Builtin | Creates a named column expression.                                                               |
 | [`dfr collect`](/commands/docs/dfr_collect.md)                 | Builtin | Collect lazy dataframe into eager dataframe.                                                     |
 | [`dfr columns`](/commands/docs/dfr_columns.md)                 | Builtin | Show dataframe columns.                                                                          |
