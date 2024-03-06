@@ -28,7 +28,7 @@ $env.config = {
 ```
 
 ::: tip Note
-you can follow the [`nu_scripts` of Nushell](https://github.com/nushell/nu_scripts/blob/main/hooks/direnv/config.nu)
+you can follow the [`nu_scripts` of Nushell](https://github.com/nushell/nu_scripts/blob/main/nu-hooks/nu-hooks/direnv/config.nu)
 for the always up-to-date version of the hook above
 :::
 
