@@ -2,7 +2,7 @@
 title: str
 categories: |
   strings
-version: 0.90.0
+version: 0.91.0
 strings: |
   Various commands for working with string data.
 usage: |

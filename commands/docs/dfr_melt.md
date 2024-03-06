@@ -2,7 +2,7 @@
 title: dfr melt
 categories: |
   dataframe
-version: 0.90.0
+version: 0.91.0
 dataframe: |
   Unpivot a DataFrame from wide to long format.
 usage: |

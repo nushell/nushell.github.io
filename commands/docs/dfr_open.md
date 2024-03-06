@@ -2,7 +2,7 @@
 title: dfr open
 categories: |
   dataframe
-version: 0.90.0
+version: 0.91.0
 dataframe: |
   Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.
 usage: |

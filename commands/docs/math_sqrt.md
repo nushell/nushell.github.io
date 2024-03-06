@@ -2,7 +2,7 @@
 title: math sqrt
 categories: |
   math
-version: 0.90.0
+version: 0.91.0
 math: |
   Returns the square root of the input number.
 usage: |

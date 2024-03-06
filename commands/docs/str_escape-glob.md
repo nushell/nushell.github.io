@@ -2,7 +2,7 @@
 title: str escape-glob
 categories: |
   strings
-version: 0.90.0
+version: 0.91.0
 strings: |
   Escape glob pattern.
 usage: |

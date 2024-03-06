@@ -2,7 +2,7 @@
 title: reject
 categories: |
   filters
-version: 0.90.0
+version: 0.91.0
 filters: |
   Remove the given columns or rows from the table. Opposite of `select`.
 usage: |
@@ -82,15 +82,15 @@ Reject a nested field in a record
 ╰───┴───────────╯
 ```
 
-Reject columns by a provided list of columns
+Reject multiple rows
 ```nu
-> let cols = [size type];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject $cols
+> [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb] [file.json json 3kb]] | reject 0 2
 
 ```
 
-Reject columns by a list of columns directly
+Reject multiple columns
 ```nu
-> [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject ["size", "type"]
+> [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject type size
 ╭───┬────────────╮
 │ # │    name    │
 ├───┼────────────┤
@@ -100,9 +100,15 @@ Reject columns by a list of columns directly
 
 ```
 
-Reject rows by a provided list of rows
+Reject multiple columns by spreading a list
 ```nu
-> let rows = [0 2];[[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb] [file.json json 3kb]] | reject $rows
+> let cols = [type size]; [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject ...$cols
+╭───┬────────────╮
+│ # │    name    │
+├───┼────────────┤
+│ 0 │ Cargo.toml │
+│ 1 │ Cargo.lock │
+╰───┴────────────╯
 
 ```
 

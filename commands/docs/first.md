@@ -2,7 +2,7 @@
 title: first
 categories: |
   filters
-version: 0.90.0
+version: 0.91.0
 filters: |
   Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
 usage: |
@@ -55,4 +55,10 @@ Return the first 2 bytes of a binary value
 Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 00000000:   01 23                                                •#
 
+```
+
+Return the first item of a range
+```nu
+> 1..3 | first
+1
 ```

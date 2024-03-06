@@ -2,7 +2,7 @@
 title: dfr arg-unique
 categories: |
   dataframe
-version: 0.90.0
+version: 0.91.0
 dataframe: |
   Returns indexes for unique values.
 usage: |

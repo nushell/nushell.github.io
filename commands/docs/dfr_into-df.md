@@ -2,7 +2,7 @@
 title: dfr into-df
 categories: |
   dataframe
-version: 0.90.0
+version: 0.91.0
 dataframe: |
   Converts a list, table or record into a dataframe.
 usage: |
@@ -101,5 +101,17 @@ Convert to a dataframe and provide a schema
 │   │   │ │   │ ╰───┴───╯ │ │           │
 │   │   │ ╰───┴───────────╯ │           │
 ╰───┴───┴───────────────────┴───────────╯
+
+```
+
+Convert to a dataframe and provide a schema that adds a new column
+```nu
+> [[a b]; [1 "foo"] [2 "bar"]] | dfr into-df -s {a: u8, b:str, c:i64} | dfr fill-null 3
+╭───┬───┬─────┬───╮
+│ # │ a │  b  │ c │
+├───┼───┼─────┼───┤
+│ 0 │ 1 │ foo │ 3 │
+│ 1 │ 2 │ bar │ 3 │
+╰───┴───┴─────┴───╯
 
 ```

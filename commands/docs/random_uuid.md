@@ -2,7 +2,7 @@
 title: random uuid
 categories: |
   random
-version: 0.90.0
+version: 0.91.0
 random: |
   Generate a random uuid4 string.
 usage: |

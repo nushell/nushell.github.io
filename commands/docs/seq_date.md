@@ -2,7 +2,7 @@
 title: seq date
 categories: |
   generators
-version: 0.90.0
+version: 0.91.0
 generators: |
   Print sequences of dates.
 usage: |

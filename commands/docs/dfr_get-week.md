@@ -2,7 +2,7 @@
 title: dfr get-week
 categories: |
   dataframe
-version: 0.90.0
+version: 0.91.0
 dataframe: |
   Gets week from date.
 usage: |

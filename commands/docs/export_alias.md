@@ -2,7 +2,7 @@
 title: export alias
 categories: |
   core
-version: 0.90.0
+version: 0.91.0
 core: |
   Alias a command (with optional flags) to a new name and export it from a module.
 usage: |
