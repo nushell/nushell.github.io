@@ -1,5 +1,13 @@
+
 [files]
-extend-exclude = ["es", "de", "ja", "ru", "zh-CN", "pt-BR", "blog/*.md", "cookbook/http.md"]
+extend-exclude = ["pt-BR", "de", "ja", "es", "blog/202[0-3]*"]
 
 [default.extend-words]
-ba = "ba"
+# Avoid the false positive in book/commands/str_replace.md
+ons = "ons"
+# Avoid false positive for json placeholder in cookbook/http.md
+optio = "optio"
+ratatui = "ratatui"
+doas = "doas"
+iterm = "iterm"
+nushell = "nushell"
