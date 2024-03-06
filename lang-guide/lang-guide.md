@@ -246,7 +246,7 @@ If you pass a `string` or a `bare word` to `builtin commands` which support glob
 open *.txt    # opens all files which ends with `.txt`
 open `*.txt`  # it's backtick quoted, it's a bare word, so nu opens all files which ends with `.txt`
 open "*.txt"  # it's quoted, opens a file named `*.txt`
-open '*.txt"  # it's quoted, opens a file named `*.txt`
+open '*.txt'  # it's quoted, opens a file named `*.txt`
 ```
 
 ## Numbers and Arithmetic
