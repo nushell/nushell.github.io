@@ -1,2 +1,5 @@
+[files]
+extend-exclude = ["es", "de", "ja", "ru", "zh-CN"]
+
 [default.extend-words]
 ba = "ba"
