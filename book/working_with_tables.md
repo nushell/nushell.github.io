@@ -161,9 +161,9 @@ These look very similar! Let's see if we can spell out the difference between th
 - [`select`](/commands/docs/select.md) - creates a new table which includes only the columns specified
 - [`get`](/commands/docs/get.md) - returns the values inside the column specified as a list
 
-The one way to tell these apart looking at the table is that the column names are missing, which lets us know that this is going to be a list of values we can work with.
-
-The [`get`](/commands/docs/get.md) command can go one step further and take a path to data deeper in the table. This simplifies working with more complex data, like the structures you might find in a .json file.
+:::tip
+The arguments provided to `select` and `get` are [cell paths](/book/types_of_data.html#cell-paths), a fundamental part of Nu's query language. In addition to simple queries like `get name`, you can also do things like `get name?` (will replace missing values with `null` instead of returning an error) or `get some.deeply.nested.column` for nested data.
+:::
 
 ## Changing data in a table
 
