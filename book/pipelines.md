@@ -66,6 +66,31 @@ Data coming from an external command into Nu will come in as bytes that Nushell 
 
 Nu works with data piped between two external commands in the same way as other shells, like Bash would. The `stdout` of external_command_1 is connected to the `stdin` of external_command_2. This lets data flow naturally between the two commands.
 
+### Notes on piping command output
+
+PowerShell users may be used to piping the output of an internal PowerShell command directly to another, e.g.:
+
+`echo 1 | sleep`
+
+Where for PowerShell, `echo` is an alias to `Write-Output` and `sleep` is to `Start-Sleep`.
+
+The same in Nushell would error:
+
+```nu
+> echo 1sec | sleep
+Error: nu::parser::missing_positional
+
+  × Missing required positional argument.
+   ╭─[entry #53:1:1]
+ 1 │ echo 1sec | sleep
+   ╰────
+  help: Usage: sleep <duration> ...(rest) . Use `--help` for more information.
+```
+
+Instead, you should supply the output of the command as an argument to the next:
+
+`echo 1sec | sleep $in` or `sleep (echo 1sec)`
+
 ## Behind the scenes
 
 You may have wondered how we see a table if [`ls`](/commands/docs/ls.md) is an input and not an output. Nu adds this output for us automatically using another command called [`table`](/commands/docs/table.md). The [`table`](/commands/docs/table.md) command is appended to any pipeline that doesn't have an output. This allows us to see the result.
