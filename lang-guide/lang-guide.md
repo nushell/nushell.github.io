@@ -1,4 +1,4 @@
-# String
+### Bool
 # The Nushell Language
 
 ## Types in the Nu language 
@@ -216,6 +216,31 @@ let truth: bool  = true
 The command 'into bool' can convert other data types into bool.
 For a complete list see: 'help into bool'.
 
+
+#### Commands that use bool
+
+- if, while
+- match
+  * in clauses where the expression matches the clause expression, or the '_' value which is always true
+- any, all, skip until, skip while, take until, take while
+  * when the closure returns bool value
+- where
+- filter
+  * when closure returns the bool value of true or false
+- is-empty, is-not-empty
+- is-admin
+- is-terminal
+
+##### Operators that use bool
+
+- '==', '!=', '<', '<=', '>', '>='
+- in, not in 
+- and, or not
+- '=~', '!~' <regex>
+- 'ends-with', 'starts-with'
+  * String comparison operators
+
+
 ### Int
 
 What it is: Integer numbers.
@@ -302,6 +327,24 @@ true
 
 The command 'into filesize' will convert a variety of other data types
 into a filesize value. For the complete list of inputs see: 'help into filesize'.
+
+#### Commands that use filesize
+
+- ls
+- du
+- sys
+
+Note: The where command and other filters can use filesize in comparison expressions.
+
+##### Operators that use filesize
+
+- '==', '!='
+- '+', '-'
+-'<', '<=',  '>', '>='
+
+
+
+
 ### Duration
 
 What it is:  A value representing a unit of passage of time.
@@ -362,14 +405,6 @@ number of nanoseconds thus are not valid duration literals.You are free to make
 your   own constants for specific months or years.
 
 
-#### Duration aware commands
-
-
-- sleep
-- where
-- ps
-- sys
-
 
 #### Casts
 
@@ -379,7 +414,22 @@ inputs, see 'help into duration'
 
 
 
+#### Commands that use duration
 
+
+- sleep
+- where
+  * In the comparison expression
+- ps
+- sys
+
+
+
+##### Operators that use duration
+
+- '==', '!='
+- '+', '-'
+-'<', '<=',  '>', '>='
 
 ### Date
 
@@ -400,7 +450,15 @@ Dates are in three forms, based on the RFC 3339 standard:
 
 
 
-#### Datetime aware commands
+
+#### Casts
+
+The command 'into datetime' can be used to convert many other data types
+into dates.  See: 'help into datetime' for a full list of inputs.
+
+
+
+#### Commands that use datetime
 
 Many of Nushell's builtin commands are datetime aware and output or use datetimes
 for fields and expressions.
@@ -409,13 +467,6 @@ for fields and expressions.
 - where
 ps
 sys
-
-
-
-#### Casts
-
-The command 'into datetime' can be used to convert many other data types
-into dates.  See: 'help into datetime' for a full list of inputs.
 
 
 
@@ -488,7 +539,7 @@ To input string data different [string literals](#string-literals) supporting es
 TBD: On which level string indexing should be performed: bytes or unicode scalars.
 
 
-##### String aware commands
+##### Commands that use string
 
 Many commands takes strings as inputs or parameters.
 These commands work with strings explicitly
@@ -535,9 +586,24 @@ Keys are guaranteed to be unique. Inserting twice with the same key will only ke
 
 
 #### Casts
+
 The command 'into record' can be used to convert other data types into records.
 See the command: 'help into record' fro a complete list of input data types.
 
+
+#### Commands that use record
+
+Since the record data type is foundational to Nushell's structured nature,
+many commands use records as inputs or as parameters. See the list of commands
+for tables because many of those also take records.
+
+Here are a few commands that use records:
+
+- get
+- insert
+- merge
+- update
+- upsert
 
 ### List
 
@@ -546,7 +612,6 @@ What it is: Basic collection of values ordered by their insertion.
 Annotation: 'list'
 
 A list is like a vector or array list in other languages.
-
 
 0-based indexing to retrieve values.
 
@@ -573,12 +638,36 @@ Lists can span multiple lines to enumerate values. For example, this is equivale
 ]
 ```
 
+
+#### Commands that use list
+
+Since lists, records and tables form the backbone of Nushell's structured nature,
+there are too many commands to list here.
+
+Here are a few
+- any
+- all
+- get
+- select
+- get
+- each, pareach, filter, reduce
+- skip, skip until, skip while, take, take until, take  while
+- first, last, length
+- insert, update, upsert, append
+See also the 'to [subcommands]' and 'from [subcommands]' for more examples.
+- where
+- match
+  * Can destructure a list
+
+##### Operators that use list
+
+- in
+
 ### Table
 
 What it is: A table is a two-dimensional container with both columns and rows.
 
 Annotation: 'table'
-
 
  There are two ways to write a table. These two examples are equivalent:
 
@@ -593,6 +682,22 @@ Annotation: 'table'
 In the first syntax, the headers are separated from the data cells using a semicolon(`;`). The semicolon separator is mandatory in this syntax to create a table. It must follow the headers.
 
 The second syntax is simply a list of records. This plays on the Nushell data model, which sees a list of records as equivalent to a table. This is used in cases where the length of a table may not be known ahead of time. In such a case, a stream of records likewise represents a table.
+
+
+#### Commands that use table
+
+- table
+- ls
+- ps
+-sys
+- select
+- get
+- where
+- range
+
+
+Note: Almost all of Nushell's filter commands work with tables
+For a longer list see: 'help commands | where category == filters'.
 
 
 ### Closure
@@ -711,6 +816,34 @@ if true {
 ```
 
 
+#### Commands that use closure
+
+-     all        
+-     any        
+-     collect    
+-     do         
+-     each       
+-     explain    
+-     filter     
+-     group-by   
+-     interleave 
+-     items      
+-    par-each   
+-    reduce     
+-    skip until 
+-    skip while 
+-    take until 
+ -   take while 
+-    tee        
+- update
+- upsert
+- zip
+
+Note: This is not a complete list. New commands are being added to Nushell
+and the new commands might take a closure as a prameter or a flag argument.
+
+
+
 
 
 ### Nothing
@@ -815,7 +948,7 @@ glob **/*.txt | each {|p| $p | path split } | each {|l| $l | str join '\' } | ea
 ```
 
 
-## Casts
+#### Casts
 
 Using the 'into glob' command, you can convert other types like strings
 into globs.
@@ -840,6 +973,18 @@ before executing. You can use the 'str escape-glob' command for this
 Note: As of Release 0.91.0 of Nu,   'str escape-glob' is deprecated.
 
 As of release 0.91.0,if you pass a string variable to commands that support glob patterns, then Nushell won't auto-expand the glob pattern (
+
+
+#### Commands that use glob
+
+- cp
+- du
+- ls
+- glob
+- mv
+- rm
+
+
 
 ### CellPath
 
@@ -990,6 +1135,20 @@ cd /usr/bin
 realpath sh
 /usr/bin/sh
 ```
+
+
+#### Casts
+
+There is no 'into path' command, but these 2 commands might fit the bill:
+
+- path expand
+- path join
+
+#### Commands that use path
+
+- path [subcommands]
+  * See: 'help path' for a full list
+
 
 ## Other data types
 
