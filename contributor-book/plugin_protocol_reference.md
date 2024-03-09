@@ -25,6 +25,8 @@ Typical plugin interaction after the initial handshake looks like this:
 
 The plugin **should** respond to further plugin calls. The engine **may** send additional plugin calls before responses have been received, and it is up to the plugin to decide whether to handle each call immediately as it is received, or to process only one at a time and hold on to them for later. In any case, sending another plugin call before a response has been received **should not** cause an error.
 
+The plugin **may** send [engine calls](#enginecall) during the execution of a call to request operations from the engine. Engine calls are [only valid within the context of a call](#enginecall-context) and may not be sent otherwise.
+
 The engine **may** send a [`Goodbye`](#goodbye) message to the plugin indicating that it will no longer send any more plugin calls. Upon receiving this message, the plugin **may** choose not to accept any more plugin calls, and **should** exit after any in-progress plugin calls have finished.
 
 ## `Hello`
@@ -79,12 +81,11 @@ Example:
 
 Tell the plugin to run a command. The argument is the following map:
 
-| Field      | Type                                        | Usage                                                 |
-| ---------- | ------------------------------------------- | ----------------------------------------------------- |
-| **name**   | string                                      | The name of the command to run                        |
-| **call**   | [`EvaluatedCall`](#evaluatedcall)           | Information about the invocation, including arguments |
-| **input**  | [`PipelineDataHeader`](#pipelinedataheader) | Pipeline input to the command                         |
-| **config** | [`Value`](#value) or null                   | Plugin configuration, if available                    |
+| Field     | Type                                        | Usage                                                 |
+| --------- | ------------------------------------------- | ----------------------------------------------------- |
+| **name**  | string                                      | The name of the command to run                        |
+| **call**  | [`EvaluatedCall`](#evaluatedcall)           | Information about the invocation, including arguments |
+| **input** | [`PipelineDataHeader`](#pipelinedataheader) | Pipeline input to the command                         |
 
 <a name="evaluatedcall"></a>
 
@@ -177,6 +178,77 @@ There is currently one supported operation: `ToBaseValue`, which **should** retu
 }
 ```
 
+### `EngineCallResponse`
+
+A response to an [engine call](#enginecall) made by the plugin. The argument is a 2-tuple (array): (`engine_call_id`, `engine_call`)
+
+The `engine_call_id` refers to the same number that the engine call being responded to originally contained. The plugin **must** send unique IDs for each engine call it makes. Like [`CallResponse`](#callresponse), there are multiple types of responses:
+
+#### `Error` engine call response
+
+A failure result. Contains a [`ShellError`](#shellerror).
+
+Example:
+
+```json
+{
+  "EngineCallResponse": [
+    0,
+    {
+      "Error": {
+        "IOError": {
+          "msg": "The connection closed."
+        }
+      }
+    }
+  ]
+}
+```
+
+#### `PipelineData` engine call response
+
+A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
+
+Example:
+
+```json
+{
+  "EngineCallResponse": [
+    0,
+    {
+      "ListStream": {
+        "id": 23
+      }
+    }
+  ]
+}
+```
+
+#### `Config` engine call response
+
+A successful result of a [`Config` engine call](#config-engine-call). The body is a [`Config`](#config).
+
+Example:
+
+```json
+{
+  "EngineCallResponse": [
+    0,
+    {
+      "Config": {
+        "external_completer": null,
+        "filesize_metric": true,
+        "table_mode": "Rounded",
+        "table_move_header": false,
+        ...
+      }
+    }
+  ]
+}
+```
+
+This example is abbreviated, as the [`Config`](#config) object is large and ever-changing.
+
 ### `Goodbye`
 
 Indicate that no further plugin calls are expected, and that the plugin **should** exit as soon as it is finished processing any in-progress plugin calls.
@@ -225,7 +297,7 @@ Example:
 }
 ```
 
-### `Signature` plugin call response
+#### `Signature` plugin call response
 
 A successful response to a [`Signature` plugin call](#signature-plugin-call). The body is an array of [signatures](https://docs.rs/nu-protocol/0.90.1/nu_protocol/struct.PluginSignature.html).
 
@@ -275,9 +347,9 @@ Example:
 }
 ```
 
-### `PipelineData` plugin call response
+#### `PipelineData` plugin call response
 
-A successful result with a Nu [`Value`](#value) or stream. The body is a map: see [`PipelineDataHeader`](#pipelinedataheader).
+A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
 
 Example:
 
@@ -297,6 +369,113 @@ Example:
       }
     }
   ]
+}
+```
+
+### `EngineCall`
+
+Plugins can make engine calls during execution of a [call](#call). The body is a map with the following keys:
+
+| Field       | Type         | Usage                                                                                   |
+| ----------- | ------------ | --------------------------------------------------------------------------------------- |
+| **context** | integer      | The ID of the [call](#call) that this engine call relates to.                           |
+| **id**      | integer      | A unique ID for this engine call, in order to send the [response](#enginecallresponse). |
+| **call**    | `EngineCall` | One of the options described below.                                                     |
+
+<a name="enginecall-context"></a>
+
+The context **must** be an ID of a [call](#call) that was received that is currently in one of two states:
+
+1. The [response](#callresponse) has not been sent yet.
+2. The response contained stream data (i.e. [`ListStream`](#pipelinedataheader-liststream) or [`ExternalStream`](#pipelinedataheader-externalstream)), and at least one of the streams started by the response is still sending data (i.e. [`End`](#end) has not been sent).
+
+After a response has been fully sent, and streams have ended, the `context` from that call can no longer be used.
+
+The engine call ID **must** be unique for the lifetime of the plugin, and it is suggested that this be a sequentially increasing number across all engine calls made by the plugin. It is not separated by `context`; the response only contains the `id`.
+
+#### `GetConfig` engine call
+
+Get the Nushell engine configuration. Returns a [`Config` response](#config-engine-call-response) if
+successful.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 0,
+    "id": 0,
+    "call": "GetConfig"
+  }
+}
+```
+
+#### `GetPluginConfig` engine call
+
+Get the configuration for the plugin, from its section in `$env.config.plugins.NAME` if present. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#pipelinedataheader-value) or be [`Empty`](#pipelinedataheader-empty) if there is no configuration for the plugin set.
+
+If the plugin configuration was specified as a closure, the engine will evaluate that closure and return the result, which may cause an [error response](#error-engine-call-response).
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 3,
+    "id": 8,
+    "call": "GetPluginConfig"
+  }
+}
+```
+
+#### `EvalClosure` engine call
+
+Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful with the output of the closure, which may be a stream.
+
+| Field               | Type                                        | Usage                                                                  |
+| ------------------- | ------------------------------------------- | ---------------------------------------------------------------------- |
+| **closure**         | `Spanned`<[`Closure`](#closure)>            | The closure to call, generally from a [`Value`](#value).               |
+| **positional**      | [`Value`](#value) array                     | Positional arguments for the closure.                                  |
+| **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the closure.                                                 |
+| **redirect_stdout** | boolean                                     | Whether to redirect stdout if the closure ends in an external command. |
+| **redirect_stderr** | boolean                                     | Whether to redirect stderr if the closure ends in an external command. |
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 7,
+    "id": 40,
+    "call": {
+      "EvalClosure": {
+        "closure": {
+          "item": {
+            "block_id": 72,
+            "captures": []
+          },
+          "span": {
+            "start": 780,
+            "end": 812
+          }
+        },
+        "positional": [
+          {
+            "Int": {
+              "val": 7,
+              "span": {
+                "start": 3080,
+                "end": 3081
+              }
+            }
+          }
+        ],
+        "input": "Empty",
+        "redirect_stdout": true,
+        "redirect_stderr": false
+      }
+    }
+  }
 }
 ```
 
@@ -638,3 +817,51 @@ Example:
 [Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/enum.ShellError.html)
 
 This enum describes errors produced by the engine. As this enum is quite large and grows frequently, it is recommended to try to send this back to the engine without interpreting it, if possible.
+
+### `Config`
+
+[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Config.html)
+
+This struct describes the configuration of Nushell. It is quite large and frequently changing, so please refer to the Rust documentation if there is anything you need from it.
+
+### `Closure`
+
+[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Closure.html)
+
+This is the representation of a closure within the engine, which references a block ID and a list of captures with variable IDs and their contents. It may be contained within [`Value`](#value).
+
+The plugin **should not** try to inspect the contents of the closure. It is recommended that this is only used as an argument to the [`EvalClosure` engine call](#evalclosure-engine-call). The exact representation of a closure is likely to change in the future to avoid serializing all of the captures.
+
+Example:
+
+```json
+{
+  "block_id": 782,
+  "captures": [
+    [
+      490,
+      {
+        "Int": {
+          "val": 72,
+          "span": {
+            "start": 78760,
+            "end": 78762
+          }
+        }
+      }
+    ],
+    [
+      491,
+      {
+        "String": {
+          "val": "Hello",
+          "span": {
+            "start": 78770,
+            "end": 78777
+          }
+        }
+      }
+    ]
+  ]
+}
+```

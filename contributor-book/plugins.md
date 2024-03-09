@@ -53,7 +53,7 @@ nu-protocol = "0.85.0"
 With this, we can open up `src/main.rs` and create our plugin.
 
 ```rust
-use nu_plugin::{serve_plugin, LabeledError, Plugin, JsonSerializer, EvaluatedCall};
+use nu_plugin::{serve_plugin, LabeledError, Plugin, JsonSerializer, EvaluatedCall, EngineInterface};
 use nu_protocol::{Value, PluginSignature, Type};
 
 struct Len;
@@ -73,9 +73,9 @@ impl Plugin for Len {
     }
 
     fn run(
-        &mut self,
+        &self,
         name: &str,
-        _config: &Option<Value>,
+        _engine: &EngineInterface,
         call: &EvaluatedCall,
         input: &Value,
     ) -> Result<Value, LabeledError> {
@@ -95,7 +95,7 @@ impl Plugin for Len {
 }
 
 fn main() {
-    serve_plugin(&mut Len::new(), JsonSerializer)
+    serve_plugin(&Len::new(), JsonSerializer)
 }
 ```
 
@@ -105,7 +105,7 @@ First off, let's look at main:
 
 ```rust
 fn main() {
-    serve_plugin(&mut Len::new(), JsonSerializer)
+    serve_plugin(&Len::new(), JsonSerializer)
 }
 ```
 
@@ -138,9 +138,9 @@ impl Plugin for Len {
     // ...
 
     fn run(
-        &mut self,
+        &self,
         name: &str,
-        _config: &Option<Value>,
+        _engine: &EngineInterface,
         call: &EvaluatedCall,
         input: &Value,
     ) -> Result<Value, LabeledError> {
@@ -241,9 +241,9 @@ impl StreamingPlugin for Len {
 
     // ... and change input and output types to PipelineData
     fn run(
-        &mut self,
+        &self,
         name: &str,
-        _config: &Option<Value>,
+        _engine: &EngineInterface,
         call: &EvaluatedCall,
         input: PipelineData,
     ) -> Result<PipelineData, LabeledError> {
@@ -314,6 +314,132 @@ $ generate 0 { |n| {out: $n, next: ($n + 1)} } | plugin
 8
 # ...
 ```
+
+## Plugin configuration
+
+It is possible for a user to provide configuration to a plugin. For a plugin named `motd`:
+
+```nu
+$env.config.plugins = {
+    motd: {
+        message: "Nushell rocks!"
+    }
+}
+```
+
+The plugin configuration can be retrieved with [`EngineInterface::get_plugin_config`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_plugin_config).
+
+```rust
+use nu_plugin::*;
+use nu_protocol::{PluginSignature, Value, Type};
+
+struct Motd;
+
+impl Plugin for Motd {
+    fn signature(&self) -> Vec<PluginSignature> {
+        vec![
+            PluginSignature::build("motd")
+                .usage("Message of the day")
+                .input_output_type(Type::Nothing, Type::String)
+        ]
+    }
+
+    fn run(
+        &self,
+        _name: &str,
+        engine: &EngineInterface,
+        call: &EvaluatedCall,
+        _input: &Value,
+    ) -> Result<Value, LabeledError> {
+        if let Some(config) = engine.get_plugin_config()? {
+            let message = config.get_data_by_key("message")
+                .ok_or_else(|| LabeledError {
+                    label: "Message not present in config".into(),
+                    msg: "add the `message` key here".into(),
+                    span: Some(config.span()),
+                })?;
+            Ok(Value::string(message.as_str()?, call.head))
+        } else {
+            Err(LabeledError {
+                label: "Config for `motd` not set in $env.config.plugins".into(),
+                msg: "".into(),
+                span: None,
+            })
+        }
+    }
+}
+
+fn main() {
+    serve_plugin(&Motd, MsgPackSerializer)
+}
+```
+
+Example:
+
+```nu
+> $env.config.plugins.motd = {message: "Nushell rocks!"}
+> motd
+Nushell rocks!
+```
+
+## Evaluating closures
+
+Plugins can accept and evaluate closures using [`EngineInterface::eval_closure`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.eval_closure) or [`eval_closure_with_stream`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.eval_closure_with_stream).
+
+```rust
+use nu_plugin::*;
+use nu_protocol::{PluginSignature, Value, Type, SyntaxShape, PipelineData};
+
+struct MyEach;
+
+impl StreamingPlugin for MyEach {
+    fn signature(&self) -> Vec<PluginSignature> {
+        vec![
+            PluginSignature::build("my-each")
+                .usage("Run closure on each element of a list")
+                .required(
+                    "closure",
+                    SyntaxShape::Closure(Some(vec![SyntaxShape::Any])),
+                    "The closure to evaluate",
+                )
+                .input_output_type(Type::ListStream, Type::ListStream)
+        ]
+    }
+
+    fn run(
+        &self,
+        _name: &str,
+        engine: &EngineInterface,
+        call: &EvaluatedCall,
+        input: PipelineData,
+    ) -> Result<PipelineData, LabeledError> {
+        let engine = engine.clone();
+        let closure = call.req(0)?;
+        Ok(input.map(move |item| {
+            let span = item.span();
+            engine.eval_closure(&closure, vec![item.clone()], Some(item))
+                .unwrap_or_else(|err| Value::error(err, span))
+        }, None)?)
+    }
+}
+
+fn main() {
+    serve_plugin(&MyEach, MsgPackSerializer)
+}
+```
+
+`my-each` works just like `each`:
+
+```nu
+> [1 2 3] | my-each { |i| $i * 2 }
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 4 │
+│ 2 │ 6 │
+╰───┴───╯
+```
+
+At present, the closures can only refer to values that would be valid to send to the plugin. This means that custom values from other plugins are not allowed. This is likely to be fixed in a future release.
 
 ## Under the hood
 
