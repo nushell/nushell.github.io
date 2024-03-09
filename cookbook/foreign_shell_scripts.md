@@ -66,14 +66,14 @@ might make more sense to leave the parsing to the shell it was meant for.
 ## Capturing the environment from a foreign shell script
 
 A more complex approach is to run the script in the shell it is written for and
-do some hackery to capture the script's variables afterwards.
+then do some hackery to capture the script's variables afterwards.
 
-Note: The following custom command assumes a Unix-like operating system, it may
-also be possible to create one for Windows that could capture variables from a
+Note: The shown command assumes a Unix-like operating system, it may also be
+possible to implement one for Windows that could capture variables from a
 PowerShell script.
 
 ```nu
-# Returns a record of changed env variables after running a non-nushell script (passed via stdin), e.g. a bash script you want to "source"
+# Returns a record of changed env variables after running a non-nushell script's contents (passed via stdin), e.g. a bash script you want to "source"
 def capture-foreign-env [
     --shell (-s): string = /bin/sh
     # The shell to run the script in
@@ -81,8 +81,8 @@ def capture-foreign-env [
     --arguments (-a): list<string> = []
     # Additional command line arguments to pass to the foreign shell
 ] {
-    let script = $in;
-    let env_out = with-env { SCRIPT_TO_SOURCE: $script } {
+    let script_contents = $in;
+    let env_out = with-env { SCRIPT_TO_SOURCE: $script_contents } {
         ^$shell ...$arguments -c `
         env
         echo '<ENV_CAPTURE_EVAL_FENCE>'
@@ -105,26 +105,32 @@ def capture-foreign-env [
 }
 ```
 
-This runs a foreign shell script and captures the changed environment variables
-after running the script. This is done by parsing output of the `env` command
-available on unix-like systems. The shell to execute can be specified and
-configured using the `--shell` and `--arguments` parameters, the command has
-been tested using sh (bash), bash, zsh, fish, ksh, and dash.
+Usage, e.g. in `env.nu`:
 
-As an example, we can use this set up Homebrew paths using `brew shellenv`. Note
-that the path to the `brew` binary depends on the OS and installation.
+```nu
+# Default usage, running the script with `/bin/sh`
+load-env (open script.sh | capture-foreign-env)
 
-```
-load-env (^/opt/homebrew/bin/brew shellenv | capture-foreign-env)
+# Running a different shell's script
+# fish might be elsewhere on your system, if it's in the PATH, `fish` is enough
+load-env (open script.fish | capture-foreign-env --shell /usr/local/bin/fish)
 ```
 
-::: warning A caveat for this approach is that it requires all changed
-environment variables not to include newline characters, as the UNIX `env`
-output is not cleanly parseable in that case.
+The command runs a foreign shell script and captures the changed environment
+variables after running the script. This is done by parsing output of the `env`
+command available on unix-like systems. The shell to execute can be specified
+and configured using the `--shell` and `--arguments` parameters, the command has
+been tested using sh (-> bash), bash, zsh, fish, ksh, and dash.
+
+::: warning
+A caveat for this approach is that it requires all changed environment variables
+not to include newline characters, as the UNIX `env` output is not cleanly
+parseable in that case.
 
 Also beware that directly passing the output of `capture-foreign-env` to
 `load-env` can result in changed variables like `PATH` to become strings again,
-even if they have been converted to a list before. :::
+even if they have been converted to a list before.
+:::
 
 ### Detailed Explanation of `capture-foreign-env`
 
@@ -138,7 +144,7 @@ def capture-foreign-env [
     --arguments (-a): list<string> = []
     # Additional command line arguments to pass to the foreign shell
 ] {
-    let script = $in;
+    let script_contents = $in;
     # ...
 }
 ```
@@ -163,7 +169,7 @@ s `/bin/sh`.
 Now, let's have a look at where the shell is actually run:
 
 ```nu
-let env_out = with-env { SCRIPT_TO_SOURCE: $script } {
+let env_out = with-env { SCRIPT_TO_SOURCE: $script_contents } {
     ^$shell ...$arguments -c ` ... `
 }
 ```
@@ -173,18 +179,17 @@ command) with any arguments specified. It also passes `-c` with an inlined
 script for the shell, which is the syntax to immediately execute a passed script
 and exit in most shells.
 
-The `with-env { SCRIPT_TO_SOURCE: $script }` block defines an additional
-environment variable with the actual script we want to run. This is used to pass
-in the script in an unescaped string form, where the executing shell is entirely
-responsible for parsing it. The alternatives would have been:
+The `with-env { SCRIPT_TO_SOURCE: $script_contents }` block defines an
+additional environment variable with the actual script we want to run. This is
+used to pass the script in an unescaped string form, where the executing shell is entirely responsible for parsing it. The alternatives would have been:
 
 - Passing the script via `-c $script`, but then we couldn't (safely) add our own
   commands to log out the environment variables after the script ran.
 - Using string interpolation, but then we would be responsible for fully
   escaping the script, so that the `eval "($script)"` line doesn't break due to
   quotation marks. With the variable expansion in the foreign shell, that shell
-  does not need the value to be escape, the same way how nu is normally able to
-  pass a string with any contents as a single string argument to a command.
+  does not need the value to be escaped; just as nu is normally able to pass a
+  string with any contents to a command as a single string argument.
 - Using a (temporary or existing) file containing the script - This would also
   work, but seems unnecessary and potentially slower.
 
@@ -203,23 +208,22 @@ following:
 
 1. Log out all environment variables at the start of the script. These may be
    different than the ones in nushell, because the shell might have defined
-   variables on startup, and all passed in variables have been serialized as
+   variables on startup and all passed-in variables have been serialized to
    strings by nushell.
 2. Log `<ENV_CAPTURE_EVAL_FENCE>` to stdout, this is so we later know where the
    first `env` output stopped. The content of this is arbitrary, but it is
-   verbose so we reduce the risk of any env var having this string in its
-   contents.
+   verbose to reduce the risk of any env var having this string in its contents.
 3. Run the actual shell script in the current context, using `eval`. The double
    quotes around the variable are necessary to get newlines to be interpreted
    correctly.
 4. Log the "fence" again to stdout so we know where the "after" list of
    variables starts.
-5. Log all environment variables after the script run. We are suppressing a few
+5. Log all environment variables after the script run. We are excluding a few
    variables here that are commonly changed by a few shells that have nothing to
    do with the particular script that was run.
 
 We then take the script output and save all lines from the `env` output before
-and after running our lines, using the `<ENV_CAPTURE_EVAL_FENCE>` logs.
+and after running the passed script, using the `<ENV_CAPTURE_EVAL_FENCE>` logs.
 
 ```nu
 # <shell invocation>
