@@ -35,6 +35,85 @@ Once registered, the plugin is available as part of your set of commands:
 > help commands | where command_type == "plugin"
 ```
 
+### Updating a plugin
+
+When updating a plugin, it is important to run `register` again just as above to load the new signatures from the plugin and allow Nu to rewrite them to the plugin file (`$nu.plugin-path`).
+
+## Managing plugins
+
+To view the list of plugins you have installed:
+
+```nu
+> plugin list
+╭───┬─────────┬────────────┬─────────┬───────────────────────┬───────┬───────────────────────────────╮
+│ # │  name   │ is_running │   pid   │       filename        │ shell │           commands            │
+├───┼─────────┼────────────┼─────────┼───────────────────────┼───────┼───────────────────────────────┤
+│ 0 │ gstat   │ true       │ 1389890 │ .../nu_plugin_gstat   │       │ ╭───┬───────╮                 │
+│   │         │            │         │                       │       │ │ 0 │ gstat │                 │
+│   │         │            │         │                       │       │ ╰───┴───────╯                 │
+│ 1 │ inc     │ false      │         │ .../nu_plugin_inc     │       │ ╭───┬─────╮                   │
+│   │         │            │         │                       │       │ │ 0 │ inc │                   │
+│   │         │            │         │                       │       │ ╰───┴─────╯                   │
+│ 2 │ example │ false      │         │ .../nu_plugin_example │       │ ╭───┬───────────────────────╮ │
+│   │         │            │         │                       │       │ │ 0 │ nu-example-1          │ │
+│   │         │            │         │                       │       │ │ 1 │ nu-example-2          │ │
+│   │         │            │         │                       │       │ │ 2 │ nu-example-3          │ │
+│   │         │            │         │                       │       │ │ 3 │ nu-example-config     │ │
+│   │         │            │         │                       │       │ │ 4 │ nu-example-disable-gc │ │
+│   │         │            │         │                       │       │ ╰───┴───────────────────────╯ │
+╰───┴─────────┴────────────┴─────────┴───────────────────────┴───────┴───────────────────────────────╯
+```
+
+Plugins stay running while they are in use, and are automatically stopped by default after a period of time of inactivity. This behavior is managed by the [plugin garbage collector](#plugin-garbage-collector). To manually stop a plugin:
+
+```nu
+> plugin stop gstat
+```
+
+If we check `plugin list` again, we can see that it is no longer running:
+
+```nu
+> plugin list | where name == gstat | select name is_running
+╭───┬───────┬────────────╮
+│ # │ name  │ is_running │
+├───┼───────┼────────────┤
+│ 0 │ gstat │ false      │
+╰───┴───────┴────────────╯
+```
+
+### Plugin garbage collector
+
+Nu comes with a plugin garbage collector, which automatically stops plugins that are not actively in use after a period of time (by default, 10 seconds). This behavior is fully configurable:
+
+```nu
+$env.config.plugin_gc = {
+    # Settings for plugins not otherwise specified:
+    default: {
+        enabled: true # set to false to never automatically stop plugins
+        stop_after: 10sec # how long to wait after the plugin is inactive before stopping it
+    }
+    # Settings for specific plugins, by plugin name
+    # (i.e. what you see in `plugin list`):
+    plugins: {
+        gstat: {
+            stop_after: 1min
+        }
+        inc: {
+            stop_after: 0sec # stop as soon as possible
+        }
+        stream_example: {
+            enabled: false # never stop automatically
+        }
+    }
+}
+```
+
+For more information on exactly under what circumstances a plugin is considered to be active, see [the relevant section in the contributor book](/contributor-book/plugins.html#plugin-garbage-collection).
+
+## Removing a plugin
+
+To remove a plugin, edit the `$nu.plugin-path` file and remove all of the `register` commands referencing the plugin you want to remove, including the signature argument.
+
 ## Examples
 
 Nu's main repo contains example plugins that are useful for learning how the plugin protocol works:

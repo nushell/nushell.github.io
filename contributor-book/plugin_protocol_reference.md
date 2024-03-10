@@ -479,6 +479,24 @@ Example:
 }
 ```
 
+### `Option`
+
+Sets options that affect how the engine treats the plugin. No response is expected for this message.
+
+#### `GcDisabled` option
+
+Set to `true` to stop the plugin from being automatically garbage collected, or `false` to enable it again.
+
+Example:
+
+```json
+{
+  "Option": {
+    "GcDisabled": true
+  }
+}
+```
+
 ## Stream messages
 
 Streams can be sent by both the plugin and the engine. The agent that is sending the stream is known as the _producer_, and the agent that receives the stream is known as the _consumer_.

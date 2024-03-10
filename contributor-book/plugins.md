@@ -441,6 +441,46 @@ fn main() {
 
 At present, the closures can only refer to values that would be valid to send to the plugin. This means that custom values from other plugins are not allowed. This is likely to be fixed in a future release.
 
+## Plugin garbage collection
+
+Nu comes with a [plugin garbage collector](/book/plugins.html#plugin-garbage-collector), which automatically stops plugins that are no longer in active use according to the user's preferences. Plugins are considered inactive for garbage collection if all of the following are true:
+
+1. They don't have any pending plugin calls that have not sent a response yet
+2. They are not currently writing any streams as part of a response
+3. They have not [explicitly opted out](#disabling-garbage-collection) of garbage collection
+
+Note that the following will **not** cause a plugin to be considered active:
+
+- Plugin custom values being held by the Nu engine
+- Reading streams produced by the engine outside of an active plugin call / response stream
+- Doing work in the background on another thread
+- Anything else not mentioned above
+
+When plugins are stopped by Nu, they are not killed. Instead, Nu waits for anything actively using the plugin to finish, then sends [`Goodbye`](plugin_protocol_reference.html#goodbye) and may close stdin, at which point the plugin should exit gracefully.
+
+### Disabling garbage collection
+
+In order to support use cases outside of those that are already guaranteed to keep the plugin from being garbage collected, an option is provided to disable and re-enable garbage collection as desired by the plugin. From Rust code, this can be set by calling [`EngineInterface::set_gc_disabled`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.set_gc_disabled):
+
+```rust
+engine.set_gc_disabled(true); // Turn off garbage collection
+engine.set_gc_disabled(false); // Turn it back on
+```
+
+This option is global to the plugin, and will last beyond the scope of a plugin call. In other languages, the [`GcDisabled` option](plugin_protocol_reference.html#gcdisabled-option) can be sent at any time:
+
+```json
+{
+  "Option": {
+    "GcDisabled": true
+  }
+}
+```
+
+Note that opting out of garbage collection does not stop users from explicitly stopping your plugin with the `plugin stop` command. We recommend against disabling garbage collection unless your plugin has a good reason to stay running - for example, to keep data in memory, to do background processing, or to keep shared resources like sockets or files open. For custom values that contain all of the data that they need to be interpreted properly, the plugin can always be re-launched as necessary.
+
+If your plugin takes a particularly long time to launch, you can recommend to your users that they change their [garbage collection settings](/book/plugins.html#plugin-garbage-collector) to either increase the `stop_after` duration, or disable garbage collection entirely for your plugin.
+
 ## Under the hood
 
 Writing Nu plugins in Rust is convenient because we can make use of the `nu-plugin` and `nu-protocol` crates, which are part of Nu itself and define the interface protocol. To write a plugin in another language you will need to implement that protocol yourself. If you're goal is to write Nu plugins in Rust you can stop here. If you'd like to explore the low level plugin interface or write plugins in other languages such as Python, keep reading.
