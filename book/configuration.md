@@ -20,10 +20,11 @@ When you launch Nushell without these files set up, Nushell will prompt you to d
 
 You can browse the default files for default values of environment variables and a list of all configurable settings.
 
-The `XDG_CONFIG_HOME` environment variable can be used to control which directory Nushell reads config files from.
-For example, on Windows, you may want to make Nushell look for config files in `~/.config/nushell` rather than
-the default directory for Windows, which is `C:\Users\username\AppData\Roaming\nushell`. You can do that by setting
-`$env.XDG_CONFIG_HOME` **before** starting Nushell.
+You can control which directory Nushell reads config files from. If you set the `XDG_CONFIG_HOME` environment variable to
+an absolute path, Nushell will read config files from `$"($env.XDG_CONFIG_HOME)/nushell"`. Note that `XDG_CONFIG_HOME` must
+be set **before** starting Nushell.
+
+Here's an example for reading config files from `~/.config/nushell` rather than the default directory for Windows, which is `C:\Users\username\AppData\Roaming\nushell`.
 
 ```nu
 > $env.XDG_CONFIG_HOME = "C:\Users\username\.config"
