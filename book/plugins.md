@@ -4,9 +4,41 @@ Nu can be extended using plugins. Plugins behave much like Nu's built-in command
 
 Nu plugins are executables; Nu launches them as needed and communicates with them over [stdin, stdout, and stderr](https://en.wikipedia.org/wiki/Standard_streams). Nu plugins can use either JSON or MSGPACK as their communication encoding.
 
-## Adding a plugin
+## Downloading and installing a plugin
 
-To add a plugin, call the [`register`](/commands/docs/register.md) command to tell Nu where to find it. As you do, you'll need to also tell Nushell what encoding the plugin uses.
+::: warning
+
+Please note that plugin installation methods are still under heavy development and that the following workflow will be refined before the release of 1.0. The nupm official package manager should simplify installation in the future when it becomes ready for general use.
+
+:::
+
+To install a plugin on your system, you first need to make sure that the plugin uses the same version of Nu as your system.
+
+```nu
+> version
+```
+
+Find plugins that have the exact same Nushell version either on crates.io, online git repositories or [`awesome-nu`](https://github.com/nushell/awesome-nu/blob/main/plugin_details.md). You can find which version the plugin uses by checking the Cargo.toml file.
+
+To install a plugin by name from crates.io, run:
+
+```nu
+> cargo install plugin_name
+```
+
+If you chose to download the git repository instead, run this when inside the cloned repository:
+
+```nu
+> cargo install --path .
+```
+
+This will create a binary file that can be used to register the plugin.
+
+Keep in mind that when installing using crates.io, the binary can be saved in different locations depending on how your system is set up. A typical location is in the users's home directory under .cargo/bin.
+
+## Registering a plugin
+
+To enable an installed plugin, call the [`register`](/commands/docs/register.md) command to tell Nu where to find it. As you do, you'll need to also tell Nushell what encoding the plugin uses.
 
 Please note that the plugin name needs to start with `nu_plugin_`, Nu uses the name prefix to detect plugins.
 
