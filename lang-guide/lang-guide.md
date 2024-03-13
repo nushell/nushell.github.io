@@ -1,7 +1,7 @@
-### Bool
 # The Nushell Language
 
-## Types in the Nu language 
+
+## Types in the Nu language
 
 Nu is strongly typed and gradually typed.
 
@@ -42,7 +42,6 @@ def "my make" [] -> list { }
 ```
 
 
-
 For a further discussion on custom command signatures please refer to: [Custom Commands](https://www.nushell.sh/book/custom_commands.html)
 And also: [ [Command Signature](https://www.nushell.sh/book/command_signature.html)
 
@@ -51,7 +50,7 @@ And also: [ [Command Signature](https://www.nushell.sh/book/command_signature.ht
 There are 3 forms of valid type signatures in Nu:
 
 - Basic: E.g. 'int', 'bool', 'string' etc.
-- Compound: 
+- Compound:
   * 'list<string>', '
 record<type: int, bar: string>'
 - Multiple: Enumerations of the above kinds delimited by commas ', '
@@ -90,13 +89,11 @@ and 'false' if not present.
 You cannot use the 'bool' type as a flag annoatation as that is the same
 as the present or not of the occurance of the flag.
 
-
 ### Closure parameters
 
 In Nu, closures have a simpler kind of type annotations for parameters
 than custom commands. Basically, closures can have type annotations for their
 parameters but not optional or default values.
-
 
 E.g. An annotated closure:
 
@@ -105,7 +102,6 @@ let cl = {|x: int, y: string| $"x: ($x), y: ($y)" }
 do $cl 88 'hello'
 # => x: 88, y: hello
 ```
-
 
 ### Commands that interact with types
 
@@ -116,7 +112,7 @@ E.g.
 
 ```nu
 [foo bar baz] | describe
-list<string>
+# => list<string>
 ```
 
 #### Commands
@@ -128,8 +124,6 @@ list<string>
   * The into commands are used to cast one type into another.
 - ast
   * In the branches of abstract syntax tree that describe the type of some element
-
-
 
 ## Basic Types
 
@@ -150,7 +144,6 @@ Example 1:
 
 Declaring an mutable variable that can accept any type.
 
-
 ```nu
 let q = false
 mut x: any = 12
@@ -163,8 +156,6 @@ if $q {
 $x
 # =>'true' a string
 ```
-
-### 
 
 Example 2:
 
@@ -182,7 +173,6 @@ takes-anything foo
 ```
 
 
-
 ### Bool
 
 What it is: A logical data type that can have only `true` or `false` values.
@@ -193,7 +183,6 @@ Annotation: 'bool'
 
 - true
 - false
-
 
 Example 1:
 
@@ -210,12 +199,10 @@ let truth: bool  = true
 # => true
 ```
 
-
 #### Casts
 
 The command 'into bool' can convert other data types into bool.
 For a complete list see: 'help into bool'.
-
 
 #### Commands that use bool
 
@@ -234,12 +221,11 @@ For a complete list see: 'help into bool'.
 ##### Operators that use bool
 
 - '==', '!=', '<', '<=', '>', '>='
-- in, not in 
 - and, or not
+- in
 - '=~', '!~' <regex>
 - 'ends-with', 'starts-with'
   * String comparison operators
-
 
 ### Int
 
@@ -250,7 +236,6 @@ Annotation: 'int'
 Internally represented as a signed 64-bit number with two's complement arithmetic.
 
 Numeric literals without a fractional components will evaluate as `Int`: `1`, `-2`, `1000`
-### 
 
 Integers can be created using hex `0xff`, octal `0o234`, binary `0b10101`, and decimal `123`.
 
@@ -260,7 +245,6 @@ Can be used for indexing into `List`s or `String`s
 
 The command 'into int' can be used to convert other types of data into integers.
 For a full list of possible inputs, see 'help into int'
-
 
 
 ### Float
@@ -294,7 +278,6 @@ The literals and display representations support both metric prefixes with a bas
 0.2 gb
 20 mib
 ```
-
 
 The full list of filesize units are:
 
@@ -344,7 +327,6 @@ Note: The where command and other filters can use filesize in comparison express
 
 
 
-
 ### Duration
 
 What it is:  A value representing a unit of passage of time.
@@ -370,7 +352,6 @@ The unit part must be one of a specific set of strings listed below.
 
 ```
 
-
 This chart shows all duration units currently supported:
 
 | Duration | Length          |
@@ -395,15 +376,13 @@ And you can do calculations with durations:
 
 ```nu
 > 30day / 1sec  # How many seconds in 30 days?
-2592000
+# => 2592000
 ```
-
 
 
 Note: Months, years, centuries and milliniums are not precise as to the exact
 number of nanoseconds thus are not valid duration literals.You are free to make
 your   own constants for specific months or years.
-
 
 
 #### Casts
@@ -413,16 +392,13 @@ into a duration. and is quite flexible. For a complete list of possible
 inputs, see 'help into duration'
 
 
-
 #### Commands that use duration
-
 
 - sleep
 - where
   * In the comparison expression
 - ps
 - sys
-
 
 
 ##### Operators that use duration
@@ -450,12 +426,10 @@ Dates are in three forms, based on the RFC 3339 standard:
 
 
 
-
 #### Casts
 
 The command 'into datetime' can be used to convert many other data types
 into dates.  See: 'help into datetime' for a full list of inputs.
-
 
 
 #### Commands that use datetime
@@ -468,18 +442,13 @@ for fields and expressions.
 ps
 sys
 
-
-
-
-
 ### Range
 
 What it is: A range describes a range of values from a starting value to an ending value, with an optional stride.
 
  Values are separated by `..` to create a range.
 
-Annotation:'range' 
-
+Annotation:'range'
 
 Example 1:
 
@@ -500,6 +469,7 @@ Ranges can also work backward. For example, the values from 10 to 1 in reverse c
 
 ```nu
 10..1
+# => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 ```
 
 Ranges can exclude either the `from` or the `to` side of the range:
@@ -508,18 +478,21 @@ Numbers from 0 to 10:
 
 ```nu
 ..10
+# => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
 Numbers starting from 1:
 
 ```nu
 1..
+# => infinite range starting at 1
 ```
 
 Ranges are lazy. They do not generate their values until needed. You can use a range with no specified end point and combine it with a command that takes only the first n elements. For example, you could generate the numbers from 1 to 10 using:
 
 ```nu
 1.. | take 10
+# => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
 ### String
@@ -538,7 +511,6 @@ To input string data different [string literals](#string-literals) supporting es
 
 TBD: On which level string indexing should be performed: bytes or unicode scalars.
 
-
 ##### Commands that use string
 
 Many commands takes strings as inputs or parameters.
@@ -554,7 +526,7 @@ These commands work with strings explicitly
 In addition to the above commands, most other 'into <type>' commands take strings
 as inputs.
 
-#### Operators
+#### Operators that use string
 
 - '+' : Concatenate two strings
 - '+=' : Mutates a string variable by concatenating its right side value.
@@ -565,12 +537,10 @@ as inputs.
 - '<' : True if the left string is less than the right string
 - '<=' : True if the left string is less or equal than the right string
 
-
 #### Casts
 
 The command 'into string' will convert other data types into strings.
 For a complete list of possible input types see: 'help into string'
-
 
 ### Record
 
@@ -584,12 +554,10 @@ Keys are guaranteed to be unique. Inserting twice with the same key will only ke
 
 `{a: b, c: d}`
 
-
 #### Casts
 
 The command 'into record' can be used to convert other data types into records.
 See the command: 'help into record' fro a complete list of input data types.
-
 
 #### Commands that use record
 
@@ -617,7 +585,6 @@ A list is like a vector or array list in other languages.
 
 Lists use either commas or spaces to delimit values.
 
-
 Examples of lists:
 
 ```nu
@@ -637,7 +604,6 @@ Lists can span multiple lines to enumerate values. For example, this is equivale
 3
 ]
 ```
-
 
 #### Commands that use list
 
@@ -661,7 +627,8 @@ See also the 'to [subcommands]' and 'from [subcommands]' for more examples.
 
 ##### Operators that use list
 
-- in
+- in For set membership
+  * 'not (12 in [1 2 3])' for inverse set membership
 
 ### Table
 
@@ -683,7 +650,6 @@ In the first syntax, the headers are separated from the data cells using a semic
 
 The second syntax is simply a list of records. This plays on the Nushell data model, which sees a list of records as equivalent to a table. This is used in cases where the length of a table may not be known ahead of time. In such a case, a stream of records likewise represents a table.
 
-
 #### Commands that use table
 
 - table
@@ -695,17 +661,14 @@ The second syntax is simply a list of records. This plays on the Nushell data mo
 - where
 - range
 
-
 Note: Almost all of Nushell's filter commands work with tables
 For a longer list see: 'help commands | where category == filters'.
-
 
 ### Closure
 
 What it is: A closure is an anonymous function which is also often called a lambda function.
 
 Annotation: 'closure'
-
 
 Closures are used in Nu extensively as parameters to iteration style commands
 like each, filter and reduce, to name but a few.
@@ -738,24 +701,22 @@ and assignns it to the immutable variable $cl. The type signatures ': int'
 are optional.
 
 ```nu
-# A closure that checks if its parameter is even 
+# A closure that checks if its parameter is even
 #returns a bool either true or false
-let evens = {|it| ($it mod 2) == 0 } 
+let evens = {|it| ($it mod 2) == 0 }
 ```
 
 #### Invoking a closure
 
 ```nu
 # Assuming $cl is the closure declared above
-
 do $cl 34 8
-42
+# => 42
 ```
 
 Using $cl from the previous example, we invoke it with the  'do' keyword
 and pass it  integers, 34 and 8. When it runs, it computes the sum
 and returns 42.
-
 
 #### Using a closure as a parameter to an iteration command
 
@@ -764,24 +725,14 @@ We can use our $evens closure to filter our list.
 
 ```nu
 # assuming $evens has been declared as above
-1..100 | filter $evens
-
-menerva lang-guide >>  > let evens = {|it| ($it mod 2) == 0 }
-menerva lang-guide >>  > 1..100 | filter $evens
-  0     2 
-  1     4 
-  2     6 
-  3     8 
-  4    10 
-  5    12 
-  6    14 
-# ...
+1..10 | filter $evens
+# => [2, 4, 6, 8, 10]
 ```
 
 #### Capturing values from an outer scope
 
 Closures can also remember values  declared in some outer scope and then
-use them for processing when invoked.  This also allows for a kind of curring
+use them for processing when invoked.
 if it must be done explicitly. There are some restrictions on the kind
 of external values that can be closed over. Only immutable variables like those
 created with the 'let' keyword or parameters to a custom command  can be captured
@@ -796,13 +747,12 @@ def "create lambda" [x: int] {
 let doubler = (create lambda 2)
 # Now invoke it with 7
 do $doubler 7
-14
+# => 14
 
 let tripler = (create lambda 3)
 do $tripler 7
-21
+# => 21
 ```
-
 
 If we try to create a closure that attempts to capture a mutable variable
 we get a compile error:
@@ -812,29 +762,27 @@ if true {
   mut x = 9
   do {|it| $it + $x }
 }
-
+# => Error: Capture of mutable variable.
 ```
-
 
 #### Commands that use closure
 
--     all        
--     any        
--     collect    
--     do         
--     each       
--     explain    
--     filter     
--     group-by   
--     interleave 
--     items      
--    par-each   
--    reduce     
--    skip until 
--    skip while 
--    take until 
- -   take while 
--    tee        
+- all
+- any
+- collect
+- do
+- each
+- explain
+- filter
+- group-by
+- interleave
+- items
+- par-each
+- reduce
+- skip until
+- skip while
+- take until
+- tee
 - update
 - upsert
 - zip
@@ -842,22 +790,13 @@ if true {
 Note: This is not a complete list. New commands are being added to Nushell
 and the new commands might take a closure as a prameter or a flag argument.
 
-
-
-
-
 ### Nothing
 
 What it is: The type `nothing` is to be used to represent the absence of another value. Commands that explicitly do not return a value return `null`.
 
 Annotation: 'nothing'
 
-
-
 Use as a missing value indicator.
-
-
-
 
 ### Binary
 
@@ -875,13 +814,10 @@ The data inside of the `[]` represents a single data value of bits.
 
 You can use spaces to make the literals more readable. For example, `0x[ffff ffff]`.
 
-
-
 #### Casts
 
 The command 'into binary' can convert other data types into a binary datatype.
 See 'help into binary' for a complete list of compatible input data types.
-
 
 ### Glob
 
@@ -892,7 +828,6 @@ Annotation: 'glob'
 In Nushell, a glob is a an unexpanded pathname pattern that gets passed around
 to commands, builtin, and custom. In order to work with actual pathnames,
  You need to explicitly expand the glob value with the 'glob' command.
-
 
 E.g. Consider these two examples with the 'echo' command, both the internal
 one and the external command (under Unix-like systems):
@@ -926,7 +861,6 @@ glob -D | path basename | str join ' '
 foo.nu bar.nu baz.nu
 ```
 
-
 Another caveat when using Nushell over  traditional shells is the 'ls' command.
 The ls command only takes a single glob pattern argument. which it internally  expands.
 
@@ -935,7 +869,6 @@ The ls command only takes a single glob pattern argument. which it internally  e
 ls (glob *.nu)
 # Error [TODO: Show the actual error]
 ```
-
 
 Globs can also represent directory trees recursively. In Unix like systems
 you might use a combination of the  'find' and 'xargs' commands to operate
@@ -947,12 +880,10 @@ glob **/*.txt | each {|p| $p | path split } | each {|l| $l | str join '\' } | ea
 # upper case pathnames
 ```
 
-
 #### Casts
 
 Using the 'into glob' command, you can convert other types like strings
 into globs.
-
 
 ####Using globs as a first class object
 
@@ -964,7 +895,6 @@ glob $g
 # Returns list of pathnames
 ```
 
-
 #### Escaping globs
 
 Sometimes you might want to not let a command expand a possible  glob pattern
@@ -974,7 +904,6 @@ Note: As of Release 0.91.0 of Nu,   'str escape-glob' is deprecated.
 
 As of release 0.91.0,if you pass a string variable to commands that support glob patterns, then Nushell won't auto-expand the glob pattern (
 
-
 #### Commands that use glob
 
 - cp
@@ -983,8 +912,6 @@ As of release 0.91.0,if you pass a string variable to commands that support glob
 - glob
 - mv
 - rm
-
-
 
 ### CellPath
 
@@ -1026,7 +953,6 @@ example,  the cell path could have been written as '$data | get 3.temps.2' witho
 However, if assigning a cell path to a variable that begins with a numerical
 index, then you must use the leading '$.' syntax.
 
-
 ```nu
 # Correct
 let cp: cell-path = $.0.foo
@@ -1034,9 +960,7 @@ let cp: cell-path = $.0.foo
 let cp: cell-path = 0.foo
 ```
 
-
 This does not affect using cell paths s arguments to a custom command.
-
 
 #### Optional cell paths
 
@@ -1076,31 +1000,28 @@ def my-get [p: cell-path] {
 }
 # Now call it
 [1 2 3 4] | my-get 2
-3
+# => 3
 # structured data
 {foo: 1, bar: { baz: {quo: 4}}} | my-get bar.baz.quo
-4
+# => 4
 # with the $ prefix
 {foo: 1, bar: { baz: {quo: 4}}} | my-get $.bar.baz.quo
-4
+# => 4
 # Create a var: $p
 let p: cell-path = $.bar.baz.quo
 # works so far
 # let's try for standard get
 {foo: 1, bar: { baz: {quo: 4}}} | get $p
-4
+# => 4
 # Now with my-get
 {foo: 1, bar: { baz: {quo: 4}}} | my-get $p
-4
+# => 4
 ```
-
-
 
 #### Casts
 
 Cell paths are not restricted to just literal values in your program source.
 You can also construct them on the fly with the 'into cell-path' command.
-
 
 For example, you could construct the cell path in the temp data programatically
 with this code which knows that the location desired is for Grand Rapids, Mich., U.S.A.
@@ -1136,7 +1057,6 @@ realpath sh
 /usr/bin/sh
 ```
 
-
 #### Casts
 
 There is no 'into path' command, but these 2 commands might fit the bill:
@@ -1148,7 +1068,6 @@ There is no 'into path' command, but these 2 commands might fit the bill:
 
 - path [subcommands]
   * See: 'help path' for a full list
-
 
 ## Other data types
 
@@ -1163,14 +1082,18 @@ are requested, a closure is called instead of just returning the field's value.
 The  key is passed to the closure so it can determine what to return
 when that key is  requested, say by the 'get' command.
 
-
 There is only one closure for the entire record.
 
 There is only one way to create a lazy record by using the 'lazy make' command.
 
 Example 1
 
-
+```nu
+  > let lr = lazy make --columns ["haskell", "futures", "nushell"] --get-value { |lazything| $lazything + "!" }
+# Get nushell field
+$lr.nushell
+# => 'nushell!'
+```
 
 
 #### How to discriminate between fields in the lazy record
@@ -1204,7 +1127,6 @@ Keeping this in mind, if the closure returns some kind of Nu structured
 data that also participates in cell path contexts,
 then further parts of the cell path will continue to work.
 
-
 Example 3
 
 ```nu
@@ -1225,9 +1147,6 @@ $lr.rec2.color
 # => red
 ```
 
-
-
-
 ## Types not exposed to scripts
 
 the following data types are valid Nushell data  types but cannot be declared
@@ -1244,7 +1163,7 @@ At the present time, this data type is not useful as a proper Nushell data type.
 When the 'error make' command is called, the system throws an exception
 so you cannot really capture the actual value generated by the 'error make' command.
 
-If you surround the code that might potentially throw such an error with a try/catch 
+If you surround the code that might potentially throw such an error with a try/catch
 code block, the error, if thrown will be captured by the catch sub-expression.
 The parameter passed to the closure given to the catch expression, is a record
 data type, not an error type.
@@ -1254,16 +1173,12 @@ It cannot be used to type either a mutable or innutable variable nor the input
 type for a custom command.
 Although, this effectly has no effect.
 
-
-
 This code snippet shows how to detect the error data type from within Nushell:
 
 ```nu
 do { error make {msg: 'can we see this?'} } | describe
 error
 ```
-
-
 
 ### CustomValue
 
@@ -1273,7 +1188,7 @@ Annotation: None
 
 Custom values are values that might be created vy Nushell internal commands or
 plugins. For instance, a plugin might generate a custom value  that encodes
-data in a binary format or some other data type  like structured data 
+data in a binary format or some other data type  like structured data
 used by DataFrames or SQLite.
 
 Note: Custom values used by external commands are not this data type.
@@ -1294,13 +1209,12 @@ open test.db | describe
 # => SQLiteDatabase
 ```
 
-
 The output from describe is 'SQLiteDatabase', which is a CustomValue data type.
 
 The dataframe example:
 
 Note:  You need to have dataframes compiled in Nushell for the following
-example to work.See [Dataframes: Nushell](https://www.nushell.sh/book/dataframes.html) 
+example to work.See [Dataframes: Nushell](https://www.nushell.sh/book/dataframes.html)
 
 ```nu
 ls | dfr into-df | describe
@@ -1332,7 +1246,6 @@ E.g.
 # => closure
 ```
 
-
 A block establishes a new variable scope. Variables defined within the new scope
 having the same name as a variable  in an outer scope will alias that name for the
 lifetime of that block's scope.
@@ -1352,7 +1265,6 @@ echo $x
 # => 9
 ```
 
-
 #### Mutable variables
 
 Unlike closures, mutable variables are exposed within the inner scope of the block
@@ -1370,7 +1282,6 @@ do { $x += 1 }
 if true { $x += 1 }
 # => 10
 ```
-
 
 Note:  Aliasing still occurs within the block:
 
@@ -1391,8 +1302,6 @@ These are the Nushell constructs that use a block
 - try
   * But not the body of the catch clause which is always a closure
 
-
-
 Note: For both the if/else and try statements, the value of the last expression
 in the block for whichever clause is executed is returned. This is not true
 for any of the looping constructs.   If you try to assign the result of calling
@@ -1403,7 +1312,6 @@ the loop and mutate it inside the body of the loop.
 However, the more idiomatic Nushell way to do it is with a command like 'each' which
 takes a closure. The last expression evaluated in the closure is returned and
 available to further items in the pipeline.
-
 
 ## Numbers and Arithmetic
 
