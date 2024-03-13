@@ -18,7 +18,7 @@ from  Jeremy Siek is here: [What is Gradual Typing?](https://wphomes.soic.indian
 
 ### Type signatures
 
-There are 3 syntatic forms that can have type signatures:
+There are 3 syntactic. forms that can have type signatures:
 
 - variable and parameter declarations
 - Input type declarations
@@ -86,7 +86,7 @@ binding will be 'bool' and its value will be 'true' if the flag is present
 and 'false' if not present.
 
 You cannot use the 'bool' type as a flag annoatation as that is the same
-as the present or not of the occurance of the flag.
+as the present or not of the occurrence of the flag.
 
 ### Closure parameters
 
@@ -336,7 +336,7 @@ Durations are internally stored as a number of nanoseconds.
 
 ##### Literals
 
-to form a Duration literal you need to combine a numeric value witha a unit of time.
+to form a Duration literal you need to combine a numeric value with a a unit of time.
 The  numeric literal part must be a signed integer or floating point number literal.
 The unit part must be one of a specific set of strings listed below.
 
@@ -408,7 +408,7 @@ inputs, see 'help into duration'
 
 ### Date
 
-What it is:  A value representing a sepcific point in time using international standard  date time descriptors.
+What it is:  A value representing a specific point in time using international standard  date time descriptors.
 
 Annotation: 'datetime'
 
@@ -675,7 +675,7 @@ like each, filter and reduce, to name but a few.
 A closure acts like a custom command that can be invoked either explicitly
 or by other commands.
 Closures can take parameters, return values and be passed to commands, either builtin or custom.
-You cannot pass a closure to an external command, they  are reserved ony for Nu
+You cannot pass a closure to an external command, they  are reserved only for Nu
 usage You can also assign a closure to a variable, be included as elements
 in a list or as a value in a record.
 
@@ -788,7 +788,7 @@ if true {
 - zip
 
 Note: This is not a complete list. New commands are being added to Nushell
-and the new commands might take a closure as a prameter or a flag argument.
+and the new commands might take a closure as a parameter or a flag argument.
 
 ### Nothing
 
@@ -1023,7 +1023,7 @@ let p: cell-path = $.bar.baz.quo
 Cell paths are not restricted to just literal values in your program source.
 You can also construct them on the fly with the 'into cell-path' command.
 
-For example, you could construct the cell path in the temp data programatically
+For example, you could construct the cell path in the temp data programmatically
 with this code which knows that the location desired is for Grand Rapids, Mich., U.S.A.
 
 ```nu
@@ -1171,7 +1171,7 @@ data type, not an error type.
 The error annotation  can be used to type a custom command parameter, or the command's return type.
 It cannot be used to type either a mutable or innutable variable nor the input
 type for a custom command.
-Although, this effectly has no effect.
+But doing so has no effect.
 
 This code snippet shows how to detect the error data type from within Nushell:
 
@@ -1223,7 +1223,7 @@ ls | dfr into-df | describe
 
 ### Block
 
-What it is: A syntatic form used by some Nushell keywords.
+What it is: A syntactic. form used by some Nushell keywords.
 
 A block is any Nushell code enclosed in curly braces: '{', '}'
 but only when used in some specific Nushell constructs. In other cases
