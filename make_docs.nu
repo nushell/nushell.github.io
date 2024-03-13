@@ -12,22 +12,6 @@ def safe-path [] {
   $in | str replace --all '\?' '' | str replace --all ' ' '_'
 }
 
-# NOTE: You should have nushell source code directory sit along with the docs' directory to make it work
-# Get commands in `extra` crate by parsing the source code
-def get-extra-cmds [] {
-    if ('../nushell/crates/nu-cmd-extra/src' | path exists) {
-        cd ..
-        glob nushell/crates/nu-cmd-extra/src/**/*.rs
-            | each { $in | open -r | parse -r 'fn name\(&self\) -> &str \{[\r|\n]\s+\"(?P<name>.+)\"[\r|\n]\s+\}' }
-            | flatten
-            | get name
-    } else {
-        []
-    }
-}
-
-let extra_cmds = get-extra-cmds
-
 # generate the YAML frontmatter of a command
 #
 # # Examples
@@ -84,8 +68,6 @@ def command-frontmatter [commands_group, command_name] {
 
     let feature = if $command_name =~ '^dfr' {
         "dataframe"
-    } else if $command_name in $extra_cmds {
-        "extra"
     } else {
         "default"
     }
@@ -248,8 +230,6 @@ $"($example.description)
 
     let features = if $command.name =~ '^dfr' {
         $'(char nl)::: warning(char nl)Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl):::(char nl)'
-    } else if $command.name in $extra_cmds {
-        $'(char nl)::: warning(char nl) Command `($command.name)` was not included in the official binaries by default, you have to build it with `--features=extra` flag(char nl):::(char nl)'
     } else { '' }
 
     let plugins = if $command.name in ['from ini', 'from ics', 'from eml', 'from vcf'] {

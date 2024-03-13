@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.89.0
+version: 0.91.0
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |
@@ -30,6 +30,9 @@ feature: default
  -  `--update, -u`: copy only when the SOURCE file is newer than the destination file or when the destination file is missing
  -  `--progress, -p`: display a progress bar
  -  `--no-clobber, -n`: do not overwrite an existing file
+ -  `--preserve, - {list<string>}`: preserve only the specified attributes (empty list means no attributes preserved)
+                    if not specified only mode is preserved
+                    possible values: mode, ownership (unix only), timestamps, context, link, links, xattr
  -  `--debug, -`: explain how a file is copied. Implies -v
 
 ## Parameters
@@ -72,5 +75,17 @@ Move many files into a directory
 Copy only if source file is newer than target file
 ```nu
 > cp -u a b
+
+```
+
+Copy file preserving mode and timestamps attributes
+```nu
+> cp --preserve [ mode timestamps ] a b
+
+```
+
+Copy file erasing all attributes
+```nu
+> cp --preserve [] a b
 
 ```

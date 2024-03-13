@@ -2,7 +2,7 @@
 title: math sum
 categories: |
   math
-version: 0.89.0
+version: 0.91.0
 math: |
   Returns the sum of a list of numbers or of each column in a table.
 usage: |
@@ -28,7 +28,8 @@ feature: default
 | list\<filesize\> | filesize |
 | list\<number\>   | number   |
 | range          | number   |
-| table          | table    |
+| record         | record   |
+| table          | record   |
 ## Examples
 
 Sum a list of numbers
@@ -41,4 +42,13 @@ Get the disk usage for the current directory
 ```nu
 > ls | get size | math sum
 
+```
+
+Compute the sum of each column in a table
+```nu
+> [[a b]; [1 2] [3 4]] | math sum
+╭───┬───╮
+│ a │ 4 │
+│ b │ 6 │
+╰───┴───╯
 ```

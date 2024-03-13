@@ -2,7 +2,7 @@
 title: date list-timezone
 categories: |
   date
-version: 0.89.0
+version: 0.91.0
 date: |
   List supported time zones.
 usage: |
@@ -28,7 +28,7 @@ feature: default
 
 ## Examples
 
-Show timezone(s) that contains 'Shanghai'
+Show time zone(s) that contains 'Shanghai'
 ```nu
 > date list-timezone | where timezone =~ Shanghai
 ╭───┬───────────────╮

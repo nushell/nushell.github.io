@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   path
-version: 0.89.0
+version: 0.91.0
 path: |
   Check whether a path exists.
 usage: |
@@ -18,6 +18,10 @@ feature: default
 ## Signature
 
 ```> path exists {flags} ```
+
+## Flags
+
+ -  `--no-symlink, -n`: Do not resolve symbolic links
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: date to-record
 categories: |
   date
-version: 0.89.0
+version: 0.91.0
 date: |
   Convert the date into a record.
 usage: |
@@ -27,12 +27,6 @@ feature: default
 | datetime | record |
 | string   | record |
 ## Examples
-
-Convert the current date into a record.
-```nu
-> date to-record
-
-```
 
 Convert the current date into a record.
 ```nu

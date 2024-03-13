@@ -2,7 +2,7 @@
 title: into int
 categories: |
   conversions
-version: 0.89.0
+version: 0.91.0
 conversions: |
   Convert value to integer.
 usage: |
@@ -23,6 +23,7 @@ feature: default
 
  -  `--radix, -r {number}`: radix of integer
  -  `--endian, -e {string}`: byte encode endian, available options: native(default), little, big
+ -  `--signed, -s`: always treat input number as a signed number
 
 ## Parameters
 
@@ -125,4 +126,16 @@ Convert 0 padded string to int with radix 8
 ```nu
 > '0010132' | into int --radix 8
 4186
+```
+
+Convert binary value to int
+```nu
+> 0x[10] | into int
+16
+```
+
+Convert binary value to signed int
+```nu
+> 0x[a0] | into int --signed
+-96
 ```

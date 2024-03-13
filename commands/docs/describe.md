@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.89.0
+version: 0.91.0
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |
@@ -30,7 +30,7 @@ feature: default
 
 | input | output |
 | ----- | ------ |
-| any   | string |
+| any   | any    |
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: bytes replace
 categories: |
   bytes
-version: 0.89.0
+version: 0.91.0
 bytes: |
   Find and replace binary.
 usage: |

@@ -139,7 +139,7 @@
     ╰───┴───────╯
 ```
 
-> **inserts `beeze` value at st index in the list**
+> **inserts `beeze` value at the 2nd index of the list**
 
 ---
 
@@ -181,7 +181,7 @@
 
 ```nu
     > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
-    > $planets | each { |it| $"($it) is a planet of solar system" }
+    > $planets | each { |it| $"($it) is a planet of the solar system" }
 ```
 
 > **iterates over a list; `it` is current list value**

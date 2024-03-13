@@ -2,7 +2,7 @@
 title: input list
 categories: |
   platform
-version: 0.89.0
+version: 0.91.0
 platform: |
   Interactive list selection.
 usage: |
@@ -23,6 +23,8 @@ feature: default
 
  -  `--multi, -m`: Use multiple results, you can press a to toggle all options on/off
  -  `--fuzzy, -f`: Use a fuzzy select.
+ -  `--index, -i`: Returns list indexes.
+ -  `--display, -d {cell-path}`: Field to use as display value
 
 ## Parameters
 
@@ -31,10 +33,10 @@ feature: default
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| list\<any\> | list\<any\> |
-| range     | int       |
+| input     | output |
+| --------- | ------ |
+| list\<any\> | any    |
+| range     | int    |
 ## Examples
 
 Return a single value from a list
@@ -58,6 +60,18 @@ Return a single record from a table with fuzzy search
 Choose an item from a range
 ```nu
 > 1..10 | input list
+
+```
+
+Return the index of a selected item
+```nu
+> [Banana Kiwi Pear Peach Strawberry] | input list --index
+
+```
+
+Choose an item from a table using a column as display value
+```nu
+> [[name price]; [Banana 12] [Kiwi 4] [Pear 7]] | input list -d name
 
 ```
 

@@ -164,6 +164,7 @@ export default defineUserConfig({
         'sh',
         'toml',
         'json',
+        'javascript',
         'python',
         'cpp',
         'powershell',

@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.89.0
+version: 0.91.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -17,7 +17,7 @@ feature: default
 
 ## Signature
 
-```> rm {flags} (filename) ...rest```
+```> rm {flags} ...rest```
 
 ## Flags
 
@@ -31,8 +31,7 @@ feature: default
 
 ## Parameters
 
- -  `filename`: The file or files you want to remove.
- -  `...rest`: Additional file path(s) to remove.
+ -  `...rest`: The file paths(s) to remove.
 
 
 ## Input/output types:

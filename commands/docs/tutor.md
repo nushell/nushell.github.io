@@ -2,7 +2,7 @@
 title: tutor
 categories: |
   misc
-version: 0.89.0
+version: 0.91.0
 misc: |
   Run the tutorial. To begin, run: tutor.
 usage: |

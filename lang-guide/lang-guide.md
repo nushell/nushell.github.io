@@ -1,6 +1,5 @@
 # The Nushell Language
 
-
 ## Types in the Nu language
 
 Nu is strongly typed and gradually typed.
@@ -235,7 +234,7 @@ Annotation: 'int'
 
 Internally represented as a signed 64-bit number with two's complement arithmetic.
 
-Numeric literals without a fractional components will evaluate as `Int`: `1`, `-2`, `1000`
+Numeric literals without a fractional component will evaluate as `Int`: `1`, `-2`, `1000`
 
 Integers can be created using hex `0xff`, octal `0o234`, binary `0b10101`, and decimal `123`.
 
@@ -507,9 +506,14 @@ As strings have to be valid UTF-8 for effective string operations, they can not 
 
 Different display operations might impose limitations on which non-printable or printable characters get shown. One relevant area are the ANSI escape sequences that can be used to affect the display on the terminal. Certain operations may choose to ignore those.
 
-To input string data different [string literals](#string-literals) supporting escaping and [string interpolation](#string-interpolation) are available.
+To input string data, different [string literals](#string-literals) supporting escaping and [string interpolation](#string-interpolation) are available.
 
-TBD: On which level string indexing should be performed: bytes or unicode scalars.
+TBD: On which level string indexing should be performed: bytes or Unicode scalars.
+
+#### Casts
+
+The command 'into string' will convert other data types into strings.
+For a complete list of possible input types see: 'help into string'
 
 ##### Commands that use string
 
@@ -537,10 +541,6 @@ as inputs.
 - '<' : True if the left string is less than the right string
 - '<=' : True if the left string is less or equal than the right string
 
-#### Casts
-
-The command 'into string' will convert other data types into strings.
-For a complete list of possible input types see: 'help into string'
 
 ### Record
 
@@ -808,7 +808,7 @@ Nushell offers a way of creating binary literals in your data. These are in one 
 
 - `0x[ffffffff]` - hex-based binary representation
 - `0o[1234567]` - octal-based binary representation
-- `0b[10101010101]` - binary-based binary reprentation
+- `0b[10101010101]` - binary-based binary representation
 
 The data inside of the `[]` represents a single data value of bits.
 
@@ -1313,6 +1313,7 @@ However, the more idiomatic Nushell way to do it is with a command like 'each' w
 takes a closure. The last expression evaluated in the closure is returned and
 available to further items in the pipeline.
 
+
 ## Numbers and Arithmetic
 
 ### Arithmetic Operators
@@ -1358,7 +1359,7 @@ Nushell provides support for these bitwise operators:
 
 ### if
 
-The`if` expression evaluates a condition and then chooses to run a block based on the condition.
+The `if` expression evaluates a condition and then chooses to run a block based on the condition.
 
 For example, you can print "yes", based on a true condition:
 
@@ -1420,24 +1421,24 @@ The code that follows the `else` is an expression rather than a block, allowing 
 
 - Maybe it's the backtick quote?
 - Should we have a `r"some\nliteral\tstring"` ala rust?
-- Should we have something like python's triple double quotes like `"""` which helps with multi-line strings and also does sring literal thigns?
+- Should we have something like python's triple double quotes like `"""` which helps with multi-line strings and also does string literal things?
 
 ## String interpolation
 
-String interpolation uses either double quotes or single quotes with a preceeding dollar sign. However, when using double quotes, you have to be aware that escapes will be recognized and interpreted. (I(darren) really don't like that people have to be aware of this functionality with double quotes.)
+String interpolation uses either double quotes or single quotes with a preceding dollar sign. However, when using double quotes, you have to be aware that escapes will be recognized and interpreted. (I(darren) really don't like that people have to be aware of this functionality with double quotes.)
 
 Example:
 
 ```nu
-let name = "nushell"
+let name = "Nushell"
 print $"My favorite shell is ($name)"
 ```
 
 There are a couple things to be aware of in the above example.
 
 1. The trigger to recognize a string interpolated string is the `$` sign.
-2. Double quotes are use here but single quotes could be used as well. User be aware of escapes if using double quotes.
-3. Access variable names needs to be parenthesis as `$name` is in the example.
+2. Double quotes are used here, but single quotes could be as well. Be aware of escapes when using double quotes.
+3. Accessed variable names need to be in parentheses as `$name` is in the example.
 
 ### Executing String Interpolated strings
 
@@ -1453,13 +1454,13 @@ let fn = "filename"
 ^$"($path1)($path2)($fn)"
 ```
 
-The caret `^` before the string interpolation symbol `$` allows that external command to be exectued.
+The caret `^` before the string interpolation symbol `$` allows that external command to be executed.
 
 ## String Quoting
 
 ### Double quotes
 
-Double quotes are used as you would think normal quotes should be used except for one thing. That one thing is escapes can be recognized and interpreted with double quotes.
+Double quotes are used as you would normal quotes, except for one thing: escapes can be recognized and interpreted with double quotes.
 
 Example:
 
@@ -1467,44 +1468,44 @@ Example:
 "\e[31mHello\e[35m Nushell\e[0m"
 ```
 
-That would be interpreted with `Red` foreground Hello and `Purple aka Magenta` foreground Nushell becuase:
+This would be interpreted as a red foreground `Hello` and a magenta/purple foreground `Nushell` because:
 
-1. `\e` means insert and `escape` character
+1. `\e` means insert an `escape` character
 2. `[31m` means use whatever is defined as `red` foreground in your terminal
-3. `[35m` means use whatever is defined as purple, sometimes called magenta, foreground in your terminal.
-4. `[0m` means reset all ansi escape sequences.
+3. `[35m` means use whatever is defined as `magenta/purple` foreground in your terminal.
+4. `[0m` means reset all ANSI escape sequences.
 
-There are other escapes that are defined by nushell found in parser.rs around line 2426 in the `unescape_string` function.
+There are other escapes defined by Nushell found in [parser.rs](https://github.com/nushell/nushell/blob/main/crates/nu-parser/src/parser.rs#L2496) around line 2500 in the `unescape_string` function.
 
-Recognized nushell escapes:
+Recognized Nushell escapes:
 
-- " - double quote
-- ' - single quote
-- \ - back slash
-- / - forward slash
-- ( - left parenthesis
-- ) - right parenthesis
-- { - left brace
-- } - right brace
-- $ - dollar sign
-- ^ - caret symbol
-- \# - hash / pound sign
-- \| - pipe character
-- ~ - tilde
-- a - bel
-- b - bs aka backspace
-- e - escape
-- f - form feed
-- n - line feed aka new line
-- r - carriage return
-- t - tab aka horizontal tab
-- uXXXX - unicode hex value for a char - requires 4 chars. It would be nice if \uXX was acceptible as well.
+- " - Double quote
+- ' - Single quote
+- \ - Back slash
+- / - Forward slash
+- ( - Left parenthesis
+- ) - Right parenthesis
+- { - Left brace
+- } - Right brace
+- $ - Dollar sign
+- ^ - Caret symbol
+- \# - Hash / pound sign
+- \| - Pipe character
+- ~ - Tilde
+- a - Bel
+- b - Bs aka Backspace
+- e - Escape
+- f - Form feed
+- n - Line feed aka New Line
+- r - Carriage return
+- t - Tab aka Horizontal Tab
+- uXXXX - Unicode hex value for a char - requires 4 chars. It would be nice if \uXX was acceptable as well.
 
 Double quotes work within string interpolation as well.
 
 ### Single quotes
 
-The single quote character should work identicaly to the double quote _except_ that escape characters will not be recognized and interpreted.
+The single quote character should work identically to the double quote _except_ that escape characters will not be recognized and interpreted.
 
 Single quotes work within string interpolation as well.
 
@@ -1514,7 +1515,7 @@ Backtick quotes are something I'm still fuzzy on. Originally I thought they were
 
 Here are some ways we see/use backtick quotes.
 
-1. If you're using tab to complete directories with spaces, backtick quotes will be used to wrap the string. The only issue with this is that when you want to complete the next folder after one with a space, you have to move the cursor backward inside the last backtick quote before you hit tab again to complete the next level or file.
+1. If you're using Tab to complete directories with spaces, backtick quotes will be used to wrap the string. The only issue with this is that when you want to complete the next folder after one with a space, you have to move the cursor backward inside the last backtick quote before you hit tab again to complete the next level or file.
 2. Backtick quotes do not work in string interpolation. Should they?
 3. I believe backtick quotes can be used the same way as double quotes and single quotes but they do not recognize and interpret escapes.
 4. Another definition from Kubouch is backtick quotes are supposed to be like `bare words` that support spaces. As an example JT just landed a PR that allows backtick quotes to autocd. So, in Windows, if you're at `C:\` you could type `` `Program Files` `` and it would change to that directory.
@@ -1530,7 +1531,7 @@ Example:
 'This is also a string "that needs an inner part quoted"'
 ```
 
-The key to always remember is that double quotes recognize and interpret escapes so if you have any `\` characters in your string, they will be interpreted as excapes. The following is an example of a question we get frequently on Discord.
+The key to always remember is that double quotes recognize and interpret escapes so if you have any `\` characters in your string, they will be interpreted as escapes. The following is an example of a question we get frequently on Discord.
 
 ```nu
 Why doesn't this work?
@@ -1563,9 +1564,83 @@ It doesn't work because it sees `\P` and `\s` as escapes that are not recognized
 
 ### Best practices for pipeline commands
 
-### Interaction with unix pipes
+### Interaction with Unix pipes
 
-### Handling stderr
+### Handling stdout and stderr
+
+You can handle stderr in multiple ways:
+
+1. Do nothing, stderr will be printed directly
+2. Pipe stderr to the next command, using `e>|` or `e+o>|`
+3. Redirect stderr to a file, using `e> file_path`, or `e+o> file_path`
+4. Use `do -i { cmd } | complete` to capture both stdout and stderr as structured data
+
+For the next examples, let's assume this file:
+
+```nushell
+# demo.nu
+print "foo"
+print -e "barbar"
+```
+
+It prints `foo` to stdout and `barbar` to stderr. The following table illustrates the differences between the different redirection styles:
+
+Redirection to a pipeline:
+
+| type   | command                                     | `$result` contents | printed to terminal |
+| ------ | ------------------------------------------- | ------------------ | ------------------- |
+| \|     | `let result = nu demo.nu \| str upcase`     | "FOO"              | "barbar"            |
+| e>\|   | `let result = nu demo.nu e>\| str upcase`   | "BARBAR"           | "foo"               |
+| o+e>\| | `let result = nu demo.nu e+o>\| str upcase` | "FOO\nBARBAR"      | nothing             |
+
+Redirection to a file:
+
+| type           | command                    | `file.txt` contents | printed to terminal |
+| -------------- | -------------------------- | ------------------- | ------------------- |
+| o> file_path   | `nu demo.nu o> file.txt`   | "foo"               | "barbar"            |
+| e> file_path   | `nu demo.nu e> file.txt`   | "barbar"            | "foo"               |
+| o+e> file_path | `nu demo.nu o+e> file.txt` | "foo/nbarbar"       | nothing             |
+
+`complete` command:
+
+| type           | command                                      | `$result` contents                       |
+| -------------- | -------------------------------------------- | ---------------------------------------- |
+| use `complete` | `let result = do { nu demo.nu } \| complete` | record containing both stdout and stderr |
+
+Note that `e>|` and `o+e>|` only work with external command, if you pipe internal commands' output through `e>|` and `o+e>|`, you will get an error:
+
+```
+❯ ls e>| str length
+Error:   × `e>|` only works with external streams
+   ╭─[entry #1:1:1]
+ 1 │ ls e>| str length
+   ·    ─┬─
+   ·     ╰── `e>|` only works on external streams
+   ╰────
+
+❯ ls e+o>| str length
+Error:   × `o+e>|` only works with external streams
+   ╭─[entry #2:1:1]
+ 1 │ ls e+o>| str length
+   ·    ──┬──
+   ·      ╰── `o+e>|` only works on external streams
+   ╰────
+```
+
+You can also redirect `stdout` to a file, and pipe `stderr` to next command:
+
+```
+nu demo.nu o> file.txt e>| str upcase
+nu demo.nu e> file.txt | str upcase
+```
+
+But you can't use redirection along with `o+e>|`, because it's ambiguous:
+
+```
+nu demo.nu o> file.txt o+e>| str upcase
+```
+
+Also note that `complete` is special, it doesn't work with `e>|`, `o+e>|`.
 
 ## Nu as a shell
 

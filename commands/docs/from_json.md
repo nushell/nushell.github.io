@@ -2,7 +2,7 @@
 title: from json
 categories: |
   formats
-version: 0.89.0
+version: 0.91.0
 formats: |
   Convert from json to structured data.
 usage: |
@@ -22,6 +22,7 @@ feature: default
 ## Flags
 
  -  `--objects, -o`: treat each line as a separate value
+ -  `--strict, -s`: follow the json specification exactly
 
 
 ## Input/output types:
@@ -50,4 +51,13 @@ Converts json formatted string to table
 │   │ │ 1 │ 2 │ │
 │   │ ╰───┴───╯ │
 ╰───┴───────────╯
+```
+
+Parse json strictly which will error on comments and trailing commas
+```nu
+> '{ "a": 1, "b": 2 }' | from json -s
+╭───┬───╮
+│ a │ 1 │
+│ b │ 2 │
+╰───┴───╯
 ```

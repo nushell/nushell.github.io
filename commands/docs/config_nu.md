@@ -2,7 +2,7 @@
 title: config nu
 categories: |
   env
-version: 0.89.0
+version: 0.91.0
 env: |
   Edit nu configurations.
 usage: |
@@ -26,9 +26,9 @@ feature: default
 
 ## Input/output types:
 
-| input   | output  |
-| ------- | ------- |
-| nothing | nothing |
+| input   | output |
+| ------- | ------ |
+| nothing | any    |
 
 ## Examples
 

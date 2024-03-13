@@ -2,7 +2,7 @@
 title: touch
 categories: |
   filesystem
-version: 0.89.0
+version: 0.91.0
 filesystem: |
   Creates one or more files.
 usage: |
@@ -17,7 +17,7 @@ feature: default
 
 ## Signature
 
-```> touch {flags} (filename) ...rest```
+```> touch {flags} ...rest```
 
 ## Flags
 
@@ -28,8 +28,7 @@ feature: default
 
 ## Parameters
 
- -  `filename`: The path of the file you want to create.
- -  `...rest`: Additional files to create.
+ -  `...rest`: The file(s) to create.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: math product
 categories: |
   math
-version: 0.89.0
+version: 0.91.0
 math: |
   Returns the product of a list of numbers or the products of each column of a table.
 usage: |
@@ -25,11 +25,22 @@ feature: default
 | input        | output |
 | ------------ | ------ |
 | list\<number\> | number |
-
+| range        | number |
+| record       | record |
+| table        | record |
 ## Examples
 
 Compute the product of a list of numbers
 ```nu
 > [2 3 3 4] | math product
 72
+```
+
+Compute the product of each column in a table
+```nu
+> [[a b]; [1 2] [3 4]] | math product
+╭───┬───╮
+│ a │ 3 │
+│ b │ 8 │
+╰───┴───╯
 ```

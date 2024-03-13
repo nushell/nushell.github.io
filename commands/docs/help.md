@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.89.0
+version: 0.91.0
 core: |
   Display help information about different parts of Nushell.
 usage: |
@@ -32,7 +32,7 @@ feature: default
 
 | input   | output |
 | ------- | ------ |
-| nothing | string |
+| nothing | any    |
 
 ## Examples
 

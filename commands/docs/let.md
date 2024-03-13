@@ -2,7 +2,7 @@
 title: let
 categories: |
   core
-version: 0.89.0
+version: 0.91.0
 core: |
   Create a variable and give it a value.
 usage: |

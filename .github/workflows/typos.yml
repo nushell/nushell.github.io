@@ -9,12 +9,5 @@ jobs:
       - name: Checkout Actions Repository
         uses: actions/checkout@v2
 
-      - name: Check spelling of book
+      - name: Check spelling
         uses: crate-ci/typos@master
-        with:
-          files: book
-
-      - name: Check spelling of contributor book
-        uses: crate-ci/typos@master
-        with:
-          files: contributor-book

@@ -347,7 +347,7 @@ Alternatively, you can use [`compact`](/commands/docs/compact.html):
 | compact
 ```
 
-### Formating output
+### Formatting output
 
 In `jq`, to output a formatted string we do:
 
@@ -744,7 +744,7 @@ This section provides the implementation of the custom commands used in this coo
 │    # │          name           │                                              usage                                              │
 ├──────┼─────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────┤
 │    0 │ cherry-pick             │ A command for cherry-picking values from a record key recursively                               │
-│    1 │ filter-map              │ A command for walking through a complex data structure and tranforming its values recursively   │
+│    1 │ filter-map              │ A command for walking through a complex data structure and transforming its values recursively  │
 │    2 │ flatten record-paths    │ A command for flattening trees whilst keeping paths as keys                                     │
 ╰──────┴─────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
@@ -880,7 +880,7 @@ def test_record_path [] {
 
 
 
-# A command for walking through a complex data structure and tranforming its values recursively
+# A command for walking through a complex data structure and transforming its values recursively
 export def filter-map [mapping_fn: closure] {
     let input = $in
 

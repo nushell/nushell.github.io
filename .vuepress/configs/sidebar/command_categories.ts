@@ -11,6 +11,7 @@ export const commandCategories = [
   '/commands/categories/debug.md',
   '/commands/categories/default.md',
   '/commands/categories/env.md',
+  '/commands/categories/experimental.md',
   '/commands/categories/expression.md',
   '/commands/categories/filesystem.md',
   '/commands/categories/filters.md',

@@ -2,7 +2,7 @@
 title: dfr implode
 categories: |
   expression
-version: 0.89.0
+version: 0.91.0
 expression: |
   Aggregates a group to a Series.
 usage: |

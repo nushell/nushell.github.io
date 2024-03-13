@@ -2,7 +2,7 @@
 title: dfr into-lazy
 categories: |
   lazyframe
-version: 0.89.0
+version: 0.91.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe.
 usage: |
@@ -22,6 +22,10 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 ## Signature
 
 ```> dfr into-lazy {flags} ```
+
+## Flags
+
+ -  `--schema, -s {record}`: Polars Schema in format [{name: str}]. CSV, JSON, and JSONL files
 
 
 ## Input/output types:

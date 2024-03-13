@@ -2,7 +2,7 @@
 title: math round
 categories: |
   math
-version: 0.89.0
+version: 0.91.0
 math: |
   Returns the input number rounded to the specified precision.
 usage: |

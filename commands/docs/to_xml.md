@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.89.0
+version: 0.91.0
 formats: |
   Convert special record structure into .xml text.
 usage: |
@@ -22,6 +22,8 @@ feature: default
 ## Flags
 
  -  `--indent, -i {int}`: Formats the XML text with the provided indentation setting
+ -  `--partial-escape, -p`: Only escape mandatory characters in text and attributes
+ -  `--self-closed, -s`: Output empty tags as self closing
 
 
 ## Input/output types:
@@ -50,6 +52,18 @@ Optionally, formats the text with a custom indentation setting
 <note>
    <remember>Event</remember>
 </note>
+```
+
+Produce less escaping sequences in resulting xml
+```nu
+> {tag: note attributes: {a: "'qwe'\\"} content: ["\"'"]} | to xml --partial-escape
+<note a="'qwe'\">"'</note>
+```
+
+Save space using self-closed tags
+```nu
+> {tag: root content: [[tag]; [a] [b] [c]]} | to xml --self-closed
+<root><a/><b/><c/></root>
 ```
 
 ## Notes

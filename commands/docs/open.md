@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.89.0
+version: 0.91.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -17,7 +17,7 @@ feature: default
 
 ## Signature
 
-```> open {flags} (filename) ...rest```
+```> open {flags} ...rest```
 
 ## Flags
 
@@ -25,8 +25,7 @@ feature: default
 
 ## Parameters
 
- -  `filename`: The filename to use.
- -  `...rest`: Optional additional files to open.
+ -  `...rest`: The file(s) to open.
 
 
 ## Input/output types:

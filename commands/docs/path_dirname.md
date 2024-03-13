@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   path
-version: 0.89.0
+version: 0.91.0
 path: |
   Get the parent directory of a path.
 usage: |

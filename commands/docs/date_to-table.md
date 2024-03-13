@@ -2,7 +2,7 @@
 title: date to-table
 categories: |
   date
-version: 0.89.0
+version: 0.91.0
 date: |
   Convert the date into a structured table.
 usage: |
@@ -29,12 +29,6 @@ feature: default
 ## Examples
 
 Convert the current date into a table.
-```nu
-> date to-table
-
-```
-
-Convert the date into a table.
 ```nu
 > date now | date to-table
 

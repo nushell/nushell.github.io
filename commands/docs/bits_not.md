@@ -2,7 +2,7 @@
 title: bits not
 categories: |
   bits
-version: 0.89.0
+version: 0.91.0
 bits: |
   Performs logical negation on each bit.
 usage: |
@@ -26,31 +26,33 @@ feature: extra
 ## Flags
 
  -  `--signed, -s`: always treat input number as a signed number
- -  `--number-bytes, -n {string}`: the size of unsigned number in bytes, it can be 1, 2, 4, 8, auto
+ -  `--number-bytes, -n {int}`: the size of unsigned number in bytes, it can be 1, 2, 4, 8, auto
 
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| int       | int       |
-| list\<int\> | list\<int\> |
+| input        | output       |
+| ------------ | ------------ |
+| binary       | binary       |
+| int          | int          |
+| list\<binary\> | list\<binary\> |
+| list\<int\>    | list\<int\>    |
 ## Examples
 
 Apply logical negation to a list of numbers
 ```nu
 > [4 3 2] | bits not
-╭───┬─────────────────╮
-│ 0 │ 140737488355323 │
-│ 1 │ 140737488355324 │
-│ 2 │ 140737488355325 │
-╰───┴─────────────────╯
+╭───┬─────╮
+│ 0 │ 251 │
+│ 1 │ 252 │
+│ 2 │ 253 │
+╰───┴─────╯
 
 ```
 
 Apply logical negation to a list of numbers, treat input as 2 bytes number
 ```nu
-> [4 3 2] | bits not --number-bytes '2'
+> [4 3 2] | bits not --number-bytes 2
 ╭───┬───────╮
 │ 0 │ 65531 │
 │ 1 │ 65532 │
@@ -67,5 +69,13 @@ Apply logical negation to a list of numbers, treat input as signed number
 │ 1 │ -4 │
 │ 2 │ -3 │
 ╰───┴────╯
+
+```
+
+Apply logical negation to binary data
+```nu
+> 0x[ff 00 7f] | bits not
+Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+00000000:   00 ff 80                                             0××
 
 ```

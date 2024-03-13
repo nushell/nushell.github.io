@@ -2,7 +2,7 @@
 title: clear
 categories: |
   platform
-version: 0.89.0
+version: 0.91.0
 platform: |
   Clear the terminal.
 usage: |
@@ -19,6 +19,10 @@ feature: default
 
 ```> clear {flags} ```
 
+## Flags
+
+ -  `--all, -a`: Clear the terminal and its scroll-back history
+
 
 ## Input/output types:
 
@@ -31,5 +35,11 @@ feature: default
 Clear the terminal
 ```nu
 > clear
+
+```
+
+Clear the terminal and its scroll-back history
+```nu
+> clear --all
 
 ```

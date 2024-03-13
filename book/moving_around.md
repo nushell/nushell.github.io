@@ -31,6 +31,12 @@ Globbing syntax in these commands not only supports `*`, but also matching [sing
 Escaping `*`, `?`, `[]` works by quoting them with single quotes or double quotes.  To show the contents of a directory named `[slug]`, use `ls "[slug]"` or `ls '[slug]'`.
 Note that backtick quote doesn't escape glob, for example: <code>cp `test dir/*`</code> will copy all files inside `test dir` to current direcroty.
 
+If you pass a variable to a command that support globbing like this: `let f = "a[bc]d.txt"; rm $f`.  It won't expand the glob pattern, only a file named `a[bc]d.txt` will be removed.  Normally it's what you want, but if you want to expand the glob pattern, there are 3 ways to achieve it:
+
+1. using spread operator along with `glob` command: `let f = "a[bc]d.txt"; rm ...(glob $f)`. This way is recommended because it's expressed most explicitly, but it doesn't work with `ls` and `du` command, for the case, you can
+2. using `into glob` command: `let f = "a[bc]d.txt"; ls ($f | into glob)`.  It's useful for `ls` and `du` commands.
+3. annotate variable with `glob` type: `let f: glob = "a[bc]d.txt"; rm $f`. It's simple to write, but doesn't work with external command like `^rm $f`.
+
 ## Changing the current directory
 
 @[code](@snippets/moving_around/cd_example.sh)

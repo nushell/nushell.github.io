@@ -2,7 +2,7 @@
 title: math median
 categories: |
   math
-version: 0.89.0
+version: 0.91.0
 math: |
   Computes the median of a list of numbers.
 usage: |
@@ -27,6 +27,8 @@ feature: default
 | list\<duration\> | duration |
 | list\<filesize\> | filesize |
 | list\<number\>   | number   |
+| range          | number   |
+| record         | record   |
 | table          | record   |
 ## Examples
 
@@ -43,4 +45,10 @@ Compute the medians of the columns of a table
 │ a │ 1 │
 │ b │ 3 │
 ╰───┴───╯
+```
+
+Find the median of a list of file sizes
+```nu
+> [5KB 10MB 200B] | math median
+4.9 KiB
 ```

@@ -2,7 +2,7 @@
 title: dfr into-df
 categories: |
   dataframe
-version: 0.89.0
+version: 0.91.0
 dataframe: |
   Converts a list, table or record into a dataframe.
 usage: |
@@ -22,6 +22,10 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 ## Signature
 
 ```> dfr into-df {flags} ```
+
+## Flags
+
+ -  `--schema, -s {record}`: Polars Schema in format [{name: str}]. CSV, JSON, and JSONL files
 
 
 ## Input/output types:
@@ -80,5 +84,34 @@ Takes a list of booleans and creates a dataframe
 │ 1 │ true  │
 │ 2 │ false │
 ╰───┴───────╯
+
+```
+
+Convert to a dataframe and provide a schema
+```nu
+> {a: 1, b: {a: [1 2 3]}, c: [a b c]}| dfr into-df -s {a: u8, b: {a: list<u64>}, c: list<str>}
+╭───┬───┬───────────────────┬───────────╮
+│ # │ a │         b         │     c     │
+├───┼───┼───────────────────┼───────────┤
+│ 0 │ 1 │ ╭───┬───────────╮ │ ╭───┬───╮ │
+│   │   │ │   │ ╭───┬───╮ │ │ │ 0 │ a │ │
+│   │   │ │ a │ │ 0 │ 1 │ │ │ │ 1 │ b │ │
+│   │   │ │   │ │ 1 │ 2 │ │ │ │ 2 │ c │ │
+│   │   │ │   │ │ 2 │ 3 │ │ │ ╰───┴───╯ │
+│   │   │ │   │ ╰───┴───╯ │ │           │
+│   │   │ ╰───┴───────────╯ │           │
+╰───┴───┴───────────────────┴───────────╯
+
+```
+
+Convert to a dataframe and provide a schema that adds a new column
+```nu
+> [[a b]; [1 "foo"] [2 "bar"]] | dfr into-df -s {a: u8, b:str, c:i64} | dfr fill-null 3
+╭───┬───┬─────┬───╮
+│ # │ a │  b  │ c │
+├───┼───┼─────┼───┤
+│ 0 │ 1 │ foo │ 3 │
+│ 1 │ 2 │ bar │ 3 │
+╰───┴───┴─────┴───╯
 
 ```

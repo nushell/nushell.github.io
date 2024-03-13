@@ -4,9 +4,10 @@ As you probably noticed, Nushell behaves quite differently from other shells and
 
 First, let's give a few example which you might intuitively try but which do not work in Nushell.
 
-1. Sourcing a dynamic path
+1. Sourcing a dynamic path (note that a constant would work, see [parse-time evaluation](#parse-time-evaluation))
 
 ```nu
+let my_path = 'foo'
 source $"($my_path)/common.nu"
 ```
 
@@ -94,8 +95,8 @@ When you run the file (`python hello_eval.py`), you'll see two messages: "Hello 
 1. Parse the whole source code
 2. Evaluate `print("Hello world!")`
 3. To evaluate `eval("print('Hello eval!')")`:
-   3.1. Parse `print('Hello eval!')`
-   3.2. Evaluate `print('Hello eval!')`
+    1. Parse `print('Hello eval!')`
+    2. Evaluate `print('Hello eval!')`
 
 Of course, you can have more fun and try `eval("eval(\"print('Hello eval!')\")")` and so on...
 
@@ -112,14 +113,14 @@ exec("def hello(): print('Hello eval!')")
 hello()
 ```
 
-_Note: We're using `exec` instead of `eval` because it can execute all valid Python code, not just expressions. The principle is similar, though._
+_Note: We're using `exec` instead of `eval` because it can execute any valid Python code, not just expressions. The principle is similar, though._
 
 What happens:
 
 1. Parse the whole source code
 2. To evaluate `exec("def hello(): print('Hello eval!')")`:
-   2.1. Parse `def hello(): print('Hello eval!')`
-   2.2 Evaluate `def hello(): print('Hello eval!')`
+   1. Parse `def hello(): print('Hello eval!')`
+   2. Evaluate `def hello(): print('Hello eval!')`
 3. Evaluate `hello()`
 
 Note, that until step 2.2, the interpreter has no idea a function `hello` exists! This makes static analysis of dynamic languages challenging. In the example, the existence of `hello` function cannot be checked just by parsing (compiling) the source code. You actually need to go and evaluate (run) the code to find out. While in a compiled language, missing function is a guaranteed compile error, in a dynamic interpreted language, it is a runtime error (which can slip unnoticed if the line calling `hello()` is, for example, behind an `if` condition and does not get executed).
@@ -144,17 +145,18 @@ _Note: The following examples use [`source`](/commands/docs/source.md), but simi
 ### 1. Sourcing a dynamic path
 
 ```nu
+let my_path = 'foo'
 source $"($my_path)/common.nu"
 ```
 
-Let's break down what would need to happen for this to work (assuming `$my_path` is set somewhere):
+Let's break down what would need to happen for this to work:
 
-1. Parse `source $"($my_path)/common.nu"`
+1. Parse `let my_path = 'foo'` and `source $"($my_path)/config.nu"`
 2. To evaluate `source $"($my_path)/common.nu"`:
-   2.1. Parse `$"($my_path)/common.nu"`
-   2.2. Evaluate `$"($my_path)/common.nu"` to get the file name
-   2.3. Parse the contents of the file
-   2.4. Evaluate the contents of the file
+   1. Parse `$"($my_path)/common.nu"`
+   2. Evaluate `$"($my_path)/common.nu"` to get the file name
+   3. Parse the contents of the file
+   4. Evaluate the contents of the file
 
 You can see the process is similar to the `eval` functionality we talked about earlier. Nesting parse-evaluation cycles into the evaluation is not allowed in Nushell.
 
@@ -193,11 +195,11 @@ source "output.nu"
 Here, the sourced path is static (= known at parse-time) so everything should be fine, right? Well... no. Let's break down the sequence again:
 
 1. Parse the whole source code
-   1.1. Parse `"def abc [] { 1 + 2 }" | save output.nu`
-   1.2. Parse `source "output.nu"` - 1.2.1. Open `output.nu` and parse its contents
+   1. Parse `"def abc [] { 1 + 2 }" | save output.nu`
+   2. Parse `source "output.nu"` - 1.2.1. Open `output.nu` and parse its contents
 2. Evaluate the whole source code
-   2.1. Evaluate `"def abc [] { 1 + 2 }" | save output.nu` to generate `output.nu`
-   2.2. ...wait what???
+   1. Evaluate `"def abc [] { 1 + 2 }" | save output.nu` to generate `output.nu`
+   2. ...wait what???
 
 We're asking Nushell to read `output.nu` before it even exists. All the source code needs to be available to Nushell at parse-time, but `output.nu` is only generated during evaluation. Again, it helps here to _think of Nushell as a compiled language_.
 
@@ -282,25 +284,29 @@ While it is impossible to add parsing into the evaluation, we can add _a little 
 One pattern that this unlocks is being able to [`source`](/commands/docs/source.md)/[`use`](/commands/docs/use.md)/etc. a path from a "variable". We've seen that
 
 ```nu
-let some_path = 'foo/common.nu'
-source $some_path
+let some_path = $nu.default-config-dir
+source $"($some_path)/common.nu"
 ```
 
 does not work, but we can do the following:
 
 ```nu
-const some_path = 'foo/common.nu'
-source $some_path
+const some_path = $nu.default-config-dir
+source $"($some_path)/config.nu"
 ```
 
 We can break down what is happening again:
 
 1. Parse the whole source code
-   1.1. Parse `const some_path = 'foo/common.nu'` - 1.1.1. Evaluate* `'foo/common.nu'` and store it as a `some_path` constant
-   1.2. Parse `source $some_path` - 1.2.1. Evaluate* `$some_path`, see that it is a constant, fetch it - 1.2.2. Parse the `foo/common.nu` file
+   1. Parse `const some_path = $nu.default-config-dir`
+      1. Evaluate\* `$nu.default-config-dir` to `/home/user/.config/nushell` and store it as a `some_path` constant
+   2. Parse `source $"($some_path)/config.nu"`
+      1. Evaluate\* `$some_path`, see that it is a constant, fetch it
+      2. Evaluate\* `$"($some_path)/config.nu"` to `/home/user/.config/nushell/config.nu`
+      3. Parse the `/home/user/.config/nushell/config.nu` file
 2. Evaluate the whole source code
-   2.1. Evaluate `const some_path = 'foo/common.nu'` (i.e., add the `foo/common.nu` string to the runtime stack as `some_path` variable)
-   2.2. Evaluate `source $some_path` (i.e., evaluate the contents of `foo/common.nu`)
+   1. Evaluate `const some_path = $nu.default-config-dir` (i.e., add the `/home/user/.config/nushell` string to the runtime stack as `some_path` variable)
+   2. Evaluate `source $"($some_path)/config.nu"` (i.e., evaluate the contents of `/home/user/.config/nushell/config.nu`)
 
 This still does not violate our rule of not having an eval function, because an eval function adds additional parsing to the evaluation step. With parse-time evaluation we're doing the opposite.
 

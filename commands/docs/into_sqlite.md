@@ -2,7 +2,7 @@
 title: into sqlite
 categories: |
   conversions
-version: 0.89.0
+version: 0.91.0
 conversions: |
   Convert table into a SQLite database.
 usage: |
@@ -17,23 +17,23 @@ feature: default
 
 ## Signature
 
-```> into sqlite {flags} (file_name)```
+```> into sqlite {flags} (file-name)```
 
 ## Flags
 
- -  `--table_name, -t {string}`: Specify table name to store the data in
+ -  `--table-name, -t {string}`: Specify table name to store the data in
 
 ## Parameters
 
- -  `file_name`: Specify the filename to save the database to.
+ -  `file-name`: Specify the filename to save the database to.
 
 
 ## Input/output types:
 
-| input | output  |
-| ----- | ------- |
-| any   | nothing |
-
+| input  | output  |
+| ------ | ------- |
+| record | nothing |
+| table  | nothing |
 ## Examples
 
 Convert ls entries into a SQLite database with 'main' as the table name
@@ -54,8 +54,8 @@ Convert table literal into a SQLite database with 'main' as the table name
 
 ```
 
-Convert a variety of values in table literal form into a SQLite database
+Insert a single record into a SQLite database
 ```nu
-> [one 2 5.2 six true 100mib 25sec] | into sqlite variety.db
+> { foo: bar, baz: quux } | into sqlite filename.db
 
 ```

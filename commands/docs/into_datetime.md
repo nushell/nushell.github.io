@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.89.0
+version: 0.91.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -46,41 +46,41 @@ feature: default
 Convert any standard timestamp string to datetime
 ```nu
 > '27.02.2021 1:55 pm +0000' | into datetime
-Sat, 27 Feb 2021 13:55:00 +0000 (2 years ago)
+Sat, 27 Feb 2021 13:55:00 +0000 (3 years ago)
 ```
 
 Convert any standard timestamp string to datetime
 ```nu
 > '2021-02-27T13:55:40.2246+00:00' | into datetime
-Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
+Sat, 27 Feb 2021 13:55:40 +0000 (3 years ago)
 ```
 
 Convert non-standard timestamp string to datetime using a custom format
 ```nu
 > '20210227_135540+0000' | into datetime --format '%Y%m%d_%H%M%S%z'
-Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
+Sat, 27 Feb 2021 13:55:40 +0000 (3 years ago)
 ```
 
 Convert nanosecond-precision unix timestamp to a datetime with offset from UTC
 ```nu
 > 1614434140123456789 | into datetime --offset -5
-Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
+Sat, 27 Feb 2021 13:55:40 +0000 (3 years ago)
 ```
 
 Convert standard (seconds) unix timestamp to a UTC datetime
 ```nu
 > 1614434140 * 1_000_000_000 | into datetime
-Sat, 27 Feb 2021 13:55:40 +0000 (2 years ago)
+Sat, 27 Feb 2021 13:55:40 +0000 (3 years ago)
 ```
 
 Convert list of timestamps to datetimes
 ```nu
 > ["2023-03-30 10:10:07 -05:00", "2023-05-05 13:43:49 -05:00", "2023-06-05 01:37:42 -05:00"] | into datetime
-╭───┬──────────────╮
-│ 0 │ 9 months ago │
-│ 1 │ 8 months ago │
-│ 2 │ 7 months ago │
-╰───┴──────────────╯
+╭───┬───────────────╮
+│ 0 │ 11 months ago │
+│ 1 │ 10 months ago │
+│ 2 │ 9 months ago  │
+╰───┴───────────────╯
 
 ```
 

@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.89.0
+version: 0.91.0
 filters: |
   Filter values based on a predicate closure.
 usage: |
@@ -30,7 +30,6 @@ feature: default
 | --------- | --------- |
 | list\<any\> | list\<any\> |
 | range     | list\<any\> |
-| table     | table     |
 ## Examples
 
 Filter items of a list according to a condition

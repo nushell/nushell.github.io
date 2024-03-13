@@ -2,7 +2,7 @@
 title: any
 categories: |
   filters
-version: 0.89.0
+version: 0.91.0
 filters: |
   Tests if any element of the input fulfills a predicate expression.
 usage: |
@@ -29,7 +29,7 @@ feature: default
 | input     | output |
 | --------- | ------ |
 | list\<any\> | bool   |
-| table     | bool   |
+
 ## Examples
 
 Check if any row's status is the string 'DOWN'

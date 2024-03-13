@@ -2,7 +2,7 @@
 title: math stddev
 categories: |
   math
-version: 0.89.0
+version: 0.91.0
 math: |
   Returns the standard deviation of a list of numbers, or of each column in a table.
 usage: |
@@ -29,7 +29,8 @@ feature: default
 | input        | output |
 | ------------ | ------ |
 | list\<number\> | number |
-
+| record       | record |
+| table        | record |
 ## Examples
 
 Compute the standard deviation of a list of numbers
@@ -42,4 +43,13 @@ Compute the sample standard deviation of a list of numbers
 ```nu
 > [1 2 3 4 5] | math stddev --sample
 1.5811388300841898
+```
+
+Compute the standard deviation of each column in a table
+```nu
+> [[a b]; [1 2] [3 4]] | math stddev
+╭───┬───╮
+│ a │ 1 │
+│ b │ 1 │
+╰───┴───╯
 ```

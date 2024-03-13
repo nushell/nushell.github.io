@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.89.0
+version: 0.91.0
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -30,7 +30,6 @@ feature: default
 | --------- | ------------ |
 | any       | string       |
 | list\<any\> | list\<string\> |
-| table     | list\<string\> |
 ## Examples
 
 Debug print a string

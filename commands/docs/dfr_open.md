@@ -2,7 +2,7 @@
 title: dfr open
 categories: |
   dataframe
-version: 0.89.0
+version: 0.91.0
 dataframe: |
   Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.
 usage: |
@@ -32,6 +32,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
  -  `--infer-schema, - {number}`: Number of rows to infer the schema of the file. CSV file
  -  `--skip-rows, - {number}`: Number of rows to skip from file. CSV file
  -  `--columns, - {list<string>}`: Columns to be selected from csv file. CSV and Parquet file
+ -  `--schema, -s {record}`: Polars Schema in format [{name: str}]. CSV, JSON, and JSONL files
 
 ## Parameters
 
