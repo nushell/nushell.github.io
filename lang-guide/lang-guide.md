@@ -85,7 +85,7 @@ binding will be 'bool' and its value will be 'true' if the flag is present
 and 'false' if not present.
 
 You cannot use the 'bool' type as a flag annoatation as that is the same
-as the the existance or not of the occurrence of the flag.
+as the the existence or not of the occurrence of the flag.
 
 ### Closure parameters
 
@@ -821,30 +821,55 @@ What it is: A pattern to match pathnames in a filesystem.
 
 Annotation: 'glob'
 
-In Nushell, a glob is a an unexpanded pathname pattern that gets passed around
-to commands, builtin, and custom. In order to work with actual pathnames,
- You need to explicitly expand the glob value with the 'glob' command.
-
-E.g. Consider these two examples with the 'echo' command, both the internal
-one and the external command (under Unix-like systems):
+Nu supports creating a value as a glob, it's similar to string, but if you pass it to some commands that support glob pattern(e.g: `open`), it will be expanded.  It's best to see difference between `glob` and `string` by example:
 
 ```nu
-# Emulate behaviour in a shell like Bash
-^echo *.nu
-date.nu mkrand.nu rfr.nu temps.nu
+let f = "a*c.txt"   # a string type.
+open $f   # opens a file names `a*c.txt`
 
-# Now try it in Nu:
-echo *.nu
-*.nu
+let g: glob = "a*c.txt"   # a glob type.
+open $g   # opens files matches the glob pattern, e.g: `abc.txt`, `aac.txt`
 ```
 
-Since echo only returns its arguments, the glob does not get expanded.
+The same rules happened if you are using custom command:
+
+```nu
+# open files which match a given glob pattern
+def open-files [g: glob] {
+    open $g
+    # In case if you want to open one file only
+    # open ($g | into string)
+}
+
+# open one file
+def open-one-file [g: string] {
+    open $g
+    # In case if you want to open with glob pattern
+    # open ($g | into glob)
+}
+
+# open one file
+def open-one-file2 [g] {
+    open $g
+}
+```
+
+You can use `into glob` and `into string` to convert values between `glob` and `string`.
+
+If you pass a `string` or a `bare word` to `builtin commands` which support glob pattern directly(not passing a variable or subexpression etc.), it follows some rules, let's see them by examples:
+
+```nu
+open *.txt    # opens all files which ends with `.txt`
+open `*.txt`  # it's backtick quoted, it's a bare word, so nu opens all files which ends with `.txt`
+open "*.txt"  # it's quoted, opens a file named `*.txt`
+open '*.txt'  # it's quoted, opens a file named `*.txt`
+```
 
 You can use the 'glob' command to expand a glob when needed.
 
 ```nu
 glob *.nu
-# ... full pathnames [TODO: replace this with  actual pathnames]
+# => /home/you/dev/foo.nu /home/you/dev/bar.nu
 ```
 
 Notice the glob, after expansion,  always gets expanded into a list of fully quallified pathanes.
@@ -852,9 +877,9 @@ Notice the glob, after expansion,  always gets expanded into a list of fully qua
 Here is a idiomatic Nu way to get just the simple filenames in the current directory:
 
 ```nu
-glob -D | path basename | str join ' '
-# Only get the actual files
-foo.nu bar.nu baz.nu
+glob -D * | path basename | str join ' '
+foo.nu bar.nu
+# => foo.nu bar.nu baz.nu
 ```
 
 Another caveat when using Nushell over  traditional shells is the 'ls' command.
