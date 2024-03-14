@@ -151,9 +151,13 @@ Example:
 
 Perform an operation on a custom value received from the plugin. The argument is a 2-tuple (array): (`custom_value`, `op`).
 
-The custom value is specified in spanned format, and not as a `Value` - see the example.
+The custom value is specified in spanned format, as a [`PluginCustomValue`](#plugincustomvalue) without the `type` field, and not as a `Value` - see the examples.
 
-There is currently one supported operation: `ToBaseValue`, which **should** return a plain value that is representative of the custom value, or an error if this is not possible. Sending a custom value back for this operation is not allowed. Returns [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response).
+##### `ToBaseValue`
+
+Returns a plain value that is representative of the custom value, or an error if this is not possible. Sending a custom value back for this operation is not allowed. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). If the operation produces a stream, it will be consumed to a value.
+
+Example:
 
 ```json
 {
@@ -172,6 +176,215 @@ There is currently one supported operation: `ToBaseValue`, which **should** retu
           }
         },
         "ToBaseValue"
+      ]
+    }
+  ]
+}
+```
+
+##### `FollowPathInt`
+
+Returns the result of following a numeric cell path (e.g. `$custom_value.0`) on the custom value. This is most commonly used with custom types that act like lists or tables. The argument is a spanned unsigned integer. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+
+Example:
+
+```nushell
+$version.0
+```
+
+```json
+{
+  "Call": [
+    0,
+    {
+      "CustomValueOp": [
+        {
+          "item": {
+            "name": "version",
+            "data": [0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0]
+          },
+          "span": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "FollowPathInt": {
+            "item": 0,
+            "span": {
+              "start": 320,
+              "end": 321
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+##### `FollowPathString`
+
+Returns the result of following a string cell path (e.g. `$custom_value.field`) on the custom value. This is most commonly used with custom types that act like lists or tables. The argument is a spanned string. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+
+Example:
+
+```nushell
+$version.field
+```
+
+```json
+{
+  "Call": [
+    0,
+    {
+      "CustomValueOp": [
+        {
+          "item": {
+            "name": "version",
+            "data": [0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0]
+          },
+          "span": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "FollowPathString": {
+            "item": "field",
+            "span": {
+              "start": 320,
+              "end": 326
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+##### `PartialCmp`
+
+Compares the custom value to another value and returns the [`Ordering`](#ordering) that should be used, if any. The argument type is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`Ordering`](#ordering-plugin-call-response). [`Error`](#error-plugin-call-response) may also be returned, but at present the error is unlikely to be presented to the user - the engine will act as if you had sent `{"Ordering": null}`.
+
+Example (comparing two `version` custom values):
+
+```json
+{
+  "Call": [
+    0,
+    {
+      "CustomValueOp": [
+        {
+          "item": {
+            "name": "version",
+            "data": [0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0]
+          },
+          "span": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "PartialCmp": {
+            "CustomValue": {
+              "val": {
+                "type": "PluginCustomValue",
+                "name": "version",
+                "data": [0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0]
+              },
+              "span": {
+                "start": 560,
+                "end": 566
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+##### `Operation`
+
+Returns the result of evaluating an [`Operator`](#operator) on this custom value with another value. The argument is a 2-tuple: (`operator`, `value`), where `operator` is a spanned [`Operator`](#operator) and `value` is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+
+Example:
+
+```nushell
+$version + 7
+```
+
+```json
+{
+  "Call": [
+    0,
+    {
+      "CustomValueOp": [
+        {
+          "item": {
+            "name": "version",
+            "data": [0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0]
+          },
+          "span": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "Operation": [
+            {
+              "item": {
+                "Math": "Plus"
+              },
+              "span": {
+                "start": 180,
+                "end": 181
+              }
+            },
+            {
+              "Int": {
+                "val": 7,
+                "span": {
+                  "start": 183,
+                  "end": 184
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+##### `Dropped`
+
+This op is used to notify the plugin that a [`PluginCustomValue`](#plugincustomvalue) that had `notify_on_drop` set to `true` was dropped in the engine - i.e., all copies of it have gone out of scope. For more information on exactly under what circumstances this is sent, see the [drop notification](plugins.md#drop-notification) section of the plugin reference. The response type is [`Empty` pipeline data](#pipelinedataheader-empty) or [`Error`](#error-plugin-call-response).
+
+Example:
+
+```json
+{
+  "Call": [
+    0,
+    {
+      "CustomValueOp": [
+        {
+          "item": {
+            "name": "handle",
+            "data": [78, 60],
+            "notify_on_drop": true
+          },
+          "span": {
+            "start": 1820,
+            "end": 1835
+          }
+        },
+        "Dropped"
       ]
     }
   ]
@@ -347,6 +560,36 @@ Example:
 }
 ```
 
+#### `Ordering` plugin call response
+
+A successful response to the [`PartialCmp` custom value op](#partialcmp). The body is either [`Ordering`](#ordering) if the comparison is possible, or `null` if the values can't be compared.
+
+Example:
+
+```json
+{
+  "CallResponse": [
+    0,
+    {
+      "Ordering": "Less"
+    }
+  ]
+}
+```
+
+Example with incomparable values:
+
+```json
+{
+  "CallResponse": [
+    0,
+    {
+      "Ordering": null
+    }
+  ]
+}
+```
+
 #### `PipelineData` plugin call response
 
 A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
@@ -434,7 +677,7 @@ Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Return
 
 | Field               | Type                                        | Usage                                                                  |
 | ------------------- | ------------------------------------------- | ---------------------------------------------------------------------- |
-| **closure**         | `Spanned`<[`Closure`](#closure)>            | The closure to call, generally from a [`Value`](#value).               |
+| **closure**         | spanned [`Closure`](#closure)               | The closure to call, generally from a [`Value`](#value).               |
 | **positional**      | [`Value`](#value) array                     | Positional arguments for the closure.                                  |
 | **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the closure.                                                 |
 | **redirect_stdout** | boolean                                     | Whether to redirect stdout if the closure ends in an external command. |
@@ -694,15 +937,20 @@ Example:
 }
 ```
 
+#### `PluginCustomValue`
+
 `CustomValue` for plugins **may** only contain the following content map:
 
-| Field    | Type       | Usage                                                              |
-| -------- | ---------- | ------------------------------------------------------------------ |
-| **type** | string     | **Must** be `"PluginCustomValue"`.                                 |
-| **name** | string     | The human-readable name of the custom value emitted by the plugin. |
-| **data** | byte array | Plugin-defined representation of the custom value.                 |
+| Field              | Type       | Usage                                                                                     |
+| ------------------ | ---------- | ----------------------------------------------------------------------------------------- |
+| **type**           | string     | **Must** be `"PluginCustomValue"`.                                                        |
+| **name**           | string     | The human-readable name of the custom value emitted by the plugin.                        |
+| **data**           | byte array | Plugin-defined representation of the custom value.                                        |
+| **notify_on_drop** | boolean    | Enable [drop notification](plugins.md#drop-notification). Default `false` if not present. |
 
 Plugins will only be sent custom values that they have previously emitted. Custom values from other plugins or custom values used within the Nu engine itself are not permitted to be sent to or from the plugin.
+
+`notify_on_drop` is an optional field that **should** be omitted if `false`, to save bytes. If this is not convenient for your implementation, `"notify_on_drop": false` is still valid, but it's preferred to not include it.
 
 Example:
 
@@ -712,7 +960,12 @@ Example:
     "val": {
       "type": "PluginCustomValue",
       "name": "database",
-      "data": [36, 190, 127, 40, 12, 3, 46, 83]
+      "data": [36, 190, 127, 40, 12, 3, 46, 83],
+      "notify_on_drop": true
+    },
+    "span": {
+      "start": 320,
+      "end": 340
     }
   }
 }
@@ -882,4 +1135,28 @@ Example:
     ]
   ]
 }
+```
+
+### `Ordering`
+
+[Documentation](https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html)
+
+We serialize the Rust `Ordering` type as literal strings, for example:
+
+```js
+'Less'; // left hand side is less than right hand side
+'Equal'; // both values are equal
+'Greater'; // left hand side is greater than right hand side
+```
+
+### `Operator`
+
+[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/ast/enum.Operator.html)
+
+Serialized with serde's default enum representation. Examples:
+
+```js
+{ "Math": "Append" }           // ++   Math(Append)
+{ "Bits": "BitOr" }            // |    Bits(BitOr)
+{ "Comparison": "RegexMatch" } // =~   Comparison(RegexMatch)
 ```

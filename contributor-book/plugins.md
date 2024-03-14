@@ -441,6 +441,105 @@ fn main() {
 
 At present, the closures can only refer to values that would be valid to send to the plugin. This means that custom values from other plugins are not allowed. This is likely to be fixed in a future release.
 
+## Custom values
+
+Plugins can create custom values that embed plugin-specific data within the engine. In Rust, this data is automatically serialized using [bincode](https://crates.io/crates/bincode), so all you need to do is implement the [`CustomValue`](https://docs.rs/nu-protocol/latest/nu_protocol/trait.CustomValue.html) trait on a type that has `Serialize` and `Deserialize` implementations compatible with bincode. This includes any attributes that would cause a dependency on field names or field presence, such as `#[serde(skip_serializing_if = "...")]` or `#[serde(untagged)]`. We use the [typetag](https://crates.io/crates/typetag) crate to reconstruct the correct custom value type.
+
+To embed the custom value in a `Value`, use [`Value::custom_value()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom_value). A minimal example:
+
+```rust
+use nu_protocol::{CustomValue, ShellError, Span, Value, record};
+use serde::{Deserialize, Serialize};
+use std::any::Any;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum Animal {
+    Dog {
+        name: String,
+        woof: bool,
+    },
+    Cat {
+        name: String,
+        meow: bool,
+    },
+}
+
+#[typetag::serde]
+impl CustomValue for Animal {
+    fn clone_value(&self, span: Span) -> Value {
+        Value::custom_value(Box::new(self.clone()), span)
+    }
+
+    fn value_string(&self) -> String {
+        // The type name
+        "Animal".into()
+    }
+
+    fn to_base_value(&self, span: Span) -> Result<Value, ShellError> {
+        // Construct a simple Nushell value that makes sense here.
+        // It must not be a custom value.
+        Ok(match self {
+            Animal::Dog { name, woof } => Value::record(record! {
+                "type" => Value::string("dog", span),
+                "name" => Value::string(name, span),
+                "woof" => Value::bool(*woof, span),
+            }, span),
+            Animal::Cat { name, meow } => Value::record(record! {
+                "type" => Value::string("cat", span),
+                "name" => Value::string(name, span),
+                "meow" => Value::bool(*meow, span),
+            }, span),
+        })
+    }
+
+    fn as_any(&self) -> &dyn Any {
+        self
+    }
+}
+
+// Use the custom value
+Value::custom_value(Box::new(Animal::Dog {
+    name: "Rex".into(),
+    woof: true,
+}), call.head)
+```
+
+Any of the methods in the trait can be implemented on plugin custom values, and functionality such as supporting cell paths (e.g. `$my_custom_value.field`), operators (e.g. `++`), and comparisons (e.g. for `sort`) are all supported.
+
+### Drop notification
+
+It is possible to ask Nushell to let you know when all copies of a custom value passed to it have gone out of scope and will no longer be used:
+
+```rust
+impl CustomValue for Animal {
+    // ...
+    fn notify_plugin_on_drop(&self) -> bool {
+        true
+    }
+}
+```
+
+The notification is sent to the `Plugin` via [`custom_value_dropped()`](https://docs.rs/nu-plugin/latest/nu_plugin/trait.Plugin.html#method.custom_value_dropped):
+
+```rust
+impl Plugin for AnimalPlugin {
+    // ...
+    fn custom_value_dropped(
+        &self,
+        engine: &EngineInterface,
+        custom_value: Box<dyn CustomValue>,
+    ) {
+        if let Some(animal) = custom_value.as_any().downcast_ref::<Animal>() {
+            eprintln!("Animal dropped: {:?}", animal);
+        }
+    }
+}
+```
+
+Every custom value sent from the plugin to the engine counts as a new unique value for the purpose of drop checking. If you accept a custom value as an argument and then return it after, you will likely receive two drop notifications, even though the value data is identical. This has implications for trying to use custom values to reference count handles.
+
+For a full example, see [`DropCheck`](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_custom_values/src/drop_check.rs) in the `nu_plugin_custom_values` plugin.
+
 ## Plugin garbage collection
 
 Nu comes with a [plugin garbage collector](/book/plugins.html#plugin-garbage-collector), which automatically stops plugins that are no longer in active use according to the user's preferences. Plugins are considered inactive for garbage collection if all of the following are true:
