@@ -14,7 +14,7 @@ from  Jeremy Siek is here: [What is Gradual Typing?](https://wphomes.soic.indian
 ###The infix type operators
 
 - ' : ' Read as 'is type of'
-- ' -> ' Read as becomes type of  or as 'to type of' in custom commands in the return type position
+- ` -> ` Read as becomes type of  or as 'to type of' in custom commands in the return type position
 
 ### Type signatures
 
@@ -40,7 +40,6 @@ def my-filter []: list { }
 def "my make" [] -> list { }
 ```
 
-
 For a further discussion on custom command signatures please refer to: [Custom Commands](https://www.nushell.sh/book/custom_commands.html)
 And also: [ [Command Signature](https://www.nushell.sh/book/command_signature.html)
 
@@ -48,12 +47,12 @@ And also: [ [Command Signature](https://www.nushell.sh/book/command_signature.ht
 
 There are 3 forms of valid type signatures in Nu:
 
-- Basic: E.g. 'int', 'bool', 'string' etc.
+- Basic: E.g. int, bool, string etc.
 - Compound:
-  * 'list<string>', '
-record<type: int, bar: string>'
+  * `list<string>`, '
+`record<type: int, bar: string>`
 - Multiple: Enumerations of the above kinds delimited by commas ', '
-  * '<string, int>'
+  * `<string, int>`
   * These can only be used for return types
 
 ### Custom command parameters and flags
@@ -86,7 +85,7 @@ binding will be 'bool' and its value will be 'true' if the flag is present
 and 'false' if not present.
 
 You cannot use the 'bool' type as a flag annoatation as that is the same
-as the present or not of the occurrence of the flag.
+as the the existance or not of the occurrence of the flag.
 
 ### Closure parameters
 
@@ -219,10 +218,10 @@ For a complete list see: 'help into bool'.
 
 ##### Operators that use bool
 
-- '==', '!=', '<', '<=', '>', '>='
+- `==`, `!=`, `<`, `<=`, `>`, `>=`
 - and, or not
 - in
-- '=~', '!~' <regex>
+- '=~', '!~' `<regex>`
 - 'ends-with', 'starts-with'
   * String comparison operators
 
@@ -320,11 +319,9 @@ Note: The where command and other filters can use filesize in comparison express
 
 ##### Operators that use filesize
 
-- '==', '!='
-- '+', '-'
--'<', '<=',  '>', '>='
-
-
+- `==`, !=`
+- `+`, `-`
+- `<`, `<=`, `>`, `>=`
 
 ### Duration
 
@@ -402,9 +399,8 @@ inputs, see 'help into duration'
 
 ##### Operators that use duration
 
-- '==', '!='
-- '+', '-'
--'<', '<=',  '>', '>='
+- `==`, `!=`, `<`, `<=`, `>`, `>=`
+- `+`, `-`
 
 ### Date
 
@@ -527,19 +523,19 @@ These commands work with strings explicitly
 - is-empty
 - is-not-empty
 
-In addition to the above commands, most other 'into <type>' commands take strings
+In addition to the above commands, most other 'into `<type>` commands take strings
 as inputs.
 
 #### Operators that use string
 
-- '+' : Concatenate two strings
-- '+=' : Mutates a string variable by concatenating its right side value.
-- == : ' True if 2 strings are equal
-- '!=' : True if two strings are not equal
-- '>' : True if the left string is greater than the right string
-- '>=' : True if the left string is greater or equal than the right string
-- '<' : True if the left string is less than the right string
-- '<=' : True if the left string is less or equal than the right string
+- `+` : Concatenate two strings
+- `+=` : Mutates a string variable by concatenating its right side value.
+- `==` : ' True if 2 strings are equal
+- `!=` : True if two strings are not equal
+- `>` : True if the left string is greater than the right string
+- `>=` : True if the left string is greater or equal than the right string
+- `<` : True if the left string is less than the right string
+- `<=` : True if the left string is less or equal than the right string
 
 
 ### Record
