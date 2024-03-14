@@ -377,7 +377,7 @@ There are a couple things to be aware of in the above example.
 
 ### Executing String Interpolated strings
 
-Sometimes you need to build a path to execute external commands.
+Sometimes you need to build a path to execute external commands or build command arguments.
 
 Example:
 
@@ -385,8 +385,9 @@ Example:
 let path1 = "/part1"
 let path2 = "/part2"
 let fn = "filename"
+let arguments = ["arg1", "-a", "arg2"]
 
-^$"($path1)($path2)($fn)"
+^$"($path1)($path2)($fn)" ...$arguments
 ```
 
 The caret `^` before the string interpolation symbol `$` allows that external command to be executed.
