@@ -462,6 +462,33 @@ Example:
 
 This example is abbreviated, as the [`Config`](#config) object is large and ever-changing.
 
+#### `ValueMap` engine call response
+
+A successful result for engine calls that produce plain maps, such as the [`GetEnvVars` engine call](#getenvvars-engine-call). The body is a map from strings to [`Value`s](#value).
+
+Example:
+
+```json
+{
+  "EngineCallResponse": [
+    0,
+    {
+      "ValueMap": {
+        "FOO": {
+          "String": {
+            "val": "bar",
+            "span": {
+              "start": 2020,
+              "end": 2024
+            }
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
 ### `Goodbye`
 
 Indicate that no further plugin calls are expected, and that the plugin **should** exit as soon as it is finished processing any in-progress plugin calls.
@@ -667,6 +694,85 @@ Example:
     "context": 3,
     "id": 8,
     "call": "GetPluginConfig"
+  }
+}
+```
+
+#### `GetEnvVar` engine call
+
+Get an environment variable from the caller's scope. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#pipelinedataheader-value) or be [`Empty`](#pipelinedataheader-empty) if the environment variable is not present.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 7,
+    "id": 41,
+    "call": {
+      "GetEnvVar": "PATH"
+    }
+  }
+}
+```
+
+#### `GetEnvVars` engine call
+
+Get all environment variables from the caller's scope. Returns a [`ValueMap` response](#valuemap-engine-call-response) if successful, with all of the environment variables in the scope.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 9,
+    "id": 72,
+    "call": "GetEnvVars"
+  }
+}
+```
+
+#### `GetCurrentDir` engine call
+
+Get the current directory path in the caller's scope. This always returns an absolute path as a string [`Value` pipeline data](#pipelinedataheader-value) response if successful. The span contained within the value response is unlikely to be useful, and may be zero.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 7,
+    "id": 40,
+    "call": "GetCurrentDir"
+  }
+}
+```
+
+#### `AddEnvVar` engine call
+
+Set an environment variable in the caller's scope. The environment variable can only be propagated to the caller's scope if called before the plugin call response is sent. Either way, it is propagated to other engine calls made within the same context. The argument is a 2-tuple: (`name`, `value`). The response type is [`Empty` pipeline data](#pipelinedataheader-empty) when successful.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 7,
+    "id": 42,
+    "call": {
+      "AddEnvVar": [
+        "FOO",
+        {
+          "String": {
+            "val": "bar",
+            "span": {
+              "start": 2020,
+              "end": 2024
+            }
+          }
+        }
+      ]
+    }
   }
 }
 ```
