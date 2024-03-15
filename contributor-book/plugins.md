@@ -54,40 +54,45 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-nu-plugin = "0.85.0" # These version numbers may differ
-nu-protocol = "0.85.0"
+nu-plugin = "0.92.0" # These version numbers may differ
+nu-protocol = "0.92.0"
 ```
 
 With this, we can open up `src/main.rs` and create our plugin.
 
 ```rust
-use nu_plugin::{serve_plugin, LabeledError, Plugin, JsonSerializer, EvaluatedCall, EngineInterface};
+use nu_plugin::{serve_plugin, LabeledError, JsonSerializer, EvaluatedCall};
+use nu_plugin::{Plugin, PluginCommand, SimplePluginCommand, EngineInterface};
 use nu_protocol::{Value, PluginSignature, Type};
 
-struct Len;
+struct LenPlugin;
 
-impl Len {
-    fn new() -> Self {
-        Self
+impl Plugin for LenPlugin {
+    fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
+        vec![
+            Box::new(Len),
+        ]
     }
 }
 
-impl Plugin for Len {
-    fn signature(&self) -> Vec<PluginSignature> {
-        vec![PluginSignature::build("len")
+struct Len;
+
+impl SimplePluginCommand for Len {
+    type Plugin = LenPlugin;
+
+    fn signature(&self) -> PluginSignature {
+        PluginSignature::build("len")
             .usage("calculates the length of its input")
             .input_output_type(Type::String, Type::Int)
-        ]
     }
 
     fn run(
         &self,
-        name: &str,
+        _plugin: &LenPlugin,
         _engine: &EngineInterface,
         call: &EvaluatedCall,
         input: &Value,
     ) -> Result<Value, LabeledError> {
-        assert_eq!(name, "len");
         let span = input.span();
         match input {
             Value::String { val, .. } => Ok(
@@ -103,7 +108,7 @@ impl Plugin for Len {
 }
 
 fn main() {
-    serve_plugin(&Len::new(), JsonSerializer)
+    serve_plugin(&LenPlugin, JsonSerializer)
 }
 ```
 
@@ -113,46 +118,56 @@ First off, let's look at main:
 
 ```rust
 fn main() {
-    serve_plugin(&Len::new(), JsonSerializer)
+    serve_plugin(&LenPlugin, JsonSerializer)
 }
 ```
 
-In main, we just call a single function `serve_plugin`. This will do the work of calling into our plugin, handling the JSON serialization/deserialization, and sending values and errors back to Nu for us. To start it up, we pass it something that implements the `Plugin` trait and something that implements the `PluginEncoder` trait. We're given a choice of serialization formats that Nu supports. Ordinarily plugins written in Rust should use `MsgPackSerializer`, but here we select JSON to demonstrate how the communication protocol works further on in this tutorial.
+In `main()`, we just call a single function `serve_plugin`. This will do the work of calling into our plugin, handling the JSON serialization/deserialization, and sending values and errors back to Nu for us. To start it up, we pass it something that implements the `Plugin` trait and something that implements the `PluginEncoder` trait. We're given a choice of serialization formats that Nu supports. Ordinarily plugins written in Rust should use `MsgPackSerializer` as it is considerably faster, but here we select JSON to demonstrate how the communication protocol works further on in this tutorial.
 
-Next, above main, is this implementation of the `Plugin` trait for our particular plugin. Here, we'll implement the Plugin trait for our type, Len, which we'll see more of soon. Let's take a look at how we implement this trait:
+Above `main()` is the implementation of the `SimplePluginCommand` trait for the `len` command that our plugin will expose, which is represented by the `Len` type. We use `SimplePluginCommand` rather than `PluginCommand` in order to simplify our implementation and avoid [handling streams](#using-streams-in-plugins). Let's take a look at how we implement this trait:
 
 ```rust
-impl Plugin for Len {
-    fn signature(&self) -> Vec<PluginSignature> {
-        vec![PluginSignature::build("len")
+impl SimplePluginCommand for Len {
+    type Plugin = LenPlugin;
+
+    // ...
+}
+```
+
+We first specify the plugin type our command expects. This allows us to receive a reference to it in `run()`, which we can use for shared state between commands.
+
+```rust
+impl SimplePluginCommand for Len {
+    // ...
+
+    fn signature(&self) -> PluginSignature {
+        PluginSignature::build("len")
             .usage("calculates the length of its input")
             .input_type(Type::String)
             .output_type(Type::Int)
-        ]
     }
 
     // ...
 }
 ```
 
-There are two methods required for this implementation. The first is the `signature` part, which is run by Nu when it first starts up. This tells Nu the basic information about the plugin: its name, the parameters it takes, the description, what kind of plugin it is, and defines the input and output types.
+There are two methods required for this implementation. The first is the `signature` part, which is run by Nu when the plugin is registered. This tells Nu the basic information about the command: its name, the parameters it takes, the description, what kind of plugin it is, and defines the input and output types.
+
 Here, we tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
 
-Next, in the `run` implementation, we describe how to do work as values flow into this plugin. Here, we receive a `Value` type that we expect to be a string.
-We also return either `Value` or an error.
+Next, in the `run` implementation, we describe how to do work as values flow into this plugin. Here, we receive a `Value` type that we expect to be a string. We also return either `Value` or an error.
 
 ```rust
-impl Plugin for Len {
+impl SimplePluginCommand for Len {
     // ...
 
     fn run(
         &self,
-        name: &str,
+        _plugin: &LenPlugin,
         _engine: &EngineInterface,
         call: &EvaluatedCall,
         input: &Value,
     ) -> Result<Value, LabeledError> {
-        assert_eq!(name, "len");
         let span = input.span();
         match input {
             Value::String { val, .. } => Ok(
@@ -172,26 +187,35 @@ We use Rust's pattern matching to check the type of the `Value` coming in, and t
 
 Our `Len` command doesn't require any parameters, but if it did we'd get them from the `EvaluatedCall`.
 
-Next, let's look at `Len` itself to see what it's doing:
-
 ```rust
 struct Len;
+```
 
-impl Len {
-    fn new() -> Self {
-        Self
+`Len` is defined as a unit struct, with no fields, and this is the most common type definition for a command in a plugin. However, you may choose to keep state here if you want to - every call of `len` shares the same reference.
+
+Above that, let's have a look at the definition of `LenPlugin`, which implements the `Plugin` trait:
+
+```rust
+struct LenPlugin;
+
+impl Plugin for LenPlugin {
+    fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
+        vec![
+            Box::new(Len),
+        ]
     }
 }
 ```
 
-We create a very simple `Len`, in fact, it has no structure at all. Instead, it's just a placeholder that will let us implement the plugin.
+Again, we use a unit struct for `LenPlugin`, but this is the recommended place to put plugin state if needed. All commands also get a reference to the plugin type. This is what we eventually pass to `serve_plugin()` in `main()`.
 
-The `new` method is optional, it's just a convenient way to create a new value of the `Len` type to pass into `serve_plugin` later.
+The only required method in `Plugin` is `commands()`, which initializes the plugin's commands. A boxed `dyn` reference is used so that we can keep all of the different command types in the single list. Dispatch by command name is automatically handled in `serve_plugin()` by looking at the name defined in the signature - in our case, that's `len`. A plugin can contain many commands, so if you end up adding more, just add them to the list returned by `commands()`.
 
 Lastly, let's look at the top of the file:
 
 ```rust
-use nu_plugin::{serve_plugin, LabeledError, Plugin, JsonSerializer, EvaluatedCall};
+use nu_plugin::{serve_plugin, LabeledError, JsonSerializer, EvaluatedCall};
+use nu_plugin::{Plugin, PluginCommand, SimplePluginCommand, EngineInterface};
 use nu_protocol::{Value, PluginSignature, Type};
 ```
 
@@ -226,36 +250,35 @@ Signatures:
 
 ## Using streams in plugins
 
-The default `Plugin` trait that we just implemented for our plugin does not support streaming input or output. If we want to extend our plugin to support determining the lengths of lists, it would be helpful to not have to consume an entire list that is a stream. We can do this by implementing `StreamingPlugin` instead.
+The `SimplePluginCommand` trait that we just implemented for our plugin does not support streaming input or output. If we want to extend our plugin to support determining the lengths of lists, it would be helpful to not have to consume an entire list that is a stream. We can do this by implementing `PluginCommand` instead.
 
 ```rust
 // add these imports:
-use nu_plugin::StreamingPlugin;
 use nu_protocol::{IntoPipelineData, PipelineData};
 // ...
 
-// change Plugin to StreamingPlugin:
-impl StreamingPlugin for Len {
-    fn signature(&self) -> Vec<PluginSignature> {
+// change SimplePluginCommand to PluginCommand:
+impl PluginCommand for Len {
+    type Plugin = LenPlugin;
+
+    fn signature(&self) -> PluginSignature {
         // ... add the list type to the signature
-        vec![PluginSignature::build("len")
+        PluginSignature::build("len")
             .usage("calculates the length of its input")
             .input_output_types(vec![
                 (Type::String, Type::Int),
                 (Type::List(Type::Any.into()), Type::Int),
             ])
-        ]
     }
 
     // ... and change input and output types to PipelineData
     fn run(
         &self,
-        name: &str,
+        _plugin: &LenPlugin,
         _engine: &EngineInterface,
         call: &EvaluatedCall,
         input: PipelineData,
     ) -> Result<PipelineData, LabeledError> {
-        assert_eq!(name, "len");
         // Check if the input is a stream or list
         match input {
             PipelineData::ListStream(..) |
@@ -341,20 +364,30 @@ The plugin configuration can be retrieved with [`EngineInterface::get_plugin_con
 use nu_plugin::*;
 use nu_protocol::{PluginSignature, Value, Type};
 
+struct MotdPlugin;
+
+impl Plugin for MotdPlugin {
+    fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
+        vec![
+            Box::new(Motd),
+        ]
+    }
+}
+
 struct Motd;
 
-impl Plugin for Motd {
-    fn signature(&self) -> Vec<PluginSignature> {
-        vec![
-            PluginSignature::build("motd")
-                .usage("Message of the day")
-                .input_output_type(Type::Nothing, Type::String)
-        ]
+impl SimplePluginCommand for Motd {
+    type Plugin = MotdPlugin;
+
+    fn signature(&self) -> PluginSignature {
+        PluginSignature::build("motd")
+            .usage("Message of the day")
+            .input_output_type(Type::Nothing, Type::String)
     }
 
     fn run(
         &self,
-        _name: &str,
+        _plugin: &MotdPlugin,
         engine: &EngineInterface,
         call: &EvaluatedCall,
         _input: &Value,
@@ -378,7 +411,7 @@ impl Plugin for Motd {
 }
 
 fn main() {
-    serve_plugin(&Motd, MsgPackSerializer)
+    serve_plugin(&MotdPlugin, MsgPackSerializer)
 }
 ```
 
@@ -398,25 +431,35 @@ Plugins can accept and evaluate closures using [`EngineInterface::eval_closure`]
 use nu_plugin::*;
 use nu_protocol::{PluginSignature, Value, Type, SyntaxShape, PipelineData};
 
+struct MyEachPlugin;
+
+impl Plugin for MyEachPlugin {
+    fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
+        vec![
+            Box::new(MyEach),
+        ]
+    }
+}
+
 struct MyEach;
 
-impl StreamingPlugin for MyEach {
-    fn signature(&self) -> Vec<PluginSignature> {
-        vec![
-            PluginSignature::build("my-each")
-                .usage("Run closure on each element of a list")
-                .required(
-                    "closure",
-                    SyntaxShape::Closure(Some(vec![SyntaxShape::Any])),
-                    "The closure to evaluate",
-                )
-                .input_output_type(Type::ListStream, Type::ListStream)
-        ]
+impl PluginCommand for MyEach {
+    type Plugin = MyEachPlugin;
+
+    fn signature(&self) -> PluginSignature {
+        PluginSignature::build("my-each")
+            .usage("Run closure on each element of a list")
+            .required(
+                "closure",
+                SyntaxShape::Closure(Some(vec![SyntaxShape::Any])),
+                "The closure to evaluate",
+            )
+            .input_output_type(Type::ListStream, Type::ListStream)
     }
 
     fn run(
         &self,
-        _name: &str,
+        _plugin: &MyEachPlugin,
         engine: &EngineInterface,
         call: &EvaluatedCall,
         input: PipelineData,
@@ -432,7 +475,7 @@ impl StreamingPlugin for MyEach {
 }
 
 fn main() {
-    serve_plugin(&MyEach, MsgPackSerializer)
+    serve_plugin(&MyEachPlugin, MsgPackSerializer)
 }
 ```
 
