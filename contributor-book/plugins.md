@@ -18,6 +18,14 @@ For more detailed information about how exactly this communication works, especi
 
 Nu keeps a registry of plugins at the file system location defined by configuration variable `$nu.plugin-path`. To register a plugin, execute `register <path_to_plugin_executable>` in a Nu shell.
 
+## Launch environment
+
+Stdin and stdout are redirected for use in the plugin protocol, and must not be used for other purposes. Stderr is inherited, and may be used to print to the terminal.
+
+Environment variables set in the shell are set in the environment of a plugin when it is launched from a plugin call.
+
+Plugins are always started with the directory of their executable as their working directory. This is because they may be sent calls with different shell working directory contexts over time. [`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) can be used to determine the current working directory of the context of a call. For more information, see [this section](#current-directory).
+
 ## Creating a plugin (in Rust)
 
 In this section, we'll walk through creating a Nu plugin using Rust.
@@ -539,6 +547,44 @@ impl Plugin for AnimalPlugin {
 Every custom value sent from the plugin to the engine counts as a new unique value for the purpose of drop checking. If you accept a custom value as an argument and then return it after, you will likely receive two drop notifications, even though the value data is identical. This has implications for trying to use custom values to reference count handles.
 
 For a full example, see [`DropCheck`](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_custom_values/src/drop_check.rs) in the `nu_plugin_custom_values` plugin.
+
+## Manipulating the environment
+
+Environment variables can be get or set through the [`EngineInterface`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html). For example:
+
+```rust
+// Get the PATH environment variable
+let paths: Value = engine.get_env_var("PATH")?;
+// Get all environment variables
+let envs: HashMap<String, Value> = engine.get_env_vars()?;
+// Set an environment variable
+engine.add_env_var("FOO", Value::string("bar", call.head))?;
+```
+
+Environment variables set during a plugin call are available in the caller's scope after the plugin call returns, and are also visible to other engine calls (such as closure evaluations) during the plugin call. Setting an environment variable after the plugin call has returned a response - for example while a stream is being produced as the result of a plugin call - has no impact on the environment of the caller's scope.
+
+### Current directory
+
+As noted earlier in the [Launch environment](#launch-environment) section, plugins are always started in the directory of their executable. This is intentionally done to try to ensure the current directory of the shell context is handled correctly. For plugins that work with filesystem paths, relative paths should always be joined against the path returned by [`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir):
+
+```rust
+use std::path::Path;
+use nu_protocol::Spanned;
+
+let relative_path: Spanned<String> = call.req(0)?;
+let absolute_path = Path::new(&engine.get_current_dir()?).join(&provided_path.item);
+
+// For example:
+if absolute_path.exists() {
+    return Err(LabeledError {
+        label: format!("{} does not exist", absolute_path.display()),
+        msg: "file not found".into(),
+        span: Some(relative_path.span),
+    });
+}
+```
+
+Note that it is not safe (at least in Rust) to change the plugin's process working directory (e.g. with `std::env::set_current_dir()`) to the current directory from the call context, as multiple threads could be processing calls in different working directories simultaneously.
 
 ## Plugin garbage collection
 
