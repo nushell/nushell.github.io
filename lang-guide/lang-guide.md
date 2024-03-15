@@ -14,7 +14,7 @@ from  Jeremy Siek is here: [What is Gradual Typing?](https://wphomes.soic.indian
 ### The infix type operators
 
 - ` : ` Read as `is type of`
-- ` -> ` Read as becomes type of  or as 'to type of' in custom commands in the return type position
+- ` -> ` Read as becomes type of or as `to type of` in custom commands in the return type position
 
 ### Type signatures
 
@@ -200,7 +200,7 @@ let truth: bool  = true
 #### Casts
 
 The command `into bool` can convert other data types into bool.
-For a complete list see: 'help into bool'.
+For a complete list see: `help into bool`.
 
 #### Commands that use bool
 
@@ -383,9 +383,7 @@ your   own constants for specific months or years.
 
 #### Casts
 
-The command 'into duration' will convert various other data types
-into a duration. and is quite flexible. For a complete list of possible
-inputs, see 'help into duration'
+The command `into duration` will convert various other data types into a duration. and is quite flexible. For a complete list of possible inputs, see `help into duration`
 
 
 #### Commands that use duration
@@ -523,7 +521,7 @@ These commands work with strings explicitly
 - `is-empty`
 - `is-not-empty`
 
-In addition to the above commands, most other 'into `<type>` commands take strings
+In addition to the above commands, most other `into <type>` commands take strings
 as inputs.
 
 #### Operators that use string
@@ -1003,11 +1001,9 @@ let p: cell-path = $.bar.baz.quo
 
 #### Casts
 
-Cell paths are not restricted to just literal values in your program source.
-You can also construct them on the fly with the 'into cell-path' command.
+Cell paths are not restricted to just literal values in your program source. You can also construct them on the fly with the `into cell-path` command.
 
-For example, you could construct the cell path in the temp data programmatically
-with this code which knows that the location desired is for Grand Rapids, Mich., U.S.A.
+For example, you could construct the cell path in the temp data programmatically with this code which knows that the location desired is for Grand Rapids, Mich., U.S.A.
 
 ```nu
 let grr = 2 # using IATA codes for variable names
@@ -1367,9 +1363,9 @@ The code that follows the `else` is an expression rather than a block, allowing 
 
 ## String interpolation
 
-String interpolation uses either double quotes or single quotes with a preceding dollar sign. However, when using double quotes, you have to be aware that escapes will be recognized and interpreted. (I(darren) really don't like that people have to be aware of this functionality with double quotes.)
+String interpolation uses either double quotes or single quotes with a preceding dollar sign. However, when using double quotes, you have to be aware that escapes will be recognized and interpreted.
 
-Example:
+#### Example:
 
 ```nu
 let name = "Nushell"
