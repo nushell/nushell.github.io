@@ -66,15 +66,17 @@ Data coming from an external command into Nu will come in as bytes that Nushell 
 
 Nu works with data piped between two external commands in the same way as other shells, like Bash would. The `stdout` of external_command_1 is connected to the `stdin` of external_command_2. This lets data flow naturally between the two commands.
 
-### Notes on piping command output
+### Notes on errors when piping commands
 
-PowerShell users may be used to piping the output of an internal PowerShell command directly to another, e.g.:
+Sometimes, it might be unclear as to why you cannot pipe to a command.
+
+For example, PowerShell users may be used to piping the output of any internal PowerShell command directly to another, e.g.:
 
 `echo 1 | sleep`
 
-Where for PowerShell, `echo` is an alias to `Write-Output` and `sleep` is to `Start-Sleep`.
+(Where for PowerShell, `echo` is an alias to `Write-Output` and `sleep` is to `Start-Sleep`.)
 
-The same in Nushell would error:
+However, it might be surprising that for some commands, the same in Nushell errors:
 
 ```nu
 > echo 1sec | sleep
@@ -87,8 +89,39 @@ Error: nu::parser::missing_positional
   help: Usage: sleep <duration> ...(rest) . Use `--help` for more information.
 ```
 
-Instead, you should supply the output of the command as an argument to the next:
+While there is no steadfast rule, Nu generally tries to copy established conventions,
+or do what 'feels right'. And with `sleep`, this is actually the same behaviour as Bash.
 
+Many commands do have piped input/output however, and if it's ever unclear,
+you can see what you can give to a command by invoking `help <command name>`:
+
+```nu
+> help sleep
+Delay for a specified amount of time.
+
+Search terms: delay, wait, timer
+
+Usage:
+  > sleep <duration> ...(rest)
+
+Flags:
+  -h, --help - Display the help message for this command
+
+Parameters:
+  duration <duration>: Time to sleep.
+  ...rest <duration>: Additional time.
+
+Input/output types:
+  ╭───┬─────────┬─────────╮
+  │ # │  input  │ output  │
+  ├───┼─────────┼─────────┤
+  │ 0 │ nothing │ nothing │
+  ╰───┴─────────┴─────────╯
+```
+
+In this case, sleep takes `nothing` and instead expects an argument.
+
+So, we can supply the output of the `echo` command as an argument to it:
 `echo 1sec | sleep $in` or `sleep (echo 1sec)`
 
 ## Behind the scenes
