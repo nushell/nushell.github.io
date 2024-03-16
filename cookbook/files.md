@@ -24,8 +24,10 @@ Make the edit to the version number and save it.
 _Note: running this command should work but it will reorder the toml file alphabetically by section._
 
 ```nu
-open Cargo.toml | upsert package.version { |p| $p | get package.version | inc --patch } | save Cargo.toml
+open Cargo.toml | upsert package.version { |p| $p | get package.version | inc --patch } | save -f Cargo.toml
 ```
+
+Note: `inc` is available through the plugin `nu_plugin_inc`.
 
 Output
 _none_
