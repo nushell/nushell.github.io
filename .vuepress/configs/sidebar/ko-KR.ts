@@ -1,0 +1,107 @@
+import type { SidebarConfig } from '@vuepress/theme-default';
+// import { commandCategories } from './command_categories';
+
+export const sidebarKoKR: SidebarConfig = {
+  '/ko-KR/book/': [
+    {
+      text: '소개',
+      link: '/ko-KR/book/README.md',
+      collapsible: false,
+    },
+    {
+      text: '시작하기',
+      link: '/book/getting_started.md',
+      collapsible: false,
+      children: [
+        '/book/installation.md',
+        '/book/default_shell.md',
+        '/book/quick_tour.md',
+        '/book/moving_around.md',
+        '/book/thinking_in_nu.md',
+        '/book/cheat_sheet.md',
+      ],
+    },
+    {
+      text: 'Nu 기초',
+      link: '/book/nu_fundamentals.md',
+      collapsible: false,
+      children: [
+        '/book/types_of_data.md',
+        '/book/loading_data.md',
+        '/book/pipeline.md',
+        '/book/working_with_strings.md',
+        '/book/working_with_lists.md',
+        '/book/working_with_tables.md',
+      ],
+    },
+    {
+      text: 'Nu로 프로그래밍하기',
+      link: '/book/programming_in_nu.md',
+      collapsible: false,
+      children: [
+        '/book/custom_commands.md',
+        '/book/aliases.md',
+        '/book/operators.md',
+        '/book/variables_and_subexpressions.md',
+        '/book/scripts.md',
+        '/book/modules.md',
+        '/book/overlays.md',
+        '/book/command_signature.md',
+        '/book/testing.md',
+        '/book/style_guide.md',
+      ],
+    },
+    {
+      text: '셸로서의 Nu',
+      link: '/book/nu_as_a_shell.md',
+      collapsible: false,
+      children: [
+        '/book/configuration.md',
+        '/book/environment.md',
+        '/book/stdout_stderr_exit_codes.md',
+        '/book/escaping.md',
+        '/book/3rdpartyprompts.md',
+        '/book/shells_in_shells.md',
+        '/book/line_editor.md',
+        '/book/externs.md',
+        '/book/custom_completions.md',
+        '/book/coloring_and_theming.md',
+        '/book/hooks.md',
+        '/book/background_task.md',
+      ],
+    },
+    {
+      text: 'Nu로 전환하기',
+      link: '/book/coming_to_nu.md',
+      collapsible: false,
+      children: [
+        '/book/coming_from_bash.md',
+        '/book/coming_from_cmd.md',
+        '/book/nushell_map.md',
+        '/book/nushell_map_imperative.md',
+        '/book/nushell_map_functional.md',
+        '/book/nushell_operator_map.md',
+      ],
+    },
+    {
+      text: 'Design Notes',
+      link: '/book/design_notes.md',
+      collapsible: false,
+      children: ['/book/how_nushell_code_gets_run.md'],
+    },
+    {
+      text: '(Not So) Advanced',
+      link: '/book/advanced.md',
+      collapsible: false,
+      children: [
+        '/book/standard_library.md',
+        '/book/dataframes.md',
+        '/book/metadata.md',
+        '/book/creating_errors.md',
+        '/book/parallelism.md',
+        '/book/plugins.md',
+        '/book/explore.md',
+      ],
+    },
+  ],
+};

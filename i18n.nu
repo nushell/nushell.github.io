@@ -28,6 +28,7 @@ def update-i18n-status [] {
             | upsert de {|it| get-cell $it.name de }
             | upsert tr {|it| get-cell $it.name tr }
             | upsert ja {|it| get-cell $it.name ja }
+            | upsert ko-KR {|it| get-cell $it.name ko-KR }
             | upsert es {|it| get-cell $it.name es }
             | upsert pt-BR {|it| get-cell $it.name pt-BR }
             | upsert ru {|it| get-cell $it.name ru }
@@ -79,6 +80,7 @@ def gen-i18n-meta [] {
         | upsert de {|it| get-cell $it.name de }
         | upsert tr {|it| get-cell $it.name tr }
         | upsert ja {|it| get-cell $it.name ja }
+        | upsert ko-KR {|it| get-cell $it.name ko-KR }
         | upsert es {|it| get-cell $it.name es }
         | upsert pt-BR {|it| get-cell $it.name pt-BR }
         | upsert ru {|it| get-cell $it.name ru }
@@ -126,7 +128,7 @@ def main [
     task: string    # Available task: `gen`, `update`, `outdated`
     lng?: string    # The locale to check outdated: zh-CN, de, etc.
 ] {
-    let locales = ['zh-cn', 'de', 'tr', 'ja', 'es', 'pt-br', 'ru']
+    let locales = ['zh-cn', 'de', 'tr', 'ja', 'ko-KR', 'es', 'pt-br', 'ru']
     match $task {
         'gen' => { gen-i18n-meta },
         'update' => { update-i18n-status },

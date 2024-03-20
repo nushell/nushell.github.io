@@ -14,6 +14,7 @@ import {
   navbarEn,
   navbarEs,
   navbarJa,
+  navbarKoKR,
   navbarPtBR,
   navbarRU,
   navbarZhCN,
@@ -21,6 +22,7 @@ import {
   sidebarEn,
   sidebarEs,
   sidebarJa,
+  sidebarKoKR,
   sidebarPtBR,
   sidebarRU,
   sidebarZhCN,
@@ -59,6 +61,11 @@ export default defineUserConfig({
       lang: 'ja',
       title: 'Nushell',
       description: '新しいタイプのシェル',
+    },
+    '/ko-KR/': {
+      lang: 'ko-KR',
+      title: 'Nushell',
+      description: '새로운 타입의 셸',
     },
     '/pt-BR/': {
       lang: 'pt-BR',
@@ -126,6 +133,13 @@ export default defineUserConfig({
         editLinkText: 'GitHubでこのページを編集する',
         navbar: navbarJa,
         sidebar: sidebarJa,
+      },
+      '/ko-KR/': {
+        selectText: '언어',
+        selectLanguageName: '한국어',
+        editLinkText: 'GitHub에서 이 페이지 편집하기',
+        navbar: navbarKoKR,
+        sidebar: sidebarKoKR,
       },
       '/pt-BR/': {
         selectText: 'Línguas',
