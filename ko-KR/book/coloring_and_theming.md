@@ -1,4 +1,4 @@
-# Nu에서 테마 적용하기
+# Nu에 테마 적용하기
 
 Many parts of Nushell's interface can have their color customized. All of these can be set in the `config.nu` configuration file. If you see the hash/hashtag/pound mark `#` in the config file it means the text after it is commented out.
 
