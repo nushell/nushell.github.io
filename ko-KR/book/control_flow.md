@@ -1,4 +1,4 @@
-# Control Flow
+# 제어 흐름
 
 Nushell provides several commands that help determine how different groups of code are executed. In programming languages this functionality is often referred to as _control flow_.
 

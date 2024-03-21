@@ -1,4 +1,4 @@
-# Programming in Nu
+# Nu로 프로그래밍하기
 
 This chapter goes into more detail of Nushell as a programming language.
 Each major language feature has its own section.

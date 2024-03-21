@@ -1,4 +1,4 @@
-# Nu Fundamentals
+# Nu 기초
 
 This chapter explains some of the fundamentals of the Nushell programming language.
 After going through it, you should have an idea how to write simple Nushell programs.

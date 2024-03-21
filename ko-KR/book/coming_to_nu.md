@@ -1,4 +1,4 @@
-# Coming to Nu
+# Nu로 전환하기
 
 If you are familiar with other shells or programming languages, you might find this chapter useful to get up to speed.
 

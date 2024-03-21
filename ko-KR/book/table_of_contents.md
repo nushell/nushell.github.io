@@ -1,4 +1,4 @@
-# Table of Contents
+# 목차
 
 - [Installation](installation.md) - Installing Nushell
 - [Introduction](README.md) - Getting started

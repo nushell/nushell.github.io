@@ -1,4 +1,4 @@
-# (Not So) Advanced
+# (살짝) 더 깊게
 
 While the "Advanced" title might sound daunting and you might be tempted to skip this chapter, in fact, some of the most interesting and powerful features can be found here.
 

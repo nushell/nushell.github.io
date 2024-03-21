@@ -18,7 +18,7 @@ features:
 
 ### Nu는 기존의 데이터를 사용할 수 있습니다
 
-Nu는 [JSON, YAML, SQLite, Excel, and more](/book/loading_data.html) 등의 데이터 포맷을 지원합니다. 데이터들이 파일, 데이터베이스, 웹 API 어디에 있든지 쉽게 Nu 파이프라인에 가져올 수 있습니다.
+Nu는 [JSON, YAML, SQLite, Excel 등](/book/loading_data.html)의 데이터 포맷을 지원합니다. 데이터들이 파일, 데이터베이스, 웹 API 어디에 있든지 쉽게 Nu 파이프라인에 가져올 수 있습니다.
 
 <img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
