@@ -1,4 +1,4 @@
-# CMD.EXE에서
+# CMD.EXE에서 전환하기
 
 This table was last updated for Nu 0.67.0.
 

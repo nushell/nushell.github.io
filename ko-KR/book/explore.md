@@ -1,4 +1,4 @@
-# `explore` 명령
+# `explore` 명령어
 
 Explore is a table pager, just like `less` but for table structured data.
 

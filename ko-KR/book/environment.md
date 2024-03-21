@@ -1,4 +1,4 @@
-# 환경
+# 환경 변수
 
 A common task in a shell is to control the environment that external applications will use. This is often done automatically, as the environment is packaged up and given to the external application as it launches. Sometimes, though, we want to have more precise control over what environment variables an application sees.
 
