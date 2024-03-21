@@ -1,41 +1,41 @@
 # 목차
 
-- [Installation](installation.md) - Installing Nushell
-- [Introduction](README.md) - Getting started
-- [Thinking in Nushell](thinking_in_nushell.md) - Thinking in Nushell
-- [Moving around](moving_around.md) - Moving around in Nushell
-- [Types of data](types_of_data.md) - Types of data in Nushell
-- [Loading data](loading_data.md) - Loading data and using it
-- [Strings](working_with_strings.md) - Strings, escape characters, and string interpolation
-- [Working with lists](working_with_lists.md) - Working with Nu lists
-- [Working with tables](working_with_tables.md) - Working with Nu tables
-- [Pipeline](pipeline.md) - How the pipeline works
-- [Configuration](configuration.md) - How to configure Nushell
-- [3rd Party Prompts](3rdpartyprompts.md) - How to configure 3rd party prompts
-- [Custom commands](custom_commands.md) - Creating your own commands
-- [Aliases](aliases.md) - How to alias commands
-- [Operators](operators.md) - Operators supported by Nushell
-- [Variables and subexpressions](variables_and_subexpressions.md) - Working with variables and working with subexpressions
-- [Control flow](control_flow.md) - Working with the control flow commands
-- [Environment](environment.md) - Working with environment variables
-- [Stdout, stderr, and exit codes](stdout_stderr_exit_codes.md) - Working with stdout, stderr, and exit codes
-- [Modules](modules.md) - Creating and using your own modules
-- [Hooks](hooks.md) - Adding code snippets to be run automatically
-- [Scripts](scripts.md) - Creating your own scripts
-- [Metadata](metadata.md) - An explanation of Nu's metadata system
-- [Creating your own errors](creating_errors.md) - Creating your own error messages
-- [Shells](shells_in_shells.md) - Working with multiple locations
-- [Escaping commands](escaping.md) - Escaping to native commands of the same name
-- [Plugins](plugins.md) - Enhancing Nushell with more features using plugins
-- [Parallelism](parallelism.md) - Running your code in parallel
-- [Line editor](line_editor.md) - Nushell's line editor
-- [Dataframes](dataframes.md) - Working with dataframes in Nushell
-- [Explore](explore.md) - Using the Nushell TUI
-- [Coloring and Theming](coloring_and_theming.md) - How to change the colors and themes in Nushell
-- [Regular Expressions](regular_expressions.md) - Guide to use regex
-- [Coming from Bash](coming_from_bash.md) - Guide for those coming to Nushell from Bash
-- [Nushell map from shells/DSL](nushell_map.md) - Guide to show how Nushell compares with SQL, LINQ, PowerShell, and Bash
-- [Nushell map from imperative languages](nushell_map_imperative.md) - Guide to show how Nushell compares with Python, Kotlin, C++, C#, and Rust
-- [Nushell map from functional languages](nushell_map_functional.md) - Guide to show how Nushell compares with Clojure, Tablecloth (OCaml / Elm) and Haskell
-- [Nushell operator map](nushell_operator_map.md) - Guide to show how Nushell operators compare with those in general purpose programming languages
-- [Command Reference](/commands/) - List of all Nushell's commands
+- [Nu 설치하기](installation.md) - Nushell 설치하기
+- [소개](README.md) - 시작하기
+- [Nu하게 생각하기](thinking_in_nu.md) - Nu하게 생각하는 방법에 대해 알아 봅니다.
+- [시스템 돌아다니기](moving_around.md) - Nushell을 통해 시스템을 돌아다녀 봅니다.
+- [데이터 타입](types_of_data.md) - Nushell의 데이터 타입에 대해 알아 봅니다.
+- [데이터 불러오기](loading_data.md) - 데이터를 불러오고 사용해 봅니다.
+- [문자열 사용하기](working_with_strings.md) - 문자열, 이스케이프 문자, 문자열 보간에 대해 알아 봅니다.
+- [리스트 사용하기](working_with_lists.md) - 리스트를 사용해 봅니다.
+- [테이블 사용하기](working_with_tables.md) - 테이블을 사용해 봅니다.
+- [파이프라인](pipeline.md) - 파이프라인이 어떻게 동작하는 지 알아 봅니다.
+- [설정](configuration.md) - Nushell을 설정하는 방법에 대해 알아 봅니다.
+- [서드파티 프롬프트](3rdpartyprompts.md) - 서드파티 프롬프트를 설정하는 방법에 대해 알아 봅니다.
+- [커스텀 명령어](custom_commands.md) - 커스텀 명령어를 만들어 봅니다.
+- [Alias](aliases.md) - 명령어의 별칭(alias)을 만들어 봅니다.
+- [연산자](operators.md) - Nushell에서 지원되는 연산자에 대해 알아 봅니다.
+- [변수와 하위 표현식](variables_and_subexpressions.md) - 변수와 하위 표현식을 만들고 사용해 봅니다.
+- [제어 흐름](control_flow.md) - 흐름 제어 명령어를 알아 봅니다.
+- [환경 변수](environment.md) - 환경 변수를 사용해 봅니다.
+- [표준 출력, 표준 에러, 그리고 종료 코드](stdout_stderr_exit_codes.md) - 표준 출력, 표준 에러와 종료 코드를 활용해 봅니다.
+- [모듈](modules.md) - 모듈을 만들고 사용해 봅니다.
+- [후크](hooks.md) - 자동으로 실행되는 코드 조각을 추가해 봅니다.
+- [스크립트](scripts.md) - 스크립트를 작성해 봅니다.
+- [메타데이터](metadata.md) - Nu의 메타데이터 시스템에 대한 설명입니다.
+- [오류 메시지 커스터마이징하기](creating_errors.md) - 커스텀 에러 메시지를 만들어 봅니다.
+- [셸 속의 셸](shells_in_shells.md) - 여러 위치에서 명령어를 실행시켜 봅니다.
+- [명령 이스케이핑](escaping.md) - 이름이 겹치는 기존의 명령어를 실행시켜 봅니다.
+- [플러그인](plugins.md) - 플러그인을 사용하여 Nushell의 기능을 확장시켜 봅니다.
+- [병렬 실행](parallelism.md) - 동시에 여러 코드를 실행시켜 봅니다.
+- [Nu의 라인 에디터, Reedline](line_editor.md) - Nushell의 라인 에디터인 Reedline에 대해 알아 봅니다.
+- [데이터프레임](dataframes.md) - Nushell에서 데이터프레임을 활용해 봅니다.
+- [explore 명령어](explore.md) - Nushell의 TUI 환경을 사용해 봅니다.
+- [Nu에 테마 적용하기](coloring_and_theming.md) - Nushell의 색깔과 테마를 변경하는 방법에 대해 알아 봅니다.
+- [정규 표현식](regular_expressions.md) - 정규 표현식에 대한 가이드입니다.
+- [Bash에서 전환하기](coming_from_bash.md) - Bash에서 Nushell로 전환하기 위한 가이드입니다.
+- [다른 셸 또는 도메인 특화 언어들과의 비교](nushell_map.md) - Nushell과 SQL, LINQ, PowerShell, 그리고 Bash를 비교한 표입니다.
+- [명령형 언어들과의 비교](nushell_map_imperative.md) - Nushell과 Python, Kotlin, C++, C#, 그리고 Rust를 비교한 표입니다.
+- [함수형 언어들과의 비교](nushell_map_functional.md) - Nushell과 Clojure, Tablecloth (OCaml / Elm), 그리고 Haskell을 비교한 표입니다.
+- [Nushell 연산자 비교](nushell_operator_map.md) - Nushell과 범용 프로그래밍 언어들과의 연산자를 비교한 표입니다.
+- [명령어 목록](/commands/) - Nushell의 명령어 리스트입니다.
