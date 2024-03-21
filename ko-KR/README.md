@@ -2,35 +2,35 @@
 home: true
 heroImage: null
 heroText: Nushell
-tagline: A new type of shell
-actionText: Get Started →
-actionLink: /book/
+tagline: 새로운 타입의 셸
+actionText: 시작하기 →
+actionLink: /ko-KR/book/
 features:
-  - title: Pipelines to control any OS
-    details: Nu works on Linux, macOS, BSD, and Windows. Learn it once, then use it anywhere.
-  - title: Everything is data
-    details: Nu pipelines use structured data so you can safely select, filter, and sort the same way every time. Stop parsing strings and start solving problems.
-  - title: Powerful plugins
-    details: It's easy to extend Nu using a powerful plugin system.
+  - title: 어떤 운영체제든 제어하기 위한 파이프라인
+    details: Nu는 Linux, macOS, BSD, 그리고 Windows에서 동작합니다. 한 번 배우고, 어디서든 사용하세요.
+  - title: 모든 것은 데이터입니다
+    details: Nu 파이프라인은 언제나 안전하게 선택하고, 필터링하고, 정렬할 수 있는 구조화된 데이터를 사용합니다. 문자열 파싱은 그만두고 문제를 해결하세요.
+  - title: 강력한 플러그인
+    details: 강력한 플러그인으로 Nu를 쉽게 확장할 수 있습니다.
 ---
 
 <img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Screenshot showing using the ls command" class="hero"/>
 
-### Nu works with existing data
+### Nu는 기존의 데이터를 사용할 수 있습니다
 
-Nu speaks [JSON, YAML, SQLite, Excel, and more](/book/loading_data.html) out of the box. It's easy to bring data into a Nu pipeline whether it's in a file, a database, or a web API:
+Nu는 [JSON, YAML, SQLite, Excel, and more](/book/loading_data.html) 등의 데이터 포맷을 지원합니다. 데이터들이 파일, 데이터베이스, 웹 API 어디에 있든지 쉽게 Nu 파이프라인에 가져올 수 있습니다.
 
 <img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
-### Nu has great error messages
+### Nu의 에러 메시지는 알아보기 쉽습니다
 
-Nu operates on typed data, so it catches bugs that other shells don't. And when things break, Nu tells you exactly where and why:
+Nu에는 데이터 타입이 있기 때문에, 타입이 없는 다른 셸들이 잡지 못하는 버그들을 감지할 수 있습니다. 또한 만약에 오류가 발생한다면, Nu는 정확히 어디서, 왜 오류가 발생했는지 알려줍니다.
 
 <img src="https://www.nushell.sh/frontpage/miette-example.png" alt="Screenshot showing Nu catching a type error" class="hero"/>
 
-## Get Nu
+## Nu 사용하기
 
-Nushell is available as [downloadable binaries](https://github.com/nushell/nushell/releases), [via your favourite package manager](https://repology.org/project/nushell/versions), in [a GitHub Action](https://github.com/marketplace/actions/setup-nu), and as [source code](https://github.com/nushell/nushell). Read [the detailed installation instructions](/book/installation.html) or dive right in:
+Nushell은 [실행 파일](https://github.com/nushell/nushell/releases)로, [패키지 매니저](https://repology.org/project/nushell/versions)를 통해, [GitHub Action](https://github.com/marketplace/actions/setup-nu)에서, 또는 [소스코드](https://github.com/nushell/nushell)로 사용할 수 있습니다. 자세한 사항은 [설치 매뉴얼](/book/installation.html) 에서 확인해 주세요.
 
 #### macOS / Linux:
 
@@ -52,10 +52,10 @@ $ nix profile install nixpkgs#nushell
 $ winget install nushell
 ```
 
-After installing, launch Nu by typing `nu`.
+설치 후에는 `nu` 커맨드로 Nu를 실행해 주세요.
 
-## Community
+## 커뮤니티
 
-Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!
+Nu에 대한 질문 사항이 있으시면 [디스코드](https://discord.gg/NtAbbGn)에 문의해 주세요!
 
-You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls).
+[피드백](https://github.com/nushell/nushell.github.io/issues) 이나 [PR](https://github.com/nushell/nushell.github.io/pulls)을 통해 이 사이트를 개선시킬 수 있습니다.
