@@ -66,16 +66,6 @@ $env.config = ($env.config | upsert <field name> <field value>)
 
 By convention, this variable is defined in the `config.nu` file.
 
-::: tip
-Try downloading the [`set-env`](https://github.com/nushell/nu_scripts/blob/main/stdlib-candidate/std-rfc/set-env.nu) command in order to _merge_ nested `$env` values at any depth:
-
-```nu
-set-env config.<field name> <field value>
-```
-
-You can optionally `--append` list settings such as [hooks](/book/hooks.md).
-:::
-
 ### Environment
 
 You can set environment variables for the duration of a Nushell session using the `$env.<var> = <val>` structure inside the `env.nu` file. For example:
