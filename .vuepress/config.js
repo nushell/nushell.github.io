@@ -33,7 +33,10 @@ const compareDate = (dateA, dateB) => {
   return dateB.getTime() - dateA.getTime();
 };
 
+const [ciUser, ciRepo] = process.env.GITHUB_REPOSITORY?.split('/') ?? []
+
 export default defineUserConfig({
+  base: ciRepo && ciUser !== 'nushell' ? `/${ciRepo}/` : '/',
   locales: {
     '/': {
       lang: 'English',
