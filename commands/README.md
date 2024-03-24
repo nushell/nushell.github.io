@@ -25,7 +25,7 @@ To see all commands from inside Nushell, run [`help commands`](/commands/docs/he
     <th>Feature</th>
   </tr>
   <tr v-for="command in commands">
-   <td><a :href="command.path">{{ command.title }}</a></td>
+   <td><a :href="$withBase(command.path)">{{ command.title }}</a></td>
    <td style="white-space: pre-wrap;">{{ command.frontmatter.categories }}</td>
    <td style="white-space: pre-wrap;">{{ command.frontmatter.usage }}</td>
    <td style="white-space: pre-wrap;">{{ command.frontmatter.feature }}</td>
