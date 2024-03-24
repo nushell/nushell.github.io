@@ -20,7 +20,7 @@
     <th>Description</th>
   </tr>
   <tr v-for="command in commands">
-   <td><a :href="command.path">{{ command.title }}</a></td>
+   <td><a :href="$withBase(command.path)">{{ command.title }}</a></td>
    <td style="white-space: pre-wrap;">{{ command.frontmatter.usage }}</td>
   </tr>
 </table>
