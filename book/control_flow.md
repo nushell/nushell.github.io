@@ -80,7 +80,7 @@ The branches can either return a single value or, as shown in the second branch,
 
 #### Catch all branch
 
-You can have also have a catch all condition for if the given value doesn't match any of the other conditions by having a branch whose matching value is `_`.
+You can also have a catch all condition for when the given value doesn't match any of the other conditions by having a branch whose matching value is `_`.
 
 ```nu
 > let foo = match 7 {
