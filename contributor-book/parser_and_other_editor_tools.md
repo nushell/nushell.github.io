@@ -68,9 +68,9 @@ It has the following goals:
 - Fast
 - Ability to be utilized for syntax highlighting
 
-## I dont know a thing about all this, can you give me a hint where to learn?
+## I dont know a thing about all this, can you give me a hint on where to start?
 
-Sure!
+Sure! you can begin with these resources:
 
 - Adrian Hesketh gives an excellent talk about [how LSP works](https://youtu.be/EkK8Jxjj95s?si=KT3YdfV5LebbTzXp)
 - TeeJ explains [tree-sitter in a 15 min video](https://www.youtube.com/watch?v=09-9LltqWLY)
