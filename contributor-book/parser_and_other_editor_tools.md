@@ -59,9 +59,14 @@ features of VSCode-nushell-lang, that's why we still can't replace it.
 
 ## Tree-sitter
 
-For syntax highligting we can use [nushell tre-sitter grammar](https://github.com/nushell/tree-sitter-nu)
-this is useful for terminal text editors (nvim, helix, etc), VS Code [has
-its own grammar](https://github.com/nushell/vscode-nushell-lang/blob/main/syntaxes/nushell.tmLanguage.json)
+We have another grammar: [tree-sitter nushell](https://github.com/nushell/tree-sitter-nu) this is useful for terminal text editors (nvim, helix, etc). VS Code doesn't have support for tree-sitter and its grammar [is written in tmLanguage](https://github.com/nushell/vscode-nushell-lang/blob/main/syntaxes/nushell.tmLanguage.json)
+It has the following goals:
+
+- Ability to serve as a parser for a repl
+- Ability to work in editors that support tree-sitter (hx, nvim, others)
+- Ability to work in rust
+- Fast
+- Ability to be utilized for syntax highlighting
 
 ## I dont know a thing about all this, can you give me a hint where to learn?
 
