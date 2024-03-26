@@ -56,7 +56,7 @@ Note: this table assumes Nu 0.60.0 or later.
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                               | Update environment temporarily                                    |
 | `export FOO=BAR`                     | `$env.FOO = BAR`                                              | Set environment variable for current session                      |
 | `echo $FOO`                          | `$env.FOO`                                                    | Use environment variables                                         |
-| `echo ${FOO:-fallback}`              | `$env.FOO? \| default "ABC"`                                   | Use a fallback in place of an unset variable                      |
+| `echo ${FOO:-fallback}`              | `$env.FOO? \| default "ABC"`                                  | Use a fallback in place of an unset variable                      |
 | `unset FOO`                          | `hide-env FOO`                                                | Unset environment variable for current session                    |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                                    | Define an alias temporarily                                       |
 | `type FOO`                           | `which FOO`                                                   | Display information about a command (builtin, alias, or executable) |
@@ -65,5 +65,5 @@ Note: this table assumes Nu 0.60.0 or later.
 | `bash <script file>`                 | `nu <script file>`                                            | Run a script file                                                 |
 | `\`                                  | `( <command> )`                                               | A command can span multiple lines when wrapped with `(` and `)`   |
 | `pwd`                                | `$env.PWD`                                                    | Display the current directory                                     |
-| `read var`                           | `let var = input`                                             | Get input from the user. |
+| `read var`                           | `let var = input`                                             | Get input from the user                                           |
 
