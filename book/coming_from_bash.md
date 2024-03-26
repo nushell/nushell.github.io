@@ -29,6 +29,7 @@ Note: this table assumes Nu 0.60.0 or later.
 | `> /dev/null`                        | `\| ignore`                                                   | Discard command output                                            |
 | `> /dev/null 2>&1`                   | `out+err> /dev/null`                                          | Discard command output, including stderr                          |
 | `command arg1 arg2 2>&1 \| less`     | `run-external --redirect-combine command [arg1 arg2] \| less` | Pipe stdout+stderr of a command into less, output updated live    |
+| `cmd1 \| tee log.txt \| cmd2`        | `cmd1 \| tee { save log.txt } \| cmd2`                        | Tee command output to a log file                                  |
 | `cat <path>`                         | `open --raw <path>`                                           | Display the contents of the given file                            |
 |                                      | `open <path>`                                                 | Read a file as structured data                                    |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                                          | Move file to new location                                         |
