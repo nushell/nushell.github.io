@@ -2,7 +2,7 @@
 title: from json
 categories: |
   formats
-version: 0.91.0
+version: 0.91.1
 formats: |
   Convert from json to structured data.
 usage: |

@@ -2,7 +2,7 @@
 title: export module
 categories: |
   core
-version: 0.91.0
+version: 0.91.1
 core: |
   Export a custom module from a module.
 usage: |

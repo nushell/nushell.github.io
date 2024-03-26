@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.91.0
+version: 0.91.1
 filters: |
   Count the number of items in an input list or rows in a table.
 usage: |

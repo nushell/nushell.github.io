@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.91.0
+version: 0.91.1
 formats: |
   Convert table into simple Markdown.
 usage: |

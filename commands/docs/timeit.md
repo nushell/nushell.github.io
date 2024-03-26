@@ -2,7 +2,7 @@
 title: timeit
 categories: |
   debug
-version: 0.91.0
+version: 0.91.1
 debug: |
   Time the running time of a block.
 usage: |

@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.91.0
+version: 0.91.1
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -24,6 +24,7 @@ feature: default
  -  `--skip, -s {int}`: number of rows to skip before detecting
  -  `--no-headers, -n`: don't detect headers
  -  `--combine-columns, -c {range}`: columns to be combined; listed as a range
+ -  `--legacy, -`: use another algorithm to detect columns, it may be useful if default one doesn't work
 
 
 ## Input/output types:
@@ -34,9 +35,22 @@ feature: default
 
 ## Examples
 
-Splits string across multiple columns
+detect columns by df output
 ```nu
-> 'a b c' | detect columns --no-headers
+>
+'Filesystem     1K-blocks      Used Available Use% Mounted on
+none             8150224         4   8150220   1% /mnt/c' | detect columns
+╭───┬────────────┬───────────┬──────┬───────────┬──────┬────────────╮
+│ # │ Filesystem │ 1K-blocks │ Used │ Available │ Use% │ Mounted on │
+├───┼────────────┼───────────┼──────┼───────────┼──────┼────────────┤
+│ 0 │ none       │ 8150224   │ 4    │ 8150220   │ 1%   │ /mnt/c     │
+╰───┴────────────┴───────────┴──────┴───────────┴──────┴────────────╯
+
+```
+
+Use --legacy parameter if you find default one does not work
+```nu
+> 'a b c' | detect columns --legacy --no-headers
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column0 │ column1 │ column2 │
 ├───┼─────────┼─────────┼─────────┤
@@ -47,19 +61,19 @@ Splits string across multiple columns
 
 
 ```nu
-> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns 0..1
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns 0..1 --legacy
 
 ```
 
 Splits a multi-line string into columns with headers detected
 ```nu
-> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns -2..-1
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns -2..-1 --legacy
 
 ```
 
 Splits a multi-line string into columns with headers detected
 ```nu
-> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns 2..
+> $'c1 c2 c3 c4 c5(char nl)a b c d e' | detect columns --combine-columns 2.. --legacy
 
 ```
 

@@ -2,7 +2,7 @@
 title: dfr not
 categories: |
   dataframe
-version: 0.91.0
+version: 0.91.1
 dataframe: |
   Inverts boolean mask.
 usage: |

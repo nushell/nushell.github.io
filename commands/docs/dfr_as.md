@@ -2,7 +2,7 @@
 title: dfr as
 categories: |
   expression
-version: 0.91.0
+version: 0.91.1
 expression: |
   Creates an alias expression.
 usage: |

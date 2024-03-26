@@ -2,7 +2,7 @@
 title: view span
 categories: |
   debug
-version: 0.91.0
+version: 0.91.1
 debug: |
   View the contents of a span.
 usage: |
