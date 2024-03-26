@@ -124,6 +124,7 @@ export const sidebarEn: SidebarConfig = {
         'commands',
         'plugins',
         'plugin_protocol_reference',
+        'parser_and_other_editor_tools.md',
       ],
     },
   ],

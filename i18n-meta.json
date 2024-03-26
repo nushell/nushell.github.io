@@ -55,6 +55,17 @@
     "ru": "-"
   },
   {
+    "name": "cheat_sheet.md",
+    "en": "In progress",
+    "zh-CN": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-",
+    "ru": "-"
+  },
+  {
     "name": "coloring_and_theming.md",
     "en": "Completed",
     "zh-CN": "1b7d01ac3b@hustcer",
@@ -542,6 +553,17 @@
     "name": "stdout_stderr_exit_codes.md",
     "en": "Completed",
     "zh-CN": "73ef7f3153@hustcer",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-",
+    "ru": "-"
+  },
+  {
+    "name": "style_guide.md",
+    "en": "In progress",
+    "zh-CN": "-",
     "de": "-",
     "tr": "-",
     "ja": "-",
