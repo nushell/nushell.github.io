@@ -33,7 +33,15 @@ const compareDate = (dateA, dateB) => {
   return dateB.getTime() - dateA.getTime();
 };
 
+// default env from the deploy GitHub action
+// e.g. ciUser = nushell and ciRepo = nushell.github.io
+// both default to undefined if the env is undefined
+const [ciUser, ciRepo] = process.env.GITHUB_REPOSITORY?.split('/') ?? []
+
 export default defineUserConfig({
+  // set the base URL to ciRepo dir if it's a fork
+  // keep the default root if not
+  base: ciRepo && ciUser !== 'nushell' ? `/${ciRepo}/` : '/',
   locales: {
     '/': {
       lang: 'English',
