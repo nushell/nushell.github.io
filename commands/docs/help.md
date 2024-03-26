@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.91.0
+version: 0.92.0
 core: |
   Display help information about different parts of Nushell.
 usage: |
@@ -44,7 +44,7 @@ show help for single command, alias, or module
 
 show help for single sub-command, alias, or module
 ```nu
-> help str lpad
+> help str join
 
 ```
 

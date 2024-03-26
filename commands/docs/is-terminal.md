@@ -2,7 +2,7 @@
 title: is-terminal
 categories: |
   platform
-version: 0.91.0
+version: 0.92.0
 platform: |
   Check if stdin, stdout, or stderr is a terminal.
 usage: |

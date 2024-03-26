@@ -2,7 +2,7 @@
 title: insert
 categories: |
   filters
-version: 0.91.0
+version: 0.92.0
 filters: |
   Insert a new column, using an expression or closure to create each row's values.
 usage: |
@@ -91,3 +91,7 @@ Insert a new value at the end of a list
 ╰───┴───╯
 
 ```
+
+## Notes
+When inserting a column, the closure will be run for each row, and the current row will be passed as the first argument.
+When inserting into a specific index, the closure will instead get the current value at the index or null if inserting at the end of a list/table.

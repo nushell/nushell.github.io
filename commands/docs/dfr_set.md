@@ -2,7 +2,7 @@
 title: dfr set
 categories: |
   dataframe
-version: 0.91.0
+version: 0.92.0
 dataframe: |
   Sets value where given mask is true.
 usage: |

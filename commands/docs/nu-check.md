@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.91.0
+version: 0.92.0
 strings: |
   Validate and parse input content.
 usage: |
@@ -23,7 +23,6 @@ feature: default
 
  -  `--as-module, -m`: Parse content as module
  -  `--debug, -d`: Show error messages
- -  `--all, -a`: Parse content as script first, returns result if success, otherwise, try with module
 
 ## Parameters
 

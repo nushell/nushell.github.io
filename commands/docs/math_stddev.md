@@ -2,7 +2,7 @@
 title: math stddev
 categories: |
   math
-version: 0.91.0
+version: 0.92.0
 math: |
   Returns the standard deviation of a list of numbers, or of each column in a table.
 usage: |

@@ -2,7 +2,7 @@
 title: into bits
 categories: |
   conversions
-version: 0.91.0
+version: 0.92.0
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -30,7 +30,6 @@ feature: default
 | -------- | ------ |
 | binary   | string |
 | bool     | string |
-| datetime | string |
 | duration | string |
 | filesize | string |
 | int      | string |
@@ -67,12 +66,6 @@ convert a boolean value into a string, padded to 8 places with 0s
 ```nu
 > true | into bits
 00000001
-```
-
-convert a datetime value into a string, padded to 8 places with 0s
-```nu
-> 2023-04-17T01:02:03 | into bits
-01001101 01101111 01101110 00100000 01000001 01110000 01110010 00100000 00110001 00110111 00100000 00110000 00110001 00111010 00110000 00110010 00111010 00110000 00110011 00100000 00110010 00110000 00110010 00110011
 ```
 
 convert a string into a raw binary string, padded with 0s to 8 places

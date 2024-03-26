@@ -2,7 +2,7 @@
 title: random float
 categories: |
   random
-version: 0.91.0
+version: 0.92.0
 random: |
   Generate a random float within a range [min..max].
 usage: |

@@ -2,7 +2,7 @@
 title: echo
 categories: |
   core
-version: 0.91.0
+version: 0.92.0
 core: |
   Returns its arguments, ignoring the piped-in value.
 usage: |

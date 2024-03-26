@@ -2,7 +2,7 @@
 title: export use
 categories: |
   core
-version: 0.91.0
+version: 0.92.0
 core: |
   Use definitions from a module and export them from this module.
 usage: |
@@ -17,12 +17,12 @@ feature: default
 
 ## Signature
 
-```> export use {flags} (module) (members)```
+```> export use {flags} (module) ...rest```
 
 ## Parameters
 
  -  `module`: Module or module file.
- -  `members`: Which members of the module to import.
+ -  `...rest`: Which members of the module to import.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: run-external
 categories: |
   system
-version: 0.91.0
+version: 0.92.0
 system: |
   Runs external command.
 usage: |
@@ -48,6 +48,12 @@ Run an external command
 
 Redirect stdout from an external command into the pipeline
 ```nu
-> run-external --redirect-stdout "echo" "-n" "hello" | split chars
+> run-external "echo" "-n" "hello" | split chars
+
+```
+
+Redirect stderr from an external command into the pipeline
+```nu
+> run-external "nu" "-c" "print -e hello" e>| split chars
 
 ```

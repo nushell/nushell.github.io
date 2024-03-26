@@ -2,7 +2,7 @@
 title: to html
 categories: |
   formats
-version: 0.91.0
+version: 0.92.0
 formats: |
   Convert table into simple HTML.
 usage: |
@@ -31,10 +31,10 @@ feature: default
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | string |
-
+| input   | output |
+| ------- | ------ |
+| any     | string |
+| nothing | any    |
 ## Examples
 
 Outputs an  HTML string representing the contents of this table

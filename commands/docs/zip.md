@@ -2,7 +2,7 @@
 title: zip
 categories: |
   filters
-version: 0.91.0
+version: 0.92.0
 filters: |
   Combine a stream with the input.
 usage: |
@@ -21,7 +21,7 @@ feature: default
 
 ## Parameters
 
- -  `other`: The other input.
+ -  `other`: The other input, or closure returning a stream.
 
 
 ## Input/output types:

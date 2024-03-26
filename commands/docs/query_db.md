@@ -2,7 +2,7 @@
 title: query db
 categories: |
   database
-version: 0.91.0
+version: 0.92.0
 database: |
   Query a database using SQL.
 usage: |
@@ -18,6 +18,10 @@ feature: default
 ## Signature
 
 ```> query db {flags} (SQL)```
+
+## Flags
+
+ -  `--params, -p {any}`: List of parameters for the SQL statement
 
 ## Parameters
 
@@ -35,5 +39,25 @@ feature: default
 Execute SQL against a SQLite database
 ```nu
 > open foo.db | query db "SELECT * FROM Bar"
+
+```
+
+Execute a SQL statement with parameters
+```nu
+> stor create -t my_table -c { first: str, second: int }
+stor open | query db "INSERT INTO my_table VALUES (?, ?)" -p [hello 123]
+
+```
+
+Execute a SQL statement with named parameters
+```nu
+> stor create -t my_table -c { first: str, second: int }
+stor insert -t my_table -d { first: 'hello', second: '123' }
+stor open | query db "SELECT * FROM my_table WHERE second = :search_second" -p { search_second: 123 }
+╭───┬───────┬────────╮
+│ # │ first │ second │
+├───┼───────┼────────┤
+│ 0 │ hello │    123 │
+╰───┴───────┴────────╯
 
 ```

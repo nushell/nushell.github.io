@@ -2,7 +2,7 @@
 title: tee
 categories: |
   filters
-version: 0.91.0
+version: 0.92.0
 filters: |
   Copy a stream to another command in parallel.
 usage: |
@@ -44,7 +44,7 @@ Save a webpage to a file while also printing it
 
 Save error messages from an external command to a file without redirecting them
 ```nu
-> do { nu --commands 'print -e error; print ok' } | tee --stderr { save error.log } | complete
+> nu -c 'print -e error; print ok' | tee --stderr { save error.log } | complete
 
 ```
 

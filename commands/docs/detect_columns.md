@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.91.0
+version: 0.92.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -24,6 +24,7 @@ feature: default
  -  `--skip, -s {int}`: number of rows to skip before detecting
  -  `--no-headers, -n`: don't detect headers
  -  `--combine-columns, -c {range}`: columns to be combined; listed as a range
+ -  `--guess, -`: detect columns by guessing width, it may be useful if default one doesn't work
 
 
 ## Input/output types:
@@ -34,9 +35,22 @@ feature: default
 
 ## Examples
 
-Splits string across multiple columns
+use --guess if you find default algorithm not working
 ```nu
-> 'a b c' | detect columns --no-headers
+>
+'Filesystem     1K-blocks      Used Available Use% Mounted on
+none             8150224         4   8150220   1% /mnt/c' | detect columns --guess
+╭───┬────────────┬───────────┬──────┬───────────┬──────┬────────────╮
+│ # │ Filesystem │ 1K-blocks │ Used │ Available │ Use% │ Mounted on │
+├───┼────────────┼───────────┼──────┼───────────┼──────┼────────────┤
+│ 0 │ none       │ 8150224   │ 4    │ 8150220   │ 1%   │ /mnt/c     │
+╰───┴────────────┴───────────┴──────┴───────────┴──────┴────────────╯
+
+```
+
+detect columns with no headers
+```nu
+> 'a b c' | detect columns  --no-headers
 ╭───┬─────────┬─────────┬─────────╮
 │ # │ column0 │ column1 │ column2 │
 ├───┼─────────┼─────────┼─────────┤

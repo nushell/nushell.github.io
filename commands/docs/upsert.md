@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.91.0
+version: 0.92.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -113,3 +113,8 @@ Upsert into a list, inserting a new value at the end
 ╰───┴───╯
 
 ```
+
+## Notes
+When updating or inserting a column, the closure will be run for each row, and the current row will be passed as the first argument. Referencing `$in` inside the closure will provide the value at the column for the current row or null if the column does not exist.
+
+When updating a specific index, the closure will instead be run once. The first argument to the closure and the `$in` value will both be the current value at the index. If the command is inserting at the end of a list or table, then both of these values will be null.

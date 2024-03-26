@@ -2,7 +2,7 @@
 title: dfr select
 categories: |
   lazyframe
-version: 0.91.0
+version: 0.92.0
 lazyframe: |
   Selects columns from lazyframe.
 usage: |

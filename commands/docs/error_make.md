@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.91.0
+version: 0.92.0
 core: |
   Create an error.
 usage: |
@@ -39,7 +39,7 @@ feature: default
 Create a simple custom error
 ```nu
 > error make {msg: "my custom error message"}
-{msg: my custom error message, debug: GenericError { error: "my custom error message", msg: "", span: None, help: None, inner: [] }, raw: GenericError { error: "my custom error message", msg: "", span: None, help: None, inner: [] }}
+
 ```
 
 Create a more complex custom error
@@ -57,7 +57,7 @@ Create a more complex custom error
         }
         help: "A help string, suggesting a fix to the user"  # optional
     }
-{msg: my custom error message, debug: GenericError { error: "my custom error message", msg: "my custom label text", span: Some(Span { start: 123, end: 456 }), help: Some("A help string, suggesting a fix to the user"), inner: [] }, raw: GenericError { error: "my custom error message", msg: "my custom label text", span: Some(Span { start: 123, end: 456 }), help: Some("A help string, suggesting a fix to the user"), inner: [] }}
+
 ```
 
 Create a custom error for a custom command that shows the span of the argument
