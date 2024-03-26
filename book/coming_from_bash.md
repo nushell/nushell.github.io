@@ -7,7 +7,7 @@ To make these commands available in `nu` as well, add the following line to your
 $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 
-Note: this table assumes Nu 0.60.0 or later.
+Note: this table assumes Nu 0.92.0 or later.
 
 | Bash                                 | Nu                                                            | Task                                                              |
 | ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
