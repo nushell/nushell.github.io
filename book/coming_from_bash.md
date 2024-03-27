@@ -7,7 +7,7 @@ To make these commands available in `nu` as well, add the following line to your
 $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 
-Note: this table assumes Nu 0.60.0 or later.
+Note: this table assumes Nu 0.91.0 or later.
 
 | Bash                                 | Nu                                                            | Task                                                              |
 | ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -17,18 +17,20 @@ Note: this table assumes Nu 0.60.0 or later.
 | `ls -la`                             | `ls --long --all` or `ls -la`                                 | List files with all available information, including hidden files |
 | `ls -d */`                           | `ls \| where type == dir`                                     | List directories                                                  |
 | `find . -name *.rs`                  | `ls **/*.rs`                                                  | Find recursively all files that match a given pattern             |
-| `find . -name Makefile \| xargs vim` | `ls **/Makefile \| get name \| vim $in`                       | Pass values as command parameters                                 |
+| `find . -name Makefile \| xargs vim` | `ls **/Makefile \| get name \| vim ...$in`                    | Pass values as command parameters                                 |
 | `cd <directory>`                     | `cd <directory>`                                              | Change to the given directory                                     |
 | `cd`                                 | `cd`                                                          | Change to the home directory                                      |
 | `cd -`                               | `cd -`                                                        | Change to the previous directory                                  |
 | `mkdir <path>`                       | `mkdir <path>`                                                | Creates the given path                                            |
 | `mkdir -p <path>`                    | `mkdir <path>`                                                | Creates the given path, creating parents as necessary             |
 | `touch test.txt`                     | `touch test.txt`                                              | Create a file                                                     |
-| `> <path>`                           | `\| save --raw <path>`                                        | Save string into a file                                           |
-| `>> <path>`                          | `\| save --raw --append <path>`                               | Append string to a file                                           |
+| `> <path>`                           | `out> <path>` or `o> <path>`                                  | Save command output to a file                                     |
+|                                      | `\| save <path>`                                              | Save command output to a file as structured data                  |
+| `>> <path>`                          | `out>> <path>` or `o>> <path>`                                | Append command output to a file                                   |
+|                                      | `\| save --append <path>`                                     | Append command output to a file as structured data                |
 | `> /dev/null`                        | `\| ignore`                                                   | Discard command output                                            |
-| `> /dev/null 2>&1`                   | `out+err> /dev/null`                                          | Discard command output, including stderr                          |
-| `command arg1 arg2 2>&1 \| less`     | `run-external --redirect-combine command [arg1 arg2] \| less` | Pipe stdout+stderr of a command into less, output updated live    |
+| `> /dev/null 2>&1`                   | `out+err>\| ignore` or `o+e>\| ignore`                        | Discard command output, including stderr                          |
+| `command 2>&1 \| less`               | `command out+err>\| less` or `command o+e>\| less`            | Pipe stdout and stderr of a command into less                     |
 | `cmd1 \| tee log.txt \| cmd2`        | `cmd1 \| tee { save log.txt } \| cmd2`                        | Tee command output to a log file                                  |
 | `cat <path>`                         | `open --raw <path>`                                           | Display the contents of the given file                            |
 |                                      | `open <path>`                                                 | Read a file as structured data                                    |
