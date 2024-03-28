@@ -302,14 +302,15 @@ impl PluginCommand for Len {
                         Value::int(val.len() as i64, value.span()).into_pipeline_data()
                     ),
                     _ => Err(
-                        LabeledError::new("Expected String or iterable input from pipeline")
-                            .with_label(
-                                format!(
-                                    "requires string or iterable input; got {}",
-                                    value.get_type(),
-                                ),
-                                call.head,
-                            )
+                        LabeledError::new(
+                            "Expected String or iterable input from pipeline",
+                        ).with_label(
+                            format!(
+                                "requires string or iterable input; got {}",
+                                value.get_type(),
+                            ),
+                            call.head,
+                        )
                     ),
                 }
             }
@@ -715,13 +716,13 @@ fn test_examples() -> Result<(), ShellError> {
 }
 ```
 
-Manual tests, including with input, can also be created:
+Manual tests, including with input, can also be created, via `.eval()` and `.eval_with()`:
 
 ```rust
 #[test]
 fn test_fib_on_input() -> Result<(), ShellError> {
-    use nu_protocol::{IntoPipelineData, Span};
     use nu_plugin_test_support::PluginTest;
+    use nu_protocol::{IntoPipelineData, Span};
 
     // this would be identical to `20 | fib`, but anything can be passed,
     // including a stream
@@ -732,6 +733,24 @@ fn test_fib_on_input() -> Result<(), ShellError> {
     assert_eq!(Value::test_int(6765), result);
 }
 ```
+
+The Nu context within tests is very basic and mostly only contains the plugin commands themselves. If you need to test your plugin with other commands, you can include those crates and then use `.add_decl()` to include them in the context:
+
+```rust
+#[test]
+fn test_fib_with_sequence() -> Result<(), ShellError> {
+    use nu_command::Seq;
+    use nu_plugin_test_support::PluginTest;
+
+    let result = PluginTest::new("fib", FibPlugin.into())?
+        .add_decl(Box::new(Seq))?
+        .eval("seq 1 10 | fib")?;
+
+    assert_eq!(10, result.into_iter().count());
+}
+```
+
+Keep in mind that this will increase the compilation time of your tests, so it's generally preferred to do your other test logic within Rust if you can.
 
 Tests on custom values are fully supported as well, but they will be serialized and deserialized to ensure that they are able to pass through the serialization that happens to custom values between the plugin and the engine safely.
 
