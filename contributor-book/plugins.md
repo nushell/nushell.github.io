@@ -61,9 +61,9 @@ nu-protocol = "0.92.0"
 With this, we can open up `src/main.rs` and create our plugin.
 
 ```rust
-use nu_plugin::{serve_plugin, LabeledError, JsonSerializer, EvaluatedCall};
-use nu_plugin::{Plugin, PluginCommand, SimplePluginCommand, EngineInterface};
-use nu_protocol::{Value, PluginSignature, Type};
+use nu_plugin::{EvaluatedCall, JsonSerializer, LabeledError, serve_plugin};
+use nu_plugin::{EngineInterface, Plugin, PluginCommand, SimplePluginCommand};
+use nu_protocol::{Signature, Type, Value};
 
 struct LenPlugin;
 
@@ -80,9 +80,16 @@ struct Len;
 impl SimplePluginCommand for Len {
     type Plugin = LenPlugin;
 
-    fn signature(&self) -> PluginSignature {
-        PluginSignature::build("len")
-            .usage("calculates the length of its input")
+    fn name(&self) -> &str {
+        "len"
+    }
+
+    fn usage(&self) -> &str {
+        "calculates the length of its input"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::build(PluginCommand::name(self))
             .input_output_type(Type::String, Type::Int)
     }
 
@@ -142,20 +149,27 @@ We first specify the plugin type our command expects. This allows us to receive 
 impl SimplePluginCommand for Len {
     // ...
 
-    fn signature(&self) -> PluginSignature {
-        PluginSignature::build("len")
-            .usage("calculates the length of its input")
-            .input_type(Type::String)
-            .output_type(Type::Int)
+
+    fn name(&self) -> &str {
+        "len"
+    }
+
+    fn usage(&self) -> &str {
+        "calculates the length of its input"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::build(PluginCommand::name(self))
+            .input_output_type(Type::String, Type::Int)
     }
 
     // ...
 }
 ```
 
-There are two methods required for this implementation. The first is the `signature` part, which is run by Nu when the plugin is registered. This tells Nu the basic information about the command: its name, the parameters it takes, the description, what kind of plugin it is, and defines the input and output types.
+There are a few methods required for this implementation. We first define the `name` of the command, which is what the user will type at the prompt or in their script to run the command. The `usage` is also required, which is a short documentation string for users to know what the command does, and is displayed along with completions and in `help`. Finally, we define the `signature`, which specifies arguments and types for the command.
 
-Here, we tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
+We tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
 
 Next, in the `run` implementation, we describe how to do work as values flow into this plugin. Here, we receive a `Value` type that we expect to be a string. We also return either `Value` or an error.
 
@@ -220,7 +234,7 @@ Lastly, let's look at the top of the file:
 ```rust
 use nu_plugin::{serve_plugin, LabeledError, JsonSerializer, EvaluatedCall};
 use nu_plugin::{Plugin, PluginCommand, SimplePluginCommand, EngineInterface};
-use nu_protocol::{Value, PluginSignature, Type};
+use nu_protocol::{Signature, Type, Value};
 ```
 
 Here we import everything we need -- types and functions -- to be able to create our plugin.
@@ -265,10 +279,11 @@ use nu_protocol::{IntoPipelineData, PipelineData};
 impl PluginCommand for Len {
     type Plugin = LenPlugin;
 
-    fn signature(&self) -> PluginSignature {
+    // ...
+
+    fn signature(&self) -> Signature {
         // ... add the list type to the signature
-        PluginSignature::build("len")
-            .usage("calculates the length of its input")
+        Signature::build(PluginCommand::name(self))
             .input_output_types(vec![
                 (Type::String, Type::Int),
                 (Type::List(Type::Any.into()), Type::Int),
@@ -372,7 +387,7 @@ The plugin configuration can be retrieved with [`EngineInterface::get_plugin_con
 
 ```rust
 use nu_plugin::*;
-use nu_protocol::{PluginSignature, Value, Type};
+use nu_protocol::{Signature, Type, Value};
 
 struct MotdPlugin;
 
@@ -389,9 +404,16 @@ struct Motd;
 impl SimplePluginCommand for Motd {
     type Plugin = MotdPlugin;
 
-    fn signature(&self) -> PluginSignature {
-        PluginSignature::build("motd")
-            .usage("Message of the day")
+    fn name(&self) -> &str {
+        "motd"
+    }
+
+    fn usage(&self) -> &str {
+        "Message of the day"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::build(PluginCommand::name(self))
             .input_output_type(Type::Nothing, Type::String)
     }
 
@@ -434,7 +456,7 @@ Plugins can accept and evaluate closures using [`EngineInterface::eval_closure`]
 
 ```rust
 use nu_plugin::*;
-use nu_protocol::{PluginSignature, Value, Type, SyntaxShape, PipelineData};
+use nu_protocol::{PipelineData, Signature, SyntaxShape, Type, Value};
 
 struct MyEachPlugin;
 
@@ -451,9 +473,16 @@ struct MyEach;
 impl PluginCommand for MyEach {
     type Plugin = MyEachPlugin;
 
-    fn signature(&self) -> PluginSignature {
-        PluginSignature::build("my-each")
-            .usage("Run closure on each element of a list")
+    fn name(&self) -> &str {
+        "my-each"
+    }
+
+    fn usage(&self) -> &str {
+        "Run closure on each element of a list"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::build(PluginCommand::name(self))
             .required(
                 "closure",
                 SyntaxShape::Closure(Some(vec![SyntaxShape::Any])),
@@ -842,7 +871,7 @@ The plugin prints its signature serialized as JSON. We'll reformat for readabili
 }
 ```
 
-This signature tells Nu everything it needs to pass data in and out of the plugin as well as format the help message and support type aware tab completion. A full description of these fields is beyond the scope of this tutorial, but the response is simply a serialized form of the [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) trait in the `nu-plugin` crate.
+This signature tells Nu everything it needs to pass data in and out of the plugin as well as format the help message and support type aware tab completion. A full description of these fields is beyond the scope of this tutorial, but the response is simply a serialized form of the [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) struct in the `nu-plugin` crate.
 
 Now let's try simulating an invocation. Above we tested the plugin within Nu by executing the command `"hello" | len` and we got the response `5`. Of course this hides all of the typed data handling that makes Nu so powerful.
 
