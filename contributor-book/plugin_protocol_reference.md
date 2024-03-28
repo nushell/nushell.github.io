@@ -801,6 +801,22 @@ Example:
 }
 ```
 
+#### `GetHelp` engine call
+
+Get fully formatted help text for the current command. This can help with implementing top-level commands that just list their subcommands, rather than implementing any specific functionality. The response on success is [`Value` pipeline data](#pipelinedataheader-value) that always contains a string.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 1,
+    "id": 2,
+    "call": "GetHelp"
+  }
+}
+```
+
 #### `EvalClosure` engine call
 
 Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful with the output of the closure, which may be a stream.
