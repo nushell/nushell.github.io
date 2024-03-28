@@ -672,6 +672,69 @@ Note that opting out of garbage collection does not stop users from explicitly s
 
 If your plugin takes a particularly long time to launch, you can recommend to your users that they change their [garbage collection settings](/book/plugins.html#plugin-garbage-collector) to either increase the `stop_after` duration, or disable garbage collection entirely for your plugin.
 
+## Testing plugins
+
+Rust-based plugins can use the [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate to write tests. Examples can be tested automatically:
+
+```rust
+use nu_protocol::{Example, ShellError, Value};
+use nu_plugin::PluginCommand;
+
+struct FibPlugin;
+struct Fib;
+
+// ...
+
+impl PluginCommand for Fib {
+    type Plugin = FibPlugin;
+
+    fn name(&self) -> &str {
+        "fib"
+    }
+
+    // ...
+
+    fn examples(&self) -> Vec<Example> {
+        vec![
+            Example {
+                example: "fib 20",
+                description: "Compute the 20th Fibonacci number",
+                result: Some(Value::test_int(6765))
+            },
+        ]
+    }
+
+    // ...
+}
+
+#[test]
+fn test_examples() -> Result<(), ShellError> {
+    use nu_plugin_test_support::PluginTest;
+
+    PluginTest::new("fib", FibPlugin.into())?.test_examples(&Fib)
+}
+```
+
+Manual tests, including with input, can also be created:
+
+```rust
+#[test]
+fn test_fib_on_input() -> Result<(), ShellError> {
+    use nu_protocol::{IntoPipelineData, Span};
+    use nu_plugin_test_support::PluginTest;
+
+    // this would be identical to `20 | fib`, but anything can be passed,
+    // including a stream
+    let result = PluginTest::new("fib", FibPlugin.into())?
+        .eval_with("fib", Value::test_int(20).into_pipeline_data())?
+        .into_value(Span::test_data());
+
+    assert_eq!(Value::test_int(6765), result);
+}
+```
+
+Tests on custom values are fully supported as well, but they will be serialized and deserialized to ensure that they are able to pass through the serialization that happens to custom values between the plugin and the engine safely.
+
 ## Under the hood
 
 Writing Nu plugins in Rust is convenient because we can make use of the `nu-plugin` and `nu-protocol` crates, which are part of Nu itself and define the interface protocol. To write a plugin in another language you will need to implement that protocol yourself. If you're goal is to write Nu plugins in Rust you can stop here. If you'd like to explore the low level plugin interface or write plugins in other languages such as Python, keep reading.
