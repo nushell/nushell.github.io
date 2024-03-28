@@ -61,9 +61,9 @@ nu-protocol = "0.92.0"
 With this, we can open up `src/main.rs` and create our plugin.
 
 ```rust
-use nu_plugin::{EvaluatedCall, JsonSerializer, LabeledError, serve_plugin};
+use nu_plugin::{EvaluatedCall, JsonSerializer, serve_plugin};
 use nu_plugin::{EngineInterface, Plugin, PluginCommand, SimplePluginCommand};
-use nu_protocol::{Signature, Type, Value};
+use nu_protocol::{LabeledError, Signature, Type, Value};
 
 struct LenPlugin;
 
@@ -232,9 +232,9 @@ The only required method in `Plugin` is `commands()`, which initializes the plug
 Lastly, let's look at the top of the file:
 
 ```rust
-use nu_plugin::{serve_plugin, LabeledError, JsonSerializer, EvaluatedCall};
+use nu_plugin::{serve_plugin, JsonSerializer, EvaluatedCall};
 use nu_plugin::{Plugin, PluginCommand, SimplePluginCommand, EngineInterface};
-use nu_protocol::{Signature, Type, Value};
+use nu_protocol::{LabeledError, Signature, Type, Value};
 ```
 
 Here we import everything we need -- types and functions -- to be able to create our plugin.
