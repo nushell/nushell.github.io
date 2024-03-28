@@ -98,11 +98,13 @@ impl SimplePluginCommand for Len {
             Value::String { val, .. } => Ok(
                 Value::int(val.len() as i64, span)
             ),
-            _ => Err(LabeledError {
-                label: "Expected String input from pipeline".to_string(),
-                msg: format!("requires string input; got {}", input.get_type()),
-                span: Some(call.head),
-            }),
+            _ => Err(
+                LabeledError::new("Expected String input from pipeline")
+                    .with_label(
+                        format!("requires string input; got {}", input.get_type()),
+                        call.head,
+                    )
+            ),
         }
     }
 }
@@ -173,11 +175,13 @@ impl SimplePluginCommand for Len {
             Value::String { val, .. } => Ok(
                 Value::int(val.len() as i64, span)
             ),
-            _ => Err(LabeledError {
-                label: "Expected String input from pipeline".to_string(),
-                msg: format!("requires string input; got {}", input.get_type()),
-                span: Some(call.head),
-            }),
+            _ => Err(
+                LabeledError::new("Expected String input from pipeline")
+                    .with_label(
+                        format!("requires string input; got {}", input.get_type()),
+                        call.head,
+                    )
+            ),
         }
     }
 }
@@ -297,11 +301,16 @@ impl PluginCommand for Len {
                     Value::String { val, .. } => Ok(
                         Value::int(val.len() as i64, value.span()).into_pipeline_data()
                     ),
-                    _ => Err(LabeledError {
-                        label: "Expected String or iterable input from pipeline".to_string(),
-                        msg: format!("requires string or iterable input; got {}", value.get_type()),
-                        span: Some(call.head),
-                    }),
+                    _ => Err(
+                        LabeledError::new("Expected String or iterable input from pipeline")
+                            .with_label(
+                                format!(
+                                    "requires string or iterable input; got {}",
+                                    value.get_type(),
+                                ),
+                                call.head,
+                            )
+                    ),
                 }
             }
         }
@@ -394,18 +403,13 @@ impl SimplePluginCommand for Motd {
     ) -> Result<Value, LabeledError> {
         if let Some(config) = engine.get_plugin_config()? {
             let message = config.get_data_by_key("message")
-                .ok_or_else(|| LabeledError {
-                    label: "Message not present in config".into(),
-                    msg: "add the `message` key here".into(),
-                    span: Some(config.span()),
-                })?;
+                .ok_or_else(
+                    || LabeledError::new("Message not present in config")
+                        .with_label("add the `message` key here", config.span())
+                )?;
             Ok(Value::string(message.as_str()?, call.head))
         } else {
-            Err(LabeledError {
-                label: "Config for `motd` not set in $env.config.plugins".into(),
-                msg: "".into(),
-                span: None,
-            })
+            Err(LabeledError::new("Config for `motd` not set in $env.config.plugins"))
         }
     }
 }
@@ -619,11 +623,10 @@ let absolute_path = Path::new(&engine.get_current_dir()?).join(&provided_path.it
 
 // For example:
 if absolute_path.exists() {
-    return Err(LabeledError {
-        label: format!("{} does not exist", absolute_path.display()),
-        msg: "file not found".into(),
-        span: Some(relative_path.span),
-    });
+    return Err(
+        LabeledError::new(format!("{} does not exist", absolute_path.display()))
+            .with_label("file not found", relative_path.span)
+    );
 }
 ```
 
