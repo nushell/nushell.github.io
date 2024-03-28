@@ -133,7 +133,7 @@ $env.config.plugin_gc = {
         inc: {
             stop_after: 0sec # stop as soon as possible
         }
-        stream_example: {
+        example: {
             enabled: false # never stop automatically
         }
     }

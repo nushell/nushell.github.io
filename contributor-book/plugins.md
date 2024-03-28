@@ -61,9 +61,9 @@ nu-protocol = "0.92.0"
 With this, we can open up `src/main.rs` and create our plugin.
 
 ```rust
-use nu_plugin::{serve_plugin, LabeledError, JsonSerializer, EvaluatedCall};
-use nu_plugin::{Plugin, PluginCommand, SimplePluginCommand, EngineInterface};
-use nu_protocol::{Value, PluginSignature, Type};
+use nu_plugin::{EvaluatedCall, JsonSerializer, serve_plugin};
+use nu_plugin::{EngineInterface, Plugin, PluginCommand, SimplePluginCommand};
+use nu_protocol::{LabeledError, Signature, Type, Value};
 
 struct LenPlugin;
 
@@ -80,9 +80,16 @@ struct Len;
 impl SimplePluginCommand for Len {
     type Plugin = LenPlugin;
 
-    fn signature(&self) -> PluginSignature {
-        PluginSignature::build("len")
-            .usage("calculates the length of its input")
+    fn name(&self) -> &str {
+        "len"
+    }
+
+    fn usage(&self) -> &str {
+        "calculates the length of its input"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::build(PluginCommand::name(self))
             .input_output_type(Type::String, Type::Int)
     }
 
@@ -98,11 +105,13 @@ impl SimplePluginCommand for Len {
             Value::String { val, .. } => Ok(
                 Value::int(val.len() as i64, span)
             ),
-            _ => Err(LabeledError {
-                label: "Expected String input from pipeline".to_string(),
-                msg: format!("requires string input; got {}", input.get_type()),
-                span: Some(call.head),
-            }),
+            _ => Err(
+                LabeledError::new("Expected String input from pipeline")
+                    .with_label(
+                        format!("requires string input; got {}", input.get_type()),
+                        call.head,
+                    )
+            ),
         }
     }
 }
@@ -140,20 +149,27 @@ We first specify the plugin type our command expects. This allows us to receive 
 impl SimplePluginCommand for Len {
     // ...
 
-    fn signature(&self) -> PluginSignature {
-        PluginSignature::build("len")
-            .usage("calculates the length of its input")
-            .input_type(Type::String)
-            .output_type(Type::Int)
+
+    fn name(&self) -> &str {
+        "len"
+    }
+
+    fn usage(&self) -> &str {
+        "calculates the length of its input"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::build(PluginCommand::name(self))
+            .input_output_type(Type::String, Type::Int)
     }
 
     // ...
 }
 ```
 
-There are two methods required for this implementation. The first is the `signature` part, which is run by Nu when the plugin is registered. This tells Nu the basic information about the command: its name, the parameters it takes, the description, what kind of plugin it is, and defines the input and output types.
+There are a few methods required for this implementation. We first define the `name` of the command, which is what the user will type at the prompt or in their script to run the command. The `usage` is also required, which is a short documentation string for users to know what the command does, and is displayed along with completions and in `help`. Finally, we define the `signature`, which specifies arguments and types for the command.
 
-Here, we tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
+We tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
 
 Next, in the `run` implementation, we describe how to do work as values flow into this plugin. Here, we receive a `Value` type that we expect to be a string. We also return either `Value` or an error.
 
@@ -173,11 +189,13 @@ impl SimplePluginCommand for Len {
             Value::String { val, .. } => Ok(
                 Value::int(val.len() as i64, span)
             ),
-            _ => Err(LabeledError {
-                label: "Expected String input from pipeline".to_string(),
-                msg: format!("requires string input; got {}", input.get_type()),
-                span: Some(call.head),
-            }),
+            _ => Err(
+                LabeledError::new("Expected String input from pipeline")
+                    .with_label(
+                        format!("requires string input; got {}", input.get_type()),
+                        call.head,
+                    )
+            ),
         }
     }
 }
@@ -214,9 +232,9 @@ The only required method in `Plugin` is `commands()`, which initializes the plug
 Lastly, let's look at the top of the file:
 
 ```rust
-use nu_plugin::{serve_plugin, LabeledError, JsonSerializer, EvaluatedCall};
+use nu_plugin::{serve_plugin, JsonSerializer, EvaluatedCall};
 use nu_plugin::{Plugin, PluginCommand, SimplePluginCommand, EngineInterface};
-use nu_protocol::{Value, PluginSignature, Type};
+use nu_protocol::{LabeledError, Signature, Type, Value};
 ```
 
 Here we import everything we need -- types and functions -- to be able to create our plugin.
@@ -261,10 +279,11 @@ use nu_protocol::{IntoPipelineData, PipelineData};
 impl PluginCommand for Len {
     type Plugin = LenPlugin;
 
-    fn signature(&self) -> PluginSignature {
+    // ...
+
+    fn signature(&self) -> Signature {
         // ... add the list type to the signature
-        PluginSignature::build("len")
-            .usage("calculates the length of its input")
+        Signature::build(PluginCommand::name(self))
             .input_output_types(vec![
                 (Type::String, Type::Int),
                 (Type::List(Type::Any.into()), Type::Int),
@@ -297,11 +316,17 @@ impl PluginCommand for Len {
                     Value::String { val, .. } => Ok(
                         Value::int(val.len() as i64, value.span()).into_pipeline_data()
                     ),
-                    _ => Err(LabeledError {
-                        label: "Expected String or iterable input from pipeline".to_string(),
-                        msg: format!("requires string or iterable input; got {}", value.get_type()),
-                        span: Some(call.head),
-                    }),
+                    _ => Err(
+                        LabeledError::new(
+                            "Expected String or iterable input from pipeline",
+                        ).with_label(
+                            format!(
+                                "requires string or iterable input; got {}",
+                                value.get_type(),
+                            ),
+                            call.head,
+                        )
+                    ),
                 }
             }
         }
@@ -362,7 +387,7 @@ The plugin configuration can be retrieved with [`EngineInterface::get_plugin_con
 
 ```rust
 use nu_plugin::*;
-use nu_protocol::{PluginSignature, Value, Type};
+use nu_protocol::{Signature, Type, Value};
 
 struct MotdPlugin;
 
@@ -379,9 +404,16 @@ struct Motd;
 impl SimplePluginCommand for Motd {
     type Plugin = MotdPlugin;
 
-    fn signature(&self) -> PluginSignature {
-        PluginSignature::build("motd")
-            .usage("Message of the day")
+    fn name(&self) -> &str {
+        "motd"
+    }
+
+    fn usage(&self) -> &str {
+        "Message of the day"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::build(PluginCommand::name(self))
             .input_output_type(Type::Nothing, Type::String)
     }
 
@@ -394,18 +426,13 @@ impl SimplePluginCommand for Motd {
     ) -> Result<Value, LabeledError> {
         if let Some(config) = engine.get_plugin_config()? {
             let message = config.get_data_by_key("message")
-                .ok_or_else(|| LabeledError {
-                    label: "Message not present in config".into(),
-                    msg: "add the `message` key here".into(),
-                    span: Some(config.span()),
-                })?;
+                .ok_or_else(
+                    || LabeledError::new("Message not present in config")
+                        .with_label("add the `message` key here", config.span())
+                )?;
             Ok(Value::string(message.as_str()?, call.head))
         } else {
-            Err(LabeledError {
-                label: "Config for `motd` not set in $env.config.plugins".into(),
-                msg: "".into(),
-                span: None,
-            })
+            Err(LabeledError::new("Config for `motd` not set in $env.config.plugins"))
         }
     }
 }
@@ -429,7 +456,7 @@ Plugins can accept and evaluate closures using [`EngineInterface::eval_closure`]
 
 ```rust
 use nu_plugin::*;
-use nu_protocol::{PluginSignature, Value, Type, SyntaxShape, PipelineData};
+use nu_protocol::{PipelineData, Signature, SyntaxShape, Type, Value};
 
 struct MyEachPlugin;
 
@@ -446,9 +473,16 @@ struct MyEach;
 impl PluginCommand for MyEach {
     type Plugin = MyEachPlugin;
 
-    fn signature(&self) -> PluginSignature {
-        PluginSignature::build("my-each")
-            .usage("Run closure on each element of a list")
+    fn name(&self) -> &str {
+        "my-each"
+    }
+
+    fn usage(&self) -> &str {
+        "Run closure on each element of a list"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::build(PluginCommand::name(self))
             .required(
                 "closure",
                 SyntaxShape::Closure(Some(vec![SyntaxShape::Any])),
@@ -619,11 +653,10 @@ let absolute_path = Path::new(&engine.get_current_dir()?).join(&provided_path.it
 
 // For example:
 if absolute_path.exists() {
-    return Err(LabeledError {
-        label: format!("{} does not exist", absolute_path.display()),
-        msg: "file not found".into(),
-        span: Some(relative_path.span),
-    });
+    return Err(
+        LabeledError::new(format!("{} does not exist", absolute_path.display()))
+            .with_label("file not found", relative_path.span)
+    );
 }
 ```
 
@@ -668,6 +701,87 @@ This option is global to the plugin, and will last beyond the scope of a plugin 
 Note that opting out of garbage collection does not stop users from explicitly stopping your plugin with the `plugin stop` command. We recommend against disabling garbage collection unless your plugin has a good reason to stay running - for example, to keep data in memory, to do background processing, or to keep shared resources like sockets or files open. For custom values that contain all of the data that they need to be interpreted properly, the plugin can always be re-launched as necessary.
 
 If your plugin takes a particularly long time to launch, you can recommend to your users that they change their [garbage collection settings](/book/plugins.html#plugin-garbage-collector) to either increase the `stop_after` duration, or disable garbage collection entirely for your plugin.
+
+## Testing plugins
+
+Rust-based plugins can use the [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate to write tests. Examples can be tested automatically:
+
+```rust
+use nu_protocol::{Example, ShellError, Value};
+use nu_plugin::PluginCommand;
+
+struct FibPlugin;
+struct Fib;
+
+// ...
+
+impl PluginCommand for Fib {
+    type Plugin = FibPlugin;
+
+    fn name(&self) -> &str {
+        "fib"
+    }
+
+    // ...
+
+    fn examples(&self) -> Vec<Example> {
+        vec![
+            Example {
+                example: "fib 20",
+                description: "Compute the 20th Fibonacci number",
+                result: Some(Value::test_int(6765))
+            },
+        ]
+    }
+
+    // ...
+}
+
+#[test]
+fn test_examples() -> Result<(), ShellError> {
+    use nu_plugin_test_support::PluginTest;
+
+    PluginTest::new("fib", FibPlugin.into())?.test_examples(&Fib)
+}
+```
+
+Manual tests, including with input, can also be created, via `.eval()` and `.eval_with()`:
+
+```rust
+#[test]
+fn test_fib_on_input() -> Result<(), ShellError> {
+    use nu_plugin_test_support::PluginTest;
+    use nu_protocol::{IntoPipelineData, Span};
+
+    // this would be identical to `20 | fib`, but anything can be passed,
+    // including a stream
+    let result = PluginTest::new("fib", FibPlugin.into())?
+        .eval_with("fib", Value::test_int(20).into_pipeline_data())?
+        .into_value(Span::test_data());
+
+    assert_eq!(Value::test_int(6765), result);
+}
+```
+
+The Nu context within tests is very basic and mostly only contains the plugin commands themselves. If you need to test your plugin with other commands, you can include those crates and then use `.add_decl()` to include them in the context:
+
+```rust
+#[test]
+fn test_fib_with_sequence() -> Result<(), ShellError> {
+    use nu_command::Seq;
+    use nu_plugin_test_support::PluginTest;
+
+    let result = PluginTest::new("fib", FibPlugin.into())?
+        .add_decl(Box::new(Seq))?
+        .eval("seq 1 10 | fib")?;
+
+    assert_eq!(10, result.into_iter().count());
+}
+```
+
+Keep in mind that this will increase the compilation time of your tests, so it's generally preferred to do your other test logic within Rust if you can.
+
+Tests on custom values are fully supported as well, but they will be serialized and deserialized to ensure that they are able to pass through the serialization that happens to custom values between the plugin and the engine safely.
 
 ## Under the hood
 
@@ -757,7 +871,7 @@ The plugin prints its signature serialized as JSON. We'll reformat for readabili
 }
 ```
 
-This signature tells Nu everything it needs to pass data in and out of the plugin as well as format the help message and support type aware tab completion. A full description of these fields is beyond the scope of this tutorial, but the response is simply a serialized form of the [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) trait in the `nu-plugin` crate.
+This signature tells Nu everything it needs to pass data in and out of the plugin as well as format the help message and support type aware tab completion. A full description of these fields is beyond the scope of this tutorial, but the response is simply a serialized form of the [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) struct in the `nu-plugin` crate.
 
 Now let's try simulating an invocation. Above we tested the plugin within Nu by executing the command `"hello" | len` and we got the response `5`. Of course this hides all of the typed data handling that makes Nu so powerful.
 

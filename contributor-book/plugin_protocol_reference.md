@@ -511,11 +511,23 @@ These are messages sent from the plugin to the engine. [`Hello`](#hello) and [`S
 
 An error occurred while attempting to fulfill the request.
 
-| Field     | Type                    | Usage                                                                                |
-| --------- | ----------------------- | ------------------------------------------------------------------------------------ |
-| **label** | string                  | The main error message to show at the top of the error.                              |
-| **msg**   | string                  | Additional context for the error. If `span` is provided, `msg` points at the `span`. |
-| **span**  | [`Span`](#span) or null | The span that points to what source code caused the error.                           |
+| Field      | Type                  | Usage                                                                                                          |
+| ---------- | --------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **msg**    | string                | The main error message to show at the top of the error.                                                        |
+| **labels** | `ErrorLabel` array?   | Spans and messages to label the error in the source code.                                                      |
+| **code**   | string?               | A unique machine- and search-friendly code that can be matched against, e.g. `nu::shell::missing_config_value` |
+| **url**    | string?               | A URL that links to additional information about the error.                                                    |
+| **help**   | string?               | Additional help for the error, usually a hint about what the user might try.                                   |
+| **inner**  | `LabeledError` array? | Additional errors referenced by the error, possibly the cause(s) of this error.                                |
+
+Most of the fields are not required - only `msg` must be present. `ErrorLabel` (in the `labels` array) is as follows:
+
+| Field    | Type            | Usage                                                       |
+| -------- | --------------- | ----------------------------------------------------------- |
+| **text** | string          | The message for the label.                                  |
+| **span** | [`Span`](#span) | The span in the source code that the label should point to. |
+
+It is strongly preferred to provide labeled messages whenever possible to let the user know where the problem might be in their script. If there is no more suitable span from a value that can be used, `head` from [`EvaluatedCall`](#evaluatedcall) is a good fallback.
 
 Example:
 
@@ -525,12 +537,24 @@ Example:
     0,
     {
       "Error": {
-        "label": "A really bad error occurred",
-        "msg": "I don't know, but it's over nine thousand!",
-        "span": {
-          "start": 9001,
-          "end": 9007
-        }
+        "msg": "A really bad error occurred",
+        "labels": [
+          {
+            "text": "I don't know, but it's over nine thousand!",
+            "span": {
+              "start": 9001,
+              "end": 9007
+            }
+          }
+        ],
+        "code": "my_plugin::bad::really_bad",
+        "url": "https://example.org/my_plugin/error/bad/really_bad.html",
+        "help": "you can solve this by not doing the bad thing",
+        "inner": [
+          {
+            "msg": "The bad thing"
+          }
+        ]
       }
     }
   ]
@@ -773,6 +797,22 @@ Example:
         }
       ]
     }
+  }
+}
+```
+
+#### `GetHelp` engine call
+
+Get fully formatted help text for the current command. This can help with implementing top-level commands that just list their subcommands, rather than implementing any specific functionality. The response on success is [`Value` pipeline data](#pipelinedataheader-value) that always contains a string.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 1,
+    "id": 2,
+    "call": "GetHelp"
   }
 }
 ```
