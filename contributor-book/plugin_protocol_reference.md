@@ -288,7 +288,7 @@ Example (comparing two `version` custom values):
         },
         {
           "PartialCmp": {
-            "CustomValue": {
+            "Custom": {
               "val": {
                 "type": "PluginCustomValue",
                 "name": "version",
@@ -1102,7 +1102,7 @@ Example:
 
 ```json
 {
-  "CustomValue": {
+  "Custom": {
     "val": {
       "type": "PluginCustomValue",
       "name": "database",

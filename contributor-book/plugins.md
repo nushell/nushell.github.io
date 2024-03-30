@@ -530,7 +530,7 @@ At present, the closures can only refer to values that would be valid to send to
 
 Plugins can create custom values that embed plugin-specific data within the engine. In Rust, this data is automatically serialized using [bincode](https://crates.io/crates/bincode), so all you need to do is implement the [`CustomValue`](https://docs.rs/nu-protocol/latest/nu_protocol/trait.CustomValue.html) trait on a type that has `Serialize` and `Deserialize` implementations compatible with bincode. This includes any attributes that would cause a dependency on field names or field presence, such as `#[serde(skip_serializing_if = "...")]` or `#[serde(untagged)]`. We use the [typetag](https://crates.io/crates/typetag) crate to reconstruct the correct custom value type.
 
-To embed the custom value in a `Value`, use [`Value::custom_value()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom_value). A minimal example:
+To embed the custom value in a `Value`, use [`Value::custom()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom_value). A minimal example:
 
 ```rust
 use nu_protocol::{CustomValue, ShellError, Span, Value, record};
@@ -583,7 +583,7 @@ impl CustomValue for Animal {
 }
 
 // Use the custom value
-Value::custom_value(Box::new(Animal::Dog {
+Value::custom(Box::new(Animal::Dog {
     name: "Rex".into(),
     woof: true,
 }), call.head)
