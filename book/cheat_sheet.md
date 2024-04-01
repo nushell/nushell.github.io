@@ -124,7 +124,7 @@
     > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 
-> **ansi command colors the text (alsways end with `ansi reset` to reset color to default)**
+> **ansi command colors the text (always end with `ansi reset` to reset color to default)**
 
 ## Lists
 
