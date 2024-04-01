@@ -80,7 +80,7 @@ Individual environment variables are fields of a record that is stored in the `$
 BAR
 ```
 
-Sometimes, you may want to access an environmental variable which might be unset. Consider using the [question mark operator](variables_and_subexpressions.md#variable-paths) to avoid an error:
+Sometimes, you may want to access an environmental variable which might be unset. Consider using the [question mark operator](types_of_data.md#optional-cell-paths) to avoid an error:
 ```nu
 > $env.FOO | describe
 Error: nu::shell::column_not_found
