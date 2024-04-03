@@ -89,7 +89,7 @@ Compared to JSON, NUON is more "human-friendly".
 For example, comments are allowed and commas are not required.
 
 One limitation of NUON currently is that it cannot represent all of the Nushell [data types](types_of_data.md).
-Most notably, NUON does not allow to serialize blocks.
+Most notably, NUON does not allow the serialization of blocks.
 
 ## Handling Strings
 
