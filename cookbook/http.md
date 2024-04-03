@@ -175,7 +175,7 @@ Making a `post` request to an endpoint with a JSON payload. To make long request
 ```
 
 ```nu
-open payload.json | get my_payload | to json | post https://jsonplaceholder.typicode.com/posts $in
+open payload.json | get my_payload | to json | http post https://jsonplaceholder.typicode.com/posts $in
 ```
 
 Output
@@ -193,7 +193,7 @@ Output
 We can put this all together into a pipeline where we read data, manipulate it, and then send it back to the API. Lets `fetch` a post, `increment` the id, and `post` it back to the endpoint. In this particular example, the test endpoint gives back an arbitrary response which we can't actually mutate.
 
 ```nu
-open urls.json | get urls | first | http get $in | upsert id {|item| $item.id | inc} | to json | post https://jsonplaceholder.typicode.com/posts $in
+open urls.json | get urls | first | http get $in | upsert id {|item| $item.id | inc} | to json | http post https://jsonplaceholder.typicode.com/posts $in
 ```
 
 Output
