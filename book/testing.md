@@ -17,8 +17,9 @@ def test_addition [] {
 }
 
 #[test]
+#[ignore]
 def test_skip [] {
-    assert skip
+    # this won't be run
 }
 
 #[test]
@@ -54,11 +55,9 @@ Error:
   │
 ```
 
-
 ## Assert commands
 
 The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error. For example:
-
 
 ```nu
 ❯ use std assert
@@ -147,12 +146,12 @@ In order for a function to be recognized as a test by the test runner it needs t
 
 The following annotations are supported by the test runner:
 
-* test        - test case to be executed during test run
-* test-skip   - test case to be skipped during test run
-* before-all  - function to run at the beginning of test run. Returns a global context record that is piped into every test function
-* before-each - function to run before every test case. Returns a per-test context record that is merged with global context and piped into test functions
-* after-each  - function to run after every test case. Receives the context record just like the test cases
-* after-all   - function to run after all test cases have been executed. Receives the global context record
+- test - test case to be executed during test run
+- test-skip - test case to be skipped during test run
+- before-all - function to run at the beginning of test run. Returns a global context record that is piped into every test function
+- before-each - function to run before every test case. Returns a per-test context record that is merged with global context and piped into test functions
+- after-each - function to run after every test case. Receives the context record just like the test cases
+- after-all - function to run after all test cases have been executed. Receives the global context record
 
 The standard library itself is tested with this framework, so you can find many examples in the [Nushell repository](https://github.com/nushell/nushell/blob/main/crates/nu-std/tests/).
 
