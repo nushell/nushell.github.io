@@ -8,7 +8,7 @@ title: Plugins
 
 Plugins are executable applications that communicate with Nu by exchanging serialized data over stdin and stdout (much in the same way VSCode plugins do). The protocol is split into two stages.
 
-The first stage of the protocol deals with the initial discovery of the plugin. When a plugin is registered the plugin executed and asked to reply with its configuration. Just as with commands, plugins have a signature that they respond to Nu with. Once Nu has this signature, it knows how to later invoke the plugin to do work.
+The first stage of the protocol deals with the initial discovery of the plugin. When a plugin is registered the plugin is executed and asked to reply with its configuration. Just as with commands, plugins have a signature that they respond to Nu with. Once Nu has this signature, it knows how to later invoke the plugin to do work.
 
 The second stage is the actual doing of work. Here the plugins are executed and sent serialized input data. The plugin then replies with the serialized output data.
 
