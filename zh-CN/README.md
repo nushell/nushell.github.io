@@ -48,6 +48,6 @@ $ winget install nushell
 
 ## 社区
 
-如果你有任何问题可以在 [Dicord](https://discord.gg/NtAbbGn) 上找到我们。
+如果你有任何问题可以在 [Discord](https://discord.gg/NtAbbGn) 上找到我们。
 
 您可以通过 [意见反馈](https://github.com/nushell/nushell.github.io/issues) 或者 [贡献 PR](https://github.com/nushell/nushell.github.io/pulls) 来帮助我们完善此网站。
