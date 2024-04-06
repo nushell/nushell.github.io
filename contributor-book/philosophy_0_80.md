@@ -159,7 +159,7 @@ Being a shell-focused language means incorporating more of the expected shell-fe
 
 Redirection (with common variations):
 
-```
+```bash
 cat foo.txt > bar.txt
 cat foo.txt >> bar.txt
 cat foo.txt 2> bar.txt
@@ -167,7 +167,7 @@ cat foo.txt 2> bar.txt
 
 Note: as of 0.72, these are currently:
 
-```
+```nu
 cat foo.txt out> bar.txt
 cat foo.txt err> bar.txt
 ```
@@ -176,14 +176,14 @@ cat foo.txt err> bar.txt
 
 Equivalent functionality for Bash logic operators:
 
-```
+```bash
 cat foo.txt && cat bar.txt
 cat foo.txt || cat bar.txt
 ```
 
 Note: as of 0.72, these are currently:
 
-```
+```nu
 cat foo.txt; cat bar.txt
 try { cat foo.txt } catch { cat bar.txt }
 ```
@@ -194,7 +194,7 @@ We don't have plans to support the full bash language.
 
 In 0.80, there will be a limited form of mutation that works with the local command.
 
-```
+```nu
 mut x = 100
 $x = 200
 print $x
@@ -212,7 +212,7 @@ Closures retain the capabilities of 0.60 and can be used as first-class values, 
 
 Block example:
 
-```
+```nu
 for x in 1..100 {
   print $x
 }
@@ -220,7 +220,7 @@ for x in 1..100 {
 
 Closure example:
 
-```
+```nu
 ls | each { |x| $x.name + "foo" }
 ```
 
