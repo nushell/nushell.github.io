@@ -6,26 +6,26 @@ export const sidebarEs: SidebarConfig = {
       text: 'Nu Libro',
       collapsible: false,
       children: [
-        'README.md',
-        'instalacion',
-        'explorando',
-        'tipos_de_datos',
-        'cargando_datos', // "trabajando_con_listas"
-        'trabajando_con_tablas',
-        'pipeline',
-        'configuracion', // "custom_commands"
-        'aliases', // "operadores"
-        'matematicas', // "variables_y_subexpresiones"
-        'entorno', // "scripts"
-        'metadatos',
-        'shells_en_shells',
-        'escapando',
-        'plugins', // "dataframes"
-        'llegando_de_bash',
-        'mapa_nushell',
-        'mapa_imperativo_nushell',
-        'mapa_funcional_nushell',
-        'mapa_operador_nushell',
+        '/es/book/README.md',
+        '/es/book/instalacion',
+        '/es/book/explorando',
+        '/es/book/tipos_de_datos',
+        '/es/book/cargando_datos', // "trabajando_con_listas"
+        '/es/book/trabajando_con_tablas',
+        '/es/book/pipeline',
+        '/es/book/configuracion', // "custom_commands"
+        '/es/book/aliases', // "operadores"
+        '/es/book/matematicas', // "variables_y_subexpresiones"
+        '/es/book/entorno', // "scripts"
+        '/es/book/metadatos',
+        '/es/book/shells_en_shells',
+        '/es/book/escapando',
+        '/es/book/plugins', // "dataframes"
+        '/es/book/llegando_de_bash',
+        '/es/book/mapa_nushell',
+        '/es/book/mapa_imperativo_nushell',
+        '/es/book/mapa_funcional_nushell',
+        '/es/book/mapa_operador_nushell',
         '/book/command_reference.md',
       ],
     },
