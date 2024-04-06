@@ -47,7 +47,7 @@ export default defineUserConfig({
   bundler: viteBundler(),
   locales: {
     '/': {
-      lang: 'English',
+      lang: 'en-US',
       title: 'Nushell',
       description: 'A new type of shell.',
     },
@@ -57,17 +57,17 @@ export default defineUserConfig({
       description: '一种新型的Shell',
     },
     '/de/': {
-      lang: 'Deutsch',
+      lang: 'de-DE',
       title: 'Nushell',
       description: 'Eine neue Art von Shell.',
     },
     '/es/': {
-      lang: 'es',
+      lang: 'es-ES',
       title: 'Nushell',
       description: 'Un nuevo tipo de shell.',
     },
     '/ja/': {
-      lang: 'ja',
+      lang: 'ja-JP',
       title: 'Nushell',
       description: '新しいタイプのシェル',
     },
@@ -77,7 +77,7 @@ export default defineUserConfig({
       description: 'Um novo tipo de shell.',
     },
     '/ru': {
-      lang: 'ru',
+      lang: 'ru-RU',
       title: 'Nushell',
       description: 'Новый тип оболочки.',
     },
@@ -112,7 +112,6 @@ export default defineUserConfig({
     lastUpdated: false,
     locales: {
       '/': {
-        lang: 'en-US',
         selectText: 'Languages',
         selectLanguageName: 'English',
         editLinkText: 'Edit this page on GitHub',
@@ -148,7 +147,6 @@ export default defineUserConfig({
         sidebar: sidebarPtBR,
       },
       '/ru/': {
-        lang: 'ru-RU',
         selectText: 'Языки',
         selectLanguageName: 'Русский язык',
         editLinkText: 'Отредактируйте эту страницу на GitHub',
