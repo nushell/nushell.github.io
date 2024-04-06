@@ -25,7 +25,7 @@ Dataframe commands were not shipped in the official binaries by default, you hav
 
 ## Flags
 
- -  `--inner, -i`: inner joing between lazyframes (default)
+ -  `--inner, -i`: inner join between lazyframes (default)
  -  `--left, -l`: left join between lazyframes
  -  `--outer, -o`: outer join between lazyframes
  -  `--cross, -c`: cross join between lazyframes
