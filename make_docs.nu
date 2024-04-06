@@ -1,8 +1,22 @@
 # get all command names from a clean scope
 def command-names [] {
-    nu --no-config-file --commands '
-    scope commands | select name
-    | to json' | from json
+    const plugins = [
+        nu_plugin_inc,
+        nu_plugin_gstat,
+        nu_plugin_query,
+        nu_plugin_formats,
+    ]
+    let nu_dir = (which nu) | get path.0 | path dirname
+    mut register_cmd = ''
+    for plugin in $plugins {
+        if (sys).host.name == 'Windows' {
+            $register_cmd += $'register ($nu_dir | path join $plugin).exe;'
+        } else {
+            $register_cmd += $'register ($nu_dir | path join $plugin);'
+        }
+    }
+    nu --no-config-file --commands $'($register_cmd) scope commands | select name | to json'
+        | from json
 }
 
 def html-escape [] {
