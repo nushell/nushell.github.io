@@ -37,7 +37,7 @@ const compareDate = (dateA, dateB) => {
 // default env from the deploy GitHub action
 // e.g. ciUser = nushell and ciRepo = nushell.github.io
 // both default to undefined if the env is undefined
-const [ciUser, ciRepo] = process.env.GITHUB_REPOSITORY?.split('/') ?? []
+const [ciUser, ciRepo] = process.env.GITHUB_REPOSITORY?.split('/') ?? [];
 
 export default defineUserConfig({
   // set the base URL to ciRepo dir if it's a fork
@@ -145,7 +145,7 @@ export default defineUserConfig({
         navbar: navbarPtBR,
         sidebar: sidebarPtBR,
       },
-      '/ru': {
+      '/ru/': {
         selectText: 'Языки',
         selectLanguageName: 'Русский язык',
         editLinkText: 'Отредактируйте эту страницу на GitHub',
