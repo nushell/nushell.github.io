@@ -26,7 +26,6 @@ export const sidebarEs: SidebarConfig = {
         '/es/book/mapa_imperativo_nushell',
         '/es/book/mapa_funcional_nushell',
         '/es/book/mapa_operador_nushell',
-        '/book/command_reference.md',
       ],
     },
   ],
