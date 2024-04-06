@@ -25,6 +25,7 @@ export const commandCategories = [
   '/commands/categories/network.md',
   '/commands/categories/path.md',
   '/commands/categories/platform.md',
+  '/commands/categories/prompt.md',
   '/commands/categories/random.md',
   '/commands/categories/removed.md',
   '/commands/categories/shells.md',
