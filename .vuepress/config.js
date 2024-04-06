@@ -112,6 +112,7 @@ export default defineUserConfig({
     lastUpdated: false,
     locales: {
       '/': {
+        lang: 'en-US',
         selectText: 'Languages',
         selectLanguageName: 'English',
         editLinkText: 'Edit this page on GitHub',
@@ -147,6 +148,7 @@ export default defineUserConfig({
         sidebar: sidebarPtBR,
       },
       '/ru/': {
+        lang: 'ru-RU',
         selectText: 'Языки',
         selectLanguageName: 'Русский язык',
         editLinkText: 'Отредактируйте эту страницу на GitHub',
