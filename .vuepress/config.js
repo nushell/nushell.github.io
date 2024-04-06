@@ -1,11 +1,12 @@
 import path from 'path';
 import { defineUserConfig } from '@vuepress/cli';
-import { viteBundler } from '@vuepress/bundler-vite';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { feedPlugin } from '@vuepress/plugin-feed';
+import { viteBundler } from '@vuepress/bundler-vite';
 import { shikiPlugin } from '@vuepress/plugin-shiki';
 import { defaultTheme } from '@vuepress/theme-default';
 import { sitemapPlugin } from '@vuepress/plugin-sitemap';
+import { copyCodePlugin } from '@vuepress/plugin-copy-code';
 import { docsearchPlugin } from '@vuepress/plugin-docsearch';
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom';
@@ -165,6 +166,13 @@ export default defineUserConfig({
     gitPlugin(),
     backToTopPlugin(),
     mediumZoomPlugin(),
+    copyCodePlugin({
+      locales: {
+        '/': {
+          copy: 'Copy Codes from code block',
+        },
+      },
+    }),
     shikiPlugin({
       theme: 'dark-plus',
       langs: [

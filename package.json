@@ -16,6 +16,7 @@
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-rc.9",
     "@vuepress/plugin-back-to-top": "2.0.0-rc.24",
+    "@vuepress/plugin-copy-code": "^2.0.0-rc.24",
     "@vuepress/plugin-docsearch": "2.0.0-rc.24",
     "@vuepress/plugin-feed": "2.0.0-rc.24",
     "@vuepress/plugin-git": "2.0.0-rc.22",
