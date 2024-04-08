@@ -37,7 +37,7 @@ split items by column named "lang"
 > {
     '2019': [
         { name: 'andres', lang: 'rb', year: '2019' },
-        { name: 'st', lang: 'rs', year: '2019' }
+        { name: 'jt', lang: 'rs', year: '2019' }
     ],
     '2021': [
         { name: 'storm', lang: 'rs', 'year': '2021' }
@@ -55,7 +55,7 @@ split items by column named "lang"
 │ rs │ │      │ ╭───┬──────┬──────┬──────╮  │  │
 │    │ │ 2019 │ │ # │ name │ lang │ year │  │  │
 │    │ │      │ ├───┼──────┼──────┼──────┤  │  │
-│    │ │      │ │ 0 │ st   │ rs   │ 2019 │  │  │
+│    │ │      │ │ 0 │ jt   │ rs   │ 2019 │  │  │
 │    │ │      │ ╰───┴──────┴──────┴──────╯  │  │
 │    │ │      │ ╭───┬───────┬──────┬──────╮ │  │
 │    │ │ 2021 │ │ # │ name  │ lang │ year │ │  │
