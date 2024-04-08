@@ -127,7 +127,7 @@ Nu をログインシェルとして利用するには、`path`と`env`変数を
 /bin/rbash
 /usr/bin/screen
 /usr/bin/fish
-/home/jonathan/.cargo/bin/nu
+/home/sophia/.cargo/bin/nu
 ```
 
 これにより、`chsh`で Nu をログインシェルとして設定できるようになります。ログアウト後、次回のログイン時に Nu の素敵なプロンプトが表示されます。

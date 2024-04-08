@@ -89,7 +89,7 @@ $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r
 /bin/rbash
 /usr/bin/screen
 /usr/bin/fish
-/home/jonathan/.cargo/bin/nu
+/home/sophia/.cargo/bin/nu
 ```
 
 这样你就可以使用`chsh`命令来将 Nu 设置为你的登录 Shell。在你注销后下次登录时，应该可以看到一个闪亮的 Nu 提示。

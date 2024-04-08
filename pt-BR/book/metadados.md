@@ -24,7 +24,7 @@ Vamos executar o comando `open` de novo, mas, dessa vez, vamos olhar as tags que
 ----------+------------------------------------------
  span     | origin
 ----------+------------------------------------------
- [object] | /home/jonathan/Source/nushell/Cargo.toml
+ [object] | /home/sophia/Source/nushell/Cargo.toml
 ----------+------------------------------------------
 ```
 

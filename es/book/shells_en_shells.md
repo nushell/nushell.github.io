@@ -7,8 +7,8 @@ Mientras es común trabajar en un directorio puede ser beneficioso trabajar en m
 Para empezar entremos a un directorio:
 
 ```
-/home/jonathan/Source/nushell(master)> enter ../lark
-/home/jonathan/Source/lark(master)> ls
+/home/sophia/Source/nushell(master)> enter ../lark
+/home/sophia/Source/lark(master)> ls
 ----+----------------+-----------+----------+---------+---------------+---------------
  #  | name           | type      | readonly | size    | accessed      | modified
 ----+----------------+-----------+----------+---------+---------------+---------------
@@ -20,12 +20,12 @@ Para empezar entremos a un directorio:
 Entrar es similar a cambiar directorios (como vimos previamente con el comando `cd`). Esto permite saltar al directorio para trabajar dentro del mismo. En lugar de cambiar de directorio, ahora estamos en dos directorios. Para ver esto con más claridad podemos usar el comando `shells` que enumera los directorios actualmente activos:
 
 ```
-/home/jonathan/Source/lark(master)> shells
+/home/sophia/Source/lark(master)> shells
 ---+---+------------+-------------------------------
  # |   | name       | path
 ---+---+------------+-------------------------------
- 0 |   | filesystem | /home/jonathan/Source/nushell
- 1 | X | filesystem | /home/jonathan/Source/lark
+ 0 |   | filesystem | /home/sophia/Source/nushell
+ 1 | X | filesystem | /home/sophia/Source/lark
 ---+---+------------+-------------------------------
 ```
 
@@ -34,9 +34,9 @@ El comando `shells` nos muestra que hay dos shells activos: nuestro directorio f
 Podemos saltar entre estas shells con los accesos directos `n` y `p`, cortos de siguiente "next" y previo "previous":
 
 ```
-/home/jonathan/Source/lark(master)> n
-/home/jonathan/Source/nushell(master)> p
-/home/jonathan/Source/lark(master)>
+/home/sophia/Source/lark(master)> n
+/home/sophia/Source/nushell(master)> p
+/home/sophia/Source/lark(master)>
 ```
 
 Podemos notar el directorio cambiando pero también siempre podremos regresar al directorio previo en el cual estábamos trabajando. Esto nos permite trabajar en múltiples directorio en la misma sesión.

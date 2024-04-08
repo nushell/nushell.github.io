@@ -5,16 +5,16 @@
 Nu is strongly typed and gradually typed.
 
 - Strongly typed : Types are strictly enforced.
-- Gradually typed :  A mix between static (types are checked at compile time) type checks and dynamic (types are checked at runtime).
+- Gradually typed : A mix between static (types are checked at compile time) type checks and dynamic (types are checked at runtime).
 
 Gradual typing is a clarification of optional typing where the developer
 could choose or not choose to add type annotations to declarations. This paper
-from  Jeremy Siek is here: [What is Gradual Typing?](https://wphomes.soic.indiana.edu/jsiek/what-is-gradual-typing/)
+from Jeremy Siek is here: [What is Gradual Typing?](https://wphomes.soic.indiana.edu/jsiek/what-is-gradual-typing/)
 
 ### The infix type operators
 
-- ` : ` Read as `is type of`
-- ` -> ` Read as becomes type of or as `to type of` in custom commands in the return type position
+- `:` Read as `is type of`
+- `->` Read as becomes type of or as `to type of` in custom commands in the return type position
 
 ### Type signatures
 
@@ -49,11 +49,11 @@ There are 3 forms of valid type signatures in Nu:
 
 - Basic: E.g. int, bool, string etc.
 - Compound:
-  * `list<string>`, 
-`record<type: int, bar: string>`
+  - `list<string>`,
+    `record<type: int, bar: string>`
 - Multiple: Enumerations of the above kinds delimited by commas `, `
-  * `<string, int>`
-  * These can only be used for return types
+  - `<string, int>`
+  - These can only be used for return types
 
 ### Custom command parameters and flags
 
@@ -63,9 +63,9 @@ types of parameters.
 
 #### Parameters
 
-If a parameter to a custom command or a closure is type annotated then  it will
-have the ` : ` operator after the name followed by the type signature
-and before any  default value.
+If a parameter to a custom command or a closure is type annotated then it will
+have the `:` operator after the name followed by the type signature
+and before any default value.
 
 E.g. Here is a fully articulated parameter with a type annotation.
 
@@ -119,9 +119,9 @@ E.g.
 - `inspect`
 - `help`
 - `into (subcommands)`
-  * The into commands are used to cast one type into another.
+  - The into commands are used to cast one type into another.
 - `ast`
-  * In the branches of abstract syntax tree that describe the type of some element
+  - In the branches of abstract syntax tree that describe the type of some element
 
 ## Basic Types
 
@@ -132,7 +132,7 @@ See: `nushell/crates/nu-protocol/src/value/mod.rs` (about line 47)
 
 What it is: The `any` type is an universal type that matches anything.
 
-What are possible values: There is no literal version of an `any` type.  Any literal value can be assigned to an `any` type.
+What are possible values: There is no literal version of an `any` type. Any literal value can be assigned to an `any` type.
 
 In other words, the `any` type is a superset of all other types.
 
@@ -170,7 +170,6 @@ takes-anything foo
 # => string
 ```
 
-
 ### Bool
 
 What it is: A logical data type that can have only `true` or `false` values.
@@ -206,12 +205,12 @@ For a complete list see: `help into bool`.
 
 - `if`, `while`
 - `match`
-  * in clauses where the expression matches the clause expression, or the `_` value which is always true
+  - in clauses where the expression matches the clause expression, or the `_` value which is always true
 - `any`, `all`, `skip until`, `skip while`, `take until`, `take while`
-  * when the closure returns bool value
+  - when the closure returns bool value
 - `where`
 - `filter`
-  * when closure returns the bool value of true or false
+  - when closure returns the bool value of true or false
 - `is-empty`, `is-not-empty`
 - `is-admin`
 - `is-terminal`
@@ -223,7 +222,7 @@ For a complete list see: `help into bool`.
 - `in`
 - `=~`, `!~` `<regex>`
 - `ends-with`, `starts-with`
-  * String comparison operators
+  - String comparison operators
 
 ### Int
 
@@ -244,7 +243,6 @@ Can be used for indexing into `List`s or `String`s
 The command `into int` can be used to convert other types of data into integers.
 For a full list of possible inputs, see `help into int`
 
-
 ### Float
 
 What it is: Real numeric values using floating point internal arithmetic.
@@ -258,10 +256,9 @@ Literals with a fractional decimal component are evaluated as `Float`: `0.1`, `3
 TBD: semantics for comparison, NaN/InF. Future hashing.
 
 #### Casts
+
 The command `into float` can be used to convert other data types into floats.
 See the command: `help into float` fro a complete list of input data types.
-
-
 
 ### Filesize
 
@@ -325,7 +322,7 @@ Note: The where command and other filters can use filesize in comparison express
 
 ### Duration
 
-What it is:  A value representing a unit of passage of time.
+What it is: A value representing a unit of passage of time.
 
 Annotation: `duration`
 
@@ -334,7 +331,7 @@ Durations are internally stored as a number of nanoseconds.
 ##### Literals
 
 to form a Duration literal you need to combine a numeric value with a a unit of time.
-The  numeric literal part must be a signed integer or floating point number literal.
+The numeric literal part must be a signed integer or floating point number literal.
 The unit part must be one of a specific set of strings listed below.
 
 ```
@@ -375,25 +372,21 @@ And you can do calculations with durations:
 # => 2592000
 ```
 
-
 Note: Months, years, centuries and milliniums are not precise as to the exact
 number of nanoseconds thus are not valid duration literals.You are free to make
-your   own constants for specific months or years.
-
+your own constants for specific months or years.
 
 #### Casts
 
 The command `into duration` will convert various other data types into a duration. and is quite flexible. For a complete list of possible inputs, see `help into duration`
 
-
 #### Commands that use duration
 
 - `sleep`
 - `where`
-  * In the comparison expression
+  - In the comparison expression
 - `ps`
 - `sys`
-
 
 ##### Operators that use duration
 
@@ -402,7 +395,7 @@ The command `into duration` will convert various other data types into a duratio
 
 ### Date
 
-What it is:  A value representing a specific point in time using international standard  date time descriptors.
+What it is: A value representing a specific point in time using international standard date time descriptors.
 
 Annotation: `datetime`
 
@@ -417,13 +410,10 @@ Dates are in three forms, based on the RFC 3339 standard:
 - A date and time with timezone:
   - `2022-02-02T14:30:00+05:00`
 
-
-
 #### Casts
 
 The command `into datetime` can be used to convert many other data types
-into dates.  See: `help into datetime` for a full list of inputs.
-
+into dates. See: `help into datetime` for a full list of inputs.
 
 #### Commands that use datetime
 
@@ -439,7 +429,7 @@ for fields and expressions.
 
 What it is: A range describes a range of values from a starting value to an ending value, with an optional stride.
 
- Values are separated by `..` to create a range.
+Values are separated by `..` to create a range.
 
 Annotation:`range`
 
@@ -515,7 +505,7 @@ Many commands takes strings as inputs or parameters.
 These commands work with strings explicitly
 
 - `str (subcommand)`
-  * For a complete list of subcommands, see: `help str`
+  - For a complete list of subcommands, see: `help str`
 - `into string`
 - `ansi strip`
 - `is-empty`
@@ -534,7 +524,6 @@ as inputs.
 - `>=` : True if the left string is greater or equal than the right string
 - `<` : True if the left string is less than the right string
 - `<=` : True if the left string is less or equal than the right string
-
 
 ### Record
 
@@ -603,6 +592,7 @@ Since lists, records and tables form the backbone of Nushell's structured nature
 there are too many commands to list here.
 
 Here are a few
+
 - `any`
 - `all`
 - `get`
@@ -612,15 +602,15 @@ Here are a few
 - `skip`, `skip until`, `skip while`, `take`, `take until`, `take while`
 - `first`, `last`, `length`
 - `insert`, `update`, `upsert`, `append`
-See also the `to (subcommands)` and `from (subcommands)` for more examples.
+  See also the `to (subcommands)` and `from (subcommands)` for more examples.
 - `where`
 - `match`
-  * Can destructure a list
+  - Can destructure a list
 
 ##### Operators that use list
 
 - in For set membership
-  * `not (12 in [1 2 3])` for inverse set membership
+  - `not (12 in [1 2 3])` for inverse set membership
 
 ### Table
 
@@ -628,7 +618,7 @@ What it is: A table is a two-dimensional container with both columns and rows.
 
 Annotation: `table`
 
- There are two ways to write a table. These two examples are equivalent:
+There are two ways to write a table. These two examples are equivalent:
 
 ```nu
 [[a, b]; [1, 2], [3, 4]]
@@ -662,12 +652,12 @@ What it is: A closure is an anonymous function which is also often called a lamb
 
 Annotation: `closure`
 
-Closures are used in Nu extensively as parameters to iteration style commands like each, filter and reduce, to name but a few. A closure acts like a custom command that can be invoked either explicitly or by other commands. Closures can take parameters, return values and be passed to commands, either builtin or custom. You cannot pass a closure to an external command, they  are reserved only for Nu usage You can also assign a closure to a variable, be included as elements in a list or as a value in a record.
+Closures are used in Nu extensively as parameters to iteration style commands like each, filter and reduce, to name but a few. A closure acts like a custom command that can be invoked either explicitly or by other commands. Closures can take parameters, return values and be passed to commands, either builtin or custom. You cannot pass a closure to an external command, they are reserved only for Nu usage You can also assign a closure to a variable, be included as elements in a list or as a value in a record.
 
 Closures can also consume input from a pipeline. and pass data further to the next item in a pipeline.
 
 As closures are closely related to functions or commands, they can also have parameters that are typed. The special variable $in (the value of
-the input from the pipeline) is also available to a closure. You can also pass closures themselves into a pipe line assuming the next  command knows how to consume it. Closures can be returned from a custom command and can also be returned from another closure.
+the input from the pipeline) is also available to a closure. You can also pass closures themselves into a pipe line assuming the next command knows how to consume it. Closures can be returned from a custom command and can also be returned from another closure.
 
 #### Declaring a closure
 
@@ -691,7 +681,7 @@ do $cl 34 8
 # => 42
 ```
 
-Using `$cl` from the previous example, we invoke it with the  `do` keyword and pass it  integers, 34 and 8. When it runs, it computes the sum and returns 42.
+Using `$cl` from the previous example, we invoke it with the `do` keyword and pass it integers, 34 and 8. When it runs, it computes the sum and returns 42.
 
 #### Using a closure as a parameter to an iteration command
 
@@ -706,7 +696,7 @@ We can use our `$evens` closure to filter our list.
 
 #### Capturing values from an outer scope
 
-Closures can also remember values  declared in some outer scope and then use them for processing when invoked. If it must be done explicitly. There are some restrictions on the kind of external values that can be closed over. Only immutable variables like those created with the `let` keyword or parameters to a custom command  can be captured in a closure. Mutable variables created with the `mut` keyword cannot be captured in a closure. However, you can mutate an `$env` variable if used by the `--env` flag passed to the `do` keyword.
+Closures can also remember values declared in some outer scope and then use them for processing when invoked. If it must be done explicitly. There are some restrictions on the kind of external values that can be closed over. Only immutable variables like those created with the `let` keyword or parameters to a custom command can be captured in a closure. Mutable variables created with the `mut` keyword cannot be captured in a closure. However, you can mutate an `$env` variable if used by the `--env` flag passed to the `do` keyword.
 
 ```nu
 def "create lambda" [x: int] {
@@ -791,7 +781,7 @@ What it is: A pattern to match pathnames in a filesystem.
 
 Annotation: `glob`
 
-Nu supports creating a value as a glob, it's similar to string, but if you pass it to some commands that support glob pattern(e.g: `open`), it will be expanded.  It's best to see difference between `glob` and `string` by example:
+Nu supports creating a value as a glob, it's similar to string, but if you pass it to some commands that support glob pattern(e.g: `open`), it will be expanded. It's best to see difference between `glob` and `string` by example:
 
 ```nu
 let f = "a*c.txt"   # a string type.
@@ -852,8 +842,8 @@ foo.nu bar.nu
 # => foo.nu bar.nu baz.nu
 ```
 
-Another caveat when using Nushell over  traditional shells is the `ls` command.
-The ls command only takes a single glob pattern argument. which it internally  expands.
+Another caveat when using Nushell over traditional shells is the `ls` command.
+The ls command only takes a single glob pattern argument. which it internally expands.
 
 ```nu
 # Try to expand the glob ourselves
@@ -861,7 +851,7 @@ ls (glob *.nu)
 # Error [TODO: Show the actual error]
 ```
 
-Globs can also represent directory trees recursively. In Unix like systems you might use a combination of the  `find` and `xargs` commands to operate on directory trees. In Nushell, it is more idiomatic to use this pattern:
+Globs can also represent directory trees recursively. In Unix like systems you might use a combination of the `find` and `xargs` commands to operate on directory trees. In Nushell, it is more idiomatic to use this pattern:
 
 ```nu
 # Nostalgic for the Good Ole DOS days?
@@ -885,7 +875,7 @@ glob $g
 
 #### Escaping globs
 
-Sometimes you might want to not let a command expand a possible  glob pattern before executing. You can use the `str escape-glob` command for this.
+Sometimes you might want to not let a command expand a possible glob pattern before executing. You can use the `str escape-glob` command for this.
 
 Note: As of Release 0.91.0 of Nu, `str escape-glob` is deprecated.
 
@@ -969,7 +959,7 @@ you are trying to extract from. Note that the above table could also be accessed
 let cp = $.temps.0.2
 ```
 
-In this case, the first part: `$.temps` will return a list of the entire temps column from the table.  Then the `.0` part will get the list in that row and the `.2` part will get the 3rd item from that list.
+In this case, the first part: `$.temps` will return a list of the entire temps column from the table. Then the `.0` part will get the list in that row and the `.2` part will get the 3rd item from that list.
 
 #### Using cell-path as a type annotation
 
@@ -1016,8 +1006,8 @@ See `help into cell-path` for full description and further examples.
 
 ## Types that cannot be used to declare variables
 
-These type annotations can be used for custom command  signatures but
- cannot be used to type variables.
+These type annotations can be used for custom command signatures but
+cannot be used to type variables.
 
 ### Path
 
@@ -1046,13 +1036,13 @@ There is no `into path` command, but these 2 commands might fit the bill:
 #### Commands that use path
 
 - `path (subcommands)`
-  * See: `help path` for a full list
+  - See: `help path` for a full list
 
 ## Other data types
 
 ### Lazy Make
 
-What it is:  A type of record that invokes a closure when a field is requested.
+What it is: A type of record that invokes a closure when a field is requested.
 
 Annotation: None.
 
@@ -1073,7 +1063,7 @@ $lr.nushell
 
 #### How to discriminate between fields in the lazy record
 
-That is up to you as the value of the key is passed to the closure when ever the key is  requested. One way to do something different is to use a match expression in the body of the closure:
+That is up to you as the value of the key is passed to the closure when ever the key is requested. One way to do something different is to use a match expression in the body of the closure:
 
 #### Example 2
 
@@ -1092,7 +1082,7 @@ $lr | get coke
 
 #### Using lazy records with cell paths
 
-A lazy record will invoke the closure when operated on in a cell path context. The value of the result will be determined by the result  of calling the closure and passing the key of the field as a parameter.
+A lazy record will invoke the closure when operated on in a cell path context. The value of the result will be determined by the result of calling the closure and passing the key of the field as a parameter.
 
 Keeping this in mind, if the closure returns some kind of Nu structured data that also participates in cell path contexts, then further parts of the cell path will continue to work.
 
@@ -1118,7 +1108,7 @@ $lr.rec2.color
 
 ## Types not exposed to scripts
 
-the following data types are valid Nushell data  types but cannot be declared in user scripts. They are used by Nushell internally or by plugins or  commands compiled in Nushell like DataFrames and SQLite database.
+the following data types are valid Nushell data types but cannot be declared in user scripts. They are used by Nushell internally or by plugins or commands compiled in Nushell like DataFrames and SQLite database.
 
 ### Error
 
@@ -1145,11 +1135,11 @@ What it is: An opaque data type that is used internal to Nushell by compiled in 
 
 Annotation: None
 
-Custom values are values that might be created vy Nushell internal commands or plugins. For instance, a plugin might generate a custom value  that encodes data in a binary format or some other data type  like structured data used by DataFrames or SQLite.
+Custom values are values that might be created vy Nushell internal commands or plugins. For instance, a plugin might generate a custom value that encodes data in a binary format or some other data type like structured data used by DataFrames or SQLite.
 
 Note: Custom values used by external commands are not this data type.
 
-You might encounter a custom value   in your interaction with parts of Nushell. Depending on the specific example,  you should let the command handle it as described in the help documentation for that command or plugin.
+You might encounter a custom value in your interaction with parts of Nushell. Depending on the specific example, you should let the command handle it as described in the help documentation for that command or plugin.
 
 There is not necessarily a string representation of any custom value.
 
@@ -1178,11 +1168,11 @@ ls | dfr into-df | describe
 
 What it is: A syntactic. form used by some Nushell keywords.
 
-A block is any Nushell code enclosed in curly braces: `{`, `}` but only when used in some specific Nushell constructs. In other cases code enclosed between braces is  a closure.
+A block is any Nushell code enclosed in curly braces: `{`, `}` but only when used in some specific Nushell constructs. In other cases code enclosed between braces is a closure.
 
 A block is not a data type like a closure and cannot be used to type a variable or custom command parameter, its input type or its return type. You will get a type error if you try this.
 
-Note:  A closure that takes no parameters may look like a block but is actually a closure.
+Note: A closure that takes no parameters may look like a block but is actually a closure.
 
 E.g.
 
@@ -1194,7 +1184,7 @@ E.g.
 # => closure
 ```
 
-A block establishes a new variable scope. Variables defined within the new scope having the same name as a variable  in an outer scope will alias that name for the lifetime of that block's scope.
+A block establishes a new variable scope. Variables defined within the new scope having the same name as a variable in an outer scope will alias that name for the lifetime of that block's scope.
 
 E.g.
 
@@ -1227,7 +1217,7 @@ if true { $x += 1 }
 # => 10
 ```
 
-Note:  Aliasing still occurs within the block:
+Note: Aliasing still occurs within the block:
 
 ```nu
 mut x = 9
@@ -1244,13 +1234,12 @@ These are the Nushell constructs that use a block
 - `while`
 - `for`
 - `try`
-  * But not the body of the catch clause which is always a closure
+  - But not the body of the catch clause which is always a closure
 
 Note: For both the if/else and try statements, the value of the last expression in the block for whichever clause is executed is returned. This is not true
-for any of the looping constructs.   If you try to assign the result of calling a for or while loop the type of the result will always be `nothing`.
+for any of the looping constructs. If you try to assign the result of calling a for or while loop the type of the result will always be `nothing`.
 
 To capture the result of a loop, you can define a mutable variable before the loop and mutate it inside the body of the loop. However, the more idiomatic Nushell way to do it is with a command like `each` which takes a closure. The last expression evaluated in the closure is returned and available to further items in the pipeline.
-
 
 ## Numbers and Arithmetic
 
@@ -1457,7 +1446,7 @@ Here are some ways we see/use backtick quotes.
 1. If you're using Tab to complete directories with spaces, backtick quotes will be used to wrap the string. The only issue with this is that when you want to complete the next folder after one with a space, you have to move the cursor backward inside the last backtick quote before you hit tab again to complete the next level or file.
 2. Backtick quotes do not work in string interpolation. Should they?
 3. I believe backtick quotes can be used the same way as double quotes and single quotes but they do not recognize and interpret escapes.
-4. Another definition from Kubouch is backtick quotes are supposed to be like `bare words` that support spaces. As an example JT just landed a PR that allows backtick quotes to autocd. So, in Windows, if you're at `C:\` you could type `` `Program Files` `` and it would change to that directory.
+4. Another definition from Kubouch is backtick quotes are supposed to be like `bare words` that support spaces. As an example Sophia just landed a PR that allows backtick quotes to autocd. So, in Windows, if you're at `C:\` you could type `` `Program Files` `` and it would change to that directory.
 
 ## Nested Quotes
 

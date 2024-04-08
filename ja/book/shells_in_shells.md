@@ -7,8 +7,8 @@
 まずはじめに、ディレクトリを入力しましょう。
 
 ```
-/home/jonathan/Source/nushell(main)> enter ../book
-/home/jonathan/Source/book(main)> ls
+/home/sophia/Source/nushell(main)> enter ../book
+/home/sophia/Source/book(main)> ls
 ────┬────────────────────┬──────┬────────┬─────────────
  #  │ name               │ type │ size   │ modified
 ────┼────────────────────┼──────┼────────┼─────────────
@@ -21,14 +21,14 @@
 `enter`はディレクトリの変更に似ています(`cd`コマンドでみたように)。これによりディレクトリにジャンプして作業することができます。ディレクトリを変更するかわりに、今２つのディレクトリの中にいます。このことをより明確にするために、`shells`コマンドを実行して、アクティブな現在のディレクトリの一覧を表示してみましょう。
 
 ```
-/home/jonathan/Source/book(main)> enter ../music
-/home/jonathan/Source/music(main)> shells
+/home/sophia/Source/book(main)> enter ../music
+/home/sophia/Source/music(main)> shells
 ───┬────────┬───────────────────────────────
  # │ active │             path
 ───┼────────┼───────────────────────────────
- 0 │ false  │ /home/jonathan/Source/nushell
- 1 │ false  │ /home/jonathan/Source/book
- 2 │ true   │ /home/jonathan/Source/music
+ 0 │ false  │ /home/sophia/Source/nushell
+ 1 │ false  │ /home/sophia/Source/book
+ 2 │ true   │ /home/sophia/Source/music
 ───┴────────┴───────────────────────────────
 ```
 
@@ -37,10 +37,10 @@
 "next"、"previous"、"goto"のショートカットである`n`、`p`、`g`を利用して、これらのシェルを行き来できます。
 
 ```
-/home/jonathan/Source/music(main)> p
-/home/jonathan/Source/book(main)> n
-/home/jonathan/Source/music(main)> g 0
-/home/jonathan/Source/nushell(main)>
+/home/sophia/Source/music(main)> p
+/home/sophia/Source/book(main)> n
+/home/sophia/Source/music(main)> g 0
+/home/sophia/Source/nushell(main)>
 ```
 
 ディレクトリを変更できることがわかります。そしていつでも元いた作業ディレクトリに戻ることができるのです。これにより、同じセッションにいながら複数のディレクトリで作業できます。

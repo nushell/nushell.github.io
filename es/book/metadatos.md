@@ -24,7 +24,7 @@ Nuevamente ejecutemos el comando `open` pero esta vez observaremos las etiquetas
 ----------+------------------------------------------
  span     | anchor
 ----------+------------------------------------------
- [object] | /home/jonathan/Source/nushell/Cargo.toml
+ [object] | /home/sophia/Source/nushell/Cargo.toml
 ----------+------------------------------------------
 ```
 

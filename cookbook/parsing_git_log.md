@@ -28,9 +28,9 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5
 
 ```
 42f1874a»¦«Update some examples and docs (#4682)»¦«Justin Ma»¦«hustcer@outlook.com»¦«Tue, 1 Mar 2022 21:05:29 +0800
-2a89936b»¦«Move to latest stable crossterm, with fix (#4684)»¦«JT»¦«547158+jntrnr@users.noreply.github.com»¦«Tue, 1 Mar 2022 07:05:46 -0500
+2a89936b»¦«Move to latest stable crossterm, with fix (#4684)»¦«Sophia»¦«547158+sophiajt@users.noreply.github.com»¦«Tue, 1 Mar 2022 07:05:46 -0500
 ece5e7db»¦«dataframe list command (#4681)»¦«Fernando Herrera»¦«fernando.j.herrera@gmail.com»¦«Tue, 1 Mar 2022 11:41:13 +0000
-a6a96b29»¦«Add binary literals (#4680)»¦«JT»¦«547158+jntrnr@users.noreply.github.com»¦«Mon, 28 Feb 2022 18:31:53 -0500
+a6a96b29»¦«Add binary literals (#4680)»¦«Sophia»¦«547158+sophiajt@users.noreply.github.com»¦«Mon, 28 Feb 2022 18:31:53 -0500
 e3100e6a»¦«Fix alias in `docs/sample_config/config.toml` (#4669)»¦«Luca Trevisani»¦«lucatrv@hotmail.com»¦«Mon, 28 Feb 2022 22:47:14 +0100
 ```
 
@@ -47,10 +47,10 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines
  0 │ 42f1874a»¦«Update some examples and docs (#4682)»¦«Justin Ma»¦«hustcer@outlook.com»¦«Tue, 1 Mar
    │ 2022 21:05:29 +0800
  1 │ 2a89936b»¦«Move to latest stable crossterm, with fix
-   │ (#4684)»¦«JT»¦«547158+jntrnr@users.noreply.github.com»¦«Tue, 1 Mar 2022 07:05:46 -0500
+   │ (#4684)»¦«Sophia»¦«547158+sophiajt@users.noreply.github.com»¦«Tue, 1 Mar 2022 07:05:46 -0500
  2 │ ece5e7db»¦«dataframe list command (#4681)»¦«Fernando
    │ Herrera»¦«fernando.j.herrera@gmail.com»¦«Tue, 1 Mar 2022 11:41:13 +0000
- 3 │ a6a96b29»¦«Add binary literals (#4680)»¦«JT»¦«547158+jntrnr@users.noreply.github.com»¦«Mon, 28
+ 3 │ a6a96b29»¦«Add binary literals (#4680)»¦«Sophia»¦«547158+sophiajt@users.noreply.github.com»¦«Mon, 28
    │ Feb 2022 18:31:53 -0500
  4 │ e3100e6a»¦«Fix alias in `docs/sample_config/config.toml` (#4669)»¦«Luca
    │ Trevisani»¦«lucatrv@hotmail.com»¦«Mon, 28 Feb 2022 22:47:14 +0100
@@ -66,23 +66,23 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split colu
 ```
 
 ```
-───┬──────────┬──────────────────────┬──────────────────┬──────────────────────┬──────────────────
- # │ column1  │       column2        │     column3      │       column4        │     column5
-───┼──────────┼──────────────────────┼──────────────────┼──────────────────────┼──────────────────
- 0 │ 42f1874a │ Update some examples │ Justin Ma        │ hustcer@outlook.com  │ Tue, 1 Mar 2022
-   │          │ and docs (#4682)     │                  │                      │ 21:05:29 +0800
- 1 │ 2a89936b │ Move to latest       │ JT               │ 547158+jntrnr@users. │ Tue, 1 Mar 2022
-   │          │ stable crossterm,    │                  │ noreply.github.com   │ 07:05:46 -0500
-   │          │ with fix (#4684)     │                  │                      │
- 2 │ ece5e7db │ dataframe list       │ Fernando Herrera │ fernando.j.herrera@g │ Tue, 1 Mar 2022
-   │          │ command (#4681)      │                  │ mail.com             │ 11:41:13 +0000
- 3 │ a6a96b29 │ Add binary literals  │ JT               │ 547158+jntrnr@users. │ Mon, 28 Feb 2022
-   │          │ (#4680)              │                  │ noreply.github.com   │ 18:31:53 -0500
- 4 │ e3100e6a │ Fix alias in         │ Luca Trevisani   │ lucatrv@hotmail.com  │ Mon, 28 Feb 2022
-   │          │ `docs/sample_config/ │                  │                      │ 22:47:14 +0100
-   │          │ config.toml`         │                  │                      │
-   │          │ (#4669)              │                  │                      │
-───┴──────────┴──────────────────────┴──────────────────┴──────────────────────┴──────────────────
+───┬──────────┬──────────────────────┬──────────────────┬────────────────────────┬──────────────────
+ # │ column1  │       column2        │     column3      │       column4          │     column5
+───┼──────────┼──────────────────────┼──────────────────┼────────────────────────┼──────────────────
+ 0 │ 42f1874a │ Update some examples │ Justin Ma        │ hustcer@outlook.com    │ Tue, 1 Mar 2022
+   │          │ and docs (#4682)     │                  │                        │ 21:05:29 +0800
+ 1 │ 2a89936b │ Move to latest       │ Sophia           │ 547158+sophiajt@users. │ Tue, 1 Mar 2022
+   │          │ stable crossterm,    │                  │ noreply.github.com     │ 07:05:46 -0500
+   │          │ with fix (#4684)     │                  │                        │
+ 2 │ ece5e7db │ dataframe list       │ Fernando Herrera │ fernando.j.herrera@g   │ Tue, 1 Mar 2022
+   │          │ command (#4681)      │                  │ mail.com               │ 11:41:13 +0000
+ 3 │ a6a96b29 │ Add binary literals  │ Sophia           │ 547158+sophiajt@users. │ Mon, 28 Feb 2022
+   │          │ (#4680)              │                  │ noreply.github.com     │ 18:31:53 -0500
+ 4 │ e3100e6a │ Fix alias in         │ Luca Trevisani   │ lucatrv@hotmail.com    │ Mon, 28 Feb 2022
+   │          │ `docs/sample_config/ │                  │                        │ 22:47:14 +0100
+   │          │ config.toml`         │                  │                        │
+   │          │ (#4669)              │                  │                        │
+───┴──────────┴──────────────────────┴──────────────────┴────────────────────────┴──────────────────
 ```
 
 Yay, for columns! But wait, it would really be nice if those columns had something other than generically named column names.
@@ -96,23 +96,23 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split colu
 Ahhh, that looks much better.
 
 ```
-───┬──────────┬──────────────────────┬──────────────────┬──────────────────────┬──────────────────
- # │  commit  │       subject        │       name       │        email         │       date
-───┼──────────┼──────────────────────┼──────────────────┼──────────────────────┼──────────────────
- 0 │ 42f1874a │ Update some examples │ Justin Ma        │ hustcer@outlook.com  │ Tue, 1 Mar 2022
-   │          │ and docs (#4682)     │                  │                      │ 21:05:29 +0800
- 1 │ 2a89936b │ Move to latest       │ JT               │ 547158+jntrnr@users. │ Tue, 1 Mar 2022
-   │          │ stable crossterm,    │                  │ noreply.github.com   │ 07:05:46 -0500
-   │          │ with fix (#4684)     │                  │                      │
- 2 │ ece5e7db │ dataframe list       │ Fernando Herrera │ fernando.j.herrera@g │ Tue, 1 Mar 2022
-   │          │ command (#4681)      │                  │ mail.com             │ 11:41:13 +0000
- 3 │ a6a96b29 │ Add binary literals  │ JT               │ 547158+jntrnr@users. │ Mon, 28 Feb 2022
-   │          │ (#4680)              │                  │ noreply.github.com   │ 18:31:53 -0500
- 4 │ e3100e6a │ Fix alias in         │ Luca Trevisani   │ lucatrv@hotmail.com  │ Mon, 28 Feb 2022
-   │          │ `docs/sample_config/ │                  │                      │ 22:47:14 +0100
-   │          │ config.toml`         │                  │                      │
-   │          │ (#4669)              │                  │                      │
-───┴──────────┴──────────────────────┴──────────────────┴──────────────────────┴──────────────────
+───┬──────────┬──────────────────────┬──────────────────┬────────────────────────┬──────────────────
+ # │  commit  │       subject        │       name       │        email           │       date
+───┼──────────┼──────────────────────┼──────────────────┼────────────────────────┼──────────────────
+ 0 │ 42f1874a │ Update some examples │ Justin Ma        │ hustcer@outlook.com    │ Tue, 1 Mar 2022
+   │          │ and docs (#4682)     │                  │                        │ 21:05:29 +0800
+ 1 │ 2a89936b │ Move to latest       │ Sophia           │ 547158+sophiajt@users. │ Tue, 1 Mar 2022
+   │          │ stable crossterm,    │                  │ noreply.github.com     │ 07:05:46 -0500
+   │          │ with fix (#4684)     │                  │                        │
+ 2 │ ece5e7db │ dataframe list       │ Fernando Herrera │ fernando.j.herrera@g   │ Tue, 1 Mar 2022
+   │          │ command (#4681)      │                  │ mail.com               │ 11:41:13 +0000
+ 3 │ a6a96b29 │ Add binary literals  │ Sophia           │ 547158+sophiajt@users. │ Mon, 28 Feb 2022
+   │          │ (#4680)              │                  │ noreply.github.com     │ 18:31:53 -0500
+ 4 │ e3100e6a │ Fix alias in         │ Luca Trevisani   │ lucatrv@hotmail.com    │ Mon, 28 Feb 2022
+   │          │ `docs/sample_config/ │                  │                        │ 22:47:14 +0100
+   │          │ config.toml`         │                  │                        │
+   │          │ (#4669)              │                  │                        │
+───┴──────────┴──────────────────────┴──────────────────┴────────────────────────┴──────────────────
 ```
 
 Hmmm, that date string is a string. If it were a date vs a string it could be used for sorting by date. The way we do that is we have to convert the datetime to a real datetime and update the column. Try this.
@@ -124,23 +124,23 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 5 | lines | split colu
 Now this looks more nu-ish
 
 ```
-───┬──────────┬──────────────────────────┬──────────────────┬──────────────────────────┬──────────────
- # │  commit  │         subject          │       name       │          email           │     date
-───┼──────────┼──────────────────────────┼──────────────────┼──────────────────────────┼──────────────
- 0 │ 42f1874a │ Update some examples and │ Justin Ma        │ hustcer@outlook.com      │ 7 hours ago
-   │          │ docs (#4682)             │                  │                          │
- 1 │ 2a89936b │ Move to latest stable    │ JT               │ 547158+jntrnr@users.nore │ 8 hours ago
-   │          │ crossterm, with fix      │                  │ ply.github.com           │
-   │          │ (#4684)                  │                  │                          │
- 2 │ ece5e7db │ dataframe list command   │ Fernando Herrera │ fernando.j.herrera@gmail │ 8 hours ago
-   │          │ (#4681)                  │                  │ .com                     │
- 3 │ a6a96b29 │ Add binary literals      │ JT               │ 547158+jntrnr@users.nore │ 20 hours ago
-   │          │ (#4680)                  │                  │ ply.github.com           │
- 4 │ e3100e6a │ Fix alias in             │ Luca Trevisani   │ lucatrv@hotmail.com      │ a day ago
-   │          │ `docs/sample_config/conf │                  │                          │
-   │          │ ig.toml`                 │                  │                          │
-   │          │ (#4669)                  │                  │                          │
-───┴──────────┴──────────────────────────┴──────────────────┴──────────────────────────┴──────────────
+───┬──────────┬──────────────────────────┬──────────────────┬────────────────────────────┬──────────────
+ # │  commit  │         subject          │       name       │          email             │     date
+───┼──────────┼──────────────────────────┼──────────────────┼────────────────────────────┼──────────────
+ 0 │ 42f1874a │ Update some examples and │ Justin Ma        │ hustcer@outlook.com        │ 7 hours ago
+   │          │ docs (#4682)             │                  │                            │
+ 1 │ 2a89936b │ Move to latest stable    │ Sophia           │ 547158+sophiajt@users.nore │ 8 hours ago
+   │          │ crossterm, with fix      │                  │ ply.github.com             │
+   │          │ (#4684)                  │                  │                            │
+ 2 │ ece5e7db │ dataframe list command   │ Fernando Herrera │ fernando.j.herrera@gmail   │ 8 hours ago
+   │          │ (#4681)                  │                  │ .com                       │
+ 3 │ a6a96b29 │ Add binary literals      │ Sophia           │ 547158+sophiajt@users.nore │ 20 hours ago
+   │          │ (#4680)                  │                  │ ply.github.com             │
+ 4 │ e3100e6a │ Fix alias in             │ Luca Trevisani   │ lucatrv@hotmail.com        │ a day ago
+   │          │ `docs/sample_config/conf │                  │                            │
+   │          │ ig.toml`                 │                  │                            │
+   │          │ (#4669)                  │                  │                            │
+───┴──────────┴──────────────────────────┴──────────────────┴────────────────────────────┴──────────────
 ```
 
 If we want to revert back to a date string we can do something like this with the `nth` command and the `get` command.
@@ -161,69 +161,69 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
 ```
 
 ```
-────┬──────────┬──────────────────────────┬───────────────────┬─────────────────────────┬──────────────
- #  │  commit  │         subject          │       name        │          email          │     date
-────┼──────────┼──────────────────────────┼───────────────────┼─────────────────────────┼──────────────
-  0 │ 0c3ea636 │ Add support for stderr   │ JT                │ 547158+jntrnr@users.nor │ 4 days ago
-    │          │ and exit code (#4647)    │                   │ eply.github.com         │
-  1 │ ed46f0ea │ fix: add missing         │ Jae-Heon Ji       │ 32578710+jaeheonji@user │ 3 days ago
-    │          │ metadata for `ls_colors` │                   │ s.noreply.github.com    │
-    │          │ (#4603)                  │                   │                         │
-  2 │ 3eca43c0 │ Plugins without file     │ Fernando Herrera  │ fernando.j.herrera@gmai │ 3 days ago
-    │          │ (#4650)                  │                   │ l.com                   │
-  3 │ 11bc0565 │ Find with regex flag     │ Fernando Herrera  │ fernando.j.herrera@gmai │ 3 days ago
-    │          │ (#4649)                  │                   │ l.com                   │
-  4 │ d2bd71d2 │ add LAST_EXIT_CODE       │ LordMZTE          │ lord@mzte.de            │ 3 days ago
-    │          │ variable (#4655)         │                   │                         │
-  5 │ 799fa984 │ Update reedline, revert  │ Stefan Holderbach │ sholderbach@users.norep │ 3 days ago
-    │          │ crossterm (#4657)        │                   │ ly.github.com           │
-  6 │ 995757c0 │ flags for find (#4663)   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
-    │          │                          │                   │ l.com                   │
-  7 │ 446c2aab │ Lets internals also      │ JT                │ 547158+jntrnr@users.nor │ 2 days ago
-    │          │ have exit codes (#4664)  │                   │ eply.github.com         │
-  8 │ 10ceac99 │ menu keybindings in      │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
-    │          │ default file (#4651)     │                   │ l.com                   │
-  9 │ 4ebbe07d │ Polars upgrade (#4665)   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
-    │          │                          │                   │ l.com                   │
- 10 │ 78192100 │ Add shortcircuiting      │ JT                │ 547158+jntrnr@users.nor │ 2 days ago
-    │          │ boolean operators        │                   │ eply.github.com         │
-    │          │ (#4668)                  │                   │                         │
- 11 │ 796d4920 │ add char separators      │ Darren Schroeder  │ 343840+fdncred@users.no │ 2 days ago
-    │          │ (#4667)                  │                   │ reply.github.com        │
- 12 │ 0f437589 │ add last exit code to    │ Darren Schroeder  │ 343840+fdncred@users.no │ 2 days ago
-    │          │ starship parameters      │                   │ reply.github.com        │
-    │          │ (#4670)                  │                   │                         │
- 13 │ ef70c8db │ Date parse refactor      │ Jonathan Moore    │ jtm170330@utdallas.edu  │ 2 days ago
-    │          │ (#4661)                  │                   │                         │
- 14 │ 10364c4f │ don't use table          │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ compaction in to nuon if │                   │ eply.github.com         │
-    │          │ not a table (#4671)      │                   │                         │
- 15 │ eec17304 │ Add profiling build      │ Stefan Holderbach │ sholderbach@users.norep │ a day ago
-    │          │ profile and symbol strip │                   │ ly.github.com           │
-    │          │ (#4630)                  │                   │                         │
- 16 │ d6a6c4b0 │ Add back in default      │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ keybindings (#4673)      │                   │ eply.github.com         │
- 17 │ 0924975b │ Use default_config.nu    │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ by default (#4675)       │                   │ eply.github.com         │
- 18 │ b09acdb7 │ Fix unsupported type     │ Justin Ma         │ hustcer@outlook.com     │ a day ago
-    │          │ message for some math    │                   │                         │
-    │          │ related commands (#4672) │                   │                         │
- 19 │ cb5c61d2 │ Fix open ended ranges    │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ (#4677)                  │                   │ eply.github.com         │
- 20 │ e3100e6a │ Fix alias in             │ Luca Trevisani    │ lucatrv@hotmail.com     │ a day ago
-    │          │ `docs/sample_config/con  │                   │                         │
-    │          │ fig.toml`                │                   │                         │
-    │          │ (#4669)                  │                   │                         │
- 21 │ a6a96b29 │ Add binary literals      │ JT                │ 547158+jntrnr@users.nor │ 20 hours ago
-    │          │ (#4680)                  │                   │ eply.github.com         │
- 22 │ ece5e7db │ dataframe list command   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 8 hours ago
-    │          │ (#4681)                  │                   │ l.com                   │
- 23 │ 2a89936b │ Move to latest stable    │ JT                │ 547158+jntrnr@users.nor │ 8 hours ago
-    │          │ crossterm, with fix      │                   │ eply.github.com         │
-    │          │ (#4684)                  │                   │                         │
- 24 │ 42f1874a │ Update some examples     │ Justin Ma         │ hustcer@outlook.com     │ 7 hours ago
-    │          │ and docs (#4682)         │                   │                         │
-────┴──────────┴──────────────────────────┴───────────────────┴─────────────────────────┴──────────────
+────┬──────────┬──────────────────────────┬───────────────────┬───────────────────────────┬──────────────
+ #  │  commit  │         subject          │       name        │          email            │     date
+────┼──────────┼──────────────────────────┼───────────────────┼───────────────────────────┼──────────────
+  0 │ 0c3ea636 │ Add support for stderr   │ Sophia            │ 547158+sophiajt@users.nor │ 4 days ago
+    │          │ and exit code (#4647)    │                   │ eply.github.com           │
+  1 │ ed46f0ea │ fix: add missing         │ Jae-Heon Ji       │ 32578710+jaeheonji@user   │ 3 days ago
+    │          │ metadata for `ls_colors` │                   │ s.noreply.github.com      │
+    │          │ (#4603)                  │                   │                           │
+  2 │ 3eca43c0 │ Plugins without file     │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 3 days ago
+    │          │ (#4650)                  │                   │ l.com                     │
+  3 │ 11bc0565 │ Find with regex flag     │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 3 days ago
+    │          │ (#4649)                  │                   │ l.com                     │
+  4 │ d2bd71d2 │ add LAST_EXIT_CODE       │ LordMZTE          │ lord@mzte.de              │ 3 days ago
+    │          │ variable (#4655)         │                   │                           │
+  5 │ 799fa984 │ Update reedline, revert  │ Stefan Holderbach │ sholderbach@users.norep   │ 3 days ago
+    │          │ crossterm (#4657)        │                   │ ly.github.com             │
+  6 │ 995757c0 │ flags for find (#4663)   │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 2 days ago
+    │          │                          │                   │ l.com                     │
+  7 │ 446c2aab │ Lets internals also      │ Sophia            │ 547158+sophiajt@users.nor │ 2 days ago
+    │          │ have exit codes (#4664)  │                   │ eply.github.com           │
+  8 │ 10ceac99 │ menu keybindings in      │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 2 days ago
+    │          │ default file (#4651)     │                   │ l.com                     │
+  9 │ 4ebbe07d │ Polars upgrade (#4665)   │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 2 days ago
+    │          │                          │                   │ l.com                     │
+ 10 │ 78192100 │ Add shortcircuiting      │ Sophia            │ 547158+sophiajt@users.nor │ 2 days ago
+    │          │ boolean operators        │                   │ eply.github.com           │
+    │          │ (#4668)                  │                   │                           │
+ 11 │ 796d4920 │ add char separators      │ Darren Schroeder  │ 343840+fdncred@users.no   │ 2 days ago
+    │          │ (#4667)                  │                   │ reply.github.com          │
+ 12 │ 0f437589 │ add last exit code to    │ Darren Schroeder  │ 343840+fdncred@users.no   │ 2 days ago
+    │          │ starship parameters      │                   │ reply.github.com          │
+    │          │ (#4670)                  │                   │                           │
+ 13 │ ef70c8db │ Date parse refactor      │ Jonathan Moore    │ jtm170330@utdallas.edu    │ 2 days ago
+    │          │ (#4661)                  │                   │                           │
+ 14 │ 10364c4f │ don't use table          │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ compaction in to nuon if │                   │ eply.github.com           │
+    │          │ not a table (#4671)      │                   │                           │
+ 15 │ eec17304 │ Add profiling build      │ Stefan Holderbach │ sholderbach@users.norep   │ a day ago
+    │          │ profile and symbol strip │                   │ ly.github.com             │
+    │          │ (#4630)                  │                   │                           │
+ 16 │ d6a6c4b0 │ Add back in default      │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ keybindings (#4673)      │                   │ eply.github.com           │
+ 17 │ 0924975b │ Use default_config.nu    │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ by default (#4675)       │                   │ eply.github.com           │
+ 18 │ b09acdb7 │ Fix unsupported type     │ Justin Ma         │ hustcer@outlook.com       │ a day ago
+    │          │ message for some math    │                   │                           │
+    │          │ related commands (#4672) │                   │                           │
+ 19 │ cb5c61d2 │ Fix open ended ranges    │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ (#4677)                  │                   │ eply.github.com           │
+ 20 │ e3100e6a │ Fix alias in             │ Luca Trevisani    │ lucatrv@hotmail.com       │ a day ago
+    │          │ `docs/sample_config/con  │                   │                           │
+    │          │ fig.toml`                │                   │                           │
+    │          │ (#4669)                  │                   │                           │
+ 21 │ a6a96b29 │ Add binary literals      │ Sophia            │ 547158+sophiajt@users.nor │ 20 hours ago
+    │          │ (#4680)                  │                   │ eply.github.com           │
+ 22 │ ece5e7db │ dataframe list command   │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 8 hours ago
+    │          │ (#4681)                  │                   │ l.com                     │
+ 23 │ 2a89936b │ Move to latest stable    │ Sophia            │ 547158+sophiajt@users.nor │ 8 hours ago
+    │          │ crossterm, with fix      │                   │ eply.github.com           │
+    │          │ (#4684)                  │                   │                           │
+ 24 │ 42f1874a │ Update some examples     │ Justin Ma         │ hustcer@outlook.com       │ 7 hours ago
+    │          │ and docs (#4682)         │                   │                           │
+────┴──────────┴──────────────────────────┴───────────────────┴───────────────────────────┴──────────────
 ```
 
 That's neat but what if I want it sorted in the opposite order? Try the `reverse` command and notice the newest commits are at the top.
@@ -233,35 +233,35 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
 ```
 
 ```
-────┬──────────┬──────────────────────────┬───────────────────┬─────────────────────────┬──────────────
- #  │  commit  │         subject          │       name        │          email          │     date
-────┼──────────┼──────────────────────────┼───────────────────┼─────────────────────────┼──────────────
-  0 │ 42f1874a │ Update some examples     │ Justin Ma         │ hustcer@outlook.com     │ 7 hours ago
-    │          │ and docs (#4682)         │                   │                         │
-  1 │ 2a89936b │ Move to latest stable    │ JT                │ 547158+jntrnr@users.nor │ 8 hours ago
-    │          │ crossterm, with fix      │                   │ eply.github.com         │
-    │          │ (#4684)                  │                   │                         │
-  2 │ ece5e7db │ dataframe list command   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 8 hours ago
-    │          │ (#4681)                  │                   │ l.com                   │
-  3 │ a6a96b29 │ Add binary literals      │ JT                │ 547158+jntrnr@users.nor │ 20 hours ago
-    │          │ (#4680)                  │                   │ eply.github.com         │
-  4 │ e3100e6a │ Fix alias in             │ Luca Trevisani    │ lucatrv@hotmail.com     │ a day ago
-    │          │ `docs/sample_config/con  │                   │                         │
-    │          │ fig.toml`                │                   │                         │
-    │          │ (#4669)                  │                   │                         │
-  5 │ cb5c61d2 │ Fix open ended ranges    │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ (#4677)                  │                   │ eply.github.com         │
-  6 │ b09acdb7 │ Fix unsupported type     │ Justin Ma         │ hustcer@outlook.com     │ a day ago
-    │          │ message for some math    │                   │                         │
-    │          │ related commands (#4672) │                   │                         │
-  7 │ 0924975b │ Use default_config.nu    │ JT                │ 547158+jntrnr@users.nor │ a day ago
+────┬──────────┬──────────────────────────┬───────────────────┬───────────────────────────┬──────────────
+ #  │  commit  │         subject          │       name        │          email            │     date
+────┼──────────┼──────────────────────────┼───────────────────┼───────────────────────────┼──────────────
+  0 │ 42f1874a │ Update some examples     │ Justin Ma         │ hustcer@outlook.com       │ 7 hours ago
+    │          │ and docs (#4682)         │                   │                           │
+  1 │ 2a89936b │ Move to latest stable    │ Sophia            │ 547158+sophiajt@users.nor │ 8 hours ago
+    │          │ crossterm, with fix      │                   │ eply.github.com           │
+    │          │ (#4684)                  │                   │                           │
+  2 │ ece5e7db │ dataframe list command   │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 8 hours ago
+    │          │ (#4681)                  │                   │ l.com                     │
+  3 │ a6a96b29 │ Add binary literals      │ Sophia            │ 547158+sophiajt@users.nor │ 20 hours ago
+    │          │ (#4680)                  │                   │ eply.github.com           │
+  4 │ e3100e6a │ Fix alias in             │ Luca Trevisani    │ lucatrv@hotmail.com       │ a day ago
+    │          │ `docs/sample_config/con  │                   │                           │
+    │          │ fig.toml`                │                   │                           │
+    │          │ (#4669)                  │                   │                           │
+  5 │ cb5c61d2 │ Fix open ended ranges    │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ (#4677)                  │                   │ eply.github.com           │
+  6 │ b09acdb7 │ Fix unsupported type     │ Justin Ma         │ hustcer@outlook.com       │ a day ago
+    │          │ message for some math    │                   │                           │
+    │          │ related commands (#4672) │                   │                           │
+  7 │ 0924975b │ Use default_config.nu    │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
     │          │ by default (#4675)       │                   │ eply.github.com         │
-  8 │ d6a6c4b0 │ Add back in default      │ JT                │ 547158+jntrnr@users.nor │ a day ago
+  8 │ d6a6c4b0 │ Add back in default      │ Sophia                │ 547158+sophiajt@users.nor │ a day ago
     │          │ keybindings (#4673)      │                   │ eply.github.com         │
   9 │ eec17304 │ Add profiling build      │ Stefan Holderbach │ sholderbach@users.norep │ a day ago
     │          │ profile and symbol strip │                   │ ly.github.com           │
     │          │ (#4630)                  │                   │                         │
- 10 │ 10364c4f │ don't use table          │ JT                │ 547158+jntrnr@users.nor │ a day ago
+ 10 │ 10364c4f │ don't use table          │ Sophia                │ 547158+sophiajt@users.nor │ a day ago
     │          │ compaction in to nuon if │                   │ eply.github.com         │
     │          │ not a table (#4671)      │                   │                         │
  11 │ ef70c8db │ Date parse refactor      │ Jonathan Moore    │ jtm170330@utdallas.edu  │ 2 days ago
@@ -271,14 +271,14 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
     │          │ (#4670)                  │                   │                         │
  13 │ 796d4920 │ add char separators      │ Darren Schroeder  │ 343840+fdncred@users.no │ 2 days ago
     │          │ (#4667)                  │                   │ reply.github.com        │
- 14 │ 78192100 │ Add shortcircuiting      │ JT                │ 547158+jntrnr@users.nor │ 2 days ago
+ 14 │ 78192100 │ Add shortcircuiting      │ Sophia                │ 547158+sophiajt@users.nor │ 2 days ago
     │          │ boolean operators        │                   │ eply.github.com         │
     │          │ (#4668)                  │                   │                         │
  15 │ 4ebbe07d │ Polars upgrade (#4665)   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
     │          │                          │                   │ l.com                   │
  16 │ 10ceac99 │ menu keybindings in      │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
     │          │ default file (#4651)     │                   │ l.com                   │
- 17 │ 446c2aab │ Lets internals also      │ JT                │ 547158+jntrnr@users.nor │ 2 days ago
+ 17 │ 446c2aab │ Lets internals also      │ Sophia                │ 547158+sophiajt@users.nor │ 2 days ago
     │          │ have exit codes (#4664)  │                   │ eply.github.com         │
  18 │ 995757c0 │ flags for find (#4663)   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
     │          │                          │                   │ l.com                   │
@@ -293,7 +293,7 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
  23 │ ed46f0ea │ fix: add missing         │ Jae-Heon Ji       │ 32578710+jaeheonji@user │ 3 days ago
     │          │ metadata for `ls_colors` │                   │ s.noreply.github.com    │
     │          │ (#4603)                  │                   │                         │
- 24 │ 0c3ea636 │ Add support for stderr   │ JT                │ 547158+jntrnr@users.nor │ 4 days ago
+ 24 │ 0c3ea636 │ Add support for stderr   │ Sophia                │ 547158+sophiajt@users.nor │ 4 days ago
     │          │ and exit code (#4647)    │                   │ eply.github.com         │
 ────┴──────────┴──────────────────────────┴───────────────────┴─────────────────────────┴──────────────
 ```
@@ -344,30 +344,30 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
 ────┼──────────┼──────────────────────────┼───────────────────┼─────────────────────────┼──────────────
   0 │ 42f1874a │ Update some examples     │ Justin Ma         │ hustcer@outlook.com     │ 7 hours ago
     │          │ and docs (#4682)         │                   │                         │
-  1 │ 2a89936b │ Move to latest stable    │ JT                │ 547158+jntrnr@users.nor │ 8 hours ago
+  1 │ 2a89936b │ Move to latest stable    │ Sophia                │ 547158+sophiajt@users.nor │ 8 hours ago
     │          │ crossterm, with fix      │                   │ eply.github.com         │
     │          │ (#4684)                  │                   │                         │
   2 │ ece5e7db │ dataframe list command   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 8 hours ago
     │          │ (#4681)                  │                   │ l.com                   │
-  3 │ a6a96b29 │ Add binary literals      │ JT                │ 547158+jntrnr@users.nor │ 21 hours ago
+  3 │ a6a96b29 │ Add binary literals      │ Sophia                │ 547158+sophiajt@users.nor │ 21 hours ago
     │          │ (#4680)                  │                   │ eply.github.com         │
   4 │ e3100e6a │ Fix alias in             │ Luca Trevisani    │ lucatrv@hotmail.com     │ a day ago
     │          │ `docs/sample_config/con  │                   │                         │
     │          │ fig.toml`                │                   │                         │
     │          │ (#4669)                  │                   │                         │
-  5 │ cb5c61d2 │ Fix open ended ranges    │ JT                │ 547158+jntrnr@users.nor │ a day ago
+  5 │ cb5c61d2 │ Fix open ended ranges    │ Sophia                │ 547158+sophiajt@users.nor │ a day ago
     │          │ (#4677)                  │                   │ eply.github.com         │
   6 │ b09acdb7 │ Fix unsupported type     │ Justin Ma         │ hustcer@outlook.com     │ a day ago
     │          │ message for some math    │                   │                         │
     │          │ related commands (#4672) │                   │                         │
-  7 │ 0924975b │ Use default_config.nu    │ JT                │ 547158+jntrnr@users.nor │ a day ago
+  7 │ 0924975b │ Use default_config.nu    │ Sophia                │ 547158+sophiajt@users.nor │ a day ago
     │          │ by default (#4675)       │                   │ eply.github.com         │
-  8 │ d6a6c4b0 │ Add back in default      │ JT                │ 547158+jntrnr@users.nor │ a day ago
+  8 │ d6a6c4b0 │ Add back in default      │ Sophia                │ 547158+sophiajt@users.nor │ a day ago
     │          │ keybindings (#4673)      │                   │ eply.github.com         │
   9 │ eec17304 │ Add profiling build      │ Stefan Holderbach │ sholderbach@users.norep │ a day ago
     │          │ profile and symbol strip │                   │ ly.github.com           │
     │          │ (#4630)                  │                   │                         │
- 10 │ 10364c4f │ don't use table          │ JT                │ 547158+jntrnr@users.nor │ a day ago
+ 10 │ 10364c4f │ don't use table          │ Sophia                │ 547158+sophiajt@users.nor │ a day ago
     │          │ compaction in to nuon if │                   │ eply.github.com         │
     │          │ not a table (#4671)      │                   │                         │
  11 │ ef70c8db │ Date parse refactor      │ Jonathan Moore    │ jtm170330@utdallas.edu  │ 2 days ago
@@ -377,14 +377,14 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
     │          │ (#4670)                  │                   │                         │
  13 │ 796d4920 │ add char separators      │ Darren Schroeder  │ 343840+fdncred@users.no │ 2 days ago
     │          │ (#4667)                  │                   │ reply.github.com        │
- 14 │ 78192100 │ Add shortcircuiting      │ JT                │ 547158+jntrnr@users.nor │ 2 days ago
+ 14 │ 78192100 │ Add shortcircuiting      │ Sophia                │ 547158+sophiajt@users.nor │ 2 days ago
     │          │ boolean operators        │                   │ eply.github.com         │
     │          │ (#4668)                  │                   │                         │
  15 │ 4ebbe07d │ Polars upgrade (#4665)   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
     │          │                          │                   │ l.com                   │
  16 │ 10ceac99 │ menu keybindings in      │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
     │          │ default file (#4651)     │                   │ l.com                   │
- 17 │ 446c2aab │ Lets internals also      │ JT                │ 547158+jntrnr@users.nor │ 2 days ago
+ 17 │ 446c2aab │ Lets internals also      │ Sophia                │ 547158+sophiajt@users.nor │ 2 days ago
     │          │ have exit codes (#4664)  │                   │ eply.github.com         │
  18 │ 995757c0 │ flags for find (#4663)   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
     │          │                          │                   │ l.com                   │
@@ -399,7 +399,7 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
  23 │ ed46f0ea │ fix: add missing         │ Jae-Heon Ji       │ 32578710+jaeheonji@user │ 3 days ago
     │          │ metadata for `ls_colors` │                   │ s.noreply.github.com    │
     │          │ (#4603)                  │                   │                         │
- 24 │ 0c3ea636 │ Add support for stderr   │ JT                │ 547158+jntrnr@users.nor │ 4 days ago
+ 24 │ 0c3ea636 │ Add support for stderr   │ Sophia                │ 547158+sophiajt@users.nor │ 4 days ago
     │          │ and exit code (#4647)    │                   │ eply.github.com         │
 ────┴──────────┴──────────────────────────┴───────────────────┴─────────────────────────┴──────────────
 ...
@@ -412,69 +412,69 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
 ```
 
 ```
-────┬──────────┬──────────────────────────┬───────────────────┬─────────────────────────┬──────────────
- #  │  commit  │         subject          │       name        │          email          │     date
-────┼──────────┼──────────────────────────┼───────────────────┼─────────────────────────┼──────────────
-  0 │ 42f1874a │ Update some examples     │ Justin Ma         │ hustcer@outlook.com     │ 7 hours ago
-    │          │ and docs (#4682)         │                   │                         │
-  1 │ 2a89936b │ Move to latest stable    │ JT                │ 547158+jntrnr@users.nor │ 8 hours ago
-    │          │ crossterm, with fix      │                   │ eply.github.com         │
-    │          │ (#4684)                  │                   │                         │
-  2 │ ece5e7db │ dataframe list command   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 8 hours ago
-    │          │ (#4681)                  │                   │ l.com                   │
-  3 │ a6a96b29 │ Add binary literals      │ JT                │ 547158+jntrnr@users.nor │ 21 hours ago
-    │          │ (#4680)                  │                   │ eply.github.com         │
-  4 │ e3100e6a │ Fix alias in             │ Luca Trevisani    │ lucatrv@hotmail.com     │ a day ago
-    │          │ `docs/sample_config/con  │                   │                         │
-    │          │ fig.toml`                │                   │                         │
-    │          │ (#4669)                  │                   │                         │
-  5 │ cb5c61d2 │ Fix open ended ranges    │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ (#4677)                  │                   │ eply.github.com         │
-  6 │ b09acdb7 │ Fix unsupported type     │ Justin Ma         │ hustcer@outlook.com     │ a day ago
-    │          │ message for some math    │                   │                         │
-    │          │ related commands (#4672) │                   │                         │
-  7 │ 0924975b │ Use default_config.nu    │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ by default (#4675)       │                   │ eply.github.com         │
-  8 │ d6a6c4b0 │ Add back in default      │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ keybindings (#4673)      │                   │ eply.github.com         │
-  9 │ eec17304 │ Add profiling build      │ Stefan Holderbach │ sholderbach@users.norep │ a day ago
-    │          │ profile and symbol strip │                   │ ly.github.com           │
-    │          │ (#4630)                  │                   │                         │
- 10 │ 10364c4f │ don't use table          │ JT                │ 547158+jntrnr@users.nor │ a day ago
-    │          │ compaction in to nuon if │                   │ eply.github.com         │
-    │          │ not a table (#4671)      │                   │                         │
- 11 │ ef70c8db │ Date parse refactor      │ Jonathan Moore    │ jtm170330@utdallas.edu  │ 2 days ago
-    │          │ (#4661)                  │                   │                         │
- 12 │ 0f437589 │ add last exit code to    │ Darren Schroeder  │ 343840+fdncred@users.no │ 2 days ago
-    │          │ starship parameters      │                   │ reply.github.com        │
-    │          │ (#4670)                  │                   │                         │
- 13 │ 796d4920 │ add char separators      │ Darren Schroeder  │ 343840+fdncred@users.no │ 2 days ago
-    │          │ (#4667)                  │                   │ reply.github.com        │
- 14 │ 78192100 │ Add shortcircuiting      │ JT                │ 547158+jntrnr@users.nor │ 2 days ago
-    │          │ boolean operators        │                   │ eply.github.com         │
-    │          │ (#4668)                  │                   │                         │
- 15 │ 4ebbe07d │ Polars upgrade (#4665)   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
-    │          │                          │                   │ l.com                   │
- 16 │ 10ceac99 │ menu keybindings in      │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
-    │          │ default file (#4651)     │                   │ l.com                   │
- 17 │ 446c2aab │ Lets internals also      │ JT                │ 547158+jntrnr@users.nor │ 2 days ago
-    │          │ have exit codes (#4664)  │                   │ eply.github.com         │
- 18 │ 995757c0 │ flags for find (#4663)   │ Fernando Herrera  │ fernando.j.herrera@gmai │ 2 days ago
-    │          │                          │                   │ l.com                   │
- 19 │ 799fa984 │ Update reedline, revert  │ Stefan Holderbach │ sholderbach@users.norep │ 3 days ago
-    │          │ crossterm (#4657)        │                   │ ly.github.com           │
- 20 │ d2bd71d2 │ add LAST_EXIT_CODE       │ LordMZTE          │ lord@mzte.de            │ 3 days ago
-    │          │ variable (#4655)         │                   │                         │
- 21 │ 11bc0565 │ Find with regex flag     │ Fernando Herrera  │ fernando.j.herrera@gmai │ 3 days ago
-    │          │ (#4649)                  │                   │ l.com                   │
- 22 │ 3eca43c0 │ Plugins without file     │ Fernando Herrera  │ fernando.j.herrera@gmai │ 3 days ago
-    │          │ (#4650)                  │                   │ l.com                   │
- 23 │ ed46f0ea │ fix: add missing         │ Jae-Heon Ji       │ 32578710+jaeheonji@user │ 3 days ago
-    │          │ metadata for `ls_colors` │                   │ s.noreply.github.com    │
-    │          │ (#4603)                  │                   │                         │
- 24 │ 0c3ea636 │ Add support for stderr   │ JT                │ 547158+jntrnr@users.nor │ 4 days ago
-    │          │ and exit code (#4647)    │                   │ eply.github.com         │
-────┴──────────┴──────────────────────────┴───────────────────┴─────────────────────────┴──────────────
+────┬──────────┬──────────────────────────┬───────────────────┬───────────────────────────┬──────────────
+ #  │  commit  │         subject          │       name        │          email            │     date
+────┼──────────┼──────────────────────────┼───────────────────┼───────────────────────────┼──────────────
+  0 │ 42f1874a │ Update some examples     │ Justin Ma         │ hustcer@outlook.com       │ 7 hours ago
+    │          │ and docs (#4682)         │                   │                           │
+  1 │ 2a89936b │ Move to latest stable    │ Sophia            │ 547158+sophiajt@users.nor │ 8 hours ago
+    │          │ crossterm, with fix      │                   │ eply.github.com           │
+    │          │ (#4684)                  │                   │                           │
+  2 │ ece5e7db │ dataframe list command   │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 8 hours ago
+    │          │ (#4681)                  │                   │ l.com                     │
+  3 │ a6a96b29 │ Add binary literals      │ Sophia            │ 547158+sophiajt@users.nor │ 21 hours ago
+    │          │ (#4680)                  │                   │ eply.github.com           │
+  4 │ e3100e6a │ Fix alias in             │ Luca Trevisani    │ lucatrv@hotmail.com       │ a day ago
+    │          │ `docs/sample_config/con  │                   │                           │
+    │          │ fig.toml`                │                   │                           │
+    │          │ (#4669)                  │                   │                           │
+  5 │ cb5c61d2 │ Fix open ended ranges    │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ (#4677)                  │                   │ eply.github.com           │
+  6 │ b09acdb7 │ Fix unsupported type     │ Justin Ma         │ hustcer@outlook.com       │ a day ago
+    │          │ message for some math    │                   │                           │
+    │          │ related commands (#4672) │                   │                           │
+  7 │ 0924975b │ Use default_config.nu    │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ by default (#4675)       │                   │ eply.github.com           │
+  8 │ d6a6c4b0 │ Add back in default      │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ keybindings (#4673)      │                   │ eply.github.com           │
+  9 │ eec17304 │ Add profiling build      │ Stefan Holderbach │ sholderbach@users.norep   │ a day ago
+    │          │ profile and symbol strip │                   │ ly.github.com             │
+    │          │ (#4630)                  │                   │                           │
+ 10 │ 10364c4f │ don't use table          │ Sophia            │ 547158+sophiajt@users.nor │ a day ago
+    │          │ compaction in to nuon if │                   │ eply.github.com           │
+    │          │ not a table (#4671)      │                   │                           │
+ 11 │ ef70c8db │ Date parse refactor      │ Jonathan Moore    │ jtm170330@utdallas.edu    │ 2 days ago
+    │          │ (#4661)                  │                   │                           │
+ 12 │ 0f437589 │ add last exit code to    │ Darren Schroeder  │ 343840+fdncred@users.no   │ 2 days ago
+    │          │ starship parameters      │                   │ reply.github.com          │
+    │          │ (#4670)                  │                   │                           │
+ 13 │ 796d4920 │ add char separators      │ Darren Schroeder  │ 343840+fdncred@users.no   │ 2 days ago
+    │          │ (#4667)                  │                   │ reply.github.com          │
+ 14 │ 78192100 │ Add shortcircuiting      │ Sophia            │ 547158+sophiajt@users.nor │ 2 days ago
+    │          │ boolean operators        │                   │ eply.github.com           │
+    │          │ (#4668)                  │                   │                           │
+ 15 │ 4ebbe07d │ Polars upgrade (#4665)   │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 2 days ago
+    │          │                          │                   │ l.com                     │
+ 16 │ 10ceac99 │ menu keybindings in      │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 2 days ago
+    │          │ default file (#4651)     │                   │ l.com                     │
+ 17 │ 446c2aab │ Lets internals also      │ Sophia            │ 547158+sophiajt@users.nor │ 2 days ago
+    │          │ have exit codes (#4664)  │                   │ eply.github.com           │
+ 18 │ 995757c0 │ flags for find (#4663)   │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 2 days ago
+    │          │                          │                   │ l.com                     │
+ 19 │ 799fa984 │ Update reedline, revert  │ Stefan Holderbach │ sholderbach@users.norep   │ 3 days ago
+    │          │ crossterm (#4657)        │                   │ ly.github.com             │
+ 20 │ d2bd71d2 │ add LAST_EXIT_CODE       │ LordMZTE          │ lord@mzte.de              │ 3 days ago
+    │          │ variable (#4655)         │                   │                           │
+ 21 │ 11bc0565 │ Find with regex flag     │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 3 days ago
+    │          │ (#4649)                  │                   │ l.com                     │
+ 22 │ 3eca43c0 │ Plugins without file     │ Fernando Herrera  │ fernando.j.herrera@gmai   │ 3 days ago
+    │          │ (#4650)                  │                   │ l.com                     │
+ 23 │ ed46f0ea │ fix: add missing         │ Jae-Heon Ji       │ 32578710+jaeheonji@user   │ 3 days ago
+    │          │ metadata for `ls_colors` │                   │ s.noreply.github.com      │
+    │          │ (#4603)                  │                   │                           │
+ 24 │ 0c3ea636 │ Add support for stderr   │ Sophia            │ 547158+sophiajt@users.nor │ 4 days ago
+    │          │ and exit code (#4647)    │                   │ eply.github.com           │
+────┴──────────┴──────────────────────────┴───────────────────┴───────────────────────────┴──────────────
 ```
 
 Now, with the 365 day slice of data, let's `group-by` name where the commits are less than a year old. This table has a lot of columns so it's unreadable. However, if we `group-by` name and `transpose` the table things will look much cleaner. `Pivot` takes rows and turns them into columns or turns columns into rows.
@@ -488,7 +488,7 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "�
   #  │             column0             │     column1
 ─────┼─────────────────────────────────┼──────────────────
    0 │ Justin Ma                       │ [table 21 rows]
-   1 │ JT                              │ [table 851 rows]
+   1 │ Sophia                          │ [table 851 rows]
    2 │ Fernando Herrera                │ [table 176 rows]
    3 │ Luca Trevisani                  │ [table 1 row]
    4 │ Stefan Holderbach               │ [table 19 rows]
@@ -531,7 +531,7 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "�
 ─────┬─────────────────────────────────┬─────────
   #  │             column0             │ column1
 ─────┼─────────────────────────────────┼─────────
-   0 │ JT                              │     851
+   0 │ Sophia                          │     851
    1 │ Darren Schroeder                │     242
    2 │ Fernando Herrera                │     176
    3 │ Jakub Žádník                    │     136
@@ -539,7 +539,7 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "�
    5 │ Andrés N. Robalino              │      29
    6 │ Luccas Mateus                   │      27
    7 │ Stefan Stanciulescu             │      27
-   8 │ Jonathan Turner                 │      23
+   8 │ Sophia Turner                   │      23
    9 │ Tanishq Kancharla               │      21
   10 │ Justin Ma                       │      21
   11 │ onthebridgetonowhere            │      20
@@ -557,8 +557,8 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "�
 ───┬────────────────────┬─────────
  # │        name        │ commits
 ───┼────────────────────┼─────────
- 0 │ Jonathan Turner    │    1420
- 1 │ JT                 │     851
+ 0 │ Sophia Turner      │    1420
+ 1 │ Sophia             │     851
  2 │ Andrés N. Robalino │     383
  3 │ Darren Schroeder   │     380
  4 │ Fernando Herrera   │     176
@@ -582,8 +582,8 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "�
 ────┬────────────────────┬─────────
  #  │        name        │ commits
 ────┼────────────────────┼─────────
-  1 │ Jonathan Turner    │    1420
-  2 │ JT                 │     851
+  1 │ Sophia Turner      │    1420
+  2 │ Sophia             │     851
   3 │ Andrés N. Robalino │     383
   4 │ Darren Schroeder   │     380
   5 │ Fernando Herrera   │     176

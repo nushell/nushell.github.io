@@ -1,8 +1,8 @@
 ---
 title: Nushell 2019 Survey Results
-author: Jonathan Turner
-author_site: https://twitter.com/jntrnr
-author_image: https://www.nushell.sh/blog/images/jonathandturner.jpg
+author: Sophia Turner
+author_site: https://twitter.com/sophiajturner
+author_image: https://www.nushell.sh/blog/images/sophiajt.jpg
 excerpt: Recently, we ran a short survey to see how you were feeling about nushell. Here are the results.
 ---
 

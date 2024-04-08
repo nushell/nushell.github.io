@@ -58,9 +58,9 @@ Der `get` Befehl erlaubt es, in die Inhalte einer Tabellenzelle einzutauchen. Hi
 
 @[code](@snippets/introduction/sys_get_nested_example.sh)
 
-Aktuelle existiert nur ein Nutzer namens "jt". Wie zu sehen ist, kann ein ganzer Pfad für Spalten angegeben werden - nicht nur der Name der Spalte. Nu wird den Pfad nehmen und durch die entsprechenden Daten in der Tabelle gehen.
+Aktuelle existiert nur ein Nutzer namens "sophiajt". Wie zu sehen ist, kann ein ganzer Pfad für Spalten angegeben werden - nicht nur der Name der Spalte. Nu wird den Pfad nehmen und durch die entsprechenden Daten in der Tabelle gehen.
 
-Und noch etwas anderes ist anders. Anstatt einer Tabelle mit Daten wurde nur ein einzelnes Element ausgegeben: der String "jt". Nu arbeitet sowohl mit Tabellen voller Daten als auch mit Strings. Strings sind ein wichtiger Bestandteil, um mit Befehlen außerhalb von Nu zu arbeiten.
+Und noch etwas anderes ist anders. Anstatt einer Tabelle mit Daten wurde nur ein einzelnes Element ausgegeben: der String "sophiajt". Nu arbeitet sowohl mit Tabellen voller Daten als auch mit Strings. Strings sind ein wichtiger Bestandteil, um mit Befehlen außerhalb von Nu zu arbeiten.
 
 Nun soll aufgezeigt werden, wie mit Strings außerhalb von Nu gearbeitet wird. Dazu wird das vorige Beispiel erweitert. Die Daten werden an den externen `echo` Befehl weitergegeben (das `^` teilt Nu mit, dass nicht der eingebaute `echo` Befehl verwendet werden soll):
 

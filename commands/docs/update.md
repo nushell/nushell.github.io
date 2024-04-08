@@ -45,23 +45,23 @@ Update a column value
 
 Use a closure to alter each value in the 'authors' column to a single string
 ```nu
-> [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|row| $row.authors | str join ',' }
-╭───┬─────────┬──────────────────╮
-│ # │ project │     authors      │
-├───┼─────────┼──────────────────┤
-│ 0 │ nu      │ Andrés,JT,Yehuda │
-╰───┴─────────┴──────────────────╯
+> [[project, authors]; ['nu', ['Andrés', 'Sophia', 'Yehuda']]] | update authors {|row| $row.authors | str join ',' }
+╭───┬─────────┬──────────────────────╮
+│ # │ project │       authors        │
+├───┼─────────┼──────────────────────┤
+│ 0 │ nu      │ Andrés,Sophia,Yehuda │
+╰───┴─────────┴──────────────────────╯
 
 ```
 
 Implicitly use the `$in` value in a closure to update 'authors'
 ```nu
-> [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors { str join ',' }
-╭───┬─────────┬──────────────────╮
-│ # │ project │     authors      │
-├───┼─────────┼──────────────────┤
-│ 0 │ nu      │ Andrés,JT,Yehuda │
-╰───┴─────────┴──────────────────╯
+> [[project, authors]; ['nu', ['Andrés', 'Sophia', 'Yehuda']]] | update authors { str join ',' }
+╭───┬─────────┬──────────────────────╮
+│ # │ project │       authors        │
+├───┼─────────┼──────────────────────┤
+│ 0 │ nu      │ Andrés,Sophia,Yehuda │
+╰───┴─────────┴──────────────────────╯
 
 ```
 
