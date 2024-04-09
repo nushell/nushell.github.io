@@ -120,7 +120,7 @@ A continuación, en algunas distribuciones también deberás asegurarte de que N
 /bin/rbash
 /usr/bin/screen
 /usr/bin/fish
-/home/jonathan/.cargo/bin/nu
+/home/sophia/.cargo/bin/nu
 ```
 
 Con esto, deberías de poder hacer `chsh` y establecer Nu como la shell de inicio de sesión. Luego de cerrar sesión, en el próximo inicio de sesión deberías de recibir un brillante mensaje de Nu.

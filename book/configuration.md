@@ -25,6 +25,7 @@ The default config files aren't required. If you prefer to start with an empty `
 > config env --default | nu-highlight | lines
 > config nu --default | nu-highlight | lines
 ```
+
 :::
 
 Control which directory Nushell reads config files from with the `XDG_CONFIG_HOME` environment variable. When you set it to
@@ -45,7 +46,7 @@ C:\Users\username\.config\nushell
 
 ::: warning
 [`XDG_CONFIG_HOME`](https://xdgbasedirectoryspecification.com) is not a Nushell-specific environment variable and should not be set to the directory that contains Nushell config files.
-It should be the directory *above* the `nushell` directory. If you set it to `/Users/username/dotfiles/nushell`, Nushell will look for
+It should be the directory _above_ the `nushell` directory. If you set it to `/Users/username/dotfiles/nushell`, Nushell will look for
 config files in `/Users/username/dotfiles/nushell/nushell` instead. In this case, you would want to set it to `/Users/username/dotfiles`.
 :::
 
@@ -58,6 +59,7 @@ $env.config = {
   ...
 }
 ```
+
 Note that setting any key overwrites its previous value. Likewise it's an error to reference any missing key. If `$env.config` already exists you can update or gracefully insert a [`cell-path`](/lang-guide/lang-guide.md#cellpath) at any depth using [`upsert`](/commands/docs/upsert.md):
 
 ```nu
@@ -129,7 +131,7 @@ Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 /bin/rbash
 /usr/bin/screen
 /usr/bin/fish
-/home/jonathan/.cargo/bin/nu
+/home/sophia/.cargo/bin/nu
 ```
 
 With this, you should be able to `chsh` and set Nu to be your login shell. After a logout, on your next login you should be greeted with a shiny Nu prompt.
@@ -204,21 +206,25 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend '/home/linuxbrew/.linux
 ```
 
 ### Pyenv
+
 [Pyenv](https://github.com/pyenv/pyenv) is a popular Python version manager. To add it to your Nushell PATH:
 
 #### MacOS or Linux
+
 ```nu
 # MacOS or Linux
 $env.PATH = ($env.PATH | split row (char esep) | prepend $"(pyenv root)/shims")
 ```
 
 #### Windows
+
 Windows users need to install [pyenv-win](https://github.com/pyenv-win/pyenv-win)
 and execute the `Get-Command pyenv` command in PowerShell to get the path of `pyenv.ps1` after the installation.
 
 The result usually looks like: `C:\Users\<your-username>\.pyenv\pyenv-win\bin\pyenv.ps1`
 
 Then add the path of pyenv to your Nushell PATH:
+
 ```nu
 # Windows
 $env.Path = ($env.Path | split row (char esep) | prepend $"~/.pyenv/pyenv-win/bin/pyenv.ps1")

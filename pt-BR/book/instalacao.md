@@ -112,7 +112,7 @@ Uma vez instalado, podemos rodar o Nu usando o comando `nu`:
 
 ```bash
 $ nu
-/home/jonathan/Source>
+/home/sophia/Source>
 ```
 
 ## Fazendo o Build a partir dos fontes

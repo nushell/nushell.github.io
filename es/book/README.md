@@ -58,9 +58,9 @@ El comando `get` nos permite ir directo al valor de una columa de la tabla. Aqu�
 
 @[code](@snippets/introduction/sys_get_nested_example.sh)
 
-En este momento, solo hay un usuario en el sistema llamado "jt". Notarás que podemos pasar una ruta de columna *-*column path*-* y no únicamente el nombre de una columna. Nu tomará esta ruta de columna e irá a los datos correspondientes en la tabla.
+En este momento, solo hay un usuario en el sistema llamado "sophiajt". Notarás que podemos pasar una ruta de columna *-*column path*-* y no únicamente el nombre de una columna. Nu tomará esta ruta de columna e irá a los datos correspondientes en la tabla.
 
-Es posible que hayas notado algo más diferente también. En lugar de tener una tabla de datos, tenemos solo un elemento individual: la cadena "jt". Nu trabaja tanto con tabla de datos así como cadenas. Cadenas son una parte importante de trabajar con comandos fuera de Nu.
+Es posible que hayas notado algo más diferente también. En lugar de tener una tabla de datos, tenemos solo un elemento individual: la cadena "sophiajt". Nu trabaja tanto con tabla de datos así como cadenas. Cadenas son una parte importante de trabajar con comandos fuera de Nu.
 
 Miremos en acción cómo funcionan las cadenas fuera de Nu. Tomaremos el ejemplo anterior y ejecutaremos el comando externo `echo` (el carácter `^` le informa a Nu que no se desea usar el comando _interno_ también llamado `echo`):
 

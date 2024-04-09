@@ -130,18 +130,18 @@ O comando `get` permite que tenhamos acesso ao conteúdo de uma coluna da tabela
 
 ```nu
 > sys | get host.users
-jonathan
+sophia
 ```
 
-Nesse momento só tem um único usuário no sistema, chamado "jonathan". Note que nós podemos passar um caminho e não apenas o nome de uma coluna. O Nu vai seguir esse caminho até o dado correspondente na tabela.
+Nesse momento só tem um único usuário no sistema, chamado "sophia". Note que nós podemos passar um caminho e não apenas o nome de uma coluna. O Nu vai seguir esse caminho até o dado correspondente na tabela.
 
-Talvez você tenha notado mais alguma coisa de diferente. Ao invés de uma tabela, recebemos apenas um elemento simples: a string "jonathan". O Nu trabalha tanto com tabelas de dados como com strings, que são uma parte importante da interação com comandos externos ao Nu.
+Talvez você tenha notado mais alguma coisa de diferente. Ao invés de uma tabela, recebemos apenas um elemento simples: a string "sophia". O Nu trabalha tanto com tabelas de dados como com strings, que são uma parte importante da interação com comandos externos ao Nu.
 
 Vejamos como as strings funcionam fora do Nu. Vamos usar nosso exemplo anterior e executar o comando externo `echo`, presente na maioria dos SOs:
 
 ```nu
 > sys | get host.users | echo $it
-jonathan
+sophia
 ```
 
 Se isso lhe parece bastante similar ao que tínhamos anteriormente, você tem um olho afiado! É similar, mas com uma diferença importante: chamamos `echo` com o valor retornado antes. Isso permite que passemos dados para o `echo` fora do Nu (ou para qualquer outro comando de fora do Nu, como `git`, por exemplo).
