@@ -21,12 +21,12 @@ Entrar es similar a cambiar directorios (como vimos previamente con el comando `
 
 ```
 /home/sophia/Source/lark(master)> shells
----+---+------------+-------------------------------
+---+---+------------+-----------------------------
  # |   | name       | path
----+---+------------+-------------------------------
+---+---+------------+-----------------------------
  0 |   | filesystem | /home/sophia/Source/nushell
  1 | X | filesystem | /home/sophia/Source/lark
----+---+------------+-------------------------------
+---+---+------------+-----------------------------
 ```
 
 El comando `shells` nos muestra que hay dos shells activos: nuestro directorio fuente original "nushell" y ahora este nuevo directorio "lark".

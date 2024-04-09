@@ -258,12 +258,12 @@ In Nu, we can `enter` a directory, which adds it to a ring of shells we can boun
 ```
 > enter ../rhai/
 /home/sophia/Source/rhai(master)> shells
----+---+------------+-------------------------------
+---+---+------------+-----------------------------
  # |   | name       | path
----+---+------------+-------------------------------
+---+---+------------+-----------------------------
  0 |   | filesystem | /home/sophia/Source/nushell
  1 | X | filesystem | /home/sophia/Source/rhai
----+---+------------+-------------------------------
+---+---+------------+-----------------------------
 ```
 
 Using `n` and `p` we can jump back and forth between the shells. `exit` gets us out of a shell.
@@ -273,13 +273,13 @@ You might noticed that `name` column in the `shells` table. Why's that there? Oh
 ```
 > enter Cargo.toml
 /> shells
----+---+--------------------------------------------+-------------------------------
+---+---+--------------------------------------------+-----------------------------
  # |   | name                                       | path
----+---+--------------------------------------------+-------------------------------
+---+---+--------------------------------------------+-----------------------------
  0 |   | filesystem                                 | /home/sophia/Source/nushell
  1 |   | filesystem                                 | /home/sophia/Source/rhai
  2 | X | {/home/sophia/Source/nushell/Cargo.toml} | /
----+---+--------------------------------------------+-------------------------------
+---+---+--------------------------------------------+-----------------------------
 ```
 
 That's right, we're in the file. Can we `cd`? Oh yes, we can:

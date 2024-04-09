@@ -23,13 +23,13 @@ Entering is similar to changing directories (as we saw with the [`cd`](/commands
 ```nu
 /home/sophia/Source/book(main)> enter ../music
 /home/sophia/Source/music(main)> shells
-───┬────────┬───────────────────────────────
+───┬────────┬─────────────────────────────
  # │ active │             path
-───┼────────┼───────────────────────────────
+───┼────────┼─────────────────────────────
  0 │ false  │ /home/sophia/Source/nushell
  1 │ false  │ /home/sophia/Source/book
  2 │ true   │ /home/sophia/Source/music
-───┴────────┴───────────────────────────────
+───┴────────┴─────────────────────────────
 ```
 
 The [`shells`](/commands/docs/shells.md) command shows us there are three shells: our original "nushell" source directory, "book" directory and "music" directory which is currently active.

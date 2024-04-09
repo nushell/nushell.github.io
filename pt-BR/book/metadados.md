@@ -21,11 +21,11 @@ Vamos executar o comando `open` de novo, mas, dessa vez, vamos olhar as tags que
 
 ```nu
 > open Cargo.toml | tags
-----------+------------------------------------------
+----------+----------------------------------------
  span     | origin
-----------+------------------------------------------
+----------+----------------------------------------
  [object] | /home/sophia/Source/nushell/Cargo.toml
-----------+------------------------------------------
+----------+----------------------------------------
 ```
 
 Atualmente, rastreamos dois pedaços de metadados dos valores no pipeline. Você pode observar que temos a origem, que nos dá a localização de onde os dados foram carregados, o que pode ajudar o Nu a entender melhor como apresentá-los.

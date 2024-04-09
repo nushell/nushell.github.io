@@ -25,9 +25,9 @@
 ───┬────────┬────────────┬─────────────────────────
  # │ active │    name    │          path
 ───┼────────┼────────────┼─────────────────────────
- 0 │ false  │ filesystem │ /home/sophiajt/Source/nushell
- 1 │ true   │ filesystem │ /home/sophiajt/Source/book
- 2 │ false  │ filesystem │ /home/sophiajt/Source/music
+ 0 │ false  │ filesystem │ /home/st/Source/nushell
+ 1 │ true   │ filesystem │ /home/st/Source/book
+ 2 │ false  │ filesystem │ /home/st/Source/music
 ───┴────────┴────────────┴─────────────────────────
 
 ```
