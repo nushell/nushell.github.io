@@ -21,11 +21,11 @@ Nuevamente ejecutemos el comando `open` pero esta vez observaremos las etiquetas
 
 ```
 > open Cargo.toml | tags
-----------+------------------------------------------
+----------+----------------------------------------
  span     | anchor
-----------+------------------------------------------
+----------+----------------------------------------
  [object] | /home/sophia/Source/nushell/Cargo.toml
-----------+------------------------------------------
+----------+----------------------------------------
 ```
 
 Actualmente rastreamos dos pedazos de metadatos de los valores en la tubería. Puedes darte cuenta que disponemos del ancla que nos da la ubicación de dónde se cargaron los datos. Esto puede ayudar a Nu entender mejor como presentar datos.
