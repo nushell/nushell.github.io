@@ -55,7 +55,7 @@ do --env {
 ### [KeyChain](https://www.funtoo.org/Funtoo:Keychain)
 
 ```nushell
-load-env (keychain --eval <your ssh keys, eg. --quiet id_ed25519> | lines | split column ";" | get column1 | first 2 | split column "=" | rename name value | reduce -f {} {|it, acc| $acc | upsert $it.name $it.value })
+load-env (keychain --eval --quiet <your ssh keys, eg. id_ed25519> | lines | split column ";" | get column1 | first 2 | split column "=" | rename name value | reduce -f {} {|it, acc| $acc | upsert $it.name $it.value })
 ```
 
 ## Non-nushell workarounds
