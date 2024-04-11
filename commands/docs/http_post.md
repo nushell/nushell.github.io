@@ -60,7 +60,7 @@ Post content to example.com, with username and password
 
 Post content to example.com, with custom header
 ```nu
-> http post --headers [my-header-key my-header-value] https://www.example.com
+> http post --headers [my-header-key my-header-value] https://www.example.com ''
 
 ```
 
