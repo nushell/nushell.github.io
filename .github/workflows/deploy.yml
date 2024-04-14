@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.2
         with:
           ref: main
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 20
 
@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: ./.vuepress/dist
 
@@ -46,4 +46,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2.0.4
+        uses: actions/deploy-pages@v4.0.5
