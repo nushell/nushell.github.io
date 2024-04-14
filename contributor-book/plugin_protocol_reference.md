@@ -1043,29 +1043,9 @@ is encoded in the MessagePack format as:
 
 Byte arrays are encoded with MessagePack's native byte arrays, which impose zero constraints on the formatting of the bytes within. In general, the MessagePack encoding is much more efficient than JSON and **should** be the first choice for plugins where performance is important and MessagePack is available.
 
-## Embedded Nu types
+## `Value`
 
-Several types used within the protocol come from elsewhere in Nu's source code, especially the [`nu-protocol`](https://docs.rs/nu-protocol) crate.
-
-Rust enums are usually encoded in [serde](https://serde.rs)'s default format:
-
-```javascript
-"Variant"             // Variant
-{ "Variant": value }  // Variant(value)
-{ "Variant": [a, b] } // Variant(a, b)
-{
-  "Variant": {
-    "one": 1,
-    "two": 2
-  }
-}                     // Variant { one: 1, two: 2 }
-```
-
-Structs are encoded as maps of their fields, without the name of the struct.
-
-### `Value`
-
-[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html)
+[Rust documentation](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html)
 
 This enum describes all structured data used in Nu.
 
@@ -1083,9 +1063,188 @@ Example:
 }
 ```
 
-#### `PluginCustomValue`
+### `Bool`
 
-`CustomValue` for plugins **may** only contain the following content map:
+A boolean.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | boolean         |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```json
+{
+  "Bool": {
+    "val": true,
+    "span": {
+      "start": 4040,
+      "end": 4044
+    }
+  }
+}
+```
+
+### `Int`
+
+A 64-bit signed integer.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | integer         |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```json
+{
+  "Int": {
+    "val": -2,
+    "span": {
+      "start": 4040,
+      "end": 4042
+    }
+  }
+}
+```
+
+### `Float`
+
+A 64-bit (double precision) floating point number.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | double          |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```json
+{
+  "Float": {
+    "val": 36.4,
+    "span": {
+      "start": 8040,
+      "end": 8044
+    }
+  }
+}
+```
+
+### `Filesize`
+
+A quantity of bytes, internally a 64-bit signed integer representing the number of bytes. This is pretty-printed to the user with a more human scale, e.g. `32.4 MiB`.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | integer         |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```json
+{
+  "Filesize": {
+    "val": 33973248,
+    "span": {
+      "start": 7740,
+      "end": 7747
+    }
+  }
+}
+```
+
+### `Duration`
+
+A duration of time, internally a 64-bit signed integer representing the number of nanoseconds. This is pretty-printed to the user with a more human scale, e.g. `8sec 375ms 604µs 528ns`.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | integer         |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```json
+{
+  "Duration": {
+    "val": 8375604528,
+    "span": {
+      "start": 181462,
+      "end": 181465
+    }
+  }
+}
+```
+
+### `Date`
+
+A date/time value, including the time zone, represented in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. This is printed to the user according to their locale.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | string          |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```json
+{
+  "Date": {
+    "val": "1996-12-19T16:39:57-08:00",
+    "span": {
+      "start": 181525,
+      "end": 181528
+    }
+  }
+}
+```
+
+### `Range`
+
+A range of values.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | `Range`         |
+| **span** | [`Span`](#span) |
+
+`Range` has two variants, `IntRange` and `FloatRange`:
+
+#### `IntRange`
+
+| Field     | Type |
+| --------- | ---- |
+| **start** |
+| **next**  |
+| **end**   |
+
+#### `FloatRange`
+
+### `String`
+
+### `Glob`
+
+### `Record`
+
+### `List`
+
+### `Block`
+
+### `Closure`
+
+### `Nothing`
+
+### `Error`
+
+### `Binary`
+
+### `CellPath`
+
+### `Custom`
+
+`Custom` values for plugins **may** only contain the following content map:
 
 | Field              | Type       | Usage                                                                                     |
 | ------------------ | ---------- | ----------------------------------------------------------------------------------------- |
@@ -1116,6 +1275,30 @@ Example:
   }
 }
 ```
+
+### `LazyRecord`
+
+Lazy record types are not allowed across the plugin boundary. They will be collected to [`Record`](#record) before sending.
+
+## Embedded Nu types
+
+Several types used within the protocol come from elsewhere in Nu's source code, especially the [`nu-protocol`](https://docs.rs/nu-protocol) crate.
+
+Rust enums are usually encoded in [serde](https://serde.rs)'s default format:
+
+```javascript
+"Variant"             // Variant
+{ "Variant": value }  // Variant(value)
+{ "Variant": [a, b] } // Variant(a, b)
+{
+  "Variant": {
+    "one": 1,
+    "two": 2
+  }
+}                     // Variant { one: 1, two: 2 }
+```
+
+Structs are encoded as maps of their fields, without the name of the struct.
 
 ### `Span`
 
