@@ -80,7 +80,7 @@ If you want to redirect both stdout and stderr to the same file, you can use `ou
 cat unknown.txt out+err> log.log
 ```
 
-Note that `out` can be shortend to just `o`, and `err` can be shortened to just `e`. So, the following examples are equivalent to the previous ones above:
+Note that `out` can be shortened to just `o`, and `err` can be shortened to just `e`. So, the following examples are equivalent to the previous ones above:
 ```nu
 cat unknown.txt o> out.log e> err.log
 
