@@ -1214,15 +1214,146 @@ A range of values.
 
 #### `IntRange`
 
-| Field     | Type |
-| --------- | ---- |
-| **start** |
-| **next**  |
-| **end**   |
+| Field     | Type            |
+| --------- | --------------- |
+| **start** | integer         |
+| **step**  | integer         |
+| **end**   | `Bound` integer |
+
+Examples:
+
+```nushell
+0..
+```
+
+```json
+{
+  "val": {
+    "IntRange": {
+      "start": 0,
+      "step": 1,
+      "end": "Unbounded"
+    }
+  },
+  "span": {
+    "start": 1380,
+    "end": 1383
+  }
+}
+```
+
+```nushell
+7..10
+```
+
+```json
+{
+  "val": {
+    "IntRange": {
+      "start": 7,
+      "step": 1,
+      "end": { "Included": 10 }
+    }
+  },
+  "span": {
+    "start": 1380,
+    "end": 1385
+  }
+}
+```
+
+```nushell
+7..<10
+```
+
+```json
+{
+  "val": {
+    "IntRange": {
+      "start": 7,
+      "step": 1,
+      "end": { "Excluded": 10 }
+    }
+  },
+  "span": {
+    "start": 1380,
+    "end": 1386
+  }
+}
+```
+
+```nushell
+0..64..128
+```
+
+```json
+{
+  "val": {
+    "IntRange": {
+      "start": 0,
+      "step": 64,
+      "end": { "Included": 128 }
+    }
+  },
+  "span": {
+    "start": 1380,
+    "end": 1390
+  }
+}
+```
 
 #### `FloatRange`
 
+Identical to [`IntRange`](#intrange) but for floats instead.
+
+| Field     | Type           |
+| --------- | -------------- |
+| **start** | double         |
+| **step**  | double         |
+| **end**   | `Bound` double |
+
+Example:
+
+```nushell
+7.5..10.5
+```
+
+```json
+{
+  "val": {
+    "FloatRange": {
+      "start": 7.5,
+      "step": 1,
+      "end": { "Included": 10.5 }
+    }
+  },
+  "span": {
+    "start": 1380,
+    "end": 1389
+  }
+}
+```
+
 ### `String`
+
+A UTF-8 string.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | string          |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```json
+{
+  "val": "Hello, nu!",
+  "span": {
+    "start": 8990,
+    "end": 9002
+  }
+}
+```
 
 ### `Glob`
 
