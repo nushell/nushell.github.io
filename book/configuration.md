@@ -4,10 +4,10 @@
 
 Nushell uses a configuration system that loads and runs two Nushell script files at launch time:
 
-- `env.nu` is used to define environment variables. These typically get used in the second config file, config.nu.
-- `config.nu` is used to add definitions, aliases, and more to the global namespace. It can use the environment variables defined in `env.nu`, which is why there's two separate files.
+- `env.nu` is used to define environment variables or write files before `config.nu` starts. For example [`$env.NU_LIB_DIRS`](/book/modules.md#dumping-files-into-directory) controls where Nu finds imports. Third party scripts, like prompts or [mise](https://mise.jdx.dev/getting-started.html#nushell), must already be saved to disk before `config.nu` can read them.
+- `config.nu` is used to add definitions, aliases, and more to the global namespace. It can also use the environment variables and constants defined in `env.nu`. If you can't decide which file to add stuff, prefer `config.nu`.
 
-You can check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`.
+Check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`.
 
 ```nu
 > $nu.env-path
@@ -18,9 +18,17 @@ _(You can think of the Nushell config loading sequence as executing two [REPL](h
 
 When you launch Nushell without these files set up, Nushell will prompt you to download the [`default env.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_env.nu) and [`default config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_config.nu).
 
-You can browse the default files for default values of environment variables and a list of all configurable settings.
+::: tip
+The default config files aren't required. If you prefer to start with an empty `env.nu` and `config.nu` then Nu applies identical defaults in internal Rust code. You can still browse the default files for default values of environment variables and a list of all configurable settings using the [`config`](#configurations-with-built-in-commands) commands:
 
-You can control which directory Nushell reads config files from. If you set the `XDG_CONFIG_HOME` environment variable to
+```nu
+> config env --default | nu-highlight | lines
+> config nu --default | nu-highlight | lines
+```
+
+:::
+
+Control which directory Nushell reads config files from with the `XDG_CONFIG_HOME` environment variable. When you set it to
 an absolute path, Nushell will read config files from `$"($env.XDG_CONFIG_HOME)/nushell"`.
 
 ::: warning
@@ -37,12 +45,12 @@ C:\Users\username\.config\nushell
 ```
 
 ::: warning
-`XDG_CONFIG_HOME` is not a Nushell-specific environment variable and should not be set to the directory that contains Nushell config files.
-It should be the directory *above* the `nushell` directory. If you set it to `/Users/username/dotfiles/nushell`, Nushell will look for
+[`XDG_CONFIG_HOME`](https://xdgbasedirectoryspecification.com) is not a Nushell-specific environment variable and should not be set to the directory that contains Nushell config files.
+It should be the directory _above_ the `nushell` directory. If you set it to `/Users/username/dotfiles/nushell`, Nushell will look for
 config files in `/Users/username/dotfiles/nushell/nushell` instead. In this case, you would want to set it to `/Users/username/dotfiles`.
 :::
 
-### Configuring `$env.config`
+## Configuring `$env.config`
 
 Nushell's main settings are kept in the `config` environment variable as a record. This record can be created using:
 
@@ -52,7 +60,7 @@ $env.config = {
 }
 ```
 
-You can also shadow `$env.config` and update it:
+Note that setting any key overwrites its previous value. Likewise it's an error to reference any missing key. If `$env.config` already exists you can update or gracefully insert a [`cell-path`](/lang-guide/lang-guide.md#cellpath) at any depth using [`upsert`](/commands/docs/upsert.md):
 
 ```nu
 $env.config = ($env.config | upsert <field name> <field value>)
@@ -82,21 +90,17 @@ These are some important variables to look at for Nushell-specific settings:
 
 ### Configurations with built-in commands
 
-Starting with release v0.64 of Nushell, we have introduced two new commands([`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/docs/config_env.md)) which help you quickly edit nu configurations with your preferred text editor/IDE
+The ([`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/docs/config_env.md)) commands open their respective configurations for quick editing in your preferred text editor or IDE. Nu determines your editor from the following environment variables in order:
 
-Nushell follows underneath orders to locate the editor:
-
-1. `$config.buffer_editor`
+1. `$env.config.buffer_editor`
 2. `$env.EDITOR`
 3. `$env.VISUAL`
-
-Note: Previous versions of Nushell were launching `notepad` on windows, otherwise `nano` when these variables weren't found. We removed defaulting to `notepad` on Windows since `notepad` is now distributed via the Windows Store and there will be a possibility of not having `notepad` at all.
 
 ### Color Config section
 
 You can learn more about setting up colors and theming in the [associated chapter](coloring_and_theming.md).
 
-## Remove Welcome Message
+### Remove Welcome Message
 
 To remove the welcome message, you need to edit your `config.nu` by typing `config nu` in your terminal, then you go to the global configuration `$env.config` and set `show_banner` option to false, like this:
 
@@ -127,7 +131,7 @@ Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
 /bin/rbash
 /usr/bin/screen
 /usr/bin/fish
-/home/jonathan/.cargo/bin/nu
+/home/sophia/.cargo/bin/nu
 ```
 
 With this, you should be able to `chsh` and set Nu to be your login shell. After a logout, on your next login you should be greeted with a shiny Nu prompt.
@@ -136,9 +140,9 @@ With this, you should be able to `chsh` and set Nu to be your login shell. After
 
 If Nushell is used as a login shell, you can use a specific configuration file which is only sourced in this case. Therefore a file with name `login.nu` has to be in the standard configuration directory.
 
-The file `login.nu` is sourced after `env.nu` and `config.nu`, so that you can overwrite those configurations if you need.
+The file `login.nu` is sourced after `env.nu` and `config.nu`, so that you can overwrite those configurations if you need. There is an environment variable `$nu.loginshell-path` containing the path to this file.
 
-There is an environment variable `$nu.loginshell-path` containing the path to this file.
+What about customizing interactive shells, similar to `.zshrc`? By default `config.nu` is only loaded in interactive shells, not scripts.
 
 ### macOS: Keeping `/usr/bin/open` as `open`
 
@@ -147,7 +151,7 @@ As Nushell has its own [`open`](/commands/docs/open.md) command which has differ
 One way to work around this is to define a custom command for Nushell's [`open`](/commands/docs/open.md) and create an alias for the system's [`open`](/commands/docs/open.md) in your `config.nu` file like this:
 
 ```nu
-def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
+alias nu-open = open
 alias open = ^open
 ```
 
@@ -164,22 +168,30 @@ $env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
 
 This will append `/some/path` to the end of PATH; you can also use [`prepend`](/commands/docs/prepend.md) to add entries to the start of PATH.
 
-Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.html#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append.md)/[`prepend`](/commands/docs/prepend.md) directly.
+Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.md#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append.md)/[`prepend`](/commands/docs/prepend.md) directly.
 
 To add multiple paths only if not already listed, one can add to `env.nu`:
 
 ```nu
-$env.PATH = ($env.PATH | 
-    split row (char esep) |
-    append /usr/local/bin |
-    append ($env.CARGO_HOME | path join "bin") |
-    append ($env.HOME | path join ".local" "bin")
-)
-# filter so the paths are unique
-$env.PATH = ($env.PATH | uniq)
+$env.PATH = $env.PATH | split row (char esep)
+  | append /usr/local/bin
+  | append ($env.CARGO_HOME | path join bin)
+  | append ($env.HOME | path join .local bin)
+  | uniq # filter so the paths are unique
 ```
 
 This will add `/usr/local/bin`, the `bin` directory of CARGO_HOME, the `.local/bin` of HOME to PATH. It will also remove duplicates from PATH.
+
+::: tip
+There's a convenience command for updating your system path but you must first open the [`std`](/book/standard_library.md) [module](/book/cheat_sheet.md#modules) (in preview):
+
+```nu
+use std *
+path add /usr/local/bin ($env.CARGO_HOME | path join bin) # etc.
+```
+
+You can optionally `--append` paths to be checked last like the ones below.
+:::
 
 ### Homebrew
 
@@ -194,23 +206,26 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend '/home/linuxbrew/.linux
 ```
 
 ### Pyenv
+
 [Pyenv](https://github.com/pyenv/pyenv) is a popular Python version manager. To add it to your Nushell PATH:
 
 #### MacOS or Linux
+
 ```nu
 # MacOS or Linux
 $env.PATH = ($env.PATH | split row (char esep) | prepend $"(pyenv root)/shims")
 ```
 
 #### Windows
+
 Windows users need to install [pyenv-win](https://github.com/pyenv-win/pyenv-win)
 and execute the `Get-Command pyenv` command in PowerShell to get the path of `pyenv.ps1` after the installation.
 
 The result usually looks like: `C:\Users\<your-username>\.pyenv\pyenv-win\bin\pyenv.ps1`
 
 Then add the path of pyenv to your Nushell PATH:
+
 ```nu
 # Windows
 $env.Path = ($env.Path | split row (char esep) | prepend $"~/.pyenv/pyenv-win/bin/pyenv.ps1")
 ```
-

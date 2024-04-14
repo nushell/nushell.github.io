@@ -61,7 +61,7 @@ Als nächstes, muss auf manchen Distributionen sichergestellt werden, dass Nu in
 /bin/rbash
 /usr/bin/screen
 /usr/bin/fish
-/home/jonathan/.cargo/bin/nu
+/home/sophia/.cargo/bin/nu
 ```
 
 Damit sollte es möglich sein, Nu als Login-Shell mit `chsh` festzulegen. Nach dem Ausloggen und erneutem Einloggen sollte Nu als Shell grüßen.

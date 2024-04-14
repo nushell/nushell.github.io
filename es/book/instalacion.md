@@ -138,7 +138,7 @@ Finalizada la instalación podemos ejecutar Nu usando el comando `nu`:
 ```
 
 $ nu
-/home/jonathan/Source>
+/home/sophia/Source>
 
 ```
 

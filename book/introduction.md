@@ -56,9 +56,9 @@ The [`get`](/commands/docs/get.md) command lets us jump into the contents of a c
 
 @[code](@snippets/introduction/sys_get_nested_example.sh)
 
-Right now, there's just one user on the system named "jt". You'll notice that we can pass a column path (the `host.sessions.name` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
+Right now, there's just one user on the system named "sophiajt". You'll notice that we can pass a column path (the `host.sessions.name` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
 
-You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "jt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
+You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "sophiajt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
 
 Let's see how strings work outside of Nu in action. We'll take our example from before and run the external [`echo`](/commands/docs/echo.md) command (the `^` tells Nu to not use the built-in [`echo`](/commands/docs/echo.md) command):
 

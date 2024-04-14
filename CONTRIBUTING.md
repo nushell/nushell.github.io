@@ -4,6 +4,10 @@ If you want to contribute to nushell itself, see [nushell/nushell/CONTRIBUTING.m
 
 This website is based on Vuepress.
 
+## Enabling a Preview URL From Your Fork
+
+Just enable GitHub actions in your repo settings. That's all! It will start deploying the next time you push to `main`.
+
 ## Running Vuepress locally
 
 1. [Install Node.js](https://nodejs.org/en/download/), the minimum version required: v18.12.0

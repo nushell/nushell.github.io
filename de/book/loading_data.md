@@ -192,7 +192,7 @@ ist dies nicht immer gewünscht. Um den darunter liegenden Text zu erhalten, kan
 > open Cargo.toml --raw
 [package]                                                                                        name = "nu"
 version = "0.1.3"
-authors = ["Yehuda Katz <wycats@gmail.com>", "Jonathan Turner <jonathan.d.turner@gmail.com>"]
+authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
 description = "A shell for the GitHub era"
 license = "MIT"
 ```

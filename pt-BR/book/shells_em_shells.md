@@ -7,8 +7,8 @@ Embora seja comum trabalhar em um único diretório, pode ser útil trabalhar em
 Para começar, vamos entrar num diretório:
 
 ```nu
-/home/jonathan/Source/nushell(master)> enter ../lark
-/home/jonathan/Source/lark(master)> ls
+/home/sophia/Source/nushell(master)> enter ../lark
+/home/sophia/Source/lark(master)> ls
 ----+----------------+-----------+----------+---------+---------------+---------------
  #  | name           | type      | readonly | size    | accessed      | modified
 ----+----------------+-----------+----------+---------+---------------+---------------
@@ -20,13 +20,13 @@ Para começar, vamos entrar num diretório:
 Entrar é semlhante a mudar de diretório (como vimos com o comando `cd`), permitindo que você salte para o diretório dentro do qual vai trabalhar. Ao invés de mudar de diretório, nós agora estamos em dois diretórios. Para ver isso mais claramente, podemos usar o comando `shells` para listar os diretórios ativos agora:
 
 ```nu
-/home/jonathan/Source/lark(master)> shells
----+---+------------+-------------------------------
+/home/sophia/Source/lark(master)> shells
+---+---+------------+-----------------------------
  # |   | name       | path
----+---+------------+-------------------------------
- 0 |   | filesystem | /home/jonathan/Source/nushell
- 1 | X | filesystem | /home/jonathan/Source/lark
----+---+------------+-------------------------------
+---+---+------------+-----------------------------
+ 0 |   | filesystem | /home/sophia/Source/nushell
+ 1 | X | filesystem | /home/sophia/Source/lark
+---+---+------------+-----------------------------
 ```
 
 O comando `shells` nos mostra que há dois diretórios ativos agora: nosso diretório original "nushell" e agora esse novo diretório "lark".
@@ -34,9 +34,9 @@ O comando `shells` nos mostra que há dois diretórios ativos agora: nosso diret
 Podemos saltar entre esses shells com os atalhos `n` e `p`, abrevisções para "next" (próximo) e "previous" (anterior):
 
 ```
-/home/jonathan/Source/lark(master)> n
-/home/jonathan/Source/nushell(master)> p
-/home/jonathan/Source/lark(master)>
+/home/sophia/Source/lark(master)> n
+/home/sophia/Source/nushell(master)> p
+/home/sophia/Source/lark(master)>
 ```
 
 Podemos ver a alteração de diretórios, mas sempre somos capazes de voltar para um diretório anterior em que estávamos trabalhando. Isso nos permite trabalhar em múltiplos diretórios na mesma sessão.

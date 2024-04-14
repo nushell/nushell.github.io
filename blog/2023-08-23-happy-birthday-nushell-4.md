@@ -42,7 +42,7 @@ Using `ls | sort-by type name -i | grid -c`, it looks like this:
 > (http get https://api.chucknorris.io/jokes/random).value
 ```
 
-## Surprise, we support script subcommands (jt)
+## Surprise, we support script subcommands (sophiajt)
 
 "Turns out, we already support subcommands in scripts."
 

@@ -1,3 +1,28 @@
+# get all command names from a clean scope
+def command-names [] {
+    const plugins = [
+        nu_plugin_inc,
+        nu_plugin_gstat,
+        nu_plugin_query,
+        nu_plugin_formats,
+    ]
+    let nu_dir = (which nu) | get path.0 | path dirname
+    mut register_cmd = ''
+    for plugin in $plugins {
+        if (sys).host.name == 'Windows' {
+            $register_cmd += $'register ($nu_dir | path join $plugin).exe;'
+        } else {
+            $register_cmd += $'register ($nu_dir | path join $plugin);'
+        }
+    }
+    nu --no-config-file --commands $'($register_cmd) scope commands | select name | to json'
+        | from json
+}
+
+def html-escape [] {
+    to html | parse --regex '<body>(?<html>.*)</body>' | get html.0
+}
+
 # remove invalid characters from a path
 #
 # # Examples
@@ -91,9 +116,9 @@ feature: ($feature)
 # TODO: be more detailed here
 def command-doc [command] {
     let top = $"
-# <code>{{ $frontmatter.title }}</code> for ($command.category)
+# `($command.name)` for [($command.category)]\(/commands/categories/($command.category).md\)
 
-<div class='command-title'>{{ $frontmatter.($command.category | str snake-case) }}</div>
+<div class='command-title'>($command.usage | html-escape)</div>
 
 "
 
@@ -229,11 +254,11 @@ $"($example.description)
     } else { '' }
 
     let features = if $command.name =~ '^dfr' {
-        $'(char nl)::: warning(char nl)Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl):::(char nl)'
+        $'::: warning(char nl)Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl):::(char nl)(char nl)'
     } else { '' }
 
     let plugins = if $command.name in ['from ini', 'from ics', 'from eml', 'from vcf'] {
-        $"(char nl)::: warning(char nl)Command `($command.name)` resides in [plugin]\(/book/plugins.html) [`nu_plugin_formats`]\(https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats(char nl):::(char nl)"
+        $"::: warning(char nl)Command `($command.name)` resides in [plugin]\(/book/plugins.html) [`nu_plugin_formats`]\(https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats(char nl):::(char nl)(char nl)"
     } else { '' }
 
     let doc = (
@@ -342,7 +367,7 @@ $"# ($category | str title-case)
     <th>Description</th>
   </tr>
   <tr v-for=\"command in commands\">
-   <td><a :href="command.path">{{ command.title }}</a></td>
+   <td><a :href=\"$withBase\(command.path\)\">{{ command.title }}</a></td>
    <td style=\"white-space: pre-wrap;\">{{ command.frontmatter.usage }}</td>
   </tr>
 </table>
@@ -361,7 +386,7 @@ def main [] {
 
     let commands = (
         scope commands
-        | where is_custom == false and is_extern == false
+        | join (command-names) name
         | sort-by category
     )
     let commands_group = ($commands | group-by name)
