@@ -409,8 +409,13 @@ Example:
     0,
     {
       "Error": {
-        "IOError": {
-          "msg": "The connection closed."
+        "LabeledError": {
+          "msg": "The connection closed.",
+          "labels": [],
+          "code": null,
+          "url": null,
+          "help": null,
+          "inner": []
         }
       }
     }
@@ -509,23 +514,7 @@ These are messages sent from the plugin to the engine. [`Hello`](#hello) and [`S
 
 #### `Error` plugin call response
 
-An error occurred while attempting to fulfill the request.
-
-| Field      | Type                  | Usage                                                                                                          |
-| ---------- | --------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **msg**    | string                | The main error message to show at the top of the error.                                                        |
-| **labels** | `ErrorLabel` array?   | Spans and messages to label the error in the source code.                                                      |
-| **code**   | string?               | A unique machine- and search-friendly code that can be matched against, e.g. `nu::shell::missing_config_value` |
-| **url**    | string?               | A URL that links to additional information about the error.                                                    |
-| **help**   | string?               | Additional help for the error, usually a hint about what the user might try.                                   |
-| **inner**  | `LabeledError` array? | Additional errors referenced by the error, possibly the cause(s) of this error.                                |
-
-Most of the fields are not required - only `msg` must be present. `ErrorLabel` (in the `labels` array) is as follows:
-
-| Field    | Type            | Usage                                                       |
-| -------- | --------------- | ----------------------------------------------------------- |
-| **text** | string          | The message for the label.                                  |
-| **span** | [`Span`](#span) | The span in the source code that the label should point to. |
+An error occurred while attempting to fulfill the request. The body is a [`LabeledError`](#labelederror).
 
 It is strongly preferred to provide labeled messages whenever possible to let the user know where the problem might be in their script. If there is no more suitable span from a value that can be used, `head` from [`EvaluatedCall`](#evaluatedcall) is a good fallback.
 
@@ -829,6 +818,8 @@ Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Return
 | **redirect_stdout** | boolean                                     | Whether to redirect stdout if the closure ends in an external command. |
 | **redirect_stderr** | boolean                                     | Whether to redirect stderr if the closure ends in an external command. |
 
+The `Closure` is not wrapped as a `Value` - i.e., it doesn't have `{"Closure": ...}` around it.
+
 Example:
 
 ```json
@@ -1043,31 +1034,13 @@ is encoded in the MessagePack format as:
 
 Byte arrays are encoded with MessagePack's native byte arrays, which impose zero constraints on the formatting of the bytes within. In general, the MessagePack encoding is much more efficient than JSON and **should** be the first choice for plugins where performance is important and MessagePack is available.
 
-## Embedded Nu types
+<a name="value"></a>
 
-Several types used within the protocol come from elsewhere in Nu's source code, especially the [`nu-protocol`](https://docs.rs/nu-protocol) crate.
+## Value types
 
-Rust enums are usually encoded in [serde](https://serde.rs)'s default format:
+[Rust documentation](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html)
 
-```javascript
-"Variant"             // Variant
-{ "Variant": value }  // Variant(value)
-{ "Variant": [a, b] } // Variant(a, b)
-{
-  "Variant": {
-    "one": 1,
-    "two": 2
-  }
-}                     // Variant { one: 1, two: 2 }
-```
-
-Structs are encoded as maps of their fields, without the name of the struct.
-
-### `Value`
-
-[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html)
-
-This enum describes all structured data used in Nu.
+The `Value` enum describes all structured data used in Nu.
 
 Example:
 
@@ -1083,9 +1056,742 @@ Example:
 }
 ```
 
-#### `PluginCustomValue`
+### `Bool`
 
-`CustomValue` for plugins **may** only contain the following content map:
+A boolean.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | boolean         |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```nushell
+true
+```
+
+```json
+{
+  "Bool": {
+    "val": true,
+    "span": {
+      "start": 4040,
+      "end": 4044
+    }
+  }
+}
+```
+
+### `Int`
+
+A 64-bit signed integer.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | integer         |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```nushell
+-2
+```
+
+```json
+{
+  "Int": {
+    "val": -2,
+    "span": {
+      "start": 4040,
+      "end": 4042
+    }
+  }
+}
+```
+
+### `Float`
+
+A 64-bit (double precision) floating point number.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | double          |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```nushell
+36.4
+```
+
+```json
+{
+  "Float": {
+    "val": 36.4,
+    "span": {
+      "start": 8040,
+      "end": 8044
+    }
+  }
+}
+```
+
+### `Filesize`
+
+A quantity of bytes, internally a 64-bit signed integer representing the number of bytes. This is pretty-printed to the user with a more human scale, e.g. `32.4 MiB`.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | integer         |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```nushell
+32.4MiB
+```
+
+```json
+{
+  "Filesize": {
+    "val": 33973248,
+    "span": {
+      "start": 7740,
+      "end": 7747
+    }
+  }
+}
+```
+
+### `Duration`
+
+A duration of time, internally a 64-bit signed integer representing the number of nanoseconds. This is pretty-printed to the user with a more human scale, e.g. `8sec 375ms 604µs 528ns`.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | integer         |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```nushell
+8375604528ns
+```
+
+```json
+{
+  "Duration": {
+    "val": 8375604528,
+    "span": {
+      "start": 181462,
+      "end": 181465
+    }
+  }
+}
+```
+
+### `Date`
+
+A date/time value, including the time zone, represented in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. This is printed to the user according to their locale.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | string          |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```nushell
+1996-12-19T16:39:57-08:00
+```
+
+```json
+{
+  "Date": {
+    "val": "1996-12-19T16:39:57-08:00",
+    "span": {
+      "start": 181525,
+      "end": 181528
+    }
+  }
+}
+```
+
+### `Range`
+
+A range of values.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | `Range`         |
+| **span** | [`Span`](#span) |
+
+`Range` has two variants, `IntRange` and `FloatRange`:
+
+#### `IntRange`
+
+| Field     | Type            |
+| --------- | --------------- |
+| **start** | integer         |
+| **step**  | integer         |
+| **end**   | `Bound` integer |
+
+Examples:
+
+```nushell
+0..
+```
+
+```json
+{
+  "Range": {
+    "val": {
+      "IntRange": {
+        "start": 0,
+        "step": 1,
+        "end": "Unbounded"
+      }
+    },
+    "span": {
+      "start": 1380,
+      "end": 1383
+    }
+  }
+}
+```
+
+```nushell
+7..10
+```
+
+```json
+{
+  "Range": {
+    "val": {
+      "IntRange": {
+        "start": 7,
+        "step": 1,
+        "end": { "Included": 10 }
+      }
+    },
+    "span": {
+      "start": 1380,
+      "end": 1385
+    }
+  }
+}
+```
+
+```nushell
+7..<10
+```
+
+```json
+{
+  "Range": {
+    "val": {
+      "IntRange": {
+        "start": 7,
+        "step": 1,
+        "end": { "Excluded": 10 }
+      }
+    },
+    "span": {
+      "start": 1380,
+      "end": 1386
+    }
+  }
+}
+```
+
+```nushell
+0..64..128
+```
+
+```json
+{
+  "Range": {
+    "val": {
+      "IntRange": {
+        "start": 0,
+        "step": 64,
+        "end": { "Included": 128 }
+      }
+    },
+    "span": {
+      "start": 1380,
+      "end": 1390
+    }
+  }
+}
+```
+
+#### `FloatRange`
+
+Identical to [`IntRange`](#intrange) but for floats instead.
+
+| Field     | Type           |
+| --------- | -------------- |
+| **start** | double         |
+| **step**  | double         |
+| **end**   | `Bound` double |
+
+Example:
+
+```nushell
+7.5..10.5
+```
+
+```json
+{
+  "Range": {
+    "val": {
+      "FloatRange": {
+        "start": 7.5,
+        "step": 1,
+        "end": { "Included": 10.5 }
+      }
+    },
+    "span": {
+      "start": 1380,
+      "end": 1389
+    }
+  }
+}
+```
+
+### `String`
+
+A UTF-8 string.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | string          |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```nushell
+"Hello, nu!"
+```
+
+```json
+{
+  "String": {
+    "val": "Hello, nu!",
+    "span": {
+      "start": 8990,
+      "end": 9002
+    }
+  }
+}
+```
+
+### `Glob`
+
+A filesystem glob, selecting multiple files or directories depending on the expansion of wildcards.
+
+If `no_expand` is true, the expansion of wildcards is disabled and this just acts as a literal path.
+
+| Field         | Type            |
+| ------------- | --------------- |
+| **val**       | string          |
+| **no_expand** | boolean         |
+| **span**      | [`Span`](#span) |
+
+Example:
+
+```nushell
+"src/**/*.rs" | into glob
+```
+
+```json
+{
+  "Glob": {
+    "val": "src/**/*.rs",
+    "no_expand": false,
+    "span": {
+      "start": 9400,
+      "end": 9413
+    }
+  }
+}
+```
+
+### `Record`
+
+An associative key-value map. If records are contained in a list, this renders as a table. The keys are always strings, but the values may be any type.
+
+| Field    | Type                            |
+| -------- | ------------------------------- |
+| **val**  | map: string ⇒ [`Value`](#value) |
+| **span** | [`Span`](#span)                 |
+
+Example:
+
+```nushell
+{foo: 5, bar: "hello nushell"}
+```
+
+```json
+{
+  "Record": {
+    "val": {
+      "foo": {
+        "Int": {
+          "val": 42,
+          "span": {
+            "start": 659813,
+            "end": 659814
+          }
+        }
+      },
+      "bar": {
+        "String": {
+          "val": "hello nushell",
+          "span": {
+            "start": 659821,
+            "end": 659836
+          }
+        }
+      }
+    },
+    "span": {
+      "start": 659807,
+      "end": 659837
+    }
+  }
+}
+```
+
+### `List`
+
+A list of values of any type.
+
+| Field    | Type                    |
+| -------- | ----------------------- |
+| **vals** | [`Value`](#value) array |
+| **span** | [`Span`](#span)         |
+
+Example:
+
+```nushell
+[1, 2, foo, bar]
+```
+
+```json
+{
+  "List": {
+    "vals": [
+      {
+        "Int": {
+          "val": 1,
+          "span": {
+            "start": 659951,
+            "end": 659952
+          }
+        }
+      },
+      {
+        "Int": {
+          "val": 2,
+          "span": {
+            "start": 659954,
+            "end": 659955
+          }
+        }
+      },
+      {
+        "String": {
+          "val": "foo",
+          "span": {
+            "start": 659957,
+            "end": 659960
+          }
+        }
+      },
+      {
+        "String": {
+          "val": "bar",
+          "span": {
+            "start": 659962,
+            "end": 659965
+          }
+        }
+      }
+    ],
+    "span": {
+      "start": 659950,
+      "end": 659966
+    }
+  }
+}
+```
+
+### `Block`
+
+A reference to a parsed block of Nushell code, without any captured variables.
+
+| Field    | Type                        |
+| -------- | --------------------------- |
+| **val**  | unsigned integer (block id) |
+| **span** | [`Span`](#span)             |
+
+Example:
+
+```json
+{
+  "Block": {
+    "val": 44500,
+    "span": {
+      "start": 59400,
+      "end": 59480
+    }
+  }
+}
+```
+
+### `Closure`
+
+A reference to a parsed block of Nushell code, with variables captured from scope.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | `Closure`       |
+| **span** | [`Span`](#span) |
+
+`Closure` is defined as:
+
+| Field        | Type                                                          |
+| ------------ | ------------------------------------------------------------- |
+| **block_id** | unsigned integer                                              |
+| **captures** | array of pairs (unsigned integer `var_id`, [`Value`](#value)) |
+
+The plugin **should not** try to inspect the contents of the closure. It is recommended that this is only used as an argument to the [`EvalClosure` engine call](#evalclosure-engine-call). The exact representation of a closure is likely to change in the future to avoid serializing all of the captures.
+
+Example:
+
+```nushell
+let foo = "bar"
+{ || $foo }
+```
+
+```json
+{
+  "Closure": {
+    "val": {
+      "block_id": 1965,
+      "captures": [
+        [
+          862,
+          {
+            "String": {
+              "val": "bar",
+              "span": {
+                "start": 660030,
+                "end": 660041
+              }
+            }
+          }
+        ]
+      ]
+    },
+    "span": {
+      "start": 660030,
+      "end": 660041
+    }
+  }
+}
+```
+
+### `Nothing`
+
+The absence of a value, represented by `null` within Nushell.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **span** | [`Span`](#span) |
+
+Example:
+
+```nushell
+null
+```
+
+```json
+{
+  "Nothing": {
+    "span": {
+      "start": 64550,
+      "end": 64554
+    }
+  }
+}
+```
+
+### `Error`
+
+An error contained within a value. Trying to operate on the value will most likely cause the error to be forwarded. When writing plugins, error values should typically be handled by returning the error from the command when encountered.
+
+`ShellError`s encountered in the plugin protocol are always [`LabeledError`](#labelederror)s.
+
+| Field    | Type                        |
+| -------- | --------------------------- |
+| **val**  | [`ShellError`](#shellerror) |
+| **span** | [`Span`](#span)             |
+
+Example:
+
+```nushell
+error make {
+  msg: "foo"
+  label: {
+    text: "bar"
+    span: {
+      start: 0
+      end: 0
+    }
+  }
+}
+```
+
+```json
+{
+  "Error": {
+    "val": {
+      "LabeledError": {
+        "msg": "foo",
+        "labels": [
+          {
+            "text": "bar",
+            "span": {
+              "start": 0,
+              "end": 0
+            }
+          }
+        ],
+        "code": null,
+        "url": null,
+        "help": null,
+        "inner": []
+      }
+    }
+  }
+}
+```
+
+### `Binary`
+
+An array of raw bytes. This is sometimes returned from operations that detect data that isn't valid as UTF-8, but can also be created with `into binary` or binary literals.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | byte array      |
+| **span** | [`Span`](#span) |
+
+Note that the encoding of byte arrays in [JSON](#json) and [MessagePack](#messagepack) is different - the former uses an array of numbers, but the latter uses the native byte array support.
+
+Example:
+
+```nushell
+0x[aa bb cc dd]
+```
+
+```json
+{
+  "Binary": {
+    "val": [170, 187, 204, 221],
+    "span": {
+      "start": 659637,
+      "end": 659652
+    }
+  }
+}
+```
+
+### `CellPath`
+
+Represents a path into subfields of lists, records, and tables.
+
+| Field    | Type            |
+| -------- | --------------- |
+| **val**  | `CellPath`      |
+| **span** | [`Span`](#span) |
+
+`CellPath` is defined as:
+
+| Field       | Type         |
+| ----------- | ------------ |
+| **members** | `PathMember` |
+
+`PathMember` has two variants, `String` or `Int`, and both contain the following fields:
+
+| Field        | Type                      |
+| ------------ | ------------------------- |
+| **val**      | string / unsigned integer |
+| **span**     | [`Span`](#span)           |
+| **optional** | boolean                   |
+
+Optional path members will not cause errors if they can't be accessed - the path access will just return [`Nothing`](#nothing) instead.
+
+Example:
+
+```nushell
+foo.0?.bar
+# [foo {value: 0, optional: true} bar] | into cell-path
+```
+
+```json
+{
+  "CellPath": {
+    "val": {
+      "members": [
+        {
+          "String": {
+            "val": "foo",
+            "span": {
+              "start": 659835,
+              "end": 659838
+            },
+            "optional": false
+          }
+        },
+        {
+          "Int": {
+            "val": 0,
+            "span": {
+              "start": 659847,
+              "end": 659848
+            },
+            "optional": true
+          }
+        },
+        {
+          "String": {
+            "val": "bar",
+            "span": {
+              "start": 659866,
+              "end": 659869
+            },
+            "optional": false
+          }
+        }
+      ]
+    },
+    "span": {
+      "start": 659873,
+      "end": 659887
+    }
+  }
+}
+```
+
+### `Custom`
+
+Represents data types that extend the base nushell types with custom functionality. Plugins can use custom values to implement native-like data types that can be indexed by cell paths, operated on by operators, and compared in plugin-defined ways.
+
+`Custom` values for plugins **may** only contain the following content map:
 
 | Field              | Type       | Usage                                                                                     |
 | ------------------ | ---------- | ----------------------------------------------------------------------------------------- |
@@ -1117,6 +1823,30 @@ Example:
 }
 ```
 
+### `LazyRecord`
+
+Lazy record types are not allowed across the plugin boundary. They will be collected to [`Record`](#record) before sending.
+
+## Embedded Nu types
+
+Several types used within the protocol come from elsewhere in Nu's source code, especially the [`nu-protocol`](https://docs.rs/nu-protocol) crate.
+
+Rust enums are usually encoded in [serde](https://serde.rs)'s default format:
+
+```javascript
+"Variant"             // Variant
+{ "Variant": value }  // Variant(value)
+{ "Variant": [a, b] } // Variant(a, b)
+{
+  "Variant": {
+    "one": 1,
+    "two": 2
+  }
+}                     // Variant { one: 1, two: 2 }
+```
+
+Structs are encoded as maps of their fields, without the name of the struct.
+
 ### `Span`
 
 [Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/span/struct.Span.html)
@@ -1132,14 +1862,14 @@ Describes a region of code in the engine's memory, used mostly for providing dia
 
 Describes either a single value, or the beginning of a stream.
 
-| Variant                                                | Usage                                         |
-| ------------------------------------------------------ | --------------------------------------------- |
-| [`Empty`](#pipelinedataheader-empty)                   | No values produced; an empty stream.          |
-| [`Value`](#pipelinedataheader-value)                   | A single value                                |
-| [`ListStream`](#pipelinedataheader-liststream)         | Specify a list stream that will be sent.      |
-| [`ExternalStream`](#pipelinedataheader-externalstream) | Specify an external stream that will be sent. |
+| Variant                                            | Usage                                         |
+| -------------------------------------------------- | --------------------------------------------- |
+| [`Empty`](#empty-header-variant)                   | No values produced; an empty stream.          |
+| [`Value`](#value-header-variant)                   | A single value                                |
+| [`ListStream`](#liststream-header-variant)         | Specify a list stream that will be sent.      |
+| [`ExternalStream`](#externalstream-header-variant) | Specify an external stream that will be sent. |
 
-#### `Empty`
+#### `Empty` header variant
 
 An empty stream. Nothing will be sent. There is no identifier, and this is equivalent to a `Nothing` value.
 
@@ -1149,7 +1879,7 @@ The representation is the following string:
 "Empty"
 ```
 
-#### `Value`
+#### `Value` header variant
 
 A single value. Does not start a stream, so there is no identifier. Contains a [`Value`](#value).
 
@@ -1169,7 +1899,7 @@ Example:
 }
 ```
 
-#### `ListStream`
+#### `ListStream` header variant
 
 Starts a list stream. Expect [`Data`](#data) messages with the referenced ID.
 
@@ -1189,7 +1919,7 @@ Example:
 }
 ```
 
-#### `ExternalStream`
+#### `ExternalStream` header variant
 
 External streams are composed of optional `stdout` and `stderr` raw streams and/or an `exit_code` list stream.
 
@@ -1233,55 +1963,60 @@ Example:
 
 [Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/enum.ShellError.html)
 
-This enum describes errors produced by the engine. As this enum is quite large and grows frequently, it is recommended to try to send this back to the engine without interpreting it, if possible.
+The only variant of `ShellError` permitted to cross the plugin protocol boundary is [`LabeledError`](#labelederror). Any other errors will be converted to this type.
+
+As such, anywhere `ShellError` is used, the plugin protocol will only contain `{"LabeledError": ...}` - i.e., a wrapped labeled error.
+
+### `LabeledError`
+
+[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/struct.LabeledError.html)
+
+A flexible, generic error type, with any number of labeled spans.
+
+| Field      | Type                  | Usage                                                                                                          |
+| ---------- | --------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **msg**    | string                | The main error message to show at the top of the error.                                                        |
+| **labels** | `ErrorLabel` array?   | Spans and messages to label the error in the source code.                                                      |
+| **code**   | string?               | A unique machine- and search-friendly code that can be matched against, e.g. `nu::shell::missing_config_value` |
+| **url**    | string?               | A URL that links to additional information about the error.                                                    |
+| **help**   | string?               | Additional help for the error, usually a hint about what the user might try.                                   |
+| **inner**  | `LabeledError` array? | Additional errors referenced by the error, possibly the cause(s) of this error.                                |
+
+Most of the fields are not required - only `msg` must be present. `ErrorLabel` (in the `labels` array) is as follows:
+
+| Field    | Type            | Usage                                                       |
+| -------- | --------------- | ----------------------------------------------------------- |
+| **text** | string          | The message for the label.                                  |
+| **span** | [`Span`](#span) | The span in the source code that the label should point to. |
+
+```json
+{
+  "msg": "A really bad error occurred",
+  "labels": [
+    {
+      "text": "I don't know, but it's over nine thousand!",
+      "span": {
+        "start": 9001,
+        "end": 9007
+      }
+    }
+  ],
+  "code": "my_plugin::bad::really_bad",
+  "url": "https://example.org/my_plugin/error/bad/really_bad.html",
+  "help": "you can solve this by not doing the bad thing",
+  "inner": [
+    {
+      "msg": "The bad thing"
+    }
+  ]
+}
+```
 
 ### `Config`
 
 [Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Config.html)
 
 This struct describes the configuration of Nushell. It is quite large and frequently changing, so please refer to the Rust documentation if there is anything you need from it.
-
-### `Closure`
-
-[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Closure.html)
-
-This is the representation of a closure within the engine, which references a block ID and a list of captures with variable IDs and their contents. It may be contained within [`Value`](#value).
-
-The plugin **should not** try to inspect the contents of the closure. It is recommended that this is only used as an argument to the [`EvalClosure` engine call](#evalclosure-engine-call). The exact representation of a closure is likely to change in the future to avoid serializing all of the captures.
-
-Example:
-
-```json
-{
-  "block_id": 782,
-  "captures": [
-    [
-      490,
-      {
-        "Int": {
-          "val": 72,
-          "span": {
-            "start": 78760,
-            "end": 78762
-          }
-        }
-      }
-    ],
-    [
-      491,
-      {
-        "String": {
-          "val": "Hello",
-          "span": {
-            "start": 78770,
-            "end": 78777
-          }
-        }
-      }
-    ]
-  ]
-}
-```
 
 ### `Ordering`
 
