@@ -46,4 +46,4 @@ Runs foo.nu in current context and call the command defined, suppose foo.nu has 
 
 ## Notes
 This command is a parser keyword. For details, check:
-  https://www.nushell.sh/book/thinking_in_nu.html
+  [Thinking in Nu](https://www.nushell.sh/book/thinking_in_nu.html)
