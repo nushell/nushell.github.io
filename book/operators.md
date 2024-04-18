@@ -50,9 +50,10 @@ Operations are evaluated in the following order (from highest precedence to lowe
 - Bitwise and (`bit-and`)
 - Bitwise xor (`bit-xor`)
 - Bitwise or (`bit-or`)
-- Logical and (`&&`, `and`)
+- Logical not (`not`)
+- Logical and (`and`)
 - Logical xor (`xor`)
-- Logical or (`||`, `or`)
+- Logical or (`or`)
 - Assignment operations
 
 ```
