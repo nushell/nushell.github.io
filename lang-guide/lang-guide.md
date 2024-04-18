@@ -249,7 +249,7 @@ What it is: Real numeric values using floating point internal arithmetic.
 
 Annotation: `float`
 
-Internally IEE-754 floats with 64 bit precision.
+Internally IEEE-754 floats with 64 bit precision.
 
 Literals with a fractional decimal component are evaluated as `Float`: `0.1`, `3.14159`, `-10.4`
 
