@@ -35,7 +35,7 @@
 ---
 
 ```nu
-    > [[framework, language]; [Django, Python] [Lavarel, PHP]]
+    > [[framework, language]; [Django, Python] [Laravel, PHP]]
 ```
 
 > **prints the table**
