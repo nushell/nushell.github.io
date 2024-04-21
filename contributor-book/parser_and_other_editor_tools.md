@@ -5,7 +5,7 @@ title: Parser and other editor tools
 # Parser and other editor tools
 
 Hi! There is a lot of space to grow in this area, and the development is
-somewhat spaced in time, so I (@AucaCoyan) decided to make a document explaning
+somewhat spaced in time, so I (@AucaCoyan) decided to make a document explaining
 the framework, conventions and other required knowledge to help others and
 myself with this section.
 
