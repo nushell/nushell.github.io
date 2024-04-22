@@ -6,15 +6,19 @@ title: Plugin protocol reference
 
 ## How Nu runs plugins
 
-Nu plugins **must** be an executable file with a filename starting with `nu_plugin_`. All interaction with the plugin is handled over standard input (stdin) and output (stdout). Standard error (stderr) is not redirected, and can be used by the plugin to print messages directly.
+Nu plugins **must** be an executable file with a filename starting with `nu_plugin_`. Plugins can run in one of two modes:
 
-Plugins are always passed `--stdio` as a command line argument. Other command line arguments are reserved for options that might be added in the future, including other communication methods. Plugins that support the protocol as described in this document **should** reject other arguments and print an informational message to stderr.
+1. Stdio mode, which **must** be supported. The plugin is passed `--stdio` as a command line argument. All interaction with the plugin is handled over standard input (stdin) and output (stdout). Standard error (stderr) is not redirected, and can be used by the plugin to print messages directly.
+
+2. Local socket mode, which **may** be supported (advertised via the [`LocalSocket` feature](#localsocket-feature)). The plugin is passed `--local-socket` as the first command line argument, and then the path of the Unix domain socket or name of the Windows named pipe to use for communication. None of the standard input or output streams are redirected, and they may all be used to interact with the user's terminal. See the [documentation](#localsocket-feature) specific to the feature for more details.
+
+Other command line arguments are reserved for options that might be added in the future, including other communication methods. Plugins that support the protocol as described in this document **should** reject other arguments and print an informational message to stderr.
 
 Immediately after spawning a plugin, Nu expects the plugin to send its encoding type. Currently two encoding types are supported: [`json`](#json) and [`msgpack`](#messagepack). The desired encoding type **should** be sent first with the length of the string as a single byte integer and then the encoding type string. That is, with C-like escape syntax, `"\x04json"` or `"\x07msgpack"`. In this document, the JSON format will be used for readability, but the MessagePack format is largely equivalent. See the [Encoding](#encoding) section for specific intricacies of the formats.
 
 Nu will then send messages in the desired encoding. The first message is always [`Hello`](#hello). The plugin **must** send a `Hello` message indicating the expected Nu version that it is compatible with, and any supported protocol features. The engine will also send a `Hello` message with its version, and any supported protocol features. The plugin **may** verify that it is compatible with the Nu version provided by the engine, but the engine will end communication with a plugin if it is determined to be unsupported. The plugin **must not** use protocol features it supports if they are not also confirmed to be supported by the engine in its `Hello` message. It is not permitted to send any other messages before sending `Hello`.
 
-The plugin **should** then receive and respond to messages until its stdin is closed.
+The plugin **should** then receive and respond to messages until its input stream is closed.
 
 Typical plugin interaction after the initial handshake looks like this:
 
@@ -41,8 +45,6 @@ After the encoding type has been decided, both the engine and plugin **must** se
 
 To be accepted, the `version` specified **must** be [semver](https://semver.org) compatible with the engine's version. "0.x.y" and "x.y.z" for differing values of "x" are considered to be incompatible.
 
-There are currently no protocol features defined, and they are only likely to be used once Nu releases versions after stabilization at "1.0.0".
-
 Plugins **may** decide to refuse engine versions with more strict criteria than specified here.
 
 Example:
@@ -56,6 +58,34 @@ Example:
   }
 }
 ```
+
+### Features
+
+All features are maps that **must** contain at least a `name` key, and **may** contain other keys. Features that are not recognized by `name` **must** be ignored, and not cause an error. Plugins **must** only advertise support for features they implement, and **should not** determine the features they will advertise depending on the engine's `Hello` message.
+
+#### `LocalSocket` feature
+
+This feature advertises support for local socket communication, instead of stdio.
+
+Example:
+
+```json
+{
+  "name": "LocalSocket"
+}
+```
+
+When local socket communication is advertised to an engine supporting the feature, the engine will cease stdio communication and launch the plugin again with the `--local-socket` command line argument. The second argument is either a path to a Unix domain socket on Linux, Android, macOS, and other Unix-like operating systems, or the name of a named pipe (without the `\\.\pipe\` prefix) on Windows.
+
+In either case, during startup, the plugin is expected to establish two separate connections to the socket, in this order:
+
+1. The input stream connection, used to send messages from the engine to the plugin
+2. The output stream connection, used to send messages from the plugin to the engine
+
+The connections are separate in order to facilitate ownership of the streams by separate threads. After these connections are both established, the engine will remove the socket, and will not accept further connections.
+
+If local socket communication fails to initialize, the engine will abort, stop the plugin, and start it again with the stdio mode, even if the plugin supports local sockets. Whether local socket mode initialized successfully, and therefore the plugin is allowed to use stdio, can be observed when
+[`EngineInterface::is_using_stdio()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.is_using_stdio) returns `false` for Rust plugins.
 
 ## Input messages
 
@@ -802,6 +832,48 @@ Example:
     "context": 1,
     "id": 2,
     "call": "GetHelp"
+  }
+}
+```
+
+#### `EnterForeground` engine call
+
+Moves the plugin to the foreground group for direct terminal access, in an operating system-defined manner. This should be called when the plugin is going to drive the terminal in raw mode, for example to implement a terminal UI. It will likely be necessary for the plugin to also be running in [local socket mode](#localsocket-feature) in that case.
+
+This call responds with [`Empty` pipeline data](#pipelinedataheader-empty) on success when no action is required by the plugin. On Unix-like operating systems, if the response is [`Value` pipeline data](#pipelinedataheader-value), it contains an [`Int`](#int) which is the process group ID the plugin must join using `setpgid()` in order to be in the foreground.
+
+This call will fail with an error if the plugin is already in the foreground.
+
+The plugin **should** call [`LeaveForeground`](#leaveforeground-engine-call) when it no longer needs to be in the foreground. Note that the plugin will also automatically be removed from the foreground when the plugin call response is received, even if the plugin call returns a stream.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 0,
+    "id": 0,
+    "call": "EnterForeground"
+  }
+}
+```
+
+#### `LeaveForeground` engine call
+
+Resets the state set by [`EnterForeground`](#enterforeground-engine-call).
+
+If the plugin had been requested to change process groups by the response of `EnterForeground`, it should also reset that state by calling `setpgid(0)`, since plugins are normally in their own process group.
+
+This call responds with [`Empty` pipeline data](#pipelinedataheader-empty) on success.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 0,
+    "id": 0,
+    "call": "LeaveForeground"
   }
 }
 ```

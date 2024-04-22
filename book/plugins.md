@@ -2,7 +2,7 @@
 
 Nu can be extended using plugins. Plugins behave much like Nu's built-in commands, with the added benefit that they can be added separately from Nu itself.
 
-Nu plugins are executables; Nu launches them as needed and communicates with them over [stdin, stdout, and stderr](https://en.wikipedia.org/wiki/Standard_streams). Nu plugins can use either JSON or MSGPACK as their communication encoding.
+Nu plugins are executables; Nu launches them as needed and communicates with them over [stdin and stdout](https://en.wikipedia.org/wiki/Standard_streams) or [local sockets](https://en.wikipedia.org/wiki/Inter-process_communication). Nu plugins can use either [JSON](https://www.json.org/) or [MessagePack](https://msgpack.org/) as their communication encoding.
 
 ## Downloading and installing a plugin
 
@@ -54,14 +54,9 @@ Windows:
 > register .\my_plugins\nu_plugin_cool.exe
 ```
 
-When [`register`](/commands/docs/register.md) is called:
+When registering a plugin, Nu runs it in order to ensure compatibility and to get a list of all of the commands it supports. These are then saved to the plugin file (`$nu.plugin-path`) which acts as a cache.
 
-1. Nu launches the plugin, and waits for the plugin to tell Nu which communication encoding it should use
-2. Nu sends it a "Signature" message over stdin
-3. The plugin responds via stdout with a message containing its signature (name, description, arguments, flags, and more)
-4. Nu saves the plugin signature in the file at `$nu.plugin-path`, so registration is persisted across multiple launches
-
-Once registered, the plugin is available as part of your set of commands:
+Once registered, the plugin should show up in [`plugin list`](/commands/docs/plugin_list.md) and all of its commands are available in scope:
 
 ```nu
 > help commands | where command_type == "plugin"
