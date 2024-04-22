@@ -372,7 +372,7 @@ You can also [`rename`](/commands/docs/rename.md) columns in a table by passing 
 You can also [`reject`](/commands/docs/reject.md) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls.md) and delete the columns, we can use this example:
 
 ```nu
-> ls -l / |reject readonly num_links inode created accessed modified
+> ls -l / | reject readonly num_links inode created accessed modified
 ╭────┬────────┬─────────┬─────────┬───────────┬──────┬───────┬────────╮
 │  # │  name  │  type   │ target  │   mode    │ uid  │ group │  size  │
 ├────┼────────┼─────────┼─────────┼───────────┼──────┼───────┼────────┤

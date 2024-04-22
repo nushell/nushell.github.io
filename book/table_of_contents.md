@@ -15,7 +15,7 @@
 - [Custom commands](custom_commands.md) - Creating your own commands
 - [Aliases](aliases.md) - How to alias commands
 - [Operators](operators.md) - Operators supported by Nushell
-- [Variables and subexpressions](variables_and_subexpressions.md) - Working with variables and working with subexpressions
+- [Variables](variables.md) - Working with variables
 - [Control flow](control_flow.md) - Working with the control flow commands
 - [Environment](environment.md) - Working with environment variables
 - [Stdout, stderr, and exit codes](stdout_stderr_exit_codes.md) - Working with stdout, stderr, and exit codes
