@@ -234,7 +234,7 @@ _(Important! The environment conversion string -> value happens **after** the en
 
 ## Removing environment variables
 
-You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide_env.md):
+You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide-env.md):
 
 ```nu
 > $env.FOO = 'BAR'
