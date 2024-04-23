@@ -456,8 +456,8 @@
 > This expression results in error.**
 
 ```nu
-    > const plugin = 'path/­to/­plugin'
-    > register $plugin
+    > const file = 'path/­to/­file.nu'
+    > source $file
 ```
 
 > **a constant variable is immutable value which is fully evaluated at parse-time**

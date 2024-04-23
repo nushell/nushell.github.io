@@ -16,7 +16,7 @@ For more detailed information about how exactly this communication works, especi
 
 ## Discovery
 
-Nu keeps a registry of plugins at the file system location defined by configuration variable `$nu.plugin-path`. To register a plugin, execute `register <path_to_plugin_executable>` in a Nu shell.
+Nu keeps a registry of plugins known as the ‘plugin cache file’ at the file system location defined by configuration variable `$nu.plugin-path`. To add a plugin, execute `plugin add <path_to_plugin_executable>` in a Nu shell.
 
 ## Launch environment
 
@@ -243,11 +243,12 @@ Once we have finished our plugin, to use it all we need to do is install it.
 
 ```sh
 > cargo install --path .
+> plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
 ```
 
-Once `nu` starts up, it will discover the plugin and register it as a command.
+Once `nu` starts up, it will discover the plugin and add its commands to the scope.
 
-If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load and register your plugin or register it manually with `register ./target/release/nu_plugin_len`.
+If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load your plugin.
 
 ```
 > nu

@@ -139,7 +139,13 @@ For more information on exactly under what circumstances a plugin is considered 
 
 ## Removing a plugin
 
-To remove a plugin, edit the `$nu.plugin-path` file and remove all of the `register` commands referencing the plugin you want to remove, including the signature argument.
+To remove a plugin, call `plugin rm` with the name of the plugin you want to remove. For example, if you previously added the plugin `~/.cargo/bin/nu_plugin_gstat`, its name would be `gstat`. To remove it:
+
+```nushell
+plugin rm gstat
+```
+
+You can check the name of a plugin by running `plugin list`.
 
 ## Examples
 
