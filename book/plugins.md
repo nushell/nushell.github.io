@@ -62,9 +62,21 @@ Once added, the next time `nu` is started, the plugin's commands are available a
 > help commands | where command_type == "plugin"
 ```
 
+You can also immediately reload a plugin in the current session by calling `plugin use`:
+
+```nu
+> plugin use cool
+```
+
+Note that `plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. If you need to run `nu` with a specific plugin or set of plugins without preparing a cache file, you can pass the `--plugins` option to `nu` with a list of plugin executable files:
+
+```nu
+> nu --plugins '[./my_plugins/nu_plugin_cool]'
+```
+
 ### Updating a plugin
 
-When updating a plugin, it is important to run `plugin add` again just as above to load the new signatures from the plugin and allow Nu to rewrite them to the plugin file (`$nu.plugin-path`).
+When updating a plugin, it is important to run `plugin add` again just as above to load the new signatures from the plugin and allow Nu to rewrite them to the plugin file (`$nu.plugin-path`). You can then `plugin use` to get the updated signatures within the current session.
 
 ## Managing plugins
 
@@ -91,7 +103,7 @@ To view the list of plugins you have installed:
 ╰───┴─────────┴────────────┴─────────┴───────────────────────┴───────┴───────────────────────────────╯
 ```
 
-Plugins stay running while they are in use, and are automatically stopped by default after a period of time of inactivity. This behavior is managed by the [plugin garbage collector](#plugin-garbage-collector). To manually stop a plugin:
+Plugins stay running while they are in use, and are automatically stopped by default after a period of time of inactivity. This behavior is managed by the [plugin garbage collector](#plugin-garbage-collector). To manually stop a plugin, call `plugin stop` with its name:
 
 ```nu
 > plugin stop gstat
@@ -141,7 +153,7 @@ For more information on exactly under what circumstances a plugin is considered 
 
 To remove a plugin, call `plugin rm` with the name of the plugin you want to remove. For example, if you previously added the plugin `~/.cargo/bin/nu_plugin_gstat`, its name would be `gstat`. To remove it:
 
-```nushell
+```nu
 plugin rm gstat
 ```
 

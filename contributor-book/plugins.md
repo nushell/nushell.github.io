@@ -16,7 +16,7 @@ For more detailed information about how exactly this communication works, especi
 
 ## Discovery
 
-Nu keeps a registry of plugins known as the ‘plugin cache file’ at the file system location defined by configuration variable `$nu.plugin-path`. To add a plugin, execute `plugin add <path_to_plugin_executable>` in a Nu shell.
+Nu keeps a registry of plugins known as the ‘plugin cache file’ at the file system location defined by configuration variable `$nu.plugin-path`. To add a plugin, execute `plugin add <path_to_plugin_executable>` in a Nu shell. The plugin's signatures will be added to the plugin cache file for future launches of Nu. To make them available immediately, call `plugin use <plugin_name>`.
 
 ## Launch environment
 
@@ -241,14 +241,19 @@ Here we import everything we need -- types and functions -- to be able to create
 
 Once we have finished our plugin, to use it all we need to do is install it.
 
-```sh
+```nu
 > cargo install --path .
+# nushell only (run with `nu -c` if not in nushell)
 > plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
 ```
 
-Once `nu` starts up, it will discover the plugin and add its commands to the scope.
+If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load your plugin, or call `plugin use` to load it immediately:
 
-If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load your plugin.
+```nu
+> plugin use len # the name of the plugin (without `nu_plugin_`)
+```
+
+Once `nu` starts up, it will discover the plugin and add its commands to the scope.
 
 ```
 > nu
@@ -266,6 +271,8 @@ Flags:
 Signatures:
   <string> | len -> <int>
 ```
+
+Run `plugin list` to see all plugins currently registered and available to this Nu session, including whether or not they are running, and their process ID if so.
 
 ## Using streams in plugins
 
