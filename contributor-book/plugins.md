@@ -16,7 +16,7 @@ For more detailed information about how exactly this communication works, especi
 
 ## Discovery
 
-Nu keeps a registry of plugins known as the ‘plugin cache file’ at the file system location defined by configuration variable `$nu.plugin-path`. To add a plugin, execute `plugin add <path_to_plugin_executable>` in a Nu shell. The plugin's signatures will be added to the plugin cache file for future launches of Nu. To make them available immediately, call `plugin use <plugin_name>`.
+Nu keeps a registry of plugins known as the ‘plugin registry file’ at the file system location defined by configuration variable `$nu.plugin-path`. To add a plugin, execute `plugin add <path_to_plugin_executable>` in a Nu shell. The plugin's signatures will be added to the plugin registry file for future launches of Nu. To make them available immediately, call `plugin use <plugin_name>`.
 
 ## Launch environment
 
