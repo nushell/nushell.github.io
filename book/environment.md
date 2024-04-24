@@ -80,7 +80,7 @@ Individual environment variables are fields of a record that is stored in the `$
 BAR
 ```
 
-Sometimes, you may want to access an environmental variable which might be unset. Consider using the [question mark operator](variables_and_subexpressions.md#variable-paths) to avoid an error:
+Sometimes, you may want to access an environmental variable which might be unset. Consider using the [question mark operator](types_of_data.md#optional-cell-paths) to avoid an error:
 ```nu
 > $env.FOO | describe
 Error: nu::shell::column_not_found
@@ -234,7 +234,7 @@ _(Important! The environment conversion string -> value happens **after** the en
 
 ## Removing environment variables
 
-You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide_env.md):
+You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide-env.md):
 
 ```nu
 > $env.FOO = 'BAR'

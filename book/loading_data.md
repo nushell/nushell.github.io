@@ -184,7 +184,6 @@ There are other commands you can use to work with strings:
 
 - [`str`](/commands/docs/str.md)
 - [`lines`](/commands/docs/lines.md)
-- [`size`](/commands/docs/size.md)
 
 There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:
 

@@ -20,12 +20,6 @@ Without the pipeline, Nushell will not do any redirection, allowing it to print 
 
 Another common stream that external applications often use to print error messages is stderr. By default, Nushell does not do any redirection of stderr, which means that by default it will print to the screen.
 
-You can force Nushell to do a redirection by using `do { ... } | complete`. For example, if we wanted to call the external above and redirect its stderr, we would write:
-
-```nu
-> do { external } | complete
-```
-
 ## Exit code
 
 Finally, external commands have an "exit code". These codes help give a hint to the caller whether the command ran successfully.
@@ -37,7 +31,7 @@ Nushell tracks the last exit code of the recently completed external in one of t
 > $env.LAST_EXIT_CODE
 ```
 
-The second uses a command called [`complete`](/commands/docs/complete.md).
+The second way is to use the [`complete`](/commands/docs/complete.md) command.
 
 ## Using the [`complete`](/commands/docs/complete.md) command
 
@@ -46,7 +40,7 @@ The [`complete`](/commands/docs/complete.md) command allows you to run an extern
 If we try to run the external `cat` on a file that doesn't exist, we can see what [`complete`](/commands/docs/complete.md) does with the streams, including the redirected stderr:
 
 ```nu
-> do { cat unknown.txt } | complete
+> cat unknown.txt | complete
 ╭───────────┬─────────────────────────────────────────────╮
 │ stdout    │                                             │
 │ stderr    │ cat: unknown.txt: No such file or directory │
@@ -72,18 +66,57 @@ The log level for output can be set with the `NU_LOG_LEVEL` environment variable
 NU_LOG_LEVEL=DEBUG nu std_log.nu
 ```
 
-## Using `out>`, `err>` to redirect stdout and stderr to files
+## File redirections
 
-If you want to redirect output to file, you can just type something like this:
+If you want to redirect stdout of an external command to a file, you can use `out>` followed by a file path. Similarly, you can use `err>` to redirect stderr:
 
 ```nu
 cat unknown.txt out> out.log err> err.log
 ```
 
-If you want to redirect both stdout and stderr to the same file, just type something like this:
+If you want to redirect both stdout and stderr to the same file, you can use `out+err>`:
 
 ```nu
 cat unknown.txt out+err> log.log
+```
+
+Note that `out` can be shortened to just `o`, and `err` can be shortened to just `e`. So, the following examples are equivalent to the previous ones above:
+```nu
+cat unknown.txt o> out.log e> err.log
+
+cat unknown.txt o+e> log.log
+```
+
+Also, any expression can be used for the file path, as long as it is a string value:
+```nu
+use std
+cat unknown.txt o+e> (std null-device)
+```
+
+Note that file redirections are scoped to an expression and apply to all external commands in the expression. In the example below, `out.txt` will contain `hello\nworld`:
+```nu
+let text = "hello\nworld"
+($text | head -n 1; $text | tail -n 1) o> out.txt
+```
+Pipes and additional file redirections inside the expression will override any file redirections applied from the outside.
+
+## Pipe redirections
+
+If a regular pipe `|` comes after an external command, it redirects the stdout of the external command as input to the next command. To instead redirect the stderr of the external command, you can use the stderr pipe, `err>|` or `e>|`:
+
+```nu
+cat unknown.txt e>| str upcase
+```
+
+Of course, there is a corresponding pipe for combined stdout and stderr, `out+err>|` or `o+e>|`:
+
+```nu
+nu -c 'print output; print -e error' o+e>| str upcase
+```
+
+Unlike file redirections, pipe redirections do not apply to all commands inside an expression. Rather, only the last command in the expression is affected. For example, only `cmd2` in the snippet below will have its stdout and stderr redirected by the pipe.
+```nu
+(cmd1; cmd2) o+e>| cmd3
 ```
 
 ## Raw streams

@@ -3,7 +3,7 @@
 Nushell provides several commands that help determine how different groups of code are executed. In programming languages this functionality is often referred to as _control flow_.
 
 ::: tip
-One thing to note is that all of the commands discussed on this page use [blocks](/book/types_of_data.html#blocks). This means you can mutate [environmental variables](/book/environment.html) and other [mutable variables](http://localhost:8080/book/variables_and_subexpressions.html#mutable-variables) in them.
+One thing to note is that all of the commands discussed on this page use [blocks](/book/types_of_data.html#blocks). This means you can mutate [environmental variables](/book/environment.html) and other [mutable variables](/book/variables.html#mutable-variables) in them.
 :::
 
 ## Already covered
