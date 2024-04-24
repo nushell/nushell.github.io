@@ -2,16 +2,16 @@
 title: shells
 categories: |
   shells
-version: 0.79.0
+version: 0.92.0
 shells: |
   Lists all open shells.
 usage: |
   Lists all open shells.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for shells
+# `shells` for [shells](/commands/categories/shells.md)
 
-<div class='command-title'>{{ $frontmatter.shells }}</div>
+<div class='command-title'>Lists all open shells.</div>
 
 ## Signature
 
