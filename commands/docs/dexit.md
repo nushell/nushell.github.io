@@ -4,9 +4,9 @@ categories: |
   shells
 version: 0.92.0
 shells: |
-  Enters a new shell at the given path.
+  Leaves a previously entered working directory.
 usage: |
-  Enters a new shell at the given path.
+  Leaves a previously entered working directory.
 ---
 
 # `dexit` for [shells](/commands/categories/shells.md)
