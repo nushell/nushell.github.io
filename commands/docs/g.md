@@ -2,16 +2,16 @@
 title: g
 categories: |
   shells
-version: 0.79.0
+version: 0.92.0
 shells: |
   Switch to a given shell, or list all shells if no given shell number.
 usage: |
   Switch to a given shell, or list all shells if no given shell number.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for shells
+# `g` for [shells](/commands/categories/shells.md)
 
-<div class='command-title'>{{ $frontmatter.shells }}</div>
+<div class='command-title'>Switch to a given shell, or list all shells if no given shell number.</div>
 
 ## Signature
 
