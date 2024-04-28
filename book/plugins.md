@@ -157,6 +157,10 @@ Nu's main repo contains example plugins that are useful for learning how the plu
 
 The simplest way to debug a plugin is to print to stderr; plugins' standard error streams are redirected through Nu and displayed to the user.
 
+### Tracing
+
+The Nu plugin protocol message stream may be captured for diagnostic purposes using the [Nu Plugin Tracer](https://crates.io/crates/nu_plugin_tracer/).
+
 ## Help
 
 Nu's plugin documentation is a work in progress. If you're unsure about something, the #plugins channel on [the Nu Discord](https://discord.gg/NtAbbGn) is a great place to ask questions!
