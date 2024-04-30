@@ -763,7 +763,7 @@ fn test_fib_on_input() -> Result<(), ShellError> {
 }
 ```
 
-The Nu context within tests is very basic and mostly only contains the plugin commands themselves. If you need to test your plugin with other commands, you can include those crates and then use `.add_decl()` to include them in the context:
+The Nu context within tests is very basic and mostly only contains the plugin commands themselves, as well as all of the core language keywords from [`nu-cmd-lang`](https://docs.rs/nu-cmd-lang/). If you need to test your plugin with other commands, you can include those crates and then use `.add_decl()` to include them in the context:
 
 ```rust
 #[test]
