@@ -70,11 +70,11 @@ To use mutable variables for such behaviour, you are encouraged to use the loops
 
 ### Constant Variables
 
-A constant variable is an immutable variable that can be fully evaluated at parse-time. These are useful with commands that need to know the value of an argument at parse time, like [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md) and [`register`](/commands/docs/register.md). See [how nushell code gets run](how_nushell_code_gets_run.md) for a deeper explanation. They are declared using the `const` keyword
+A constant variable is an immutable variable that can be fully evaluated at parse-time. These are useful with commands that need to know the value of an argument at parse time, like [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md) and [`plugin use`](/commands/docs/plugin_use.md). See [how nushell code gets run](how_nushell_code_gets_run.md) for a deeper explanation. They are declared using the `const` keyword
 
 ```nu
-const plugin = 'path/to/plugin'
-register $plugin
+const script_file = 'path/to/script.nu'
+source $script_file
 ```
 
 ## Variable Names

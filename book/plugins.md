@@ -32,44 +32,51 @@ If you chose to download the git repository instead, run this when inside the cl
 > cargo install --path .
 ```
 
-This will create a binary file that can be used to register the plugin.
+This will create a binary file that can be used to add the plugin.
 
 Keep in mind that when installing using crates.io, the binary can be saved in different locations depending on how your system is set up. A typical location is in the users's home directory under .cargo/bin.
 
-## Registering a plugin
+## Adding a plugin
 
-To enable an installed plugin, call the [`register`](/commands/docs/register.md) command to tell Nu where to find it. As you do, you'll need to also tell Nushell what encoding the plugin uses.
+To add a plugin to the plugin registry file, call the [`plugin add`](/commands/docs/plugin_add.md) command to tell Nu where to find it.
 
 Please note that the plugin name needs to start with `nu_plugin_`, Nu uses the name prefix to detect plugins.
 
 Linux+macOS:
 
 ```nu
-> register ./my_plugins/nu_plugin_cool
+> plugin add ./my_plugins/nu_plugin_cool
 ```
 
 Windows:
 
 ```nu
-> register .\my_plugins\nu_plugin_cool.exe
+> plugin add .\my_plugins\nu_plugin_cool.exe
 ```
 
-When [`register`](/commands/docs/register.md) is called:
+When [`plugin add`](/commands/docs/plugin_add.md) is called, Nu runs the plugin binary and communicates via the [plugin protocol](plugin_protocol_reference.md) to get the signatures of all of the commands the plugin supports. It then saves information about the plugin, including the command signatures, to the plugin registry file at `$nu.plugin-path` in a custom brotli-compressed MessagePack format. This caching step saves `nu` from having to run all plugins during startup, which could be very slow.
 
-1. Nu launches the plugin, and waits for the plugin to tell Nu which communication encoding it should use
-2. Nu sends it a "Signature" message over stdin
-3. The plugin responds via stdout with a message containing its signature (name, description, arguments, flags, and more)
-4. Nu saves the plugin signature in the file at `$nu.plugin-path`, so registration is persisted across multiple launches
-
-Once registered, the plugin is available as part of your set of commands:
+Once added, the next time `nu` is started, the plugin's commands are available as part of your set of commands:
 
 ```nu
 > help commands | where command_type == "plugin"
 ```
 
+You can also immediately reload a plugin in the current session by calling `plugin use`:
+
+```nu
+> plugin use cool
+```
+
+Note that `plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. If you need to run `nu` with a specific plugin or set of plugins without preparing a cache file, you can pass the `--plugins` option to `nu` with a list of plugin executable files:
+
+```nu
+> nu --plugins '[./my_plugins/nu_plugin_cool]'
+```
+
 ### Updating a plugin
 
-When updating a plugin, it is important to run `register` again just as above to load the new signatures from the plugin and allow Nu to rewrite them to the plugin file (`$nu.plugin-path`).
+When updating a plugin, it is important to run `plugin add` again just as above to load the new signatures from the plugin and allow Nu to rewrite them to the plugin file (`$nu.plugin-path`). You can then `plugin use` to get the updated signatures within the current session.
 
 ## Managing plugins
 
@@ -96,7 +103,7 @@ To view the list of plugins you have installed:
 ╰───┴─────────┴────────────┴─────────┴───────────────────────┴───────┴───────────────────────────────╯
 ```
 
-Plugins stay running while they are in use, and are automatically stopped by default after a period of time of inactivity. This behavior is managed by the [plugin garbage collector](#plugin-garbage-collector). To manually stop a plugin:
+Plugins stay running while they are in use, and are automatically stopped by default after a period of time of inactivity. This behavior is managed by the [plugin garbage collector](#plugin-garbage-collector). To manually stop a plugin, call `plugin stop` with its name:
 
 ```nu
 > plugin stop gstat
@@ -144,7 +151,13 @@ For more information on exactly under what circumstances a plugin is considered 
 
 ## Removing a plugin
 
-To remove a plugin, edit the `$nu.plugin-path` file and remove all of the `register` commands referencing the plugin you want to remove, including the signature argument.
+To remove a plugin, call `plugin rm` with the name of the plugin you want to remove. For example, if you previously added the plugin `~/.cargo/bin/nu_plugin_gstat`, its name would be `gstat`. To remove it:
+
+```nu
+plugin rm gstat
+```
+
+You can check the name of a plugin by running `plugin list`.
 
 ## Examples
 
