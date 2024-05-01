@@ -112,6 +112,12 @@ BAR
 BAR
 ```
 
+### Case sensitivity
+
+Nushell's `$env` is case-insensitive, regardless of the OS. Although `$env` behaves mostly like a record, it is special in that it ignores the case when reading or updating. This means, for example, you can use any of `$env.PATH`, `$env.Path`, or `$env.path`, and they all work the same on any OS.
+
+If you want to read `$env` in a case-sensitive manner, use `$env | get --sensitive`.
+
 ## Scoping
 
 When you set an environment variable, it will be available only in the current scope (the block you're in and any block inside of it).
