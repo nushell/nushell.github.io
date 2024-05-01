@@ -159,7 +159,7 @@ The simplest way to debug a plugin is to print to stderr; plugins' standard erro
 
 ### Tracing
 
-The Nu plugin protocol message stream may be captured for diagnostic purposes using the [Nu Plugin Tracer](https://crates.io/crates/nu_plugin_tracer/).
+The Nu plugin protocol message stream may be captured for diagnostic purposes using [trace_nu_plugin](https://crates.io/crates/trace_nu_plugin/).
 
 ## Help
 
