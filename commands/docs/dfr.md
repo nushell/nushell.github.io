@@ -2,7 +2,7 @@
 title: dfr
 categories: |
   dataframe
-version: 0.92.3
+version: 0.93.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |

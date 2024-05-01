@@ -2,7 +2,7 @@
 title: random chars
 categories: |
   random
-version: 0.92.3
+version: 0.93.0
 random: |
   Generate random chars.
 usage: |

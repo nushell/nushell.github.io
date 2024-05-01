@@ -2,7 +2,7 @@
 title: any
 categories: |
   filters
-version: 0.92.3
+version: 0.93.0
 filters: |
   Tests if any element of the input fulfills a predicate expression.
 usage: |

@@ -2,7 +2,7 @@
 title: bytes build
 categories: |
   bytes
-version: 0.92.3
+version: 0.93.0
 bytes: |
   Create bytes from the arguments.
 usage: |

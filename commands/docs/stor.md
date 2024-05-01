@@ -2,7 +2,7 @@
 title: stor
 categories: |
   database
-version: 0.92.3
+version: 0.93.0
 database: |
   Various commands for working with the in-memory sqlite database.
 usage: |

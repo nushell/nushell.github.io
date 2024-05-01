@@ -2,7 +2,7 @@
 title: dfr get-day
 categories: |
   dataframe
-version: 0.92.3
+version: 0.93.0
 dataframe: |
   Gets day from date.
 usage: |

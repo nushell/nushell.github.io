@@ -2,7 +2,7 @@
 title: into float
 categories: |
   conversions
-version: 0.92.3
+version: 0.93.0
 conversions: |
   Convert data into floating point number.
 usage: |

@@ -2,7 +2,7 @@
 title: interleave
 categories: |
   filters
-version: 0.92.3
+version: 0.93.0
 filters: |
   Read multiple streams in parallel and combine them into one stream.
 usage: |

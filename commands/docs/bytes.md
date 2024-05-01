@@ -2,7 +2,7 @@
 title: bytes
 categories: |
   bytes
-version: 0.92.3
+version: 0.93.0
 bytes: |
   Various commands for working with byte data.
 usage: |

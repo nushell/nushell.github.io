@@ -2,7 +2,7 @@
 title: sys
 categories: |
   system
-version: 0.92.3
+version: 0.93.0
 system: |
   View information about the system.
 usage: |

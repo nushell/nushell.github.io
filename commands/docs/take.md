@@ -2,7 +2,7 @@
 title: take
 categories: |
   filters
-version: 0.92.3
+version: 0.93.0
 filters: |
   Take only the first n elements of a list, or the first n bytes of a binary value.
 usage: |

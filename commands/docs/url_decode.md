@@ -2,7 +2,7 @@
 title: url decode
 categories: |
   strings
-version: 0.92.3
+version: 0.93.0
 strings: |
   Converts a percent-encoded web safe string to a string.
 usage: |

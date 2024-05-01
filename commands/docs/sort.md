@@ -2,7 +2,7 @@
 title: sort
 categories: |
   filters
-version: 0.92.3
+version: 0.93.0
 filters: |
   Sort in increasing order.
 usage: |

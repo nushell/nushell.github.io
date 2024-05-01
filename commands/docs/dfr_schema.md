@@ -2,7 +2,7 @@
 title: dfr schema
 categories: |
   dataframe
-version: 0.92.3
+version: 0.93.0
 dataframe: |
   Show schema for a dataframe.
 usage: |

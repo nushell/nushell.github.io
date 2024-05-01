@@ -2,7 +2,7 @@
 title: window
 categories: |
   filters
-version: 0.92.3
+version: 0.93.0
 filters: |
   Creates a sliding window of `window_size` that slide by n rows/elements across input.
 usage: |

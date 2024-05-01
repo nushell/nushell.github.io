@@ -2,7 +2,7 @@
 title: panic
 categories: |
   experimental
-version: 0.92.3
+version: 0.93.0
 experimental: |
   Executes a rust panic, useful only for testing.
 usage: |

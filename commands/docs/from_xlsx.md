@@ -2,7 +2,7 @@
 title: from xlsx
 categories: |
   formats
-version: 0.92.3
+version: 0.93.0
 formats: |
   Parse binary Excel(.xlsx) data and create table.
 usage: |

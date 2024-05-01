@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.92.3
+version: 0.93.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |

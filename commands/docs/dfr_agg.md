@@ -2,7 +2,7 @@
 title: dfr agg
 categories: |
   lazyframe
-version: 0.92.3
+version: 0.93.0
 lazyframe: |
   Performs a series of aggregations from a group-by.
 usage: |

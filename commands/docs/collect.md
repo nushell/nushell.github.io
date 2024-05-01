@@ -2,7 +2,7 @@
 title: collect
 categories: |
   filters
-version: 0.92.3
+version: 0.93.0
 filters: |
   Collect a stream into a value and then run a closure with the collected value as input.
 usage: |

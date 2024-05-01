@@ -2,7 +2,7 @@
 title: dfr concatenate
 categories: |
   dataframe
-version: 0.92.3
+version: 0.93.0
 dataframe: |
   Concatenates strings with other array.
 usage: |

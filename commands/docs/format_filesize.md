@@ -2,7 +2,7 @@
 title: format filesize
 categories: |
   strings
-version: 0.92.3
+version: 0.93.0
 strings: |
   Converts a column of filesizes to some specified format.
 usage: |

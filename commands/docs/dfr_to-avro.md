@@ -2,7 +2,7 @@
 title: dfr to-avro
 categories: |
   dataframe
-version: 0.92.3
+version: 0.93.0
 dataframe: |
   Saves dataframe to avro file.
 usage: |

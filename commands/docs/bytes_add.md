@@ -2,7 +2,7 @@
 title: bytes add
 categories: |
   bytes
-version: 0.92.3
+version: 0.93.0
 bytes: |
   Add specified bytes to the input.
 usage: |

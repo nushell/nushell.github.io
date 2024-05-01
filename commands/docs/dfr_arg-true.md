@@ -2,7 +2,7 @@
 title: dfr arg-true
 categories: |
   dataframe
-version: 0.92.3
+version: 0.93.0
 dataframe: |
   Returns indexes where values are true.
 usage: |

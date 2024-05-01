@@ -2,7 +2,7 @@
 title: dfr explode
 categories: |
   lazyframe
-version: 0.92.3
+version: 0.93.0
 lazyframe: |
   Explodes a dataframe or creates a explode expression.
 usage: |

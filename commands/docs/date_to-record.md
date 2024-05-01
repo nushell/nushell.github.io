@@ -2,7 +2,7 @@
 title: date to-record
 categories: |
   date
-version: 0.92.3
+version: 0.93.0
 date: |
   Convert the date into a record.
 usage: |
