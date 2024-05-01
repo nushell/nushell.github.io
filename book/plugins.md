@@ -54,7 +54,7 @@ Windows:
 > plugin add .\my_plugins\nu_plugin_cool.exe
 ```
 
-When [`plugin add`](/commands/docs/plugin_add.md) is called, Nu runs the plugin binary and communicates via the [plugin protocol](plugin_protocol_reference.md) to get the signatures of all of the commands the plugin supports. It then saves information about the plugin, including the command signatures, to the plugin registry file at `$nu.plugin-path` in a custom brotli-compressed MessagePack format. This caching step saves `nu` from having to run all plugins during startup, which could be very slow.
+When [`plugin add`](/commands/docs/plugin_add.md) is called, Nu runs the plugin binary and communicates via the [plugin protocol](/contributor-book/plugin_protocol_reference.md) to get the signatures of all of the commands the plugin supports. It then saves information about the plugin, including the command signatures, to the plugin registry file at `$nu.plugin-path` in a custom brotli-compressed MessagePack format. This caching step saves `nu` from having to run all plugins during startup, which could be very slow.
 
 Once added, the next time `nu` is started, the plugin's commands are available as part of your set of commands:
 
