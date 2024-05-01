@@ -68,6 +68,8 @@ You can also immediately reload a plugin in the current session by calling `plug
 > plugin use cool
 ```
 
+It is not necessary to add `plugin use` to your config file. All previously added plugins are automatically loaded at startup.
+
 Note that `plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. If you need to run `nu` with a specific plugin or set of plugins without preparing a cache file, you can pass the `--plugins` option to `nu` with a list of plugin executable files:
 
 ```nu
