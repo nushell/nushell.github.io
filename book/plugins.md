@@ -161,7 +161,7 @@ The simplest way to debug a plugin is to print to stderr; plugins' standard erro
 
 The Nu plugin protocol message stream may be captured for diagnostic purposes using [trace_nu_plugin](https://crates.io/crates/trace_nu_plugin/).
 
-**WARNING: trace output will accumulate for as long as the plugin is installed with the trace wrapper.  Large files are possible.  Be sure to remove the plugin when finished tracing, and reinstall without the trace wrapper.**
+**WARNING: trace output will accumulate for as long as the plugin is installed with the trace wrapper.  Large files are possible.  Be sure to remove the plugin with `plugin rm` when finished tracing, and reinstall without the trace wrapper.**
 
 ## Help
 
