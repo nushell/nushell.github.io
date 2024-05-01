@@ -2,7 +2,7 @@
 title: ast
 categories: |
   debug
-version: 0.92.0
+version: 0.92.3
 debug: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |

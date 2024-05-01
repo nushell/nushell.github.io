@@ -2,7 +2,7 @@
 title: reduce
 categories: |
   filters
-version: 0.92.0
+version: 0.92.3
 filters: |
   Aggregate a list to a single value using an accumulator closure.
 usage: |

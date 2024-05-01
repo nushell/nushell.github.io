@@ -2,7 +2,7 @@
 title: dfr n-unique
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Counts unique values.
 usage: |

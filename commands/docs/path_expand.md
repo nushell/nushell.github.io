@@ -2,7 +2,7 @@
 title: path expand
 categories: |
   path
-version: 0.92.0
+version: 0.92.3
 path: |
   Try to expand a path to its absolute form.
 usage: |

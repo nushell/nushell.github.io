@@ -2,7 +2,7 @@
 title: split list
 categories: |
   filters
-version: 0.92.0
+version: 0.92.3
 filters: |
   Split a list into multiple lists using a separator.
 usage: |

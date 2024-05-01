@@ -2,7 +2,7 @@
 title: help externs
 categories: |
   core
-version: 0.92.0
+version: 0.92.3
 core: |
   Show help on nushell externs.
 usage: |

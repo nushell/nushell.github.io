@@ -2,7 +2,7 @@
 title: dfr mean
 categories: |
   expression
-version: 0.92.0
+version: 0.92.3
 expression: |
   Creates a mean expression for an aggregation or aggregates columns to their mean value.
 usage: |

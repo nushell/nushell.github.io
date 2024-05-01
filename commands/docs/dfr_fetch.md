@@ -2,7 +2,7 @@
 title: dfr fetch
 categories: |
   lazyframe
-version: 0.92.0
+version: 0.92.3
 lazyframe: |
   Collects the lazyframe to the selected rows.
 usage: |

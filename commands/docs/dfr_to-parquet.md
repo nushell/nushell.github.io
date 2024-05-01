@@ -2,7 +2,7 @@
 title: dfr to-parquet
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Saves dataframe to parquet file.
 usage: |

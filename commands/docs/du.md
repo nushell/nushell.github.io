@@ -2,7 +2,7 @@
 title: du
 categories: |
   filesystem
-version: 0.92.0
+version: 0.92.3
 filesystem: |
   Find disk usage sizes of specified items.
 usage: |
@@ -17,7 +17,7 @@ feature: default
 
 ## Signature
 
-```> du {flags} (path)```
+```> du {flags} ...rest```
 
 ## Flags
 
@@ -29,7 +29,7 @@ feature: default
 
 ## Parameters
 
- -  `path`: Starting directory.
+ -  `...rest`: Starting directory.
 
 
 ## Input/output types:

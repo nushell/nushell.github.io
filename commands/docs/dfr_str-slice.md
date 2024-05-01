@@ -2,7 +2,7 @@
 title: dfr str-slice
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Slices the string from the start position until the selected length.
 usage: |

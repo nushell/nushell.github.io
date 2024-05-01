@@ -2,7 +2,7 @@
 title: dfr slice
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Creates new dataframe from a slice of rows.
 usage: |

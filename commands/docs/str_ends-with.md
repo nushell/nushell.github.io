@@ -2,7 +2,7 @@
 title: str ends-with
 categories: |
   strings
-version: 0.92.0
+version: 0.92.3
 strings: |
   Check if an input ends with a string.
 usage: |

@@ -2,7 +2,7 @@
 title: dfr to-arrow
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Saves dataframe to arrow file.
 usage: |

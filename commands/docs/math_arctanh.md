@@ -2,7 +2,7 @@
 title: math arctanh
 categories: |
   math
-version: 0.92.0
+version: 0.92.3
 math: |
   Returns the inverse of the hyperbolic tangent function.
 usage: |

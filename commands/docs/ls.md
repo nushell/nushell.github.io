@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.92.0
+version: 0.92.3
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -17,7 +17,7 @@ feature: default
 
 ## Signature
 
-```> ls {flags} (pattern)```
+```> ls {flags} ...rest```
 
 ## Flags
 
@@ -31,7 +31,7 @@ feature: default
 
 ## Parameters
 
- -  `pattern`: The glob pattern to use.
+ -  `...rest`: The glob pattern to use.
 
 
 ## Input/output types:

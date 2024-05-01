@@ -2,7 +2,7 @@
 title: roll left
 categories: |
   filters
-version: 0.92.0
+version: 0.92.3
 filters: |
   Roll record or table columns left.
 usage: |

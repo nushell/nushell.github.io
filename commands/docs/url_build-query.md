@@ -2,7 +2,7 @@
 title: url build-query
 categories: |
   network
-version: 0.92.0
+version: 0.92.3
 network: |
   Converts record or table into query string applying percent-encoding.
 usage: |

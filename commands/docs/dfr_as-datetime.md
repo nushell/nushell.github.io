@@ -2,7 +2,7 @@
 title: dfr as-datetime
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Converts string to datetime.
 usage: |

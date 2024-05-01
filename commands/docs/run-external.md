@@ -2,7 +2,7 @@
 title: run-external
 categories: |
   system
-version: 0.92.0
+version: 0.92.3
 system: |
   Runs external command.
 usage: |
@@ -18,13 +18,6 @@ feature: default
 ## Signature
 
 ```> run-external {flags} (command) ...rest```
-
-## Flags
-
- -  `--redirect-stdout, -`: redirect stdout to the pipeline
- -  `--redirect-stderr, -`: redirect stderr to the pipeline
- -  `--redirect-combine, -`: redirect both stdout and stderr combined to the pipeline (collected in stdout)
- -  `--trim-end-newline, -`: trimming end newlines
 
 ## Parameters
 

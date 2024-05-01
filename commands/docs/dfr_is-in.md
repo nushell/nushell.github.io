@@ -2,7 +2,7 @@
 title: dfr is-in
 categories: |
   expression
-version: 0.92.0
+version: 0.92.3
 expression: |
   Creates an is-in expression.
 usage: |

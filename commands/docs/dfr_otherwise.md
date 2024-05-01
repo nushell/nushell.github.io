@@ -2,7 +2,7 @@
 title: dfr otherwise
 categories: |
   expression
-version: 0.92.0
+version: 0.92.3
 expression: |
   Completes a when expression.
 usage: |

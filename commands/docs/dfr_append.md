@@ -2,7 +2,7 @@
 title: dfr append
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Appends a new dataframe.
 usage: |

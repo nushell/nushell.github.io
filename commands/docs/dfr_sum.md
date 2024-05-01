@@ -2,7 +2,7 @@
 title: dfr sum
 categories: |
   expression
-version: 0.92.0
+version: 0.92.3
 expression: |
   Creates a sum expression for an aggregation or aggregates columns to their sum value.
 usage: |

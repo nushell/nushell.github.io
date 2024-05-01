@@ -2,7 +2,7 @@
 title: into bits
 categories: |
   conversions
-version: 0.92.0
+version: 0.92.3
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -40,7 +40,7 @@ feature: default
 
 convert a binary value into a string, padded to 8 places with 0s
 ```nu
-> 01b | into bits
+> 0x[1] | into bits
 00000001
 ```
 

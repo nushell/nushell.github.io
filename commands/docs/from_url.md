@@ -2,7 +2,7 @@
 title: from url
 categories: |
   formats
-version: 0.92.0
+version: 0.92.3
 formats: |
   Parse url-encoded string as a record.
 usage: |

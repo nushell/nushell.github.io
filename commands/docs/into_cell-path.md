@@ -2,7 +2,7 @@
 title: into cell-path
 categories: |
   conversions
-version: 0.92.0
+version: 0.92.3
 conversions: |
   Convert value to a cell-path.
 usage: |

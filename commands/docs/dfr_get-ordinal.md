@@ -2,7 +2,7 @@
 title: dfr get-ordinal
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Gets ordinal from date.
 usage: |

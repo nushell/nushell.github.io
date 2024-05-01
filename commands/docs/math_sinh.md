@@ -2,7 +2,7 @@
 title: math sinh
 categories: |
   math
-version: 0.92.0
+version: 0.92.3
 math: |
   Returns the hyperbolic sine of the number.
 usage: |

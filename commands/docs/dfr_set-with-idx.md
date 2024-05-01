@@ -2,7 +2,7 @@
 title: dfr set-with-idx
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Sets value in the given index.
 usage: |

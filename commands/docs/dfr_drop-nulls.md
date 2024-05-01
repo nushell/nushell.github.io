@@ -2,7 +2,7 @@
 title: dfr drop-nulls
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Drops null values in dataframe.
 usage: |

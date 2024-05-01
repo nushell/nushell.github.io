@@ -2,7 +2,7 @@
 title: into filesize
 categories: |
   conversions
-version: 0.92.0
+version: 0.92.3
 conversions: |
   Convert value to filesize.
 usage: |
@@ -75,4 +75,10 @@ Convert file size to filesize
 ```nu
 > 4KB | into filesize
 3.9 KiB
+```
+
+Convert string with unit to filesize
+```nu
+> '-1KB' | into filesize
+-1,000 B
 ```

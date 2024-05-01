@@ -2,7 +2,7 @@
 title: to html
 categories: |
   formats
-version: 0.92.0
+version: 0.92.3
 formats: |
   Convert table into simple HTML.
 usage: |

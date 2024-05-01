@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.92.0
+version: 0.92.3
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |

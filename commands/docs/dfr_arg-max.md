@@ -2,7 +2,7 @@
 title: dfr arg-max
 categories: |
   dataframe
-version: 0.92.0
+version: 0.92.3
 dataframe: |
   Return index for max value in series.
 usage: |

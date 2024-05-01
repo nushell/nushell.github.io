@@ -2,7 +2,7 @@
 title: cal
 categories: |
   generators
-version: 0.92.0
+version: 0.92.3
 generators: |
   Display a calendar.
 usage: |
@@ -51,6 +51,6 @@ The calendar for all of 2012
 
 This month's calendar with the week starting on monday
 ```nu
-> cal --week-start monday
+> cal --week-start mo
 
 ```
