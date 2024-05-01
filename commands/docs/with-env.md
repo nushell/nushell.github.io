@@ -2,7 +2,7 @@
 title: with-env
 categories: |
   env
-version: 0.92.0
+version: 0.93.0
 env: |
   Runs a block with an environment variable set.
 usage: |
@@ -32,24 +32,6 @@ feature: default
 | any   | any    |
 
 ## Examples
-
-Set the MYENV environment variable
-```nu
-> with-env [MYENV "my env value"] { $env.MYENV }
-my env value
-```
-
-Set by primitive value list
-```nu
-> with-env [X Y W Z] { $env.X }
-Y
-```
-
-Set by single row table
-```nu
-> with-env [[X W]; [Y Z]] { $env.W }
-Z
-```
 
 Set by key-value record
 ```nu

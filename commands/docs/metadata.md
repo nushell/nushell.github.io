@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   debug
-version: 0.92.0
+version: 0.93.0
 debug: |
   Get the metadata for items in the stream.
 usage: |
@@ -43,3 +43,10 @@ Get the metadata of the input
 > ls | metadata
 
 ```
+
+
+## Subcommands:
+
+| name                                             | type    | usage                                     |
+| ------------------------------------------------ | ------- | ----------------------------------------- |
+| [`metadata set`](/commands/docs/metadata_set.md) | Builtin | Set the metadata for items in the stream. |

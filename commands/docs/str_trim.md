@@ -2,7 +2,7 @@
 title: str trim
 categories: |
   strings
-version: 0.92.0
+version: 0.93.0
 strings: |
   Trim whitespace or specific character.
 usage: |

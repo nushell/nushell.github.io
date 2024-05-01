@@ -2,7 +2,7 @@
 title: dfr summary
 categories: |
   dataframe
-version: 0.92.0
+version: 0.93.0
 dataframe: |
   For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.
 usage: |
