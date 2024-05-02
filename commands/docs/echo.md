@@ -2,7 +2,7 @@
 title: echo
 categories: |
   core
-version: 0.92.0
+version: 0.93.0
 core: |
   Returns its arguments, ignoring the piped-in value.
 usage: |
@@ -50,6 +50,8 @@ Returns the piped-in value, by using the special $in variable to obtain it.
 ```
 
 ## Notes
-When given no arguments, it returns an empty string. When given one argument,
-it returns it. Otherwise, it returns a list of the arguments. There is usually
+Unlike `print`, which prints unstructured text to stdout, `echo` is like an
+identity function and simply returns its arguments. When given no arguments,
+it returns an empty string. When given one argument, it returns it as a
+nushell value. Otherwise, it returns a list of the arguments. There is usually
 little reason to use this over just writing the values as-is.

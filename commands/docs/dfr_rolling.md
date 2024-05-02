@@ -2,7 +2,7 @@
 title: dfr rolling
 categories: |
   dataframe
-version: 0.92.0
+version: 0.93.0
 dataframe: |
   Rolling calculation for a series.
 usage: |

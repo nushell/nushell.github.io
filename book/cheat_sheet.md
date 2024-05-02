@@ -412,7 +412,7 @@
 
 > **custom command which takes any number of positional arguments using rest params**
 
-## Variables & Subexpressions
+## Variables
 
 ```nu
     > let val = 42
@@ -456,8 +456,8 @@
 > This expression results in error.**
 
 ```nu
-    > const plugin = 'path/­to/­plugin'
-    > register $plugin
+    > const file = 'path/­to/­file.nu'
+    > source $file
 ```
 
 > **a constant variable is immutable value which is fully evaluated at parse-time**
@@ -475,10 +475,10 @@
 
 ```nu
     > let big_files = (ls | where size > 10kb)
-    >  $big_files
+    > $big_files
 ```
 
-> **using subexp­ression by wrapping the expression with parent­heses ()**
+> **assigning the result of a pipeline to a variable**
 
 ---
 

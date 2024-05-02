@@ -404,7 +404,7 @@ Moreover, you can also access entire columns of a table by name, to obtain lists
 ╰───┴────╯
 ```
 
-Of course, these resulting lists don't have the column names of the table. To remove columns from a table while leaving it as a table, you'll commonly use the [`select`](/commands/docs/select.md) command with column names:
+Of course, these resulting lists don't have the column names of the table. To choose columns from a table while leaving it as a table, you'll commonly use the [`select`](/commands/docs/select.md) command with column names:
 
 ```nu
 > [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select y z
@@ -417,7 +417,7 @@ Of course, these resulting lists don't have the column names of the table. To re
 ╰───┴───┴───╯
 ```
 
-To remove rows from a table, you'll commonly use the [`select`](/commands/docs/select.md) command with row numbers, as you would with a list:
+To get specific rows from a table, you'll commonly use the [`select`](/commands/docs/select.md) command with row numbers, as you would with a list:
 
 ```nu
 > [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select 1 2

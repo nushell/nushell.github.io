@@ -878,6 +878,26 @@ Example:
 }
 ```
 
+#### `GetSpanContents` engine call
+
+Get the contents of a [`Span`](#span) from the engine. This can be used for viewing the source code that generated a value. The argument is a [`Span`](#span). The response on success is [`Value` pipeline data](3pipelinedataheader-value) containing a [`Binary`](#binary) value, as the result is not guaranteed to be valid UTF-8.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "id": 72,
+    "call": {
+      "GetSpanContents": {
+        "start": 38881,
+        "end": 39007
+      }
+    }
+  }
+}
+```
+
 #### `EvalClosure` engine call
 
 Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful with the output of the closure, which may be a stream.

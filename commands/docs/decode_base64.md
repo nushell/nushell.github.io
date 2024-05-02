@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   hash
-version: 0.92.0
+version: 0.93.0
 hash: |
   Base64 decode a value.
 usage: |

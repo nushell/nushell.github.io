@@ -16,7 +16,7 @@ For more detailed information about how exactly this communication works, especi
 
 ## Discovery
 
-Nu keeps a registry of plugins at the file system location defined by configuration variable `$nu.plugin-path`. To register a plugin, execute `register <path_to_plugin_executable>` in a Nu shell.
+Nu keeps a registry of plugins known as the ‘plugin registry file’ at the file system location defined by configuration variable `$nu.plugin-path`. To add a plugin, execute `plugin add <path_to_plugin_executable>` in a Nu shell. The plugin's signatures will be added to the plugin registry file for future launches of Nu. To make them available immediately, call `plugin use <plugin_name>`.
 
 ## Launch environment
 
@@ -243,13 +243,19 @@ Here we import everything we need -- types and functions -- to be able to create
 
 Once we have finished our plugin, to use it all we need to do is install it.
 
-```sh
+```nu
 > cargo install --path .
+# nushell only (run with `nu -c` if not in nushell)
+> plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
 ```
 
-Once `nu` starts up, it will discover the plugin and register it as a command.
+If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load your plugin, or call `plugin use` to load it immediately:
 
-If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load and register your plugin or register it manually with `register ./target/release/nu_plugin_len`.
+```nu
+> plugin use len # the name of the plugin (without `nu_plugin_`)
+```
+
+Once `nu` starts up, it will discover the plugin and add its commands to the scope.
 
 ```
 > nu
@@ -267,6 +273,8 @@ Flags:
 Signatures:
   <string> | len -> <int>
 ```
+
+Run `plugin list` to see all plugins currently registered and available to this Nu session, including whether or not they are running, and their process ID if so.
 
 ## Using streams in plugins
 
@@ -765,7 +773,7 @@ fn test_fib_on_input() -> Result<(), ShellError> {
 }
 ```
 
-The Nu context within tests is very basic and mostly only contains the plugin commands themselves. If you need to test your plugin with other commands, you can include those crates and then use `.add_decl()` to include them in the context:
+The Nu context within tests is very basic and mostly only contains the plugin commands themselves, as well as all of the core language keywords from [`nu-cmd-lang`](https://docs.rs/nu-cmd-lang/). If you need to test your plugin with other commands, you can include those crates and then use `.add_decl()` to include them in the context:
 
 ```rust
 #[test]

@@ -67,7 +67,7 @@ In the following sections, the `>` prompt will be preceded by the name of the la
 
 ## Removing an Overlay
 
-If you don't need the overlay definitions anymore, call [`overlay hide`](/commands/docs/overlay_remove.md):
+If you don't need the overlay definitions anymore, call [`overlay hide`](/commands/docs/overlay_hide.md):
 
 ```nu
 (spam)> overlay hide spam
@@ -94,7 +94,7 @@ foo
 ───┴──────
 ```
 
-The last way to remove an overlay is to call [`overlay hide`](/commands/docs/overlay_remove.md) without an argument which will remove the last active overlay.
+The last way to remove an overlay is to call [`overlay hide`](/commands/docs/overlay_hide.md) without an argument which will remove the last active overlay.
 
 ## Overlays Are Recordable
 

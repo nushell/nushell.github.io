@@ -2,16 +2,16 @@
 title: n
 categories: |
   shells
-version: 0.79.0
+version: 0.92.0
 shells: |
   Switch to the next shell.
 usage: |
   Switch to the next shell.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for shells
+# `n` for [shells](/commands/categories/shells.md)
 
-<div class='command-title'>{{ $frontmatter.shells }}</div>
+<div class='command-title'>Switch to the next shell.</div>
 
 ## Signature
 

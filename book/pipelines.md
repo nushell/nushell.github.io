@@ -25,17 +25,15 @@ The `$in` variable will collect the pipeline into a value for you, allowing you 
 
 ## Multi-line pipelines
 
-If a pipeline is getting a bit long for one line, you can enclose it within `(` and `)` to create a subexpression:
+If a pipeline is getting a bit long for one line, you can enclose it within parentheses `()`:
 
 ```nu
-(
+let year = (
     "01/22/2021" |
     parse "{month}/{day}/{year}" |
     get year
 )
 ```
-
-Also see [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
 
 ## Semicolons
 

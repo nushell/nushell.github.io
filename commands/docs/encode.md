@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.92.0
+version: 0.93.0
 strings: |
   Encode a string into bytes.
 usage: |
@@ -59,6 +59,7 @@ Multiple encodings are supported; here are a few:
 big5, euc-jp, euc-kr, gbk, iso-8859-1, cp1252, latin5
 
 Note that since the Encoding Standard doesn't specify encoders for utf-16le and utf-16be, these are not yet supported.
+More information can be found here: https://docs.rs/encoding_rs/latest/encoding_rs/#utf-16le-utf-16be-and-unicode-encoding-schemes
 
 For a more complete list of encodings, please refer to the encoding_rs
 documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics

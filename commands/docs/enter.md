@@ -2,16 +2,16 @@
 title: enter
 categories: |
   shells
-version: 0.79.0
+version: 0.92.0
 shells: |
   Enters a new shell at the given path.
 usage: |
   Enters a new shell at the given path.
 ---
 
-# <code>{{ $frontmatter.title }}</code> for shells
+# `enter` for [shells](/commands/categories/shells.md)
 
-<div class='command-title'>{{ $frontmatter.shells }}</div>
+<div class='command-title'>Enters a new shell at the given path.</div>
 
 ## Signature
 
