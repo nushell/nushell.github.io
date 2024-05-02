@@ -11,7 +11,7 @@ The module borrows the power of [pueue](https://github.com/Nukesor/pueue), it is
 
 Unlike terminal multiplexer, you don't need to attach to multiple tmux sessions, and get task status easily.
 
-Here we provide a [nushell module](https://github.com/nushell/nu_scripts/tree/main/modules/background_task) to work with pueue easiler.
+Here we provide a [nushell module](https://github.com/nushell/nu_scripts/tree/main/modules/background_task) that makes working with pueue easier.
 
 Here is a setup example to make Nushell "support" background tasks:
 
