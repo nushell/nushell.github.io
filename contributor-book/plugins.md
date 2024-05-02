@@ -6,7 +6,7 @@ title: Plugins
 
 ## Protocol
 
-Plugins are executable applications that communicate with Nu by exchanging serialized data over stdin and stdout (much in the same way VSCode plugins do). The protocol is split into two stages.
+Plugins are executable applications that communicate with Nu by exchanging serialized data over a stream (much in the same way VSCode plugins do). The stream may either be stdio, which all plugins support, or a local socket (e.g. Unix domain socket or Windows named pipe) when supported. The protocol is split into two stages.
 
 The first stage of the protocol deals with the initial discovery of the plugin. When a plugin is registered the plugin is executed and asked to reply with its configuration. Just as with commands, plugins have a signature that they respond to Nu with. Once Nu has this signature, it knows how to later invoke the plugin to do work.
 
@@ -20,7 +20,9 @@ Nu keeps a registry of plugins known as the ‘plugin registry file’ at the fi
 
 ## Launch environment
 
-Stdin and stdout are redirected for use in the plugin protocol, and must not be used for other purposes. Stderr is inherited, and may be used to print to the terminal.
+When launched in `stdio` mode, `stdin` and `stdout` are redirected for use in the plugin protocol, and must not be used for other purposes. Stderr is inherited, and may be used to print to the terminal.
+
+When launched in `local-socket` mode, `stdin` and `stdout` can also be used to interact with the user's terminal. This is the default for Rust plugins unless `local-socket` is disabled, and can be checked for by calling [`EngineInterface::is_using_stdio()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.is_using_stdio). Plugins may fall back to `stdio` mode if sockets are not working for some reason, so it is important to check this if you are going to be using `stdin` or `stdout`.
 
 Environment variables set in the shell are set in the environment of a plugin when it is launched from a plugin call.
 
@@ -799,7 +801,7 @@ Ordinarily, Nu will execute the plugin and knows what data to pass to it and how
 
 We recommend keeping the [plugin protocol](plugin_protocol_reference.md) documentation handy as a reference while reading this section.
 
-Assuming you've built the Rust plugin described above let's now run it:
+Assuming you've built the Rust plugin described above let's now run it with `--stdio` so that it communicates with us there:
 
 ```sh
 $ ./target/release/nu_plugin_len --stdio

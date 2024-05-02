@@ -2,7 +2,7 @@
 
 Nu can be extended using plugins. Plugins behave much like Nu's built-in commands, with the added benefit that they can be added separately from Nu itself.
 
-Nu plugins are executables; Nu launches them as needed and communicates with them over [stdin, stdout, and stderr](https://en.wikipedia.org/wiki/Standard_streams). Nu plugins can use either JSON or MSGPACK as their communication encoding.
+Nu plugins are executables; Nu launches them as needed and communicates with them over [stdin and stdout](https://en.wikipedia.org/wiki/Standard_streams) or [local sockets](https://en.wikipedia.org/wiki/Inter-process_communication). Nu plugins can use either [JSON](https://www.json.org/) or [MessagePack](https://msgpack.org/) as their communication encoding.
 
 ## Downloading and installing a plugin
 
@@ -54,9 +54,9 @@ Windows:
 > plugin add .\my_plugins\nu_plugin_cool.exe
 ```
 
-When [`plugin add`](/commands/docs/plugin_add.md) is called, Nu runs the plugin binary and communicates via the [plugin protocol](/contributor-book/plugin_protocol_reference.md) to get the signatures of all of the commands the plugin supports. It then saves information about the plugin, including the command signatures, to the plugin registry file at `$nu.plugin-path` in a custom brotli-compressed MessagePack format. This caching step saves `nu` from having to run all plugins during startup, which could be very slow.
+When [`plugin add`](/commands/docs/plugin_add.md) is called, Nu runs the plugin binary and communicates via the [plugin protocol](/contributor-book/plugin_protocol_reference.md) in order to ensure compatibility and to get a list of all of the commands it supports. These are then saved to the plugin registry file (`$nu.plugin-path`) which acts as a cache.
 
-Once added, the next time `nu` is started, the plugin's commands are available as part of your set of commands:
+Once added, the next time `nu` is started, the plugin should show up in [`plugin list`](/commands/docs/plugin_list.md) with all of its commands are available in scope:
 
 ```nu
 > help commands | where command_type == "plugin"
