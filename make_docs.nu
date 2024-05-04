@@ -9,7 +9,7 @@ def command-names [] {
     let nu_dir = (which nu) | get path.0 | path dirname
     mut register_cmd = ''
     for plugin in $plugins {
-        if (sys).host.name == 'Windows' {
+        if (sys host).name == 'Windows' {
             $register_cmd += $'register ($nu_dir | path join $plugin).exe;'
         } else {
             $register_cmd += $'register ($nu_dir | path join $plugin);'

@@ -38,19 +38,19 @@ To get the date as a table we can feed it into [`date to-table`](/commands/docs/
 
 @[code](@snippets/introduction/date_table_example.sh)
 
-Running [`sys`](/commands/docs/sys.md) gives information about the system that Nu is running on:
+Running [`sys host`](/commands/docs/sys_host.md) gives information about the system that Nu is running on:
 
-@[code](@snippets/introduction/sys_example.sh)
+@[code](@snippets/introduction/sys_host_example.sh)
 
-This is a bit different than the tables we saw before. The [`sys`](/commands/docs/sys.md) command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to _get_ the column to view:
+This is a bit different than the tables we saw before. The [`sys host`](/commands/docs/sys.md) command gives us a [record](/book/types_of_data.html#records), which is set of key-value pairs. Note that the "sessions" column in the record happens to contain a table instead of a simple value. To take a look at this data, we need to _get_ the column to view:
 
 @[code](@snippets/introduction/sys_get_example.sh)
 
-The [`get`](/commands/docs/get.md) command lets us jump into the contents of a column of the table. Here, we're looking into the "host" column, which contains information about the host that Nu is running on. The name of the OS, the hostname, the CPU, and more. Let's get the name of the users on the system:
+The [`get`](/commands/docs/get.md) command lets us jump into the contents of structured data (a table, record, or list). Here, we're looking into the "sessions" column, which contains a table of the users on the system and their groups. Let's get the names of the users:
 
 @[code](@snippets/introduction/sys_get_nested_example.sh)
 
-Right now, there's just one user on the system named "sophiajt". You'll notice that we can pass a column path (the `host.sessions.name` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
+Right now, there's just one user on the system named "sophiajt". You'll notice that we can pass nested columns (the `sessions.name` part) and not just the name of the column. These are called [cell paths](/book/types_of_data.html#cell-paths). Nu will take the cell path and go to the corresponding bit of data in the table.
 
 You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "sophiajt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
 

@@ -310,7 +310,7 @@ into a filesize value. For the complete list of inputs see: `help into filesize`
 
 - `ls`
 - `du`
-- `sys`
+- some of the `sys` commands
 
 Note: The where command and other filters can use filesize in comparison expressions.
 
@@ -386,7 +386,7 @@ The command `into duration` will convert various other data types into a duratio
 - `where`
   - In the comparison expression
 - `ps`
-- `sys`
+- `sys host`
 
 ##### Operators that use duration
 
@@ -423,7 +423,7 @@ for fields and expressions.
 - `ls`
 - `where`
 - `ps`
-- `sys`
+- `sys host`
 
 ### Range
 
@@ -637,7 +637,7 @@ The second syntax is simply a list of records. This plays on the Nushell data mo
 - `table`
 - `ls`
 - `ps`
-- `sys`
+- most of the `sys` commands
 - `select`
 - `get`
 - `where`
