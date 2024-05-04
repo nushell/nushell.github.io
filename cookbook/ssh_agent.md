@@ -58,9 +58,9 @@ do --env {
 load-env (
     keychain --eval --quiet <your ssh keys, eg. id_ed25519>
     | lines
+    | where not ($it | is-empty)
     | split column ";"
     | get column1
-    | first 2
     | split column "="
     | rename name value
     | reduce -f {} {|it, acc| $acc | upsert $it.name $it.value }
