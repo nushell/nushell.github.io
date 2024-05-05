@@ -152,7 +152,7 @@ if $q {
   $x = 'false'
 }
 $x
-# =>'true' a string
+# =>'false' a string
 ```
 
 #### Example 2:
