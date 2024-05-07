@@ -1,7 +1,21 @@
 # Dataframes
 
 ::: warning
-To use the dataframe support you need a fully-featured build with `cargo build --features dataframe`. Starting with version 0.72, dataframes are *not* included with binary releases of Nushell. [See the installation instructions](/book/installation.md) for further details.
+Starting with version 0.94, the dataframes functionality has been moved to the `polars` plugin.
+To use it, you'll need to install [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html).
+
+```nu
+# Install the `polars` nushell plugin
+> cargo install nu_plugin_polars
+
+# Add the plugin's commands to your plugin registry file:
+> plugin add ~/.cargo/bin/nu_plugin_polars
+```
+
+After installation, you will need to restart the nushell instance. If everything is successful,
+you should be able to see command completions for `polars`. For example, you should be able to execute
+`polars into-df -h`.
+
 :::
 
 As we have seen so far, Nushell makes working with data its main priority.
