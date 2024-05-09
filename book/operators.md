@@ -39,7 +39,9 @@ Parentheses can be used for grouping to specify evaluation order or for calling 
 
 ## Order of Operations
 
-Operations are evaluated in the following order (from highest precedence to lowest):
+The precedence order of operations can be found using the command: `help operators | sort-by precedence -r`
+
+Article form of the order (from highest to lowest precedence):
 
 - Parentheses (`()`)
 - Exponentiation/Power (`**`)
