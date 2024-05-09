@@ -1,8 +1,8 @@
 # Dataframes
 
 ::: warning
-Starting with version 0.94, the dataframes functionality has been moved to the `polars` plugin.
-To use it, you'll need to install [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html).
+Starting with version 0.93, there is a more recent implementation of dataframes in `nu_plugin_polars`, which includes a newer version of `polars` and many bug fixes.
+From version 0.94 of Nushell, internal dataframes (with the `dfr` prefix) are going to be deprecated in favor of `nu_plugin_polars`.
 
 ```nu
 # Install the `polars` nushell plugin
