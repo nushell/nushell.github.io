@@ -50,11 +50,11 @@ Operations are evaluated in the following order (from highest precedence to lowe
 - Bitwise and (`bit-and`)
 - Bitwise xor (`bit-xor`)
 - Bitwise or (`bit-or`)
-- Logical not (`not`)
 - Logical and (`and`)
 - Logical xor (`xor`)
 - Logical or (`or`)
 - Assignment operations
+- Logical not (`not`)
 
 ```
 > 3 * (1 + 2)
