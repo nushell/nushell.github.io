@@ -462,7 +462,7 @@ $group | polars agg [
     (polars col float_2 | polars count)
 ] | polars sort-by first
 ```
-```output-numd
+```
 ╭────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ plan           │ SORT BY [col("first")]                                                                                       │
 │                │   AGGREGATE                                                                                                  │
@@ -1007,7 +1007,7 @@ $a |
      ((polars col a) / 2 | polars as half_a)
 ] | polars collect
 ```
-```output-numd
+```
 ╭───┬───┬───┬──────────┬────────╮
 │ # │ a │ b │ double_a │ half_a │
 ├───┼───┼───┼──────────┼────────┤
@@ -1076,7 +1076,7 @@ $a
      (polars col value | polars mean | polars as mean)
 ] | polars collect
 ```
-```output-numd
+```
 ╭───┬──────┬─────┬──────╮
 │ # │ name │ sum │ mean │
 ├───┼──────┼─────┼──────┤
@@ -1099,7 +1099,7 @@ let group = ($a
 )
 $a | polars join $group name name | polars collect
 ```
-```output-numd
+```
 ╭───┬──────┬───────┬─────┬──────╮
 │ # │ name │ value │ sum │ mean │
 ├───┼──────┼───────┼─────┼──────┤
