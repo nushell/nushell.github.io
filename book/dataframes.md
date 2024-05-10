@@ -960,7 +960,7 @@ operations.
 Let's create a small example of a lazy dataframe
 
 ```nu
-> let a = [[a b]; [1 a] [2 b] [3 c] [4 d]] | polars into-lazy
+> let a = [[a b]; [1 a] [2 b] [3 c] [4 d]] | polars into-df
 > $a
 ╭────────────────┬───────────────────────────────────────────────────────╮
 │ plan           │ DF ["a", "b"]; PROJECT */2 COLUMNS; SELECTION: "None" │
@@ -1071,7 +1071,7 @@ Let's try something more complicated and create aggregations from a lazy
 dataframe
 
 ```nu
-let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
+let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-df
 
 $a
 | polars group-by name
@@ -1094,7 +1094,7 @@ And we could join on a lazy dataframe that hasn't being collected. Let's join
 the resulting group by to the original lazy frame
 
 ```nu
-let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
+let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-df
 let group = $a
     | polars group-by name
     | polars agg [
