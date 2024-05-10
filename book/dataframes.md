@@ -65,7 +65,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 `polars store-ls` command:
 
 ```nu no-run
-> let df = (polars open .\Data7602DescendingYearOrder.csv)
+> let df = polars open .\Data7602DescendingYearOrder.csv
 > polars store-ls
 
 ╭───┬────────┬─────────┬─────────╮
@@ -193,8 +193,8 @@ all the operations in one `nu` file, to make sure we are doing similar
 operations:
 
 ```nu no-run
-let df = (polars open Data7602DescendingYearOrder.csv)
-let res = ($df | polars group-by year | polars agg (polars col geo_count | polars sum))
+let df = polars open Data7602DescendingYearOrder.csv
+let res = $df | polars group-by year | polars agg (polars col geo_count | polars sum)
 $res
 ```
 
@@ -483,7 +483,7 @@ as integers, decimals, or strings. Let's create a small dataframe using the
 command `polars into-df`.
 
 ```nu
-> let a = ([[a b]; [1 2] [3 4] [5 6]] | polars into-df)
+> let a = [[a b]; [1 2] [3 4] [5 6]] | polars into-df
 > $a
 ╭───┬───┬───╮
 │ # │ a │ b │
@@ -555,7 +555,7 @@ Let's start our exploration with Series by creating one using the `polars into-d
 command:
 
 ```nu
-> let new = ([9 8 4] | polars into-df)
+> let new = [9 8 4] | polars into-df
 > $new
 ╭───┬───╮
 │ # │ 0 │
@@ -574,7 +574,7 @@ other Series. Let's create a new Series by doing some arithmetic on the
 previously created column.
 
 ```nu
-> let new_2 = ($new * 3 + 10)
+> let new_2 = $new * 3 + 10
 > $new_2
 ╭───┬────╮
 │ # │ 0  │
@@ -1068,7 +1068,7 @@ Let's try something more complicated and create aggregations from a lazy
 dataframe
 
 ```nu
-let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy )
+let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
 $a
 | polars group-by name
 | polars agg [
@@ -1089,7 +1089,7 @@ And we could join on a lazy dataframe that hasn't being collected. Let's join
 the resulting group by to the original lazy frame
 
 ```nu
-let a = ( [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy )
+let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
 let group = ($a
     | polars group-by name
     | polars agg [
