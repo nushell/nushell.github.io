@@ -455,12 +455,14 @@ lazy operation waiting to be completed by adding an aggregation. Using the
 or we can define multiple aggregations on the same or different columns
 
 ```nu
-$group | polars agg [
+$group
+| polars agg [
     (polars col int_1 | polars n-unique)
     (polars col int_2 | polars min)
     (polars col float_1 | polars sum)
     (polars col float_2 | polars count)
-] | polars sort-by first
+]
+| polars sort-by first
 ```
 ```output-numd
 ╭────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
@@ -1000,12 +1002,13 @@ With your lazy frame defined we can start chaining operations on it. For
 example this
 
 ```nu
-$a |
-    polars reverse |
-    polars with-column [
+$a
+| polars reverse
+| polars with-column [
      ((polars col a) * 2 | polars as double_a)
      ((polars col a) / 2 | polars as half_a)
-] | polars collect
+]
+| polars collect
 ```
 ```output-numd
 ╭───┬───┬───┬──────────┬────────╮
@@ -1069,12 +1072,14 @@ dataframe
 
 ```nu
 let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
+
 $a
 | polars group-by name
 | polars agg [
      (polars col value | polars sum | polars as sum)
      (polars col value | polars mean | polars as mean)
-] | polars collect
+]
+| polars collect
 ```
 ```output-numd
 ╭───┬──────┬─────┬──────╮
@@ -1090,13 +1095,13 @@ the resulting group by to the original lazy frame
 
 ```nu
 let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
-let group = ($a
+let group = $a
     | polars group-by name
     | polars agg [
       (polars col value | polars sum | polars as sum)
       (polars col value | polars mean | polars as mean)
     ]
-)
+
 $a | polars join $group name name | polars collect
 ```
 ```output-numd
