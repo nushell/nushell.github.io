@@ -505,7 +505,7 @@ We can append columns to a dataframe in order to create a new variable. As an
 example, let's append two columns to our mini dataframe `$a`
 
 ```nu
-> let a2 = $a | polars with-column $a.a --name a2 | polars with-column $a.a --name a3
+> let a2 = $a | polars append ($a.a | polars rename a a2) | polars append ($a.a | polars rename a a3)
 > $a2
 ╭───┬───┬───┬────┬────╮
 │ # │ a │ b │ a2 │ a3 │
@@ -626,7 +626,7 @@ data type
 And we can add them to previously defined dataframes
 
 ```nu
-> let new_df = $a | polars with-column $new --name new_col
+> let new_df = $a | polars append ($new | polars rename '0' new_col)
 > $new_df
 ╭───┬───┬───┬─────────╮
 │ # │ a │ b │ new_col │
@@ -654,7 +654,7 @@ we can multiply columns `a` and `b` to create a new Series
 and we can start piping things in order to create new columns and dataframes
 
 ```nu
-> let $new_df = $new_df | polars with-column ($new_df.a * $new_df.b / $new_df.new_col) --name my_sum
+> let new_df = $new_df | polars with-column ((polars col a) * (polars col b) / (polars col new_col) | polars as my_sum)
 > $new_df
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
