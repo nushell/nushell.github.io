@@ -687,7 +687,7 @@ mask using the equality operator
 
 and with this mask we can now filter a dataframe, like this
 
-```nu
+```nu no-run
 > $new_df | polars filter-with $mask
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
@@ -702,13 +702,13 @@ The masks can also be created from Nushell lists, for example:
 
 ```nu
 > let mask1 = [true true false] | polars into-df
-> $new_df | polars filter-with $mask1
-╭───┬───┬───┬─────────┬────────╮
-│ # │ a │ b │ new_col │ my_sum │
-├───┼───┼───┼─────────┼────────┤
-│ 0 │ 1 │ 2 │       9 │      0 │
-│ 1 │ 3 │ 4 │       8 │      1 │
-╰───┴───┴───┴─────────┴────────╯
+#> $new_df | polars filter-with $mask1
+#╭───┬───┬───┬─────────┬────────╮
+#│ # │ a │ b │ new_col │ my_sum │
+#├───┼───┼───┼─────────┼────────┤
+#│ 0 │ 1 │ 2 │       9 │      0 │
+#│ 1 │ 3 │ 4 │       8 │      1 │
+#╰───┴───┴───┴─────────┴────────╯
 ```
 
 To create complex masks, we have the `AND`
@@ -921,8 +921,8 @@ Or we can get a mask that we can use to filter out the rows where data is
 unique or duplicated. For example, we can select the rows for unique values
 in column `word`
 
-```nu
-> $df | polars filter-with ($df | polars get word | polars is-unique)
+```nu no-run
+> $df | polars filter-with ((polars col word) | polars is-unique)
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┤
@@ -933,7 +933,7 @@ in column `word`
 
 Or all the duplicated ones
 
-```nu
+```nu no-run
 > $df | polars filter-with ($df | polars get word | polars is-duplicated)
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
@@ -972,7 +972,7 @@ As you can see, the resulting dataframe is not yet evaluated, it stays as a
 set of instructions that can be done on the data. If you were to collect that
 dataframe you would get the next result
 
-```nu
+```nu no-run
 > $a | polars collect
 ╭───┬───┬───╮
 │ # │ a │ b │
