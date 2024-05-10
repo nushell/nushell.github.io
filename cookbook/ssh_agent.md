@@ -55,16 +55,14 @@ do --env {
 ### [Keychain](https://www.funtoo.org/Funtoo:Keychain)
 
 ```nushell
-load-env (
-    keychain --eval --quiet <your ssh keys, eg. id_ed25519>
+keychain --eval --quiet <your ssh keys, eg. id_ed25519>
     | lines
     | where not ($it | is-empty)
-    | split column ";"
-    | get column1
-    | split column "="
-    | rename name value
-    | reduce -f {} {|it, acc| $acc | upsert $it.name $it.value }
-    )
+    | parse "{k}={v}; export {k2};"
+    | select k v
+    | transpose --header-row
+    | into record
+    | load-env
 ```
 
 ## Non-nushell workarounds
