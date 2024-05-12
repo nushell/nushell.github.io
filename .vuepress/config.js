@@ -76,7 +76,7 @@ export default defineUserConfig({
       title: 'Nushell',
       description: 'Um novo tipo de shell.',
     },
-    '/ru': {
+    '/ru/': {
       lang: 'ru-RU',
       title: 'Nushell',
       description: 'Новый тип оболочки.',
