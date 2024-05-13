@@ -30,7 +30,7 @@ Nu 在类型化的数据上操作，所以它能捕捉到其他 Shell 无法捕�
 
 ## 获取 Nu
 
-Nushell 可以通过 [你喜欢的软件包管理器](https://repology.org/project/nushell/versions) 来安装 [可下载的二进制文件](https://github.com/nushell/nushell/releases)，可以在 [GitHub Action](https://github.com/marketplace/actions/setup-nu) 中使用，此外也可以以 [源码](https://github.com/nushell/nushell)方式获得。在此阅读 [详细的安装说明](/zh-CN/book/installation.md) 或直接开始：
+Nushell 可以通过 [你喜欢的软件包管理器](https://repology.org/project/nushell/versions) 来安装，可以下载 [二进制文件](https://github.com/nushell/nushell/releases)，可以在 [GitHub Action](https://github.com/marketplace/actions/setup-nu) 中使用，此外也可以以 [源码](https://github.com/nushell/nushell)方式获得。在此阅读 [详细的安装说明](/zh-CN/book/installation.md) 或直接开始：
 
 #### macOS / Linux:
 
