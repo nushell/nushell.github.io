@@ -159,7 +159,6 @@ export const sidebarEn: SidebarConfig = {
       collapsible: false,
       children: [
         '/lang-guide/README.md',
-        '/lang-guide/lang-guide.md',
         {
           text: 'Types in the Nu Language',
           link: '/lang-guide/chapters/types/00_types_overview.md',
@@ -244,9 +243,9 @@ export const sidebarEn: SidebarConfig = {
         '/lang-guide/chapters/custom_commands.md',
         '/lang-guide/chapters/declarations.md',
         '/lang-guide/chapters/variable_scope.md',
-        '/lang-guide/chapters/literals.md',
         '/lang-guide/chapters/strings_and_text.md',
         '/lang-guide/chapters/helpers_and_debugging.md',
+        '/lang-guide/chapters/pipelines.md',
       ],
     },
   ],

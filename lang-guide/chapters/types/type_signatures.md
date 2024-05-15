@@ -10,7 +10,7 @@
 There are several syntactic forms that can have type signatures:
 
 - Variable declarations
-- Parameter declarations in custom commands
+- Parameter declarations in custom commands and closures
 - Input type declarations to custom commands
 - Return type declarations from custom commands
 
