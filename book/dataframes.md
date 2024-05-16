@@ -68,11 +68,10 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 > let df = polars open Data7602DescendingYearOrder.csv
 > polars store-ls
 
-╭───┬────────┬─────────┬─────────╮
-│ # │  name  │ columns │  rows   │
-├───┼────────┼─────────┼─────────┤
-│ 0 │ $df    │       5 │ 5429252 │
-╰───┴────────┴─────────┴─────────╯
+╭──────────────────key──────────────────┬─────created─────┬─columns──┬───rows───┬────type────┬─estimated_size──┬─span_contents──┬─span_start─┬─...─╮
+│ 3b53543c-cf7d-4135-bb17-e789cfb5d144  │ a minute ago    │        5 │  5429252 │ LazyFrame  │        184.5 MB │ polars open    │    1984929 │ ... │
+│ f9c4af11-67b3-4d6a-9dbc-d79b26146045  │ 11 seconds ago  │        5 │  5429252 │ LazyFrame  │        184.5 MB │ polars open    │    1985041 │ ... │
+╰──────────────────key──────────────────┴─────created─────┴─columns──┴───rows───┴────type────┴─estimated_size──┴─span_contents──┴─span_start─┴─...─╯
 ```
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
@@ -104,9 +103,9 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 Let's start by comparing loading times between the various methods. First, we
 will load the data using Nushell's [`open`](/commands/docs/open.md) command:
 
-```nu no-run
-> timeit {open .\Data7602DescendingYearOrder.csv}
-30sec 479ms 614us 400ns
+```nu
+> timeit {open Data7602DescendingYearOrder.csv}
+1sec 634ms 599µs 375ns
 ```
 
 Loading the file using native Nushell functionality took 30 seconds. Not bad for
@@ -125,7 +124,7 @@ And the benchmark for it is:
 
 ```nu
 > timeit {python load.py}
-2sec 91ms 872us 900ns
+1sec 338ms 158µs 417ns
 ```
 
 That is a great improvement, from 30 seconds to 2 seconds. Nicely done, Pandas!
@@ -135,7 +134,7 @@ Probably we can load the data a bit faster. This time we will use Nushell's
 
 ```nu no-run
 > timeit {polars open Data7602DescendingYearOrder.csv}
-601ms 700us 700ns
+534µs 959ns
 ```
 
 This time it took us 0.6 seconds. Not bad at all.
@@ -183,9 +182,8 @@ print(res)'
 And the result from the benchmark is:
 
 ```nu
-> timeit {python load.py}
-
-1sec 966ms 954us 800ns
+> timeit {python load.py | null}
+1sec 373ms 338µs 42ns
 ```
 
 Not bad at all. Again, pandas managed to get it done in a fraction of the time.
@@ -197,7 +195,7 @@ operations:
 ```nu
 ('let df = polars open Data7602DescendingYearOrder.csv
 let res = $df | polars group-by year | polars agg (polars col geo_count | polars sum)
-$res'
+$res | polars collect'
 | save load.nu -f)
 ```
 
@@ -205,8 +203,7 @@ and the benchmark with dataframes is:
 
 ```nu
 > timeit {source load.nu}
-
-557ms 658us 500ns
+1ms 771µs 709ns
 ```
 
 Luckily Nushell dataframes managed to halve the time again. Isn't that great?
