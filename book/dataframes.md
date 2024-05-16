@@ -137,8 +137,6 @@ Probably we can load the data a bit faster. This time we will use Nushell's
 11sec 994ms 700µs 125ns
 ```
 
-This time it took us 0.00053 seconds. Not bad at all.
-
 ### Group-by comparison
 
 Let's do a slightly more complex operation this time. We are going to group the
