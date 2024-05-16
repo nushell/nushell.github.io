@@ -132,9 +132,9 @@ Here bare nushell goes almost like pandas!
 Probably we can load the data a bit faster. This time we will use Nushell's
 `polars open` command:
 
-```nu no-run
-> timeit {polars open Data7602DescendingYearOrder.csv}
 534µs 959ns
+```nu
+> timeit {polars open Data7602DescendingYearOrder.csv | polars collect; null}
 ```
 
 This time it took us 0.00053 seconds. Not bad at all.
