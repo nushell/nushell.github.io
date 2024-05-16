@@ -64,8 +64,8 @@ Feel free to download it if you want to follow these tests.
 The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 `polars store-ls` command:
 
-```nu no-run
-> let df = polars open .\Data7602DescendingYearOrder.csv
+```nu
+> let df = polars open Data7602DescendingYearOrder.csv
 > polars store-ls
 
 ╭───┬────────┬─────────┬─────────╮
@@ -77,8 +77,8 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
 
-```nu no-run
-> $df | polars first
+```nu
+> $df | polars first | polars collect
 ╭───┬──────────┬─────────┬──────┬───────────┬──────────╮
 │ # │ anzsic06 │  Area   │ year │ geo_count │ ec_count │
 ├───┼──────────┼─────────┼──────┼───────────┼──────────┤
@@ -88,17 +88,15 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 
 ...and finally, we can get an idea of the inferred data types:
 
-```nu no-run
-> $df | polars dtypes
-╭───┬───────────┬───────╮
-│ # │  column   │ dtype │
-├───┼───────────┼───────┤
-│ 0 │ anzsic06  │ str   │
-│ 1 │ Area      │ str   │
-│ 2 │ year      │ i64   │
-│ 3 │ geo_count │ i64   │
-│ 4 │ ec_count  │ i64   │
-╰───┴───────────┴───────╯
+```nu
+> $df | polars schema
+╭───────────┬─────╮
+│ anzsic06  │ str │
+│ Area      │ str │
+│ year      │ i64 │
+│ geo_count │ i64 │
+│ ec_count  │ i64 │
+╰───────────┴─────╯
 ```
 
 ### Loading the file
@@ -116,15 +114,16 @@ loading five million records! But we can do a bit better than that.
 
 Let's now use Pandas. We are going to use the next script to load the file:
 
-```python
-import pandas as pd
+```nu
+('import pandas as pd
 
-df = pd.read_csv("Data7602DescendingYearOrder.csv")
+df = pd.read_csv("Data7602DescendingYearOrder.csv")'
+| save load.py -f)
 ```
 
 And the benchmark for it is:
 
-```nu no-run
+```nu
 > timeit {python load.py}
 2sec 91ms 872us 900ns
 ```
@@ -135,7 +134,7 @@ Probably we can load the data a bit faster. This time we will use Nushell's
 `polars open` command:
 
 ```nu no-run
-> timeit {polars open .\Data7602DescendingYearOrder.csv}
+> timeit {polars open Data7602DescendingYearOrder.csv}
 601ms 700us 700ns
 ```
 
@@ -154,34 +153,37 @@ use a large amount of memory. This may affect the performance of your system
 while this is being executed.
 :::
 
-```nu no-run
-> timeit {
-    open .\Data7602DescendingYearOrder.csv
-    | group-by year
-    | transpose header rows
-    | upsert rows { get rows | math sum }
-    | flatten
+```nu
+timeit {
+    open 'Data7602DescendingYearOrder.csv'
+    | group-by year --to-table
+    | update items {|i|
+        $i.items.geo_count
+        | math sum
+    }
 }
-
-6min 30sec 622ms 312us
+```
+```output-numd
+3sec 662ms 20µs 959ns
 ```
 
 So, six minutes to perform this aggregated operation.
 
 Let's try the same operation in pandas:
 
-```python
-import pandas as pd
+```nu
+('import pandas as pd
 
 df = pd.read_csv("Data7602DescendingYearOrder.csv")
 res = df.groupby("year")["geo_count"].sum()
-print(res)
+print(res)'
+| save load.py -f)
 ```
 
 And the result from the benchmark is:
 
-```nu no-run
-> timeit {python .\load.py}
+```nu
+> timeit {python load.py}
 
 1sec 966ms 954us 800ns
 ```
@@ -192,15 +194,16 @@ To finish the comparison, let's try Nushell dataframes. We are going to put
 all the operations in one `nu` file, to make sure we are doing similar
 operations:
 
-```nu no-run
-let df = polars open Data7602DescendingYearOrder.csv
+```nu
+('let df = polars open Data7602DescendingYearOrder.csv
 let res = $df | polars group-by year | polars agg (polars col geo_count | polars sum)
-$res
+$res'
+| save load.nu -f)
 ```
 
 and the benchmark with dataframes is:
 
-```nu no-run
+```nu
 > timeit {source load.nu}
 
 557ms 658us 500ns
