@@ -223,7 +223,7 @@ the examples. In your favorite file editor paste the next lines to create out
 sample csv file.
 
 ```nu
-"int_1,int_2,float_1,float_2,first,second,third,word
+("int_1,int_2,float_1,float_2,first,second,third,word
 1,11,0.1,1.0,a,b,c,first
 2,12,0.2,1.0,a,b,c,second
 3,13,0.3,2.0,a,b,c,third
@@ -234,7 +234,7 @@ sample csv file.
 8,18,0.8,7.0,c,c,b,eight
 9,19,0.9,8.0,c,c,b,ninth
 0,10,0.0,9.0,c,c,b,ninth"
-| save --raw --force test_small.csv
+| save --raw --force test_small.csv)
 ```
 
 Save the file and name it however you want to, for the sake of these examples
