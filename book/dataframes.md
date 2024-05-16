@@ -67,11 +67,11 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ```nu
 > let df = polars open Data7602DescendingYearOrder.csv
 > polars store-ls
-
-╭──────────────────key──────────────────┬─────created─────┬─columns──┬───rows───┬────type────┬─estimated_size──┬─span_contents──┬─span_start─┬─...─╮
-│ 3b53543c-cf7d-4135-bb17-e789cfb5d144  │ a minute ago    │        5 │  5429252 │ LazyFrame  │        184.5 MB │ polars open    │    1984929 │ ... │
-│ f9c4af11-67b3-4d6a-9dbc-d79b26146045  │ 11 seconds ago  │        5 │  5429252 │ LazyFrame  │        184.5 MB │ polars open    │    1985041 │ ... │
-╰──────────────────key──────────────────┴─────created─────┴─columns──┴───rows───┴────type────┴─estimated_size──┴─span_contents──┴─span_start─┴─...─╯
+╭─────────────┬─────────────┬─────────┬─────────┬───────────┬─────────────┬──────────────┬────────────┬──────────┬──────────────╮
+│     key     │   created   │ columns │  rows   │   type    │ estimate... │ span_cont... │ span_start │ span_end │ reference... │
+├─────────────┼─────────────┼─────────┼─────────┼───────────┼─────────────┼──────────────┼────────────┼──────────┼──────────────┤
+│ 6c6e77d5... │ 24 secon... │       5 │ 5429252 │ LazyFrame │    184.5 MB │ polars open  │    1986903 │  1986914 │            1 │
+╰─────────────┴─────────────┴─────────┴─────────┴───────────┴─────────────┴──────────────┴────────────┴──────────┴──────────────╯
 ```
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
@@ -105,7 +105,7 @@ will load the data using Nushell's [`open`](/commands/docs/open.md) command:
 
 ```nu
 > timeit {open Data7602DescendingYearOrder.csv}
-1sec 634ms 599µs 375ns
+1sec 611ms 351µs 291ns
 ```
 
 Loading the file using native Nushell functionality took 1.63 seconds. Not bad for
@@ -124,7 +124,7 @@ And the benchmark for it is:
 
 ```nu
 > timeit {python load.py}
-1sec 338ms 158µs 417ns
+3sec 431ms 316µs 791ns
 ```
 
 Here bare nushell goes almost like pandas!
@@ -183,7 +183,7 @@ And the result from the benchmark is:
 
 ```nu
 > timeit {python load.py | null}
-1sec 373ms 338µs 42ns
+1sec 367ms 831µs 375ns
 ```
 
 Not bad at all. Again, pandas managed to get it done in a fraction of the time.
@@ -203,7 +203,7 @@ and the benchmark with dataframes is:
 
 ```nu
 > timeit {source load.nu}
-1ms 771µs 709ns
+1ms 236µs 125ns
 ```
 
 Luckily Nushell dataframes managed to halve the time again. Isn't that great?
@@ -259,11 +259,14 @@ To see all the dataframes that are stored in memory you can use
 
 ```nu
 > polars store-ls
-╭───────────────┬─────────┬─────────┬──────┬───────────┬───────────────┬───────────────┬────────────┬──────────┬────────────────╮
-│      key      │ created │ columns │ rows │   type    │ estimated_... │ span_contents │ span_start │ span_end │ reference_c... │
-├───────────────┼─────────┼─────────┼──────┼───────────┼───────────────┼───────────────┼────────────┼──────────┼────────────────┤
-│ 40854a12-c... │ now     │       8 │   10 │ LazyFrame │         403 B │ polars open   │    1987306 │  1987317 │              1 │
-╰───────────────┴─────────┴─────────┴──────┴───────────┴───────────────┴───────────────┴────────────┴──────────┴────────────────╯
+╭─────────────┬─────────────┬─────────┬─────────┬───────────┬─────────────┬──────────────┬────────────┬──────────┬──────────────╮
+│     key     │   created   │ columns │  rows   │   type    │ estimate... │ span_cont... │ span_start │ span_end │ reference... │
+├─────────────┼─────────────┼─────────┼─────────┼───────────┼─────────────┼──────────────┼────────────┼──────────┼──────────────┤
+│ f38a4c09... │ 11 secon... │       5 │ 5429252 │ LazyFrame │    184.5 MB │ polars open  │    2003954 │  2003965 │            1 │
+│ 6c6e77d5... │ 45 secon... │       5 │ 5429252 │ LazyFrame │    184.5 MB │ polars open  │    1986903 │  1986914 │            1 │
+│ 5369a0f8... │ 11 secon... │       2 │      21 │ LazyFrame │       336 B │ polars agg   │    2004037 │  2004047 │            1 │
+│ b85b61df... │ 11 secon... │       8 │      10 │ LazyFrame │       403 B │ polars open  │    1990952 │  1990963 │            1 │
+╰─────────────┴─────────────┴─────────┴─────────┴───────────┴─────────────┴──────────────┴────────────┴──────────┴──────────────╯
 ```
 
 As you can see, the command shows the created dataframes together with basic
@@ -337,12 +340,15 @@ And now we have two dataframes stored in memory
 
 ```nu
 > polars store-ls
-╭───────────────┬─────────┬─────────┬──────┬───────────┬───────────────┬───────────────┬────────────┬──────────┬────────────────╮
-│      key      │ created │ columns │ rows │   type    │ estimated_... │ span_contents │ span_start │ span_end │ reference_c... │
-├───────────────┼─────────┼─────────┼──────┼───────────┼───────────────┼───────────────┼────────────┼──────────┼────────────────┤
-│ 40854a12-c... │ now     │       8 │   10 │ LazyFrame │         403 B │ polars open   │    1987306 │  1987317 │              1 │
-│ 8616244e-7... │ now     │       4 │    1 │ LazyFrame │          32 B │ polars select │    1988326 │  1988339 │              1 │
-╰───────────────┴─────────┴─────────┴──────┴───────────┴───────────────┴───────────────┴────────────┴──────────┴────────────────╯
+╭─────────────┬─────────────┬─────────┬─────────┬───────────┬─────────────┬──────────────┬────────────┬──────────┬──────────────╮
+│     key     │   created   │ columns │  rows   │   type    │ estimate... │ span_cont... │ span_start │ span_end │ reference... │
+├─────────────┼─────────────┼─────────┼─────────┼───────────┼─────────────┼──────────────┼────────────┼──────────┼──────────────┤
+│ f38a4c09... │ 30 secon... │       5 │ 5429252 │ LazyFrame │    184.5 MB │ polars open  │    2003954 │  2003965 │            1 │
+│ 0ddc8f11... │ 19 secon... │       4 │       1 │ LazyFrame │        32 B │ polars se... │    1991972 │  1991985 │            1 │
+│ 6c6e77d5... │ a minute... │       5 │ 5429252 │ LazyFrame │    184.5 MB │ polars open  │    1986903 │  1986914 │            1 │
+│ 5369a0f8... │ 30 secon... │       2 │      21 │ LazyFrame │       336 B │ polars agg   │    2004037 │  2004047 │            1 │
+│ b85b61df... │ 30 secon... │       8 │      10 │ LazyFrame │       403 B │ polars open  │    1990952 │  1990963 │            1 │
+╰─────────────┴─────────────┴─────────┴─────────┴───────────┴─────────────┴──────────────┴────────────┴──────────┴──────────────╯
 ```
 
 Pretty neat, isn't it?
@@ -553,16 +559,19 @@ dataframes you will see in total four dataframes
 
 ```nu
 > polars store-ls
-╭──────────────┬─────────┬─────────┬──────┬─────────────┬───────────────┬───────────────┬────────────┬──────────┬───────────────╮
-│     key      │ created │ columns │ rows │    type     │ estimated_... │ span_contents │ span_start │ span_end │ reference_... │
-├──────────────┼─────────┼─────────┼──────┼─────────────┼───────────────┼───────────────┼────────────┼──────────┼───────────────┤
-│ 8616244e-... │ now     │       4 │    1 │ LazyFrame   │          32 B │ polars select │    1988326 │  1988339 │             1 │
-│ 0359d97e-... │      ❎ │         │      │ LazyGroupBy │               │ polars gro... │    1991560 │  1991575 │             1 │
-│ 9abcc0b4-... │ now     │       4 │    3 │ DataFrame   │          96 B │ polars append │    1991318 │  1991331 │             1 │
-│ 5c8f2d9a-... │ now     │       2 │    3 │ DataFrame   │          48 B │ polars int... │    1990963 │  1990977 │             1 │
-│ 40854a12-... │ now     │       8 │   10 │ LazyFrame   │         403 B │ polars open   │    1987306 │  1987317 │             1 │
-│ a53f7cf6-... │ now     │       5 │    4 │ LazyFrame   │         132 B │ polars open   │    1989163 │  1989174 │             1 │
-╰──────────────┴─────────┴─────────┴──────┴─────────────┴───────────────┴───────────────┴────────────┴──────────┴───────────────╯
+╭─────────────┬─────────────┬─────────┬─────────┬─────────────┬─────────────┬─────────────┬────────────┬──────────┬─────────────╮
+│     key     │   created   │ columns │  rows   │    type     │ estimate... │ span_con... │ span_start │ span_end │ referenc... │
+├─────────────┼─────────────┼─────────┼─────────┼─────────────┼─────────────┼─────────────┼────────────┼──────────┼─────────────┤
+│ 0ddc8f11... │ 30 secon... │       4 │       1 │ LazyFrame   │        32 B │ polars s... │    1991972 │  1991985 │           1 │
+│ 11f0153b... │ now         │       4 │       3 │ DataFrame   │        96 B │ polars a... │    1994964 │  1994977 │           1 │
+│ b85b61df... │ 41 secon... │       8 │      10 │ LazyFrame   │       403 B │ polars open │    1990952 │  1990963 │           1 │
+│ f38a4c09... │ 41 secon... │       5 │ 5429252 │ LazyFrame   │    184.5 MB │ polars open │    2003954 │  2003965 │           1 │
+│ 5369a0f8... │ 41 secon... │       2 │      21 │ LazyFrame   │       336 B │ polars agg  │    2004037 │  2004047 │           1 │
+│ 75ee83df... │          ❎ │         │         │ LazyGroupBy │             │ polars g... │    1995206 │  1995221 │           1 │
+│ e4104372... │ now         │       5 │       4 │ LazyFrame   │       132 B │ polars open │    1992809 │  1992820 │           1 │
+│ 366aed5e... │ now         │       2 │       3 │ DataFrame   │        48 B │ polars i... │    1994609 │  1994623 │           1 │
+│ 6c6e77d5... │ a minute... │       5 │ 5429252 │ LazyFrame   │    184.5 MB │ polars open │    1986903 │  1986914 │           1 │
+╰─────────────┴─────────────┴─────────┴─────────┴─────────────┴─────────────┴─────────────┴────────────┴──────────┴─────────────╯
 ```
 
 One thing that is important to mention is how the memory is being optimized
