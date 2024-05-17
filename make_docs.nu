@@ -315,7 +315,7 @@ def generate-command [commands_group command_name] {
 #   ...
 # ];
 # ```
-# and contains all the categories given by `$nu.scope.commands.category | uniq`
+# and contains all the categories given by `scope commands | get category | uniq`
 #
 # this file is responsible for the sidebar containing the categories that one can see in
 #

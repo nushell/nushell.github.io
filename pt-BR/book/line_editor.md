@@ -601,7 +601,7 @@ $env.config = {
             description_text: yellow
         }
         source: { |buffer, position|
-            $nu.scope.vars
+            scope variables
             | where name =~ $buffer
             | sort-by name
             | each { |it| {value: $it.name description: $it.type} }
@@ -611,7 +611,7 @@ $env.config = {
     ]
     ...
 ```
-Como você pode ver, o novo menu é idêntico ao `history_menu` descrito anteriormente. A única diferença significativa é o novo campo chamado `source`. O campo `source` é uma definição do Nushell dos valores que você deseja exibir no menu. Para este menu, estamos extraindo os dados de `$nu.scope.vars` e estamos usando esses dados para criar registros que serão usados para popular o menu.
+Como você pode ver, o novo menu é idêntico ao `history_menu` descrito anteriormente. A única diferença significativa é o novo campo chamado `source`. O campo `source` é uma definição do Nushell dos valores que você deseja exibir no menu. Para este menu, estamos extraindo os dados de `scope variables` e estamos usando esses dados para criar registros que serão usados para popular o menu.
 
 A estrutura necessária para o registro é a seguinte:
 
