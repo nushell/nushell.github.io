@@ -23,7 +23,7 @@ Listed below are the top nushell hacks that people often forget about or didn't 
 
 ## 2. easter egg
 
-Did you know that when you start nushell, the `$env.CMD_DURATION_MS` value of 0823 is an easter egg? [It's nushell's first pubic release date month day](https://github.com/nushell/nushell/releases/tag/0.2.0).
+Did you know that when you start nushell, the `$env.CMD_DURATION_MS` value of 0823 is an easter egg? [It's nushell's first public release date month day](https://github.com/nushell/nushell/releases/tag/0.2.0).
 
 ## 3. abbr
 
