@@ -24,7 +24,7 @@ Das ist äquivalent zu `ls -l -a`. Deutlich kürzer.
 
 ## Alle Aliase auflisten
 
-Die verfügbaren Aliase können mit `$nu.scope.aliases` aufgelistet werden.
+Die verfügbaren Aliase können mit `scope aliases` aufgelistet werden.
 
 ## Persistenz
 
