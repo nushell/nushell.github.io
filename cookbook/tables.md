@@ -79,7 +79,7 @@ Output:
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-Or just like last time we could use the [`reduce`](../book/docs/reduce.md) command to merge tables together recursively:
+Or just like last time we could use the [`reduce`](../commands/docs/reduce.md) command to merge tables together recursively:
 
 ```nu
 [$first_table $second_table $third_table]
