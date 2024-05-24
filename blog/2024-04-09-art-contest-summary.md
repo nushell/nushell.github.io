@@ -1,6 +1,6 @@
 # Art Contest Summary
 
-Some time ago, we announced Nushell [logo and mascot contest](2023-12-21-logo-contest.md). We (the core team) agreed that we were not ready to commit to any of the submitted designs and begin using them as our official logo. Nevertherless, since the submissions are great, we wanted to collect and showcase them as a shoutout to the talented contributors.
+Some time ago, we announced Nushell [logo and mascot contest](2023-12-21-logo-contest.md). We (the core team) agreed that we were not ready to commit to any of the submitted designs and begin using them as our official logo. Nevertheless, since the submissions are great, we wanted to collect and showcase them as a shoutout to the talented contributors.
 
 _(The ordering of authors was generated via `[ JLi JustinGarrison aboutscientific ulitroyo ] | shuffle`)._
 

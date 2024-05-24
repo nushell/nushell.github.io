@@ -24,7 +24,7 @@ You can define the following things inside a module:
 - Imported symbols from other modules (`use`)
 - Environment setup (`export-env`)
 
-Only definitions marked with `export` are possible to access from outside of the module ("take out of the bag"). Definitions not marked with `export` are allowed but are visible only inside the module (you could call them private). (_`export-env` is special and does not require `export`._)
+Only definitions marked with `export` are possible to access from outside the module ("take out of the bag"). Definitions not marked with `export` are allowed but are visible only inside the module (you could call them private). (_`export-env` is special and does not require `export`._)
 
 _\*These definitions can also be named `main` (see below)._
 
@@ -457,8 +457,8 @@ $env.NU_LIB_DIRS = [
 Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
 
 > **Note**
-> This will use the file name (in our example `git` from `git.nu`) as the module name. This means some completions might not work if the definition has the base command in it's name.
-> For example, if you defined our known externals in our `git.nu` as `export extern 'git push' []`, etc. and followed the rest of the steps, you would get subcommands like `git git push`, etc. 
+> This will use the file name (in our example `git` from `git.nu`) as the module name. This means some completions might not work if the definition has the base command in its name.
+> For example, if you defined our known externals in our `git.nu` as `export extern 'git push' []`, etc. and followed the rest of the steps, you would get subcommands like `git git push`, etc.
 > You would need to call `use completions git *` to get the desired subcommands. For this reason, using `main` as outlined in the step above is the preferred way to define subcommands.
 
 ### Setting environment + aliases (conda style)
@@ -507,7 +507,7 @@ It can be one of the following:
 
 `hide greetings *`
 
-- Hides all of the module's exports, without the prefix
+- Hides all the module's exports, without the prefix
 
 > **Note**
 > `hide` is not a supported keyword at the root of a module (unlike `def` etc.)
