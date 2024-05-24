@@ -111,7 +111,7 @@ will load the data using Nushell's [`open`](/commands/docs/open.md) command:
 > timeit {open Data7602DescendingYearOrder.csv}
 ```
 
-Loading the file using native Nushell functionality took 30 seconds. Not bad for
+Loading the file using native Nushell functionality took 1.63 seconds. Not bad for
 loading five million records! But we can do a bit better than that.
 
 Let's now use Pandas. We are going to use the next script to load the file:
@@ -130,7 +130,7 @@ And the benchmark for it is:
 2sec 91ms 872us 900ns
 ```
 
-That is a great improvement, from 30 seconds to 2 seconds. Nicely done, Pandas!
+Here bare nushell goes almost like pandas!
 
 Probably we can load the data a bit faster. This time we will use Nushell's
 `polars open` command:
@@ -139,8 +139,6 @@ Probably we can load the data a bit faster. This time we will use Nushell's
 > timeit {polars open Data7602DescendingYearOrder.csv}
 601ms 700us 700ns
 ```
-
-This time it took us 0.6 seconds. Not bad at all.
 
 ### Group-by comparison
 
@@ -170,7 +168,7 @@ timeit {
 ```output-numd
 ```
 
-So, six minutes to perform this aggregated operation.
+So, 3.7 seconds to perform this aggregated operation.
 
 Let's try the same operation in pandas:
 
