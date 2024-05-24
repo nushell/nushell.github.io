@@ -88,9 +88,9 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 
 ...and finally, we can get an idea of the inferred data types:
 
-╭───┬───────────┬───────╮
 ```nu
 > $df | polars schema
+╭───────────┬───────╮
 │ # │  column   │ dtype │
 ├───┼───────────┼───────┤
 │ 0 │ anzsic06  │ str   │
@@ -106,9 +106,9 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 Let's start by comparing loading times between the various methods. First, we
 will load the data using Nushell's [`open`](/commands/docs/open.md) command:
 
-30sec 479ms 614us 400ns
 ```nu
 > timeit {open Data7602DescendingYearOrder.csv}
+1sec 570ms 740µs 667ns
 ```
 
 Loading the file using native Nushell functionality took 1.63 seconds. Not bad for
@@ -127,7 +127,7 @@ And the benchmark for it is:
 
 ```nu
 > timeit {python load.py}
-2sec 91ms 872us 900ns
+1sec 310ms 514µs 292ns
 ```
 
 Here bare nushell goes almost like pandas!
@@ -162,10 +162,9 @@ timeit {
         | math sum
     }
 }
-
-6min 30sec 622ms 312us
 ```
 ```output-numd
+3sec 220ms 205µs 83ns
 ```
 
 So, 3.7 seconds to perform this aggregated operation.
@@ -183,9 +182,9 @@ print(res)'
 
 And the result from the benchmark is:
 
-1sec 966ms 954us 800ns
 ```nu
 > timeit {python load.py | null}
+1sec 340ms 992µs 583ns
 ```
 
 Not bad at all. Again, pandas managed to get it done in a fraction of the time.
@@ -466,15 +465,14 @@ $group
     (polars col float_2 | polars count)
 ] | polars sort-by first
 ```
-╭────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ plan           │ SORT BY [col("first")]                                                                                       │
-│                │   AGGREGATE                                                                                                  │
-│                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1").sum()...                                  │
-│ optimized_plan │ SORT BY [col("first")]                                                                                       │
-│                │   AGGREGATE                                                                                                  │
-│                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1").sum()...                                  │
-╰────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```output-numd
+╭───┬───────┬───────┬───────┬─────────┬─────────╮
+│ # │ first │ int_1 │ int_2 │ float_1 │ float_2 │
+├───┼───────┼───────┼───────┼─────────┼─────────┤
+│ 0 │ a     │     3 │    11 │    0.60 │       3 │
+│ 1 │ b     │     4 │    14 │    2.20 │       4 │
+│ 2 │ c     │     3 │    10 │    1.70 │       3 │
+╰───┴───────┴───────┴───────┴─────────┴─────────╯
 ```
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
@@ -924,39 +922,40 @@ unique or duplicated. For example, we can select the rows for unique values
 in column `word`
 
 ```nu
-╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
-│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
-├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┤
-│ 0 │     1 │    11 │    0.10 │    1.00 │ a     │ b      │ c     │ first │
-│ 1 │     8 │    18 │    0.80 │    7.00 │ c     │ c      │ b     │ eight │
-╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────╯
 $df
 | polars append ($in | polars select word | polars is-unique)
 | polars filter-with (polars col is_unique)
 ```
 ```output-numd
+╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────┬───────────╮
+│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │ is_unique │
+├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┼───────────┤
+│ 0 │     1 │    11 │    0.10 │    1.00 │ a     │ b      │ c     │ first │ true      │
+│ 1 │     8 │    18 │    0.80 │    7.00 │ c     │ c      │ b     │ eight │ true      │
+╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────┴───────────╯
 ```
 
 Or all the duplicated ones
 
 ```nu
-╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
-│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
-├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
-│ 0 │     2 │    12 │    0.20 │    1.00 │ a     │ b      │ c     │ second │
-│ 1 │     3 │    13 │    0.30 │    2.00 │ a     │ b      │ c     │ third  │
-│ 2 │     4 │    14 │    0.40 │    3.00 │ b     │ a      │ c     │ second │
-│ 3 │     0 │    15 │    0.50 │    4.00 │ b     │ a      │ a     │ third  │
-│ 4 │     6 │    16 │    0.60 │    5.00 │ b     │ a      │ a     │ second │
-│ 5 │     7 │    17 │    0.70 │    6.00 │ b     │ c      │ a     │ third  │
-│ 6 │     9 │    19 │    0.90 │    8.00 │ c     │ c      │ b     │ ninth  │
-│ 7 │     0 │    10 │    0.00 │    9.00 │ c     │ c      │ b     │ ninth  │
-╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 $df
 | polars append ($in | polars select word | polars is-duplicated)
 | polars filter-with (polars col is_duplicated)
 ```
 ```output-numd
+╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────┬───────────────╮
+│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │ is_duplicated │
+├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┼───────────────┤
+│ 0 │     2 │    12 │    0.20 │    1.00 │ a     │ b      │ c     │ second │ true          │
+│ 1 │     3 │    13 │    0.30 │    2.00 │ a     │ b      │ c     │ third  │ true          │
+│ 2 │     4 │    14 │    0.40 │    3.00 │ b     │ a      │ c     │ second │ true          │
+│ 3 │     0 │    15 │    0.50 │    4.00 │ b     │ a      │ a     │ third  │ true          │
+│ 4 │     6 │    16 │    0.60 │    5.00 │ b     │ a      │ a     │ second │ true          │
+│ 5 │     7 │    17 │    0.70 │    6.00 │ b     │ c      │ a     │ third  │ true          │
+│ 6 │     9 │    19 │    0.90 │    8.00 │ c     │ c      │ b     │ ninth  │ true          │
+│ 7 │     0 │    10 │    0.00 │    9.00 │ c     │ c      │ b     │ ninth  │ true          │
+╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────┴───────────────╯
+```
 
 ## Lazy Dataframes
 
