@@ -64,8 +64,8 @@ Feel free to download it if you want to follow these tests.
 The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 `polars store-ls` command:
 
-```nu no-run
 > let df = (polars open .\Data7602DescendingYearOrder.csv)
+```nu
 > polars store-ls
 
 ╭───┬────────┬─────────┬─────────╮
@@ -77,7 +77,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
 
-```nu no-run
+```nu
 > $df | polars first
 ╭───┬──────────┬─────────┬──────┬───────────┬──────────╮
 │ # │ anzsic06 │  Area   │ year │ geo_count │ ec_count │
@@ -88,8 +88,8 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 
 ...and finally, we can get an idea of the inferred data types:
 
-```nu no-run
 ╭───┬───────────┬───────╮
+```nu
 > $df | polars schema
 │ # │  column   │ dtype │
 ├───┼───────────┼───────┤
@@ -106,9 +106,9 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 Let's start by comparing loading times between the various methods. First, we
 will load the data using Nushell's [`open`](/commands/docs/open.md) command:
 
-```nu no-run
 > timeit {open .\Data7602DescendingYearOrder.csv}
 30sec 479ms 614us 400ns
+```nu
 ```
 
 Loading the file using native Nushell functionality took 30 seconds. Not bad for
@@ -116,15 +116,15 @@ loading five million records! But we can do a bit better than that.
 
 Let's now use Pandas. We are going to use the next script to load the file:
 
-```python
 import pandas as pd
+```nu
 
 df = pd.read_csv("Data7602DescendingYearOrder.csv")
 ```
 
 And the benchmark for it is:
 
-```nu no-run
+```nu
 > timeit {python load.py}
 2sec 91ms 872us 900ns
 ```
@@ -154,16 +154,18 @@ use a large amount of memory. This may affect the performance of your system
 while this is being executed.
 :::
 
-```nu no-run
 > timeit {
     open .\Data7602DescendingYearOrder.csv
     | group-by year
     | transpose header rows
     | upsert rows { get rows | math sum }
     | flatten
+```nu
 }
 
 6min 30sec 622ms 312us
+```
+```output-numd
 ```
 
 So, six minutes to perform this aggregated operation.
@@ -180,10 +182,10 @@ print(res)
 
 And the result from the benchmark is:
 
-```nu no-run
 > timeit {python .\load.py}
 
 1sec 966ms 954us 800ns
+```nu
 ```
 
 Not bad at all. Again, pandas managed to get it done in a fraction of the time.
@@ -192,10 +194,10 @@ To finish the comparison, let's try Nushell dataframes. We are going to put
 all the operations in one `nu` file, to make sure we are doing similar
 operations:
 
-```nu no-run
 let df = (polars open Data7602DescendingYearOrder.csv)
 let res = ($df | polars group-by year | polars agg (polars col geo_count | polars sum))
 $res
+```nu
 ```
 
 and the benchmark with dataframes is:
@@ -462,7 +464,6 @@ $group | polars agg [
     (polars col float_2 | polars count)
 ] | polars sort-by first
 ```
-```
 ╭────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ plan           │ SORT BY [col("first")]                                                                                       │
 │                │   AGGREGATE                                                                                                  │
@@ -471,6 +472,7 @@ $group | polars agg [
 │                │   AGGREGATE                                                                                                  │
 │                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1").sum()...                                  │
 ╰────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```output-numd
 ```
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
@@ -928,6 +930,8 @@ in column `word`
 │ 1 │     8 │    18 │    0.80 │    7.00 │ c     │ c      │ b     │ eight │
 ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────╯
 ```
+```output-numd
+```
 
 Or all the duplicated ones
 
@@ -946,6 +950,7 @@ Or all the duplicated ones
 │ 7 │     0 │    10 │    0.00 │    9.00 │ c     │ c      │ b     │ ninth  │
 ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
+```output-numd
 
 ## Lazy Dataframes
 
@@ -1007,7 +1012,7 @@ $a |
      ((polars col a) / 2 | polars as half_a)
 ] | polars collect
 ```
-```
+```output-numd
 ╭───┬───┬───┬──────────┬────────╮
 │ # │ a │ b │ double_a │ half_a │
 ├───┼───┼───┼──────────┼────────┤
@@ -1076,7 +1081,7 @@ $a
      (polars col value | polars mean | polars as mean)
 ] | polars collect
 ```
-```
+```output-numd
 ╭───┬──────┬─────┬──────╮
 │ # │ name │ sum │ mean │
 ├───┼──────┼─────┼──────┤
@@ -1099,7 +1104,7 @@ let group = ($a
 )
 $a | polars join $group name name | polars collect
 ```
-```
+```output-numd
 ╭───┬──────┬───────┬─────┬──────╮
 │ # │ name │ value │ sum │ mean │
 ├───┼──────┼───────┼─────┼──────┤
