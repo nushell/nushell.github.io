@@ -89,8 +89,8 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 ...and finally, we can get an idea of the inferred data types:
 
 ```nu no-run
-> $df | polars dtypes
 ╭───┬───────────┬───────╮
+> $df | polars schema
 │ # │  column   │ dtype │
 ├───┼───────────┼───────┤
 │ 0 │ anzsic06  │ str   │
