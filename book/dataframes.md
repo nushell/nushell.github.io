@@ -151,7 +151,7 @@ $res'
 
 and the benchmark with dataframes is:
 
-```nu no-run
+```nu
 > timeit {source load.nu}
 
 557ms 658us 500ns
