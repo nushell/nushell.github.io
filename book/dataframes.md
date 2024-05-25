@@ -49,11 +49,9 @@ much attention to the [`Dataframe` commands](/commands/categories/dataframe.md).
 sections of this page.
 
 > System Details: The benchmarks presented in this section were run using a
-> machine with a processor Intel(R) Core(TM) i7-10710U (CPU @1.10GHz 1.61 GHz)
-> and 16 gb of RAM.
+> Macbook with a processor M1 and 32gb of ram
 >
-> All examples were run on Nushell version 0.33.1.
-> (Command names are updated to Nushell 0.78)
+> All examples were run on Nushell version 0.93 using `nu_plugin_polars 0.93`
 
 ### File information
 
@@ -98,57 +96,11 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 ╰───────────┴─────╯
 ```
 
-### Loading the file
-
-Let's start by comparing loading times between the various methods. First, we
-will load the data using Nushell's [`open`](/commands/docs/open.md) command:
-
-```nu
-> timeit {open Data7602DescendingYearOrder.csv}
-1sec 574ms 193µs 375ns
-```
-
-Loading the file using native Nushell functionality took 1.63 seconds. Not bad for
-loading five million records! But we can do a bit better than that.
-
-Let's now use Pandas. We are going to use the next script to load the file:
-
-```nu
-('import pandas as pd
-
-df = pd.read_csv("Data7602DescendingYearOrder.csv")'
-| save load.py -f)
-```
-
-And the benchmark for it is:
-
-```nu
-> timeit {python load.py}
-1sec 310ms 288µs 791ns
-```
-
-Here bare nushell goes almost like pandas!
-
-Probably we can load the data a bit faster. This time we will use Nushell's
-`polars open` command:
-
-```nu no-run
-> timeit {polars open Data7602DescendingYearOrder.csv}
-601ms 700us 700ns
-```
-
 ### Group-by comparison
 
-Let's do a slightly more complex operation this time. We are going to group the
-data by year, and add groups using the column `geo_count`.
+We are going to group the data by year, and sum the column `geo_count`.
 
-Again, we are going to start with a Nushell native command.
-
-::: tip
-If you want to run this example, be aware that the next command will
-use a large amount of memory. This may affect the performance of your system
-while this is being executed.
-:::
+We are going to start with a Nushell native command.
 
 ```nu
 timeit {
@@ -184,7 +136,7 @@ And the result from the benchmark is:
 1sec 352ms 960µs 459ns
 ```
 
-Not bad at all. Again, pandas managed to get it done in a fraction of the time.
+Not bad at all. Pandas managed to get it done in a fraction of the time.
 
 To finish the comparison, let's try Nushell dataframes. We are going to put
 all the operations in one `nu` file, to make sure we are doing similar
