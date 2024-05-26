@@ -19,7 +19,7 @@ To create a new overlay, you first need a module:
         "foo"
     }
 
-    export alias bar = "bar"
+    export alias bar = echo "bar"
 
     export-env {
         load-env { BAZ: "baz" }

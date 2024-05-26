@@ -48,6 +48,186 @@ Here, semicolons are used in conjunction with pipelines. When a semicolon is use
 - As there is a semicolon after `line1`, the command will run to completion and get displayed on the screen.
 - `line2` | `line3` is a normal pipeline. It runs, and its contents are displayed after `line1`'s contents.
 
+## The pipeline special variable `$in`
+
+Much of Nu's composability comes from the special `$in` variable, which holds the current pipeline input.
+
+`$in` is particular useful when used in:
+
+- Command or external parameters
+- Filters
+- Custom command definitions or scripts that accept pipeline input
+
+### `$in` as a command argument or as part of an expression
+
+Imagine you are creating a directory that includes tomorrow's date as part of the name. The following two commands are equivalent:
+
+```nushell
+mkdir $'((date now) + 1day | format date '%F') Report'
+```
+
+or
+
+```nushell
+date now                    # 1: today
+| $in + 1day                # 2: tomorrow
+| format date '%F'          # 3: Format as YYYY-MM-DD
+| $'($in) Report'           # 4: Format the directory name
+| mkdir $in                 # 5: Create the directory
+```
+
+While the second form may be overly verbose for this contribed example, you'll notice several advantages:
+
+- It can be composed step-by-step with a simple <kbd>↑</kbd> (up arrow) to repeat the previous command and add the next stage of the pipeline.
+- It's arguably more readable.
+- Each step can, if needed, be commented.
+- Each step in the pipeline can be [`inspect`ed for debugging](/commands/docs/inspect.html).
+
+Let's examine the contents of `$in` on each line of the above example:
+
+- On line 2, `$in` refers to the results of line 1's `date now` (a datetime value).
+- On line 4, `$in` refers to tomorrow's formatted date from line 3 and is used in an interpolated string
+- On line 5, `$in` refers to the results of line 4's interpolated string, e.g. '2024-05-14 Report'
+
+### `$in` in filters
+
+`$in` may be modified by certain [filter commands](/commands/categories/filters.html) to provide more convenient access to the expected context. For example:
+
+```nushell
+1..10 | each {$in * 2}
+```
+
+Rather than referring to the entire range of 10 digits, the `each` filter modifies `$in` inside the closure to refer to the value of the _current iteration_.
+
+In most cases, `$in` will be the same as the closure parameter. For the `each` filter, the following example is equivalent to the one above:
+
+```nushell
+1..10 | each {|value| $value * 2}
+```
+
+However, some filters will assign an even more convenient value to `$in`. The `update` filter is one example. Using `$in` with `update` refers to the _column_ being updated, while the closure parameter refers to the entire record:
+
+```nushell
+ls | update name {|file| $file.name | str upcase}
+ls | update name {$in | str upcase}
+```
+
+With most filters, `$in` would refer to the entire `file` record (with `name`, `type`, `size`, and `modified` columns). However, with `update`, it refers specifically to the contents of the _column_ being updated, in this case `name`.
+
+### Implicit `$in`
+
+The preceding example can be simplified even further because `$in |` is implicit at the beginning of a closure. So we can just use the more concise:
+
+```nushell
+ls | update name {str upcase}
+```
+
+### `$in` in custom command definitions and scripts
+
+`$in` (as well as its implicit use) is also useful to create custom commands and scripts which act as part of the pipeline.
+
+The following contrived example creates a custom command that returns every other letter of the input string:
+
+```nushell
+def "every other" [] {
+  $in
+  | split chars
+  | enumerate
+  | where ($it.index mod 2) == 0
+  | get item
+  | str join ''
+}
+
+> 'N+u&sphre!l!l' | every other
+Nushell
+```
+
+Again, `$in` is implicit in this particular example, and starting the command with `split chars` would have the same effect.
+
+### When is `$in` valid?
+
+A common source of errors is misunderstanding where `$in` is valid, invalid, and when it changes.
+
+As described above, `$in` is valid:
+
+- When used in a pipeline to address the previous expression's result
+
+  Example:
+
+  ```nushell
+  > 4               # Pipeline input
+    | $in * $in     # 4 * 4 = 16
+    | $in / 2       # 16 / 2 = 8
+
+  8
+  ```
+
+- When used in the first line of a multiline closure or block to address the pipeline (or filter) input to the closure/block:
+
+  Example:
+
+  ```nushell
+  def works [] {
+    print $in
+  }
+
+  > true | works
+  true
+  ```
+
+### When is `$in` invalid?
+
+- `$in` should not be considered valid on any line _other_ than the first in a multiline closure/block. For example:
+
+  ```nushell
+  def fails [] {
+    print $in
+    print $in
+  }
+
+  > true | fails
+  true
+  Error: nu::shell::variable_not_found
+
+    × Variable not found
+    ╭─[entry #232:3:9]
+  2 │   print $in
+  3 │   print $in
+    ·         ─┬─
+    ·          ╰── variable not found
+  4 │ }
+    ╰────
+  ```
+
+  Note: While the above scenario will work in a closure, see the next section for the recommended alternative.
+
+### Best practice for `$in` in multiline code
+
+It is, of course, common to need to refer to the pipeline input multiple times in either a pipeline or multiline statements.
+
+In this case, reassign the contents of `$in` to another variable as the first line of your closure/block. This will also aid in readability and debugging.
+
+Example:
+
+```nushell
+def "date info" [] {
+  let day = $in
+  print ($day | format date '%v')
+  print $'... was a ($day | format date '%A')'
+  print $'... was day ($day | format date '%j') of the year'
+}
+
+> '2000-01-01' | date info
+ 1-Jan-2000
+... was a Saturday
+... was day 001 of the year
+```
+
+### Collectability of `$in`
+
+Currently, the use of `$in` on a stream in a pipeline results in a "collected" value, meaning the pipeline "waits" on the stream to complete before handling `$in` with the full results. However, this behavior is not guaranteed in future releases. To ensure that a stream is collected into a single variable, use the [`collect` command](/commands/docs/collect.html).
+
+
 ## Working with external commands
 
 Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data.md)), but what about commands outside of Nu? Let's look at some examples of working with external commands:
