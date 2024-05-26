@@ -154,7 +154,7 @@ and the benchmark with dataframes is:
 ```nu
 > timeit {source load.nu}
 
-557ms 658us 500ns
+103ms 791µs 875ns
 ```
 
 Luckily Nushell dataframes managed to halve the time again. Isn't that great?
