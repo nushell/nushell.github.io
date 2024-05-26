@@ -49,7 +49,7 @@ much attention to the [`Dataframe` commands](/commands/categories/dataframe.md).
 sections of this page.
 
 > System Details: The benchmarks presented in this section were run using a
-> Macbook with a processor M1 and 32gb of ram
+> Macbook with a processor M1 pro and 32gb of ram
 >
 > All examples were run on Nushell version 0.93 using `nu_plugin_polars 0.93`
 
