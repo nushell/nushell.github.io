@@ -116,7 +116,7 @@ timeit {
 3sec 364ms 48µs 625ns
 ```
 
-So, 3.7 seconds to perform this aggregated operation.
+So, 3.7 seconds to perform this aggregation.
 
 Let's try the same operation in pandas:
 
@@ -136,7 +136,7 @@ And the result from the benchmark is:
 1sec 352ms 960µs 459ns
 ```
 
-Not bad at all. Pandas managed to get it done in a fraction of the time.
+Not bad at all. Pandas managed to get it almost 3 times faster then nushell.
 
 To finish the comparison, let's try Nushell dataframes. We are going to put
 all the operations in one `nu` file, to make sure we are doing similar
@@ -157,7 +157,7 @@ and the benchmark with dataframes is:
 103ms 791µs 875ns
 ```
 
-Luckily Nushell dataframes managed to halve the time again. Isn't that great?
+The `polars` dataframes plugin managed to finish operation 16 times faster than pandas with python. Isn't that great?
 
 As you can see, Nushell's [`Dataframe` commands](/commands/categories/dataframe.md)
 are as fast as the most common tools that exist today to do data analysis. The commands
