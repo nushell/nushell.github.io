@@ -165,6 +165,13 @@ are as fast as the most common tools that exist today to do data analysis. The c
 that are included in this release have the potential to become your go-to tool for
 doing data analysis. By composing complex Nushell pipelines, you can extract information
 from data in a reliable way.
+Let's clean up the cache from the dataframes that we used during benchmarking.
+To do that, let's stop the `polars`.
+When we execute our next commands, we will start a new instance of plugin.
+
+```nu
+> plugin stop polars
+```
 
 ## Working with Dataframes
 
