@@ -64,12 +64,12 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 
 ```nu
 > let df = polars open Data7602DescendingYearOrder.csv
-╭──────────────┬─────────┬─────────┬─────────┬───────────┬──────────────┬───────────────┬────────────┬──────────┬───────────────╮
-│     key      │ created │ columns │  rows   │   type    │ estimated... │ span_contents │ span_start │ span_end │ reference_... │
-├──────────────┼─────────┼─────────┼─────────┼───────────┼──────────────┼───────────────┼────────────┼──────────┼───────────────┤
-│ 70493c0b-... │ now     │       5 │ 5429252 │ DataFrame │     184.5 MB │ polars open   │    1989598 │  1989609 │             1 │
-╰──────────────┴─────────┴─────────┴─────────┴───────────┴──────────────┴───────────────┴────────────┴──────────┴───────────────╯
 > polars store-ls | select key type columns rows estimated_size
+╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
+│                 key                  │   type    │ columns │  rows   │ estimated_size │
+├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
+│ a4c4020c-15a6-406b-bcbf-582ded6ddb23 │ DataFrame │       5 │ 5429252 │       184.5 MB │
+╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
 ```
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
@@ -119,10 +119,10 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-3sec 411ms 373µs 833ns
+3sec 332ms 171µs 450ns +/- 51ms 197µs 768ns
 ```
 
-So, 3.4 seconds to perform this aggregation.
+So, 3.3 seconds to perform this aggregation.
 
 Let's try the same operation in pandas:
 
@@ -141,6 +141,9 @@ And the result from the benchmark is:
 bench -n 10 --pretty {
     python load.py | null
 }
+```
+```output-numd
+1sec 334ms 831µs 604ns +/- 8ms 932µs 853ns
 ```
 
 Not bad at all. Pandas managed to get it 2.6 times faster than Nushell.
@@ -164,9 +167,12 @@ instance for each test in order of honest comparison) is:
 ```nu
 bench -n 10 --pretty {nu load.nu | complete | null}
 ```
+```output-numd
+135ms 376µs 887ns +/- 3ms 572µs 870ns
+```
 
-The `polars` dataframes plugin managed to finish operation almost 14 times
-faster than pandas with python. Isn't that great?
+The `polars` dataframes plugin managed to finish operation almost 10 times
+faster than `pandas` with python. Isn't that great?
 
 As you can see, the Nushell's `polars` plugin is performant like `polars` itself.
 Coupled with Nushell commands and pipelines, it is capable of conducting sophisticated
@@ -223,13 +229,12 @@ The `polars open` command can read files in formats: **csv**, **tsv**, **parquet
 To see all the dataframes that are stored in memory you can use
 
 ```nu
-╭──────────────┬─────────┬─────────┬─────────┬───────────┬──────────────┬───────────────┬────────────┬──────────┬───────────────╮
-│     key      │ created │ columns │  rows   │   type    │ estimated... │ span_contents │ span_start │ span_end │ reference_... │
-├──────────────┼─────────┼─────────┼─────────┼───────────┼──────────────┼───────────────┼────────────┼──────────┼───────────────┤
-│ 15526914-... │ now     │       8 │      10 │ DataFrame │        403 B │ polars open   │    1993602 │  1993613 │             1 │
-│ 70493c0b-... │ now     │       5 │ 5429252 │ DataFrame │     184.5 MB │ polars open   │    1989598 │  1989609 │             1 │
-╰──────────────┴─────────┴─────────┴─────────┴───────────┴──────────────┴───────────────┴────────────┴──────────┴───────────────╯
 > polars store-ls | select key type columns rows estimated_size
+╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
+│                 key                  │   type    │ columns │ rows │ estimated_size │
+├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
+│ 7c9ffa1a-5519-4a5e-92bd-069fdde61b01 │ DataFrame │       8 │   10 │          403 B │
+╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
 As you can see, the command shows the created dataframes together with basic
@@ -306,14 +311,13 @@ executed command. Note the space between ( and !!.
 And now we have two dataframes stored in memory
 
 ```nu
-╭──────────────┬─────────┬─────────┬─────────┬───────────┬──────────────┬───────────────┬────────────┬──────────┬───────────────╮
-│     key      │ created │ columns │  rows   │   type    │ estimated... │ span_contents │ span_start │ span_end │ reference_... │
-├──────────────┼─────────┼─────────┼─────────┼───────────┼──────────────┼───────────────┼────────────┼──────────┼───────────────┤
-│ 70493c0b-... │ now     │       5 │ 5429252 │ DataFrame │     184.5 MB │ polars open   │    1989598 │  1989609 │             1 │
-│ 15526914-... │ now     │       8 │      10 │ DataFrame │        403 B │ polars open   │    1993602 │  1993613 │             1 │
-│ 72392924-... │ now     │       4 │       1 │ DataFrame │         32 B │ polars select │    1994622 │  1994635 │             1 │
-╰──────────────┴─────────┴─────────┴─────────┴───────────┴──────────────┴───────────────┴────────────┴──────────┴───────────────╯
 > polars store-ls | select key type columns rows estimated_size
+╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
+│                 key                  │   type    │ columns │ rows │ estimated_size │
+├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
+│ 16995878-1aa7-4a40-a065-04fb4ba12e95 │ DataFrame │       4 │    1 │           32 B │
+│ 7c9ffa1a-5519-4a5e-92bd-069fdde61b01 │ DataFrame │       8 │   10 │          403 B │
+╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
 Pretty neat, isn't it?
@@ -431,14 +435,20 @@ $group
 ] | polars sort-by first
 ```
 ```output-numd
-╭────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ plan           │ SORT BY [col("first")]                                                                                       │
-│                │   AGGREGATE                                                                                                  │
-│                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1").sum()...                                  │
-│ optimized_plan │ SORT BY [col("first")]                                                                                       │
-│                │   AGGREGATE                                                                                                  │
-│                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1").sum()...                                  │
-╰────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ plan           │ SORT BY [col("first")]                                                                              │
+│                │   AGGREGATE                                                                                         │
+│                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1")                                  │
+│                │ .sum(), col("float_2").count()] BY [col("first")] FROM                                              │
+│                │     DF ["int_1", "int_2", "float_1", "float_2                                                       │
+│                │ "]; PROJECT */8 COLUMNS; SELECTION: "None"                                                          │
+│ optimized_plan │ SORT BY [col("first")]                                                                              │
+│                │   AGGREGATE                                                                                         │
+│                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1")                                  │
+│                │ .sum(), col("float_2").count()] BY [col("first")] FROM                                              │
+│                │     DF ["int_1", "int_2", "float_1", "float_2                                                       │
+│                │ "]; PROJECT 5/8 COLUMNS; SELECTION: "None"                                                          │
+╰────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
@@ -488,17 +498,22 @@ dataframes you will see in total four dataframes
 
 ```nu
 > polars store-ls
-╭──────────────┬─────────┬─────────┬─────────┬─────────────┬──────────────┬──────────────┬────────────┬──────────┬──────────────╮
-│     key      │ created │ columns │  rows   │    type     │ estimated... │ span_cont... │ span_start │ span_end │ reference... │
-├──────────────┼─────────┼─────────┼─────────┼─────────────┼──────────────┼──────────────┼────────────┼──────────┼──────────────┤
-│ a7be8df5-... │ now     │       5 │       4 │ DataFrame   │        132 B │ polars open  │    1995459 │  1995470 │            1 │
-│ 9b3d0e37-... │      ❎ │         │         │ LazyGroupBy │              │ polars gr... │    1997824 │  1997839 │            1 │
-│ 70493c0b-... │ now     │       5 │ 5429252 │ DataFrame   │     184.5 MB │ polars open  │    1989598 │  1989609 │            1 │
-│ 15526914-... │ now     │       8 │      10 │ DataFrame   │        403 B │ polars open  │    1993602 │  1993613 │            1 │
-│ 72392924-... │ now     │       4 │       1 │ DataFrame   │         32 B │ polars se... │    1994622 │  1994635 │            1 │
-│ 484e5b70-... │ now     │       2 │       3 │ DataFrame   │         48 B │ polars in... │    1997259 │  1997273 │            1 │
-│ 3b1f23d5-... │ now     │       4 │       3 │ DataFrame   │         96 B │ polars wi... │    1997590 │  1997608 │            1 │
-╰──────────────┴─────────┴─────────┴─────────┴─────────────┴──────────────┴──────────────┴────────────┴──────────┴──────────────╯
+╭─────────────────────────────────┬─────────┬─────────┬──────┬─────────────┬────────────────┬────────────────────┬─────╮
+│               key               │ created │ columns │ rows │    type     │ estimated_size │   span_contents    │ ... │
+├─────────────────────────────────┼─────────┼─────────┼──────┼─────────────┼────────────────┼────────────────────┼─────┤
+│ 2745ec0f-8c66-4616-8cbb-bc5f63e │ now     │       2 │    3 │ DataFrame   │           48 B │ polars into-df     │ ... │
+│ 631e9                           │         │         │      │             │                │                    │     │
+│ 16995878-1aa7-4a40-a065-04fb4ba │ now     │       4 │    1 │ DataFrame   │           32 B │ polars select      │ ... │
+│ 12e95                           │         │         │      │             │                │                    │     │
+│ 57a61605-7759-480b-a0ba-c185701 │ now     │       4 │    3 │ DataFrame   │           96 B │ polars with-column │ ... │
+│ 933d9                           │         │         │      │             │                │                    │     │
+│ 0209b64f-649c-428b-8673-704bd09 │ now     │       5 │    4 │ DataFrame   │          132 B │ polars open        │ ... │
+│ bd02c                           │         │         │      │             │                │                    │     │
+│ 0b7b0cee-ff9c-41c2-8296-34d10c0 │      ❎ │         │      │ LazyGroupBy │                │ polars group-by    │ ... │
+│ e89d8                           │         │         │      │             │                │                    │     │
+│ 7c9ffa1a-5519-4a5e-92bd-069fdde │ now     │       8 │   10 │ DataFrame   │          403 B │ polars open        │ ... │
+│ 61b01                           │         │         │      │             │                │                    │     │
+╰─────────────────────────────────┴─────────┴─────────┴──────┴─────────────┴────────────────┴────────────────────┴─────╯
 ```
 
 One thing that is important to mention is how the memory is being optimized
@@ -710,11 +725,13 @@ Using the first dataframe that we created we can do something like this
 ```nu
 > let mask3 = $df | polars col first | polars is-in [b c]
 > $mask3
-╭──────────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ input    │ [table 2 rows]                                                                                                     │
-│ function │ Boolean(IsIn)                                                                                                      │
-│ options  │ FunctionOptions { collect_groups: ElementWise, fmt_str: "", input_wildcard_expansion: false, returns_scalar: fa... │
-╰──────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭──────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ input    │ [table 2 rows]                                                                                            │
+│ function │ Boolean(IsIn)                                                                                             │
+│ options  │ FunctionOptions { collect_groups: ElementWise, fmt_str: "", input_wildcard_expansion: false, returns_scal │
+│          │ ar: false, cast_to_supertypes: true, allow_rename: false, pass_name_to_apply: false, changes_length: fals │
+│          │ e, check_lengths: UnsafeBool(true), allow_group_aware: true }                                             │
+╰──────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 and this new mask can be used to filter the dataframe
