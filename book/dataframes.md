@@ -98,12 +98,18 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 
 ### Group-by comparison
 
+To output more statistically correct timings, let's load and use the `std bench` command.
+
+```nu
+> use std bench
+```
+
 We are going to group the data by year, and sum the column `geo_count`.
 
 We are going to start with a Nushell native command.
 
 ```nu
-timeit {
+bench -n 10 --pretty {
     open 'Data7602DescendingYearOrder.csv'
     | group-by year --to-table
     | update items {|i|
@@ -132,8 +138,9 @@ print(res)'
 And the result from the benchmark is:
 
 ```nu
-> timeit {python load.py | null}
-1sec 310ms 534µs 500ns
+bench -n 10 --pretty {
+    python load.py | null
+}
 ```
 
 Not bad at all. Pandas managed to get it 2.6 times faster than Nushell.
@@ -154,8 +161,7 @@ comparison:
 and the benchmark with dataframes is:
 
 ```nu
-> timeit {source load.nu}
-94ms 417µs 416ns
+bench -n 10 --pretty {nu load.nu | complete | null}
 ```
 
 The `polars` dataframes plugin managed to finish operation almost 14 times
