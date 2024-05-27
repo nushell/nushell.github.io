@@ -144,10 +144,11 @@ all the operations in one `nu` file, to make sure we are doing similar
 operations:
 
 ```nu
-('let df = polars open Data7602DescendingYearOrder.csv
-let res = $df | polars group-by year | polars agg (polars col geo_count | polars sum)
-$res | polars collect'
-| save load.nu -f)
+( 'polars open Data7602DescendingYearOrder.csv
+    | polars group-by year
+    | polars agg (polars col geo_count | polars sum)
+    | polars collect'
+| save load.nu -f )
 ```
 
 and the benchmark with dataframes is:
