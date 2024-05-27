@@ -64,12 +64,12 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 
 ```nu
 > let df = polars open Data7602DescendingYearOrder.csv
-> polars store-ls
 ╭──────────────┬─────────┬─────────┬─────────┬───────────┬──────────────┬───────────────┬────────────┬──────────┬───────────────╮
 │     key      │ created │ columns │  rows   │   type    │ estimated... │ span_contents │ span_start │ span_end │ reference_... │
 ├──────────────┼─────────┼─────────┼─────────┼───────────┼──────────────┼───────────────┼────────────┼──────────┼───────────────┤
 │ 70493c0b-... │ now     │       5 │ 5429252 │ DataFrame │     184.5 MB │ polars open   │    1989598 │  1989609 │             1 │
 ╰──────────────┴─────────┴─────────┴─────────┴───────────┴──────────────┴───────────────┴────────────┴──────────┴───────────────╯
+> polars store-ls | select key type columns rows estimated_size
 ```
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
@@ -145,7 +145,7 @@ operations:
 ```nu
 ('let df = polars open Data7602DescendingYearOrder.csv
 let res = $df | polars group-by year | polars agg (polars col geo_count | polars sum)
-$res'
+$res | polars collect'
 | save load.nu -f)
 ```
 
@@ -209,13 +209,13 @@ files.
 To see all the dataframes that are stored in memory you can use
 
 ```nu
-> polars store-ls
 ╭──────────────┬─────────┬─────────┬─────────┬───────────┬──────────────┬───────────────┬────────────┬──────────┬───────────────╮
 │     key      │ created │ columns │  rows   │   type    │ estimated... │ span_contents │ span_start │ span_end │ reference_... │
 ├──────────────┼─────────┼─────────┼─────────┼───────────┼──────────────┼───────────────┼────────────┼──────────┼───────────────┤
 │ 15526914-... │ now     │       8 │      10 │ DataFrame │        403 B │ polars open   │    1993602 │  1993613 │             1 │
 │ 70493c0b-... │ now     │       5 │ 5429252 │ DataFrame │     184.5 MB │ polars open   │    1989598 │  1989609 │             1 │
 ╰──────────────┴─────────┴─────────┴─────────┴───────────┴──────────────┴───────────────┴────────────┴──────────┴───────────────╯
+> polars store-ls | select key type columns rows estimated_size
 ```
 
 As you can see, the command shows the created dataframes together with basic
@@ -292,7 +292,6 @@ executed command. Note the space between ( and !!.
 And now we have two dataframes stored in memory
 
 ```nu
-> polars store-ls
 ╭──────────────┬─────────┬─────────┬─────────┬───────────┬──────────────┬───────────────┬────────────┬──────────┬───────────────╮
 │     key      │ created │ columns │  rows   │   type    │ estimated... │ span_contents │ span_start │ span_end │ reference_... │
 ├──────────────┼─────────┼─────────┼─────────┼───────────┼──────────────┼───────────────┼────────────┼──────────┼───────────────┤
@@ -300,6 +299,7 @@ And now we have two dataframes stored in memory
 │ 15526914-... │ now     │       8 │      10 │ DataFrame │        403 B │ polars open   │    1993602 │  1993613 │             1 │
 │ 72392924-... │ now     │       4 │       1 │ DataFrame │         32 B │ polars select │    1994622 │  1994635 │             1 │
 ╰──────────────┴─────────┴─────────┴─────────┴───────────┴──────────────┴───────────────┴────────────┴──────────┴───────────────╯
+> polars store-ls | select key type columns rows estimated_size
 ```
 
 Pretty neat, isn't it?
