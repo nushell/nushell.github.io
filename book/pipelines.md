@@ -48,7 +48,7 @@ Here, semicolons are used in conjunction with pipelines. When a semicolon is use
 - As there is a semicolon after `line1`, the command will run to completion and get displayed on the screen.
 - `line2` | `line3` is a normal pipeline. It runs, and its contents are displayed after `line1`'s contents.
 
-## The pipeline special variable `$in`
+## Pipeline input and the special `$in` variable
 
 Much of Nu's composability comes from the special `$in` variable, which holds the current pipeline input.
 
@@ -60,13 +60,15 @@ Much of Nu's composability comes from the special `$in` variable, which holds th
 
 ### `$in` as a command argument or as part of an expression
 
-Imagine you are creating a directory that includes tomorrow's date as part of the name. The following two commands are equivalent:
+Compare the following two command-lines that create a directory with tomorrow's date as part of the name. The following are equivalent:
+
+Using subexpressions:
 
 ```nushell
 mkdir $'((date now) + 1day | format date '%F') Report'
 ```
 
-or
+or using pipelines:
 
 ```nushell
 date now                    # 1: today
@@ -76,7 +78,7 @@ date now                    # 1: today
 | mkdir $in                 # 5: Create the directory
 ```
 
-While the second form may be overly verbose for this contribed example, you'll notice several advantages:
+While the second form may be overly verbose for this contrived example, you'll notice several advantages:
 
 - It can be composed step-by-step with a simple <kbd>↑</kbd> (up arrow) to repeat the previous command and add the next stage of the pipeline.
 - It's arguably more readable.
@@ -89,60 +91,34 @@ Let's examine the contents of `$in` on each line of the above example:
 - On line 4, `$in` refers to tomorrow's formatted date from line 3 and is used in an interpolated string
 - On line 5, `$in` refers to the results of line 4's interpolated string, e.g. '2024-05-14 Report'
 
-### `$in` in filters
+### Pipeline input in filter closures
 
-`$in` may be modified by certain [filter commands](/commands/categories/filters.html) to provide more convenient access to the expected context. For example:
+Certain [filter commands](/commands/categories/filters.html) may modify the pipeline input to their closure in order to provide more convenient access to the expected context. For example:
 
 ```nushell
 1..10 | each {$in * 2}
 ```
 
-Rather than referring to the entire range of 10 digits, the `each` filter modifies `$in` inside the closure to refer to the value of the _current iteration_.
+Rather than referring to the entire range of 10 digits, the `each` filter modifies the input to refer to the value of the _current iteration_.
 
-In most cases, `$in` will be the same as the closure parameter. For the `each` filter, the following example is equivalent to the one above:
+In most cases, the pipeline input, and resulting `$in`, will be the same as the closure parameter. For the `each` filter, the following example is equivalent to the one above:
 
 ```nushell
 1..10 | each {|value| $value * 2}
 ```
 
-However, some filters will assign an even more convenient value to `$in`. The `update` filter is one example. Using `$in` with `update` refers to the _column_ being updated, while the closure parameter refers to the entire record:
+However, some filters will assign an even more convenient value to their closures' input. The `update` filter is one example. The pipeline input to the `update` command's closure (as well as `$in`) refers to the _column_ being updated, while the closure parameter refers to the entire record. As a result, the following two examples are also equivalent:
 
 ```nushell
 ls | update name {|file| $file.name | str upcase}
-ls | update name {$in | str upcase}
-```
-
-With most filters, `$in` would refer to the entire `file` record (with `name`, `type`, `size`, and `modified` columns). However, with `update`, it refers specifically to the contents of the _column_ being updated, in this case `name`.
-
-### Implicit `$in`
-
-The preceding example can be simplified even further because `$in |` is implicit at the beginning of a closure. So we can just use the more concise:
-
-```nushell
 ls | update name {str upcase}
 ```
 
-### `$in` in custom command definitions and scripts
+With most filters, the second version would refer to the entire `file` record (with `name`, `type`, `size`, and `modified` columns). However, with `update`, it refers specifically to the contents of the _column_ being updated, in this case `name`.
 
-`$in` (as well as its implicit use) is also useful to create custom commands and scripts which act as part of the pipeline.
+### Pipeline input in custom command definitions and scripts
 
-The following contrived example creates a custom command that returns every other letter of the input string:
-
-```nushell
-def "every other" [] {
-  $in
-  | split chars
-  | enumerate
-  | where ($it.index mod 2) == 0
-  | get item
-  | str join ''
-}
-
-> 'N+u&sphre!l!l' | every other
-Nushell
-```
-
-Again, `$in` is implicit in this particular example, and starting the command with `split chars` would have the same effect.
+See: [Custom Commands -> Pipeline Input](http://localhost:8080/book/custom_commands.html#pipeline-input)
 
 ### When is `$in` valid?
 
@@ -227,6 +203,7 @@ def "date info" [] {
 
 Currently, the use of `$in` on a stream in a pipeline results in a "collected" value, meaning the pipeline "waits" on the stream to complete before handling `$in` with the full results. However, this behavior is not guaranteed in future releases. To ensure that a stream is collected into a single variable, use the [`collect` command](/commands/docs/collect.html).
 
+Likewise, avoid using `$in` when normal pipeline input will suffice, as internally `$in` forces a conversion from `PipelineData` to `Value` and _may_ result in decreased performance and/or increased memory usage.
 
 ## Working with external commands
 
