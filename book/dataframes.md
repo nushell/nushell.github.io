@@ -140,8 +140,8 @@ Not bad at all. Pandas managed to get it 2.6 times faster than Nushell.
 And with bigger files, the superiority of Pandas should increase here.
 
 To finish the comparison, let's try Nushell dataframes. We are going to put
-all the operations in one `nu` file, to make sure we are doing similar
-operations:
+all the operations in one `nu` file, to make sure we are doing the correct
+comparison:
 
 ```nu
 ( 'polars open Data7602DescendingYearOrder.csv
@@ -161,11 +161,10 @@ and the benchmark with dataframes is:
 The `polars` dataframes plugin managed to finish operation almost 14 times
 faster than pandas with python. Isn't that great?
 
-As you can see, Nushell's [`Dataframe` commands](/commands/categories/dataframe.md)
-are as fast as the most common tools that exist today to do data analysis. The commands
-that are included in this release have the potential to become your go-to tool for
-doing data analysis. By composing complex Nushell pipelines, you can extract information
-from data in a reliable way.
+As you can see, the Nushell's `polars` plugin is performant like `polars` itself.
+Coupled with Nushell commands and pipelines, it is capable of conducting sophisticated
+analysis without leaving the terminal.
+
 Let's clean up the cache from the dataframes that we used during benchmarking.
 To do that, let's stop the `polars`.
 When we execute our next commands, we will start a new instance of plugin.
@@ -211,8 +210,7 @@ This should create the value `$df` in memory which holds the data we just
 created.
 
 ::: tip
-The command `polars open` can read either **csv** or **parquet**
-files.
+The `polars open` command can read files in formats: **csv**, **tsv**, **parquet**, **json(l)**, **arrow**, and **avro**.
 :::
 
 To see all the dataframes that are stored in memory you can use
