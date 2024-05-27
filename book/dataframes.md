@@ -106,7 +106,7 @@ To output more statistically correct timings, let's load and use the `std bench`
 
 We are going to group the data by year, and sum the column `geo_count`.
 
-We are going to start with a Nushell native command.
+First, let's measure the performance of a Nushell native commands pipeline.
 
 ```nu
 bench -n 10 --pretty {
@@ -158,7 +158,8 @@ comparison:
 | save load.nu -f )
 ```
 
-and the benchmark with dataframes is:
+and the benchmark with dataframes (together with loading a new nushell and `polars`
+instance for each test in order of honest comparison) is:
 
 ```nu
 bench -n 10 --pretty {nu load.nu | complete | null}
