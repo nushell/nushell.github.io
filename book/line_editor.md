@@ -86,7 +86,6 @@ Vi Normal motions
 | Key | motion            |
 | --- | ----------------- |
 | w   | Word              |
-| d   | Line end          |
 | 0   | Line start        |
 | $   | Line end          |
 | f   | Right until char  |
