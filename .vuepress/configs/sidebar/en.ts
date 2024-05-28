@@ -124,6 +124,7 @@ export const sidebarEn: SidebarConfig = {
         '/contributor-book/commands',
         '/contributor-book/plugins',
         '/contributor-book/plugin_protocol_reference',
+        '/contributor-book/parser_and_other_editor_tools.md',
       ],
     },
   ],
