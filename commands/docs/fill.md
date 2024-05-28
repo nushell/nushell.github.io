@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.93.0
+version: 0.94.0
 conversions: |
   Fill and Align.
 usage: |
@@ -53,10 +53,10 @@ Fill a string on the right side to a width of 15 with the character '─'
 ────────nushell
 ```
 
-Fill a string on both sides to a width of 15 with the character '─'
+Fill an empty string with 10 '─' characters
 ```nu
-> 'nushell' | fill --alignment m --character '─' --width 15
-────nushell────
+> '' | fill --character '─' --width 10
+──────────
 ```
 
 Fill a number on the left side to a width of 5 with the character '0'

@@ -2,7 +2,7 @@
 title: str
 categories: |
   strings
-version: 0.93.0
+version: 0.94.0
 strings: |
   Various commands for working with string data.
 usage: |
@@ -31,27 +31,27 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                                     | type    | usage                                                                                                                               |
-| ------------------------------------------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [`str camel-case`](/commands/docs/str_camel-case.md)                     | Builtin | Convert a string to camelCase.                                                                                                      |
-| [`str capitalize`](/commands/docs/str_capitalize.md)                     | Builtin | Capitalize first letter of text.                                                                                                    |
-| [`str contains`](/commands/docs/str_contains.md)                         | Builtin | Checks if string input contains a substring.                                                                                        |
-| [`str distance`](/commands/docs/str_distance.md)                         | Builtin | Compare two strings and return the edit distance/Levenshtein distance.                                                              |
-| [`str downcase`](/commands/docs/str_downcase.md)                         | Builtin | Make text lowercase.                                                                                                                |
-| [`str ends-with`](/commands/docs/str_ends-with.md)                       | Builtin | Check if an input ends with a string.                                                                                               |
-| [`str expand`](/commands/docs/str_expand.md)                             | Builtin | Generates all possible combinations defined in brace expansion syntax.                                                              |
-| [`str index-of`](/commands/docs/str_index-of.md)                         | Builtin | Returns start index of first occurrence of string in input, or -1 if no match.                                                      |
-| [`str join`](/commands/docs/str_join.md)                                 | Builtin | Concatenate multiple strings into a single string, with an optional separator between each.                                         |
-| [`str kebab-case`](/commands/docs/str_kebab-case.md)                     | Builtin | Convert a string to kebab-case.                                                                                                     |
-| [`str length`](/commands/docs/str_length.md)                             | Builtin | Output the length of any strings in the pipeline.                                                                                   |
-| [`str pascal-case`](/commands/docs/str_pascal-case.md)                   | Builtin | Convert a string to PascalCase.                                                                                                     |
-| [`str replace`](/commands/docs/str_replace.md)                           | Builtin | Find and replace text.                                                                                                              |
-| [`str reverse`](/commands/docs/str_reverse.md)                           | Builtin | Reverse every string in the pipeline.                                                                                               |
-| [`str screaming-snake-case`](/commands/docs/str_screaming-snake-case.md) | Builtin | Convert a string to SCREAMING_SNAKE_CASE.                                                                                           |
-| [`str snake-case`](/commands/docs/str_snake-case.md)                     | Builtin | Convert a string to snake_case.                                                                                                     |
-| [`str starts-with`](/commands/docs/str_starts-with.md)                   | Builtin | Check if an input starts with a string.                                                                                             |
-| [`str stats`](/commands/docs/str_stats.md)                               | Builtin | Gather word count statistics on the text.                                                                                           |
-| [`str substring`](/commands/docs/str_substring.md)                       | Builtin | Get part of a string. Note that the start is included but the end is excluded, and that the first character of a string is index 0. |
-| [`str title-case`](/commands/docs/str_title-case.md)                     | Builtin | Convert a string to Title Case.                                                                                                     |
-| [`str trim`](/commands/docs/str_trim.md)                                 | Builtin | Trim whitespace or specific character.                                                                                              |
-| [`str upcase`](/commands/docs/str_upcase.md)                             | Builtin | Make text uppercase.                                                                                                                |
+| name                                                                     | usage                                                                                       | type     |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | -------- |
+| [`str camel-case`](/commands/docs/str_camel-case.md)                     | Convert a string to camelCase.                                                              | built-in |
+| [`str capitalize`](/commands/docs/str_capitalize.md)                     | Capitalize first letter of text.                                                            | built-in |
+| [`str contains`](/commands/docs/str_contains.md)                         | Checks if string input contains a substring.                                                | built-in |
+| [`str distance`](/commands/docs/str_distance.md)                         | Compare two strings and return the edit distance/Levenshtein distance.                      | built-in |
+| [`str downcase`](/commands/docs/str_downcase.md)                         | Make text lowercase.                                                                        | built-in |
+| [`str ends-with`](/commands/docs/str_ends-with.md)                       | Check if an input ends with a string.                                                       | built-in |
+| [`str expand`](/commands/docs/str_expand.md)                             | Generates all possible combinations defined in brace expansion syntax.                      | built-in |
+| [`str index-of`](/commands/docs/str_index-of.md)                         | Returns start index of first occurrence of string in input, or -1 if no match.              | built-in |
+| [`str join`](/commands/docs/str_join.md)                                 | Concatenate multiple strings into a single string, with an optional separator between each. | built-in |
+| [`str kebab-case`](/commands/docs/str_kebab-case.md)                     | Convert a string to kebab-case.                                                             | built-in |
+| [`str length`](/commands/docs/str_length.md)                             | Output the length of any strings in the pipeline.                                           | built-in |
+| [`str pascal-case`](/commands/docs/str_pascal-case.md)                   | Convert a string to PascalCase.                                                             | built-in |
+| [`str replace`](/commands/docs/str_replace.md)                           | Find and replace text.                                                                      | built-in |
+| [`str reverse`](/commands/docs/str_reverse.md)                           | Reverse every string in the pipeline.                                                       | built-in |
+| [`str screaming-snake-case`](/commands/docs/str_screaming-snake-case.md) | Convert a string to SCREAMING_SNAKE_CASE.                                                   | built-in |
+| [`str snake-case`](/commands/docs/str_snake-case.md)                     | Convert a string to snake_case.                                                             | built-in |
+| [`str starts-with`](/commands/docs/str_starts-with.md)                   | Check if an input starts with a string.                                                     | built-in |
+| [`str stats`](/commands/docs/str_stats.md)                               | Gather word count statistics on the text.                                                   | built-in |
+| [`str substring`](/commands/docs/str_substring.md)                       | Get part of a string. Note that the first character of a string is index 0.                 | built-in |
+| [`str title-case`](/commands/docs/str_title-case.md)                     | Convert a string to Title Case.                                                             | built-in |
+| [`str trim`](/commands/docs/str_trim.md)                                 | Trim whitespace or specific character.                                                      | built-in |
+| [`str upcase`](/commands/docs/str_upcase.md)                             | Make text uppercase.                                                                        | built-in |

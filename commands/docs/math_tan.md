@@ -2,7 +2,7 @@
 title: math tan
 categories: |
   math
-version: 0.93.0
+version: 0.94.0
 math: |
   Returns the tangent of the number.
 usage: |

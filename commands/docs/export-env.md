@@ -2,7 +2,7 @@
 title: export-env
 categories: |
   env
-version: 0.93.0
+version: 0.94.0
 env: |
   Run a block and preserve its environment in a current scope.
 usage: |

@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.93.0
+version: 0.94.0
 strings: |
   Validate and parse input content.
 usage: |
@@ -55,7 +55,7 @@ Parse a input file by showing error message
 
 ```
 
-Parse an external stream as script by showing error message
+Parse a byte stream as script by showing error message
 ```nu
 > open foo.nu | nu-check --debug script.nu
 

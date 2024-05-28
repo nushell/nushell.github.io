@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.93.0
+version: 0.94.0
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match.
 usage: |

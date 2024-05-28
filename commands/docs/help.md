@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.93.0
+version: 0.94.0
 core: |
   Display help information about different parts of Nushell.
 usage: |
@@ -59,11 +59,11 @@ search for string in command names, usage and search terms
 
 ## Subcommands:
 
-| name                                                 | type    | usage                                |
-| ---------------------------------------------------- | ------- | ------------------------------------ |
-| [`help aliases`](/commands/docs/help_aliases.md)     | Builtin | Show help on nushell aliases.        |
-| [`help commands`](/commands/docs/help_commands.md)   | Builtin | Show help on nushell commands.       |
-| [`help escapes`](/commands/docs/help_escapes.md)     | Builtin | Show help on nushell string escapes. |
-| [`help externs`](/commands/docs/help_externs.md)     | Builtin | Show help on nushell externs.        |
-| [`help modules`](/commands/docs/help_modules.md)     | Builtin | Show help on nushell modules.        |
-| [`help operators`](/commands/docs/help_operators.md) | Builtin | Show help on nushell operators.      |
+| name                                                 | usage                                | type     |
+| ---------------------------------------------------- | ------------------------------------ | -------- |
+| [`help aliases`](/commands/docs/help_aliases.md)     | Show help on nushell aliases.        | built-in |
+| [`help commands`](/commands/docs/help_commands.md)   | Show help on nushell commands.       | built-in |
+| [`help escapes`](/commands/docs/help_escapes.md)     | Show help on nushell string escapes. | built-in |
+| [`help externs`](/commands/docs/help_externs.md)     | Show help on nushell externs.        | built-in |
+| [`help modules`](/commands/docs/help_modules.md)     | Show help on nushell modules.        | built-in |
+| [`help operators`](/commands/docs/help_operators.md) | Show help on nushell operators.      | built-in |

@@ -10,7 +10,7 @@ def command-names [] {
     let nu_dir = (which nu) | get path.0 | path dirname
     mut plugins = []
     for plugin in $PLUGINS {
-        if (sys).host.name == 'Windows' {
+        if (sys host | get name) == 'Windows' {
             $plugins ++= $'($nu_dir | path join $plugin).exe'
         } else {
             $plugins ++= $'($nu_dir | path join $plugin)'
@@ -242,14 +242,11 @@ $"($example.description)
     # Typically a root command that has sub commands should be one word command
     let one_word_cmd = ($command.name | split row ' ' | length) == 1
     let sub_commands = if $one_word_cmd { scope commands | where name =~ $'^($command.name) ' } else { [] }
-    let type_mapping = {is_builtin: 'Builtin', is_plugin: 'Plugin', is_custom: 'Custom'}
     let sub_commands = if $one_word_cmd and ($sub_commands | length) > 0 {
         let commands = $sub_commands
-            | select name usage is_builtin is_plugin is_custom
+            | select name usage type
             | update name {|it| $"[`($it.name)`]\(/commands/docs/($it.name | safe-path).md\)" }
             | upsert usage {|it| $it.usage | str replace -a '<' '\<' | str replace -a '>' '\>' }
-            | upsert type {|it| $type_mapping | columns | each {|t| if ($it | get $t) { $type_mapping | get $t } } | str join ',' }
-            | select name type usage
             | to md --pretty
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }

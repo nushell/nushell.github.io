@@ -2,7 +2,7 @@
 title: commandline
 categories: |
   core
-version: 0.93.0
+version: 0.94.0
 core: |
   View the current command line input buffer.
 usage: |
@@ -29,8 +29,8 @@ feature: default
 
 ## Subcommands:
 
-| name                                                                 | type    | usage                                         |
-| -------------------------------------------------------------------- | ------- | --------------------------------------------- |
-| [`commandline edit`](/commands/docs/commandline_edit.md)             | Builtin | Modify the current command line input buffer. |
-| [`commandline get-cursor`](/commands/docs/commandline_get-cursor.md) | Builtin | Get the current cursor position.              |
-| [`commandline set-cursor`](/commands/docs/commandline_set-cursor.md) | Builtin | Set the current cursor position.              |
+| name                                                                 | usage                                         | type     |
+| -------------------------------------------------------------------- | --------------------------------------------- | -------- |
+| [`commandline edit`](/commands/docs/commandline_edit.md)             | Modify the current command line input buffer. | built-in |
+| [`commandline get-cursor`](/commands/docs/commandline_get-cursor.md) | Get the current cursor position.              | built-in |
+| [`commandline set-cursor`](/commands/docs/commandline_set-cursor.md) | Set the current cursor position.              | built-in |

@@ -2,7 +2,7 @@
 title: view
 categories: |
   debug
-version: 0.93.0
+version: 0.94.0
 debug: |
   Various commands for viewing debug information.
 usage: |
@@ -31,8 +31,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | type    | usage                                                      |
-| ---------------------------------------------- | ------- | ---------------------------------------------------------- |
-| [`view files`](/commands/docs/view_files.md)   | Builtin | View the files registered in nushell's EngineState memory. |
-| [`view source`](/commands/docs/view_source.md) | Builtin | View a block, module, or a definition.                     |
-| [`view span`](/commands/docs/view_span.md)     | Builtin | View the contents of a span.                               |
+| name                                           | usage                                                      | type     |
+| ---------------------------------------------- | ---------------------------------------------------------- | -------- |
+| [`view files`](/commands/docs/view_files.md)   | View the files registered in nushell's EngineState memory. | built-in |
+| [`view source`](/commands/docs/view_source.md) | View a block, module, or a definition.                     | built-in |
+| [`view span`](/commands/docs/view_span.md)     | View the contents of a span.                               | built-in |

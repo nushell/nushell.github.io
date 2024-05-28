@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.93.0
+version: 0.94.0
 platform: |
   Output ANSI codes to change color and style of text.
 usage: |
@@ -143,8 +143,8 @@ Operating system commands:
 
 ## Subcommands:
 
-| name                                               | type    | usage                                                              |
-| -------------------------------------------------- | ------- | ------------------------------------------------------------------ |
-| [`ansi gradient`](/commands/docs/ansi_gradient.md) | Builtin | Add a color gradient (using ANSI color codes) to the given string. |
-| [`ansi link`](/commands/docs/ansi_link.md)         | Builtin | Add a link (using OSC 8 escape sequence) to the given string.      |
-| [`ansi strip`](/commands/docs/ansi_strip.md)       | Builtin | Strip ANSI escape sequences from a string.                         |
+| name                                               | usage                                                              | type     |
+| -------------------------------------------------- | ------------------------------------------------------------------ | -------- |
+| [`ansi gradient`](/commands/docs/ansi_gradient.md) | Add a color gradient (using ANSI color codes) to the given string. | built-in |
+| [`ansi link`](/commands/docs/ansi_link.md)         | Add a link (using OSC 8 escape sequence) to the given string.      | built-in |
+| [`ansi strip`](/commands/docs/ansi_strip.md)       | Strip ANSI escape sequences from a string.                         | built-in |

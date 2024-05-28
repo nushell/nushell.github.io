@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.93.0
+version: 0.94.0
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -61,7 +61,7 @@ Debug print a table
 
 ## Subcommands:
 
-| name                                               | type    | usage                                   |
-| -------------------------------------------------- | ------- | --------------------------------------- |
-| [`debug info`](/commands/docs/debug_info.md)       | Builtin | View process memory info.               |
-| [`debug profile`](/commands/docs/debug_profile.md) | Builtin | Profile pipeline elements in a closure. |
+| name                                               | usage                                   | type     |
+| -------------------------------------------------- | --------------------------------------- | -------- |
+| [`debug info`](/commands/docs/debug_info.md)       | View process memory info.               | built-in |
+| [`debug profile`](/commands/docs/debug_profile.md) | Profile pipeline elements in a closure. | built-in |
