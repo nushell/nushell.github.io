@@ -1,4 +1,4 @@
-> sys host | get sessions.name
+> sys | get host.sessions.name
 ╭───┬──────────╮
 │ 0 │ sophiajt │
 ╰───┴──────────╯
