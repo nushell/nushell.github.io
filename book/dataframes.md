@@ -63,7 +63,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 `polars store-ls` command:
 
 ```nu
-> let df = polars open Data7602DescendingYearOrder.csv
+> let df_0 = polars open Data7602DescendingYearOrder.csv
 > polars store-ls | select key type columns rows estimated_size
 ╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
 │                 key                  │   type    │ columns │  rows   │ estimated_size │
@@ -75,7 +75,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
 
 ```nu
-> $df | polars first
+> $df_0 | polars first
 ╭───┬──────────┬─────────┬──────┬───────────┬──────────╮
 │ # │ anzsic06 │  Area   │ year │ geo_count │ ec_count │
 ├───┼──────────┼─────────┼──────┼───────────┼──────────┤
@@ -86,7 +86,7 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 ...and finally, we can get an idea of the inferred data types:
 
 ```nu
-> $df | polars schema
+> $df_0 | polars schema
 ╭───────────┬─────╮
 │ anzsic06  │ str │
 │ Area      │ str │
@@ -218,10 +218,10 @@ Now, to read that file as a dataframe use the `polars open` command like
 this:
 
 ```nu
-> let df = polars open test_small.csv
+> let df_1 = polars open test_small.csv
 ```
 
-This should create the value `$df` in memory which holds the data we just
+This should create the value `$df_1` in memory which holds the data we just
 created.
 
 ::: tip
@@ -246,7 +246,7 @@ And if you want to see a preview of the loaded dataframe you can send the
 dataframe variable to the stream
 
 ```nu
-> $df
+> $df_1
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
@@ -277,7 +277,7 @@ Let's start with basic aggregations on the dataframe. Let's sum all the columns
 that exist in `df` by using the `aggregate` command
 
 ```nu
-> $df | polars sum
+> $df_1 | polars sum
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬──────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼──────┤
@@ -290,7 +290,7 @@ a sum makes sense. If you want to filter out the text column, you can select
 the columns you want by using the [`polars select`](/commands/docs/polars_select.md) command
 
 ```nu
-> $df | polars sum | polars select int_1 int_2 float_1 float_2
+> $df_1 | polars sum | polars select int_1 int_2 float_1 float_2
 ╭───┬───────┬───────┬─────────┬─────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │
 ├───┼───────┼───────┼─────────┼─────────┤
@@ -302,7 +302,7 @@ You can even store the result from this aggregation as you would store any
 other Nushell variable
 
 ```nu
-> let res = $df | polars sum | polars select int_1 int_2 float_1 float_2
+> let res = $df_1 | polars sum | polars select int_1 int_2 float_1 float_2
 ```
 
 ::: tip
@@ -347,7 +347,7 @@ are going to call it `test_small_a.csv`)
 We use the `polars open` command to create the new variable
 
 ```nu
-> let df_a = polars open test_small_a.csv
+> let df_2 = polars open test_small_a.csv
 ```
 
 Now, with the second dataframe loaded in memory we can join them using the
@@ -355,7 +355,7 @@ column called `int_1` from the left dataframe and the column `int_1` from the
 right dataframe
 
 ```nu
-> $df | polars join $df_a int_1 int_1
+> $df_1 | polars join $df_2 int_1 int_1
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────┬─────────┬───────────┬───────────┬─────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │ int_2_x │ float_1_x │ float_2_x │ first_x │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┼─────────┼───────────┼───────────┼─────────┤
@@ -376,7 +376,7 @@ as long as they have the same type.
 For example:
 
 ```nu
-> $df | polars join $df_a [int_1 first] [int_1 first]
+> $df_1 | polars join $df_2 [int_1 first] [int_1 first]
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────┬─────────┬───────────┬───────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │ int_2_x │ float_1_x │ float_2_x │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┼─────────┼───────────┼───────────┤
@@ -402,7 +402,7 @@ operations with the same group condition.
 To create a `GroupBy` object you only need to use the [`polars_group-by`](/commands/docs/polars_group-by.md) command
 
 ```nu
-> let group = $df | polars group-by first
+> let group = $df_1 | polars group-by first
 > $group
 ╭─────────────┬──────────────────────────────────────────────╮
 │ LazyGroupBy │ apply aggregation to complete execution plan │
@@ -463,8 +463,8 @@ as integers, decimals, or strings. Let's create a small dataframe using the
 command `polars into-df`.
 
 ```nu
-> let a = [[a b]; [1 2] [3 4] [5 6]] | polars into-df
-> $a
+> let df_3 = [[a b]; [1 2] [3 4] [5 6]] | polars into-df
+> $df_3
 ╭───┬───┬───╮
 │ # │ a │ b │
 ├───┼───┼───┤
@@ -480,11 +480,11 @@ a dataframe. This will change in the future, as the dataframe feature matures
 :::
 
 We can append columns to a dataframe in order to create a new variable. As an
-example, let's append two columns to our mini dataframe `$a`
+example, let's append two columns to our mini dataframe `$df_3`
 
 ```nu
-> let a2 = $a | polars with-column $a.a --name a2 | polars with-column $a.a --name a3
-> $a2
+> let df_4 = $df_3 | polars with-column $df_3.a --name a2 | polars with-column $df_3.a --name a3
+> $df_4
 ╭───┬───┬───┬────┬────╮
 │ # │ a │ b │ a2 │ a3 │
 ├───┼───┼───┼────┼────┤
@@ -520,7 +520,7 @@ the data as packed as possible (check [Arrow columnar
 format](https://arrow.apache.org/docs/format/Columnar.html)). The other
 optimization trick is the fact that whenever possible, the columns from the
 dataframes are shared between dataframes, avoiding memory duplication for the
-same data. This means that dataframes `$a` and `$a2` are sharing the same two
+same data. This means that dataframes `$df_3` and `$df_4` are sharing the same two
 columns we created using the `polars into-df` command. For this reason, it isn't
 possible to change the value of a column in a dataframe. However, you can
 create new columns based on data from other columns or dataframes.
@@ -535,8 +535,8 @@ Let's start our exploration with Series by creating one using the `polars into-d
 command:
 
 ```nu
-> let new = [9 8 4] | polars into-df
-> $new
+> let df_5 = [9 8 4] | polars into-df
+> $df_5
 ╭───┬───╮
 │ # │ 0 │
 ├───┼───┤
@@ -554,8 +554,8 @@ other Series. Let's create a new Series by doing some arithmetic on the
 previously created column.
 
 ```nu
-> let new_2 = $new * 3 + 10
-> $new_2
+> let df_6 = $df_5 * 3 + 10
+> $df_6
 ╭───┬────╮
 │ # │ 0  │
 ├───┼────┤
@@ -576,8 +576,8 @@ use `scope variables`
 Let's rename our previous Series so it has a memorable name
 
 ```nu
-> let new_2a = $new_2 | polars rename "0" memorable
-> $new_2a
+> let df_7 = $df_6 | polars rename "0" memorable
+> $df_7
 ╭───┬───────────╮
 │ # │ memorable │
 ├───┼───────────┤
@@ -591,7 +591,7 @@ We can also do basic operations with two Series as long as they have the same
 data type
 
 ```nu
-> $new - $new_2a
+> $df_5 - $df_7
 ╭───┬─────────────────╮
 │ # │ sub_0_memorable │
 ├───┼─────────────────┤
@@ -604,8 +604,8 @@ data type
 And we can add them to previously defined dataframes
 
 ```nu
-> let new_df = $a | polars with-column $new --name new_col
-> $new_df
+> let df_8 = $df_3 | polars with-column $df_5 --name new_col
+> $df_8
 ╭───┬───┬───┬─────────╮
 │ # │ a │ b │ new_col │
 ├───┼───┼───┼─────────┤
@@ -619,7 +619,7 @@ The Series stored in a Dataframe can also be used directly, for example,
 we can multiply columns `a` and `b` to create a new Series
 
 ```nu
-> $new_df.a * $new_df.b
+> $df_8.a * $df_8.b
 ╭───┬─────────╮
 │ # │ mul_a_b │
 ├───┼─────────┤
@@ -632,8 +632,8 @@ we can multiply columns `a` and `b` to create a new Series
 and we can start piping things in order to create new columns and dataframes
 
 ```nu
-> let $new_df_a = $new_df | polars with-column ($new_df.a * $new_df.b / $new_df.new_col) --name my_sum
-> $new_df_a
+> let df_9 = $df_8 | polars with-column ($df_8.a * $new_df.b / $new_df.new_col) --name my_sum
+> $df_9
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
 ├───┼───┼───┼─────────┼────────┤
@@ -652,8 +652,8 @@ that we can build boolean masks out of them. Let's start by creating a simple
 mask using the equality operator
 
 ```nu
-> let mask = $new == 8
-> $mask
+> let mask_0 = $df_5 == 8
+> $mask_0
 ╭───┬───────╮
 │ # │   0   │
 ├───┼───────┤
@@ -666,7 +666,7 @@ mask using the equality operator
 and with this mask we can now filter a dataframe, like this
 
 ```nu
-> $new_df_a | polars filter-with $mask
+> $df_9 | polars filter-with $mask_0
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
 ├───┼───┼───┼─────────┼────────┤
@@ -679,8 +679,8 @@ Now we have a new dataframe with only the values where the mask was true.
 The masks can also be created from Nushell lists, for example:
 
 ```nu
-> let mask1 = [true true false] | polars into-df
-> $new_df_a | polars filter-with $mask1
+> let mask_1 = [true true false] | polars into-df
+> $df_9 | polars filter-with $mask_1
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
 ├───┼───┼───┼─────────┼────────┤
@@ -692,7 +692,7 @@ The masks can also be created from Nushell lists, for example:
 To create complex masks, we have the `AND`
 
 ```nu
-> $mask and $mask1
+> $mask_0 and $mask_1
 ╭───┬─────────╮
 │ # │ and_0_0 │
 ├───┼─────────┤
@@ -705,7 +705,7 @@ To create complex masks, we have the `AND`
 and `OR` operations
 
 ```nu
-> $mask or $mask1
+> $mask_0 or $mask_1
 ╭───┬────────╮
 │ # │ or_0_0 │
 ├───┼────────┤
@@ -719,8 +719,8 @@ We can also create a mask by checking if some values exist in other Series.
 Using the first dataframe that we created we can do something like this
 
 ```nu
-> let mask3 = $df | polars col first | polars is-in [b c]
-> $mask3
+> let mask_2 = $df_1 | polars col first | polars is-in [b c]
+> $mask_2
 ╭──────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ input    │ [table 2 rows]                                                                                            │
 │ function │ Boolean(IsIn)                                                                                             │
@@ -733,7 +733,7 @@ Using the first dataframe that we created we can do something like this
 and this new mask can be used to filter the dataframe
 
 ```nu
-> $df | polars filter-with $mask3
+> $df_1 | polars filter-with $mask_2
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
@@ -756,7 +756,7 @@ This is example is not updated to recent Nushell versions.
 :::
 
 ```nu
-> $df | polars get first | polars set new --mask ($df.first =~ a)
+> $df_1 | polars get first | polars set new --mask ($df_1.first =~ a)
 ╭───┬────────╮
 │ # │ string │
 ├───┼────────┤
@@ -781,8 +781,8 @@ from our original dataframe. With that in mind, we can use the next command to
 extract that information
 
 ```nu
-> let indices = [1 4 6] | polars into-df
-> $df | polars take $indices
+> let indices_0 = [1 4 6] | polars into-df
+> $df_1 | polars take $indices_0
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
@@ -798,8 +798,8 @@ column `first`. In order to do that, we can use the command `polars arg-unique` 
 shown in the next example
 
 ```nu
-> let indices = $df | polars get first | polars arg-unique
-> $df | polars take $indices
+> let indices_1 = $df_1 | polars get first | polars arg-unique
+> $df_1 | polars take $indices_1
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
@@ -818,8 +818,8 @@ The same result could be accomplished using the command [`sort`](/commands/docs/
 :::
 
 ```nu
-> let indices_1 = $df | polars get word | polars arg-sort
-> $df | polars take $indices_1
+> let indices_2 = $df_1 | polars get word | polars arg-sort
+> $df_1 | polars take $indices_2
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
@@ -840,8 +840,8 @@ And finally, we can create new Series by setting a new value in the marked
 indices. Have a look at the next command
 
 ```nu
-> let indices_2 = [0 2] | polars into-df
-> $df | polars get int_1 | polars set-with-idx 123 --indices $indices_2
+> let indices_3 = [0 2] | polars into-df
+> $df_1 | polars get int_1 | polars set-with-idx 123 --indices $indices_3
 ╭───┬───────╮
 │ # │ int_1 │
 ├───┼───────┤
@@ -870,7 +870,7 @@ example, we can use it to count how many occurrences we have in the column
 `first`
 
 ```nu
-> $df | polars get first | polars value-counts
+> $df_1 | polars get first | polars value-counts
 ╭───┬───────┬───────╮
 │ # │ first │ count │
 ├───┼───────┼───────┤
@@ -887,7 +887,7 @@ Continuing with our exploration of `Series`, the next thing that we can do is
 to only get the unique unique values from a series, like this
 
 ```nu
-> $df | polars get first | polars unique
+> $df_1 | polars get first | polars unique
 ╭───┬───────╮
 │ # │ first │
 ├───┼───────┤
@@ -902,7 +902,7 @@ unique or duplicated. For example, we can select the rows for unique values
 in column `word`
 
 ```nu
-$df | polars filter-with ($in.word | polars is-unique)
+$df_1 | polars filter-with ($in.word | polars is-unique)
 ```
 ```output-numd
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
@@ -916,7 +916,7 @@ $df | polars filter-with ($in.word | polars is-unique)
 Or all the duplicated ones
 
 ```nu
-$df | polars filter-with ($in.word | polars is-duplicated)
+$df_1 | polars filter-with ($in.word | polars is-duplicated)
 ```
 ```output-numd
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
