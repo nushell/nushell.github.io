@@ -232,7 +232,7 @@ int_1,int_2,float_1,float_2,first,second,third,word
 有了内存中的 DataFrame，我们就可以开始对 `DataFrame` 进行列操作。
 
 ::: tip
-如果你想看到所有可用的 DataFrame 命令，你可以使用 `$nu.scope.commands | where category =~ dataframe`。
+如果你想看到所有可用的 DataFrame 命令，你可以使用 `scope commands | where category =~ dataframe`。
 :::
 
 ## 基本聚合
@@ -469,7 +469,7 @@ Nushell 强大的管道语法允许我们通过从其他 DataFrame 中获取数�
 现在我们有一个新的系列，它是通过对前一个变量进行基本操作而构建的。
 
 ::: tip
-如果你想看看你在内存中存储了多少变量，你可以使用`$nu.scope.vars`。
+如果你想看看你在内存中存储了多少变量，你可以使用`scope variables`。
 :::
 
 让我们重新命名我们之前的系列为 `memorable`
@@ -846,7 +846,7 @@ Nushell 的管道系统可以帮助你创建非常有趣的工作流程。
 要找到所有惰性 Dataframe 操作，你可以使用：
 
 ```nu
-$nu.scope.commands | where category =~ lazyframe
+scope commands | where category =~ lazyframe
 ```
 
 在定义了你的惰性 Dataframe 后，我们可以开始对它进行链式操作。例如：

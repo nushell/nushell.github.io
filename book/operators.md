@@ -39,7 +39,9 @@ Parentheses can be used for grouping to specify evaluation order or for calling 
 
 ## Order of Operations
 
-Operations are evaluated in the following order (from highest precedence to lowest):
+To understand the precedence of operations, you can run the command: `help operators | sort-by precedence -r`.
+
+Presented in descending order of precedence, the article details the operations as follows:
 
 - Parentheses (`()`)
 - Exponentiation/Power (`**`)
@@ -50,11 +52,11 @@ Operations are evaluated in the following order (from highest precedence to lowe
 - Bitwise and (`bit-and`)
 - Bitwise xor (`bit-xor`)
 - Bitwise or (`bit-or`)
-- Logical not (`not`)
 - Logical and (`and`)
 - Logical xor (`xor`)
 - Logical or (`or`)
 - Assignment operations
+- Logical not (`not`)
 
 ```
 > 3 * (1 + 2)

@@ -640,7 +640,7 @@ let a = (ls | where size > 10MiB)
             description_text: yellow
         }
         source: { |buffer, position|
-            $nu.scope.vars
+            scope variables
             | where name =~ $buffer
             | sort-by name
             | each { |it| {value: $it.name description: $it.type} }
@@ -651,7 +651,7 @@ let a = (ls | where size > 10MiB)
     ...
 ```
 
-正如你所看到的，新的菜单与之前描述的`history_menu`是相同的，唯一的区别是新的字段叫`source`。`source`字段是 Nushell 所定义的，它包含了你想在菜单中显示的值。对于这个菜单，我们从`$nu.scope.vars`中提取数据，然后用它来创建记录并填充菜单。
+正如你所看到的，新的菜单与之前描述的`history_menu`是相同的，唯一的区别是新的字段叫`source`。`source`字段是 Nushell 所定义的，它包含了你想在菜单中显示的值。对于这个菜单，我们从`scope variables`中提取数据，然后用它来创建记录并填充菜单。
 
 记录所需的结构如下：
 

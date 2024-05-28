@@ -86,7 +86,6 @@ Vi Normal motions
 | Key | motion            |
 | --- | ----------------- |
 | w   | Word              |
-| d   | Line end          |
 | 0   | Line start        |
 | $   | Line end          |
 | f   | Right until char  |
@@ -761,7 +760,7 @@ With that in mind, the desired menu would look like this
             description_text: yellow
         }
         source: { |buffer, position|
-            $nu.scope.vars
+            scope variables
             | where name =~ $buffer
             | sort-by name
             | each { |it| {value: $it.name description: $it.type} }
@@ -775,7 +774,7 @@ With that in mind, the desired menu would look like this
 As you can see, the new menu is identical to the `history_menu` previously
 described. The only huge difference is the new field called [`source`](/commands/docs/source.md). The
 [`source`](/commands/docs/source.md) field is a nushell definition of the values you want to display in the
-menu. For this menu we are extracting the data from `$nu.scope.vars` and we
+menu. For this menu we are extracting the data from `scope variables` and we
 are using it to create records that will be used to populate the menu.
 
 The required structure for the record is the next one

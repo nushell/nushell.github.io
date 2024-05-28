@@ -62,7 +62,7 @@ Read a table from MessagePack
 │ # │      event_name      │     time     │
 ├───┼──────────────────────┼──────────────┤
 │ 0 │ Apollo 11 Landing    │ 54 years ago │
-│ 1 │ Nushell first commit │ 4 years ago  │
+│ 1 │ Nushell first commit │ 5 years ago  │
 ╰───┴──────────────────────┴──────────────╯
 
 ```

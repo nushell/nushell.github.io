@@ -1,21 +1,22 @@
 # get all command names from a clean scope
 def command-names [] {
-    const plugins = [
+    const PLUGINS = [
         nu_plugin_inc,
         nu_plugin_gstat,
         nu_plugin_query,
+        nu_plugin_polars,
         nu_plugin_formats,
     ]
     let nu_dir = (which nu) | get path.0 | path dirname
-    mut register_cmd = ''
-    for plugin in $plugins {
+    mut plugins = []
+    for plugin in $PLUGINS {
         if (sys host).name == 'Windows' {
-            $register_cmd += $'register ($nu_dir | path join $plugin).exe;'
+            $plugins ++= $'($nu_dir | path join $plugin).exe'
         } else {
-            $register_cmd += $'register ($nu_dir | path join $plugin);'
+            $plugins ++= $'($nu_dir | path join $plugin)'
         }
     }
-    nu --no-config-file --commands $'($register_cmd) scope commands | select name | to json'
+    nu --no-config-file --plugins ($plugins | to nuon) --commands $'scope commands | select name | to json'
         | from json
 }
 
@@ -314,7 +315,7 @@ def generate-command [commands_group command_name] {
 #   ...
 # ];
 # ```
-# and contains all the categories given by `$nu.scope.commands.category | uniq`
+# and contains all the categories given by `scope commands | get category | uniq`
 #
 # this file is responsible for the sidebar containing the categories that one can see in
 #
