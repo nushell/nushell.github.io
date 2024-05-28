@@ -53,7 +53,7 @@ Example:
 {
   "Hello": {
     "protocol": "nu-plugin",
-    "version": "0.90.2",
+    "version": "0.94.0",
     "features": []
   }
 }
@@ -393,7 +393,7 @@ $version + 7
 
 ##### `Dropped`
 
-This op is used to notify the plugin that a [`PluginCustomValue`](#plugincustomvalue) that had `notify_on_drop` set to `true` was dropped in the engine - i.e., all copies of it have gone out of scope. For more information on exactly under what circumstances this is sent, see the [drop notification](plugins.md#drop-notification) section of the plugin reference. The response type is [`Empty` pipeline data](#pipelinedataheader-empty) or [`Error`](#error-plugin-call-response).
+This op is used to notify the plugin that a [`PluginCustomValue`](#plugincustomvalue) that had `notify_on_drop` set to `true` was dropped in the engine - i.e., all copies of it have gone out of scope. For more information on exactly under what circumstances this is sent, see the [drop notification](plugins.md#drop-notification) section of the plugin reference. The response type is [`Empty` pipeline data](#empty-header-variant) or [`Error`](#error-plugin-call-response).
 
 Example:
 
@@ -429,7 +429,7 @@ The `engine_call_id` refers to the same number that the engine call being respon
 
 #### `Error` engine call response
 
-A failure result. Contains a [`ShellError`](#shellerror).
+A failure result. Contains a [`LabeledError`](#labelederror).
 
 Example:
 
@@ -465,7 +465,11 @@ Example:
     0,
     {
       "ListStream": {
-        "id": 23
+        "id": 23,
+        "span": {
+          "start": 8081,
+          "end": 8087
+        }
       }
     }
   ]
@@ -582,7 +586,7 @@ Example:
 
 #### `Signature` plugin call response
 
-A successful response to a [`Signature` plugin call](#signature-plugin-call). The body is an array of [signatures](https://docs.rs/nu-protocol/0.90.1/nu_protocol/struct.PluginSignature.html).
+A successful response to a [`Signature` plugin call](#signature-plugin-call). The body is an array of [signatures](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html).
 
 Example:
 
@@ -700,7 +704,7 @@ Plugins can make engine calls during execution of a [call](#call). The body is a
 The context **must** be an ID of a [call](#call) that was received that is currently in one of two states:
 
 1. The [response](#callresponse) has not been sent yet.
-2. The response contained stream data (i.e. [`ListStream`](#pipelinedataheader-liststream) or [`ExternalStream`](#pipelinedataheader-externalstream)), and at least one of the streams started by the response is still sending data (i.e. [`End`](#end) has not been sent).
+2. The response contained stream data (i.e. [`ListStream`](#liststream-header-variant) or [`ByteStream`](#bytestream-header-variant)), and at least one of the streams started by the response is still sending data (i.e. [`End`](#end) has not been sent).
 
 After a response has been fully sent, and streams have ended, the `context` from that call can no longer be used.
 
@@ -725,7 +729,7 @@ Example:
 
 #### `GetPluginConfig` engine call
 
-Get the configuration for the plugin, from its section in `$env.config.plugins.NAME` if present. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#pipelinedataheader-value) or be [`Empty`](#pipelinedataheader-empty) if there is no configuration for the plugin set.
+Get the configuration for the plugin, from its section in `$env.config.plugins.NAME` if present. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#value-header-variant) or be [`Empty`](#empty-header-variant) if there is no configuration for the plugin set.
 
 If the plugin configuration was specified as a closure, the engine will evaluate that closure and return the result, which may cause an [error response](#error-engine-call-response).
 
@@ -743,7 +747,7 @@ Example:
 
 #### `GetEnvVar` engine call
 
-Get an environment variable from the caller's scope. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#pipelinedataheader-value) or be [`Empty`](#pipelinedataheader-empty) if the environment variable is not present.
+Get an environment variable from the caller's scope. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#value-header-variant) or be [`Empty`](#empty-header-variant) if the environment variable is not present.
 
 Example:
 
@@ -777,7 +781,7 @@ Example:
 
 #### `GetCurrentDir` engine call
 
-Get the current directory path in the caller's scope. This always returns an absolute path as a string [`Value` pipeline data](#pipelinedataheader-value) response if successful. The span contained within the value response is unlikely to be useful, and may be zero.
+Get the current directory path in the caller's scope. This always returns an absolute path as a string [`Value` pipeline data](#value-header-variant) response if successful. The span contained within the value response is unlikely to be useful, and may be zero.
 
 Example:
 
@@ -793,7 +797,7 @@ Example:
 
 #### `AddEnvVar` engine call
 
-Set an environment variable in the caller's scope. The environment variable can only be propagated to the caller's scope if called before the plugin call response is sent. Either way, it is propagated to other engine calls made within the same context. The argument is a 2-tuple: (`name`, `value`). The response type is [`Empty` pipeline data](#pipelinedataheader-empty) when successful.
+Set an environment variable in the caller's scope. The environment variable can only be propagated to the caller's scope if called before the plugin call response is sent. Either way, it is propagated to other engine calls made within the same context. The argument is a 2-tuple: (`name`, `value`). The response type is [`Empty` pipeline data](#empty-header-variant) when successful.
 
 Example:
 
@@ -822,7 +826,7 @@ Example:
 
 #### `GetHelp` engine call
 
-Get fully formatted help text for the current command. This can help with implementing top-level commands that just list their subcommands, rather than implementing any specific functionality. The response on success is [`Value` pipeline data](#pipelinedataheader-value) that always contains a string.
+Get fully formatted help text for the current command. This can help with implementing top-level commands that just list their subcommands, rather than implementing any specific functionality. The response on success is [`Value` pipeline data](#value-header-variant) that always contains a string.
 
 Example:
 
@@ -840,7 +844,7 @@ Example:
 
 Moves the plugin to the foreground group for direct terminal access, in an operating system-defined manner. This should be called when the plugin is going to drive the terminal in raw mode, for example to implement a terminal UI. It will likely be necessary for the plugin to also be running in [local socket mode](#localsocket-feature) in that case.
 
-This call responds with [`Empty` pipeline data](#pipelinedataheader-empty) on success when no action is required by the plugin. On Unix-like operating systems, if the response is [`Value` pipeline data](#pipelinedataheader-value), it contains an [`Int`](#int) which is the process group ID the plugin must join using `setpgid()` in order to be in the foreground.
+This call responds with [`Empty` pipeline data](#empty-header-variant) on success when no action is required by the plugin. On Unix-like operating systems, if the response is [`Value` pipeline data](#value-header-variant), it contains an [`Int`](#int) which is the process group ID the plugin must join using `setpgid()` in order to be in the foreground.
 
 This call will fail with an error if the plugin is already in the foreground.
 
@@ -864,7 +868,7 @@ Resets the state set by [`EnterForeground`](#enterforeground-engine-call).
 
 If the plugin had been requested to change process groups by the response of `EnterForeground`, it should also reset that state by calling `setpgid(0)`, since plugins are normally in their own process group.
 
-This call responds with [`Empty` pipeline data](#pipelinedataheader-empty) on success.
+This call responds with [`Empty` pipeline data](#empty-header-variant) on success.
 
 Example:
 
@@ -880,7 +884,7 @@ Example:
 
 #### `GetSpanContents` engine call
 
-Get the contents of a [`Span`](#span) from the engine. This can be used for viewing the source code that generated a value. The argument is a [`Span`](#span). The response on success is [`Value` pipeline data](3pipelinedataheader-value) containing a [`Binary`](#binary) value, as the result is not guaranteed to be valid UTF-8.
+Get the contents of a [`Span`](#span) from the engine. This can be used for viewing the source code that generated a value. The argument is a [`Span`](#span). The response on success is [`Value` pipeline data](3value-header-variant) containing a [`Binary`](#binary) value, as the result is not guaranteed to be valid UTF-8.
 
 Example:
 
@@ -979,7 +983,7 @@ All stream messages reference a stream ID. This identifier is an integer startin
 
 This message is sent from producer to consumer. The body is a 2-tuple (array) of (`id`, `data`).
 
-The `data` is either a `List` map for a list stream, in which case the body is the [`Value`](#value) to be sent, or `Raw` for a raw stream, in which case the body is either an `Ok` map with a byte buffer, or an `Err` map with a [`ShellError`](#shellerror).
+The `data` is either a `List` map for a list stream, in which case the body is the [`Value`](#value) to be sent, or `Raw` for a raw stream, in which case the body is either an `Ok` map with a byte buffer, or an `Err` map with a [`LabeledError`](#labelederror).
 
 Examples:
 
@@ -1102,7 +1106,7 @@ Most messages are encoded in the same way as their JSON analogue. For example, t
 {
   "Hello": {
     "protocol": "nu-plugin",
-    "version": "0.90.2",
+    "version": "0.94.0",
     "features": []
   }
 }
@@ -1117,7 +1121,7 @@ is encoded in the MessagePack format as:
     a8 "protocol"    // 8-character string
     a9 "nu-plugin"   // 9-character string
     a7 "version"     // 7-character string
-    a6 "0.90.2"      // 6-character string
+    a6 "0.94.0"      // 6-character string
     a8 "features"    // 8-character string
     90               // array, zero elements
 ```
@@ -1726,12 +1730,10 @@ null
 
 An error contained within a value. Trying to operate on the value will most likely cause the error to be forwarded. When writing plugins, error values should typically be handled by returning the error from the command when encountered.
 
-`ShellError`s encountered in the plugin protocol are always [`LabeledError`](#labelederror)s.
-
-| Field    | Type                        |
-| -------- | --------------------------- |
-| **val**  | [`ShellError`](#shellerror) |
-| **span** | [`Span`](#span)             |
+| Field    | Type                            |
+| -------- | ------------------------------- |
+| **val**  | [`LabeledError`](#labelederror) |
+| **span** | [`Span`](#span)                 |
 
 Example:
 
@@ -1752,22 +1754,20 @@ error make {
 {
   "Error": {
     "val": {
-      "LabeledError": {
-        "msg": "foo",
-        "labels": [
-          {
-            "text": "bar",
-            "span": {
-              "start": 0,
-              "end": 0
-            }
+      "msg": "foo",
+      "labels": [
+        {
+          "text": "bar",
+          "span": {
+            "start": 0,
+            "end": 0
           }
-        ],
-        "code": null,
-        "url": null,
-        "help": null,
-        "inner": []
-      }
+        }
+      ],
+      "code": null,
+      "url": null,
+      "help": null,
+      "inner": []
     }
   }
 }
@@ -1915,10 +1915,6 @@ Example:
 }
 ```
 
-### `LazyRecord`
-
-Lazy record types are not allowed across the plugin boundary. They will be collected to [`Record`](#record) before sending.
-
 ## Embedded Nu types
 
 Several types used within the protocol come from elsewhere in Nu's source code, especially the [`nu-protocol`](https://docs.rs/nu-protocol) crate.
@@ -1954,12 +1950,12 @@ Describes a region of code in the engine's memory, used mostly for providing dia
 
 Describes either a single value, or the beginning of a stream.
 
-| Variant                                            | Usage                                         |
-| -------------------------------------------------- | --------------------------------------------- |
-| [`Empty`](#empty-header-variant)                   | No values produced; an empty stream.          |
-| [`Value`](#value-header-variant)                   | A single value                                |
-| [`ListStream`](#liststream-header-variant)         | Specify a list stream that will be sent.      |
-| [`ExternalStream`](#externalstream-header-variant) | Specify an external stream that will be sent. |
+| Variant                                    | Usage                                    |
+| ------------------------------------------ | ---------------------------------------- |
+| [`Empty`](#empty-header-variant)           | No values produced; an empty stream.     |
+| [`Value`](#value-header-variant)           | A single value                           |
+| [`ListStream`](#liststream-header-variant) | Specify a list stream that will be sent. |
+| [`ByteStream`](#bytestream-header-variant) | Specify a byte stream that will be sent. |
 
 #### `Empty` header variant
 
@@ -1993,71 +1989,63 @@ Example:
 
 #### `ListStream` header variant
 
-Starts a list stream. Expect [`Data`](#data) messages with the referenced ID.
+Starts a list stream. Expect [`Data`](#data) messages of the `List` variant with the referenced ID.
 
 Contains <a name="liststreaminfo">`ListStreamInfo`</a>, a map:
 
-| Field  | Type    | Usage                 |
-| ------ | ------- | --------------------- |
-| **id** | integer | The stream identifier |
+| Field    | Type            | Usage                                             |
+| -------- | --------------- | ------------------------------------------------- |
+| **id**   | integer         | The stream identifier                             |
+| **span** | [`Span`](#span) | The source code reference that caused the stream. |
 
 Example:
 
 ```json
 {
   "ListStream": {
-    "id": 2
-  }
-}
-```
-
-#### `ExternalStream` header variant
-
-External streams are composed of optional `stdout` and `stderr` raw streams and/or an `exit_code` list stream.
-
-| Field                | Type                                        | Usage                                                         |
-| -------------------- | ------------------------------------------- | ------------------------------------------------------------- |
-| **span**             | [`Span`](#span)                             | The source code reference that caused the stream.             |
-| **stdout**           | [`RawStreamInfo`](#rawstreaminfo) or null   | Standard output of the command                                |
-| **stderr**           | [`RawStreamInfo`](#rawstreaminfo) or null   | Standard error of the command                                 |
-| **exit_code**        | [`ListStreamInfo`](#liststreaminfo) or null | The exit code (integer) of the command                        |
-| **trim_end_newline** | boolean                                     | True if Nu **should** remove the last newline from the stream |
-
-<a name="rawstreaminfo">`RawStreamInfo`</a> is a map as follows:
-
-| Field          | Type            | Usage                                                                           |
-| -------------- | --------------- | ------------------------------------------------------------------------------- |
-| **id**         | integer         | The stream identifier                                                           |
-| **is_binary**  | boolean         | True if the stream **should** be immediately treated as binary (non-text) data. |
-| **known_size** | integer or null | If known, the size of the stream contents in bytes.                             |
-
-The exit code stream is also optional, and is expected to send one integer representing a command exit code at any time, where `0` represents success and any other value is treated as a failure - but will not automatically cause an error to be generated within Nu.
-
-Example:
-
-```json
-{
-  "ExternalStream": {
-    "stdout": {
-      "id": 0,
-      "is_binary": true,
-      "known_size": 262144
-    },
-    "stderr": null,
-    "exit_code": {
-      "id": 1
+    "id": 2,
+    "span": {
+      "start": 33911,
+      "end": 33942
     }
   }
 }
 ```
 
-### `ShellError`
+#### `ByteStream` header variant
 
-[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/enum.ShellError.html)
+Starts a byte stream. Expect [`Data`](#data) messages of the `Raw` variant with the referenced ID.
 
-The only variant of `ShellError` permitted to cross the plugin protocol boundary is [`LabeledError`](#labelederror). Any other errors will be converted to this type.
+| Field    | Type                                | Usage                                             |
+| -------- | ----------------------------------- | ------------------------------------------------- |
+| **id**   | integer                             | The stream identifier                             |
+| **span** | [`Span`](#span)                     | The source code reference that caused the stream. |
+| **type** | [`ByteStreamType`](#bytestreamtype) | The expected type of the stream.                  |
 
-As such, anywhere `ShellError` is used, the plugin protocol will only contain `{"LabeledError": ...}` - i.e., a wrapped labeled error.
+<a name="bytestreamtype"></a> Byte streams carry a `type` field with one of the three following strings:
+
+| `type`      | Meaning                                                                                                                               |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `"Binary"`  | The stream contains binary data of unknown encoding, and should be treated as a `binary` value.                                       |
+| `"String"`  | The stream contains text data that is valid UTF-8, and should be treated as a `string` value.                                         |
+| `"Unknown"` | The type of the byte stream is unknown and should be inferred depending on whether its contents can be decoded as valid UTF-8 or not. |
+
+The `Unknown` type is used by Nu to represent the output of external commands if they are not passed through [`into string`](/commands/docs/into_string.md) or [`into binary`](/commands/docs/into_binary.md) to explicitly set their type. A command that declares an output type of exclusively either `string` or `binary` **must** explicitly type its output byte streams appropriately, to ensure they coerce to the correct type, rather than using `Unknown`.
+
+Example:
+
+```json
+{
+  "ByteStream": {
+    "id": 7,
+    "span": {
+      "start": 49011,
+      "end": 49027
+    },
+    "type": "String"
+  }
+}
+```
 
 ### `LabeledError`
 
@@ -2080,6 +2068,12 @@ Most of the fields are not required - only `msg` must be present. `ErrorLabel` (
 | -------- | --------------- | ----------------------------------------------------------- |
 | **text** | string          | The message for the label.                                  |
 | **span** | [`Span`](#span) | The span in the source code that the label should point to. |
+
+::: tip
+When reading the Rust source code for the `nu-plugin` crates, many places where `LabeledError` is specified here are actually represented as `ShellError` in that implementation. However, `ShellError` always serializes as if it were `LabeledError`, so the difference between the two can be ignored within the protocol.
+:::
+
+Example:
 
 ```json
 {
