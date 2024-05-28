@@ -576,8 +576,8 @@ use `scope variables`
 Let's rename our previous Series so it has a memorable name
 
 ```nu
-> let new_2 = $new_2 | polars rename "0" memorable
-> $new_2
+> let new_2a = $new_2 | polars rename "0" memorable
+> $new_2a
 ╭───┬───────────╮
 │ # │ memorable │
 ├───┼───────────┤
@@ -591,7 +591,7 @@ We can also do basic operations with two Series as long as they have the same
 data type
 
 ```nu
-> $new - $new_2
+> $new - $new_2a
 ╭───┬─────────────────╮
 │ # │ sub_0_memorable │
 ├───┼─────────────────┤
@@ -632,8 +632,8 @@ we can multiply columns `a` and `b` to create a new Series
 and we can start piping things in order to create new columns and dataframes
 
 ```nu
-> let $new_df = $new_df | polars with-column ($new_df.a * $new_df.b / $new_df.new_col) --name my_sum
-> $new_df
+> let $new_df_a = $new_df | polars with-column ($new_df.a * $new_df.b / $new_df.new_col) --name my_sum
+> $new_df_a
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
 ├───┼───┼───┼─────────┼────────┤
@@ -666,7 +666,7 @@ mask using the equality operator
 and with this mask we can now filter a dataframe, like this
 
 ```nu
-> $new_df | polars filter-with $mask
+> $new_df_a | polars filter-with $mask
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
 ├───┼───┼───┼─────────┼────────┤
@@ -680,7 +680,7 @@ The masks can also be created from Nushell lists, for example:
 
 ```nu
 > let mask1 = [true true false] | polars into-df
-> $new_df | polars filter-with $mask1
+> $new_df_a | polars filter-with $mask1
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
 ├───┼───┼───┼─────────┼────────┤
@@ -818,8 +818,8 @@ The same result could be accomplished using the command [`sort`](/commands/docs/
 :::
 
 ```nu
-> let indices = $df | polars get word | polars arg-sort
-> $df | polars take $indices
+> let indices_1 = $df | polars get word | polars arg-sort
+> $df | polars take $indices_1
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
@@ -840,8 +840,8 @@ And finally, we can create new Series by setting a new value in the marked
 indices. Have a look at the next command
 
 ```nu
-> let indices = [0 2] | polars into-df
-> $df | polars get int_1 | polars set-with-idx 123 --indices $indices
+> let indices_2 = [0 2] | polars into-df
+> $df | polars get int_1 | polars set-with-idx 123 --indices $indices_2
 ╭───┬───────╮
 │ # │ int_1 │
 ├───┼───────┤
@@ -944,8 +944,8 @@ operations.
 Let's create a small example of a lazy dataframe
 
 ```nu
-> let a = [[a b]; [1 a] [2 b] [3 c] [4 d]] | polars into-lazy
-> $a
+> let lf_0 = [[a b]; [1 a] [2 b] [3 c] [4 d]] | polars into-lazy
+> $lf_0
 ╭────────────────┬───────────────────────────────────────────────────────╮
 │ plan           │ DF ["a", "b"]; PROJECT */2 COLUMNS; SELECTION: "None" │
 │ optimized_plan │ DF ["a", "b"]; PROJECT */2 COLUMNS; SELECTION: "None" │
@@ -957,7 +957,7 @@ set of instructions that can be done on the data. If you were to collect that
 dataframe you would get the next result
 
 ```nu
-> $a | polars collect
+> $lf_0 | polars collect
 ╭───┬───┬───╮
 │ # │ a │ b │
 ├───┼───┼───┤
@@ -986,7 +986,7 @@ With your lazy frame defined we can start chaining operations on it. For
 example this
 
 ```nu
-$a
+$lf_0
 | polars reverse
 | polars with-column [
      ((polars col a) * 2 | polars as double_a)
@@ -1026,7 +1026,7 @@ In some cases the use of the `polars col` command can be inferred. For example,
 using the `polars select` command we can use only a string
 
 ```nu
-> $a | polars select a | polars collect
+> $lf_0 | polars select a | polars collect
 ╭───┬───╮
 │ # │ a │
 ├───┼───┤
@@ -1040,7 +1040,7 @@ using the `polars select` command we can use only a string
 or the `polars col` command
 
 ```nu
-> $a | polars select (polars col a) | polars collect
+> $lf_0 | polars select (polars col a) | polars collect
 ╭───┬───╮
 │ # │ a │
 ├───┼───┤
@@ -1055,9 +1055,9 @@ Let's try something more complicated and create aggregations from a lazy
 dataframe
 
 ```nu
-let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-df
+let lf_1 =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
 
-$a
+$lf_1
 | polars group-by name
 | polars agg [
      (polars col value | polars sum | polars as sum)
@@ -1078,15 +1078,15 @@ And we could join on a lazy dataframe that hasn't being collected. Let's join
 the resulting group by to the original lazy frame
 
 ```nu
-let a =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-df
-let group = $a
+let lf_2 =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
+let group = $lf_2
     | polars group-by name
     | polars agg [
       (polars col value | polars sum | polars as sum)
       (polars col value | polars mean | polars as mean)
     ]
 
-$a | polars join $group name name
+$lf_2 | polars join $group name name
 ```
 ```output-numd
 ╭───┬──────┬───────┬─────┬──────╮
