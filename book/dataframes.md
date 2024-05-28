@@ -496,7 +496,7 @@ example, let's append two columns to our mini dataframe `$a`
 
 Nushell's powerful piping syntax allows us to create new dataframes by
 taking data from other dataframes and appending it to them. Now, if you list your
-dataframes you will see in total four dataframes
+dataframes you will see in total five dataframes
 
 ```nu
 > polars store-ls | select key type columns rows estimated_size
