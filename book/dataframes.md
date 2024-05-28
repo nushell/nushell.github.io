@@ -165,7 +165,9 @@ and the benchmark with dataframes (together with loading a new nushell and `pola
 instance for each test in order of honest comparison) is:
 
 ```nu
-bench -n 10 --pretty {nu load.nu | complete | null}
+bench -n 10 --pretty {
+    nu load.nu | complete | null
+}
 ```
 ```output-numd
 135ms 376µs 887ns +/- 3ms 572µs 870ns
