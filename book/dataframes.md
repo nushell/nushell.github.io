@@ -632,7 +632,7 @@ we can multiply columns `a` and `b` to create a new Series
 and we can start piping things in order to create new columns and dataframes
 
 ```nu
-> let df_9 = $df_8 | polars with-column ($df_8.a * $new_df.b / $new_df.new_col) --name my_sum
+> let df_9 = $df_8 | polars with-column ($df_8.a * $df_8.b / $df_8.new_col) --name my_sum
 > $df_9
 ╭───┬───┬───┬─────────┬────────╮
 │ # │ a │ b │ new_col │ my_sum │
