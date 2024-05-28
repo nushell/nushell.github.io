@@ -68,7 +68,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
 │                 key                  │   type    │ columns │  rows   │ estimated_size │
 ├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
-│ b7a113da-2697-4878-97c7-1152f15a87d5 │ DataFrame │       5 │ 5429252 │       184.5 MB │
+│ b2519dac-3b64-4e5d-a0d7-24bde9052dc7 │ DataFrame │       5 │ 5429252 │       184.5 MB │
 ╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
 ```
 
@@ -119,7 +119,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-3sec 261ms +/- 53ms
+3sec 268ms +/- 50ms
 ```
 
 So, 3.3 seconds to perform this aggregation.
@@ -143,7 +143,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-1sec 322ms +/- 5ms
+1sec 322ms +/- 6ms
 ```
 
 Not bad at all. Pandas managed to get it 2.6 times faster than Nushell.
@@ -170,7 +170,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-132ms +/- 2ms
+135ms +/- 4ms
 ```
 
 The `polars` dataframes plugin managed to finish operation 10 times
@@ -235,7 +235,7 @@ To see all the dataframes that are stored in memory you can use
 ╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
 │                 key                  │   type    │ columns │ rows │ estimated_size │
 ├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
-│ 8ed8dc80-54d9-40d8-9c22-def291dece0c │ DataFrame │       8 │   10 │          403 B │
+│ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame │       8 │   10 │          403 B │
 ╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
@@ -317,8 +317,8 @@ And now we have two dataframes stored in memory
 ╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
 │                 key                  │   type    │ columns │ rows │ estimated_size │
 ├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
-│ def3e0d1-51af-4cf2-b105-3023f43960bf │ DataFrame │       4 │    1 │           32 B │
-│ 8ed8dc80-54d9-40d8-9c22-def291dece0c │ DataFrame │       8 │   10 │          403 B │
+│ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame │       8 │   10 │          403 B │
+│ 3146f4c1-f2a0-475b-a623-7375c1fdb4a7 │ DataFrame │       4 │    1 │           32 B │
 ╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
@@ -503,12 +503,12 @@ dataframes you will see in total five dataframes
 ╭──────────────────────────────────────┬─────────────┬─────────┬──────┬────────────────╮
 │                 key                  │    type     │ columns │ rows │ estimated_size │
 ├──────────────────────────────────────┼─────────────┼─────────┼──────┼────────────────┤
-│ 44435425-7232-4a8c-91b7-d03936ac2592 │ LazyGroupBy │         │      │                │
-│ ea821981-3e3a-4c1f-9a51-b0e87237be2c │ DataFrame   │       2 │    3 │           48 B │
-│ def3e0d1-51af-4cf2-b105-3023f43960bf │ DataFrame   │       4 │    1 │           32 B │
-│ ffe5d1f1-9336-4edb-8d6e-83ba65a25d63 │ DataFrame   │       5 │    4 │          132 B │
-│ 8ed8dc80-54d9-40d8-9c22-def291dece0c │ DataFrame   │       8 │   10 │          403 B │
-│ 81b36fca-0c4f-46c1-9428-46f2310e2f01 │ DataFrame   │       4 │    3 │           96 B │
+│ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame   │       8 │   10 │          403 B │
+│ 3146f4c1-f2a0-475b-a623-7375c1fdb4a7 │ DataFrame   │       4 │    1 │           32 B │
+│ 455a1483-e328-43e2-a354-35afa32803b9 │ DataFrame   │       5 │    4 │          132 B │
+│ 0d8532a5-083b-4f78-8f66-b5e6b59dc449 │ LazyGroupBy │         │      │                │
+│ 9504dfaf-4782-42d4-9110-9dae7c8fb95b │ DataFrame   │       2 │    3 │           48 B │
+│ 37ab1bdc-e1fb-426d-8006-c3f974764a3d │ DataFrame   │       4 │    3 │           96 B │
 ╰──────────────────────────────────────┴─────────────┴─────────┴──────┴────────────────╯
 ```
 
@@ -875,8 +875,8 @@ example, we can use it to count how many occurrences we have in the column
 │ # │ first │ count │
 ├───┼───────┼───────┤
 │ 0 │ a     │     3 │
-│ 1 │ c     │     3 │
-│ 2 │ b     │     4 │
+│ 1 │ b     │     4 │
+│ 2 │ c     │     3 │
 ╰───┴───────┴───────╯
 ```
 
@@ -891,9 +891,9 @@ to only get the unique unique values from a series, like this
 ╭───┬───────╮
 │ # │ first │
 ├───┼───────┤
-│ 0 │ c     │
-│ 1 │ a     │
-│ 2 │ b     │
+│ 0 │ a     │
+│ 1 │ b     │
+│ 2 │ c     │
 ╰───┴───────╯
 ```
 
