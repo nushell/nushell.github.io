@@ -118,7 +118,7 @@ bench -n 10 --pretty {
     }
 }
 ```
-```
+```output-numd
 3sec 268ms +/- 50ms
 ```
 
@@ -142,7 +142,7 @@ bench -n 10 --pretty {
     python load.py | null
 }
 ```
-```
+```output-numd
 1sec 322ms +/- 6ms
 ```
 
@@ -169,7 +169,7 @@ bench -n 10 --pretty {
     nu load.nu | complete | null
 }
 ```
-```
+```output-numd
 135ms +/- 4ms
 ```
 
@@ -436,7 +436,7 @@ $group
     (polars col float_2 | polars count)
 ] | polars sort-by first
 ```
-```
+```output-numd
 ╭────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ plan           │ SORT BY [col("first")]                                                                              │
 │                │   AGGREGATE                                                                                         │
@@ -904,7 +904,7 @@ in column `word`
 ```nu
 $df_1 | polars filter-with ($in.word | polars is-unique)
 ```
-```
+```output-numd
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┤
@@ -918,7 +918,7 @@ Or all the duplicated ones
 ```nu
 $df_1 | polars filter-with ($in.word | polars is-duplicated)
 ```
-```
+```output-numd
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
 ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
@@ -994,7 +994,7 @@ $lf_0
 ]
 | polars collect
 ```
-```
+```output-numd
 ╭───┬───┬───┬──────────┬────────╮
 │ # │ a │ b │ double_a │ half_a │
 ├───┼───┼───┼──────────┼────────┤
@@ -1065,7 +1065,7 @@ $lf_1
 ]
 | polars collect
 ```
-```
+```output-numd
 ╭───┬──────┬─────┬──────╮
 │ # │ name │ sum │ mean │
 ├───┼──────┼─────┼──────┤
@@ -1088,7 +1088,7 @@ let group = $lf_2
 
 $lf_2 | polars join $group name name | polars collect
 ```
-```
+```output-numd
 ╭───┬──────┬───────┬─────┬──────╮
 │ # │ name │ value │ sum │ mean │
 ├───┼──────┼───────┼─────┼──────┤
