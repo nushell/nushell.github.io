@@ -180,6 +180,14 @@ As you can see, the Nushell's `polars` plugin is performant like `polars` itself
 Coupled with Nushell commands and pipelines, it is capable of conducting sophisticated
 analysis without leaving the terminal.
 
+Let's clean up the cache from the dataframes that we used during benchmarking.
+To do that, let's stop the `polars`.
+When we execute our next commands, we will start a new instance of plugin.
+
+```nu
+> plugin stop polars
+```
+
 ## Working with Dataframes
 
 After seeing a glimpse of the things that can be done with [`Dataframe` commands](/commands/categories/dataframe.md),
