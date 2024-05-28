@@ -2,7 +2,7 @@
 title: random
 categories: |
   random
-version: 0.93.0
+version: 0.94.0
 random: |
   Generate a random value.
 usage: |
@@ -31,11 +31,11 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | type    | usage                                              |
-| ------------------------------------------------ | ------- | -------------------------------------------------- |
-| [`random bool`](/commands/docs/random_bool.md)   | Builtin | Generate a random boolean value.                   |
-| [`random chars`](/commands/docs/random_chars.md) | Builtin | Generate random chars.                             |
-| [`random dice`](/commands/docs/random_dice.md)   | Builtin | Generate a random dice roll.                       |
-| [`random float`](/commands/docs/random_float.md) | Builtin | Generate a random float within a range [min..max]. |
-| [`random int`](/commands/docs/random_int.md)     | Builtin | Generate a random integer [min..max].              |
-| [`random uuid`](/commands/docs/random_uuid.md)   | Builtin | Generate a random uuid4 string.                    |
+| name                                             | usage                                              | type     |
+| ------------------------------------------------ | -------------------------------------------------- | -------- |
+| [`random bool`](/commands/docs/random_bool.md)   | Generate a random boolean value.                   | built-in |
+| [`random chars`](/commands/docs/random_chars.md) | Generate random chars.                             | built-in |
+| [`random dice`](/commands/docs/random_dice.md)   | Generate a random dice roll.                       | built-in |
+| [`random float`](/commands/docs/random_float.md) | Generate a random float within a range [min..max]. | built-in |
+| [`random int`](/commands/docs/random_int.md)     | Generate a random integer [min..max].              | built-in |
+| [`random uuid`](/commands/docs/random_uuid.md)   | Generate a random uuid4 string.                    | built-in |

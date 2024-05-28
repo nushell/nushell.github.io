@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.93.0
+version: 0.94.0
 filesystem: |
   Change directory.
 usage: |
@@ -18,6 +18,10 @@ feature: default
 ## Signature
 
 ```> cd {flags} (path)```
+
+## Flags
+
+ -  `--physical, -P`: use the physical directory structure; resolve symbolic links before processing instances of ..
 
 ## Parameters
 

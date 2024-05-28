@@ -2,7 +2,7 @@
 title: split
 categories: |
   strings
-version: 0.93.0
+version: 0.94.0
 strings: |
   Split contents across desired subcommand (like row, column) via the separator.
 usage: |
@@ -31,10 +31,10 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | type    | usage                                                   |
-| ------------------------------------------------ | ------- | ------------------------------------------------------- |
-| [`split chars`](/commands/docs/split_chars.md)   | Builtin | Split a string into a list of characters.               |
-| [`split column`](/commands/docs/split_column.md) | Builtin | Split a string into multiple columns using a separator. |
-| [`split list`](/commands/docs/split_list.md)     | Builtin | Split a list into multiple lists using a separator.     |
-| [`split row`](/commands/docs/split_row.md)       | Builtin | Split a string into multiple rows using a separator.    |
-| [`split words`](/commands/docs/split_words.md)   | Builtin | Split a string's words into separate rows.              |
+| name                                             | usage                                                   | type     |
+| ------------------------------------------------ | ------------------------------------------------------- | -------- |
+| [`split chars`](/commands/docs/split_chars.md)   | Split a string into a list of characters.               | built-in |
+| [`split column`](/commands/docs/split_column.md) | Split a string into multiple columns using a separator. | built-in |
+| [`split list`](/commands/docs/split_list.md)     | Split a list into multiple lists using a separator.     | built-in |
+| [`split row`](/commands/docs/split_row.md)       | Split a string into multiple rows using a separator.    | built-in |
+| [`split words`](/commands/docs/split_words.md)   | Split a string's words into separate rows.              | built-in |

@@ -2,7 +2,7 @@
 title: encode base64
 categories: |
   hash
-version: 0.93.0
+version: 0.94.0
 hash: |
   Encode a string or binary value using Base64.
 usage: |
@@ -57,5 +57,5 @@ U29tZSBEYXRh
 Encode a string with the binhex character set
 ```nu
 > 'Some Data' | encode base64 --character-set binhex
-7epXB5"%A@4J
+8fpYC5"%BA4K
 ```

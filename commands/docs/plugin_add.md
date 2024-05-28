@@ -2,7 +2,7 @@
 title: plugin add
 categories: |
   plugin
-version: 0.93.0
+version: 0.94.0
 plugin: |
   Add a plugin to the plugin registry file.
 usage: |
@@ -50,7 +50,8 @@ Run the `nu_plugin_polars` plugin from the current directory or $env.NU_PLUGIN_D
 ```
 
 ## Notes
-This does not load the plugin commands into the scope - see `register` for that.
+This does not load the plugin commands into the scope - see `plugin use` for
+that.
 
 Instead, it runs the plugin to get its command signatures, and then edits the
 plugin registry file (by default, `$nu.plugin-path`). The changes will be

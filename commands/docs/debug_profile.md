@@ -2,7 +2,7 @@
 title: debug profile
 categories: |
   debug
-version: 0.93.0
+version: 0.94.0
 debug: |
   Profile pipeline elements in a closure.
 usage: |
@@ -25,6 +25,7 @@ feature: default
  -  `--expand-source, -e`: Collect full source fragments of profiled elements
  -  `--values, -v`: Collect pipeline element output values
  -  `--expr, -x`: Collect expression types
+ -  `--lines, -l`: Collect line numbers
  -  `--max-depth, -m {int}`: How many blocks/closures deep to step into (default 2)
 
 ## Parameters

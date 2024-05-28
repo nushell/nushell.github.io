@@ -2,7 +2,7 @@
 title: scope engine-stats
 categories: |
   core
-version: 0.93.0
+version: 0.94.0
 core: |
   Output stats on the engine in the current state.
 usage: |

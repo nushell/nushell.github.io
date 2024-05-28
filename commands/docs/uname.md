@@ -2,7 +2,7 @@
 title: uname
 categories: |
   system
-version: 0.93.0
+version: 0.94.0
 system: |
   Print certain system information using uutils/coreutils uname.
 usage: |

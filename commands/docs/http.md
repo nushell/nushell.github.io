@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.93.0
+version: 0.94.0
 network: |
   Various commands for working with http methods.
 usage: |
@@ -31,12 +31,12 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | type    | usage                                                     |
-| ------------------------------------------------ | ------- | --------------------------------------------------------- |
-| [`http delete`](/commands/docs/http_delete.md)   | Builtin | Delete the specified resource.                            |
-| [`http get`](/commands/docs/http_get.md)         | Builtin | Fetch the contents from a URL.                            |
-| [`http head`](/commands/docs/http_head.md)       | Builtin | Get the headers from a URL.                               |
-| [`http options`](/commands/docs/http_options.md) | Builtin | Requests permitted communication options for a given URL. |
-| [`http patch`](/commands/docs/http_patch.md)     | Builtin | Patch a body to a URL.                                    |
-| [`http post`](/commands/docs/http_post.md)       | Builtin | Post a body to a URL.                                     |
-| [`http put`](/commands/docs/http_put.md)         | Builtin | Put a body to a URL.                                      |
+| name                                             | usage                                                     | type     |
+| ------------------------------------------------ | --------------------------------------------------------- | -------- |
+| [`http delete`](/commands/docs/http_delete.md)   | Delete the specified resource.                            | built-in |
+| [`http get`](/commands/docs/http_get.md)         | Fetch the contents from a URL.                            | built-in |
+| [`http head`](/commands/docs/http_head.md)       | Get the headers from a URL.                               | built-in |
+| [`http options`](/commands/docs/http_options.md) | Requests permitted communication options for a given URL. | built-in |
+| [`http patch`](/commands/docs/http_patch.md)     | Patch a body to a URL.                                    | built-in |
+| [`http post`](/commands/docs/http_post.md)       | Post a body to a URL.                                     | built-in |
+| [`http put`](/commands/docs/http_put.md)         | Put a body to a URL.                                      | built-in |

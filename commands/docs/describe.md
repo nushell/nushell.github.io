@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.93.0
+version: 0.94.0
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |
@@ -23,7 +23,6 @@ feature: default
 
  -  `--no-collect, -n`: do not collect streams of structured data
  -  `--detailed, -d`: show detailed information about the value
- -  `--collect-lazyrecords, -l`: collect lazy records
 
 
 ## Input/output types:
@@ -45,13 +44,11 @@ Describe the type of a record in a detailed way
 > {shell:'true', uwu:true, features: {bugs:false, multiplatform:true, speed: 10}, fib: [1 1 2 3 5 8], on_save: {|x| print $'Saving ($x)'}, first_commit: 2019-05-10, my_duration: (4min + 20sec)} | describe -d
 ╭─────────┬───────────────────────────────────────────────────────────╮
 │ type    │ record                                                    │
-│ lazy    │ false                                                     │
 │         │ ╭──────────────┬────────────────────────────────────────╮ │
 │ columns │ │ shell        │ string                                 │ │
 │         │ │ uwu          │ bool                                   │ │
 │         │ │              │ ╭─────────┬──────────────────────────╮ │ │
 │         │ │ features     │ │ type    │ record                   │ │ │
-│         │ │              │ │ lazy    │ false                    │ │ │
 │         │ │              │ │         │ ╭───────────────┬──────╮ │ │ │
 │         │ │              │ │ columns │ │ bugs          │ bool │ │ │ │
 │         │ │              │ │         │ │ multiplatform │ bool │ │ │ │

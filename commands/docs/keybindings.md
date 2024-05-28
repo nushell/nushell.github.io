@@ -2,7 +2,7 @@
 title: keybindings
 categories: |
   platform
-version: 0.93.0
+version: 0.94.0
 platform: |
   Keybindings related commands.
 usage: |
@@ -34,8 +34,8 @@ For more information on input and keybindings, check:
 
 ## Subcommands:
 
-| name                                                           | type    | usage                                                          |
-| -------------------------------------------------------------- | ------- | -------------------------------------------------------------- |
-| [`keybindings default`](/commands/docs/keybindings_default.md) | Builtin | List default keybindings.                                      |
-| [`keybindings list`](/commands/docs/keybindings_list.md)       | Builtin | List available options that can be used to create keybindings. |
-| [`keybindings listen`](/commands/docs/keybindings_listen.md)   | Builtin | Get input from the user.                                       |
+| name                                                           | usage                                                          | type     |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------- |
+| [`keybindings default`](/commands/docs/keybindings_default.md) | List default keybindings.                                      | built-in |
+| [`keybindings list`](/commands/docs/keybindings_list.md)       | List available options that can be used to create keybindings. | built-in |
+| [`keybindings listen`](/commands/docs/keybindings_listen.md)   | Get input from the user.                                       | built-in |

@@ -2,7 +2,7 @@
 title: register
 categories: |
   plugin
-version: 0.93.0
+version: 0.94.0
 plugin: |
   Register a plugin.
 usage: |

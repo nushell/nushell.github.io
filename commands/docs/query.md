@@ -2,7 +2,7 @@
 title: query
 categories: |
   filters
-version: 0.93.0
+version: 0.94.0
 filters: |
   Show all the query commands
 usage: |
@@ -29,9 +29,9 @@ feature: default
 
 ## Subcommands:
 
-| name                                         | type           | usage                                                                             |
-| -------------------------------------------- | -------------- | --------------------------------------------------------------------------------- |
-| [`query db`](/commands/docs/query_db.md)     | Builtin        | Query a database using SQL.                                                       |
-| [`query json`](/commands/docs/query_json.md) | Builtin,Plugin | execute json query on json file (open --raw \<file\> | query json 'query string') |
-| [`query web`](/commands/docs/query_web.md)   | Builtin,Plugin | execute selector query on html/web                                                |
-| [`query xml`](/commands/docs/query_xml.md)   | Builtin,Plugin | execute xpath query on xml                                                        |
+| name                                         | usage                                                                             | type     |
+| -------------------------------------------- | --------------------------------------------------------------------------------- | -------- |
+| [`query db`](/commands/docs/query_db.md)     | Query a database using SQL.                                                       | built-in |
+| [`query json`](/commands/docs/query_json.md) | execute json query on json file (open --raw \<file\> | query json 'query string') | plugin   |
+| [`query web`](/commands/docs/query_web.md)   | execute selector query on html/web                                                | plugin   |
+| [`query xml`](/commands/docs/query_xml.md)   | execute xpath query on xml                                                        | plugin   |

@@ -2,7 +2,7 @@
 title: polars melt
 categories: |
   dataframe
-version: 0.93.0
+version: 0.94.0
 dataframe: |
   Unpivot a DataFrame from wide to long format.
 usage: |

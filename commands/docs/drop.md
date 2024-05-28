@@ -2,7 +2,7 @@
 title: drop
 categories: |
   filters
-version: 0.93.0
+version: 0.94.0
 filters: |
   Remove items/rows from the end of the input list/table. Counterpart of `skip`. Opposite of `last`.
 usage: |
@@ -79,7 +79,7 @@ Remove the last row in a table
 
 ## Subcommands:
 
-| name                                           | type    | usage                                                                                               |
-| ---------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------- |
-| [`drop column`](/commands/docs/drop_column.md) | Builtin | Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`. |
-| [`drop nth`](/commands/docs/drop_nth.md)       | Builtin | Drop the selected rows.                                                                             |
+| name                                           | usage                                                                                               | type     |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------- | -------- |
+| [`drop column`](/commands/docs/drop_column.md) | Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`. | built-in |
+| [`drop nth`](/commands/docs/drop_nth.md)       | Drop the selected rows.                                                                             | built-in |

@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.93.0
+version: 0.94.0
 formats: |
   Translate structured data to a format.
 usage: |
@@ -31,17 +31,17 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | type    | usage                                                         |
-| ---------------------------------------------- | ------- | ------------------------------------------------------------- |
-| [`to csv`](/commands/docs/to_csv.md)           | Builtin | Convert table into .csv text .                                |
-| [`to html`](/commands/docs/to_html.md)         | Builtin | Convert table into simple HTML.                               |
-| [`to json`](/commands/docs/to_json.md)         | Builtin | Converts table data into JSON text.                           |
-| [`to md`](/commands/docs/to_md.md)             | Builtin | Convert table into simple Markdown.                           |
-| [`to msgpack`](/commands/docs/to_msgpack.md)   | Builtin | Convert Nu values into MessagePack.                           |
-| [`to msgpackz`](/commands/docs/to_msgpackz.md) | Builtin | Convert Nu values into brotli-compressed MessagePack.         |
-| [`to nuon`](/commands/docs/to_nuon.md)         | Builtin | Converts table data into Nuon (Nushell Object Notation) text. |
-| [`to text`](/commands/docs/to_text.md)         | Builtin | Converts data into simple text.                               |
-| [`to toml`](/commands/docs/to_toml.md)         | Builtin | Convert record into .toml text.                               |
-| [`to tsv`](/commands/docs/to_tsv.md)           | Builtin | Convert table into .tsv text.                                 |
-| [`to xml`](/commands/docs/to_xml.md)           | Builtin | Convert special record structure into .xml text.              |
-| [`to yaml`](/commands/docs/to_yaml.md)         | Builtin | Convert table into .yaml/.yml text.                           |
+| name                                           | usage                                                         | type     |
+| ---------------------------------------------- | ------------------------------------------------------------- | -------- |
+| [`to csv`](/commands/docs/to_csv.md)           | Convert table into .csv text .                                | built-in |
+| [`to html`](/commands/docs/to_html.md)         | Convert table into simple HTML.                               | built-in |
+| [`to json`](/commands/docs/to_json.md)         | Converts table data into JSON text.                           | built-in |
+| [`to md`](/commands/docs/to_md.md)             | Convert table into simple Markdown.                           | built-in |
+| [`to msgpack`](/commands/docs/to_msgpack.md)   | Convert Nu values into MessagePack.                           | built-in |
+| [`to msgpackz`](/commands/docs/to_msgpackz.md) | Convert Nu values into brotli-compressed MessagePack.         | built-in |
+| [`to nuon`](/commands/docs/to_nuon.md)         | Converts table data into Nuon (Nushell Object Notation) text. | built-in |
+| [`to text`](/commands/docs/to_text.md)         | Converts data into simple text.                               | built-in |
+| [`to toml`](/commands/docs/to_toml.md)         | Convert record into .toml text.                               | built-in |
+| [`to tsv`](/commands/docs/to_tsv.md)           | Convert table into .tsv text.                                 | built-in |
+| [`to xml`](/commands/docs/to_xml.md)           | Convert special record structure into .xml text.              | built-in |
+| [`to yaml`](/commands/docs/to_yaml.md)         | Convert table into .yaml/.yml text.                           | built-in |

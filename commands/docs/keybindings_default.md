@@ -2,7 +2,7 @@
 title: keybindings default
 categories: |
   platform
-version: 0.93.0
+version: 0.94.0
 platform: |
   List default keybindings.
 usage: |

@@ -2,7 +2,7 @@
 title: config
 categories: |
   env
-version: 0.93.0
+version: 0.94.0
 env: |
   Edit nushell configuration files.
 usage: |
@@ -31,8 +31,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | type    | usage                                                                                                                                 |
-| ------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| [`config env`](/commands/docs/config_env.md)     | Builtin | Edit nu environment configurations.                                                                                                   |
-| [`config nu`](/commands/docs/config_nu.md)       | Builtin | Edit nu configurations.                                                                                                               |
-| [`config reset`](/commands/docs/config_reset.md) | Builtin | Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu. |
+| name                                             | usage                                                                                                                                 | type     |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [`config env`](/commands/docs/config_env.md)     | Edit nu environment configurations.                                                                                                   | built-in |
+| [`config nu`](/commands/docs/config_nu.md)       | Edit nu configurations.                                                                                                               | built-in |
+| [`config reset`](/commands/docs/config_reset.md) | Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu. | built-in |
