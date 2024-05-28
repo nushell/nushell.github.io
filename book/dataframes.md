@@ -173,7 +173,7 @@ bench -n 10 --pretty {
 136ms +/- 6ms
 ```
 
-The `polars` dataframes plugin managed to finish operation almost 10 times
+The `polars` dataframes plugin managed to finish operation 10 times
 faster than `pandas` with python. Isn't that great?
 
 As you can see, the Nushell's `polars` plugin is performant like `polars` itself.
@@ -299,8 +299,8 @@ other Nushell variable
 ```
 
 ::: tip
-Type `let res = ( !! )` and press enter. This will auto complete the previously
-executed command. Note the space between ( and !!.
+Type `let res = !!` and press enter. This will auto complete the previously
+executed command. Note the space between `=` and `!!`.
 :::
 
 And now we have two dataframes stored in memory
