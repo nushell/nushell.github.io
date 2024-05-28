@@ -900,9 +900,7 @@ unique or duplicated. For example, we can select the rows for unique values
 in column `word`
 
 ```nu
-$df
-| polars append ($in | polars select word | polars is-unique)
-| polars filter-with (polars col is_unique)
+$df | polars filter-with ($in.word | polars is-unique)
 ```
 ```output-numd
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────┬───────────╮
@@ -916,9 +914,7 @@ $df
 Or all the duplicated ones
 
 ```nu
-$df
-| polars append ($in | polars select word | polars is-duplicated)
-| polars filter-with (polars col is_duplicated)
+$df | polars filter-with ($in.word | polars is-duplicated)
 ```
 ```output-numd
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────┬───────────────╮
