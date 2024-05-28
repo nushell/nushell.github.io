@@ -491,7 +491,6 @@ taking data from other dataframes and appending it to them. Now, if you list you
 dataframes you will see in total four dataframes
 
 ```nu
-> polars store-ls
 ╭─────────────────────────────────┬─────────┬─────────┬──────┬─────────────┬────────────────┬────────────────────┬─────╮
 │               key               │ created │ columns │ rows │    type     │ estimated_size │   span_contents    │ ... │
 ├─────────────────────────────────┼─────────┼─────────┼──────┼─────────────┼────────────────┼────────────────────┼─────┤
@@ -508,6 +507,7 @@ dataframes you will see in total four dataframes
 │ 7c9ffa1a-5519-4a5e-92bd-069fdde │ now     │       8 │   10 │ DataFrame   │          403 B │ polars open        │ ... │
 │ 61b01                           │         │         │      │             │                │                    │     │
 ╰─────────────────────────────────┴─────────┴─────────┴──────┴─────────────┴────────────────┴────────────────────┴─────╯
+> polars store-ls | select key type columns rows estimated_size
 ```
 
 One thing that is important to mention is how the memory is being optimized
