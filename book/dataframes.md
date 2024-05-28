@@ -68,7 +68,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
 │                 key                  │   type    │ columns │  rows   │ estimated_size │
 ├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
-│ a4c4020c-15a6-406b-bcbf-582ded6ddb23 │ DataFrame │       5 │ 5429252 │       184.5 MB │
+│ b17fa46c-15ca-4da1-8f83-4e6018f8116a │ DataFrame │       5 │ 5429252 │       184.5 MB │
 ╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
 ```
 
@@ -119,7 +119,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-3sec 332ms 171µs 450ns +/- 51ms 197µs 768ns
+3sec 254ms +/- 79ms
 ```
 
 So, 3.3 seconds to perform this aggregation.
@@ -143,7 +143,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-1sec 334ms 831µs 604ns +/- 8ms 932µs 853ns
+1sec 382ms +/- 155ms
 ```
 
 Not bad at all. Pandas managed to get it 2.6 times faster than Nushell.
@@ -170,7 +170,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-135ms 376µs 887ns +/- 3ms 572µs 870ns
+136ms +/- 6ms
 ```
 
 The `polars` dataframes plugin managed to finish operation almost 10 times
@@ -224,11 +224,12 @@ To see all the dataframes that are stored in memory you can use
 
 ```nu
 > polars store-ls | select key type columns rows estimated_size
-╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
-│                 key                  │   type    │ columns │ rows │ estimated_size │
-├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
-│ 7c9ffa1a-5519-4a5e-92bd-069fdde61b01 │ DataFrame │       8 │   10 │          403 B │
-╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
+╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
+│                 key                  │   type    │ columns │  rows   │ estimated_size │
+├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
+│ b17fa46c-15ca-4da1-8f83-4e6018f8116a │ DataFrame │       5 │ 5429252 │       184.5 MB │
+│ ba3760ee-1ad5-47c9-aabb-bc1be4d43c48 │ DataFrame │       8 │      10 │          403 B │
+╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
 ```
 
 As you can see, the command shows the created dataframes together with basic
@@ -306,12 +307,13 @@ And now we have two dataframes stored in memory
 
 ```nu
 > polars store-ls | select key type columns rows estimated_size
-╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
-│                 key                  │   type    │ columns │ rows │ estimated_size │
-├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
-│ 16995878-1aa7-4a40-a065-04fb4ba12e95 │ DataFrame │       4 │    1 │           32 B │
-│ 7c9ffa1a-5519-4a5e-92bd-069fdde61b01 │ DataFrame │       8 │   10 │          403 B │
-╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
+╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
+│                 key                  │   type    │ columns │  rows   │ estimated_size │
+├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
+│ 7ddd814a-06a6-442e-8f35-c0de64005c1c │ DataFrame │       4 │       1 │           32 B │
+│ b17fa46c-15ca-4da1-8f83-4e6018f8116a │ DataFrame │       5 │ 5429252 │       184.5 MB │
+│ ba3760ee-1ad5-47c9-aabb-bc1be4d43c48 │ DataFrame │       8 │      10 │          403 B │
+╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
 ```
 
 Pretty neat, isn't it?
@@ -491,23 +493,18 @@ taking data from other dataframes and appending it to them. Now, if you list you
 dataframes you will see in total four dataframes
 
 ```nu
-╭─────────────────────────────────┬─────────┬─────────┬──────┬─────────────┬────────────────┬────────────────────┬─────╮
-│               key               │ created │ columns │ rows │    type     │ estimated_size │   span_contents    │ ... │
-├─────────────────────────────────┼─────────┼─────────┼──────┼─────────────┼────────────────┼────────────────────┼─────┤
-│ 2745ec0f-8c66-4616-8cbb-bc5f63e │ now     │       2 │    3 │ DataFrame   │           48 B │ polars into-df     │ ... │
-│ 631e9                           │         │         │      │             │                │                    │     │
-│ 16995878-1aa7-4a40-a065-04fb4ba │ now     │       4 │    1 │ DataFrame   │           32 B │ polars select      │ ... │
-│ 12e95                           │         │         │      │             │                │                    │     │
-│ 57a61605-7759-480b-a0ba-c185701 │ now     │       4 │    3 │ DataFrame   │           96 B │ polars with-column │ ... │
-│ 933d9                           │         │         │      │             │                │                    │     │
-│ 0209b64f-649c-428b-8673-704bd09 │ now     │       5 │    4 │ DataFrame   │          132 B │ polars open        │ ... │
-│ bd02c                           │         │         │      │             │                │                    │     │
-│ 0b7b0cee-ff9c-41c2-8296-34d10c0 │      ❎ │         │      │ LazyGroupBy │                │ polars group-by    │ ... │
-│ e89d8                           │         │         │      │             │                │                    │     │
-│ 7c9ffa1a-5519-4a5e-92bd-069fdde │ now     │       8 │   10 │ DataFrame   │          403 B │ polars open        │ ... │
-│ 61b01                           │         │         │      │             │                │                    │     │
-╰─────────────────────────────────┴─────────┴─────────┴──────┴─────────────┴────────────────┴────────────────────┴─────╯
 > polars store-ls | select key type columns rows estimated_size
+╭──────────────────────────────────────┬─────────────┬─────────┬─────────┬────────────────╮
+│                 key                  │    type     │ columns │  rows   │ estimated_size │
+├──────────────────────────────────────┼─────────────┼─────────┼─────────┼────────────────┤
+│ ba3760ee-1ad5-47c9-aabb-bc1be4d43c48 │ DataFrame   │       8 │      10 │          403 B │
+│ d2d105d5-719a-496c-91d8-85a06c92af29 │ DataFrame   │       5 │       4 │          132 B │
+│ 7ddd814a-06a6-442e-8f35-c0de64005c1c │ DataFrame   │       4 │       1 │           32 B │
+│ b17fa46c-15ca-4da1-8f83-4e6018f8116a │ DataFrame   │       5 │ 5429252 │       184.5 MB │
+│ cc1591ab-2cea-4fcf-88ba-08a7c6469d3c │ LazyGroupBy │         │         │                │
+│ 94b72782-2b0e-431d-81b9-f6168d9b7369 │ DataFrame   │       4 │       3 │           96 B │
+│ 4143cba2-0907-48c2-832e-8bec79c1533f │ DataFrame   │       2 │       3 │           48 B │
+╰──────────────────────────────────────┴─────────────┴─────────┴─────────┴────────────────╯
 ```
 
 One thing that is important to mention is how the memory is being optimized
@@ -873,8 +870,8 @@ example, we can use it to count how many occurrences we have in the column
 │ # │ first │ count │
 ├───┼───────┼───────┤
 │ 0 │ a     │     3 │
-│ 1 │ c     │     3 │
-│ 2 │ b     │     4 │
+│ 1 │ b     │     4 │
+│ 2 │ c     │     3 │
 ╰───┴───────┴───────╯
 ```
 
@@ -889,9 +886,9 @@ to only get the unique unique values from a series, like this
 ╭───┬───────╮
 │ # │ first │
 ├───┼───────┤
-│ 0 │ a     │
-│ 1 │ b     │
-│ 2 │ c     │
+│ 0 │ b     │
+│ 1 │ c     │
+│ 2 │ a     │
 ╰───┴───────╯
 ```
 
@@ -903,12 +900,12 @@ in column `word`
 $df | polars filter-with ($in.word | polars is-unique)
 ```
 ```output-numd
-╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────┬───────────╮
-│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │ is_unique │
-├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┼───────────┤
-│ 0 │     1 │    11 │    0.10 │    1.00 │ a     │ b      │ c     │ first │ true      │
-│ 1 │     8 │    18 │    0.80 │    7.00 │ c     │ c      │ b     │ eight │ true      │
-╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────┴───────────╯
+╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
+│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
+├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┤
+│ 0 │     1 │    11 │    0.10 │    1.00 │ a     │ b      │ c     │ first │
+│ 1 │     8 │    18 │    0.80 │    7.00 │ c     │ c      │ b     │ eight │
+╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────╯
 ```
 
 Or all the duplicated ones
@@ -917,18 +914,18 @@ Or all the duplicated ones
 $df | polars filter-with ($in.word | polars is-duplicated)
 ```
 ```output-numd
-╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────┬───────────────╮
-│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │ is_duplicated │
-├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┼───────────────┤
-│ 0 │     2 │    12 │    0.20 │    1.00 │ a     │ b      │ c     │ second │ true          │
-│ 1 │     3 │    13 │    0.30 │    2.00 │ a     │ b      │ c     │ third  │ true          │
-│ 2 │     4 │    14 │    0.40 │    3.00 │ b     │ a      │ c     │ second │ true          │
-│ 3 │     0 │    15 │    0.50 │    4.00 │ b     │ a      │ a     │ third  │ true          │
-│ 4 │     6 │    16 │    0.60 │    5.00 │ b     │ a      │ a     │ second │ true          │
-│ 5 │     7 │    17 │    0.70 │    6.00 │ b     │ c      │ a     │ third  │ true          │
-│ 6 │     9 │    19 │    0.90 │    8.00 │ c     │ c      │ b     │ ninth  │ true          │
-│ 7 │     0 │    10 │    0.00 │    9.00 │ c     │ c      │ b     │ ninth  │ true          │
-╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────┴───────────────╯
+╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
+│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
+├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
+│ 0 │     2 │    12 │    0.20 │    1.00 │ a     │ b      │ c     │ second │
+│ 1 │     3 │    13 │    0.30 │    2.00 │ a     │ b      │ c     │ third  │
+│ 2 │     4 │    14 │    0.40 │    3.00 │ b     │ a      │ c     │ second │
+│ 3 │     0 │    15 │    0.50 │    4.00 │ b     │ a      │ a     │ third  │
+│ 4 │     6 │    16 │    0.60 │    5.00 │ b     │ a      │ a     │ second │
+│ 5 │     7 │    17 │    0.70 │    6.00 │ b     │ c      │ a     │ third  │
+│ 6 │     9 │    19 │    0.90 │    8.00 │ c     │ c      │ b     │ ninth  │
+│ 7 │     0 │    10 │    0.00 │    9.00 │ c     │ c      │ b     │ ninth  │
+╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
 ## Lazy Dataframes
@@ -1067,8 +1064,8 @@ $a
 ╭───┬──────┬─────┬──────╮
 │ # │ name │ sum │ mean │
 ├───┼──────┼─────┼──────┤
-│ 0 │ two  │   5 │ 2.50 │
-│ 1 │ one  │   2 │ 1.00 │
+│ 0 │ one  │   2 │ 1.00 │
+│ 1 │ two  │   5 │ 2.50 │
 ╰───┴──────┴─────┴──────╯
 ```
 
