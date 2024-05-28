@@ -178,14 +178,6 @@ As you can see, the Nushell's `polars` plugin is performant like `polars` itself
 Coupled with Nushell commands and pipelines, it is capable of conducting sophisticated
 analysis without leaving the terminal.
 
-Let's clean up the cache from the dataframes that we used during benchmarking.
-To do that, let's stop the `polars`.
-When we execute our next commands, we will start a new instance of plugin.
-
-```nu
-> plugin stop polars
-```
-
 ## Working with Dataframes
 
 After seeing a glimpse of the things that can be done with [`Dataframe` commands](/commands/categories/dataframe.md),
@@ -878,9 +870,9 @@ example, we can use it to count how many occurrences we have in the column
 ╭───┬───────┬───────╮
 │ # │ first │ count │
 ├───┼───────┼───────┤
-│ 0 │ b     │     4 │
-│ 1 │ a     │     3 │
-│ 2 │ c     │     3 │
+│ 0 │ a     │     3 │
+│ 1 │ c     │     3 │
+│ 2 │ b     │     4 │
 ╰───┴───────┴───────╯
 ```
 
@@ -895,9 +887,9 @@ to only get the unique unique values from a series, like this
 ╭───┬───────╮
 │ # │ first │
 ├───┼───────┤
-│ 0 │ c     │
-│ 1 │ a     │
-│ 2 │ b     │
+│ 0 │ a     │
+│ 1 │ b     │
+│ 2 │ c     │
 ╰───┴───────╯
 ```
 
@@ -1077,8 +1069,8 @@ $a
 ╭───┬──────┬─────┬──────╮
 │ # │ name │ sum │ mean │
 ├───┼──────┼─────┼──────┤
-│ 0 │ one  │   2 │ 1.00 │
-│ 1 │ two  │   5 │ 2.50 │
+│ 0 │ two  │   5 │ 2.50 │
+│ 1 │ one  │   2 │ 1.00 │
 ╰───┴──────┴─────┴──────╯
 ```
 
