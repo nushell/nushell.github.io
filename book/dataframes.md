@@ -1086,7 +1086,7 @@ let group = $lf_2
       (polars col value | polars mean | polars as mean)
     ]
 
-$lf_2 | polars join $group name name
+$lf_2 | polars join $group name name | polars collect
 ```
 ```output-numd
 ╭───┬──────┬───────┬─────┬──────╮
