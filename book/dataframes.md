@@ -68,7 +68,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
 │                 key                  │   type    │ columns │  rows   │ estimated_size │
 ├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
-│ b17fa46c-15ca-4da1-8f83-4e6018f8116a │ DataFrame │       5 │ 5429252 │       184.5 MB │
+│ b7a113da-2697-4878-97c7-1152f15a87d5 │ DataFrame │       5 │ 5429252 │       184.5 MB │
 ╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
 ```
 
@@ -119,7 +119,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-3sec 254ms +/- 79ms
+3sec 261ms +/- 53ms
 ```
 
 So, 3.3 seconds to perform this aggregation.
@@ -143,7 +143,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-1sec 382ms +/- 155ms
+1sec 322ms +/- 5ms
 ```
 
 Not bad at all. Pandas managed to get it 2.6 times faster than Nushell.
@@ -170,7 +170,7 @@ bench -n 10 --pretty {
 }
 ```
 ```output-numd
-136ms +/- 6ms
+132ms +/- 2ms
 ```
 
 The `polars` dataframes plugin managed to finish operation 10 times
@@ -232,12 +232,11 @@ To see all the dataframes that are stored in memory you can use
 
 ```nu
 > polars store-ls | select key type columns rows estimated_size
-╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
-│                 key                  │   type    │ columns │  rows   │ estimated_size │
-├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
-│ b17fa46c-15ca-4da1-8f83-4e6018f8116a │ DataFrame │       5 │ 5429252 │       184.5 MB │
-│ ba3760ee-1ad5-47c9-aabb-bc1be4d43c48 │ DataFrame │       8 │      10 │          403 B │
-╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
+╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
+│                 key                  │   type    │ columns │ rows │ estimated_size │
+├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
+│ 8ed8dc80-54d9-40d8-9c22-def291dece0c │ DataFrame │       8 │   10 │          403 B │
+╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
 As you can see, the command shows the created dataframes together with basic
@@ -315,13 +314,12 @@ And now we have two dataframes stored in memory
 
 ```nu
 > polars store-ls | select key type columns rows estimated_size
-╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
-│                 key                  │   type    │ columns │  rows   │ estimated_size │
-├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
-│ 7ddd814a-06a6-442e-8f35-c0de64005c1c │ DataFrame │       4 │       1 │           32 B │
-│ b17fa46c-15ca-4da1-8f83-4e6018f8116a │ DataFrame │       5 │ 5429252 │       184.5 MB │
-│ ba3760ee-1ad5-47c9-aabb-bc1be4d43c48 │ DataFrame │       8 │      10 │          403 B │
-╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
+╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
+│                 key                  │   type    │ columns │ rows │ estimated_size │
+├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
+│ def3e0d1-51af-4cf2-b105-3023f43960bf │ DataFrame │       4 │    1 │           32 B │
+│ 8ed8dc80-54d9-40d8-9c22-def291dece0c │ DataFrame │       8 │   10 │          403 B │
+╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
 Pretty neat, isn't it?
@@ -502,17 +500,16 @@ dataframes you will see in total four dataframes
 
 ```nu
 > polars store-ls | select key type columns rows estimated_size
-╭──────────────────────────────────────┬─────────────┬─────────┬─────────┬────────────────╮
-│                 key                  │    type     │ columns │  rows   │ estimated_size │
-├──────────────────────────────────────┼─────────────┼─────────┼─────────┼────────────────┤
-│ ba3760ee-1ad5-47c9-aabb-bc1be4d43c48 │ DataFrame   │       8 │      10 │          403 B │
-│ d2d105d5-719a-496c-91d8-85a06c92af29 │ DataFrame   │       5 │       4 │          132 B │
-│ 7ddd814a-06a6-442e-8f35-c0de64005c1c │ DataFrame   │       4 │       1 │           32 B │
-│ b17fa46c-15ca-4da1-8f83-4e6018f8116a │ DataFrame   │       5 │ 5429252 │       184.5 MB │
-│ cc1591ab-2cea-4fcf-88ba-08a7c6469d3c │ LazyGroupBy │         │         │                │
-│ 94b72782-2b0e-431d-81b9-f6168d9b7369 │ DataFrame   │       4 │       3 │           96 B │
-│ 4143cba2-0907-48c2-832e-8bec79c1533f │ DataFrame   │       2 │       3 │           48 B │
-╰──────────────────────────────────────┴─────────────┴─────────┴─────────┴────────────────╯
+╭──────────────────────────────────────┬─────────────┬─────────┬──────┬────────────────╮
+│                 key                  │    type     │ columns │ rows │ estimated_size │
+├──────────────────────────────────────┼─────────────┼─────────┼──────┼────────────────┤
+│ 44435425-7232-4a8c-91b7-d03936ac2592 │ LazyGroupBy │         │      │                │
+│ ea821981-3e3a-4c1f-9a51-b0e87237be2c │ DataFrame   │       2 │    3 │           48 B │
+│ def3e0d1-51af-4cf2-b105-3023f43960bf │ DataFrame   │       4 │    1 │           32 B │
+│ ffe5d1f1-9336-4edb-8d6e-83ba65a25d63 │ DataFrame   │       5 │    4 │          132 B │
+│ 8ed8dc80-54d9-40d8-9c22-def291dece0c │ DataFrame   │       8 │   10 │          403 B │
+│ 81b36fca-0c4f-46c1-9428-46f2310e2f01 │ DataFrame   │       4 │    3 │           96 B │
+╰──────────────────────────────────────┴─────────────┴─────────┴──────┴────────────────╯
 ```
 
 One thing that is important to mention is how the memory is being optimized
@@ -878,8 +875,8 @@ example, we can use it to count how many occurrences we have in the column
 │ # │ first │ count │
 ├───┼───────┼───────┤
 │ 0 │ a     │     3 │
-│ 1 │ b     │     4 │
-│ 2 │ c     │     3 │
+│ 1 │ c     │     3 │
+│ 2 │ b     │     4 │
 ╰───┴───────┴───────╯
 ```
 
@@ -894,9 +891,9 @@ to only get the unique unique values from a series, like this
 ╭───┬───────╮
 │ # │ first │
 ├───┼───────┤
-│ 0 │ b     │
-│ 1 │ c     │
-│ 2 │ a     │
+│ 0 │ c     │
+│ 1 │ a     │
+│ 2 │ b     │
 ╰───┴───────╯
 ```
 
@@ -1072,8 +1069,8 @@ $a
 ╭───┬──────┬─────┬──────╮
 │ # │ name │ sum │ mean │
 ├───┼──────┼─────┼──────┤
-│ 0 │ one  │   2 │ 1.00 │
-│ 1 │ two  │   5 │ 2.50 │
+│ 0 │ two  │   5 │ 2.50 │
+│ 1 │ one  │   2 │ 1.00 │
 ╰───┴──────┴─────┴──────╯
 ```
 
