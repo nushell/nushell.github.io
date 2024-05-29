@@ -2,548 +2,469 @@
 
 ## Data types
 
-```nu
-    > "12" | into int
-```
+convert string to integer: `"12" | into int`
 
-> **converts string to integer**
+convert present date to provided time zone: `date now | date to-timezone "Europe/London"`
 
----
+update a record's language and if none is specified insert provided value: `{'name': 'nu', 'stars': 5, 'language': 'Python'} | upsert language 'Rust'`
 
-```nu
-    > date now | date to-timezone "Europe/London"
-```
+convert list of strings to yaml: `[one two three] | to yaml`
 
-> **converts present date to provided time zone**
+print table data: `[[framework, language]; [Django, Python] [Laravel, PHP]]`
 
----
+select two named columns from the table and print their values:
 
 ```nu
-    > {'name': 'nu', 'stars': 5, 'language': 'Python'} | upsert language 'Rust'
+[{name: 'Robert' age: 34 position: 'Designer'}
+ {name: 'Margaret' age: 30 position: 'Software Developer'}
+ {name: 'Natalie' age: 50 position: 'Accountant'}
+] | select name position
 ```
-
-> **updates a record's language and if none is specified inserts provided value**
-
----
-
-```nu
-    > [one two three] | to yaml
-```
-
-> **converts list of strings to yaml**
-
----
-
-```nu
-    > [[framework, language]; [Django, Python] [Laravel, PHP]]
-```
-
-> **prints the table**
-
----
-
-```nu
-    > [{name: 'Robert' age: 34 position: 'Designer'}
-     {name: 'Margaret' age: 30 position: 'Software Developer'}
-     {name: 'Natalie' age: 50 position: 'Accountant'}
-    ] | select name position
-```
-
-> **selects two columns from the table and prints their values**
 
 ## Strings
 
-```nu
-    > let name = "Alice"
-    > $"greetings, ($name)!"
-```
-
-> **prints `greetings, Alice!`**
-
----
+interpolate text:
 
 ```nu
-    > let string_list = "one,two,three" | split row ","
-    $string_list
-
-    ╭───┬───────╮
-    │ 0 │ one   │
-    │ 1 │ two   │
-    │ 2 │ three │
-    ╰───┴───────╯
+> let name = "Alice"
+> $"greetings, ($name)!"
+greetings, Alice!
 ```
 
-> **splits the string with specified delimiter and saves the list to `string_list` variable**
-
----
+split text on comma delimiter and save the list to `string_list` variable:
 
 ```nu
-    "Hello, world!" | str contains "o, w"
+> let string_list = "one,two,three" | split row ","
+> $string_list
+╭───┬───────╮
+│ 0 │ one   │
+│ 1 │ two   │
+│ 2 │ three │
+╰───┴───────╯
 ```
 
-> **checks if a string contains a substring and returns `boolean`**
-
----
+check if a string contains a substring:
 
 ```nu
-    let str_list = [zero one two]
-    $str_list | str join ','
+> "Hello, world!" | str contains "o, w"
+true
 ```
 
-> **joins the list of strings using provided delimiter**
-
----
+join multiple strings with delimiter:
 
 ```nu
-    > 'Hello World!' | str substring 4..8
+> let str_list = [zero one two]
+> $str_list | str join ','
+zero,one,two
 ```
 
-> **created a slice from a given string with start (4) and end (8) indices**
-
----
+slice text by indices:
 
 ```nu
-    > 'Nushell 0.80' | parse '{shell} {version}'
-
-    ╭───┬─────────┬─────────╮
-    │ # │  shell  │ version │
-    ├───┼─────────┼─────────┤
-    │ 0 │ Nushell │ 0.80    │
-    ╰───┴─────────┴─────────╯
+> 'Hello World!' | str substring 4..8
+o Wor
 ```
 
-> **parses the string to columns**
+parse string into named columns:
 
 ```nu
-    > "acronym,long\nAPL,A Programming Language" | from csv
+> 'Nushell 0.80' | parse '{shell} {version}'
+╭───┬─────────┬─────────╮
+│ # │  shell  │ version │
+├───┼─────────┼─────────┤
+│ 0 │ Nushell │ 0.80    │
+╰───┴─────────┴─────────╯
 ```
 
-> **parses comma separated values (csv)**
+parse comma separated values (csv):
 
 ```nu
-    > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
+> "acronym,long\nAPL,A Programming Language" | from csv
+╭───┬─────────┬────────────────────────╮
+│ # │ acronym │          long          │
+├───┼─────────┼────────────────────────┤
+│ 0 │ APL     │ A Programming Language │
+╰───┴─────────┴────────────────────────╯
 ```
 
-> **ansi command colors the text (always end with `ansi reset` to reset color to default)**
+color text in command-line terminal:
+
+```nu
+> $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
+This text is a bold purple!
+```
 
 ## Lists
 
-```nu
-    > [foo bar baz] | insert 1 'beeze'
-
-    ╭───┬───────╮
-    │ 0 │ foo   │
-    │ 1 │ beeze │
-    │ 2 │ bar   │
-    │ 3 │ baz   │
-    ╰───┴───────╯
-```
-
-> **inserts `beeze` value at the 2nd index of the list**
-
----
+insert list value at index:
 
 ```nu
-    > [1, 2, 3, 4] | update 1 10
+> [foo bar baz] | insert 1 'beeze'
+╭───┬───────╮
+│ 0 │ foo   │
+│ 1 │ beeze │
+│ 2 │ bar   │
+│ 3 │ baz   │
+╰───┴───────╯
 ```
 
-> **updates 2nd value to 10**
-
----
+update list value by index:
 
 ```nu
-    > let numbers = [1, 2, 3, 4, 5]
-    > $numbers | prepend 0
+> [1, 2, 3, 4] | update 1 10
+╭───┬────╮
+│ 0 │  1 │
+│ 1 │ 10 │
+│ 2 │  3 │
+│ 3 │  4 │
+╰───┴────╯
 ```
 
-> **adds value at the beginning of the list**
-
----
+prepend list value:
 
 ```nu
-    > let numbers = [1, 2, 3, 4, 5]
-    > $numbers | append 6
+> let numbers = [1, 2, 3]
+> $numbers | prepend 0
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+│ 3 │ 3 │
+╰───┴───╯
 ```
 
-> **adds value at the end of the list**
-
----
+append list value:
 
 ```nu
-    > let flowers = [cammomile marigold rose forget-me-not]
-    > let flowers = ($flowers | first 2)
-    > $flowers
+> let numbers = [1, 2, 3]
+> $numbers | append 4
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+│ 3 │ 4 │
+╰───┴───╯
 ```
 
-> **creates slice of first two values from `flowers` list**
-
----
+slice first list values:
 
 ```nu
-    > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
-    > $planets | each { |it| $"($it) is a planet of the solar system" }
+> [cammomile marigold rose forget-me-not] | first 2
+╭───┬───────────╮
+│ 0 │ cammomile │
+│ 1 │ marigold  │
+╰───┴───────────╯
 ```
 
-> **iterates over a list; `it` is current list value**
-
----
+iterate over a list; `it` is current list value:
 
 ```nu
-    > $planets | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
+> let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
+> $planets | each { |it| $"($it) is a planet of the solar system" }
+╭───┬─────────────────────────────────────────╮
+│ 0 │ Mercury is a planet of the solar system │
+│ 1 │ Venus is a planet of the solar system   │
+│ 2 │ Earth is a planet of the solar system   │
+│ 3 │ Mars is a planet of the solar system    │
+│ 4 │ Jupiter is a planet of the solar system │
+│ 5 │ Saturn is a planet of the solar system  │
+│ 6 │ Uranus is a planet of the solar system  │
+│ 7 │ Neptune is a planet of the solar system │
+╰───┴─────────────────────────────────────────╯
 ```
 
-> **iterates over a list and provides index and value in `it`**
-
----
+iterate over a list with an index and value:
 
 ```nu
-    > let scores = [3 8 4]
-    > $"total = ($scores | reduce { |it, acc| $acc + $it })"
+> $planets | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
+╭───┬─────────────╮
+│ 0 │ 1 - Mercury │
+│ 1 │ 2 - Venus   │
+│ 2 │ 3 - Earth   │
+│ 3 │ 4 - Mars    │
+│ 4 │ 5 - Jupiter │
+│ 5 │ 6 - Saturn  │
+│ 6 │ 7 - Uranus  │
+│ 7 │ 8 - Neptune │
+╰───┴─────────────╯
 ```
 
-> **reduces the list to a single value, `reduce` gives access to accumulator that is applied
-> to each element in the list**
-
----
+reduce the list to a single value; `reduce` gives access to accumulator that is applied to each element in the list:
 
 ```nu
-    > $"total = ($scores | reduce --fold 1 { |it, acc| $acc * $it })"
+> let scores = [3 8 4]
+> $"total = ($scores | reduce { |it, acc| $acc + $it })"
+total = 15
 ```
 
-> **initial value for accumulator value can be set with `--fold`**
-
----
+reduce with an initial value (`--fold`):
 
 ```nu
-    > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
-    > $planets.2
-    > Earth
+> let scores = [3 8 4]
+> $"total = ($scores | reduce --fold 1 { |it, acc| $acc * $it })"
+total = 96
 ```
 
-> **gives access to the 3rd item in the list**
-
----
+give access to the 3rd item in the list:
 
 ```nu
-    > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
-    > $planets | any {|it| $it | str starts-with "E" }
-    > true
+> let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
+> $planets.2
+Earth
 ```
 
-> **checks if any string in the list starts with `E`**
-
----
+check if any string in the list starts with `E`:
 
 ```nu
-    > let cond = {|x| $x < 0 }; [-1 -2 9 1] | take while $cond
-    ╭───┬────╮
-    │ 0 │ -1 │
-    │ 1 │ -2 │
-    ╰───┴────╯
+> let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
+> $planets | any {|it| $it | str starts-with "E" }
+true
 ```
 
-> **creates slice of items that satisfy provided condition**
+slice items that satisfy provided condition:
+
+```nu
+> let cond = {|x| $x < 0 }; [-1 -2 9 1] | take while $cond
+╭───┬────╮
+│ 0 │ -1 │
+│ 1 │ -2 │
+╰───┴────╯
+```
 
 ## Tables
 
-```nu
-    > ls | sort-by size
-```
+sort table: `ls | sort-by size`
 
-> **sorting table by size of files**
+sort table, get first rows: `ls | sort-by size | first 5`
 
----
+concatenate two tables with same columns:
 
 ```nu
-    > ls | sort-by size | first 5
+> let $a = [[first_column second_column third_column]; [foo bar snooze]]
+> let $b = [[first_column second_column third_column]; [hex seeze feeze]]
+> $a | append $b
+
+╭───┬──────────────┬───────────────┬──────────────╮
+│ # │ first_column │ second_column │ third_column │
+├───┼──────────────┼───────────────┼──────────────┤
+│ 0 │ foo          │ bar           │ snooze       │
+│ 1 │ hex          │ seeze         │ feeze        │
+╰───┴──────────────┴───────────────┴──────────────╯
 ```
 
-> **sorting table by size of files and show first 5 entries**
-
----
+remove the last column of a table:
 
 ```nu
-    > let $a = [[first_column second_column third_column]; [foo bar snooze]]
-    > let $b = [[first_column second_column third_column]; [hex seeze feeze]]
-    > $a | append $b
+> let teams_scores = [[team score plays]; ['Boston Celtics' 311 3] ['Golden State Warriors', 245 2]]
+> $teams_scores | drop column
 
-    ╭───┬──────────────┬───────────────┬──────────────╮
-    │ # │ first_column │ second_column │ third_column │
-    ├───┼──────────────┼───────────────┼──────────────┤
-    │ 0 │ foo          │ bar           │ snooze       │
-    │ 1 │ hex          │ seeze         │ feeze        │
-    ╰───┴──────────────┴───────────────┴──────────────╯
+╭───┬───────────────────────┬───────╮
+│ # │         team          │ score │
+├───┼───────────────────────┼───────┤
+│ 0 │ Boston Celtics        │   311 │
+│ 1 │ Golden State Warriors │   245 │
+╰───┴───────────────────────┴───────╯
 ```
-
-> **concatenate two tables with same columns**
-
----
-
-```nu
-    > let teams_scores = [[team score plays]; ['Boston Celtics' 311 3] ['Golden State Warriors', 245 2]]
-    > $teams_scores | drop column
-
-    ╭───┬───────────────────────┬───────╮
-    │ # │         team          │ score │
-    ├───┼───────────────────────┼───────┤
-    │ 0 │ Boston Celtics        │   311 │
-    │ 1 │ Golden State Warriors │   245 │
-    ╰───┴───────────────────────┴───────╯
-```
-
-> **remove the last column of a table**
 
 ## Files & Filesystem
 
-```nu
-    > start file.txt
-```
+open a text file with the default text editor: `start file.txt`
 
-> **opens a text file with the default text editor**
+save a string to text file: `'lorem ipsum ' | save file.txt`
 
----
+append a string to the end of a text file: `'dolor sit amet' | save --append file.txt`
 
-```nu
-    > 'lorem ipsum ' | save file.txt
-```
+save a record to file.json: `{ a: 1, b: 2 } | save file.json`
 
-> **saves a string to text file**
+recursively search for files by file name: `glob **/*.{rs,toml} --depth 2`
 
----
-
-```nu
-    > 'dolor sit amet' | save --append file.txt
-```
-
-> **appends a string to the end of file.txt**
-
----
-
-```nu
-    > { a: 1, b: 2 } | save file.json
-```
-
-> **saves a record to file.json**
-
----
-
-```nu
-    > glob **/*.{rs,toml} --depth 2
-```
-
-> **searches for `.rs` and `.toml` files recursively up to 2 folders deep**
-
----
-
-```nu
-    > watch . --glob=**/*.rs {|| cargo test }
-```
-
-> **runs cargo test whenever a Rust file changes**
-
----
+watch a file, run command whenever it changes: `watch . --glob=**/*.rs {|| cargo test }`
 
 ## Custom Commands
 
+custom command with parameter type set to string:
+
 ```nu
-    def greet [name: string] {
-        $"hello ($name­)"
-    }
+> def greet [name: string] {
+    $"hello ($name)"
+}
 ```
 
-> **custom command with parameter type set to string**
-
----
+custom command with default parameter set to nushell:
 
 ```nu
-    def greet [name = "nushell"] {
-        $"hello ($name­)"
-    }
+> def greet [name = "nushell"] {
+    $"hello ($name)"
+}
 ```
 
-> **custom command with default parameter set to nushell**
-
----
+passing named parameter by defining flag for custom commands:
 
 ```nu
-    def greet [
-        name: string
-        --age: int
-    ] {
+> def greet [
+    name: string
+    --age: int
+] {
+    [$name $age]
+}
+
+> greet world --age 10
+```
+
+using flag as a switch with a shorthand flag (-a) for the age:
+
+```nu
+> def greet [
+    name: string
+    --age (-a): int
+    --twice
+] {
+    if $twice {
+        [$name $age $name $age]
+    } else {
         [$name $age]
     }
-
-    > greet world --age 10
+}
+> greet -a 10 --twice hello
 ```
 
-> **passing named parameter by defining flag for custom commands**
-
----
+custom command which takes any number of positional arguments using rest params:
 
 ```nu
-    def greet [
-        name: string
-        --age (-a): int
-        --twice
-    ] {
-        if $twice {
-            [$name $age $name $age]
-        } else {
-            [$name $age]
-        }
+> def greet [...name: string] {
+    print "hello all:"
+    for $n in $name {
+        print $n
     }
-    > greet -a 10 --twice hello
+}
+> greet earth mars jupiter venus
+hello all:
+earth
+mars
+jupiter
+venus
 ```
-
-> **using flag as a switch with a shorthand flag (-a) for the age**
-
----
-
-```nu
-    def greet [...name: string] {
-        print "­hello all:"
-        for $n in $name {
-            print $n
-        }
-    }
-
-    > greet earth mars jupiter venus
-```
-
-> **custom command which takes any number of positional arguments using rest params**
 
 ## Variables
 
-```nu
-    > let val = 42
-    > print $val
-    42
-```
-
-> **an immutable variable cannot change its value after declaration**
-
----
+an immutable variable cannot change its value after declaration:
 
 ```nu
-    > let val = 42
-    > do { let val = 101;  $val }
-    101
-    > $val
-    42
+> let val = 42
+> print $val
+42
 ```
 
-> **shadowing variable (declaring variable with the same name in a different scope)**
-
----
+shadowing variable (declaring variable with the same name in a different scope):
 
 ```nu
-    > mut val = 42
-    > $val += 27
-    > $val
-    69
+> let val = 42
+> do { let val = 101;  $val }
+101
+> $val
+42
 ```
 
-> **declaring a mutable variable with mut key word**
-
----
+declaring a mutable variable with mut key word:
 
 ```nu
-    > mut x = 0
-    > [1 2 3] | each { $x += 1 }
+> mut val = 42
+> $val += 27
+> $val
+69
 ```
 
-> **closures and nested defs cannot capture mutable variables from their enviro­nment.
-> This expression results in error.**
+closures and nested defs cannot capture mutable variables from their environment (errors):
 
 ```nu
-    > const file = 'path/­to/­file.nu'
-    > source $file
+> mut x = 0
+> [1 2 3] | each { $x += 1 }
+Error: nu::parser::expected_keyword
+
+  × Capture of mutable variable.
+   ╭─[entry #83:1:18]
+ 1 │ [1 2 3] | each { $x += 1 }
+   ·                  ─┬
+   ·                   ╰── capture of mutable variable
+   ╰────
 ```
 
-> **a constant variable is immutable value which is fully evaluated at parse-time**
-
----
+a constant variable is immutable and is fully evaluated at parse-time:
 
 ```nu
-    > let files = (ls)
-    > $files.na­me?.0?
+> const file = 'path/to/file.nu'
+> source $file
 ```
 
-> **using question mark operator to return null instead of error if provided path is incorrect**
-
----
+use question mark operator `?` to return null instead of error if provided path is incorrect:
 
 ```nu
-    > let big_files = (ls | where size > 10kb)
-    > $big_files
+> let files = (ls)
+> $files.name?.0?
 ```
 
-> **assigning the result of a pipeline to a variable**
+assig the result of a pipeline to a variable:
 
----
+```nu
+> let big_files = (ls | where size > 10kb)
+> $big_files
+```
 
 ## Modules
 
-```nu
-    > module greetings {
-        export def hello [name: string] {
-            $"hello ($name­)!"
-        }
-
-        export def hi [where: string] {
-            $"hi ($where)!­"
-        }
-    }
-
-    > use greetings hello
-    > hello "­wor­ld"
-```
-
-> **using inline module**
-
----
+use an inline module:
 
 ```nu
-    # greeti­ngs.nu
-    export-env {
-        $env.M­YNAME = "­Arthur, King of the Briton­s"
-    }
-    export def hello [] {
-        $"hello ($env.M­YN­AME­)"
-    }
-
-    > use greeti­ngs.nu
-    > $env.M­YNAME
-    Arthur, King of the Britons
-    > greetings hello
-    hello Arthur, King of the Britons!
-```
-
-> **importing module from file and using its enviro­nment in current scope**
-
----
-
-```nu
-    # greeti­ngs.nu
+> module greetings {
     export def hello [name: string] {
-        $"hello ($name­)!"
+        $"hello ($name)!"
     }
 
     export def hi [where: string] {
-        $"hi ($where)!­"
+        $"hi ($where)!"
     }
-
-    export def main [] {
-        "­gre­etings and salutations!"
-    }
-
-    > use greeti­ngs.nu
-    > greetings
-    greetings and saluta­tions!
-    > greetings hello world
-    hello world!
+}
+> use greetings hello
+> hello "world"
 ```
 
-> **using main command in module**
+import module from file and use its environment in current scope:
 
----
+```nu
+# greetings.nu
+export-env {
+    $env.MYNAME = "Arthur, King of the Britons"
+}
+export def hello [] {
+    $"hello ($env.MYNAME)"
+}
+
+> use greetings.nu
+> $env.MYNAME
+Arthur, King of the Britons
+> greetings hello
+hello Arthur, King of the Britons!
+```
+
+use main command in module:
+
+```nu
+# greetings.nu
+export def hello [name: string] {
+    $"hello ($name)!"
+}
+
+export def hi [where: string] {
+    $"hi ($where)!"
+}
+
+export def main [] {
+    "greetings and salutations!"
+}
+
+> use greetings.nu
+> greetings
+greetings and salutations!
+> greetings hello world
+hello world!
+```
