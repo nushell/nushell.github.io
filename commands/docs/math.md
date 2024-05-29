@@ -2,7 +2,7 @@
 title: math
 categories: |
   math
-version: 0.93.0
+version: 0.94.0
 math: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.
 usage: |
@@ -31,34 +31,34 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                               | type    | usage                                                                                 |
-| -------------------------------------------------- | ------- | ------------------------------------------------------------------------------------- |
-| [`math abs`](/commands/docs/math_abs.md)           | Builtin | Returns the absolute value of a number.                                               |
-| [`math arccos`](/commands/docs/math_arccos.md)     | Builtin | Returns the arccosine of the number.                                                  |
-| [`math arccosh`](/commands/docs/math_arccosh.md)   | Builtin | Returns the inverse of the hyperbolic cosine function.                                |
-| [`math arcsin`](/commands/docs/math_arcsin.md)     | Builtin | Returns the arcsine of the number.                                                    |
-| [`math arcsinh`](/commands/docs/math_arcsinh.md)   | Builtin | Returns the inverse of the hyperbolic sine function.                                  |
-| [`math arctan`](/commands/docs/math_arctan.md)     | Builtin | Returns the arctangent of the number.                                                 |
-| [`math arctanh`](/commands/docs/math_arctanh.md)   | Builtin | Returns the inverse of the hyperbolic tangent function.                               |
-| [`math avg`](/commands/docs/math_avg.md)           | Builtin | Returns the average of a list of numbers.                                             |
-| [`math ceil`](/commands/docs/math_ceil.md)         | Builtin | Returns the ceil of a number (smallest integer greater than or equal to that number). |
-| [`math cos`](/commands/docs/math_cos.md)           | Builtin | Returns the cosine of the number.                                                     |
-| [`math cosh`](/commands/docs/math_cosh.md)         | Builtin | Returns the hyperbolic cosine of the number.                                          |
-| [`math exp`](/commands/docs/math_exp.md)           | Builtin | Returns e raised to the power of x.                                                   |
-| [`math floor`](/commands/docs/math_floor.md)       | Builtin | Returns the floor of a number (largest integer less than or equal to that number).    |
-| [`math ln`](/commands/docs/math_ln.md)             | Builtin | Returns the natural logarithm. Base: (math e).                                        |
-| [`math log`](/commands/docs/math_log.md)           | Builtin | Returns the logarithm for an arbitrary base.                                          |
-| [`math max`](/commands/docs/math_max.md)           | Builtin | Returns the maximum of a list of values, or of columns in a table.                    |
-| [`math median`](/commands/docs/math_median.md)     | Builtin | Computes the median of a list of numbers.                                             |
-| [`math min`](/commands/docs/math_min.md)           | Builtin | Finds the minimum within a list of values or tables.                                  |
-| [`math mode`](/commands/docs/math_mode.md)         | Builtin | Returns the most frequent element(s) from a list of numbers or tables.                |
-| [`math product`](/commands/docs/math_product.md)   | Builtin | Returns the product of a list of numbers or the products of each column of a table.   |
-| [`math round`](/commands/docs/math_round.md)       | Builtin | Returns the input number rounded to the specified precision.                          |
-| [`math sin`](/commands/docs/math_sin.md)           | Builtin | Returns the sine of the number.                                                       |
-| [`math sinh`](/commands/docs/math_sinh.md)         | Builtin | Returns the hyperbolic sine of the number.                                            |
-| [`math sqrt`](/commands/docs/math_sqrt.md)         | Builtin | Returns the square root of the input number.                                          |
-| [`math stddev`](/commands/docs/math_stddev.md)     | Builtin | Returns the standard deviation of a list of numbers, or of each column in a table.    |
-| [`math sum`](/commands/docs/math_sum.md)           | Builtin | Returns the sum of a list of numbers or of each column in a table.                    |
-| [`math tan`](/commands/docs/math_tan.md)           | Builtin | Returns the tangent of the number.                                                    |
-| [`math tanh`](/commands/docs/math_tanh.md)         | Builtin | Returns the hyperbolic tangent of the number.                                         |
-| [`math variance`](/commands/docs/math_variance.md) | Builtin | Returns the variance of a list of numbers or of each column in a table.               |
+| name                                               | usage                                                                                 | type     |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------- | -------- |
+| [`math abs`](/commands/docs/math_abs.md)           | Returns the absolute value of a number.                                               | built-in |
+| [`math arccos`](/commands/docs/math_arccos.md)     | Returns the arccosine of the number.                                                  | built-in |
+| [`math arccosh`](/commands/docs/math_arccosh.md)   | Returns the inverse of the hyperbolic cosine function.                                | built-in |
+| [`math arcsin`](/commands/docs/math_arcsin.md)     | Returns the arcsine of the number.                                                    | built-in |
+| [`math arcsinh`](/commands/docs/math_arcsinh.md)   | Returns the inverse of the hyperbolic sine function.                                  | built-in |
+| [`math arctan`](/commands/docs/math_arctan.md)     | Returns the arctangent of the number.                                                 | built-in |
+| [`math arctanh`](/commands/docs/math_arctanh.md)   | Returns the inverse of the hyperbolic tangent function.                               | built-in |
+| [`math avg`](/commands/docs/math_avg.md)           | Returns the average of a list of numbers.                                             | built-in |
+| [`math ceil`](/commands/docs/math_ceil.md)         | Returns the ceil of a number (smallest integer greater than or equal to that number). | built-in |
+| [`math cos`](/commands/docs/math_cos.md)           | Returns the cosine of the number.                                                     | built-in |
+| [`math cosh`](/commands/docs/math_cosh.md)         | Returns the hyperbolic cosine of the number.                                          | built-in |
+| [`math exp`](/commands/docs/math_exp.md)           | Returns e raised to the power of x.                                                   | built-in |
+| [`math floor`](/commands/docs/math_floor.md)       | Returns the floor of a number (largest integer less than or equal to that number).    | built-in |
+| [`math ln`](/commands/docs/math_ln.md)             | Returns the natural logarithm. Base: (math e).                                        | built-in |
+| [`math log`](/commands/docs/math_log.md)           | Returns the logarithm for an arbitrary base.                                          | built-in |
+| [`math max`](/commands/docs/math_max.md)           | Returns the maximum of a list of values, or of columns in a table.                    | built-in |
+| [`math median`](/commands/docs/math_median.md)     | Computes the median of a list of numbers.                                             | built-in |
+| [`math min`](/commands/docs/math_min.md)           | Finds the minimum within a list of values or tables.                                  | built-in |
+| [`math mode`](/commands/docs/math_mode.md)         | Returns the most frequent element(s) from a list of numbers or tables.                | built-in |
+| [`math product`](/commands/docs/math_product.md)   | Returns the product of a list of numbers or the products of each column of a table.   | built-in |
+| [`math round`](/commands/docs/math_round.md)       | Returns the input number rounded to the specified precision.                          | built-in |
+| [`math sin`](/commands/docs/math_sin.md)           | Returns the sine of the number.                                                       | built-in |
+| [`math sinh`](/commands/docs/math_sinh.md)         | Returns the hyperbolic sine of the number.                                            | built-in |
+| [`math sqrt`](/commands/docs/math_sqrt.md)         | Returns the square root of the input number.                                          | built-in |
+| [`math stddev`](/commands/docs/math_stddev.md)     | Returns the standard deviation of a list of numbers, or of each column in a table.    | built-in |
+| [`math sum`](/commands/docs/math_sum.md)           | Returns the sum of a list of numbers or of each column in a table.                    | built-in |
+| [`math tan`](/commands/docs/math_tan.md)           | Returns the tangent of the number.                                                    | built-in |
+| [`math tanh`](/commands/docs/math_tanh.md)         | Returns the hyperbolic tangent of the number.                                         | built-in |
+| [`math variance`](/commands/docs/math_variance.md) | Returns the variance of a list of numbers or of each column in a table.               | built-in |

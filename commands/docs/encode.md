@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.93.0
+version: 0.94.0
 strings: |
   Encode a string into bytes.
 usage: |
@@ -66,7 +66,7 @@ documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
 
 ## Subcommands:
 
-| name                                               | type    | usage                                         |
-| -------------------------------------------------- | ------- | --------------------------------------------- |
-| [`encode base64`](/commands/docs/encode_base64.md) | Builtin | Encode a string or binary value using Base64. |
-| [`encode hex`](/commands/docs/encode_hex.md)       | Builtin | Encode a binary value using hex.              |
+| name                                               | usage                                         | type     |
+| -------------------------------------------------- | --------------------------------------------- | -------- |
+| [`encode base64`](/commands/docs/encode_base64.md) | Encode a string or binary value using Base64. | built-in |
+| [`encode hex`](/commands/docs/encode_hex.md)       | Encode a binary value using hex.              | built-in |

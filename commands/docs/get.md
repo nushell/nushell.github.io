@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.93.0
+version: 0.94.0
 filters: |
   Extract data using a cell path.
 usage: |
@@ -60,7 +60,7 @@ Get a cell from a table
 A0
 ```
 
-Extract the name of the 3rd record in a list (same as `ls | $in.name`)
+Extract the name of the 3rd record in a list (same as `ls | $in.name.2`)
 ```nu
 > ls | get name.2
 
@@ -69,12 +69,6 @@ Extract the name of the 3rd record in a list (same as `ls | $in.name`)
 Extract the name of the 3rd record in a list
 ```nu
 > ls | get 2.name
-
-```
-
-Extract the cpu list from the sys information record
-```nu
-> sys | get cpu
 
 ```
 

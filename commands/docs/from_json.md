@@ -2,7 +2,7 @@
 title: from json
 categories: |
   formats
-version: 0.93.0
+version: 0.94.0
 formats: |
   Convert from json to structured data.
 usage: |
@@ -60,4 +60,17 @@ Parse json strictly which will error on comments and trailing commas
 │ a │ 1 │
 │ b │ 2 │
 ╰───┴───╯
+```
+
+Parse a stream of line-delimited JSON values
+```nu
+> '{ "a": 1 }
+{ "b": 2 }' | from json --objects
+╭───┬────┬────╮
+│ # │ a  │ b  │
+├───┼────┼────┤
+│ 0 │  1 │ ❎ │
+│ 1 │ ❎ │  2 │
+╰───┴────┴────╯
+
 ```

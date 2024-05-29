@@ -2,7 +2,7 @@
 title: scope
 categories: |
   core
-version: 0.93.0
+version: 0.94.0
 core: |
   Commands for getting info about what is in scope.
 usage: |
@@ -29,11 +29,11 @@ feature: default
 
 ## Subcommands:
 
-| name                                                         | type    | usage                                                    |
-| ------------------------------------------------------------ | ------- | -------------------------------------------------------- |
-| [`scope aliases`](/commands/docs/scope_aliases.md)           | Builtin | Output info on the aliases in the current scope.         |
-| [`scope commands`](/commands/docs/scope_commands.md)         | Builtin | Output info on the commands in the current scope.        |
-| [`scope engine-stats`](/commands/docs/scope_engine-stats.md) | Builtin | Output stats on the engine in the current state.         |
-| [`scope externs`](/commands/docs/scope_externs.md)           | Builtin | Output info on the known externals in the current scope. |
-| [`scope modules`](/commands/docs/scope_modules.md)           | Builtin | Output info on the modules in the current scope.         |
-| [`scope variables`](/commands/docs/scope_variables.md)       | Builtin | Output info on the variables in the current scope.       |
+| name                                                         | usage                                                    | type     |
+| ------------------------------------------------------------ | -------------------------------------------------------- | -------- |
+| [`scope aliases`](/commands/docs/scope_aliases.md)           | Output info on the aliases in the current scope.         | built-in |
+| [`scope commands`](/commands/docs/scope_commands.md)         | Output info on the commands in the current scope.        | built-in |
+| [`scope engine-stats`](/commands/docs/scope_engine-stats.md) | Output stats on the engine in the current state.         | built-in |
+| [`scope externs`](/commands/docs/scope_externs.md)           | Output info on the known externals in the current scope. | built-in |
+| [`scope modules`](/commands/docs/scope_modules.md)           | Output info on the modules in the current scope.         | built-in |
+| [`scope variables`](/commands/docs/scope_variables.md)       | Output info on the variables in the current scope.       | built-in |

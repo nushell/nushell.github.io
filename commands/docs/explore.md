@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.93.0
+version: 0.94.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |
@@ -23,7 +23,7 @@ feature: default
 
  -  `--head, - {bool}`: Show or hide column headers (default true)
  -  `--index, -i`: Show row indexes when viewing a list
- -  `--reverse, -r`: Start with the viewport scrolled to the bottom
+ -  `--tail, -t`: Start with the viewport scrolled to the bottom
  -  `--peek, -p`: When quitting, output the value of the cell the cursor was on
 
 
@@ -35,9 +35,9 @@ feature: default
 
 ## Examples
 
-Explore the system information record
+Explore the system host information record
 ```nu
-> sys | explore
+> sys host | explore
 
 ```
 

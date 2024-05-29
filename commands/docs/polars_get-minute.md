@@ -2,7 +2,7 @@
 title: polars get-minute
 categories: |
   dataframe
-version: 0.93.0
+version: 0.94.0
 dataframe: |
   Gets minute from date.
 usage: |

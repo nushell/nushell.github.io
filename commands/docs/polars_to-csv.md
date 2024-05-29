@@ -2,7 +2,7 @@
 title: polars to-csv
 categories: |
   dataframe
-version: 0.93.0
+version: 0.94.0
 dataframe: |
   Saves dataframe to CSV file.
 usage: |

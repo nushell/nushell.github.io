@@ -2,7 +2,7 @@
 title: mkdir
 categories: |
   filesystem
-version: 0.93.0
+version: 0.94.0
 filesystem: |
   Create directories, with intermediary directories if required using uutils/coreutils mkdir.
 usage: |

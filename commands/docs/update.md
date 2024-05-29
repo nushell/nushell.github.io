@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.93.0
+version: 0.94.0
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -94,6 +94,6 @@ When updating a specific index, the closure will instead be run once. The first 
 
 ## Subcommands:
 
-| name                                             | type    | usage                   |
-| ------------------------------------------------ | ------- | ----------------------- |
-| [`update cells`](/commands/docs/update_cells.md) | Builtin | Update the table cells. |
+| name                                             | usage                   | type     |
+| ------------------------------------------------ | ----------------------- | -------- |
+| [`update cells`](/commands/docs/update_cells.md) | Update the table cells. | built-in |

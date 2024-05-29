@@ -2,7 +2,7 @@
 title: polars mean
 categories: |
   expression
-version: 0.93.0
+version: 0.94.0
 expression: |
   Creates a mean expression for an aggregation or aggregates columns to their mean value.
 usage: |

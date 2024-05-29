@@ -2,7 +2,7 @@
 title: str contains
 categories: |
   strings
-version: 0.93.0
+version: 0.94.0
 strings: |
   Checks if string input contains a substring.
 usage: |
@@ -22,7 +22,7 @@ feature: default
 ## Flags
 
  -  `--ignore-case, -i`: search is case insensitive
- -  `--not, -n`: does not contain
+ -  `--not, -n`: DEPRECATED OPTION: does not contain
 
 ## Parameters
 
@@ -96,17 +96,6 @@ Check if list contains string
 │ 0 │ true  │
 │ 1 │ true  │
 │ 2 │ false │
-╰───┴───────╯
-
-```
-
-Check if list does not contain string
-```nu
-> [one two three] | str contains --not o
-╭───┬───────╮
-│ 0 │ false │
-│ 1 │ false │
-│ 2 │ true  │
 ╰───┴───────╯
 
 ```

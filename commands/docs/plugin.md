@@ -2,7 +2,7 @@
 title: plugin
 categories: |
   plugin
-version: 0.93.0
+version: 0.94.0
 plugin: |
   Commands for managing plugins.
 usage: |
@@ -63,10 +63,10 @@ Remove the installed signatures for the `inc` plugin.
 
 ## Subcommands:
 
-| name                                           | type    | usage                                                   |
-| ---------------------------------------------- | ------- | ------------------------------------------------------- |
-| [`plugin add`](/commands/docs/plugin_add.md)   | Builtin | Add a plugin to the plugin registry file.               |
-| [`plugin list`](/commands/docs/plugin_list.md) | Builtin | List installed plugins.                                 |
-| [`plugin rm`](/commands/docs/plugin_rm.md)     | Builtin | Remove a plugin from the plugin registry file.          |
-| [`plugin stop`](/commands/docs/plugin_stop.md) | Builtin | Stop an installed plugin if it was running.             |
-| [`plugin use`](/commands/docs/plugin_use.md)   | Builtin | Load a plugin from the plugin registry file into scope. |
+| name                                           | usage                                                   | type     |
+| ---------------------------------------------- | ------------------------------------------------------- | -------- |
+| [`plugin add`](/commands/docs/plugin_add.md)   | Add a plugin to the plugin registry file.               | built-in |
+| [`plugin list`](/commands/docs/plugin_list.md) | List installed plugins.                                 | built-in |
+| [`plugin rm`](/commands/docs/plugin_rm.md)     | Remove a plugin from the plugin registry file.          | built-in |
+| [`plugin stop`](/commands/docs/plugin_stop.md) | Stop an installed plugin if it was running.             | built-in |
+| [`plugin use`](/commands/docs/plugin_use.md)   | Load a plugin from the plugin registry file into scope. | keyword  |

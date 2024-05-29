@@ -2,7 +2,7 @@
 title: sys
 categories: |
   system
-version: 0.93.0
+version: 0.94.0
 system: |
   View information about the system.
 usage: |
@@ -34,14 +34,17 @@ Show info about the system
 
 ```
 
-Show the os system name with get
-```nu
-> (sys).host | get name
+## Notes
+Note that this command may take a noticeable amount of time to run. To reduce the time taken, you can use the various `sys` sub commands to get the subset of information you are interested in.
 
-```
+## Subcommands:
 
-Show the os system name
-```nu
-> (sys).host.name
-
-```
+| name                                       | usage                                                 | type     |
+| ------------------------------------------ | ----------------------------------------------------- | -------- |
+| [`sys cpu`](/commands/docs/sys_cpu.md)     | View information about the system CPUs.               | built-in |
+| [`sys disks`](/commands/docs/sys_disks.md) | View information about the system disks.              | built-in |
+| [`sys host`](/commands/docs/sys_host.md)   | View information about the system host.               | built-in |
+| [`sys mem`](/commands/docs/sys_mem.md)     | View information about the system memory.             | built-in |
+| [`sys net`](/commands/docs/sys_net.md)     | View information about the system network interfaces. | built-in |
+| [`sys temp`](/commands/docs/sys_temp.md)   | View the temperatures of system components.           | built-in |
+| [`sys users`](/commands/docs/sys_users.md) | View information about the users on the system.       | built-in |
