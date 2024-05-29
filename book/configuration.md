@@ -60,7 +60,7 @@ $env.config = {
 }
 ```
 
-Note that setting any key overwrites its previous value. Likewise it's an error to reference any missing key. If `$env.config` already exists you can update or gracefully insert a [`cell-path`](/lang-guide/lang-guide.md#cellpath) at any depth using [`upsert`](/commands/docs/upsert.md):
+Note that setting any key overwrites its previous value. Likewise it's an error to reference any missing key. If `$env.config` already exists you can update or gracefully insert a [`cell-path`](/book/types_of_data.html#cell-paths) at any depth using [`upsert`](/commands/docs/upsert.md):
 
 ```nu
 $env.config = ($env.config | upsert <field name> <field value>)
