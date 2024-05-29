@@ -105,3 +105,64 @@ Error:
    ·              ╰── 13 is not an even number
    ╰────
 ```
+
+## Running the tests
+
+Now that we are able to write tests by calling commands from `std assert`, it would be great to be able to run them and see our tests fail when there is an issue and pass when everything is correct :)
+
+
+### Nupm package
+
+In this first case, we will assume that the code you are trying to test is part of a [Nupm] package.
+
+In that case, it is as easy as following the following steps
+- create a `tests/` directory next to the `nupm.nuon` package file of your pacakge
+- make the `tests/` directory a valid module by adding a `mod.nu` file into it
+- write commands inside `tests/`
+- call `nupm test`
+
+The convention is that any command fully exported from the `tests` module will be run as a test, e.g.
+- `export def some-test` in `tests/mod.nu` will run
+- `def just-an-internal-cmd` in `tests/mod.nu` will NOT run
+- `export def another-test` in `tests/spam.nu` will run if and only if there is something like `export use spam.nu *` in `tests/mod.nu`
+
+
+### Standalone tests
+
+If your Nushell script or module is not part of a [Nupm] package, the simplest way is to write tests in standalone scripts and then call them, either from a `Makefile` or in a CI:
+
+Let's say we have a simple `math.nu` module which contains a simple Fibonacci command:
+```nushell
+# `fib n` is the n-th Fibonacci number
+export def fib [n: int] [ nothing -> int ] {
+    if $n == 0 {
+        return 0
+    } else if $n == 1 {
+        return 1
+    }
+
+    (fib ($n - 1)) + (fib ($n - 2))
+}
+```
+then a test script called `tests.nu` could look like
+```nushell
+use math.nu fib
+use std assert
+
+for t in [
+    [input, expected];
+    [0, 0],
+    [1, 1],
+    [2, 1],
+    [3, 2],
+    [4, 3],
+    [5, 5],
+    [6, 8],
+    [7, 13],
+] {
+    assert equal (fib $t.input) $t.expected
+}
+```
+and be invoked as `nu tests.nu`
+
+[Nupm]: https://github.com/nushell/nupm
