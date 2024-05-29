@@ -292,22 +292,28 @@ hello Arthur, King of the Britons!
 ```
 
 ::: tip
-You can put a complex code defining your environment without polluting the namespace of the module, for example:
+The module implementation can use its own scoped environment variables without them bleeding into users scope. For example:
 
 ```nu
-    def tmp [] { "tmp" }
-    def other [] { "other" }
+# greetings-local.nu
 
-    let len = (tmp | str length)
-
-    load-env {
-        OTHER_ENV: (other)
-        TMP_LEN: $len
-    }
+export def hello [] {
+    $env.MYNAMELOCAL = "Arthur, King of the Britons"
+    $"hello ($env.MYNAMELOCAL)"
 }
 ```
 
-Only `$env.TMP_LEN` and `$env.OTHER_ENV` are preserved after evaluating the `export-env` module.
+```nu
+> use greetings-local.nu
+
+> $env.MYNAMELOCAL
+Error: nu::shell::column_not_found
+[…]
+
+> greetings-local hello
+hello Arthur, King of the Britons!
+```
+
 :::
 
 ## Caveats
