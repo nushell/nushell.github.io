@@ -10,7 +10,7 @@ def command-names [] {
     let nu_dir = (which nu) | get path.0 | path dirname
     mut plugins = []
     for plugin in $PLUGINS {
-        if (sys host).name == 'Windows' {
+        if (sys host | get name) == 'Windows' {
             $plugins ++= $'($nu_dir | path join $plugin).exe'
         } else {
             $plugins ++= $'($nu_dir | path join $plugin)'
