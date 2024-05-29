@@ -116,7 +116,7 @@ Now that we are able to write tests by calling commands from `std assert`, it wo
 In this first case, we will assume that the code you are trying to test is part of a [Nupm] package.
 
 In that case, it is as easy as following the following steps
-- create a `tests/` directory next to the `nupm.nuon` package file of your pacakge
+- create a `tests/` directory next to the `nupm.nuon` package file of your package
 - make the `tests/` directory a valid module by adding a `mod.nu` file into it
 - write commands inside `tests/`
 - call `nupm test`
