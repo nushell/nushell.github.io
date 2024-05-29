@@ -265,7 +265,7 @@ As you can see, defining the submodule structure also shapes the command line AP
 
 ## Environment Variables
 
-Modules can also define an environment using [`export-env`](/commands/docs/export-env.md):
+Modules can define an environment using [`export-env`](/commands/docs/export-env.md):
 
 ```nu
 # greetings.nu
