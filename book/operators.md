@@ -213,7 +213,7 @@ operator. You can use the spread multiple records inside a single record literal
     ...$config,
     users: [alice bob],
     ...{ url: example.com },
-    ...(sys | get mem)
+    ...(sys mem)
   }
 ╭────────────┬───────────────╮
 │ path       │ /tmp          │

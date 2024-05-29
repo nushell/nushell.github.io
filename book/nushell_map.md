@@ -2,7 +2,7 @@
 
 The idea behind this table is to help you understand how Nu builtins and plugins relate to other known shells and domain specific languages. We've tried to produce a map of relevant Nu commands and what their equivalents are in other languages. Contributions are welcome.
 
-Note: this table assumes Nu 0.43 or later.
+Note: this table assumes Nu 0.94 or later.
 
 
 | Nushell                | SQL                           | .Net LINQ (C#)                                       | PowerShell (without external modules)      | Bash                                            |
@@ -59,7 +59,9 @@ Note: this table assumes Nu 0.43 or later.
 | str join               | concat_ws                     | Join                                                 | Join-String                                |                                                 |
 | str trim               | rtrim, ltrim                  | Trim, TrimStart, TrimEnd                             | Trim                                       |                                                 |
 | sum                    | sum                           | Sum                                                  | Measure-Object, measure                    |                                                 |
-| sys                    |                               |                                                      | Get-ComputerInfo                           | uname, lshw, lsblk, lscpu, lsusb, hdparam, free |
+| sys host               |                               |                                                      | Get-ComputerInfo                           | uname                                           |
+| sys disks              |                               |                                                      | Get-ComputerInfo                           | lsblk                                           |
+| sys mem                |                               |                                                      | Get-ComputerInfo                           | free                                            |
 | table                  |                               |                                                      | Format-Table, ft, Format-List, fl          |                                                 |
 | take                   | top, limit                    | Take                                                 | Select-Object -First                       | head                                            |
 | take until             |                               | TakeWhile                                            |                                            |                                                 |

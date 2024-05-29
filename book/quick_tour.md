@@ -28,40 +28,26 @@ What if we wanted to show the processes that were actively using the CPU? Just l
 
 @[code](@snippets/introduction/ps_where_example.sh)
 
-So far, we've been using [`ls`](/commands/docs/ls.md) and [`ps`](/commands/docs/ps.md) to list files and processes. Nu also offers other commands that can create tables of useful information. Next, let's explore [`date`](/commands/docs/date.md) and [`sys`](/commands/docs/sys.md).
+So far, we've been using [`ls`](/commands/docs/ls.md) and [`ps`](/commands/docs/ps.md) to list files and processes in the form of a simple table. But data in Nu is structured and can be arbitrarily nested. As an example, let's now explore the [`help commands`](/commands/docs/help_commands.md) command.
 
-Running [`date now`](/commands/docs/date_now.md) gives us information about the current day and time:
+Running [`help commands`](/commands/docs/help_commands.md) gives us information for all Nushell commands as a table. However, the output will be quite large, so let's get the row for the `each` command only.
 
-@[code](@snippets/introduction/date_example.sh)
+@[code](@snippets/introduction/help_commands_each_example.nu)
 
-To get the date as a table we can feed it into [`date to-table`](/commands/docs/date_to-table.md)
+This is a bit different than the tables we saw before. Retrieving a single row from a table gives us a [record](/book/types_of_data.html#records), which is set of key-value pairs. Note that the "params" and "input_output" columns happen to contain tables instead of a simple values. To view only one of those columns, we can use the [`get`](/commands/docs/get.md) command to retrieve it:
 
-@[code](@snippets/introduction/date_table_example.sh)
+@[code](@snippets/introduction/help_commands_get_example.nu)
 
-Running [`sys`](/commands/docs/sys.md) gives information about the system that Nu is running on:
+The [`get`](/commands/docs/get.md) command lets us jump into the contents of structured data (a table, record, or list). We can even pass it nested columns to access data at any depth.
 
-@[code](@snippets/introduction/sys_example.sh)
+@[code](@snippets/introduction/help_commands_get_nested_example.nu)
 
-This is a bit different than the tables we saw before. The [`sys`](/commands/docs/sys.md) command gives us a table that contains structured tables in the cells instead of simple values. To take a look at this data, we need to _get_ the column to view:
+These nested columns are called [cell paths](/book/types_of_data.html#cell-paths). Nu will take the cell path and go to the corresponding bit of data in a table, record, or list. Cell paths also support row numbers, so we could have rewritten the above pipeline as:
 
-@[code](@snippets/introduction/sys_get_example.sh)
-
-The [`get`](/commands/docs/get.md) command lets us jump into the contents of a column of the table. Here, we're looking into the "host" column, which contains information about the host that Nu is running on. The name of the OS, the hostname, the CPU, and more. Let's get the name of the users on the system:
-
-@[code](@snippets/introduction/sys_get_nested_example.sh)
-
-Right now, there's just one user on the system named "sophiajt". You'll notice that we can pass a column path (the `host.sessions.name` part) and not just the name of the column. Nu will take the column path and go to the corresponding bit of data in the table.
-
-You might have noticed something else that's different. Rather than having a table of data, we have just a single element: the string "sophiajt". Nu works with both tables of data as well as strings. Strings are an important part of working with commands outside of Nu.
-
-Let's see how strings work outside of Nu in action. We'll take our example from before and run the external [`echo`](/commands/docs/echo.md) command (the `^` tells Nu to not use the built-in [`echo`](/commands/docs/echo.md) command):
-
-@[code](@snippets/introduction/sys_get_external_echo_example.sh)
-
-If this looks very similar to what we had before, you have a keen eye! It is similar, but with one important difference: we've called `^echo` with the value we saw earlier. This allows us to pass data out of Nu into [`echo`](/commands/docs/echo.md) (or any command outside of Nu, like `git` for example).
+@[code](@snippets/introduction/help_commands_get_cell_path_example.nu)
 
 ### Getting Help
 
-Help text for any of Nu's built-in commands can be discovered with the [`help`](/commands/docs/help.md) command. To see all commands, run [`help commands`](/commands/docs/help_commands.md). You can also search for a topic by doing `help -f <topic>`.
+You can see the help text for any of Nu's built-in commands by using the [`help`](/commands/docs/help.md) command or by passing the `--help` flag to a command. You can also search for a topic by doing `help -f <topic>`.
 
 @[code](@snippets/introduction/help_example.sh)
