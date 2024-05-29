@@ -1,60 +1,5 @@
 # Testing your Nushell code
 
-To ensure that your code works as expected, you can use the [testing module](https://github.com/nushell/nushell/blob/main/crates/nu-std/testing.nu).
-
-## Quick start
-
-Download the [testing module](https://raw.githubusercontent.com/nushell/nushell/main/crates/nu-std/testing.nu) and save it as `testing.nu` in the folder with your project.
-
-Have a file, called `test_math.nu`:
-
-```nu
-use std assert
-
-#[test]
-def test_addition [] {
-    assert equal (1 + 2) 3
-}
-
-#[test]
-#[ignore]
-def test_skip [] {
-    # this won't be run
-}
-
-#[test]
-def test_failing [] {
-    assert false "This is just for testing"
-}
-```
-
-Run the tests:
-
-```nu
-❯ use testing.nu run-tests
-❯ run-tests
-INF|2023-04-12T10:42:29.099|Running tests in test_math
-Error:
-  × This is just for testing
-    ╭─[C:\wip\test_math.nu:13:1]
- 13 │ def test_failing [] {
- 14 │     assert false "This is just for testing"
-    ·            ──┬──
-    ·              ╰── It is not true.
- 15 │ }
-    ╰────
-
-
-WRN|2023-04-12T10:42:31.086|Test case test_skip is skipped
-Error:
-  × some tests did not pass (see complete errors above):
-  │
-  │       test_math test_addition
-  │     ⨯ test_math test_failing
-  │     s test_math test_skip
-  │
-```
-
 ## Assert commands
 
 The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error. For example:
@@ -136,31 +81,4 @@ Error:
    ·             ─┬
    ·              ╰── 13 is not an even number
    ╰────
-```
-
-## Test modules & test cases
-
-The naming convention for test modules is `test_<your_module>.nu` and `test_<test name>` for test cases.
-
-In order for a function to be recognized as a test by the test runner it needs to be annotated with `#[test]`.
-
-The following annotations are supported by the test runner:
-
-- test - test case to be executed during test run
-- test-skip - test case to be skipped during test run
-- before-all - function to run at the beginning of test run. Returns a global context record that is piped into every test function
-- before-each - function to run before every test case. Returns a per-test context record that is merged with global context and piped into test functions
-- after-each - function to run after every test case. Receives the context record just like the test cases
-- after-all - function to run after all test cases have been executed. Receives the global context record
-
-The standard library itself is tested with this framework, so you can find many examples in the [Nushell repository](https://github.com/nushell/nushell/blob/main/crates/nu-std/tests/).
-
-## Setting verbosity
-
-The `testing.nu` module uses the `log` commands from the standard library to display information, so you can set `NU_LOG_LEVEL` if you want more or less details:
-
-```nu
-❯ use testing.nu run-tests
-❯ NU_LOG_LEVEL=DEBUG run-tests
-❯ NU_LOG_LEVEL=WARNING run-tests
 ```
