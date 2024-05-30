@@ -2,15 +2,35 @@
 
 ## Data types
 
-convert string to integer: `"12" | into int`
+convert string to integer:
 
-convert present date to provided time zone: `date now | date to-timezone "Europe/London"`
+```nu
+"12" | into int
+```
 
-update a record's language and if none is specified insert provided value: `{'name': 'nu', 'stars': 5, 'language': 'Python'} | upsert language 'Rust'`
+convert present date to provided time zone:
 
-convert list of strings to yaml: `[one two three] | to yaml`
+```nu
+date now | date to-timezone "Europe/London"
+```
 
-print table data: `[[framework, language]; [Django, Python] [Laravel, PHP]]`
+update a record's language and if none is specified insert provided value:
+
+```nu
+{'name': 'nu', 'stars': 5, 'language': 'Python'} | upsert language 'Rust'
+```
+
+convert list of strings to yaml:
+
+```nu
+[one two three] | to yaml
+```
+
+print table data:
+
+```nu
+[[framework, language]; [Django, Python] [Laravel, PHP]]
+```
 
 select two named columns from the table and print their values:
 
@@ -233,9 +253,17 @@ slice items that satisfy provided condition:
 
 ## Tables
 
-sort table: `ls | sort-by size`
+sort table:
 
-sort table, get first rows: `ls | sort-by size | first 5`
+```nu
+ls | sort-by size
+```
+
+sort table, get first rows:
+
+```nu
+ls | sort-by size | first 5
+```
 
 concatenate two tables with same columns:
 
@@ -268,17 +296,41 @@ remove the last column of a table:
 
 ## Files & Filesystem
 
-open a text file with the default text editor: `start file.txt`
+open a text file with the default text editor:
 
-save a string to text file: `'lorem ipsum ' | save file.txt`
+```nu
+start file.txt
+```
 
-append a string to the end of a text file: `'dolor sit amet' | save --append file.txt`
+save a string to text file:
 
-save a record to file.json: `{ a: 1, b: 2 } | save file.json`
+```nu
+'lorem ipsum ' | save file.txt
+```
 
-recursively search for files by file name: `glob **/*.{rs,toml} --depth 2`
+append a string to the end of a text file:
 
-watch a file, run command whenever it changes: `watch . --glob=**/*.rs {|| cargo test }`
+```nu
+'dolor sit amet' | save --append file.txt
+```
+
+save a record to file.json:
+
+```nu
+{ a: 1, b: 2 } | save file.json
+```
+
+recursively search for files by file name:
+
+```nu
+glob **/*.{rs,toml} --depth 2
+```
+
+watch a file, run command whenever it changes:
+
+```nu
+watch . --glob=**/*.rs {|| cargo test }
+```
 
 ## Custom Commands
 
