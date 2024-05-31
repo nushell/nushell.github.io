@@ -150,14 +150,12 @@ o We
 
 ### Texte ausrichten (padding)
 
-Mit den Befehlen `[str lpad`](/commands/docs/str_lpad.md) und [`str rpad`](/commands/docs/str_rpad.md)
-können Texte der angegeben Ausrichtung nach erweitert werden.
-Dieses Padding erweitert den Text bis zur angegebenen Länge, zum Beispiel:
+Verwende [`fill`](/commands/docs/fill.md):
 
 ```nu
-> '1234' | str lpad -l 10 -c '0'
+> '1234' | fill -a right -c '0' -w 10
 0000001234
-> '1234' | str rpad -l 10 -c '0' | str length
+> '1234' | fill -a left -c '0' -w 10 | str length
 10
 ```
 
@@ -204,7 +202,6 @@ Es gibt verschiedenste Wege Texte in und von anderen Typen zu konvertieren.
 
 1. Mit [`into string`](/commands/docs/into_string.md). e.g. `123 | into string`
 2. Mit Text Interpolation. e.g. `$'(123)'`
-3. Mit [`build-string`](/commands/docs/build-string.md). e.g. `build-string (123)`
 
 ### Von einem Text
 

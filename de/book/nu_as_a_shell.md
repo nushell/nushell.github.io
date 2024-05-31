@@ -13,15 +13,15 @@ Ein starkes Merkmal jeder Shell sind ihre [Umgebungsvariablen](environment.md).
 In Nushell sind Umgebungsvariablen in Geltungsbereiche unterteilt und können jeden unterstützten Typ annehmen.
 Dies bringt einige zusätzliche Design Überlegungen mit sich, welche in den verlinken Kapiteln erklärt werden.
 
-Die anderen Kapitel erklären wie mit [stdout, stderr und exit codes](stdout_stderr_exit_codes.md) gearbeitet werden kann, oder wie ein [Befehl zu einem externer Befehl "escaped"](escaping.md) werden kann.
+Die anderen Kapitel erklären wie mit [stdout, stderr und exit codes](/book/stdout_stderr_exit_codes.md) gearbeitet werden kann, oder wie ein [Befehl zu einem externer Befehl "escaped"](escaping.md) werden kann.
 Sowie wie ein [Drittanbieter Prompt](3rdpartyprompts.md) zur Zusammenarbeit mit Nushell bewegt werden kann.
 
-Ein interessantes Merkmal von Nushell ist [Shell in Shells](shells_in_shells.md) welches erlaubt in mehreren Verzeichnissen gleichzeitig zu arbeiten.
+Ein interessantes Merkmal von Nushell ist [Shell in Shells](/book/shells_in_shells.md) welches erlaubt in mehreren Verzeichnissen gleichzeitig zu arbeiten.
 
-Nushell hat auch seinen eigenen Zeilen Editor [Reedline](line_editor.md).
+Nushell hat auch seinen eigenen Zeilen Editor [Reedline](/book/line_editor.md).
 In Nushells Konfiguration ist es möglich einige Merkmale von Reedline wie Prompt, Tastenkombinationen, History oder Menus einzustellen.
 
-Es ist auch möglich, eigene [Signaturen für externe Befehle](externs.md) zu definieren, was es erlaubt [eigene Vervollständigungen](custom_completions.md) für diese zu erstellen (welche auch für die eigenen Befehle funktionieren).
+Es ist auch möglich, eigene [Signaturen für externe Befehle](/book/externs.md) zu definieren, was es erlaubt [eigene Vervollständigungen](custom_completions.md) für diese zu erstellen (welche auch für die eigenen Befehle funktionieren).
 
 [Farben und Themen in Nu](coloring_and_theming.md)) geht ins Detail zum Thema, wie Nushells Aussehen konfiguriert werden kann.
 

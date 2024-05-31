@@ -29,7 +29,7 @@ _注意：要了解覆层，请确保先查看 [模块](modules.md)，因为覆�
 
 我们将在本章中使用这个模块。每当你看到 `overlay use spam`，就应该知道 `spam` 是指这个模块。
 
-要创建覆层，请调用 [`overlay use`](/commands/docs/overlay_add.md)。
+要创建覆层，请调用 [`overlay use`](/commands/docs/overlay_use.md)。
 
 ```nu
 > overlay use spam
@@ -55,7 +55,7 @@ baz
 
 ## 移除覆层
 
-如果你不再需要叠加定义，请调用 [`overlay hide`](/commands/docs/overlay_remove.md)：
+如果你不再需要叠加定义，请调用 [`overlay hide`](/commands/docs/overlay_hide.md)：
 
 ```nu
 (spam)> overlay hide spam
@@ -82,7 +82,7 @@ foo
 ───┴──────
 ```
 
-此外，[`overlay hide`](/commands/docs/overlay_remove.md) 在没有参数的情况下，将删除最后一个活动的覆层。
+此外，[`overlay hide`](/commands/docs/overlay_hide.md) 在没有参数的情况下，将删除最后一个活动的覆层。
 
 ## 覆层是可记录的
 

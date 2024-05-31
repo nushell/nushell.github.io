@@ -85,7 +85,7 @@ Nu はソースの形で、Rust で人気のパッケージレジストリ [crat
 
 これでおしまいです！`cargo`は Nu のソースコードとその依存関係をダウンロードしてビルドし、`cargo`のバイナリーパスにインストールすることで Nu を実行できるようにします。
 
-もし [dataframes](book/dataframes.md) サポートをともにインストールしたいなら、 `--features=dataframe` フラグを使ってインストールすることができます。
+もし [dataframes](/book/dataframes.md) サポートをともにインストールしたいなら、 `--features=dataframe` フラグを使ってインストールすることができます。
 
 @[code](@snippets/installation/cargo_install_nu_more_features.sh)
 

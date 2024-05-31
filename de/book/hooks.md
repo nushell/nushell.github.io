@@ -118,7 +118,7 @@ $env.config = ($env.config | upsert hooks {
 })
 ```
 
-Dies wird jedoch nicht funktionieren, weil die Umgebung nur innerhalb des Blocks [`if`](/Befehle/docs/if.md) aktiv ist.
+Dies wird jedoch nicht funktionieren, weil die Umgebung nur innerhalb des Blocks [`if`](/commands/docs/if.md) aktiv ist.
 In diesem Fall könnte es als `load-env` neu geschrieben werden (`load-env (if $after == ... { ... } else { {} })`),
 aber dieses Muster ist ziemlich häufig und später werden wir sehen, dass nicht alle Fälle so geschrieben werden können.
 

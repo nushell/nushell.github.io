@@ -138,7 +138,7 @@ Antonio | Vivaldi | Composer
 
 - `str`
 - [`lines`](/commands/docs/lines.md)
-- [`size`](/commands/docs/size.md)
+- ~~`size`~~
 
 如果我们已经知道待处理的数据具有 Nu 能够理解的格式，则可以使用一些辅助命令，例如，我们打开一个 Rust 的 Cargo.lock 文件：
 
@@ -173,6 +173,6 @@ license = "MIT"
 
 ## 获取 URLs
 
-除了从文件系统中加载文件，你还可以通过使用[`http get`](/commands/docs/fetch.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
+除了从文件系统中加载文件，你还可以通过使用[`http get`](/commands/docs/http_get.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
 
 @[code](@snippets/loading_data/rust-lang-feed.sh)

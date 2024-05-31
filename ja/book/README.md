@@ -19,12 +19,12 @@ Nuは様々な馴染みのある要素からヒントを得ています：伝統
 章のヘッダーをクリックすると、その章についての詳細情報が得られます。
 
 - [Getting Started](getting_started.md) では、Nushellのインストール方法と基本的な使い方を学びます。また、Nushellが典型的なシェル（例えばbash）と異なる設計原則についても説明します。
-- [Nu Fundamentals](nu_fundamentals.md) では、Nushell言語の基本概念について説明します。
-- [Programming in Nu](programming_in_nu.md) では、言語の機能をより深く掘り下げ、コードの組織化と構造化のさまざまな方法を紹介します。
-- [Nu as a Shell](nu_as_a_shell.md)はシェル機能に焦点を当て、特に設定と環境について詳しく説明します。
-- [Coming to Nu](coming_to_nu.md)は、他のシェルや言語から移行するユーザーに迅速なスタートを提供することを目的としています。
-- [Design Notes](design_notes.md)では、Nushellの設計上の選択について詳細な説明があります。
-- [(Not So) Advanced](advanced.md)には、少し高度なトピックが含まれています（それほど高度ではないので、ぜひチェックしてください！）。
+- [Nu Fundamentals](/book/nu_fundamentals.md) では、Nushell言語の基本概念について説明します。
+- [Programming in Nu](/book/programming_in_nu.md) では、言語の機能をより深く掘り下げ、コードの組織化と構造化のさまざまな方法を紹介します。
+- [Nu as a Shell](/book/nu_as_a_shell.md)はシェル機能に焦点を当て、特に設定と環境について詳しく説明します。
+- [Coming to Nu](/book/coming_to_nu.md)は、他のシェルや言語から移行するユーザーに迅速なスタートを提供することを目的としています。
+- [Design Notes](/book/design_notes.md)では、Nushellの設計上の選択について詳細な説明があります。
+- [(Not So) Advanced](/book/advanced.md)には、少し高度なトピックが含まれています（それほど高度ではないので、ぜひチェックしてください！）。
 
 ## Nushellの全て
 

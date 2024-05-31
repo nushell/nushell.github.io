@@ -390,7 +390,7 @@ In [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/prompt/oh-m
 ## `LS_COLORS` Farben für den `ls` Befehl
 
 Nushell wird die Umgebungsvariable `LS_COLORS` auf Linu, Mac und Windows respektieren.
-Diese Einstellung erlaubt es Farben anhand ihres Dateityps zu definieren, wenn ein [`ls`](commands/ls.md) ausgeführt wird.
+Diese Einstellung erlaubt es Farben anhand ihres Dateityps zu definieren, wenn ein [`ls`](/commands/docs/ls.md) ausgeführt wird.
 Zum Beispiel können Verzeichnisse in einer Farbe, _.md Markdown Dateien in einer anderen Farbe, _.toml Dateien in einer dritten Farbe usw. dargestellt werden.
 
 Es gibt verschiedenste Wege um Dateitypen ein zu färben.
