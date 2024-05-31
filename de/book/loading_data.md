@@ -160,7 +160,7 @@ Weitere Befehle, mit denen Texte aus Strings bearbeitet werden können sind:
 
 - `str`
 - [`lines`](/commands/docs/lines.md)
-- [`size`](/commands/docs/size.md)
+- ~~`size`~~
 
 Es gibt ausserdem einige Hilfsbefehle, die verwendet werden können um mit Daten umzugehen,
 die Nu eigentlich verstehen sollte. Zum Beispiel wenn eine Rust lock Datei geöffnet wird:
@@ -199,7 +199,7 @@ license = "MIT"
 
 ## URLs abrufen
 
-Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`http get`](/commands/docs/fetch.md)
+Zusätzlich zum Laden von Dateien vom Dateisystem, können auch URLs mit dem [`http get`](/commands/docs/http_get.md)
 Befehl geladen werden. Dies wird den Inhalt der URL aus dem Netz abrufen und zurückgeben:
 
 @[code](@snippets/loading_data/rust-lang-feed.sh)

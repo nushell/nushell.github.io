@@ -120,12 +120,12 @@ o Wo
 
 ### 字符串填充
 
-使用 [`str lpad`](/commands/docs/str_lpad.md) 和 [`str rpad`](/commands/docs/str_rpad.md) 命令，你可以给字符串添加填充。填充会给字符串添加字符，直到它达到一定的长度。比如：
+[`fill`](/commands/docs/fill.md)：
 
 ```nu
-> '1234' | str lpad -l 10 -c '0'
+> '1234' | fill -a right -c '0' -w 10
 0000001234
-> '1234' | str rpad -l 10 -c '0' | str length
+> '1234' | fill -a left -c '0' -w 10 | str length
 10
 ```
 
@@ -171,7 +171,6 @@ llehsuN
 
 1. 使用 [`into string`](/commands/docs/into_string.md)。例如：`123 | into string`
 2. 通过字符串插值。例如：`$'(123)'`
-3. 使用 [`build-string`](/commands/docs/build-string.md)。例如：`build-string (123)`
 
 ### 字符串转换为其他类型
 

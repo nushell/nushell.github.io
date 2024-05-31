@@ -1,10 +1,16 @@
 # Environment
 
+::: warning
+
+Diese Dokumentation ist veraltet. Neuerungen wurde noch nicht nach Deutsch übersetzt. Die [Englische Dokumentation (EN)](/book/environment.md) ist aktuell.
+
+:::
+
 Eine häufige Aufgabe in einer Shell ist die Kontrolle der Umgebung, in der die externen Programme laufen. Dies wird meist automatisch geschehen,
 da die Umgebung dem externen programm mitgegeben wird, wenn es gestartet wird. Manchmal jedoch will man eine genauere Kontrolle darüber,
 welche Umgebungsvariablen ein Programm sehen kann.
 
-Die aktuellen Umbegungsvariablen werden mit dem [`env`](/commands/docs/env.md) Befehl ausgegeben:
+Die aktuellen Umbegungsvariablen werden mit dem `env` Befehl ausgegeben:
 
 ```
    #           name                 type                value                 raw
@@ -62,7 +68,7 @@ Siehe [Definiere Umgebung aus eigenen Befehlen](environment.md#defining-environm
 
 ### Exports von Modulen
 
-Siehe [Module](modules.md) für Details.
+Siehe [Module (EN)](/book/modules.md) für Details.
 
 ## Gültigkeitsbereiche
 
@@ -120,7 +126,7 @@ $env.FOO = 'BAR'
 
 Aufgrund der Gültigkeitsregeln ist eine Umgebungsvariable, welche innerhalb eines selbstdefinierten Befehls gesetzt ist, auch nur in dessen Block gültig.
 Wird sie jedoch mit [`def --env`](/commands/docs/def.md) anstatt [`def`](/commands/docs/def.md) gesetzt, so wird sie beim verlassen des Blocks erhalten bleiben.
-(Gilt auch für `export def`, siehe [Modules](modules.md))
+(Gilt auch für `export def`, siehe [Modules (EN)](/book/modules.md))
 
 ```
 > def --env foo [] {
@@ -188,7 +194,7 @@ So können wir überprüfen, ob die Konvertierung erfolgreich war.
 
 Dieser Schritt kann auch manuell ausgelöst werden mit `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
-Zurückschauend auf den [`env`](/commands/docs/env.md) Befehl, die `raw` Spalte zeigt die Werte, die mit `ENV_CONVERSIONS.<name>.to_string` übersetzt wurden.
+Zurückschauend auf den `env` Befehl, die `raw` Spalte zeigt die Werte, die mit `ENV_CONVERSIONS.<name>.to_string` übersetzt wurden.
 Die `value` Spalte zeigt die Werte, die Nushell benutzt (Das Resultat von `ENV_CONVERSIONS.<name>.from_string` wie bei `FOO`)
 Wenn der Wert kein String ist und keine `to_string` Konvertierung angewendet wird, wird er nicht an einen externen Befehl weitergeleitet (siehe die `raw` Spalte von `PROMPT_COMMAND`)
 Eine Ausnahme ist die `PATH` Variable (`Path` in Windows): Standardmässig wird diese von einem String in eine Liste konvertiert beim Start
@@ -219,4 +225,4 @@ Dieses Verstecken im Gültigkeitsbereich erlaubt es gleichzeitig temporär eine 
 BAR
 ```
 
-Mehr Informationen über Verstecken findet sich im Kapitel [Modules](modules.md)
+Mehr Informationen über Verstecken findet sich im Kapitel [Modules](/book/modules.md)

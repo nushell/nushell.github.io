@@ -2,7 +2,7 @@
 
 Shell 中的一个常见任务是控制外部应用程序将使用的环境变量。这通常是自动完成的，因为环境被打包，并在外部应用程序启动时提供给它。但有时，我们希望更精确地控制一个应用程序看到的环境变量。
 
-你可以使用[`env`](/commands/docs/env.md)命令查看当前环境变量：
+你可以使用`env`命令查看当前环境变量：
 
 ```
    #           name                 type                value                 raw
@@ -190,7 +190,7 @@ a-b-c
 用`nu -c`运行命令不会加载配置文件，因此`FOO`的环境转换没有了，它被显示为一个普通的字符串 —— 这样我们可以验证转换是否成功。
 你也可以通过`do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`手动运行这个步骤。
 
-如果我们回头看一下[`env`](/commands/docs/env.md)命令，`raw`列显示由`ENV_CONVERSIONS.<name>.to_string`翻译的值，`value`列显示 Nushell 中使用的值（在`FOO`的情况下是`ENV_CONVERSIONS.<name>.from_string`的结果）。
+如果我们回头看一下`env`命令，`raw`列显示由`ENV_CONVERSIONS.<name>.to_string`翻译的值，`value`列显示 Nushell 中使用的值（在`FOO`的情况下是`ENV_CONVERSIONS.<name>.from_string`的结果）。
 如果这个值不是字符串，并且没有`to_string`的转换，它就不会被传递给外部（见`PROMPT_COMMAND`的`raw`列）。
 一个例外是`PATH`（Windows 上的`Path`）。默认情况下，它在启动时将字符串转换为列表，在运行外部程序时，如果没有指定手动转换，则从列表转换为字符串。
 

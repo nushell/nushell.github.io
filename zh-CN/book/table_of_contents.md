@@ -2,14 +2,14 @@
 
 - [安装](installation.md) - 安装 Nushell
 - [介绍](README.md) - 开始使用
-- [Nushell 开发思想](thinking_in_nushell.md) - Nushell 开发思想
+- [Nushell 开发思想 (EN)](/book/thinking_in_nu.md) - Nushell 开发思想
 - [四处移动](moving_around.md) - 在 Nushell 里四处移动
 - [数据类型](types_of_data.md) - Nushell 中的数据类型
 - [加载数据](loading_data.md) - 加载及使用数据
 - [字符串](working_with_strings.md) - 字符串、转义字符和字符串插值
 - [使用列表](working_with_lists.md) - 使用 Nushell 的列表
 - [使用表格](working_with_tables.md) - 使用 Nushell 的表格
-- [管道](pipeline.md) - 管道是如何运作的
+- [管道 (EN)](/book/pipelines.md) - 管道是如何运作的
 - [配置](configuration.md) - 如何配置 Nushell
 - [第三方命令行提示](3rdpartyprompts.md) - 如何配置第三方命令行提示
 - [自定义命令](custom_commands.md) - 创建你自己的命令

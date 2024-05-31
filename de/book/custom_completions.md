@@ -3,7 +3,7 @@
 Eigene Vervollständigungen kombinieren zwei Merkmale von Nushell:
 Eigene Befehle und Vervollständigungen. Mit ihnen können Befehle erzeugt werden,
 die Vervollständigungen für Positions- sowie Markierungs-Argumente enthalten.
-Die eigenen Vervollständigungen funktionieren für eigene Befehle und [bekannt gemachte externe Befehle (via `extern`)](externs.md).
+Die eigenen Vervollständigungen funktionieren für eigene Befehle und [bekannt gemachte externe Befehle (via `extern`) (EN)](/book/externs.md).
 
 Eigene Vervollständigungen bestehen aus zwei Teilen:
 Dem Befehl, der die Vervollständigung bereitstellt, und die Verknüpfung mit dem Argument des Befehls, der die Vervollständigung bekommt, mit Hilfe von `@`.
@@ -95,7 +95,7 @@ Auf der zweiten Zeile wird, sobald die `<tab>` Taste gedrückt wurde, das Argume
 
 ## Eigene Vervollständigungen und [`extern`](/commands/docs/extern.md)
 
-Sehr mächtig ist die Kombination von eigenen Vervollständigungen mit [externen Befehlen](externs.md). Diese funktionieren gleich wie die Vervollständigungen zu eigenen Befehlen:
+Sehr mächtig ist die Kombination von eigenen Vervollständigungen mit [externen Befehlen (EN)](/book/externs.md). Diese funktionieren gleich wie die Vervollständigungen zu eigenen Befehlen:
 Erstellen der Vervollständigung und anbinden an ein Positions- oder Markierungs-Argument des `extern` mit dem `@` Zeichen.
 
 In der Default Konfiguration finden sich ebenfalls Vervollständigungen:
@@ -174,4 +174,4 @@ let carapace_completer = {|spans|
 }
 ```
 
-[Mehr Beispiele für eigene Vervollständigungen können im Kochbuch gefunden werden](../cookbook/external_completers.md).
+[Mehr Beispiele für eigene Vervollständigungen können im Kochbuch gefunden werden (EN)](/cookbook/external_completers.md).
