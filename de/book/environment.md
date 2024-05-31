@@ -68,7 +68,7 @@ Siehe [Definiere Umgebung aus eigenen Befehlen](environment.md#defining-environm
 
 ### Exports von Modulen
 
-Siehe [Module](/book/modules.md) für Details.
+Siehe [Module (EN)](/book/modules.md) für Details.
 
 ## Gültigkeitsbereiche
 
@@ -126,7 +126,7 @@ $env.FOO = 'BAR'
 
 Aufgrund der Gültigkeitsregeln ist eine Umgebungsvariable, welche innerhalb eines selbstdefinierten Befehls gesetzt ist, auch nur in dessen Block gültig.
 Wird sie jedoch mit [`def --env`](/commands/docs/def.md) anstatt [`def`](/commands/docs/def.md) gesetzt, so wird sie beim verlassen des Blocks erhalten bleiben.
-(Gilt auch für `export def`, siehe [Modules](/book/modules.md))
+(Gilt auch für `export def`, siehe [Modules (EN)](/book/modules.md))
 
 ```
 > def --env foo [] {

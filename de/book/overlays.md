@@ -5,7 +5,7 @@
 welche aktiviert und deaktiviert werden können.
 Sie gleichen den virtuellen Umgebungen wie man sie von Sprachen wie Python kennt.
 
-_Note: Zum Verständnis von Überlagerungen emphielt es sich [Modules](/book/modules.md) zuerst zu lesen, da es auf ihnen aufbaut._
+_Note: Zum Verständnis von Überlagerungen emphielt es sich [Modules (EN)](/book/modules.md) zuerst zu lesen, da es auf ihnen aufbaut._
 
 ## Basis
 
@@ -53,7 +53,7 @@ baz
 ```
 
 Dies hat die Definition des Moduls in den aktuellen Gültigkeitsbereich gebracht und den [`export-env`](/commands/docs/export-env.md) Block ausgewertet.
-Genau so wie dies auch der [`use`](/commands/docs/use.md) Befehl tut. (see [Modules](/book/modules.md#environment-variables) chapter)
+Genau so wie dies auch der [`use`](/commands/docs/use.md) Befehl tut. (see [Modules (EN)](/book/modules.md#environment-variables) chapter)
 
 ::: tip
 Im folgenden Abschnitt wird der `>` prompt mit dem Namen des zuletzt aktivierten Überlagerung vorangestellt.

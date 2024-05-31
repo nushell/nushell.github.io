@@ -11,7 +11,7 @@ Dies ist alles erklärt in [Datentypen](types_of_data.md).
 
 [Laden von Daten](loading_data.md) erklärt, wie gebräuchliche Datenformate in _strukturierte Daten_ gelesen werden, wie JSON. Dies beinhaltet auch das eigene Datenformat "NUON".
 
-Wie bei Unix Shells, können in Nushell Befehle in [Pipelines](/book/pipelines.md) zusammengeführt werden, um Daten in einem Strom zu modifizieren.
+Wie bei Unix Shells, können in Nushell Befehle in [Pipelines (EN)](/book/pipelines.md) zusammengeführt werden, um Daten in einem Strom zu modifizieren.
 
 Einige Datentypen haben interessante Eigenschaften, die ein eigenes Kapitel verdienen: [Text](working_with_strings.md), [Listen](working_with_lists.md), and [Tabellen](working_with_tables.md).
 Diese Kapitel zeigen ausserdem auch gängige Operationen wie Texte zusammensetzen oder ändern von Einträgen in einer Liste .
