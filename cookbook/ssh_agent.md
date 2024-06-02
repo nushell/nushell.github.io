@@ -21,6 +21,12 @@ Adding this to your `env.nu` will however start a new ssh-agent process every ti
 See the workarounds.
 :::
 
+Alternatively, use the third-party Nu plugin [bash-env](https://github.com/tesujimath/nu_plugin_bash_env) as follows.
+
+```nushell
+^ssh-agent | bash-env | load-env
+```
+
 ## Workarounds
 
 You can work around this behavior by checking if a ssh-agent is already running on your user, and start one if none is:
