@@ -16,7 +16,7 @@ def 'has-ref' [
 # Update issue contents for https://github.com/nushell/nushell.github.io/issues/261
 def update-i18n-status [] {
 
-    print "The following table holds the overview of the Nushell docs’ writing and translation status. Welcome to participate in the translation of the docs. And please update the `i18n-meta.json` file after you have finished writing or translating the doc. Thanks"
+    print "The following table holds the overview of the Nushell docs’ writing and translation status. We welcome translations and translation updates. When making changes please keep the `i18n-meta.json` file up-to-date."
     print $'(char nl)---(char nl)'
 
     let status = (
@@ -35,7 +35,7 @@ def update-i18n-status [] {
     )
     print $status
 
-    print $'(char nl)Possible status values: `-`,`Completed`,`In Progress`,`Being translated by @ABC`, `commit_id@author` or simply a COMMIT ID indicate your translation end to.(char nl)'
+    print $'(char nl)Possible status values: `-`,`Completed`,`In Progress`,`translated by @ABC`,`commit_id@author`,`commit_id`.(char nl)'
 }
 
 def get-cell [
