@@ -74,6 +74,7 @@ and can therefore cope with arbitrarily complex Bash sources.
 Please note that the `bash-env` plugin is not supported by the core Nushell team.
 All issues and requests for support should be directed to its own
 [issue tracker](https://github.com/tesujimath/nu_plugin_bash_env/issues).
+:::
 
 ## Capturing the environment from a foreign shell script
 
