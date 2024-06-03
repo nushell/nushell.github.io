@@ -27,9 +27,10 @@ Alternatively, use the third-party Nu plugin [bash-env](https://github.com/tesuj
 ^ssh-agent | bash-env | load-env
 ```
 
-**Please note that the `bash-env` plugin is not supported by the core Nushell team.
+::: warning
+Please note that the `bash-env` plugin is not supported by the core Nushell team.
 All issues and requests for support should be directed to its own
-[issue tracker](https://github.com/tesujimath/nu_plugin_bash_env/issues).**
+[issue tracker](https://github.com/tesujimath/nu_plugin_bash_env/issues).
 
 ## Workarounds
 
