@@ -1113,11 +1113,7 @@ The next list shows the available dataframe commands with their descriptions, an
 whenever possible, their analogous Nushell command.
 
 ::: warning
-This list may be outdated. To get the up-to-date command list, see
-[Dataframe](/commands/categories/dataframe.md)
-[Lazyframe](/commands/categories/lazyframe.md) and
-[Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md)
-command categories.
+This list may be outdated. To get the up-to-date command list, see [Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.html) command categories.
 :::
 
 | Command Name           | Applies To            | Description                                                                                      | Nushell Equivalent      |
