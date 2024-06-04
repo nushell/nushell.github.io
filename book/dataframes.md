@@ -1120,56 +1120,56 @@ This list may be outdated. To get the up-to-date command list, see
 command categories.
 :::
 
-| Command Name    | Applies To                  | Description                                                                | Nushell Equivalent            |
-| --------------- | --------------------------- | -------------------------------------------------------------------------- | ----------------------------- |
-| aggregate       | DataFrame, GroupBy, Series  | Performs an aggregation operation on a dataframe, groupby or series object | math                          |
-| all-false       | Series                      | Returns true if all values are false                                       |                               |
-| all-true        | Series                      | Returns true if all values are true                                        | all                           |
-| arg-max         | Series                      | Return index for max value in series                                       |                               |
-| arg-min         | Series                      | Return index for min value in series                                       |                               |
-| arg-sort        | Series                      | Returns indexes for a sorted series                                        |                               |
-| arg-true        | Series                      | Returns indexes where values are true                                      |                               |
-| arg-unique      | Series                      | Returns indexes for unique values                                          |                               |
-| count-null      | Series                      | Counts null values                                                         |                               |
-| count-unique    | Series                      | Counts unique value                                                        |                               |
-| drop            | DataFrame                   | Creates a new dataframe by dropping the selected columns                   | drop                          |
-| drop-duplicates | DataFrame                   | Drops duplicate values in dataframe                                        |                               |
-| drop-nulls      | DataFrame, Series           | Drops null values in dataframe                                             |                               |
-| dtypes          | DataFrame                   | Show dataframe data types                                                  |                               |
-| filter-with     | DataFrame                   | Filters dataframe using a mask as reference                                |                               |
-| first           | DataFrame                   | Creates new dataframe with first rows                                      | first                         |
-| get             | DataFrame                   | Creates dataframe with the selected columns                                | get                           |
-| group-by        | DataFrame                   | Creates a groupby object that can be used for other aggregations           | group-by                      |
-| is-duplicated   | Series                      | Creates mask indicating duplicated values                                  |                               |
-| is-in           | Series                      | Checks if elements from a series are contained in right series             | in                            |
-| is-not-null     | Series                      | Creates mask where value is not null                                       |                               |
-| is-null         | Series                      | Creates mask where value is null                                           | `<column_name> == null`       |
-| is-unique       | Series                      | Creates mask indicating unique values                                      |                               |
-| join            | DataFrame                   | Joins a dataframe using columns as reference                               |                               |
-| last            | DataFrame                   | Creates new dataframe with last rows                                       | last                          |
-| ls-df           |                             | Lists stored dataframes                                                    |                               |
-| melt            | DataFrame                   | Unpivot a DataFrame from wide to long format                               |                               |
-| not             | Series Inverts boolean mask |                                                                            |
-| open            |                             | Loads dataframe form csv file                                              | open                          |
-| pivot           | GroupBy                     | Performs a pivot operation on a groupby object                             | pivot                         |
-| rename          | Dataframe, Series           | Renames a series                                                           | rename                        |
-| sample          | DataFrame                   | Create sample dataframe                                                    |                               |
-| select          | DataFrame                   | Creates a new dataframe with the selected columns                          | select                        |
-| set             | Series                      | Sets value where given mask is true                                        |                               |
-| set-with-idx    | Series                      | Sets value in the given index                                              |                               |
-| shift           | Series                      | Shifts the values by a given period                                        |                               |
-| show            | DataFrame                   | Converts a section of the dataframe to a Table or List value               |                               |
-| slice           | DataFrame                   | Creates new dataframe from a slice of rows                                 |                               |
-| sort-by         | DataFrame, Series           | Creates new sorted dataframe or series                                     | sort                          |
-| take            | DataFrame, Series           | Creates new dataframe using the given indices                              |                               |
-| to csv          | DataFrame                   | Saves dataframe to csv file                                                | to csv                        |
-| into df         |                             | Converts a pipelined Table or List into Dataframe                          |                               |
-| dummies         | DataFrame                   | Creates a new dataframe with dummy variables                               |                               |
-| to parquet      | DataFrame                   | Saves dataframe to parquet file                                            |                               |
-| unique          | Series                      | Returns unique values from a series                                        | uniq                          |
-| value-counts    | Series                      | Returns a dataframe with the counts for unique values in series            |                               |
-| where           | DataFrame                   | Filter dataframe to match the condition                                    | where                         |
-| with-column     | DataFrame                   | Adds a series to the dataframe                                             | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
+| Command Name           | Applies To                  | Description                                                                | Nushell Equivalent            |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------- | ----------------------------- |
+| polars aggregate       | DataFrame, GroupBy, Series  | Performs an aggregation operation on a dataframe, groupby or series object | math                          |
+| polars all-false       | Series                      | Returns true if all values are false                                       |                               |
+| polars all-true        | Series                      | Returns true if all values are true                                        | all                           |
+| polars arg-max         | Series                      | Return index for max value in series                                       |                               |
+| polars arg-min         | Series                      | Return index for min value in series                                       |                               |
+| polars arg-sort        | Series                      | Returns indexes for a sorted series                                        |                               |
+| polars arg-true        | Series                      | Returns indexes where values are true                                      |                               |
+| polars arg-unique      | Series                      | Returns indexes for unique values                                          |                               |
+| polars count-null      | Series                      | Counts null values                                                         |                               |
+| polars count-unique    | Series                      | Counts unique value                                                        |                               |
+| polars drop            | DataFrame                   | Creates a new dataframe by dropping the selected columns                   | drop                          |
+| polars drop-duplicates | DataFrame                   | Drops duplicate values in dataframe                                        |                               |
+| polars drop-nulls      | DataFrame, Series           | Drops null values in dataframe                                             |                               |
+| polars dtypes          | DataFrame                   | Show dataframe data types                                                  |                               |
+| polars filter-with     | DataFrame                   | Filters dataframe using a mask as reference                                |                               |
+| polars first           | DataFrame                   | Creates new dataframe with first rows                                      | first                         |
+| polars get             | DataFrame                   | Creates dataframe with the selected columns                                | get                           |
+| polars group-by        | DataFrame                   | Creates a groupby object that can be used for other aggregations           | group-by                      |
+| polars is-duplicated   | Series                      | Creates mask indicating duplicated values                                  |                               |
+| polars is-in           | Series                      | Checks if elements from a series are contained in right series             | in                            |
+| polars is-not-null     | Series                      | Creates mask where value is not null                                       |                               |
+| polars is-null         | Series                      | Creates mask where value is null                                           | `<column_name> == null`       |
+| polars is-unique       | Series                      | Creates mask indicating unique values                                      |                               |
+| polars join            | DataFrame                   | Joins a dataframe using columns as reference                               |                               |
+| polars last            | DataFrame                   | Creates new dataframe with last rows                                       | last                          |
+| polars ls-df           |                             | Lists stored dataframes                                                    |                               |
+| polars melt            | DataFrame                   | Unpivot a DataFrame from wide to long format                               |                               |
+| polars not             | Series Inverts boolean mask |                                                                            |
+| polars open            |                             | Loads dataframe form csv file                                              | open                          |
+| polars pivot           | GroupBy                     | Performs a pivot operation on a groupby object                             | pivot                         |
+| polars rename          | Dataframe, Series           | Renames a series                                                           | rename                        |
+| polars sample          | DataFrame                   | Create sample dataframe                                                    |                               |
+| polars select          | DataFrame                   | Creates a new dataframe with the selected columns                          | select                        |
+| polars set             | Series                      | Sets value where given mask is true                                        |                               |
+| polars set-with-idx    | Series                      | Sets value in the given index                                              |                               |
+| polars shift           | Series                      | Shifts the values by a given period                                        |                               |
+| polars show            | DataFrame                   | Converts a section of the dataframe to a Table or List value               |                               |
+| polars slice           | DataFrame                   | Creates new dataframe from a slice of rows                                 |                               |
+| polars sort-by         | DataFrame, Series           | Creates new sorted dataframe or series                                     | sort                          |
+| polars take            | DataFrame, Series           | Creates new dataframe using the given indices                              |                               |
+| polars to csv          | DataFrame                   | Saves dataframe to csv file                                                | to csv                        |
+| polars into df         |                             | Converts a pipelined Table or List into Dataframe                          |                               |
+| polars dummies         | DataFrame                   | Creates a new dataframe with dummy variables                               |                               |
+| polars to parquet      | DataFrame                   | Saves dataframe to parquet file                                            |                               |
+| polars unique          | Series                      | Returns unique values from a series                                        | uniq                          |
+| polars value-counts    | Series                      | Returns a dataframe with the counts for unique values in series            |                               |
+| polars where           | DataFrame                   | Filter dataframe to match the condition                                    | where                         |
+| polars with-column     | DataFrame                   | Adds a series to the dataframe                                             | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
 
 ## Future of Dataframes
 
