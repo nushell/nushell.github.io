@@ -1122,7 +1122,6 @@ command categories.
 
 | Command Name           | Applies To            | Description                                                                                      | Nushell Equivalent      |
 | ---------------------- | --------------------- | ------------------------------------------------------------------------------------------------ | ----------------------- |
-| polars                 | nothing               | Operate with data in a dataframe format.                                                         |                         |
 | polars agg             | dataframe             | Performs a series of aggregations from a group-by.                                               | math                    |
 | polars agg-groups      | expression            | Creates an agg_groups expression.                                                                |                         |
 | polars all-false       | dataframe             | Returns true if all values are false.                                                            |                         |
