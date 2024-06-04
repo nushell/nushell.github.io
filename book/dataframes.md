@@ -1122,7 +1122,7 @@ command categories.
 
 | Command Name           | Applies To                  | Description                                                                | Nushell Equivalent            |
 | ---------------------- | --------------------------- | -------------------------------------------------------------------------- | ----------------------------- |
-| polars aggregate       | DataFrame, GroupBy, Series  | Performs an aggregation operation on a dataframe, groupby or series object | math                          |
+| polars agg             | DataFrame, GroupBy, Series  | Performs an aggregation operation on a dataframe, groupby or series object | math                          |
 | polars all-false       | Series                      | Returns true if all values are false                                       |                               |
 | polars all-true        | Series                      | Returns true if all values are true                                        | all                           |
 | polars arg-max         | Series                      | Return index for max value in series                                       |                               |
@@ -1131,11 +1131,10 @@ command categories.
 | polars arg-true        | Series                      | Returns indexes where values are true                                      |                               |
 | polars arg-unique      | Series                      | Returns indexes for unique values                                          |                               |
 | polars count-null      | Series                      | Counts null values                                                         |                               |
-| polars count-unique    | Series                      | Counts unique value                                                        |                               |
+| polars n-unique        | Series                      | Counts unique value                                                        |                               |
 | polars drop            | DataFrame                   | Creates a new dataframe by dropping the selected columns                   | drop                          |
 | polars drop-duplicates | DataFrame                   | Drops duplicate values in dataframe                                        |                               |
 | polars drop-nulls      | DataFrame, Series           | Drops null values in dataframe                                             |                               |
-| polars dtypes          | DataFrame                   | Show dataframe data types                                                  |                               |
 | polars filter-with     | DataFrame                   | Filters dataframe using a mask as reference                                |                               |
 | polars first           | DataFrame                   | Creates new dataframe with first rows                                      | first                         |
 | polars get             | DataFrame                   | Creates dataframe with the selected columns                                | get                           |
@@ -1147,18 +1146,18 @@ command categories.
 | polars is-unique       | Series                      | Creates mask indicating unique values                                      |                               |
 | polars join            | DataFrame                   | Joins a dataframe using columns as reference                               |                               |
 | polars last            | DataFrame                   | Creates new dataframe with last rows                                       | last                          |
-| polars ls-df           |                             | Lists stored dataframes                                                    |                               |
+| polars store-ls        |                             | Lists stored dataframes                                                    |                               |
 | polars melt            | DataFrame                   | Unpivot a DataFrame from wide to long format                               |                               |
 | polars not             | Series Inverts boolean mask |                                                                            |
 | polars open            |                             | Loads dataframe form csv file                                              | open                          |
 | polars pivot           | GroupBy                     | Performs a pivot operation on a groupby object                             | pivot                         |
 | polars rename          | Dataframe, Series           | Renames a series                                                           | rename                        |
 | polars sample          | DataFrame                   | Create sample dataframe                                                    |                               |
+| polars schema          | DataFrame                   | Show dataframe data types                                                  |                               |
 | polars select          | DataFrame                   | Creates a new dataframe with the selected columns                          | select                        |
 | polars set             | Series                      | Sets value where given mask is true                                        |                               |
 | polars set-with-idx    | Series                      | Sets value in the given index                                              |                               |
 | polars shift           | Series                      | Shifts the values by a given period                                        |                               |
-| polars show            | DataFrame                   | Converts a section of the dataframe to a Table or List value               |                               |
 | polars slice           | DataFrame                   | Creates new dataframe from a slice of rows                                 |                               |
 | polars sort-by         | DataFrame, Series           | Creates new sorted dataframe or series                                     | sort                          |
 | polars take            | DataFrame, Series           | Creates new dataframe using the given indices                              |                               |
@@ -1168,7 +1167,6 @@ command categories.
 | polars to parquet      | DataFrame                   | Saves dataframe to parquet file                                            |                               |
 | polars unique          | Series                      | Returns unique values from a series                                        | uniq                          |
 | polars value-counts    | Series                      | Returns a dataframe with the counts for unique values in series            |                               |
-| polars where           | DataFrame                   | Filter dataframe to match the condition                                    | where                         |
 | polars with-column     | DataFrame                   | Adds a series to the dataframe                                             | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
 
 ## Future of Dataframes
