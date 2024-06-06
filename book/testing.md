@@ -1,86 +1,44 @@
 # Testing your Nushell code
 
-To ensure that your code works as expected, you can use the [testing module](https://github.com/nushell/nushell/blob/main/crates/nu-std/testing.nu).
-
-## Quick start
-
-Download the [testing module](https://raw.githubusercontent.com/nushell/nushell/main/crates/nu-std/testing.nu) and save it as `testing.nu` in the folder with your project.
-
-Have a file, called `test_math.nu`:
-
-```nu
-use std assert
-
-#[test]
-def test_addition [] {
-    assert equal (1 + 2) 3
-}
-
-#[test]
-#[ignore]
-def test_skip [] {
-    # this won't be run
-}
-
-#[test]
-def test_failing [] {
-    assert false "This is just for testing"
-}
-```
-
-Run the tests:
-
-```nu
-❯ use testing.nu run-tests
-❯ run-tests
-INF|2023-04-12T10:42:29.099|Running tests in test_math
-Error:
-  × This is just for testing
-    ╭─[C:\wip\test_math.nu:13:1]
- 13 │ def test_failing [] {
- 14 │     assert false "This is just for testing"
-    ·            ──┬──
-    ·              ╰── It is not true.
- 15 │ }
-    ╰────
-
-
-WRN|2023-04-12T10:42:31.086|Test case test_skip is skipped
-Error:
-  × some tests did not pass (see complete errors above):
-  │
-  │       test_math test_addition
-  │     ⨯ test_math test_failing
-  │     s test_math test_skip
-  │
-```
-
 ## Assert commands
 
-The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error. For example:
+Nushell provides a set of "assertion" commands in the standard library.
+One could use built-in equality / order tests such as `==` or `<=` or more complex commands and throw errors manually when an expected condition fails, but using what the standard library has to offer is arguably easier!
+
+In the following, it will be assumed that the `std assert` module has been imported inside the current scope
+```nushell
+use std assert
+```
+
+The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error.
 
 ```nu
-❯ use std assert
-❯ std assert (1 == 2)
+assert (1 == 2)
+```
+```
 Error:
   × Assertion failed.
    ╭─[entry #13:1:1]
- 1 │ std assert (1 == 2)
-   ·             ───┬──
-   ·                ╰── It is not true.
+ 1 │ assert (1 == 2)
+   ·         ───┬──
+   ·            ╰── It is not true.
    ╰────
 ```
 
 Optionally, a message can be set to show the intention of the assert command, what went wrong or what was expected:
 
 ```nu
-❯ std assert ($a == 19) $"The lockout code is wrong, received: ($a)"
+let a = 0
+assert ($a == 19) $"The lockout code is wrong, received: ($a)"
+```
+```
 Error:
   × The lockout code is wrong, received: 13
    ╭─[entry #25:1:1]
- 1 │ std assert ($a == 19) $"The lockout code is wrong, received: ($a)"
-   ·             ────┬───
-   ·                 ╰── It is not true.
+ 1 │ let a = 0
+ 2 │ assert ($a == 19) $"The lockout code is wrong, received: ($a)"
+   ·         ────┬───
+   ·             ╰── It is not true.
    ╰────
 ```
 
@@ -89,26 +47,35 @@ There are many assert commands, which behave exactly as the base one with the pr
 For example this is not so helpful without additional message:
 
 ```nu
-❯ std assert ($b | str contains $a)
-Error:
-  × Assertion failed.
-   ╭─[entry #35:1:1]
- 1 │ assert ($b | str contains $a)
-   ·              ──────┬─────
-   ·                    ╰── It is not true.
+let a = "foo"
+let b = "bar"
+assert ($b | str contains $a)
+```
+```
+Error:   × Assertion failed.
+   ╭─[entry #5:3:8]
+ 2 │ let b = "bar"
+ 3 │ assert ($b | str contains $a)
+   ·        ───────────┬──────────
+   ·                   ╰── It is not true.
    ╰────
 ```
 
 While with using `assert str contains`:
 
 ```nu
-❯ std assert str contains $b $a
-Error:
-  × Assertion failed.
-   ╭─[entry #34:1:1]
- 1 │ assert str contains $b $a
+let a = "a needle"
+let b = "haystack"
+assert str contains $b $a
+```
+```
+Error:   × Assertion failed.
+   ╭─[entry #7:3:21]
+ 2 │ let b = "bar"
+ 3 │ assert str contains $b $a
    ·                     ──┬──
-   ·                       ╰── 'haystack' does not contain 'a needle'.
+   ·                       ╰─┤ This does not contain 'a needle'.
+   ·                         │         value: "haystack"
    ╰────
 ```
 
@@ -116,10 +83,9 @@ In general for base `assert` command it is encouraged to always provide the addi
 
 ```nu
 def "assert even" [number: int] {
-    std assert ($number mod 2 == 0) --error-label {
-        start: (metadata $number).span.start,
-        end: (metadata $number).span.end,
+    assert ($number mod 2 == 0) --error-label {
         text: $"($number) is not an even number",
+        span: (metadata $number).span,
     }
 }
 ```
@@ -127,8 +93,10 @@ def "assert even" [number: int] {
 Then you'll have your detailed custom error message:
 
 ```nu
-❯ let $a = 13
-❯ assert even $a
+let $a = 13
+assert even $a
+```
+```
 Error:
   × Assertion failed.
    ╭─[entry #37:1:1]
@@ -138,29 +106,63 @@ Error:
    ╰────
 ```
 
-## Test modules & test cases
+## Running the tests
 
-The naming convention for test modules is `test_<your_module>.nu` and `test_<test name>` for test cases.
+Now that we are able to write tests by calling commands from `std assert`, it would be great to be able to run them and see our tests fail when there is an issue and pass when everything is correct :)
 
-In order for a function to be recognized as a test by the test runner it needs to be annotated with `#[test]`.
 
-The following annotations are supported by the test runner:
+### Nupm package
 
-- test - test case to be executed during test run
-- test-skip - test case to be skipped during test run
-- before-all - function to run at the beginning of test run. Returns a global context record that is piped into every test function
-- before-each - function to run before every test case. Returns a per-test context record that is merged with global context and piped into test functions
-- after-each - function to run after every test case. Receives the context record just like the test cases
-- after-all - function to run after all test cases have been executed. Receives the global context record
+In this first case, we will assume that the code you are trying to test is part of a [Nupm] package.
 
-The standard library itself is tested with this framework, so you can find many examples in the [Nushell repository](https://github.com/nushell/nushell/blob/main/crates/nu-std/tests/).
+In that case, it is as easy as following the following steps
+- create a `tests/` directory next to the `nupm.nuon` package file of your package
+- make the `tests/` directory a valid module by adding a `mod.nu` file into it
+- write commands inside `tests/`
+- call `nupm test`
 
-## Setting verbosity
+The convention is that any command fully exported from the `tests` module will be run as a test, e.g.
+- `export def some-test` in `tests/mod.nu` will run
+- `def just-an-internal-cmd` in `tests/mod.nu` will NOT run
+- `export def another-test` in `tests/spam.nu` will run if and only if there is something like `export use spam.nu *` in `tests/mod.nu`
 
-The `testing.nu` module uses the `log` commands from the standard library to display information, so you can set `NU_LOG_LEVEL` if you want more or less details:
 
-```nu
-❯ use testing.nu run-tests
-❯ NU_LOG_LEVEL=DEBUG run-tests
-❯ NU_LOG_LEVEL=WARNING run-tests
+### Standalone tests
+
+If your Nushell script or module is not part of a [Nupm] package, the simplest way is to write tests in standalone scripts and then call them, either from a `Makefile` or in a CI:
+
+Let's say we have a simple `math.nu` module which contains a simple Fibonacci command:
+```nushell
+# `fib n` is the n-th Fibonacci number
+export def fib [n: int] [ nothing -> int ] {
+    if $n == 0 {
+        return 0
+    } else if $n == 1 {
+        return 1
+    }
+
+    (fib ($n - 1)) + (fib ($n - 2))
+}
 ```
+then a test script called `tests.nu` could look like
+```nushell
+use math.nu fib
+use std assert
+
+for t in [
+    [input, expected];
+    [0, 0],
+    [1, 1],
+    [2, 1],
+    [3, 2],
+    [4, 3],
+    [5, 5],
+    [6, 8],
+    [7, 13],
+] {
+    assert equal (fib $t.input) $t.expected
+}
+```
+and be invoked as `nu tests.nu`
+
+[Nupm]: https://github.com/nushell/nupm
