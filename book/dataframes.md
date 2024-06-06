@@ -1116,6 +1116,8 @@ whenever possible, their analogous Nushell command.
 This list may be outdated. To get the up-to-date command list, see [Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.html) command categories.
 :::
 
+<!-- This table was updated using the script from the comment at the bottom of this .md document. -->
+
 | Command Name           | Applies To            | Description                                                                                      | Nushell Equivalent      |
 | ---------------------- | --------------------- | ------------------------------------------------------------------------------------------------ | ----------------------- |
 | polars agg             | dataframe             | Performs a series of aggregations from a group-by.                                               | math                    |
@@ -1241,3 +1243,36 @@ mature.
 
 Keep visiting this book in order to check the new things happening to
 dataframes and how they can help you process data faster and efficiently.
+
+<!--
+# 1. Updates the table with the current list of `polars` commands.
+# 2. Joins the updated table with the currently specified values in the `Nushell Equivalent` column of the current markdown table.
+
+
+let chapter = open dataframes.md
+let book_table_str = $chapter
+    | lines
+    | skip until {|it| $it starts-with '| Command Name '}
+    | take until {|i| $i starts-with '## Future'}
+
+let book_table = $book_table_str
+    | parse '| {command_name} | {applies_to} | {description} | {nushell_equivalent} |'
+    | skip 2
+    | str trim command_name nushell_equivalent
+    | rename name
+    | select name nushell_equivalent
+
+let updated_table = help commands
+    | where name =~ 'polars'
+    | where name != 'polars'
+    | update input_output {|i| $i.input_output.input | str join ', '}
+    | select name input_output usage
+    | join --left $book_table name
+    | rename "Command Name" "Applies To" Description "Nushell Equivalent"
+    | to md --pretty
+    | str replace -ar "(( |-){47} \\|\n)" " \|\n"
+    | $'($in)(char nl)'
+
+$chapter | str replace ($book_table_str | str join (char nl)) $updated_table | save -f dataframes.md
+
+-->
