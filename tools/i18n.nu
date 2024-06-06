@@ -1,5 +1,6 @@
 
-let META_FILE = 'i18n-meta.json'
+cd ($env.CURRENT_FILE | path dirname | path dirname)
+let META_FILE = 'tools/i18n-meta.json'
 if ($META_FILE | path exists) == false {
     echo '[]' | save -r $META_FILE
 }
