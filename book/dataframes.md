@@ -1113,63 +1113,123 @@ The next list shows the available dataframe commands with their descriptions, an
 whenever possible, their analogous Nushell command.
 
 ::: warning
-This list may be outdated. To get the up-to-date command list, see
-[Dataframe](/commands/categories/dataframe.md)
-[Lazyframe](/commands/categories/lazyframe.md) and
-[Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md)
-command categories.
+This list may be outdated. To get the up-to-date command list, see [Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.html) command categories.
 :::
 
-| Command Name    | Applies To                  | Description                                                                | Nushell Equivalent            |
-| --------------- | --------------------------- | -------------------------------------------------------------------------- | ----------------------------- |
-| aggregate       | DataFrame, GroupBy, Series  | Performs an aggregation operation on a dataframe, groupby or series object | math                          |
-| all-false       | Series                      | Returns true if all values are false                                       |                               |
-| all-true        | Series                      | Returns true if all values are true                                        | all                           |
-| arg-max         | Series                      | Return index for max value in series                                       |                               |
-| arg-min         | Series                      | Return index for min value in series                                       |                               |
-| arg-sort        | Series                      | Returns indexes for a sorted series                                        |                               |
-| arg-true        | Series                      | Returns indexes where values are true                                      |                               |
-| arg-unique      | Series                      | Returns indexes for unique values                                          |                               |
-| count-null      | Series                      | Counts null values                                                         |                               |
-| count-unique    | Series                      | Counts unique value                                                        |                               |
-| drop            | DataFrame                   | Creates a new dataframe by dropping the selected columns                   | drop                          |
-| drop-duplicates | DataFrame                   | Drops duplicate values in dataframe                                        |                               |
-| drop-nulls      | DataFrame, Series           | Drops null values in dataframe                                             |                               |
-| dtypes          | DataFrame                   | Show dataframe data types                                                  |                               |
-| filter-with     | DataFrame                   | Filters dataframe using a mask as reference                                |                               |
-| first           | DataFrame                   | Creates new dataframe with first rows                                      | first                         |
-| get             | DataFrame                   | Creates dataframe with the selected columns                                | get                           |
-| group-by        | DataFrame                   | Creates a groupby object that can be used for other aggregations           | group-by                      |
-| is-duplicated   | Series                      | Creates mask indicating duplicated values                                  |                               |
-| is-in           | Series                      | Checks if elements from a series are contained in right series             | in                            |
-| is-not-null     | Series                      | Creates mask where value is not null                                       |                               |
-| is-null         | Series                      | Creates mask where value is null                                           | `<column_name> == null`       |
-| is-unique       | Series                      | Creates mask indicating unique values                                      |                               |
-| join            | DataFrame                   | Joins a dataframe using columns as reference                               |                               |
-| last            | DataFrame                   | Creates new dataframe with last rows                                       | last                          |
-| ls-df           |                             | Lists stored dataframes                                                    |                               |
-| melt            | DataFrame                   | Unpivot a DataFrame from wide to long format                               |                               |
-| not             | Series Inverts boolean mask |                                                                            |
-| open            |                             | Loads dataframe form csv file                                              | open                          |
-| pivot           | GroupBy                     | Performs a pivot operation on a groupby object                             | pivot                         |
-| rename          | Dataframe, Series           | Renames a series                                                           | rename                        |
-| sample          | DataFrame                   | Create sample dataframe                                                    |                               |
-| select          | DataFrame                   | Creates a new dataframe with the selected columns                          | select                        |
-| set             | Series                      | Sets value where given mask is true                                        |                               |
-| set-with-idx    | Series                      | Sets value in the given index                                              |                               |
-| shift           | Series                      | Shifts the values by a given period                                        |                               |
-| show            | DataFrame                   | Converts a section of the dataframe to a Table or List value               |                               |
-| slice           | DataFrame                   | Creates new dataframe from a slice of rows                                 |                               |
-| sort-by         | DataFrame, Series           | Creates new sorted dataframe or series                                     | sort                          |
-| take            | DataFrame, Series           | Creates new dataframe using the given indices                              |                               |
-| to csv          | DataFrame                   | Saves dataframe to csv file                                                | to csv                        |
-| into df         |                             | Converts a pipelined Table or List into Dataframe                          |                               |
-| dummies         | DataFrame                   | Creates a new dataframe with dummy variables                               |                               |
-| to parquet      | DataFrame                   | Saves dataframe to parquet file                                            |                               |
-| unique          | Series                      | Returns unique values from a series                                        | uniq                          |
-| value-counts    | Series                      | Returns a dataframe with the counts for unique values in series            |                               |
-| where           | DataFrame                   | Filter dataframe to match the condition                                    | where                         |
-| with-column     | DataFrame                   | Adds a series to the dataframe                                             | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
+<!-- This table was updated using the script from ../tools/dataframes_md-update.nu -->
+
+| Command Name           | Applies To            | Description                                                                                      | Nushell Equivalent      |
+| ---------------------- | --------------------- | ------------------------------------------------------------------------------------------------ | ----------------------- |
+| polars agg             | dataframe             | Performs a series of aggregations from a group-by.                                               | math                    |
+| polars agg-groups      | expression            | Creates an agg_groups expression.                                                                |                         |
+| polars all-false       | dataframe             | Returns true if all values are false.                                                            |                         |
+| polars all-true        | dataframe             | Returns true if all values are true.                                                             | all                     |
+| polars append          | dataframe             | Appends a new dataframe.                                                                         |                         |
+| polars arg-max         | dataframe             | Return index for max value in series.                                                            |                         |
+| polars arg-min         | dataframe             | Return index for min value in series.                                                            |                         |
+| polars arg-sort        | dataframe             | Returns indexes for a sorted series.                                                             |                         |
+| polars arg-true        | dataframe             | Returns indexes where values are true.                                                           |                         |
+| polars arg-unique      | dataframe             | Returns indexes for unique values.                                                               |                         |
+| polars arg-where       | any                   | Creates an expression that returns the arguments where expression is true.                       |                         |
+| polars as              | expression            | Creates an alias expression.                                                                     |                         |
+| polars as-date         | dataframe             | Converts string to date.                                                                         |                         |
+| polars as-datetime     | dataframe             | Converts string to datetime.                                                                     |                         |
+| polars cache           | dataframe             | Caches operations in a new LazyFrame.                                                            |                         |
+| polars cast            | expression, dataframe | Cast a column to a different dtype.                                                              |                         |
+| polars col             | any                   | Creates a named column expression.                                                               |                         |
+| polars collect         | dataframe             | Collect lazy dataframe into eager dataframe.                                                     |                         |
+| polars columns         | dataframe             | Show dataframe columns.                                                                          |                         |
+| polars concat-str      | any                   | Creates a concat string expression.                                                              |                         |
+| polars concatenate     | dataframe             | Concatenates strings with other array.                                                           |                         |
+| polars contains        | dataframe             | Checks if a pattern is contained in a string.                                                    |                         |
+| polars count           | expression            | Creates a count expression.                                                                      |                         |
+| polars count-null      | dataframe             | Counts null values.                                                                              |                         |
+| polars cumulative      | dataframe             | Cumulative calculation for a series.                                                             |                         |
+| polars datepart        | expression            | Creates an expression for capturing the specified datepart in a column.                          |                         |
+| polars drop            | dataframe             | Creates a new dataframe by dropping the selected columns.                                        | drop                    |
+| polars drop-duplicates | dataframe             | Drops duplicate values in dataframe.                                                             |                         |
+| polars drop-nulls      | dataframe             | Drops null values in dataframe.                                                                  |                         |
+| polars dummies         | dataframe             | Creates a new dataframe with dummy variables.                                                    |                         |
+| polars explode         | expression, dataframe | Explodes a dataframe or creates a explode expression.                                            |                         |
+| polars expr-not        | expression            | Creates a not expression.                                                                        |                         |
+| polars fetch           | dataframe             | Collects the lazyframe to the selected rows.                                                     |                         |
+| polars fill-nan        | dataframe             | Replaces NaN values with the given expression.                                                   |                         |
+| polars fill-null       | dataframe             | Replaces NULL values with the given expression.                                                  |                         |
+| polars filter          | dataframe             | Filter dataframe based in expression.                                                            |                         |
+| polars filter-with     | dataframe             | Filters dataframe using a mask or expression as reference.                                       |                         |
+| polars first           | expression, dataframe | Show only the first number of rows or create a first expression                                  | first                   |
+| polars flatten         | expression, dataframe | An alias for polars explode.                                                                     |                         |
+| polars get             | dataframe             | Creates dataframe with the selected columns.                                                     | get                     |
+| polars get-day         | dataframe             | Gets day from date.                                                                              |                         |
+| polars get-hour        | dataframe             | Gets hour from date.                                                                             |                         |
+| polars get-minute      | dataframe             | Gets minute from date.                                                                           |                         |
+| polars get-month       | dataframe             | Gets month from date.                                                                            |                         |
+| polars get-nanosecond  | dataframe             | Gets nanosecond from date.                                                                       |                         |
+| polars get-ordinal     | dataframe             | Gets ordinal from date.                                                                          |                         |
+| polars get-second      | dataframe             | Gets second from date.                                                                           |                         |
+| polars get-week        | dataframe             | Gets week from date.                                                                             |                         |
+| polars get-weekday     | dataframe             | Gets weekday from date.                                                                          |                         |
+| polars get-year        | dataframe             | Gets year from date.                                                                             |                         |
+| polars group-by        | dataframe             | Creates a group-by object that can be used for other aggregations.                               | group-by                |
+| polars implode         | expression            | Aggregates a group to a Series.                                                                  |                         |
+| polars into-df         | any                   | Converts a list, table or record into a dataframe.                                               |                         |
+| polars into-lazy       | any                   | Converts a dataframe into a lazy dataframe.                                                      |                         |
+| polars into-nu         | expression, dataframe | Converts a dataframe or an expression into into nushell value for access and exploration.        |                         |
+| polars is-duplicated   | dataframe             | Creates mask indicating duplicated values.                                                       |                         |
+| polars is-in           | expression, dataframe | Creates an is-in expression or checks to see if the elements are contained in the right series   | in                      |
+| polars is-not-null     | expression, dataframe | Creates mask where value is not null.                                                            |                         |
+| polars is-null         | expression, dataframe | Creates mask where value is null.                                                                | `<column_name> == null` |
+| polars is-unique       | dataframe             | Creates mask indicating unique values.                                                           |                         |
+| polars join            | dataframe             | Joins a lazy frame with other lazy frame.                                                        |                         |
+| polars last            | expression, dataframe | Creates new dataframe with tail rows or creates a last expression.                               | last                    |
+| polars lit             | any                   | Creates a literal expression.                                                                    |                         |
+| polars lowercase       | dataframe             | Lowercase the strings in the column.                                                             |                         |
+| polars max             | expression, dataframe | Creates a max expression or aggregates columns to their max value.                               |                         |
+| polars mean            | expression, dataframe | Creates a mean expression for an aggregation or aggregates columns to their mean value.          |                         |
+| polars median          | expression, dataframe | Median value from columns in a dataframe or creates expression for an aggregation                |                         |
+| polars melt            | dataframe             | Unpivot a DataFrame from wide to long format.                                                    |                         |
+| polars min             | expression, dataframe | Creates a min expression or aggregates columns to their min value.                               |                         |
+| polars n-unique        | expression, dataframe | Counts unique values.                                                                            |                         |
+| polars not             | dataframe             | Inverts boolean mask.                                                                            |                         |
+| polars open            | any                   | Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.                   | open                    |
+| polars otherwise       | any                   | Completes a when expression.                                                                     |                         |
+| polars quantile        | expression, dataframe | Aggregates the columns to the selected quantile.                                                 |                         |
+| polars query           | dataframe             | Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause. |                         |
+| polars rename          | dataframe             | Rename a dataframe column.                                                                       | rename                  |
+| polars replace         | dataframe             | Replace the leftmost (sub)string by a regex pattern.                                             |                         |
+| polars replace-all     | dataframe             | Replace all (sub)strings by a regex pattern.                                                     |                         |
+| polars reverse         | dataframe             | Reverses the LazyFrame                                                                           |                         |
+| polars rolling         | dataframe             | Rolling calculation for a series.                                                                |                         |
+| polars sample          | dataframe             | Create sample dataframe.                                                                         |                         |
+| polars schema          | dataframe             | Show schema for a dataframe.                                                                     |                         |
+| polars select          | dataframe             | Selects columns from lazyframe.                                                                  | select                  |
+| polars set             | dataframe             | Sets value where given mask is true.                                                             |                         |
+| polars set-with-idx    | dataframe             | Sets value in the given index.                                                                   |                         |
+| polars shape           | dataframe             | Shows column and row size for a dataframe.                                                       |                         |
+| polars shift           | dataframe             | Shifts the values by a given period.                                                             |                         |
+| polars slice           | dataframe             | Creates new dataframe from a slice of rows.                                                      |                         |
+| polars sort-by         | dataframe             | Sorts a lazy dataframe based on expression(s).                                                   | sort                    |
+| polars std             | expression, dataframe | Creates a std expression for an aggregation of std value from columns in a dataframe.            |                         |
+| polars store-get       | any, any              | Gets a Dataframe or other object from the plugin cache.                                          |                         |
+| polars store-ls        |                       | Lists stored dataframes.                                                                         |                         |
+| polars store-rm        | any                   | Removes a stored Dataframe or other object from the plugin cache.                                |                         |
+| polars str-lengths     | dataframe             | Get lengths of all strings.                                                                      |                         |
+| polars str-slice       | dataframe             | Slices the string from the start position until the selected length.                             |                         |
+| polars strftime        | dataframe             | Formats date based on string rule.                                                               |                         |
+| polars sum             | expression, dataframe | Creates a sum expression for an aggregation or aggregates columns to their sum value.            |                         |
+| polars summary         | dataframe             | For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.   |                         |
+| polars take            | dataframe             | Creates new dataframe using the given indices.                                                   |                         |
+| polars to-arrow        | dataframe             | Saves dataframe to arrow file.                                                                   |                         |
+| polars to-avro         | dataframe             | Saves dataframe to avro file.                                                                    |                         |
+| polars to-csv          | dataframe             | Saves dataframe to CSV file.                                                                     |                         |
+| polars to-jsonl        | dataframe             | Saves dataframe to a JSON lines file.                                                            |                         |
+| polars to-parquet      | dataframe             | Saves dataframe to parquet file.                                                                 |                         |
+| polars unique          | dataframe             | Returns unique values from a dataframe.                                                          | uniq                    |
+| polars uppercase       | dataframe             | Uppercase the strings in the column.                                                             |                         |
+| polars value-counts    | dataframe             | Returns a dataframe with the counts for unique values in series.                                 |                         |
+| polars var             | expression, dataframe | Create a var expression for an aggregation.                                                      |                         |
+| polars when            | expression            | Creates and modifies a when expression.                                                          |                         |
+| polars with-column     | dataframe             | Adds a series to the dataframe.                                                                  | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
 
 ## Future of Dataframes
 
@@ -1183,3 +1243,4 @@ mature.
 
 Keep visiting this book in order to check the new things happening to
 dataframes and how they can help you process data faster and efficiently.
+
