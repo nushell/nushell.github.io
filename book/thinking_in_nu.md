@@ -63,6 +63,14 @@ would work, since the string can be evaluated at compile-time:
 
 For more in-depth explanation, check [How Nushell Code Gets Run](how_nushell_code_gets_run.md).
 
+## Variables are immutable by default
+
+Another common surprise for folks coming from other languages is that Nushell variables are immutable by default. Coming to Nushell, you'll want to spend some time becoming familiar with working in a more functional style, as this tends to help write code that works best with immutable variables.
+
+**Thinking in Nushell:** If you're used to using mutable variables for different tasks, it will take some time to learn how to do each task in a more functional style. Nushell has a set of built-in capabilities to help with many of these patterns, and learning them will help you write code in a more Nushell-style. The added benefit of speeding up your scripts by running parts of your code in parallel is a nice bonus.
+
+See [Immutable Variables](variables.html#immutable-variables) and [Choosing between mutable and immutable variables](variables.html#choosing-between-mutable-and-immutable-variables) for more information.
+
 ## Nushell's environment is scoped
 
 Nushell takes multiple design cues from compiled languages. One such cue is that languages should avoid global mutable state. Shells have commonly used global mutation to update the environment, but Nushell steers clear of this approach.

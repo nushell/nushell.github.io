@@ -93,7 +93,7 @@ source $script_file
 
 Try to use immutable variables for most use-cases.
 
-For the first few years of Nushell's development, mutable variables were not a language feature. Early on in Nushell's development, we decided to see how long we could go using a more data-focused, functional style in the language. This experiment showed its value when Nushell introduced parallelism. By switching from [`each`](/commands/docs/each.md) to [`par-each`](/commands/docs/par-each.md) in any Nushell script, you're able to run the corresponding block of code in parallel over the input. This is possible because Nushell's design leans heavily on immutability, composition, and pipelining.
+You might wonder why Nushell uses immutable variables by default. For the first few years of Nushell's development, mutable variables were not a language feature. Early on in Nushell's development, we decided to see how long we could go using a more data-focused, functional style in the language. This experiment showed its value when Nushell introduced parallelism. By switching from [`each`](/commands/docs/each.md) to [`par-each`](/commands/docs/par-each.md) in any Nushell script, you're able to run the corresponding block of code in parallel over the input. This is possible because Nushell's design leans heavily on immutability, composition, and pipelining.
 
 Many, if not most, use-cases for mutable variables in Nushell have a functional solution that:
 
