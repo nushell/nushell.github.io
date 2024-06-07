@@ -118,7 +118,7 @@ With most filters, the second version would refer to the entire `file` record (w
 
 ### Pipeline input in custom command definitions and scripts
 
-See: [Custom Commands -> Pipeline Input](http://localhost:8080/book/custom_commands.html#pipeline-input)
+See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
 
 ### When is `$in` valid?
 
