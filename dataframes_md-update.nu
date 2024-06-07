@@ -12,7 +12,7 @@ let book_table_str = $chapter
 
 let book_table = $book_table_str
     | parse '| {command_name} | {applies_to} | {description} | {nushell_equivalent} |'
-    | skip 2 # skip header and delimeter lines
+    | skip 2 # skip header and delimiter lines
     | str trim command_name nushell_equivalent
     | rename name
     | select name nushell_equivalent
