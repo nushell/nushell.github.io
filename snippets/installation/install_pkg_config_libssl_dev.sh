@@ -1,1 +1,1 @@
-apt install pkg-config libssl-dev
+apt install pkg-config libssl-dev build-essential
