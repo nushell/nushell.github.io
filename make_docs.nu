@@ -107,7 +107,6 @@ version: ($nu_version)
 ($category_matter)
 usage: |
 ($indented_usage)
-feature: ($feature)
 ---"
 }
 
