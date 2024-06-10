@@ -58,7 +58,7 @@ If you'd rather not install Rust via `rustup`, you can also install it via other
 
 #### Debian/Ubuntu
 
-You will need to install the "pkg-config" and "libssl-dev" package:
+You will need to install the "pkg-config", "build-essential" and "libssl-dev" package:
 
 @[code](@snippets/installation/install_pkg_config_libssl_dev.sh)
 
