@@ -41,7 +41,7 @@ This table was last updated for Nu 0.67.0.
 | `PATH %PATH%;<path>`                 | `$env.Path = ($env.Path \| prepend <path>`)                                         | Edit the path variable                                                |
 | `PAUSE`                              | `input "Press any key to continue . . ."`                                           | Pause script execution                                                |
 | `PROMPT <template>`                  | `$env.PROMPT_COMMAND = { <command> }`                                               | Change the terminal prompt                                            |
-| `PUSHD <path>`/`POPD`                | `enter <path>`/`exit`                                                               | Change working directory temporarily                                  |
+| `PUSHD <path>`/`POPD`                | `enter <path>`/`dexit`                                                              | Change working directory temporarily                                  |
 | `REM`                                | `#`                                                                                 | Comments                                                              |
 | `REN` or `RENAME`                    | `mv`                                                                                | Rename files                                                          |
 | `RD` or `RMDIR`                      | `rm`                                                                                | Remove directory                                                      |
