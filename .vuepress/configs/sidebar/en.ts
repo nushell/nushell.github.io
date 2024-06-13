@@ -143,6 +143,7 @@ export const sidebarEn: SidebarConfig = {
         '/cookbook/files',
         '/cookbook/git',
         '/cookbook/parsing_git_log',
+        '/cookbook/input_listen_keys',
         '/cookbook/http',
         '/cookbook/direnv',
         '/cookbook/ssh_agent',
