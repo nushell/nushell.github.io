@@ -256,6 +256,8 @@ $"($example.description)
 
     let plugins = if $command.name in ['from ini', 'from ics', 'from eml', 'from vcf'] {
         $"::: warning(char nl)Command `($command.name)` resides in [plugin]\(/book/plugins.html) [`nu_plugin_formats`]\(https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats(char nl):::(char nl)(char nl)"
+    } else if $command.name in ['query', 'query xml', 'query json', 'query web'] {
+        $"::: warning(char nl)Command `($command.name)` resides in [plugin]\(/book/plugins.html) [`nu_plugin_query`]\(https://crates.io/crates/nu_plugin_query). To use this command, you must install/compile and register nu_plugin_query(char nl):::(char nl)(char nl)"
     } else { '' }
 
     let doc = (
