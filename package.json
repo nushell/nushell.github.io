@@ -24,10 +24,10 @@
     "@vuepress/plugin-shiki": "^2.0.0-rc.25",
     "@vuepress/plugin-sitemap": "2.0.0-rc.26",
     "@vuepress/theme-default": "2.0.0-rc.26",
-    "lefthook": "^1.6.10",
+    "lefthook": "1.6.15",
     "patch-package": "^8.0.0",
-    "prettier": "^3.2.5",
-    "shiki": "^1.4.0",
+    "prettier": "^3.3.2",
+    "shiki": "^1.7.0",
     "vuepress": "2.0.0-rc.9"
   },
   "engines": {
