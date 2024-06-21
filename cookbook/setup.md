@@ -43,37 +43,6 @@ Output
  CARGO_PKG_VERSION_MAJOR         │ 0
 ```
 
-or for a more detailed view, use our new `env` command.
-
-```nu
-env
-```
-
-Output
-
-```
-────┬─────────────────────────────┬─────────────────────────────┬─────────────────────────────┬──────────────────────────────
- #  │            name             │            type             │            value            │             raw
-────┼─────────────────────────────┼─────────────────────────────┼─────────────────────────────┼──────────────────────────────
-  0 │ ALLUSERSPROFILE             │ string                      │ C:\ProgramData              │ C:\ProgramData
-  1 │ APPDATA                     │ string                      │ C:\Users\someuser10\AppData │ C:\Users\someuser10\AppData
-    │                             │                             │ \Roaming                    │ \Roaming
-  2 │ CARGO                       │ string                      │ \\?\C:\Users\someuser10\.ru │ \\?\C:\Users\someuser10\.ru
-    │                             │                             │ stup\toolchains\stable-x86_ │ stup\toolchains\stable-x86_
-    │                             │                             │ 64-pc-windows-msvc\bin\carg │ 64-pc-windows-msvc\bin\carg
-    │                             │                             │ o.exe                       │ o.exe
-  3 │ CARGO_HOME                  │ string                      │ C:\Users\someuser10\.cargo  │ C:\Users\someuser10\.cargo
-  4 │ CARGO_MANIFEST_DIR          │ string                      │ C:\Users\someuser10\source\ │ C:\Users\someuser10\source\
-    │                             │                             │ repos\forks\nushell         │ repos\forks\nushell
-  5 │ CARGO_PKG_AUTHORS           │ string                      │ The Nu Project Contributors │ The Nu Project Contributors
-  6 │ CARGO_PKG_DESCRIPTION       │ string                      │ A new type of shell         │ A new type of shell
-  7 │ CARGO_PKG_HOMEPAGE          │ string                      │ https://www.nushell.sh      │ https://www.nushell.sh
-  8 │ CARGO_PKG_LICENSE           │ string                      │ MIT                         │ MIT
-  9 │ CARGO_PKG_LICENSE_FILE      │ string                      │                             │
- 10 │ CARGO_PKG_NAME              │ string                      │ nu                          │ nu
- 11 │ CARGO_PKG_REPOSITORY        │ string                      │ https://github.com/nushell/ │ https://github.com/nushell/
-```
-
 Let's practise that and set `$EDITOR` in our `env.nu` file using `vim` (or an editor of your choice)
 
 ```
@@ -100,21 +69,6 @@ You should now be able to run `config nu` or `config env` and edit those files e
 ```nu
 $env.APPDATA
 ```
-
-or
-
-```nu
-env | where name == APPDATA
-```
-
-```
-───┬─────────┬────────┬─────────────────────────────────────┬─────────────────────────────────────
- # │  name   │  type  │                value                │                 raw
-───┼─────────┼────────┼─────────────────────────────────────┼─────────────────────────────────────
- 0 │ APPDATA │ string │ C:\Users\someuser10\AppData\Roaming │ C:\Users\someuser10\AppData\Roaming
-───┴─────────┴────────┴─────────────────────────────────────┴─────────────────────────────────────
-```
-
 ---
 
 ### Use hooks to export state via environment variables
