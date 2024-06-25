@@ -1068,7 +1068,13 @@ if __name__ == "__main__":
             break
         elif "Call" in input:
             [id, call] = input["Call"]
-            if call == "Signature":
+            if plugin_call == "Metadata":
+                send_response(id, {
+                    "Metadata": {
+                        "version": "0.1.0",
+                    }
+                })
+            elif call == "Signature":
                 send_response(id, {"Signature": [signature()]})
             elif "Run" in call:
                 handle_call(id, call["Run"])
@@ -1095,7 +1101,13 @@ if __name__ == "__main__":
             break
         elif "Call" in input:
             [id, call] = input["Call"]
-            if call == "Signature":
+            if plugin_call == "Metadata":
+                send_response(id, {
+                    "Metadata": {
+                        "version": "0.1.0",
+                    }
+                })
+            elif call == "Signature":
                 send_response(id, {"Signature": [signature()]})
             elif "Run" in call:
                 handle_call(id, call["Run"])
