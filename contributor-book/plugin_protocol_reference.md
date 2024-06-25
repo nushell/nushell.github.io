@@ -95,6 +95,18 @@ These are messages sent from the engine to the plugin. [`Hello`](#hello) and [`S
 
 The body of this message is a 2-tuple (array): (`id`, `call`). The engine sends unique IDs for each plugin call it makes. The ID is needed to send the [`CallResponse`](#callresponse).
 
+#### `Metadata` plugin call
+
+Ask the plugin to send metadata about itself. Takes no arguments. Returns [`Metadata`](#metadata-plugin-call-response) or [`Error`](#error-plugin-call-response)
+
+Example:
+
+```json
+{
+  "Call": [0, "Metadata"]
+}
+```
+
 #### `Signature` plugin call
 
 Ask the plugin to send its command signatures. Takes no arguments. Returns [`Signature`](#signature-plugin-call-response) or [`Error`](#error-plugin-call-response)
@@ -578,6 +590,29 @@ Example:
             "msg": "The bad thing"
           }
         ]
+      }
+    }
+  ]
+}
+```
+
+#### `Metadata` plugin call response
+
+A successful response to a [`Metadata` plugin call](#metadata-plugin-call). The body contains fields that describe the plugin, none of which are required:
+
+| Field       | Type    | Usage                                                                                                         |
+| ----------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| **version** | string? | The version of the plugin (not the protocol!). [SemVer](https://semver.org) is recommended, but not required. |
+
+Example:
+
+```json
+{
+  "CallResponse": [
+    0,
+    {
+      "Metadata": {
+        "version": "1.2.3"
       }
     }
   ]

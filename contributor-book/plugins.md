@@ -70,6 +70,10 @@ use nu_protocol::{LabeledError, Signature, Type, Value};
 struct LenPlugin;
 
 impl Plugin for LenPlugin {
+    fn version(&self) -> String {
+        env!("CARGO_PKG_VERSION").into()
+    }
+
     fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
         vec![
             Box::new(Len),
@@ -219,6 +223,10 @@ Above that, let's have a look at the definition of `LenPlugin`, which implements
 struct LenPlugin;
 
 impl Plugin for LenPlugin {
+    fn version(&self) -> String {
+        env!("CARGO_PKG_VERSION").into()
+    }
+
     fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
         vec![
             Box::new(Len),
@@ -229,7 +237,9 @@ impl Plugin for LenPlugin {
 
 Again, we use a unit struct for `LenPlugin`, but this is the recommended place to put plugin state if needed. All commands also get a reference to the plugin type. This is what we eventually pass to `serve_plugin()` in `main()`.
 
-The only required method in `Plugin` is `commands()`, which initializes the plugin's commands. A boxed `dyn` reference is used so that we can keep all of the different command types in the single list. Dispatch by command name is automatically handled in `serve_plugin()` by looking at the name defined in the signature - in our case, that's `len`. A plugin can contain many commands, so if you end up adding more, just add them to the list returned by `commands()`.
+`Plugin` has two required methods: `version()`, which reports the plugin's version back to Nu, and `commands()`, which initializes the plugin's commands. A boxed `dyn` reference is used so that we can keep all of the different command types in the single list. Dispatch by command name is automatically handled in `serve_plugin()` by looking at the name defined in the signature - in our case, that's `len`. A plugin can contain many commands, so if you end up adding more, just add them to the list returned by `commands()`.
+
+For the version, we just use the `CARGO_PKG_VERSION` environment variable available at compile-time in order to get our plugin's version from Cargo.
 
 Lastly, let's look at the top of the file:
 
@@ -402,6 +412,10 @@ use nu_protocol::{Signature, Type, Value};
 struct MotdPlugin;
 
 impl Plugin for MotdPlugin {
+    fn version(&self) -> String {
+        env!("CARGO_PKG_VERSION").into()
+    }
+
     fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
         vec![
             Box::new(Motd),
@@ -471,6 +485,10 @@ use nu_protocol::{PipelineData, Signature, SyntaxShape, Type, Value};
 struct MyEachPlugin;
 
 impl Plugin for MyEachPlugin {
+    fn version(&self) -> String {
+        env!("CARGO_PKG_VERSION").into()
+    }
+
     fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
         vec![
             Box::new(MyEach),
@@ -1050,7 +1068,13 @@ if __name__ == "__main__":
             break
         elif "Call" in input:
             [id, call] = input["Call"]
-            if call == "Signature":
+            if plugin_call == "Metadata":
+                send_response(id, {
+                    "Metadata": {
+                        "version": "0.1.0",
+                    }
+                })
+            elif call == "Signature":
                 send_response(id, {"Signature": [signature()]})
             elif "Run" in call:
                 handle_call(id, call["Run"])
@@ -1077,7 +1101,13 @@ if __name__ == "__main__":
             break
         elif "Call" in input:
             [id, call] = input["Call"]
-            if call == "Signature":
+            if plugin_call == "Metadata":
+                send_response(id, {
+                    "Metadata": {
+                        "version": "0.1.0",
+                    }
+                })
+            elif call == "Signature":
                 send_response(id, {"Signature": [signature()]})
             elif "Run" in call:
                 handle_call(id, call["Run"])
