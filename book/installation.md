@@ -82,10 +82,6 @@ Nu releases are published as source to the popular Rust package registry [crates
 
 That's it! The `cargo` tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path.
 
-If you want to install with support for [dataframes](dataframes.md), you can install using the `--features=dataframe` flag.
-
-@[code](@snippets/installation/cargo_install_nu_more_features.sh)
-
 ### Building from the GitHub repository
 
 You can also build Nu from the latest source on GitHub. This gives you immediate access to the latest features and bug fixes. First, clone the repo:
