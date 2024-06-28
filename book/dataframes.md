@@ -2,7 +2,7 @@
 
 ::: warning
 
-To use `nu_plugin_polars`, you'll need to install [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) and then install the plugin with commands:
+To use dataframes you'll need to install [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) and then install `nu_plugin_polars` with commands:
 
 ```nu no-run
 # Install the `polars` nushell plugin
