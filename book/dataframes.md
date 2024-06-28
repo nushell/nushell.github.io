@@ -1,10 +1,8 @@
 # Dataframes
 
 ::: warning
-Starting with version 0.93, there is a more recent implementation of dataframes in `nu_plugin_polars`, which includes a newer version of `polars` and many bug fixes.
-From version 0.94 of Nushell, internal dataframes (with the `dfr` prefix) are going to be deprecated in favor of `nu_plugin_polars`.
 
-To use `nu_plugin_polars`, you'll need to install [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) and then install the plugin with commands:
+To use dataframes you'll need to install [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) and then install `nu_plugin_polars` with commands:
 
 ```nu no-run
 # Install the `polars` nushell plugin
@@ -118,6 +116,9 @@ bench -n 10 --pretty {
     }
 }
 ```
+
+Output
+
 ```
 3sec 268ms +/- 50ms
 ```
@@ -142,6 +143,9 @@ bench -n 10 --pretty {
     python load.py | null
 }
 ```
+
+Output
+
 ```
 1sec 322ms +/- 6ms
 ```
@@ -169,6 +173,9 @@ bench -n 10 --pretty {
     nu load.nu | complete | null
 }
 ```
+
+Output
+
 ```
 135ms +/- 4ms
 ```
@@ -436,6 +443,9 @@ $group
     (polars col float_2 | polars count)
 ] | polars sort-by first
 ```
+
+Output
+
 ```
 ╭────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ plan           │ SORT BY [col("first")]                                                                              │
@@ -904,6 +914,9 @@ in column `word`
 ```nu
 $df_1 | polars filter-with ($in.word | polars is-unique)
 ```
+
+Output
+
 ```
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
@@ -918,6 +931,9 @@ Or all the duplicated ones
 ```nu
 $df_1 | polars filter-with ($in.word | polars is-duplicated)
 ```
+
+Output
+
 ```
 ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
 │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
@@ -994,6 +1010,9 @@ $lf_0
 ]
 | polars collect
 ```
+
+Output
+
 ```
 ╭───┬───┬───┬──────────┬────────╮
 │ # │ a │ b │ double_a │ half_a │
@@ -1065,6 +1084,9 @@ $lf_1
 ]
 | polars collect
 ```
+
+Output
+
 ```
 ╭───┬──────┬─────┬──────╮
 │ # │ name │ sum │ mean │
@@ -1088,6 +1110,9 @@ let group = $lf_2
 
 $lf_2 | polars join $group name name | polars collect
 ```
+
+Output
+
 ```
 ╭───┬──────┬───────┬─────┬──────╮
 │ # │ name │ value │ sum │ mean │
@@ -1243,4 +1268,3 @@ mature.
 
 Keep visiting this book in order to check the new things happening to
 dataframes and how they can help you process data faster and efficiently.
-
