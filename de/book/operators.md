@@ -110,10 +110,10 @@ Operatoren beachten grundsätzlich die Gross- Kleinschreibung bei Textoperatione
 "FOO" =~ "(?i)foo" # gibt true zurück
 ```
 
-2. Verwenden des `--insensitive` Parameters für den [`str contains`](/commands/docs/str_contains.md) Befehl:
+2. Verwenden des `--ignore-case` Parameters für den [`str contains`](/commands/docs/str_contains.md) Befehl:
 
 ```nu
-"FOO" | str contains --insensitive "foo"
+"FOO" | str contains --ignore-case "foo"
 ```
 
 3. Konvertieren von allen Zeichen in einem Text zu Kleinbuchstaben mittels [`str downcase`](/commands/docs/str_downcase.md) vor einem Vergleich:
