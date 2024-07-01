@@ -112,10 +112,10 @@ Operators are usually case-sensitive when operating on strings. There are a few 
 "FOO" =~ "(?i)foo" # returns true
 ```
 
-2. Use the [`str contains`](/commands/docs/str_contains.md) command's `--insensitive` flag:
+2. Use the [`str contains`](/commands/docs/str_contains.md) command's `--ignore-case` flag:
 
 ```nu
-"FOO" | str contains --insensitive "foo"
+"FOO" | str contains --ignore-case "foo"
 ```
 
 3. Convert strings to lowercase with [`str downcase`](/commands/docs/str_downcase.md) before comparing:
