@@ -173,11 +173,11 @@ Note the `split row (char esep)` step. We need to add it because in `env.nu`, th
 To add multiple paths only if not already listed, one can add to `env.nu`:
 
 ```nu
-$env.PATH = $env.PATH | split row (char esep)
+$env.PATH = ($env.PATH | split row (char esep)
   | append /usr/local/bin
   | append ($env.CARGO_HOME | path join bin)
   | append ($env.HOME | path join .local bin)
-  | uniq # filter so the paths are unique
+  | uniq # filter so the paths are unique)
 ```
 
 This will add `/usr/local/bin`, the `bin` directory of CARGO_HOME, the `.local/bin` of HOME to PATH. It will also remove duplicates from PATH.
