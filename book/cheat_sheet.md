@@ -455,7 +455,7 @@ use question mark operator `?` to return null instead of error if provided path 
 > $files.name?.0?
 ```
 
-assig the result of a pipeline to a variable:
+assign the result of a pipeline to a variable:
 
 ```nu
 > let big_files = (ls | where size > 10kb)
