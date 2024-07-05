@@ -140,7 +140,7 @@ _Before going into examples, one note about the "dynamic" and "static" terminolo
 
 By insisting on strict parse-evaluation separation, we lose much of a flexibility users expect from dynamic interpreted languages, especially other shells, such as bash, fish, zsh and others. This leads to the examples at the beginning of this page not working. Let's break them down one by one
 
-_Note: The following examples use [`source`](/commands/docs/source.md), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md), [`register`](/commands/docs/register.md) or [`source-env`](/commands/docs/source-env.md)._
+_Note: The following examples use [`source`](/commands/docs/source.md), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md) or [`source-env`](/commands/docs/source-env.md)._
 
 ### 1. Sourcing a dynamic path
 
