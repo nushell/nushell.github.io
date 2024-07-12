@@ -1,72 +1,71 @@
-# Moving around your system
+# Перемещение по системе
 
-Early shells allow you to move around your filesystem and run commands, and modern shells like Nu allow you to do the same. Let's take a look at some of the common commands you might use when interacting with your system.
+Ранние оболочки позволяли вам перемещаться по файловой системе и выполнять команды, и современные оболочки, такие как Nu, позволяют вам делать то же самое. Давайте рассмотрим некоторые общие команды, которые вы можете использовать при взаимодействии с системой.
 
-## Viewing directory contents
+## Просмотр содержимого каталога
 
 @[code](@snippets/moving_around/ls_example.sh)
 
-As we've seen in other chapters, [`ls`](/commands/docs/ls.md) is a command for viewing the contents of a path. Nu will return the contents as a table that we can use.
+Как мы уже видели в других главах, [`ls`](/commands/docs/ls.md) - это команда для просмотра содержимого пути. Nu вернет содержимое в виде таблицы, которую мы можем использовать.
 
-The [`ls`](/commands/docs/ls.md) command also takes an optional argument, to change what you'd like to view. For example, we can list the files that end in ".md"
+Команда [`ls`](/commands/docs/ls.md) также принимает дополнительный аргумент, чтобы изменить то, что вы хотите просмотреть. Например, мы можем вывести список файлов, которые заканчиваются на ".md"
 
 @[code](@snippets/moving_around/ls_shallow_glob_example.sh)
 
-## Glob patterns (wildcards)
+## Glob patterns (подстановочные знаки)
 
-The asterisk (\*) in the above optional argument "\*.md" is sometimes called a wildcard or a glob. It lets us match anything. You could read the glob "\*.md" as "match any filename, so long as it ends with '.md' "
+Звездочка (\*) в приведенном выше необязательном аргументе "\*.md" иногда называется подстановочным знаком или glob. Она позволяет нам искать соответствия чему угодно. Вы можете прочитать glob "\*.md" как "соответствовать любому имени файла, если оно заканчивается на '.md'".
 
-The most general glob is `*`, which will match all paths. More often, you'll see this pattern used as part of another pattern, for example `*.bak` and `temp*`.
+Самый общий glob - `*`, который будет соответствовать всем путям. Чаще всего этот шаблон используется как часть другого шаблона, например `*.bak` и `temp*`.
 
-In Nushell, we also support double `*` to talk about traversing deeper paths that are nested inside of other directories. For example, `ls **/*` will list all the non-hidden paths nested under the current directory.
+В Nushell мы также поддерживаем двойное `*`, чтобы говорить об обходе более глубоких путей, которые вложены в другие каталоги. Например, `ls **/*` выведет список всех не скрытых путей, вложенных в текущий каталог.
 
 @[code](@snippets/moving_around/ls_deep_glob_example.sh)
 
-Here, we're looking for any file that ends with ".md", and the two asterisks further say "in any directory starting from here".
+Здесь мы ищем любой файл, который заканчивается на ".md", а две звездочки далее говорят "в любой директории, начиная отсюда".
 
-In other shells (like bash), glob expansion happens in the shell and the invoked program (`ls` in the example above) receives a list of matched files. In Nushell however, the string you enter is passed "as is" to the command, and some commands (like `ls`, `mv`, `cp` and `rm`) interpret their input string as a glob pattern. For example the [`ls` command's help page](https://www.nushell.sh/commands/docs/ls.html) shows that it takes the parameter: `pattern: the glob pattern to use (optional)`.
+В других оболочках (например, bash) расширение glob происходит в самой оболочке, и вызванная программа (`ls` в примере выше) получает список найденных файлов. Однако в Nushell строка, которую вы вводите, передается команде "как есть", и некоторые команды (например, `ls`, `mv`, `cp` и `rm`) интерпретируют свою входную строку как шаблон glob. Например, на странице помощи команды [`ls`](https://www.nushell.sh/commands/docs/ls.html) показано, что она принимает параметр: `pattern: the glob pattern to use (optional)`.
 
-Globbing syntax in these commands not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html). Note that this is a more limited syntax than what the dedicated [`glob` Nushell command](https://www.nushell.sh/commands/docs/glob.html) supports.
+Синтаксис globbing в этих командах поддерживает не только `*`, но и сопоставление [отдельных символов с `?` и групп символов с `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html). Обратите внимание, что это более ограниченный синтаксис, чем тот, который поддерживает специальная команда [`glob` Nushell](https://www.nushell.sh/commands/docs/glob.html).
+Чтобы избежать `*`, `?`, `[]` заключите их в одинарные или двойные кавычки. Чтобы показать содержимое каталога с именем `[slug]`, используйте `ls "[slug]"` или `ls '[slug]'`.
+Обратите внимание, что обратный знак кавычек не экранирует, например, glob: <code>cp \`test dir/\*\`</code> скопирует все файлы из `test dir` в текущий каталог.
 
-Escaping `*`, `?`, `[]` works by quoting them with single quotes or double quotes. To show the contents of a directory named `[slug]`, use `ls "[slug]"` or `ls '[slug]'`.
-Note that backtick quote doesn't escape glob, for example: <code>cp \`test dir/\*\`</code> will copy all files inside `test dir` to current directory.
+Если вы передадите переменную в команду, поддерживающую globbing, например: `let f = "a[bc]d.txt"; rm $f`. Это не расширит шаблон glob, будет удален только файл с именем `a[bc]d.txt`. Обычно это то, что вам нужно, но если вы хотите расширить шаблон glob, есть 3 способа добиться этого:
 
-If you pass a variable to a command that support globbing like this: `let f = "a[bc]d.txt"; rm $f`. It won't expand the glob pattern, only a file named `a[bc]d.txt` will be removed. Normally it's what you want, but if you want to expand the glob pattern, there are 3 ways to achieve it:
+1. Использование оператора spread вместе с командой `glob`: `let f = "a[bc]d.txt"; rm ...(glob $f)`. Этот способ рекомендуется, потому что он выражен наиболее явно, но он не работает с командами `ls` и `du`, для этого случая вы можете
+2. используя команду `into glob`: `let f = "a[bc]d.txt"; ls ($f | into glob)`. Это полезно для команд `ls` и `du`.
+3. аннотируйте переменную с типом `glob`: `let f: glob = "a[bc]d.txt"; rm $f`. Он прост в написании, но не работает с внешними командами типа `^rm $f`.
 
-1. using spread operator along with `glob` command: `let f = "a[bc]d.txt"; rm ...(glob $f)`. This way is recommended because it's expressed most explicitly, but it doesn't work with `ls` and `du` command, for the case, you can
-2. using `into glob` command: `let f = "a[bc]d.txt"; ls ($f | into glob)`. It's useful for `ls` and `du` commands.
-3. annotate variable with `glob` type: `let f: glob = "a[bc]d.txt"; rm $f`. It's simple to write, but doesn't work with external command like `^rm $f`.
-
-## Changing the current directory
+## Изменение текущей директории
 
 @[code](@snippets/moving_around/cd_example.sh)
 
-To change from the current directory to a new one, we use the [`cd`](/commands/docs/cd.md) command. Just as in other shells, we can use either the name of the directory, or if we want to go up a directory we can use the `..` shortcut.
+Чтобы перейти из текущей директории в новую, мы используем команду [`cd`](/commands/docs/cd.md). Как и в других оболочках, мы можем использовать либо имя каталога, либо, если мы хотим подняться вверх по каталогу, мы можем использовать сокращение `...`.
 
-Changing the current working directory can also be done if [`cd`](/commands/docs/cd.md) is omitted and a path by itself is given:
+Изменение текущего рабочего каталога также возможно, если опущен [`cd`](/commands/docs/cd.md) и указан путь сам по себе:
 
 @[code](@snippets/moving_around/cd_without_command_example.sh)
 
-**Note:** changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of a directory is kept to the current block. Once you exit the block, you'll return to the previous directory. You can learn more about working with this in the [environment chapter](./environment.md).
+**Примечание:** изменение каталога с помощью [`cd`](/commands/docs/cd.md) изменяет переменную окружения `PWD`. Это означает, что изменение директории сохраняется в текущем блоке. После выхода из блока вы вернетесь в предыдущий каталог. Подробнее о работе с этим можно узнать в главе [environment](./environment.md).
 
-## Filesystem commands
+## Команды файловой системы
 
-Nu also provides some basic filesystem commands that work cross-platform.
+Nu также предоставляет некоторые базовые команды файловой системы, которые работают в кросс-платформенном режиме.
 
-We can move an item from one place to another using the [`mv`](/commands/docs/mv.md) command:
+Мы можем переместить элемент из одного места в другое с помощью команды [`mv`](/commands/docs/mv.md):
 
 @[code](@snippets/moving_around/mv_example.sh)
 
-We can copy an item from one location to another with the [`cp`](/commands/docs/cp.md) command:
+Мы можем скопировать элемент из одного места в другое с помощью команды [`cp`](/commands/docs/cp.md):
 
 @[code](@snippets/moving_around/cp_example.sh)
 
-We can remove an item with the [`rm`](/commands/docs/rm.md) command:
+Мы можем удалить элемент с помощью команды [`rm`](/commands/docs/rm.md):
 
 @[code](@snippets/moving_around/rm_example.sh)
 
-The three commands also can use the glob capabilities we saw earlier with [`ls`](/commands/docs/ls.md).
+Эти три команды также могут использовать возможности glob, которые мы видели ранее с [`ls`](/commands/docs/ls.md).
 
-Finally, we can create a new directory using the [`mkdir`](/commands/docs/mkdir.md) command:
+Наконец, мы можем создать новый каталог с помощью команды [`mkdir`](/commands/docs/mkdir.md):
 
 @[code](@snippets/moving_around/mkdir_example.sh)

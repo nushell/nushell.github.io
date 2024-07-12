@@ -2,52 +2,52 @@
 
 Самый простой способ увидеть то, на что способен Nu - это начать с некоторых примеров, поэтому давайте взглянем на них.
 
-Первое, что вы можете попробовать, это запустить самую обычную команду [`ls`](/commands/docs/ls.md), и не увидеть стену текста. Вместо этого в вашем терминале появится структуризированная таблица.
+Первое, что вы можете попробовать, это запустить самую обычную команду [`ls`](/commands/docs/ls.md), и не увидеть стену текста. Вместо этого в вашем терминале появится структурированная таблица.
 
 @[code](@snippets/introduction/ls_example.sh)
 
-The table does more than show the directory in a different way. Just like tables in a spreadsheet, this table allows us to work with the data more interactively.
+Таблица не просто показывает каталог в другом виде. Подобно таблицам в базе данных, эта таблица позволяет нам работать с данными более интерактивно.
 
-The first thing we'll do is to sort our table by size. To do this, we'll take the output from [`ls`](/commands/docs/ls.md) and feed it into a command that can sort tables based on the contents of a column.
+Теперь давайте отсортируем таблицу по размеру файлов. Для того, чтобы это сделать, нам нужно взять вывод из [`ls`](/commands/docs/ls.md) и предать его в команду, которая может сортировать таблицы на основе содержимого столбца.
 
 @[code](@snippets/introduction/ls_sort_by_reverse_example.sh)
 
-You can see that to make this work we didn't pass commandline arguments to [`ls`](/commands/docs/ls.md). Instead, we used the [`sort-by`](/commands/docs/sort-by.md) command that Nu provides to do the sorting of the output of the [`ls`](/commands/docs/ls.md) command. To see the biggest files on top, we also used [`reverse`](/commands/docs/reverse.md).
+Как вы могли заметить, для того чтобы выполнить это работу, мы не передавали никаких аргументов в [`ls`](/commands/docs/ls.md). В место этого, мы использовали команду [`sort-by`](/commands/docs/sort-by.md), которую предоставляет Nu для сортировки вывода из [`ls`](/commands/docs/ls.md). Для того, чтобы увидеть большие файла вверху, мы также использовали команду [`reverse`](/commands/docs/reverse.md).
 
-Nu provides many commands that can work on tables. For example, we could use [`where`](/commands/docs/where.md) to filter the contents of the [`ls`](/commands/docs/ls.md) table so that it only shows files over 1 kilobyte:
+Nu предоставляет много команд для работы с таблицами. На пример мы можем использовать [`where`](/commands/docs/where.md), для того чтобы отфильтровать вывод из [`ls`](/commands/docs/ls.md) так, чтобы остались файлы, размер которых больше 1 килобайт.
 
 @[code](@snippets/introduction/ls_where_example.sh)
 
-Just as in the Unix philosophy, being able to have commands talk to each other gives us ways to mix-and-match in many different combinations. Let's look at a different command:
+Как и в философии Unix, возможность взаимодействия команд друг с другом дает нам возможность смешивать и сочетать их в различных комбинациях. Давайте рассмотрим другую команду:
 
 @[code](@snippets/introduction/ps_example.sh)
 
-You may be familiar with the [`ps`](/commands/docs/ps.md) command if you've used Linux. With it, we can get a list of all the current processes that the system is running, what their status is, and what their name is. We can also see the CPU load for the processes.
+Если вы работали в Linux, то, возможно, знакомы с командой [`ps`](/commands/docs/ps.md). С ее помощью мы можем получить список всех текущих процессов, запущенных в системе, их статус и название. Мы также можем увидеть загрузку процессора для этих процессов.
 
-What if we wanted to show the processes that were actively using the CPU? Just like we did with the [`ls`](/commands/docs/ls.md) command earlier, we can also work with the table that the [`ps`](/commands/docs/ps.md) command gives back to us:
+Что, если мы хотим показать процессы, активно использующие процессор? Точно так же, как мы делали это ранее с командой [`ls`](/commands/docs/ls.md), мы можем работать с таблицей, которую выдает нам команда [`ps`](/commands/docs/ps.md):
 
 @[code](@snippets/introduction/ps_where_example.sh)
 
-So far, we've been using [`ls`](/commands/docs/ls.md) and [`ps`](/commands/docs/ps.md) to list files and processes in the form of a simple table. But data in Nu is structured and can be arbitrarily nested. As an example, let's now explore the [`help commands`](/commands/docs/help_commands.md) command.
+До сих пор мы использовали [`ls`](/commands/docs/ls.md) и [`ps`](/commands/docs/ps.md) для создания списка файлов и процессов в виде простой таблицы. Но данные в Nu структурированы и могут быть произвольно вложены. В качестве примера рассмотрим команду [`help commands`](/commands/docs/help_commands.md).
 
-Running [`help commands`](/commands/docs/help_commands.md) gives us information for all Nushell commands as a table. However, the output will be quite large, so let's get the row for the `each` command only.
+Запуск [`help commands`](/commands/docs/help_commands.md) дает нам информацию по всем командам Nushell в виде таблицы. Однако результат будет довольно большим, поэтому давайте получим строку только для команды `each`.
 
 @[code](@snippets/introduction/help_commands_each_example.nu)
 
-This is a bit different than the tables we saw before. Retrieving a single row from a table gives us a [record](/book/types_of_data.html#records), which is set of key-value pairs. Note that the "params" and "input_output" columns happen to contain tables instead of a simple values. To view only one of those columns, we can use the [`get`](/commands/docs/get.md) command to retrieve it:
+Это немного отличается от таблиц, которые мы видели раньше. Извлечение одной строки из таблицы дает нам [record](/book/types_of_data.html#records), который представляет собой набор пар ключ-значение. Обратите внимание, что столбцы "params" и "input_output" содержат таблицы вместо простых значений. Чтобы просмотреть только один из этих столбцов, мы можем использовать команду [`get`](/commands/docs/get.md) для его извлечения:
 
 @[code](@snippets/introduction/help_commands_get_example.nu)
 
-The [`get`](/commands/docs/get.md) command lets us jump into the contents of structured data (a table, record, or list). We can even pass it nested columns to access data at any depth.
+Команда [`get`](/commands/docs/get.md) позволяет нам перейти к содержимому структурированных данных (таблица, запись или список). Мы можем даже передавать ей вложенные столбцы, чтобы получить доступ к данным любой глубины.
 
 @[code](@snippets/introduction/help_commands_get_nested_example.nu)
 
-These nested columns are called [cell paths](/book/types_of_data.html#cell-paths). Nu will take the cell path and go to the corresponding bit of data in a table, record, or list. Cell paths also support row numbers, so we could have rewritten the above pipeline as:
+Эти вложенные столбцы называются [cell paths](/book/types_of_data.html#cell-paths). Nu берет путь к ячейке и переходит к соответствующему биту данных в таблице, записи или списке. Пути к ячейкам также поддерживают номера строк, поэтому мы могли бы переписать вышеприведенный конвейер следующим образом:
 
 @[code](@snippets/introduction/help_commands_get_cell_path_example.nu)
 
-### Getting Help
+### Получение справки
 
-You can see the help text for any of Nu's built-in commands by using the [`help`](/commands/docs/help.md) command or by passing the `--help` flag to a command. You can also search for a topic by doing `help -f <topic>`.
+Вы можете просмотреть текст справки для любой из встроенных команд Nu, используя команду [`help`](/commands/docs/help.md) или передав флаг `--help` команде. Вы также можете найти тему, выполнив команду `help -f <topic>`.
 
 @[code](@snippets/introduction/help_example.sh)
