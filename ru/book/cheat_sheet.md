@@ -1,38 +1,38 @@
-# Nushell cheat sheet
+# Шпаргалка по Nushell
 
-## Data types
+## Типы данных
 
-convert string to integer:
+сконвертировать строку в целое число:
 
 ```nu
 "12" | into int
 ```
 
-convert present date to provided time zone:
+сконвертировать настоящую дату в указанную временную зону:
 
 ```nu
 date now | date to-timezone "Europe/London"
 ```
 
-update a record's language and if none is specified insert provided value:
+обновить запись с языком и если он не указан, вставить предоставленное значение:
 
 ```nu
 {'name': 'nu', 'stars': 5, 'language': 'Python'} | upsert language 'Rust'
 ```
 
-convert list of strings to yaml:
+сконвертировать список строк в yaml:
 
 ```nu
 [one two three] | to yaml
 ```
 
-print table data:
+вывести таблицу данных:
 
 ```nu
 [[framework, language]; [Django, Python] [Laravel, PHP]]
 ```
 
-select two named columns from the table and print their values:
+выделить два именнованных столбца из таблицы и вывести их значения
 
 ```nu
 [{name: 'Robert' age: 34 position: 'Designer'}
@@ -41,9 +41,9 @@ select two named columns from the table and print their values:
 ] | select name position
 ```
 
-## Strings
+## Строки
 
-interpolate text:
+интерполяция текста:
 
 ```nu
 > let name = "Alice"
@@ -51,7 +51,7 @@ interpolate text:
 greetings, Alice!
 ```
 
-split text on comma delimiter and save the list to `string_list` variable:
+разделить текст на запятую и сохранить список в переменной `string_list`:
 
 ```nu
 > let string_list = "one,two,three" | split row ","
@@ -63,14 +63,14 @@ split text on comma delimiter and save the list to `string_list` variable:
 ╰───┴───────╯
 ```
 
-check if a string contains a substring:
+проверить строку на присутствие подстроки:
 
 ```nu
 > "Hello, world!" | str contains "o, w"
 true
 ```
 
-join multiple strings with delimiter:
+создать список строк и объединить его с разделителем:
 
 ```nu
 > let str_list = [zero one two]
@@ -78,14 +78,14 @@ join multiple strings with delimiter:
 zero,one,two
 ```
 
-slice text by indices:
+получить подстроки с помощью индексов:
 
 ```nu
 > 'Hello World!' | str substring 4..8
 o Wor
 ```
 
-parse string into named columns:
+сконвертировать строку в названные столбцы:
 
 ```nu
 > 'Nushell 0.80' | parse '{shell} {version}'
@@ -96,7 +96,7 @@ parse string into named columns:
 ╰───┴─────────┴─────────╯
 ```
 
-parse comma separated values (csv):
+спарсить строку разделенную запятыми в csv:
 
 ```nu
 > "acronym,long\nAPL,A Programming Language" | from csv
@@ -107,16 +107,16 @@ parse comma separated values (csv):
 ╰───┴─────────┴────────────────────────╯
 ```
 
-color text in command-line terminal:
+цветной текст:
 
 ```nu
 > $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 This text is a bold purple!
 ```
 
-## Lists
+## Списки
 
-insert list value at index:
+вставить значение в список по индексу
 
 ```nu
 > [foo bar baz] | insert 1 'beeze'
@@ -128,7 +128,7 @@ insert list value at index:
 ╰───┴───────╯
 ```
 
-update list value by index:
+обновить значение в списке по индексу
 
 ```nu
 > [1, 2, 3, 4] | update 1 10
@@ -140,7 +140,7 @@ update list value by index:
 ╰───┴────╯
 ```
 
-prepend list value:
+добавить значение в начало списка
 
 ```nu
 > let numbers = [1, 2, 3]
@@ -153,7 +153,7 @@ prepend list value:
 ╰───┴───╯
 ```
 
-append list value:
+добавить значение в конец списка
 
 ```nu
 > let numbers = [1, 2, 3]
@@ -166,7 +166,7 @@ append list value:
 ╰───┴───╯
 ```
 
-slice first list values:
+получить первые 2 значения списка
 
 ```nu
 > [cammomile marigold rose forget-me-not] | first 2
@@ -176,7 +176,7 @@ slice first list values:
 ╰───┴───────────╯
 ```
 
-iterate over a list; `it` is current list value:
+итерация по списку; `it` - текущее значение
 
 ```nu
 > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
@@ -193,7 +193,7 @@ iterate over a list; `it` is current list value:
 ╰───┴─────────────────────────────────────────╯
 ```
 
-iterate over a list with an index and value:
+итерация по списку с индексом и значением; `it` - текущее значение
 
 ```nu
 > $planets | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
@@ -209,7 +209,7 @@ iterate over a list with an index and value:
 ╰───┴─────────────╯
 ```
 
-reduce the list to a single value; `reduce` gives access to accumulator that is applied to each element in the list:
+сократить список до одного значения; `reduce` дает доступ к аккумулятору, который применяется к каждому элементу списка:
 
 ```nu
 > let scores = [3 8 4]
@@ -217,7 +217,7 @@ reduce the list to a single value; `reduce` gives access to accumulator that is 
 total = 15
 ```
 
-reduce with an initial value (`--fold`):
+уменьшить с начальным значением (`--fold`):
 
 ```nu
 > let scores = [3 8 4]
@@ -225,7 +225,7 @@ reduce with an initial value (`--fold`):
 total = 96
 ```
 
-give access to the 3rd item in the list:
+дать доступ к третьему элементу в списке:
 
 ```nu
 > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
@@ -233,7 +233,7 @@ give access to the 3rd item in the list:
 Earth
 ```
 
-check if any string in the list starts with `E`:
+Проверьте, начинается ли какая-либо строка в списке с `E`:
 
 ```nu
 > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
@@ -241,7 +241,7 @@ check if any string in the list starts with `E`:
 true
 ```
 
-slice items that satisfy provided condition:
+срез элементов, удовлетворяющих заданному условию:
 
 ```nu
 > let cond = {|x| $x < 0 }; [-1 -2 9 1] | take while $cond
@@ -251,21 +251,21 @@ slice items that satisfy provided condition:
 ╰───┴────╯
 ```
 
-## Tables
+## Таблицы
 
-sort table:
+сортировка таблицы
 
 ```nu
 ls | sort-by size
 ```
 
-sort table, get first rows:
+сортировка таблицы, получить первые 5 строк
 
 ```nu
 ls | sort-by size | first 5
 ```
 
-concatenate two tables with same columns:
+соеденить две таблицы с одинаковыми столбцами
 
 ```nu
 > let $a = [[first_column second_column third_column]; [foo bar snooze]]
@@ -280,7 +280,7 @@ concatenate two tables with same columns:
 ╰───┴──────────────┴───────────────┴──────────────╯
 ```
 
-remove the last column of a table:
+удалить последний столбец таблицы
 
 ```nu
 > let teams_scores = [[team score plays]; ['Boston Celtics' 311 3] ['Golden State Warriors', 245 2]]
@@ -294,47 +294,47 @@ remove the last column of a table:
 ╰───┴───────────────────────┴───────╯
 ```
 
-## Files & Filesystem
+## Файлы и файловая система
 
-open a text file with the default text editor:
+открыть текстовый файл с помощью текстового редактора по умолчанию:
 
 ```nu
 start file.txt
 ```
 
-save a string to text file:
+сохранение строки в текстовый файл:
 
 ```nu
 'lorem ipsum ' | save file.txt
 ```
 
-append a string to the end of a text file:
+добавить строку в конец текстового файла:
 
 ```nu
 'dolor sit amet' | save --append file.txt
 ```
 
-save a record to file.json:
+сохранить запись в файле file.json:
 
 ```nu
 { a: 1, b: 2 } | save file.json
 ```
 
-recursively search for files by file name:
+рекурсивный поиск файлов по имени файла:
 
 ```nu
 glob **/*.{rs,toml} --depth 2
 ```
 
-watch a file, run command whenever it changes:
+следить за файлом, выполнять команду при каждом его изменении:
 
 ```nu
 watch . --glob=**/*.rs {|| cargo test }
 ```
 
-## Custom Commands
+## Свои команды
 
-custom command with parameter type set to string:
+пользовательская команда с типом параметра string:
 
 ```nu
 > def greet [name: string] {
@@ -342,7 +342,7 @@ custom command with parameter type set to string:
 }
 ```
 
-custom command with default parameter set to nushell:
+пользовательская команда с параметром по умолчанию nushell:
 
 ```nu
 > def greet [name = "nushell"] {
@@ -350,7 +350,7 @@ custom command with default parameter set to nushell:
 }
 ```
 
-passing named parameter by defining flag for custom commands:
+передача именованного параметра путем определения флага для пользовательских команд:
 
 ```nu
 > def greet [
@@ -363,7 +363,7 @@ passing named parameter by defining flag for custom commands:
 > greet world --age 10
 ```
 
-using flag as a switch with a shorthand flag (-a) for the age:
+использование флага в качестве переключателя с сокращенным флагом (-a) для возраста:
 
 ```nu
 > def greet [
@@ -380,7 +380,7 @@ using flag as a switch with a shorthand flag (-a) for the age:
 > greet -a 10 --twice hello
 ```
 
-custom command which takes any number of positional arguments using rest params:
+пользовательская команда, принимающая любое количество позиционных аргументов с помощью rest params:
 
 ```nu
 > def greet [...name: string] {
@@ -397,9 +397,9 @@ jupiter
 venus
 ```
 
-## Variables
+## Переменные
 
-an immutable variable cannot change its value after declaration:
+Неизменяемая переменная не может изменить свое значение после объявления:
 
 ```nu
 > let val = 42
@@ -407,7 +407,7 @@ an immutable variable cannot change its value after declaration:
 42
 ```
 
-shadowing variable (declaring variable with the same name in a different scope):
+теневая переменная (объявление переменной с тем же именем в другой области видимости):
 
 ```nu
 > let val = 42
@@ -417,7 +417,7 @@ shadowing variable (declaring variable with the same name in a different scope):
 42
 ```
 
-declaring a mutable variable with mut key word:
+объявление изменяемой переменной с ключевым словом mut:
 
 ```nu
 > mut val = 42
@@ -426,7 +426,7 @@ declaring a mutable variable with mut key word:
 69
 ```
 
-closures and nested defs cannot capture mutable variables from their environment (errors):
+закрытия и вложенные defs не могут захватывать изменяемые переменные из своего окружения (ошибки):
 
 ```nu
 > mut x = 0
@@ -441,30 +441,30 @@ Error: nu::parser::expected_keyword
    ╰────
 ```
 
-a constant variable is immutable and is fully evaluated at parse-time:
+Константная переменная является неизменяемой и полностью оценивается во время разбора:
 
 ```nu
 > const file = 'path/to/file.nu'
 > source $file
 ```
 
-use question mark operator `?` to return null instead of error if provided path is incorrect:
+Используйте оператор вопросительного знака `?` для возврата null вместо ошибки, если указанный путь неверен:
 
 ```nu
 > let files = (ls)
 > $files.name?.0?
 ```
 
-assign the result of a pipeline to a variable:
+присвоить результат пайплайна переменной:
 
 ```nu
 > let big_files = (ls | where size > 10kb)
 > $big_files
 ```
 
-## Modules
+## Модули
 
-use an inline module:
+используйте встроенный модуль:
 
 ```nu
 > module greetings {
@@ -480,7 +480,7 @@ use an inline module:
 > hello "world"
 ```
 
-import module from file and use its environment in current scope:
+импортировать модуль из файла и использовать его окружение в текущей области видимости:
 
 ```nu
 # greetings.nu
@@ -498,7 +498,7 @@ Arthur, King of the Britons
 hello Arthur, King of the Britons!
 ```
 
-use main command in module:
+используйте главную команду в модуле:
 
 ```nu
 # greetings.nu

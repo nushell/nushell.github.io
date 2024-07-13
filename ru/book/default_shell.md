@@ -1,4 +1,4 @@
-# Установка шелла по умолчанию
+# Установка в качестве шелла по умолчанию
 
 ## Установка Nu в качестве шелла по умолчанию в вашем терминале
 
@@ -27,6 +27,6 @@ Nu всё ещё в разработке, и совместимость с POSIX
 
 @[code](@snippets/installation/chsh_invalid_shell_error.sh)
 
-You can add Nu to the list of allowed shells by appending your Nu binary to the `shells` file.
+Вы должны добавить Nu в список разрешённых хеллов, добавив путь до `nu` в `shells` файл.
 В этом случае вам нужно добавить путь к Nu в список разрешённых шеллов в `/etc/shells`.
 Путь до `nu` можно получить с помощью команды `which nu`, обычно это `$HOME/.cargo/bin/nu`.
