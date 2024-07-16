@@ -1,6 +1,11 @@
 [files]
 extend-exclude = ["pt-BR", "de", "ja", "es", "blog/202[0-3]*", "commands/"]
 
+[default]
+extend-ignore-re = [
+    "changes_length: fals" # false positive in cookbook/tables.md
+]
+
 [default.extend-words]
 ons = "ons" # false positive in commands/docs/str_replace.md
 ful = "ful" # false positive in commands/docs/str_replace.md
