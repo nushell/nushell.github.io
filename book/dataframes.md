@@ -731,13 +731,11 @@ Using the first dataframe that we created we can do something like this
 ```nu
 > let mask_2 = $df_1 | polars col first | polars is-in [b c]
 > $mask_2
-╭──────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ input    │ [table 2 rows]                                                                                            │
-│ function │ Boolean(IsIn)                                                                                             │
-│ options  │ FunctionOptions { collect_groups: ElementWise, fmt_str: "", input_wildcard_expansion: false, returns_scal │
-│          │ ar: false, cast_to_supertypes: true, allow_rename: false, pass_name_to_apply: false, changes_length: fals │
-│          │ e, check_lengths: UnsafeBool(true), allow_group_aware: true }                                             │
-╰──────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭──────────┬─────────────────────────╮
+│ input    │ [table 2 rows]          │
+│ function │ Boolean(IsIn)           │
+│ options  │ FunctionOptions { ... } │
+╰──────────┴─────────────────────────╯
 ```
 
 and this new mask can be used to filter the dataframe
