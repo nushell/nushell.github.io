@@ -141,6 +141,8 @@ The full list of filesize units are:
 As with durations, you can make fractional file sizes, and do calculations:
 
 ```nu
+> 0.5kB
+500 B
 > 1GB / 1B
 1000000000
 > 1GiB / 1B
