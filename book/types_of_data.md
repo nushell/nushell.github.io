@@ -97,16 +97,18 @@ Dates are in three forms, based on the RFC 3339 standard:
 
 Durations represent a length of time. This chart shows all durations currently supported:
 
-| Duration | Length          |
-| -------- | --------------- |
-| `1ns`    | one nanosecond  |
-| `1us`    | one microsecond |
-| `1ms`    | one millisecond |
-| `1sec`   | one second      |
-| `1min`   | one minute      |
-| `1hr`    | one hour        |
-| `1day`   | one day         |
-| `1wk`    | one week        |
+| Duration  | Length          |
+| --------- | --------------- |
+| `1ns`     | one nanosecond  |
+| `1μs`[^1] | one microsecond |
+| `1ms`     | one millisecond |
+| `1sec`    | one second      |
+| `1min`    | one minute      |
+| `1hr`     | one hour        |
+| `1day`    | one day         |
+| `1wk`     | one week        |
+
+[^1]: Can be simplified to `us` if unicode or the greek letter mu (μ) is unavailable
 
 You can make fractional durations:
 
