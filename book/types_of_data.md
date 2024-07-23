@@ -22,7 +22,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 | Booleans          | `true`                                                                |
 | Dates             | `2000-01-01`                                                          |
 | Durations         | `2min + 12sec`                                                        |
-| File sizes        | `64mb`                                                                |
+| File sizes        | `64MB`                                                                |
 | Ranges            | `0..4`, `0..<5`, `0..`, `..4`                                         |
 | Binary            | `0x[FE FF]`                                                           |
 | Lists             | `[0 1 'two' 3]`                                                       |
@@ -128,28 +128,24 @@ Nushell also has a special type for file sizes. Examples include `100b`, `15kb`,
 
 The full list of filesize units are:
 
-- `b`: bytes
-- `kb`: kilobytes (aka 1000 bytes)
-- `mb`: megabytes
-- `gb`: gigabytes
-- `tb`: terabytes
-- `pb`: petabytes
-- `eb`: exabytes
-- `kib`: kibibytes (aka 1024 bytes)
-- `mib`: mebibytes
-- `gib`: gibibytes
-- `tib`: tebibytes
-- `pib`: pebibytes
-- `eib`: exbibytes
+| Decimal (factor of 1000) | Binary (factor of 1024) |
+| --------------- | ---------------- |
+| `B`: bytes      | `B`: bytes       |
+| `kB`: kilobytes | `KiB`: kibibytes |
+| `MB`: megabytes | `MiB`: mebibytes |
+| `GB`: gigabytes | `GiB`: gibibytes |
+| `TB`: terabytes | `TiB`: tebibytes |
+| `PB`: petabytes | `PiB`: pebibytes |
+| `EB`: exabytes  | `EiB`: exbibytes |
 
 As with durations, you can make fractional file sizes, and do calculations:
 
 ```nu
-> 1Gb / 1b
+> 1GB / 1B
 1000000000
-> 1Gib / 1b
+> 1GiB / 1B
 1073741824
-> (1Gib / 1b) == 2 ** 30
+> (1GiB / 1B) == 2 ** 30
 true
 ```
 
