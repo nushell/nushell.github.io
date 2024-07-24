@@ -126,9 +126,9 @@ And you can do calculations with durations:
 
 ## File sizes
 
-Nushell also has a special type for file sizes. Examples include `100b`, `15kb`, and `100mb`.
+Nushell also has a special type for file sizes. Examples include `100B`, `15kB`, and `100MB`.
 
-The full list of filesize units are:
+The full list of file size units are:
 
 | Decimal (factor of 1000) | Binary (factor of 1024) |
 | --------------- | ---------------- |
