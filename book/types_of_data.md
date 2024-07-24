@@ -108,7 +108,7 @@ Durations represent a length of time. This chart shows all durations currently s
 | `1day`    | one day         |
 | `1wk`     | one week        |
 
-[^1]: Can be simplified to `us` if unicode or the greek letter mu (μ) is unavailable
+[^1]: Can be simplified to `us` if Unicode or the Greek letter Mu (μ) is unavailable
 
 You can make fractional durations:
 
