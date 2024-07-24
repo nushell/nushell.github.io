@@ -82,7 +82,7 @@ Output:
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-Or as mentioned in [The Cookbook](https://www.nushell.sh/book/working_with_tables.html#merging-tables) we can use the [`reduce`](../commands/docs/reduce.md) command to merge tables together recursively:
+Or as mentioned in the [Cookbook](https://www.nushell.sh/book/working_with_tables.html#merging-tables) we can use the [`reduce`](../commands/docs/reduce.md) command to merge tables together recursively:
 
 ```nu
 [$first_table $second_table $third_table]
