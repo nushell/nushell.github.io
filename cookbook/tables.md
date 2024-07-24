@@ -62,7 +62,7 @@ We can merge all three tables like this:
 
 ```nu
 $first_table
-| chunks ( $second_table | length )
+| chunks ($second_table | length)
 | each { merge $second_table }
 | flatten
 | chunks ($third_table | length)
