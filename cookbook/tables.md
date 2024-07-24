@@ -26,13 +26,13 @@ Output:
 ───┴───┴───┴───┴───
 ```
 
-Second row in columns `c` and `d` is empty because our `second` table only contained a single row so nushell has nothing to fill the remaining rows with. But what if we wanted the smaller table to 'wrap around' and keep filling the rows? For that we can use the [`group`](/commands/docs/group.md) command to split the larger table into subtables, merge each of them with the smaller table and then combine the merged tables together using [`flatten`](/commands/docs/flatten.md) command like this:
+Second row in columns `c` and `d` is empty because our `second` table only contained a single row so nushell has nothing to fill the remaining rows with. But what if we wanted the smaller table to 'wrap around' and keep filling the rows? For that we can use the [`chunks`](/commands/docs/chunks.md) command to split the larger table into subtables, merge each of them with the smaller table and then combine the merged tables together using [`flatten`](/commands/docs/flatten.md) command like this:
 
 ```nu
 let first = [[a b]; [1 2] [3 4]]
 let second = [[c d]; [3 4]]
 $first
-| group ($second | length)
+| chunks ($second | length)
 | each { merge $second }
 | flatten
 ```
@@ -59,10 +59,10 @@ We could join all three tables like this:
 
 ```nu
 $first
-| group ($second|length)
+| chunks ($second | length)
 | each { merge $second }
 | flatten
-| group ($third | length)
+| chunks ($third | length)
 | each { merge $third }
 | flatten
 ```
@@ -85,7 +85,7 @@ Or just like last time we could use the [`reduce`](../commands/docs/reduce.md) c
 [$first_table $second_table $third_table]
 | reduce { |it, acc|
     $acc
-    | group ($it | length)
+    | chunks ($it | length)
     | each { merge $it }
     | flatten
   }
