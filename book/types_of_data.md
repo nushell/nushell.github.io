@@ -140,6 +140,8 @@ The full list of filesize units are:
 | `PB`: petabytes | `PiB`: pebibytes |
 | `EB`: exabytes  | `EiB`: exbibytes |
 
+Note that in Nushell file size units are case-insensitive, they do not need to be written following the SI and IEC standards like above. This gives you some leeway, since no error is raised if you write `mb` instead of `MB`. Therefore, `1KiB` = `1kib` = `1kIB` = `1Kib`, etc.
+
 As with durations, you can make fractional file sizes, and do calculations:
 
 ```nu
@@ -149,7 +151,7 @@ As with durations, you can make fractional file sizes, and do calculations:
 1000000000
 > 1GiB / 1B
 1073741824
-> (1GiB / 1B) == 2 ** 30
+> [1kib, 1kIB, 1Kib, 1kIb] | all { |kibibyte| $kibibyte == 1KiB } # These are all equivalent.
 true
 ```
 
