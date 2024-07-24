@@ -2,7 +2,7 @@
 title: polars filter
 categories: |
   lazyframe
-version: 0.95.0
+version: 0.96.0
 lazyframe: |
   Filter dataframe based in expression.
 usage: |

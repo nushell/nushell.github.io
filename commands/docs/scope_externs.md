@@ -2,7 +2,7 @@
 title: scope externs
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Output info on the known externals in the current scope.
 usage: |

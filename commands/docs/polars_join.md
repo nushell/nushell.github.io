@@ -2,7 +2,7 @@
 title: polars join
 categories: |
   lazyframe
-version: 0.95.0
+version: 0.96.0
 lazyframe: |
   Joins a lazy frame with other lazy frame.
 usage: |
@@ -22,7 +22,7 @@ usage: |
 
  -  `--inner, -i`: inner joining between lazyframes (default)
  -  `--left, -l`: left join between lazyframes
- -  `--outer, -o`: outer join between lazyframes
+ -  `--full, -f`: full join between lazyframes
  -  `--cross, -c`: cross join between lazyframes
  -  `--suffix, -s {string}`: Suffix to use on columns with same name
 

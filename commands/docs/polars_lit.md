@@ -2,7 +2,7 @@
 title: polars lit
 categories: |
   expression
-version: 0.95.0
+version: 0.96.0
 expression: |
   Creates a literal expression.
 usage: |
@@ -34,8 +34,8 @@ usage: |
 Created a literal expression and converts it to a nu object
 ```nu
 > polars lit 2 | polars into-nu
-╭───────┬─────────╮
-│ expr  │ literal │
-│ value │ 2       │
-╰───────┴─────────╯
+╭───────┬────────────╮
+│ expr  │ literal    │
+│ value │ dyn int: 2 │
+╰───────┴────────────╯
 ```

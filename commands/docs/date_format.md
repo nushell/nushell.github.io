@@ -2,7 +2,7 @@
 title: date format
 categories: |
   removed
-version: 0.95.0
+version: 0.96.0
 removed: |
   Removed command: use `format date` instead.
 usage: |

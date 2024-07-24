@@ -2,7 +2,7 @@
 title: random int
 categories: |
   random
-version: 0.95.0
+version: 0.96.0
 random: |
   Generate a random integer [min..max].
 usage: |

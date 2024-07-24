@@ -2,7 +2,7 @@
 title: str
 categories: |
   strings
-version: 0.95.0
+version: 0.96.0
 strings: |
   Various commands for working with string data.
 usage: |
@@ -35,6 +35,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`str camel-case`](/commands/docs/str_camel-case.md)                     | Convert a string to camelCase.                                                              | built-in |
 | [`str capitalize`](/commands/docs/str_capitalize.md)                     | Capitalize first letter of text.                                                            | built-in |
 | [`str contains`](/commands/docs/str_contains.md)                         | Checks if string input contains a substring.                                                | built-in |
+| [`str deunicode`](/commands/docs/str_deunicode.md)                       | Convert Unicode string to pure ASCII.                                                       | built-in |
 | [`str distance`](/commands/docs/str_distance.md)                         | Compare two strings and return the edit distance/Levenshtein distance.                      | built-in |
 | [`str downcase`](/commands/docs/str_downcase.md)                         | Make text lowercase.                                                                        | built-in |
 | [`str ends-with`](/commands/docs/str_ends-with.md)                       | Check if an input ends with a string.                                                       | built-in |
