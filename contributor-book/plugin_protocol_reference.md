@@ -540,6 +540,23 @@ Example:
 }
 ```
 
+#### `Identifier` engine call response
+
+A successful result for engine calls that produce internal identifiers, such as [`FindDecl`](#finddecl-engine-call). The body is a `usize` (unsigned integer, platform pointer size).
+
+Example:
+
+```json
+{
+  "EngineCallResponse": [
+    0,
+    {
+      "Identifier": 4221
+    }
+  ]
+}
+```
+
 ### `Goodbye`
 
 Indicate that no further plugin calls are expected, and that the plugin **should** exit as soon as it is finished processing any in-progress plugin calls.
@@ -982,6 +999,98 @@ Example:
           }
         ],
         "input": "Empty",
+        "redirect_stdout": true,
+        "redirect_stderr": false
+      }
+    }
+  }
+}
+```
+
+#### `FindDecl` engine call
+
+Find the declaration ID for a command in scope. The body is the name of the desired command, as a string. Returns an [`Identifier` response](#identifier-engine-call-response) if successful with the ID of the declared command, or an [empty](#empty-header-variant) [`PipelineData` response](#pipelinedata-engine-call-response) if the command with the given name couldn't be found in the scope of the plugin call.
+
+It is recommended to provide a descriptive error about what command was required if the command wasn't found, as it is possible to `hide` even the core commands that are provided with Nushell. Finding and calling commands from the same or other plugins is supported, however keep in mind that doing things within the plugin is usually more efficient when possible.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 7,
+    "id": 48,
+    "call": {
+      "FindDecl": "inc"
+    }
+  }
+}
+```
+
+#### `CallDecl` engine call
+
+Pass a command's declaration ID (found via [`FindDecl`](#finddecl-engine-call)) and arguments to the engine to be called. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful with the output of the command, which may be a stream.
+
+| Field               | Type                                        | Usage                                                                           |
+| ------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
+| **decl_id**         | unsigned integer                            | The ID of the declaration to call.                                              |
+| **call**            | [`EvaluatedCall`](#evaluatedcall)           | Arguments and head span for the call.                                           |
+| **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the command.                                                          |
+| **redirect_stdout** | boolean                                     | Whether to redirect stdout if the declared command ends in an external command. |
+| **redirect_stderr** | boolean                                     | Whether to redirect stderr if the declared command ends in an external command. |
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 7,
+    "id": 49,
+    "call": {
+      "CallDecl": {
+        "decl_id": 432,
+        "call": {
+          "head": {
+            "start": 40400,
+            "end": 40403
+          },
+          "positional": [
+            {
+              "String": {
+                "val": "0.1.2",
+                "span": {
+                  "start": 40407,
+                  "end": 40415
+                }
+              }
+            }
+          ],
+          "named": [
+            [
+              "major",
+              {
+                "Bool": {
+                  "val": true,
+                  "span": {
+                    "start": 40404,
+                    "end": 40406
+                  }
+                }
+              }
+            ]
+          ]
+        },
+        "input": {
+          "Value": {
+            "Int": {
+              "val": 400,
+              "span": {
+                "start": 40390,
+                "end": 40393
+              }
+            }
+          }
+        },
         "redirect_stdout": true,
         "redirect_stderr": false
       }
