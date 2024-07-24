@@ -2,7 +2,7 @@
 title: http delete
 categories: |
   network
-version: 0.95.0
+version: 0.96.0
 network: |
   Delete the specified resource.
 usage: |
@@ -39,9 +39,9 @@ usage: |
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | any    |
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -72,6 +72,12 @@ http delete from example.com, with body
 http delete from example.com, with JSON body
 ```nu
 > http delete --content-type application/json --data { field: value } https://www.example.com
+
+```
+
+Perform an HTTP delete with JSON content from a pipeline to example.com
+```nu
+> open foo.json | http delete https://www.example.com
 
 ```
 

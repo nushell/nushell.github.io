@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -99,12 +99,12 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars max`](/commands/docs/polars_max.md)                         | Creates a max expression or aggregates columns to their max value.                               | plugin |
 | [`polars mean`](/commands/docs/polars_mean.md)                       | Creates a mean expression for an aggregation or aggregates columns to their mean value.          | plugin |
 | [`polars median`](/commands/docs/polars_median.md)                   | Median value from columns in a dataframe or creates expression for an aggregation                | plugin |
-| [`polars melt`](/commands/docs/polars_melt.md)                       | Unpivot a DataFrame from wide to long format.                                                    | plugin |
 | [`polars min`](/commands/docs/polars_min.md)                         | Creates a min expression or aggregates columns to their min value.                               | plugin |
 | [`polars n-unique`](/commands/docs/polars_n-unique.md)               | Counts unique values.                                                                            | plugin |
 | [`polars not`](/commands/docs/polars_not.md)                         | Inverts boolean mask.                                                                            | plugin |
 | [`polars open`](/commands/docs/polars_open.md)                       | Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.                   | plugin |
 | [`polars otherwise`](/commands/docs/polars_otherwise.md)             | Completes a when expression.                                                                     | plugin |
+| [`polars pivot`](/commands/docs/polars_pivot.md)                     | Pivot a DataFrame from wide to long format.                                                      | plugin |
 | [`polars quantile`](/commands/docs/polars_quantile.md)               | Aggregates the columns to the selected quantile.                                                 | plugin |
 | [`polars query`](/commands/docs/polars_query.md)                     | Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause. | plugin |
 | [`polars rename`](/commands/docs/polars_rename.md)                   | Rename a dataframe column.                                                                       | plugin |
@@ -123,7 +123,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars sort-by`](/commands/docs/polars_sort-by.md)                 | Sorts a lazy dataframe based on expression(s).                                                   | plugin |
 | [`polars std`](/commands/docs/polars_std.md)                         | Creates a std expression for an aggregation of std value from columns in a dataframe.            | plugin |
 | [`polars store-get`](/commands/docs/polars_store-get.md)             | Gets a Dataframe or other object from the plugin cache.                                          | plugin |
-| [`polars store-ls`](/commands/docs/polars_store-ls.md)               | Lists stored dataframes.                                                                         | plugin |
+| [`polars store-ls`](/commands/docs/polars_store-ls.md)               | Lists stored polars objects.                                                                     | plugin |
 | [`polars store-rm`](/commands/docs/polars_store-rm.md)               | Removes a stored Dataframe or other object from the plugin cache.                                | plugin |
 | [`polars str-lengths`](/commands/docs/polars_str-lengths.md)         | Get lengths of all strings.                                                                      | plugin |
 | [`polars str-slice`](/commands/docs/polars_str-slice.md)             | Slices the string from the start position until the selected length.                             | plugin |
@@ -137,6 +137,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars to-jsonl`](/commands/docs/polars_to-jsonl.md)               | Saves dataframe to a JSON lines file.                                                            | plugin |
 | [`polars to-parquet`](/commands/docs/polars_to-parquet.md)           | Saves dataframe to parquet file.                                                                 | plugin |
 | [`polars unique`](/commands/docs/polars_unique.md)                   | Returns unique values from a dataframe.                                                          | plugin |
+| [`polars unpivot`](/commands/docs/polars_unpivot.md)                 | Unpivot a DataFrame from wide to long format.                                                    | plugin |
 | [`polars uppercase`](/commands/docs/polars_uppercase.md)             | Uppercase the strings in the column.                                                             | plugin |
 | [`polars value-counts`](/commands/docs/polars_value-counts.md)       | Returns a dataframe with the counts for unique values in series.                                 | plugin |
 | [`polars var`](/commands/docs/polars_var.md)                         | Create a var expression for an aggregation.                                                      | plugin |

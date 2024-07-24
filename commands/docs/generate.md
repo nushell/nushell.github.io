@@ -2,7 +2,7 @@
 title: generate
 categories: |
   generators
-version: 0.95.0
+version: 0.96.0
 generators: |
   Generate a list of values by successively invoking a closure.
 usage: |
@@ -16,12 +16,12 @@ usage: |
 
 ## Signature
 
-```> generate {flags} (initial) (closure)```
+```> generate {flags} (closure) (initial)```
 
 ## Parameters
 
- -  `initial`: Initial value.
  -  `closure`: Generator function.
+ -  `initial`: Initial value.
 
 
 ## Input/output types:
@@ -34,7 +34,7 @@ usage: |
 
 Generate a sequence of numbers
 ```nu
-> generate 0 {|i| if $i <= 10 { {out: $i, next: ($i + 2)} }}
+> generate {|i| if $i <= 10 { {out: $i, next: ($i + 2)} }} 0
 ╭───┬────╮
 │ 0 │  0 │
 │ 1 │  2 │
@@ -48,7 +48,13 @@ Generate a sequence of numbers
 
 Generate a continuous stream of Fibonacci numbers
 ```nu
-> generate [0, 1] {|fib| {out: $fib.0, next: [$fib.1, ($fib.0 + $fib.1)]} }
+> generate {|fib| {out: $fib.0, next: [$fib.1, ($fib.0 + $fib.1)]} } [0, 1]
+
+```
+
+Generate a continuous stream of Fibonacci numbers, using default parameters
+```nu
+> generate {|fib=[0, 1]| {out: $fib.0, next: [$fib.1, ($fib.0 + $fib.1)]} }
 
 ```
 

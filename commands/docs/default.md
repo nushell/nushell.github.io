@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.95.0
+version: 0.96.0
 filters: |
   Sets a default row's column if missing.
 usage: |
@@ -41,12 +41,12 @@ Give a default 'target' column to all file entries
 Get the env value of `MY_ENV` with a default value 'abc' if not present
 ```nu
 > $env | get --ignore-errors MY_ENV | default 'abc'
-
+abc
 ```
 
 Replace the `null` value in a list
 ```nu
-> [1, 2, null, 4] | default 3
+> [1, 2, null, 4] | each { default 3 }
 ╭───┬───╮
 │ 0 │ 1 │
 │ 1 │ 2 │

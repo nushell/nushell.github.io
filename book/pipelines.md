@@ -99,9 +99,9 @@ Certain [filter commands](/commands/categories/filters.html) may modify the pipe
 1..10 | each {$in * 2}
 ```
 
-Rather than referring to the entire range of 10 digits, the `each` filter modifies the input to refer to the value of the _current iteration_.
+Rather than referring to the entire range of 10 digits, the `each` filter modifies `$in` to refer to the value of the _current iteration_.
 
-In most cases, the pipeline input, and resulting `$in`, will be the same as the closure parameter. For the `each` filter, the following example is equivalent to the one above:
+In most filters, the pipeline input and its resulting `$in` will be the same as the closure parameter. For the `each` filter, the following example is equivalent to the one above:
 
 ```nushell
 1..10 | each {|value| $value * 2}
@@ -120,68 +120,142 @@ With most filters, the second version would refer to the entire `file` record (w
 
 See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
 
-### When is `$in` valid?
+### When does `$in` change (and when can it be reused)?
 
-A common source of errors is misunderstanding where `$in` is valid, invalid, and when it changes.
+- **_Rule 1:_** When used in the first position of a pipeline in a closure or block, `$in` refers to the pipeline (or filter) input to the closure/block.
 
-As described above, `$in` is valid:
+  Example:
 
-- When used in a pipeline to address the previous expression's result
+  ```nushell
+  def echo_me [] {
+    print $in
+  }
+
+  > true | echo_me
+  true
+  ```
+
+  - **_Rule 1.5:_** This is true throughout the current scope. Even on subsequent lines in a closure or block, `$in` is the same value when used in the first position of _any pipeline_ inside that scope.
+
+    Example:
+
+    ```nu
+    [ a b c ] | each {
+        print $in
+        print $in
+        $in
+    }
+    ```
+
+    All three of the `$in` values are the same on each iteration, so this outputs:
+
+    ```nu
+    a
+    a
+    b
+    b
+    c
+    c
+    ╭───┬───╮
+    │ 0 │ a │
+    │ 1 │ b │
+    │ 2 │ c │
+    ╰───┴───╯
+    ```
+
+* **_Rule 2:_** When used anywhere else in a pipeline (other than the first position), `$in` refers to the previous expression's result:
 
   Example:
 
   ```nushell
   > 4               # Pipeline input
-    | $in * $in     # 4 * 4 = 16
-    | $in / 2       # 16 / 2 = 8
+    | $in * $in     # $in is 4 in this expression
+    | $in / 2       # $in is now 16 in this expression
+    | $in           # $in is now 8
 
   8
   ```
 
-- When used in the first line of a multiline closure or block to address the pipeline (or filter) input to the closure/block:
+  - **_Rule 2.5:_** Inside a closure or block, Rule 2 usage occurs inside a new scope (a sub-expression) where that "new" `$in` value is valid. This means that Rule 1 and Rule 2 usage can coexist in the same closure or block.
+
+    Example:
+
+    ```nushell
+    4 | do {
+      print $in            # closure-scope $in is 4
+
+      let p = (            # explicit sub-expression, but one will be created regardless
+        $in * $in          # initial-pipeline position $in is still 4 here
+        | $in / 2          # $in is now 16
+      )                    # $p is the result, 8 - Sub-expression scope ends
+
+      print $in            # At the closure-scope, the "original" $in is still 4
+      print $p
+    }
+    ```
+
+    So the output from the 3 `print` statements is:
+
+    ```nu
+    4
+    4
+    8
+    ```
+
+    Again, this would hold true even if the command above used the more compact, implicit sub-expression form:
+
+    Example:
+
+    ```nushell
+    4 | do {
+      print $in                       # closure-scope $in is 4
+      let p = $in * $in | $in / 2     # Implicit let sub-expression
+      print $in                       # At the closure-scope, $in is still 4
+      print $p
+    }
+
+    4
+    4
+    8
+    ```
+
+* **_Rule 3:_** When used with no input, `$in` is null.
 
   Example:
 
   ```nushell
-  def works [] {
-    print $in
-  }
+  > # Input
+  > 1 | do { $in | describe }
+  int
+  > "Hello, Nushell" | do { in | describe }
+  string
+  > {||} | do { $in | describe }
+  closure
 
-  > true | works
-  true
+  > # No input
+  > do { $in | describe }
+  nothing
   ```
 
-### When is `$in` invalid?
+* **_Rule 4:_** In a multi-statement line separated by semicolons, `$in` cannot be used to capture the results of the previous _statement_.
 
-- `$in` should not be considered valid on any line _other_ than the first in a multiline closure/block. For example:
+  This is the same as having no-input:
 
   ```nushell
-  def fails [] {
-    print $in
-    print $in
-  }
-
-  > true | fails
-  true
-  Error: nu::shell::variable_not_found
-
-    × Variable not found
-    ╭─[entry #232:3:9]
-  2 │   print $in
-  3 │   print $in
-    ·         ─┬─
-    ·          ╰── variable not found
-  4 │ }
-    ╰────
+  > ls / | get name; $in | describe
+  nothing
   ```
 
-  Note: While the above scenario will work in a closure, see the next section for the recommended alternative.
+  Instead, simply continue the pipeline:
+
+  ```nushell
+  > ls / | get name | $in | describe
+  list<string>
+  ```
 
 ### Best practice for `$in` in multiline code
 
-It is, of course, common to need to refer to the pipeline input multiple times in either a pipeline or multiline statements.
-
-In this case, reassign the contents of `$in` to another variable as the first line of your closure/block. This will also aid in readability and debugging.
+While `$in` can be reused as demonstrated above, assigning its value to another variable in the first line of your closure/block will often aid in readability and debugging.
 
 Example:
 

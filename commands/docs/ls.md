@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.95.0
+version: 0.96.0
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -67,19 +67,31 @@ List Rust files
 
 List files and directories whose name do not contain 'bar'
 ```nu
-> ls -s | where name !~ bar
+> ls | where name !~ bar
 
 ```
 
-List all dirs in your home directory
+List the full path of all dirs in your home directory
 ```nu
 > ls -a ~ | where type == dir
 
 ```
 
-List all dirs in your home directory which have not been modified in 7 days
+List only the names (not paths) of all dirs in your home directory which have not been modified in 7 days
 ```nu
 > ls -as ~ | where type == dir and modified < ((date now) - 7day)
+
+```
+
+Recursively list all files and subdirectories under the current directory using a glob pattern
+```nu
+> ls -a **/*
+
+```
+
+Recursively list *.rs and *.toml files using the glob command
+```nu
+> ls ...(glob **/*.{rs,toml})
 
 ```
 

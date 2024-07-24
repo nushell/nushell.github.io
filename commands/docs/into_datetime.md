@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.95.0
+version: 0.96.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -42,22 +42,28 @@ usage: |
 | table        | table          |
 ## Examples
 
-Convert any standard timestamp string to datetime
+Convert timestamp string to datetime with timezone offset
 ```nu
 > '27.02.2021 1:55 pm +0000' | into datetime
 Sat, 27 Feb 2021 13:55:00 +0000 (3 years ago)
 ```
 
-Convert any standard timestamp string to datetime
+Convert standard timestamp string to datetime with timezone offset
 ```nu
 > '2021-02-27T13:55:40.2246+00:00' | into datetime
 Sat, 27 Feb 2021 13:55:40 +0000 (3 years ago)
 ```
 
-Convert non-standard timestamp string to datetime using a custom format
+Convert non-standard timestamp string, with timezone offset, to datetime using a custom format
 ```nu
 > '20210227_135540+0000' | into datetime --format '%Y%m%d_%H%M%S%z'
 Sat, 27 Feb 2021 13:55:40 +0000 (3 years ago)
+```
+
+Convert non-standard timestamp string, without timezone offset, to datetime with custom formatting
+```nu
+> '16.11.1984 8:00 am' | into datetime --format '%d.%m.%Y %H:%M %P'
+Fri, 16 Nov 1984 16:00:00 +0800 (39 years ago)
 ```
 
 Convert nanosecond-precision unix timestamp to a datetime with offset from UTC

@@ -2,7 +2,7 @@
 title: polars summary
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--quantiles, -q {table}`: provide optional quantiles
+ -  `--quantiles, -q {list<float>}`: provide optional quantiles
 
 
 ## Input/output types:

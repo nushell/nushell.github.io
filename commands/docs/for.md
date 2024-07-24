@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Loop over a range.
 usage: |
@@ -17,10 +17,6 @@ usage: |
 ## Signature
 
 ```> for {flags} (var_name) (range) (block)```
-
-## Flags
-
- -  `--numbered, -n`: DEPRECATED: return a numbered item ($it.index and $it.item)
 
 ## Parameters
 
