@@ -2,7 +2,7 @@
 title: http put
 categories: |
   network
-version: 0.95.0
+version: 0.96.0
 network: |
   Put a body to a URL.
 usage: |
@@ -34,14 +34,14 @@ usage: |
 ## Parameters
 
  -  `URL`: The URL to post to.
- -  `data`: The contents of the post body.
+ -  `data`: The contents of the post body. Required unless part of a pipeline.
 
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | any    |
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -66,6 +66,12 @@ Put content to example.com, with custom header
 Put content to example.com, with JSON body
 ```nu
 > http put --content-type application/json https://www.example.com { field: value }
+
+```
+
+Put JSON content from a pipeline to example.com
+```nu
+> open foo.json | http put https://www.example.com
 
 ```
 

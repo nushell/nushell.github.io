@@ -2,7 +2,7 @@
 title: polars sum
 categories: |
   expression
-version: 0.95.0
+version: 0.96.0
 expression: |
   Creates a sum expression for an aggregation or aggregates columns to their sum value.
 usage: |

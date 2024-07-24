@@ -2,7 +2,7 @@
 title: commandline set-cursor
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Set the current cursor position.
 usage: |

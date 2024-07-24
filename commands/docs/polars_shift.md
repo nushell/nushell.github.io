@@ -2,7 +2,7 @@
 title: polars shift
 categories: |
   dataframe or lazyframe
-version: 0.95.0
+version: 0.96.0
 dataframe_or_lazyframe: |
   Shifts the values by a given period.
 usage: |
@@ -44,6 +44,21 @@ Shifts the values by a given period
 │ 0 │ 1 │
 │ 1 │ 2 │
 │ 2 │ 2 │
+╰───┴───╯
+
+```
+
+Shifts the values by a given period, fill absent values with 0
+```nu
+> [1 2 2 3 3] | polars into-lazy | polars shift 2 --fill 0 | polars collect
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 0 │
+│ 1 │ 0 │
+│ 2 │ 1 │
+│ 3 │ 2 │
+│ 4 │ 2 │
 ╰───┴───╯
 
 ```

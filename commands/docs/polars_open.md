@@ -2,7 +2,7 @@
 title: polars open
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.
 usage: |

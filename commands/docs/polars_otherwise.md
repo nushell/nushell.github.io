@@ -2,7 +2,7 @@
 title: polars otherwise
 categories: |
   expression
-version: 0.95.0
+version: 0.96.0
 expression: |
   Completes a when expression.
 usage: |

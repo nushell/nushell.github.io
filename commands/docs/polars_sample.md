@@ -2,7 +2,7 @@
 title: polars sample
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   Create sample dataframe.
 usage: |
@@ -44,5 +44,16 @@ Sample rows from dataframe
 Shows sample row using fraction and replace
 ```nu
 > [[a b]; [1 2] [3 4] [5 6]] | polars into-df | polars sample --fraction 0.5 --replace
+
+```
+
+Shows sample row using using predefined seed 1
+```nu
+> [[a b]; [1 2] [3 4] [5 6]] | polars into-df | polars sample --seed 1 --n-rows 1
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 5 │ 6 │
+╰───┴───┴───╯
 
 ```
