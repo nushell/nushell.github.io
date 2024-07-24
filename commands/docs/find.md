@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.95.0
+version: 0.96.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -46,9 +46,9 @@ Search for multiple terms in a command output
 
 ```
 
-Search and highlight text for a term in a string
+Search and highlight text for a term in a string. Note that regular search is case insensitive
 ```nu
-> 'Cargo.toml' | find toml
+> 'Cargo.toml' | find cargo
 Cargo.toml
 ```
 

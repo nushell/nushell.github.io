@@ -2,7 +2,7 @@
 title: polars to-jsonl
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   Saves dataframe to a JSON lines file.
 usage: |

@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.95.0
+version: 0.96.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -23,6 +23,7 @@ usage: |
  -  `--debounce-ms, -d {int}`: Debounce changes for this many milliseconds (default: 100). Adjust if you find that single writes are reported as multiple events
  -  `--glob, -g {string}`: Only report changes for files that match this glob pattern (default: all files)
  -  `--recursive, -r {bool}`: Watch all directories under `<path>` recursively. Will be ignored if `<path>` is a file (default: true)
+ -  `--quiet, -q`: Hide the initial status message (default: false)
  -  `--verbose, -v`: Operate in verbose mode (default: false)
 
 ## Parameters

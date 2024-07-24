@@ -2,7 +2,7 @@
 title: sys users
 categories: |
   system
-version: 0.95.0
+version: 0.96.0
 system: |
   View information about the users on the system.
 usage: |

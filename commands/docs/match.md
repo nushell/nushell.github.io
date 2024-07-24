@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -71,3 +71,7 @@ Match with a guard
 
 good list
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

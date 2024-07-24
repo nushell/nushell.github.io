@@ -2,7 +2,7 @@
 title: from
 categories: |
   formats
-version: 0.95.0
+version: 0.96.0
 formats: |
   Parse a string or binary data into structured data.
 usage: |
@@ -33,9 +33,6 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                               | usage                                                                                                                      | type     |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
 | [`from csv`](/commands/docs/from_csv.md)           | Parse text as .csv and create table.                                                                                       | built-in |
-| [`from eml`](/commands/docs/from_eml.md)           | Parse text as .eml and create record.                                                                                      | plugin   |
-| [`from ics`](/commands/docs/from_ics.md)           | Parse text as .ics and create table.                                                                                       | plugin   |
-| [`from ini`](/commands/docs/from_ini.md)           | Parse text as .ini and create table.                                                                                       | plugin   |
 | [`from json`](/commands/docs/from_json.md)         | Convert from json to structured data.                                                                                      | built-in |
 | [`from msgpack`](/commands/docs/from_msgpack.md)   | Convert MessagePack data into Nu values.                                                                                   | built-in |
 | [`from msgpackz`](/commands/docs/from_msgpackz.md) | Convert brotli-compressed MessagePack data into Nu values.                                                                 | built-in |
@@ -45,7 +42,6 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`from toml`](/commands/docs/from_toml.md)         | Parse text as .toml and create record.                                                                                     | built-in |
 | [`from tsv`](/commands/docs/from_tsv.md)           | Parse text as .tsv and create table.                                                                                       | built-in |
 | [`from url`](/commands/docs/from_url.md)           | Parse url-encoded string as a record.                                                                                      | built-in |
-| [`from vcf`](/commands/docs/from_vcf.md)           | Parse text as .vcf and create table.                                                                                       | plugin   |
 | [`from xlsx`](/commands/docs/from_xlsx.md)         | Parse binary Excel(.xlsx) data and create table.                                                                           | built-in |
 | [`from xml`](/commands/docs/from_xml.md)           | Parse text as .xml and create record.                                                                                      | built-in |
 | [`from yaml`](/commands/docs/from_yaml.md)         | Parse text as .yaml/.yml and create table.                                                                                 | built-in |

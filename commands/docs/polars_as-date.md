@@ -2,7 +2,7 @@
 title: polars as-date
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   Converts string to date.
 usage: |
@@ -38,6 +38,12 @@ usage: |
 Converts string to date
 ```nu
 > ["2021-12-30" "2021-12-31"] | polars into-df | polars as-date "%Y-%m-%d"
+
+```
+
+Converts string to date
+```nu
+> ["2021-12-30" "2021-12-31 21:00:00"] | polars into-df | polars as-date "%Y-%m-%d" --not-exact
 
 ```
 

@@ -2,7 +2,7 @@
 title: polars into-nu
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   Converts a dataframe or an expression into into nushell value for access and exploration.
 usage: |
@@ -22,6 +22,7 @@ usage: |
 
  -  `--rows, -n {number}`: number of rows to be shown
  -  `--tail, -t`: shows tail rows
+ -  `--index, -i`: add an index column
 
 
 ## Input/output types:
@@ -34,7 +35,7 @@ usage: |
 
 Shows head rows from dataframe
 ```nu
-> [[a b]; [1 2] [3 4]] | polars into-df | polars into-nu
+> [[a b]; [1 2] [3 4]] | polars into-df | polars into-nu --index
 ╭───┬───┬───╮
 │ # │ a │ b │
 ├───┼───┼───┤
@@ -46,7 +47,7 @@ Shows head rows from dataframe
 
 Shows tail rows from dataframe
 ```nu
-> [[a b]; [1 2] [5 6] [3 4]] | polars into-df | polars into-nu --tail --rows 1
+> [[a b]; [1 2] [5 6] [3 4]] | polars into-df | polars into-nu --tail --rows 1 --index
 ╭───┬───┬───╮
 │ # │ a │ b │
 ├───┼───┼───┤
@@ -57,7 +58,7 @@ Shows tail rows from dataframe
 
 Convert a col expression into a nushell value
 ```nu
-> polars col a | polars into-nu
+> polars col a | polars into-nu --index
 ╭───────┬────────╮
 │ expr  │ column │
 │ value │ a      │

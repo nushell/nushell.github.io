@@ -2,7 +2,7 @@
 title: from ssv
 categories: |
   formats
-version: 0.95.0
+version: 0.96.0
 formats: |
   Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
 usage: |
@@ -50,7 +50,7 @@ Converts ssv formatted string to table but not treating the first row as column 
 > 'FOO   BAR
 1   2' | from ssv --noheaders
 ╭───┬─────────┬─────────╮
-│ # │ column1 │ column2 │
+│ # │ column0 │ column1 │
 ├───┼─────────┼─────────┤
 │ 0 │ FOO     │ BAR     │
 │ 1 │ 1       │ 2       │

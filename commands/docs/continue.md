@@ -2,7 +2,7 @@
 title: continue
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Continue a loop from the next iteration.
 usage: |
@@ -32,3 +32,9 @@ Continue a loop from the next iteration
 > for i in 1..10 { if $i == 5 { continue }; print $i }
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html
+
+  continue can only be used in while, loop, and for loops. It can not be used with each or other filter commands

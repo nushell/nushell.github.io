@@ -2,7 +2,7 @@
 title: polars as-datetime
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -55,6 +55,17 @@ Converts string to datetime with high resolutions
 ├───┼─────────────┤
 │ 0 │ 2 years ago │
 │ 1 │ 2 years ago │
+╰───┴─────────────╯
+
+```
+
+Converts string to datetime using the `--not-exact` flag even with excessive symbols
+```nu
+> ["2021-12-30 00:00:00 GMT+4"] | polars into-df | polars as-datetime "%Y-%m-%d %H:%M:%S" --not-exact
+╭───┬─────────────╮
+│ # │  datetime   │
+├───┼─────────────┤
+│ 0 │ 2 years ago │
 ╰───┴─────────────╯
 
 ```
