@@ -11,5 +11,5 @@ However, keep in mind that many Nushell operations will be performed using struc
 See:
 
 ```nu
-help commands | where category == filter
+help commands | where category == filters
 ```
