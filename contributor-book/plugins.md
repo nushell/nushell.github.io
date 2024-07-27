@@ -733,6 +733,47 @@ Note that opting out of garbage collection does not stop users from explicitly s
 
 If your plugin takes a particularly long time to launch, you can recommend to your users that they change their [garbage collection settings](/book/plugins.html#plugin-garbage-collector) to either increase the `stop_after` duration, or disable garbage collection entirely for your plugin.
 
+## Making calls to other Nushell commands
+
+Plugins can look up and make calls to other Nushell commands in the scope of the original plugin call. This includes internal commands, custom commands written in Nushell, as well as commands provided by plugins. The relevant calls are [`FindDecl`](plugin_protocol_reference.html#finddecl-engine-call) and [`CallDecl`](plugin_protocol_reference.html#calldecl-engine-call).
+
+From Rust, use the [`.find_decl()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.find_decl) and [`.call_decl()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.call_decl) methods on `EngineInterface`. Provide arguments by adding them to an [`EvaluatedCall`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EvaluatedCall.html) via the builder or setter methods. For example:
+
+```rust
+// Find the two commands we need. We strongly recommend using a descriptive error here, and
+// discourage `.unwrap()` or `.expect()` as it's quite possible to not find something in scope, even
+// if it's a core Nushell command.
+let find_decl = |name| {
+    engine.find_decl(name)?.ok_or_else(|| {
+        LabeledError::new(format!("can't find `{name}`"))
+            .with_label("required here", call.head)
+            .with_help("not found in scope, perhaps you have to import it")
+    })
+};
+let std_assert = find_decl("std assert")?;
+let view_ir = find_decl("view ir")?;
+// `engine.find_decl()` returns an identifier which can also be passed to `view ir --decl-id`.
+let ir_of_assert = engine
+    .call_decl(
+        view_ir,
+        // Call `view ir --decl-id <std_assert>`
+        EvaluatedCall::new(call.head)
+            .with_flag("decl-id".into_spanned(call.head))
+            .with_positional(Value::int(std_assert as i64, call.head)),
+        PipelineData::Empty,
+        true,
+        false,
+    )?
+    .into_value(call.head)?
+    .into_string()?;
+eprintln!("IR of `std assert`:");
+eprintln!("{ir_of_assert}");
+```
+
+Keep in mind that the engine will not validate that the parameters of a call made by the plugin actually matches the signature of the command being called, so care must be taken when designing the plugin to try to match the documented signature. There is not currently a way to look up the signature of a command before running it, but we may add that in the future to make it easier to ensure a plugin call behaves as expected. As performance is a priority for plugins, we do not intend to validate call arguments from plugins at this time.
+
+There is some overhead when making calls from plugins back to the engine, and it may be difficult to construct some of the arguments for commands - for example, it's not possible to create new closures from within plugins. We recommend trying to implement functionality within the plugin if possible, and falling back to command calls only when necessary. It is virtually guaranteed that a script that chains multiple commands together will be more performant than trying to put pipelines together from within a plugin, so you may want to provide a companion script with your plugins, or expect your users to compose pipelines made up of simple commands [rather than providing lots of different options](https://www.nushell.sh/contributor-book/philosophy_0_80.html#command-philosophy).
+
 ## Testing plugins
 
 Rust-based plugins can use the [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate to write tests. Examples can be tested automatically:
