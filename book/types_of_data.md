@@ -22,7 +22,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 | Booleans          | `true`                                                                |
 | Dates             | `2000-01-01`                                                          |
 | Durations         | `2min + 12sec`                                                        |
-| File sizes        | `64MB`                                                                |
+| File sizes        | `64MB`, `64Mb`, `64mb`                                                |
 | Ranges            | `0..4`, `0..<5`, `0..`, `..4`                                         |
 | Binary            | `0x[FE FF]`                                                           |
 | Lists             | `[0 1 'two' 3]`                                                       |
