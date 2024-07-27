@@ -583,8 +583,7 @@ impl CustomValue for Animal {
         Value::custom_value(Box::new(self.clone()), span)
     }
 
-    fn value_string(&self) -> String {
-        // The type name
+    fn type_name(&self) -> String {
         "Animal".into()
     }
 
@@ -606,6 +605,10 @@ impl CustomValue for Animal {
     }
 
     fn as_any(&self) -> &dyn Any {
+        self
+    }
+
+    fn as_mut_any(&mut self) -> &mut dyn Any {
         self
     }
 }
