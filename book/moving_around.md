@@ -28,26 +28,38 @@ In other shells (like bash), glob expansion happens in the shell and the invoked
 
 Globbing syntax in these commands not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html). Note that this is a more limited syntax than what the dedicated [`glob` Nushell command](https://www.nushell.sh/commands/docs/glob.html) supports.
 
-Escaping `*`, `?`, `[]` works by quoting them with single quotes or double quotes.  To show the contents of a directory named `[slug]`, use `ls "[slug]"` or `ls '[slug]'`.
-Note that backtick quote doesn't escape glob, for example: <code>cp \`test dir/*\`</code> will copy all files inside `test dir` to current directory.
+Escaping `*`, `?`, `[]` works by quoting them with single quotes or double quotes. To show the contents of a directory named `[slug]`, use `ls "[slug]"` or `ls '[slug]'`.
+Note that backtick quote doesn't escape glob, for example: <code>cp \`test dir/\*\`</code> will copy all files inside `test dir` to current directory.
 
-If you pass a variable to a command that support globbing like this: `let f = "a[bc]d.txt"; rm $f`.  It won't expand the glob pattern, only a file named `a[bc]d.txt` will be removed.  Normally it's what you want, but if you want to expand the glob pattern, there are 3 ways to achieve it:
+If you pass a variable to a command that support globbing like this: `let f = "a[bc]d.txt"; rm $f`. It won't expand the glob pattern, only a file named `a[bc]d.txt` will be removed. Normally it's what you want, but if you want to expand the glob pattern, there are 3 ways to achieve it:
 
 1. using spread operator along with `glob` command: `let f = "a[bc]d.txt"; rm ...(glob $f)`. This way is recommended because it's expressed most explicitly, but it doesn't work with `ls` and `du` command, for the case, you can
-2. using `into glob` command: `let f = "a[bc]d.txt"; ls ($f | into glob)`.  It's useful for `ls` and `du` commands.
+2. using `into glob` command: `let f = "a[bc]d.txt"; ls ($f | into glob)`. It's useful for `ls` and `du` commands.
 3. annotate variable with `glob` type: `let f: glob = "a[bc]d.txt"; rm $f`. It's simple to write, but doesn't work with external command like `^rm $f`.
 
 ## Changing the current directory
 
-@[code](@snippets/moving_around/cd_example.sh)
+@[code](@snippets/book/moving_around/cd_example.nu)
 
-To change from the current directory to a new one, we use the [`cd`](/commands/docs/cd.md) command. Just as in other shells, we can use either the name of the directory, or if we want to go up a directory we can use the `..` shortcut.
+To change from the current directory to a new one, use the [`cd`](/commands/docs/cd.md) command.
 
 Changing the current working directory can also be done if [`cd`](/commands/docs/cd.md) is omitted and a path by itself is given:
 
-@[code](@snippets/moving_around/cd_without_command_example.sh)
+@[code](@snippets/book/moving_around/cd_without_command_example.nu)
 
-**Note:** changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of a directory is kept to the current block. Once you exit the block, you'll return to the previous directory. You can learn more about working with this in the [environment chapter](./environment.md).
+Just as in other shells, you can use either the name of the directory, or if you want to go up a directory you can use the `..` shortcut.
+
+You can also add additional dots to go up additional directory levels:
+
+@[code](@snippets/book/moving_around/multiple_cd_levels.nu)
+
+You can combine relative directory levels with directory names as well:
+
+@[code](@snippets/book/moving_around/relative_cd_levels.nu)
+
+::: tip IMPORTANT TIP
+Changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of a directory is kept to the current scope (e.g. block or closure). Once you exit the block, you'll return to the previous directory. You can learn more about this in the [Environment](./environment.md) chapter.
+:::
 
 ## Filesystem commands
 

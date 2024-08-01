@@ -22,13 +22,13 @@ Nu はより深いディレクトリにアクセスできる最新のグロブ�
 
 ## 現在のディレクトリを変更する
 
-@[code](@snippets/moving_around/cd_example.sh)
+@[code](@snippets/book/moving_around/cd_example.nu)
 
 現在のディレクトリを変更するには`cd`コマンドを使います。他のシェルと同じように、ディレクトリの名前か上の階層に移動する場合は`..`ショートカットを利用します。
 
 `cd`を省略してパスだけを指定することでも現在の作業ディレクトリを変更することができます。
 
-@[code](@snippets/moving_around/cd_without_command_example.sh)
+@[code](@snippets/book/moving_around/cd_without_command_example.nu)
 
 ## ファイルシステムのコマンド
 

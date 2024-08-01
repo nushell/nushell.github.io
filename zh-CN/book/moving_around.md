@@ -30,13 +30,13 @@ Nu 也使用现代 Globs，它允许你访问更深的目录。比如，`ls **/*
 
 ## 改变当前目录
 
-@[code](@snippets/moving_around/cd_example.sh)
+@[code](@snippets/book/moving_around/cd_example.nu)
 
 要从当前目录换到一个新目录，我们使用 [`cd`](/commands/docs/cd.md) 命令。就像在其他 Shells 中一样，我们可以使用目录的名称，或者如果我们想进入父目录，我们可以使用 `..` 的快捷方式。
 
 如果 [`cd`](/commands/docs/cd.md) 被省略，只给出一个路径本身，也可以改变当前工作目录：
 
-@[code](@snippets/moving_around/cd_without_command_example.sh)
+@[code](@snippets/book/moving_around/cd_without_command_example.nu)
 
 :::warning
 用 [`cd`](/commands/docs/cd.md) 改变目录会改变 `PWD` 环境变量。这意味着目录的改变会保留到当前代码块中，一旦你退出这个代码块，你就会返回到以前的目录。你可以在 [环境篇](environment.md) 中了解更多关于这方面的信息。
