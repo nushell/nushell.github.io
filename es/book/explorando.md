@@ -22,13 +22,13 @@ Aquí, buscamos cualquier archivo que termine con ".md", y los dos asteriscos di
 
 ## Cambiar el directorio actual
 
-@[code](@snippets/moving_around/cd_example.sh)
+@[code](@snippets/book/moving_around/cd_example.nu)
 
 Para cambiar del directorio actual a uno nuevo usamos el comando `cd`. Al igual que en otras shells, podemos usar tanto el nombre del directorio o si deseamos subir a un directorio podemos usar el acceso directo `..`.
 
 También se puede cambiar el directorio si se omite `cd` y se proporciona una ruta por si sola:
 
-@[code](@snippets/moving_around/cd_without_command_example.sh)
+@[code](@snippets/book/moving_around/cd_without_command_example.nu)
 
 ## Comandos del sistema de archivos
 
