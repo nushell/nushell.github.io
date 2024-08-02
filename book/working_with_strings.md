@@ -9,7 +9,7 @@ and much more. Strings are so common that Nushell offers multiple string formats
 | ---------------------------------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
 | [Single-quoted string](#single-quoted-strings)       | `'[^\n]+'`              | None                      | Cannot contain single quotes within the string                         |
 | [Double-quoted string](#double-quoted-strings)       | `"The\nEnd"`            | C-style backslash escapes | All literal backslashes must be escaped                                |
-| [Raw strings](#raw-strings)                          | `r#'Raw string'#`        | None                      | May include single quotes                                              |
+| [Raw strings](#raw-strings)                          | `r#'Raw string'#`       | None                      | May include single quotes                                              |
 | [Bare word string](#bare-word-strings)               | `ozymandias`            | None                      | Can only contain "word" characters; Cannot be used in command position |
 | [Backtick string](#backtick-quoted-strings)          | <code>\`[^\n]+\`</code> | None                      | Bare string that can include whitespace. Cannot contain any backticks  |
 | [Single-quoted interpolation](#string-interpolation) | `$'Captain ($name)'`    | None                      | Cannot contain any `'` or unmatched `()`                               |
@@ -59,19 +59,23 @@ Nushell currently supports the following escape characters:
 
 ## Raw strings
 
-Raw strings behave the same as a single quoted strings, except that raw strings may also contain single quotes.
-This is possible because raw strings are enclosed by a starting `r#'` and a closing `'#`. This syntax should look familiar to users of Rust.
+Raw strings behave the same as a single quoted strings, except that raw strings
+may also contain single quotes. This is possible because raw strings are enclosed
+by a starting `r#'` and a closing `'#`. This syntax should look familiar to users
+of Rust.
 
 ```nu
-r#'some text'# == 'some text' # true
-
-r#'contains 'quoted' text'# == "contains 'quoted' text"
+> r#'Raw strings can contain 'quoted' text.'#
+Raw strings can contain 'quoted' text.
 ```
 
-Additional `#` symbols can be added to the start and end of the raw string to enclose one less than the same number of `#` symbols next to a `'` symbol in the string.
+Additional `#` symbols can be added to the start and end of the raw string to enclose
+one less than the same number of `#` symbols next to a `'` symbol in the string. This can
+be used to nest raw strings:
 
 ```nu
-r###'this text has multiple '## symbols'###
+> r###'r##'This is an example of a raw string.'##'###
+r##'This is an example of a raw string.'##
 ```
 
 ## Bare word strings
