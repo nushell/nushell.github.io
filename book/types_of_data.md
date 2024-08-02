@@ -297,7 +297,7 @@ This means that any command that operates on a table's rows _also_ operates on t
 
 :::
 
-You can iterate over a record by first transposing it into a table:
+You can iterate over the key-value pairs of a record by first transposing it into a table:
 
 ```nu
 > {name: "Sam", rank: 10} | transpose key value
@@ -379,7 +379,7 @@ Lists are equivalent to the individual columns of tables. You can think of a lis
 
 :::
 
-Accessing a lists' data is done by placing a `.` before an integer literal:
+Accessing a list's data is done by placing a `.` before an integer literal:
 
 ```nu
 > [a b c].1
@@ -422,7 +422,7 @@ The table is a core data structure in Nushell. As you run commands, you'll see t
 
 ### Table-literal syntax
 
-We can create our own tables similarly to how we create a list. Because tables also contain columns and not just values, we pass in the name of the column values:
+Table literals can be created using a syntax similar to that of a list literal. Because tables also contain columns and not just values, we also specify the column names:
 
 ```nu
 > [[column1, column2]; [Value1, Value2] [Value3, Value4]]
@@ -477,7 +477,7 @@ This is true regardless of which table syntax you use:
 `cell-path`
 :::
 
-List and record syntax can be combined to navigate tables. When used on tables, these access chains are called "cell paths".
+The syntax used to access lists and records can be combined to navigate tables. When used on tables, these access chains are called "cell paths".
 
 You can access individual rows by number to obtain records:
 
