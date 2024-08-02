@@ -46,21 +46,34 @@ Escaping the `*`, `?`, and `[]` patterns works by enclosing them in a single-quo
 [raw string](working_with_strings.md#raw-strings). For example, to show the contents of a directory named
 `[slug]`, use `ls "[slug]"` or `ls '[slug]'`.
 
-However, _backtick_ quoted strings do not escape globs. For example:
+However, _backtick_ quoted strings do not escape globs. For example, compare the following scenarios:
 
-```nu
-# Removes all files in the current directory that contain
-# "myfile" as part of the filename
-> rm *myfile*
+1. Unquoted: Glob pattern
 
-# Quoted asterisk - Removes only a single file with the
-# name *myfile* (including the asterisks)
-> rm "*"
+   An unquoted [bare word string](working_with_strings.html#bare-word-strings) with glob characters is interpreted as a glob pattern, so the following will remove all files in the current directory that contain
+   `myfile` as any part of the filename:
 
-# Backtick-quoted - Removes all files in the current directory
-# that contain "myfile" as part of the filename
-> rm `*myfile*`
-```
+   ```nu
+   rm *myfile*
+   ```
+
+2. Quoted: String literal with asterisks
+
+   When quoting with single or double quotes, or using a [raw string](working_with_strings.html#raw-strings), a _string_ with the literal, escaped asterisks (or other glob characters) is passed to the command. The result is not a glob. The following command will only remove a file literally named `*myfile*` (including the asterisks). Other files with `myfile` in the name are not affected:
+
+   ```nu
+   rm "*myfile*"
+   ```
+
+3. Backtick-quoted: Glob pattern
+
+   Asterisks (and other glob patterns) within a [backtick-quoted string](working_with_strings.html#backtick-quoted-strings) are interpreted as a glob pattern. Notice that this is the same behavior as that of the bare-word string example in #1 above.
+
+   The following, as with that first example, removes all files in the current directory that contain `myfile` as part of the filename
+
+   ```nu
+   rm `*myfile*`
+   ```
 
 ::: tip
 Nushell also includes a dedicated [`glob` command](https://www.nushell.sh/commands/docs/glob.html) with support for more complex globbing scenarios.
