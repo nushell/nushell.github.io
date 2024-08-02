@@ -34,6 +34,10 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 
 ## Integers
 
+::: warning Type
+`int`
+:::
+
 Examples of integers (i.e. "round numbers") include 1, 0, -5, and 100.
 You can parse a string into an integer with the [`into int`](/commands/docs/into_int.md) command
 
@@ -41,7 +45,11 @@ You can parse a string into an integer with the [`into int`](/commands/docs/into
 > "-5" | into int
 ```
 
-## Decimals (floats)
+## Decimals
+
+::: warning Type
+`float`
+:::
 
 Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
 You can cast a string into a Float with the [`into float`](/commands/docs/into_float.md) command
@@ -50,24 +58,19 @@ You can cast a string into a Float with the [`into float`](/commands/docs/into_f
 > "1.2" | into float
 ```
 
-## Strings
+## Text/Strings
 
-A string of characters that represents text. There are a few ways these can be constructed:
+::: warning Type
+`string`
+:::
 
-- Double quotes
-  - `"Line1\nLine2\n"`
-- Single quotes
-  `'She said "Nushell is the future".'`
-- Dynamic string interpolation
-  - `$"6 x 7 = (6 * 7)"`
-  - `ls | each { |it| $"($it.name) is ($it.size)" }`
-- Bare strings
-  - `print hello`
-  - `[foo bar baz]`
-
-See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
+A string of characters that represents text. There are multiple ways these can be constructed. See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
 
 ## Booleans
+
+::: warning Type
+`bool`
+:::
 
 There are just two boolean values: `true` and `false`. Rather than writing the values directly, they often result from a comparison:
 
@@ -82,6 +85,10 @@ true
 
 ## Dates
 
+::: warning Type
+`date`
+:::
+
 Dates and times are held together in the Date value type. Date values used by the system are timezone-aware, and by default use the UTC timezone.
 
 Dates are in three forms, based on the RFC 3339 standard:
@@ -94,6 +101,10 @@ Dates are in three forms, based on the RFC 3339 standard:
   - `2022-02-02T14:30:00+05:00`
 
 ## Durations
+
+::: warning Type
+`duration`
+:::
 
 Durations represent a length of time. This chart shows all durations currently supported:
 
@@ -108,14 +119,14 @@ Durations represent a length of time. This chart shows all durations currently s
 | `1day`   | one day         |
 | `1wk`    | one week        |
 
-You can make fractional durations:
+Nushell supports fractional durations:
 
 ```nu
 > 3.14day
 3day 3hr 21min
 ```
 
-And you can do calculations with durations:
+As well as calculations with durations:
 
 ```nu
 > 30day / 1sec  # How many seconds in 30 days?
@@ -123,6 +134,10 @@ And you can do calculations with durations:
 ```
 
 ## File sizes
+
+::: warning Type
+`filesize`
+:::
 
 Nushell also has a special type for file sizes. Examples include `100b`, `15kb`, and `100mb`.
 
@@ -142,7 +157,7 @@ The full list of filesize units are:
 - `pib`: pebibytes
 - `eib`: exbibytes
 
-As with durations, you can make fractional file sizes, and do calculations:
+As with durations, Nushell supports fractional file sizes and calculations:
 
 ```nu
 > 1Gb / 1b
@@ -154,6 +169,10 @@ true
 ```
 
 ## Ranges
+
+::: warning Type
+`range`
+:::
 
 A range is a way of expressing a sequence of integer or float values from start to finish. They take the form \<start\>..\<end\>. For example, the range `1..3` means the numbers 1, 2, and 3.
 
@@ -185,11 +204,15 @@ You can also make the start of the range open. In this case, Nushell will start 
 
 ::: warning
 
-Watch out for displaying open-ended ranges like just entering `3..` into the command line. It will keep printing out numbers very quickly until you stop it with something like Ctr + c.
+Use caution when typing an open-ended range such as `3..` into the command line. This will continue printing out numbers very quickly until you terminate the range generation with <kbd>Ctrl</kbd>+<kbd>C</kbd> or an equivalent.
 
 :::
 
 ## Binary data
+
+::: warning Type
+`binary`
+:::
 
 Binary data, like the data from an image file, is a group of raw bytes.
 
@@ -203,28 +226,65 @@ You can write binary as a literal using any of the `0x[...]`, `0b[...]`, or `0o[
 
 Incomplete bytes will be left-padded with zeros.
 
-## Structured data
+## Structured data types
 
-Structured data builds from the simple data. For example, instead of a single integer, structured data gives us a way to represent multiple integers in the same value. Here's a list of the currently supported structured data types: records, lists and tables.
+Nushell includes a collection of structured data types that can contain the primitive types above. For example, instead of a single `float`, structured data gives us a way to represent multiple `float` values, such as a `list` of temperature readings, in the same value. Nushell supports the following structured data types:
 
 ## Records
 
-Records hold key-value pairs, which associate string keys with various data values. Record syntax is very similar to objects in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
+::: warning Type
+`record`
+:::
+
+Records hold key-value pairs, which associate string keys with various data values. Record syntax is very similar to objects in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them! The key-value pairs of a record may be delimited by:
+
+- Commas
+
+  ```nu
+  > {name: "Sam", rank: 10}
+  ╭──────┬─────╮
+  │ name │ Sam │
+  │ rank │ 10  │
+  ╰──────┴─────╯
+  ```
+
+- Spaces (when unambiguous):
+
+  ```nu
+  > {name: "Sam" rank: 10}
+  ╭──────┬─────╮
+  │ name │ Sam │
+  │ rank │ 10  │
+  ╰──────┴─────╯
+  ```
+
+- Line breaks:
+
+  ```nu
+  > {
+      name: "Sam"
+      rank: 10
+    }
+  ╭──────┬─────╮
+  │ name │ Sam │
+  │ rank │ 10  │
+  ╰──────┴─────╯
+  ```
+
+As records can have many fields, they are, by default, displayed vertically rather than left-to-right. To display a record left-to-right, convert it to a nuon. For example:
 
 ```nu
-> {name: sam rank: 10}
-╭──────┬─────╮
-│ name │ sam │
-│ rank │ 10  │
-╰──────┴─────╯
+  > {
+      name: "Sam"
+      rank: 10
+    } | to nuon
+  {name: Sam, rank: 10}
 ```
-
-As these can sometimes have many fields, a record is printed up-down rather than left-right.
 
 :::tip
 A record is identical to a single row of a table (see below). You can think of a record as essentially being a "one-row table", with each of its keys as a column (although a true one-row table is something distinct from a record).
 
-This means that any command that operates on a table's rows _also_ operates on records. For instance, [`insert`](/commands/docs/insert.md), which adds data to each of a table's rows, can be used with records:
+This means that any command that operates on a table's rows _also_ operates on that of a record. For instance, [`insert`](/commands/docs/insert.md), which adds data to each of a table's rows, can be used with records:
 
 ```nu
 > {x:3 y:1} | insert z 0
@@ -237,54 +297,72 @@ This means that any command that operates on a table's rows _also_ operates on r
 
 :::
 
-You can iterate over records by first transposing it into a table:
+You can iterate over a record by first transposing it into a table:
 
 ```nu
-> {name: sam, rank: 10} | transpose key value
+> {name: "Sam", rank: 10} | transpose key value
 ╭───┬──────┬───────╮
 │ # │ key  │ value │
 ├───┼──────┼───────┤
-│ 0 │ name │  sam  │
+│ 0 │ name │  Sam  │
 │ 1 │ rank │   10  │
 ╰───┴──────┴───────╯
 ```
 
-Accessing records' data is done by placing a `.` before a string, which is usually a bare string:
+Accessing a record's value is done by placing a `.` before a string with the key name. This is usually a bare-word string:
 
 ```nu
 > {x:12 y:4}.x
 12
 ```
 
-However, if a record has a key name that can't be expressed as a bare string, or resembles an integer (see lists, below), you'll need to use more explicit string syntax, like so:
+However, if a record has a key name that can't be expressed as a bare string, or resembles an integer (see lists, below), you'll need to use more explicit string syntax. For example:
 
 ```nu
-> {"1":true " ":false}." "
-false
+> let record_example = {
+    "key x":12
+    "key y":4
+  }
+> $record_example."key x"
+12
+
+# or
+> $record_example | get "key x"
+12
 ```
 
 To make a copy of a record with new fields, you can use the [spread operator](/book/operators#spread-operator) (`...`):
 
 ```nu
-> let data = { name: alice, age: 50 }
-> { ...$data, hobby: cricket }
+> let data = {
+    name: "Alice"
+    age: 50
+  }
+> {
+    ...$data
+    hobby: "Cricket"
+  }
 ╭───────┬─────────╮
-│ name  │ alice   │
+│ name  │ Alice   │
 │ age   │ 50      │
-│ hobby │ cricket │
+│ hobby │ Cricket │
 ╰───────┴─────────╯
 ```
 
 ## Lists
 
-Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them!
+::: warning Type
+`list`
+:::
+
+Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them! As with Records, Lists may be delimited by commas, spaces, or linebreaks.
 
 ```nu
-> [sam fred george]
+> [Sam Fred George]
 ╭───┬────────╮
-│ 0 │ sam    │
-│ 1 │ fred   │
-│ 2 │ george │
+│ 0 │ Sam    │
+│ 1 │ Fred   │
+│ 2 │ George │
 ╰───┴────────╯
 ```
 
@@ -301,14 +379,14 @@ Lists are equivalent to the individual columns of tables. You can think of a lis
 
 :::
 
-Accessing lists' data is done by placing a `.` before a bare integer:
+Accessing a lists' data is done by placing a `.` before an integer literal:
 
 ```nu
 > [a b c].1
 b
 ```
 
-To get a sub-list from a list, you can use the [`range`](/commands/docs/range.md) command:
+To return multiple rows (a sub-list) from a list, you can use the [`range`](/commands/docs/range.md) command:
 
 ```nu
 > [a b c d e f] | range 1..3
@@ -336,7 +414,13 @@ To append one or more lists together, optionally with values interspersed in bet
 
 ## Tables
 
+::: warning Type
+`table`
+:::
+
 The table is a core data structure in Nushell. As you run commands, you'll see that many of them return tables as output. A table has both rows and columns.
+
+### Table-literal syntax
 
 We can create our own tables similarly to how we create a list. Because tables also contain columns and not just values, we pass in the name of the column values:
 
@@ -350,15 +434,17 @@ We can create our own tables similarly to how we create a list. Because tables a
 ╰───┴─────────┴─────────╯
 ```
 
+### List-of-Records syntax
+
 You can also create a table as a list of records, JSON-style:
 
 ```nu
-> [{name: sam, rank: 10}, {name: bob, rank: 7}]
+> [{name: "Sam", rank: 10}, {name: "Bob", rank: 7}]
 ╭───┬──────┬──────╮
 │ # │ name │ rank │
 ├───┼──────┼──────┤
-│ 0 │ sam  │   10 │
-│ 1 │ bob  │    7 │
+│ 0 │ Sam  │   10 │
+│ 1 │ Bob  │    7 │
 ╰───┴──────┴──────╯
 ```
 
@@ -385,9 +471,13 @@ This is true regardless of which table syntax you use:
 
 :::
 
-### Cell Paths
+## Cell Paths
 
-You can combine list and record data access syntax to navigate tables. When used on tables, these access chains are called "cell paths".
+::: warning Type
+`cell-path`
+:::
+
+List and record syntax can be combined to navigate tables. When used on tables, these access chains are called "cell paths".
 
 You can access individual rows by number to obtain records:
 
@@ -431,7 +521,7 @@ To get specific rows from a table, you'll commonly use the [`select`](/commands/
 
 #### Optional cell paths
 
-By default, cell path access will fail if it can't access the requested row or column. To suppress these errors, you can add `?` to a cell path member to mark it as _optional_:
+By default, cell path access will fail if it can't access the requested row or column. To logically handle this case, you can add `?` to a cell path member to mark it as _optional_:
 
 ```nu
 > [{foo: 123}, {}].foo?
@@ -445,29 +535,43 @@ When using optional cell path members, missing data is replaced with `null`.
 
 ## Closures
 
-Closures are anonymous functions that can be passed a value through parameters and _close over_ (i.e. use) a variable outside their scope.
+::: warning Type
+`closure`
+:::
+
+Closures are anonymous functions that can be passed a value through parameters and _close over_ (i.e., use) variables from outside their scope.
 
 For example, in the command `each { |it| print $it }` the closure is the portion contained in curly braces, `{ |it| print $it }`.
 Closure parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary.
-You can also use a pipeline input as `$in` in most closures instead of providing an explicit parameter: `each { print $in }`
+You can also use [pipeline input as `$in`](pipelines.html#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
 
-Closures itself can be bound to a named variable and passed as a parameter.
+```nu
+1..10 | each { print $in }
+```
+
+A closure can be bound to a named variable and passed as a parameter.
 To call a closure directly in your code use the [`do`](/commands/docs/do.md) command.
 
 ```nu
 # Assign a closure to a variable
-let greet = { |name| print $"Hello ($name)"}
-do $greet "Julian"
+> let greet = {|name| print $"Hello, ($name)"}
+> do $greet "Julian"
+Hello, Julian
 ```
 
 Closures are a useful way to represent code that can be executed on each row of data.
-It is idiomatic to use `$it` as a parameter name in [`each`](/commands/docs/each.md) blocks, but not required;
-`each { |x| print $x }` works the same way as `each { |it| print $it }`.
+It is common to use `$it` as a parameter name in [`each`](/commands/docs/each.md) blocks, but not required. For example:
+
+`each {|x| print $x }` works the same way as `each {|it| print $it }`.
 
 ## Blocks
 
+::: warning Type
+`block`
+:::
+
 Blocks don't close over variables, don't have parameters, and can't be passed as a value.
-However, unlike closures, blocks can access mutable variable in the parent closure.
+However, unlike closures, blocks can access mutable variable in the parent scope.
 For example, mutating a variable inside the block used in an [`if`](/commands/docs/if.md) call is valid:
 
 ```nu
@@ -478,41 +582,100 @@ if true {
 print $x
 ```
 
-## Null
-
-Finally, there is `null` which is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md)) produce `null`.
-
-You can place `null` at the end of a pipeline to replace the pipeline's output with it, and thus print nothing:
+Result:
 
 ```nu
-git checkout featurebranch | null
+1001
 ```
 
-:::warning
+## Null
 
-`null` is not the same as the absence of a value! It is possible for a table to be produced that has holes in some of its rows. Attempting to access this value will not produce `null`, but instead cause an error:
+::: warning Type
+`nothing`
+:::
+
+Finally, `null` is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md)) produce `null`.
+
+::: tip
+You can add `ignore` at the end of a pipeline to convert any pipeline result to a `nothing`. This will prevent the command/pipeline's output from being displayed.
 
 ```nu
-> [{a:1 b:2} {b:1}]
+git checkout featurebranch | ignore
+```
+
+:::
+
+It's important to understand that `null` is not the same as the absence of a value! It is possible for a table or list to have _missing_ values. Attempting to access a missing value will not produce `null` but will instead generate an error:
+
+```nu
+> let missing_value = [{a:1 b:2} {b:1}]
+> $missing_value
 ╭───┬────┬───╮
 │ # │ a  │ b │
 ├───┼────┼───┤
 │ 0 │  1 │ 2 │
 │ 1 │ ❎ │ 1 │
 ╰───┴────┴───╯
-> [{a:1 b:2} {b:1}].1.a
+
+> $missing_value.1.a
 Error: nu::shell::column_not_found
 
-  × Cannot find column
-   ╭─[entry #15:1:1]
- 1 │ [{a:1 b:2} {b:1}].1.a
-   ·            ──┬──    ┬
-   ·              │      ╰── cannot find column
-   ·              ╰── value originates here
+  × Cannot find column 'a'
+   ╭─[entry #4:1:32]
+ 1 │ let missing_value = [{a:1 b:2} {b:1}]
+   ·                                ──┬──
+   ·                                  ╰── value originates here
+   ╰────
+   ╭─[entry #6:1:18]
+ 1 │ $missing_value.1.a
+   ·                  ┬
+   ·                  ╰── cannot find column 'a'
    ╰────
 ```
 
-If you would prefer this to return `null`, mark the cell path member as _optional_ like `.1.a?`.
+Note that, in the table above, the missing value is printed as the ❎ emoji in interactive output.
 
-The absence of a value is (as of Nushell 0.71) printed as the ❎ emoji in interactive output.
+To safely access a value that may be missing, mark the cell-path member as _optional_ using a question-mark (`?`) after the key name.
+Missing values will return `null` when accessed with the optional operator. For example, continuing the example above:
+
+```nu
+> match $missing_value.1.a? {
+    null => "Missing"
+    $value => $value
+  }
+Missing
+
+> match $missing_value.1.b? {
+    null => "Missing"
+    $value => $value
+  }
+1
+```
+
+::: tip
+The [`default` command](/commands/docs/default.html) can be used to apply a default value to missing or null column result. In the example, above, for instance:
+
+```nu
+> let missing_value = [{a:1 b:2} {b:1}]
+> $missing_value
+╭───┬────┬───╮
+│ # │ a  │ b │
+├───┼────┼───┤
+│ 0 │  1 │ 2 │
+│ 1 │ ❎ │ 1 │
+╰───┴────┴───╯
+
+> let with_default_value = ($missing_value | default 'n/a' a)
+> $with_default_value
+╭───┬─────┬───╮
+│ # │  a  │ b │
+├───┼─────┼───┤
+│ 0 │   1 │ 2 │
+│ 1 │ n/a │ 1 │
+╰───┴─────┴───╯
+
+> $with_default_value.1.a
+n/a
+```
+
 :::
