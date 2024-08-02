@@ -9,7 +9,7 @@ and much more. Strings are so common that Nushell offers multiple string formats
 | ---------------------------------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
 | [Single-quoted string](#single-quoted-strings)       | `'[^\n]+'`              | None                      | Cannot contain single quotes within the string                         |
 | [Double-quoted string](#double-quoted-strings)       | `"The\nEnd"`            | C-style backslash escapes | All literal backslashes must be escaped                                |
-| [Raw strings](#raw-strings)                          | `r#'Raw string'#        | None                      | May include single quotes                                              |
+| [Raw strings](#raw-strings)                          | `r#'Raw string'#`        | None                      | May include single quotes                                              |
 | [Bare word string](#bare-word-strings)               | `ozymandias`            | None                      | Can only contain "word" characters; Cannot be used in command position |
 | [Backtick string](#backtick-quoted-strings)          | <code>\`[^\n]+\`</code> | None                      | Bare string that can include whitespace. Cannot contain any backticks  |
 | [Single-quoted interpolation](#string-interpolation) | `$'Captain ($name)'`    | None                      | Cannot contain any `'` or unmatched `()`                               |
