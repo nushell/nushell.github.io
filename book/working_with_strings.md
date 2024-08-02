@@ -1,19 +1,19 @@
 # Working with strings
 
-Strings in Nushell help to hold text data for later use. This can include file names, file paths, names of columns,
-and much more. Strings are so common that Nushell offers a couple ways to work with them, letting you pick what best
-matches your needs.
+As with most languages, strings are a collection of 0 or more characters that represent text. This can include file names, file paths, names of columns,
+and much more. Strings are so common that Nushell offers multiple string formats to match your use-case:
 
 ## String formats at a glance
 
-| Format of string            | Example                 | Escapes                   | Notes                                                                  |
-| --------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
-| Single-quoted string        | `'[^\n]+'`              | None                      | Cannot contain any `'`                                                 |
-| Backtick string             | <code>\`[^\n]+\`</code> | None                      | Cannot contain any backticks `                                         |
-| Double-quoted string        | `"The\nEnd"`            | C-style backslash escapes | All backslashes must be escaped                                        |
-| Bare string                 | `ozymandias`            | None                      | Can only contain "word" characters; Cannot be used in command position |
-| Single-quoted interpolation | `$'Captain ($name)'`    | None                      | Cannot contain any `'` or unmatched `()`                               |
-| Double-quoted interpolation | `$"Captain ($name)"`    | C-style backslash escapes | All backslashes and `()` must be escaped                               |
+| Format of string                                     | Example                 | Escapes                   | Notes                                                                  |
+| ---------------------------------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
+| [Single-quoted string](#single-quoted-strings)       | `'[^\n]+'`              | None                      | Cannot contain single quotes within the string                         |
+| [Double-quoted string](#double-quoted-strings)       | `"The\nEnd"`            | C-style backslash escapes | All literal backslashes must be escaped                                |
+| [Raw strings](#raw-strings)                          | `r#'Raw string'#`       | None                      | May include single quotes                                              |
+| [Bare word string](#bare-word-strings)               | `ozymandias`            | None                      | Can only contain "word" characters; Cannot be used in command position |
+| [Backtick string](#backtick-quoted-strings)          | <code>\`[^\n]+\`</code> | None                      | Bare string that can include whitespace. Cannot contain any backticks  |
+| [Single-quoted interpolation](#string-interpolation) | `$'Captain ($name)'`    | None                      | Cannot contain any `'` or unmatched `()`                               |
+| [Double-quoted interpolation](#string-interpolation) | `$"Captain ($name)"`    | C-style backslash escapes | All literal backslashes and `()` must be escaped                       |
 
 ## Single-quoted strings
 
@@ -29,21 +29,6 @@ end
 ```
 
 Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range of text data.
-
-## Backtick-quoted strings
-
-Single-quoted strings, due to not supporting any escapes, cannot contain any single-quote characters themselves. As an alternative, backtick strings using the <code>`</code> character also exist:
-
-```nu
-> `no man's land`
-no man's land
-> `no man's
-land`
-no man's
-land
-```
-
-Of course, backtick strings cannot contain any backticks themselves. Otherwise, they are identical to single-quoted strings.
 
 ## Double-quoted Strings
 
@@ -72,7 +57,28 @@ Nushell currently supports the following escape characters:
 - `\t` - tab
 - `\u{X...}` - a single unicode character, where X... is 1-6 hex digits (0-9, A-F)
 
-## Bare strings
+## Raw strings
+
+Raw strings behave the same as a single quoted strings, except that raw strings
+may also contain single quotes. This is possible because raw strings are enclosed
+by a starting `r#'` and a closing `'#`. This syntax should look familiar to users
+of Rust.
+
+```nu
+> r#'Raw strings can contain 'quoted' text.'#
+Raw strings can contain 'quoted' text.
+```
+
+Additional `#` symbols can be added to the start and end of the raw string to enclose
+one less than the same number of `#` symbols next to a `'` symbol in the string. This can
+be used to nest raw strings:
+
+```nu
+> r###'r##'This is an example of a raw string.'##'###
+r##'This is an example of a raw string.'##
+```
+
+## Bare word strings
 
 Like other shell languages (but unlike most other programming languages) strings consisting of a single 'word' can also be written without any quotes:
 
@@ -120,6 +126,41 @@ Error: nu::shell::external_command
 ```
 
 So, while bare strings are useful for informal command line usage, when programming more formally in nu, you should generally use quotes.
+
+## Backtick-quoted strings
+
+Bare word strings, by their nature, cannot include spaces or quotes. As an alternative, Nushell also includes backtick-quoted
+strings using the <code>`</code> character. In most cases, these should operate the same as a bare word string.
+
+For instance, as with a bare word, a backtick-quoted string in the first position of an expression will be interpreted as a _command_ or _path_.
+For example:
+
+```nu
+# Run the external ls binary found on the path
+`ls`
+
+Move up one directory
+`..`
+
+# Change to the "my dir" subdirectory, if it exists
+`./my dir`
+```
+
+Backtick-quoted strings can be useful for combining globs with files or directories which include spaces:
+
+```nu
+ls `./my dir/*`
+```
+
+Backtick-quoted strings cannot contain _unmatched_ backticks in the string itself. For example:
+
+`````nu
+> echo ````
+``
+
+> echo ```
+# Unterminated string which will start a new line in the CLI
+`````
 
 ## Strings as external commands
 
