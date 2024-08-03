@@ -1,10 +1,10 @@
 # Types of Data
 
-Traditionally, Unix shell commands have communicated with each other using strings of text: one command would write text to standard output (often abbreviated 'stdout') and the other would read text from standard input (or 'stdin'), allowing the two commands to communicate.
+Traditional Unix shell commands communicate with each other using strings of text -- One command writes text to standard output (often abbreviated `stdout`) and the other reads text from standard input (or `stdin`). This allows multiple commands to be combined together to communicate through what is called a "pipeline".
 
-Nu embraces this approach, and expands it to include other types of data, in addition to strings.
+Nushell embraces this approach and expands it to include other types of data in addition to strings.
 
-Like many programming languages, Nu models data using a set of simple, and structured data types. Simple data types include integers, floats, strings, booleans, dates. There are also special types for filesizes and time durations.
+Like many programming languages, Nu models data using a set of simple, structured data types. Simple data types include integers, floats, strings, and booleans. There are also special types for dates, file sizes, and time durations.
 
 The [`describe`](/commands/docs/describe.md) command returns the type of a data value:
 
