@@ -139,7 +139,7 @@ For example:
 # Run the external ls binary found on the path
 `ls`
 
-Move up one directory
+# Move up one directory
 `..`
 
 # Change to the "my dir" subdirectory, if it exists
