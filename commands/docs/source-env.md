@@ -2,7 +2,7 @@
 title: source-env
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Source the environment from a source file into the current environment.
 usage: |
@@ -36,3 +36,7 @@ Sources the environment from foo.nu in the current context
 > source-env foo.nu
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

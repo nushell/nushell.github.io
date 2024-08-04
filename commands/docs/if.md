@@ -2,7 +2,7 @@
 title: if
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Conditionally run a block.
 usage: |
@@ -50,3 +50,7 @@ Chain multiple if's together
 > if 5 < 3 { 'yes!' } else if 4 < 5 { 'no!' } else { 'okay!' }
 no!
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

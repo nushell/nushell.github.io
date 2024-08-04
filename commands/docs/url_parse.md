@@ -2,7 +2,7 @@
 title: url parse
 categories: |
   network
-version: 0.95.0
+version: 0.96.0
 network: |
   Parses a url.
 usage: |

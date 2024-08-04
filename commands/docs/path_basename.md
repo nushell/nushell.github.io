@@ -2,7 +2,7 @@
 title: path basename
 categories: |
   path
-version: 0.95.0
+version: 0.96.0
 path: |
   Get the final component of a path.
 usage: |

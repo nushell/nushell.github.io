@@ -2,7 +2,7 @@
 title: try
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Try to run a block, if it fails optionally run a catch closure.
 usage: |
@@ -49,3 +49,7 @@ Try to run a missing command and report the message
 > try { asdfasdf } catch { |err| $err.msg }
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html

@@ -2,7 +2,7 @@
 title: polars into-lazy
 categories: |
   lazyframe
-version: 0.95.0
+version: 0.96.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe.
 usage: |
@@ -31,8 +31,14 @@ usage: |
 
 ## Examples
 
-Takes a dictionary and creates a lazy dataframe
+Takes a table and creates a lazyframe
 ```nu
 > [[a b];[1 2] [3 4]] | polars into-lazy
+
+```
+
+Takes a table, creates a lazyframe, assigns column 'b' type str, displays the schema
+```nu
+> [[a b];[1 2] [3 4]] | polars into-lazy --schema {b: str} | polars schema
 
 ```

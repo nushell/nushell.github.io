@@ -2,7 +2,7 @@
 title: break
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Break a loop.
 usage: |
@@ -32,3 +32,9 @@ Break out of a loop
 > loop { break }
 
 ```
+
+## Notes
+This command is a parser keyword. For details, check:
+  https://www.nushell.sh/book/thinking_in_nu.html
+
+  break can only be used in while, loop, and for loops. It can not be used with each or other filter commands

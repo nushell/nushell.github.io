@@ -2,7 +2,7 @@
 title: polars cache
 categories: |
   lazyframe
-version: 0.95.0
+version: 0.96.0
 lazyframe: |
   Caches operations in a new LazyFrame.
 usage: |

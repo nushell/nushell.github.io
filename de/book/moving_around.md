@@ -22,13 +22,13 @@ Hier werden alle ".md" Dateien ausgegeben, die "in jedem tiefer liegenden Verzei
 
 ## Wechseln des aktuellen Verzeichnisses
 
-@[code](@snippets/moving_around/cd_example.sh)
+@[code](@snippets/book/moving_around/cd_example.nu)
 
 Um vom aktuellen Verzeichnis in ein neues zu gelangen, wird der [`cd`](/commands/docs/cd.md) Befehl verwendet. Wie in jeder anderen Shell, kann entweder der Name des Verzeichnisses angeben, oder mit `..` ein Verzeichnis hochgesprungen werden.
 
 Es kann jedoch auch das Verzeichnis gewechselt werden ohne [`cd`](/commands/docs/cd.md) angeben zu müssen, indem einfach der neue Pfad angegeben wird:
 
-@[code](@snippets/moving_around/cd_without_command_example.sh)
+@[code](@snippets/book/moving_around/cd_without_command_example.nu)
 
 **Hinweis** wenn mit [`cd`](/commands/docs/cd.md) das Verzeichnis gewechselt wird, ändert sich die `PWD` Umgebungsvariable. Das heisst der Wechsel bleibt für den aktuellen Block bestehen. Beim Verlassen des Blocks, wird wieder ins vorherige Verzeichnis gewechselt.
 Mehr zu dieser Funktionsweise findet sich im Kapitel [environment chapter](./environment.md).

@@ -2,7 +2,7 @@
 title: polars cumulative
 categories: |
   dataframe
-version: 0.95.0
+version: 0.96.0
 dataframe: |
   Cumulative calculation for a series.
 usage: |
@@ -46,6 +46,21 @@ Cumulative sum for a series
 │ 2 │                6 │
 │ 3 │               10 │
 │ 4 │               15 │
+╰───┴──────────────────╯
+
+```
+
+Cumulative sum for a series in reverse order
+```nu
+> [1 2 3 4 5] | polars into-df | polars cumulative sum --reverse
+╭───┬──────────────────╮
+│ # │ 0_cumulative_sum │
+├───┼──────────────────┤
+│ 0 │               15 │
+│ 1 │               14 │
+│ 2 │               12 │
+│ 3 │                9 │
+│ 4 │                5 │
 ╰───┴──────────────────╯
 
 ```

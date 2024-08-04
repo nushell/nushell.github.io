@@ -2,7 +2,7 @@
 title: window
 categories: |
   filters
-version: 0.95.0
+version: 0.96.0
 filters: |
   Creates a sliding window of `window_size` that slide by n rows/elements across input.
 usage: |
@@ -92,3 +92,6 @@ A sliding window of equal stride that includes remainder. Equivalent to chunking
 ╰───┴───────────╯
 
 ```
+
+## Notes
+This command will error if `window_size` or `stride` are negative or zero.

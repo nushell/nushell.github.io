@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.95.0
+version: 0.96.0
 network: |
   Patch a body to a URL.
 usage: |
@@ -39,9 +39,9 @@ usage: |
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | any    |
+| input | output |
+| ----- | ------ |
+| any   | any    |
 
 ## Examples
 
@@ -66,6 +66,12 @@ Patch content to example.com, with custom header
 Patch content to example.com, with JSON body
 ```nu
 > http patch --content-type application/json https://www.example.com { field: value }
+
+```
+
+Patch JSON content from a pipeline to example.com
+```nu
+> open foo.json | http patch https://www.example.com
 
 ```
 

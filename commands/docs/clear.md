@@ -2,7 +2,7 @@
 title: clear
 categories: |
   platform
-version: 0.95.0
+version: 0.96.0
 platform: |
   Clear the terminal.
 usage: |

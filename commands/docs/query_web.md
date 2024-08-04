@@ -2,7 +2,7 @@
 title: query web
 categories: |
   network
-version: 0.95.0
+version: 0.96.0
 network: |
   execute selector query on html/web
 usage: |
@@ -26,7 +26,7 @@ Command `query web` resides in [plugin](/book/plugins.html) [`nu_plugin_query`](
 
  -  `--query, -q {string}`: selector query
  -  `--as-html, -m`: return the query output as html
- -  `--attribute, -a {string}`: downselect based on the given attribute
+ -  `--attribute, -a {any}`: downselect based on the given attribute
  -  `--as-table, -t {list<string>}`: find table based on column header list
  -  `--inspect, -i`: run in inspect mode to provide more information for determining column headers
 
@@ -61,5 +61,11 @@ Pass multiple css selectors to extract several elements within single query, gro
 Retrieve a specific html attribute instead of the default text
 ```nu
 > http get https://example.org | query web --query a --attribute href
+
+```
+
+Retrieve the OpenGraph properties (`<meta property="og:...">`) from a web page
+```nu
+> http get https://www.rust-lang.org | query web --query 'meta[property^="og:"]' --attribute [ property content ]
 
 ```

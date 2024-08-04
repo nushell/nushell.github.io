@@ -2,7 +2,7 @@
 title: str upcase
 categories: |
   strings
-version: 0.95.0
+version: 0.96.0
 strings: |
   Make text uppercase.
 usage: |

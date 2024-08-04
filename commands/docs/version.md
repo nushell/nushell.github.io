@@ -2,7 +2,7 @@
 title: version
 categories: |
   core
-version: 0.95.0
+version: 0.96.0
 core: |
   Display Nu version, and its build configuration.
 usage: |
