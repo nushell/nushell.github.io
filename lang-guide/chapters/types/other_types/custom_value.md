@@ -4,7 +4,7 @@ What it is: An opaque data type that is used internal to Nushell by compiled in 
 
 Annotation: None
 
-Custom values are values that might be created vy Nushell internal commands or plugins. For instance, a plugin might generate a custom value that encodes data in a binary format or some other data type like structured data used by DataFrames or SQLite.
+Custom values are values that might be created by Nushell internal commands or plugins. For instance, a plugin might generate a custom value that encodes data in a binary format or some other data type like structured data used by DataFrames or SQLite.
 
 Note: Custom values used by external commands are not this data type.
 
