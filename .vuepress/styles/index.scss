@@ -15,6 +15,12 @@
   line-height: 1;
 }
 
+/* Make sure the line numbers have the same line-height as the code lines
+ */
+div[class*="language-"].line-numbers-mode .line-numbers {
+  line-height: 1;
+}
+
 /* Add DejaVu Sans Mono to the list of monospaced fonts.
  * This allows tables to be rendered seamlessly with box-drawing characters.
  */
