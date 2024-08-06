@@ -205,3 +205,89 @@ Output
  101
 ━━━━━
 ```
+
+### Uploading files
+
+To upload a form with a file (think a common file upload form in a browser, where you have to select a file and provide some additional data), you need to:
+
+1. Specify the content type as `multipart/form-data`
+2. Provide the record as the POST body
+3. Provide the file data in one of the record fields as *binary* data.
+
+```nu
+http post https://httpbin.org/post --content-type "multipart/form-data" {
+  icon: (open -r ~/Downloads/favicon-32x32.png),
+  description: "Small icon"
+}
+```
+
+Output:
+
+```
+╭─────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ args    │ {record 0 fields}                                                                                     │
+│ data    │                                                                                                       │
+│         │ ╭──────┬────────────────────────────────────────────────────────────────────────────────────────────╮ │
+│ files   │ │ icon │ data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIW │ │
+│         │ │      │ XMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAG5SURBVHgBrZeBUcMwDEU/XYBuUG8 │ │
+│         │ │      │ AG2A26AZ0A7pBu0FhgmaDskHKBA0TJExAmSBYd/bFBNmWfLw73fUukvXlWI4KpLHOTs56Z6OzL2ets03C3zg7MP47/ │ │
+│         │ │      │ 0zM0geOGeuZRW3BfwsBBlMFJaMK74UCghVFHIXJ48qWCgHjTPSf6scK2ysFtHHSRfRb9I4YHqDDYtq1XwLuUIeFHgt │ │
+│         │ │      │ GgEE9K+hgd+CKer6h48oJ+EAdA/TiBzACGtRxho7BWZd6SC2iaUG6jIyPtcKYDTIYv6hUQNy6VuD/AgF0U/UoVz6/N │ │
+│         │ │      │ 2whpoEC4wN6JnELvmVNQniLzF1xgzK0I9S3dNIHlE988If3H3LOC5QJCZeQMUQx1XcLJduBP5BHpF9BC/4VbKBAcgj │ │
+│         │ │      │ nHUDYgv8BAgx0bfikECASIal83hXagWQdJ4wP4Rr6LyIl184Rz6kHR+iqD9b7eKuIWYWk8Q4kZ7UCBvIWDTxyArSLx │ │
+│         │ │      │ Nyikv8aSD6hgx1I3lFHBz0dJ+ANdbxCxxmZ7wP9F6zpAMIKY7KHnQ7iRbhQPA1JBewhgEQ0KFduZnG2IFb9x4duxhO │ │
+│         │ │      │ mb0MYRrYF4ZeZ0D0yN+wPKKVmaKtbyvUAAAAASUVORK5CYII=                                          │ │
+│         │ ╰──────┴────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│         │ ╭─────────────┬────────────╮                                                                          │
+│ form    │ │ description │ Small icon │                                                                          │
+│         │ ╰─────────────┴────────────╯                                                                          │
+│         │ ╭────────────────────────┬──────────────────────────────────────────────────────────────────────────╮ │
+│ headers │ │ Accept                 │ */*                                                                      │ │
+│         │ │ Accept-Encoding        │ gzip                                                                     │ │
+│         │ │ Content-Length         │ 893                                                                      │ │
+│         │ │ Content-Type           │ multipart/form-data; boundary=cddfac9d-e5e0-4aa3-a3df-6f9f6e570bc9       │ │
+│         │ │ Host                   │ httpbin.org                                                              │ │
+│         │ │ User-Agent             │ nushell                                                                  │ │
+│         │ │ X-Amzn-Trace-Id        │ Root=1-66b28d98-549045021ddb79ab3d0eda79                                 │ │
+│         │ ╰────────────────────────┴──────────────────────────────────────────────────────────────────────────╯ │
+│ json    │                                                                                                       │
+│ url     │ https://httpbin.org/post                                                                              │
+╰─────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+If the file happens to be a text file, you may need to additionally convert it to binary data before sending it. This can be done using the `into binary` command.
+
+```nu
+http post https://httpbin.org/post --content-type "multipart/form-data" {
+  doc: (open -r ~/Downloads/README.txt | into binary),
+  description: "Documentation file"
+}
+```
+
+Output:
+
+```
+╭─────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ args    │ {record 0 fields}                                                                                        │
+│ data    │                                                                                                          │
+│         │ ╭──────┬───────────────────────────────────────────────────────────────────────────────────────────────╮ │
+│ files   │ │ doc  │ To use Nu plugins, use the register command to tell Nu where to find the plugin. For example: │ │
+│         │ │      │                                                                                               │ │
+│         │ │      │ > register ./nu_plugin_query                                                                  │ │
+│         │ ╰──────┴───────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│         │ ╭─────────────┬────────────────────╮                                                                     │
+│ form    │ │ description │ Documentation file │                                                                     │
+│         │ ╰─────────────┴────────────────────╯                                                                     │
+│         │ ╭─────────────────┬────────────────────────────────────────────────────────────────────╮                 │
+│ headers │ │ Accept          │ */*                                                                │                 │
+│         │ │ Accept-Encoding │ gzip                                                               │                 │
+│         │ │ Content-Length  │ 476                                                                │                 │
+│         │ │ Content-Type    │ multipart/form-data; boundary=f872d6c3-7937-426d-b266-de562b777e1d │                 │
+│         │ │ Host            │ httpbin.org                                                        │                 │
+│         │ │ User-Agent      │ nushell                                                            │                 │
+│         │ │ X-Amzn-Trace-Id │ Root=1-66b28eef-4998c6ab0ef5becb19ca7f6f                           │                 │
+│         │ ╰─────────────────┴────────────────────────────────────────────────────────────────────╯                 │
+│ json    │                                                                                                          │
+│ url     │ https://httpbin.org/post                                                                                 │
+╰─────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
