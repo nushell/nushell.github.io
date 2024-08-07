@@ -86,10 +86,6 @@ Nu 发行版会作为源码发布到流行的 Rust 包仓库 [crates.io](https:/
 
 如此即可！`cargo` 工具将完成下载 Nu 及其源码依赖，构建并将其安装到 cargo bin 路径中，以便我们能够运行它。
 
-如果你想要安装并支持 [dataframes](/zh-CN/book/dataframes.md) 功能，你可以在安装命令附上 `--features=dataframe`：
-
-@[code](@snippets/installation/cargo_install_nu_more_features.sh)
-
 ### 从 GitHub 仓库构建
 
 我们也可以从 GitHub 上的最新源码构建自己的 Nu。这让我们可以立即获得最新的功能和错误修复。首先，克隆源码仓库：

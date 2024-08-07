@@ -86,20 +86,6 @@ Wenn alle die Abhängigkeitenn, die für Nu benötigt werden, installiert sind, 
 
 Das war's! Cargo wird Nu und seine anderen Abhängigkeiten herunterladen, kompilieren und schließlich im cargo `bin` Pfad installieren, damit es benutzt werden kann.
 
-Wenn mehr Funktionalitäten installiert werden sollen, kann der folgende Befehl verwendet werden:
-
-@[code](@snippets/installation/cargo_install_nu_more_features.sh)
-
-Um alle verfügbaren Funktionalitäten zu bekommen, ist es am einfachsten einen Checkout durchzuführen und es selbst mit Hilfe der Rust-Tools zu kompilieren:
-
-@[code](@snippets/installation/build_nu_yourself.sh)
-
-Damit das funktioniert, sollte sichergestellt werden, dass alle oben genannten Abhängigkeiten auf dem System installiert sind.
-
-Wenn Nu schließlich installiert ist, kann die Shell mit dem `nu`-Befehl gestartet werden:
-
-@[code](@snippets/installation/run_nu.sh)
-
 ## Kompilieren von Quelldateien
 
 Nu kann auch direkt aus den Quelldateien, die auf GitHub verfügbar sind, kompiliert werden. Das stellt unmittelbar die neuesten Funktionen und Fehlerbehebungen von Nu zur Verfügung.
