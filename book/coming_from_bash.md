@@ -7,8 +7,6 @@ To make these commands available in `nu` as well, add the following line to your
 $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 
-Note: this table assumes Nu 0.91.0 or later.
-
 | Bash                                 | Nu                                                            | Task                                                              |
 | ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `ls`                                 | `ls`                                                          | Lists the files in the current directory                          |
@@ -35,6 +33,8 @@ Note: this table assumes Nu 0.91.0 or later.
 | `cat <path>`                         | `open --raw <path>`                                           | Display the contents of the given file                            |
 |                                      | `open <path>`                                                 | Read a file as structured data                                    |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                                          | Move file to new location                                         |
+| `for f in *.md; do echo $f; done`    | `ls *.md \| each { $in.name }`                                | Iterate over a list and return results                            |
+| `for i in $(seq 1 10); do echo $i; done` | `for i in 1..10 { print $i }`                             | Iterate over a list and run a command on results                  |
 | `cp <source> <dest>`                 | `cp <source> <dest>`                                          | Copy file to new location                                         |
 | `cp -r <source> <dest>`              | `cp -r <source> <dest>`                                       | Copy directory to a new location, recursively                     |
 | `rm <path>`                          | `rm <path>`                                                   | Remove the given file                                             |
