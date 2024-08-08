@@ -73,7 +73,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `pwd`                                | `$env.PWD`                                                    | Display the current directory                                     |
 | `read var`                           | `let var = input`                                             | Get input from the user                                           |
 
-## History and Default Keybindings:
+## History Substitutions and Default Keybindings:
 
 | Bash                                 | Nu                                                            | Task                                                              |
 | ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
