@@ -1,11 +1,15 @@
 # Coming from Bash
 
-If you're coming from `Git Bash` on Windows, then the external commands you're used to (bash, grep, etc) will not be available in `nu` by default (unless you had explicitly made them available in the Windows Path environment variable).
-To make these commands available in `nu` as well, add the following line to your `config.nu` with either `append` or `prepend`.
+::: tip
+If you're coming from `Git Bash` on Windows, then the external commands you're used to (e.g, `ln`, `grep`, `vi`, etc) will not be available in Nushell by default unless you have already explicitly made them available in the Windows Path environment variable.
+To make these commands available in Nushell as well, add the following line to your `config.nu` with either `append` or `prepend`.
 
 ```
 $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
+:::
+
+## Command equivalents:
 
 | Bash                                 | Nu                                                            | Task                                                              |
 | ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -69,3 +73,17 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `pwd`                                | `$env.PWD`                                                    | Display the current directory                                     |
 | `read var`                           | `let var = input`                                             | Get input from the user                                           |
 
+## History and Default Keybindings:
+
+| Bash                                 | Nu                                                            | Task                                                              |
+| ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `!!`                                 | `!!`                                                          | Repeat last commandline from history                              |
+| `!$`                                 | `!$`                                                          | Repeat last commandline from history                              |
+| `!<n>` (e.g., `!5`)                  | `!<n>`                                                        | Repeat \<n\>th command from the beginning of the history          |
+|                                      |                                                               | Tip: `history \| enumerate \| last 10` to show recent positions   |
+| `!<-n>` (e.g., `!-5`)                | `!<-n>`                                                       | Repeat \<n\>th command from the end of the history                |
+| <kbd>Ctrl/Cmd</kbd>+<kbd>R</kbd>     | <kbd>Ctrl/Cmd</kbd>+<kbd>R</kbd>                              | Reverse history search                                            |
+| (Emacs Mode) <kbd>Ctrl</kbd>+<kbd>X</kbd><kbd>Ctrl</kbd>+<kbd>E</kbd> | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd> | Edit the commandline in the editor defined by `$env.EDITOR`   |
+| (Vi Command Mode) <kbd>V</kbd>       | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd>                              | Edit the commandline in the editor defined by `$env.EDITOR`       |
+
+Most common Emacs-mode and Vi-mode keybindings are also available. See the [Reedline Chapter](line_editor.html#editing-mode).
