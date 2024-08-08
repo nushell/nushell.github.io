@@ -82,6 +82,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `!<n>` (e.g., `!5`)                  | `!<n>`                                                        | Repeat \<n\>th command from the beginning of the history          |
 |                                      |                                                               | Tip: `history \| enumerate \| last 10` to show recent positions   |
 | `!<-n>` (e.g., `!-5`)                | `!<-n>`                                                       | Repeat \<n\>th command from the end of the history                |
+| `!<string>` (e.g., `!ls`)            | `!<string>`                                                   | Repeat the most recent history item beginning with the string     |
 | <kbd>Ctrl/Cmd</kbd>+<kbd>R</kbd>     | <kbd>Ctrl/Cmd</kbd>+<kbd>R</kbd>                              | Reverse history search                                            |
 | (Emacs Mode) <kbd>Ctrl</kbd>+<kbd>X</kbd><kbd>Ctrl</kbd>+<kbd>E</kbd> | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd> | Edit the commandline in the editor defined by `$env.EDITOR`   |
 | (Vi Command Mode) <kbd>V</kbd>       | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd>                              | Edit the commandline in the editor defined by `$env.EDITOR`       |
