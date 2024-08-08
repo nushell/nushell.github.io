@@ -22,7 +22,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 | Booleans          | `true`                                                                |
 | Dates             | `2000-01-01`                                                          |
 | Durations         | `2min + 12sec`                                                        |
-| File sizes        | `64mb`                                                                |
+| File sizes        | `64MB`, `64Mb`, `64mb`                                                |
 | Ranges            | `0..4`, `0..<5`, `0..`, `..4`                                         |
 | Binary            | `0x[FE FF]`                                                           |
 | Lists             | `[0 1 'two' 3]`                                                       |
@@ -97,16 +97,18 @@ Dates are in three forms, based on the RFC 3339 standard:
 
 Durations represent a length of time. This chart shows all durations currently supported:
 
-| Duration | Length          |
-| -------- | --------------- |
-| `1ns`    | one nanosecond  |
-| `1us`    | one microsecond |
-| `1ms`    | one millisecond |
-| `1sec`   | one second      |
-| `1min`   | one minute      |
-| `1hr`    | one hour        |
-| `1day`   | one day         |
-| `1wk`    | one week        |
+| Duration  | Length          |
+| --------- | --------------- |
+| `1ns`     | one nanosecond  |
+| `1μs`[^1] | one microsecond |
+| `1ms`     | one millisecond |
+| `1sec`    | one second      |
+| `1min`    | one minute      |
+| `1hr`     | one hour        |
+| `1day`    | one day         |
+| `1wk`     | one week        |
+
+[^1]: Can be simplified to `us` if Unicode or the Greek letter Mu (μ) is unavailable
 
 You can make fractional durations:
 
@@ -124,32 +126,32 @@ And you can do calculations with durations:
 
 ## File sizes
 
-Nushell also has a special type for file sizes. Examples include `100b`, `15kb`, and `100mb`.
+Nushell also has a special type for file sizes. Examples include `100B`, `15kB`, and `100MB`.
 
-The full list of filesize units are:
+The full list of file size units are:
 
-- `b`: bytes
-- `kb`: kilobytes (aka 1000 bytes)
-- `mb`: megabytes
-- `gb`: gigabytes
-- `tb`: terabytes
-- `pb`: petabytes
-- `eb`: exabytes
-- `kib`: kibibytes (aka 1024 bytes)
-- `mib`: mebibytes
-- `gib`: gibibytes
-- `tib`: tebibytes
-- `pib`: pebibytes
-- `eib`: exbibytes
+| Decimal (factor of 1000) | Binary (factor of 1024) |
+| --------------- | ---------------- |
+| `B`: bytes      | `B`: bytes       |
+| `kB`: kilobytes | `KiB`: kibibytes |
+| `MB`: megabytes | `MiB`: mebibytes |
+| `GB`: gigabytes | `GiB`: gibibytes |
+| `TB`: terabytes | `TiB`: tebibytes |
+| `PB`: petabytes | `PiB`: pebibytes |
+| `EB`: exabytes  | `EiB`: exbibytes |
+
+Note that in Nushell file size units are case-insensitive, they do not need to be written following the SI and IEC standards like above. This gives you some leeway, since no error is raised if you write `mb` instead of `MB`. Therefore, `1KiB` = `1kib` = `1kIB` = `1Kib`, etc.
 
 As with durations, you can make fractional file sizes, and do calculations:
 
 ```nu
-> 1Gb / 1b
+> 0.5kB
+500 B
+> 1GB / 1B
 1000000000
-> 1Gib / 1b
+> 1GiB / 1B
 1073741824
-> (1Gib / 1b) == 2 ** 30
+> [1kib, 1kIB, 1Kib, 1kIb] | all { |kibibyte| $kibibyte == 1KiB } # These are all equivalent.
 true
 ```
 
