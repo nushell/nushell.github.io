@@ -78,7 +78,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | Bash                                 | Nu                                                            | Task                                                              |
 | ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `!!`                                 | `!!`                                                          | Repeat last commandline from history                              |
-| `!$`                                 | `!$`                                                          | Repeat last commandline from history                              |
+| `!$`                                 | `!$`                                                          | Repeat last spatially separated token from history                |
 | `!<n>` (e.g., `!5`)                  | `!<n>`                                                        | Repeat \<n\>th command from the beginning of the history          |
 |                                      |                                                               | Tip: `history \| enumerate \| last 10` to show recent positions   |
 | `!<-n>` (e.g., `!-5`)                | `!<-n>`                                                       | Repeat \<n\>th command from the end of the history                |
