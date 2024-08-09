@@ -77,14 +77,26 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 
 | Bash                                 | Nu                                                            | Task                                                              |
 | ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `!!`                                 | `!!`                                                          | Repeat last commandline from history                              |
-| `!$`                                 | `!$`                                                          | Repeat last spatially separated token from history                |
-| `!<n>` (e.g., `!5`)                  | `!<n>`                                                        | Repeat \<n\>th command from the beginning of the history          |
+| `!!`                                 | `!!`                                                          | Insert last command-line from history                              |
+| `!$`                                 | `!$`                                                          | Insert last spatially separated token from history                |
+| `!<n>` (e.g., `!5`)                  | `!<n>`                                                        | Insert \<n\>th command from the beginning of the history          |
 |                                      |                                                               | Tip: `history \| enumerate \| last 10` to show recent positions   |
-| `!<-n>` (e.g., `!-5`)                | `!<-n>`                                                       | Repeat \<n\>th command from the end of the history                |
-| `!<string>` (e.g., `!ls`)            | `!<string>`                                                   | Repeat the most recent history item beginning with the string     |
+| `!<-n>` (e.g., `!-5`)                | `!<-n>`                                                       | Insert \<n\>th command from the end of the history                |
+| `!<string>` (e.g., `!ls`)            | `!<string>`                                                   | Insert the most recent history item that begins with the string   |
 | <kbd>Ctrl/Cmd</kbd>+<kbd>R</kbd>     | <kbd>Ctrl/Cmd</kbd>+<kbd>R</kbd>                              | Reverse history search                                            |
-| (Emacs Mode) <kbd>Ctrl</kbd>+<kbd>X</kbd><kbd>Ctrl</kbd>+<kbd>E</kbd> | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd> | Edit the commandline in the editor defined by `$env.EDITOR`   |
-| (Vi Command Mode) <kbd>V</kbd>       | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd>                              | Edit the commandline in the editor defined by `$env.EDITOR`       |
+| (Emacs Mode) <kbd>Ctrl</kbd>+<kbd>X</kbd><kbd>Ctrl</kbd>+<kbd>E</kbd> | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd> | Edit the command-line in the editor defined by `$env.EDITOR`   |
+| (Vi Command Mode) <kbd>V</kbd>       | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd>                              | Edit the command-line in the editor defined by `$env.EDITOR`       |
 
 Most common Emacs-mode and Vi-mode keybindings are also available. See the [Reedline Chapter](line_editor.html#editing-mode).
+
+::: tip
+In Bash, history substitution occurs immediately after pressing <kbd>Enter</kbd> 
+to execute the command-line. Nushell, however, *inserts* the substitution into
+the command-line after pressing <kbd>Enter</kbd>. This allows you to confirm
+the substitution and, if needed, make additional edits before execution.
+
+This behavior extends to "Edit command-line in Editor" as well. While Bash immediately
+executes the command after exiting the editor, Nushell (like other, more modern shells
+such as Fish and Zsh) inserts the editor contents into the command-line, allowing you
+to review and make changes before committing it to execution.
+:::
