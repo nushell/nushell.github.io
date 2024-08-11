@@ -64,4 +64,6 @@ There are a few limitations to the current `extern` syntax. In Nushell, flags an
 
 The second limitation is that some externals require flags to be passed using `=` to separate the flag and the value. In Nushell, the `=` is a convenient optional syntax and there's currently no way to require its use.
 
+In addition, externals called via the caret sigil (e.g., `^ssh`) are not recognized by `extern`.
+
 Finally, some external commands support `-long` arguments using a single leading hyphen. Nushell `extern` syntax can not yet represent these arguments.
