@@ -1,20 +1,18 @@
 # Binary
 
-What it is: A literal syntax for expressing binary data in your Nushell scripts.
+- **_Description:_** Represents binary data
+- **_Annotation:_** `binary`
+- **_Literal Syntax: _**
 
-Annotation: `binary`
+  - `0x[ffffffff]` - hex-based binary representation
+  - `0o[1234567]` - octal-based binary representation
+  - `0b[10101010101]` - binary-based binary representation
 
-Nushell offers a way of creating binary literals in your data. These are in one of three ways:
+- **_Casts:_** [`into binary`](/commands/docs/into_binary.md)
+- **_See also: _** [Types of data - Binary](/book/types_of_data.md#binary-data)
 
-- `0x[ffffffff]` - hex-based binary representation
-- `0o[1234567]` - octal-based binary representation
-- `0b[10101010101]` - binary-based binary representation
+Incomplete bytes are left-padded with zeros.
 
-The data inside of the `[]` represents a single data value of bits.
-
-You can use spaces to make the literals more readable. For example, `0x[ffff ffff]`.
-
-## Casts
-
-The command `into binary` can convert other data types into a binary datatype.
-See `help into binary` for a complete list of compatible input data types.
+::: tip
+Spaces can be used to improve readability. For example, `0x[ffff ffff]`.
+:::

@@ -10,6 +10,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 
 ```nu
 > 42 | describe
+int
 ```
 
 ## Types at a glance
@@ -17,7 +18,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 | Type              | Example                                                               |
 | ----------------- | --------------------------------------------------------------------- |
 | Integers          | `-65535`                                                              |
-| Decimals (floats) | `9.9999`, `Infinity`                                                  |
+| Floats (decimals) | `9.9999`, `Infinity`                                                  |
 | Strings           | <code>"hole 18", 'hole 18', \`hole 18\`, hole18</code>                |
 | Booleans          | `true`                                                                |
 | Dates             | `2000-01-01`                                                          |
@@ -32,205 +33,195 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 | Blocks            | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
 | Null              | `null`                                                                |
 
-## Integers
+## Basic Data Types
 
-::: warning Type
-`int`
-:::
+### Integers
 
-Examples of integers (i.e. "round numbers") include 1, 0, -5, and 100.
-You can parse a string into an integer with the [`into int`](/commands/docs/into_int.md) command
+- **_Description:_** Numbers without a fractional component (positive, negative, and 0)
+- **_Annotation:_** `int`
+- **_Literal Syntax:_** A decimal, hex, octal, or binary numeric value without a decimal place. E.g., `-100`, `0`, `50`, `+50`, `0xff` (hex), `0o234` (octal), `0b10101` (binary)
+- **_See also:_** [Language Reference](/lang-guide/chapters/types/basic_types/int.md)
+
+Simple Example:
 
 ```nu
-> "-5" | into int
+> 10 / 2
+5
+> 5 | describe
+int
 ```
 
-## Decimals
+### Floats/Decimals
 
-::: warning Type
-`float`
-:::
+- **_Description:_** Numbers with some fractional component
+- **_Annotation:_** `float`
+- **_Literal Syntax:_** A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333`
+- **_See also:_** [Language Reference](/lang-guide/chapters/types/basic_types/float.md)
 
-Decimal numbers are numbers with some fractional component. Examples include 1.5, 2.0, and 15.333.
-You can cast a string into a Float with the [`into float`](/commands/docs/into_float.md) command
+Simple Example:
 
 ```nu
-> "1.2" | into float
+> 2.5 / 5.0
+0.5
 ```
 
-## Text/Strings
-
-::: warning Type
-`string`
-:::
-
-A string of characters that represents text. There are multiple ways these can be constructed. See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
-
-## Booleans
-
-::: warning Type
-`bool`
-:::
-
-There are just two boolean values: `true` and `false`. Rather than writing the values directly, they often result from a comparison:
+::: tip
+As in most programming languages, decimal values in Nushell are approximate.
 
 ```nu
-> let mybool = 2 > 1
+> 10.2 * 5.1
+52.01999999999999
+```
+
+:::
+
+### Text/Strings
+
+- **_Description:_** A string of characters that represents text
+- **_Annotation:_** `string`
+- **_Literal Syntax:_** See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
+- **_See also:_** [Working with strings](working_with_strings.md), [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings), and the [Language Reference](/lang-guide/chapters/types/basic_types/string.md)
+
+As with many languages, Nushell provides multiple ways to specify String values and numerous commands for working with strings.
+
+Simple (obligatory) example:
+
+```nu
+> let audience: string = "World"
+> $"Hello, ($audience)"
+Hello, World
+```
+
+### Booleans
+
+- **_Description:_** True or False value
+- **_Annotation:_** `bool`
+- **_Literal Syntax:_** Either a literal `true` or `false`
+- **_See also:_** [Language Reference](/lang-guide/chapters/types/basic_types/bool.md)
+
+Booleans are commonly the result of a comparison. For example:
+
+```nu
+> let mybool: bool = (2 > 1)
 > $mybool
 true
-> let mybool = ($env.HOME | path exists)
+> let mybool: bool = ($env.HOME | path exists)
 > $mybool
 true
 ```
 
-## Dates
+A boolean result is commonly used to control the flow of execution:
 
-::: warning Type
-`date`
-:::
+```nu
+> let num = -2
+> if $num < 0 { print "It's negative" }
+It's negative
+```
 
-Dates and times are held together in the Date value type. Date values used by the system are timezone-aware, and by default use the UTC timezone.
+### Dates
 
-Dates are in three forms, based on the RFC 3339 standard:
+- **_Description:_** Represents a specific point in time using international standard date time descriptors
+- **_Annotation:_** `date`
+- **_Literal Syntax:_** See [Language Guide](/lang-guide/chapters/types/basic_types/date.md)
 
-- A date:
-  - `2022-02-02`
-- A date and time (in GMT):
-  - `2022-02-02T14:30:00`
-- A date and time with timezone:
-  - `2022-02-02T14:30:00+05:00`
+Nushell also includes the `date` type, and associated methods and operators, for working with dates.
 
-## Durations
+Simple example:
 
-::: warning Type
-`duration`
-:::
+```nu
+>  date now
+Mon, 12 Aug 2024 13:59:22 -0400 (now)
+# Format as Unix epoch
+> date now | format date '%s'
+1723485562
+```
 
-Durations represent a length of time. This chart shows all durations currently supported:
+### Durations
 
-| Duration | Length          |
-| -------- | --------------- |
-| `1ns`    | one nanosecond  |
-| `1us`    | one microsecond |
-| `1ms`    | one millisecond |
-| `1sec`   | one second      |
-| `1min`   | one minute      |
-| `1hr`    | one hour        |
-| `1day`   | one day         |
-| `1wk`    | one week        |
+- **_Description:_** Represent a unit of a passage of time
+- **_Annotation:_** `duration`
+- **_Literal Syntax:_** See [Language Reference](/lang-guide/chapters/types/basic_types/duration.html)
 
-Nushell supports fractional durations:
+Durations support fractional values as well as calculations.
+
+Simple example:
 
 ```nu
 > 3.14day
 3day 3hr 21min
-```
-
-As well as calculations with durations:
-
-```nu
 > 30day / 1sec  # How many seconds in 30 days?
 2592000
 ```
 
-## File sizes
+### File sizes
 
-::: warning Type
-`filesize`
-:::
+- **_Description:_** Specialized numeric type to represent the size of files or a number of bytes
+- **_Annotation:_** `filesize`
+- **_Literal Syntax:_** See [Language Reference](/lang-guide/chapters/types/basic_types/filesize.html)
 
-Nushell also has a special type for file sizes. Examples include `100b`, `15kb`, and `100mb`.
-
-The full list of filesize units are:
-
-- `b`: bytes
-- `kb`: kilobytes (aka 1000 bytes)
-- `mb`: megabytes
-- `gb`: gigabytes
-- `tb`: terabytes
-- `pb`: petabytes
-- `eb`: exabytes
-- `kib`: kibibytes (aka 1024 bytes)
-- `mib`: mebibytes
-- `gib`: gibibytes
-- `tib`: tebibytes
-- `pib`: pebibytes
-- `eib`: exbibytes
+Nushell also has a special type for file sizes.
 
 As with durations, Nushell supports fractional file sizes and calculations:
 
 ```nu
-> 1Gb / 1b
-1000000000
-> 1Gib / 1b
+> 0.5kB
+500 B
+> 1GiB / 1B
 1073741824
-> (1Gib / 1b) == 2 ** 30
+> (1GiB / 1B) == 2 ** 30
 true
 ```
 
-## Ranges
+See the [Language Reference](/lang-guide/chapters/types/basic_types/filesize.html) for a complete list of units and more detail.
 
-::: warning Type
-`range`
-:::
+### Ranges
 
-A range is a way of expressing a sequence of integer or float values from start to finish. They take the form \<start\>..\<end\>. For example, the range `1..3` means the numbers 1, 2, and 3.
+- **_Description:_** Describes a range of values from a starting value to an ending value, with an optional stride.
+- **_Annotation:_** `range`
+- **_Literal Syntax:_** `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.
+- **_See also:_** [Language Guide - Ranges](/lang-guide/chapters/types/basic_types/range.md)
+
+Simple example:
+
+```nu
+> 1..5
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+│ 3 │ 4 │
+│ 4 │ 5 │
+╰───┴───╯
+```
 
 ::: tip
-
 You can also easily create lists of characters with a form similar to ranges with the command [`seq char`](/commands/docs/seq_char.html) as well as with dates using the [`seq date`](/commands/docs/seq_date.html) command.
-
 :::
 
-### Specifying the step
+### Binary data
 
-You can specify the step of a range with the form \<start\>..\<second\>..\<end\>, where the step between values in the range is the distance between the \<start\> and \<second\> values, which numerically is \<second\> - \<start\>. For example, the range `2..5..11` means the numbers 2, 5, 8, and 11 because the step is \<second\> - \<first\> = 5 - 2 = 3. The third value is 5 + 3 = 8 and the fourth value is 8 + 3 = 11.
-
-[`seq`](/commands/docs/seq.md) can also create sequences of numbers, and provides an alternate way of specifying the step with three parameters. It's called with `seq $start $step $end` where the step amount is the second parameter rather than being the second parameter minus the first parameter. So `2..5..9` would be equivalent to `seq 2 3 9`.
-
-### Inclusive and non-inclusive ranges
-
-Ranges are inclusive by default, meaning that the ending value is counted as part of the range. The range `1..3` includes the number `3` as the last value in the range.
-
-Sometimes, you may want a range that is limited by a number but doesn't use that number in the output. For this, you can use `..<` instead of `..`. For example, `1..<5` is the numbers 1, 2, 3, and 4.
-
-### Open-ended ranges
-
-Ranges can also be open-ended. You can remove the start or the end of the range to make it open-ended.
-
-Let's say you wanted to start counting at 3, but you didn't have a specific end in mind. You could use the range `3..` to represent this. When you use a range that's open-ended on the right side, remember that this will continue counting for as long as possible, which could be a very long time! You'll often want to use open-ended ranges with commands like [`take`](/commands/docs/take.md), so you can take the number of elements you want from the range.
-
-You can also make the start of the range open. In this case, Nushell will start counting with `0`. For example, the range `..2` is the numbers 0, 1, and 2.
-
-::: warning
-
-Use caution when typing an open-ended range such as `3..` into the command line. This will continue printing out numbers very quickly until you terminate the range generation with <kbd>Ctrl</kbd>+<kbd>C</kbd> or an equivalent.
-
-:::
-
-## Binary data
-
-::: warning Type
-`binary`
-:::
+- **_Description:_** Describes a range of values from a starting value to an ending value, with an optional stride.
+- **_Annotation:_** `range`
+- **_Literal Syntax:_** `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.
+- **_See also:_** [Language Guide - Ranges](/lang-guide/chapters/types/basic_types/range.md)
 
 Binary data, like the data from an image file, is a group of raw bytes.
 
-You can write binary as a literal using any of the `0x[...]`, `0b[...]`, or `0o[...]` forms:
+Simple example - Confirm that a JPEG file starts with the proper identifier:
 
 ```nu
-> 0x[1F FF]  # Hexadecimal
-> 0b[1 1010] # Binary
-> 0o[377]    # Octal
+> open nushell_logo.jpg
+  | into binary
+  | first 2
+  | $in == 0x[ff d8]
+true
 ```
-
-Incomplete bytes will be left-padded with zeros.
 
 ## Structured data types
 
 Nushell includes a collection of structured data types that can contain the primitive types above. For example, instead of a single `float`, structured data gives us a way to represent multiple `float` values, such as a `list` of temperature readings, in the same value. Nushell supports the following structured data types:
 
-## Records
+### Records
 
 ::: warning Type
 `record`
@@ -349,7 +340,7 @@ To make a copy of a record with new fields, you can use the [spread operator](/b
 ╰───────┴─────────╯
 ```
 
-## Lists
+### Lists
 
 ::: warning Type
 `list`
@@ -412,7 +403,7 @@ To append one or more lists together, optionally with values interspersed in bet
 ╰───┴───╯
 ```
 
-## Tables
+### Tables
 
 ::: warning Type
 `table`
@@ -420,7 +411,7 @@ To append one or more lists together, optionally with values interspersed in bet
 
 The table is a core data structure in Nushell. As you run commands, you'll see that many of them return tables as output. A table has both rows and columns.
 
-### Table-literal syntax
+#### Table-literal syntax
 
 Table literals can be created using a syntax similar to that of a list literal. Because tables also contain columns and not just values, we also specify the column names:
 
@@ -434,7 +425,7 @@ Table literals can be created using a syntax similar to that of a list literal. 
 ╰───┴─────────┴─────────╯
 ```
 
-### List-of-Records syntax
+#### List-of-Records syntax
 
 You can also create a table as a list of records, JSON-style:
 
@@ -471,7 +462,7 @@ This is true regardless of which table syntax you use:
 
 :::
 
-## Cell Paths
+### Cell Paths
 
 ::: warning Type
 `cell-path`
@@ -533,7 +524,7 @@ By default, cell path access will fail if it can't access the requested row or c
 
 When using optional cell path members, missing data is replaced with `null`.
 
-## Closures
+### Closures
 
 ::: warning Type
 `closure`
@@ -564,7 +555,7 @@ It is common to use `$it` as a parameter name in [`each`](/commands/docs/each.md
 
 `each {|x| print $x }` works the same way as `each {|it| print $it }`.
 
-## Blocks
+### Blocks
 
 ::: warning Type
 `block`
@@ -588,7 +579,7 @@ Result:
 1001
 ```
 
-## Null
+### Null
 
 ::: warning Type
 `nothing`
