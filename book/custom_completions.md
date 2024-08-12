@@ -104,7 +104,7 @@ On the second line, after pressing the <kbd>tab</kbd> key, the argument `"my-com
 Completers can also obtain the current cursor position on the command-line using:
 
 ```nu
-def completer[context:string, position:int] {}
+def completer [context:string, position:int] {}
 ```
 
 :::
