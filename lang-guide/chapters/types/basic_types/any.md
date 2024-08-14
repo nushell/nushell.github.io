@@ -6,13 +6,6 @@
 | **_Annotation:_**     | `any`                                                                                                       |
 | **_Literal syntax:_** | N/A - Any literal value can be assigned to an `any` type                                                    |
 | **_Casts:_**          | N/A                                                                                                         |
-| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/bool.md)                                        |
-
-- **_Description:_** When used in a type annotation or signature, matches any type. In other words, a "superset" of other types.
-- **_Annotation:_** `any`
-- **_Literal syntax:_** N/A - Any literal value can be assigned to an `any` type
-- **_Casts:_** N/A
-- **_See also:_** [Language Reference](/lang-guide/chapters/types/basic_types/bool.md)
 
 ## Additional Language Notes
 
