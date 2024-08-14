@@ -1,27 +1,12 @@
 # Boolean
 
-- **_Description:_** True or False value
-- **_Annotation:_** `bool`
-- **_Literal syntax:_** Either a literal `true` or `false`
-- **_Casts:_** [`into bool`](/commands/docs/into_bool.md)
-- **_See also:_** [Language Reference](/lang-guide/chapters/types/basic_types/bool.md)
-
-What it is: A logical data type that can have only `true` or `false` values.
-
-## Example 1
-
-```nu
-> if true { print hello }
-# => hello
-```
-
-## Example 2
-
-```nu
-let truth: bool  = true
-> echo $truth
-# => true
-```
+|                       |                                                                      |
+| --------------------- | -------------------------------------------------------------------- |
+| **_Description:_**    | A logical data type that can have only True or False values          |
+| **_Annotation:_**     | `bool`                                                               |
+| **_Literal syntax:_** | Either a literal `true` or `false`                                   |
+| **_Casts:_**          | [`into bool`](/commands/docs/into_bool.md)                           |
+| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/bool.md) |
 
 ## Common commands that use bool
 

@@ -1,24 +1,26 @@
 # Duration
 
-- **_Description:_** Represent a unit of a passage of time
-- **_Annotation:_** `duration`
-- **_Literal Syntax:_** A numeric (integer or decimal) literal followed immediately by a duration unit (listed below). E.g., `10sec`, `987us`, `-34.65day`
-- **_Casts:_** [`into duration`](/commands/docs/into_duration.md)
+|                       |                                                                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | Represent a unit of a passage of time                                                                                              |
+| **_Annotation:_**     | `duration`                                                                                                                         |
+| **_Literal Syntax:_** | A numeric (integer or decimal) literal followed immediately by a duration unit (listed below). E.g., `10sec`, `987us`, `-34.65day` |
+| **_Casts:_**          | [`into duration`](/commands/docs/into_duration.md)                                                                                 |
 
 Durations are internally stored as a number of nanoseconds.
 
 This chart shows all duration units currently supported:
 
-| Duration  | Length          |
-| --------- | --------------- |
-| `ns`      | one nanosecond  |
-| `us`/`μs` | one microsecond |
-| `ms`      | one millisecond |
-| `sec`     | one second      |
-| `min`     | one minute      |
-| `hr`      | one hour        |
-| `day`     | one day         |
-| `wk`      | one week        |
+| Duration  | Length      |
+| --------- | ----------- |
+| `ns`      | nanosecond  |
+| `us`/`μs` | microsecond |
+| `ms`      | millisecond |
+| `sec`     | second      |
+| `min`     | minute      |
+| `hr`      | hour        |
+| `day`     | day         |
+| `wk`      | week        |
 
 Datetime values can be combined with durations in calculations:
 

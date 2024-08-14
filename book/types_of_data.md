@@ -37,10 +37,12 @@ int
 
 ### Integers
 
-- **_Description:_** Numbers without a fractional component (positive, negative, and 0)
-- **_Annotation:_** `int`
-- **_Literal Syntax:_** A decimal, hex, octal, or binary numeric value without a decimal place. E.g., `-100`, `0`, `50`, `+50`, `0xff` (hex), `0o234` (octal), `0b10101` (binary)
-- **_See also:_** [Language Reference](/lang-guide/chapters/types/basic_types/int.md)
+|                       |                                                                                                                                                           |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | Numbers without a fractional component (positive, negative, and 0)                                                                                        |
+| **_Annotation:_**     | `int`                                                                                                                                                     |
+| **_Literal Syntax:_** | A decimal, hex, octal, or binary numeric value without a decimal place. E.g., `-100`, `0`, `50`, `+50`, `0xff` (hex), `0o234` (octal), `0b10101` (binary) |
+| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/int.md)                                                                                       |
 
 Simple Example:
 
@@ -53,10 +55,12 @@ int
 
 ### Floats/Decimals
 
-- **_Description:_** Numbers with some fractional component
-- **_Annotation:_** `float`
-- **_Literal Syntax:_** A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333`
-- **_See also:_** [Language Reference](/lang-guide/chapters/types/basic_types/float.md)
+|                       |                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------- |
+| **_Description:_**    | Numbers with some fractional component                                           |
+| **_Annotation:_**     | `float`                                                                          |
+| **_Literal Syntax:_** | A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333` |
+| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/float.md)            |
 
 Simple Example:
 
@@ -77,10 +81,13 @@ As in most programming languages, decimal values in Nushell are approximate.
 
 ### Text/Strings
 
-- **_Description:_** A string of characters that represents text
-- **_Annotation:_** `string`
-- **_Literal Syntax:_** See [Working with strings](working_with_strings.md) and [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) for details.
-- **_See also:_** [Working with strings](working_with_strings.md), [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings), and the [Language Reference](/lang-guide/chapters/types/basic_types/string.md)
+|                       |                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------- |
+| **_Description:_**    | A series of characters that represents text                                      |
+| **_Annotation:_**     | `string`                                                                         |
+| **_Literal Syntax:_** | See [Working with strings](working_with_strings.md)                              |
+| **_See also:_**       | [Handling Strings](/book/loading_data.html#handling-strings)                     |
+|                       | [Language Reference - Strings](/lang-guide/chapters/types/basic_types/string.md) |
 
 As with many languages, Nushell provides multiple ways to specify String values and numerous commands for working with strings.
 
@@ -94,10 +101,12 @@ Hello, World
 
 ### Booleans
 
-- **_Description:_** True or False value
-- **_Annotation:_** `bool`
-- **_Literal Syntax:_** Either a literal `true` or `false`
-- **_See also:_** [Language Reference](/lang-guide/chapters/types/basic_types/bool.md)
+|                       |                                                                      |
+| --------------------- | -------------------------------------------------------------------- |
+| **_Description:_**    | True or False value                                                  |
+| **_Annotation:_**     | `bool`                                                               |
+| **_Literal Syntax:_** | Either a literal `true` or `false`                                   |
+| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/bool.md) |
 
 Booleans are commonly the result of a comparison. For example:
 
@@ -120,11 +129,11 @@ It's negative
 
 ### Dates
 
-- **_Description:_** Represents a specific point in time using international standard date time descriptors
-- **_Annotation:_** `date`
-- **_Literal Syntax:_** See [Language Guide](/lang-guide/chapters/types/basic_types/date.md)
-
-Nushell also includes the `date` type, and associated methods and operators, for working with dates.
+|                       |                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------- |
+| **_Description:_**    | Represents a specific point in time using international standard date time descriptors |
+| **_Annotation:_**     | `date`                                                                                 |
+| **_Literal Syntax:_** | See [Language Guide](/lang-guide/chapters/types/basic_types/date.md)                   |
 
 Simple example:
 
@@ -138,9 +147,11 @@ Mon, 12 Aug 2024 13:59:22 -0400 (now)
 
 ### Durations
 
-- **_Description:_** Represent a unit of a passage of time
-- **_Annotation:_** `duration`
-- **_Literal Syntax:_** See [Language Reference](/lang-guide/chapters/types/basic_types/duration.html)
+|                       |                                                                                |
+| --------------------- | ------------------------------------------------------------------------------ |
+| **_Description:_**    | Represent a unit of a passage of time                                          |
+| **_Annotation:_**     | `duration`                                                                     |
+| **_Literal Syntax:_** | See [Language Reference](/lang-guide/chapters/types/basic_types/duration.html) |
 
 Durations support fractional values as well as calculations.
 
@@ -155,9 +166,11 @@ Simple example:
 
 ### File sizes
 
-- **_Description:_** Specialized numeric type to represent the size of files or a number of bytes
-- **_Annotation:_** `filesize`
-- **_Literal Syntax:_** See [Language Reference](/lang-guide/chapters/types/basic_types/filesize.html)
+|                       |                                                                                |
+| --------------------- | ------------------------------------------------------------------------------ |
+| **_Description:_**    | Specialized numeric type to represent the size of files or a number of bytes   |
+| **_Annotation:_**     | `filesize`                                                                     |
+| **_Literal Syntax:_** | See [Language Reference](/lang-guide/chapters/types/basic_types/filesize.html) |
 
 Nushell also has a special type for file sizes.
 
@@ -176,10 +189,13 @@ See the [Language Reference](/lang-guide/chapters/types/basic_types/filesize.htm
 
 ### Ranges
 
-- **_Description:_** Describes a range of values from a starting value to an ending value, with an optional stride.
-- **_Annotation:_** `range`
-- **_Literal Syntax:_** `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.
-- **_See also:_** [Language Guide - Ranges](/lang-guide/chapters/types/basic_types/range.md)
+|                       |                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride. |
+| **_Annotation:_**     | `range`                                                                                        |
+| **_Literal Syntax:_** | `<start_value>..<end_value>`. E.g., `1..10`.                                                   |
+|                       | `<start_value>..<second_value>..<end_value>`. E.g., `2..4..20`                                 |
+| **_See also:_**       | [Language Guide - Ranges](/lang-guide/chapters/types/basic_types/range.md)                     |
 
 Simple example:
 
@@ -200,10 +216,12 @@ You can also easily create lists of characters with a form similar to ranges wit
 
 ### Binary data
 
-- **_Description:_** Describes a range of values from a starting value to an ending value, with an optional stride.
-- **_Annotation:_** `range`
-- **_Literal Syntax:_** `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.
-- **_See also:_** [Language Guide - Ranges](/lang-guide/chapters/types/basic_types/range.md)
+|                       |                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride. |
+| **_Annotation:_**     | `range`                                                                                        |
+| **_Literal Syntax:_** | `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.     |
+| **_See also:_**       | [Language Guide - Ranges](/lang-guide/chapters/types/basic_types/range.md)                     |
 
 Binary data, like the data from an image file, is a group of raw bytes.
 
@@ -221,132 +239,17 @@ true
 
 Nushell includes a collection of structured data types that can contain the primitive types above. For example, instead of a single `float`, structured data gives us a way to represent multiple `float` values, such as a `list` of temperature readings, in the same value. Nushell supports the following structured data types:
 
-### Records
-
-::: warning Type
-`record`
-:::
-
-Records hold key-value pairs, which associate string keys with various data values. Record syntax is very similar to objects in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them! The key-value pairs of a record may be delimited by:
-
-- Commas
-
-  ```nu
-  > {name: "Sam", rank: 10}
-  ╭──────┬─────╮
-  │ name │ Sam │
-  │ rank │ 10  │
-  ╰──────┴─────╯
-  ```
-
-- Spaces (when unambiguous):
-
-  ```nu
-  > {name: "Sam" rank: 10}
-  ╭──────┬─────╮
-  │ name │ Sam │
-  │ rank │ 10  │
-  ╰──────┴─────╯
-  ```
-
-- Line breaks:
-
-  ```nu
-  > {
-      name: "Sam"
-      rank: 10
-    }
-  ╭──────┬─────╮
-  │ name │ Sam │
-  │ rank │ 10  │
-  ╰──────┴─────╯
-  ```
-
-As records can have many fields, they are, by default, displayed vertically rather than left-to-right. To display a record left-to-right, convert it to a nuon. For example:
-
-```nu
-  > {
-      name: "Sam"
-      rank: 10
-    } | to nuon
-  {name: Sam, rank: 10}
-```
-
-:::tip
-A record is identical to a single row of a table (see below). You can think of a record as essentially being a "one-row table", with each of its keys as a column (although a true one-row table is something distinct from a record).
-
-This means that any command that operates on a table's rows _also_ operates on that of a record. For instance, [`insert`](/commands/docs/insert.md), which adds data to each of a table's rows, can be used with records:
-
-```nu
-> {x:3 y:1} | insert z 0
-╭───┬───╮
-│ x │ 3 │
-│ y │ 1 │
-│ z │ 0 │
-╰───┴───╯
-```
-
-:::
-
-You can iterate over the key-value pairs of a record by first transposing it into a table:
-
-```nu
-> {name: "Sam", rank: 10} | transpose key value
-╭───┬──────┬───────╮
-│ # │ key  │ value │
-├───┼──────┼───────┤
-│ 0 │ name │  Sam  │
-│ 1 │ rank │   10  │
-╰───┴──────┴───────╯
-```
-
-Accessing a record's value is done by placing a `.` before a string with the key name. This is usually a bare-word string:
-
-```nu
-> {x:12 y:4}.x
-12
-```
-
-However, if a record has a key name that can't be expressed as a bare string, or resembles an integer (see lists, below), you'll need to use more explicit string syntax. For example:
-
-```nu
-> let record_example = {
-    "key x":12
-    "key y":4
-  }
-> $record_example."key x"
-12
-
-# or
-> $record_example | get "key x"
-12
-```
-
-To make a copy of a record with new fields, you can use the [spread operator](/book/operators#spread-operator) (`...`):
-
-```nu
-> let data = {
-    name: "Alice"
-    age: 50
-  }
-> {
-    ...$data
-    hobby: "Cricket"
-  }
-╭───────┬─────────╮
-│ name  │ Alice   │
-│ age   │ 50      │
-│ hobby │ Cricket │
-╰───────┴─────────╯
-```
-
 ### Lists
 
-::: warning Type
-`list`
-:::
+|                       |                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------- |
+| **_Description:_**    | Ordered sequence of zero or more values of any type                             |
+| **_Annotation:_**     | `list`                                                                          |
+| **_Literal Syntax:_** | See [Language Guide - Lists](/lang-guide/chapters/types/basic_types/list.md)    |
+| **_See Also:_**       | [Working with Lists](./working_with_lists.md)                                   |
+|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) |
 
-Lists are ordered sequences of data values. List syntax is very similar to arrays in JSON. However, commas are _not_ required to separate values if Nushell can easily distinguish them! As with Records, Lists may be delimited by commas, spaces, or linebreaks.
+Simple example:
 
 ```nu
 > [Sam Fred George]
@@ -357,87 +260,44 @@ Lists are ordered sequences of data values. List syntax is very similar to array
 ╰───┴────────╯
 ```
 
-:::tip
-Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where.md) can be used with lists:
+### Records
+
+|                       |                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------- |
+| **_Description:_**    | Holds key-value pairs which associate string keys with various data values.      |
+| **_Annotation:_**     | `record`                                                                         |
+| **_Literal Syntax:_** | See [Language Guide - Records](/lang-guide/chapters/types/basic_types/record.md) |
+| **_See Also:_**       | [Working with Records](./working_with_records.md)                                |
+|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)  |
+
+Simple example:
 
 ```nu
-> [bell book candle] | where ($it =~ 'b')
-╭───┬──────╮
-│ 0 │ bell │
-│ 1 │ book │
-╰───┴──────╯
-```
+> let my_record = {
+    name: "Kylian"
+    rank: 99
+  }
+> $my_record
+╭───────┬────────────╮
+│ name  │ Kylian     │
+│ rank  │ 99         │
+╰───────┴────────────╯
 
-:::
-
-Accessing a list's data is done by placing a `.` before an integer literal:
-
-```nu
-> [a b c].1
-b
-```
-
-To return multiple rows (a sub-list) from a list, you can use the [`range`](/commands/docs/range.md) command:
-
-```nu
-> [a b c d e f] | range 1..3
-╭───┬───╮
-│ 0 │ b │
-│ 1 │ c │
-│ 2 │ d │
-╰───┴───╯
-```
-
-To append one or more lists together, optionally with values interspersed in between, you can use the
-[spread operator](/book/operators#spread-operator) (`...`):
-
-```nu
-> let x = [1 2]
-> [...$x 3 ...(4..7 | take 2)]
-╭───┬───╮
-│ 0 │ 1 │
-│ 1 │ 2 │
-│ 2 │ 3 │
-│ 3 │ 4 │
-│ 4 │ 5 │
-╰───┴───╯
+ > $my_record | get name
+ Kylian
 ```
 
 ### Tables
 
-::: warning Type
-`table`
-:::
+|                    |                                                                                                                   |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| **_Description:_** | A two-dimensional container with both columns and rows where each cell can hold any basic or structured data type |
+| **_Annotation:_**  | `table`                                                                                                           |
+| **_See Also:_**    | [Working with Tables](./working_with_tables.md)                                                                   |
+|                    | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                   |
+|                    | [Language Guide - Tables](/lang-guide/chapters/types/basic_types/table.md)                                        |
 
 The table is a core data structure in Nushell. As you run commands, you'll see that many of them return tables as output. A table has both rows and columns.
-
-#### Table-literal syntax
-
-Table literals can be created using a syntax similar to that of a list literal. Because tables also contain columns and not just values, we also specify the column names:
-
-```nu
-> [[column1, column2]; [Value1, Value2] [Value3, Value4]]
-╭───┬─────────┬─────────╮
-│ # │ column1 │ column2 │
-├───┼─────────┼─────────┤
-│ 0 │ Value1  │ Value2  │
-│ 1 │ Value3  │ Value4  │
-╰───┴─────────┴─────────╯
-```
-
-#### List-of-Records syntax
-
-You can also create a table as a list of records, JSON-style:
-
-```nu
-> [{name: "Sam", rank: 10}, {name: "Bob", rank: 7}]
-╭───┬──────┬──────╮
-│ # │ name │ rank │
-├───┼──────┼──────┤
-│ 0 │ Sam  │   10 │
-│ 1 │ Bob  │    7 │
-╰───┴──────┴──────╯
-```
 
 :::tip
 Internally, tables are simply **lists of records**. This means that any command which extracts or isolates a specific row of a table will produce a record. For example, `get 0`, when used on a list, extracts the first value. But when used on a table (a list of records), it extracts a record:
@@ -450,223 +310,105 @@ Internally, tables are simply **lists of records**. This means that any command 
 ╰───┴────╯
 ```
 
-This is true regardless of which table syntax you use:
-
-```nu
-[[x,y];[12,5],[3,6]] | get 0
-╭───┬────╮
-│ x │ 12 │
-│ y │ 5  │
-╰───┴────╯
-```
-
 :::
+
+## Other data types
+
+### Any
+
+|                       |                                                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | When used in a type annotation or signature, matches any type. In other words, a "superset" of other types. |
+| **_Annotation:_**     | `any`                                                                                                       |
+| **_Literal syntax:_** | N/A - Any literal value can be assigned to an `any` type                                                    |
+| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/any.md)                                         |
 
 ### Cell Paths
 
-::: warning Type
-`cell-path`
-:::
+|                       |                                                                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | An expression that is used to navigated to an inner value in a structured value.                                |
+| **_Annotation:_**     | `cell-path`                                                                                                     |
+| **_Literal syntax:_** | A dot-separated list of row (int) and column (string) IDs. E.g., `name.4.5`.                                    |
+|                       | Optionally, use a leading `$.` when needed for disambiguation, such as when assigning a cell-path to a variable |
+| **_See also:_**       | [Language Reference - Cell-path](/lang-guide/chapters/types/basic_types/cellpath.md)                            |
+|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) chapter.                        |
 
-The syntax used to access lists and records can be combined to navigate tables. When used on tables, these access chains are called "cell paths".
-
-You can access individual rows by number to obtain records:
-
-@[code](@snippets/types_of_data/cell-paths.sh)
-
-Moreover, you can also access entire columns of a table by name, to obtain lists:
-
-```nu
-> [{x:12 y:5} {x:4 y:7} {x:2 y:2}].x
-╭───┬────╮
-│ 0 │ 12 │
-│ 1 │  4 │
-│ 2 │  2 │
-╰───┴────╯
-```
-
-Of course, these resulting lists don't have the column names of the table. To choose columns from a table while leaving it as a table, you'll commonly use the [`select`](/commands/docs/select.md) command with column names:
+Simple example:
 
 ```nu
-> [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select y z
-╭───┬───┬───╮
-│ # │ y │ z │
-├───┼───┼───┤
-│ 0 │ 5 │ 1 │
-│ 1 │ 7 │ 3 │
-│ 2 │ 2 │ 0 │
-╰───┴───┴───╯
+> let cp = $.2
+# Return list item at index 2
+> [ foo bar goo glue ] | get $cp
+goo
 ```
-
-To get specific rows from a table, you'll commonly use the [`select`](/commands/docs/select.md) command with row numbers, as you would with a list:
-
-```nu
-> [{x:0 y:5 z:1} {x:4 y:7 z:3} {x:2 y:2 z:0}] | select 1 2
-╭───┬───┬───┬───╮
-│ # │ x │ y │ z │
-├───┼───┼───┼───┤
-│ 0 │ 4 │ 7 │ 3 │
-│ 1 │ 2 │ 2 │ 0 │
-╰───┴───┴───┴───╯
-```
-
-#### Optional cell paths
-
-By default, cell path access will fail if it can't access the requested row or column. To logically handle this case, you can add `?` to a cell path member to mark it as _optional_:
-
-```nu
-> [{foo: 123}, {}].foo?
-╭───┬─────╮
-│ 0 │ 123 │
-│ 1 │     │
-╰───┴─────╯
-```
-
-When using optional cell path members, missing data is replaced with `null`.
 
 ### Closures
 
-::: warning Type
-`closure`
-:::
+|                       |                                                                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | An anonymous function, often called a lambda function, which accepts parameters and _closes over_ (i.e., uses) variables from outside its scope |
+| **_Annotation:_**     | `closure`                                                                                                                                       |
+| **_Literal Syntax:_** | `{\|args\| expressions }`                                                                                                                       |
+| **_Casts:_**          | N/A                                                                                                                                             |
+| **_See also:_**       | [Language Reference - Closure](/lang-guide/chapters/types/basic_types/closure.md)                                                               |
 
-Closures are anonymous functions that can be passed a value through parameters and _close over_ (i.e., use) variables from outside their scope.
+Simple example:
 
-For example, in the command `each { |it| print $it }` the closure is the portion contained in curly braces, `{ |it| print $it }`.
-Closure parameters are specified between a pair of pipe symbols (for example, `|it|`) if necessary.
-You can also use [pipeline input as `$in`](pipelines.html#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
-
-```nu
-1..10 | each { print $in }
-```
-
-A closure can be bound to a named variable and passed as a parameter.
-To call a closure directly in your code use the [`do`](/commands/docs/do.md) command.
+This closure returns a boolean result of the comparison and then uses it in a `filter` command to return all values greater than 5.
 
 ```nu
-# Assign a closure to a variable
-> let greet = {|name| print $"Hello, ($name)"}
-> do $greet "Julian"
-Hello, Julian
+> let compare_closure = {|a| $a > 5 }
+> let original_list = [ 40 -4 0 8 12 16 -16 ]
+> $original_list | filter $compare_closure
+╭───┬────╮
+│ 0 │ 40 │
+│ 1 │  8 │
+│ 2 │ 12 │
+│ 3 │ 16 │
+╰───┴────╯
 ```
 
-Closures are a useful way to represent code that can be executed on each row of data.
-It is common to use `$it` as a parameter name in [`each`](/commands/docs/each.md) blocks, but not required. For example:
-
-`each {|x| print $x }` works the same way as `each {|it| print $it }`.
+Closures are a useful way to represent code that can be executed on each row of data via [filters](/lang-guide/chapters/filters/00_filters_overview.md)
 
 ### Blocks
 
-::: warning Type
-`block`
-:::
+|                       |                                                                               |
+| --------------------- | ----------------------------------------------------------------------------- |
+| **_Description:_**    | A syntactic form used by some Nushell keywords (e.g., `if` and `for`)         |
+| **_Annotation:_**     | N/A                                                                           |
+| **_Literal Syntax:_** | N/A                                                                           |
+| **_See also:_**       | [Language Reference - Block](/lang-guide/chapters/types/other_types/block.md) |
 
-Blocks don't close over variables, don't have parameters, and can't be passed as a value.
-However, unlike closures, blocks can access mutable variable in the parent scope.
-For example, mutating a variable inside the block used in an [`if`](/commands/docs/if.md) call is valid:
-
-```nu
-mut x = 1
-if true {
-    $x += 1000
-}
-print $x
-```
-
-Result:
+Simple example:
 
 ```nu
-1001
+> if true { print "It's true" }
 ```
 
-### Null
+The `{ print "It's true" }` portion above is a block.
 
-::: warning Type
-`nothing`
-:::
+### Nothing (Null)
 
-Finally, `null` is the language's "nothing" value, similar to JSON's "null". Whenever Nushell would print the `null` value (outside of a string or data structure), it prints nothing instead. Hence, most of Nushell's file system commands (like [`save`](/commands/docs/save.md) or [`cd`](/commands/docs/cd.md)) produce `null`.
+|                       |                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **_Description:_**    | The `nothing` type is to be used to represent the absence of another value.       |
+| **_Annotation:_**     | `nothing`                                                                         |
+| **_Literal Syntax:_** | `null`                                                                            |
+| **_See also:_**       | [Language Reference - Nothing](/lang-guide/chapters/types/basic_types/nothing.md) |
 
-::: tip
-You can add `ignore` at the end of a pipeline to convert any pipeline result to a `nothing`. This will prevent the command/pipeline's output from being displayed.
+#### Simple example
+
+Using the optional operator `?` returns `null` if the requested cell-path doesn't exist:
 
 ```nu
-git checkout featurebranch | ignore
+> let simple_record = { a: 5, b: 10 }
+> $simple_record.a?
+5
+> $simple_record.c?
+# => Nothing is output
+> $simple_record.c? | describe
+nothing
+> $simple_record.c? == null
+true
 ```
-
-:::
-
-It's important to understand that `null` is not the same as the absence of a value! It is possible for a table or list to have _missing_ values. Attempting to access a missing value will not produce `null` but will instead generate an error:
-
-```nu
-> let missing_value = [{a:1 b:2} {b:1}]
-> $missing_value
-╭───┬────┬───╮
-│ # │ a  │ b │
-├───┼────┼───┤
-│ 0 │  1 │ 2 │
-│ 1 │ ❎ │ 1 │
-╰───┴────┴───╯
-
-> $missing_value.1.a
-Error: nu::shell::column_not_found
-
-  × Cannot find column 'a'
-   ╭─[entry #4:1:32]
- 1 │ let missing_value = [{a:1 b:2} {b:1}]
-   ·                                ──┬──
-   ·                                  ╰── value originates here
-   ╰────
-   ╭─[entry #6:1:18]
- 1 │ $missing_value.1.a
-   ·                  ┬
-   ·                  ╰── cannot find column 'a'
-   ╰────
-```
-
-Note that, in the table above, the missing value is printed as the ❎ emoji in interactive output.
-
-To safely access a value that may be missing, mark the cell-path member as _optional_ using a question-mark (`?`) after the key name.
-Missing values will return `null` when accessed with the optional operator. For example, continuing the example above:
-
-```nu
-> match $missing_value.1.a? {
-    null => "Missing"
-    $value => $value
-  }
-Missing
-
-> match $missing_value.1.b? {
-    null => "Missing"
-    $value => $value
-  }
-1
-```
-
-::: tip
-The [`default` command](/commands/docs/default.html) can be used to apply a default value to missing or null column result. In the example, above, for instance:
-
-```nu
-> let missing_value = [{a:1 b:2} {b:1}]
-> $missing_value
-╭───┬────┬───╮
-│ # │ a  │ b │
-├───┼────┼───┤
-│ 0 │  1 │ 2 │
-│ 1 │ ❎ │ 1 │
-╰───┴────┴───╯
-
-> let with_default_value = ($missing_value | default 'n/a' a)
-> $with_default_value
-╭───┬─────┬───╮
-│ # │  a  │ b │
-├───┼─────┼───┤
-│ 0 │   1 │ 2 │
-│ 1 │ n/a │ 1 │
-╰───┴─────┴───╯
-
-> $with_default_value.1.a
-n/a
-```
-
-:::

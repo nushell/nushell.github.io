@@ -47,6 +47,10 @@ We can sort a table by any column that can be compared. For example, we could al
 
 ## Selecting the data you want
 
+::: tip Note
+The following is a basic overview. For a more in-depth discussion of this topic, see the chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
+:::
+
 We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](/commands/docs/select.md) a few columns from our table to use:
 
 ```nu
@@ -162,7 +166,7 @@ These look very similar! Let's see if we can spell out the difference between th
 - [`get`](/commands/docs/get.md) - returns the values inside the column specified as a list
 
 :::tip
-The arguments provided to `select` and `get` are [cell paths](/book/types_of_data.html#cell-paths), a fundamental part of Nu's query language. In addition to simple queries like `get name`, you can also do things like `get name?` (will replace missing values with `null` instead of returning an error) or `get some.deeply.nested.column` for nested data.
+The arguments provided to `select` and `get` are [cell-paths](/book/types_of_data.html#cell-paths), a fundamental part of Nu's query language. For a more in-depth discussion of cell-paths and other navigation topics, see the next chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
 :::
 
 ## Changing data in a table

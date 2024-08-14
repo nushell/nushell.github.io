@@ -1,24 +1,49 @@
 # Table
 
-What it is: A table is a two-dimensional container with both columns and rows.
+|                             |                                                                                                                   |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**          | A two-dimensional container with both columns and rows where each cell can hold any basic or structured data type |
+| **_Annotation:_**           | `table`                                                                                                           |
+| **_Table-Literal Syntax:_** | See below                                                                                                         |
+| **_Casts:_**                | N/A                                                                                                               |
+| **_See Also:_**             | [Working with Tables](./working_with_tables.md)                                                                   |
+|                             | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                   |
 
-Annotation: `table`
+## Creating Tables
 
-There are two ways to write a table. These two examples are equivalent:
+### Table-literal syntax
+
+Table literals can be created using a syntax similar to that of a list literal. Because tables also contain columns and not just values, we also specify the column names:
 
 ```nu
-[[a, b]; [1, 2], [3, 4]]
+> [[column1, column2]; [Value1, Value2] [Value3, Value4]]
+╭───┬─────────┬─────────╮
+│ # │ column1 │ column2 │
+├───┼─────────┼─────────┤
+│ 0 │ Value1  │ Value2  │
+│ 1 │ Value3  │ Value4  │
+╰───┴─────────┴─────────╯
 ```
+
+In this syntax, the headers are separated from the data cells using a semicolon(`;`). The semicolon separator is mandatory in a table-literal. It must follow the headers.
+
+### List-of-Records syntax
+
+You can also create a table as a list of records, JSON-style:
 
 ```nu
-[{a: 1, b: 2}, {a: 3, b: 4}]
+> [{name: "Sam", rank: 10}, {name: "Bob", rank: 7}]
+╭───┬──────┬──────╮
+│ # │ name │ rank │
+├───┼──────┼──────┤
+│ 0 │ Sam  │   10 │
+│ 1 │ Bob  │    7 │
+╰───┴──────┴──────╯
 ```
 
-In the first syntax, the headers are separated from the data cells using a semicolon(`;`). The semicolon separator is mandatory in this syntax to create a table. It must follow the headers.
+This list-of-records pattern plays on the Nushell data model, which sees a list of records as equivalent to a table. This is useful in cases where the length of a table may not be known ahead of time. In such a case, a stream of records likewise represents a table.
 
-The second syntax is simply a list of records. This plays on the Nushell data model, which sees a list of records as equivalent to a table. This is used in cases where the length of a table may not be known ahead of time. In such a case, a stream of records likewise represents a table.
-
-## Commands that use table
+## Common commands that can be used with tables
 
 - `table`
 - `ls`
@@ -29,4 +54,6 @@ The second syntax is simply a list of records. This plays on the Nushell data mo
 - `where`
 - `range`
 
-Note: Almost all of Nushell's filter commands work with tables. For a longer list see: `help commands | where category == filters`.
+::: tip Note
+Most of Nushell's filter commands work with tables. For a longer list see: `help commands | where category == filters`.
+:::

@@ -1,9 +1,11 @@
 # Filesize
 
-- **_Description:_** Specialized numeric type to represent the size of files or a number of bytes
-- **_Annotation:_** `filesize`
-- **_Literal Syntax:_** A numeric value followed by a filesize unit (below). E.g., `5GB`, `1024B`
-- **_Casts:_** [`into filesize`](/commands/docs/into_filesize.md)
+|                       |                                                                              |
+| --------------------- | ---------------------------------------------------------------------------- |
+| **_Description:_**    | Specialized numeric type to represent the size of files or a number of bytes |
+| **_Annotation:_**     | `filesize`                                                                   |
+| **_Literal Syntax:_** | A numeric value followed by a filesize unit (below). E.g., `5GB`, `1024B`    |
+| **_Casts:_**          | [`into filesize`](/commands/docs/into_filesize.md)                           |
 
 Filesize literal and display representations support both:
 

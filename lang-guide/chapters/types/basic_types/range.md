@@ -1,10 +1,12 @@
 # Range
 
-- **_Description:_** Describes a range of values from a starting value to an ending value, with an optional stride.
-- **_Annotation:_** `range`
-- **_Literal Syntax:_** `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.
-- **_See also:_** [Types of Data](/book/types_of_data.md#ranges)
-- **_Casts:_** [`seq`](/commands/docs/seq.md)
+|                       |                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride. |
+| **_Annotation:_**     | `range`                                                                                        |
+| **_Literal Syntax:_** | `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.     |
+| **_See also:_**       | [Types of Data](/book/types_of_data.md#ranges)                                                 |
+| **_Casts:_**          | [`seq`](/commands/docs/seq.md)                                                                 |
 
 Ranges are inclusive by default.
 

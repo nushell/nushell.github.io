@@ -31,7 +31,9 @@ export const sidebarEn: SidebarConfig = {
         '/book/pipelines.md',
         '/book/working_with_strings.md',
         '/book/working_with_lists.md',
+        '/book/working_with_records.md',
         '/book/working_with_tables.md',
+        '/book/navigating_structured_data.md',
       ],
     },
     {
@@ -202,7 +204,6 @@ export const sidebarEn: SidebarConfig = {
                   text: 'Types which are not declarable',
                   link: '/lang-guide/chapters/types/other_types/01_not_declarable.md',
                   children: [
-                    '/lang-guide/chapters/types/other_types/lazy_record.md',
                     '/lang-guide/chapters/types/other_types/error.md',
                     '/lang-guide/chapters/types/other_types/custom_value.md',
                     '/lang-guide/chapters/types/other_types/block.md',

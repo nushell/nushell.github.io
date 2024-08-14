@@ -1,23 +1,61 @@
 # Record
 
-What it is: A record is the foundational associative map.
+|                       |                                                                                                                |
+| --------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | The foundational associative map. Holds key-value pairs, which associate string keys with various data values. |
+| **_Annotation:_**     | `record`                                                                                                       |
+| **_Literal syntax:_** | See below                                                                                                      |
+| **_Casts:_**          | [`into record`](/commands/docs/into_record.md)                                                                 |
+| **_See Also:_**       | [Working with Records](/book/working_with_records.md)                                                          |
+|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                |
 
-Annotation: `record`
+# Language Notes
 
-A record contains items of any value that are addressed by a string key. (TBD: complex hashable/equality checkable keys)
-The keys maintain the order of insertion or the order defined in a record literal.
-Keys are guaranteed to be unique. Inserting twice with the same key will only keep the last insertion or definition.
+- The keys maintain the order of insertion or the order defined in a record literal.
+- Keys are guaranteed to be unique. Inserting the same key twice will keep only the last insertion or definition.
 
-`{a: b, c: d}`
+(TBD: complex hashable/equality checkable keys)
 
-## Casts
+# Record-Literal Syntax
 
-The command `into record` can be used to convert other data types into records.
-See the command: `help into record` fro a complete list of input data types.
+Record syntax is very similar to objects in JSON. However, commas are _not_ required to separate values when Nushell can easily distinguish them. The key-value pairs of a record may be delimited by:
 
-## Commands that use record
+- Commas
 
-Since the record data type is foundational to Nushell's structured nature, many commands use records as inputs or as parameters. See the list of commands for tables because many of those also take records.
+  ```nu
+  > {name: "Sam", rank: 10}
+  ╭──────┬─────╮
+  │ name │ Sam │
+  │ rank │ 10  │
+  ╰──────┴─────╯
+  ```
+
+- Spaces (when unambiguous):
+
+  ```nu
+  > {name: "Sam" rank: 10}
+  ╭──────┬─────╮
+  │ name │ Sam │
+  │ rank │ 10  │
+  ╰──────┴─────╯
+  ```
+
+- Line breaks:
+
+  ```nu
+  > {
+      name: "Sam"
+      rank: 10
+    }
+  ╭──────┬─────╮
+  │ name │ Sam │
+  │ rank │ 10  │
+  ╰──────┴─────╯
+  ```
+
+## Common commands that can be used with records
+
+Since the record data type is foundational to Nushell's structured nature, many commands use records as inputs or as parameters. See the list of commands for tables as many of those also take records.
 
 Here are a few commands that use records:
 

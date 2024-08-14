@@ -1,18 +1,17 @@
 # Binary
 
-- **_Description:_** Represents binary data
-- **_Annotation:_** `binary`
-- **_Literal Syntax: _**
+|                       |                                                              |
+| --------------------- | ------------------------------------------------------------ |
+| **_Description:_**    | Represents binary data                                       |
+| **_Annotation:_**     | `binary`                                                     |
+| **_Literal Syntax:_** | `0x[ffffffff]` - hex-based binary representation             |
+|                       | `0o[1234567]` - octal-based binary representation            |
+|                       | `0b[10101010101]` - binary-based binary representation       |
+| **_Casts:_**          | [`into binary`](/commands/docs/into_binary.md)               |
+| **_See also:_**       | [Types of data - Binary](/book/types_of_data.md#binary-data) |
 
-  - `0x[ffffffff]` - hex-based binary representation
-  - `0o[1234567]` - octal-based binary representation
-  - `0b[10101010101]` - binary-based binary representation
+## Additional Language Notes
 
-- **_Casts:_** [`into binary`](/commands/docs/into_binary.md)
-- **_See also: _** [Types of data - Binary](/book/types_of_data.md#binary-data)
+- Incomplete bytes are left-padded with zeros.
 
-Incomplete bytes are left-padded with zeros.
-
-::: tip
-Spaces can be used to improve readability. For example, `0x[ffff ffff]`.
-:::
+- Spaces can be used to improve readability. For example, `0x[ffff ffff]`.
