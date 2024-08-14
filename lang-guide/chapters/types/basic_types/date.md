@@ -5,7 +5,7 @@
 | **_Literal syntax:_** | RFC 3339
 | | Date-only: `2022-02-02`
 | | Date and time (GMT): `2022-02-02T14:30:00`
-| | Date and time including timezone: `2022-02-02T14:30:00+05:00`
+| | Date and time including timezone offset: `2022-02-02T14:30:00+05:00`
 | **_Casts:_** | [`into datetime`](/commands/docs/into_datetime.md)
 
 Dates and times are held together in the `date` type. Date values used by the system are timezone-aware. By default, dates use the UTC timezone.
