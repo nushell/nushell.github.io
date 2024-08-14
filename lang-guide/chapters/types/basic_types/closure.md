@@ -1,10 +1,11 @@
 # Closure
 
-|                       |                                                                                                                                                 |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------------- | ---- | -------------- |
+<!-- prettier-ignore -->
+|     |     |
+| --- | --- |
 | **_Description:_**    | An anonymous function, often called a lambda function, which accepts parameters and _closes over_ (i.e., uses) variables from outside its scope |
 | **_Annotation:_**     | `closure`                                                                                                                                       |
-| **_Literal Syntax:_** | `{                                                                                                                                              | args | expressions }`-` | args | ` is optional. |
+| **_Literal Syntax:_** | `{\|args\| expressions }` where  `\|args\|` is optional. 
 | **_Casts:_**          | N/A                                                                                                                                             |
 | **_See also:_**       | [Types of Data - Closures](/book/types_of_data.md#closures)                                                                                     |
 
