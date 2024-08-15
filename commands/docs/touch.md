@@ -56,12 +56,6 @@ Changes the last modified time of "fixture.json" to today's date
 
 ```
 
-Changes the last modified time of files a, b and c to a date
-```nu
-> touch -m -d "yesterday" a b c
-
-```
-
 Changes the last modified time of file d and e to "fixture.json"'s last modified time
 ```nu
 > touch -m -r fixture.json d e
