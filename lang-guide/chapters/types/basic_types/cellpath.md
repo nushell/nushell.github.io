@@ -5,7 +5,7 @@
 | **_Description:_**            | An expression that is used to navigated to an inner value in a structured value.                                                                                                                          |
 | **_Annotation:_**             | `cell-path`                                                                                                                                                                                               |
 | **_Literal syntax example:_** | A dot-separated list of row (int) and column (string) IDs. E.g., `name.4.5`. Optionally, use a leading `$.` when needed for disambiguation, such as when assigning a cell-path to a variable (see below). |
-| **_Casts:_**                  | [`into cell-path](/commands/docs/into_cell-path.md)                                                                                                                                                       |
+| **_Casts:_**                  | [`into cell-path`](/commands/docs/into_cell-path.md)                                                                                                                                                      |
 | **_See also:_**               | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) for an in-depth overview.                                                                                                 |
 
 ## Literal Syntax Options

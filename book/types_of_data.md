@@ -216,6 +216,54 @@ Simple example:
 You can also easily create lists of characters with a form similar to ranges with the command [`seq char`](/commands/docs/seq_char.html) as well as with dates using the [`seq date`](/commands/docs/seq_date.html) command.
 :::
 
+### Cell Paths
+
+|                       |                                                                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | An expression that is used to navigated to an inner value in a structured value.                                |
+| **_Annotation:_**     | `cell-path`                                                                                                     |
+| **_Literal syntax:_** | A dot-separated list of row (int) and column (string) IDs. E.g., `name.4.5`.                                    |
+|                       | Optionally, use a leading `$.` when needed for disambiguation, such as when assigning a cell-path to a variable |
+| **_See also:_**       | [Language Reference - Cell-path](/lang-guide/chapters/types/basic_types/cellpath.md)                            |
+|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) chapter.                        |
+
+Simple example:
+
+```nu
+> let cp = $.2
+# Return list item at index 2
+> [ foo bar goo glue ] | get $cp
+goo
+```
+
+### Closures
+
+|                       |                                                                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | An anonymous function, often called a lambda function, which accepts parameters and _closes over_ (i.e., uses) variables from outside its scope |
+| **_Annotation:_**     | `closure`                                                                                                                                       |
+| **_Literal Syntax:_** | `{\|args\| expressions }`                                                                                                                       |
+| **_Casts:_**          | N/A                                                                                                                                             |
+| **_See also:_**       | [Language Reference - Closure](/lang-guide/chapters/types/basic_types/closure.md)                                                               |
+
+Simple example:
+
+This closure returns a boolean result of the comparison and then uses it in a `filter` command to return all values greater than 5.
+
+```nu
+> let compare_closure = {|a| $a > 5 }
+> let original_list = [ 40 -4 0 8 12 16 -16 ]
+> $original_list | filter $compare_closure
+╭───┬────╮
+│ 0 │ 40 │
+│ 1 │  8 │
+│ 2 │ 12 │
+│ 3 │ 16 │
+╰───┴────╯
+```
+
+Closures are a useful way to represent code that can be executed on each row of data via [filters](/lang-guide/chapters/filters/00_filters_overview.md)
+
 ### Binary data
 
 |                       |                                                                                                |
@@ -324,54 +372,6 @@ Internally, tables are simply **lists of records**. This means that any command 
 | **_Annotation:_**     | `any`                                                                                                       |
 | **_Literal syntax:_** | N/A - Any literal value can be assigned to an `any` type                                                    |
 | **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/any.md)                                         |
-
-### Cell Paths
-
-|                       |                                                                                                                 |
-| --------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **_Description:_**    | An expression that is used to navigated to an inner value in a structured value.                                |
-| **_Annotation:_**     | `cell-path`                                                                                                     |
-| **_Literal syntax:_** | A dot-separated list of row (int) and column (string) IDs. E.g., `name.4.5`.                                    |
-|                       | Optionally, use a leading `$.` when needed for disambiguation, such as when assigning a cell-path to a variable |
-| **_See also:_**       | [Language Reference - Cell-path](/lang-guide/chapters/types/basic_types/cellpath.md)                            |
-|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) chapter.                        |
-
-Simple example:
-
-```nu
-> let cp = $.2
-# Return list item at index 2
-> [ foo bar goo glue ] | get $cp
-goo
-```
-
-### Closures
-
-|                       |                                                                                                                                                 |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **_Description:_**    | An anonymous function, often called a lambda function, which accepts parameters and _closes over_ (i.e., uses) variables from outside its scope |
-| **_Annotation:_**     | `closure`                                                                                                                                       |
-| **_Literal Syntax:_** | `{\|args\| expressions }`                                                                                                                       |
-| **_Casts:_**          | N/A                                                                                                                                             |
-| **_See also:_**       | [Language Reference - Closure](/lang-guide/chapters/types/basic_types/closure.md)                                                               |
-
-Simple example:
-
-This closure returns a boolean result of the comparison and then uses it in a `filter` command to return all values greater than 5.
-
-```nu
-> let compare_closure = {|a| $a > 5 }
-> let original_list = [ 40 -4 0 8 12 16 -16 ]
-> $original_list | filter $compare_closure
-╭───┬────╮
-│ 0 │ 40 │
-│ 1 │  8 │
-│ 2 │ 12 │
-│ 3 │ 16 │
-╰───┴────╯
-```
-
-Closures are a useful way to represent code that can be executed on each row of data via [filters](/lang-guide/chapters/filters/00_filters_overview.md)
 
 ### Blocks
 
