@@ -12,6 +12,14 @@
 
 ## Additional Language Notes
 
-- Incomplete bytes are left-padded with zeros.
+1. Incomplete bytes are left-padded with zeros.
 
-- Spaces can be used to improve readability. For example, `0x[ffff ffff]`.
+2. Spaces can be used to improve readability. For example, `0x[ffff ffff]`.
+
+## Common commands that can be used with `binary`
+
+- `into bits`
+- `bits` subcommands (see `help bits` for a list)
+- `bytes` subcommands (see `help bytes` for a list)
+- `encode`
+- `take`

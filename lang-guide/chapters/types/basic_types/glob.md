@@ -1,63 +1,123 @@
 # Glob
 
-What it is: A pattern to match pathnames in a filesystem.
+<!-- prettier-ignore -->
+|     |     |
+| --- | --- |
+| **_Description:_**    | A *pattern* that matches pathnames in a filesystem
+| **_Annotation:_**     | `glob`                                                                                 
+| **_Literal syntax:_** | None
+| **_Casts:_**          | [`into glob`](/commands/docs/into_glob.md)
+| **_See Also:_**       | [Moving around the system - Glob patterns](/book/moving_around.md#glob-patterns-wildcards) in the Book
 
-Annotation: `glob`
+## Additional Language Notes
 
-Nu supports creating a value as a glob, it's similar to string, but if you pass it to some commands that support glob pattern(e.g: `open`), it will be expanded. It's best to see difference between `glob` and `string` by example:
+1. A `glob` is similar to a string, but it is expanded to match files using a pattern.
 
-```nu
-let f = "a*c.txt"   # a string type.
-open $f   # opens a file names `a*c.txt`
+1. Globs are implemented using the [nu_glob](https://docs.rs/nu-glob/latest/nu_glob/index.html) crate. The [possible glob patterns](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html) are documented there.
 
-let g: glob = "a*c.txt"   # a glob type.
-open $g   # opens files matches the glob pattern, e.g: `abc.txt`, `aac.txt`
-```
+1. When a command accepts a glob pattern directly:
 
-The same rules happened if you are using custom command:
+   - It will interpret a bare-word (or backtick-quoted) string as a glob. This means:
+     ```nu
+     open *.txt    # opens all files which ends with `.txt`
+     open `*.txt`  # it's backtick quoted, it's a bare word, so nu opens all files which ends with `.txt`
+     ```
+   - It will interpret other string types as a string literal. This means:
 
-```nu
-# open files which match a given glob pattern
-def open-files [g: glob] {
-    open $g
-    # In case if you want to open one file only
-    # open ($g | into string)
-}
+     ```nu
+     open "*.txt"  # it's quoted, opens a file named `*.txt`
+     open '*.txt'  # it's quoted, opens a file named `*.txt`
+     ```
 
-# open one file
-def open-one-file [g: string] {
-    open $g
-    # In case if you want to open with glob pattern
-    # open ($g | into glob)
-}
+1. There is no literal syntax for a glob. As seen above, it is usually created as a string and then interpreted by the calling command as a glob.
 
-# open one file
-def open-one-file2 [g] {
-    open $g
-}
-```
+   Example
 
-You can use `into glob` and `into string` to convert values between `glob` and `string`.
+   <!-- TODO: Update example to use touch once it accepts glob properly -->
+   <!-- touch can show the differences more tangibly -->
 
-If you pass a `string` or a `bare word` to `builtin commands` which support glob pattern directly(not passing a variable or subexpression etc.), it follows some rules, let's see them by examples:
+   ```nu
+   let s = "a*c.txt"         # a string type.
+   open $s                   # opens a file literally named `a*c.txt`
 
-```nu
-open *.txt    # opens all files which ends with `.txt`
-open `*.txt`  # it's backtick quoted, it's a bare word, so nu opens all files which ends with `.txt`
-open "*.txt"  # it's quoted, opens a file named `*.txt`
-open '*.txt'  # it's quoted, opens a file named `*.txt`
-```
+   let g: glob = "a*c.txt"   # a glob type.
+   open $g                   # opens files matching the glob pattern, e.g: `abc.txt`, `aac.txt`
+   ```
 
-You can use the `glob` command to expand a glob when needed.
+1. These expansions also take place with custom commands:
+
+   ```nu
+   # open files which match a given glob pattern
+   def open-files [g: glob] {
+     open $g
+     # In case if you want to open one file only
+     # open ($g | into string)
+   }
+
+   # open one file
+   def open-one-file [g: string] {
+     open $g
+     # In case if you want to open with glob pattern
+     # open ($g | into glob)
+   }
+
+   # open one file
+   def open-one-file2 [g] {
+     open $g
+   }
+   ```
+
+1. Glob expansion also takes place with external commands:
+
+   ```nu
+   # Concatenate files using cat and then split to a list of lines
+   ^cat *.txt | lines
+   ```
+
+1. As with most other types, globs can be saved in a variable, passed to custom commands and returned from custom commands.
+
+1. You can use `into glob` and `into string` to convert values between `glob` and `string`.
+
+   ```nu
+   let glob1: glob = "*"
+   let glob2 = ("*" | into glob)
+
+   # Both result in the same glob pattern
+   $glob1 == $glob2
+   # => true
+   ```
+
+1. Globs can also represent directory trees recursively using the `**` pattern.
+
+   For example, in Unix-like systems you might use a combination of the `find` and `xargs` commands to operate on directory trees:
+
+   ```bash
+   find -iname *.txt | xargs -I {} echo {} | tr "[:lower:]" "[:upper:]"
+   ```
+
+   In Nushell, it is more idiomatic to use this pattern:
+
+   ```nu
+   # Nostalgic for the Good Ole DOS days?
+   ls **/*.txt | get name | str upcase
+   ```
+
+## The `glob` command
+
+The [`glob` **command**](/commands/docs/glob.md) provides additional globbing options. It is distinct from the `glob` **type**.
+
+Simple example:
 
 ```nu
 glob *.nu
-# => /home/you/dev/foo.nu /home/you/dev/bar.nu
+# => [ /home/you/dev/foo.nu /home/you/dev/bar.nu ]
 ```
 
-Notice the glob, after expansion, always gets expanded into a list of fully quallified pathanes.
+Notice the glob, after expansion, always returns a `list` of fully qualified pathnames.
 
-Here is a idiomatic Nu way to get just the simple filenames in the current directory:
+### Additional `glob` command options
+
+For example, it can ignore directories using the `-D` flag:
 
 ```nu
 glob -D * | path basename | str join ' '
@@ -65,46 +125,7 @@ foo.nu bar.nu
 # => foo.nu bar.nu baz.nu
 ```
 
-Another caveat when using Nushell over traditional shells is the `ls` command.
-The ls command only takes a single glob pattern argument. which it internally expands.
-
-```nu
-# Try to expand the glob ourselves
-ls (glob *.nu)
-# Error [TODO: Show the actual error]
-```
-
-Globs can also represent directory trees recursively. In Unix like systems you might use a combination of the `find` and `xargs` commands to operate on directory trees. In Nushell, it is more idiomatic to use this pattern:
-
-```nu
-# Nostalgic for the Good Ole DOS days?
-glob **/*.txt | each {|p| $p | path split } | each {|l| $l | str join '\' } | each {|p| $p | str upcase }
-# upper case pathnames
-```
-
-## Casts
-
-Using the `into glob` command, you can convert other types like strings into globs.
-
-#### Using globs as a first class object
-
-Globs can be saved in a variable, passed to a custom command and returned from a custom command.
-
-```nu
-let g: glob = **/*.nu
-glob $g
-# Returns list of pathnames
-```
-
-## Escaping globs
-
-Sometimes you might want to not let a command expand a possible glob pattern before executing. You can use the `str escape-glob` command for this.
-
-Note: As of Release 0.91.0 of Nu, `str escape-glob` is deprecated.
-
-As of release 0.91.0, if you pass a string variable to commands that support glob patterns, then Nushell won't auto-expand the glob pattern.
-
-## Commands that use glob
+## Common commands that can work with `glob`
 
 - `cp`
 - `du`

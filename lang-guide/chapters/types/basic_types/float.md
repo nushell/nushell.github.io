@@ -8,6 +8,8 @@
 | **_Casts:_**          | [`into float`](/commands/docs/into_float.md)                                     |
 | **_See also:_**       | [Types of Data - Floats](/book/types_of_data.md#floatsdecimals                   |
 
-Floats are internally represented as IEEE-754 floats with 64 bit precision.
+## Additional language notes
 
-TBD: semantics for comparison, NaN/InF. Future hashing.
+- Floats are internally represented as IEEE-754 floats with 64 bit precision.
+
+<!-- TBD: semantics for comparison, NaN/InF. Future hashing. -->

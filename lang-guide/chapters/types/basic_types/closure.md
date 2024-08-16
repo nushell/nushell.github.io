@@ -1,11 +1,10 @@
 # Closure
 
-<!-- prettier-ignore -->
-|     |     |
-| --- | --- |
+|                       |                                                                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **_Description:_**    | An anonymous function, often called a lambda function, which accepts parameters and _closes over_ (i.e., uses) variables from outside its scope |
 | **_Annotation:_**     | `closure`                                                                                                                                       |
-| **_Literal Syntax:_** | `{\|args\| expressions }` where  `\|args\|` is optional. 
+| **_Literal Syntax:_** | `{\|args\| expressions }` where `\|args\|` is optional.                                                                                         |
 | **_Casts:_**          | N/A                                                                                                                                             |
 | **_See also:_**       | [Types of Data - Closures](/book/types_of_data.md#closures)                                                                                     |
 
@@ -86,7 +85,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 
 1. As closures are closely related to functions or commands, their parameters can be typed.
 
-## Common commands that can use a closure
+## Common commands that can be used with a `closure`
 
 - `all`
 - `any`

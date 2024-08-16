@@ -8,6 +8,7 @@
 | **_Casts:_**          | [`into record`](/commands/docs/into_record.md)                                                                 |
 | **_See Also:_**       | [Working with Records](/book/working_with_records.md)                                                          |
 |                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                |
+|                       | [Types of Data - Records](/book/types_of_data.md#records)                                                      |
 
 # Language Notes
 
@@ -53,7 +54,7 @@ Record syntax is very similar to objects in JSON. However, commas are _not_ requ
   ╰──────┴─────╯
   ```
 
-## Common commands that can be used with records
+## Common commands that can be used with `record`
 
 Since the record data type is foundational to Nushell's structured nature, many commands use records as inputs or as parameters. See the list of commands for tables as many of those also take records.
 

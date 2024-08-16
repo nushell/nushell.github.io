@@ -5,120 +5,118 @@
 | **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride. |
 | **_Annotation:_**     | `range`                                                                                        |
 | **_Literal Syntax:_** | `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.     |
-| **_See also:_**       | [Types of Data](/book/types_of_data.md#ranges)                                                 |
 | **_Casts:_**          | [`seq`](/commands/docs/seq.md)                                                                 |
+| **_See also:_**       | [Types of Data - Ranges](/book/types_of_data.md#ranges)                                        |
 
-Ranges are inclusive by default.
+## Additional Language Notes
 
-Examples:
+1. Ranges are inclusive by default.
 
-- Values from 1 to 10 inclusive:
+   Examples:
 
-  ```nu
-  > 1..5
-  ╭───┬────╮
-  │ 0 │  1 │
-  │ 1 │  2 │
-  │ 2 │  3 │
-  │ 3 │  4 │
-  │ 4 │  5 │
-  ╰───┴────╯
-  ```
+   - Values from 1 to 10 inclusive:
 
-- Values from 1 to 10, striding with 2 (only odds):
+   ```nu
+   > 1..5
+   ╭───┬────╮
+   │ 0 │  1 │
+   │ 1 │  2 │
+   │ 2 │  3 │
+   │ 3 │  4 │
+   │ 4 │  5 │
+   ╰───┴────╯
+   ```
 
-  ```nu
-  > 1..3..10
-  ╭───┬───╮
-  │ 0 │ 1 │
-  │ 1 │ 3 │
-  │ 2 │ 5 │
-  │ 3 │ 7 │
-  │ 4 │ 9 │
-  ╰───┴───╯
-  ```
+1. In many programming languages, the _step_ (or interval) is specified. Nushell's range is inspired by more functional languages, where the second value is literally the second value that should be generated. The step is then automatically calculated as the distance between the first and second values.
 
-  ::: tip
-  In many programming languages, the _step_ (or interval) is specified. Nushell's range is inspired by more functional languages, where the second value is literally the second value that should be generated. The step is then automatically calculated as the distance between the first and second values.
-  :::
+   Example - Values from 1 to 10, striding with 2 (only odds):
 
-- You can also use `..<` to have values up to, but not including, the range end.
+   ```nu
+   > 1..3..10
+   ╭───┬───╮
+   │ 0 │ 1 │
+   │ 1 │ 3 │
+   │ 2 │ 5 │
+   │ 3 │ 7 │
+   │ 4 │ 9 │
+   ╰───┴───╯
+   ```
 
-  Values from 1 to 5 (exclusive):
+1. Exclusive range - You can also use `..<` to have values up to, but not including, the range end.
 
-  ```nu
-  > 1..<5
-  ╭───┬───╮
-  │ 0 │ 1 │
-  │ 1 │ 2 │
-  │ 2 │ 3 │
-  │ 3 │ 4 │
-  ╰───┴───╯
-  ```
+   Values from 1 to 5 (exclusive):
 
-- Range values can be floats:
+   ```nu
+   > 1..<5
+   ╭───┬───╮
+   │ 0 │ 1 │
+   │ 1 │ 2 │
+   │ 2 │ 3 │
+   │ 3 │ 4 │
+   ╰───┴───╯
+   ```
 
-  ```nu
-  (1.0)..(1.2)..(2.2)
-  ╭───┬──────╮
-  │ 0 │ 1.00 │
-  │ 1 │ 1.20 │
-  │ 2 │ 1.40 │
-  │ 3 │ 1.60 │
-  │ 4 │ 1.80 │
-  │ 5 │ 2.00 │
-  │ 6 │ 2.20 │
-  ╰───┴──────╯
-  ```
+1. Range values can be floats:
 
-  Parentheses (subexpressions) are not required in this example; they are simply used for readability.
+   ```nu
+   (1.0)..(1.2)..(2.2)
+   ╭───┬──────╮
+   │ 0 │ 1.00 │
+   │ 1 │ 1.20 │
+   │ 2 │ 1.40 │
+   │ 3 │ 1.60 │
+   │ 4 │ 1.80 │
+   │ 5 │ 2.00 │
+   │ 6 │ 2.20 │
+   ╰───┴──────╯
+   ```
 
-- Ranges can also work backward:
+   Note: Parentheses (subexpressions) are not required in this example; they are simply used for readability.
 
-  ```nu
-  > 5..1
-  ╭───┬───╮
-  │ 0 │ 5 │
-  │ 1 │ 4 │
-  │ 2 │ 3 │
-  │ 3 │ 2 │
-  │ 4 │ 1 │
-  ╰───┴───╯
-  ```
+1. Ranges can also work backward:
 
-- The start value is optional. The default start value is `0`.
+   ```nu
+   > 5..1
+   ╭───┬───╮
+   │ 0 │ 5 │
+   │ 1 │ 4 │
+   │ 2 │ 3 │
+   │ 3 │ 2 │
+   │ 4 │ 1 │
+   ╰───┴───╯
+   ```
 
-  ```nu
-  > (..5) == (0..5)
-  true
-  ```
+1. The start value is optional. The default start value is `0`.
 
-- The end value is also optional. The default end value is infinite:
+   ```nu
+   > (..5) == (0..5)
+   true
+   ```
 
-  ```nu
-  > 1..
-  # => infinite range starting at 1
-  ```
+1. The end value is also optional. The default end value is infinite:
 
-  Interrupt the generation of the above range using <kbd>Ctrl</kbd>+<kbd>C</kbd>.
+   ```nu
+   > 1..
+   # => infinite range starting at 1
+   ```
 
-- Ranges are lazy, meaning they do not generate their values until needed. You can use a range with no specified end point and combine it with a command that takes only the first n elements. For example, you could generate the numbers from 1 to 10 using:
+   Note: Interrupt the generation of the above range using <kbd>Ctrl</kbd>+<kbd>C</kbd>.
 
-  ```nu
-  > 1.. | take 5
-  ╭───┬───╮
-  │ 0 │ 1 │
-  │ 1 │ 2 │
-  │ 2 │ 3 │
-  │ 3 │ 4 │
-  │ 4 │ 5 │
-  ╰───┴───╯
-  ```
+1. Ranges are lazy, meaning they do not generate their values until needed. You can use a range with no specified end point and combine it with a command that takes only the first n elements. For example, you could generate the numbers from 1 to 10 using:
 
-## Conversions
+   ```nu
+   > 1.. | take 5
+   ╭───┬───╮
+   │ 0 │ 1 │
+   │ 1 │ 2 │
+   │ 2 │ 3 │
+   │ 3 │ 4 │
+   │ 4 │ 5 │
+   ╰───┴───╯
+   ```
 
-Ranges may be converted to `list<int>` using:
+1. Conversion - A ranges may be converted to a `list` using:
 
-```nu
-1..5 | each {||}
-```
+   ```nu
+   1..5 | each {||}
+   ```

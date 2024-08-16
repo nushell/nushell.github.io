@@ -20,7 +20,7 @@
 
 - TBD: On which level string indexing should be performed: bytes or Unicode scalars.
 
-## Common commands that can use strings
+## Common commands that work with `string`
 
 Many commands takes strings as inputs or parameters.
 These commands work with strings explicitly
@@ -35,7 +35,7 @@ These commands work with strings explicitly
 In addition to the above commands, most other `into <type>` commands take strings
 as inputs.
 
-## Operators that use string
+## Common operators that work with `sting`
 
 - `+` : Concatenate two strings
 - `+=` : Mutates a string variable by concatenating its right side value.

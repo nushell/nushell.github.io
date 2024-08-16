@@ -8,6 +8,7 @@
 | **_Casts:_**                | N/A                                                                                                               |
 | **_See Also:_**             | [Working with Tables](./working_with_tables.md)                                                                   |
 |                             | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                   |
+|                             | [Types of Data - Tables](/book/types_of_data.md#tables)                                                           |
 
 ## Creating Tables
 
@@ -43,7 +44,7 @@ You can also create a table as a list of records, JSON-style:
 
 This list-of-records pattern plays on the Nushell data model, which sees a list of records as equivalent to a table. This is useful in cases where the length of a table may not be known ahead of time. In such a case, a stream of records likewise represents a table.
 
-## Common commands that can be used with tables
+## Common commands that can be used with `table`
 
 - `table`
 - `ls`

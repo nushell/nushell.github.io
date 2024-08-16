@@ -108,7 +108,7 @@ for any of the looping constructs. If you try to assign the result of calling a 
 To capture the result of a loop, you can define a mutable variable before the loop and mutate it inside the body of the loop. However, the more idiomatic Nushell way to do it is with a command like `each` which takes a closure. The last expression evaluated in the closure is returned and available to further items in the pipeline.
 :::
 
-## Common commands that use a block
+## Common commands that can be used with a `block`
 
 - `if`/`else`
 - `loop`

@@ -6,8 +6,9 @@
 | **_Annotation:_**     | `filesize`                                                                   |
 | **_Literal Syntax:_** | A numeric value followed by a filesize unit (below). E.g., `5GB`, `1024B`    |
 | **_Casts:_**          | [`into filesize`](/commands/docs/into_filesize.md)                           |
+| **_See also:_**       | [Types of Data - File sizes](/book/types_of_data.md#file-sizes)              |
 
-Filesize literal and display representations support both:
+The `filesize` literal and display representations support both:
 
 - Metric prefixes with a base of `1000`
 - Binary-compatible kibibytes, mebibytes, etc. with a base of `1024`
@@ -28,7 +29,7 @@ The full list of `filesize` units is:
 File size units are case-insensitive. E.g., `1KiB`, `1kib`, and `1Kib` are all equivalent.
 :::
 
-## Common commands using `filesizes`
+## Common commands that can work with `filesizes`
 
 - `ls`
 - `du`

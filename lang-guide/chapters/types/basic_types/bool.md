@@ -1,14 +1,14 @@
 # Boolean
 
-|                       |                                                                      |
-| --------------------- | -------------------------------------------------------------------- |
-| **_Description:_**    | A logical data type that can have only True or False values          |
-| **_Annotation:_**     | `bool`                                                               |
-| **_Literal syntax:_** | Either a literal `true` or `false`                                   |
-| **_Casts:_**          | [`into bool`](/commands/docs/into_bool.md)                           |
-| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/bool.md) |
+|                       |                                                             |
+| --------------------- | ----------------------------------------------------------- |
+| **_Description:_**    | A logical data type that can have only True or False values |
+| **_Annotation:_**     | `bool`                                                      |
+| **_Literal syntax:_** | Either a literal `true` or `false`                          |
+| **_Casts:_**          | [`into bool`](/commands/docs/into_bool.md)                  |
+| **_See also:_**       | [Types of Data - Booleans](/book/types_of_data.md#booleans) |
 
-## Common commands that use bool
+## Common commands that can be used with `bool`
 
 - `if`, `while`
 - `match` (in clauses where the expression matches the clause expression, or the `_` value which is always true)
@@ -22,7 +22,7 @@ The following commands take a closure as their main argument. The return value f
 - `where`/`filter`
 - `any`, `all`, `skip until`, `skip while`, `take until`, `take while`
 
-## Operators that use bool
+## Common operators that can be used with `bool`
 
 - `==`, `!=`, `<`, `<=`, `>`, `>=`
 - `and`, `or`, `not`
