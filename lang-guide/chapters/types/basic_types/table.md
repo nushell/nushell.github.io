@@ -6,7 +6,7 @@
 | **_Annotation:_**           | `table`                                                                                                           |
 | **_Table-Literal Syntax:_** | See below                                                                                                         |
 | **_Casts:_**                | N/A                                                                                                               |
-| **_See Also:_**             | [Working with Tables](./working_with_tables.md)                                                                   |
+| **_See Also:_**             | [Working with Tables](/book/working_with_tables.md)                                                               |
 |                             | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                   |
 |                             | [Types of Data - Tables](/book/types_of_data.md#tables)                                                           |
 

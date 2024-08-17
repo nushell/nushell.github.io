@@ -1,13 +1,13 @@
 # String
 
-|                       |                                                                                    |
-| --------------------- | ---------------------------------------------------------------------------------- |
-| **_Description:_**    | A series of characters that represents text                                        |
-| **_Annotation:_**     | `string`                                                                           |
-| **_Literal Syntax:_** | See [Working with strings](working_with_strings.md)                                |
-| **_Casts:_**          | [`into string`](/commands/docs/into_string.md)                                     |
-| **_See also:_**       | [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings) |
-|                       | [Language Reference - Strings](/lang-guide/chapters/types/basic_types/string.md)   |
+|                       |                                                              |
+| --------------------- | ------------------------------------------------------------ |
+| **_Description:_**    | A series of characters that represents text                  |
+| **_Annotation:_**     | `string`                                                     |
+| **_Literal Syntax:_** | See [Working with strings](/book/working_with_strings.md)    |
+| **_Casts:_**          | [`into string`](/commands/docs/into_string.md)               |
+| **_See also:_**       | [Handling Strings](/book/loading_data.md#handling-strings)   |
+|                       | [Types of Data - String](/book/types_of_data.md#textstrings) |
 
 ## Language Notes:
 
