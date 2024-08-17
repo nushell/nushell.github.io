@@ -1,58 +1,43 @@
 # Filesize
 
-What it is: Specialized numeric type to represent the size of files or a number of bytes.
+|                       |                                                                              |
+| --------------------- | ---------------------------------------------------------------------------- |
+| **_Description:_**    | Specialized numeric type to represent the size of files or a number of bytes |
+| **_Annotation:_**     | `filesize`                                                                   |
+| **_Literal Syntax:_** | A numeric value followed by a filesize unit (below). E.g., `5GB`, `1024B`    |
+| **_Casts:_**          | [`into filesize`](/commands/docs/into_filesize.md)                           |
+| **_See also:_**       | [Types of Data - File sizes](/book/types_of_data.md#file-sizes)              |
 
-Annotation: `filesize`
+The `filesize` literal and display representations support both:
 
-The literals and display representations support both metric prefixes with a base of `1000` and the binary compatible kibibytes, mebibytes, etc. with a base of `1024`
+- Metric prefixes with a base of `1000`
+- Binary-compatible kibibytes, mebibytes, etc. with a base of `1024`
 
-```nu
-1 kb
-0.2 gb
-20 mib
-```
+The full list of `filesize` units is:
 
-The full list of filesize units are:
+| Decimal (factor of 1000) | Binary (factor of 1024) |
+| ------------------------ | ----------------------- |
+| `B`: bytes               | `B`: bytes              |
+| `kB`: kilobytes          | `KiB`: kibibytes        |
+| `MB`: megabytes          | `MiB`: mebibytes        |
+| `GB`: gigabytes          | `GiB`: gibibytes        |
+| `TB`: terabytes          | `TiB`: tebibytes        |
+| `PB`: petabytes          | `PiB`: pebibytes        |
+| `EB`: exabytes           | `EiB`: exbibytes        |
 
-- `b`: bytes
-- `kb`: kilobytes (aka 1000 bytes)
-- `mb`: megabytes
-- `gb`: gigabytes
-- `tb`: terabytes
-- `pb`: petabytes
-- `eb`: exabytes
-- `kib`: kibibytes (aka 1024 bytes)
-- `mib`: mebibytes
-- `gib`: gibibytes
-- `tib`: tebibytes
-- `pib`: pebibytes
-- `eib`: exbibytes
+::: tip
+File size units are case-insensitive. E.g., `1KiB`, `1kib`, and `1Kib` are all equivalent.
+:::
 
-As with durations, you can make fractional file sizes, and do calculations:
-
-```nu
-> 1Gb / 1b
-1000000000
-> 1Gib / 1b
-1073741824
-> (1Gib / 1b) == 2 ** 30
-true
-```
-
-## Casts
-
-The command `into filesize` will convert a variety of other data types
-into a filesize value. For the complete list of inputs see: `help into filesize`.
-
-## Commands that use filesize
+## Common commands that can work with `filesizes`
 
 - `ls`
 - `du`
 - `sys`
 
-Note: The where command and other filters can use filesize in comparison expressions.
+Note: The `where` command and other filters can use filesize in comparison expressions.
 
-## Operators that use filesize
+## Common operators that can be used with `filesize`
 
 - `==`, `!=`
 - `+`, `-`

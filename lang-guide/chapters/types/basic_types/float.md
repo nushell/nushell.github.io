@@ -1,16 +1,15 @@
-# Float
+# Floats
 
-What it is: Real numeric values using floating point internal arithmetic.
+|                       |                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------- |
+| **_Description:_**    | Numbers with some fractional component                                           |
+| **_Annotation:_**     | `float`                                                                          |
+| **_Literal syntax:_** | A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333` |
+| **_Casts:_**          | [`into float`](/commands/docs/into_float.md)                                     |
+| **_See also:_**       | [Types of Data - Floats](/book/types_of_data.md#floatsdecimals                   |
 
-Annotation: `float`
+## Additional language notes
 
-Internally IEEE-754 floats with 64 bit precision.
+- Floats are internally represented as IEEE-754 floats with 64 bit precision.
 
-Literals with a fractional decimal component are evaluated as `Float`: `0.1`, `3.14159`, `-10.4`
-
-TBD: semantics for comparison, NaN/InF. Future hashing.
-
-## Casts
-
-The command `into float` can be used to convert other data types into floats.
-See the command: `help into float` fro a complete list of input data types.
+<!-- TBD: semantics for comparison, NaN/InF. Future hashing. -->

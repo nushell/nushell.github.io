@@ -1,20 +1,25 @@
 # Binary
 
-What it is: A literal syntax for expressing binary data in your Nushell scripts.
+|                       |                                                              |
+| --------------------- | ------------------------------------------------------------ |
+| **_Description:_**    | Represents binary data                                       |
+| **_Annotation:_**     | `binary`                                                     |
+| **_Literal Syntax:_** | `0x[ffffffff]` - hex-based binary representation             |
+|                       | `0o[1234567]` - octal-based binary representation            |
+|                       | `0b[10101010101]` - binary-based binary representation       |
+| **_Casts:_**          | [`into binary`](/commands/docs/into_binary.md)               |
+| **_See also:_**       | [Types of data - Binary](/book/types_of_data.md#binary-data) |
 
-Annotation: `binary`
+## Additional Language Notes
 
-Nushell offers a way of creating binary literals in your data. These are in one of three ways:
+1. Incomplete bytes are left-padded with zeros.
 
-- `0x[ffffffff]` - hex-based binary representation
-- `0o[1234567]` - octal-based binary representation
-- `0b[10101010101]` - binary-based binary representation
+2. Spaces can be used to improve readability. For example, `0x[ffff ffff]`.
 
-The data inside of the `[]` represents a single data value of bits.
+## Common commands that can be used with `binary`
 
-You can use spaces to make the literals more readable. For example, `0x[ffff ffff]`.
-
-## Casts
-
-The command `into binary` can convert other data types into a binary datatype.
-See `help into binary` for a complete list of compatible input data types.
+- `into bits`
+- `bits` subcommands (see `help bits` for a list)
+- `bytes` subcommands (see `help bytes` for a list)
+- `encode`
+- `take`

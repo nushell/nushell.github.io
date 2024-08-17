@@ -1,72 +1,50 @@
 # Duration
 
-What it is: A value representing a unit of passage of time.
+|                       |                                                                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | Represent a unit of a passage of time                                                                                              |
+| **_Annotation:_**     | `duration`                                                                                                                         |
+| **_Literal Syntax:_** | A numeric (integer or decimal) literal followed immediately by a duration unit (listed below). E.g., `10sec`, `987us`, `-34.65day` |
+| **_Casts:_**          | [`into duration`](/commands/docs/into_duration.md)                                                                                 |
+| **_See also:_**       | [Types of Data - Durations](/book/types_of_data.md#durations)                                                                      |
 
-Annotation: `duration`
+## Additional Language Notes
 
-Durations are internally stored as a number of nanoseconds.
+1. Durations are internally stored as a number of nanoseconds.
 
-## Literals
+1. This chart shows all duration units currently supported:
 
-to form a Duration literal you need to combine a numeric value with a a unit of time.
-The numeric literal part must be a signed integer or floating point number literal.
-The unit part must be one of a specific set of strings listed below.
+   | Duration  | Length      |
+   | --------- | ----------- |
+   | `ns`      | nanosecond  |
+   | `us`/`μs` | microsecond |
+   | `ms`      | millisecond |
+   | `sec`     | second      |
+   | `min`     | minute      |
+   | `hr`      | hour        |
+   | `day`     | day         |
+   | `wk`      | week        |
 
-```
-<number><unit>
+1. Datetime values can be combined with durations in calculations:
 
-# E.g.
+   ```nu
+   > (date now) + 1day
+   Tue, 13 Aug 2024 11:49:27 -0400 (in a day)
+   > 2024-08-12T11:50:30-04:00 - 2019-05-10T09:59:12-07:00
+   274wk 2day 22hr 51min 18sec
+   ```
 
-10sec
-987us
--34.65day
+1. Months, years, centuries and millenniums are not precise as to the exact
+   number of nanoseconds and thus are not valid duration literals. Users are free to define
+   their own constants for specific months or years.
 
-```
-
-This chart shows all duration units currently supported:
-
-| Duration | Length          |
-| -------- | --------------- |
-| `1ns`    | one nanosecond  |
-| `1us`    | one microsecond |
-| `1ms`    | one millisecond |
-| `1sec`   | one second      |
-| `1min`   | one minute      |
-| `1hr`    | one hour        |
-| `1day`   | one day         |
-| `1wk`    | one week        |
-
-You can make fractional durations:
-
-```nu
-> 3.14day
-3day 3hr 21min
-```
-
-And you can do calculations with durations:
-
-```nu
-> 30day / 1sec  # How many seconds in 30 days?
-# => 2592000
-```
-
-Note: Months, years, centuries and milliniums are not precise as to the exact
-number of nanoseconds thus are not valid duration literals.You are free to make
-your own constants for specific months or years.
-
-## Casts
-
-The command `into duration` will convert various other data types into a duration. and is quite flexible. For a complete list of possible inputs, see `help into duration`
-
-## Commands that use duration
+## Common commands that can be used with `duration`
 
 - `sleep`
-- `where`
-  - In the comparison expression
 - `ps`
 - `sys`
 
-## Operators that use duration
+## Operators that can be used with `duration`
 
 - `==`, `!=`, `<`, `<=`, `>`, `>=`
 - `+`, `-`

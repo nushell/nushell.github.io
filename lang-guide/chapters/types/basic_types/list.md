@@ -1,41 +1,65 @@
 # List
 
-What it is: Basic collection of values ordered by their insertion.
+|                       |                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------- |
+| **_Description:_**    | Ordered sequence of zero or more values of any type                             |
+| **_Annotation:_**     | `list`                                                                          |
+| **_Literal syntax:_** | See below                                                                       |
+| **_Casts:_**          | N/A                                                                             |
+| **_See Also:_**       | [Working with Tables](/book/working_with_tables.md)                             |
+|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) |
+|                       | [Types of Data - Tables](/book/types_of_data.md#tables)                         |
 
-Annotation: `list`
+## List-literal Syntax
 
-A list is like a vector or array list in other languages.
+List syntax is very similar to that of arrays in JSON. However, commas are _not_ required to separate values when Nushell can easily distinguish them. The values of a list may be delimited by:
 
-0-based indexing to retrieve values.
+- Commas
 
-Lists use either commas or spaces to delimit values.
+  ```nu
+  > [ foo, bar, baz ]
+  ╭───┬─────╮
+  │ 0 │ foo │
+  │ 1 │ bar │
+  │ 2 │ baz │
+  ╰───┴─────╯
+  ```
 
-Examples of lists:
+- Spaces (when unambiguous):
 
-```nu
-[1, 2, 3]
-[1 2 3]
-[1,2,3]
-```
+  ```nu
+  > [ foo bar baz ]
+  ╭───┬─────╮
+  │ 0 │ foo │
+  │ 1 │ bar │
+  │ 2 │ baz │
+  ╰───┴─────╯
+  ```
 
-Effectively, commas in the above are treated like spaces.
+- Line breaks:
 
-Lists can span multiple lines to enumerate values. For example, this is equivalent to `[1, 2, 3]`:
+  ```nu
+  > [
+      foo
+      bar
+      baz
+    ]
+  ╭───┬─────╮
+  │ 0 │ foo │
+  │ 1 │ bar │
+  │ 2 │ baz │
+  ╰───┴─────╯
+  ```
 
-```nu
-[
-1
-2
-3
-]
-```
+## Additional Language Notes
 
-## Commands that use list
+1. A list is like a vector or array list in other languages.
+2. A list uses 0-based indexing to retrieve values.
+
+## Common commands that can be used with `list`
 
 Since lists, records and tables form the backbone of Nushell's structured nature,
-there are too many commands to list here.
-
-Here are a few
+there are too many commands to list here. Here are a few:
 
 - `any`
 - `all`
@@ -51,7 +75,7 @@ Here are a few
 - `match`
   - Can destructure a list
 
-## Operators that use list
+## Common operators that can be used with `list`
 
 - in For set membership
   - `not (12 in [1 2 3])` for inverse set membership

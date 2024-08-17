@@ -1,14 +1,31 @@
 # Working with lists
 
+:::tip
+Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where.md) can be used with lists:
+
+```nu
+> [bell book candle] | where ($it =~ 'b')
+╭───┬──────╮
+│ 0 │ bell │
+│ 1 │ book │
+╰───┴──────╯
+```
+
+:::
+
 ## Creating lists
 
 A list is an ordered collection of values.
-You can create a `list` with square brackets, surrounded values separated by spaces and/or commas (for readability).
+A list is created using square brackets surrounding values separated by spaces, linebreaks, and/or commas.
 For example, `[foo bar baz]` or `[foo, bar, baz]`.
+
+::: tip
+Nushell lists are similar to JSON arrays. The same `[ "Item1", "Item2", "Item3" ]` that represents a JSON array can also be used to create a Nushell list.
+:::
 
 ## Updating lists
 
-You can [`update`](/commands/docs/update.md) and [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
+We can [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
 
 ```nu
 > [1, 2, 3, 4] | insert 2 10
@@ -62,6 +79,27 @@ let colors = ($colors | first 2)
 $colors # [yellow green]
 ```
 
+### Using the Spread Operator
+
+To append one or more lists together, optionally with values interspersed in between, you can also use the
+[spread operator](/book/operators#spread-operator) (`...`):
+
+```nu
+> let x = [1 2]
+> [
+    ...$x
+    3
+    ...(4..7 | take 2)
+  ]
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+│ 3 │ 4 │
+│ 4 │ 5 │
+╰───┴───╯
+```
+
 ## Iterating over lists
 
 To iterate over the items in a list, use the [`each`](/commands/docs/each.md) command with a [block](types_of_data.html#blocks)
@@ -113,6 +151,10 @@ $scores | enumerate | reduce --fold 0 { |it, acc| $acc + $it.index * $it.item } 
 ```
 
 ## Accessing the list
+
+::: tip Note
+The following is a basic overview. For a more in-depth discussion of this topic, see the chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
+:::
 
 To access a list item at a given index, use the `$name.index` form where `$name` is a variable that holds a list.
 
