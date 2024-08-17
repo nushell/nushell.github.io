@@ -15,23 +15,25 @@ int
 
 ## Types at a glance
 
-| Type              | Example                                                               |
-| ----------------- | --------------------------------------------------------------------- |
-| Integers          | `-65535`                                                              |
-| Floats (decimals) | `9.9999`, `Infinity`                                                  |
-| Strings           | <code>"hole 18", 'hole 18', \`hole 18\`, hole18</code>                |
-| Booleans          | `true`                                                                |
-| Dates             | `2000-01-01`                                                          |
-| Durations         | `2min + 12sec`                                                        |
-| File sizes        | `64mb`                                                                |
-| Ranges            | `0..4`, `0..<5`, `0..`, `..4`                                         |
-| Binary            | `0x[FE FF]`                                                           |
-| Lists             | `[0 1 'two' 3]`                                                       |
-| Records           | `{name:"Nushell", lang: "Rust"}`                                      |
-| Tables            | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`            |
-| Closures          | `{\|e\| $e + 1 \| into string }`, `{ $in.name.0 \| path exists }`     |
-| Blocks            | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
-| Null              | `null`                                                                |
+| Type                                  | Example                                                               |
+| ------------------------------------- | --------------------------------------------------------------------- |
+| [Integers](#integers)                 | `-65535`                                                              |
+| [Floats (decimals)](#floats-decimals) | `9.9999`, `Infinity`                                                  |
+| [Strings](#text-strings)              | <code>"hole 18", 'hole 18', \`hole 18\`, hole18, r#'hole18'#</code>   |
+| [Booleans](#booleans)                 | `true`                                                                |
+| [Dates](#dates)                       | `2000-01-01`                                                          |
+| [Durations](#durations)               | `2min + 12sec`                                                        |
+| [File-sizes](#file-sizes)             | `64mb`                                                                |
+| [Ranges](#ranges)                     | `0..4`, `0..<5`, `0..`, `..4`                                         |
+| [Binary](#binary-data)                | `0x[FE FF]`                                                           |
+| [Lists](#lists)                       | `[0 1 'two' 3]`                                                       |
+| [Records](#records)                   | `{name:"Nushell", lang: "Rust"}`                                      |
+| [Tables](#tables)                     | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`            |
+| [Closures](#closures)                 | `{\|e\| $e + 1 \| into string }`, `{ $in.name.0 \| path exists }`     |
+| [Cell-paths](#cell-paths)             | `$.name.0`                                                            |
+| [Blocks](#blocks)                     | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
+| [Null (Nothing)](#nothing-null)       | `null`                                                                |
+| [Any](#any)                           | `let p: any = 5`                                                      |
 
 ## Basic Data Types
 
@@ -42,7 +44,7 @@ int
 | **_Description:_**    | Numbers without a fractional component (positive, negative, and 0)                                                                                        |
 | **_Annotation:_**     | `int`                                                                                                                                                     |
 | **_Literal Syntax:_** | A decimal, hex, octal, or binary numeric value without a decimal place. E.g., `-100`, `0`, `50`, `+50`, `0xff` (hex), `0o234` (octal), `0b10101` (binary) |
-| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/int.md)                                                                                       |
+| **_See also:_**       | [Language Reference - Integer](/lang-guide/chapters/types/basic_types/int.md)                                                                             |
 
 Simple Example:
 
@@ -60,7 +62,7 @@ int
 | **_Description:_**    | Numbers with some fractional component                                           |
 | **_Annotation:_**     | `float`                                                                          |
 | **_Literal Syntax:_** | A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333` |
-| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/float.md)            |
+| **_See also:_**       | [Language Reference - Float](/lang-guide/chapters/types/basic_types/float.md)    |
 
 Simple Example:
 
@@ -81,13 +83,13 @@ As in most programming languages, decimal values in Nushell are approximate.
 
 ### Text/Strings
 
-|                       |                                                                                  |
-| --------------------- | -------------------------------------------------------------------------------- |
-| **_Description:_**    | A series of characters that represents text                                      |
-| **_Annotation:_**     | `string`                                                                         |
-| **_Literal Syntax:_** | See [Working with strings](working_with_strings.md)                              |
-| **_See also:_**       | [Handling Strings](/book/loading_data.html#handling-strings)                     |
-|                       | [Language Reference - Strings](/lang-guide/chapters/types/basic_types/string.md) |
+|                       |                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------- |
+| **_Description:_**    | A series of characters that represents text                                     |
+| **_Annotation:_**     | `string`                                                                        |
+| **_Literal Syntax:_** | See [Working with strings](working_with_strings.md)                             |
+| **_See also:_**       | [Handling Strings](/book/loading_data.html#handling-strings)                    |
+|                       | [Language Reference - String](/lang-guide/chapters/types/basic_types/string.md) |
 
 As with many languages, Nushell provides multiple ways to specify String values and numerous commands for working with strings.
 
@@ -101,12 +103,12 @@ Hello, World
 
 ### Booleans
 
-|                       |                                                                      |
-| --------------------- | -------------------------------------------------------------------- |
-| **_Description:_**    | True or False value                                                  |
-| **_Annotation:_**     | `bool`                                                               |
-| **_Literal Syntax:_** | Either a literal `true` or `false`                                   |
-| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/bool.md) |
+|                       |                                                                                |
+| --------------------- | ------------------------------------------------------------------------------ |
+| **_Description:_**    | True or False value                                                            |
+| **_Annotation:_**     | `bool`                                                                         |
+| **_Literal Syntax:_** | Either a literal `true` or `false`                                             |
+| **_See also:_**       | [Language Reference - Boolean](/lang-guide/chapters/types/basic_types/bool.md) |
 
 Booleans are commonly the result of a comparison. For example:
 
@@ -133,7 +135,7 @@ It's negative
 | --------------------- | -------------------------------------------------------------------------------------- |
 | **_Description:_**    | Represents a specific point in time using international standard date time descriptors |
 | **_Annotation:_**     | `date`                                                                                 |
-| **_Literal Syntax:_** | See [Language Guide](/lang-guide/chapters/types/basic_types/date.md)                   |
+| **_Literal Syntax:_** | See [Language Guide - Date](/lang-guide/chapters/types/basic_types/date.md)            |
 
 Simple example:
 
@@ -147,11 +149,11 @@ Mon, 12 Aug 2024 13:59:22 -0400 (now)
 
 ### Durations
 
-|                       |                                                                                |
-| --------------------- | ------------------------------------------------------------------------------ |
-| **_Description:_**    | Represent a unit of a passage of time                                          |
-| **_Annotation:_**     | `duration`                                                                     |
-| **_Literal Syntax:_** | See [Language Reference](/lang-guide/chapters/types/basic_types/duration.html) |
+|                       |                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| **_Description:_**    | Represent a unit of a passage of time                                                     |
+| **_Annotation:_**     | `duration`                                                                                |
+| **_Literal Syntax:_** | See [Language Reference - Duration](/lang-guide/chapters/types/basic_types/duration.html) |
 
 Durations support fractional values as well as calculations.
 
@@ -166,11 +168,11 @@ Simple example:
 
 ### File sizes
 
-|                       |                                                                                |
-| --------------------- | ------------------------------------------------------------------------------ |
-| **_Description:_**    | Specialized numeric type to represent the size of files or a number of bytes   |
-| **_Annotation:_**     | `filesize`                                                                     |
-| **_Literal Syntax:_** | See [Language Reference](/lang-guide/chapters/types/basic_types/filesize.html) |
+|                       |                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| **_Description:_**    | Specialized numeric type to represent the size of files or a number of bytes              |
+| **_Annotation:_**     | `filesize`                                                                                |
+| **_Literal Syntax:_** | See [Language Reference - Filesize](/lang-guide/chapters/types/basic_types/filesize.html) |
 
 Nushell also has a special type for file sizes.
 
@@ -195,7 +197,7 @@ See the [Language Reference](/lang-guide/chapters/types/basic_types/filesize.htm
 | **_Annotation:_**     | `range`                                                                                        |
 | **_Literal Syntax:_** | `<start_value>..<end_value>`. E.g., `1..10`.                                                   |
 |                       | `<start_value>..<second_value>..<end_value>`. E.g., `2..4..20`                                 |
-| **_See also:_**       | [Language Guide - Ranges](/lang-guide/chapters/types/basic_types/range.md)                     |
+| **_See also:_**       | [Language Guide - Range](/lang-guide/chapters/types/basic_types/range.md)                      |
 
 Simple example:
 
@@ -241,7 +243,6 @@ goo
 | **_Description:_**    | An anonymous function, often called a lambda function, which accepts parameters and _closes over_ (i.e., uses) variables from outside its scope |
 | **_Annotation:_**     | `closure`                                                                                                                                       |
 | **_Literal Syntax:_** | `{\|args\| expressions }`                                                                                                                       |
-| **_Casts:_**          | N/A                                                                                                                                             |
 | **_See also:_**       | [Language Reference - Closure](/lang-guide/chapters/types/basic_types/closure.md)                                                               |
 
 Simple example:
@@ -269,7 +270,7 @@ Closures are a useful way to represent code that can be executed on each row of 
 | **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride. |
 | **_Annotation:_**     | `range`                                                                                        |
 | **_Literal Syntax:_** | `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.     |
-| **_See also:_**       | [Language Guide - Ranges](/lang-guide/chapters/types/basic_types/range.md)                     |
+| **_See also:_**       | [Language Guide - Binary](/lang-guide/chapters/types/basic_types/binary.md)                    |
 
 Binary data, like the data from an image file, is a group of raw bytes.
 
@@ -293,7 +294,7 @@ Nushell includes a collection of structured data types that can contain the prim
 | --------------------- | ------------------------------------------------------------------------------- |
 | **_Description:_**    | Ordered sequence of zero or more values of any type                             |
 | **_Annotation:_**     | `list`                                                                          |
-| **_Literal Syntax:_** | See [Language Guide - Lists](/lang-guide/chapters/types/basic_types/list.md)    |
+| **_Literal Syntax:_** | See [Language Guide - List](/lang-guide/chapters/types/basic_types/list.md)     |
 | **_See Also:_**       | [Working with Lists](./working_with_lists.md)                                   |
 |                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) |
 
@@ -310,13 +311,13 @@ Simple example:
 
 ### Records
 
-|                       |                                                                                  |
-| --------------------- | -------------------------------------------------------------------------------- |
-| **_Description:_**    | Holds key-value pairs which associate string keys with various data values.      |
-| **_Annotation:_**     | `record`                                                                         |
-| **_Literal Syntax:_** | See [Language Guide - Records](/lang-guide/chapters/types/basic_types/record.md) |
-| **_See Also:_**       | [Working with Records](./working_with_records.md)                                |
-|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)  |
+|                       |                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------- |
+| **_Description:_**    | Holds key-value pairs which associate string keys with various data values.     |
+| **_Annotation:_**     | `record`                                                                        |
+| **_Literal Syntax:_** | See [Language Guide - Record](/lang-guide/chapters/types/basic_types/record.md) |
+| **_See Also:_**       | [Working with Records](./working_with_records.md)                               |
+|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) |
 
 Simple example:
 
@@ -343,7 +344,7 @@ Simple example:
 | **_Annotation:_**  | `table`                                                                                                           |
 | **_See Also:_**    | [Working with Tables](./working_with_tables.md)                                                                   |
 |                    | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                   |
-|                    | [Language Guide - Tables](/lang-guide/chapters/types/basic_types/table.md)                                        |
+|                    | [Language Guide - Table](/lang-guide/chapters/types/basic_types/table.md)                                         |
 
 The table is a core data structure in Nushell. As you run commands, you'll see that many of them return tables as output. A table has both rows and columns.
 
@@ -369,7 +370,7 @@ Internally, tables are simply **lists of records**. This means that any command 
 | **_Description:_**    | When used in a type annotation or signature, matches any type. In other words, a "superset" of other types. |
 | **_Annotation:_**     | `any`                                                                                                       |
 | **_Literal syntax:_** | N/A - Any literal value can be assigned to an `any` type                                                    |
-| **_See also:_**       | [Language Reference](/lang-guide/chapters/types/basic_types/any.md)                                         |
+| **_See also:_**       | [Language Reference - Any](/lang-guide/chapters/types/basic_types/any.md)                                   |
 
 ### Blocks
 
