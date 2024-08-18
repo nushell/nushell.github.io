@@ -1,10 +1,15 @@
 import type { NavbarConfig } from '@vuepress/theme-default';
 
 export const navbarEn: NavbarConfig = [
-  { text: 'Book', link: '/book/' },
-  { text: 'Commands', link: '/commands/' },
-  { text: 'Contrib', link: '/contributor-book/' },
-  { text: 'Cookbook', link: '/cookbook/' },
+  {
+    text: 'Documentation',
+    children: [
+      { text: 'Nushell Book', link: '/book/' },
+      { text: 'Command Reference', link: '/commands/' },
+      { text: 'Cookbook', link: '/cookbook/' },
+      { text: 'Language Reference Guide', link: '/lang-guide/' },
+    ],
+  },
+  { text: 'Contributing', link: '/contributor-book/' },
   { text: 'Blog', link: '/blog/' },
-  { text: 'Ref', link: '/lang-guide/' },
 ];
