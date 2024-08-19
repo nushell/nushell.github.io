@@ -4,10 +4,8 @@ If you want to contribute to Nushell itself, see [nushell/nushell/CONTRIBUTING.m
 
 If you want to contribute to the Nushell documentation and website, this is the right place.
 
-::: warning Important
 While most documentation is updated via commits to this repository, an important exception is the `help` [documentation for all commands](/commands).
 These pages are generated automatically from the internal help in each command's `.rs` file. Please see the [main Nushell repo](https://github.com/nushell/nushell) and submit pull requests for changes to *command* documentation there.
-:::
 
 ## Local Development
 
@@ -34,9 +32,7 @@ This website is based on VuePress.
 1. `git pull` the latest changes
 1. Run `npm run dev`
 
-   ::: tip
    Pay close attention to the messages when starting the server, as this will inform you of any broken links and other errors that might need to be fixed.
-   :::
 
 1. Create a branch for your changes using a short, descriptive name:
 
