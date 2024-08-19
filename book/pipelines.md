@@ -7,14 +7,14 @@ One of the core designs of Nu is the pipeline, a design idea that traces its roo
 A pipeline is composed of three parts: the input, the filter, and the output.
 
 ```nu
-> open "Cargo.toml" | inc package.version --minor | save "Cargo_new.toml"
+open Cargo.toml | update workspace.dependencies.base64 0.24.2 | save Cargo_new.toml
 ```
 
-The first command, `open "Cargo.toml"`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with. Commands like [`ls`](/commands/docs/ls.md) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
+The first command, `open Cargo.toml`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with. Commands like [`ls`](/commands/docs/ls.md) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
 
-The second command, `inc package.version --minor`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the [`inc`](/commands/docs/inc.md) command in our example), or they may do another operation, like logging, as the values pass through.
+The second command, `update workspace.dependencies.base64 0.24.2`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the [`update`](/commands/docs/update.md) command in our example), or they may perform other operations, like logging, as the values pass through.
 
-The last command, `save "Cargo_new.toml"`, is an output (sometimes called a "sink"). An output takes input from the pipeline and does some final operation on it. In our example, we save what comes through the pipeline to a file as the final step. Other types of output commands may take the values and view them for the user.
+The last command, `save Cargo_new.toml`, is an output (sometimes called a "sink"). An output takes input from the pipeline and does some final operation on it. In our example, we save what comes through the pipeline to a file as the final step. Other types of output commands may take the values and view them for the user.
 
 The `$in` variable will collect the pipeline into a value for you, allowing you to access the whole stream as a parameter:
 
