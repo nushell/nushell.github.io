@@ -277,14 +277,24 @@ $"($example.description)
         $'::: warning(char nl)Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl):::(char nl)(char nl)'
     } else { '' }
 
-    let plugins = if $command.name in ['from ini', 'from ics', 'from eml', 'from vcf'] {
-        $"::: warning(char nl)Command `($command.name)` resides in [plugin]\(/book/plugins.html) [`nu_plugin_formats`]\(https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats(char nl):::(char nl)(char nl)"
-    } else if $command.name in ['query', 'query xml', 'query json', 'query web'] {
-        $"::: warning(char nl)Command `($command.name)` resides in [plugin]\(/book/plugins.html) [`nu_plugin_query`]\(https://crates.io/crates/nu_plugin_query). To use this command, you must install/compile and register nu_plugin_query(char nl):::(char nl)(char nl)"
-    } else { '' }
+
+    let plugin_commands = (plugin list | flatten)
+    let plugin_warning = if ($command.name in $plugin_commands.commands) {
+        let plugin = ($plugin_commands | where commands == $command.name | first)
+        [ $"::: warning This command requires a plugin"
+          $"The `($command.name)` command resides in the `($plugin.name)` plugin."
+          $"To use this command, you must install and register `($plugin.filename | path basename).`"
+          "See the [Plugins]\(/book/plugins.html) chapter in the book for more information."
+          ":::"
+          ""
+          ""
+        ] | to text
+    } else {
+        ''
+    }
 
     let doc = (
-        ($top + $plugins + $features + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
+        ($top + $plugin_warning + $features + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)
