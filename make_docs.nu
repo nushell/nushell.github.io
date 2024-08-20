@@ -1,21 +1,30 @@
-# get all command names from a clean scope
-def command-names [] {
-    const PLUGINS = [
-        nu_plugin_inc,
-        nu_plugin_gstat,
-        nu_plugin_query,
-        nu_plugin_polars,
-        nu_plugin_formats,
-    ]
-    let nu_dir = (which nu) | get path.0 | path dirname
-    mut plugins = []
-    for plugin in $PLUGINS {
-        if (sys host | get name) == 'Windows' {
-            $plugins ++= $'($nu_dir | path join $plugin).exe'
-        } else {
-            $plugins ++= $'($nu_dir | path join $plugin)'
+const PLUGINS = [
+    nu_plugin_inc,
+    nu_plugin_gstat,
+    nu_plugin_query,
+    nu_plugin_polars,
+    nu_plugin_formats,
+]
+
+def plugin-paths [ nu_path?: path ] {
+    # If no custom path is provided, default to the
+    # directory of the currently running nu
+    let nu_dir = match $nu_path {
+        null => ($nu.current-exe | path dirname)
+        _ => ($nu_path | path dirname)
+    }
+
+    $PLUGINS | each {|plugin|
+        match (sys host | get name) {
+            'Windows' => $'($nu_dir | path join $plugin).exe'
+            _ => $'($nu_dir | path join $plugin)'
         }
     }
+}
+
+# get all command names from a clean scope
+def command-names [] {
+    let plugins = (plugin-paths)
     nu --no-config-file --plugins ($plugins | to nuon) --commands $'scope commands | select name | to json'
         | from json
 }
@@ -36,6 +45,19 @@ def html-escape [] {
 # ```
 def safe-path [] {
   $in | str replace --all '\?' '' | str replace --all ' ' '_'
+}
+
+# optional helper to run make_docs in a new subshell with core plugins installed
+#
+# To use:
+# `source make_docs`
+# `make_docs` or `make_docs path_to_nu`
+def make_docs [
+    nu_path?: path     # Path to the Nushell executable to use
+] {
+    let $nu_path = ($nu_path | default $nu.current-exe)
+    let plugins = (plugin-paths $nu_path)
+    run-external $nu_path "--no-config-file" $"--plugins ($plugins | to nuon)" "make_docs.nu"
 }
 
 # generate the YAML frontmatter of a command
