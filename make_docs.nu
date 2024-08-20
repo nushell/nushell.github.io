@@ -273,11 +273,6 @@ $"($example.description)
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }
 
-    let features = if $command.name =~ '^dfr' {
-        $'::: warning(char nl)Dataframe commands were not shipped in the official binaries by default, you have to build it with `--features=dataframe` flag(char nl):::(char nl)(char nl)'
-    } else { '' }
-
-
     let plugin_commands = (plugin list | flatten)
     let plugin_warning = if ($command.name in $plugin_commands.commands) {
         let plugin = ($plugin_commands | where commands == $command.name | first)
@@ -294,7 +289,7 @@ $"($example.description)
     }
 
     let doc = (
-        ($top + $plugin_warning + $features + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
+        ($top + $plugin_warning + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
         | lines
         | each {|it| ($it | str trim -r) }
         | str join (char newline)
