@@ -278,7 +278,7 @@ $"($example.description)
         let plugin = ($plugin_commands | where commands == $command.name | first)
         [ $"::: warning This command requires a plugin"
           $"The `($command.name)` command resides in the `($plugin.name)` plugin."
-          $"To use this command, you must install and register `($plugin.filename | path basename).`"
+          $"To use this command, you must install and register `($plugin.filename | path basename)`."
           "See the [Plugins]\(/book/plugins.html) chapter in the book for more information."
           ":::"
           ""
