@@ -2,7 +2,7 @@
 title: polars get-week
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.0
 dataframe: |
   Gets week from date.
 usage: |

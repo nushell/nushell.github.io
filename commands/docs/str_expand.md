@@ -2,7 +2,7 @@
 title: str expand
 categories: |
   strings
-version: 0.96.0
+version: 0.97.0
 strings: |
   Generates all possible combinations defined in brace expansion syntax.
 usage: |

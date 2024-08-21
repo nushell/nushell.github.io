@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.96.0
+version: 0.97.0
 filesystem: |
   Move files or directories using uutils/coreutils mv.
 usage: |
@@ -24,6 +24,7 @@ usage: |
  -  `--verbose, -v`: explain what is being done.
  -  `--progress, -p`: display a progress bar
  -  `--interactive, -i`: prompt before overwriting
+ -  `--update, -u`: move and overwrite only when the SOURCE file is newer than the destination file or when the destination file is missing
  -  `--no-clobber, -n`: do not overwrite an existing file
 
 ## Parameters
@@ -51,8 +52,20 @@ Move a file into a directory
 
 ```
 
+Move only if source file is newer than target file
+```nu
+> mv -u new/test.txt old/
+
+```
+
 Move many files into a directory
 ```nu
 > mv *.txt my/subdirectory
+
+```
+
+Move a file into the "my" directory two levels up in the directory tree
+```nu
+> mv test.txt .../my/
 
 ```

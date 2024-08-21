@@ -2,7 +2,7 @@
 title: if
 categories: |
   core
-version: 0.96.0
+version: 0.97.0
 core: |
   Conditionally run a block.
 usage: |

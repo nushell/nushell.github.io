@@ -2,7 +2,7 @@
 title: polars concatenate
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.0
 dataframe: |
   Concatenates strings with other array.
 usage: |

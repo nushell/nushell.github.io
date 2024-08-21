@@ -2,7 +2,7 @@
 title: polars count
 categories: |
   expression
-version: 0.96.0
+version: 0.97.0
 expression: |
   Creates a count expression.
 usage: |

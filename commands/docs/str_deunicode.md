@@ -2,7 +2,7 @@
 title: str deunicode
 categories: |
   strings
-version: 0.96.0
+version: 0.97.0
 strings: |
   Convert Unicode string to pure ASCII.
 usage: |

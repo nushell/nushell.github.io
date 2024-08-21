@@ -2,7 +2,7 @@
 title: fmt
 categories: |
   conversions
-version: 0.96.0
+version: 0.97.0
 conversions: |
   Format a number.
 usage: |

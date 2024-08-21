@@ -2,7 +2,7 @@
 title: polars arg-max
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.0
 dataframe: |
   Return index for max value in series.
 usage: |

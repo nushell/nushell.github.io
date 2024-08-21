@@ -2,7 +2,7 @@
 title: polars expr-not
 categories: |
   expression
-version: 0.96.0
+version: 0.97.0
 expression: |
   Creates a not expression.
 usage: |

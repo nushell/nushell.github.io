@@ -2,7 +2,7 @@
 title: sys disks
 categories: |
   system
-version: 0.96.0
+version: 0.97.0
 system: |
   View information about the system disks.
 usage: |

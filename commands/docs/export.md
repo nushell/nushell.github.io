@@ -2,7 +2,7 @@
 title: export
 categories: |
   core
-version: 0.96.0
+version: 0.97.0
 core: |
   Export definitions or environment variables from a module.
 usage: |

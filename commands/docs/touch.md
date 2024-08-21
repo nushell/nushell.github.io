@@ -2,7 +2,7 @@
 title: touch
 categories: |
   filesystem
-version: 0.96.0
+version: 0.97.0
 filesystem: |
   Creates one or more files.
 usage: |
@@ -53,12 +53,6 @@ Creates files a, b and c
 Changes the last modified time of "fixture.json" to today's date
 ```nu
 > touch -m fixture.json
-
-```
-
-Changes the last modified time of files a, b and c to a date
-```nu
-> touch -m -d "yesterday" a b c
 
 ```
 

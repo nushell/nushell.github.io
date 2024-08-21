@@ -2,7 +2,7 @@
 title: polars fill-null
 categories: |
   lazyframe
-version: 0.96.0
+version: 0.97.0
 lazyframe: |
   Replaces NULL values with the given expression.
 usage: |

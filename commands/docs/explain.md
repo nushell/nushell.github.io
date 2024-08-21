@@ -2,7 +2,7 @@
 title: explain
 categories: |
   debug
-version: 0.96.0
+version: 0.97.0
 debug: |
   Explain closure contents.
 usage: |

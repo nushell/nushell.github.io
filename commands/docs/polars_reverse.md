@@ -2,7 +2,7 @@
 title: polars reverse
 categories: |
   lazyframe
-version: 0.96.0
+version: 0.97.0
 lazyframe: |
   Reverses the LazyFrame
 usage: |

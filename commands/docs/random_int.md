@@ -2,7 +2,7 @@
 title: random int
 categories: |
   random
-version: 0.96.0
+version: 0.97.0
 random: |
   Generate a random integer [min..max].
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Parameters
 
- -  `range`: Range of values.
+ -  `range`: Range of potential values, inclusive of both start and end values.
 
 
 ## Input/output types:
@@ -31,13 +31,13 @@ usage: |
 
 ## Examples
 
-Generate an unconstrained random integer
+Generate a non-negative random integer
 ```nu
 > random int
 
 ```
 
-Generate a random integer less than or equal to 500
+Generate a random integer between 0 (inclusive) and 500 (inclusive)
 ```nu
 > random int ..500
 
@@ -49,8 +49,8 @@ Generate a random integer greater than or equal to 100000
 
 ```
 
-Generate a random integer between 1 and 10
+Generate a random integer between -10 (inclusive) and 10 (inclusive)
 ```nu
-> random int 1..10
+> random int (-10)..10
 
 ```

@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.96.0
+version: 0.97.0
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |
@@ -73,18 +73,24 @@ Move many files into a directory
 
 Copy only if source file is newer than target file
 ```nu
-> cp -u a b
+> cp -u myfile newfile
 
 ```
 
 Copy file preserving mode and timestamps attributes
 ```nu
-> cp --preserve [ mode timestamps ] a b
+> cp --preserve [ mode timestamps ] myfile newfile
 
 ```
 
 Copy file erasing all attributes
 ```nu
-> cp --preserve [] a b
+> cp --preserve [] myfile newfile
+
+```
+
+Copy file to a directory three levels above its current location
+```nu
+> cp myfile ....
 
 ```
