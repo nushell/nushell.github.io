@@ -2,7 +2,7 @@
 title: plugin list
 categories: |
   plugin
-version: 0.97.0
+version: 0.97.1
 plugin: |
   List installed plugins.
 usage: |

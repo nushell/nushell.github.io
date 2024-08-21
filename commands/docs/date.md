@@ -2,7 +2,7 @@
 title: date
 categories: |
   date
-version: 0.97.0
+version: 0.97.1
 date: |
   Date-related commands.
 usage: |

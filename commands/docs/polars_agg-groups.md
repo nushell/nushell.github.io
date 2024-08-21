@@ -2,7 +2,7 @@
 title: polars agg-groups
 categories: |
   expression
-version: 0.97.0
+version: 0.97.1
 expression: |
   Creates an agg_groups expression.
 usage: |

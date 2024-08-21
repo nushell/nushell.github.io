@@ -2,7 +2,7 @@
 title: polars into-df
 categories: |
   dataframe
-version: 0.97.0
+version: 0.97.1
 dataframe: |
   Converts a list, table or record into a dataframe.
 usage: |

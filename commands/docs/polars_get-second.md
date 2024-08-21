@@ -2,7 +2,7 @@
 title: polars get-second
 categories: |
   dataframe
-version: 0.97.0
+version: 0.97.1
 dataframe: |
   Gets second from date.
 usage: |

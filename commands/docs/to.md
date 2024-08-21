@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.97.0
+version: 0.97.1
 formats: |
   Translate structured data to a format.
 usage: |

@@ -2,7 +2,7 @@
 title: stor create
 categories: |
   database
-version: 0.97.0
+version: 0.97.1
 database: |
   Create a table in the in-memory sqlite database.
 usage: |

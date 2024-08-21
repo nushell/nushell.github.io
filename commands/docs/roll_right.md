@@ -2,7 +2,7 @@
 title: roll right
 categories: |
   filters
-version: 0.97.0
+version: 0.97.1
 filters: |
   Roll table columns right.
 usage: |

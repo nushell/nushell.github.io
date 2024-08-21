@@ -2,7 +2,7 @@
 title: random chars
 categories: |
   random
-version: 0.97.0
+version: 0.97.1
 random: |
   Generate random chars uniformly distributed over ASCII letters and numbers: a-z, A-Z and 0-9.
 usage: |

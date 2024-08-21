@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.97.0
+version: 0.97.1
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |

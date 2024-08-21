@@ -2,7 +2,7 @@
 title: polars into-nu
 categories: |
   dataframe
-version: 0.97.0
+version: 0.97.1
 dataframe: |
   Converts a dataframe or an expression into nushell value for access and exploration.
 usage: |

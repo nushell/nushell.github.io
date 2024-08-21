@@ -2,7 +2,7 @@
 title: str capitalize
 categories: |
   strings
-version: 0.97.0
+version: 0.97.1
 strings: |
   Capitalize first letter of text.
 usage: |

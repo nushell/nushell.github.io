@@ -2,7 +2,7 @@
 title: polars drop-duplicates
 categories: |
   dataframe
-version: 0.97.0
+version: 0.97.1
 dataframe: |
   Drops duplicate values in dataframe.
 usage: |

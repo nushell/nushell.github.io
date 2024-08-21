@@ -2,7 +2,7 @@
 title: format duration
 categories: |
   strings
-version: 0.97.0
+version: 0.97.1
 strings: |
   Outputs duration with a specified unit of time.
 usage: |

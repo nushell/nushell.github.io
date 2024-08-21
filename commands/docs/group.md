@@ -2,7 +2,7 @@
 title: group
 categories: |
   filters
-version: 0.97.0
+version: 0.97.1
 filters: |
   Groups input into groups of `group_size`.
 usage: |

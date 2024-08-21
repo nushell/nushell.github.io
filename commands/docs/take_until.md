@@ -2,7 +2,7 @@
 title: take until
 categories: |
   filters
-version: 0.97.0
+version: 0.97.1
 filters: |
   Take elements of the input until a predicate is true.
 usage: |

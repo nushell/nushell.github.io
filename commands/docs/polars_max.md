@@ -2,7 +2,7 @@
 title: polars max
 categories: |
   expression
-version: 0.97.0
+version: 0.97.1
 expression: |
   Creates a max expression or aggregates columns to their max value.
 usage: |

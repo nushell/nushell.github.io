@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.97.0
+version: 0.97.1
 filters: |
   Sets a default value if a row's column is missing or null.
 usage: |

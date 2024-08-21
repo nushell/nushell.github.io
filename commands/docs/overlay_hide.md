@@ -2,7 +2,7 @@
 title: overlay hide
 categories: |
   core
-version: 0.97.0
+version: 0.97.1
 core: |
   Hide an active overlay.
 usage: |
