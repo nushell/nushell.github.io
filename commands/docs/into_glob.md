@@ -2,7 +2,7 @@
 title: into glob
 categories: |
   conversions
-version: 0.96.0
+version: 0.97.1
 conversions: |
   Convert value to glob.
 usage: |

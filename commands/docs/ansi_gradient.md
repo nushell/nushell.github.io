@@ -2,7 +2,7 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.96.0
+version: 0.97.1
 platform: |
   Add a color gradient (using ANSI color codes) to the given string.
 usage: |

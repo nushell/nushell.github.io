@@ -2,7 +2,7 @@
 title: polars with-column
 categories: |
   dataframe or lazyframe
-version: 0.96.0
+version: 0.97.1
 dataframe_or_lazyframe: |
   Adds a series to the dataframe.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars with-column` for [dataframe or lazyframe](/commands/categories/dataframe or lazyframe.md)
 
 <div class='command-title'>Adds a series to the dataframe.</div>
+
+::: warning This command requires a plugin
+The `polars with-column` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

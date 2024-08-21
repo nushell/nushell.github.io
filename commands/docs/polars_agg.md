@@ -2,7 +2,7 @@
 title: polars agg
 categories: |
   lazyframe
-version: 0.96.0
+version: 0.97.1
 lazyframe: |
   Performs a series of aggregations from a group-by.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars agg` for [lazyframe](/commands/categories/lazyframe.md)
 
 <div class='command-title'>Performs a series of aggregations from a group-by.</div>
+
+::: warning This command requires a plugin
+The `polars agg` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

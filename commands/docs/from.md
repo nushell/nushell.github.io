@@ -2,7 +2,7 @@
 title: from
 categories: |
   formats
-version: 0.96.0
+version: 0.97.1
 formats: |
   Parse a string or binary data into structured data.
 usage: |
@@ -41,6 +41,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`from msgpackz`](/commands/docs/from_msgpackz.md) | Convert brotli-compressed MessagePack data into Nu values.                                                                 | built-in |
 | [`from nuon`](/commands/docs/from_nuon.md)         | Convert from nuon to structured data.                                                                                      | built-in |
 | [`from ods`](/commands/docs/from_ods.md)           | Parse OpenDocument Spreadsheet(.ods) data and create table.                                                                | built-in |
+| [`from plist`](/commands/docs/from_plist.md)       | Convert plist to Nushell values                                                                                            | plugin   |
 | [`from ssv`](/commands/docs/from_ssv.md)           | Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2. | built-in |
 | [`from toml`](/commands/docs/from_toml.md)         | Parse text as .toml and create record.                                                                                     | built-in |
 | [`from tsv`](/commands/docs/from_tsv.md)           | Parse text as .tsv and create table.                                                                                       | built-in |

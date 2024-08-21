@@ -2,7 +2,7 @@
 title: query xml
 categories: |
   filters
-version: 0.96.0
+version: 0.97.1
 filters: |
   execute xpath query on xml
 usage: |
@@ -14,8 +14,10 @@ usage: |
 
 <div class='command-title'>execute xpath query on xml</div>
 
-::: warning
-Command `query xml` resides in [plugin](/book/plugins.html) [`nu_plugin_query`](https://crates.io/crates/nu_plugin_query). To use this command, you must install/compile and register nu_plugin_query
+::: warning This command requires a plugin
+The `query xml` command resides in the `query` plugin.
+To use this command, you must install and register `nu_plugin_query`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
 
 ## Signature

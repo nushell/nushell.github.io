@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.96.0
+version: 0.97.1
 network: |
   Post a body to a URL.
 usage: |
@@ -72,6 +72,12 @@ Post content to example.com, with JSON body
 Post JSON content from a pipeline to example.com
 ```nu
 > open foo.json | http post https://www.example.com
+
+```
+
+Upload a file to example.com
+```nu
+> http post --content-type multipart/form-data https://www.example.com { audio: (open -r file.mp3) }
 
 ```
 

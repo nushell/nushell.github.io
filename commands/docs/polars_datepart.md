@@ -2,7 +2,7 @@
 title: polars datepart
 categories: |
   expression
-version: 0.96.0
+version: 0.97.1
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars datepart` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Creates an expression for capturing the specified datepart in a column.</div>
+
+::: warning This command requires a plugin
+The `polars datepart` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

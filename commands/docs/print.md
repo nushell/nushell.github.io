@@ -2,7 +2,7 @@
 title: print
 categories: |
   strings
-version: 0.96.0
+version: 0.97.1
 strings: |
   Print the given values to stdout.
 usage: |
@@ -22,6 +22,7 @@ usage: |
 
  -  `--no-newline, -n`: print without inserting a newline for the line ending
  -  `--stderr, -e`: print to stderr instead of stdout
+ -  `--raw, -r`: print without formatting (including binary data)
 
 ## Parameters
 
@@ -45,6 +46,12 @@ Print 'hello world'
 Print the sum of 2 and 3
 ```nu
 > print (2 + 3)
+
+```
+
+Print 'ABC' from binary data
+```nu
+> 0x[41 42 43] | print --raw
 
 ```
 

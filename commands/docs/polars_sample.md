@@ -2,7 +2,7 @@
 title: polars sample
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.1
 dataframe: |
   Create sample dataframe.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars sample` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Create sample dataframe.</div>
+
+::: warning This command requires a plugin
+The `polars sample` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

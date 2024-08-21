@@ -2,7 +2,7 @@
 title: polars store-ls
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.1
 dataframe: |
   Lists stored polars objects.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars store-ls` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Lists stored polars objects.</div>
+
+::: warning This command requires a plugin
+The `polars store-ls` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

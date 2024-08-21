@@ -2,7 +2,7 @@
 title: polars get-nanosecond
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.1
 dataframe: |
   Gets nanosecond from date.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars get-nanosecond` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Gets nanosecond from date.</div>
+
+::: warning This command requires a plugin
+The `polars get-nanosecond` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

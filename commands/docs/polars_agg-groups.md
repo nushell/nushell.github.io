@@ -2,7 +2,7 @@
 title: polars agg-groups
 categories: |
   expression
-version: 0.96.0
+version: 0.97.1
 expression: |
   Creates an agg_groups expression.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars agg-groups` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Creates an agg_groups expression.</div>
+
+::: warning This command requires a plugin
+The `polars agg-groups` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 
