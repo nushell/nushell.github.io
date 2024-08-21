@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Get the git status of a repo</div>
 
+::: warning This command requires a plugin
+The `gstat` command resides in the `gstat` plugin.
+To use this command, you must install and register `nu_plugin_gstat`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> gstat {flags} (path)```

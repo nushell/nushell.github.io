@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Sets value in the given index.</div>
 
+::: warning This command requires a plugin
+The `polars set-with-idx` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> polars set-with-idx {flags} (value)```

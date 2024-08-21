@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Creates an expression that returns the arguments where expression is true.</div>
 
+::: warning This command requires a plugin
+The `polars arg-where` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> polars arg-where {flags} (column name)```

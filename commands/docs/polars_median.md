@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Median value from columns in a dataframe or creates expression for an aggregation</div>
 
+::: warning This command requires a plugin
+The `polars median` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> polars median {flags} ```

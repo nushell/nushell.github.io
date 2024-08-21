@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Creates a new dataframe with dummy variables.</div>
 
+::: warning This command requires a plugin
+The `polars dummies` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> polars dummies {flags} ```

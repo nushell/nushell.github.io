@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Convert Nu values into plist</div>
 
+::: warning This command requires a plugin
+The `to plist` command resides in the `formats` plugin.
+To use this command, you must install and register `nu_plugin_formats`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> to plist {flags} ```

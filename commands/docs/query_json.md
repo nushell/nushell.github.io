@@ -14,8 +14,10 @@ usage: |
 
 <div class='command-title'>execute json query on json file (open --raw &lt;file&gt; | query json &#x27;query string&#x27;)</div>
 
-::: warning
-Command `query json` resides in [plugin](/book/plugins.html) [`nu_plugin_query`](https://crates.io/crates/nu_plugin_query). To use this command, you must install/compile and register nu_plugin_query
+::: warning This command requires a plugin
+The `query json` command resides in the `query` plugin.
+To use this command, you must install and register `nu_plugin_query`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
 
 ## Signature

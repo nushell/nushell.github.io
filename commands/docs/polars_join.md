@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Joins a lazy frame with other lazy frame.</div>
 
+::: warning This command requires a plugin
+The `polars join` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> polars join {flags} (other) (left_on) (right_on)```

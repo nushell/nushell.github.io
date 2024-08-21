@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc&#x2f;arrow, csv, and ndjson).</div>
 
+::: warning This command requires a plugin
+The `polars save` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> polars save {flags} (path)```

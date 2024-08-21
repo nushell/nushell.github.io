@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Query dataframe using SQL. Note: The dataframe is always named &#x27;df&#x27; in your query&#x27;s from clause.</div>
 
+::: warning This command requires a plugin
+The `polars query` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> polars query {flags} (sql)```
