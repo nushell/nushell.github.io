@@ -2,7 +2,7 @@
 title: to tsv
 categories: |
   formats
-version: 0.96.0
+version: 0.97.1
 formats: |
   Convert table into .tsv text.
 usage: |

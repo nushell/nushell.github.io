@@ -2,7 +2,7 @@
 title: def
 categories: |
   core
-version: 0.96.0
+version: 0.97.1
 core: |
   Define a custom command.
 usage: |
@@ -66,6 +66,12 @@ Define a custom wrapper for an external command
 ```nu
 > def --wrapped my-echo [...rest] { ^echo ...$rest }; my-echo -e 'spam\tspam'
 spamspam
+```
+
+Define a custom command with a type signature. Passing a non-int value will result in an error
+```nu
+> def only_int []: int -> int { $in }; 42 | only_int
+42
 ```
 
 ## Notes

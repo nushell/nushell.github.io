@@ -2,7 +2,7 @@
 title: polars reverse
 categories: |
   lazyframe
-version: 0.96.0
+version: 0.97.1
 lazyframe: |
   Reverses the LazyFrame
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars reverse` for [lazyframe](/commands/categories/lazyframe.md)
 
 <div class='command-title'>Reverses the LazyFrame</div>
+
+::: warning This command requires a plugin
+The `polars reverse` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

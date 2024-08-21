@@ -2,7 +2,7 @@
 title: math
 categories: |
   math
-version: 0.96.0
+version: 0.97.1
 math: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.
 usage: |

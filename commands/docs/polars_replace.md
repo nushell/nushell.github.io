@@ -2,7 +2,7 @@
 title: polars replace
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.1
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars replace` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Replace the leftmost (sub)string by a regex pattern.</div>
+
+::: warning This command requires a plugin
+The `polars replace` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

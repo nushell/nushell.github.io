@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.96.0
+version: 0.97.1
 filesystem: |
   Change directory.
 usage: |
@@ -41,7 +41,7 @@ Change to your home directory
 
 ```
 
-Change to the previous working directory ($OLDPWD)
+Change to the previous working directory (same as "cd $env.OLDPWD")
 ```nu
 > cd -
 
@@ -50,5 +50,17 @@ Change to the previous working directory ($OLDPWD)
 Changing directory with a custom command requires 'def --env'
 ```nu
 > def --env gohome [] { cd ~ }
+
+```
+
+Move two directories up in the tree (the parent directory's parent). Additional dots can be added for additional levels.
+```nu
+> cd ...
+
+```
+
+The cd command itself is often optional. Simply entering a path to a directory will cd to it.
+```nu
+> /home
 
 ```

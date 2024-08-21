@@ -2,7 +2,7 @@
 title: plugin
 categories: |
   plugin
-version: 0.96.0
+version: 0.97.1
 plugin: |
   Commands for managing plugins.
 usage: |

@@ -2,7 +2,7 @@
 title: from ics
 categories: |
   formats
-version: 0.96.0
+version: 0.97.1
 formats: |
   Parse text as .ics and create table.
 usage: |
@@ -14,8 +14,10 @@ usage: |
 
 <div class='command-title'>Parse text as .ics and create table.</div>
 
-::: warning
-Command `from ics` resides in [plugin](/book/plugins.html) [`nu_plugin_formats`](https://crates.io/crates/nu_plugin_formats). To use this command, you must install/compile and register nu_plugin_formats
+::: warning This command requires a plugin
+The `from ics` command resides in the `formats` plugin.
+To use this command, you must install and register `nu_plugin_formats`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
 
 ## Signature

@@ -2,7 +2,7 @@
 title: polars arg-sort
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.1
 dataframe: |
   Returns indexes for a sorted series.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars arg-sort` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Returns indexes for a sorted series.</div>
+
+::: warning This command requires a plugin
+The `polars arg-sort` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

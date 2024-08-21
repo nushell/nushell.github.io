@@ -2,7 +2,7 @@
 title: polars str-slice
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.1
 dataframe: |
   Slices the string from the start position until the selected length.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars str-slice` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Slices the string from the start position until the selected length.</div>
+
+::: warning This command requires a plugin
+The `polars str-slice` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

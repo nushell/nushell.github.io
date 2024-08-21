@@ -2,7 +2,7 @@
 title: rename
 categories: |
   filters
-version: 0.96.0
+version: 0.97.1
 filters: |
   Creates a new table with columns renamed.
 usage: |

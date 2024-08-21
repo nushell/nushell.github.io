@@ -2,7 +2,7 @@
 title: polars rename
 categories: |
   dataframe or lazyframe
-version: 0.96.0
+version: 0.97.1
 dataframe_or_lazyframe: |
   Rename a dataframe column.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars rename` for [dataframe or lazyframe](/commands/categories/dataframe or lazyframe.md)
 
 <div class='command-title'>Rename a dataframe column.</div>
+
+::: warning This command requires a plugin
+The `polars rename` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: polars into-df
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.1
 dataframe: |
   Converts a list, table or record into a dataframe.
 usage: |
@@ -14,6 +14,12 @@ usage: |
 
 <div class='command-title'>Converts a list, table or record into a dataframe.</div>
 
+::: warning This command requires a plugin
+The `polars into-df` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
 ## Signature
 
 ```> polars into-df {flags} ```
@@ -21,6 +27,7 @@ usage: |
 ## Flags
 
  -  `--schema, -s {record}`: Polars Schema in format [{name: str}]. CSV, JSON, and JSONL files
+ -  `--as-columns, -c`: When input shape is record of lists, treat each list as column values.
 
 
 ## Input/output types:
@@ -34,6 +41,18 @@ usage: |
 Takes a dictionary and creates a dataframe
 ```nu
 > [[a b];[1 2] [3 4]] | polars into-df
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
+
+```
+
+Takes a record of lists and creates a dataframe
+```nu
+> {a: [1 3], b: [2 4]} | polars into-df --as-columns
 ╭───┬───┬───╮
 │ # │ a │ b │
 ├───┼───┼───┤

@@ -2,7 +2,7 @@
 title: polars unique
 categories: |
   dataframe or lazyframe
-version: 0.96.0
+version: 0.97.1
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars unique` for [dataframe or lazyframe](/commands/categories/dataframe or lazyframe.md)
 
 <div class='command-title'>Returns unique values from a dataframe.</div>
+
+::: warning This command requires a plugin
+The `polars unique` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 

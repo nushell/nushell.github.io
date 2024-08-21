@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.96.0
+version: 0.97.1
 filters: |
   Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
 usage: |

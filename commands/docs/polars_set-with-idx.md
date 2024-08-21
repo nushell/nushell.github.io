@@ -2,7 +2,7 @@
 title: polars set-with-idx
 categories: |
   dataframe
-version: 0.96.0
+version: 0.97.1
 dataframe: |
   Sets value in the given index.
 usage: |
@@ -13,6 +13,12 @@ usage: |
 # `polars set-with-idx` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Sets value in the given index.</div>
+
+::: warning This command requires a plugin
+The `polars set-with-idx` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
 
 ## Signature
 
