@@ -227,7 +227,7 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   > # Input
   > 1 | do { $in | describe }
   int
-  > "Hello, Nushell" | do { in | describe }
+  > "Hello, Nushell" | do { $in | describe }
   string
   > {||} | do { $in | describe }
   closure
