@@ -49,7 +49,7 @@ sections of this page.
 > System Details: The benchmarks presented in this section were run using a
 > Macbook with a processor M1 pro and 32gb of ram
 >
-> All examples were run on Nushell version 0.93 using `nu_plugin_polars 0.97`
+> All examples were run on Nushell version 0.97 using `nu_plugin_polars 0.97`
 
 ### File information
 
