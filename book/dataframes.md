@@ -49,7 +49,7 @@ sections of this page.
 > System Details: The benchmarks presented in this section were run using a
 > Macbook with a processor M1 pro and 32gb of ram
 >
-> All examples were run on Nushell version 0.93 using `nu_plugin_polars 0.93`
+> All examples were run on Nushell version 0.97 using `nu_plugin_polars 0.97`
 
 ### File information
 
@@ -61,7 +61,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 `polars store-ls` command:
 
 ```nu
-> let df_0 = polars open Data7602DescendingYearOrder.csv
+> let df_0 = polars open --eager Data7602DescendingYearOrder.csv
 > polars store-ls | select key type columns rows estimated_size
 ╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
 │                 key                  │   type    │ columns │  rows   │ estimated_size │
@@ -69,6 +69,11 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 │ b2519dac-3b64-4e5d-a0d7-24bde9052dc7 │ DataFrame │       5 │ 5429252 │       184.5 MB │
 ╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
 ```
+
+::: tip
+As of nushell 0.97, `polars open` will open as a lazy dataframe instead of a eager dataframe. 
+To open as an eager dataframe, use the `--eager` flag.
+:::
 
 We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
 
@@ -225,7 +230,7 @@ Now, to read that file as a dataframe use the `polars open` command like
 this:
 
 ```nu
-> let df_1 = polars open test_small.csv
+> let df_1 = polars open --eager test_small.csv
 ```
 
 This should create the value `$df_1` in memory which holds the data we just
@@ -354,7 +359,7 @@ are going to call it `test_small_a.csv`)
 We use the `polars open` command to create the new variable
 
 ```nu
-> let df_2 = polars open test_small_a.csv
+> let df_2 = polars open --eager test_small_a.csv
 ```
 
 Now, with the second dataframe loaded in memory we can join them using the
@@ -758,10 +763,6 @@ and this new mask can be used to filter the dataframe
 Another operation that can be done with masks is setting or replacing a value
 from a series. For example, we can change the value in the column `first` where
 the value is equal to `a`
-
-::: warning
-This is example is not updated to recent Nushell versions.
-:::
 
 ```nu
 > $df_1 | polars get first | polars set new --mask ($df_1.first =~ a)
@@ -1224,6 +1225,7 @@ This list may be outdated. To get the up-to-date command list, see [Dataframe](/
 | polars reverse         | dataframe             | Reverses the LazyFrame                                                                           |                         |
 | polars rolling         | dataframe             | Rolling calculation for a series.                                                                |                         |
 | polars sample          | dataframe             | Create sample dataframe.                                                                         |                         |
+| polars save            | dataframe             | Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson).|                         |
 | polars schema          | dataframe             | Show schema for a dataframe.                                                                     |                         |
 | polars select          | dataframe             | Selects columns from lazyframe.                                                                  | select                  |
 | polars set             | dataframe             | Sets value where given mask is true.                                                             |                         |
@@ -1242,11 +1244,6 @@ This list may be outdated. To get the up-to-date command list, see [Dataframe](/
 | polars sum             | expression, dataframe | Creates a sum expression for an aggregation or aggregates columns to their sum value.            |                         |
 | polars summary         | dataframe             | For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.   |                         |
 | polars take            | dataframe             | Creates new dataframe using the given indices.                                                   |                         |
-| polars to-arrow        | dataframe             | Saves dataframe to arrow file.                                                                   |                         |
-| polars to-avro         | dataframe             | Saves dataframe to avro file.                                                                    |                         |
-| polars to-csv          | dataframe             | Saves dataframe to CSV file.                                                                     |                         |
-| polars to-jsonl        | dataframe             | Saves dataframe to a JSON lines file.                                                            |                         |
-| polars to-parquet      | dataframe             | Saves dataframe to parquet file.                                                                 |                         |
 | polars unique          | dataframe             | Returns unique values from a dataframe.                                                          | uniq                    |
 | polars uppercase       | dataframe             | Uppercase the strings in the column.                                                             |                         |
 | polars value-counts    | dataframe             | Returns a dataframe with the counts for unique values in series.                                 |                         |
