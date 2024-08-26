@@ -65,7 +65,7 @@
    ```
 
 1. To safely access a value that may be missing, mark the cell-path member as _optional_ using a question-mark (`?`) after the key name.
-   See [Navigating and Accessing Structured Data - Handling Missing Data](/book/navigating_structured_data.md#handling-missing-data---the-optional-operator) for more details and examples.
+   See [Navigating and Accessing Structured Data - Handling Missing Data](/book/navigating_structured_data.html#handling-missing-data) for more details and examples.
 
 ## Related commands
 
