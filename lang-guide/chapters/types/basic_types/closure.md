@@ -60,7 +60,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    ```nu
    if true {
      mut x = 9
-     do {|it| $it + $x }
+     do {|p| $p + $x }
    }
    # => Error: Capture of mutable variable.
    ```

@@ -148,7 +148,7 @@ operator can let you do it more easily.
 > [
     ...$dogs
     Polly
-    ...($cats | each { |it| $"($it) \(cat\)" })
+    ...($cats | each { |elt| $"($elt) \(cat\)" })
     ...[Porky Bessie]
     ...Nemo
   ]
@@ -169,7 +169,7 @@ The below code is an equivalent version using `append`:
 ```nushell
 > $dogs |
     append Polly |
-    append ($cats | each { |it| $"($it) \(cat\)" }) |
+    append ($cats | each { |elt| $"($elt) \(cat\)" }) |
     append [Porky Bessie] |
     append ...Nemo
 ```

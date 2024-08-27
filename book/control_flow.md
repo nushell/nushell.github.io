@@ -351,7 +351,7 @@ positive
 > positive-check (-3)
 non-positive
 
-> let positive_check = {|it| if $it > 0 { return 'positive' }; 'non-positive' }
+> let positive_check = {|elt| if $elt > 0 { return 'positive' }; 'non-positive' }
 
 > do $positive_check 3
 positive

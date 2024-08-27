@@ -69,8 +69,8 @@ Correct:
 
 ```nu
 [[status]; [UP] [UP]] | all {|el| $el.status == UP }
-[1 2 3 4] | reduce {|it, acc| $it + $acc }
-[1 2 3 4] | reduce {|it acc| $it + $acc }
+[1 2 3 4] | reduce {|elt, acc| $elt + $acc }
+[1 2 3 4] | reduce {|elt acc| $elt + $acc }
 {x: 1, y: 2}
 {x: 1 y: 2}
 [1 2] | zip [3 4]
@@ -85,7 +85,7 @@ Incorrect:
 [[status]; [UP] [UP]] | all { |el| $el.status == UP }
 
 # too many spaces before ",": no space is allowed
-[1 2 3 4] | reduce {|it , acc| $it + $acc }
+[1 2 3 4] | reduce {|elt , acc| $elt + $acc }
 
 # too many spaces before "x": no space is allowed
 { x: 1, y: 2}
@@ -134,8 +134,8 @@ Correct:
     $el.status == UP
 }
 
-[1 2 3 4] | reduce {|it, acc|
-    $it + $acc
+[1 2 3 4] | reduce {|elt, acc|
+    $elt + $acc
 }
 
 {x: 1, y: 2}
@@ -159,8 +159,8 @@ Incorrect:
     $el.status == UP}
 
 # too many spaces before "2": one space is required (like in one-line format)
-[1  2 3 4] | reduce {|it, acc|
-    $it + $acc
+[1  2 3 4] | reduce {|elt, acc|
+    $elt + $acc
 }
 
 {

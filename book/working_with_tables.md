@@ -253,7 +253,7 @@ We could join all three tables together like this:
 Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically merge all tables:
 
 ```nu
-> [$first $second $third] | reduce {|it, acc| $acc | merge $it }
+> [$first $second $third] | reduce {|elt, acc| $acc | merge $elt }
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───

@@ -288,7 +288,7 @@ first clears the prompt, inserts a string and then enters that value
       event:[
           { edit: Clear }
           { edit: InsertString,
-            value: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
+            value: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
 
           }
           { send: Enter }
@@ -318,7 +318,7 @@ event to the engine
       mode: emacs
       event: {
         send: executehostcommand,
-        cmd: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
+        cmd: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
       }
     }
   ]
@@ -763,7 +763,7 @@ With that in mind, the desired menu would look like this
             scope variables
             | where name =~ $buffer
             | sort-by name
-            | each { |it| {value: $it.name description: $it.type} }
+            | each { |row| {value: $row.name description: $row.type} }
         }
       }
       ...
