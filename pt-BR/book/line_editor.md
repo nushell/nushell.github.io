@@ -242,7 +242,7 @@ A próxima tecla de atalho é um exemplo de uma série de eventos enviados para 
       event:[
           { edit: Clear }
           { edit: InsertString,
-            value: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
+            value: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
 
           }
           { send: Enter }
@@ -266,7 +266,7 @@ Uma desvantagem da tecla de atalho anterior é o fato de que o texto inserido se
       mode: emacs
       event: {
         send: executehostcommand,
-        cmd: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
+        cmd: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
       }
     }
   ]
@@ -604,7 +604,7 @@ $env.config = {
             scope variables
             | where name =~ $buffer
             | sort-by name
-            | each { |it| {value: $it.name description: $it.type} }
+            | each { |elt| {value: $elt.name description: $elt.type} }
         }
       }
       ...
