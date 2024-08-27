@@ -50,7 +50,7 @@ Nushell unterstützt Text Erweiterung, was es erlaubt, Unterausdrücke innerhalb
 ```
 
 ```
-> ls | each { |it| echo $"($it.name) is ($it.size)" }
+> ls | each { |row| echo $"($row.name) is ($row.size)" }
 ───┬─────────────────────
  0 │ genawait is 4.1 KB
  1 │ learncpp is 4.1 KB
@@ -284,10 +284,10 @@ Oder aus einer Liste von Wertepaaren:
 
 ## Blöcke (blocks)
 
-Unter einem Block versteht man einen Block aus Code. Wie im Befehl `each { |it| echo $it }` ist der Block der Teil in den geschweiften Klammern, also { |it| echo $it }`. Block Parameter werden zwischen zwei Pipe-Symbolen eingegeben (z.B. ` |it| `)
+Unter einem Block versteht man einen Block aus Code. Wie im Befehl `each { |elt| echo $elt }` ist der Block der Teil in den geschweiften Klammern, also `{ |elt| echo $elt }`. Block Parameter werden zwischen zwei Pipe-Symbolen eingegeben (z.B. ` |elt| `)
 
-Blöcke sind ein praktischer Weg Code einzugeben, der auf jeder Zeile der Daten ausgeführt wird. Es ist üblich `$it` als Parameter in [`each`](/commands/docs/each.md)
-zu benutzen, aber nicht zwingend. `each { |x| echo $x }`funktioniert gleich wie `each { |it| echo $it }`.
+Blöcke sind ein praktischer Weg Code einzugeben, der auf jeder Zeile der Daten ausgeführt wird. Es ist üblich `$elt` als Parameter in [`each`](/commands/docs/each.md)
+zu benutzen, aber nicht zwingend. `each { |x| echo $x }`funktioniert gleich wie `each { |elt| echo $elt }`.
 
 ## Gruppen (groups)
 
