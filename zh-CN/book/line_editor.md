@@ -253,7 +253,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
       event:[
           { edit: Clear }
           { edit: InsertString,
-            value: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
+            value: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
 
           }
           { send: Enter }
@@ -278,7 +278,7 @@ Reedline 按键绑定是一个强大的结构，它允许你建立一连串的�
       mode: emacs
       event: {
         send: ExecuteHostCommand,
-        cmd: "cd (ls | where type == dir | each { |it| $it.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
+        cmd: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
       }
     }
   ]
@@ -643,7 +643,7 @@ let a = (ls | where size > 10MiB)
             scope variables
             | where name =~ $buffer
             | sort-by name
-            | each { |it| {value: $it.name description: $it.type} }
+            | each { |row| {value: $row.name description: $row.type} }
         }
       }
       ...

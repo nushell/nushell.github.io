@@ -215,7 +215,7 @@
 或者我们可以使用[`reduce`](/commands/docs/reduce.md)命令来动态地合并所有的表格：
 
 ```nu
-> [$first $second $third] | reduce {|it, acc| $acc | merge { $it }}
+> [$first $second $third] | reduce {|elt, acc| $acc | merge { $elt }}
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───

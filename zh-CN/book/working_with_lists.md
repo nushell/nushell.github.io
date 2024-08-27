@@ -33,14 +33,14 @@ $colors # [red yellow green purple]
 
 ## 迭代列表
 
-要遍历一个列表中的元素，可以使用[`each`](/commands/docs/each.md)命令和 [Nu 代码块](types_of_data.html#块) 指定对每一个元素做什么操作。块参数（例如`{ |it| echo $it }`中的`|it|`）通常是当前的列表元素，但如果需要，通过 `--numbered`(`-n`) 标志可以将其改为包含`index`和`item`值的元素。比如：
+要遍历一个列表中的元素，可以使用[`each`](/commands/docs/each.md)命令和 [Nu 代码块](types_of_data.html#块) 指定对每一个元素做什么操作。块参数（例如`{ |elt| echo $elt }`中的`|elt|`）通常是当前的列表元素，但如果需要，通过 `--numbered`(`-n`) 标志可以将其改为包含`index`和`item`值的元素。比如：
 
 ```nu
 let names = [Mark Tami Amanda Jeremy]
-$names | each { |it| $"Hello, ($it)!" }
+$names | each { |name| $"Hello, ($name)!" }
 # Outputs "Hello, Mark!" and three more similar lines.
 
-$names | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
+$names | enumerate | each { |item| $"($item.index + 1) - ($item.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 
@@ -64,19 +64,19 @@ $scores | where $it > 7 # [10 8]
 ```
 
 [`reduce`](/commands/docs/reduce.md)命令从一个列表计算一个单一的值。
-它使用了一个代码块，该块有两个参数：当前元素（即 `it`）和一个累加器 (即 `acc`)。如果想要给累加器指定一个初始值，请使用 `--fold` (`-f`) 标志。
-若要改变`it`使其具有`index`和`item`两个值，请添加`--numbered`（`-n`）标志。
+它使用了一个代码块，该块有两个参数：当前元素（即 `elt`）和一个累加器 (即 `acc`)。如果想要给累加器指定一个初始值，请使用 `--fold` (`-f`) 标志。
+若要改变`elt`使其具有`index`和`item`两个值，请添加`--numbered`（`-n`）标志。
 例如：
 
 ```nu
 let scores = [3 8 4]
-echo "total =" ($scores | reduce { |it, acc| $acc + $it }) # 15
+echo "total =" ($scores | reduce { |elt, acc| $acc + $elt }) # 15
 
 echo "total =" ($scores | math sum) # easier approach, same result
 
-echo "product =" ($scores | reduce --fold 1 { |it, acc| $acc * $it }) # 96
+echo "product =" ($scores | reduce --fold 1 { |elt, acc| $acc * $elt }) # 96
 
-$scores | reduce -n { |it, acc| $acc.item + $it.index * $it.item } # 3 + 1*8 + 2*4 = 19
+$scores | reduce -n { |elt, acc| $acc.item + $elt.index * $elt.item } # 3 + 1*8 + 2*4 = 19
 ```
 
 ## 访问列表
@@ -123,32 +123,32 @@ let colors = [red green blue]
 
 ```nu
 # Do any color names end with "e"?
-$colors | any {|it| $it | str ends-with "e" } # true
+$colors | any {|elt| $elt | str ends-with "e" } # true
 
 # Is the length of any color name less than 3?
-$colors | any {|it| ($it | str length) < 3 } # false
+$colors | any {|elt| ($elt | str length) < 3 } # false
 
 # Are any scores greater than 7?
-$scores | any {|it| $it > 7 } # true
+$scores | any {|elt| $elt > 7 } # true
 
 # Are any scores odd?
-$scores | any {|it| $it mod 2 == 1 } # true
+$scores | any {|elt| $elt mod 2 == 1 } # true
 ```
 
 [`all`](/commands/docs/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
 
 ```nu
 # Do all color names end with "e"?
-$colors | all {|it| $it | str ends-with "e" } # false
+$colors | all {|elt| $elt | str ends-with "e" } # false
 
 # Is the length of all color names greater than or equal to 3?
-$colors | all {|it| ($it | str length) >= 3 } # true
+$colors | all {|elt| ($elt | str length) >= 3 } # true
 
 # Are all scores greater than 7?
-$scores | all {|it| $it > 7 } # false
+$scores | all {|elt| $elt > 7 } # false
 
 # Are all scores even?
-$scores | all {|it| $it mod 2 == 0 } # false
+$scores | all {|elt| $elt mod 2 == 0 } # false
 ```
 
 ## 转换列表
@@ -167,10 +167,10 @@ $scores | all {|it| $it mod 2 == 0 } # false
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 
 # Show world clock for selected time zones
-$zones | wrap 'Zone' | upsert Time {|it|
+$zones | wrap 'Zone' | upsert Time {|row|
     (
         date now
-            | date to-timezone $it.Zone
+            | date to-timezone $row.Zone
             | format date '%Y.%m.%d %H:%M'
     )
 }

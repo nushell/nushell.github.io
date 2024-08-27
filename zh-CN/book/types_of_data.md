@@ -62,7 +62,7 @@ Nushell 支持字符串插值，允许你在以`$`为前缀的字符串中运行
 ```
 
 ```
-> ls | each { |it| echo $"($it.name) is ($it.size)" }
+> ls | each { |elt| echo $"($elt.name) is ($elt.size)" }
 ───┬─────────────────────
  0 │ genawait is 4.1 KB
  1 │ learncpp is 4.1 KB
@@ -290,9 +290,9 @@ Eg) `1wk`是一个星期的时间间隔。
 
 ## 块
 
-块(Blocks)表示 Nu 中的一个代码块。例如，在命令 `each { |it| echo $it }` 中，块是包含在大括号中的部分，`{ |it| echo $it }`。如果有必要，可以在一对管道符号（例如，`|it|`）之间指定块参数。
+块(Blocks)表示 Nu 中的一个代码块。例如，在命令 `each { |elt| echo $elt }` 中，块是包含在大括号中的部分，`{ |elt| echo $elt }`。如果有必要，可以在一对管道符号（例如，`|elt|`）之间指定块参数。
 
-块是表示可以在每行数据上执行的代码的一种有效方法。在[`each`](/commands/docs/each.md)块中使用`$it`作为参数名是惯例，但并不是必须的：`each { |x| echo $x }`与`each { |it| echo $it }`的结果相同。
+块是表示可以在每行数据上执行的代码的一种有效方法。在[`each`](/commands/docs/each.md)块中使用`$elt`作为参数名是惯例，但并不是必须的：`each { |x| echo $x }`与`each { |elt| echo $elt }`的结果相同。
 
 ## 组
 

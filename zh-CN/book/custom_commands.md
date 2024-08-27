@@ -410,7 +410,7 @@ def my-ls [] { ls }
 
 ```nu
 def double [] {
-  each { |it| 2 * $it }
+  each { |elt| 2 * $elt }
 }
 ```
 
