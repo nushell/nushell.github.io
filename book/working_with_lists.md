@@ -103,15 +103,15 @@ To append one or more lists together, optionally with values interspersed in bet
 ## Iterating over lists
 
 To iterate over the items in a list, use the [`each`](/commands/docs/each.md) command with a [block](types_of_data.html#blocks)
-of Nu code that specifies what to do to each item. The block parameter (e.g. `|it|` in `{ |it| print $it }`) is the current list
+of Nu code that specifies what to do to each item. The block parameter (e.g. `|elt|` in `{ |elt| print $elt }`) is the current list
 item, but the [`enumerate`](/commands/docs/enumerate.md) filter can be used to provide `index` and `item` values if needed. For example:
 
 ```nu
 let names = [Mark Tami Amanda Jeremy]
-$names | each { |it| $"Hello, ($it)!" }
+$names | each { |elt| $"Hello, ($elt)!" }
 # Outputs "Hello, Mark!" and three more similar lines.
 
-$names | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
+$names | enumerate | each { |elt| $"($elt.index + 1) - ($elt.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 
@@ -141,13 +141,13 @@ For example:
 
 ```nu
 let scores = [3 8 4]
-$"total = ($scores | reduce { |it, acc| $acc + $it })" # total = 15
+$"total = ($scores | reduce { |elt, acc| $acc + $elt })" # total = 15
 
 $"total = ($scores | math sum)" # easier approach, same result
 
-$"product = ($scores | reduce --fold 1 { |it, acc| $acc * $it })" # product = 96
+$"product = ($scores | reduce --fold 1 { |elt, acc| $acc * $elt })" # product = 96
 
-$scores | enumerate | reduce --fold 0 { |it, acc| $acc + $it.index * $it.item } # 0*3 + 1*8 + 2*4 = 16
+$scores | enumerate | reduce --fold 0 { |elt, acc| $acc + $elt.index * $elt.item } # 0*3 + 1*8 + 2*4 = 16
 ```
 
 ## Accessing the list
@@ -203,17 +203,17 @@ For example:
 ```nu
 let colors = [red green blue]
 # Do any color names end with "e"?
-$colors | any {|it| $it | str ends-with "e" } # true
+$colors | any {|elt| $elt | str ends-with "e" } # true
 
 # Is the length of any color name less than 3?
-$colors | any {|it| ($it | str length) < 3 } # false
+$colors | any {|elt| ($elt | str length) < 3 } # false
 
 let scores = [3 8 4]
 # Are any scores greater than 7?
-$scores | any {|it| $it > 7 } # true
+$scores | any {|elt| $elt > 7 } # true
 
 # Are any scores odd?
-$scores | any {|it| $it mod 2 == 1 } # true
+$scores | any {|elt| $elt mod 2 == 1 } # true
 ```
 
 The [`all`](/commands/docs/all.md) command determines if every item in a list
@@ -223,17 +223,17 @@ For example:
 ```nu
 let colors = [red green blue]
 # Do all color names end with "e"?
-$colors | all {|it| $it | str ends-with "e" } # false
+$colors | all {|elt| $elt | str ends-with "e" } # false
 
 # Is the length of all color names greater than or equal to 3?
-$colors | all {|it| ($it | str length) >= 3 } # true
+$colors | all {|elt| ($elt | str length) >= 3 } # true
 
 let scores = [3 8 4]
 # Are all scores greater than 7?
-$scores | all {|it| $it > 7 } # false
+$scores | all {|elt| $elt > 7 } # false
 
 # Are all scores even?
-$scores | all {|it| $it mod 2 == 0 } # false
+$scores | all {|elt| $elt mod 2 == 0 } # false
 ```
 
 ## Converting the list
@@ -256,5 +256,5 @@ be converted to a separate row with a single column:
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 
 # Show world clock for selected time zones
-$zones | wrap 'Zone' | upsert Time {|it| (date now | date to-timezone $it.Zone | format date '%Y.%m.%d %H:%M')}
+$zones | wrap 'Zone' | upsert Time {|row| (date now | date to-timezone $row.Zone | format date '%Y.%m.%d %H:%M')}
 ```

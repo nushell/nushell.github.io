@@ -24,14 +24,14 @@ def update-i18n-status [] {
         ls -s book/*.md
             | where type == file
             | select name
-            | upsert en {|it| get-cell $it.name en }
-            | upsert zh-CN {|it| get-cell $it.name zh-CN }
-            | upsert de {|it| get-cell $it.name de }
-            | upsert tr {|it| get-cell $it.name tr }
-            | upsert ja {|it| get-cell $it.name ja }
-            | upsert es {|it| get-cell $it.name es }
-            | upsert pt-BR {|it| get-cell $it.name pt-BR }
-            | upsert ru {|it| get-cell $it.name ru }
+            | upsert en {|elt| get-cell $elt.name en }
+            | upsert zh-CN {|elt| get-cell $elt.name zh-CN }
+            | upsert de {|elt| get-cell $elt.name de }
+            | upsert tr {|elt| get-cell $elt.name tr }
+            | upsert ja {|elt| get-cell $elt.name ja }
+            | upsert es {|elt| get-cell $elt.name es }
+            | upsert pt-BR {|elt| get-cell $elt.name pt-BR }
+            | upsert ru {|elt| get-cell $elt.name ru }
             | to md --pretty
     )
     print $status
@@ -75,14 +75,14 @@ def gen-i18n-meta [] {
     ls -s book/*.md
         | where type == file
         | select name
-        | upsert en {|it| get-cell $it.name en }
-        | upsert zh-CN {|it| get-cell $it.name zh-CN }
-        | upsert de {|it| get-cell $it.name de }
-        | upsert tr {|it| get-cell $it.name tr }
-        | upsert ja {|it| get-cell $it.name ja }
-        | upsert es {|it| get-cell $it.name es }
-        | upsert pt-BR {|it| get-cell $it.name pt-BR }
-        | upsert ru {|it| get-cell $it.name ru }
+        | upsert en {|elt| get-cell $elt.name en }
+        | upsert zh-CN {|elt| get-cell $elt.name zh-CN }
+        | upsert de {|elt| get-cell $elt.name de }
+        | upsert tr {|elt| get-cell $elt.name tr }
+        | upsert ja {|elt| get-cell $elt.name ja }
+        | upsert es {|elt| get-cell $elt.name es }
+        | upsert pt-BR {|elt| get-cell $elt.name pt-BR }
+        | upsert ru {|elt| get-cell $elt.name ru }
         | to json -i 2
         | save -rf $META_FILE
 }
@@ -100,8 +100,8 @@ def check-outdated-translation [
 ] {
     let columns = { 'zh-cn': 'zh-CN', 'pt-br': 'pt-BR' }
     let locale = if ($lng in $columns) { $columns | get $lng } else { $lng }
-    open $META_FILE | select name $locale | insert outdated { |it|
-        let val = ($it | get $locale)
+    open $META_FILE | select name $locale | insert outdated { |row|
+        let val = ($row | get $locale)
         if ($val | is-empty) or $val == '-' {
             '-'
         # Handle data like: "c13a71d11@hustcer"
@@ -109,12 +109,12 @@ def check-outdated-translation [
             let commit = ($val | split row '@')
             let id = ($commit | get 0)
             if ($commit | length) > 1 and (has-ref $id) {
-                has-change $it.name $id
+                has-change $row.name $id
             } else {
                 'N/A'
             }
         } else if (has-ref $val) {
-            has-change $it.name $val
+            has-change $row.name $val
         } else {
             'N/A'
         }

@@ -71,7 +71,7 @@ git whatchanged -p --abbrev-commit --pretty=medium
       source: { |buffer, position|
         scope aliases
         | where name == $buffer
-        | each { |it| {value: $it.expansion }}
+        | each { |elt| {value: $elt.expansion }}
       }
     }
 ```

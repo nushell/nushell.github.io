@@ -467,7 +467,7 @@ Let's make our own command that doubles every value it receives as input:
 
 ```nu
 def double [] {
-  each { |it| 2 * $it }
+  each { |elt| 2 * $elt }
 }
 ```
 

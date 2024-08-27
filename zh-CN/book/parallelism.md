@@ -13,8 +13,8 @@ Nushell 现在已经初步支持并行运行代码了，这允许你使用更多
 假设你想计算当前目录下每个子目录下的文件数量。使用[`each`](/commands/docs/each.md)你可以这样写。
 
 ```nu
-> ls | where type == dir | each { |it|
-    { name: $it.name, len: (ls $it.name | length) }
+> ls | where type == dir | each { |elt|
+    { name: $elt.name, len: (ls $elt.name | length) }
 }
 ```
 
@@ -25,8 +25,8 @@ Nushell 现在已经初步支持并行运行代码了，这允许你使用更多
 现在，由于这个操作可以并行运行，让我们把上面的操作转换为并行的，把[`each`](/commands/docs/each.md)改为[`par-each`](/commands/docs/par-each.md)：
 
 ```nu
-> ls | where type == dir | par-each { |it|
-    { name: $it.name, len: (ls $it.name | length) }
+> ls | where type == dir | par-each { |row|
+    { name: $row.name, len: (ls $row.name | length) }
 }
 ```
 
@@ -35,8 +35,8 @@ Nushell 现在已经初步支持并行运行代码了，这允许你使用更多
 顺便提一下：由于 [环境变量是有作用域的](environment.md#作用域)，你可以使用`par-each`在多个目录中并行工作（注意 `cd` 命令）：
 
 ```nu
-> ls | where type == dir | par-each { |it|
-    { name: $it.name, len: (cd $it.name; ls | length) }
+> ls | where type == dir | par-each { |row|
+    { name: $row.name, len: (cd $row.name; ls | length) }
 }
 ```
 

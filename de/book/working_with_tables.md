@@ -225,7 +225,7 @@ Können nun alle drei Tabellen zusammengeführt werden wie hier:
 Oder mit dem [`reduce`](/commands/docs/reduce.md) Befehl alle dynamisch gemerged:
 
 ```
-> [$first $second $third] | reduce {|it, acc| $acc|merge { $it }}
+> [$first $second $third] | reduce {|elt, acc| $acc|merge { $elt }}
 ───┬───┬───┬───┬───┬───┬───
  # │ a │ b │ c │ d │ e │ f
 ───┼───┼───┼───┼───┼───┼───

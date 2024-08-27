@@ -105,7 +105,7 @@ Many, if not most, use-cases for mutable variables in Nushell have a functional 
 For instance, loop counters are a common pattern for mutable variables and are built into most iterating commands. For example, you can get both each item and the index of each item using [`each`](/commands/docs/each.md) with [`enumerate`](/commands/docs/enumerate.md):
 
 ```nu
-> ls | enumerate | each { |it| $"Item #($it.index) is size ($it.item.size)" }
+> ls | enumerate | each { |elt| $"Item #($elt.index) is size ($elt.item.size)" }
 ╭───┬───────────────────────────╮
 │ 0 │ Item #0 is size 812 B     │
 │ 1 │ Item #1 is size 3.4 KiB   │

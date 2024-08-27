@@ -1,2 +1,2 @@
-> sys | get host.sessions.name | each { |it| ^echo $it }
+> sys | get host.sessions.name | each { |elt| ^echo $elt }
 sophiajt

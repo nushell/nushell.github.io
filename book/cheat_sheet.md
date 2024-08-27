@@ -180,7 +180,7 @@ iterate over a list; `it` is current list value:
 
 ```nu
 > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
-> $planets | each { |it| $"($it) is a planet of the solar system" }
+> $planets | each { |elt| $"($elt) is a planet of the solar system" }
 ╭───┬─────────────────────────────────────────╮
 │ 0 │ Mercury is a planet of the solar system │
 │ 1 │ Venus is a planet of the solar system   │
@@ -196,7 +196,7 @@ iterate over a list; `it` is current list value:
 iterate over a list with an index and value:
 
 ```nu
-> $planets | enumerate | each { |it| $"($it.index + 1) - ($it.item)" }
+> $planets | enumerate | each { |elt| $"($elt.index + 1) - ($elt.item)" }
 ╭───┬─────────────╮
 │ 0 │ 1 - Mercury │
 │ 1 │ 2 - Venus   │
@@ -213,7 +213,7 @@ reduce the list to a single value; `reduce` gives access to accumulator that is 
 
 ```nu
 > let scores = [3 8 4]
-> $"total = ($scores | reduce { |it, acc| $acc + $it })"
+> $"total = ($scores | reduce { |elt, acc| $acc + $elt })"
 total = 15
 ```
 
@@ -221,7 +221,7 @@ reduce with an initial value (`--fold`):
 
 ```nu
 > let scores = [3 8 4]
-> $"total = ($scores | reduce --fold 1 { |it, acc| $acc * $it })"
+> $"total = ($scores | reduce --fold 1 { |elt, acc| $acc * $elt })"
 total = 96
 ```
 
@@ -237,7 +237,7 @@ check if any string in the list starts with `E`:
 
 ```nu
 > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
-> $planets | any {|it| $it | str starts-with "E" }
+> $planets | any {|elt| $elt | str starts-with "E" }
 true
 ```
 

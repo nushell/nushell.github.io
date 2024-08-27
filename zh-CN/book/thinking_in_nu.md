@@ -101,7 +101,7 @@ let x = $x + 1
 循环计数器是可变变量的另一种常见模式，它被内置于大多数迭代命令中，例如，你可以使用 [`each`](/commands/docs/each.md) 上的 `-n` 标志同时获得每个元素的值和索引：
 
 ```nu
-> ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
+> ls | enumerate | each { |elt| $"Number ($elt.index) is size ($elt.item.size)" }
 ```
 
 你也可以使用 [`reduce`](/commands/docs/reduce.md) 命令来达到上述目的，其方式与你在循环中修改一个变量相同。例如，如果你想在一个字符串列表中找到最长的字符串，你可以这样做：
@@ -127,8 +127,8 @@ Nushell 从编译型语言中获得了很多设计灵感，其中一个是语言
 在实践中，这可以让你用更简洁的代码来处理子目录，例如，如果你想在当前目录下构建每个子项目，你可以运行：
 
 ```nu
-> ls | each { |it|
-    cd $it.name
+> ls | each { |row|
+    cd $row.name
     make
 }
 ```

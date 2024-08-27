@@ -111,7 +111,7 @@ def command-frontmatter [commands_group, command_name] {
     let indented_usage = (
         $commands_list
         | get usage
-        | each {|it| $"  ($it)"}
+        | each {|elt| $"  ($elt)"}
         | str join (char newline)
     )
 
@@ -267,8 +267,8 @@ $"($example.description)
     let sub_commands = if $one_word_cmd and ($sub_commands | length) > 0 {
         let commands = $sub_commands
             | select name usage type
-            | update name {|it| $"[`($it.name)`]\(/commands/docs/($it.name | safe-path).md\)" }
-            | upsert usage {|it| $it.usage | str replace -a '<' '\<' | str replace -a '>' '\>' }
+            | update name {|row| $"[`($row.name)`]\(/commands/docs/($row.name | safe-path).md\)" }
+            | upsert usage {|row| $row.usage | str replace -a '<' '\<' | str replace -a '>' '\>' }
             | to md --pretty
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }
@@ -291,7 +291,7 @@ $"($example.description)
     let doc = (
         ($top + $plugin_warning + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
         | lines
-        | each {|it| ($it | str trim -r) }
+        | each {|line| ($line | str trim -r) }
         | str join (char newline)
     )
 

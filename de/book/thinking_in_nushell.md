@@ -88,7 +88,7 @@ Schleifenzähler sind ein anderes häufiges Muster für veränderliche Variablen
 Zum Beispiel kann sowohl jedes Element wie auch dessen Index mit dem `-n` Flag von [`each`](/commands/docs/each.md) erreicht werden:
 
 ```
-> ls | enumerate | each { |it| $"Number ($it.index) is size ($it.item.size)" }
+> ls | enumerate | each { |row| $"Number ($row.index) is size ($row.item.size)" }
 ```
 
 Mit dem [`reduce`](/commands/docs/reduce.md) kann eine ähnliche Funktionalität erreicht werden wie man es von Variablen in Schleifen kennt.
@@ -119,8 +119,8 @@ In der Praxis ist damit präziserer Code möglich, um zum Beispiel mit Unterverz
 erstellt werden soll:
 
 ```
-> ls | each { |it|
-    cd $it.name
+> ls | each { |elt|
+    cd $elt.name
     make
 }
 ```

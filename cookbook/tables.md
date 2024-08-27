@@ -86,10 +86,10 @@ Or as mentioned in the [Cookbook](https://www.nushell.sh/book/working_with_table
 
 ```nu
 [$first_table $second_table $third_table]
-| reduce { |it, acc|
+| reduce { |elt, acc|
     $acc
-    | chunks ($it | length)
-    | each { merge $it }
+    | chunks ($elt | length)
+    | each { merge $elt }
     | flatten
   }
 ```
