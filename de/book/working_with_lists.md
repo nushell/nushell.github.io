@@ -71,9 +71,9 @@ echo $scores | where $it > 7 # [10 8]
 ```
 
 Der [`reduce`](/commands/docs/reduce.md) Befehl berechnet einen einfachen Wert aus einer Liste.
-Der darauffolgende Block enthält 2 Parameter: Das momentane Element (üblicherweise `it` genannt)
+Der darauffolgende Block enthält 2 Parameter: Das momentane Element (üblicherweise `elt` genannt)
 und einen Sammler (Akkumulator) (üblicherweise `acc`). Um einen initialen Wert für den Akkumulator zu setzen,
-wird das `--fold` (`-f`) Flag gesetzt. Um den Iterator `it` zu ändern nach `index` und `item`, wird wiederum
+wird das `--fold` (`-f`) Flag gesetzt. Um den Iterator `elt` zu ändern nach `index` und `item`, wird wiederum
 das `--numbered` (`-n`) Flag verwendet.
 Zum Beispiel:
 

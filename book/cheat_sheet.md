@@ -176,7 +176,7 @@ slice first list values:
 ╰───┴───────────╯
 ```
 
-iterate over a list; `it` is current list value:
+iterate over a list; `elt` is current list value:
 
 ```nu
 > let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]

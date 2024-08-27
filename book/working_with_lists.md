@@ -134,9 +134,9 @@ $scores | where $it > 7 # [10 8]
 ```
 
 The [`reduce`](/commands/docs/reduce.md) command computes a single value from a list.
-It uses a block which takes 2 parameters: the current item (conventionally named `it`) and an accumulator
+It uses a block which takes 2 parameters: the current item (conventionally named `elt`) and an accumulator
 (conventionally named `acc`). To specify an initial value for the accumulator, use the `--fold` (`-f`) flag.
-To change `it` to have `index` and `item` values, use the [`enumerate`](/commands/docs/enumerate.md) filter.
+To change `elt` to have `index` and `item` values, use the [`enumerate`](/commands/docs/enumerate.md) filter.
 For example:
 
 ```nu
