@@ -7,8 +7,8 @@ let path = '../book/dataframes.md'
 let chapter = open $path
 let book_table_str = $chapter
     | lines
-    | skip until {|it| $it starts-with '| Command Name '}
-    | take until {|it| $it starts-with '## Future'}
+    | skip until {|line| $line starts-with '| Command Name '}
+    | take until {|line| $line starts-with '## Future'}
 
 let book_table = $book_table_str
     | parse '| {command_name} | {applies_to} | {description} | {nushell_equivalent} |'
