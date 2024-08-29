@@ -2,7 +2,7 @@
 
 A defining characteristic of a shell is the ability to navigate and interact with the filesystem. Nushell is, of course, no exception. Here are some common commands you might use when interacting with the filesystem:
 
-## Viewing directory contents
+## Viewing Directory Contents
 
 @[code](@snippets/moving_around/ls_example.sh)
 
@@ -12,7 +12,7 @@ The [`ls`](/commands/docs/ls.md) command also takes an optional argument to chan
 
 @[code](@snippets/moving_around/ls_shallow_glob_example.sh)
 
-## Glob patterns (wildcards)
+## Glob Patterns (wildcards)
 
 The asterisk (`*`) in the above optional argument `*.md` is sometimes called a wildcard or a glob. It lets us match anything. You can read this glob `*.md` as _"match any filename, so long as it ends with '.md'."_
 
@@ -79,7 +79,7 @@ However, _backtick_ quoted strings do not escape globs. For example, compare the
 Nushell also includes a dedicated [`glob` command](https://www.nushell.sh/commands/docs/glob.html) with support for more complex globbing scenarios.
 :::
 
-### Converting strings to globs
+### Converting Strings to Globs
 
 The quoting techniques above are useful when constructing glob-literals, but you may need to construct globs programmatically. There are several techniques available for this purpose:
 
@@ -113,7 +113,7 @@ The quoting techniques above are useful when constructing glob-literals, but you
    ls $glob_pattern
    ```
 
-## Changing the current directory
+## Changing the Current Directory
 
 @[code](@snippets/book/moving_around/cd_example.nu)
 
@@ -141,7 +141,7 @@ You can combine relative directory levels with directory names as well:
 Changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of a directory is kept to the current scope (e.g. block or closure). Once you exit the block, you'll return to the previous directory. You can learn more about this in the [Environment](./environment.md) chapter.
 :::
 
-## Filesystem commands
+## Filesystem Commands
 
 Nu also provides some basic [filesystem commands](/commands/categories/filesystem.html) that work cross-platform such as:
 

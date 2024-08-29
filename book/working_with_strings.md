@@ -3,7 +3,7 @@
 As with most languages, strings are a collection of 0 or more characters that represent text. This can include file names, file paths, names of columns,
 and much more. Strings are so common that Nushell offers multiple string formats to match your use-case:
 
-## String formats at a glance
+## String Formats at a Glance
 
 | Format of string                                     | Example                 | Escapes                   | Notes                                                                  |
 | ---------------------------------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
@@ -15,7 +15,7 @@ and much more. Strings are so common that Nushell offers multiple string formats
 | [Single-quoted interpolation](#string-interpolation) | `$'Captain ($name)'`    | None                      | Cannot contain any `'` or unmatched `()`                               |
 | [Double-quoted interpolation](#string-interpolation) | `$"Captain ($name)"`    | C-style backslash escapes | All literal backslashes and `()` must be escaped                       |
 
-## Single-quoted strings
+## Single-quoted Strings
 
 The simplest string in Nushell is the single-quoted string. This string uses the `'` character to surround some text. Here's the text for hello world as a single-quoted string:
 
@@ -57,7 +57,7 @@ Nushell currently supports the following escape characters:
 - `\t` - tab
 - `\u{X...}` - a single unicode character, where X... is 1-6 hex digits (0-9, A-F)
 
-## Raw strings
+## Raw Strings
 
 Raw strings behave the same as a single quoted strings, except that raw strings
 may also contain single quotes. This is possible because raw strings are enclosed
@@ -78,7 +78,7 @@ be used to nest raw strings:
 r##'This is an example of a raw string.'##
 ```
 
-## Bare word strings
+## Bare Word Strings
 
 Like other shell languages (but unlike most other programming languages) strings consisting of a single 'word' can also be written without any quotes:
 
@@ -127,7 +127,7 @@ Error: nu::shell::external_command
 
 So, while bare strings are useful for informal command line usage, when programming more formally in nu, you should generally use quotes.
 
-## Backtick-quoted strings
+## Backtick-quoted Strings
 
 Bare word strings, by their nature, cannot include spaces or quotes. As an alternative, Nushell also includes backtick-quoted
 strings using the <code>`</code> character. In most cases, these should operate the same as a bare word string.
@@ -241,7 +241,7 @@ So if you have something like this in your `config.nu`, `x` will be `"2.0 KB"` e
 > const x = $"(2kb)"
 ```
 
-## Splitting strings
+## Splitting Strings
 
 The [`split row`](/commands/docs/split_row.md) command creates a list from a string based on a delimiter.
 
@@ -291,7 +291,7 @@ true
 
 (You might also prefer, for brevity, the `=~` operator (described below).)
 
-### Trimming strings
+### Trimming Strings
 
 You can trim the sides of a string with the [`str trim`](/commands/docs/str_trim.md) command. By default, the [`str trim`](/commands/docs/str_trim.md) commands trims whitespace from both sides of the string. For example:
 
@@ -324,7 +324,7 @@ Substrings are slices of a string. They have a startpoint and an endpoint. Here'
 o Wo
 ```
 
-### String padding
+### String Padding
 
 With the [`fill`](/commands/docs/fill.md) command you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
 
@@ -335,7 +335,7 @@ With the [`fill`](/commands/docs/fill.md) command you can add padding to a strin
 10
 ```
 
-### Reversing strings
+### Reversing Strings
 
 This can be done easily with the [`str reverse`](/commands/docs/str_reverse.md) command.
 
@@ -350,7 +350,7 @@ llehsuN
 ╰───┴─────────╯
 ```
 
-## String parsing
+## String Parsing
 
 With the [`parse`](/commands/docs/parse.md) command you can parse a string into columns. For example:
 
@@ -393,7 +393,7 @@ If a string is known to contain comma-separated, tab-separated or multi-space-se
 ╰───┴──────┴────────╯
 ```
 
-## String comparison
+## String Comparison
 
 In addition to the standard `==` and `!=` operators, a few operators exist for specifically comparing strings to one another.
 
@@ -415,7 +415,7 @@ true
 true
 ```
 
-## Converting strings
+## Converting Strings
 
 There are multiple ways to convert strings to and from other types.
 
@@ -428,7 +428,7 @@ There are multiple ways to convert strings to and from other types.
 
 1. Using [`into <type>`](/commands/docs/into.md). e.g. `'123' | into int`
 
-## Coloring strings
+## Coloring Strings
 
 You can color strings with the [`ansi`](/commands/docs/ansi.md) command. For example:
 

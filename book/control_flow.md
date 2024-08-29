@@ -78,7 +78,7 @@ three
 
 The branches can either return a single value or, as shown in the second branch, can return the results of a [block](/book/types_of_data.html#blocks).
 
-#### Catch all branch
+#### Catch all Branch
 
 You can also have a catch all condition for when the given value doesn't match any of the other conditions by having a branch whose matching value is `_`.
 
@@ -133,7 +133,7 @@ You can find more details about [`match`](/commands/docs/match.html) in the [pat
 
 The loop commands allow you to repeat a block of code multiple times.
 
-### Loops and other iterating commands
+### Loops and Other Iterating Commands
 
 The functionality of the loop commands is similar to commands that apply a closure over elements in a list or table like [`each`](/commands/docs/each.html) or [`where`](/commands/docs/where.html) and many times you can accomplish the same thing with either. For example:
 
@@ -158,7 +158,7 @@ The functionality of the loop commands is similar to commands that apply a closu
 
 While it may be tempting to use loops if you're familiar with them in other languages, it is considered more in the [Nushell-style](book/thinking_in_nu.html) (idiomatic) to use commands that apply closures when you can solve a problem either way. The reason for this is because of a pretty big downside with using loops.
 
-#### Loop disadvantages
+#### Loop Disadvantages
 
 The biggest downside of loops is that they are statements, unlike [`each`](/commands/docs/each.html) which is an expression. Expressions, like [`each`](/commands/docs/each.html) always result in some output value, however statements do not.
 
@@ -181,7 +181,7 @@ Error: nu::parser::unexpected_keyword
 
 Because Nushell is very pipeline oriented, this means using expression commands like [`each`](/commands/docs/each.html) is typically more natural than loop statements.
 
-#### Loop advantages
+#### Loop Advantages
 
 If loops have such a big disadvantage, why do they exist? Well, one reason is that closures, like [`each`](/commands/docs/each.html) uses, can't modify mutable variables in the surrounding environment. If you try to modify a mutable variable in a closure you will get an error:
 
@@ -222,7 +222,7 @@ If you modify an environmental variable in a closure, you can, but it will only 
 9
 ```
 
-#### Expression command alternatives
+#### Expression Command Alternatives
 
 - [`each`](/commands/docs/each.html)
 - [`par-each`](/commands/docs/par-each.html)
@@ -238,7 +238,7 @@ If you modify an environmental variable in a closure, you can, but it will only 
 10
 ```
 
-#### Expression command alternatives
+#### Expression Command Alternatives
 
 The "until" and other "while" commands
 

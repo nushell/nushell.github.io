@@ -44,7 +44,7 @@ A cell-path is the primary way to access values inside structured data. This pat
 
 For a record, the cell-path specifies the name of a key, which is a `string`.
 
-#### Example - Access a record value:
+#### Example - Access a Record Value:
 
 ```nu
 > let my_record = {
@@ -59,7 +59,7 @@ For a record, the cell-path specifies the name of a key, which is a `string`.
 
 For a list, the cell-path specifies the position (index) of the value in the list. This is an `int`:
 
-#### Example - Access a list value:
+#### Example - Access a List Value:
 
 Remember, list indices are 0-based.
 
@@ -131,7 +131,7 @@ This represents weather data in the form of a table with three columns:
 2. **_temps_**: A Nushell `list` of 5 `float` values representing temperature readings at different weather stations in the area
 3. **_conditions_**: A Nushell `string` for each day's weather condition for the area
 
-#### Example - Access a table row (record)
+#### Example - Access a Table Row (Record)
 
 Access the second day's data as a record:
 
@@ -150,7 +150,7 @@ Access the second day's data as a record:
 ╰───────────┴───────────────╯
 ```
 
-#### Example - Access a table column (list)
+#### Example - Access a Table Column (List)
 
 ```nu
 > $data.condition
@@ -162,7 +162,7 @@ Access the second day's data as a record:
 ╰───┴────────╯
 ```
 
-#### Example - Access a table cell (value)
+#### Example - Access a Table Cell (Value)
 
 The condition for the fourth day:
 
@@ -175,7 +175,7 @@ rain
 
 Since data can be nested, a cell-path can contain references to multiple names or indices.
 
-#### Example - Accessing nested table data
+#### Example - Accessing Nested Table Data
 
 To obtain the temperature at the second weather station on the third day:
 
@@ -300,7 +300,7 @@ Do not confuse the key name with a row index in this case. Here, the first item 
 
 By default, cell path access will fail if it can't access the requested row or column. To suppress these errors, you can add a `?` to a cell path member to mark it as optional:
 
-#### Example - The optional operator
+#### Example - The Optional Operator
 
 Using the temp data from above:
 

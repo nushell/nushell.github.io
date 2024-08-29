@@ -48,7 +48,7 @@ Here, semicolons are used in conjunction with pipelines. When a semicolon is use
 - As there is a semicolon after `line1`, the command will run to completion and get displayed on the screen.
 - `line2` | `line3` is a normal pipeline. It runs, and its contents are displayed after `line1`'s contents.
 
-## Pipeline input and the special `$in` variable
+## Pipeline Input and the Special `$in` Variable
 
 Much of Nu's composability comes from the special `$in` variable, which holds the current pipeline input.
 
@@ -58,7 +58,7 @@ Much of Nu's composability comes from the special `$in` variable, which holds th
 - Filters
 - Custom command definitions or scripts that accept pipeline input
 
-### `$in` as a command argument or as part of an expression
+### `$in` as a Command Argument or as Part of an Expression
 
 Compare the following two command-lines that create a directory with tomorrow's date as part of the name. The following are equivalent:
 
@@ -91,7 +91,7 @@ Let's examine the contents of `$in` on each line of the above example:
 - On line 4, `$in` refers to tomorrow's formatted date from line 3 and is used in an interpolated string
 - On line 5, `$in` refers to the results of line 4's interpolated string, e.g. '2024-05-14 Report'
 
-### Pipeline input in filter closures
+### Pipeline Input in Filter Closures
 
 Certain [filter commands](/commands/categories/filters.html) may modify the pipeline input to their closure in order to provide more convenient access to the expected context. For example:
 
@@ -116,11 +116,11 @@ ls | update name {str upcase}
 
 With most filters, the second version would refer to the entire `file` record (with `name`, `type`, `size`, and `modified` columns). However, with `update`, it refers specifically to the contents of the _column_ being updated, in this case `name`.
 
-### Pipeline input in custom command definitions and scripts
+### Pipeline Input in Custom Command Definitions and Scripts
 
 See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
 
-### When does `$in` change (and when can it be reused)?
+### When Does `$in` Change (and when can it be reused)?
 
 - **_Rule 1:_** When used in the first position of a pipeline in a closure or block, `$in` refers to the pipeline (or filter) input to the closure/block.
 
@@ -253,7 +253,7 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   list<string>
   ```
 
-### Best practice for `$in` in multiline code
+### Best practice for `$in` in Multiline Code
 
 While `$in` can be reused as demonstrated above, assigning its value to another variable in the first line of your closure/block will often aid in readability and debugging.
 
@@ -279,7 +279,7 @@ Currently, the use of `$in` on a stream in a pipeline results in a "collected" v
 
 Likewise, avoid using `$in` when normal pipeline input will suffice, as internally `$in` forces a conversion from `PipelineData` to `Value` and _may_ result in decreased performance and/or increased memory usage.
 
-## Working with external commands
+## Working with External Commands
 
 Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data.md)), but what about commands outside of Nu? Let's look at some examples of working with external commands:
 
@@ -295,7 +295,7 @@ Data coming from an external command into Nu will come in as bytes that Nushell 
 
 Nu works with data piped between two external commands in the same way as other shells, like Bash would. The `stdout` of external_command_1 is connected to the `stdin` of external_command_2. This lets data flow naturally between the two commands.
 
-### Notes on errors when piping commands
+### Notes on Errors when Piping Commands
 
 Sometimes, it might be unclear as to why you cannot pipe to a command.
 
@@ -353,7 +353,7 @@ In this case, sleep takes `nothing` and instead expects an argument.
 So, we can supply the output of the `echo` command as an argument to it:
 `echo 1sec | sleep $in` or `sleep (echo 1sec)`
 
-## Behind the scenes
+## Behind the Scenes
 
 You may have wondered how we see a table if [`ls`](/commands/docs/ls.md) is an input and not an output. Nu adds this output for us automatically using another command called [`table`](/commands/docs/table.md). The [`table`](/commands/docs/table.md) command is appended to any pipeline that doesn't have an output. This allows us to see the result.
 
@@ -382,7 +382,7 @@ Are one and the same.
 >
 > `ls | table` is not even structured data!
 
-## Output result to external commands
+## Output Result to External Commands
 
 Sometimes you want to output Nushell structured data to an external command for further processing. However, Nushell's default formatting options for structured data may not be what you want.
 For example, you want to find a file named "tutor" under "/usr/share/vim/runtime" and check its ownership

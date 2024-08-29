@@ -1,6 +1,6 @@
-# Testing your Nushell code
+# Testing your Nushell Code
 
-## Assert commands
+## Assert Commands
 
 Nushell provides a set of "assertion" commands in the standard library.
 One could use built-in equality / order tests such as `==` or `<=` or more complex commands and throw errors manually when an expected condition fails, but using what the standard library has to offer is arguably easier!
@@ -106,12 +106,12 @@ Error:
    ╰────
 ```
 
-## Running the tests
+## Running the Tests
 
 Now that we are able to write tests by calling commands from `std assert`, it would be great to be able to run them and see our tests fail when there is an issue and pass when everything is correct :)
 
 
-### Nupm package
+### Nupm Package
 
 In this first case, we will assume that the code you are trying to test is part of a [Nupm] package.
 
@@ -127,7 +127,7 @@ The convention is that any command fully exported from the `tests` module will b
 - `export def another-test` in `tests/spam.nu` will run if and only if there is something like `export use spam.nu *` in `tests/mod.nu`
 
 
-### Standalone tests
+### Standalone Tests
 
 If your Nushell script or module is not part of a [Nupm] package, the simplest way is to write tests in standalone scripts and then call them, either from a `Makefile` or in a CI:
 

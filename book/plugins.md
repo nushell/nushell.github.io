@@ -4,7 +4,7 @@ Nu can be extended using plugins. Plugins behave much like Nu's built-in command
 
 Nu plugins are executables; Nu launches them as needed and communicates with them over [stdin and stdout](https://en.wikipedia.org/wiki/Standard_streams) or [local sockets](https://en.wikipedia.org/wiki/Inter-process_communication). Nu plugins can use either [JSON](https://www.json.org/) or [MessagePack](https://msgpack.org/) as their communication encoding.
 
-## Downloading and installing a plugin
+## Downloading and Installing a Plugin
 
 ::: warning
 
@@ -36,7 +36,7 @@ This will create a binary file that can be used to add the plugin.
 
 Keep in mind that when installing using crates.io, the binary can be saved in different locations depending on how your system is set up. A typical location is in the users's home directory under .cargo/bin.
 
-## Adding a plugin
+## Adding a Plugin
 
 To add a plugin to the plugin registry file, call the [`plugin add`](/commands/docs/plugin_add.md) command to tell Nu where to find it.
 
@@ -76,11 +76,11 @@ Note that `plugin use` is a parser keyword, so when evaluating a script, it will
 > nu --plugins '[./my_plugins/nu_plugin_cool]'
 ```
 
-### Updating a plugin
+### Updating a Plugin
 
 When updating a plugin, it is important to run `plugin add` again just as above to load the new signatures from the plugin and allow Nu to rewrite them to the plugin file (`$nu.plugin-path`). You can then `plugin use` to get the updated signatures within the current session.
 
-## Managing plugins
+## Managing Plugins
 
 To view the list of plugins you have installed:
 
@@ -122,7 +122,7 @@ If we check `plugin list` again, we can see that it is no longer running:
 ╰───┴───────┴────────────╯
 ```
 
-### Plugin garbage collector
+### Plugin Garbage Collector
 
 Nu comes with a plugin garbage collector, which automatically stops plugins that are not actively in use after a period of time (by default, 10 seconds). This behavior is fully configurable:
 
@@ -151,7 +151,7 @@ $env.config.plugin_gc = {
 
 For more information on exactly under what circumstances a plugin is considered to be active, see [the relevant section in the contributor book](/contributor-book/plugins.html#plugin-garbage-collection).
 
-## Removing a plugin
+## Removing a Plugin
 
 To remove a plugin, call `plugin rm` with the name of the plugin you want to remove. For example, if you previously added the plugin `~/.cargo/bin/nu_plugin_gstat`, its name would be `gstat`. To remove it:
 

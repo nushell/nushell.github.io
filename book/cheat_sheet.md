@@ -1,6 +1,6 @@
 # Nushell Cheat Sheet
 
-## Data types
+## Data Types
 
 convert string to integer:
 
@@ -294,7 +294,7 @@ remove the last column of a table:
 ╰───┴───────────────────────┴───────╯
 ```
 
-## Files & Filesystem
+## Files and Filesystem
 
 open a text file with the default text editor:
 

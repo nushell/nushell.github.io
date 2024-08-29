@@ -53,7 +53,7 @@ As records can have many fields, they are, by default, displayed vertically rath
 
 :::
 
-## Updating records
+## Updating Records
 
 As with lists, you can [`insert`](/commands/docs/insert.md) values in records. For example, let's add some pears:
 
@@ -109,7 +109,7 @@ To make a copy of a record with new fields, you can either:
   ╰───────┴───────╯
   ```
 
-## Iterating over a record
+## Iterating over a Record
 
 You can iterate over the key-value pairs of a record by first transposing it into a table:
 
@@ -124,10 +124,10 @@ You can iterate over the key-value pairs of a record by first transposing it int
 ╰───┴─────────────────────╯
 ```
 
-## Accessing record values
+## Accessing Record Values
 
 See [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) for an in-depth explanation of how to access record values (and other structured data).
 
-## Other Record commands
+## Other Record Commands
 
 See [Working with Tables](./working_with_tables.md) - Remember, commands that operate on table rows will usually operate the same way on records.

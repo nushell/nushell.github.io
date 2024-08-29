@@ -28,7 +28,7 @@ In Nushell, we use the `>` as the greater-than operator. This fits better with t
 
 **Thinking in Nushell:** The way Nushell views data is that data flows through the pipeline until it reaches the user or is handled by a final command. You can simply type data, from strings to JSON-style lists and records, and follow it with `|` to send it through the pipeline. Nushell uses commands to do work and produce more data. Learning these commands and when to use them helps you compose many kinds of pipelines.
 
-## Think of Nushell as a compiled language
+## Think of Nushell as a Compiled Language
 
 An important part of Nushell's design and specifically where it differs from many dynamic languages is that Nushell converts the source you give it into something to run, and then runs the result. It doesn't have an `eval` feature which allows you to continue pulling in new source during runtime. This means that tasks like including files to be part of your project need to be known paths, much like includes in compiled languages like C++ or Rust.
 
@@ -63,7 +63,7 @@ would work, since the string can be evaluated at compile-time:
 
 For more in-depth explanation, check [How Nushell Code Gets Run](how_nushell_code_gets_run.md).
 
-## Variables are immutable by default
+## Variables are Immutable by Default
 
 Another common surprise for folks coming from other languages is that Nushell variables are immutable by default. Coming to Nushell, you'll want to spend some time becoming familiar with working in a more functional style, as this tends to help write code that works best with immutable variables.
 
@@ -71,7 +71,7 @@ Another common surprise for folks coming from other languages is that Nushell va
 
 See [Immutable Variables](variables.html#immutable-variables) and [Choosing between mutable and immutable variables](variables.html#choosing-between-mutable-and-immutable-variables) for more information.
 
-## Nushell's environment is scoped
+## Nushell's Environment is Scoped
 
 Nushell takes multiple design cues from compiled languages. One such cue is that languages should avoid global mutable state. Shells have commonly used global mutation to update the environment, but Nushell steers clear of this approach.
 

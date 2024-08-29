@@ -1,6 +1,6 @@
 # Shells in Shells
 
-## Working in multiple directories
+## Working in Multiple Directories
 
 While it's common to work in one directory, it can be handy to work in multiple places at the same time. For this, Nu offers the concept of "shells". As the name implies, they're a way of running multiple shells in one, allowing you to quickly jump between working directories and more.
 
@@ -45,7 +45,7 @@ We can jump between these shells with the [`n`](/commands/docs/n.md), [`p`](/com
 
 We can see the directory changing, but we're always able to get back to a previous directory we were working on. This allows us to work in multiple directories in the same session.
 
-## Exiting the shell
+## Exiting the Shell
 
 You can leave a shell you have [`enter`](/commands/docs/enter.md)ed using the `dexit` command.
 

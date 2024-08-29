@@ -8,7 +8,7 @@ Many parts of Nushell's interface can have their color customized. All of these 
 4. prompt
 5. LS_COLORS
 
-## `Table borders`
+## Table Borders
 
 Table borders are controlled by the `$env.config.table.mode` setting in `config.nu`. Here is an example:
 
@@ -34,7 +34,7 @@ Here are the current options for `$env.config.table.mode`:
 - `none`
 - `other`
 
-### `Color symbologies`
+### Color Symbologies
 
 ---
 
@@ -45,7 +45,7 @@ Here are the current options for `$env.config.table.mode`:
 - `"#ff0000"` - "#hex" format foreground color red (quotes are required)
 - `{ fg: "#ff0000" bg: "#0000ff" attr: b }` - "full #hex" format foreground red in "#hex" format with a background of blue in "#hex" format with an attribute of bold abbreviated.
 
-### `attributes`
+### Attributes
 
 ---
 
@@ -62,7 +62,7 @@ Here are the current options for `$env.config.table.mode`:
 | n    | nothing             |
 |      | defaults to nothing |
 
-### `normal colors` and `abbreviations`
+### Normal Colors and Abbreviations
 
 | code   | name                   |
 | ------ | ---------------------- |
@@ -195,7 +195,7 @@ Here are the current options for `$env.config.table.mode`:
 | dgrbl  | dark_gray_blink        |
 | dgrst  | dark_gray_strike       |
 
-### `"#hex"` format
+### `"#hex"` Format
 
 ---
 
@@ -205,7 +205,7 @@ Example: The primary `red` color is `"#ff0000"` or `"#FF0000"`. Upper and lower 
 
 This `"#hex"` format allows us to specify 24-bit truecolor tones to different parts of Nushell.
 
-## `full "#hex"` format
+## Full `"#hex"` Format
 
 ---
 
@@ -217,7 +217,7 @@ Example: `{ fg: "#ff0000" bg: "#0000ff" attr: b }`
 - background of blue in "#hex" format
 - attribute of bold abbreviated
 
-## `Primitive values`
+## Primitive Values
 
 ---
 
@@ -256,7 +256,7 @@ This is the current list of primitives. Not all of these are configurable. The c
 | `vardecl`    |                       |              |
 | `variable`   |                       |              |
 
-#### special "primitives" (not really primitives but they exist solely for coloring)
+#### Special "primitives" (not really primitives but they exist solely for coloring)
 
 | primitive                   | default color              | configurable |
 | --------------------------- | -------------------------- | ------------ |
@@ -313,7 +313,7 @@ Here's another small example using multiple color syntaxes with some comments.
 }
 ```
 
-## `Shape` values
+## Shape Values
 
 As mentioned above, `shape` is a term used to indicate the syntax coloring.
 
@@ -357,7 +357,7 @@ Here's a small example of how to apply color to these items. Anything not specif
 }
 ```
 
-## `Prompt` configuration and coloring
+## Prompt Configuration and Coloring
 
 The Nushell prompt is configurable through these environment variables and config items:
 
@@ -392,7 +392,7 @@ config {
 
 Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/modules/prompt/oh-my.nu).
 
-### Transient prompt
+### Transient Prompt
 
 If you want a different prompt displayed for previously entered commands, you can use Nushell's transient prompt feature. This can be useful if your prompt has lots of information that is unnecessary to show for previous lines (e.g. time and Git status), since you can make it so that previous lines show with a shorter prompt.
 
@@ -410,7 +410,7 @@ If you want to go back to the normal left prompt, you'll have to unset `TRANSIEN
 > hide-env TRANSIENT_PROMPT_COMMAND
 ```
 
-## `LS_COLORS` colors for the [`ls`](/commands/docs/ls.md) command
+## `LS_COLORS` Colors for the [`ls`](/commands/docs/ls.md) Command
 
 Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the color of file types when you do a [`ls`](/commands/docs/ls.md). For instance, you can make directories one color, _.md markdown files another color, _.toml files yet another color, etc. There are a variety of ways to color your file types.
 
@@ -512,7 +512,7 @@ let config = {
 
 if you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
 
-### Working on light background terminal
+### Working on Light Background Terminal
 
 Nushell's default config file contains a light theme definition, if you are working on a light background terminal, you can apply the light theme easily.
 
@@ -555,7 +555,7 @@ $env.config = {
 
 ```
 
-## Line editor menus (completion, history, help…)
+## Line Editor Menus (completion, history, help…)
 
 Reedline (Nu’s line editor) style is not using the `color_config` key.
 Instead, each menu has its own style to be configured separately.

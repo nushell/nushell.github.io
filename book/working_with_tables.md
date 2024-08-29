@@ -24,7 +24,7 @@ Nu will try to expands all table's structure by default. You can change this beh
 See [hooks](/book/hooks.md#changing-how-output-is-displayed) for more information.
 :::
 
-## Sorting the data
+## Sorting the Data
 
 We can sort a table by calling the [`sort-by`](/commands/docs/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
 
@@ -45,7 +45,7 @@ We can sort a table by calling the [`sort-by`](/commands/docs/sort-by.md) comman
 
 We can sort a table by any column that can be compared. For example, we could also have sorted the above using the "name", "accessed", or "modified" columns.
 
-## Selecting the data you want
+## Selecting the Data you Want
 
 ::: tip Note
 The following is a basic overview. For a more in-depth discussion of this topic, see the chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
@@ -124,7 +124,7 @@ Let's look at a few other commands for selecting data. You may have wondered why
 ───┴───────────────┴──────┴─────────┴────────────
 ```
 
-## Getting data out of a table
+## Getting Data out of a Table
 
 So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](/commands/docs/get.md) command:
 
@@ -169,7 +169,7 @@ These look very similar! Let's see if we can spell out the difference between th
 The arguments provided to `select` and `get` are [cell-paths](/book/types_of_data.html#cell-paths), a fundamental part of Nu's query language. For a more in-depth discussion of cell-paths and other navigation topics, see the next chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
 :::
 
-## Changing data in a table
+## Changing Data in a Table
 
 In addition to selecting data from a table, we can also update what the table has. We may want to combine tables, add new columns, or edit the contents of a cell. In Nu, rather than editing in place, each of the commands in the section will return a new table in the pipeline.
 
@@ -261,7 +261,7 @@ Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically 
 ───┴───┴───┴───┴───┴───┴───
 ```
 
-### Adding a new column
+### Adding a new Column
 
 We can use the [`insert`](/commands/docs/insert.md) command to add a new column to the table. Let's look at an example:
 
@@ -315,7 +315,7 @@ Changes in Nu are functional changes, meaning that they work on values themselve
 ──────────────┴──────
 ```
 
-### Updating a column
+### Updating a Column
 
 In a similar way to the [`insert`](/commands/docs/insert.md) command, we can also use the [`update`](/commands/docs/update.md) command to change the contents of a column to a new value. To see it in action let's open the same file:
 
@@ -337,7 +337,7 @@ And now, let's update the edition to point at the next edition we hope to suppor
 
 You can also use the [`upsert`](/commands/docs/upsert.md) command to insert or update depending on whether the column already exists.
 
-### Moving columns
+### Moving Columns
 
 You can use [`move`](/commands/docs/move.md) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls.md) after the "size" column, we could do:
 
@@ -354,7 +354,7 @@ You can use [`move`](/commands/docs/move.md) to move columns in the table. For e
 ...
 ```
 
-### Renaming columns
+### Renaming Columns
 
 You can also [`rename`](/commands/docs/rename.md) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls.md) and rename the columns, we can use this example:
 
@@ -371,7 +371,7 @@ You can also [`rename`](/commands/docs/rename.md) columns in a table by passing 
 ...
 ```
 
-### Rejecting/Deleting columns
+### Rejecting/Deleting Columns
 
 You can also [`reject`](/commands/docs/reject.md) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls.md) and delete the columns, we can use this example:
 

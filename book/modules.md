@@ -28,7 +28,7 @@ Only definitions marked with `export` are possible to access from outside the mo
 
 _\*These definitions can also be named `main` (see below)._
 
-## "Inline" modules
+## "Inline" Modules
 
 The simplest (and probably least useful) way to define a module is an "inline" module can be defined like this:
 
@@ -52,7 +52,7 @@ _You can paste the code into a file and run it with `nu`, or type into the REPL.
 
 First, we create a module (put `hello` and `hi` commands into a "bag" called `greetings`), then we import the `hello` command from the module (find a "bag" called `greetings` and take `hello` command from it) with `use`.
 
-## Modules from files
+## Modules from Files
 
 A .nu file can be a module. Just take the contents of the module block from the example above and save it to a file `greetings.nu`. The module name is automatically inferred as the stem of the file ("greetings").
 
@@ -84,7 +84,7 @@ The result should be similar as in the previous section.
 > Using `module` can be useful if you're not interested in any definitions from the module but want to,
 > e.g., re-export the module (`export module greetings.nu`).
 
-## Modules from directories
+## Modules from Directories
 
 Finally, a directory can be imported as a module. The only condition is that it needs to contain a `mod.nu` file (even empty, which is not particularly useful, however). The `mod.nu` file defines the root module. Any submodules (`export module`) or re-exports (`export use`) must be declared inside the `mod.nu` file. We could write our `greetings` module like this:
 
@@ -188,7 +188,7 @@ Importing definitions selectively (`use greetings.nu hello` or `use greetings.nu
 
 Apart from commands (`def`, `def --env`), known externals (`extern`) can also be named `main`.
 
-## Submodules and subcommands
+## Submodules and Subcommands
 
 Submodules are modules inside modules. They are automatically created when you call `use` on a directory: Any .nu files inside the directory are implicitly added as submodules of the main module. There are two more ways to add a submodule to a module:
 
@@ -418,7 +418,7 @@ hi there!
 > generate-prefix  # fails because the command is imported only locally inside the module
 ```
 
-### Dumping files into directory
+### Dumping Files into Directory
 
 A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, doing this directly is currently not possible, but directory modules can still be used.
 

@@ -37,13 +37,13 @@ def greet [name] {
 
 There is no requirement that definitions have to come before the parts of the script that call the definitions, allowing you to put them where you feel comfortable.
 
-## How scripts are processed
+## How Scripts are Processed
 
 In a script, definitions run first. This allows us to call the definitions using the calls in the script.
 
 After the definitions run, we start at the top of the script file and run each group of commands one after another.
 
-## Script lines
+## Script Lines
 
 To better understand how Nushell sees lines of code, let's take a look at an example script:
 
