@@ -1,4 +1,4 @@
-# Working with tables
+# Working with Tables
 
 One of the common ways of seeing data in Nu is through a table. Nu comes with a number of commands for working with tables to make it convenient to find what you're looking for, and for narrowing down the data to just what you need.
 

@@ -1,4 +1,4 @@
-# Shells in shells
+# Shells in Shells
 
 ## Working in multiple directories
 

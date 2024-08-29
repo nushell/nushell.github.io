@@ -1,4 +1,4 @@
-# Nu map from functional languages
+# Nu Map from Functional Languages
 
 The idea behind this table is to help you understand how Nu builtins and plugins relate to functional languages. We've tried to produce a map of relevant Nu commands and what their equivalents are in other languages. Contributions are welcome.
 

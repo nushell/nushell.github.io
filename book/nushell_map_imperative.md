@@ -1,4 +1,4 @@
-# Nu map from imperative languages
+# Nu Map from Imperative Languages
 
 The idea behind this table is to help you understand how Nu built-ins and plugins relate to imperative languages. We've tried to produce a map of programming-relevant Nu commands and what their equivalents are in other languages. Contributions are welcome.
 

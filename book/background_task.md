@@ -1,4 +1,4 @@
-# Background tasks with Nu
+# Background Tasks with Nu
 
 Currently, Nushell doesn't have built-in background task management feature, but you can make it "support" background task with some tools, here are some examples:
 

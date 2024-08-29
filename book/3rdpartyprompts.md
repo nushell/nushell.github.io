@@ -1,4 +1,4 @@
-# How to configure 3rd party prompts
+# How to Configure 3rd Party Prompts
 
 ## nerdfonts
 
