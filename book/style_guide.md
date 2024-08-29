@@ -35,7 +35,7 @@ Incorrect:
 'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
 ```
 
-#### One-line format
+#### One-line Format
 
 One-line format is a format for writing all commands in one line.
 
@@ -100,7 +100,7 @@ Incorrect:
 (1 + 2 ) * 3
 ```
 
-#### Multi-line format
+#### Multi-line Format
 
 Multi-line format is a format for writing all commands in several lines. It inherits all rules from one-line format
 and modifies them slightly.
@@ -180,7 +180,7 @@ let selectedProfile = (
 })
 ```
 
-## Options and parameters of custom commands
+## Options and Parameters of Custom Commands
 
 - **It's recommended to** keep count of all positional parameters less than or equal to 2, for remaining inputs use options. Assume that command can expect source and destination parameter, like `mv`: source and target file or directory.
 - **It's recommended to** use positional parameters unless they can't be used due to rules listed here or technical restrictions.

@@ -29,7 +29,7 @@ To send environment variables to external applications, the values will need to 
 
 The environment is initially created from the Nu [configuration files](configuration.md) and from the environment that Nu is run inside of.
 
-## Setting environment variables
+## Setting Environment Variables
 
 There are several ways to set an environment variable:
 
@@ -58,20 +58,20 @@ If you have more than one environment variable you'd like to set, you can use [`
 > load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
-### One-shot environment variables
+### One-shot Environment Variables
 
 These are defined to be active only temporarily for a duration of executing a code block.
 See [Single-use environment variables](environment.md#single-use-environment-variables) for details.
 
-### Calling a command defined with [`def --env`](/commands/docs/def.md)
+### Calling a Command Defined with [`def --env`](/commands/docs/def.md)
 
 See [Defining environment from custom commands](environment.md#defining-environment-from-custom-commands) for details.
 
-### Using module's exports
+### Using Module's Exports
 
 See [Modules](modules.md) for details.
 
-## Reading environment variables
+## Reading Environment Variables
 
 Individual environment variables are fields of a record that is stored in the `$env` variable and can be read with `$env.VARIABLE`:
 
@@ -135,13 +135,13 @@ true
 true
 ```
 
-## Changing directory
+## Changing Directory
 
 Common task in a shell is to change directory with the [`cd`](/commands/docs/cd.md) command.
 In Nushell, calling [`cd`](/commands/docs/cd.md) is equivalent to setting the `PWD` environment variable.
 Therefore, it follows the same rules as other environment variables (for example, scoping).
 
-## Single-use environment variables
+## Single-use Environment Variables
 
 A common shorthand to set an environment variable once is available, inspired by Bash and others:
 
@@ -159,7 +159,7 @@ BAR
 
 The [`with-env`](/commands/docs/with-env.md) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the [block](types_of_data.md#blocks) will run with this new environment variable set.
 
-## Permanent environment variables
+## Permanent Environment Variables
 
 You can also set environment variables at startup so they are available for the duration of Nushell running.
 To do this, set an environment variable inside [the Nu configuration file](configuration.md).
@@ -170,7 +170,7 @@ For example:
 $env.FOO = 'BAR'
 ```
 
-## Defining environment from custom commands
+## Defining Environment from Custom Commands
 
 Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
 However, a command defined as [`def --env`](/commands/docs/def.md) instead of [`def`](/commands/docs/def.md) (it applies also to [`export def`](/commands/docs/export_def.md), see [Modules](modules.md)) will preserve the environment on the caller's side:
@@ -186,7 +186,7 @@ However, a command defined as [`def --env`](/commands/docs/def.md) instead of [`
 BAR
 ```
 
-## Environment variable conversions
+## Environment Variable Conversions
 
 You can set the `ENV_CONVERSIONS` environment variable to convert other environment variables between a string and a value.
 For example, the [default environment config](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_env.nu) includes conversion of PATH (and Path used on Windows) environment variables from a string to a list.
@@ -238,7 +238,7 @@ You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a
 
 _(Important! The environment conversion string -> value happens **after** the env.nu and config.nu are evaluated. All environment variables in env.nu and config.nu are still strings unless you set them manually to some other values.)_
 
-## Removing environment variables
+## Removing Environment Variables
 
 You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide-env.md):
 

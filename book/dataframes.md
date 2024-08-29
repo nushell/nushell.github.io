@@ -38,7 +38,7 @@ working with data easier and more reliable. For this reason, let's start this
 page by presenting benchmarks on common operations that are done when
 processing data.
 
-## Benchmark comparisons
+## Benchmark Comparisons
 
 For this little benchmark exercise we will be comparing native Nushell
 commands, dataframe Nushell commands and [Python
@@ -51,7 +51,7 @@ sections of this page.
 >
 > All examples were run on Nushell version 0.97 using `nu_plugin_polars 0.97`
 
-### File information
+### File Information
 
 The file that we will be using for the benchmarks is the
 [New Zealand business demography](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) dataset.
@@ -99,7 +99,7 @@ We can have a look at the first lines of the file using [`first`](/commands/docs
 ╰───────────┴─────╯
 ```
 
-### Group-by comparison
+### Group-by Comparison
 
 To output more statistically correct timings, let's load and use the `std bench` command.
 
@@ -283,7 +283,7 @@ If you want to see all the dataframe commands that are available you
 can use `scope commands | where category =~ dataframe`
 :::
 
-## Basic aggregations
+## Basic Aggregations
 
 Let's start with basic aggregations on the dataframe. Let's sum all the columns
 that exist in `df` by using the `aggregate` command
@@ -660,7 +660,7 @@ and we can start piping things in order to create new columns and dataframes
 
 Nushell's piping system can help you create very interesting workflows.
 
-## Series and masks
+## Series and Masks
 
 Series have another key use in when working with `DataFrames`, and it is the fact
 that we can build boolean masks out of them. Let's start by creating a simple
@@ -782,7 +782,7 @@ the value is equal to `a`
 ╰───┴────────╯
 ```
 
-## Series as indices
+## Series as Indices
 
 Series can be also used as a way of filtering a dataframe by using them as a
 list of indices. For example, let's say that we want to get rows 1, 4, and 6
@@ -867,7 +867,7 @@ indices. Have a look at the next command
 ╰───┴───────╯
 ```
 
-## Unique values
+## Unique Values
 
 Another operation that can be done with `Series` is to search for unique values
 in a list or column. Lets use again the first dataframe we created to test
@@ -1126,7 +1126,7 @@ Output
 As you can see lazy frames are a powerful construct that will let you query
 data using a flexible syntax, resulting in blazing fast results.
 
-## Dataframe commands
+## Dataframe Commands
 
 So far we have seen quite a few operations that can be done using `DataFrame`s
 commands. However, the commands we have used so far are not all the commands

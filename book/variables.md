@@ -159,7 +159,7 @@ generate khot {|weather_station|
 }
 ```
 
-### Performance considerations
+### Performance Considerations
 
 Using [filter commands](/commands/categories/filters.html) with immutable variables is often far more performant than mutable variables with traditional flow-control statements such as `for` and `while`. For example:
 

@@ -6,11 +6,11 @@ The main Nushell binary is named `nu` (or `nu.exe` on Windows). After installati
 
 @[code](@snippets/installation/run_nu.sh)
 
-## Pre-built binaries
+## Pre-built Binaries
 
 Nu binaries are published for Linux, macOS, and Windows [with each GitHub release](https://github.com/nushell/nushell/releases). Just download, extract the binaries, then copy them to a location on your PATH.
 
-## Package managers
+## Package Managers
 
 Nu is available via several package managers:
 
@@ -28,11 +28,11 @@ Cross Platform installation:
 
 - [npm](https://www.npmjs.com/) (`npm install -g nushell` Note that nu plugins are not included if you install in this way)
 
-## Build from source
+## Build from Source
 
 You can also build Nu from source. First, you will need to set up the Rust toolchain and its dependencies.
 
-### Installing a compiler suite
+### Installing a Compiler Suite
 
 For Rust to work properly, you'll need to have a compatible compiler suite installed on your system. These are the recommended compiler suites:
 

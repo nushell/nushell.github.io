@@ -7,7 +7,7 @@ and screen paint.
 
 ## Configuration
 
-### Editing mode
+### Editing Mode
 
 Reedline allows you to edit text using two modes: vi and emacs. If not
 specified, the default edit mode is emacs mode. In order to select your
@@ -24,7 +24,7 @@ For example:
   }
 ```
 
-#### Default keybindings
+#### Default Keybindings
 
 Each edit mode comes with the usual keybinding for vi and emacs text editing.
 
@@ -118,7 +118,7 @@ Vi Normal actions
 | D   | Delete to end                   |
 | A   | Append to end                   |
 
-### Command history
+### Command History
 
 As mentioned before, Reedline manages and stores all the commands that are
 edited and sent to Nushell. To configure the max number of records that
@@ -136,7 +136,7 @@ Reedline should store you will need to adjust this value in your config file:
   }
 ```
 
-### Customizing your prompt
+### Customizing your Prompt
 
 Reedline prompt is also highly customizable. In order to construct your perfect
 prompt, you could define the next environment variables in your config file:
@@ -332,7 +332,7 @@ sends, and for that reason it is important to explain them a bit more. A `send`
 is all the `Reedline` events that can be processed by the engine and an `edit`
 are all the `EditCommands` that can be processed by the engine.
 
-### Send type
+### Send Type
 
 To find all the available options for `send` you can use
 
@@ -386,7 +386,7 @@ records in the keybinding's event. An `Edit([])` event is the same as the
 `edit` type that was mentioned. And the `UntilFound([])` event is the same as
 the `until` type mentioned before.
 
-### Edit type
+### Edit Type
 
 The `edit` type is the simplification of the `Edit([])` event. The `event` type
 simplifies defining complex editing events for the keybindings. To list the
@@ -432,7 +432,7 @@ or say you want to move right until the first `S`
 As you can see, these two types will allow you to construct any type of
 keybinding that you require
 
-### Until type
+### Until Type
 
 To complete this keybinding tour we need to discuss the `until` type for event.
 As you have seen so far, you can send a single event or a list of events. And
@@ -512,7 +512,7 @@ is always successful
   }
 ```
 
-### Removing a default keybinding
+### Removing a Default Keybinding
 
 If you want to remove a certain default keybinding without replacing it with a different action, you can set `event: null`.
 
@@ -536,7 +536,7 @@ e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 
 ```
 
-### Troubleshooting keybinding problems
+### Troubleshooting Keybinding Problems
 
 Your terminal environment may not always propagate your key combinations on to nushell the way you expect it to.
 You can use the command [`keybindings listen`](/commands/docs/keybindings_listen.md) to figure out if certain keypresses are actually received by nushell, and how.
@@ -547,7 +547,7 @@ Thanks to Reedline, Nushell has menus that can help you with your day to day
 shell scripting. Next we present the default menus that are always available
 when using Nushell
 
-### Help menu
+### Help Menu
 
 The help menu is there to ease your transition into Nushell. Say you are
 putting together an amazing pipeline and then you forgot the internal command
@@ -592,7 +592,7 @@ The help menu can be configured by modifying the next parameters
     ...
 ```
 
-### Completion menu
+### Completion Menu
 
 The completion menu is a context sensitive menu that will present suggestions
 based on the status of the prompt. These suggestions can range from path
@@ -634,7 +634,7 @@ modifying these values from the config object:
 By modifying these parameters you can customize the layout of your menu to your
 liking.
 
-### History menu
+### History Menu
 
 The history menu is a handy way to access the editor history. When activating
 the menu (default `Ctrl+r`) the command history is presented in reverse
@@ -674,7 +674,7 @@ append them to the current page. If it isn't possible to present all the pulled
 records, the menu will create a new page. The pages can be navigated by
 pressing `Ctrl+z` to go to previous page or `Ctrl+x` to go to next page.
 
-#### Searching the history
+#### Searching the History
 
 To search in your history you can start typing key words for the command you
 are looking for. Once the menu is activated, anything that you type will be
@@ -693,7 +693,7 @@ words will be replaced
 let a = (ls | where size > 10MiB)
 ```
 
-#### Menu quick selection
+#### Menu Quick Selection
 
 Another nice feature of the menu is the ability to quick select something from
 it. Say you have activated your menu and it looks like this
@@ -714,7 +714,7 @@ History search and quick selection can be used together. You can activate the
 menu, do a quick search, and then quick select using the quick selection
 character.
 
-### User defined menus
+### User Defined Menus
 
 In case you find that the default menus are not enough for you and you have
 the need to create your own menu, Nushell can help you with that.
@@ -810,7 +810,7 @@ require and to replace that value in the location you need it. The only thing
 extra that you need to play with your menu is to define a keybinding that will
 activate your brand new menu.
 
-### Menu keybindings
+### Menu Keybindings
 
 In case you want to change the default way both menus are activated, you can
 change that by defining new keybindings. For example, the next two keybindings

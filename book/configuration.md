@@ -88,7 +88,7 @@ These are some important variables to look at for Nushell-specific settings:
 - `PROMPT_INDICATOR_VI_NORMAL = "〉 "`
 - `PROMPT_MULTILINE_INDICATOR = "::: "`
 
-### Configurations with built-in commands
+### Configurations with Built-in Commands
 
 The ([`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/docs/config_env.md)) commands open their respective configurations for quick editing in your preferred text editor or IDE. Nu determines your editor from the following environment variables in order:
 
@@ -96,7 +96,7 @@ The ([`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/doc
 2. `$env.EDITOR`
 3. `$env.VISUAL`
 
-### Color Config section
+### Color Config Section
 
 You can learn more about setting up colors and theming in the [associated chapter](coloring_and_theming.md).
 
@@ -106,7 +106,7 @@ To remove the welcome message, you need to edit your `config.nu` by typing `conf
 
 @[code](@snippets/installation/remove_welcome_message.nu)
 
-## Configuring Nu as a login shell
+## Configuring Nu as a Login Shell
 
 To use Nu as a login shell, you'll need to configure the `$env` variable. This sets up the environment for external programs.
 

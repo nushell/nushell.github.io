@@ -22,7 +22,7 @@ Once we do, it's as if we typed `ls -l`. This also allows us to pass in flags or
 
 And get the equivalent to having typed `ls -l -a`.
 
-## List all loaded aliases
+## List All Loaded Aliases
 
 Your useable aliases can be seen in `scope aliases` and `help aliases`.
 
@@ -41,7 +41,7 @@ alias ll = ls -l
 # some other config and script loading
 ```
 
-## Piping in aliases
+## Piping in Aliases
 
 Note that `alias uuidgen = uuidgen | tr A-F a-f` (to make uuidgen on mac behave like linux) won't work.
 The solution is to define a command without parameters that calls the system program `uuidgen` via `^`.
@@ -60,7 +60,7 @@ def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 
 displaying all listed files and folders in a grid.
 
-## Replacing existing commands using aliases
+## Replacing Existing Commands Using Aliases
 
 > Caution! When replacing commands it is best to "back up" the command first and avoid recursion error.
 
@@ -109,4 +109,3 @@ def ls [path?] {
   }
 }
 ```
-

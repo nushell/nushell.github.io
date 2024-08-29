@@ -136,7 +136,7 @@ There are three places you can use the spread operator:
 - [In record literals](#in-record-literals)
 - [In command calls](#in-command-calls)
 
-### In list literals
+### In List literals
 
 Suppose you have multiple lists you want to concatenate together, but you also want to intersperse
 some individual values. This can be done with `append` and `prepend`, but the spread
@@ -196,7 +196,7 @@ the next expression:
 
 This is mainly so that `...` won't be confused for the spread operator in commands such as `mv ... $dir`.
 
-### In record literals
+### In Record literals
 
 Let's say you have a record with some configuration information and you want to add more fields to
 this record:
@@ -237,7 +237,7 @@ Similarly to lists, inside record literals, the spread operator can only be used
 subexpressions (`...(foo)`), and record literals (`...{foo:bar}`). Here too, there needs to be no
 whitespace between the `...` and the next expression for it to be recognized as the spread operator.
 
-### In command calls
+### In Command calls
 
 You can also spread arguments to a command, provided that it either has a rest parameter or is an
 external command.

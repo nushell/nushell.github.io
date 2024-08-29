@@ -34,7 +34,7 @@ The third line is demonstration of the completion. Type the name of the custom c
 When the completion menu is displayed, the prompt changes to include the `|` character by default. This can be changed using `$env.config.menus.marker`.
 :::
 
-## Modules and custom completions
+## Modules and Custom Completions
 
 Since completion commands aren't meant to be called directly, it's common to define them in modules.
 
@@ -58,7 +58,7 @@ In this module, only the the custom command `my-command` is exported. The `anima
 Completers are attached to custom commands using `@` at parse time. This means that, in order for a change to the completion command to take effect, the public custom command must be reparsed as well. Importing a module satisfies both of these requirements at the same time with a single `use` statement.
 :::
 
-## Context aware custom completions
+## Context Aware Custom Completions
 
 It is possible to pass the context to the completion command. This is useful in situations where it is necessary to know previous arguments or flags to generate accurate completions.
 
@@ -109,7 +109,7 @@ def completer [context:string, position:int] {}
 
 :::
 
-## Custom completion and [`extern`](/commands/docs/extern.md)
+## Custom Completion and [`extern`](/commands/docs/extern.md)
 
 A powerful combination is adding custom completions to [known `extern` commands](externs.md). These work the same way as adding a custom completion to a custom command: by creating the custom completion and then attaching it with a `@` to the type of one of the positional or flag arguments of the `extern`.
 
@@ -125,7 +125,7 @@ export extern "git push" [
 
 Custom completions will serve the same role in this example as in the previous examples. The examples above call into two different custom completions, based on the position the user is currently in.
 
-## Custom descriptions
+## Custom Descriptions
 
 As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` and `description` field.
 
@@ -158,7 +158,7 @@ def my_commits [] {
 >
 > only the value, i.e. "5c2464" or "f3a377", will be used in the command arguments!
 
-## External completions
+## External Completions
 
 External completers can also be integrated, instead of relying solely on Nushell ones.
 

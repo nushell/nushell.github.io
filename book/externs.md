@@ -47,7 +47,7 @@ This implementation:
 A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
 :::
 
-## Format specifiers
+## Format Specifiers
 
 Positional parameters can be made optional with a `?` (as seen above). The remaining (`rest`) parameters can be matched with `...` before the parameter name. For example:
 

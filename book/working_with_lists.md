@@ -39,7 +39,7 @@ We can also use [`update`](/commands/docs/update.md) to replace the 2nd element 
 # [1, 10, 3, 4]
 ```
 
-## Removing or adding items from list
+## Removing or Adding Items from List
 
 In addition to [`insert`](/commands/docs/insert.md) and [`update`](/commands/docs/update.md), we also have [`prepend`](/commands/docs/prepend.md) and [`append`](/commands/docs/append.md). These let you insert to the beginning of a list or at the end of the list, respectively.
 
@@ -100,7 +100,7 @@ To append one or more lists together, optionally with values interspersed in bet
 ╰───┴───╯
 ```
 
-## Iterating over lists
+## Iterating over Lists
 
 To iterate over the items in a list, use the [`each`](/commands/docs/each.md) command with a [block](types_of_data.html#blocks)
 of Nu code that specifies what to do to each item. The block parameter (e.g. `|elt|` in `{ |elt| print $elt }`) is the current list
@@ -150,7 +150,7 @@ $"product = ($scores | reduce --fold 1 { |elt, acc| $acc * $elt })" # product = 
 $scores | enumerate | reduce --fold 0 { |elt, acc| $acc + $elt.index * $elt.item } # 0*3 + 1*8 + 2*4 = 16
 ```
 
-## Accessing the list
+## Accessing the List
 
 ::: tip Note
 The following is a basic overview. For a more in-depth discussion of this topic, see the chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
@@ -236,7 +236,7 @@ $scores | all {|elt| $elt > 7 } # false
 $scores | all {|elt| $elt mod 2 == 0 } # false
 ```
 
-## Converting the list
+## Converting the List
 
 The [`flatten`](/commands/docs/flatten.md) command creates a new list from an existing list
 by adding items in nested lists to the top-level list.

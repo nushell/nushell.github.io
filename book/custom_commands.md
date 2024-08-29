@@ -47,13 +47,13 @@ greet nushell
 returns `hello nushell`
 :::
 
-## Command names
+## Command Names
 
 In Nushell, a command name is a string of characters. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `my command`, and `😊`.
 
 _Note: It's common practice in Nushell to separate the words of the command with `-` for better readability._ For example `get-size` instead of `getsize` or `get_size`.
 
-## Sub-commands
+## Subcommands
 
 You can also define subcommands to commands using a space. For example, if we wanted to add a new subcommand to [`str`](/commands/docs/str.md), we can create it by naming our subcommand to start with "str ". For example:
 
@@ -77,7 +77,7 @@ def "custom command" [] {
 }
 ```
 
-## Parameter types
+## Parameter Types
 
 When defining custom commands, you can name and optionally set the type for each parameter. For example, you can write the above as:
 
@@ -135,7 +135,7 @@ The currently accepted types are (as of version 0.86.0):
 - `string`
 - `table`
 
-## Parameters with a default value
+## Parameters with a Default Value
 
 To make a parameter optional and directly provide a default value for it you can provide a default value in the command definition.
 
@@ -164,7 +164,7 @@ def congratulate [age: int = 18] {
 
 If you want to check if an optional parameter is present or not and not just rely on a default value use [optional positional parameters](#optional-positional-parameters) instead.
 
-## Optional positional parameters
+## Optional Positional Parameters
 
 By default, positional parameters are required. If a positional parameter is not passed, we will encounter an error:
 
@@ -367,7 +367,7 @@ To pass a list to a rest parameter, you can use the [spread operator](/book/oper
 > greet moon ...$planets
 ```
 
-## Documenting your command
+## Documenting Your Command
 
 In order to best help users of your custom commands, you can also document them with additional descriptions for the commands and parameters.
 

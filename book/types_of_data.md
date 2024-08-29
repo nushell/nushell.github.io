@@ -13,7 +13,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 int
 ```
 
-## Types at a glance
+## Types at a Glance
 
 | Type                                  | Example                                                               |
 | ------------------------------------- | --------------------------------------------------------------------- |
@@ -284,7 +284,7 @@ Simple example - Confirm that a JPEG file starts with the proper identifier:
 true
 ```
 
-## Structured data types
+## Structured Data Types
 
 Nushell includes a collection of structured data types that can contain the primitive types above. For example, instead of a single `float`, structured data gives us a way to represent multiple `float` values, such as a `list` of temperature readings, in the same value. Nushell supports the following structured data types:
 
@@ -361,7 +361,7 @@ Internally, tables are simply **lists of records**. This means that any command 
 
 :::
 
-## Other data types
+## Other Data Types
 
 ### Any
 
@@ -398,7 +398,7 @@ The `{ print "It's true" }` portion above is a block.
 | **_Literal Syntax:_** | `null`                                                                            |
 | **_See also:_**       | [Language Reference - Nothing](/lang-guide/chapters/types/basic_types/nothing.md) |
 
-#### Simple example
+#### Simple Example
 
 Using the optional operator `?` returns `null` if the requested cell-path doesn't exist:
 

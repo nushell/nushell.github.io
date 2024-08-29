@@ -5,7 +5,7 @@ Currently, Nushell doesn't have built-in background task management feature, but
 1. Using a third-party task management tools, like [pueue](https://github.com/Nukesor/pueue)
 2. Using a terminal multiplexer, like [tmux](https://github.com/tmux/tmux/wiki) or [zellij](https://zellij.dev/)
 
-## Using nu with pueue
+## Using Nu With Pueue
 
 The module borrows the power of [pueue](https://github.com/Nukesor/pueue), it is possible to schedule background tasks to pueue, and manage those tasks (such as viewing logs, killing tasks, or getting the running status of all tasks, creating groups, pausing tasks etc etc)
 
@@ -27,7 +27,7 @@ Cons: It spawns a new Nushell interpreter to execute every single task, so it do
 It only inherits environment variables whose value can be converted to a string.
 Therefore, if you want to use custom commands or variables, you have to [`use`](/commands/docs/use.md) or [`def`](/commands/docs/def.md) them within the given block.
 
-## Using nu with terminal multiplexer
+## Using Nu With Terminal Multiplexer
 
 You can choose and install a terminal multiplexer and use it.
 

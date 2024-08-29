@@ -44,7 +44,7 @@ You can find an example configuration in [`default-config.nu`](https://github.co
 
 ## Examples
 
-### Peeking a value
+### Peeking a Value
 
 ```nu
 $nu | explore --peek
@@ -52,7 +52,7 @@ $nu | explore --peek
 
 ![explore-peek-gif](https://user-images.githubusercontent.com/20165848/207854897-35cb7b1d-7f7d-4ae2-9ec8-df19ac04ac99.gif)
 
-### `:try` command
+### `:try` Command
 
 There's an interactive environment which you can use to navigate through data using `nu`.
 

@@ -20,7 +20,7 @@ Without the pipeline, Nushell will not do any redirection, allowing it to print 
 
 Another common stream that external applications often use to print error messages is stderr. By default, Nushell does not do any redirection of stderr, which means that by default it will print to the screen.
 
-## Exit code
+## Exit Code
 
 Finally, external commands have an "exit code". These codes help give a hint to the caller whether the command ran successfully.
 
@@ -66,7 +66,7 @@ The log level for output can be set with the `NU_LOG_LEVEL` environment variable
 NU_LOG_LEVEL=DEBUG nu std_log.nu
 ```
 
-## File redirections
+## File Redirections
 
 If you want to redirect stdout of an external command to a file, you can use `out>` followed by a file path. Similarly, you can use `err>` to redirect stderr:
 
@@ -100,7 +100,7 @@ let text = "hello\nworld"
 ```
 Pipes and additional file redirections inside the expression will override any file redirections applied from the outside.
 
-## Pipe redirections
+## Pipe Redirections
 
 If a regular pipe `|` comes after an external command, it redirects the stdout of the external command as input to the next command. To instead redirect the stderr of the external command, you can use the stderr pipe, `err>|` or `e>|`:
 
@@ -119,7 +119,7 @@ Unlike file redirections, pipe redirections do not apply to all commands inside 
 (cmd1; cmd2) o+e>| cmd3
 ```
 
-## Raw streams
+## Raw Streams
 
 Both stdout and stderr are represented as "raw streams" inside of Nushell. These are streams of bytes rather than structured data, which are what internal Nushell commands use.
 
