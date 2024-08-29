@@ -1,4 +1,4 @@
-# Working with strings
+# Working with Strings
 
 As with most languages, strings are a collection of 0 or more characters that represent text. This can include file names, file paths, names of columns,
 and much more. Strings are so common that Nushell offers multiple string formats to match your use-case:

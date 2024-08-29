@@ -1,4 +1,4 @@
-# Best practices
+# Best Practices
 
 This page is a working document collecting syntax guidelines and best practices we have discovered so far.
 The goal of this document is to eventually land on a canonical Nushell code style, but as for now it is still work in

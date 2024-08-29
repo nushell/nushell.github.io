@@ -1,4 +1,4 @@
-# Creating your own errors
+# Creating Your Own Errors
 
 Using the [metadata](metadata.md) information, you can create your own custom error messages. Error messages are built of multiple parts:
 

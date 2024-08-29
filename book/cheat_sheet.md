@@ -1,4 +1,4 @@
-# Nushell cheat sheet
+# Nushell Cheat Sheet
 
 ## Data types
 

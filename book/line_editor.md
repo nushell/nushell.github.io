@@ -1,4 +1,4 @@
-# Reedline, Nu's line editor
+# Reedline, Nu's Line Editor
 
 Nushell's line editor [Reedline](https://github.com/nushell/reedline) is a
 cross-platform line reader designed to be modular and flexible. The engine is

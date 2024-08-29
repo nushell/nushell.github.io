@@ -1,4 +1,4 @@
-# Working with lists
+# Working with Lists
 
 :::tip
 Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where.md) can be used with lists:

@@ -1,4 +1,4 @@
-# Default shell
+# Default Shell
 
 ## Setting Nu as default shell on your terminal
 

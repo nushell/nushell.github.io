@@ -1,4 +1,4 @@
-# Custom commands
+# Custom Commands
 
 Nu's ability to compose long pipelines allows you a lot of control over your data and system, but it comes at the price of a lot of typing. Ideally, you'd be able to save your well-crafted pipelines to use again and again.
 
