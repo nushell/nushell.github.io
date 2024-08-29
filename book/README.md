@@ -15,7 +15,8 @@ Nu takes cues from a lot of familiar territory: traditional shells like bash, ob
 The book is split into chapters which are further broken down into sections.
 You can click on the chapter headers to get more information about it.
 
-- [Getting Started](getting_started.md) teaches you how to install Nushell and shows you the ropes. It also explains some of the design principles where Nushell differs from typical shells, such as bash.
+- [Installation](installation.md), of course, helps you get Nushell onto your system.
+- [Getting Started](getting_started.md) shows you the ropes. It also explains some of the design principles where Nushell differs from typical shells, such as Bash.
 - [Nu Fundamentals](nu_fundamentals.md) explains basic concepts of the Nushell language.
 - [Programming in Nu](programming_in_nu.md) dives more deeply into the language features and shows several ways how to organize and structure your code.
 - [Nu as a Shell](nu_as_a_shell.md) focuses on the shell features, most notably the configuration and environment.

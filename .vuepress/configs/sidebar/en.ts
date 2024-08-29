@@ -9,12 +9,16 @@ export const sidebarEn: SidebarConfig = {
       collapsible: false,
     },
     {
+      text: 'Installation',
+      link: '/book/installation.md',
+      collapsible: false,
+      children: ['/book/default_shell.md'],
+    },
+    {
       text: 'Getting Started',
       link: '/book/getting_started.md',
       collapsible: false,
       children: [
-        '/book/installation.md',
-        '/book/default_shell.md',
         '/book/quick_tour.md',
         '/book/moving_around.md',
         '/book/thinking_in_nu.md',
