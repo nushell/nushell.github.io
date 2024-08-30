@@ -35,7 +35,7 @@ These commands work with strings explicitly
 In addition to the above commands, most other `into <type>` commands take strings
 as inputs.
 
-## Common operators that work with `sting`
+## Common operators that work with `string`
 
 - `+` : Concatenate two strings
 - `+=` : Mutates a string variable by concatenating its right side value.
