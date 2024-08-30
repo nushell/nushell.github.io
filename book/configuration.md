@@ -29,25 +29,33 @@ The default config files aren't required. If you prefer to start with an empty `
 :::
 
 Control which directory Nushell reads config files from with the `XDG_CONFIG_HOME` environment variable. When you set it to
-an absolute path, Nushell will read config files from `$"($env.XDG_CONFIG_HOME)/nushell"`.
+an absolute path, Nushell will read config files from `$"($env.XDG_CONFIG_HOME)/nushell"`. For example, if you set it to
+`C:\Users\bob\.config`, Nushell will read config files from `C:\Users\bob\.config\nushell\`.
 
 ::: warning
-`XDG_CONFIG_HOME` must be set **before** starting Nushell. Do not set it in `env.nu`.
+`XDG_CONFIG_HOME` must be set **before** starting Nushell. Setting it in `env.nu` or `config.nu` won't change where Nushell
+looks for configuration files.
 :::
 
-Here's an example for reading config files from `~/.config/nushell` rather than the default directory for Windows, which is `C:\Users\username\AppData\Roaming\nushell`.
+On Windows, you can persistently set the `XDG_CONFIG_HOME` environment variable through the Control Panel. To get there, just
+search for "environment variable" in the Start menu.
 
-```nu
-> $env.XDG_CONFIG_HOME = "C:\Users\username\.config"
-> nu
-> $nu.default-config-dir
-C:\Users\username\.config\nushell
+On other platforms, if Nushell isn't your login shell, then you can set `XDG_CONFIG_HOME` before launching Nushell. For example, if you
+use MacOS and your login shell is Zsh, you could add the following to your `.zshrc`:
+
+```zsh
+export XDG_CONFIG_HOME="/Users/bob/.config"
 ```
 
+If Nushell is your login shell, then ways to set `XDG_CONFIG_HOME` will depend on your OS.
+Some Linux distros will let you set environment variables in `/etc/profile` or `/etc/profile.d`.
+On modern Linux distros, you can also set it through PAM in `/etc/environment`.
+
 ::: warning
-[`XDG_CONFIG_HOME`](https://xdgbasedirectoryspecification.com) is not a Nushell-specific environment variable and should not be set to the directory that contains Nushell config files.
-It should be the directory _above_ the `nushell` directory. If you set it to `/Users/username/dotfiles/nushell`, Nushell will look for
-config files in `/Users/username/dotfiles/nushell/nushell` instead. In this case, you would want to set it to `/Users/username/dotfiles`.
+[`XDG_CONFIG_HOME`](https://xdgbasedirectoryspecification.com) is not a Nushell-specific environment variable and should not be set to the
+directory that contains Nushell config files. It should be the directory _above_ the `nushell` directory. If you set it to
+`/Users/username/dotfiles/nushell`, Nushell will look for config files in `/Users/username/dotfiles/nushell/nushell` instead.
+In this case, you would want to set it to `/Users/username/dotfiles`.
 :::
 
 ## Configuring `$env.config`
@@ -180,7 +188,7 @@ $env.PATH = (
   | append ($env.CARGO_HOME | path join bin)
   | append ($env.HOME | path join .local bin)
   | uniq # filter so the paths are unique
-) 
+)
 ```
 
 This will add `/usr/local/bin`, the `bin` directory of CARGO_HOME, the `.local/bin` of HOME to PATH. It will also remove duplicates from PATH.
