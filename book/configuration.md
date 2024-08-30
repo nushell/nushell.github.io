@@ -33,7 +33,8 @@ an absolute path, Nushell will read config files from `$"($env.XDG_CONFIG_HOME)/
 `C:\Users\bob\.config`, Nushell will read config files from `C:\Users\bob\.config\nushell\`.
 
 ::: warning
-`XDG_CONFIG_HOME` must be set **before** starting Nushell. If set in `env.nu`,.
+`XDG_CONFIG_HOME` must be set **before** starting Nushell. Setting it in `env.nu` or `config.nu` won't change where Nushell
+looks for configuration files.
 :::
 
 On Windows, you can persistently set the `XDG_CONFIG_HOME` environment variable through the Control Panel. To get there, just
