@@ -265,12 +265,14 @@ Closures are a useful way to represent code that can be executed on each row of 
 
 ### Binary data
 
-|                       |                                                                                                |
-| --------------------- | ---------------------------------------------------------------------------------------------- |
-| **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride. |
-| **_Annotation:_**     | `range`                                                                                        |
-| **_Literal Syntax:_** | `<start_value>..<end_value> or `<start_value>..<second_value>..<end_value>. E.g., `1..10`.     |
-| **_See also:_**       | [Language Guide - Binary](/lang-guide/chapters/types/basic_types/binary.md)                    |
+|                       |                                                                             |
+| --------------------- | --------------------------------------------------------------------------- |
+| **_Description:_**    | Represents binary data                                                      |
+| **_Annotation:_**     | `binary`                                                                    |
+| **_Literal Syntax:_** | `0x[ffffffff]` - hex-based binary representation                            |
+|                       | `0o[1234567]` - octal-based binary representation                           |
+|                       | `0b[10101010101]` - binary-based binary representation                      |
+| **_See also:_**       | [Language Guide - Binary](/lang-guide/chapters/types/basic_types/binary.md) |
 
 Binary data, like the data from an image file, is a group of raw bytes.
 
