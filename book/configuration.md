@@ -50,9 +50,10 @@ If Nushell is your login shell, then ways to set `XDG_CONFIG_HOME` will depend o
 environment variables in `/etc/environment`, `/etc/profile`, or `/etc/profile.d`.
 
 ::: warning
-[`XDG_CONFIG_HOME`](https://xdgbasedirectoryspecification.com) is not a Nushell-specific environment variable and should not be set to the directory that contains Nushell config files.
-It should be the directory _above_ the `nushell` directory. If you set it to `/Users/username/dotfiles/nushell`, Nushell will look for
-config files in `/Users/username/dotfiles/nushell/nushell` instead. In this case, you would want to set it to `/Users/username/dotfiles`.
+[`XDG_CONFIG_HOME`](https://xdgbasedirectoryspecification.com) is not a Nushell-specific environment variable and should not be set to the
+directory that contains Nushell config files. It should be the directory _above_ the `nushell` directory. If you set it to
+`/Users/username/dotfiles/nushell`, Nushell will look for config files in `/Users/username/dotfiles/nushell/nushell` instead.
+In this case, you would want to set it to `/Users/username/dotfiles`.
 :::
 
 ## Configuring `$env.config`
