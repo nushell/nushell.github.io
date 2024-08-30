@@ -42,12 +42,14 @@ search for "environment variable" in the Start menu.
 
 On other platforms, if Nushell isn't your login shell, then you can set `XDG_CONFIG_HOME` before launching Nushell. For example, if you
 use MacOS and your login shell is Zsh, you could add the following to your `.zshrc`:
+
 ```zsh
 export XDG_CONFIG_HOME="/Users/bob/.config"
 ```
 
-If Nushell is your login shell, then ways to set `XDG_CONFIG_HOME` will depend on your OS. Some Linux distros will let you set
-environment variables in `/etc/environment`, `/etc/profile`, or `/etc/profile.d`.
+If Nushell is your login shell, then ways to set `XDG_CONFIG_HOME` will depend on your OS.
+Some Linux distros will let you set environment variables in `/etc/profile` or `/etc/profile.d`.
+On modern Linux distros, you can also set it through PAM in `/etc/environment`.
 
 ::: warning
 [`XDG_CONFIG_HOME`](https://xdgbasedirectoryspecification.com) is not a Nushell-specific environment variable and should not be set to the
@@ -186,7 +188,7 @@ $env.PATH = (
   | append ($env.CARGO_HOME | path join bin)
   | append ($env.HOME | path join .local bin)
   | uniq # filter so the paths are unique
-) 
+)
 ```
 
 This will add `/usr/local/bin`, the `bin` directory of CARGO_HOME, the `.local/bin` of HOME to PATH. It will also remove duplicates from PATH.
