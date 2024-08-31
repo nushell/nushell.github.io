@@ -6,7 +6,7 @@
 | **_Annotation:_**     | `float`                                                                          |
 | **_Literal syntax:_** | A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333` |
 | **_Casts:_**          | [`into float`](/commands/docs/into_float.md)                                     |
-| **_See also:_**       | [Types of Data - Floats](/book/types_of_data.md#floatsdecimals                   |
+| **_See also:_**       | [Types of Data - Floats](/book/types_of_data.md#floatsdecimals)                  |
 
 ## Additional language notes
 
