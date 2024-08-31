@@ -4,7 +4,7 @@
 | --------------------- | --------------------------------------------------------------------------- |
 | **_Description:_**    | The `nothing` type is to be used to represent the absence of another value. |
 | **_Annotation:_**     | `nothing`                                                                   |
-| **_Literal Syntax:_** | `none`                                                                      |
+| **_Literal Syntax:_** | `null`                                                                      |
 | **_Casts:_**          | `ignore`                                                                    |
 | **_See also:_**       | [Types of Data - Nothing](/book/types_of_data.md#nothing-null)              |
 
