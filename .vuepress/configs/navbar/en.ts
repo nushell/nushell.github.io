@@ -13,14 +13,5 @@ export const navbarEn: NavbarConfig = [
       { text: 'Contributing Guide', link: '/contributor-book/' },
     ],
   },
-  {
-    text: 'News',
-    children: [
-      { text: 'Blog', link: '/blog/' },
-      {
-        text: 'This Week in Nu!',
-        link: 'https://github.com/nushell/this_week_in_nu/blob/main/This%20week%20in%20Nu%20261.md',
-      },
-    ],
-  },
+  { text: 'Blog', link: '/blog/' },
 ];
