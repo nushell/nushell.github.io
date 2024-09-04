@@ -1,21 +1,10 @@
 # Dataframes
 
-::: warning
+::: warning Important!
+This feature requires the Polars plugin.  See the the 
+[Plugins Chapter](plugins.md) to learn how to install it.
 
-To use dataframes you'll need to install [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) and then install `nu_plugin_polars` with commands:
-
-```nu no-run
-# Install the `polars` nushell plugin
-> cargo install nu_plugin_polars
-
-# Add the plugin's commands to your plugin registry file:
-> plugin add ~/.cargo/bin/nu_plugin_polars
-```
-
-After installation, you will need to restart the nushell instance. If everything is successful,
-you should be able to see command completions for `polars`. For example, you should be able to execute
-`polars into-df -h`.
-
+To test that this plugin is properly installed, run `help polars`.
 :::
 
 As we have seen so far, Nushell makes working with data its main priority.
@@ -34,9 +23,11 @@ Arrow](https://arrow.apache.org/) specification, and uses
 extremely [fast columnar operations](https://h2oai.github.io/db-benchmark/).
 
 You may be wondering now how fast this combo could be, and how could it make
-working with data easier and more reliable. For this reason, let's start this
-page by presenting benchmarks on common operations that are done when
+working with data easier and more reliable. For this reason, we'll start this
+chapter by presenting benchmarks on common operations that are done when
 processing data.
+
+[[toc]]
 
 ## Benchmark Comparisons
 
@@ -1261,5 +1252,5 @@ However, the future of these dataframes is still very experimental. New
 commands and tools that take advantage of these commands will be added as they
 mature.
 
-Keep visiting this book in order to check the new things happening to
-dataframes and how they can help you process data faster and efficiently.
+Check this chapter, as well as our [Blog](/blog/), regularly to learn about new
+dataframes features and how they can help you process data faster and efficiently.
