@@ -32,24 +32,23 @@ For example, when installing or upgrading Nushell directly from crates.io using 
 
 ### Third-party Plugins
 
-To install a third-party plugin on your system, you first need to make sure that the plugin uses the same version of Nu as your system.
+You can find third-party plugins on crates.io, online Git repositories, [`awesome-nu`](https://github.com/nushell/awesome-nu/blob/main/plugin_details.md), and other sources. As with any third-party code you run on your system, please make sure you trust its source.
 
-```nu
-> version
-```
+To install a third-party plugin on your system, you first need to make sure the plugin uses the same version of Nu as your system:
 
-Find plugins that have the exact same Nushell version either on crates.io, online Git repositories, or [`awesome-nu`](https://github.com/nushell/awesome-nu/blob/main/plugin_details.md). You can find which version the plugin uses by checking the `Cargo.toml` file.
+- Confirm your Nushell version with the `version` command
+- Confirm the version the plugin requires by checking its `Cargo.toml` file
 
 To install a plugin by name from crates.io, run:
 
 ```nu
-> cargo install plugin_name
+cargo install nu_plugin_<plugin_name>
 ```
 
 When installing from a repository (e.g., GitHub), run the following from inside the cloned repository:
 
 ```nu
-> cargo install --path .
+cargo install --path .
 ```
 
 This will create a binary file that can be used to add the plugin.
@@ -70,13 +69,13 @@ The plugin file name must start with `nu_plugin_`, Nu uses this filename prefix 
 - Linux and macOS:
 
   ```nu
-  > plugin add ./my_plugins/nu_plugin_cool
+  plugin add ./my_plugins/nu_plugin_cool
   ```
 
 - Windows:
 
   ```nu
-  > plugin add .\my_plugins\nu_plugin_cool.exe
+  plugin add .\my_plugins\nu_plugin_cool.exe
   ```
 
 When [`plugin add`](/commands/docs/plugin_add.md) is called, Nu:
@@ -90,7 +89,7 @@ Once added to the registry, the next time `nu` is started, the plugin will be av
 You can also immediately reload a plugin in the current session by calling `plugin use`. In this case, the name of the plugin (rather than the filename) is used without the `nu_plugin` prefix:
 
 ```nu
-> plugin use cool
+plugin use cool
 ```
 
 It is not necessary to add `plugin use` statements to your config file. All previously added plugins are automatically loaded at startup.
@@ -99,7 +98,7 @@ It is not necessary to add `plugin use` statements to your config file. All prev
 `plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. If you need to run `nu` with a specific plugin or set of plugins without preparing a cache file, you can pass the `--plugins` option to `nu` with a list of plugin executable files:
 
 ```nu
-> nu --plugins '[./my_plugins/nu_plugin_cool]'
+nu --plugins '[./my_plugins/nu_plugin_cool]'
 ```
 
 :::
@@ -113,7 +112,8 @@ When updating a plugin, it is important to run `plugin add` again just as above 
 Installed plugins are displayed using [`plugin list`](/commands/docs/plugin_list.md):
 
 ```nu
-> plugin list
+plugin list
+# =>
 ╭───┬─────────┬────────────┬─────────┬───────────────────────┬───────┬───────────────────────────────╮
 │ # │  name   │ is_running │   pid   │       filename        │ shell │           commands            │
 ├───┼─────────┼────────────┼─────────┼───────────────────────┼───────┼───────────────────────────────┤
@@ -136,7 +136,7 @@ Installed plugins are displayed using [`plugin list`](/commands/docs/plugin_list
 All of the commands from installed plugins are available in the current scope:
 
 ```nu
-> scope commands | where type == "plugin"
+scope commands | where type == "plugin"
 ```
 
 ### Plugin Lifecycle
@@ -230,7 +230,9 @@ The simplest way to debug a plugin is to print to stderr; plugins' standard erro
 
 The Nu plugin protocol message stream may be captured for diagnostic purposes using [trace_nu_plugin](https://crates.io/crates/trace_nu_plugin/).
 
-**WARNING: trace output will accumulate for as long as the plugin is installed with the trace wrapper. Large files are possible. Be sure to remove the plugin with `plugin rm` when finished tracing, and reinstall without the trace wrapper.**
+::: warning
+Trace output will accumulate for as long as the plugin is installed with the trace wrapper. Large files are possible. Be sure to remove the plugin with `plugin rm` when finished tracing, and reinstall without the trace wrapper.\*\*
+:::
 
 ### Developer Help
 
