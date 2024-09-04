@@ -54,7 +54,10 @@ When installing from a repository (e.g., GitHub), run the following from inside 
 
 This will create a binary file that can be used to add the plugin.
 
-Keep in mind that when installing using crates.io, the binary might be saved in different locations depending on how your system is configured. The default location is in the users's home directory under `.cargo/bin`.
+::: tip Cargo installation location
+By default, binaries installed with `cargo install` are placed in your home directory under `.cargo/bin`.
+However, this can change depending on how your system is configured.
+:::
 
 ## Registering Plugins
 
