@@ -5,7 +5,7 @@
 | **_Description:_**          | A two-dimensional container with both columns and rows where each cell can hold any basic or structured data type |
 | **_Annotation:_**           | `table`                                                                                                           |
 | **_Table-Literal Syntax:_** | See below                                                                                                         |
-| **_Casts:_**                | N/A                                                                                                               |
+| **_Casts:_**                | [`wrap`](/commands/docs/wrap.md)                                                                                  |
 | **_See Also:_**             | [Working with Tables](/book/working_with_tables.md)                                                               |
 |                             | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                   |
 |                             | [Types of Data - Tables](/book/types_of_data.md#tables)                                                           |

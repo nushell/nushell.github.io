@@ -5,7 +5,7 @@
 | **_Description:_**    | The foundational associative map. Holds key-value pairs, which associate string keys with various data values. |
 | **_Annotation:_**     | `record`                                                                                                       |
 | **_Literal syntax:_** | See below                                                                                                      |
-| **_Casts:_**          | [`into record`](/commands/docs/into_record.md)                                                                 |
+| **_Casts:_**          | [`into record`](/commands/docs/into_record.md), [`wrap`](/commands/docs/wrap.md)                               |
 | **_See Also:_**       | [Working with Records](/book/working_with_records.md)                                                          |
 |                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                |
 |                       | [Types of Data - Records](/book/types_of_data.md#records)                                                      |
