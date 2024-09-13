@@ -16,7 +16,7 @@ Given Nushell's strong support for structured data, some of the more common task
 - [Using `get` and `select`](#using-get-and-select)
   - Example - `get` vs. `select` with a Table Row
   - Example - `select` with multiple rows and columns
-- [Handling missing data using the optional operator](#handling-missing-data---the-optional-operator)
+- [Handling missing data using the optional operator](#the-optional-operator)
 - [Key/Column names with spaces](#keycolumn-names-with-spaces)
 - [Other commands for navigating structured data](#other-commands-for-accessing-structured-data)
 
