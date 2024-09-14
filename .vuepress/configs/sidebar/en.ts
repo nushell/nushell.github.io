@@ -182,7 +182,7 @@ export const sidebarEn: SidebarConfig = {
                 '/lang-guide/chapters/types/basic_types/float.md',
                 '/lang-guide/chapters/types/basic_types/filesize.md',
                 '/lang-guide/chapters/types/basic_types/duration.md',
-                '/lang-guide/chapters/types/basic_types/date.md',
+                '/lang-guide/chapters/types/basic_types/datetime.md',
                 '/lang-guide/chapters/types/basic_types/range.md',
                 '/lang-guide/chapters/types/basic_types/string.md',
                 '/lang-guide/chapters/types/basic_types/record.md',

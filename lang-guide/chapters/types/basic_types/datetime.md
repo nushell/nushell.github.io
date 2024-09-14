@@ -1,10 +1,10 @@
-# Date
+# Datetime
 
 <!-- prettier-ignore -->
 |     |     |
 | --- | --- |
 | **_Description:_**    | Represents a specific point in time using international standard date time descriptors 
-| **_Annotation:_**     | `date`                                                                                 
+| **_Annotation:_**     | `datetime`                                                                                 
 | **_Literal syntax:_** | RFC 3339                                                                               
 |                       | Date-only: `2022-02-02`                                                                
 |                       | Date and time (GMT): `2022-02-02T14:30:00`                                             
@@ -14,14 +14,15 @@
 
 ## Additional language notes
 
-- Dates and times are held together in the `date` type. Date values used by the system are timezone-aware. By default, dates use the UTC timezone.
+- Dates and times are held together in the `datetime` type. Date values used by the system are timezone-aware. By default, dates use the UTC timezone.
 
-## Common commands that can be used with `date`
+## Common commands that can be used with `datetime`
 
-Many of Nushell's builtin commands are datetime aware and output or use `date` values
+Many of Nushell's builtin commands are datetime aware and output or use `datetime` values
 for fields and expressions. For example:
 
+- `date` and its subcommands
+- `format date`
 - `ls`
-- `where`
 - `ps`
 - `sys`

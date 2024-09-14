@@ -133,9 +133,9 @@ It's negative
 
 |                       |                                                                                        |
 | --------------------- | -------------------------------------------------------------------------------------- |
-| **_Description:_**    | Represents a specific point in time using international standard date time descriptors |
-| **_Annotation:_**     | `date`                                                                                 |
-| **_Literal Syntax:_** | See [Language Guide - Date](/lang-guide/chapters/types/basic_types/date.md)            |
+| **_Description:_**    | Represents a specific point in time using international standard date-time descriptors |
+| **_Annotation:_**     | `datetime`                                                                             |
+| **_Literal Syntax:_** | See [Language Guide - Date](/lang-guide/chapters/types/basic_types/datetime.md)        |
 
 Simple example:
 
