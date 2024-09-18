@@ -103,14 +103,14 @@ def command-frontmatter [commands_group, command_name] {
         $commands_list
         | get category
         | each { |category|
-            let usage = ($commands_list | where category == $category | get usage | str join (char newline))
+            let usage = ($commands_list | where category == $category | get description | str join (char newline))
             $'($category | str snake-case): |(char newline)  ($usage)'
         }
         | str join (char newline)
     )
     let indented_usage = (
         $commands_list
-        | get usage
+        | get description
         | each {|elt| $"  ($elt)"}
         | str join (char newline)
     )
@@ -141,7 +141,7 @@ def command-doc [command] {
     let top = $"
 # `($command.name)` for [($command.category)]\(/commands/categories/($command.category).md\)
 
-<div class='command-title'>($command.usage | html-escape)</div>
+<div class='command-title'>($command.description | html-escape)</div>
 
 "
 
@@ -208,11 +208,11 @@ $"## Parameters
 "
     }
 
-    let ex = $command.extra_usage
+    let ex = $command.extra_description
 
-    # Certain commands' extra_usage is wrapped in code block markup to prevent their code from
+    # Certain commands' extra_description is wrapped in code block markup to prevent their code from
     # being interpreted as markdown. This is strictly hard-coded for now.
-    let extra_usage = if $ex == "" {
+    let extra_description = if $ex == "" {
         ""
     } else if $command.name in ['def-env' 'export def-env' 'as-date' 'as-datetime' ansi] {
 $"## Notes
@@ -266,9 +266,9 @@ $"($example.description)
     let sub_commands = if $one_word_cmd { scope commands | where name =~ $'^($command.name) ' } else { [] }
     let sub_commands = if $one_word_cmd and ($sub_commands | length) > 0 {
         let commands = $sub_commands
-            | select name usage type
+            | select name description type
             | update name {|row| $"[`($row.name)`]\(/commands/docs/($row.name | safe-path).md\)" }
-            | upsert usage {|row| $row.usage | str replace -a '<' '\<' | str replace -a '>' '\>' }
+            | upsert description {|row| $row.description | str replace -a '<' '\<' | str replace -a '>' '\>' }
             | to md --pretty
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }
@@ -289,7 +289,7 @@ $"($example.description)
     }
 
     let doc = (
-        ($top + $plugin_warning + $signatures + $flags + $parameters + $in_out + $examples + $extra_usage + $sub_commands)
+        ($top + $plugin_warning + $signatures + $flags + $parameters + $in_out + $examples + $extra_description + $sub_commands)
         | lines
         | each {|line| ($line | str trim -r) }
         | str join (char newline)
