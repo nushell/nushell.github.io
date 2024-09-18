@@ -2,7 +2,7 @@
 title: insert
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Insert a new column, using an expression or closure to create each row's values.
 usage: |

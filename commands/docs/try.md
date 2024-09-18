@@ -2,7 +2,7 @@
 title: try
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Try to run a block, if it fails optionally run a catch closure.
 usage: |
@@ -32,21 +32,21 @@ usage: |
 
 ## Examples
 
-Try to run a missing command
+Try to run a division by zero
 ```nu
-> try { asdfasdf }
+> try { 1 / 0 }
 
 ```
 
-Try to run a missing command
+Try to run a division by zero and return a string instead
 ```nu
-> try { asdfasdf } catch { 'missing' }
-missing
+> try { 1 / 0 } catch { 'divided by zero' }
+divided by zero
 ```
 
-Try to run a missing command and report the message
+Try to run a division by zero and report the message
 ```nu
-> try { asdfasdf } catch { |err| $err.msg }
+> try { 1 / 0 } catch { |err| $err.msg }
 
 ```
 

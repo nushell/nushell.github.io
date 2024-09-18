@@ -2,7 +2,7 @@
 title: http put
 categories: |
   network
-version: 0.97.1
+version: 0.98.0
 network: |
   Put a body to a URL.
 usage: |
@@ -71,7 +71,7 @@ Put content to example.com, with JSON body
 
 Put JSON content from a pipeline to example.com
 ```nu
-> open foo.json | http put https://www.example.com
+> open --raw foo.json | http put https://www.example.com
 
 ```
 

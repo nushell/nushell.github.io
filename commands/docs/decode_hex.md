@@ -2,7 +2,7 @@
 title: decode hex
 categories: |
   formats
-version: 0.97.1
+version: 0.98.0
 formats: |
   Hex decode a value.
 usage: |
@@ -16,35 +16,29 @@ usage: |
 
 ## Signature
 
-```> decode hex {flags} ...rest```
-
-## Parameters
-
- -  `...rest`: For a data structure input, decode data at the given cell paths
+```> decode hex {flags} ```
 
 
 ## Input/output types:
 
-| input        | output       |
-| ------------ | ------------ |
-| list\<string\> | list\<binary\> |
-| record       | record       |
-| string       | binary       |
-| table        | table        |
+| input  | output |
+| ------ | ------ |
+| string | binary |
+
 ## Examples
 
-Hex decode a value and output as binary
+Decode arbitrary binary data
 ```nu
-> '0102030A0a0B' | decode hex
-Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
-00000000:   01 02 03 0a  0a 0b                                   •••__•
+> "09FD" | decode hex
+Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+00000000:   09 fd                                                _×
 
 ```
 
-Whitespaces are allowed to be between hex digits
+Lowercase Hex is also accepted
 ```nu
-> '01 02  03 0A 0a 0B' | decode hex
-Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
-00000000:   01 02 03 0a  0a 0b                                   •••__•
+> "09fd" | decode hex
+Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+00000000:   09 fd                                                _×
 
 ```

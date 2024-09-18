@@ -2,7 +2,7 @@
 title: update cells
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Update the table cells.
 usage: |

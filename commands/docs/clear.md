@@ -2,7 +2,7 @@
 title: clear
 categories: |
   platform
-version: 0.97.1
+version: 0.98.0
 platform: |
   Clear the terminal.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--all, -a`: Clear the terminal and its scroll-back history
+ -  `--keep-scrollback, -k`: Do not clear the scrollback history
 
 
 ## Input/output types:
@@ -37,8 +37,11 @@ Clear the terminal
 
 ```
 
-Clear the terminal and its scroll-back history
+Clear the terminal but not its scrollback history
 ```nu
-> clear --all
+> clear --keep-scrollback
 
 ```
+
+## Notes
+By default clears the current screen and the off-screen scrollback buffer.

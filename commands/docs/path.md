@@ -2,7 +2,7 @@
 title: path
 categories: |
   path
-version: 0.97.1
+version: 0.98.0
 path: |
   Explore and manipulate paths.
 usage: |
@@ -43,7 +43,7 @@ the path literal.
 
 ## Subcommands:
 
-| name                                                     | usage                                                                   | type     |
+| name                                                     | description                                                             | type     |
 | -------------------------------------------------------- | ----------------------------------------------------------------------- | -------- |
 | [`path basename`](/commands/docs/path_basename.md)       | Get the final component of a path.                                      | built-in |
 | [`path dirname`](/commands/docs/path_dirname.md)         | Get the parent directory of a path.                                     | built-in |

@@ -2,7 +2,7 @@
 title: keybindings
 categories: |
   platform
-version: 0.97.1
+version: 0.98.0
 platform: |
   Keybindings related commands.
 usage: |
@@ -33,7 +33,7 @@ For more information on input and keybindings, check:
 
 ## Subcommands:
 
-| name                                                           | usage                                                          | type     |
+| name                                                           | description                                                    | type     |
 | -------------------------------------------------------------- | -------------------------------------------------------------- | -------- |
 | [`keybindings default`](/commands/docs/keybindings_default.md) | List default keybindings.                                      | built-in |
 | [`keybindings list`](/commands/docs/keybindings_list.md)       | List available options that can be used to create keybindings. | built-in |

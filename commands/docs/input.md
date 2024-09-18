@@ -2,7 +2,7 @@
 title: input
 categories: |
   platform
-version: 0.97.1
+version: 0.98.0
 platform: |
   Get input from the user.
 usage: |
@@ -52,7 +52,7 @@ Get two characters from the user, and assign to a variable
 
 ## Subcommands:
 
-| name                                             | usage                            | type     |
+| name                                             | description                      | type     |
 | ------------------------------------------------ | -------------------------------- | -------- |
 | [`input list`](/commands/docs/input_list.md)     | Interactive list selection.      | built-in |
 | [`input listen`](/commands/docs/input_listen.md) | Listen for user interface event. | built-in |

@@ -2,7 +2,7 @@
 title: polars arg-sort
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Returns indexes for a sorted series.
 usage: |

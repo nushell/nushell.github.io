@@ -2,7 +2,7 @@
 title: config
 categories: |
   env
-version: 0.97.1
+version: 0.98.0
 env: |
   Edit nushell configuration files.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | usage                                                                                                                                 | type     |
+| name                                             | description                                                                                                                           | type     |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | [`config env`](/commands/docs/config_env.md)     | Edit nu environment configurations.                                                                                                   | built-in |
 | [`config nu`](/commands/docs/config_nu.md)       | Edit nu configurations.                                                                                                               | built-in |

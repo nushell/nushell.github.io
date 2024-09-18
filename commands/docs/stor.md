@@ -2,7 +2,7 @@
 title: stor
 categories: |
   database
-version: 0.97.1
+version: 0.98.0
 database: |
   Various commands for working with the in-memory sqlite database.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | usage                                                                       | type     |
+| name                                           | description                                                                 | type     |
 | ---------------------------------------------- | --------------------------------------------------------------------------- | -------- |
 | [`stor create`](/commands/docs/stor_create.md) | Create a table in the in-memory sqlite database.                            | built-in |
 | [`stor delete`](/commands/docs/stor_delete.md) | Delete a table or specified rows in the in-memory sqlite database.          | built-in |

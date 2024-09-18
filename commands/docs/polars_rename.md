@@ -2,7 +2,7 @@
 title: polars rename
 categories: |
   dataframe or lazyframe
-version: 0.97.1
+version: 0.98.0
 dataframe_or_lazyframe: |
   Rename a dataframe column.
 usage: |

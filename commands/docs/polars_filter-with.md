@@ -2,7 +2,7 @@
 title: polars filter-with
 categories: |
   dataframe or lazyframe
-version: 0.97.1
+version: 0.98.0
 dataframe_or_lazyframe: |
   Filters dataframe using a mask or expression as reference.
 usage: |

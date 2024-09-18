@@ -2,7 +2,7 @@
 title: view
 categories: |
   debug
-version: 0.97.1
+version: 0.98.0
 debug: |
   Various commands for viewing debug information.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | usage                                                      | type     |
+| name                                           | description                                                | type     |
 | ---------------------------------------------- | ---------------------------------------------------------- | -------- |
 | [`view files`](/commands/docs/view_files.md)   | View the files registered in nushell's EngineState memory. | built-in |
 | [`view ir`](/commands/docs/view_ir.md)         | View the compiled IR code for a block of code.             | built-in |

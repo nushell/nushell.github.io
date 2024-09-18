@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.97.1
+version: 0.98.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -22,6 +22,7 @@ usage: |
 
  -  `--width, -w {int}`: number of terminal columns wide (not output columns)
  -  `--color, -c`: draw output with color
+ -  `--icons, -i`: draw output with icons (assumes nerd font is used)
  -  `--separator, -s {string}`: character to separate grid with
 
 
@@ -65,6 +66,12 @@ Render a table with 'name' column in it to a grid
 ```nu
 > [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid
 0.1.0 │ 0.1.1 │ 0.2.0
+
+```
+
+Render a table with 'name' column in it to a grid with icons and colors
+```nu
+> [[name patch]; [Cargo.toml false] [README.md true] [SECURITY.md false]] | grid --icons --color
 
 ```
 

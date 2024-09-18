@@ -2,7 +2,7 @@
 title: help externs
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Show help on nushell externs.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--find, -f {string}`: string to find in extern names and usage
+ -  `--find, -f {string}`: string to find in extern names and descriptions
 
 ## Parameters
 
@@ -47,7 +47,7 @@ show help for single extern
 
 ```
 
-search for string in extern names and usages
+search for string in extern names and descriptions
 ```nu
 > help externs --find smth
 

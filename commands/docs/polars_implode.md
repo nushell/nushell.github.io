@@ -2,7 +2,7 @@
 title: polars implode
 categories: |
   expression
-version: 0.97.1
+version: 0.98.0
 expression: |
   Aggregates a group to a Series.
 usage: |

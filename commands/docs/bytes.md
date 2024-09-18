@@ -2,7 +2,7 @@
 title: bytes
 categories: |
   bytes
-version: 0.97.1
+version: 0.98.0
 bytes: |
   Various commands for working with byte data.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                       | usage                                                                                      | type     |
+| name                                                       | description                                                                                | type     |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------ | -------- |
 | [`bytes add`](/commands/docs/bytes_add.md)                 | Add specified bytes to the input.                                                          | built-in |
 | [`bytes at`](/commands/docs/bytes_at.md)                   | Get bytes defined by a range.                                                              | built-in |

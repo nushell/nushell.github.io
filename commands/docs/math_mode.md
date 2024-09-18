@@ -2,7 +2,7 @@
 title: math mode
 categories: |
   math
-version: 0.97.1
+version: 0.98.0
 math: |
   Returns the most frequent element(s) from a list of numbers or tables.
 usage: |

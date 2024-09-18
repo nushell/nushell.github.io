@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.97.1
+version: 0.98.0
 formats: |
   Convert special record structure into .xml text.
 usage: |

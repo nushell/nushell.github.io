@@ -2,7 +2,7 @@
 title: query
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Show all the query commands
 usage: |
@@ -34,7 +34,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Subcommands:
 
-| name                                                         | usage                                                                                                                             | type     |
+| name                                                         | description                                                                                                                       | type     |
 | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | [`query db`](/commands/docs/query_db.md)                     | Query a database using SQL.                                                                                                       | built-in |
 | [`query json`](/commands/docs/query_json.md)                 | execute json query on json file (open --raw \<file\> | query json 'query string')                                                 | plugin   |

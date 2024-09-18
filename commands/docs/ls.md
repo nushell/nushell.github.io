@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.97.1
+version: 0.98.0
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |

@@ -2,7 +2,7 @@
 title: polars replace-all
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Replace all (sub)strings by a regex pattern.
 usage: |
@@ -37,6 +37,19 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | any   | any    |
 
 ## Examples
+
+Replaces string in a column
+```nu
+> [[a]; [abac] [abac] [abac]] | polars into-df | polars select (polars col a | polars replace-all --pattern a --replace A) | polars collect
+╭───┬──────╮
+│ # │  a   │
+├───┼──────┤
+│ 0 │ AbAc │
+│ 1 │ AbAc │
+│ 2 │ AbAc │
+╰───┴──────╯
+
+```
 
 Replaces string
 ```nu

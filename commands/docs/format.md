@@ -2,7 +2,7 @@
 title: format
 categories: |
   strings
-version: 0.97.1
+version: 0.98.0
 strings: |
   Various commands for formatting data.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                   | usage                                                    | type     |
+| name                                                   | description                                              | type     |
 | ------------------------------------------------------ | -------------------------------------------------------- | -------- |
 | [`format date`](/commands/docs/format_date.md)         | Format a given date using a format string.               | built-in |
 | [`format duration`](/commands/docs/format_duration.md) | Outputs duration with a specified unit of time.          | built-in |

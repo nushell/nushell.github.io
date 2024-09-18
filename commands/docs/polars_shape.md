@@ -2,7 +2,7 @@
 title: polars shape
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Shows column and row size for a dataframe.
 usage: |

@@ -2,7 +2,7 @@
 title: into
 categories: |
   conversions
-version: 0.97.1
+version: 0.98.0
 conversions: |
   Commands to convert data from one type to another.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                 | usage                                      | type     |
+| name                                                 | description                                | type     |
 | ---------------------------------------------------- | ------------------------------------------ | -------- |
 | [`into binary`](/commands/docs/into_binary.md)       | Convert value to a binary primitive.       | built-in |
 | [`into bits`](/commands/docs/into_bits.md)           | Convert value to a binary primitive.       | built-in |

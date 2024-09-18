@@ -2,7 +2,7 @@
 title: math exp
 categories: |
   math
-version: 0.97.1
+version: 0.98.0
 math: |
   Returns e raised to the power of x.
 usage: |

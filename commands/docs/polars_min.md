@@ -2,7 +2,7 @@
 title: polars min
 categories: |
   expression
-version: 0.97.1
+version: 0.98.0
 expression: |
   Creates a min expression or aggregates columns to their min value.
 usage: |

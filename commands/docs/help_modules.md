@@ -2,7 +2,7 @@
 title: help modules
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Show help on nushell modules.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--find, -f {string}`: string to find in module names and usage
+ -  `--find, -f {string}`: string to find in module names and descriptions
 
 ## Parameters
 
@@ -47,7 +47,7 @@ show help for single module
 
 ```
 
-search for string in module names and usages
+search for string in module names and descriptions
 ```nu
 > help modules --find my-module
 

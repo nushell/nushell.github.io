@@ -2,7 +2,7 @@
 title: polars uppercase
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Uppercase the strings in the column.
 usage: |
@@ -32,6 +32,17 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | any   | any    |
 
 ## Examples
+
+Modifies strings in a column to uppercase
+```nu
+> [[a]; [Abc]] | polars into-df | polars select (polars col a | polars uppercase) | polars collect
+╭───┬─────╮
+│ # │  a  │
+├───┼─────┤
+│ 0 │ ABC │
+╰───┴─────╯
+
+```
 
 Modifies strings to uppercase
 ```nu

@@ -2,7 +2,7 @@
 title: polars is-in
 categories: |
   expression
-version: 0.97.1
+version: 0.98.0
 expression: |
   Creates an is-in expression or checks to see if the elements are contained in the right series
 usage: |

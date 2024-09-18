@@ -2,7 +2,7 @@
 title: polars var
 categories: |
   expression
-version: 0.97.1
+version: 0.98.0
 expression: |
   Create a var expression for an aggregation.
 usage: |

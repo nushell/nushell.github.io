@@ -2,7 +2,7 @@
 title: polars n-unique
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Counts unique values.
 usage: |

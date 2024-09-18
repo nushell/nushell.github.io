@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -99,6 +99,6 @@ with 'transpose' first.
 
 ## Subcommands:
 
-| name                                         | usage                                                                                                       | type     |
+| name                                         | description                                                                                                 | type     |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | -------- |
 | [`each while`](/commands/docs/each_while.md) | Run a closure on each row of the input list until a null is found, then create a new list with the results. | built-in |

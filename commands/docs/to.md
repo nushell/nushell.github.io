@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.97.1
+version: 0.98.0
 formats: |
   Translate structured data to a format.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | usage                                                         | type     |
+| name                                           | description                                                   | type     |
 | ---------------------------------------------- | ------------------------------------------------------------- | -------- |
 | [`to csv`](/commands/docs/to_csv.md)           | Convert table into .csv text .                                | built-in |
 | [`to html`](/commands/docs/to_html.md)         | Convert table into simple HTML.                               | built-in |
@@ -39,7 +39,6 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`to msgpack`](/commands/docs/to_msgpack.md)   | Convert Nu values into MessagePack.                           | built-in |
 | [`to msgpackz`](/commands/docs/to_msgpackz.md) | Convert Nu values into brotli-compressed MessagePack.         | built-in |
 | [`to nuon`](/commands/docs/to_nuon.md)         | Converts table data into Nuon (Nushell Object Notation) text. | built-in |
-| [`to plist`](/commands/docs/to_plist.md)       | Convert Nu values into plist                                  | plugin   |
 | [`to text`](/commands/docs/to_text.md)         | Converts data into simple text.                               | built-in |
 | [`to toml`](/commands/docs/to_toml.md)         | Convert record into .toml text.                               | built-in |
 | [`to tsv`](/commands/docs/to_tsv.md)           | Convert table into .tsv text.                                 | built-in |

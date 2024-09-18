@@ -2,7 +2,7 @@
 title: polars replace
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern.
 usage: |
@@ -37,6 +37,18 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | any   | any    |
 
 ## Examples
+
+Replaces string in column
+```nu
+> [[a]; [abc] [abcabc]] | polars into-df | polars select (polars col a | polars replace --pattern ab --replace AB) | polars collect
+╭───┬────────╮
+│ # │   a    │
+├───┼────────┤
+│ 0 │ ABc    │
+│ 1 │ ABcabc │
+╰───┴────────╯
+
+```
 
 Replaces string
 ```nu

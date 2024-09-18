@@ -2,7 +2,7 @@
 title: split
 categories: |
   strings
-version: 0.97.1
+version: 0.98.0
 strings: |
   Split contents across desired subcommand (like row, column) via the separator.
 usage: |
@@ -30,10 +30,11 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | usage                                                   | type     |
-| ------------------------------------------------ | ------------------------------------------------------- | -------- |
-| [`split chars`](/commands/docs/split_chars.md)   | Split a string into a list of characters.               | built-in |
-| [`split column`](/commands/docs/split_column.md) | Split a string into multiple columns using a separator. | built-in |
-| [`split list`](/commands/docs/split_list.md)     | Split a list into multiple lists using a separator.     | built-in |
-| [`split row`](/commands/docs/split_row.md)       | Split a string into multiple rows using a separator.    | built-in |
-| [`split words`](/commands/docs/split_words.md)   | Split a string's words into separate rows.              | built-in |
+| name                                                   | description                                             | type     |
+| ------------------------------------------------------ | ------------------------------------------------------- | -------- |
+| [`split cell-path`](/commands/docs/split_cell-path.md) | Split a cell-path into its components.                  | built-in |
+| [`split chars`](/commands/docs/split_chars.md)         | Split a string into a list of characters.               | built-in |
+| [`split column`](/commands/docs/split_column.md)       | Split a string into multiple columns using a separator. | built-in |
+| [`split list`](/commands/docs/split_list.md)           | Split a list into multiple lists using a separator.     | built-in |
+| [`split row`](/commands/docs/split_row.md)             | Split a string into multiple rows using a separator.    | built-in |
+| [`split words`](/commands/docs/split_words.md)         | Split a string's words into separate rows.              | built-in |

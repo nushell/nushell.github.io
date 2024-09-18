@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Display help information about different parts of Nushell.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--find, -f {string}`: string to find in command names, usage, and search terms
+ -  `--find, -f {string}`: string to find in command names, descriptions, and search terms
 
 ## Parameters
 
@@ -47,7 +47,7 @@ show help for single sub-command, alias, or module
 
 ```
 
-search for string in command names, usage and search terms
+search for string in command names, descriptions, and search terms
 ```nu
 > help --find char
 
@@ -58,7 +58,7 @@ search for string in command names, usage and search terms
 
 ## Subcommands:
 
-| name                                                 | usage                                | type     |
+| name                                                 | description                          | type     |
 | ---------------------------------------------------- | ------------------------------------ | -------- |
 | [`help aliases`](/commands/docs/help_aliases.md)     | Show help on nushell aliases.        | built-in |
 | [`help commands`](/commands/docs/help_commands.md)   | Show help on nushell commands.       | built-in |

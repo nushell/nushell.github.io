@@ -2,7 +2,7 @@
 title: nu-highlight
 categories: |
   strings
-version: 0.97.1
+version: 0.98.0
 strings: |
   Syntax highlight the input string.
 usage: |

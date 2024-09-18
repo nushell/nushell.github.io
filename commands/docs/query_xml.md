@@ -2,7 +2,7 @@
 title: query xml
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   execute xpath query on xml
 usage: |

@@ -2,7 +2,7 @@
 title: shuffle
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Shuffle rows randomly.
 usage: |

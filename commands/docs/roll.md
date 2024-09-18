@@ -2,7 +2,7 @@
 title: roll
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Rolling commands for tables.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                         | usage                              | type     |
+| name                                         | description                        | type     |
 | -------------------------------------------- | ---------------------------------- | -------- |
 | [`roll down`](/commands/docs/roll_down.md)   | Roll table rows down.              | built-in |
 | [`roll left`](/commands/docs/roll_left.md)   | Roll record or table columns left. | built-in |
