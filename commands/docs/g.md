@@ -2,7 +2,7 @@
 title: g
 categories: |
   shells
-version: 0.96.0
+version: 0.98.0
 shells: |
   Switch to a given shell, or list all shells if no given shell number.
 usage: |
