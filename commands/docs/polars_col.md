@@ -26,7 +26,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Parameters
 
- -  `column name`: Name of column to be used
+ -  `column name`: Name of column to be used. '*' can be used for all columns.
 
 
 ## Input/output types:
@@ -44,4 +44,17 @@ Creates a named column expression and converts it to a nu object
 │ expr  │ column │
 │ value │ a      │
 ╰───────┴────────╯
+```
+
+Select all columns using the asterisk wildcard.
+```nu
+> [[a b]; [x 1] [y 2] [z 3]] | polars into-df | polars select (polars col '*') | polars collect
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ x │ 1 │
+│ 1 │ y │ 2 │
+│ 2 │ z │ 3 │
+╰───┴───┴───╯
+
 ```

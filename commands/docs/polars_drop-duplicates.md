@@ -44,12 +44,14 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 drop duplicates
 ```nu
-> [[a b]; [1 2] [3 4] [1 2]] | polars into-df | polars drop-duplicates
+> [[a b]; [1 2] [3 4] [1 2]] | polars into-df
+                | polars drop-duplicates
+                | polars sort-by a
 ╭───┬───┬───╮
 │ # │ a │ b │
 ├───┼───┼───┤
-│ 0 │ 3 │ 4 │
-│ 1 │ 1 │ 2 │
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
 ╰───┴───┴───╯
 
 ```

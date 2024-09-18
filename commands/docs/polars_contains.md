@@ -37,6 +37,21 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Examples
 
+Returns boolean indicating if pattern was found in a column
+```nu
+> let df = [[a]; [abc] [acb] [acb]] | polars into-df;
+                let df2 = $df | polars with-column [(polars col a | polars contains ab | polars as b)] | polars collect;
+                $df2.b
+╭───┬───────╮
+│ # │   b   │
+├───┼───────┤
+│ 0 │ true  │
+│ 1 │ false │
+│ 2 │ false │
+╰───┴───────╯
+
+```
+
 Returns boolean indicating if pattern was found
 ```nu
 > [abc acb acb] | polars into-df | polars contains ab

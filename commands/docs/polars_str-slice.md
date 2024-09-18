@@ -41,6 +41,19 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Examples
 
+Creates slices from the strings in a specified column
+```nu
+> [[a]; [abcded] [abc321] [abc123]] | polars into-df | polars select (polars col a | polars str-slice 1 --length 2) | polars collect
+╭───┬────╮
+│ # │ a  │
+├───┼────┤
+│ 0 │ bc │
+│ 1 │ bc │
+│ 2 │ bc │
+╰───┴────╯
+
+```
+
 Creates slices from the strings
 ```nu
 > [abcded abc321 abc123] | polars into-df | polars str-slice 1 --length 2

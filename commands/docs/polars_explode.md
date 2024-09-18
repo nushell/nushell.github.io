@@ -39,7 +39,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 Explode the specified dataframe
 ```nu
-> [[id name hobbies]; [1 Mercy [Cycling Knitting]] [2 Bob [Skiing Football]]] | polars into-df | polars explode hobbies | polars collect
+> [[id name hobbies]; [1 Mercy [Cycling Knitting]] [2 Bob [Skiing Football]]]
+                    | polars into-df
+                    | polars explode hobbies
+                    | polars collect
+                    | polars sort-by [id, name]
 ╭───┬────┬───────┬──────────╮
 │ # │ id │ name  │ hobbies  │
 ├───┼────┼───────┼──────────┤
