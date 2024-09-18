@@ -2,7 +2,7 @@
 title: bytes at
 categories: |
   bytes
-version: 0.97.1
+version: 0.98.0
 bytes: |
   Get bytes defined by a range.
 usage: |

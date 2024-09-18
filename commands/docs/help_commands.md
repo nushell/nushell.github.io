@@ -2,7 +2,7 @@
 title: help commands
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Show help on nushell commands.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--find, -f {string}`: string to find in command names, usage, and search terms
+ -  `--find, -f {string}`: string to find in command names, descriptions, and search terms
 
 ## Parameters
 

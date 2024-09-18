@@ -2,7 +2,7 @@
 title: polars get-day
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Gets day from date.
 usage: |

@@ -2,7 +2,7 @@
 title: date
 categories: |
   date
-version: 0.97.1
+version: 0.98.0
 date: |
   Date-related commands.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                         | usage                                                     | type     |
+| name                                                         | description                                               | type     |
 | ------------------------------------------------------------ | --------------------------------------------------------- | -------- |
 | [`date format`](/commands/docs/date_format.md)               | Removed command: use `format date` instead.               | built-in |
 | [`date humanize`](/commands/docs/date_humanize.md)           | Print a 'humanized' format for the date, relative to now. | built-in |

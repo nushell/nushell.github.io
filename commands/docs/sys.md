@@ -2,7 +2,7 @@
 title: sys
 categories: |
   system
-version: 0.97.1
+version: 0.98.0
 system: |
   View information about the system.
 usage: |
@@ -38,7 +38,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                       | usage                                                 | type     |
+| name                                       | description                                           | type     |
 | ------------------------------------------ | ----------------------------------------------------- | -------- |
 | [`sys cpu`](/commands/docs/sys_cpu.md)     | View information about the system CPUs.               | built-in |
 | [`sys disks`](/commands/docs/sys_disks.md) | View information about the system disks.              | built-in |

@@ -2,7 +2,7 @@
 title: polars unpivot
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Unpivot a DataFrame from wide to long format.
 usage: |

@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
 usage: |
@@ -67,7 +67,7 @@ To skip specific numbered rows, try `drop nth`. To skip specific named columns, 
 
 ## Subcommands:
 
-| name                                         | usage                                                 | type     |
+| name                                         | description                                           | type     |
 | -------------------------------------------- | ----------------------------------------------------- | -------- |
 | [`skip until`](/commands/docs/skip_until.md) | Skip elements of the input until a predicate is true. | built-in |
 | [`skip while`](/commands/docs/skip_while.md) | Skip elements of the input while a predicate is true. | built-in |

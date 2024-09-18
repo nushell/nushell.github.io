@@ -2,7 +2,7 @@
 title: polars strftime
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Formats date based on string rule.
 usage: |
@@ -36,6 +36,20 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | any   | any    |
 
 ## Examples
+
+Formats date column as a string
+```nu
+> let date = '2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC';
+    let df = ([[a]; [$date]] | polars into-df);
+    let df2 = $df | polars with-column [(polars col a | polars strftime "%Y/%m/%d" | polars as b)] | polars collect;
+    $df2.b
+╭───┬────────────╮
+│ # │     b      │
+├───┼────────────┤
+│ 0 │ 2020/08/04 │
+╰───┴────────────╯
+
+```
 
 Formats date
 ```nu

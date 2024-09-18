@@ -2,7 +2,7 @@
 title: into record
 categories: |
   conversions
-version: 0.97.1
+version: 0.98.0
 conversions: |
   Convert value to record.
 usage: |
@@ -26,7 +26,6 @@ usage: |
 | datetime  | record |
 | duration  | record |
 | list\<any\> | record |
-| range     | record |
 | record    | record |
 ## Examples
 
@@ -38,24 +37,22 @@ Convert from one row table to record
 ╰───────┴───────╯
 ```
 
-Convert from list to record
+Convert from list of records to record
 ```nu
-> [1 2 3] | into record
-╭───┬───╮
-│ 0 │ 1 │
-│ 1 │ 2 │
-│ 2 │ 3 │
-╰───┴───╯
+> [{foo: bar} {baz: quux}] | into record
+╭─────┬──────╮
+│ foo │ bar  │
+│ baz │ quux │
+╰─────┴──────╯
 ```
 
-Convert from range to record
+Convert from list of pairs into record
 ```nu
-> 0..2 | into record
-╭───┬───╮
-│ 0 │ 0 │
-│ 1 │ 1 │
-│ 2 │ 2 │
-╰───┴───╯
+> [[foo bar] [baz quux]] | into record
+╭─────┬──────╮
+│ foo │ bar  │
+│ baz │ quux │
+╰─────┴──────╯
 ```
 
 convert duration to record (weeks max)
@@ -82,13 +79,16 @@ convert record to record
 convert date to record
 ```nu
 > 2020-04-12T22:10:57+02:00 | into record
-╭──────────┬────────╮
-│ year     │ 2020   │
-│ month    │ 4      │
-│ day      │ 12     │
-│ hour     │ 22     │
-│ minute   │ 10     │
-│ second   │ 57     │
-│ timezone │ +02:00 │
-╰──────────┴────────╯
+╭─────────────┬────────╮
+│ year        │ 2020   │
+│ month       │ 4      │
+│ day         │ 12     │
+│ hour        │ 22     │
+│ minute      │ 10     │
+│ second      │ 57     │
+│ millisecond │ 0      │
+│ microsecond │ 0      │
+│ nanosecond  │ 0      │
+│ timezone    │ +02:00 │
+╰─────────────┴────────╯
 ```

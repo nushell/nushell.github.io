@@ -2,7 +2,7 @@
 title: help aliases
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Show help on nushell aliases.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--find, -f {string}`: string to find in alias names and usage
+ -  `--find, -f {string}`: string to find in alias names and descriptions
 
 ## Parameters
 
@@ -47,7 +47,7 @@ show help for single alias
 
 ```
 
-search for string in alias names and usages
+search for string in alias names and descriptions
 ```nu
 > help aliases --find my-alias
 

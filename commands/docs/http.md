@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.97.1
+version: 0.98.0
 network: |
   Various commands for working with http methods.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                             | usage                                                     | type     |
+| name                                             | description                                               | type     |
 | ------------------------------------------------ | --------------------------------------------------------- | -------- |
 | [`http delete`](/commands/docs/http_delete.md)   | Delete the specified resource.                            | built-in |
 | [`http get`](/commands/docs/http_get.md)         | Fetch the contents from a URL.                            | built-in |

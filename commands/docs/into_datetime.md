@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.97.1
+version: 0.98.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |

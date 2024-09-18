@@ -2,7 +2,7 @@
 title: export
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Export definitions or environment variables from a module.
 usage: |
@@ -39,7 +39,7 @@ This command is a parser keyword. For details, check:
 
 ## Subcommands:
 
-| name                                               | usage                                                                            | type    |
+| name                                               | description                                                                      | type    |
 | -------------------------------------------------- | -------------------------------------------------------------------------------- | ------- |
 | [`export alias`](/commands/docs/export_alias.md)   | Alias a command (with optional flags) to a new name and export it from a module. | keyword |
 | [`export const`](/commands/docs/export_const.md)   | Use parse-time constant from a module and export them from this module.          | keyword |

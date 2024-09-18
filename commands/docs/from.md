@@ -2,7 +2,7 @@
 title: from
 categories: |
   formats
-version: 0.97.1
+version: 0.98.0
 formats: |
   Parse a string or binary data into structured data.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                               | usage                                                                                                                      | type     |
+| name                                               | description                                                                                                                | type     |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
 | [`from csv`](/commands/docs/from_csv.md)           | Parse text as .csv and create table.                                                                                       | built-in |
 | [`from eml`](/commands/docs/from_eml.md)           | Parse text as .eml and create record.                                                                                      | plugin   |

@@ -2,7 +2,7 @@
 title: polars shift
 categories: |
   dataframe or lazyframe
-version: 0.97.1
+version: 0.98.0
 dataframe_or_lazyframe: |
   Shifts the values by a given period.
 usage: |

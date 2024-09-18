@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.97.1
+version: 0.98.0
 formats: |
   Translate structured data to a format.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                           | usage                                                         | type     |
+| name                                           | description                                                   | type     |
 | ---------------------------------------------- | ------------------------------------------------------------- | -------- |
 | [`to csv`](/commands/docs/to_csv.md)           | Convert table into .csv text .                                | built-in |
 | [`to html`](/commands/docs/to_html.md)         | Convert table into simple HTML.                               | built-in |

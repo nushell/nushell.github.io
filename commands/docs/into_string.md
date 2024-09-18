@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.97.1
+version: 0.98.0
 conversions: |
   Convert value to string.
 usage: |

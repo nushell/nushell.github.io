@@ -2,7 +2,7 @@
 title: scope
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Commands for getting info about what is in scope.
 usage: |
@@ -28,7 +28,7 @@ usage: |
 
 ## Subcommands:
 
-| name                                                         | usage                                                    | type     |
+| name                                                         | description                                              | type     |
 | ------------------------------------------------------------ | -------------------------------------------------------- | -------- |
 | [`scope aliases`](/commands/docs/scope_aliases.md)           | Output info on the aliases in the current scope.         | built-in |
 | [`scope commands`](/commands/docs/scope_commands.md)         | Output info on the commands in the current scope.        | built-in |

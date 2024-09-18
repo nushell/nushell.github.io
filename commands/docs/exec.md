@@ -2,7 +2,7 @@
 title: exec
 categories: |
   system
-version: 0.97.1
+version: 0.98.0
 system: |
   Execute a command, replacing or exiting the current process, depending on platform.
 usage: |

@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   debug
-version: 0.97.1
+version: 0.98.0
 debug: |
   Get the metadata for items in the stream.
 usage: |
@@ -46,6 +46,7 @@ Get the metadata of the input
 
 ## Subcommands:
 
-| name                                             | usage                                     | type     |
-| ------------------------------------------------ | ----------------------------------------- | -------- |
-| [`metadata set`](/commands/docs/metadata_set.md) | Set the metadata for items in the stream. | built-in |
+| name                                                   | description                                                | type     |
+| ------------------------------------------------------ | ---------------------------------------------------------- | -------- |
+| [`metadata access`](/commands/docs/metadata_access.md) | Access the metadata for the input stream within a closure. | built-in |
+| [`metadata set`](/commands/docs/metadata_set.md)       | Set the metadata for items in the stream.                  | built-in |

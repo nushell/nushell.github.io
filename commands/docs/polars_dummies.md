@@ -2,7 +2,7 @@
 title: polars dummies
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Creates a new dataframe with dummy variables.
 usage: |

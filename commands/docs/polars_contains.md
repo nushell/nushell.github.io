@@ -2,7 +2,7 @@
 title: polars contains
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Checks if a pattern is contained in a string.
 usage: |
@@ -36,6 +36,21 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | any   | any    |
 
 ## Examples
+
+Returns boolean indicating if pattern was found in a column
+```nu
+> let df = [[a]; [abc] [acb] [acb]] | polars into-df;
+                let df2 = $df | polars with-column [(polars col a | polars contains ab | polars as b)] | polars collect;
+                $df2.b
+╭───┬───────╮
+│ # │   b   │
+├───┼───────┤
+│ 0 │ true  │
+│ 1 │ false │
+│ 2 │ false │
+╰───┴───────╯
+
+```
 
 Returns boolean indicating if pattern was found
 ```nu

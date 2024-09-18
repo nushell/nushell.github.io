@@ -2,7 +2,7 @@
 title: str substring
 categories: |
   strings
-version: 0.97.1
+version: 0.98.0
 strings: |
   Get part of a string. Note that the first character of a string is index 0.
 usage: |

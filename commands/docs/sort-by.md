@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Sort by the given columns, in increasing order.
 usage: |

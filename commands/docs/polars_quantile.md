@@ -2,7 +2,7 @@
 title: polars quantile
 categories: |
   lazyframe
-version: 0.97.1
+version: 0.98.0
 lazyframe: |
   Aggregates the columns to the selected quantile.
 usage: |
@@ -51,9 +51,11 @@ quantile value from columns in a dataframe
 Quantile aggregation for a group-by
 ```nu
 > [[a b]; [one 2] [one 4] [two 1]]
-    | polars into-df
-    | polars group-by a
-    | polars agg (polars col b | polars quantile 0.5)
+                    | polars into-df
+                    | polars group-by a
+                    | polars agg (polars col b | polars quantile 0.5)
+                    | polars collect
+                    | polars sort-by a
 ╭───┬─────┬──────╮
 │ # │  a  │  b   │
 ├───┼─────┼──────┤

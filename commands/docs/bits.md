@@ -2,7 +2,7 @@
 title: bits
 categories: |
   bits
-version: 0.97.1
+version: 0.98.0
 bits: |
   Various commands for working with bits.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                     | usage                                           | type     |
+| name                                     | description                                     | type     |
 | ---------------------------------------- | ----------------------------------------------- | -------- |
 | [`bits and`](/commands/docs/bits_and.md) | Performs bitwise and for ints or binary values. | built-in |
 | [`bits not`](/commands/docs/bits_not.md) | Performs logical negation on each bit.          | built-in |

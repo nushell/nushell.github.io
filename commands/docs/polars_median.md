@@ -2,7 +2,7 @@
 title: polars median
 categories: |
   lazyframe
-version: 0.97.1
+version: 0.98.0
 lazyframe: |
   Median value from columns in a dataframe or creates expression for an aggregation
 usage: |
@@ -36,9 +36,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 Median aggregation for a group-by
 ```nu
 > [[a b]; [one 2] [one 4] [two 1]]
-    | polars into-df
-    | polars group-by a
-    | polars agg (polars col b | polars median)
+                    | polars into-df
+                    | polars group-by a
+                    | polars agg (polars col b | polars median)
+                    | polars collect
+                    | polars sort-by a
 ╭───┬─────┬──────╮
 │ # │  a  │  b   │
 ├───┼─────┼──────┤
@@ -50,7 +52,7 @@ Median aggregation for a group-by
 
 Median value from columns in a dataframe
 ```nu
-> [[a b]; [6 2] [4 2] [2 2]] | polars into-df | polars median
+> [[a b]; [6 2] [4 2] [2 2]] | polars into-df | polars median | polars collect
 ╭───┬──────┬──────╮
 │ # │  a   │  b   │
 ├───┼──────┼──────┤

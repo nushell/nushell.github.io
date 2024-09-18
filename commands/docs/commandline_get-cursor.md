@@ -2,7 +2,7 @@
 title: commandline get-cursor
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Get the current cursor position.
 usage: |

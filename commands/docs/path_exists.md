@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   path
-version: 0.97.1
+version: 0.98.0
 path: |
   Check whether a path exists.
 usage: |
@@ -50,3 +50,4 @@ Check if files in list exist
 ## Notes
 This only checks if it is possible to either `open` or `cd` to the given path.
 If you need to distinguish dirs and files, please use `path type`.
+Also note that if you don't have a permission to a directory of a path, false will be returned

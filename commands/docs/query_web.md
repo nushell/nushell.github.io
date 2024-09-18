@@ -2,7 +2,7 @@
 title: query web
 categories: |
   network
-version: 0.97.1
+version: 0.98.0
 network: |
   execute selector query on html/web
 usage: |

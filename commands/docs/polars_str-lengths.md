@@ -2,7 +2,7 @@
 title: polars str-lengths
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Get lengths of all strings.
 usage: |
@@ -24,6 +24,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ```> polars str-lengths {flags} ```
 
+## Flags
+
+ -  `--bytes, -b`: Get the length in bytes instead of chars.
+
 
 ## Input/output types:
 
@@ -32,6 +36,19 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | any   | any    |
 
 ## Examples
+
+Returns string lengths for a column
+```nu
+> [[a]; [a] [ab] [abc]] | polars into-df | polars select (polars col a | polars str-lengths) | polars collect
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+╰───┴───╯
+
+```
 
 Returns string lengths
 ```nu

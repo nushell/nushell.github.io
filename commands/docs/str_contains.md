@@ -2,7 +2,7 @@
 title: str contains
 categories: |
   strings
-version: 0.97.1
+version: 0.98.0
 strings: |
   Checks if string input contains a substring.
 usage: |

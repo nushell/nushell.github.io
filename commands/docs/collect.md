@@ -2,7 +2,7 @@
 title: collect
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Collect a stream into a value.
 usage: |

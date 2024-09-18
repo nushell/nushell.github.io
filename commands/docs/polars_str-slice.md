@@ -2,7 +2,7 @@
 title: polars str-slice
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Slices the string from the start position until the selected length.
 usage: |
@@ -40,6 +40,19 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | any   | any    |
 
 ## Examples
+
+Creates slices from the strings in a specified column
+```nu
+> [[a]; [abcded] [abc321] [abc123]] | polars into-df | polars select (polars col a | polars str-slice 1 --length 2) | polars collect
+╭───┬────╮
+│ # │ a  │
+├───┼────┤
+│ 0 │ bc │
+│ 1 │ bc │
+│ 2 │ bc │
+╰───┴────╯
+
+```
 
 Creates slices from the strings
 ```nu

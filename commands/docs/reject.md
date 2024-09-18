@@ -2,7 +2,7 @@
 title: reject
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Remove the given columns or rows from the table. Opposite of `select`.
 usage: |

@@ -2,7 +2,7 @@
 title: commandline
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   View the current command line input buffer.
 usage: |
@@ -28,7 +28,7 @@ usage: |
 
 ## Subcommands:
 
-| name                                                                 | usage                                         | type     |
+| name                                                                 | description                                   | type     |
 | -------------------------------------------------------------------- | --------------------------------------------- | -------- |
 | [`commandline edit`](/commands/docs/commandline_edit.md)             | Modify the current command line input buffer. | built-in |
 | [`commandline get-cursor`](/commands/docs/commandline_get-cursor.md) | Get the current cursor position.              | built-in |

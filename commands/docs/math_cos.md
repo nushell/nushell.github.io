@@ -2,7 +2,7 @@
 title: math cos
 categories: |
   math
-version: 0.97.1
+version: 0.98.0
 math: |
   Returns the cosine of the number.
 usage: |

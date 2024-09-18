@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |
@@ -40,7 +40,7 @@ string
 
 Describe the type of a record in a detailed way
 ```nu
-> {shell:'true', uwu:true, features: {bugs:false, multiplatform:true, speed: 10}, fib: [1 1 2 3 5 8], on_save: {|x| print $'Saving ($x)'}, first_commit: 2019-05-10, my_duration: (4min + 20sec)} | describe -d
+> {shell:'true', uwu:true, features: {bugs:false, multiplatform:true, speed: 10}, fib: [1 1 2 3 5 8], on_save: {|x| $'Saving ($x)'}, first_commit: 2019-05-10, my_duration: (4min + 20sec)} | describe -d
 ╭─────────┬───────────────────────────────────────────────────────────╮
 │ type    │ record                                                    │
 │         │ ╭──────────────┬────────────────────────────────────────╮ │

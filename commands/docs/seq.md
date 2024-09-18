@@ -2,7 +2,7 @@
 title: seq
 categories: |
   generators
-version: 0.97.1
+version: 0.98.0
 generators: |
   Output sequences of numbers.
 usage: |
@@ -77,7 +77,7 @@ sequence 1 to 5, then convert to a string with a pipe separator
 
 ## Subcommands:
 
-| name                                     | usage                                 | type     |
+| name                                     | description                           | type     |
 | ---------------------------------------- | ------------------------------------- | -------- |
 | [`seq char`](/commands/docs/seq_char.md) | Print a sequence of ASCII characters. | built-in |
 | [`seq date`](/commands/docs/seq_date.md) | Print sequences of dates.             | built-in |

@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.97.1
+version: 0.98.0
 strings: |
   Split a string into multiple columns using a separator.
 usage: |
@@ -21,6 +21,7 @@ usage: |
 ## Flags
 
  -  `--collapse-empty, -c`: remove empty columns
+ -  `--number, -n {int}`: Split into maximum number of items
  -  `--regex, -r`: separator is a regular expression
 
 ## Parameters
@@ -80,5 +81,17 @@ Split a list of strings into a table, ignoring padding
 │ 0 │ a       │ b       │
 │ 1 │ c       │ d       │
 ╰───┴─────────┴─────────╯
+
+```
+
+Split into columns, last column may contain the delimiter
+```nu
+> ['author: Salina Yoon' r#'title: Where's Ellie?: A Hide-and-Seek Book'#] | split column --number 2 ': ' key value
+╭───┬────────┬──────────────────────────────────────╮
+│ # │  key   │                value                 │
+├───┼────────┼──────────────────────────────────────┤
+│ 0 │ author │ Salina Yoon                          │
+│ 1 │ title  │ Where's Ellie?: A Hide-and-Seek Book │
+╰───┴────────┴──────────────────────────────────────╯
 
 ```

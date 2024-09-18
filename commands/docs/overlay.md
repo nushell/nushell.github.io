@@ -2,7 +2,7 @@
 title: overlay
 categories: |
   core
-version: 0.97.1
+version: 0.98.0
 core: |
   Commands for manipulating overlays.
 usage: |
@@ -33,7 +33,7 @@ This command is a parser keyword. For details, check:
 
 ## Subcommands:
 
-| name                                             | usage                                        | type     |
+| name                                             | description                                  | type     |
 | ------------------------------------------------ | -------------------------------------------- | -------- |
 | [`overlay hide`](/commands/docs/overlay_hide.md) | Hide an active overlay.                      | keyword  |
 | [`overlay list`](/commands/docs/overlay_list.md) | List all active overlays.                    | built-in |

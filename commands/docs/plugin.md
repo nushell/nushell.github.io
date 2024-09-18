@@ -2,7 +2,7 @@
 title: plugin
 categories: |
   plugin
-version: 0.97.1
+version: 0.98.0
 plugin: |
   Commands for managing plugins.
 usage: |
@@ -62,7 +62,7 @@ Remove the installed signatures for the `inc` plugin.
 
 ## Subcommands:
 
-| name                                           | usage                                                   | type     |
+| name                                           | description                                             | type     |
 | ---------------------------------------------- | ------------------------------------------------------- | -------- |
 | [`plugin add`](/commands/docs/plugin_add.md)   | Add a plugin to the plugin registry file.               | built-in |
 | [`plugin list`](/commands/docs/plugin_list.md) | List installed plugins.                                 | built-in |

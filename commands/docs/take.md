@@ -2,7 +2,7 @@
 title: take
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Take only the first n elements of a list, or the first n bytes of a binary value.
 usage: |
@@ -86,7 +86,7 @@ Return the first 3 elements of a range
 
 ## Subcommands:
 
-| name                                         | usage                                                 | type     |
+| name                                         | description                                           | type     |
 | -------------------------------------------- | ----------------------------------------------------- | -------- |
 | [`take until`](/commands/docs/take_until.md) | Take elements of the input until a predicate is true. | built-in |
 | [`take while`](/commands/docs/take_while.md) | Take elements of the input while a predicate is true. | built-in |

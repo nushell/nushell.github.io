@@ -2,7 +2,7 @@
 title: par-each
 categories: |
   filters
-version: 0.97.1
+version: 0.98.0
 filters: |
   Run a closure on each row of the input list in parallel, creating a new list with the results.
 usage: |

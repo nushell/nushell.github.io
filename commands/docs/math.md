@@ -2,7 +2,7 @@
 title: math
 categories: |
   math
-version: 0.97.1
+version: 0.98.0
 math: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.
 usage: |
@@ -30,7 +30,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                               | usage                                                                                 | type     |
+| name                                               | description                                                                           | type     |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------- | -------- |
 | [`math abs`](/commands/docs/math_abs.md)           | Returns the absolute value of a number.                                               | built-in |
 | [`math arccos`](/commands/docs/math_arccos.md)     | Returns the arccosine of the number.                                                  | built-in |

@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.97.1
+version: 0.98.0
 network: |
   Patch a body to a URL.
 usage: |
@@ -71,7 +71,7 @@ Patch content to example.com, with JSON body
 
 Patch JSON content from a pipeline to example.com
 ```nu
-> open foo.json | http patch https://www.example.com
+> open --raw foo.json | http patch https://www.example.com
 
 ```
 

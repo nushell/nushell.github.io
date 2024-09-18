@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.97.1
+version: 0.98.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -36,7 +36,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                                 | usage                                                                                                                                            | type   |
+| name                                                                 | description                                                                                                                                      | type   |
 | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------ |
 | [`polars agg`](/commands/docs/polars_agg.md)                         | Performs a series of aggregations from a group-by.                                                                                               | plugin |
 | [`polars agg-groups`](/commands/docs/polars_agg-groups.md)           | Creates an agg_groups expression.                                                                                                                | plugin |
@@ -58,12 +58,12 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars collect`](/commands/docs/polars_collect.md)                 | Collect lazy dataframe into eager dataframe.                                                                                                     | plugin |
 | [`polars columns`](/commands/docs/polars_columns.md)                 | Show dataframe columns.                                                                                                                          | plugin |
 | [`polars concat-str`](/commands/docs/polars_concat-str.md)           | Creates a concat string expression.                                                                                                              | plugin |
-| [`polars concatenate`](/commands/docs/polars_concatenate.md)         | Concatenates strings with other array.                                                                                                           | plugin |
 | [`polars contains`](/commands/docs/polars_contains.md)               | Checks if a pattern is contained in a string.                                                                                                    | plugin |
-| [`polars count`](/commands/docs/polars_count.md)                     | Creates a count expression.                                                                                                                      | plugin |
+| [`polars count`](/commands/docs/polars_count.md)                     | Returns the number of non-null values in the column.                                                                                             | plugin |
 | [`polars count-null`](/commands/docs/polars_count-null.md)           | Counts null values.                                                                                                                              | plugin |
-| [`polars cumulative`](/commands/docs/polars_cumulative.md)           | Cumulative calculation for a series.                                                                                                             | plugin |
+| [`polars cumulative`](/commands/docs/polars_cumulative.md)           | Cumulative calculation for a column or series.                                                                                                   | plugin |
 | [`polars datepart`](/commands/docs/polars_datepart.md)               | Creates an expression for capturing the specified datepart in a column.                                                                          | plugin |
+| [`polars decimal`](/commands/docs/polars_decimal.md)                 | Converts a string column into a decimal column                                                                                                   | plugin |
 | [`polars drop`](/commands/docs/polars_drop.md)                       | Creates a new dataframe by dropping the selected columns.                                                                                        | plugin |
 | [`polars drop-duplicates`](/commands/docs/polars_drop-duplicates.md) | Drops duplicate values in dataframe.                                                                                                             | plugin |
 | [`polars drop-nulls`](/commands/docs/polars_drop-nulls.md)           | Drops null values in dataframe.                                                                                                                  | plugin |
@@ -89,7 +89,8 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars get-weekday`](/commands/docs/polars_get-weekday.md)         | Gets weekday from date.                                                                                                                          | plugin |
 | [`polars get-year`](/commands/docs/polars_get-year.md)               | Gets year from date.                                                                                                                             | plugin |
 | [`polars group-by`](/commands/docs/polars_group-by.md)               | Creates a group-by object that can be used for other aggregations.                                                                               | plugin |
-| [`polars implode`](/commands/docs/polars_implode.md)                 | Aggregates a group to a Series.                                                                                                                  | plugin |
+| [`polars implode`](/commands/docs/polars_implode.md)                 | Aggregates values into a list.                                                                                                                   | plugin |
+| [`polars integer`](/commands/docs/polars_integer.md)                 | Converts a string column into a integer column                                                                                                   | plugin |
 | [`polars into-df`](/commands/docs/polars_into-df.md)                 | Converts a list, table or record into a dataframe.                                                                                               | plugin |
 | [`polars into-lazy`](/commands/docs/polars_into-lazy.md)             | Converts a dataframe into a lazy dataframe.                                                                                                      | plugin |
 | [`polars into-nu`](/commands/docs/polars_into-nu.md)                 | Converts a dataframe or an expression into nushell value for access and exploration.                                                             | plugin |
@@ -132,6 +133,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars store-get`](/commands/docs/polars_store-get.md)             | Gets a Dataframe or other object from the plugin cache.                                                                                          | plugin |
 | [`polars store-ls`](/commands/docs/polars_store-ls.md)               | Lists stored polars objects.                                                                                                                     | plugin |
 | [`polars store-rm`](/commands/docs/polars_store-rm.md)               | Removes a stored Dataframe or other object from the plugin cache.                                                                                | plugin |
+| [`polars str-join`](/commands/docs/polars_str-join.md)               | Concatenates strings within a column or dataframes                                                                                               | plugin |
 | [`polars str-lengths`](/commands/docs/polars_str-lengths.md)         | Get lengths of all strings.                                                                                                                      | plugin |
 | [`polars str-slice`](/commands/docs/polars_str-slice.md)             | Slices the string from the start position until the selected length.                                                                             | plugin |
 | [`polars strftime`](/commands/docs/polars_strftime.md)               | Formats date based on string rule.                                                                                                               | plugin |
