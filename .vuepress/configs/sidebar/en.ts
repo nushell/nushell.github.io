@@ -252,6 +252,7 @@ export const sidebarEn: SidebarConfig = {
         '/lang-guide/chapters/strings_and_text.md',
         '/lang-guide/chapters/helpers_and_debugging.md',
         '/lang-guide/chapters/pipelines.md',
+        '/lang-guide/chapters/mime_types.md',
       ],
     },
   ],
