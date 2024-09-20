@@ -48,7 +48,6 @@ Output
 
 Suppose you are querying several endpoints,
 perhaps with different query parameters and you want to view all the responses as a single dataset.
-You can make use of `$it` to run nu commands on every row of data.
 
 An example JSON file, `urls.json`, with the following contents:
 
