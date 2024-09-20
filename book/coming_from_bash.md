@@ -32,8 +32,9 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 |                                      | `\| save --append <path>`                                     | Append command output to a file as structured data                |
 | `> /dev/null`                        | `\| ignore`                                                   | Discard command output                                            |
 | `> /dev/null 2>&1`                   | `out+err>\| ignore` or `o+e>\| ignore`                        | Discard command output, including stderr                          |
-| `command 2>&1 \| less`               | `command out+err>\| less` or `command o+e>\| less`            | Pipe stdout and stderr of a command into less                     |
+| `command 2>&1 \| less`               | `command out+err>\| less` or `command o+e>\| less`            | Pipe stdout and stderr of an external command into less (NOTE: use [explore](explore.html) for paging output of internal commands) |
 | `cmd1 \| tee log.txt \| cmd2`        | `cmd1 \| tee { save log.txt } \| cmd2`                        | Tee command output to a log file                                  |
+| `command \| head -5`                 | `command \| first 5`                                          | Limit the output to the first 5 rows of an internal command (see also `last` and `skip`) |
 | `cat <path>`                         | `open --raw <path>`                                           | Display the contents of the given file                            |
 |                                      | `open <path>`                                                 | Read a file as structured data                                    |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                                          | Move file to new location                                         |
