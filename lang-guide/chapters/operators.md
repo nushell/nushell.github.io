@@ -6,7 +6,7 @@
 - `-` - Minus / Subtraction
 - `*` - Multiply
 - `/` - Divide
-- `=` - Equal
+- `==` - Equal
 - `!=` - Not Equal
 - `//` - Floor Division
 - `<` - Less Than
