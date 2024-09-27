@@ -40,7 +40,7 @@ $ brew install nushell
 
 #### Windows:
 
-```powershell
+```sh
 $ winget install nushell
 ```
 
