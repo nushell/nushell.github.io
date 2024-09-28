@@ -37,7 +37,7 @@ To install all of the default plugins, from within Nushell run:
   nu_plugin_gstat
   nu_plugin_formats
   nu_plugin_query
-] | each { cargo install $in; $in }
+] | each { cargo install $in } | ignore
 ```
 
 :::
