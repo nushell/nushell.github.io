@@ -40,8 +40,8 @@ $ brew install nushell
 
 #### Windows:
 
-```shell
-$ winget install nushell
+```powershell
+winget install nushell
 ```
 
 После установки запустите Nu, набрав `nu`.

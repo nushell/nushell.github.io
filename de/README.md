@@ -41,7 +41,7 @@ $ brew install nushell
 #### Windows:
 
 ```powershell
-$ winget install nushell
+winget install nushell
 ```
 
 ## Community

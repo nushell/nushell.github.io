@@ -48,8 +48,8 @@ $ nix profile install nixpkgs#nushell
 
 #### Windows:
 
-```shell
-$ winget install nushell
+```powershell
+winget install nushell
 ```
 
 After installing, launch Nu by typing `nu`.
