@@ -37,8 +37,8 @@ $ brew install nushell
 
 En [Scoop](https://scoop.sh):
 
-```sh
-$ scoop install nu
+```powershell
+scoop install nu
 ```
 
 #### Inicia la shell

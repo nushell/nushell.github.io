@@ -40,8 +40,8 @@ $ brew install nushell
 
 #### Windows:
 
-```sh
-$ winget install nushell
+```powershell
+winget install nushell
 ```
 
 ## Nu を Github Actions で利用する
