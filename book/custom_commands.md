@@ -550,6 +550,49 @@ vip-greet $vip ...$guests
 # => And a special welcome to our VIP today, Tanisha!
 ```
 
+## Input-Output Signature
+
+Custom commands can be given explicit signatures.
+
+For example, the signature for [`str stats`](/commands/docs/str_stats.md) looks like this:
+
+```nu
+def "str stats" []: string -> record { }
+```
+
+Here, `string -> record` defines the allowed types of the _pipeline input and output_ of the command:
+
+- It accepts a `string` as pipeline input
+- It outputs a `record`
+
+If there are multiple input/output types, they can be placed within brackets and separated with commas or newlines, as in [`str join`](/commands/docs/str_join.md):
+
+```nu
+def "str join" [separator?: string]: [
+  list -> string
+  string -> string
+] { }
+```
+
+This indicates that `str join` can accept either a `list<any>` or a `string` as pipeline input. In either case, it will output a `string`.
+
+Some commands don't accept or require data as pipeline input. In this case, the input type will be `<nothing>`. The same is true for the output type if the command returns `null` (e.g., [`rm`](/commands/docs/rm.md) or [`hide`](/commands/docs/hide.md)):
+
+```nu
+def xhide [module: string, members?]: nothing -> nothing { }
+```
+
+::: tip Note
+The example above is renamed `xhide` so that copying it to the REPL will not shadow the built-in `hide` command.
+:::
+
+Input-output signatures are shown in the `help` for a command (both built-in and custom) and can also be introspected through:
+
+```nu
+help commands | where name == <command_name>
+scope commands | where name == <command_name>
+```
+
 ## Documenting Your Command
 
 In order to best help users understand how to use your custom commands, you can also document them with additional descriptions for the commands and parameters.
