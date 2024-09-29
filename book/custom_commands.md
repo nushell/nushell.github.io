@@ -173,7 +173,7 @@ It's common practice in Nushell to separate the words of the command with `-` fo
 :::
 
 ::: tip
-Because `def` is a parser keyword, the command name must be known at parse time. This means that command names may not be a variale or constant. For example, the following is _not allowed_:
+Because `def` is a parser keyword, the command name must be known at parse time. This means that command names may not be a variable or constant. For example, the following is _not allowed_:
 
 ````nu
 let name = "foo"
@@ -619,7 +619,7 @@ Input/output types:
 ```
 
 ::: tip Cool!
-You can see that Nushell automatically created some basic help for the commmand simply based on our definition so far. Nushell also automatically adds a `--help`/`-h` flag to the command, so users can also access the help using `vip-greet --help`.
+You can see that Nushell automatically created some basic help for the command simply based on our definition so far. Nushell also automatically adds a `--help`/`-h` flag to the command, so users can also access the help using `vip-greet --help`.
 :::
 
 We can extend the help further with some simple comments describing the command and its parameters:
