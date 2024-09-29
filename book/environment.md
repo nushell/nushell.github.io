@@ -81,6 +81,7 @@ BAR
 ```
 
 Sometimes, you may want to access an environmental variable which might be unset. Consider using the [question mark operator](types_of_data.md#optional-cell-paths) to avoid an error:
+
 ```nu
 > $env.FOO | describe
 Error: nu::shell::column_not_found
@@ -135,11 +136,11 @@ true
 true
 ```
 
-## Changing Directory
+See also: [Changing the Environment in a Custom Command](./custom_commands.html#changing-the-environment-in-a-custom-command).
 
-Common task in a shell is to change directory with the [`cd`](/commands/docs/cd.md) command.
-In Nushell, calling [`cd`](/commands/docs/cd.md) is equivalent to setting the `PWD` environment variable.
-Therefore, it follows the same rules as other environment variables (for example, scoping).
+## Changing the Directory
+
+A common task in a shell is to change the directory using the [`cd`](/commands/docs/cd.md) command. In Nushell, calling [`cd`](/commands/docs/cd.md) is equivalent to setting the `PWD` environment variable. Therefore, it follows the same rules as other environment variables (for example, scoping).
 
 ## Single-use Environment Variables
 
@@ -161,29 +162,13 @@ The [`with-env`](/commands/docs/with-env.md) command will temporarily set the en
 
 ## Permanent Environment Variables
 
-You can also set environment variables at startup so they are available for the duration of Nushell running.
-To do this, set an environment variable inside [the Nu configuration file](configuration.md).
+You can also set environment variables at startup so they are available for the duration of Nushell running. To do this, set an environment variable inside [the Nu configuration file](configuration.md).
+
 For example:
 
 ```nu
 # In config.nu
 $env.FOO = 'BAR'
-```
-
-## Defining Environment from Custom Commands
-
-Due to the scoping rules, any environment variables defined inside a custom command will only exist inside the command's scope.
-However, a command defined as [`def --env`](/commands/docs/def.md) instead of [`def`](/commands/docs/def.md) (it applies also to [`export def`](/commands/docs/export_def.md), see [Modules](modules.md)) will preserve the environment on the caller's side:
-
-```nu
-> def --env foo [] {
-    $env.FOO = 'BAR'
-}
-
-> foo
-
-> $env.FOO
-BAR
 ```
 
 ## Environment Variable Conversions
