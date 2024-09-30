@@ -155,6 +155,98 @@ In this case, the final expression is the `match` statement which can return:
 - Otherwise, a `record` representing the randomly chosen file
   :::
 
+## Custom Commands and Pipelines
+
+Just as with built-in commands, the return value of a custom command can be passed into the next command in a pipeline. Custom commands can also accept pipeline input. In addition, whenever possible, pipeline input and output is streamed as it becomes available.
+
+::: tip Important!
+See also: [Pipelines](./pipelines.html)
+:::
+
+### Pipeline Output
+
+```nu
+> ls | get name
+```
+
+Let's move [`ls`](/commands/docs/ls.md) into a command that we've written:
+
+```nu
+def my-ls [] { ls }
+```
+
+We can use the output from this command just as we would [`ls`](/commands/docs/ls.md).
+
+```nu
+> my-ls | get name
+# => ╭───┬───────────────────────╮
+# => │ 0 │ myscript.nu           │
+# => │ 1 │ myscript2.nu          │
+# => │ 2 │ welcome_to_nushell.md │
+# => ╰───┴───────────────────────╯
+```
+
+This lets us easily build custom commands and process their output. Remember that that we don't use return statements like other languages. Instead, the [implicit return](#returning-values-from-a-command) allows us to build pipelines that output streams of data that can be connected to other pipelines.
+
+::: tip Note
+The `ls` content is still streamed in this case, even though it is in a separate command. Running this command against a long-directory on a slow (e.g., networked) filesystem would return rows as they became available.
+:::
+
+### Pipeline Input
+
+Custom commands can also take input from the pipeline, just like other commands. This input is automatically passed to the custom command's block.
+
+Let's make our own command that doubles every value it receives as input:
+
+```nu
+def double [] {
+  each { |num| 2 * $num }
+}
+```
+
+Now, if we call the above command later in a pipeline, we can see what it does with the input:
+
+```nu
+[1 2 3] | double
+# => ╭───┬───╮
+# => │ 0 │ 2 │
+# => │ 1 │ 4 │
+# => │ 2 │ 6 │
+# => ╰───┴───╯
+```
+
+::: tip Cool!
+This command demonstrates both input and output _streaming_. Try running it with an infinite input:
+
+```nu
+1.. | each {||} | double
+```
+
+Even though the input command hasn't ended, the `double` command can still receive and output values as they become available.
+
+Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the command.
+:::
+
+We can also store the input for later use using the [`$in` variable](pipelines.html#pipeline-input-and-the-special-in-variable):
+
+```nu
+def nullify [...cols] {
+  let start = $in
+  $cols | reduce --fold $start { |col, table|
+    $table | upsert $col null
+  }
+}
+
+ls | nullify name size
+# => ╭───┬──────┬──────┬──────┬───────────────╮
+# => │ # │ name │ type │ size │   modified    │
+# => ├───┼──────┼──────┼──────┼───────────────┤
+# => │ 0 │      │ file │      │ 8 minutes ago │
+# => │ 1 │      │ file │      │ 8 minutes ago │
+# => │ 2 │      │ file │      │ 8 minutes ago │
+# => ╰───┴──────┴──────┴──────┴───────────────╯
+```
+
 ## Naming Commands
 
 In Nushell, a command name can be a string of characters. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `my command`, `命令` (English translation: "command"), and even `😊`.
@@ -169,7 +261,7 @@ Strings which might be confused with other parser patterns should be avoided. Fo
 While names like `"+foo"` might work, they are best avoided as the parser rules might change over time. When in doubt, keep command names as simple as possible.
 
 ::: tip
-It's common practice in Nushell to separate the words of the command with `-` for better readability.\_ For example `get-size` instead of `getsize` or `get_size`.
+It's common practice in Nushell to separate the words of the command with `-` for better readability. For example `get-size` instead of `getsize` or `get_size`.
 :::
 
 ::: tip
@@ -408,7 +500,7 @@ def greet [
       name: $name
       age: $age
     }
-  }
+}
 ```
 
 In this version of `greet`, we define the `name` positional parameter as well as an `age` flag. The positional parameter (since it doesn't have a `?`) is required. The named flag is optional. Calling the command without the `--age` flag will set `$age` to `null`.
@@ -584,9 +676,9 @@ vip-greet $vip ...$guests
 # => And a special welcome to our VIP today, Tanisha!
 ```
 
-## Input-Output Signature
+## Pipeline Input-Output Signature
 
-Custom commands can be given explicit signatures.
+By default, custom commands accept [`<any>` type](./types_of_data.md#any) as pipline input and likewise can output `<any>` type. But custom commands can also be given explicit signatures to narrow the types allowed.
 
 For example, the signature for [`str stats`](/commands/docs/str_stats.md) looks like this:
 
@@ -626,6 +718,46 @@ Input-output signatures are shown in the `help` for a command (both built-in and
 help commands | where name == <command_name>
 scope commands | where name == <command_name>
 ```
+
+:::tip Cool!
+Input-Output signatures allow Nushell to catch two additional categories of errors at parse-time:
+
+- Attempting to return the wrong type from a command. For example:
+
+  ```nu
+    def inc []: int -> int {
+    $in + 1
+    print "Did it!"
+  }
+
+  # => Error: nu::parser::output_type_mismatch
+  # =>
+  # => × Command output doesn't match int.
+  # => ╭─[entry #12:1:24]
+  # => 1 │ ╭─▶ def inc []: int -> int {
+  # => 2 │ │     $in + 1
+  # => 3 │ │     print "Did it!"
+  # => 4 │ ├─▶ }
+  # => · ╰──── expected int, but command outputs nothing
+  # => ╰────
+  ```
+
+- And attempting to pass an invalid type into a command:
+
+  ```nu
+  def inc []: int -> int { $in + 1 }
+  "Hi" | inc
+  # => Error: nu::parser::input_type_mismatch
+  # =>
+  # =>     × Command does not support string input.
+  # =>      ╭─[entry #16:1:8]
+  # =>    1 │ "Hi" | inc
+  # =>      ·        ─┬─
+  # =>      ·         ╰── command doesn't support string input
+  # =>      ╰────
+  ```
+
+  :::
 
 ## Documenting Your Command
 
@@ -779,82 +911,6 @@ cd /
 go-home
 pwd
 # => Your home directory
-```
-
-## Custom Commands and Pipelines
-
-::: tip Important!
-See also: [Pipelines](./pipelines.html)
-:::
-
-### Pipeline Output
-
-Custom commands stream their output just like built-in commands. For example, let's say we wanted to refactor this pipeline:
-
-```nu
-> ls | get name
-```
-
-Let's move [`ls`](/commands/docs/ls.md) into a command that we've written:
-
-```nu
-def my-ls [] { ls }
-```
-
-We can use the output from this command just as we would [`ls`](/commands/docs/ls.md).
-
-```nu
-> my-ls | get name
-# => ╭───┬───────────────────────╮
-# => │ 0 │ myscript.nu           │
-# => │ 1 │ myscript2.nu          │
-# => │ 2 │ welcome_to_nushell.md │
-# => ╰───┴───────────────────────╯
-```
-
-This lets us easily build custom commands and process their output. Remember that that we don't use return statements like other languages. Instead, the [implicit return](#returning-values-from-a-command) allows us to build pipelines that output streams of data that can be connected to other pipelines.
-
-### Pipeline Input
-
-Custom commands can also take input from the pipeline, just like other commands. This input is automatically passed to the block that the custom command uses.
-
-Let's make our own command that doubles every value it receives as input:
-
-```nu
-def double [] {
-  each { |num| 2 * $num }
-}
-```
-
-Now, if we call the above command later in a pipeline, we can see what it does with the input:
-
-```nu
-[1 2 3] | double
-# => ╭───┬───╮
-# => │ 0 │ 2 │
-# => │ 1 │ 4 │
-# => │ 2 │ 6 │
-# => ╰───┴───╯
-```
-
-We can also store the input for later use using the [`$in` variable](pipelines.html#pipeline-input-and-the-special-in-variable):
-
-```nu
-def nullify [...cols] {
-  let start = $in
-  $cols | reduce --fold $start { |col, table|
-    $table | upsert $col null
-  }
-}
-
-ls | nullify name size
-# => ╭───┬──────┬──────┬──────┬───────────────╮
-# => │ # │ name │ type │ size │   modified    │
-# => ├───┼──────┼──────┼──────┼───────────────┤
-# => │ 0 │      │ file │      │ 8 minutes ago │
-# => │ 1 │      │ file │      │ 8 minutes ago │
-# => │ 2 │      │ file │      │ 8 minutes ago │
-# => ╰───┴──────┴──────┴──────┴───────────────╯
 ```
 
 ## Persisting
