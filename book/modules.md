@@ -199,7 +199,9 @@ Submodules are modules inside modules. They are automatically created when you c
 
 The difference is that `export module some-module` _only_ adds the module as a submodule, while `export use some-module` _also_ re-exports the submodule's definitions. Since definitions of submodules are available when importing from a module, `export use some-module` is typically redundant, unless you want to re-export its definitions without the namespace prefix.
 
-> **Note** > `module` without `export` defines only a local module, it does not export a submodule.
+::: tip Note
+`module` without `export` defines only a local module, it does not export a submodule.
+:::
 
 Let's illustrate this with an example. Assume three files:
 
