@@ -678,7 +678,7 @@ vip-greet $vip ...$guests
 
 ## Pipeline Input-Output Signature
 
-By default, custom commands accept [`<any>` type](./types_of_data.md#any) as pipline input and likewise can output `<any>` type. But custom commands can also be given explicit signatures to narrow the types allowed.
+By default, custom commands accept [`<any>` type](./types_of_data.md#any) as pipeline input and likewise can output `<any>` type. But custom commands can also be given explicit signatures to narrow the types allowed.
 
 For example, the signature for [`str stats`](/commands/docs/str_stats.md) looks like this:
 
