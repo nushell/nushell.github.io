@@ -186,6 +186,8 @@ The `main` is exported only when
 
 Importing definitions selectively (`use greetings.nu hello` or `use greetings.nu [hello hi]`) does not define the `greetings` command from `main`. You can, however, selectively import `main` using `use greetings main` (or `[main]`) which defines _only_ the `greetings` command without pulling in `hello` or `hi`.
 
+Additionally, `main` has special behavior if used in a script file, regardless of whether it is exported or not. See the [section on scripts](scripts.html#parameterizing-scripts) for more details.
+
 Apart from commands (`def`, `def --env`), known externals (`extern`) can also be named `main`.
 
 ## Submodules and Subcommands
@@ -197,8 +199,7 @@ Submodules are modules inside modules. They are automatically created when you c
 
 The difference is that `export module some-module` _only_ adds the module as a submodule, while `export use some-module` _also_ re-exports the submodule's definitions. Since definitions of submodules are available when importing from a module, `export use some-module` is typically redundant, unless you want to re-export its definitions without the namespace prefix.
 
-> **Note**
-> `module` without `export` defines only a local module, it does not export a submodule.
+> **Note** > `module` without `export` defines only a local module, it does not export a submodule.
 
 Let's illustrate this with an example. Assume three files:
 
@@ -425,10 +426,11 @@ A common pattern in traditional shells is dumping and auto-sourcing files from a
 Here we'll create a simple completion module with a submodule dedicated to some Git completions:
 
 1. Create the completion directory
-`mkdir ($nu.default-config-dir | path join completions)`
+   `mkdir ($nu.default-config-dir | path join completions)`
 2. Create an empty `mod.nu` for it
-`touch ($nu.default-config-dir | path join completions mod.nu)`
+   `touch ($nu.default-config-dir | path join completions mod.nu)`
 3. Put the following snippet in `git.nu` under the `completions` directory
+
 ```nu
 export extern main [
     --version(-v)
@@ -450,17 +452,20 @@ def complete-git-branch [] {
     # ... code to list git branches
 }
 ```
+
 4. Add `export module git.nu` to `mod.nu`
 5. Add the parent of the `completions` directory to your NU_LIB_DIRS inside `env.nu`
+
 ```nu
 $env.NU_LIB_DIRS = [
     ...
     $nu.default-config-dir
 ]
 ```
+
 6. import the completions to Nushell in your `config.nu`
-`use completions *`
-Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
+   `use completions *`
+   Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
 
 > **Note**
 > This will use the file name (in our example `git` from `git.nu`) as the module name. This means some completions might not work if the definition has the base command in its name.
@@ -515,5 +520,4 @@ It can be one of the following:
 
 - Hides all the module's exports, without the prefix
 
-> **Note**
-> `hide` is not a supported keyword at the root of a module (unlike `def` etc.)
+> **Note** > `hide` is not a supported keyword at the root of a module (unlike `def` etc.)
