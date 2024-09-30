@@ -78,11 +78,12 @@ then
 
 The result should be similar as in the previous section.
 
-> **Note**
-> that the `use greetings.nu hello` call here first implicitly creates the `greetings` module,
-> then takes `hello` from it. You could also write it as `module greetings.nu`, `use greetings hello`.
-> Using `module` can be useful if you're not interested in any definitions from the module but want to,
-> e.g., re-export the module (`export module greetings.nu`).
+::: tip Note
+Note that the `use greetings.nu hello` call here first implicitly creates the `greetings` module,
+then takes `hello` from it. You could also write it as `module greetings.nu`, `use greetings hello`.
+Using `module` can be useful if you're not interested in any definitions from the module but want to,
+e.g., re-export the module (`export module greetings.nu`).
+:::
 
 ## Modules from Directories
 
@@ -112,7 +113,7 @@ then
 
 The name of the module follows the same rule as module created from a file: Stem of the directory name, i.e., the directory name, is used as the module name. Again, you could do this as a two-step action using `module` and `use` separately, as explained in the previous section.
 
-::: tip
+::: tip Note
 You can define `main` command inside `mod.nu` to create a command named after the module directory.
 :::
 
@@ -428,62 +429,68 @@ A common pattern in traditional shells is dumping and auto-sourcing files from a
 Here we'll create a simple completion module with a submodule dedicated to some Git completions:
 
 1. Create the completion directory
+
    `mkdir ($nu.default-config-dir | path join completions)`
+
 2. Create an empty `mod.nu` for it
+
    `touch ($nu.default-config-dir | path join completions mod.nu)`
+
 3. Put the following snippet in `git.nu` under the `completions` directory
 
-```nu
-export extern main [
-    --version(-v)
-    -C: string
-    # ... etc.
-]
+   ```nu
+   export extern main [
+       --version(-v)
+       -C: string
+       # ... etc.
+   ]
 
-export extern add [
-    --verbose(-v)
-    --dry-run(-n)
-    # ... etc.
-]
+   export extern add [
+       --verbose(-v)
+       --dry-run(-n)
+       # ... etc.
+   ]
 
-export extern checkout [
-    branch: string@complete-git-branch
-]
+   export extern checkout [
+       branch: string@complete-git-branch
+   ]
 
-def complete-git-branch [] {
-    # ... code to list git branches
-}
-```
+   def complete-git-branch [] {
+       # ... code to list git branches
+   }
+   ```
 
 4. Add `export module git.nu` to `mod.nu`
 5. Add the parent of the `completions` directory to your NU_LIB_DIRS inside `env.nu`
 
-```nu
-$env.NU_LIB_DIRS = [
-    ...
-    $nu.default-config-dir
-]
-```
+   ```nu
+   $env.NU_LIB_DIRS = [
+       ...
+       $nu.default-config-dir
+   ]
+   ```
 
-6. import the completions to Nushell in your `config.nu`
+6. Import the completions to Nushell in your `config.nu`:
+
    `use completions *`
-   Now you've set up a directory where you can put your completion files and you should have some Git completions the next time you start Nushell
 
-> **Note**
-> This will use the file name (in our example `git` from `git.nu`) as the module name. This means some completions might not work if the definition has the base command in its name.
-> For example, if you defined our known externals in our `git.nu` as `export extern 'git push' []`, etc. and followed the rest of the steps, you would get subcommands like `git git push`, etc.
-> You would need to call `use completions git *` to get the desired subcommands. For this reason, using `main` as outlined in the step above is the preferred way to define subcommands.
+Now you've set up a directory where you can put your completion files, and you should have some Git completions the next time you start Nushell.
+
+::: tip Note
+This will use the file name (in our example `git` from `git.nu`) as the module name. This means some completions might not work if the definition has the base command in its name.
+For example, if you defined our known externals in our `git.nu` as `export extern 'git push' []`, etc. and followed the rest of the steps, you would get subcommands like `git git push`, etc.
+You would need to call `use completions git *` to get the desired subcommands. For this reason, using `main` as outlined in the step above is the preferred way to define subcommands.
+:::
 
 ### Setting environment + aliases (conda style)
 
 `def --env` commands, `export-env` block and aliases can be used to dynamically manipulate "virtual environments" (a concept well known from Python).
 
-We use it in our official virtualenv integration https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu
+We use it in our [official virtualenv integration](https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu). Another example is our [unofficial Conda module](https://github.com/nushell/nu_scripts/blob/main/modules/virtual_environments/conda.nu).
 
-Another example could be our unofficial Conda module: https://github.com/nushell/nu_scripts/blob/f86a060c10f132407694e9ba0f536bfe3ee51efc/modules/virtual_environments/conda.nu
-
-> **Warning**
-> Work In Progress
+::: warning
+Work in progress
+:::
 
 ## Hiding
 
@@ -522,4 +529,6 @@ It can be one of the following:
 
 - Hides all the module's exports, without the prefix
 
-> **Note** > `hide` is not a supported keyword at the root of a module (unlike `def` etc.)
+:::tip Note
+`hide` is not a supported keyword at the root of a module (unlike `def` etc.)
+:::

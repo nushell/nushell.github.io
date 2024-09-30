@@ -103,9 +103,7 @@ Hello string +1
 
 ## Subcommands
 
-A script's `main` command can have multiple [subcommands](custom_commands.html#subcommands) like `run`, `build`, etc. which allows executing a specific sub-function from the commandline.
-
-For example:
+A script can have multiple [subcommands](custom_commands.html#subcommands), like `run` or `build` for example:
 
 ```nu
 # myscript.nu
@@ -121,6 +119,8 @@ def main [] {
     print "hello from myscript!"
 }
 ```
+
+You can then execute the script's subcommands when calling it:
 
 ```nu
 > nu myscript.nu
