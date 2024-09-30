@@ -28,6 +28,18 @@ Core plugins are typically distributed with the Nushell release and should alrea
 
 ::: tip Installing using Cargo
 For example, when installing or upgrading Nushell directly from crates.io using `cargo install nu`, the corresponding core plugins for that version may also be installed or updated using `cargo install nu_plugin_<plugin_name>`.
+
+To install all of the default plugins, from within Nushell run:
+
+```nu
+[ nu_plugin_inc
+  nu_plugin_polars
+  nu_plugin_gstat
+  nu_plugin_formats
+  nu_plugin_query
+] | each { cargo install $in } | ignore
+```
+
 :::
 
 ### Third-party Plugins
