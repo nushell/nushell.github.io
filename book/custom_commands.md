@@ -206,26 +206,60 @@ def "custom command" [] {
 
 ## Parameters
 
-### Required positional parameters
+### Multiple parameters
 
-The basic argument definitions used above are _positional_. The first parameter passed into the `greet` command above is assigned to the first `name` parameter.
+In the `def` command, the parameters are defined in a [`list`](./types_of_data.md#lists). This means that multiple parameters can be separated with spaces, commas, or line-breaks.
 
-By default, positional parameters are required. If a positional parameter is not provided, we will encounter an error. Using our basic `greet` command:
+For example, here's a version of `greet` that accepts two names. Any of these three definitions will work:
 
 ```nu
-def greet [name] {
+# Spaces
+def greet [name1 name2] {
+  $"Hello, ($name1) and ($name2)!"
+}
+
+# Commas
+def greet [name1, name2] {
+  $"Hello, ($name1) and ($name2)!"
+}
+
+# Linebreaks
+def greet [
+  name1
+  name2
+] {
+  $"Hello, ($name1) and ($name2)!"
+}
+```
+
+### Required positional parameters
+
+The basic argument definitions used above are _positional_. The first argument passed into the `greet` command above is assigned to the `name1` parameter (and, as mentioned above, the `$name1` variable). The second argument becomes the `name2` parameter and the `$name2` variable.
+
+By default, positional parameters are _required_. Using our previous definition of `greet` with two required, positional parameters:
+
+```nu
+def greet [name1, name2] {
   $"Hello, ($name)!"
 }
 
-greet
-# =>   × Missing required positional argument.
-# =>    ╭─[entry #23:1:1]
-# =>  1 │ greet
-# =>    ·      ▲
-# =>    ·      ╰── missing name
-# =>    ╰────
-# =>   help: Usage: greet <name>
+greet Wei Mei
+# => Hello, Wei and Mei!
+
+greet Wei
+# => Error: nu::parser::missing_positional
+# =>
+# =>
+# => × Missing required positional argument.
+# => ╭─[entry #10:1:10]
+# => 1 │ greet Mei
+# => ╰────
+# => help: Usage: greet <name1> <name2> . Use `--help` for more information.
 ```
+
+::: tip
+Try typing a third name after this version of `greet`. Notice that the parser automatically detects the error and highlights the third argument as an error even before execution.
+:::
 
 ### Optional Positional Parameters
 
