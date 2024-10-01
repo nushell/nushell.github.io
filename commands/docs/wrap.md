@@ -57,3 +57,20 @@ Wrap a range into a table with a given column name
 ╰───┴─────╯
 
 ```
+
+## Notes
+Since `index` is a special keyword that defines the index of the table itself, in this case, `wrap` behavior might be surprising to some.
+```nu
+> [4 5 6] | wrap index
+╭───┬───────────────╮
+│ 4 │ ╭───────┬───╮ │
+│   │ │ index │ 4 │ │
+│   │ ╰───────┴───╯ │
+│ 5 │ ╭───────┬───╮ │
+│   │ │ index │ 5 │ │
+│   │ ╰───────┴───╯ │
+│ 6 │ ╭───────┬───╮ │
+│   │ │ index │ 6 │ │
+│   │ ╰───────┴───╯ │
+╰───┴───────────────╯
+```
