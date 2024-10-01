@@ -86,18 +86,18 @@ Table rows are sorted by comparing rows by the columns in order. If two rows hav
 
 ```nu
 > let items = [
-    {id: 100, price: 10, quantity: 5 }
-    {id: 100, price: 5,  quantity: 8 }
-    {id: 100, price: 5,  quantity: 1 }
+    {id: 100, quantity: 10, price: 5 }
+    {id: 100, quantity: 5,  price: 8 }
+    {id: 100, quantity: 5,  price: 1 }
 ]
 > $items | sort
-╭───┬─────┬───────┬──────────╮
-│ # │ id  │ price │ quantity │
-├───┼─────┼───────┼──────────┤
-│ 0 │ 100 │     5 │        1 │
-│ 1 │ 100 │     5 │        8 │
-│ 2 │ 100 │    10 │        5 │
-╰───┴─────┴───────┴──────────╯
+╭───┬─────┬──────────┬───────╮
+│ # │ id  │ quantity │ price │
+├───┼─────┼──────────┼───────┤
+│ 0 │ 100 │        5 │     1 │
+│ 1 │ 100 │        5 │     8 │
+│ 2 │ 100 │       10 │     5 │
+╰───┴─────┴──────────┴───────╯
 ```
 
 In this example, the `id` column for all items is equal. Then, the two items with price `5` are sorted before the item with price `10`. Finally, the `item` with quantity `1` is sorted before the item with quantity `8`.
