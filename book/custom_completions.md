@@ -138,25 +138,25 @@ def my_commits [] {
 }
 ```
 
-> **Note**
->
-> with the following snippet
->
-> ```nu
-> def my-command [commit: string@my_commits] {
->     print $commit
-> }
-> ```
->
-> be aware that, even though the completion menu will show you something like
->
-> ```nu
-> >_ my-command <TAB>
-> 5c2464  Add .gitignore
-> f3a377  Initial commit
-> ```
->
-> only the value, i.e. "5c2464" or "f3a377", will be used in the command arguments!
+::: tip Note
+With the following snippet:
+
+```nu
+def my-command [commit: string@my_commits] {
+    print $commit
+}
+```
+
+... be aware that, even though the completion menu will show you something like
+
+```nu
+>_ my-command <TAB>
+5c2464  Add .gitignore
+f3a377  Initial commit
+```
+
+... only the value (i.e., "5c2464" or "f3a377") will be used in the command arguments!
+:::
 
 ## External Completions
 
@@ -174,12 +174,13 @@ For this, set the `external_completer` field in `config.nu` to a [closure](types
 
 You can configure the closure to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
 
-When the closure returns unparsable json (e.g. an empty string) it defaults to file completion.
+When the closure returns unparsable json (e.g., an empty string) it defaults to file completion.
 
 An external completer is a function that takes the current command as a string list, and outputs a list of records with `value` and `description` keys, like custom completion functions.
 
-> **Note**
-> This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.
+::: tip Note
+This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.
+:::
 
 This example will enable carapace external completions:
 

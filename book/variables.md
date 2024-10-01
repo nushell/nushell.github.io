@@ -59,13 +59,11 @@ There are a couple of assignment operators used with mutable variables
 | `/=`     | Divides the variable by a value and makes the quotient its new value       |
 | `++=`    | Appends a list or a value to a variable                                    |
 
-> **Note**
->
-> 1. `+=`, `-=`, `*=` and `/=` are only valid in the contexts where their root operations
->    are expected to work. For example, `+=` uses addition, so it can not be used for contexts
->    where addition would normally fail
-> 2. `++=` requires that either the variable **or** the argument is a
->    list.
+::: tip Note
+
+1. `+=`, `-=`, `*=` and `/=` are only valid in the contexts where their root operations are expected to work. For example, `+=` uses addition, so it can not be used for contexts where addition would normally fail
+2. `++=` requires that either the variable **or** the argument is a list.
+   :::
 
 #### More on Mutability
 

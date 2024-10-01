@@ -371,16 +371,16 @@ And the pipeline:
 
 Are one and the same.
 
-> **Note**
-> the sentence _are one and the same_ above only applies for the graphical output in the shell,
-> it does not mean the two data structures are them same
->
-> ```nushell
-> > (ls) == (ls | table)
-> false
-> ```
->
-> `ls | table` is not even structured data!
+::: tip Note
+The phrase _"are one and the same"_ above only applies to the graphical output in the shell, it does not mean the two data structures are the same:
+
+```nushell
+(ls) == (ls | table)
+# => false
+```
+
+`ls | table` is not even structured data!
+:::
 
 ## Output Result to External Commands
 
