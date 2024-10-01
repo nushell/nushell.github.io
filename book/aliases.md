@@ -62,12 +62,16 @@ displaying all listed files and folders in a grid.
 
 ## Replacing Existing Commands Using Aliases
 
-> Caution! When replacing commands it is best to "back up" the command first and avoid recursion error.
+::: warning Caution!
+When replacing commands it is best to "back up" the command first and avoid recursion error.
+:::
 
 How to back up a command like `ls`:
+
 ```nu
 alias core-ls = ls    # This will create a new alias core-ls for ls
 ```
+
 Now you can use `core-ls` as `ls` in your nu-programming. You will see further down how to use `core-ls`.
 
 The reason you need to use alias is because, unlike `def`, aliases are position-dependent. So, you need to "back up" the old command first with an alias, before re-defining it.

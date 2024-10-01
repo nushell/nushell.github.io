@@ -165,11 +165,11 @@ External completers can also be integrated, instead of relying solely on Nushell
 For this, set the `external_completer` field in `config.nu` to a [closure](types_of_data.md#closures) which will be evaluated if no Nushell completions were found.
 
 ```nu
-> $env.config.completions.external = {
->     enable: true
->     max_results: 100
->     completer: $completer
-> }
+$env.config.completions.external = {
+    enable: true
+    max_results: 100
+    completer: $completer
+}
 ```
 
 You can configure the closure to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
