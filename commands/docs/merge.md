@@ -33,13 +33,13 @@ usage: |
 
 Add an 'index' column to the input table
 ```nu
-> [a b c] | wrap name | merge ( [1 2 3] | wrap index )
+> [a b c] | wrap name | merge ( [4 5 6] | wrap index )
 ╭───┬──────╮
 │ # │ name │
 ├───┼──────┤
-│ 1 │ a    │
-│ 2 │ b    │
-│ 3 │ c    │
+│ 4 │ a    │
+│ 5 │ b    │
+│ 6 │ c    │
 ╰───┴──────╯
 
 ```
