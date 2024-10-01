@@ -37,10 +37,9 @@ Pandas](https://pandas.pydata.org/) commands. For the time being don't pay too
 much attention to the [`Dataframe` commands](/commands/categories/dataframe.md). They will be explained in later
 sections of this page.
 
-> System Details: The benchmarks presented in this section were run using a
-> Macbook with a processor M1 pro and 32gb of ram
->
-> All examples were run on Nushell version 0.97 using `nu_plugin_polars 0.97`
+::: tip System Details
+The benchmarks presented in this section were run using a Macbook with a processor M1 pro and 32gb of ram. All examples were run on Nushell version 0.97 using `nu_plugin_polars 0.97`.
+:::
 
 ### File Information
 
