@@ -296,3 +296,40 @@ $env.config = {
     }
 }
 ```
+
+
+
+### `command_not_found` Hook in _Windows_
+
+The following hook uses the `ftype` command, to find program paths in _Windows_ that might be relevant to the user for `alias`-ing.
+
+```nu
+$env.config = {
+    ...other config...
+
+    hooks: {
+        ...other hooks...
+
+        command_not_found: {
+            |cmd_name| (
+                try {
+                    let attrs = (
+                        ftype | find $cmd_name | to text | lines | reduce -f [] { |line, acc|
+                            $line | parse "{type}={path}" | append $acc
+                        } | group-by path | transpose key value | each { |row|
+                            { path: $row.key, types: ($row.value | get type | str join ", ") }
+                        }
+                    )
+                    let len = ($attrs | length)
+
+                    if $len == 0 {
+                        return null
+                    } else {
+                        return ($attrs | table --collapse)
+                    }
+                }
+            )
+        }
+    }
+}
+```
