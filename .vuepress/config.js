@@ -92,9 +92,6 @@ export default defineUserConfig({
     ['link', { rel: 'icon', href: '/icon.png' }],
   ],
   markdown: {
-    code: {
-      lineNumbers: false,
-    },
     importCode: {
       handleImportPath: (str) =>
         str.replace(/^@snippets/, path.resolve(__dirname, '../snippets')),
@@ -175,6 +172,7 @@ export default defineUserConfig({
     }),
     shikiPlugin({
       theme: 'dark-plus',
+      lineNumbers: false,
       langs: [
         'nushell',
         'rust',
