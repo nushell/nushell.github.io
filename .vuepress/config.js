@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { defineUserConfig } from '@vuepress/cli';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { feedPlugin } from '@vuepress/plugin-feed';
