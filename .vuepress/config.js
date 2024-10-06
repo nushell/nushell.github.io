@@ -172,7 +172,7 @@ export default defineUserConfig({
     }),
     shikiPlugin({
       theme: 'dark-plus',
-      lineNumbers: false,
+      lineNumbers: true,
       langs: [
         'nushell',
         'rust',
