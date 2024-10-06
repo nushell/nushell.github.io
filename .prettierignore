@@ -10,3 +10,4 @@ commands/docs/*.md
 .vuepress/.temp
 .vuepress/.cache
 .vuepress/dist/
+.vuepress/styles/
