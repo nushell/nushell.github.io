@@ -11,3 +11,5 @@ commands/docs/*.md
 .vuepress/.cache
 .vuepress/dist/
 .vuepress/styles/
+**/*.scss
+**/*.css
