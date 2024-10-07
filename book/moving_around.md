@@ -153,7 +153,7 @@ Nu also provides some basic [filesystem commands](/commands/categories/filesyste
 ::: tip NOTE
 Under Bash and many other shells, most filesystem commands (other than `cd`) are actually separate binaries in the system. For instance, on a Linux system, `cp` is the `/usr/bin/cp` binary. In Nushell, these commands are built-in. This has several advantages:
 
-- They work consistently on platforms where a binary version may not be available (e.g., Windows). This allows the creation of cross-platform scripts, modules, and custom commands.
+- They work consistently on platforms where a binary version may not be available (e.g. Windows). This allows the creation of cross-platform scripts, modules, and custom commands.
 - They are more tightly integrated with Nushell, allowing them to understand Nushell types and other constructs
 - As mentioned in the [Quick Tour](quick_tour.html), they are documented in the Nushell help system. Running `help <command>` or `<command> --help` will display the Nushell documentation for the command.
 
