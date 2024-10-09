@@ -22,7 +22,7 @@ usage: |
 
  -  `--all, -a`: replace all occurrences of the pattern
  -  `--no-expand, -n`: do not expand capture groups (like $name) in the replacement string
- -  `--regex, -r`: match the pattern as a regular expression in the input, instead of a substring
+ -  `--regex, -r`: match the pattern as a regular expression in the input, instead of a substring, following [rust specification](https://docs.rs/regex/latest/regex/struct.Regex.html#method.replace)
  -  `--multiline, -m`: multi-line regex mode (implies --regex): ^ and $ match begin/end of line; equivalent to (?m)
 
 ## Parameters
