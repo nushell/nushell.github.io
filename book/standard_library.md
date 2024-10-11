@@ -212,7 +212,7 @@ Edit those files to use the recommended syntax below.
 :::
 
 ::: note
-If a Nushell library (e.g., from [the `nu_scripts` repository](https://github.com/nushell/nu_scripts)) is using this syntax, please report it via an issue or PR. These will be updated over time after Nushell 0.99.0 is released.
+If a Nushell library (e.g., from [the `nu_scripts` repository](https://github.com/nushell/nu_scripts)), example, or doc is using this syntax, please report it via an issue or PR. These will be updated over time after Nushell 0.99.0 is released.
 
 If a third-party module is using this syntax, please report it to the author/maintainers to update.
 :::
