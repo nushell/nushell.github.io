@@ -43,7 +43,7 @@ use std *
 However, this form should be avoided in custom commands and scripts since it has the longest load time. While the load time is only on the order of ~20-30 milliseconds on an average system, that can add up in certain scenarios.
 
 ::: important Optimal Startup when Using the Standard Library
-See the [notes below](#optimal-startup) on how to ensure that your configutation isn't loading the entire Standard Library.
+See the [notes below](#optimal-startup) on how to ensure that your configuration isn't loading the entire Standard Library.
 :::
 
 ### Importing Submodules
@@ -230,6 +230,6 @@ view source ellie | nu-highlight
 ## Windows Path Syntax
 
 ::: important
-Nushell on Windows supports both forward-slashes and back-slashes as the path separator.  However, to ensure cross-platform support for cripts and modules using `std`, using only the forward-slash `/` when importing Standard Library submodules is highly recommended.
+Nushell on Windows supports both forward-slashes and back-slashes as the path separator.  However, to ensure cross-platform support for scripts and modules using `std`, using only the forward-slash `/` when importing Standard Library submodules is highly recommended.
 :::
 ```
