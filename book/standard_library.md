@@ -71,7 +71,7 @@ This form requires that you prefix the command using the submodule name. This ca
 
 2. In the `use std/help` example, `help` is both the submodule name and the name of the main command it exports. Using `use std/help` allows you to access:
 
-   ```
+   ```nu
    help
    help aliases
    help modules
