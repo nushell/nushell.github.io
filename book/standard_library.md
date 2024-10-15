@@ -40,7 +40,7 @@ While working at the commandline, it can be convenient to load the entire standa
 use std *
 ```
 
-However, this form should be avoided in custom commands and scripts since it has the longest load time. While the load time is only on the order of ~20-30 milliseconds on an average system, that can add up in certain scenarios.
+However, this form should be avoided in custom commands and scripts since it has the longest load time.
 
 ::: important Optimal Startup when Using the Standard Library
 See the [notes below](#optimal-startup) on how to ensure that your configuration isn't loading the entire Standard Library.
@@ -48,7 +48,7 @@ See the [notes below](#optimal-startup) on how to ensure that your configuration
 
 ### Importing Submodules
 
-Each submodule of the standard library can be loaded separately. Again, for best performance, load only the submodule(s) that you need in your code.
+Each submodule of the standard library can be loaded separately. Again, _for best performance, load only the submodule(s) that you need in your code._
 
 There are several forms that can be used:
 
@@ -93,9 +93,9 @@ Submodules that are normally imported with `use std/<submodule>`:
 - `use std/log`: The `log <subcommands>` such as `log warning <msg>`
 - `use std/math`: Mathematical constants such as `$math.E`. These can also be imported without a prefix using Form #2 below.
 
-#### 2. Import all submodule commands without a prefix
+#### 2. Import the _contents_ of the module directly
 
-For certain submodules, you will want the commands from a submodule to be available in the current namespace, so that you _can_ simply access the command by name. For instance:
+For certain submodules, you will want the commands from a submodule to be available in the current scope, so that you _can_ simply access the command by name. For instance:
 
 ```nu
 use std/formats *
@@ -117,7 +117,7 @@ As with most modules, you can choose to import only a subset of the commands. Fo
 use std/iter [ zip-with ]
 ```
 
-#### 4. Not Recommended - `use std <submodule>` and `use std <submodule> *`
+#### 4. `use std <submodule>`
 
 While it is _possible_ to import Standard Library submodules using a space-separated form:
 
@@ -126,29 +126,13 @@ use std log
 use std formats *
 ```
 
-This is NOT RECOMMENDED. Using this form has the same performance impact as:
-
-```nu
-use std *
-```
-
-::: caution
-The difference is subtle, but important from a performance perspective. Using `std/<submodules>` (with a slash) is far faster than `std <submodule>` (with a space):
-
-```nu
-bench -n 200 --pretty { nu -c "use std/formats *; exit" }
-# => 9ms 271µs 832ns +/- 328µs 860ns
-bench -n 200 --pretty { nu -c "use std formats *; exit" }
-# => 26ms 921µs 59ns +/- 588µs 919ns
-```
-
-:::
+However, similar to `use std *`, this form first loads the _entire_ Standard Library into scope and _then_ imports the submodules. In contrast, using the slash-separated version _only_ imports the submodule and will be much faster as a result.
 
 ## The Standard Library Candidate Module
 
 (Also known as `std-rfc`)
 
-`stdlib-candidate`, found in the [nu_scripts Repository](https://github.com/nushell/nu_scripts/tree/main/stdlib-candidate/std-rfc), serves as a staging ground for new commands before they are added to the Standard Library.
+`stdlib-candidate`, found in the [nu_scripts Repository](https://github.com/nushell/nu_scripts/tree/main/stdlib-candidate/std-rfc), serves as a staging ground for possible Standard Library additions.
 
 If you are interested in adding to the Standard Library, please submit your code via PR to the Candidate module in that repository. We also encourage you to install this module and provide feedback on upcoming candidate commands.
 
