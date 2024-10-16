@@ -2,7 +2,7 @@
 title: polars agg-groups
 categories: |
   dataframe
-version: 0.98.0
+version: 0.99.0
 dataframe: |
   Creates an agg_groups expression.
 usage: |

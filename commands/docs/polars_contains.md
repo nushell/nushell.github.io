@@ -2,7 +2,7 @@
 title: polars contains
 categories: |
   dataframe
-version: 0.98.0
+version: 0.99.0
 dataframe: |
   Checks if a pattern is contained in a string.
 usage: |

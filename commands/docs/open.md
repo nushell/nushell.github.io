@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.98.0
+version: 0.99.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |

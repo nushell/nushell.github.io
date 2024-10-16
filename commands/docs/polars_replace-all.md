@@ -2,7 +2,7 @@
 title: polars replace-all
 categories: |
   dataframe
-version: 0.98.0
+version: 0.99.0
 dataframe: |
   Replace all (sub)strings by a regex pattern.
 usage: |

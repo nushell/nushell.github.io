@@ -2,7 +2,7 @@
 title: polars replace
 categories: |
   dataframe
-version: 0.98.0
+version: 0.99.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern.
 usage: |

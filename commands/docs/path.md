@@ -2,7 +2,7 @@
 title: path
 categories: |
   path
-version: 0.98.0
+version: 0.99.0
 path: |
   Explore and manipulate paths.
 usage: |

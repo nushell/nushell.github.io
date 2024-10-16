@@ -2,7 +2,7 @@
 title: polars fetch
 categories: |
   lazyframe
-version: 0.98.0
+version: 0.99.0
 lazyframe: |
   Collects the lazyframe to the selected rows.
 usage: |

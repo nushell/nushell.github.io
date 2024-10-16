@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.98.0
+version: 0.99.0
 strings: |
   Encode a string into bytes.
 usage: |
@@ -65,10 +65,9 @@ documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
 
 ## Subcommands:
 
-| name                                                       | description                                        | type     |
-| ---------------------------------------------------------- | -------------------------------------------------- | -------- |
-| [`encode base32`](/commands/docs/encode_base32.md)         | Encode a string or binary value using Base32.      | built-in |
-| [`encode base32hex`](/commands/docs/encode_base32hex.md)   | Encode a binary value or a string using base32hex. | built-in |
-| [`encode base64`](/commands/docs/encode_base64.md)         | Encode a string or binary value using Base64.      | built-in |
-| [`encode hex`](/commands/docs/encode_hex.md)               | Hex encode a binary value or a string.             | built-in |
-| [`encode new-base64`](/commands/docs/encode_new-base64.md) | Encode a string or binary value using Base64.      | built-in |
+| name                                                     | description                                        | type     |
+| -------------------------------------------------------- | -------------------------------------------------- | -------- |
+| [`encode base32`](/commands/docs/encode_base32.md)       | Encode a string or binary value using Base32.      | built-in |
+| [`encode base32hex`](/commands/docs/encode_base32hex.md) | Encode a binary value or a string using base32hex. | built-in |
+| [`encode base64`](/commands/docs/encode_base64.md)       | Encode a string or binary value using Base64.      | built-in |
+| [`encode hex`](/commands/docs/encode_hex.md)             | Hex encode a binary value or a string.             | built-in |

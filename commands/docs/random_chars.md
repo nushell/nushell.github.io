@@ -2,7 +2,7 @@
 title: random chars
 categories: |
   random
-version: 0.98.0
+version: 0.99.0
 random: |
   Generate random chars uniformly distributed over ASCII letters and numbers: a-z, A-Z and 0-9.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--length, -l {int}`: Number of chars (default 25)
+ -  `--length, -l {one_of(int, filesize)}`: Number of chars (default 25)
 
 
 ## Input/output types:
@@ -40,5 +40,11 @@ Generate a string with 25 random chars
 Generate random chars with specified length
 ```nu
 > random chars --length 20
+
+```
+
+Generate one kilobyte of random chars
+```nu
+> random chars --length 1kb
 
 ```

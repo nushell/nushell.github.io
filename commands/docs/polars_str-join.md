@@ -2,7 +2,7 @@
 title: polars str-join
 categories: |
   dataframe
-version: 0.98.0
+version: 0.99.0
 dataframe: |
   Concatenates strings within a column or dataframes
 usage: |

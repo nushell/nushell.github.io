@@ -2,7 +2,7 @@
 title: path relative-to
 categories: |
   path
-version: 0.98.0
+version: 0.99.0
 path: |
   Express a path as relative to another path.
 usage: |

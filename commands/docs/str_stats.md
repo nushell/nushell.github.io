@@ -2,7 +2,7 @@
 title: str stats
 categories: |
   strings
-version: 0.98.0
+version: 0.99.0
 strings: |
   Gather word count statistics on the text.
 usage: |
@@ -30,35 +30,38 @@ usage: |
 Count the number of words in a string
 ```nu
 > "There are seven words in this sentence" | str stats
-╭───────────┬────╮
-│ lines     │ 1  │
-│ words     │ 7  │
-│ bytes     │ 38 │
-│ chars     │ 38 │
-│ graphemes │ 38 │
-╰───────────┴────╯
+╭───────────────┬────╮
+│ lines         │ 1  │
+│ words         │ 7  │
+│ bytes         │ 38 │
+│ chars         │ 38 │
+│ graphemes     │ 38 │
+│ unicode-width │ 38 │
+╰───────────────┴────╯
 ```
 
 Counts unicode characters
 ```nu
 > '今天天气真好' | str stats
-╭───────────┬────╮
-│ lines     │ 1  │
-│ words     │ 6  │
-│ bytes     │ 18 │
-│ chars     │ 6  │
-│ graphemes │ 6  │
-╰───────────┴────╯
+╭───────────────┬────╮
+│ lines         │ 1  │
+│ words         │ 6  │
+│ bytes         │ 18 │
+│ chars         │ 6  │
+│ graphemes     │ 6  │
+│ unicode-width │ 12 │
+╰───────────────┴────╯
 ```
 
 Counts Unicode characters correctly in a string
 ```nu
 > "Amélie Amelie" | str stats
-╭───────────┬────╮
-│ lines     │ 1  │
-│ words     │ 2  │
-│ bytes     │ 15 │
-│ chars     │ 14 │
-│ graphemes │ 13 │
-╰───────────┴────╯
+╭───────────────┬────╮
+│ lines         │ 1  │
+│ words         │ 2  │
+│ bytes         │ 15 │
+│ chars         │ 14 │
+│ graphemes     │ 13 │
+│ unicode-width │ 13 │
+╰───────────────┴────╯
 ```

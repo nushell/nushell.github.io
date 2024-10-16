@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.98.0
+version: 0.99.0
 strings: |
   Find and replace text.
 usage: |
@@ -60,13 +60,19 @@ Find and replace contents with capture group using regular expression
 my_library.nu
 ```
 
-Find and replace all occurrences of find string using regular expression
+Find and replace contents with capture group using regular expression, with escapes
+```nu
+> 'hello=world' | str replace -r '\$?(?<varname>.*)=(?<value>.*)' '$$$varname = $value'
+$hello = world
+```
+
+Find and replace all occurrences of found string using regular expression
 ```nu
 > 'abc abc abc' | str replace --all --regex 'b' 'z'
 azc azc azc
 ```
 
-Find and replace all occurrences of find string in table using regular expression
+Find and replace all occurrences of found string in table using regular expression
 ```nu
 > [[ColA ColB ColC]; [abc abc ads]] | str replace --all --regex 'b' 'z' ColA ColC
 ╭───┬──────┬──────┬──────╮
@@ -77,7 +83,7 @@ Find and replace all occurrences of find string in table using regular expressio
 
 ```
 
-Find and replace all occurrences of find string in record using regular expression
+Find and replace all occurrences of found string in record using regular expression
 ```nu
 > { KeyA: abc, KeyB: abc, KeyC: ads } | str replace --all --regex 'b' 'z' KeyA KeyC
 ╭──────┬─────╮

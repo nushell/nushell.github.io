@@ -2,7 +2,7 @@
 title: transpose
 categories: |
   filters
-version: 0.98.0
+version: 0.99.0
 filters: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--header-row, -r`: treat the first row as column names
+ -  `--header-row, -r`: use the first input column as the table header-row (or keynames when combined with --as-record)
  -  `--ignore-titles, -i`: don't transpose the column names into values
  -  `--as-record, -d`: transfer to record if the result is a table and contains only one row
  -  `--keep-last, -l`: on repetition of record fields due to `header-row`, keep the last value obtained
