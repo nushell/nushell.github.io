@@ -2,7 +2,7 @@
 title: merge
 categories: |
   filters
-version: 0.98.0
+version: 0.99.0
 filters: |
   Merge the input with a record or table, overwriting values in matching columns.
 usage: |
@@ -31,16 +31,16 @@ usage: |
 | table  | table  |
 ## Examples
 
-Add an 'index' column to the input table
+Add an 'id' column to the input table
 ```nu
-> [a b c] | wrap name | merge ( [1 2 3] | wrap index )
-╭───┬──────╮
-│ # │ name │
-├───┼──────┤
-│ 1 │ a    │
-│ 2 │ b    │
-│ 3 │ c    │
-╰───┴──────╯
+> [a b c] | wrap name | merge ( [47 512 618] | wrap id )
+╭───┬──────┬─────╮
+│ # │ name │ id  │
+├───┼──────┼─────┤
+│ 0 │ a    │  47 │
+│ 1 │ b    │ 512 │
+│ 2 │ c    │ 618 │
+╰───┴──────┴─────╯
 
 ```
 

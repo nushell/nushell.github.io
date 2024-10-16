@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.98.0
+version: 0.99.0
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -27,6 +27,7 @@ usage: |
  -  `--du, -d`: Display the apparent directory size ("disk usage") in place of the directory metadata size
  -  `--directory, -D`: List the specified directory itself instead of its contents
  -  `--mime-type, -m`: Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
+ -  `--threads, -t`: Use multiple threads to list contents. Output will be non-deterministic.
 
 ## Parameters
 

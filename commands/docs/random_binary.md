@@ -2,7 +2,7 @@
 title: random binary
 categories: |
   random
-version: 0.98.0
+version: 0.99.0
 random: |
   Generate random bytes.
 usage: |
@@ -34,5 +34,11 @@ usage: |
 Generate 16 random bytes
 ```nu
 > random binary 16
+
+```
+
+Generate 1 random kilobyte
+```nu
+> random binary 1kb
 
 ```

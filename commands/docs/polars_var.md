@@ -2,7 +2,7 @@
 title: polars var
 categories: |
   dataframe
-version: 0.98.0
+version: 0.99.0
 dataframe: |
   Create a var expression for an aggregation.
 usage: |

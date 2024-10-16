@@ -2,7 +2,7 @@
 title: scope variables
 categories: |
   core
-version: 0.98.0
+version: 0.99.0
 core: |
   Output info on the variables in the current scope.
 usage: |

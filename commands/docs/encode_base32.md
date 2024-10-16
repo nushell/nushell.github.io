@@ -2,7 +2,7 @@
 title: encode base32
 categories: |
   formats
-version: 0.98.0
+version: 0.99.0
 formats: |
   Encode a string or binary value using Base32.
 usage: |
