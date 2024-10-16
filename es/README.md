@@ -4,7 +4,7 @@ heroImage: null
 heroText: Nushell
 tagline: Un nuevo tipo de shell
 actionText: Get Started →
-actionLink: /book/
+actionLink: /es/book/
 features:
   - title: *Pipelines* para controlar cualquier sistema operativo
     details: Nu funciona en Linux, macOS, BSD, y Windows. Aprende una vez, y úsalo en cualquier parte.
