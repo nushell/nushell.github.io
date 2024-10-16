@@ -42,7 +42,7 @@ We can see that the numbers are sorted in order, and the strings are sorted to t
 If you _do_ want a sort containing differing types to error, see [strict sort](#strict-sort).
 :::
 
-Nushell's sort is also **stable**, meaning equal values will retain their original ordering relative to each other. This is illustrated here using the [insensitive](#insensitive-sort) sort option:
+Nushell's sort is also **stable**, meaning equal values will retain their original ordering relative to each other. This is illustrated here using the [case insensitive](#case-insensitive-sort) sort option:
 
 ```nu
 > ["foo" "FOO" "BAR" "bar"] | sort -i
@@ -138,7 +138,7 @@ We can also provide multiple cell paths to `sort-by`, which will sort by each ce
 
 This time, `shopping_list.txt` comes before `my-secret-plans.txt`, since it has an earlier modification time, but two larger files remain sorted after the `.txt` files.
 
-Furthermore, we use more complex cell paths to sort nested data:
+Furthermore, we can use more complex cell paths to sort nested data:
 
 ```nu
 > let cities = [
@@ -165,6 +165,30 @@ Furthermore, we use more complex cell paths to sort nested data:
 ╰───┴───────────┴────────────────────────────╯
 ```
 
+### Sorting records
+
+Records can be sorted in order of their keys using `sort`:
+
+```nu
+> {foo: 123, bar: 456, baz: 89} | sort
+╭─────┬─────╮
+│ bar │ 456 │
+│ baz │ 89  │
+│ foo │ 123 │
+╰─────┴─────╯
+```
+
+To instead sort in order of a record's values, use `sort -v`:
+
+```nu
+> {foo: 123, bar: 456, baz: 89} | sort -v
+╭─────┬─────╮
+│ baz │ 89  │
+│ foo │ 123 │
+│ bar │ 456 │
+╰─────┴─────╯
+```
+
 ### Sort by key closure
 
 Sometimes, it's useful to sort data in a more complicated manner than "increasing" or "decreasing". Instead of using `sort-by` with a cell path, you can supply a [closure](types_of_data.html#closures), which will transform each value into a [sorting key](https://en.wikipedia.org/wiki/Collation#Sort_keys) _without changing the underlying data_. Here's an example of a key closure, where we want to sort a list of assignments by their average grade:
@@ -187,7 +211,7 @@ Sometimes, it's useful to sort data in a more complicated manner than "increasin
 ╰───┴────────────┴───────────────────────╯
 ```
 
-The value is passed into the pipeline input of the key closure, however you can also use it as a parameter:
+The value is passed into the pipeline input of the key closure, however, you can also use it as a parameter:
 
 ```nu
 > let weight = {alpha: 10, beta: 5, gamma: 3}
@@ -201,13 +225,11 @@ The value is passed into the pipeline input of the key closure, however you can 
 ╰───┴───────╯
 ```
 
-### Sorting records
-
-## Custom sort order
+### Custom sort order
 
 In addition to [key closures](#sort-by-key-closure), `sort-by` also supports closures which specify a custom sort order. The `--custom`, or `-c`, flag will tell `sort-by` to interpret closures as custom sort closures. A custom sort closure has two parameters, and returns a boolean. The closure should return `true` if the first parameter comes _before_ the second parameter in the sort order.
 
-For a simple example, we could rewrite a cell path sort as a custom sort:
+For a simple example, we could rewrite a cell path sort as a custom sort. This can be read as "If $a.size is less than $b.size, a should appear before b in the sort order":
 
 ```nu
 > ls | sort-by -c {|a, b| $a.size < $b.size }
@@ -228,7 +250,7 @@ The parameters are also passed to the custom closure as a two element list, so t
 - `{ $in.0 < $in.1 }`
   :::
 
-Here's an example of a custom sort which couldn't be trivially written as a key sort. In this example, we have a queue of tasks with some amount of work time and a priority. We want to sort by priority (highest first), but if a task has had zero work time, we want to schedule it immediately. Otherwise, we ignore the work time.
+Here's an example of a custom sort which couldn't be trivially written as a key sort. In this example, we have a queue of tasks with some amount of work time and a priority. We want to sort by priority (highest first). If a task has had zero work time, we want to schedule it immediately; otherwise, we ignore the work time.
 
 ```nu
 > let queue = [
@@ -238,12 +260,11 @@ Here's an example of a custom sort which couldn't be trivially written as a key 
     {task: 583, work_time: 0,   priority: 5 }
 ]
 > let my_sort = {|a, b|
-    if ($a.work_time == 0) {
-        true
-    } else if ($b.work_time == 0) {
-        false
-    } else {
-        $a.priority > $b.priority
+    match [$a.work_time, $b.work_time] {
+        [0, 0] => ($a.priority > $b.priority) # fall back to priority if equal work time
+        [0, _] => true, # only a has 0 work time, so a comes before b in the sort order
+        [_, 0] => false, # only b has 0 work time, so a comes after b in the sort order
+        _ => ($a.priority > $b.priority) # both have non-zero work time, sort by priority
     }
 }
 > $queue | sort-by -c $my_sort
@@ -256,6 +277,92 @@ Here's an example of a custom sort which couldn't be trivially written as a key 
 │ 3 │  948 │        72 │        2 │
 ╰───┴──────┴───────────┴──────────╯
 ```
+
+## Special sorts
+
+### Case insensitive sort
+
+When using case insensitive sort, strings (and globs) which are the same except for different casing will be considered equal for sorting, while other types remain unaffected:
+
+```nu
+> let data = [
+    Nushell,
+    foobar,
+    10,
+    nushell,
+    FoOBaR,
+    9
+]
+> $data | sort -i
+╭───┬─────────╮
+│ 0 │       9 │
+│ 1 │      10 │
+│ 2 │ foobar  │
+│ 3 │ FoOBaR  │
+│ 4 │ Nushell │
+│ 5 │ nushell │
+╰───┴─────────╯
+```
+
+### Natural sort
+
+The [natural sort option](https://en.wikipedia.org/wiki/Natural_sort_order) allows strings which contain numbers to be sorted in the same way that numbers are normally sorted. This works both for strings which consist solely of numbers, and strings which have numbers and letters:
+
+```nu
+> let data = ["10", "9", "foo123", "foo20", "bar123", "bar20"]
+> $data | sort
+╭───┬────────╮
+│ 0 │ 10     │
+│ 1 │ 9      │
+│ 2 │ bar123 │
+│ 3 │ bar20  │
+│ 4 │ foo123 │
+│ 5 │ foo20  │
+╰───┴────────╯
+> # "1" is sorted before "9", so "10" is sorted before "9"
+> $data | sort -n
+╭───┬────────╮
+│ 0 │ 9      │
+│ 1 │ 10     │
+│ 2 │ bar20  │
+│ 3 │ bar123 │
+│ 4 │ foo20  │
+│ 5 │ foo123 │
+╰───┴────────╯
+```
+
+Furthermore, natural sort allows you to sort numbers together with numeric strings:
+
+```nu
+> let data = [4, "6.2", 1, "10", 2, 8.1, "3", 5.5, "9", 7]
+> $data | sort -n
+╭───┬──────╮
+│ 0 │    1 │
+│ 1 │    2 │
+│ 2 │ 3    │
+│ 3 │    4 │
+│ 4 │ 5.50 │
+│ 5 │ 6.2  │
+│ 6 │    7 │
+│ 7 │ 8.10 │
+│ 8 │ 9    │
+│ 9 │ 10   │
+╰───┴──────╯
+```
+
+### Sorting with mixed types
+
+Under some circumstances, you might need to sort data containing mixed types. There are a couple things to be aware of when sorting mixed types:
+
+- Generally, values of the same type will appear next to each other in the sort order. For example, sorted numbers come first, then sorted strings, then sorted lists.
+- Some types will be intermixed in the sort order. These are:
+  - Integers and floats. For example, `[2.2, 1, 3]` will be sorted as `[1, 2.2, 3]`.
+  - Strings and globs. For example, `[("b" | into glob) a c]` will be sorted as `[a b c]` (where b is still a glob).
+  - If using [natural sort](#natural-sort), integers, floats, and strings will be intermixed as described in that section.
+- The ordering between non-intermixed types is not guaranteed, **except** for `null` values, which will always be sorted to the end of a list.
+  - Within the same Nushell version the ordering should always be the same, but this should not be relied upon. If you have code which is sensitive to the ordering across types, consider using a [custom sort](#custom-sort-order) which better expresses your requirements.
+
+If you need to sort data which may contain mixed types, consider using [strict sort](#strict-sort), [natural sort](#natural-sort), or a [custom sort](#custom-sort-order) using [`describe`](https://www.nushell.sh/commands/docs/describe.html).
 
 ### Strict sort
 
@@ -307,13 +414,3 @@ Error:   × Attempt to sort null
  5 │       [_, null] => (error make {msg: "Attempt to sort null"}),
    ╰────
 ```
-
-## Special sorts
-
-### Insensitive sort
-
-### Natural sort
-
-### Sorting with mixed types
-
-Under some circumstances, you might end up with values containing mixed types.
