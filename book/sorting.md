@@ -259,27 +259,54 @@ Here's an example of a custom sort which couldn't be trivially written as a key 
 
 ### Strict sort
 
-Custom sort closures also provide a simple way to sort data while enforcing type homogeneity. This takes advantage of [operators requiring compatible data types](operators.html#types):
+Custom sort closures also provides a simple way to sort data while ensuring only types with well-defined comparisons are sorted together. This takes advantage of [operators requiring compatible data types](operators.html#types):
 
 ```nu
-> let data = ["hello" 4 9 2 1 "foobar" 8 6]
-> $data | sort-by -c {|a, b| $a < $b}
+> let compatible = [8 3.2 null 58 2]
+> let incompatible = ["hello" 4 9 2 1 "meow" 8 6]
+> $compatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
+╭───┬──────╮
+│ 0 │    2 │
+│ 1 │ 3.20 │
+│ 2 │    8 │
+│ 3 │   58 │
+│ 4 │      │
+╰───┴──────╯
+> $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 Error: nu::shell::type_mismatch
 
   × Type mismatch during operation.
-   ╭─[entry #173:1:28]
- 1 │ $data | sort-by -c {|a, b| $a < $b}
-   ·                            ─┬ ┬ ─┬
-   ·                             │ │  ╰── string
-   ·                             │ ╰── type mismatch for operator
-   ·                             ╰── int
+   ╭─[entry #26:1:36]
+ 1 │ $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
+   ·                                    ─┬ ┬ ─┬
+   ·                                     │ │  ╰── string
+   ·                                     │ ╰── type mismatch for operator
+   ·                                     ╰── int
    ╰────
 
 ```
 
-::: warning
-This does not currently work with `null` values due to comparison between any value and `null` returning `null`.
-:::
+Special handling is required for `null` values, since comparison between any value and `null` returns `null`. To instead reject `null` values, try the following:
+
+```nu
+> let baddata = [8 3.2 null 58 2]
+> let strict = {|a, b|
+    match [$a, $b] {
+        [null, _] => (error make {msg: "Attempt to sort null"}),
+        [_, null] => (error make {msg: "Attempt to sort null"}),
+        _ => ($a < $b)
+    }
+}
+> $baddata | sort-by -c $strict
+Error:   × Attempt to sort null
+   ╭─[entry #3:4:21]
+ 3 │   match [$a, $b] {
+ 4 │       [null, _] => (error make {msg: "Attempt to sort null"}),
+   ·                     ─────┬────
+   ·                          ╰── originates from here
+ 5 │       [_, null] => (error make {msg: "Attempt to sort null"}),
+   ╰────
+```
 
 ## Special sorts
 
