@@ -2,47 +2,60 @@
 home: true
 heroImage: null
 heroText: Nushell
-tagline: Un nuevo tipo de shell.
-actionText: Empieza →
+tagline: Un nuevo tipo de shell
+actionText: Empezar →
 actionLink: /es/book/
 features:
-  - title: Pipelines potentes para controlar tu sistema
-    details: Pipelines permiten trabajar con tu sistema como nunca antes. Tienes el control del sistema, listo para tu siguiente comando.
-  - title: Todo es data.
-    details: En lugar de tener la necesidad de recordar todos los parámetros de todos los comandos, podemos usar los mismos, independientemente de su procedencia.
-  - title: Plugins
-    details: Nu no puede incluir todo lo que quieras hacer con él, por lo que puedes extenderlo usando su sistema fuerte de plugins.
-footer: Sugerencias o propuestas de cambios son bienvenidas. Escríbenos
+  - title: Pipelines para controlar cualquier sistema operativo
+    details: Nu funciona en Linux, macOS, BSD, y Windows. Aprende una vez, y úsalo en cualquier parte.
+  - title: Todo son datos
+    details: Los *pipelines* de Nu utilizan datos estructurados para que puedas seleccionar, filtrar y ordenar de forma segura de la misma manera cada vez. Deja de analizar cadenas y comienza a resolver problemas.
+  - title: Complementos potentes
+    details: Es fácil ampliar Nu usando un potente sistema de complementos.
 ---
 
-### Instalación rápida
+<img src="https://www.nushell.sh/frontpage/ls-example.png" alt="Captura de pantalla utilizando el comando ls" class="hero"/>
 
-#### Ultima versión
+### Nu trabaja con datos existentes
 
-Instala la última versión en la [pagina de releases](https://github.com/nushell/nushell/releases)
+Nu admite [JSON, YAML, SQLite, Excel, y mucho más](/book/loading_data.html) de serie. Es fácil introducir datos en un *pipeline* de Nu, ya sea en un archivo, una base de datos o una API web.:
 
-Desde la fuente en [crates.io](https://crates.io):
+<img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Captura de pantalla mostrando fetch con una web API" class="hero"/>
 
-```sh
-$ cargo install nu
-```
+### Nu tiene unos fabulosos mensajes de error
 
-#### Instalación a través de resolvedores de paquetes
+Nu opera con datos tipificados, por lo que detecta errores que otros shells no detectan. Y cuando algo falla, Nu te dice exactamente dónde y por qué:
 
-En [Homebrew](https://brew.sh/):
+<img src="https://www.nushell.sh/frontpage/miette-example.png" alt="Captura de pantalla mostrando un tipo de error en Nu" class="hero"/>
 
-```sh
+## Obtener Nu
+
+Nushell está disponible como [binarios descargables](https://github.com/nushell/nushell/releases), [mediante tu gestor de paquetes preferido](https://repology.org/project/nushell/versions), en [una acción de GitHub](https://github.com/marketplace/actions/setup-nu), y como [código fuente](https://github.com/nushell/nushell). Lee [las intrucciones detalladas de instalación](/book/installation.html) o lánzate directamente en:
+
+#### macOS / Linux:
+
+##### Homebrew
+
+```shell
 $ brew install nushell
 ```
 
-En [Scoop](https://scoop.sh):
+##### Nix profile
+
+```shell
+$ nix profile install nixpkgs#nushell
+```
+
+#### Windows:
 
 ```powershell
-scoop install nu
+winget install nushell
 ```
 
-#### Inicia la shell
+Después de la instalación, puedes ejecutar Nu escribiendo `nu`.
 
-```sh
-$ nu
-```
+## Comunidad
+
+¡Únete a nosotros [en Discord](https://discord.gg/NtAbbGn) si tienes alguna pregunta relacionada con Nu!
+
+Puedes ayudar a mejorar este sitio web [compartiendo tu opinión](https://github.com/nushell/nushell.github.io/issues) o [enviando un PR](https://github.com/nushell/nushell.github.io/pulls).
