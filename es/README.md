@@ -3,10 +3,10 @@ home: true
 heroImage: null
 heroText: Nushell
 tagline: Un nuevo tipo de shell
-actionText: Get Started →
+actionText: Empezar →
 actionLink: /es/book/
 features:
-  - title: *Pipelines* para controlar cualquier sistema operativo
+  - title: Pipelines para controlar cualquier sistema operativo
     details: Nu funciona en Linux, macOS, BSD, y Windows. Aprende una vez, y úsalo en cualquier parte.
   - title: Todo son datos
     details: Los *pipelines* de Nu utilizan datos estructurados para que puedas seleccionar, filtrar y ordenar de forma segura de la misma manera cada vez. Deja de analizar cadenas y comienza a resolver problemas.
