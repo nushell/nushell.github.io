@@ -362,7 +362,12 @@ Under some circumstances, you might need to sort data containing mixed types. Th
 - The ordering between non-intermixed types is not guaranteed, **except** for `null` values, which will always be sorted to the end of a list.
   - Within the same Nushell version the ordering should always be the same, but this should not be relied upon. If you have code which is sensitive to the ordering across types, consider using a [custom sort](#custom-sort-order) which better expresses your requirements.
 
-If you need to sort data which may contain mixed types, consider using [strict sort](#strict-sort), [natural sort](#natural-sort), or a [custom sort](#custom-sort-order) using [`describe`](https://www.nushell.sh/commands/docs/describe.html).
+If you need to sort data which may contain mixed types, consider one of the following strategies:
+
+- [Strict sort](#strict-sort) to disallow sorting of incompatible types
+- [Natural sort](#natural-sort) to sort intermixed numbers and numeric strings
+- A [key sort](#sort-by-key-closure) using [`to text`](/commands/docs/to_text.html), [`to nuon`](/commands/docs/to_nuon.html), or [`to json`](/commands/docs/to_json.html), as appropriate
+- A [custom sort](#custom-sort-order) using [`describe`](/commands/docs/describe.html) to explicitly check types
 
 ### Strict sort
 
