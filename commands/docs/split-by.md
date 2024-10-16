@@ -2,7 +2,7 @@
 title: split-by
 categories: |
   filters
-version: 0.98.0
+version: 0.99.0
 filters: |
   Split a record into groups.
 usage: |

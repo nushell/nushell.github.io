@@ -2,7 +2,7 @@
 title: into
 categories: |
   conversions
-version: 0.98.0
+version: 0.99.0
 conversions: |
   Commands to convert data from one type to another.
 usage: |
@@ -45,4 +45,4 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`into record`](/commands/docs/into_record.md)       | Convert value to record.                   | built-in |
 | [`into sqlite`](/commands/docs/into_sqlite.md)       | Convert table into a SQLite database.      | built-in |
 | [`into string`](/commands/docs/into_string.md)       | Convert value to string.                   | built-in |
-| [`into value`](/commands/docs/into_value.md)         | Infer nushell datatype for each cell.      | built-in |
+| [`into value`](/commands/docs/into_value.md)         | Infer Nushell datatype for each cell.      | built-in |

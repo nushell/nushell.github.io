@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { defineUserConfig } from '@vuepress/cli';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { feedPlugin } from '@vuepress/plugin-feed';
@@ -15,12 +15,14 @@ import {
   navbarDe,
   navbarEn,
   navbarEs,
+  navbarFr,
   navbarJa,
   navbarPtBR,
   navbarRU,
   navbarZhCN,
   sidebarDe,
   sidebarEn,
+  sidebarFr,
   sidebarEs,
   sidebarJa,
   sidebarPtBR,
@@ -61,6 +63,11 @@ export default defineUserConfig({
       title: 'Nushell',
       description: 'Eine neue Art von Shell.',
     },
+    '/fr/': {
+      lang: 'fr-FR',
+      title: 'Nushell',
+      description: 'Un nouveau type de shell.',
+    },
     '/es/': {
       lang: 'es-ES',
       title: 'Nushell',
@@ -92,9 +99,6 @@ export default defineUserConfig({
     ['link', { rel: 'icon', href: '/icon.png' }],
   ],
   markdown: {
-    code: {
-      lineNumbers: false,
-    },
     importCode: {
       handleImportPath: (str) =>
         str.replace(/^@snippets/, path.resolve(__dirname, '../snippets')),
@@ -131,6 +135,13 @@ export default defineUserConfig({
         editLinkText: 'Edita esta página en GitHub',
         navbar: navbarEs,
         sidebar: sidebarEs,
+      },
+      '/fr/': {
+        selectText: 'Langues',
+        selectLanguageName: 'Français',
+        editLinkText: 'Modifier la page sur GitHub',
+        navbar: navbarFr,
+        sidebar: sidebarFr,
       },
       '/ja/': {
         selectText: '言語',
@@ -175,6 +186,7 @@ export default defineUserConfig({
     }),
     shikiPlugin({
       theme: 'dark-plus',
+      lineNumbers: true,
       langs: [
         'nushell',
         'rust',

@@ -2,7 +2,7 @@
 title: decode base32hex
 categories: |
   formats
-version: 0.98.0
+version: 0.99.0
 formats: |
   Encode a base32hex value.
 usage: |

@@ -2,7 +2,7 @@
 title: sort
 categories: |
   filters
-version: 0.98.0
+version: 0.99.0
 filters: |
   Sort in increasing order.
 usage: |
@@ -34,7 +34,7 @@ usage: |
 | record    | record    |
 ## Examples
 
-sort the list by increasing value
+Sort the list by increasing value
 ```nu
 > [2 0 1] | sort
 ╭───┬───╮
@@ -45,7 +45,7 @@ sort the list by increasing value
 
 ```
 
-sort the list by decreasing value
+Sort the list by decreasing value
 ```nu
 > [2 0 1] | sort --reverse
 ╭───┬───╮
@@ -56,7 +56,7 @@ sort the list by decreasing value
 
 ```
 
-sort a list of strings
+Sort a list of strings
 ```nu
 > [betty amy sarah] | sort
 ╭───┬───────╮
@@ -67,7 +67,7 @@ sort a list of strings
 
 ```
 
-sort a list of strings in reverse
+Sort a list of strings in reverse
 ```nu
 > [betty amy sarah] | sort --reverse
 ╭───┬───────╮
@@ -97,6 +97,17 @@ Sort strings (reversed case-insensitive)
 │ 1 │ Car      │
 │ 2 │ airplane │
 ╰───┴──────────╯
+
+```
+
+Sort alphanumeric strings in natural order
+```nu
+> [foo1 foo10 foo9] | sort -n
+╭───┬───────╮
+│ 0 │ foo1  │
+│ 1 │ foo9  │
+│ 2 │ foo10 │
+╰───┴───────╯
 
 ```
 

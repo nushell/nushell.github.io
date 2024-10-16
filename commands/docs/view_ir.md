@@ -2,7 +2,7 @@
 title: view ir
 categories: |
   debug
-version: 0.98.0
+version: 0.99.0
 debug: |
   View the compiled IR code for a block of code.
 usage: |

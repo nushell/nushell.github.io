@@ -8,8 +8,8 @@ Just like most programming languages allow you to define functions, Nushell uses
 From other shells you might be used to [aliases](aliases.md).
 Nushell's aliases work in a similar way and are a part of the programming language, not just a shell feature.
 
-Common operations can, such as addition or regex search, be done with [operators](operators.md).
-Not all operations are supported for all data types and Nushell will make sure to let you know.
+Common operations, such as addition or regex search, can be done with [operators](operators.md).
+Not all operations are supported for all data types, and Nushell will make sure to let you know when there is a mismatch.
 
 You can store intermediate results to [variables](variables.md).
 Variables can be immutable, mutable, or a parse-time constant.
@@ -25,7 +25,5 @@ Modules let you define a public interface vs. private commands and you can impor
 [Overlays](overlays.md) build on top of modules.
 By defining an overlay, you bring in module's definitions into its own swappable "layer" that gets applied on top of other overlays.
 This enables features like activating virtual environments or overriding sets of default commands with custom variants.
-
-The help message of some built-in commands shows a [signature](command_signature.md).  You can take a look at it to get general rules how the command can be used.
 
 The standard library also has a [testing framework](testing.md) if you want to prove your reusable code works perfectly.

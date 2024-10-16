@@ -2,7 +2,7 @@
 title: hide-env
 categories: |
   core
-version: 0.98.0
+version: 0.99.0
 core: |
   Hide environment variables in the current scope.
 usage: |
@@ -37,6 +37,6 @@ usage: |
 
 Hide an environment variable
 ```nu
-> $env.HZ_ENV_ABC = 1; hide-env HZ_ENV_ABC; 'HZ_ENV_ABC' in (env).name
+> $env.HZ_ENV_ABC = 1; hide-env HZ_ENV_ABC; 'HZ_ENV_ABC' in $env
 false
 ```

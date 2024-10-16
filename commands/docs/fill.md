@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.98.0
+version: 0.99.0
 conversions: |
   Fill and Align.
 usage: |
@@ -70,7 +70,7 @@ Fill a number on both sides to a width of 5 with the character '0'
 01.10
 ```
 
-Fill a filesize on the left side to a width of 5 with the character '0'
+Fill a filesize on both sides to a width of 10 with the character '0'
 ```nu
 > 1kib | fill --alignment middle --character '0' --width 10
 0001024000

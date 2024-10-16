@@ -11,21 +11,26 @@
  * to avoid gaps in tables rendered with box-drawing characters
  */
 .theme-default-content pre,
-.theme-default-content pre[class*=language-] {
-  line-height: 1;
+.theme-default-content pre[class*='language-'] {
+  line-height: 1.1;
+}
+.theme-default-content h2.title a {
+  color: #adb6be;
 }
 
 /* Make sure the line numbers have the same line-height as the code lines
  */
-div[class*="language-"].line-numbers-mode .line-numbers {
-  line-height: 1;
+div[class*='language-'].line-numbers-mode .line-numbers {
+  line-height: 1.1;
 }
 
 /* Add DejaVu Sans Mono to the list of monospaced fonts.
  * This allows tables to be rendered seamlessly with box-drawing characters.
  */
 :root {
-  --font-family-code: Consolas, Monaco, 'Andale Mono', 'DejaVu Sans Mono', 'Ubuntu Mono', monospace;
+  --code-line-height: 1.1;
+  --font-family-code: Consolas, Monaco, 'Andale Mono', 'DejaVu Sans Mono',
+    'Ubuntu Mono', monospace;
 }
 
 @media screen and (min-width: 720px) and (max-width: 815px) {

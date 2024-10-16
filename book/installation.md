@@ -6,6 +6,8 @@ The main Nushell binary is named `nu` (or `nu.exe` on Windows). After installati
 
 @[code](@snippets/installation/run_nu.sh)
 
+[[toc]]
+
 ## Pre-built Binaries
 
 Nu binaries are published for Linux, macOS, and Windows [with each GitHub release](https://github.com/nushell/nushell/releases). Just download, extract the binaries, then copy them to a location on your PATH.
@@ -74,13 +76,17 @@ Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmak
 
 @[code](@snippets/installation/macos_deps.sh)
 
-### Build using [crates.io](https://crates.io)
+### Build from [crates.io](https://crates.io) using Cargo
 
-Nu releases are published as source to the popular Rust package registry [crates.io](https://crates.io/). This makes it easy to build and install the latest Nu release with `cargo`:
+Nushell releases are published as source to the popular Rust package registry [crates.io](https://crates.io/). This makes it easy to build and install the latest Nu release with `cargo`:
 
-@[code](@snippets/installation/cargo_install_nu.sh)
+```nu
+cargo install nu
+```
 
-That's it! The `cargo` tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path.
+The `cargo` tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path.
+
+Note that the default plugins must be installed separately when using `cargo`. See the [Plugins Installation](./plugins.html#core-plugins) section of the Book for instructions.
 
 ### Building from the GitHub repository
 
