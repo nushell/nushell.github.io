@@ -73,6 +73,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `\`                                  | `( <command> )`                                               | A command can span multiple lines when wrapped with `(` and `)`   |
 | `pwd`                                | `$env.PWD`                                                    | Display the current directory                                     |
 | `read var`                           | `let var = input`                                             | Get input from the user                                           |
+| `read -s secret`                     | `let secret = input -s`                                       | Get a secret value from the user without printing keystrokes      |
 
 ## History Substitutions and Default Keybindings:
 
