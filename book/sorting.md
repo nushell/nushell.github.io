@@ -366,7 +366,7 @@ If you need to sort data which may contain mixed types, consider using [strict s
 
 ### Strict sort
 
-Custom sort closures also provides a simple way to sort data while ensuring only types with well-defined comparisons are sorted together. This takes advantage of [operators requiring compatible data types](operators.html#types):
+Custom sort closures also provide a simple way to sort data while ensuring only types with well-defined comparisons are sorted together. This takes advantage of [operators requiring compatible data types](operators.html#types):
 
 ```nu
 > let compatible = [8 3.2 null 58 2]
