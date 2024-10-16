@@ -2,7 +2,7 @@
 title: dexit
 categories: |
   shells
-version: 0.98.0
+version: 0.99.0
 shells: |
   Leaves a previously entered working directory.
 usage: |
