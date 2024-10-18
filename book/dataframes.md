@@ -1,7 +1,7 @@
 # Dataframes
 
 ::: warning Important!
-This feature requires the Polars plugin.  See the the 
+This feature requires the Polars plugin.  See the
 [Plugins Chapter](plugins.md) to learn how to install it.
 
 To test that this plugin is properly installed, run `help polars`.
@@ -61,7 +61,7 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ```
 
 ::: tip
-As of nushell 0.97, `polars open` will open as a lazy dataframe instead of a eager dataframe. 
+As of nushell 0.97, `polars open` will open as a lazy dataframe instead of a eager dataframe.
 To open as an eager dataframe, use the `--eager` flag.
 :::
 
@@ -135,7 +135,7 @@ And the result from the benchmark is:
 
 ```nu
 bench -n 10 --pretty {
-    python load.py | null
+    python load.py | complete | null
 }
 ```
 
