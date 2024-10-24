@@ -177,47 +177,41 @@ use std assert
 source fib.nu
 
 def main [] {
-  print "Running tests..."
+    print "Running tests..."
 
-  let test_commands = (
-    scope commands
-      # Exclude all in-built commands
-      | where ($it.type == "custom")
-      # Include all commands starting with "test_"
-      | where ($it.name | str starts-with "test_")
-      # Exclude commands marked as "ignored" in the description
-      | where not ($it.description | str starts-with "ignore")
-      # Get the name of the test command
-      | get name
-      # Prefix each test command with a command to print the test name
-      | each { |test| [$"print 'Running test: ($test)'", $test] } | flatten
-      # Concatenate into a command list
-      | str join "; "
-  )
+    let test_commands = (
+        scope commands
+            | where ($it.type == "custom")
+                and ($it.name | str starts-with "test ")
+                and not ($it.description | str starts-with "ignore")
+            | get name
+            | each { |test| [$"print 'Running test: ($test)'", $test] } | flatten
+            | str join "; "
+    )
 
-  nu --commands $"source ($env.CURRENT_FILE); ($tests)"
-  print "Tests completed successfully"
+    nu --commands $"source ($env.CURRENT_FILE); ($test_commands)"
+    print "Tests completed successfully"
 }
 
-def test_fib [] {
-  for t in [
-      [input, expected];
-      [0, 0],
-      [1, 1],
-      [2, 1],
-      [3, 2],
-      [4, 3],
-      [5, 5],
-      [6, 8],
-      [7, 13]
-  ] {
-    assert equal (fib $t.input) $t.expected
-  }
+def "test fib" [] {
+    for t in [
+        [input, expected];
+        [0, 0],
+        [1, 1],
+        [2, 1],
+        [3, 2],
+        [4, 3],
+        [5, 5],
+        [6, 8],
+        [7, 13]
+    ] {
+        assert equal (fib $t.input) $t.expected
+    }
 }
 
 # ignore
-def test_fib_ignored_test [] {
-  print "This test will not be executed"
+def "test show-ignored-test" [] {
+    print "This test will not be executed"
 }
 ```
 
