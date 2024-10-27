@@ -11,8 +11,7 @@ There are several syntactic forms that can have type signatures:
 
 - Variable declarations
 - Parameter declarations in custom commands and closures
-- Input type declarations to custom commands
-- Return type declarations from custom commands
+- Input and Return type declarations for custom commands
 
 The following code snippets illustrates these kinds of type signatures:
 
@@ -25,6 +24,16 @@ def my-command [x: int, y: string] { }
 
 # Parameter declaration in closures
 do {|nums : list<int>| $nums | describe} [ 1 2 3 ]
+
+# Input and Return type declaration on a custom command
+def my-filter []: nothing -> list { }
+
+# Multiple Input/Return type signatures on a custom command
+def my-filter []: [
+  nothing -> list
+  range -> list
+] { }
+
 ```
 
 For a further discussion on custom command signatures please refer to: [Custom Commands](/book/custom_commands.html)
