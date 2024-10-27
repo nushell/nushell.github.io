@@ -5,6 +5,7 @@ Like many programming languages, Nushell supports writing and using _modules_ as
 - Additional custom commands
 - Aliases
 - Constants
+- Externs
 - Environment variables
 - And even other modules (a.k.a., submodules)
 

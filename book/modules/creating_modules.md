@@ -40,11 +40,11 @@ use inc.nu *
 # => 6
 ```
 
-Of course, you can easily distribute this file so that others can make use of the module as well.
+Of course, you can easily distribute a file like this so that others can make use of the module as well.
 
 ## Exports
 
-We covered the types of definitions that are available in modules briefly in [Using Modules](./using_modules.md) from the end-user's perspective. Module authors, on the other hand, need to know _how_ to create the export definitions for:
+We covered the types of definitions that are available in modules briefly in the main Modules Overview above. While this might be enough explanation for an end-user, module authors will need to know _how_ to create the export definitions for:
 
 - Commands ([`export def`](/commands/docs/export_def.md))
 - Aliases ([`export alias`](/commands/docs/export_alias.md))
@@ -55,7 +55,7 @@ We covered the types of definitions that are available in modules briefly in [Us
 - Environment setup ([`export-env`](/commands/docs/export-env.md))
 
 ::: tip
-Only definitions marked with `export` (or `export-env` for environment variables) are accessible when the module is imported. Definitions not marked with `export` are only visible from inside the module. In some languages, these would be called "private" definitions. An example can be found below in [Additional Examples](#local-definitions).
+Only definitions marked with `export` (or `export-env` for environment variables) are accessible when the module is imported. Definitions not marked with `export` are only visible from inside the module. In some languages, these would be called "private" or "local" definitions. An example can be found below in [Additional Examples](#local-definitions).
 :::
 
 ### `main` Exports
@@ -64,7 +64,7 @@ Only definitions marked with `export` (or `export-env` for environment variables
 An export cannot have the same name as that of the module itself.
 :::
 
-In the [Basic Example](#basic-module-example) above, we had a module named `inc` with a command named `increment`. However, if you try to renamed that file to `increment.nu`, it will fail to import.
+In the [Basic Example](#basic-module-example) above, we had a module named `inc` with a command named `increment`. However, if we rename that file to `increment.nu`, it will fail to import.
 
 ```nu
 mv inc.nu increment.nu
@@ -85,7 +85,7 @@ export def main []: int -> int {
 }
 ```
 
-Then:
+Now it works as expected:
 
 ```nu
 use ./increment.nu

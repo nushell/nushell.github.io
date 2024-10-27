@@ -4,14 +4,7 @@
 
 ## Overview
 
-End-users can add new functionality to Nushell by using ("importing") modules written by others. Modules can include:
-
-- Commands
-- Aliases
-- Constants
-- Externs
-- Other modules (as submodules)
-- Environment variables
+End-users can add new functionality to Nushell by using ("importing") modules written by others.
 
 To import a module and its definitions, we call the [`use`](/commands/docs/use.md) command:
 
