@@ -338,7 +338,7 @@ export def examine-module [] {
 }
 ```
 
-Running this command changes the directory _locally_ in the module, but the changes are not propogated to the parent scope.
+Running this command changes the directory _locally_ in the module, but the changes are not propagated to the parent scope.
 
 :::
 
@@ -373,7 +373,7 @@ go modules
 # => Error: $env.NU_MODULES_DIR is not found
 ```
 
-This doesn't work because `my-utils` isn't _evaluated_ in this case; it is only _parsed_ when the `go.nu` module is imported. While this brings all of the other exports into scope, it doese not _run_ the `export-env` block.
+This doesn't work because `my-utils` isn't _evaluated_ in this case; it is only _parsed_ when the `go.nu` module is imported. While this brings all of the other exports into scope, it does not _run_ the `export-env` block.
 
 ::: important
 As mentioned at the start of this chapter, trying this while `my-utils` (and its `$env.NU_MODULES_DIR`) is still in scope from a previous import will _not_ fail as expected. Test in a new shell session to see the "normal" failure.
@@ -423,7 +423,7 @@ Note that the first method keeps `my-utils` environment inside the `go.nu` modul
 
 ### Module files and commands cannot be named after parent module
 
-A `.nu` file cannot have the same name as its module directory (e.g., `spam/spam.nu`) as this would create an ambiguous sitation with the name being defined twice. This is similar to the situation described above where a command cannot have the same name as its parent.
+A `.nu` file cannot have the same name as its module directory (e.g., `spam/spam.nu`) as this would create an ambiguous condition with the name being defined twice. This is similar to the situation described above where a command cannot have the same name as its parent.
 
 ## Windows Path Syntax
 

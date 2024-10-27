@@ -69,7 +69,7 @@ These submodules are normally imported with `use std/<submodule>` (without a glo
 
 #### 2. Import the _definitions_ (contents) of the module directly
 
-Some submodules are easier to use when their definitions (commands, aliases, contants, etc.) are loaded into the current scope. For instance:
+Some submodules are easier to use when their definitions (commands, aliases, constants, etc.) are loaded into the current scope. For instance:
 
 ```nu
 use std/formats *
