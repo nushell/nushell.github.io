@@ -25,12 +25,6 @@ def my-command [x: int, y: string] { }
 
 # Parameter declaration in closures
 do {|nums : list<int>| $nums | describe} [ 1 2 3 ]
-
-# Input type declaration
-def my-filter []: list { }
-
-# Return type declaration
-def "my make" [] -> list { }
 ```
 
 For a further discussion on custom command signatures please refer to: [Custom Commands](/book/custom_commands.html)
@@ -44,9 +38,6 @@ There are 3 forms of valid type signatures in Nu:
 - Compound:
   - `list<string>`,
     `record<type: int, bar: string>`
-- Multiple: Enumerations of the above kinds delimited by commas `, `:
-  - `<string, int>`
-  - These can only be used for return types
 
 ## Custom command parameters and flags
 
