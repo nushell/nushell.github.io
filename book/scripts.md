@@ -175,7 +175,9 @@ For script to have access to standard input, `nu` should be invoked with `--stdi
 
 ```nu
 #!/usr/bin/env -S nu --stdin
-echo $"stdin: ($in)"
+def main [] {
+  echo $"stdin: ($in)"
+}
 ```
 
 ```nu
