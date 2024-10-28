@@ -267,10 +267,11 @@ It's common practice in Nushell to separate the words of the command with `-` fo
 ::: tip
 Because `def` is a parser keyword, the command name must be known at parse time. This means that command names may not be a variable or constant. For example, the following is _not allowed_:
 
-````nu
+```nu
 let name = "foo"
 def $name [] { foo }
 :::
+```
 
 ### Subcommands
 
@@ -280,7 +281,7 @@ You can also define subcommands of commands using a space. For example, if we wa
 def "str mycommand" [] {
   "hello"
 }
-````
+```
 
 Now we can call our custom command as if it were a built-in subcommand of [`str`](/commands/docs/str.md):
 
