@@ -512,10 +512,10 @@ The `sort-by modified` now _also_ sorts the `index` along with the rest of the c
 
 ```nu
 let table = [
-[additions | deletions | delta ];
-[       10 |        20 |   -10 ]
-[       15 |         5 |    10 ]
-[        8 |         6 |     2 ]]
+[additions   deletions   delta ];
+[       10          20     -10 ]
+[       15           5      10 ]
+[        8           6       2 ]]
 
 let totals_row = ($table | math sum | insert index {"Totals"})
 $table | append $totals_row
