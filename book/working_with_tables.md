@@ -404,7 +404,7 @@ You've noticed that every table, by default, starts with a column with the headi
    - The default mode
    - Nushell provides a 0-based, consecutive index
    - Always corresponds to the cell-path row-number, where `select 0` will return the first item in the list, and `select <n-1>` returns the nth item
-   - Is a display of an internal representation only. In other words, it is not addressible by column name. For example, `get index` will not work, nor `get #`
+   - Is a display of an internal representation only. In other words, it is not accessible by column name. For example, `get index` will not work, nor `get #`
 
 1. "Index"-Renamed #
 
@@ -576,7 +576,7 @@ This can be useful when you need to store the rendered view of structured data a
 ls | table | ansi strip
 ```
 
-The `table` command also has multipe options for _changing_ the rendering of a table, such as:
+The `table` command also has multiple options for _changing_ the rendering of a table, such as:
 
 - `-e` to expand data that would normally be collapsed when rendering. Compare `scope modules | table` to `scope modules | table -e`.
 - `-i false` to hide the `index`/`#` column
