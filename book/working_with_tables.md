@@ -1,5 +1,9 @@
 # Working with Tables
 
+[[toc]]
+
+## Overview
+
 One of the common ways of seeing data in Nu is through a table. Nu comes with a number of commands for working with tables to make it convenient to find what you're looking for, and for narrowing down the data to just what you need.
 
 To start off, let's get a table that we can use:
@@ -390,3 +394,191 @@ You can also [`reject`](/commands/docs/reject.md) columns in a table by passing 
 │  7 │ /mnt   │ dir     │         │ rwxr-xr-x │ root │ root  │    0 B │
 ...
 ```
+
+### The # Index Column
+
+You've noticed that every table, by default, starts with a column with the heading `#`. This column can operate in one of two modes:
+
+1. Internal #
+
+   - The default mode
+   - Nushell provides a 0-based, consecutive index
+   - Always corresponds to the cell-path row-number, where `select 0` will return the first item in the list, and `select <n-1>` returns the nth item
+   - Is a display of an internal representation only. In other words, it is not addressible by column name. For example, `get index` will not work, nor `get #`
+
+1. "Index"-Renamed #
+
+   - When a column named "index" is created, either directly or as a side-effect of another command, then this `index` column takes the place of the `#` column in the table display. In the table output, the column header is still `#`, but the _name_ of the column is now `index`.
+
+     Example:
+
+     ```nu
+     ls | each { insert index { 1000 }} | first 5
+     # => ╭──────┬─────────────────┬──────┬─────────┬──────────────╮
+     # => │    # │      name       │ type │  size   │   modified   │
+     # => ├──────┼─────────────────┼──────┼─────────┼──────────────┤
+     # => │ 1000 │ CNAME           │ file │    15 B │ 9 months ago │
+     # => │ 1000 │ CONTRIBUTING.md │ file │ 4.3 KiB │ 9 hours ago  │
+     # => │ 1000 │ LICENSE         │ file │ 1.0 KiB │ 9 months ago │
+     # => │ 1000 │ README.md       │ file │ 2.2 KiB │ 3 weeks ago  │
+     # => │ 1000 │ assets          │ dir  │ 4.0 KiB │ 9 months ago │
+     # => ╰──────┴─────────────────┴──────┴─────────┴──────────────╯
+     ```
+
+     - If an `index` key is added to each row in the table, then it can be accessed via `select` and `get`:
+
+     ```nu
+     ls | each { insert index { 1000 }} | first 5 | select index name
+     # => ╭──────┬─────────────────╮
+     # => │    # │      name       │
+     # => ├──────┼─────────────────┤
+     # => │ 1000 │ CNAME           │
+     # => │ 1000 │ CONTRIBUTING.md │
+     # => │ 1000 │ LICENSE         │
+     # => │ 1000 │ README.md       │
+     # => │ 1000 │ assets          │
+     # => ╰──────┴─────────────────╯
+     ```
+
+     - On the other hand, if some rows have an `index` key and others don't, the result is no longer a table; it is a `list<any>` due to the different record types:
+
+       ```nu
+       ls | upsert 3.index { "--->" } | first 5
+       # => ╭──────┬─────────────────┬──────┬─────────┬──────────────╮
+       # => │    # │      name       │ type │  size   │   modified   │
+       # => ├──────┼─────────────────┼──────┼─────────┼──────────────┤
+       # => │    0 │ CNAME           │ file │    15 B │ 9 months ago │
+       # => │    1 │ CONTRIBUTING.md │ file │ 4.3 KiB │ 9 hours ago  │
+       # => │    2 │ LICENSE         │ file │ 1.0 KiB │ 9 months ago │
+       # => │ ---> │ README.md       │ file │ 2.2 KiB │ 3 weeks ago  │
+       # => │    4 │ assets          │ dir  │ 4.0 KiB │ 9 months ago │
+       # => ╰──────┴─────────────────┴──────┴─────────┴──────────────╯
+
+       ls | upsert 3.index { "--->" } | first 5 | describe
+       # => list<any> (stream)
+
+       ls | upsert 3.index { "--->" } | select index name
+       # Error: cannot find column 'index'
+
+       ls | upsert 3.index { "--->" } | select index? name | first 5
+       # => ╭──────┬─────────────────╮
+       # => │    # │      name       │
+       # => ├──────┼─────────────────┤
+       # => │      │ CNAME           │
+       # => │      │ CONTRIBUTING.md │
+       # => │      │ LICENSE         │
+       # => │ ---> │ README.md       │
+       # => │      │ assets          │
+       # => ╰──────┴─────────────────╯
+       ```
+
+   - As demonstrated in the example above, any rows (records) in the table without an `index` key will continue to display the internal representation.
+
+#### Additional Index Examples
+
+##### Convert # to Index
+
+A useful pattern for converting an internal `#` into an index for all rows, while maintaining the original numbering, is:
+
+```nu
+ls | enumerate | flatten
+```
+
+While the results _look_ the same, the `index` is now decoupled from the internal cell-path. For example:
+
+```nu
+ls | enumerate | flatten | sort-by modified | first 5
+# => ╭────┬──────────────┬──────┬─────────┬──────────────╮
+# => │  # │     name     │ type │  size   │   modified   │
+# => ├────┼──────────────┼──────┼─────────┼──────────────┤
+# => │  0 │ CNAME        │ file │    15 B │ 9 months ago │
+# => │  2 │ LICENSE      │ file │ 1.0 KiB │ 9 months ago │
+# => │  4 │ assets       │ dir  │ 4.0 KiB │ 9 months ago │
+# => │ 17 │ lefthook.yml │ file │ 1.1 KiB │ 9 months ago │
+# => │ 24 │ snippets     │ dir  │ 4.0 KiB │ 9 months ago │
+# => ╰────┴──────────────┴──────┴─────────┴──────────────╯
+
+ls | enumerate | flatten | sort-by modified | select 4
+# => ╭────┬──────────┬──────┬─────────┬──────────────╮
+# => │  # │   name   │ type │  size   │   modified   │
+# => ├────┼──────────┼──────┼─────────┼──────────────┤
+# => │ 24 │ snippets │ dir  │ 4.0 KiB │ 9 months ago │
+# => ╰────┴──────────┴──────┴─────────┴──────────────╯
+```
+
+The `sort-by modified` now _also_ sorts the `index` along with the rest of the columns.
+
+##### Adding a Row Header
+
+```nu
+let table = [
+[additions | deletions | delta ];
+[       10 |        20 |   -10 ]
+[       15 |         5 |    10 ]
+[        8 |         6 |     2 ]]
+
+let totals_row = ($table | math sum | insert index {"Totals"})
+$table | append $totals_row
+# => ╭────────┬───────────┬───────────┬───────╮
+# => │      # │ additions │ deletions │ delta │
+# => ├────────┼───────────┼───────────┼───────┤
+# => │      0 │        10 │        20 │   -10 │
+# => │      1 │        15 │         5 │    10 │
+# => │      2 │         8 │         6 │     2 │
+# => │ Totals │        33 │        31 │     2 │
+# => ╰────────┴───────────┴───────────┴───────╯
+```
+
+### The `table` command
+
+The [`table`](/commands/docs/table.md) command is used to _render_ structured data. This includes:
+
+- Tables
+- Lists
+- Records
+- Ranges
+
+Perhaps contrary to initial assumptions, the result of rendering these types is a `string`. For example:
+
+```nu
+[ Nagasaki Ghent Cambridge Izmir Graz Lubango ] | table | describe
+# => string (stream)
+```
+
+Other data types are passed through the `table` command unchanged.
+
+With no arguments, the output rendered from the `table` command will often _display_ the same as unrendered form. For example:
+
+```nu
+[ Nagasaki Ghent Cambridge Izmir Graz Lubango ]
+# => ╭───┬───────────╮
+# => │ 0 │ Nagasaki  │
+# => │ 1 │ Ghent     │
+# => │ 2 │ Cambridge │
+# => │ 3 │ Izmir     │
+# => │ 4 │ Graz      │
+# => │ 5 │ Lubango   │
+# => ╰───┴───────────╯
+[ Nagasaki Ghent Cambridge Izmir Graz Lubango ] | table
+# => ╭───┬───────────╮
+# => │ 0 │ Nagasaki  │
+# => │ 1 │ Ghent     │
+# => │ 2 │ Cambridge │
+# => │ 3 │ Izmir     │
+# => │ 4 │ Graz      │
+# => │ 5 │ Lubango   │
+# => ╰───┴───────────╯
+```
+
+This can be useful when you need to store the rendered view of structured data as a string. For example, to remove all ANSI formatting (colors) from a table:
+
+```
+ls | table | ansi strip
+```
+
+The `table` command also has multipe options for _changing_ the rendering of a table, such as:
+
+- `-e` to expand data that would normally be collapsed when rendering. Compare `scope modules | table` to `scope modules | table -e`.
+- `-i false` to hide the `index`/`#` column
+- `-a 5` to abbreviate the table to just the first and last 5 entries
+- And more
