@@ -165,4 +165,57 @@ for t in [
 ```
 and be invoked as `nu tests.nu`
 
+### Basic Test Framework
+
+It is also possible to define tests in Nushell as functions with descriptive names and discover
+them dynamically without requiring a [Nupm] package. The following uses `scope commands` and a
+second instance of Nushell to run the generated list of tests.
+
+```nushell
+use std assert
+
+source fib.nu
+
+def main [] {
+    print "Running tests..."
+
+    let test_commands = (
+        scope commands
+            | where ($it.type == "custom")
+                and ($it.name | str starts-with "test ")
+                and not ($it.description | str starts-with "ignore")
+            | get name
+            | each { |test| [$"print 'Running test: ($test)'", $test] } | flatten
+            | str join "; "
+    )
+
+    nu --commands $"source ($env.CURRENT_FILE); ($test_commands)"
+    print "Tests completed successfully"
+}
+
+def "test fib" [] {
+    for t in [
+        [input, expected];
+        [0, 0],
+        [1, 1],
+        [2, 1],
+        [3, 2],
+        [4, 3],
+        [5, 5],
+        [6, 8],
+        [7, 13]
+    ] {
+        assert equal (fib $t.input) $t.expected
+    }
+}
+
+# ignore
+def "test show-ignored-test" [] {
+    print "This test will not be executed"
+}
+```
+
+This is a simple example but could be extended to include many of the things you might expect from
+a testing framework, including setup and tear down functions and test discovery across files.
+
 [Nupm]: https://github.com/nushell/nupm
