@@ -1,6 +1,6 @@
 # Coming from CMD.EXE
 
-This table was last updated for Nu 0.67.0.
+This table was last updated for Nu 0.99.1.
 
 | CMD.EXE                              | Nu                                                                                  | Task                                                                  |
 | ------------------------------------ | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
@@ -57,4 +57,45 @@ This table was last updated for Nu 0.67.0.
 | `VERIFY`                             |                                                                                     | Verify that file writes happen                                        |
 | `VOL`                                |                                                                                     | Show drive information                                                |
 
-Before Nu version 0.67, Nu [used to](https://www.nushell.sh/blog/2022-08-16-nushell-0_67.html#windows-cmd-exe-changes-rgwood) use CMD.EXE to launch external commands, which meant that the above builtins could be run as an `^external` command. As of version 0.67, however, Nu no longer uses CMD.EXE to launch externals, meaning the above builtins cannot be run from within Nu, except for `ASSOC`, `CLS`, `ECHO`, `FTYPE`, `MKLINK`, `PAUSE`, `START`, `VER`, and `VOL`, which are explicitly allowed to be interpreted by CMD if no executable by that name exists.
+## Forwarded CMD.EXE commands
+
+Nu accepts and runs *some* CMD.EXE commands through `cmd.exe`.
+Which ones, and under which precedence depends on the Nu version.
+
+### Version 0.94 onward
+
+Nu version 0.94 released *(on 2024-05-28)* with [a behavior change](https://github.com/nushell/nushell/pull/12921).
+
+If the command is one of the forwarded CMD.EXE commands, `cmd.exe` is called with that command.
+
+The forwarded commands have not changed since version 0.75.0 ([v0.94 src](https://github.com/nushell/nushell/blob/0.94.0/crates/nu-command/src/system/run_external.rs#L531-L538)):
+
+`ASSOC`, `CLS`, `ECHO`, `FTYPE`, `MKLINK`, `PAUSE`, `START`, `VER`, `VOL`
+
+Note that, contrary to earlier versions, the forwards take precedence over other external commands.
+
+For example, with a `ver.bat` file in the current working directory, executing `^ver` leads to the CMD.EXE `VER` being executed, *NOT* the `ver.bat` file.
+
+Executing `./ver` or `ver.bat` *will* execute the local bat file though.
+
+### Version 0.67 until before 0.94
+
+Nu version 0.67 released *(on 2022-08-16)* with [a behavior change](https://www.nushell.sh/blog/2022-08-16-nushell-0_67.html#windows-cmd-exe-changes-rgwood).
+
+When a command is not found as an executable, if the command is one of the forwarded CMD.EXE commands, `cmd.exe` is called with that command.
+
+The forwarded commands are:
+
+* v0.67.0 onward ([src](https://github.com/nushell/nushell/blob/0.67.0/crates/nu-command/src/system/run_external.rs#L148)):\
+  `ASSOC`, `DIR`, `ECHO`, `FTYPE`, `MKLINK`, `START`, `VER`, `VOL`
+* v0.68.0 onward ([src](https://github.com/nushell/nushell/blob/0.68.0/crates/nu-command/src/system/run_external.rs#L168-L169)):\
+  `ASSOC`, `CLS`, `DIR`, `ECHO`, `FTYPE`, `MKLINK`, `PAUSE`, `START`, `VER`, `VOL`
+* v0.75.0 onward ([src](https://github.com/nushell/nushell/blob/0.75.0/crates/nu-command/src/system/run_external.rs#L207), [change](https://github.com/nushell/nushell/pull/7740)):\
+  `ASSOC`, `CLS`, `ECHO`, `FTYPE`, `MKLINK`, `PAUSE`, `START`, `VER`, `VOL`
+
+## Prior to version 0.67
+
+If a command is not found, `cmd.exe` is called with that command.
+That means that effectively *all* CMD.EXE commands can be called from within Nu.
+
+The disadvantage is that commands that do not resolve in `cmd.exe`, the command not found error message comes from `cmd.exe` rather than Nu.
