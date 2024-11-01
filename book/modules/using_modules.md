@@ -42,7 +42,7 @@ The module's documentation will usually tell you the recommended way to import i
 
 The path to the module can be:
 
-- An absolute or relative path to a directory containing a `mod.nu` file:
+- An absolute path to a directory containing a `mod.nu` file:
 
   ::: details Example
 
