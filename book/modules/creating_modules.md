@@ -465,7 +465,7 @@ Notice that we have two definitions in this module -- `alpha-num-range` and `str
 use is-alphanumeric.nu *
 'Word' | str is-alphanumeric
 # => true
-'Some punctutation?!' | str is-alphanumeric
+'Some punctuation?!' | str is-alphanumeric
 # => false
 'a' in (alpha-num-range)
 # => Error:
