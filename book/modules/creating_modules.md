@@ -89,7 +89,7 @@ Now it works as expected:
 
 ```nu
 use ./increment.nu
-2024 | inc
+2024 | increment
 # => 2025
 ```
 
@@ -333,7 +333,7 @@ As with any command defined without `--env`, commands and other definitions in t
 ```nu
 export def examine-module [] {
     # Changes the PWD environment variable
-    cd $env.CURRENT_FILE
+    cd ($env.CURRENT_FILE | path dirname)
     ls
 }
 ```
