@@ -100,7 +100,7 @@ The path to the module can be:
 
   :::
 
-- Less commonly, the name of a module already created with the [`module`](/commands/docs/module.md) command. While it is possible to use this command to create a module at the commandline, this isn't common or useful. Instead, this form is primarily used by module authors to define a submodule. See [Creating Modules - Submodules](./creating_modules.md#submodules).
+- Less commonly, the name of a module is created with the [`module`](/commands/docs/module.md) command. While it is possible to use this command to create a module at the commandline, this isn't common or useful. Instead, this form is primarily used by module authors to define a submodule. See [Creating Modules - Submodules](./creating_modules.md#submodules).
 
 ### Module Definitions
 
