@@ -1,12 +1,14 @@
 # How to Configure 3rd Party Prompts
 
-## nerdfonts
+## Nerd Fonts
 
-nerdfonts are not required but they make the presentation much better.
+Nerd Fonts are not required, but they can improve the prompt presentation through additional glyphs and iconography.
 
-[site](https://www.nerdfonts.com)
+> Nerd Fonts patches developer targeted fonts with a high number of glyphs (icons).
+> Specifically to add a high number of extra glyphs from popular ‘iconic fonts’ such as Font Awesome, Devicons, Octicons, and others.
 
-[repo](https://github.com/ryanoasis/nerd-fonts)
+* [Nerd Fonts website](https://www.nerdfonts.com)
+* [Source Repository](https://github.com/ryanoasis/nerd-fonts)
 
 ## oh-my-posh
 
