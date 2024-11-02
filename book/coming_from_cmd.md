@@ -59,12 +59,12 @@ This table was last updated for Nu 0.67.0.
 
 ## Forwarded CMD.EXE commands
 
-Nu accepts and runs *some* CMD.EXE commands through `cmd.exe`.
+Nu accepts and runs *some* of CMD.EXE's internal commands through `cmd.exe`.
 
-The forwarded commands are: `ASSOC`, `CLS`, `ECHO`, `FTYPE`, `MKLINK`, `PAUSE`, `START`, `VER`, `VOL`
+The internal commands are: `ASSOC`, `CLS`, `ECHO`, `FTYPE`, `MKLINK`, `PAUSE`, `START`, `VER`, `VOL`
 
-These forwarded commands take precedence over external commands.
+These internal commands take precedence over external commands.
 
-For example, with a `ver.bat` file in the current working directory, executing `^ver` leads to the CMD.EXE `VER` being executed, *NOT* the `ver.bat` file.
+For example, with a `ver.bat` file in the current working directory, executing `^ver` executes CMD.EXE's internal `VER` command, *NOT* the `ver.bat` file.
 
 Executing `./ver` or `ver.bat` *will* execute the local bat file though.
