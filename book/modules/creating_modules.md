@@ -332,8 +332,13 @@ As with any command defined without `--env`, commands and other definitions in t
 
 ```nu
 export def examine-module [] {
+    let module_dir = if $env.CURRENT_FILE =~ 'mod\.nu$' {
+        $env.CURRENT_FILE | path dirname
+    } else {
+        $env.CURRENT_FILE
+    }
     # Changes the PWD environment variable
-    cd ($env.CURRENT_FILE | path dirname)
+    cd $module_dir
     ls
 }
 ```
