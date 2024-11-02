@@ -331,14 +331,9 @@ cd $env.NU_MODULES_DIR
 As with any command defined without `--env`, commands and other definitions in the module use their own scope for environment. This allows changes to be made internal to the module without them bleeding into the user's scope. Add the following to the bottom of `my-utils/mod.nu`:
 
 ```nu
-export def examine-module [] {
-    let module_dir = if $env.CURRENT_FILE =~ 'mod\.nu$' {
-        $env.CURRENT_FILE | path dirname
-    } else {
-        $env.CURRENT_FILE
-    }
+export def examine-config-dir [] {
     # Changes the PWD environment variable
-    cd $module_dir
+    cd $nu.default-config-dir
     ls
 }
 ```
