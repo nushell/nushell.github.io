@@ -37,7 +37,7 @@ This table was last updated for Nu 0.67.0.
 | `MKLINK`                             |                                                                                     | Create symbolic links                                                 |
 | `MOVE`                               | `mv`                                                                                | Move files                                                            |
 | `PATH`                               | `$env.Path`                                                                         | Display the current path variable                                     |
-| `PATH <path>;%PATH%`                 | `$env.Path = ($env.Path \| prepend <path>`)                                         | Edit the path variable                                                |
+| `PATH <path>;%PATH%`                 | `$env.Path = ($env.Path \| append <path>`)                                          | Edit the path variable                                                |
 | `PATH %PATH%;<path>`                 | `$env.Path = ($env.Path \| prepend <path>`)                                         | Edit the path variable                                                |
 | `PAUSE`                              | `input "Press any key to continue . . ."`                                           | Pause script execution                                                |
 | `PROMPT <template>`                  | `$env.PROMPT_COMMAND = { <command> }`                                               | Change the terminal prompt                                            |
