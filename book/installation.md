@@ -30,6 +30,32 @@ Cross Platform installation:
 
 - [npm](https://www.npmjs.com/) (`npm install -g nushell` Note that nu plugins are not included if you install in this way)
 
+## Docker Container Images
+
+Docker images are available from the GitHub Container Registry. An image for the latest release is built regularly
+for Alpine and Debian. You can run the image in interactive mode using:
+
+```nu
+docker run -it --rm ghcr.io/nushell/nushell:<version>-<distro>
+```
+
+Where `<version>` is the version of Nushell you want to run and `<distro>` is `alpine` or the latest supported Debian release, such as `bookworm`.
+
+To run a specific command, use:
+
+```nu
+docker run --rm ghcr.io/nushell/nushell:latest-alpine -c "ls /usr/bin | where size > 10KiB"
+```
+
+To run a script from the current directory using Bash, use:
+
+```nu
+docker run --rm \
+    -v $(pwd):/work \
+    ghcr.io/nushell/nushell:latest-alpine \
+    "/work/script.nu"
+```
+
 ## Build from Source
 
 You can also build Nu from source. First, you will need to set up the Rust toolchain and its dependencies.
