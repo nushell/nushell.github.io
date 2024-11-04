@@ -165,30 +165,6 @@ Furthermore, we can use more complex cell paths to sort nested data:
 ╰───┴───────────┴────────────────────────────╯
 ```
 
-### Sorting records
-
-Records can be sorted in order of their keys using `sort`:
-
-```nu
-> {foo: 123, bar: 456, baz: 89} | sort
-╭─────┬─────╮
-│ bar │ 456 │
-│ baz │ 89  │
-│ foo │ 123 │
-╰─────┴─────╯
-```
-
-To instead sort in order of a record's values, use `sort -v`:
-
-```nu
-> {foo: 123, bar: 456, baz: 89} | sort -v
-╭─────┬─────╮
-│ baz │ 89  │
-│ foo │ 123 │
-│ bar │ 456 │
-╰─────┴─────╯
-```
-
 ### Sort by key closure
 
 Sometimes, it's useful to sort data in a more complicated manner than "increasing" or "decreasing". Instead of using `sort-by` with a cell path, you can supply a [closure](types_of_data.html#closures), which will transform each value into a [sorting key](https://en.wikipedia.org/wiki/Collation#Sort_keys) _without changing the underlying data_. Here's an example of a key closure, where we want to sort a list of assignments by their average grade:
