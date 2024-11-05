@@ -33,6 +33,8 @@ The plugin **may** send [engine calls](#enginecall) during the execution of a ca
 
 The engine **may** send a [`Goodbye`](#goodbye) message to the plugin indicating that it will no longer send any more plugin calls. Upon receiving this message, the plugin **may** choose not to accept any more plugin calls, and **should** exit after any in-progress plugin calls have finished.
 
+**Note**: During the sequence, the engine may also send a [`Signal`](#signal) message asynchronously, such as when an interrupt (Ctrl+C) or reset signal is triggered. Plugins should handle these messages as they are received, for example, by pausing or stopping operations when an `Interrupt` signal is sent.
+
 ## `Hello`
 
 After the encoding type has been decided, both the engine and plugin **must** send a `Hello` message containing relevant version and protocol support information.
@@ -554,6 +556,21 @@ Example:
       "Identifier": 4221
     }
   ]
+}
+```
+
+### `Signal`
+
+The `Signal` message type is used to relay a signal from the engine to the plugin, allowing the plugin to respond to various system-level or user-initiated signals. The message body consists of a `SignalAction` enum, which currently supports the following variants:
+
+- **`Interrupt`**: Sent when the engine receives an interrupt signal (such as Ctrl+C), to gracefully interrupt a plugin's operation.
+- **`Reset`**: Sent when the engine’s `reset_signals` method is called, indicating that the plugin should reset its signal state.
+
+Example:
+
+```json
+{
+  "Signal": "Interrupt"
 }
 ```
 
@@ -1227,6 +1244,42 @@ Example:
   "Drop": 0
 }
 ```
+
+## Signal Handling in Plugins
+
+Plugins can respond to signals sent from the engine, such as interrupts (Ctrl+C) or resets, by registering handlers. The plugin’s signal handling methods allow for customizable responses to user or system actions, enhancing the plugin's integration with the Nu engine.
+
+### `register_signal_handler`
+
+The `register_signal_handler` method allows a plugin to register a handler that will be called when a signal is received. This method accepts a closure with the following signature:
+```rust
+|action: SignalAction| { ... }
+```
+The closure will be invoked with the `SignalAction` variant received from the engine. This method returns an RAII guard that ensures the handler remains active until it is dropped.
+
+#### Example Usage
+
+Below is an example of registering a handler that responds to both `Interrupt` and `Reset` signals:
+
+```rust
+let _guard = engine.register_signal_handler(Box::new(move |action| {
+    match action {
+        SignalAction::Interrupt => println!("Interrupt signal received"),
+        SignalAction::Reset => println!("Reset signal received"),
+    }
+}));
+```
+
+#### `signals()`
+
+The `signals()` method allows the plugin to check the status of the signal, specifically for `Interrupt`. This method returns a `Signals` struct, which includes the method `interrupted()` that indicates if an interrupt has occurred.
+
+```rust
+if engine.signals().interrupted() {
+    println!("Operation was interrupted.");
+}
+```
+Use `signals().interrupted()` to check for interrupt status, particularly when managing long-running operations.
 
 ## Encoding
 
@@ -2271,3 +2324,14 @@ Serialized with serde's default enum representation. Examples:
 { "Bits": "BitOr" }            // |    Bits(BitOr)
 { "Comparison": "RegexMatch" } // =~   Comparison(RegexMatch)
 ```
+
+### `SignalAction`
+
+The `SignalAction` enum is used to specify actions that the plugin should take in response to signals from the engine.
+
+| Variant       | Description                                                                            |
+| ------------- | -------------------------------------------------------------------------------------- |
+| `Interrupt`   | Indicates an interrupt signal (e.g., Ctrl+C) was received. Plugins should pause, stop, or end their operation. |
+| `Reset`       | Indicates a reset signal from the engine’s `reset_signals` function. Plugins should reset any internal signal states. |
+
+This enum can be used in conjunction with `register_signal_handler` to perform specific tasks when each signal type is received.
