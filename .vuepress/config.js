@@ -172,6 +172,11 @@ export default defineUserConfig({
         sidebar: sidebarZhCN,
       },
     },
+    themePlugins: {
+      prismjs: {
+        lineNumbers: 10,
+      },
+    },
   }),
   plugins: [
     gitPlugin(),
@@ -186,7 +191,7 @@ export default defineUserConfig({
     }),
     shikiPlugin({
       theme: 'dark-plus',
-      lineNumbers: true,
+      lineNumbers: 10,
       langs: [
         'nushell',
         'rust',
