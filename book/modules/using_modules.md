@@ -47,7 +47,7 @@ The path to the module can be:
   ::: details Example
 
   ```nu
-  use ~/nushell/modules/nupm`
+  use ~/nushell/modules/nupm
   ```
 
   Note that the module name (its directory) can end in a `/` (or `\` on Windows), but as with most commands that take a paths (e.g., `cd`), this is completely optional.
@@ -69,7 +69,7 @@ The path to the module can be:
   Note that the module name (its directory) can end in a `/` (or `\` on Windows), but as with most commands that take a paths (e.g., `cd`), this is completely optional.
   :::
 
-  ::: important Important! Importing modules from `$env.NU_LIB_PATH`
+  ::: important Important! Importing modules from `$env.NU_LIB_DIRS`
   When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the `$env.NU_LIB_DIRS` list.
 
   This allows you to install modules to a location that is easily accessible via a relative path regardless of the current directory.
@@ -104,7 +104,9 @@ The path to the module can be:
 
 ### Module Definitions
 
-The second argument to the `use` command is an optional list of the definitions to import. Again, the module documentation should provide recommendations, but you always have the option to choose a form that works best for your use-case.
+The second argument to the `use` command is an optional list of the definitions to import. Again, the module documentation should provide recommendations. For example, the [Standard Library Chapter](../standard_library.md#importing-submodules) covers the recommended imports for each submodule.
+
+Of course, you always have the option to choose a form that works best for your use-case.
 
 - **Import an entire module/submodule as a command with subcommands**
 
@@ -135,9 +137,7 @@ The second argument to the `use` command is an optional list of the definitions 
 
   Notice how the `to jsonl` command is placed directly in the current scope, rather than being a subcommand of `formats`.
 
-  The [Standard Library Chapter](../standard_library.md) covers the recommended imports for each submodule.
-
-- **Import one or more commands from a module**
+- **Import one or more definitions from a module**
 
   Nushell can also selectively import a subset of the definitions of a module. For example:
 
@@ -161,16 +161,39 @@ The second argument to the `use` command is an optional list of the definitions 
   use std/formats [ 'from ndjson' 'to ndjson' ]
   ```
 
+  ::: note Importing submodules
+  While you can import a submodule by itself using `use <module> </submodule>` (e.g., `use std help`), the entire parent module and _all_ of its definitions (and thus submodules) will be _parsed_ when using this form. When possible, loading the submodule as a _module_ will result in faster code. For example:
+
+  ```nu
+  # Faster
+  use std/help
+  ```
+
+  :::
+
 ## Importing Constants
 
-As seen above with the `std/math` examples, some modules may export constant definitions. The syntax for accessing a constant varies slightly depending on how it was imported. For example:
+As seen above with the `std/math` examples, some modules may export constant definitions. When importing the entire module, constants can be accessed through a record with the same name as the module:
 
 ```nu
+# Importing entire module - Record access
 use std/math
 $math.PI
-# or
+# => 3.141592653589793
+
+$math
+# => ╭───────┬──────╮
+# => │ GAMMA │ 0.58 │
+# => │ E     │ 2.72 │
+# => │ PI    │ 3.14 │
+# => │ TAU   │ 6.28 │
+# => │ PHI   │ 1.62 │
+# => ╰───────┴──────╯
+
+# Or importing all of the module's members
 use std/math *
 $PI
+# => 3.141592653589793
 ```
 
 ## Hiding

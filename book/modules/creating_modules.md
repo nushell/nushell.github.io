@@ -69,7 +69,6 @@ In the [Basic Example](#basic-module-example) above, we had a module named `inc`
 ```nu
 mv inc.nu increment.nu
 use increment.nu *
-
 # => Error: nu::parser::named_as_module
 # => ...
 # => help: Module increment can't export command named
@@ -120,10 +119,10 @@ Additionally, `main` has special behavior if used in a script file, regardless o
 
 As mentioned briefly in the Overview above, modules can be created either as:
 
-* `<module_name>.nu`: Useful for simple modules
-* `<module_name>/mod.nu`: Useful for organizing larger module projects where submodules can easily map to subdirectories of the main module
+1. `<module_name>.nu`: "File-form" - Useful for simple modules
+2. `<module_name>/mod.nu`: "Directory-form" - Useful for organizing larger module projects where submodules can easily map to subdirectories of the main module
 
-The `increment.nu` example above is clearly an example of the former. Let's convert it to the directory form:
+The `increment.nu` example above is clearly an example of (1) the file-form. Let's try converting it to the directory-form:
 
 ```nu
 mkdir increment
@@ -152,7 +151,7 @@ export def main []: int -> int {
 }
 
 export def "increment by" [amount: int]: int -> int {
-  $in + $amount
+    $in + $amount
 }
 ```
 
@@ -166,7 +165,7 @@ export def main []: int -> int {
 }
 
 export def by [amount: int]: int -> int {
-  $in + $amount
+    $in + $amount
 }
 ```
 
@@ -183,10 +182,7 @@ Submodules are modules that are exported from another module. There are two ways
 1. With `export module`: Exports (a) the submodule and (b) its definitions as members of the submodule
 2. With `export use`: Exports (a) the submodule and (b) its definitions as members of the parent module
 
-To demonstrate the difference, let's add to our `increment` example by:
-
-- Adding a new `range-into-list` module and command
-- Creating a new parent module `my-utils` with `increment` and `range-into-list` as its submodules
+To demonstrate the difference, let's create a new `my-utils` module, with our `increment` example as a submodule. Additionally, we'll create a new `range-into-list` command in its own submodule.
 
 1. Create a directory for the new `my-utils` and move the `increment.nu` into it
 
@@ -276,6 +272,10 @@ ls / | sort-by modified | select ...$file_indices
 ```
 
 Run `scope modules` again and notice that all of the commands from the submodules are re-exported into the `my-utils` module.
+
+::: tip
+While `export module` is the recommended and most common form, there is one module-design scenario in which `export use` is required -- `export use` can be used to _selectively export_ definitions from the submodule, something `export module` cannot do. See [Additional Examples - Selective Export](#selective-export-from-a-submodule) for an example.
+:::
 
 ::: note
 `module` without `export` defines only a local module; it does not export a submodule.
@@ -470,4 +470,78 @@ use is-alphanumeric.nu *
 'a' in (alpha-num-range)
 # => Error:
 # => help: `alpha-num-range` is neither a Nushell built-in or a known external command
+```
+
+### Selective Export from a Submodule
+
+::: note
+While the following is a rare use-case, this technique is used by the Standard Library to
+make the `dirs` commands and its aliases available separately.
+:::
+
+As mentioned in the [Submodules](#submodules) section above, only `export use` can selectively export definitions from a submodule.
+
+To demonstrate, let's add a modified form of the `go.nu` module example [above](#caveats) to `my-utils`:
+
+```nu
+# go.nu, in the my-utils directory
+export def --env home [] {
+    cd ~
+}
+
+export def --env modules [] {
+    cd ($nu.default-config-dir | path join "scripts")
+}
+
+export alias h = home
+export alias m = modules
+```
+
+This `go.nu` includes the following changes from the original:
+
+- It doesn't rely on the `my-utils` mod since it will now be a submodule of `my-utils` instead
+- It adds "shortcut" aliases:
+  `h`: Goes to the home directory (alias of `go home`)
+  `m`: Goes to the modules directory (alias of `go modules`)
+
+A user could import _just_ the aliases with:
+
+```nu
+use my-utils/go.nu [h, m]
+```
+
+However, let's say we want to have `go.nu` be a submodule of `my-utils`. When a user imports `my-utils`, they should _only_ get the commands, but not the aliases. Edit `my-utils/mod.nu` and add:
+
+```nu
+export use ./go.nu [home, modules]
+```
+
+That _almost_ works -- It selectively exports `home` and `modules`, but not the aliases. However, it does so without the `go` prefix. For example:
+
+```nu
+use my-utils *
+home
+# => works
+go home
+# => Error: command not found
+```
+
+To export them as `go home` and `go modules`, make the following change to `my-utils/mod.nu`:
+
+```nu
+# Replace the existing `export use` with ...
+export module go {
+    export use ./go.nu [home, modules]
+}
+```
+
+This creates a new, exported submodule `go` in `my-utils` with the selectively (re)exported definitions for `go home` and `go modules`.
+
+```nu
+use my-utils *
+# => As expected:
+go home
+# => works
+home
+# => Error: command not found
 ```
