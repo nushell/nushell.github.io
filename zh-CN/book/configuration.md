@@ -58,8 +58,8 @@ _(尽管 `$env.config` 是一个环境变量，按照惯例它仍然在 `config.
 Nushell 遵循如下的规则来匹配编辑器:
 
 1. `$config.buffer_editor`
-2. `$env.EDITOR`
 3. `$env.VISUAL`
+2. `$env.EDITOR`
 4. 如果上面都未匹配成功，则针对 Windows 运行`notepad`, 其他系统`nano`
 
 ### 颜色配置部分

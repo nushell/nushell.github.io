@@ -101,8 +101,8 @@ These are some important variables to look at for Nushell-specific settings:
 The ([`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/docs/config_env.md)) commands open their respective configurations for quick editing in your preferred text editor or IDE. Nu determines your editor from the following environment variables in order:
 
 1. `$env.config.buffer_editor`
-2. `$env.EDITOR`
 3. `$env.VISUAL`
+2. `$env.EDITOR`
 
 ### Color Config Section
 
