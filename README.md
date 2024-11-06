@@ -59,3 +59,7 @@ After installing, launch Nu by typing `nu`.
 Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!
 
 You can help improve this site by [giving us feedback](https://github.com/nushell/nushell.github.io/issues) or [sending a PR](https://github.com/nushell/nushell.github.io/pulls).
+
+
+
+
