@@ -333,7 +333,7 @@ By default, positional parameters are _required_. Using our previous definition 
 
 ```nu
 def greet [name1, name2] {
-  $"Hello, ($name)!"
+  $"Hello, ($name1) and ($name2)!"
 }
 
 greet Wei Mei
