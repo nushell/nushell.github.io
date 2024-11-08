@@ -61,6 +61,7 @@ export const sidebarEn: SidebarConfig = {
           ],
         },
         '/book/overlays.md',
+        '/book/sorting.md',
         '/book/testing.md',
         '/book/style_guide.md',
       ],

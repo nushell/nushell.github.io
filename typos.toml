@@ -1,6 +1,11 @@
 [files]
 extend-exclude = ["pt-BR", "de", "ja", "es", "blog/202[0-3]*", "commands/", "fr"]
 
+[default]
+extend-ignore-identifiers-re = [
+    "(?i)foobar", # false positive in book/sorting.md
+]
+
 [default.extend-words]
 ons = "ons" # false positive in commands/docs/str_replace.md
 ful = "ful" # false positive in commands/docs/str_replace.md
@@ -13,3 +18,4 @@ iterm = "iterm"
 nushell = "nushell"
 ba = "ba"
 guid = "guid"
+

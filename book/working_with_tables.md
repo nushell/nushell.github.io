@@ -49,6 +49,8 @@ We can sort a table by calling the [`sort-by`](/commands/docs/sort-by.md) comman
 
 We can sort a table by any column that can be compared. For example, we could also have sorted the above using the "name", "accessed", or "modified" columns.
 
+For more info on sorting, see [Sorting](/book/sorting.md).
+
 ## Selecting the Data you Want
 
 ::: tip Note
