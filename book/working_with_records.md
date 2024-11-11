@@ -1,7 +1,7 @@
 # Working with Records
 
 :::tip
-Records are roughly equivalent to the individual rows of a table. You can think of a record as essentially being a "one-row table". Thus, most commands which operate on a table row _also_ operates on a record. For instance, [`update`](/commands/docs/where.md) can be used with records:
+Records are roughly equivalent to the individual rows of a table. You can think of a record as essentially being a "one-row table". Thus, most commands which operate on a table row _also_ operates on a record. For instance, [`update`](/commands/docs/update.md) can be used with records:
 
 ```nu
 > let my_record = {
