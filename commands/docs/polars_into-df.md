@@ -2,7 +2,7 @@
 title: polars into-df
 categories: |
   dataframe
-version: 0.99.0
+version: 0.100.0
 dataframe: |
   Converts a list, table or record into a dataframe.
 usage: |
@@ -19,6 +19,7 @@ The `polars into-df` command resides in the `polars` plugin.
 To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 
@@ -103,18 +104,18 @@ Takes a list of booleans and creates a dataframe
 
 Convert to a dataframe and provide a schema
 ```nu
-> {a: 1, b: {a: [1 2 3]}, c: [a b c]}| polars into-df -s {a: u8, b: {a: list<u64>}, c: list<str>}
-╭───┬───┬───────────────────┬───────────╮
-│ # │ a │         b         │     c     │
-├───┼───┼───────────────────┼───────────┤
-│ 0 │ 1 │ ╭───┬───────────╮ │ ╭───┬───╮ │
-│   │   │ │   │ ╭───┬───╮ │ │ │ 0 │ a │ │
-│   │   │ │ a │ │ 0 │ 1 │ │ │ │ 1 │ b │ │
-│   │   │ │   │ │ 1 │ 2 │ │ │ │ 2 │ c │ │
-│   │   │ │   │ │ 2 │ 3 │ │ │ ╰───┴───╯ │
-│   │   │ │   │ ╰───┴───╯ │ │           │
-│   │   │ ╰───┴───────────╯ │           │
-╰───┴───┴───────────────────┴───────────╯
+> [[a b c]; [1 {d: [1 2 3]} [10 11 12] ]]| polars into-df -s {a: u8, b: {d: list<u64>}, c: list<u8>}
+╭───┬───┬───────────────────┬────────────╮
+│ # │ a │         b         │     c      │
+├───┼───┼───────────────────┼────────────┤
+│ 0 │ 1 │ ╭───┬───────────╮ │ ╭───┬────╮ │
+│   │   │ │   │ ╭───┬───╮ │ │ │ 0 │ 10 │ │
+│   │   │ │ a │ │ 0 │ 1 │ │ │ │ 1 │ 11 │ │
+│   │   │ │   │ │ 1 │ 2 │ │ │ │ 2 │ 12 │ │
+│   │   │ │   │ │ 2 │ 3 │ │ │ ╰───┴────╯ │
+│   │   │ │   │ ╰───┴───╯ │ │            │
+│   │   │ ╰───┴───────────╯ │            │
+╰───┴───┴───────────────────┴────────────╯
 
 ```
 

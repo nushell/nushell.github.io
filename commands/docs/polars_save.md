@@ -2,7 +2,7 @@
 title: polars save
 categories: |
   lazyframe
-version: 0.99.0
+version: 0.100.0
 lazyframe: |
   Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson).
 usage: |
@@ -19,6 +19,7 @@ The `polars save` command resides in the `polars` plugin.
 To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.99.0
+version: 0.100.0
 network: |
   Post a body to a URL.
 usage: |
@@ -23,7 +23,7 @@ usage: |
  -  `--user, -u {any}`: the username when authenticating
  -  `--password, -p {any}`: the password when authenticating
  -  `--content-type, -t {any}`: the MIME type of content to post
- -  `--max-time, -m {int}`: timeout period in seconds
+ -  `--max-time, -m {duration}`: max duration before timeout occurs
  -  `--headers, -H {any}`: custom headers you want to add
  -  `--raw, -r`: return values as a string instead of a table
  -  `--insecure, -k`: allow insecure server connections when using SSL
@@ -75,9 +75,15 @@ Post JSON content from a pipeline to example.com
 
 ```
 
-Upload a file to example.com
+Upload a binary file to example.com
 ```nu
-> http post --content-type multipart/form-data https://www.example.com { audio: (open -r file.mp3) }
+> http post --content-type multipart/form-data https://www.example.com { file: (open -r file.mp3) }
+
+```
+
+Convert a text file into binary and upload it to example.com
+```nu
+> http post --content-type multipart/form-data https://www.example.com { file: (open -r file.txt | into binary) }
 
 ```
 

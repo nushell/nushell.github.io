@@ -2,7 +2,7 @@
 title: inc
 categories: |
   default
-version: 0.99.0
+version: 0.100.0
 default: |
   Increment a value or version. Optionally use the column of a table.
 usage: |
@@ -19,6 +19,7 @@ The `inc` command resides in the `inc` plugin.
 To use this command, you must install and register `nu_plugin_inc`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 

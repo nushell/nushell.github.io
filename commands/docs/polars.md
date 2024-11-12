@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.99.0
+version: 0.100.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -19,6 +19,7 @@ The `polars` command resides in the `polars` plugin.
 To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 
@@ -102,6 +103,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars is-unique`](/commands/docs/polars_is-unique.md)             | Creates mask indicating unique values.                                                                                                                                                                                                     | plugin |
 | [`polars join`](/commands/docs/polars_join.md)                       | Joins a lazy frame with other lazy frame.                                                                                                                                                                                                  | plugin |
 | [`polars last`](/commands/docs/polars_last.md)                       | Creates new dataframe with tail rows or creates a last expression.                                                                                                                                                                         | plugin |
+| [`polars len`](/commands/docs/polars_len.md)                         | Return the number of rows in the context. This is similar to COUNT(*) in SQL.                                                                                                                                                              | plugin |
 | [`polars lit`](/commands/docs/polars_lit.md)                         | Creates a literal expression.                                                                                                                                                                                                              | plugin |
 | [`polars lowercase`](/commands/docs/polars_lowercase.md)             | Lowercase the strings in the column.                                                                                                                                                                                                       | plugin |
 | [`polars max`](/commands/docs/polars_max.md)                         | Creates a max expression or aggregates columns to their max value.                                                                                                                                                                         | plugin |
@@ -145,6 +147,7 @@ The units of the timings are microseconds. | plugin |
 | [`polars summary`](/commands/docs/polars_summary.md)                 | For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.                                                                                                                                             | plugin |
 | [`polars take`](/commands/docs/polars_take.md)                       | Creates new dataframe using the given indices.                                                                                                                                                                                             | plugin |
 | [`polars unique`](/commands/docs/polars_unique.md)                   | Returns unique values from a dataframe.                                                                                                                                                                                                    | plugin |
+| [`polars unnest`](/commands/docs/polars_unnest.md)                   | Decompose struct columns into separate columns for each of their fields. The new columns will be inserted into the dataframe at the location of the struct column.                                                                         | plugin |
 | [`polars unpivot`](/commands/docs/polars_unpivot.md)                 | Unpivot a DataFrame from wide to long format.                                                                                                                                                                                              | plugin |
 | [`polars uppercase`](/commands/docs/polars_uppercase.md)             | Uppercase the strings in the column.                                                                                                                                                                                                       | plugin |
 | [`polars value-counts`](/commands/docs/polars_value-counts.md)       | Returns a dataframe with the counts for unique values in series.                                                                                                                                                                           | plugin |

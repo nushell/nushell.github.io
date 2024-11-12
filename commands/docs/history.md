@@ -2,7 +2,7 @@
 title: history
 categories: |
   history
-version: 0.99.0
+version: 0.100.0
 history: |
   Get the command history.
 usage: |
@@ -55,4 +55,5 @@ Search all the commands from history that contains 'cargo'
 
 | name                                                   | description                      | type     |
 | ------------------------------------------------------ | -------------------------------- | -------- |
+| [`history import`](/commands/docs/history_import.md)   | Import command line history      | built-in |
 | [`history session`](/commands/docs/history_session.md) | Get the command history session. | built-in |

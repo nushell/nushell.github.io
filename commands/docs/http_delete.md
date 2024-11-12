@@ -2,7 +2,7 @@
 title: http delete
 categories: |
   network
-version: 0.99.0
+version: 0.100.0
 network: |
   Delete the specified resource.
 usage: |
@@ -24,7 +24,7 @@ usage: |
  -  `--password, -p {any}`: the password when authenticating
  -  `--data, -d {any}`: the content to post
  -  `--content-type, -t {any}`: the MIME type of content to post
- -  `--max-time, -m {int}`: timeout period in seconds
+ -  `--max-time, -m {duration}`: max duration before timeout occurs
  -  `--headers, -H {any}`: custom headers you want to add
  -  `--raw, -r`: fetch contents as text rather than a table
  -  `--insecure, -k`: allow insecure server connections when using SSL

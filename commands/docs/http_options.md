@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.99.0
+version: 0.100.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |
@@ -22,7 +22,7 @@ usage: |
 
  -  `--user, -u {any}`: the username when authenticating
  -  `--password, -p {any}`: the password when authenticating
- -  `--max-time, -m {int}`: timeout period in seconds
+ -  `--max-time, -m {duration}`: max duration before timeout occurs
  -  `--headers, -H {any}`: custom headers you want to add
  -  `--insecure, -k`: allow insecure server connections when using SSL
  -  `--allow-errors, -e`: do not fail if the server returns an error code

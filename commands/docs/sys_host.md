@@ -2,7 +2,7 @@
 title: sys host
 categories: |
   system
-version: 0.99.0
+version: 0.100.0
 system: |
   View information about the system host.
 usage: |

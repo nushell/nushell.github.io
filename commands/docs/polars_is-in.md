@@ -2,7 +2,7 @@
 title: polars is-in
 categories: |
   expression
-version: 0.99.0
+version: 0.100.0
 expression: |
   Creates an is-in expression or checks to see if the elements are contained in the right series
 usage: |
@@ -19,6 +19,7 @@ The `polars is-in` command resides in the `polars` plugin.
 To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 
