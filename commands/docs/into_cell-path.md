@@ -2,7 +2,7 @@
 title: into cell-path
 categories: |
   conversions
-version: 0.99.0
+version: 0.100.0
 conversions: |
   Convert value to a cell-path.
 usage: |
@@ -31,25 +31,25 @@ usage: |
 Convert integer into cell path
 ```nu
 > 5 | into cell-path
-5
+$.5
 ```
 
 Convert string into cell path
 ```nu
 > 'some.path' | split row '.' | into cell-path
-some.path
+$.some.path
 ```
 
 Convert list into cell path
 ```nu
 > [5 c 7 h] | into cell-path
-5.c.7.h
+$.5.c.7.h
 ```
 
 Convert table into cell path
 ```nu
 > [[value, optional]; [5 true] [c false]] | into cell-path
-5.c
+$.5?.c
 ```
 
 ## Notes

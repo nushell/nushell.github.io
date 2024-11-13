@@ -2,7 +2,7 @@
 title: polars query
 categories: |
   dataframe
-version: 0.99.0
+version: 0.100.0
 dataframe: |
   Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause.
 usage: |
@@ -19,6 +19,7 @@ The `polars query` command resides in the `polars` plugin.
 To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 

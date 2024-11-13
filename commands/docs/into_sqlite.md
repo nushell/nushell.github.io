@@ -2,7 +2,7 @@
 title: into sqlite
 categories: |
   conversions
-version: 0.99.0
+version: 0.100.0
 conversions: |
   Convert table into a SQLite database.
 usage: |

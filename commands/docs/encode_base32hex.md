@@ -2,7 +2,7 @@
 title: encode base32hex
 categories: |
   formats
-version: 0.99.0
+version: 0.100.0
 formats: |
   Encode a binary value or a string using base32hex.
 usage: |

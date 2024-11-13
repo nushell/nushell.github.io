@@ -2,7 +2,7 @@
 title: url join
 categories: |
   network
-version: 0.99.0
+version: 0.100.0
 network: |
   Converts a record to url.
 usage: |
@@ -27,7 +27,7 @@ usage: |
 
 ## Examples
 
-Outputs a url representing the contents of this record
+Outputs a url representing the contents of this record, `params` and `query` fields must be equivalent
 ```nu
 > {
         "scheme": "http",
@@ -45,6 +45,20 @@ Outputs a url representing the contents of this record
         }
     } | url join
 http://www.pixiv.net/member_illust.php?mode=medium&illust_id=99260204
+```
+
+Outputs a url representing the contents of this record, "exploding" the list in `params` into multiple parameters
+```nu
+> {
+        "scheme": "http",
+        "username": "user",
+        "password": "pwd",
+        "host": "www.pixiv.net",
+        "port": "1234",
+        "params": {a: ["one", "two"], b: "three"},
+        "fragment": ""
+    } | url join
+http://user:pwd@www.pixiv.net:1234?a=one&a=two&b=three
 ```
 
 Outputs a url representing the contents of this record

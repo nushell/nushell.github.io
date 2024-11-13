@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.99.0
+version: 0.100.0
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
@@ -103,3 +103,25 @@ You can also output a table instead of a record
 ╰───┴───────┴───────────╯
 
 ```
+
+Group bools, whether they are strings or actual bools
+```nu
+> [true "true" false "false"] | group-by
+╭───────┬───────────────╮
+│       │ ╭───┬──────╮  │
+│ true  │ │ 0 │ true │  │
+│       │ │ 1 │ true │  │
+│       │ ╰───┴──────╯  │
+│       │ ╭───┬───────╮ │
+│ false │ │ 0 │ false │ │
+│       │ │ 1 │ false │ │
+│       │ ╰───┴───────╯ │
+╰───────┴───────────────╯
+```
+
+## Notes
+the group-by command makes some assumptions:
+    - if the input data is not a string, the grouper will convert the key to string but the values will remain in their original format. e.g. with bools, "true" and true would be in the same group (see example).
+    - datetime is formatted based on your configuration setting. use `format date` to change the format.
+    - filesize is formatted based on your configuration setting. use `format filesize` to change the format.
+    - some nushell values are not supported, such as closures.

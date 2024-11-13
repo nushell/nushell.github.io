@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.99.0
+version: 0.100.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |

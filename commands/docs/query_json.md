@@ -2,7 +2,7 @@
 title: query json
 categories: |
   filters
-version: 0.99.0
+version: 0.100.0
 filters: |
   execute json query on json file (open --raw <file> | query json 'query string')
 usage: |
@@ -19,6 +19,7 @@ The `query json` command resides in the `query` plugin.
 To use this command, you must install and register `nu_plugin_query`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 

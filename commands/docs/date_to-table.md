@@ -2,7 +2,7 @@
 title: date to-table
 categories: |
   date
-version: 0.99.0
+version: 0.100.0
 date: |
   Convert the date into a structured table.
 usage: |

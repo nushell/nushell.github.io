@@ -2,7 +2,7 @@
 title: source-env
 categories: |
   core
-version: 0.99.0
+version: 0.100.0
 core: |
   Source the environment from a source file into the current environment.
 usage: |

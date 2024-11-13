@@ -2,7 +2,7 @@
 title: to text
 categories: |
   formats
-version: 0.99.0
+version: 0.100.0
 formats: |
   Converts data into simple text.
 usage: |
@@ -18,6 +18,10 @@ usage: |
 
 ```> to text {flags} ```
 
+## Flags
+
+ -  `--no-newline, -n`: Do not append a newline to the end of the text
+
 
 ## Input/output types:
 
@@ -27,9 +31,16 @@ usage: |
 
 ## Examples
 
-Outputs data as simple text
+Outputs data as simple text with a trailing newline
 ```nu
-> 1 | to text
+> [1] | to text
+1
+
+```
+
+Outputs data as simple text without a trailing newline
+```nu
+> [1] | to text --no-newline
 1
 ```
 

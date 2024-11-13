@@ -2,7 +2,7 @@
 title: from plist
 categories: |
   formats
-version: 0.99.0
+version: 0.100.0
 formats: |
   Convert plist to Nushell values
 usage: |
@@ -19,6 +19,7 @@ The `from plist` command resides in the `formats` plugin.
 To use this command, you must install and register `nu_plugin_formats`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 

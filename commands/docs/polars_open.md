@@ -2,7 +2,7 @@
 title: polars open
 categories: |
   dataframe
-version: 0.99.0
+version: 0.100.0
 dataframe: |
   Opens CSV, JSON, NDJSON/JSON lines, arrow, avro, or parquet file to create dataframe. A lazy dataframe will be created by default, if supported.
 usage: |
@@ -20,6 +20,7 @@ To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
 
+
 ## Signature
 
 ```> polars open {flags} (file)```
@@ -34,6 +35,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
  -  `--skip-rows, - {number}`: Number of rows to skip from file. CSV file
  -  `--columns, - {list<string>}`: Columns to be selected from csv file. CSV and Parquet file
  -  `--schema, -s {record}`: Polars Schema in format [{name: str}]. CSV, JSON, and JSONL files
+ -  `--truncate-ragged-lines, -`: Truncate lines that are longer than the schema. CSV file
 
 ## Parameters
 

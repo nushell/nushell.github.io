@@ -2,7 +2,7 @@
 title: generate
 categories: |
   generators
-version: 0.99.0
+version: 0.100.0
 generators: |
   Generate a list of values by successively invoking a closure.
 usage: |

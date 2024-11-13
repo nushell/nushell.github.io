@@ -2,7 +2,7 @@
 title: polars agg-groups
 categories: |
   dataframe
-version: 0.99.0
+version: 0.100.0
 dataframe: |
   Creates an agg_groups expression.
 usage: |
@@ -19,6 +19,7 @@ The `polars agg-groups` command resides in the `polars` plugin.
 To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: str stats
 categories: |
   strings
-version: 0.99.0
+version: 0.100.0
 strings: |
   Gather word count statistics on the text.
 usage: |

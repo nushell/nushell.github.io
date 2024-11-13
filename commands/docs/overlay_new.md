@@ -2,7 +2,7 @@
 title: overlay new
 categories: |
   core
-version: 0.99.0
+version: 0.100.0
 core: |
   Create an empty overlay.
 usage: |

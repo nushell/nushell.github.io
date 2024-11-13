@@ -2,7 +2,7 @@
 title: url parse
 categories: |
   network
-version: 0.99.0
+version: 0.100.0
 network: |
   Parses a url.
 usage: |
@@ -34,20 +34,23 @@ usage: |
 
 Parses a url
 ```nu
-> 'http://user123:pass567@www.example.com:8081/foo/bar?param1=section&p2=&f[name]=vldc#hello' | url parse
-╭──────────┬─────────────────────────────────╮
-│ scheme   │ http                            │
-│ username │ user123                         │
-│ password │ pass567                         │
-│ host     │ www.example.com                 │
-│ port     │ 8081                            │
-│ path     │ /foo/bar                        │
-│ query    │ param1=section&p2=&f[name]=vldc │
-│ fragment │ hello                           │
-│          │ ╭─────────┬─────────╮           │
-│ params   │ │ param1  │ section │           │
-│          │ │ p2      │         │           │
-│          │ │ f[name] │ vldc    │           │
-│          │ ╰─────────┴─────────╯           │
-╰──────────┴─────────────────────────────────╯
+> 'http://user123:pass567@www.example.com:8081/foo/bar?param1=section&p2=&f[name]=vldc&f[no]=42#hello' | url parse
+╭──────────┬──────────────────────────────────────────╮
+│ scheme   │ http                                     │
+│ username │ user123                                  │
+│ password │ pass567                                  │
+│ host     │ www.example.com                          │
+│ port     │ 8081                                     │
+│ path     │ /foo/bar                                 │
+│ query    │ param1=section&p2=&f[name]=vldc&f[no]=42 │
+│ fragment │ hello                                    │
+│          │ ╭───┬─────────┬─────────╮                │
+│ params   │ │ # │   key   │  value  │                │
+│          │ ├───┼─────────┼─────────┤                │
+│          │ │ 0 │ param1  │ section │                │
+│          │ │ 1 │ p2      │         │                │
+│          │ │ 2 │ f[name] │ vldc    │                │
+│          │ │ 3 │ f[no]   │ 42      │                │
+│          │ ╰───┴─────────┴─────────╯                │
+╰──────────┴──────────────────────────────────────────╯
 ```

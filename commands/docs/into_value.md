@@ -2,7 +2,7 @@
 title: into value
 categories: |
   filters
-version: 0.99.0
+version: 0.100.0
 filters: |
   Infer Nushell datatype for each cell.
 usage: |
@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--columns, -c {table}`: list of columns to update
+ -  `--columns, -c {list<any>}`: list of columns to update
  -  `--prefer-filesizes, -f`: For ints display them as human-readable file sizes
 
 

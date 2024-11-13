@@ -2,7 +2,7 @@
 title: stor insert
 categories: |
   database
-version: 0.99.0
+version: 0.100.0
 database: |
   Insert information into a specified table in the in-memory sqlite database.
 usage: |
@@ -30,9 +30,10 @@ usage: |
 | ------- | ------ |
 | nothing | table  |
 | record  | table  |
+| table   | table  |
 ## Examples
 
-Insert data the in-memory sqlite database using a data-record of column-name and column-value pairs
+Insert data in the in-memory sqlite database using a data-record of column-name and column-value pairs
 ```nu
 > stor insert --table-name nudb --data-record {bool1: true, int1: 5, float1: 1.1, str1: fdncred, datetime1: 2023-04-17}
 
@@ -41,5 +42,17 @@ Insert data the in-memory sqlite database using a data-record of column-name and
 Insert data through pipeline input as a record of column-name and column-value pairs
 ```nu
 > {bool1: true, int1: 5, float1: 1.1, str1: fdncred, datetime1: 2023-04-17} | stor insert --table-name nudb
+
+```
+
+Insert data through pipeline input as a table literal
+```nu
+> [[bool1 int1 float1]; [true 5 1.1], [false 8 3.14]] | stor insert --table-name nudb
+
+```
+
+Insert ls entries
+```nu
+> ls | stor insert --table-name files
 
 ```

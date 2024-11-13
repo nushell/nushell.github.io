@@ -2,7 +2,7 @@
 title: polars unpivot
 categories: |
   dataframe
-version: 0.99.0
+version: 0.100.0
 dataframe: |
   Unpivot a DataFrame from wide to long format.
 usage: |
@@ -20,17 +20,17 @@ To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
 
+
 ## Signature
 
 ```> polars unpivot {flags} ```
 
 ## Flags
 
- -  `--index, -i {table}`: column names for unpivoting
- -  `--on, -o {table}`: column names used as value columns
+ -  `--index, -i {list<any>}`: column names for unpivoting
+ -  `--on, -o {list<any>}`: column names used as value columns
  -  `--variable-name, -r {string}`: optional name for variable column
  -  `--value-name, -l {string}`: optional name for value column
- -  `--streamable, -t`: Whether or not to use the polars streaming engine. Only valid for lazy dataframes
 
 
 ## Input/output types:

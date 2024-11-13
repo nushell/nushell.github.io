@@ -2,7 +2,7 @@
 title: polars profile
 categories: |
   dataframe
-version: 0.99.0
+version: 0.100.0
 dataframe: |
   Profile a lazy dataframe. This will run the query and return a record containing the materialized DataFrame and a DataFrame that contains profiling information of each node that is executed.
 
@@ -23,6 +23,7 @@ The `polars profile` command resides in the `polars` plugin.
 To use this command, you must install and register `nu_plugin_polars`.
 See the [Plugins](/book/plugins.html) chapter in the book for more information.
 :::
+
 
 ## Signature
 

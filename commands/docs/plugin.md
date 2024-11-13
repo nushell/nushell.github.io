@@ -2,7 +2,7 @@
 title: plugin
 categories: |
   plugin
-version: 0.99.0
+version: 0.100.0
 plugin: |
   Commands for managing plugins.
 usage: |
@@ -65,7 +65,7 @@ Remove the installed signatures for the `inc` plugin.
 | name                                           | description                                             | type     |
 | ---------------------------------------------- | ------------------------------------------------------- | -------- |
 | [`plugin add`](/commands/docs/plugin_add.md)   | Add a plugin to the plugin registry file.               | built-in |
-| [`plugin list`](/commands/docs/plugin_list.md) | List installed plugins.                                 | built-in |
+| [`plugin list`](/commands/docs/plugin_list.md) | List loaded and installed plugins.                      | built-in |
 | [`plugin rm`](/commands/docs/plugin_rm.md)     | Remove a plugin from the plugin registry file.          | built-in |
 | [`plugin stop`](/commands/docs/plugin_stop.md) | Stop an installed plugin if it was running.             | built-in |
 | [`plugin use`](/commands/docs/plugin_use.md)   | Load a plugin from the plugin registry file into scope. | keyword  |
