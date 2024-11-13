@@ -22,7 +22,9 @@ $env.config = {
       }
 
       direnv export json | from json | default {} | load-env
-      $env.PATH = do $env.ENV_CONVERSIONS.PATH.from_string $env.PATH
+      if 'ENV_CONVERSIONS' in ($env | columns) and 'PATH' in ($env.ENV_CONVERSIONS | columns) {
+        $env.PATH = do $env.ENV_CONVERSIONS.PATH.from_string $env.PATH
+      }
     }]
   }
 }
