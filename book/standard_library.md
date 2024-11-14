@@ -146,6 +146,13 @@ nu -n -c "$nu.startup-time"
 
 You will not be able to import the library, any of its submodules, nor use any of its commands, when it is disabled in this way.
 
+## Using `std/log` in Modules
+
+::: warning Important!
+`std/log` exports environment variables. To use the `std/log` module in your own module, please see [this caveat](./modules/creating_modules.md#export-env-runs-only-when-the-use-call-is-evaluated) in the "Creating Modules" Chapter.
+
+:::
+
 ## Optimal Startup
 
 If Nushell's startup time is important to your workflow, review your [startup configuration]([./configuration.md]) in `config.nu`, `env.nu`, and potentially others for inefficient use of the standard library. The following command should identify any problem areas:
