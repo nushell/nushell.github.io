@@ -51,7 +51,7 @@ The calendar for all of 2012
 
 This month's calendar with the week starting on Monday
 ```nu
-> cal --week-start mo
+> cal --week-start monday
 
 ```
 
