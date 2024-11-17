@@ -47,7 +47,9 @@ This table was last updated for Nu 0.67.0.
 | `RD` or `RMDIR`                      | `rm`                                                                                | Remove directory                                                      |
 | `SET <var>=<string>`                 | `$env.<var> = <string>`                                                             | Set environment variables                                             |
 | `SETLOCAL`                           | (default behavior)                                                                  | Localize environment changes to a script                              |
-| `START <path>`                       | `explorer <path>`                                                                   | Open a file as if double-clicked in File Explorer                     |
+| `START <path>`                       | Partially covered by `start <path>`                                                 | Open the path in the system-configured default application            |
+| `START <internal command>`           |                                                                                     | Start a separate window to run a specified internal command           |
+| `START <batch file>`                 |                                                                                     | Start a separate window to run a specified batch file                 |
 | `TIME /T`                            | `date now \| format date "%H:%M:%S"`                                                | Get the current time                                                  |
 | `TIME`                               |                                                                                     | Set the current time                                                  |
 | `TITLE`                              |                                                                                     | Set the cmd.exe window name                                           |
@@ -68,3 +70,6 @@ These internal commands take precedence over external commands.
 For example, with a `ver.bat` file in the current working directory, executing `^ver` executes CMD.EXE's internal `VER` command, *NOT* the `ver.bat` file.
 
 Executing `./ver` or `ver.bat` *will* execute the local bat file though.
+
+Note that Nushell has its own [`start` command](/commands/docs/start.md) which takes precedence.
+You can call the CMD.EXE's internal `START` command with the external command syntax `^start`.
