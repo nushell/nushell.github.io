@@ -379,34 +379,10 @@ The `sleep` behavior of not supporting an input stream matches Bash `sleep` beha
 
 Many commands do have piped input/output however, and if it's ever unclear, check their `help` documentation as described above.
 
-## Behind the Scenes
+## Result Display Rendering
 
-You may have wondered how we see a table if [`ls`](/commands/docs/ls.md) is an input and not an output. Nu adds this output for us automatically using another command called [`table`](/commands/docs/table.md). The [`table`](/commands/docs/table.md) command is appended to any pipeline that doesn't have an output. This allows us to see the result.
-
-In effect, the command:
-
-```nu
-ls
-```
-
-And the pipeline:
-
-```nu
-ls | table
-```
-
-Are one and the same.
-
-::: tip Note
-The phrase _"are one and the same"_ above only applies to the graphical output in the shell, it does not mean the two data structures are the same:
-
-```nushell
-(ls) == (ls | table)
-# => false
-```
-
-`ls | table` is not even structured data!
-:::
+In interactive mode, when a pipeline ends, the [`display_output` hook configuration](hooks.md#changing-how-output-is-displayed) defines how the result will be displayed.
+The default configuration uses the [`table` command](/commands/docs/table.md) to render structured data as a visual table.
 
 ## Output Result to External Commands
 
