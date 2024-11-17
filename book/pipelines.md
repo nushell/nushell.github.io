@@ -300,9 +300,9 @@ Nu works with data piped between two external commands in the same way as other 
 The Basics section above describes how commands can be combined in pipelines as input, filters, or output.
 How you can use commands depends on what they offer in terms of input/output handling.
 
-You can check what a command supports with `help <command name>`, which shows the relevant *Input/output types*.
+You can check what a command supports with [`help <command name>`](/commands/docs/help.md), which shows the relevant *Input/output types*.
 
-For example, through `help first` we can see that the `first` command supports multiple input and output types:
+For example, through `help first` we can see that the [`first` command](/commands/docs/first.md) supports multiple input and output types:
 
 ```nu
 > help first
@@ -323,7 +323,7 @@ a
 1
 ```
 
-As another example, the `ls` command supports output but not input:
+As another example, the [`ls` command](/commands/docs/ls.md) supports output but not input:
 
 ```nu
 > help ls
@@ -349,7 +349,7 @@ Note that this only works if `$in` matches the argument type. For example, `[dir
 
 Other commands without default behavior may fail in different ways, and with explicit errors.
 
-For example, `help sleep` tells us that `sleep` supports no input and no output types:
+For example, `help sleep` tells us that [`sleep`](/commands/docs/sleep.md) supports no input and no output types:
 
 ```nu
 > help sleep
