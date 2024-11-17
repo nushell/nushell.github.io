@@ -295,51 +295,65 @@ Data coming from an external command into Nu will come in as bytes that Nushell 
 
 Nu works with data piped between two external commands in the same way as other shells, like Bash would. The `stdout` of external_command_1 is connected to the `stdin` of external_command_2. This lets data flow naturally between the two commands.
 
-### Notes on Errors when Piping Commands
+### Command Input and Output Types
 
-Sometimes, it might be unclear as to why you cannot pipe to a command.
+The Basics section above describes how commands can be combined in pipelines as input, filters, or output.
+How you can use commands depends on what they offer in terms of input/output handling.
 
-For example, PowerShell users may be used to piping the output of any internal PowerShell command directly to another, e.g.:
+You can check what a command supports with [`help <command name>`](/commands/docs/help.md), which shows the relevant *Input/output types*.
 
-`echo 1 | sleep`
-
-(Where for PowerShell, `echo` is an alias to `Write-Output` and `sleep` is to `Start-Sleep`.)
-
-However, it might be surprising that for some commands, the same in Nushell errors:
+For example, through `help first` we can see that the [`first` command](/commands/docs/first.md) supports multiple input and output types:
 
 ```nu
-> echo 1sec | sleep
-Error: nu::parser::missing_positional
+> help first
+[…]
+Input/output types:
+  ╭───┬───────────┬────────╮
+  │ # │   input   │ output │
+  ├───┼───────────┼────────┤
+  │ 0 │ list<any> │ any    │
+  │ 1 │ binary    │ binary │
+  │ 2 │ range     │ any    │
+  ╰───┴───────────┴────────╯
 
-  × Missing required positional argument.
-   ╭─[entry #53:1:1]
- 1 │ echo 1sec | sleep
-   ╰────
-  help: Usage: sleep <duration> ...(rest) . Use `--help` for more information.
+> [a b c] | first                                                                                                                                   took 1ms
+a
+
+> 1..4 | first                                                                                                                                     took 21ms
+1
 ```
 
-While there is no steadfast rule, Nu generally tries to copy established conventions,
-or do what 'feels right'. And with `sleep`, this is actually the same behaviour as Bash.
+As another example, the [`ls` command](/commands/docs/ls.md) supports output but not input:
 
-Many commands do have piped input/output however, and if it's ever unclear,
-you can see what you can give to a command by invoking `help <command name>`:
+```nu
+> help ls
+[…]
+Input/output types:
+  ╭───┬─────────┬────────╮
+  │ # │  input  │ output │
+  ├───┼─────────┼────────┤
+  │ 0 │ nothing │ table  │
+  ╰───┴─────────┴────────╯
+```
+
+This means, for example, that attempting to pipe into `ls` (`echo .. | ls`) leads to unintended results.
+The input stream is ignored, and `ls` defaults to listing the current directory.
+
+To integrate a command like `ls` into a pipeline, you have to explicitly reference the input and pass it as a parameter:
+
+```nu
+> echo .. | ls $in
+```
+
+Note that this only works if `$in` matches the argument type. For example, `[dir1 dir2] | ls $in` will fail with the error `can't convert list<string> to string`.
+
+Other commands without default behavior may fail in different ways, and with explicit errors.
+
+For example, `help sleep` tells us that [`sleep`](/commands/docs/sleep.md) supports no input and no output types:
 
 ```nu
 > help sleep
-Delay for a specified amount of time.
-
-Search terms: delay, wait, timer
-
-Usage:
-  > sleep <duration> ...(rest)
-
-Flags:
-  -h, --help - Display the help message for this command
-
-Parameters:
-  duration <duration>: Time to sleep.
-  ...rest <duration>: Additional time.
-
+[…]
 Input/output types:
   ╭───┬─────────┬─────────╮
   │ # │  input  │ output  │
@@ -348,10 +362,24 @@ Input/output types:
   ╰───┴─────────┴─────────╯
 ```
 
-In this case, sleep takes `nothing` and instead expects an argument.
+When we erroneously pipe into it, instead of unintended behavior like in the `ls` example above, we receive an error:
 
-So, we can supply the output of the `echo` command as an argument to it:
-`echo 1sec | sleep $in` or `sleep (echo 1sec)`
+```nu
+> echo 1sec | sleep
+Error: nu::parser::missing_positional
+
+  × Missing required positional argument.
+   ╭─[entry #53:1:18]
+ 1 │ echo 1sec | sleep
+   ╰────
+  help: Usage: sleep <duration> ...(rest) . Use `--help` for more information.
+```
+
+While there is no steadfast rule, Nu generally tries to copy established conventions in command behavior,
+or do what 'feels right'.
+The `sleep` behavior of not supporting an input stream matches Bash `sleep` behavior for example.
+
+Many commands do have piped input/output however, and if it's ever unclear, check their `help` documentation as described above.
 
 ## Behind the Scenes
 
