@@ -355,7 +355,7 @@ So, we can supply the output of the `echo` command as an argument to it:
 
 ## Result Display Rendering
 
-In interactive mode, when a pipeline ends, the [`display_output` hook configuration](hooks.md#changing-how-output-is-displayed) defines how the result will be displayed.
+In interactive mode, when a pipeline ends, the [`display_output` hook configuration](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) defines how the result will be displayed.
 The default configuration uses the [`table` command](/commands/docs/table.md) to render structured data as a visual table.
 
 ## Output Result to External Commands
