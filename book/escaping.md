@@ -16,4 +16,6 @@ Escape to external command:
 
 ## Windows Note
 
-When running an external command on Windows, nushell [used to](https://www.nushell.sh/blog/2022-08-16-nushell-0_67.html#windows-cmd-exe-changes-rgwood) use [Cmd.exe](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/cmd) to run the command, as a number of common commands on Windows are actually shell builtins and not available as separate executables. [Coming from CMD.EXE](coming_from_cmd.md) contains a list of these commands and how to map them to nushell native concepts.
+When running an external command on Windows,
+Nushell forwards some CMD.EXE internal commands to cmd instead of attempting to run external commands.
+[Coming from CMD.EXE](coming_from_cmd.md) contains a list of these commands and describes the behavior in more detail.
