@@ -25,7 +25,7 @@ The example above uses the [Standard Library](../standard_library.md), a collect
 
 ## Installing Modules
 
-Installing a module is a matter of placing its files in a directory. This might be done via `git clone` (or other version control system), a package manager such as `nupm`, or manually. The module's documentation should provide recommendations.
+Installing a module is simply a matter of placing its files in a directory. This might be done via `git clone` (or other version control system), a package manager such as `nupm`, or manually. The module's documentation should provide recommendations.
 
 ## Importing Modules
 
@@ -231,7 +231,7 @@ assert true
 ```
 
 ::: tip
-`main` is covered in more detail in [Creating Modules](./creating_modules.md#main-exports), but for end-users, `main` means "the command named the same as the module." In this case the `assert` module exports a `main` command that "masquerades" as the `assert` command. Hiding `main` has the effect of hiding the `assert` command, but not its subcommands.
+`main` is covered in more detail in [Creating Modules](./creating_modules.md#main-exports), but for end-users, `main` simply means "the command named the same as the module." In this case the `assert` module exports a `main` command that "masquerades" as the `assert` command. Hiding `main` has the effect of hiding the `assert` command, but not its subcommands.
 :::
 
 ## See Also
