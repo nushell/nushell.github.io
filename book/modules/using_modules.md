@@ -207,7 +207,7 @@ assert true
 # => Assertion passes
 
 hide assert
-assert equal 1 2
+assert equal 1 1
 # => Error:
 # => help: A command with that name exists in module `assert`. Try importing it with `use`
 
@@ -222,7 +222,7 @@ Just as you can `use` a subset of the module's definitions, you can also `hide` 
 ```nu
 use std/assert
 hide assert main
-assert equal 1 2
+assert equal 1 1
 # => assertion passes
 
 assert true
