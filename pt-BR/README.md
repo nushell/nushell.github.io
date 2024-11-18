@@ -24,7 +24,7 @@ Instale a última versão a partir da [página de _releases_](https://github.com
 Alternativamente, você pode instalar a partir do código fonte com o [crates.io](https://crates.io):
 
 ```sh
-$ cargo install nu
+$ cargo install nu --locked
 ```
 
 #### Instale com Gerenciador de Pacotes

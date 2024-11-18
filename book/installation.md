@@ -107,7 +107,7 @@ Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmak
 Nushell releases are published as source to the popular Rust package registry [crates.io](https://crates.io/). This makes it easy to build and install the latest Nu release with `cargo`:
 
 ```nu
-cargo install nu
+cargo install nu --locked
 ```
 
 The `cargo` tool will do the work of downloading Nu and its source dependencies, building it, and installing it into the cargo bin path.

@@ -113,7 +113,7 @@ brew install openssl cmake
 Una vez instaladas las depependencias que Nu necesita, podemos instalarla usando el comando `cargo` que viene con el compilador Rust.
 
 ```
-> cargo install nu
+> cargo install nu --locked
 ```
 
 ¡Eso es todo! Cargo hará el trabajo de descarga Nu junto con sus dependencias, construirla e instalarla en el bin path de cargo para que podamos arrancarlo.
@@ -121,7 +121,7 @@ Una vez instaladas las depependencias que Nu necesita, podemos instalarla usando
 Si deseas instalar con más funcionalidades, puedes hacer:
 
 ```
-> cargo install nu --features=stable
+> cargo install nu --locked --features=stable
 ```
 
 Para todas las funcionalidades disponibles, la manera más fácil es descargar la fuente de Nu y construírlo usted mismo usando las herramientas de Rust:
@@ -129,7 +129,7 @@ Para todas las funcionalidades disponibles, la manera más fácil es descargar l
 ```
 > git clone https://github.com/nushell/nushell.git
 > cd nushell
-nushell> cargo install --path . --force --features=stable
+nushell> cargo install --path . --locked --force --features=stable
 
 Para que esto funcione, asegúrate de tener todas las dependencias instaladas (que se muestran arriba) en el sistema.
 

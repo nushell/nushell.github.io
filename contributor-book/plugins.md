@@ -254,7 +254,7 @@ Here we import everything we need -- types and functions -- to be able to create
 Once we have finished our plugin, to use it all we need to do is install it.
 
 ```nu
-> cargo install --path .
+> cargo install --path . --locked
 # nushell only (run with `nu -c` if not in nushell)
 > plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
 ```
