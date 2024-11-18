@@ -8,8 +8,8 @@ Currently, we support these types of hooks:
 - `pre_prompt` : Triggered before the prompt is drawn
 - `pre_execution` : Triggered before the line input starts executing
 - `env_change` : Triggered when an environment variable changes
-- `display_output` : A block that the output is passed to (experimental).
-- `command_not_found` : Triggered when a command is not found.
+- `display_output` : A block that the output is passed to
+- `command_not_found` : Triggered when a command is not found
 
 To make it clearer, we can break down Nushell's execution cycle.
 The steps to evaluate one line in the REPL mode are as follows:
