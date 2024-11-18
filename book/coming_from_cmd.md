@@ -32,7 +32,7 @@ This table was last updated for Nu 0.67.0.
 | `IF ERRORLEVEL <number> <command>`   | `if $env.LAST_EXIT_CODE >= <number> { <command> }`                                  | Run a command if the last command returned an error code >= specified |
 | `IF <string> EQU <string> <command>` | `if <string> == <string> { <command> }`                                             | Run a command if strings match                                        |
 | `IF EXIST <filename> <command>`      | `if (<filename> \| path exists) { <command> }`                                      | Run a command if the file exists                                      |
-| `IF DEFINED <variable> <command>`    | `if (scope variables \| any {\|var\| $var.name == '<variable>'}) { <command> }`     | Run a command if the variable is defined                              |
+| `IF DEFINED <variable> <command>`    | `if '$<variable>' in (scope variables).name { <command> }`                          | Run a command if the variable is defined                              |
 | `MD` or `MKDIR`                      | `mkdir`                                                                             | Create directories                                                    |
 | `MKLINK`                             |                                                                                     | Create symbolic links                                                 |
 | `MOVE`                               | `mv`                                                                                | Move files                                                            |
