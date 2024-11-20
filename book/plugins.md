@@ -27,7 +27,7 @@ Nushell also ships with several plugins that serve as examples or tools for plug
 Core plugins are typically distributed with the Nushell release and should already be installed in the same directory as the Nushell executable. If this is the case on your system, core plugins should be using correct `nu-plugin` protocol version. If your package management system installs them separately, please make sure to update the core plugins whenever Nushell itself is updated.
 
 ::: tip Installing using Cargo
-For example, when installing or upgrading Nushell directly from crates.io using `cargo install nu`, the corresponding core plugins for that version may also be installed or updated using `cargo install nu_plugin_<plugin_name>`.
+For example, when installing or upgrading Nushell directly from crates.io using `cargo install nu --locked`, the corresponding core plugins for that version may also be installed or updated using `cargo install nu_plugin_<plugin_name> --locked`.
 
 To install all of the default plugins, from within Nushell run:
 
@@ -37,7 +37,7 @@ To install all of the default plugins, from within Nushell run:
   nu_plugin_gstat
   nu_plugin_formats
   nu_plugin_query
-] | each { cargo install $in } | ignore
+] | each { cargo install $in --locked } | ignore
 ```
 
 :::
@@ -54,13 +54,13 @@ To install a third-party plugin on your system, you first need to make sure the 
 To install a plugin by name from crates.io, run:
 
 ```nu
-cargo install nu_plugin_<plugin_name>
+cargo install nu_plugin_<plugin_name> --locked
 ```
 
 When installing from a repository (e.g., GitHub), run the following from inside the cloned repository:
 
 ```nu
-cargo install --path .
+cargo install --path . --locked
 ```
 
 This will create a binary file that can be used to add the plugin.
