@@ -1112,7 +1112,7 @@ if __name__ == "__main__":
             break
         elif "Call" in input:
             [id, call] = input["Call"]
-            if plugin_call == "Metadata":
+            if call == "Metadata":
                 send_response(id, {
                     "Metadata": {
                         "version": "0.1.0",
@@ -1145,7 +1145,7 @@ if __name__ == "__main__":
             break
         elif "Call" in input:
             [id, call] = input["Call"]
-            if plugin_call == "Metadata":
+            if call == "Metadata":
                 send_response(id, {
                     "Metadata": {
                         "version": "0.1.0",
