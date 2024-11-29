@@ -14,7 +14,7 @@ This brings in some additional design considerations so please refer to the link
 
 The other sections explain how to work with [stdout, stderr and exit codes](stdout_stderr_exit_codes.md), how to [escape a command call to the external command call](escaping.md), and how to [configure 3rd party prompts](3rdpartyprompts.md) to work with Nushell.
 
-An interesting feature of Nushell is [shells](shells_in_shells.md) which let you work in multiple directories simultaneously.
+An interesting feature of Nushell is the [Directory Stack](directory_stack.md) which let you work in multiple directories simultaneously.
 
 Nushell also has its own line editor [Reedline](line_editor.md).
 With Nushell's config, it is possible to configure some of the Reedline's features, such as the prompt, keybindings, history, or menus.
