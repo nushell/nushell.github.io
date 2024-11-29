@@ -19,14 +19,218 @@ _(You can think of the Nushell config loading sequence as executing two [REPL](h
 When you launch Nushell without these files set up, Nushell will prompt you to download the [default config files](https://github.com/nushell/nushell/tree/main/crates/nu-utils/src/default_files).
 
 ::: tip
-The default config files aren't required. If you prefer to start with an empty `env.nu` and `config.nu` then Nu applies identical defaults in internal Rust code. You can still browse the default files for default values of environment variables and a list of all configurable settings using the [`config`](#configurations-with-built-in-commands) commands:
+To view a simplified version of this documentation from inside Nushell, run:
 
 ```nu
-> config env --default | nu-highlight | lines
-> config nu --default | nu-highlight | lines
+config env --sample | nu-highlight | less -R
+config nu -- sample | nu-highlight | less -R
 ```
 
 :::
+
+## Overview
+
+Nushell uses multiple, optional configuration files. These files are loaded in the following order:
+
+1. `env.nu` is typically used to define or override environment variables.
+2. `config.nu` is typically used to override default Nushell settings, define (or import) custom commands, or run any other startup tasks.
+3. Files in `$nu.vendor-autoload-dirs` are sourced. These files can be used for any purpose, and are a convenient way to modularize a configuration.
+4. `login.nu` runs commands or handles configuration that should only take place when Nushell is running as a login shell.
+
+By default, `env.nu`, `config.nu`, and `login.nu` are read from the `$nu.default-config-dir` directory. For example:
+
+```nu
+$nu.default-config-dir
+# macOS
+# => /Users/me/Library/Application Support/nushell
+# Linux
+# => /home/me/.config/nushell
+# Windows
+# => C:\Users\me\AppData\Roaming\nushell
+```
+
+The first time Nushell is launched, it will create the configuration directory and an empty (other than comments) `env.nu` and `config.nu`.
+
+::: tip
+You can quickly open `config.nu` in your default text editor using the `config nu` command. Likewise, the `config env` command will open `env.nu`.
+
+This requires that you have configured a default editor using either:
+
+- Nushell's `$env.config.buffer_editor` setting
+- The `$env.VISUAL` or `$env.EDITOR` environment variables
+
+For example, place this in your `config.nu` to edit your files in Visual Studio Code:
+
+```nu
+$env.config.buffer_editor = 'code'
+```
+
+:::
+
+## Configuring `env.nu`
+
+::: tip See Also
+The [Environment](./environment.md) Chapter covers additional information on how to set and access environment variables.
+:::
+
+Common configuration tasks in `env.conf`:
+
+### Path Configuration
+
+As with most shells, Nushell searches the environment variable named `PATH` (or variants).
+The `env.nu` file is often used to add (and sometimes remove) directories on the path.
+
+:::tip
+Unlike some shells, Nushell attempts to be "case agnostic" with environment variables. `Path`, `path`, `PATH`, and even `pAtH` are all allowed variants of the same environment variable. See [Environment - Case Sensitivity](./environment.md#case-sensitivity) for details.
+:::
+
+When Nushell is launched, it usually inherits the `PATH` as a string. However, Nushell automatically converts this to a Nushell list for easy access. This means that you can _append_ to
+the path using, for example:
+
+```nu
+$env.path ++= ["~/.local/bin"]
+```
+
+The Standard Library also includes a helper command. The default `path add` behavior is to _prepend_
+a directory so that it has higher precedence than the rest of the path. For example, the following can be
+added to `env.nu`:
+
+```nushell
+use std/util "path add"
+path add "~/.local/bin"
+path add ($env.CARGO_HOME | path join "bin")
+```
+
+::: tip
+Notice the use of `path join` in the example above. This command properly joins two path
+components regardless of whether or not the path separator is present. See `help path` for
+more commands in this category.
+:::
+
+### Prompt Configuration
+
+Nushell provides a number of prompt configuration options. By default, Nushell includes:
+
+- A prompt which includes the current directory, abbreviated using `~` if it is (or is under)
+  the home directory.
+- A prompt indicator which appears immediately to the right of the prompt. This defaults to `> ` when in normal editing mode, or a `: ` when in Vi-insert mode. Note
+  extra space after the character to provide separation of the command from the prompt.
+- A right-prompt with the date and time
+- An indicator which is displayed when the current commandline extends over multiple lines - `::: ` by default
+
+The environment variables which control these prompt components are:
+
+- `$env.PROMPT_COMMAND`: The prompt itself
+- `$env.PROMPT_COMMAND_RIGHT`: A prompt which can appear on the right side of the terminal
+- `$env.PROMPT_INDICATOR`: Emacs mode indicator
+- `$env.PROMPT_INDICATOR_VI_NORMAL`: Vi-normal mode indicator
+- `$env.PROMPT_INDICATOR_VI_INSERT`: Vi-insert mode indicator
+- `$env.PROMPT_MULTILINE_INDICATOR`: The multi-line indicator
+
+Each of these variables accepts either:
+
+- A string, in which case the component will be statically displayed as that string.
+- A closure (with no parameters), in which case the component will be dynamically displayed based on the closure's code.
+- `null`, in which case the component will revert to its internal default value.
+
+::: tip
+To disable the right-prompt, for instance, add the following to the `env.nu`:
+
+```nu
+$env.PROMPT_COMMAND_RIGHT = ""
+# or
+$env.PROMPT_COMMAND_RIGHT = {||}
+```
+
+:::
+
+#### Transient Prompts
+
+Nushell also supports transient prompts, which allow a different prompt to be shown _after_ a commandline has been executed. This can be useful in several situations:
+
+- When using a multi-line prompt, the transient prompt can be a more condensed version.
+- Removing the transient multiline indicator and right-prompt can simplify copying from the terminal.
+
+As with the normal prompt commands above, each transient prompt can accept a (static) string, a (dynamic) closure, or a `null` to use the Nushell internal defaults.
+
+The environment variables which control the transient prompt components are:
+
+- `$env.TRANSIENT_PROMPT_COMMAND`: The prompt itself after the commandline has been executed
+- `$env.PROMPT_COMMAND_RIGHT`: A prompt which can appear on the right side of the terminal
+- `$env.TRANSIENT_PROMPT_INDICATOR`: Emacs mode indicator
+- `$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL`: Vi-normal mode indicator
+- `$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT`: Vi-insert mode indicator
+- `$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR`: The multi-line indicator
+
+### ENV_CONVERSIONS
+
+Certain variables, such as those containing multiple paths, are often stored as a
+colon-separated string in other shells. Nushell can convert these automatically to a
+more convenient Nushell list. The ENV_CONVERSIONS variable specifies how environment
+variables are:
+
+- converted from a string to a value on Nushell startup (from_string)
+- converted from a value back to a string when running external commands (to_string)
+
+`ENV_CONVERSIONS` is a record, where:
+
+- each key is an environment variable to be converted
+- each value is another record containing a:
+  ```nu
+  {
+    from_string: <closure>
+    to_string: <closure>
+  }
+  ```
+
+::: tip
+The OS Path variable is automatically converted before `env.nu` loads. As a result, it can be treated as a list within `env.nu`. This conversion is handled via an initial, pre-defined `$env.ENV_CONVERSIONS` of:
+
+```nu
+$env.ENV_CONVERSIONS = {
+  "Path": {
+    from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
+    to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
+  }
+}
+
+```
+
+Note that environment variables are not case-sensitive in Nushell, so the above will work
+for both Windows and Unix-like platforms.
+:::
+
+To add an additional conversion, [`merge`](/commands/docs/merge.md) it into the `$env.ENV_CONVERSIONS` record. For example, to add a conversion for the `XDG_DATA_DIRS` variable:
+
+```nu
+$env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
+    "XDG_DATA_DIRS": {
+        from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
+        to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
+    }
+}
+```
+
+### Others
+
+LS_COLORS
+
+### Additional `$env.nu` Notes
+
+While `env.nu` is typically used for environment variable configuration, this is purely by convention. Environment variables can be set in _any_
+of the available configuration files. Likewise, `env.nu` can be used for any purpose, if desired.
+
+There are several configuration tasks where `env.nu` has advantages:
+
+1. `$env.ENV_CONVERSIONS` can be defined in `env.nu` to translate certain environment variables to (and from) Nushell structured data types. This can make
+   working with these variables in Nushell much more convenient. See below for details on this variable.
+
+2. Modules or source files that are written or modified during `env.nu` can be imported or evaluated during `config.nu`. This is a fairly advanced, uncommon
+   technique.
+
+## `config.nu`
+
+## Changing the Default Configuration Directory
 
 Control which directory Nushell reads config files from with the `XDG_CONFIG_HOME` environment variable. When you set it to
 an absolute path, Nushell will read config files from `$"($env.XDG_CONFIG_HOME)/nushell"`. For example, if you set it to
@@ -57,6 +261,8 @@ directory that contains Nushell config files. It should be the directory _above_
 `/Users/username/dotfiles/nushell`, Nushell will look for config files in `/Users/username/dotfiles/nushell/nushell` instead.
 In this case, you would want to set it to `/Users/username/dotfiles`.
 :::
+
+## Other Pre-Launch Environment Variables
 
 ## Configuring `$env.config`
 
@@ -95,14 +301,6 @@ These are some important variables to look at for Nushell-specific settings:
 - `PROMPT_INDICATOR_VI_INSERT = ": "`
 - `PROMPT_INDICATOR_VI_NORMAL = "〉 "`
 - `PROMPT_MULTILINE_INDICATOR = "::: "`
-
-### Configurations with Built-in Commands
-
-The ([`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/docs/config_env.md)) commands open their respective configurations for quick editing in your preferred text editor or IDE. Nu determines your editor from the following environment variables in order:
-
-1. `$env.config.buffer_editor`
-3. `$env.VISUAL`
-2. `$env.EDITOR`
 
 ### Color Config Section
 
@@ -240,3 +438,156 @@ Then add the path of pyenv to your Nushell PATH:
 # Windows
 $env.Path = ($env.Path | split row (char esep) | prepend $"~/.pyenv/pyenv-win/bin/pyenv.ps1")
 ```
+
+## Detailed Configuration Startup Process
+
+This section contains a more detailed description of how different configuration (and flag) options can be used to
+change Nushell's startup behavior.
+
+### Launch Stages
+
+The following stages and their steps _may_ occur during startup, based on the flags that are passed to `nu`. See [Flag Behavior](#flag-behavior) immediately following this table for how each flag impacts the process:
+
+| Step | Stage                           | Nushell Action                                                                                                                                                                                                                                                                                                                                                                     |
+| ---- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0.   | (misc)                          | Sets internal defaults via its internal Rust implementation. In practice, this may not take place until "first use" of the setting or variable, but there will typically be a Rust default for most (but not all) settings and variables that control Nushell's behavior. These defaults can then be superseded by the steps below.                                                |
+| 1.   | (main)                          | Inherits its initial environment from the calling process. These will initially be converted to Nushell strings, but can be converted to other structures later using `ENV_CONVERSIONS` (see below).                                                                                                                                                                               |
+| 2.   | (main)                          | Gets the configuration directory. This is OS-dependent (see [dirs::config_dir](https://docs.rs/dirs/latest/dirs/fn.config_dir.html)), but can be overridden using `XDG_CONFIG_HOME` on all platforms. (TODO: Link)                                                                                                                                                                 |
+| 3.   | (main)                          | Creates the initial `$env.NU_LIB_DIRS` variable. By default, it includes (1) the `scripts` directory under the configuration directory, and (2) `nushell/completions` under the default data directory (either `$env.XDG_DATA_HOME` or [the default provided by the dirs crate](https://docs.rs/dirs/latest/dirs/fn.data_dir.html)). These directories are not created by default. |
+| 4.   | (main)                          | Creates the initial `$env.NU_PLUGIN_DIRS` variable. By default, this will include the configuration directory.                                                                                                                                                                                                                                                                     |
+| 5.   | (main)                          | Initializes the in-memory SQLite database. This allows the `stor` family of commands to be used in the following configuration files.                                                                                                                                                                                                                                              |
+| 6.   | (main)                          | Processes commandline arguments.                                                                                                                                                                                                                                                                                                                                                   |
+| 7.   | (main)                          | Gets the path to `env.nu` and `config.nu`. By default, these are located in the config directory, but either or both can be overridden using the `--env-config <path>` and `--config <path>` flags.                                                                                                                                                                                |
+| 8.   | (main)                          | If the `--include-path` flag was used, it overrides the default `$env.NU_LIB_DIRS` that was obtained above.                                                                                                                                                                                                                                                                        |
+| 9.   | (main)                          | Loads the initial `$env.config` values from the internal defaults.                                                                                                                                                                                                                                                                                                                 |
+| 10.  | (stdlib)                        | Loads the [Standard Library](./standard_library.md) into the virtual filesystem. It is not parsed or evaluated at this point.                                                                                                                                                                                                                                                      |
+| 11.  | (stdlib)                        | Parses and evaluates `std/core`, which brings the `banner` and `pwd` commands into scope.                                                                                                                                                                                                                                                                                          |
+| 12.  | (main)                          | Generates the initial `$nu` record constant so that items such as `$nu.default-config-dir` can be used in the following config files.                                                                                                                                                                                                                                              |
+| 13.  | (main)                          | Loads any plugins that were specified using the `--plugin` flag.                                                                                                                                                                                                                                                                                                                   |
+| 14.  | (config files) (plugin)         | Processes the signatures in the user's `plugin.msgpackz` (located in the configuration directory) so that added plugins can be used in the following config files.                                                                                                                                                                                                                 |
+| 15.  | (config files)                  | If this is the first time Nushell has been launched, then it creates the configuration directory. "First launch" is determined by whether or not the configuration directory exists.                                                                                                                                                                                               |
+| 16.  | (config files)                  | Also, if this is the first time Nushell has been launched, creates a mostly empty (other than a few comments) `env.nu` and `config .nu` in that directory.                                                                                                                                                                                                                         |
+| 17.  | (config files) (default_env.nu) | Loads default environment variables from the internal `default_env.nu`. This file can be viewed with: `nu config env --default \| nu-highlight \| less -R`.                                                                                                                                                                                                                        |
+| 18.  | (config files) (env.nu)         | Converts the `PATH` variable into a list so that it can be accessed more easily in the next step.                                                                                                                                                                                                                                                                                  |
+| 19.  | (config files) (env.nu)         | Loads (parses and evaluates) the user's `env.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                         |
+| 20.  | (config files) (config.nu)      | Processes any `ENV_CONVERSIONS` that were defined in the user's `env.nu` so that those environment variables can be treated as Nushell structured data in the `config.nu`.                                                                                                                                                                                                         |
+| 21.  | (config files) (config.nu)      | Loads a minimal `$env.config` record from the internal `default_config.nu`. This file can be viewed with: `nu config nu --default \| nu-highlight \| less -R`.                                                                                                                                                                                                                     |
+| 21.  | (config files) (config.nu)      | Loads (parses and evaluates) the user's `config.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                      |
+| 22.  | (config files) (login)          | When Nushell is running as a login shell, loads the user's `login.nu`.                                                                                                                                                                                                                                                                                                             |
+| 23.  | (config files)                  | Loops through autoload directories and loads any `.nu` files found. The directories are processed in the order found in `$nu.vendor-autoload-directories`, and files in those directories are processed in alphabetical order.                                                                                                                                                     |
+| 24.  | (repl)                          | Processes any additional `ENV_CONVERSIONS` that were defined in `config.nu` or the autoload files.                                                                                                                                                                                                                                                                                 |
+| 25.  | (repl) and (stdlib)             | Shows the banner if configured.                                                                                                                                                                                                                                                                                                                                                    |
+| 26.  | (repl)                          | Nushell enters the normal commandline (REPL).                                                                                                                                                                                                                                                                                                                                      |
+
+## Flag Behavior
+
+| Mode                | Command/Flags                              | Behavior                                                                                                                                                                                                                                                                                     |
+| ------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Normal Shell        | `nu` (no flags)                            | All launch steps **_except_** those marked with **_(login)_** occur.                                                                                                                                                                                                                         |
+| Login Shell         | `nu --login/-l`                            | All launch steps occur.                                                                                                                                                                                                                                                                      |
+| Command-string      | `nu --commands <command-string>` (or `-c`) | All Launch stages **_except_** those marked with **_(config files)_** or **_(repl)_** occur. However, **_(default_env)_** and **_(plugin)_** do occur. The first allows the path `ENV_CONVERSIONS` defined there can take place. The second allows plugins to be used in the command-string. |
+| Script file         | `nu <script_file>`                         | Same as with Command-string.                                                                                                                                                                                                                                                                 |
+| No config           | `nu -n`                                    | **_(config files)_** stages do **_not_** occur, regardless of other flags.                                                                                                                                                                                                                   |
+| No Standard Library | `nu --no-std-lib`                          | Regardless of other flags, the steps marked **_(stdlib)_** will **_not_** occur.                                                                                                                                                                                                             |
+| Force config file   | `nu --config <file>`                       | Forces steps marked with **_(config.nu)_** above to run, unless `-n` was also specified                                                                                                                                                                                                      |
+| Force env file      | `nu --env-config <file>`                   | Forces steps marked with **_(default_env.nu)_** and **_(env.nu)_** above to run, unless `-n` was also specified                                                                                                                                                                              |
+
+## Simplified Examples
+
+- `nu`:
+
+  - ✅ Makes the Standard Library available
+  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
+  - ✅ Sources the `default_env.nu` file internally
+  - ✅ Sources the user's `env.nu` file if it exists in the config directory
+  - ✅ Sources the `default_config.nu` file internally
+  - ✅ Sources user's `config.nu` file if it exists if it exists in the config directory
+  - ❌ Does not read `personal login.nu` file
+  - ✅ Enters the REPL
+
+- `nu -c "ls"`:
+
+  - ✅ Makes the Standard Library available
+  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
+  - ✅ Sources the `default_env.nu` file internally
+  - ❌ Does not source the user's `env.nu`
+  - ❌ Does not read the internal `default_config.nu` file
+  - ❌ Does not read the user's `config.nu` file
+  - ❌ Does not read the user's `login.nu` file
+  - ✅ Runs the `ls` command and exits
+  - ❌ Does not enter the REPL
+
+- `nu -l -c "ls"`:
+
+  - ✅ Makes the Standard Library available
+  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
+  - ✅ Sources the `default_env.nu` file internally
+  - ✅ Sources the user's `env.nu` file if it exists in the config directory
+  - ✅ Sources the `default_config.nu` file internally
+  - ✅ Sources user's `config.nu` file if it exists in the config directory
+  - ✅ Sources the user's `login.nu` file if it exists in the config directory
+  - ✅ Runs the `ls` command and exits
+  - ❌ Does not enter the REPL
+
+- `nu -l -c "ls" --config foo_config.nu`
+
+  - Same as above, but reads an alternative config file named `foo_config.nu` from the config directory
+
+- `nu -n -l -c "ls"`:
+
+  - ✅ Makes the Standard Library available
+  - ❌ Does not read user's `plugin.msgpackz`
+  - ❌ Does not read the internal `default_env.nu`
+  - ❌ Does not source the user's `env.nu`
+  - ❌ Does not read the internal `default_config.nu` file
+  - ❌ Does not read the user's `config.nu` file
+  - ❌ Does not read the user's `login.nu` file
+  - ✅ Runs the `ls` command and exits
+  - ❌ Does not enter the REPL
+
+- `nu test.nu`:
+
+  - ✅ Makes the Standard Library available
+  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
+  - ✅ Sources the `default_env.nu` file internally
+  - ❌ Does not source the user's `env.nu`
+  - ❌ Does not read the internal `default_config.nu` file
+  - ❌ Does not read the user's `config.nu` file
+  - ❌ Does not read the user's `login.nu` file
+  - ✅ Runs `test.nu` file as a script
+  - ❌ Does not enter the REPL
+
+- `nu --config foo_config.nu test.nu`
+
+  - ✅ Makes the Standard Library available
+  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
+  - ✅ Sources the `default_env.nu` file internally
+  - ❌ Does not source the user's `env.nu` (no `--env-config` was specified)
+  - ✅ Sources the `default_config.nu` file internally. Note that `default_config.nu` is always handled before a user's config
+  - ✅ Sources user's `config.nu` file if it exists in the config directory
+  - ❌ Does not read the user's `login.nu` file
+  - ✅ Runs `test.nu` file as a script
+  - ❌ Does not enter the REPL
+
+- `nu -n --no-std-lib` (fastest REPL startup):
+
+  - ❌ Does not make the Standard Library available
+  - ❌ Does not read user's `plugin.msgpackz`
+  - ❌ Does not read the internal `default_env.nu`
+  - ❌ Does not source the user's `env.nu`
+  - ❌ Does not read the internal `default_config.nu` file
+  - ❌ Does not read the user's `config.nu` file
+  - ❌ Does not read the user's `login.nu` file
+  - ✅ Enters the REPL
+
+- `nu -n --no-std-lib -c "ls"` (fastest command-string invocation):
+
+  - ❌ Does not make the Standard Library available
+  - ❌ Does not read user's `plugin.msgpackz`
+  - ❌ Does not read the internal `default_env.nu`
+  - ❌ Does not source the user's `env.nu`
+  - ❌ Does not read the internal `default_config.nu` file
+  - ❌ Does not read the user's `config.nu` file
+  - ❌ Does not read the user's `login.nu` file
+  - ✅ Runs the `ls` command and exits
+  - ❌ Does not enter the REPL
