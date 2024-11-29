@@ -16,7 +16,7 @@ Dies bringt einige zusätzliche Design Überlegungen mit sich, welche in den ver
 Die anderen Kapitel erklären wie mit [stdout, stderr und exit codes (EN)](/book/stdout_stderr_exit_codes.md) gearbeitet werden kann, oder wie ein [Befehl zu einem externer Befehl "escaped"](escaping.md) werden kann.
 Sowie wie ein [Drittanbieter Prompt](3rdpartyprompts.md) zur Zusammenarbeit mit Nushell bewegt werden kann.
 
-Ein interessantes Merkmal von Nushell ist [Shell in Shells (EN)](/book/shells_in_shells.md) welches erlaubt in mehreren Verzeichnissen gleichzeitig zu arbeiten.
+Ein interessantes Merkmal von Nushell ist [Shell in Shells (EN)](/book/directory_stack.md) welches erlaubt in mehreren Verzeichnissen gleichzeitig zu arbeiten.
 
 Nushell hat auch seinen eigenen Zeilen Editor [Reedline (EN)](/book/line_editor.md).
 In Nushells Konfiguration ist es möglich einige Merkmale von Reedline wie Prompt, Tastenkombinationen, History oder Menus einzustellen.
@@ -25,6 +25,6 @@ Es ist auch möglich, eigene [Signaturen für externe Befehle (EN)](/book/extern
 
 [Farben und Themen in Nu](coloring_and_theming.md)) geht ins Detail zum Thema, wie Nushells Aussehen konfiguriert werden kann.
 
-Sind einige Befehle geplant , die im Hintergrund ablaufen sollen, so kann darüber in  [Hintergrund Tasks in Nu](background_task.md) nachgelesen werden.
+Sind einige Befehle geplant , die im Hintergrund ablaufen sollen, so kann darüber in [Hintergrund Tasks in Nu](background_task.md) nachgelesen werden.
 
 Schliesslich erklärt [Hooks](hooks.md) wie Fragmente von Nushell Code beim Auftreten gewisser Ereignisse ausgeführt werden kann.

@@ -76,7 +76,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/stdout_stderr_exit_codes.md',
         '/book/escaping.md',
         '/book/3rdpartyprompts.md',
-        '/book/shells_in_shells.md',
+        '/book/directory_stack.md',
         '/book/line_editor.md',
         '/book/custom_completions.md',
         '/book/externs.md',
