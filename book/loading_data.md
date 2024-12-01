@@ -55,7 +55,7 @@ Below the surface, what Nu sees in these text files is one large string. Next, w
 
 Nushell Object Notation (NUON) aims to be for Nushell what JavaScript Object Notation (JSON) is for JavaScript.
 That is, NUON code is a valid Nushell code that describes some data structure.
-For example, this is a valid NUON (example from the [default configuration file](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_config.nu)):
+For example, this is a valid NUON (example from the [default configuration file](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_config.nu)):
 
 ```nu
 {
