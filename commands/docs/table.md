@@ -25,8 +25,8 @@ usage: |
  -  `--width, -w {int}`: number of terminal columns wide (not output columns)
  -  `--expand, -e`: expand the table structure in a light mode
  -  `--expand-deep, -d {int}`: an expand limit of recursion which will take place, must be used with --expand
- -  `--flatten, -`: Flatten simple arrays
- -  `--flatten-separator, - {string}`: sets a separator when 'flatten' used
+ -  `--flatten`: Flatten simple arrays
+ -  `--flatten-separator {string}`: sets a separator when 'flatten' used
  -  `--collapse, -c`: expand the table structure in collapse mode.
 Be aware collapse mode currently doesn't support width control
  -  `--abbreviated, -a {int}`: abbreviate the data in the table by truncating the middle part and only showing amount provided on top and bottom
