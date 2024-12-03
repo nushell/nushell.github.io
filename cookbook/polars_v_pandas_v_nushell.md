@@ -9,11 +9,11 @@ A dataframe example based on https://studioterabyte.nl/en/blog/polars-vs-pandas
 ## 1. Opening the file and show the shape of the DataFrame
 
 ```nu
-let df = (dfr open NYCTaxi.csv)
+let df = polars open NYCTaxi.csv
 ```
 
 ```nu
-$df | shape
+$df | polars shape
 ```
 
 Output:
@@ -23,15 +23,13 @@ Output:
 │ # │  rows   │ columns │
 ├───┼─────────┼─────────┤
 │ 0 │ 1458644 │      11 │
-├───┼─────────┼─────────┤
-│ # │  rows   │ columns │
 ╰───┴─────────┴─────────╯
 ```
 
 ## 2. Opening the file and show the first 5 rows
 
 ```nu
-$df | first 5
+$df | polars first 5 | polars collect
 ```
 
 Output:
@@ -51,17 +49,14 @@ Output:
 │   │           │           │ 19:32:31      │ 19:39:40      │               │               │               │               │               │              │              │
 │ 4 │ id2181028 │         2 │ 2016-03-26    │ 2016-03-26    │             1 │        -73.97 │         40.79 │        -73.97 │         40.78 │ N            │          435 │
 │   │           │           │ 13:30:55      │ 13:38:10      │               │               │               │               │               │              │              │
-├───┼───────────┼───────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼──────────────┼──────────────┤
-│ # │    id     │ vendor_id │ pickup_dateti │ dropoff_datet │ passenger_cou │ pickup_longit │ pickup_latitu │ dropoff_longi │ dropoff_latit │ store_and_fw │ trip_duratio │
-│   │           │           │ me            │ ime           │ nt            │ ude           │ de            │ tude          │ ude           │ d_flag       │ n            │
 ╰───┴───────────┴───────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴──────────────┴──────────────╯
 ```
 
 ## 3. Opening the file and get the length of all strings in the "id" column
 
 ```nu
-let ids = ($df | first 5 | get id | str-lengths)
-$df | first 5 | append $ids | rename id_x vendor_id_length
+let ids = $df | polars first 5 | polars get id | polars str-lengths
+$df | polars first 5 | polars append $ids | polars rename id_x vendor_id_length
 ```
 
 Output:
@@ -81,16 +76,13 @@ Output:
 │   │           │           │ 19:32:31     │ 19:39:40     │             │             │             │             │             │             │             │             │
 │ 4 │ id2181028 │         2 │ 2016-03-26   │ 2016-03-26   │           1 │      -73.97 │       40.79 │      -73.97 │       40.78 │ N           │         435 │           9 │
 │   │           │           │ 13:30:55     │ 13:38:10     │             │             │             │             │             │             │             │             │
-├───┼───────────┼───────────┼──────────────┼──────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-│ # │    id     │ vendor_id │ pickup_datet │ dropoff_date │ passenger_c │ pickup_long │ pickup_lati │ dropoff_lon │ dropoff_lat │ store_and_f │ trip_durati │ vendor_id_l │
-│   │           │           │ ime          │ time         │ ount        │ itude       │ tude        │ gitude      │ itude       │ wd_flag     │ on          │ ength       │
 ╰───┴───────────┴───────────┴──────────────┴──────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯
 ```
 
 Here's an alternate approach using `with-column`
 
 ```nu
-$df | first 5 | with-column ($df | first 5 | get id | str-lengths) --name vendor_id_length
+$df | polars with-column (polars col id | polars str-lengths | polars as vendor_id_lengths) | polars first 5 | polars collect
 ```
 
 Output:
@@ -110,16 +102,13 @@ Output:
 │   │           │           │ 19:32:31     │ 19:39:40     │             │             │             │             │             │             │             │             │
 │ 4 │ id2181028 │         2 │ 2016-03-26   │ 2016-03-26   │           1 │      -73.97 │       40.79 │      -73.97 │       40.78 │ N           │         435 │           9 │
 │   │           │           │ 13:30:55     │ 13:38:10     │             │             │             │             │             │             │             │             │
-├───┼───────────┼───────────┼──────────────┼──────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-│ # │    id     │ vendor_id │ pickup_datet │ dropoff_date │ passenger_c │ pickup_long │ pickup_lati │ dropoff_lon │ dropoff_lat │ store_and_f │ trip_durati │ vendor_id_l │
-│   │           │           │ ime          │ time         │ ount        │ itude       │ tude        │ gitude      │ itude       │ wd_flag     │ on          │ ength       │
 ╰───┴───────────┴───────────┴──────────────┴──────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────┴─────────────╯
 ```
 
 ## 4. Opening the file and apply a function to the "trip_duration" to divide the number by 60 to go from the second value to a minute value
 
 ```nu
-$df | first 5 | with-column ((col trip_duration) / 60.0)
+$df | polars first 5 | polars with-column ((polars col trip_duration) / 60.0) | polars collect
 ```
 
 Output:
@@ -139,16 +128,13 @@ Output:
 │   │           │           │ 19:32:31      │ 19:39:40      │               │               │               │               │               │              │              │
 │ 4 │ id2181028 │         2 │ 2016-03-26    │ 2016-03-26    │             1 │        -73.97 │         40.79 │        -73.97 │         40.78 │ N            │         7.25 │
 │   │           │           │ 13:30:55      │ 13:38:10      │               │               │               │               │               │              │              │
-├───┼───────────┼───────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼──────────────┼──────────────┤
-│ # │    id     │ vendor_id │ pickup_dateti │ dropoff_datet │ passenger_cou │ pickup_longit │ pickup_latitu │ dropoff_longi │ dropoff_latit │ store_and_fw │ trip_duratio │
-│   │           │           │ me            │ ime           │ nt            │ ude           │ de            │ tude          │ ude           │ d_flag       │ n            │
 ╰───┴───────────┴───────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴──────────────┴──────────────╯
 ```
 
 ## 5. Opening the file and filtering out all rows with a trip duration shorther than 500 seconds
 
 ```nu
-$df | filter-with ((col trip_duration) >= 500) | first 5
+$df | polars filter-with ((polars col trip_duration) >= 500) | polars first 5 | polars collect
 ```
 
 Output:
@@ -168,16 +154,13 @@ Output:
 │   │           │           │ 21:45:01      │ 22:05:26      │               │               │               │               │               │              │              │
 │ 4 │ id1436371 │         2 │ 2016-05-10    │ 2016-05-10    │             1 │        -73.98 │         40.76 │        -74.00 │         40.73 │ N            │         1274 │
 │   │           │           │ 22:08:41      │ 22:29:55      │               │               │               │               │               │              │              │
-├───┼───────────┼───────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼──────────────┼──────────────┤
-│ # │    id     │ vendor_id │ pickup_dateti │ dropoff_datet │ passenger_cou │ pickup_longit │ pickup_latitu │ dropoff_longi │ dropoff_latit │ store_and_fw │ trip_duratio │
-│   │           │           │ me            │ ime           │ nt            │ ude           │ de            │ tude          │ ude           │ d_flag       │ n            │
 ╰───┴───────────┴───────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴──────────────┴──────────────╯
 ```
 
 ## 6. Opening the file, filtering out all the rows with a "Y" store_and_fwd_flag value, group by ID and calculate the mean duration time
 
 ```nu
-$df | filter-with ((col store_and_fwd_flag) == "N") | group-by id | agg (col trip_duration | mean) | sort-by id | first 5
+$df | polars filter-with ((polars col store_and_fwd_flag) == "N") | polars group-by id | polars agg (polars col trip_duration | polars mean) | polars sort-by id | polars first 5 | polars collect
 ```
 
 Output:
@@ -191,7 +174,5 @@ Output:
 │ 2 │ id0000005 │        368.00 │
 │ 3 │ id0000008 │        303.00 │
 │ 4 │ id0000009 │        547.00 │
-├───┼───────────┼───────────────┤
-│ # │    id     │ trip_duration │
 ╰───┴───────────┴───────────────╯
 ```
