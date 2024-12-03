@@ -86,9 +86,9 @@ Rather than defining a monolithic **`$env.config = { ... all values }`** as in t
 $env.config.show_banner = false
 $env.config.buffer_editor = "code"
 
-$env.history.file_format = "sqlite"
-$env.history.max_size: 1_000_000
-$env.history.isolation = true
+$env.config.history.file_format = "sqlite"
+$env.config.history.max_size: 1_000_000
+$env.config.history.isolation = true
 
 $env.config.keybindings ++= [{
   name: "insert_last_token"
@@ -106,6 +106,20 @@ $env.config.keybindings ++= [{
   mode: [ emacs, vi_normal, vi_insert ]
 }]
 ```
+
+::: note
+You could also set `$env.config.history` to a record, but it's recommended that you override all values if so. For example:
+
+```nu
+$env.config.history = {
+  file_format: sqlite
+  max_size: 1_000_000
+  sync_on_enter: true
+  isolation: true
+}
+```
+
+:::
 
 ### Other Config Changes in 0.101
 
