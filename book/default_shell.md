@@ -16,9 +16,9 @@
 ## Setting Nu as login shell (Linux, BSD & macOS)
 
 ::: warning
-Nu is still in development and is not intended to be POSIX compliant.
-Be aware that some programs on your system might assume that your login shell is [POSIX](https://en.wikipedia.org/wiki/POSIX) compatible.
-Breaking that assumption can lead to unexpected issues.
+Nu is not intended to be POSIX compliant.
+Be aware that some programs on your system (or their documentation) might assume that your login shell is [POSIX](https://en.wikipedia.org/wiki/POSIX) compatible.
+Breaking that assumption can lead to unexpected issues. See [Configuration - Login Shell](./configuration.md#configuring-nu-as-a-login-shell) for more details.
 :::
 
 To set the login shell you can use the [`chsh`](https://linux.die.net/man/1/chsh) command.
