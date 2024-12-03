@@ -150,7 +150,7 @@ Each of these variables accepts either:
 - `null`, in which case the component will revert to its internal default value.
 
 ::: tip
-To disable the right-prompt, for instance, add the following to the `env.nu`:
+To disable the right-prompt, for instance, add the following to `env.nu`:
 
 ```nu
 $env.PROMPT_COMMAND_RIGHT = ""
@@ -172,7 +172,7 @@ As with the normal prompt commands above, each transient prompt can accept a (st
 The environment variables which control the transient prompt components are:
 
 - `$env.TRANSIENT_PROMPT_COMMAND`: The prompt itself after the commandline has been executed
-- `$env.PROMPT_COMMAND_RIGHT`: A prompt which can appear on the right side of the terminal
+- `$env.TRANSIENT_PROMPT_COMMAND_RIGHT`: A prompt which can appear on the right side of the terminal
 - `$env.TRANSIENT_PROMPT_INDICATOR`: Emacs mode indicator
 - `$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL`: Vi-normal mode indicator
 - `$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT`: Vi-insert mode indicator
