@@ -49,14 +49,14 @@ If you have an existing `config.nu` with a complete `$env.config` record, you co
   Of course, these users can always simply override that value when and if the default changes.
   :::
 
-Note that not _all_ default values are introspectable. The following Nushell internals are no longer set (by default) in `config.nu` and will not be automatically populated:
+Not _every_ default value is introspectable. The following Nushell internals are no longer set (by default) in `config.nu` and will not be automatically populated:
 
 - `keybindings`
 - `menus`
 
 However, the functionality behind them has always been handled internally by Nushell and Reedline. Only user-defined keybindings and menus should (as best-practice) be specified in the `$env.config`.
 
-### Identifying Overridden Values
+### Finding Overridden Values
 
 To identify which values your current configuration has changed from the defaults, run the following in the current build (or 0.101 when available):
 
@@ -75,12 +75,12 @@ In the above example, `nu` (without a path) needs to point to a 0.101 or higher 
 Also examine:
 
 - Any theme/styling in `$env.config.color_config` and add those settings if desired.
-- Your personalized keybindings in `$env.config.keybindings`. Note that many of the keybindings in the older default configuration files were simply examples that replicated built-in capabilities and did not change any Nushell functionality.
+- Your personalized keybindings in `$env.config.keybindings`. Note that most (perhaps all) of the keybindings in the older default configuration files were simply examples that replicated built-in capabilities and did not change any Nushell functionality.
 - Any personalized menus in `$env.config.menus`. As with keybindings, you do not need to copy over examples.
 
 ### Setting Values in the New Config
 
-Rather than defining a monolithic `$env.config = { ... all values }` as in the past, just create one entry for each setting you wish to **_override_**. For example:
+Rather than defining a monolithic **`$env.config = { ... all values }`** as in the past, just create one entry for each setting you wish to **_override_**. For example:
 
 ```nu
 $env.config.show_banner = false
@@ -90,7 +90,7 @@ $env.history.file_format = "sqlite"
 $env.history.max_size: 1_000_000
 $env.history.isolation = true
 
-$env.keybindings ++= [{
+$env.config.keybindings ++= [{
   name: "insert_last_token"
   modifier: "alt"
   keycode: "char_."

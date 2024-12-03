@@ -3,7 +3,7 @@
 ## Quickstart
 
 While Nushell provides many options for managing its startup and configuration, new users
-can get started with several very simple steps:
+can get started with just a few simple steps:
 
 1. Tell Nushell what editor to use:
 
@@ -21,6 +21,13 @@ can get started with several very simple steps:
 
 3. Add commands to this file that should run each time Nushell starts. A good first example might be the `buffer_editor` setting above.
 
+   You can find a detailed list of available settings using:
+
+   ```nu
+    config nu --sample | nu-highlight | less -R
+    config env --sample | nu-highlight | less -R
+   ```
+
 4. Save, exit the editor, and start a new Nushell session to load these settings.
 
 That's it! More details are below when you need them ...
@@ -34,7 +41,7 @@ To view a simplified version of this documentation from inside Nushell, run:
 
 ```nu
 config env --sample | nu-highlight | less -R
-config nu -- sample | nu-highlight | less -R
+config nu --sample | nu-highlight | less -R
 ```
 
 :::
@@ -660,114 +667,3 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not read the user's `login.nu` file
   - ✅ Runs the `ls` command and exits
   - ❌ Does not enter the REPL
-
-## Upgrading to Nushell version 0.101.0 or later
-
-::: note
-This is a temporary addendum to the Chapter due to the extensive recent changes in Nushell's startup process. After a few releases with the new configuration features in place, this section will likely be removed.
-:::
-
-::: tip In a hurry?
-See [Setting Values in the New Config](#setting-values-in-the-new-config) below, then come back and read the rest if needed.
-:::
-
-In previous Nushell releases, the recommended practice was to include the **entire** `$env.config` record in `config.nu` and change values within it. Any `$env.config` keys that were not present in this record would use internal defaults, but these settings weren't introspectable in Nushell.
-
-With changes in releases 0.100 and 0.101, (most, but not all) missing values in `$env.config` are automatically populated in the record itself using the default, internal values. With this in place, it's no longer necessary to create a monolithic configuration record.
-
-If you have an existing `config.nu` with a complete `$env.config` record, you could continue to use it, but you should consider streamlining it based on these new features. This has the following advantages:
-
-- Startup will typically be slightly faster.
-- It's easier to see exactly which values are overridden, as those should be the only settings changed in `config.nu`.
-- If a key name or default value changes in the future, it will only be a breaking change if it was a value that had been overridden. All other values will update seamlessly when you install new Nushell releases.
-
-  ::: note
-  This may be an advantage or disadvantage in some situations. For instance, at some point, we plan to switch the default history format to SQLite. When that change occurs in Nushell, it will automatically be changed for all users who hadn't overridden the value. That's a positive change for most users, as they'll automatically be switched to the more advanced format when they upgrade to that (as yet unknown) release, but that change may not be desirable for some users.
-
-  Of course, these users can always simply override that value when and if the default changes.
-  :::
-
-Note that not _all_ default values are introspectable. The following Nushell internals are no longer set (by default) in `config.nu` and will not be automatically populated:
-
-- `keybindings`
-- `menus`
-
-Only user-defined keybindings and menus should (as best-practice) be specified in the `$env.config`.
-
-### Identifying Overridden Values
-
-To identify which values your current configuration has changed from the defaults, run the following in the current build (or 0.101 when available):
-
-```nu
-let defaults = nu -n -c "$env.config = {}; $env.config | reject color_config keybindings menus | to nuon" | from nuon | transpose key default
-let current = $env.config | reject color_config keybindings menus | transpose key current
-$current | merge $defaults | where $it.current != $it.default
-```
-
-These are the values that you should migrate to your updated `config.nu`.
-
-Also examine:
-
-- Any theme/styling in `$env.config.color_config` and add those settings
-- Your personalized keybindings in `$env.config.keybindings`. Note that many of the keybindings in the older default configuration files were examples that replicated built-in capabilities.
-- Any personalized menus in `$env.config.menus`. As with keybindings, you do not need to copy over examples.
-
-### Setting Values in the New Config
-
-Rather than defining a `$env.config = { ... all values }` as in the past, just create one entry for each overridden setting. For example:
-
-```nu
-$env.config.show_banner = false
-$env.config.buffer_editor = "code"
-
-$env.history.file_format = "sqlite"
-$env.history.max_size: 1_000_000
-$env.history.isolation = true
-
-$env.keybindings ++= [{
-  name: "insert_last_token"
-  modifier: "alt"
-  keycode: "char_."
-  event: [
-    {
-      edit: "InsertString"
-      value: "!$"
-    },
-    {
-      "send": "Enter"
-    }
-  ]
-  mode: [ emacs, vi_normal, vi_insert ]
-}]
-```
-
-### Other Config Changes in 0.101
-
-- The (previous version) commented sample (default) implementation was useful for learning about configuration options. This documentation has been enhanced and is now available using:
-
-  ```nu
-  config env --sample | nu-highlight | less -R
-  config nu --sample | nu-highlight | less -R
-  ```
-
-- Skeleton config files (`env.nu` and `config.nu`) are automatically created when the default config directory is created. Usually this will be the first time Nushell is started. The user will no longer be asked whether or not to create the files.
-
-- The files that are created have no configuration in them; just comments. This is because, "out-of-the-box", no values are overridden.
-
-- An internal `default_env.nu` is loaded immediately before the user's `env.nu`. You can inspect its
-  contents using `config env --default | nu-highlight | less -R`.
-
-  This means that, as with `config.nu`, you can also use your `env.nu` to just override the default environment variables if desired.
-
-- Likewise, a `default_config.nu` is loaded immediately before the user's `config.nu`. View
-  this file using `config nu --default | nu-highlight | less -R`.
-
-- `ENV_CONVERSIONS` are run multiple times so that the converted values may be used in `config.nu` and later files. Note that this currently means that `from_string` may be called even when the value is
-  not a string. The `from_string` closure should check the type and only convert a string.
-
-- The previous `$light_theme` and `$dark_theme` variables have been replaced by new standard library commands:
-
-  ```nu
-  use std/config *
-  $env.config.color_config = (dark-theme)
-  ```
