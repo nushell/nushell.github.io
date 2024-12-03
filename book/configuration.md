@@ -28,13 +28,13 @@ config nu -- sample | nu-highlight | less -R
 
 :::
 
-## Overview
+## Configuration Overview
 
 Nushell uses multiple, optional configuration files. These files are loaded in the following order:
 
 1. `env.nu` is typically used to define or override environment variables.
 2. `config.nu` is typically used to override default Nushell settings, define (or import) custom commands, or run any other startup tasks.
-3. Files in `$nu.vendor-autoload-dirs` are sourced. These files can be used for any purpose, and are a convenient way to modularize a configuration.
+3. Files in `$nu.vendor-autoload-dirs` are loaded. These files can be used for any purpose and are a convenient way to modularize a configuration.
 4. `login.nu` runs commands or handles configuration that should only take place when Nushell is running as a login shell.
 
 By default, `env.nu`, `config.nu`, and `login.nu` are read from the `$nu.default-config-dir` directory. For example:
@@ -67,13 +67,11 @@ $env.config.buffer_editor = 'code'
 
 :::
 
-## Configuring `env.nu`
+## Common Configuration Tasks in `env.nu`:
 
 ::: tip See Also
 The [Environment](./environment.md) Chapter covers additional information on how to set and access environment variables.
 :::
-
-Common configuration tasks in `env.conf`:
 
 ### Path Configuration
 
@@ -211,9 +209,9 @@ $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
 }
 ```
 
-### Others
+### `LS_COLORS`
 
-LS_COLORS
+As with many `ls`-like utilities, Nushell's directory listings make use of the `LS_COLORS` environment variable for defining styles/colors to apply to certain file types and patterns.
 
 ### Additional `$env.nu` Notes
 
@@ -222,138 +220,270 @@ of the available configuration files. Likewise, `env.nu` can be used for any pur
 
 There are several configuration tasks where `env.nu` has advantages:
 
-1. `$env.ENV_CONVERSIONS` can be defined in `env.nu` to translate certain environment variables to (and from) Nushell structured data types. This can make
-   working with these variables in Nushell much more convenient. See below for details on this variable.
+1. As mentioned above, `$env.ENV_CONVERSIONS` can be defined in `env.nu` to translate certain environment variables to (and from) Nushell structured data types. In order to treat these variables as structured-data in `config.nu`, then conversion needs to be defined in `env.nu`.
 
 2. Modules or source files that are written or modified during `env.nu` can be imported or evaluated during `config.nu`. This is a fairly advanced, uncommon
    technique.
 
-## `config.nu`
+## Common Configuration Tasks in `config.nu`
 
-## Changing the Default Configuration Directory
+The primary purpose of `config.nu` is to:
 
-Control which directory Nushell reads config files from with the `XDG_CONFIG_HOME` environment variable. When you set it to
-an absolute path, Nushell will read config files from `$"($env.XDG_CONFIG_HOME)/nushell"`. For example, if you set it to
-`C:\Users\bob\.config`, Nushell will read config files from `C:\Users\bob\.config\nushell\`.
+- Override default Nushell settings in the `$env.config` record
+- Define or import custom commands
+- Run other startup tasks
 
-::: warning
-`XDG_CONFIG_HOME` must be set **before** starting Nushell. Setting it in `env.nu` or `config.nu` won't change where Nushell
-looks for configuration files.
+::: tip
+Some users will prefer a "monolithic" configuration file with most or all startup tasks in one place. `config.nu` can be used for this purpose.
+
+Other users may prefer a "modular" configuration where each file handles a smaller, more focused set of tasks. Files in the autoload dirs can be used to create this experience.
 :::
 
-On Windows, you can persistently set the `XDG_CONFIG_HOME` environment variable through the Control Panel. To get there, just
-search for "environment variable" in the Start menu.
+### Changing Settings in the `$env.config` Record
 
-On other platforms, if Nushell isn't your login shell, then you can set `XDG_CONFIG_HOME` before launching Nushell. For example, if you
-use MacOS and your login shell is Zsh, you could add the following to your `.zshrc`:
+The primary mechanism for changing Nushell's behavior is the `$env.config` record. While this record is accessed as an environment variable, unlike most other variables it is:
 
-```zsh
-export XDG_CONFIG_HOME="/Users/bob/.config"
+- Not inherited from the parent process. Instead, it is populated by Nushell itself with certain defaults.
+- Not exported to child processes started by Nushell.
+
+To examine the current settings in `$env.config`, just type the variable name:
+
+```nu
+$env.config
 ```
 
-If Nushell is your login shell, then ways to set `XDG_CONFIG_HOME` will depend on your OS.
-Some Linux distros will let you set environment variables in `/etc/profile` or `/etc/profile.d`.
-On modern Linux distros, you can also set it through PAM in `/etc/environment`.
+::: tip
+Since Nushell provides so many customization options, it may be better to send this to a pager like:
 
-::: warning
-[`XDG_CONFIG_HOME`](https://xdgbasedirectoryspecification.com) is not a Nushell-specific environment variable and should not be set to the
-directory that contains Nushell config files. It should be the directory _above_ the `nushell` directory. If you set it to
-`/Users/username/dotfiles/nushell`, Nushell will look for config files in `/Users/username/dotfiles/nushell/nushell` instead.
-In this case, you would want to set it to `/Users/username/dotfiles`.
+```nu
+$env.config | table -e | less -R
+# or, if bat is installed:
+$env.config | table -e | bat -p
+```
+
 :::
 
-## Other Pre-Launch Environment Variables
+An appendix documenting each setting will be available soon. In the meantime, abbreviated documentation on each setting can be
+viewed in Nushell using:
 
-## Configuring `$env.config`
+```nu
+config nu --sample | nu-highlight | bat
+# or
+config nu --sample | nu-highlight | less -R
+```
 
-Nushell's main settings are kept in the `config` environment variable as a record. This record can be created using:
+To avoid overwriting existing settings, it's best to simply assign updated values to the desired configuration keys, rather than the entire `config` record. In other words:
+
+::: warning Wrong
 
 ```nu
 $env.config = {
-  ...
+  show_banner: false
 }
 ```
 
-Note that setting any key overwrites its previous value. Likewise it's an error to reference any missing key. If `$env.config` already exists you can update or gracefully insert a [`cell-path`](/book/types_of_data.html#cell-paths) at any depth using [`upsert`](/commands/docs/upsert.md):
+This would reset any _other_ settings that had been changed, since the entire record would be overwritten.
+:::
+
+::: tip Right
 
 ```nu
-$env.config = ($env.config | upsert <field name> <field value>)
+$env.config.show_banner = false
 ```
 
-By convention, this variable is defined in the `config.nu` file.
+This changes _only_ the `show_banner` key/value pair, leaving all other keys with their existing values.
+:::
 
-### Environment
-
-You can set environment variables for the duration of a Nushell session using the `$env.<var> = <val>` structure inside the `env.nu` file. For example:
+Certain keys are themselves also records. It's okay to overwrite these records, but it's best-practice
+to set all values when doing so. For example:
 
 ```nu
-$env.FOO = 'BAR'
+$env.config.history = {
+  file_format: sqlite
+  max_size: 1_000_000
+  sync_on_enter: true
+  isolation: true
+}
 ```
-
-_(Although $env.config is an environment variable, it is still defined by convention inside config.nu.)_
-
-These are some important variables to look at for Nushell-specific settings:
-
-- `LS_COLORS`: Sets up colors per file type in ls
-- `PROMPT_COMMAND`: Code to execute for setting up the prompt (block or string)
-- `PROMPT_COMMAND_RIGHT`: Code to execute for setting up the right prompt (block)
-- `PROMPT_INDICATOR = "〉"`: The indicator printed after the prompt (by default ">"-like Unicode symbol)
-- `PROMPT_INDICATOR_VI_INSERT = ": "`
-- `PROMPT_INDICATOR_VI_NORMAL = "〉 "`
-- `PROMPT_MULTILINE_INDICATOR = "::: "`
-
-### Color Config Section
-
-You can learn more about setting up colors and theming in the [associated chapter](coloring_and_theming.md).
 
 ### Remove Welcome Message
 
-To remove the welcome message, you need to edit your `config.nu` by typing `config nu` in your terminal, then you go to the global configuration `$env.config` and set `show_banner` option to false, like this:
+:::note
+This section is linked directly from the banner message, so it repeats some information from above.
+:::
 
-@[code](@snippets/installation/remove_welcome_message.nu)
+To remove the welcome message that displays each time Nushell starts:
 
-## Configuring Nu as a Login Shell
+1. Type `config nu` to edit your configuration file.
+2. If you receive an error regarding the editor not being defined:
 
-To use Nu as a login shell, you'll need to configure the `$env` variable. This sets up the environment for external programs.
+   ```nu
+   $env.config.buffer_editor = <path to your preferred editor>
+   # Such as:
+   $env.config.buffer_editor = "code"
+   $env.config.buffer_editor = "vi"
+   ```
 
-To get an idea of which environment variables are set up by your current login shell, start a new shell session, then run nu in that shell.
+   Then repeat step 1.
 
-You can then configure some `$env.<var> = <val>` that setup the same environment variables in your nu login shell. Use this command to generate some `$env.<var> = <val>` for all the environment variables:
+3. Add the following line to the end of the file:
+
+   ```nu
+   $env.config.show_banner = false
+   ```
+
+4. Save and exit your editor.
+5. Restart Nushell to test the change.
+
+## Additional Startup Configuration
+
+### Changing default directories
+
+::: warning Important
+As discussed below, variables in this section must be set **before** Nushell is launched.
+:::
+
+Some variables that control Nushell startup file locations must be set **before** Nushell is loaded. This is often done by a parent process such as:
+
+- The terminal application in which Nushell is run
+
+- The operating system or window manager. When running Nushell as a login shell, this will likely be the only mechanism available.
+
+  For example, on Windows, you can set environment variables through the Control Panel. Choose the Start Menu and search for _"environment variables"_.
+
+  On Linux systems using PAM, `/etc/environment` (and other system-specific mechanisms) can be used.
+
+- A parent shell. For example, exporting the value from `bash` before running `nu`.
+
+### Startup Variables
+
+The variables that affect Nushell file locations are:
+
+- `$env.XDG_CONFIG_HOME`: If this environment variable is set, it is used to change the directory that Nushell searches for its configuration files such as `env.nu`, `config.nu`, and `login.nu`. The history and plugin files are also stored in this directory by default.
+
+  Once Nushell starts, this value is stored in the `$nu.default-config-path` constant. See [Using Constants](#using-constants) below.
+
+- `$env.XDG_DATA_HOME`: If this environment variable is set, Nushell sets the `$nu.data-dir` constant to this value. The `data-dir` is used in several startup tasks:
+
+  - `($nu.data-dir)/nushell/completions` is added to the `$env.NU_LIB_DIRS` search path.
+  - `($nu.data-dir)/vendor/autoloads` is added as the last path in `nu.vendor-autoload-dirs`. This means that files in this directory will be read last during startup (and thus override any definitions made in earlier files).
+
+  Note that the directory represented by `$nu.data-dir`, nor any of its subdirectories, are created by default. Creation and use of these directories is up to the user.
+
+- `$env.XDG_DATA_DIRS`: If this environment variable is set, it is used to populate the `$nu.vendor-auto-load` directories in the order listed. The first directory in the list is processed first, meaning the last one read will have the ability to override previous definitions.
+
+::: warning
+The `XDG_*` variables are **not** Nushell-specific and should not be set to a directory with only Nushell files. Instead, set the environment variable to the directory _above_ the one with the `nushell` directory.
+
+For example, if you set `$env.XDG_CONFIG_HOME` to:
+
+```
+/users/username/dotfiles/nushell
+```
+
+... Nushell will look for config files in `/Users/username/dotfiles/nushell/nushell`. The proper setting would be:
+
+```
+/users/username/dotfiles
+```
+
+Also keep in mind that if the system has already set `XDG` variables, then there may already be files in use in those directories. Changing the location may require that you move other application's files to the new directory.
+:::
+
+::: tip
+You can easily test out config changes in a "fresh" environment using the following recipe. The following is run from inside Nushell, but can be
+adapted to other shells as well:
+
+```nu
+# Create an empty temporary directory
+let temp_home = (mktemp -d)
+# Set the configuration path to this directory
+$env.XDG_CONFIG_HOME = $temp_home
+# Set the data-dir to this directory
+$env.XDG_DATA_HOME = $temp_home
+# Remove other potential autoload directories
+$env.XDG_DATA_DIRS = ""
+# Run Nushell in this environment
+nu
+
+# Edit config
+config nu
+# Exit the subshell
+exit
+# Run the temporary config
+nu
+```
+
+When done testing the configuration:
+
+```nu
+# Remove the temporary config directory, if desired
+rm $temp_home
+```
+
+**Important:** Then exit the parent shell so that the `XDG` changes are not accidentally propagated to other processes.
+:::
+
+### Using Constants
+
+Some important commands, like `source` and `use`, that help define custom commands (and other definitions) are parse-time keywords. Along other things, this means means that all arguments must be known at parse-time.
+
+In other words, **_variable arguments are not allowed for parser keywords_**.
+
+However, Nushell creates some convenience _constants_ that can be used to help identify common file locations. For instance, you can source a file in the default configuration directory using:
+
+```
+source ($nu.default-config-dir | path join "myfile.nu")
+```
+
+Because the constant value is known at parse-time, it can be used with parse-time keywords like `source` and `use`.
+
+To see a list of the built-in Nushell constants, examine the record constant using `$nu` (including the dollar sign).
+
+Nushell can also make use of a `NU_LIB_DIRS` _constant_ which can act like the `$env.NU_LIB_DIRS` variable mentioned above. However, unlike `$env.NU_LIB_DIRS`, it can be defined _and_ used in `config.nu`. For example:
+
+```nu
+# Define module and source search path
+const NU_LIB_DIRS = [
+  '~/myscripts'
+]
+# Load myscript.nu from the ~/myscripts directory
+source myscript.nu
+```
+
+If both the variable `$env.NU_LIB_DIRS` and the const `NU_LIB_DIRS` are defined, both sets
+of paths will be searched. The constant `NU_LIB_DIRS` will be searched _first_ and have
+precedence. If a file matching the name is found in one of those directories, the search will
+stop. Otherwise, it will continue into the `$env.NU_LIB_DIRS` search path.
+
+### Colors, Theming, and Syntax Highlighting
+
+You can learn more about setting up colors and theming in the [associated chapter](coloring_and_theming.md).
+
+### Configuring Nu as a Login Shell
+
+The login shell is often responsible for setting certain environment variables which will be inherited by subshells and other processes. When setting Nushell as a user's default login shell, you'll want to make sure that the `login.nu` handles this task.
+
+Many applications will assume a POSIX or PowerShell login shell, and will either provide instructions for modifying the system or user `profile` that is loaded by POSIX login-shells (or `.ps1` file on PowerShell systems).
+
+As you may have noticed by now, Nushell is not a POSIX shell, nor is it PowerShell, and it won't be able to process a profile written for these. You'll need to set these values in `login.nu` instead.
+
+To find environment variables that may need to be set through `login.nu`, examine the inherited environment from your login shell by running `nu` from within your previous login shell. Run:
 
 ```nu
 $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r.val)'"} | str join (char nl)
 ```
 
-This will print out `$env.<var> = <val>` lines, one for each environment variable along with its setting. You may not need all of them, for instance the `PS1` variable is bash specific.
+Look for any values that may be needed by third-party applications and copy these to your `login.nu`. Many of these will not be needed. For instance, the `PS1` setting is the current prompt in POSIX shells and won't be useful in Nushell.
 
-Next, on some distros you'll also need to ensure Nu is in the /etc/shells list:
-
-```sh
-> cat /etc/shells
-# /etc/shells: valid login shells
-/bin/sh
-/bin/dash
-/bin/bash
-/bin/rbash
-/usr/bin/screen
-/usr/bin/fish
-/home/sophia/.cargo/bin/nu
-```
-
-With this, you should be able to `chsh` and set Nu to be your login shell. After a logout, on your next login you should be greeted with a shiny Nu prompt.
-
-### Configuration with `login.nu`
-
-If Nushell is used as a login shell, you can use a specific configuration file which is only sourced in this case. Therefore a file with name `login.nu` has to be in the standard configuration directory.
-
-The file `login.nu` is sourced after `env.nu` and `config.nu`, so that you can overwrite those configurations if you need. There is an environment variable `$nu.loginshell-path` containing the path to this file.
-
-What about customizing interactive shells, similar to `.zshrc`? By default `config.nu` is only loaded in interactive shells, not scripts.
+When ready, add Nushell to your `/etc/shells` (Unix) and `chsh` as discussed in [the Installation Chapter](./default_shell.md).
 
 ### macOS: Keeping `/usr/bin/open` as `open`
 
-Some tools (e.g. Emacs) rely on an [`open`](/commands/docs/open.md) command to open files on Mac.
-As Nushell has its own [`open`](/commands/docs/open.md) command which has different semantics and shadows `/usr/bin/open`, these tools will error out when trying to use it.
+Some tools such as Emacs rely on an [`open`](/commands/docs/open.md) command to open files on Mac.
+
+Since Nushell has its own [`open`](/commands/docs/open.md) command with a different meaning which shadows (overrides) `/usr/bin/open`, these tools will generate an error when trying to use the command.
+
 One way to work around this is to define a custom command for Nushell's [`open`](/commands/docs/open.md) and create an alias for the system's [`open`](/commands/docs/open.md) in your `config.nu` file like this:
 
 ```nu
@@ -361,83 +491,11 @@ alias nu-open = open
 alias open = ^open
 ```
 
-The `^` symbol _escapes_ the Nushell `open` command, which invokes the operating system's `open` command.
-For more about escape and `^` see the [chapter about escapes](escaping.md).
+Place this in your `config.nu` to make it permanent.
 
-## PATH configuration
+The `^` symbol tells Nushell to run the following command as an _external_ command, rather than as a Nushell built-in. After running these commands, `nu-open` will be the Nushell _internal_ version, and the `open` alias will call the Mac, external `open` instead.
 
-In Nushell, [the PATH environment variable](<https://en.wikipedia.org/wiki/PATH_(variable)>) (Path on Windows) is a list of paths. To append a new path to it, you can use `$env.<var> = <val>` and [`append`](/commands/docs/append.md) in `env.nu`:
-
-```nu
-$env.PATH = ($env.PATH | split row (char esep) | append '/some/path')
-```
-
-This will append `/some/path` to the end of PATH; you can also use [`prepend`](/commands/docs/prepend.md) to add entries to the start of PATH.
-
-Note the `split row (char esep)` step. We need to add it because in `env.nu`, the environment variables inherited from the host process are still strings. The conversion step of environment variables to Nushell values happens after reading the config files (see also the [Environment](environment.md#environment-variable-conversions) section). After that, for example in the Nushell REPL when `PATH`/`Path` is a list , you can use [`append`](/commands/docs/append.md)/[`prepend`](/commands/docs/prepend.md) directly.
-
-To add multiple paths only if not already listed, one can add to `env.nu`:
-
-```nu
-$env.PATH = (
-  $env.PATH
-  | split row (char esep)
-  | append /usr/local/bin
-  | append ($env.CARGO_HOME | path join bin)
-  | append ($env.HOME | path join .local bin)
-  | uniq # filter so the paths are unique
-)
-```
-
-This will add `/usr/local/bin`, the `bin` directory of CARGO_HOME, the `.local/bin` of HOME to PATH. It will also remove duplicates from PATH.
-
-::: tip
-There's a convenience command for updating your system path but you must first open the [`std`](/book/standard_library.md) [module](/book/cheat_sheet.md#modules) (in preview):
-
-```nu
-use std *
-path add /usr/local/bin ($env.CARGO_HOME | path join bin) # etc.
-```
-
-You can optionally `--append` paths to be checked last like the ones below.
-:::
-
-### Homebrew
-
-[Homebrew](https://brew.sh/) is a popular package manager that often requires PATH configuration. To add it to your Nushell PATH:
-
-```nu
-# macOS ARM64 (Apple Silicon)
-$env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
-
-# Linux
-$env.PATH = ($env.PATH | split row (char esep) | prepend '/home/linuxbrew/.linuxbrew/bin')
-```
-
-### Pyenv
-
-[Pyenv](https://github.com/pyenv/pyenv) is a popular Python version manager. To add it to your Nushell PATH:
-
-#### MacOS or Linux
-
-```nu
-# MacOS or Linux
-$env.PATH = ($env.PATH | split row (char esep) | prepend $"(pyenv root)/shims")
-```
-
-#### Windows
-
-Windows users need to install [pyenv-win](https://github.com/pyenv-win/pyenv-win)
-and execute the `Get-Command pyenv` command in PowerShell to get the path of `pyenv.ps1` after the installation.
-
-The result usually looks like: `C:\Users\<your-username>\.pyenv\pyenv-win\bin\pyenv.ps1`
-
-Then add the path of pyenv to your Nushell PATH:
-
-```nu
-# Windows
-$env.Path = ($env.Path | split row (char esep) | prepend $"~/.pyenv/pyenv-win/bin/pyenv.ps1")
-```
+For more information, see [Running System (External) Commands](./running_externals.md).
 
 ## Detailed Configuration Startup Process
 
@@ -452,7 +510,7 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | ---- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 0.   | (misc)                          | Sets internal defaults via its internal Rust implementation. In practice, this may not take place until "first use" of the setting or variable, but there will typically be a Rust default for most (but not all) settings and variables that control Nushell's behavior. These defaults can then be superseded by the steps below.                                                |
 | 1.   | (main)                          | Inherits its initial environment from the calling process. These will initially be converted to Nushell strings, but can be converted to other structures later using `ENV_CONVERSIONS` (see below).                                                                                                                                                                               |
-| 2.   | (main)                          | Gets the configuration directory. This is OS-dependent (see [dirs::config_dir](https://docs.rs/dirs/latest/dirs/fn.config_dir.html)), but can be overridden using `XDG_CONFIG_HOME` on all platforms. (TODO: Link)                                                                                                                                                                 |
+| 2.   | (main)                          | Gets the configuration directory. This is OS-dependent (see [dirs::config_dir](https://docs.rs/dirs/latest/dirs/fn.config_dir.html)), but can be overridden using `XDG_CONFIG_HOME` on all platforms as discussed [above](#changing-default-directories).                                                                                                                          |
 | 3.   | (main)                          | Creates the initial `$env.NU_LIB_DIRS` variable. By default, it includes (1) the `scripts` directory under the configuration directory, and (2) `nushell/completions` under the default data directory (either `$env.XDG_DATA_HOME` or [the default provided by the dirs crate](https://docs.rs/dirs/latest/dirs/fn.data_dir.html)). These directories are not created by default. |
 | 4.   | (main)                          | Creates the initial `$env.NU_PLUGIN_DIRS` variable. By default, this will include the configuration directory.                                                                                                                                                                                                                                                                     |
 | 5.   | (main)                          | Initializes the in-memory SQLite database. This allows the `stor` family of commands to be used in the following configuration files.                                                                                                                                                                                                                                              |
@@ -462,7 +520,7 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | 9.   | (main)                          | Loads the initial `$env.config` values from the internal defaults.                                                                                                                                                                                                                                                                                                                 |
 | 10.  | (stdlib)                        | Loads the [Standard Library](./standard_library.md) into the virtual filesystem. It is not parsed or evaluated at this point.                                                                                                                                                                                                                                                      |
 | 11.  | (stdlib)                        | Parses and evaluates `std/core`, which brings the `banner` and `pwd` commands into scope.                                                                                                                                                                                                                                                                                          |
-| 12.  | (main)                          | Generates the initial `$nu` record constant so that items such as `$nu.default-config-dir` can be used in the following config files.                                                                                                                                                                                                                                              |
+| 12.  | (main)                          | Generates the initial [`$nu` record constant](#using-constants) so that items such as `$nu.default-config-dir` can be used in the following config files.                                                                                                                                                                                                                          |
 | 13.  | (main)                          | Loads any plugins that were specified using the `--plugin` flag.                                                                                                                                                                                                                                                                                                                   |
 | 14.  | (config files) (plugin)         | Processes the signatures in the user's `plugin.msgpackz` (located in the configuration directory) so that added plugins can be used in the following config files.                                                                                                                                                                                                                 |
 | 15.  | (config files)                  | If this is the first time Nushell has been launched, then it creates the configuration directory. "First launch" is determined by whether or not the configuration directory exists.                                                                                                                                                                                               |
@@ -471,7 +529,7 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | 18.  | (config files) (env.nu)         | Converts the `PATH` variable into a list so that it can be accessed more easily in the next step.                                                                                                                                                                                                                                                                                  |
 | 19.  | (config files) (env.nu)         | Loads (parses and evaluates) the user's `env.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                         |
 | 20.  | (config files) (config.nu)      | Processes any `ENV_CONVERSIONS` that were defined in the user's `env.nu` so that those environment variables can be treated as Nushell structured data in the `config.nu`.                                                                                                                                                                                                         |
-| 21.  | (config files) (config.nu)      | Loads a minimal `$env.config` record from the internal `default_config.nu`. This file can be viewed with: `nu config nu --default \| nu-highlight \| less -R`.                                                                                                                                                                                                                     |
+| 21.  | (config files) (config.nu)      | Loads a minimal `$env.config` record from the internal `default_config.nu`. This file can be viewed with: `nu config nu --default \| nu-highlight \| less -R`. Most values that are not defined in `default_config.nu` will be auto-populated into `$env.config` using their internal defaults as well.                                                                            |
 | 21.  | (config files) (config.nu)      | Loads (parses and evaluates) the user's `config.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                      |
 | 22.  | (config files) (login)          | When Nushell is running as a login shell, loads the user's `login.nu`.                                                                                                                                                                                                                                                                                                             |
 | 23.  | (config files)                  | Loops through autoload directories and loads any `.nu` files found. The directories are processed in the order found in `$nu.vendor-autoload-directories`, and files in those directories are processed in alphabetical order.                                                                                                                                                     |
@@ -479,7 +537,7 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | 25.  | (repl) and (stdlib)             | Shows the banner if configured.                                                                                                                                                                                                                                                                                                                                                    |
 | 26.  | (repl)                          | Nushell enters the normal commandline (REPL).                                                                                                                                                                                                                                                                                                                                      |
 
-## Flag Behavior
+### Flag Behavior
 
 | Mode                | Command/Flags                              | Behavior                                                                                                                                                                                                                                                                                     |
 | ------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -492,7 +550,7 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | Force config file   | `nu --config <file>`                       | Forces steps marked with **_(config.nu)_** above to run, unless `-n` was also specified                                                                                                                                                                                                      |
 | Force env file      | `nu --env-config <file>`                   | Forces steps marked with **_(default_env.nu)_** and **_(env.nu)_** above to run, unless `-n` was also specified                                                                                                                                                                              |
 
-## Simplified Examples
+### Scenarios
 
 - `nu`:
 
@@ -591,3 +649,114 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not read the user's `login.nu` file
   - ✅ Runs the `ls` command and exits
   - ❌ Does not enter the REPL
+
+## Upgrading to Nushell version 0.101.0 or later
+
+::: note
+This is a temporary addendum to the Chapter due to the extensive recent changes in Nushell's startup process. After a few releases with the new configuration features in place, this section will likely be removed.
+:::
+
+::: tip In a hurry?
+See [Setting Values in the New Config](#setting-values-in-the-new-config) below, then come back and read the rest if needed.
+:::
+
+In previous Nushell releases, the recommended practice was to include the **entire** `$env.config` record in `config.nu` and change values within it. Any `$env.config` keys that were not present in this record would use internal defaults, but these settings weren't introspectable in Nushell.
+
+With changes in releases 0.100 and 0.101, (most, but not all) missing values in `$env.config` are automatically populated in the record itself using the default, internal values. With this in place, it's no longer necessary to create a monolithic configuration record.
+
+If you have an existing `config.nu` with a complete `$env.config` record, you could continue to use it, but you should consider streamlining it based on these new features. This has the following advantages:
+
+- Startup will typically be slightly faster.
+- It's easier to see exactly which values are overridden, as those should be the only settings changed in `config.nu`.
+- If a key name or default value changes in the future, it will only be a breaking change if it was a value that had been overridden. All other values will update seamlessly when you install new Nushell releases.
+
+  ::: note
+  This may be an advantage or disadvantage in some situations. For instance, at some point, we plan to switch the default history format to SQLite. When that change occurs in Nushell, it will automatically be changed for all users who hadn't overridden the value. That's a positive change for most users, as they'll automatically be switched to the more advanced format when they upgrade to that (as yet unknown) release, but that change may not be desirable for some users.
+
+  Of course, these users can always simply override that value when and if the default changes.
+  :::
+
+Note that not _all_ default values are introspectable. The following Nushell internals are no longer set (by default) in `config.nu` and will not be automatically populated:
+
+- `keybindings`
+- `menus`
+
+Only user-defined keybindings and menus should (as best-practice) be specified in the `$env.config`.
+
+### Identifying Overridden Values
+
+To identify which values your current configuration has changed from the defaults, run the following in the current build (or 0.101 when available):
+
+```nu
+let defaults = nu -n -c "$env.config = {}; $env.config | reject color_config keybindings menus | to nuon" | from nuon | transpose key default
+let current = $env.config | reject color_config keybindings menus | transpose key current
+$current | merge $defaults | where $it.current != $it.default
+```
+
+These are the values that you should migrate to your updated `config.nu`.
+
+Also examine:
+
+- Any theme/styling in `$env.config.color_config` and add those settings
+- Your personalized keybindings in `$env.config.keybindings`. Note that many of the keybindings in the older default configuration files were examples that replicated built-in capabilities.
+- Any personalized menus in `$env.config.menus`. As with keybindings, you do not need to copy over examples.
+
+### Setting Values in the New Config
+
+Rather than defining a `$env.config = { ... all values }` as in the past, just create one entry for each overridden setting. For example:
+
+```nu
+$env.config.show_banner = false
+$env.config.buffer_editor = "code"
+
+$env.history.file_format = "sqlite"
+$env.history.max_size: 1_000_000
+$env.history.isolation = true
+
+$env.keybindings ++= [{
+  name: "insert_last_token"
+  modifier: "alt"
+  keycode: "char_."
+  event: [
+    {
+      edit: "InsertString"
+      value: "!$"
+    },
+    {
+      "send": "Enter"
+    }
+  ]
+  mode: [ emacs, vi_normal, vi_insert ]
+}]
+```
+
+### Other Config Changes in 0.101
+
+- The (previous version) commented sample (default) implementation was useful for learning about configuration options. This documentation has been enhanced and is now available using:
+
+  ```nu
+  config env --sample | nu-highlight | less -R
+  config nu --sample | nu-highlight | less -R
+  ```
+
+- Skeleton config files (`env.nu` and `config.nu`) are automatically created when the default config directory is created. Usually this will be the first time Nushell is started. The user will no longer be asked whether or not to create the files.
+
+- The files that are created have no configuration in them; just comments. This is because, "out-of-the-box", no values are overridden.
+
+- An internal `default_env.nu` is loaded immediately before the user's `env.nu`. You can inspect its
+  contents using `config env --default | nu-highlight | less -R`.
+
+  This means that, as with `config.nu`, you can also use your `env.nu` to just override the default environment variables if desired.
+
+- Likewise, a `default_config.nu` is loaded immediately before the user's `config.nu`. View
+  this file using `config nu --default | nu-highlight | less -R`.
+
+- `ENV_CONVERSIONS` are run multiple times so that the converted values may be used in `config.nu` and later files. Note that this currently means that `from_string` may be called even when the value is
+  not a string. The `from_string` closure should check the type and only convert a string.
+
+- The previous `$light_theme` and `$dark_theme` variables have been replaced by new standard library commands:
+
+  ```nu
+  use std/config *
+  $env.config.color_config = (dark-theme)
+  ```
