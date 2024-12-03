@@ -14,7 +14,11 @@ External command (typically `/usr/bin/ls`):
 ^ls
 ```
 
-## Windows Note
+::: note
+On Windows, `ls` is a PowerShell _alias_ by default, so `^ls` will not find a matching system _command_.
+:::
+
+## Additional Windows Notes
 
 When running an external command on Windows,
 Nushell forwards some `CMD.EXE` internal commands to cmd instead of attempting to run external commands.

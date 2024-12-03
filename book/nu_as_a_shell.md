@@ -12,7 +12,7 @@ A big feature of any shell are [environment variables](environment.md).
 In Nushell, environment variables are scoped and can have any type supported by Nushell.
 This brings in some additional design considerations so please refer to the linked section for more details.
 
-The other sections explain how to work with [stdout, stderr and exit codes](stdout_stderr_exit_codes.md), how to [escape a command call to the external command call](escaping.md), and how to [configure 3rd party prompts](3rdpartyprompts.md) to work with Nushell.
+The other sections explain how to work with [stdout, stderr and exit codes](stdout_stderr_exit_codes.md), how to [run an external command when there is a built-in with the same name](./running_externals.md), and how to [configure 3rd party prompts](3rdpartyprompts.md) to work with Nushell.
 
 An interesting feature of Nushell is the [Directory Stack](directory_stack.md) which let you work in multiple directories simultaneously.
 
