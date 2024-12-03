@@ -8,10 +8,10 @@ Explore is a table pager, just like `less` but for table structured data.
 
 ### Parameters
 
-- `--head {boolean}`: turn off column headers
-- `--index`: show row indexes (by default it's not showed)
-- `--reverse`: start from the last row
-- `--peek`: returns a last used value, so it can be used in next pipelines
+ -  `--head {bool}`: Show or hide column headers (default true)
+ -  `--index, -i`: Show row indexes when viewing a list
+ -  `--tail, -t`: Start with the viewport scrolled to the bottom
+ -  `--peek, -p`: When quitting, output the value of the cell the cursor was on
 
 ## Get Started
 
@@ -23,7 +23,7 @@ ls | explore -i
 
 So the main point of [`explore`](/commands/docs/explore.md) is `:table` (Which you see on the above screenshot).
 
-You can interact with it via `<Left>`, `<Right>`, `<Up>`, `<Down>` _arrow keys_.
+You can interact with it via `<Left>`, `<Right>`, `<Up>`, `<Down>` _arrow keys_. It also supports the `Vim` keybindings `<h>`, `<j>`, `<k>`, and `<l>`, `<Ctrl-f>` and `<Ctrl-b>`, and it supports the `Emacs` keybindings `<Ctrl-v>`, `<Alt-v>`, `<Ctrl-p>`, and `<Ctrl-n>`.
 
 You can inspect a underlying values by entering into cursor mode. You can press either `<i>` or `<Enter>` to do so.
 Then using _arrow keys_ you can choose a necessary cell.
