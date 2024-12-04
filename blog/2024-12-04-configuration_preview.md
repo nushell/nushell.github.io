@@ -141,7 +141,7 @@ $env.config.history = {
 - Likewise, a `default_config.nu` is loaded immediately before the user's `config.nu`. View
   this file using `config nu --default | nu-highlight | less -R`.
 
-- **_(Breaking Change)_** `ENV_CONVERSIONS` are run several times so that the converted values may be used in `config.nu` and later files. Note that this currently means that `from_string` may be called even when the value is not a string. The `from_string` closure should check the type and only convert a string.
+- `ENV_CONVERSIONS` are run several times so that the converted values may be used in `config.nu` and later files. It will now only convert `from_string` if the value was already a string. Otherwise, an already-converted-to-non-string value could cause issues with a `from_string` closure that wasn't expecting to be run multiple times.
 
 - The previous `$light_theme` and `$dark_theme` variables have been replaced by new standard library commands:
 
