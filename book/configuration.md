@@ -101,8 +101,8 @@ These are some important variables to look at for Nushell-specific settings:
 The ([`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/docs/config_env.md)) commands open their respective configurations for quick editing in your preferred text editor or IDE. Nu determines your editor from the following environment variables in order:
 
 1. `$env.config.buffer_editor`
-3. `$env.VISUAL`
-2. `$env.EDITOR`
+2. `$env.VISUAL`
+3. `$env.EDITOR`
 
 ### Color Config Section
 
@@ -163,8 +163,8 @@ alias nu-open = open
 alias open = ^open
 ```
 
-The `^` symbol _escapes_ the Nushell `open` command, which invokes the operating system's `open` command.
-For more about escape and `^` see the [chapter about escapes](escaping.md).
+The `^` symbol escapes the Nushell `open` command, which invokes the operating system's `open` command.
+For more about escape and `^` see the [chapter about escapes](./running_externals.md).
 
 ## PATH configuration
 
