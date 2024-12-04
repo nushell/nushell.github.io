@@ -96,7 +96,7 @@ You may be familiar with the Linux/Unix `ps` command. It provides a list of all 
 The traditional Unix `ps` only shows the current process and its parents by default. Nushell's implementation shows all of the processes on the system by default.
 :::
 
-What if we wanted to show the processes that were actively running? Just as we did with `ls` above, we can also work with the table that `ps` _outputs_:
+What if we wanted to just show the processes that are actively running? As with `ls` above, we can also work with the table that `ps` _outputs_:
 
 ```nu
 ps | where status == Running
@@ -147,6 +147,11 @@ The first three lines are the same commands we used in the second example above,
 4. The [`first` command](/commands/docs/first.md) simply returns the first value from the table. In this case, that means the file with the largest size. That's the `Cargo.lock` file if using the directory listing from the second example above. This "file" is a [`record`](./types_of_data.md#records) from the table which still contains its `name`, `type`, `size`, and `modified` columns/fields.
 5. `get name` returns the _value_ of the `name` field from the previous command, so `"Cargo.lock"` (a string). This is also a simple example of a [`cell-path`](./types_of_data.md#cell-paths) that can be used to navigate and isolate structured data.
 6. The last line uses the `$in` variable to reference the output of line 5. The result is a command that says _"Copy 'Cargo.lock' to the home directory"_
+
+::: tip
+[`get`](/commands/docs/get.md) and its counterpart [`select`](/commands/docs/select.md) are two of the most used filters in Nushell, but it might not be easy to
+spot the difference between them at first glance. When you're ready to start using them more extensively, see [Using `get` and `select`](./navigating_structured_data.md#using-get-and-select) for a guide.
+:::
 
 ## Getting Help
 
