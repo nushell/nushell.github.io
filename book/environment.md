@@ -65,7 +65,7 @@ See [Single-use environment variables](environment.md#single-use-environment-var
 
 ### Calling a Command Defined with [`def --env`](/commands/docs/def.md)
 
-See [Defining environment from custom commands](environment.md#defining-environment-from-custom-commands) for details.
+See [Defining environment from custom commands](custom_commands.md#changing-the-environment-in-a-custom-command) for details.
 
 ### Using Module's Exports
 
