@@ -390,7 +390,7 @@ The variables that affect Nushell file locations are:
 
   Note that the directory represented by `$nu.data-dir`, nor any of its subdirectories, are created by default. Creation and use of these directories is up to the user.
 
-- `$env.XDG_DATA_DIRS`: If this environment variable is set, it is used to populate the `$nu.vendor-auto-load` directories in the order listed. The first directory in the list is processed first, meaning the last one read will have the ability to override previous definitions.
+- `$env.XDG_DATA_DIRS` _(Unix Platforms Only)_: If this environment variable is set, it is used to populate the `$nu.vendor-auto-load` directories in the order listed. The first directory in the list is processed first, meaning the last one read will have the ability to override previous definitions.
 
 ::: warning
 The `XDG_*` variables are **not** Nushell-specific and should not be set to a directory with only Nushell files. Instead, set the environment variable to the directory _above_ the one with the `nushell` directory.
