@@ -207,7 +207,7 @@ Notice that the `params` and `input_output` columns of the output above are _nes
 
 ## `explore`'ing from Here
 
-Of course, that `help commands` output is quite long. You could send it to a pager less `less` or `bat`, but Nushell includes a built-in `explore` command that lets you not only scroll, but also telescope-in to nested data. Try:
+That `help commands` output is quite long. You could send it to a pager like `less` or `bat`, but Nushell includes a built-in `explore` command that lets you not only scroll, but also telescope-in to nested data. Try:
 
 ```
 help commands | explore
