@@ -108,8 +108,8 @@ ps | where status == Running
 ```
 
 ::: tip
-Remember above, where the `size` column from the `ls` command was a `filesize`? In this case, `status` may look like an "enum" type from some programming languages,
-but here it's really a normal `string`.
+Remember above, where the `size` column from the `ls` command was a `filesize`? Here, `status` is really just a string, and
+you can use all the normal string operations and commands with it, including (as above) the `==` comparison.
 
 You can examine the types for the table's columns using:
 
@@ -132,6 +132,12 @@ ls
 | get name
 | cp $in ~
 ```
+
+::: tip Nushell Design Note
+Whenever possible, Nushell commands are designed to act on pipeline _input_. However, some commands, like `cp` in this example, have two (or more)
+arguments with different meanings. In this case, `cp` needs to know both the path to _copy_ as well as the _target_ path. As a result, this command is
+more ergonomic with two _positional parameters_.
+:::
 
 ::: tip
 Nushell commands can extend across multiple lines for readability. The above is the same as:
