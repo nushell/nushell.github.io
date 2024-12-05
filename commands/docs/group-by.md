@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--to-table`: Return a table with "groups" and "items" columns
+ -  `--to-table, -`: Return a table with "groups" and "items" columns
 
 ## Parameters
 

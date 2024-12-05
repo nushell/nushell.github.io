@@ -20,8 +20,8 @@ usage: |
 
 ## Flags
 
- -  `--env`: keep the environment defined inside the command
- -  `--wrapped`: treat unknown flags and arguments as strings (requires ...rest-like parameter in signature)
+ -  `--env, -`: keep the environment defined inside the command
+ -  `--wrapped, -`: treat unknown flags and arguments as strings (requires ...rest-like parameter in signature)
 
 ## Parameters
 

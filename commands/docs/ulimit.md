@@ -25,20 +25,11 @@ usage: |
  -  `--all, -a`: Prints all current limits
  -  `--core-size, -c`: Maximum size of core files created
  -  `--data-size, -d`: Maximum size of a process's data segment
- -  `--nice, -e`: Controls of maximum nice priority
  -  `--file-size, -f`: Maximum size of files created by the shell
- -  `--pending-signals, -i`: Maximum number of pending signals
- -  `--lock-size, -l`: Maximum size that may be locked into memory
- -  `--resident-set-size, -m`: Maximum resident set size
  -  `--file-descriptor-count, -n`: Maximum number of open file descriptors
- -  `--queue-size, -q`: Maximum bytes in POSIX message queues
- -  `--realtime-priority, -r`: Maximum realtime scheduling priority
  -  `--stack-size, -s`: Maximum stack size
  -  `--cpu-time, -t`: Maximum amount of CPU time in seconds
- -  `--process-count, -u`: Maximum number of processes available to the current user
  -  `--virtual-memory-size, -v`: Maximum amount of virtual memory available to each process
- -  `--file-locks, -x`: Maximum number of file locks
- -  `--realtime-maxtime, -y`: Maximum contiguous realtime CPU time
 
 ## Parameters
 

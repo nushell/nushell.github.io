@@ -24,8 +24,8 @@ usage: |
  -  `--quote, -q {string}`: a quote character to ignore separators in strings, defaults to '"'
  -  `--escape, -e {string}`: an escape character for strings containing the quote character
  -  `--noheaders, -n`: don't treat the first row as column names
- -  `--flexible`: allow the number of fields in records to be variable
- -  `--no-infer`: no field type inferencing
+ -  `--flexible, -`: allow the number of fields in records to be variable
+ -  `--no-infer, -`: no field type inferencing
  -  `--trim, -t {string}`: drop leading and trailing whitespaces around headers names and/or field values
 
 

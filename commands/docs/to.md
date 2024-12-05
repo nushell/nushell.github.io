@@ -39,6 +39,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`to msgpack`](/commands/docs/to_msgpack.md)   | Convert Nu values into MessagePack.                           | built-in |
 | [`to msgpackz`](/commands/docs/to_msgpackz.md) | Convert Nu values into brotli-compressed MessagePack.         | built-in |
 | [`to nuon`](/commands/docs/to_nuon.md)         | Converts table data into Nuon (Nushell Object Notation) text. | built-in |
+| [`to plist`](/commands/docs/to_plist.md)       | Convert Nu values into plist                                  | plugin   |
 | [`to text`](/commands/docs/to_text.md)         | Converts data into simple text.                               | built-in |
 | [`to toml`](/commands/docs/to_toml.md)         | Convert record into .toml text.                               | built-in |
 | [`to tsv`](/commands/docs/to_tsv.md)           | Convert table into .tsv text.                                 | built-in |

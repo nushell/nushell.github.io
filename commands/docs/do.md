@@ -24,7 +24,7 @@ usage: |
  -  `--ignore-shell-errors, -s`: ignore shell errors as the closure runs
  -  `--ignore-program-errors, -p`: ignore external program errors as the closure runs
  -  `--capture-errors, -c`: catch errors as the closure runs, and return them
- -  `--env`: keep the environment defined inside the command
+ -  `--env, -`: keep the environment defined inside the command
 
 ## Parameters
 

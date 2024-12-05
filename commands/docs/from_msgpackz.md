@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--objects`: Read multiple objects from input
+ -  `--objects, -`: Read multiple objects from input
 
 
 ## Input/output types:

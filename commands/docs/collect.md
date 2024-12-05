@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--keep-env`: let the closure affect environment variables
+ -  `--keep-env, -`: let the closure affect environment variables
 
 ## Parameters
 

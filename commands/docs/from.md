@@ -33,15 +33,20 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                               | description                                                                                                                | type     |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
 | [`from csv`](/commands/docs/from_csv.md)           | Parse text as .csv and create table.                                                                                       | built-in |
+| [`from eml`](/commands/docs/from_eml.md)           | Parse text as .eml and create record.                                                                                      | plugin   |
+| [`from ics`](/commands/docs/from_ics.md)           | Parse text as .ics and create table.                                                                                       | plugin   |
+| [`from ini`](/commands/docs/from_ini.md)           | Parse text as .ini and create table.                                                                                       | plugin   |
 | [`from json`](/commands/docs/from_json.md)         | Convert from json to structured data.                                                                                      | built-in |
 | [`from msgpack`](/commands/docs/from_msgpack.md)   | Convert MessagePack data into Nu values.                                                                                   | built-in |
 | [`from msgpackz`](/commands/docs/from_msgpackz.md) | Convert brotli-compressed MessagePack data into Nu values.                                                                 | built-in |
 | [`from nuon`](/commands/docs/from_nuon.md)         | Convert from nuon to structured data.                                                                                      | built-in |
 | [`from ods`](/commands/docs/from_ods.md)           | Parse OpenDocument Spreadsheet(.ods) data and create table.                                                                | built-in |
+| [`from plist`](/commands/docs/from_plist.md)       | Convert plist to Nushell values                                                                                            | plugin   |
 | [`from ssv`](/commands/docs/from_ssv.md)           | Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2. | built-in |
 | [`from toml`](/commands/docs/from_toml.md)         | Parse text as .toml and create record.                                                                                     | built-in |
 | [`from tsv`](/commands/docs/from_tsv.md)           | Parse text as .tsv and create table.                                                                                       | built-in |
 | [`from url`](/commands/docs/from_url.md)           | Parse url-encoded string as a record.                                                                                      | built-in |
+| [`from vcf`](/commands/docs/from_vcf.md)           | Parse text as .vcf and create table.                                                                                       | plugin   |
 | [`from xlsx`](/commands/docs/from_xlsx.md)         | Parse binary Excel(.xlsx) data and create table.                                                                           | built-in |
 | [`from xml`](/commands/docs/from_xml.md)           | Parse text as .xml and create record.                                                                                      | built-in |
 | [`from yaml`](/commands/docs/from_yaml.md)         | Parse text as .yaml/.yml and create table.                                                                                 | built-in |

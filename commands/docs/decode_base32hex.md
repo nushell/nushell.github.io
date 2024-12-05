@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--nopad`: Reject input with padding.
+ -  `--nopad, -`: Reject input with padding.
 
 
 ## Input/output types:

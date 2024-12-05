@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--lower`: Encode to lowercase hex.
+ -  `--lower, -`: Encode to lowercase hex.
 
 
 ## Input/output types:

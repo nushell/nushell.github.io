@@ -29,10 +29,10 @@ usage: |
  -  `--update, -u`: copy only when the SOURCE file is newer than the destination file or when the destination file is missing
  -  `--progress, -p`: display a progress bar
  -  `--no-clobber, -n`: do not overwrite an existing file
- -  `--preserve {list<string>}`: preserve only the specified attributes (empty list means no attributes preserved)
+ -  `--preserve, - {list<string>}`: preserve only the specified attributes (empty list means no attributes preserved)
                     if not specified only mode is preserved
                     possible values: mode, ownership (unix only), timestamps, context, link, links, xattr
- -  `--debug`: explain how a file is copied. Implies -v
+ -  `--debug, -`: explain how a file is copied. Implies -v
 
 ## Parameters
 

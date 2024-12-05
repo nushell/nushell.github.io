@@ -20,8 +20,8 @@ usage: |
 
 ## Flags
 
- -  `--url`: Decode the URL-safe Base64 version.
- -  `--nopad`: Reject padding.
+ -  `--url, -`: Decode the URL-safe Base64 version.
+ -  `--nopad, -`: Reject padding.
 
 
 ## Input/output types:

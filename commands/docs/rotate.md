@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--ccw`: rotate counter clockwise
+ -  `--ccw, -`: rotate counter clockwise
 
 ## Parameters
 

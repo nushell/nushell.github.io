@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`
+ -  `--plugin-config, - {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`
  -  `--shell, -s {path}`: Use an additional shell program (cmd, sh, python, etc.) to run the plugin
 
 ## Parameters
