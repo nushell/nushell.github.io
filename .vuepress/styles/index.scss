@@ -76,3 +76,12 @@ html[data-theme='light'] {
     text-decoration: none;
   }
 }
+
+:root,
+html[data-theme='dark'] {
+  h2.title a {
+    color: #adb6be;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+}
