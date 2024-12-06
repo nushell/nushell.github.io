@@ -169,11 +169,14 @@ def command-doc [command] {
 
     let flags = if $no_flags { '' } else {
         ($command.signatures | get $columns.0 | each { |param|
-            if $param.parameter_type == "switch" {
-                $" -  `--($param.parameter_name), -($param.short_flag)`: ($param.description)"
-            } else if $param.parameter_type == "named" {
-                $" -  `--($param.parameter_name), -($param.short_flag) {($param.syntax_shape)}`: ($param.description)"
-            }
+            let start = $' -  `--($param.parameter_name)'
+            let end = $'`: ($param.description)'
+            let short_flag = (if ($param.short_flag | is-empty) {''} else {$', -($param.short_flag)'})
+            if $param.parameter_type == 'switch' {
+                $'($start)($short_flag)($end)'
+            } else if $param.parameter_type == 'named' {
+                $'($start)($short_flag) {($param.syntax_shape)}($end)'
+	    }
         } | str join (char newline))
     }
 
