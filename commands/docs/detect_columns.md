@@ -23,7 +23,7 @@ usage: |
  -  `--skip, -s {int}`: number of rows to skip before detecting
  -  `--no-headers, -n`: don't detect headers
  -  `--combine-columns, -c {range}`: columns to be combined; listed as a range
- -  `--guess, -`: detect columns by guessing width, it may be useful if default one doesn't work
+ -  `--guess`: detect columns by guessing width, it may be useful if default one doesn't work
 
 
 ## Input/output types:

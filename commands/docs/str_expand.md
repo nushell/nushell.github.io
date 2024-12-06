@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--path, -`: Replaces all backslashes with double backslashes, useful for Path.
+ -  `--path`: Replaces all backslashes with double backslashes, useful for Path.
 
 
 ## Input/output types:

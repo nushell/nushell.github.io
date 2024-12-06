@@ -20,8 +20,8 @@ usage: |
 
 ## Flags
 
- -  `--after, - {string}`: the column that will precede the columns moved
- -  `--before, - {string}`: the column that will be the next after the columns moved
+ -  `--after {string}`: the column that will precede the columns moved
+ -  `--before {string}`: the column that will be the next after the columns moved
 
 ## Parameters
 

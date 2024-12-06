@@ -27,11 +27,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Flags
 
- -  `--no-parallel, -`: Disable parallel execution
- -  `--rechunk, -`: Rechunk the resulting dataframe
- -  `--to-supertypes, -`: Cast to supertypes
- -  `--diagonal, -`: Concatenate dataframes diagonally
- -  `--from-partitioned-ds, -`: Concatenate dataframes from a partitioned dataset
+ -  `--no-parallel`: Disable parallel execution
+ -  `--rechunk`: Rechunk the resulting dataframe
+ -  `--to-supertypes`: Cast to supertypes
+ -  `--diagonal`: Concatenate dataframes diagonally
+ -  `--from-partitioned-ds`: Concatenate dataframes from a partitioned dataset
 
 ## Parameters
 
