@@ -27,15 +27,15 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Flags
 
- -  `--eager, -`: Open dataframe as an eager dataframe
+ -  `--eager`: Open dataframe as an eager dataframe
  -  `--type, -t {string}`: File type: csv, tsv, json, parquet, arrow, avro. If omitted, derive from file extension
  -  `--delimiter, -d {string}`: file delimiter character. CSV file
- -  `--no-header, -`: Indicates if file doesn't have header. CSV file
- -  `--infer-schema, - {number}`: Number of rows to infer the schema of the file. CSV file
- -  `--skip-rows, - {number}`: Number of rows to skip from file. CSV file
- -  `--columns, - {list<string>}`: Columns to be selected from csv file. CSV and Parquet file
+ -  `--no-header`: Indicates if file doesn't have header. CSV file
+ -  `--infer-schema {number}`: Number of rows to infer the schema of the file. CSV file
+ -  `--skip-rows {number}`: Number of rows to skip from file. CSV file
+ -  `--columns {list<string>}`: Columns to be selected from csv file. CSV and Parquet file
  -  `--schema, -s {record}`: Polars Schema in format [{name: str}]. CSV, JSON, and JSONL files
- -  `--truncate-ragged-lines, -`: Truncate lines that are longer than the schema. CSV file
+ -  `--truncate-ragged-lines`: Truncate lines that are longer than the schema. CSV file
 
 ## Parameters
 

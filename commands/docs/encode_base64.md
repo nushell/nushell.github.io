@@ -20,8 +20,8 @@ usage: |
 
 ## Flags
 
- -  `--url, -`: Use the URL-safe Base64 version.
- -  `--nopad, -`: Don't pad the output.
+ -  `--url`: Use the URL-safe Base64 version.
+ -  `--nopad`: Don't pad the output.
 
 
 ## Input/output types:

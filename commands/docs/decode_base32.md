@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--nopad, -`: Do not pad the output.
+ -  `--nopad`: Do not pad the output.
 
 
 ## Input/output types:
