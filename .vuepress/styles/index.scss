@@ -55,3 +55,22 @@ div[class*='language-'].line-numbers-mode .line-numbers {
     margin-right: 30px;
   }
 }
+
+@media screen and (min-width: 1280px) {
+  :root {
+    --content-width: 960px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :root {
+    --content-width: 1060px;
+  }
+}
+
+:root,
+html[data-theme='light'] {
+  h2.title a {
+    color: #339966;
+  }
+}
