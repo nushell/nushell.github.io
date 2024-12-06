@@ -642,7 +642,7 @@ multi-greet Elin Lars Erik
 # => Hello, Erik!
 ```
 
-We could call the above definition of the `greet` command with any number of arguments, including none at all. All of the arguments are collected into `$name` as a list.
+We could call the above definition of the `greet` command with any number of arguments, including none at all. All of the arguments are collected into `$names` as a list.
 
 Rest parameters can be used together with positional parameters:
 
