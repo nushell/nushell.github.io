@@ -31,7 +31,7 @@ int
 | [Tables](#tables)                     | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`            |
 | [Closures](#closures)                 | `{\|e\| $e + 1 \| into string }`, `{ $in.name.0 \| path exists }`     |
 | [Cell-paths](#cell-paths)             | `$.name.0`                                                            |
-| [Blocks](#blocks)                     | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
+| [Blocks](#blocks)                     | `if true { print "hello!" }`; `loop { print "press ctrl-c to exit" }` |
 | [Null (Nothing)](#nothing-null)       | `null`                                                                |
 | [Any](#any)                           | `let p: any = 5`                                                      |
 
