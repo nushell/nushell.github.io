@@ -201,12 +201,12 @@ help -f filesize
 
 It may not surprise you by now that the Help system itself is based on structured data! Notice that the output of `help -f filesize` is a table.
 
-The Help for each command is stored as a record with its:
+The Help for each command is stored as a record with the:
 
 - Name
 - Category
 - Type (built-in, plugin, custom)
-- The parameters it accepts
+- Parameters it accepts
 - Signatures showing what types of data it can accept as well as output
 - And more
 
