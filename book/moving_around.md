@@ -1,4 +1,4 @@
-# Moving around the System
+# Moving Around the System
 
 A defining characteristic of a shell is the ability to navigate and interact with the filesystem. Nushell is, of course, no exception. Here are some common commands you might use when interacting with the filesystem:
 
