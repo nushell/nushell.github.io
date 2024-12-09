@@ -94,6 +94,14 @@ You may be familiar with the Linux/Unix `ps` command. It provides a list of all 
 
 ::: note
 The traditional Unix `ps` only shows the current process and its parents by default. Nushell's implementation shows all of the processes on the system by default.
+
+Normally, running `ps` in Nushell uses its **_internal_**, cross-platform command. However, it is still possible to run the **_external_**, system-dependent version on Unix/Linux platforms by prefacing it with the _caret sigil_. For example:
+
+```nu
+^ps aux  # run the Unix ps command with all processes in user-oriented form
+```
+
+See [Running External System Commands](./running_externals.md) for more details.
 :::
 
 What if we wanted to just show the processes that are actively running? As with `ls` above, we can also work with the table that `ps` _outputs_:
@@ -108,8 +116,7 @@ ps | where status == Running
 ```
 
 ::: tip
-Remember above, where the `size` column from the `ls` command was a `filesize`? Here, `status` is really just a string, and
-you can use all the normal string operations and commands with it, including (as above) the `==` comparison.
+Remember above, where the `size` column from the `ls` command was a `filesize`? Here, `status` is really just a string, and you can use all the normal string operations and commands with it, including (as above) the `==` comparison.
 
 You can examine the types for the table's columns using:
 
@@ -117,6 +124,8 @@ You can examine the types for the table's columns using:
 ps | describe
 # => table<pid: int, ppid: int, name: string, status: string, cpu: float, mem: filesize, virtual: filesize> (stream)
 ```
+
+The [`describe` command](/commands/docs/describe.md) can be used to display the output type of any command or expression.
 
 :::
 
