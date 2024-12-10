@@ -127,7 +127,7 @@ The quoting techniques above are useful when constructing glob-literals, but you
 
 ## Creating a Directory
 
-As with most other shells, the [`mkdir` command](/commands/docs/mkdir.md) is used to create a new directory. However, unlike some other `mkdir` implementations, Nushell's version:
+As with most other shells, the [`mkdir` command](/commands/docs/mkdir.md) is used to create new directories. One subtle difference is that Nushell's internal `mkdir` command operates like the Unix/Linux `mkdir -p` by default, in that it:
 
 - Will create multiple directory levels automatically. For example:
 
@@ -137,15 +137,6 @@ As with most other shells, the [`mkdir` command](/commands/docs/mkdir.md) is use
 
   This will create all three directories even if none of them currently exists. On Linux/Unix, this requires `mkdir -p`.
 
-  ::: tip
-  A common mistake when coming to Nushell is to attempt to use `mkdir -p <directory>` as in the native Linux/Unix version. However, this will generate an `Unknown Flag` error on Nushell.
-
-  Just repeat the command without the `-p` to achieve the same effect.
-
-  ```
-
-  ```
-
 - Will not error if the directory already exists. For example:
 
   ```nu
@@ -154,7 +145,11 @@ As with most other shells, the [`mkdir` command](/commands/docs/mkdir.md) is use
   # => No error
   ```
 
-These features greatly simplify directory creation in scripting.
+  ::: tip
+  A common mistake when coming to Nushell is to attempt to use `mkdir -p <directory>` as in the native Linux/Unix version. However, this will generate an `Unknown Flag` error on Nushell.
+
+  Just repeat the command without the `-p` to achieve the same effect.
+  :::
 
 ## Changing the Current Directory
 
