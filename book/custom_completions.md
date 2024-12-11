@@ -34,6 +34,12 @@ The third line is demonstration of the completion. Type the name of the custom c
 When the completion menu is displayed, the prompt changes to include the `|` character by default. This can be changed using `$env.config.menus.marker`.
 :::
 
+Note that, by default, the list of completions will be presented in alphabetical order, but sometimes it makes more sense to sort the list differently, e.g. commit hashes from `git log` output.
+In this case, to preserve the order of items the completer needs to return a record such as this:
+```nu
+{options: { sort: false }, completions: ["dog", "cat", "eel" ]}
+```
+
 ## Modules and Custom Completions
 
 Since completion commands aren't meant to be called directly, it's common to define them in modules.
