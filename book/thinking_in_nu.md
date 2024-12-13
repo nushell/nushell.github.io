@@ -10,7 +10,9 @@ The most common questions from new users typically fall into one of the followin
 
 ### It can sometimes look like Bash
 
-Nushell is both a programming language and a shell. Because of this, it has its own way of working with files, directories, websites, and more. We've modeled this to work closely with what you may be familiar with other shells. Pipelines work by attaching two commands together, just like in other shells. For example, the following commandline works the same in both Bash and Nushell on Unix/Linux platforms:
+Nushell is both a programming language and a shell. Because of this, it has its own way of working with files, directories, websites, and more. You'll find that some features in Nushell work similar to those you're familiar with in other shells. For instance, pipelines work by combining two (or more) commands together, just like in other shells.
+
+For example, the following commandline works the same in both Bash and Nushell on Unix/Linux platforms:
 
 ```nu
 curl -s https://api.github.com/repos/nushell/nushell/contributors | jq '.[].login'
@@ -20,7 +22,7 @@ curl -s https://api.github.com/repos/nushell/nushell/contributors | jq '.[].logi
 Nushell has many other similarities with Bash (and other shells) and many commands in common.
 
 ::: tip
-While the above commandline works, in Nushell there's no need to use the `curl` and `jq` commands for this, since Nushell has a built-in [`http get` command](/commands/docs/http_get.md) and handles JSON data natively. For example:
+While the above commandline works, in Nushell there's just no need to use the `curl` and `jq` commands for this, since Nushell has a built-in [`http get` command](/commands/docs/http_get.md) and handles JSON data natively. For example:
 
 ```nu
 http get https://api.github.com/repos/nushell/nushell/contributors | select login contributions
@@ -45,7 +47,7 @@ echo $?
 # => 1
 ```
 
-In Nushell, however, the `>` is used as the greater-than operator for comparison. This is more in line with modern programming expectations.
+In Nushell, however, the `>` is used as the greater-than operator for comparisons. This is more in line with modern programming expectations.
 
 ```nu
 4 > 10
@@ -74,21 +76,23 @@ echo "Hello, World"
 # => Hello, World
 ```
 
-But while the other shells are sending the argument straight to _standard output_, Nushell's `echo` is
+But while the other shells are sending `Hello, World` straight to _standard output_, Nushell's `echo` is
 simply _returning a value_. Nushell then _renders_ the return value of a command, or more technically, an _expression_.
 
 More importantly, Nushell _implicitly returns_ the value of an expression. This is similar to PowerShell or Rust in many respects.
 
-And an expression can be more than just a pipeline. Even custom commands (similar to functions in many languages, but we'll cover them more in depth in a [later chapter](./custom_commands.md)) automatically, implicitly _return_ the last value. There's no need for an `echo` or even a [`return` command](/commands/docs/return.md) to return a value - It just _happens_.
+::: tip
+An expression can be more than just a pipeline. Even custom commands (similar to functions in many languages, but we'll cover them more in depth in a [later chapter](./custom_commands.md)) automatically, implicitly _return_ the last value. There's no need for an `echo` or even a [`return` command](/commands/docs/return.md) to return a value - It just _happens_.
+:::
 
-In other words, the string _"Hello, World"_ and the return value from `echo "Hello, World"` are equivalent:
+In other words, the string _"Hello, World"_ and the output value from `echo "Hello, World"` are equivalent:
 
 ```nu
 "Hello, World" == (echo "Hello, World")
 # => true
 ```
 
-An example with a custom command definition:
+Here's another example with a custom command definition:
 
 ```nu
 def latest-file [] {
@@ -96,7 +100,7 @@ def latest-file [] {
 }
 ```
 
-The _result_ of that pipeline (its _"value"_) becomes the _return value_ of the `latest-file` custom command.
+The _output_ of that pipeline (its _"value"_) becomes the _return value_ of the `latest-file` custom command.
 
 ::: warning Thinking in Nushell
 Most anywhere you might write `echo <something>`, in Nushell, you can just write `<something>` instead.
@@ -122,14 +126,16 @@ New users might expect:
 - Line 2 to output _"Returning the last file"_
 - Line 3 to return/output the file
 
-However, remember that `echo` **_returns a value_**. Since only the last value is return, the Line 2 _value_ is discarded. Only the file will be returned.
+However, remember that `echo` **_returns a value_**. Since only the last value is returned, the Line 2 _value_ is discarded. Only the file will be returned by line 3.
 
 To make sure the first line is _displayed_, use the [`print` command](/commands/docs/print.md):
 
+```nu
 def latest-file [] {
 print "Returning last file"
 ls | sort-by modified | last
 }
+```
 
 Also compare:
 
@@ -138,7 +144,7 @@ Also compare:
 ```
 
 ::: tip
-A semicolon is the same as a newline in a Nushell expression. The above is the same as:
+A semicolon is the same as a newline in a Nushell expression. The above is the same as a file or multi-line command:
 
 ```nu
 40
@@ -195,8 +201,8 @@ $p * 6
    result, and is also displayed (rendered).
 
 ::: warning Thinking in Nushell
-Becoming familiar with the return values of common commands will help you understand how
-to combine simple commands to achieve complex results.
+Becoming familiar with the output types of common commands will help you understand how
+to combine simple commands together to achieve complex results.
 
 `help <command>` will show the signature, including the output type(s), for each command in Nushell.
 :::
@@ -208,10 +214,10 @@ In most other shells, code is is only _evaluated_. In Nushell, code is:
 1. Stage 1: Parsed
 2. Stage 2: If the code parsed correctly, the result is then Evaluated
 
-The Nushell Parser is key to many of Nushell's and the REPL features such as:
+The Nushell Parser is key to many features of Nushell and its REPL, such as:
 
 - Accurate and expressive error messages
-- Earlier and robust detection of error conditions
+- Semantic analysis for earlier and robust detection of error conditions
 - IDE integration
 - The type system
 - The module system
@@ -223,9 +229,18 @@ The Nushell Parser is key to many of Nushell's and the REPL features such as:
 - (Future) Formatting
 - (Future) Saving IR (Intermediate Results) "compiled" results for faster execution
 
-It may be useful to think of this parsing stage as _compilation_ in languages like Rust or C++. This means that all of the code that will evaluated in Stage 2 must be _known_ and available during the parsing stage. However, this also means that Nushell cannot currently support an `eval` construct as with many _dynamic_ languages such as Bash or Python.
+It may be useful to think of this parsing stage as _compilation_ in languages like Rust or C++. This means that all of the code that will be evaluated in Stage 2 must be **_known and available_** during the parsing stage. However, this also means that Nushell cannot currently support an `eval` construct as with many _dynamic_ languages such as Bash or Python.
 
-For example, the following cannot run as a single expression (e.g., a script):
+Consider a simple two-line file:
+
+1. Parsing:
+   1. Line 1 is parsed
+   2. Line 2 is parsed
+2. If parsing was successful, then Evaluation:
+   1. Line 1 is evaluated
+   2. Line 1 is evaluated
+
+This helps demonstrate why the following cannot run as a single expression (e.g., a script):
 
 ```nu
 "print Hello" | save output.nu
@@ -244,8 +259,8 @@ source output.nu
 
 This is problematic because:
 
-1. Line 1 gets parsed but not evaluated. In other words, `output.nu` is not created during the parsing stage, but only during evaluation.
-2. Line 2 gets parsed, but `output.nu` is not available. This results in the error.
+1. Line 1 is parsed but not evaluated. In other words, `output.nu` is not created during the parsing stage, but only during evaluation.
+2. Line 2 is parsed. Because `source` is a parser-keyword, resolution of the sourced file is attempted during Parsing (Stage 1). But `output.nu` is not available! This results in the error.
 
 ::: note
 Typing these as two _separate_ lines in the **_REPL_** will work since the first line will be parsed and evaluated, then the second line will be parsed and evaluated.
@@ -253,7 +268,7 @@ Typing these as two _separate_ lines in the **_REPL_** will work since the first
 The limitation only occurs when both are parsed _together_ as a single expression, which could be part of a script, block, closure, or other expression.
 :::
 
-Another common scenario when coming from another shell might be trying to dynamically create a filename that will be sourced:
+Another common scenario when coming from another shell might be attempting to dynamically create a filename that will be sourced:
 
 ```nu
 let my_path = "~/nushell-files"
@@ -284,14 +299,14 @@ As noted in the error message, however, this can work if `my_path` can be define
 resolved during parsing.
 
 ```nu
-> const my_path = ([$nu.home-path nushell] | path join)
-> source $"($my_path)/common.nu" # sources /home/user/nushell/common.nu
+const my_path = ([$nu.home-path nushell] | path join)
+source $"($my_path)/common.nu" # sources /home/user/nushell/common.nu
 ```
 
 ::: tip
-The output of many Nushell commands can be a constant value if all of the command's inputs are also constant.
+The output of many Nushell commands can be a constant value, as long as all of the command's inputs are also constant.
 
-You can see which Nushell commands operate this way using:
+You can see which Nushell commands can return constant results using:
 
 ```nu
 help commands | where is_const
@@ -309,20 +324,21 @@ Nushell is designed to use a single Parsing stage for each expression or file. T
 
 ## Variables are Immutable by Default
 
-Another common surprise for folks coming from other languages is that Nushell variables are immutable by default. Coming to Nushell, you'll want to spend some time becoming familiar with working in a more functional style, as this tends to help write code that works best with immutable variables.
+Another common surprise when coming from other languages is that Nushell variables are immutable by default. Coming to Nushell, you'll want to spend some time becoming familiar with working in a more functional style, as this tends to help write code that works best with immutable variables.
 
 Immutable variables are also key to Nushell's [`par-each` command](/commands/docs/par-each.md), which allows you to operate on multiple values in parallel using threads.
 
 See [Immutable Variables](variables.html#immutable-variables) and [Choosing between mutable and immutable variables](variables.html#choosing-between-mutable-and-immutable-variables) for more information.
 
-**Thinking in Nushell:** If you're used to relying on mutable variables, it may take some time to relearn how to code in a more functional style. Nushell has many functional features and commands that operate on and with immutable variables. Learning them will help you write code in a more Nushell-idiomatic style.
+::: warning Thinking in Nushell
+If you're used to relying on mutable variables, it may take some time to relearn how to code in a more functional style. Nushell has many functional features and commands that operate on and with immutable variables. Learning them will help you write code in a more Nushell-idiomatic style.
 
 A nice bonus is the performance increase you can realize by running parts of your code in parallel.
 :::
 
 ## Nushell's Environment is Scoped
 
-Nushell takes multiple design cues from compiled languages. One such cue is that languages should avoid global mutable state. Shells have commonly used global mutation to update the environment, but Nushell steers clear of this approach.
+Nushell takes multiple design cues from compiled languages. One such cue is that languages should avoid global mutable state. Shells have commonly used global mutation to update the environment, but Nushell attempts to steer clear of this approach.
 
 In Nushell, blocks control their own environment. Changes to the environment are scoped to the block where they occur.
 
@@ -343,6 +359,6 @@ Having a scoped environment makes commands more predictable, easier to read, and
 [`def --env`](/commands/docs/def.md) is an exception to this rule. It allows you to create a command that changes the parent's environment.
 :::
 
-::: note Thinking in Nushell
+::: warning Thinking in Nushell
 Use scoped-environment to write more concise scripts and prevent unnecessary or unwanted global environment mutation.
 :::
