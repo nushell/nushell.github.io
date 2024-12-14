@@ -209,10 +209,10 @@ to combine simple commands together to achieve complex results.
 
 ## Think of Nushell as a Compiled Language
 
-In most other shells, code is is only _evaluated_. In Nushell, code is:
+In Nushell, there are exactly two, high-level stages when running code:
 
-1. Stage 1: Parsed
-2. Stage 2: If the code parsed correctly, the result is then Evaluated
+1. _Stage 1 (Parser):_ Parse the entire source code
+2. _Stage 2 (Engine):_ Evaluate the entire source code
 
 The Nushell Parser is key to many features of Nushell and its REPL, such as:
 
@@ -227,11 +227,22 @@ The Nushell Parser is key to many features of Nushell and its REPL, such as:
 - Real-time error highlighting
 - Profiling and debugging commands
 - (Future) Formatting
-- (Future) Saving IR (Intermediate Results) "compiled" results for faster execution
+- (Future) Saving IR (Intermediate Representation) "compiled" results for faster execution
 
-It may be useful to think of this parsing stage as _compilation_ in languages like Rust or C++. This means that all of the code that will be evaluated in Stage 2 must be **_known and available_** during the parsing stage. However, this also means that Nushell cannot currently support an `eval` construct as with many _dynamic_ languages such as Bash or Python.
+It can be useful to think of Nushell's parsing stage as _compilation_ in [static](./how_nushell_code_gets_run.md#dynamic-vs-static-languages) languages like Rust or C++. By this, we mean that all of the code that will be evaluated in Stage 2 must be **_known and available_** during the parsing stage.
+
+::: important
+However, this also means that Nushell cannot currently support an `eval` construct as with _dynamic_ languages such as Bash or Python.
+:::
+
+This often leads to confusion for users coming to Nushell from languages where an `eval` is available.
 
 Consider a simple two-line file:
+
+```text
+<line1 code>
+<line2 code>
+```
 
 1. Parsing:
    1. Line 1 is parsed
@@ -240,7 +251,16 @@ Consider a simple two-line file:
    1. Line 1 is evaluated
    2. Line 1 is evaluated
 
-This helps demonstrate why the following cannot run as a single expression (e.g., a script):
+This helps demonstrate why the following examples cannot run as a single expression (e.g., a script) in Nushell:
+
+::: note
+The following examples use the [`source` command](/commands/docs/source.md), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md) or [`source-env`](/commands/docs/source-env.md).
+
+:::
+
+### Example: Dynamically Generating Source
+
+Consider this scenario:
 
 ```nu
 "print Hello" | save output.nu
@@ -260,13 +280,17 @@ source output.nu
 This is problematic because:
 
 1. Line 1 is parsed but not evaluated. In other words, `output.nu` is not created during the parsing stage, but only during evaluation.
-2. Line 2 is parsed. Because `source` is a parser-keyword, resolution of the sourced file is attempted during Parsing (Stage 1). But `output.nu` is not available! This results in the error.
+2. Line 2 is parsed. Because `source` is a parser-keyword, resolution of the sourced file is attempted during Parsing (Stage 1). But `output.nu` doesn't even exist yet! If it _does_ exist, then it's probably not even the correct file! This results in the error.
 
 ::: note
 Typing these as two _separate_ lines in the **_REPL_** will work since the first line will be parsed and evaluated, then the second line will be parsed and evaluated.
 
 The limitation only occurs when both are parsed _together_ as a single expression, which could be part of a script, block, closure, or other expression.
+
+See the [REPL](./how_nushell_code_gets_run.md#the-nushell-repl) section in _"How Nushell Code Gets Run"_ for more explanation.
 :::
+
+### Example: Dynamically Creating a Filename to be Sourced
 
 Another common scenario when coming from another shell might be attempting to dynamically create a filename that will be sourced:
 
@@ -295,27 +319,67 @@ source $"($my_path)/common.nu"
 
 Because the `let` assignment is not resolved until evaluation, the parser-keyword `source` will fail during parsing if passed a variable.
 
-As noted in the error message, however, this can work if `my_path` can be defined as a [constant](/book/variables#constant-variables) since constants can be (and are)
-resolved during parsing.
+::: details Comparing Rust and C++
+Imagine that the code above was written in a typical compiled language such as C++:
 
-```nu
-const my_path = ([$nu.home-path nushell] | path join)
-source $"($my_path)/common.nu" # sources /home/user/nushell/common.nu
+```cpp
+#include <string>
+
+std::string my_path("foo");
+#include <my_path + "/common.h">
 ```
 
-::: tip
-The output of many Nushell commands can be a constant value, as long as all of the command's inputs are also constant.
+or Rust
 
-You can see which Nushell commands can return constant results using:
+```rust
+let my_path = "foo";
+use format!("{}::common", my_path);
+```
+
+If you've ever written a simple program in any of these languages, you can see these examples aren't valid in those languages. Like Nushell, compiled languages require that all of the source code files are ready and available to the compiler beforehand.
+
+:::
+
+::: tip See Also
+As noted in the error message, however, this can work if `my_path` can be defined as a [constant](/book/variables#constant-variables) since constants can be (and are) resolved during parsing.
 
 ```nu
-help commands | where is_const
+const my_path = "~/nushell-files"
+source $"($my_path)/common.nu"
+```
+
+See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-constant-evaluation) for more details.
+:::
+
+### Example: Change to a different directory (`cd`) and `source` a file
+
+Here's one more — Change to a different directory and then attempt to `source` a file in that directory.
+
+```nu:line-numbers
+if ('spam/foo.nu' | path exists) {
+    cd spam
+    source-env foo.nu
+}
+```
+
+Based on what we've covered about Nushell's Parse/Eval stages, see if you can spot the problem with that example.
+
+::: details Solution
+
+In line 3, during Parsing, the `source-env` attempts to parse `foo.nu`. However, `cd` doesn't occur until Evaluation. This results in a parse-time error, since the file is not found in the _current_ directory.
+
+To resolve this, of course, simply use the full-path to the file to be sourced.
+
+```nu
+    source-env spam/foo.nu
 ```
 
 :::
 
+### Summary
+
 ::: important
-For more in-depth explanation of this section, see [How Nushell Code Gets Run](how_nushell_code_gets_run.md).
+For a more in-depth explanation of this section, see [How Nushell Code Gets Run](how_nushell_code_gets_run.md).
 :::
 
 ::: warning Thinking in Nushell
@@ -333,7 +397,7 @@ See [Immutable Variables](variables.html#immutable-variables) and [Choosing betw
 ::: warning Thinking in Nushell
 If you're used to relying on mutable variables, it may take some time to relearn how to code in a more functional style. Nushell has many functional features and commands that operate on and with immutable variables. Learning them will help you write code in a more Nushell-idiomatic style.
 
-A nice bonus is the performance increase you can realize by running parts of your code in parallel.
+A nice bonus is the performance increase you can realize by running parts of your code in parallel with `par-each`.
 :::
 
 ## Nushell's Environment is Scoped
@@ -342,7 +406,7 @@ Nushell takes multiple design cues from compiled languages. One such cue is that
 
 In Nushell, blocks control their own environment. Changes to the environment are scoped to the block where they occur.
 
-In practice, this lets you write (for example) more concise code for working with subdirectories. Here's an example that builds each sub-project in the current directory:
+In practice, this lets you write (as just one example) more concise code for working with subdirectories. Here's an example that builds each sub-project in the current directory:
 
 ```nu
 ls | each { |row|
@@ -354,6 +418,10 @@ ls | each { |row|
 The [`cd`](/commands/docs/cd.md) command changes the `PWD` environment variables, but this variable change does not survive past the end of the block. This allows each iteration to start from the current directory and then enter the next subdirectory.
 
 Having a scoped environment makes commands more predictable, easier to read, and when the time comes, easier to debug. Nushell also provides helper commands like [`load-env`](/commands/docs/load-env.md) as a convenient way of loading multiple updates to the environment at once.
+
+::: tip See Also
+[Environment - Scoping](./environment.md#scoping)
+:::
 
 ::: note
 [`def --env`](/commands/docs/def.md) is an exception to this rule. It allows you to create a command that changes the parent's environment.
