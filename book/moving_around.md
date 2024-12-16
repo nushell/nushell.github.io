@@ -174,7 +174,7 @@ You can also add additional dots to go up additional directory levels:
 cd ..
 # or
 ..
-Go up two levels (parent's parent)
+# Go up two levels (parent's parent)
 cd ...
 # or
 ...
