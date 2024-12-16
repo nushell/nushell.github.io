@@ -22,7 +22,9 @@ curl -s https://api.github.com/repos/nushell/nushell/contributors | jq '.[].logi
 Nushell has many other similarities with Bash (and other shells) and many commands in common.
 
 ::: tip
-While the above commandline works, in Nushell there's just no need to use the `curl` and `jq` commands for this, since Nushell has a built-in [`http get` command](/commands/docs/http_get.md) and handles JSON data natively. For example:
+Bash is primarily a command interpreter which runs external commands. Nushell provides many of these as cross-platform, built-in commands.
+
+While the above commandline works in both shells, in Nushell there's just no need to use the `curl` and `jq` commands. Instead, Nushell has a built-in [`http get` command](/commands/docs/http_get.md) and handles JSON data natively. For example:
 
 ```nu
 http get https://api.github.com/repos/nushell/nushell/contributors | select login contributions
@@ -209,12 +211,20 @@ to combine simple commands together to achieve complex results.
 
 ## Think of Nushell as a Compiled Language
 
-In Nushell, there are exactly two, high-level stages when running code:
+In Nushell, there are exactly two, separate, high-level stages when running code:
 
-1. _Stage 1 (Parser):_ Parse the entire source code
-2. _Stage 2 (Engine):_ Evaluate the entire source code
+1. _Stage 1 (Parser):_ Parse the **_entire_** source code
+2. _Stage 2 (Engine):_ Evaluate the **_entire_** source code
 
-The Nushell Parser is key to many features of Nushell and its REPL, such as:
+It can be useful to think of Nushell's parsing stage as _compilation_ in [static](./how_nushell_code_gets_run.md#dynamic-vs-static-languages) languages like Rust or C++. By this, we mean that all of the code that will be evaluated in Stage 2 must be **_known and available_** during the parsing stage.
+
+::: important
+However, this also means that Nushell cannot currently support an `eval` construct as with _dynamic_ languages such as Bash or Python.
+:::
+
+### Features Built on Static Parsing
+
+On the other hand, the **_static_** results of Parsing are key to many features of Nushell its REPL, such as:
 
 - Accurate and expressive error messages
 - Semantic analysis for earlier and robust detection of error conditions
@@ -229,13 +239,9 @@ The Nushell Parser is key to many features of Nushell and its REPL, such as:
 - (Future) Formatting
 - (Future) Saving IR (Intermediate Representation) "compiled" results for faster execution
 
-It can be useful to think of Nushell's parsing stage as _compilation_ in [static](./how_nushell_code_gets_run.md#dynamic-vs-static-languages) languages like Rust or C++. By this, we mean that all of the code that will be evaluated in Stage 2 must be **_known and available_** during the parsing stage.
+### Limitations
 
-::: important
-However, this also means that Nushell cannot currently support an `eval` construct as with _dynamic_ languages such as Bash or Python.
-:::
-
-This often leads to confusion for users coming to Nushell from languages where an `eval` is available.
+The static nature of Nushell often leads to confusion for users coming to Nushell from languages where an `eval` is available.
 
 Consider a simple two-line file:
 
@@ -258,7 +264,7 @@ The following examples use the [`source` command](/commands/docs/source.md), but
 
 :::
 
-### Example: Dynamically Generating Source
+#### Example: Dynamically Generating Source
 
 Consider this scenario:
 
@@ -290,7 +296,7 @@ The limitation only occurs when both are parsed _together_ as a single expressio
 See the [REPL](./how_nushell_code_gets_run.md#the-nushell-repl) section in _"How Nushell Code Gets Run"_ for more explanation.
 :::
 
-### Example: Dynamically Creating a Filename to be Sourced
+#### Example: Dynamically Creating a Filename to be Sourced
 
 Another common scenario when coming from another shell might be attempting to dynamically create a filename that will be sourced:
 
@@ -351,7 +357,7 @@ source $"($my_path)/common.nu"
 See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-constant-evaluation) for more details.
 :::
 
-### Example: Change to a different directory (`cd`) and `source` a file
+#### Example: Change to a different directory (`cd`) and `source` a file
 
 Here's one more — Change to a different directory and then attempt to `source` a file in that directory.
 
@@ -388,7 +394,7 @@ Nushell is designed to use a single Parsing stage for each expression or file. T
 
 ## Variables are Immutable by Default
 
-Another common surprise when coming from other languages is that Nushell variables are immutable by default. Coming to Nushell, you'll want to spend some time becoming familiar with working in a more functional style, as this tends to help write code that works best with immutable variables.
+Another common surprise when coming from other languages is that Nushell variables are immutable by default. While Nushell has optional mutable variables, many of Nushell's commands are based on a functional-style of programming which requires immutability.
 
 Immutable variables are also key to Nushell's [`par-each` command](/commands/docs/par-each.md), which allows you to operate on multiple values in parallel using threads.
 
@@ -417,7 +423,9 @@ ls | each { |row|
 
 The [`cd`](/commands/docs/cd.md) command changes the `PWD` environment variables, but this variable change does not survive past the end of the block. This allows each iteration to start from the current directory and then enter the next subdirectory.
 
-Having a scoped environment makes commands more predictable, easier to read, and when the time comes, easier to debug. Nushell also provides helper commands like [`load-env`](/commands/docs/load-env.md) as a convenient way of loading multiple updates to the environment at once.
+Having a scoped environment makes commands more predictable, easier to read, and when the time comes, easier to debug. It's also another feature that is key to the `par-each` command we discussed above.
+
+Nushell also provides helper commands like [`load-env`](/commands/docs/load-env.md) as a convenient way of loading multiple updates to the environment at once.
 
 ::: tip See Also
 [Environment - Scoping](./environment.md#scoping)

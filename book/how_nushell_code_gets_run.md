@@ -347,7 +347,7 @@ Compiled ("static") languages also tend to have a way to convey some logic at co
 
 - C's preprocessor
 - Rust macros
-- [Zig's comptime](https://kristoff.it/blog/what-is-zig-comptime)
+- [Zig's comptime](https://kristoff.it/blog/what-is-zig-comptime), which was an inspiration for Nushell's parse-time constant evaluation.
 
 There are two reasons for this:
 
