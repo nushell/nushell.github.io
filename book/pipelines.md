@@ -470,13 +470,13 @@ In fact, running this in the shell will only display `"What?!"` because that is 
 Knowing when data is displayed is important when using configuration variables that affect the display output of commands such as `table`.
 
 ```nu
-> do { $env.config.table.mode = none; ls }
+> do { $env.config.table.mode = "none"; ls }
 ```
 
 For instance, the above example sets the `$env.config.table.mode` configuration variable to `none`, which causes the `table` command to render data without additional borders. However, as it was shown earlier, the command is effectively equivalent to
 
 ```nu
-> do { $env.config.table.mode = none; ls } | table
+> do { $env.config.table.mode = "none"; ls } | table
 ```
 
 Because Nushell `$env` variables are [scoped](https://www.nushell.sh/book/environment.html#scoping), this means that the `table` command in the example is not affected by the
@@ -485,6 +485,6 @@ environment modification inside the `do` block and the data will not be shown wi
 When displaying data early is desired, it is possible to explicitly apply `| table` inside the scope, or use the `print` command.
 
 ```nu
-> do { $env.config.table.mode = none; ls | table }
-> do { $env.config.table.mode = none; print (ls) }
+> do { $env.config.table.mode = "none"; ls | table }
+> do { $env.config.table.mode = "none"; print (ls) }
 ```
