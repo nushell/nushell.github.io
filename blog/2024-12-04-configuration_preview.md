@@ -126,8 +126,7 @@ $env.config.history = {
 - The commented, sample `default_env.nu` and `default_config.nu` in older releases was useful for learning about configuration options. Since these (long) files are no longer copied to the filesystem, you can access an enhanced version of this documentation using:
 
   ```nu
-  config env --sample | nu-highlight | less -R
-  config nu --sample | nu-highlight | less -R
+  config nu --doc | nu-highlight | less -R
   ```
 
 - Skeleton config files (`env.nu` and `config.nu`) are automatically created when the default config directory is created. Usually this will be the first time Nushell is started. The user will no longer be asked whether or not to create the files.
@@ -135,8 +134,6 @@ $env.config.history = {
 - These files that are created have no configuration in them; just comments. This is because, "out-of-the-box", no values are overridden in the user config files.
 
 - An internal `default_env.nu` is loaded immediately before the user's `env.nu`. You can inspect its contents using `config env --default | nu-highlight | less -R`.
-
-  This means that, as with `config.nu`, you can also use your `env.nu` to just override the default environment variables if desired.
 
 - Likewise, a `default_config.nu` is loaded immediately before the user's `config.nu`. View
   this file using `config nu --default | nu-highlight | less -R`.
