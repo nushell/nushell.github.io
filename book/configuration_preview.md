@@ -24,8 +24,7 @@ can get started with just a few simple steps:
    You can find a detailed list of available settings using:
 
    ```nu
-    config nu --sample | nu-highlight | less -R
-    config env --sample | nu-highlight | less -R
+    config nu --doc | nu-highlight | less -R
    ```
 
 4. Save, exit the editor, and start a new Nushell session to load these settings.
@@ -40,8 +39,7 @@ That's it! More details are below when you need them ...
 To view a simplified version of this documentation from inside Nushell, run:
 
 ```nu
-config env --sample | nu-highlight | less -R
-config nu --sample | nu-highlight | less -R
+config env --doc | nu-highlight | less -R
 ```
 
 :::
@@ -50,7 +48,8 @@ config nu --sample | nu-highlight | less -R
 
 Nushell uses multiple, optional configuration files. These files are loaded in the following order:
 
-1. `env.nu` is typically used to define or override environment variables.
+1. The first file loaded is `env.nu`, which was historically used to override environment variables. However, the current "best-practice" recommendation is to set all environment variables (and other configuration) using `config.nu` and the autoload directories below.
+
 2. `config.nu` is typically used to override default Nushell settings, define (or import) custom commands, or run any other startup tasks.
 3. Files in `$nu.vendor-autoload-dirs` are loaded. These files can be used for any purpose and are a convenient way to modularize a configuration.
 4. `login.nu` runs commands or handles configuration that should only take place when Nushell is running as a login shell.
@@ -85,7 +84,22 @@ $env.config.buffer_editor = 'code'
 
 :::
 
-## Common Configuration Tasks in `env.nu`:
+## Common Configuration Tasks in `config.nu`:
+
+::: tip
+Some users will prefer a "monolithic" configuration file with most or all startup tasks in one place. `config.nu` can be used for this purpose.
+
+Other users may prefer a "modular" configuration where each file handles a smaller, more focused set of tasks. Files in the autoload dirs can be used to create this experience.
+:::
+
+`config.nu` is commonly used to:
+
+- Set [environment variables](#set-environment-variables) for Nushell and other applications
+- Set Nushell settings in [`$env.config`](#nushell-settings-in-the-envconfig-record)
+- Load modules or source files so that their commands are readily available
+- Run any other applications or commands at startup
+
+## Set Environment Variables
 
 ::: tip See Also
 The [Environment](./environment.md) Chapter covers additional information on how to set and access environment variables.
@@ -129,8 +143,7 @@ Nushell provides a number of prompt configuration options. By default, Nushell i
 
 - A prompt which includes the current directory, abbreviated using `~` if it is (or is under)
   the home directory.
-- A prompt indicator which appears immediately to the right of the prompt. This defaults to `> ` when in normal editing mode, or a `: ` when in Vi-insert mode. Note
-  extra space after the character to provide separation of the command from the prompt.
+- A prompt indicator which appears immediately to the right of the prompt. This defaults to `> ` when in normal editing mode, or a `: ` when in Vi-insert mode. Note extra space after the character to provide separation of the command from the prompt.
 - A right-prompt with the date and time
 - An indicator which is displayed when the current commandline extends over multiple lines - `::: ` by default
 
@@ -178,6 +191,18 @@ The environment variables which control the transient prompt components are:
 - `$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT`: Vi-insert mode indicator
 - `$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR`: The multi-line indicator
 
+::: tip
+Nushell sets `TRANSIENT_PROMPT_COMMAND_RIGHT` and `TRANSIENT_PROMPT_MULTILINE_INDICATOR` to an empty string (`""`) so that each disappears after the previous command is entered. This simplifies copying and pasting from the terminal.
+
+To disable this feature and always show those items, set:
+
+```nu
+$env.TRANSIENT_PROMPT_COMMAND_RIGHT = null
+$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = null
+```
+
+:::
+
 ### ENV_CONVERSIONS
 
 Certain variables, such as those containing multiple paths, are often stored as a
@@ -200,20 +225,7 @@ variables are:
   ```
 
 ::: tip
-The OS Path variable is automatically converted before `env.nu` loads. As a result, it can be treated as a list within `env.nu`. This conversion is handled via an initial, pre-defined `$env.ENV_CONVERSIONS` of:
-
-```nu
-$env.ENV_CONVERSIONS = {
-  "Path": {
-    from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
-    to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
-  }
-}
-
-```
-
-Note that environment variables are not case-sensitive in Nushell, so the above will work
-for both Windows and Unix-like platforms.
+As mentioned above, the OS Path variable is automatically converted by Nushell. As a result, it can be treated as a list within `env.nu` without needing to be present in `ENV_CONVERSIONS`. Other colon-separated paths, like `XDG_DATA_DIRS`, are not automatically converted.
 :::
 
 To add an additional conversion, [`merge`](/commands/docs/merge.md) it into the `$env.ENV_CONVERSIONS` record. For example, to add a conversion for the `XDG_DATA_DIRS` variable:
@@ -221,8 +233,8 @@ To add an additional conversion, [`merge`](/commands/docs/merge.md) it into the 
 ```nu
 $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
     "XDG_DATA_DIRS": {
-        from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
-        to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
+        from_string: {|s| $s | split row (char esep) | path expand --no-symlink }
+        to_string: {|v| $v | path expand --no-symlink | str join (char esep) }
     }
 }
 ```
@@ -231,31 +243,7 @@ $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
 
 As with many `ls`-like utilities, Nushell's directory listings make use of the `LS_COLORS` environment variable for defining styles/colors to apply to certain file types and patterns.
 
-### Additional `$env.nu` Notes
-
-While `env.nu` is typically used for environment variable configuration, this is purely by convention. Environment variables can be set in _any_
-of the available configuration files. Likewise, `env.nu` can be used for any purpose, if desired.
-
-There are several configuration tasks where `env.nu` has advantages:
-
-1. As mentioned above, `$env.ENV_CONVERSIONS` can be defined in `env.nu` to translate certain environment variables to (and from) Nushell structured data types. In order to treat these variables as structured-data in `config.nu`, then conversion needs to be defined in `env.nu`.
-
-2. Modules or source files that are written or modified during `env.nu` can be imported or evaluated during `config.nu`. This is a fairly advanced, uncommon
-   technique.
-
-## Common Configuration Tasks in `config.nu`
-
-The primary purpose of `config.nu` is to:
-
-- Override default Nushell settings in the `$env.config` record
-- Define or import custom commands
-- Run other startup tasks
-
-::: tip
-Some users will prefer a "monolithic" configuration file with most or all startup tasks in one place. `config.nu` can be used for this purpose.
-
-Other users may prefer a "modular" configuration where each file handles a smaller, more focused set of tasks. Files in the autoload dirs can be used to create this experience.
-:::
+## Nushell Settings in the `$env.config` Record
 
 ### Changing Settings in the `$env.config` Record
 
@@ -281,13 +269,12 @@ $env.config | table -e | bat -p
 
 :::
 
-An appendix documenting each setting will be available soon. In the meantime, abbreviated documentation on each setting can be
-viewed in Nushell using:
+An appendix documenting each setting will be available soon. In the meantime, abbreviated documentation on each setting can be viewed in Nushell using:
 
 ```nu
-config nu --sample | nu-highlight | bat
+config nu --doc | nu-highlight | bat
 # or
-config nu --sample | nu-highlight | less -R
+config nu --doc | nu-highlight | less -R
 ```
 
 To avoid overwriting existing settings, it's best to simply assign updated values to the desired configuration keys, rather than the entire `config` record. In other words:
@@ -446,7 +433,7 @@ rm $temp_home
 
 ### Using Constants
 
-Some important commands, like `source` and `use`, that help define custom commands (and other definitions) are parse-time keywords. Along other things, this means means that all arguments must be known at parse-time.
+Some important commands, like `source` and `use`, that help define custom commands (and other definitions) are parse-time keywords. Among other things, this means means that all arguments must be known at parse-time.
 
 In other words, **_variable arguments are not allowed for parser keywords_**.
 
@@ -458,7 +445,15 @@ source ($nu.default-config-dir | path join "myfile.nu")
 
 Because the constant value is known at parse-time, it can be used with parse-time keywords like `source` and `use`.
 
+:::tip See Also
+See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-constant-evaluation) for more details on this parse.
+:::
+
+#### `$nu` Constant
+
 To see a list of the built-in Nushell constants, examine the record constant using `$nu` (including the dollar sign).
+
+#### `NU_LIB_DIRS` Constant
 
 Nushell can also make use of a `NU_LIB_DIRS` _constant_ which can act like the `$env.NU_LIB_DIRS` variable mentioned above. However, unlike `$env.NU_LIB_DIRS`, it can be defined _and_ used in `config.nu`. For example:
 
@@ -475,6 +470,24 @@ If both the variable `$env.NU_LIB_DIRS` and the const `NU_LIB_DIRS` are defined,
 of paths will be searched. The constant `NU_LIB_DIRS` will be searched _first_ and have
 precedence. If a file matching the name is found in one of those directories, the search will
 stop. Otherwise, it will continue into the `$env.NU_LIB_DIRS` search path.
+
+#### `NU_PLUGIN_DIRS` Constant
+
+`const NU_PLUGIN_DIRS` works in the same way for the plugin search path.
+
+The following `NU_PLUGIN_DIRS` configuration will allow plugins to be loaded from;
+
+- The directory where the `nu` executable is located. This is typically where plugins are located in release packages.
+- A directory in `$nu.data-dirs` named after the version of Nushell running (e.g. `0.100.0`).
+- A `plugins` directory in your `$nu.config-path`.
+
+```nu
+const NU_PLUGIN_DIRS = [
+  ($nu.current-exe | path dirname)
+  ($nu.data-dir | path join 'plugins' | path join (version).version)
+  ($nu.config-path | path dirname | path join 'plugins')
+]
+```
 
 ### Colors, Theming, and Syntax Highlighting
 
