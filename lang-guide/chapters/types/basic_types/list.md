@@ -65,7 +65,6 @@ there are too many commands to list here. Here are a few:
 - `all`
 - `get`
 - `select`
-- `get`
 - `each`, `par-each`, `filter`, `reduce`
 - `skip`, `skip until`, `skip while`, `take`, `take until`, `take while`
 - `first`, `last`, `length`

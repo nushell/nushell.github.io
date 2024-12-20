@@ -28,7 +28,7 @@ def my-command [x] {
         msg: "this is fishy",
         label: {
             text: "fish right here",
-            span: (metadata $x).span
+            span: $span
         }
     }
 }

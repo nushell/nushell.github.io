@@ -899,7 +899,7 @@ $env.FOO
 # => After
 ```
 
-### Changing Directories in a Custom Command
+### Changing Directories (cd) in a Custom Command
 
 Likewise, changing the directory using the `cd` command results in a change of the `$env.PWD` environment variable. This means that directory changes (the `$env.PWD` variable) will also be reset when a custom command ends. The solution, as above, is to use `def --env` or `export def --env`.
 
