@@ -459,7 +459,7 @@ source ($nu.default-config-dir | path join "myfile.nu")
 Because the constant value is known at parse-time, it can be used with parse-time keywords like `source` and `use`.
 
 :::tip See Also
-See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-constant-evaluation) for more details on this parse.
+See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-constant-evaluation) for more details on this process.
 :::
 
 #### `$nu` Constant
