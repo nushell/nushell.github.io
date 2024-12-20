@@ -11,6 +11,19 @@ can get started with just a few simple steps:
    $env.config.buffer_editor = <path_to_your_preferred_editor>
    ```
 
+   For example:
+
+   ```nu
+   $env.config.buffer_editor = "code"
+   # or
+   $env.config.buffer_editor = "nano"
+   # or
+   $env.config.buffer_editor = "hx"
+   # or
+   $env.config.buffer_editor = "vi"
+   # etc.
+   ```
+
 2. Edit `config.nu` using:
 
    ```nu
