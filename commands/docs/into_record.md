@@ -92,3 +92,9 @@ convert date to record
 │ timezone    │ +02:00 │
 ╰─────────────┴────────╯
 ```
+
+convert date components to table columns
+```nu
+> 2020-04-12T22:10:57+02:00 | into record | transpose | transpose -r
+
+```

@@ -50,6 +50,22 @@ Convert comma-separated data to a table
 
 ```
 
+Convert comma-separated data to a table, allowing variable number of columns per row
+```nu
+> "ColA,ColB
+1,2
+3,4,5
+6" | from csv --flexible
+╭───┬──────┬──────┬─────────╮
+│ # │ ColA │ ColB │ column2 │
+├───┼──────┼──────┼─────────┤
+│ 0 │    1 │    2 │   ❎    │
+│ 1 │    3 │    4 │       5 │
+│ 2 │    6 │  ❎  │   ❎    │
+╰───┴──────┴──────┴─────────╯
+
+```
+
 Convert comma-separated data to a table, ignoring headers
 ```nu
 > open data.txt | from csv --noheaders

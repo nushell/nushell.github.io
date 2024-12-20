@@ -34,7 +34,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Examples
 
-Get the groiup index of the group by operations.
+Get the group index of the group by operations.
 ```nu
 > [[group value]; [one 94] [one 95] [one 96] [two 97] [two 98] [two 99]]
                 | polars into-df

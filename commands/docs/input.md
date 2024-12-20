@@ -22,6 +22,7 @@ usage: |
 
  -  `--bytes-until-any, -u {string}`: read bytes (not text) until any of the given stop bytes is seen
  -  `--numchar, -n {int}`: number of characters to read; suppresses output
+ -  `--default, -d {string}`: default value if no input is provided
  -  `--suppress-output, -s`: don't print keystroke values
 
 ## Parameters
@@ -46,6 +47,12 @@ Get input from the user, and assign to a variable
 Get two characters from the user, and assign to a variable
 ```nu
 > let user_input = (input --numchar 2)
+
+```
+
+Get input from the user with default value, and assign to a variable
+```nu
+> let user_input = (input --default 10)
 
 ```
 

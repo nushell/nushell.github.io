@@ -28,7 +28,7 @@ usage: |
 
 | input   | output    |
 | ------- | --------- |
-| nothing | list\<any\> |
+| nothing | list\<int\> |
 
 ## Examples
 

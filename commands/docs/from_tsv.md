@@ -49,6 +49,19 @@ Convert tab-separated data to a table
 
 ```
 
+Convert comma-separated data to a table, allowing variable number of columns per row and ignoring headers
+```nu
+> "value 1
+value 2	description 2" | from tsv --flexible --noheaders
+╭───┬─────────┬───────────────╮
+│ # │ column0 │    column1    │
+├───┼─────────┼───────────────┤
+│ 0 │ value 1 │      ❎       │
+│ 1 │ value 2 │ description 2 │
+╰───┴─────────┴───────────────╯
+
+```
+
 Create a tsv file with header columns and open it
 ```nu
 > $'c1(char tab)c2(char tab)c3(char nl)1(char tab)2(char tab)3' | save tsv-data | open tsv-data | from tsv

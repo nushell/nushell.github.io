@@ -45,7 +45,7 @@ sequence a to e
 
 ```
 
-sequence a to e, and put the characters in a pipe-separated string
+Sequence a to e, and join the characters with a pipe
 ```nu
 > seq char a e | str join '|'
 

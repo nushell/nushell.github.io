@@ -20,7 +20,8 @@ usage: |
 
 ## Flags
 
- -  `--default, -d`: Print default `config.nu` file instead.
+ -  `--default, -d`: Print the internal default `config.nu` file instead.
+ -  `--doc, -s`: Print a commented `config.nu` with documentation instead.
 
 
 ## Input/output types:
@@ -31,20 +32,20 @@ usage: |
 
 ## Examples
 
-allow user to open and update nu config
+open user's config.nu in the default editor
 ```nu
 > config nu
 
 ```
 
-allow user to print default `config.nu` file
+pretty-print a commented `config.nu` that explains common settings
 ```nu
-> config nu --default,
+> config nu --doc | nu-highlight
 
 ```
 
-allow saving the default `config.nu` locally
+pretty-print the internal `config.nu` file which is loaded before user's config
 ```nu
-> config nu --default | save -f ~/.config/nushell/default_config.nu
+> config nu --default | nu-highlight
 
 ```

@@ -18,6 +18,10 @@ usage: |
 
 ```> sys cpu {flags} ```
 
+## Flags
+
+ -  `--long, -l`: Get all available columns (slower, needs to sample CPU over time)
+
 
 ## Input/output types:
 

@@ -58,18 +58,6 @@ Run the closure and ignore both shell and external program errors
 
 ```
 
-Run the closure and ignore shell errors
-```nu
-> do --ignore-shell-errors { thisisnotarealcommand }
-
-```
-
-Run the closure and ignore external program errors
-```nu
-> do --ignore-program-errors { nu --commands 'exit 1' }; echo "I'll still run"
-
-```
-
 Abort the pipeline if a program returns a non-zero exit code
 ```nu
 > do --capture-errors { nu --commands 'exit 1' } | myscarycommand

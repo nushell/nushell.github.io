@@ -50,8 +50,8 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 Join two lazy dataframes
 ```nu
-> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | polars into-lazy);
-    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | polars into-lazy);
+> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | polars into-lazy)
+    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | polars into-lazy)
     $df_a | polars join $df_b a foo | polars collect
 ╭───┬───┬───┬───┬─────┬─────╮
 │ # │ a │ b │ c │ bar │ ham │
@@ -66,8 +66,8 @@ Join two lazy dataframes
 
 Join one eager dataframe with a lazy dataframe
 ```nu
-> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | polars into-df);
-    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | polars into-lazy);
+> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | polars into-df)
+    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | polars into-lazy)
     $df_a | polars join $df_b a foo
 ╭───┬───┬───┬───┬─────┬─────╮
 │ # │ a │ b │ c │ bar │ ham │
@@ -77,5 +77,23 @@ Join one eager dataframe with a lazy dataframe
 │ 2 │ 1 │ c │ 2 │ a   │ let │
 │ 3 │ 1 │ c │ 3 │ a   │ let │
 ╰───┴───┴───┴───┴─────┴─────╯
+
+```
+
+Join one eager dataframe with another using a cross join
+```nu
+> let tokens = [[monopoly_token]; [hat] [shoe] [boat]] | polars into-df
+    let players = [[name, cash]; [Alice, 78] [Bob, 135]] | polars into-df
+    $players | polars select (polars col name) | polars join --cross $tokens | polars collect
+╭───┬───────┬────────────────╮
+│ # │ name  │ monopoly_token │
+├───┼───────┼────────────────┤
+│ 0 │ Alice │ hat            │
+│ 1 │ Alice │ shoe           │
+│ 2 │ Alice │ boat           │
+│ 3 │ Bob   │ hat            │
+│ 4 │ Bob   │ shoe           │
+│ 5 │ Bob   │ boat           │
+╰───┴───────┴────────────────╯
 
 ```

@@ -20,8 +20,9 @@ usage: |
 
 ## Flags
 
- -  `--json, -j`: serialize to json
- -  `--minify, -m`: minify the nuon or json output
+ -  `--json, -j`: Serialize to json
+ -  `--minify, -m`: Minify the nuon or json output
+ -  `--flatten, -f`: An easier to read version of the ast
 
 ## Parameters
 
@@ -30,9 +31,9 @@ usage: |
 
 ## Input/output types:
 
-| input  | output |
-| ------ | ------ |
-| string | record |
+| input   | output |
+| ------- | ------ |
+| nothing | table  |
 
 ## Examples
 
@@ -63,5 +64,59 @@ Print the ast of a pipeline with an error, as json, in a nushell table
 Print the ast of a pipeline with an error, as json, minified
 ```nu
 > ast 'for x in 1..10 { echo $x ' --json --minify
+
+```
+
+Print the ast of a string flattened
+```nu
+> ast "'hello'" --flatten
+╭───┬─────────┬──────────────┬───────────────╮
+│ # │ content │    shape     │     span      │
+├───┼─────────┼──────────────┼───────────────┤
+│ 0 │ 'hello' │ shape_string │ ╭───────┬───╮ │
+│   │         │              │ │ start │ 0 │ │
+│   │         │              │ │ end   │ 7 │ │
+│   │         │              │ ╰───────┴───╯ │
+╰───┴─────────┴──────────────┴───────────────╯
+
+```
+
+Print the ast of a string flattened, as json, minified
+```nu
+> ast "'hello'" --flatten --json --minify
+[{"content":"'hello'","shape":"shape_string","span":{"start":0,"end":7}}]
+```
+
+Print the ast of a pipeline flattened
+```nu
+> ast 'ls | sort-by type name -i' --flatten
+╭───┬─────────┬────────────────────┬────────────────╮
+│ # │ content │       shape        │      span      │
+├───┼─────────┼────────────────────┼────────────────┤
+│ 0 │ ls      │ shape_external     │ ╭───────┬───╮  │
+│   │         │                    │ │ start │ 0 │  │
+│   │         │                    │ │ end   │ 2 │  │
+│   │         │                    │ ╰───────┴───╯  │
+│ 1 │ |       │ shape_pipe         │ ╭───────┬───╮  │
+│   │         │                    │ │ start │ 3 │  │
+│   │         │                    │ │ end   │ 4 │  │
+│   │         │                    │ ╰───────┴───╯  │
+│ 2 │ sort-by │ shape_internalcall │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 5  │ │
+│   │         │                    │ │ end   │ 12 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 3 │ type    │ shape_string       │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 13 │ │
+│   │         │                    │ │ end   │ 17 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 4 │ name    │ shape_string       │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 18 │ │
+│   │         │                    │ │ end   │ 22 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 5 │ -i      │ shape_flag         │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 23 │ │
+│   │         │                    │ │ end   │ 25 │ │
+│   │         │                    │ ╰───────┴────╯ │
+╰───┴─────────┴────────────────────┴────────────────╯
 
 ```
