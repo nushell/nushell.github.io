@@ -5,7 +5,7 @@
 Nushell uses a configuration system that loads and runs two Nushell script files at launch time:
 
 - `env.nu` is used to define environment variables or write files before `config.nu` starts. For example [`$env.NU_LIB_DIRS`](/book/modules.md#dumping-files-into-directory) controls where Nu finds imports. Third party scripts, like prompts or [mise](https://mise.jdx.dev/getting-started.html#nushell), must already be saved to disk before `config.nu` can read them.
-- `config.nu` is used to add definitions, aliases, and more to the global namespace. It can also use the environment variables and constants defined in `env.nu`. If you can't decide which file to add stuff, prefer `config.nu`.
+- `config.nu` is used to add definitions, aliases, and more to the global namespace. It can also use the environment variables and constants defined in `env.nu`. If you can't decide which file to add stuff to, prefer `config.nu`.
 
 Check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`.
 

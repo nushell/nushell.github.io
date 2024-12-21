@@ -453,7 +453,7 @@ drwxr-xr-x@  4 pengs  admin   128 14 Nov 13:42 en
 (Actually, for this simple usage you can just use [`find`](/commands/docs/find.md))
 
 ```nu
-> ls /usr/share/nvim/runtime/ | get name | find tutor | ^ls -al $in
+> ls /usr/share/nvim/runtime/ | get name | find tutor | ansi strip | ^ls -al ...$in
 ```
 
 ## Command Output in Nushell
