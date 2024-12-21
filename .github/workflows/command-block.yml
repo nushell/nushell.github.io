@@ -12,10 +12,10 @@ permissions:
 jobs:
   comment:
     runs-on: ubuntu-latest
+    # If the docs was updated by hustcer, skip the commenting step
+    if: ${{!contains(github.event.pull_request.user.login, 'hustcer') }}
     steps:
       - uses: actions/github-script@v7.0.1
-        # If the docs was updated by hustcer, skip the commenting step
-        if: ${{!contains(github.event.pull_request.body, 'hustcer') }}
         with:
           script: |
             github.rest.issues.createComment({
