@@ -37,13 +37,12 @@ def my-command [x] {
 When called with a value, we'll now see an error message returned:
 
 ```nu
-> my-command 100
-
-Error:
-  × this is fishy
-   ╭─[entry #5:1:1]
- 1 │ my-command 100
-   ·            ─┬─
-   ·             ╰── fish right here
-   ╰────
+my-command 100
+# => Error:
+# =>   × this is fishy
+# =>    ╭─[entry #5:1:1]
+# =>  1 │ my-command 100
+# =>    ·            ─┬─
+# =>    ·             ╰── fish right here
+# =>    ╰────
 ```

@@ -13,7 +13,7 @@ Many parts of Nushell's interface can have their color customized. All of these 
 Table borders are controlled by the `$env.config.table.mode` setting in `config.nu`. Here is an example:
 
 ```nu
-> $env.config = {
+$env.config = {
     table: {
         mode: rounded
     }
@@ -269,7 +269,7 @@ This is the current list of primitives. Not all of these are configurable. The c
 Here's a small example of changing some of these values.
 
 ```nu
-> let config = {
+let config = {
     color_config: {
         separator: purple
         leading_trailing_space_bg: "#ffffff"
@@ -294,7 +294,7 @@ Here's a small example of changing some of these values.
 Here's another small example using multiple color syntaxes with some comments.
 
 ```nu
-> let config = {
+let config = {
     color_config: {
         separator: "#88b719" # this sets only the foreground color like PR #486
         leading_trailing_space_bg: white # this sets only the foreground color in the original style
@@ -348,7 +348,7 @@ Here's the current list of flat shapes.
 Here's a small example of how to apply color to these items. Anything not specified will receive the default color.
 
 ```nu
-> $env.config = {
+$env.config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
         shape_bool: green
@@ -372,13 +372,13 @@ The Nushell prompt is configurable through these environment variables and confi
 Example: For a simple prompt one could do this. Note that `PROMPT_COMMAND` requires a `block` whereas the others require a `string`.
 
 ```nu
-> $env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
+$env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 If you don't like the default `PROMPT_INDICATOR` you could change it like this.
 
 ```nu
-> $env.PROMPT_INDICATOR = "> "
+$env.PROMPT_INDICATOR = "> "
 ```
 
 If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
@@ -401,13 +401,13 @@ Each of the `PROMPT_*` variables has a corresponding `TRANSIENT_PROMPT_*` variab
 For example, if you want to make past prompts show up without a left prompt entirely and leave only the indicator, you can use:
 
 ```nu
-> $env.TRANSIENT_PROMPT_COMMAND = ""
+$env.TRANSIENT_PROMPT_COMMAND = ""
 ```
 
 If you want to go back to the normal left prompt, you'll have to unset `TRANSIENT_PROMPT_COMMAND`:
 
 ```nu
-> hide-env TRANSIENT_PROMPT_COMMAND
+hide-env TRANSIENT_PROMPT_COMMAND
 ```
 
 ## `LS_COLORS` Colors for the [`ls`](/commands/docs/ls.md) Command

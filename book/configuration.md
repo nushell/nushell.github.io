@@ -10,8 +10,8 @@ Nushell uses a configuration system that loads and runs two Nushell script files
 Check where Nushell is reading these config files from by calling `$nu.env-path` and `$nu.config-path`.
 
 ```nu
-> $nu.env-path
-/Users/FirstNameLastName/Library/Application Support/nushell/env.nu
+$nu.env-path
+# => /Users/FirstNameLastName/Library/Application Support/nushell/env.nu
 ```
 
 _(You can think of the Nushell config loading sequence as executing two [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) lines on startup: `source /path/to/env.nu` and `source /path/to/config.nu`. Therefore, using `env.nu` for environment and `config.nu` for other config is just a convention.)_
@@ -22,8 +22,8 @@ When you launch Nushell without these files set up, Nushell will prompt you to d
 The default config files aren't required. If you prefer to start with an empty `env.nu` and `config.nu` then Nu applies identical defaults in internal Rust code. You can still browse the default files for default values of environment variables and a list of all configurable settings using the [`config`](#configurations-with-built-in-commands) commands:
 
 ```nu
-> config env --default | nu-highlight | lines
-> config nu --default | nu-highlight | lines
+config env --default | nu-highlight | lines
+config nu --default | nu-highlight | lines
 ```
 
 :::

@@ -25,10 +25,10 @@ If you like [oh-my-posh](https://ohmyposh.dev/), you can use oh-my-posh with Nus
 
 ```nu
 # Generate the .oh-my-posh.nu file
-> oh-my-posh init nu --config ~/.poshthemes/M365Princess.omp.json
+oh-my-posh init nu --config ~/.poshthemes/M365Princess.omp.json
 
 # Initialize oh-my-posh.nu at shell startup by adding this line in your config.nu file
-> source ~/.oh-my-posh.nu
+source ~/.oh-my-posh.nu
 ```
 
 For MacOS users:

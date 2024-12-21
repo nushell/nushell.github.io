@@ -5,19 +5,19 @@ Aliases in Nushell offer a way of doing a simple replacement of command calls (b
 For example, let's create an alias called `ll` which will expand to `ls -l`.
 
 ```nu
-> alias ll = ls -l
+alias ll = ls -l
 ```
 
 We can now call this alias:
 
 ```nu
-> ll
+ll
 ```
 
 Once we do, it's as if we typed `ls -l`. This also allows us to pass in flags or positional parameters. For example, we can now also write:
 
 ```nu
-> ll -a
+ll -a
 ```
 
 And get the equivalent to having typed `ls -l -a`.

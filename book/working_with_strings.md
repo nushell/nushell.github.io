@@ -20,12 +20,12 @@ and much more. Strings are so common that Nushell offers multiple string formats
 The simplest string in Nushell is the single-quoted string. This string uses the `'` character to surround some text. Here's the text for hello world as a single-quoted string:
 
 ```nu
-> 'hello world'
-hello world
-> 'The
+'hello world'
+# => hello world
+'The
 end'
-The
-end
+# => The
+# => end
 ```
 
 Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range of text data.
@@ -37,9 +37,9 @@ For more complex strings, Nushell also offers double-quoted strings. These strin
 For example, we could write the text hello followed by a new line and then world, using escape characters and a double-quoted string:
 
 ```nu
-> "hello\nworld"
-hello
-world
+"hello\nworld"
+# => hello
+# => world
 ```
 
 Escape characters let you quickly add in a character that would otherwise be hard to type.
@@ -65,8 +65,8 @@ by a starting `r#'` and a closing `'#`. This syntax should look familiar to user
 of Rust.
 
 ```nu
-> r#'Raw strings can contain 'quoted' text.'#
-Raw strings can contain 'quoted' text.
+r#'Raw strings can contain 'quoted' text.'#
+# => Raw strings can contain 'quoted' text.
 ```
 
 Additional `#` symbols can be added to the start and end of the raw string to enclose
@@ -74,8 +74,8 @@ one less than the same number of `#` symbols next to a `'` symbol in the string.
 be used to nest raw strings:
 
 ```nu
-> r###'r##'This is an example of a raw string.'##'###
-r##'This is an example of a raw string.'##
+r###'r##'This is an example of a raw string.'##'###
+# => r##'This is an example of a raw string.'##
 ```
 
 ## Bare Word Strings
@@ -83,46 +83,46 @@ r##'This is an example of a raw string.'##
 Like other shell languages (but unlike most other programming languages) strings consisting of a single 'word' can also be written without any quotes:
 
 ```nu
-> print hello
-hello
-> [hello] | describe
-list<string>
+print hello
+# => hello
+[hello] | describe
+# => list<string>
 ```
 
 But be careful - if you use a bare word plainly on the command line (that is, not inside a data structure or used as a command parameter) or inside round brackets `(` `)`, it will be interpreted as an external command:
 
 ```nu
-> hello
-Error: nu::shell::external_command
-
-  × External command failed
-   ╭─[entry #5:1:1]
- 1 │ hello
-   · ──┬──
-   ·   ╰── executable was not found
-   ╰────
-  help: program not found
+hello
+# => Error: nu::shell::external_command
+# => 
+# =>   × External command failed
+# =>    ╭─[entry #5:1:1]
+# =>  1 │ hello
+# =>    · ──┬──
+# =>    ·   ╰── executable was not found
+# =>    ╰────
+# =>   help: program not found
 ```
 
 Also, many bare words have special meaning in nu, and so will not be interpreted as a string:
 
 ```nu
-> true | describe
-bool
-> [true] | describe
-list<bool>
-> [trueX] | describe
-list<string>
-> trueX | describe
-Error: nu::shell::external_command
-
-  × External command failed
-   ╭─[entry #5:1:1]
- 1 │ trueX | describe
-   · ──┬──
-   ·   ╰── executable was not found
-   ╰────
-  help: program not found
+true | describe
+# => bool
+[true] | describe
+# => list<bool>
+[trueX] | describe
+# => list<string>
+trueX | describe
+# => Error: nu::shell::external_command
+# => 
+# =>   × External command failed
+# =>    ╭─[entry #5:1:1]
+# =>  1 │ trueX | describe
+# =>    · ──┬──
+# =>    ·   ╰── executable was not found
+# =>    ╰────
+# =>   help: program not found
 ```
 
 So, while bare strings are useful for informal command line usage, when programming more formally in nu, you should generally use quotes.
@@ -155,10 +155,10 @@ ls `./my dir/*`
 Backtick-quoted strings cannot contain _unmatched_ backticks in the string itself. For example:
 
 `````nu
-> echo ````
+echo ````
 ``
 
-> echo ```
+echo ```
 # Unterminated string which will start a new line in the CLI
 `````
 
@@ -169,8 +169,8 @@ You can place the `^` sigil in front of any string (including a variable) to hav
 ```nu
 ^'C:\Program Files\exiftool.exe'
 
-> let foo = 'C:\Program Files\exiftool.exe'
-> ^$foo
+let foo = 'C:\Program Files\exiftool.exe'
+^$foo
 ```
 
 You can also use the [`run-external`](/commands/docs/run-external.md) command for this purpose, which provides additional flags and options.
@@ -216,9 +216,9 @@ String interpolation uses `$" "` and `$' '` as ways to wrap interpolated text.
 For example, let's say we have a variable called `$name` and we want to greet the name of the person contained in this variable:
 
 ```nu
-> let name = "Alice"
-> $"greetings, ($name)"
-greetings, Alice
+let name = "Alice"
+$"greetings, ($name)"
+# => greetings, Alice
 ```
 
 By wrapping expressions in `()`, we can run them to completion and use the results to help build the string.
@@ -228,8 +228,8 @@ String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" 
 As of version 0.61, interpolated strings support escaping parentheses, so that the `(` and `)` characters may be used in a string without Nushell trying to evaluate what appears between them:
 
 ```nu
-> $"2 + 2 is (2 + 2) \(you guessed it!)"
-2 + 2 is 4 (you guessed it!)
+$"2 + 2 is (2 + 2) \(you guessed it!)"
+# => 2 + 2 is 4 (you guessed it!)
 ```
 
 Interpolated strings can be evaluated at parse time, but if they include values whose formatting depends
@@ -238,7 +238,7 @@ So if you have something like this in your `config.nu`, `x` will be `"2.0 KB"` e
 `MB` for all file sizes (datetimes will similarly use the default config).
 
 ```nu
-> const x = $"(2kb)"
+const x = $"(2kb)"
 ```
 
 ## Splitting Strings
@@ -246,36 +246,36 @@ So if you have something like this in your `config.nu`, `x` will be `"2.0 KB"` e
 The [`split row`](/commands/docs/split_row.md) command creates a list from a string based on a delimiter.
 
 ```nu
-> "red,green,blue" | split row ","
-╭───┬───────╮
-│ 0 │ red   │
-│ 1 │ green │
-│ 2 │ blue  │
-╰───┴───────╯
+"red,green,blue" | split row ","
+# => ╭───┬───────╮
+# => │ 0 │ red   │
+# => │ 1 │ green │
+# => │ 2 │ blue  │
+# => ╰───┴───────╯
 ```
 
 The [`split column`](/commands/docs/split_column.md) command will create a table from a string based on a delimiter. This applies generic column names to the table.
 
 ```nu
-> "red,green,blue" | split column ","
-╭───┬─────────┬─────────┬─────────╮
-│ # │ column1 │ column2 │ column3 │
-├───┼─────────┼─────────┼─────────┤
-│ 0 │ red     │ green   │ blue    │
-╰───┴─────────┴─────────┴─────────╯
+"red,green,blue" | split column ","
+# => ╭───┬─────────┬─────────┬─────────╮
+# => │ # │ column1 │ column2 │ column3 │
+# => ├───┼─────────┼─────────┼─────────┤
+# => │ 0 │ red     │ green   │ blue    │
+# => ╰───┴─────────┴─────────┴─────────╯
 ```
 
 Finally, the [`split chars`](/commands/docs/split_chars.md) command will split a string into a list of characters.
 
 ```nu
-> 'aeiou' | split chars
-╭───┬───╮
-│ 0 │ a │
-│ 1 │ e │
-│ 2 │ i │
-│ 3 │ o │
-│ 4 │ u │
-╰───┴───╯
+'aeiou' | split chars
+# => ╭───┬───╮
+# => │ 0 │ a │
+# => │ 1 │ e │
+# => │ 2 │ i │
+# => │ 3 │ o │
+# => │ 4 │ u │
+# => ╰───┴───╯
 ```
 
 ## The [`str`](/commands/docs/str.md) command
@@ -285,8 +285,8 @@ Many string functions are subcommands of the [`str`](/commands/docs/str.md) comm
 For example, you can look if a string contains a particular substring using [`str contains`](/commands/docs/str_contains.md):
 
 ```nu
-> "hello world" | str contains "o wo"
-true
+"hello world" | str contains "o wo"
+# => true
 ```
 
 (You might also prefer, for brevity, the `=~` operator (described below).)
@@ -296,8 +296,8 @@ true
 You can trim the sides of a string with the [`str trim`](/commands/docs/str_trim.md) command. By default, the [`str trim`](/commands/docs/str_trim.md) commands trims whitespace from both sides of the string. For example:
 
 ```nu
-> '       My   string   ' | str trim
-My   string
+'       My   string   ' | str trim
+# => My   string
 ```
 
 You can specify on which side the trimming occurs with the `--right` and `--left` options. (`-r` and `-l` being the short-form options respectively)
@@ -307,8 +307,8 @@ To trim a specific character, use `--char <Character>` or `-c <Character>` to sp
 Here's an example of all the options in action:
 
 ```nu
-> '=== Nu shell ===' | str trim -r -c '='
-=== Nu shell
+'=== Nu shell ===' | str trim -r -c '='
+# => === Nu shell
 ```
 
 ### Substrings
@@ -316,12 +316,12 @@ Here's an example of all the options in action:
 Substrings are slices of a string. They have a startpoint and an endpoint. Here's an example of using a substring:
 
 ```nu
-> 'Hello World!' | str index-of 'o'
-4
-> 'Hello World!' | str index-of 'r'
-8
-> 'Hello World!' | str substring 4..8
-o Wo
+'Hello World!' | str index-of 'o'
+# => 4
+'Hello World!' | str index-of 'r'
+# => 8
+'Hello World!' | str substring 4..8
+# => o Wo
 ```
 
 ### String Padding
@@ -329,10 +329,10 @@ o Wo
 With the [`fill`](/commands/docs/fill.md) command you can add padding to a string. Padding adds characters to string until it's a certain length. For example:
 
 ```nu
-> '1234' | fill -a right -c '0' -w 10
-0000001234
-> '1234' | fill -a left -c '0' -w 10 | str length
-10
+'1234' | fill -a right -c '0' -w 10
+# => 0000001234
+'1234' | fill -a left -c '0' -w 10 | str length
+# => 10
 ```
 
 ### Reversing Strings
@@ -340,14 +340,14 @@ With the [`fill`](/commands/docs/fill.md) command you can add padding to a strin
 This can be done easily with the [`str reverse`](/commands/docs/str_reverse.md) command.
 
 ```nu
-> 'Nushell' | str reverse
-llehsuN
-> ['Nushell' 'is' 'cool'] | str reverse
-╭───┬─────────╮
-│ 0 │ llehsuN │
-│ 1 │ si      │
-│ 2 │ looc    │
-╰───┴─────────╯
+'Nushell' | str reverse
+# => llehsuN
+['Nushell' 'is' 'cool'] | str reverse
+# => ╭───┬─────────╮
+# => │ 0 │ llehsuN │
+# => │ 1 │ si      │
+# => │ 2 │ looc    │
+# => ╰───┴─────────╯
 ```
 
 ## String Parsing
@@ -355,42 +355,42 @@ llehsuN
 With the [`parse`](/commands/docs/parse.md) command you can parse a string into columns. For example:
 
 ```nu
-> 'Nushell 0.80' | parse '{shell} {version}'
-╭───┬─────────┬─────────╮
-│ # │  shell  │ version │
-├───┼─────────┼─────────┤
-│ 0 │ Nushell │ 0.80    │
-╰───┴─────────┴─────────╯
-> 'where all data is structured!' | parse --regex '(?P<subject>\w*\s?\w+) is (?P<adjective>\w+)'
-╭───┬──────────┬────────────╮
-│ # │ subject  │ adjective  │
-├───┼──────────┼────────────┤
-│ 0 │ all data │ structured │
-╰───┴──────────┴────────────╯
+'Nushell 0.80' | parse '{shell} {version}'
+# => ╭───┬─────────┬─────────╮
+# => │ # │  shell  │ version │
+# => ├───┼─────────┼─────────┤
+# => │ 0 │ Nushell │ 0.80    │
+# => ╰───┴─────────┴─────────╯
+'where all data is structured!' | parse --regex '(?P<subject>\w*\s?\w+) is (?P<adjective>\w+)'
+# => ╭───┬──────────┬────────────╮
+# => │ # │ subject  │ adjective  │
+# => ├───┼──────────┼────────────┤
+# => │ 0 │ all data │ structured │
+# => ╰───┴──────────┴────────────╯
 ```
 
 If a string is known to contain comma-separated, tab-separated or multi-space-separated data, you can use [`from csv`](/commands/docs/from_csv.md), [`from tsv`](/commands/docs/from_tsv.md) or [`from ssv`](/commands/docs/from_ssv.md):
 
 ```nu
-> "acronym,long\nAPL,A Programming Language" | from csv
-╭───┬─────────┬────────────────────────╮
-│ # │ acronym │          long          │
-├───┼─────────┼────────────────────────┤
-│ 0 │ APL     │ A Programming Language │
-╰───┴─────────┴────────────────────────╯
-> "name  duration\nonestop.mid  4:06" | from ssv
-╭───┬─────────────┬──────────╮
-│ # │    name     │ duration │
-├───┼─────────────┼──────────┤
-│ 0 │ onestop.mid │ 4:06     │
-╰───┴─────────────┴──────────╯
-> "rank\tsuit\nJack\tSpades\nAce\tClubs" | from tsv
-╭───┬──────┬────────╮
-│ # │ rank │  suit  │
-├───┼──────┼────────┤
-│ 0 │ Jack │ Spades │
-│ 1 │ Ace  │ Clubs  │
-╰───┴──────┴────────╯
+"acronym,long\nAPL,A Programming Language" | from csv
+# => ╭───┬─────────┬────────────────────────╮
+# => │ # │ acronym │          long          │
+# => ├───┼─────────┼────────────────────────┤
+# => │ 0 │ APL     │ A Programming Language │
+# => ╰───┴─────────┴────────────────────────╯
+"name  duration\nonestop.mid  4:06" | from ssv
+# => ╭───┬─────────────┬──────────╮
+# => │ # │    name     │ duration │
+# => ├───┼─────────────┼──────────┤
+# => │ 0 │ onestop.mid │ 4:06     │
+# => ╰───┴─────────────┴──────────╯
+"rank\tsuit\nJack\tSpades\nAce\tClubs" | from tsv
+# => ╭───┬──────┬────────╮
+# => │ # │ rank │  suit  │
+# => ├───┼──────┼────────┤
+# => │ 0 │ Jack │ Spades │
+# => │ 1 │ Ace  │ Clubs  │
+# => ╰───┴──────┴────────╯
 ```
 
 ## String Comparison
@@ -400,19 +400,19 @@ In addition to the standard `==` and `!=` operators, a few operators exist for s
 Those familiar with Bash and Perl will recognise the regex comparison operators:
 
 ```nu
-> 'APL' =~ '^\w{0,3}$'
-true
-> 'FORTRAN' !~ '^\w{0,3}$'
-true
+'APL' =~ '^\w{0,3}$'
+# => true
+'FORTRAN' !~ '^\w{0,3}$'
+# => true
 ```
 
 Two other operators exist for simpler comparisons:
 
 ```nu
-> 'JavaScript' starts-with 'Java'
-true
-> 'OCaml' ends-with 'Caml'
-true
+'JavaScript' starts-with 'Java'
+# => true
+'OCaml' ends-with 'Caml'
+# => true
 ```
 
 ## Converting Strings
@@ -433,7 +433,7 @@ There are multiple ways to convert strings to and from other types.
 You can color strings with the [`ansi`](/commands/docs/ansi.md) command. For example:
 
 ```nu
-> $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
+$'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 
 `ansi purple_bold` makes the text a bold purple

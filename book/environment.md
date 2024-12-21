@@ -5,22 +5,22 @@ A common task in a shell is to control the environment that external application
 You can see the current environment variables in the $env variable:
 
 ```nu
-~> $env | table -e
-╭──────────────────────────────────┬───────────────────────────────────────────╮
-│                                  │ ╭──────┬────────────────────────────────╮ │
-│ ENV_CONVERSIONS                  │ │      │ ╭─────────────┬──────────────╮ │ │
-│                                  │ │ PATH │ │ from_string │ <Closure 32> │ │ │
-│                                  │ │      │ │ to_string   │ <Closure 34> │ │ │
-│                                  │ │      │ ╰─────────────┴──────────────╯ │ │
-│                                  │ │      │ ╭─────────────┬──────────────╮ │ │
-│                                  │ │ Path │ │ from_string │ <Closure 36> │ │ │
-│                                  │ │      │ │ to_string   │ <Closure 38> │ │ │
-│                                  │ │      │ ╰─────────────┴──────────────╯ │ │
-│                                  │ ╰──────┴────────────────────────────────╯ │
-│ HOME                             │ /Users/jelle                              │
-│ LSCOLORS                         │ GxFxCxDxBxegedabagaced                    │
-| ...                              | ...                                       |
-╰──────────────────────────────────┴───────────────────────────────────────────╯
+$env | table -e
+# => ╭──────────────────────────────────┬───────────────────────────────────────────╮
+# => │                                  │ ╭──────┬────────────────────────────────╮ │
+# => │ ENV_CONVERSIONS                  │ │      │ ╭─────────────┬──────────────╮ │ │
+# => │                                  │ │ PATH │ │ from_string │ <Closure 32> │ │ │
+# => │                                  │ │      │ │ to_string   │ <Closure 34> │ │ │
+# => │                                  │ │      │ ╰─────────────┴──────────────╯ │ │
+# => │                                  │ │      │ ╭─────────────┬──────────────╮ │ │
+# => │                                  │ │ Path │ │ from_string │ <Closure 36> │ │ │
+# => │                                  │ │      │ │ to_string   │ <Closure 38> │ │ │
+# => │                                  │ │      │ ╰─────────────┴──────────────╯ │ │
+# => │                                  │ ╰──────┴────────────────────────────────╯ │
+# => │ HOME                             │ /Users/jelle                              │
+# => │ LSCOLORS                         │ GxFxCxDxBxegedabagaced                    │
+# => | ...                              | ...                                       |
+# => ╰──────────────────────────────────┴───────────────────────────────────────────╯
 ```
 
 In Nushell, environment variables can be any value and have any type. You can see the type of an env variable with the describe command, for example: `$env.PROMPT_COMMAND | describe`.
@@ -38,7 +38,7 @@ There are several ways to set an environment variable:
 Using the `$env.VAR = "val"` is the most straightforward method
 
 ```nu
-> $env.FOO = 'BAR'
+$env.FOO = 'BAR'
 ```
 
 So, if you want to extend the Windows `Path` variable, for example, you could do that as follows.
@@ -55,7 +55,7 @@ If you want to give it the lowest priority instead, you can use the [`append`](/
 If you have more than one environment variable you'd like to set, you can use [`load-env`](/commands/docs/load-env.md) to create a table of name/value pairs and load multiple variables at the same time:
 
 ```nu
-> load-env { "BOB": "FOO", "JAY": "BAR" }
+load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
 ### One-shot Environment Variables
@@ -76,41 +76,41 @@ See [Modules](modules.md) for details.
 Individual environment variables are fields of a record that is stored in the `$env` variable and can be read with `$env.VARIABLE`:
 
 ```nu
-> $env.FOO
-BAR
+$env.FOO
+# => BAR
 ```
 
 Sometimes, you may want to access an environmental variable which might be unset. Consider using the [question mark operator](types_of_data.md#optional-cell-paths) to avoid an error:
 
 ```nu
-> $env.FOO | describe
-Error: nu::shell::column_not_found
+$env.FOO | describe
+# => Error: nu::shell::column_not_found
+# => 
+# =>   × Cannot find column
+# =>    ╭─[entry #1:1:1]
+# =>  1 │ $env.FOO
+# =>    · ──┬─ ─┬─
+# =>    ·   │   ╰── cannot find column 'FOO'
+# =>    ·   ╰── value originates here
+# =>    ╰────
 
-  × Cannot find column
-   ╭─[entry #1:1:1]
- 1 │ $env.FOO
-   · ──┬─ ─┬─
-   ·   │   ╰── cannot find column 'FOO'
-   ·   ╰── value originates here
-   ╰────
+$env.FOO? | describe
+# => nothing
 
-> $env.FOO? | describe
-nothing
-
-> $env.FOO? | default "BAR"
-BAR
+$env.FOO? | default "BAR"
+# => BAR
 ```
 
 Alternatively, you can check for the presence of an environmental variable with `in`:
 
 ```
-> $env.FOO
-BAR
+$env.FOO
+# => BAR
 
-> if "FOO" in $env {
->     echo $env.FOO
-> }
-BAR
+if "FOO" in $env {
+echo $env.FOO
+}
+# => BAR
 ```
 
 ### Case sensitivity
@@ -126,14 +126,14 @@ When you set an environment variable, it will be available only in the current s
 Here is a small example to demonstrate the environment scoping:
 
 ```nu
-> $env.FOO = "BAR"
-> do {
+$env.FOO = "BAR"
+do {
     $env.FOO = "BAZ"
     $env.FOO == "BAZ"
 }
-true
-> $env.FOO == "BAR"
-true
+# => true
+$env.FOO == "BAR"
+# => true
 ```
 
 See also: [Changing the Environment in a Custom Command](./custom_commands.html#changing-the-environment-in-a-custom-command).
@@ -147,15 +147,15 @@ A common task in a shell is to change the directory using the [`cd`](/commands/d
 A common shorthand to set an environment variable once is available, inspired by Bash and others:
 
 ```nu
-> FOO=BAR $env.FOO
-BAR
+FOO=BAR $env.FOO
+# => BAR
 ```
 
 You can also use [`with-env`](/commands/docs/with-env.md) to do the same thing more explicitly:
 
 ```nu
-> with-env { FOO: BAR } { $env.FOO }
-BAR
+with-env { FOO: BAR } { $env.FOO }
+# => BAR
 ```
 
 The [`with-env`](/commands/docs/with-env.md) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the [block](types_of_data.md#blocks) will run with this new environment variable set.
@@ -195,26 +195,26 @@ $env.ENV_CONVERSIONS = {
 Now, within a Nushell instance:
 
 ```nu
-> with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
+with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
 
-> $env.FOO
-  0   a
-  1   b
-  2   c
+$env.FOO
+# =>   0   a
+# =>   1   b
+# =>   2   c
 ```
 
 You can see the `$env.FOO` is now a list in a new Nushell instance with the updated config.
 You can also test the conversion manually by
 
 ```nu
-> do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
+do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
 ```
 
 Now, to test the conversion list -> string, run:
 
 ```nu
-> nu -c '$env.FOO'
-a-b-c
+nu -c '$env.FOO'
+# => a-b-c
 ```
 
 Because `nu` is an external program, Nushell translated the `[ a b c ]` list according to `ENV_CONVERSIONS.FOO.to_string` and passed it to the `nu` process.
@@ -228,19 +228,19 @@ _(Important! The environment conversion string -> value happens **after** the en
 You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide-env.md):
 
 ```nu
-> $env.FOO = 'BAR'
-...
-> hide-env FOO
+$env.FOO = 'BAR'
+# => ...
+hide-env FOO
 ```
 
 The hiding is also scoped which both allows you to remove an environment variable temporarily and prevents you from modifying a parent environment from within a child scope:
 
 ```nu
-> $env.FOO = 'BAR'
-> do {
+$env.FOO = 'BAR'
+do {
     hide-env FOO
     # $env.FOO does not exist
   }
-> $env.FOO
-BAR
+$env.FOO
+# => BAR
 ```
