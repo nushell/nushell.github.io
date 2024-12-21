@@ -9,8 +9,8 @@ Like many programming languages, Nu models data using a set of simple, structure
 The [`describe`](/commands/docs/describe.md) command returns the type of a data value:
 
 ```nu
-> 42 | describe
-int
+42 | describe
+# => int
 ```
 
 ## Types at a Glance
@@ -49,10 +49,10 @@ int
 Simple Example:
 
 ```nu
-> 10 / 2
-5
-> 5 | describe
-int
+10 / 2
+# => 5
+5 | describe
+# => int
 ```
 
 ### Floats/Decimals
@@ -67,16 +67,16 @@ int
 Simple Example:
 
 ```nu
-> 2.5 / 5.0
-0.5
+2.5 / 5.0
+# => 0.5
 ```
 
 ::: tip
 As in most programming languages, decimal values in Nushell are approximate.
 
 ```nu
-> 10.2 * 5.1
-52.01999999999999
+10.2 * 5.1
+# => 52.01999999999999
 ```
 
 :::
@@ -96,9 +96,9 @@ As with many languages, Nushell provides multiple ways to specify String values 
 Simple (obligatory) example:
 
 ```nu
-> let audience: string = "World"
-> $"Hello, ($audience)"
-Hello, World
+let audience: string = "World"
+$"Hello, ($audience)"
+# => Hello, World
 ```
 
 ### Booleans
@@ -113,20 +113,20 @@ Hello, World
 Booleans are commonly the result of a comparison. For example:
 
 ```nu
-> let mybool: bool = (2 > 1)
-> $mybool
-true
-> let mybool: bool = ($env.HOME | path exists)
-> $mybool
-true
+let mybool: bool = (2 > 1)
+$mybool
+# => true
+let mybool: bool = ($env.HOME | path exists)
+$mybool
+# => true
 ```
 
 A boolean result is commonly used to control the flow of execution:
 
 ```nu
-> let num = -2
-> if $num < 0 { print "It's negative" }
-It's negative
+let num = -2
+if $num < 0 { print "It's negative" }
+# => It's negative
 ```
 
 ### Dates
@@ -140,11 +140,11 @@ It's negative
 Simple example:
 
 ```nu
->  date now
-Mon, 12 Aug 2024 13:59:22 -0400 (now)
+date now
+# => Mon, 12 Aug 2024 13:59:22 -0400 (now)
 # Format as Unix epoch
-> date now | format date '%s'
-1723485562
+date now | format date '%s'
+# => 1723485562
 ```
 
 ### Durations
@@ -160,10 +160,10 @@ Durations support fractional values as well as calculations.
 Simple example:
 
 ```nu
-> 3.14day
-3day 3hr 21min
-> 30day / 1sec  # How many seconds in 30 days?
-2592000
+3.14day
+# => 3day 3hr 21min
+30day / 1sec  # How many seconds in 30 days?
+# => 2592000
 ```
 
 ### File sizes
@@ -179,12 +179,12 @@ Nushell also has a special type for file sizes.
 As with durations, Nushell supports fractional file sizes and calculations:
 
 ```nu
-> 0.5kB
-500 B
-> 1GiB / 1B
-1073741824
-> (1GiB / 1B) == 2 ** 30
-true
+0.5kB
+# => 500 B
+1GiB / 1B
+# => 1073741824
+(1GiB / 1B) == 2 ** 30
+# => true
 ```
 
 See the [Language Reference](/lang-guide/chapters/types/basic_types/filesize.html) for a complete list of units and more detail.
@@ -202,14 +202,14 @@ See the [Language Reference](/lang-guide/chapters/types/basic_types/filesize.htm
 Simple example:
 
 ```nu
-> 1..5
-╭───┬───╮
-│ 0 │ 1 │
-│ 1 │ 2 │
-│ 2 │ 3 │
-│ 3 │ 4 │
-│ 4 │ 5 │
-╰───┴───╯
+1..5
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => │ 3 │ 4 │
+# => │ 4 │ 5 │
+# => ╰───┴───╯
 ```
 
 ::: tip
@@ -230,10 +230,10 @@ You can also easily create lists of characters with a form similar to ranges wit
 Simple example:
 
 ```nu
-> let cp = $.2
+let cp = $.2
 # Return list item at index 2
-> [ foo bar goo glue ] | get $cp
-goo
+[ foo bar goo glue ] | get $cp
+# => goo
 ```
 
 ### Closures
@@ -250,15 +250,15 @@ Simple example:
 This closure returns a boolean result of the comparison and then uses it in a `filter` command to return all values greater than 5.
 
 ```nu
-> let compare_closure = {|a| $a > 5 }
-> let original_list = [ 40 -4 0 8 12 16 -16 ]
-> $original_list | filter $compare_closure
-╭───┬────╮
-│ 0 │ 40 │
-│ 1 │  8 │
-│ 2 │ 12 │
-│ 3 │ 16 │
-╰───┴────╯
+let compare_closure = {|a| $a > 5 }
+let original_list = [ 40 -4 0 8 12 16 -16 ]
+$original_list | filter $compare_closure
+# => ╭───┬────╮
+# => │ 0 │ 40 │
+# => │ 1 │  8 │
+# => │ 2 │ 12 │
+# => │ 3 │ 16 │
+# => ╰───┴────╯
 ```
 
 Closures are a useful way to represent code that can be executed on each row of data via [filters](/lang-guide/chapters/filters/00_filters_overview.md)
@@ -279,11 +279,11 @@ Binary data, like the data from an image file, is a group of raw bytes.
 Simple example - Confirm that a JPEG file starts with the proper identifier:
 
 ```nu
-> open nushell_logo.jpg
-  | into binary
-  | first 2
-  | $in == 0x[ff d8]
-true
+open nushell_logo.jpg
+| into binary
+| first 2
+| $in == 0x[ff d8]
+# => true
 ```
 
 ## Structured Data Types
@@ -303,12 +303,12 @@ Nushell includes a collection of structured data types that can contain the prim
 Simple example:
 
 ```nu
-> [Sam Fred George]
-╭───┬────────╮
-│ 0 │ Sam    │
-│ 1 │ Fred   │
-│ 2 │ George │
-╰───┴────────╯
+[Sam Fred George]
+# => ╭───┬────────╮
+# => │ 0 │ Sam    │
+# => │ 1 │ Fred   │
+# => │ 2 │ George │
+# => ╰───┴────────╯
 ```
 
 ### Records
@@ -324,18 +324,18 @@ Simple example:
 Simple example:
 
 ```nu
-> let my_record = {
-    name: "Kylian"
-    rank: 99
-  }
-> $my_record
-╭───────┬────────────╮
-│ name  │ Kylian     │
-│ rank  │ 99         │
-╰───────┴────────────╯
+let my_record = {
+  name: "Kylian"
+  rank: 99
+}
+$my_record
+# => ╭───────┬────────────╮
+# => │ name  │ Kylian     │
+# => │ rank  │ 99         │
+# => ╰───────┴────────────╯
 
- > $my_record | get name
- Kylian
+ $my_record | get name
+# =>  Kylian
 ```
 
 ### Tables
@@ -354,11 +354,11 @@ The table is a core data structure in Nushell. As you run commands, you'll see t
 Internally, tables are simply **lists of records**. This means that any command which extracts or isolates a specific row of a table will produce a record. For example, `get 0`, when used on a list, extracts the first value. But when used on a table (a list of records), it extracts a record:
 
 ```nu
-> [{x:12, y:5}, {x:3, y:6}] | get 0
-╭───┬────╮
-│ x │ 12 │
-│ y │ 5  │
-╰───┴────╯
+[{x:12, y:5}, {x:3, y:6}] | get 0
+# => ╭───┬────╮
+# => │ x │ 12 │
+# => │ y │ 5  │
+# => ╰───┴────╯
 ```
 
 :::
@@ -386,7 +386,7 @@ Internally, tables are simply **lists of records**. This means that any command 
 Simple example:
 
 ```nu
-> if true { print "It's true" }
+if true { print "It's true" }
 ```
 
 The `{ print "It's true" }` portion above is a block.
@@ -405,13 +405,13 @@ The `{ print "It's true" }` portion above is a block.
 Using the optional operator `?` returns `null` if the requested cell-path doesn't exist:
 
 ```nu
-> let simple_record = { a: 5, b: 10 }
-> $simple_record.a?
-5
-> $simple_record.c?
+let simple_record = { a: 5, b: 10 }
+$simple_record.a?
+# => 5
+$simple_record.c?
 # => Nothing is output
-> $simple_record.c? | describe
-nothing
-> $simple_record.c? == null
-true
+$simple_record.c? | describe
+# => nothing
+$simple_record.c? == null
+# => true
 ```
