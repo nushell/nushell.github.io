@@ -33,29 +33,28 @@ Reedline allows Nushell commandlines to extend across multiple lines. This can b
 
    It can even be used to continue a single command across multiple lines:
 
+   ::: details Example
+
    ```nu
    (
-     ffmpeg
-     -i input.mp4
-     -vf "scale=1280:720,setsar=1:1"
-     -b:v 1500k
-     -preset veryfast
-     -crf 23
-     -c:a aac
-     -b:a 192k
-     -movflags +faststart
-     -y
-     output.mp4
+     tar
+     -cvz
+     -f archive.tgz
+     --exclude='*.temp'
+     --directory=../project/
+     ./
    )
    ```
+
+   :::
 
 2. Pressing <kbd>Enter</kbd> at the end of a line with a trailing pipe-symbol (`|`).
 
    ```nu
    ls                     |
-   where name =~ '^[0-9]' | # filenames starting with a digit
-   get name               | # get the filenames
-   mv ...$in ./backups/     # and move to backups folder
+   where name =~ '^[0-9]' | # Comments after a trailing pipe are okay
+   get name               |
+   mv ...$in ./backups/
    ```
 
 3. Manually insert a newline using <kbd>Alt</kbd>+<kbd>Enter</kbd> or <kbd>Shift</kbd>+<kbd>Enter</kbd>.
@@ -64,9 +63,9 @@ Reedline allows Nushell commandlines to extend across multiple lines. This can b
 
    ```nu
    ls
-   | where name =~ '^[0-9]'  # filenames starting with a digit
-   | get name                # get the filenames
-   | mv ...$in ./backups/    # and move to backups folder
+   | where name =~ '^[0-9]'  # Files starting with a digit
+   | get name
+   | mv ...$in ./backups/
    ```
 
    ::: tip
@@ -107,6 +106,8 @@ Each edit mode comes with common keybindings for Vi and Emacs text editing.
 
 ### Emacs and Vi-insert Keybindings
 
+These keybinding events apply to both Emacs and Vi-insert mode:
+
 | Key                                        | Event                               |
 | ------------------------------------------ | ----------------------------------- |
 | <kbd>Shift</kbd>+<kbd>Enter</kbd>          | Insert newline                      |
@@ -122,21 +123,13 @@ Each edit mode comes with common keybindings for Vi and Emacs text editing.
 | <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Move word right                     |
 | <kbd>Ctrl</kbd>+<kbd>←</kbd> (Left Arrow)  | Move word left                      |
 | <kbd>↑</kbd> (Up Arrow)                    | Move up                             |
-| <kbd>Ctrl</kbd>+<kbd>P</kbd>               | Move up                             |
-| <kbd>↑</kbd> (Up Arrow)                    | Move menu up                        |
-| <kbd>Ctrl</kbd>+<kbd>P</kbd>               | Move menu up                        |
 | <kbd>↓</kbd> (Down Arrow)                  | Move down                           |
-| <kbd>Ctrl</kbd>+<kbd>N</kbd>               | Move down                           |
-| <kbd>↓</kbd> (Down Arrow)                  | Move menu down                      |
-| <kbd>Ctrl</kbd>+<kbd>N</kbd>               | Move menu down                      |
 | <kbd>←</kbd> (Left Arrow)                  | Move left                           |
-| <kbd>Ctrl</kbd>+<kbd>B</kbd>               | Move left                           |
-| <kbd>←</kbd> (Left Arrow)                  | Move menu left                      |
-| <kbd>Ctrl</kbd>+<kbd>B</kbd>               | Move menu left                      |
 | <kbd>→</kbd> (Right Arrow)                 | Move right                          |
+| <kbd>Ctrl</kbd>+<kbd>P</kbd>               | Move up                             |
+| <kbd>Ctrl</kbd>+<kbd>N</kbd>               | Move down                           |
+| <kbd>Ctrl</kbd>+<kbd>B</kbd>               | Move left                           |
 | <kbd>Ctrl</kbd>+<kbd>F</kbd>               | Move right                          |
-| <kbd>→</kbd> (Right Arrow)                 | Move menu right                     |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>               | Move menu right                     |
 | <kbd>→</kbd> (Right Arrow)                 | History-hint complete               |
 | <kbd>Ctrl</kbd>+<kbd>F</kbd>               | History-hint complete               |
 | <kbd>Alt</kbd>+<kbd>F</kbd>                | History-hint complete one word      |
@@ -144,30 +137,30 @@ Each edit mode comes with common keybindings for Vi and Emacs text editing.
 
 ### Vi-insert Keybindings
 
+These keybinding events apply only to Vi-insert mode:
+
 | Key            | Event                    |
 | -------------- | ------------------------ |
 | <kbd>Esc</kbd> | Switch to Vi-normal mode |
 
 ### Vi-normal Keybindings
 
+These keybinding events apply only to Vi-normal mode:
+
 | Key                                         | Event               |
 | ------------------------------------------- | ------------------- |
 | <kbd>Ctrl</kbd>+<kbd>C</kbd>                | Cancel current line |
 | <kbd>Ctrl</kbd>+<kbd>L</kbd>                | Clear screen        |
-| <kbd>↑</kbd> (Up Arrow)                     | Move menu up        |
 | <kbd>↑</kbd> (Up Arrow)                     | Move up             |
-| <kbd>↓</kbd> (Down Arrow)                   | Move menu down      |
 | <kbd>↓</kbd> (Down Arrow)                   | Move down           |
-| <kbd>←</kbd> (Left Arrow)                   | Move menu left      |
 | <kbd>←</kbd> (Left Arrow)                   | Move left           |
-| <kbd>→</kbd> (Right Arrow)                  | Move menu right     |
 | <kbd>→</kbd> (Right Arrow)                  | Move right          |
 | <kbd>Ctrl></kbd>+<kbd>→</kbd> (Right Arrow) | Move right one word |
 | <kbd>Ctrl></kbd>+<kbd>←</kbd> (Left Arrow)  | Move left one word  |
 
-As with Vi, many motions and actions can be combined with an optional count in normal-mode. For example, <kbd>3</kbd><kbd>d</kbd><kbd>w</kbd> deletes the next three words.
-
 ### Vi-normal Motions
+
+As with Vi, many motions and actions can be combined with an optional count in normal-mode. For example, <kbd>3</kbd><kbd>d</kbd><kbd>w</kbd> deletes the next three words.
 
 | Key                                    | Motion                                        |
 | -------------------------------------- | --------------------------------------------- |
@@ -186,6 +179,8 @@ As with Vi, many motions and actions can be combined with an optional count in n
 | <kbd>Shift</kbd>+<kbd>T</kbd>+\<char\> | Move left to after \<char\>                   |
 
 ### Vi-normal Actions
+
+These actions can be combined with many of the [motions above](#vi-normal-motions).
 
 | Key                           | Action                                             |
 | ----------------------------- | -------------------------------------------------- |
@@ -585,14 +580,37 @@ e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 
 ### Troubleshooting Keybinding Problems
 
-Your terminal environment may not always propagate your key combinations on to nushell the way you expect it to.
-You can use the command [`keybindings listen`](/commands/docs/keybindings_listen.md) to figure out if certain keypresses are actually received by nushell, and how.
+Your terminal environment may not always propagate your key combinations on to Nushell the way you expect it to. You can use the command [`keybindings listen`](/commands/docs/keybindings_listen.md) to determine if certain keypresses are actually received by Nushell, and how.
 
 ## Menus
 
 Thanks to Reedline, Nushell has menus that can help you with your day to day
 shell scripting. Next we present the default menus that are always available
 when using Nushell
+
+### Menu Keybindings
+
+When a menu is active, some keybindings change based on the keybinding [`until` specifier](#until-type) discussed above. Common keybindings for menus are:
+
+| Key                             | Event                |
+| ------------------------------- | -------------------- |
+| <kbd>Tab</kbd>                  | Select next item     |
+| <kbd>Shift</kbd>+<kbd>Tab</kbd> | Select previous item |
+| <kbd>Enter</kbd>                | Accept selection     |
+| <kbd>↑</kbd> (Up Arrow)         | Move menu up         |
+| <kbd>↓</kbd> (Down Arrow)       | Move menu down       |
+| <kbd>←</kbd> (Left Arrow)       | Move menu left       |
+| <kbd>→</kbd> (Right Arrow)      | Move menu right      |
+| <kbd>Ctrl</kbd>+<kbd>P</kbd>    | Move menu up         |
+| <kbd>Ctrl</kbd>+<kbd>N</kbd>    | Move menu down       |
+| <kbd>Ctrl</kbd>+<kbd>B</kbd>    | Move menu left       |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>    | Move menu right      |
+
+::: note
+Menu direction behavior varies based on the menu type (see below). For example,
+in a `description` menu, "Up" and "Down" apply to the "Extra" list, but in a
+`list` menu the directions apply to the selection.
+:::
 
 ### Help Menu
 
