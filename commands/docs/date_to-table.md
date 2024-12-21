@@ -2,7 +2,7 @@
 title: date to-table
 categories: |
   deprecated
-version: 0.100.0
+version: 0.101.0
 deprecated: |
   Convert the date into a structured table.
 usage: |

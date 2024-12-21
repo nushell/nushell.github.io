@@ -2,7 +2,7 @@
 title: view files
 categories: |
   debug
-version: 0.100.0
+version: 0.101.0
 debug: |
   View the files registered in nushell's EngineState memory.
 usage: |

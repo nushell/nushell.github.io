@@ -2,7 +2,7 @@
 title: split-by
 categories: |
   deprecated
-version: 0.100.0
+version: 0.101.0
 deprecated: |
   Split a record into groups.
 usage: |

@@ -2,7 +2,7 @@
 title: prepend
 categories: |
   filters
-version: 0.100.0
+version: 0.101.0
 filters: |
   Prepend any number of rows to a table.
 usage: |

@@ -2,7 +2,7 @@
 title: chunk-by
 categories: |
   filters
-version: 0.100.0
+version: 0.101.0
 filters: |
   Divides a sequence into sub-sequences based on a closure.
 usage: |

@@ -2,7 +2,7 @@
 title: math min
 categories: |
   math
-version: 0.100.0
+version: 0.101.0
 math: |
   Finds the minimum within a list of values or tables.
 usage: |

@@ -2,7 +2,7 @@
 title: math sum
 categories: |
   math
-version: 0.100.0
+version: 0.101.0
 math: |
   Returns the sum of a list of numbers or of each column in a table.
 usage: |

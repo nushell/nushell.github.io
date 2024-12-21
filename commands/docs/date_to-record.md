@@ -2,7 +2,7 @@
 title: date to-record
 categories: |
   deprecated
-version: 0.100.0
+version: 0.101.0
 deprecated: |
   Convert the date into a record.
 usage: |

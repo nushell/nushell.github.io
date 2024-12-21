@@ -2,7 +2,7 @@
 title: keybindings listen
 categories: |
   platform
-version: 0.100.0
+version: 0.101.0
 platform: |
   Get input from the user.
 usage: |

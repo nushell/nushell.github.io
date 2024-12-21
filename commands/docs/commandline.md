@@ -2,7 +2,7 @@
 title: commandline
 categories: |
   core
-version: 0.100.0
+version: 0.101.0
 core: |
   View the current command line input buffer.
 usage: |
