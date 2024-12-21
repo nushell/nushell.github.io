@@ -2,7 +2,7 @@
 title: do
 categories: |
   core
-version: 0.100.0
+version: 0.101.0
 core: |
   Run a closure, providing it with the pipeline input.
 usage: |
@@ -55,18 +55,6 @@ I am enclosed
 Run the closure and ignore both shell and external program errors
 ```nu
 > do --ignore-errors { thisisnotarealcommand }
-
-```
-
-Run the closure and ignore shell errors
-```nu
-> do --ignore-shell-errors { thisisnotarealcommand }
-
-```
-
-Run the closure and ignore external program errors
-```nu
-> do --ignore-program-errors { nu --commands 'exit 1' }; echo "I'll still run"
 
 ```
 

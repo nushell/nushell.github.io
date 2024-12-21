@@ -2,7 +2,7 @@
 title: from nuon
 categories: |
   formats
-version: 0.100.0
+version: 0.101.0
 formats: |
   Convert from nuon to structured data.
 usage: |

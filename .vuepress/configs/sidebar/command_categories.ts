@@ -10,6 +10,7 @@ export const commandCategories = [
   '/commands/categories/date.md',
   '/commands/categories/debug.md',
   '/commands/categories/default.md',
+  '/commands/categories/deprecated.md',
   '/commands/categories/env.md',
   '/commands/categories/expression.md',
   '/commands/categories/filesystem.md',

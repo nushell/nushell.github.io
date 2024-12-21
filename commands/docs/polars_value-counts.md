@@ -2,7 +2,7 @@
 title: polars value-counts
 categories: |
   dataframe
-version: 0.100.0
+version: 0.101.0
 dataframe: |
   Returns a dataframe with the counts for unique values in series.
 usage: |
@@ -27,7 +27,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Flags
 
- -  `--column, -c {string}`: Provide a custom name for the coutn column
+ -  `--column, -c {string}`: Provide a custom name for the count column
  -  `--sort, -s`: Whether or not values should be sorted
  -  `--parallel, -p`: Use multiple threads when processing
  -  `--normalize, -n {string}`: Normalize the counts

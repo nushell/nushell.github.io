@@ -2,7 +2,7 @@
 title: into record
 categories: |
   conversions
-version: 0.100.0
+version: 0.101.0
 conversions: |
   Convert value to record.
 usage: |
@@ -91,4 +91,10 @@ convert date to record
 │ nanosecond  │ 0      │
 │ timezone    │ +02:00 │
 ╰─────────────┴────────╯
+```
+
+convert date components to table columns
+```nu
+> 2020-04-12T22:10:57+02:00 | into record | transpose | transpose -r
+
 ```

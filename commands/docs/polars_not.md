@@ -2,7 +2,7 @@
 title: polars not
 categories: |
   dataframe
-version: 0.100.0
+version: 0.101.0
 dataframe: |
   Inverts boolean mask.
 usage: |

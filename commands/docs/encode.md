@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.100.0
+version: 0.101.0
 strings: |
   Encode a string into bytes.
 usage: |

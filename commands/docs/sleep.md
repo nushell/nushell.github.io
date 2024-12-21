@@ -2,7 +2,7 @@
 title: sleep
 categories: |
   platform
-version: 0.100.0
+version: 0.101.0
 platform: |
   Delay for a specified amount of time.
 usage: |
@@ -38,9 +38,9 @@ Sleep for 1sec
 
 ```
 
-Sleep for 3sec
+Use multiple arguments to write a duration with multiple units, which is unsupported by duration literals
 ```nu
-> sleep 1sec 1sec 1sec
+> sleep 1min 30sec
 
 ```
 

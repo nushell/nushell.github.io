@@ -2,7 +2,7 @@
 title: polars join
 categories: |
   lazyframe
-version: 0.100.0
+version: 0.101.0
 lazyframe: |
   Joins a lazy frame with other lazy frame.
 usage: |
@@ -31,6 +31,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
  -  `--left, -l`: left join between lazyframes
  -  `--full, -f`: full join between lazyframes
  -  `--cross, -c`: cross join between lazyframes
+ -  `--coalesce-columns`: Sets the join coalesce strategy to colesce columns. Most useful when used with --full, which will not otherwise coalesce.
  -  `--suffix, -s {string}`: Suffix to use on columns with same name
 
 ## Parameters
@@ -50,8 +51,8 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 Join two lazy dataframes
 ```nu
-> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | polars into-lazy);
-    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | polars into-lazy);
+> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | polars into-lazy)
+    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | polars into-lazy)
     $df_a | polars join $df_b a foo | polars collect
 ╭───┬───┬───┬───┬─────┬─────╮
 │ # │ a │ b │ c │ bar │ ham │
@@ -66,8 +67,8 @@ Join two lazy dataframes
 
 Join one eager dataframe with a lazy dataframe
 ```nu
-> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | polars into-df);
-    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | polars into-lazy);
+> let df_a = ([[a b c];[1 "a" 0] [2 "b" 1] [1 "c" 2] [1 "c" 3]] | polars into-df)
+    let df_b = ([["foo" "bar" "ham"];[1 "a" "let"] [2 "c" "var"] [3 "c" "const"]] | polars into-lazy)
     $df_a | polars join $df_b a foo
 ╭───┬───┬───┬───┬─────┬─────╮
 │ # │ a │ b │ c │ bar │ ham │
@@ -77,5 +78,38 @@ Join one eager dataframe with a lazy dataframe
 │ 2 │ 1 │ c │ 2 │ a   │ let │
 │ 3 │ 1 │ c │ 3 │ a   │ let │
 ╰───┴───┴───┴───┴─────┴─────╯
+
+```
+
+Perform a full join of two dataframes and coalesce columns
+```nu
+> let table1 = [[A B]; ["common" "common"] ["table1" "only"]] | polars into-df
+                let table2 = [[A C]; ["common" "common"] ["table2" "only"]] | polars into-df
+                $table1 | polars join -f $table2 --coalesce-columns A A
+╭───┬────────┬────────┬────────╮
+│ # │   A    │   B    │   C    │
+├───┼────────┼────────┼────────┤
+│ 0 │ common │ common │ common │
+│ 1 │ table2 │        │ only   │
+│ 2 │ table1 │ only   │        │
+╰───┴────────┴────────┴────────╯
+
+```
+
+Join one eager dataframe with another using a cross join
+```nu
+> let tokens = [[monopoly_token]; [hat] [shoe] [boat]] | polars into-df
+    let players = [[name, cash]; [Alice, 78] [Bob, 135]] | polars into-df
+    $players | polars select (polars col name) | polars join --cross $tokens | polars collect
+╭───┬───────┬────────────────╮
+│ # │ name  │ monopoly_token │
+├───┼───────┼────────────────┤
+│ 0 │ Alice │ hat            │
+│ 1 │ Alice │ shoe           │
+│ 2 │ Alice │ boat           │
+│ 3 │ Bob   │ hat            │
+│ 4 │ Bob   │ shoe           │
+│ 5 │ Bob   │ boat           │
+╰───┴───────┴────────────────╯
 
 ```

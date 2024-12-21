@@ -2,7 +2,7 @@
 title: random dice
 categories: |
   random
-version: 0.100.0
+version: 0.101.0
 random: |
   Generate a random dice roll.
 usage: |
@@ -28,7 +28,7 @@ usage: |
 
 | input   | output    |
 | ------- | --------- |
-| nothing | list\<any\> |
+| nothing | list\<int\> |
 
 ## Examples
 

@@ -2,7 +2,7 @@
 title: inc
 categories: |
   default
-version: 0.100.0
+version: 0.101.0
 default: |
   Increment a value or version. Optionally use the column of a table.
 usage: |

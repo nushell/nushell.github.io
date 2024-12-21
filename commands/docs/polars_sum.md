@@ -2,7 +2,7 @@
 title: polars sum
 categories: |
   dataframe
-version: 0.100.0
+version: 0.101.0
 dataframe: |
   Creates a sum expression for an aggregation or aggregates columns to their sum value.
 usage: |

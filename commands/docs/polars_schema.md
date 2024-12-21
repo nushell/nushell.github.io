@@ -2,7 +2,7 @@
 title: polars schema
 categories: |
   dataframe
-version: 0.100.0
+version: 0.101.0
 dataframe: |
   Show schema for a dataframe.
 usage: |

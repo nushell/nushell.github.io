@@ -2,7 +2,7 @@
 title: sys cpu
 categories: |
   system
-version: 0.100.0
+version: 0.101.0
 system: |
   View information about the system CPUs.
 usage: |
@@ -17,6 +17,10 @@ usage: |
 ## Signature
 
 ```> sys cpu {flags} ```
+
+## Flags
+
+ -  `--long, -l`: Get all available columns (slower, needs to sample CPU over time)
 
 
 ## Input/output types:

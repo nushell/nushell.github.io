@@ -2,7 +2,7 @@
 title: from tsv
 categories: |
   formats
-version: 0.100.0
+version: 0.101.0
 formats: |
   Parse text as .tsv and create table.
 usage: |
@@ -46,6 +46,19 @@ Convert tab-separated data to a table
 ├───┼──────┼──────┤
 │ 0 │    1 │    2 │
 ╰───┴──────┴──────╯
+
+```
+
+Convert comma-separated data to a table, allowing variable number of columns per row and ignoring headers
+```nu
+> "value 1
+value 2	description 2" | from tsv --flexible --noheaders
+╭───┬─────────┬───────────────╮
+│ # │ column0 │    column1    │
+├───┼─────────┼───────────────┤
+│ 0 │ value 1 │      ❎       │
+│ 1 │ value 2 │ description 2 │
+╰───┴─────────┴───────────────╯
 
 ```
 

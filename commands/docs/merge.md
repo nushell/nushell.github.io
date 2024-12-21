@@ -2,7 +2,7 @@
 title: merge
 categories: |
   filters
-version: 0.100.0
+version: 0.101.0
 filters: |
   Merge the input with a record or table, overwriting values in matching columns.
 usage: |
@@ -71,3 +71,9 @@ You may provide a column structure to merge
 When merging tables, row 0 of the input table is overwritten
 with values from row 0 of the provided table, then
 repeating this process with row 1, and so on.
+
+## Subcommands:
+
+| name                                         | description                                                                             | type     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------- | -------- |
+| [`merge deep`](/commands/docs/merge_deep.md) | Merge the input with a record or table, recursively merging values in matching columns. | built-in |

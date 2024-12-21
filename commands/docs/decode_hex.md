@@ -2,7 +2,7 @@
 title: decode hex
 categories: |
   formats
-version: 0.100.0
+version: 0.101.0
 formats: |
   Hex decode a value.
 usage: |
