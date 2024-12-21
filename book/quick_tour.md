@@ -155,6 +155,7 @@ Nushell commands can extend across multiple lines for readability. The above is 
 ls | sort-by size | reverse | first | get name | cp $in ~
 ```
 
+See Also: [Multi-line Editing](./line_editor.md#multi-line-editing)
 :::
 
 The first three lines are the same commands we used in the second example above, so let's examine the last three:
