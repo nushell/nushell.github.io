@@ -1,2 +1,2 @@
-> nu
-C:\Users\user>
+nu
+# => C:\Users\user>
