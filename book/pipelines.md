@@ -131,7 +131,7 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
     print $in
   }
     true | echo_me
-  # =>   true
+  # => true
   ```
 
   - **_Rule 1.5:_** This is true throughout the current scope. Even on subsequent lines in a closure or block, `$in` is the same value when used in the first position of _any pipeline_ inside that scope.
