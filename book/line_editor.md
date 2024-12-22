@@ -1,124 +1,207 @@
 # Reedline, Nu's Line Editor
 
-Nushell's line editor [Reedline](https://github.com/nushell/reedline) is a
-cross-platform line reader designed to be modular and flexible. The engine is
-in charge of controlling the command history, validations, completions, hints
-and screen paint.
+Nushell's line-editor [Reedline](https://github.com/nushell/reedline) is
+cross-platform and designed to be modular and flexible. The line-editor is
+in charge of controlling the command history, validations, completions, hints,
+screen paint, and more.
 
-## Configuration
+[[toc]]
 
-### Editing Mode
+## Multi-line Editing
 
-Reedline allows you to edit text using two modes: vi and emacs. If not
-specified, the default edit mode is emacs mode. In order to select your
-favorite you need to modify your config file and write down your preferred
-mode.
+Reedline allows Nushell commandlines to extend across multiple lines. This can be accomplished using several methods:
 
-For example:
+1. Pressing <kbd>Enter</kbd> when a bracketed expression is open.
+
+   For example:
+
+   ```nu
+   def my-command [] {
+   ```
+
+   Pressing <kbd>Enter </kbd> after the open-bracket will insert a newline. This will also occur with opening (and valid) `(` and `[` expressions.
+
+   This is commonly used to create blocks and closures (as above), but also list, record, and table literals:
+
+   ```nu
+   let file = {
+     name: 'repos.sqlite'
+     hash: 'b939a3fa4ca011ca1aa3548420e78cee'
+     version: '1.4.2'
+   }
+   ```
+
+   It can even be used to continue a single command across multiple lines:
+
+   ::: details Example
+
+   ```nu
+   (
+     tar
+     -cvz
+     -f archive.tgz
+     --exclude='*.temp'
+     --directory=../project/
+     ./
+   )
+   ```
+
+   :::
+
+2. Pressing <kbd>Enter</kbd> at the end of a line with a trailing pipe-symbol (`|`).
+
+   ```nu
+   ls                     |
+   where name =~ '^[0-9]' | # Comments after a trailing pipe are okay
+   get name               |
+   mv ...$in ./backups/
+   ```
+
+3. Manually insert a newline using <kbd>Alt</kbd>+<kbd>Enter</kbd> or <kbd>Shift</kbd>+<kbd>Enter</kbd>.
+
+   This can be used to create a somewhat more readable version of the previous commandline:
+
+   ```nu
+   ls
+   | where name =~ '^[0-9]'  # Files starting with a digit
+   | get name
+   | mv ...$in ./backups/
+   ```
+
+   ::: tip
+   It's possible that one or both of these keybindings may be intercepted by the terminal application or window-manager. For instance, Windows Terminal (and most other terminal applications on Windows) assign <kbd>Alt</kbd>+<kbd>Enter</kbd> to expand the terminal to full-screen. If neither of the above keybindings work in your terminal, you can assign a different keybinding to:
+
+   ```nu
+   event: { edit: insertnewline }
+   ```
+
+   See [Keybindings](#keybindings) below for more details.
+
+   :::
+
+4. Pressing <kbd>Ctrl</kbd>+<kbd>O</kbd> opens the current commandline in your editor. Saving the resulting file and exiting the editor will update the commandline with the results.
+
+## Setting the Editing Mode
+
+Reedline allows you to edit text using two modes — Vi and Emacs. If not
+specified, the default mode is Emacs. To change the mode, use the
+`edit_mode` setting.
 
 ```nu
-  $env.config = {
-    ...
-    edit_mode: emacs
-    ...
-  }
+$env.config.edit_mode = 'vi'
 ```
 
-#### Default Keybindings
+This can be changed at the commandline or persisted in `config.nu`.
 
-Each edit mode comes with the usual keybinding for vi and emacs text editing.
+::: note
+Vi is a "modal" editor with "normal" mode and an "insert" mode. We recommend
+becoming familiar with these modes through the use of the Vim or Neovim editors
+before using Vi mode in Nushell. Each has a built-in tutorial covering the basics
+(and more) of modal editing.
+:::
 
-Emacs and Vi Insert keybindings
+## Default Keybindings
 
-| Key         | Event                 |
-| ----------- | --------------------- |
-| Esc         | Esc                   |
-| Backspace   | Backspace             |
-| End         | Move to end of line   |
-| End         | Complete history hint |
-| Home        | Move to line start    |
-| Ctr + c     | Cancel current line   |
-| Ctr + l     | Clear screen          |
-| Ctr + r     | Search history        |
-| Ctr + Right | Complete history word |
-| Ctr + Right | Move word right       |
-| Ctr + Left  | Move word left        |
-| Up          | Move menu up          |
-| Up          | Move up               |
-| Down        | Move menu down        |
-| Down        | Move down             |
-| Left        | Move menu left        |
-| Left        | Move left             |
-| Right       | History hint complete |
-| Right       | Move menu right       |
-| Right       | Move right            |
-| Ctr + b     | Move menu left        |
-| Ctr + b     | Move left             |
-| Ctr + f     | History hint complete |
-| Ctr + f     | Move menu right       |
-| Ctr + f     | Move right            |
-| Ctr + p     | Move menu up          |
-| Ctr + p     | Move up               |
-| Ctr + n     | Move menu down        |
-| Ctr + n     | Move down             |
+Each edit mode comes with common keybindings for Vi and Emacs text editing.
 
-Vi Normal keybindings
+### Emacs and Vi-insert Keybindings
 
-| Key     | Event               |
-| ------- | ------------------- |
-| Ctr + c | Cancel current line |
-| Ctr + l | Clear screen        |
-| Up      | Move menu up        |
-| Up      | Move up             |
-| Down    | Move menu down      |
-| Down    | Move down           |
-| Left    | Move menu left      |
-| Left    | Move left           |
-| Right   | Move menu right     |
-| Right   | Move right          |
+These keybinding events apply to both Emacs and Vi-insert mode:
 
-Besides the previous keybindings, while in Vi normal mode you can use the classic
-vi mode of executing actions by selecting a motion or an action. The available
-options for the combinations are:
+| Key                                        | Event                               |
+| ------------------------------------------ | ----------------------------------- |
+| <kbd>Shift</kbd>+<kbd>Enter</kbd>          | Insert newline                      |
+| <kbd>Alt</kbd>+<kbd>Enter</kbd>            | Insert newline                      |
+| <kbd>Backspace</kbd>                       | Backspace                           |
+| <kbd>End</kbd>                             | Move to end of line                 |
+| <kbd>End</kbd>                             | Complete history hint               |
+| <kbd>Home</kbd>                            | Move to line start                  |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd>               | Cancel current line                 |
+| <kbd>Ctrl</kbd>+<kbd>L</kbd>               | Clear screen                        |
+| <kbd>Ctrl</kbd>+<kbd>R</kbd>               | Search history                      |
+| <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Complete history word               |
+| <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Move word right                     |
+| <kbd>Ctrl</kbd>+<kbd>←</kbd> (Left Arrow)  | Move word left                      |
+| <kbd>↑</kbd> (Up Arrow)                    | Move up                             |
+| <kbd>↓</kbd> (Down Arrow)                  | Move down                           |
+| <kbd>←</kbd> (Left Arrow)                  | Move left                           |
+| <kbd>→</kbd> (Right Arrow)                 | Move right                          |
+| <kbd>Ctrl</kbd>+<kbd>P</kbd>               | Move up                             |
+| <kbd>Ctrl</kbd>+<kbd>N</kbd>               | Move down                           |
+| <kbd>Ctrl</kbd>+<kbd>B</kbd>               | Move left                           |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>               | Move right                          |
+| <kbd>→</kbd> (Right Arrow)                 | History-hint complete               |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>               | History-hint complete               |
+| <kbd>Alt</kbd>+<kbd>F</kbd>                | History-hint complete one word      |
+| <kbd>Alt</kbd>+<kbd>←</kbd> (Left Arrow)   | History-hint complete one word less |
 
-Vi Normal motions
+### Vi-insert Keybindings
 
-| Key | motion            |
-| --- | ----------------- |
-| w   | Word              |
-| 0   | Line start        |
-| $   | Line end          |
-| f   | Right until char  |
-| t   | Right before char |
-| F   | Left until char   |
-| T   | Left before char  |
+These keybinding events apply only to Vi-insert mode:
 
-Vi Normal actions
+| Key            | Event                    |
+| -------------- | ------------------------ |
+| <kbd>Esc</kbd> | Switch to Vi-normal mode |
 
-| Key | action                          |
-| --- | ------------------------------- |
-| d   | Delete                          |
-| p   | Paste after                     |
-| P   | Paste before                    |
-| h   | Move left                       |
-| l   | Move right                      |
-| j   | Move down                       |
-| k   | Move up                         |
-| w   | Move word right                 |
-| b   | Move word left                  |
-| i   | Enter Vi insert at current char |
-| a   | Enter Vi insert after char      |
-| 0   | Move to start of line           |
-| ^   | Move to start of line           |
-| $   | Move to end of line             |
-| u   | Undo                            |
-| c   | Change                          |
-| x   | Delete char                     |
-| s   | History search                  |
-| D   | Delete to end                   |
-| A   | Append to end                   |
+### Vi-normal Keybindings
 
-### Command History
+These keybinding events apply only to Vi-normal mode:
+
+| Key                                         | Event               |
+| ------------------------------------------- | ------------------- |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd>                | Cancel current line |
+| <kbd>Ctrl</kbd>+<kbd>L</kbd>                | Clear screen        |
+| <kbd>↑</kbd> (Up Arrow)                     | Move up             |
+| <kbd>↓</kbd> (Down Arrow)                   | Move down           |
+| <kbd>←</kbd> (Left Arrow)                   | Move left           |
+| <kbd>→</kbd> (Right Arrow)                  | Move right          |
+| <kbd>Ctrl></kbd>+<kbd>→</kbd> (Right Arrow) | Move right one word |
+| <kbd>Ctrl></kbd>+<kbd>←</kbd> (Left Arrow)  | Move left one word  |
+
+### Vi-normal Motions
+
+As with Vi, many motions and actions can be combined with an optional count in normal-mode. For example, <kbd>3</kbd><kbd>d</kbd><kbd>w</kbd> deletes the next three words.
+
+| Key                                    | Motion                                        |
+| -------------------------------------- | --------------------------------------------- |
+| <kbd>w</kbd>                           | Move to beginning of next word                |
+| <kbd>e</kbd>                           | Move to end of current or next word           |
+| <kbd>b</kbd>                           | Move to beginning of current or previous word |
+| <kbd>0</kbd>                           | Move to start of line                         |
+| <kbd>$</kbd>                           | Move to end of line                           |
+| <kbd>h</kbd>                           | Move left                                     |
+| <kbd>l</kbd>                           | Move right                                    |
+| <kbd>j</kbd>                           | Move down                                     |
+| <kbd>k</kbd>                           | Move up                                       |
+| <kbd>f</kbd>+\<char\>                  | Move right to \<char\>                        |
+| <kbd>t</kbd>+\<char\>                  | Move right to before \<char\>                 |
+| <kbd>Shift</kbd>+<kbd>F</kbd>+\<char\> | Move left to \<char\>                         |
+| <kbd>Shift</kbd>+<kbd>T</kbd>+\<char\> | Move left to after \<char\>                   |
+
+### Vi-normal Actions
+
+These actions can be combined with many of the [motions above](#vi-normal-motions).
+
+| Key                           | Action                                             |
+| ----------------------------- | -------------------------------------------------- |
+| <kbd>d</kbd>                  | Delete                                             |
+| <kbd>Shift</kbd>+<kbd>D</kbd> | Delete to end of line                              |
+| <kbd>p</kbd>                  | Paste after current character                      |
+| <kbd>Shift</kbd>+<kbd>P</kbd> | Paste before current character                     |
+| <kbd>i</kbd>                  | Enter Vi insert-mode (append) at current character |
+| <kbd>Shift</kbd>+<kbd>I</kbd> | Enter insert-mode at beginning of line             |
+| <kbd>a</kbd>                  | Append after current character                     |
+| <kbd>Shift</kbd>+<kbd>A</kbd> | Append to end of line                              |
+| <kbd>0</kbd>                  | Move to start of line                              |
+| <kbd>^</kbd>                  | Move to start of line                              |
+| <kbd>$</kbd>                  | Move to end of line                                |
+| <kbd>c</kbd>                  | Change                                             |
+| <kbd>r</kbd>                  | Replace                                            |
+| <kbd>s</kbd>                  | Substitute character(s)                            |
+| <kbd>x</kbd>                  | Delete character                                   |
+| <kbd>u</kbd>                  | Undo                                               |
+
+## Command History
 
 As mentioned before, Reedline manages and stores all the commands that are
 edited and sent to Nushell. To configure the max number of records that
@@ -136,50 +219,9 @@ Reedline should store you will need to adjust this value in your config file:
   }
 ```
 
-### Customizing your Prompt
+## Customizing the Prompt
 
-Reedline prompt is also highly customizable. In order to construct your perfect
-prompt, you could define the next environment variables in your config file:
-
-```nu
-# Use nushell functions to define your right and left prompt
-def create_left_prompt [] {
-    let path_segment = ($env.PWD)
-
-    $path_segment
-}
-
-def create_right_prompt [] {
-    let time_segment = ([
-        (date now | format date '%m/%d/%Y %r')
-    ] | str join)
-
-    $time_segment
-}
-
-$env.PROMPT_COMMAND = { create_left_prompt }
-$env.PROMPT_COMMAND_RIGHT = { create_right_prompt }
-```
-
-::: tip
-You don't have to define the environment variables using Nushell
-functions. You can use simple strings to define them.
-:::
-
-You can also customize the prompt indicator for the line editor by modifying
-the next env variables.
-
-```nu
-$env.PROMPT_INDICATOR = "〉"
-$env.PROMPT_INDICATOR_VI_INSERT = ": "
-$env.PROMPT_INDICATOR_VI_NORMAL = "〉"
-$env.PROMPT_MULTILINE_INDICATOR = "::: "
-```
-
-::: tip
-The prompt indicators are environment variables that represent the
-state of the prompt
-:::
+The Reedline prompt is configured using a number of environment variables. See [Prompt Configuration](./configuration.md#prompt-configuration) for details.
 
 ## Keybindings
 
@@ -538,14 +580,37 @@ e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 
 ### Troubleshooting Keybinding Problems
 
-Your terminal environment may not always propagate your key combinations on to nushell the way you expect it to.
-You can use the command [`keybindings listen`](/commands/docs/keybindings_listen.md) to figure out if certain keypresses are actually received by nushell, and how.
+Your terminal environment may not always propagate your key combinations on to Nushell the way you expect it to. You can use the command [`keybindings listen`](/commands/docs/keybindings_listen.md) to determine if certain keypresses are actually received by Nushell, and how.
 
 ## Menus
 
 Thanks to Reedline, Nushell has menus that can help you with your day to day
 shell scripting. Next we present the default menus that are always available
 when using Nushell
+
+### Menu Keybindings
+
+When a menu is active, some keybindings change based on the keybinding [`until` specifier](#until-type) discussed above. Common keybindings for menus are:
+
+| Key                             | Event                |
+| ------------------------------- | -------------------- |
+| <kbd>Tab</kbd>                  | Select next item     |
+| <kbd>Shift</kbd>+<kbd>Tab</kbd> | Select previous item |
+| <kbd>Enter</kbd>                | Accept selection     |
+| <kbd>↑</kbd> (Up Arrow)         | Move menu up         |
+| <kbd>↓</kbd> (Down Arrow)       | Move menu down       |
+| <kbd>←</kbd> (Left Arrow)       | Move menu left       |
+| <kbd>→</kbd> (Right Arrow)      | Move menu right      |
+| <kbd>Ctrl</kbd>+<kbd>P</kbd>    | Move menu up         |
+| <kbd>Ctrl</kbd>+<kbd>N</kbd>    | Move menu down       |
+| <kbd>Ctrl</kbd>+<kbd>B</kbd>    | Move menu left       |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>    | Move menu right      |
+
+::: note
+Menu direction behavior varies based on the menu type (see below). For example,
+in a `description` menu, "Up" and "Down" apply to the "Extra" list, but in a
+`list` menu the directions apply to the selection.
+:::
 
 ### Help Menu
 
