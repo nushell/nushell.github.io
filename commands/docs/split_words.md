@@ -2,7 +2,7 @@
 title: split words
 categories: |
   strings
-version: 0.100.0
+version: 0.101.0
 strings: |
   Split a string's words into separate rows.
 usage: |

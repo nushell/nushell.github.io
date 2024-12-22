@@ -2,7 +2,7 @@
 title: reduce
 categories: |
   filters
-version: 0.100.0
+version: 0.101.0
 filters: |
   Aggregate a list (starting from the left) to a single value using an accumulator closure.
 usage: |
@@ -82,4 +82,14 @@ Concatenate a string with itself, using a range to determine the number of times
 ```nu
 > let s = "Str"; 0..2 | reduce --fold '' {|it, acc| $acc + $s}
 StrStrStr
+```
+
+Merge multiple records together, making use of the fact that the accumulated value is also supplied as pipeline input to the closure.
+```nu
+> [{a: 1} {b: 2} {c: 3}] | reduce {|it| merge $it}
+╭───┬───╮
+│ a │ 1 │
+│ b │ 2 │
+│ c │ 3 │
+╰───┴───╯
 ```

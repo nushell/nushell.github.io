@@ -2,7 +2,7 @@
 title: polars into-lazy
 categories: |
   lazyframe
-version: 0.100.0
+version: 0.101.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe.
 usage: |

@@ -2,7 +2,7 @@
 title: polars with-column
 categories: |
   dataframe or lazyframe
-version: 0.100.0
+version: 0.101.0
 dataframe_or_lazyframe: |
   Adds a series to the dataframe.
 usage: |
@@ -27,7 +27,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Flags
 
- -  `--name, -n {string}`: new column name
+ -  `--name, -n {string}`: New column name. For lazy dataframes and expressions syntax, use a `polars as` expression to name a column.
 
 ## Parameters
 

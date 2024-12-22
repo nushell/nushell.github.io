@@ -2,7 +2,7 @@
 title: polars agg
 categories: |
   lazyframe
-version: 0.100.0
+version: 0.101.0
 lazyframe: |
   Performs a series of aggregations from a group-by.
 usage: |

@@ -2,7 +2,7 @@
 title: plugin list
 categories: |
   plugin
-version: 0.100.0
+version: 0.101.0
 plugin: |
   List loaded and installed plugins.
 usage: |
@@ -39,7 +39,7 @@ List installed plugins.
 ╭───┬──────┬─────────┬─────────┬────────┬───────────────────────────────┬───────┬─────────────╮
 │ # │ name │ version │ status  │  pid   │           filename            │ shell │  commands   │
 ├───┼──────┼─────────┼─────────┼────────┼───────────────────────────────┼───────┼─────────────┤
-│ 0 │ inc  │ 0.100.0 │ running │ 106480 │ /opt/nu/plugins/nu_plugin_inc │       │ ╭───┬─────╮ │
+│ 0 │ inc  │ 0.100.1 │ running │ 106480 │ /opt/nu/plugins/nu_plugin_inc │       │ ╭───┬─────╮ │
 │   │      │         │         │        │                               │       │ │ 0 │ inc │ │
 │   │      │         │         │        │                               │       │ ╰───┴─────╯ │
 ╰───┴──────┴─────────┴─────────┴────────┴───────────────────────────────┴───────┴─────────────╯

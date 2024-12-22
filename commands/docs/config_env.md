@@ -2,7 +2,7 @@
 title: config env
 categories: |
   env
-version: 0.100.0
+version: 0.101.0
 env: |
   Edit nu environment configurations.
 usage: |
@@ -20,7 +20,8 @@ usage: |
 
 ## Flags
 
- -  `--default, -d`: Print default `env.nu` file instead.
+ -  `--default, -d`: Print the internal default `env.nu` file instead.
+ -  `--doc, -s`: Print a commented `env.nu` with documentation instead.
 
 
 ## Input/output types:
@@ -31,20 +32,20 @@ usage: |
 
 ## Examples
 
-allow user to open and update nu env
+open user's env.nu in the default editor
 ```nu
 > config env
 
 ```
 
-allow user to print default `env.nu` file
+pretty-print a commented `env.nu` that explains common settings
 ```nu
-> config env --default,
+> config env --doc | nu-highlight,
 
 ```
 
-allow saving the default `env.nu` locally
+pretty-print the internal `env.nu` file which is loaded before the user's environment
 ```nu
-> config env --default | save -f ~/.config/nushell/default_env.nu
+> config env --default | nu-highlight,
 
 ```

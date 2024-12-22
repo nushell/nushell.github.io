@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.100.0
+version: 0.101.0
 filters: |
   Count the number of items in an input list, rows in a table, or bytes in binary data.
 usage: |
@@ -25,6 +25,7 @@ usage: |
 | --------- | ------ |
 | binary    | int    |
 | list\<any\> | int    |
+| nothing   | int    |
 ## Examples
 
 Count the number of items in a list
@@ -43,4 +44,10 @@ Count the number of bytes in binary data
 ```nu
 > 0x[01 02] | length
 2
+```
+
+Count the length a null value
+```nu
+> null | length
+0
 ```
