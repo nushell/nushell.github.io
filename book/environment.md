@@ -108,7 +108,7 @@ $env.FOO
 # => BAR
 
 if "FOO" in $env {
-echo $env.FOO
+    echo $env.FOO
 }
 # => BAR
 ```
