@@ -17,7 +17,7 @@ Tabellen Rahmen werden mit der Einstellung `table_mode` in der `config.nu` konfi
 Hier ein Beispiel:
 
 ```nu
-> $env.config = {
+$env.config = {
     table_mode: rounded
 }
 ```
@@ -273,7 +273,7 @@ Hier die aktuelle Liste von Primitiven Typen. Nicht alle davon sind konfigurierb
 Hier ein kleines Beispiel, wie diese Werte angewendet werden können.
 
 ```nu
-> let config = {
+let config = {
     color_config: {
         separator: purple
         leading_trailing_space_bg: "#ffffff"
@@ -298,7 +298,7 @@ Hier ein kleines Beispiel, wie diese Werte angewendet werden können.
 Hier ein anderes Beispiel, welches mehrere Farben Schreibweisen sowie Kommentare verwendet.
 
 ```nu
-> let config = {
+let config = {
     color_config: {
         separator: "#88b719" # Dies setzt nur die Vordergrundsfarbe wie in PR #486
         leading_trailing_space_bg: white # Dies setzt nur die Vordergrundsfarbe im ursprünglichen Stil
@@ -352,7 +352,7 @@ Hier die aktuelle Formen Liste.
 Hier ein kleines Beispiel wie Farben auf diese Teile angewendet werden. Was nicht spezifiziert wird, erhält die Standardfarbe.
 
 ```nu
-> $env.config = {
+$env.config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
         shape_bool: green
@@ -375,13 +375,13 @@ Der Nushell Prompt ist konfigurierbar mit diesen Umgebungsvariablen:
 Beispiel: Für einen einfachen Prompt wäre folgendes mögllich. Hinweis `PROMPT_COMMAND` benötigt einen `block` wogegen die anderen einen `string` erwarten.
 
 ```nu
-> $env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
+$env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 Soll der standard `PROMPT_INDICATOR` geändert werden, sieht das so aus.
 
 ```nu
-> $env.PROMPT_INDICATOR = "> "
+$env.PROMPT_INDICATOR = "> "
 ```
 
 Den Prompt einfärben wird duch den `block` `PROMPT_COMMAND` kontrolliert und individualisiert.

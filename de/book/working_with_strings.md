@@ -11,8 +11,8 @@ Der einfachste Text in Nushell ist der in einfachen Anführungszeichen.
 Er wird mit dem `'` Zeichen umgeben. Hier der Text als Hallo Welt.
 
 ```nu
-> 'Hallo Welt'
-Hallo Welt
+'Hallo Welt'
+# => Hallo Welt
 ```
 
 Text in einfachen Anführungszeichen belassen den Text wie er ist,
@@ -30,9 +30,9 @@ Hallo gefolgt von einen `\n` um eine neue Linie zu erzeugen, dann Welt.
 Das ganze in doppelten Anführungszeichen.
 
 ```nu
-> "Hallo\nWelt"
-Hallo
-Welt
+"Hallo\nWelt"
+# => Hallo
+# => Welt
 ```
 
 Escape Zeichen werden verwendet um Zeichen einzugeben, die ansonsten
@@ -64,9 +64,9 @@ Soll zum Beispiel eine Person per Namen gegrüsst werden, deren Namen in einer V
 dann sieht das so aus:
 
 ```nu
-> let name = "Alice"
-> $"greetings, ($name)"
-greetings, Alice
+let name = "Alice"
+$"greetings, ($name)"
+# => greetings, Alice
 ```
 
 Ein Ausdruck in `()` wird zuerst fertig ausgeführt. Das Ergebnis wird zur Bildung
@@ -81,8 +81,8 @@ So können die Zeichen `(` und `)` in einem Text verwendet werden, ohne dass Nus
 auswerten will, was sich dazwischen befindet.
 
 ```nu
-> $"2 + 2 is (2 + 2) \(you guessed it!)"
-2 + 2 is 4 (you guessed it!)
+$"2 + 2 is (2 + 2) \(you guessed it!)"
+# => 2 + 2 is 4 (you guessed it!)
 ```
 
 ## Texte aufsplitten
@@ -108,8 +108,8 @@ Mit `help str` wirden alle Sub-Befehle ausgegeben.
 Zum Beispiel kann geprüft werden, ob sich ein Zeichen in einem Text befindet mit `str contains`:
 
 ```nu
-> "Hallo Welt" | str contains "W"
-true
+"Hallo Welt" | str contains "W"
+# => true
 ```
 
 ### Texte schneiden
@@ -119,8 +119,8 @@ geschnitten. Standardmässig schneidet der [`str trim`](/commands/docs/str_trim.
 Leerraum von beiden Seiten des Textes. Zum Beispiel:
 
 ```nu
-> '       My   string   ' | str trim
-My   string
+'       My   string   ' | str trim
+# => My   string
 ```
 
 Mit den Optionen `--right` und `--left` kann die Seite angegeben werden,
@@ -130,8 +130,8 @@ Um ein spezifisches Zeichen weg zu schneiden, wird `--char <Character>` verwende
 Hier ein Beispiel mit dieser Option:
 
 ```nu
-> '=== Nu shell ===' | str trim -r -c '='
-=== Nu shell
+'=== Nu shell ===' | str trim -r -c '='
+# => === Nu shell
 ```
 
 ### Subtexte
@@ -140,12 +140,12 @@ Subtexte sind Stücke von Texten. Sie haben einen Start- und einen Endpunkt.
 Hier ein Beispiel eines Substrings:
 
 ```nu
-> 'Hallo Welt!' | str index-of 'o'
-4
-> 'Hallo Welt!' | str index-of 'l'
-8
-> 'Hallo Welt!' | str substring 4..8
-o We
+'Hallo Welt!' | str index-of 'o'
+# => 4
+'Hallo Welt!' | str index-of 'l'
+# => 8
+'Hallo Welt!' | str substring 4..8
+# => o We
 ```
 
 ### Texte ausrichten (padding)
@@ -153,10 +153,10 @@ o We
 Verwende [`fill`](/commands/docs/fill.md):
 
 ```nu
-> '1234' | fill -a right -c '0' -w 10
-0000001234
-> '1234' | fill -a left -c '0' -w 10 | str length
-10
+'1234' | fill -a right -c '0' -w 10
+# => 0000001234
+'1234' | fill -a left -c '0' -w 10 | str length
+# => 10
 ```
 
 ### Texte umkehren
@@ -164,14 +164,14 @@ Verwende [`fill`](/commands/docs/fill.md):
 Dies kann mit dem [`str reverse`](/commands/docs/str_reverse.md) Befehl ganz einfach erreicht werden.
 
 ```nu
-> 'Nushell' | str reverse
-llehsuN
-> ['Nushell' 'is' 'cool'] | str reverse
-╭───┬─────────╮
-│ 0 │ llehsuN │
-│ 1 │ si      │
-│ 2 │ looc    │
-╰───┴─────────╯
+'Nushell' | str reverse
+# => llehsuN
+['Nushell' 'is' 'cool'] | str reverse
+# => ╭───┬─────────╮
+# => │ 0 │ llehsuN │
+# => │ 1 │ si      │
+# => │ 2 │ looc    │
+# => ╰───┴─────────╯
 ```
 
 ## Texte parsen
@@ -180,18 +180,18 @@ Mit dem [`parse`](/commands/docs/parse.md) Befehl können Texte in Spalten gepar
 Zum Beispiel:
 
 ```nu
-> 'Nushell is the best' | parse '{shell} is {type}'
-╭───┬─────────┬──────────╮
-│ # │  shell  │   type   │
-├───┼─────────┼──────────┤
-│ 0 │ Nushell │ the best │
-╰───┴─────────┴──────────╯
-> 'Bash is kinda cringe' | parse --regex '(?P<shell>\w+) is (?P<type>[\w\s]+)'
-╭───┬───────┬──────────────╮
-│ # │ shell │     type     │
-├───┼───────┼──────────────┤
-│ 0 │ Bash  │ kinda cringe │
-╰───┴───────┴──────────────╯
+'Nushell is the best' | parse '{shell} is {type}'
+# => ╭───┬─────────┬──────────╮
+# => │ # │  shell  │   type   │
+# => ├───┼─────────┼──────────┤
+# => │ 0 │ Nushell │ the best │
+# => ╰───┴─────────┴──────────╯
+'Bash is kinda cringe' | parse --regex '(?P<shell>\w+) is (?P<type>[\w\s]+)'
+# => ╭───┬───────┬──────────────╮
+# => │ # │ shell │     type     │
+# => ├───┼───────┼──────────────┤
+# => │ 0 │ Bash  │ kinda cringe │
+# => ╰───┴───────┴──────────────╯
 ```
 
 ## Texte konvertieren

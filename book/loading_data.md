@@ -13,8 +13,8 @@ In a similar way to [`ls`](/commands/docs/ls.md), opening a file type that Nu un
 If we wanted to check the version of the project we were looking at, we can use the [`get`](/commands/docs/get.md) command.
 
 ```nu
-> open editors/vscode/package.json | get version
-1.0.0
+open editors/vscode/package.json | get version
+# => 1.0.0
 ```
 
 Nu currently supports the following formats for loading data directly into tables:
@@ -44,7 +44,7 @@ You can thus simply extend the set of supported file types of `open` by creating
 But what happens if you load a text file that isn't one of these? Let's try it:
 
 ```nu
-> open README.md
+open README.md
 ```
 
 We're shown the contents of the file.
@@ -98,10 +98,10 @@ An important part of working with data coming from outside Nu is that it's not a
 Let's imagine that we're given this data file:
 
 ```nu
-> open people.txt
-Octavia | Butler | Writer
-Bob | Ross | Painter
-Antonio | Vivaldi | Composer
+open people.txt
+# => Octavia | Butler | Writer
+# => Bob | Ross | Painter
+# => Antonio | Vivaldi | Composer
 ```
 
 Each bit of data we want is separated by the pipe ('|') symbol, and each person is on a separate line. Nu doesn't have a pipe-delimited file format by default, so we'll have to parse this ourselves.
@@ -109,75 +109,75 @@ Each bit of data we want is separated by the pipe ('|') symbol, and each person 
 The first thing we want to do when bringing in the file is to work with it a line at a time:
 
 ```nu
-> open people.txt | lines
-───┬──────────────────────────────
- 0 │ Octavia | Butler | Writer
- 1 │ Bob | Ross | Painter
- 2 │ Antonio | Vivaldi | Composer
-───┴──────────────────────────────
+open people.txt | lines
+# => ───┬──────────────────────────────
+# =>  0 │ Octavia | Butler | Writer
+# =>  1 │ Bob | Ross | Painter
+# =>  2 │ Antonio | Vivaldi | Composer
+# => ───┴──────────────────────────────
 ```
 
 We can see that we're working with the lines because we're back into a list. Our next step is to see if we can split up the rows into something a little more useful. For that, we'll use the [`split`](/commands/docs/split.md) command. [`split`](/commands/docs/split.md), as the name implies, gives us a way to split a delimited string. We will use [`split`](/commands/docs/split.md)'s `column` subcommand to split the contents across multiple columns. We tell it what the delimiter is, and it does the rest:
 
 ```nu
-> open people.txt | lines | split column "|"
-───┬──────────┬───────────┬───────────
- # │ column1  │ column2   │ column3
-───┼──────────┼───────────┼───────────
- 0 │ Octavia  │  Butler   │  Writer
- 1 │ Bob      │  Ross     │  Painter
- 2 │ Antonio  │  Vivaldi  │  Composer
-───┴──────────┴───────────┴───────────
+open people.txt | lines | split column "|"
+# => ───┬──────────┬───────────┬───────────
+# =>  # │ column1  │ column2   │ column3
+# => ───┼──────────┼───────────┼───────────
+# =>  0 │ Octavia  │  Butler   │  Writer
+# =>  1 │ Bob      │  Ross     │  Painter
+# =>  2 │ Antonio  │  Vivaldi  │  Composer
+# => ───┴──────────┴───────────┴───────────
 ```
 
 That _almost_ looks correct. It looks like there's an extra space there. Let's [`trim`](/commands/docs/str_trim.md) that extra space:
 
 ```nu
-> open people.txt | lines | split column "|" | str trim
-───┬─────────┬─────────┬──────────
- # │ column1 │ column2 │ column3
-───┼─────────┼─────────┼──────────
- 0 │ Octavia │ Butler  │ Writer
- 1 │ Bob     │ Ross    │ Painter
- 2 │ Antonio │ Vivaldi │ Composer
-───┴─────────┴─────────┴──────────
+open people.txt | lines | split column "|" | str trim
+# => ───┬─────────┬─────────┬──────────
+# =>  # │ column1 │ column2 │ column3
+# => ───┼─────────┼─────────┼──────────
+# =>  0 │ Octavia │ Butler  │ Writer
+# =>  1 │ Bob     │ Ross    │ Painter
+# =>  2 │ Antonio │ Vivaldi │ Composer
+# => ───┴─────────┴─────────┴──────────
 ```
 
 Not bad. The [`split`](/commands/docs/split.md) command gives us data we can use. It also goes ahead and gives us default column names:
 
 ```nu
-> open people.txt | lines | split column "|" | str trim | get column1
-───┬─────────
- 0 │ Octavia
- 1 │ Bob
- 2 │ Antonio
-───┴─────────
+open people.txt | lines | split column "|" | str trim | get column1
+# => ───┬─────────
+# =>  0 │ Octavia
+# =>  1 │ Bob
+# =>  2 │ Antonio
+# => ───┴─────────
 ```
 
 We can also name our columns instead of using the default names:
 
 ```nu
-> open people.txt | lines | split column "|" first_name last_name job | str trim
-───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job
-───┼────────────┼───────────┼──────────
- 0 │ Octavia    │ Butler    │ Writer
- 1 │ Bob        │ Ross      │ Painter
- 2 │ Antonio    │ Vivaldi   │ Composer
-───┴────────────┴───────────┴──────────
+open people.txt | lines | split column "|" first_name last_name job | str trim
+# => ───┬────────────┬───────────┬──────────
+# =>  # │ first_name │ last_name │ job
+# => ───┼────────────┼───────────┼──────────
+# =>  0 │ Octavia    │ Butler    │ Writer
+# =>  1 │ Bob        │ Ross      │ Painter
+# =>  2 │ Antonio    │ Vivaldi   │ Composer
+# => ───┴────────────┴───────────┴──────────
 ```
 
 Now that our data is in a table, we can use all the commands we've used on tables before:
 
 ```nu
-> open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
-───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job
-───┼────────────┼───────────┼──────────
- 0 │ Antonio    │ Vivaldi   │ Composer
- 1 │ Bob        │ Ross      │ Painter
- 2 │ Octavia    │ Butler    │ Writer
-───┴────────────┴───────────┴──────────
+open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
+# => ───┬────────────┬───────────┬──────────
+# =>  # │ first_name │ last_name │ job
+# => ───┼────────────┼───────────┼──────────
+# =>  0 │ Antonio    │ Vivaldi   │ Composer
+# =>  1 │ Bob        │ Ross      │ Painter
+# =>  2 │ Octavia    │ Butler    │ Writer
+# => ───┴────────────┴───────────┴──────────
 ```
 
 There are other commands you can use to work with strings:
@@ -188,12 +188,12 @@ There are other commands you can use to work with strings:
 There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:
 
 ```nu
-> open Cargo.lock
-# This file is automatically @generated by Cargo.
-# It is not intended for manual editing.
-[[package]]
-name = "adhoc_derive"
-version = "0.1.2"
+open Cargo.lock
+# => # This file is automatically @generated by Cargo.
+# => # It is not intended for manual editing.
+# => [[package]]
+# => name = "adhoc_derive"
+# => version = "0.1.2"
 ```
 
 The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the [`from`](/commands/docs/from.md) command using the `toml` subcommand:
@@ -207,12 +207,12 @@ The [`from`](/commands/docs/from.md) command can be used for each of the structu
 While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the [`open`](/commands/docs/open.md) command can take an optional `--raw` flag:
 
 ```nu
-> open Cargo.toml --raw
-[package]                                                                                        name = "nu"
-version = "0.1.3"
-authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
-description = "A shell for the GitHub era"
-license = "MIT"
+open Cargo.toml --raw
+# => [package]                                                                                        name = "nu"
+# => version = "0.1.3"
+# => authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
+# => description = "A shell for the GitHub era"
+# => license = "MIT"
 ```
 
 ## SQLite
@@ -220,19 +220,19 @@ license = "MIT"
 SQLite databases are automatically detected by [`open`](/commands/docs/open.md), no matter what their file extension is. You can open a whole database:
 
 ```nu
-> open foo.db
+open foo.db
 ```
 
 Or [`get`](/commands/docs/get.md) a specific table:
 
 ```nu
-> open foo.db | get some_table
+open foo.db | get some_table
 ```
 
 Or run any SQL query you like:
 
 ```nu
-> open foo.db | query db "select * from some_table"
+open foo.db | query db "select * from some_table"
 ```
 
 (Note: some older versions of Nu use `into db | query` instead of `query db` )

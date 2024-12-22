@@ -4,11 +4,11 @@
 Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where.md) can be used with lists:
 
 ```nu
-> [bell book candle] | where ($it =~ 'b')
-╭───┬──────╮
-│ 0 │ bell │
-│ 1 │ book │
-╰───┴──────╯
+[bell book candle] | where ($it =~ 'b')
+# => ╭───┬──────╮
+# => │ 0 │ bell │
+# => │ 1 │ book │
+# => ╰───┴──────╯
 ```
 
 :::
@@ -28,15 +28,15 @@ Nushell lists are similar to JSON arrays. The same `[ "Item1", "Item2", "Item3" 
 We can [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
 
 ```nu
-> [1, 2, 3, 4] | insert 2 10
-# [1, 2, 10, 3, 4]
+[1, 2, 3, 4] | insert 2 10
+# => [1, 2, 10, 3, 4]
 ```
 
 We can also use [`update`](/commands/docs/update.md) to replace the 2nd element with the value `10`.
 
 ```nu
-> [1, 2, 3, 4] | update 1 10
-# [1, 10, 3, 4]
+[1, 2, 3, 4] | update 1 10
+# => [1, 10, 3, 4]
 ```
 
 ## Removing or Adding Items from List
@@ -51,7 +51,8 @@ let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
 let colors = ($colors ++ "blue")
 let colors = ("black" ++ $colors)
-$colors # [black red yellow green purple blue]
+$colors 
+# => [black red yellow green purple blue]
 ```
 
 In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list.
@@ -60,7 +61,8 @@ In case you want to remove items from list, there are many ways. [`skip`](/comma
 let colors = [red yellow green purple]
 let colors = ($colors | skip 1)
 let colors = ($colors | drop 2)
-$colors # [yellow]
+$colors 
+# => [yellow]
 ```
 
 We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first.md) which allow you to [`take`](/commands/docs/take.md) from the end or beginning of the list, respectively.
@@ -68,7 +70,8 @@ We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first
 ```nu
 let colors = [red yellow green purple black magenta]
 let colors = ($colors | last 3)
-$colors # [purple black magenta]
+$colors 
+# => [purple black magenta]
 ```
 
 And from the beginning of a list,
@@ -76,7 +79,8 @@ And from the beginning of a list,
 ```nu
 let colors = [yellow green purple]
 let colors = ($colors | first 2)
-$colors # [yellow green]
+$colors 
+# => [yellow green]
 ```
 
 ### Using the Spread Operator
@@ -85,19 +89,19 @@ To append one or more lists together, optionally with values interspersed in bet
 [spread operator](/book/operators#spread-operator) (`...`):
 
 ```nu
-> let x = [1 2]
-> [
-    ...$x
-    3
-    ...(4..7 | take 2)
-  ]
-╭───┬───╮
-│ 0 │ 1 │
-│ 1 │ 2 │
-│ 2 │ 3 │
-│ 3 │ 4 │
-│ 4 │ 5 │
-╰───┴───╯
+let x = [1 2]
+[
+  ...$x
+  3
+  ...(4..7 | take 2)
+]
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => │ 3 │ 4 │
+# => │ 4 │ 5 │
+# => ╰───┴───╯
 ```
 
 ## Iterating over Lists

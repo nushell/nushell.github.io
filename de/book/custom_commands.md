@@ -17,7 +17,7 @@ In dieser Definition, wird ein Befehl `greet` beschrieben, der einen Parameter `
 Um den obigen Befehl auszuführen wird er wie ein eingebauter Befehl aufgerufen:
 
 ```
-> greet "world"
+greet "world"
 ```
 
 Wenn das getan wird, wird eine Ausgabe erzeugt, die wie die der eingebauten Befehle aussieht:
@@ -48,7 +48,7 @@ def "str mycommand" [] {
 Jetzt kann der eigene Unterbefehl aufgerufen werden, als ob er ein eingebauter Befehl von `str` wäre:
 
 ```
-> str mycommand
+str mycommand
 ```
 
 ## Typen von Parametern
@@ -130,19 +130,19 @@ In der obigen Definition von `greet`, werden ein fester Parameter `name` und ein
 Das obige Beispiel kann wie folgt aufgerufen werden:
 
 ```
-> greet world --age 10
+greet world --age 10
 ```
 
 Oder:
 
 ```
-> greet --age 10 world
+greet --age 10 world
 ```
 
 Oder gleich ganz ohne Flag:
 
 ```
-> greet world
+greet world
 ```
 
 Flags können auch so definiert werden, dass es eine Kurzform gibt. Das erlaubt es sowohl eine kurze als auch eine einfach lesbare lange Flag für die selbe Aufgabe zu haben.
@@ -163,7 +163,7 @@ _Hinweis:_ Flags sind benannt nach der langen Form des Namens. Im obigen Beispie
 Nun kann diese neue Version von `greet` wie folgt aufgerufen werden:
 
 ```
-> greet -a 10 hello
+greet -a 10 hello
 ```
 
 ## Dokumentation für den eigenen Befehl
