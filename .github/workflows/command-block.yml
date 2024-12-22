@@ -17,9 +17,11 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Awesome that you are trying to improve the documentation of a nushell command!\n\n' +
-                'As we autogenerate these command pages from the help information defined with the command after each release:\n'+
-                '- If you already updated the command help, you are already done!\n'+
-                '- Else, please look for the command in the [source tree](https://github.com/nushell/nushell/tree/main/crates) and make your changes directly there.\n\n'+
+                'You should not modify the files in `commands/docs` or `commands/categorees`!\n' +
+                'We autogenerate these command pages from the `help` information defined by the command implementation, after each release. Thus:\n'+
+                '- If you already updated the command help, you are already done and can close this PR!\n'+
+                '- Else, please look for the command in the [source tree](https://github.com/nushell/nushell/tree/main/crates) and make your changes directly there in the `impl Command` and `Signature`.\n'+
+                '- If you accidentally made a change in `commands/` while working on general documentation, please revert changes to `commands/`\n\n'+
                 'Thanks for helping out!'
             })
       - run: |
