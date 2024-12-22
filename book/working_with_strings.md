@@ -437,4 +437,8 @@ $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 ```
 
 `ansi purple_bold` makes the text a bold purple
-`ansi reset` resets the coloring to the default. (Tip: You should always end colored strings with `ansi reset`)
+`ansi reset` resets the coloring to the default.
+
+::: tip
+You should always end colored strings with `ansi reset`
+:::

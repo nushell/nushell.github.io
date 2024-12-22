@@ -115,7 +115,7 @@
    ╰───┴───╯
    ```
 
-1. Conversion - A ranges may be converted to a `list` using:
+1. Conversion - A range may be converted to a `list` using:
 
    ```nu
    1..5 | each {||}
