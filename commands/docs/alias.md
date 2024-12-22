@@ -18,6 +18,8 @@ usage: |
 
 ```> alias {flags} (name) (initial_value)```
 
+TROL:LING
+
 ## Parameters
 
  -  `name`: Name of the alias.
