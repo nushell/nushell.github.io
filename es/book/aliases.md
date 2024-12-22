@@ -9,16 +9,16 @@ Un alias te permite crear un nombre corto para un bloque de comandos. Cuando se 
 Ejemplo:
 
 ```
-> alias ls-nombres [] { ls | select name }
-> ls-nombres
-────┬────────────────────
- #  │ name
-────┼────────────────────
-  0 │ 404.html
-  1 │ CONTRIBUTING.md
-  2 │ Gemfile
-  3 │ Gemfile.lock
-  4 │ LICENSE
+alias ls-nombres [] { ls | select name }
+ls-nombres
+# => ────┬────────────────────
+# =>  #  │ name
+# => ────┼────────────────────
+# =>   0 │ 404.html
+# =>   1 │ CONTRIBUTING.md
+# =>   2 │ Gemfile
+# =>   3 │ Gemfile.lock
+# =>   4 │ LICENSE
 ```
 
 ## Parámetros
@@ -26,9 +26,9 @@ Ejemplo:
 También pueden tomar parámetros opcionales que son pasadas al bloque. Cada parámetro se convierte en una variable en el bloque.
 
 ```
-> alias decir [mensaje] { echo $mensaje }
-> decir "¡hola!"
-¡hola!
+alias decir [mensaje] { echo $mensaje }
+decir "¡hola!"
+# => ¡hola!
 ```
 
 Puedes tener un número arbitrario de estos argumentos. Cuando el usuario no proporciona un valor, la variable en el bloque evaulara a `Nothing` y será eliminada.

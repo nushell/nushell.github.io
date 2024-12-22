@@ -5,11 +5,11 @@ Nu proporciona una serie de comandos que puedes utilitar en diferentes sistemas 
 Comando de Nu:
 
 ```
-> ls
+ls
 ```
 
 Escapa al comando local:
 
 ```
-> ^ls
+^ls
 ```

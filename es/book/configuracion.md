@@ -23,7 +23,7 @@ Nu tiene un número pequeño, pero creciente, de variables internas que puedes e
 Para establecer una de estas variables, puedes usar `config set`. Por ejemplo:
 
 ```
-> config set edit_mode "vi"
+config set edit_mode "vi"
 ```
 
 ### Estableciendo una variable desde la tubería
@@ -31,7 +31,7 @@ Para establecer una de estas variables, puedes usar `config set`. Por ejemplo:
 Hay una manera adicional de establecer una variable, y es usar el contenido de la tubería como el valor deseado para la variable. Para esto usa la bandera `set-into`:
 
 ```
-> echo "bar" | config set_into foo
+echo "bar" | config set_into foo
 ```
 
 Esto es de utilidad cuando se trabaja con las variables `env` y `path`.
@@ -41,12 +41,12 @@ Esto es de utilidad cuando se trabaja con las variables `env` y `path`.
 Ejecutando el comando `config` sin argumentos mostrará una tabla de las preferencias de configuración actuales:
 
 ```
-> config
-━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━
- edit_mode │ env            │ path             │ table_mode
-───────────┼────────────────┼──────────────────┼────────────
- emacs     │ [table: 1 row] │ [table: 10 rows] │ normal
-━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━
+config
+# => ━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━
+# =>  edit_mode │ env            │ path             │ table_mode
+# => ───────────┼────────────────┼──────────────────┼────────────
+# =>  emacs     │ [table: 1 row] │ [table: 10 rows] │ normal
+# => ━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━
 ```
 
 Nota: si por el momento no has establecido variables de configuración, puede estar vacía.
@@ -56,7 +56,7 @@ Nota: si por el momento no has establecido variables de configuración, puede es
 Usando la bandera `get`, puedes conseguir el valor de una variable:
 
 ```
-> config get edit_mode
+config get edit_mode
 ```
 
 ### Eliminando una variable
@@ -64,7 +64,7 @@ Usando la bandera `get`, puedes conseguir el valor de una variable:
 Para eliminar una variable de la configuración, usa la bandera `remove`:
 
 ```
-> config remove edit_mode
+config remove edit_mode
 ```
 
 ### Borrar toda la configuración
@@ -72,7 +72,7 @@ Para eliminar una variable de la configuración, usa la bandera `remove`:
 Si deseas borrar toda la configuración y empezar de cero, puedes usar la bandera `clear`. Por supuesto, tenga precaución con esto ya que una vez ejecutado el archivo de configuración también se eliminará.
 
 ```
-> config clear
+config clear
 ```
 
 ### Encontrar dónde se almacena el archivo de configuración
@@ -93,7 +93,7 @@ config path
 Es posible que desees cargar la configuración desde una ubicación distinta a la predeterminada. Para hacerlo, usa la bandera `load`:
 
 ```
-> config load myconfiguration.toml
+config load myconfiguration.toml
 ```
 
 ## Configurando Nu como shell de inicio de sesión
@@ -103,8 +103,8 @@ Para usar Nu como shell de inicio de sesión, necesitarás configurar las variab
 Antes de cambiarlo, ejecuta Nu dentro de otra shell, como Bash. Luego, obtén el entorno y PATH desde esa shell con los siguientes comandos:
 
 ```
-> config set path $nu.path
-> config set env $nu.env
+config set path $nu.path
+config set env $nu.env
 ```
 
 `$nu.path` y `$nu.env` son valores que están prestablecidas a las variables actuales de entorno y PATH, respectivamente. Una vez que las estableces a la configuración, estarán disponibles cuando uses Nu como shell de inicio de sesión.
@@ -112,15 +112,15 @@ Antes de cambiarlo, ejecuta Nu dentro de otra shell, como Bash. Luego, obtén el
 A continuación, en algunas distribuciones también deberás asegurarte de que Nu esté en la lista en `/etc/shells`:
 
 ```
-❯ cat /etc/shells
-# /etc/shells: valid login shells
-/bin/sh
-/bin/dash
-/bin/bash
-/bin/rbash
-/usr/bin/screen
-/usr/bin/fish
-/home/sophia/.cargo/bin/nu
+cat /etc/shells
+# => # /etc/shells: valid login shells
+# => /bin/sh
+# => /bin/dash
+# => /bin/bash
+# => /bin/rbash
+# => /usr/bin/screen
+# => /usr/bin/fish
+# => /home/sophia/.cargo/bin/nu
 ```
 
 Con esto, deberías de poder hacer `chsh` y establecer Nu como la shell de inicio de sesión. Luego de cerrar sesión, en el próximo inicio de sesión deberías de recibir un brillante mensaje de Nu.
