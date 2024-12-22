@@ -23,6 +23,7 @@ usage: |
  -  `name`: Name of the alias.
  -  `initial_value`: Equals sign followed by value.
 
+STEFAN TRIGGERING
 
 ## Input/output types:
 
