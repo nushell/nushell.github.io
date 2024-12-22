@@ -14,7 +14,7 @@ Today, we're releasing two documentation items related to these changes:
 
 - A guide to upgrading your configuration to take advantage of the enhancements (below). This will also be linked from the 0.101 Release Notes when it becomes available.
 
-- A [preview of the new Configuration chapter](/book/configuration_preview.md) of the Book. This chapter has been rewritten to match the new functionality, as well as add some previously missing documentation on features like autoload dirs (and more). Once 0.101 releases, this will replace the previous configuration chapter. We welcome reviews of the updates, and any corrections or enhancements can be submitted to [the doc repository](https://github.com/nushell/nushell.github.io) if needed.
+- A [<s>preview of the</s> (now live) new Configuration chapter](/book/configuration) of the Book. This chapter has been rewritten to match the new functionality, as well as add some previously missing documentation on features like autoload dirs (and more). Once 0.101 releases, this will replace the previous configuration chapter. We welcome reviews of the updates, and any corrections or enhancements can be submitted to [the doc repository](https://github.com/nushell/nushell.github.io) if needed.
 
 ---
 
