@@ -87,11 +87,11 @@ To make a copy of a record with new fields, you can either:
   ```nu
   let first_record = { name: "Sam", rank: 10 }
   $first_record | merge { title: "Mayor" }
-# =>   ╭───────┬───────╮
-# =>   │ name  │ Sam   │
-# =>   │ rank  │ 10    │
-# =>   │ title │ Mayor │
-# =>   ╰───────┴───────╯
+  # =>   ╭───────┬───────╮
+  # =>   │ name  │ Sam   │
+  # =>   │ rank  │ 10    │
+  # =>   │ title │ Mayor │
+  # =>   ╰───────┴───────╯
   ```
 
 - Use the [spread operator](/book/operators#spread-operator) (`...`) to expand the first record inside a new record:
