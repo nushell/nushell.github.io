@@ -4,20 +4,23 @@ on:
     paths:
       - 'commands/docs/**'
 
+# Fix Resource not accessible by integration (updatePullRequest)
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v7.0.1
+      - uses: peter-evans/create-or-update-comment@v4
         with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'Awesome that you are trying to improve the documentation of a nushell command!\n\n' +
-                'As we autogenerate these command pages from the help information defined with the command after each release:\n'+
-                '- If you already updated the command help, you are already done!\n'+
-                '- Else, please look for the command in the [source tree](https://github.com/nushell/nushell/tree/main/crates) and make your changes directly there.\n\n'+
-                'Thanks for helping out!'
-            })
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Awesome that you are trying to improve the documentation of a nushell command!
+
+            As we autogenerate these command pages from the help information defined with the command after each release:
+            - If you already updated the command help, you are already done!
+            - Else, please look for the command in the [source tree](https://github.com/nushell/nushell/tree/main/crates) and make your changes directly there.
+
+            Thanks for helping out!
