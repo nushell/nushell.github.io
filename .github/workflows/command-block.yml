@@ -3,6 +3,7 @@ on:
   pull_request_target:
     paths:
       - 'commands/docs/**'
+      - 'commands/categories/**'
 
 jobs:
   comment:
