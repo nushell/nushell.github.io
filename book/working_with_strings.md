@@ -439,4 +439,6 @@ You can color strings with the [`ansi`](/commands/docs/ansi.md) command. For exa
 `ansi purple_bold` makes the text a bold purple
 `ansi reset` resets the coloring to the default.
 
-_Tip: You should always end colored strings with `ansi reset`_
+::: tip
+You should always end colored strings with `ansi reset`
+:::
