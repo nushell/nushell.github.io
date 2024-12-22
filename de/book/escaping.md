@@ -5,11 +5,11 @@ Nushell stellt einen identischen Satz an Befehlen für verschiedene Systeme zur 
 Nushell Befehl:
 
 ```
-> ls
+ls
 ```
 
 Aufruf des Systembefehls:
 
 ```
-> ^ls
+^ls
 ```

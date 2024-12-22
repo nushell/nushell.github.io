@@ -3,13 +3,13 @@
 In Nushell, you can write and run scripts in the Nushell language. To run a script, you can pass it as an argument to the `nu` commandline application:
 
 ```nu
-> nu myscript.nu
+nu myscript.nu
 ```
 
 This will run the script to completion in a new instance of Nu. You can also run scripts inside the _current_ instance of Nu using [`source`](/commands/docs/source.md):
 
 ```nu
-> source myscript.nu
+source myscript.nu
 ```
 
 Let's look at an example script file:
@@ -69,8 +69,8 @@ def main [x: int] {
 ```
 
 ```nu
-> nu myscript.nu 100
-110
+nu myscript.nu 100
+# => 110
 ```
 
 ## Argument Type Interpretation
@@ -94,11 +94,11 @@ def main [x: string] {
 ```
 
 ```nu
-> nu implicit_type.nu +1
-Hello int 1
+nu implicit_type.nu +1
+# => Hello int 1
 
-> nu explicit_type.nu +1
-Hello string +1
+nu explicit_type.nu +1
+# => Hello string +1
 ```
 
 ## Subcommands
@@ -123,12 +123,12 @@ def main [] {
 You can then execute the script's subcommands when calling it:
 
 ```nu
-> nu myscript.nu
-hello from myscript!
-> nu myscript.nu build
-building
-> nu myscript.nu run
-running
+nu myscript.nu
+# => hello from myscript!
+nu myscript.nu build
+# => building
+nu myscript.nu run
+# => running
 ```
 
 [Unlike modules](modules.html#main), `main` does _not_ need to exported in order to be visible. In the above example, our `main` command is not `export def`, however it was still executed when running `nu myscript.nu`. If we had used myscript as a module by running `use myscript.nu`, rather than running `myscript.nu` as a script, trying to execute the `myscript` command would not work since `myscript` is not exported.
@@ -147,8 +147,8 @@ def "main build" [] {
 ```
 
 ```nu
-> nu myscript.nu build
-> nu myscript.nu run
+nu myscript.nu build
+nu myscript.nu run
 ```
 
 This is a limitation of the way scripts are currently processed. If your script only has subcommands, you can add an empty `main` to expose the subcommands, like so:
@@ -167,8 +167,8 @@ On Linux and macOS you can optionally use a [shebang](<https://en.wikipedia.org/
 ```
 
 ```nu
-> ./myscript
-Hello World!
+./myscript
+# => Hello World!
 ```
 
 For script to have access to standard input, `nu` should be invoked with `--stdin` flag:
@@ -181,6 +181,6 @@ def main [] {
 ```
 
 ```nu
-> echo "Hello World!" | ./myscript
-stdin: Hello World!
+echo "Hello World!" | ./myscript
+# => stdin: Hello World!
 ```
