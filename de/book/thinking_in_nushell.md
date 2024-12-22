@@ -11,21 +11,21 @@ Nushell ist sowohl eine Programmiersprache, als auch eine Shell. Deswegen hat si
 Einiges ist jedoch so modelliert, wie es auch von anderen Shells her bekannt ist. Zum Beispiel Pipelines verbinden zwei Befehle:
 
 ```
-> ls | length
+ls | length
 ```
 
 Nushell hat auch andere Fähigkeiten, wie, aufnehmen des exit codes eines zuvor ausgeführten Befehls.
 Trotz dieser Vorzüge ist Nushell nicht Bash. In einer Bash, oder bei POSIX kompatiblen Shells ganz generell, verwendet man z.B.:
 
 ```
-> echo "hello" > output.txt
+echo "hello" > output.txt
 ```
 
 In Nushell is das `>` ein grösser-als Operator, was eher dem Programmiersprachen Aspekt von Nushell entspricht.
 Stattdessen wird eine Pipe zu einem Befehl geführt, der die Aufgabe des Speicherns übernimmt:
 
 ```
-> echo "hello" | save output.txt
+echo "hello" | save output.txt
 ```
 
 **Denken in Nushell:** In Nushell werden die Daten durch die Pipeline weitergereicht, bis sie den Benutzer oder einen abschliessenden Befehl erreichen.
@@ -52,7 +52,7 @@ bevor sie ausgeführt werden kann, können die drei Zeilen nicht im voraus `komp
 Ein anderes Problem ist, einen Dateinamen dynamisch erzeugen zu wollen um ihn auszuführen:
 
 ```
-> source $"($my_path)/common.nu"
+source $"($my_path)/common.nu"
 ```
 
 Dies würde voraussetzen, dass Nushell die Eingabe auswerten kann um sie dann auszuführen, jedoch wird diese Information zur Kompilierzeit benötigt.
@@ -88,14 +88,14 @@ Schleifenzähler sind ein anderes häufiges Muster für veränderliche Variablen
 Zum Beispiel kann sowohl jedes Element wie auch dessen Index mit dem `-n` Flag von [`each`](/commands/docs/each.md) erreicht werden:
 
 ```
-> ls | enumerate | each { |row| $"Number ($row.index) is size ($row.item.size)" }
+ls | enumerate | each { |row| $"Number ($row.index) is size ($row.item.size)" }
 ```
 
 Mit dem [`reduce`](/commands/docs/reduce.md) kann eine ähnliche Funktionalität erreicht werden wie man es von Variablen in Schleifen kennt.
 Zum Beispiel, wenn der längste Text in einer Liste von Texten gesucht wird:
 
 ```
-> [one, two, three, four, five, six] | reduce {|curr, max|
+[one, two, three, four, five, six] | reduce {|curr, max|
     if ($curr | str length) > ($max | str length) {
         $curr
     } else {
@@ -119,7 +119,7 @@ In der Praxis ist damit präziserer Code möglich, um zum Beispiel mit Unterverz
 erstellt werden soll:
 
 ```
-> ls | each { |elt|
+ls | each { |elt|
     cd $elt.name
     make
 }

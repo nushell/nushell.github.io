@@ -23,8 +23,8 @@ Soll nur die Version aus dem Projekt angezeigt werden, kann mit dem [`get`](/com
 direkt diese Information herausgelesen werden.
 
 ```
-> open editors/vscode/package.json | get version
-1.0.0
+open editors/vscode/package.json | get version
+# => 1.0.0
 ```
 
 Nu unterstützt aktuell die folgenden Formate um Daten direkt als Tabelle zu öffnen:
@@ -48,7 +48,7 @@ Nu unterstützt aktuell die folgenden Formate um Daten direkt als Tabelle zu öf
 Was aber passiert, wenn eine Text Datei geladen wird, die keinem der angegebenen Formate entspricht?
 
 ```
-> open README.md
+# => open README.md
 ```
 
 Die Datei wird wie gewohnt als Text ausgegeben.
@@ -64,10 +64,10 @@ Oft werden diese Daten als String repräsentiert.
 Zum Beispiel wie in dieser Datei:
 
 ```
-> open people.txt
-Octavia | Butler | Writer
-Bob | Ross | Painter
-Antonio | Vivaldi | Composer
+open people.txt
+# => Octavia | Butler | Writer
+# => Bob | Ross | Painter
+# => Antonio | Vivaldi | Composer
 ```
 
 Jeder Datenpunkt ist durch ein pipe ('|') Symbol getrennt. Und jede Person steht auf einer
@@ -77,12 +77,12 @@ weshalb diese Datei von Hand geparst werden muss.
 Zuerst wird die Datei so geladen, dass jede Zeile für sich verarbeitet werden kann:
 
 ```
-> open people.txt | lines
-───┬──────────────────────────────
- 0 │ Octavia | Butler | Writer
- 1 │ Bob | Ross | Painter
- 2 │ Antonio | Vivaldi | Composer
-───┴──────────────────────────────
+open people.txt | lines
+# => ───┬──────────────────────────────
+# =>  0 │ Octavia | Butler | Writer
+# =>  1 │ Bob | Ross | Painter
+# =>  2 │ Antonio | Vivaldi | Composer
+# => ───┴──────────────────────────────
 ```
 
 Dadurch wird bereits wieder eine Liste ausgegeben. Im nächsten Schritt sollen die Zeilen
@@ -93,67 +93,67 @@ Mit dem `column` Unterbefehl wird der Inhalt über mehrere Spalten aufgeteilt.
 Als Parameter reicht das Trennzeichen, der Rest ist automatisch:
 
 ```
-> open people.txt | lines | split column "|"
-───┬──────────┬───────────┬───────────
- # │ column1  │ column2   │ column3
-───┼──────────┼───────────┼───────────
- 0 │ Octavia  │  Butler   │  Writer
- 1 │ Bob      │  Ross     │  Painter
- 2 │ Antonio  │  Vivaldi  │  Composer
-───┴──────────┴───────────┴───────────
+open people.txt | lines | split column "|"
+# => ───┬──────────┬───────────┬───────────
+# =>  # │ column1  │ column2   │ column3
+# => ───┼──────────┼───────────┼───────────
+# =>  0 │ Octavia  │  Butler   │  Writer
+# =>  1 │ Bob      │  Ross     │  Painter
+# =>  2 │ Antonio  │  Vivaldi  │  Composer
+# => ───┴──────────┴───────────┴───────────
 ```
 
 Das sieht _fast_ korrekt aus.Es sieht so aus, als ob sich noch eine zusätzliche Lücke eingeschlichen hat.
 Mit dem [`trim`](/commands/docs/str_trim.md) Befehl wird dieser beseitigt:
 
 ```
-> open people.txt | lines | split column "|" | str trim
-───┬─────────┬─────────┬──────────
- # │ column1 │ column2 │ column3
-───┼─────────┼─────────┼──────────
- 0 │ Octavia │ Butler  │ Writer
- 1 │ Bob     │ Ross    │ Painter
- 2 │ Antonio │ Vivaldi │ Composer
-───┴─────────┴─────────┴──────────
+open people.txt | lines | split column "|" | str trim
+# => ───┬─────────┬─────────┬──────────
+# =>  # │ column1 │ column2 │ column3
+# => ───┼─────────┼─────────┼──────────
+# =>  0 │ Octavia │ Butler  │ Writer
+# =>  1 │ Bob     │ Ross    │ Painter
+# =>  2 │ Antonio │ Vivaldi │ Composer
+# => ───┴─────────┴─────────┴──────────
 ```
 
 Nicht schlecht. Der [`split`](/commands/docs/split.md) Befehl gibt nicht nur brauchbare Daten zurück,
 sondern bezeichnet auch noch standardmässig die Spaltennamen:
 
 ```
-> open people.txt | lines | split column "|" | str trim | get column1
-───┬─────────
- 0 │ Octavia
- 1 │ Bob
- 2 │ Antonio
-───┴─────────
+open people.txt | lines | split column "|" | str trim | get column1
+# => ───┬─────────
+# =>  0 │ Octavia
+# =>  1 │ Bob
+# =>  2 │ Antonio
+# => ───┴─────────
 ```
 
 Die Spalten können jedoch auch benannt werden:
 
 ```
-> open people.txt | lines | split column "|" first_name last_name job | str trim
-───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job
-───┼────────────┼───────────┼──────────
- 0 │ Octavia    │ Butler    │ Writer
- 1 │ Bob        │ Ross      │ Painter
- 2 │ Antonio    │ Vivaldi   │ Composer
-───┴────────────┴───────────┴──────────
+open people.txt | lines | split column "|" first_name last_name job | str trim
+# => ───┬────────────┬───────────┬──────────
+# =>  # │ first_name │ last_name │ job
+# => ───┼────────────┼───────────┼──────────
+# =>  0 │ Octavia    │ Butler    │ Writer
+# =>  1 │ Bob        │ Ross      │ Painter
+# =>  2 │ Antonio    │ Vivaldi   │ Composer
+# => ───┴────────────┴───────────┴──────────
 ```
 
 Jetzt da die Daten in einer Tabelle sind, können alle Befehle, die wir davor schon auf Tabellen
 angewendet haben wiederverwenden:
 
 ```
-> open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
-───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job
-───┼────────────┼───────────┼──────────
- 0 │ Antonio    │ Vivaldi   │ Composer
- 1 │ Bob        │ Ross      │ Painter
- 2 │ Octavia    │ Butler    │ Writer
-───┴────────────┴───────────┴──────────
+open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
+# => ───┬────────────┬───────────┬──────────
+# =>  # │ first_name │ last_name │ job
+# => ───┼────────────┼───────────┼──────────
+# =>  0 │ Antonio    │ Vivaldi   │ Composer
+# =>  1 │ Bob        │ Ross      │ Painter
+# =>  2 │ Octavia    │ Butler    │ Writer
+# => ───┴────────────┴───────────┴──────────
 ```
 
 Weitere Befehle, mit denen Texte aus Strings bearbeitet werden können sind:
@@ -166,12 +166,12 @@ Es gibt ausserdem einige Hilfsbefehle, die verwendet werden können um mit Daten
 die Nu eigentlich verstehen sollte. Zum Beispiel wenn eine Rust lock Datei geöffnet wird:
 
 ```
-> open Cargo.lock
-# This file is automatically @generated by Cargo.
-# It is not intended for manual editing.
-[[package]]
-name = "adhoc_derive"
-version = "0.1.2"
+open Cargo.lock
+# => # This file is automatically @generated by Cargo.
+# => # It is not intended for manual editing.
+# => [[package]]
+# => name = "adhoc_derive"
+# => version = "0.1.2"
 ```
 
 Eine "Cargo.lock" Datei ist eigentlich eine .toml Datei, aber die Dateiendung ist nicht .toml.
@@ -189,12 +189,12 @@ ist dies nicht immer gewünscht. Um den darunter liegenden Text zu erhalten, kan
 [`open`](/commands/docs/open.md) Befehl das Flag `--raw` mitgegeben werden:
 
 ```
-> open Cargo.toml --raw
-[package]                                                                                        name = "nu"
-version = "0.1.3"
-authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
-description = "A shell for the GitHub era"
-license = "MIT"
+open Cargo.toml --raw
+# => [package]                                                                                        name = "nu"
+# => version = "0.1.3"
+# => authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
+# => description = "A shell for the GitHub era"
+# => license = "MIT"
 ```
 
 ## URLs abrufen

@@ -36,7 +36,7 @@ Umgebungsvariablen werden als Felder der Variable `$env` gesetzt.
 Um die Umgebungsvariable `FOO` zu setzen kann direkt der Wert zu `$env.FOO` zugewiesen werden.
 
 ```
-> $env.FOO = 'BAR'
+$env.FOO = 'BAR'
 ```
 
 Um zum Beispiel die `PATH` Variable zu ergänzen, wird folgendes eingegeben:
@@ -54,7 +54,7 @@ Wenn mehrere Umgebungsvariablen gesetzt werden sollen, so kann `load-env` eine g
 Diese besteht aus name/value Paaren, welche alle auf einmal geladen werden:
 
 ```
-> load-env { "BOB": "FOO", "JAY": "BAR" }
+load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
 ### Einmalig verwendete Umgebungsvariablen
@@ -77,14 +77,14 @@ Wenn eine Umgebungsvariable gesetzt wird, ist sie nur in ihrem Gültigkeitsberei
 Hier ein kleines Beispiel um den Gültigkeitsbereich zu demonstrieren:
 
 ```
-> $env.FOO = "BAR"
-> do {
+$env.FOO = "BAR"
+do {
     $env.FOO = "BAZ"
     $env.FOO == "BAZ"
 }
-true
-> $env.FOO == "BAR"
-true
+# => true
+$env.FOO == "BAR"
+# => true
 ```
 
 ## Verzeichnis Wechsel
@@ -98,15 +98,15 @@ Dies wiederum folgt den gleichen Regeln wie das setzen anderer Umgebungsvariable
 Eine praktische Möglichkeit eine Umgebungsvariable einmalig zu setzen, ist inspiriert von Bash und anderen Shells:
 
 ```
-> FOO=BAR echo $env.FOO
-BAR
+FOO=BAR echo $env.FOO
+# => BAR
 ```
 
 Es kann auch [`with-env`](/commands/docs/with-env.md) verwendet werden um expliziter zu sein:
 
 ```
-> with-env { FOO: BAR } { echo $env.FOO }
-BAR
+with-env { FOO: BAR } { echo $env.FOO }
+# => BAR
 ```
 
 Der [`with-env`](/commands/docs/with-env.md) Befehl setzt die Umgebungsvariable temporär (hier wird die Variable "FOO" auf den Wert "BAR" gesetzt)
@@ -129,14 +129,14 @@ Wird sie jedoch mit [`def --env`](/commands/docs/def.md) anstatt [`def`](/comman
 (Gilt auch für `export def`, siehe [Modules (EN)](/book/modules.md))
 
 ```
-> def --env foo [] {
+def --env foo [] {
     $env.FOO = 'BAR'
 }
 
-> foo
+foo
 
-> $env.FOO
-BAR
+$env.FOO
+# => BAR
 ```
 
 ## Umgebungsvariablen konvertieren
@@ -166,26 +166,26 @@ $env.ENV_CONVERSIONS = {
 In einer Nushell Instanz gilt nun:
 
 ```
-> with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
+with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
 
-> $env.FOO
-  0   a
-  1   b
-  2   c
+$env.FOO
+# =>   0   a
+# =>   1   b
+# =>   2   c
 ```
 
 Wie zu sehen ist `$env.FOO` nun eine Liste in einer neuen Nushell Instanz mit der neuen config.
 Die Konvertierung kann auch manuell getestet werden mit:
 
 ```
-> do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
+do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
 ```
 
 Um die Konvertierun list -> string zu testen:
 
 ```
-> nu -c '$env.FOO'
-a-b-c
+nu -c '$env.FOO'
+# => a-b-c
 ```
 
 Weil `nu` selber ein externer Befehl ist, übersetzt Nushell die `[ a b c ]` Liste gemäss `ENV_CONVERSIONS.FOO.to_string` und übergibt sie dem `nu` Prozess.
@@ -208,21 +208,21 @@ Alle Umgebungsvariablen in env.nu und config.nu sind immer noch Strings solange 
 Umgebungsvariablen können im aktuellen Gültigkeitsbereich entfernt werden via [`hide`](/commands/docs/hide.md):
 
 ```
-> $env.FOO = 'BAR'
-...
-> hide FOO
+$env.FOO = 'BAR'
+# => ...
+hide FOO
 ```
 
 Dieses Verstecken im Gültigkeitsbereich erlaubt es gleichzeitig temporär eine Variabel zu entfernen ohne dass man die höher gelegene Umgebung modifiziert wird:
 
 ```
-> $env.FOO = 'BAR'
-> do {
+$env.FOO = 'BAR'
+do {
     hide FOO
     # $env.FOO does not exist
   }
-> $env.FOO
-BAR
+$env.FOO
+# => BAR
 ```
 
 Mehr Informationen über Verstecken findet sich im Kapitel [Modules](/book/modules.md)
