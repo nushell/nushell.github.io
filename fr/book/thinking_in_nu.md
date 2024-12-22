@@ -9,7 +9,7 @@ Alors, que signifie penser en Nushell ? Voici quelques sujets courants qui revie
 Nushell est à la fois un langage de programmation et un shell. Pour cette raison, Nushell possède sa propre manière de fonctionner avec les fichiers, les dossiers, les sites web, et plus encore. Nous l'avons conçu pour fonctionner en étroite collaboration avec ce que vous connaissez peut-être d'autres shells. Les pipelines fonctionnent en reliant deux commandes ensemble :
 
 ```nu
-> ls | length
+ls | length
 ```
 
 Nushell, par exemple, prend également en charge d'autres fonctionnalités courantes comme la récupération du code de sortie des commandes précédemment exécutées.
@@ -17,13 +17,13 @@ Nushell, par exemple, prend également en charge d'autres fonctionnalités coura
 Bien que Nushell dispose de ces commodités, Nushell n'est pas bash. La manière de travailler avec bash, et le style POSIX en général, ne sont pas pris en charge par Nushell. Par exemple, dans bash, vous pourriez utiliser :
 
 ```sh
-> echo "hello" > output.txt
+echo "hello" > output.txt
 ```
 
 En Nushell, nous utilisons `>` comme l'opérateur supérieur à. Cela s'accorde mieux avec l'aspect langage de Nushell. Au lieu de cela, vous redirigez vers une commande qui a pour tâche de sauvegarder le contenu :
 
 ```nu
-> "hello" | save output.txt
+"hello" | save output.txt
 ```
 
 **Penser en Nushell :** La manière dont Nushell voit les données est que celles-ci circulent à travers le pipeline jusqu'à atteindre l'utilisateur ou être traitées par une commande finale. Vous pouvez simplement taper des données, des chaînes de caractères aux listes et records en style JSON, et les suivre par `|` pour les envoyer dans le pipeline. Nushell utilise des commandes pour effectuer des tâches et produire plus de données. Apprendre ces commandes et savoir quand les utiliser vous aidera à composer de nombreux types de pipelines.
@@ -45,7 +45,7 @@ La commande [`source`](/commands/docs/source.md) va augmenter les sources qui vo
 Un autre problème courant est d'essayer de créer dynamiquement le nom du fichier à inclure :
 
 ```nu
-> source $"($my_path)/common.nu"
+source $"($my_path)/common.nu"
 ```
 
 Cela ne fonctionne pas si `my_path` est une variable déclarée au runtime avec `let`. Cela nécessiterait que l'évaluateur exécute et évalue la chaîne de caractères, mais malheureusement, Nushell a besoin de cette information au moment de la compilation.
@@ -53,8 +53,8 @@ Cela ne fonctionne pas si `my_path` est une variable déclarée au runtime avec 
 Cependant, si `my_path` est une [constante](/book/variables#constant-variables), cela fonctionnera, car la chaîne de caractères peut être évaluée au moment de la compilation :
 
 ```nu
-> const my_path = ([$nu.home-path nushell] | path join)
-> source $"($my_path)/common.nu" # sources /home/user/nushell/common.nu
+const my_path = ([$nu.home-path nushell] | path join)
+source $"($my_path)/common.nu" # sources /home/user/nushell/common.nu
 ```
 
 **Penser en Nushell :** Nushell est conçu pour utiliser une unique étape de compilation pour toutes les sources que vous lui envoyez, et cela est distinct de l'évaluation. Cela permettra un support solide pour les IDEs, des messages d'erreur précis, un langage plus facile à utiliser pour les outils tiers, et à l'avenir, même des possibilités plus sophistiquées comme la possibilité de compiler Nushell directement en un fichier binaire.
@@ -79,7 +79,7 @@ Dans Nushell, les blocs contrôlent leur propre environnement. Les modifications
 En pratique, cela vous permet d'écrire du code concis pour travailler avec des sous-répertoires. Par exemple, si vous vouliez compiler chaque sous-projet dans le répertoire courant, vous pourriez exécuter :
 
 ```nu
-> ls | each { |row|
+ls | each { |row|
     cd $row.name
     make
 }
