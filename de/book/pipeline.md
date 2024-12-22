@@ -8,7 +8,7 @@ So wie Nu die Arbeit mit Texten als dem Basis Datentyp in Unix erweitert, erweit
 Eine Pipeline besteht aus drei Teilen: Dem Input, dem Filter und dem Output.
 
 ```
-> open "Cargo.toml" | inc package.version --minor | save "Cargo_new.toml"
+open "Cargo.toml" | inc package.version --minor | save "Cargo_new.toml"
 ```
 
 Der erste Befehl, `open "Cargo.toml"`, ist der Input (manchmal auch als "source" oder "producer" bezeichnet).
@@ -25,8 +25,8 @@ Andere Arten von Output geben die Daten aus der Pipeline zum Beispiel auf der Ko
 Die `$in` Variable sammelt die Daten in der Pipeline in einen Wert, um den ganzen Strom als Parameter verwenden zu können:
 
 ```nushell
-> echo 1 2 3 | $in.1 * $in.2
-6
+echo 1 2 3 | $in.1 * $in.2
+# => 6
 ```
 
 ## Mehrzeilen Pipelines
@@ -73,13 +73,13 @@ Der [`table`](/commands/docs/table.md) Befehl wird an jede Pipeline angefügt, d
 Dies erlaubt es den Output in dieser Form zu sehen. Tatsächlich ist der Befehl:
 
 ```
-> ls
+ls
 ```
 
 und die Pipeline,
 
 ```
-> ls
+ls
 ```
 
 ein und dasselbe.

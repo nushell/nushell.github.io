@@ -47,12 +47,12 @@ For a record, the cell-path specifies the name of a key, which is a `string`.
 #### Example - Access a Record Value:
 
 ```nu
-> let my_record = {
+let my_record = {
     a: 5
     b: 42
   }
-> $my_record.b + 5
-47
+$my_record.b + 5
+# => 47
 ```
 
 ### Lists
@@ -64,9 +64,9 @@ For a list, the cell-path specifies the position (index) of the value in the lis
 Remember, list indices are 0-based.
 
 ```nu
-> let scoobies_list = [ Velma Fred Daphne Shaggy Scooby ]
-> $scoobies_list.2
-Daphne
+let scoobies_list = [ Velma Fred Daphne Shaggy Scooby ]
+$scoobies_list.2
+# => Daphne
 ```
 
 ### Tables
@@ -137,30 +137,30 @@ This represents weather data in the form of a table with three columns:
 Access the second day's data as a record:
 
 ```nu
-> $data.1
-╭───────────┬───────────────╮
-│ date      │ 2 years ago   │
-│           │ ╭───┬───────╮ │
-│ temps     │ │ 0 │ 35.24 │ │
-│           │ │ 1 │ 35.94 │ │
-│           │ │ 2 │ 34.91 │ │
-│           │ │ 3 │ 35.24 │ │
-│           │ │ 4 │ 36.65 │ │
-│           │ ╰───┴───────╯ │
-│ condition │ sunny         │
-╰───────────┴───────────────╯
+$data.1
+# => ╭───────────┬───────────────╮
+# => │ date      │ 2 years ago   │
+# => │           │ ╭───┬───────╮ │
+# => │ temps     │ │ 0 │ 35.24 │ │
+# => │           │ │ 1 │ 35.94 │ │
+# => │           │ │ 2 │ 34.91 │ │
+# => │           │ │ 3 │ 35.24 │ │
+# => │           │ │ 4 │ 36.65 │ │
+# => │           │ ╰───┴───────╯ │
+# => │ condition │ sunny         │
+# => ╰───────────┴───────────────╯
 ```
 
 #### Example - Access a Table Column (List)
 
 ```nu
-> $data.condition
-╭───┬────────╮
-│ 0 │ sunny  │
-│ 1 │ sunny  │
-│ 2 │ cloudy │
-│ 3 │ rain   │
-╰───┴────────╯
+$data.condition
+# => ╭───┬────────╮
+# => │ 0 │ sunny  │
+# => │ 1 │ sunny  │
+# => │ 2 │ cloudy │
+# => │ 3 │ rain   │
+# => ╰───┴────────╯
 ```
 
 #### Example - Access a Table Cell (Value)
@@ -168,8 +168,8 @@ Access the second day's data as a record:
 The condition for the fourth day:
 
 ```nu
-> $data.condition.3
-rain
+$data.condition.3
+# => rain
 ```
 
 ### Nested Data
@@ -181,8 +181,8 @@ Since data can be nested, a cell-path can contain references to multiple names o
 To obtain the temperature at the second weather station on the third day:
 
 ```nu
-> $data.temps.2.1
-36.67
+$data.temps.2.1
+# => 36.67
 ```
 
 The first index `2` accesses the third day, then the next index `1` accesses the second weather station's temperature reading.
@@ -202,31 +202,31 @@ Continuing with the sample table above:
 ### Example - `get` vs. `select` a table row
 
 ```nu
-> $data | get 1
-╭───────────┬───────────────╮
-│ date      │ 2 years ago   │
-│           │ ╭───┬───────╮ │
-│ temps     │ │ 0 │ 35.24 │ │
-│           │ │ 1 │ 35.94 │ │
-│           │ │ 2 │ 34.91 │ │
-│           │ │ 3 │ 35.24 │ │
-│           │ │ 4 │ 36.65 │ │
-│           │ ╰───┴───────╯ │
-│ condition │ sunny         │
-╰───────────┴───────────────╯
+$data | get 1
+# => ╭───────────┬───────────────╮
+# => │ date      │ 2 years ago   │
+# => │           │ ╭───┬───────╮ │
+# => │ temps     │ │ 0 │ 35.24 │ │
+# => │           │ │ 1 │ 35.94 │ │
+# => │           │ │ 2 │ 34.91 │ │
+# => │           │ │ 3 │ 35.24 │ │
+# => │           │ │ 4 │ 36.65 │ │
+# => │           │ ╰───┴───────╯ │
+# => │ condition │ sunny         │
+# => ╰───────────┴───────────────╯
 
-> $data | select 1
-╭───┬─────────────┬───────────────┬───────────╮
-│ # │    date     │     temps     │ condition │
-├───┼─────────────┼───────────────┼───────────┤
-│ 0 │ 2 years ago │ ╭───┬───────╮ │ sunny     │
-│   │             │ │ 0 │ 35.24 │ │           │
-│   │             │ │ 1 │ 35.94 │ │           │
-│   │             │ │ 2 │ 34.91 │ │           │
-│   │             │ │ 3 │ 35.24 │ │           │
-│   │             │ │ 4 │ 36.65 │ │           │
-│   │             │ ╰───┴───────╯ │           │
-╰───┴─────────────┴───────────────┴───────────╯
+$data | select 1
+# => ╭───┬─────────────┬───────────────┬───────────╮
+# => │ # │    date     │     temps     │ condition │
+# => ├───┼─────────────┼───────────────┼───────────┤
+# => │ 0 │ 2 years ago │ ╭───┬───────╮ │ sunny     │
+# => │   │             │ │ 0 │ 35.24 │ │           │
+# => │   │             │ │ 1 │ 35.94 │ │           │
+# => │   │             │ │ 2 │ 34.91 │ │           │
+# => │   │             │ │ 3 │ 35.24 │ │           │
+# => │   │             │ │ 4 │ 36.65 │ │           │
+# => │   │             │ ╰───┴───────╯ │           │
+# => ╰───┴─────────────┴───────────────┴───────────╯
 ```
 
 Notice that:
@@ -240,7 +240,7 @@ The row indices of the table resulting from `select` are not the same as that of
 To obtain the original index, you can using the [`enumerate`](/commands/docs/enumerate.md) command. For example:
 
 ```nu
-> $data | enumerate | select 1
+$data | enumerate | select 1
 ```
 
 :::
@@ -250,13 +250,13 @@ To obtain the original index, you can using the [`enumerate`](/commands/docs/enu
 Because `select` results in a new table, it's possible to specify multiple column names, row indices, or even both. This example creates a new table containing the date and condition columns of the first and second rows:
 
 ```nu
-> $data | select date condition 0 1
-╭───┬─────────────┬───────────╮
-│ # │    date     │ condition │
-├───┼─────────────┼───────────┤
-│ 0 │ 2 years ago │ sunny     │
-│ 1 │ 2 years ago │ sunny     │
-╰───┴─────────────┴───────────╯
+$data | select date condition 0 1
+# => ╭───┬─────────────┬───────────╮
+# => │ # │    date     │ condition │
+# => ├───┼─────────────┼───────────┤
+# => │ 0 │ 2 years ago │ sunny     │
+# => │ 1 │ 2 years ago │ sunny     │
+# => ╰───┴─────────────┴───────────╯
 ```
 
 ## Key/Column names with spaces
@@ -266,16 +266,16 @@ If a key name or column name contains spaces or other characters that prevent it
 Example:
 
 ```nu
-> let record_example = {
+let record_example = {
     "key x":12
     "key y":4
   }
-> $record_example."key x"
-12
+$record_example."key x"
+# => 12
 
 # or
-> $record_example | get "key x"
-12
+$record_example | get "key x"
+# => 12
 ```
 
 Quotes are also required when a key name may be confused for a numeric value.
@@ -283,14 +283,14 @@ Quotes are also required when a key name may be confused for a numeric value.
 Example:
 
 ```nu
-> let record_example = {
-    "1": foo
-    "2": baz
-    "3": far
-  }
+let record_example = {
+  "1": foo
+  "2": baz
+  "3": far
+}
 
-> $record_example."1"
-  foo
+$record_example."1"
+# =>   foo
 ```
 
 Do not confuse the key name with a row index in this case. Here, the first item is _assigned_ the key name `1` (a string). If converted to a table using the `transpose` command, key `1` (`string`) would be at row-index `0` (an integer).
@@ -319,26 +319,26 @@ By default missing cells will be replaced by `null` when accessed via the option
 The [`default` command](/commands/docs/default.html) can be used to apply a default value to missing or null column result.
 
 ```nu
-> let missing_value = [{a:1 b:2} {b:1}]
-> $missing_value
-╭───┬────┬───╮
-│ # │ a  │ b │
-├───┼────┼───┤
-│ 0 │  1 │ 2 │
-│ 1 │ ❎ │ 1 │
-╰───┴────┴───╯
+let missing_value = [{a:1 b:2} {b:1}]
+$missing_value
+# => ╭───┬────┬───╮
+# => │ # │ a  │ b │
+# => ├───┼────┼───┤
+# => │ 0 │  1 │ 2 │
+# => │ 1 │ ❎ │ 1 │
+# => ╰───┴────┴───╯
 
-> let with_default_value = ($missing_value | default 'n/a' a)
-> $with_default_value
-╭───┬─────┬───╮
-│ # │  a  │ b │
-├───┼─────┼───┤
-│ 0 │   1 │ 2 │
-│ 1 │ n/a │ 1 │
-╰───┴─────┴───╯
+let with_default_value = ($missing_value | default 'n/a' a)
+$with_default_value
+# => ╭───┬─────┬───╮
+# => │ # │  a  │ b │
+# => ├───┼─────┼───┤
+# => │ 0 │   1 │ 2 │
+# => │ 1 │ n/a │ 1 │
+# => ╰───┴─────┴───╯
 
-> $with_default_value.1.a
-n/a
+$with_default_value.1.a
+# => n/a
 ```
 
 ## Other commands for accessing structured data

@@ -88,12 +88,12 @@ Environment variables defined inside the hook **block** will be preserved in a s
 You can test it with the following example:
 
 ```nu
-> $env.config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: { $env.SPAM = "eggs" }
 })
 
-> $env.SPAM
-eggs
+$env.SPAM
+# => eggs
 ```
 
 The hook blocks otherwise follow the general scoping rules, i.e., commands, aliases, etc. defined within the block will be thrown away once the block ends.
@@ -150,12 +150,12 @@ You can think of it as if you typed the string into the REPL and hit Enter.
 So, the hook from the previous section can be also written as
 
 ```nu
-> $env.config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: '$env.SPAM = "eggs"'
 })
 
-> $env.SPAM
-eggs
+$env.SPAM
+# => eggs
 ```
 
 This feature can be used, for example, to conditionally bring in definitions based on the current directory:

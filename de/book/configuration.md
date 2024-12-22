@@ -45,7 +45,7 @@ Um Nushell als Login-Shell zu verwenden, muss die `$env` Variable konfiguriert w
 Der komplette Satz an Umgebungsvariablen kann erzeugt werden, wenn Nu in einer anderen Shell, wie beispielsweise Bash, ausgeführt wird. In diese Nu-Sitzung kann ein Befehl wie der folgende verwendet werden, um `$env` zu setzen:
 
 ```
-> env | each { echo $"$env.($it.name) = '($it.raw)'" } | str join (char nl)
+env | each { echo $"$env.($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
 Das gibt Zeilen aus um `$env` in `env.nu` zu setzen - eine für jede Umgebungsvariable - inklusive der nötigen Werte.
@@ -53,15 +53,15 @@ Das gibt Zeilen aus um `$env` in `env.nu` zu setzen - eine für jede Umgebungsva
 Als nächstes, muss auf manchen Distributionen sichergestellt werden, dass Nu in der Liste der Shells in /etc/shells ist:
 
 ```
-> cat /etc/shells
-# /etc/shells: valid login shells
-/bin/sh
-/bin/dash
-/bin/bash
-/bin/rbash
-/usr/bin/screen
-/usr/bin/fish
-/home/sophia/.cargo/bin/nu
+cat /etc/shells
+# => # /etc/shells: valid login shells
+# => /bin/sh
+# => /bin/dash
+# => /bin/bash
+# => /bin/rbash
+# => /usr/bin/screen
+# => /usr/bin/fish
+# => /home/sophia/.cargo/bin/nu
 ```
 
 Damit sollte es möglich sein, Nu als Login-Shell mit `chsh` festzulegen. Nach dem Ausloggen und erneutem Einloggen sollte Nu als Shell grüßen.

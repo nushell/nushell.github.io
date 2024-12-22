@@ -9,7 +9,7 @@ The first of these important streams is stdout.
 Stdout is the way that most external apps will send data into the pipeline or to the screen. Data sent by an external app to its stdout is received by Nushell by default if it's part of a pipeline:
 
 ```nu
-> external | str join
+external | str join
 ```
 
 The above would call the external named `external` and would redirect the stdout output stream into the pipeline. With this redirection, Nushell can then pass the data to the next command in the pipeline, here [`str join`](/commands/docs/str_join.md).
@@ -27,8 +27,8 @@ Finally, external commands have an "exit code". These codes help give a hint to 
 Nushell tracks the last exit code of the recently completed external in one of two ways. The first way is with the `LAST_EXIT_CODE` environment variable.
 
 ```nu
-> do { external }
-> $env.LAST_EXIT_CODE
+do { external }
+$env.LAST_EXIT_CODE
 ```
 
 The second way is to use the [`complete`](/commands/docs/complete.md) command.
@@ -40,12 +40,12 @@ The [`complete`](/commands/docs/complete.md) command allows you to run an extern
 If we try to run the external `cat` on a file that doesn't exist, we can see what [`complete`](/commands/docs/complete.md) does with the streams, including the redirected stderr:
 
 ```nu
-> cat unknown.txt | complete
-╭───────────┬─────────────────────────────────────────────╮
-│ stdout    │                                             │
-│ stderr    │ cat: unknown.txt: No such file or directory │
-│ exit_code │ 1                                           │
-╰───────────┴─────────────────────────────────────────────╯
+cat unknown.txt | complete
+# => ╭───────────┬─────────────────────────────────────────────╮
+# => │ stdout    │                                             │
+# => │ stderr    │ cat: unknown.txt: No such file or directory │
+# => │ exit_code │ 1                                           │
+# => ╰───────────┴─────────────────────────────────────────────╯
 ```
 
 ## `echo`, `print`, and `log` commands
@@ -130,6 +130,6 @@ Nushell attempts to convert to text using UTF-8. If at any time the conversion f
 If you want more control over the decoding of the byte stream, you can use the [`decode`](/commands/docs/decode.md) command. The [`decode`](/commands/docs/decode.md) command can be inserted into the pipeline after the external, or other raw stream-creating command, and will handle decoding the bytes based on the argument you give decode. For example, you could decode shift-jis text this way:
 
 ```nu
-> 0x[8a 4c] | decode shift-jis
-貝
+0x[8a 4c] | decode shift-jis
+# => 貝
 ```

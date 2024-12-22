@@ -4,14 +4,14 @@ In Nushell können Skripte geschrieben und ausgeführt werden, welche in der Nus
 Um ein Skript auszuführen, wird es dem Befehl `nu` als Argument übergeben:
 
 ```
-> nu myscript.nu
+nu myscript.nu
 ```
 
 Dies wird das Skript bis zum Ende in einer neuen Nuinstanz ausführen.
 Das Skript kann auch in der _aktuellen_ Instanz ausgeführt werden mit dem [`source`](/commands/docs/source.md) Befehl:
 
 ```
-> source myscript.nu
+source myscript.nu
 ```
 
 Hier ein Beispiel einer Skript Datei:
@@ -75,8 +75,8 @@ def main [x: int] {
 ```
 
 ```
-> nu myscript.nu 100
-110
+nu myscript.nu 100
+# => 110
 ```
 
 ## Shebangs (`#!`)
@@ -91,6 +91,6 @@ echo "Hello World!"
 ```
 
 ```
-> ./myscript
-Hello World!
+./myscript
+# => Hello World!
 ```

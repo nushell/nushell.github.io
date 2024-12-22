@@ -45,23 +45,23 @@ Einfache Anführungszeichen ergeben ebenfalls einen Text zurück. Der Unterschie
 Nushell unterstützt Text Erweiterung, was es erlaubt, Unterausdrücke innerhalb eines Textes zu verwenden. Diese werden mit `$` ausgedrückt:
 
 ```
-> echo $"6 x 7 = (6 * 7)"
-6 x 7 = 42
+echo $"6 x 7 = (6 * 7)"
+# => 6 x 7 = 42
 ```
 
 ```
-> ls | each { |row| echo $"($row.name) is ($row.size)" }
-───┬─────────────────────
- 0 │ genawait is 4.1 KB
- 1 │ learncpp is 4.1 KB
- 2 │ nuscripts is 4.1 KB
-───┴─────────────────────
+ls | each { |row| echo $"($row.name) is ($row.size)" }
+# => ───┬─────────────────────
+# =>  0 │ genawait is 4.1 KB
+# =>  1 │ learncpp is 4.1 KB
+# =>  2 │ nuscripts is 4.1 KB
+# => ───┴─────────────────────
 ```
 
 **blosse Texte**
 
 ```
-> echo hello
+echo hello
 ```
 
 Eine spezielle Eigenschaft von Nushell ist, dass ein Text mit nur einem Wort auch ganz ohne Anführungszeichen erstellt werden kann.
@@ -69,7 +69,7 @@ Eine spezielle Eigenschaft von Nushell ist, dass ein Text mit nur einem Wort auc
 Der Text oben ist das selbe als wäre geschrieben:
 
 ```
-> echo "hello"
+echo "hello"
 ```
 
 Siehe auch [Handling Strings](https://www.nushell.sh/book/loading_data.html#handling-strings).
@@ -187,9 +187,9 @@ Binärdaten wie der Inhalt einer Bilddatei entspricht einer Gruppe von rohen (ra
 Binär kann explizit wörtlich geschrieben werden in einer der Formen `0x[...]`, `0b[...]`, or `0o[...]`:
 
 ```
-> 0x[1F FF]  # Hexadecimal
-> 0b[1 1010] # Binary
-> 0o[377]    # Octal
+0x[1F FF]  # Hexadecimal
+0b[1 1010] # Binary
+0o[377]    # Octal
 ```
 
 Nicht vollständige bytes werden links mit Nullen aufgefüllt (left-padded)
@@ -207,23 +207,23 @@ Wertepaare werden auch als key-value pairs bezeichnet, ähnlich wie sie von JSON
 werden Wertepaar von oben unten anstatt links-rechts dargestellt:
 
 ```
-> echo {name: sam, rank: 10}
-╭──────┬─────╮
-│ name │ sam │
-│ rank │ 10  │
-╰──────┴─────╯
+echo {name: sam, rank: 10}
+# => ╭──────┬─────╮
+# => │ name │ sam │
+# => │ rank │ 10  │
+# => ╰──────┴─────╯
 ```
 
 Über Wertepaare kann iteriert werden wenn sie zuerst in eine Tabelle transponiert werden:
 
 ```
-> echo {name: sam, rank: 10} | transpose key value
-╭───┬──────┬───────╮
-│ # │ key  │ value │
-├───┼──────┼───────┤
-│ 0 │ name │  sam  │
-│ 1 │ rank │   10  │
-╰───┴──────┴───────╯
+echo {name: sam, rank: 10} | transpose key value
+# => ╭───┬──────┬───────╮
+# => │ # │ key  │ value │
+# => ├───┼──────┼───────┤
+# => │ 0 │ name │  sam  │
+# => │ 1 │ rank │   10  │
+# => ╰───┴──────┴───────╯
 ```
 
 ## Listen (lists)
@@ -234,12 +234,12 @@ was man eine Tabelle (table) nennt.
 Beispiel: Eine Liste von Texten
 
 ```
-> echo [sam fred george]
-───┬────────
- 0 │ sam
- 1 │ fred
- 2 │ george
-───┴────────
+echo [sam fred george]
+# => ───┬────────
+# =>  0 │ sam
+# =>  1 │ fred
+# =>  2 │ george
+# => ───┴────────
 ```
 
 ## Tabellen (tables)
@@ -250,36 +250,36 @@ Eine Tabelle besteht immer aus Zeilen und Spalten.
 Eine Tabelle wird ähnlich erstellt wie eine Liste. Weil diese auch Spalten und nicht nur Werte enthält, geben wir die Spalten zuerst an:
 
 ```
-> echo [[column1, column2]; [Value1, Value2]]
-───┬─────────┬─────────
- # │ column1 │ column2
-───┼─────────┼─────────
- 0 │ Value1  │ Value2
-───┴─────────┴─────────
+echo [[column1, column2]; [Value1, Value2]]
+# => ───┬─────────┬─────────
+# =>  # │ column1 │ column2
+# => ───┼─────────┼─────────
+# =>  0 │ Value1  │ Value2
+# => ───┴─────────┴─────────
 ```
 
 Eine Tabelle mit mehreren Zeilen sieht dann so aus:
 
 ```
-> echo [[column1, column2]; [Value1, Value2] [Value3, Value4]]
-───┬─────────┬─────────
- # │ column1 │ column2
-───┼─────────┼─────────
- 0 │ Value1  │ Value2
- 1 │ Value3  │ Value4
-───┴─────────┴─────────
+echo [[column1, column2]; [Value1, Value2] [Value3, Value4]]
+# => ───┬─────────┬─────────
+# =>  # │ column1 │ column2
+# => ───┼─────────┼─────────
+# =>  0 │ Value1  │ Value2
+# =>  1 │ Value3  │ Value4
+# => ───┴─────────┴─────────
 ```
 
 Oder aus einer Liste von Wertepaaren:
 
 ```
-> echo [{name: sam, rank: 10}, {name: bob, rank: 7}]
-╭───┬──────┬──────╮
-│ # │ name │ rank │
-├───┼──────┼──────┤
-│ 0 │ sam  │   10 │
-│ 1 │ bob  │    7 │
-╰───┴──────┴──────╯
+echo [{name: sam, rank: 10}, {name: bob, rank: 7}]
+# => ╭───┬──────┬──────╮
+# => │ # │ name │ rank │
+# => ├───┼──────┼──────┤
+# => │ 0 │ sam  │   10 │
+# => │ 1 │ bob  │    7 │
+# => ╰───┴──────┴──────╯
 ```
 
 ## Blöcke (blocks)

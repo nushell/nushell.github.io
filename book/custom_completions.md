@@ -11,11 +11,11 @@ Here's a simple example:
 
 ```nu
 # Completion command
-> def animals [] { ["cat", "dog", "eel" ] }
+def animals [] { ["cat", "dog", "eel" ] }
 # Command to be completed
-> def my-command [animal: string@animals] { print $animal }
->| my-command
-cat                 dog                 eel
+def my-command [animal: string@animals] { print $animal }
+my-command
+# => cat                 dog                 eel
 ```
 
 The first line defines a custom command which returns a list of three different animals. These are the possible values for the completion.

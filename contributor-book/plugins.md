@@ -37,14 +37,14 @@ Let's create our project. For this example, we'll create a simple `len` command 
 First off, we'll create our plugin:
 
 ```sh
-> cargo new nu_plugin_len
-> cd nu_plugin_len
+cargo new nu_plugin_len
+cd nu_plugin_len
 ```
 
 Next, we'll add `nu` to our project's dependencies.
 
 ```sh
-> cargo add nu-plugin nu-protocol
+cargo add nu-plugin nu-protocol
 ```
 
 The `Cargo.toml` file should now look something like the following.
