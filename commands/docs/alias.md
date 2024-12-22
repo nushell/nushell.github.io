@@ -20,7 +20,6 @@ usage: |
 
 ## Parameters
 
-Troll
  -  `name`: Name of the alias.
  -  `initial_value`: Equals sign followed by value.
 
