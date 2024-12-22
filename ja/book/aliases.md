@@ -9,16 +9,16 @@ Nu ではパイプラインを利用して自由にデータやシステムを�
 例:
 
 ```
-> alias ls-names [] { ls | select name }
-> ls-names
-────┬────────────────────
- #  │ name
-────┼────────────────────
-  0 │ 404.html
-  1 │ CONTRIBUTING.md
-  2 │ Gemfile
-  3 │ Gemfile.lock
-  4 │ LICENSE
+alias ls-names [] { ls | select name }
+ls-names
+# => ────┬────────────────────
+# =>  #  │ name
+# => ────┼────────────────────
+# =>   0 │ 404.html
+# =>   1 │ CONTRIBUTING.md
+# =>   2 │ Gemfile
+# =>   3 │ Gemfile.lock
+# =>   4 │ LICENSE
 ```
 
 ## パラメータ
@@ -26,9 +26,9 @@ Nu ではパイプラインを利用して自由にデータやシステムを�
 エイリアスは、ブロックに渡されるオプションのパラメータをもつことができます。これらはブロック内の新しい変数になります。
 
 ```
-> alias e [msg] { echo $msg }
-> e "hello world"
-hello world
+alias e [msg] { echo $msg }
+e "hello world"
+# => hello world
 ```
 
 パラメータは任意の数設定することができ、ユーザが値を提供しなかった場合、ブロック内では Nothing と評価されて削除されます。
