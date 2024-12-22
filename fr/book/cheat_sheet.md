@@ -515,6 +515,6 @@ export def main [] {
 use greetings.nu
 greetings
 # => greetings and salutations!
-# => greetings hello world
+greetings hello world
 # => hello world!
 ```
