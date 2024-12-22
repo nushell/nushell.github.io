@@ -186,7 +186,7 @@ my-ls | get name
 # => ╰───┴───────────────────────╯
 ```
 
-This lets us easily build custom commands and process their output. Remember that that we don't use return statements like other languages. Instead, the [implicit return](#returning-values-from-a-command) allows us to build pipelines that output streams of data that can be connected to other pipelines.
+This lets us easily build custom commands and process their output. Remember that we don't use return statements like other languages. Instead, the [implicit return](#returning-values-from-a-command) allows us to build pipelines that output streams of data that can be connected to other pipelines.
 
 ::: tip Note
 The `ls` content is still streamed in this case, even though it is in a separate command. Running this command against a long-directory on a slow (e.g., networked) filesystem would return rows as they became available.
