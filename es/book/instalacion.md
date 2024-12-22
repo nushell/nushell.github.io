@@ -20,7 +20,6 @@ y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos 
 
 ```
  nu
- C:\Users\user>
 ```
 
 Si te encuentras usando [Windows Terminal](https://github.com/microsoft/terminal) puedes establecer `nu` como la shell por defecto añadiendo:
