@@ -1,2 +1,1 @@
 nu
-# => C:\Users\user>
