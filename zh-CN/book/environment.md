@@ -213,7 +213,7 @@ $env.FOO = 'BAR'
 do {
     hide FOO
     # $env.FOO does not exist
-  }
+}
 $env.FOO
 # => BAR
 ```
