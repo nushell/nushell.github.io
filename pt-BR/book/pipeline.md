@@ -7,7 +7,7 @@ Um dos principais designs do Nu é o pipeline, uma ideia de design que tem suas 
 Um pipeline é construído com três partes: a entrada, o filtro e a saída.
 
 ```nu
-> open "Cargo.toml" | inc package.version | save "Cargo_new.toml"
+open "Cargo.toml" | inc package.version | save "Cargo_new.toml"
 ```
 
 O primeiro comando, `open "Cargo.toml"`, é uma entrada (às vezes também chamado de "fonte" ou "produtor"). Ele cria ou carrega dados com os quais alimenta o pipeline. É a partir da entrada que os pipelines conseguem dados para trabalhar. Comandos como `ls` também são entradas, já que pegam dados do sistema de arquivos e os enviam através dos pipelines para que possam ser usados adiante.
@@ -39,13 +39,13 @@ Você pode ter se perguntado como vemos uma tabela se o `ls` é uma entrada e n�
 Com efeito, o comando:
 
 ```nu
-> ls
+ls
 ```
 
 E o pipeline:
 
 ```nu
-> ls | autoview
+ls | autoview
 ```
 
 São a mesma coisa.
