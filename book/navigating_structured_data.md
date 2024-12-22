@@ -284,10 +284,10 @@ Example:
 
 ```nu
 let record_example = {
-    "1": foo
-    "2": baz
-    "3": far
-  }
+  "1": foo
+  "2": baz
+  "3": far
+}
 
 $record_example."1"
 # =>   foo

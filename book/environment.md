@@ -238,9 +238,9 @@ The hiding is also scoped which both allows you to remove an environment variabl
 ```nu
 $env.FOO = 'BAR'
 do {
-    hide-env FOO
-    # $env.FOO does not exist
-  }
+  hide-env FOO
+  # $env.FOO does not exist
+}
 $env.FOO
 # => BAR
 ```

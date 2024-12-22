@@ -130,94 +130,94 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   def echo_me [] {
     print $in
   }
-    true | echo_me
+  true | echo_me
   # => true
   ```
 
-  - **_Rule 1.5:_** This is true throughout the current scope. Even on subsequent lines in a closure or block, `$in` is the same value when used in the first position of _any pipeline_ inside that scope.
+- **_Rule 1.5:_** This is true throughout the current scope. Even on subsequent lines in a closure or block, `$in` is the same value when used in the first position of _any pipeline_ inside that scope.
 
-    Example:
+  Example:
 
-    ```nu
-    [ a b c ] | each {
-        print $in
-        print $in
-        $in
-    }
-    ```
+  ```nu
+  [ a b c ] | each {
+    print $in
+    print $in
+    $in
+  }
+  ```
 
-    All three of the `$in` values are the same on each iteration, so this outputs:
+  All three of the `$in` values are the same on each iteration, so this outputs:
 
-    ```nu
-    a
-    a
-    b
-    b
-    c
-    c
-    ╭───┬───╮
-    │ 0 │ a │
-    │ 1 │ b │
-    │ 2 │ c │
-    ╰───┴───╯
-    ```
+  ```nu
+  a
+  a
+  b
+  b
+  c
+  c
+  ╭───┬───╮
+  │ 0 │ a │
+  │ 1 │ b │
+  │ 2 │ c │
+  ╰───┴───╯
+  ```
 
-* **_Rule 2:_** When used anywhere else in a pipeline (other than the first position), `$in` refers to the previous expression's result:
+- **_Rule 2:_** When used anywhere else in a pipeline (other than the first position), `$in` refers to the previous expression's result:
 
   Example:
 
   ```nushell
-    4               # Pipeline input
-    | $in * $in     # $in is 4 in this expression
-    | $in / 2       # $in is now 16 in this expression
-    | $in           # $in is now 8
+  4               # Pipeline input
+  | $in * $in     # $in is 4 in this expression
+  | $in / 2       # $in is now 16 in this expression
+  | $in           # $in is now 8
   # =>   8
   ```
 
-  - **_Rule 2.5:_** Inside a closure or block, Rule 2 usage occurs inside a new scope (a sub-expression) where that "new" `$in` value is valid. This means that Rule 1 and Rule 2 usage can coexist in the same closure or block.
+- **_Rule 2.5:_** Inside a closure or block, Rule 2 usage occurs inside a new scope (a sub-expression) where that "new" `$in` value is valid. This means that Rule 1 and Rule 2 usage can coexist in the same closure or block.
 
-    Example:
+  Example:
 
-    ```nushell
-    4 | do {
-      print $in            # closure-scope $in is 4
+  ```nushell
+  4 | do {
+    print $in            # closure-scope $in is 4
 
-      let p = (            # explicit sub-expression, but one will be created regardless
-        $in * $in          # initial-pipeline position $in is still 4 here
-        | $in / 2          # $in is now 16
-      )                    # $p is the result, 8 - Sub-expression scope ends
+    let p = (            # explicit sub-expression, but one will be created regardless
+      $in * $in          # initial-pipeline position $in is still 4 here
+      | $in / 2          # $in is now 16
+    )                    # $p is the result, 8 - Sub-expression scope ends
 
-      print $in            # At the closure-scope, the "original" $in is still 4
-      print $p
-    }
-    ```
+    print $in            # At the closure-scope, the "original" $in is still 4
+    print $p
+  }
+  ```
 
-    So the output from the 3 `print` statements is:
+  So the output from the 3 `print` statements is:
 
-    ```nu
-    4
-    4
-    8
-    ```
+  ```nu
+  4
+  4
+  8
+  ```
 
-    Again, this would hold true even if the command above used the more compact, implicit sub-expression form:
+  Again, this would hold true even if the command above used the more compact, implicit sub-expression form:
 
-    Example:
+  Example:
 
-    ```nushell
-    4 | do {
-      print $in                       # closure-scope $in is 4
-      let p = $in * $in | $in / 2     # Implicit let sub-expression
-      print $in                       # At the closure-scope, $in is still 4
-      print $p
-    }
+  ```nushell
+  4 | do {
+    print $in                       # closure-scope $in is 4
+    let p = $in * $in | $in / 2     # Implicit let sub-expression
+    print $in                       # At the closure-scope, $in is still 4
+    print $p
+  }
 
-    4
-    4
-    8
-    ```
+  4
+  4
+  8
+  ```
 
-* **_Rule 3:_** When used with no input, `$in` is null.
+- **_Rule 3:_** When used with no input, `$in` is null.
 
   Example:
 
@@ -240,15 +240,15 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   This is the same as having no-input:
 
   ```nushell
-ls / | get name; $in | describe
-# =>   nothing
+  ls / | get name; $in | describe
+  # => nothing
   ```
 
   Instead, simply continue the pipeline:
 
   ```nushell
   ls / | get name | $in | describe
-  # =>   list<string>
+  # => list<string>
   ```
 
 ### Best practice for `$in` in Multiline Code
