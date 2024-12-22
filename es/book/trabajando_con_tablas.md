@@ -223,7 +223,6 @@ Los cambios en Nu son cambios funcionales, lo que significa que funcionan en los
 
 ```
 open rustfmt.toml | add next_edition 2021 | save rustfmt2.toml
-# /home/sophia/Source/nushell(master)
 open rustfmt2.toml
 # => ---------+--------------
 # =>  edition | next_edition
