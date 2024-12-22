@@ -13,10 +13,10 @@ Dem Befehl, der die Vervollständigung bereitstellt, und die Verknüpfung mit de
 Hier ein Beispiel:
 
 ```
-> def tiere [] { ["katze", "hund", "aal" ] }
-> def my-command [tier: string@tiere] { print $tier }
->| my-command
-katze                 hund                 aal
+def tiere [] { ["katze", "hund", "aal" ] }
+def my-command [tier: string@tiere] { print $tier }
+| my-command
+# => katze                 hund                 aal
 ```
 
 In der ersten Zeile wird ein eigener Befehl erstellt, der eine Liste von drei verschiedenen Tieren zurückgibt.

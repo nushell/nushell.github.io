@@ -19,10 +19,10 @@ An interesting feature of Nushell is the [Directory Stack](directory_stack.md) w
 Nushell also has its own line editor [Reedline](line_editor.md).
 With Nushell's config, it is possible to configure some of the Reedline's features, such as the prompt, keybindings, history, or menus.
 
-It is also possible to define [custom signatures for external commands](externs.md) which lets you define [custom completions](custom_completions.md) for them (the custom completions work also for Nushell custom commands).
+It is also possible to define [custom signatures for external commands](externs.md) which lets you define [custom completions](custom_completions.md) for them (the custom completions also work for Nushell custom commands).
 
 [Coloring and Theming in Nu](coloring_and_theming.md) goes into more detail about how to configure Nushell's appearance.
 
-If you want to schedule some commands to run in the background, [Background task in Nu](background_task.md) provide a simple guideline for you to follow.
+If you want to schedule some commands to run in the background, [Background task in Nu](background_task.md) provides simple guidelines for you to follow.
 
-And finally, [hooks](hooks.md) allow you to insert fragments of Nushell code to run at certain events.
+Finally, [hooks](hooks.md) allow you to insert fragments of Nushell code to run at certain events.

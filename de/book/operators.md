@@ -56,8 +56,8 @@ Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von d
 - Zuweisungs Operationen
 
 ```
-> 3 * (1 + 2)
-9
+3 * (1 + 2)
+# => 9
 ```
 
 ## Typen
@@ -65,18 +65,18 @@ Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von d
 Nicht alle Operationen ergeben für alle Datentypen Sinn.
 Wenn eine Operation auf einen nicht kompatiblen Datentyp angewendet werden soll, wird ein Fehler ausgegeben, der erklären soll, was falsch gelaufen ist:
 ```
-> "spam" - 1
-Error: nu::parser::unsupported_operation (link)
-
-  × Types mismatched for operation.
-   ╭─[entry #49:1:1]
- 1 │ "spam" - 1
-   · ───┬── ┬ ┬
-   ·    │   │ ╰── int
-   ·    │   ╰── doesn't support these values.
-   ·    ╰── string
-   ╰────
-  help: Change string or int to be the right types and try again.
+"spam" - 1
+# => Error: nu::parser::unsupported_operation (link)
+# => 
+# =>   × Types mismatched for operation.
+# =>    ╭─[entry #49:1:1]
+# =>  1 │ "spam" - 1
+# =>    · ───┬── ┬ ┬
+# =>    ·    │   │ ╰── int
+# =>    ·    │   ╰── doesn't support these values.
+# =>    ·    ╰── string
+# =>    ╰────
+# =>   help: Change string or int to be the right types and try again.
 ```
 
 Die Regeln fühlen sich oft strickt an. Auf der anderen Seite sollten sich jedoch weniger unerwünschte Nebeneffekte einschleichen.

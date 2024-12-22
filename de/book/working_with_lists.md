@@ -13,15 +13,15 @@ Mit den zwei Befehlen `update` und `insert` können Listen in einer Pipeline ver
 zum Beispiel fügt folgende Zeile den Wert `10` in der Mitte, also an Stelle 2 ein.
 
 ```nu
-> [1, 2, 3, 4] | insert 2 10
-# [1, 2, 10, 3, 4]
+[1, 2, 3, 4] | insert 2 10
+# => [1, 2, 10, 3, 4]
 ```
 
 Mit dem Befehl `update` ersetzen wir hingegen das 2. Element mit dem Wert `10`.
 
 ```nu
-> [1, 2, 3, 4] | update 1 10
-# [1, 10, 3, 4]
+[1, 2, 3, 4] | update 1 10
+# => [1, 10, 3, 4]
 ```
 
 Zusätzlich zu `insert` und `update` stehen die Befehle `prepend` und `append` zu Verfügung.

@@ -14,7 +14,7 @@ You should see the default overlay listed there.
 To create a new overlay, you first need a module:
 
 ```nu
-> module spam {
+module spam {
     export def foo [] {
         "foo"
     }
@@ -40,22 +40,22 @@ The module can be created by any of the three methods described in [Modules](mod
 To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
 
 ```nu
-> overlay use spam
+overlay use spam
 
-> foo
 foo
+# => foo
 
-> bar
 bar
+# => bar
 
-> $env.BAZ
-baz
+$env.BAZ
+# => baz
 
-> overlay list
-───┬──────
- 0 │ zero
- 1 │ spam
-───┴──────
+overlay list
+# => ───┬──────
+# =>  0 │ zero
+# =>  1 │ spam
+# => ───┴──────
 ```
 
 It brought the module's definitions into the current scope and evaluated the [`export-env`](/commands/docs/export-env.md) block the same way as [`use`](/commands/docs/use.md) command would (see [Modules](modules.md#environment-variables) chapter).

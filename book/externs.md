@@ -35,7 +35,7 @@ Notice that the syntax here is similar to that of the `def` keyword when definin
 
 This implementation:
 
-- Will provide `-p` and `-i` (with descriptions) as possibly completions for `ssh -`.
+- Will provide `-p` and `-i` (with descriptions) as possible completions for `ssh -`.
 - Will perform parse-time type checking. Attempting to use a non-`int` for the port number will result in an error (and error-condition syntax highlighting).
 - Will offer parse-time syntax highlighting based on the shapes of the arguments.
 - Will offer any private key files in `~/.ssh` as completion values for the `-i` (identity) option

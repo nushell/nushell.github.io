@@ -166,7 +166,7 @@ See also: [Pipelines](./pipelines.html)
 ### Pipeline Output
 
 ```nu
-> ls | get name
+ls | get name
 ```
 
 Let's move [`ls`](/commands/docs/ls.md) into a command that we've written:
@@ -178,7 +178,7 @@ def my-ls [] { ls }
 We can use the output from this command just as we would [`ls`](/commands/docs/ls.md).
 
 ```nu
-> my-ls | get name
+my-ls | get name
 # => ╭───┬───────────────────────╮
 # => │ 0 │ myscript.nu           │
 # => │ 1 │ myscript2.nu          │
@@ -186,7 +186,7 @@ We can use the output from this command just as we would [`ls`](/commands/docs/l
 # => ╰───┴───────────────────────╯
 ```
 
-This lets us easily build custom commands and process their output. Remember that that we don't use return statements like other languages. Instead, the [implicit return](#returning-values-from-a-command) allows us to build pipelines that output streams of data that can be connected to other pipelines.
+This lets us easily build custom commands and process their output. Remember that we don't use return statements like other languages. Instead, the [implicit return](#returning-values-from-a-command) allows us to build pipelines that output streams of data that can be connected to other pipelines.
 
 ::: tip Note
 The `ls` content is still streamed in this case, even though it is in a separate command. Running this command against a long-directory on a slow (e.g., networked) filesystem would return rows as they became available.
@@ -286,7 +286,7 @@ def "str mycommand" [] {
 Now we can call our custom command as if it were a built-in subcommand of [`str`](/commands/docs/str.md):
 
 ```nu
-> str mycommand
+str mycommand
 ```
 
 Of course, commands with spaces in their names are defined in the same way:

@@ -52,8 +52,8 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 |                                      | `help commands`                                               | List all available commands                                       |
 |                                      | `help --find <string>`                                        | Search for match in all available commands                        |
 | `command1 && command2`               | `command1; command2`                                          | Run a command, and if it's successful run a second                |
-| `stat $(which git)`                  | `stat (which git).path`                                       | Use command output as argument for other command                  |
-| `echo /tmp/$RANDOM`                  | `$"/tmp/(random integer)"`                                    | Use command output in a string                                    |
+| `stat $(which git)`                  | `stat ...(which git).path`                                    | Use command output as argument for other command                  |
+| `echo /tmp/$RANDOM`                  | `$"/tmp/(random int)"`                                        | Use command output in a string                                    |
 | `cargo b --jobs=$(nproc)`            | `cargo b $"--jobs=(sys cpu \| length)"`                       | Use command output in an option                                   |
 | `echo $PATH`                         | `$env.PATH` (Non-Windows) or `$env.Path` (Windows)            | See the current path                                              |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                                         | Update PATH permanently                                           |

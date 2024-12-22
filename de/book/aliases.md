@@ -5,19 +5,19 @@ Aliase in Nushell bieten eine einfache Möglichkeit, um Texte zur ersetzen. Dami
 Beispielsweise kann ein Alias namens `ll` definiert werden, der den längeren Befehl `ls -l` ersetzt:
 
 ```
-> alias ll = ls -l
+alias ll = ls -l
 ```
 
 Nun kann der Alias aufgerufen werden:
 
 ```
-> ll
+ll
 ```
 
 Wenn das getan wird, wirkt es, als sei `ls -l` aufgerufen worden. Das bietet auch die Möglichkeit weitere Parameter anzugeben. So kann auch geschrieben werden:
 
 ```
-> ll -a
+ll -a
 ```
 
 Das ist äquivalent zu `ls -l -a`. Deutlich kürzer.

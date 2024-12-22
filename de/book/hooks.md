@@ -89,12 +89,12 @@ Umgebungsvariablen im Hook **Block** werden in ähnlicher Weise wie [`def --env`
 Folgendes Beispiel zeigt dies:
 
 ```
-> $env.config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: { $env.SPAM = "eggs" }
 })
 
-> $env.SPAM
-eggs
+$env.SPAM
+# => eggs
 ```
 
 Die Hookblöcke folgen ansonsten den allgemeinen Scoping-Regeln, d.h. Befehle, Aliase, etc., die innerhalb des Blocks definiert sind,
@@ -152,11 +152,11 @@ Dies funktioniert, als ob der String in den REPL eingeben und Enter gedrückt wi
 So kann der Hook aus dem vorherigen Abschnitt auch geschrieben werden als:
 
 ```
-> $env.config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: '$env.SPAM = "eggs"'
 })
 
-> $env.SPAM
+$env.SPAM
 eggs
 ```
 Dieses Feature kann z.B. verwendet werden, um abhängig vom aktuellen Verzeichnis Definitionen einzubringen:
