@@ -12,6 +12,8 @@ permissions:
 jobs:
   comment:
     runs-on: ubuntu-latest
+    # If the docs was updated by hustcer, skip the commenting step
+    if: ${{github.event.pull_request.user.login != 'hustcer'}}
     steps:
       - uses: peter-evans/create-or-update-comment@v4
         with:
