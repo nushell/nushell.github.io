@@ -9,7 +9,7 @@
 Nushell 既是一种编程语言，也是一种 Shell。正因为如此，它有自己的方式来处理文件、目录、网站等等。我们对其进行了建模，以使其与你可能熟悉的其他 Shell 的工作方式接近。其中管道用于将两个命令连接在一起：
 
 ```nu
-> ls | length
+ls | length
 ```
 
 Nushell 也支持其他常见的功能，例如从之前运行的命令中获取退出代码（Exit Code）。
@@ -17,13 +17,13 @@ Nushell 也支持其他常见的功能，例如从之前运行的命令中获取
 虽然它确实有这些功能，但 Nushell 并不是 Bash。Bash 的工作方式以及一般的 POSIX 风格，并不是 Nushell 所支持的。例如，在 Bash 中你可以使用：
 
 ```shell
-> echo "hello" > output.txt
+echo "hello" > output.txt
 ```
 
 在 Nushell 中，我们使用 `>` 作为大于运算符，这与 Nushell 的语言特质比较吻合。取而代之的是，你需要用管道将其连接到一个可以保存内容的命令：
 
 ```nu
-> "hello" | save output.txt
+"hello" | save output.txt
 ```
 
 **以 Nushell 的方式思考：** Nushell 看待数据的方式是，数据在管道中流动，直到它到达用户或由最后的命令处理。你可以简单地输入数据，从字符串到类似 JSON 的列表和记录，然后使用 `|` 将其通过管道发送。Nushell 使用命令来执行工作并生成更多数据。学习这些命令以及何时使用它们有助于你组合使用多种管道。
@@ -43,33 +43,33 @@ abc
 ```
 
 ```nu
-> nu compiled.nu
-Error: nu::parser::sourced_file_not_found
-
-  × File not found
-   ╭─[.../compiled.nu:2:1]
- 2 │ sleep 1sec
- 3 │ source "output.nu"
-   ·        ─────┬─────
-   ·             ╰── File not found: output.nu
- 4 │ abc
-   ╰────
-  help: sourced files need to be available before your script is run
+nu compiled.nu
+# => Error: nu::parser::sourced_file_not_found
+# => 
+# =>   × File not found
+# =>    ╭─[.../compiled.nu:2:1]
+# =>  2 │ sleep 1sec
+# =>  3 │ source "output.nu"
+# =>    ·        ─────┬─────
+# =>    ·             ╰── File not found: output.nu
+# =>  4 │ abc
+# =>    ╰────
+# =>   help: sourced files need to be available before your script is run
 ```
 
 但是，以 [组](types_of_data.html#组) 的方式在**交互式模式**中运行就又和脚本一样了：
 
 ```nu
-> "def abc [] { 1 + 2 }" | save output.nu; sleep 1sec; source "output.nu"; abc
-Error: nu::parser::sourced_file_not_found
-
-  × File not found
-   ╭─[entry #1:1:1]
- 1 │ "def abc [] { 1 + 2 }" | save output.nu; sleep 1sec; source "output.nu"; abc
-   ·                                                             ─────┬─────
-   ·                                                                  ╰── File not found: output.nu
-   ╰────
-  help: sourced files need to be available before your script is run
+"def abc [] { 1 + 2 }" | save output.nu; sleep 1sec; source "output.nu"; abc
+# => Error: nu::parser::sourced_file_not_found
+# => 
+# =>   × File not found
+# =>    ╭─[entry #1:1:1]
+# =>  1 │ "def abc [] { 1 + 2 }" | save output.nu; sleep 1sec; source "output.nu"; abc
+# =>    ·                                                             ─────┬─────
+# =>    ·                                                                  ╰── File not found: output.nu
+# =>    ╰────
+# =>   help: sourced files need to be available before your script is run
 ```
 
 `source` 命令将引入被编译的源码，但前面那行 `save` 命令还没有机会运行。Nushell 运行整个程序块就像运行一个文件一样，而不是一次运行一行。在这个例子中，由于 `output.nu` 文件是在“编译”步骤之后才创建的，因此 `source` 命令在解析时无法从其中读取定义。
@@ -77,7 +77,7 @@ Error: nu::parser::sourced_file_not_found
 另一个常见的问题是试图动态地创建文件名并 `source`，如下：
 
 ```nu
-> source $"($my_path)/common.nu"
+source $"($my_path)/common.nu"
 ```
 
 这就需要求值器（Evaluator）运行并对字符串进行求值（Evaluate），但不幸的是，Nushell 在编译时就需要这些信息。
@@ -101,13 +101,13 @@ let x = $x + 1
 循环计数器是可变变量的另一种常见模式，它被内置于大多数迭代命令中，例如，你可以使用 [`each`](/commands/docs/each.md) 上的 `-n` 标志同时获得每个元素的值和索引：
 
 ```nu
-> ls | enumerate | each { |elt| $"Number ($elt.index) is size ($elt.item.size)" }
+ls | enumerate | each { |elt| $"Number ($elt.index) is size ($elt.item.size)" }
 ```
 
 你也可以使用 [`reduce`](/commands/docs/reduce.md) 命令来达到上述目的，其方式与你在循环中修改一个变量相同。例如，如果你想在一个字符串列表中找到最长的字符串，你可以这样做：
 
 ```nu
-> [one, two, three, four, five, six] | reduce {|curr, max|
+[one, two, three, four, five, six] | reduce {|curr, max|
     if ($curr | str length) > ($max | str length) {
         $curr
     } else {
@@ -127,7 +127,7 @@ Nushell 从编译型语言中获得了很多设计灵感，其中一个是语言
 在实践中，这可以让你用更简洁的代码来处理子目录，例如，如果你想在当前目录下构建每个子项目，你可以运行：
 
 ```nu
-> ls | each { |row|
+ls | each { |row|
     cd $row.name
     make
 }

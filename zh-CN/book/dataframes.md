@@ -14,10 +14,10 @@
 
 在这个小的性能测试练习中，我们将比较本地的 Nushell 原生命令、Nushell DataFrame 相关命令和[Python Pandas](https://pandas.pydata.org/)命令。暂时不要太在意`dataframe`命令，它们将在本页后面的章节中解释。
 
-> 系统细节：本节介绍的性能测试是用一台配备 Intel(R) Core(TM) i7-10710U
-> （CPU @1.10GHz 1.61GHz）和 16 GB 内存的机器运行的。
->
-> 所有的例子都在 Nushell 0.78 版本上运行。
+系统细节：本节介绍的性能测试是用一台配备 Intel(R) Core(TM) i7-10710U
+（CPU @1.10GHz 1.61GHz）和 16 GB 内存的机器运行的。
+
+所有的例子都在 Nushell 0.78 版本上运行。
 
 ### 文件信息
 
@@ -187,7 +187,7 @@ int_1,int_2,float_1,float_2,first,second,third,word
 现在，要将该文件作为 DataFrame 进行读取，请使用 `dfr open` 命令，如下所示：
 
 ```nu
-> let df = (dfr open test_small.csv)
+let df = (dfr open test_small.csv)
 ```
 
 这应该会在内存中创建一个值 `$df`，用来存放我们刚刚创建的数据。

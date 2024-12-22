@@ -30,7 +30,7 @@ Nushell 中使用的环境变量的实际值在`value`列下。
 使用`$env.VAR = "val"`命令是最直接的方法：
 
 ```nu
-> $env.FOO = 'BAR'
+$env.FOO = 'BAR'
 ```
 
 因此，如果你想扩展`PATH`变量，你可以这样做：
@@ -47,7 +47,7 @@ $env.PATH = ($env.PATH | prepend '/path/you/want/to/add')
 如果你有一个以上的环境变量需要设置，你可以使用`load-env`并创建一个键/值对记录(Record)，以用于加载多个环境变量：
 
 ```nu
-> load-env { "BOB": "FOO", "JAY": "BAR" }
+load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
 ### 一次性环境变量
@@ -68,8 +68,8 @@ $env.PATH = ($env.PATH | prepend '/path/you/want/to/add')
 单个环境变量是记录的一个字段，存储在 `$env` 变量中，可以用 `$env.VARIABLE` 读取：
 
 ```
-> $env.FOO
-BAR
+$env.FOO
+# => BAR
 ```
 
 ## 作用域
@@ -79,14 +79,14 @@ BAR
 这里有一个小例子来演示环境变量作用域：
 
 ```nu
-> $env.FOO = "BAR"
-> do {
+$env.FOO = "BAR"
+do {
     $env.FOO = "BAZ"
     $env.FOO == "BAZ"
 }
-true
-> $env.FOO == "BAR"
-true
+# => true
+$env.FOO == "BAR"
+# => true
 ```
 
 ## 目录切换
@@ -100,15 +100,15 @@ Shell 中常见的任务是用[`cd`](/commands/docs/cd.md)命令来改变目录�
 在 Bash 和其他软件的启发下，有一个常用的简便方法，可以设置一次性环境变量：
 
 ```nu
-> FOO=BAR echo $env.FOO
-BAR
+FOO=BAR echo $env.FOO
+# => BAR
 ```
 
 你也可以使用[`with-env`](/commands/docs/with-env.md)来更明确地做同样的事情：
 
 ```nu
-> with-env { FOO: BAR } { echo $env.FOO }
-BAR
+with-env { FOO: BAR } { echo $env.FOO }
+# => BAR
 ```
 
 [`with-env`](/commands/docs/with-env.md)命令将暂时把环境变量设置为给定的值（这里：变量 "FOO" 被赋为 "BAR" 值）。一旦这样做了，[块](types_of_data.html#块) 将在这个新的环境变量设置下运行。
@@ -130,14 +130,14 @@ $env.FOO = 'BAR'
 然而，用[`def --env`](/commands/docs/def.md)而不是[`def`](/commands/docs/def.md)定义的命令（它也适用于`export def`，见 [模块](modules.md)）将在调用者一方保留环境设置：
 
 ```nu
-> def --env foo [] {
+def --env foo [] {
     $env.FOO = 'BAR'
 }
 
-> foo
+foo
 
-> $env.FOO
-BAR
+$env.FOO
+# => BAR
 ```
 
 ## 环境变量转换
@@ -164,26 +164,26 @@ $env.ENV_CONVERSIONS = {
 现在，在一个 Nushell 实例内执行：
 
 ```nu
-> with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
+with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
 
-> $env.FOO
-  0   a
-  1   b
-  2   c
+$env.FOO
+# =>   0   a
+# =>   1   b
+# =>   2   c
 ```
 
 你可以看到`$env.FOO`现在是一个新的 Nushell 实例中的列表，配置已经更新。
 你也可以通过以下方式手动测试转换：
 
 ```nu
-> do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
+do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
 ```
 
 现在，为了测试列表->字符串的转换，运行：
 
 ```nu
-> nu -c '$env.FOO'
-a-b-c
+nu -c '$env.FOO'
+# => a-b-c
 ```
 
 因为`nu`是一个外部程序，Nushell 根据`ENV_CONVERSIONS.FOO.to_string`翻译了 `[ a b c ]` 列表，并把它传递给`nu`进程。
@@ -201,21 +201,21 @@ _(重要! 环境转换字符串->值发生在 `env.nu` 和 `config.nu` 被运行
 只有当一个环境变量被设置在当前作用域中时，你才能通过 [`hide`](/commands/docs/hide.md) 命令“删除”它：
 
 ```nu
-> $env.FOO = 'BAR'
-...
-> hide FOO
+$env.FOO = 'BAR'
+# => ...
+hide FOO
 ```
 
 隐藏也是有作用域的，这既允许你暂时删除一个环境变量，又可以防止你从子作用域内修改父环境：
 
 ```nu
-> $env.FOO = 'BAR'
-> do {
+$env.FOO = 'BAR'
+do {
     hide FOO
     # $env.FOO does not exist
   }
-> $env.FOO
-BAR
+$env.FOO
+# => BAR
 ```
 
 关于隐藏的更多细节，请参考 [模块](modules.md#隐藏)
