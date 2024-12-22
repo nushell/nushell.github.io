@@ -12,7 +12,6 @@ usage: |
 
 # `ansi` for [platform](/commands/categories/platform.md)
 
-JUST MESSING
 <div class='command-title'>Output ANSI codes to change color and style of text.</div>
 
 ## Signature
