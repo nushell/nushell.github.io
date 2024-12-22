@@ -334,7 +334,7 @@ $my_record
 # => │ rank  │ 99         │
 # => ╰───────┴────────────╯
 
- $my_record | get name
+$my_record | get name
 # =>  Kylian
 ```
 
