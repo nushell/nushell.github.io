@@ -279,7 +279,7 @@ Let's start with basic aggregations on the dataframe. Let's sum all the columns
 that exist in `df` by using the `aggregate` command
 
 ```nu
-$df_1 | polars sum
+$df_1 | polars sum | polars collect
 # => ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬──────╮
 # => │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word │
 # => ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼──────┤
@@ -292,7 +292,7 @@ a sum makes sense. If you want to filter out the text column, you can select
 the columns you want by using the [`polars select`](/commands/docs/polars_select.md) command
 
 ```nu
-$df_1 | polars sum | polars select int_1 int_2 float_1 float_2
+$df_1 | polars sum | polars select int_1 int_2 float_1 float_2 | polars collect
 # => ╭───┬───────┬───────┬─────────┬─────────╮
 # => │ # │ int_1 │ int_2 │ float_1 │ float_2 │
 # => ├───┼───────┼───────┼─────────┼─────────┤
