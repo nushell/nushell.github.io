@@ -21,18 +21,51 @@ my-command
 The first line defines a custom command which returns a list of three different animals. These are the possible values for the completion.
 
 ::: tip
-The completion command must return a Nushell `list` of the possible completion values. If a completer does not return a valid list, the default completer will be used. The default completer returns a list of files and subdirectories of the current directory.
-
 To suppress completions for an argument (for example, an `int` that can accept any integer), define a completer that returns an empty list (`[ ]`).
 :::
 
-In the second line of the example above, `string@animals` tells Nushell two things—the shape of the argument for type-checking and the completer which will suggest possible values for the argument.
+In the second line, `string@animals` tells Nushell two things—the shape of the argument for type-checking and the completer which will suggest possible values for the argument.
 
 The third line is demonstration of the completion. Type the name of the custom command `my-command`, followed by a space, and then the <kbd>Tab</kbd> key. This displays a menu with the possible completions. Custom completions work the same as other completions in the system, allowing you to type `e` followed by the <kbd>Tab</kbd> key to complete "eel" automatically.
 
 ::: tip
 When the completion menu is displayed, the prompt changes to include the `|` character by default. This can be changed using `$env.config.menus.marker`.
 :::
+
+## Options for Custom Completions
+
+If you want to choose how your completions are filtered and sorted, you can return a record rather than a list. The list of completion suggestions should be under the `completions` key of this record. Optionally, it can also have, under the `options` key, a record containing the following optional settings:
+
+- `sort` - Set this to `false` to stop Nushell from sorting your completions. By default, this is `true`, and completions are sorted according to `$env.config.completions.sort`.
+- `case_sensitive` - Set to `true` for the custom completions to be matched case sensitively, `false` otherwise. Used for overriding `$env.config.completions.case_sensitive`.
+- `completion_algorithm` - Set this to either `prefix` or `fuzzy` to choose how your completions are matched against the typed text. Used for overriding `$env.config.completions.algorithm`.
+- `positional` - When prefix matching is used, setting this to `false` will use substring matching instead. `true` by default.
+
+Here's an example demonstrating how to set these options:
+
+```nu
+def animals [] {
+    {
+        options: {
+            case_sensitive: false,
+            completion_algorithm: prefix,
+            positional: false,
+            sort: false,
+        },
+        completions: [cat, rat, bat]
+    }
+}
+def my-command [animal: string@animals] { print $animal }
+```
+
+Now, if you try to complete `A`, you get the following completions:
+
+```nu
+>| my-command A
+cat                 rat                 bat
+```
+
+Because we made matching case-insensitive and used `positional: false`, Nushell will find the substring "a" in all of the completion suggestions. Additionally, because we set `sort: false`, the completions will be left in their original order.
 
 ## Modules and Custom Completions
 
