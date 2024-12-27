@@ -8,7 +8,7 @@ Note: this table assumes Nu 0.43 or later.
 | ------------ | ---------------------------- | ------------------------------- | ------------------------ | ------------------------------ |
 | append       | conj, into, concat           | append, (++), concat, concatMap | (++)                     |  `builtins.concatLists`        |
 | into binary  | Integer/toHexString          |                                 | showHex                  |  `toString (toHex value)`      |
-| count        | count                        | length, size                    | length, size             |  `length`                      |
+| count        | count                        | length, size                    | length, size             |  `builtins.length`             |
 | date         | java.time.LocalDate/now      |                                 |                          |  `builtins.time`               |
 | each         | map, mapv, iterate           | map, forEach                    | map, mapM                |  `map`                         |
 | exit         | System/exit                  |                                 |                          |  `throw`                       |
@@ -24,18 +24,18 @@ Note: this table assumes Nu 0.43 or later.
 | open         | with-open                    |                                 |                          |  N/A (Declarative paradigm)    |
 | transpose    | (apply mapv vector matrix)   |                                 | transpose                |  Custom function               |
 | prepend      | cons                         | cons, ::                        | ::                       |  `[value] ++ list`             |
-| print        | println                      |                                 | putStrLn, print          |  `trace`                       |
+| print        | println                      |                                 | putStrLn, print          |  `builtins.trace`              |
 | range, 1..10 | range                        | range                           | 1..10, 'a'..'f'          |  `builtins.genList`            |
 | reduce       | reduce, reduce-kv            | foldr                           | foldr                    |  Custom function with `fold`   |
 | reverse      | reverse, rseq                | reverse, reverseInPlace         | reverse                  |  `builtins.reverse`            |
 | select       | select-keys                  |                                 |                          |  Custom function with `attr`   |
 | shuffle      | shuffle                      |                                 |                          |  N/A (Write custom logic)      |
-| size         | count                        |                                 | size, length             |  `length`                      |
+| size         | count                        |                                 | size, length             |  `builtins.length`             |
 | skip         | rest                         | tail                            | tail                     |  `builtins.tail`               |
 | skip until   | drop-while                   |                                 |                          |  Custom function with `filter` |
 | skip while   | drop-while                   | dropWhile                       | dropWhile, dropWhileEnd  |  Custom function with `filter` |
 | sort-by      | sort, sort-by, sorted-set-by | sort, sortBy, sortWith          | sort, sortBy             |  Custom sort logic             |
-| split row    | split, split-{at,with,lines} | split, words, lines             | split, words, lines      |  `splitString`                 |
+| split row    | split, split-{at,with,lines} | split, words, lines             | split, words, lines      |  `lib.splitString`             |
 | str          | clojure.string functions     | String functions                |                          |  `builtins.toString`           |
 | str join     | join                         | concat                          | intercalate              |  `builtins.concatStringsSep`   |
 | str trim     | trim, triml, trimr           | trim, trimLeft, trimRight       | strip                    |  Custom function               |
@@ -43,6 +43,6 @@ Note: this table assumes Nu 0.43 or later.
 | take         | take, drop-last, pop         | take, init                      | take, init               |  `builtins.slice`              |
 | take until   | take-while                   | takeWhile                       | takeWhile                |  Custom function               |
 | take while   | take-while                   | takeWhile                       | takeWhile                |  Custom function               |
-| uniq         | set                          | Set.empty                       | Data.Set                 |  `builtins.uniq`               |
+| uniq         | set                          | Set.empty                       | Data.Set                 |  `lib.unique`                  |
 | where        | filter, filterv, select      | filter, filterMap               | filter                   |  `filter`                      |
 
