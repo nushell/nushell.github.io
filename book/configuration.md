@@ -52,7 +52,7 @@ That's it! More details are below when you need them ...
 To view a simplified version of this documentation from inside Nushell, run:
 
 ```nu
-config env --doc | nu-highlight | less -R
+config nu --doc | nu-highlight | less -R
 ```
 
 :::
@@ -121,14 +121,12 @@ The [Environment](./environment.md) Chapter covers additional information on how
 ### Path Configuration
 
 As with most shells, Nushell searches the environment variable named `PATH` (or variants).
-The `env.nu` file is often used to add (and sometimes remove) directories on the path.
 
 :::tip
 Unlike some shells, Nushell attempts to be "case agnostic" with environment variables. `Path`, `path`, `PATH`, and even `pAtH` are all allowed variants of the same environment variable. See [Environment - Case Sensitivity](./environment.md#case-sensitivity) for details.
 :::
 
-When Nushell is launched, it usually inherits the `PATH` as a string. However, Nushell automatically converts this to a Nushell list for easy access. This means that you can _append_ to
-the path using, for example:
+When Nushell is launched, it usually inherits the `PATH` as a string. However, Nushell automatically converts this to a Nushell list for easy access. This means that you can _append_ to the path using, for example:
 
 ```nu
 $env.path ++= ["~/.local/bin"]
@@ -136,7 +134,7 @@ $env.path ++= ["~/.local/bin"]
 
 The Standard Library also includes a helper command. The default `path add` behavior is to _prepend_
 a directory so that it has higher precedence than the rest of the path. For example, the following can be
-added to `env.nu`:
+added to your startup config:
 
 ```nushell
 use std/util "path add"
@@ -176,7 +174,7 @@ Each of these variables accepts either:
 - `null`, in which case the component will revert to its internal default value.
 
 ::: tip
-To disable the right-prompt, for instance, add the following to `env.nu`:
+To disable the right-prompt, for instance, add the following to your startup config:
 
 ```nu
 $env.PROMPT_COMMAND_RIGHT = ""
@@ -238,7 +236,7 @@ variables are:
   ```
 
 ::: tip
-As mentioned above, the OS Path variable is automatically converted by Nushell. As a result, it can be treated as a list within `env.nu` without needing to be present in `ENV_CONVERSIONS`. Other colon-separated paths, like `XDG_DATA_DIRS`, are not automatically converted.
+As mentioned above, the OS Path variable is automatically converted by Nushell. As a result, it can be treated as a list within your startup config without needing to be present in `ENV_CONVERSIONS`. Other colon-separated paths, like `XDG_DATA_DIRS`, are not automatically converted.
 :::
 
 To add an additional conversion, [`merge`](/commands/docs/merge.md) it into the `$env.ENV_CONVERSIONS` record. For example, to add a conversion for the `XDG_DATA_DIRS` variable:
