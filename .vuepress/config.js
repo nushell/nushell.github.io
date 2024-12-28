@@ -103,11 +103,15 @@ export default defineUserConfig({
       handleImportPath: (str) =>
         str.replace(/^@snippets/, path.resolve(__dirname, '../snippets')),
     },
+    highlighter: 'shiki',
   },
   // without this, we attempt to prefetch the whole site 😬
   shouldPrefetch: false,
   colorMode: 'auto',
   theme: defaultTheme({
+    markdown: {
+      highlighter: 'shiki',
+    },
     repo: 'nushell/nushell',
     repoLabel: 'GitHub',
     editLinks: true,
@@ -173,9 +177,7 @@ export default defineUserConfig({
       },
     },
     themePlugins: {
-      prismjs: {
-        lineNumbers: 10,
-      },
+      prismjs: false,
     },
   }),
   plugins: [
@@ -193,6 +195,7 @@ export default defineUserConfig({
       theme: 'dark-plus',
       lineNumbers: 10,
       langs: [
+        'csv',
         'nushell',
         'rust',
         'bash',
