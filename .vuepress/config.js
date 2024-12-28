@@ -198,6 +198,8 @@ export default defineUserConfig({
         'bash',
         'shell',
         'sh',
+        'csv',
+        'ansi',
         'toml',
         'json',
         'javascript',
