@@ -167,6 +167,9 @@ let cats = ["Mr. Humphrey Montgomery", Kitten]
 
 The below code is an equivalent version using `append`:
 ```nushell
+let dogs = [Spot, Teddy, Tommy]
+let cats = ["Mr. Humphrey Montgomery", Kitten]
+# BEGIN EXAMPLE
 $dogs |
   append Polly |
   append ($cats | each { |elt| $"($elt) \(cat\)" }) |
@@ -209,6 +212,8 @@ You can make a new record with all the fields of `$config` and some new addition
 operator. You can use the spread multiple records inside a single record literal.
 
 ```nushell
+let config = { path: /tmp, limit: 5 }
+# BEGIN EXAMPLE
 {
   ...$config,
   users: [alice bob],

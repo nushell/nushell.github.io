@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { defineUserConfig } from '@vuepress/cli';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { feedPlugin } from '@vuepress/plugin-feed';
@@ -10,6 +11,7 @@ import { copyCodePlugin } from '@vuepress/plugin-copy-code';
 import { docsearchPlugin } from '@vuepress/plugin-docsearch';
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom';
+import { transformerRenderWhitespace } from '@shikijs/transformers';
 
 import {
   navbarDe,
@@ -194,18 +196,46 @@ export default defineUserConfig({
     shikiPlugin({
       themes: {
         dark: 'dark-plus',
-        vitessedark: 'vitesse-dark', // pre-load vitesse-dark for ansi code blocks
+        onedarkpro: 'one-dark-pro', // pre-load one-dark-pro for ansi code blocks
       },
       lineNumbers: 10,
       transformers: [
+        transformerRenderWhitespace(),
+        {
+          // highlight nushell code blocks with nu-highlight
+          preprocess(code, options) {
+            if (this.options.lang != 'nushell' && this.options.lang != 'nu') {
+              return code;
+            }
+
+            this.options.defaultColor = 'onedarkpro';
+            // this doesn't work at the top-level for some reason
+            this.options.colorReplacements = {
+              // make one-dark-pro background color the same as dark-plus
+              '#282c34': '#1e1e1e',
+              // HACK: change color of comments, since nu-highlight can't highlight them
+              '#abb2bf': '#80858f',
+            };
+
+            // switch language to ansi, and highlight code blocks with nu-highlight
+            this.options.lang = 'ansi';
+            let result = execFileSync('nu', ['--stdin', 'tools/highlight.nu'], {
+              input: code,
+            });
+            return result.toString().trimEnd();
+          },
+        },
+        // use one-dark-pro theme for ansi code blocks
         {
           preprocess(code, options) {
             if (options.lang == 'ansi') {
-              this.options.defaultColor = 'vitessedark';
+              this.options.defaultColor = 'onedarkpro';
               // this doesn't work at the top-level for some reason
               this.options.colorReplacements = {
-                // make vitesse-dark background color the same as dark-plus
-                '#121212': '#1e1e1e',
+                // make one-dark-pro background color the same as dark-plus
+                '#282c34': '#1e1e1e',
+                // HACK: change color of comments, since nu-highlight can't highlight them
+                '#abb2bf': '#80858f',
               };
             }
             return code;
