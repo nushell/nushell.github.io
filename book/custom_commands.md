@@ -287,6 +287,10 @@ def "str mycommand" [] {
 Now we can call our custom command as if it were a built-in subcommand of [`str`](/commands/docs/str.md):
 
 ```nu
+def "str mycommand" [] {
+  "hello"
+}
+# BEGIN EXAMPLE
 str mycommand
 ```
 
@@ -444,12 +448,16 @@ greet World
 
 If we try to run the above, Nushell will tell us that the types don't match:
 
-```nu
-error: Type Error
-  ┌─ shell:6:7
-  │
-5 │ greet world
-  │       ^^^^^ Expected int
+```ansi
+Error: [31mnu::parser::parse_mismatch
+
+[39m  [31m×[39m Parse mismatch during operation.
+   ╭─[[22;1;36;4mentry #1:5:7[22;39;24m]
+ [22;2m4[22m │
+ [22;2m5[22m │ greet World
+   · [22;1;35m      ──┬──
+[22;39m   ·         [22;1;35m╰── expected int
+[22;39m   ╰────[m
 ```
 
 ::: tip Cool!
