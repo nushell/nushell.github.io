@@ -192,8 +192,29 @@ export default defineUserConfig({
       },
     }),
     shikiPlugin({
-      theme: 'dark-plus',
+      themes: {
+        dark: 'dark-plus',
+        onedarkpro: 'one-dark-pro', // pre-load one-dark-pro for ansi code blocks
+      },
       lineNumbers: 10,
+      transformers: [
+        // use one-dark-pro theme for ansi code blocks
+        {
+          preprocess(code, options) {
+            if (options.lang == 'ansi') {
+              this.options.defaultColor = 'onedarkpro';
+              // this doesn't work at the top-level for some reason
+              this.options.colorReplacements = {
+                // make one-dark-pro background color the same as dark-plus
+                '#282c34': '#1e1e1e',
+                // HACK: change color of comments, since nu-highlight can't highlight them
+                '#abb2bf': '#80858f',
+              };
+            }
+            return code;
+          },
+        },
+      ],
       langs: [
         'csv',
         'nushell',
