@@ -270,8 +270,9 @@ Because `def` is a parser keyword, the command name must be known at parse time.
 ```nu
 let name = "foo"
 def $name [] { foo }
-:::
 ```
+
+:::
 
 ### Subcommands
 
