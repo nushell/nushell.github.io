@@ -192,8 +192,26 @@ export default defineUserConfig({
       },
     }),
     shikiPlugin({
-      theme: 'dark-plus',
+      themes: {
+        dark: 'dark-plus',
+        vitessedark: 'vitesse-dark', // pre-load vitesse-dark for ansi code blocks
+      },
       lineNumbers: 10,
+      transformers: [
+        {
+          preprocess(code, options) {
+            if (options.lang == 'ansi') {
+              this.options.defaultColor = 'vitessedark';
+              // this doesn't work at the top-level for some reason
+              this.options.colorReplacements = {
+                // make vitesse-dark background color the same as dark-plus
+                '#121212': '#1e1e1e',
+              };
+            }
+            return code;
+          },
+        },
+      ],
       langs: [
         'csv',
         'nushell',
