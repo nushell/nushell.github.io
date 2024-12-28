@@ -194,18 +194,21 @@ export default defineUserConfig({
     shikiPlugin({
       themes: {
         dark: 'dark-plus',
-        vitessedark: 'vitesse-dark', // pre-load vitesse-dark for ansi code blocks
+        onedarkpro: 'one-dark-pro', // pre-load one-dark-pro for ansi code blocks
       },
       lineNumbers: 10,
       transformers: [
+        // use one-dark-pro theme for ansi code blocks
         {
           preprocess(code, options) {
             if (options.lang == 'ansi') {
-              this.options.defaultColor = 'vitessedark';
+              this.options.defaultColor = 'onedarkpro';
               // this doesn't work at the top-level for some reason
               this.options.colorReplacements = {
-                // make vitesse-dark background color the same as dark-plus
-                '#121212': '#1e1e1e',
+                // make one-dark-pro background color the same as dark-plus
+                '#282c34': '#1e1e1e',
+                // HACK: change color of comments, since nu-highlight can't highlight them
+                '#abb2bf': '#80858f',
               };
             }
             return code;
