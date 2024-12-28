@@ -134,8 +134,8 @@ To make sure the first line is _displayed_, use the [`print` command](/commands/
 
 ```nu
 def latest-file [] {
-print "Returning last file"
-ls | sort-by modified | last
+    print "Returning last file"
+    ls | sort-by modified | last
 }
 ```
 
