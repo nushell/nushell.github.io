@@ -192,7 +192,7 @@ export default defineUserConfig({
       },
     }),
     shikiPlugin({
-      theme: 'vitesse-dark',
+      theme: 'dark-plus',
       lineNumbers: 10,
       langs: [
         'csv',
