@@ -65,7 +65,7 @@ Now, if you try to complete `A`, you get the following completions:
 cat                 rat                 bat
 ```
 
-Because we made matching case-insensitive and used `positional: false`, Nushell will find the substring "a" in all of the completion suggestions. Additionally, because we set `sort: false`, the completions will be left in their original order.
+Because we made matching case-insensitive and used `positional: false`, Nushell will find the substring "a" in all of the completion suggestions. Additionally, because we set `sort: false`, the completions will be left in their original order. This is useful if your completions are already sorted in a particular order unrelated to their text (e.g. by date).
 
 ## Modules and Custom Completions
 
@@ -158,14 +158,14 @@ export extern "git push" [
 
 Custom completions will serve the same role in this example as in the previous examples. The examples above call into two different custom completions, based on the position the user is currently in.
 
-## Custom Descriptions
+## Custom Descriptions and Styles
 
-As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` and `description` field.
+As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` field as well as optional `description` and `style` fields.
 
 ```nu
 def my_commits [] {
     [
-        { value: "5c2464", description: "Add .gitignore" },
+        { value: "5c2464", description: "Add .gitignore", style: red },
         { value: "f3a377", description: "Initial commit" }
     ]
 }
@@ -182,9 +182,9 @@ def my-command [commit: string@my_commits] {
 
 ... be aware that, even though the completion menu will show you something like
 
-```nu
+```ansi
 >_ my-command <TAB>
-5c2464  Add .gitignore
+[1;34m5c2464[0m  Add .gitignore
 f3a377  Initial commit
 ```
 
