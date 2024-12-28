@@ -1,7 +1,11 @@
 const DELIMITER = "BEGIN EXAMPLE"
 
 def main [] {
-  let source = $in
+  let source = (
+    $in
+    # prune leading caret
+    | str replace -r '^[>>]\s+' ''
+  )
   let highlighted = $source | nu-highlight
   if $DELIMITER in $source {
     $highlighted
