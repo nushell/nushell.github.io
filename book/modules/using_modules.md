@@ -75,17 +75,31 @@ The path to the module can be:
   This allows you to install modules to a location that is easily accessible via a relative path regardless of the current directory.
   :::
 
-- An absolute or relative path to a Nushell module file. As above, Nushell will search the `$env.NU_LIB_DIRS` for a matching relative path.
+- An absolute path to a Nushell module file:
 
   ::: details Example
 
   ```nu
   use ~/nushell/modules/std-rfc/bulk-rename.nu
-  # Or
+  ```
+
+  :::
+
+- A relative path to a Nushell module file:
+
+  ::: details Example
+
+  ```nu
   cd ~/nushell/modules
   use std-rfc/bulk-rename.nu
   ```
 
+  :::
+
+  ::: important Important! Importing modules from `$env.NU_LIB_DIRS`
+  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the `$env.NU_LIB_DIRS` list.
+
+  This allows you to install modules to a location that is easily accessible via a relative path regardless of the current directory.
   :::
 
 - A virtual directory:
@@ -100,7 +114,7 @@ The path to the module can be:
 
   :::
 
-- Less commonly, the name of a module already created with the [`module`](/commands/docs/module.md) command. While it is possible to use this command to create a module at the commandline, this isn't common or useful. Instead, this form is primarily used by module authors to define a submodule. See [Creating Modules - Submodules](./creating_modules.md#submodules).
+- Less commonly, the name of a module is created with the [`module`](/commands/docs/module.md) command. While it is possible to use this command to create a module at the commandline, this isn't common or useful. Instead, this form is primarily used by module authors to define a submodule. See [Creating Modules - Submodules](./creating_modules.md#submodules).
 
 ### Module Definitions
 
@@ -245,6 +259,6 @@ assert true
 
 ## See Also
 
-- To make a module always be available without having to `use` it in each Nushell session, simply add its import (`use`) to your startup configuration. See the [Configuration](../configuration.md) Chapter to learn how.
+- To make a module always be available without having to `use` it in each Nushell session, add its import (`use`) to your startup configuration. See the [Configuration](../configuration.md) Chapter to learn how.
 
 - Modules can also be used as part of an [Overlay](../overlays.md).
