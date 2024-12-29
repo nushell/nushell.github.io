@@ -1,1 +1,1 @@
-> rm item
+rm item
