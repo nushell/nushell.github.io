@@ -49,9 +49,9 @@ For example:
 let colors = [yellow green]
 let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
-let colors = ($colors ++ "blue")
-let colors = ("black" ++ $colors)
-$colors 
+let colors = ($colors ++ ["blue"])
+let colors = (["black"] ++ $colors)
+$colors
 # => [black red yellow green purple blue]
 ```
 
@@ -61,7 +61,7 @@ In case you want to remove items from list, there are many ways. [`skip`](/comma
 let colors = [red yellow green purple]
 let colors = ($colors | skip 1)
 let colors = ($colors | drop 2)
-$colors 
+$colors
 # => [yellow]
 ```
 
@@ -70,7 +70,7 @@ We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first
 ```nu
 let colors = [red yellow green purple black magenta]
 let colors = ($colors | last 3)
-$colors 
+$colors
 # => [purple black magenta]
 ```
 
@@ -79,7 +79,7 @@ And from the beginning of a list,
 ```nu
 let colors = [yellow green purple]
 let colors = ($colors | first 2)
-$colors 
+$colors
 # => [yellow green]
 ```
 
