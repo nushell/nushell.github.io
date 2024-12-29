@@ -20,7 +20,7 @@ usage: |
 
 ## Flags
 
- -  `--table-name, -t {string}`: name of the table you want to insert into
+ -  `--table-name, -t {string}`: name of the table you want to delete from
  -  `--where-clause, -w {string}`: a sql string to use as a where clause without the WHERE keyword
 
 
