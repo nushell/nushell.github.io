@@ -162,15 +162,16 @@ Custom completions will serve the same role in this example as in the previous e
 
 As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` field as well as optional `description` and `style` fields. The style can be one of the following:
 
-- A string with the foreground color, either a hex code or a color name. For a list of valid color names, see `ansi --list`.
-- A record with the fields `fg` (foreground color), `bg` (background color), and `attr` (attributes such as underline and bold). This record is in the same format that `ansi --escape` accepts.
+- A string with the foreground color, either a hex code or a color name such as `yellow`. For a list of valid color names, see `ansi --list`.
+- A record with the fields `fg` (foreground color), `bg` (background color), and `attr` (attributes such as underline and bold). This record is in the same format that `ansi --escape` accepts. See the [`ansi`](/commands/docs/ansi) command reference for a list of possible values for the `attr` field.
 - The same record, but converted to a JSON string.
 
 ```nu
 def my_commits [] {
     [
         { value: "5c2464", description: "Add .gitignore", style: red },
-        { value: "f3a377", description: "Initial commit", style: { fg: green, bg: "#66078c", attr: u } }
+        # "attr: ub" => underlined and bolded
+        { value: "f3a377", description: "Initial commit", style: { fg: green, bg: "#66078c", attr: ub } }
     ]
 }
 ```
@@ -189,7 +190,7 @@ def my-command [commit: string@my_commits] {
 ```ansi
 >_ [36mmy-command[0m <TAB>
 [1;31m5c2464[0m  [33mAdd .gitignore[0m
-[4;48;2;102;7;140;32mf3a377  [0m[33mInitial commit[0m
+[1;4;48;2;102;7;140;32mf3a377  [0m[33mInitial commit[0m
 ```
 
 ... only the value (i.e., "5c2464" or "f3a377") will be used in the command arguments!
