@@ -128,7 +128,7 @@ Vous pouvez ajouter des points supplémentaires pour remonter de niveaux supplé
 @[code](@snippets/book/moving_around/multiple_cd_levels.nu)
 
 ::: tip
-Les raccourcis multi-points sont disponibles à la fois pour les commandes Nushelles, [les commandes du système de fichier](//commands/categories/filesystem.html) et les commandes externes. Par exemple, executer `^stat ....` sur un système Linux/Unix affichera que le chemin est étendu à `../../../..`
+Les raccourcis multi-points sont disponibles à la fois pour les commandes Nushelles, [les commandes du système de fichier](/commands/categories/filesystem.html) et les commandes externes. Par exemple, executer `^stat ....` sur un système Linux/Unix affichera que le chemin est étendu à `../../../..`
 :::
 
 Vous pouvez aussi combiner des niveaux de répertoires relatifs avec des noms de répertoires :

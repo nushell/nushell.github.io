@@ -237,7 +237,7 @@ Pressing <kbd>Esc</kbd> one time returns from Scroll-mode to the View; Pressing 
 :::
 
 ::: tip
-You can, of course, use the `explore` command on _any_ structured data in Nushell. This might include JSON data coming from a Web API, a spreadsheet or CVS file, YAML, or anything that can be represented as structured data in Nushell.
+You can, of course, use the `explore` command on _any_ structured data in Nushell. This might include JSON data coming from a Web API, a spreadsheet or CSV file, YAML, or anything that can be represented as structured data in Nushell.
 
 Try `$env.config | explore` for fun!
 :::
