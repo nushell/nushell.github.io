@@ -231,7 +231,6 @@ export default defineUserConfig({
         'python',
         'cpp',
         'powershell',
-        'ansi',
       ],
     }),
     docsearchPlugin({
