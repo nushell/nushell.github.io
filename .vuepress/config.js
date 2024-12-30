@@ -193,6 +193,7 @@ export default defineUserConfig({
     }),
     shikiPlugin({
       themes: {
+        light: 'dark-plus',
         dark: 'dark-plus',
         onedarkpro: 'one-dark-pro', // pre-load one-dark-pro for ansi code blocks
       },
