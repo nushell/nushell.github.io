@@ -21,7 +21,7 @@ my-command
 The first line defines a custom command which returns a list of three different animals. These are the possible values for the completion.
 
 ::: tip
-To suppress completions for an argument (for example, an `int` that can accept any integer), define a completer that returns an empty list (`[ ]`).
+To suppress completions for an argument (for example, an `int` that can accept any integer), define a completer that returns an empty list (`[ ]`). At the moment, invalid values such as `null` will also suppress completions, but this may change in the future.
 :::
 
 In the second line, `string@animals` tells Nushell two things—the shape of the argument for type-checking and the completer which will suggest possible values for the argument.
@@ -34,7 +34,7 @@ When the completion menu is displayed, the prompt changes to include the `|` cha
 
 ## Options for Custom Completions
 
-If you want to choose how your completions are filtered and sorted, you can return a record rather than a list. The list of completion suggestions should be under the `completions` key of this record. Optionally, it can also have, under the `options` key, a record containing the following optional settings:
+If you want to choose how your completions are filtered and sorted, you can also return a record rather than a list. The list of completion suggestions should be under the `completions` key of this record. Optionally, it can also have, under the `options` key, a record containing the following optional settings:
 
 - `sort` - Set this to `false` to stop Nushell from sorting your completions. By default, this is `true`, and completions are sorted according to `$env.config.completions.sort`.
 - `case_sensitive` - Set to `true` for the custom completions to be matched case sensitively, `false` otherwise. Used for overriding `$env.config.completions.case_sensitive`.
