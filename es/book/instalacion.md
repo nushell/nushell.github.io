@@ -128,7 +128,6 @@ Para todas las funcionalidades disponibles, la manera más fácil es descargar l
 ```
 git clone https://github.com/nushell/nushell.git
 cd nushell
-# ./nushell
 cargo install --path . --locked --force --features=stable
 
 Para que esto funcione, asegúrate de tener todas las dependencias instaladas (que se muestran arriba) en el sistema.
