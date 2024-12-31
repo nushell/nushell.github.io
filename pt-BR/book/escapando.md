@@ -5,11 +5,11 @@ O Nu fornece um conjunto de comandos que você pode usar entre diferentes SOs e 
 Comando Nu:
 
 ```nu
-> ls
+ls
 ```
 
 Escapando para o comando local:
 
 ```nu
-> ^ls
+^ls
 ```
