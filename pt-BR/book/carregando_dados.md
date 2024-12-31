@@ -176,7 +176,8 @@ Embora seja útil poder abrir um arquivo e trabalhar imediatamente com uma tabel
 
 ```nu
 open Cargo.toml --raw
-# => [package]                                                                                        name = "nu"
+# => [package]
+# => name = "nu"
 # => version = "0.1.3"
 # => authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
 # => description = "A shell for the GitHub era"
