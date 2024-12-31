@@ -154,7 +154,8 @@ open Cargo.lock
 
 ```
 open Cargo.toml --raw
-# => [package]                                                                                        name = "nu"
+# => [package]
+# => name = "nu"
 # => version = "0.1.3"
 # => authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
 # => description = "A shell for the GitHub era"
