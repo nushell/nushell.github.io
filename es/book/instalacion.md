@@ -156,7 +156,6 @@ Git nos clonará el repositorio principal de Nu. Partiendo de ahí podemos contr
 ```
 
 cd nushell
-# ./nushell
 cargo build --workspace --features=stable; cargo run --features=stable
 
 ```
