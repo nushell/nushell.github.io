@@ -127,7 +127,6 @@ O Git vai clonar o repositório principal do nushell e daí podemos fazer o buil
 
 ```bash
 cd nushell
-# ./nushell
 cargo build --workspace --features=stable; cargo run --features=stable
 ```
 
