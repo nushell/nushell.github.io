@@ -187,7 +187,7 @@ int_1,int_2,float_1,float_2,first,second,third,word
 现在，要将该文件作为 DataFrame 进行读取，请使用 `dfr open` 命令，如下所示：
 
 ```nu
-> let df = (dfr open test_small.csv)
+let df = (dfr open test_small.csv)
 ```
 
 这应该会在内存中创建一个值 `$df`，用来存放我们刚刚创建的数据。

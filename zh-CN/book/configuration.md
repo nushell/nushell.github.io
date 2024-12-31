@@ -81,15 +81,15 @@ $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r
 接下来，在一些发行版上，你还需要确保 Nu 在`/etc/shells`列表中：
 
 ```nu
-> cat /etc/shells
-# /etc/shells: valid login shells
-/bin/sh
-/bin/dash
-/bin/bash
-/bin/rbash
-/usr/bin/screen
-/usr/bin/fish
-/home/sophia/.cargo/bin/nu
+cat /etc/shells
+# => # /etc/shells: valid login shells
+# => /bin/sh
+# => /bin/dash
+# => /bin/bash
+# => /bin/rbash
+# => /usr/bin/screen
+# => /usr/bin/fish
+# => /home/sophia/.cargo/bin/nu
 ```
 
 这样你就可以使用`chsh`命令来将 Nu 设置为你的登录 Shell。在你注销后下次登录时，应该可以看到一个闪亮的 Nu 提示。

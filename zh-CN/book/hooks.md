@@ -84,12 +84,12 @@ $env.config = ($env.config | upsert hooks {
 你可以用下面的例子测试一下：
 
 ```nu
-> $env.config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: { $env.SPAM = "eggs" }
 })
 
-> $env.SPAM
-eggs
+$env.SPAM
+# => eggs
 ```
 
 钩子代码块遵循一般的作用域规则，即在块内定义的命令、别名等将在代码块结束后被丢掉。
@@ -146,12 +146,12 @@ $env.config = ($env.config | upsert hooks {
 所以，上一节中的钩子也可以写成：
 
 ```nu
-> $env.config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: '$env.SPAM = "eggs"'
 })
 
-> $env.SPAM
-eggs
+$env.SPAM
+# => eggs
 ```
 
 这个功能可以用来，例如，根据当前目录有条件地引入定义：

@@ -10,7 +10,7 @@ _注意! 目前对模块的实现是相当基本的，并将在未来进一步�
 一个简单的模块可以像这样定义：
 
 ```nu
-> module greetings {
+module greetings {
      export def hello [name: string] {
          $"hello ($name)!"
      }
@@ -44,13 +44,13 @@ export def hi [where: string] {
 模块本身并不做任何事情，要使用模块导出的定义，我们需要[`use`](/commands/docs/use.md)它：
 
 ```nu
-> use greetings
+use greetings
 
-> greetings hello "world"
-hello world!
+# => greetings hello "world"
+# => hello world!
 
-> greetings hi "there"
-hi there!
+greetings hi "there"
+# => hi there!
 ```
 
 `hello`和`hi`命令现在可以通过`greetings`前缀被调用。
@@ -96,13 +96,13 @@ export def hi [where: string] {
 现在，你可以直接在文件上调用[`use`](/commands/docs/use.md)：
 
 ```nu
-> use greetings.nu
+use greetings.nu
 
-> greetings hello "world"
-hello world!
+# => greetings hello "world"
+# => hello world!
 
-> greetings hi "there"
-hi there!
+greetings hi "there"
+# => hi there!
 ```
 
 Nushell 会自动从文件名（"greetings"，没有".nu"扩展名）推断出模块的名称。所以你可以通过文件名而不是模块名配合使用上述任何导入模式来完成导入。
@@ -130,15 +130,15 @@ def greetings-helper [greeting: string, subject: string] {
 然后，在 Nushell 里我们可以从 "greetings.nu" 中导入所有定义：
 
 ```nu
-> use greetings.nu *
+use greetings.nu *
 
-> hello "world"
-hello world!
+# => hello "world"
+# => hello world!
 
-> hi "there"
-hi there!
+# => hi "there"
+# => hi there!
 
-> greetings-helper "foo" "bar"  # fails because 'greetings-helper' is not exported
+greetings-helper "foo" "bar"  # fails because 'greetings-helper' is not exported
 ```
 
 ## 环境变量
@@ -159,35 +159,35 @@ export def hello [name: string] {
 `use` 的工作方式与自定义命令相同：
 
 ```nu
-> use greetings.nu
+use greetings.nu
 
-> $env."greetings MYNAME"
-Arthur, King of the Britons
+# => $env."greetings MYNAME"
+# => Arthur, King of the Britons
 
-> greetings hello $env."greetings MYNAME"
-hello Arthur, King of the Britons!
+greetings hello $env."greetings MYNAME"
+# => hello Arthur, King of the Britons!
 ```
 
 你可能注意到我们没有直接给`MYNAME`赋值，相反，我们给了它一个代码块（`{ ...}`），它在我们每次调用[`use`](/commands/docs/use.md)时都会被执行。例如，我们可以用[`random`](/commands/docs/random.md)命令来演示这一点：
 
 ```nu
-> module roll { export env ROLL { random dice | into string } }
+module roll { export env ROLL { random dice | into string } }
 
-> use roll ROLL
+use roll ROLL
 
-> $env.ROLL
-4
+# => $env.ROLL
+# => 4
 
-> $env.ROLL
-4
+# => $env.ROLL
+# => 4
 
-> use roll ROLL
+use roll ROLL
 
-> $env.ROLL
-6
+# => $env.ROLL
+# => 6
 
-> $env.ROLL
-6
+$env.ROLL
+# => 6
 ```
 
 ## 导出符号
@@ -211,14 +211,14 @@ hello Arthur, King of the Britons!
 我们用[`hide`](/commands/docs/hide.md)命令来实现隐藏：
 
 ```nu
-> def foo [] { "foo" }
+def foo [] { "foo" }
 
-> foo
-foo
+# => foo
+# => foo
 
-> hide foo
+hide foo
 
-> foo  # error! command not found!
+foo  # error! command not found!
 ```
 
 [`hide`](/commands/docs/hide.md)命令也接受导入模式，就像[`use`](/commands/docs/use.md)那样。不过，导入模式的解释略有不同。它可以是下面中的一种：
@@ -243,50 +243,50 @@ foo
 让我们看几个例子。前面已经看到了直接隐藏一个自定义命令的例子，现在让我们试试环境变量：
 
 ```nu
-> $env.FOO = "FOO"
+$env.FOO = "FOO"
 
-> $env.FOO
-FOO
+# => $env.FOO
+# => FOO
 
-> hide FOO
+hide FOO
 
-> $env.FOO  # error! environment variable not found!
+$env.FOO  # error! environment variable not found!
 ```
 
 第一种情况也适用于从一个模块导入的命令/环境变量（使用上面定义的 "greetings.nu" 文件）：
 
 ```nu
-> use greetings.nu *
+use greetings.nu *
 
-> $env.MYNAME
-Arthur, King of the Britons
+# => $env.MYNAME
+# => Arthur, King of the Britons
 
-> hello "world"
-hello world!
+# => hello "world"
+# => hello world!
 
-> hide MYNAME
+hide MYNAME
 
-> $env.MYNAME  # error! environment variable not found!
+$env.MYNAME  # error! environment variable not found!
 
-> hide hello
+hide hello
 
-> hello "world" # error! command not found!
+hello "world" # error! command not found!
 ```
 
 最后，当名称为模块名时（假设是之前的`greetings`模块）：
 
 ```nu
-> use greetings.nu
+use greetings.nu
 
-> $env."greetings MYNAME"
-Arthur, King of the Britons
+# => $env."greetings MYNAME"
+# => Arthur, King of the Britons
 
-> greetings hello "world"
-hello world!
+# => greetings hello "world"
+# => hello world!
 
-> hide greetings
+hide greetings
 
-> $env."greetings MYNAME"  # error! environment variable not found!
+$env."greetings MYNAME"  # error! environment variable not found!
 
-> greetings hello "world" # error! command not found!
+greetings hello "world" # error! command not found!
 ```

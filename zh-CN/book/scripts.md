@@ -3,13 +3,13 @@
 在 Nushell 中，你可以用 Nushell 语言编写和运行脚本。要运行一个脚本，你可以把它作为一个参数传递给`nu`命令行程序：
 
 ```nu
-> nu myscript.nu
+nu myscript.nu
 ```
 
 这将在一个新的 Nu 实例中运行脚本直至完成。你也可以使用[`source`](/commands/docs/source.md)在 Nu 的 **当前** 实例中运行脚本：
 
 ```nu
-> source myscript.nu
+source myscript.nu
 ```
 
 我们来看一个脚本文件的例子吧：
@@ -67,8 +67,8 @@ def main [x: int] {
 ```
 
 ```
-> nu myscript.nu 100
-110
+nu myscript.nu 100
+# => 110
 ```
 
 ## Shebangs (`#!`)
@@ -83,6 +83,6 @@ echo "Hello World!"
 此时你可以直接运行该脚本(注意：前面并没有加`nu`)：
 
 ```nu
-> ./myscript
-Hello World!
+./myscript
+# => Hello World!
 ```

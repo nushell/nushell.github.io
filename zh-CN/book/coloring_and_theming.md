@@ -15,7 +15,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 表的边框由`config.nu`中的`table_mode`设置来控制。下面是一个例子：
 
 ```nu
-> $env.config = {
+$env.config = {
     table_mode: rounded
 }
 ```
@@ -269,7 +269,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 下面是一个改变其中一些数值的小例子。
 
 ```nu
-> let config = {
+let config = {
     color_config: {
         separator: purple
         leading_trailing_space_bg: "#ffffff"
@@ -294,7 +294,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 下面是另一个使用多种颜色语法的小例子，其中有一些注释：
 
 ```nu
-> let config = {
+let config = {
     color_config: {
         separator: "#88b719" # this sets only the foreground color like PR #486
         leading_trailing_space_bg: white # this sets only the foreground color in the original style
@@ -348,7 +348,7 @@ Nushell 界面的许多部分都可以定制它们的颜色，所有这些都可
 这里有一个小例子，说明如何对这些项目应用颜色。任何没有显示指定的都会被设置为默认的颜色。
 
 ```nu
-> $env.config = {
+$env.config = {
     color_config: {
         shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
         shape_bool: green
@@ -371,13 +371,13 @@ Nushell 的提示符可以通过这些环境变量进行配置：
 例如：对于一个简单的提示，我们可以这样做。注意`PROMPT_COMMAND`需要一个`block`而其他的需要一个`string`。
 
 ```nu
-> $env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
+$env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
 ```
 
 如果你不喜欢默认的`PROMPT_INDICATOR`，你可以这样改变它：
 
 ```nu
-> $env.PROMPT_INDICATOR = "> "
+$env.PROMPT_INDICATOR = "> "
 ```
 
 提示的颜色由 `PROMPT_COMMAND` 中的 `block` 控制，在这里你可以编写自己的自定义提示。我们写了一个稍微花哨点的，有 git 状态的，位于 [nu_scripts 仓库](https://github.com/nushell/nu_scripts/blob/main/prompt/oh-my.nu)。
