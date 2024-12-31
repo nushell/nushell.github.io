@@ -428,7 +428,7 @@ les closures et définitions imbriquées ne peuvent pas capturer des variables m
 
 ```nu
 mut x = 0
-# => [1 2 3] | each { $x += 1 }
+[1 2 3] | each { $x += 1 }
 # => Error: nu::parser::expected_keyword
 # => 
 # =>   × Capture of mutable variable.
