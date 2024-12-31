@@ -9,9 +9,9 @@ La variable es el más simple de ambas expresiones de evaluación. Durante la ev
 Si creamos una variable, podemos imprimir su contenido al usar `$` para referir a la misma:
 
 ```
-> let mi_valor = 4
-> echo $mi_valor
-4
+let mi_valor = 4
+echo $mi_valor
+# => 4
 ```
 
 ## Variables rutas (paths)
@@ -19,14 +19,14 @@ Si creamos una variable, podemos imprimir su contenido al usar `$` para referir 
 Una variable ruta funciona al llegar dentro del contenido de una variable, navegando columnas dentro de la misma para alcanzar un valor final. Supongamos que en vez de `4`, hayamos asignado una tabla como valor:
 
 ```
-> let mi_valor = [[nombre]; [pruebausuario]]
+let mi_valor = [[nombre]; [pruebausuario]]
 ```
 
 Podemos usar variables ruta para evaluar la variable `$mi_valor` y obtener el valor de la columna `nombre` con un solo paso:
 
 ```
-> echo $mi_valor.nombre
-pruebausuario
+echo $mi_valor.nombre
+# => pruebausuario
 ```
 
 ## Subexpresiones
@@ -38,14 +38,14 @@ Los paréntesis contienen una tubería que se ejecutará hasta completar, y su v
 Subexpresiones también pueden ser tuberías y no solamente comandos individuales. Si desearamos una lista de nombres de archivos superiores a diez kilobytes, podemos utilizar subexpresiones para ejecutar una tubería y asignar el resultado a una variable:
 
 ```
-> let nombres_de_archivos_grandes = (ls | where size > 10kb)
-> echo $nombres_de_archivos_grandes
-───┬────────────┬──────┬──────────┬──────────────
- # │    name    │ type │   size   │   modified
-───┼────────────┼──────┼──────────┼──────────────
- 0 │ Cargo.lock │ File │ 155.3 KB │ 17 hours ago
- 1 │ README.md  │ File │  15.9 KB │ 17 hours ago
-───┴────────────┴──────┴──────────┴──────────────
+let nombres_de_archivos_grandes = (ls | where size > 10kb)
+echo $nombres_de_archivos_grandes
+# => ───┬────────────┬──────┬──────────┬──────────────
+# =>  # │    name    │ type │   size   │   modified
+# => ───┼────────────┼──────┼──────────┼──────────────
+# =>  0 │ Cargo.lock │ File │ 155.3 KB │ 17 hours ago
+# =>  1 │ README.md  │ File │  15.9 KB │ 17 hours ago
+# => ───┴────────────┴──────┴──────────┴──────────────
 ```
 
 ## Subexpresiones y rutas
@@ -53,13 +53,13 @@ Subexpresiones también pueden ser tuberías y no solamente comandos individuale
 Subexpresiones también soportan rutas. Por ejemplo, supongamos que queremos una lista de nombres de archivos en el directorio actual. Una manera de hacerlo es con una tubería:
 
 ```
-> ls | get name
+ls | get name
 ```
 
 Pero también podemos hacer una acción similar con un solo paso usando una subexpresión de ruta:
 
 ```
-> echo (ls).name
+echo (ls).name
 ```
 
 Todo depende de las necesidades del código o estilo particular que trabaje mejor para ti.

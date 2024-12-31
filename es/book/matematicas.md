@@ -5,8 +5,8 @@ Hay veces que simplemente necesitas sumar un par de números cuando te encuentra
 ## Sumar, Restar, Mupltiplicar, Dividir
 
 ```
-> 1 + 3
-4
+1 + 3
+# => 4
 ```
 
 En Nu puedes realizar lo usual: sumar, restar, mutiplicar y dividir con los operadores `+`, `-`, `*`, y `/` respectivamente. Precedencia de operadores es respetada, por lo que `1 + 2 * 3` será tratado como `1 + (2 * 3)`. Lo que nos lleva a paréntesis.
@@ -20,13 +20,13 @@ Puedes usar paréntesis para agrupar expresiones matemáticas en modo `math`. Es
 Puedes revisar si un valor se encuentra dentro de un conjunto de valores o no, usando los operadores `in` y `not-in`.
 
 ```
-> 1 in [1 2 3]
-true
+1 in [1 2 3]
+# => true
 ```
 
 ```
-> 1 not-in [1 2 3]
-false
+1 not-in [1 2 3]
+# => false
 ```
 
 ## =~ y !~
@@ -34,13 +34,13 @@ false
 Puedes revisar si una cadena se encuentra dentro de otra cadena o no, usando `=~` y `!~`.
 
 ```
-> "gallinagallo" =~ "gallo"
-true
+"gallinagallo" =~ "gallo"
+# => true
 ```
 
 ```
-> "gallinagallo" !~ "pollito"
-true
+"gallinagallo" !~ "pollito"
+# => true
 ```
 
 ## Comparaciones
@@ -67,8 +67,8 @@ Las operaciones matemáticas son evaluadas de la siguiente manera (de mayor prec
 - Suma (`+`) y Resta (`-`)
 
 ```
-> 3 * (1 + 2)
-9
+3 * (1 + 2)
+# => 9
 ```
 
 ## Modo matemático abreviado
@@ -78,13 +78,13 @@ Hay una variación abreviada "short-hand" en modo matemático incluída en Nushe
 Es probable que ya la usaste antes. Por ejemplo, supongamos que deseamos ver filas de `ls` donde para cada uno por lo menos tenga 10 kilobytes, podemos escribir:
 
 ```
-> ls | where size > 10kb
+ls | where size > 10kb
 ```
 
 El comando `where memoria > 10kb` tiene dos partes: El nombre del comando `where` y su abreviación expresión matemática `size > 10kb`. Indicamos `abreviada` debido a que `size` es una versión acortada de escribir `$it.size`. Si observamos su forma completamente expandida, veríamos:
 
 ```
-> ls | where {|$it| $it.size > 10kb }
+ls | where {|$it| $it.size > 10kb }
 ```
 
 Usamos el modo abreviado para trabajar con datos de columnas para no tener que repetir la forma expandida siempre.

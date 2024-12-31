@@ -19,8 +19,7 @@ Descarga el archivo actual `.zip` [de la página de releases](https://github.com
 y posteriormente agrega Nu a la variable de entorno `PATH`. Una vez que hagamos eso, podemos ejecutar Nu usando el comando `nu`:
 
 ```
- > nu
- C:\Users\user>
+ nu
 ```
 
 Si te encuentras usando [Windows Terminal](https://github.com/microsoft/terminal) puedes establecer `nu` como la shell por defecto añadiendo:
@@ -113,7 +112,7 @@ brew install openssl cmake
 Una vez instaladas las depependencias que Nu necesita, podemos instalarla usando el comando `cargo` que viene con el compilador Rust.
 
 ```
-> cargo install nu --locked
+cargo install nu --locked
 ```
 
 ¡Eso es todo! Cargo hará el trabajo de descarga Nu junto con sus dependencias, construirla e instalarla en el bin path de cargo para que podamos arrancarlo.
@@ -121,15 +120,15 @@ Una vez instaladas las depependencias que Nu necesita, podemos instalarla usando
 Si deseas instalar con más funcionalidades, puedes hacer:
 
 ```
-> cargo install nu --locked --features=stable
+cargo install nu --locked --features=stable
 ```
 
 Para todas las funcionalidades disponibles, la manera más fácil es descargar la fuente de Nu y construírlo usted mismo usando las herramientas de Rust:
 
 ```
-> git clone https://github.com/nushell/nushell.git
-> cd nushell
-nushell> cargo install --path . --locked --force --features=stable
+git clone https://github.com/nushell/nushell.git
+cd nushell
+cargo install --path . --locked --force --features=stable
 
 Para que esto funcione, asegúrate de tener todas las dependencias instaladas (que se muestran arriba) en el sistema.
 
@@ -148,7 +147,7 @@ También podemos contruir nuestro propio Nu directamente desde github. Esto nos 
 
 ```
 
-> git clone https://github.com/nushell/nushell.git
+git clone https://github.com/nushell/nushell.git
 
 ```
 
@@ -156,8 +155,8 @@ Git nos clonará el repositorio principal de Nu. Partiendo de ahí podemos contr
 
 ```
 
-> cd nushell
-> nushell> cargo build --workspace --features=stable; cargo run --features=stable
+cd nushell
+cargo build --workspace --features=stable; cargo run --features=stable
 
 ```
 
@@ -165,7 +164,7 @@ También puedes construir y arrancar Nu en modo release:
 
 ```
 
-nushell> cargo build --release --workspace --features=stable; cargo run --release --features=stable
+cargo build --release --workspace --features=stable; cargo run --release --features=stable
 
 ```
 Gente familiarizada con Rust se preguntará la razón por la que hacemos un paso "build" y otro paso "run" si "run" construye por defecto. Esto es para evitar una deficiencia de la nueva opción `default-run` en Cargo y asegurar que todos los plugins se construyan aunque puede que esto no sea necesario en el futuro.
