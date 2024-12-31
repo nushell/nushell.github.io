@@ -29,6 +29,6 @@ A common shorthand, inspired by Bash and others, is also available. You can writ
 Una atajo común, inspirada en Bash y otros, también está disponible. Puedes escribir el ejemplo anterior como:
 
 ```
-# => MI_VARIABLE=VALOR echo $nu.env.MI_VARIABLE
+MI_VARIABLE=VALOR echo $nu.env.MI_VARIABLE
 # => VALOR
 ```
