@@ -75,6 +75,8 @@ def make_docs [
 #   Various commands for working with bits.
 # usage: |
 #   Various commands for working with bits.
+# editLink: false      # turns off the "Edit this page in GitHub for commands"
+# contributors: false  # turns off the contributors list since it is not accurate for commands
 # ---
 # ```
 # - the `dfr min` command in `commands/docs/dfr_min.md`
@@ -92,6 +94,8 @@ def make_docs [
 # usage: |
 #   Creates a min expression
 #   Aggregates columns to their min value
+# editLink: false
+# contributors: false
 # ---
 # ```
 def command-frontmatter [commands_group, command_name] {
@@ -130,6 +134,8 @@ version: ($nu_version)
 ($category_matter)
 usage: |
 ($indented_usage)
+editLink: false
+contributors: false
 ---"
 }
 
@@ -375,7 +381,12 @@ def generate-category [category] {
     let safe_name = ($category | safe-path)
     let doc_path = (['.', 'commands', 'categories', $'($safe_name).md'] | path join)
 
-$"# ($category | str title-case)
+$"---
+editLink: false
+contributors: false
+---
+
+# ($category | str title-case)
 
 <script>
   import pages from '@temp/pages'
