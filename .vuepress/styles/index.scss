@@ -85,3 +85,12 @@ html[data-theme='dark'] {
     text-decoration: underline;
   }
 }
+
+:root,
+html[data-theme='light'] {
+  .vp-copy-code-button {
+    // Make the copy code button white for good contrast with the
+    // dark background in code blocks
+    color: white !important;
+  }
+}
