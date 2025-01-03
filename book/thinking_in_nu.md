@@ -256,7 +256,7 @@ Consider a simple two-line file:
    2. Line 2 is parsed
 2. If parsing was successful, then Evaluation:
    1. Line 1 is evaluated
-   2. Line 1 is evaluated
+   2. Line 2 is evaluated
 
 This helps demonstrate why the following examples cannot run as a single expression (e.g., a script) in Nushell:
 
