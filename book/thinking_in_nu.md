@@ -194,11 +194,11 @@ print $p
 $p * 6
 ```
 
-1. Line 1: The integer 5 is assigned to `$p`, but the return value of the
+1. Line 1: The integer 7 is assigned to `$p`, but the return value of the
    [`let` command](/commands/docs/let.md) itself is `null`. However, because it is not the last
    value in the expression, it is not displayed.
 2. Line 2: The return value of the `print` command itself is `null`, but the `print` command
-   forces its argument (`$p`, which is 5) to be _displayed_. As with Line 1, the `null` return value
+   forces its argument (`$p`, which is 7) to be _displayed_. As with Line 1, the `null` return value
    is discarded since this isn't the last value in the expression.
 3. Line 3: Evaluates to the integer value 42. As the last value in the expression, this is the return
    result, and is also displayed (rendered).
