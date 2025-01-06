@@ -48,6 +48,7 @@ Presented in descending order of precedence, the article details the operations 
 - Multiply (`*`), Divide (`/`), Integer/Floor Division (`//`), and Modulo (`mod`)
 - Add (`+`) and Subtract (`-`)
 - Bit shifting (`bit-shl`, `bit-shr`)
+- Logical not (`not`)
 - Comparison operations (`==`, `!=`, `<`, `>`, `<=`, `>=`), membership tests (`in`, `not-in`, `starts-with`, `ends-with`), regex matching (`=~`, `!~`), and list appending (`++`)
 - Bitwise and (`bit-and`)
 - Bitwise xor (`bit-xor`)
@@ -56,7 +57,6 @@ Presented in descending order of precedence, the article details the operations 
 - Logical xor (`xor`)
 - Logical or (`or`)
 - Assignment operations
-- Logical not (`not`)
 
 ```
 3 * (1 + 2)
