@@ -384,7 +384,7 @@ The variables that affect Nushell file locations are:
 - `$env.XDG_DATA_HOME`: If this environment variable is set, Nushell sets the `$nu.data-dir` constant to this value. The `data-dir` is used in several startup tasks:
 
   - `($nu.data-dir)/nushell/completions` is added to the `$env.NU_LIB_DIRS` search path.
-  - `($nu.data-dir)/vendor/autoloads` is added as the last path in `nu.vendor-autoload-dirs`. This means that files in this directory will be read last during startup (and thus override any definitions made in earlier files).
+  - `($nu.data-dir)/vendor/autoload` is added as the last path in `nu.vendor-autoload-dirs`. This means that files in this directory will be read last during startup (and thus override any definitions made in earlier files).
 
   Note that the directory represented by `$nu.data-dir`, nor any of its subdirectories, are created by default. Creation and use of these directories is up to the user.
 
