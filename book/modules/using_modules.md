@@ -50,7 +50,7 @@ The path to the module can be:
   use ~/nushell/modules/nupm
   ```
 
-  Note that the module name (its directory) can end in a `/` (or `\` on Windows), but as with most commands that take a paths (e.g., `cd`), this is completely optional.
+  Note that the module name (i.e., its directory) can end in a `/` (or `\` on Windows), but as with most commands that take paths (e.g., `cd`), this is completely optional.
 
   :::
 
@@ -198,13 +198,13 @@ $PI
 
 ## Hiding
 
-Any custom command or alias, imported from a module or not, can be "hidden", restoring the previous definition.
-We do this with the [`hide`](/commands/docs/hide.md) command.
+Any custom command or alias, whether imported from a module or not, can be "hidden" to restore the previous definition using
+the [`hide`](/commands/docs/hide.md) command.
 
-The `hide` command also accepts import patterns, just like [`use`](/commands/docs/use.md). The import pattern is interpreted slightly differently, though. It can be one of the following:
+The `hide` command also accepts import patterns, similar to [`use`](/commands/docs/use.md), but interprets them slightly differently. These patterns can be one of the following:
 
-- If the name is a custom command, it hides it directly. Otherwise ...
-- If the name is a module name, hides all of its exports prefixed with the module name
+- If the name is a custom command, the `hide` command hides it directly.
+- If the name is a module name, it hides all of its exports prefixed with the module name
 
 For example, using `std/assert`:
 
