@@ -54,10 +54,6 @@ Nu 还提供了一些基本的文件系统命令，并且可以跨平台工作�
 
 @[code](@snippets/moving_around/cp_example.sh)
 
-:::danger
-`cp` 在 Windows 系统，即使目标文件存在，命令也没有附加 `--force, -f`，目标文件仍会被覆盖！
-:::
-
 我们也可以通过 [`rm`](/commands/docs/rm.md) 命令删除一个目录或文件：
 
 @[code](@snippets/moving_around/rm_example.sh)
