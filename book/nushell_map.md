@@ -2,9 +2,6 @@
 
 The idea behind this table is to help you understand how Nu builtins and plugins relate to other known shells and domain specific languages. We've tried to produce a map of relevant Nu commands and what their equivalents are in other languages. Contributions are welcome.
 
-Note: This table assumes Nu 0.94 or later.
-
-
 | Nushell                                                    | SQL                           | .Net LINQ (C#)                                       | PowerShell (without external modules)      | Bash                                            |
 | ---------------------------------------------------------- | ----------------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
 | [`alias`](/commands/docs/alias.md)                         |                               |                                                      | `alias`                                    | `alias`                                         |
@@ -53,7 +50,6 @@ Note: This table assumes Nu 0.94 or later.
 | [`skip until`](/commands/docs/skip_until.md)               |                               | `SkipWhile`                                          |                                            |                                                 |
 | [`skip while`](/commands/docs/skip_while.md)               |                               | `SkipWhile`                                          |                                            |                                                 |
 | [`sort-by`](/commands/docs/sort-by.md)                     | `order by`                    | `OrderBy`, `OrderByDescending`, `ThenBy`, `ThenByDescending` | `Sort-Object`, `sort`              | `sort`                                          |
-| [`split-by`](/commands/docs/split-by.md)                   |                               | `Split`                                              | `Split`                                    |                                                 |
 | [`str`](/commands/docs/str.md)                             | String functions              | `String` class                                       | `String` class                             |                                                 |
 | [`str join`](/commands/docs/str_join.md)                   | `concat_ws`                   | `Join`                                               | `Join-String`                              |                                                 |
 | [`str trim`](/commands/docs/str_trim.md)                   | `rtrim`, `ltrim`              | `Trim`, `TrimStart`, `TrimEnd`                       | `Trim`                                     |                                                 |
