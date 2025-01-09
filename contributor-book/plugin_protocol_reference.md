@@ -39,7 +39,7 @@ The engine **may** send a [`Goodbye`](#goodbye) message to the plugin indicating
 
 After the encoding type has been decided, both the engine and plugin **must** send a `Hello` message containing relevant version and protocol support information.
 
-| Field        | Type   | Usage                                                                                 |
+| Field        | Type   | Description                                                                           |
 | ------------ | ------ | ------------------------------------------------------------------------------------- |
 | **protocol** | string | **Must** be `"nu-plugin"`.                                                            |
 | **version**  | string | The engine's version, or the target version of Nu that the plugin supports.           |
@@ -125,7 +125,7 @@ Example:
 
 Tell the plugin to run a command. The argument is the following map:
 
-| Field     | Type                                        | Usage                                                 |
+| Field     | Type                                        | Description                                           |
 | --------- | ------------------------------------------- | ----------------------------------------------------- |
 | **name**  | string                                      | The name of the command to run                        |
 | **call**  | [`EvaluatedCall`](#evaluatedcall)           | Information about the invocation, including arguments |
@@ -135,7 +135,7 @@ Tell the plugin to run a command. The argument is the following map:
 
 `EvaluatedCall` is a map:
 
-| Field          | Type                                              | Usage                                                   |
+| Field          | Type                                              | Description                                             |
 | -------------- | ------------------------------------------------- | ------------------------------------------------------- |
 | **head**       | [`Span`](#span)                                   | The position of the beginning of the command execution. |
 | **positional** | [`Value`](#value) array                           | Positional arguments.                                   |
@@ -634,7 +634,7 @@ Example:
 
 A successful response to a [`Metadata` plugin call](#metadata-plugin-call). The body contains fields that describe the plugin, none of which are required:
 
-| Field       | Type    | Usage                                                                                                         |
+| Field       | Type    | Description                                                                                                   |
 | ----------- | ------- | ------------------------------------------------------------------------------------------------------------- |
 | **version** | string? | The version of the plugin (not the protocol!). [SemVer](https://semver.org) is recommended, but not required. |
 
@@ -668,8 +668,8 @@ Example:
         {
           "sig": {
             "name": "len",
-            "usage": "calculates the length of its input",
-            "extra_usage": "",
+            "description": "calculates the length of its input",
+            "extra_description": "",
             "search_terms": [],
             "required_positional": [],
             "optional_positional": [],
@@ -762,7 +762,7 @@ Example:
 
 Plugins can make engine calls during execution of a [call](#call). The body is a map with the following keys:
 
-| Field       | Type         | Usage                                                                                   |
+| Field       | Type         | Description                                                                             |
 | ----------- | ------------ | --------------------------------------------------------------------------------------- |
 | **context** | integer      | The ID of the [call](#call) that this engine call relates to.                           |
 | **id**      | integer      | A unique ID for this engine call, in order to send the [response](#enginecallresponse). |
@@ -975,7 +975,7 @@ Example:
 
 Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful with the output of the closure, which may be a stream.
 
-| Field               | Type                                        | Usage                                                                  |
+| Field               | Type                                        | Description                                                            |
 | ------------------- | ------------------------------------------- | ---------------------------------------------------------------------- |
 | **closure**         | spanned [`Closure`](#closure)               | The closure to call, generally from a [`Value`](#value).               |
 | **positional**      | [`Value`](#value) array                     | Positional arguments for the closure.                                  |
@@ -1048,7 +1048,7 @@ Example:
 
 Pass a command's declaration ID (found via [`FindDecl`](#finddecl-engine-call)) and arguments to the engine to be called. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful with the output of the command, which may be a stream.
 
-| Field               | Type                                        | Usage                                                                           |
+| Field               | Type                                        | Description                                                                     |
 | ------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
 | **decl_id**         | unsigned integer                            | The ID of the declaration to call.                                              |
 | **call**            | [`EvaluatedCall`](#evaluatedcall)           | Arguments and head span for the call.                                           |
@@ -2082,7 +2082,7 @@ Represents data types that extend the base nushell types with custom functionali
 
 `Custom` values for plugins **may** only contain the following content map:
 
-| Field              | Type       | Usage                                                                                     |
+| Field              | Type       | Description                                                                               |
 | ------------------ | ---------- | ----------------------------------------------------------------------------------------- |
 | **type**           | string     | **Must** be `"PluginCustomValue"`.                                                        |
 | **name**           | string     | The human-readable name of the custom value emitted by the plugin.                        |
@@ -2138,7 +2138,7 @@ Structs are encoded as maps of their fields, without the name of the struct.
 
 Describes a region of code in the engine's memory, used mostly for providing diagnostic error messages to the user with context about where a value that caused an error came from.
 
-| Field     | Type    | Usage                                          |
+| Field     | Type    | Description                                    |
 | --------- | ------- | ---------------------------------------------- |
 | **start** | integer | The index of the first character referenced.   |
 | **end**   | integer | The index after the last character referenced. |
@@ -2147,7 +2147,7 @@ Describes a region of code in the engine's memory, used mostly for providing dia
 
 Describes either a single value, or the beginning of a stream.
 
-| Variant                                    | Usage                                    |
+| Variant                                    | Description                              |
 | ------------------------------------------ | ---------------------------------------- |
 | [`Empty`](#empty-header-variant)           | No values produced; an empty stream.     |
 | [`Value`](#value-header-variant)           | A single value                           |
@@ -2190,7 +2190,7 @@ Starts a list stream. Expect [`Data`](#data) messages of the `List` variant with
 
 Contains <a name="liststreaminfo">`ListStreamInfo`</a>, a map:
 
-| Field    | Type            | Usage                                             |
+| Field    | Type            | Description                                       |
 | -------- | --------------- | ------------------------------------------------- |
 | **id**   | integer         | The stream identifier                             |
 | **span** | [`Span`](#span) | The source code reference that caused the stream. |
@@ -2213,7 +2213,7 @@ Example:
 
 Starts a byte stream. Expect [`Data`](#data) messages of the `Raw` variant with the referenced ID.
 
-| Field    | Type                                | Usage                                             |
+| Field    | Type                                | Description                                       |
 | -------- | ----------------------------------- | ------------------------------------------------- |
 | **id**   | integer                             | The stream identifier                             |
 | **span** | [`Span`](#span)                     | The source code reference that caused the stream. |
@@ -2250,7 +2250,7 @@ Example:
 
 A flexible, generic error type, with any number of labeled spans.
 
-| Field      | Type                  | Usage                                                                                                          |
+| Field      | Type                  | Description                                                                                                    |
 | ---------- | --------------------- | -------------------------------------------------------------------------------------------------------------- |
 | **msg**    | string                | The main error message to show at the top of the error.                                                        |
 | **labels** | `ErrorLabel` array?   | Spans and messages to label the error in the source code.                                                      |
@@ -2261,7 +2261,7 @@ A flexible, generic error type, with any number of labeled spans.
 
 Most of the fields are not required - only `msg` must be present. `ErrorLabel` (in the `labels` array) is as follows:
 
-| Field    | Type            | Usage                                                       |
+| Field    | Type            | Description                                                 |
 | -------- | --------------- | ----------------------------------------------------------- |
 | **text** | string          | The message for the label.                                  |
 | **span** | [`Span`](#span) | The span in the source code that the label should point to. |
