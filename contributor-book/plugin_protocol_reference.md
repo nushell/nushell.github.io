@@ -668,8 +668,8 @@ Example:
         {
           "sig": {
             "name": "len",
-            "usage": "calculates the length of its input",
-            "extra_usage": "",
+            "description": "calculates the length of its input",
+            "extra_description": "",
             "search_terms": [],
             "required_positional": [],
             "optional_positional": [],

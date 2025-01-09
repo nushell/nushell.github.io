@@ -90,7 +90,7 @@ impl SimplePluginCommand for Len {
         "len"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "calculates the length of its input"
     }
 
@@ -160,7 +160,7 @@ impl SimplePluginCommand for Len {
         "len"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "calculates the length of its input"
     }
 
@@ -173,7 +173,7 @@ impl SimplePluginCommand for Len {
 }
 ```
 
-There are a few methods required for this implementation. We first define the `name` of the command, which is what the user will type at the prompt or in their script to run the command. The `usage` is also required, which is a short documentation string for users to know what the command does, and is displayed along with completions and in `help`. Finally, we define the `signature`, which specifies arguments and types for the command.
+There are a few methods required for this implementation. We first define the `name` of the command, which is what the user will type at the prompt or in their script to run the command. The `description` is also required, which is a short documentation string for users to know what the command does, and is displayed along with completions and in `help`. Finally, we define the `signature`, which specifies arguments and types for the command.
 
 We tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
 
@@ -432,7 +432,7 @@ impl SimplePluginCommand for Motd {
         "motd"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Message of the day"
     }
 
@@ -505,7 +505,7 @@ impl PluginCommand for MyEach {
         "my-each"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Run closure on each element of a list"
     }
 
@@ -899,7 +899,7 @@ $ ./target/release/nu_plugin_len --stdio
 json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
 {"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
 {"Call":[0,"Signature"]}
-{"CallResponse":[0, {"Signature":[{"sig":{"name":"len","usage":"calculates the length of its input","extra_usage":"","search_terms":[],"required_positional":[],"optional_positional":[],"rest_positional":null,"vectorizes_over_list":false,"named":[{"long":"help","short":"h","arg":null,"required":false,"desc":"Display the help message for this command","var_id":null,"default_value":null}],"input_type":"String","output_type":"Int","input_output_types":[],"allow_variants_without_examples":false,"is_filter":false,"creates_scope":false,"allows_unknown_args":false,"category":"Default"},"examples":[]}]}]}
+{"CallResponse":[0, {"Signature":[{"sig":{"name":"len","description":"calculates the length of its input","extra_description":"","search_terms":[],"required_positional":[],"optional_positional":[],"rest_positional":null,"vectorizes_over_list":false,"named":[{"long":"help","short":"h","arg":null,"required":false,"desc":"Display the help message for this command","var_id":null,"default_value":null}],"input_type":"String","output_type":"Int","input_output_types":[],"allow_variants_without_examples":false,"is_filter":false,"creates_scope":false,"allows_unknown_args":false,"category":"Default"},"examples":[]}]}]}
 ```
 
 The plugin prints its signature serialized as JSON. We'll reformat for readability.
@@ -910,8 +910,8 @@ The plugin prints its signature serialized as JSON. We'll reformat for readabili
     {
       "sig": {
         "name": "len",
-        "usage": "calculates the length of its input",
-        "extra_usage": "",
+        "description": "calculates the length of its input",
+        "extra_description": "",
         "search_terms": [],
         "required_positional": [],
         "optional_positional": [],
@@ -1020,8 +1020,8 @@ def signature():
     return {
         "sig": {
             "name": "len",
-            "usage": "calculates the length of its input",
-            "extra_usage": "",
+            "description": "calculates the length of its input",
+            "extra_description": "",
             "search_terms": [],
             "required_positional": [],
             "optional_positional": [],
