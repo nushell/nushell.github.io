@@ -339,7 +339,7 @@ To remove the welcome message that displays each time Nushell starts:
    $env.config.buffer_editor = "code"
    $env.config.buffer_editor = "vi"
    # Or with editor arguments:
-   $env.config.buffer_editor: ["emacsclient", "-s", "light", "-t"],
+   $env.config.buffer_editor = ["emacsclient", "-s", "light", "-t"]
    ```
 
    Then repeat step 1.
