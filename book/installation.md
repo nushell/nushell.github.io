@@ -98,9 +98,19 @@ You will need to install "libxcb", "openssl-devel" and "libX11-devel":
 
 #### macOS
 
+##### Homebrew
+
 Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmake" using:
 
 @[code](@snippets/installation/macos_deps.sh)
+
+##### Nix
+
+If using [Nix](https://nixos.org/download/#nix-install-macos) for package management on macOS, the `openssl`, `cmake`, `pkg-config`, and `curl` packages are required. These can be installed:
+
+- Globally, using `nix-env --install` (and others).
+- Locally, using [Home Manager](https://github.com/nix-community/home-manager) in your `home.nix` config.
+- Temporarily, using `nix-shell` (and others).
 
 ### Build from [crates.io](https://crates.io) using Cargo
 
