@@ -297,6 +297,16 @@ $env.config = {
 }
 ```
 
+### `command_not_found` Hook in _NixOS_
+
+NixOS comes with the command `command-not-found`. We only need to plug it in the nushell hook:
+
+```nu
+$env.config.hooks.command_not_found = {
+  |command_name|
+  print (command-not-found $command_name | str trim)
+}
+```
 
 
 ### `command_not_found` Hook in _Windows_
