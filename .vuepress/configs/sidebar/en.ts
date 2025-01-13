@@ -252,7 +252,6 @@ export const sidebarEn: SidebarConfig = {
             '/lang-guide/chapters/filters/each-par-each.md',
             '/lang-guide/chapters/filters/selecting_data.md',
             '/lang-guide/chapters/filters/where-filter.md',
-            '/lang-guide/chapters/filters/select-get.md',
           ],
         },
         '/lang-guide/chapters/custom_commands.md',
