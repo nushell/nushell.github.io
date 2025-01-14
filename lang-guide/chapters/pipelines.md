@@ -84,7 +84,7 @@ Also note that `complete` is special, it doesn't work with `e>|`, `o+e>|`.
 
 ## Stdio and redirection behavior examples
 
-Pipeline and redirection behavior can be hard to follow when they are used with subexpression, or custom commands.  Here are some examples to show stdio behavior
+Pipeline and redirection behavior can be hard to follow when they are used with subexpressions, or custom commands.  Here are some examples that show intended stdio behavior.
 
 ### Examples for subexpression
 
