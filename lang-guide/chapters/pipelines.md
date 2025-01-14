@@ -161,7 +161,7 @@ def custom-cmd [] {
 }
 ```
 
-Here are some examples to show stdio behavior.  Actually the stio behavior will be the same to previous session.
+The custom command stdio behavior is the same as the previous section.
 
 In the examples below the body of `custom-cmd` is `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4).
 
