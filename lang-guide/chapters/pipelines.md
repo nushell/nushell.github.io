@@ -81,3 +81,149 @@ nu demo.nu o> file.txt o+e>| str upcase
 ```
 
 Also note that `complete` is special, it doesn't work with `e>|`, `o+e>|`.
+
+## Stdio and redirection behavior examples
+
+Pipeline and redirection behavior can be hard to follow when they are used with subexpression, or custom commands.  Here are some examples to show stdio behavior
+
+### Examples for subexpression
+
+- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4)
+
+| Command | Stdout     | Stderr     |
+| ------- | --------   | ---------- |
+| cmd1    | Piped      | Terminal   |
+| cmd2    | *Terminal* | Terminal   |
+| cmd3    | Piped      | Terminal   |
+| cmd4    | Terminal   | Terminal   |
+
+- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) | ^cmd5
+
+| Command | Stdout     | Stderr     |
+| ------- | --------   | ---------- |
+| cmd1    | Piped      | Terminal   |
+| cmd2    | *Terminal* | Terminal   |
+| cmd3    | Piped      | Terminal   |
+| cmd4    | Piped      | Terminal  |
+
+- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) e>| ^cmd5
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | Terminal |
+| cmd2    | Terminal | Terminal |
+| cmd3    | Piped    | Terminal |
+| cmd4    | Terminal | Piped   |
+
+- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o+e>| ^cmd5
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | Terminal |
+| cmd2    | Terminal | Terminal |
+| cmd3    | Piped    | Terminal |
+| cmd4    | Piped    | Piped   |
+
+- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o> test.out
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | Terminal |
+| cmd2    | File | Terminal |
+| cmd3    | Piped    | Terminal |
+| cmd4    | File    | Terminal   |
+
+- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) e> test.out
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | File |
+| cmd2    | Terminal | File |
+| cmd3    | Piped    | File |
+| cmd4    | Terminal    | File   |
+
+- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o+e> test.out
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | File |
+| cmd2    | File | File |
+| cmd3    | Piped    | File |
+| cmd4    | File    | File   |
+
+### Examples for custom command
+Given the following custom commands
+
+```nushell
+def custom-cmd [] {
+    ^cmd1 | ^cmd2
+    ^cmd3 | ^cmd4
+}
+```
+
+Here are some examples to show stdio behavior.  Actually the stio behavior will be the same to previous session.
+
+You can think the body of `custom-cmd` like `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4).
+
+- custom-cmd
+
+| Command | Stdout     | Stderr     |
+| ------- | --------   | ---------- |
+| cmd1    | Piped      | Terminal   |
+| cmd2    | *Terminal* | Terminal   |
+| cmd3    | Piped      | Terminal   |
+| cmd4    | Terminal   | Terminal   |
+
+- custom-cmd | ^cmd5
+
+| Command | Stdout     | Stderr     |
+| ------- | --------   | ---------- |
+| cmd1    | Piped      | Terminal   |
+| cmd2    | *Terminal* | Terminal   |
+| cmd3    | Piped      | Terminal   |
+| cmd4    | Piped      | Terminal  |
+
+- custom-cmd e>| ^cmd5
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | Terminal |
+| cmd2    | Terminal | Terminal |
+| cmd3    | Piped    | Terminal |
+| cmd4    | Terminal | Piped   |
+
+- custom-cmd o+e>| ^cmd5
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | Terminal |
+| cmd2    | Terminal | Terminal |
+| cmd3    | Piped    | Terminal |
+| cmd4    | Piped    | Piped   |
+
+- custom-cmd o> test.out
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | Terminal |
+| cmd2    | File | Terminal |
+| cmd3    | Piped    | Terminal |
+| cmd4    | File    | Terminal   |
+
+- custom-cmd e> test.out
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | File |
+| cmd2    | Terminal | File |
+| cmd3    | Piped    | File |
+| cmd4    | Terminal    | File   |
+
+- custom-cmd o+e> test.out
+
+| Command | Stdout   | Stderr   |
+| ------- | -------- | -------- |
+| cmd1    | Piped    | File |
+| cmd2    | File | File |
+| cmd3    | Piped    | File |
+| cmd4    | File    | File   |
