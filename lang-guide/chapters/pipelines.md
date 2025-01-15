@@ -99,6 +99,8 @@ Pipeline and redirection behavior can be hard to follow when they are used with 
 
 - (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) | ^cmd5
 
+It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes *stdout* to `^cmd5`, where both stdout and stderr are directed to the Terminal.
+
 | Command | Stdout     | Stderr     |
 | ------- | --------   | ---------- |
 | cmd1    | Piped      | Terminal   |
@@ -108,6 +110,8 @@ Pipeline and redirection behavior can be hard to follow when they are used with 
 
 - (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) e>| ^cmd5
 
+It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes *stderr* to `^cmd5`, where both stdout and stderr are directed to the Terminal.
+
 | Command | Stdout   | Stderr   |
 | ------- | -------- | -------- |
 | cmd1    | Piped    | Terminal |
@@ -116,6 +120,8 @@ Pipeline and redirection behavior can be hard to follow when they are used with 
 | cmd4    | Terminal | Piped   |
 
 - (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o+e>| ^cmd5
+
+It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes *stdout and stderr* to `^cmd5`, where both stdout and stderr are directed to the Terminal.
 
 | Command | Stdout   | Stderr   |
 | ------- | -------- | -------- |
@@ -163,7 +169,7 @@ def custom-cmd [] {
 
 The custom command stdio behavior is the same as the previous section.
 
-In the examples below the body of `custom-cmd` is `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4).
+In the examples below the body of `custom-cmd` is `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)`.
 
 - custom-cmd
 
@@ -176,6 +182,8 @@ In the examples below the body of `custom-cmd` is `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4
 
 - custom-cmd | ^cmd5
 
+It runs `custom-cmd` first, then pipes *stdout* to `^cmd5`, where both stdout and stderr are directed to the Terminal.
+
 | Command | Stdout     | Stderr     |
 | ------- | --------   | ---------- |
 | cmd1    | Piped      | Terminal   |
@@ -185,6 +193,8 @@ In the examples below the body of `custom-cmd` is `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4
 
 - custom-cmd e>| ^cmd5
 
+It runs `custom-cmd` first, then pipes *stderr* to `^cmd5`, where both stdout and stderr are directed to the Terminal.
+
 | Command | Stdout   | Stderr   |
 | ------- | -------- | -------- |
 | cmd1    | Piped    | Terminal |
@@ -193,6 +203,8 @@ In the examples below the body of `custom-cmd` is `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4
 | cmd4    | Terminal | Piped   |
 
 - custom-cmd o+e>| ^cmd5
+
+It runs `custom-cmd` first, then pipes *stdout and stderr* to `^cmd5`, where both stdout and stderr are directed to the Terminal.
 
 | Command | Stdout   | Stderr   |
 | ------- | -------- | -------- |
