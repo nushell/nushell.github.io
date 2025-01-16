@@ -226,7 +226,7 @@ $env.config = ($env.config | upsert hooks.env_change.PWD {
         {
             condition: {|before, after|
                 ('/path/to/target/dir' not-in $after
-                    and '/path/to/target/dir' in $before
+                    and '/path/to/target/dir' in ($before | default "")
                     and 'test-env' in (overlay list))
             }
             code: "overlay hide test-env --keep-env [ PWD ]"
