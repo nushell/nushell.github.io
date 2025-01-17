@@ -56,7 +56,7 @@ In Nushell, however, the `>` is used as the greater-than operator for comparison
 # => false
 ```
 
-Since `>` is an operator, redirection to a file in Nushell is handled through a pipeline command that is dedicated to saving content - `[save](/commands/docs/save.md)`:
+Since `>` is an operator, redirection to a file in Nushell is handled through a pipeline command that is dedicated to saving content - [`save`](/commands/docs/save.md):
 
 ```nu
 "hello" | save output.txt
