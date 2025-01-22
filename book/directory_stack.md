@@ -120,7 +120,7 @@ The Standard Library provides a set of aliases that can be used in place of the 
 Import them using:
 
 ```nu
-use std/dirs shell-aliases *
+use std/dirs shells-aliases *
 ```
 
 The built-in aliases are:
