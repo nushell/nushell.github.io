@@ -1,3 +1,6 @@
+---
+head: [[meta, {name: draft}]]
+---
 # Helpers and debugging commands
 
 TODO
