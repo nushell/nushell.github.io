@@ -1,3 +1,6 @@
+---
+head: [[meta, {name: draft}]]
+---
 # `loop`
 
 See the [`loop` Help](/commands/docs/loop.html).

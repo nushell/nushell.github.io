@@ -1,3 +1,6 @@
+---
+head: [[meta, {name: draft}]]
+---
 # Custom Commands
 
 ## Defining Custom Commands
