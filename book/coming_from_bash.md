@@ -56,6 +56,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `echo /tmp/$RANDOM`                  | `$"/tmp/(random int)"`                                        | Use command output in a string                                    |
 | `cargo b --jobs=$(nproc)`            | `cargo b $"--jobs=(sys cpu \| length)"`                       | Use command output in an option                                   |
 | `echo $PATH`                         | `$env.PATH` (Non-Windows) or `$env.Path` (Windows)            | See the current path                                              |
+| `echo $?`                            | `$env.LAST_EXIT_CODE`                                         | See the exit status of the last executed command                  |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                                         | Update PATH permanently                                           |
 | `export PATH = $PATH:/usr/other/bin` | `$env.PATH = ($env.PATH \| append /usr/other/bin)`            | Update PATH temporarily                                           |
 | `export`                             | `$env`                                                        | List the current environment variables                            |
