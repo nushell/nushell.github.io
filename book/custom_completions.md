@@ -216,9 +216,7 @@ $env.config.completions.external = {
 
 You can configure the closure to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
 
-When the closure returns unparsable json (e.g., an empty string) it defaults to file completion.
-
-An external completer is a function that takes the current command as a string list, and outputs a list of records with `value` and `description` keys, like custom completion functions.
+An external completer is a function that takes the current command as a string list, and outputs a list of records with `value` and `description` keys, like custom completion functions. When the closure returns `null`, it defaults to file completion.
 
 ::: tip Note
 This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.
