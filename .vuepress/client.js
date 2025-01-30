@@ -6,9 +6,11 @@
 
 import { defineClientConfig } from 'vuepress/client';
 import BlogPosts from './components/BlogPosts.vue';
+import TwinPosts from './components/TwinPosts.vue';
 
 export default defineClientConfig({
   enhance({ app }) {
     app.component('BlogPosts', BlogPosts);
+    app.component('TwinPosts', TwinPosts);
   },
 });

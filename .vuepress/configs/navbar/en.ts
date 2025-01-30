@@ -13,5 +13,11 @@ export const navbarEn: NavbarConfig = [
       { text: 'Contributing Guide', link: '/contributor-book/' },
     ],
   },
-  { text: 'Blog', link: '/blog/' },
+  {
+    text: 'News',
+    children: [
+      { text: 'Blog', link: '/blog/' },
+      { text: 'This Week in Nushell', link: '/twin/' },
+    ],
+  },
 ];
