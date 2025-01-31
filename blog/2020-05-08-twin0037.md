@@ -1,0 +1,11 @@
+# This week in Nu #37
+
+- nespera improved our filesize unit parser ([#1693](https://github.com/nushell/nushell/pull/1693)), added docs for `wrap` ([#1704](https://github.com/nushell/nushell/pull/1704))
+- fdncred parallelized plugin loading, dramatically speeding it up ([#1694](https://github.com/nushell/nushell/pull/1694))
+- JosephTLyons cleaned up some logic in file handling ([#1692](https://github.com/nushell/nushell/pull/1692)), added directory sizes to `ls` ([#1696](https://github.com/nushell/nushell/pull/1696)), fixed some `ls` column bugs ([#1705](https://github.com/nushell/nushell/pull/1705))
+- jzaefferer added docs for `alias` ([#1697](https://github.com/nushell/nushell/pull/1697)), fixed the new `to` and `from` subcommand docs ([#1711](https://github.com/nushell/nushell/pull/1711), [#1712](https://github.com/nushell/nushell/pull/1712), [#1715](https://github.com/nushell/nushell/pull/1715))
+- jonathandturner fixed a bug where `each` wasn't showing errors ([#1707](https://github.com/nushell/nushell/pull/1707)), added subcommands and changed `to-*` and `from-*` to use them ([#1708](https://github.com/nushell/nushell/pull/1708)), added `with-env` command to temporarily add environment variables ([#1717](https://github.com/nushell/nushell/pull/1717)), added bash-like shorthand for `with-env` ([#1718](https://github.com/nushell/nushell/pull/1718)), fixed a bug when changing to Windows drive ([#1721](https://github.com/nushell/nushell/pull/1721))
+- thegedge fixed an issue with externals closing gave a pipeline error ([#1723](https://github.com/nushell/nushell/pull/1723))
+- andrasio renamed `edit` to `update` ([#1724](https://github.com/nushell/nushell/pull/1724)) and `pick` to `select` ([#1725](https://github.com/nushell/nushell/pull/1725))
+- 1ntEgr8 added a `start` command to automatically load apps based on file type ([#1727](https://github.com/nushell/nushell/pull/1727))
+- JesterOrNot improved our Gitpod integration ([#1728](https://github.com/nushell/nushell/pull/1728))
