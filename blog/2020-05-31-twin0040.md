@@ -1,0 +1,16 @@
+# This week in Nu #40
+
+- JosephTLyons added more help for contributors to [CONTRIBUTING.md](http://contributing.md) ([#1865](https://github.com/nushell/nushell/pull/1865)), improve the `cal` implementation ([#1885](https://github.com/nushell/nushell/pull/1886)) and documentation ([#1895](https://github.com/nushell/nushell/pull/1895)), added ctrl-c support to `du` ([#1901](https://github.com/nushell/nushell/pull/1901))
+- AarconC81 added completions for binaries in the PATH ([#1866](https://github.com/nushell/nushell/pull/1866))
+- shiena fixed a link in our Japanese documentation ([#101](https://github.com/nushell/book/pull/101), [#103](https://github.com/nushell/book/pull/103))
+- Kelli314 helped improved light mode table printing ([#1871](https://github.com/nushell/nushell/pull/1871))
+- q-b helped fix some typos in the book ([#102](https://github.com/nushell/book/pull/102))
+- k-brk added `--to-float` to the `str` command ([#1872](https://github.com/nushell/nushell/pull/1872)), improved the `with-env` shorthand ([#1900](https://github.com/nushell/nushell/pull/1900))
+- jzaefferer documented the new `--save` flag for `alias` ([#1874](https://github.com/nushell/nushell/pull/1874))
+- thegedge simplified the logic in the `parse` command ([#1875](https://github.com/nushell/nushell/pull/1875), [#1904](https://github.com/nushell/nushell/pull/1904))
+- EmNudge documented the `trim` command ([#1876](https://github.com/nushell/nushell/pull/1876))
+- notryanb fixed some flaky external command tests ([#1878](https://github.com/nushell/nushell/pull/1878))
+- andrasio converted the `split` commands into sub-commands ([#1879](https://github.com/nushell/nushell/pull/1879)), moved `str` to being a built-in command ([#1908](https://github.com/nushell/nushell/pull/1908)), fixed an issue with plugins not having "end_filter" called correctly ([#1914](https://github.com/nushell/nushell/pull/1914)), updated docs for `split` and `from` ([#104](https://github.com/nushell/book/pull/104))
+- shaaraddalvi improved errors when sorting by invalid column ([#1880](https://github.com/nushell/nushell/pull/1880))
+- fdncred improved auto-pivot's configuration ([#1888](https://github.com/nushell/nushell/pull/1888)), added "plugin_dir" to config docs ([#1911](https://github.com/nushell/nushell/pull/1911)), got nu-jupyter working online ([#2](https://github.com/nushell/nu_jupyter/pull/2))
+- jonathandturner optimized processing time for `where` and related commands ([#1902](https://github.com/nushell/nushell/pull/1902)), made it-expansion work on lists ([#1903](https://github.com/nushell/nushell/pull/1903)), allowed `echo` to iterate ranges ([#1905](https://github.com/nushell/nushell/pull/1905)), simplified plugin directory scanning ([#1910](https://github.com/nushell/nushell/pull/1910))
