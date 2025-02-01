@@ -96,20 +96,32 @@ The recommended way to replace an existing command is to shadow the command.
 Here is an example shadowing the `ls` command.
 
 ```nu
-# An escape hatch to have access to the original ls command
-alias core-ls = ls
+# alias the built-in ls command to ls-builtins
+alias ls-builtin = ls
 
-# Call the built-in ls command with a path parameter
-def old-ls [path] {
-  core-ls $path | sort-by type name -i
-}
-
-# Shadow the ls command so that you always have the sort type you want
-def ls [path?] {
-  if $path == null {
-    old-ls .
-  } else {
-    old-ls $path
-  }
+# List the filenames, sizes, and modification times of items in a directory.
+def ls [
+    --all (-a),         # Show hidden files
+    --long (-l),        # Get all available columns for each entry (slower; columns are platform-dependent)
+    --short-names (-s), # Only print the file names, and not the path
+    --full-paths (-f),  # display paths as absolute paths
+    --du (-d),          # Display the apparent directory size ("disk usage") in place of the directory metadata size
+    --directory (-D),   # List the specified directory itself instead of its contents
+    --mime-type (-m),   # Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
+    --threads (-t),     # Use multiple threads to list contents. Output will be non-deterministic.
+    ...pattern: glob,   # The glob pattern to use.
+]: [ nothing -> table ] {
+    let pattern = if ($pattern | is-empty) { [ '.' ] } else { $pattern }
+    (ls-builtin
+        --all=$all
+        --long=$long
+        --short-names=$short_names
+        --full-paths=$full_paths
+        --du=$du
+        --directory=$directory
+        --mime-type=$mime_type
+        --threads=$threads
+        ...$pattern
+    ) | sort-by type name -i
 }
 ```
