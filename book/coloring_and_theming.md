@@ -412,17 +412,47 @@ hide-env TRANSIENT_PROMPT_COMMAND
 
 ## `LS_COLORS` Colors for the [`ls`](/commands/docs/ls.md) Command
 
-Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the color of file types when you do a [`ls`](/commands/docs/ls.md). For instance, you can make directories one color, _.md markdown files another color, _.toml files yet another color, etc. There are a variety of ways to color your file types.
+Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the coloring of file types when you do a [`ls`](/commands/docs/ls.md). For instance, you can make directories one color, `.md` Markdown files another color, `.toml` files yet another color, etc. There are a variety of ways to color and style your file types.
 
-There's an exhaustive list [here](https://github.com/trapd00r/LS_COLORS), which is overkill, but gives you an rudimentary understanding of how to create a ls_colors file that `dircolors` can turn into a `LS_COLORS` environment variable.
+If `LS_COLORS` is not set, nushell will default to a built-in `LS_COLORS` setting, based on [8-bit (extended) ANSI colors](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit).
 
-[This](https://www.linuxhowto.net/how-to-set-colors-for-ls-command/) is a pretty good introduction to `LS_COLORS`. I'm sure you can find many more tutorials on the web.
+### Understanding `LS_COLORS`
 
-I like the `vivid` application and currently have it configured in my `config.nu` like this. You can find `vivid` [here](https://github.com/sharkdp/vivid).
+`LS_COLORS` contains a colon (`:`) separated list of records that map file types and file names to styling attributes (`selector=attributes`).
 
-`$env.LS_COLORS = (vivid generate molokai | str trim)`
+The selector can be a file type specified like `di` for "directory identifier", or `*.nu` for files with the `.nu` file extension.
 
-If `LS_COLORS` is not set, nushell will default to a built-in `LS_COLORS` setting, based on 8-bit (extended) ANSI colors.
+The attributes are a list of semicolon (`;`) separated numbers. Note that which attributes and attribute formats are supported depends on the terminal you are using.
+
+- Style attributes like `0` normal, `1` bold, `3` italic, `5` blink, [etc](https://en.wikipedia.org/wiki/ANSI_escape_code#Select_Graphic_Rendition_parameters)
+- [Foreground colors](https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit) `30`-`37` and `90`-`97`
+- [Background colors](https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit) `40`-`47` and `100`-`107`
+- [RGB foreground](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) prefixed with `38;2`, optionally followed by additional attributes
+- [RGB background](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) prefixed with `48;2`, optionally followed by additional attributes
+
+For example:
+
+`$env.LS_COLORS = "di=1;34:*.nu=3;33;46"`: Bold directories, italic yellow foreground cyan background `*.nu` files
+
+`$env.LS_COLORS = "di=48;2;200;0;0;5"`: Red background blinking directories
+
+### vivid Themes
+
+For example, you can use the third-party tool [vivid](https://github.com/sharkdp/vivid), which runs on multiple platforms, has [many themes defined](https://github.com/sharkdp/vivid/tree/master/themes), and generates a `LS_COLORS` configuration from it.
+
+After downloading and extracting the binary, you can use it with:
+
+```nu
+$env.LS_COLORS = (vivid generate molokai)
+```
+
+or with an alternative theme:
+
+```nu
+$env.LS_COLORS = (vivid generate ayu)
+```
+
+You can put this command into your [Nushell configuration](/book/configuration.md) for it to become the default coloring.
 
 ## Theming
 
