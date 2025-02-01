@@ -221,7 +221,7 @@ For example:
 
 ```nu
 $env.config.color_config.filesize = {|x| if $x == 0b { 'dark_gray' } else if $x < 1mb { 'cyan' } else { 'blue' } }
-$env.config.color_config.filesize = {|x| if $x == 0b { 'dark_gray' } else if $x < 1mb { 'cyan' } else { 'blue_bold' } }
+$env.config.color_config.bool = {|x| if $x { 'green' } else { 'light_red' } }
 {a:true,b:false,c:0mb,d:0.5mb,e:10mib}
 ```
 
