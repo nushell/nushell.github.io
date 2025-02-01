@@ -47,7 +47,7 @@ La plupart des dépôts contiennent un fichier `CONTRIBUTING.md` avec des consei
 Nushell lui-même est écrit en [Rust](https://www.rust-lang.org).
 Cependant, vous n'avez pas besoin d'être un programmeur en Rust pour aider.
 Si vous connaissez un peu le développement web, vous pouvez contribuer à l'amélioration de ce site web ou du projet Nana.
-[Les Dataframes](dataframes.md) peuvent bénéficier de votre expertise en traitement de données.
+Les Dataframes peuvent bénéficier de votre expertise en traitement de données.
 
 Si vous avez écrit un script sympa, un plugin, ou intégré Nushell quelque part, nous serions heureux de voir votre contribution à `nu_scripts` ou à Awesome Nu.
 Découvrir des bugs avec des étapes pour les reproduire et les signaler sur GitHub est également une aide précieuse !
