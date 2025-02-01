@@ -44,7 +44,7 @@ The color and style-attributes can be declared in multiple alternative formats.
 - `red_bold` - normal color red with bold attribute
 - `"#ff0000"` - "#hex" format foreground color red (quotes are required)
 - `{ fg: "#ff0000" bg: "#0000ff" attr: b }` - "full #hex" format foreground red in "#hex" format with a background of blue in "#hex" format with an attribute of bold abbreviated.
-- `{|x| 'yellow' }` - closure returning a valid string
+- `{|x| 'yellow' }` - closure returning a string with one of the color representations listed above
 - `{|x| { fg: "#ff0000" bg: "#0000ff" attr: b } }` - closure returning a valid record
 
 ### Attributes
