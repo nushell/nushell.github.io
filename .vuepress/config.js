@@ -250,14 +250,7 @@ export default defineUserConfig({
         );
       },
       sorter: (a, b) => {
-        return compareDate(
-          a.data.git?.createdTime
-            ? new Date(a.data.git?.createdTime)
-            : a.frontmatter.date,
-          b.data.git?.createdTime
-            ? new Date(b.data.git?.createdTime)
-            : b.frontmatter.date,
-        );
+        return compareDate(a.frontmatter.date, b.frontmatter.date);
       },
     }),
     sitemapPlugin({
