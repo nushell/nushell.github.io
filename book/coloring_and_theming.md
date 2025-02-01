@@ -215,7 +215,7 @@ Example: `{ fg: "#ff0000" bg: "#0000ff" attr: b }`
 
 ### Closure
 
-Note that closures are only executed for table output. They do not work for `shape_` configurations, nor when output as the value type itself, or as a list of such value.
+Note: Closures are only executed for table output. They do not work in other contexts like for `shape_` configurations, when printing a value directly, or as a value in a list.
 
 For example:
 
