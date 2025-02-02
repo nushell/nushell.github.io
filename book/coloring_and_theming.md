@@ -1,12 +1,6 @@
 # Coloring and Theming in Nu
 
-Many parts of Nushell's interface can have their color customized. All of these can be set in the `config.nu` configuration file. If you see the hash/hashtag/pound mark `#` in the config file it means the text after it is commented out.
-
-1. table borders
-2. primitive values
-3. shapes (this is the command line syntax)
-4. prompt
-5. LS_COLORS
+Many parts of Nushell's interface can have their color customized. All of these can be set in the `config.nu` configuration file. If you see the `#` outside of a text value in the config file it means the text after it is commented out.
 
 ## Table Borders
 
@@ -34,9 +28,15 @@ Here are the current options for `$env.config.table.mode`:
 - `none`
 - `other`
 
-### Color Symbologies
+## Color Configuration
 
----
+The color configuration is defined in `$env.config.color_config`. The current configuration can be printed with:
+
+```nu
+$env.config.color_config | sort
+```
+
+The color and style-attributes can be declared in multiple alternative formats.
 
 - `r` - normal color red's abbreviation
 - `rb` - normal color red's abbreviation with bold attribute
@@ -44,10 +44,10 @@ Here are the current options for `$env.config.table.mode`:
 - `red_bold` - normal color red with bold attribute
 - `"#ff0000"` - "#hex" format foreground color red (quotes are required)
 - `{ fg: "#ff0000" bg: "#0000ff" attr: b }` - "full #hex" format foreground red in "#hex" format with a background of blue in "#hex" format with an attribute of bold abbreviated.
+- `{|x| 'yellow' }` - closure returning a string with one of the color representations listed above
+- `{|x| { fg: "#ff0000" bg: "#0000ff" attr: b } }` - closure returning a valid record
 
 ### Attributes
-
----
 
 | code | meaning             |
 | ---- | ------------------- |
@@ -197,17 +197,13 @@ Here are the current options for `$env.config.table.mode`:
 
 ### `"#hex"` Format
 
----
-
 The "#hex" format is one way you typically see colors represented. It's simply the `#` character followed by 6 characters. The first two are for `red`, the second two are for `green`, and the third two are for `blue`. It's important that this string be surrounded in quotes, otherwise Nushell thinks it's a commented out string.
 
 Example: The primary `red` color is `"#ff0000"` or `"#FF0000"`. Upper and lower case in letters shouldn't make a difference.
 
 This `"#hex"` format allows us to specify 24-bit truecolor tones to different parts of Nushell.
 
-## Full `"#hex"` Format
-
----
+### Full `"#hex"` Format
 
 The `full "#hex"` format is a take on the `"#hex"` format but allows one to specify the foreground, background, and attributes in one line.
 
@@ -217,9 +213,33 @@ Example: `{ fg: "#ff0000" bg: "#0000ff" attr: b }`
 - background of blue in "#hex" format
 - attribute of bold abbreviated
 
-## Primitive Values
+### Closure
 
----
+Note: Closures are only executed for table output. They do not work in other contexts like for `shape_` configurations, when printing a value directly, or as a value in a list.
+
+For example:
+
+```nu
+$env.config.color_config.filesize = {|x| if $x == 0b { 'dark_gray' } else if $x < 1mb { 'cyan' } else { 'blue' } }
+$env.config.color_config.bool = {|x| if $x { 'green' } else { 'light_red' } }
+{a:true,b:false,c:0mb,d:0.5mb,e:10mib}
+```
+
+prints
+
+```nu
+╭───┬───────────╮
+│ a │ true      │
+│ b │ false     │
+│ c │ 0 B       │
+│ d │ 488.3 KiB │
+│ e │ 10.0 MiB  │
+╰───┴───────────╯
+```
+
+with a green `true`, a light red `false`, a dark grey `0 B`, a cyan `488.3 KiB`, and a blue `10.0 MiB`.
+
+## Primitive Values
 
 Primitive values are things like `int` and `string`. Primitive values and shapes can be set with a variety of color symbologies seen above.
 
@@ -256,7 +276,7 @@ This is the current list of primitives. Not all of these are configurable. The c
 | `vardecl`    |                       |              |
 | `variable`   |                       |              |
 
-#### Special "primitives" (not really primitives but they exist solely for coloring)
+### Special "primitives" (not really primitives but they exist solely for coloring)
 
 | primitive                   | default color              | configurable |
 | --------------------------- | -------------------------- | ------------ |
