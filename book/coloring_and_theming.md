@@ -237,7 +237,7 @@ prints
 ╰───┴───────────╯
 ```
 
-with a green `true`, a red `false`, a grey `0 B`, a cyan `488.3 KiB`, and a blue `10.0 MiB`.
+with a green `true`, a light red `false`, a dark grey `0 B`, a cyan `488.3 KiB`, and a blue `10.0 MiB`.
 
 ## Primitive Values
 
