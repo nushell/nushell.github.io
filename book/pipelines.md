@@ -379,7 +379,7 @@ The `sleep` behavior of not supporting an input stream matches Bash `sleep` beha
 
 Many commands do have piped input/output however, and if it's ever unclear, check their `help` documentation as described above.
 
-## Result Display Rendering
+## Rendering Display Results
 
 In interactive mode, when a pipeline ends, the [`display_output` hook configuration](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) defines how the result will be displayed.
 The default configuration uses the [`table` command](/commands/docs/table.md) to render structured data as a visual table.
