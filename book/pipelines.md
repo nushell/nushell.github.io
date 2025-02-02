@@ -384,6 +384,65 @@ Many commands do have piped input/output however, and if it's ever unclear, chec
 In interactive mode, when a pipeline ends, the [`display_output` hook configuration](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) defines how the result will be displayed.
 The default configuration uses the [`table` command](/commands/docs/table.md) to render structured data as a visual table.
 
+The following example shows how the `display_output` hook can render
+
+- an expanded table with `table -e`
+- an unexpanded table with `table`
+- an empty closure `{||}` and empty string `''` lead to simple output
+- `null` can be assigned to clear any customization, reverting back to default behavior
+
+```nu
+$env.config.hooks.display_output = { table -e }
+[1,2,3,[4,5,6]]
+# => ╭───┬───────────╮
+# => │ 0 │         1 │
+# => │ 1 │         2 │
+# => │ 2 │         3 │
+# => │ 3 │ ╭───┬───╮ │
+# => │   │ │ 0 │ 4 │ │
+# => │   │ │ 1 │ 5 │ │
+# => │   │ │ 2 │ 6 │ │
+# => │   │ ╰───┴───╯ │
+# => ╰───┴───────────╯
+
+$env.config.hooks.display_output = { table }
+[1,2,3,[4,5,6]]
+# => ╭───┬────────────────╮
+# => │ 0 │              1 │
+# => │ 1 │              2 │
+# => │ 2 │              3 │
+# => │ 3 │ [list 3 items] │
+# => ╰───┴────────────────╯
+
+$env.config.hooks.display_output = {||}
+[1,2,3,[4,5,6]]
+# => 1
+# => 2
+# => 3
+# => [4
+# => 5
+# => 6]
+
+$env.config.hooks.display_output = ''
+[1,2,3,[4,5,6]]
+# => 1
+# => 2
+# => 3
+# => [4
+# => 5
+# => 6]
+
+# clear to default behavior
+$env.config.hooks.display_output = null
+[1,2,3,[4,5,6]]
+# => ╭───┬────────────────╮
+# => │ 0 │              1 │
+# => │ 1 │              2 │
+# => │ 2 │              3 │
+# => │ 3 │ [list 3 items] │
+# => ╰───┴────────────────╯
+```
+
 ## Output Result to External Commands
 
 Sometimes you want to output Nushell structured data to an external command for further processing. However, Nushell's default formatting options for structured data may not be what you want.
