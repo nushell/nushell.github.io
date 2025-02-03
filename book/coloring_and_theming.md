@@ -4,29 +4,55 @@ Many parts of Nushell's interface can have their color customized. All of these 
 
 ## Table Borders
 
-Table borders are controlled by the `$env.config.table.mode` setting in `config.nu`. Here is an example:
+Table borders are controlled by the `$env.config.table.mode` setting. It can be changed at run time, or in the `config.nu` file:
 
 ```nu
-$env.config = {
-    table: {
-        mode: rounded
-    }
-}
+$env.config.table.mode = 'rounded'
 ```
 
-Here are the current options for `$env.config.table.mode`:
+The options for `$env.config.table.mode` can be listed with `table --list`:
 
-- `rounded` # of course, this is the best one :)
+<!-- Generated with table --list | each {|| $"- `($in)`"} | sort | str join "\n"` -->
+
+- `ascii_rounded`
+- `basic_compact`
 - `basic`
-- `compact`
 - `compact_double`
+- `compact`
+- `default`
+- `dots`
+- `heavy`
 - `light`
+- `markdown`
+- `none`
+- `psql`
+- `reinforced`
+- `restructured`
+- `rounded`
 - `thin`
 - `with_love`
-- `reinforced`
-- `heavy`
-- `none`
-- `other`
+
+Examples:
+
+```nu
+$env.config.table.mode = 'rounded'
+table --list | first 5
+# => ╭───┬────────────────╮
+# => │ 0 │ basic          │
+# => │ 1 │ compact        │
+# => │ 2 │ compact_double │
+# => │ 3 │ default        │
+# => │ 4 │ heavy          │
+# => ╰───┴────────────────╯
+
+$env.config.table.mode = 'psql'
+table --list | first 5
+# =>  0 | basic
+# =>  1 | compact
+# =>  2 | compact_double
+# =>  3 | default
+# =>  4 | heavy
+```
 
 ## Color Configuration
 
