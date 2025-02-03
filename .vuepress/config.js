@@ -239,7 +239,6 @@ export default defineUserConfig({
       apiKey: 'dd6a8f770a42efaed5befa429d167232',
     }),
     feedPlugin({
-      devServer: true,
       rss: true,
       json: true,
       atom: true,
