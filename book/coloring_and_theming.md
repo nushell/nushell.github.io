@@ -41,21 +41,24 @@ The options for `$env.config.table.mode` can be listed with `table --list`:
 Examples:
 
 ```nu
-> $env.config.table.mode = 'rounded'
-╭───┬────────────────╮
-│ 0 │ basic          │
-│ 1 │ compact        │
-│ 2 │ compact_double │
-│ 3 │ default        │
-│ 4 │ heavy          │
-╰───┴────────────────╯
-> $env.config.table.mode = 'psql' | first 5
- 0 | basic
- 1 | compact
- 2 | compact_double
- 3 | default
- 4 | heavy
- ```
+$env.config.table.mode = 'rounded'
+table --list | first 5
+# => ╭───┬────────────────╮
+# => │ 0 │ basic          │
+# => │ 1 │ compact        │
+# => │ 2 │ compact_double │
+# => │ 3 │ default        │
+# => │ 4 │ heavy          │
+# => ╰───┴────────────────╯
+
+$env.config.table.mode = 'psql'
+table --list | first 5
+# =>  0 | basic
+# =>  1 | compact
+# =>  2 | compact_double
+# =>  3 | default
+# =>  4 | heavy
+```
 
 ### Color Symbologies
 
