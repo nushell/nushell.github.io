@@ -250,14 +250,27 @@ export default defineUserConfig({
         );
       },
       sorter: (a, b) => {
-        return compareDate(
-          a.data.git?.createdTime
-            ? new Date(a.data.git?.createdTime)
-            : a.frontmatter.date,
-          b.data.git?.createdTime
-            ? new Date(b.data.git?.createdTime)
-            : b.frontmatter.date,
+        const pathDateA = new Date(
+          a.path.replace('/blog/', '').substring(0, 10),
         );
+        const pathDateB = new Date(
+          b.path.replace('/blog/', '').substring(0, 10),
+        );
+        const effectiveDateA =
+          pathDateA != 'Invalid Date'
+            ? pathDateA
+            : a.frontmatter.date
+              ? new Date(a.frontmatter.date)
+              : new Date(a.data.git?.createdTime);
+
+        // Determine the effective date for item B
+        const effectiveDateB =
+          pathDateB != 'Invalid Date'
+            ? pathDateB
+            : b.frontmatter.date
+              ? new Date(b.frontmatter.date)
+              : new Date(b.data.git?.createdTime);
+        return compareDate(effectiveDateA, effectiveDateB);
       },
     }),
     sitemapPlugin({
