@@ -29,6 +29,7 @@ contributors: false
 
 | input   | output  |
 | ------- | ------- |
+| any     | nothing |
 | nothing | nothing |
 | record  | nothing |
 ## Examples

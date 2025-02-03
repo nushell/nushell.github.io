@@ -33,6 +33,7 @@ contributors: false
 
 | input   | output |
 | ------- | ------ |
+| any     | any    |
 | nothing | any    |
 | string  | any    |
 ## Examples

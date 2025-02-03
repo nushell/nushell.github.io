@@ -30,6 +30,7 @@ contributors: false
 
 | input   | output |
 | ------- | ------ |
+| any     | table  |
 | nothing | table  |
 | record  | table  |
 | table   | table  |

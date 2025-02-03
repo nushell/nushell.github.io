@@ -34,7 +34,7 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-| string  | nothing |
+
 ## Examples
 
 Change to your home directory

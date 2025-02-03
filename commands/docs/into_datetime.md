@@ -37,9 +37,11 @@ contributors: false
 
 | input        | output         |
 | ------------ | -------------- |
+| any          | table          |
 | datetime     | datetime       |
 | int          | datetime       |
 | list\<string\> | list\<datetime\> |
+| nothing      | table          |
 | record       | record         |
 | string       | datetime       |
 | table        | table          |

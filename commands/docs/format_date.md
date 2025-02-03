@@ -33,6 +33,7 @@ contributors: false
 
 | input    | output |
 | -------- | ------ |
+| any      | table  |
 | datetime | string |
 | nothing  | table  |
 | string   | string |

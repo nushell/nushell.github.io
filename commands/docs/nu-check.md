@@ -34,6 +34,7 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
+| any       | bool   |
 | list\<any\> | bool   |
 | nothing   | bool   |
 | string    | bool   |
