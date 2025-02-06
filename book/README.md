@@ -60,5 +60,5 @@ Furthermore, you can consider translating parts of it to your language.
 ## Community
 
 The main place to discuss anything Nushell is our [Discord](https://discord.com/invite/NtAbbGn).
-You can also follow us on [Twitter](https://twitter.com/nu_shell) for news and updates.
+You can also follow our [blog](https://www.nushell.sh/blog) for news and updates.
 Finally, you can use the GitHub discussions or file GitHub issues.
