@@ -678,6 +678,62 @@ vip-greet $vip ...$guests
 # => And a special welcome to our VIP today, Tanisha!
 ```
 
+### Rest Parameters with Wrapped External Commands
+
+Custom commands defined with `def --wrapped` will collect any unknown flags and arguments into a
+rest-parameter which can then be passed, via list-spreading, to an external command. This allows
+a custom command to "wrap" and extend the external command while still accepting all of its original
+parameters. For example, the external `eza` command displays a directory listing. By default, it displays
+a grid arrangement:
+
+```nu
+eza commands
+# => categories  docs  README.md
+```
+
+We can define a new command `ezal` which will always display a long-listing, adding icons:
+
+```nu
+def --wrapped ezal [...rest] {
+  eza -l ...$rest
+}
+```
+
+:::note
+You could also add `--icons`. We're omitting that in this example simply because those icons don't
+display well in this guide.
+:::
+
+Notice that `--wrapped` forces any additional parameters into the `rest` parameter, so the command
+can be called with any parameter that `eza` supports. Those additional parameters will be expanded via
+the list-spreading operation `...$rest`.
+
+```nu
+ezal commands
+# => drwxr-xr-x   - ntd  7 Feb 11:41 categories
+# => drwxr-xr-x   - ntd  7 Feb 11:41 docs
+# => .rw-r--r-- 936 ntd 14 Jun  2024 README.md
+
+ezal -d commands
+# => drwxr-xr-x - ntd 14 Jun  2024 commands
+```
+
+The custom command can check for certain parameters and change its behavior accordingly. For instance,
+when using the `-G` option to force a grid, we can omit passing a `-l` to `eza`:
+
+```nu
+def --wrapped ezal [...rest] {
+  if '-G' in $rest {
+    eza ...$rest
+  } else {
+    eza -l --icons ...$rest
+  }
+}
+
+ezal -G commands
+# => categories  docs  README.md
+```
+
 ## Pipeline Input-Output Signature
 
 By default, custom commands accept [`<any>` type](./types_of_data.md#any) as pipeline input and likewise can output `<any>` type. But custom commands can also be given explicit signatures to narrow the types allowed.
