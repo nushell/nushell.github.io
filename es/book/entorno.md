@@ -4,7 +4,7 @@ Una tarea común al usar una shell es controlar el ambiente de entorno que aplic
 
 Puedes ver las variables de entorno actuales que se enviarán a las aplicaciones explorando `#nu.env`:
 
-```
+```nu
 echo $nu.env
 # => ──────────────────────────┬──────────────────────────────
 # =>  COLORTERM                │ truecolor
@@ -17,7 +17,7 @@ El ambiente es creador a través de los ajustes en la configuración de Nu y a p
 
 También puedes temporalmente actualizar una variable de entorno cuando ejecutas un comando o tubería de comandos.
 
-```
+```nu
 with-env [MI_VARIABLE VALOR] { echo $nu.env.MI_VARIABLE }
 # => VALOR
 ```
@@ -28,7 +28,7 @@ A common shorthand, inspired by Bash and others, is also available. You can writ
 
 Una atajo común, inspirada en Bash y otros, también está disponible. Puedes escribir el ejemplo anterior como:
 
-```
+```nu
 MI_VARIABLE=VALOR echo $nu.env.MI_VARIABLE
 # => VALOR
 ```

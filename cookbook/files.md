@@ -48,7 +48,7 @@ Output
 
 Suppose you have a file with the following format.
 
-```
+```text
 band:album:year
 Fugazi:Steady Diet of Nothing:1991
 Fugazi:The Argument:2001

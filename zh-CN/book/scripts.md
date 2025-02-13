@@ -66,7 +66,7 @@ def main [x: int] {
 }
 ```
 
-```
+```nu
 nu myscript.nu 100
 # => 110
 ```

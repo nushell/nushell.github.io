@@ -53,7 +53,7 @@ Note: if you've never used `vim` before and you want to leave typing `:q!` will 
 
 Go to the end of the file and add
 
-```
+```nu
 $env.EDITOR = vim
 ```
 

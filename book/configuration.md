@@ -450,7 +450,7 @@ In other words, **_variable arguments are not allowed for parser keywords_**.
 
 However, Nushell creates some convenience _constants_ that can be used to help identify common file locations. For instance, you can source a file in the default configuration directory using:
 
-```
+```nu
 source ($nu.default-config-dir | path join "myfile.nu")
 ```
 

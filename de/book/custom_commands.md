@@ -47,7 +47,7 @@ def "str mycommand" [] {
 
 Jetzt kann der eigene Unterbefehl aufgerufen werden, als ob er ein eingebauter Befehl von `str` wäre:
 
-```
+```nu
 str mycommand
 ```
 
@@ -129,19 +129,19 @@ In der obigen Definition von `greet`, werden ein fester Parameter `name` und ein
 
 Das obige Beispiel kann wie folgt aufgerufen werden:
 
-```
+```nu
 greet world --age 10
 ```
 
 Oder:
 
-```
+```nu
 greet --age 10 world
 ```
 
 Oder gleich ganz ohne Flag:
 
-```
+```nu
 greet world
 ```
 
@@ -162,7 +162,7 @@ _Hinweis:_ Flags sind benannt nach der langen Form des Namens. Im obigen Beispie
 
 Nun kann diese neue Version von `greet` wie folgt aufgerufen werden:
 
-```
+```nu
 greet -a 10 hello
 ```
 

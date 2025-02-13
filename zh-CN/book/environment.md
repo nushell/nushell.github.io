@@ -67,7 +67,7 @@ load-env { "BOB": "FOO", "JAY": "BAR" }
 
 单个环境变量是记录的一个字段，存储在 `$env` 变量中，可以用 `$env.VARIABLE` 读取：
 
-```
+```nu
 $env.FOO
 # => BAR
 ```

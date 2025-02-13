@@ -2,7 +2,7 @@
 
 在使用 Nu 的过程中，你可能遇到过这样的情况：你觉得有一些额外的事情在幕后进行。例如，假设你试图打开一个 Nu 支持的文件，但却忘记了它已被 Nu 支持并试图再次转换：
 
-```
+```nu
 open Cargo.toml | from toml
 # => error: Expected a string from pipeline
 # => - shell:1:18
@@ -19,7 +19,7 @@ open Cargo.toml | from toml
 
 让我们再次运行[`open`](/commands/docs/open.md)命令，但这一次，我们将看一下它所反馈的标签：
 
-```
+```nu
 metadata (open Cargo.toml)
 # => ╭──────┬───────────────────╮
 # => │ span │ {record 2 fields} │
