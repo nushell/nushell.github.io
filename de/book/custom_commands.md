@@ -270,14 +270,14 @@ def my-echo [] {
 
 Wenn dieser neue Befehl nun in einer Pipeline aufgerufen wird, sieht die Ausgabe wie folgt aus:
 
-```
-> echo foo bar | my-echo
-───┬─────
- 0 │ foo
- 1 │ --
- 2 │ bar
- 3 │ --
-───┴─────
+```nu
+echo foo bar | my-echo
+# => ───┬─────
+# =>  0 │ foo
+# =>  1 │ --
+# =>  2 │ bar
+# =>  3 │ --
+# => ───┴─────
 ```
 
 ## Persistenz

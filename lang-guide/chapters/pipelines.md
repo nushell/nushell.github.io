@@ -50,21 +50,21 @@ Redirection to a file:
 Note that `e>|` and `o+e>|` only work with external command, if you pipe internal commands' output through `e>|` and `o+e>|`, you will get an error:
 
 ```nu
-❯ ls e>| str length
-Error:   × `e>|` only works with external streams
-   ╭─[entry #1:1:1]
- 1 │ ls e>| str length
-   ·    ─┬─
-   ·     ╰── `e>|` only works on external streams
-   ╰────
+ls e>| str length
+# => Error:   × `e>|` only works with external streams
+# =>    ╭─[entry #1:1:1]
+# =>  1 │ ls e>| str length
+# =>    ·    ─┬─
+# =>    ·     ╰── `e>|` only works on external streams
+# =>    ╰────
 
-❯ ls e+o>| str length
-Error:   × `o+e>|` only works with external streams
-   ╭─[entry #2:1:1]
- 1 │ ls e+o>| str length
-   ·    ──┬──
-   ·      ╰── `o+e>|` only works on external streams
-   ╰────
+ls e+o>| str length
+# => Error:   × `o+e>|` only works with external streams
+# =>    ╭─[entry #2:1:1]
+# =>  1 │ ls e+o>| str length
+# =>    ·    ──┬──
+# =>    ·      ╰── `o+e>|` only works on external streams
+# =>    ╰────
 ```
 
 You can also redirect `stdout` to a file, and pipe `stderr` to next command:

@@ -47,8 +47,8 @@ Nu unterstützt aktuell die folgenden Formate um Daten direkt als Tabelle zu öf
 
 Was aber passiert, wenn eine Text Datei geladen wird, die keinem der angegebenen Formate entspricht?
 
-```
-# => open README.md
+```nu
+open README.md
 ```
 
 Die Datei wird wie gewohnt als Text ausgegeben.
