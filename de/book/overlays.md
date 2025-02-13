@@ -64,7 +64,7 @@ Im folgenden Abschnitt wird der `>` prompt mit dem Namen des zuletzt aktivierten
 
 Wenn die Überlagerung nicht mehr benötigt wird, entfernt sie der Befehl [`overlay hide`](/commands/docs/overlay_hide.md):
 
-```
+```nu
 (spam)> overlay hide spam
 
 (zero)> foo
@@ -79,7 +79,7 @@ Wenn die Überlagerung nicht mehr benötigt wird, entfernt sie der Befehl [`over
 Überlagerungen haben ebenfalls einen Gültigkeitsbereich.
 Jede hinzugefügte Überlagerung wird entfernt, wenn der Gütligkeitsbereich endet:
 
-```
+```nu
 (zero)> do { overlay use spam; foo }  # Überlagerung ist aktiv innerhalb des Blocks
 # => foo
 
@@ -233,7 +233,7 @@ Dafür wird das `--keep-env` Argument verwendet:
 Wenn mehrere Überlagerungen die gleiche Definition enthalten, z.B. `foo`, dann wird die der zuletzt aktivierten verwendet.
 Um eine Überlagerung im Stapel nach oben zu bringen, wird einfach der Befehl [`overlay use`](/commands/docs/overlay_use.md) nochmals aufgerufen:
 
-```
+```nu
 (zero)> def foo [] { "foo-in-zero" }
 
 (zero)> overlay use spam
