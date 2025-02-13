@@ -457,7 +457,6 @@ keybindings list | where type == edits
 
     ...
   }
-
 ```
 
 ### 排查键盘绑定问题

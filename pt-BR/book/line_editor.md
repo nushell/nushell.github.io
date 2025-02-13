@@ -309,7 +309,6 @@ E o ExecuteHostCommand requer um comando válido que será enviado para o mecani
         cmd: "cd ~"
       }
     ...
-
 ```
 Vale mencionar que na lista de eventos você também verá Edit([]), Multiple([]) e UntilFound([]). Essas opções não estão disponíveis para o analisador, pois são construídas com base na definição da tecla de atalho. Por exemplo, um evento Multiple([]) é construído para você ao definir uma lista de registros no evento da tecla de atalho. Um evento Edit([]) é o mesmo que o tipo de edição mencionado anteriormente. E o evento UntilFound([]) é o mesmo que o tipo until mencionado antes. 
 

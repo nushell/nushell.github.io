@@ -635,7 +635,6 @@ $env.config = {
   error_style: "plain"
   ...
 }
-
 ```
 
 ## Line Editor Menus (completion, history, help…)

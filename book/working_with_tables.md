@@ -298,7 +298,6 @@ open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_editio
 # =>  0 │    2018 │         2021
 # =>  1 │    2021 │         2024
 # => ───┴─────────┴──────────────
-
 ```
 
 Notice that if we open the original file, the contents have stayed the same:
