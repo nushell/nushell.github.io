@@ -12,7 +12,7 @@ Nu 在处理数据方面最强大的能力之一是[`open`](/commands/docs/open.
 
 如果我们想查看当前项目的版本，我们可以使用[`get`](/commands/docs/get.md)命令：
 
-```
+```nu
 open editors/vscode/package.json | get version
 # => 1.0.0
 ```
@@ -51,7 +51,7 @@ open README.md
 
 想象一下，我们得到了这个数据文件：
 
-```
+```nu
 open people.txt
 # => Octavia | Butler | Writer
 # => Bob | Ross | Painter
@@ -62,7 +62,7 @@ open people.txt
 
 当我们引入这个文件时，我们需要做的第一件事是确保后续每次只处理一行：
 
-```
+```nu
 open people.txt | lines
 # => ───┬──────────────────────────────
 # =>  0 │ Octavia | Butler | Writer
@@ -73,7 +73,7 @@ open people.txt | lines
 
 可以看到，我们正在处理这些行，因为我们又回到了一个列表中。下一步是看看是否可以把行分割成更有用的东西。为此，我们将使用[`split`](/commands/docs/split.md)命令。[`split`](/commands/docs/split.md)，顾名思义，为我们提供了一种分割字符串的方法。我们将使用[`split`](/commands/docs/split.md)的`column`子命令，将内容分成多列。我们会告诉它分隔符是什么，剩下的就由它来完成：
 
-```
+```nu
 open people.txt | lines | split column "|"
 # => ───┬──────────┬───────────┬───────────
 # =>  # │ column1  │ column2   │ column3
@@ -86,7 +86,7 @@ open people.txt | lines | split column "|"
 
 这看起来差不多了，只是还有一些额外的空白字符，让我们 [`trim`](/commands/docs/str_trim.md) 掉这些空格：
 
-```
+```nu
 open people.txt | lines | split column "|" | str trim
 # => ───┬─────────┬─────────┬──────────
 # =>  # │ column1 │ column2 │ column3
@@ -99,7 +99,7 @@ open people.txt | lines | split column "|" | str trim
 
 还不错，[`split`](/commands/docs/split.md)命令返回给我们可以使用的数据，还预设了默认的列名：
 
-```
+```nu
 open people.txt | lines | split column "|" | str trim | get column1
 # => ───┬─────────
 # =>  0 │ Octavia
@@ -110,7 +110,7 @@ open people.txt | lines | split column "|" | str trim | get column1
 
 我们也可以用自定义的列名代替默认的：
 
-```
+```nu
 open people.txt | lines | split column "|" first_name last_name job | str trim
 # => ───┬────────────┬───────────┬──────────
 # =>  # │ first_name │ last_name │ job
@@ -123,7 +123,7 @@ open people.txt | lines | split column "|" first_name last_name job | str trim
 
 现在，我们的数据加载到一个表中了，我们可以使用之前对表所用的各种命令来处理它：
 
-```
+```nu
 open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
 # => ───┬────────────┬───────────┬──────────
 # =>  # │ first_name │ last_name │ job

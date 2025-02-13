@@ -1311,7 +1311,7 @@ Most messages are encoded in the same way as their JSON analogue. For example, t
 
 is encoded in the MessagePack format as:
 
-```
+```text
 81                   // map, one element
   a5 "Hello"         // 5-character string
   83                 // map, three elements

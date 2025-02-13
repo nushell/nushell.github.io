@@ -95,7 +95,7 @@ Wird der Befehl [`overlay hide`](/commands/docs/overlay_hide.md) ohne Argument a
 
 Eine neue Definition (Befehl, Alias, Umgebungsvariable) wird in der zuletzt aktivierten Überlagerung aufgezeichnet:
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> def eggs [] { "eggs" }
@@ -104,7 +104,7 @@ Eine neue Definition (Befehl, Alias, Umgebungsvariable) wird in der zuletzt akti
 Der `eggs` Befehl gehört zur `spam` Überlagerung.
 Wird diese entfernt, ist auch der Befehl nicht mehr aufrufbar:
 
-```
+```nu
 (spam)> overlay hide spam
 
 (zero)> eggs
@@ -113,7 +113,7 @@ Error: Can't run executable...
 
 Er ist jedoch nicht verloren!
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> eggs
@@ -127,7 +127,7 @@ So kann mehrfach zwischen verschiedenen Kontexten gewechselt werden.
 Es gibt Momente, in denen Definitionen nicht zu einer Überlagerung hinzugefügt werden sollen.
 Die Lösung dafür ist, eine leere Überlagerung zu erstellen und die Definitionen temporär nur dort zu speichern:
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> module scratchpad { }
@@ -141,7 +141,7 @@ Der `eggs` Befehl wird zu `scratchpad` hinzugefügt, während `spam` intakt blei
 
 Um dies weniger wortreich zu machen, reicht der Befehl [`overlay new`](/commands/docs/overlay_new.md):
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> overlay new scratchpad
@@ -157,7 +157,7 @@ Der [`overlay use`](/commands/docs/overlay_use.md) Befehl übernimmt alle Befehl
 Sie können jedoch auch als Unterbefehl hinter dem Modulnamen stehen.
 Dafür ist das `--prefix` Argument da:
 
-```
+```nu
 (zero)> module spam {
     export def foo [] { "foo" }
 }
@@ -174,7 +174,7 @@ Dies gilt jedoch nicht für Umgebungsvariablen.
 
 Der Name einer Überlagerung kann mit `as` geändert werden:
 
-```
+```nu
 (zero)> module spam { export def foo [] { "foo" } }
 
 (zero)> overlay use spam as eggs
@@ -194,7 +194,7 @@ um dieser einen Namen zu geben, der sie besser beschreibt.
 
 Manchmal ist es nicht gewünscht, dass Definitionen, die in einer Überlagerungen gemacht wurden, verloren gehen, wenn diese entfernt wird:
 
-```
+```nu
 (zero)> overlay use spam
 
 (spam)> def eggs [] { "eggs" }
@@ -210,7 +210,7 @@ Das `--keep-custom` Argument macht genau das.
 Es ist auch möglich, eine Liste von Umgebungsvariablen, welche in der Überlagerung definiert wurden, zu behalten, und den Rest zu entfernen.
 Dafür wird das `--keep-env` Argument verwendet:
 
-```
+```nu
 (zero)> module spam {
     export def foo [] { "foo" }
     export-env { $env.FOO = "foo" }

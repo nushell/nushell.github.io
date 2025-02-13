@@ -4,7 +4,7 @@
 
 首先，让我们获得一个可用的表：
 
-```
+```nu
 ls
 # => ───┬───────────────┬──────┬─────────┬────────────
 # =>  # │ name          │ type │ size    │ modified
@@ -23,7 +23,7 @@ ls
 
 我们可以通过调用[`sort-by`](/commands/docs/sort-by.md)命令对一个表进行排序，并指定需要排序的列。比如，按照文件的大小对表格进行排序：
 
-```
+```nu
 ls | sort-by size
 # => ───┬───────────────┬──────┬─────────┬────────────
 # =>  # │ name          │ type │ size    │ modified
@@ -44,7 +44,7 @@ ls | sort-by size
 
 我们可以从表中通过选择特定的列或行来获得数据。让我们从表中选择（[`select`](/commands/docs/select.md)）几列吧：
 
-```
+```nu
 ls | select name size
 # => ───┬───────────────┬─────────
 # =>  # │ name          │ size
@@ -61,7 +61,7 @@ ls | select name size
 
 这有助于创建一个更专注于我们所需的表格。接下来，假设我们只想看这个目录中最小的 5 个文件：
 
-```
+```nu
 ls | sort-by size | first 5
 # => ───┬──────────────┬──────┬────────┬────────────
 # =>  # │ name         │ type │ size   │ modified
@@ -78,7 +78,7 @@ ls | sort-by size | first 5
 
 你也可以跳过(`skip`)不需要的行，让我们跳过上面所得 5 行中的前两行：
 
-```
+```nu
 ls | sort-by size | first 5 | skip 2
 # => ───┬───────────┬──────┬────────┬────────────
 # =>  # │ name      │ type │ size   │ modified
@@ -93,7 +93,7 @@ ls | sort-by size | first 5 | skip 2
 
 让我们看看其他几个用于选择数据的命令。您可能想知道为什么选取表格的行是通过数字，这是选择单行数据的便捷方式。让我们按文件名对表进行排序，然后使用 `select` 命令通过行号来选择其中的一行：
 
-```
+```nu
 ls | sort-by name
 # => ───┬───────────────┬──────┬─────────┬────────────
 # =>  # │ name          │ type │ size    │ modified
@@ -119,7 +119,7 @@ ls | sort-by name | select 5
 
 到目前为止，我们在处理表格时都是将表格修剪成我们需要的样子。有时我们可能想更进一步，只看单元格本身的值，而不是取整列。比如，我们只想得到一个包含所有文件名的列表。在此，我们使用[`get`](/commands/docs/get.md) 命令：
 
-```
+```nu
 ls | get name
 # => ───┬───────────────
 # =>  0 │ files.rs
@@ -136,7 +136,7 @@ ls | get name
 
 这可能看起来很像我们之前使用的[`select`](/commands/docs/select.md)命令，所以也把它放在这里以便于比较：
 
-```
+```nu
 ls | select name
 # => ───┬───────────────
 # =>  # │ name
@@ -168,7 +168,7 @@ ls | select name
 
 我们可以使用[`append`](/commands/docs/append.md)将列名相同的表拼接起来：
 
-```
+```nu
 let $first = [[a b]; [1 2]]
 let $second = [[a b]; [3 4]]
 $first | append $second
@@ -227,7 +227,7 @@ $first | merge { $second } | merge { $third }
 
 我们可以使用[`insert`](/commands/docs/insert.md)命令在表中增加新列，让我们看一个例子：
 
-```
+```nu
 open rustfmt.toml
 # => ─────────┬──────
 # =>  edition │ 2018
@@ -236,7 +236,7 @@ open rustfmt.toml
 
 让我们添加一个名为 "next_edition" 的列并将 2021 作为值：
 
-```
+```nu
 open rustfmt.toml | insert next_edition 2021
 # => ──────────────┬──────
 # =>  edition      │ 2018
@@ -246,7 +246,7 @@ open rustfmt.toml | insert next_edition 2021
 
 注意，我们如果打开原始文件，会发现内容没变：
 
-```
+```nu
 open rustfmt.toml
 # => ─────────┬──────
 # =>  edition │ 2018
@@ -255,7 +255,7 @@ open rustfmt.toml
 
 Nu 的更改是函数性更改，这意味着它们只在值上起作用，而不是试图引起永久性变更。这使我们可以在管道中进行许多不同类型的操作直到我们准备好将结果输出(如果我们选择这样做的话)。这里我们可以使用 [`save`](/commands/docs/save.md) 命令保存结果：
 
-```
+```nu
 open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
 open rustfmt2.toml
 # => ──────────────┬──────
@@ -268,7 +268,7 @@ open rustfmt2.toml
 
 与[`insert`](/commands/docs/insert.md)命令类似，我们也可以使用[`update`](/commands/docs/update.md)命令将某一列的内容修改为新值。为了看看效果，让我们打开同一个文件：
 
-```
+```nu
 open rustfmt.toml
 # => ─────────┬──────
 # =>  edition │ 2018
@@ -277,7 +277,7 @@ open rustfmt.toml
 
 现在，用我们希望支持的下一个版本更新 edition：
 
-```
+```nu
 open rustfmt.toml | update edition 2021
 # => ─────────┬──────
 # =>  edition │ 2021
@@ -290,7 +290,7 @@ open rustfmt.toml | update edition 2021
 
 你可以使用`move`来移动表中的列。例如，如果想把`ls`中的 "name" 列移到 "size" 列之后，我们可以这样做：
 
-```
+```nu
 ls | move name --after size
 # => ╭────┬──────┬─────────┬───────────────────┬──────────────╮
 # => │ #  │ type │  size   │       name        │   modified   │
@@ -307,7 +307,7 @@ ls | move name --after size
 
 你也可以通过`rename`命令对表中的列进行**重命名**。我们可以使用这个例子来运行`ls`并重命名这些列：
 
-```
+```nu
 ls | rename filename filetype filesize date
 # => ╭────┬───────────────────┬──────────┬──────────┬──────────────╮
 # => │ #  │     filename      │ filetype │ filesize │     date     │

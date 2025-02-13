@@ -574,7 +574,7 @@ With no arguments, the output rendered from the `table` command will often _disp
 
 This can be useful when you need to store the rendered view of structured data as a string. For example, to remove all ANSI formatting (colors) from a table:
 
-```
+```nu
 ls | table | ansi strip
 ```
 

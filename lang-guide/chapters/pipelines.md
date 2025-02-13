@@ -49,7 +49,7 @@ Redirection to a file:
 
 Note that `e>|` and `o+e>|` only work with external command, if you pipe internal commands' output through `e>|` and `o+e>|`, you will get an error:
 
-```
+```nu
 ❯ ls e>| str length
 Error:   × `e>|` only works with external streams
    ╭─[entry #1:1:1]
@@ -69,14 +69,14 @@ Error:   × `o+e>|` only works with external streams
 
 You can also redirect `stdout` to a file, and pipe `stderr` to next command:
 
-```
+```nu
 nu demo.nu o> file.txt e>| str upcase
 nu demo.nu e> file.txt | str upcase
 ```
 
 But you can't use redirection along with `o+e>|`, because it's ambiguous:
 
-```
+```nu
 nu demo.nu o> file.txt o+e>| str upcase
 ```
 

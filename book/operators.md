@@ -58,7 +58,7 @@ Presented in descending order of precedence, the article details the operations 
 - Assignment operations
 - Logical not (`not`)
 
-```
+```nu
 3 * (1 + 2)
 # => 9
 ```

@@ -22,7 +22,7 @@ Nu tiene un número pequeño, pero creciente, de variables internas que puedes e
 
 Para establecer una de estas variables, puedes usar `config set`. Por ejemplo:
 
-```
+```nu
 config set edit_mode "vi"
 ```
 
@@ -30,7 +30,7 @@ config set edit_mode "vi"
 
 Hay una manera adicional de establecer una variable, y es usar el contenido de la tubería como el valor deseado para la variable. Para esto usa la bandera `set-into`:
 
-```
+```nu
 echo "bar" | config set_into foo
 ```
 
@@ -40,7 +40,7 @@ Esto es de utilidad cuando se trabaja con las variables `env` y `path`.
 
 Ejecutando el comando `config` sin argumentos mostrará una tabla de las preferencias de configuración actuales:
 
-```
+```nu
 config
 # => ━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━
 # =>  edit_mode │ env            │ path             │ table_mode
@@ -55,7 +55,7 @@ Nota: si por el momento no has establecido variables de configuración, puede es
 
 Usando la bandera `get`, puedes conseguir el valor de una variable:
 
-```
+```nu
 config get edit_mode
 ```
 
@@ -63,7 +63,7 @@ config get edit_mode
 
 Para eliminar una variable de la configuración, usa la bandera `remove`:
 
-```
+```nu
 config remove edit_mode
 ```
 
@@ -71,7 +71,7 @@ config remove edit_mode
 
 Si deseas borrar toda la configuración y empezar de cero, puedes usar la bandera `clear`. Por supuesto, tenga precaución con esto ya que una vez ejecutado el archivo de configuración también se eliminará.
 
-```
+```nu
 config clear
 ```
 
@@ -79,7 +79,7 @@ config clear
 
 El archivo de configuración se carga desde una ubicación predeterminada. Para encontrar esta ubicación en el sistema, puedes solicitarla usando la bandera `path`:
 
-```
+```nu
 config path
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  <value>
@@ -92,7 +92,7 @@ config path
 
 Es posible que desees cargar la configuración desde una ubicación distinta a la predeterminada. Para hacerlo, usa la bandera `load`:
 
-```
+```nu
 config load myconfiguration.toml
 ```
 
@@ -102,7 +102,7 @@ Para usar Nu como shell de inicio de sesión, necesitarás configurar las variab
 
 Antes de cambiarlo, ejecuta Nu dentro de otra shell, como Bash. Luego, obtén el entorno y PATH desde esa shell con los siguientes comandos:
 
-```
+```nu
 config set path $nu.path
 config set env $nu.env
 ```
@@ -111,7 +111,7 @@ config set env $nu.env
 
 A continuación, en algunas distribuciones también deberás asegurarte de que Nu esté en la lista en `/etc/shells`:
 
-```
+```nu
 cat /etc/shells
 # => # /etc/shells: valid login shells
 # => /bin/sh
