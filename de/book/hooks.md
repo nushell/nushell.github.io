@@ -136,6 +136,7 @@ $env.config = ($env.config | upsert hooks {
     }
 })
 ```
+
 Wird der Hook getriggert, wird der `condition` Block ausgewertet.
 Wenn dieser `true` zurückgibt, wird der `code` Block ausgewertet.
 Wenn er `false`zurückgibt, passiert nichts.
@@ -236,6 +237,7 @@ $env.config = ($env.config | upsert hooks.env_change.PWD {
     ]
 })
 ```
+
 ### Filtern oder Umlenken des Befehl-Outputs
 
 Der `display_output` Hook kann verwendet werden, um die Ausgabe von Befehlen umzuleiten.
