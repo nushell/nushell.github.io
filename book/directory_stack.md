@@ -50,7 +50,6 @@ dirs
 # => ├───┼────────┼─────────────────────────────────┤
 # => │ 0 │ true   │ /home/myuser/repo/nushell       │
 # => ╰───┴────────┴─────────────────────────────────╯
-
 ```
 
 Notice that `cd` only changes the Active directory.
