@@ -81,13 +81,13 @@ module commands {
 ```
 Der Befehl `tier-name` gibt die entsprechende Liste der Namen zurück. Dies funktioniert, weil der Wert der `$context` Variablen, dem Text entspricht, der bis zu dem Zeitpunkt eingegeben wurde.
 
-```
->| my-command
-katze                 hund                 aal
->| my-command hund
-Lulu                Enzo
->my-command hund enzo
-Als hund heisse ich Enzo
+```nu
+my-command
+# => katze                 hund                 aal
+my-command hund
+# => Lulu                Enzo
+my-command hund enzo
+# => Als hund heisse ich Enzo
 ```
 
 Auf der zweiten Zeile wird, sobald die `<tab>` Taste gedrückt wurde, das Argument `"my-command hund"` dem `tier-namen` Kontext übergeben.

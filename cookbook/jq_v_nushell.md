@@ -735,8 +735,8 @@ Note that if what you are after is computing a histogram, you can benefit from t
 This section provides the implementation of the custom commands used in this cookbook. Note that they are illustrative and in no way optimised for large inputs. If you are interested in that, [plugins](/book/plugins.html) will likely be the answer as they can be written in general purpose languages such as Rust or Python.
 
 ```nu
-> use toolbox.nu *
-> help commands | where command_type == "custom"
+use toolbox.nu *
+help commands | where command_type == "custom"
 ```
 
 ```

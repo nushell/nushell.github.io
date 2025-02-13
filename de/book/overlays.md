@@ -15,8 +15,8 @@ Am Anfang sollte dort der die Standard-Überlagerung gelistet sein.
 
 Um eine neue Überlagerung zu kreieren, wird zuerst ein Modul benötigt:
 
-```
-> module spam {
+```nu
+module spam {
     export def foo [] {
         "foo"
     }
@@ -33,23 +33,23 @@ Dieses Modul wird im ganzen Kapitel verwendet, also wenn immer `overlay use spam
 
 Um die Überlagerung zu generieren, wird [`overlay use`](/commands/docs/overlay_use.md) aufgerufen:
 
-```
-> overlay use spam
+```nu
+overlay use spam
 
-> foo
 foo
+# => foo
 
-> bar
 bar
+# => bar
 
-> $env.BAZ
-baz
+$env.BAZ
+# => baz
 
-> overlay list
-───┬──────
- 0 │ zero
- 1 │ spam
-───┴──────
+overlay list
+# => ───┬──────
+# =>  0 │ zero
+# =>  1 │ spam
+# => ───┴──────
 ```
 
 Dies hat die Definition des Moduls in den aktuellen Gültigkeitsbereich gebracht und den [`export-env`](/commands/docs/export-env.md) Block ausgewertet.
