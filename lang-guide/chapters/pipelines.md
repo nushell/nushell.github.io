@@ -17,7 +17,7 @@ You can handle stderr in multiple ways:
 
 For the next examples, let's assume this file:
 
-```nushell
+```nu
 # demo.nu
 print "foo"
 print -e "barbar"
@@ -160,7 +160,7 @@ It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes *stdout and stderr* t
 ### Examples for custom command
 Given the following custom commands
 
-```nushell
+```nu
 def custom-cmd [] {
     ^cmd1 | ^cmd2
     ^cmd3 | ^cmd4

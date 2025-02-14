@@ -232,7 +232,7 @@ Returns the result of following a numeric cell path (e.g. `$custom_value.0`) on 
 
 Example:
 
-```nushell
+```nu
 $version.0
 ```
 
@@ -273,7 +273,7 @@ Returns the result of following a string cell path (e.g. `$custom_value.field`) 
 
 Example:
 
-```nushell
+```nu
 $version.field
 ```
 
@@ -357,7 +357,7 @@ Returns the result of evaluating an [`Operator`](#operator) on this custom value
 
 Example:
 
-```nushell
+```nu
 $version + 7
 ```
 
@@ -1360,7 +1360,7 @@ A boolean.
 
 Example:
 
-```nushell
+```nu
 true
 ```
 
@@ -1387,7 +1387,7 @@ A 64-bit signed integer.
 
 Example:
 
-```nushell
+```nu
 -2
 ```
 
@@ -1414,7 +1414,7 @@ A 64-bit (double precision) floating point number.
 
 Example:
 
-```nushell
+```nu
 36.4
 ```
 
@@ -1441,7 +1441,7 @@ A quantity of bytes, internally a 64-bit signed integer representing the number 
 
 Example:
 
-```nushell
+```nu
 32.4MiB
 ```
 
@@ -1468,7 +1468,7 @@ A duration of time, internally a 64-bit signed integer representing the number o
 
 Example:
 
-```nushell
+```nu
 8375604528ns
 ```
 
@@ -1495,7 +1495,7 @@ A date/time value, including the time zone, represented in [RFC 3339](https://ww
 
 Example:
 
-```nushell
+```nu
 1996-12-19T16:39:57-08:00
 ```
 
@@ -1532,7 +1532,7 @@ A range of values.
 
 Examples:
 
-```nushell
+```nu
 0..
 ```
 
@@ -1554,7 +1554,7 @@ Examples:
 }
 ```
 
-```nushell
+```nu
 7..10
 ```
 
@@ -1576,7 +1576,7 @@ Examples:
 }
 ```
 
-```nushell
+```nu
 7..<10
 ```
 
@@ -1598,7 +1598,7 @@ Examples:
 }
 ```
 
-```nushell
+```nu
 0..64..128
 ```
 
@@ -1632,7 +1632,7 @@ Identical to [`IntRange`](#intrange) but for floats instead.
 
 Example:
 
-```nushell
+```nu
 7.5..10.5
 ```
 
@@ -1665,7 +1665,7 @@ A UTF-8 string.
 
 Example:
 
-```nushell
+```nu
 "Hello, nu!"
 ```
 
@@ -1695,7 +1695,7 @@ If `no_expand` is true, the expansion of wildcards is disabled and this just act
 
 Example:
 
-```nushell
+```nu
 "src/**/*.rs" | into glob
 ```
 
@@ -1723,7 +1723,7 @@ An associative key-value map. If records are contained in a list, this renders a
 
 Example:
 
-```nushell
+```nu
 {foo: 5, bar: "hello nushell"}
 ```
 
@@ -1769,7 +1769,7 @@ A list of values of any type.
 
 Example:
 
-```nushell
+```nu
 [1, 2, foo, bar]
 ```
 
@@ -1865,7 +1865,7 @@ The plugin **should not** try to inspect the contents of the closure. It is reco
 
 Example:
 
-```nushell
+```nu
 let foo = "bar"
 { || $foo }
 ```
@@ -1908,7 +1908,7 @@ The absence of a value, represented by `null` within Nushell.
 
 Example:
 
-```nushell
+```nu
 null
 ```
 
@@ -1934,7 +1934,7 @@ An error contained within a value. Trying to operate on the value will most like
 
 Example:
 
-```nushell
+```nu
 error make {
   msg: "foo"
   label: {
@@ -1983,7 +1983,7 @@ Note that the encoding of byte arrays in [JSON](#json) and [MessagePack](#messag
 
 Example:
 
-```nushell
+```nu
 0x[aa bb cc dd]
 ```
 
@@ -2026,7 +2026,7 @@ Optional path members will not cause errors if they can't be accessed - the path
 
 Example:
 
-```nushell
+```nu
 foo.0?.bar
 # [foo {value: 0, optional: true} bar] | into cell-path
 ```
