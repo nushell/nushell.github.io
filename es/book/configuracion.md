@@ -81,11 +81,7 @@ El archivo de configuración se carga desde una ubicación predeterminada. Para 
 
 ```nu
 config path
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- <value>
-───────────────────────────────────────
- /home/nusheller/.config/nu/config.toml
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# => /home/nusheller/.config/nu/config.toml
 ```
 
 ### Cargando la configuración desde un archivo
