@@ -425,7 +425,7 @@ The Nushell prompt is configurable through these environment variables and confi
 Example: For a simple prompt one could do this. Note that `PROMPT_COMMAND` requires a `block` whereas the others require a `string`.
 
 ```nu
-$env.PROMPT_COMMAND = { build-string (date now | format date '%m/%d/%Y %I:%M:%S%.3f') ': ' (pwd | path basename) }
+$env.PROMPT_COMMAND = { $"(date now | format date '%m/%d/%Y %I:%M:%S%.3f'): (pwd | path basename)" }
 ```
 
 If you don't like the default `PROMPT_INDICATOR` you could change it like this.
