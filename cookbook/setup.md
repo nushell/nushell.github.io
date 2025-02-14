@@ -40,7 +40,7 @@ $env
 
 Let's practise that and set `$EDITOR` in our `env.nu` file using `vim` (or an editor of your choice)
 
-```
+```nu
 vim $nu.env-path
 ```
 

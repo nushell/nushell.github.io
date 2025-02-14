@@ -64,29 +64,29 @@ Im folgenden Abschnitt wird der `>` prompt mit dem Namen des zuletzt aktivierten
 
 Wenn die Überlagerung nicht mehr benötigt wird, entfernt sie der Befehl [`overlay hide`](/commands/docs/overlay_hide.md):
 
-```
+```nu
 (spam)> overlay hide spam
 
 (zero)> foo
-Error: Can't run executable...
+# => Error: Can't run executable...
 
 (zero)> overlay list
-───┬──────
- 0 │ zero
-───┴──────
+# => ───┬──────
+# =>  0 │ zero
+# => ───┴──────
 ```
 
 Überlagerungen haben ebenfalls einen Gültigkeitsbereich.
 Jede hinzugefügte Überlagerung wird entfernt, wenn der Gütligkeitsbereich endet:
 
-```
+```nu
 (zero)> do { overlay use spam; foo }  # Überlagerung ist aktiv innerhalb des Blocks
-foo
+# => foo
 
 (zero)> overlay list
-───┬──────
- 0 │ zero
-───┴──────
+# => ───┬──────
+# =>  0 │ zero
+# => ───┴──────
 ```
 
 Wird der Befehl [`overlay hide`](/commands/docs/overlay_hide.md) ohne Argument aufgerufen, so wird die zuletzt aktivierte Überlagerung entfernt.
@@ -108,7 +108,7 @@ Wird diese entfernt, ist auch der Befehl nicht mehr aufrufbar:
 (spam)> overlay hide spam
 
 (zero)> eggs
-Error: Can't run executable...
+# => Error: Can't run executable...
 ```
 
 Er ist jedoch nicht verloren!
@@ -117,7 +117,7 @@ Er ist jedoch nicht verloren!
 (zero)> overlay use spam
 
 (spam)> eggs
-eggs
+# => eggs
 ```
 
 Überlagerungen speichern die Informationen, die ihnen übergeben werden, auch wenn die Überlagerung entfernt wird.
@@ -165,7 +165,7 @@ Dafür ist das `--prefix` Argument da:
 (zero)> overlay use --prefix spam
 
 (spam)> spam foo
-foo
+# => foo
 ```
 
 Dies gilt jedoch nicht für Umgebungsvariablen.
@@ -180,7 +180,7 @@ Der Name einer Überlagerung kann mit `as` geändert werden:
 (zero)> overlay use spam as eggs
 
 (eggs)> foo
-foo
+# => foo
 
 (eggs)> overlay hide eggs
 
@@ -202,7 +202,7 @@ Manchmal ist es nicht gewünscht, dass Definitionen, die in einer Überlagerunge
 (spam)> overlay hide --keep-custom spam
 
 (zero)> eggs
-eggs
+# => eggs
 ```
 
 Das `--keep-custom` Argument macht genau das.
@@ -221,10 +221,10 @@ Dafür wird das `--keep-env` Argument verwendet:
 (spam)> overlay hide spam --keep-env [ FOO ]
 
 (zero)> foo
-Error: Can't run executable...
+# => Error: Can't run executable...
 
 (zero)> $env.FOO
-foo
+# => foo
 ```
 
 ## Überlagerungen ordnen
@@ -233,24 +233,24 @@ foo
 Wenn mehrere Überlagerungen die gleiche Definition enthalten, z.B. `foo`, dann wird die der zuletzt aktivierten verwendet.
 Um eine Überlagerung im Stapel nach oben zu bringen, wird einfach der Befehl [`overlay use`](/commands/docs/overlay_use.md) nochmals aufgerufen:
 
-```
+```nu
 (zero)> def foo [] { "foo-in-zero" }
 
 (zero)> overlay use spam
 
 (spam)> foo
-foo
+# => foo
 
 (spam)> overlay use zero
 
 (zero)> foo
-foo-in-zero
+# => foo-in-zero
 
 (zero)> overlay list
-───┬──────
- 0 │ spam
- 1 │ zero
-───┴──────
+# => ───┬──────
+# =>  0 │ spam
+# =>  1 │ zero
+# => ───┴──────
 ```
 
 Nun hat die `zero` Überlagerung wieder Vorrang.
