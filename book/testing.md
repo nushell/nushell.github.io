@@ -106,16 +106,18 @@ Error:
    ╰────
 ```
 
-## Running the Tests
+## Running Tests
 
 Now that we are able to write tests by calling commands from `std assert`, it would be great to be able to run them and see our tests fail when there is an issue and pass when everything is correct :)
 
+There are a few options for this:
+- [Nupm]
+- [Nutest]
+- Standalone
 
-### Nupm Package
+### Nupm
 
-In this first case, we will assume that the code you are trying to test is part of a [Nupm] package.
-
-In that case, it is as easy as following the following steps
+If your code is part of a [Nupm] package, you can use the bundled test runner to run your tests. In that case, it is as easy as following the following steps:
 - create a `tests/` directory next to the `nupm.nuon` package file of your package
 - make the `tests/` directory a valid module by adding a `mod.nu` file into it
 - write commands inside `tests/`
@@ -126,10 +128,31 @@ The convention is that any command fully exported from the `tests` module will b
 - `def just-an-internal-cmd` in `tests/mod.nu` will NOT run
 - `export def another-test` in `tests/spam.nu` will run if and only if there is something like `export use spam.nu *` in `tests/mod.nu`
 
+### Nutest
 
-### Standalone Tests
+[Nutest] is a dedicated test framework for Nushell. A test is defined similar to the Rust approach of using comment-based annotations as follows:
 
-If your Nushell script or module is not part of a [Nupm] package, the simplest way is to write tests in standalone scripts and then call them, either from a `Makefile` or in a CI:
+```nushell
+use std assert
+use hello
+
+# [test]
+def "hello should greet the name supplied" [] {
+    assert equal (hello "world") "Hello, world!" 
+}
+```
+
+These tests will be discovered and run if the name of the test file as one of the supported patterns, such as `test_hello.nu` or `hello-test.nu`. Since Nutest is intended to help test both Nushell code and anything else given Nushell's convenient data-centric approach, there is flexibility in how the files are named and where they are placed.
+
+Nutest is an appropriate choice if you want to test commands that are not exported, query test results as data, or produce reports that can be integrated into common CI/CD tooling.
+
+### Standalone
+
+If your testing requirements are simple enough not to need a framework, or you prefer not to depend on external modules, the following is a couple of illustrative examples how to achieve this.
+
+#### Direct Invocation
+
+The simplest method is to write tests in standalone scripts and then `use` or `source` the code under test.
 
 Let's say we have a simple `math.nu` module which contains a simple Fibonacci command:
 ```nushell
@@ -144,7 +167,7 @@ export def fib [n: int] [ nothing -> int ] {
     (fib ($n - 1)) + (fib ($n - 2))
 }
 ```
-then a test script called `tests.nu` could look like
+then a test script called `tests.nu` might look like
 ```nushell
 use math.nu fib
 use std assert
@@ -165,11 +188,9 @@ for t in [
 ```
 and be invoked as `nu tests.nu`
 
-### Basic Test Framework
+#### Test Discovery
 
-It is also possible to define tests in Nushell as functions with descriptive names and discover
-them dynamically without requiring a [Nupm] package. The following uses `scope commands` and a
-second instance of Nushell to run the generated list of tests.
+The direct invocation method can be expanded to call multiple test commands from a `main` declaration, but as the number of tests methods increases, it is convenient to discover and run them dynamically. The following makes use of `scope commands` to discover the list of tests within the test file, which can be run using `nu tests.nu`.
 
 ```nushell
 use std assert
@@ -215,7 +236,6 @@ def "test show-ignored-test" [] {
 }
 ```
 
-This is a simple example but could be extended to include many of the things you might expect from
-a testing framework, including setup and tear down functions and test discovery across files.
 
 [Nupm]: https://github.com/nushell/nupm
+[Nutest]: https://github.com/vyadh/nutest
