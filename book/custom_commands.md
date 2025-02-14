@@ -254,7 +254,7 @@ In Nushell, a command name can be a string of characters. Here are some examples
 Strings which might be confused with other parser patterns should be avoided. For instance, the following command names might not be callable:
 
 - `1`, `"1"`, or `"1.5"`: Nushell will not allow numbers to be used as command names
-- `4MiB` or `"4MiB"`: Nushell will not allow filesizes to be use₫ as command names
+- `4MiB` or `"4MiB"`: Nushell will not allow filesizes to be used as command names
 - `"number#four"` or `"number^four"`: Carets and hash symbols are not allowed in command names
 - `-a`, `"{foo}"`, `"(bar)"`: Will not be callable, as Nushell will interpret them as flags, closures, or expressions.
 
