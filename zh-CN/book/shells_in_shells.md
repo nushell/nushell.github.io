@@ -21,26 +21,24 @@
 进入(`enter`)类似于改变目录（正如我们在`cd`命令中看到的那样）。这允许你跳入一个目录，在其中工作。我们现在是在两个目录中，而不是改变目录。为了更清楚地看到这一点，我们可以使用`shells`命令来列出我们当前的活动目录：
 
 ```nu
-/home/sophia/Source/book(main)> shells
-───┬────────┬────────────┬─────────────────────────
- # │ active │    name    │          path
-───┼────────┼────────────┼─────────────────────────
- 0 │ false  │ filesystem │ /home/st/Source/nushell
- 1 │ true   │ filesystem │ /home/st/Source/book
- 2 │ false  │ filesystem │ /home/st/Source/music
-───┴────────┴────────────┴─────────────────────────
-
+shells
+# => ───┬────────┬────────────┬─────────────────────────
+# =>  # │ active │    name    │          path
+# => ───┼────────┼────────────┼─────────────────────────
+# =>  0 │ false  │ filesystem │ /home/st/Source/nushell
+# =>  1 │ true   │ filesystem │ /home/st/Source/book
+# =>  2 │ false  │ filesystem │ /home/st/Source/music
+# => ───┴────────┴────────────┴─────────────────────────
 ```
 
 `shells`命令显示目前有三个 Shells 处于活动状态：我们最初的 "nushell" 源目录和现在的新 "book" 目录。
 
 我们可以用 `n`, `p` 和 `g` 的快捷命令在这些 Shell 之间跳转，这是 "next"、"previous" 和 "go" 的缩写：
 
-```
-/home/jonathant/Source/book(main)> n
-/home/jonathant/Source/nushell(main)> p
-/home/jonathant/Source/book(main)> g 2
-/home/jonathant/Source/music(main)>
+```nu
+n
+p
+g 2
 ```
 
 我们可以看到目录在变化，但我们总是能够回到我们正在工作的前一个目录。这使我们能够在同一个会话的多个目录中工作。
