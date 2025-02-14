@@ -22,7 +22,7 @@ can get started with just a few simple steps:
    # or
    $env.config.buffer_editor = "vi"
    # with args
-   #env.config.buffer_editor= ["emacsclient", "-s", "light", "-t"]
+   $env.config.buffer_editor = ["emacsclient", "-s", "light", "-t"]
    # etc.
    ```
 
