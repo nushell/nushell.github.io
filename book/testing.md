@@ -6,7 +6,7 @@ Nushell provides a set of "assertion" commands in the standard library.
 One could use built-in equality / order tests such as `==` or `<=` or more complex commands and throw errors manually when an expected condition fails, but using what the standard library has to offer is arguably easier!
 
 In the following, it will be assumed that the `std assert` module has been imported inside the current scope
-```nushell
+```nu
 use std assert
 ```
 
@@ -132,7 +132,7 @@ The convention is that any command fully exported from the `tests` module will b
 If your Nushell script or module is not part of a [Nupm] package, the simplest way is to write tests in standalone scripts and then call them, either from a `Makefile` or in a CI:
 
 Let's say we have a simple `math.nu` module which contains a simple Fibonacci command:
-```nushell
+```nu
 # `fib n` is the n-th Fibonacci number
 export def fib [n: int] [ nothing -> int ] {
     if $n == 0 {
@@ -145,7 +145,7 @@ export def fib [n: int] [ nothing -> int ] {
 }
 ```
 then a test script called `tests.nu` could look like
-```nushell
+```nu
 use math.nu fib
 use std assert
 
@@ -171,7 +171,7 @@ It is also possible to define tests in Nushell as functions with descriptive nam
 them dynamically without requiring a [Nupm] package. The following uses `scope commands` and a
 second instance of Nushell to run the generated list of tests.
 
-```nushell
+```nu
 use std assert
 
 source fib.nu

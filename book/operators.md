@@ -142,7 +142,7 @@ Suppose you have multiple lists you want to concatenate together, but you also w
 some individual values. This can be done with `append` and `prepend`, but the spread
 operator can let you do it more easily.
 
-```nushell
+```nu
 let dogs = [Spot, Teddy, Tommy]
 let cats = ["Mr. Humphrey Montgomery", Kitten]
 [
@@ -166,7 +166,7 @@ let cats = ["Mr. Humphrey Montgomery", Kitten]
 ```
 
 The below code is an equivalent version using `append`:
-```nushell
+```nu
 $dogs |
   append Polly |
   append ($cats | each { |elt| $"($elt) \(cat\)" }) |
@@ -186,7 +186,7 @@ only be used before variables (`...$foo`), subexpressions (`...(foo)`), and list
 The `...` also won't be recognized as the spread operator if there's any whitespace between it and
 the next expression:
 
-```nushell
+```nu
 [ ... [] ]
 # => ╭───┬────────────────╮
 # => │ 0 │ ...            │
@@ -201,14 +201,14 @@ This is mainly so that `...` won't be confused for the spread operator in comman
 Let's say you have a record with some configuration information and you want to add more fields to
 this record:
 
-```nushell
+```nu
 let config = { path: /tmp, limit: 5 }
 ```
 
 You can make a new record with all the fields of `$config` and some new additions using the spread
 operator. You can use the spread multiple records inside a single record literal.
 
-```nushell
+```nu
 {
   ...$config,
   users: [alice bob],
@@ -244,7 +244,7 @@ external command.
 
 Here is an example custom command that has a rest parameter:
 
-```nushell
+```nu
 def foo [ --flag req opt? ...args ] { [$flag, $req, $opt, $args] | to nuon }
 ```
 
@@ -255,7 +255,7 @@ If you have a list of arguments to pass to `args`, you can spread it the same wa
 [inside a list literal](#in-list-literals). The same rules apply: the spread operator is only
 recognized before variables, subexpressions, and list literals, and no whitespace is allowed in between.
 
-```nushell
+```nu
 foo "bar" "baz" ...[1 2 3] # With ..., the numbers are treated as separate arguments
 # => [false, bar, baz, [1, 2, 3]]
 foo "bar" "baz" [1 2 3] # Without ..., [1 2 3] is treated as a single argument
@@ -265,7 +265,7 @@ foo "bar" "baz" [1 2 3] # Without ..., [1 2 3] is treated as a single argument
 A more useful way to use the spread operator is if you have another command with a rest parameter
 and you want it to forward its arguments to `foo`:
 
-```nushell
+```nu
 def bar [ ...args ] { foo --flag "bar" "baz" ...$args }
 bar 1 2 3
 # => [true, bar, baz, [1, 2, 3]]
@@ -273,14 +273,14 @@ bar 1 2 3
 
 You can spread multiple lists in a single call, and also intersperse individual arguments:
 
-```nushell
+```nu
 foo "bar" "baz" 1 ...[2 3] 4 5 ...(6..9 | take 2) last
 # => [false, bar, baz, [1, 2, 3, 4, 5, 6, 7, last]]
 ```
 
 Flags/named arguments can go after a spread argument, just like they can go after regular rest arguments:
 
-```nushell
+```nu
 foo "bar" "baz" 1 ...[2 3] --flag 4
 # => [true, bar, baz, [1, 2, 3, 4]]
 ```
@@ -288,7 +288,7 @@ foo "bar" "baz" 1 ...[2 3] --flag 4
 If a spread argument comes before an optional positional parameter, that optional parameter is treated
 as being omitted:
 
-```nushell
+```nu
 foo "bar" ...[1 2] "not opt" # The null means no argument was given for opt
 # => [false, bar, null, [1, 2, "not opt"]]
 ```

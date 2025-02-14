@@ -136,7 +136,7 @@ The Standard Library also includes a helper command. The default `path add` beha
 a directory so that it has higher precedence than the rest of the path. For example, the following can be
 added to your startup config:
 
-```nushell
+```nu
 use std/util "path add"
 path add "~/.local/bin"
 path add ($env.CARGO_HOME | path join "bin")
