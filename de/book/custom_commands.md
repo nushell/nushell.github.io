@@ -14,19 +14,15 @@ def greet [name] {
 
 In dieser Definition, wird ein Befehl `greet` beschrieben, der einen Parameter `name` konsumiert. Nach diesem Parameter erfolgt die Beschreibung was passiert, wenn der Befehl ausgeführt wird. Wenn der Befehl aufgerufen wird, wird der Wert, der als Parameter `name` übergeben wurde, in die Variable `$name` geschrieben, die im Codeblock verfügbar ist.
 
-Um den obigen Befehl auszuführen wird er wie ein eingebauter Befehl aufgerufen:
-
-```
-greet "world"
-```
-
+Um den obigen Befehl auszuführen wird er wie ein eingebauter Befehl aufgerufen.
 Wenn das getan wird, wird eine Ausgabe erzeugt, die wie die der eingebauten Befehle aussieht:
 
-```
-───┬───────
- 0 │ hello
- 1 │ world
-───┴───────
+```nu
+greet "world"
+# => ───┬───────
+# =>  0 │ hello
+# =>  1 │ world
+# => ───┴───────
 ```
 
 ## Namen von Befehlen
