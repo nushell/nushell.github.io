@@ -70,7 +70,7 @@ do --env {
 keychain --eval --quiet <your ssh keys, eg. id_ed25519>
     | lines
     | where not ($it | is-empty)
-    | parse "{k}={v}; export {k2};"
+    | parse "set -e {k}; set -x -U {k} {v};"
     | select k v
     | transpose --header-row
     | into record
