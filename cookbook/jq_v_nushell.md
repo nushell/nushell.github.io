@@ -637,7 +637,7 @@ help commands | where command_type == "custom"
 
 ```nu
 # toolbox.nu
-use std assert
+use std/assert
 
 # A command for cherry-picking values from a record key recursively
 export def cherry-pick [

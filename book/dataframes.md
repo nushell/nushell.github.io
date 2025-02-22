@@ -94,7 +94,7 @@ $df_0 | polars schema
 To output more statistically correct timings, let's load and use the `std bench` command.
 
 ```nu
-use std bench
+use std/bench
 ```
 
 We are going to group the data by year, and sum the column `geo_count`.
