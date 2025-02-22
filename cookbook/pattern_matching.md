@@ -94,7 +94,7 @@ Also note that we have to capture the `$in` variable on the first statement of t
 With this implementation we can check that the command works as expected:
 
 ```nu
-use std assert
+use std/assert
 assert equal ("foo" | str append "/") "foo/"
 assert equal (["foo", "bar", "baz"] | str append "/") ["foo/", "bar/", "baz/"]
 ```
