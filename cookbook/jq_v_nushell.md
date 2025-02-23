@@ -728,7 +728,6 @@ export def "flatten record-paths" [
 
 def flatten-record-paths [separator: string, ctx?: string] {
     let input = $in
-
     match ($input | describe-primitive) {
         "record" => {
             $input
@@ -749,7 +748,12 @@ def flatten-record-paths [separator: string, ctx?: string] {
                   {path: ([$ctx $e.index] | str join $separator), value: $e.item}
               }
         },
-        "table" | "block" | "closure" => { error make {msg: "Unexpected type"} },
+        "table" => {
+            $input | enumerate | each { |r| $r.item | flatten-record-paths $separator ([$ctx $r.index] | str join $separator) }
+        }
+        "block" | "closure" => { 
+            error make {msg: "Unexpected type"} 
+        },
         _ => {
             {path: $ctx, value: $input}
         },
