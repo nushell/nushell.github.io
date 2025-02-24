@@ -8,13 +8,17 @@ export const sidebarRU: SidebarConfig = {
       link: '/ru/book/README.md',
       collapsible: false,
     },
+    {
+      text: 'Установка',
+      link: '/ru/book/installation.md',
+      collapsible: false,
+      children: ['ru/book/default_shell.md'],
+    },
     // {
     //   text: 'Начало работы',
     //   link: '/ru/book/getting_started.md',
     //   collapsible: false,
     //   children: [
-    //     '/ru/book/installation.md',
-    //     '/ru/book/default_shell.md',
     //     '/ru/book/quick_tour.md',
     //     '/ru/book/moving_around.md',
     //     '/ru/book/thinking_in_nu.md',
