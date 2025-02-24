@@ -17,7 +17,7 @@ You can handle stderr in multiple ways:
 
 For the next examples, let's assume this file:
 
-```nushell
+```nu
 # demo.nu
 print "foo"
 print -e "barbar"
@@ -49,34 +49,34 @@ Redirection to a file:
 
 Note that `e>|` and `o+e>|` only work with external command, if you pipe internal commands' output through `e>|` and `o+e>|`, you will get an error:
 
-```
-❯ ls e>| str length
-Error:   × `e>|` only works with external streams
-   ╭─[entry #1:1:1]
- 1 │ ls e>| str length
-   ·    ─┬─
-   ·     ╰── `e>|` only works on external streams
-   ╰────
+```nu
+ls e>| str length
+# => Error:   × `e>|` only works with external streams
+# =>    ╭─[entry #1:1:1]
+# =>  1 │ ls e>| str length
+# =>    ·    ─┬─
+# =>    ·     ╰── `e>|` only works on external streams
+# =>    ╰────
 
-❯ ls e+o>| str length
-Error:   × `o+e>|` only works with external streams
-   ╭─[entry #2:1:1]
- 1 │ ls e+o>| str length
-   ·    ──┬──
-   ·      ╰── `o+e>|` only works on external streams
-   ╰────
+ls e+o>| str length
+# => Error:   × `o+e>|` only works with external streams
+# =>    ╭─[entry #2:1:1]
+# =>  1 │ ls e+o>| str length
+# =>    ·    ──┬──
+# =>    ·      ╰── `o+e>|` only works on external streams
+# =>    ╰────
 ```
 
 You can also redirect `stdout` to a file, and pipe `stderr` to next command:
 
-```
+```nu
 nu demo.nu o> file.txt e>| str upcase
 nu demo.nu e> file.txt | str upcase
 ```
 
 But you can't use redirection along with `o+e>|`, because it's ambiguous:
 
-```
+```nu
 nu demo.nu o> file.txt o+e>| str upcase
 ```
 
@@ -160,7 +160,7 @@ It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes *stdout and stderr* t
 ### Examples for custom command
 Given the following custom commands
 
-```nushell
+```nu
 def custom-cmd [] {
     ^cmd1 | ^cmd2
     ^cmd3 | ^cmd4

@@ -6,8 +6,9 @@ Nushell provides a set of "assertion" commands in the standard library.
 One could use built-in equality / order tests such as `==` or `<=` or more complex commands and throw errors manually when an expected condition fails, but using what the standard library has to offer is arguably easier!
 
 In the following, it will be assumed that the `std assert` module has been imported inside the current scope
-```nushell
-use std assert
+
+```nu
+use std/assert
 ```
 
 The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error.
@@ -15,6 +16,7 @@ The foundation for every assertion is the `std assert` command. If the condition
 ```nu
 assert (1 == 2)
 ```
+
 ```
 Error:
   × Assertion failed.
@@ -31,6 +33,7 @@ Optionally, a message can be set to show the intention of the assert command, wh
 let a = 0
 assert ($a == 19) $"The lockout code is wrong, received: ($a)"
 ```
+
 ```
 Error:
   × The lockout code is wrong, received: 13
@@ -51,6 +54,7 @@ let a = "foo"
 let b = "bar"
 assert ($b | str contains $a)
 ```
+
 ```
 Error:   × Assertion failed.
    ╭─[entry #5:3:8]
@@ -68,6 +72,7 @@ let a = "a needle"
 let b = "haystack"
 assert str contains $b $a
 ```
+
 ```
 Error:   × Assertion failed.
    ╭─[entry #7:3:21]
@@ -96,6 +101,7 @@ Then you'll have your detailed custom error message:
 let $a = 13
 assert even $a
 ```
+
 ```
 Error:
   × Assertion failed.
@@ -110,29 +116,30 @@ Error:
 
 Now that we are able to write tests by calling commands from `std assert`, it would be great to be able to run them and see our tests fail when there is an issue and pass when everything is correct :)
 
-
 ### Nupm Package
 
 In this first case, we will assume that the code you are trying to test is part of a [Nupm] package.
 
 In that case, it is as easy as following the following steps
+
 - create a `tests/` directory next to the `nupm.nuon` package file of your package
 - make the `tests/` directory a valid module by adding a `mod.nu` file into it
 - write commands inside `tests/`
 - call `nupm test`
 
 The convention is that any command fully exported from the `tests` module will be run as a test, e.g.
+
 - `export def some-test` in `tests/mod.nu` will run
 - `def just-an-internal-cmd` in `tests/mod.nu` will NOT run
 - `export def another-test` in `tests/spam.nu` will run if and only if there is something like `export use spam.nu *` in `tests/mod.nu`
-
 
 ### Standalone Tests
 
 If your Nushell script or module is not part of a [Nupm] package, the simplest way is to write tests in standalone scripts and then call them, either from a `Makefile` or in a CI:
 
 Let's say we have a simple `math.nu` module which contains a simple Fibonacci command:
-```nushell
+
+```nu
 # `fib n` is the n-th Fibonacci number
 export def fib [n: int] [ nothing -> int ] {
     if $n == 0 {
@@ -144,10 +151,12 @@ export def fib [n: int] [ nothing -> int ] {
     (fib ($n - 1)) + (fib ($n - 2))
 }
 ```
+
 then a test script called `tests.nu` could look like
-```nushell
+
+```nu
 use math.nu fib
-use std assert
+use std/assert
 
 for t in [
     [input, expected];
@@ -163,6 +172,7 @@ for t in [
     assert equal (fib $t.input) $t.expected
 }
 ```
+
 and be invoked as `nu tests.nu`
 
 ### Basic Test Framework
@@ -171,8 +181,8 @@ It is also possible to define tests in Nushell as functions with descriptive nam
 them dynamically without requiring a [Nupm] package. The following uses `scope commands` and a
 second instance of Nushell to run the generated list of tests.
 
-```nushell
-use std assert
+```nu
+use std/assert
 
 source fib.nu
 

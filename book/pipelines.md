@@ -64,13 +64,13 @@ Compare the following two command-lines that create a directory with tomorrow's 
 
 Using subexpressions:
 
-```nushell
+```nu
 mkdir $'((date now) + 1day | format date '%F') Report'
 ```
 
 or using pipelines:
 
-```nushell
+```nu
 date now                    # 1: today
 | $in + 1day                # 2: tomorrow
 | format date '%F'          # 3: Format as YYYY-MM-DD
@@ -95,7 +95,7 @@ Let's examine the contents of `$in` on each line of the above example:
 
 Certain [filter commands](/commands/categories/filters.html) may modify the pipeline input to their closure in order to provide more convenient access to the expected context. For example:
 
-```nushell
+```nu
 1..10 | each {$in * 2}
 ```
 
@@ -103,13 +103,13 @@ Rather than referring to the entire range of 10 digits, the `each` filter modifi
 
 In most filters, the pipeline input and its resulting `$in` will be the same as the closure parameter. For the `each` filter, the following example is equivalent to the one above:
 
-```nushell
+```nu
 1..10 | each {|value| $value * 2}
 ```
 
 However, some filters will assign an even more convenient value to their closures' input. The `update` filter is one example. The pipeline input to the `update` command's closure (as well as `$in`) refers to the _column_ being updated, while the closure parameter refers to the entire record. As a result, the following two examples are also equivalent:
 
-```nushell
+```nu
 ls | update name {|file| $file.name | str upcase}
 ls | update name {str upcase}
 ```
@@ -257,7 +257,7 @@ While `$in` can be reused as demonstrated above, assigning its value to another 
 
 Example:
 
-```nushell
+```nu
 def "date info" [] {
   let day = $in
   print ($day | format date '%v')
@@ -400,7 +400,7 @@ Are one and the same.
 ::: tip Note
 The phrase _"are one and the same"_ above only applies to the graphical output in the shell, it does not mean the two data structures are the same:
 
-```nushell
+```nu
 (ls) == (ls | table)
 # => false
 ```

@@ -21,7 +21,7 @@ Nerdfonts 并不是必需的，但它们能使呈现效果更好。
 3. 在`~/.config/nushell/config.nu`（或由`$nu.config-path`输出的路径）中设置`PROMPT_COMMAND`，将`M365Princess.mp.json`改为你喜欢的任何 [主题](https://ohmyposh.dev/docs/themes)。
 
 ```nu
-> $env.PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
+$env.PROMPT_COMMAND = { oh-my-posh --config ~/.poshthemes/M365Princess.omp.json }
 ```
 
 MacOS 用户配置步骤：

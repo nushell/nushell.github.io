@@ -1,4 +1,4 @@
-use std log
+use std/log
 
 def main [] {
     log debug "Debug message"

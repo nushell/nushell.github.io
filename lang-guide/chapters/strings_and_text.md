@@ -118,8 +118,8 @@ Sometimes you need to nest quotes. I think this could use some work because some
 The key to always remember is that double quotes recognize and interpret escapes so if you have any `\` characters in your string, they will be interpreted as escapes. The following is an example of a question we get frequently on Discord.
 
 ```nu
-Why doesn't this work?
-> cd "C:\Program Files\somedir"
+# Why doesn't this work?
+cd "C:\Program Files\somedir"
 ```
 
 It doesn't work because it sees `\P` and `\s` as escapes that are not recognized.

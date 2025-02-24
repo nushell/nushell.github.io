@@ -17,20 +17,15 @@ Like many other languages, nu offers a [`match`](https://www.nushell.sh/commands
     _ => "innovative"
   }
 }
-```
-
-Output:
-
-```
-───┬────────────
- 0 │ classy
- 1 │ funamental
- 2 │ vibrant
- 3 │ funamental
- 4 │ vibrant
- 5 │ funamental
- 6 │ innovative
-───┴────────────
+# => ───┬────────────
+# =>  0 │ classy
+# =>  1 │ funamental
+# =>  2 │ vibrant
+# =>  3 │ funamental
+# =>  4 │ vibrant
+# =>  5 │ funamental
+# =>  6 │ innovative
+# => ───┴────────────
 ```
 
 The equivalent in `if-else` statements would be:
@@ -58,15 +53,10 @@ As you can see you can also use command expressions in match statements (in this
     "yellow" | "green" => "vibrant"
   }
 }
-```
-
-Output:
-
-```
-───┬────────────
- 0 │ vibrant
- 1 │ funamental
-───┴────────────
+# => ───┬────────────
+# =>  0 │ vibrant
+# =>  1 │ funamental
+# => ───┴────────────
 ```
 
 ## Pattern matching on types
@@ -75,22 +65,12 @@ You can use the [`describe`](https://www.nushell.sh/commands/docs/describe.html)
 
 ```nu
 {one: 1 two: 2} | describe
-```
-
-Output:
-
-```
-record<one: int, two: int>
+# => record<one: int, two: int>
 ```
 
 ```nu
 [{a: 1 b: 2} {a: 2 b:3 }] | describe
-```
-
-Output:
-
-```
-table<a: int, b: int>
+# => table<a: int, b: int>
 ```
 
 Together with `match` and some clever regex use you can do quite powerful type matching. For example, let's say we wanted to implement a `str append` function that would work on both strings and lists. On strings it would work as expected, on lists of strings, it should append the same string to each element of the list. Using `match` one might do that like so:
@@ -114,7 +94,7 @@ Also note that we have to capture the `$in` variable on the first statement of t
 With this implementation we can check that the command works as expected:
 
 ```nu
-use std assert
+use std/assert
 assert equal ("foo" | str append "/") "foo/"
 assert equal (["foo", "bar", "baz"] | str append "/") ["foo/", "bar/", "baz/"]
 ```

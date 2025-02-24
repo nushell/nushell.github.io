@@ -10,7 +10,7 @@ Ein Beispiel für eine Nushell `config.nu` kann [hier](https://github.com/nushel
 
 Die zentralen Konfigurationen von Nushell sind in der globalen `$config` Variable festgehalten. Dieser Eintrag kann wie folgt erstellt werden:
 
-```
+```nu
 $env.config = {
   ...
 }
@@ -18,7 +18,7 @@ $env.config = {
 
 Es ist auch möglich `$config` zu überschreiben und zu ändern:
 
-```
+```nu
 $env.config = ($config | update <field name> <field value>)
 ```
 
@@ -44,7 +44,7 @@ Um Nushell als Login-Shell zu verwenden, muss die `$env` Variable konfiguriert w
 
 Der komplette Satz an Umgebungsvariablen kann erzeugt werden, wenn Nu in einer anderen Shell, wie beispielsweise Bash, ausgeführt wird. In diese Nu-Sitzung kann ein Befehl wie der folgende verwendet werden, um `$env` zu setzen:
 
-```
+```nu
 env | each { echo $"$env.($it.name) = '($it.raw)'" } | str join (char nl)
 ```
 
@@ -52,7 +52,7 @@ Das gibt Zeilen aus um `$env` in `env.nu` zu setzen - eine für jede Umgebungsva
 
 Als nächstes, muss auf manchen Distributionen sichergestellt werden, dass Nu in der Liste der Shells in /etc/shells ist:
 
-```
+```nu
 cat /etc/shells
 # => # /etc/shells: valid login shells
 # => /bin/sh
@@ -80,7 +80,7 @@ Manche Tools (z.B. Emacs) vertrauen darauf, dass `open` Dateien auf dem Mac öff
 Da Nushell einen eigenen `open` Befehl hat, der eine andere Semantik hat und `/usr/bin/open` verbirgt, werden diese Tools einen Fehler werfen, wenn sie verwendet werden.
 Eine Möglichkeit, dieses Problem zu umgehen, ist es, einen eigenen Befehl und einen `alias` in `config.nu` zu definieren:
 
-```
+```nu
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 ```
@@ -90,7 +90,7 @@ alias open = ^open
 Die Konfiguration der Prompt wird durch das Setzen der Umgebungsvariable `PROMPT_COMMAND` bzw. `PROMPT_COMMAND_RIGHT` durchgeführt.
 Diese akzeptieren entweder einen String oder einen Codeblock der ausgeführt wird.
 
-```
+```nu
 $env.PROMPT_COMMAND = "Hallo Nu"  # Die Hauptprompt auf einen festen String setzen
 $env.PROMPT_COMMAND_RIGHT = {pwd} # Den rechte Promptteil mit dem aktuellen Verzeichnis anzeigen
 ```

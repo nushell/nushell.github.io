@@ -1,1 +1,1 @@
-> cp item location
+cp item location

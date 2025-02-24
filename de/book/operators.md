@@ -55,7 +55,7 @@ Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von d
 - Logisches oder (`||`, `or`)
 - Zuweisungs Operationen
 
-```
+```nu
 3 * (1 + 2)
 # => 9
 ```

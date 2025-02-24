@@ -4,7 +4,7 @@
 If you're coming from `Git Bash` on Windows, then the external commands you're used to (e.g, `ln`, `grep`, `vi`, etc) will not be available in Nushell by default unless you have already explicitly made them available in the Windows Path environment variable.
 To make these commands available in Nushell as well, add the following line to your `config.nu` with either `append` or `prepend`.
 
-```
+```nu
 $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 ```
 :::

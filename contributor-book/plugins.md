@@ -267,21 +267,21 @@ If you're already running `nu` during the installation process of your plugin, e
 
 Once `nu` starts up, it will discover the plugin and add its commands to the scope.
 
-```
-> nu
-> "hello" | len
-5
-> help len
-calculates the length of its input
-
-Usage:
-  > len
-
-Flags:
-  -h, --help - Display the help message for this command
-
-Signatures:
-  <string> | len -> <int>
+```nu
+nu
+"hello" | len
+# => 5
+help len
+# => calculates the length of its input
+# => 
+# => Usage:
+# =>   > len
+# => 
+# => Flags:
+# =>   -h, --help - Display the help message for this command
+# => 
+# => Signatures:
+# =>   <string> | len -> <int>
 ```
 
 Run `plugin list` to see all plugins currently registered and available to this Nu session, including whether or not they are running, and their process ID if so.

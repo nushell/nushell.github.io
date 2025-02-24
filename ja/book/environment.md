@@ -4,7 +4,7 @@
 
 アプリケーションに送られる現在の環境変数は`$nu.env`の値を echo して確認することができます。
 
-```
+```nu
 echo $nu.env
 # => ──────────────────────────┬──────────────────────────────
 # =>  COLORTERM                │ truecolor
@@ -17,7 +17,7 @@ echo $nu.env
 
 コマンドやパイプラインを実行するときに一時的に環境変数を更新することもできます。
 
-```
+```nu
 with-env [FOO BAR] { echo $nu.env.FOO }
 # => BAR
 ```
@@ -26,7 +26,7 @@ with-env [FOO BAR] { echo $nu.env.FOO }
 
 Bash などにヒントを得た一般的な省略記法も用意されています。上の例は次のように書くことができます。
 
-```
+```nu
 # => FOO=BAR echo $nu.env.FOO
 # => BAR
 ```

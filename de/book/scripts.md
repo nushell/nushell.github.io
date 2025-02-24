@@ -3,20 +3,20 @@
 In Nushell können Skripte geschrieben und ausgeführt werden, welche in der Nushell Sprache geschrieben sind.
 Um ein Skript auszuführen, wird es dem Befehl `nu` als Argument übergeben:
 
-```
+```nu
 nu myscript.nu
 ```
 
 Dies wird das Skript bis zum Ende in einer neuen Nuinstanz ausführen.
 Das Skript kann auch in der _aktuellen_ Instanz ausgeführt werden mit dem [`source`](/commands/docs/source.md) Befehl:
 
-```
+```nu
 source myscript.nu
 ```
 
 Hier ein Beispiel einer Skript Datei:
 
-```
+```nu
 # myscript.nu
 def greet [name] {
   echo "hello" $name
@@ -29,7 +29,7 @@ Eine Skriptdatei definiert eigene Befehle genauso wie die Main Routine, welche a
 Im obigen Beispiel wird `greet` zuerst definiert vom Nushell Interpreter. Dies erlaubt den späteren Aufruf der Definition.
 Das Skript hätte auch geschrieben werden können als:
 
-```
+```nu
 greet "world"
 
 def greet [name] {
@@ -50,7 +50,7 @@ Nachdem die Definitionen ausgeführt wurden, werden von oben nach unten alle Bef
 
 Um besser zu verstehen wie Nushell die Linien im Code versteht, hier ein Beispiel:
 
-```
+```nu
 a
 b; c | d
 ```
@@ -74,7 +74,7 @@ def main [x: int] {
 }
 ```
 
-```
+```nu
 nu myscript.nu 100
 # => 110
 ```
@@ -85,12 +85,12 @@ Auf Linux und macOS kann optional ein [shebang](<https://en.wikipedia.org/wiki/S
 um dem OS mitzuteilen, wie die Datei interpretiert werden will.
 Hier zum Beispiel in einer Datei mit dem Damen `myscript`:
 
-```
+```nu
 #!/usr/bin/env nu
 echo "Hello World!"
 ```
 
-```
+```nu
 ./myscript
 # => Hello World!
 ```

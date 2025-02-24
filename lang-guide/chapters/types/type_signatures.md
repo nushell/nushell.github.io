@@ -33,7 +33,6 @@ def my-filter []: [
   nothing -> list
   range -> list
 ] { }
-
 ```
 
 For a further discussion on custom command signatures please refer to: [Custom Commands](/book/custom_commands.html)

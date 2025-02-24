@@ -24,7 +24,7 @@ Of course, this runs as expected using `nu hello.nu`. A similar program written 
 
 In _"interpreted languages"_ code usually gets handled something like this:
 
-```
+```text
 Source Code → Interpreter → Result
 ```
 

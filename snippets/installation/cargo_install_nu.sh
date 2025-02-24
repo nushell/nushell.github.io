@@ -1,1 +1,1 @@
-> cargo install nu --locked
+cargo install nu --locked

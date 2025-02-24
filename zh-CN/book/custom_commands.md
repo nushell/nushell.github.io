@@ -17,7 +17,7 @@ def greet [name] {
 要运行上述命令，我们可以像调用内置命令一样调用它：
 
 ```nu
-> greet "world"
+greet "world"
 ```
 
 当我们这样做的时候，就会得到输出，如同我们使用内置命令一样：
@@ -62,7 +62,7 @@ def "str mycommand" [] {
 现在我们可以像调用`str`的内置子命令一样调用我们的自定义命令：
 
 ```nu
-> str mycommand
+str mycommand
 ```
 
 ## 参数类型
@@ -136,16 +136,16 @@ def greet [name = "nushell"] {
 
 你可以在没有参数的情况下调用这个命令，也可以指定一个值来覆盖默认值：
 
-```
-> greet
-hello nushell
-> greet world
-hello world
+```nu
+greet
+# => hello nushell
+greet world
+# => hello world
 ```
 
 你也可以将默认值与[类型要求](#参数类型)相结合：
 
-```
+```nu
 def congratulate [age: int = 18] {
   echo "Happy birthday! Wow you are " $age " years old now!" | str join
 }
@@ -217,19 +217,19 @@ def greet [
 你可以用以下方法调用上述内容：
 
 ```nu
-> greet world --age 10
+greet world --age 10
 ```
 
 或者：
 
 ```nu
-> greet --age 10 world
+greet --age 10 world
 ```
 
 或者甚至完全不使用标志：
 
-```
-> greet world
+```nu
+greet world
 ```
 
 标志也可以指定一个缩写版本，这允许你传递一个更简单的标志，如同传递一个更容易阅读的全写标志那样。
@@ -249,8 +249,8 @@ _注意：_ 标志是以其全称命名的，所以上面的例子的命令体�
 
 现在，我们可以使用缩写标志来调用这个新的定义：
 
-```
-> greet -a 10 hello
+```nu
+greet -a 10 hello
 ```
 
 标志也可以作为基本开关使用，这意味着它们的存在或不存在被当作定义的参数。延伸前面的例子：
@@ -271,14 +271,14 @@ def greet [
 
 而这个定义可以通过如下方式调用：
 
-```
-> greet -a 10 --twice hello
+```nu
+greet -a 10 --twice hello
 ```
 
 或者只是没有开关标志：
 
-```
-> greet -a 10 hello
+```nu
+greet -a 10 hello
 ```
 
 ## 剩余参数
@@ -380,7 +380,7 @@ Flags:
 自定义命令会像内置命令一样流式输出。例如，假设我们想重构这个管道：
 
 ```nu
-> ls | get name
+ls | get name
 ```
 
 让我们把[`ls`](/commands/docs/ls.md)移到我们编写的命令中：
@@ -392,7 +392,7 @@ def my-ls [] { ls }
 我们就可以像使用[`ls`](/commands/docs/ls.md)一样使用这个命令的输出：
 
 ```nu
-> my-ls | get name
+my-ls | get name
 ───┬───────────────────────
  0 │ myscript.nu
  1 │ myscript2.nu
@@ -416,13 +416,13 @@ def double [] {
 
 现在，如果我们在一个管道中调用上述命令，就可以看到它对输入的处理结果：
 
-```
-> [1 2 3] | double
-───┬─────
- 0 │ 2
- 1 │ 4
- 2 │ 6
-───┴─────
+```nu
+[1 2 3] | double
+# => ───┬─────
+# =>  0 │ 2
+# =>  1 │ 4
+# =>  2 │ 6
+# => ───┴─────
 ```
 
 我们还可以使用`$in`变量来存储输入，以便在后面使用：

@@ -38,13 +38,12 @@ def my-command [x] {
 现在当传入一个值调用时，我们会看到一个错误信息返回：
 
 ```nu
-> my-command 100
-
-Error:
-  × this is fishy
-   ╭─[entry #5:1:1]
- 1 │ my-command 100
-   ·            ─┬─
-   ·             ╰── fish right here
-   ╰────
+my-command 100
+# => Error:
+# =>   × this is fishy
+# =>    ╭─[entry #5:1:1]
+# =>  1 │ my-command 100
+# =>    ·            ─┬─
+# =>    ·             ╰── fish right here
+# =>    ╰────
 ```

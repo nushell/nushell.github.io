@@ -9,10 +9,10 @@
 我们来看一个例子：
 
 ```nu
-> def animals [] { ["cat", "dog", "eel" ] }
-> def my-command [animal: string@animals] { print $animal }
->| my-command
-cat                 dog                 eel
+def animals [] { ["cat", "dog", "eel" ] }
+def my-command [animal: string@animals] { print $animal }
+my-command
+# => cat                 dog                 eel
 ```
 
 在第一行中，我们创建了一个自定义命令，将返回三个不同动物的列表。这些是我们想在补全中使用的值。一旦我们创建了这个命令，我们就可以用它来为其他自定义命令和 `extern` 提供补全。

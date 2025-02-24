@@ -103,7 +103,7 @@ $env.FOO? | default "BAR"
 
 Alternatively, you can check for the presence of an environmental variable with `in`:
 
-```
+```nu
 $env.FOO
 # => BAR
 

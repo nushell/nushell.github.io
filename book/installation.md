@@ -26,6 +26,35 @@ For Windows:
 - [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 
+For Debian & Ubuntu:
+
+```sh
+curl -fsSL https://apt.fury.io/nushell/gpg.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/fury-nushell.gpg
+echo "deb https://apt.fury.io/nushell/ /" | sudo tee /etc/apt/sources.list.d/fury.list
+sudo apt update
+sudo apt install nushell
+```
+
+For RedHat/Fedora & Rocky Linux:
+
+```sh
+echo "[gemfury-nushell]
+name=Gemfury Nushell Repo
+baseurl=https://yum.fury.io/nushell/
+enabled=1
+gpgcheck=0
+gpgkey=https://yum.fury.io/nushell/gpg.key" | sudo tee /etc/yum.repos.d/fury-nushell.repo
+sudo dnf install -y nushell
+```
+
+For Alpine Linux:
+
+```sh
+echo "https://alpine.fury.io/nushell/" | tee -a /etc/apk/repositories
+apk update
+apk add --allow-untrusted nushell
+```
+
 Cross Platform installation:
 
 - [npm](https://www.npmjs.com/) (`npm install -g nushell` Note that nu plugins are not included if you install in this way)

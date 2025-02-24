@@ -168,7 +168,7 @@ $res
 
 在看到了可以用[`Dataframe`](/commands/categories/dataframe.md)命令完成的事情之后，现在是时候开始测试它们了。首先，让我们创建一个样本 CSV 文件，该文件将成为我们的样本 DataFrame，并与示例一起使用。在你喜欢的编辑器中粘贴下面几行来创建样本 csv 文件：
 
-```
+```text
 int_1,int_2,float_1,float_2,first,second,third,word
 1,11,0.1,1.0,a,b,c,first
 2,12,0.2,1.0,a,b,c,second
@@ -187,7 +187,7 @@ int_1,int_2,float_1,float_2,first,second,third,word
 现在，要将该文件作为 DataFrame 进行读取，请使用 `dfr open` 命令，如下所示：
 
 ```nu
-> let df = (dfr open test_small.csv)
+let df = (dfr open test_small.csv)
 ```
 
 这应该会在内存中创建一个值 `$df`，用来存放我们刚刚创建的数据。
@@ -289,7 +289,7 @@ int_1,int_2,float_1,float_2,first,second,third,word
 
 也可以用一个列作为参考来连接(`join`)两个 DataFrame。我们将把我们的迷你 DataFrame 与另一个迷你 DataFrame 连接起来。在另一个文件中复制这些行，并创建相应的 DataFrame（在以下例子中，我们将称之为`test_small_a.csv`）。
 
-```
+```text
 int_1,int_2,float_1,float_2,first
 9,14,0.4,3.0,a
 8,13,0.3,2.0,a

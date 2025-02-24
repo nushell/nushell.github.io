@@ -1,1 +1,1 @@
-> cd new_directory
+cd new_directory

@@ -575,7 +575,6 @@ e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 
     ...
   }
-
 ```
 
 ### Troubleshooting Keybinding Problems

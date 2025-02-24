@@ -35,13 +35,13 @@ Umgebungsvariablen werden als Felder der Variable `$env` gesetzt.
 
 Um die Umgebungsvariable `FOO` zu setzen kann direkt der Wert zu `$env.FOO` zugewiesen werden.
 
-```
+```nu
 $env.FOO = 'BAR'
 ```
 
 Um zum Beispiel die `PATH` Variable zu ergänzen, wird folgendes eingegeben:
 
-```
+```nu
 $env.PATH = ($env.PATH | prepend '/pfad/der/hinzu/kommt')
 ```
 
@@ -53,7 +53,7 @@ Soll der Pfad ans Ende angehängt werden, so wird `append` verwendet.
 Wenn mehrere Umgebungsvariablen gesetzt werden sollen, so kann `load-env` eine ganze Tabelle mitgegeben werden.
 Diese besteht aus name/value Paaren, welche alle auf einmal geladen werden:
 
-```
+```nu
 load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
@@ -76,7 +76,7 @@ Wenn eine Umgebungsvariable gesetzt wird, ist sie nur in ihrem Gültigkeitsberei
 
 Hier ein kleines Beispiel um den Gültigkeitsbereich zu demonstrieren:
 
-```
+```nu
 $env.FOO = "BAR"
 do {
     $env.FOO = "BAZ"
@@ -97,14 +97,14 @@ Dies wiederum folgt den gleichen Regeln wie das setzen anderer Umgebungsvariable
 
 Eine praktische Möglichkeit eine Umgebungsvariable einmalig zu setzen, ist inspiriert von Bash und anderen Shells:
 
-```
+```nu
 FOO=BAR echo $env.FOO
 # => BAR
 ```
 
 Es kann auch [`with-env`](/commands/docs/with-env.md) verwendet werden um expliziter zu sein:
 
-```
+```nu
 with-env { FOO: BAR } { echo $env.FOO }
 # => BAR
 ```
@@ -117,7 +117,7 @@ Umgebungsvariablen können beim Start von Nushell gesetzt werden. Dafür werden 
 und sind dann für die gesamte Laufzeit von Nushell verfügbar.
 Zum Beispiel:
 
-```
+```nu
 # In config.nu
 $env.FOO = 'BAR'
 ```
@@ -128,7 +128,7 @@ Aufgrund der Gültigkeitsregeln ist eine Umgebungsvariable, welche innerhalb ein
 Wird sie jedoch mit [`def --env`](/commands/docs/def.md) anstatt [`def`](/commands/docs/def.md) gesetzt, so wird sie beim verlassen des Blocks erhalten bleiben.
 (Gilt auch für `export def`, siehe [Modules (EN)](/book/modules.md))
 
-```
+```nu
 def --env foo [] {
     $env.FOO = 'BAR'
 }
@@ -153,7 +153,7 @@ Die Konvertierung von Wert -> String erfolgt mit `to_string` innerhalb `ENV_CONV
 Zur Illustration hier ein Beispiel.
 Diese Zeilen gehören in config.nu:
 
-```
+```nu
 $env.ENV_CONVERSIONS = {
     # ... you might have Path and PATH already there, add:
     FOO : {
@@ -165,7 +165,7 @@ $env.ENV_CONVERSIONS = {
 
 In einer Nushell Instanz gilt nun:
 
-```
+```nu
 with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
 
 $env.FOO
@@ -177,13 +177,13 @@ $env.FOO
 Wie zu sehen ist `$env.FOO` nun eine Liste in einer neuen Nushell Instanz mit der neuen config.
 Die Konvertierung kann auch manuell getestet werden mit:
 
-```
+```nu
 do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
 ```
 
 Um die Konvertierun list -> string zu testen:
 
-```
+```nu
 nu -c '$env.FOO'
 # => a-b-c
 ```
@@ -207,7 +207,7 @@ Alle Umgebungsvariablen in env.nu und config.nu sind immer noch Strings solange 
 
 Umgebungsvariablen können im aktuellen Gültigkeitsbereich entfernt werden via [`hide`](/commands/docs/hide.md):
 
-```
+```nu
 $env.FOO = 'BAR'
 # => ...
 hide FOO
@@ -215,7 +215,7 @@ hide FOO
 
 Dieses Verstecken im Gültigkeitsbereich erlaubt es gleichzeitig temporär eine Variabel zu entfernen ohne dass man die höher gelegene Umgebung modifiziert wird:
 
-```
+```nu
 $env.FOO = 'BAR'
 do {
     hide FOO

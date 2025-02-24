@@ -26,7 +26,7 @@ Eine Zeichenfolge die einen Text repräsentiert. Es gibt mehrere Möglichkeiten 
 
 **Doppelte Anführungszeichen**
 
-```
+```nu
 "Mein Text"
 ```
 
@@ -34,7 +34,7 @@ Doppelte Anführungszeichen werden am häufigsten verwendet und finden sich übe
 
 **Einfache Anführungszeichen**
 
-```
+```nu
 'Mein Text'
 ```
 
@@ -44,12 +44,12 @@ Einfache Anführungszeichen ergeben ebenfalls einen Text zurück. Der Unterschie
 **Text Erweiterung** (interpolation)
 Nushell unterstützt Text Erweiterung, was es erlaubt, Unterausdrücke innerhalb eines Textes zu verwenden. Diese werden mit `$` ausgedrückt:
 
-```
+```nu
 echo $"6 x 7 = (6 * 7)"
 # => 6 x 7 = 42
 ```
 
-```
+```nu
 ls | each { |row| echo $"($row.name) is ($row.size)" }
 # => ───┬─────────────────────
 # =>  0 │ genawait is 4.1 KB
@@ -60,7 +60,7 @@ ls | each { |row| echo $"($row.name) is ($row.size)" }
 
 **blosse Texte**
 
-```
+```nu
 echo hello
 ```
 
@@ -68,7 +68,7 @@ Eine spezielle Eigenschaft von Nushell ist, dass ein Text mit nur einem Wort auc
 
 Der Text oben ist das selbe als wäre geschrieben:
 
-```
+```nu
 echo "hello"
 ```
 
@@ -186,7 +186,7 @@ Binärdaten wie der Inhalt einer Bilddatei entspricht einer Gruppe von rohen (ra
 
 Binär kann explizit wörtlich geschrieben werden in einer der Formen `0x[...]`, `0b[...]`, or `0o[...]`:
 
-```
+```nu
 0x[1F FF]  # Hexadecimal
 0b[1 1010] # Binary
 0o[377]    # Octal
@@ -206,7 +206,7 @@ records, lists und tables.
 Wertepaare werden auch als key-value pairs bezeichnet, ähnlich wie sie von JSON Objekten bekannt sind. Da diese manchmal viele Felder haben können,
 werden Wertepaar von oben unten anstatt links-rechts dargestellt:
 
-```
+```nu
 echo {name: sam, rank: 10}
 # => ╭──────┬─────╮
 # => │ name │ sam │
@@ -216,7 +216,7 @@ echo {name: sam, rank: 10}
 
 Über Wertepaare kann iteriert werden wenn sie zuerst in eine Tabelle transponiert werden:
 
-```
+```nu
 echo {name: sam, rank: 10} | transpose key value
 # => ╭───┬──────┬───────╮
 # => │ # │ key  │ value │
@@ -233,7 +233,7 @@ was man eine Tabelle (table) nennt.
 
 Beispiel: Eine Liste von Texten
 
-```
+```nu
 echo [sam fred george]
 # => ───┬────────
 # =>  0 │ sam
@@ -249,7 +249,7 @@ Eine Tabelle besteht immer aus Zeilen und Spalten.
 
 Eine Tabelle wird ähnlich erstellt wie eine Liste. Weil diese auch Spalten und nicht nur Werte enthält, geben wir die Spalten zuerst an:
 
-```
+```nu
 echo [[column1, column2]; [Value1, Value2]]
 # => ───┬─────────┬─────────
 # =>  # │ column1 │ column2
@@ -260,7 +260,7 @@ echo [[column1, column2]; [Value1, Value2]]
 
 Eine Tabelle mit mehreren Zeilen sieht dann so aus:
 
-```
+```nu
 echo [[column1, column2]; [Value1, Value2] [Value3, Value4]]
 # => ───┬─────────┬─────────
 # =>  # │ column1 │ column2
@@ -272,7 +272,7 @@ echo [[column1, column2]; [Value1, Value2] [Value3, Value4]]
 
 Oder aus einer Liste von Wertepaaren:
 
-```
+```nu
 echo [{name: sam, rank: 10}, {name: bob, rank: 7}]
 # => ╭───┬──────┬──────╮
 # => │ # │ name │ rank │
@@ -293,7 +293,7 @@ zu benutzen, aber nicht zwingend. `each { |x| echo $x }`funktioniert gleich wie 
 
 In diesem Beispiel:
 
-```
+```nu
 foo {
   line1
   line2; line3 | line4
