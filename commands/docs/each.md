@@ -60,7 +60,7 @@ Produce a list of values in the record, converted to string
 
 ```
 
-Produce a list that has "two" for each 2 in the input
+`null` items will be dropped from the result list. It has the same effect as `filter_map` in other languages.
 ```nu
 > [1 2 3 2] | each {|e| if $e == 2 { "two" } }
 ╭───┬─────╮
@@ -91,13 +91,13 @@ Iterate over each element, keeping null results
 ```
 
 ## Notes
-Since tables are lists of records, passing a table into 'each' will
+Since tables are lists of records, passing a table into `each` will
 iterate over each record, not necessarily each cell within it.
 
 Avoid passing single records to this command. Since a record is a
-one-row structure, 'each' will only run once, behaving similar to 'do'.
-To iterate over a record's values, try converting it to a table
-with 'transpose' first.
+one-row structure, `each` will only run once, behaving similar to [`do`](/commands/docs/do.md).
+To iterate over a record's values, use [`items`](/commands/docs/items.md) or try converting it to a table
+with [`transpose`](/commands/docs/transpose.md) first.
 
 ## Subcommands:
 
