@@ -50,9 +50,9 @@ Mathematische Operationen werden in der folgenden Reihenfolge ausgewertet (von d
 - Bitweises und (`bit-and`)
 - Bitweises xor (`bit-xor`)
 - Bitweises oder (`bit-or`)
-- Logisches und (`&&`, `and`)
+- Logisches und (`and`)
 - Logisches xor (`xor`)
-- Logisches oder (`||`, `or`)
+- Logisches oder (`or`)
 - Zuweisungs Operationen
 
 ```nu
