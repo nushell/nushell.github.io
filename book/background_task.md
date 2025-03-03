@@ -1,34 +1,77 @@
-# Background Tasks with Nu
+# Background Jobs
 
-Currently, Nushell doesn't have built-in background task management feature, but you can make it "support" background task with some tools, here are some examples:
+## Spawning Jobs
 
-1. Using a third-party task management tools, like [pueue](https://github.com/Nukesor/pueue)
-2. Using a terminal multiplexer, like [tmux](https://github.com/tmux/tmux/wiki) or [zellij](https://zellij.dev/)
+Nushell currently presents experimental support for thread-based background jobs.
 
-## Using Nu With Pueue
+Jobs can be can be spawned using [`job spawn`](/commands/docs/job_spawn.md), which receives a closure and starts its execution in a background thread, returning
+an unique integer id for such job:
 
-The module borrows the power of [pueue](https://github.com/Nukesor/pueue), it is possible to schedule background tasks to pueue, and manage those tasks (such as viewing logs, killing tasks, or getting the running status of all tasks, creating groups, pausing tasks etc etc)
+```nu
+"i am" | save status.txt
 
-Unlike terminal multiplexer, you don't need to attach to multiple tmux sessions, and get task status easily.
+job spawn { sleep 10sec; 'inevitable' | save --append status.txt }
+## => 1
 
-Here we provide a [nushell module](https://github.com/nushell/nu_scripts/tree/main/modules/background_task) that makes working with pueue easier.
+open status.txt
+## => i am
 
-Here is a setup example to make Nushell "support" background tasks:
+# wait for 10 seconds
+sleep 10sec
 
-1. Install pueue
-2. run `pueued`, you can refer to [start-the-daemon page](https://github.com/Nukesor/pueue/wiki/Get-started#start-the-daemon) for more information.
-3. Put the [task.nu](https://github.com/nushell/nu_scripts/blob/main/modules/background_task/task.nu) file under `$env.NU_LIB_DIRS`.
-4. Add a line to the `$nu.config-path` file: `use task.nu`
-5. Restart Nushell.
+open status.txt
+## => i am inevitable
+```
 
-Then you will get some commands to schedule background tasks. (e.g: `task spawn`, `task status`, `task log`)
+::: tip Note
+Unlike many other shells, Nushell jobs are **not** separate processes, and are instead implemented
+as background threads. An important side effect of that, is that all background jobs terminate once the shell process exits.
+:::
 
-Cons: It spawns a new Nushell interpreter to execute every single task, so it doesn't inherit current scope's variables, custom commands, alias definition.
-It only inherits environment variables whose value can be converted to a string.
-Therefore, if you want to use custom commands or variables, you have to [`use`](/commands/docs/use.md) or [`def`](/commands/docs/def.md) them within the given block.
+## Listing and Killing jobs
 
-## Using Nu With Terminal Multiplexer
+Active jobs can be queried with the [`job list`](/commands/docs/job_list.md) command, which returns a table with the information of the jobs which are currently executing.
+Jobs can also be kiled/interrupted by using the [`job kill`](/commands/docs/job_kill.md) command, which interrupts the job's thread and kills all of the job's child processes:
 
-You can choose and install a terminal multiplexer and use it.
+```nu
+let id = job spawn { sleep 1day }
 
-It allows you to easily switch between multiple programs in one terminal, detach them (they continue to run in the background) and reconnect them to a different terminal.  As a result, it is very flexible and usable.
+job list
+# => ┏━━━┳━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┓
+# => ┃ # ┃ id ┃  type  ┃      pids      ┃
+# => ┣━━━╋━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━┫
+# => ┃ 0 ┃  1 ┃ thread ┃ [list 0 items] ┃
+# => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
+
+job kill $id
+
+job list
+# => ╭────────────╮
+# => │ empty list │
+# => ╰────────────╯
+```
+
+## Unix Ctrl-Z
+
+In unix targets (namely Linux and MacOS), Nushell's background job support also integrates with the Ctrl-Z feature
+of terminals (more specifically, the `SIGTSTP` signal), which allows users to suspend foreground processes into background jobs.
+When a running process is suspended, it is turned into a background job of type `frozen`. A frozen job can be reanimated into foreground with the
+[`job unfreeze`](/commands/docs/job_unfreeze.md) command.
+
+```
+long_running_process
+# (Ctrl-Z is pressed)
+
+job list
+# => ┏━━━┳━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┓
+# => ┃ # ┃ id ┃  type  ┃      pids      ┃
+# => ┣━━━╋━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━┫
+# => ┃ 0 ┃  1 ┃ frozen ┃ [list 0 items] ┃
+# => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
+
+job unfreeze 1
+# (process is brought back where it stopped)
+```
+
+If no job id is provided to `job unfreeze`, it will unfreeze the job id of the most recently frozen job.
+Therefore, one can use `alias fg = job unfreeze` to achieve a behavior similar to the one of existing unix shells.
