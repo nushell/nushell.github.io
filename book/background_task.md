@@ -8,9 +8,9 @@ Jobs can be can be spawned using [`job spawn`](/commands/docs/job_spawn.md), whi
 an unique integer id for such job:
 
 ```nu
-"i am" | save status.txt
+'i am' | save status.txt
 
-job spawn { sleep 10sec; 'inevitable' | save --append status.txt }
+job spawn { sleep 10sec; ' inevitable' | save --append status.txt }
 ## => 1
 
 open status.txt
@@ -66,7 +66,7 @@ job list
 # => ┏━━━┳━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┓
 # => ┃ # ┃ id ┃  type  ┃      pids      ┃
 # => ┣━━━╋━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━┫
-# => ┃ 0 ┃  1 ┃ frozen ┃ [list 0 items] ┃
+# => ┃ 0 ┃  1 ┃ frozen ┃ [list 1 items] ┃
 # => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
 
 job unfreeze 1
