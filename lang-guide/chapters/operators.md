@@ -34,9 +34,7 @@ Nushell provides support for these bitwise operators:
 - `not-in` - Not In / Not Contains (doesn't use regex)
 - `starts-with` - Starts With
 - `ends-with` - Ends With
-- `&&` - And
 - `and` - And
-- `||` - Or
 - `or` - Or
 
 ## Brackets

@@ -24,8 +24,8 @@ Given Nushell's strong support for structured data, some of the more common task
 
 For the examples and descriptions below, keep in mind several definitions regarding structured data:
 
-- **_List:_** Lists contain a series of zero or more values of any type. A list with zero values is known as an "empty list."
-- **_Record:_** Records contain zero or more pairs of named keys and their corresponding value. The data in a record's value can also be of any type. A record with zero key-value pairs is known as an "empty record."
+- **_List:_** Lists contain a series of zero or more values of any type. A list with zero values is known as an "empty list"
+- **_Record:_** Records contain zero or more pairs of named keys and their corresponding value. The data in a record's value can also be of any type. A record with zero key-value pairs is known as an "empty record"
 - **_Nested Data:_** The values contained in a list, record, or table can be either of a basic type or structured data themselves. This means that data can be nested multiple levels and in multiple forms:
   - List values can contain tables, records, and even other lists
     - **_Table:_** Tables are a list of records
@@ -237,7 +237,7 @@ Notice that:
 ::: tip
 The row indices of the table resulting from `select` are not the same as that of the original. The new table has its own, 0-based index.
 
-To obtain the original index, you can using the [`enumerate`](/commands/docs/enumerate.md) command. For example:
+To obtain the original index, you can use the [`enumerate`](/commands/docs/enumerate.md) command. For example:
 
 ```nu
 $data | enumerate | select 1

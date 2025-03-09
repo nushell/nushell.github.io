@@ -56,7 +56,7 @@ Los siguientes comparadores también se encuentran disponibles:
 
 ## Operadores Compuestos
 
-Nushell también soporta `&&` y `||` para unir dos operaciones que regresen valores booleanos, usando `y` y `o` respectivamente. Por ejemplo: `ls | where name in ["uno" "dos" "tres"] && size > 10kb`
+Nushell también soporta `and` y `or` para unir dos operaciones que regresen valores booleanos. Por ejemplo: `ls | where name in ["uno" "dos" "tres"] and size > 10kb`
 
 ## Orden de operaciones
 

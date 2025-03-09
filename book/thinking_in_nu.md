@@ -15,7 +15,7 @@ Nushell is both a programming language and a shell. Because of this, it has its 
 For example, the following commandline works the same in both Bash and Nushell on Unix/Linux platforms:
 
 ```nu
-curl -s https://api.github.com/repos/nushell/nushell/contributors | jq '.[].login'
+curl -s https://api.github.com/repos/nushell/nushell/contributors | jq -c '.[] | {login,contributions}'
 # => returns contributors to Nushell, ordered by number of contributions
 ```
 
