@@ -72,7 +72,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `bash -c <commands>`                 | `nu -c <commands>`                                            | Run a pipeline of commands                                        |
 | `bash <script file>`                 | `nu <script file>`                                            | Run a script file                                                 |
 | `\`                                  | `( <command> )`                                               | A command can span multiple lines when wrapped with `(` and `)`   |
-| `pwd`                                | `$env.PWD`                                                    | Display the current directory                                     |
+| `pwd` or `echo $PWD`                 | `pwd` or `$env.PWD`                                           | Display the current directory                                     |
 | `read var`                           | `let var = input`                                             | Get input from the user                                           |
 | `read -s secret`                     | `let secret = input -s`                                       | Get a secret value from the user without printing keystrokes      |
 
