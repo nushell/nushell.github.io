@@ -2,7 +2,7 @@
 title: start
 categories: |
   filesystem
-version: 0.102.0
+version: 0.103.0
 filesystem: |
   Open a folder, file, or website in the default application or viewer.
 usage: |

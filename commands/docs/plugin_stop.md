@@ -2,7 +2,7 @@
 title: plugin stop
 categories: |
   plugin
-version: 0.102.0
+version: 0.103.0
 plugin: |
   Stop an installed plugin if it was running.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `name`: The name, or filename, of the plugin to stop
+ -  `name`: The name, or filename, of the plugin to stop.
 
 
 ## Input/output types:

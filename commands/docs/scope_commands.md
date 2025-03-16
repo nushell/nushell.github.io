@@ -2,7 +2,7 @@
 title: scope commands
 categories: |
   core
-version: 0.102.0
+version: 0.103.0
 core: |
   Output info on the commands in the current scope.
 usage: |

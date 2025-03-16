@@ -2,7 +2,7 @@
 title: format bits
 categories: |
   conversions
-version: 0.102.0
+version: 0.103.0
 conversions: |
   Convert value to a string of binary data represented by 0 and 1.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: for a data structure input, convert data at the given cell paths
+ -  `...rest`: For a data structure input, convert data at the given cell paths.
 
 
 ## Input/output types:

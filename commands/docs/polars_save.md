@@ -2,7 +2,7 @@
 title: polars save
 categories: |
   lazyframe
-version: 0.102.0
+version: 0.103.0
 lazyframe: |
   Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson).
 usage: |
@@ -36,7 +36,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Parameters
 
- -  `path`: Path to write to.
+ -  `path`: Path or cloud url to write to
 
 
 ## Input/output types:
@@ -79,12 +79,12 @@ Saves dataframe to avro file
 
 Saves dataframe to CSV file
 ```nu
-> [[a b]; [1 2] [3 4]] | dfr into-df | dfr save test.csv
+> [[a b]; [1 2] [3 4]] | polars into-df | polars save test.csv
 
 ```
 
 Saves dataframe to CSV file using other delimiter
 ```nu
-> [[a b]; [1 2] [3 4]] | dfr into-df | dfr save test.csv --delimiter '|'
+> [[a b]; [1 2] [3 4]] | polars into-df | polars save test.csv --csv-delimiter '|'
 
 ```

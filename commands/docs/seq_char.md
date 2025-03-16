@@ -2,7 +2,7 @@
 title: seq char
 categories: |
   generators
-version: 0.102.0
+version: 0.103.0
 generators: |
   Print a sequence of ASCII characters.
 usage: |

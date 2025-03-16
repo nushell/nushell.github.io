@@ -2,11 +2,11 @@
 title: chunks
 categories: |
   filters
-version: 0.102.0
+version: 0.103.0
 filters: |
-  Divide a list or table into chunks of `chunk_size`.
+  Divide a list, table or binary input into chunks of `chunk_size`.
 usage: |
-  Divide a list or table into chunks of `chunk_size`.
+  Divide a list, table or binary input into chunks of `chunk_size`.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `chunks` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Divide a list or table into chunks of `chunk_size`.</div>
+<div class='command-title'>Divide a list, table or binary input into chunks of `chunk_size`.</div>
 
 ## Signature
 

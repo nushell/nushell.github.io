@@ -2,7 +2,7 @@
 title: bits ror
 categories: |
   bits
-version: 0.102.0
+version: 0.103.0
 bits: |
   Bitwise rotate right for ints or binary values.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
 
 ## Parameters
 
- -  `bits`: number of bits to rotate right
+ -  `bits`: Number of bits to rotate right.
 
 
 ## Input/output types:

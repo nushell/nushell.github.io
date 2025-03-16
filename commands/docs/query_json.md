@@ -2,7 +2,7 @@
 title: query json
 categories: |
   filters
-version: 0.102.0
+version: 0.103.0
 filters: |
   execute json query on json file (open --raw <file> | query json 'query string')
 usage: |
@@ -37,3 +37,54 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
+
+## Examples
+
+Get a list of children from a json object
+```nu
+> '{"children": ["Sara","Alex","Jack"]}' | query json children
+╭───┬──────╮
+│ 0 │ Sara │
+│ 1 │ Alex │
+│ 2 │ Jack │
+╰───┴──────╯
+
+```
+
+Get a list of first names of the friends from a json object
+```nu
+> '{
+  "friends": [
+    {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb", "tw"]},
+    {"first": "Roger", "last": "Craig", "age": 68, "nets": ["fb", "tw"]},
+    {"first": "Jane", "last": "Murphy", "age": 47, "nets": ["ig", "tw"]}
+  ]
+}' | query json friends.#.first
+╭───┬───────╮
+│ 0 │ Dale  │
+│ 1 │ Roger │
+│ 2 │ Jane  │
+╰───┴───────╯
+
+```
+
+Get the key named last of the name from a json object
+```nu
+> '{"name": {"first": "Tom", "last": "Anderson"}}' | query json name.last
+Anderson
+```
+
+Get the count of children from a json object
+```nu
+> '{"children": ["Sara","Alex","Jack"]}' | query json children.#
+3
+```
+
+Get the first child from the children array in reverse the order using the @reverse modifier from a json object
+```nu
+> '{"children": ["Sara","Alex","Jack"]}' | query json "children|@reverse|0"
+Jack
+```
+
+## Notes
+query json uses the gjson crate https://github.com/tidwall/gjson.rs to query json data. The query syntax is available at https://github.com/tidwall/gjson/blob/master/SYNTAX.md.

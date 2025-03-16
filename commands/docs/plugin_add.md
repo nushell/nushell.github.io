@@ -2,7 +2,7 @@
 title: plugin add
 categories: |
   plugin
-version: 0.102.0
+version: 0.103.0
 plugin: |
   Add a plugin to the plugin registry file.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
 
 ## Parameters
 
- -  `filename`: Path to the executable for the plugin
+ -  `filename`: Path to the executable for the plugin.
 
 
 ## Input/output types:

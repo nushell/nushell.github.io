@@ -2,7 +2,7 @@
 title: into
 categories: |
   conversions
-version: 0.102.0
+version: 0.103.0
 conversions: |
   Commands to convert data from one type to another.
 usage: |
@@ -35,7 +35,6 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                                 | description                                | type     |
 | ---------------------------------------------------- | ------------------------------------------ | -------- |
 | [`into binary`](/commands/docs/into_binary.md)       | Convert value to a binary primitive.       | built-in |
-| [`into bits`](/commands/docs/into_bits.md)           | Convert value to a binary string.          | built-in |
 | [`into bool`](/commands/docs/into_bool.md)           | Convert value to boolean.                  | built-in |
 | [`into cell-path`](/commands/docs/into_cell-path.md) | Convert value to a cell-path.              | built-in |
 | [`into datetime`](/commands/docs/into_datetime.md)   | Convert text or timestamp into a datetime. | built-in |

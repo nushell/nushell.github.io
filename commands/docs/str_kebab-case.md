@@ -2,7 +2,7 @@
 title: str kebab-case
 categories: |
   strings
-version: 0.102.0
+version: 0.103.0
 strings: |
   Convert a string to kebab-case.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: For a data structure input, convert strings at the given cell paths
+ -  `...rest`: For a data structure input, convert strings at the given cell paths.
 
 
 ## Input/output types:

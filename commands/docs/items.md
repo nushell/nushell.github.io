@@ -2,7 +2,7 @@
 title: items
 categories: |
   filters
-version: 0.102.0
+version: 0.103.0
 filters: |
   Given a record, iterate on each pair of column name and associated value.
 usage: |

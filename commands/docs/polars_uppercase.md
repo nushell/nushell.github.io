@@ -2,7 +2,7 @@
 title: polars uppercase
 categories: |
   dataframe
-version: 0.102.0
+version: 0.103.0
 dataframe: |
   Uppercase the strings in the column.
 usage: |

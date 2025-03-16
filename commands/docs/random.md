@@ -2,7 +2,7 @@
 title: random
 categories: |
   random
-version: 0.102.0
+version: 0.103.0
 random: |
   Generate a random value.
 usage: |
@@ -40,4 +40,4 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`random dice`](/commands/docs/random_dice.md)     | Generate a random dice roll.                                                                  | built-in |
 | [`random float`](/commands/docs/random_float.md)   | Generate a random float within a range [min..max].                                            | built-in |
 | [`random int`](/commands/docs/random_int.md)       | Generate a random integer [min..max].                                                         | built-in |
-| [`random uuid`](/commands/docs/random_uuid.md)     | Generate a random uuid4 string.                                                               | built-in |
+| [`random uuid`](/commands/docs/random_uuid.md)     | Generate a random uuid string of the specified version.                                       | built-in |

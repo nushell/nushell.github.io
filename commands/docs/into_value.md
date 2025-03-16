@@ -2,7 +2,7 @@
 title: into value
 categories: |
   filters
-version: 0.102.0
+version: 0.103.0
 filters: |
   Infer Nushell datatype for each cell.
 usage: |

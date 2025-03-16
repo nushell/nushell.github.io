@@ -2,7 +2,7 @@
 title: panic
 categories: |
   debug
-version: 0.102.0
+version: 0.103.0
 debug: |
   Causes nushell to panic.
 usage: |

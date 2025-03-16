@@ -2,7 +2,7 @@
 title: bits shl
 categories: |
   bits
-version: 0.102.0
+version: 0.103.0
 bits: |
   Bitwise shift left for ints or binary values.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
 
 ## Parameters
 
- -  `bits`: number of bits to shift left
+ -  `bits`: Number of bits to shift left.
 
 
 ## Input/output types:

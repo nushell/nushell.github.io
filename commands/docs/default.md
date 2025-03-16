@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.102.0
+version: 0.103.0
 filters: |
   Sets a default value if a row's column is missing or null.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> default {flags} (default value) (column name)```
+
+## Flags
+
+ -  `--empty, -e`: also replace empty items like "", {}, and []
 
 ## Parameters
 
@@ -61,6 +65,18 @@ Replace the `null` value in a list
 Replace the missing value in the "a" column of a list
 ```nu
 > [{a:1 b:2} {b:1}] | default 'N/A' a
+╭───┬─────┬───╮
+│ # │  a  │ b │
+├───┼─────┼───┤
+│ 0 │   1 │ 2 │
+│ 1 │ N/A │ 1 │
+╰───┴─────┴───╯
+
+```
+
+Replace the empty string in the "a" column of a list
+```nu
+> [{a:1 b:2} {a:'' b:1}] | default -e 'N/A' a
 ╭───┬─────┬───╮
 │ # │  a  │ b │
 ├───┼─────┼───┤

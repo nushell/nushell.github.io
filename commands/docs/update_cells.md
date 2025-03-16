@@ -2,7 +2,7 @@
 title: update cells
 categories: |
   filters
-version: 0.102.0
+version: 0.103.0
 filters: |
   Update the table cells.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
 
 ## Parameters
 
- -  `closure`: the closure to run an update for each cell
+ -  `closure`: The closure to run an update for each cell.
 
 
 ## Input/output types:

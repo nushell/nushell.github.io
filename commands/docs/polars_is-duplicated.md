@@ -2,7 +2,7 @@
 title: polars is-duplicated
 categories: |
   dataframe
-version: 0.102.0
+version: 0.103.0
 dataframe: |
   Creates mask indicating duplicated values.
 usage: |

@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.102.0
+version: 0.103.0
 system: |
   View information about system processes.
 usage: |

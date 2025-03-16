@@ -2,7 +2,7 @@
 title: polars first
 categories: |
   dataframe
-version: 0.102.0
+version: 0.103.0
 dataframe: |
   Show only the first number of rows or create a first expression
 usage: |

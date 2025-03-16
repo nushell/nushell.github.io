@@ -2,7 +2,7 @@
 title: plugin use
 categories: |
   plugin
-version: 0.102.0
+version: 0.103.0
 plugin: |
   Load a plugin from the plugin registry file into scope.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
 
 ## Parameters
 
- -  `name`: The name, or filename, of the plugin to load
+ -  `name`: The name, or filename, of the plugin to load.
 
 
 ## Input/output types:

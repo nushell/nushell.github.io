@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.102.0
+version: 0.103.0
 conversions: |
   Convert value to string.
 usage: |
@@ -22,6 +22,7 @@ contributors: false
 
 ## Flags
 
+ -  `--group-digits, -g`: group digits together by the locale specific thousands separator
  -  `--decimals, -d {int}`: decimal digits to which to round
 
 ## Parameters

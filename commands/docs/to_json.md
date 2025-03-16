@@ -2,7 +2,7 @@
 title: to json
 categories: |
   formats
-version: 0.102.0
+version: 0.103.0
 formats: |
   Converts table data into JSON text.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--raw, -r`: remove all of the whitespace
+ -  `--raw, -r`: remove all of the whitespace and trailing line ending
  -  `--indent, -i {number}`: specify indentation width
  -  `--tabs, -t {number}`: specify indentation tab quantity
  -  `--serialize, -s`: serialize nushell types that cannot be deserialized

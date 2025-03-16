@@ -2,7 +2,7 @@
 title: from xml
 categories: |
   formats
-version: 0.102.0
+version: 0.103.0
 formats: |
   Parse text as .xml and create record.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--keep-comments`: add comment nodes to result
+ -  `--disallow-dtd`: disallow parsing documents with DTDs (prevents exponential entity expansion attacks)
  -  `--keep-pi`: add processing instruction nodes to result
 
 

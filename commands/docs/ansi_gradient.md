@@ -2,7 +2,7 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.102.0
+version: 0.103.0
 platform: |
   Add a color gradient (using ANSI color codes) to the given string.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: for a data structure input, add a gradient to strings at the given cell paths
+ -  `...rest`: For a data structure input, add a gradient to strings at the given cell paths.
 
 
 ## Input/output types:

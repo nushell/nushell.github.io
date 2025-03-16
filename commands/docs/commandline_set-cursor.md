@@ -2,7 +2,7 @@
 title: commandline set-cursor
 categories: |
   core
-version: 0.102.0
+version: 0.103.0
 core: |
   Set the current cursor position.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
 
 ## Parameters
 
- -  `pos`: Cursor position to be set
+ -  `pos`: Cursor position to be set.
 
 
 ## Input/output types:

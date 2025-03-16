@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.102.0
+version: 0.103.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -112,6 +112,26 @@ Upsert into a list, inserting a new value at the end
 │ 2 │ 3 │
 │ 3 │ 4 │
 ╰───┴───╯
+
+```
+
+Upsert into a nested path, creating new values as needed
+```nu
+> [{} {a: [{}]}] | upsert a.0.b "value"
+╭───┬───────────────╮
+│ # │       a       │
+├───┼───────────────┤
+│ 0 │ ╭───┬───────╮ │
+│   │ │ # │   b   │ │
+│   │ ├───┼───────┤ │
+│   │ │ 0 │ value │ │
+│   │ ╰───┴───────╯ │
+│ 1 │ ╭───┬───────╮ │
+│   │ │ # │   b   │ │
+│   │ ├───┼───────┤ │
+│   │ │ 0 │ value │ │
+│   │ ╰───┴───────╯ │
+╰───┴───────────────╯
 
 ```
 

@@ -2,7 +2,7 @@
 title: polars arg-where
 categories: |
   expression
-version: 0.102.0
+version: 0.103.0
 expression: |
   Creates an expression that returns the arguments where expression is true.
 usage: |
