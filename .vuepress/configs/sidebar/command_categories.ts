@@ -1,5 +1,4 @@
 export const commandCategories = [
-  '/commands/categories/.md',
   '/commands/categories/bits.md',
   '/commands/categories/bytes.md',
   '/commands/categories/chart.md',

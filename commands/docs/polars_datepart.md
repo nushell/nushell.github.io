@@ -61,10 +61,10 @@ Creates an expression to capture multiple date parts
                 (polars col datetime | polars datepart minute | polars as datetime_minute ),
                 (polars col datetime | polars datepart second | polars as datetime_second ),
                 (polars col datetime | polars datepart nanosecond | polars as datetime_ns ) ]
-╭─────┬───────────────┬─────────────────┬──────────────────┬───────────────┬────────────────┬──────────────────┬──────╮
-│   # │   datetime    │  datetime_year  │  datetime_month  │ datetime_day  │ datetime_hour  │ datetime_minute  │ ...  │
-├─────┼───────────────┼─────────────────┼──────────────────┼───────────────┼────────────────┼──────────────────┼──────┤
-│   0 │ 3 years ago   │            2021 │               12 │            30 │              1 │                2 │ ...  │
-╰─────┴───────────────┴─────────────────┴──────────────────┴───────────────┴────────────────┴──────────────────┴──────╯
+╭───┬─────────────┬───────────────┬────────────────┬──────────────┬───────────────┬─────────────────┬─────────────────┬─────────────╮
+│ # │  datetime   │ datetime_year │ datetime_month │ datetime_day │ datetime_hour │ datetime_minute │ datetime_second │ datetime_ns │
+├───┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼─────────────────┼─────────────┤
+│ 0 │ 3 years ago │          2021 │             12 │           30 │             1 │               2 │               3 │   123456789 │
+╰───┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴─────────────────┴─────────────╯
 
 ```

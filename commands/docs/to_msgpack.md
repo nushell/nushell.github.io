@@ -20,6 +20,10 @@ contributors: false
 
 ```> to msgpack {flags} ```
 
+## Flags
+
+ -  `--serialize, -s`: serialize nushell types that cannot be deserialized
+
 
 ## Input/output types:
 

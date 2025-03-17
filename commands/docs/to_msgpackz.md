@@ -24,6 +24,7 @@ contributors: false
 
  -  `--quality, -q {int}`: Quality of brotli compression (default 3)
  -  `--window-size, -w {int}`: Window size for brotli compression (default 20)
+ -  `--serialize, -s`: serialize nushell types that cannot be deserialized
 
 
 ## Input/output types:
