@@ -21,7 +21,7 @@ my-command
 The first line defines a custom command which returns a list of three different animals. These are the possible values for the completion.
 
 ::: tip
-To suppress completions for an argument (for example, an `int` that can accept any integer), define a completer that returns an empty list (`[ ]`). At the moment, invalid values such as `null` will also suppress completions, but this may change in the future.
+To suppress completions for an argument (for example, an `int` that can accept any integer), define a completer that returns an empty list (`[ ]`).
 :::
 
 In the second line, `string@animals` tells Nushell two things—the shape of the argument for type-checking and the completer which will suggest possible values for the argument.
@@ -29,7 +29,11 @@ In the second line, `string@animals` tells Nushell two things—the shape of the
 The third line is demonstration of the completion. Type the name of the custom command `my-command`, followed by a space, and then the <kbd>Tab</kbd> key. This displays a menu with the possible completions. Custom completions work the same as other completions in the system, allowing you to type `e` followed by the <kbd>Tab</kbd> key to complete "eel" automatically.
 
 ::: tip
-When the completion menu is displayed, the prompt changes to include the `|` character by default. This can be changed using `$env.config.menus.marker`.
+When the completion menu is displayed, the prompt changes to include the `|` character by default. To change the prompt marker, modify the `marker` value of the record, where the `name` key is `completion_menu`, in the `$env.config.menus` list.  See also [the completion menu configuration](/book/line_editor.md#completion-menu).
+:::
+
+::: tip
+To fall back to Nushell's built-in file completions, return `null` rather than a list of suggestions.
 :::
 
 ## Options for Custom Completions
@@ -212,9 +216,7 @@ $env.config.completions.external = {
 
 You can configure the closure to run an external completer, such as [carapace](https://github.com/rsteube/carapace-bin).
 
-When the closure returns unparsable json (e.g., an empty string) it defaults to file completion.
-
-An external completer is a function that takes the current command as a string list, and outputs a list of records with `value` and `description` keys, like custom completion functions.
+An external completer is a function that takes the current command as a string list, and outputs a list of records with `value` and `description` keys, like custom completion functions. When the closure returns `null`, it defaults to file completion.
 
 ::: tip Note
 This closure will accept the current command as a list. For example, typing `my-command --arg1 <tab>` will receive `[my-command --arg1 " "]`.

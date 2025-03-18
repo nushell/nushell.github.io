@@ -8,38 +8,33 @@ title: HTTP
 
 ```nu
 http get https://jsonplaceholder.typicode.com/posts | first 5
-```
-
-Output
-
-```
-━━━┯━━━━━━━━┯━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- # │ userId │ id │ title                                                   │ body
-───┼────────┼────┼─────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────
- 0 │      1 │  1 │ sunt aut facere repellat provident occaecati excepturi  │ quia et suscipit
-   │        │    │ optio reprehenderit                                     │ suscipit recusandae consequuntur expedita et cum
-   │        │    │                                                         │ reprehenderit molestiae ut ut quas totam
-   │        │    │                                                         │ nostrum rerum est autem sunt rem eveniet architecto
- 1 │      1 │  2 │ qui est esse                                            │ est rerum tempore vitae
-   │        │    │                                                         │ sequi sint nihil reprehenderit dolor beatae ea dolores
-   │        │    │                                                         │ neque
-   │        │    │                                                         │ fugiat blanditiis voluptate porro vel nihil molestiae ut
-   │        │    │                                                         │ reiciendis
-   │        │    │                                                         │ qui aperiam non debitis possimus qui neque nisi nulla
- 2 │      1 │  3 │ ea molestias quasi exercitationem repellat qui ipsa sit │ et iusto sed quo iure
-   │        │    │ aut                                                     │ voluptatem occaecati omnis eligendi aut ad
-   │        │    │                                                         │ voluptatem doloribus vel accusantium quis pariatur
-   │        │    │                                                         │ molestiae porro eius odio et labore et velit aut
- 3 │      1 │  4 │ eum et est occaecati                                    │ ullam et saepe reiciendis voluptatem adipisci
-   │        │    │                                                         │ sit amet autem assumenda provident rerum culpa
-   │        │    │                                                         │ quis hic commodi nesciunt rem tenetur doloremque ipsam
-   │        │    │                                                         │ iure
-   │        │    │                                                         │ quis sunt voluptatem rerum illo velit
- 4 │      1 │  5 │ nesciunt quas odio                                      │ repudiandae veniam quaerat sunt sed
-   │        │    │                                                         │ alias aut fugiat sit autem sed est
-   │        │    │                                                         │ voluptatem omnis possimus esse voluptatibus quis
-   │        │    │                                                         │ est aut tenetur dolor neque
-━━━┷━━━━━━━━┷━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# => ━━━┯━━━━━━━━┯━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# =>  # │ userId │ id │ title                                                   │ body
+# => ───┼────────┼────┼─────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────
+# =>  0 │      1 │  1 │ sunt aut facere repellat provident occaecati excepturi  │ quia et suscipit
+# =>    │        │    │ optio reprehenderit                                     │ suscipit recusandae consequuntur expedita et cum
+# =>    │        │    │                                                         │ reprehenderit molestiae ut ut quas totam
+# =>    │        │    │                                                         │ nostrum rerum est autem sunt rem eveniet architecto
+# =>  1 │      1 │  2 │ qui est esse                                            │ est rerum tempore vitae
+# =>    │        │    │                                                         │ sequi sint nihil reprehenderit dolor beatae ea dolores
+# =>    │        │    │                                                         │ neque
+# =>    │        │    │                                                         │ fugiat blanditiis voluptate porro vel nihil molestiae ut
+# =>    │        │    │                                                         │ reiciendis
+# =>    │        │    │                                                         │ qui aperiam non debitis possimus qui neque nisi nulla
+# =>  2 │      1 │  3 │ ea molestias quasi exercitationem repellat qui ipsa sit │ et iusto sed quo iure
+# =>    │        │    │ aut                                                     │ voluptatem occaecati omnis eligendi aut ad
+# =>    │        │    │                                                         │ voluptatem doloribus vel accusantium quis pariatur
+# =>    │        │    │                                                         │ molestiae porro eius odio et labore et velit aut
+# =>  3 │      1 │  4 │ eum et est occaecati                                    │ ullam et saepe reiciendis voluptatem adipisci
+# =>    │        │    │                                                         │ sit amet autem assumenda provident rerum culpa
+# =>    │        │    │                                                         │ quis hic commodi nesciunt rem tenetur doloremque ipsam
+# =>    │        │    │                                                         │ iure
+# =>    │        │    │                                                         │ quis sunt voluptatem rerum illo velit
+# =>  4 │      1 │  5 │ nesciunt quas odio                                      │ repudiandae veniam quaerat sunt sed
+# =>    │        │    │                                                         │ alias aut fugiat sit autem sed est
+# =>    │        │    │                                                         │ voluptatem omnis possimus esse voluptatibus quis
+# =>    │        │    │                                                         │ est aut tenetur dolor neque
+# => ━━━┷━━━━━━━━┷━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---
@@ -63,29 +58,24 @@ An example JSON file, `urls.json`, with the following contents:
 
 ```nu
 open urls.json | get urls | each { |u| http get $u }
-```
-
-Output
-
-```
-━━━┯━━━━━━━━┯━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- # │ userId │ id │ title                                                   │ body
-───┼────────┼────┼─────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────
- 0 │      1 │  1 │ sunt aut facere repellat provident occaecati excepturi  │ quia et suscipit
-   │        │    │ optio reprehenderit                                     │ suscipit recusandae consequuntur expedita et cum
-   │        │    │                                                         │ reprehenderit molestiae ut ut quas totam
-   │        │    │                                                         │ nostrum rerum est autem sunt rem eveniet architecto
- 1 │      1 │  2 │ qui est esse                                            │ est rerum tempore vitae
-   │        │    │                                                         │ sequi sint nihil reprehenderit dolor beatae ea dolores
-   │        │    │                                                         │ neque
-   │        │    │                                                         │ fugiat blanditiis voluptate porro vel nihil molestiae ut
-   │        │    │                                                         │ reiciendis
-   │        │    │                                                         │ qui aperiam non debitis possimus qui neque nisi nulla
- 2 │      1 │  3 │ ea molestias quasi exercitationem repellat qui ipsa sit │ et iusto sed quo iure
-   │        │    │ aut                                                     │ voluptatem occaecati omnis eligendi aut ad
-   │        │    │                                                         │ voluptatem doloribus vel accusantium quis pariatur
-   │        │    │                                                         │ molestiae porro eius odio et labore et velit aut
-━━━┷━━━━━━━━┷━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# => ━━━┯━━━━━━━━┯━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# =>  # │ userId │ id │ title                                                   │ body
+# => ───┼────────┼────┼─────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────
+# =>  0 │      1 │  1 │ sunt aut facere repellat provident occaecati excepturi  │ quia et suscipit
+# =>    │        │    │ optio reprehenderit                                     │ suscipit recusandae consequuntur expedita et cum
+# =>    │        │    │                                                         │ reprehenderit molestiae ut ut quas totam
+# =>    │        │    │                                                         │ nostrum rerum est autem sunt rem eveniet architecto
+# =>  1 │      1 │  2 │ qui est esse                                            │ est rerum tempore vitae
+# =>    │        │    │                                                         │ sequi sint nihil reprehenderit dolor beatae ea dolores
+# =>    │        │    │                                                         │ neque
+# =>    │        │    │                                                         │ fugiat blanditiis voluptate porro vel nihil molestiae ut
+# =>    │        │    │                                                         │ reiciendis
+# =>    │        │    │                                                         │ qui aperiam non debitis possimus qui neque nisi nulla
+# =>  2 │      1 │  3 │ ea molestias quasi exercitationem repellat qui ipsa sit │ et iusto sed quo iure
+# =>    │        │    │ aut                                                     │ voluptatem occaecati omnis eligendi aut ad
+# =>    │        │    │                                                         │ voluptatem doloribus vel accusantium quis pariatur
+# =>    │        │    │                                                         │ molestiae porro eius odio et labore et velit aut
+# => ━━━┷━━━━━━━━┷━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---
@@ -94,36 +84,31 @@ If you specify the `--raw` flag, you'll see 3 separate json objects, one in each
 
 ```nu
 open urls.json | get urls | each { |u| http get $u -r }
-```
-
-Output
-
-```
-━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- # │ <value>
-───┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
- 0 │ {
-   │   "userId": 1,
-   │   "id": 1,
-   │   "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-   │   "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum
-   │ rerum est autem sunt rem eveniet architecto"
-   │ }
- 1 │ {
-   │   "userId": 1,
-   │   "id": 2,
-   │   "title": "qui est esse",
-   │   "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro
-   │ vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-   │ }
- 2 │ {
-   │   "userId": 1,
-   │   "id": 3,
-   │   "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
-   │   "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis
-   │ pariatur\nmolestiae porro eius odio et labore et velit aut"
-   │ }
-━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# => ━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# =>  # │ <value>
+# => ───┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# =>  0 │ {
+# =>    │   "userId": 1,
+# =>    │   "id": 1,
+# =>    │   "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+# =>    │   "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum
+# =>    │ rerum est autem sunt rem eveniet architecto"
+# =>    │ }
+# =>  1 │ {
+# =>    │   "userId": 1,
+# =>    │   "id": 2,
+# =>    │   "title": "qui est esse",
+# =>    │   "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro
+# =>    │ vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+# =>    │ }
+# =>  2 │ {
+# =>    │   "userId": 1,
+# =>    │   "id": 3,
+# =>    │   "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+# =>    │   "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis
+# =>    │ pariatur\nmolestiae porro eius odio et labore et velit aut"
+# =>    │ }
+# => ━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---
@@ -175,16 +160,11 @@ Making a `post` request to an endpoint with a JSON payload. To make long request
 
 ```nu
 open payload.json | get my_payload | to json | http post https://jsonplaceholder.typicode.com/posts $in
-```
-
-Output
-
-```
-━━━━━
- id
-─────
- 101
-━━━━━
+# => ━━━━━
+# =>  id
+# => ─────
+# =>  101
+# => ━━━━━
 ```
 
 ---
@@ -193,16 +173,11 @@ We can put this all together into a pipeline where we read data, manipulate it, 
 
 ```nu
 open urls.json | get urls | first | http get $in | upsert id {|item| $item.id | inc} | to json | http post https://jsonplaceholder.typicode.com/posts $in
-```
-
-Output
-
-```
-━━━━━
- id
-─────
- 101
-━━━━━
+# => ━━━━━
+# =>  id
+# => ─────
+# =>  101
+# => ━━━━━
 ```
 
 ### Uploading files
@@ -218,40 +193,35 @@ http post https://httpbin.org/post --content-type "multipart/form-data" {
   icon: (open -r ~/Downloads/favicon-32x32.png),
   description: "Small icon"
 }
-```
-
-Output:
-
-```
-╭─────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ args    │ {record 0 fields}                                                                                     │
-│ data    │                                                                                                       │
-│         │ ╭──────┬────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ files   │ │ icon │ data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIW │ │
-│         │ │      │ XMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAG5SURBVHgBrZeBUcMwDEU/XYBuUG8 │ │
-│         │ │      │ AG2A26AZ0A7pBu0FhgmaDskHKBA0TJExAmSBYd/bFBNmWfLw73fUukvXlWI4KpLHOTs56Z6OzL2ets03C3zg7MP47/ │ │
-│         │ │      │ 0zM0geOGeuZRW3BfwsBBlMFJaMK74UCghVFHIXJ48qWCgHjTPSf6scK2ysFtHHSRfRb9I4YHqDDYtq1XwLuUIeFHgt │ │
-│         │ │      │ GgEE9K+hgd+CKer6h48oJ+EAdA/TiBzACGtRxho7BWZd6SC2iaUG6jIyPtcKYDTIYv6hUQNy6VuD/AgF0U/UoVz6/N │ │
-│         │ │      │ 2whpoEC4wN6JnELvmVNQniLzF1xgzK0I9S3dNIHlE988If3H3LOC5QJCZeQMUQx1XcLJduBP5BHpF9BC/4VbKBAcgj │ │
-│         │ │      │ nHUDYgv8BAgx0bfikECASIal83hXagWQdJ4wP4Rr6LyIl184Rz6kHR+iqD9b7eKuIWYWk8Q4kZ7UCBvIWDTxyArSLx │ │
-│         │ │      │ Nyikv8aSD6hgx1I3lFHBz0dJ+ANdbxCxxmZ7wP9F6zpAMIKY7KHnQ7iRbhQPA1JBewhgEQ0KFduZnG2IFb9x4duxhO │ │
-│         │ │      │ mb0MYRrYF4ZeZ0D0yN+wPKKVmaKtbyvUAAAAASUVORK5CYII=                                          │ │
-│         │ ╰──────┴────────────────────────────────────────────────────────────────────────────────────────────╯ │
-│         │ ╭─────────────┬────────────╮                                                                          │
-│ form    │ │ description │ Small icon │                                                                          │
-│         │ ╰─────────────┴────────────╯                                                                          │
-│         │ ╭────────────────────────┬──────────────────────────────────────────────────────────────────────────╮ │
-│ headers │ │ Accept                 │ */*                                                                      │ │
-│         │ │ Accept-Encoding        │ gzip                                                                     │ │
-│         │ │ Content-Length         │ 893                                                                      │ │
-│         │ │ Content-Type           │ multipart/form-data; boundary=cddfac9d-e5e0-4aa3-a3df-6f9f6e570bc9       │ │
-│         │ │ Host                   │ httpbin.org                                                              │ │
-│         │ │ User-Agent             │ nushell                                                                  │ │
-│         │ │ X-Amzn-Trace-Id        │ Root=1-66b28d98-549045021ddb79ab3d0eda79                                 │ │
-│         │ ╰────────────────────────┴──────────────────────────────────────────────────────────────────────────╯ │
-│ json    │                                                                                                       │
-│ url     │ https://httpbin.org/post                                                                              │
-╰─────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+# => ╭─────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ args    │ {record 0 fields}                                                                                     │
+# => │ data    │                                                                                                       │
+# => │         │ ╭──────┬────────────────────────────────────────────────────────────────────────────────────────────╮ │
+# => │ files   │ │ icon │ data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIW │ │
+# => │         │ │      │ XMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAG5SURBVHgBrZeBUcMwDEU/XYBuUG8 │ │
+# => │         │ │      │ AG2A26AZ0A7pBu0FhgmaDskHKBA0TJExAmSBYd/bFBNmWfLw73fUukvXlWI4KpLHOTs56Z6OzL2ets03C3zg7MP47/ │ │
+# => │         │ │      │ 0zM0geOGeuZRW3BfwsBBlMFJaMK74UCghVFHIXJ48qWCgHjTPSf6scK2ysFtHHSRfRb9I4YHqDDYtq1XwLuUIeFHgt │ │
+# => │         │ │      │ GgEE9K+hgd+CKer6h48oJ+EAdA/TiBzACGtRxho7BWZd6SC2iaUG6jIyPtcKYDTIYv6hUQNy6VuD/AgF0U/UoVz6/N │ │
+# => │         │ │      │ 2whpoEC4wN6JnELvmVNQniLzF1xgzK0I9S3dNIHlE988If3H3LOC5QJCZeQMUQx1XcLJduBP5BHpF9BC/4VbKBAcgj │ │
+# => │         │ │      │ nHUDYgv8BAgx0bfikECASIal83hXagWQdJ4wP4Rr6LyIl184Rz6kHR+iqD9b7eKuIWYWk8Q4kZ7UCBvIWDTxyArSLx │ │
+# => │         │ │      │ Nyikv8aSD6hgx1I3lFHBz0dJ+ANdbxCxxmZ7wP9F6zpAMIKY7KHnQ7iRbhQPA1JBewhgEQ0KFduZnG2IFb9x4duxhO │ │
+# => │         │ │      │ mb0MYRrYF4ZeZ0D0yN+wPKKVmaKtbyvUAAAAASUVORK5CYII=                                          │ │
+# => │         │ ╰──────┴────────────────────────────────────────────────────────────────────────────────────────────╯ │
+# => │         │ ╭─────────────┬────────────╮                                                                          │
+# => │ form    │ │ description │ Small icon │                                                                          │
+# => │         │ ╰─────────────┴────────────╯                                                                          │
+# => │         │ ╭────────────────────────┬──────────────────────────────────────────────────────────────────────────╮ │
+# => │ headers │ │ Accept                 │ */*                                                                      │ │
+# => │         │ │ Accept-Encoding        │ gzip                                                                     │ │
+# => │         │ │ Content-Length         │ 893                                                                      │ │
+# => │         │ │ Content-Type           │ multipart/form-data; boundary=cddfac9d-e5e0-4aa3-a3df-6f9f6e570bc9       │ │
+# => │         │ │ Host                   │ httpbin.org                                                              │ │
+# => │         │ │ User-Agent             │ nushell                                                                  │ │
+# => │         │ │ X-Amzn-Trace-Id        │ Root=1-66b28d98-549045021ddb79ab3d0eda79                                 │ │
+# => │         │ ╰────────────────────────┴──────────────────────────────────────────────────────────────────────────╯ │
+# => │ json    │                                                                                                       │
+# => │ url     │ https://httpbin.org/post                                                                              │
+# => ╰─────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 If the file happens to be a text file, you may need to additionally convert it to binary data before sending it. This can be done using the `into binary` command.
@@ -261,32 +231,27 @@ http post https://httpbin.org/post --content-type "multipart/form-data" {
   doc: (open -r ~/Downloads/README.txt | into binary),
   description: "Documentation file"
 }
-```
-
-Output:
-
-```
-╭─────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ args    │ {record 0 fields}                                                                                        │
-│ data    │                                                                                                          │
-│         │ ╭──────┬───────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ files   │ │ doc  │ To use Nu plugins, use the register command to tell Nu where to find the plugin. For example: │ │
-│         │ │      │                                                                                               │ │
-│         │ │      │ > register ./nu_plugin_query                                                                  │ │
-│         │ ╰──────┴───────────────────────────────────────────────────────────────────────────────────────────────╯ │
-│         │ ╭─────────────┬────────────────────╮                                                                     │
-│ form    │ │ description │ Documentation file │                                                                     │
-│         │ ╰─────────────┴────────────────────╯                                                                     │
-│         │ ╭─────────────────┬────────────────────────────────────────────────────────────────────╮                 │
-│ headers │ │ Accept          │ */*                                                                │                 │
-│         │ │ Accept-Encoding │ gzip                                                               │                 │
-│         │ │ Content-Length  │ 476                                                                │                 │
-│         │ │ Content-Type    │ multipart/form-data; boundary=f872d6c3-7937-426d-b266-de562b777e1d │                 │
-│         │ │ Host            │ httpbin.org                                                        │                 │
-│         │ │ User-Agent      │ nushell                                                            │                 │
-│         │ │ X-Amzn-Trace-Id │ Root=1-66b28eef-4998c6ab0ef5becb19ca7f6f                           │                 │
-│         │ ╰─────────────────┴────────────────────────────────────────────────────────────────────╯                 │
-│ json    │                                                                                                          │
-│ url     │ https://httpbin.org/post                                                                                 │
-╰─────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+# => ╭─────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ args    │ {record 0 fields}                                                                                        │
+# => │ data    │                                                                                                          │
+# => │         │ ╭──────┬───────────────────────────────────────────────────────────────────────────────────────────────╮ │
+# => │ files   │ │ doc  │ To use Nu plugins, use the register command to tell Nu where to find the plugin. For example: │ │
+# => │         │ │      │                                                                                               │ │
+# => │         │ │      │ > register ./nu_plugin_query                                                                  │ │
+# => │         │ ╰──────┴───────────────────────────────────────────────────────────────────────────────────────────────╯ │
+# => │         │ ╭─────────────┬────────────────────╮                                                                     │
+# => │ form    │ │ description │ Documentation file │                                                                     │
+# => │         │ ╰─────────────┴────────────────────╯                                                                     │
+# => │         │ ╭─────────────────┬────────────────────────────────────────────────────────────────────╮                 │
+# => │ headers │ │ Accept          │ */*                                                                │                 │
+# => │         │ │ Accept-Encoding │ gzip                                                               │                 │
+# => │         │ │ Content-Length  │ 476                                                                │                 │
+# => │         │ │ Content-Type    │ multipart/form-data; boundary=f872d6c3-7937-426d-b266-de562b777e1d │                 │
+# => │         │ │ Host            │ httpbin.org                                                        │                 │
+# => │         │ │ User-Agent      │ nushell                                                            │                 │
+# => │         │ │ X-Amzn-Trace-Id │ Root=1-66b28eef-4998c6ab0ef5becb19ca7f6f                           │                 │
+# => │         │ ╰─────────────────┴────────────────────────────────────────────────────────────────────╯                 │
+# => │ json    │                                                                                                          │
+# => │ url     │ https://httpbin.org/post                                                                                 │
+# => ╰─────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```

@@ -1,2 +1,3 @@
-> cd nushell
-nushell> cargo build --workspace; cargo run
+cd nushell
+# ./nushell
+cargo build --workspace; cargo run

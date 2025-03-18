@@ -11,13 +11,13 @@ Nu 的插件是可执行的；Nu 在需要时启动它们，并通过 [stdin, st
 Linux+macOS:
 
 ```nu
-> plugin add --encoding=capnp ./my_plugins/my-cool-plugin
+plugin add --encoding=capnp ./my_plugins/my-cool-plugin
 ```
 
 Windows:
 
 ```nu
-> plugin add --encoding=capnp .\my_plugins\my-cool-plugin.exe
+plugin add --encoding=capnp .\my_plugins\my-cool-plugin.exe
 ```
 
 当 [`plugin add`](/commands/docs/plugin_add.md) 被调用时：
@@ -29,7 +29,7 @@ Windows:
 一旦注册，该插件就可以作为你的命令集的一部分被使用：
 
 ```nu
-> help commands | where is_plugin == true
+help commands | where is_plugin == true
 ```
 
 ## 示例

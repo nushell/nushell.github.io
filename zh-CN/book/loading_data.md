@@ -12,9 +12,9 @@ Nu 在处理数据方面最强大的能力之一是[`open`](/commands/docs/open.
 
 如果我们想查看当前项目的版本，我们可以使用[`get`](/commands/docs/get.md)命令：
 
-```
-> open editors/vscode/package.json | get version
-1.0.0
+```nu
+open editors/vscode/package.json | get version
+# => 1.0.0
 ```
 
 Nu 目前支持直接从以下格式加载表数据：
@@ -38,7 +38,7 @@ Nu 目前支持直接从以下格式加载表数据：
 但是，当你加载其他的文本文件时会发生什么呢？让我们试一试：
 
 ```nu
-> open README.md
+open README.md
 ```
 
 我们会看到该文件的内容。
@@ -51,87 +51,87 @@ Nu 目前支持直接从以下格式加载表数据：
 
 想象一下，我们得到了这个数据文件：
 
-```
-> open people.txt
-Octavia | Butler | Writer
-Bob | Ross | Painter
-Antonio | Vivaldi | Composer
+```nu
+open people.txt
+# => Octavia | Butler | Writer
+# => Bob | Ross | Painter
+# => Antonio | Vivaldi | Composer
 ```
 
 我们想要的数据都由管道（`|`）符号隔开，每人单独一行。由于 Nu 没有默认的以管道分隔的文件格式，所以我们必须自己来解析。
 
 当我们引入这个文件时，我们需要做的第一件事是确保后续每次只处理一行：
 
-```
-> open people.txt | lines
-───┬──────────────────────────────
- 0 │ Octavia | Butler | Writer
- 1 │ Bob | Ross | Painter
- 2 │ Antonio | Vivaldi | Composer
-───┴──────────────────────────────
+```nu
+open people.txt | lines
+# => ───┬──────────────────────────────
+# =>  0 │ Octavia | Butler | Writer
+# =>  1 │ Bob | Ross | Painter
+# =>  2 │ Antonio | Vivaldi | Composer
+# => ───┴──────────────────────────────
 ```
 
 可以看到，我们正在处理这些行，因为我们又回到了一个列表中。下一步是看看是否可以把行分割成更有用的东西。为此，我们将使用[`split`](/commands/docs/split.md)命令。[`split`](/commands/docs/split.md)，顾名思义，为我们提供了一种分割字符串的方法。我们将使用[`split`](/commands/docs/split.md)的`column`子命令，将内容分成多列。我们会告诉它分隔符是什么，剩下的就由它来完成：
 
-```
-> open people.txt | lines | split column "|"
-───┬──────────┬───────────┬───────────
- # │ column1  │ column2   │ column3
-───┼──────────┼───────────┼───────────
- 0 │ Octavia  │  Butler   │  Writer
- 1 │ Bob      │  Ross     │  Painter
- 2 │ Antonio  │  Vivaldi  │  Composer
-───┴──────────┴───────────┴───────────
+```nu
+open people.txt | lines | split column "|"
+# => ───┬──────────┬───────────┬───────────
+# =>  # │ column1  │ column2   │ column3
+# => ───┼──────────┼───────────┼───────────
+# =>  0 │ Octavia  │  Butler   │  Writer
+# =>  1 │ Bob      │  Ross     │  Painter
+# =>  2 │ Antonio  │  Vivaldi  │  Composer
+# => ───┴──────────┴───────────┴───────────
 ```
 
 这看起来差不多了，只是还有一些额外的空白字符，让我们 [`trim`](/commands/docs/str_trim.md) 掉这些空格：
 
-```
-> open people.txt | lines | split column "|" | str trim
-───┬─────────┬─────────┬──────────
- # │ column1 │ column2 │ column3
-───┼─────────┼─────────┼──────────
- 0 │ Octavia │ Butler  │ Writer
- 1 │ Bob     │ Ross    │ Painter
- 2 │ Antonio │ Vivaldi │ Composer
-───┴─────────┴─────────┴──────────
+```nu
+open people.txt | lines | split column "|" | str trim
+# => ───┬─────────┬─────────┬──────────
+# =>  # │ column1 │ column2 │ column3
+# => ───┼─────────┼─────────┼──────────
+# =>  0 │ Octavia │ Butler  │ Writer
+# =>  1 │ Bob     │ Ross    │ Painter
+# =>  2 │ Antonio │ Vivaldi │ Composer
+# => ───┴─────────┴─────────┴──────────
 ```
 
 还不错，[`split`](/commands/docs/split.md)命令返回给我们可以使用的数据，还预设了默认的列名：
 
-```
-> open people.txt | lines | split column "|" | str trim | get column1
-───┬─────────
- 0 │ Octavia
- 1 │ Bob
- 2 │ Antonio
-───┴─────────
+```nu
+open people.txt | lines | split column "|" | str trim | get column1
+# => ───┬─────────
+# =>  0 │ Octavia
+# =>  1 │ Bob
+# =>  2 │ Antonio
+# => ───┴─────────
 ```
 
 我们也可以用自定义的列名代替默认的：
 
-```
-> open people.txt | lines | split column "|" first_name last_name job | str trim
-───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job
-───┼────────────┼───────────┼──────────
- 0 │ Octavia    │ Butler    │ Writer
- 1 │ Bob        │ Ross      │ Painter
- 2 │ Antonio    │ Vivaldi   │ Composer
-───┴────────────┴───────────┴──────────
+```nu
+open people.txt | lines | split column "|" first_name last_name job | str trim
+# => ───┬────────────┬───────────┬──────────
+# =>  # │ first_name │ last_name │ job
+# => ───┼────────────┼───────────┼──────────
+# =>  0 │ Octavia    │ Butler    │ Writer
+# =>  1 │ Bob        │ Ross      │ Painter
+# =>  2 │ Antonio    │ Vivaldi   │ Composer
+# => ───┴────────────┴───────────┴──────────
 ```
 
 现在，我们的数据加载到一个表中了，我们可以使用之前对表所用的各种命令来处理它：
 
-```
-> open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
-───┬────────────┬───────────┬──────────
- # │ first_name │ last_name │ job
-───┼────────────┼───────────┼──────────
- 0 │ Antonio    │ Vivaldi   │ Composer
- 1 │ Bob        │ Ross      │ Painter
- 2 │ Octavia    │ Butler    │ Writer
-───┴────────────┴───────────┴──────────
+```nu
+open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
+# => ───┬────────────┬───────────┬──────────
+# =>  # │ first_name │ last_name │ job
+# => ───┼────────────┼───────────┼──────────
+# =>  0 │ Antonio    │ Vivaldi   │ Composer
+# =>  1 │ Bob        │ Ross      │ Painter
+# =>  2 │ Octavia    │ Butler    │ Writer
+# => ───┴────────────┴───────────┴──────────
 ```
 
 其他可用于字符串的命令有：
@@ -143,12 +143,12 @@ Antonio | Vivaldi | Composer
 如果我们已经知道待处理的数据具有 Nu 能够理解的格式，则可以使用一些辅助命令，例如，我们打开一个 Rust 的 Cargo.lock 文件：
 
 ```toml
-> open Cargo.lock
-# This file is automatically @generated by Cargo.
-# It is not intended for manual editing.
-[[package]]
-name = "adhoc_derive"
-version = "0.1.2"
+open Cargo.lock
+# => # This file is automatically @generated by Cargo.
+# => # It is not intended for manual editing.
+# => [[package]]
+# => name = "adhoc_derive"
+# => version = "0.1.2"
 ```
 
 "Cargo.lock" 实际上是一个 .toml 文件，但是文件扩展名不是 .toml。没关系，我们可以使用 `from toml` 命令：
@@ -162,13 +162,13 @@ version = "0.1.2"
 虽然能够打开一个文件并立即使用其数据表很有帮助，但这并不总是我们想要的。为了获得原始文本，[`open`](/commands/docs/open.md)命令可以接受一个可选的`--raw`标志：
 
 ```toml
-> open Cargo.toml --raw
-[package]
-name = "nu"
-version = "0.1.3"
-authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
-description = "A shell for the GitHub era"
-license = "MIT"
+open Cargo.toml --raw
+# => [package]
+# => name = "nu"
+# => version = "0.1.3"
+# => authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
+# => description = "A shell for the GitHub era"
+# => license = "MIT"
 ```
 
 ## 获取 URLs

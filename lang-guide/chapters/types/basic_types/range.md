@@ -14,7 +14,7 @@
 
    Examples:
 
-   - Values from 1 to 10 inclusive:
+   - Values from 1 to 5 inclusive:
 
    ```nu
    > 1..5

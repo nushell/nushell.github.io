@@ -1,3 +1,8 @@
+---
+editLink: false
+contributors: false
+---
+
 # Shells
 
 <script>
@@ -15,12 +20,16 @@
 </script>
 
 <table>
-  <tr>
-    <th>Command</th>
-    <th>Description</th>
-  </tr>
-  <tr v-for="command in commands">
-   <td><a :href="$withBase(command.path)">{{ command.title }}</a></td>
-   <td style="white-space: pre-wrap;">{{ command.frontmatter.usage }}</td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="command in commands">
+       <td><a :href="$withBase(command.path)">{{ command.title }}</a></td>
+       <td style="white-space: pre-wrap;">{{ command.frontmatter.usage }}</td>
+    </tr>
+  </tbody>
 </table>

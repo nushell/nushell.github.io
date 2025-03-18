@@ -94,7 +94,7 @@ $df_0 | polars schema
 To output more statistically correct timings, let's load and use the `std bench` command.
 
 ```nu
-use std bench
+use std/bench
 ```
 
 We are going to group the data by year, and sum the column `geo_count`.
@@ -110,12 +110,7 @@ bench -n 10 --pretty {
         | math sum
     }
 }
-```
-
-Output
-
-```
-3sec 268ms +/- 50ms
+# => 3sec 268ms +/- 50ms
 ```
 
 So, 3.3 seconds to perform this aggregation.
@@ -137,12 +132,7 @@ And the result from the benchmark is:
 bench -n 10 --pretty {
     python load.py | complete | null
 }
-```
-
-Output
-
-```
-1sec 322ms +/- 6ms
+# => 1sec 322ms +/- 6ms
 ```
 
 Not bad at all. Pandas managed to get it 2.6 times faster than Nushell.
@@ -167,12 +157,7 @@ instance for each test in order of honest comparison) is:
 bench -n 10 --pretty {
     nu load.nu | complete | null
 }
-```
-
-Output
-
-```
-135ms +/- 4ms
+# => 135ms +/- 4ms
 ```
 
 The `polars` dataframes plugin managed to finish operation 10 times
@@ -437,25 +422,20 @@ $group
     (polars col float_1 | polars sum)
     (polars col float_2 | polars count)
 ] | polars sort-by first
-```
-
-Output
-
-```
-╭────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ plan           │ SORT BY [col("first")]                                                                              │
-│                │   AGGREGATE                                                                                         │
-│                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1")                                  │
-│                │ .sum(), col("float_2").count()] BY [col("first")] FROM                                              │
-│                │     DF ["int_1", "int_2", "float_1", "float_2                                                       │
-│                │ "]; PROJECT */8 COLUMNS; SELECTION: "None"                                                          │
-│ optimized_plan │ SORT BY [col("first")]                                                                              │
-│                │   AGGREGATE                                                                                         │
-│                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1")                                  │
-│                │ .sum(), col("float_2").count()] BY [col("first")] FROM                                              │
-│                │     DF ["int_1", "int_2", "float_1", "float_2                                                       │
-│                │ "]; PROJECT 5/8 COLUMNS; SELECTION: "None"                                                          │
-╰────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────╯
+# => ╭────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ plan           │ SORT BY [col("first")]                                                                              │
+# => │                │   AGGREGATE                                                                                         │
+# => │                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1")                                  │
+# => │                │ .sum(), col("float_2").count()] BY [col("first")] FROM                                              │
+# => │                │     DF ["int_1", "int_2", "float_1", "float_2                                                       │
+# => │                │ "]; PROJECT */8 COLUMNS; SELECTION: "None"                                                          │
+# => │ optimized_plan │ SORT BY [col("first")]                                                                              │
+# => │                │   AGGREGATE                                                                                         │
+# => │                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1")                                  │
+# => │                │ .sum(), col("float_2").count()] BY [col("first")] FROM                                              │
+# => │                │     DF ["int_1", "int_2", "float_1", "float_2                                                       │
+# => │                │ "]; PROJECT 5/8 COLUMNS; SELECTION: "None"                                                          │
+# => ╰────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
@@ -902,40 +882,30 @@ in column `word`
 
 ```nu
 $df_1 | polars filter-with ($in.word | polars is-unique)
-```
-
-Output
-
-```
-╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
-│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
-├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┤
-│ 0 │     1 │    11 │    0.10 │    1.00 │ a     │ b      │ c     │ first │
-│ 1 │     8 │    18 │    0.80 │    7.00 │ c     │ c      │ b     │ eight │
-╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────╯
+# => ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
+# => │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
+# => ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┤
+# => │ 0 │     1 │    11 │    0.10 │    1.00 │ a     │ b      │ c     │ first │
+# => │ 1 │     8 │    18 │    0.80 │    7.00 │ c     │ c      │ b     │ eight │
+# => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────╯
 ```
 
 Or all the duplicated ones
 
 ```nu
 $df_1 | polars filter-with ($in.word | polars is-duplicated)
-```
-
-Output
-
-```
-╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
-│ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
-├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
-│ 0 │     2 │    12 │    0.20 │    1.00 │ a     │ b      │ c     │ second │
-│ 1 │     3 │    13 │    0.30 │    2.00 │ a     │ b      │ c     │ third  │
-│ 2 │     4 │    14 │    0.40 │    3.00 │ b     │ a      │ c     │ second │
-│ 3 │     0 │    15 │    0.50 │    4.00 │ b     │ a      │ a     │ third  │
-│ 4 │     6 │    16 │    0.60 │    5.00 │ b     │ a      │ a     │ second │
-│ 5 │     7 │    17 │    0.70 │    6.00 │ b     │ c      │ a     │ third  │
-│ 6 │     9 │    19 │    0.90 │    8.00 │ c     │ c      │ b     │ ninth  │
-│ 7 │     0 │    10 │    0.00 │    9.00 │ c     │ c      │ b     │ ninth  │
-╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
+# => ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬────────╮
+# => │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │  word  │
+# => ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼────────┤
+# => │ 0 │     2 │    12 │    0.20 │    1.00 │ a     │ b      │ c     │ second │
+# => │ 1 │     3 │    13 │    0.30 │    2.00 │ a     │ b      │ c     │ third  │
+# => │ 2 │     4 │    14 │    0.40 │    3.00 │ b     │ a      │ c     │ second │
+# => │ 3 │     0 │    15 │    0.50 │    4.00 │ b     │ a      │ a     │ third  │
+# => │ 4 │     6 │    16 │    0.60 │    5.00 │ b     │ a      │ a     │ second │
+# => │ 5 │     7 │    17 │    0.70 │    6.00 │ b     │ c      │ a     │ third  │
+# => │ 6 │     9 │    19 │    0.90 │    8.00 │ c     │ c      │ b     │ ninth  │
+# => │ 7 │     0 │    10 │    0.00 │    9.00 │ c     │ c      │ b     │ ninth  │
+# => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
 ## Lazy Dataframes
@@ -998,19 +968,14 @@ $lf_0
      ((polars col a) / 2 | polars as half_a)
 ]
 | polars collect
-```
-
-Output
-
-```
-╭───┬───┬───┬──────────┬────────╮
-│ # │ a │ b │ double_a │ half_a │
-├───┼───┼───┼──────────┼────────┤
-│ 0 │ 4 │ d │        8 │      2 │
-│ 1 │ 3 │ c │        6 │      1 │
-│ 2 │ 2 │ b │        4 │      1 │
-│ 3 │ 1 │ a │        2 │      0 │
-╰───┴───┴───┴──────────┴────────╯
+# => ╭───┬───┬───┬──────────┬────────╮
+# => │ # │ a │ b │ double_a │ half_a │
+# => ├───┼───┼───┼──────────┼────────┤
+# => │ 0 │ 4 │ d │        8 │      2 │
+# => │ 1 │ 3 │ c │        6 │      1 │
+# => │ 2 │ 2 │ b │        4 │      1 │
+# => │ 3 │ 1 │ a │        2 │      0 │
+# => ╰───┴───┴───┴──────────┴────────╯
 ```
 
 :::tip
@@ -1072,17 +1037,12 @@ $lf_1
      (polars col value | polars mean | polars as mean)
 ]
 | polars collect
-```
-
-Output
-
-```
-╭───┬──────┬─────┬──────╮
-│ # │ name │ sum │ mean │
-├───┼──────┼─────┼──────┤
-│ 0 │ two  │   5 │ 2.50 │
-│ 1 │ one  │   2 │ 1.00 │
-╰───┴──────┴─────┴──────╯
+# => ╭───┬──────┬─────┬──────╮
+# => │ # │ name │ sum │ mean │
+# => ├───┼──────┼─────┼──────┤
+# => │ 0 │ two  │   5 │ 2.50 │
+# => │ 1 │ one  │   2 │ 1.00 │
+# => ╰───┴──────┴─────┴──────╯
 ```
 
 And we could join on a lazy dataframe that hasn't being collected. Let's join
@@ -1098,19 +1058,14 @@ let group = $lf_2
     ]
 
 $lf_2 | polars join $group name name | polars collect
-```
-
-Output
-
-```
-╭───┬──────┬───────┬─────┬──────╮
-│ # │ name │ value │ sum │ mean │
-├───┼──────┼───────┼─────┼──────┤
-│ 0 │ one  │     1 │   2 │ 1.00 │
-│ 1 │ two  │     2 │   5 │ 2.50 │
-│ 2 │ one  │     1 │   2 │ 1.00 │
-│ 3 │ two  │     3 │   5 │ 2.50 │
-╰───┴──────┴───────┴─────┴──────╯
+# => ╭───┬──────┬───────┬─────┬──────╮
+# => │ # │ name │ value │ sum │ mean │
+# => ├───┼──────┼───────┼─────┼──────┤
+# => │ 0 │ one  │     1 │   2 │ 1.00 │
+# => │ 1 │ two  │     2 │   5 │ 2.50 │
+# => │ 2 │ one  │     1 │   2 │ 1.00 │
+# => │ 3 │ two  │     3 │   5 │ 2.50 │
+# => ╰───┴──────┴───────┴─────┴──────╯
 ```
 
 As you can see lazy frames are a powerful construct that will let you query

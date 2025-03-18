@@ -202,7 +202,7 @@ Using [filter commands](/commands/categories/filters.html) with immutable variab
 
 Variable names in Nushell come with a few restrictions as to what characters they can contain. In particular, they cannot contain these characters:
 
-```
+```text
 .  [  (  {  +  -  *  ^  /  =  !  <  >  &  |
 ```
 

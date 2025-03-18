@@ -1,1 +1,1 @@
-> cd ../sibling
+cd ../sibling

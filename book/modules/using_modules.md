@@ -223,7 +223,6 @@ assert equal 1 1
 assert true
 # => Error:
 # => help: A command with that name exists in module `assert`. Try importing it with `use`
-
 ```
 
 Just as you can `use` a subset of the module's definitions, you can also `hide` them selectively as well:

@@ -4,7 +4,7 @@ Hay veces que simplemente necesitas sumar un par de números cuando te encuentra
 
 ## Sumar, Restar, Mupltiplicar, Dividir
 
-```
+```nu
 1 + 3
 # => 4
 ```
@@ -19,12 +19,12 @@ Puedes usar paréntesis para agrupar expresiones matemáticas en modo `math`. Es
 
 Puedes revisar si un valor se encuentra dentro de un conjunto de valores o no, usando los operadores `in` y `not-in`.
 
-```
+```nu
 1 in [1 2 3]
 # => true
 ```
 
-```
+```nu
 1 not-in [1 2 3]
 # => false
 ```
@@ -33,12 +33,12 @@ Puedes revisar si un valor se encuentra dentro de un conjunto de valores o no, u
 
 Puedes revisar si una cadena se encuentra dentro de otra cadena o no, usando `=~` y `!~`.
 
-```
+```nu
 "gallinagallo" =~ "gallo"
 # => true
 ```
 
-```
+```nu
 "gallinagallo" !~ "pollito"
 # => true
 ```
@@ -56,7 +56,7 @@ Los siguientes comparadores también se encuentran disponibles:
 
 ## Operadores Compuestos
 
-Nushell también soporta `&&` y `||` para unir dos operaciones que regresen valores booleanos, usando `y` y `o` respectivamente. Por ejemplo: `ls | where name in ["uno" "dos" "tres"] && size > 10kb`
+Nushell también soporta `and` y `or` para unir dos operaciones que regresen valores booleanos. Por ejemplo: `ls | where name in ["uno" "dos" "tres"] and size > 10kb`
 
 ## Orden de operaciones
 
@@ -66,7 +66,7 @@ Las operaciones matemáticas son evaluadas de la siguiente manera (de mayor prec
 - Multiplicación (`*`) y División (`/`)
 - Suma (`+`) y Resta (`-`)
 
-```
+```nu
 3 * (1 + 2)
 # => 9
 ```
@@ -77,13 +77,13 @@ Hay una variación abreviada "short-hand" en modo matemático incluída en Nushe
 
 Es probable que ya la usaste antes. Por ejemplo, supongamos que deseamos ver filas de `ls` donde para cada uno por lo menos tenga 10 kilobytes, podemos escribir:
 
-```
+```nu
 ls | where size > 10kb
 ```
 
 El comando `where memoria > 10kb` tiene dos partes: El nombre del comando `where` y su abreviación expresión matemática `size > 10kb`. Indicamos `abreviada` debido a que `size` es una versión acortada de escribir `$it.size`. Si observamos su forma completamente expandida, veríamos:
 
-```
+```nu
 ls | where {|$it| $it.size > 10kb }
 ```
 

@@ -18,7 +18,7 @@ features:
 
 ### Nu は既存のデータとの連携が可能
 
-Nu はでは[JSON, YAML, XML, Excel and more](/book/loading_data.md)を標準サポートしています。ファイル、データベース、Web API など、どのようなデータでも簡単に Nu パイプラインに取り込むことができます。
+Nu は[JSON, YAML, XML, Excel and more](/book/loading_data.md)を標準サポートしています。ファイル、データベース、Web API など、どのようなデータでも簡単に Nu パイプラインに取り込むことができます。
 
 <img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 

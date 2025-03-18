@@ -48,7 +48,7 @@ Output
 
 Suppose you have a file with the following format.
 
-```
+```text
 band:album:year
 Fugazi:Steady Diet of Nothing:1991
 Fugazi:The Argument:2001
@@ -61,20 +61,15 @@ You can parse it into a table.
 
 ```nu
 open bands.txt | lines | split column ":" Band Album Year | skip 1 | sort-by Year
-```
-
-Output
-
-```
-━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━
- # │ Band   │ Album                  │ Year
-───┼────────┼────────────────────────┼──────
- 0 │ Fugazi │ 7 Songs                │ 1988
- 1 │ Fugazi │ Repeater               │ 1990
- 2 │ Fugazi │ Steady Diet of Nothing │ 1991
- 3 │ Fugazi │ In On The Kill Taker   │ 1993
- 4 │ Fugazi │ The Argument           │ 2001
-━━━┷━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━
+# => ━━━┯━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━
+# =>  # │ Band   │ Album                  │ Year
+# => ───┼────────┼────────────────────────┼──────
+# =>  0 │ Fugazi │ 7 Songs                │ 1988
+# =>  1 │ Fugazi │ Repeater               │ 1990
+# =>  2 │ Fugazi │ Steady Diet of Nothing │ 1991
+# =>  3 │ Fugazi │ In On The Kill Taker   │ 1993
+# =>  4 │ Fugazi │ The Argument           │ 2001
+# => ━━━┷━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━
 ```
 
 You can alternatively do this using `parse`.
@@ -97,24 +92,19 @@ Suppose you would like to check the number of lines the string "Value" appears p
 
 ```nu
 rg -c Value | lines | split column ":" file line_count | into int line_count | sort-by line_count | reverse
-```
-
-Output
-
-```
-───┬──────────────────────────────────────┬────────────
- # │ file                                 │ line_count
-───┼──────────────────────────────────────┼────────────
- 0 │ crates/nu-source/src/meta.rs         │         27
- 1 │ crates/nu-protocol/src/value/dict.rs │         10
- 2 │ src/commands/config.rs               │         10
- 3 │ crates/nu_plugin_sys/src/sys.rs      │         10
- 4 │ src/commands/from_bson.rs            │          9
- 5 │ src/utils/data_processing.rs         │          9
- 6 │ src/deserializer.rs                  │          8
- 7 │ src/commands/histogram.rs            │          7
- 8 │ src/commands/split_column.rs         │          6
- 9 │ src/data/dict.rs                     │          6
-───┴──────────────────────────────────────┴────────────
-... example output limited due to large output
+# => ───┬──────────────────────────────────────┬────────────
+# =>  # │ file                                 │ line_count
+# => ───┼──────────────────────────────────────┼────────────
+# =>  0 │ crates/nu-source/src/meta.rs         │         27
+# =>  1 │ crates/nu-protocol/src/value/dict.rs │         10
+# =>  2 │ src/commands/config.rs               │         10
+# =>  3 │ crates/nu_plugin_sys/src/sys.rs      │         10
+# =>  4 │ src/commands/from_bson.rs            │          9
+# =>  5 │ src/utils/data_processing.rs         │          9
+# =>  6 │ src/deserializer.rs                  │          8
+# =>  7 │ src/commands/histogram.rs            │          7
+# =>  8 │ src/commands/split_column.rs         │          6
+# =>  9 │ src/data/dict.rs                     │          6
+# => ───┴──────────────────────────────────────┴────────────
+# => ... example output limited due to large output
 ```
