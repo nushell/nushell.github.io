@@ -2,7 +2,7 @@
 title: to msgpack
 categories: |
   formats
-version: 0.102.0
+version: 0.103.0
 formats: |
   Convert Nu values into MessagePack.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> to msgpack {flags} ```
+
+## Flags
+
+ -  `--serialize, -s`: serialize nushell types that cannot be deserialized
 
 
 ## Input/output types:

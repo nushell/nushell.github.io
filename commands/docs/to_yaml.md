@@ -2,7 +2,7 @@
 title: to yaml
 categories: |
   formats
-version: 0.102.0
+version: 0.103.0
 formats: |
   Convert table into .yaml/.yml text.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 
 ## Examples
 
-Outputs an YAML string representing the contents of this table
+Outputs a YAML string representing the contents of this table
 ```nu
 > [[foo bar]; ["1" "2"]] | to yaml
 - foo: '1'

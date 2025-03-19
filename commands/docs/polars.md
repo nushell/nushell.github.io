@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.102.0
+version: 0.103.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -35,7 +35,21 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | nothing | string |
 
 ## Notes
-You must use one of the following subcommands. Using this command as-is will only produce this help message.
+
+You must use one of the subcommands below. Using this command as-is will only produce this help message.
+
+The following are the main datatypes (wrapped from Polars) that are used by these subcommands:
+
+Lazy and Strict dataframes (called `NuLazyFrame` and `NuDataFrame` in error messages) are the main
+data structure.
+
+Expressions, representing various column operations (called `NuExpression`), are passed to many commands such as
+`polars filter` or `polars with-column`. Most nushell operators are supported in these expressions, importantly
+arithmetic, comparison and boolean logical.
+
+Groupbys (`NuLazyGroupBy`), the output of a `polars group-by`, represent a grouped dataframe and are typically piped
+to the `polars agg` command with some column expressions for aggregation which then returns a dataframe.
+
 
 ## Subcommands:
 
@@ -107,6 +121,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars join`](/commands/docs/polars_join.md)                       | Joins a lazy frame with other lazy frame.                                                                                                                          | plugin |
 | [`polars last`](/commands/docs/polars_last.md)                       | Creates new dataframe with tail rows or creates a last expression.                                                                                                 | plugin |
 | [`polars len`](/commands/docs/polars_len.md)                         | Return the number of rows in the context. This is similar to COUNT(*) in SQL.                                                                                      | plugin |
+| [`polars list-contains`](/commands/docs/polars_list-contains.md)     | Checks if an element is contained in a list.                                                                                                                       | plugin |
 | [`polars lit`](/commands/docs/polars_lit.md)                         | Creates a literal expression.                                                                                                                                      | plugin |
 | [`polars lowercase`](/commands/docs/polars_lowercase.md)             | Lowercase the strings in the column.                                                                                                                               | plugin |
 | [`polars max`](/commands/docs/polars_max.md)                         | Creates a max expression or aggregates columns to their max value.                                                                                                 | plugin |
@@ -144,6 +159,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`polars str-lengths`](/commands/docs/polars_str-lengths.md)         | Get lengths of all strings.                                                                                                                                        | plugin |
 | [`polars str-slice`](/commands/docs/polars_str-slice.md)             | Slices the string from the start position until the selected length.                                                                                               | plugin |
 | [`polars str-split`](/commands/docs/polars_str-split.md)             | Split the string by a substring. The resulting dtype is list\<str\>.                                                                                               | plugin |
+| [`polars str-strip-chars`](/commands/docs/polars_str-strip-chars.md) | Strips specified characters from strings in a column                                                                                                               | plugin |
 | [`polars strftime`](/commands/docs/polars_strftime.md)               | Formats date based on string rule.                                                                                                                                 | plugin |
 | [`polars sum`](/commands/docs/polars_sum.md)                         | Creates a sum expression for an aggregation or aggregates columns to their sum value.                                                                              | plugin |
 | [`polars summary`](/commands/docs/polars_summary.md)                 | For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.                                                                     | plugin |

@@ -2,7 +2,7 @@
 title: polars concat
 categories: |
   dataframe
-version: 0.102.0
+version: 0.103.0
 dataframe: |
   Concatenate two or more dataframes.
 usage: |
@@ -33,6 +33,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
  -  `--rechunk`: Rechunk the resulting dataframe
  -  `--to-supertypes`: Cast to supertypes
  -  `--diagonal`: Concatenate dataframes diagonally
+ -  `--no-maintain-order`: Do not maintain order. The default behavior is to maintain order.
  -  `--from-partitioned-ds`: Concatenate dataframes from a partitioned dataset
 
 ## Parameters

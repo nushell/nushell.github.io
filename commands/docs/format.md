@@ -2,7 +2,7 @@
 title: format
 categories: |
   strings
-version: 0.102.0
+version: 0.103.0
 strings: |
   Various commands for formatting data.
 usage: |

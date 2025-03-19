@@ -2,7 +2,7 @@
 title: commandline edit
 categories: |
   core
-version: 0.102.0
+version: 0.103.0
 core: |
   Modify the current command line input buffer.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 
 ## Parameters
 
- -  `str`: the string to perform the operation with
+ -  `str`: The string to perform the operation with.
 
 
 ## Input/output types:

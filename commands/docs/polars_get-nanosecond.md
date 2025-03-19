@@ -2,7 +2,7 @@
 title: polars get-nanosecond
 categories: |
   dataframe
-version: 0.102.0
+version: 0.103.0
 dataframe: |
   Gets nanosecond from date.
 usage: |

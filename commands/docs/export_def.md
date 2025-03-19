@@ -2,7 +2,7 @@
 title: export def
 categories: |
   core
-version: 0.102.0
+version: 0.103.0
 core: |
   Define a custom command and export it from a module.
 usage: |

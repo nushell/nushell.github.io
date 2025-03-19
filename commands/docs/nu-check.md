@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.102.0
+version: 0.103.0
 strings: |
   Validate and parse input content.
 usage: |
@@ -73,17 +73,5 @@ Parse an internal stream as module by showing error message
 Parse a string as script
 ```nu
 > $'two(char nl)lines' | nu-check
-
-```
-
-Heuristically parse which begins with script first, if it sees a failure, try module afterwards
-```nu
-> nu-check -a script.nu
-
-```
-
-Heuristically parse by showing error message
-```nu
-> open foo.nu | lines | nu-check --all --debug
 
 ```

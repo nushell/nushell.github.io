@@ -2,7 +2,7 @@
 title: keybindings list
 categories: |
   platform
-version: 0.102.0
+version: 0.103.0
 platform: |
   List available options that can be used to create keybindings.
 usage: |

@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.102.0
+version: 0.103.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |

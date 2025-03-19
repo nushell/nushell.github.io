@@ -2,7 +2,7 @@
 title: path type
 categories: |
   path
-version: 0.102.0
+version: 0.103.0
 path: |
   Get the type of the object a path refers to (e.g., file, dir, symlink).
 usage: |

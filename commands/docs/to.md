@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.102.0
+version: 0.103.0
 formats: |
   Translate structured data to a format.
 usage: |
@@ -47,3 +47,4 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`to tsv`](/commands/docs/to_tsv.md)           | Convert table into .tsv text.                                 | built-in |
 | [`to xml`](/commands/docs/to_xml.md)           | Convert special record structure into .xml text.              | built-in |
 | [`to yaml`](/commands/docs/to_yaml.md)         | Convert table into .yaml/.yml text.                           | built-in |
+| [`to yml`](/commands/docs/to_yml.md)           | Convert table into .yaml/.yml text.                           | built-in |

@@ -2,7 +2,7 @@
 title: from yaml
 categories: |
   formats
-version: 0.102.0
+version: 0.103.0
 formats: |
   Parse text as .yaml/.yml and create table.
 usage: |

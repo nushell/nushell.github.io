@@ -2,11 +2,11 @@
 title: return
 categories: |
   core
-version: 0.102.0
+version: 0.103.0
 core: |
-  Return early from a function.
+  Return early from a custom command.
 usage: |
-  Return early from a function.
+  Return early from a custom command.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `return` for [core](/commands/categories/core.md)
 
-<div class='command-title'>Return early from a function.</div>
+<div class='command-title'>Return early from a custom command.</div>
 
 ## Signature
 

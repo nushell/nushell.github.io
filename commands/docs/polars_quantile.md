@@ -2,7 +2,7 @@
 title: polars quantile
 categories: |
   lazyframe
-version: 0.102.0
+version: 0.103.0
 lazyframe: |
   Aggregates the columns to the selected quantile.
 usage: |

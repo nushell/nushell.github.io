@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.102.0
+version: 0.103.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -60,7 +60,7 @@ Produce a list of values in the record, converted to string
 
 ```
 
-Produce a list that has "two" for each 2 in the input
+'null' items will be dropped from the result list. It has the same effect as 'filter_map' in other languages.
 ```nu
 > [1 2 3 2] | each {|e| if $e == 2 { "two" } }
 ╭───┬─────╮
@@ -96,7 +96,7 @@ iterate over each record, not necessarily each cell within it.
 
 Avoid passing single records to this command. Since a record is a
 one-row structure, 'each' will only run once, behaving similar to 'do'.
-To iterate over a record's values, try converting it to a table
+To iterate over a record's values, use 'items' or try converting it to a table
 with 'transpose' first.
 
 ## Subcommands:

@@ -2,7 +2,7 @@
 title: format number
 categories: |
   conversions
-version: 0.102.0
+version: 0.103.0
 conversions: |
   Format a number.
 usage: |

@@ -2,7 +2,7 @@
 title: bits xor
 categories: |
   bits
-version: 0.102.0
+version: 0.103.0
 bits: |
   Performs bitwise xor for ints or binary values.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
 
 ## Parameters
 
- -  `target`: right-hand side of the operation
+ -  `target`: Right-hand side of the operation.
 
 
 ## Input/output types:

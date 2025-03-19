@@ -2,7 +2,7 @@
 title: polars max
 categories: |
   dataframe
-version: 0.102.0
+version: 0.103.0
 dataframe: |
   Creates a max expression or aggregates columns to their max value.
 usage: |

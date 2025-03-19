@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.102.0
+version: 0.103.0
 filesystem: |
   Remove files and directories.
 usage: |

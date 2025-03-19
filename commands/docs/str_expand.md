@@ -2,7 +2,7 @@
 title: str expand
 categories: |
   strings
-version: 0.102.0
+version: 0.103.0
 strings: |
   Generates all possible combinations defined in brace expansion syntax.
 usage: |
@@ -149,6 +149,23 @@ Also, it is possible to use one inside another. Here is a real-world example, th
 │ 2 │ AC2D │
 │ 3 │ AC5D │
 ╰───┴──────╯
+
+```
+
+Supports zero padding in numeric ranges.
+```nu
+> "A{08..10}B{11..013}C" | str expand
+╭───┬──────────╮
+│ 0 │ A08B011C │
+│ 1 │ A08B012C │
+│ 2 │ A08B013C │
+│ 3 │ A09B011C │
+│ 4 │ A09B012C │
+│ 5 │ A09B013C │
+│ 6 │ A10B011C │
+│ 7 │ A10B012C │
+│ 8 │ A10B013C │
+╰───┴──────────╯
 
 ```
 
