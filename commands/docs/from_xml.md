@@ -23,7 +23,7 @@ contributors: false
 ## Flags
 
  -  `--keep-comments`: add comment nodes to result
- -  `--disallow-dtd`: disallow parsing documents with DTDs (prevents exponential entity expansion attacks)
+ -  `--allow-dtd`: allow parsing documents with DTDs (may result in exponential entity expansion)
  -  `--keep-pi`: add processing instruction nodes to result
 
 
