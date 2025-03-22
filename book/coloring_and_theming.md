@@ -597,25 +597,30 @@ if you want to go full-tilt on theming, you'll want to theme all the items I men
 
 ### Working on Light Background Terminal
 
-Nushell's default config file contains a light theme definition, if you are working on a light background terminal, you can apply the light theme easily.
+Nushell's [standard library](https://www.nushell.sh/book/standard_library.html) contains a `config` module with default light and dark themes.
+If you are working on a light background terminal, you can apply the light theme easily.
 
 ```nu
 # in $nu.config-path
+use config light-theme   # add this line to load the theme into scope
+
 $env.config = {
-  ...
-  color_config: $dark_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
-  ...
+  # ...
+  color_config: (light_theme)   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  # ...
 }
 ```
 
-You can just change it to light theme by replacing `$dark_theme` to `$light_theme`
+You can also load the dark theme.
 
 ```nu
 # in $nu.config-path
+use config dark-theme
+
 $env.config = {
-  ...
-  color_config: $light_theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
-  ...
+  # ...
+  color_config: (dark_theme)
+  # ...
 }
 ```
 
