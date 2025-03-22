@@ -597,7 +597,7 @@ if you want to go full-tilt on theming, you'll want to theme all the items I men
 
 ### Working on Light Background Terminal
 
-Nushell's [standard library](https://www.nushell.sh/book/standard_library.html) contains a `config` module with default light and dark themes.
+Nushell's [standard library](/book/standard_library.md) contains a `config` module with default light and dark themes.
 If you are working on a light background terminal, you can apply the light theme easily.
 
 ```nu
