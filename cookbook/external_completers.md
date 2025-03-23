@@ -120,6 +120,20 @@ let carapace_completer = {|spans: list<string>|
 }
 ```
 
+### File path escapes
+External completers with the exception of [carapace](https://github.com/carapace-sh/carapace) use POSIX escape sequences for files, rather than nu-compatible quoting.
+
+While there's no built-in mechanism to process posix escapes, this can be imperfectly worked around by manually un-escaping files.
+
+For example
+```nu
+let fish_completer_escaped = {|spans|
+    do $fish_completer $spans | update value {
+        if ($in | path exists) {$'"($in | str replace "\"" "\\\"" )"'} else {$in}
+    }
+}
+```
+
 ## Putting it all together
 
 This is an example of how an external completer definition might look like:
