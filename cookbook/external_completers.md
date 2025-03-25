@@ -32,36 +32,6 @@ A couple of things to note on this command:
 - The output of the fish completer does not contain a header (name of the columns), so we add `--noheaders` to prevent `from tsv` from treating the first row as headers and later give the columns their names using `rename`.
 - `--no-infer` is optional. `from tsv` will infer the data type of the result, so a numeric value like some git hashes will be inferred as a number. `--no-infer` will keep everything as a string. It doesn't make a difference in practice but it will print a more consistent output if the completer is ran on it's own.
 
-### Zoxide completer
-
-[Zoxide](https://github.com/ajeetdsouza/zoxide) allows easily jumping between visited folders in the system. It's possible to autocomplete matching folders with this completer:
-
-```nu
-let zoxide_completer = {|spans|
-    $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD}
-}
-```
-
-This completer is not usable for almost every other command, so it's recommended to add it as an override in the [multiple completer](#multiple-completer):
-
-```nu
-{
-    z => $zoxide_completer
-    zi => $zoxide_completer
-}
-```
-
-> **Note**
-> Zoxide sets an alias (`z` by default) that calls the `__zoxide_z` function.
-> If [alias completions](#alias-completions) are supported, the following snippet can be used instead:
->
-> ```nu
-> {
->     __zoxide_z => $zoxide_completer
->     __zoxide_zi => $zoxide_completer
-> }
-> ```
-
 ### Multiple completer
 
 Sometimes, a single external completer is not flexible enough. Luckily, as many as needed can be combined into a single one. The following example uses `$default_completer` for all commands except the ones explicitly defined in the record:
@@ -154,8 +124,6 @@ let external_completer = {|spans|
         git => $fish_completer
         # carapace doesn't have completions for asdf
         asdf => $fish_completer
-        # use zoxide completions for zoxide commands
-        __zoxide_z | __zoxide_zi => $zoxide_completer
         _ => $carapace_completer
     } | do $in $spans
 }
