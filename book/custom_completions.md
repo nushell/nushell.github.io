@@ -90,15 +90,7 @@ def "nu-complete zoxide path" [context: string] {
   }
 
 def --env --wrapped z [...rest: string@"nu-complete zoxide path"] {
-  let path = match $rest {
-    [] => { '~' }
-    ['-'] => { '-' }
-    [$arg] if ($arg | path type) == 'dir' => { $arg }
-    _ => {
-      zoxide query --exclude $env.PWD -- ...$rest | str trim -r -c "\n"
-    }
-  }
-  cd $path
+  __zoxide_z ...$rest
 }
 ```
 
