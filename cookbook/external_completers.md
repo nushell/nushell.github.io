@@ -23,6 +23,9 @@ let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
     | from tsv --flexible --noheaders --no-infer
     | rename value description
+    | update value {
+        if ($in | path exists) {$'"($in | str replace "\"" "\\\"" )"'} else {$in}
+    }
 }
 ```
 
@@ -31,6 +34,7 @@ A couple of things to note on this command:
 - The fish completer will return lines of text, each one holding the `value` and `description` separated by a tab. The `description` can be missing, and in that case there won't be a tab after the `value`. If that happens, `from tsv` will fail, so we add the `--flexible` flag.
 - The output of the fish completer does not contain a header (name of the columns), so we add `--noheaders` to prevent `from tsv` from treating the first row as headers and later give the columns their names using `rename`.
 - `--no-infer` is optional. `from tsv` will infer the data type of the result, so a numeric value like some git hashes will be inferred as a number. `--no-infer` will keep everything as a string. It doesn't make a difference in practice but it will print a more consistent output if the completer is ran on it's own.
+- Since fish only supports POSIX style escapes for file paths (`file\ name.txt`, etc.), file paths completed by fish will not be quoted or escaped properly on external commands. Nushell does not have a way to natively parse POSIX escapes, so we need to do this conversion manually such as by testing if the items are valid paths as shown in the example. This simple approach is imperfect, but it should cover the 99.9%.
 
 ### Zoxide completer
 
@@ -117,20 +121,6 @@ let carapace_completer = {|spans: list<string>|
     carapace $spans.0 nushell ...$spans
     | from json
     | if ($in | default [] | where value == $"($spans | last)ERR" | is-empty) { $in } else { null }
-}
-```
-
-### File path escapes
-External completers with the exception of [carapace](https://github.com/carapace-sh/carapace) use POSIX escape sequences for files, rather than nu-compatible quoting.
-
-While there's no built-in mechanism to process posix escapes, this can be imperfectly worked around by manually un-escaping files.
-
-For example
-```nu
-let fish_completer_escaped = {|spans|
-    do $fish_completer $spans | update value {
-        if ($in | path exists) {$'"($in | str replace "\"" "\\\"" )"'} else {$in}
-    }
 }
 ```
 
