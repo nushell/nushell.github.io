@@ -15,6 +15,8 @@ $my_record | update age { $in + 1 }
 # => ╰──────┴─────╯
 ```
 
+Note that the `my_record` [variable is immutable](variables.md). The updated record resulting from the [pipeline](pipelines.md) is printed as seen in the code block. The `my_record` variable still holds the original value - `$my_record.age` is still `30`.
+
 :::
 
 ## Creating records
