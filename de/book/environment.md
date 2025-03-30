@@ -142,7 +142,7 @@ $env.FOO
 ## Umgebungsvariablen konvertieren
 
 Mit `ENV_CONVERSIONS` kann eine Umgebungsvariable von einem string zu einem Wert konvertiert werden.
-Zum Beispiel beinhaltet die [default environment config](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_env.nu)
+Zum Beispiel beinhaltet die [default environment config](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu)
 bereits eine Konvertierung der PATH Umgebungsvariablen (sowie der Path Variablen in Windows) von einem String in eine List.
 
 Nachdem beide `env.nu` und `config.nu` geladen wurden, wird jede existierende Umgebungsvariable, die mit `ENV_CONVERSIONS` definiert ist,

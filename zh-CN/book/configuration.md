@@ -10,7 +10,7 @@ Nushell 使用一个配置系统，在启动时加载并运行两个 Nushell 脚
 
 _(你可以把 Nushell 的配置加载顺序想象成在启动时执行两行 [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)：`source /path/to/env.nu`和`source /path/to/config.nu`。因此，用`env.nu`表示环境，用`config.nu`表示其他配置只是一个约定。)_
 
-当你在没有设置这些文件的情况下启动 Nushell，Nushell 会提示你下载[`default env.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_env.nu)和[`default config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_config.nu)。
+当你在没有设置这些文件的情况下启动 Nushell，Nushell 会提示你下载[`default env.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu)和[`default config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_config.nu)。
 你可以通过浏览这些默认文件，了解环境变量的默认值和所有可配置项的列表。
 
 ### 配置 `$env.config`
