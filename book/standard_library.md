@@ -98,11 +98,9 @@ As mentioned in [Using Modules](./modules/using_modules.md#module-definitions), 
 
 ## The Standard Library Candidate Module
 
-(Also known as `std-rfc`)
+`std-rfc`, found in the [nushell Repository](https://github.com/nushell/nushell/tree/main/crates/nu-std/std-rfc), serves as a staging ground for possible Standard Library additions.
 
-`stdlib-candidate`, found in the [nu_scripts Repository](https://github.com/nushell/nu_scripts/tree/main/stdlib-candidate/std-rfc), serves as a staging ground for possible Standard Library additions.
-
-If you are interested in adding to the Standard Library, please submit your code via PR to the Candidate module in that repository. We also encourage you to install this module and provide feedback on upcoming candidate commands.
+If you are interested in adding to the Standard Library, please submit your code via PR to the `std-rfc` module in that repository. We also encourage you to install this module and provide feedback on upcoming candidate commands.
 
 ::: details More details
 
