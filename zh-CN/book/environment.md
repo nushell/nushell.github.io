@@ -143,7 +143,7 @@ $env.FOO
 ## 环境变量转换
 
 你可以通过设置`ENV_CONVERSIONS`环境变量，来在字符串和值之间转换其他环境变量。
-例如，[默认环境配置](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_env.nu)包括将`PATH`（和 Windows 上使用的`Path`）环境变量从一个字符串转换为一个列表。
+例如，[默认环境配置](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu)包括将`PATH`（和 Windows 上使用的`Path`）环境变量从一个字符串转换为一个列表。
 在 `env.nu` 和 `config.nu` 配置文件加载后，任何在`ENV_CONVERSIONS`内指定的现有环境变量将根据其`from_string`字段被转换为任何类型的值。
 外部工具要求环境变量是字符串，因此，任何非字符串的环境变量需要先进行转换：
 值->字符串的转换由`ENV_CONVERSIONS`的`to_string`字段设置，每次运行外部命令时都会进行转换。
