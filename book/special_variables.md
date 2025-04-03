@@ -103,6 +103,13 @@ the file resides. Note that this value is also available as a constant through:
 path self | path dirname
 ```
 
+### `$env.PROCESS_PATH`
+
+When _executing a script_, this variable represents the name and relative path of the script. Unlike the two variables
+above, it is not present when sourcing a file or importing a module.
+
+Note: Also unlike the two variables above, the exact path (including symlinks) that was used to _invoke_ the file is returned.
+
 ### `$env.NU_LIB_DIRS`
 
 A list of directories which will be searched when using the `source`, `use`, or `overlay use` commands. See also:
