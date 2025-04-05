@@ -38,6 +38,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/working_with_records.md',
         '/book/working_with_tables.md',
         '/book/navigating_structured_data.md',
+        '/book/special_variables.md',
       ],
     },
     {
