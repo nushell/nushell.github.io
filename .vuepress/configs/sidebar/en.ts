@@ -83,7 +83,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/externs.md',
         '/book/coloring_and_theming.md',
         '/book/hooks.md',
-        '/book/background_task.md',
+        '/book/background_jobs.md',
       ],
     },
     {
