@@ -47,7 +47,7 @@ The `$nu` constant is a record containing several useful values:
 
 `$env` is a special mutable variable containing the current environment variables. As with any process, the initial environment is inherited from the parent process which started `nu`.
 
-::: details **_Comparison with other languages:_**
+::: tip In other shells and languages ...
 
 ::: tabs
 @tab Nu
@@ -129,7 +129,7 @@ try {
 # => 2
 ```
 
-::: details **_Comparison with other languages:_**
+::: tip In other shells and languages ...
 
 ::: tabs
 
@@ -185,9 +185,15 @@ the file resides. Note that this value is also available as a constant through:
 path self | path dirname
 ```
 
-::: details **_Comparison with other languages:_**
+::: tip In other shells and languages ...
 
 ::: tabs
+
+@tab Nu
+
+```nu
+$env.FILE_PWD
+```
 
 @tab PowerShell
 
@@ -204,7 +210,7 @@ above, it is not present when sourcing a file or importing a module.
 
 Note: Also unlike the two variables above, the exact path (including symlinks) that was used to _invoke_ the file is returned.
 
-::: details **_Comparison with other languages:_**
+::: tip In other shells and languages ...
 
 ::: tabs
 @tab Nushell
