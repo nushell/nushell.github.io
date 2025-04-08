@@ -47,6 +47,54 @@ The `$nu` constant is a record containing several useful values:
 
 `$env` is a special mutable variable containing the current environment variables. As with any process, the initial environment is inherited from the parent process which started `nu`.
 
+::: details **_Comparison with other languages:_**
+
+::: tabs
+@tab Nu
+
+```nu
+# Set an environment variable
+$env.VARNAME = "Content"
+
+# Access an environment variable
+$env.VARNAME
+# => Content
+
+# View all environment variables
+$env
+```
+
+@tab Bash/POSIX
+
+````bash:no-line-numbers
+# Set an environment variable
+VARNAME="Content"
+export VARNAME
+# or
+export VARNAME="Content"
+
+# Access an environment variable
+echo $VARNAME
+# => Content
+
+# View all environment variables
+env
+
+@tab PowerShell
+
+```powershell
+# Set an environment variable
+$env:VARNAME = "Content"
+
+# Access an environment variable
+$env:VARNAME
+# => Content
+````
+
+<!-- Please add additional languages -->
+
+:::
+
 There are also several environment variables that Nushell uses for specific purposes:
 
 ### `$env.config`
@@ -81,6 +129,40 @@ try {
 # => 2
 ```
 
+::: details **_Comparison with other languages:_**
+
+::: tabs
+
+@tab Nu
+
+```nu
+$env.LAST_EXIT_CODE
+```
+
+@tab Bash/POSIX
+
+```bash
+$?
+```
+
+@tab PowerShell
+
+```powershell
+# Code
+$LASTEXITCODE
+
+# Successful - true or false
+$?
+```
+
+@tab Perl
+
+```perl
+$? >> 8
+```
+
+:::
+
 ### `env.CMD_DURATION_MS`
 
 The amount of time in milliseconds that the previous command took to run.
@@ -103,12 +185,41 @@ the file resides. Note that this value is also available as a constant through:
 path self | path dirname
 ```
 
+::: details **_Comparison with other languages:_**
+
+::: tabs
+
+@tab PowerShell
+
+```powershell
+$PSCommandPath
+```
+
+:::
+
 ### `$env.PROCESS_PATH`
 
 When _executing a script_, this variable represents the name and relative path of the script. Unlike the two variables
 above, it is not present when sourcing a file or importing a module.
 
 Note: Also unlike the two variables above, the exact path (including symlinks) that was used to _invoke_ the file is returned.
+
+::: details **_Comparison with other languages:_**
+
+::: tabs
+@tab Nushell
+
+```nu
+print $env.PROCESS_PATH
+```
+
+@tab Bash
+
+```bash
+echo $0
+```
+
+:::
 
 ### `$env.NU_LIB_DIRS`
 
