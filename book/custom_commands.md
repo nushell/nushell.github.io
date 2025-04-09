@@ -343,12 +343,11 @@ greet Wei Mei
 greet Wei
 # => Error: nu::parser::missing_positional
 # =>
-# =>
-# => × Missing required positional argument.
-# => ╭─[entry #10:1:10]
-# => 1 │ greet Mei
-# => ╰────
-# => help: Usage: greet <name1> <name2> . Use `--help` for more information.
+# =>   × Missing required positional argument.
+# =>    ╭─[entry #1:1:10]
+# =>  1 │ greet Wei
+# =>    ╰────
+# =>   help: Usage: greet <name1> <name2> . Use `--help` for more information.
 ```
 
 ::: tip
@@ -365,7 +364,6 @@ def greet [name?: string] {
 }
 
 greet
-
 # => Hello, You
 ```
 
@@ -386,7 +384,6 @@ def greet [name?: string] {
 }
 
 greet
-
 # => Hello! I don't know your name!
 ```
 
@@ -445,11 +442,14 @@ greet World
 If we try to run the above, Nushell will tell us that the types don't match:
 
 ```nu
-error: Type Error
-  ┌─ shell:6:7
-  │
-5 │ greet world
-  │       ^^^^^ Expected int
+Error: nu::parser::parse_mismatch
+
+  × Parse mismatch during operation.
+   ╭─[entry #1:1:7]
+ 1 │ greet World
+   ·       ──┬──
+   ·         ╰── expected int
+   ╰────
 ```
 
 ::: tip Cool!
@@ -783,21 +783,21 @@ Input-Output signatures allow Nushell to catch two additional categories of erro
 - Attempting to return the wrong type from a command. For example:
 
   ```nu
-    def inc []: int -> int {
+  def inc []: int -> int {
     $in + 1
     print "Did it!"
   }
 
   # => Error: nu::parser::output_type_mismatch
   # =>
-  # => × Command output doesn't match int.
-  # => ╭─[entry #12:1:24]
-  # => 1 │ ╭─▶ def inc []: int -> int {
-  # => 2 │ │     $in + 1
-  # => 3 │ │     print "Did it!"
-  # => 4 │ ├─▶ }
-  # => · ╰──── expected int, but command outputs nothing
-  # => ╰────
+  # =>   × Command output doesn't match int.
+  # =>    ╭─[entry #1:1:24]
+  # =>  1 │ ╭─▶ def inc []: int -> int {
+  # =>  2 │ │     $in + 1
+  # =>  3 │ │     print "Did it!"
+  # =>  4 │ ├─▶ }
+  # =>    · ╰──── expected int, but command outputs nothing
+  # =>    ╰────
   ```
 
 - And attempting to pass an invalid type into a command:
@@ -807,12 +807,12 @@ Input-Output signatures allow Nushell to catch two additional categories of erro
   "Hi" | inc
   # => Error: nu::parser::input_type_mismatch
   # =>
-  # =>     × Command does not support string input.
-  # =>      ╭─[entry #16:1:8]
-  # =>    1 │ "Hi" | inc
-  # =>      ·        ─┬─
-  # =>      ·         ╰── command doesn't support string input
-  # =>      ╰────
+  # =>   × Command does not support string input.
+  # =>    ╭─[entry #1:1:8]
+  # =>  1 │ "Hi" | inc
+  # =>    ·        ─┬─
+  # =>    ·         ╰── command doesn't support string input
+  # =>    ╰────
   ```
 
   :::
