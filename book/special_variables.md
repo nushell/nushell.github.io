@@ -81,7 +81,7 @@ try {
 # => 2
 ```
 
-### `env.CMD_DURATION_MS`
+### `$env.CMD_DURATION_MS`
 
 The amount of time in milliseconds that the previous command took to run.
 
