@@ -37,9 +37,9 @@ Redirection to a file:
 
 | type           | command                    | `file.txt` contents | printed to terminal |
 | -------------- | -------------------------- | ------------------- | ------------------- |
-| o> file_path   | `nu demo.nu o> file.txt`   | "foo"               | "barbar"            |
-| e> file_path   | `nu demo.nu e> file.txt`   | "barbar"            | "foo"               |
-| o+e> file_path | `nu demo.nu o+e> file.txt` | "foo/nbarbar"       | nothing             |
+| o> file_path   | `nu demo.nu o> file.txt`   | "foo\n"             | "barbar"            |
+| e> file_path   | `nu demo.nu e> file.txt`   | "barbar\n"          | "foo"               |
+| o+e> file_path | `nu demo.nu o+e> file.txt` | "foo\nbarbar\n"     | nothing             |
 
 `complete` command:
 
