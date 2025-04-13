@@ -68,3 +68,14 @@ Format a given date using a given format string.
 > "2021-10-22 20:00:12 +01:00" | format date "%Y-%m-%d"
 2021-10-22
 ```
+
+Format a given date-time using RFC3339 format.
+```nu
+> "2021-10-22 20:00:12 +01:00" | format date %+
+2021-10-22T20:00:12+01:00
+```
+
+Format current date-time using RFC3339 format.
+```nu
+> date now | format date %+
+```

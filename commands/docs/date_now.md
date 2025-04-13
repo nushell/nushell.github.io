@@ -35,6 +35,12 @@ Get the current date and display it in a given format string.
 
 ```
 
+Get current time in full RFC 3339 format with time zone.
+```nu
+> date now | format date %+
+
+```
+
 Get the time duration since 2019-04-30.
 ```nu
 > (date now) - 2019-05-01
@@ -47,8 +53,8 @@ Get the time duration since a more specific time.
 
 ```
 
-Get current time in full RFC 3339 format with time zone.
+Get current time in RFC 2289 format with time zone.
 ```nu
-> date now | debug
+> date now | format date
 
 ```
