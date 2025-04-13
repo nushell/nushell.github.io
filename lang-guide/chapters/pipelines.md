@@ -119,12 +119,6 @@ It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes _stderr_ to `^cmd5`, 
 | cmd3    | Piped    | Terminal |
 | cmd4    | Terminal | Piped    |
 
-::: warning
-
-Please note that the following 3 examples are currently broken due to a regression documented [issue #15326](https://github.com/nushell/nushell/issues/15326).
-
-:::
-
 - (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o+e>| ^cmd5
 
 It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes _stdout and stderr_ to `^cmd5`, where both stdout and stderr are directed to the Terminal.
@@ -135,6 +129,12 @@ It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes _stdout and stderr_ t
 | cmd2    | Terminal | Terminal |
 | cmd3    | Piped    | Terminal |
 | cmd4    | Piped    | Piped    |
+
+::: warning
+
+Please note that the following 3 examples are currently broken due to a regression documented [issue #15326](https://github.com/nushell/nushell/issues/15326).
+
+:::
 
 - (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o> test.out
 
