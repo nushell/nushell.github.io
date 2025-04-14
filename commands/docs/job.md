@@ -1,7 +1,7 @@
 ---
 title: job
 categories: |
-  strings
+  experimental
 version: 0.103.0
 strings: |
   Various commands for working with background jobs.
