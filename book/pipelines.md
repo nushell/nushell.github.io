@@ -434,13 +434,13 @@ You decided to use `grep` and [pipe](https://www.nushell.sh/book/pipelines.html)
 
 ```nu
 ls /usr/share/nvim/runtime/ | get name | ^grep tutor | ^ls -la $in
-# => ls: cannot access ''$'\342\224\202'' 32 '$'\342\224\202'' /usr/share/nvim/runtime/tutor        '$'\342\224\202\n': No such file or directory
+# => ls: │ 32 │ /usr/share/nvim/runtime/tutor         │: No such file or directory
 ```
 
 What's wrong? Nushell renders lists and tables (by adding a border with characters like `╭`,`─`,`┬`,`╮`) before piping them as text to external commands. If that's not the behavior you want, you must explicitly convert the data to a string before piping it to an external. For example, you can do so with [`to text`](/commands/docs/to_text.md):
 
 ```nu
-ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^ls -la $in
+ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | ^ls -la $in
 # => total 24
 # => drwxr-xr-x@  5 pengs  admin   160 14 Nov 13:12 .
 # => drwxr-xr-x@  4 pengs  admin   128 14 Nov 13:42 en
