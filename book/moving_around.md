@@ -184,7 +184,7 @@ cd ....
 ```
 
 ::: tip
-Multi-dot shortcuts are available to both internal Nushell [filesystem commands](/commands/categories/filesystem.html) as well as to external commands. For example, running `^stat ....` on a Linux/Unix system will show that the path is expanded to `../../../..`
+Multi-dot shortcuts are available to both internal Nushell [filesystem commands](/commands/categories/filesystem.html) as well as to external commands. For example, running `^stat ....` on a Linux/Unix system will show that the path is expanded to `../../..`
 :::
 
 You can combine relative directory levels with directory names as well:
