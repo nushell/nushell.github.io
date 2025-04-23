@@ -382,7 +382,7 @@ The variables that affect Nushell file locations are:
 
 - `$env.XDG_CONFIG_HOME`: If this environment variable is set, it is used to change the directory that Nushell searches for its configuration files such as `env.nu`, `config.nu`, `login.nu`, and the `<config>/autoload` directory. The history and plugin files are also stored in this directory by default.
 
-  Once Nushell starts, this value is stored in the `$nu.default-config-path` constant. See [Using Constants](#using-constants) below.
+  Once Nushell starts, this value is stored in the `$nu.default-config-dir` constant. See [Using Constants](#using-constants) below.
 
 - `$env.XDG_DATA_HOME`: If this environment variable is set, Nushell sets the `$nu.data-dir` constant to this value. The `data-dir` is used in several startup tasks:
 
