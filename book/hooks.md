@@ -98,6 +98,26 @@ $env.SPAM
 
 The hook blocks otherwise follow the general scoping rules, i.e., commands, aliases, etc. defined within the block will be thrown away once the block ends.
 
+## `pre_execution` Hooks
+
+`pre_execution` hooks can inspect the to-be-executed command through the [`commandline` command](/commands/docs/commandline.md).
+
+For example, to print the command being executed:
+
+```nu
+$env.config = (
+    $env.config
+    | upsert hooks.pre_execution [ {||
+        $env.repl_commandline = (commandline)
+        print $"Command: ($env.repl_commandline)"
+    } ]
+)
+
+print (1 + 3)
+# => Command: print (1 + 3)
+# => 4
+```
+
 ## Conditional Hooks
 
 One thing you might be tempted to do is to activate an environment whenever you enter a directory:
