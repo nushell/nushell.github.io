@@ -28,15 +28,11 @@ The steps to evaluate one line in the REPL mode are as follows:
 To enable hooks, define them in your [config](configuration.md):
 
 ```nu
-$env.config = {
-    # ...other config...
-
-    hooks: {
-        pre_prompt: { print "pre prompt hook" }
-        pre_execution: { print "pre exec hook" }
-        env_change: {
-            PWD: {|before, after| print $"changing directory from ($before) to ($after)" }
-        }
+$env.config.hooks = {
+    pre_prompt: [{ print "pre prompt hook" }]
+    pre_execution: [{ print "pre exec hook" }]
+    env_change: {
+        PWD: [{|before, after| print $"changing directory from ($before) to ($after)" }]
     }
 }
 ```
@@ -47,38 +43,28 @@ When you change a directory, the `PWD` environment variable changes and the chan
 Instead of defining just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
 
 ```nu
-$env.config = {
-    ...other config...
-
-    hooks: {
-        pre_prompt: [
-            { print "pre prompt hook" }
-            { print "pre prompt hook2" }
+$env.config.hooks = {
+    pre_prompt: [
+        { print "pre prompt hook" }
+        { print "pre prompt hook2" }
+    ]
+    pre_execution: [
+        { print "pre exec hook" }
+        { print "pre exec hook2" }
+    ]
+    env_change: {
+        PWD: [
+            {|before, after| print $"changing directory from ($before) to ($after)" }
+            {|before, after| print $"changing directory from ($before) to ($after) 2" }
         ]
-        pre_execution: [
-            { print "pre exec hook" }
-            { print "pre exec hook2" }
-        ]
-        env_change: {
-            PWD: [
-                {|before, after| print $"changing directory from ($before) to ($after)" }
-                {|before, after| print $"changing directory from ($before) to ($after) 2" }
-            ]
-        }
     }
 }
 ```
 
-Also, it might be more practical to update the existing config with new hooks, instead of defining the whole config from scratch:
+Instead of replacing all hooks, you can append a new hook to existing configuration:
 
 ```nu
-$env.config = ($env.config | upsert hooks {
-    pre_prompt: ...
-    pre_execution: ...
-    env_change: {
-        PWD: ...
-    }
-})
+$env.config.hooks.pre_execution = $env.config.hooks.pre_execution | append { print "pre exec hook3" }
 ```
 
 ## Changing Environment
