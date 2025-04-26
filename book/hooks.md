@@ -1,7 +1,7 @@
 # Hooks
 
 Hooks allow you to run a code snippet at some predefined situations.
-They are only available in the interactive mode ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)), they do not work if you run a Nushell with a script (`nu script.nu`) or commands (`nu -c "print foo"`) arguments.
+They are only available in the interactive mode ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)), they do not work if you run Nushell with a script (`nu script.nu`) or command (`nu -c "print foo"`) argument.
 
 Currently, we support these types of hooks:
 
@@ -41,7 +41,7 @@ $env.config = {
 }
 ```
 
-Try putting the above to your config, running Nushell and moving around your filesystem.
+Try putting the above into your config, running Nushell and moving around your filesystem.
 When you change a directory, the `PWD` environment variable changes and the change triggers the hook with the previous and the current values stored in `before` and `after` variables, respectively.
 
 Instead of defining just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
@@ -119,7 +119,7 @@ $env.config = ($env.config | upsert hooks {
 This won't work because the environment will be active only within the [`if`](/commands/docs/if.md) block.
 In this case, you could easily rewrite it as `load-env (if $after == ... { ... } else { {} })` but this pattern is fairly common and later we'll see that not all cases can be rewritten like this.
 
-To deal with the above problem, we introduce another way to define a hook -- **a record**:
+To deal with the above problem, we introduce another way to define a hook - **a record**:
 
 ```nu
 $env.config = ($env.config | upsert hooks {
