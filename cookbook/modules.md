@@ -39,7 +39,7 @@ Here we'll create a simple completion module with a submodule dedicated to some 
    ```
 
 4. Add `export module git.nu` to `mod.nu`
-5. Add the parent of the `completions` directory to your NU_LIB_DIRS inside `env.nu`
+5. Add the parent of the `completions` directory to your `NU_LIB_DIRS` inside `env.nu`
 
    ```nu
    $env.NU_LIB_DIRS = [
