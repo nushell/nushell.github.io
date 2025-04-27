@@ -328,6 +328,24 @@ try { 1 / 0 } catch { 'An error happened!' } | $in ++ ' And now I am resuming.'
 
 It will not execute the `catch` block if an error did not occur.
 
+`try` also works for external commands:
+
+```nu
+try { ^nonexisting }; print 'a'
+# => a
+
+^nonexisting; print 'a'
+# => Error: nu::shell::external_command
+# => 
+# =>   × External command failed
+# =>    ╭─[entry #3:1:2]
+# =>  1 │ ^nonexisting; print 'a'
+# =>    ·  ─────┬─────
+# =>    ·       ╰── Command `nonexisting` not found
+# =>    ╰────
+# =>   help: `nonexisting` is neither a Nushell built-in or a known external command
+```
+
 ## Other
 
 ### `return`
