@@ -1,6 +1,6 @@
 # Module Scenarios
 
-### Dumping Files into Directory
+## Dumping Files into Directory
 
 A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, doing this directly is currently not possible, but directory modules can still be used.
 
@@ -60,7 +60,7 @@ For example, if you defined our known externals in our `git.nu` as `export exter
 You would need to call `use completions git *` to get the desired subcommands. For this reason, using `main` as outlined in the step above is the preferred way to define subcommands.
 :::
 
-### Setting environment + aliases (conda style)
+## Setting environment + aliases (conda style)
 
 `def --env` commands, `export-env` block and aliases can be used to dynamically manipulate "virtual environments" (a concept well known from Python).
 
