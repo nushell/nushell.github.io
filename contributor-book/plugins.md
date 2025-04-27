@@ -53,11 +53,11 @@ The `Cargo.toml` file should now look something like the following.
 [package]
 name = "nu_plugin_len"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
-nu-plugin = "0.92.0" # These version numbers may differ
-nu-protocol = "0.92.0"
+nu-plugin = "0.103.0"
+nu-protocol = "0.103.0"
 ```
 
 With this, we can open up `src/main.rs` and create our plugin.
