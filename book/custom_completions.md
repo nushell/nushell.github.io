@@ -67,7 +67,7 @@ Now, if you try to complete `A`, you get the following completions:
 cat                 rat                 bat
 ```
 
-Because we made matching case-insensitive and used `positional: false`, Nushell will find the substring "a" in all of the completion suggestions. Additionally, because we set `sort: false`, the completions will be left in their original order. This is useful if your completions are already sorted in a particular order unrelated to their text (e.g. by date).
+Because we made matching case-insensitive, Nushell will find the substring "a" in all of the completion suggestions. Additionally, because we set `sort: false`, the completions will be left in their original order. This is useful if your completions are already sorted in a particular order unrelated to their text (e.g. by date).
 
 ## Modules and Custom Completions
 
