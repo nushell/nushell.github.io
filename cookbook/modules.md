@@ -60,12 +60,69 @@ For example, if you defined our known externals in our `git.nu` as `export exter
 You would need to call `use completions git *` to get the desired subcommands. For this reason, using `main` as outlined in the step above is the preferred way to define subcommands.
 :::
 
-## Setting environment + aliases (conda style)
+## Overlay and "Virtual Environments"
 
-`def --env` commands, `export-env` block and aliases can be used to dynamically manipulate "virtual environments" (a concept well known from Python).
+[Overlays](/book/overlays.md) are layers of definitions. We can make use of them to establish a temporary virtual environment, with custom environment variables, which we discard at the end.
 
-We use it in our [official virtualenv integration](https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu). Another example is our [unofficial Conda module](https://github.com/nushell/nu_scripts/blob/main/modules/virtual_environments/conda.nu).
+Our goals in this example are:
 
-::: warning
-Work in progress
-:::
+* Activate a set of environment variables from a file called `env.json`
+* Work in this context
+* Discard the environment - restoring the original environment
+
+First, let's prepare an `env.json` for testing:
+
+```nu
+{ A: 1 B: 2 } | save env.json
+
+$env.A = 'zzz'
+
+print $"('A' in $env) ('B' in $env)"
+# => true false
+```
+
+Now let's create a module `env` with a `load` command that loads the environment from `env.json`, and use it as an overlay:
+
+```nu
+'export def --env load [] { open env.json | load-env }' | save env.nu
+
+overlay use ./env.nu
+
+overlay list
+# => ╭───┬──────╮
+# => │ 0 │ zero │
+# => │ 1 │ env  │
+# => ╰───┴──────╯
+```
+
+Now we load the `env.json` file:
+
+```nu
+load
+
+print $"($env.A) ($env.B)"
+# => 1 2
+```
+
+To hide the overlay:
+
+```nu
+overlay hide env
+
+print $"('A' in $env) ('B' in $env)"
+# => true false
+```
+
+Note that - as documented in [Overlays](/book/overlays.md) - reactivating the overlay will recover the loaded environment variables,
+not create a new context for as long as the Nushell session remains active, despite `overlay list` no longer listing the overlay.
+
+More related information and specifically about environment variables and their modification can be found in [Environment](/book/environment.md), [Modules](/book/modules.md), [Overlay](/book/overlays.md),
+and the respective command documentation of [`def --env`](/commands/docs/def.md), [`export def --env`](/commands/docs/export_def.md), [`load-env`](/commands/docs/load-env.md), and [`export-env`](/commands/docs/export-env.md).
+
+### Elaborate Virtual Environments
+
+This kind of overlaying environments can be used to scope more elaborate virtual environments, including changing the `PATH` environment variable, or other tool settings defined in environment variables or files.
+
+Tools like conda or Python virtualenv manage and isolate sets of environment variables.
+The [official virtualenv integration](https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu) makes use of these concepts.
+And our nu_scripts repository has a an [unofficial Conda module](https://github.com/nushell/nu_scripts/tree/main/modules/virtual_environments).
