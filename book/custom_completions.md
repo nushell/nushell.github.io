@@ -29,7 +29,7 @@ In the second line, `string@animals` tells Nushell two things—the shape of the
 The third line is demonstration of the completion. Type the name of the custom command `my-command`, followed by a space, and then the <kbd>Tab</kbd> key. This displays a menu with the possible completions. Custom completions work the same as other completions in the system, allowing you to type `e` followed by the <kbd>Tab</kbd> key to complete "eel" automatically.
 
 ::: tip
-When the completion menu is displayed, the prompt changes to include the `|` character by default. To change the prompt marker, modify the `marker` value of the record, where the `name` key is `completion_menu`, in the `$env.config.menus` list.  See also [the completion menu configuration](/book/line_editor.md#completion-menu).
+When the completion menu is displayed, the prompt changes to include the `|` character by default. To change the prompt marker, modify the `marker` value of the record, where the `name` key is `completion_menu`, in the `$env.config.menus` list. See also [the completion menu configuration](/book/line_editor.md#completion-menu).
 :::
 
 ::: tip
@@ -42,8 +42,7 @@ If you want to choose how your completions are filtered and sorted, you can also
 
 - `sort` - Set this to `false` to stop Nushell from sorting your completions. By default, this is `true`, and completions are sorted according to `$env.config.completions.sort`.
 - `case_sensitive` - Set to `true` for the custom completions to be matched case sensitively, `false` otherwise. Used for overriding `$env.config.completions.case_sensitive`.
-- `completion_algorithm` - Set this to either `prefix` or `fuzzy` to choose how your completions are matched against the typed text. Used for overriding `$env.config.completions.algorithm`.
-- `positional` - When prefix matching is used, setting this to `false` will use substring matching instead. `true` by default.
+- `completion_algorithm` - Set this to `prefix`, `substring`, or `fuzzy` to choose how your completions are matched against the typed text. Used for overriding `$env.config.completions.algorithm`.
 
 Here's an example demonstrating how to set these options:
 
@@ -52,8 +51,7 @@ def animals [] {
     {
         options: {
             case_sensitive: false,
-            completion_algorithm: prefix,
-            positional: false,
+            completion_algorithm: substring,
             sort: false,
         },
         completions: [cat, rat, bat]
