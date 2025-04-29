@@ -2,7 +2,7 @@
 title: str
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Various commands for working with string data.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Notes
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
 

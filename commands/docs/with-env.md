@@ -2,7 +2,7 @@
 title: with-env
 categories: |
   env
-version: 0.103.0
+version: 0.104.0
 env: |
   Runs a block with an environment variable set.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Set by key-value record

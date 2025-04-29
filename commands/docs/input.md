@@ -2,7 +2,7 @@
 title: input
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Get input from the user.
 usage: |
@@ -37,7 +37,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Get input from the user, and assign to a variable

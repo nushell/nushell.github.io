@@ -2,7 +2,7 @@
 title: version
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Display Nu version, and its build configuration.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | record |
-
 ## Examples
 
 Display Nu version

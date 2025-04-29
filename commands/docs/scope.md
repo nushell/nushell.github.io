@@ -2,7 +2,7 @@
 title: scope
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Commands for getting info about what is in scope.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 
 ## Subcommands:
 

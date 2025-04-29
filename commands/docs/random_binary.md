@@ -2,7 +2,7 @@
 title: random binary
 categories: |
   random
-version: 0.103.0
+version: 0.104.0
 random: |
   Generate random bytes.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | binary |
-
 ## Examples
 
 Generate 16 random bytes

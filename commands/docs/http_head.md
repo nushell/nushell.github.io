@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.103.0
+version: 0.104.0
 network: |
   Get the headers from a URL.
 usage: |
@@ -39,7 +39,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Get headers from example.com

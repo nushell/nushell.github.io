@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Encode a string into bytes.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | binary |
-
 ## Examples
 
 Encode an UTF-8 string into Shift-JIS

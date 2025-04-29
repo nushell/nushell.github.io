@@ -2,7 +2,7 @@
 title: polars select
 categories: |
   lazyframe
-version: 0.103.0
+version: 0.104.0
 lazyframe: |
   Selects columns from lazyframe.
 usage: |
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Select a column from the dataframe
@@ -50,5 +49,31 @@ Select a column from the dataframe
 │ 1 │ 4 │
 │ 2 │ 2 │
 ╰───┴───╯
+
+```
+
+Select a column from a dataframe using a record
+```nu
+> [[a b]; [6 2] [4 2] [2 2]] | polars into-df | polars select {c: ((polars col a) * 2)}
+╭───┬────╮
+│ # │ c  │
+├───┼────┤
+│ 0 │ 12 │
+│ 1 │  8 │
+│ 2 │  4 │
+╰───┴────╯
+
+```
+
+Select a column from a dataframe using a mix of expressions and record of expressions
+```nu
+> [[a b]; [6 2] [4 2] [2 2]] | polars into-df | polars select a b {c: ((polars col a) ** 2)}
+╭───┬───┬───┬────╮
+│ # │ a │ b │ c  │
+├───┼───┼───┼────┤
+│ 0 │ 6 │ 2 │ 36 │
+│ 1 │ 4 │ 2 │ 16 │
+│ 2 │ 2 │ 2 │  4 │
+╰───┴───┴───┴────╯
 
 ```

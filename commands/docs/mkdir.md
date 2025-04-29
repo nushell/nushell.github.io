@@ -2,7 +2,7 @@
 title: mkdir
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Create directories, with intermediary directories if required using uutils/coreutils mkdir.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Make a directory named foo

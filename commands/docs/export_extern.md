@@ -2,7 +2,7 @@
 title: export extern
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Define an extern and export it from a module.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Export the signature for an external command

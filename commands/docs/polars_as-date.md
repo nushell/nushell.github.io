@@ -2,7 +2,7 @@
 title: polars as-date
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Converts string to date.
 usage: |
@@ -41,19 +41,50 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Converts string to date
 ```nu
 > ["2021-12-30" "2021-12-31"] | polars into-df | polars as-date "%Y-%m-%d"
+╭───┬─────────────╮
+│ # │    date     │
+├───┼─────────────┤
+│ 0 │ 3 years ago │
+│ 1 │ 3 years ago │
+╰───┴─────────────╯
 
 ```
 
 Converts string to date
 ```nu
 > ["2021-12-30" "2021-12-31 21:00:00"] | polars into-df | polars as-date "%Y-%m-%d" --not-exact
+╭───┬─────────────╮
+│ # │    date     │
+├───┼─────────────┤
+│ 0 │ 3 years ago │
+│ 1 │ 3 years ago │
+╰───┴─────────────╯
 
+```
+
+Converts string to date in an expression
+```nu
+> ["2021-12-30" "2021-12-31 21:00:00"] | polars into-lazy | polars select (polars col 0 | polars as-date "%Y-%m-%d" --not-exact)
+╭───┬─────────────╮
+│ # │    date     │
+├───┼─────────────┤
+│ 0 │ 3 years ago │
+│ 1 │ 3 years ago │
+╰───┴─────────────╯
+
+```
+
+Output is of date type
+```nu
+> ["2021-12-30" "2021-12-31 21:00:00"] | polars into-df | polars as-date "%Y-%m-%d" --not-exact | polars schema
+╭──────┬──────╮
+│ date │ date │
+╰──────┴──────╯
 ```
 
 ## Notes

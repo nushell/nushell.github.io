@@ -2,7 +2,7 @@
 title: take until
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Take elements of the input until a predicate is true.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input     | output    |
 | --------- | --------- |
 | list\<any\> | list\<any\> |
-
 ## Examples
 
 Take until the element is positive

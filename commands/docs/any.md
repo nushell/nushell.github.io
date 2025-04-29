@@ -2,7 +2,7 @@
 title: any
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Tests if any element of the input fulfills a predicate expression.
 usage: |
@@ -30,8 +30,13 @@ contributors: false
 | input     | output |
 | --------- | ------ |
 | list\<any\> | bool   |
-
 ## Examples
+
+Check if a list contains any true values
+```nu
+> [false true true false] | any {}
+true
+```
 
 Check if any row's status is the string 'DOWN'
 ```nu

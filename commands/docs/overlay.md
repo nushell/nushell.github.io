@@ -2,7 +2,7 @@
 title: overlay
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Commands for manipulating overlays.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Notes
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html

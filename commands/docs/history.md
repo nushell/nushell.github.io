@@ -2,7 +2,7 @@
 title: history
 categories: |
   history
-version: 0.103.0
+version: 0.104.0
 history: |
   Get the command history.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Get current history length

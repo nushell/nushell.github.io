@@ -2,7 +2,7 @@
 title: query webpage-info
 categories: |
   network
-version: 0.103.0
+version: 0.104.0
 network: |
   uses the webpage crate to extract info from html: title, description, language, links, RSS feeds, Opengraph, Schema.org, and more
 usage: |
@@ -33,7 +33,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input  | output |
 | ------ | ------ |
 | string | record |
-
 ## Examples
 
 extract detailed info from phoronix.com website

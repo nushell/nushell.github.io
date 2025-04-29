@@ -2,7 +2,7 @@
 title: str distance
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Compare two strings and return the edit distance/Levenshtein distance.
 usage: |

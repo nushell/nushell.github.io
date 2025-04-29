@@ -2,7 +2,7 @@
 title: job kill
 categories: |
   experimental
-version: 0.103.0
+version: 0.104.0
 experimental: |
   Kill a background job.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Kill a newly spawned job

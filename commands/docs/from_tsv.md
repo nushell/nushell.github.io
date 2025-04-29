@@ -2,7 +2,7 @@
 title: from tsv
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Parse text as .tsv and create table.
 usage: |
@@ -36,7 +36,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | table  |
-
 ## Examples
 
 Convert tab-separated data to a table

@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Hide definitions in the current scope.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Hide the alias just defined

@@ -2,7 +2,7 @@
 title: random float
 categories: |
   random
-version: 0.103.0
+version: 0.104.0
 random: |
   Generate a random float within a range [min..max].
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | float  |
-
 ## Examples
 
 Generate a default float value between 0 and 1

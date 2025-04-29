@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.103.0
+version: 0.104.0
 network: |
   Post a body to a URL.
 usage: |
@@ -44,7 +44,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Post content to example.com

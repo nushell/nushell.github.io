@@ -2,7 +2,7 @@
 title: to yaml
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Convert table into .yaml/.yml text.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | string |
-
 ## Examples
 
 Outputs a YAML string representing the contents of this table

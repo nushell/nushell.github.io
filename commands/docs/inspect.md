@@ -2,7 +2,7 @@
 title: inspect
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   Inspect pipeline results while running a pipeline.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Inspect pipeline results

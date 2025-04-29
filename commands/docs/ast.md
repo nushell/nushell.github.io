@@ -2,7 +2,7 @@
 title: ast
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |
@@ -36,7 +36,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Print the ast of a string

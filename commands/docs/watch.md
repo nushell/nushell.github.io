@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -39,7 +39,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Run `cargo test` whenever a Rust file changes

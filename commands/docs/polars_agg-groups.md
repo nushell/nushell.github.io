@@ -2,7 +2,7 @@
 title: polars agg-groups
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Creates an agg_groups expression.
 usage: |
@@ -33,7 +33,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Get the group index of the group by operations.

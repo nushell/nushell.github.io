@@ -2,7 +2,7 @@
 title: stor create
 categories: |
   database
-version: 0.103.0
+version: 0.104.0
 database: |
   Create a table in the in-memory sqlite database.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Create an in-memory sqlite database with specified table name, column names, and column data types

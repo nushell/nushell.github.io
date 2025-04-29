@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Loop over a range.
 usage: |
@@ -32,7 +32,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Print the square of each integer

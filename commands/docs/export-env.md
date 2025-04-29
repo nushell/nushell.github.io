@@ -2,7 +2,7 @@
 title: export-env
 categories: |
   env
-version: 0.103.0
+version: 0.104.0
 env: |
   Run a block and preserve its environment in a current scope.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Set an environment variable

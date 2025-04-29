@@ -2,7 +2,7 @@
 title: touch
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Creates one or more files.
 usage: |
@@ -40,7 +40,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Creates "fixture.json"

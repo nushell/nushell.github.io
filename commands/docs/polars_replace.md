@@ -2,7 +2,7 @@
 title: polars replace
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern.
 usage: |
@@ -38,7 +38,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Replaces string in column

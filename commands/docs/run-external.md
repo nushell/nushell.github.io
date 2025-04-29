@@ -2,7 +2,7 @@
 title: run-external
 categories: |
   system
-version: 0.103.0
+version: 0.104.0
 system: |
   Runs external command.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Run an external command

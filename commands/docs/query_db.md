@@ -2,7 +2,7 @@
 title: query db
 categories: |
   database
-version: 0.103.0
+version: 0.104.0
 database: |
   Query a database using SQL.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Execute SQL against a SQLite database

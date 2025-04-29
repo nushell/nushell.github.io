@@ -2,7 +2,7 @@
 title: if
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Conditionally run a block.
 usage: |
@@ -32,7 +32,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Output a value if a condition matches, otherwise return nothing

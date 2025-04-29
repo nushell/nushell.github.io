@@ -2,7 +2,7 @@
 title: str stats
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Gather word count statistics on the text.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | record |
-
 ## Examples
 
 Count the number of words in a string

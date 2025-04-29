@@ -2,7 +2,7 @@
 title: to plist
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Convert Nu values into plist
 usage: |
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Convert a table into a plist file

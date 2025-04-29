@@ -2,7 +2,7 @@
 title: polars min
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Creates a min expression or aggregates columns to their min value.
 usage: |
@@ -33,7 +33,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Min value from columns in a dataframe

@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.103.0
+version: 0.104.0
 viewers: |
   Render the table.
 usage: |
@@ -40,7 +40,6 @@ Be aware collapse mode currently doesn't support width control
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 List the files in current directory, with indexes starting from 1

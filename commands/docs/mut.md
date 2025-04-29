@@ -2,7 +2,7 @@
 title: mut
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Create a mutable variable and give it a value.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input | output  |
 | ----- | ------- |
 | any   | nothing |
-
 ## Examples
 
 Set a mutable variable to a value, then update it

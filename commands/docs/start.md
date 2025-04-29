@@ -2,7 +2,7 @@
 title: start
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Open a folder, file, or website in the default application or viewer.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Open a text file with the default text editor

@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -41,7 +41,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 List visible files in the current directory

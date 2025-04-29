@@ -2,7 +2,7 @@
 title: plugin
 categories: |
   plugin
-version: 0.103.0
+version: 0.104.0
 plugin: |
   Commands for managing plugins.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Run the `nu_plugin_inc` plugin from the current directory and install its signatures.

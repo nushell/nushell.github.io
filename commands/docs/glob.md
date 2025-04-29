@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -26,6 +26,7 @@ contributors: false
  -  `--no-dir, -D`: Whether to filter out directories from the returned paths
  -  `--no-file, -F`: Whether to filter out files from the returned paths
  -  `--no-symlink, -S`: Whether to filter out symlinks from the returned paths
+ -  `--follow-symlinks, -l`: Whether to follow symbolic links to their targets
  -  `--exclude, -e {list<string>}`: Patterns to exclude from the search: `glob` will not walk the inside of directories matching the excluded patterns.
 
 ## Parameters
@@ -38,7 +39,6 @@ contributors: false
 | input   | output       |
 | ------- | ------------ |
 | nothing | list\<string\> |
-
 ## Examples
 
 Search for *.rs files
@@ -104,6 +104,12 @@ Search for files named tsconfig.json that are not in node_modules directories
 Search for all files that are not in the target nor .git directories
 ```nu
 > glob **/* --exclude [**/target/** **/.git/** */]
+
+```
+
+Search for files following symbolic links to their targets
+```nu
+> glob "**/*.txt" --follow-symlinks
 
 ```
 

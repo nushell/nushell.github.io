@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Examples
 
 View the source of a code block

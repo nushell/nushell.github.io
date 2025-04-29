@@ -2,7 +2,7 @@
 title: url join
 categories: |
   network
-version: 0.103.0
+version: 0.104.0
 network: |
   Converts a record to url.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | record | string |
-
 ## Examples
 
 Outputs a url representing the contents of this record, `params` and `query` fields must be equivalent

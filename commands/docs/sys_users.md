@@ -2,7 +2,7 @@
 title: sys users
 categories: |
   system
-version: 0.103.0
+version: 0.104.0
 system: |
   View information about the users on the system.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Show info about the system users

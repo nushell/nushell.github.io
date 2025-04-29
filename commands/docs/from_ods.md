@@ -2,7 +2,7 @@
 title: from ods
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | table  |
-
 ## Examples
 
 Convert binary .ods data to a table

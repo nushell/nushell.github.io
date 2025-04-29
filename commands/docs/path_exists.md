@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   path
-version: 0.103.0
+version: 0.104.0
 path: |
   Check whether a path exists.
 usage: |

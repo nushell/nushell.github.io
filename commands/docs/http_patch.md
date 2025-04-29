@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.103.0
+version: 0.104.0
 network: |
   Patch a body to a URL.
 usage: |
@@ -44,7 +44,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Patch content to example.com

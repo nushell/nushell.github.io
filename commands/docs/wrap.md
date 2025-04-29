@@ -2,7 +2,7 @@
 title: wrap
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Wrap the value into a column.
 usage: |

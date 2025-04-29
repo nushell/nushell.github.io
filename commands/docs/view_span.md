@@ -2,7 +2,7 @@
 title: view span
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   View the contents of a span.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Examples
 
 View the source of a span. 1 and 2 are just example values. Use the return of debug --raw to get the actual values

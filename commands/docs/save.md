@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Save a file.
 usage: |
@@ -38,7 +38,6 @@ contributors: false
 | input | output  |
 | ----- | ------- |
 | any   | nothing |
-
 ## Examples
 
 Save a string to foo.txt in the current directory

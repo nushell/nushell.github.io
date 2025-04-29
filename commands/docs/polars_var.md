@@ -2,7 +2,7 @@
 title: polars var
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Create a var expression for an aggregation.
 usage: |
@@ -33,7 +33,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Var value from columns in a dataframe or aggregates columns to their var value

@@ -2,7 +2,7 @@
 title: shuffle
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Shuffle rows randomly.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input     | output    |
 | --------- | --------- |
 | list\<any\> | list\<any\> |
-
 ## Examples
 
 Shuffle rows randomly (execute it several times and see the difference)

@@ -2,7 +2,7 @@
 title: random
 categories: |
   random
-version: 0.103.0
+version: 0.104.0
 random: |
   Generate a random value.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Notes
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
 

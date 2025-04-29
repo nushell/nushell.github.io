@@ -2,7 +2,7 @@
 title: drop nth
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Drop the selected rows.
 usage: |

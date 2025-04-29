@@ -2,7 +2,7 @@
 title: from yaml
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Parse text as .yaml/.yml and create table.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | any    |
-
 ## Examples
 
 Converts yaml formatted string to table

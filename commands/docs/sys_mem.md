@@ -2,7 +2,7 @@
 title: sys mem
 categories: |
   system
-version: 0.103.0
+version: 0.104.0
 system: |
   View information about the system memory.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | record |
-
 ## Examples
 
 Show info about the system memory

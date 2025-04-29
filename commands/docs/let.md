@@ -2,7 +2,7 @@
 title: let
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Create a variable and give it a value.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input | output  |
 | ----- | ------- |
 | any   | nothing |
-
 ## Examples
 
 Set a variable to a value

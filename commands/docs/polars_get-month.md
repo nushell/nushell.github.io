@@ -2,7 +2,7 @@
 title: polars get-month
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Gets month from date.
 usage: |
@@ -33,7 +33,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Returns month from a date
@@ -41,6 +40,20 @@ Returns month from a date
 > let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
     let df = ([$dt $dt] | polars into-df);
     $df | polars get-month
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 8 │
+│ 1 │ 8 │
+╰───┴───╯
+
+```
+
+Returns month from a date in an expression
+```nu
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars select (polars col 0 | polars get-month)
 ╭───┬───╮
 │ # │ 0 │
 ├───┼───┤

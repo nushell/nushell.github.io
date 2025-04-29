@@ -2,7 +2,7 @@
 title: tutor
 categories: |
   misc
-version: 0.103.0
+version: 0.104.0
 misc: |
   Run the tutorial. To begin, run: tutor.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Examples
 
 Begin the tutorial

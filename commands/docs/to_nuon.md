@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -33,7 +33,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | string |
-
 ## Examples
 
 Outputs a NUON string representing the contents of this list, compact by default

@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input     | output |
 | --------- | ------ |
 | list\<any\> | any    |
-
 ## Examples
 
 Group items by the "type" column's values

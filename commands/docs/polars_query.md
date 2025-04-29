@@ -2,7 +2,7 @@
 title: polars query
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause.
 usage: |
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Query dataframe using SQL

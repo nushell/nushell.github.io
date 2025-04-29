@@ -2,7 +2,7 @@
 title: headers
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Use the first row of the table as column names.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | table | table  |
-
 ## Examples
 
 Sets the column names for a table created by `split column`

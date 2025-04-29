@@ -2,7 +2,7 @@
 title: scope aliases
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Output info on the aliases in the current scope.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Show the aliases in the current scope

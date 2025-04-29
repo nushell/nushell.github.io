@@ -2,7 +2,7 @@
 title: slice
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Return only the selected rows.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input     | output    |
 | --------- | --------- |
 | list\<any\> | list\<any\> |
-
 ## Examples
 
 Get the last 2 items

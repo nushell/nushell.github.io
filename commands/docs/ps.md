@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.103.0
+version: 0.104.0
 system: |
   View information about system processes.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 List the system processes

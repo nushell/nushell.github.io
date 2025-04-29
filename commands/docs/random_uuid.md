@@ -2,7 +2,7 @@
 title: random uuid
 categories: |
   random
-version: 0.103.0
+version: 0.104.0
 random: |
   Generate a random uuid string of the specified version.
 usage: |
@@ -33,7 +33,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Examples
 
 Generate a random uuid v4 string (default)

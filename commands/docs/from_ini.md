@@ -2,7 +2,7 @@
 title: from ini
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Parse text as .ini and create table.
 usage: |
@@ -33,7 +33,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input  | output |
 | ------ | ------ |
 | string | record |
-
 ## Examples
 
 Converts ini formatted string to record

@@ -2,7 +2,7 @@
 title: export def
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Define a custom command and export it from a module.
 usage: |
@@ -37,7 +37,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Define a custom command in a module and call it

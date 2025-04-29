@@ -2,7 +2,7 @@
 title: keybindings default
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   List default keybindings.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Get list with default keybindings

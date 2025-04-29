@@ -2,7 +2,7 @@
 title: continue
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Continue a loop from the next iteration.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Continue a loop from the next iteration

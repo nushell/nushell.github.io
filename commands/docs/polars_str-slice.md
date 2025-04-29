@@ -2,7 +2,7 @@
 title: polars str-slice
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Slices the string from the start position until the selected length.
 usage: |
@@ -41,7 +41,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Creates slices from the strings in a specified column

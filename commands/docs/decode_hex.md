@@ -2,7 +2,7 @@
 title: decode hex
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Hex decode a value.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | binary |
-
 ## Examples
 
 Decode arbitrary binary data

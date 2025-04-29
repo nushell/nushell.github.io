@@ -2,7 +2,7 @@
 title: is-terminal
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Check if stdin, stdout, or stderr is a terminal.
 usage: |
@@ -32,7 +32,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | bool   |
-
 ## Examples
 
 Return "terminal attached" if standard input is attached to a terminal, and "no terminal" if not.

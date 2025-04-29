@@ -2,7 +2,7 @@
 title: registry query
 categories: |
   system
-version: 0.103.0
+version: 0.104.0
 system: |
   Query the Windows registry.
 usage: |

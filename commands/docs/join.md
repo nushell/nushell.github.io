@@ -2,7 +2,7 @@
 title: join
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Join two tables.
 usage: |
@@ -39,7 +39,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | table | table  |
-
 ## Examples
 
 Join two tables

@@ -2,7 +2,7 @@
 title: export module
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Export a custom module from a module.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Define a custom command in a submodule of a module and call it

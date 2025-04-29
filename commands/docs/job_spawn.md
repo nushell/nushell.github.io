@@ -2,7 +2,7 @@
 title: job spawn
 categories: |
   experimental
-version: 0.103.0
+version: 0.104.0
 experimental: |
   Spawn a background job and retrieve its ID.
 usage: |
@@ -20,6 +20,10 @@ contributors: false
 
 ```> job spawn {flags} (closure)```
 
+## Flags
+
+ -  `--tag, -t {string}`: An optional description tag for this job
+
 ## Parameters
 
  -  `closure`: The closure to run in another thread.
@@ -30,7 +34,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | int    |
-
 ## Examples
 
 Spawn a background job to do some time consuming work

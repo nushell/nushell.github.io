@@ -2,7 +2,7 @@
 title: url encode
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Converts a string to a percent encoded web safe string.
 usage: |

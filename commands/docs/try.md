@@ -2,7 +2,7 @@
 title: try
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Try to run a block, if it fails optionally run a catch closure.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Try to run a division by zero

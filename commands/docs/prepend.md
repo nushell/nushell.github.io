@@ -2,7 +2,7 @@
 title: prepend
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Prepend any number of rows to a table.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output    |
 | ----- | --------- |
 | any   | list\<any\> |
-
 ## Examples
 
 prepend a list to an item

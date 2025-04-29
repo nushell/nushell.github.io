@@ -2,7 +2,7 @@
 title: config nu
 categories: |
   env
-version: 0.103.0
+version: 0.104.0
 env: |
   Edit nu configurations.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 open user's config.nu in the default editor

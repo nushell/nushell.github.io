@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.103.0
+version: 0.104.0
 system: |
   Finds a program file, alias or custom command.
 usage: |
@@ -35,7 +35,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Find if the 'myapp' application is available

@@ -2,7 +2,7 @@
 title: keybindings list
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   List available options that can be used to create keybindings.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Get list of key modifiers

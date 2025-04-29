@@ -2,7 +2,7 @@
 title: keybindings listen
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Get input from the user.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Type and see key event codes

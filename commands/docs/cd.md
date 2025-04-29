@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Change directory.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Change to your home directory

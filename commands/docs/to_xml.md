@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Convert special record structure into .xml text.
 usage: |
@@ -32,7 +32,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | record | string |
-
 ## Examples
 
 Outputs an XML string representing the contents of this table

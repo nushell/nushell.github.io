@@ -2,7 +2,7 @@
 title: stor reset
 categories: |
   database
-version: 0.103.0
+version: 0.104.0
 database: |
   Reset the in-memory database by dropping all tables.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Reset the in-memory sqlite database

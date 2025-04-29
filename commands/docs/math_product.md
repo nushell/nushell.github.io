@@ -2,7 +2,7 @@
 title: math product
 categories: |
   math
-version: 0.103.0
+version: 0.104.0
 math: |
   Returns the product of a list of numbers or the products of each column of a table.
 usage: |

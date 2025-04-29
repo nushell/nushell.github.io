@@ -2,7 +2,7 @@
 title: format number
 categories: |
   conversions
-version: 0.103.0
+version: 0.104.0
 conversions: |
   Format a number.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | number | record |
-
 ## Examples
 
 Get a record containing multiple formats for the number 42
