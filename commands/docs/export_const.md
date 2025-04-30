@@ -2,7 +2,7 @@
 title: export const
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Use parse-time constant from a module and export them from this module.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Re-export a command from another module

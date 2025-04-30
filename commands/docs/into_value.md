@@ -2,7 +2,7 @@
 title: into value
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Infer Nushell datatype for each cell.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | table | table  |
-
 ## Examples
 
 Infer Nushell values for each cell.

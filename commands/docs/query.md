@@ -2,7 +2,7 @@
 title: query
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Show all the query commands
 usage: |
@@ -33,7 +33,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 
 ## Subcommands:
 

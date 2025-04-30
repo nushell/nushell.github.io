@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Output ANSI codes to change color and style of text.
 usage: |
@@ -36,7 +36,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Change color to green (see how the next example text will be green!)

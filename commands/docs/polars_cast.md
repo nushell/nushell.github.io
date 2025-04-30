@@ -2,7 +2,7 @@
 title: polars cast
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Cast a column to a different dtype.
 usage: |
@@ -38,7 +38,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Cast a column in a dataframe to a different dtype

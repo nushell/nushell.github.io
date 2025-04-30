@@ -2,7 +2,7 @@
 title: kill
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Kill a process using the process id.
 usage: |
@@ -18,7 +18,7 @@ contributors: false
 
 ## Signature
 
-```> kill {flags} (pid) ...rest```
+```> kill {flags} ...rest```
 
 ## Flags
 
@@ -28,8 +28,7 @@ contributors: false
 
 ## Parameters
 
- -  `pid`: Process id of process that is to be killed.
- -  `...rest`: Rest of processes to kill.
+ -  `...rest`: Process ids of processes that are to be killed.
 
 
 ## Input/output types:
@@ -37,7 +36,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Kill the pid using the most memory

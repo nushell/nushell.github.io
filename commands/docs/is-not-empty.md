@@ -2,7 +2,7 @@
 title: is-not-empty
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Check for non-empty values.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | bool   |
-
 ## Examples
 
 Check if a string is empty

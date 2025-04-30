@@ -2,7 +2,7 @@
 title: random int
 categories: |
   random
-version: 0.103.0
+version: 0.104.0
 random: |
   Generate a random integer [min..max].
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | int    |
-
 ## Examples
 
 Generate a non-negative random integer

@@ -2,7 +2,7 @@
 title: polars filter-with
 categories: |
   dataframe or lazyframe
-version: 0.103.0
+version: 0.104.0
 dataframe_or_lazyframe: |
   Filters dataframe using a mask or expression as reference.
 usage: |
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Filter dataframe using a bool mask

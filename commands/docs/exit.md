@@ -2,7 +2,7 @@
 title: exit
 categories: |
   shells
-version: 0.103.0
+version: 0.104.0
 shells: |
   Exit Nu.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Exit the current shell

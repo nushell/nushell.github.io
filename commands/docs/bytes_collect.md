@@ -2,7 +2,7 @@
 title: bytes collect
 categories: |
   bytes
-version: 0.103.0
+version: 0.104.0
 bytes: |
   Concatenate multiple binary into a single binary, with an optional separator between each.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input        | output |
 | ------------ | ------ |
 | list\<binary\> | binary |
-
 ## Examples
 
 Create a byte array from input

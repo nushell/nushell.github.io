@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Sets a default value if a row's column is missing or null.
 usage: |
@@ -35,7 +35,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Give a default 'target' column to all file entries

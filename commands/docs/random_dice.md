@@ -2,7 +2,7 @@
 title: random dice
 categories: |
   random
-version: 0.103.0
+version: 0.104.0
 random: |
   Generate a random dice roll.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output    |
 | ------- | --------- |
 | nothing | list\<int\> |
-
 ## Examples
 
 Roll 1 dice with 6 sides each

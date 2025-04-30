@@ -2,7 +2,7 @@
 title: plugin rm
 categories: |
   plugin
-version: 0.103.0
+version: 0.104.0
 plugin: |
   Remove a plugin from the plugin registry file.
 usage: |
@@ -35,7 +35,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Remove the installed signatures for the `inc` plugin.

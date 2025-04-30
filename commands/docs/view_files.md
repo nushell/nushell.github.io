@@ -2,7 +2,7 @@
 title: view files
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   View the files registered in nushell's EngineState memory.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output                                                   |
 | ------- | -------------------------------------------------------- |
 | nothing | table\<filename: string, start: int, end: int, size: int\> |
-
 ## Examples
 
 View the files registered in Nushell's EngineState memory

@@ -2,7 +2,7 @@
 title: polars unpivot
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Unpivot a DataFrame from wide to long format.
 usage: |
@@ -40,7 +40,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 unpivot on an eager dataframe

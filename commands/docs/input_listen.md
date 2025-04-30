@@ -2,7 +2,7 @@
 title: input listen
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Listen for user interface event.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output                                           |
 | ------- | ------------------------------------------------ |
 | nothing | record\<keycode: string, modifiers: list\<string\>\> |
-
 ## Examples
 
 Listen for a keyboard shortcut and find out how nu receives it

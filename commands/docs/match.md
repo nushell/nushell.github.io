@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Match on a value in range

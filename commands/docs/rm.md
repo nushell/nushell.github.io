@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -40,7 +40,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Delete, or move a file to the trash (based on the 'always_trash' config option)

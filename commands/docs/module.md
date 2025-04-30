@@ -2,7 +2,7 @@
 title: module
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Define a custom module.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Define a custom command in a module and call it

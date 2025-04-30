@@ -2,7 +2,7 @@
 title: plugin stop
 categories: |
   plugin
-version: 0.103.0
+version: 0.104.0
 plugin: |
   Stop an installed plugin if it was running.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Stop the plugin named `inc`.

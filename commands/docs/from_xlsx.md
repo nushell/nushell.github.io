@@ -2,7 +2,7 @@
 title: from xlsx
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Parse binary Excel(.xlsx) data and create table.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | binary | table  |
-
 ## Examples
 
 Convert binary .xlsx data to a table

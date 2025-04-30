@@ -2,7 +2,7 @@
 title: date list-timezone
 categories: |
   date
-version: 0.103.0
+version: 0.104.0
 date: |
   List supported time zones.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Show time zone(s) that contains 'Shanghai'

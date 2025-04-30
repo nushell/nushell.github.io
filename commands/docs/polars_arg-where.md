@@ -2,7 +2,7 @@
 title: polars arg-where
 categories: |
   expression
-version: 0.103.0
+version: 0.104.0
 expression: |
   Creates an expression that returns the arguments where expression is true.
 usage: |
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Return a dataframe where the value match the expression

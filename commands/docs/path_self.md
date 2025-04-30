@@ -2,7 +2,7 @@
 title: path self
 categories: |
   path
-version: 0.103.0
+version: 0.104.0
 path: |
   Get the absolute path of the script or module containing this command at parse time.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Examples
 
 Get the path of the current file

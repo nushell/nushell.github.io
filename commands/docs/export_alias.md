@@ -2,7 +2,7 @@
 title: export alias
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Alias a command (with optional flags) to a new name and export it from a module.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Alias ll to ls -l and export it from a module

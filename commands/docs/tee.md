@@ -2,7 +2,7 @@
 title: tee
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Copy a stream to another command in parallel.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Save a webpage to a file while also printing it

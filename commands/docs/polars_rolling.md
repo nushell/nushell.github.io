@@ -2,7 +2,7 @@
 title: polars rolling
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Rolling calculation for a series.
 usage: |
@@ -38,7 +38,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Rolling sum for a series

@@ -2,7 +2,7 @@
 title: history session
 categories: |
   history
-version: 0.103.0
+version: 0.104.0
 history: |
   Get the command history session.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | int    |
-
 ## Examples
 
 Get current history session

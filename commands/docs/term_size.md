@@ -2,7 +2,7 @@
 title: term size
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Returns a record containing the number of columns (width) and rows (height) of the terminal.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output                          |
 | ------- | ------------------------------- |
 | nothing | record\<columns: int, rows: int\> |
-
 ## Examples
 
 Return the columns (width) and rows (height) of the terminal

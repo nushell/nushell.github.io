@@ -2,7 +2,7 @@
 title: from nuon
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Convert from nuon to structured data.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | any    |
-
 ## Examples
 
 Converts nuon formatted string to table

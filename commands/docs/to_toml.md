@@ -2,7 +2,7 @@
 title: to toml
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Convert record into .toml text.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | record | string |
-
 ## Examples
 
 Outputs an TOML string representing the contents of this record

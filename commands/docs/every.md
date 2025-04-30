@@ -2,7 +2,7 @@
 title: every
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Show (or skip) every n-th row, starting from the first one.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input     | output    |
 | --------- | --------- |
 | list\<any\> | list\<any\> |
-
 ## Examples
 
 Get every second row

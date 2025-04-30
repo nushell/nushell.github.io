@@ -2,7 +2,7 @@
 title: break
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Break a loop.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Break out of a loop

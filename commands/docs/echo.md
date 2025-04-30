@@ -2,7 +2,7 @@
 title: echo
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Returns its arguments, ignoring the piped-in value.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Put a list of numbers in the pipeline. This is the same as [1 2 3].

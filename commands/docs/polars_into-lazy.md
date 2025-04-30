@@ -2,7 +2,7 @@
 title: polars into-lazy
 categories: |
   lazyframe
-version: 0.103.0
+version: 0.104.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe.
 usage: |
@@ -29,7 +29,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Flags
 
- -  `--schema, -s {record}`: Polars Schema in format [{name: str}]. CSV, JSON, and JSONL files
+ -  `--schema, -s {any}`: Polars Schema in format [{name: str}].
 
 
 ## Input/output types:
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Takes a table and creates a lazyframe
@@ -49,5 +48,19 @@ Takes a table and creates a lazyframe
 Takes a table, creates a lazyframe, assigns column 'b' type str, displays the schema
 ```nu
 > [[a b];[1 2] [3 4]] | polars into-lazy --schema {b: str} | polars schema
+╭───┬─────╮
+│ b │ str │
+╰───┴─────╯
+```
+
+Use a predefined schama
+```nu
+> let schema = {a: str, b: str}; [[a b]; [1 "foo"] [2 "bar"]] | polars into-lazy -s $schema
+╭───┬───┬─────╮
+│ # │ a │  b  │
+├───┼───┼─────┤
+│ 0 │ 1 │ foo │
+│ 1 │ 2 │ bar │
+╰───┴───┴─────╯
 
 ```

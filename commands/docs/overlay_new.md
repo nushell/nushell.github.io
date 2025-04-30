@@ -2,7 +2,7 @@
 title: overlay new
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Create an empty overlay.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Create an empty overlay

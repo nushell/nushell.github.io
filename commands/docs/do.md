@@ -2,7 +2,7 @@
 title: do
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Run a closure, providing it with the pipeline input.
 usage: |
@@ -23,8 +23,6 @@ contributors: false
 ## Flags
 
  -  `--ignore-errors, -i`: ignore errors as the closure runs
- -  `--ignore-shell-errors, -s`: ignore shell errors as the closure runs
- -  `--ignore-program-errors, -p`: ignore external program errors as the closure runs
  -  `--capture-errors, -c`: catch errors as the closure runs, and return them
  -  `--env`: keep the environment defined inside the command
 
@@ -39,7 +37,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Run the closure

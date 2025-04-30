@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.103.0
+version: 0.104.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -42,7 +42,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Get content from example.com

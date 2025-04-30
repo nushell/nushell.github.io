@@ -2,7 +2,7 @@
 title: whoami
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Get the current username using uutils/coreutils whoami.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Examples
 
 Get the current username

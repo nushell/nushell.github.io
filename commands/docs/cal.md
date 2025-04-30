@@ -2,7 +2,7 @@
 title: cal
 categories: |
   generators
-version: 0.103.0
+version: 0.104.0
 generators: |
   Display a calendar.
 usage: |
@@ -36,7 +36,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 This month's calendar

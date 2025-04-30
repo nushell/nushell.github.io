@@ -2,7 +2,7 @@
 title: polars store-rm
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Removes a stored Dataframe or other object from the plugin cache.
 usage: |
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output       |
 | ----- | ------------ |
 | any   | list\<string\> |
-
 ## Examples
 
 Removes a stored

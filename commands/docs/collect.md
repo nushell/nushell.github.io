@@ -2,7 +2,7 @@
 title: collect
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Collect a stream into a value.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Use the second value in the stream

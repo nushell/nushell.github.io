@@ -2,7 +2,7 @@
 title: polars slice
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Creates new dataframe from a slice of rows.
 usage: |
@@ -38,7 +38,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Create new dataframe from a slice of the rows

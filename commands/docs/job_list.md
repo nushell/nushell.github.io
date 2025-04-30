@@ -2,7 +2,7 @@
 title: job list
 categories: |
   experimental
-version: 0.103.0
+version: 0.104.0
 experimental: |
   List background jobs.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 List all background jobs

@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -32,7 +32,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Set the metadata of a table literal

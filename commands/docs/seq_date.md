@@ -2,7 +2,7 @@
 title: seq date
 categories: |
   generators
-version: 0.103.0
+version: 0.104.0
 generators: |
   Print sequences of dates.
 usage: |
@@ -37,7 +37,6 @@ contributors: false
 | input   | output       |
 | ------- | ------------ |
 | nothing | list\<string\> |
-
 ## Examples
 
 Return a list of the next 10 days in the YYYY-MM-DD format

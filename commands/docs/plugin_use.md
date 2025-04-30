@@ -2,7 +2,7 @@
 title: plugin use
 categories: |
   plugin
-version: 0.103.0
+version: 0.104.0
 plugin: |
   Load a plugin from the plugin registry file into scope.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Load the commands for the `query` plugin from $nu.plugin-path

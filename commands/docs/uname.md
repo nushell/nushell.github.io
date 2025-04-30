@@ -2,7 +2,7 @@
 title: uname
 categories: |
   system
-version: 0.103.0
+version: 0.104.0
 system: |
   Print certain system information using uutils/coreutils uname.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Print all information

@@ -2,7 +2,7 @@
 title: roll
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Rolling commands for tables.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Notes
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
 

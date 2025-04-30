@@ -2,7 +2,7 @@
 title: append
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Append any number of rows to a table.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output    |
 | ----- | --------- |
 | any   | list\<any\> |
-
 ## Examples
 
 Append one int to a list

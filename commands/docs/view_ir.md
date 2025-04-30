@@ -2,7 +2,7 @@
 title: view ir
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   View the compiled IR code for a block of code.
 usage: |
@@ -35,7 +35,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Notes
 The target can be a closure, the name of a custom command, or an internal block
 ID. Closure literals within IR dumps often reference the block by ID (e.g.

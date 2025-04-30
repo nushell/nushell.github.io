@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--raw, -r`: Prints the raw value representation
+ -  `--raw-value, -v`: Prints the raw value representation but not the nushell value part
 
 
 ## Input/output types:
@@ -57,6 +58,12 @@ Debug print a table
 │ 2 │ {version: 0.2.0, patch: false} │
 ╰───┴────────────────────────────────╯
 
+```
+
+Debug print an ansi escape encoded string and get the raw value
+```nu
+> $'(ansi red)nushell(ansi reset)' | debug -v
+"\u{1b}[31mnushell\u{1b}[0m"
 ```
 
 

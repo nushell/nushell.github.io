@@ -2,7 +2,7 @@
 title: polars into-repr
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Display a dataframe in its repr format.
 usage: |
@@ -33,33 +33,32 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | string |
-
 ## Examples
 
 Shows dataframe in repr format
 ```nu
 > [[a b]; [2025-01-01 2] [2025-01-02 4]] | polars into-df | polars into-repr
 shape: (2, 2)
-┌─────────────────────┬─────┐
-│ a                   ┆ b   │
-│ ---                 ┆ --- │
-│ datetime[ns]        ┆ i64 │
-╞═════════════════════╪═════╡
-│ 2025-01-01 00:00:00 ┆ 2   │
-│ 2025-01-02 00:00:00 ┆ 4   │
-└─────────────────────┴─────┘
+┌─────────────────────────┬─────┐
+│ a                       ┆ b   │
+│ ---                     ┆ --- │
+│ datetime[ns, UTC]       ┆ i64 │
+╞═════════════════════════╪═════╡
+│ 2025-01-01 00:00:00 UTC ┆ 2   │
+│ 2025-01-02 00:00:00 UTC ┆ 4   │
+└─────────────────────────┴─────┘
 ```
 
 Shows lazy dataframe in repr format
 ```nu
-> [[a b]; [2025-01-01 2] [2025-01-02 4]] | polars into-df | polars into-lazy | polars into-repr
+> [[a b]; [2025-01-01 2] [2025-01-02 4]] | polars into-lazy | polars into-repr
 shape: (2, 2)
-┌─────────────────────┬─────┐
-│ a                   ┆ b   │
-│ ---                 ┆ --- │
-│ datetime[ns]        ┆ i64 │
-╞═════════════════════╪═════╡
-│ 2025-01-01 00:00:00 ┆ 2   │
-│ 2025-01-02 00:00:00 ┆ 4   │
-└─────────────────────┴─────┘
+┌─────────────────────────┬─────┐
+│ a                       ┆ b   │
+│ ---                     ┆ --- │
+│ datetime[ns, UTC]       ┆ i64 │
+╞═════════════════════════╪═════╡
+│ 2025-01-01 00:00:00 UTC ┆ 2   │
+│ 2025-01-02 00:00:00 UTC ┆ 4   │
+└─────────────────────────┴─────┘
 ```

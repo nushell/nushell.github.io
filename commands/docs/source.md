@@ -2,7 +2,7 @@
 title: source
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Runs a script file in the current context.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Runs foo.nu in the current context

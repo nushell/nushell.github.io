@@ -2,7 +2,7 @@
 title: config use-colors
 categories: |
   env
-version: 0.103.0
+version: 0.104.0
 env: |
   Get the configuration for color output.
 usage: |
@@ -26,6 +26,5 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | bool   |
-
 ## Notes
 Use this command instead of checking `$env.config.use_ansi_coloring` to properly handle the "auto" setting, including environment variables that influence its behavior.

@@ -2,7 +2,7 @@
 title: polars get-year
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Gets year from date.
 usage: |
@@ -33,7 +33,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Returns year from a date
@@ -41,6 +40,20 @@ Returns year from a date
 > let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
     let df = ([$dt $dt] | polars into-df);
     $df | polars get-year
+╭───┬──────╮
+│ # │  0   │
+├───┼──────┤
+│ 0 │ 2020 │
+│ 1 │ 2020 │
+╰───┴──────╯
+
+```
+
+Returns year from a date in an expression
+```nu
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars select (polars col 0 | polars get-year)
 ╭───┬──────╮
 │ # │  0   │
 ├───┼──────┤

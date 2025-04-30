@@ -2,7 +2,7 @@
 title: into duration
 categories: |
   conversions
-version: 0.103.0
+version: 0.104.0
 conversions: |
   Convert value to duration.
 usage: |
@@ -34,7 +34,9 @@ contributors: false
 | input    | output   |
 | -------- | -------- |
 | duration | duration |
+| float    | duration |
 | int      | duration |
+| record   | any      |
 | string   | duration |
 | table    | table    |
 ## Examples
@@ -82,6 +84,18 @@ Convert a number of an arbitrary unit to duration
 ```nu
 > 1_234 | into duration --unit ms
 1sec 234ms
+```
+
+Convert a floating point number of an arbitrary unit to duration
+```nu
+> 1.234 | into duration --unit sec
+1sec 234ms
+```
+
+Convert a record to a duration
+```nu
+> {day: 10, hour: 2, minute: 6, second: 50, sign: '+'} | into duration
+1wk 3day 2hr 6min 50sec
 ```
 
 ## Notes

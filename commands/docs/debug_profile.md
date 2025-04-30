@@ -2,7 +2,7 @@
 title: debug profile
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   Profile pipeline elements in a closure.
 usage: |
@@ -39,7 +39,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | table  |
-
 ## Examples
 
 Profile config evaluation

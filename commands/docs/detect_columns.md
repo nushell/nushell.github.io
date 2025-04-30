@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -33,7 +33,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | table  |
-
 ## Examples
 
 use --guess if you find default algorithm not working

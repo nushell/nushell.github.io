@@ -2,7 +2,7 @@
 title: plugin add
 categories: |
   plugin
-version: 0.103.0
+version: 0.104.0
 plugin: |
   Add a plugin to the plugin registry file.
 usage: |
@@ -35,7 +35,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Run the `nu_plugin_inc` plugin from the current directory or $env.NU_PLUGIN_DIRS and install its signatures.

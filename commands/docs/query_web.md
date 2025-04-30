@@ -2,7 +2,7 @@
 title: query web
 categories: |
   network
-version: 0.103.0
+version: 0.104.0
 network: |
   execute selector query on html/web
 usage: |
@@ -41,7 +41,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Retrieve all `<header>` elements from phoronix.com website

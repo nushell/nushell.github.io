@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   Get the metadata for items in the stream.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | record |
-
 ## Examples
 
 Get the metadata of a variable

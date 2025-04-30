@@ -2,7 +2,7 @@
 title: export
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Export definitions or environment variables from a module.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Export a definition from a module

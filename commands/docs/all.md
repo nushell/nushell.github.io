@@ -2,7 +2,7 @@
 title: all
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Test if every element of the input fulfills a predicate expression.
 usage: |
@@ -30,8 +30,13 @@ contributors: false
 | input     | output |
 | --------- | ------ |
 | list\<any\> | bool   |
-
 ## Examples
+
+Check if a list contains only true values
+```nu
+> [false true true false] | all {}
+false
+```
 
 Check if each row's status is the string 'UP'
 ```nu

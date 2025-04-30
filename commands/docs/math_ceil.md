@@ -2,7 +2,7 @@
 title: math ceil
 categories: |
   math
-version: 0.103.0
+version: 0.104.0
 math: |
   Returns the ceil of a number (smallest integer greater than or equal to that number).
 usage: |
@@ -23,10 +23,11 @@ contributors: false
 
 ## Input/output types:
 
-| input        | output    |
-| ------------ | --------- |
-| list\<number\> | list\<int\> |
-| number       | int       |
+| input        | output       |
+| ------------ | ------------ |
+| list\<number\> | list\<int\>    |
+| number       | int          |
+| range        | list\<number\> |
 ## Examples
 
 Apply the ceil function to a list of numbers

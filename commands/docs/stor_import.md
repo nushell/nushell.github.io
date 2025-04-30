@@ -2,7 +2,7 @@
 title: stor import
 categories: |
   database
-version: 0.103.0
+version: 0.104.0
 database: |
   Import a sqlite database file into the in-memory sqlite database.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Import a sqlite database file into the in-memory sqlite database

@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Decode a Base64 value.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | binary |
-
 ## Examples
 
 Decode a Base64 string

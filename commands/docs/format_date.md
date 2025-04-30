@@ -2,7 +2,7 @@
 title: format date
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Format a given date using a format string.
 usage: |
@@ -49,6 +49,12 @@ Format a given date-time as a string using the default format (RFC 2822).
 ```nu
 > "2021-10-22 20:00:12 +01:00" | format date
 Fri, 22 Oct 2021 20:00:12 +0100
+```
+
+Format a given date-time according to the RFC 3339 standard.
+```nu
+> '2021-10-22 20:00:12 +01:00' | into datetime | format date "%+"
+2021-10-22T20:00:12+01:00
 ```
 
 Format the current date-time using a given format string.

@@ -2,7 +2,7 @@
 title: roll up
 categories: |
   filters
-version: 0.103.0
+version: 0.104.0
 filters: |
   Roll table rows up.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | table | table  |
-
 ## Examples
 
 Rolls rows up

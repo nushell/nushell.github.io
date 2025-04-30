@@ -2,7 +2,7 @@
 title: ulimit
 categories: |
   platform
-version: 0.103.0
+version: 0.104.0
 platform: |
   Set or get resource usage limits.
 usage: |
@@ -43,7 +43,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Print all current limits

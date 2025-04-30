@@ -2,7 +2,7 @@
 title: panic
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   Causes nushell to panic.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Panic with a custom message

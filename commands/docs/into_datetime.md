@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.103.0
+version: 0.104.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
  -  `--offset, -o {int}`: Specify timezone by offset from UTC if the input is a Unix timestamp, like '+8', '-4'
  -  `--format, -f {string}`: Specify expected format of INPUT string to parse to datetime. Use --list to see options
  -  `--list, -l`: Show all possible variables for use in --format flag
- -  `--list-human, -n`: Show human-readable datetime parsing examples
 
 ## Parameters
 
@@ -42,7 +41,7 @@ contributors: false
 | int          | datetime       |
 | list\<string\> | list\<datetime\> |
 | nothing      | table          |
-| record       | record         |
+| record       | any            |
 | string       | datetime       |
 | table        | table          |
 ## Examples
@@ -89,6 +88,12 @@ Using a datetime as input simply returns the value
 Sat, 27 Feb 2021 13:55:40 +0000 (4 years ago)
 ```
 
+Using a record as input
+```nu
+> {year: 2025, month: 3, day: 30, hour: 12, minute: 15, second: 59, timezone: '+02:00'} | into datetime
+Sun, 30 Mar 2025 10:15:59 +0000 (a month ago)
+```
+
 Convert list of timestamps to datetimes
 ```nu
 > ["2023-03-30 10:10:07 -05:00", "2023-05-05 13:43:49 -05:00", "2023-06-05 01:37:42 -05:00"] | into datetime
@@ -97,23 +102,5 @@ Convert list of timestamps to datetimes
 │ 1 │ 2 years ago │
 │ 2 │ 2 years ago │
 ╰───┴─────────────╯
-
-```
-
-Parsing human readable datetimes
-```nu
-> 'Today at 18:30' | into datetime
-
-```
-
-Parsing human readable datetimes
-```nu
-> 'Last Friday at 19:45' | into datetime
-
-```
-
-Parsing human readable datetimes
-```nu
-> 'In 5 minutes and 30 seconds' | into datetime
 
 ```

@@ -2,7 +2,7 @@
 title: load-env
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Loads an environment update from a record.
 usage: |

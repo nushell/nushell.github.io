@@ -2,7 +2,7 @@
 title: decode base32hex
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Encode a base32hex value.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | binary |
-
 ## Examples
 
 Decode arbitrary binary data

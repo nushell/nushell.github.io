@@ -2,7 +2,7 @@
 title: mktemp
 categories: |
   filesystem
-version: 0.103.0
+version: 0.104.0
 filesystem: |
   Create temporary files or directories using uutils/coreutils mktemp.
 usage: |
@@ -37,7 +37,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Examples
 
 Make a temporary file with the given suffix in the current working directory.

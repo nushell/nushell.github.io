@@ -2,7 +2,7 @@
 title: polars datepart
 categories: |
   expression
-version: 0.103.0
+version: 0.104.0
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |
@@ -37,12 +37,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Creates an expression to capture the year date part
 ```nu
-> [["2021-12-30T01:02:03.123456789"]] | polars into-df | polars as-datetime "%Y-%m-%dT%H:%M:%S.%9f" | polars with-column [(polars col datetime | polars datepart year | polars as datetime_year )]
+> [["2021-12-30T01:02:03.123456789"]] | polars into-df | polars as-datetime "%Y-%m-%dT%H:%M:%S.%9f" --naive | polars with-column [(polars col datetime | polars datepart year | polars as datetime_year )]
 ╭───┬─────────────┬───────────────╮
 │ # │  datetime   │ datetime_year │
 ├───┼─────────────┼───────────────┤
@@ -53,7 +52,7 @@ Creates an expression to capture the year date part
 
 Creates an expression to capture multiple date parts
 ```nu
-> [["2021-12-30T01:02:03.123456789"]] | polars into-df | polars as-datetime "%Y-%m-%dT%H:%M:%S.%9f" |
+> [["2021-12-30T01:02:03.123456789"]] | polars into-df | polars as-datetime "%Y-%m-%dT%H:%M:%S.%9f" --naive |
                 polars with-column [ (polars col datetime | polars datepart year | polars as datetime_year ),
                 (polars col datetime | polars datepart month | polars as datetime_month ),
                 (polars col datetime | polars datepart day | polars as datetime_day ),
@@ -61,10 +60,15 @@ Creates an expression to capture multiple date parts
                 (polars col datetime | polars datepart minute | polars as datetime_minute ),
                 (polars col datetime | polars datepart second | polars as datetime_second ),
                 (polars col datetime | polars datepart nanosecond | polars as datetime_ns ) ]
-╭───┬─────────────┬───────────────┬────────────────┬──────────────┬───────────────┬─────────────────┬─────────────────┬─────────────╮
-│ # │  datetime   │ datetime_year │ datetime_month │ datetime_day │ datetime_hour │ datetime_minute │ datetime_second │ datetime_ns │
-├───┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼─────────────────┼─────────────┤
-│ 0 │ 3 years ago │          2021 │             12 │           30 │             1 │               2 │               3 │   123456789 │
-╰───┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴─────────────────┴─────────────╯
+╭───┬─────────────┬───────────────┬────────────────┬──────────────┬───────────────┬─────────────────┬───────────┬─────╮
+│ # │  datetime   │ datetime_year │ datetime_month │ datetime_day │ datetime_hour │ datetime_minute │ datetime_ │ dat │
+│   │             │               │                │              │               │                 │ second    │ eti │
+│   │             │               │                │              │               │                 │           │ me_ │
+│   │             │               │                │              │               │                 │           │ ns  │
+├───┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼───────────┼─────┤
+│ 0 │ 3 years ago │          2021 │             12 │           30 │             1 │               2 │         3 │ 123 │
+│   │             │               │                │              │               │                 │           │ 456 │
+│   │             │               │                │              │               │                 │           │ 789 │
+╰───┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴───────────┴─────╯
 
 ```

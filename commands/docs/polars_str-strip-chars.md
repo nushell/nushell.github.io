@@ -2,7 +2,7 @@
 title: polars str-strip-chars
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Strips specified characters from strings in a column
 usage: |
@@ -42,7 +42,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Strip characters from both ends of strings in a column

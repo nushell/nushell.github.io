@@ -2,7 +2,7 @@
 title: loop
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Run a block in a loop.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Loop while a condition is true

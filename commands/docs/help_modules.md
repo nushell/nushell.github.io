@@ -2,7 +2,7 @@
 title: help modules
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Show help on nushell modules.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 show all modules

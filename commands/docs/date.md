@@ -2,7 +2,7 @@
 title: date
 categories: |
   date
-version: 0.103.0
+version: 0.104.0
 date: |
   Date-related commands.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | string |
-
 ## Notes
 You must use one of the following subcommands. Using this command as-is will only produce this help message.
 
@@ -35,6 +34,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                                         | description                                               | type     |
 | ------------------------------------------------------------ | --------------------------------------------------------- | -------- |
 | [`date format`](/commands/docs/date_format.md)               | Removed command: use `format date` instead.               | built-in |
+| [`date from-human`](/commands/docs/date_from-human.md)       | Convert a human readable datetime string to a datetime.   | built-in |
 | [`date humanize`](/commands/docs/date_humanize.md)           | Print a 'humanized' format for the date, relative to now. | built-in |
 | [`date list-timezone`](/commands/docs/date_list-timezone.md) | List supported time zones.                                | built-in |
 | [`date now`](/commands/docs/date_now.md)                     | Get the current date.                                     | built-in |

@@ -2,7 +2,7 @@
 title: to msgpack
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Convert Nu values into MessagePack.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | binary |
-
 ## Examples
 
 Convert a list of values to MessagePack

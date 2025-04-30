@@ -2,7 +2,7 @@
 title: debug info
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   View process memory info.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | record |
-
 ## Examples
 
 View process information

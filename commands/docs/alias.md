@@ -2,7 +2,7 @@
 title: alias
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Alias a command (with optional flags) to a new name.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Alias ll to ls -l

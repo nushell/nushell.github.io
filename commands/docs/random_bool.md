@@ -2,7 +2,7 @@
 title: random bool
 categories: |
   random
-version: 0.103.0
+version: 0.104.0
 random: |
   Generate a random boolean value.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | bool   |
-
 ## Examples
 
 Generate a random boolean value

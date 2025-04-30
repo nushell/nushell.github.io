@@ -2,7 +2,7 @@
 title: to text
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Converts data into simple text.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | string |
-
 ## Examples
 
 Outputs data as simple text with a trailing newline

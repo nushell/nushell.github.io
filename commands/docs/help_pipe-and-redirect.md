@@ -2,7 +2,7 @@
 title: help pipe-and-redirect
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Show help on nushell pipes and redirects.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Notes
 This command contains basic usage of pipe and redirect symbol, for more detail, check:
 https://www.nushell.sh/lang-guide/chapters/pipelines.html

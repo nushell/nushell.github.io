@@ -2,7 +2,7 @@
 title: metadata access
 categories: |
   debug
-version: 0.103.0
+version: 0.104.0
 debug: |
   Access the metadata for the input stream within a closure.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Access metadata and data from a stream together

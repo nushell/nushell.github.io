@@ -2,7 +2,7 @@
 title: str kebab-case
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Convert a string to kebab-case.
 usage: |

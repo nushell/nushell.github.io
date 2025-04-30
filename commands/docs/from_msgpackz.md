@@ -2,7 +2,7 @@
 title: from msgpackz
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Convert brotli-compressed MessagePack data into Nu values.
 usage: |
@@ -30,6 +30,5 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | binary | any    |
-
 ## Notes
 This is the format used by the plugin registry file ($nu.plugin-path).

@@ -2,7 +2,7 @@
 title: stor delete
 categories: |
   database
-version: 0.103.0
+version: 0.104.0
 database: |
   Delete a table or specified rows in the in-memory sqlite database.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | table  |
-
 ## Examples
 
 Delete a table from the in-memory sqlite database

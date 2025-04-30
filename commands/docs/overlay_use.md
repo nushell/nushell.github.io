@@ -2,7 +2,7 @@
 title: overlay use
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Use definitions from a module as an overlay.
 usage: |
@@ -36,7 +36,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Create an overlay from a module

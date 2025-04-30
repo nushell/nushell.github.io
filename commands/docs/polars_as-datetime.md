@@ -2,7 +2,7 @@
 title: polars as-datetime
 categories: |
   dataframe
-version: 0.103.0
+version: 0.104.0
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -30,6 +30,13 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 ## Flags
 
  -  `--not-exact, -n`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
+ -  `--naive`: the input datetimes should be parsed as naive (i.e., not timezone-aware). Ignored if input is an expression.
+ -  `--ambiguous, -a {one_of(string, nothing)}`: Determine how to deal with ambiguous datetimes:
+                    `raise` (default): raise error
+                    `earliest`: use the earliest datetime
+                    `latest`: use the latest datetime
+                    `null`: set to null
+                    Used only when input is a lazyframe or expression and ignored otherwise
 
 ## Parameters
 
@@ -41,12 +48,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Converts string to datetime
 ```nu
-> ["2021-12-30 00:00:00" "2021-12-31 00:00:00"] | polars into-df | polars as-datetime "%Y-%m-%d %H:%M:%S"
+> ["2021-12-30 00:00:00 -0400" "2021-12-31 00:00:00 -0400"] | polars into-df | polars as-datetime "%Y-%m-%d %H:%M:%S %z"
 ╭───┬─────────────╮
 │ # │  datetime   │
 ├───┼─────────────┤
@@ -58,7 +64,7 @@ Converts string to datetime
 
 Converts string to datetime with high resolutions
 ```nu
-> ["2021-12-30 00:00:00.123456789" "2021-12-31 00:00:00.123456789"] | polars into-df | polars as-datetime "%Y-%m-%d %H:%M:%S.%9f"
+> ["2021-12-30 00:00:00.123456789" "2021-12-31 00:00:00.123456789"] | polars into-df | polars as-datetime "%Y-%m-%d %H:%M:%S.%9f" --naive
 ╭───┬─────────────╮
 │ # │  datetime   │
 ├───┼─────────────┤
@@ -70,11 +76,25 @@ Converts string to datetime with high resolutions
 
 Converts string to datetime using the `--not-exact` flag even with excessive symbols
 ```nu
-> ["2021-12-30 00:00:00 GMT+4"] | polars into-df | polars as-datetime "%Y-%m-%d %H:%M:%S" --not-exact
+> ["2021-12-30 00:00:00 GMT+4"] | polars into-df | polars as-datetime "%Y-%m-%d %H:%M:%S" --not-exact --naive
 ╭───┬─────────────╮
 │ # │  datetime   │
 ├───┼─────────────┤
 │ 0 │ 3 years ago │
+╰───┴─────────────╯
+
+```
+
+Converts string to datetime using the `--not-exact` flag even with excessive symbols in an expression
+```nu
+> ["2025-11-02 00:00:00", "2025-11-02 01:00:00", "2025-11-02 02:00:00", "2025-11-02 03:00:00"] | polars into-df | polars select (polars col 0 | polars as-datetime "%Y-%m-%d %H:%M:%S")
+╭───┬─────────────╮
+│ # │  datetime   │
+├───┼─────────────┤
+│ 0 │ in 6 months │
+│ 1 │ in 6 months │
+│ 2 │ in 6 months │
+│ 3 │ in 6 months │
 ╰───┴─────────────╯
 
 ```

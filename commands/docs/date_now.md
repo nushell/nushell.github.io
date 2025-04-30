@@ -2,7 +2,7 @@
 title: date now
 categories: |
   date
-version: 0.103.0
+version: 0.104.0
 date: |
   Get the current date.
 usage: |
@@ -26,12 +26,17 @@ contributors: false
 | input   | output   |
 | ------- | -------- |
 | nothing | datetime |
-
 ## Examples
 
-Get the current date and display it in a given format string.
+Get the current date and format it in a given format string.
 ```nu
 > date now | format date "%Y-%m-%d %H:%M:%S"
+
+```
+
+Get the current date and format it according to the RFC 3339 standard.
+```nu
+> date now | format date "%+"
 
 ```
 
@@ -47,7 +52,7 @@ Get the time duration since a more specific time.
 
 ```
 
-Get current time in full RFC 3339 format with time zone.
+Get current time and format it in the debug format (RFC 2822 with timezone)
 ```nu
 > date now | debug
 

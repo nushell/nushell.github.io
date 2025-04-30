@@ -2,7 +2,7 @@
 title: nu-highlight
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Syntax highlight the input string.
 usage: |
@@ -26,7 +26,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | string |
-
 ## Examples
 
 Describe the type of a string

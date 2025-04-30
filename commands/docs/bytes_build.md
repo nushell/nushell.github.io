@@ -2,7 +2,7 @@
 title: bytes build
 categories: |
   bytes
-version: 0.103.0
+version: 0.104.0
 bytes: |
   Create bytes from the arguments.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | binary |
-
 ## Examples
 
 Builds binary data from 0x[01 02], 0x[03], 0x[04]

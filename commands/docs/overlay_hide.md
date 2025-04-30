@@ -2,7 +2,7 @@
 title: overlay hide
 categories: |
   core
-version: 0.103.0
+version: 0.104.0
 core: |
   Hide an active overlay.
 usage: |
@@ -35,7 +35,6 @@ contributors: false
 | input   | output  |
 | ------- | ------- |
 | nothing | nothing |
-
 ## Examples
 
 Keep a custom command after hiding the overlay

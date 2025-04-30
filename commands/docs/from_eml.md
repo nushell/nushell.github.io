@@ -2,7 +2,7 @@
 title: from eml
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Parse text as .eml and create record.
 usage: |
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input  | output |
 | ------ | ------ |
 | string | record |
-
 ## Examples
 
 Convert eml structured data into record

@@ -2,7 +2,7 @@
 title: polars agg
 categories: |
   lazyframe
-version: 0.103.0
+version: 0.104.0
 lazyframe: |
   Performs a series of aggregations from a group-by.
 usage: |
@@ -37,7 +37,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | input | output |
 | ----- | ------ |
 | any   | any    |
-
 ## Examples
 
 Group by and perform an aggregation
@@ -50,6 +49,27 @@ Group by and perform an aggregation
                     (polars col b | polars max | polars as "b_max")
                     (polars col b | polars sum | polars as "b_sum")
                  ]
+                | polars collect
+                | polars sort-by a
+╭───┬───┬───────┬───────┬───────╮
+│ # │ a │ b_min │ b_max │ b_sum │
+├───┼───┼───────┼───────┼───────┤
+│ 0 │ 1 │     2 │     4 │     6 │
+│ 1 │ 2 │     4 │     6 │    10 │
+╰───┴───┴───────┴───────┴───────╯
+
+```
+
+Group by and perform an aggregation using a record
+```nu
+> [[a b]; [1 2] [1 4] [2 6] [2 4]]
+                | polars into-lazy
+                | polars group-by a
+                | polars agg {
+                    b_min: (polars col b | polars min)
+                    b_max: (polars col b | polars max)
+                    b_sum: (polars col b | polars sum)
+                 }
                 | polars collect
                 | polars sort-by a
 ╭───┬───┬───────┬───────┬───────╮

@@ -2,7 +2,7 @@
 title: decode
 categories: |
   strings
-version: 0.103.0
+version: 0.104.0
 strings: |
   Decode bytes into a string.
 usage: |
@@ -30,7 +30,6 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | binary | string |
-
 ## Examples
 
 Decode the output of an external command

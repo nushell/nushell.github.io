@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.103.0
+version: 0.104.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |
@@ -39,7 +39,6 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | any    |
-
 ## Examples
 
 Get options from example.com

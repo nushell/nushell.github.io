@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.103.0
+version: 0.104.0
 formats: |
   Convert table into simple Markdown.
 usage: |
@@ -31,7 +31,6 @@ contributors: false
 | input | output |
 | ----- | ------ |
 | any   | string |
-
 ## Examples
 
 Outputs an MD string representing the contents of this table
@@ -40,7 +39,6 @@ Outputs an MD string representing the contents of this table
 |foo|bar|
 |-|-|
 |1|2|
-
 ```
 
 Optionally, output a formatted markdown string
@@ -49,7 +47,6 @@ Optionally, output a formatted markdown string
 | foo | bar |
 | --- | --- |
 | 1   | 2   |
-
 ```
 
 Treat each row as a markdown element
@@ -67,4 +64,16 @@ Render a list
 0
 1
 2
+```
+
+Separate list into markdown tables
+```nu
+> [ {foo: 1, bar: 2} {foo: 3, bar: 4} {foo: 5}] | to md --per-element
+|foo|bar|
+|-|-|
+|1|2|
+|3|4|
+|foo|
+|-|
+|5|
 ```
