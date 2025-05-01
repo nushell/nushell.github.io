@@ -328,27 +328,20 @@ impl PluginCommand for Len {
                     Value::int(length as i64, call.head).into_pipeline_data()
                 )
             },
-            input => {
-                // Handle a string
-                let span = input.span().unwrap_or(call.head);
-                let value = input.into_value(span);
-                match &value {
-                    Value::String { val, .. } => Ok(
-                        Value::int(val.len() as i64, value.span()).into_pipeline_data()
+            PipelineData::Value(Value::String { val, .. }, _) => {
+                Ok(Value::int(val.len() as i64, call.head).into_pipeline_data())
+            },
+            _ => Err(
+                LabeledError::new(
+                    "Expected String or iterable input from pipeline",
+                ).with_label(
+                    format!(
+                        "requires string or iterable input; got {}",
+                        input.get_type(),
                     ),
-                    _ => Err(
-                        LabeledError::new(
-                            "Expected String or iterable input from pipeline",
-                        ).with_label(
-                            format!(
-                                "requires string or iterable input; got {}",
-                                value.get_type(),
-                            ),
-                            call.head,
-                        )
-                    ),
-                }
-            }
+                    call.head,
+                )
+            ),
         }
     }
 }
