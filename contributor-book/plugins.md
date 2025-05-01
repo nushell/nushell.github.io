@@ -358,8 +358,13 @@ Since `run()` also returns `PipelineData`, it is also possible for the plugin to
 two:
 
 ```rust
-fn run(..., input: PipelineData) -> Result<PipelineData, ShellError> {
-    Ok(input.map(|value| {
+fn run(
+    ..., 
+    engine: &EngineInterface,
+    call: &EvaluatedCall,
+    input: PipelineData,
+) -> Result<PipelineData, ShellError> {
+    input.map(|value| {
         let span = value.span();
         match value.as_int() {
             Ok(int) => Value::int(int * 2, span),
@@ -368,14 +373,24 @@ fn run(..., input: PipelineData) -> Result<PipelineData, ShellError> {
             // `Value::Error`.
             Err(err) => Value::error(err, span),
         }
-    }))
+    }, engine.signals()).map_err(|e|
+        LabeledError::new(
+            "Failed",
+        ).with_label(
+            format!(
+                "Failed; {}",
+                e,
+            ),
+            call.head,
+        )
+    )
 }
 ```
 
 Since the input and output are both streaming, this will work even on an infinite stream:
 
 ```nu
-$ generate 0 { |n| {out: $n, next: ($n + 1)} } | plugin
+$ generate { |n| {out: $n, next: ($n + 1)} } 0 | plugin
 0
 2
 4
