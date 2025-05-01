@@ -467,7 +467,7 @@ Example:
 Nushell rocks!
 ```
 
-For a full example, see [`nu_plugin_example` in the Nushell source repository](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_example).
+For a full example, see [`nu_plugin_example`](https://github.com/nushell/plugin-examples/tree/main/rust/nu_plugin_example).
 
 ## Evaluating closures
 
