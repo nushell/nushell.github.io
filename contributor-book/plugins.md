@@ -56,8 +56,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-nu-plugin = "0.103.0"
-nu-protocol = "0.103.0"
+nu-plugin = "0.104.0"
+nu-protocol = "0.104.0"
 ```
 
 With this, we can open up `src/main.rs` and create our plugin.
