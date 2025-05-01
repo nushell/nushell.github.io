@@ -482,6 +482,8 @@ Example:
 Nushell rocks!
 ```
 
+For a full example, see [`nu_plugin_example`](https://github.com/nushell/plugin-examples/tree/main/rust/nu_plugin_example).
+
 ## Evaluating closures
 
 Plugins can accept and evaluate closures using [`EngineInterface::eval_closure`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.eval_closure) or [`eval_closure_with_stream`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.eval_closure_with_stream).
