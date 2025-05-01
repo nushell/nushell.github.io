@@ -38,6 +38,10 @@ div[class*='language-'].line-numbers-mode .line-numbers {
   --code-line-height: 1.1;
   --font-family-code: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'DejaVu Sans Mono',
     'Ubuntu Mono', monospace;
+  }
+  
+/* override vuepress `:root` --code-font-family variable with higher specificity (`body`) because vuepress puts theirs after this one */
+body {
   --code-font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'DejaVu Sans Mono',
     'Ubuntu Mono', monospace;
 }
