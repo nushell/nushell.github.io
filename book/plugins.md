@@ -50,7 +50,7 @@ To begin using the Polars plugin:
    # Or on Windows
    plugin add nu_plugin_polars.exe
 
-   plug list # Confirm it was added to the registry
+   plugin list # Confirm it was added to the registry
    ```
 
    Alternatively, if you did not add the binary directory to the plugin path in Step 2, you can still use an absolute path:
