@@ -61,7 +61,7 @@ It is converted back to a string before running a child-process.
 
 ### `$env.ENV_CONVERSIONS`
 
-Allows users to specify how to convert certain environment variables to Nushell types. See [ENV_CONVERSIONS](./configuration.md#env_conversions).
+Allows users to specify how to convert certain environment variables to Nushell types. See [ENV_CONVERSIONS](./configuration.md#env-conversions).
 
 ### `$env.LAST_EXIT_CODE`
 
@@ -116,7 +116,7 @@ A list of directories which will be searched when using the `source`, `use`, or 
 
 - The `$NU_LIB_DIRS` constant below
 - [Module Path](./modules/using_modules.md#module-path)
-- [Configuration - `$NU_LIB_DIRS`](./configuration.md#nu_lib_dirs-constant)
+- [Configuration - `$NU_LIB_DIRS`](./configuration.md#nu-lib-dirs-constant)
 
 ### `$env.NU_PLUGIN_DIRS`
 
@@ -157,7 +157,7 @@ The `$in` variable represents the pipeline input into an expression. See [Pipeli
 A constant version of `$env.NU_LIB_DIRS` - a list of directories which will be searched when using the `source`, `use`, or `overlay use` commands. See also:
 
 - [Module Path](./modules/using_modules.md#module-path)
-- [Configuration - `$NU_LIB_DIRS`](./configuration.md#nu_lib_dirs-constant)
+- [Configuration - `$NU_LIB_DIRS`](./configuration.md#nu-lib-dirs-constant)
 
 ## `$NU_PLUGIN_DIRS`
 
