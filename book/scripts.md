@@ -56,7 +56,7 @@ When this script is run, Nushell will first run the `a` command to completion an
 
 ## Parameterizing Scripts
 
-Script files can optionally contain a special "main" command. `main` will be run after any other Nu code, and is primarily used to add parameters to scripts. You can pass arguments to scripts after the script name (`nu <script name> <script args>`).
+Script files can optionally contain a special "main" command. `main` will be run after any other Nu code, and is primarily used to allow positional parameters and flags in scripts. You can pass arguments to scripts after the script name (`nu <script name> <script args>`).
 
 For example:
 

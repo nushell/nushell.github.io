@@ -103,7 +103,7 @@ $env.FOO? | default "BAR"
 
 Alternatively, you can check for the presence of an environmental variable with `in`:
 
-```
+```nu
 $env.FOO
 # => BAR
 
@@ -174,7 +174,7 @@ $env.FOO = 'BAR'
 ## Environment Variable Conversions
 
 You can set the `ENV_CONVERSIONS` environment variable to convert other environment variables between a string and a value.
-For example, the [default environment config](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_env.nu) includes conversion of PATH (and Path used on Windows) environment variables from a string to a list.
+For example, the [default environment config](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu) includes conversion of PATH (and Path used on Windows) environment variables from a string to a list.
 After both `env.nu` and `config.nu` are loaded, any existing environment variable specified inside `ENV_CONVERSIONS` will be translated according to its `from_string` field into a value of any type.
 External tools require environment variables to be strings, therefore, any non-string environment variable needs to be converted first.
 The conversion of value -> string is set by the `to_string` field of `ENV_CONVERSIONS` and is done every time an external command is run.

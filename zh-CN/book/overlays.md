@@ -14,7 +14,7 @@ _注意：要了解覆层，请确保先查看 [模块](modules.md)，因为覆�
 要创建一个新的覆层，你首先需要一个模块：
 
 ```nu
-> module spam {
+module spam {
     export def foo [] {
         "foo"
     }
@@ -32,22 +32,22 @@ _注意：要了解覆层，请确保先查看 [模块](modules.md)，因为覆�
 要创建覆层，请调用 [`overlay use`](/commands/docs/overlay_use.md)。
 
 ```nu
-> overlay use spam
+overlay use spam
 
-> foo
 foo
+# => foo
 
-> bar
 bar
+# => bar
 
-> $env.BAZ
-baz
+$env.BAZ
+# => baz
 
-> overlay list
-───┬──────
- 0 │ zero
- 1 │ spam
-───┴──────
+overlay list
+# => ───┬──────
+# =>  0 │ zero
+# =>  1 │ spam
+# => ───┴──────
 ```
 
 在下面的章节中，`>` 的提示语前面会有最后一个活动覆层的名称。

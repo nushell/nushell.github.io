@@ -17,6 +17,7 @@ Den Status von Tasks erhält man sehr einfach.
 Hier ein einfaches Beispiel wie ein [nushell module](https://github.com/nushell/nu_scripts/tree/main/background_task) mit pueu zusammenarbeitet.
 
 Das Setup umfasst:
+
 1. installiere pueue
 2. führe `pueued` mit der default Konfiguration aus. Siehe unter [start-the-daemon page](https://github.com/Nukesor/pueue/wiki/Get-started#start-the-daemon) für mehr Informationen.
 3. speichere die [job.nu](https://github.com/nushell/nu_scripts/blob/main/modules/background_task/job.nu) Datei unter `$env.NU_LIB_DIRS`.

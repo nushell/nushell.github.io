@@ -8,6 +8,8 @@
 - `pre_prompt` : 在命令提示显示之前被触发；
 - `pre_execution` : 在行输入开始执行前被触发；
 - `env_change` : 当环境变量发生变化时被触发；
+- `display_output` : A block that the output is passed to
+- `command_not_found` : Triggered when a command is not found
 
 为了更清晰地阐述，我们可以将 Nushell 的执行周期进行分解。
 在 REPL 模式下，评估一行（代码）的步骤如下：
@@ -24,15 +26,11 @@
 要想使用钩子需要先在 [配置](configuration.md) 中定义它们：
 
 ```nu
-$env.config = {
-    # ...other config...
-
-    hooks: {
-        pre_prompt: { print "pre prompt hook" }
-        pre_execution: { print "pre exec hook" }
-        env_change: {
-            PWD: {|before, after| print $"changing directory from ($before) to ($after)" }
-        }
+$env.config.hooks = {
+    pre_prompt: [{ print "pre prompt hook" }]
+    pre_execution: [{ print "pre exec hook" }]
+    env_change: {
+        PWD: [{|before, after| print $"changing directory from ($before) to ($after)" }]
     }
 }
 ```
@@ -43,38 +41,28 @@ $env.config = {
 可以为每个触发器只定义一个钩子，也可以定义一个**钩子列表**，让其依次运行：
 
 ```nu
-$env.config = {
-    ...other config...
-
-    hooks: {
-        pre_prompt: [
-            { print "pre prompt hook" }
-            { print "pre prompt hook2" }
+$env.config.hooks = {
+    pre_prompt: [
+        { print "pre prompt hook" }
+        { print "pre prompt hook2" }
+    ]
+    pre_execution: [
+        { print "pre exec hook" }
+        { print "pre exec hook2" }
+    ]
+    env_change: {
+        PWD: [
+            {|before, after| print $"changing directory from ($before) to ($after)" }
+            {|before, after| print $"changing directory from ($before) to ($after) 2" }
         ]
-        pre_execution: [
-            { print "pre exec hook" }
-            { print "pre exec hook2" }
-        ]
-        env_change: {
-            PWD: [
-                {|before, after| print $"changing directory from ($before) to ($after)" }
-                {|before, after| print $"changing directory from ($before) to ($after) 2" }
-            ]
-        }
     }
 }
 ```
 
-另外，用新的钩子更新现有的配置，而不是从头开始定义整个配置可能更实用：
+Instead of replacing all hooks, you can append a new hook to existing configuration:
 
 ```nu
-$env.config = ($env.config | upsert hooks {
-    pre_prompt: ...
-    pre_execution: ...
-    env_change: {
-        PWD: ...
-    }
-})
+$env.config.hooks.pre_execution = $env.config.hooks.pre_execution | append { print "pre exec hook3" }
 ```
 
 ## 修改环境变量
@@ -84,12 +72,12 @@ $env.config = ($env.config | upsert hooks {
 你可以用下面的例子测试一下：
 
 ```nu
-> $env.config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: { $env.SPAM = "eggs" }
 })
 
-> $env.SPAM
-eggs
+$env.SPAM
+# => eggs
 ```
 
 钩子代码块遵循一般的作用域规则，即在块内定义的命令、别名等将在代码块结束后被丢掉。
@@ -98,7 +86,7 @@ eggs
 
 你可能很想做的一件事是，每当你进入一个目录时，就激活一个环境：
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
@@ -146,12 +134,12 @@ $env.config = ($env.config | upsert hooks {
 所以，上一节中的钩子也可以写成：
 
 ```nu
-> $env.config = ($env.config | upsert hooks {
+$env.config = ($env.config | upsert hooks {
     pre_prompt: '$env.SPAM = "eggs"'
 })
 
-> $env.SPAM
-eggs
+$env.SPAM
+# => eggs
 ```
 
 这个功能可以用来，例如，根据当前目录有条件地引入定义：

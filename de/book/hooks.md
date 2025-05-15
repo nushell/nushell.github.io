@@ -27,16 +27,12 @@ Die Schritte zur Auswertung einer Zeile im REPL-Modus sind wie folgt:
 
 Um Hooks zu aktivieren, werden sie in der [config](configuration.md) definiert:
 
-```
-$env.config = {
-    # ...other config...
-
-    hooks: {
-        pre_prompt: { print "pre prompt hook" }
-        pre_execution: { print "pre exec hook" }
-        env_change: {
-            PWD: {|before, after| print $"changing directory from ($before) to ($after)" }
-        }
+```nu
+$env.config.hooks = {
+    pre_prompt: [{ print "pre prompt hook" }]
+    pre_execution: [{ print "pre exec hook" }]
+    env_change: {
+        PWD: [{|before, after| print $"changing directory from ($before) to ($after)" }]
     }
 }
 ```
@@ -46,40 +42,29 @@ Die Änderung löst den Hook aus und tauscht die entsprechenden Werte in `before
 
 Anstatt nur einen einzigen Hook pro Trigger zu definieren, ist es möglich, eine *Liste von Hooks* zu definieren, die nacheinander durchlaufen werden:
 
-```
-$env.config = {
-    ...other config...
-
-    hooks: {
-        pre_prompt: [
-            { print "pre prompt hook" }
-            { print "pre prompt hook2" }
+```nu
+$env.config.hooks = {
+    pre_prompt: [
+        { print "pre prompt hook" }
+        { print "pre prompt hook2" }
+    ]
+    pre_execution: [
+        { print "pre exec hook" }
+        { print "pre exec hook2" }
+    ]
+    env_change: {
+        PWD: [
+            {|before, after| print $"changing directory from ($before) to ($after)" }
+            {|before, after| print $"changing directory from ($before) to ($after) 2" }
         ]
-        pre_execution: [
-            { print "pre exec hook" }
-            { print "pre exec hook2" }
-        ]
-        env_change: {
-            PWD: [
-                {|before, after| print $"changing directory from ($before) to ($after)" }
-                {|before, after| print $"changing directory from ($before) to ($after) 2" }
-            ]
-        }
     }
 }
 ```
 
-Auch könnte es praktischer sein, die bestehende Konfiguration mit neuen Hooks zu aktualisieren,
-anstatt die gesamte Konfiguration von Grund auf neu zu definieren:
+Anstatt alle hooks zu ersetzen können neue Hooks der Liste vorhandener Hooks angehängt werden:
 
-```
-$env.config = ($env.config | upsert hooks {
-    pre_prompt: ...
-    pre_execution: ...
-    env_change: {
-        PWD: ...
-    }
-})
+```nu
+$env.config.hooks.pre_execution = $env.config.hooks.pre_execution | append { print "pre exec hook3" }
 ```
 
 ## Changing Environment
@@ -88,7 +73,7 @@ Eine Besonderheit der Hooks ist, dass sie die Umgebung bewahren.
 Umgebungsvariablen im Hook **Block** werden in ähnlicher Weise wie [`def --env`](environment.md#defining-environment-from-custom-commands) erhalten.
 Folgendes Beispiel zeigt dies:
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     pre_prompt: { $env.SPAM = "eggs" }
 })
@@ -104,7 +89,7 @@ werden verworfen, sobald der Block endet.
 
 Nun wäre es verlockend eine Umgebung zu aktivieren wenn in ein Verzeichnis eingestiegen wird:
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
@@ -124,7 +109,7 @@ aber dieses Muster ist ziemlich häufig und später werden wir sehen, dass nicht
 
 Um das obige Problem zu lösen, führen wir eine neue Möglichkeit ein, einen Hook zu definieren -- **einen record**:
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
@@ -136,6 +121,7 @@ $env.config = ($env.config | upsert hooks {
     }
 })
 ```
+
 Wird der Hook getriggert, wird der `condition` Block ausgewertet.
 Wenn dieser `true` zurückgibt, wird der `code` Block ausgewertet.
 Wenn er `false`zurückgibt, passiert nichts.
@@ -151,7 +137,7 @@ Um Befehle oder Aliase definieren zu können, ist es möglich, das Codefeld **al
 Dies funktioniert, als ob der String in den REPL eingeben und Enter gedrückt wird.
 So kann der Hook aus dem vorherigen Abschnitt auch geschrieben werden als:
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     pre_prompt: '$env.SPAM = "eggs"'
 })
@@ -159,9 +145,10 @@ $env.config = ($env.config | upsert hooks {
 $env.SPAM
 eggs
 ```
+
 Dieses Feature kann z.B. verwendet werden, um abhängig vom aktuellen Verzeichnis Definitionen einzubringen:
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: [
@@ -181,7 +168,7 @@ $env.config = ($env.config | upsert hooks {
 Wird ein Hook als String definiert, werden die `$before` und `$after` Variablen auf die vorherigen und aktuellen Umgebungsvariablen gesetzt,
 analog dem vorherigen Beispiel:
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
         PWD: {
@@ -197,7 +184,7 @@ $env.config = ($env.config | upsert hooks {
 
 Beispiel eines PWD env Wechsel Hooks:
 
-```
+```nu
 $env.config = ($env.config | upsert hooks.env_change.PWD {|config|
     let val = ($config | get -i hooks.env_change.PWD)
 
@@ -215,7 +202,7 @@ $env.config = ($env.config | upsert hooks.env_change.PWD {|config|
 
 Dieses Beispiel sucht nach einem `test-env.nu` in einem Verzeichnis
 
-```
+```nu
 $env.config = ($env.config | upsert hooks.env_change.PWD {
     [
         {
@@ -236,6 +223,7 @@ $env.config = ($env.config | upsert hooks.env_change.PWD {
     ]
 })
 ```
+
 ### Filtern oder Umlenken des Befehl-Outputs
 
 Der `display_output` Hook kann verwendet werden, um die Ausgabe von Befehlen umzuleiten.
@@ -245,7 +233,7 @@ Die Ausgabe externer Befehle wird nicht durch `display_output` gefiltert.
 Dieser Hook kann die Ausgabe in einem separaten Fenster anzeigen,
 vielleicht als HTML-Text. Hier ist die Grundidee, wie dies erreicht wird:
 
-```
+```nu
 $env.config = ($env.config | upsert hooks {
     display_output: { to html --partial --no-color | save --raw /tmp/nu-output.html }
 })
@@ -259,7 +247,7 @@ Anstelle des Befehls [`save`](/commands/docs/save.md) würde normalerweise der H
 
 Der folgende Hook verwendet den `pkgfile` Befehl, um in _Arch Linux_ herauzufinden, zu welchem Packet ein Befehl gehört.
 
-```
+```nu
 $env.config = {
     ...other config...
 

@@ -254,7 +254,7 @@ In Nushell, a command name can be a string of characters. Here are some examples
 Strings which might be confused with other parser patterns should be avoided. For instance, the following command names might not be callable:
 
 - `1`, `"1"`, or `"1.5"`: Nushell will not allow numbers to be used as command names
-- `4MiB` or `"4MiB"`: Nushell will not allow filesizes to be use₫ as command names
+- `4MiB` or `"4MiB"`: Nushell will not allow filesizes to be used as command names
 - `"number#four"` or `"number^four"`: Carets and hash symbols are not allowed in command names
 - `-a`, `"{foo}"`, `"(bar)"`: Will not be callable, as Nushell will interpret them as flags, closures, or expressions.
 
@@ -343,12 +343,11 @@ greet Wei Mei
 greet Wei
 # => Error: nu::parser::missing_positional
 # =>
-# =>
-# => × Missing required positional argument.
-# => ╭─[entry #10:1:10]
-# => 1 │ greet Mei
-# => ╰────
-# => help: Usage: greet <name1> <name2> . Use `--help` for more information.
+# =>   × Missing required positional argument.
+# =>    ╭─[entry #1:1:10]
+# =>  1 │ greet Wei
+# =>    ╰────
+# =>   help: Usage: greet <name1> <name2> . Use `--help` for more information.
 ```
 
 ::: tip
@@ -365,7 +364,6 @@ def greet [name?: string] {
 }
 
 greet
-
 # => Hello, You
 ```
 
@@ -386,7 +384,6 @@ def greet [name?: string] {
 }
 
 greet
-
 # => Hello! I don't know your name!
 ```
 
@@ -445,11 +442,14 @@ greet World
 If we try to run the above, Nushell will tell us that the types don't match:
 
 ```nu
-error: Type Error
-  ┌─ shell:6:7
-  │
-5 │ greet world
-  │       ^^^^^ Expected int
+Error: nu::parser::parse_mismatch
+
+  × Parse mismatch during operation.
+   ╭─[entry #1:1:7]
+ 1 │ greet World
+   ·       ──┬──
+   ·         ╰── expected int
+   ╰────
 ```
 
 ::: tip Cool!
@@ -678,6 +678,62 @@ vip-greet $vip ...$guests
 # => And a special welcome to our VIP today, Tanisha!
 ```
 
+### Rest Parameters with Wrapped External Commands
+
+Custom commands defined with `def --wrapped` will collect any unknown flags and arguments into a
+rest-parameter which can then be passed, via list-spreading, to an external command. This allows
+a custom command to "wrap" and extend the external command while still accepting all of its original
+parameters. For example, the external `eza` command displays a directory listing. By default, it displays
+a grid arrangement:
+
+```nu
+eza commands
+# => categories  docs  README.md
+```
+
+We can define a new command `ezal` which will always display a long-listing, adding icons:
+
+```nu
+def --wrapped ezal [...rest] {
+  eza -l ...$rest
+}
+```
+
+:::note
+You could also add `--icons`. We're omitting that in this example simply because those icons don't
+display well in this guide.
+:::
+
+Notice that `--wrapped` forces any additional parameters into the `rest` parameter, so the command
+can be called with any parameter that `eza` supports. Those additional parameters will be expanded via
+the list-spreading operation `...$rest`.
+
+```nu
+ezal commands
+# => drwxr-xr-x   - ntd  7 Feb 11:41 categories
+# => drwxr-xr-x   - ntd  7 Feb 11:41 docs
+# => .rw-r--r-- 936 ntd 14 Jun  2024 README.md
+
+ezal -d commands
+# => drwxr-xr-x - ntd 14 Jun  2024 commands
+```
+
+The custom command can check for certain parameters and change its behavior accordingly. For instance,
+when using the `-G` option to force a grid, we can omit passing a `-l` to `eza`:
+
+```nu
+def --wrapped ezal [...rest] {
+  if '-G' in $rest {
+    eza ...$rest
+  } else {
+    eza -l --icons ...$rest
+  }
+}
+
+ezal -G commands
+# => categories  docs  README.md
+```
+
 ## Pipeline Input-Output Signature
 
 By default, custom commands accept [`<any>` type](./types_of_data.md#any) as pipeline input and likewise can output `<any>` type. But custom commands can also be given explicit signatures to narrow the types allowed.
@@ -727,21 +783,21 @@ Input-Output signatures allow Nushell to catch two additional categories of erro
 - Attempting to return the wrong type from a command. For example:
 
   ```nu
-    def inc []: int -> int {
+  def inc []: int -> int {
     $in + 1
     print "Did it!"
   }
 
   # => Error: nu::parser::output_type_mismatch
   # =>
-  # => × Command output doesn't match int.
-  # => ╭─[entry #12:1:24]
-  # => 1 │ ╭─▶ def inc []: int -> int {
-  # => 2 │ │     $in + 1
-  # => 3 │ │     print "Did it!"
-  # => 4 │ ├─▶ }
-  # => · ╰──── expected int, but command outputs nothing
-  # => ╰────
+  # =>   × Command output doesn't match int.
+  # =>    ╭─[entry #1:1:24]
+  # =>  1 │ ╭─▶ def inc []: int -> int {
+  # =>  2 │ │     $in + 1
+  # =>  3 │ │     print "Did it!"
+  # =>  4 │ ├─▶ }
+  # =>    · ╰──── expected int, but command outputs nothing
+  # =>    ╰────
   ```
 
 - And attempting to pass an invalid type into a command:
@@ -751,12 +807,12 @@ Input-Output signatures allow Nushell to catch two additional categories of erro
   "Hi" | inc
   # => Error: nu::parser::input_type_mismatch
   # =>
-  # =>     × Command does not support string input.
-  # =>      ╭─[entry #16:1:8]
-  # =>    1 │ "Hi" | inc
-  # =>      ·        ─┬─
-  # =>      ·         ╰── command doesn't support string input
-  # =>      ╰────
+  # =>   × Command does not support string input.
+  # =>    ╭─[entry #1:1:8]
+  # =>  1 │ "Hi" | inc
+  # =>    ·        ─┬─
+  # =>    ·         ╰── command doesn't support string input
+  # =>    ╰────
   ```
 
   :::

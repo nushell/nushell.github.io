@@ -24,7 +24,7 @@ Of course, this runs as expected using `nu hello.nu`. A similar program written 
 
 In _"interpreted languages"_ code usually gets handled something like this:
 
-```
+```text
 Source Code → Interpreter → Result
 ```
 
@@ -52,7 +52,7 @@ fn main() {
 To "run" this code, it must be:
 
 1. Compiled into [machine code instructions](https://en.wikipedia.org/wiki/Machine_code)
-2. The compilation results stored as a binary file one the disk
+2. The compilation results stored as a binary file on the disk
 
 The first two steps are handled with `rustc main.rs`.
 

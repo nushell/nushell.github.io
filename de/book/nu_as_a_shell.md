@@ -25,6 +25,6 @@ Es ist auch möglich, eigene [Signaturen für externe Befehle (EN)](/book/extern
 
 [Farben und Themen in Nu](coloring_and_theming.md)) geht ins Detail zum Thema, wie Nushells Aussehen konfiguriert werden kann.
 
-Sind einige Befehle geplant , die im Hintergrund ablaufen sollen, so kann darüber in [Hintergrund Tasks in Nu](background_task.md) nachgelesen werden.
+Sind einige Befehle geplant , die im Hintergrund ablaufen sollen, so kann darüber in [Hintergrund Tasks in Nu](background_jobs.md) nachgelesen werden.
 
 Schliesslich erklärt [Hooks](hooks.md) wie Fragmente von Nushell Code beim Auftreten gewisser Ereignisse ausgeführt werden kann.

@@ -230,7 +230,7 @@ The most common form for a submodule definition is with `export module`.
    export module ./range-into-list.nu
    ```
 
-2. We now have a module `my-init` with the two submodules. Try it out:
+2. We now have a module `my-utils` with the two submodules. Try it out:
 
    ```nu
    # Go to the parent directory of my-utils

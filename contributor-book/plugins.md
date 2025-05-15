@@ -53,11 +53,11 @@ The `Cargo.toml` file should now look something like the following.
 [package]
 name = "nu_plugin_len"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
-nu-plugin = "0.92.0" # These version numbers may differ
-nu-protocol = "0.92.0"
+nu-plugin = "0.104.0"
+nu-protocol = "0.104.0"
 ```
 
 With this, we can open up `src/main.rs` and create our plugin.
@@ -267,21 +267,21 @@ If you're already running `nu` during the installation process of your plugin, e
 
 Once `nu` starts up, it will discover the plugin and add its commands to the scope.
 
-```
-> nu
-> "hello" | len
-5
-> help len
-calculates the length of its input
-
-Usage:
-  > len
-
-Flags:
-  -h, --help - Display the help message for this command
-
-Signatures:
-  <string> | len -> <int>
+```nu
+nu
+"hello" | len
+# => 5
+help len
+# => calculates the length of its input
+# => 
+# => Usage:
+# =>   > len
+# => 
+# => Flags:
+# =>   -h, --help - Display the help message for this command
+# => 
+# => Signatures:
+# =>   <string> | len -> <int>
 ```
 
 Run `plugin list` to see all plugins currently registered and available to this Nu session, including whether or not they are running, and their process ID if so.
@@ -328,27 +328,20 @@ impl PluginCommand for Len {
                     Value::int(length as i64, call.head).into_pipeline_data()
                 )
             },
-            input => {
-                // Handle a string
-                let span = input.span().unwrap_or(call.head);
-                let value = input.into_value(span);
-                match &value {
-                    Value::String { val, .. } => Ok(
-                        Value::int(val.len() as i64, value.span()).into_pipeline_data()
+            PipelineData::Value(Value::String { val, .. }, _) => {
+                Ok(Value::int(val.len() as i64, call.head).into_pipeline_data())
+            },
+            _ => Err(
+                LabeledError::new(
+                    "Expected String or iterable input from pipeline",
+                ).with_label(
+                    format!(
+                        "requires string or iterable input; got {}",
+                        input.get_type(),
                     ),
-                    _ => Err(
-                        LabeledError::new(
-                            "Expected String or iterable input from pipeline",
-                        ).with_label(
-                            format!(
-                                "requires string or iterable input; got {}",
-                                value.get_type(),
-                            ),
-                            call.head,
-                        )
-                    ),
-                }
-            }
+                    call.head,
+                )
+            ),
         }
     }
 }
@@ -365,8 +358,13 @@ Since `run()` also returns `PipelineData`, it is also possible for the plugin to
 two:
 
 ```rust
-fn run(..., input: PipelineData) -> Result<PipelineData, ShellError> {
-    Ok(input.map(|value| {
+fn run(
+    ..., 
+    engine: &EngineInterface,
+    call: &EvaluatedCall,
+    input: PipelineData,
+) -> Result<PipelineData, ShellError> {
+    input.map(|value| {
         let span = value.span();
         match value.as_int() {
             Ok(int) => Value::int(int * 2, span),
@@ -375,14 +373,24 @@ fn run(..., input: PipelineData) -> Result<PipelineData, ShellError> {
             // `Value::Error`.
             Err(err) => Value::error(err, span),
         }
-    }))
+    }, engine.signals()).map_err(|e|
+        LabeledError::new(
+            "Failed",
+        ).with_label(
+            format!(
+                "Failed; {}",
+                e,
+            ),
+            call.head,
+        )
+    )
 }
 ```
 
 Since the input and output are both streaming, this will work even on an infinite stream:
 
 ```nu
-$ generate 0 { |n| {out: $n, next: ($n + 1)} } | plugin
+$ generate { |n| {out: $n, next: ($n + 1)} } 0 | plugin
 0
 2
 4
@@ -473,6 +481,8 @@ Example:
 > motd
 Nushell rocks!
 ```
+
+For a full example, see [`nu_plugin_example`](https://github.com/nushell/plugin-examples/tree/main/rust/nu_plugin_example).
 
 ## Evaluating closures
 

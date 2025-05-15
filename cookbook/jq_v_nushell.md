@@ -23,15 +23,10 @@ In `nu`, we need to be explicit because Nushell has a wider range of input choic
 ```nu
 '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}'
 | from json
-```
-
-Output:
-
-```
-╭──────────────────┬───────────────╮
-│ title            │ jq vs Nushell │
-│ publication_date │ 2023-11-20    │
-╰──────────────────┴───────────────╯
+# => ╭──────────────────┬───────────────╮
+# => │ title            │ jq vs Nushell │
+# => │ publication_date │ 2023-11-20    │
+# => ╰──────────────────┴───────────────╯
 ```
 
 The output for `jq` is a JSON string whereas in `nu` it's a Nushell value. To get the output of any pipeline as JSON, simply apply a [`to json`](/commands/docs/to_json.html) at the end:
@@ -81,12 +76,7 @@ In `nu` we do:
 
 ```nu
 '{"name": "Alice", "age": 30}' | from json | get name
-```
-
-Output:
-
-```
-Alice
+# => Alice
 ```
 
 ### Filtering lists
@@ -104,14 +94,11 @@ In `nu` we do:
 '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
 | from json
 | where age > 28
-```
-
-```
-╭───┬───────┬─────╮
-│ # │ name  │ age │
-├───┼───────┼─────┤
-│ 0 │ Alice │  30 │
-╰───┴───────┴─────╯
+# => ╭───┬───────┬─────╮
+# => │ # │ name  │ age │
+# => ├───┼───────┼─────┤
+# => │ 0 │ Alice │  30 │
+# => ╰───┴───────┴─────╯
 ```
 
 ### Mapping over lists
@@ -129,18 +116,13 @@ In `nu` we do:
 '[1, 2, 3, 4, 5]'
 | from json
 | each { |x| $x * 2 }
-```
-
-Output:
-
-```
-╭───┬────╮
-│ 0 │  2 │
-│ 1 │  4 │
-│ 2 │  6 │
-│ 3 │  8 │
-│ 4 │ 10 │
-╰───┴────╯
+# => ╭───┬────╮
+# => │ 0 │  2 │
+# => │ 1 │  4 │
+# => │ 2 │  6 │
+# => │ 3 │  8 │
+# => │ 4 │ 10 │
+# => ╰───┴────╯
 ```
 
 Note that you can rely on the `$in` auto-binding for a slightly more compact block:
@@ -167,20 +149,15 @@ In `nu` we do:
 | from json
 | get items
 | update price {|row| $row.price * 2}
+# => ╭───┬────────┬───────╮
+# => │ # │  name  │ price │
+# => ├───┼────────┼───────┤
+# => │ 0 │ Apple  │     2 │
+# => │ 1 │ Banana │  1.00 │
+# => ╰───┴────────┴───────╯
 ```
 
 In this case nu does not require creating new records because we can leverage the fact that a list of records is a table. However, in other situations it might be required as we have seen in [Composing records](#composing-records).
-
-Output:
-
-```
-╭───┬────────┬───────╮
-│ # │  name  │ price │
-├───┼────────┼───────┤
-│ 0 │ Apple  │     2 │
-│ 1 │ Banana │  1.00 │
-╰───┴────────┴───────╯
-```
 
 ### Sorting lists
 
@@ -197,18 +174,13 @@ In `nu` we do:
 '[3, 1, 4, 2, 5]'
 | from json
 | sort
-```
-
-Output:
-
-```
-╭───┬───╮
-│ 0 │ 1 │
-│ 1 │ 2 │
-│ 2 │ 3 │
-│ 3 │ 4 │
-│ 4 │ 5 │
-╰───┴───╯
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => │ 3 │ 4 │
+# => │ 4 │ 5 │
+# => ╰───┴───╯
 ```
 
 ### Filtering distinct values in a list
@@ -226,18 +198,13 @@ In `nu` we do:
 '[1, 2, 2, 3, 4, 4, 5]'
 | from json
 | uniq
-```
-
-Output:
-
-```
-╭───┬───╮
-│ 0 │ 1 │
-│ 1 │ 2 │
-│ 2 │ 3 │
-│ 3 │ 4 │
-│ 4 │ 5 │
-╰───┴───╯
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => │ 3 │ 4 │
+# => │ 4 │ 5 │
+# => ╰───┴───╯
 ```
 
 ### Combining filters
@@ -256,14 +223,9 @@ In `nu` we do:
 | from json
 | where age > 28
 | get name
-```
-
-Output:
-
-```
-╭───┬───────╮
-│ 0 │ Alice │
-╰───┴───────╯
+# => ╭───┬───────╮
+# => │ 0 │ Alice │
+# => ╰───┴───────╯
 ```
 
 ### Splitting strings
@@ -283,12 +245,7 @@ In `nu` we do:
 | get name
 | split words
 | get 0
-```
-
-Output:
-
-```
-Alice
+# => Alice
 ```
 
 ### Conditional logic
@@ -306,10 +263,7 @@ In `nu` we do:
 '{"name": "Alice", "age": 30}'
 | from json
 | if $in.age > 18 { "Adult" } else { "Child" }
-```
-
-```
-Adult
+# => Adult
 ```
 
 ### Handling `null` values
@@ -327,16 +281,11 @@ In `nu` we do:
 '[1, null, 3, null, 5]'
 | from json
 | where { $in != null }
-```
-
-Output:
-
-```
-╭───┬───╮
-│ 0 │ 1 │
-│ 1 │ 3 │
-│ 2 │ 5 │
-╰───┴───╯
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 3 │
+# => │ 2 │ 5 │
+# => ╰───┴───╯
 ```
 
 Alternatively, you can use [`compact`](/commands/docs/compact.html):
@@ -363,12 +312,7 @@ In `nu` we do:
 | from json
 | items { |key, value| ["Name" $value] | str join ": " }
 | str join ", "
-```
-
-Output:
-
-```
-Name: Alice, Name: 30
+# => Name: Alice, Name: 30
 ```
 
 This approach is a bit involved but if we [install the full version](https://github.com/nushell/nushell/releases) which includes the _extra commands_ we can benefit from the [`format`](/commands/docs/format.html):
@@ -394,15 +338,10 @@ In `nu` we do:
 '{"name": "Alice", "age": 30}'
 | from json
 | {name: $in.name, age: ($in.age + 5)}
-```
-
-Output:
-
-```
-╭──────┬───────╮
-│ name │ Alice │
-│ age  │ 35    │
-╰──────┴───────╯
+# => ╭──────┬───────╮
+# => │ name │ Alice │
+# => │ age  │ 35    │
+# => ╰──────┴───────╯
 ```
 
 ## Dealing with nested items
@@ -422,16 +361,11 @@ In `nu`, there is no built-in command to achieve this, however, we can define ou
 '{"data": {"value": 42, "nested": {"value": 24}}}'
 | from json
 | cherry-pick { |x| $x.value? }
-```
-
-Output:
-
-```
-╭───┬────╮
-│ 0 │    │
-│ 1 │ 42 │
-│ 2 │ 24 │
-╰───┴────╯
+# => ╭───┬────╮
+# => │ 0 │    │
+# => │ 1 │ 42 │
+# => │ 2 │ 24 │
+# => ╰───┴────╯
 ```
 
 ### Filtering nested arrays
@@ -451,16 +385,11 @@ In `nu` we can take advantage of the fact that [a list of records is in fact a t
 | get data.values
 | flatten
 | where {|x| $x > 3}
-```
-
-Output:
-
-```
-╭───┬───╮
-│ 0 │ 4 │
-│ 1 │ 5 │
-│ 2 │ 6 │
-╰───┴───╯
+# => ╭───┬───╮
+# => │ 0 │ 4 │
+# => │ 1 │ 5 │
+# => │ 2 │ 6 │
+# => ╰───┴───╯
 ```
 
 ### Flattening nested records
@@ -478,18 +407,13 @@ In `nu`, there is no built-in command to achieve this. See the [Appendix: Custom
 '{"person": {"name": {"first": "Alice", "last": "Smith"}, "age": 30}}'
 | from json
 | flatten record-paths
-```
-
-Output:
-
-```
-╭───┬───────────────────┬───────╮
-│ # │       path        │ value │
-├───┼───────────────────┼───────┤
-│ 0 │ person.name.first │ Alice │
-│ 1 │ person.name.last  │ Smith │
-│ 2 │ person.age        │    30 │
-╰───┴───────────────────┴───────╯
+# => ╭───┬───────────────────┬───────╮
+# => │ # │       path        │ value │
+# => ├───┼───────────────────┼───────┤
+# => │ 0 │ person.name.first │ Alice │
+# => │ 1 │ person.name.last  │ Smith │
+# => │ 2 │ person.age        │    30 │
+# => ╰───┴───────────────────┴───────╯
 ```
 
 ### Mapping over nested items
@@ -509,15 +433,10 @@ In `nu`, there is no built-in function equivalent to `recurse`. However, we can 
 | cherry-pick { |x| $x.value? }
 | compact
 | each { |x| $x * 5 }
-```
-
-Output:
-
-```
-╭───┬─────╮
-│ 0 │ 210 │
-│ 1 │ 120 │
-╰───┴─────╯
+# => ╭───┬─────╮
+# => │ 0 │ 210 │
+# => │ 1 │ 120 │
+# => ╰───┴─────╯
 ```
 
 ### Filtering and mapping over nested items
@@ -535,27 +454,22 @@ In `nu`, there is no built-in function to achieve this. See the [Appendix: Custo
 '{"data": {"values": [1, 2, 3], "nested": {"values": [4, 5, 6]}}}'
 | from json
 | filter-map {|value| if ($value | describe) == "int" { $value * 2 } else { $value }}
-```
-
-Output:
-
-```
-╭──────┬──────────────────────────────────────╮
-│      │ ╭────────┬─────────────────────────╮ │
-│ data │ │        │ ╭───┬───╮               │ │
-│      │ │ values │ │ 0 │ 2 │               │ │
-│      │ │        │ │ 1 │ 4 │               │ │
-│      │ │        │ │ 2 │ 6 │               │ │
-│      │ │        │ ╰───┴───╯               │ │
-│      │ │        │ ╭────────┬────────────╮ │ │
-│      │ │ nested │ │        │ ╭───┬────╮ │ │ │
-│      │ │        │ │ values │ │ 0 │  8 │ │ │ │
-│      │ │        │ │        │ │ 1 │ 10 │ │ │ │
-│      │ │        │ │        │ │ 2 │ 12 │ │ │ │
-│      │ │        │ │        │ ╰───┴────╯ │ │ │
-│      │ │        │ ╰────────┴────────────╯ │ │
-│      │ ╰────────┴─────────────────────────╯ │
-╰──────┴──────────────────────────────────────╯
+# => ╭──────┬──────────────────────────────────────╮
+# => │      │ ╭────────┬─────────────────────────╮ │
+# => │ data │ │        │ ╭───┬───╮               │ │
+# => │      │ │ values │ │ 0 │ 2 │               │ │
+# => │      │ │        │ │ 1 │ 4 │               │ │
+# => │      │ │        │ │ 2 │ 6 │               │ │
+# => │      │ │        │ ╰───┴───╯               │ │
+# => │      │ │        │ ╭────────┬────────────╮ │ │
+# => │      │ │ nested │ │        │ ╭───┬────╮ │ │ │
+# => │      │ │        │ │ values │ │ 0 │  8 │ │ │ │
+# => │      │ │        │ │        │ │ 1 │ 10 │ │ │ │
+# => │      │ │        │ │        │ │ 2 │ 12 │ │ │ │
+# => │      │ │        │ │        │ ╰───┴────╯ │ │ │
+# => │      │ │        │ ╰────────┴────────────╯ │ │
+# => │      │ ╰────────┴─────────────────────────╯ │
+# => ╰──────┴──────────────────────────────────────╯
 ```
 
 ## Grouping and aggregating
@@ -575,29 +489,24 @@ In `nu` we do:
 '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
+# => ╭───┬───────┬──────────────────────────╮
+# => │ # │ group │          items           │
+# => ├───┼───────┼──────────────────────────┤
+# => │ 0 │ A     │ ╭───┬──────────┬───────╮ │
+# => │   │       │ │ # │ category │ value │ │
+# => │   │       │ ├───┼──────────┼───────┤ │
+# => │   │       │ │ 0 │ A        │    10 │ │
+# => │   │       │ │ 1 │ A        │     5 │ │
+# => │   │       │ ╰───┴──────────┴───────╯ │
+# => │ 1 │ B     │ ╭───┬──────────┬───────╮ │
+# => │   │       │ │ # │ category │ value │ │
+# => │   │       │ ├───┼──────────┼───────┤ │
+# => │   │       │ │ 0 │ B        │    20 │ │
+# => │   │       │ ╰───┴──────────┴───────╯ │
+# => ╰───┴───────┴──────────────────────────╯
 ```
 
 Note that `--to-table` was added to Nushell in [version 0.87.0](blog/2023-11-14-nushell_0_87_0.html). Before that you had to [`transpose`](/commands/docs/transpose) the record resulting from `group-by` which was substantially slower for large sets.
-
-Output:
-
-```
-╭───┬───────┬──────────────────────────╮
-│ # │ group │          items           │
-├───┼───────┼──────────────────────────┤
-│ 0 │ A     │ ╭───┬──────────┬───────╮ │
-│   │       │ │ # │ category │ value │ │
-│   │       │ ├───┼──────────┼───────┤ │
-│   │       │ │ 0 │ A        │    10 │ │
-│   │       │ │ 1 │ A        │     5 │ │
-│   │       │ ╰───┴──────────┴───────╯ │
-│ 1 │ B     │ ╭───┬──────────┬───────╮ │
-│   │       │ │ # │ category │ value │ │
-│   │       │ ├───┼──────────┼───────┤ │
-│   │       │ │ 0 │ B        │    20 │ │
-│   │       │ ╰───┴──────────┴───────╯ │
-╰───┴───────┴──────────────────────────╯
-```
 
 ### Aggregating grouped values
 
@@ -636,16 +545,11 @@ In `nu` we do:
 | update items { |row| $row.items.value | math sum }
 | rename category value
 | where value > 17
-```
-
-Output:
-
-```
-╭───┬──────────┬───────╮
-│ # │ category │ value │
-├───┼──────────┼───────┤
-│ 0 │ B        │    20 │
-╰───┴──────────┴───────╯
+# => ╭───┬──────────┬───────╮
+# => │ # │ category │ value │
+# => ├───┼──────────┼───────┤
+# => │ 0 │ B        │    20 │
+# => ╰───┴──────────┴───────╯
 ```
 
 ### Custom aggregations
@@ -663,12 +567,7 @@ In `nu` we do:
 '[{"value": 10}, {"value": 20}, {"value": 30}]'
 | from json
 | reduce -f 0 { |item, acc| $acc + $item.value }
-```
-
-Output:
-
-```
-60
+# => 60
 ```
 
 ## Other operations
@@ -689,12 +588,7 @@ In `nu` we do:
 | from json
 | get score
 | math avg
-```
-
-Output:
-
-```
-90
+# => 90
 ```
 
 ### Generating histogram bins
@@ -713,19 +607,14 @@ In `nu` we do:
 | from json
 | group-by --to-table { $in // 5 * 5 }
 | each { |row| {bin: $row.items.0, count: ($row.items | length)} }
-```
-
-Output:
-
-```
-╭───┬─────┬───────╮
-│ # │ bin │ count │
-├───┼─────┼───────┤
-│ 0 │   1 │     4 │
-│ 1 │   5 │     5 │
-│ 2 │  10 │     5 │
-│ 3 │  15 │     1 │
-╰───┴─────┴───────╯
+# => ╭───┬─────┬───────╮
+# => │ # │ bin │ count │
+# => ├───┼─────┼───────┤
+# => │ 0 │   1 │     4 │
+# => │ 1 │   5 │     5 │
+# => │ 2 │  10 │     5 │
+# => │ 3 │  15 │     1 │
+# => ╰───┴─────┴───────╯
 ```
 
 Note that if what you are after is computing a histogram, you can benefit from the [`histogram`](/commands/docs/histogram) command.
@@ -735,23 +624,20 @@ Note that if what you are after is computing a histogram, you can benefit from t
 This section provides the implementation of the custom commands used in this cookbook. Note that they are illustrative and in no way optimised for large inputs. If you are interested in that, [plugins](/book/plugins.html) will likely be the answer as they can be written in general purpose languages such as Rust or Python.
 
 ```nu
-> use toolbox.nu *
-> help commands | where command_type == "custom"
-```
-
-```
-╭──────┬─────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────╮
-│    # │          name           │                                              usage                                              │
-├──────┼─────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────┤
-│    0 │ cherry-pick             │ A command for cherry-picking values from a record key recursively                               │
-│    1 │ filter-map              │ A command for walking through a complex data structure and transforming its values recursively  │
-│    2 │ flatten record-paths    │ A command for flattening trees whilst keeping paths as keys                                     │
-╰──────┴─────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────╯
+use toolbox.nu *
+help commands | where command_type == "custom"
+# => ╭──────┬─────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │    # │          name           │                                              usage                                              │
+# => ├──────┼─────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────┤
+# => │    0 │ cherry-pick             │ A command for cherry-picking values from a record key recursively                               │
+# => │    1 │ filter-map              │ A command for walking through a complex data structure and transforming its values recursively  │
+# => │    2 │ flatten record-paths    │ A command for flattening trees whilst keeping paths as keys                                     │
+# => ╰──────┴─────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 ```nu
 # toolbox.nu
-use std assert
+use std/assert
 
 # A command for cherry-picking values from a record key recursively
 export def cherry-pick [
@@ -842,7 +728,6 @@ export def "flatten record-paths" [
 
 def flatten-record-paths [separator: string, ctx?: string] {
     let input = $in
-
     match ($input | describe-primitive) {
         "record" => {
             $input
@@ -863,7 +748,12 @@ def flatten-record-paths [separator: string, ctx?: string] {
                   {path: ([$ctx $e.index] | str join $separator), value: $e.item}
               }
         },
-        "table" | "block" | "closure" => { error make {msg: "Unexpected type"} },
+        "table" => {
+            $input | enumerate | each { |r| $r.item | flatten-record-paths $separator ([$ctx $r.index] | str join $separator) }
+        }
+        "block" | "closure" => { 
+            error make {msg: "Unexpected type"} 
+        },
         _ => {
             {path: $ctx, value: $input}
         },

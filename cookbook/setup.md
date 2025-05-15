@@ -25,27 +25,22 @@ For more detailed instructions, see the documentation about [environment variabl
 
 ```nu
 $env
-```
-
-Output
-
-```
-─────────────────────────────────┬────────────────────────────────────────────
- ALLUSERSPROFILE                 │ C:\ProgramData
- CARGO_PKG_AUTHORS               │ The Nu Project Contributors
- CARGO_PKG_DESCRIPTION           │ A new type of shell
- CARGO_PKG_HOMEPAGE              │ https://www.nushell.sh
- CARGO_PKG_LICENSE               │ MIT
- CARGO_PKG_LICENSE_FILE          │
- CARGO_PKG_NAME                  │ nu
- CARGO_PKG_REPOSITORY            │ https://github.com/nushell/nushell
- CARGO_PKG_VERSION               │ 0.59.0
- CARGO_PKG_VERSION_MAJOR         │ 0
+# => ─────────────────────────────────┬────────────────────────────────────────────
+# =>  ALLUSERSPROFILE                 │ C:\ProgramData
+# =>  CARGO_PKG_AUTHORS               │ The Nu Project Contributors
+# =>  CARGO_PKG_DESCRIPTION           │ A new type of shell
+# =>  CARGO_PKG_HOMEPAGE              │ https://www.nushell.sh
+# =>  CARGO_PKG_LICENSE               │ MIT
+# =>  CARGO_PKG_LICENSE_FILE          │
+# =>  CARGO_PKG_NAME                  │ nu
+# =>  CARGO_PKG_REPOSITORY            │ https://github.com/nushell/nushell
+# =>  CARGO_PKG_VERSION               │ 0.59.0
+# =>  CARGO_PKG_VERSION_MAJOR         │ 0
 ```
 
 Let's practise that and set `$EDITOR` in our `env.nu` file using `vim` (or an editor of your choice)
 
-```
+```nu
 vim $nu.env-path
 ```
 
@@ -53,8 +48,8 @@ Note: if you've never used `vim` before and you want to leave typing `:q!` will 
 
 Go to the end of the file and add
 
-```
-$env.EDITOR = vim
+```nu
+$env.EDITOR = 'vim'
 ```
 
 or `emacs`, `vscode` or whatever editor you like. Don't forget that the program needs to be accessible on the `PATH`

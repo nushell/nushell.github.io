@@ -38,6 +38,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/working_with_records.md',
         '/book/working_with_tables.md',
         '/book/navigating_structured_data.md',
+        '/book/special_variables.md',
       ],
     },
     {
@@ -82,7 +83,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/externs.md',
         '/book/coloring_and_theming.md',
         '/book/hooks.md',
-        '/book/background_task.md',
+        '/book/background_jobs.md',
       ],
     },
     {

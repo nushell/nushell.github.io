@@ -10,7 +10,7 @@ Nushell 使用一个配置系统，在启动时加载并运行两个 Nushell 脚
 
 _(你可以把 Nushell 的配置加载顺序想象成在启动时执行两行 [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)：`source /path/to/env.nu`和`source /path/to/config.nu`。因此，用`env.nu`表示环境，用`config.nu`表示其他配置只是一个约定。)_
 
-当你在没有设置这些文件的情况下启动 Nushell，Nushell 会提示你下载[`default env.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_env.nu)和[`default config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/sample_config/default_config.nu)。
+当你在没有设置这些文件的情况下启动 Nushell，Nushell 会提示你下载[`default env.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu)和[`default config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_config.nu)。
 你可以通过浏览这些默认文件，了解环境变量的默认值和所有可配置项的列表。
 
 ### 配置 `$env.config`
@@ -57,7 +57,7 @@ _(尽管 `$env.config` 是一个环境变量，按照惯例它仍然在 `config.
 
 Nushell 遵循如下的规则来匹配编辑器:
 
-1. `$config.buffer_editor`
+1. `$env.config.buffer_editor`
 3. `$env.VISUAL`
 2. `$env.EDITOR`
 4. 如果上面都未匹配成功，则针对 Windows 运行`notepad`, 其他系统`nano`
@@ -81,15 +81,15 @@ $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r
 接下来，在一些发行版上，你还需要确保 Nu 在`/etc/shells`列表中：
 
 ```nu
-> cat /etc/shells
-# /etc/shells: valid login shells
-/bin/sh
-/bin/dash
-/bin/bash
-/bin/rbash
-/usr/bin/screen
-/usr/bin/fish
-/home/sophia/.cargo/bin/nu
+cat /etc/shells
+# => # /etc/shells: valid login shells
+# => /bin/sh
+# => /bin/dash
+# => /bin/bash
+# => /bin/rbash
+# => /usr/bin/screen
+# => /usr/bin/fish
+# => /home/sophia/.cargo/bin/nu
 ```
 
 这样你就可以使用`chsh`命令来将 Nu 设置为你的登录 Shell。在你注销后下次登录时，应该可以看到一个闪亮的 Nu 提示。

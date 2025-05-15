@@ -1,1 +1,1 @@
-> mkdir new_directory
+mkdir new_directory

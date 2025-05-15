@@ -8,7 +8,7 @@ Un alias te permite crear un nombre corto para un bloque de comandos. Cuando se 
 
 Ejemplo:
 
-```
+```nu
 alias ls-nombres [] { ls | select name }
 ls-nombres
 # => ────┬────────────────────
@@ -25,7 +25,7 @@ ls-nombres
 
 También pueden tomar parámetros opcionales que son pasadas al bloque. Cada parámetro se convierte en una variable en el bloque.
 
-```
+```nu
 alias decir [mensaje] { echo $mensaje }
 decir "¡hola!"
 # => ¡hola!

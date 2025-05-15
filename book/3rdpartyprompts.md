@@ -33,7 +33,7 @@ source ~/.oh-my-posh.nu
 
 For MacOS users:
 
-1. You can install oh-my-posh by `brew`, just following the [guide here](https://ohmyposh.dev/docs/installation/macos)
+1. You can install oh-my-posh using `brew`, just following the [guide here](https://ohmyposh.dev/docs/installation/macos)
 2. Download and install a [nerd font](https://github.com/ryanoasis/nerd-fonts).
 3. Set the PROMPT_COMMAND in the file output by `$nu.config-path`, here is a code snippet:
 

@@ -57,7 +57,7 @@ export const sidebarDe: SidebarConfig = {
         '/de/book/custom_completions',
         '/de/book/coloring_and_theming',
         '/de/book/hooks',
-        '/de/book/background_task.md',
+        '/de/book/background_jobs.md',
       ],
     },
     {

@@ -10,6 +10,69 @@ When updating Nushell, please make sure to also update any plugins that you have
 
 [[toc]]
 
+## Overview
+
+- In order to use a plugin, it needs to be:
+
+  - Installed
+  - Added
+  - Imported
+
+There are two types of plugins:
+
+- "Core plugins" are officially maintained and are usually installed with Nushell, in the same directory as the Nushell executable.
+- Third-party plugins are also available from many sources.
+
+The `$NU_LIB_DIRS` constant or `$env.NU_LIB_DIRS` environment variable can be used to set the search-path for plugins.
+
+### Core Plugin Quickstart
+
+To begin using the Polars plugin:
+
+1. Most package managers will automatically install the core plugins with Nushell. A notable exception, however, is `cargo`. If you installed
+   Nushell using `cargo`, see [Installing Core Plugins](#core-plugins) below.
+
+2. (Recommended) Set the plugin search path to include the directory where Nushell and its plugins are installed. Assuming the core plugins are installed
+   in the same directory as the Nushell binary, the following can be added to your startup config:
+
+   ```nu
+   const NU_PLUGIN_DIRS = [
+     ($nu.current-exe | path dirname)
+     ...$NU_PLUGIN_DIRS
+   ]
+   ```
+
+3. Add the plugin to the plugin registry. This only needs to be done one time. The name is the name of the plugin _file_, including its extension:
+
+   ```nu
+   # On Unix/Linux platforms:
+   plugin add nu_plugin_polars
+   # Or on Windows
+   plugin add nu_plugin_polars.exe
+
+   plugin list # Confirm it was added to the registry
+   ```
+
+   Alternatively, if you did not add the binary directory to the plugin path in Step 2, you can still use an absolute path:
+
+   ```nu
+   plugin add ~/.local/share/rust/cargo/bin/nu_plugin_polars
+   ```
+
+4. Import the plugin (to begin using it immediately) or restart Nushell. All plugins in the registry are automatically imported when Nushell starts:
+
+   ```nu
+   # The name of the plugin, without the leading `nu_plugin` nor any extension
+   use polars
+   ```
+
+5. Confirm the plugin is working:
+
+   ```nu
+   ls | polars into-df | describe
+   # => NuDataFrame
+   ```
+
 ## Installing Plugins
 
 ### Core Plugins
@@ -29,7 +92,7 @@ Core plugins are typically distributed with the Nushell release and should alrea
 ::: tip Installing using Cargo
 For example, when installing or upgrading Nushell directly from crates.io using `cargo install nu --locked`, the corresponding core plugins for that version may also be installed or updated using `cargo install nu_plugin_<plugin_name> --locked`.
 
-To install all of the default plugins, from within Nushell run:
+To install all of the default (non-developer) plugins, from within Nushell run:
 
 ```nu
 [ nu_plugin_inc
@@ -96,15 +159,17 @@ When [`plugin add`](/commands/docs/plugin_add.md) is called, Nu:
 - Communicates via the [plugin protocol](/contributor-book/plugin_protocol_reference.md) in order to ensure compatibility and to get a list of all of the commands it supports
 - This plugin information is then saved to the plugin registry file (`$nu.plugin-path`), which acts as a cache
 
-Once added to the registry, the next time `nu` is started, the plugin will be available in that session.
+### Importing Plugins
 
-You can also immediately reload a plugin in the current session by calling `plugin use`. In this case, the name of the plugin (rather than the filename) is used without the `nu_plugin` prefix:
+Once added to the registry, the next time `nu` is started, the plugin will be imported and available in that session.
+
+You can also immediately import (or reload) a plugin in the current session by calling `plugin use`. In this case, the name of the plugin (rather than the filename) is used without the `nu_plugin` prefix:
 
 ```nu
 plugin use cool
 ```
 
-It is not necessary to add `plugin use` statements to your config file. All previously added plugins are automatically loaded at startup.
+It is not necessary to add `plugin use` statements to your config file. All previously registered plugins are automatically loaded at startup.
 
 ::: tip Note
 `plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. If you need to run `nu` with a specific plugin or set of plugins without preparing a cache file, you can pass the `--plugins` option to `nu` with a list of plugin executable files:
@@ -114,6 +179,14 @@ nu --plugins '[./my_plugins/nu_plugin_cool]'
 ```
 
 :::
+
+### Plugin Search Path
+
+Nushell includes two `list` variables that can be used to set a search path for plugins. This only applies when registering plugins with `plugin add`, but it can be a nice shortcut
+if you commonly add and remove plugins.
+
+- `const NU_PLUGIN_DIRS`: A constant which takes effect immediately when set. However, as a constant, only certain commands may be used with it. It can be updated, for example, as seen in the [QuickStart above](#core-plugin-quickstart).
+- `$env.NU_PLUGIN_DIRS`: An environment variable which is mutable and can accept any command that updates its list. However, changes to it will not take effect until the _next_ expression is parsed.
 
 ### Updating Plugins
 
