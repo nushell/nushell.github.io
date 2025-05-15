@@ -379,34 +379,69 @@ The `sleep` behavior of not supporting an input stream matches Bash `sleep` beha
 
 Many commands do have piped input/output however, and if it's ever unclear, check their `help` documentation as described above.
 
-## Behind the Scenes
+## Rendering Display Results
 
-You may have wondered how we see a table if [`ls`](/commands/docs/ls.md) is an input and not an output. Nu adds this output for us automatically using another command called [`table`](/commands/docs/table.md). The [`table`](/commands/docs/table.md) command is appended to any pipeline that doesn't have an output. This allows us to see the result.
+In interactive mode, when a pipeline ends, the [`display_output` hook configuration](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) defines how the result will be displayed.
+The default configuration uses the [`table` command](/commands/docs/table.md) to render structured data as a visual table.
 
-In effect, the command:
+The following example shows how the `display_output` hook can render
 
-```nu
-ls
-```
-
-And the pipeline:
-
-```nu
-ls | table
-```
-
-Are one and the same.
-
-::: tip Note
-The phrase _"are one and the same"_ above only applies to the graphical output in the shell, it does not mean the two data structures are the same:
+- an expanded table with `table -e`
+- an unexpanded table with `table`
+- an empty closure `{||}` and empty string `''` lead to simple output
+- `null` can be assigned to clear any customization, reverting back to default behavior
 
 ```nu
-(ls) == (ls | table)
-# => false
-```
+$env.config.hooks.display_output = { table -e }
+[1,2,3,[4,5,6]]
+# => ╭───┬───────────╮
+# => │ 0 │         1 │
+# => │ 1 │         2 │
+# => │ 2 │         3 │
+# => │ 3 │ ╭───┬───╮ │
+# => │   │ │ 0 │ 4 │ │
+# => │   │ │ 1 │ 5 │ │
+# => │   │ │ 2 │ 6 │ │
+# => │   │ ╰───┴───╯ │
+# => ╰───┴───────────╯
 
-`ls | table` is not even structured data!
-:::
+$env.config.hooks.display_output = { table }
+[1,2,3,[4,5,6]]
+# => ╭───┬────────────────╮
+# => │ 0 │              1 │
+# => │ 1 │              2 │
+# => │ 2 │              3 │
+# => │ 3 │ [list 3 items] │
+# => ╰───┴────────────────╯
+
+$env.config.hooks.display_output = {||}
+[1,2,3,[4,5,6]]
+# => 1
+# => 2
+# => 3
+# => [4
+# => 5
+# => 6]
+
+$env.config.hooks.display_output = ''
+[1,2,3,[4,5,6]]
+# => 1
+# => 2
+# => 3
+# => [4
+# => 5
+# => 6]
+
+# clear to default behavior
+$env.config.hooks.display_output = null
+[1,2,3,[4,5,6]]
+# => ╭───┬────────────────╮
+# => │ 0 │              1 │
+# => │ 1 │              2 │
+# => │ 2 │              3 │
+# => │ 3 │ [list 3 items] │
+# => ╰───┴────────────────╯
+```
 
 ## Output Result to External Commands
 
