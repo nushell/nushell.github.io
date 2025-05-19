@@ -1,6 +1,8 @@
 @font-face {
   font-family: 'Fira Code';
-  src: url('/fonts/FiraCode-Regular.woff2') format('woff2'), url("woff/FiraCode-Regular.woff") format("woff");
+  src:
+    url('/fonts/FiraCode-Regular.woff2') format('woff2'),
+    url('woff/FiraCode-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
@@ -36,14 +38,17 @@ div[class*='language-'].line-numbers-mode .line-numbers {
  */
 :root {
   --code-line-height: 1.1;
-  --font-family-code: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'DejaVu Sans Mono',
-    'Ubuntu Mono', monospace;
-  }
-  
+  --font-family-code: 'Fira Code', Consolas, Monaco, 'Andale Mono',
+    'DejaVu Sans Mono', 'Ubuntu Mono', monospace;
+}
+
 /* override vuepress `:root` --code-font-family variable with higher specificity (`body`) because vuepress puts theirs after this one */
 body {
-  --code-font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'DejaVu Sans Mono',
-    'Ubuntu Mono', monospace;
+  --code-font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono',
+    'DejaVu Sans Mono', 'Ubuntu Mono', monospace;
+  code {
+    font-variant-ligatures: none;
+  }
 }
 
 @media screen and (min-width: 720px) and (max-width: 815px) {
