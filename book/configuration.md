@@ -447,7 +447,7 @@ rm $temp_home
 
 ### Using Constants
 
-Some important commands, like `source` and `use`, that help define custom commands (and other definitions) are parse-time keywords. Among other things, this means means that all arguments must be known at parse-time.
+Some important commands, like `source` and `use`, that help define custom commands (and other definitions) are parse-time keywords. Among other things, this means that all arguments must be known at parse-time.
 
 In other words, **_variable arguments are not allowed for parser keywords_**.
 
