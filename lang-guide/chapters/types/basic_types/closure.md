@@ -10,7 +10,7 @@
 
 Closures are used in Nu extensively as parameters to iteration style commands like `each`, `filter`, and `reduce`, to name but a few. A closure acts like a custom command that can be invoked either explicitly or by other commands. Closures can take parameters, return values and be passed to commands, either builtin or custom.
 
-## Language Notes:
+## Language Notes
 
 1. A closure can be directly invoked using the [`do`](/commands/docs/do.md) command.
 
@@ -106,3 +106,83 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 - `update`
 - `upsert`
 - `zip`
+
+### Examples of using closures
+
+Here are a few select, concise examples to illustrate the broad use of closures with some of the aforementioned common Nushell commands:
+
+#### `each` – Applying a transformation
+
+The `each` command iterates over input, applying a closure to transform each item.
+
+```nu
+[1 2 3] | each { |num| $num * 10 }
+```
+
+_Explanation:_ This takes a list of numbers. The closure `{|num| $num * 10}` is executed for each number (`num`), multiplying it by 10.
+
+**Output:**
+
+```nu
+[10 20 30]
+```
+
+---
+
+#### `where` – Filtering data
+
+The `where` command filters data based on a condition defined in a closure. The closure must return true (keep) or false (discard).
+
+```nu
+ls | where { |file_info| $file_info.size > 1mb }
+```
+
+_Explanation:_ This lists files and then filters them. The closure `{|file_info| $file_info.size > 1mb}` checks if each file's size is greater than 1 megabyte.
+
+**Output:**
+
+```nu
+# A table of files larger than 1MB
+```
+
+_Closure's role:_ Defines the operation to perform on every element.
+
+---
+
+#### `sort-by` – Custom sorting logic
+
+The `sort-by` command sorts a list or table. The closure is used to extract or calculate the value to sort on for each item.
+
+```nu
+["kiwi" "apple" "banana"] | sort-by { |fruit_name| $fruit_name | str length }
+```
+
+_Explanation:_ This sorts a list of fruit names. The closure `{|fruit_name| $fruit_name | str length}` calculates the length of each fruit name. `sort-by` then uses these lengths for sorting.
+
+**Output:**
+
+```nu
+["kiwi" "apple" "banana"] # sorted by string length: kiwi (4), apple (5), banana (6)
+```
+
+_Closure's role:_ Specifies the attribute or derived value to use for comparison during sorting.
+
+---
+
+#### `reduce` – Aggregating values
+
+The `reduce` command processes a list to accumulate a single result. The closure defines how to combine the current item with the accumulated value.
+
+```nu
+[1 2 3 4] | reduce { |accumulator, current_value| $accumulator + $current_value }
+```
+
+_Explanation:_ This sums the numbers in the list. The closure `{|accumulator, current_value| $accumulator + $current_value}` adds the `current_value` to the `accumulator`. By default, the first item is the initial accumulator, and iteration starts from the second.
+
+**Output:**
+
+```nu
+10
+```
+
+_Closure's role:_ Defines the operation for combining elements into a single accumulated value.
