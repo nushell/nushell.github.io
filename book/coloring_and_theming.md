@@ -602,11 +602,11 @@ If you are working on a light background terminal, you can apply the light theme
 
 ```nu
 # in $nu.config-path
-use config light-theme   # add this line to load the theme into scope
+use std config light-theme   # add this line to load the theme into scope
 
 $env.config = {
   # ...
-  color_config: (light_theme)   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  color_config: (light-theme)   # if you want a light theme, replace `$dark_theme` to `$light_theme`
   # ...
 }
 ```
@@ -615,11 +615,11 @@ You can also load the dark theme.
 
 ```nu
 # in $nu.config-path
-use config dark-theme
+use std config dark-theme
 
 $env.config = {
   # ...
-  color_config: (dark_theme)
+  color_config: (dark-theme)
   # ...
 }
 ```
