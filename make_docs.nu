@@ -1,4 +1,3 @@
-
 def plugin-paths [ nu_path?: path ] {
     const PLUGINS = [
         nu_plugin_inc,
@@ -243,10 +242,13 @@ $"## Notes
         # FIXME: Parentheses are required here to mutate $input_output, otherwise it won't work, maybe a bug?
         $input_output = ($input_output | append [[input output]; [$input $output]])
     }
-    let in_out = if ($input_output | length) > 0 {
-        let markdown = ($input_output | sort-by input | to md --pretty | str replace -a '<' '\<' | str replace -a '>' '\>')
-        ['', '## Input/output types:', '', $markdown, ''] | str join (char newline)
-    } else { '' }
+    # Input/output types: use help commands
+    let input_output_table = help commands | where name == $command.name | get input_output | first | to md
+    let in_out = if ($input_output_table | is-empty) {
+        ''
+    } else {
+        ['', '## Input/output types:', '', $input_output_table, ''] | str join (char newline)
+    }
 
     let examples = if ($command.examples | length) > 0 {
         let example_top = $"## Examples(char newline)(char newline)"
