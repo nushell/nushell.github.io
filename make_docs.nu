@@ -243,7 +243,15 @@ $"## Notes
         $input_output = ($input_output | append [[input output]; [$input $output]])
     }
     # Input/output types: use help commands
-    let input_output_table = help commands | where name == $command.name | get input_output | first | to md
+    let input_output_table = (
+        help commands
+        | where name == $command.name
+        | get input_output
+        | first
+        | to md --pretty
+        | str replace -a '<' '&lt;'
+        | str replace -a '>' '&gt;'
+    )
     let in_out = if ($input_output_table | is-empty) {
         ''
     } else {
