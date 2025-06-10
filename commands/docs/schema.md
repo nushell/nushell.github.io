@@ -2,7 +2,7 @@
 title: schema
 categories: |
   database
-version: 0.104.0
+version: 0.105.0
 database: |
   Show the schema of a SQLite database.
 usage: |

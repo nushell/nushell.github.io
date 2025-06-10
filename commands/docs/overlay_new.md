@@ -2,7 +2,7 @@
 title: overlay new
 categories: |
   core
-version: 0.104.0
+version: 0.105.0
 core: |
   Create an empty overlay.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> overlay new {flags} (name)```
+
+## Flags
+
+ -  `--reload, -r`: If the overlay already exists, reload its environment.
 
 ## Parameters
 

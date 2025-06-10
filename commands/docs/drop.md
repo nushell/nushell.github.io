@@ -2,7 +2,7 @@
 title: drop
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Remove items/rows from the end of the input list/table. Counterpart of `skip`. Opposite of `last`.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
 | table     | table     |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Remove the last item of a list

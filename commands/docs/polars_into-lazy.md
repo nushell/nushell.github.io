@@ -2,7 +2,7 @@
 title: polars into-lazy
 categories: |
   lazyframe
-version: 0.104.0
+version: 0.105.0
 lazyframe: |
   Converts a dataframe into a lazy dataframe.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input | output    |
+| ----- | --------- |
+| any   | dataframe |
 ## Examples
 
 Takes a table and creates a lazyframe

@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Convert value to string.
 usage: |
@@ -35,18 +35,18 @@ contributors: false
 | input     | output       |
 | --------- | ------------ |
 | binary    | string       |
+| int       | string       |
+| number    | string       |
+| string    | string       |
+| glob      | string       |
 | bool      | string       |
+| filesize  | string       |
 | datetime  | string       |
 | duration  | string       |
-| filesize  | string       |
-| glob      | string       |
-| int       | string       |
-| list\<any\> | list\<string\> |
-| number    | string       |
 | range     | string       |
-| record    | record       |
-| string    | string       |
+| list&lt;any&gt; | list&lt;string&gt; |
 | table     | table        |
+| record    | record       |
 ## Examples
 
 convert int to string and append three decimal places

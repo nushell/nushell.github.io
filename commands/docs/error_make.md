@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.104.0
+version: 0.105.0
 core: |
   Create an error.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 
 | input   | output |
 | ------- | ------ |
-| nothing | any    |
+| nothing | error  |
 ## Examples
 
 Create a simple custom error

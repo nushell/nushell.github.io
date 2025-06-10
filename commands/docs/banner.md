@@ -2,7 +2,7 @@
 title: banner
 categories: |
   default
-version: 0.104.0
+version: 0.105.0
 default: |
   Print a banner for Nushell with information about the project
 usage: |
@@ -23,10 +23,3 @@ contributors: false
 ## Flags
 
  -  `--short`: Only show startup time
-
-
-## Input/output types:
-
-| input | output |
-| ----- | ------ |
-| any   | any    |

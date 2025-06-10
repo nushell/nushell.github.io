@@ -2,7 +2,7 @@
 title: polars arg-true
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Returns indexes where values are true.
 usage: |
@@ -30,9 +30,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Returns indexes where values are true

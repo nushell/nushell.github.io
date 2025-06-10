@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Extract data using a cell path.
 usage: |
@@ -23,7 +23,7 @@ contributors: false
 ## Flags
 
  -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional)
- -  `--sensitive, -s`: get path in a case sensitive manner
+ -  `--sensitive, -s`: get path in a case sensitive manner (deprecated)
 
 ## Parameters
 
@@ -35,10 +35,10 @@ contributors: false
 
 | input     | output  |
 | --------- | ------- |
-| list\<any\> | any     |
-| nothing   | nothing |
-| record    | any     |
+| list&lt;any&gt; | any     |
 | table     | any     |
+| record    | any     |
+| nothing   | nothing |
 ## Examples
 
 Get an item from a list
@@ -76,13 +76,13 @@ Extract the name of the 3rd record in a list
 
 Getting Path/PATH in a case insensitive way
 ```nu
-> $env | get paTH
+> $env | get paTH!
 
 ```
 
 Getting Path in a case sensitive way, won't work for 'PATH'
 ```nu
-> $env | get --sensitive Path
+> $env | get Path
 
 ```
 

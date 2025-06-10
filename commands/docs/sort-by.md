@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Sort by the given cell path or closure.
 usage: |
@@ -36,7 +36,7 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
+| list&lt;any&gt; | list&lt;any&gt; |
 | record    | table     |
 | table     | table     |
 ## Examples

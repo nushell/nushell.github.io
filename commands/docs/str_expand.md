@@ -2,7 +2,7 @@
 title: str expand
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Generates all possible combinations defined in brace expansion syntax.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input        | output             |
 | ------------ | ------------------ |
-| list\<string\> | list\<list\<string\>\> |
-| string       | list\<string\>       |
+| string       | list&lt;string&gt;       |
+| list&lt;string&gt; | list&lt;list&lt;string&gt;&gt; |
 ## Examples
 
 Define a range inside braces to produce a list of string.

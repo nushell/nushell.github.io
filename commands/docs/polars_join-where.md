@@ -2,7 +2,7 @@
 title: polars join-where
 categories: |
   lazyframe
-version: 0.104.0
+version: 0.105.0
 lazyframe: |
   Joins a lazy frame with other lazy frame based on conditions.
 usage: |
@@ -35,9 +35,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Join two lazy dataframes with a condition

@@ -2,7 +2,7 @@
 title: polars convert-time-zone
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Convert datetime to target timezone.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| expression | expression |
 ## Examples
 
 Convert timezone for timezone-aware datetime
@@ -44,12 +44,12 @@ Convert timezone for timezone-aware datetime
 > ["2025-04-10 09:30:00 -0400" "2025-04-10 10:30:00 -0400"] | polars into-df
                     | polars as-datetime "%Y-%m-%d %H:%M:%S %z"
                     | polars select (polars col datetime | polars convert-time-zone "Europe/Lisbon")
-╭───┬─────────────╮
-│ # │  datetime   │
-├───┼─────────────┤
-│ 0 │ 2 weeks ago │
-│ 1 │ 2 weeks ago │
-╰───┴─────────────╯
+╭───┬──────────────╮
+│ # │   datetime   │
+├───┼──────────────┤
+│ 0 │ 2 months ago │
+│ 1 │ 2 months ago │
+╰───┴──────────────╯
 
 ```
 
@@ -58,11 +58,11 @@ Timezone conversions for timezone-naive datetime will assume the original timezo
 > ["2025-04-10 09:30:00" "2025-04-10 10:30:00"] | polars into-df
                     | polars as-datetime "%Y-%m-%d %H:%M:%S" --naive
                     | polars select (polars col datetime | polars convert-time-zone "America/New_York")
-╭───┬─────────────╮
-│ # │  datetime   │
-├───┼─────────────┤
-│ 0 │ 2 weeks ago │
-│ 1 │ 2 weeks ago │
-╰───┴─────────────╯
+╭───┬──────────────╮
+│ # │   datetime   │
+├───┼──────────────┤
+│ 0 │ 2 months ago │
+│ 1 │ 2 months ago │
+╰───┴──────────────╯
 
 ```

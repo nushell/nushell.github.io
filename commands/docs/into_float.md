@@ -2,7 +2,7 @@
 title: into float
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Convert data into floating point number.
 usage: |
@@ -29,13 +29,13 @@ contributors: false
 
 | input     | output      |
 | --------- | ----------- |
+| int       | float       |
+| string    | float       |
 | bool      | float       |
 | float     | float       |
-| int       | float       |
-| list\<any\> | list\<float\> |
-| record    | record      |
-| string    | float       |
 | table     | table       |
+| record    | record      |
+| list&lt;any&gt; | list&lt;float&gt; |
 ## Examples
 
 Convert string to float in table

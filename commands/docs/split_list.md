@@ -2,7 +2,7 @@
 title: split list
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Split a list into multiple lists using a separator.
 usage: |
@@ -34,7 +34,7 @@ contributors: false
 
 | input     | output          |
 | --------- | --------------- |
-| list\<any\> | list\<list\<any\>\> |
+| list&lt;any&gt; | list&lt;list&lt;any&gt;&gt; |
 ## Examples
 
 Split a list of chars into two lists

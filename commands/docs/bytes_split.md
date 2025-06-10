@@ -2,7 +2,7 @@
 title: bytes split
 categories: |
   bytes
-version: 0.104.0
+version: 0.105.0
 bytes: |
   Split input into multiple items using a separator.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 
 | input  | output       |
 | ------ | ------------ |
-| binary | list\<binary\> |
+| binary | list&lt;binary&gt; |
 ## Examples
 
 Split a binary value using a binary separator

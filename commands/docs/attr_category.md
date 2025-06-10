@@ -2,7 +2,7 @@
 title: attr category
 categories: |
   core
-version: 0.104.0
+version: 0.105.0
 core: |
   Attribute for adding a category to custom commands.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 
 | input   | output       |
 | ------- | ------------ |
-| nothing | list\<string\> |
+| nothing | list&lt;string&gt; |
 ## Examples
 
 Add a category to a custom command

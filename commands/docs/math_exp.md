@@ -2,7 +2,7 @@
 title: math exp
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns e raised to the power of x.
 usage: |
@@ -25,8 +25,8 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Get e raised to the power of zero

@@ -2,7 +2,7 @@
 title: hash sha256
 categories: |
   hash
-version: 0.104.0
+version: 0.105.0
 hash: |
   Hash a value using the sha256 hash algorithm.
 usage: |
@@ -33,10 +33,10 @@ contributors: false
 
 | input  | output |
 | ------ | ------ |
-| binary | any    |
-| record | record |
 | string | any    |
+| binary | any    |
 | table  | table  |
+| record | record |
 ## Examples
 
 Return the sha256 hash of a string, hex-encoded

@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Find and replace text.
 usage: |
@@ -38,10 +38,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
 | table        | table        |
+| record       | record       |
+| list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
 Find and replace the first occurrence of a substring

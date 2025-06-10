@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.104.0
+version: 0.105.0
 filesystem: |
   Save a file.
 usage: |
@@ -67,5 +67,16 @@ Save a running program's stderr to foo.txt
 Save a running program's stderr to separate file
 ```nu
 > do -i {} | save foo.txt --stderr bar.txt
+
+```
+
+Show the extensions for which the `save` command will automatically serialize
+```nu
+> scope commands
+    | where name starts-with "to "
+    | insert extension { get name | str replace -r "^to " "" | $"*.($in)" }
+    | select extension name
+    | rename extension command
+
 
 ```

@@ -2,7 +2,7 @@
 title: url parse
 categories: |
   network
-version: 0.104.0
+version: 0.105.0
 network: |
   Parses a url.
 usage: |
@@ -29,9 +29,9 @@ contributors: false
 
 | input  | output |
 | ------ | ------ |
-| record | record |
 | string | record |
 | table  | table  |
+| record | record |
 ## Examples
 
 Parses a url

@@ -2,7 +2,7 @@
 title: values
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Given a record or table, produce a list of its columns' values.
 usage: |
@@ -25,8 +25,8 @@ contributors: false
 
 | input  | output    |
 | ------ | --------- |
-| record | list\<any\> |
-| table  | list\<any\> |
+| record | list&lt;any&gt; |
+| table  | list&lt;any&gt; |
 ## Examples
 
 Get the values from the record (produce a list)

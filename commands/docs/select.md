@@ -2,7 +2,7 @@
 title: select
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Select only these columns or rows from the input. Opposite of `reject`.
 usage: |
@@ -33,9 +33,9 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| list\<any\> | any    |
 | record    | record |
 | table     | table  |
+| list&lt;any&gt; | any    |
 ## Examples
 
 Select a column in a table

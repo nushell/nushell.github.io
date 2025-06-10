@@ -2,7 +2,7 @@
 title: histogram
 categories: |
   chart
-version: 0.104.0
+version: 0.105.0
 chart: |
   Creates a new table with a histogram based on the column name passed in.
 usage: |
@@ -34,7 +34,7 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| list\<any\> | table  |
+| list&lt;any&gt; | table  |
 ## Examples
 
 Compute a histogram of file types

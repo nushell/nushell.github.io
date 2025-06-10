@@ -2,7 +2,7 @@
 title: str contains
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Checks if string input contains a substring.
 usage: |
@@ -34,10 +34,10 @@ contributors: false
 
 | input        | output     |
 | ------------ | ---------- |
-| list\<string\> | list\<bool\> |
-| record       | record     |
 | string       | bool       |
 | table        | table      |
+| record       | record     |
+| list&lt;string&gt; | list&lt;bool&gt; |
 ## Examples
 
 Check if input contains string

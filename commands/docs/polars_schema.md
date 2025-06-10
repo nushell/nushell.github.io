@@ -2,7 +2,7 @@
 title: polars schema
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Show schema for a dataframe.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | record |
+| input     | output |
+| --------- | ------ |
+| dataframe | record |
 ## Examples
 
 Dataframe schema

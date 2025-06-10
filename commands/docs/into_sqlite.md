@@ -2,7 +2,7 @@
 title: into sqlite
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Convert table into a SQLite database.
 usage: |
@@ -33,8 +33,8 @@ contributors: false
 
 | input  | output  |
 | ------ | ------- |
-| record | nothing |
 | table  | nothing |
+| record | nothing |
 ## Examples
 
 Convert ls entries into a SQLite database with 'main' as the table name

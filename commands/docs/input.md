@@ -2,7 +2,7 @@
 title: input
 categories: |
   platform
-version: 0.104.0
+version: 0.105.0
 platform: |
   Get input from the user.
 usage: |
@@ -25,6 +25,9 @@ contributors: false
  -  `--bytes-until-any, -u {string}`: read bytes (not text) until any of the given stop bytes is seen
  -  `--numchar, -n {int}`: number of characters to read; suppresses output
  -  `--default, -d {string}`: default value if no input is provided
+ -  `--reedline`: use the reedline library, defaults to false
+ -  `--history-file {path}`: Path to a file to read and write command history. This is a text file and will be created if it doesn't exist. Will be used as the selection list.
+ -  `--max-history {int}`: The maximum number of entries to keep in the history, defaults to $env.config.history.max_size.
  -  `--suppress-output, -s`: don't print keystroke values
 
 ## Parameters
@@ -34,9 +37,10 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | any    |
+| input        | output |
+| ------------ | ------ |
+| nothing      | any    |
+| list&lt;string&gt; | any    |
 ## Examples
 
 Get input from the user, and assign to a variable
@@ -54,6 +58,18 @@ Get two characters from the user, and assign to a variable
 Get input from the user with default value, and assign to a variable
 ```nu
 > let user_input = (input --default 10)
+
+```
+
+Get input from the user with history, and assign to a variable
+```nu
+> let user_input = ([past,command,entries] | input )
+
+```
+
+Get input from the user with history backed by a file, and assign to a variable
+```nu
+> let user_input = (input --history-file ./history.txt)
 
 ```
 

@@ -2,7 +2,7 @@
 title: split words
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Split a string's words into separate rows.
 usage: |
@@ -31,8 +31,8 @@ contributors: false
 
 | input        | output             |
 | ------------ | ------------------ |
-| list\<string\> | list\<list\<string\>\> |
-| string       | list\<string\>       |
+| string       | list&lt;string&gt;       |
+| list&lt;string&gt; | list&lt;list&lt;string&gt;&gt; |
 ## Examples
 
 Split the string's words into separate rows

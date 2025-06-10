@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.104.0
+version: 0.105.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| list\<any\> | string |
+| list&lt;any&gt; | string |
 | record    | string |
 ## Examples
 

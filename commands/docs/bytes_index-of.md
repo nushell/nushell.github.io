@@ -2,7 +2,7 @@
 title: bytes index-of
 categories: |
   bytes
-version: 0.104.0
+version: 0.105.0
 bytes: |
   Returns start index of first occurrence of pattern in bytes, or -1 if no match.
 usage: |
@@ -36,8 +36,8 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | binary | any    |
-| record | record |
 | table  | table  |
+| record | record |
 ## Examples
 
 Returns index of pattern in bytes

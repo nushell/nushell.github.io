@@ -2,7 +2,7 @@
 title: print
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Print the given values to stdout.
 usage: |
@@ -35,8 +35,8 @@ contributors: false
 
 | input   | output  |
 | ------- | ------- |
-| any     | nothing |
 | nothing | nothing |
+| any     | nothing |
 ## Examples
 
 Print 'hello world'

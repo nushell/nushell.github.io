@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -30,9 +30,9 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
 | record    | record    |
 | table     | table     |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Update a column value

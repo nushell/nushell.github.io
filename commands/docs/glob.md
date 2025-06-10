@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.104.0
+version: 0.105.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -38,7 +38,7 @@ contributors: false
 
 | input   | output       |
 | ------- | ------------ |
-| nothing | list\<string\> |
+| nothing | list&lt;string&gt; |
 ## Examples
 
 Search for *.rs files

@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Fill and Align.
 usage: |
@@ -31,15 +31,15 @@ contributors: false
 
 | input          | output       |
 | -------------- | ------------ |
-| filesize       | string       |
-| float          | string       |
 | int            | string       |
-| list\<any\>      | list\<string\> |
-| list\<filesize\> | list\<string\> |
-| list\<float\>    | list\<string\> |
-| list\<int\>      | list\<string\> |
-| list\<string\>   | list\<string\> |
+| float          | string       |
 | string         | string       |
+| filesize       | string       |
+| list&lt;int&gt;      | list&lt;string&gt; |
+| list&lt;float&gt;    | list&lt;string&gt; |
+| list&lt;string&gt;   | list&lt;string&gt; |
+| list&lt;filesize&gt; | list&lt;string&gt; |
+| list&lt;any&gt;      | list&lt;string&gt; |
 ## Examples
 
 Fill a string on the left side to a width of 15 with the character '─'

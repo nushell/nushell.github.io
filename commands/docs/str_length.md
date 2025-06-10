@@ -2,7 +2,7 @@
 title: str length
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Output the length of any strings in the pipeline.
 usage: |
@@ -34,10 +34,10 @@ contributors: false
 
 | input        | output    |
 | ------------ | --------- |
-| list\<string\> | list\<int\> |
-| record       | record    |
 | string       | int       |
+| list&lt;string&gt; | list&lt;int&gt; |
 | table        | table     |
+| record       | record    |
 ## Examples
 
 Return the lengths of a string

@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
  -  `--multiline, -m`: multi-line regex mode: ^ and $ match begin/end of line; equivalent to (?m)
  -  `--dotall, -s`: dotall regex mode: allow a dot . to match newlines \n; equivalent to (?s)
  -  `--columns, -c {list<string>}`: column names to be searched (with rest parameter, not regex yet)
- -  `--no-highlight, -n`: no-highlight mode: find without marking with ascii code
+ -  `--no-highlight, -n`: no-highlight mode: find without marking with ansi code
  -  `--invert, -v`: invert the match
 
 ## Parameters
@@ -39,7 +39,7 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
+| list&lt;any&gt; | list&lt;any&gt; |
 | string    | any       |
 ## Examples
 

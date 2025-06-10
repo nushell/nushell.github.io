@@ -2,7 +2,7 @@
 title: bytes starts-with
 categories: |
   bytes
-version: 0.104.0
+version: 0.105.0
 bytes: |
   Check if bytes starts with a pattern.
 usage: |
@@ -31,8 +31,8 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | binary | bool   |
-| record | record |
 | table  | table  |
+| record | record |
 ## Examples
 
 Checks if binary starts with `0x[1F FF AA]`

@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.104.0
+version: 0.105.0
 network: |
   Get the headers from a URL.
 usage: |
@@ -53,9 +53,15 @@ Get headers from example.com, with username and password
 
 ```
 
-Get headers from example.com, with custom header
+Get headers from example.com, with custom header using a record
 ```nu
-> http head --headers [my-header-key my-header-value] https://www.example.com
+> http head --headers {my-header-key: my-header-value} https://www.example.com
+
+```
+
+Get headers from example.com, with custom header using a list
+```nu
+> http head --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 

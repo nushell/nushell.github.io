@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   path
-version: 0.104.0
+version: 0.105.0
 path: |
   Convert a path into structured data.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input        | output |
 | ------------ | ------ |
-| list\<string\> | table  |
 | string       | record |
+| list&lt;string&gt; | table  |
 ## Examples
 
 Parse a path

@@ -2,7 +2,7 @@
 title: url split-query
 categories: |
   network
-version: 0.104.0
+version: 0.105.0
 network: |
   Converts query string into table applying percent-decoding.
 usage: |
@@ -25,7 +25,7 @@ contributors: false
 
 | input  | output                            |
 | ------ | --------------------------------- |
-| string | table\<key: string, value: string\> |
+| string | table&lt;key: string, value: string&gt; |
 ## Examples
 
 Outputs a table representing the contents of this query string

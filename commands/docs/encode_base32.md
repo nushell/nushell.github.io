@@ -2,7 +2,7 @@
 title: encode base32
 categories: |
   formats
-version: 0.104.0
+version: 0.105.0
 formats: |
   Encode a string or binary value using Base32.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input  | output |
 | ------ | ------ |
-| binary | string |
 | string | string |
+| binary | string |
 ## Examples
 
 Encode a binary value

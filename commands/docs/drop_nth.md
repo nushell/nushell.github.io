@@ -2,7 +2,7 @@
 title: drop nth
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Drop the selected rows.
 usage: |
@@ -30,8 +30,8 @@ contributors: false
 
 | input     | output       |
 | --------- | ------------ |
-| list\<any\> | list\<any\>    |
-| range     | list\<number\> |
+| range     | list&lt;number&gt; |
+| list&lt;any&gt; | list&lt;any&gt;    |
 ## Examples
 
 Drop the first, second, and third row

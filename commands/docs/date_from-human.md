@@ -2,7 +2,7 @@
 title: date from-human
 categories: |
   date
-version: 0.104.0
+version: 0.105.0
 date: |
   Convert a human readable datetime string to a datetime.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input   | output   |
 | ------- | -------- |
-| nothing | table    |
 | string  | datetime |
+| nothing | table    |
 ## Examples
 
 Parsing human readable datetime
