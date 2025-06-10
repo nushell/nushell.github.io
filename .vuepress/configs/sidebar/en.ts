@@ -154,6 +154,7 @@ export const sidebarEn: SidebarConfig = {
         '/cookbook/parsing',
         '/cookbook/foreign_shell_scripts',
         '/cookbook/pattern_matching',
+        '/cookbook/custom_completers',
         '/cookbook/external_completers',
         '/cookbook/modules',
         '/cookbook/files',
