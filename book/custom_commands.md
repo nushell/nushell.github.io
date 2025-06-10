@@ -80,7 +80,7 @@ def process-list [] {
 :::
 
 ::: details Suppressing the return value
-You'll often want to create a custom command that acts as a _statement_ rather than an expression, and doesn't return a a value.
+You'll often want to create a custom command that acts as a _statement_ rather than an expression, and doesn't return a value.
 
 You can use the `ignore` keyword in this case:
 
