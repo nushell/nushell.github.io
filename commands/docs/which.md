@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.104.0
+version: 0.105.0
 system: |
   Finds a program file, alias or custom command.
 usage: |
@@ -18,7 +18,7 @@ contributors: false
 
 ## Signature
 
-```> which {flags} (application) ...rest```
+```> which {flags} ...rest```
 
 ## Flags
 
@@ -26,8 +26,7 @@ contributors: false
 
 ## Parameters
 
- -  `application`: Application.
- -  `...rest`: Additional applications.
+ -  `...rest`: Application(s).
 
 
 ## Input/output types:

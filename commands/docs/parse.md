@@ -2,7 +2,7 @@
 title: parse
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Parse columns from string data using a simple pattern or a supplied regular expression.
 usage: |
@@ -33,8 +33,8 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| list\<any\> | table  |
 | string    | table  |
+| list&lt;any&gt; | table  |
 ## Examples
 
 Parse a string into two named columns
@@ -45,6 +45,17 @@ Parse a string into two named columns
 ├───┼─────┼───────┤
 │ 0 │ hi  │ there │
 ╰───┴─────┴───────╯
+
+```
+
+Parse a string, ignoring a column with _
+```nu
+> "hello world" | parse "{foo} {_}"
+╭───┬───────╮
+│ # │  foo  │
+├───┼───────┤
+│ 0 │ hello │
+╰───┴───────╯
 
 ```
 

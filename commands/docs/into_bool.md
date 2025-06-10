@@ -2,7 +2,7 @@
 title: into bool
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Convert value to boolean.
 usage: |
@@ -33,14 +33,14 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| bool      | bool   |
 | int       | bool   |
-| list\<any\> | table  |
-| nothing   | bool   |
 | number    | bool   |
-| record    | record |
 | string    | bool   |
+| bool      | bool   |
+| nothing   | bool   |
+| list&lt;any&gt; | table  |
 | table     | table  |
+| record    | record |
 ## Examples
 
 Convert value to boolean in table

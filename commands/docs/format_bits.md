@@ -2,7 +2,7 @@
 title: format bits
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Convert value to a string of binary data represented by 0 and 1.
 usage: |
@@ -30,13 +30,13 @@ contributors: false
 | input    | output |
 | -------- | ------ |
 | binary   | string |
-| bool     | string |
-| duration | string |
-| filesize | string |
 | int      | string |
-| record   | record |
+| filesize | string |
+| duration | string |
 | string   | string |
+| bool     | string |
 | table    | table  |
+| record   | record |
 ## Examples
 
 convert a binary value into a string, padded to 8 places with 0s

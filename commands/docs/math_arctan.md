@@ -2,7 +2,7 @@
 title: math arctan
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns the arctangent of the number.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Get the arctangent of 1

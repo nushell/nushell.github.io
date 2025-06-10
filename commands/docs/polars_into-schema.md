@@ -2,7 +2,7 @@
 title: polars into-schema
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Convert a value to a polars schema object
 usage: |
@@ -32,7 +32,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 | input | output |
 | ----- | ------ |
-| any   | any    |
+| any   | schema |
 ## Examples
 
 Convert a record into a schema and back to a nu object

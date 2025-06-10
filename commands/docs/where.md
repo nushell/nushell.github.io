@@ -2,11 +2,11 @@
 title: where
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
-  Filter values based on a row condition.
+  Filter values of an input list based on a condition.
 usage: |
-  Filter values based on a row condition.
+  Filter values of an input list based on a condition.
 editLink: false
 contributors: false
 ---
@@ -14,24 +14,24 @@ contributors: false
 
 # `where` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Filter values based on a row condition.</div>
+<div class='command-title'>Filter values of an input list based on a condition.</div>
 
 ## Signature
 
-```> where {flags} (row_condition)```
+```> where {flags} (condition)```
 
 ## Parameters
 
- -  `row_condition`: Filter condition.
+ -  `condition`: Filter row condition or closure.
 
 
 ## Input/output types:
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
-| range     | any       |
+| list&lt;any&gt; | list&lt;any&gt; |
 | table     | table     |
+| range     | any       |
 ## Examples
 
 Filter rows of a table according to a condition
@@ -45,24 +45,15 @@ Filter rows of a table according to a condition
 
 ```
 
-Filter items of a list according to a condition
+List only the files in the current directory
 ```nu
-> [1 2] | where {|x| $x > 1}
-╭───┬───╮
-│ 0 │ 2 │
-╰───┴───╯
+> ls | where type == file
 
 ```
 
 List all files in the current directory with sizes greater than 2kb
 ```nu
 > ls | where size > 2kb
-
-```
-
-List only the files in the current directory
-```nu
-> ls | where type == file
 
 ```
 
@@ -78,25 +69,76 @@ List all files that were modified in the last two weeks
 
 ```
 
-Find files whose filenames don't begin with the correct sequential number
+Filter items of a list with a row condition
 ```nu
-> ls | where type == file | sort-by name --natural | enumerate | where {|e| $e.item.name !~ $'^($e.index + 1)' } | each {|| get item }
+> [1 2 3 4 5] | where $it > 2
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 4 │
+│ 2 │ 5 │
+╰───┴───╯
 
 ```
 
-Find case-insensitively files called "readme", without an explicit closure
+Filter items of a list with a closure
+```nu
+> [1 2 3 4 5] | where {|x| $x > 2 }
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 4 │
+│ 2 │ 5 │
+╰───┴───╯
+
+```
+
+Find files whose filenames don't begin with the correct sequential number
+```nu
+> ls | where type == file | sort-by name --natural | enumerate | where {|e| $e.item.name !~ $'^($e.index + 1)' } | get item
+
+```
+
+Find case-insensitively files called "readme", with a subexpression inside the row condition
 ```nu
 > ls | where ($it.name | str downcase) =~ readme
 
 ```
 
-same as above but with regex only
+Find case-insensitively files called "readme", with regex only
 ```nu
 > ls | where name =~ '(?i)readme'
 
 ```
 
+Filter rows of a table according to a stored condition
+```nu
+> let cond = {|x| $x.a > 1}; [{a: 1} {a: 2}] | where $cond
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 2 │
+╰───┴───╯
+
+```
+
+List all numbers above 3, using an existing closure condition
+```nu
+> let a = {$in > 3}; [1, 2, 5, 6] | where $a
+╭───┬───╮
+│ 0 │ 5 │
+│ 1 │ 6 │
+╰───┴───╯
+
+```
+
 ## Notes
-This command works similar to 'filter' but allows extra shorthands for working with
-tables, known as "row conditions". On the other hand, reading the condition from a variable is
-not supported.
+A condition is evaluated for each element of the input, and only elements which meet the condition are included in the output.
+
+A condition can be either a "row condition" or a closure. A row condition is a special short-hand syntax to makes accessing fields easier.
+Each element of the input can be accessed through the `$it` variable.
+
+On the left hand side of a row condition, any field name is automatically expanded to use `$it`.
+For example, `where type == dir` is equivalent to `where $it.type == dir`. This expansion does not happen when passing a subexpression or closure to `where`.
+
+When using a closure, the element is passed as an argument and as pipeline input (`$in`) to the closure. Unlike row conditions, the `$it` variable isn't available inside closures.
+
+Row conditions cannot be stored in a variable. To pass a condition with a variable, use a closure instead.

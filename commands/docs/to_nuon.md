@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.104.0
+version: 0.105.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--raw, -r`: remove all of the whitespace (default behaviour and overwrites -i and -t)
+ -  `--raw, -r`: remove all of the whitespace (overwrites -i and -t)
  -  `--indent, -i {number}`: specify indentation width
  -  `--tabs, -t {number}`: specify indentation tab quantity
  -  `--serialize, -s`: serialize nushell types that cannot be deserialized
@@ -54,7 +54,7 @@ Outputs a NUON array of ints, with pretty indentation
 Overwrite any set option with --raw
 ```nu
 > [1 2 3] | to nuon --indent 2 --raw
-[1, 2, 3]
+[1,2,3]
 ```
 
 A more complex record with multiple data types
@@ -71,4 +71,10 @@ A more complex record with multiple data types
     4.56
   ]
 }
+```
+
+A more complex record with --raw
+```nu
+> {date: 2000-01-01, data: [1 [2 3] 4.56]} | to nuon --raw
+{date:2000-01-01T00:00:00+00:00,data:[1,[2,3],4.56]}
 ```

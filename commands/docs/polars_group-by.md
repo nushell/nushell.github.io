@@ -2,7 +2,7 @@
 title: polars group-by
 categories: |
   lazyframe
-version: 0.104.0
+version: 0.105.0
 lazyframe: |
   Creates a group-by object that can be used for other aggregations.
 usage: |
@@ -27,6 +27,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ```> polars group-by {flags} ...rest```
 
+## Flags
+
+ -  `--maintain-order, -m`: Ensure that the order of the groups is consistent with the input data. This is slower than a default group by and cannot be run on the streaming engine.
+
 ## Parameters
 
  -  `...rest`: Expression(s) that define the lazy group-by
@@ -34,9 +38,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Group by and perform an aggregation

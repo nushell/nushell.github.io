@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Count the number of items in an input list, rows in a table, or bytes in binary data.
 usage: |
@@ -25,8 +25,8 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
+| list&lt;any&gt; | int    |
 | binary    | int    |
-| list\<any\> | int    |
 | nothing   | int    |
 ## Examples
 

@@ -2,7 +2,7 @@
 title: path basename
 categories: |
   path
-version: 0.104.0
+version: 0.105.0
 path: |
   Get the final component of a path.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
 Get basename of a path

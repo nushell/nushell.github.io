@@ -2,7 +2,7 @@
 title: stor update
 categories: |
   database
-version: 0.104.0
+version: 0.105.0
 database: |
   Update information in a specified table in the in-memory sqlite database.
 usage: |
@@ -31,9 +31,9 @@ contributors: false
 
 | input   | output |
 | ------- | ------ |
-| any     | table  |
 | nothing | table  |
 | record  | table  |
+| any     | table  |
 ## Examples
 
 Update the in-memory sqlite database

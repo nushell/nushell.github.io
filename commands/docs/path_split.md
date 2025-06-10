@@ -2,7 +2,7 @@
 title: path split
 categories: |
   path
-version: 0.104.0
+version: 0.105.0
 path: |
   Split a path into a list based on the system's path separator.
 usage: |
@@ -25,8 +25,8 @@ contributors: false
 
 | input        | output             |
 | ------------ | ------------------ |
-| list\<string\> | list\<list\<string\>\> |
-| string       | list\<string\>       |
+| string       | list&lt;string&gt;       |
+| list&lt;string&gt; | list&lt;list&lt;string&gt;&gt; |
 ## Examples
 
 Split a path into parts

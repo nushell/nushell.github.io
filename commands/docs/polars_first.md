@@ -2,7 +2,7 @@
 title: polars first
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Show only the first number of rows or create a first expression
 usage: |
@@ -34,9 +34,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| expression | expression |
+| dataframe  | dataframe  |
 ## Examples
 
 Return the first row of a dataframe
@@ -65,5 +66,18 @@ Return the first two rows of a dataframe
 Creates a first expression from a column
 ```nu
 > polars col a | polars first
+
+```
+
+Aggregate the first values in the group.
+```nu
+> [[a b c d]; [1 0.5 true Apple] [2 0.5 true Orange] [2 4 true Apple] [3 10 false Apple] [4 13 false Banana] [5 14 true Banana]] | polars into-df -s {a: u8, b: f32, c: bool, d: str} | polars group-by d | polars first | polars sort-by [a] | polars collect
+╭───┬────────┬───┬───────┬───────╮
+│ # │   d    │ a │   b   │   c   │
+├───┼────────┼───┼───────┼───────┤
+│ 0 │ Apple  │ 1 │  0.50 │ true  │
+│ 1 │ Orange │ 2 │  0.50 │ true  │
+│ 2 │ Banana │ 4 │ 13.00 │ false │
+╰───┴────────┴───┴───────┴───────╯
 
 ```

@@ -2,7 +2,7 @@
 title: seq
 categories: |
   generators
-version: 0.104.0
+version: 0.105.0
 generators: |
   Output sequences of numbers.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 
 | input   | output       |
 | ------- | ------------ |
-| nothing | list\<number\> |
+| nothing | list&lt;number&gt; |
 ## Examples
 
 sequence 1 to 10

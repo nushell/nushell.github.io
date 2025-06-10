@@ -2,7 +2,7 @@
 title: path relative-to
 categories: |
   path
-version: 0.104.0
+version: 0.105.0
 path: |
   Express a path as relative to another path.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
 Find a relative path from two absolute paths

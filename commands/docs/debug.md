@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.104.0
+version: 0.105.0
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -30,8 +30,8 @@ contributors: false
 
 | input     | output       |
 | --------- | ------------ |
+| list&lt;any&gt; | list&lt;string&gt; |
 | any       | string       |
-| list\<any\> | list\<string\> |
 ## Examples
 
 Debug print a string
@@ -69,7 +69,8 @@ Debug print an ansi escape encoded string and get the raw value
 
 ## Subcommands:
 
-| name                                               | description                             | type     |
-| -------------------------------------------------- | --------------------------------------- | -------- |
-| [`debug info`](/commands/docs/debug_info.md)       | View process memory info.               | built-in |
-| [`debug profile`](/commands/docs/debug_profile.md) | Profile pipeline elements in a closure. | built-in |
+| name                                               | description                                                   | type     |
+| -------------------------------------------------- | ------------------------------------------------------------- | -------- |
+| [`debug env`](/commands/docs/debug_env.md)         | Show environment variables as external commands would get it. | built-in |
+| [`debug info`](/commands/docs/debug_info.md)       | View process memory info.                                     | built-in |
+| [`debug profile`](/commands/docs/debug_profile.md) | Profile pipeline elements in a closure.                       | built-in |

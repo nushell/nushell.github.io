@@ -2,7 +2,7 @@
 title: history session
 categories: |
   history
-version: 0.104.0
+version: 0.105.0
 history: |
   Get the command history session.
 usage: |

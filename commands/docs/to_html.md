@@ -2,7 +2,7 @@
 title: to html
 categories: |
   formats
-version: 0.104.0
+version: 0.105.0
 formats: |
   Convert table into simple HTML.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
  -  `--no-color, -n`: remove all ansi colors in output
  -  `--dark, -d`: indicate your background color is a darker color
  -  `--partial, -p`: only output the html for the content itself
- -  `--theme, -t {string}`: the name of the theme to use (github, blulocolight, ...)
+ -  `--theme, -t {string}`: the name of the theme to use (github, blulocolight, ...); case-insensitive
  -  `--list, -l`: produce a color table of all available themes
 
 
@@ -34,8 +34,8 @@ contributors: false
 
 | input   | output |
 | ------- | ------ |
-| any     | string |
 | nothing | any    |
+| any     | string |
 ## Examples
 
 Outputs an  HTML string representing the contents of this table

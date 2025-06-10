@@ -2,7 +2,7 @@
 title: math cosh
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns the hyperbolic cosine of the number.
 usage: |
@@ -25,8 +25,8 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Apply the hyperbolic cosine to 1

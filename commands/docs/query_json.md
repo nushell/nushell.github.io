@@ -2,7 +2,7 @@
 title: query json
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   execute json query on json file (open --raw <file> | query json 'query string')
 usage: |
@@ -31,12 +31,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
  -  `query`: json query
 
-
-## Input/output types:
-
-| input | output |
-| ----- | ------ |
-| any   | any    |
 ## Examples
 
 Get a list of children from a json object

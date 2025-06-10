@@ -2,7 +2,7 @@
 title: chunks
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Divide a list, table or binary input into chunks of `chunk_size`.
 usage: |
@@ -29,9 +29,9 @@ contributors: false
 
 | input     | output          |
 | --------- | --------------- |
-| binary    | list\<binary\>    |
-| list\<any\> | list\<list\<any\>\> |
-| table     | list\<table\>     |
+| table     | list&lt;table&gt;     |
+| list&lt;any&gt; | list&lt;list&lt;any&gt;&gt; |
+| binary    | list&lt;binary&gt;    |
 ## Examples
 
 Chunk a list into pairs

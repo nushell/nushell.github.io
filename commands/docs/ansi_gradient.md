@@ -2,7 +2,7 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.104.0
+version: 0.105.0
 platform: |
   Add a color gradient (using ANSI color codes) to the given string.
 usage: |
@@ -36,10 +36,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 draw text in a gradient with foreground start and end colors

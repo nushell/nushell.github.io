@@ -2,7 +2,7 @@
 title: polars count-null
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Counts null values.
 usage: |
@@ -30,9 +30,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Counts null values

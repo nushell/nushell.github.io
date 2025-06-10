@@ -2,7 +2,7 @@
 title: path join
 categories: |
   path
-version: 0.104.0
+version: 0.105.0
 path: |
   Join a structured path or a list of path parts.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | string       |
-| record       | string       |
 | string       | string       |
-| table        | list\<string\> |
+| list&lt;string&gt; | string       |
+| record       | string       |
+| table        | list&lt;string&gt; |
 ## Examples
 
 Append a filename to a path

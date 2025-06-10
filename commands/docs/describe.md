@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.104.0
+version: 0.105.0
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |
@@ -116,7 +116,7 @@ Describe the type of a record in a detailed way
 │               │ │              │ │ detailed_type │ datetime                                                     │ │ │
 │               │ │              │ │ rust_type     │ chrono::datetime::DateTime<chrono::offset::fixed::FixedOffse │ │ │
 │               │ │              │ │               │ t>                                                           │ │ │
-│               │ │              │ │ value         │ 5 years ago                                                  │ │ │
+│               │ │              │ │ value         │ 6 years ago                                                  │ │ │
 │               │ │              │ ╰───────────────┴──────────────────────────────────────────────────────────────╯ │ │
 │               │ │              │ ╭───────────────┬────────────╮                                                   │ │
 │               │ │ my_duration  │ │ type          │ duration   │                                                   │ │

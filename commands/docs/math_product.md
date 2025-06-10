@@ -2,7 +2,7 @@
 title: math product
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns the product of a list of numbers or the products of each column of a table.
 usage: |
@@ -25,10 +25,10 @@ contributors: false
 
 | input        | output |
 | ------------ | ------ |
-| list\<number\> | number |
+| list&lt;number&gt; | number |
 | range        | number |
-| record       | record |
 | table        | record |
+| record       | record |
 ## Examples
 
 Compute the product of a list of numbers

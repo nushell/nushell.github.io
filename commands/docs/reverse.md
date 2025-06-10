@@ -2,7 +2,7 @@
 title: reverse
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Reverses the input list or table.
 usage: |
@@ -25,7 +25,7 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Reverse a list

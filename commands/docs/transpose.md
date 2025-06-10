@@ -2,7 +2,7 @@
 title: transpose
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |
@@ -37,8 +37,8 @@ contributors: false
 
 | input  | output |
 | ------ | ------ |
-| record | table  |
 | table  | any    |
+| record | table  |
 ## Examples
 
 Transposes the table contents with default column names

@@ -2,7 +2,7 @@
 title: uniq-by
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Return the distinct values in the input by the given column(s).
 usage: |
@@ -36,8 +36,8 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
 | table     | table     |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Get rows from table filtered by column uniqueness

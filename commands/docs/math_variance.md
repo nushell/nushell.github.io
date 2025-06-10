@@ -2,7 +2,7 @@
 title: math variance
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns the variance of a list of numbers or of each column in a table.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input        | output |
 | ------------ | ------ |
-| list\<number\> | number |
+| list&lt;number&gt; | number |
 | range        | number |
-| record       | record |
 | table        | record |
+| record       | record |
 ## Examples
 
 Get the variance of a list of numbers

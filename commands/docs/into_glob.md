@@ -2,7 +2,7 @@
 title: into glob
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Convert value to glob.
 usage: |
@@ -30,10 +30,10 @@ contributors: false
 | input        | output     |
 | ------------ | ---------- |
 | glob         | glob       |
-| list\<string\> | list\<glob\> |
-| record       | record     |
 | string       | glob       |
+| list&lt;string&gt; | list&lt;glob&gt; |
 | table        | table      |
+| record       | record     |
 ## Examples
 
 convert string to glob

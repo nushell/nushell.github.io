@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Validate and parse input content.
 usage: |
@@ -34,10 +34,10 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| any       | bool   |
-| list\<any\> | bool   |
 | nothing   | bool   |
 | string    | bool   |
+| list&lt;any&gt; | bool   |
+| any       | bool   |
 ## Examples
 
 Parse a input file as script(Default)

@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.104.0
+version: 0.105.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -33,9 +33,9 @@ contributors: false
 
 | input   | output |
 | ------- | ------ |
-| any     | any    |
 | nothing | any    |
 | string  | any    |
+| any     | any    |
 ## Examples
 
 Open a file, with structure (based on file extension or SQLite database header)
@@ -65,6 +65,17 @@ Open a file, and decode it by the specified encoding
 Create a custom `from` parser to open newline-delimited JSON files with `open`
 ```nu
 > def "from ndjson" [] { from json -o }; open myfile.ndjson
+
+```
+
+Show the extensions for which the `open` command will automatically parse
+```nu
+> scope commands
+    | where name starts-with "from "
+    | insert extension { get name | str replace -r "^from " "" | $"*.($in)" }
+    | select extension name
+    | rename extension command
+
 
 ```
 

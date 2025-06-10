@@ -2,7 +2,7 @@
 title: math round
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns the input number rounded to the specified precision.
 usage: |
@@ -29,9 +29,9 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<number\> | list\<number\> |
 | number       | number       |
-| range        | list\<number\> |
+| list&lt;number&gt; | list&lt;number&gt; |
+| range        | list&lt;number&gt; |
 ## Examples
 
 Apply the round function to a list of numbers

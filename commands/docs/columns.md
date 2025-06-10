@@ -2,7 +2,7 @@
 title: columns
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Given a record or table, produce a list of its columns' names.
 usage: |
@@ -25,8 +25,8 @@ contributors: false
 
 | input  | output       |
 | ------ | ------------ |
-| record | list\<string\> |
-| table  | list\<string\> |
+| table  | list&lt;string&gt; |
+| record | list&lt;string&gt; |
 ## Examples
 
 Get the columns from the record

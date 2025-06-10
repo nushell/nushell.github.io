@@ -2,7 +2,7 @@
 title: du
 categories: |
   filesystem
-version: 0.104.0
+version: 0.105.0
 filesystem: |
   Find disk usage sizes of specified items.
 usage: |

@@ -2,7 +2,7 @@
 title: polars lit
 categories: |
   expression
-version: 0.104.0
+version: 0.105.0
 expression: |
   Creates a literal expression.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input | output     |
+| ----- | ---------- |
+| any   | expression |
 ## Examples
 
 Created a literal expression and converts it to a nu object

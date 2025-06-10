@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.104.0
+version: 0.105.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |
@@ -53,13 +53,13 @@ Get options from example.com, with username and password
 
 ```
 
-Get options from example.com, with custom header
+Get options from example.com, with custom header using a record
 ```nu
-> http options --headers [my-header-key my-header-value] https://www.example.com
+> http options --headers {my-header-key: my-header-value} https://www.example.com
 
 ```
 
-Get options from example.com, with custom headers
+Get options from example.com, with custom headers using a list
 ```nu
 > http options --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 

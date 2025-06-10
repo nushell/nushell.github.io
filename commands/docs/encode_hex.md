@@ -2,7 +2,7 @@
 title: encode hex
 categories: |
   formats
-version: 0.104.0
+version: 0.105.0
 formats: |
   Hex encode a binary value or a string.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input  | output |
 | ------ | ------ |
-| binary | string |
 | string | string |
+| binary | string |
 ## Examples
 
 Encode a binary value

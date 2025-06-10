@@ -2,7 +2,7 @@
 title: math sqrt
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns the square root of the input number.
 usage: |
@@ -25,9 +25,9 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<number\> | list\<float\>  |
 | number       | float        |
-| range        | list\<number\> |
+| list&lt;number&gt; | list&lt;float&gt;  |
+| range        | list&lt;number&gt; |
 ## Examples
 
 Compute the square root of each number in a list

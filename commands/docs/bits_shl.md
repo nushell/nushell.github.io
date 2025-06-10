@@ -2,7 +2,7 @@
 title: bits shl
 categories: |
   bits
-version: 0.104.0
+version: 0.105.0
 bits: |
   Bitwise shift left for ints or binary values.
 usage: |
@@ -34,10 +34,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| binary       | binary       |
 | int          | int          |
-| list\<binary\> | list\<binary\> |
-| list\<int\>    | list\<int\>    |
+| binary       | binary       |
+| list&lt;int&gt;    | list&lt;int&gt;    |
+| list&lt;binary&gt; | list&lt;binary&gt; |
 ## Examples
 
 Shift left a number by 7 bits

@@ -2,7 +2,7 @@
 title: polars replace-time-zone
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Replace the timezone information in a datetime column.
 usage: |
@@ -29,12 +29,12 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Flags
 
- -  `--ambiguous, -a {one_of(string, nothing)}`: Determine how to deal with ambiguous datetimes:
+ -  `--ambiguous, -a {oneof<string, nothing>}`: Determine how to deal with ambiguous datetimes:
                     `raise` (default): raise error
                     `earliest`: use the earliest datetime
                     `latest`: use the latest datetime
                     `null`: set to null
- -  `--nonexistent, -n {one_of(string, nothing)}`: Determine how to deal with non-existent datetimes: raise (default) or null.
+ -  `--nonexistent, -n {oneof<string, nothing>}`: Determine how to deal with non-existent datetimes: raise (default) or null.
 
 ## Parameters
 
@@ -43,9 +43,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| expression | expression |
 ## Examples
 
 Apply timezone to a naive datetime
@@ -71,10 +71,10 @@ Apply timezone with ambiguous datetime
 ╭───┬─────────────╮
 │ # │  datetime   │
 ├───┼─────────────┤
-│ 0 │ in 6 months │
+│ 0 │ in 4 months │
 │ 1 │             │
-│ 2 │ in 6 months │
-│ 3 │ in 6 months │
+│ 2 │ in 4 months │
+│ 3 │ in 4 months │
 ╰───┴─────────────╯
 
 ```
@@ -88,10 +88,10 @@ Apply timezone with nonexistent datetime
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 2 months ago │
+│ 0 │ 3 months ago │
 │ 1 │              │
-│ 2 │ 2 months ago │
-│ 3 │ 2 months ago │
+│ 2 │ 3 months ago │
+│ 3 │ 3 months ago │
 ╰───┴──────────────╯
 
 ```

@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   path
-version: 0.104.0
+version: 0.105.0
 path: |
   Check whether a path exists.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input        | output     |
 | ------------ | ---------- |
-| list\<string\> | list\<bool\> |
 | string       | bool       |
+| list&lt;string&gt; | list&lt;bool&gt; |
 ## Examples
 
 Check if a file exists

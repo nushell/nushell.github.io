@@ -2,7 +2,7 @@
 title: pwd
 categories: |
   default
-version: 0.104.0
+version: 0.105.0
 default: |
   Return the current working directory
 usage: |
@@ -23,10 +23,3 @@ contributors: false
 ## Flags
 
  -  `--physical, -P`: Resolve symbolic links
-
-
-## Input/output types:
-
-| input | output |
-| ----- | ------ |
-| any   | any    |

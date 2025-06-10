@@ -2,7 +2,7 @@
 title: version check
 categories: |
   platform
-version: 0.104.0
+version: 0.105.0
 platform: |
   Checks to see if you have the latest version of nushell.
 usage: |

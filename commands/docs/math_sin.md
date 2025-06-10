@@ -2,7 +2,7 @@
 title: math sin
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns the sine of the number.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Apply the sine to π/2

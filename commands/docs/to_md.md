@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.104.0
+version: 0.105.0
 formats: |
   Convert table into simple Markdown.
 usage: |
@@ -24,6 +24,7 @@ contributors: false
 
  -  `--pretty, -p`: Formats the Markdown table to vertically align items
  -  `--per-element, -e`: treat each row as markdown syntax element
+ -  `--center, -c {list<cell-path>}`: Formats the Markdown table to center given columns
 
 
 ## Input/output types:
@@ -76,4 +77,13 @@ Separate list into markdown tables
 |foo|
 |-|
 |5|
+```
+
+Center a column of a markdown table
+```nu
+> [ {foo: 1, bar: 2} {foo: 3, bar: 4}] | to md --pretty --center [bar]
+| foo | bar |
+| --- |:---:|
+| 1   |  2  |
+| 3   |  4  |
 ```

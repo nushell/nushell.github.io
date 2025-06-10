@@ -2,7 +2,7 @@
 title: math stddev
 categories: |
   math
-version: 0.104.0
+version: 0.105.0
 math: |
   Returns the standard deviation of a list of numbers, or of each column in a table.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input        | output |
 | ------------ | ------ |
-| list\<number\> | number |
+| list&lt;number&gt; | number |
 | range        | number |
-| record       | record |
 | table        | record |
+| record       | record |
 ## Examples
 
 Compute the standard deviation of a list of numbers

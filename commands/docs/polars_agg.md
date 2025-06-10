@@ -2,7 +2,7 @@
 title: polars agg
 categories: |
   lazyframe
-version: 0.104.0
+version: 0.105.0
 lazyframe: |
   Performs a series of aggregations from a group-by.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Group by and perform an aggregation

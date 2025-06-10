@@ -2,7 +2,7 @@
 title: str trim
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Trim whitespace or specific character.
 usage: |
@@ -35,10 +35,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Trim whitespace

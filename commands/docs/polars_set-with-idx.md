@@ -2,7 +2,7 @@
 title: polars set-with-idx
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Sets value in the given index.
 usage: |
@@ -38,9 +38,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Set value in selected rows from series

@@ -2,7 +2,7 @@
 title: into filesize
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Convert value to filesize.
 usage: |
@@ -29,17 +29,17 @@ contributors: false
 
 | input          | output         |
 | -------------- | -------------- |
-| filesize       | filesize       |
 | int            | filesize       |
-| list\<any\>      | list\<filesize\> |
-| list\<filesize\> | list\<filesize\> |
-| list\<int\>      | list\<filesize\> |
-| list\<number\>   | list\<filesize\> |
-| list\<string\>   | list\<filesize\> |
 | number         | filesize       |
-| record         | record         |
 | string         | filesize       |
+| filesize       | filesize       |
 | table          | table          |
+| record         | record         |
+| list&lt;int&gt;      | list&lt;filesize&gt; |
+| list&lt;number&gt;   | list&lt;filesize&gt; |
+| list&lt;string&gt;   | list&lt;filesize&gt; |
+| list&lt;filesize&gt; | list&lt;filesize&gt; |
+| list&lt;any&gt;      | list&lt;filesize&gt; |
 ## Examples
 
 Convert string to filesize in table

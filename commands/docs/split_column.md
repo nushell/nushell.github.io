@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Split a string into multiple columns using a separator.
 usage: |
@@ -36,8 +36,8 @@ contributors: false
 
 | input        | output |
 | ------------ | ------ |
-| list\<string\> | table  |
 | string       | table  |
+| list&lt;string&gt; | table  |
 ## Examples
 
 Split a string into columns by the specified separator

@@ -2,7 +2,7 @@
 title: http put
 categories: |
   network
-version: 0.104.0
+version: 0.105.0
 network: |
   Put a body to a URL.
 usage: |
@@ -58,9 +58,15 @@ Put content to example.com, with username and password
 
 ```
 
-Put content to example.com, with custom header
+Put content to example.com, with custom header using a record
 ```nu
-> http put --headers [my-header-key my-header-value] https://www.example.com
+> http put --headers {my-header-key: my-header-value} https://www.example.com
+
+```
+
+Put content to example.com, with custom header using a list
+```nu
+> http put --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 

@@ -2,7 +2,7 @@
 title: str reverse
 categories: |
   strings
-version: 0.104.0
+version: 0.105.0
 strings: |
   Reverse every string in the pipeline.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Reverse a single string

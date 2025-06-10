@@ -2,7 +2,7 @@
 title: into int
 categories: |
   conversions
-version: 0.104.0
+version: 0.105.0
 conversions: |
   Convert value to integer.
 usage: |
@@ -35,22 +35,22 @@ contributors: false
 
 | input          | output    |
 | -------------- | --------- |
-| binary         | int       |
+| string         | int       |
+| number         | int       |
 | bool           | int       |
 | datetime       | int       |
 | duration       | int       |
 | filesize       | int       |
-| list\<any\>      | list\<int\> |
-| list\<bool\>     | list\<int\> |
-| list\<datetime\> | list\<int\> |
-| list\<duration\> | list\<int\> |
-| list\<filesize\> | list\<int\> |
-| list\<number\>   | list\<int\> |
-| list\<string\>   | list\<int\> |
-| number         | int       |
-| record         | record    |
-| string         | int       |
+| binary         | int       |
 | table          | table     |
+| record         | record    |
+| list&lt;string&gt;   | list&lt;int&gt; |
+| list&lt;number&gt;   | list&lt;int&gt; |
+| list&lt;bool&gt;     | list&lt;int&gt; |
+| list&lt;datetime&gt; | list&lt;int&gt; |
+| list&lt;duration&gt; | list&lt;int&gt; |
+| list&lt;filesize&gt; | list&lt;int&gt; |
+| list&lt;any&gt;      | list&lt;int&gt; |
 ## Examples
 
 Convert string to int in table

@@ -2,7 +2,7 @@
 title: reject
 categories: |
   filters
-version: 0.104.0
+version: 0.105.0
 filters: |
   Remove the given columns or rows from the table. Opposite of `select`.
 usage: |
@@ -33,9 +33,9 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
 | record    | record    |
 | table     | table     |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Reject a column in the `ls` table

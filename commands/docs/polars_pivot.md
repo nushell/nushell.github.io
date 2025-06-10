@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.104.0
+version: 0.105.0
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |
@@ -40,20 +40,20 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Perform a pivot in order to show individuals test score by subject
 ```nu
 > [[name subject date test_1 test_2]; [Cady maths 2025-04-01 98 100] [Cady physics 2025-04-01 99 100] [Karen maths 2025-04-02 61 60] [Karen physics 2025-04-02 58 60]] | polars into-df |  polars pivot --on [subject] --index [name date] --values [test_1]
-╭───┬───────┬─────────────┬───────┬─────────╮
-│ # │ name  │    date     │ maths │ physics │
-├───┼───────┼─────────────┼───────┼─────────┤
-│ 0 │ Cady  │ 4 weeks ago │    98 │      99 │
-│ 1 │ Karen │ 3 weeks ago │    61 │      58 │
-╰───┴───────┴─────────────┴───────┴─────────╯
+╭───┬───────┬──────────────┬───────┬─────────╮
+│ # │ name  │     date     │ maths │ physics │
+├───┼───────┼──────────────┼───────┼─────────┤
+│ 0 │ Cady  │ 2 months ago │    98 │      99 │
+│ 1 │ Karen │ 2 months ago │    61 │      58 │
+╰───┴───────┴──────────────┴───────┴─────────╯
 
 ```
 
