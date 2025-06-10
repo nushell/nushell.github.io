@@ -69,29 +69,6 @@ cat                 rat                 bat
 
 Because we made matching case-insensitive, Nushell will find the substring "a" in all of the completion suggestions. Additionally, because we set `sort: false`, the completions will be left in their original order. This is useful if your completions are already sorted in a particular order unrelated to their text (e.g. by date).
 
-## Another Practical Example - Zoxide Path Completions
-
-[Zoxide](https://github.com/ajeetdsouza/zoxide) allows easily jumping between visited folders in the system. It's possible to autocomplete matching folders with this completer:
-
-```nu
-def "nu-complete zoxide path" [context: string] {
-    let parts = $context | split row " " | skip 1
-    {
-      options: {
-        sort: false,
-        completion_algorithm: prefix,
-        positional: false,
-        case_sensitive: false,
-      },
-      completions: (zoxide query --list --exclude $env.PWD -- ...$parts | lines),
-    }
-  }
-
-def --env --wrapped z [...rest: string@"nu-complete zoxide path"] {
-  __zoxide_z ...$rest
-}
-```
-
 ## Modules and Custom Completions
 
 Since completion commands aren't meant to be called directly, it's common to define them in modules.
