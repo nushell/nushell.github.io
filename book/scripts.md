@@ -62,7 +62,6 @@ For example:
 
 ```nu
 # myscript.nu
-
 def main [x: int] {
   $x + 10
 }
