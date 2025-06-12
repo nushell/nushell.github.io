@@ -112,7 +112,7 @@ use <module> [ <other_definitions> ]
 :::
 
 ::: note
-Additionally, `main` has special behavior if used in a script file, regardless of whether it is exported or not. See the [Scripts](scripts.html#parameterizing-scripts) chapter for more details.
+Additionally, `main` has special behavior if used in a script file, regardless of whether it is exported or not. See the [Scripts](../scripts.html#parameterizing-scripts) chapter for more details.
 :::
 
 ## Module Files
