@@ -195,7 +195,7 @@ In addition to the cell-path literal syntax used above, Nushell also provides se
 - `select` is subtly, but critically, different. It returns the specified **data structure** itself, rather than just its value.
   - Using `select` on a table will return a table of equal or lesser size
   - Using `select` on a list will return a list of equal or lesser size
-  - using `select` on a record will return a record of equal or lesser size
+  - Using `select` on a record will return a record of equal or lesser size
 
 Continuing with the sample table above:
 
