@@ -21,6 +21,7 @@ The options for `$env.config.table.mode` can be listed with `table --list`:
 - `compact`
 - `default`
 - `dots`
+- `double`
 - `heavy`
 - `light`
 - `markdown`
@@ -29,6 +30,7 @@ The options for `$env.config.table.mode` can be listed with `table --list`:
 - `reinforced`
 - `restructured`
 - `rounded`
+- `single`
 - `thin`
 - `with_love`
 
