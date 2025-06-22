@@ -205,7 +205,7 @@ let weight = {alpha: 10, beta: 5, gamma: 3}
 
 In addition to [key closures](#sort-by-key-closure), `sort-by` also supports closures which specify a custom sort order. The `--custom`, or `-c`, flag will tell `sort-by` to interpret closures as custom sort closures. A custom sort closure has two parameters, and returns a boolean. The closure should return `true` if the first parameter comes _before_ the second parameter in the sort order.
 
-For a simple example, we could rewrite a cell path sort as a custom sort. This can be read as "If $a.size is less than $b.size, a should appear before b in the sort order":
+For a simple example, we could rewrite a cell path sort as a custom sort. This can be read as "If `$a.size` is less than `$b.size`, `a` should appear before `b` in the sort order":
 
 ```nu
 ls | sort-by -c {|a, b| $a.size < $b.size }
