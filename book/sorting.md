@@ -100,7 +100,7 @@ $items | sort
 # => ╰───┴─────┴──────────┴───────╯
 ```
 
-In this example, the `id` column for all items is equal. Then, the two items with price `5` are sorted before the item with price `10`. Finally, the `item` with quantity `1` is sorted before the item with quantity `8`.
+In this example, the `id` column for all items is equal. Then, the two items with quantity `5` are sorted before the item with quantity `10`. Finally, the `item` with price `1` is sorted before the item with price `8`.
 
 ## Sorting structured data
 
@@ -354,7 +354,7 @@ $compatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # => ╰───┴──────╯
 $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # => Error: nu::shell::type_mismatch
-# => 
+# =>
 # =>   × Type mismatch during operation.
 # =>    ╭─[entry #26:1:36]
 # =>  1 │ $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
