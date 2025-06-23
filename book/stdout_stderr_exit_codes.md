@@ -20,6 +20,12 @@ Without the pipeline, Nushell will not do any redirection, allowing it to print 
 
 Another common stream that external applications often use to print error messages is stderr. By default, Nushell does not do any redirection of stderr, which means that by default it will print to the screen.
 
+But you can do pass stderr to a command or a file if you want to:
+
+- use `e>|` to pass stderr to next command.
+- use `e> file` to redirect stderr to a file.
+- use `do -i { cmd } | complete` to capture stderr message.
+
 ## Exit Code
 
 Finally, external commands have an "exit code". These codes help give a hint to the caller whether the command ran successfully.
