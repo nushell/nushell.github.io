@@ -395,7 +395,7 @@ parser since they are constructed based on the keybinding definition. For
 example, a `Multiple([])` event is built for you when defining a list of
 records in the keybinding's event. An `Edit([])` event is the same as the
 `edit` type that was mentioned. And the `UntilFound([])` event is the same as
-the `until` type mentioned before.
+the `until` type mentioned later.
 
 ### Edit Type
 
