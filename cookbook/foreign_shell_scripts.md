@@ -115,6 +115,7 @@ def capture-foreign-env [
     | where { |line| $line not-in $env_out.before } # Only get changed lines
     | parse "{key}={value}"
     | transpose --header-row --as-record
+    | if $in == [] { {} } else { $in }
 }
 ```
 
