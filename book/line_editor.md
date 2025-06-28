@@ -798,9 +798,9 @@ values, together with extra information that could be inserted into the buffer.
 
 Let's say we want to create a menu that displays all the variables created
 during your session, we are going to call it `vars_menu`. This menu will use a
-list layout (layout: list). To search for values, we want to use only the things
-that are written after the menu has been activated (only_buffer_difference:
-true).
+list layout (`layout: list`). To search for values, we want to use only the things
+that are written after the menu has been activated
+(`only_buffer_difference: true`).
 
 With that in mind, the desired menu would look like this
 
