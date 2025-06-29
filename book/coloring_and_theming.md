@@ -391,7 +391,7 @@ Here's the current list of flat shapes.
 | `shape_table`                | fg(Color::Blue).bold()                 | \*           |
 | `shape_variable`             | fg(Color::Purple)                      | \*           |
 
-Here's a small example of how to apply color to these items. Anything not overidden will receive its default color.
+Here's a small example of how to apply color to these items. Anything not overridden will receive its default color.
 
 ```nu
 $env.config.color_config.shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
