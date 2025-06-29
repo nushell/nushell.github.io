@@ -324,47 +324,39 @@ This is the current list of primitives. Not all of these are configurable. The c
 Here's a small example of changing some of these values.
 
 ```nu
-let config = {
-    color_config: {
-        separator: purple
-        leading_trailing_space_bg: "#ffffff"
-        header: gb
-        date: wd
-        filesize: c
-        row_index: cb
-        bool: red
-        int: green
-        duration: blue_bold
-        range: purple
-        float: red
-        string: white
-        nothing: red
-        binary: red
-        cellpath: cyan
-        hints: dark_gray
-    }
-}
+$env.config.color_config.separator = purple
+$env.config.color_config.leading_trailing_space_bg = "#ffffff"
+$env.config.color_config.header = gb
+$env.config.color_config.date = wd
+$env.config.color_config.filesize = c
+$env.config.color_config.row_index = cb
+$env.config.color_config.bool = red
+$env.config.color_config.int = green
+$env.config.color_config.duration = blue_bold
+$env.config.color_config.range = purple
+$env.config.color_config.float = red
+$env.config.color_config.string = white
+$env.config.color_config.nothing = red
+$env.config.color_config.binary = red
+$env.config.color_config.cellpath = cyan
+$env.config.color_config.hints = dark_gray
 ```
 
 Here's another small example using multiple color syntaxes with some comments.
 
 ```nu
-let config = {
-    color_config: {
-        separator: "#88b719" # this sets only the foreground color like PR #486
-        leading_trailing_space_bg: white # this sets only the foreground color in the original style
-        header: { # this is like PR #489
-            fg: "#B01455", # note, quotes are required on the values with hex colors
-            bg: "#ffb900", # note, commas are not required, it could also be all on one line
-            attr: bli # note, there are no quotes around this value. it works with or without quotes
-        }
-        date: "#75507B"
-        filesize: "#729fcf"
-        row_index: {
-            # note, that this is another way to set only the foreground, no need to specify bg and attr
-            fg: "#e50914"
-        }
-    }
+$env.config.color_config.separator = "#88b719" # this sets only the foreground color like PR #486
+$env.config.color_config.leading_trailing_space_bg = white # this sets only the foreground color in the original style
+$env.config.color_config.header = { # this is like PR #489
+    fg: "#B01455", # note, quotes are required on the values with hex colors
+    bg: "#ffb900", # note, commas are not required, it could also be all on one line
+    attr: bli # note, there are no quotes around this value. it works with or without quotes
+}
+$env.config.color_config.date = "#75507B"
+$env.config.color_config.filesize = "#729fcf"
+$env.config.color_config.row_index = {
+    # note, that this is another way to set only the foreground, no need to specify bg and attr
+    fg: "#e50914"
 }
 ```
 
@@ -392,6 +384,7 @@ Here's the current list of flat shapes.
 | `shape_literal`              | fg(Color::Blue)                        | \*           |
 | `shape_nothing`              | fg(Color::LightCyan)                   | \*           |
 | `shape_operator`             | fg(Color::Yellow)                      | \*           |
+| `shape_pipe`                 | fg(Color::Purple).bold()               | \*           |
 | `shape_range`                | fg(Color::Yellow).bold()               | \*           |
 | `shape_record`               | fg(Color::Cyan).bold()                 | \*           |
 | `shape_signature`            | fg(Color::Green).bold()                | \*           |
@@ -400,16 +393,12 @@ Here's the current list of flat shapes.
 | `shape_table`                | fg(Color::Blue).bold()                 | \*           |
 | `shape_variable`             | fg(Color::Purple)                      | \*           |
 
-Here's a small example of how to apply color to these items. Anything not specified will receive the default color.
+Here's a small example of how to apply color to these items. Anything not overridden will receive its default color.
 
 ```nu
-$env.config = {
-    color_config: {
-        shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
-        shape_bool: green
-        shape_int: { fg: "#0000ff" attr: b}
-    }
-}
+$env.config.color_config.shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
+$env.config.color_config.shape_bool: green
+$env.config.color_config.shape_int: { fg: "#0000ff" attr: b}
 ```
 
 ## Prompt Configuration and Coloring
@@ -439,10 +428,7 @@ $env.PROMPT_INDICATOR = "> "
 If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
 
 ```nu
-config {
-    render_right_prompt_on_last_line = true
-    ...
-}
+$env.config.render_right_prompt_on_last_line = true
 ```
 
 Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/modules/prompt/oh-my.nu).
@@ -555,44 +541,42 @@ let base16_theme = {
     cellpath: $base08
     hints: dark_gray
 
-    # shape_garbage: { fg: $base07 bg: $base08 attr: b} # base16 white on red
+    # shape_garbage: { fg: $base07 bg: $base08 attr: b } # base16 white on red
     # but i like the regular white on red for parse errors
-    shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
+    shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b }
     shape_bool: $base0d
-    shape_int: { fg: $base0e attr: b}
-    shape_float: { fg: $base0e attr: b}
-    shape_range: { fg: $base0a attr: b}
-    shape_internalcall: { fg: $base0c attr: b}
+    shape_int: { fg: $base0e attr: b }
+    shape_float: { fg: $base0e attr: b }
+    shape_range: { fg: $base0a attr: b }
+    shape_internalcall: { fg: $base0c attr: b }
     shape_external: $base0c
-    shape_externalarg: { fg: $base0b attr: b}
+    shape_externalarg: { fg: $base0b attr: b }
     shape_literal: $base0d
     shape_operator: $base0a
-    shape_signature: { fg: $base0b attr: b}
+    shape_signature: { fg: $base0b attr: b }
     shape_string: $base0b
     shape_filepath: $base0d
-    shape_globpattern: { fg: $base0d attr: b}
+    shape_globpattern: { fg: $base0d attr: b }
     shape_variable: $base0e
-    shape_flag: { fg: $base0d attr: b}
-    shape_custom: {attr: b}
+    shape_flag: { fg: $base0d attr: b }
+    shape_custom: { attr: b }
 }
 
 # now let's apply our regular config settings but also apply the "color_config:" theme that we specified above.
 
-let config = {
-  filesize_metric: true
-  table_mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
-  use_ls_colors: true
-  color_config: $base16_theme # <-- this is the theme
-  use_grid_icons: true
-  footer_mode: always #always, never, number_of_rows, auto
-  animate_prompt: false
-  float_precision: 2
-  use_ansi_coloring: true
-  filesize_format: "b" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
-  edit_mode: emacs # vi
-  max_history_size: 10000
-  log_level: error
-}
+$env.config.animate_prompt: false
+$env.config.color_config: $base16_theme # <-- this is the theme
+$env.config.edit_mode: emacs # vi
+$env.config.filesize_format: "b" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
+$env.config.filesize_metric: true
+$env.config.float_precision: 2
+$env.config.footer_mode: always #always, never, number_of_rows, auto
+$env.config.log_level: error
+$env.config.max_history_size: 10000
+$env.config.table_mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
+$env.config.use_ansi_coloring: true
+$env.config.use_grid_icons: true
+$env.config.use_ls_colors: true
 ```
 
 if you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
