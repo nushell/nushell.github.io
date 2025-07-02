@@ -247,12 +247,12 @@ let cp = $.2
 
 Simple example:
 
-This closure returns a boolean result of the comparison and then uses it in a `filter` command to return all values greater than 5.
+This closure returns a boolean result of the comparison and then uses it in a `where` command to return all values greater than 5.
 
 ```nu
 let compare_closure = {|a| $a > 5 }
 let original_list = [ 40 -4 0 8 12 16 -16 ]
-$original_list | filter $compare_closure
+$original_list | where $compare_closure
 # => ╭───┬────╮
 # => │ 0 │ 40 │
 # => │ 1 │  8 │
