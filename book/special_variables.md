@@ -150,7 +150,7 @@ The `$in` variable represents the pipeline input into an expression. See [Pipeli
 
 ## `$it`
 
-`$it` is a special variable that is _only_ available in a `where` "row condition" — a convenient shorthand which simplifies field access. See `help where` for more information.
+`$it` is a special variable that is _only_ available in a `where` "row condition" — a convenient shorthand which simplifies field access. See `help where` or [where](/commands/docs/where.md) for more information.
 
 ## `$NU_LIB_DIRS`
 
