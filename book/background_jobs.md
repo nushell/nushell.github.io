@@ -100,7 +100,7 @@ An important side effect of this, is that all background jobs will terminate onc
 process exits.
 For this reason, Nushell has no UNIX-like `disown` command to prevent jobs from terminating once the shell exits.
 To account for that, there are plans for a `job dispatch` implementation in the future,
-for spawning independent background processes.
+for spawning independent background processes (see [#15201](https://github.com/nushell/nushell/issues/15193?issue=nushell%7Cnushell%7C15201) for progress).
 
 Additionally, if the user is running an interactive Nushell session and runs
 [`exit`](/commands/docs/exit.md) while there are background jobs running,
