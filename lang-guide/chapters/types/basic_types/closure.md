@@ -87,25 +87,25 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 
 ## Common commands that can be used with a `closure`
 
-- `all`
-- `any`
-- `collect`
-- `do`
-- `each`
-- `explain`
-- `filter`
-- `group-by`
-- `interleave`
-- `items`
-- `par-each`
-- `reduce`
-- `skip until`
-- `skip while`
-- `take until`
-- `tee`
-- `update`
-- `upsert`
-- `zip`
+- [`all`](/commands/docs/all.md)
+- [`any`](/commands/docs/any.md)
+- [`collect`](/commands/docs/collect.md)
+- [`do`](/commands/docs/do`.md)
+- [`each`](/commands/docs/each.md)
+- [`explain`](/commands/docs/explain.md)
+- [`filter`](/commands/docs/filter.md)
+- [`group-by`](/commands/docs/group.md)
+- [`interleave`](/commands/docs/interleave.md)
+- [`items`](/commands/docs/items.md)
+- [`par-each`](/commands/docs/par.md)
+- [`reduce`](/commands/docs/reduce.md)
+- [`skip until`](/commands/docs/skip_until.md)
+- [`skip while`](/commands/docs/skip_while.md)
+- [`take until`](/commands/docs/take_until.md)
+- [`tee`](/commands/docs/tee.md)
+- [`update`](/commands/docs/update.md)
+- [`upsert`](/commands/docs/upsert.md)
+- [`zip`](/commands/docs/zip.md)
 
 ### Examples of using closures
 
