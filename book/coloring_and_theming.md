@@ -588,7 +588,7 @@ If you are working on a light background terminal, you can apply the light theme
 
 ```nu
 # in $nu.config-path
-use config light-theme   # add this line to load the theme into scope
+use std/config light-theme   # add this line to load the theme into scope
 
 $env.config = {
   # ...
@@ -601,7 +601,7 @@ You can also load the dark theme.
 
 ```nu
 # in $nu.config-path
-use config dark-theme
+use std/config dark-theme
 
 $env.config = {
   # ...
