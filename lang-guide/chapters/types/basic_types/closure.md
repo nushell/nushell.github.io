@@ -177,7 +177,7 @@ The `reduce` command processes a list to accumulate a single result. The closure
 [1 2 3 4] | reduce { |accumulator, current_value| $accumulator + $current_value }
 ```
 
-_Explanation:_ This sums the numbers in the list. The closure `{|accumulator, current_value| $accumulator + $current_value}` adds the `current_value` to the `accumulator`. By default, the first item is the initial accumulator, and iteration starts from the second.
+_Explanation:_ This sums the numbers in the list. The closure `{|current_value, accumulator| $accumulator + $current_value}` adds the `current_value` to the `accumulator`. By default, the first item is the initial accumulator, and iteration starts from the second.
 
 **Output:**
 
