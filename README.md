@@ -54,6 +54,14 @@ winget install nushell
 
 After installing, launch Nu by typing `nu`.
 
+## Documentation
+
+* [Getting Started](/book/getting_started.html) guides you through getting familiar with Nushell
+* [Coming to Nu](/book/coming_to_nu.html) describes similarities and differences to other languages and shells
+* [Nu Fundamentals](/book/nu_fundamentals.html) is a more elaborate and structured description of the fundamentals
+* [Programming in Nu](/book/programming_in_nu.html) describes Nu as a programming language
+* [Nu as a Shell](/book/nu_as_a_shell.html) gives you insight into interactive functionality and configurability in a shell environment
+
 ## Community
 
 Join us [on Discord](https://discord.gg/NtAbbGn) if you have any questions about Nu!
