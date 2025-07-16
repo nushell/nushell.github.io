@@ -71,7 +71,15 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 1. You can also use [pipeline input as `$in`](pipelines.html#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
 
    ```nu
-   1..10 | each { print $in }
+   1..5 | each { print $in }
+   # => 1
+   # => 2
+   # => 3
+   # => 4
+   # => 5
+   # => ╭────────────╮
+   # => │ empty list │
+   # => ╰────────────╯
    ```
 
 1. You can also pass closures themselves into a pipeline assuming the next command knows how to consume it. For example, the `do` example can be rewritten as:
