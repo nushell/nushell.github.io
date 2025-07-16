@@ -101,6 +101,37 @@ A list of directories which will be searched when using the `source`, `use`, or 
 - [Module Path](./modules/using_modules.md#module-path)
 - [Configuration - `$NU_LIB_DIRS`](./configuration.md#nu-lib-dirs-constant)
 
+### `$env.NU_LOG_LEVEL`
+
+The [standard library](/book/standard_library.md) offers logging in `std/log`. The `NU_LOG_LEVEL` environment variable is used to define the log level being used for custom commands, modules, and scripts.
+
+```nu
+nu -c '1 | print; use std/log; log debug 1111; 9 | print'
+# => 1
+# => 9
+
+nu -c '1 | print; use std/log; NU_LOG_LEVEL=debug log debug 1111; 9 | print'
+# => 1
+# => 2025-07-12T21:27:30.080|DBG|1111
+# => 9
+
+nu -c '1 | print; use std/log; $env.NU_LOG_LEVEL = "debug"; log debug 1111; 9 | print'
+# => 1
+# => 2025-07-12T21:27:57.888|DBG|1111
+# => 9
+```
+
+Note that `$env.NU_LOG_LEVEL` is different from `nu --log-level`, which sets the log level for built-in native Rust Nushell commands. It does not influence the `std/log` logging used in custom commands and scripts.
+
+```nu
+nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
+# => … a lot more log messages, with references to the Nushell command Rust source files
+#      and without our own `log debug` message
+# => 1
+# => 9
+# => …
+```
+
 ### `$env.NU_PLUGIN_DIRS`
 
 A list of directories which will be searched when registering plugins with `plugin add`. See also:
