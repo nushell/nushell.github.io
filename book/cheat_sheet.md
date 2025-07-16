@@ -1,3 +1,8 @@
+---
+next:
+  text: Nu Fundamentals
+  link: /book/nu_fundamentals.md
+---
 # Nushell Cheat Sheet
 
 ## Data Types

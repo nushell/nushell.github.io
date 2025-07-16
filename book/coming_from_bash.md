@@ -1,3 +1,8 @@
+---
+prev:
+  text: Coming to Nu
+  link: /book/coming_to_nu.md
+---
 # Coming from Bash
 
 ::: tip

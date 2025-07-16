@@ -1,3 +1,11 @@
+---
+prev:
+  text: Background Jobs
+  link: /book/background_jobs.md
+next:
+  text: Coming from Bash
+  link: /book/coming_from_bash.md
+---
 # Coming to Nu
 
 If you are familiar with other shells or programming languages, you might find this chapter useful to get up to speed.
