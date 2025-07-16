@@ -103,7 +103,7 @@ A list of directories which will be searched when using the `source`, `use`, or 
 
 ### `$env.NU_LOG_LEVEL`
 
-The [standard library](/book/standard_library.md) offers logging in `std/log`. The `NU_LOG_LEVEL` environment variable is used to define the log level being used.
+The [standard library](/book/standard_library.md) offers logging in `std/log`. The `NU_LOG_LEVEL` environment variable is used to define the log level being used for custom commands, modules, and scripts.
 
 ```nu
 nu -c '1 | print; use std/log; log debug 1111; 9 | print'
