@@ -121,7 +121,7 @@ nu -c '1 | print; use std/log; $env.NU_LOG_LEVEL = "debug"; log debug 1111; 9 | 
 # => 9
 ```
 
-Note that `$env.NU_LOG_LEVEL` is different from `nu --log-level`, which sets the log level for Nushell commands. It does not influence the `std/log` logging used in custom commands and scripts.
+Note that `$env.NU_LOG_LEVEL` is different from `nu --log-level`, which sets the log level for built-in native Rust Nushell commands. It does not influence the `std/log` logging used in custom commands and scripts.
 
 ```nu
 nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
