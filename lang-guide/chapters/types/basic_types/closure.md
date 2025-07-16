@@ -15,8 +15,8 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 1. A closure can be directly invoked using the [`do`](/commands/docs/do.md) command.
 
    ```nu
-   > do {|a,b| $a + $b } 34 8
-   42
+   do {|a,b| $a + $b } 34 8
+   # => 42
    ```
 
 1. The `|args|` list can also contain 0 arguments (`||`) or more than one argument `|arg1,arg2|`
@@ -35,21 +35,21 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    - However, the closure that is returned has "captured" the value represented by `$greeting` and can still access it later when the closure itself is called.
 
    ```nu
-   > def create_greeter [ greeting: string ]: nothing -> closure {
-       {|name| $"($greeting), ($name)" }
-     }
+   def create_greeter [ greeting: string ]: nothing -> closure {
+     {|name| $"($greeting), ($name)" }
+   }
 
-   > let greet = create_greeter "Hello"
+   let greet = create_greeter "Hello"
    # Invoke the closure with `do`
-   > do $greet Dalija
-   Hello, Dalija
-   > do $greet Ryan
-   Hello, Ryan
+   do $greet Dalija
+   # => Hello, Dalija
+   do $greet Ryan
+   # => Hello, Ryan
 
    # Redefine greet with a new greeting
-   > let greet = create_greeter "Aloha"
-   > do $greet Kai
-   Aloha, Kai
+   let greet = create_greeter "Aloha"
+   do $greet Kai
+   # => Aloha, Kai
    ```
 
    Note that the `create_greeter` only needs to be defined once.
@@ -91,8 +91,8 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 1. You can also pass closures themselves into a pipeline assuming the next command knows how to consume it. For example, the `do` example can be rewritten as:
 
    ```nu
-   > {|a,b| $a + $b} | do $in 34 8
-   43
+   {|a,b| $a + $b} | do $in 34 8
+   # => 43
    ```
 
 1. As seen above, closures can be returned from a custom command. They can also be returned from another closure.
