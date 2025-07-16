@@ -20,6 +20,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    ```
 
 1. The `|args|` list can also contain 0 arguments (`||`) or more than one argument `|arg1,arg2|`
+
 1. When there are 0 arguments, the `||` is optional as long as the closure cannot be mistaken for a record (which also uses the curly-brace style).
 
    - An empty (no-op) closure can be represented as `{||}`
@@ -66,7 +67,20 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    ```
 
 1. You cannot pass a closure to an external command; they are reserved only for Nu usage.
+
 1. As with other types, you can also assign a closure to a variable, and closures can be included as values in a list or record.
+
+   ```nu
+   let c = {|x| $x + 1 }
+   do $c 1
+   # => 2
+   ```
+
+   ```nu
+   let c = [ {|x| $x + 1 } {|x| $x + 2 } ]
+   do $c.1 1
+   # => 3
+   ```
 
 1. You can also use [pipeline input as `$in`](pipelines.html#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
 
@@ -83,7 +97,17 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 
 1. As seen above, closures can be returned from a custom command. They can also be returned from another closure.
 
+   ```nu
+   do {|| {|| 3 }} | do $in
+   # => 3
+   ```
+
 1. As closures are closely related to functions or commands, their parameters can be typed.
+
+   ```nu
+   do {|a:int,b:int| $a + $b } 34 8
+   # => 42
+   ```
 
 ## Common commands that can be used with a `closure`
 
