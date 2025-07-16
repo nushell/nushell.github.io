@@ -20,6 +20,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    ```
 
 1. The `|args|` list can also contain 0 arguments (`||`) or more than one argument `|arg1,arg2|`
+
 1. When there are 0 arguments, the `||` is optional as long as the closure cannot be mistaken for a record (which also uses the curly-brace style).
 
    - An empty (no-op) closure can be represented as `{||}`
@@ -66,6 +67,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    ```
 
 1. You cannot pass a closure to an external command; they are reserved only for Nu usage.
+
 1. As with other types, you can also assign a closure to a variable, and closures can be included as values in a list or record.
 
 1. You can also use [pipeline input as `$in`](pipelines.html#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
