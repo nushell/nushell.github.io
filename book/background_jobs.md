@@ -1,3 +1,8 @@
+---
+next:
+  text: Coming to Nu
+  link: /book/coming_to_nu.md
+---
 # Background Jobs
 
 Nushell currently has experimental support for thread-based background jobs.

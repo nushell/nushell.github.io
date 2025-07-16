@@ -1,3 +1,11 @@
+---
+prev:
+  text: Design Notes
+  link: /book/design_notes.md
+next:
+  text: (Not so) Advanced
+  link: /book/advanced.md
+---
 # How Nushell Code Gets Run
 
 In [Thinking in Nu](./thinking_in_nu.md#think-of-nushell-as-a-compiled-language), we encouraged you to _"Think of Nushell as a compiled language"_ due to the way in which Nushell code is processed. We also covered several code examples that won't work in Nushell due that process.

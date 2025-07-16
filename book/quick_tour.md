@@ -1,3 +1,8 @@
+---
+prev:
+  text: Getting Started
+  link: /book/getting_started.md
+---
 # Quick Tour
 
 [[toc]]

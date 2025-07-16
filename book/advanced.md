@@ -1,3 +1,11 @@
+---
+prev:
+  text: How Nushell Code Gets Run
+  link: /book/how_nushell_code_gets_run.md
+next:
+  text: Standard Library (Preview)
+  link: /book/standard_library.md
+---
 # (Not so) Advanced
 
 While the "Advanced" title might sound daunting and you might be tempted to skip this chapter, in fact, some of the most interesting and powerful features can be found here.

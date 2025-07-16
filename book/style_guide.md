@@ -1,3 +1,8 @@
+---
+next:
+  text: Nu as a Shell
+  link: /book/nu_as_a_shell.md
+---
 # Best Practices
 
 This page is a working document collecting syntax guidelines and best practices we have discovered so far.

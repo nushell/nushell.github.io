@@ -1,3 +1,8 @@
+---
+prev:
+  text: Programming in Nu
+  link: /book/programming_in_nu.md
+---
 # Custom Commands
 
 As with any programming language, you'll quickly want to save longer pipelines and expressions so that you can call them again easily when needed.

@@ -1,3 +1,8 @@
+---
+prev:
+  text: Nu Fundamentals
+  link: /book/nu_fundamentals.md
+---
 # Types of Data
 
 Traditional Unix shell commands communicate with each other using strings of text -- One command writes text to standard output (often abbreviated `stdout`) and the other reads text from standard input (or `stdin`). This allows multiple commands to be combined together to communicate through what is called a "pipeline".

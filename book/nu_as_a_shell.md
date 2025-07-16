@@ -1,3 +1,11 @@
+---
+prev:
+  text: Best Practices
+  link: /book/style_guide.md
+next:
+  text: Configuration
+  link: /book/configuration.md
+---
 # Nu as a Shell
 
 The [Nu Fundamentals](nu_fundamentals.md) and [Programming in Nu](programming_in_nu.md) chapter focused mostly on the language aspects of Nushell.
