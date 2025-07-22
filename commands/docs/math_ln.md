@@ -2,7 +2,7 @@
 title: math ln
 categories: |
   math
-version: 0.105.0
+version: 0.106.0
 math: |
   Returns the natural logarithm. Base: (math e).
 usage: |
@@ -32,5 +32,5 @@ contributors: false
 Get the natural logarithm of e
 ```nu
 > 2.7182818 | math ln | math round --precision 4
-1
+1.0
 ```

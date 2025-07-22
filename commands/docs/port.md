@@ -2,7 +2,7 @@
 title: port
 categories: |
   network
-version: 0.105.0
+version: 0.106.0
 network: |
   Get a free port from system.
 usage: |

@@ -2,7 +2,7 @@
 title: math sin
 categories: |
   math
-version: 0.105.0
+version: 0.106.0
 math: |
   Returns the sine of the number.
 usage: |
@@ -36,7 +36,7 @@ contributors: false
 Apply the sine to π/2
 ```nu
 > 3.141592 / 2 | math sin | math round --precision 4
-1
+1.0
 ```
 
 Apply the sine to a list of angles in degrees

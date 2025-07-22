@@ -2,7 +2,7 @@
 title: sys net
 categories: |
   system
-version: 0.105.0
+version: 0.106.0
 system: |
   View information about the system network interfaces.
 usage: |

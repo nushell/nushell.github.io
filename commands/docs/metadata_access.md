@@ -2,7 +2,7 @@
 title: metadata access
 categories: |
   debug
-version: 0.105.0
+version: 0.106.0
 debug: |
   Access the metadata for the input stream within a closure.
 usage: |
@@ -34,11 +34,9 @@ contributors: false
 
 Access metadata and data from a stream together
 ```nu
-> {foo: bar} | to json --raw | metadata access {|meta| {in: $in, meta: $meta}}
-╭──────┬─────────────────────────────────────╮
-│ in   │ {"foo":"bar"}                       │
-│      │ ╭──────────────┬──────────────────╮ │
-│ meta │ │ content_type │ application/json │ │
-│      │ ╰──────────────┴──────────────────╯ │
-╰──────┴─────────────────────────────────────╯
+> {foo: bar} | to json --raw | metadata access {|meta| {in: $in, content: $meta.content_type}}
+╭─────────┬──────────────────╮
+│ in      │ {"foo":"bar"}    │
+│ content │ application/json │
+╰─────────┴──────────────────╯
 ```

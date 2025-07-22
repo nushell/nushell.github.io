@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.105.0
+version: 0.106.0
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |

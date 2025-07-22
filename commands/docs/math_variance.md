@@ -2,7 +2,7 @@
 title: math variance
 categories: |
   math
-version: 0.105.0
+version: 0.106.0
 math: |
   Returns the variance of a list of numbers or of each column in a table.
 usage: |
@@ -38,7 +38,7 @@ contributors: false
 Get the variance of a list of numbers
 ```nu
 > [1 2 3 4 5] | math variance
-2
+2.0
 ```
 
 Get the sample variance of a list of numbers

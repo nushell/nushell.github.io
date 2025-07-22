@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.105.0
+version: 0.106.0
 platform: |
   Output ANSI codes to change color and style of text.
 usage: |
@@ -44,7 +44,7 @@ Change color to green (see how the next example text will be green!)
 
 ```
 
-Reset the color
+Reset all styles and colors
 ```nu
 > ansi reset
 
@@ -58,13 +58,25 @@ Hello Nu World
 
 The same example as above with short names
 ```nu
-> $'(ansi rb)Hello(ansi reset) (ansi gd)Nu(ansi reset) (ansi pi)World(ansi reset)'
+> $'(ansi rb)Hello(ansi rst) (ansi gd)Nu(ansi rst) (ansi pi)World(ansi rst)'
 Hello Nu World
+```
+
+Avoid resetting color when setting/resetting different style codes
+```nu
+> $'Set color to (ansi g)GREEN then style to (ansi bo)BOLD(ansi rst_bo) or (ansi d)DIMMED(ansi rst_d) or (ansi i)ITALICS(ansi rst_i) or (ansi u)UNDERLINE(ansi rst_u) or (ansi re)REVERSE(ansi rst_re) or (ansi h)HIDDEN(ansi rst_h) or (ansi s)STRIKE(ansi rst_s) then (ansi rst)reset everything'
+Set color to GREEN then style to BOLD or DIMMED or ITALICS or UNDERLINE or REVERSE or HIDDEN or STRIKE then reset everything
 ```
 
 Use escape codes, without the '\x1b['
 ```nu
 > $"(ansi --escape '3;93;41m')Hello(ansi reset)"  # italic bright yellow on red background
+Hello
+```
+
+Use simple hex string
+```nu
+> $"(ansi '#4169E1')Hello(ansi reset)"  # royal blue foreground color
 Hello
 ```
 
@@ -110,21 +122,30 @@ Escape sequences usual values:
 │ 17 │ background │     49 │        │ default │
 ╰────┴────────────┴────────┴────────┴─────────╯
 
-Escape sequences attributes:
-╭───┬────┬──────────────┬──────────────────────────────╮
-│ # │ id │ abbreviation │         description          │
-├───┼────┼──────────────┼──────────────────────────────┤
-│ 0 │  0 │              │ reset / normal display       │
-│ 1 │  1 │ b            │ bold or increased intensity  │
-│ 2 │  2 │ d            │ faint or decreased intensity │
-│ 3 │  3 │ i            │ italic on (non-mono font)    │
-│ 4 │  4 │ u            │ underline on                 │
-│ 5 │  5 │ l            │ slow blink on                │
-│ 6 │  6 │              │ fast blink on                │
-│ 7 │  7 │ r            │ reverse video on             │
-│ 8 │  8 │ h            │ nondisplayed (invisible) on  │
-│ 9 │  9 │ s            │ strike-through on            │
-╰───┴────┴──────────────┴──────────────────────────────╯
+Escape sequences style attributes:
+╭────┬────┬──────────────┬─────────────────────────────────────────╮
+│  # │ id │ abbreviation │         description                     │
+├────┼────┼──────────────┼─────────────────────────────────────────┤
+│  0 │  0 │ rst          │ reset / normal display                  │
+│  1 │  1 │ bo           │ bold on                                 │
+│  2 │  2 │ d            │ dimmed on                               │
+│  3 │  3 │ i            │ italic on (non-mono font)               │
+│  4 │  4 │ u            │ underline on                            │
+│  5 │  5 │ bl           │ blink on                                │
+│  6 │  6 │ bf           │ fast blink on                           │
+│  7 │  7 │ r            │ reverse video on                        │
+│  8 │  8 │ h            │ hidden (invisible) on                   │
+│  9 │  9 │ s            │ strike-through on                       │
+│ 10 │ 21 │ rst_bo       │ bold or dimmed off                      │
+│ 11 │ 22 │ du           │ double underline (not widely supported) │
+│ 12 │ 23 │ rst_i        │ italic off (non-mono font)              │
+│ 13 │ 24 │ rst_u        │ underline off                           │
+│ 14 │ 25 │ rst_bl       │ blink off                               │
+│ 15 │ 26 │              │ <reserved>                              │
+│ 16 │ 27 │ rst_r        │ reverse video off                       │
+│ 17 │ 28 │ rst_h        │ hidden (invisible) off                  │
+│ 18 │ 29 │ rst_s        │ strike-through off                      │
+╰────┴────┴──────────────┴─────────────────────────────────────────╯
 
 Operating system commands:
 ╭───┬─────┬───────────────────────────────────────╮

@@ -2,7 +2,7 @@
 title: math avg
 categories: |
   math
-version: 0.105.0
+version: 0.106.0
 math: |
   Returns the average of a list of numbers.
 usage: |
@@ -39,7 +39,7 @@ contributors: false
 Compute the average of a list of numbers
 ```nu
 > [-50 100.0 25] | math avg
-25
+25.0
 ```
 
 Compute the average of a list of durations

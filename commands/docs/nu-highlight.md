@@ -2,7 +2,7 @@
 title: nu-highlight
 categories: |
   strings
-version: 0.105.0
+version: 0.106.0
 strings: |
   Syntax highlight the input string.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> nu-highlight {flags} ```
+
+## Flags
+
+ -  `--reject-garbage, -r`: Return an error if invalid syntax (garbage) was encountered
 
 
 ## Input/output types:

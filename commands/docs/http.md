@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.105.0
+version: 0.106.0
 network: |
   Various commands for working with http methods.
 usage: |
@@ -18,16 +18,54 @@ contributors: false
 
 ## Signature
 
-```> http {flags} ```
+```> http {flags} (URL) (data)```
+
+## Flags
+
+ -  `--content-type, -t {any}`: the MIME type of content to post
+ -  `--user, -u {any}`: the username when authenticating
+ -  `--password, -p {any}`: the password when authenticating
+ -  `--max-time, -m {duration}`: max duration before timeout occurs
+ -  `--headers, -H {any}`: custom headers you want to add
+ -  `--raw, -r`: fetch contents as text rather than a table
+ -  `--insecure, -k`: allow insecure server connections when using SSL
+ -  `--full, -f`: returns the full response instead of only the body
+ -  `--allow-errors, -e`: do not fail if the server returns an error code
+ -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+
+## Parameters
+
+ -  `URL`: The URL to fetch the contents from.
+ -  `data`: The contents of the post body. Required unless part of a pipeline.
 
 
 ## Input/output types:
 
 | input   | output |
 | ------- | ------ |
-| nothing | string |
+| nothing | any    |
+## Examples
+
+Get content from example.com with default verb
+```nu
+> http https://www.example.com
+
+```
+
+Post content to example.com with default verb
+```nu
+> http https://www.example.com 'body'
+
+```
+
+Get content from example.com with explicit verb
+```nu
+> http get https://www.example.com
+
+```
+
 ## Notes
-You must use one of the following subcommands. Using this command as-is will only produce this help message.
+Without a subcommand but with a URL provided, it performs a GET request by default or a POST request if data is provided. You can use one of the following subcommands. Using this command as-is will only display this help message.
 
 ## Subcommands:
 

@@ -2,7 +2,7 @@
 title: config flatten
 categories: |
   debug
-version: 0.105.0
+version: 0.106.0
 debug: |
   Show the current configuration in a flattened form.
 usage: |

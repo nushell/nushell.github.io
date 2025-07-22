@@ -2,7 +2,7 @@
 title: polars reverse
 categories: |
   dataframe
-version: 0.105.0
+version: 0.106.0
 dataframe: |
   Reverses the LazyFrame
 usage: |

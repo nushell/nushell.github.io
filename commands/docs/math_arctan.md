@@ -2,7 +2,7 @@
 title: math arctan
 categories: |
   math
-version: 0.105.0
+version: 0.106.0
 math: |
   Returns the arctangent of the number.
 usage: |
@@ -42,5 +42,5 @@ Get the arctangent of 1
 Get the arctangent of -1 in degrees
 ```nu
 > -1 | math arctan --degrees
--45
+-45.0
 ```

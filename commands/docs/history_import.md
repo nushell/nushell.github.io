@@ -2,7 +2,7 @@
 title: history import
 categories: |
   history
-version: 0.105.0
+version: 0.106.0
 history: |
   Import command line history.
 usage: |
@@ -45,7 +45,7 @@ Append `foo` to the current history
 
 Append `foo` ran from `/home` to the current history
 ```nu
-> [[ command_line cwd ]; [ foo /home ]] | history import
+> [[ command cwd ]; [ foo /home ]] | history import
 
 ```
 
