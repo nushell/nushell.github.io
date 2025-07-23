@@ -2,7 +2,7 @@
 title: job recv
 categories: |
   experimental
-version: 0.105.0
+version: 0.106.0
 experimental: |
   Read a message from the mailbox.
 usage: |

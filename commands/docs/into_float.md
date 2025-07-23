@@ -2,7 +2,7 @@
 title: into float
 categories: |
   conversions
-version: 0.105.0
+version: 0.106.0
 conversions: |
   Convert data into floating point number.
 usage: |
@@ -68,5 +68,5 @@ Coerce list of ints and floats to float
 Convert boolean to float
 ```nu
 > true | into float
-1
+1.0
 ```

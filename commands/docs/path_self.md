@@ -2,7 +2,7 @@
 title: path self
 categories: |
   path
-version: 0.105.0
+version: 0.106.0
 path: |
   Get the absolute path of the script or module containing this command at parse time.
 usage: |

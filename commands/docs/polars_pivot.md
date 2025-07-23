@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.105.0
+version: 0.106.0
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |
@@ -51,8 +51,8 @@ Perform a pivot in order to show individuals test score by subject
 ╭───┬───────┬──────────────┬───────┬─────────╮
 │ # │ name  │     date     │ maths │ physics │
 ├───┼───────┼──────────────┼───────┼─────────┤
-│ 0 │ Cady  │ 2 months ago │    98 │      99 │
-│ 1 │ Karen │ 2 months ago │    61 │      58 │
+│ 0 │ Cady  │ 3 months ago │    98 │      99 │
+│ 1 │ Karen │ 3 months ago │    61 │      58 │
 ╰───┴───────┴──────────────┴───────┴─────────╯
 
 ```

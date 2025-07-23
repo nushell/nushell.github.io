@@ -2,7 +2,7 @@
 title: select
 categories: |
   filters
-version: 0.105.0
+version: 0.106.0
 filters: |
   Select only these columns or rows from the input. Opposite of `reject`.
 usage: |
@@ -22,7 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional)
+ -  `--optional, -o`: make all cell path members optional (returns `null` for missing values)
+ -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional) (deprecated)
 
 ## Parameters
 

@@ -2,7 +2,7 @@
 title: math arcsinh
 categories: |
   math
-version: 0.105.0
+version: 0.106.0
 math: |
   Returns the inverse of the hyperbolic sine function.
 usage: |
@@ -32,5 +32,5 @@ contributors: false
 Get the arcsinh of 0
 ```nu
 > 0 | math arcsinh
-0
+0.0
 ```

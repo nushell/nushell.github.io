@@ -2,7 +2,7 @@
 title: polars append
 categories: |
   dataframe
-version: 0.105.0
+version: 0.106.0
 dataframe: |
   Appends a new dataframe.
 usage: |

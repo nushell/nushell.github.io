@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.105.0
+version: 0.106.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -71,7 +71,7 @@ A case-insensitive search for files and folders that begin with c
 
 ```
 
-Search for files for folders that do not begin with c, C, b, M, or s
+Search for files or folders that do not begin with c, C, b, M, or s
 ```nu
 > glob "[!cCbMs]*"
 

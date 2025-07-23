@@ -2,7 +2,7 @@
 title: polars drop-nulls
 categories: |
   dataframe
-version: 0.105.0
+version: 0.106.0
 dataframe: |
   Drops null values in dataframe.
 usage: |

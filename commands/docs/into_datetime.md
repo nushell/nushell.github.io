@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.105.0
+version: 0.106.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -93,7 +93,7 @@ Sat, 27 Feb 2021 13:55:40 +0000 (4 years ago)
 Using a record as input
 ```nu
 > {year: 2025, month: 3, day: 30, hour: 12, minute: 15, second: 59, timezone: '+02:00'} | into datetime
-Sun, 30 Mar 2025 10:15:59 +0000 (2 months ago)
+Sun, 30 Mar 2025 10:15:59 +0000 (3 months ago)
 ```
 
 Convert list of timestamps to datetimes

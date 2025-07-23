@@ -2,7 +2,7 @@
 title: math tanh
 categories: |
   math
-version: 0.105.0
+version: 0.106.0
 math: |
   Returns the hyperbolic tangent of the number.
 usage: |
@@ -32,5 +32,5 @@ contributors: false
 Apply the hyperbolic tangent to 10*π
 ```nu
 > 3.141592 * 10 | math tanh | math round --precision 4
-1
+1.0
 ```

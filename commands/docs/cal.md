@@ -2,7 +2,7 @@
 title: cal
 categories: |
   generators
-version: 0.105.0
+version: 0.106.0
 generators: |
   Display a calendar.
 usage: |

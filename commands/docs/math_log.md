@@ -2,7 +2,7 @@
 title: math log
 categories: |
   math
-version: 0.105.0
+version: 0.106.0
 math: |
   Returns the logarithm for an arbitrary base.
 usage: |
@@ -37,7 +37,7 @@ contributors: false
 Get the logarithm of 100 to the base 10
 ```nu
 > 100 | math log 10
-2
+2.0
 ```
 
 Get the log2 of a list of values

@@ -2,7 +2,7 @@
 title: date humanize
 categories: |
   date
-version: 0.105.0
+version: 0.106.0
 date: |
   Print a 'humanized' format for the date, relative to now.
 usage: |

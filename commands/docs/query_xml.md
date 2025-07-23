@@ -2,7 +2,7 @@
 title: query xml
 categories: |
   filters
-version: 0.105.0
+version: 0.106.0
 filters: |
   execute xpath query on xml
 usage: |
@@ -26,6 +26,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 ## Signature
 
 ```> query xml {flags} (query)```
+
+## Flags
+
+ -  `--namespaces, -n {record}`: map of prefixes to namespace URIs
 
 ## Parameters
 

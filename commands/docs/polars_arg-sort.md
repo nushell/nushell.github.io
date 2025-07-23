@@ -2,7 +2,7 @@
 title: polars arg-sort
 categories: |
   dataframe
-version: 0.105.0
+version: 0.106.0
 dataframe: |
   Returns indexes for a sorted series.
 usage: |
@@ -31,6 +31,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
  -  `--reverse, -r`: reverse order
  -  `--nulls-last, -n`: nulls ordered last
+ -  `--limit, -l {int}`: Limit a sort output, this is for optimization purposes and might be ignored.
  -  `--maintain-order, -m`: maintain order on sorted items
 
 
@@ -67,6 +68,18 @@ Returns indexes for a sorted series
 │ 2 │        1 │
 │ 3 │        2 │
 │ 4 │        0 │
+╰───┴──────────╯
+
+```
+
+Returns indexes for a sorted series and applying a limit
+```nu
+> [1 2 2 3 3] | polars into-df | polars arg-sort --limit 2
+╭───┬──────────╮
+│ # │ arg_sort │
+├───┼──────────┤
+│ 0 │        0 │
+│ 1 │        1 │
 ╰───┴──────────╯
 
 ```
