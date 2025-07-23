@@ -153,7 +153,7 @@ In this case, the final expression is the `match` statement which can return:
 
 - `null` if the directory is empty
 - Otherwise, a `record` representing the randomly chosen file
-  :::
+:::
 
 ## Custom Commands and Pipelines
 
@@ -485,7 +485,8 @@ The following [types](./types_of_data.html) can be used for parameter annotation
 - `record`
 - `string`
 - `table`
-  :::
+
+:::
 
 ### Flags
 
@@ -815,7 +816,7 @@ Input-Output signatures allow Nushell to catch two additional categories of erro
   # =>    ╰────
   ```
 
-  :::
+:::
 
 ## Documenting Your Command
 
