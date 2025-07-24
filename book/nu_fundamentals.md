@@ -1,3 +1,11 @@
+---
+prev:
+  text: Nushell Cheat Sheet
+  link: cheat_sheet.md
+next:
+  text: Types of Data
+  link: /book/types_of_data.md
+---
 # Nu Fundamentals
 
 This chapter explains some of the fundamentals of the Nushell programming language.

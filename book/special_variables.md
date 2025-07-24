@@ -1,3 +1,8 @@
+---
+next:
+  text: Programming in Nu
+  link: /book/programming_in_nu.md
+---
 # Special Variables
 
 Nushell makes available and uses a number of special variables and constants. Many of these are mentioned or documented in other places in this Book, but this page

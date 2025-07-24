@@ -1,3 +1,8 @@
+---
+prev:
+  text: (Not so) Advanced
+  link: /book/advanced.md
+---
 # Standard Library (Preview)
 
 Nushell ships with a standard library of useful commands written in native Nu. By default, the standard library is loaded into memory (but not automatically imported) when Nushell starts.

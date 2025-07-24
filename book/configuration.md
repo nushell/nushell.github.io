@@ -1,3 +1,8 @@
+---
+prev:
+  text: Nu as a Shell
+  link: /book/nu_as_a_shell.md
+---
 # Configuration
 
 ## Quickstart
