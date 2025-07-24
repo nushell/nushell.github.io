@@ -1,4 +1,7 @@
 ---
+prev:
+  text: Default Shell
+  link: /book/default_shell.md
 next:
   text: Quick Tour
   link: /book/quick_tour.md

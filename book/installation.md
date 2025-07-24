@@ -1,3 +1,8 @@
+---
+next:
+  text: Default Shell
+  link: /book/default_shell.md
+---
 # Installing Nu
 
 There are lots of ways to get Nu up and running. You can download pre-built binaries from our [release page](https://github.com/nushell/nushell/releases), [use your favourite package manager](https://repology.org/project/nushell/versions), or build from source.
