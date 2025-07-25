@@ -387,7 +387,7 @@ To bring `my-utils` exported environment into scope for the `go.nu` module, ther
 
 1. Import the module in each command where it is needed
 
-   By placing `use my-utils` in the `go home` command itself, its `export-env` will be _evaludated_ when the command is. For example:
+   By placing `use my-utils` in the `go home` command itself, its `export-env` will be _evaluated_ when the command is. For example:
 
    ```nu
    # go.nu
