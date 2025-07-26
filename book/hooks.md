@@ -203,7 +203,7 @@ An example for PWD env change hook:
 
 ```nu
 $env.config = ($env.config | upsert hooks.env_change.PWD {|config|
-    let val = ($config | get -i hooks.env_change.PWD)
+    let val = ($config | get -o hooks.env_change.PWD)
 
     if $val == null {
         $val | append {|before, after| print $"changing directory from ($before) to ($after)" }
@@ -313,7 +313,6 @@ $env.config.hooks.command_not_found = {
   print (command-not-found $command_name | str trim)
 }
 ```
-
 
 ### `command_not_found` Hook in _Windows_
 
