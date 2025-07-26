@@ -30,10 +30,10 @@ For Windows:
 
 - [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
 
-  - Machine scope install: `winget install nushell --scope machine`
+  - Machine scope installation: `winget install nushell --scope machine`
   - Machine scope upgrade: `winget update nushell`
-  - User scope install: `winget install nushell` or `winget install nushell --scope user`
-  - User scope upgrade: Due to [winget-cli issue #3011](https://github.com/microsoft/winget-cli/issues/3011), `winget update nushell` will unexpectedly install the latest version to `C:\Program Files\nu`. The workaround is to run `winget install nushell` again to install the latest version for user scope.
+  - User scope installation: `winget install nushell` or `winget install nushell --scope user`
+  - User scope upgrade: Due to [winget-cli issue #3011](https://github.com/microsoft/winget-cli/issues/3011), running `winget update nushell` will unexpectedly install the latest version to `C:\Program Files\nu`. To work around this, run `winget install nushell` again to install the latest version in the user scope.
 
 - [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
