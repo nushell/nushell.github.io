@@ -49,7 +49,10 @@ $ nix profile install nixpkgs#nushell
 #### Windows:
 
 ```powershell
+# Install to user scope (by default).
 winget install nushell
+# Machine scope installation (Run as admin).
+winget install nushell --scope machine
 ```
 
 After installing, launch Nu by typing `nu`.
