@@ -9,7 +9,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "README.md",
@@ -21,7 +22,8 @@
     "ja": "cfc7b0d@YukiOnodera",
     "es": "-",
     "pt-BR": "-",
-    "ru": "translated by @blezz-tech"
+    "ru": "translated by @blezz-tech",
+    "ko": "Completed"
   },
   {
     "name": "advanced.md",
@@ -33,7 +35,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "aliases.md",
@@ -45,7 +48,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "background_jobs.md",
@@ -57,7 +61,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "cheat_sheet.md",
@@ -69,7 +74,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "coloring_and_theming.md",
@@ -81,7 +87,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "coming_from_bash.md",
@@ -93,7 +100,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "coming_from_cmd.md",
@@ -105,7 +113,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "coming_to_nu.md",
@@ -117,7 +126,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "command_signature.md",
@@ -129,7 +139,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "configuration.md",
@@ -141,7 +152,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "control_flow.md",
@@ -153,7 +165,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "creating_errors.md",
@@ -165,7 +178,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "custom_commands.md",
@@ -177,7 +191,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "custom_completions.md",
@@ -189,7 +204,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "dataframes.md",
@@ -201,7 +217,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "default_shell.md",
@@ -213,7 +230,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "design_notes.md",
@@ -225,7 +243,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "environment.md",
@@ -237,7 +256,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "escaping.md",
@@ -249,7 +269,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "explore.md",
@@ -261,7 +282,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "externs.md",
@@ -273,7 +295,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "getting_started.md",
@@ -285,7 +308,8 @@
     "ja": "cfc7b0d@YukiOnodera",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "hooks.md",
@@ -297,7 +321,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "how_nushell_code_gets_run.md",
@@ -309,7 +334,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "installation.md",
@@ -321,7 +347,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "line_editor.md",
@@ -333,7 +360,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "loading_data.md",
@@ -345,7 +373,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "metadata.md",
@@ -357,7 +386,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "modules.md",
@@ -369,7 +399,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "moving_around.md",
@@ -381,7 +412,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "nu_as_a_shell.md",
@@ -393,7 +425,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "nu_fundamentals.md",
@@ -405,7 +438,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "nushell_map.md",
@@ -417,7 +451,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "nushell_map_functional.md",
@@ -429,7 +464,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "nushell_map_imperative.md",
@@ -441,7 +477,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "nushell_operator_map.md",
@@ -453,7 +490,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "operators.md",
@@ -465,7 +503,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "overlays.md",
@@ -477,7 +516,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "parallelism.md",
@@ -489,7 +529,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "pipelines.md",
@@ -501,7 +542,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "plugins.md",
@@ -513,7 +555,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "programming_in_nu.md",
@@ -525,7 +568,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "quick_tour.md",
@@ -537,7 +581,8 @@
     "ja": "fcf0d7c8@yukitomoda",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "regular_expressions.md",
@@ -549,7 +594,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "scripts.md",
@@ -561,7 +607,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "shells_in_shells.md",
@@ -573,7 +620,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "standard_library.md",
@@ -585,7 +633,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "stdout_stderr_exit_codes.md",
@@ -597,7 +646,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "style_guide.md",
@@ -609,7 +659,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "table_of_contents.md",
@@ -621,7 +672,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "testing.md",
@@ -633,7 +685,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "thinking_in_nu.md",
@@ -645,7 +698,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "types_of_data.md",
@@ -657,7 +711,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "variables.md",
@@ -669,7 +724,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "working_with_lists.md",
@@ -681,7 +737,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "working_with_strings.md",
@@ -693,7 +750,8 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   },
   {
     "name": "working_with_tables.md",
@@ -705,6 +763,7 @@
     "ja": "-",
     "es": "-",
     "pt-BR": "-",
-    "ru": "-"
+    "ru": "-",
+    "ko": "-"
   }
 ]
