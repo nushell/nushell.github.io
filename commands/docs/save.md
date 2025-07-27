@@ -25,6 +25,7 @@ contributors: false
  -  `--stderr, -e {path}`: the filename used to save stderr, only works with `-r` flag
  -  `--raw, -r`: save file as raw binary
  -  `--append, -a`: append input to the end of the file
+ -  `--prepend, -P`: prepend input to the beginning of the file
  -  `--force, -f`: overwrite the destination
  -  `--progress, -p`: enable progress bar
 
@@ -49,6 +50,12 @@ Save a string to foo.txt in the current directory
 Append a string to the end of foo.txt
 ```nu
 > 'append me' | save --append foo.txt
+
+```
+
+Prepend a string to the beginning of foo.txt
+```nu
+> 'prepend me' | save --prepend foo.txt
 
 ```
 
