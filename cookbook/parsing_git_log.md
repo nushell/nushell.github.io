@@ -530,7 +530,7 @@ And there you have it. The top 10 committers and we learned a little bit of pars
 Here's one last little known command. Perhaps you don't want your table numbered starting with 0. Here's a way to change that with the `table` command.
 
 ```nu
-git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10 | table -n 1
+git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime} | group-by name | transpose | upsert column1 {|c| $c.column1 | length} | sort-by column1 | rename name commits | reverse | first 10 | table -i 1
 # => ────┬────────────────────┬─────────
 # =>  #  │        name        │ commits
 # => ────┼────────────────────┼─────────
