@@ -155,8 +155,8 @@ These keybinding events apply only to Vi-normal mode:
 | <kbd>↓</kbd> (Down Arrow)                   | Move down           |
 | <kbd>←</kbd> (Left Arrow)                   | Move left           |
 | <kbd>→</kbd> (Right Arrow)                  | Move right          |
-| <kbd>Ctrl></kbd>+<kbd>→</kbd> (Right Arrow) | Move right one word |
-| <kbd>Ctrl></kbd>+<kbd>←</kbd> (Left Arrow)  | Move left one word  |
+| <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Move right one word |
+| <kbd>Ctrl</kbd>+<kbd>←</kbd> (Left Arrow)  | Move left one word  |
 
 ### Vi-normal Motions
 
