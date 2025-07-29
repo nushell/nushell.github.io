@@ -1,62 +1,61 @@
 ---
 prev:
-  text: Nu as a Shell
+  text: 셸로서의 Nu
   link: /book/nu_as_a_shell.md
 ---
-# Configuration
+# 구성
 
-## Quickstart
+## 빠른 시작
 
-While Nushell provides many options for managing its startup and configuration, new users
-can get started with just a few simple steps:
+누셸은 시작 및 구성을 관리하기 위한 많은 옵션을 제공하지만, 새로운 사용자는 몇 가지 간단한 단계만으로 시작할 수 있습니다.
 
-1. Tell Nushell what editor to use:
+1. 누셸에게 사용할 편집기를 알려줍니다.
 
    ```nu
-   $env.config.buffer_editor = <path_to_your_preferred_editor>
+   $env.config.buffer_editor = <선호하는 편집기 경로>
    ```
 
-   For example:
+   예시:
 
    ```nu
    $env.config.buffer_editor = "code"
-   # or
+   # 또는
    $env.config.buffer_editor = "nano"
-   # or
+   # 또는
    $env.config.buffer_editor = "hx"
-   # or
+   # 또는
    $env.config.buffer_editor = "vi"
-   # with args
+   # 인수가 있는 경우
    $env.config.buffer_editor = ["emacsclient", "-s", "light", "-t"]
-   # etc.
+   # 등
    ```
 
-2. Edit `config.nu` using:
+2. 다음을 사용하여 `config.nu`를 편집합니다.
 
    ```nu
    config nu
    ```
 
-   This will open the current `config.nu` in the editor defined above.
+   그러면 위에서 정의한 편집기에서 현재 `config.nu`가 열립니다.
 
-3. Add commands to this file that should run each time Nushell starts. A good first example might be the `buffer_editor` setting above.
+3. 누셸이 시작될 때마다 실행되어야 하는 명령을 이 파일에 추가합니다. 좋은 첫 번째 예는 위의 `buffer_editor` 설정일 수 있습니다.
 
-   You can find a detailed list of available settings using:
+   다음을 사용하여 사용 가능한 설정의 자세한 목록을 찾을 수 있습니다.
 
    ```nu
     config nu --doc | nu-highlight | less -R
    ```
 
-4. Save, exit the editor, and start a new Nushell session to load these settings.
+4. 설정을 저장하고 편집기를 종료한 다음 새 누셸 세션을 시작하여 이러한 설정을 로드합니다.
 
-That's it! More details are below when you need them ...
+이것이 전부입니다! 필요할 때 더 자세한 내용은 아래에 있습니다...
 
 ---
 
 [[toc]]
 
 ::: tip
-To view a simplified version of this documentation from inside Nushell, run:
+누셸 내에서 이 문서의 단순화된 버전을 보려면 다음을 실행하십시오.
 
 ```nu
 config nu --doc | nu-highlight | less -R
@@ -64,18 +63,18 @@ config nu --doc | nu-highlight | less -R
 
 :::
 
-## Configuration Overview
+## 구성 개요
 
-Nushell uses multiple, optional configuration files. These files are loaded in the following order:
+누셸은 여러 개의 선택적 구성 파일을 사용합니다. 이러한 파일은 다음 순서로 로드됩니다.
 
-1. The first file loaded is `env.nu`, which was historically used to override environment variables. However, the current "best-practice" recommendation is to set all environment variables (and other configuration) using `config.nu` and the autoload directories below.
+1. 로드되는 첫 번째 파일은 `env.nu`이며, 역사적으로 환경 변수를 재정의하는 데 사용되었습니다. 그러나 현재 "모범 사례" 권장 사항은 아래의 자동 로드 디렉터리와 `config.nu`를 사용하여 모든 환경 변수(및 기타 구성)를 설정하는 것입니다.
 
-2. `config.nu` is typically used to override default Nushell settings, define (or import) custom commands, or run any other startup tasks.
-3. `*.nu` files in `$nu.vendor-autoload-dirs` are loaded. These directories are intended for vendors' and package managers' startup files.
-4. `*.nu` files in `$nu.user-autoload-dirs` are loaded. These files may be used for any startup tasks and are a good way to modularize the configuration.
-5. `login.nu` runs commands or handles configuration that should only take place when Nushell is running as a login shell.
+2. `config.nu`는 일반적으로 기본 누셸 설정을 재정의하거나, 사용자 지정 명령을 정의(또는 가져오기)하거나, 다른 시작 작업을 실행하는 데 사용됩니다.
+3. `$nu.vendor-autoload-dirs`의 `*.nu` 파일이 로드됩니다. 이러한 디렉터리는 공급업체 및 패키지 관리자의 시작 파일을 위한 것입니다.
+4. `$nu.user-autoload-dirs`의 `*.nu` 파일이 로드됩니다. 이러한 파일은 모든 시작 작업에 사용할 수 있으며 구성을 모듈화하는 좋은 방법입니다.
+5. `login.nu`는 누셸이 로그인 셸로 실행될 때만 수행되어야 하는 명령을 실행하거나 구성을 처리합니다.
 
-By default, `env.nu`, `config.nu`, and `login.nu` are read from the `$nu.default-config-dir` directory. For example:
+기본적으로 `env.nu`, `config.nu` 및 `login.nu`는 `$nu.default-config-dir` 디렉터리에서 읽습니다. 예시:
 
 ```nu
 $nu.default-config-dir
@@ -87,17 +86,17 @@ $nu.default-config-dir
 # => C:\Users\me\AppData\Roaming\nushell
 ```
 
-The first time Nushell is launched, it will create the configuration directory and an empty (other than comments) `env.nu` and `config.nu`.
+누셸이 처음 시작되면 구성 디렉터리와 비어 있는(주석 제외) `env.nu` 및 `config.nu`를 생성합니다.
 
 ::: tip
-You can quickly open `config.nu` in your default text editor using the `config nu` command. Likewise, the `config env` command will open `env.nu`.
+`config nu` 명령을 사용하여 기본 텍스트 편집기에서 `config.nu`를 빠르게 열 수 있습니다. 마찬가지로 `config env` 명령은 `env.nu`를 엽니다.
 
-This requires that you have configured a default editor using either:
+이를 위해서는 다음 중 하나를 사용하여 기본 편집기를 구성해야 합니다.
 
-- Nushell's `$env.config.buffer_editor` setting
-- The `$env.VISUAL` or `$env.EDITOR` environment variables
+- 누셸의 `$env.config.buffer_editor` 설정
+- `$env.VISUAL` 또는 `$env.EDITOR` 환경 변수
 
-For example, place this in your `config.nu` to edit your files in Visual Studio Code:
+예를 들어, Visual Studio Code에서 파일을 편집하려면 `config.nu`에 다음을 배치하십시오.
 
 ```nu
 $env.config.buffer_editor = 'code'
@@ -105,44 +104,42 @@ $env.config.buffer_editor = 'code'
 
 :::
 
-## Common Configuration Tasks in `config.nu`:
+## `config.nu`의 일반적인 구성 작업:
 
 ::: tip
-Some users will prefer a "monolithic" configuration file with most or all startup tasks in one place. `config.nu` can be used for this purpose.
+일부 사용자는 한 곳에 대부분 또는 모든 시작 작업이 있는 "모놀리식" 구성 파일을 선호합니다. `config.nu`는 이 목적으로 사용할 수 있습니다.
 
-Other users may prefer a "modular" configuration where each file handles a smaller, more focused set of tasks. Files in the autoload dirs can be used to create this experience.
+다른 사용자는 각 파일이 더 작고 집중된 작업 집합을 처리하는 "모듈식" 구성을 선호할 수 있습니다. 자동 로드 디렉터리의 파일은 이러한 경험을 만드는 데 사용할 수 있습니다.
 :::
 
-`config.nu` is commonly used to:
+`config.nu`는 일반적으로 다음을 위해 사용됩니다.
 
-- Set [environment variables](#set-environment-variables) for Nushell and other applications
-- Set Nushell settings in [`$env.config`](#nushell-settings-in-the-envconfig-record)
-- Load modules or source files so that their commands are readily available
-- Run any other applications or commands at startup
+- 누셸 및 기타 응용 프로그램에 대한 [환경 변수 설정](#set-environment-variables)
+- [`$env.config`](#nushell-settings-in-the-envconfig-record)에서 누셸 설정
+- 모듈 또는 소스 파일을 로드하여 해당 명령을 쉽게 사용할 수 있도록 함
+- 시작 시 다른 응용 프로그램이나 명령 실행
 
-## Set Environment Variables
+## 환경 변수 설정
 
-::: tip See Also
-The [Environment](./environment.md) Chapter covers additional information on how to set and access environment variables.
+::: tip 참조
+[환경](./environment.md) 장에서는 환경 변수를 설정하고 액세스하는 방법에 대한 추가 정보를 다룹니다.
 :::
 
-### Path Configuration
+### 경로 구성
 
-As with most shells, Nushell searches the environment variable named `PATH` (or variants).
+대부분의 셸과 마찬가지로 누셸은 `PATH`(또는 변형)라는 환경 변수를 검색합니다.
 
 :::tip
-Unlike some shells, Nushell attempts to be "case agnostic" with environment variables. `Path`, `path`, `PATH`, and even `pAtH` are all allowed variants of the same environment variable. See [Environment - Case Sensitivity](./environment.md#case-sensitivity) for details.
+일부 셸과 달리 누셸은 환경 변수에 대해 "대소문자를 구분하지 않으려고" 합니다. `Path`, `path`, `PATH` 및 `pAtH`는 모두 동일한 환경 변수의 허용되는 변형입니다. 자세한 내용은 [환경 - 대소문자 구분](./environment.md#case-sensitivity)을 참조하십시오.
 :::
 
-When Nushell is launched, it usually inherits the `PATH` as a string. However, Nushell automatically converts this to a Nushell list for easy access. This means that you can _append_ to the path using, for example:
+누셸이 시작되면 일반적으로 `PATH`를 문자열로 상속합니다. 그러나 누셸은 쉽게 액세스할 수 있도록 이를 자동으로 누셸 목록으로 변환합니다. 즉, 예를 들어 다음을 사용하여 경로에 _추가_할 수 있습니다.
 
 ```nu
 $env.path ++= ["~/.local/bin"]
 ```
 
-The Standard Library also includes a helper command. The default `path add` behavior is to _prepend_
-a directory so that it has higher precedence than the rest of the path. For example, the following can be
-added to your startup config:
+표준 라이브러리에는 도우미 명령도 포함되어 있습니다. 기본 `path add` 동작은 경로의 나머지 부분보다 우선 순위가 높도록 디렉터리를 _앞에 추가_하는 것입니다. 예를 들어, 다음을 시작 구성에 추가할 수 있습니다.
 
 ```nu
 use std/util "path add"
@@ -151,69 +148,66 @@ path add ($env.CARGO_HOME | path join "bin")
 ```
 
 ::: tip
-Notice the use of `path join` in the example above. This command properly joins two path
-components regardless of whether or not the path separator is present. See `help path` for
-more commands in this category.
+위 예제에서 `path join`의 사용에 주목하십시오. 이 명령은 경로 구분 기호의 존재 여부에 관계없이 두 경로 구성 요소를 올바르게 결합합니다. 이 범주의 더 많은 명령은 `help path`를 참조하십시오.
 :::
 
-### Prompt Configuration
+### 프롬프트 구성
 
-Nushell provides a number of prompt configuration options. By default, Nushell includes:
+누셸은 여러 프롬프트 구성 옵션을 제공합니다. 기본적으로 누셸에는 다음이 포함됩니다.
 
-- A prompt which includes the current directory, abbreviated using `~` if it is (or is under)
-  the home directory.
-- A prompt indicator which appears immediately to the right of the prompt. This defaults to `> ` when in normal editing mode, or a `: ` when in Vi-insert mode. Note extra space after the character to provide separation of the command from the prompt.
-- A right-prompt with the date and time
-- An indicator which is displayed when the current commandline extends over multiple lines - `::: ` by default
+- 홈 디렉터리인 경우(또는 그 아래에 있는 경우) `~`를 사용하여 축약된 현재 디렉터리를 포함하는 프롬프트.
+- 프롬프트 바로 오른쪽에 나타나는 프롬프트 표시기. 일반 편집 모드에서는 기본적으로 `> `이 되고, Vi 삽입 모드에서는 `: `가 됩니다. 명령과 프롬프트를 구분하기 위해 문자 뒤에 추가 공백을 참고하십시오.
+- 날짜와 시간이 있는 오른쪽 프롬프트
+- 현재 명령줄이 여러 줄에 걸쳐 있을 때 표시되는 표시기 - 기본적으로 `::: `
 
-The environment variables which control these prompt components are:
+이러한 프롬프트 구성 요소를 제어하는 환경 변수는 다음과 같습니다.
 
-- `$env.PROMPT_COMMAND`: The prompt itself
-- `$env.PROMPT_COMMAND_RIGHT`: A prompt which can appear on the right side of the terminal
-- `$env.PROMPT_INDICATOR`: Emacs mode indicator
-- `$env.PROMPT_INDICATOR_VI_NORMAL`: Vi-normal mode indicator
-- `$env.PROMPT_INDICATOR_VI_INSERT`: Vi-insert mode indicator
-- `$env.PROMPT_MULTILINE_INDICATOR`: The multi-line indicator
+- `$env.PROMPT_COMMAND`: 프롬프트 자체
+- `$env.PROMPT_COMMAND_RIGHT`: 터미널 오른쪽에 나타날 수 있는 프롬프트
+- `$env.PROMPT_INDICATOR`: Emacs 모드 표시기
+- `$env.PROMPT_INDICATOR_VI_NORMAL`: Vi-normal 모드 표시기
+- `$env.PROMPT_INDICATOR_VI_INSERT`: Vi-insert 모드 표시기
+- `$env.PROMPT_MULTILINE_INDICATOR`: 여러 줄 표시기
 
-Each of these variables accepts either:
+이러한 각 변수는 다음 중 하나를 허용합니다.
 
-- A string, in which case the component will be statically displayed as that string.
-- A closure (with no parameters), in which case the component will be dynamically displayed based on the closure's code.
-- `null`, in which case the component will revert to its internal default value.
+- 문자열, 이 경우 구성 요소는 해당 문자열로 정적으로 표시됩니다.
+- 클로저(매개변수 없음), 이 경우 구성 요소는 클로저의 코드를 기반으로 동적으로 표시됩니다.
+- `null`, 이 경우 구성 요소는 내부 기본값으로 되돌아갑니다.
 
 ::: tip
-To disable the right-prompt, for instance, add the following to your startup config:
+예를 들어 오른쪽 프롬프트를 비활성화하려면 시작 구성에 다음을 추가하십시오.
 
 ```nu
 $env.PROMPT_COMMAND_RIGHT = ""
-# or
+# 또는
 $env.PROMPT_COMMAND_RIGHT = {||}
 ```
 
 :::
 
-#### Transient Prompts
+#### 임시 프롬프트
 
-Nushell also supports transient prompts, which allow a different prompt to be shown _after_ a commandline has been executed. This can be useful in several situations:
+누셸은 또한 명령줄이 실행된 _후에_ 다른 프롬프트를 표시할 수 있는 임시 프롬프트를 지원합니다. 이는 여러 상황에서 유용할 수 있습니다.
 
-- When using a multi-line prompt, the transient prompt can be a more condensed version.
-- Removing the transient multiline indicator and right-prompt can simplify copying from the terminal.
+- 여러 줄 프롬프트를 사용하는 경우 임시 프롬프트는 더 압축된 버전일 수 있습니다.
+- 임시 여러 줄 표시기와 오른쪽 프롬프트를 제거하면 터미널에서 복사하는 것이 간단해질 수 있습니다.
 
-As with the normal prompt commands above, each transient prompt can accept a (static) string, a (dynamic) closure, or a `null` to use the Nushell internal defaults.
+위의 일반 프롬프트 명령과 마찬가지로 각 임시 프롬프트는 (정적) 문자열, (동적) 클로저 또는 누셸 내부 기본값을 사용하기 위한 `null`을 허용할 수 있습니다.
 
-The environment variables which control the transient prompt components are:
+임시 프롬프트 구성 요소를 제어하는 환경 변수는 다음과 같습니다.
 
-- `$env.TRANSIENT_PROMPT_COMMAND`: The prompt itself after the commandline has been executed
-- `$env.TRANSIENT_PROMPT_COMMAND_RIGHT`: A prompt which can appear on the right side of the terminal
-- `$env.TRANSIENT_PROMPT_INDICATOR`: Emacs mode indicator
-- `$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL`: Vi-normal mode indicator
-- `$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT`: Vi-insert mode indicator
-- `$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR`: The multi-line indicator
+- `$env.TRANSIENT_PROMPT_COMMAND`: 명령줄이 실행된 후의 프롬프트 자체
+- `$env.TRANSIENT_PROMPT_COMMAND_RIGHT`: 터미널 오른쪽에 나타날 수 있는 프롬프트
+- `$env.TRANSIENT_PROMPT_INDICATOR`: Emacs 모드 표시기
+- `$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL`: Vi-normal 모드 표시기
+- `$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT`: Vi-insert 모드 표시기
+- `$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR`: 여러 줄 표시기
 
 ::: tip
-Nushell sets `TRANSIENT_PROMPT_COMMAND_RIGHT` and `TRANSIENT_PROMPT_MULTILINE_INDICATOR` to an empty string (`""`) so that each disappears after the previous command is entered. This simplifies copying and pasting from the terminal.
+누셸은 `TRANSIENT_PROMPT_COMMAND_RIGHT` 및 `TRANSIENT_PROMPT_MULTILINE_INDICATOR`를 빈 문자열(`""`)로 설정하여 이전 명령이 입력된 후 각 항목이 사라지도록 합니다. 이렇게 하면 터미널에서 복사 및 붙여넣기가 간단해집니다.
 
-To disable this feature and always show those items, set:
+이 기능을 비활성화하고 항상 해당 항목을 표시하려면 다음을 설정하십시오.
 
 ```nu
 $env.TRANSIENT_PROMPT_COMMAND_RIGHT = null
@@ -224,30 +218,27 @@ $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = null
 
 ### ENV_CONVERSIONS
 
-Certain variables, such as those containing multiple paths, are often stored as a
-colon-separated string in other shells. Nushell can convert these automatically to a
-more convenient Nushell list. The ENV_CONVERSIONS variable specifies how environment
-variables are:
+여러 경로를 포함하는 변수와 같은 특정 변수는 종종 다른 셸에서 콜론으로 구분된 문자열로 저장됩니다. 누셸은 이를 자동으로 더 편리한 누셸 목록으로 변환할 수 있습니다. ENV_CONVERSIONS 변수는 환경 변수가 다음과 같이 변환되는 방법을 지정합니다.
 
-- converted from a string to a value on Nushell startup (from_string)
-- converted from a value back to a string when running external commands (to_string)
+- 누셸 시작 시 문자열에서 값으로 변환(from_string)
+- 외부 명령을 실행할 때 값에서 문자열로 다시 변환(to_string)
 
-`ENV_CONVERSIONS` is a record, where:
+`ENV_CONVERSIONS`는 레코드이며, 여기서:
 
-- each key is an environment variable to be converted
-- each value is another record containing a:
+- 각 키는 변환할 환경 변수입니다.
+- 각 값은 다음을 포함하는 또 다른 레코드입니다.
   ```nu
   {
-    from_string: <closure>
-    to_string: <closure>
+    from_string: <클로저>
+    to_string: <클로저>
   }
   ```
 
 ::: tip
-As mentioned above, the OS Path variable is automatically converted by Nushell. As a result, it can be treated as a list within your startup config without needing to be present in `ENV_CONVERSIONS`. Other colon-separated paths, like `XDG_DATA_DIRS`, are not automatically converted.
+위에서 언급했듯이 OS 경로 변수는 누셸에 의해 자동으로 변환됩니다. 결과적으로 `ENV_CONVERSIONS`에 있을 필요 없이 시작 구성 내에서 목록으로 처리될 수 있습니다. `XDG_DATA_DIRS`와 같은 다른 콜론으로 구분된 경로는 자동으로 변환되지 않습니다.
 :::
 
-To add an additional conversion, [`merge`](/commands/docs/merge.md) it into the `$env.ENV_CONVERSIONS` record. For example, to add a conversion for the `XDG_DATA_DIRS` variable:
+추가 변환을 추가하려면 `$env.ENV_CONVERSIONS` 레코드에 [`merge`](/commands/docs/merge.md)하십시오. 예를 들어, `XDG_DATA_DIRS` 변수에 대한 변환을 추가하려면 다음을 수행하십시오.
 
 ```nu
 $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
@@ -260,45 +251,45 @@ $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
 
 ### `LS_COLORS`
 
-As with many `ls`-like utilities, Nushell's directory listings make use of the `LS_COLORS` environment variable for defining styles/colors to apply to certain file types and patterns.
+많은 `ls`와 유사한 유틸리티와 마찬가지로 누셸의 디렉터리 목록은 특정 파일 형식 및 패턴에 적용할 스타일/색상을 정의하기 위해 `LS_COLORS` 환경 변수를 사용합니다.
 
-## Nushell Settings in the `$env.config` Record
+## `$env.config` 레코드의 누셸 설정
 
-### Changing Settings in the `$env.config` Record
+### `$env.config` 레코드의 설정 변경
 
-The primary mechanism for changing Nushell's behavior is the `$env.config` record. While this record is accessed as an environment variable, unlike most other variables it is:
+누셸의 동작을 변경하는 주요 메커니즘은 `$env.config` 레코드입니다. 이 레코드는 환경 변수로 액세스되지만 대부분의 다른 변수와 달리 다음과 같습니다.
 
-- Not inherited from the parent process. Instead, it is populated by Nushell itself with certain defaults.
-- Not exported to child processes started by Nushell.
+- 부모 프로세스에서 상속되지 않습니다. 대신 특정 기본값으로 누셸 자체에서 채워집니다.
+- 누셸에서 시작된 자식 프로세스로 내보내지지 않습니다.
 
-To examine the current settings in `$env.config`, just type the variable name:
+`$env.config`의 현재 설정을 검사하려면 변수 이름을 입력하기만 하면 됩니다.
 
 ```nu
 $env.config
 ```
 
 ::: tip
-Since Nushell provides so many customization options, it may be better to send this to a pager like:
+누셸은 많은 사용자 지정 옵션을 제공하므로 다음과 같은 페이저로 보내는 것이 더 좋을 수 있습니다.
 
 ```nu
 $env.config | table -e | less -R
-# or, if bat is installed:
+# 또는 bat가 설치된 경우:
 $env.config | table -e | bat -p
 ```
 
 :::
 
-An appendix documenting each setting will be available soon. In the meantime, abbreviated documentation on each setting can be viewed in Nushell using:
+각 설정을 설명하는 부록이 곧 제공될 예정입니다. 그 동안 각 설정에 대한 약식 문서는 누셸 내에서 다음을 사용하여 볼 수 있습니다.
 
 ```nu
 config nu --doc | nu-highlight | bat
-# or
+# 또는
 config nu --doc | nu-highlight | less -R
 ```
 
-To avoid overwriting existing settings, it's best to simply assign updated values to the desired configuration keys, rather than the entire `config` record. In other words:
+기존 설정을 덮어쓰지 않으려면 전체 `config` 레코드가 아닌 원하는 구성 키에 업데이트된 값을 할당하는 것이 가장 좋습니다. 즉:
 
-::: warning Wrong
+::: warning 잘못됨
 
 ```nu
 $env.config = {
@@ -306,20 +297,19 @@ $env.config = {
 }
 ```
 
-This would reset any _other_ settings that had been changed, since the entire record would be overwritten.
+이렇게 하면 전체 레코드가 덮어쓰여지므로 변경된 _다른_ 설정이 재설정됩니다.
 :::
 
-::: tip Right
+::: tip 올바름
 
 ```nu
 $env.config.show_banner = false
 ```
 
-This changes _only_ the `show_banner` key/value pair, leaving all other keys with their existing values.
+이렇게 하면 `show_banner` 키/값 쌍만 변경되고 다른 모든 키는 기존 값을 유지합니다.
 :::
 
-Certain keys are themselves also records. It's okay to overwrite these records, but it's best-practice
-to set all values when doing so. For example:
+특정 키는 자체적으로 레코드이기도 합니다. 이러한 레코드를 덮어쓰는 것은 괜찮지만 그렇게 할 때 모든 값을 설정하는 것이 모범 사례입니다. 예를 들어:
 
 ```nu
 $env.config.history = {
@@ -330,175 +320,171 @@ $env.config.history = {
 }
 ```
 
-### Remove Welcome Message
+### 환영 메시지 제거
 
 :::note
-This section is linked directly from the banner message, so it repeats some information from above.
+이 섹션은 배너 메시지에서 직접 연결되므로 위의 일부 정보가 반복됩니다.
 :::
 
-To remove the welcome message that displays each time Nushell starts:
+누셸이 시작될 때마다 표시되는 환영 메시지를 제거하려면:
 
-1. Type `config nu` to edit your configuration file.
-2. If you receive an error regarding the editor not being defined:
+1. `config nu`를 입력하여 구성 파일을 편집합니다.
+2. 편집기가 정의되지 않았다는 오류가 발생하면:
 
    ```nu
-   $env.config.buffer_editor = <path to your preferred editor>
-   # Such as:
+   $env.config.buffer_editor = <선호하는 편집기 경로>
+   # 예:
    $env.config.buffer_editor = "code"
    $env.config.buffer_editor = "vi"
-   # Or with editor arguments:
+   # 또는 편집기 인수가 있는 경우:
    $env.config.buffer_editor = ["emacsclient", "-s", "light", "-t"]
    ```
 
-   Then repeat step 1.
+   그런 다음 1단계를 반복합니다.
 
-3. Add the following line to the end of the file:
+3. 파일 끝에 다음 줄을 추가합니다.
 
    ```nu
    $env.config.show_banner = false
    ```
 
-4. Save and exit your editor.
-5. Restart Nushell to test the change.
+4. 편집기를 저장하고 종료합니다.
+5. 누셸을 다시 시작하여 변경 사항을 테스트합니다.
 
-## Additional Startup Configuration
+## 추가 시작 구성
 
-### Changing default directories
+### 기본 디렉터리 변경
 
-::: warning Important
-As discussed below, variables in this section must be set **before** Nushell is launched.
+::: warning 중요
+아래에서 설명하는 것처럼 이 섹션의 변수는 누셸이 시작되기 **전에** 설정해야 합니다.
 :::
 
-Some variables that control Nushell startup file locations must be set **before** Nushell is loaded. This is often done by a parent process such as:
+누셸 시작 파일 위치를 제어하는 일부 변수는 누셸이 로드되기 **전에** 설정해야 합니다. 이는 종종 다음과 같은 부모 프로세스에 의해 수행됩니다.
 
-- The terminal application in which Nushell is run
+- 누셸이 실행되는 터미널 응용 프로그램
 
-- The operating system or window manager. When running Nushell as a login shell, this will likely be the only mechanism available.
+- 운영 체제 또는 창 관리자. 누셸을 로그인 셸로 실행할 때 이것이 유일하게 사용할 수 있는 메커니즘일 것입니다.
 
-  For example, on Windows, you can set environment variables through the Control Panel. Choose the Start Menu and search for _"environment variables"_.
+  예를 들어, Windows에서는 제어판을 통해 환경 변수를 설정할 수 있습니다. 시작 메뉴를 선택하고 _"환경 변수"_를 검색하십시오.
 
-  On Linux systems using PAM, `/etc/environment` (and other system-specific mechanisms) can be used.
+  PAM을 사용하는 Linux 시스템에서는 `/etc/environment`(및 기타 시스템별 메커니즘)를 사용할 수 있습니다.
 
-- A parent shell. For example, exporting the value from `bash` before running `nu`.
+- 부모 셸. 예를 들어 `nu`를 실행하기 전에 `bash`에서 값을 내보냅니다.
 
-### Startup Variables
+### 시작 변수
 
-The variables that affect Nushell file locations are:
+누셸 파일 위치에 영향을 미치는 변수는 다음과 같습니다.
 
-- `$env.XDG_CONFIG_HOME`: If this environment variable is set, it is used to change the directory that Nushell searches for its configuration files such as `env.nu`, `config.nu`, `login.nu`, and the `<config>/autoload` directory. The history and plugin files are also stored in this directory by default.
+- `$env.XDG_CONFIG_HOME`: 이 환경 변수가 설정되면 누셸이 `env.nu`, `config.nu`, `login.nu` 및 `<config>/autoload` 디렉터리와 같은 구성 파일을 검색하는 디렉터리를 변경하는 데 사용됩니다. 기록 및 플러그인 파일도 기본적으로 이 디렉터리에 저장됩니다.
 
-  Once Nushell starts, this value is stored in the `$nu.default-config-dir` constant. See [Using Constants](#using-constants) below.
+  누셸이 시작되면 이 값은 `$nu.default-config-dir` 상수에 저장됩니다. 아래의 [상수 사용](#using-constants)을 참조하십시오.
 
-- `$env.XDG_DATA_HOME`: If this environment variable is set, Nushell sets the `$nu.data-dir` constant to this value. The `data-dir` is used in several startup tasks:
+- `$env.XDG_DATA_HOME`: 이 환경 변수가 설정되면 누셸은 `$nu.data-dir` 상수를 이 값으로 설정합니다. `data-dir`은 여러 시작 작업에서 사용됩니다.
 
-  - `($nu.data-dir)/completions` is added to the `$env.NU_LIB_DIRS` search path.
-  - `($nu.data-dir)/vendor/autoload` is added as the last path in `nu.vendor-autoload-dirs`. Files in this directory will be read after the other vendor-auto-load directories, thus overriding any of their settings.
+  - `($nu.data-dir)/completions`가 `$env.NU_LIB_DIRS` 검색 경로에 추가됩니다.
+  - `($nu.data-dir)/vendor/autoload`가 `nu.vendor-autoload-dirs`의 마지막 경로로 추가됩니다. 이 디렉터리의 파일은 다른 공급업체 자동 로드 디렉터리 다음에 읽혀서 해당 설정을 재정의합니다.
 
-  Note that the directory represented by `$nu.data-dir`, nor any of its subdirectories, are created by default. Creation and use of these directories is up to the user.
+  `$nu.data-dir`으로 표시되는 디렉터리나 하위 디렉터리는 기본적으로 생성되지 않습니다. 이러한 디렉터리의 생성 및 사용은 사용자에게 달려 있습니다.
 
-- `$env.XDG_DATA_DIRS` _(Unix Platforms Only)_: If this environment variable is set, it is used to populate the `$nu.vendor-auto-load` directories in the order listed. The first directory in the list is processed first, meaning the last one read will have the ability to override previous definitions.
+- `$env.XDG_DATA_DIRS` _(Unix 플랫폼만)_: 이 환경 변수가 설정되면 나열된 순서대로 `$nu.vendor-auto-load` 디렉터리를 채우는 데 사용됩니다. 목록의 첫 번째 디렉터리가 먼저 처리되므로 마지막으로 읽은 디렉터리가 이전 정의를 재정의할 수 있습니다.
 
 ::: warning
-The `XDG_*` variables are **not** Nushell-specific and should not be set to a directory with only Nushell files. Instead, set the environment variable to the directory _above_ the one with the `nushell` directory.
+`XDG_*` 변수는 누셸 전용이 **아니며** 누셸 파일만 있는 디렉터리로 설정해서는 안 됩니다. 대신 `nushell` 디렉터리가 있는 디렉터리 _위의_ 디렉터리로 환경 변수를 설정하십시오.
 
-For example, if you set `$env.XDG_CONFIG_HOME` to:
+예를 들어 `$env.XDG_CONFIG_HOME`을 다음으로 설정하면:
 
 ```
 /users/username/dotfiles/nushell
 ```
 
-... Nushell will look for config files in `/Users/username/dotfiles/nushell/nushell`. The proper setting would be:
+... 누셸은 `/Users/username/dotfiles/nushell/nushell`에서 구성 파일을 찾습니다. 올바른 설정은 다음과 같습니다.
 
 ```
 /users/username/dotfiles
 ```
 
-Also keep in mind that if the system has already set `XDG` variables, then there may already be files in use in those directories. Changing the location may require that you move other application's files to the new directory.
+또한 시스템이 이미 `XDG` 변수를 설정한 경우 해당 디렉터리에 이미 사용 중인 파일이 있을 수 있다는 점을 명심하십시오. 위치를 변경하면 다른 응용 프로그램의 파일을 새 디렉터리로 이동해야 할 수 있습니다.
 :::
 
 ::: tip
-You can easily test out config changes in a "fresh" environment using the following recipe. The following is run from inside Nushell, but can be
-adapted to other shells as well:
+다음 레시피를 사용하여 "새로운" 환경에서 구성 변경 사항을 쉽게 테스트할 수 있습니다. 다음은 누셸 내에서 실행되지만 다른 셸에도 적용할 수 있습니다.
 
 ```nu
-# Create an empty temporary directory
+# 빈 임시 디렉터리 만들기
 let temp_home = (mktemp -d)
-# Set the configuration path to this directory
+# 구성 경로를 이 디렉터리로 설정
 $env.XDG_CONFIG_HOME = $temp_home
-# Set the data-dir to this directory
+# 데이터 디렉터리를 이 디렉터리로 설정
 $env.XDG_DATA_HOME = $temp_home
-# Remove other potential autoload directories
+# 다른 잠재적인 자동 로드 디렉터리 제거
 $env.XDG_DATA_HOME = ""
-# Run Nushell in this environment
+# 이 환경에서 누셸 실행
 nu
 
-# Edit config
+# 구성 편집
 config nu
-# Exit the subshell
+# 하위 셸 종료
 exit
-# Run the temporary config
+# 임시 구성 실행
 nu
 ```
 
-When done testing the configuration:
+구성 테스트가 끝나면:
 
 ```nu
-# Remove the temporary config directory, if desired
+# 원하는 경우 임시 구성 디렉터리 제거
 rm $temp_home
 ```
 
-**Important:** Then exit the parent shell so that the `XDG` changes are not accidentally propagated to other processes.
+**중요:** 그런 다음 `XDG` 변경 사항이 다른 프로세스로 우발적으로 전파되지 않도록 부모 셸을 종료합니다.
 :::
 
-### Using Constants
+### 상수 사용
 
-Some important commands, like `source` and `use`, that help define custom commands (and other definitions) are parse-time keywords. Among other things, this means that all arguments must be known at parse-time.
+`source` 및 `use`와 같이 사용자 지정 명령(및 기타 정의)을 정의하는 데 도움이 되는 일부 중요한 명령은 구문 분석 시간 키워드입니다. 무엇보다도 이는 모든 인수가 구문 분석 시간에 알려져야 함을 의미합니다.
 
-In other words, **_variable arguments are not allowed for parser keywords_**.
+즉, **_변수 인수는 구문 분석기 키워드에 허용되지 않습니다_**.
 
-However, Nushell creates some convenience _constants_ that can be used to help identify common file locations. For instance, you can source a file in the default configuration directory using:
+그러나 누셸은 일반적인 파일 위치를 식별하는 데 도움이 되는 몇 가지 편의 _상수_를 만듭니다. 예를 들어 다음을 사용하여 기본 구성 디렉터리에서 파일을 소싱할 수 있습니다.
 
 ```nu
 source ($nu.default-config-dir | path join "myfile.nu")
 ```
 
-Because the constant value is known at parse-time, it can be used with parse-time keywords like `source` and `use`.
+상수 값은 구문 분석 시간에 알려져 있으므로 `source` 및 `use`와 같은 구문 분석 시간 키워드와 함께 사용할 수 있습니다.
 
-:::tip See Also
-See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-constant-evaluation) for more details on this process.
+:::tip 참조
+이 프로세스에 대한 자세한 내용은 [구문 분석 시간 상수 평가](./how_nushell_code_gets_run.md#parse-time-constant-evaluation)를 참조하십시오.
 :::
 
-#### `$nu` Constant
+#### `$nu` 상수
 
-To see a list of the built-in Nushell constants, examine the record constant using `$nu` (including the dollar sign).
+기본 제공 누셸 상수 목록을 보려면 `$nu`(달러 기호 포함)를 사용하여 레코드 상수를 검사하십시오.
 
-#### `NU_LIB_DIRS` Constant
+#### `NU_LIB_DIRS` 상수
 
-Nushell can also make use of a `NU_LIB_DIRS` _constant_ which can act like the `$env.NU_LIB_DIRS` variable mentioned above. However, unlike `$env.NU_LIB_DIRS`, it can be defined _and_ used in `config.nu`. For example:
+누셸은 위에서 언급한 `$env.NU_LIB_DIRS` 변수처럼 작동할 수 있는 `NU_LIB_DIRS` _상수_를 사용할 수도 있습니다. 그러나 `$env.NU_LIB_DIRS`와 달리 `config.nu`에서 정의하고 사용할 수 있습니다. 예를 들어:
 
 ```nu
-# Define module and source search path
+# 모듈 및 소스 검색 경로 정의
 const NU_LIB_DIRS = [
   '~/myscripts'
 ]
-# Load myscript.nu from the ~/myscripts directory
+# ~/myscripts 디렉터리에서 myscript.nu 로드
 source myscript.nu
 ```
 
-If both the variable `$env.NU_LIB_DIRS` and the const `NU_LIB_DIRS` are defined, both sets
-of paths will be searched. The constant `NU_LIB_DIRS` will be searched _first_ and have
-precedence. If a file matching the name is found in one of those directories, the search will
-stop. Otherwise, it will continue into the `$env.NU_LIB_DIRS` search path.
+변수 `$env.NU_LIB_DIRS`와 상수 `NU_LIB_DIRS`가 모두 정의된 경우 두 경로 집합이 모두 검색됩니다. 상수 `NU_LIB_DIRS`가 _먼저_ 검색되고 우선 순위를 갖습니다. 해당 디렉터리 중 하나에서 이름과 일치하는 파일이 발견되면 검색이 중지됩니다. 그렇지 않으면 `$env.NU_LIB_DIRS` 검색 경로로 계속됩니다.
 
-#### `NU_PLUGIN_DIRS` Constant
+#### `NU_PLUGIN_DIRS` 상수
 
-`const NU_PLUGIN_DIRS` works in the same way for the plugin search path.
+`const NU_PLUGIN_DIRS`는 플러그인 검색 경로에 대해 동일한 방식으로 작동합니다.
 
-The following `NU_PLUGIN_DIRS` configuration will allow plugins to be loaded from;
+다음 `NU_PLUGIN_DIRS` 구성을 사용하면 다음에서 플러그인을 로드할 수 있습니다.
 
-- The directory where the `nu` executable is located. This is typically where plugins are located in release packages.
-- A directory in `$nu.data-dirs` named after the version of Nushell running (e.g. `0.100.0`).
-- A `plugins` directory in your `$nu.config-path`.
+- `nu` 실행 파일이 있는 디렉터리. 이것은 일반적으로 릴리스 패키지에 플러그인이 있는 위치입니다.
+- 실행 중인 누셸 버전의 이름을 딴 `$nu.data-dirs`의 디렉터리(예: `0.100.0`).
+- `$nu.config-path`의 `plugins` 디렉터리.
 
 ```nu
 const NU_PLUGIN_DIRS = [
@@ -508,199 +494,198 @@ const NU_PLUGIN_DIRS = [
 ]
 ```
 
-### Colors, Theming, and Syntax Highlighting
+### 색상, 테마 및 구문 강조 표시
 
-You can learn more about setting up colors and theming in the [associated chapter](coloring_and_theming.md).
+[관련 장](coloring_and_theming.md)에서 색상 및 테마 설정에 대해 자세히 알아볼 수 있습니다.
 
-### Configuring Nu as a Login Shell
+### Nu를 로그인 셸로 구성하기
 
-The login shell is often responsible for setting certain environment variables which will be inherited by subshells and other processes. When setting Nushell as a user's default login shell, you'll want to make sure that the `login.nu` handles this task.
+로그인 셸은 종종 하위 셸 및 기타 프로세스에 의해 상속될 특정 환경 변수를 설정하는 역할을 합니다. 누셸을 사용자의 기본 로그인 셸로 설정할 때 `login.nu`가 이 작업을 처리하는지 확인해야 합니다.
 
-Many applications will assume a POSIX or PowerShell login shell, and will either provide instructions for modifying the system or user `profile` that is loaded by POSIX login-shells (or `.ps1` file on PowerShell systems).
+많은 응용 프로그램은 POSIX 또는 PowerShell 로그인 셸을 가정하고 POSIX 로그인 셸(또는 PowerShell 시스템의 `.ps1` 파일)에서 로드되는 시스템 또는 사용자 `profile`을 수정하기 위한 지침을 제공합니다.
 
-As you may have noticed by now, Nushell is not a POSIX shell, nor is it PowerShell, and it won't be able to process a profile written for these. You'll need to set these values in `login.nu` instead.
+지금까지 눈치채셨겠지만, 누셸은 POSIX 셸도 아니고 PowerShell도 아니므로 이러한 셸용으로 작성된 프로필을 처리할 수 없습니다. 대신 `login.nu`에서 이러한 값을 설정해야 합니다.
 
-To find environment variables that may need to be set through `login.nu`, examine the inherited environment from your login shell by running `nu` from within your previous login shell. Run:
+`login.nu`를 통해 설정해야 할 수 있는 환경 변수를 찾으려면 이전 로그인 셸 내에서 `nu`를 실행하여 로그인 셸에서 상속된 환경을 검사하십시오. 다음을 실행하십시오.
 
 ```nu
 $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r.val)'"} | str join (char nl)
 ```
 
-Look for any values that may be needed by third-party applications and copy these to your `login.nu`. Many of these will not be needed. For instance, the `PS1` setting is the current prompt in POSIX shells and won't be useful in Nushell.
+타사 응용 프로그램에 필요할 수 있는 값을 찾아 `login.nu`에 복사하십시오. 이러한 값 중 상당수는 필요하지 않습니다. 예를 들어, `PS1` 설정은 POSIX 셸의 현재 프롬프트이며 누셸에서는 유용하지 않습니다.
 
-When ready, add Nushell to your `/etc/shells` (Unix) and `chsh` as discussed in [the Installation Chapter](./default_shell.md).
+준비가 되면 [설치 장](./default_shell.md)에서 설명한 대로 누셸을 `/etc/shells`(Unix)에 추가하고 `chsh`하십시오.
 
-### macOS: Keeping `/usr/bin/open` as `open`
+### macOS: `/usr/bin/open`을 `open`으로 유지하기
 
-Some tools such as Emacs rely on an [`open`](/commands/docs/open.md) command to open files on Mac.
+Emacs와 같은 일부 도구는 Mac에서 파일을 열기 위해 [`open`](/commands/docs/open.md) 명령에 의존합니다.
 
-Since Nushell has its own [`open`](/commands/docs/open.md) command with a different meaning which shadows (overrides) `/usr/bin/open`, these tools will generate an error when trying to use the command.
+누셸에는 `/usr/bin/open`을 가리는(재정의하는) 다른 의미를 가진 자체 [`open`](/commands/docs/open.md) 명령이 있으므로 이러한 도구는 명령을 사용하려고 할 때 오류를 생성합니다.
 
-One way to work around this is to define a custom command for Nushell's [`open`](/commands/docs/open.md) and create an alias for the system's [`open`](/commands/docs/open.md) in your `config.nu` file like this:
+이 문제를 해결하는 한 가지 방법은 누셸의 [`open`](/commands/docs/open.md)에 대한 사용자 지정 명령을 정의하고 `config.nu` 파일에서 시스템의 [`open`](/commands/docs/open.md)에 대한 별칭을 만드는 것입니다.
 
 ```nu
 alias nu-open = open
 alias open = ^open
 ```
 
-Place this in your `config.nu` to make it permanent.
+영구적으로 만들려면 `config.nu`에 이것을 넣으십시오.
 
-The `^` symbol tells Nushell to run the following command as an _external_ command, rather than as a Nushell built-in. After running these commands, `nu-open` will be the Nushell _internal_ version, and the `open` alias will call the Mac, external `open` instead.
+`^` 기호는 누셸에게 다음 명령을 누셸 내장이 아닌 _외부_ 명령으로 실행하도록 지시합니다. 이러한 명령을 실행한 후 `nu-open`은 누셸 _내부_ 버전이 되고 `open` 별칭은 Mac 외부 `open`을 대신 호출합니다.
 
-For more information, see [Running System (External) Commands](./running_externals.md).
+자세한 내용은 [시스템(외부) 명령 실행](./running_externals.md)을 참조하십시오.
 
-## Detailed Configuration Startup Process
+## 자세한 구성 시작 프로세스
 
-This section contains a more detailed description of how different configuration (and flag) options can be used to
-change Nushell's startup behavior.
+이 섹션에는 다른 구성(및 플래그) 옵션을 사용하여 누셸의 시작 동작을 변경하는 방법에 대한 자세한 설명이 포함되어 있습니다.
 
-### Launch Stages
+### 시작 단계
 
-The following stages and their steps _may_ occur during startup, based on the flags that are passed to `nu`. See [Flag Behavior](#flag-behavior) immediately following this table for how each flag impacts the process:
+`nu`에 전달된 플래그에 따라 다음 단계와 해당 단계가 시작 중에 발생할 _수_ 있습니다. 각 플래그가 프로세스에 미치는 영향은 이 표 바로 다음에 나오는 [플래그 동작](#flag-behavior)을 참조하십시오.
 
-| Step | Stage                           | Nushell Action                                                                                                                                                                                                                                                                                                                                                                 |
-| ---- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 0.   | (misc)                          | Sets internal defaults via its internal Rust implementation. In practice, this may not take place until "first use" of the setting or variable, but there will typically be a Rust default for most (but not all) settings and variables that control Nushell's behavior. These defaults can then be superseded by the steps below.                                            |
-| 1.   | (main)                          | Inherits its initial environment from the calling process. These will initially be converted to Nushell strings, but can be converted to other structures later using `ENV_CONVERSIONS` (see below).                                                                                                                                                                           |
-| 2.   | (main)                          | Gets the configuration directory. This is OS-dependent (see [dirs::config_dir](https://docs.rs/dirs/latest/dirs/fn.config_dir.html)), but can be overridden using `XDG_CONFIG_HOME` on all platforms as discussed [above](#changing-default-directories).                                                                                                                      |
-| 3.   | (main)                          | Creates the initial `$env.NU_LIB_DIRS` variable. By default, it is an empty list.                                                                                                                                                                                                                                                                                              |
-| 4.   | (main)                          | Creates the initial `$NU_LIB_DIRS` variable. By default, it includes (1) the `scripts` directory under the configuration directory, and (2) `nushell/completions` under the default data directory (either `$env.XDG_DATA_HOME` or [the default provided by the dirs crate](https://docs.rs/dirs/latest/dirs/fn.data_dir.html)). These directories are not created by default. |
-| 5.   | (main)                          | Creates the initial `$env.NU_PLUGIN_DIRS` variable. By default, it is an empty list.                                                                                                                                                                                                                                                                                           |
-| 6.   | (main)                          | Creates the initial `$NU_PLUGIN_DIRS` variable. By default, this will include (1) the `plugins` directory under the configuration directory, and (2) the directory where the currently running `nu`/`nu.exe` is located.                                                                                                                                                       |
-| 7.   | (main)                          | Initializes the in-memory SQLite database. This allows the `stor` family of commands to be used in the following configuration files.                                                                                                                                                                                                                                          |
-| 8.   | (main)                          | Processes commandline arguments such as `--plugin-config <file>`, `--plugins <list>`, and others. See `nu --help` for a complete list.                                                                                                                                                                                                                                         |
-| 9.   | (main)                          | Gets the path to `env.nu` and `config.nu`. By default, these are located in the config directory, but either or both can be overridden using the `--env-config <path>` and `--config <path>` flags.                                                                                                                                                                            |
-| 10.  | (main)                          | If the `--include-path (-I)` flag was used, it overrides the default `$env.NU_LIB_DIRS` that was obtained above.                                                                                                                                                                                                                                                               |
-| 11.  | (main)                          | Loads the initial `$env.config` values from the internal defaults.                                                                                                                                                                                                                                                                                                             |
-| 12.  | (main)                          | Converts the search path from the inherited `string` to a Nushell `list`.                                                                                                                                                                                                                                                                                                      |
-| 13.  | (stdlib)                        | Loads the [Standard Library](./standard_library.md) and `std-rfc` into the virtual filesystem. It is not parsed or evaluated at this point.                                                                                                                                                                                                                                    |
-| 14.  | (stdlib)                        | Parses and evaluates `std/prelude`, which brings the `banner` and `pwd` commands into scope.                                                                                                                                                                                                                                                                                   |
-| 15.  | (main)                          | Generates the initial [`$nu` record constant](#using-constants) so that items such as `$nu.default-config-dir` can be used in the following config files.                                                                                                                                                                                                                      |
-| 16.  | (main)                          | Loads any plugins that were specified using the `--plugin` flag.                                                                                                                                                                                                                                                                                                               |
-| 17.  | (repl)                          | Sets several default environment variables that only apply in the REPL (prompt-related and `SHLVL`). Note that prompt-related variables using closures are set in `default_env.nu`.                                                                                                                                                                                            |
-| 18.  | (config files) (plugin)         | Processes the signatures in the user's `plugin.msgpackz` (located in the configuration directory) so that added plugins can be used in the following config files.                                                                                                                                                                                                             |
-| 19.  | (config files)                  | If this is the first time Nushell has been launched, then it creates the configuration directory. "First launch" is determined by whether or not the configuration directory exists.                                                                                                                                                                                           |
-| 20.  | (config files)                  | Also, if this is the first time Nushell has been launched, creates a mostly empty (other than a few comments) `env.nu` and `config .nu` in that directory.                                                                                                                                                                                                                     |
-| 21.  | (config files) (default_env.nu) | Loads default environment variables from the internal `default_env.nu`. This file can be viewed with: `config env --default \| nu-highlight \| less -R`.                                                                                                                                                                                                                    |
-| 22.  | (config files) (env.nu)         | Converts the `PATH` variable into a list so that it can be accessed more easily in the next step.                                                                                                                                                                                                                                                                              |
-| 23.  | (config files) (env.nu)         | Loads (parses and evaluates) the user's `env.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                     |
-| 24.  | (config files) (config.nu)      | Loads a minimal `$env.config` record from the internal `default_config.nu`. This file can be viewed with: `config nu --default \| nu-highlight \| less -R`. Most values that are not defined in `default_config.nu` will be auto-populated into `$env.config` using their internal defaults as well.                                                                        |
-| 25.  | (config files) (config.nu)      | Loads (parses and evaluates) the user's `config.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                  |
-| 26.  | (config files) (login)          | When Nushell is running as a login shell, loads the user's `login.nu`.                                                                                                                                                                                                                                                                                                         |
-| 27.  | (config files)                  | Loops through the vendor autoload directories and loads any `.nu` files found. The directories are processed in the order found in `$nu.vendor-autoload-dirs`, and files in those directories are processed in alphabetical order.                                                                                                                                             |
-| 28.  | (config files)                  | Loops through the user autoload directories and loads any `.nu` files found. The directories are processed in the order found in `$nu.user-autoload-dirs`, and files in those directories are processed in alphabetical order.                                                                                                                                                 |
-| 29.  | (repl) and (stdlib)             | Shows the banner if configured.                                                                                                                                                                                                                                                                                                                                                |
-| 29.  | (repl)                          | Nushell enters the normal commandline (REPL).                                                                                                                                                                                                                                                                                                                                  |
+| 단계 | 단계                           | 누셸 작업                                                                                                                                                                                                                                                                                                                                  |
+| ---- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0.   | (기타)                          | 내부 Rust 구현을 통해 내부 기본값을 설정합니다. 실제로 이는 설정 또는 변수의 "첫 사용"까지 발생하지 않을 수 있지만, 누셸의 동작을 제어하는 대부분(전부는 아님)의 설정 및 변수에 대한 Rust 기본값이 일반적으로 있습니다. 이러한 기본값은 아래 단계로 대체될 수 있습니다.                                            |
+| 1.   | (주요)                          | 호출 프로세스에서 초기 환경을 상속합니다. 처음에는 누셸 문자열로 변환되지만 나중에 `ENV_CONVERSIONS`(아래 참조)를 사용하여 다른 구조로 변환할 수 있습니다.                                                                                                                                                                           |
+| 2.   | (주요)                          | 구성 디렉터리를 가져옵니다. 이는 OS에 따라 다르지만( [dirs::config_dir](https://docs.rs/dirs/latest/dirs/fn.config_dir.html) 참조), 위에서 설명한 대로 모든 플랫폼에서 `XDG_CONFIG_HOME`을 사용하여 재정의할 수 있습니다.                                                                                                                      |
+| 3.   | (주요)                          | 초기 `$env.NU_LIB_DIRS` 변수를 만듭니다. 기본적으로 빈 목록입니다.                                                                                                                                                                                                                                                                                              |
+| 4.   | (주요)                          | 초기 `$NU_LIB_DIRS` 변수를 만듭니다. 기본적으로 (1) 구성 디렉터리 아래의 `scripts` 디렉터리와 (2) 기본 데이터 디렉터리( `$env.XDG_DATA_HOME` 또는 [dirs 크레이트에서 제공하는 기본값](https://docs.rs/dirs/latest/dirs/fn.data_dir.html)) 아래의 `nushell/completions`를 포함합니다. 이러한 디렉터리는 기본적으로 생성되지 않습니다. |
+| 5.   | (주요)                          | 초기 `$env.NU_PLUGIN_DIRS` 변수를 만듭니다. 기본적으로 빈 목록입니다.                                                                                                                                                                                                                                                                                           |
+| 6.   | (주요)                          | 초기 `$NU_PLUGIN_DIRS` 변수를 만듭니다. 기본적으로 (1) 구성 디렉터리 아래의 `plugins` 디렉터리와 (2) 현재 실행 중인 `nu`/`nu.exe`가 있는 디렉터리를 포함합니다.                                                                                                                                                       |
+| 7.   | (주요)                          | 인메모리 SQLite 데이터베이스를 초기화합니다. 이렇게 하면 다음 구성 파일에서 `stor` 계열 명령을 사용할 수 있습니다.                                                                                                                                                                                                                                          |
+| 8.   | (주요)                          | `--plugin-config <file>`, `--plugins <list>` 등과 같은 명령줄 인수를 처리합니다. 전체 목록은 `nu --help`를 참조하십시오.                                                                                                                                                                                                                                         |
+| 9.   | (주요)                          | `env.nu` 및 `config.nu`의 경로를 가져옵니다. 기본적으로 구성 디렉터리에 있지만 `--env-config <path>` 및 `--config <path>` 플래그를 사용하여 둘 중 하나 또는 둘 다를 재정의할 수 있습니다.                                                                                                                                                                            |
+| 10.  | (주요)                          | `--include-path (-I)` 플래그가 사용된 경우 위에서 얻은 기본 `$env.NU_LIB_DIRS`를 재정의합니다.                                                                                                                                                                                                                                                               |
+| 11.  | (주요)                          | 내부 기본값에서 초기 `$env.config` 값을 로드합니다.                                                                                                                                                                                                                                                                                                             |
+| 12.  | (주요)                          | 상속된 `string`에서 검색 경로를 누셸 `list`로 변환합니다.                                                                                                                                                                                                                                                                                                      |
+| 13.  | (stdlib)                        | [표준 라이브러리](./standard_library.md) 및 `std-rfc`를 가상 파일 시스템에 로드합니다. 이 시점에서 구문 분석되거나 평가되지 않습니다.                                                                                                                                                                                                                                    |
+| 14.  | (stdlib)                        | `std/prelude`를 구문 분석하고 평가하여 `banner` 및 `pwd` 명령을 범위로 가져옵니다.                                                                                                                                                                                                                                                                                   |
+| 15.  | (주요)                          | `$nu.default-config-dir`과 같은 항목을 다음 구성 파일에서 사용할 수 있도록 초기 [`$nu` 레코드 상수](#using-constants)를 생성합니다.                                                                                                                                                                                                                      |
+| 16.  | (주요)                          | `--plugin` 플래그를 사용하여 지정된 모든 플러그인을 로드합니다.                                                                                                                                                                                                                                                                                |
+| 17.  | (repl)                          | REPL에만 적용되는 여러 기본 환경 변수(프롬프트 관련 및 `SHLVL`)를 설정합니다. 클로저를 사용하는 프롬프트 관련 변수는 `default_env.nu`에 설정됩니다.                                                                                                                                                                                            |
+| 18.  | (구성 파일) (플러그인)         | 다음 구성 파일에서 추가된 플러그인을 사용할 수 있도록 사용자 `plugin.msgpackz`(구성 디렉터리에 있음)의 서명을 처리합니다.                                                                                                                                                                                                             |
+| 19.  | (구성 파일)                  | 누셸이 처음 시작된 경우 구성 디렉터리를 만듭니다. "첫 시작"은 구성 디렉터리의 존재 여부로 결정됩니다.                                                                                                                                                                                           |
+| 20.  | (구성 파일)                  | 또한 누셸이 처음 시작된 경우 해당 디렉터리에 거의 비어 있는(몇 가지 주석 제외) `env.nu` 및 `config .nu`를 만듭니다.                                                                                                                                                                                                                     |
+| 21.  | (구성 파일) (default_env.nu) | 내부 `default_env.nu`에서 기본 환경 변수를 로드합니다. 이 파일은 `config env --default \| nu-highlight \| less -R`로 볼 수 있습니다.                                                                                                                                                                                                                    |
+| 22.  | (구성 파일) (env.nu)         | `PATH` 변수를 목록으로 변환하여 다음 단계에서 더 쉽게 액세스할 수 있도록 합니다.                                                                                                                                                                                                                                                                              |
+| 23.  | (구성 파일) (env.nu)         | 사용자 `env.nu`(위에서 결정된 경로)를 로드(구문 분석 및 평가)합니다.                                                                                                                                                                                                                                                                                     |
+| 24.  | (구성 파일) (config.nu)      | 내부 `default_config.nu`에서 최소 `$env.config` 레코드를 로드합니다. 이 파일은 `config nu --default \| nu-highlight \| less -R`로 볼 수 있습니다. `default_config.nu`에 정의되지 않은 대부분의 값은 내부 기본값을 사용하여 `$env.config`에 자동으로 채워집니다.                                                                        |
+| 25.  | (구성 파일) (config.nu)      | 사용자 `config.nu`(위에서 결정된 경로)를 로드(구문 분석 및 평가)합니다.                                                                                                                                                                                                                                                                                  |
+| 26.  | (구성 파일) (로그인)          | 누셸이 로그인 셸로 실행될 때 사용자 `login.nu`를 로드합니다.                                                                                                                                                                                                                                                                                                         |
+| 27.  | (구성 파일)                  | 공급업체 자동 로드 디렉터리를 반복하고 발견된 `.nu` 파일을 로드합니다. 디렉터리는 `$nu.vendor-autoload-dirs`에서 찾은 순서대로 처리되고 해당 디렉터리의 파일은 알파벳순으로 처리됩니다.                                                                                                                                             |
+| 28.  | (구성 파일)                  | 사용자 자동 로드 디렉터리를 반복하고 발견된 `.nu` 파일을 로드합니다. 디렉터리는 `$nu.user-autoload-dirs`에서 찾은 순서대로 처리되고 해당 디렉터리의 파일은 알파벳순으로 처리됩니다.                                                                                                                                                 |
+| 29.  | (repl) 및 (stdlib)             | 구성된 경우 배너를 표시합니다.                                                                                                                                                                                                                                                                                                                                                |
+| 29.  | (repl)                          | 누셸이 일반 명령줄(REPL)로 들어갑니다.                                                                                                                                                                                                                                                                                                                                  |
 
-### Flag Behavior
+### 플래그 동작
 
-| Mode                | Command/Flags                              | Behavior                                                                                                                                                                                                                                                                                     |
-| ------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Normal Shell        | `nu` (no flags)                            | All launch steps **_except_** those marked with **_(login)_** occur.                                                                                                                                                                                                                         |
-| Login Shell         | `nu --login/-l`                            | All launch steps occur.                                                                                                                                                                                                                                                                      |
-| Command-string      | `nu --commands <command-string>` (or `-c`) | All Launch stages **_except_** those marked with **_(config files)_** or **_(repl)_** occur. However, **_(default_env)_** and **_(plugin)_** do occur. The first allows the path `ENV_CONVERSIONS` defined there can take place. The second allows plugins to be used in the command-string. |
-| Script file         | `nu <script_file>`                         | Same as with Command-string.                                                                                                                                                                                                                                                                 |
-| No config           | `nu -n`                                    | **_(config files)_** stages do **_not_** occur, regardless of other flags.                                                                                                                                                                                                                   |
-| No Standard Library | `nu --no-std-lib`                          | Regardless of other flags, the steps marked **_(stdlib)_** will **_not_** occur.                                                                                                                                                                                                             |
-| Force config file   | `nu --config <file>`                       | Forces steps marked with **_(config.nu)_** above to run with the provided config `<file>`, unless `-n` was also specified                                                                                                                                                                    |
-| Force env file      | `nu --env-config <file>`                   | Forces steps marked with **_(default_env.nu)_** and **_(env.nu)_** above to run with the specified env `<file>`, unless `-n` was also specified                                                                                                                                              |
+| 모드                | 명령/플래그                              | 동작                                                                                                                                                                                                                                                                                     |
+| ------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 일반 셸        | `nu` (플래그 없음)                            | **_(로그인)_**으로 표시된 단계를 **_제외하고_** 모든 시작 단계가 발생합니다.                                                                                                                                                                                                                         |
+| 로그인 셸         | `nu --login/-l`                            | 모든 시작 단계가 발생합니다.                                                                                                                                                                                                                                                                      |
+| 명령 문자열      | `nu --commands <command-string>` (또는 `-c`) | **_(구성 파일)_** 또는 **_(repl)_**로 표시된 단계를 **_제외하고_** 모든 시작 단계가 발생합니다. 그러나 **_(default_env)_** 및 **_(플러그인)_**은 발생합니다. 첫 번째는 거기에서 정의된 경로 `ENV_CONVERSIONS`가 발생할 수 있도록 합니다. 두 번째는 명령 문자열에서 플러그인을 사용할 수 있도록 합니다. |
+| 스크립트 파일         | `nu <script_file>`                         | 명령 문자열과 동일합니다.                                                                                                                                                                                                                                                                 |
+| 구성 없음           | `nu -n`                                    | 다른 플래그에 관계없이 **_(구성 파일)_** 단계가 발생하지 **_않습니다_**.                                                                                                                                                                                                                   |
+| 표준 라이브러리 없음 | `nu --no-std-lib`                          | 다른 플래그에 관계없이 **_(stdlib)_**로 표시된 단계가 발생하지 **_않습니다_**.                                                                                                                                                                                                             |
+| 구성 파일 강제   | `nu --config <file>`                       | `-n`이 지정되지 않은 경우 위에서 **_(config.nu)_**로 표시된 단계가 제공된 구성 `<file>`으로 실행되도록 강제합니다.                                                                                                                                                                    |
+| env 파일 강제      | `nu --env-config <file>`                   | `-n`이 지정되지 않은 경우 위에서 **_(default_env.nu)_** 및 **_(env.nu)_**로 표시된 단계가 지정된 env `<file>`으로 실행되도록 강제합니다.                                                                                                                                              |
 
-### Scenarios
+### 시나리오
 
 - `nu`:
 
-  - ✅ Makes the Standard Library available
-  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
-  - ✅ Sources the `default_env.nu` file internally
-  - ✅ Sources the user's `env.nu` file if it exists in the config directory
-  - ✅ Sources the `default_config.nu` file internally
-  - ✅ Sources user's `config.nu` file if it exists if it exists in the config directory
-  - ❌ Does not read `personal login.nu` file
-  - ✅ Enters the REPL
+  - ✅ 표준 라이브러리를 사용할 수 있도록 합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `plugin.msgpackz` 파일을 읽습니다.
+  - ✅ 내부적으로 `default_env.nu` 파일을 소싱합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `env.nu` 파일을 소싱합니다.
+  - ✅ 내부적으로 `default_config.nu` 파일을 소싱합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `config.nu` 파일을 소싱합니다.
+  - ❌ `개인 login.nu` 파일을 읽지 않습니다.
+  - ✅ REPL에 들어갑니다.
 
 - `nu -c "ls"`:
 
-  - ✅ Makes the Standard Library available
-  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
-  - ✅ Sources the `default_env.nu` file internally
-  - ❌ Does not source the user's `env.nu`
-  - ❌ Does not read the internal `default_config.nu` file
-  - ❌ Does not read the user's `config.nu` file
-  - ❌ Does not read the user's `login.nu` file
-  - ✅ Runs the `ls` command and exits
-  - ❌ Does not enter the REPL
+  - ✅ 표준 라이브러리를 사용할 수 있도록 합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `plugin.msgpackz` 파일을 읽습니다.
+  - ✅ 내부적으로 `default_env.nu` 파일을 소싱합니다.
+  - ❌ 사용자 `env.nu`를 소싱하지 않습니다.
+  - ❌ 내부 `default_config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `login.nu` 파일을 읽지 않습니다.
+  - ✅ `ls` 명령을 실행하고 종료합니다.
+  - ❌ REPL에 들어가지 않습니다.
 
 - `nu -l -c "ls"`:
 
-  - ✅ Makes the Standard Library available
-  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
-  - ✅ Sources the `default_env.nu` file internally
-  - ✅ Sources the user's `env.nu` file if it exists in the config directory
-  - ✅ Sources the `default_config.nu` file internally
-  - ✅ Sources user's `config.nu` file if it exists in the config directory
-  - ✅ Sources the user's `login.nu` file if it exists in the config directory
-  - ✅ Runs the `ls` command and exits
-  - ❌ Does not enter the REPL
+  - ✅ 표준 라이브러리를 사용할 수 있도록 합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `plugin.msgpackz` 파일을 읽습니다.
+  - ✅ 내부적으로 `default_env.nu` 파일을 소싱합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `env.nu` 파일을 소싱합니다.
+  - ✅ 내부적으로 `default_config.nu` 파일을 소싱합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `config.nu` 파일을 소싱합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `login.nu` 파일을 소싱합니다.
+  - ✅ `ls` 명령을 실행하고 종료합니다.
+  - ❌ REPL에 들어가지 않습니다.
 
 - `nu -l -c "ls" --config foo_config.nu`
 
-  - Same as above, but reads an alternative config file named `foo_config.nu` from the config directory
+  - 위와 동일하지만 구성 디렉터리에서 `foo_config.nu`라는 대체 구성 파일을 읽습니다.
 
 - `nu -n -l -c "ls"`:
 
-  - ✅ Makes the Standard Library available
-  - ❌ Does not read user's `plugin.msgpackz`
-  - ❌ Does not read the internal `default_env.nu`
-  - ❌ Does not source the user's `env.nu`
-  - ❌ Does not read the internal `default_config.nu` file
-  - ❌ Does not read the user's `config.nu` file
-  - ❌ Does not read the user's `login.nu` file
-  - ✅ Runs the `ls` command and exits
-  - ❌ Does not enter the REPL
+  - ✅ 표준 라이브러리를 사용할 수 있도록 합니다.
+  - ❌ 사용자 `plugin.msgpackz`를 읽지 않습니다.
+  - ❌ 내부 `default_env.nu`를 읽지 않습니다.
+  - ❌ 사용자 `env.nu`를 소싱하지 않습니다.
+  - ❌ 내부 `default_config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `login.nu` 파일을 읽지 않습니다.
+  - ✅ `ls` 명령을 실행하고 종료합니다.
+  - ❌ REPL에 들어가지 않습니다.
 
 - `nu test.nu`:
 
-  - ✅ Makes the Standard Library available
-  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
-  - ✅ Sources the `default_env.nu` file internally
-  - ❌ Does not source the user's `env.nu`
-  - ❌ Does not read the internal `default_config.nu` file
-  - ❌ Does not read the user's `config.nu` file
-  - ❌ Does not read the user's `login.nu` file
-  - ✅ Runs `test.nu` file as a script
-  - ❌ Does not enter the REPL
+  - ✅ 표준 라이브러리를 사용할 수 있도록 합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `plugin.msgpackz` 파일을 읽습니다.
+  - ✅ 내부적으로 `default_env.nu` 파일을 소싱합니다.
+  - ❌ 사용자 `env.nu`를 소싱하지 않습니다.
+  - ❌ 내부 `default_config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `login.nu` 파일을 읽지 않습니다.
+  - ✅ `test.nu` 파일을 스크립트로 실행합니다.
+  - ❌ REPL에 들어가지 않습니다.
 
 - `nu --config foo_config.nu test.nu`
 
-  - ✅ Makes the Standard Library available
-  - ✅ Reads user's `plugin.msgpackz` file if it exists in the config directory
-  - ✅ Sources the `default_env.nu` file internally
-  - ❌ Does not source the user's `env.nu` (no `--env-config` was specified)
-  - ✅ Sources the `default_config.nu` file internally. Note that `default_config.nu` is always handled before a user's config
-  - ✅ Sources user's `config.nu` file if it exists in the config directory
-  - ❌ Does not read the user's `login.nu` file
-  - ✅ Runs `test.nu` file as a script
-  - ❌ Does not enter the REPL
+  - ✅ 표준 라이브러리를 사용할 수 있도록 합니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `plugin.msgpackz` 파일을 읽습니다.
+  - ✅ 내부적으로 `default_env.nu` 파일을 소싱합니다.
+  - ❌ 사용자 `env.nu`를 소싱하지 않습니다(`--env-config`가 지정되지 않았습니다).
+  - ✅ 내부적으로 `default_config.nu` 파일을 소싱합니다. `default_config.nu`는 항상 사용자 구성 전에 처리됩니다.
+  - ✅ 구성 디렉터리에 있는 경우 사용자 `config.nu` 파일을 소싱합니다.
+  - ❌ 사용자 `login.nu` 파일을 읽지 않습니다.
+  - ✅ `test.nu` 파일을 스크립트로 실행합니다.
+  - ❌ REPL에 들어가지 않습니다.
 
-- `nu -n --no-std-lib` (fastest REPL startup):
+- `nu -n --no-std-lib` (가장 빠른 REPL 시작):
 
-  - ❌ Does not make the Standard Library available
-  - ❌ Does not read user's `plugin.msgpackz`
-  - ❌ Does not read the internal `default_env.nu`
-  - ❌ Does not source the user's `env.nu`
-  - ❌ Does not read the internal `default_config.nu` file
-  - ❌ Does not read the user's `config.nu` file
-  - ❌ Does not read the user's `login.nu` file
-  - ✅ Enters the REPL
+  - ❌ 표준 라이브러리를 사용할 수 없도록 합니다.
+  - ❌ 사용자 `plugin.msgpackz`를 읽지 않습니다.
+  - ❌ 내부 `default_env.nu`를 읽지 않습니다.
+  - ❌ 사용자 `env.nu`를 소싱하지 않습니다.
+  - ❌ 내부 `default_config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `login.nu` 파일을 읽지 않습니다.
+  - ✅ REPL에 들어갑니다.
 
-- `nu -n --no-std-lib -c "ls"` (fastest command-string invocation):
+- `nu -n --no-std-lib -c "ls"` (가장 빠른 명령 문자열 호출):
 
-  - ❌ Does not make the Standard Library available
-  - ❌ Does not read user's `plugin.msgpackz`
-  - ❌ Does not read the internal `default_env.nu`
-  - ❌ Does not source the user's `env.nu`
-  - ❌ Does not read the internal `default_config.nu` file
-  - ❌ Does not read the user's `config.nu` file
-  - ❌ Does not read the user's `login.nu` file
-  - ✅ Runs the `ls` command and exits
-  - ❌ Does not enter the REPL
+  - ❌ 표준 라이브러리를 사용할 수 없도록 합니다.
+  - ❌ 사용자 `plugin.msgpackz`를 읽지 않습니다.
+  - ❌ 내부 `default_env.nu`를 읽지 않습니다.
+  - ❌ 사용자 `env.nu`를 소싱하지 않습니다.
+  - ❌ 내부 `default_config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `config.nu` 파일을 읽지 않습니다.
+  - ❌ 사용자 `login.nu` 파일을 읽지 않습니다.
+  - ✅ `ls` 명령을 실행하고 종료합니다.
+  - ❌ REPL에 들어가지 않습니다.

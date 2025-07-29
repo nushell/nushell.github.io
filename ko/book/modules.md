@@ -1,15 +1,15 @@
-# Modules
+# 모듈
 
-Like many programming languages, Nushell supports writing and using _modules_ as a way to organize code more efficiently. Modules can be thought of as "containers" that hold various definitions, including:
+많은 프로그래밍 언어와 마찬가지로 누셸은 코드를 보다 효율적으로 구성하는 방법으로 _모듈_을 작성하고 사용하는 것을 지원합니다. 모듈은 다음과 같은 다양한 정의를 담는 "컨테이너"로 생각할 수 있습니다.
 
-- Additional custom commands
-- Aliases
-- Constants
-- Externs
-- Environment variables
-- And even other modules (a.k.a., submodules)
+- 추가 사용자 지정 명령
+- 별칭
+- 상수
+- 외부 명령
+- 환경 변수
+- 심지어 다른 모듈(일명 하위 모듈)까지
 
-Many users will start off using modules written by others, then progress to writing their own. This chapter covers those two topics:
+많은 사용자는 다른 사람이 작성한 모듈을 사용하는 것으로 시작하여 자신의 모듈을 작성하는 단계로 진행합니다. 이 장에서는 다음 두 가지 주제를 다룹니다.
 
-- [Using Modules](./modules/using_modules.md)
-- [Creating Modules](./modules/creating_modules.md)
+- [모듈 사용](./modules/using_modules.md)
+- [모듈 만들기](./modules/creating_modules.md)

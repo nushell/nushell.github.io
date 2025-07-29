@@ -1,16 +1,16 @@
-# Parallelism
+# 병렬 처리
 
-Nushell now has early support for running code in parallel. This allows you to process elements of a stream using more hardware resources of your computer.
+누셸은 이제 코드를 병렬로 실행하는 초기 지원을 제공합니다. 이를 통해 컴퓨터의 더 많은 하드웨어 리소스를 사용하여 스트림의 요소를 처리할 수 있습니다.
 
-You will notice these commands with their characteristic `par-` naming. Each corresponds to a non-parallel version, allowing you to easily write code in a serial style first, and then go back and easily convert serial scripts into parallel scripts with a few extra characters.
+`par-`라는 특징적인 이름으로 이러한 명령을 볼 수 있습니다. 각 명령은 비병렬 버전에 해당하므로 먼저 직렬 스타일로 코드를 쉽게 작성한 다음 몇 가지 추가 문자로 직렬 스크립트를 병렬 스크립트로 쉽게 변환할 수 있습니다.
 
 ## par-each
 
-The most common parallel command is [`par-each`](/commands/docs/par-each.md), a companion to the [`each`](/commands/docs/each.md) command.
+가장 일반적인 병렬 명령은 [`each`](/commands/docs/each.md) 명령의 동반자인 [`par-each`](/commands/docs/par-each.md)입니다.
 
-Like [`each`](/commands/docs/each.md), [`par-each`](/commands/docs/par-each.md) works on each element in the pipeline as it comes in, running a block on each. Unlike [`each`](/commands/docs/each.md), [`par-each`](/commands/docs/par-each.md) will do these operations in parallel.
+[`each`](/commands/docs/each.md)와 마찬가지로 [`par-each`](/commands/docs/par-each.md)는 파이프라인에 들어오는 각 요소에 대해 작동하여 각 요소에 대해 블록을 실행합니다. [`each`](/commands/docs/each.md)와 달리 [`par-each`](/commands/docs/par-each.md)는 이러한 작업을 병렬로 수행합니다.
 
-Let's say you wanted to count the number of files in each sub-directory of the current directory. Using [`each`](/commands/docs/each.md), you could write this as:
+현재 디렉터리의 각 하위 디렉터리에 있는 파일 수를 계산하고 싶다고 가정해 보겠습니다. [`each`](/commands/docs/each.md)를 사용하여 다음과 같이 작성할 수 있습니다.
 
 ```nu
 ls | where type == dir | each { |row|
@@ -18,11 +18,11 @@ ls | where type == dir | each { |row|
 }
 ```
 
-We create a record for each entry, and fill it with the name of the directory and the count of entries in that sub-directory.
+각 항목에 대한 레코드를 만들고 디렉터리 이름과 해당 하위 디렉터리의 항목 수로 채웁니다.
 
-On your machine, the times may vary. For this machine, it took 21 milliseconds for the current directory.
+컴퓨터에 따라 시간이 다를 수 있습니다. 이 컴퓨터에서는 현재 디렉터리에 대해 21밀리초가 걸렸습니다.
 
-Now, since this operation can be run in parallel, let's convert the above to parallel by changing [`each`](/commands/docs/each.md) to [`par-each`](/commands/docs/par-each.md):
+이제 이 작업은 병렬로 실행할 수 있으므로 [`each`](/commands/docs/each.md)를 [`par-each`](/commands/docs/par-each.md)로 변경하여 위를 병렬로 변환해 보겠습니다.
 
 ```nu
 ls | where type == dir | par-each { |row|
@@ -30,9 +30,9 @@ ls | where type == dir | par-each { |row|
 }
 ```
 
-On this machine, it now runs in 6ms. That's quite a difference!
+이 컴퓨터에서는 이제 6ms로 실행됩니다. 상당한 차이입니다!
 
-As a side note: Because [environment variables are scoped](environment.md#scoping), you can use [`par-each`](/commands/docs/par-each.md) to work in multiple directories in parallel (notice the [`cd`](/commands/docs/cd.md) command):
+참고: [환경 변수는 범위가 지정되므로](environment.md#scoping) [`par-each`](/commands/docs/par-each.md)를 사용하여 여러 디렉터리에서 병렬로 작업할 수 있습니다([`cd`](/commands/docs/cd.md) 명령 참조).
 
 ```nu
 ls | where type == dir | par-each { |row|
@@ -40,4 +40,4 @@ ls | where type == dir | par-each { |row|
 }
 ```
 
-You'll notice, if you look at the results, that they come back in different orders each run (depending on the number of hardware threads on your system). As tasks finish, and we get the correct result, we may need to add additional steps if we want our results in a particular order. For example, for the above, we may want to sort the results by the "name" field. This allows both [`each`](/commands/docs/each.md) and [`par-each`](/commands/docs/par-each.md) versions of our script to give the same result.
+결과를 보면 실행할 때마다 다른 순서로 돌아오는 것을 알 수 있습니다(시스템의 하드웨어 스레드 수에 따라 다름). 작업이 완료되고 올바른 결과를 얻으면 특정 순서로 결과를 원하면 추가 단계를 추가해야 할 수 있습니다. 예를 들어, 위의 경우 "name" 필드를 기준으로 결과를 정렬할 수 있습니다. 이렇게 하면 스크립트의 [`each`](/commands/docs/each.md) 및 [`par-each`](/commands/docs/par-each.md) 버전 모두 동일한 결과를 제공할 수 있습니다.

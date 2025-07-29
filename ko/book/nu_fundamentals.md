@@ -1,28 +1,28 @@
 ---
 prev:
-  text: Nushell Cheat Sheet
+  text: 누셸 치트 시트
   link: cheat_sheet.md
 next:
-  text: Types of Data
+  text: 데이터 유형
   link: /book/types_of_data.md
 ---
-# Nu Fundamentals
+# 누셸 기본 사항
 
-This chapter explains some of the fundamentals of the Nushell programming language.
-After going through it, you should have an idea how to write simple Nushell programs.
+이 장에서는 누셸 프로그래밍 언어의 몇 가지 기본 사항을 설명합니다.
+이 장을 마치면 간단한 누셸 프로그램을 작성하는 방법에 대한 아이디어를 얻을 수 있습니다.
 
-Nushell has a rich type system.
-You will find typical data types such as strings or integers and less typical data types, such as cell paths.
-Furthermore, one of the defining features of Nushell is the notion of _structured data_ which means that you can organize types into collections: lists, records, or tables.
-Contrary to the traditional Unix approach where commands communicate via plain text, Nushell commands communicate via these data types.
-All of the above is explained in [Types of Data](types_of_data.md).
+누셸은 풍부한 유형 시스템을 가지고 있습니다.
+문자열이나 정수와 같은 일반적인 데이터 유형과 셀 경로와 같은 덜 일반적인 데이터 유형을 찾을 수 있습니다.
+또한 누셸의 특징 중 하나는 _구조화된 데이터_라는 개념으로, 유형을 목록, 레코드 또는 테이블과 같은 컬렉션으로 구성할 수 있음을 의미합니다.
+명령이 일반 텍스트를 통해 통신하는 전통적인 유닉스 접근 방식과 달리 누셸 명령은 이러한 데이터 유형을 통해 통신합니다.
+위의 모든 내용은 [데이터 유형](types_of_data.md)에서 설명합니다.
 
-[Loading Data](loading_data.md) explains how to read common data formats, such as JSON, into _structured data_. This includes our own "NUON" data format.
+[데이터 로드](loading_data.md)에서는 JSON과 같은 일반적인 데이터 형식을 _구조화된 데이터_로 읽는 방법을 설명합니다. 여기에는 자체 "NUON" 데이터 형식이 포함됩니다.
 
-Just like Unix shells, Nushell commands can be composed into [pipelines](pipelines.md) to pass and modify a stream of data.
+유닉스 셸과 마찬가지로 누셸 명령은 [파이프라인](pipelines.md)으로 구성하여 데이터 스트림을 전달하고 수정할 수 있습니다.
 
-Some data types have interesting features that deserve their own sections: [strings](working_with_strings.md), [lists](working_with_lists.md), and [tables](working_with_tables.md).
-Apart from explaining the features, these sections also show how to do some common operations, such as composing strings or updating values in a list.
+일부 데이터 유형에는 자체 섹션이 필요한 흥미로운 기능이 있습니다: [문자열](working_with_strings.md), [목록](working_with_lists.md) 및 [테이블](working_with_tables.md).
+이러한 섹션에서는 기능을 설명하는 것 외에도 문자열 구성이나 목록 값 업데이트와 같은 몇 가지 일반적인 작업을 수행하는 방법도 보여줍니다.
 
-Finally, [Command Reference](/commands/) lists all the built-in commands with brief descriptions.
-Note that you can also access this info from within Nushell using the [`help`](/commands/docs/help.md) command.
+마지막으로 [명령 참조](/commands/)에는 간단한 설명과 함께 모든 기본 제공 명령이 나열됩니다.
+[`help`](/commands/docs/help.md) 명령을 사용하여 누셸 내에서 이 정보에 액세스할 수도 있습니다.

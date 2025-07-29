@@ -1,26 +1,26 @@
 ---
 prev:
-  text: Design Notes
+  text: 디자인 노트
   link: /book/design_notes.md
 next:
-  text: (Not so) Advanced
+  text: (그렇게) 고급은 아님
   link: /book/advanced.md
 ---
-# How Nushell Code Gets Run
+# 누셸 코드가 실행되는 방법
 
-In [Thinking in Nu](./thinking_in_nu.md#think-of-nushell-as-a-compiled-language), we encouraged you to _"Think of Nushell as a compiled language"_ due to the way in which Nushell code is processed. We also covered several code examples that won't work in Nushell due that process.
+[누셸 방식으로 생각하기](./thinking_in_nu.md#think-of-nushell-as-a-compiled-language)에서 누셸 코드가 처리되는 방식 때문에 _"누셸을 컴파일된 언어로 생각하라"_고 권장했습니다. 또한 해당 프로세스로 인해 누셸에서 작동하지 않는 여러 코드 예제를 다루었습니다.
 
-The underlying reason for this is a strict separation of the **_parsing and evaluation_** stages that **_disallows `eval`-like functionality_**. In this section, we'll explain in detail what this means, why we're doing it, and what the implications are. The explanation aims to be as simple as possible, but it might help if you've programmed in another language before.
+이에 대한 근본적인 이유는 **_`eval`과 유사한 기능을 허용하지 않는 파싱 및 평가 단계의 엄격한 분리_**입니다. 이 섹션에서는 이것이 무엇을 의미하는지, 왜 그렇게 하는지, 그리고 그 의미가 무엇인지 자세히 설명합니다. 설명은 가능한 한 간단하게 하려고 하지만, 이전에 다른 언어로 프로그래밍한 경험이 있다면 도움이 될 수 있습니다.
 
 [[toc]]
 
-## Interpreted vs. Compiled Languages
+## 인터프리터 언어 대 컴파일 언어
 
-### Interpreted Languages
+### 인터프리터 언어
 
-Nushell, Python, and Bash (and many others) are _"interpreted"_ languages.
+누셸, 파이썬, Bash(그리고 다른 많은 언어)는 _"인터프리터"_ 언어입니다.
 
-Let's start with a simple "Hello, World!" Nushell program:
+간단한 "Hello, World!" 누셸 프로그램으로 시작하겠습니다.
 
 ```nu
 # hello.nu
@@ -28,26 +28,26 @@ Let's start with a simple "Hello, World!" Nushell program:
 print "Hello, World!"
 ```
 
-Of course, this runs as expected using `nu hello.nu`. A similar program written in Python or Bash would look (and behave) nearly the same.
+물론 이것은 `nu hello.nu`를 사용하여 예상대로 실행됩니다. 파이썬이나 Bash로 작성된 유사한 프로그램은 거의 동일하게 보이고 동작합니다.
 
-In _"interpreted languages"_ code usually gets handled something like this:
+_"인터프리터 언어"_에서 코드는 일반적으로 다음과 같이 처리됩니다.
 
 ```text
-Source Code → Interpreter → Result
+소스 코드 → 인터프리터 → 결과
 ```
 
-Nushell follows this pattern, and its "Interpreter" is split into two parts:
+누셸은 이 패턴을 따르며, "인터프리터"는 두 부분으로 나뉩니다.
 
-1. `Source Code → Parser → Intermediate Representation (IR)`
-2. `IR → Evaluation Engine → Result`
+1. `소스 코드 → 파서 → 중간 표현(IR)`
+2. `IR → 평가 엔진 → 결과`
 
-First, the source code is analyzed by the Parser and converted into an intermediate representation (IR), which in Nushell's case is just a collection of data structures. Then, these data structures are passed to the Engine for evaluation and output of the results.
+먼저 소스 코드가 파서에 의해 분석되고 중간 표현(IR)으로 변환되는데, 누셸의 경우 이는 단지 데이터 구조의 모음입니다. 그런 다음 이러한 데이터 구조는 평가 및 결과 출력을 위해 엔진에 전달됩니다.
 
-This, as well, is common in interpreted languages. For example, Python's source code is typically [converted into bytecode](https://github.com/python/cpython/blob/main/InternalDocs/interpreter.md) before evaluation.
+이것 역시 인터프리터 언어에서 일반적입니다. 예를 들어 파이썬의 소스 코드는 일반적으로 평가 전에 [바이트코드로 변환](https://github.com/python/cpython/blob/main/InternalDocs/interpreter.md)됩니다.
 
-### Compiled Languages
+### 컴파일 언어
 
-On the other side are languages that are typically "compiled", such as C, C++, or Rust. For example, here's a simple _"Hello, World!"_ in Rust:
+반면에 C, C++, Rust와 같이 일반적으로 "컴파일"되는 언어가 있습니다. 예를 들어, Rust로 작성된 간단한 _"Hello, World!"_입니다.
 
 ```rust
 // main.rs
@@ -57,46 +57,46 @@ fn main() {
 }
 ```
 
-To "run" this code, it must be:
+이 코드를 "실행"하려면 다음을 수행해야 합니다.
 
-1. Compiled into [machine code instructions](https://en.wikipedia.org/wiki/Machine_code)
-2. The compilation results stored as a binary file on the disk
+1. [기계어 명령어](https://en.wikipedia.org/wiki/Machine_code)로 컴파일
+2. 컴파일 결과를 디스크에 바이너리 파일로 저장
 
-The first two steps are handled with `rustc main.rs`.
+처음 두 단계는 `rustc main.rs`로 처리됩니다.
 
-3. Then, to produce a result, you need to run the binary (`./main`), which passes the instructions to the CPU
+3. 그런 다음 결과를 생성하려면 바이너리(`/.main`)를 실행해야 하며, 이는 명령어를 CPU에 전달합니다.
 
-So:
+그래서:
 
-1. `Source Code ⇒ Compiler ⇒ Machine Code`
-2. `Machine Code ⇒ CPU ⇒ Result`
+1. `소스 코드 ⇒ 컴파일러 ⇒ 기계어`
+2. `기계어 ⇒ CPU ⇒ 결과`
 
 ::: important
-You can see that the compile-run sequence is not much different from the parse-evaluate sequence of an interpreter. You begin with source code, parse (or compile) it into some state (e.g., bytecode, IR, machine code), then evaluate (or run) the IR to get a result. You could think of machine code as just another type of IR and the CPU as its interpreter.
+컴파일-실행 시퀀스는 인터프리터의 파싱-평가 시퀀스와 크게 다르지 않다는 것을 알 수 있습니다. 소스 코드로 시작하여 일부 상태(예: 바이트코드, IR, 기계어)로 파싱(또는 컴파일)한 다음 IR을 평가(또는 실행)하여 결과를 얻습니다. 기계어는 단지 다른 유형의 IR이고 CPU는 해당 인터프리터라고 생각할 수 있습니다.
 
-One big difference, however, between interpreted and compiled languages is that interpreted languages typically implement an _`eval` function_ while compiled languages do not. What does this mean?
+그러나 인터프리터 언어와 컴파일 언어의 한 가지 큰 차이점은 인터프리터 언어는 일반적으로 _`eval` 함수_를 구현하는 반면 컴파일 언어는 그렇지 않다는 것입니다. 이것은 무엇을 의미합니까?
 :::
 
-## Dynamic vs. Static Languages
+## 동적 언어 대 정적 언어
 
-::: tip Terminology
-In general, the difference between a dynamic and static language is how much of the source code is resolved during Compilation (or Parsing) vs. Evaluation/Runtime:
+::: tip 용어
+일반적으로 동적 언어와 정적 언어의 차이점은 컴파일(또는 파싱) 대 평가/런타임 중에 소스 코드의 어느 정도가 해결되는지에 있습니다.
 
-- _"Static"_ languages perform more code analysis (e.g., type-checking, [data ownership](https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership.html)) during Compilation/Parsing.
+- _"정적"_ 언어는 컴파일/파싱 중에 더 많은 코드 분석(예: 형식 검사, [데이터 소유권](https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership.html))을 수행합니다.
 
-- _"Dynamic"_ languages perform more code analysis, including `eval` of additional code, during Evaluation/Runtime.
+- _"동적"_ 언어는 평가/런타임 중에 추가 코드의 `eval`을 포함하여 더 많은 코드 분석을 수행합니다.
 
-For the purposes of this discussion, the primary difference between a static and dynamic language is whether or not it has an `eval` function.
+이 논의의 목적상 정적 언어와 동적 언어의 주요 차이점은 `eval` 함수가 있는지 여부입니다.
 
 :::
 
-### Eval Function
+### Eval 함수
 
-Most dynamic, interpreted languages have an `eval` function. For example, [Python `eval`](https://docs.python.org/3/library/functions.html#eval) (also, [Python `exec`](https://docs.python.org/3/library/functions.html#exec)) or [Bash `eval`](https://linux.die.net/man/1/bash).
+대부분의 동적 인터프리터 언어에는 `eval` 함수가 있습니다. 예를 들어, [Python `eval`](https://docs.python.org/3/library/functions.html#eval)(또한 [Python `exec`](https://docs.python.org/3/library/functions.html#exec)) 또는 [Bash `eval`](https://linux.die.net/man/1/bash)이 있습니다.
 
-The argument to an `eval` is _"source code inside of source code"_, typically conditionally or dynamically computed. This means that, when an interpreted language encounters an `eval` in source code during Parse/Eval, it typically interrupts the normal Evaluation process to start a new Parse/Eval on the source code argument to the `eval`.
+`eval`의 인수는 _"소스 코드 내부의 소스 코드"_이며, 일반적으로 조건부 또는 동적으로 계산됩니다. 즉, 인터프리터 언어가 파싱/평가 중에 소스 코드에서 `eval`을 만나면 일반적으로 정상적인 평가 프로세스를 중단하고 `eval`의 소스 코드 인수에 대한 새로운 파싱/평가를 시작합니다.
 
-Here's a simple Python `eval` example to demonstrate this (potentially confusing!) concept:
+다음은 이 (잠재적으로 혼란스러운!) 개념을 설명하기 위한 간단한 Python `eval` 예제입니다.
 
 ```python:line-numbers
 # hello_eval.py
@@ -105,33 +105,33 @@ print("Hello, World!")
 eval("print('Hello, Eval!')")
 ```
 
-When you run the file (`python hello_eval.py`), you'll see two messages: _"Hello, World!"_ and _"Hello, Eval!"_. Here is what happens:
+파일(`python hello_eval.py`)을 실행하면 _"Hello, World!"_와 _"Hello, Eval!"_이라는 두 가지 메시지가 표시됩니다. 다음은 발생하는 일입니다.
 
-1. The entire program is Parsed
-2. (Line 3) `print("Hello, World!")` is Evaluated
-3. (Line 4) In order to evaluate `eval("print('Hello, Eval!')")`:
-   1. `print('Hello, Eval!')` is Parsed
-   2. `print('Hello, Eval!')` is Evaluated
+1. 전체 프로그램이 파싱됩니다.
+2. (3행) `print("Hello, World!")`가 평가됩니다.
+3. (4행) `eval("print('Hello, Eval!')")`을 평가하기 위해:
+   1. `print('Hello, Eval!')`가 파싱됩니다.
+   2. `print('Hello, Eval!')`가 평가됩니다.
 
-::: tip More fun
-Consider `eval("eval(\"print('Hello, Eval!')\")")` and so on!
+::: tip 더 재미있는 것
+`eval("eval(\"print('Hello, Eval!')\")")` 등을 고려하십시오!
 :::
 
-Notice how the use of `eval` here adds a new "meta" step into the execution process. Instead of a single Parse/Eval, the `eval` creates additional, "recursive" Parse/Eval steps instead. This means that the bytecode produced by the Python interpreter can be further modified during the evaluation.
+여기서 `eval`을 사용하면 실행 프로세스에 새로운 "메타" 단계가 추가됩니다. 단일 파싱/평가 대신 `eval`은 추가적인 "재귀적" 파싱/평가 단계를 만듭니다. 즉, 파이썬 인터프리터가 생성한 바이트코드는 평가 중에 추가로 수정될 수 있습니다.
 
-Nushell does not allow this.
+누셸은 이를 허용하지 않습니다.
 
-As mentioned above, without an `eval` function to modify the bytecode during the interpretation process, there's very little difference (at a high level) between the Parse/Eval process of an interpreted language and that of the Compile/Run in compiled languages like C++ and Rust.
+위에서 언급했듯이 해석 과정 중에 바이트코드를 수정할 `eval` 함수가 없으면 인터프리터 언어의 파싱/평가 과정과 C++ 및 Rust와 같은 컴파일 언어의 컴파일/실행 과정 사이에는 (높은 수준에서) 거의 차이가 없습니다.
 
-::: tip Takeaway
-This is why we recommend that you _"think of Nushell as a compiled language"_. Despite being an interpreted language, its lack of `eval` gives it some of the characteristic benefits as well as limitations common in traditional static, compiled languages.
+::: tip 요점
+이것이 우리가 _"누셸을 컴파일된 언어로 생각하라"_고 권장하는 이유입니다. 인터프리터 언어임에도 불구하고 `eval`이 없기 때문에 기존의 정적, 컴파일 언어에서 흔히 볼 수 있는 특징적인 이점과 제한 사항을 일부 공유합니다.
 :::
 
-We'll dig deeper into what it means in the next section.
+다음 섹션에서는 이것이 무엇을 의미하는지 더 자세히 살펴보겠습니다.
 
-## Implications
+## 영향
 
-Consider this Python example:
+이 파이썬 예제를 고려하십시오.
 
 ```python:line-numbers
 exec("def hello(): print('Hello eval!')")
@@ -139,51 +139,51 @@ hello()
 ```
 
 ::: note
-We're using `exec` in this example instead of `eval` because it can execute any valid Python code rather than being limited to `eval` expressions. The principle is similar in both cases, though.
+이 예제에서는 `eval`이 `eval` 표현식으로 제한되는 대신 유효한 파이썬 코드를 실행할 수 있기 때문에 `eval` 대신 `exec`를 사용합니다. 그러나 원칙은 두 경우 모두 유사합니다.
 :::
 
-During interpretation:
+해석 중:
 
-1. The entire program is Parsed
-2. In order to Evaluate Line 1:
-   1. `def hello(): print('Hello eval!')` is Parsed
-   2. `def hello(): print('Hello eval!')` is Evaluated
-3. (Line 2) `hello()` is evaluated.
+1. 전체 프로그램이 파싱됩니다.
+2. 1행을 평가하기 위해:
+   1. `def hello(): print('Hello eval!')`가 파싱됩니다.
+   2. `def hello(): print('Hello eval!')`가 평가됩니다.
+3. (2행) `hello()`가 평가됩니다.
 
-Note, that until step 2.2, the interpreter has no idea that a function `hello` even exists! This makes [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) of dynamic languages challenging. In this example, the existence of the `hello` function cannot be checked just by parsing (compiling) the source code. The interpreter must evaluate (run) the code to discover it.
+2.2 단계까지 인터프리터는 `hello`라는 함수가 존재하는지조차 모릅니다! 이로 인해 동적 언어의 [정적 분석](https://en.wikipedia.org/wiki/Static_program_analysis)이 어려워집니다. 이 예제에서 `hello` 함수의 존재는 소스 코드를 파싱(컴파일)하는 것만으로는 확인할 수 없습니다. 인터프리터는 코드를 평가(실행)하여 이를 발견해야 합니다.
 
-- In a static, compiled language, a missing function is guaranteed to be caught at compile-time.
-- In a dynamic, interpreted language, however, it becomes a _possible_ runtime error. If the `eval`-defined function is conditionally called, the error may not be discovered until that condition is met in production.
+- 정적, 컴파일 언어에서는 누락된 함수가 컴파일 시간에 잡히는 것이 보장됩니다.
+- 그러나 동적, 인터프리터 언어에서는 _가능한_ 런타임 오류가 됩니다. `eval`로 정의된 함수가 조건부로 호출되는 경우 해당 조건이 프로덕션에서 충족될 때까지 오류가 발견되지 않을 수 있습니다.
 
 ::: important
-In Nushell, there are **exactly two steps**:
+누셸에는 **정확히 두 단계**가 있습니다.
 
-1. Parse the entire source code
-2. Evaluate the entire source code
+1. 전체 소스 코드 파싱
+2. 전체 소스 코드 평가
 
-This is the complete Parse/Eval sequence.
+이것이 완전한 파싱/평가 시퀀스입니다.
 :::
 
-::: tip Takeaway
-By not allowing `eval`-like functionality, Nushell prevents these types of `eval`-related bugs. Calling a non-existent definition is guaranteed to be caught at parse-time in Nushell.
+::: tip 요점
+`eval`과 유사한 기능을 허용하지 않음으로써 누셸은 이러한 유형의 `eval` 관련 버그를 방지합니다. 존재하지 않는 정의를 호출하는 것은 누셸에서 구문 분석 시에 잡히는 것이 보장됩니다.
 
-Furthermore, after parsing completes, we can be certain the bytecode (IR) won't change during evaluation. This gives us a deep insight into the resulting bytecode (IR), allowing for powerful and reliable static analysis and IDE integration which can be challenging to achieve with more dynamic languages.
+또한 구문 분석이 완료된 후에는 바이트코드(IR)가 평가 중에 변경되지 않을 것이라고 확신할 수 있습니다. 이를 통해 결과 바이트코드(IR)에 대한 깊은 통찰력을 얻을 수 있으므로 보다 동적인 언어로 달성하기 어려운 강력하고 신뢰할 수 있는 정적 분석 및 IDE 통합이 가능합니다.
 
-In general, you have more peace of mind that errors will be caught earlier when scaling Nushell programs.
+일반적으로 누셸 프로그램을 확장할 때 오류가 더 일찍 잡힐 것이라는 확신을 가질 수 있습니다.
 :::
 
-## The Nushell REPL
+## 누셸 REPL
 
-As with most any shell, Nushell has a _"Read→Eval→Print Loop"_ ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)) that is started when you run `nu` without any file. This is often thought of, but isn't quite the same, as the _"commandline"_.
+대부분의 셸과 마찬가지로 누셸에는 파일 없이 `nu`를 실행할 때 시작되는 _"읽기→평가→인쇄 루프"_([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop))가 있습니다. 이것은 종종 _"명령줄"_과 같다고 생각되지만 실제로는 그렇지 않습니다.
 
-::: tip Note
-In this section, the `> ` character at the beginning of a line in a code-block is used to represent the commandline **_prompt_**. For instance:
+::: tip 참고
+이 섹션에서 코드 블록의 줄 시작 부분에 있는 `> ` 문자는 명령줄 **_프롬프트_**를 나타내는 데 사용됩니다. 예시:
 
 ```nu
 > some code...
 ```
 
-Code after the prompt in the following examples is executed by pressing the <kbd>Enter</kbd> key. For example:
+다음 예제의 프롬프트 뒤에 있는 코드는 <kbd>Enter</kbd> 키를 눌러 실행됩니다. 예시:
 
 ```nu
 > print "Hello world!"
@@ -193,149 +193,149 @@ Code after the prompt in the following examples is executed by pressing the <kbd
 # => prints files and directories...
 ```
 
-The above means:
+위의 내용은 다음과 같습니다.
 
-- From inside Nushell (launched with `nu`):
-  1. Type `print "Hello world!"`
-  1. Press <kbd>Enter</kbd>
-  1. Nushell will display the result
-  1. Type `ls`
-  1. Press <kbd>Enter</kbd>
-  1. Nushell will display the result
+- 누셸 내부에서(`nu`로 시작):
+  1. `print "Hello world!"` 입력
+  1. <kbd>Enter</kbd> 누르기
+  1. 누셸이 결과를 표시합니다.
+  1. `ls` 입력
+  1. <kbd>Enter</kbd> 누르기
+  1. 누셸이 결과를 표시합니다.
 
 :::
 
-When you press <kbd>Enter</kbd> after typing a commandline, Nushell:
+명령줄을 입력한 후 <kbd>Enter</kbd>를 누르면 누셸은 다음을 수행합니다.
 
-1. **_(Read):_** Reads the commandline input
-1. **_(Evaluate):_** Parses the commandline input
-1. **_(Evaluate):_** Evaluates the commandline input
-1. **_(Evaluate):_** Merges the environment (such as the current working directory) to the internal Nushell state
-1. **_(Print):_** Displays the results (if non-`null`)
-1. **_(Loop):_** Waits for another input
+1. **_(읽기):_** 명령줄 입력을 읽습니다.
+1. **_(평가):_** 명령줄 입력을 구문 분석합니다.
+1. **_(평가):_** 명령줄 입력을 평가합니다.
+1. **_(평가):_** 환경(예: 현재 작업 디렉터리)을 내부 누셸 상태에 병합합니다.
+1. **_(인쇄):_** 결과(비-`null`인 경우)를 표시합니다.
+1. **_(루프):_** 다른 입력을 기다립니다.
 
-In other words, each REPL invocation is its own separate parse-evaluation sequence. By merging the environment back to the Nushell's state, we maintain continuity between the REPL invocations.
+즉, 각 REPL 호출은 자체적인 별도의 구문 분석-평가 시퀀스입니다. 환경을 누셸의 상태에 다시 병합함으로써 REPL 호출 간의 연속성을 유지합니다.
 
-Compare a simplified version of the [`cd` example](./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file) from _"Thinking in Nu"_:
+_"누셸 방식으로 생각하기"_에서 [`cd` 예제](./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)의 단순화된 버전을 비교해 보십시오.
 
 ```nu
 cd spam
 source-env foo.nu
 ```
 
-There we saw that this cannot work (as a script or other single expression) because the directory will be changed _after_ the parse-time [`source-env` keyword](/commands/docs/source-env.md) attempts to read the file.
+거기서 우리는 디렉터리가 구문 분석 시간 [`source-env` 키워드](/commands/docs/source-env.md)가 파일을 읽으려고 시도한 _후에_ 변경되기 때문에 이것이 (스크립트나 다른 단일 표현식으로) 작동할 수 없다는 것을 보았습니다.
 
-Running these commands as separate REPL entries, however, works:
+그러나 이러한 명령을 별도의 REPL 항목으로 실행하면 작동합니다.
 
 ```nu
 > cd spam
 > source-env foo.nu
-# Yay, works!
+# 야호, 작동합니다!
 ```
 
-To see why, let's break down what happens in the example:
+이유를 보려면 예제에서 무슨 일이 일어나는지 분석해 보겠습니다.
 
-1. Read the `cd spam` commandline.
-2. Parse the `cd spam` commandline.
-3. Evaluate the `cd spam` commandline.
-4. Merge environment (including the current directory) into the Nushell state.
-5. Read and Parse `source-env foo.nu`.
-6. Evaluate `source-env foo.nu`.
-7. Merge environment (including any changes from `foo.nu`) into the Nushell state.
+1. `cd spam` 명령줄을 읽습니다.
+2. `cd spam` 명령줄을 구문 분석합니다.
+3. `cd spam` 명령줄을 평가합니다.
+4. 환경(현재 디렉터리 포함)을 누셸 상태에 병합합니다.
+5. `source-env foo.nu`를 읽고 구문 분석합니다.
+6. `source-env foo.nu`를 평가합니다.
+7. 환경(`foo.nu`의 모든 변경 사항 포함)을 누셸 상태에 병합합니다.
 
-When `source-env` tries to open `foo.nu` during the parsing in Step 5, it can do so because the directory change from Step 3 was merged into the Nushell state during Step 4. As a result, it's visible in the following Parse/Eval cycles.
+5단계에서 구문 분석 중에 `source-env`가 `foo.nu`를 열려고 할 때 3단계의 디렉터리 변경 사항이 4단계에서 누셸 상태에 병합되었기 때문에 그렇게 할 수 있습니다. 결과적으로 다음 구문 분석/평가 주기에서 볼 수 있습니다.
 
-### Multiline REPL Commandlines
+### 여러 줄 REPL 명령줄
 
-Keep in mind that this only works for **_separate_** commandlines.
+이것은 **_별도의_** 명령줄에만 작동한다는 점을 명심하십시오.
 
-In Nushell, it's possible to group multiple commands into one commandline using:
+누셸에서는 다음을 사용하여 여러 명령을 하나의 명령줄로 그룹화할 수 있습니다.
 
-- A semicolon:
+- 세미콜론:
 
   ```nu
   cd spam; source-env foo.nu
   ```
 
-- A newline:
+- 줄 바꿈:
 
   ```
   > cd span
     source-env foo.nu
   ```
 
-  Notice there is no "prompt" before the second line. This type of multiline commandline is usually created with a [keybinding](./line_editor.md#keybindings) to insert a Newline when <kbd>Alt</kbd>+<kbd>Enter</kbd> or <kbd>Shift</kbd>+ <kbd>Enter</kbd> is pressed.
+  두 번째 줄 앞에 "프롬프트"가 없다는 점에 유의하십시오. 이러한 유형의 여러 줄 명령줄은 일반적으로 <kbd>Alt</kbd>+<kbd>Enter</kbd> 또는 <kbd>Shift</kbd>+ <kbd>Enter</kbd>를 누를 때 줄 바꿈을 삽입하기 위해 [키 바인딩](./line_editor.md#keybindings)으로 만들어집니다.
 
-These two examples behave exactly the same in the Nushell REPL. The entire commandline (both statements) are processed a single Read→Eval→Print Loop. As such, they will fail the same way that the earlier script-example did.
+이 두 예제는 누셸 REPL에서 정확히 동일하게 작동합니다. 전체 명령줄(두 문 모두)은 단일 읽기→평가→인쇄 루프로 처리됩니다. 따라서 이전 스크립트 예제와 동일한 방식으로 실패합니다.
 
 ::: tip
-Multiline commandlines are very useful in Nushell, but watch out for any out-of-order Parser-keywords.
+여러 줄 명령줄은 누셸에서 매우 유용하지만 순서가 잘못된 파서 키워드에 주의하십시오.
 :::
 
-## Parse-time Constant Evaluation
+## 구문 분석 시간 상수 평가
 
-While it is impossible to add parsing into the evaluation stage and yet still maintain our static-language benefits, we can safely add _a little bit_ of evaluation into parsing.
+평가 단계에 구문 분석을 추가하면서도 정적 언어의 이점을 유지하는 것은 불가능하지만, 구문 분석에 _약간의_ 평가를 안전하게 추가할 수 있습니다.
 
-::: tip Terminology
-In the text below, we use the term _"constant"_ to refer to:
+::: tip 용어
+아래 텍스트에서 _"상수"_라는 용어는 다음을 나타내는 데 사용됩니다.
 
-- A `const` definition
-- The result of any command that outputs a constant value when provide constant inputs.
+- `const` 정의
+- 상수 입력을 제공할 때 상수 값을 출력하는 모든 명령의 결과.
   :::
 
-By their nature, **_constants_** and constant values are known at Parse-time. This, of course, is in sharp contrast to _variable_ declarations and values.
+본질적으로 **_상수_**와 상수 값은 구문 분석 시간에 알려져 있습니다. 물론 이것은 _변수_ 선언 및 값과 극명한 대조를 이룹니다.
 
-As a result, we can utilize constants as safe, known arguments to parse-time keywords like [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md), and related commands.
+결과적으로 상수를 [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md) 및 관련 명령과 같은 구문 분석 시간 키워드에 대한 안전하고 알려진 인수로 활용할 수 있습니다.
 
-Consider [this example](./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced) from _"Thinking in Nu"_:
+_"누셸 방식으로 생각하기"_에서 [이 예제](./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced)를 고려하십시오.
 
 ```nu
 let my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
 ```
 
-As noted there, we **_can_**, however, do the following instead:
+거기서 언급했듯이, 우리는 대신 다음을 수행할 **_수_** 있습니다.
 
 ```nu:line-numbers
 const my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
 ```
 
-Let's analyze the Parse/Eval process for this version:
+이 버전에 대한 구문 분석/평가 프로세스를 분석해 보겠습니다.
 
-1. The entire program is Parsed into IR.
+1. 전체 프로그램이 IR로 구문 분석됩니다.
 
-   1. Line 1: The `const` definition is parsed. Because it is a constant assignment (and `const` is also a parser-keyword), that assignment can also be Evaluated at this stage. Its name and value are stored by the Parser.
-   2. Line 2: The `source` command is parsed. Because `source` is also a parser-keyword, it is Evaluated at this stage. In this example, however, it can be **_successfully_** parsed since its argument is **_known_** and can be retrieved at this point.
-   3. The source-code of `~/nushell-files/common.nu` is parsed. If it is invalid, then an error will be generated, otherwise the IR results will be included in evaluation in the next stage.
+   1. 1행: `const` 정의가 구문 분석됩니다. 상수 할당(그리고 `const`도 파서 키워드)이므로 이 단계에서 해당 할당도 평가될 수 있습니다. 이름과 값은 파서에 의해 저장됩니다.
+   2. 2행: `source` 명령이 구문 분석됩니다. `source`도 파서 키워드이므로 이 단계에서 평가됩니다. 그러나 이 예제에서는 인수가 **_알려져_** 있고 이 시점에서 검색할 수 있으므로 **_성공적으로_** 구문 분석될 수 있습니다.
+   3. `~/nushell-files/common.nu`의 소스 코드가 구문 분석됩니다. 유효하지 않으면 오류가 생성되고, 그렇지 않으면 IR 결과가 다음 단계의 평가에 포함됩니다.
 
-2. The entire IR is Evaluated:
-   1. Line 1: The `const` definition is Evaluated. The variable is added to the runtime stack.
-   2. Line 2: The IR result from parsing `~/nushell-files/common.nu` is Evaluated.
+2. 전체 IR이 평가됩니다.
+   1. 1행: `const` 정의가 평가됩니다. 변수가 런타임 스택에 추가됩니다.
+   2. 2행: `~/nushell-files/common.nu` 구문 분석의 IR 결과가 평가됩니다.
 
 ::: important
 
-- An `eval` adds additional parsing during evaluation
-- Parse-time constants do the opposite, adding additional evaluation to the parser.
+- `eval`은 평가 중에 추가 구문 분석을 추가합니다.
+- 구문 분석 시간 상수는 반대로 작동하여 파서에 추가 평가를 추가합니다.
   :::
 
-Also keep in mind that the evaluation allowed during parsing is **_very restricted_**. It is limited to only a small subset of what is allowed during a regular evaluation.
+또한 구문 분석 중에 허용되는 평가는 **_매우 제한적_**이라는 점을 명심하십시오. 일반 평가 중에 허용되는 것의 작은 하위 집합으로만 제한됩니다.
 
-For example, the following is not allowed:
+예를 들어 다음은 허용되지 않습니다.
 
 ```nu
 const foo_contents = (open foo.nu)
 ```
 
-Put differently, only a small subset of commands and expressions can generate a constant value. For a command to be allowed:
+다르게 말하면, 작은 하위 집합의 명령과 표현식만 상수 값을 생성할 수 있습니다. 명령이 허용되려면:
 
-- It must be designed to output a constant value
-- All of its inputs must also be constant values, literals, or composite types (e.g., records, lists, tables) of literals.
+- 상수 값을 출력하도록 설계되어야 합니다.
+- 모든 입력도 상수 값, 리터럴 또는 리터럴의 복합 유형(예: 레코드, 목록, 테이블)이어야 합니다.
 
-In general, the commands and resulting expressions will be fairly simple and **_without side effects_**. Otherwise, the parser could all-too-easily enter an unrecoverable state. Imagine, for instance, attempting to assign an infinite stream to a constant. The Parse stage would never complete!
+일반적으로 명령과 결과 표현식은 매우 간단하고 **_부작용이 없습니다_**. 그렇지 않으면 파서가 너무 쉽게 복구할 수 없는 상태에 빠질 수 있습니다. 예를 들어 상수에 무한 스트림을 할당하려고 시도한다고 상상해 보십시오. 구문 분석 단계가 절대 완료되지 않을 것입니다!
 
 ::: tip
-You can see which Nushell commands can return constant values using:
+다음과 같이 어떤 누셸 명령이 상수 값을 반환할 수 있는지 볼 수 있습니다.
 
 ```nu
 help commands | where is_const
@@ -343,33 +343,33 @@ help commands | where is_const
 
 :::
 
-For example, the `path join` command can output a constant value. Nushell also defines several useful paths in the `$nu` constant record. These can be combined to create useful parse-time constant evaluations like:
+예를 들어, `path join` 명령은 상수 값을 출력할 수 있습니다. 누셸은 또한 `$nu` 상수 레코드에 몇 가지 유용한 경로를 정의합니다. 이를 결합하여 다음과 같은 유용한 구문 분석 시간 상수 평가를 만들 수 있습니다.
 
 ```nu
 const my_startup_modules =  $nu.default-config-dir | path join "my-mods"
 use $"($my_startup_modules)/my-utils.nu"
 ```
 
-::: note Additional Notes
-Compiled ("static") languages also tend to have a way to convey some logic at compile time. For instance:
+::: note 추가 참고 사항
+컴파일된("정적") 언어는 컴파일 시간에 일부 논리를 전달하는 방법도 가지고 있는 경향이 있습니다. 예시:
 
-- C's preprocessor
-- Rust macros
-- [Zig's comptime](https://kristoff.it/blog/what-is-zig-comptime), which was an inspiration for Nushell's parse-time constant evaluation.
+- C의 전처리기
+- Rust 매크로
+- [Zig의 comptime](https://kristoff.it/blog/what-is-zig-comptime), 누셸의 구문 분석 시간 상수 평가에 영감을 주었습니다.
 
-There are two reasons for this:
+이에 대한 두 가지 이유가 있습니다.
 
-1. _Increasing Runtime Performance:_ Logic in the compilation stage doesn't need to be repeated during runtime.
+1. _런타임 성능 향상:_ 컴파일 단계의 논리는 런타임 중에 반복할 필요가 없습니다.
 
-   This isn't currently applicable to Nushell, since the parsed results (IR) are not stored beyond Evaluation. However, this has certainly been considered as a possible future feature.
+   구문 분석된 결과(IR)가 평가를 넘어 저장되지 않기 때문에 현재 누셸에는 적용되지 않습니다. 그러나 이것은 확실히 가능한 미래 기능으로 고려되었습니다.
 
-2. As with Nushell's parse-time constant evaluations, these features help (safely) work around limitations caused by the absence of an `eval` function.
+2. 누셸의 구문 분석 시간 상수 평가와 마찬가지로 이러한 기능은 `eval` 함수가 없을 때 발생하는 제한 사항을 (안전하게) 해결하는 데 도움이 됩니다.
    :::
 
-## Conclusion
+## 결론
 
-Nushell operates in a scripting language space typically dominated by _"dynamic"_, _"interpreted"_ languages, such as Python, Bash, Zsh, Fish, and many others. Nushell is also _"interpreted"_ since code is run immediately (without a separate, manual compilation).
+누셸은 일반적으로 파이썬, Bash, Zsh, Fish 및 기타 많은 언어와 같이 _"동적"_, _"인터프리터"_ 언어가 지배하는 스크립팅 언어 공간에서 작동합니다. 누셸은 코드가 즉시 실행되기 때문에(별도의 수동 컴파일 없이) _"인터프리터"_이기도 합니다.
 
-However, is not _"dynamic"_ in that it does not have an `eval` construct. In this respect, it shares more in common with _"static"_, compiled languages like Rust or Zig.
+그러나 `eval` 구문이 없기 때문에 _"동적"_은 아닙니다. 이 점에서 Rust나 Zig와 같은 _"정적"_, 컴파일된 언어와 더 많은 공통점을 공유합니다.
 
-This lack of `eval` is often surprising to many new users and is why it can be helpful to think of Nushell as a compiled, and static, language.
+`eval`이 없다는 것은 많은 새로운 사용자에게 종종 놀라움을 주며, 이것이 누셸을 컴파일된 정적 언어로 생각하는 것이 도움이 될 수 있는 이유입니다.

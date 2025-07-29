@@ -1,15 +1,15 @@
 ---
 prev:
-  text: Nushell operator map
+  text: 누셸 연산자 맵
   link: /book/nushell_operator_map.md
 next:
-  text: How Nushell Code Gets Run
+  text: 누셸 코드가 실행되는 방법
   link: /book/how_nushell_code_gets_run.md
 ---
-# Design Notes
+# 디자인 노트
 
-This chapter intends to give more in-depth overview of certain aspects of Nushell's design. The topics are not necessary for a basic usage, but reading them will help you understand how Nushell works and why.
+이 장에서는 누셸 디자인의 특정 측면에 대한 심층적인 개요를 제공하고자 합니다. 이 주제는 기본적인 사용에는 필수는 아니지만, 이를 읽으면 누셸이 어떻게 작동하고 왜 그렇게 작동하는지 이해하는 데 도움이 될 것입니다.
 
-We intend to expand this chapter in the future. If there is some topic that you find confusing and hard to understand, let us know. It might be a good candidate for a page here.
+향후 이 장을 확장할 계획입니다. 혼란스럽고 이해하기 어려운 주제가 있으면 알려주십시오. 여기에 페이지를 만들 좋은 후보가 될 수 있습니다.
 
-[How Nushell Code Gets Run](how_nushell_code_gets_run.md) explains what happens when you run Nushell source code. It explains how Nushell is in many ways closer to classic compiled languages, like C or Rust, than to other shells and dynamic languages and hopefully clears some confusion that stems from that.
+[누셸 코드가 실행되는 방법](how_nushell_code_gets_run.md)은 누셸 소스 코드를 실행할 때 발생하는 일을 설명합니다. 누셸이 다른 셸이나 동적 언어보다 C나 Rust와 같은 고전적인 컴파일 언어에 여러 면에서 더 가깝다는 것을 설명하고 그로 인해 발생하는 혼란을 해소하는 데 도움이 되기를 바랍니다.

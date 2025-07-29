@@ -1,23 +1,23 @@
-# Loading Data
+# 데이터 로드
 
-Earlier, we saw how you can use commands like [`ls`](/commands/docs/ls.md), [`ps`](/commands/docs/ps.md), [`date`](/commands/docs/date.md), and [`sys`](/commands/docs/sys.md) to load information about your files, processes, time of day, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
+앞서 [`ls`](/commands/docs/ls.md), [`ps`](/commands/docs/ps.md), [`date`](/commands/docs/date.md), [`sys`](/commands/docs/sys.md)와 같은 명령을 사용하여 파일, 프로세스, 시간 및 시스템 자체에 대한 정보를 로드하는 방법을 보았습니다. 각 명령은 탐색할 수 있는 정보 테이블을 제공합니다. 작업할 데이터 테이블을 로드하는 다른 방법도 있습니다.
 
-## Opening files
+## 파일 열기
 
-One of Nu's most powerful assets in working with data is the [`open`](/commands/docs/open.md) command. It is a multi-tool that can work with a number of different data formats. To see what this means, let's try opening a json file:
+데이터 작업에서 Nu의 가장 강력한 자산 중 하나는 [`open`](/commands/docs/open.md) 명령입니다. 여러 가지 데이터 형식으로 작업할 수 있는 다중 도구입니다. 이것이 무엇을 의미하는지 보려면 json 파일을 열어 보겠습니다.
 
 @[code](@snippets/loading_data/vscode.sh)
 
-In a similar way to [`ls`](/commands/docs/ls.md), opening a file type that Nu understands will give us back something that is more than just text (or a stream of bytes). Here we open a "package.json" file from a JavaScript project. Nu can recognize the JSON text and parse it to a table of data.
+[`ls`](/commands/docs/ls.md)와 유사한 방식으로 Nu가 이해하는 파일 형식을 열면 텍스트(또는 바이트 스트림) 이상의 것을 반환합니다. 여기서는 JavaScript 프로젝트의 "package.json" 파일을 엽니다. Nu는 JSON 텍스트를 인식하고 이를 데이터 테이블로 구문 분석할 수 있습니다.
 
-If we wanted to check the version of the project we were looking at, we can use the [`get`](/commands/docs/get.md) command.
+보고 있는 프로젝트의 버전을 확인하려면 [`get`](/commands/docs/get.md) 명령을 사용할 수 있습니다.
 
 ```nu
 open editors/vscode/package.json | get version
 # => 1.0.0
 ```
 
-Nu currently supports the following formats for loading data directly into tables:
+Nu는 현재 데이터를 테이블로 직접 로드하기 위해 다음 형식을 지원합니다.
 
 - csv
 - eml
@@ -26,7 +26,7 @@ Nu currently supports the following formats for loading data directly into table
 - json
 - [nuon](#nuon)
 - ods
-- [SQLite databases](#sqlite)
+- [SQLite 데이터베이스](#sqlite)
 - ssv
 - toml
 - tsv
@@ -36,32 +36,32 @@ Nu currently supports the following formats for loading data directly into table
 - xml
 - yaml / yml
 
-::: tip Did you know?
-Under the hood `open` will look for a `from ...` subcommand in your scope which matches the extension of your file.
-You can thus simply extend the set of supported file types of `open` by creating your own `from ...` subcommand.
+::: tip 알고 계셨나요?
+내부적으로 `open`은 범위에서 파일 확장자와 일치하는 `from ...` 하위 명령을 찾습니다.
+따라서 자신만의 `from ...` 하위 명령을 만들어 `open`에서 지원하는 파일 형식 집합을 간단히 확장할 수 있습니다.
 :::
 
-But what happens if you load a text file that isn't one of these? Let's try it:
+하지만 이러한 형식이 아닌 텍스트 파일을 로드하면 어떻게 될까요? 시도해 보겠습니다.
 
 ```nu
 open README.md
 ```
 
-We're shown the contents of the file.
+파일 내용이 표시됩니다.
 
-Below the surface, what Nu sees in these text files is one large string. Next, we'll talk about how to work with these strings to get the data we need out of them.
+내부적으로 Nu가 이러한 텍스트 파일에서 보는 것은 하나의 큰 문자열입니다. 다음으로 이러한 문자열을 사용하여 필요한 데이터를 추출하는 방법을 설명합니다.
 
 ## NUON
 
-Nushell Object Notation (NUON) aims to be for Nushell what JavaScript Object Notation (JSON) is for JavaScript.
-That is, NUON code is a valid Nushell code that describes some data structure.
-For example, this is a valid NUON (example from the [default configuration file](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_config.nu)):
+누셸 객체 표기법(NUON)은 자바스크립트 객체 표기법(JSON)이 자바스크립트에 대해 하는 것과 같은 역할을 누셸에 대해 하는 것을 목표로 합니다.
+즉, NUON 코드는 일부 데이터 구조를 설명하는 유효한 누셸 코드입니다.
+예를 들어, 이것은 유효한 NUON입니다([기본 구성 파일](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_config.nu)의 예).
 
 ```nu
 {
   menus: [
-    # Configuration for default nushell menus
-    # Note the lack of source parameter
+    # 기본 누셸 메뉴 구성
+    # 소스 매개변수 없음 참고
     {
       name: completion_menu
       only_buffer_difference: false
@@ -69,7 +69,7 @@ For example, this is a valid NUON (example from the [default configuration file]
       type: {
           layout: columnar
           columns: 4
-          col_width: 20   # Optional value. If missing all the screen width is used to calculate column width
+          col_width: 20   # 선택적 값. 누락된 경우 모든 화면 너비가 열 너비를 계산하는 데 사용됩니다.
           col_padding: 2
       }
       style: {
@@ -82,20 +82,20 @@ For example, this is a valid NUON (example from the [default configuration file]
 }
 ```
 
-You might notice it is quite similar to JSON, and you're right.
-**NUON is a superset of JSON!**
-That is, any JSON code is a valid NUON code, therefore a valid Nushell code.
-Compared to JSON, NUON is more "human-friendly".
-For example, comments are allowed and commas are not required.
+JSON과 매우 유사하다는 것을 알 수 있으며, 맞습니다.
+**NUON은 JSON의 상위 집합입니다!**
+즉, 모든 JSON 코드는 유효한 NUON 코드이므로 유효한 누셸 코드입니다.
+JSON에 비해 NUON은 더 "인간 친화적"입니다.
+예를 들어, 주석이 허용되고 쉼표가 필요하지 않습니다.
 
-One limitation of NUON currently is that it cannot represent all of the Nushell [data types](types_of_data.md).
-Most notably, NUON does not allow the serialization of blocks.
+현재 NUON의 한 가지 제한 사항은 모든 누셸 [데이터 유형](types_of_data.md)을 나타낼 수 없다는 것입니다.
+가장 주목할 만한 점은 NUON이 블록의 직렬화를 허용하지 않는다는 것입니다.
 
-## Handling Strings
+## 문자열 처리
 
-An important part of working with data coming from outside Nu is that it's not always in a format that Nu understands. Often this data is given to us as a string.
+Nu 외부에서 들어오는 데이터로 작업할 때 중요한 부분은 Nu가 이해하는 형식이 항상 아니라는 것입니다. 종종 이 데이터는 문자열로 제공됩니다.
 
-Let's imagine that we're given this data file:
+다음 데이터 파일이 있다고 상상해 봅시다.
 
 ```nu
 open people.txt
@@ -104,9 +104,9 @@ open people.txt
 # => Antonio | Vivaldi | Composer
 ```
 
-Each bit of data we want is separated by the pipe ('|') symbol, and each person is on a separate line. Nu doesn't have a pipe-delimited file format by default, so we'll have to parse this ourselves.
+원하는 각 데이터 비트는 파이프('|') 기호로 구분되고 각 사람은 별도의 줄에 있습니다. Nu는 기본적으로 파이프로 구분된 파일 형식이 없으므로 직접 구문 분석해야 합니다.
 
-The first thing we want to do when bringing in the file is to work with it a line at a time:
+파일을 가져올 때 가장 먼저 해야 할 일은 한 번에 한 줄씩 작업하는 것입니다.
 
 ```nu
 open people.txt | lines
@@ -117,7 +117,7 @@ open people.txt | lines
 # => ───┴──────────────────────────────
 ```
 
-We can see that we're working with the lines because we're back into a list. Our next step is to see if we can split up the rows into something a little more useful. For that, we'll use the [`split`](/commands/docs/split.md) command. [`split`](/commands/docs/split.md), as the name implies, gives us a way to split a delimited string. We will use [`split`](/commands/docs/split.md)'s `column` subcommand to split the contents across multiple columns. We tell it what the delimiter is, and it does the rest:
+목록으로 돌아왔기 때문에 줄 단위로 작업하고 있음을 알 수 있습니다. 다음 단계는 행을 좀 더 유용한 것으로 분할할 수 있는지 확인하는 것입니다. 이를 위해 [`split`](/commands/docs/split.md) 명령을 사용합니다. 이름에서 알 수 있듯이 [`split`](/commands/docs/split.md)는 구분된 문자열을 분할하는 방법을 제공합니다. [`split`](/commands/docs/split.md)의 `column` 하위 명령을 사용하여 내용을 여러 열로 분할합니다. 구분 기호가 무엇인지 알려주면 나머지는 알아서 처리합니다.
 
 ```nu
 open people.txt | lines | split column "|"
@@ -130,7 +130,7 @@ open people.txt | lines | split column "|"
 # => ───┴──────────┴───────────┴───────────
 ```
 
-That _almost_ looks correct. It looks like there's an extra space there. Let's [`trim`](/commands/docs/str_trim.md) that extra space:
+거의 올바르게 보입니다. 추가 공백이 있는 것 같습니다. [`trim`](/commands/docs/str_trim.md)을 사용하여 추가 공백을 제거해 보겠습니다.
 
 ```nu
 open people.txt | lines | split column "|" | str trim
@@ -143,7 +143,7 @@ open people.txt | lines | split column "|" | str trim
 # => ───┴─────────┴─────────┴──────────
 ```
 
-Not bad. The [`split`](/commands/docs/split.md) command gives us data we can use. It also goes ahead and gives us default column names:
+나쁘지 않습니다. [`split`](/commands/docs/split.md) 명령은 사용할 수 있는 데이터를 제공합니다. 또한 기본 열 이름을 제공합니다.
 
 ```nu
 open people.txt | lines | split column "|" | str trim | get column1
@@ -154,7 +154,7 @@ open people.txt | lines | split column "|" | str trim | get column1
 # => ───┴─────────
 ```
 
-We can also name our columns instead of using the default names:
+기본 이름을 사용하는 대신 열 이름을 지정할 수도 있습니다.
 
 ```nu
 open people.txt | lines | split column "|" first_name last_name job | str trim
@@ -167,7 +167,7 @@ open people.txt | lines | split column "|" first_name last_name job | str trim
 # => ───┴────────────┴───────────┴──────────
 ```
 
-Now that our data is in a table, we can use all the commands we've used on tables before:
+이제 데이터가 테이블에 있으므로 이전에 테이블에서 사용했던 모든 명령을 사용할 수 있습니다.
 
 ```nu
 open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
@@ -180,12 +180,12 @@ open people.txt | lines | split column "|" first_name last_name job | str trim |
 # => ───┴────────────┴───────────┴──────────
 ```
 
-There are other commands you can use to work with strings:
+문자열로 작업하는 데 사용할 수 있는 다른 명령이 있습니다.
 
 - [`str`](/commands/docs/str.md)
 - [`lines`](/commands/docs/lines.md)
 
-There is also a set of helper commands we can call if we know the data has a structure that Nu should be able to understand. For example, let's open a Rust lock file:
+Nu가 이해할 수 있는 구조를 가진 데이터가 있는 경우 호출할 수 있는 도우미 명령 집합도 있습니다. 예를 들어 Rust 잠금 파일을 열어 보겠습니다.
 
 ```nu
 open Cargo.lock
@@ -196,15 +196,15 @@ open Cargo.lock
 # => version = "0.1.2"
 ```
 
-The "Cargo.lock" file is actually a .toml file, but the file extension isn't .toml. That's okay, we can use the [`from`](/commands/docs/from.md) command using the `toml` subcommand:
+"Cargo.lock" 파일은 실제로 .toml 파일이지만 파일 확장자는 .toml이 아닙니다. 괜찮습니다. `toml` 하위 명령을 사용하여 [`from`](/commands/docs/from.md) 명령을 사용할 수 있습니다.
 
 @[code](@snippets/loading_data/cargo-toml.sh)
 
-The [`from`](/commands/docs/from.md) command can be used for each of the structured data text formats that Nu can open and understand by passing it the supported format as a subcommand.
+[`from`](/commands/docs/from.md) 명령은 Nu가 열고 이해할 수 있는 각 구조화된 데이터 텍스트 형식에 대해 지원되는 형식을 하위 명령으로 전달하여 사용할 수 있습니다.
 
-## Opening in raw mode
+## 원시 모드에서 열기
 
-While it's helpful to be able to open a file and immediately work with a table of its data, this is not always what you want to do. To get to the underlying text, the [`open`](/commands/docs/open.md) command can take an optional `--raw` flag:
+파일을 열고 즉시 해당 데이터 테이블로 작업할 수 있다는 것은 도움이 되지만 항상 원하는 것은 아닙니다. 기본 텍스트에 액세스하려면 [`open`](/commands/docs/open.md) 명령에 선택적 `--raw` 플래그를 사용할 수 있습니다.
 
 ```nu
 open Cargo.toml --raw
@@ -217,28 +217,28 @@ open Cargo.toml --raw
 
 ## SQLite
 
-SQLite databases are automatically detected by [`open`](/commands/docs/open.md), no matter what their file extension is. You can open a whole database:
+SQLite 데이터베이스는 파일 확장자에 관계없이 [`open`](/commands/docs/open.md)에 의해 자동으로 감지됩니다. 전체 데이터베이스를 열 수 있습니다.
 
 ```nu
 open foo.db
 ```
 
-Or [`get`](/commands/docs/get.md) a specific table:
+또는 특정 테이블을 [`get`](/commands/docs/get.md)합니다.
 
 ```nu
 open foo.db | get some_table
 ```
 
-Or run any SQL query you like:
+또는 원하는 SQL 쿼리를 실행할 수 있습니다.
 
 ```nu
 open foo.db | query db "select * from some_table"
 ```
 
-(Note: some older versions of Nu use `into db | query` instead of `query db` )
+(참고: 일부 이전 버전의 Nu는 `query db` 대신 `into db | query`를 사용합니다.)
 
-## Fetching URLs
+## URL 가져오기
 
-In addition to loading files from your filesystem, you can also load URLs by using the [`http get`](/commands/docs/http.md) command. This will fetch the contents of the URL from the internet and return it:
+파일 시스템에서 파일을 로드하는 것 외에도 [`http get`](/commands/docs/http.md) 명령을 사용하여 URL을 로드할 수도 있습니다. 이렇게 하면 인터넷에서 URL의 내용을 가져와 반환합니다.
 
 @[code](@snippets/loading_data/rust-lang-feed.sh)

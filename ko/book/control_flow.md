@@ -1,28 +1,28 @@
-# Control Flow
+# 제어 흐름
 
-Nushell provides several commands that help determine how different groups of code are executed. In programming languages this functionality is often referred to as _control flow_.
+누셸은 여러 코드 그룹이 실행되는 방식을 결정하는 데 도움이 되는 여러 명령을 제공합니다. 프로그래밍 언어에서 이 기능은 종종 _제어 흐름_이라고 합니다.
 
 ::: tip
-One thing to note is that all of the commands discussed on this page use [blocks](/book/types_of_data.html#blocks). This means you can mutate [environmental variables](/book/environment.html) and other [mutable variables](/book/variables.html#mutable-variables) in them.
+이 페이지에서 설명하는 모든 명령은 [블록](/book/types_of_data.html#blocks)을 사용한다는 점에 유의해야 합니다. 즉, [환경 변수](/book/environment.html) 및 기타 [가변 변수](/book/variables.html#mutable-variables)를 수정할 수 있습니다.
 :::
 
-## Already covered
+## 이미 다룬 내용
 
-Below we cover some commands related to control flow, but before we get to them, it's worthwhile to note there are several pieces of functionality and concepts that have already been covered in other sections that are also related to control flow or that can be used in the same situations. These include:
+아래에서는 제어 흐름과 관련된 몇 가지 명령을 다루지만, 그 전에 다른 섹션에서 이미 다룬 제어 흐름과 관련되거나 동일한 상황에서 사용할 수 있는 몇 가지 기능과 개념이 있다는 점에 유의해야 합니다. 여기에는 다음이 포함됩니다.
 
-- Pipes on the [pipelines](/book/pipelines.html) page.
-- Closures on the [types of data](/book/types_of_data.html) page.
-- Iteration commands on the [working with lists](/book/working_with_lists.html) page. Such as:
+- [파이프라인](/book/pipelines.html) 페이지의 파이프.
+- [데이터 유형](/book/types_of_data.html) 페이지의 클로저.
+- [목록 작업](/book/working_with_lists.html) 페이지의 반복 명령. 예:
   - [`each`](/commands/docs/each.html)
   - [`where`](/commands/docs/where.html)
   - [`reduce`](/commands/docs/reduce.html)
 
-## Choice (Conditionals)
+## 선택 (조건부)
 
-The following commands execute code based on some given condition.
+다음 명령은 주어진 조건에 따라 코드를 실행합니다.
 
 ::: tip
-The choice/conditional commands are expressions so they return values, unlike the other commands on this page. This means the following works.
+선택/조건부 명령은 이 페이지의 다른 명령과 달리 값을 반환하는 표현식입니다. 즉, 다음이 작동합니다.
 
 ```nu
 'foo' | if $in == 'foo' { 1 } else { 0 } | $in + 2
@@ -33,35 +33,35 @@ The choice/conditional commands are expressions so they return values, unlike th
 
 ### `if`
 
-[`if`](/commands/docs/if.html) evaluates branching [blocks](/book/types_of_data.html#blocks) of code based on the results of one or more conditions similar to the "if" functionality in other programming languages. For example:
+[`if`](/commands/docs/if.html)는 다른 프로그래밍 언어의 "if" 기능과 유사하게 하나 이상의 조건 결과에 따라 분기 [블록](/book/types_of_data.html#blocks)을 평가합니다. 예시:
 
 ```nu
 if $x > 0 { 'positive' }
 ```
 
-Returns `'positive`' when the condition is `true` (`$x` is greater than zero) and `null` when the condition is `false` (`$x` is less than or equal to zero).
+조건이 `true`일 때(`$x`가 0보다 클 때) `'positive'`를 반환하고 조건이 `false`일 때(`$x`가 0보다 작거나 같을 때) `null`을 반환합니다.
 
-We can add an `else` branch to the `if` after the first block which executes and returns the resulting value from the `else` block when the condition is `false`. For example:
+첫 번째 블록 뒤에 `if`에 `else` 분기를 추가할 수 있으며, 조건이 `false`일 때 `else` 블록에서 결과 값을 실행하고 반환합니다. 예시:
 
 ```nu
 if $x > 0 { 'positive' } else { 'non-positive' }
 ```
 
-This time it returns `'positive'` when the condition is `true` (`$x` is greater than zero) and `'non-positive`' when the condition is `false` (`$x` is less than or equal to zero).
+이번에는 조건이 `true`일 때(`$x`가 0보다 클 때) `'positive'`를 반환하고 조건이 `false`일 때(`$x`가 0보다 작거나 같을 때) `'non-positive'`를 반환합니다.
 
-We can also chain multiple `if`s together like the following:
+다음과 같이 여러 `if`를 연결할 수도 있습니다.
 
 ```nu
 if $x > 0 { 'positive' } else if $x == 0 { 'zero' } else { "negative" }
 ```
 
-When the first condition is `true` (`$x` is greater than zero) it will return `'positive'`, when the first condition is `false` and the next condition is `true` (`$x` equals zero) it will return `'zero'`, otherwise it will return `'negative'` (when `$x` is less than zero).
+첫 번째 조건이 `true`일 때(`$x`가 0보다 클 때) `'positive'`를 반환하고, 첫 번째 조건이 `false`이고 다음 조건이 `true`일 때(`$x`가 0일 때) `'zero'`를 반환하고, 그렇지 않으면 `'negative'`를 반환합니다(`$x`가 0보다 작을 때).
 
 ### `match`
 
-[`match`](/commands/docs/match.html) executes one of several conditional branches based on the value given to match. You can also do some [pattern matching](/cookbook/pattern_matching.html) to unpack values in composite types like lists and records.
+[`match`](/commands/docs/match.html)는 일치하도록 지정된 값을 기반으로 여러 조건부 분기 중 하나를 실행합니다. 목록 및 레코드와 같은 복합 유형의 값을 풀기 위해 [패턴 일치](/cookbook/pattern_matching.html)를 수행할 수도 있습니다.
 
-Basic usage of [`match`](/commands/docs/match.html) can conditionally run different code like a "switch" statement common in other languages. [`match`](/commands/docs/match.html) checks if the value after the word [`match`](/commands/docs/match.html) is equal to the value at the start of each branch before the `=>` and if it does, it executes the code after that branch's `=>`.
+[`match`](/commands/docs/match.html)의 기본 사용법은 다른 언어에서 일반적인 "switch" 문과 같이 다른 코드를 조건부로 실행할 수 있습니다. [`match`](/commands/docs/match.html)는 [`match`](/commands/docs/match.html) 단어 뒤의 값이 `=>` 앞의 각 분기 시작에 있는 값과 같은지 확인하고, 같으면 해당 분기의 `=>` 뒤에 있는 코드를 실행합니다.
 
 ```nu
 match 3 {
@@ -76,11 +76,11 @@ match 3 {
 # => three
 ```
 
-The branches can either return a single value or, as shown in the second branch, can return the results of a [block](/book/types_of_data.html#blocks).
+분기는 단일 값을 반환하거나, 두 번째 분기에서와 같이 [블록](/book/types_of_data.html#blocks)의 결과를 반환할 수 있습니다.
 
-#### Catch all Branch
+#### 모두 잡기 분기
 
-You can also have a catch all condition for when the given value doesn't match any of the other conditions by having a branch whose matching value is `_`.
+주어진 값이 다른 조건과 일치하지 않을 때 일치하는 값이 `_`인 분기를 사용하여 모두 잡기 조건을 가질 수도 있습니다.
 
 ```nu
 let foo = match 7 {
@@ -93,11 +93,11 @@ $foo
 # => other number
 ```
 
-(Reminder, [`match`](/commands/docs/match.html) is an expression which is why we can assign the result to `$foo` here).
+(참고로 [`match`](/commands/docs/match.html)는 표현식이므로 여기서 결과를 `$foo`에 할당할 수 있습니다.)
 
-#### Pattern Matching
+#### 패턴 일치
 
-You can "unpack" values from types like lists and records with [pattern matching](/cookbook/pattern_matching.html). You can then assign variables to the parts you want to unpack and use them in the matched expressions.
+목록 및 레코드와 같은 유형에서 값을 "풀기" 위해 [패턴 일치](/cookbook/pattern_matching.html)를 사용할 수 있습니다. 그런 다음 풀고 싶은 부분에 변수를 할당하고 일치하는 표현식에서 사용할 수 있습니다.
 
 ```nu
 let foo = { name: 'bar', count: 7 }
@@ -109,11 +109,11 @@ match $foo {
 # => 10
 ```
 
-The `_` in the second branch means it matches any record with field `name` and `count`, not just ones where `name` is `'bar'`.
+두 번째 분기의 `_`는 `name`이 `'bar'`인 레코드뿐만 아니라 `name` 및 `count` 필드가 있는 모든 레코드와 일치함을 의미합니다.
 
-#### Guards
+#### 가드
 
-You can also add an additional condition to each branch called a "guard" to determine if the branch should be matched. To do so, after the matched pattern put `if` and then the condition before the `=>`.
+분기가 일치해야 하는지 여부를 결정하기 위해 각 분기에 "가드"라는 추가 조건을 추가할 수도 있습니다. 이렇게 하려면 일치하는 패턴 뒤에 `if`를 넣고 `=>` 앞에 조건을 넣습니다.
 
 ```nu
 let foo = { name: 'bar', count: 7 }
@@ -127,15 +127,15 @@ match $foo {
 
 ---
 
-You can find more details about [`match`](/commands/docs/match.html) in the [pattern matching cookbook page](https://www.nushell.sh/cookbook/pattern_matching.html).
+[`match`](/commands/docs/match.html)에 대한 자세한 내용은 [패턴 일치 요리책 페이지](https://www.nushell.sh/cookbook/pattern_matching.html)에서 찾을 수 있습니다.
 
-## Loops
+## 루프
 
-The loop commands allow you to repeat a block of code multiple times.
+루프 명령을 사용하면 코드 블록을 여러 번 반복할 수 있습니다.
 
-### Loops and Other Iterating Commands
+### 루프 및 기타 반복 명령
 
-The functionality of the loop commands is similar to commands that apply a closure over elements in a list or table like [`each`](/commands/docs/each.html) or [`where`](/commands/docs/where.html) and many times you can accomplish the same thing with either. For example:
+루프 명령의 기능은 [`each`](/commands/docs/each.html) 또는 [`where`](/commands/docs/where.html)와 같이 목록이나 테이블의 요소에 클로저를 적용하는 명령과 유사하며, 많은 경우 어느 쪽으로든 동일한 작업을 수행할 수 있습니다. 예시:
 
 ```nu
 mut result = []
@@ -156,15 +156,15 @@ $result
 # => ╰───┴───╯
 ```
 
-While it may be tempting to use loops if you're familiar with them in other languages, it is considered more in the [Nushell-style](/book/thinking_in_nu.html) (idiomatic) to use commands that apply closures when you can solve a problem either way. The reason for this is because of a pretty big downside with using loops.
+다른 언어에서 루프에 익숙하다면 루프를 사용하는 것이 유혹적일 수 있지만, 어느 쪽으로든 문제를 해결할 수 있을 때 클로저를 적용하는 명령을 사용하는 것이 더 [누셸 스타일](/book/thinking_in_nu.html)(관용적)로 간주됩니다. 그 이유는 루프 사용에 꽤 큰 단점이 있기 때문입니다.
 
-#### Loop Disadvantages
+#### 루프 단점
 
-The biggest downside of loops is that they are statements, unlike [`each`](/commands/docs/each.html) which is an expression. Expressions, like [`each`](/commands/docs/each.html) always result in some output value, however statements do not.
+루프의 가장 큰 단점은 표현식인 [`each`](/commands/docs/each.html)와 달리 문이라는 것입니다. [`each`](/commands/docs/each.html)와 같은 표현식은 항상 일부 출력 값을 반환하지만 문은 그렇지 않습니다.
 
-This means that they don't work well with immutable variables and using immutable variables is considered a more [Nushell-style](/book/thinking_in_nu.html#variables-are-immutable). Without a mutable variable declared beforehand in the example in the previous section, it would be impossible to use [`for`](/commands/docs/each.html) to get the list of numbers with incremented numbers, or any value at all.
+이는 불변 변수와 잘 작동하지 않으며 불변 변수를 사용하는 것이 더 [누셸 스타일](/book/thinking_in_nu.html#variables-are-immutable)로 간주된다는 것을 의미합니다. 이전 섹션의 예에서 미리 선언된 가변 변수가 없으면 [`for`](/commands/docs/each.html)를 사용하여 증가된 숫자의 목록이나 어떤 값이든 얻는 것이 불가능합니다.
 
-Statements also don't work in Nushell pipelines which require some output. In fact Nushell will give an error if you try:
+문은 일부 출력이 필요한 누셸 파이프라인에서도 작동하지 않습니다. 실제로 누셸은 시도하면 오류를 발생시킵니다.
 
 ```nu
 [1 2 3] | for x in $in { $x + 1 } | $in ++ [5 6 7]
@@ -179,11 +179,11 @@ Statements also don't work in Nushell pipelines which require some output. In fa
 # =>   help: 'for' keyword is not allowed in pipeline. Use 'for' by itself, outside of a pipeline.
 ```
 
-Because Nushell is very pipeline oriented, this means using expression commands like [`each`](/commands/docs/each.html) is typically more natural than loop statements.
+누셸은 매우 파이프라인 지향적이므로 [`each`](/commands/docs/each.html)와 같은 표현식 명령을 사용하는 것이 루프 문보다 일반적으로 더 자연스럽습니다.
 
-#### Loop Advantages
+#### 루프 장점
 
-If loops have such a big disadvantage, why do they exist? Well, one reason is that closures, like [`each`](/commands/docs/each.html) uses, can't modify mutable variables in the surrounding environment. If you try to modify a mutable variable in a closure you will get an error:
+루프에 그렇게 큰 단점이 있다면 왜 존재할까요? 한 가지 이유는 [`each`](/commands/docs/each.html)에서 사용하는 것과 같은 클로저는 주변 환경의 가변 변수를 수정할 수 없기 때문입니다. 클로저에서 가변 변수를 수정하려고 하면 오류가 발생합니다.
 
 ```nu
 mut foo = []
@@ -198,7 +198,7 @@ mut foo = []
 # =>    ╰────
 ```
 
-If you modify an environmental variable in a closure, you can, but it will only modify it within the scope of the closure, leaving it unchanged everywhere else. Loops, however, use [blocks](/book/types_of_data.html#blocks) which means they can modify a regular mutable variable or an environmental variable within the larger scope.
+클로저에서 환경 변수를 수정하면 할 수 있지만, 클로저 범위 내에서만 수정되고 다른 곳에서는 변경되지 않습니다. 그러나 루프는 [블록](/book/types_of_data.html#blocks)을 사용하므로 더 큰 범위 내에서 일반 가변 변수 또는 환경 변수를 수정할 수 있습니다.
 
 ```nu
 mut result = []
@@ -213,7 +213,7 @@ $result
 
 ### `for`
 
-[`for`](/commands/docs/for.html) loops over a range or collection like a list or a table.
+[`for`](/commands/docs/for.html)는 범위나 목록 또는 테이블과 같은 컬렉션을 반복합니다.
 
 ```nu
 for x in [1 2 3] { $x * $x | print }
@@ -222,7 +222,7 @@ for x in [1 2 3] { $x * $x | print }
 # => 9
 ```
 
-#### Expression Command Alternatives
+#### 표현식 명령 대안
 
 - [`each`](/commands/docs/each.html)
 - [`par-each`](/commands/docs/par-each.html)
@@ -231,16 +231,16 @@ for x in [1 2 3] { $x * $x | print }
 
 ### `while`
 
-[`while`](/commands/docs/while.html) loops the same block of code until the given condition is `false`.
+[`while`](/commands/docs/while.html)은 주어진 조건이 `false`가 될 때까지 동일한 코드 블록을 반복합니다.
 
 ```nu
 mut x = 0; while $x < 10 { $x = $x + 1 }; $x
 # => 10
 ```
 
-#### Expression Command Alternatives
+#### 표현식 명령 대안
 
-The "until" and other "while" commands
+"until" 및 기타 "while" 명령
 
 - [`take until`](/commands/docs/take_until.html)
 - [`take while`](/commands/docs/take_while.html)
@@ -249,7 +249,7 @@ The "until" and other "while" commands
 
 ### `loop`
 
-[`loop`](/commands/docs/loop.html) loops a block infinitely. You can use [`break`](/commands/docs/break.html) (as described in the next section) to limit how many times it loops. It can also be handy for continuously running scripts, like an interactive prompt.
+[`loop`](/commands/docs/loop.html)는 블록을 무한정 반복합니다. [`break`](/commands/docs/break.html)(다음 섹션에서 설명)를 사용하여 반복 횟수를 제한할 수 있습니다. 대화형 프롬프트와 같이 지속적으로 실행되는 스크립트에 유용할 수도 있습니다.
 
 ```nu
 mut x = 0; loop { if $x > 10 { break }; $x = $x + 1 }; $x
@@ -258,7 +258,7 @@ mut x = 0; loop { if $x > 10 { break }; $x = $x + 1 }; $x
 
 ### `break`
 
-[`break`](/commands/docs/break.html) will stop executing the code in a loop and resume execution after the loop. Effectively "break"ing out of the loop.
+[`break`](/commands/docs/break.html)는 루프에서 코드 실행을 중지하고 루프 후에 실행을 재개합니다. 효과적으로 루프에서 "탈출"합니다.
 
 ```nu
 for x in 1..10 { if $x > 3 { break }; print $x }
@@ -269,7 +269,7 @@ for x in 1..10 { if $x > 3 { break }; print $x }
 
 ### `continue`
 
-[`continue`](/commands/docs/continue.html) will stop execution of the current loop, skipping the rest of the code in the loop, and will go to the next loop. If the loop would normally end, like if [`for`](/commands/docs/for.html) has iterated through all the given elements, or if [`while`](/commands/docs/while.html)'s condition is now false, it won't loop again and execution will continue after the loop block.
+[`continue`](/commands/docs/continue.html)는 현재 루프의 실행을 중지하고 루프의 나머지 코드를 건너뛰고 다음 루프로 이동합니다. [`for`](/commands/docs/for.html)가 주어진 모든 요소를 반복했거나 [`while`](/commands/docs/while.html)의 조건이 이제 false인 경우와 같이 루프가 정상적으로 종료되면 다시 반복되지 않고 루프 블록 후에 실행이 계속됩니다.
 
 ```nu
 mut x = -1; while $x <= 6 { $x = $x + 1; if $x mod 3 == 0 { continue }; print $x }
@@ -280,11 +280,11 @@ mut x = -1; while $x <= 6 { $x = $x + 1; if $x mod 3 == 0 { continue }; print $x
 # => 7
 ```
 
-## Errors
+## 오류
 
 ### `error make`
 
-[`error make`](/commands/docs/error_make.html) creates an error that stops execution of the code and any code that called it, until either it is handled by a [`try`](/commands/docs/try.html) block, or it ends the script and outputs the error message. This functionality is the same as "exceptions" in other languages.
+[`error make`](/commands/docs/error_make.html)는 코드 실행과 이를 호출한 모든 코드 실행을 중지하는 오류를 생성하며, [`try`](/commands/docs/try.html) 블록에 의해 처리되거나 스크립트를 종료하고 오류 메시지를 출력할 때까지 계속됩니다. 이 기능은 다른 언어의 "예외"와 동일합니다.
 
 ```nu
 print 'printed'; error make { msg: 'Some error info' }; print 'unprinted'
@@ -297,38 +297,38 @@ print 'printed'; error make { msg: 'Some error info' }; print 'unprinted'
 # =>    ╰────
 ```
 
-The record passed to it provides some information to the code that catches it or the resulting error message.
+전달된 레코드는 이를 포착하는 코드나 결과 오류 메시지에 일부 정보를 제공합니다.
 
-You can find more information about [`error make`](/commands/docs/error_make.html) and error concepts on the [Creating your own errors page](/book/creating_errors.html).
+[`error make`](/commands/docs/error_make.html) 및 오류 개념에 대한 자세한 내용은 [자신만의 오류 만들기 페이지](/book/creating_errors.html)에서 확인할 수 있습니다.
 
 ### `try`
 
-[`try`](/commands/docs/try.html) will catch errors created anywhere in the [`try`](/commands/docs/try.html)'s code block and resume execution of the code after the block.
+[`try`](/commands/docs/try.html)는 [`try`](/commands/docs/try.html)의 코드 블록 어디에서나 생성된 오류를 포착하고 블록 뒤의 코드 실행을 재개합니다.
 
 ```nu
 try { error make { msg: 'Some error info' }}; print 'Resuming'
 # => Resuming
 ```
 
-This includes catching built in errors.
+여기에는 기본 제공 오류 포착이 포함됩니다.
 
 ```nu
 try { 1 / 0 }; print 'Resuming'
 # => Resuming
 ```
 
-The resulting value will be `nothing` if an error occurs and the returned value of the block if an error did not occur.
+오류가 발생하면 결과 값은 `nothing`이 되고 오류가 발생하지 않으면 블록의 반환 값이 됩니다.
 
-If you include a `catch` block after the [`try`](/commands/docs/try.html) block, it will execute the code in the `catch` block if an error occurred in the [`try`](/commands/docs/try.html) block.
+[`try`](/commands/docs/try.html) 블록 뒤에 `catch` 블록을 포함하면 [`try`](/commands/docs/try.html) 블록에서 오류가 발생한 경우 `catch` 블록의 코드를 실행합니다.
 
 ```nu
 try { 1 / 0 } catch { 'An error happened!' } | $in ++ ' And now I am resuming.'
 # => An error happened! And now I am resuming.
 ```
 
-It will not execute the `catch` block if an error did not occur.
+오류가 발생하지 않으면 `catch` 블록을 실행하지 않습니다.
 
-`try` also works for external commands:
+`try`는 외부 명령에도 작동합니다.
 
 ```nu
 try { ^nonexisting }; print 'a'
@@ -346,11 +346,11 @@ try { ^nonexisting }; print 'a'
 # =>   help: `nonexisting` is neither a Nushell built-in or a known external command
 ```
 
-## Other
+## 기타
 
 ### `return`
 
-[`return`](/commands/docs/return.html) Ends a closure or command early where it is called, without running the rest of the command/closure, and returns the given value. Not often necessary since the last value in a closure or command is also returned, but it can sometimes be convenient.
+[`return`](/commands/docs/return.html)은 호출된 위치에서 클로저나 명령을 조기에 종료하고 나머지 명령/클로저를 실행하지 않고 주어진 값을 반환합니다. 클로저나 명령의 마지막 값도 반환되므로 자주 필요하지는 않지만 때로는 편리할 수 있습니다.
 
 ```nu
 def 'positive-check' [it] {

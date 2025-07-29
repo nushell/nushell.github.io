@@ -1,18 +1,18 @@
-# Coloring and Theming in Nu
+# Nu의 색상 지정 및 테마 설정
 
-Many parts of Nushell's interface can have their color customized. All of these can be set in the `config.nu` configuration file. If you see the `#` outside of a text value in the config file it means the text after it is commented out.
+누셸 인터페이스의 여러 부분의 색상을 사용자 지정할 수 있습니다. 이 모든 것은 `config.nu` 구성 파일에서 설정할 수 있습니다. 구성 파일에서 텍스트 값 외부에 `#`이 표시되면 그 뒤의 텍스트가 주석 처리되었음을 의미합니다.
 
-## Table Borders
+## 테이블 테두리
 
-Table borders are controlled by the `$env.config.table.mode` setting. It can be changed at run time, or in the `config.nu` file:
+테이블 테두리는 `$env.config.table.mode` 설정으로 제어됩니다. 런타임에 또는 `config.nu` 파일에서 변경할 수 있습니다.
 
 ```nu
 $env.config.table.mode = 'rounded'
 ```
 
-The options for `$env.config.table.mode` can be listed with `table --list`:
+`$env.config.table.mode`에 대한 옵션은 `table --list`로 나열할 수 있습니다.
 
-<!-- Generated with table --list | each {|| $"- `($in)`"} | sort | str join "\n"` -->
+<!-- table --list | each {|| $"- `($in)`"} | sort | str join "\n"`으로 생성됨 -->
 
 - `ascii_rounded`
 - `basic_compact`
@@ -34,7 +34,7 @@ The options for `$env.config.table.mode` can be listed with `table --list`:
 - `thin`
 - `with_love`
 
-Examples:
+예시:
 
 ```nu
 $env.config.table.mode = 'rounded'
@@ -56,43 +56,43 @@ table --list | first 5
 # =>  4 | heavy
 ```
 
-## Color Configuration
+## 색상 구성
 
-The color configuration is defined in `$env.config.color_config`. The current configuration can be printed with:
+색상 구성은 `$env.config.color_config`에 정의되어 있습니다. 현재 구성은 다음으로 인쇄할 수 있습니다.
 
 ```nu
 $env.config.color_config | sort
 ```
 
-The color and style-attributes can be declared in multiple alternative formats.
+색상 및 스타일 속성은 여러 대체 형식으로 선언할 수 있습니다.
 
-- `r` - normal color red's abbreviation
-- `rb` - normal color red's abbreviation with bold attribute
-- `red` - normal color red
-- `red_bold` - normal color red with bold attribute
-- `"#ff0000"` - "#hex" format foreground color red (quotes are required)
-- `{ fg: "#ff0000" bg: "#0000ff" attr: b }` - "full #hex" format foreground red in "#hex" format with a background of blue in "#hex" format with an attribute of bold abbreviated.
-- `{|x| 'yellow' }` - closure returning a string with one of the color representations listed above
-- `{|x| { fg: "#ff0000" bg: "#0000ff" attr: b } }` - closure returning a valid record
+- `r` - 일반 색상 빨강의 약어
+- `rb` - 굵은 속성이 있는 일반 색상 빨강의 약어
+- `red` - 일반 색상 빨강
+- `red_bold` - 굵은 속성이 있는 일반 색상 빨강
+- `"#ff0000"` - "#hex" 형식 전경색 빨강(따옴표 필요)
+- `{ fg: "#ff0000" bg: "#0000ff" attr: b }` - "#hex" 형식의 전경 빨강과 "#hex" 형식의 배경 파랑, 굵게 약어 속성이 있는 "전체 #hex" 형식.
+- `{|x| 'yellow' }` - 위에 나열된 색상 표현 중 하나가 포함된 문자열을 반환하는 클로저
+- `{|x| { fg: "#ff0000" bg: "#0000ff" attr: b } }` - 유효한 레코드를 반환하는 클로저
 
-### Attributes
+### 속성
 
-| code | meaning             |
+| 코드 | 의미             |
 | ---- | ------------------- |
-| l    | blink               |
-| b    | bold                |
-| d    | dimmed              |
-| h    | hidden              |
-| i    | italic              |
-| r    | reverse             |
-| s    | strikethrough       |
-| u    | underline           |
-| n    | nothing             |
-|      | defaults to nothing |
+| l    | 깜박임               |
+| b    | 굵게                |
+| d    | 흐리게              |
+| h    | 숨김              |
+| i    | 기울임꼴            |
+| r    | 반전             |
+| s    | 취소선       |
+| u    | 밑줄           |
+| n    | 없음             |
+|      | 기본값 없음 |
 
-### Normal Colors and Abbreviations
+### 일반 색상 및 약어
 
-| code      | name                      |
+| 코드      | 이름                      |
 | --------- | ------------------------- |
 | `g`       | `green`                   |
 | `gb`      | `green_bold`              |
@@ -228,31 +228,31 @@ The color and style-attributes can be declared in multiple alternative formats.
 | `defr`    | `default_reverse`         |
 | `bg_def`  | `bg_default`              |
 
-<!-- The table body can be printed with ansi --list | select 'short name' name | each {|| $"| `($in.'short name')` | `($in.name)` |"} | first 133 | str join "\n" -->
+<!-- 테이블 본문은 ansi --list | select 'short name' name | each {|| $"| `($in.'short name')` | `($in.name)` |"} | first 133 | str join "\n" 으로 인쇄할 수 있습니다. -->
 
-### `"#hex"` Format
+### `"#hex"` 형식
 
-The "#hex" format is one way you typically see colors represented. It's simply the `#` character followed by 6 characters. The first two are for `red`, the second two are for `green`, and the third two are for `blue`. It's important that this string be surrounded in quotes, otherwise Nushell thinks it's a commented out string.
+"#hex" 형식은 일반적으로 색상을 나타내는 한 가지 방법입니다. `#` 문자 뒤에 6개의 문자가 오는 것입니다. 처음 두 개는 `빨강`, 다음 두 개는 `녹색`, 마지막 두 개는 `파랑`입니다. 이 문자열을 따옴표로 묶는 것이 중요합니다. 그렇지 않으면 누셸이 주석 처리된 문자열로 인식합니다.
 
-Example: The primary `red` color is `"#ff0000"` or `"#FF0000"`. Upper and lower case in letters shouldn't make a difference.
+예시: 기본 `빨강` 색상은 `"#ff0000"` 또는 `"#FF0000"`입니다. 문자의 대소문자는 중요하지 않습니다.
 
-This `"#hex"` format allows us to specify 24-bit truecolor tones to different parts of Nushell.
+이 `"#hex"` 형식을 사용하면 누셸의 다른 부분에 24비트 트루컬러 톤을 지정할 수 있습니다.
 
-### Full `"#hex"` Format
+### 전체 `"#hex"` 형식
 
-The `full "#hex"` format is a take on the `"#hex"` format but allows one to specify the foreground, background, and attributes in one line.
+`전체 "#hex"` 형식은 `"#hex"` 형식을 기반으로 하지만 한 줄에 전경, 배경 및 속성을 지정할 수 있습니다.
 
-Example: `{ fg: "#ff0000" bg: "#0000ff" attr: b }`
+예시: `{ fg: "#ff0000" bg: "#0000ff" attr: b }`
 
-- foreground of red in "#hex" format
-- background of blue in "#hex" format
-- attribute of bold abbreviated
+- "#hex" 형식의 빨강 전경
+- "#hex" 형식의 파랑 배경
+- 굵게 약어 속성
 
-### Closure
+### 클로저
 
-Note: Closures are only executed for table output. They do not work in other contexts like for `shape_` configurations, when printing a value directly, or as a value in a list.
+참고: 클로저는 테이블 출력에 대해서만 실행됩니다. `shape_` 구성, 값을 직접 인쇄할 때 또는 목록의 값과 같은 다른 컨텍스트에서는 작동하지 않습니다.
 
-For example:
+예시:
 
 ```nu
 $env.config.color_config.filesize = {|x| if $x == 0b { 'dark_gray' } else if $x < 1mb { 'cyan' } else { 'blue' } }
@@ -260,7 +260,7 @@ $env.config.color_config.bool = {|x| if $x { 'green' } else { 'light_red' } }
 {a:true,b:false,c:0mb,d:0.5mb,e:10mib}
 ```
 
-prints
+인쇄물
 
 ```nu
 ╭───┬───────────╮
@@ -272,15 +272,15 @@ prints
 ╰───┴───────────╯
 ```
 
-with a green `true`, a light red `false`, a dark grey `0 B`, a cyan `488.3 KiB`, and a blue `10.0 MiB`.
+녹색 `true`, 밝은 빨강 `false`, 어두운 회색 `0 B`, 청록색 `488.3 KiB`, 파란색 `10.0 MiB`가 있습니다.
 
-## Primitive Values
+## 기본 값
 
-Primitive values are things like `int` and `string`. Primitive values and shapes can be set with a variety of color symbologies seen above.
+기본 값은 `int` 및 `string`과 같은 것입니다. 기본 값과 모양은 위에서 본 다양한 색상 기호로 설정할 수 있습니다.
 
-This is the current list of primitives. Not all of these are configurable. The configurable ones are marked with \*.
+다음은 현재 기본 목록입니다. 이들 모두가 구성 가능한 것은 아닙니다. 구성 가능한 것은 \*로 표시됩니다.
 
-| primitive    | default color         | configurable |
+| 기본형    | 기본 색상         | 구성 가능 |
 | ------------ | --------------------- | ------------ |
 | `any`        |                       |              |
 | `binary`     | Color::White.normal() | \*           |
@@ -311,9 +311,9 @@ This is the current list of primitives. Not all of these are configurable. The c
 | `vardecl`    |                       |              |
 | `variable`   |                       |              |
 
-### Special "primitives" (not really primitives but they exist solely for coloring)
+### 특수 "기본형" (실제로는 기본형이 아니지만 색상 지정을 위해서만 존재)
 
-| primitive                   | default color              | configurable |
+| 기본형                   | 기본 색상              | 구성 가능 |
 | --------------------------- | -------------------------- | ------------ |
 | `leading_trailing_space_bg` | Color::Rgb(128, 128, 128)) | \*           |
 | `header`                    | Color::Green.bold()        | \*           |
@@ -321,7 +321,7 @@ This is the current list of primitives. Not all of these are configurable. The c
 | `row_index`                 | Color::Green.bold()        | \*           |
 | `hints`                     | Color::DarkGray.normal()   | \*           |
 
-Here's a small example of changing some of these values.
+다음은 이러한 값 중 일부를 변경하는 작은 예입니다.
 
 ```nu
 $env.config.color_config.separator = purple
@@ -342,31 +342,31 @@ $env.config.color_config.cellpath = cyan
 $env.config.color_config.hints = dark_gray
 ```
 
-Here's another small example using multiple color syntaxes with some comments.
+다음은 일부 주석과 함께 여러 색상 구문을 사용하는 또 다른 작은 예입니다.
 
 ```nu
-$env.config.color_config.separator = "#88b719" # this sets only the foreground color like PR #486
-$env.config.color_config.leading_trailing_space_bg = white # this sets only the foreground color in the original style
-$env.config.color_config.header = { # this is like PR #489
-    fg: "#B01455", # note, quotes are required on the values with hex colors
-    bg: "#ffb900", # note, commas are not required, it could also be all on one line
-    attr: bli # note, there are no quotes around this value. it works with or without quotes
+$env.config.color_config.separator = "#88b719" # PR #486과 같이 전경색만 설정합니다.
+$env.config.color_config.leading_trailing_space_bg = white # 원래 스타일로 전경색만 설정합니다.
+$env.config.color_config.header = { # PR #489와 같습니다.
+    fg: "#B01455", # 16진수 색상이 있는 값에는 따옴표가 필요합니다.
+    bg: "#ffb900", # 쉼표는 필요하지 않으며 한 줄에 모두 있을 수도 있습니다.
+    attr: bli # 이 값 주위에는 따옴표가 없습니다. 따옴표가 있거나 없는 경우에도 작동합니다.
 }
 $env.config.color_config.date = "#75507B"
 $env.config.color_config.filesize = "#729fcf"
 $env.config.color_config.row_index = {
-    # note, that this is another way to set only the foreground, no need to specify bg and attr
+    # 전경만 설정하는 또 다른 방법이며 bg 및 attr을 지정할 필요가 없습니다.
     fg: "#e50914"
 }
 ```
 
-## Shape Values
+## 모양 값
 
-As mentioned above, `shape` is a term used to indicate the syntax coloring.
+위에서 언급했듯이 `shape`는 구문 색상 지정을 나타내는 데 사용되는 용어입니다.
 
-Here's the current list of flat shapes.
+다음은 현재 플랫 모양 목록입니다.
 
-| shape                        | default style                          | configurable |
+| 모양                        | 기본 스타일                          | 구성 가능 |
 | ---------------------------- | -------------------------------------- | ------------ |
 | `shape_block`                | fg(Color::Blue).bold()                 | \*           |
 | `shape_bool`                 | fg(Color::LightCyan)                   | \*           |
@@ -393,7 +393,7 @@ Here's the current list of flat shapes.
 | `shape_table`                | fg(Color::Blue).bold()                 | \*           |
 | `shape_variable`             | fg(Color::Purple)                      | \*           |
 
-Here's a small example of how to apply color to these items. Anything not overridden will receive its default color.
+다음은 이러한 항목에 색상을 적용하는 방법에 대한 작은 예입니다. 재정의되지 않은 모든 항목은 기본 색상을 받습니다.
 
 ```nu
 $env.config.color_config.shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
@@ -401,127 +401,127 @@ $env.config.color_config.shape_bool: green
 $env.config.color_config.shape_int: { fg: "#0000ff" attr: b}
 ```
 
-## Prompt Configuration and Coloring
+## 프롬프트 구성 및 색상 지정
 
-The Nushell prompt is configurable through these environment variables and config items:
+누셸 프롬프트는 다음 환경 변수 및 구성 항목을 통해 구성할 수 있습니다.
 
-- `PROMPT_COMMAND`: Code to execute for setting up the prompt (block)
-- `PROMPT_COMMAND_RIGHT`: Code to execute for setting up the _RIGHT_ prompt (block) (see oh-my.nu in nu_scripts)
-- `PROMPT_INDICATOR` = "〉": The indicator printed after the prompt (by default ">"-like Unicode symbol)
+- `PROMPT_COMMAND`: 프롬프트를 설정하기 위해 실행할 코드(블록)
+- `PROMPT_COMMAND_RIGHT`: _오른쪽_ 프롬프트를 설정하기 위해 실행할 코드(블록) (nu_scripts의 oh-my.nu 참조)
+- `PROMPT_INDICATOR` = "〉": 프롬프트 뒤에 인쇄되는 표시기(기본적으로 ">"와 유사한 유니코드 기호)
 - `PROMPT_INDICATOR_VI_INSERT` = ": "
 - `PROMPT_INDICATOR_VI_NORMAL` = "v "
 - `PROMPT_MULTILINE_INDICATOR` = "::: "
-- `render_right_prompt_on_last_line`: Bool value to enable or disable the right prompt to be rendered on the last line of the prompt
+- `render_right_prompt_on_last_line`: 프롬프트의 마지막 줄에 오른쪽 프롬프트를 렌더링할지 여부를 활성화 또는 비활성화하는 부울 값
 
-Example: For a simple prompt one could do this. Note that `PROMPT_COMMAND` requires a `block` whereas the others require a `string`.
+예시: 간단한 프롬프트의 경우 다음과 같이 할 수 있습니다. `PROMPT_COMMAND`는 `블록`이 필요하고 다른 것들은 `문자열`이 필요합니다.
 
 ```nu
 $env.PROMPT_COMMAND = { $"(date now | format date '%m/%d/%Y %I:%M:%S%.3f'): (pwd | path basename)" }
 ```
 
-If you don't like the default `PROMPT_INDICATOR` you could change it like this.
+기본 `PROMPT_INDICATOR`가 마음에 들지 않으면 다음과 같이 변경할 수 있습니다.
 
 ```nu
 $env.PROMPT_INDICATOR = "> "
 ```
 
-If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
+`starship`을 사용하는 경우 zsh 또는 fish와 마찬가지로 프롬프트의 마지막 줄에 오른쪽 프롬프트를 표시하고 싶을 것입니다. `config.nu` 파일을 수정하고 `render_right_prompt_on_last_line`을 true로 설정하면 됩니다.
 
 ```nu
 $env.config.render_right_prompt_on_last_line = true
 ```
 
-Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/modules/prompt/oh-my.nu).
+프롬프트의 색상 지정은 `PROMPT_COMMAND`의 `블록`에서 제어되며, 여기서 사용자 지정 프롬프트를 작성할 수 있습니다. [nu_scripts 저장소](https://github.com/nushell/nu_scripts/blob/main/modules/prompt/oh-my.nu)에 git 상태가 있는 약간 멋진 프롬프트를 작성했습니다.
 
-### Transient Prompt
+### 임시 프롬프트
 
-If you want a different prompt displayed for previously entered commands, you can use Nushell's transient prompt feature. This can be useful if your prompt has lots of information that is unnecessary to show for previous lines (e.g. time and Git status), since you can make it so that previous lines show with a shorter prompt.
+이전에 입력한 명령에 대해 다른 프롬프트를 표시하려면 누셸의 임시 프롬프트 기능을 사용할 수 있습니다. 프롬프트에 이전 줄에 표시할 필요가 없는 정보(예: 시간 및 Git 상태)가 많은 경우 유용할 수 있습니다. 이전 줄이 더 짧은 프롬프트로 표시되도록 할 수 있기 때문입니다.
 
-Each of the `PROMPT_*` variables has a corresponding `TRANSIENT_PROMPT_*` variable to be used for changing that segment when displaying past prompts: `TRANSIENT_PROMPT_COMMAND`, `TRANSIENT_PROMPT_COMMAND_RIGHT`, `TRANSIENT_PROMPT_INDICATOR`, `TRANSIENT_PROMPT_INDICATOR_VI_INSERT`, `TRANSIENT_PROMPT_INDICATOR_VI_NORMAL`, `TRANSIENT_PROMPT_MULTILINE_INDICATOR`. By default, the `PROMPT_*` variables are used for displaying past prompts.
+각 `PROMPT_*` 변수에는 과거 프롬프트를 표시할 때 해당 세그먼트를 변경하는 데 사용할 해당 `TRANSIENT_PROMPT_*` 변수가 있습니다. `TRANSIENT_PROMPT_COMMAND`, `TRANSIENT_PROMPT_COMMAND_RIGHT`, `TRANSIENT_PROMPT_INDICATOR`, `TRANSIENT_PROMPT_INDICATOR_VI_INSERT`, `TRANSIENT_PROMPT_INDICATOR_VI_NORMAL`, `TRANSIENT_PROMPT_MULTILINE_INDICATOR`가 있습니다. 기본적으로 `PROMPT_*` 변수는 과거 프롬프트를 표시하는 데 사용됩니다.
 
-For example, if you want to make past prompts show up without a left prompt entirely and leave only the indicator, you can use:
+예를 들어, 과거 프롬프트를 왼쪽 프롬프트 없이 완전히 표시하고 표시기만 남기려면 다음을 사용할 수 있습니다.
 
 ```nu
 $env.TRANSIENT_PROMPT_COMMAND = ""
 ```
 
-If you want to go back to the normal left prompt, you'll have to unset `TRANSIENT_PROMPT_COMMAND`:
+일반 왼쪽 프롬프트로 돌아가려면 `TRANSIENT_PROMPT_COMMAND`를 설정 해제해야 합니다.
 
 ```nu
 hide-env TRANSIENT_PROMPT_COMMAND
 ```
 
-## `LS_COLORS` Colors for the [`ls`](/commands/docs/ls.md) Command
+## [`ls`](/commands/docs/ls.md) 명령에 대한 `LS_COLORS` 색상
 
-Nushell will respect and use the `LS_COLORS` environment variable setting on Mac, Linux, and Windows. This setting allows you to define the coloring of file types when you do a [`ls`](/commands/docs/ls.md). For instance, you can make directories one color, `.md` Markdown files another color, `.toml` files yet another color, etc. There are a variety of ways to color and style your file types.
+누셸은 Mac, Linux 및 Windows에서 `LS_COLORS` 환경 변수 설정을 존중하고 사용합니다. 이 설정을 사용하면 [`ls`](/commands/docs/ls.md)를 수행할 때 파일 형식의 색상을 정의할 수 있습니다. 예를 들어 디렉터리를 한 가지 색상으로, `.md` 마크다운 파일을 다른 색상으로, `.toml` 파일을 또 다른 색상으로 지정할 수 있습니다. 파일 형식을 색상 지정하고 스타일을 지정하는 다양한 방법이 있습니다.
 
-If `LS_COLORS` is not set, nushell will default to a built-in `LS_COLORS` setting, based on [8-bit (extended) ANSI colors](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit).
+`LS_COLORS`가 설정되지 않은 경우 nushell은 [8비트(확장) ANSI 색상](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)을 기반으로 하는 내장 `LS_COLORS` 설정으로 기본 설정됩니다.
 
-### Understanding `LS_COLORS`
+### `LS_COLORS` 이해하기
 
-`LS_COLORS` contains a colon (`:`) separated list of records that map file types and file names to styling attributes (`selector=attributes`).
+`LS_COLORS`에는 파일 형식과 파일 이름을 스타일링 속성(`선택기=속성`)에 매핑하는 콜론(`:`)으로 구분된 레코드 목록이 포함되어 있습니다.
 
-The selector can be a file type specified like `di` for "directory identifier", or `*.nu` for files with the `.nu` file extension.
+선택기는 "디렉터리 식별자"에 대한 `di`와 같이 지정된 파일 형식이거나 `.nu` 파일 확장자를 가진 파일에 대한 `*.nu`일 수 있습니다.
 
-The attributes are a list of semicolon (`;`) separated numbers. Note that which attributes and attribute formats are supported depends on the terminal you are using.
+속성은 세미콜론(`;`)으로 구분된 숫자 목록입니다. 어떤 속성과 속성 형식이 지원되는지는 사용 중인 터미널에 따라 다릅니다.
 
-- Style attributes like `0` normal, `1` bold, `3` italic, `5` blink, [etc](https://en.wikipedia.org/wiki/ANSI_escape_code#Select_Graphic_Rendition_parameters)
-- [Foreground colors](https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit) `30`-`37` and `90`-`97`
-- [Background colors](https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit) `40`-`47` and `100`-`107`
-- [RGB foreground](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) prefixed with `38;2`, optionally followed by additional attributes
-- [RGB background](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit) prefixed with `48;2`, optionally followed by additional attributes
+- `0` 일반, `1` 굵게, `3` 기울임꼴, `5` 깜박임 등과 같은 스타일 속성([기타](https://en.wikipedia.org/wiki/ANSI_escape_code#Select_Graphic_Rendition_parameters))
+- [전경색](https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit) `30`-`37` 및 `90`-`97`
+- [배경색](https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit) `40`-`47` 및 `100`-`107`
+- `38;2` 접두사가 붙은 [RGB 전경](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit), 선택적으로 추가 속성이 뒤따름
+- `48;2` 접두사가 붙은 [RGB 배경](https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit), 선택적으로 추가 속성이 뒤따름
 
-For example:
+예시:
 
-`$env.LS_COLORS = "di=1;34:*.nu=3;33;46"`: Bold directories, italic yellow foreground cyan background `*.nu` files
+`$env.LS_COLORS = "di=1;34:*.nu=3;33;46"`: 굵은 디렉터리, 기울임꼴 노란색 전경 청록색 배경 `*.nu` 파일
 
-`$env.LS_COLORS = "di=48;2;200;0;0;5"`: Red background blinking directories
+`$env.LS_COLORS = "di=48;2;200;0;0;5"`: 빨간색 배경 깜박이는 디렉터리
 
-### vivid Themes
+### 생생한 테마
 
-For example, you can use the third-party tool [vivid](https://github.com/sharkdp/vivid), which runs on multiple platforms, has [many themes defined](https://github.com/sharkdp/vivid/tree/master/themes), and generates a `LS_COLORS` configuration from it.
+예를 들어, 여러 플랫폼에서 실행되고 [많은 테마가 정의된](https://github.com/sharkdp/vivid/tree/master/themes) 타사 도구 [vivid](https://github.com/sharkdp/vivid)를 사용하고 여기에서 `LS_COLORS` 구성을 생성할 수 있습니다.
 
-After downloading and extracting the binary, you can use it with:
+바이너리를 다운로드하고 추출한 후 다음을 사용하여 사용할 수 있습니다.
 
 ```nu
 $env.LS_COLORS = (vivid generate molokai)
 ```
 
-or with an alternative theme:
+또는 대체 테마 사용:
 
 ```nu
 $env.LS_COLORS = (vivid generate ayu)
 ```
 
-You can put this command into your [Nushell configuration](/book/configuration.md) for it to become the default coloring.
+이 명령을 [누셸 구성](/book/configuration.md)에 넣어 기본 색상 지정으로 만들 수 있습니다.
 
-## Theming
+## 테마 설정
 
-Theming combines all the coloring above. Here's a quick example of one we put together quickly to demonstrate the ability to theme. This is a spin on the `base16` themes that we see so widespread on the web.
+테마 설정은 위의 모든 색상 지정을 결합합니다. 다음은 테마 설정 기능을 시연하기 위해 신속하게 구성한 간단한 예입니다. 이것은 웹에서 널리 볼 수 있는 `base16` 테마를 변형한 것입니다.
 
-The key to making theming work is to make sure you specify all themes and colors you're going to use in the `config.nu` file _before_ you declare the `let config = ` line.
+테마 설정을 작동시키는 핵심은 `config.nu` 파일에서 `let config = ` 줄을 선언하기 전에 사용할 모든 테마와 색상을 지정하는 것입니다.
 
 ```nu
-# let's define some colors
+# 몇 가지 색상을 정의해 보겠습니다.
 
-let base00 = "#181818" # Default Background
-let base01 = "#282828" # Lighter Background (Used for status bars, line number and folding marks)
-let base02 = "#383838" # Selection Background
-let base03 = "#585858" # Comments, Invisibles, Line Highlighting
-let base04 = "#b8b8b8" # Dark Foreground (Used for status bars)
-let base05 = "#d8d8d8" # Default Foreground, Caret, Delimiters, Operators
-let base06 = "#e8e8e8" # Light Foreground (Not often used)
-let base07 = "#f8f8f8" # Light Background (Not often used)
-let base08 = "#ab4642" # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-let base09 = "#dc9656" # Integers, Boolean, Constants, XML Attributes, Markup Link Url
-let base0a = "#f7ca88" # Classes, Markup Bold, Search Text Background
-let base0b = "#a1b56c" # Strings, Inherited Class, Markup Code, Diff Inserted
-let base0c = "#86c1b9" # Support, Regular Expressions, Escape Characters, Markup Quotes
-let base0d = "#7cafc2" # Functions, Methods, Attribute IDs, Headings
-let base0e = "#ba8baf" # Keywords, Storage, Selector, Markup Italic, Diff Changed
-let base0f = "#a16946" # Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+let base00 = "#181818" # 기본 배경
+let base01 = "#282828" # 더 밝은 배경(상태 표시줄, 줄 번호 및 접는 표시에 사용됨)
+let base02 = "#383838" # 선택 배경
+let base03 = "#585858" # 주석, 보이지 않는 문자, 줄 강조 표시
+let base04 = "#b8b8b8" # 어두운 전경(상태 표시줄에 사용됨)
+let base05 = "#d8d8d8" # 기본 전경, 캐럿, 구분 기호, 연산자
+let base06 = "#e8e8e8" # 밝은 전경(자주 사용되지 않음)
+let base07 = "#f8f8f8" # 밝은 배경(자주 사용되지 않음)
+let base08 = "#ab4642" # 변수, XML 태그, 마크업 링크 텍스트, 마크업 목록, Diff 삭제됨
+let base09 = "#dc9656" # 정수, 부울, 상수, XML 속성, 마크업 링크 URL
+let base0a = "#f7ca88" # 클래스, 마크업 굵게, 검색 텍스트 배경
+let base0b = "#a1b56c" # 문자열, 상속된 클래스, 마크업 코드, Diff 삽입됨
+let base0c = "#86c1b9" # 지원, 정규식, 이스케이프 문자, 마크업 인용문
+let base0d = "#7cafc2" # 함수, 메서드, 속성 ID, 제목
+let base0e = "#ba8baf" # 키워드, 스토리지, 선택기, 마크업 기울임꼴, Diff 변경됨
+let base0f = "#a16946" # 더 이상 사용되지 않음, 포함된 언어 태그 열기/닫기(예: <?php ?>)
 
-# we're creating a theme here that uses the colors we defined above.
+# 위에서 정의한 색상을 사용하는 테마를 만들고 있습니다.
 
 let base16_theme = {
     separator: $base03
@@ -541,8 +541,8 @@ let base16_theme = {
     cellpath: $base08
     hints: dark_gray
 
-    # shape_garbage: { fg: $base07 bg: $base08 attr: b } # base16 white on red
-    # but i like the regular white on red for parse errors
+    # shape_garbage: { fg: $base07 bg: $base08 attr: b } # base16 흰색 바탕에 빨간색
+    # 하지만 구문 분석 오류에는 일반적인 흰색 바탕에 빨간색이 더 좋습니다.
     shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b }
     shape_bool: $base0d
     shape_int: { fg: $base0e attr: b }
@@ -562,10 +562,10 @@ let base16_theme = {
     shape_custom: { attr: b }
 }
 
-# now let's apply our regular config settings but also apply the "color_config:" theme that we specified above.
+# 이제 일반 구성 설정을 적용하고 위에서 지정한 "color_config:" 테마도 적용해 보겠습니다.
 
 $env.config.animate_prompt: false
-$env.config.color_config: $base16_theme # <-- this is the theme
+$env.config.color_config: $base16_theme # <-- 이것이 테마입니다.
 $env.config.edit_mode: emacs # vi
 $env.config.filesize_format: "b" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
 $env.config.filesize_metric: true
@@ -579,28 +579,28 @@ $env.config.use_grid_icons: true
 $env.config.use_ls_colors: true
 ```
 
-if you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
+테마 설정을 완전히 하려면 LS_COLORS 및 프롬프트를 포함하여 처음에 언급한 모든 항목을 테마로 설정해야 합니다. 행운을 빕니다!
 
-### Working on Light Background Terminal
+### 밝은 배경 터미널에서 작업하기
 
-Nushell's [standard library](/book/standard_library.md) contains a `config` module with default light and dark themes.
-If you are working on a light background terminal, you can apply the light theme easily.
+누셸의 [표준 라이브러리](/book/standard_library.md)에는 기본 밝은 테마와 어두운 테마가 있는 `config` 모듈이 포함되어 있습니다.
+밝은 배경 터미널에서 작업하는 경우 밝은 테마를 쉽게 적용할 수 있습니다.
 
 ```nu
-# in $nu.config-path
-use std/config light-theme   # add this line to load the theme into scope
+# $nu.config-path에서
+use std/config light-theme   # 테마를 범위로 로드하려면 이 줄을 추가합니다.
 
 $env.config = {
   # ...
-  color_config: (light_theme)   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  color_config: (light_theme)   # 밝은 테마를 원하면 `$dark_theme`을 `$light_theme`으로 바꿉니다.
   # ...
 }
 ```
 
-You can also load the dark theme.
+어두운 테마를 로드할 수도 있습니다.
 
 ```nu
-# in $nu.config-path
+# $nu.config-path에서
 use std/config dark-theme
 
 $env.config = {
@@ -610,12 +610,12 @@ $env.config = {
 }
 ```
 
-## Accessibility
+## 접근성
 
-It's often desired to have the minimum amount of decorations when using a screen reader. In those cases, it's possible to disable borders and other decorations for both table and errors with the following options:
+화면 판독기를 사용할 때 장식을 최소화하는 것이 종종 바람직합니다. 이러한 경우 다음 옵션을 사용하여 테이블과 오류 모두에 대해 테두리 및 기타 장식을 비활성화할 수 있습니다.
 
 ```nu
-# in $nu.config-path
+# $nu.config-path에서
 $env.config = {
   ...
   table: {
@@ -628,8 +628,8 @@ $env.config = {
 }
 ```
 
-## Line Editor Menus (completion, history, help…)
+## 줄 편집기 메뉴(완성, 기록, 도움말...)
 
-Reedline (Nu’s line editor) style is not using the `color_config` key.
-Instead, each menu has its own style to be configured separately.
-See the [section dedicated to Reedline’s menus configuration](line_editor.md#menus) to learn more on this.
+Reedline(Nu의 줄 편집기) 스타일은 `color_config` 키를 사용하지 않습니다.
+대신 각 메뉴에는 별도로 구성할 수 있는 자체 스타일이 있습니다.
+자세한 내용은 [Reedline 메뉴 구성 전용 섹션](line_editor.md#menus)을 참조하십시오.

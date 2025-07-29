@@ -1,74 +1,74 @@
-# Operators
+# 연산자
 
-Nushell supports the following operators for common math, logic, and string operations:
+누셸은 일반적인 수학, 논리 및 문자열 연산을 위해 다음 연산자를 지원합니다.
 
-| Operator           | Description                                             |
+| 연산자           | 설명                                             |
 | ------------------ | ------------------------------------------------------- |
-| `+`                | add                                                     |
-| `-`                | subtract                                                |
-| `*`                | multiply                                                |
-| `/`                | divide                                                  |
-| `//`               | floor division                                          |
-| `mod`              | modulo                                                  |
-| `**`               | exponentiation (power)                                  |
-| `==`               | equal                                                   |
-| `!=`               | not equal                                               |
-| `<`                | less than                                               |
-| `<=`               | less than or equal                                      |
-| `>`                | greater than                                            |
-| `>=`               | greater than or equal                                   |
-| `=~` or `like`     | regex match / string contains another                   |
-| `!~` or `not-like` | inverse regex match / string does *not* contain another |
-| `in`               | value in list                                           |
-| `not-in`           | value not in list                                       |
-| `has`              | list has value                                          |
-| `not-has`          | list does not have value                                |
-| `not`              | logical not                                             |
-| `and`              | and two Boolean expressions (short-circuits)            |
-| `or`               | or two Boolean expressions (short-circuits)             |
-| `xor`              | exclusive or two boolean expressions                    |
-| `bit-or`           | bitwise or                                              |
-| `bit-xor`          | bitwise xor                                             |
-| `bit-and`          | bitwise and                                             |
-| `bit-shl`          | bitwise shift left                                      |
-| `bit-shr`          | bitwise shift right                                     |
-| `starts-with`      | string starts with                                      |
-| `ends-with`        | string ends with                                        |
-| `++`               | append lists                                            |
+| `+`                | 더하기                                                     |
+| `-`                | 빼기                                                     |
+| `*`                | 곱하기                                                |
+| `/`                | 나누기                                                  |
+| `//`               | 정수/내림 나누기                                          |
+| `mod`              | 모듈로                                                  |
+| `**`               | 거듭제곱                                  |
+| `==`               | 같음                                                   |
+| `!=`               | 같지 않음                                               |
+| `<`                | 작음                                               |
+| `<=`               | 작거나 같음                                      |
+| `>`                | 큼                                            |
+| `>=`               | 크거나 같음                                      |
+| `=~` 또는 `like`     | 정규식 일치 / 문자열이 다른 문자열 포함                   |
+| `!~` 또는 `not-like` | 역 정규식 일치 / 문자열이 다른 문자열을 포함하지 *않음* |
+| `in`               | 목록에 값이 있음                                           |
+| `not-in`           | 목록에 값이 없음                                       |
+| `has`              | 목록에 값이 있음                                           |
+| `not-has`          | 목록에 값이 없음                                |
+| `not`              | 논리 부정                                             |
+| `and`              | 두 부울 표현식의 논리곱 (단락 평가)            |
+| `or`               | 두 부울 표현식의 논리합 (단락 평가)             |
+| `xor`              | 두 부울 표현식의 배타적 논리합                    |
+| `bit-or`           | 비트 OR                                              |
+| `bit-xor`          | 비트 XOR                                             |
+| `bit-and`          | 비트 AND                                             |
+| `bit-shl`          | 비트 왼쪽 시프트                                      |
+| `bit-shr`          | 비트 오른쪽 시프트                                     |
+| `starts-with`      | 문자열이 ~로 시작                                      |
+| `ends-with`        | 문자열이 ~로 끝남                                       |
+| `++`               | 목록 추가                                            |
 
 
-Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
+괄호는 평가 순서를 지정하기 위해 그룹화하거나 명령을 호출하고 표현식에서 결과를 사용하는 데 사용할 수 있습니다.
 
-## Order of Operations
+## 연산 순서
 
-To understand the precedence of operations, you can run the command: `help operators | sort-by precedence -r`.
+연산의 우선 순위를 이해하려면 `help operators | sort-by precedence -r` 명령을 실행할 수 있습니다.
 
-Presented in descending order of precedence, the article details the operations as follows:
+우선 순위가 높은 순서대로 나열된 이 문서에서는 연산을 다음과 같이 자세히 설명합니다.
 
-- Parentheses (`()`)
-- Exponentiation/Power (`**`)
-- Multiply (`*`), Divide (`/`), Integer/Floor Division (`//`), and Modulo (`mod`)
-- Add (`+`) and Subtract (`-`)
-- Bit shifting (`bit-shl`, `bit-shr`)
-- Comparison operations (`==`, `!=`, `<`, `>`, `<=`, `>=`), membership tests (`in`, `not-in`, `starts-with`, `ends-with`), regex matching (`=~`, `!~`), and list appending (`++`)
-- Bitwise and (`bit-and`)
-- Bitwise xor (`bit-xor`)
-- Bitwise or (`bit-or`)
-- Logical and (`and`)
-- Logical xor (`xor`)
-- Logical or (`or`)
-- Assignment operations
-- Logical not (`not`)
+- 괄호 (`()`)
+- 거듭제곱/멱 (`**`)
+- 곱하기 (`*`), 나누기 (`/`), 정수/내림 나누기 (`//`), 모듈로 (`mod`)
+- 더하기 (`+`) 및 빼기 (`-`)
+- 비트 시프트 (`bit-shl`, `bit-shr`)
+- 비교 연산 (`==`, `!=`, `<`, `>`, `<=`, `>=`), 멤버십 테스트 (`in`, `not-in`, `starts-with`, `ends-with`), 정규식 일치 (`=~`, `!~`), 목록 추가 (`++`)
+- 비트 AND (`bit-and`)
+- 비트 XOR (`bit-xor`)
+- 비트 OR (`bit-or`)
+- 논리 AND (`and`)
+- 논리 XOR (`xor`)
+- 논리 OR (`or`)
+- 할당 연산
+- 논리 NOT (`not`)
 
 ```nu
 3 * (1 + 2)
 # => 9
 ```
 
-## Types
+## 유형
 
-Not all operations make sense for all data types.
-If you attempt to perform an operation on non-compatible data types, you will be met with an error message that should explain what went wrong:
+모든 연산이 모든 데이터 유형에 대해 의미가 있는 것은 아닙니다.
+호환되지 않는 데이터 유형에 대해 연산을 시도하면 무엇이 잘못되었는지 설명하는 오류 메시지가 표시됩니다.
 ```nu
 "spam" - 1
 # => Error: nu::parser::unsupported_operation (link)
@@ -84,65 +84,61 @@ If you attempt to perform an operation on non-compatible data types, you will be
 # =>   help: Change string or int to be the right types and try again.
 ```
 
-The rules might sometimes feel a bit strict, but on the other hand there should be less unexpected side effects.
+규칙이 때로는 약간 엄격하게 느껴질 수 있지만, 반면에 예기치 않은 부작용이 적을 것입니다.
 
-## Regular Expression / string-contains Operators
+## 정규식 / 문자열 포함 연산자
 
-The `=~` and `!~` operators provide a convenient way to evaluate [regular expressions](https://cheatography.com/davechild/cheat-sheets/regular-expressions/). You don't need to know regular expressions to use them - they're also an easy way to check whether 1 string contains another.
+`=~` 및 `!~` 연산자는 [정규식](https://cheatography.com/davechild/cheat-sheets/regular-expressions/)을 평가하는 편리한 방법을 제공합니다. 정규식을 몰라도 사용할 수 있습니다. 또한 한 문자열이 다른 문자열을 포함하는지 확인하는 쉬운 방법이기도 합니다.
 
-- `string =~ pattern` returns **true** if `string` contains a match for `pattern`, and **false** otherwise.
-- `string !~ pattern` returns **false** if `string` contains a match for `pattern`, and **true** otherwise.
+- `string =~ pattern`은 `string`이 `pattern`과 일치하는 경우 **true**를 반환하고 그렇지 않으면 **false**를 반환합니다.
+- `string !~ pattern`은 `string`이 `pattern`과 일치하는 경우 **false**를 반환하고 그렇지 않으면 **true**를 반환합니다.
 
-For example:
-
-```nu
-foobarbaz =~ bar # returns true
-foobarbaz !~ bar # returns false
-ls | where name =~ ^nu # returns all files whose names start with "nu"
-```
-
-Both operators use [the Rust regex crate's `is_match()` function](https://docs.rs/regex/latest/regex/struct.Regex.html#method.is_match).
-
-## Case Sensitivity
-
-Operators are usually case-sensitive when operating on strings. There are a few ways to do case-insensitive work instead:
-
-1. In the regular expression operators, specify the `(?i)` case-insensitive mode modifier:
+예시:
 
 ```nu
-"FOO" =~ "foo" # returns false
-"FOO" =~ "(?i)foo" # returns true
+foobarbaz =~ bar # true 반환
+foobarbaz !~ bar # false 반환
+ls | where name =~ ^nu # 이름이 "nu"로 시작하는 모든 파일 반환
 ```
 
-2. Use the [`str contains`](/commands/docs/str_contains.md) command's `--ignore-case` flag:
+두 연산자 모두 [Rust 정규식 크레이트의 `is_match()` 함수](https://docs.rs/regex/latest/regex/struct.Regex.html#method.is_match)를 사용합니다.
+
+## 대소문자 구분
+
+연산자는 일반적으로 문자열에 대해 작동할 때 대소문자를 구분합니다. 대신 대소문자를 구분하지 않는 작업을 수행하는 몇 가지 방법이 있습니다.
+
+1. 정규식 연산자에서 `(?i)` 대소문자 구분 안 함 모드 수정자를 지정합니다.
+
+```nu
+"FOO" =~ "foo" # false 반환
+"FOO" =~ "(?i)foo" # true 반환
+```
+
+2. [`str contains`](/commands/docs/str_contains.md) 명령의 `--ignore-case` 플래그를 사용합니다.
 
 ```nu
 "FOO" | str contains --ignore-case "foo"
 ```
 
-3. Convert strings to lowercase with [`str downcase`](/commands/docs/str_downcase.md) before comparing:
+3. 비교하기 전에 [`str downcase`](/commands/docs/str_downcase.md)를 사용하여 문자열을 소문자로 변환합니다.
 
 ```nu
 ("FOO" | str downcase) == ("Foo" | str downcase)
 ```
 
-## Spread operator
+## 스프레드 연산자
 
-Nushell has a spread operator (`...`) for unpacking lists and records. You may be familiar with it
-if you've used JavaScript before. Some languages use `*` for their spread/splat operator. It can
-expand lists or records in places where multiple values or key-value pairs are expected.
+누셸에는 목록과 레코드를 풀기 위한 스프레드 연산자(`...`)가 있습니다. 이전에 자바스크립트를 사용해 본 적이 있다면 익숙할 것입니다. 일부 언어에서는 스프레드/스플랫 연산자에 `*`를 사용합니다. 여러 값이나 키-값 쌍이 예상되는 곳에서 목록이나 레코드를 확장할 수 있습니다.
 
-There are three places you can use the spread operator:
+스프레드 연산자를 사용할 수 있는 세 곳이 있습니다.
 
-- [In list literals](#in-list-literals)
-- [In record literals](#in-record-literals)
-- [In command calls](#in-command-calls)
+- [목록 리터럴](#in-list-literals)
+- [레코드 리터럴](#in-record-literals)
+- [명령 호출](#in-command-calls)
 
-### In List literals
+### 목록 리터럴에서
 
-Suppose you have multiple lists you want to concatenate together, but you also want to intersperse
-some individual values. This can be done with `append` and `prepend`, but the spread
-operator can let you do it more easily.
+여러 목록을 함께 연결하고 싶지만 개별 값을 산재시키고 싶다고 가정해 보겠습니다. `append` 및 `prepend`를 사용하여 이 작업을 수행할 수 있지만 스프레드 연산자를 사용하면 더 쉽게 할 수 있습니다.
 
 ```nu
 let dogs = [Spot, Teddy, Tommy]
@@ -167,7 +163,7 @@ let cats = ["Mr. Humphrey Montgomery", Kitten]
 # => ╰───┴───────────────────────────────╯
 ```
 
-The below code is an equivalent version using `append`:
+아래 코드는 `append`를 사용한 동일한 버전입니다.
 ```nu
 $dogs |
   append Polly |
@@ -176,17 +172,11 @@ $dogs |
   append ...Nemo
 ```
 
-Note that each call to `append` results in the creation of a new list, meaning that in this second
-example, 3 unnecessary intermediate lists are created. This is not the case with the spread operator,
-so there may be (very minor) performance benefits to using `...` if you're joining lots of large
-lists together, over and over.
+각 `append` 호출은 새 목록을 생성하므로 이 두 번째 예제에서는 불필요한 중간 목록 3개가 생성됩니다. 스프레드 연산자의 경우에는 그렇지 않으므로 많은 큰 목록을 반복해서 결합하는 경우 `...`를 사용하면 (아주 약간의) 성능 이점이 있을 수 있습니다.
 
-You may have noticed that the last item of the resulting list above is `"...Nemo"`. This is because
-inside list literals, it can only be used to spread lists, not strings. As such, inside list literals, it can
-only be used before variables (`...$foo`), subexpressions (`...(foo)`), and list literals (`...[foo]`).
+위 결과 목록의 마지막 항목이 `"...Nemo"`라는 것을 알 수 있습니다. 이는 목록 리터럴 내부에서는 문자열이 아닌 목록을 전파하는 데만 사용할 수 있기 때문입니다. 따라서 목록 리터럴 내부에서는 변수(`...$foo`), 하위 표현식(`...(foo)`) 및 목록 리터럴(`...[foo]`) 앞에서만 사용할 수 있습니다.
 
-The `...` also won't be recognized as the spread operator if there's any whitespace between it and
-the next expression:
+`...`와 다음 표현식 사이에 공백이 있으면 스프레드 연산자로 인식되지 않습니다.
 
 ```nu
 [ ... [] ]
@@ -196,19 +186,17 @@ the next expression:
 # => ╰───┴────────────────╯
 ```
 
-This is mainly so that `...` won't be confused for the spread operator in commands such as `mv ... $dir`.
+이는 주로 `...`가 `mv ... $dir`와 같은 명령에서 스프레드 연산자와 혼동되지 않도록 하기 위한 것입니다.
 
-### In Record literals
+### 레코드 리터럴에서
 
-Let's say you have a record with some configuration information and you want to add more fields to
-this record:
+일부 구성 정보가 있는 레코드가 있고 이 레코드에 필드를 더 추가하고 싶다고 가정해 보겠습니다.
 
 ```nu
 let config = { path: /tmp, limit: 5 }
 ```
 
-You can make a new record with all the fields of `$config` and some new additions using the spread
-operator. You can use the spread multiple records inside a single record literal.
+스프레드 연산자를 사용하여 `$config`의 모든 필드와 일부 새로운 추가 사항이 있는 새 레코드를 만들 수 있습니다. 단일 레코드 리터럴 내에서 여러 레코드를 스프레드할 수 있습니다.
 
 ```nu
 {
@@ -235,37 +223,30 @@ operator. You can use the spread multiple records inside a single record literal
 # => ╰────────────┴───────────────╯
 ```
 
-Similarly to lists, inside record literals, the spread operator can only be used before variables (`...$foo`),
-subexpressions (`...(foo)`), and record literals (`...{foo:bar}`). Here too, there needs to be no
-whitespace between the `...` and the next expression for it to be recognized as the spread operator.
+목록과 마찬가지로 레코드 리터럴 내부에서 스프레드 연산자는 변수(`...$foo`), 하위 표현식(`...(foo)`) 및 레코드 리터럴(`...{foo:bar}`) 앞에서만 사용할 수 있습니다. 여기에서도 스프레드 연산자로 인식되려면 `...`와 다음 표현식 사이에 공백이 없어야 합니다.
 
-### In Command calls
+### 명령 호출에서
 
-You can also spread arguments to a command, provided that it either has a rest parameter or is an
-external command.
+나머지 매개변수가 있거나 외부 명령인 경우 명령에 인수를 전파할 수도 있습니다.
 
-Here is an example custom command that has a rest parameter:
+다음은 나머지 매개변수가 있는 사용자 지정 명령의 예입니다.
 
 ```nu
 def foo [ --flag req opt? ...args ] { [$flag, $req, $opt, $args] | to nuon }
 ```
 
-It has one flag (`--flag`), one required positional parameter (`req`), one optional positional parameter
-(`opt?`), and rest parameter (`args`).
+플래그(`--flag`) 하나, 필수 위치 매개변수(`req`) 하나, 선택적 위치 매개변수(`opt?`) 하나, 나머지 매개변수(`args`) 하나가 있습니다.
 
-If you have a list of arguments to pass to `args`, you can spread it the same way you'd spread a list
-[inside a list literal](#in-list-literals). The same rules apply: the spread operator is only
-recognized before variables, subexpressions, and list literals, and no whitespace is allowed in between.
+`args`에 전달할 인수 목록이 있는 경우 [목록 리터럴 내부](#in-list-literals)에서 목록을 전파하는 것과 같은 방식으로 전파할 수 있습니다. 동일한 규칙이 적용됩니다. 스프레드 연산자는 변수, 하위 표현식 및 목록 리터럴 앞에서만 인식되며 그 사이에 공백이 허용되지 않습니다.
 
 ```nu
-foo "bar" "baz" ...[1 2 3] # With ..., the numbers are treated as separate arguments
+foo "bar" "baz" ...[1 2 3] # ...를 사용하면 숫자가 별도의 인수로 처리됩니다.
 # => [false, bar, baz, [1, 2, 3]]
-foo "bar" "baz" [1 2 3] # Without ..., [1 2 3] is treated as a single argument
+foo "bar" "baz" [1 2 3] # ...가 없으면 [1 2 3]이 단일 인수로 처리됩니다.
 # => [false, bar, baz, [[1, 2, 3]]]
 ```
 
-A more useful way to use the spread operator is if you have another command with a rest parameter
-and you want it to forward its arguments to `foo`:
+스프레드 연산자를 사용하는 더 유용한 방법은 나머지 매개변수가 있는 다른 명령이 있고 해당 인수를 `foo`에 전달하려는 경우입니다.
 
 ```nu
 def bar [ ...args ] { foo --flag "bar" "baz" ...$args }
@@ -273,24 +254,23 @@ bar 1 2 3
 # => [true, bar, baz, [1, 2, 3]]
 ```
 
-You can spread multiple lists in a single call, and also intersperse individual arguments:
+단일 호출에서 여러 목록을 전파하고 개별 인수를 산재시킬 수도 있습니다.
 
 ```nu
 foo "bar" "baz" 1 ...[2 3] 4 5 ...(6..9 | take 2) last
 # => [false, bar, baz, [1, 2, 3, 4, 5, 6, 7, last]]
 ```
 
-Flags/named arguments can go after a spread argument, just like they can go after regular rest arguments:
+플래그/명명된 인수는 일반 나머지 인수 뒤에 올 수 있는 것처럼 스프레드 인수 뒤에 올 수 있습니다.
 
 ```nu
 foo "bar" "baz" 1 ...[2 3] --flag 4
 # => [true, bar, baz, [1, 2, 3, 4]]
 ```
 
-If a spread argument comes before an optional positional parameter, that optional parameter is treated
-as being omitted:
+스프레드 인수가 선택적 위치 매개변수 앞에 오면 해당 선택적 매개변수는 생략된 것으로 처리됩니다.
 
 ```nu
-foo "bar" ...[1 2] "not opt" # The null means no argument was given for opt
+foo "bar" ...[1 2] "not opt" # null은 opt에 대한 인수가 제공되지 않았음을 의미합니다.
 # => [false, bar, null, [1, 2, "not opt"]]
 ```

@@ -1,37 +1,37 @@
-# Directory Stack
+# 디렉터리 스택
 
-Like some other shells, Nushell provides a Directory Stack feature for easily switching between multiple directories. In Nushell, this feature is part of the [Standard Library](./standard_library.md) and can be accessed in several ways.
+다른 셸과 마찬가지로 누셸은 여러 디렉터리 간에 쉽게 전환할 수 있도록 디렉터리 스택 기능을 제공합니다. 누셸에서 이 기능은 [표준 라이브러리](./standard_library.md)의 일부이며 여러 가지 방법으로 액세스할 수 있습니다.
 
 ::: note
-In Nushell, the "stack" is represented as a `list`, but the overall functionality is similar to that of other shells.
+누셸에서 "스택"은 `list`로 표시되지만 전체적인 기능은 다른 셸과 유사합니다.
 :::
 
 [[toc]]
 
-## `dirs` Module and Commands
+## `dirs` 모듈 및 명령
 
-To use the `dirs` command and its subcommands, first import the module using:
+`dirs` 명령과 하위 명령을 사용하려면 먼저 다음을 사용하여 모듈을 가져옵니다.
 
 ```nu
 use std/dirs
 ```
 
 ::: tip
-To make the feature available whenever you start Nushell, add the above command to your [startup configuration](./configuration.md).
+누셸을 시작할 때마다 이 기능을 사용하려면 위 명령을 [시작 구성](./configuration.md)에 추가하십시오.
 :::
 
-This makes several new commands available:
+이렇게 하면 몇 가지 새로운 명령을 사용할 수 있습니다.
 
-| Command     | Description                                                                                                                                                         |
+| 명령     | 설명                                                                                                                                                         |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dirs`      | Lists the directories on the stack                                                                                                                                  |
-| `dirs add`  | Adds one or more directories to the list. The first directory listed becomes the new active directory. Similar to the `pushd` command in some other shells.         |
-| `dirs drop` | Drops the current directory from the list. The previous directory in the list becomes the new active directory. Similar to the `popd` command in some other shells. |
-| `dirs goto` | Jumps to directory by using its index in the list                                                                                                                   |
-| `dirs next` | Makes the next directory on the list the active directory. If the current active directory is the last in the list, then cycle to the start of the list.            |
-| `dirs prev` | Makes the previous directory on the list the active directory. If the current active directory is the first in the list, then cycle to the end of the list.         |
+| `dirs`      | 스택의 디렉터리 목록을 표시합니다.                                                                                                                                  |
+| `dirs add`  | 목록에 하나 이상의 디렉터리를 추가합니다. 나열된 첫 번째 디렉터리가 새 활성 디렉터리가 됩니다. 다른 셸의 `pushd` 명령과 유사합니다.         |
+| `dirs drop` | 목록에서 현재 디렉터리를 삭제합니다. 목록의 이전 디렉터리가 새 활성 디렉터리가 됩니다. 다른 셸의 `popd` 명령과 유사합니다. |
+| `dirs goto` | 목록의 인덱스를 사용하여 디렉터리로 이동합니다.                                                                                                                   |
+| `dirs next` | 목록의 다음 디렉터리를 활성 디렉터리로 만듭니다. 현재 활성 디렉터리가 목록의 마지막인 경우 목록의 시작으로 순환합니다.            |
+| `dirs prev` | 목록의 이전 디렉터리를 활성 디렉터리로 만듭니다. 현재 활성 디렉터리가 목록의 첫 번째인 경우 목록의 끝으로 순환합니다.         |
 
-When we start using `dirs`, there is only one directory in the list, the active one. You can, as always, change this directory using the `cd` command.
+`dirs`를 사용하기 시작하면 목록에 활성 디렉터리 하나만 있습니다. 언제나처럼 `cd` 명령을 사용하여 이 디렉터리를 변경할 수 있습니다.
 
 ```nu
 cd ~
@@ -52,9 +52,9 @@ dirs
 # => ╰───┴────────┴─────────────────────────────────╯
 ```
 
-Notice that `cd` only changes the Active directory.
+`cd`는 활성 디렉터리만 변경합니다.
 
-To _add_ the current directory to the list, change to a new active directory using the `dirs add` command:
+목록에 현재 디렉터리를 _추가_하려면 `dirs add` 명령을 사용하여 새 활성 디렉터리로 변경합니다.
 
 ```nu
 dirs add ../reedline
@@ -67,7 +67,7 @@ dirs
 # => ╰───┴────────┴──────────────────────────────────╯
 ```
 
-Let's go ahead and add a few more commonly used directories to the list:
+계속해서 자주 사용하는 디렉터리를 몇 개 더 목록에 추가해 보겠습니다.
 
 ```nu
 dirs add ../nu_scripts
@@ -83,18 +83,18 @@ dirs
 # => ╰───┴────────┴────────────────────────────────────╯
 ```
 
-We can now switch between them easily using `dirs next`, `dirs prev` or `dirs goto`:
+이제 `dirs next`, `dirs prev` 또는 `dirs goto`를 사용하여 쉽게 전환할 수 있습니다.
 
 ```nu
 dirs next
-# Active was 3, is now 0
+# 활성이 3이었고 지금은 0입니다.
 pwd
 # => /home/myuser/src/repo/nushell
 dirs goto 2
 # => /home/myuser/src/repo/nu_scripts
 ```
 
-When you have finished your work in a directory, you can drop it from the list using:
+디렉터리에서 작업을 마쳤으면 다음을 사용하여 목록에서 삭제할 수 있습니다.
 
 ```nu
 dirs drop
@@ -108,29 +108,29 @@ dirs
 # => ╰───┴────────┴──────────────────────────────────╯
 ```
 
-When we drop `nu_scripts` from the list, the previous directory (`reedline`) becomes active.
+목록에서 `nu_scripts`를 삭제하면 이전 디렉터리(`reedline`)가 활성화됩니다.
 
-## `shells` Aliases
+## `shells` 별칭
 
-Some users may prefer to think of this feature as multiple "shells within shells", where each has its own directory.
+일부 사용자는 이 기능을 각각 고유한 디렉터리가 있는 여러 "셸 내 셸"로 생각하는 것을 선호할 수 있습니다.
 
-The Standard Library provides a set of aliases that can be used in place of the `dirs` commands above.
+표준 라이브러리는 위 `dirs` 명령 대신 사용할 수 있는 별칭 집합을 제공합니다.
 
-Import them using:
+다음을 사용하여 가져옵니다.
 
 ```nu
 use std/dirs shells-aliases *
 ```
 
-The built-in aliases are:
+기본 제공 별칭은 다음과 같습니다.
 
-| Alias    | Description                                              |
+| 별칭    | 설명                                              |
 | -------- | -------------------------------------------------------- |
-| `shells` | in place of `dirs` to list current "shells"/directories. |
-| `enter`  | in place of `dirs add` to enter a new "shell"/dir.       |
-| `dexit`  | in place of `dirs drop` to exit a "shell"/dir.           |
-| `g`      | as an alias for `dirs goto`.                             |
-| `n`      | for `dirs next`                                          |
-| `p`      | for `dirs prev`                                          |
+| `shells` | 현재 "셸"/디렉터리를 나열하기 위해 `dirs` 대신 사용합니다. |
+| `enter`  | 새 "셸"/디렉터리로 들어가기 위해 `dirs add` 대신 사용합니다.       |
+| `dexit`  | "셸"/디렉터리를 나가기 위해 `dirs drop` 대신 사용합니다.           |
+| `g`      | `dirs goto`의 별칭입니다.                             |
+| `n`      | `dirs next` 용                                          |
+| `p`      | `dirs prev` 용                                          |
 
-Of course, you can also define your own aliases if desired.
+물론 원하는 경우 자신만의 별칭을 정의할 수도 있습니다.

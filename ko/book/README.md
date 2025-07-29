@@ -1,64 +1,64 @@
-# Introduction
+# 소개
 
-Hello, and welcome to the Nushell project.
-The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development.
-Thus, rather than being either a shell, or a programming language, Nushell connects both by bringing a rich programming language and a full-featured shell together into one package.
+안녕하세요, 누셸 프로젝트에 오신 것을 환영합니다.
+이 프로젝트의 목표는 파이프가 간단한 명령을 함께 연결하는 셸의 유닉스 철학을 현대적인 개발 스타일에 도입하는 것입니다.
+따라서 누셸은 셸이나 프로그래밍 언어 중 하나가 아니라 풍부한 프로그래밍 언어와 모든 기능을 갖춘 셸을 하나의 패키지로 결합하여 둘 다를 연결합니다.
 
-Nu takes cues from a lot of familiar territory: traditional shells like bash, object based shells like PowerShell, gradually typed languages like TypeScript, functional programming, systems programming, and more. But rather than trying to be a jack of all trades, Nu focuses its energy on doing a few things well:
+Nu는 bash와 같은 전통적인 셸, PowerShell과 같은 개체 기반 셸, TypeScript와 같은 점진적으로 유형이 지정된 언어, 함수형 프로그래밍, 시스템 프로그래밍 등 많은 익숙한 영역에서 단서를 얻습니다. 그러나 모든 거래의 잭이 되려고 하기보다는 Nu는 몇 가지 일을 잘하는 데 에너지를 집중합니다.
 
-- Being a flexible cross-platform shell with a modern feel
-- Solving problems as a modern programming language that works with the structure of your data
-- Giving clear error messages and clean IDE support
+- 현대적인 느낌의 유연한 크로스 플랫폼 셸
+- 데이터 구조와 함께 작동하는 최신 프로그래밍 언어로서 문제 해결
+- 명확한 오류 메시지와 깔끔한 IDE 지원 제공
 
-## This Book
+## 이 책
 
-The book is split into chapters which are further broken down into sections.
-You can click on the chapter headers to get more information about it.
+이 책은 여러 장으로 나뉘며, 각 장은 다시 여러 섹션으로 나뉩니다.
+자세한 내용은 장 머리글을 클릭하면 볼 수 있습니다.
 
-- [Installation](installation.md), of course, helps you get Nushell onto your system.
-- [Getting Started](getting_started.md) shows you the ropes. It also explains some of the design principles where Nushell differs from typical shells, such as Bash.
-- [Nu Fundamentals](nu_fundamentals.md) explains basic concepts of the Nushell language.
-- [Programming in Nu](programming_in_nu.md) dives more deeply into the language features and shows several ways how to organize and structure your code.
-- [Nu as a Shell](nu_as_a_shell.md) focuses on the shell features, most notably the configuration and environment.
-- [Coming to Nu](coming_to_nu.md) is intended to give a quick start for users coming from other shells or languages.
-- [Design Notes](design_notes.md) has in-depth explanation of some of the Nushell's design choices.
-- [(Not So) Advanced](advanced.md) includes some more advanced topics (they are not _so_ advanced, make sure to check them out, too!).
+- [설치](installation.md)는 물론 시스템에 누셸을 설치하는 데 도움이 됩니다.
+- [시작하기](getting_started.md)는 요령을 보여줍니다. 또한 누셸이 Bash와 같은 일반적인 셸과 다른 설계 원칙 중 일부를 설명합니다.
+- [Nu 기본 사항](nu_fundamentals.md)은 누셸 언어의 기본 개념을 설명합니다.
+- [Nu로 프로그래밍하기](programming_in_nu.md)는 언어 기능을 더 깊이 파고들어 코드를 구성하고 구조화하는 여러 가지 방법을 보여줍니다.
+- [셸로서의 Nu](nu_as_a_shell.md)는 셸 기능, 특히 구성 및 환경에 중점을 둡니다.
+- [Nu 시작하기](coming_to_nu.md)는 다른 셸이나 언어에서 온 사용자를 위한 빠른 시작을 제공하기 위한 것입니다.
+- [설계 노트](design_notes.md)에는 누셸의 설계 선택 사항 중 일부에 대한 심층적인 설명이 있습니다.
+- [(그렇게) 고급이 아닌](advanced.md)에는 몇 가지 더 고급 항목이 포함되어 있습니다(그렇게 고급은 아니므로 꼭 확인하십시오!).
 
-## The Many Parts of Nushell
+## 누셸의 여러 부분
 
-The Nushell project consists of multiple different repositories and subprojects.
-You can find all of them under [our organization on GitHub](https://github.com/nushell).
+누셸 프로젝트는 여러 다른 저장소와 하위 프로젝트로 구성됩니다.
+[GitHub의 우리 조직](https://github.com/nushell)에서 모두 찾을 수 있습니다.
 
-- The main Nushell repository can be found [here](https://github.com/nushell/nushell). It is broken into multiple crates that can be used as independent libraries in your own project, if you wish so.
-- The repository of our [nushell.sh](https://www.nushell.sh) page, including this book, can be found [here](https://github.com/nushell/nushell.github.io).
-- Nushell has its own line editor which [has its own repository](https://github.com/nushell/reedline)
-- [`nu_scripts`](https://github.com/nushell/nu_scripts) is a place to share scripts and modules with other users until we have some sort of package manager.
-- [Nana](https://github.com/nushell/nana) is an experimental effort to explore graphical user interface for Nushell.
-- [Awesome Nu](https://github.com/nushell/awesome-nu) contains a list of tools that work with the Nushell ecosystem: plugins, scripts, editor extension, 3rd party integrations, etc.
-- [Nu Showcase](https://github.com/nushell/showcase) is a place to share works about Nushell, be it blogs, artwork or something else.
-- [Request for Comment (RFC)](https://github.com/nushell/rfcs) serves as a place to propose and discuss major design changes. While currently under-utilized, we expect to use it more as we get closer to and beyond 1.0.
+- 기본 누셸 저장소는 [여기](https://github.com/nushell/nushell)에서 찾을 수 있습니다. 원하는 경우 자신의 프로젝트에서 독립적인 라이브러리로 사용할 수 있는 여러 크레이트로 나뉩니다.
+- 이 책을 포함한 [nushell.sh](https://www.nushell.sh) 페이지의 저장소는 [여기](https://github.com/nushell/nushell.github.io)에서 찾을 수 있습니다.
+- 누셸에는 [자체 저장소가 있는](https://github.com/nushell/reedline) 자체 줄 편집기가 있습니다.
+- [`nu_scripts`](https://github.com/nushell/nu_scripts)는 일종의 패키지 관리자가 생길 때까지 다른 사용자와 스크립트 및 모듈을 공유하는 곳입니다.
+- [Nana](https://github.com/nushell/nana)는 누셸의 그래픽 사용자 인터페이스를 탐색하기 위한 실험적인 노력입니다.
+- [Awesome Nu](https://github.com/nushell/awesome-nu)에는 누셸 생태계와 함께 작동하는 도구 목록이 포함되어 있습니다: 플러그인, 스크립트, 편집기 확장, 타사 통합 등.
+- [Nu Showcase](https://github.com/nushell/showcase)는 블로그, 아트워크 또는 기타 무엇이든 누셸에 대한 작업을 공유하는 곳입니다.
+- [의견 요청(RFC)](https://github.com/nushell/rfcs)는 주요 설계 변경 사항을 제안하고 논의하는 장소 역할을 합니다. 현재는 활용도가 낮지만 1.0에 가까워지고 그 이상이 되면 더 많이 사용할 것으로 예상됩니다.
 
-## Contributing
+## 기여
 
-We welcome contributions!
-[As you can see](#the-many-parts-of-nushell), there are a lot of places to contribute to.
-Most repositories contain `CONTRIBUTING.md` file with tips and details that should help you get started (if not, consider contributing a fix!).
+기여를 환영합니다!
+[보시다시피](#the-many-parts-of-nushell) 기여할 곳이 많습니다.
+대부분의 저장소에는 시작하는 데 도움이 되는 팁과 세부 정보가 포함된 `CONTRIBUTING.md` 파일이 있습니다(그렇지 않은 경우 수정을 기여하는 것을 고려하십시오!).
 
-Nushell itself is written in [Rust](https://www.rust-lang.org).
-However, you do not have to be a Rust programmer to help.
-If you know some web development, you can contribute to improving this website or the Nana project.
-[Dataframes](dataframes.md) can use your data processing expertise.
+누셸 자체는 [Rust](https://www.rust-lang.org)로 작성되었습니다.
+그러나 도움을 주기 위해 Rust 프로그래머가 될 필요는 없습니다.
+웹 개발을 알고 있다면 이 웹사이트나 Nana 프로젝트를 개선하는 데 기여할 수 있습니다.
+[데이터프레임](dataframes.md)은 데이터 처리 전문 지식을 사용할 수 있습니다.
 
-If you wrote a cool script, plugin or integrated Nushell somewhere, we'd welcome your contribution to `nu_scripts` or Awesome Nu.
-Discovering bugs with reproduction steps and filing GitHub issues for them is a valuable help, too!
-You can contribute to Nushell just by using Nushell!
+멋진 스크립트, 플러그인을 작성했거나 누셸을 어딘가에 통합했다면 `nu_scripts` 또는 Awesome Nu에 대한 기여를 환영합니다.
+재현 단계가 있는 버그를 발견하고 이에 대한 GitHub 문제를 제출하는 것도 귀중한 도움이 됩니다!
+누셸을 사용하는 것만으로도 누셸에 기여할 수 있습니다!
 
-Since Nushell evolves fast, this book is in a constant need of updating.
-Contributing to this book does not require any special skills aside from a basic familiarity with Markdown.
-Furthermore, you can consider translating parts of it to your language.
+누셸은 빠르게 발전하므로 이 책은 지속적으로 업데이트해야 합니다.
+이 책에 기여하는 데는 마크다운에 대한 기본적인 지식 외에 특별한 기술이 필요하지 않습니다.
+또한 일부를 귀하의 언어로 번역하는 것을 고려할 수 있습니다.
 
-## Community
+## 커뮤니티
 
-The main place to discuss anything Nushell is our [Discord](https://discord.com/invite/NtAbbGn).
-You can also follow our [blog](https://www.nushell.sh/blog) for news and updates.
-Finally, you can use the GitHub discussions or file GitHub issues.
+누셸에 대해 논의할 수 있는 주요 장소는 [Discord](https://discord.com/invite/NtAbbGn)입니다.
+뉴스 및 업데이트는 [블로그](https://www.nushell.sh/blog)를 팔로우할 수도 있습니다.
+마지막으로 GitHub 토론을 사용하거나 GitHub 문제를 제출할 수 있습니다.

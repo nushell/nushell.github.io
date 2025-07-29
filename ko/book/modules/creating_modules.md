@@ -1,30 +1,30 @@
-# Creating Modules
+# 모듈 만들기
 
 [[toc]]
 
 ::: important
-When working through the examples below, it is recommended that you start a new shell before importing an updated version of each module or command. This will help reduce any confusion caused by definitions from previous imports.
+아래 예제를 진행할 때 각 모듈 또는 명령의 업데이트된 버전을 가져오기 전에 새 셸을 시작하는 것이 좋습니다. 이렇게 하면 이전 가져오기의 정의로 인한 혼동을 줄이는 데 도움이 됩니다.
 :::
 
-## Overview
+## 개요
 
-Modules (and Submodules, to be covered below) are created in one of two ways:
+모듈(및 아래에서 다룰 하위 모듈)은 다음 두 가지 방법 중 하나로 만들어집니다.
 
-- Most commonly, by creating a file with a series of `export` statements of definitions to be exported from the module.
-- For submodules inside a module, using the `module` command
+- 가장 일반적으로 모듈에서 내보낼 정의의 `export` 문 시리즈가 있는 파일을 만들어 사용합니다.
+- 모듈 내의 하위 모듈의 경우 `module` 명령을 사용합니다.
 
 ::: tip
-While it's possible to use the `module` command to create a module directly at the commandline, it's far more useful and common to store the module definitions in a file for reusability.
+`module` 명령을 사용하여 명령줄에서 직접 모듈을 만들 수 있지만, 재사용성을 위해 모듈 정의를 파일에 저장하는 것이 훨씬 더 유용하고 일반적입니다.
 :::
 
-The module file can be either:
+모듈 파일은 다음 중 하나일 수 있습니다.
 
-- A file named `mod.nu`, in which case its _directory_ becomes the module name
-- Any other `<module_name>.nu` file, in which case the filename becomes the module name
+- `mod.nu`라는 파일, 이 경우 해당 _디렉터리_가 모듈 이름이 됩니다.
+- 다른 `<module_name>.nu` 파일, 이 경우 파일 이름이 모듈 이름이 됩니다.
 
-### Simple Module Example
+### 간단한 모듈 예제
 
-Create a file named `inc.nu` with the following:
+다음 내용으로 `inc.nu`라는 파일을 만듭니다.
 
 ```nu
 export def increment []: int -> int  {
@@ -32,7 +32,7 @@ export def increment []: int -> int  {
 }
 ```
 
-This is a module! We can now import it and use the `increment` command:
+이것은 모듈입니다! 이제 가져와서 `increment` 명령을 사용할 수 있습니다.
 
 ```nu
 use inc.nu *
@@ -40,31 +40,31 @@ use inc.nu *
 # => 6
 ```
 
-Of course, you can easily distribute a file like this so that others can make use of the module as well.
+물론 다른 사람도 모듈을 사용할 수 있도록 이와 같은 파일을 쉽게 배포할 수 있습니다.
 
-## Exports
+## 내보내기
 
-We covered the types of definitions that are available in modules briefly in the main Modules Overview above. While this might be enough explanation for an end-user, module authors will need to know _how_ to create the export definitions for:
+위의 기본 모듈 개요에서 모듈에서 사용할 수 있는 정의 유형을 간략하게 다루었습니다. 이것이 최종 사용자에게는 충분한 설명일 수 있지만 모듈 작성자는 다음을 위해 내보내기 정의를 만드는 _방법_을 알아야 합니다.
 
-- Commands ([`export def`](/commands/docs/export_def.md))
-- Aliases ([`export alias`](/commands/docs/export_alias.md))
-- Constants ([`export const`](/commands/docs/export_const.md))
-- Known externals ([`export extern`](/commands/docs/export_extern.md))
-- Submodules ([`export module`](/commands/docs/export_module.md))
-- Imported symbols from other modules ([`export use`](/commands/docs/export_use.md))
-- Environment setup ([`export-env`](/commands/docs/export-env.md))
+- 명령 ([`export def`](/commands/docs/export_def.md))
+- 별칭 ([`export alias`](/commands/docs/export_alias.md))
+- 상수 ([`export const`](/commands/docs/export_const.md))
+- 알려진 외부 명령 ([`export extern`](/commands/docs/export_extern.md))
+- 하위 모듈 ([`export module`](/commands/docs/export_module.md))
+- 다른 모듈에서 가져온 기호 ([`export use`](/commands/docs/export_use.md))
+- 환경 설정 ([`export-env`](/commands/docs/export-env.md))
 
 ::: tip
-Only definitions marked with `export` (or `export-env` for environment variables) are accessible when the module is imported. Definitions not marked with `export` are only visible from inside the module. In some languages, these would be called "private" or "local" definitions. An example can be found below in [Additional Examples](#local-definitions).
+`export`(또는 환경 변수의 경우 `export-env`)로 표시된 정의만 모듈을 가져올 때 액세스할 수 있습니다. `export`로 표시되지 않은 정의는 모듈 내부에서만 볼 수 있습니다. 일부 언어에서는 이를 "비공개" 또는 "로컬" 정의라고 합니다. 예는 아래 [추가 예제](#local-definitions)에서 찾을 수 있습니다.
 :::
 
-### `main` Exports
+### `main` 내보내기
 
 ::: important
-An export cannot have the same name as that of the module itself.
+내보내기는 모듈 자체와 동일한 이름을 가질 수 없습니다.
 :::
 
-In the [Basic Example](#basic-module-example) above, we had a module named `inc` with a command named `increment`. However, if we rename that file to `increment.nu`, it will fail to import.
+위의 [기본 예제](#basic-module-example)에서 `increment`라는 명령이 있는 `inc`라는 모듈이 있었습니다. 그러나 해당 파일의 이름을 `increment.nu`로 바꾸면 가져오기에 실패합니다.
 
 ```nu
 mv inc.nu increment.nu
@@ -76,7 +76,7 @@ use increment.nu *
 # => name, or export `main` command.
 ```
 
-As helpfully mentioned in the error message, you can simply rename the export `main`, in which case it will take on the name of the module when imported. Edit the `increment.nu` file:
+오류 메시지에서 친절하게 언급했듯이 내보내기 이름을 `main`으로 바꾸면 가져올 때 모듈 이름이 됩니다. `increment.nu` 파일을 편집합니다.
 
 ```nu
 export def main []: int -> int {
@@ -84,7 +84,7 @@ export def main []: int -> int {
 }
 ```
 
-Now it works as expected:
+이제 예상대로 작동합니다.
 
 ```nu
 use ./increment.nu
@@ -93,36 +93,36 @@ use ./increment.nu
 ```
 
 ::: note
-`main` can be used for both `export def` and `export extern` definitions.
+`main`은 `export def` 및 `export extern` 정의 모두에 사용할 수 있습니다.
 :::
 
 ::: tip
-`main` definitions are imported in the following cases:
+`main` 정의는 다음 경우에 가져옵니다.
 
-- The entire module is imported with `use <module>` or `use <module.nu>`
-- The `*` glob is used to import all of the modules definitions (e.g., `use <module> *`, etc.)
-- The `main` definition is explicitly imported with `use <module> main`, `use <module> [main]`, etc.)
+- 전체 모듈을 `use <module>` 또는 `use <module.nu>`로 가져옵니다.
+- `*` glob를 사용하여 모듈의 모든 정의를 가져옵니다(예: `use <module> *` 등).
+- `main` 정의를 `use <module> main`, `use <module> [main]` 등으로 명시적으로 가져옵니다.
 
-Conversely, the following forms do _not_ import the `main` definition:
+반대로 다음 형식은 `main` 정의를 가져오지 _않습니다_.
 
 ````nu
 use <module> <other_definition>
-# or
+# 또는
 use <module> [ <other_definitions> ]
 :::
 
 ::: note
-Additionally, `main` has special behavior if used in a script file, regardless of whether it is exported or not. See the [Scripts](../scripts.html#parameterizing-scripts) chapter for more details.
+또한 `main`은 내보내기 여부에 관계없이 스크립트 파일에서 사용될 때 특별한 동작을 합니다. 자세한 내용은 [스크립트](../scripts.html#parameterizing-scripts) 장을 참조하십시오.
 :::
 
-## Module Files
+## 모듈 파일
 
-As mentioned briefly in the Overview above, modules can be created either as:
+위의 개요에서 간략하게 언급했듯이 모듈은 다음 중 하나로 만들 수 있습니다.
 
-1. `<module_name>.nu`: "File-form" - Useful for simple modules
-2. `<module_name>/mod.nu`: "Directory-form" - Useful for organizing larger module projects where submodules can easily map to subdirectories of the main module
+1. `<module_name>.nu`: "파일 형식" - 간단한 모듈에 유용합니다.
+2. `<module_name>/mod.nu`: "디렉터리 형식" - 하위 모듈이 주 모듈의 하위 디렉터리로 쉽게 매핑될 수 있는 대규모 모듈 프로젝트를 구성하는 데 유용합니다.
 
-The `increment.nu` example above is clearly an example of (1) the file-form. Let's try converting it to the directory-form:
+위의 `increment.nu` 예제는 분명히 (1) 파일 형식의 예입니다. 디렉터리 형식으로 변환해 보겠습니다.
 
 ```nu
 mkdir increment
@@ -133,17 +133,17 @@ use increment *
 # => 42
 ````
 
-Notice that the behavior of the module once imported is identical regardless of whether the file-form or directory-form is used; only its path changes.
+가져온 모듈의 동작은 파일 형식을 사용하든 디렉터리 형식을 사용하든 관계없이 동일하며 경로만 변경됩니다.
 
 ::: note
-Technically, you can import this either using the directory form above or explicitly with `use increment/mod.nu *`, but the directory shorthand is preferred when using a `mod.nu`.
+기술적으로는 위 디렉터리 형식을 사용하거나 `use increment/mod.nu *`를 사용하여 명시적으로 가져올 수 있지만 `mod.nu`를 사용할 때는 디렉터리 약어가 선호됩니다.
 :::
 
-## Subcommands
+## 하위 명령
 
-As covered in [Custom Commands](../custom_commands.md), subcommands allow us to group commands logically. Using modules, this can be done in one of two ways:
+[사용자 지정 명령](../custom_commands.md)에서 다루었듯이 하위 명령을 사용하면 명령을 논리적으로 그룹화할 수 있습니다. 모듈을 사용하면 다음 두 가지 방법 중 하나로 이 작업을 수행할 수 있습니다.
 
-1. As with any custom command, the command can be defined as `"<command> <subcommand>"`, using a space inside quotes. Let's add an `increment by` subcommand to the `increment` module we defined above:
+1. 모든 사용자 지정 명령과 마찬가지로 명령을 `"<command> <subcommand>"`로 정의하고 따옴표 안에 공백을 사용할 수 있습니다. 위에서 정의한 `increment` 모듈에 `increment by` 하위 명령을 추가해 보겠습니다.
 
 ```nu
 export def main []: int -> int {
@@ -155,9 +155,9 @@ export def "increment by" [amount: int]: int -> int {
 }
 ```
 
-It can then be imported with `use increment *` to load both the `increment` command and `increment by` subcommand.
+그런 다음 `use increment *`로 가져와 `increment` 명령과 `increment by` 하위 명령을 모두 로드할 수 있습니다.
 
-2. Alternatively, we can define the subcommand simply using the name `by`, since importing the entire `increment` module will result in the same commands:
+2. 또는 전체 `increment` 모듈을 가져오면 동일한 명령이 생성되므로 하위 명령을 단순히 `by`라는 이름으로 정의할 수 있습니다.
 
 ```nu
 export def main []: int -> int {
@@ -169,42 +169,42 @@ export def by [amount: int]: int -> int {
 }
 ```
 
-This module is imported using `use increment` (without the glob `*`) and results in the same `increment` command and `increment by` subcommand.
+이 모듈은 `use increment`(glob `*` 없음)를 사용하여 가져오며 동일한 `increment` 명령과 `increment by` 하위 명령을 생성합니다.
 
 ::: note
-We'll continue to use this version for further examples below, so notice that the import pattern has changed to `use increment` (rather than `use increment *`) below.
+아래의 추가 예제에서는 이 버전을 계속 사용할 것이므로 가져오기 패턴이 아래에서 `use increment`( `use increment *` 대신)로 변경되었음을 확인하십시오.
 :::
 
-## Submodules
+## 하위 모듈
 
-Submodules are modules that are exported from another module. There are two ways to add a submodule to a module:
+하위 모듈은 다른 모듈에서 내보내는 모듈입니다. 모듈에 하위 모듈을 추가하는 방법에는 두 가지가 있습니다.
 
-1. With `export module`: Exports (a) the submodule and (b) its definitions as members of the submodule
-2. With `export use`: Exports (a) the submodule and (b) its definitions as members of the parent module
+1. `export module` 사용: (a) 하위 모듈과 (b) 해당 정의를 하위 모듈의 멤버로 내보냅니다.
+2. `export use` 사용: (a) 하위 모듈과 (b) 해당 정의를 부모 모듈의 멤버로 내보냅니다.
 
-To demonstrate the difference, let's create a new `my-utils` module, with our `increment` example as a submodule. Additionally, we'll create a new `range-into-list` command in its own submodule.
+차이점을 설명하기 위해 `increment` 예제를 하위 모듈로 사용하여 새 `my-utils` 모듈을 만들어 보겠습니다. 또한 자체 하위 모듈에 새 `range-into-list` 명령을 만들겠습니다.
 
-1. Create a directory for the new `my-utils` and move the `increment.nu` into it
+1. 새 `my-utils`용 디렉터리를 만들고 `increment.nu`를 그 안으로 이동합니다.
 
    ```nu
    mkdir my-utils
-   # Adjust the following as needed
+   # 필요에 따라 다음을 조정합니다.
    mv increment/mod.nu my-utils/increment.nu
    rm increment
    cd my-utils
    ```
 
-2. In the `my-utils` directory, create a `range-into-list.nu` file with the following:
+2. `my-utils` 디렉터리에서 다음 내용으로 `range-into-list.nu` 파일을 만듭니다.
 
    ```nu
    export def main []: range -> list {
-       # It looks odd, yes, but the following is just
-       # a simple way to convert ranges to lists
+       # 이상하게 보일 수 있지만 다음은 단지
+       # 범위를 목록으로 변환하는 간단한 방법입니다.
        each {||}
    }
    ```
 
-3. Test it:
+3. 테스트합니다.
 
    ```nu
    use range-into-list.nu
@@ -212,28 +212,28 @@ To demonstrate the difference, let's create a new `my-utils` module, with our `i
    # => list<int> (stream)
    ```
 
-4. We should now have a `my-utils` directory with the:
+4. 이제 다음이 포함된 `my-utils` 디렉터리가 있어야 합니다.
 
-   - `increment.nu` module
-   - `range-into-list.nu` module
+   - `increment.nu` 모듈
+   - `range-into-list.nu` 모듈
 
-The following examples show how to create a module with submodules.
+다음 예제는 하위 모듈이 있는 모듈을 만드는 방법을 보여줍니다.
 
-### Example: Submodule with `export module`
+### 예제: `export module`이 있는 하위 모듈
 
-The most common form for a submodule definition is with `export module`.
+하위 모듈 정의의 가장 일반적인 형태는 `export module`입니다.
 
-1. Create a new module named `my-utils`. Since we're in the `my-utils` directory, we will create a `mod.nu` to define it. This version of `my-utils/mod.nu` will contain:
+1. `my-utils`라는 새 모듈을 만듭니다. `my-utils` 디렉터리에 있으므로 `mod.nu`를 만들어 정의합니다. 이 `my-utils/mod.nu` 버전에는 다음이 포함됩니다.
 
    ```nu
    export module ./increment.nu
    export module ./range-into-list.nu
    ```
 
-2. We now have a module `my-utils` with the two submodules. Try it out:
+2. 이제 두 개의 하위 모듈이 있는 `my-utils` 모듈이 있습니다. 사용해 보십시오.
 
    ```nu
-   # Go to the parent directory of my-utils
+   # my-utils의 부모 디렉터리로 이동
    cd ..
    use my-utils *
    5 | increment by 4
@@ -241,26 +241,26 @@ The most common form for a submodule definition is with `export module`.
 
    let file_indices = 0..2..<10 | range-into-list
    ls | select ...$file_indices
-   # => Returns the 1st, 3rd, 5th, 7th, and 9th file in the directory
+   # => 디렉터리의 첫 번째, 세 번째, 다섯 번째, 일곱 번째 및 아홉 번째 파일을 반환합니다.
    ```
 
-Before proceeding to the next section, run `scope modules` and look for the `my-utils` module. Notice that it has no commands of its own; just the two submodules.
+다음 섹션으로 진행하기 전에 `scope modules`를 실행하고 `my-utils` 모듈을 찾으십시오. 자체 명령이 없고 두 개의 하위 모듈만 있다는 점에 유의하십시오.
 
-### Example: Submodule with `export use`
+### 예제: `export use`가 있는 하위 모듈
 
-Alternatively, we can (re)export the _definitions_ from other modules. This is slightly different from the first form, in that the commands (and other definitions, if they were present) from `increment` and `range-into-list` become _members_ of the `my-utils` module itself. We'll be able to see the difference in the output of the `scope modules` command.
+또는 다른 모듈에서 _정의_를 (다시) 내보낼 수 있습니다. 이것은 `increment` 및 `range-into-list`의 명령(및 다른 정의가 있는 경우)이 `my-utils` 모듈 자체의 _멤버_가 된다는 점에서 첫 번째 형태와 약간 다릅니다. `scope modules` 명령의 출력에서 차이점을 볼 수 있습니다.
 
-Let's change `my-utils/mod.nu` to:
+`my-utils/mod.nu`를 다음으로 변경해 보겠습니다.
 
 ```nu
 export use ./increment.nu
 export use ./range-into-list.nu
 ```
 
-Try it out using the same commands as above:
+위와 동일한 명령을 사용하여 사용해 보십시오.
 
 ```nu
-# Go to the parent directory of my-utils
+# my-utils의 부모 디렉터리로 이동
 cd ..
 use my-utils *
 5 | increment by 4
@@ -268,47 +268,47 @@ use my-utils *
 
 let file_indices = 0..2..<10 | range-into-list
 ls / | sort-by modified | select ...$file_indices
-# => Returns the 1st, 3rd, 5th, 7th, and 9th file in the directory, oldest-to-newest
+# => 디렉터리의 첫 번째, 세 번째, 다섯 번째, 일곱 번째 및 아홉 번째 파일을 가장 오래된 것부터 최신 것 순으로 반환합니다.
 ```
 
-Run `scope modules` again and notice that all of the commands from the submodules are re-exported into the `my-utils` module.
+`scope modules`를 다시 실행하면 하위 모듈의 모든 명령이 `my-utils` 모듈로 다시 내보내진다는 것을 알 수 있습니다.
 
 ::: tip
-While `export module` is the recommended and most common form, there is one module-design scenario in which `export use` is required -- `export use` can be used to _selectively export_ definitions from the submodule, something `export module` cannot do. See [Additional Examples - Selective Export](#selective-export-from-a-submodule) for an example.
+`export module`이 권장되고 가장 일반적인 형태이지만 `export use`가 필요한 모듈 설계 시나리오가 하나 있습니다. `export use`는 하위 모듈에서 정의를 _선택적으로 내보내는_ 데 사용할 수 있으며, `export module`은 할 수 없는 작업입니다. 예는 [추가 예제 - 하위 모듈에서 선택적 내보내기](#selective-export-from-a-submodule)를 참조하십시오.
 :::
 
 ::: note
-`module` without `export` defines only a local module; it does not export a submodule.
+`export` 없는 `module`은 로컬 모듈만 정의하며 하위 모듈을 내보내지 않습니다.
 :::
 
-## Documenting Modules
+## 모듈 문서화
 
-As with [custom commands](../custom_commands.md#documenting-your-command), modules can include documentation that can be viewed with `help <module_name>`. The documentation is simply a series of commented lines at the beginning of the module file. Let's document the `my-utils` module:
+[사용자 지정 명령](../custom_commands.md#documenting-your-command)과 마찬가지로 모듈에는 `help <module_name>`으로 볼 수 있는 문서가 포함될 수 있습니다. 문서는 모듈 파일의 시작 부분에 있는 일련의 주석 처리된 줄입니다. `my-utils` 모듈을 문서화해 보겠습니다.
 
 ```nu
-# A collection of helpful utility functions
+# 유용한 유틸리티 함수 모음
 
 export use ./increment.nu
 export use ./range-into-list.nu
 ```
 
-Now examine the help:
+이제 도움말을 살펴보십시오.
 
 ```nu
 use my-utils *
 help my-utils
 
-# => A collection of helpful utility functions
+# => 유용한 유틸리티 함수 모음
 ```
 
-Also notice that, because the commands from `increment` and `range-into-list` are re-exported with `export use ...`, those commands show up in the help for the main module as well.
+또한 `increment` 및 `range-into-list`의 명령이 `export use ...`로 다시 내보내지므로 해당 명령이 주 모듈의 도움말에도 표시된다는 점에 유의하십시오.
 
-## Environment Variables
+## 환경 변수
 
-Modules can define an environment using [`export-env`](/commands/docs/export-env.md). Let's extend our `my-utils` module with an environment variable export for a common directory where we'll place our modules in the future. This directory is (by default) in the `$env.NU_LIB_DIRS` search path discussed in [Using Modules - Module Path](./using_modules.md#module-path).
+모듈은 [`export-env`](/commands/docs/export-env.md)를 사용하여 환경을 정의할 수 있습니다. 앞으로 모듈을 배치할 공통 디렉터리에 대한 환경 변수 내보내기로 `my-utils` 모듈을 확장해 보겠습니다. 이 디렉터리는 (기본적으로) [모듈 사용 - 모듈 경로](./using_modules.md#module-path)에서 설명하는 `$env.NU_LIB_DIRS` 검색 경로에 있습니다.
 
 ```nu
-# A collection of helpful utility functions
+# 유용한 유틸리티 함수 모음
 
 export use ./increment.nu
 export use ./range-into-list.nu
@@ -318,44 +318,44 @@ export-env {
 }
 ```
 
-When this module is imported with `use`, the code inside the [`export-env`](/commands/docs/export-env.md) block is run and the its environment merged into the current scope:
+이 모듈을 `use`로 가져오면 [`export-env`](/commands/docs/export-env.md) 블록 내부의 코드가 실행되고 해당 환경이 현재 범위에 병합됩니다.
 
 ```nu
 use my-utils
 $env.NU_MODULES_DIR
-# => Returns the directory name
+# => 디렉터리 이름 반환
 cd $env.NU_MODULES_DIR
 ```
 
 ::: tip
-As with any command defined without `--env`, commands and other definitions in the module use their own scope for environment. This allows changes to be made internal to the module without them bleeding into the user's scope. Add the following to the bottom of `my-utils/mod.nu`:
+`--env` 없이 정의된 모든 명령과 마찬가지로 모듈의 명령 및 기타 정의는 환경에 대해 자체 범위를 사용합니다. 이렇게 하면 사용자의 범위로 유출되지 않고 모듈 내부에서 변경할 수 있습니다. `my-utils/mod.nu`의 맨 아래에 다음을 추가하십시오.
 
 ```nu
 export def examine-config-dir [] {
-    # Changes the PWD environment variable
+    # PWD 환경 변수 변경
     cd $nu.default-config-dir
     ls
 }
 ```
 
-Running this command changes the directory _locally_ in the module, but the changes are not propagated to the parent scope.
+이 명령을 실행하면 모듈에서 _로컬로_ 디렉터리가 변경되지만 변경 사항은 부모 범위로 전파되지 않습니다.
 
 :::
 
-## Caveats
+## 주의 사항
 
-### `export-env` runs only when the `use` call is _evaluated_
+### `export-env`는 `use` 호출이 _평가_될 때만 실행됩니다.
 
 ::: note
-This scenario is commonly encountered when creating a module that uses `std/log`.
+이 시나리오는 `std/log`를 사용하는 모듈을 만들 때 일반적으로 발생합니다.
 :::
 
-Attempting to import a module's environment within another environment may not work as expected. Let's create a new module `go.nu` that creates "shortcuts" to common directories. One of these will be the `$env.NU_MODULES_DIR` defined above in `my-utils`.
+다른 환경 내에서 모듈의 환경을 가져오려고 하면 예상대로 작동하지 않을 수 있습니다. `my-utils`에서 위에서 정의한 `$env.NU_MODULES_DIR` 중 하나인 공통 디렉터리에 대한 "바로 가기"를 만드는 새 모듈 `go.nu`를 만들어 보겠습니다.
 
-We might try:
+다음을 시도할 수 있습니다.
 
 ```nu
-# go.nu, in the parent directory of my-utils
+# go.nu, my-utils의 부모 디렉터리에 있음
 use my-utils
 
 export def --env home [] {
@@ -367,27 +367,27 @@ export def --env modules [] {
 }
 ```
 
-And then import it:
+그런 다음 가져옵니다.
 
 ```nu
 use go.nu
 go home
-# => Works
+# => 작동함
 go modules
-# => Error: $env.NU_MODULES_DIR is not found
+# => 오류: $env.NU_MODULES_DIR을 찾을 수 없습니다.
 ```
 
-This doesn't work because `my-utils` isn't _evaluated_ in this case; it is only _parsed_ when the `go.nu` module is imported. While this brings all of the other exports into scope, it does not _run_ the `export-env` block.
+이 경우 `my-utils`가 _평가_되지 않기 때문에 작동하지 않습니다. `go.nu` 모듈을 가져올 때만 _구문 분석_됩니다. 이렇게 하면 다른 모든 내보내기가 범위로 가져오지만 `export-env` 블록은 _실행_되지 않습니다.
 
 ::: important
-As mentioned at the start of this chapter, trying this while `my-utils` (and its `$env.NU_MODULES_DIR`) is still in scope from a previous import will _not_ fail as expected. Test in a new shell session to see the "normal" failure.
+이 장의 시작 부분에서 언급했듯이 `my-utils`(및 해당 `$env.NU_MODULES_DIR`)가 이전 가져오기에서 여전히 범위에 있는 동안 이를 시도하면 예상대로 실패하지 _않습니다_. "정상적인" 실패를 보려면 새 셸 세션에서 테스트하십시오.
 :::
 
-To bring `my-utils` exported environment into scope for the `go.nu` module, there are two options:
+`my-utils` 내보낸 환경을 `go.nu` 모듈의 범위로 가져오려면 두 가지 옵션이 있습니다.
 
-1. Import the module in each command where it is needed
+1. 필요한 각 명령에서 모듈 가져오기
 
-   By placing `use my-utils` in the `go home` command itself, its `export-env` will be _evaluated_ when the command is. For example:
+   `go home` 명령 자체에 `use my-utils`를 배치하면 해당 `export-env`가 명령이 실행될 때 _평가_됩니다. 예시:
 
    ```nu
    # go.nu
@@ -401,7 +401,7 @@ To bring `my-utils` exported environment into scope for the `go.nu` module, ther
    }
    ```
 
-2. Import the `my-utils` environment inside an `export-env` block in the `go.nu` module
+2. `go.nu` 모듈의 `export-env` 블록 내에서 `my-utils` 환경 가져오기
 
    ```nu
    use my-utils
@@ -418,30 +418,30 @@ To bring `my-utils` exported environment into scope for the `go.nu` module, ther
    }
    ```
 
-   In the example above, `go.nu` imports `my-utils` twice:
+   위 예제에서 `go.nu`는 `my-utils`를 두 번 가져옵니다.
 
-   1. The first `use my-utils` imports the module and its definitions (except for the environment) into the module scope.
-   2. The second `use my-utils []` imports nothing _but_ the environment into `go.nu`'s exported environment block. Because the `export-env` of `go.nu` is executed when the module is first imported, the `use my-utils []` is also evaluated.
+   1. 첫 번째 `use my-utils`는 모듈과 해당 정의(환경 제외)를 모듈 범위로 가져옵니다.
+   2. 두 번째 `use my-utils []`는 환경을 제외한 아무것도 `go.nu`의 내보낸 환경 블록으로 가져오지 않습니다. `go.nu`의 `export-env`는 모듈을 처음 가져올 때 실행되므로 `use my-utils []`도 평가됩니다.
 
-Note that the first method keeps `my-utils` environment inside the `go.nu` module's scope. The second, on the other hand, re-exports `my-utils` environment into the user scope.
+첫 번째 방법은 `my-utils` 환경을 `go.nu` 모듈의 범위 내에 유지한다는 점에 유의하십시오. 반면에 두 번째 방법은 `my-utils` 환경을 사용자 범위로 다시 내보냅니다.
 
-### Module files and commands cannot be named after parent module
+### 모듈 파일과 명령은 부모 모듈의 이름을 따서 명명할 수 없습니다.
 
-A `.nu` file cannot have the same name as its module directory (e.g., `spam/spam.nu`) as this would create an ambiguous condition with the name being defined twice. This is similar to the situation described above where a command cannot have the same name as its parent.
+`.nu` 파일은 모듈 디렉터리와 동일한 이름을 가질 수 없습니다(예: `spam/spam.nu`). 이름이 두 번 정의되는 모호한 조건이 생성되기 때문입니다. 이것은 위에서 설명한 명령이 부모와 동일한 이름을 가질 수 없는 상황과 유사합니다.
 
-## Windows Path Syntax
+## Windows 경로 구문
 
 ::: important
-Nushell on Windows supports both forward-slashes and back-slashes as the path separator. However, to ensure that they work on all platforms, using only the forward-slash `/` in your modules is highly recommended.
+Windows의 누셸은 경로 구분 기호로 슬래시와 백슬래시를 모두 지원합니다. 그러나 모든 플랫폼에서 작동하도록 하려면 모듈에서 슬래시 `/`만 사용하는 것이 좋습니다.
 :::
 
-## Additional Examples
+## 추가 예제
 
-### Local Definitions
+### 로컬 정의
 
-As mentioned above, definitions in a module without the [`export`](/commands/docs/export.md) keyword are only accessible in the module's scope.
+위에서 언급했듯이 [`export`](/commands/docs/export.md) 키워드가 없는 모듈의 정의는 모듈의 범위에서만 액세스할 수 있습니다.
 
-To demonstrate, create a new module `is-alphanumeric.nu`. Inside this module, we'll create a `str is-alphanumeric` command. If any of the characters in the string are not alpha-numeric, it returns `false`:
+설명하기 위해 새 모듈 `is-alphanumeric.nu`를 만듭니다. 이 모듈 내에서 `str is-alphanumeric` 명령을 만듭니다. 문자열의 문자 중 영숫자가 아닌 문자가 있으면 `false`를 반환합니다.
 
 ```nu
 # is-alphanumeric.nu
@@ -463,7 +463,7 @@ export def "str is-alphanumeric" []: string -> bool {
 }
 ```
 
-Notice that we have two definitions in this module -- `alpha-num-range` and `str is-alphanumeric`, but only the second is exported.
+이 모듈에는 `alpha-num-range`와 `str is-alphanumeric`라는 두 가지 정의가 있지만 두 번째만 내보내집니다.
 
 ```nu
 use is-alphanumeric.nu *
@@ -476,19 +476,18 @@ use is-alphanumeric.nu *
 # => help: `alpha-num-range` is neither a Nushell built-in or a known external command
 ```
 
-### Selective Export from a Submodule
+### 하위 모듈에서 선택적 내보내기
 
 ::: note
-While the following is a rare use-case, this technique is used by the Standard Library to
-make the `dirs` commands and its aliases available separately.
+다음은 드문 사용 사례이지만 이 기술은 표준 라이브러리에서 `dirs` 명령과 해당 별칭을 별도로 사용할 수 있도록 하는 데 사용됩니다.
 :::
 
-As mentioned in the [Submodules](#submodules) section above, only `export use` can selectively export definitions from a submodule.
+위의 [하위 모듈](#submodules) 섹션에서 언급했듯이 `export use`만 하위 모듈에서 정의를 선택적으로 내보낼 수 있습니다.
 
-To demonstrate, let's add a modified form of the `go.nu` module example [above](#caveats) to `my-utils`:
+설명하기 위해 위 [`go.nu` 모듈 예제](#caveats)의 수정된 형식을 `my-utils`에 추가해 보겠습니다.
 
 ```nu
-# go.nu, in the my-utils directory
+# go.nu, my-utils 디렉터리에 있음
 export def --env home [] {
     cd ~
 }
@@ -501,51 +500,51 @@ export alias h = home
 export alias m = modules
 ```
 
-This `go.nu` includes the following changes from the original:
+이 `go.nu`에는 원본과 다음과 같은 변경 사항이 포함되어 있습니다.
 
-- It doesn't rely on the `my-utils` mod since it will now be a submodule of `my-utils` instead
-- It adds "shortcut" aliases:
-  `h`: Goes to the home directory (alias of `go home`)
-  `m`: Goes to the modules directory (alias of `go modules`)
+- 이제 `my-utils`의 하위 모듈이 되므로 `my-utils` 모드에 의존하지 않습니다.
+- "바로 가기" 별칭을 추가합니다.
+  `h`: 홈 디렉터리로 이동합니다(`go home`의 별칭).
+  `m`: 모듈 디렉터리로 이동합니다(`go modules`의 별칭).
 
-A user could import _just_ the aliases with:
+사용자는 다음을 사용하여 별칭만 가져올 수 있습니다.
 
 ```nu
 use my-utils/go.nu [h, m]
 ```
 
-However, let's say we want to have `go.nu` be a submodule of `my-utils`. When a user imports `my-utils`, they should _only_ get the commands, but not the aliases. Edit `my-utils/mod.nu` and add:
+그러나 `go.nu`가 `my-utils`의 하위 모듈이 되도록 하고 싶다고 가정해 보겠습니다. 사용자가 `my-utils`를 가져올 때 별칭이 아닌 명령만 가져와야 합니다. `my-utils/mod.nu`를 편집하고 다음을 추가합니다.
 
 ```nu
 export use ./go.nu [home, modules]
 ```
 
-That _almost_ works -- It selectively exports `home` and `modules`, but not the aliases. However, it does so without the `go` prefix. For example:
+거의 작동합니다. `home` 및 `modules`를 선택적으로 내보내지만 별칭은 내보내지 않습니다. 그러나 `go` 접두사 없이 그렇게 합니다. 예시:
 
 ```nu
 use my-utils *
 home
-# => works
+# => 작동함
 go home
-# => Error: command not found
+# => 오류: 명령을 찾을 수 없음
 ```
 
-To export them as `go home` and `go modules`, make the following change to `my-utils/mod.nu`:
+`go home` 및 `go modules`로 내보내려면 `my-utils/mod.nu`를 다음과 같이 변경하십시오.
 
 ```nu
-# Replace the existing `export use` with ...
+# 기존 `export use`를 다음으로 바꿉니다.
 export module go {
     export use ./go.nu [home, modules]
 }
 ```
 
-This creates a new, exported submodule `go` in `my-utils` with the selectively (re)exported definitions for `go home` and `go modules`.
+이렇게 하면 `go home` 및 `go modules`에 대해 선택적으로 (다시) 내보낸 정의가 있는 `my-utils`에 새 내보낸 하위 모듈 `go`가 생성됩니다.
 
 ```nu
 use my-utils *
-# => As expected:
+# => 예상대로:
 go home
-# => works
+# => 작동함
 home
-# => Error: command not found
+# => 오류: 명령을 찾을 수 없음
 ```

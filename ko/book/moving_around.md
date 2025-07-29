@@ -1,16 +1,16 @@
-# Moving Around the System
+# 시스템 이동
 
-A defining characteristic of a shell is the ability to navigate and interact with the filesystem. Nushell is, of course, no exception. Here are some common commands you might use when interacting with the filesystem:
+셸의 특징은 파일 시스템을 탐색하고 상호 작용하는 기능입니다. 물론 누셸도 예외는 아닙니다. 다음은 파일 시스템과 상호 작용할 때 사용할 수 있는 몇 가지 일반적인 명령입니다.
 
-## Viewing Directory Contents
+## 디렉터리 내용 보기
 
 ```nu
 ls
 ```
 
-As seen in the Quick Tour, the [`ls`](/commands/docs/ls.md) command returns the contents of a directory. Nushell's `ls` will return the contents as a [table](types_of_data.html#tables).
+빠른 둘러보기에서 보았듯이 [`ls`](/commands/docs/ls.md) 명령은 디렉터리의 내용을 반환합니다. 누셸의 `ls`는 내용을 [테이블](types_of_data.html#tables)로 반환합니다.
 
-The [`ls`](/commands/docs/ls.md) command also takes an optional argument to change what you'd like to view. For example, we can list the files that end in ".md"
+[`ls`](/commands/docs/ls.md) 명령은 보고 싶은 것을 변경하기 위해 선택적 인수를 받기도 합니다. 예를 들어, ".md"로 끝나는 파일을 나열할 수 있습니다.
 
 ```nu
 ls *.md
@@ -24,13 +24,13 @@ ls *.md
 # => ╰───┴────────────────────┴──────┴──────────┴──────────────╯
 ```
 
-## Glob Patterns (wildcards)
+## Glob 패턴 (와일드카드)
 
-The asterisk (`*`) in the above optional argument `*.md` is sometimes called a wildcard or a glob. It lets us match anything. You can read this glob `*.md` as _"match any filename, so long as it ends with '.md'."_
+위 선택적 인수 `*.md`의 별표(`*`)는 와일드카드 또는 glob라고도 합니다. 무엇이든 일치시킬 수 있습니다. 이 glob `*.md`를 _"'.md'로 끝나는 모든 파일 이름과 일치"_라고 읽을 수 있습니다.
 
-The most general glob is `*`, which will match all paths. More often, you'll see this pattern used as part of another pattern, for example `*.bak` and `temp*`.
+가장 일반적인 glob는 모든 경로와 일치하는 `*`입니다. 더 자주 `*.bak` 및 `temp*`와 같은 다른 패턴의 일부로 이 패턴을 볼 수 있습니다.
 
-Nushell also supports a double `*` which will traverse paths that are nested inside of other directories. For example, `ls **/*` will list all the non-hidden paths nested under the current directory.
+누셸은 다른 디렉터리 내에 중첩된 경로를 순회하는 이중 `*`도 지원합니다. 예를 들어, `ls **/*`는 현재 디렉터리 아래에 중첩된 모든 숨겨지지 않은 경로를 나열합니다.
 
 ```nu
 ls **/*.md
@@ -50,166 +50,166 @@ ls **/*.md
 # => ╰───┴───────────────────────────────┴──────┴──────────┴──────────────╯
 ```
 
-Here, we're looking for any file that ends with ".md". The double-asterisks further specify _"in any directory starting from here."_
+여기서는 ".md"로 끝나는 모든 파일을 찾고 있습니다. 이중 별표는 _"여기서부터 시작하는 모든 디렉터리에서"_를 추가로 지정합니다.
 
-Nushell's globbing syntax not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html).
+누셸의 glob 구문은 `*`뿐만 아니라 [`?`로 단일 문자 일치 및 `[...]`로 문자 그룹 일치](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html)도 지원합니다.
 
-Escaping the `*`, `?`, and `[]` patterns works by enclosing them in a single-quoted, double-quoted, or
-[raw string](working_with_strings.md#raw-strings). For example, to show the contents of a directory named
-`[slug]`, use `ls "[slug]"` or `ls '[slug]'`.
+`*`, `?` 및 `[]` 패턴을 이스케이프하는 것은 작은따옴표, 큰따옴표 또는
+[원시 문자열](working_with_strings.md#raw-strings)로 묶어서 작동합니다. 예를 들어, `[slug]`라는 디렉터리의 내용을 표시하려면 `ls "[slug]"` 또는 `ls '[slug]'`를 사용하십시오.
 
-However, _backtick_ quoted strings do not escape globs. For example, compare the following scenarios:
+그러나 _백틱_으로 묶인 문자열은 glob를 이스케이프하지 않습니다. 예를 들어 다음 시나리오를 비교해 보십시오.
 
-1. Unquoted: Glob pattern
+1. 따옴표 없음: Glob 패턴
 
-   An unquoted [bare word string](working_with_strings.html#bare-word-strings) with glob characters is interpreted as a glob pattern, so the following will remove all files in the current directory that contain
-   `myfile` as any part of the filename:
+   glob 문자가 있는 따옴표 없는 [일반 단어 문자열](working_with_strings.html#bare-word-strings)은 glob 패턴으로 해석되므로 다음은 현재 디렉터리에서 파일 이름의 일부로 `myfile`을 포함하는 모든 파일을 제거합니다.
 
    ```nu
    rm *myfile*
    ```
 
-2. Quoted: String literal with asterisks
+2. 따옴표: 별표가 있는 문자열 리터럴
 
-   When quoting with single or double quotes, or using a [raw string](working_with_strings.html#raw-strings), a _string_ with the literal, escaped asterisks (or other glob characters) is passed to the command. The result is not a glob. The following command will only remove a file literally named `*myfile*` (including the asterisks). Other files with `myfile` in the name are not affected:
+   작은따옴표나 큰따옴표로 묶거나 [원시 문자열](working_with_strings.html#raw-strings)을 사용할 때 리터럴, 이스케이프된 별표(또는 기타 glob 문자)가 있는 _문자열_이 명령에 전달됩니다. 결과는 glob가 아닙니다. 다음 명령은 문자 그대로 `*myfile*`(별표 포함)라는 이름의 파일만 제거합니다. 이름에 `myfile`이 있는 다른 파일은 영향을 받지 않습니다.
 
    ```nu
    rm "*myfile*"
    ```
 
-3. Backtick-quoted: Glob pattern
+3. 백틱으로 묶음: Glob 패턴
 
-   Asterisks (and other glob patterns) within a [backtick-quoted string](working_with_strings.html#backtick-quoted-strings) are interpreted as a glob pattern. Notice that this is the same behavior as that of the bare-word string example in #1 above.
+   [백틱으로 묶인 문자열](working_with_strings.html#backtick-quoted-strings) 내의 별표(및 기타 glob 패턴)는 glob 패턴으로 해석됩니다. 이것은 위의 #1의 일반 단어 문자열 예제와 동일한 동작입니다.
 
-   The following, as with that first example, removes all files in the current directory that contain `myfile` as part of the filename
+   다음은 해당 첫 번째 예제와 마찬가지로 현재 디렉터리에서 파일 이름의 일부로 `myfile`을 포함하는 모든 파일을 제거합니다.
 
    ```nu
    rm `*myfile*`
    ```
 
 ::: tip
-Nushell also includes a dedicated [`glob` command](https://www.nushell.sh/commands/docs/glob.html) with support for more complex globbing scenarios.
+누셸에는 더 복잡한 glob 시나리오를 지원하는 전용 [`glob` 명령](https://www.nushell.sh/commands/docs/glob.html)도 포함되어 있습니다.
 :::
 
-### Converting Strings to Globs
+### 문자열을 Glob로 변환
 
-The quoting techniques above are useful when constructing glob-literals, but you may need to construct globs programmatically. There are several techniques available for this purpose:
+위의 따옴표 기법은 glob 리터럴을 구성할 때 유용하지만 프로그래밍 방식으로 glob를 구성해야 할 수도 있습니다. 이 목적을 위해 사용할 수 있는 몇 가지 기법이 있습니다.
 
 1. `into glob`
 
-   The [`into glob` command](/commands/docs/into_glob.html) can be used to convert a string (and other types) into a glob. For instance:
+   [`into glob` 명령](/commands/docs/into_glob.html)을 사용하여 문자열(및 기타 유형)을 glob로 변환할 수 있습니다. 예시:
 
    ```nu
-   # Find files whose name includes the current month in the form YYYY-mm
+   # YYYY-mm 형식으로 현재 월을 포함하는 파일 찾기
    let current_month = (date now | format date '%Y-%m')
    let glob_pattern = ($"*($current_month)*" | into glob)
    ls $glob_pattern
    ```
 
-2. The spread operator combined with the [`glob` command](/commands/docs/glob.html):
+2. [`glob` 명령](/commands/docs/glob.html)과 결합된 스프레드 연산자:
 
-   The [`glob` command](/commands/docs/glob.html) (note: not the same as `into glob`) produces a [`list`](types_of_data.html#lists) of filenames that match the glob pattern. This list can be expanded and passed to filesystem commands using the [spread operator](operators.html#spread-operator):
+   [`glob` 명령](/commands/docs/glob.html)(참고: `into glob`와 동일하지 않음)은 glob 패턴과 일치하는 파일 이름의 [`list`](types_of_data.html#lists)를 생성합니다. 이 목록은 [스프레드 연산자](operators.html#spread-operator)를 사용하여 확장하고 파일 시스템 명령에 전달할 수 있습니다.
 
    ```nu
-   # Find files whose name includes the current month in the form YYYY-mm
+   # YYYY-mm 형식으로 현재 월을 포함하는 파일 찾기
    let current_month = (date now | format date '%Y-%m')
    ls ...(glob $"*($current_month)*")
    ```
 
-3. Force `glob` type via annotation:
+3. 주석을 통해 `glob` 유형 강제:
 
    ```nu
-   # Find files whose name includes the current month in the form YYYY-mm
+   # YYYY-mm 형식으로 현재 월을 포함하는 파일 찾기
    let current_month = (date now | format date '%Y-%m')
    let glob_pattern: glob = ($"*($current_month)*")
    ls $glob_pattern
    ```
 
-## Creating a Directory
+## 디렉터리 만들기
 
-As with most other shells, the [`mkdir` command](/commands/docs/mkdir.md) is used to create new directories. One subtle difference is that Nushell's internal `mkdir` command operates like the Unix/Linux `mkdir -p` by default, in that it:
+대부분의 다른 셸과 마찬가지로 [`mkdir` 명령](/commands/docs/mkdir.md)은 새 디렉터리를 만드는 데 사용됩니다. 한 가지 미묘한 차이점은 누셸의 내부 `mkdir` 명령이 기본적으로 Unix/Linux `mkdir -p`처럼 작동한다는 것입니다.
 
-- Will create multiple directory levels automatically. For example:
+- 여러 디렉터리 수준을 자동으로 만듭니다. 예시:
 
   ```nu
   mkdir modules/my/new_module
   ```
 
-  This will create all three directories even if none of them currently exists. On Linux/Unix, this requires `mkdir -p`.
+  이렇게 하면 현재 존재하지 않더라도 세 개의 디렉터리가 모두 생성됩니다. Linux/Unix에서는 `mkdir -p`가 필요합니다.
 
-- Will not error if the directory already exists. For example:
+- 디렉터리가 이미 있는 경우 오류가 발생하지 않습니다. 예시:
 
   ```nu
   mkdir modules/my/new_module
   mkdir modules/my/new_module
-  # => No error
+  # => 오류 없음
   ```
 
   ::: tip
-  A common mistake when coming to Nushell is to attempt to use `mkdir -p <directory>` as in the native Linux/Unix version. However, this will generate an `Unknown Flag` error on Nushell.
+  누셸에 올 때 흔히 저지르는 실수는 네이티브 Linux/Unix 버전처럼 `mkdir -p <directory>`를 사용하려고 시도하는 것입니다. 그러나 이렇게 하면 누셸에서 `알 수 없는 플래그` 오류가 발생합니다.
 
-  Just repeat the command without the `-p` to achieve the same effect.
+  동일한 효과를 얻으려면 `-p` 없이 명령을 반복하기만 하면 됩니다.
   :::
 
-## Changing the Current Directory
+## 현재 디렉터리 변경
 
 ```nu
 cd cookbook
 ```
 
-To change from the current directory to a new one, use the [`cd`](/commands/docs/cd.md) command.
+현재 디렉터리에서 새 디렉터리로 변경하려면 [`cd`](/commands/docs/cd.md) 명령을 사용하십시오.
 
-Changing the current working directory can also be done if [`cd`](/commands/docs/cd.md) is omitted and a path by itself is given:
+[`cd`](/commands/docs/cd.md)가 생략되고 경로 자체만 지정된 경우에도 현재 작업 디렉터리를 변경할 수 있습니다.
 
 ```nu
 cookbook/
 ```
 
-Just as in other shells, you can use either the name of the directory, or if you want to go up a directory you can use the `..` shortcut.
+다른 셸과 마찬가지로 디렉터리 이름을 사용하거나 디렉터리 위로 이동하려면 `..` 바로 가기를 사용할 수 있습니다.
 
-You can also add additional dots to go up additional directory levels:
+추가 디렉터리 수준으로 이동하려면 추가 점을 추가할 수도 있습니다.
 
 ```nu
-# Change to the parent directory
+# 부모 디렉터리로 변경
 cd ..
-# or
+# 또는
 ..
-# Go up two levels (parent's parent)
+# 두 수준 위로 이동(부모의 부모)
 cd ...
-# or
+# 또는
 ...
-# Go up three levels (parent of parent's parent)
+# 세 수준 위로 이동(부모의 부모의 부모)
 cd ....
-# Etc.
+# 등
 ```
 
 ::: tip
-Multi-dot shortcuts are available to both internal Nushell [filesystem commands](/commands/categories/filesystem.html) as well as to external commands. For example, running `^stat ....` on a Linux/Unix system will show that the path is expanded to `../../..`
+여러 점 바로 가기는 내부 누셸 [파일 시스템 명령](/commands/categories/filesystem.html)과 외부 명령 모두에서 사용할 수 있습니다. 예를 들어 Linux/Unix 시스템에서 `^stat ....`를 실행하면 경로가 `../../..`로 확장되는 것을 볼 수 있습니다.
 :::
 
-You can combine relative directory levels with directory names as well:
+상대 디렉터리 수준을 디렉터리 이름과 결합할 수도 있습니다.
 
 ```nu
 cd ../sibling
 ```
 
-::: tip IMPORTANT TIP
-Changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of a directory is kept to the current scope (e.g. block or closure). Once you exit the block, you'll return to the previous directory. You can learn more about this in the [Environment](./environment.md) chapter.
+::: tip 중요 팁
+[`cd`](/commands/docs/cd.md)로 디렉터리를 변경하면 `PWD` 환경 변수가 변경됩니다. 즉, 디렉터리 변경은 현재 범위(예: 블록 또는 클로저)에 유지됩니다. 블록을 종료하면 이전 디렉터리로 돌아갑니다. 이에 대한 자세한 내용은 [환경](./environment.md) 장에서 확인할 수 있습니다.
 :::
 
-## Filesystem Commands
+## 파일 시스템 명령
 
-Nu also provides some basic [filesystem commands](/commands/categories/filesystem.html) that work cross-platform such as:
+Nu는 또한 다음과 같은 크로스 플랫폼에서 작동하는 몇 가지 기본 [파일 시스템 명령](/commands/categories/filesystem.html)을 제공합니다.
 
-- [`mv`](/commands/docs/mv.md) to rename or move a file or directory to a new location
-- [`cp`](/commands/docs/cp.md) to copy an item to a new location
-- [`rm`](/commands/docs/rm.md) to remove items from the filesystem
+- [`mv`](/commands/docs/mv.md) 파일 또는 디렉터리를 새 위치로 이름 바꾸거나 이동합니다.
+- [`cp`](/commands/docs/cp.md) 항목을 새 위치로 복사합니다.
+- [`rm`](/commands/docs/rm.md) 파일 시스템에서 항목을 제거합니다.
 
-::: tip NOTE
-Under Bash and many other shells, most filesystem commands (other than `cd`) are actually separate binaries in the system. For instance, on a Linux system, `cp` is the `/usr/bin/cp` binary. In Nushell, these commands are built-in. This has several advantages:
+::: tip 참고
+Bash 및 기타 많은 셸에서 대부분의 파일 시스템 명령(`cd` 제외)은 실제로 시스템의 별도 바이너리입니다. 예를 들어 Linux 시스템에서 `cp`는 `/usr/bin/cp` 바이너리입니다. 누셸에서 이러한 명령은 기본 제공됩니다. 여기에는 몇 가지 장점이 있습니다.
 
-- They work consistently on platforms where a binary version may not be available (e.g. Windows). This allows the creation of cross-platform scripts, modules, and custom commands.
-- They are more tightly integrated with Nushell, allowing them to understand Nushell types and other constructs
-- As mentioned in the [Quick Tour](quick_tour.html), they are documented in the Nushell help system. Running `help <command>` or `<command> --help` will display the Nushell documentation for the command.
+- 바이너리 버전을 사용할 수 없는 플랫폼(예: Windows)에서 일관되게 작동합니다. 이를 통해 크로스 플랫폼 스크립트, 모듈 및 사용자 지정 명령을 만들 수 있습니다.
+- 누셸과 더 긴밀하게 통합되어 누셸 유형 및 기타 구문을 이해할 수 있습니다.
+- [빠른 둘러보기](quick_tour.html)에서 언급했듯이 누셸 도움말 시스템에 문서화되어 있습니다. `help <command>` 또는 `<command> --help`를 실행하면 명령에 대한 누셸 설명서가 표시됩니다.
 
-While the use of the Nushell built-in versions is typically recommended, it is possible to access the Linux binaries. See [Running System Commands](./running_externals.md) for details.
+누셸 기본 제공 버전을 사용하는 것이 일반적으로 권장되지만 Linux 바이너리에 액세스할 수 있습니다. 자세한 내용은 [시스템 명령 실행](./running_externals.md)을 참조하십시오.
+
+[end of ko/book/moving_around.md]
