@@ -1,15 +1,15 @@
 ---
 next:
-  text: Design Notes
+  text: 디자인 노트
   link: /book/design_notes.md
 ---
-# Nushell operator map
+# 누셸 연산자 맵
 
-The idea behind this table is to help you understand how Nu operators relate to other language operators. We've tried to produce a map of all the nushell operators and what their equivalents are in other languages. Contributions are welcome.
+이 표의 목적은 Nu 연산자가 다른 언어 연산자와 어떻게 관련되는지 이해하는 데 도움을 주는 것입니다. 모든 누셸 연산자와 다른 언어에서의 해당 연산자를 매핑하려고 노력했습니다. 기여를 환영합니다.
 
-Note: this table assumes Nu 0.14.1 or later.
+참고: 이 표는 Nu 0.14.1 이상을 가정합니다.
 
-| Nushell | SQL      | Python             | .NET LINQ (C#)       | PowerShell             | Bash               |
+| 누셸 | SQL      | 파이썬             | .NET LINQ (C#)       | PowerShell             | Bash               |
 | ------- | -------- | ------------------ | -------------------- | ---------------------- | ------------------ |
 | ==      | =        | ==                 | ==                   | -eq, -is               | -eq                |
 | !=      | !=, <>   | !=                 | !=                   | -ne, -isnot            | -ne                |
