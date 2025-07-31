@@ -1,30 +1,30 @@
-# Thinking in Nu
+# 누셸 방식으로 생각하기
 
-Nushell is different! It's common (and expected!) for new users to have some existing "habits" or mental models coming from other shells or languages.
+누셸은 다릅니다! 새로운 사용자가 다른 셸이나 언어에서 온 기존의 "습관"이나 정신 모델을 가지고 있는 것은 일반적이며 예상되는 일입니다!
 
-The most common questions from new users typically fall into one of the following topics:
+새로운 사용자의 가장 일반적인 질문은 일반적으로 다음 주제 중 하나에 해당합니다.
 
 [[toc]]
 
-## Nushell isn't Bash
+## 누셸은 Bash가 아닙니다
 
-### It can sometimes look like Bash
+### 때로는 Bash처럼 보일 수 있습니다
 
-Nushell is both a programming language and a shell. Because of this, it has its own way of working with files, directories, websites, and more. You'll find that some features in Nushell work similar to those you're familiar with in other shells. For instance, pipelines work by combining two (or more) commands together, just like in other shells.
+누셸은 프로그래밍 언어이자 셸입니다. 이 때문에 파일, 디렉터리, 웹사이트 등을 다루는 고유한 방식이 있습니다. 누셸의 일부 기능은 다른 셸에서 익숙한 기능과 유사하게 작동한다는 것을 알게 될 것입니다. 예를 들어, 파이프라인은 다른 셸과 마찬가지로 두 개 이상의 명령을 함께 결합하여 작동합니다.
 
-For example, the following commandline works the same in both Bash and Nushell on Unix/Linux platforms:
+예를 들어, 다음 명령줄은 유닉스/리눅스 플랫폼의 Bash와 누셸 모두에서 동일하게 작동합니다.
 
 ```nu
 curl -s https://api.github.com/repos/nushell/nushell/contributors | jq -c '.[] | {login,contributions}'
-# => returns contributors to Nushell, ordered by number of contributions
+# => 누셸에 대한 기여자를 기여 횟수 순으로 반환합니다.
 ```
 
-Nushell has many other similarities with Bash (and other shells) and many commands in common.
+누셸은 Bash(및 다른 셸)와 많은 유사점을 가지고 있으며 공통된 명령도 많습니다.
 
 ::: tip
-Bash is primarily a command interpreter which runs external commands. Nushell provides many of these as cross-platform, built-in commands.
+Bash는 주로 외부 명령을 실행하는 명령 인터프리터입니다. 누셸은 이러한 많은 명령을 크로스 플랫폼, 내장 명령으로 제공합니다.
 
-While the above commandline works in both shells, in Nushell there's just no need to use the `curl` and `jq` commands. Instead, Nushell has a built-in [`http get` command](/commands/docs/http_get.md) and handles JSON data natively. For example:
+위 명령줄은 두 셸 모두에서 작동하지만 누셸에서는 `curl` 및 `jq` 명령을 사용할 필요가 없습니다. 대신 누셸에는 내장 [`http get` 명령](/commands/docs/http_get.md)이 있으며 JSON 데이터를 기본적으로 처리합니다. 예시:
 
 ```nu
 http get https://api.github.com/repos/nushell/nushell/contributors | select login contributions
@@ -32,69 +32,69 @@ http get https://api.github.com/repos/nushell/nushell/contributors | select logi
 
 :::
 
-::: warning Thinking in Nushell
-Nushell borrows concepts from many shells and languages. You'll likely find many of Nushell's features familiar.
+::: warning 누셸 방식으로 생각하기
+누셸은 많은 셸과 언어에서 개념을 차용합니다. 누셸의 많은 기능이 익숙하게 느껴질 것입니다.
 :::
 
-### But it's not Bash
+### 하지만 Bash는 아닙니다
 
-Because of this, however, it's sometimes easy to forget that some Bash (and POSIX in general) style constructs just won't work in Nushell. For instance, in Bash, it would be normal to write:
+그러나 이 때문에 Bash(및 일반적으로 POSIX) 스타일 구문 중 일부는 누셸에서 작동하지 않는다는 것을 잊기 쉽습니다. 예를 들어, Bash에서는 다음과 같이 작성하는 것이 일반적입니다.
 
 ```sh
-# Redirect using >
+# >를 사용하여 리디렉션
 echo "hello" > output.txt
-# But compare (greater-than) using the test command
+# 그러나 test 명령을 사용하여 비교(보다 큼)
 test 4 -gt 7
 echo $?
 # => 1
 ```
 
-In Nushell, however, the `>` is used as the greater-than operator for comparisons. This is more in line with modern programming expectations.
+그러나 누셸에서는 `>`가 비교를 위한 보다 큼 연산자로 사용됩니다. 이것은 현대 프로그래밍 기대치와 더 일치합니다.
 
 ```nu
 4 > 10
 # => false
 ```
 
-Since `>` is an operator, redirection to a file in Nushell is handled through a pipeline command that is dedicated to saving content - [`save`](/commands/docs/save.md):
+`>`가 연산자이므로 누셸에서 파일로의 리디렉션은 콘텐츠 저장 전용 파이프라인 명령인 [`save`](/commands/docs/save.md)를 통해 처리됩니다.
 
 ```nu
 "hello" | save output.txt
 ```
 
-::: warning Thinking in Nushell
-We've put together a list of common Bash'isms and how to accomplish those tasks in Nushell in the [Coming from Bash](./coming_from_bash.md) Chapter.
+::: warning 누셸 방식으로 생각하기
+[Bash에서 오신 분들을 위해](./coming_from_bash.md) 장에서 일반적인 Bash 사용법과 누셸에서 해당 작업을 수행하는 방법에 대한 목록을 정리했습니다.
 :::
 
-## Implicit Return
+## 암시적 반환
 
-Users coming from other shells will likely be very familiar with the `echo` command. Nushell's
-[`echo`](/commands/docs/echo.md) might appear the same at first, but it is _very_ different.
+다른 셸에서 온 사용자는 `echo` 명령에 매우 익숙할 것입니다. 누셸의
+[`echo`](/commands/docs/echo.md)는 처음에는 동일하게 보일 수 있지만 _매우_ 다릅니다.
 
-First, notice how the following output _looks_ the same in both Bash and Nushell (and even PowerShell and Fish):
+먼저, 다음 출력이 Bash와 누셸(심지어 PowerShell과 Fish에서도)에서 어떻게 _동일하게 보이는지_ 확인하십시오.
 
 ```nu
 echo "Hello, World"
 # => Hello, World
 ```
 
-But while the other shells are sending `Hello, World` straight to _standard output_, Nushell's `echo` is
-simply _returning a value_. Nushell then _renders_ the return value of a command, or more technically, an _expression_.
+그러나 다른 셸이 `Hello, World`를 _표준 출력_으로 직접 보내는 반면, 누셸의 `echo`는
+단순히 _값을 반환_합니다. 그런 다음 누셸은 명령 또는 더 기술적으로는 _표현식_의 반환 값을 _렌더링_합니다.
 
-More importantly, Nushell _implicitly returns_ the value of an expression. This is similar to PowerShell or Rust in many respects.
+더 중요한 것은 누셸이 표현식의 값을 _암시적으로 반환_한다는 것입니다. 이것은 여러 면에서 PowerShell이나 Rust와 유사합니다.
 
 ::: tip
-An expression can be more than just a pipeline. Even custom commands (similar to functions in many languages, but we'll cover them more in depth in a [later chapter](./custom_commands.md)) automatically, implicitly _return_ the last value. There's no need for an `echo` or even a [`return` command](/commands/docs/return.md) to return a value - It just _happens_.
+표현식은 파이프라인 이상일 수 있습니다. 사용자 지정 명령(많은 언어의 함수와 유사하지만 [나중 장](./custom_commands.md)에서 더 자세히 다룰 것입니다)조차도 자동으로 마지막 값을 암시적으로 _반환_합니다. 값을 반환하기 위해 `echo`나 심지어 [`return` 명령](/commands/docs/return.md)도 필요하지 않습니다. 그냥 _발생_합니다.
 :::
 
-In other words, the string _"Hello, World"_ and the output value from `echo "Hello, World"` are equivalent:
+즉, 문자열 _"Hello, World"_와 `echo "Hello, World"`의 출력 값은 동일합니다.
 
 ```nu
 "Hello, World" == (echo "Hello, World")
 # => true
 ```
 
-Here's another example with a custom command definition:
+다음은 사용자 지정 명령 정의가 있는 또 다른 예입니다.
 
 ```nu
 def latest-file [] {
@@ -102,17 +102,17 @@ def latest-file [] {
 }
 ```
 
-The _output_ of that pipeline (its _"value"_) becomes the _return value_ of the `latest-file` custom command.
+해당 파이프라인의 _출력_(_"값"_)은 `latest-file` 사용자 지정 명령의 _반환 값_이 됩니다.
 
-::: warning Thinking in Nushell
-Most anywhere you might write `echo <something>`, in Nushell, you can just write `<something>` instead.
+::: warning 누셸 방식으로 생각하기
+`echo <something>`을 작성할 수 있는 대부분의 곳에서 누셸에서는 대신 `<something>`만 작성하면 됩니다.
 :::
 
-## Single Return Value per Expression
+## 표현식당 단일 반환 값
 
-It's important to understand that an expression can only return a single value. If there are multiple subexpressions inside an expression, only the **_last_** value is returned.
+표현식은 단일 값만 반환할 수 있다는 것을 이해하는 것이 중요합니다. 표현식 내에 여러 하위 표현식이 있는 경우 **_마지막_** 값만 반환됩니다.
 
-A common mistake is to write a custom command definition like this:
+일반적인 실수는 다음과 같은 사용자 지정 명령 정의를 작성하는 것입니다.
 
 ```nu:line-numbers
 def latest-file [] {
@@ -123,14 +123,14 @@ def latest-file [] {
 latest-file
 ```
 
-New users might expect:
+새로운 사용자는 다음을 기대할 수 있습니다.
 
-- Line 2 to output _"Returning the last file"_
-- Line 3 to return/output the file
+- 2행에서 _"Returning the last file"_ 출력
+- 3행에서 파일 반환/출력
 
-However, remember that `echo` **_returns a value_**. Since only the last value is returned, the Line 2 _value_ is discarded. Only the file will be returned by line 3.
+그러나 `echo`가 **_값을 반환_**한다는 것을 기억하십시오. 마지막 값만 반환되므로 2행의 _값_은 버려집니다. 3행에서 파일만 반환됩니다.
 
-To make sure the first line is _displayed_, use the [`print` command](/commands/docs/print.md):
+첫 번째 줄이 _표시_되도록 하려면 [`print` 명령](/commands/docs/print.md)을 사용하십시오.
 
 ```nu
 def latest-file [] {
@@ -139,14 +139,14 @@ def latest-file [] {
 }
 ```
 
-Also compare:
+또한 다음을 비교하십시오.
 
 ```nu
 40; 50; 60
 ```
 
 ::: tip
-A semicolon is the same as a newline in a Nushell expression. The above is the same as a file or multi-line command:
+세미콜론은 누셸 표현식에서 줄 바꿈과 동일합니다. 위는 파일 또는 여러 줄 명령과 동일합니다.
 
 ```nu
 40
@@ -154,7 +154,7 @@ A semicolon is the same as a newline in a Nushell expression. The above is the s
 60
 ```
 
-or
+또는
 
 ```nu
 echo 40
@@ -162,31 +162,30 @@ echo 50
 echo 60
 ```
 
-See Also: [Multi-line Editing](./line_editor.md#multi-line-editing)
+참조: [여러 줄 편집](./line_editor.md#multi-line-editing)
 :::
 
-In all of the above:
+위의 모든 경우:
 
-- The first value is evaluated as the integer 40 but is not returned
-- The second value is evaluated as the integer 50 but is not returned
-- The third value is evaluated as the integer 60, and since it is the last
-  value, it is is returned and displayed (rendered).
+- 첫 번째 값은 정수 40으로 평가되지만 반환되지 않습니다.
+- 두 번째 값은 정수 50으로 평가되지만 반환되지 않습니다.
+- 세 번째 값은 정수 60으로 평가되며, 마지막 값이므로 반환되어 표시(렌더링)됩니다.
 
-::: warning Thinking in Nushell
-When debugging unexpected results, be on the lookout for:
+::: warning 누셸 방식으로 생각하기
+예기치 않은 결과를 디버깅할 때 다음을 주의하십시오.
 
-- Subexpressions (e.g., commands or pipelines) that ...
-- ... output a (non-`null`) value ...
-- ... where that value isn't returned from the parent expression.
+- 하위 표현식(예: 명령 또는 파이프라인)...
+- ... (비-`null`) 값을 출력하는...
+- ... 해당 값이 부모 표현식에서 반환되지 않는 경우.
 
-These can be likely sources of issues in your code.
+이것들은 코드에서 문제의 원인이 될 수 있습니다.
 :::
 
-## Every Command Returns a Value
+## 모든 명령은 값을 반환합니다
 
-Some languages have the concept of "statements" which don't return values. Nushell does not.
+일부 언어에는 값을 반환하지 않는 "문"이라는 개념이 있습니다. 누셸에는 없습니다.
 
-In Nushell, **_every command returns a value_**, even if that value is `null` (the `nothing` type). Consider the following multiline expression:
+누셸에서는 **_모든 명령이 값을 반환_**합니다. 해당 값이 `null`( `nothing` 유형)인 경우에도 마찬가지입니다. 다음 여러 줄 표현식을 고려하십시오.
 
 ```nu:line-numbers
 let p = 7
@@ -194,80 +193,74 @@ print $p
 $p * 6
 ```
 
-1. Line 1: The integer 7 is assigned to `$p`, but the return value of the
-   [`let` command](/commands/docs/let.md) itself is `null`. However, because it is not the last
-   value in the expression, it is not displayed.
-2. Line 2: The return value of the `print` command itself is `null`, but the `print` command
-   forces its argument (`$p`, which is 7) to be _displayed_. As with Line 1, the `null` return value
-   is discarded since this isn't the last value in the expression.
-3. Line 3: Evaluates to the integer value 42. As the last value in the expression, this is the return
-   result, and is also displayed (rendered).
+1. 1행: 정수 7이 `$p`에 할당되지만 [`let` 명령](/commands/docs/let.md) 자체의 반환 값은 `null`입니다. 그러나 표현식의 마지막 값이 아니므로 표시되지 않습니다.
+2. 2행: `print` 명령 자체의 반환 값은 `null`이지만 `print` 명령은 해당 인수(`$p`, 즉 7)를 _표시_하도록 강제합니다. 1행과 마찬가지로 이것이 표현식의 마지막 값이 아니므로 `null` 반환 값은 버려집니다.
+3. 3행: 정수 값 42로 평가됩니다. 표현식의 마지막 값이므로 이것이 반환 결과이며 표시(렌더링)됩니다.
 
-::: warning Thinking in Nushell
-Becoming familiar with the output types of common commands will help you understand how
-to combine simple commands together to achieve complex results.
+::: warning 누셸 방식으로 생각하기
+일반적인 명령의 출력 유형에 익숙해지면 간단한 명령을 함께 결합하여 복잡한 결과를 얻는 방법을 이해하는 데 도움이 됩니다.
 
-`help <command>` will show the signature, including the output type(s), for each command in Nushell.
+`help <command>`는 누셸의 각 명령에 대한 서명(출력 유형 포함)을 표시합니다.
 :::
 
-## Think of Nushell as a Compiled Language
+## 누셸을 컴파일된 언어로 생각하십시오
 
-In Nushell, there are exactly two, separate, high-level stages when running code:
+누셸에서는 코드를 실행할 때 정확히 두 개의 별도 상위 수준 단계가 있습니다.
 
-1. _Stage 1 (Parser):_ Parse the **_entire_** source code
-2. _Stage 2 (Engine):_ Evaluate the **_entire_** source code
+1. _1단계(파서):_ **_전체_** 소스 코드 구문 분석
+2. _2단계(엔진):_ **_전체_** 소스 코드 평가
 
-It can be useful to think of Nushell's parsing stage as _compilation_ in [static](./how_nushell_code_gets_run.md#dynamic-vs-static-languages) languages like Rust or C++. By this, we mean that all of the code that will be evaluated in Stage 2 must be **_known and available_** during the parsing stage.
+누셸의 구문 분석 단계를 Rust 또는 C++와 같은 [정적](./how_nushell_code_gets_run.md#dynamic-vs-static-languages) 언어의 _컴파일_로 생각하는 것이 유용할 수 있습니다. 즉, 2단계에서 평가될 모든 코드는 구문 분석 단계 중에 **_알려지고 사용 가능_**해야 합니다.
 
 ::: important
-However, this also means that Nushell cannot currently support an `eval` construct as with _dynamic_ languages such as Bash or Python.
+그러나 이것은 또한 누셸이 현재 Bash나 Python과 같은 _동적_ 언어와 같이 `eval` 구문을 지원할 수 없음을 의미합니다.
 :::
 
-### Features Built on Static Parsing
+### 정적 구문 분석에 기반한 기능
 
-On the other hand, the **_static_** results of Parsing are key to many features of Nushell its REPL, such as:
+반면에 구문 분석의 **_정적_** 결과는 다음과 같은 누셸의 REPL의 많은 기능에 대한 핵심입니다.
 
-- Accurate and expressive error messages
-- Semantic analysis for earlier and robust detection of error conditions
-- IDE integration
-- The type system
-- The module system
-- Completions
-- Custom command argument parsing
-- Syntax highlighting
-- Real-time error highlighting
-- Profiling and debugging commands
-- (Future) Formatting
-- (Future) Saving IR (Intermediate Representation) "compiled" results for faster execution
+- 정확하고 표현력 있는 오류 메시지
+- 오류 조건의 조기 및 강력한 감지를 위한 의미 분석
+- IDE 통합
+- 유형 시스템
+- 모듈 시스템
+- 완성
+- 사용자 지정 명령 인수 구문 분석
+- 구문 강조
+- 실시간 오류 강조
+- 프로파일링 및 디버깅 명령
+- (미래) 서식 지정
+- (미래) 더 빠른 실행을 위해 "컴파일된" IR(중간 표현) 결과 저장
 
-### Limitations
+### 제한 사항
 
-The static nature of Nushell often leads to confusion for users coming to Nushell from languages where an `eval` is available.
+누셸의 정적 특성은 `eval`을 사용할 수 있는 언어에서 온 사용자에게 종종 혼란을 야기합니다.
 
-Consider a simple two-line file:
+간단한 두 줄 파일을 고려하십시오.
 
 ```text
 <line1 code>
 <line2 code>
 ```
 
-1. Parsing:
-   1. Line 1 is parsed
-   2. Line 2 is parsed
-2. If parsing was successful, then Evaluation:
-   1. Line 1 is evaluated
-   2. Line 2 is evaluated
+1. 구문 분석:
+   1. 1행이 구문 분석됩니다.
+   2. 2행이 구문 분석됩니다.
+2. 구문 분석이 성공하면 평가:
+   1. 1행이 평가됩니다.
+   2. 2행이 평가됩니다.
 
-This helps demonstrate why the following examples cannot run as a single expression (e.g., a script) in Nushell:
+이것은 다음 예제가 누셸에서 단일 표현식(예: 스크립트)으로 실행될 수 없는 이유를 설명하는 데 도움이 됩니다.
 
 ::: note
-The following examples use the [`source` command](/commands/docs/source.md), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md) or [`source-env`](/commands/docs/source-env.md).
+다음 예제에서는 [`source` 명령](/commands/docs/source.md)을 사용하지만, [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md) 또는 [`source-env`](/commands/docs/source-env.md)와 같이 누셸 소스 코드를 구문 분석하는 다른 명령에도 유사한 결론이 적용됩니다.
 
 :::
 
-#### Example: Dynamically Generating Source
+#### 예제: 동적으로 소스 생성
 
-Consider this scenario:
+이 시나리오를 고려하십시오.
 
 ```nu
 "print Hello" | save output.nu
@@ -284,22 +277,22 @@ source output.nu
 # =>   help: sourced files need to be available before your script is run
 ```
 
-This is problematic because:
+이것은 문제가 있습니다. 왜냐하면:
 
-1. Line 1 is parsed but not evaluated. In other words, `output.nu` is not created during the parsing stage, but only during evaluation.
-2. Line 2 is parsed. Because `source` is a parser-keyword, resolution of the sourced file is attempted during Parsing (Stage 1). But `output.nu` doesn't even exist yet! If it _does_ exist, then it's probably not even the correct file! This results in the error.
+1. 1행은 구문 분석되지만 평가되지 않습니다. 즉, `output.nu`는 구문 분석 단계에서는 생성되지 않고 평가 중에만 생성됩니다.
+2. 2행이 구문 분석됩니다. `source`는 파서 키워드이므로 소스 파일의 확인은 구문 분석(1단계) 중에 시도됩니다. 그러나 `output.nu`는 아직 존재하지도 않습니다! 존재하는 경우에도 올바른 파일이 아닐 수 있습니다! 이로 인해 오류가 발생합니다.
 
 ::: note
-Typing these as two _separate_ lines in the **_REPL_** will work since the first line will be parsed and evaluated, then the second line will be parsed and evaluated.
+**_REPL_**에서 두 개의 _별도_ 줄로 입력하면 첫 번째 줄이 구문 분석 및 평가된 다음 두 번째 줄이 구문 분석 및 평가되므로 작동합니다.
 
-The limitation only occurs when both are parsed _together_ as a single expression, which could be part of a script, block, closure, or other expression.
+제한은 스크립트, 블록, 클로저 또는 다른 표현식의 일부일 수 있는 단일 표현식으로 _함께_ 구문 분석될 때만 발생합니다.
 
-See the [REPL](./how_nushell_code_gets_run.md#the-nushell-repl) section in _"How Nushell Code Gets Run"_ for more explanation.
+자세한 내용은 _"누셸 코드가 실행되는 방법"_의 [REPL](./how_nushell_code_gets_run.md#the-nushell-repl) 섹션을 참조하십시오.
 :::
 
-#### Example: Dynamically Creating a Filename to be Sourced
+#### 예제: 동적으로 소싱할 파일 이름 만들기
 
-Another common scenario when coming from another shell might be attempting to dynamically create a filename that will be sourced:
+다른 셸에서 올 때 흔히 볼 수 있는 또 다른 시나리오는 소싱될 파일 이름을 동적으로 만들려고 시도하는 것입니다.
 
 ```nu
 let my_path = "~/nushell-files"
@@ -324,10 +317,10 @@ source $"($my_path)/common.nu"
 # =>    ╰────
 ```
 
-Because the `let` assignment is not resolved until evaluation, the parser-keyword `source` will fail during parsing if passed a variable.
+`let` 할당은 평가될 때까지 확인되지 않으므로 파서 키워드 `source`는 변수가 전달되면 구문 분석 중에 실패합니다.
 
-::: details Comparing Rust and C++
-Imagine that the code above was written in a typical compiled language such as C++:
+::: details Rust 및 C++ 비교
+위 코드가 C++와 같은 일반적인 컴파일 언어로 작성되었다고 상상해 보십시오.
 
 ```cpp
 #include <string>
@@ -336,31 +329,31 @@ std::string my_path("foo");
 #include <my_path + "/common.h">
 ```
 
-or Rust
+또는 Rust
 
 ```rust
 let my_path = "foo";
 use format!("{}::common", my_path);
 ```
 
-If you've ever written a simple program in any of these languages, you can see these examples aren't valid in those languages. Like Nushell, compiled languages require that all of the source code files are ready and available to the compiler beforehand.
+이러한 언어 중 하나에서 간단한 프로그램을 작성해 본 적이 있다면 이러한 예제가 해당 언어에서 유효하지 않다는 것을 알 수 있습니다. 누셸과 마찬가지로 컴파일된 언어는 모든 소스 코드 파일이 컴파일러에 미리 준비되고 사용 가능해야 합니다.
 
 :::
 
-::: tip See Also
-As noted in the error message, however, this can work if `my_path` can be defined as a [constant](/book/variables#constant-variables) since constants can be (and are) resolved during parsing.
+::: tip 참조
+오류 메시지에서 언급했듯이 `my_path`가 [상수](/book/variables#constant-variables)로 정의될 수 있는 경우 상수는 구문 분석 중에 확인될 수 있으므로(그리고 확인되므로) 작동할 수 있습니다.
 
 ```nu
 const my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
 ```
 
-See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-constant-evaluation) for more details.
+자세한 내용은 [구문 분석 시간 상수 평가](./how_nushell_code_gets_run.md#parse-time-constant-evaluation)를 참조하십시오.
 :::
 
-#### Example: Change to a different directory (`cd`) and `source` a file
+#### 예제: 다른 디렉터리로 변경(`cd`)하고 파일 `source`하기
 
-Here's one more — Change to a different directory and then attempt to `source` a file in that directory.
+하나 더 있습니다. 다른 디렉터리로 변경한 다음 해당 디렉터리에서 파일을 `source`하려고 시도합니다.
 
 ```nu:line-numbers
 if ('spam/foo.nu' | path exists) {
@@ -369,13 +362,13 @@ if ('spam/foo.nu' | path exists) {
 }
 ```
 
-Based on what we've covered about Nushell's Parse/Eval stages, see if you can spot the problem with that example.
+누셸의 구문 분석/평가 단계에 대해 다룬 내용을 바탕으로 해당 예제의 문제를 찾아보십시오.
 
-::: details Solution
+::: details 해결책
 
-In line 3, during Parsing, the `source-env` attempts to parse `foo.nu`. However, `cd` doesn't occur until Evaluation. This results in a parse-time error, since the file is not found in the _current_ directory.
+3행에서 구문 분석 중에 `source-env`가 `foo.nu`를 구문 분석하려고 시도합니다. 그러나 `cd`는 평가될 때까지 발생하지 않습니다. 이로 인해 파일이 _현재_ 디렉터리에서 발견되지 않으므로 구문 분석 시간 오류가 발생합니다.
 
-To resolve this, of course, simply use the full-path to the file to be sourced.
+이 문제를 해결하려면 소싱할 파일의 전체 경로를 사용하기만 하면 됩니다.
 
 ```nu
     source-env spam/foo.nu
@@ -383,37 +376,37 @@ To resolve this, of course, simply use the full-path to the file to be sourced.
 
 :::
 
-### Summary
+### 요약
 
 ::: important
-For a more in-depth explanation of this section, see [How Nushell Code Gets Run](how_nushell_code_gets_run.md).
+이 섹션에 대한 자세한 내용은 [누셸 코드가 실행되는 방법](how_nushell_code_gets_run.md)을 참조하십시오.
 :::
 
-::: warning Thinking in Nushell
-Nushell is designed to use a single Parsing stage for each expression or file. This Parsing stage occurs before and is separate from Evaluation. While this enables many of Nushell's features, it also means that users need to understand the limitations it creates.
+::: warning 누셸 방식으로 생각하기
+누셸은 각 표현식 또는 파일에 대해 단일 구문 분석 단계를 사용하도록 설계되었습니다. 이 구문 분석 단계는 평가 전에 발생하며 평가와는 별개입니다. 이것이 누셸의 많은 기능을 가능하게 하지만, 사용자가 그것이 만드는 제한 사항을 이해해야 한다는 것을 의미하기도 합니다.
 :::
 
-## Variables are Immutable by Default
+## 변수는 기본적으로 불변입니다
 
-Another common surprise when coming from other languages is that Nushell variables are immutable by default. While Nushell has optional mutable variables, many of Nushell's commands are based on a functional-style of programming which requires immutability.
+다른 언어에서 올 때 흔히 놀라는 또 다른 점은 누셸 변수가 기본적으로 불변이라는 것입니다. 누셸에는 선택적 가변 변수가 있지만 누셸의 많은 명령은 불변성을 요구하는 함수형 프로그래밍 스타일을 기반으로 합니다.
 
-Immutable variables are also key to Nushell's [`par-each` command](/commands/docs/par-each.md), which allows you to operate on multiple values in parallel using threads.
+불변 변수는 또한 여러 값을 스레드를 사용하여 병렬로 작업할 수 있는 누셸의 [`par-each` 명령](/commands/docs/par-each.md)의 핵심입니다.
 
-See [Immutable Variables](variables.html#immutable-variables) and [Choosing between mutable and immutable variables](variables.html#choosing-between-mutable-and-immutable-variables) for more information.
+자세한 내용은 [불변 변수](variables.html#immutable-variables) 및 [가변 변수와 불변 변수 중에서 선택](variables.html#choosing-between-mutable-and-immutable-variables)을 참조하십시오.
 
-::: warning Thinking in Nushell
-If you're used to relying on mutable variables, it may take some time to relearn how to code in a more functional style. Nushell has many functional features and commands that operate on and with immutable variables. Learning them will help you write code in a more Nushell-idiomatic style.
+::: warning 누셸 방식으로 생각하기
+가변 변수에 의존하는 데 익숙하다면 더 기능적인 스타일로 코딩하는 방법을 다시 배우는 데 시간이 걸릴 수 있습니다. 누셸에는 불변 변수와 함께 작동하고 불변 변수에서 작동하는 많은 기능적 기능과 명령이 있습니다. 그것들을 배우면 더 누셸 관용적인 스타일로 코드를 작성하는 데 도움이 될 것입니다.
 
-A nice bonus is the performance increase you can realize by running parts of your code in parallel with `par-each`.
+좋은 보너스는 `par-each`를 사용하여 코드의 일부를 병렬로 실행하여 얻을 수 있는 성능 향상입니다.
 :::
 
-## Nushell's Environment is Scoped
+## 누셸의 환경은 범위가 지정됩니다
 
-Nushell takes multiple design cues from compiled languages. One such cue is that languages should avoid global mutable state. Shells have commonly used global mutation to update the environment, but Nushell attempts to steer clear of this approach.
+누셸은 컴파일된 언어에서 여러 디자인 단서를 가져옵니다. 그러한 단서 중 하나는 언어가 전역 가변 상태를 피해야 한다는 것입니다. 셸은 일반적으로 환경을 업데이트하기 위해 전역 변형을 사용했지만 누셸은 이 접근 방식을 피하려고 합니다.
 
-In Nushell, blocks control their own environment. Changes to the environment are scoped to the block where they occur.
+누셸에서 블록은 자체 환경을 제어합니다. 환경에 대한 변경 사항은 발생하는 블록으로 범위가 지정됩니다.
 
-In practice, this lets you write (as just one example) more concise code for working with subdirectories. Here's an example that builds each sub-project in the current directory:
+실제로 이것은 (한 가지 예일 뿐이지만) 하위 디렉터리로 작업하기 위한 더 간결한 코드를 작성할 수 있게 해줍니다. 다음은 현재 디렉터리의 각 하위 프로젝트를 빌드하는 예입니다.
 
 ```nu
 ls | each { |row|
@@ -422,20 +415,20 @@ ls | each { |row|
 }
 ```
 
-The [`cd`](/commands/docs/cd.md) command changes the `PWD` environment variables, but this variable change does not survive past the end of the block. This allows each iteration to start from the current directory and then enter the next subdirectory.
+[`cd`](/commands/docs/cd.md) 명령은 `PWD` 환경 변수를 변경하지만 이 변수 변경은 블록이 끝난 후에도 유지되지 않습니다. 이를 통해 각 반복은 현재 디렉터리에서 시작하여 다음 하위 디렉터리로 들어갈 수 있습니다.
 
-Having a scoped environment makes commands more predictable, easier to read, and when the time comes, easier to debug. It's also another feature that is key to the `par-each` command we discussed above.
+범위가 지정된 환경을 사용하면 명령을 더 예측 가능하고 읽기 쉽게 만들고, 때가 되면 디버깅하기 더 쉬워집니다. 이것은 또한 위에서 논의한 `par-each` 명령의 핵심 기능이기도 합니다.
 
-Nushell also provides helper commands like [`load-env`](/commands/docs/load-env.md) as a convenient way of loading multiple updates to the environment at once.
+누셸은 또한 한 번에 환경에 대한 여러 업데이트를 로드하는 편리한 방법으로 [`load-env`](/commands/docs/load-env.md)와 같은 도우미 명령을 제공합니다.
 
-::: tip See Also
-[Environment - Scoping](./environment.md#scoping)
+::: tip 참조
+[환경 - 범위](./environment.md#scoping)
 :::
 
 ::: note
-[`def --env`](/commands/docs/def.md) is an exception to this rule. It allows you to create a command that changes the parent's environment.
+[`def --env`](/commands/docs/def.md)는 이 규칙의 예외입니다. 부모의 환경을 변경하는 명령을 만들 수 있습니다.
 :::
 
-::: warning Thinking in Nushell
-Use scoped-environment to write more concise scripts and prevent unnecessary or unwanted global environment mutation.
+::: warning 누셸 방식으로 생각하기
+범위가 지정된 환경을 사용하여 더 간결한 스크립트를 작성하고 불필요하거나 원치 않는 전역 환경 변형을 방지하십시오.
 :::

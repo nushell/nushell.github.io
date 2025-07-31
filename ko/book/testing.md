@@ -1,17 +1,17 @@
-# Testing your Nushell Code
+# 누셸 코드 테스트
 
-## Assert Commands
+## 어설션 명령
 
-Nushell provides a set of "assertion" commands in the standard library.
-One could use built-in equality / order tests such as `==` or `<=` or more complex commands and throw errors manually when an expected condition fails, but using what the standard library has to offer is arguably easier!
+누셸은 표준 라이브러리에 "어설션" 명령 세트를 제공합니다.
+`==` 또는 `<=`와 같은 기본 제공 동등성/순서 테스트 또는 더 복잡한 명령을 사용하고 예상 조건이 실패할 때 수동으로 오류를 발생시킬 수 있지만, 표준 라이브러리가 제공하는 것을 사용하는 것이 더 쉽습니다!
 
-In the following, it will be assumed that the `std assert` module has been imported inside the current scope
+다음에서는 `std assert` 모듈이 현재 범위 내에서 가져온 것으로 가정합니다.
 
 ```nu
 use std/assert
 ```
 
-The foundation for every assertion is the `std assert` command. If the condition is not true, it makes an error.
+모든 어설션의 기초는 `std assert` 명령입니다. 조건이 참이 아니면 오류를 발생시킵니다.
 
 ```nu
 assert (1 == 2)
@@ -27,7 +27,7 @@ Error:
    ╰────
 ```
 
-Optionally, a message can be set to show the intention of the assert command, what went wrong or what was expected:
+선택적으로, 어설션 명령의 의도, 무엇이 잘못되었는지 또는 무엇이 예상되었는지 보여주기 위해 메시지를 설정할 수 있습니다.
 
 ```nu
 let a = 0
@@ -45,9 +45,9 @@ Error:
    ╰────
 ```
 
-There are many assert commands, which behave exactly as the base one with the proper operator. The additional value for them is the ability for better error messages.
+많은 어설션 명령이 있으며, 적절한 연산자와 함께 기본 명령과 똑같이 작동합니다. 추가적인 가치는 더 나은 오류 메시지를 제공하는 능력입니다.
 
-For example this is not so helpful without additional message:
+예를 들어, 추가 메시지 없이는 그다지 도움이 되지 않습니다.
 
 ```nu
 let a = "foo"
@@ -65,7 +65,7 @@ Error:   × Assertion failed.
    ╰────
 ```
 
-While with using `assert str contains`:
+`assert str contains`를 사용하는 동안:
 
 ```nu
 let a = "a needle"
@@ -84,7 +84,7 @@ Error:   × Assertion failed.
    ╰────
 ```
 
-In general for base `assert` command it is encouraged to always provide the additional message to show what went wrong. If you cannot use any built-in assert command, you can create a custom one with passing the label for [`error make`](/commands/docs/error_make.md) for the `assert` command:
+일반적으로 기본 `assert` 명령의 경우 무엇이 잘못되었는지 보여주기 위해 항상 추가 메시지를 제공하는 것이 좋습니다. 기본 제공 어설션 명령을 사용할 수 없는 경우 [`error make`](/commands/docs/error_make.md)에 대한 레이블을 `assert` 명령에 전달하여 사용자 지정 명령을 만들 수 있습니다.
 
 ```nu
 def "assert even" [number: int] {
@@ -95,7 +95,7 @@ def "assert even" [number: int] {
 }
 ```
 
-Then you'll have your detailed custom error message:
+그러면 다음과 같은 자세한 사용자 지정 오류 메시지가 표시됩니다.
 
 ```nu
 let $a = 13
@@ -112,35 +112,35 @@ Error:
    ╰────
 ```
 
-## Running the Tests
+## 테스트 실행
 
-Now that we are able to write tests by calling commands from `std assert`, it would be great to be able to run them and see our tests fail when there is an issue and pass when everything is correct :)
+이제 `std assert`에서 명령을 호출하여 테스트를 작성할 수 있으므로, 문제가 있을 때 테스트가 실패하고 모든 것이 올바를 때 통과하는 것을 실행하고 볼 수 있으면 좋을 것입니다 :)
 
-### Nupm Package
+### Nupm 패키지
 
-In this first case, we will assume that the code you are trying to test is part of a [Nupm] package.
+이 첫 번째 경우, 테스트하려는 코드가 [Nupm] 패키지의 일부라고 가정합니다.
 
-In that case, it is as easy as following the following steps
+이 경우 다음 단계를 따르는 것만큼 쉽습니다.
 
-- create a `tests/` directory next to the `nupm.nuon` package file of your package
-- make the `tests/` directory a valid module by adding a `mod.nu` file into it
-- write commands inside `tests/`
-- call `nupm test`
+- 패키지의 `nupm.nuon` 패키지 파일 옆에 `tests/` 디렉터리 만들기
+- `mod.nu` 파일을 추가하여 `tests/` 디렉터리를 유효한 모듈로 만들기
+- `tests/` 내에 명령 작성
+- `nupm test` 호출
 
-The convention is that any command fully exported from the `tests` module will be run as a test, e.g.
+관례는 `tests` 모듈에서 완전히 내보낸 모든 명령이 테스트로 실행된다는 것입니다. 예:
 
-- `export def some-test` in `tests/mod.nu` will run
-- `def just-an-internal-cmd` in `tests/mod.nu` will NOT run
-- `export def another-test` in `tests/spam.nu` will run if and only if there is something like `export use spam.nu *` in `tests/mod.nu`
+- `tests/mod.nu`의 `export def some-test`가 실행됩니다.
+- `tests/mod.nu`의 `def just-an-internal-cmd`는 실행되지 않습니다.
+- `tests/spam.nu`의 `export def another-test`는 `tests/mod.nu`에 `export use spam.nu *`와 같은 것이 있는 경우에만 실행됩니다.
 
-### Standalone Tests
+### 독립 실행형 테스트
 
-If your Nushell script or module is not part of a [Nupm] package, the simplest way is to write tests in standalone scripts and then call them, either from a `Makefile` or in a CI:
+누셸 스크립트 또는 모듈이 [Nupm] 패키지의 일부가 아닌 경우 가장 간단한 방법은 독립 실행형 스크립트로 테스트를 작성한 다음 `Makefile` 또는 CI에서 호출하는 것입니다.
 
-Let's say we have a simple `math.nu` module which contains a simple Fibonacci command:
+간단한 피보나치 명령이 포함된 간단한 `math.nu` 모듈이 있다고 가정해 보겠습니다.
 
 ```nu
-# `fib n` is the n-th Fibonacci number
+# `fib n`은 n번째 피보나치 수입니다.
 export def fib [n: int] [ nothing -> int ] {
     if $n == 0 {
         return 0
@@ -152,7 +152,7 @@ export def fib [n: int] [ nothing -> int ] {
 }
 ```
 
-then a test script called `tests.nu` could look like
+그런 다음 `tests.nu`라는 테스트 스크립트는 다음과 같을 수 있습니다.
 
 ```nu
 use math.nu fib
@@ -173,13 +173,11 @@ for t in [
 }
 ```
 
-and be invoked as `nu tests.nu`
+그리고 `nu tests.nu`로 호출됩니다.
 
-### Basic Test Framework
+### 기본 테스트 프레임워크
 
-It is also possible to define tests in Nushell as functions with descriptive names and discover
-them dynamically without requiring a [Nupm] package. The following uses `scope commands` and a
-second instance of Nushell to run the generated list of tests.
+[Nupm] 패키지 없이도 설명적인 이름을 가진 함수로 누셸에서 테스트를 정의하고 동적으로 발견할 수도 있습니다. 다음은 `scope commands`와 생성된 테스트 목록을 실행하기 위해 두 번째 누셸 인스턴스를 사용합니다.
 
 ```nu
 use std/assert
@@ -225,7 +223,6 @@ def "test show-ignored-test" [] {
 }
 ```
 
-This is a simple example but could be extended to include many of the things you might expect from
-a testing framework, including setup and tear down functions and test discovery across files.
+이것은 간단한 예이지만 설정 및 해체 함수와 파일 전체의 테스트 검색을 포함하여 테스트 프레임워크에서 기대할 수 있는 많은 것을 포함하도록 확장될 수 있습니다.
 
 [Nupm]: https://github.com/nushell/nupm

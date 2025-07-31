@@ -1,18 +1,18 @@
-# Using Modules
+# 모듈 사용하기
 
 [[toc]]
 
-## Overview
+## 개요
 
-End-users can add new functionality to Nushell by using ("importing") modules written by others.
+최종 사용자는 다른 사람이 작성한 모듈을 사용("가져오기")하여 누셸에 새로운 기능을 추가할 수 있습니다.
 
-To import a module and its definitions, we call the [`use`](/commands/docs/use.md) command:
+모듈과 해당 정의를 가져오려면 [`use`](/commands/docs/use.md) 명령을 호출합니다.
 
 ```nu
 use <path/to/module> <members...>
 ```
 
-For example:
+예시:
 
 ```nu
 use std/log
@@ -20,78 +20,78 @@ log info "Hello, Modules"
 ```
 
 ::: tip
-The example above uses the [Standard Library](../standard_library.md), a collection of modules built-in to Nushell. Because it is readily available to all Nushell users, we'll also use it for several of the examples below.
+위 예제는 누셸에 내장된 모듈 모음인 [표준 라이브러리](../standard_library.md)를 사용합니다. 모든 누셸 사용자가 쉽게 사용할 수 있으므로 아래의 여러 예제에서도 사용할 것입니다.
 :::
 
-## Installing Modules
+## 모듈 설치
 
-Installing a module is simply a matter of placing its files in a directory. This might be done via `git clone` (or other version control system), a package manager such as `nupm`, or manually. The module's documentation should provide recommendations.
+모듈을 설치하는 것은 단순히 해당 파일을 디렉터리에 배치하는 문제입니다. 이는 `git clone`(또는 다른 버전 관리 시스템), `nupm`과 같은 패키지 관리자 또는 수동으로 수행할 수 있습니다. 모듈 설명서에는 권장 사항이 제공되어야 합니다.
 
-## Importing Modules
+## 모듈 가져오기
 
-Anything after the [`use`](/commands/docs/use.md) keyword forms an **import pattern** which controls how the definitions are imported.
+[`use`](/commands/docs/use.md) 키워드 뒤에 오는 모든 것은 정의가 가져오는 방법을 제어하는 **가져오기 패턴**을 형성합니다.
 
-Notice above that `use` has two arguments:
+위에서 `use`에는 두 개의 인수가 있음을 확인하십시오.
 
-- A path to the module
-- (Optional) The definitions to import
+- 모듈 경로
+- (선택 사항) 가져올 정의
 
-The module's documentation will usually tell you the recommended way to import it. However, it can still be useful to understand the options available:
+모듈 설명서에는 일반적으로 권장되는 가져오기 방법이 나와 있습니다. 그러나 사용 가능한 옵션을 이해하는 것이 여전히 유용할 수 있습니다.
 
-### Module Path
+### 모듈 경로
 
-The path to the module can be:
+모듈 경로는 다음 중 하나일 수 있습니다.
 
-- An absolute path to a directory containing a `mod.nu` file:
+- `mod.nu` 파일이 포함된 디렉터리의 절대 경로:
 
-  ::: details Example
+  ::: details 예시
 
   ```nu
   use ~/nushell/modules/nupm
   ```
 
-  Note that the module name (i.e., its directory) can end in a `/` (or `\` on Windows), but as with most commands that take paths (e.g., `cd`), this is completely optional.
+  모듈 이름(즉, 해당 디렉터리)은 `/`(또는 Windows에서는 `\`)로 끝날 수 있지만, 경로를 사용하는 대부분의 명령(예: `cd`)과 마찬가지로 이는 완전히 선택 사항입니다.
 
   :::
 
-- A relative path to a directory containing a `mod.nu` file:
+- `mod.nu` 파일이 포함된 디렉터리의 상대 경로:
 
-  ::: details Example
+  ::: details 예시
 
   ```nu
-  # cd then use the mod.nu in the relative nupm directory
+  # cd 후 상대 nupm 디렉터리의 mod.nu 사용
   cd ~/nushell/modules
   use nupm
-  # or
+  # 또는
   use nupm/
   ```
 
-  Note that the module name (its directory) can end in a `/` (or `\` on Windows), but as with most commands that take a paths (e.g., `cd`), this is completely optional.
+  모듈 이름(해당 디렉터리)은 `/`(또는 Windows에서는 `\`)로 끝날 수 있지만, 경로를 사용하는 대부분의 명령(예: `cd`)과 마찬가지로 이는 완전히 선택 사항입니다.
   :::
 
-  ::: important Important! Importing modules from `$env.NU_LIB_DIRS`
-  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the `$env.NU_LIB_DIRS` list.
+  ::: important 중요! `$env.NU_LIB_DIRS`에서 모듈 가져오기
+  상대 경로를 통해 모듈을 가져올 때 누셸은 먼저 현재 디렉터리에서 검색합니다. 해당 위치에서 일치하는 모듈을 찾지 못하면 누셸은 `$env.NU_LIB_DIRS` 목록의 각 디렉터리를 검색합니다.
 
-  This allows you to install modules to a location that is easily accessible via a relative path regardless of the current directory.
+  이를 통해 현재 디렉터리에 관계없이 상대 경로를 통해 쉽게 액세스할 수 있는 위치에 모듈을 설치할 수 있습니다.
   :::
 
-- An absolute or relative path to a Nushell module file. As above, Nushell will search the `$env.NU_LIB_DIRS` for a matching relative path.
+- 누셸 모듈 파일의 절대 또는 상대 경로. 위와 같이 누셸은 `$env.NU_LIB_DIRS`에서 일치하는 상대 경로를 검색합니다.
 
-  ::: details Example
+  ::: details 예시
 
   ```nu
   use ~/nushell/modules/std-rfc/bulk-rename.nu
-  # Or
+  # 또는
   cd ~/nushell/modules
   use std-rfc/bulk-rename.nu
   ```
 
   :::
 
-- A virtual directory:
+- 가상 디렉터리:
 
-  ::: details Example
-  The standard library modules mentioned above are stored in a virtual filesystem with a `std` directory. Consider this an alternate form of the "absolute path" examples above.
+  ::: details 예시
+  위에서 언급한 표준 라이브러리 모듈은 `std` 디렉터리가 있는 가상 파일 시스템에 저장됩니다. 이를 위의 "절대 경로" 예제의 대체 형식으로 생각하십시오.
 
   ```nu
   use std/assert
@@ -100,83 +100,83 @@ The path to the module can be:
 
   :::
 
-- Less commonly, the name of a module already created with the [`module`](/commands/docs/module.md) command. While it is possible to use this command to create a module at the commandline, this isn't common or useful. Instead, this form is primarily used by module authors to define a submodule. See [Creating Modules - Submodules](./creating_modules.md#submodules).
+- 덜 일반적으로 [`module`](/commands/docs/module.md) 명령으로 이미 만든 모듈의 이름. 이 명령을 사용하여 명령줄에서 모듈을 만들 수 있지만 이는 일반적이거나 유용하지 않습니다. 대신 이 형식은 주로 모듈 작성자가 하위 모듈을 정의하는 데 사용됩니다. [모듈 만들기 - 하위 모듈](./creating_modules.md#submodules)을 참조하십시오.
 
-### Module Definitions
+### 모듈 정의
 
-The second argument to the `use` command is an optional list of the definitions to import. Again, the module documentation should provide recommendations. For example, the [Standard Library Chapter](../standard_library.md#importing-submodules) covers the recommended imports for each submodule.
+`use` 명령의 두 번째 인수는 가져올 정의의 선택적 목록입니다. 다시 말하지만, 모듈 설명서에는 권장 사항이 제공되어야 합니다. 예를 들어 [표준 라이브러리 장](../standard_library.md#importing-submodules)에서는 각 하위 모듈에 대한 권장 가져오기를 다룹니다.
 
-Of course, you always have the option to choose a form that works best for your use-case.
+물론 사용 사례에 가장 적합한 형식을 항상 선택할 수 있습니다.
 
-- **Import an entire module/submodule as a command with subcommands**
+- **전체 모듈/하위 모듈을 하위 명령이 있는 명령으로 가져오기**
 
-  In an earlier example above, we imported the `std/log` module without specifying the definitions:
+  위의 이전 예제에서는 정의를 지정하지 않고 `std/log` 모듈을 가져왔습니다.
 
   ```nu
   use std/log
   log info "Hello, std/log Module"
   ```
 
-  Notice that this imports the `log` submodule with all of its _subcommands_ (e.g., `log info`, `log error`, etc.) into the current scope.
+  이렇게 하면 `log` 하위 모듈과 모든 _하위 명령_(예: `log info`, `log error` 등)이 현재 범위로 가져옵니다.
 
-  Compare the above to the next version, where the command becomes `std log info`:
+  위의 내용을 다음 버전과 비교해 보십시오. 여기서 명령은 `std log info`가 됩니다.
 
   ```nu
   use std
   std log info "Hello, std Module"
   ```
 
-- **Import all of the definitions from a module**
+- **모듈에서 모든 정의 가져오기**
 
-  Alternatively, you can import the definitions themselves into the current scope. For example:
+  또는 정의 자체를 현재 범위로 가져올 수 있습니다. 예시:
 
   ```nu
   use std/formats *
   ls | to jsonl
   ```
 
-  Notice how the `to jsonl` command is placed directly in the current scope, rather than being a subcommand of `formats`.
+  `to jsonl` 명령이 `formats`의 하위 명령이 아니라 현재 범위에 직접 배치되는 방식에 유의하십시오.
 
-- **Import one or more definitions from a module**
+- **모듈에서 하나 이상의 정의 가져오기**
 
-  Nushell can also selectively import a subset of the definitions of a module. For example:
+  누셸은 모듈의 정의 하위 집합을 선택적으로 가져올 수도 있습니다. 예시:
 
   ```nu
   use std/math PI
   let circle = 2 * $PI * $radius
   ```
 
-  Keep in mind that the definitions can be:
+  정의는 다음이 될 수 있음을 명심하십시오.
 
-  - Commands
-  - Aliases
-  - Constants
-  - Externs
-  - Other modules (as submodules)
-  - Environment variables (always imported)
+  - 명령
+  - 별칭
+  - 상수
+  - 외부 명령
+  - 다른 모듈(하위 모듈로)
+  - 환경 변수(항상 가져옴)
 
-  Less commonly, a list of imports can also be used:
+  덜 일반적으로 가져오기 목록을 사용할 수도 있습니다.
 
   ```nu
   use std/formats [ 'from ndjson' 'to ndjson' ]
   ```
 
-  ::: note Importing submodules
-  While you can import a submodule by itself using `use <module> </submodule>` (e.g., `use std help`), the entire parent module and _all_ of its definitions (and thus submodules) will be _parsed_ when using this form. When possible, loading the submodule as a _module_ will result in faster code. For example:
+  ::: note 하위 모듈 가져오기
+  `use <module> </submodule>`(예: `use std help`)를 사용하여 하위 모듈을 자체적으로 가져올 수 있지만 이 형식을 사용할 때 전체 부모 모듈과 _모든_ 해당 정의(따라서 하위 모듈)가 _구문 분석_됩니다. 가능하면 하위 모듈을 _모듈_로 로드하면 코드가 더 빨라집니다. 예시:
 
   ```nu
-  # Faster
+  # 더 빠름
   use std/help
   ```
 
   :::
 
-## Importing Constants
+## 상수 가져오기
 
-As seen above with the `std/math` examples, some modules may export constant definitions. When importing the entire module, constants can be accessed through a record with the same name as the module:
+위의 `std/math` 예제에서 볼 수 있듯이 일부 모듈은 상수 정의를 내보낼 수 있습니다. 전체 모듈을 가져올 때 모듈과 동일한 이름의 레코드를 통해 상수에 액세스할 수 있습니다.
 
 ```nu
-# Importing entire module - Record access
+# 전체 모듈 가져오기 - 레코드 액세스
 use std/math
 $math.PI
 # => 3.141592653589793
@@ -190,60 +190,59 @@ $math
 # => │ PHI   │ 1.62 │
 # => ╰───────┴──────╯
 
-# Or importing all of the module's members
+# 또는 모듈의 모든 멤버 가져오기
 use std/math *
 $PI
 # => 3.141592653589793
 ```
 
-## Hiding
+## 숨기기
 
-Any custom command or alias, whether imported from a module or not, can be "hidden" to restore the previous definition using
-the [`hide`](/commands/docs/hide.md) command.
+모듈에서 가져왔는지 여부에 관계없이 모든 사용자 지정 명령 또는 별칭은 [`hide`](/commands/docs/hide.md) 명령을 사용하여 이전 정의를 복원하기 위해 "숨길" 수 있습니다.
 
-The `hide` command also accepts import patterns, similar to [`use`](/commands/docs/use.md), but interprets them slightly differently. These patterns can be one of the following:
+`hide` 명령은 [`use`](/commands/docs/use.md)와 유사하게 가져오기 패턴도 허용하지만 약간 다르게 해석합니다. 이러한 패턴은 다음 중 하나일 수 있습니다.
 
-- If the name is a custom command, the `hide` command hides it directly.
-- If the name is a module name, it hides all of its exports prefixed with the module name
+- 이름이 사용자 지정 명령인 경우 `hide` 명령은 직접 숨깁니다.
+- 이름이 모듈 이름인 경우 모듈 이름으로 시작하는 모든 내보내기를 숨깁니다.
 
-For example, using `std/assert`:
+예를 들어, `std/assert` 사용:
 
 ```nu
 use std/assert
 assert equal 1 2
-# => Assertion failed
+# => 어설션 실패
 assert true
-# => Assertion passes
+# => 어설션 통과
 
 hide assert
 assert equal 1 1
-# => Error:
-# => help: A command with that name exists in module `assert`. Try importing it with `use`
+# => 오류:
+# => 도움말: 해당 이름의 명령이 `assert` 모듈에 있습니다. `use`로 가져오십시오.
 
 assert true
-# => Error:
-# => help: A command with that name exists in module `assert`. Try importing it with `use`
+# => 오류:
+# => 도움말: 해당 이름의 명령이 `assert` 모듈에 있습니다. `use`로 가져오십시오.
 ```
 
-Just as you can `use` a subset of the module's definitions, you can also `hide` them selectively as well:
+모듈의 정의 하위 집합을 `use`할 수 있는 것처럼 선택적으로 `hide`할 수도 있습니다.
 
 ```nu
 use std/assert
 hide assert main
 assert equal 1 1
-# => assertion passes
+# => 어설션 통과
 
 assert true
-# => Error:
-# => help: A command with that name exists in module `assert`. Try importing it with `use`
+# => 오류:
+# => 도움말: 해당 이름의 명령이 `assert` 모듈에 있습니다. `use`로 가져오십시오.
 ```
 
 ::: tip
-`main` is covered in more detail in [Creating Modules](./creating_modules.md#main-exports), but for end-users, `main` simply means "the command named the same as the module." In this case the `assert` module exports a `main` command that "masquerades" as the `assert` command. Hiding `main` has the effect of hiding the `assert` command, but not its subcommands.
+`main`은 [모듈 만들기](./creating_modules.md#main-exports)에서 자세히 다루지만 최종 사용자에게 `main`은 단순히 "모듈과 동일한 이름의 명령"을 의미합니다. 이 경우 `assert` 모듈은 `assert` 명령으로 "위장"하는 `main` 명령을 내보냅니다. `main`을 숨기면 `assert` 명령은 숨겨지지만 하위 명령은 숨겨지지 않습니다.
 :::
 
-## See Also
+## 참조
 
-- To make a module always be available without having to `use` it in each Nushell session, simply add its import (`use`) to your startup configuration. See the [Configuration](../configuration.md) Chapter to learn how.
+- 각 누셸 세션에서 `use`할 필요 없이 모듈을 항상 사용할 수 있도록 하려면 시작 구성에 해당 가져오기(`use`)를 추가하기만 하면 됩니다. 방법을 알아보려면 [구성](../configuration.md) 장을 참조하십시오.
 
-- Modules can also be used as part of an [Overlay](../overlays.md).
+- 모듈은 [오버레이](../overlays.md)의 일부로도 사용할 수 있습니다.

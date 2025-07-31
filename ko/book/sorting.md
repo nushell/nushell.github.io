@@ -1,12 +1,12 @@
-# Sorting
+# 정렬
 
-Nushell offers many ways of sorting data, and which method you reach for will depend on the problem and what kind of data you're working with. Let's take a look at some of the ways you might wish to sort data.
+누셸은 데이터를 정렬하는 여러 가지 방법을 제공하며, 어떤 방법을 사용할지는 문제와 작업 중인 데이터 종류에 따라 다릅니다. 데이터를 정렬하려는 몇 가지 방법을 살펴보겠습니다.
 
-## Basic sorting
+## 기본 정렬
 
-### Lists
+### 목록
 
-Sorting a basic list works exactly how you might expect:
+기본 목록을 정렬하는 것은 예상대로 작동합니다.
 
 ```nu
 [9 3 8 1 4 6] | sort
@@ -20,7 +20,7 @@ Sorting a basic list works exactly how you might expect:
 # => ╰───┴───╯
 ```
 
-However, things get a bit more complex when you start combining types. For example, let's see what happens when we have a list with numbers _and_ strings:
+그러나 형식을 결합하기 시작하면 상황이 조금 더 복잡해집니다. 예를 들어, 숫자 _와_ 문자열이 포함된 목록이 있는 경우 어떻게 되는지 보겠습니다.
 
 ```nu
 ["hello" 4 9 2 1 "foobar" 8 6] | sort
@@ -36,13 +36,13 @@ However, things get a bit more complex when you start combining types. For examp
 # => ╰───┴────────╯
 ```
 
-We can see that the numbers are sorted in order, and the strings are sorted to the end of the list, also in order. If you are coming from other programming languages, this may not be quite what you expect. In Nushell, as a general rule, **data can always be sorted without erroring**.
+숫자는 순서대로 정렬되고 문자열은 목록 끝으로 정렬되며 순서대로 정렬되는 것을 볼 수 있습니다. 다른 프로그래밍 언어에서 온 경우 이것이 예상과 다를 수 있습니다. 누셸에서는 일반적으로 **데이터는 항상 오류 없이 정렬될 수 있습니다**.
 
 ::: tip
-If you _do_ want a sort containing differing types to error, see [strict sort](#strict-sort).
+다른 유형이 포함된 정렬이 오류를 발생시키기를 _원하는_ 경우 [엄격한 정렬](#strict-sort)을 참조하십시오.
 :::
 
-Nushell's sort is also **stable**, meaning equal values will retain their original ordering relative to each other. This is illustrated here using the [case insensitive](#case-insensitive-sort) sort option:
+누셸의 정렬은 또한 **안정적**이므로 동일한 값은 서로에 대한 원래 순서를 유지합니다. 이것은 [대소문자를 구분하지 않는](#case-insensitive-sort) 정렬 옵션을 사용하여 여기에 설명되어 있습니다.
 
 ```nu
 ["foo" "FOO" "BAR" "bar"] | sort -i
@@ -54,11 +54,11 @@ Nushell's sort is also **stable**, meaning equal values will retain their origin
 # => ╰───┴─────╯
 ```
 
-Since this sort is case insensitive, `foo` and `FOO` are considered equal to each other, and the same is true for `bar` and `BAR`. In the result, the uppercase `BAR` precedes the lowercase `bar`, since the uppercase `BAR` also precedes the lowercase `bar` in the input. Similarly, the lowercase `foo` precedes the uppercase `FOO` in both the input and the result.
+이 정렬은 대소문자를 구분하지 않으므로 `foo`와 `FOO`는 서로 동일한 것으로 간주되며 `bar`와 `BAR`도 마찬가지입니다. 결과적으로 대문자 `BAR`는 입력에서 대문자 `BAR`가 소문자 `bar` 앞에 오기 때문에 소문자 `bar` 앞에 옵니다. 마찬가지로 소문자 `foo`는 입력과 결과 모두에서 대문자 `FOO` 앞에 옵니다.
 
-### Records
+### 레코드
 
-Records can be sorted two ways: by key, and by value. By default, passing a record to `sort` will sort in order of its keys:
+레코드는 키와 값의 두 가지 방법으로 정렬할 수 있습니다. 기본적으로 레코드를 `sort`에 전달하면 키 순서로 정렬됩니다.
 
 ```nu
 {x: 123, a: hello!, foo: bar} | sort
@@ -69,7 +69,7 @@ Records can be sorted two ways: by key, and by value. By default, passing a reco
 # => ╰─────┴────────╯
 ```
 
-To instead sort in order of values, use the `-v` flag:
+대신 값 순서로 정렬하려면 `-v` 플래그를 사용하십시오.
 
 ```nu
 {x: 123, a: hello! foo: bar} | sort -v
@@ -80,9 +80,9 @@ To instead sort in order of values, use the `-v` flag:
 # => ╰─────┴────────╯
 ```
 
-### Tables
+### 테이블
 
-Table rows are sorted by comparing rows by the columns in order. If two rows have equal values in their first column, they are sorted by their second column. This repeats until the rows are sorted different or all columns are equal.
+테이블 행은 열 순서대로 행을 비교하여 정렬됩니다. 두 행의 첫 번째 열 값이 같으면 두 번째 열로 정렬됩니다. 행이 다르게 정렬되거나 모든 열이 같을 때까지 반복됩니다.
 
 ```nu
 let items = [
@@ -100,15 +100,15 @@ $items | sort
 # => ╰───┴─────┴──────────┴───────╯
 ```
 
-In this example, the `id` column for all items is equal. Then, the two items with quantity `5` are sorted before the item with quantity `10`. Finally, the `item` with price `1` is sorted before the item with price `8`.
+이 예제에서 모든 항목의 `id` 열은 동일합니다. 그런 다음 수량이 `5`인 두 항목이 수량이 `10`인 항목보다 먼저 정렬됩니다. 마지막으로 가격이 `1`인 `item`이 가격이 `8`인 항목보다 먼저 정렬됩니다.
 
-## Sorting structured data
+## 구조화된 데이터 정렬
 
-### Cell path
+### 셀 경로
 
-In order to sort more complex types, such as tables, you can use the `sort-by` command. `sort-by` can order its input by a [cell path](navigating_structured_data.html#cell-paths).
+테이블과 같은 더 복잡한 유형을 정렬하려면 `sort-by` 명령을 사용할 수 있습니다. `sort-by`는 [셀 경로](navigating_structured_data.html#cell-paths)별로 입력을 정렬할 수 있습니다.
 
-Here's an example directory, sorted by filesize:
+다음은 파일 크기별로 정렬된 예제 디렉터리입니다.
 
 ```nu
 ls | sort-by size
@@ -122,7 +122,7 @@ ls | sort-by size
 # => ╰───┴─────────────────────┴──────┴──────────┴────────────────╯
 ```
 
-We can also provide multiple cell paths to `sort-by`, which will sort by each cell path in order of priority. You can think of providing multiple cell paths as a "tiebreaker" for elements which have equal values. Let's sort first by size, then by modification time:
+`sort-by`에 여러 셀 경로를 제공할 수도 있으며, 그러면 우선 순위 순서대로 각 셀 경로별로 정렬됩니다. 여러 셀 경로를 제공하는 것을 값이 같은 요소에 대한 "동점자"로 생각할 수 있습니다. 먼저 크기별로 정렬한 다음 수정 시간별로 정렬해 보겠습니다.
 
 ```nu
 ls | sort-by size modified
@@ -136,9 +136,9 @@ ls | sort-by size modified
 # => ╰───┴─────────────────────┴──────┴──────────┴────────────────╯
 ```
 
-This time, `shopping_list.txt` comes before `my-secret-plans.txt`, since it has an earlier modification time, but two larger files remain sorted after the `.txt` files.
+이번에는 `shopping_list.txt`가 `my-secret-plans.txt`보다 수정 시간이 더 빠르기 때문에 먼저 나오고, 두 개의 더 큰 파일은 `.txt` 파일 뒤에 정렬된 상태로 유지됩니다.
 
-Furthermore, we can use more complex cell paths to sort nested data:
+또한 더 복잡한 셀 경로를 사용하여 중첩된 데이터를 정렬할 수 있습니다.
 
 ```nu
 let cities = [
@@ -165,9 +165,9 @@ $cities | sort-by info.established
 # => ╰───┴───────────┴────────────────────────────╯
 ```
 
-### Sort by key closure
+### 키 클로저로 정렬
 
-Sometimes, it's useful to sort data in a more complicated manner than "increasing" or "decreasing". Instead of using `sort-by` with a cell path, you can supply a [closure](types_of_data.html#closures), which will transform each value into a [sorting key](https://en.wikipedia.org/wiki/Collation#Sort_keys) _without changing the underlying data_. Here's an example of a key closure, where we want to sort a list of assignments by their average grade:
+때로는 "증가" 또는 "감소"보다 더 복잡한 방식으로 데이터를 정렬하는 것이 유용합니다. 셀 경로와 함께 `sort-by`를 사용하는 대신 [클로저](types_of_data.html#closures)를 제공할 수 있으며, 이는 기본 데이터를 변경하지 않고 각 값을 [정렬 키](https://en.wikipedia.org/wiki/Collation#Sort_keys)로 변환합니다. 다음은 평균 성적별로 과제 목록을 정렬하려는 키 클로저의 예입니다.
 
 ```nu
 let assignments = [
@@ -187,7 +187,7 @@ $assignments | sort-by { get grades | math avg }
 # => ╰───┴────────────┴───────────────────────╯
 ```
 
-The value is passed into the pipeline input of the key closure, however, you can also use it as a parameter:
+값은 키 클로저의 파이프라인 입력으로 전달되지만 매개변수로 사용할 수도 있습니다.
 
 ```nu
 let weight = {alpha: 10, beta: 5, gamma: 3}
@@ -201,11 +201,11 @@ let weight = {alpha: 10, beta: 5, gamma: 3}
 # => ╰───┴───────╯
 ```
 
-### Custom sort order
+### 사용자 지정 정렬 순서
 
-In addition to [key closures](#sort-by-key-closure), `sort-by` also supports closures which specify a custom sort order. The `--custom`, or `-c`, flag will tell `sort-by` to interpret closures as custom sort closures. A custom sort closure has two parameters, and returns a boolean. The closure should return `true` if the first parameter comes _before_ the second parameter in the sort order.
+[키 클로저](#sort-by-key-closure) 외에도 `sort-by`는 사용자 지정 정렬 순서를 지정하는 클로저도 지원합니다. `--custom` 또는 `-c` 플래그는 `sort-by`에게 클로저를 사용자 지정 정렬 클로저로 해석하도록 지시합니다. 사용자 지정 정렬 클로저에는 두 개의 매개변수가 있으며 부울을 반환합니다. 클로저는 첫 번째 매개변수가 정렬 순서에서 두 번째 매개변수보다 _앞에_ 오면 `true`를 반환해야 합니다.
 
-For a simple example, we could rewrite a cell path sort as a custom sort. This can be read as "If `$a.size` is less than `$b.size`, `a` should appear before `b` in the sort order":
+간단한 예로, 셀 경로 정렬을 사용자 지정 정렬로 다시 작성할 수 있습니다. 이것은 "`$a.size`가 `$b.size`보다 작으면 정렬 순서에서 `a`가 `b`보다 앞에 와야 합니다"라고 읽을 수 있습니다.
 
 ```nu
 ls | sort-by -c {|a, b| $a.size < $b.size }
@@ -220,13 +220,13 @@ ls | sort-by -c {|a, b| $a.size < $b.size }
 ```
 
 ::: tip
-The parameters are also passed to the custom closure as a two element list, so the following are equivalent:
+매개변수는 두 요소 목록으로 사용자 지정 클로저에 전달되므로 다음은 동일합니다.
 
 - `{|a, b| $a < $b }`
 - `{ $in.0 < $in.1 }`
   :::
 
-Here's an example of a custom sort which couldn't be trivially written as a key sort. In this example, we have a queue of tasks with some amount of work time and a priority. We want to sort by priority (highest first). If a task has had zero work time, we want to schedule it immediately; otherwise, we ignore the work time.
+다음은 키 정렬로 간단하게 작성할 수 없는 사용자 지정 정렬의 예입니다. 이 예제에서는 작업 시간과 우선 순위가 있는 작업 대기열이 있습니다. 우선 순위(가장 높은 순서)별로 정렬하고 싶습니다. 작업 시간이 0인 작업이 있으면 즉시 예약하고, 그렇지 않으면 작업 시간을 무시합니다.
 
 ```nu
 let queue = [
@@ -237,20 +237,20 @@ let queue = [
 ]
 let my_sort = {|a, b|
     match [$a.work_time, $b.work_time] {
-        [0, 0] => ($a.priority > $b.priority) # fall back to priority if equal work time
-        [0, _] => true, # only a has 0 work time, so a comes before b in the sort order
-        [_, 0] => false, # only b has 0 work time, so a comes after b in the sort order
-        _ => ($a.priority > $b.priority) # both have non-zero work time, sort by priority
+        [0, 0] => ($a.priority > $b.priority) # 작업 시간이 같으면 우선 순위로 대체
+        [0, _] => true, # a만 작업 시간이 0이므로 정렬 순서에서 a가 b보다 앞에 옴
+        [_, 0] => false, # b만 작업 시간이 0이므로 정렬 순서에서 a가 b보다 뒤에 옴
+        _ => ($a.priority > $b.priority) # 둘 다 0이 아닌 작업 시간을 가지므로 우선 순위로 정렬
     }
 }
 $queue | sort-by -c $my_sort
 ```
 
-## Special sorts
+## 특수 정렬
 
-### Case insensitive sort
+### 대소문자를 구분하지 않는 정렬
 
-When using case insensitive sort, strings (and globs) which are the same except for different casing will be considered equal for sorting, while other types remain unaffected:
+대소문자를 구분하지 않는 정렬을 사용할 때 대소문자만 다른 문자열(및 glob)은 정렬에 대해 동일한 것으로 간주되는 반면 다른 유형은 영향을 받지 않습니다.
 
 ```nu
 let data = [
@@ -272,9 +272,9 @@ $data | sort -i
 # => ╰───┴─────────╯
 ```
 
-### Natural sort
+### 자연 정렬
 
-The [natural sort option](https://en.wikipedia.org/wiki/Natural_sort_order) allows strings which contain numbers to be sorted in the same way that numbers are normally sorted. This works both for strings which consist solely of numbers, and strings which have numbers and letters:
+[자연 정렬 옵션](https://en.wikipedia.org/wiki/Natural_sort_order)을 사용하면 숫자가 포함된 문자열을 숫자가 일반적으로 정렬되는 것과 같은 방식으로 정렬할 수 있습니다. 이것은 숫자로만 구성된 문자열과 숫자와 문자가 있는 문자열 모두에 대해 작동합니다.
 
 ```nu
 let data = ["10", "9", "foo123", "foo20", "bar123", "bar20"]
@@ -287,7 +287,7 @@ $data | sort
 # => │ 4 │ foo123 │
 # => │ 5 │ foo20  │
 # => ╰───┴────────╯
-# "1" is sorted before "9", so "10" is sorted before "9"
+# "1"은 "9"보다 먼저 정렬되므로 "10"은 "9"보다 먼저 정렬됩니다.
 $data | sort -n
 # => ╭───┬────────╮
 # => │ 0 │ 9      │
@@ -299,7 +299,7 @@ $data | sort -n
 # => ╰───┴────────╯
 ```
 
-Furthermore, natural sort allows you to sort numbers together with numeric strings:
+또한 자연 정렬을 사용하면 숫자와 숫자 문자열을 함께 정렬할 수 있습니다.
 
 ```nu
 let data = [4, "6.2", 1, "10", 2, 8.1, "3", 5.5, "9", 7]
@@ -318,28 +318,28 @@ $data | sort -n
 # => ╰───┴──────╯
 ```
 
-### Sorting with mixed types
+### 혼합 유형으로 정렬
 
-Under some circumstances, you might need to sort data containing mixed types. There are a couple things to be aware of when sorting mixed types:
+어떤 상황에서는 혼합 유형이 포함된 데이터를 정렬해야 할 수 있습니다. 혼합 유형을 정렬할 때 알아야 할 몇 가지 사항이 있습니다.
 
-- Generally, values of the same type will appear next to each other in the sort order. For example, sorted numbers come first, then sorted strings, then sorted lists.
-- Some types will be intermixed in the sort order. These are:
-  - Integers and floats. For example, `[2.2, 1, 3]` will be sorted as `[1, 2.2, 3]`.
-  - Strings and globs. For example, `[("b" | into glob) a c]` will be sorted as `[a b c]` (where b is still a glob).
-  - If using [natural sort](#natural-sort), integers, floats, and strings will be intermixed as described in that section.
-- The ordering between non-intermixed types is not guaranteed, **except** for `null` values, which will always be sorted to the end of a list.
-  - Within the same Nushell version the ordering should always be the same, but this should not be relied upon. If you have code which is sensitive to the ordering across types, consider using a [custom sort](#custom-sort-order) which better expresses your requirements.
+- 일반적으로 동일한 유형의 값은 정렬 순서에서 서로 옆에 표시됩니다. 예를 들어, 정렬된 숫자가 먼저 오고, 그 다음 정렬된 문자열, 그 다음 정렬된 목록이 옵니다.
+- 일부 유형은 정렬 순서에서 혼합됩니다. 다음과 같습니다.
+  - 정수 및 부동 소수점. 예를 들어 `[2.2, 1, 3]`은 `[1, 2.2, 3]`으로 정렬됩니다.
+  - 문자열 및 glob. 예를 들어 `[("b" | into glob) a c]`는 `[a b c]`로 정렬됩니다(여기서 b는 여전히 glob임).
+  - [자연 정렬](#natural-sort)을 사용하는 경우 정수, 부동 소수점 및 문자열이 해당 섹션에 설명된 대로 혼합됩니다.
+- 혼합되지 않은 유형 간의 순서는 `null` 값을 제외하고 보장되지 않으며, 이는 항상 목록의 끝으로 정렬됩니다.
+  - 동일한 누셸 버전 내에서 순서는 항상 동일해야 하지만 이에 의존해서는 안 됩니다. 유형 간의 순서에 민감한 코드가 있는 경우 요구 사항을 더 잘 표현하는 [사용자 지정 정렬](#custom-sort-order)을 사용하는 것을 고려하십시오.
 
-If you need to sort data which may contain mixed types, consider one of the following strategies:
+혼합 유형이 포함될 수 있는 데이터를 정렬해야 하는 경우 다음 전략 중 하나를 고려하십시오.
 
-- [Strict sort](#strict-sort) to disallow sorting of incompatible types
-- [Natural sort](#natural-sort) to sort intermixed numbers and numeric strings
-- A [key sort](#sort-by-key-closure) using [`to text`](/commands/docs/to_text.html), [`to nuon`](/commands/docs/to_nuon.html), or [`to json`](/commands/docs/to_json.html), as appropriate
-- A [custom sort](#custom-sort-order) using [`describe`](/commands/docs/describe.html) to explicitly check types
+- [엄격한 정렬](#strict-sort)을 사용하여 호환되지 않는 유형의 정렬을 허용하지 않습니다.
+- [자연 정렬](#natural-sort)을 사용하여 혼합된 숫자와 숫자 문자열을 정렬합니다.
+- [`to text`](/commands/docs/to_text.html), [`to nuon`](/commands/docs/to_nuon.html) 또는 [`to json`](/commands/docs/to_json.html)을 적절하게 사용하는 [키 정렬](#sort-by-key-closure)
+- [`describe`](/commands/docs/describe.html)를 사용하여 유형을 명시적으로 확인하는 [사용자 지정 정렬](#custom-sort-order)
 
-### Strict sort
+### 엄격한 정렬
 
-Custom sort closures also provide a simple way to sort data while ensuring only types with well-defined comparisons are sorted together. This takes advantage of [operators requiring compatible data types](operators.html#types):
+사용자 지정 정렬 클로저는 잘 정의된 비교가 있는 유형만 함께 정렬되도록 하면서 데이터를 정렬하는 간단한 방법을 제공합니다. 이것은 [호환되는 데이터 유형을 요구하는 연산자](operators.html#types)를 활용합니다.
 
 ```nu
 let compatible = [8 3.2 null 58 2]
@@ -365,7 +365,7 @@ $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # =>    ╰────
 ```
 
-Special handling is required for `null` values, since comparison between any value and `null` returns `null`. To instead reject `null` values, try the following:
+`null` 값은 모든 값과 `null` 간의 비교가 `null`을 반환하므로 특별한 처리가 필요합니다. 대신 `null` 값을 거부하려면 다음을 시도하십시오.
 
 ```nu
 let baddata = [8 3.2 null 58 2]

@@ -1,7 +1,7 @@
-# Working with Lists
+# 목록 작업
 
 :::tip
-Lists are equivalent to the individual columns of tables. You can think of a list as essentially being a "one-column table" (with no column name). Thus, any command which operates on a column _also_ operates on a list. For instance, [`where`](/commands/docs/where.md) can be used with lists:
+목록은 테이블의 개별 열과 동일합니다. 목록을 본질적으로 "열 이름이 없는 한 열 테이블"로 생각할 수 있습니다. 따라서 열에서 작동하는 모든 명령은 목록에서도 _또한_ 작동합니다. 예를 들어, [`where`](/commands/docs/where.md)는 목록과 함께 사용할 수 있습니다.
 
 ```nu
 [bell book candle] | where ($it =~ 'b')
@@ -13,37 +13,37 @@ Lists are equivalent to the individual columns of tables. You can think of a lis
 
 :::
 
-## Creating lists
+## 목록 만들기
 
-A list is an ordered collection of values.
-A list is created using square brackets surrounding values separated by spaces, linebreaks, and/or commas.
-For example, `[foo bar baz]` or `[foo, bar, baz]`.
+목록은 순서가 지정된 값 모음입니다.
+목록은 공백, 줄 바꿈 및/또는 쉼표로 구분된 값을 둘러싼 대괄호를 사용하여 만듭니다.
+예를 들어, `[foo bar baz]` 또는 `[foo, bar, baz]`입니다.
 
 ::: tip
-Nushell lists are similar to JSON arrays. The same `[ "Item1", "Item2", "Item3" ]` that represents a JSON array can also be used to create a Nushell list.
+누셸 목록은 JSON 배열과 유사합니다. JSON 배열을 나타내는 동일한 `[ "Item1", "Item2", "Item3" ]`을 사용하여 누셸 목록을 만들 수도 있습니다.
 :::
 
-## Updating lists
+## 목록 업데이트
 
-We can [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
+파이프라인을 통해 흐르는 목록에 값을 [`insert`](/commands/docs/insert.md)할 수 있습니다. 예를 들어 목록 중간에 값 `10`을 삽입해 보겠습니다.
 
 ```nu
 [1, 2, 3, 4] | insert 2 10
 # => [1, 2, 10, 3, 4]
 ```
 
-We can also use [`update`](/commands/docs/update.md) to replace the 2nd element with the value `10`.
+[`update`](/commands/docs/update.md)를 사용하여 두 번째 요소를 값 `10`으로 바꿀 수도 있습니다.
 
 ```nu
 [1, 2, 3, 4] | update 1 10
 # => [1, 10, 3, 4]
 ```
 
-## Removing or Adding Items from List
+## 목록에서 항목 제거 또는 추가
 
-In addition to [`insert`](/commands/docs/insert.md) and [`update`](/commands/docs/update.md), we also have [`prepend`](/commands/docs/prepend.md) and [`append`](/commands/docs/append.md). These let you insert to the beginning of a list or at the end of the list, respectively.
+[`insert`](/commands/docs/insert.md) 및 [`update`](/commands/docs/update.md) 외에도 [`prepend`](/commands/docs/prepend.md) 및 [`append`](/commands/docs/append.md)가 있습니다. 이를 통해 각각 목록의 시작 또는 끝에 삽입할 수 있습니다.
 
-For example:
+예시:
 
 ```nu
 let colors = [yellow green]
@@ -55,7 +55,7 @@ $colors
 # => [black red yellow green purple blue]
 ```
 
-In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list.
+목록에서 항목을 제거하려는 경우 여러 가지 방법이 있습니다. [`skip`](/commands/docs/skip.md)을 사용하면 입력에서 첫 번째 행을 건너뛸 수 있고, [`drop`](/commands/docs/drop.md)을 사용하면 목록 끝에서 특정 번호가 매겨진 행을 건너뛸 수 있습니다.
 
 ```nu
 let colors = [red yellow green purple]
@@ -65,7 +65,7 @@ $colors
 # => [yellow]
 ```
 
-We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first.md) which allow you to [`take`](/commands/docs/take.md) from the end or beginning of the list, respectively.
+또한 각각 목록의 끝 또는 시작에서 [`take`](/commands/docs/take.md)할 수 있는 [`last`](/commands/docs/last.md) 및 [`first`](/commands/docs/first.md)도 있습니다.
 
 ```nu
 let colors = [red yellow green purple black magenta]
@@ -74,7 +74,7 @@ $colors
 # => [purple black magenta]
 ```
 
-And from the beginning of a list,
+그리고 목록의 시작부터,
 
 ```nu
 let colors = [yellow green purple]
@@ -83,10 +83,9 @@ $colors
 # => [yellow green]
 ```
 
-### Using the Spread Operator
+### 스프레드 연산자 사용
 
-To append one or more lists together, optionally with values interspersed in between, you can also use the
-[spread operator](/book/operators#spread-operator) (`...`):
+하나 이상의 목록을 함께 추가하고 선택적으로 그 사이에 값을 산재시키려면 [스프레드 연산자](/book/operators#spread-operator)(`...`)를 사용할 수도 있습니다.
 
 ```nu
 let x = [1 2]
@@ -104,84 +103,81 @@ let x = [1 2]
 # => ╰───┴───╯
 ```
 
-## Iterating over Lists
+## 목록 반복
 
-To iterate over the items in a list, use the [`each`](/commands/docs/each.md) command with a [block](types_of_data.html#blocks)
-of Nu code that specifies what to do to each item. The block parameter (e.g. `|elt|` in `{ |elt| print $elt }`) is the current list
-item, but the [`enumerate`](/commands/docs/enumerate.md) filter can be used to provide `index` and `item` values if needed. For example:
+목록의 항목을 반복하려면 각 항목에 대해 수행할 작업을 지정하는 Nu 코드 [블록](types_of_data.html#blocks)과 함께 [`each`](/commands/docs/each.md) 명령을 사용합니다. 블록 매개변수(예: `{ |elt| print $elt }`의 `|elt|`)는 현재 목록 항목이지만, 필요한 경우 `index` 및 `item` 값을 제공하기 위해 [`enumerate`](/commands/docs/enumerate.md) 필터를 사용할 수 있습니다. 예시:
 
 ```nu
 let names = [Mark Tami Amanda Jeremy]
 $names | each { |elt| $"Hello, ($elt)!" }
-# Outputs "Hello, Mark!" and three more similar lines.
+# "Hello, Mark!"와 세 개의 유사한 줄을 출력합니다.
 
 $names | enumerate | each { |elt| $"($elt.index + 1) - ($elt.item)" }
-# Outputs "1 - Mark", "2 - Tami", etc.
+# "1 - Mark", "2 - Tami" 등을 출력합니다.
 ```
 
-The [`where`](/commands/docs/where.md) command can be used to create a subset of a list, effectively filtering the list based on a condition.
+[`where`](/commands/docs/where.md) 명령을 사용하여 목록의 하위 집합을 만들 수 있으며, 조건을 기반으로 목록을 효과적으로 필터링합니다.
 
-The following example gets all the colors whose names end in "e".
+다음 예제는 이름이 "e"로 끝나는 모든 색상을 가져옵니다.
 
 ```nu
 let colors = [red orange yellow green blue purple]
 $colors | where ($it | str ends-with 'e')
-# The block passed to `where` must evaluate to a boolean.
-# This outputs the list [orange blue purple].
+# `where`에 전달된 블록은 부울로 평가되어야 합니다.
+# 이것은 [orange blue purple] 목록을 출력합니다.
 ```
 
-In this example, we keep only values higher than `7`.
+이 예제에서는 `7`보다 큰 값만 유지합니다.
 
 ```nu
 let scores = [7 10 8 6 7]
 $scores | where $it > 7 # [10 8]
 ```
 
-The [`reduce`](/commands/docs/reduce.md) command computes a single value from a list.
-It uses a block which takes 2 parameters: the current item (conventionally named `elt`) and an accumulator
-(conventionally named `acc`). To specify an initial value for the accumulator, use the `--fold` (`-f`) flag.
-To change `elt` to have `index` and `item` values, use the [`enumerate`](/commands/docs/enumerate.md) filter.
-For example:
+[`reduce`](/commands/docs/reduce.md) 명령은 목록에서 단일 값을 계산합니다.
+두 개의 매개변수를 사용하는 블록을 사용합니다. 현재 항목(일반적으로 `elt`로 명명됨)과 누산기(일반적으로 `acc`로 명명됨)입니다. 누산기의 초기 값을 지정하려면 `--fold` (`-f`) 플래그를 사용하십시오.
+`elt`를 `index` 및 `item` 값을 갖도록 변경하려면 [`enumerate`](/commands/docs/enumerate.md) 필터를 사용하십시오.
+예시:
 
 ```nu
 let scores = [3 8 4]
 $"total = ($scores | reduce { |elt, acc| $acc + $elt })" # total = 15
 
-$"total = ($scores | math sum)" # easier approach, same result
+$"total = ($scores | math sum)" # 더 쉬운 접근 방식, 동일한 결과
 
 $"product = ($scores | reduce --fold 1 { |elt, acc| $acc * $elt })" # product = 96
 
 $scores | enumerate | reduce --fold 0 { |elt, acc| $acc + $elt.index * $elt.item } # 0*3 + 1*8 + 2*4 = 16
 ```
 
-## Accessing the List
+## 목록 액세스
 
-::: tip Note
-The following is a basic overview. For a more in-depth discussion of this topic, see the chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
+::: tip 참고
+다음은 기본 개요입니다. 이 주제에 대한 자세한 내용은 [구조화된 데이터 탐색 및 액세스](/book/navigating_structured_data.md) 장을 참조하십시오.
 :::
 
-To access a list item at a given index, use the `$name.index` form where `$name` is a variable that holds a list.
+지정된 인덱스에서 목록 항목에 액세스하려면 `$name`이 목록을 보유하는 변수인 `$name.index` 형식을 사용합니다.
 
-For example, the second element in the list below can be accessed with `$names.1`.
+예를 들어, 아래 목록의 두 번째 요소는 `$names.1`로 액세스할 수 있습니다.
 
 ```nu
 let names = [Mark Tami Amanda Jeremy]
-$names.1 # gives Tami
+$names.1 # Tami를 제공합니다.
 ```
 
-If the index is in some variable `$index` we can use the `get` command to extract the item from the list.
+인덱스가 일부 변수 `$index`에 있는 경우 `get` 명령을 사용하여 목록에서 항목을 추출할 수 있습니다.
 
 ```nu
 let names = [Mark Tami Amanda Jeremy]
 let index = 1
-$names | get $index # gives Tami
+$names | get $index # Tami를 제공합니다.
 ```
 
-The [`length`](/commands/docs/length.md) command returns the number of items in a list.
-For example, `[red green blue] | length` outputs `3`.
+[`length`](/commands/docs/length.md) 명령은 목록의 항목 수를 반환합니다.
+예를 들어, `[red green blue] | length`는 `3`을 출력합니다.
 
-The [`is-empty`](/commands/docs/is-empty.md) command determines whether a string, list, or table is empty.
-It can be used with lists as follows:
+[`is-empty`](/commands/docs/is-empty.md) 명령은 문자열, 목록 또는 테이블이 비어 있는지 여부를 결정합니다.
+목록과 함께 다음과 같이 사용할 수 있습니다.
 
 ```nu
 let colors = [red green blue]
@@ -191,7 +187,7 @@ let colors = []
 $colors | is-empty # true
 ```
 
-The `in` and `not-in` operators are used to test whether a value is in a list. For example:
+`in` 및 `not-in` 연산자는 값이 목록에 있는지 여부를 테스트하는 데 사용됩니다. 예시:
 
 ```nu
 let colors = [red green blue]
@@ -200,52 +196,49 @@ let colors = [red green blue]
 'gold' not-in $colors # true
 ```
 
-The [`any`](/commands/docs/any.md) command determines if any item in a list
-matches a given condition.
-For example:
+[`any`](/commands/docs/any.md) 명령은 목록의 모든 항목이 주어진 조건을 만족하는지 여부를 결정합니다.
+예시:
 
 ```nu
 let colors = [red green blue]
-# Do any color names end with "e"?
+# 색상 이름이 "e"로 끝나는 것이 있습니까?
 $colors | any {|elt| $elt | str ends-with "e" } # true
 
-# Is the length of any color name less than 3?
+# 색상 이름의 길이가 3보다 작은 것이 있습니까?
 $colors | any {|elt| ($elt | str length) < 3 } # false
 
 let scores = [3 8 4]
-# Are any scores greater than 7?
+# 7보다 큰 점수가 있습니까?
 $scores | any {|elt| $elt > 7 } # true
 
-# Are any scores odd?
+# 홀수인 점수가 있습니까?
 $scores | any {|elt| $elt mod 2 == 1 } # true
 ```
 
-The [`all`](/commands/docs/all.md) command determines if every item in a list
-matches a given condition.
-For example:
+[`all`](/commands/docs/all.md) 명령은 목록의 모든 항목이 주어진 조건을 만족하는지 여부를 결정합니다.
+예시:
 
 ```nu
 let colors = [red green blue]
-# Do all color names end with "e"?
+# 모든 색상 이름이 "e"로 끝납니까?
 $colors | all {|elt| $elt | str ends-with "e" } # false
 
-# Is the length of all color names greater than or equal to 3?
+# 모든 색상 이름의 길이가 3 이상입니까?
 $colors | all {|elt| ($elt | str length) >= 3 } # true
 
 let scores = [3 8 4]
-# Are all scores greater than 7?
+# 모든 점수가 7보다 큽니까?
 $scores | all {|elt| $elt > 7 } # false
 
-# Are all scores even?
+# 모든 점수가 짝수입니까?
 $scores | all {|elt| $elt mod 2 == 0 } # false
 ```
 
-## Converting the List
+## 목록 변환
 
-The [`flatten`](/commands/docs/flatten.md) command creates a new list from an existing list
-by adding items in nested lists to the top-level list.
-This can be called multiple times to flatten lists nested at any depth.
-For example:
+[`flatten`](/commands/docs/flatten.md) 명령은 중첩된 목록의 항목을 최상위 목록에 추가하여 기존 목록에서 새 목록을 만듭니다.
+이것은 모든 깊이에서 중첩된 목록을 평탄화하기 위해 여러 번 호출할 수 있습니다.
+예시:
 
 ```nu
 [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
@@ -253,12 +246,11 @@ For example:
 [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-The [`wrap`](/commands/docs/wrap.md) command converts a list to a table. Each list value will
-be converted to a separate row with a single column:
+[`wrap`](/commands/docs/wrap.md) 명령은 목록을 테이블로 변환합니다. 각 목록 값은 단일 열이 있는 별도의 행으로 변환됩니다.
 
 ```nu
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
 
-# Show world clock for selected time zones
+# 선택한 시간대에 대한 세계 시계 표시
 $zones | wrap 'Zone' | upsert Time {|row| (date now | date to-timezone $row.Zone | format date '%Y.%m.%d %H:%M')}
 ```

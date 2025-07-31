@@ -1,25 +1,25 @@
-# Running System (External) Commands
+# 시스템(외부) 명령 실행
 
-Nu provides a set of commands that you can use across different operating systems ("internal" commands) and having this consistency is helpful when creating cross-platform code. Sometimes, though, you want to run an external command that has the same name as an internal Nu command. To run the external [`ls`](/commands/docs/ls.md) or [`date`](/commands/docs/date.md) command, for example, preface it with the caret (^) sigil. Prefacing with the caret calls the external command found in the user's `PATH` (e.g. `/bin/ls`) instead of Nu's internal [`ls`](/commands/docs/ls.md) command).
+Nu는 다양한 운영 체제에서 사용할 수 있는 일련의 명령("내부" 명령)을 제공하며, 이러한 일관성은 크로스 플랫폼 코드를 만들 때 유용합니다. 그러나 때로는 내부 Nu 명령과 동일한 이름을 가진 외부 명령을 실행하고 싶을 수 있습니다. 예를 들어 외부 [`ls`](/commands/docs/ls.md) 또는 [`date`](/commands/docs/date.md) 명령을 실행하려면 앞에 캐럿(^) 기호를 붙입니다. 캐럿을 앞에 붙이면 Nu의 내부 [`ls`](/commands/docs/ls.md) 명령 대신 사용자의 `PATH`에 있는 외부 명령(예: `/bin/ls`)을 호출합니다.
 
-Nu internal command:
+Nu 내부 명령:
 
 ```nu
 ls
 ```
 
-External command (typically `/usr/bin/ls`):
+외부 명령 (일반적으로 `/usr/bin/ls`):
 
 ```nu
 ^ls
 ```
 
 ::: note
-On Windows, `ls` is a PowerShell _alias_ by default, so `^ls` will not find a matching system _command_.
+Windows에서 `ls`는 기본적으로 PowerShell _별칭_이므로 `^ls`는 일치하는 시스템 _명령_을 찾지 못합니다.
 :::
 
-## Additional Windows Notes
+## 추가 Windows 참고 사항
 
-When running an external command on Windows,
-Nushell forwards some `CMD.EXE` internal commands to cmd instead of attempting to run external commands.
-[Coming from CMD.EXE](coming_from_cmd.md) contains a list of these commands and describes the behavior in more detail.
+Windows에서 외부 명령을 실행할 때,
+누셸은 일부 `CMD.EXE` 내부 명령을 외부 명령을 실행하려고 시도하는 대신 cmd로 전달합니다.
+[CMD.EXE에서 오신 분들을 위해](coming_from_cmd.md)에는 이러한 명령 목록이 포함되어 있으며 동작을 더 자세히 설명합니다.

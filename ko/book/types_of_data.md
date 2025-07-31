@@ -1,57 +1,57 @@
 ---
 prev:
-  text: Nu Fundamentals
+  text: 누셸 기본 사항
   link: /book/nu_fundamentals.md
 ---
-# Types of Data
+# 데이터 유형
 
-Traditional Unix shell commands communicate with each other using strings of text -- One command writes text to standard output (often abbreviated `stdout`) and the other reads text from standard input (or `stdin`). This allows multiple commands to be combined together to communicate through what is called a "pipeline".
+전통적인 유닉스 셸 명령은 텍스트 문자열을 사용하여 서로 통신합니다. 한 명령은 표준 출력(종종 `stdout`으로 축약됨)에 텍스트를 쓰고 다른 명령은 표준 입력(또는 `stdin`)에서 텍스트를 읽습니다. 이를 통해 여러 명령을 함께 결합하여 "파이프라인"이라고 하는 것을 통해 통신할 수 있습니다.
 
-Nushell embraces this approach and expands it to include other types of data in addition to strings.
+누셸은 이 접근 방식을 수용하고 문자열 외에 다른 유형의 데이터를 포함하도록 확장합니다.
 
-Like many programming languages, Nu models data using a set of simple, structured data types. Simple data types include integers, floats, strings, and booleans. There are also special types for dates, file sizes, and time durations.
+많은 프로그래밍 언어와 마찬가지로 Nu는 간단하고 구조화된 데이터 유형 집합을 사용하여 데이터를 모델링합니다. 간단한 데이터 유형에는 정수, 부동 소수점, 문자열 및 부울이 포함됩니다. 날짜, 파일 크기 및 시간 기간에 대한 특수 유형도 있습니다.
 
-The [`describe`](/commands/docs/describe.md) command returns the type of a data value:
+[`describe`](/commands/docs/describe.md) 명령은 데이터 값의 유형을 반환합니다.
 
 ```nu
 42 | describe
 # => int
 ```
 
-## Types at a Glance
+## 한눈에 보는 유형
 
-| Type                                  | Example                                                               |
+| 유형                                  | 예시                                                               |
 | ------------------------------------- | --------------------------------------------------------------------- |
-| [Integers](#integers)                 | `-65535`                                                              |
-| [Floats (decimals)](#floats-decimals) | `9.9999`, `Infinity`                                                  |
-| [Strings](#text-strings)              | <code>"hole 18", 'hole 18', \`hole 18\`, hole18, r#'hole18'#</code>   |
-| [Booleans](#booleans)                 | `true`                                                                |
-| [Dates](#dates)                       | `2000-01-01`                                                          |
-| [Durations](#durations)               | `2min + 12sec`                                                        |
-| [File-sizes](#file-sizes)             | `64mb`                                                                |
-| [Ranges](#ranges)                     | `0..4`, `0..<5`, `0..`, `..4`                                         |
-| [Binary](#binary-data)                | `0x[FE FF]`                                                           |
-| [Lists](#lists)                       | `[0 1 'two' 3]`                                                       |
-| [Records](#records)                   | `{name:"Nushell", lang: "Rust"}`                                      |
-| [Tables](#tables)                     | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`            |
-| [Closures](#closures)                 | `{\|e\| $e + 1 \| into string }`, `{ $in.name.0 \| path exists }`     |
-| [Cell-paths](#cell-paths)             | `$.name.0`                                                            |
-| [Blocks](#blocks)                     | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
+| [정수](#integers)                 | `-65535`                                                              |
+| [부동 소수점 (소수)](#floats-decimals) | `9.9999`, `Infinity`                                                  |
+| [문자열](#text-strings)              | <code>"hole 18", 'hole 18', \`hole 18\`, hole18, r#'hole18'#</code>   |
+| [부울](#booleans)                 | `true`                                                                |
+| [날짜](#dates)                       | `2000-01-01`                                                          |
+| [기간](#durations)               | `2min + 12sec`                                                        |
+| [파일 크기](#file-sizes)             | `64mb`                                                                |
+| [범위](#ranges)                     | `0..4`, `0..<5`, `0..`, `..4`                                         |
+| [이진](#binary-data)                | `0x[FE FF]`                                                           |
+| [목록](#lists)                       | `[0 1 'two' 3]`                                                       |
+| [레코드](#records)                   | `{name:"Nushell", lang: "Rust"}`                                      |
+| [테이블](#tables)                     | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`            |
+| [클로저](#closures)                 | `{\|e\| $e + 1 \| into string }`, `{ $in.name.0 \| path exists }`     |
+| [셀 경로](#cell-paths)             | `$.name.0`                                                            |
+| [블록](#blocks)                     | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
 | [Null (Nothing)](#nothing-null)       | `null`                                                                |
 | [Any](#any)                           | `let p: any = 5`                                                      |
 
-## Basic Data Types
+## 기본 데이터 유형
 
-### Integers
+### 정수
 
 |                       |                                                                                                                                                           |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **_Description:_**    | Numbers without a fractional component (positive, negative, and 0)                                                                                        |
-| **_Annotation:_**     | `int`                                                                                                                                                     |
-| **_Literal Syntax:_** | A decimal, hex, octal, or binary numeric value without a decimal place. E.g., `-100`, `0`, `50`, `+50`, `0xff` (hex), `0o234` (octal), `0b10101` (binary) |
-| **_See also:_**       | [Language Reference - Integer](/lang-guide/chapters/types/basic_types/int.md)                                                                             |
+| **_설명:_**    | 소수 부분이 없는 숫자(양수, 음수 및 0)                                                                                        |
+| **_주석:_**     | `int`                                                                                                                                                     |
+| **_리터럴 구문:_** | 소수점이 없는 10진수, 16진수, 8진수 또는 2진수 숫자 값입니다. 예: `-100`, `0`, `50`, `+50`, `0xff` (16진수), `0o234` (8진수), `0b10101` (2진수) |
+| **_참조:_**       | [언어 참조 - 정수](/lang-guide/chapters/types/basic_types/int.md)                                                                             |
 
-Simple Example:
+간단한 예:
 
 ```nu
 10 / 2
@@ -60,16 +60,16 @@ Simple Example:
 # => int
 ```
 
-### Floats/Decimals
+### 부동 소수점/소수
 
 |                       |                                                                                  |
 | --------------------- | -------------------------------------------------------------------------------- |
-| **_Description:_**    | Numbers with some fractional component                                           |
-| **_Annotation:_**     | `float`                                                                          |
-| **_Literal Syntax:_** | A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333` |
-| **_See also:_**       | [Language Reference - Float](/lang-guide/chapters/types/basic_types/float.md)    |
+| **_설명:_**    | 소수 부분이 있는 숫자                                           |
+| **_주석:_**     | `float`                                                                          |
+| **_리터럴 구문:_** | 소수점이 포함된 10진수 숫자 값입니다. 예: `1.5`, `2.0`, `-15.333` |
+| **_참조:_**       | [언어 참조 - 부동 소수점](/lang-guide/chapters/types/basic_types/float.md)    |
 
-Simple Example:
+간단한 예:
 
 ```nu
 2.5 / 5.0
@@ -77,7 +77,7 @@ Simple Example:
 ```
 
 ::: tip
-As in most programming languages, decimal values in Nushell are approximate.
+대부분의 프로그래밍 언어와 마찬가지로 누셸의 소수 값은 근사치입니다.
 
 ```nu
 10.2 * 5.1
@@ -86,19 +86,19 @@ As in most programming languages, decimal values in Nushell are approximate.
 
 :::
 
-### Text/Strings
+### 텍스트/문자열
 
 |                       |                                                                                 |
 | --------------------- | ------------------------------------------------------------------------------- |
-| **_Description:_**    | A series of characters that represents text                                     |
-| **_Annotation:_**     | `string`                                                                        |
-| **_Literal Syntax:_** | See [Working with strings](working_with_strings.md)                             |
-| **_See also:_**       | [Handling Strings](/book/loading_data.html#handling-strings)                    |
-|                       | [Language Reference - String](/lang-guide/chapters/types/basic_types/string.md) |
+| **_설명:_**    | 텍스트를 나타내는 일련의 문자                                     |
+| **_주석:_**     | `string`                                                                        |
+| **_리터럴 구문:_** | [문자열 작업](working_with_strings.md) 참조                             |
+| **_참조:_**       | [문자열 처리](/book/loading_data.html#handling-strings)                    |
+|                       | [언어 참조 - 문자열](/lang-guide/chapters/types/basic_types/string.md) |
 
-As with many languages, Nushell provides multiple ways to specify String values and numerous commands for working with strings.
+많은 언어와 마찬가지로 누셸은 문자열 값을 지정하는 여러 가지 방법과 문자열로 작업하기 위한 수많은 명령을 제공합니다.
 
-Simple (obligatory) example:
+간단한 (의무적인) 예:
 
 ```nu
 let audience: string = "World"
@@ -106,16 +106,16 @@ $"Hello, ($audience)"
 # => Hello, World
 ```
 
-### Booleans
+### 부울
 
 |                       |                                                                                |
 | --------------------- | ------------------------------------------------------------------------------ |
-| **_Description:_**    | True or False value                                                            |
-| **_Annotation:_**     | `bool`                                                                         |
-| **_Literal Syntax:_** | Either a literal `true` or `false`                                             |
-| **_See also:_**       | [Language Reference - Boolean](/lang-guide/chapters/types/basic_types/bool.md) |
+| **_설명:_**    | 참 또는 거짓 값                                                            |
+| **_주석:_**     | `bool`                                                                         |
+| **_리터럴 구문:_** | 리터럴 `true` 또는 `false`                                             |
+| **_참조:_**       | [언어 참조 - 부울](/lang-guide/chapters/types/basic_types/bool.md) |
 
-Booleans are commonly the result of a comparison. For example:
+부울은 일반적으로 비교의 결과입니다. 예시:
 
 ```nu
 let mybool: bool = (2 > 1)
@@ -126,7 +126,7 @@ $mybool
 # => true
 ```
 
-A boolean result is commonly used to control the flow of execution:
+부울 결과는 일반적으로 실행 흐름을 제어하는 데 사용됩니다.
 
 ```nu
 let num = -2
@@ -134,54 +134,54 @@ if $num < 0 { print "It's negative" }
 # => It's negative
 ```
 
-### Dates
+### 날짜
 
 |                       |                                                                                        |
 | --------------------- | -------------------------------------------------------------------------------------- |
-| **_Description:_**    | Represents a specific point in time using international standard date-time descriptors |
-| **_Annotation:_**     | `datetime`                                                                             |
-| **_Literal Syntax:_** | See [Language Guide - Date](/lang-guide/chapters/types/basic_types/datetime.md)        |
+| **_설명:_**    | 국제 표준 날짜-시간 설명자를 사용하여 특정 시점을 나타냅니다. |
+| **_주석:_**     | `datetime`                                                                             |
+| **_리터럴 구문:_** | [언어 가이드 - 날짜](/lang-guide/chapters/types/basic_types/datetime.md) 참조        |
 
-Simple example:
+간단한 예:
 
 ```nu
 date now
 # => Mon, 12 Aug 2024 13:59:22 -0400 (now)
-# Format as Unix epoch
+# 유닉스 에포크로 포맷
 date now | format date '%s'
 # => 1723485562
 ```
 
-### Durations
+### 기간
 
 |                       |                                                                                           |
 | --------------------- | ----------------------------------------------------------------------------------------- |
-| **_Description:_**    | Represent a unit of a passage of time                                                     |
-| **_Annotation:_**     | `duration`                                                                                |
-| **_Literal Syntax:_** | See [Language Reference - Duration](/lang-guide/chapters/types/basic_types/duration.html) |
+| **_설명:_**    | 시간의 경과 단위를 나타냅니다.                                                     |
+| **_주석:_**     | `duration`                                                                                |
+| **_리터럴 구문:_** | [언어 참조 - 기간](/lang-guide/chapters/types/basic_types/duration.html) |
 
-Durations support fractional values as well as calculations.
+기간은 소수 값과 계산을 지원합니다.
 
-Simple example:
+간단한 예:
 
 ```nu
 3.14day
 # => 3day 3hr 21min
-30day / 1sec  # How many seconds in 30 days?
+30day / 1sec  # 30일은 몇 초입니까?
 # => 2592000
 ```
 
-### File sizes
+### 파일 크기
 
 |                       |                                                                                           |
 | --------------------- | ----------------------------------------------------------------------------------------- |
-| **_Description:_**    | Specialized numeric type to represent the size of files or a number of bytes              |
-| **_Annotation:_**     | `filesize`                                                                                |
-| **_Literal Syntax:_** | See [Language Reference - Filesize](/lang-guide/chapters/types/basic_types/filesize.html) |
+| **_설명:_**    | 파일 크기 또는 바이트 수를 나타내는 특수 숫자 유형              |
+| **_주석:_**     | `filesize`                                                                                |
+| **_리터럴 구문:_** | [언어 참조 - 파일 크기](/lang-guide/chapters/types/basic_types/filesize.html) |
 
-Nushell also has a special type for file sizes.
+누셸에는 파일 크기에 대한 특수 유형도 있습니다.
 
-As with durations, Nushell supports fractional file sizes and calculations:
+기간과 마찬가지로 누셸은 소수 파일 크기와 계산을 지원합니다.
 
 ```nu
 0.5kB
@@ -192,19 +192,19 @@ As with durations, Nushell supports fractional file sizes and calculations:
 # => true
 ```
 
-See the [Language Reference](/lang-guide/chapters/types/basic_types/filesize.html) for a complete list of units and more detail.
+단위 및 자세한 내용의 전체 목록은 [언어 참조](/lang-guide/chapters/types/basic_types/filesize.html)를 참조하십시오.
 
-### Ranges
+### 범위
 
 |                       |                                                                                                |
 | --------------------- | ---------------------------------------------------------------------------------------------- |
-| **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride. |
-| **_Annotation:_**     | `range`                                                                                        |
-| **_Literal Syntax:_** | `<start_value>..<end_value>`. E.g., `1..10`.                                                   |
-|                       | `<start_value>..<second_value>..<end_value>`. E.g., `2..4..20`                                 |
-| **_See also:_**       | [Language Guide - Range](/lang-guide/chapters/types/basic_types/range.md)                      |
+| **_설명:_**    | 시작 값에서 끝 값까지의 값 범위를 선택적 보폭으로 설명합니다. |
+| **_주석:_**     | `range`                                                                                        |
+| **_리터럴 구문:_** | `<start_value>..<end_value>`. 예: `1..10`.                                                   |
+|                       | `<start_value>..<second_value>..<end_value>`. 예: `2..4..20`                                 |
+| **_참조:_**       | [언어 가이드 - 범위](/lang-guide/chapters/types/basic_types/range.md)                      |
 
-Simple example:
+간단한 예:
 
 ```nu
 1..5
@@ -218,41 +218,41 @@ Simple example:
 ```
 
 ::: tip
-You can also easily create lists of characters with a form similar to ranges with the command [`seq char`](/commands/docs/seq_char.html) as well as with dates using the [`seq date`](/commands/docs/seq_date.html) command.
+[`seq char`](/commands/docs/seq_char.md) 명령과 [`seq date`](/commands/docs/seq_date.html) 명령을 사용하여 범위와 유사한 형식으로 문자 목록을 쉽게 만들 수도 있습니다.
 :::
 
-### Cell Paths
+### 셀 경로
 
 |                       |                                                                                                                 |
 | --------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **_Description:_**    | An expression that is used to navigated to an inner value in a structured value.                                |
-| **_Annotation:_**     | `cell-path`                                                                                                     |
-| **_Literal syntax:_** | A dot-separated list of row (int) and column (string) IDs. E.g., `name.4.5`.                                    |
-|                       | Optionally, use a leading `$.` when needed for disambiguation, such as when assigning a cell-path to a variable |
-| **_See also:_**       | [Language Reference - Cell-path](/lang-guide/chapters/types/basic_types/cellpath.md)                            |
-|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) chapter.                        |
+| **_설명:_**    | 구조화된 값의 내부 값으로 이동하는 데 사용되는 표현식입니다.                                |
+| **_주석:_**     | `cell-path`                                                                                                     |
+| **_리터럴 구문:_** | 점으로 구분된 행(정수) 및 열(문자열) ID 목록입니다. 예: `name.4.5`.                                    |
+|                       | 선택적으로 변수에 셀 경로를 할당하는 경우와 같이 명확성을 위해 선행 `$.`를 사용합니다. |
+| **_참조:_**       | [언어 참조 - 셀 경로](/lang-guide/chapters/types/basic_types/cellpath.md)                            |
+|                       | [구조화된 데이터 탐색 및 액세스](/book/navigating_structured_data.md) 장.                        |
 
-Simple example:
+간단한 예:
 
 ```nu
 let cp = $.2
-# Return list item at index 2
+# 인덱스 2의 목록 항목 반환
 [ foo bar goo glue ] | get $cp
 # => goo
 ```
 
-### Closures
+### 클로저
 
 |                       |                                                                                                                                                 |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **_Description:_**    | An anonymous function, often called a lambda function, which accepts parameters and _closes over_ (i.e., uses) variables from outside its scope |
-| **_Annotation:_**     | `closure`                                                                                                                                       |
-| **_Literal Syntax:_** | `{\|args\| expressions }`                                                                                                                       |
-| **_See also:_**       | [Language Reference - Closure](/lang-guide/chapters/types/basic_types/closure.md)                                                               |
+| **_설명:_**    | 익명 함수, 종종 람다 함수라고 하며, 매개변수를 받고 범위 외부의 변수를 _닫습니다_(즉, 사용합니다). |
+| **_주석:_**     | `closure`                                                                                                                                       |
+| **_리터럴 구문:_** | `{\|args\| expressions }`                                                                                                                       |
+| **_참조:_**       | [언어 참조 - 클로저](/lang-guide/chapters/types/basic_types/closure.md)                                                               |
 
-Simple example:
+간단한 예:
 
-This closure returns a boolean result of the comparison and then uses it in a `where` command to return all values greater than 5.
+이 클로저는 비교의 부울 결과를 반환한 다음 `where` 명령에서 사용하여 5보다 큰 모든 값을 반환합니다.
 
 ```nu
 let compare_closure = {|a| $a > 5 }
@@ -266,22 +266,22 @@ $original_list | where $compare_closure
 # => ╰───┴────╯
 ```
 
-Closures are a useful way to represent code that can be executed on each row of data via [filters](/lang-guide/chapters/filters/00_filters_overview.md)
+클로저는 [필터](/lang-guide/chapters/filters/00_filters_overview.md)를 통해 각 데이터 행에서 실행될 수 있는 코드를 나타내는 유용한 방법입니다.
 
-### Binary data
+### 이진 데이터
 
 |                       |                                                                             |
 | --------------------- | --------------------------------------------------------------------------- |
-| **_Description:_**    | Represents binary data                                                      |
-| **_Annotation:_**     | `binary`                                                                    |
-| **_Literal Syntax:_** | `0x[ffffffff]` - hex-based binary representation                            |
-|                       | `0o[1234567]` - octal-based binary representation                           |
-|                       | `0b[10101010101]` - binary-based binary representation                      |
-| **_See also:_**       | [Language Guide - Binary](/lang-guide/chapters/types/basic_types/binary.md) |
+| **_설명:_**    | 이진 데이터를 나타냅니다.                                                      |
+| **_주석:_**     | `binary`                                                                    |
+| **_리터럴 구문:_** | `0x[ffffffff]` - 16진수 기반 이진 표현                            |
+|                       | `0o[1234567]` - 8진수 기반 이진 표현                           |
+|                       | `0b[10101010101]` - 2진수 기반 이진 표현                      |
+| **_참조:_**       | [언어 가이드 - 이진](/lang-guide/chapters/types/basic_types/binary.md) |
 
-Binary data, like the data from an image file, is a group of raw bytes.
+이미지 파일의 데이터와 같은 이진 데이터는 원시 바이트 그룹입니다.
 
-Simple example - Confirm that a JPEG file starts with the proper identifier:
+간단한 예 - JPEG 파일이 올바른 식별자로 시작하는지 확인합니다.
 
 ```nu
 open nushell_logo.jpg
@@ -291,21 +291,21 @@ open nushell_logo.jpg
 # => true
 ```
 
-## Structured Data Types
+## 구조화된 데이터 유형
 
-Nushell includes a collection of structured data types that can contain the primitive types above. For example, instead of a single `float`, structured data gives us a way to represent multiple `float` values, such as a `list` of temperature readings, in the same value. Nushell supports the following structured data types:
+누셸은 위의 기본 유형을 포함할 수 있는 구조화된 데이터 유형 모음을 포함합니다. 예를 들어, 단일 `float` 대신 구조화된 데이터는 동일한 값에 온도 측정값의 `list`와 같이 여러 `float` 값을 나타내는 방법을 제공합니다. 누셸은 다음 구조화된 데이터 유형을 지원합니다.
 
-### Lists
+### 목록
 
 |                       |                                                                                 |
 | --------------------- | ------------------------------------------------------------------------------- |
-| **_Description:_**    | Ordered sequence of zero or more values of any type                             |
-| **_Annotation:_**     | `list`                                                                          |
-| **_Literal Syntax:_** | See [Language Guide - List](/lang-guide/chapters/types/basic_types/list.md)     |
-| **_See Also:_**       | [Working with Lists](./working_with_lists.md)                                   |
-|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) |
+| **_설명:_**    | 모든 유형의 0개 이상의 값의 순서 있는 시퀀스                             |
+| **_주석:_**     | `list`                                                                          |
+| **_리터럴 구문:_** | [언어 가이드 - 목록](/lang-guide/chapters/types/basic_types/list.md)     |
+| **_참조:_**       | [목록 작업](./working_with_lists.md)                                   |
+|                       | [구조화된 데이터 탐색 및 액세스](/book/navigating_structured_data.md) |
 
-Simple example:
+간단한 예:
 
 ```nu
 [Sam Fred George]
@@ -316,17 +316,17 @@ Simple example:
 # => ╰───┴────────╯
 ```
 
-### Records
+### 레코드
 
 |                       |                                                                                 |
 | --------------------- | ------------------------------------------------------------------------------- |
-| **_Description:_**    | Holds key-value pairs which associate string keys with various data values.     |
-| **_Annotation:_**     | `record`                                                                        |
-| **_Literal Syntax:_** | See [Language Guide - Record](/lang-guide/chapters/types/basic_types/record.md) |
-| **_See Also:_**       | [Working with Records](./working_with_records.md)                               |
-|                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) |
+| **_설명:_**    | 문자열 키를 다양한 데이터 값과 연결하는 키-값 쌍을 보유합니다.     |
+| **_주석:_**     | `record`                                                                        |
+| **_리터럴 구문:_** | [언어 가이드 - 레코드](/lang-guide/chapters/types/basic_types/record.md) |
+| **_참조:_**       | [레코드 작업](./working_with_records.md)                               |
+|                       | [구조화된 데이터 탐색 및 액세스](/book/navigating_structured_data.md) |
 
-Simple example:
+간단한 예:
 
 ```nu
 let my_record = {
@@ -343,20 +343,20 @@ $my_record | get name
 # =>  Kylian
 ```
 
-### Tables
+### 테이블
 
 |                    |                                                                                                                   |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| **_Description:_** | A two-dimensional container with both columns and rows where each cell can hold any basic or structured data type |
-| **_Annotation:_**  | `table`                                                                                                           |
-| **_See Also:_**    | [Working with Tables](./working_with_tables.md)                                                                   |
-|                    | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md)                                   |
-|                    | [Language Guide - Table](/lang-guide/chapters/types/basic_types/table.md)                                         |
+| **_설명:_** | 각 셀이 모든 기본 또는 구조화된 데이터 유형을 보유할 수 있는 열과 행이 모두 있는 2차원 컨테이너 |
+| **_주석:_**  | `table`                                                                                                           |
+| **_참조:_**    | [테이블 작업](./working_with_tables.md)                                                                   |
+|                    | [구조화된 데이터 탐색 및 액세스](/book/navigating_structured_data.md)                                   |
+|                    | [언어 가이드 - 테이블](/lang-guide/chapters/types/basic_types/table.md)                                         |
 
-The table is a core data structure in Nushell. As you run commands, you'll see that many of them return tables as output. A table has both rows and columns.
+테이블은 누셸의 핵심 데이터 구조입니다. 명령을 실행하면 많은 명령이 출력으로 테이블을 반환하는 것을 볼 수 있습니다. 테이블에는 행과 열이 모두 있습니다.
 
 :::tip
-Internally, tables are simply **lists of records**. This means that any command which extracts or isolates a specific row of a table will produce a record. For example, `get 0`, when used on a list, extracts the first value. But when used on a table (a list of records), it extracts a record:
+내부적으로 테이블은 단순히 **레코드 목록**입니다. 즉, 테이블의 특정 행을 추출하거나 격리하는 모든 명령은 레코드를 생성합니다. 예를 들어, 목록에서 사용될 때 `get 0`은 첫 번째 값을 추출합니다. 그러나 테이블(레코드 목록)에서 사용될 때 레코드를 추출합니다.
 
 ```nu
 [{x:12, y:5}, {x:3, y:6}] | get 0
@@ -368,53 +368,53 @@ Internally, tables are simply **lists of records**. This means that any command 
 
 :::
 
-## Other Data Types
+## 기타 데이터 유형
 
 ### Any
 
 |                       |                                                                                                             |
 | --------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **_Description:_**    | When used in a type annotation or signature, matches any type. In other words, a "superset" of other types. |
-| **_Annotation:_**     | `any`                                                                                                       |
-| **_Literal syntax:_** | N/A - Any literal value can be assigned to an `any` type                                                    |
-| **_See also:_**       | [Language Reference - Any](/lang-guide/chapters/types/basic_types/any.md)                                   |
+| **_설명:_**    | 유형 주석 또는 서명에서 사용될 때 모든 유형과 일치합니다. 즉, 다른 유형의 "상위 집합"입니다. |
+| **_주석:_**     | `any`                                                                                                       |
+| **_리터럴 구문:_** | 해당 없음 - 모든 리터럴 값을 `any` 유형에 할당할 수 있습니다.                                                    |
+| **_참조:_**       | [언어 참조 - Any](/lang-guide/chapters/types/basic_types/any.md)                                   |
 
-### Blocks
+### 블록
 
 |                       |                                                                               |
 | --------------------- | ----------------------------------------------------------------------------- |
-| **_Description:_**    | A syntactic form used by some Nushell keywords (e.g., `if` and `for`)         |
-| **_Annotation:_**     | N/A                                                                           |
-| **_Literal Syntax:_** | N/A                                                                           |
-| **_See also:_**       | [Language Reference - Block](/lang-guide/chapters/types/other_types/block.md) |
+| **_설명:_**    | 일부 누셸 키워드(예: `if` 및 `for`)에서 사용하는 구문 형식         |
+| **_주석:_**     | 해당 없음                                                                           |
+| **_리터럴 구문:_** | 해당 없음                                                                           |
+| **_참조:_**       | [언어 참조 - 블록](/lang-guide/chapters/types/other_types/block.md) |
 
-Simple example:
+간단한 예:
 
 ```nu
 if true { print "It's true" }
 ```
 
-The `{ print "It's true" }` portion above is a block.
+위의 `{ print "It's true" }` 부분은 블록입니다.
 
 ### Nothing (Null)
 
 |                       |                                                                                   |
 | --------------------- | --------------------------------------------------------------------------------- |
-| **_Description:_**    | The `nothing` type is to be used to represent the absence of another value.       |
-| **_Annotation:_**     | `nothing`                                                                         |
-| **_Literal Syntax:_** | `null`                                                                            |
-| **_See also:_**       | [Language Reference - Nothing](/lang-guide/chapters/types/basic_types/nothing.md) |
+| **_설명:_**    | `nothing` 유형은 다른 값이 없음을 나타내는 데 사용됩니다.       |
+| **_주석:_**     | `nothing`                                                                         |
+| **_리터럴 구문:_** | `null`                                                                            |
+| **_참조:_**       | [언어 참조 - Nothing](/lang-guide/chapters/types/basic_types/nothing.md) |
 
-#### Simple Example
+#### 간단한 예
 
-Using the optional operator `?` returns `null` if the requested cell-path doesn't exist:
+선택적 연산자 `?`를 사용하면 요청된 셀 경로가 없는 경우 `null`을 반환합니다.
 
 ```nu
 let simple_record = { a: 5, b: 10 }
 $simple_record.a?
 # => 5
 $simple_record.c?
-# => Nothing is output
+# => 아무것도 출력되지 않음
 $simple_record.c? | describe
 # => nothing
 $simple_record.c? == null

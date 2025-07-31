@@ -1,50 +1,50 @@
-# Navigating and Accessing Structured Data
+# 구조화된 데이터 탐색 및 액세스
 
-Given Nushell's strong support for structured data, some of the more common tasks involve navigating and accessing that data.
+누셸의 구조화된 데이터에 대한 강력한 지원을 고려할 때, 더 일반적인 작업 중 일부는 해당 데이터를 탐색하고 액세스하는 것과 관련이 있습니다.
 
-## Index to this Section
+## 이 섹션의 색인
 
-- [Background and Definitions](#background)
-- [Cell-paths](#cell-paths)
-  - [With Records](#records)
-  - [With Lists](#lists)
-  - [With Tables](#tables)
-    - Sample Data
-    - Example - Access a Table Row
-    - Example - Access a Table Column
-  - [With Nested Data](#nested-data)
-- [Using `get` and `select`](#using-get-and-select)
-  - Example - `get` vs. `select` with a Table Row
-  - Example - `select` with multiple rows and columns
-- [Handling missing data using the optional operator](#the-optional-operator)
-- [Key/Column names with spaces](#keycolumn-names-with-spaces)
-- [Other commands for navigating structured data](#other-commands-for-accessing-structured-data)
+- [배경 및 정의](#background)
+- [셀 경로](#cell-paths)
+  - [레코드 사용](#records)
+  - [목록 사용](#lists)
+  - [테이블 사용](#tables)
+    - 샘플 데이터
+    - 예제 - 테이블 행 액세스
+    - 예제 - 테이블 열 액세스
+  - [중첩된 데이터 사용](#nested-data)
+- [`get` 및 `select` 사용](#using-get-and-select)
+  - 예제 - 테이블 행과 함께 `get` 대 `select`
+  - 예제 - 여러 행과 열이 있는 `select`
+- 선택적 연산자를 사용하여 누락된 데이터 처리](#the-optional-operator)
+- [공백이 있는 키/열 이름](#keycolumn-names-with-spaces)
+- [구조화된 데이터 탐색을 위한 기타 명령](#other-commands-for-accessing-structured-data)
 
-## Background
+## 배경
 
-For the examples and descriptions below, keep in mind several definitions regarding structured data:
+아래 예제 및 설명을 위해 구조화된 데이터에 대한 몇 가지 정의를 염두에 두십시오.
 
-- **_List:_** Lists contain a series of zero or more values of any type. A list with zero values is known as an "empty list"
-- **_Record:_** Records contain zero or more pairs of named keys and their corresponding value. The data in a record's value can also be of any type. A record with zero key-value pairs is known as an "empty record"
-- **_Nested Data:_** The values contained in a list, record, or table can be either of a basic type or structured data themselves. This means that data can be nested multiple levels and in multiple forms:
-  - List values can contain tables, records, and even other lists
-    - **_Table:_** Tables are a list of records
-  - Record values can contain tables, lists, and other records
-    - This means that the records of a table can also contain nested tables, lists, and other records
+- **_목록:_** 목록에는 모든 유형의 0개 이상의 값 시리즈가 포함됩니다. 값이 0개인 목록을 "빈 목록"이라고 합니다.
+- **_레코드:_** 레코드에는 0개 이상의 명명된 키와 해당 값 쌍이 포함됩니다. 레코드 값의 데이터는 모든 유형일 수 있습니다. 키-값 쌍이 0개인 레코드를 "빈 레코드"라고 합니다.
+- **_중첩된 데이터:_** 목록, 레코드 또는 테이블에 포함된 값은 기본 유형이거나 구조화된 데이터 자체일 수 있습니다. 즉, 데이터는 여러 수준과 여러 형태로 중첩될 수 있습니다.
+  - 목록 값에는 테이블, 레코드 및 다른 목록도 포함될 수 있습니다.
+    - **_테이블:_** 테이블은 레코드 목록입니다.
+  - 레코드 값에는 테이블, 목록 및 다른 레코드가 포함될 수 있습니다.
+    - 즉, 테이블의 레코드에는 중첩된 테이블, 목록 및 다른 레코드도 포함될 수 있습니다.
 
 ::: tip
-Because a table is a list of records, any command or syntax that works on a list will also work on a table. The converse is not necessarily the case; there are some commands and syntax that work on tables but not lists.
+테이블은 레코드 목록이므로 목록에서 작동하는 모든 명령이나 구문은 테이블에서도 작동합니다. 그 반대는 반드시 사실이 아닙니다. 테이블에서는 작동하지만 목록에서는 작동하지 않는 일부 명령과 구문이 있습니다.
 :::
 
-## Cell-paths
+## 셀 경로
 
-A cell-path is the primary way to access values inside structured data. This path is based on a concept similar to that of a spreadsheet, where columns have names and rows have numbers. Cell-path names and indices are separated by dots.
+셀 경로는 구조화된 데이터 내부의 값에 액세스하는 주요 방법입니다. 이 경로는 열에 이름이 있고 행에 번호가 있는 스프레드시트와 유사한 개념을 기반으로 합니다. 셀 경로 이름과 인덱스는 점으로 구분됩니다.
 
-### Records
+### 레코드
 
-For a record, the cell-path specifies the name of a key, which is a `string`.
+레코드의 경우 셀 경로는 `문자열`인 키의 이름을 지정합니다.
 
-#### Example - Access a Record Value:
+#### 예제 - 레코드 값 액세스:
 
 ```nu
 let my_record = {
@@ -55,13 +55,13 @@ $my_record.b + 5
 # => 47
 ```
 
-### Lists
+### 목록
 
-For a list, the cell-path specifies the position (index) of the value in the list. This is an `int`:
+목록의 경우 셀 경로는 목록에서 값의 위치(인덱스)를 지정합니다. 이것은 `정수`입니다.
 
-#### Example - Access a List Value:
+#### 예제 - 목록 값 액세스:
 
-Remember, list indices are 0-based.
+목록 인덱스는 0부터 시작한다는 것을 기억하십시오.
 
 ```nu
 let scoobies_list = [ Velma Fred Daphne Shaggy Scooby ]
@@ -69,13 +69,13 @@ $scoobies_list.2
 # => Daphne
 ```
 
-### Tables
+### 테이블
 
-- To access a column, a cell-path uses the name of the column, which is a `string`
-- To access a row, it uses the index number of the row, which is an `int`
-- To access a single cell, it uses a combination of the column name with the row index.
+- 열에 액세스하려면 셀 경로가 `문자열`인 열의 이름을 사용합니다.
+- 행에 액세스하려면 `정수`인 행의 인덱스 번호를 사용합니다.
+- 단일 셀에 액세스하려면 열 이름과 행 인덱스를 조합하여 사용합니다.
 
-The next few examples will use the following table:
+다음 몇 가지 예제에서는 다음 테이블을 사용합니다.
 
 ```nu
 let data = [
@@ -87,7 +87,7 @@ let data = [
 ]
 ```
 
-::: details Expand for a visual representation of this data
+::: details 이 데이터의 시각적 표현을 보려면 확장하십시오.
 
 ```nu
 ╭───┬─────────────┬───────────────┬───────────╮
@@ -126,15 +126,15 @@ let data = [
 
 :::
 
-This represents weather data in the form of a table with three columns:
+이것은 세 개의 열이 있는 테이블 형식의 날씨 데이터를 나타냅니다.
 
-1. **_date_**: A Nushell `date` for each day
-2. **_temps_**: A Nushell `list` of 5 `float` values representing temperature readings at different weather stations in the area
-3. **_conditions_**: A Nushell `string` for each day's weather condition for the area
+1. **_date_**: 각 날짜에 대한 누셸 `date`
+2. **_temps_**: 해당 지역의 여러 기상 관측소에서 측정한 5개의 `float` 값으로 구성된 누셸 `list`
+3. **_conditions_**: 해당 지역의 각 날짜 날씨 상태에 대한 누셸 `string`
 
-#### Example - Access a Table Row (Record)
+#### 예제 - 테이블 행 액세스(레코드)
 
-Access the second day's data as a record:
+두 번째 날짜의 데이터를 레코드로 액세스합니다.
 
 ```nu
 $data.1
@@ -151,7 +151,7 @@ $data.1
 # => ╰───────────┴───────────────╯
 ```
 
-#### Example - Access a Table Column (List)
+#### 예제 - 테이블 열 액세스(목록)
 
 ```nu
 $data.condition
@@ -163,43 +163,43 @@ $data.condition
 # => ╰───┴────────╯
 ```
 
-#### Example - Access a Table Cell (Value)
+#### 예제 - 테이블 셀 액세스(값)
 
-The condition for the fourth day:
+네 번째 날의 상태:
 
 ```nu
 $data.condition.3
 # => rain
 ```
 
-### Nested Data
+### 중첩된 데이터
 
-Since data can be nested, a cell-path can contain references to multiple names or indices.
+데이터는 중첩될 수 있으므로 셀 경로는 여러 이름이나 인덱스에 대한 참조를 포함할 수 있습니다.
 
-#### Example - Accessing Nested Table Data
+#### 예제 - 중첩된 테이블 데이터 액세스
 
-To obtain the temperature at the second weather station on the third day:
+세 번째 날의 두 번째 기상 관측소에서 온도를 얻으려면:
 
 ```nu
 $data.temps.2.1
 # => 36.67
 ```
 
-The first index `2` accesses the third day, then the next index `1` accesses the second weather station's temperature reading.
+첫 번째 인덱스 `2`는 세 번째 날에 액세스하고, 다음 인덱스 `1`은 두 번째 기상 관측소의 온도 측정값에 액세스합니다.
 
-## Using `get` and `select`
+## `get` 및 `select` 사용
 
-In addition to the cell-path literal syntax used above, Nushell also provides several commands that utilize cell-paths. The most important of these are:
+위에서 사용된 셀 경로 리터럴 구문 외에도 누셸은 셀 경로를 사용하는 몇 가지 명령도 제공합니다. 이 중 가장 중요한 것은 다음과 같습니다.
 
-- `get` is equivalent to using a cell-path literal but with support for variable names and expressions. `get`, like the cell-path examples above, returns the **value** indicated by the cell-path.
-- `select` is subtly, but critically, different. It returns the specified **data structure** itself, rather than just its value.
-  - Using `select` on a table will return a table of equal or lesser size
-  - Using `select` on a list will return a list of equal or lesser size
-  - Using `select` on a record will return a record of equal or lesser size
+- `get`은 셀 경로 리터럴을 사용하는 것과 동일하지만 변수 이름과 표현식을 지원합니다. 위 셀 경로 예제와 마찬가지로 `get`은 셀 경로로 표시된 **값**을 반환합니다.
+- `select`는 미묘하지만 결정적으로 다릅니다. 값만 반환하는 대신 지정된 **데이터 구조** 자체를 반환합니다.
+  - 테이블에서 `select`를 사용하면 같거나 작은 크기의 테이블이 반환됩니다.
+  - 목록에서 `select`를 사용하면 같거나 작은 크기의 목록이 반환됩니다.
+  - 레코드에서 `select`를 사용하면 같거나 작은 크기의 레코드가 반환됩니다.
 
-Continuing with the sample table above:
+위의 샘플 테이블을 계속 사용합니다.
 
-### Example - `get` vs. `select` a table row
+### 예제 - `get` 대 `select` 테이블 행
 
 ```nu
 $data | get 1
@@ -229,15 +229,15 @@ $data | select 1
 # => ╰───┴─────────────┴───────────────┴───────────╯
 ```
 
-Notice that:
+다음을 확인하십시오.
 
-- [`get`](/commands/docs/get.md) returns the same record as the `$data.1` example above
-- [`select`](/commands/docs/select.md) returns a new, single-row table, including column names and row indices
+- [`get`](/commands/docs/get.md)은 위의 `$data.1` 예제와 동일한 레코드를 반환합니다.
+- [`select`](/commands/docs/select.md)는 열 이름과 행 인덱스를 포함하여 새로운 단일 행 테이블을 반환합니다.
 
 ::: tip
-The row indices of the table resulting from `select` are not the same as that of the original. The new table has its own, 0-based index.
+`select`에서 반환된 테이블의 행 인덱스는 원본 테이블의 행 인덱스와 동일하지 않습니다. 새 테이블에는 자체 0 기반 인덱스가 있습니다.
 
-To obtain the original index, you can use the [`enumerate`](/commands/docs/enumerate.md) command. For example:
+원본 인덱스를 얻으려면 [`enumerate`](/commands/docs/enumerate.md) 명령을 사용할 수 있습니다. 예시:
 
 ```nu
 $data | enumerate | select 1
@@ -245,9 +245,9 @@ $data | enumerate | select 1
 
 :::
 
-### Example - `select` with multiple rows and columns
+### 예제 - 여러 행과 열이 있는 `select`
 
-Because `select` results in a new table, it's possible to specify multiple column names, row indices, or even both. This example creates a new table containing the date and condition columns of the first and second rows:
+`select`가 새 테이블을 생성하므로 여러 열 이름, 행 인덱스 또는 둘 다를 지정할 수 있습니다. 이 예제는 첫 번째 및 두 번째 행의 날짜 및 상태 열을 포함하는 새 테이블을 만듭니다.
 
 ```nu
 $data | select date condition 0 1
@@ -259,11 +259,11 @@ $data | select date condition 0 1
 # => ╰───┴─────────────┴───────────╯
 ```
 
-## Key/Column names with spaces
+## 공백이 있는 키/열 이름
 
-If a key name or column name contains spaces or other characters that prevent it from being accessible as a bare-word string, then the key name may be quoted.
+키 이름이나 열 이름에 공백이나 다른 문자가 포함되어 있어 일반 단어 문자열로 액세스할 수 없는 경우 키 이름을 따옴표로 묶을 수 있습니다.
 
-Example:
+예시:
 
 ```nu
 let record_example = {
@@ -273,14 +273,14 @@ let record_example = {
 $record_example."key x"
 # => 12
 
-# or
+# 또는
 $record_example | get "key x"
 # => 12
 ```
 
-Quotes are also required when a key name may be confused for a numeric value.
+키 이름이 숫자 값과 혼동될 수 있는 경우에도 따옴표가 필요합니다.
 
-Example:
+예시:
 
 ```nu
 let record_example = {
@@ -293,30 +293,30 @@ $record_example."1"
 # =>   foo
 ```
 
-Do not confuse the key name with a row index in this case. Here, the first item is _assigned_ the key name `1` (a string). If converted to a table using the `transpose` command, key `1` (`string`) would be at row-index `0` (an integer).
+이 경우 키 이름을 행 인덱스와 혼동하지 마십시오. 여기서 첫 번째 항목은 키 이름 `1`(문자열)에 _할당_됩니다. `transpose` 명령을 사용하여 테이블로 변환하면 키 `1`(문자열)은 행 인덱스 `0`(정수)에 있습니다.
 
-## Handling Missing Data
+## 누락된 데이터 처리
 
-### The Optional Operator
+### 선택적 연산자
 
-By default, cell path access will fail if it can't access the requested row or column. To suppress these errors, you can add a `?` to a cell path member to mark it as optional:
+기본적으로 셀 경로 액세스는 요청된 행이나 열에 액세스할 수 없는 경우 실패합니다. 이러한 오류를 억제하려면 셀 경로 멤버에 `?`를 추가하여 선택적으로 표시할 수 있습니다.
 
-#### Example - The Optional Operator
+#### 예제 - 선택적 연산자
 
-Using the temp data from above:
+위의 임시 데이터 사용:
 
 ```nu
-let cp: cell-path = $.temps?.1 # only get the 2nd location from the temps column
+let cp: cell-path = $.temps?.1 # temps 열에서 두 번째 위치만 가져옵니다.
 
-# Ooops, we've removed the temps column
+# 웁스, temps 열을 제거했습니다.
 $data | reject temps | get $cp
 ```
 
-By default missing cells will be replaced by `null` when accessed via the optional operator.
+기본적으로 누락된 셀은 선택적 연산자를 통해 액세스할 때 `null`로 대체됩니다.
 
-### Assigning a `default` for missing or `null` data
+### 누락되거나 `null`인 데이터에 대한 `default` 할당
 
-The [`default` command](/commands/docs/default.html) can be used to apply a default value to missing or null column result.
+[`default` 명령](/commands/docs/default.html)을 사용하여 누락되거나 null인 열 결과에 기본값을 적용할 수 있습니다.
 
 ```nu
 let missing_value = [{a:1 b:2} {b:1}]
@@ -341,7 +341,7 @@ $with_default_value.1.a
 # => n/a
 ```
 
-## Other commands for accessing structured data
+## 구조화된 데이터 액세스를 위한 기타 명령
 
-- [`reject`](/commands/docs/reject.md) is the opposite of `select`, removing the specified rows and columns
-- [`range`](/commands/docs/range.md) specifies the rows of a list or table to select using a [`range`](./types_of_data.md#ranges) type
+- [`reject`](/commands/docs/reject.md)는 `select`의 반대이며 지정된 행과 열을 제거합니다.
+- [`range`](/commands/docs/range.md)는 [`range`](./types_of_data.md#ranges) 유형을 사용하여 선택할 목록 또는 테이블의 행을 지정합니다.

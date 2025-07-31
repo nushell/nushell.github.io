@@ -1,37 +1,37 @@
 ---
 prev:
-  text: Special Variables
+  text: 특수 변수
   link: /book/special_variables.md
 next:
-  text: Custom Commands
+  text: 사용자 지정 명령
   link: /book/custom_commands.md
 ---
-# Programming in Nu
+# Nu로 프로그래밍하기
 
-This chapter goes into more detail of Nushell as a programming language.
-Each major language feature has its own section.
+이 장에서는 누셸을 프로그래밍 언어로서 더 자세히 다룹니다.
+각 주요 언어 기능에는 자체 섹션이 있습니다.
 
-Just like most programming languages allow you to define functions, Nushell uses [custom commands](custom_commands.md) for this purpose.
+대부분의 프로그래밍 언어가 함수를 정의할 수 있도록 하는 것처럼 누셸은 이 목적으로 [사용자 지정 명령](custom_commands.md)을 사용합니다.
 
-From other shells you might be used to [aliases](aliases.md).
-Nushell's aliases work in a similar way and are a part of the programming language, not just a shell feature.
+다른 셸에서는 [별칭](aliases.md)에 익숙할 수 있습니다.
+누셸의 별칭은 비슷한 방식으로 작동하며 셸 기능뿐만 아니라 프로그래밍 언어의 일부입니다.
 
-Common operations, such as addition or regex search, can be done with [operators](operators.md).
-Not all operations are supported for all data types, and Nushell will make sure to let you know when there is a mismatch.
+더하기 또는 정규식 검색과 같은 일반적인 작업은 [연산자](operators.md)로 수행할 수 있습니다.
+모든 데이터 유형에 대해 모든 작업이 지원되는 것은 아니며, 누셸은 불일치가 있을 때 알려줍니다.
 
-You can store intermediate results to [variables](variables.md).
-Variables can be immutable, mutable, or a parse-time constant.
+중간 결과를 [변수](variables.md)에 저장할 수 있습니다.
+변수는 불변, 가변 또는 구문 분석 시간 상수일 수 있습니다.
 
-The last three sections are aimed at organizing your code:
+마지막 세 섹션은 코드 구성을 목표로 합니다.
 
-[Scripts](scripts.md) are the simplest form of code organization: You just put the code into a file and source it.
-However, you can also run scripts as standalone programs with command line signatures using the "special" `main` command.
+[스크립트](scripts.md)는 가장 간단한 코드 구성 형태입니다. 코드를 파일에 넣고 소싱하기만 하면 됩니다.
+그러나 "특수" `main` 명령을 사용하여 명령줄 서명이 있는 독립 실행형 프로그램으로 스크립트를 실행할 수도 있습니다.
 
-With [modules](modules.md), just like in many other programming languages, it is possible to compose your code from smaller pieces.
-Modules let you define a public interface vs. private commands and you can import custom commands, aliases, and environment variables from them.
+[모듈](modules.md)을 사용하면 다른 많은 프로그래밍 언어와 마찬가지로 코드를 더 작은 조각으로 구성할 수 있습니다.
+모듈을 사용하면 공용 인터페이스 대 비공개 명령을 정의할 수 있으며 사용자 지정 명령, 별칭 및 환경 변수를 가져올 수 있습니다.
 
-[Overlays](overlays.md) build on top of modules.
-By defining an overlay, you bring in module's definitions into its own swappable "layer" that gets applied on top of other overlays.
-This enables features like activating virtual environments or overriding sets of default commands with custom variants.
+[오버레이](overlays.md)는 모듈 위에 구축됩니다.
+오버레이를 정의하면 모듈의 정의를 다른 오버레이 위에 적용되는 자체 교체 가능한 "계층"으로 가져옵니다.
+이를 통해 가상 환경 활성화 또는 기본 명령 집합을 사용자 지정 변형으로 재정의하는 것과 같은 기능이 가능합니다.
 
-The standard library also has a [testing framework](testing.md) if you want to prove your reusable code works perfectly.
+표준 라이브러리에는 재사용 가능한 코드가 완벽하게 작동하는지 증명하려는 경우 [테스트 프레임워크](testing.md)도 있습니다.

@@ -1,12 +1,12 @@
-# Working with Tables
+# 테이블 작업
 
 [[toc]]
 
-## Overview
+## 개요
 
-One of the common ways of seeing data in Nu is through a table. Nu comes with a number of commands for working with tables to make it convenient to find what you're looking for, and for narrowing down the data to just what you need.
+Nu에서 데이터를 보는 일반적인 방법 중 하나는 테이블을 통해서입니다. Nu는 찾고 있는 것을 편리하게 찾고 필요한 데이터만으로 데이터를 좁힐 수 있도록 테이블로 작업하기 위한 여러 명령과 함께 제공됩니다.
 
-To start off, let's get a table that we can use:
+시작하려면 사용할 수 있는 테이블을 가져오겠습니다.
 
 ```nu
 ls
@@ -23,14 +23,14 @@ ls
 # => ───┴───────────────┴──────┴─────────┴────────────
 ```
 
-::: tip Changing how tables are displayed
-Nu will try to expands all table's structure by default. You can change this behavior by changing the `display_output` hook.
-See [hooks](/book/hooks.md#changing-how-output-is-displayed) for more information.
+::: tip 테이블 표시 방법 변경
+Nu는 기본적으로 모든 테이블의 구조를 확장하려고 합니다. `display_output` 후크를 변경하여 이 동작을 변경할 수 있습니다.
+자세한 내용은 [후크](/book/hooks.md#changing-how-output-is-displayed)를 참조하십시오.
 :::
 
-## Sorting the Data
+## 데이터 정렬
 
-We can sort a table by calling the [`sort-by`](/commands/docs/sort-by.md) command and telling it which columns we want to use in the sort. Let's say we wanted to sort our table by the size of the file:
+[`sort-by`](/commands/docs/sort-by.md) 명령을 호출하고 정렬에 사용할 열을 알려주어 테이블을 정렬할 수 있습니다. 파일 크기별로 테이블을 정렬하고 싶다고 가정해 보겠습니다.
 
 ```nu
 ls | sort-by size
@@ -47,17 +47,17 @@ ls | sort-by size
 # => ───┴───────────────┴──────┴─────────┴────────────
 ```
 
-We can sort a table by any column that can be compared. For example, we could also have sorted the above using the "name", "accessed", or "modified" columns.
+비교할 수 있는 모든 열로 테이블을 정렬할 수 있습니다. 예를 들어, 위를 "name", "accessed" 또는 "modified" 열을 사용하여 정렬할 수도 있습니다.
 
-For more info on sorting, see [Sorting](/book/sorting.md).
+정렬에 대한 자세한 내용은 [정렬](/book/sorting.md)을 참조하십시오.
 
-## Selecting the Data you Want
+## 원하는 데이터 선택
 
-::: tip Note
-The following is a basic overview. For a more in-depth discussion of this topic, see the chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
+::: tip 참고
+다음은 기본 개요입니다. 이 주제에 대한 자세한 내용은 [구조화된 데이터 탐색 및 액세스](/book/navigating_structured_data.md) 장을 참조하십시오.
 :::
 
-We can select data from a table by choosing to select specific columns or specific rows. Let's [`select`](/commands/docs/select.md) a few columns from our table to use:
+특정 열 또는 특정 행을 선택하여 테이블에서 데이터를 선택할 수 있습니다. 사용할 테이블에서 몇 개의 열을 [`select`](/commands/docs/select.md)해 보겠습니다.
 
 ```nu
 ls | select name size
@@ -74,7 +74,7 @@ ls | select name size
 # => ───┴───────────────┴─────────
 ```
 
-This helps to create a table that's more focused on what we need. Next, let's say we want to only look at the 5 smallest files in this directory:
+이렇게 하면 필요한 것에 더 집중된 테이블을 만드는 데 도움이 됩니다. 다음으로, 이 디렉터리에서 가장 작은 5개의 파일만 보고 싶다고 가정해 보겠습니다.
 
 ```nu
 ls | sort-by size | first 5
@@ -89,9 +89,9 @@ ls | sort-by size | first 5
 # => ───┴──────────────┴──────┴────────┴────────────
 ```
 
-You'll notice we first sort the table by size to get to the smallest file, and then we use the `first 5` to return the first 5 rows of the table.
+먼저 테이블을 크기별로 정렬하여 가장 작은 파일을 찾은 다음 `first 5`를 사용하여 테이블의 처음 5개 행을 반환하는 것을 알 수 있습니다.
 
-You can also [`skip`](/commands/docs/skip.md) rows that you don't want. Let's skip the first two of the 5 rows we returned above:
+원하지 않는 행을 [`skip`](/commands/docs/skip.md)할 수도 있습니다. 위에서 반환한 5개 행 중 처음 두 개를 건너뛰겠습니다.
 
 ```nu
 ls | sort-by size | first 5 | skip 2
@@ -104,9 +104,9 @@ ls | sort-by size | first 5 | skip 2
 # => ───┴───────────┴──────┴────────┴────────────
 ```
 
-We've narrowed it to three rows we care about.
+우리가 관심 있는 세 개의 행으로 좁혔습니다.
 
-Let's look at a few other commands for selecting data. You may have wondered why the rows of the table are numbers. This acts as a handy way to get to a single row. Let's sort our table by the file name and then pick one of the rows with the [`select`](/commands/docs/select.md) command using its row number:
+데이터를 선택하는 몇 가지 다른 명령을 살펴보겠습니다. 테이블의 행이 왜 숫자인지 궁금했을 수 있습니다. 이것은 단일 행에 액세스하는 편리한 방법으로 작동합니다. 파일 이름으로 테이블을 정렬한 다음 [`select`](/commands/docs/select.md) 명령을 사용하여 행 번호로 행 중 하나를 선택해 보겠습니다.
 
 ```nu
 ls | sort-by name
@@ -130,9 +130,9 @@ ls | sort-by name | select 5
 # => ───┴───────────────┴──────┴─────────┴────────────
 ```
 
-## Getting Data out of a Table
+## 테이블에서 데이터 가져오기
 
-So far, we've worked with tables by trimming the table down to only what we need. Sometimes we may want to go a step further and only look at the values in the cells themselves rather than taking a whole column. Let's say, for example, we wanted to only get a list of the names of the files. For this, we use the [`get`](/commands/docs/get.md) command:
+지금까지 필요한 것만으로 테이블을 잘라내어 테이블로 작업했습니다. 때로는 한 단계 더 나아가 전체 열을 가져오는 대신 셀 자체의 값만 보고 싶을 수 있습니다. 예를 들어, 파일 이름 목록만 가져오고 싶다고 가정해 보겠습니다. 이를 위해 [`get`](/commands/docs/get.md) 명령을 사용합니다.
 
 ```nu
 ls | get name
@@ -147,9 +147,9 @@ ls | get name
 # => ───┴───────────────
 ```
 
-We now have the values for each of the filenames.
+이제 각 파일 이름에 대한 값을 얻었습니다.
 
-This might look like the [`select`](/commands/docs/select.md) command we saw earlier, so let's put that here as well to compare the two:
+이것은 이전에 본 [`select`](/commands/docs/select.md) 명령과 비슷해 보일 수 있으므로 두 가지를 비교하기 위해 여기에도 배치해 보겠습니다.
 
 ```nu
 ls | select name
@@ -166,22 +166,22 @@ ls | select name
 # => ───┴───────────────
 ```
 
-These look very similar! Let's see if we can spell out the difference between these two commands to make it clear:
+이것들은 매우 비슷해 보입니다! 이 두 명령의 차이점을 명확히 하기 위해 설명해 보겠습니다.
 
-- [`select`](/commands/docs/select.md) - creates a new table which includes only the columns specified
-- [`get`](/commands/docs/get.md) - returns the values inside the column specified as a list
+- [`select`](/commands/docs/select.md) - 지정된 열만 포함하는 새 테이블을 만듭니다.
+- [`get`](/commands/docs/get.md) - 지정된 열 내부의 값을 목록으로 반환합니다.
 
 :::tip
-The arguments provided to `select` and `get` are [cell-paths](/book/types_of_data.html#cell-paths), a fundamental part of Nu's query language. For a more in-depth discussion of cell-paths and other navigation topics, see the next chapter, [Navigating and Accessing Structured Data](/book/navigating_structured_data.md).
+`select` 및 `get`에 제공된 인수는 Nu의 쿼리 언어의 기본 부분인 [셀 경로](/book/types_of_data.html#cell-paths)입니다. 셀 경로 및 기타 탐색 주제에 대한 자세한 내용은 다음 장인 [구조화된 데이터 탐색 및 액세스](/book/navigating_structured_data.md)를 참조하십시오.
 :::
 
-## Changing Data in a Table
+## 테이블의 데이터 변경
 
-In addition to selecting data from a table, we can also update what the table has. We may want to combine tables, add new columns, or edit the contents of a cell. In Nu, rather than editing in place, each of the commands in the section will return a new table in the pipeline.
+테이블에서 데이터를 선택하는 것 외에도 테이블에 있는 내용을 업데이트할 수도 있습니다. 테이블을 결합하거나, 새 열을 추가하거나, 셀의 내용을 편집하고 싶을 수 있습니다. Nu에서는 제자리에서 편집하는 대신 이 섹션의 각 명령이 파이프라인에서 새 테이블을 반환합니다.
 
-### Concatenating Tables
+### 테이블 연결
 
-We can concatenate tables using [`append`](/commands/docs/append.md):
+[`append`](/commands/docs/append.md)를 사용하여 테이블을 연결할 수 있습니다.
 
 ```nu
 let first = [[a b]; [1 2]]
@@ -195,7 +195,7 @@ $first | append $second
 # => ───┴───┴───
 ```
 
-If the column names are not identical then additionally columns and values will be created as necessary:
+열 이름이 동일하지 않으면 필요에 따라 추가 열과 값이 생성됩니다.
 
 ```nu
 let first = [[a b]; [1 2]]
@@ -211,7 +211,7 @@ $first | append $second | append $third
 # => ───┴───┴────┴────
 ```
 
-You can also use the `++` operator as an inline replacement for `append`:
+`++` 연산자를 `append`의 인라인 대체로 사용할 수도 있습니다.
 
 ```nu
 $first ++ $second ++ $third
@@ -221,12 +221,12 @@ $first ++ $second ++ $third
 # =>  0 │ 1 │  2 │ ❎
 # =>  1 │ 3 │  4 │ ❎
 # =>  2 │ 3 │ ❎ │  4
-# => ───┴───┴────┴───
+# => ───┴───┴────┴────
 ```
 
-### Merging Tables
+### 테이블 병합
 
-We can use the [`merge`](/commands/docs/merge.md) command to merge two (or more) tables together
+[`merge`](/commands/docs/merge.md) 명령을 사용하여 두 개 이상의 테이블을 함께 병합할 수 있습니다.
 
 ```nu
 let first = [[a b]; [1 2]]
@@ -239,13 +239,13 @@ $first | merge $second
 # => ───┴───┴───┴───┴───
 ```
 
-Let's add a third table:
+세 번째 테이블을 추가해 보겠습니다.
 
 ```nu
 let third = [[e f]; [5 6]]
 ```
 
-We could join all three tables together like this:
+다음과 같이 세 테이블을 모두 함께 결합할 수 있습니다.
 
 ```nu
 $first | merge $second  | merge $third
@@ -256,7 +256,7 @@ $first | merge $second  | merge $third
 # => ───┴───┴───┴───┴───┴───┴───
 ```
 
-Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically merge all tables:
+또는 [`reduce`](/commands/docs/reduce.md) 명령을 사용하여 모든 테이블을 동적으로 병합할 수 있습니다.
 
 ```nu
 [$first $second $third] | reduce {|elt, acc| $acc | merge $elt }
@@ -267,9 +267,9 @@ Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically 
 # => ───┴───┴───┴───┴───┴───┴───
 ```
 
-### Adding a new Column
+### 새 열 추가
 
-We can use the [`insert`](/commands/docs/insert.md) command to add a new column to the table. Let's look at an example:
+[`insert`](/commands/docs/insert.md) 명령을 사용하여 테이블에 새 열을 추가할 수 있습니다. 예를 살펴보겠습니다.
 
 ```nu
 open rustfmt.toml
@@ -278,7 +278,7 @@ open rustfmt.toml
 # => ─────────┴──────
 ```
 
-Let's add a column called "next_edition" with the value 2021:
+값이 2021인 "next_edition"이라는 열을 추가해 보겠습니다.
 
 ```nu
 open rustfmt.toml | insert next_edition 2021
@@ -288,7 +288,7 @@ open rustfmt.toml | insert next_edition 2021
 # => ──────────────┴──────
 ```
 
-This visual may be slightly confusing, because it looks like what we've just done is add a row. In this case, remember: rows have numbers, columns have names. If it still is confusing, note that appending one more row will make the table render as expected:
+이 시각적 표현은 약간 혼란스러울 수 있습니다. 왜냐하면 우리가 방금 한 일이 행을 추가한 것처럼 보이기 때문입니다. 이 경우 행에는 숫자가 있고 열에는 이름이 있다는 것을 기억하십시오. 그래도 혼란스럽다면 한 행을 더 추가하면 테이블이 예상대로 렌더링됩니다.
 
 ```nu
 open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_edition: 2024}
@@ -300,7 +300,7 @@ open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_editio
 # => ───┴─────────┴──────────────
 ```
 
-Notice that if we open the original file, the contents have stayed the same:
+원본 파일을 열면 내용이 그대로 유지되는 것을 알 수 있습니다.
 
 ```nu
 open rustfmt.toml
@@ -309,7 +309,7 @@ open rustfmt.toml
 # => ─────────┴──────
 ```
 
-Changes in Nu are functional changes, meaning that they work on values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](/commands/docs/save.md) command:
+Nu의 변경 사항은 영구적인 변경을 유발하려고 시도하는 대신 값 자체에 대해 작동하는 기능적 변경입니다. 이를 통해 선택한 경우 원하는 변경 사항으로 결과를 쓸 준비가 될 때까지 파이프라인에서 다양한 유형의 작업을 수행할 수 있습니다. 여기서는 [`save`](/commands/docs/save.md) 명령을 사용하여 결과를 쓸 수 있습니다.
 
 ```nu
 open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
@@ -320,9 +320,9 @@ open rustfmt2.toml
 # => ──────────────┴──────
 ```
 
-### Updating a Column
+### 열 업데이트
 
-In a similar way to the [`insert`](/commands/docs/insert.md) command, we can also use the [`update`](/commands/docs/update.md) command to change the contents of a column to a new value. To see it in action let's open the same file:
+[`insert`](/commands/docs/insert.md) 명령과 유사한 방식으로 [`update`](/commands/docs/update.md) 명령을 사용하여 열의 내용을 새 값으로 변경할 수도 있습니다. 작동하는 모습을 보려면 동일한 파일을 열어 보겠습니다.
 
 ```nu
 open rustfmt.toml
@@ -331,7 +331,7 @@ open rustfmt.toml
 # => ─────────┴──────
 ```
 
-And now, let's update the edition to point at the next edition we hope to support:
+그리고 이제 지원하려는 다음 버전을 가리키도록 버전을 업데이트해 보겠습니다.
 
 ```nu
 open rustfmt.toml | update edition 2021
@@ -340,11 +340,11 @@ open rustfmt.toml | update edition 2021
 # => ─────────┴──────
 ```
 
-You can also use the [`upsert`](/commands/docs/upsert.md) command to insert or update depending on whether the column already exists.
+열이 이미 존재하는지 여부에 따라 [`upsert`](/commands/docs/upsert.md) 명령을 사용하여 삽입하거나 업데이트할 수도 있습니다.
 
-### Moving Columns
+### 열 이동
 
-You can use [`move`](/commands/docs/move.md) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls.md) after the "size" column, we could do:
+[`move`](/commands/docs/move.md)를 사용하여 테이블의 열을 이동할 수 있습니다. 예를 들어, [`ls`](/commands/docs/ls.md)에서 "name" 열을 "size" 열 뒤로 이동하려면 다음과 같이 할 수 있습니다.
 
 ```nu
 ls | move name --after size
@@ -359,9 +359,9 @@ ls | move name --after size
 # => ...
 ```
 
-### Renaming Columns
+### 열 이름 바꾸기
 
-You can also [`rename`](/commands/docs/rename.md) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls.md) and rename the columns, we can use this example:
+rename 명령을 통해 테이블의 열 이름을 [`rename`](/commands/docs/rename.md)할 수도 있습니다. [`ls`](/commands/docs/ls.md)를 실행하고 열 이름을 바꾸려면 다음 예제를 사용할 수 있습니다.
 
 ```nu
 ls | rename filename filetype filesize date
@@ -376,9 +376,9 @@ ls | rename filename filetype filesize date
 # => ...
 ```
 
-### Rejecting/Deleting Columns
+### 열 거부/삭제
 
-You can also [`reject`](/commands/docs/reject.md) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls.md) and delete the columns, we can use this example:
+reject 명령을 통해 테이블의 열을 [`reject`](/commands/docs/reject.md)할 수도 있습니다. [`ls`](/commands/docs/ls.md)를 실행하고 열을 삭제하려면 다음 예제를 사용할 수 있습니다.
 
 ```nu
 ls -l / | reject readonly num_links inode created accessed modified
@@ -396,22 +396,22 @@ ls -l / | reject readonly num_links inode created accessed modified
 # => ...
 ```
 
-### The # Index Column
+### # 인덱스 열
 
-You've noticed that every table, by default, starts with a column with the heading `#`. This column can operate in one of two modes:
+모든 테이블은 기본적으로 `#` 헤더가 있는 열로 시작한다는 것을 알 수 있습니다. 이 열은 두 가지 모드 중 하나로 작동할 수 있습니다.
 
-1. Internal #
+1. 내부 #
 
-   - The default mode
-   - Nushell provides a 0-based, consecutive index
-   - Always corresponds to the cell-path row-number, where `select 0` will return the first item in the list, and `select <n-1>` returns the nth item
-   - Is a display of an internal representation only. In other words, it is not accessible by column name. For example, `get index` will not work, nor `get #`
+   - 기본 모드
+   - 누셸은 0부터 시작하는 연속적인 인덱스를 제공합니다.
+   - 항상 셀 경로 행 번호에 해당하며, `select 0`은 목록의 첫 번째 항목을 반환하고 `select <n-1>`은 n번째 항목을 반환합니다.
+   - 내부 표현의 표시일 뿐입니다. 즉, 열 이름으로 액세스할 수 없습니다. 예를 들어 `get index`는 작동하지 않으며 `get #`도 작동하지 않습니다.
 
-1. "Index"-Renamed #
+1. "인덱스"로 이름이 바뀐 #
 
-   - When a column named "index" is created, either directly or as a side-effect of another command, then this `index` column takes the place of the `#` column in the table display. In the table output, the column header is still `#`, but the _name_ of the column is now `index`.
+   - "index"라는 이름의 열이 직접 또는 다른 명령의 부작용으로 생성되면 이 `index` 열이 테이블 디스플레이에서 `#` 열을 대신합니다. 테이블 출력에서 열 헤더는 여전히 `#`이지만 열의 _이름_은 이제 `index`입니다.
 
-     Example:
+     예시:
 
      ```nu
      ls | each { insert index { 1000 }} | first 5
@@ -426,7 +426,7 @@ You've noticed that every table, by default, starts with a column with the headi
      # => ╰──────┴─────────────────┴──────┴─────────┴──────────────╯
      ```
 
-     - If an `index` key is added to each row in the table, then it can be accessed via `select` and `get`:
+     - 테이블의 각 행에 `index` 키가 추가되면 `select` 및 `get`을 통해 액세스할 수 있습니다.
 
      ```nu
      ls | each { insert index { 1000 }} | first 5 | select index name
@@ -441,7 +441,7 @@ You've noticed that every table, by default, starts with a column with the headi
      # => ╰──────┴─────────────────╯
      ```
 
-     - On the other hand, if some rows have an `index` key and others don't, the result is no longer a table; it is a `list<any>` due to the different record types:
+     - 반면에 일부 행에 `index` 키가 있고 다른 행에는 없는 경우 결과는 더 이상 테이블이 아닙니다. 다른 레코드 유형으로 인해 `list<any>`입니다.
 
        ```nu
        ls | upsert 3.index { "--->" } | first 5
@@ -473,19 +473,19 @@ You've noticed that every table, by default, starts with a column with the headi
        # => ╰──────┴─────────────────╯
        ```
 
-   - As demonstrated in the example above, any rows (records) in the table without an `index` key will continue to display the internal representation.
+   - 위 예제에서 보여주듯이 `index` 키가 없는 테이블의 모든 행(레코드)은 내부 표현을 계속 표시합니다.
 
-#### Additional Index Examples
+#### 추가 인덱스 예제
 
-##### Convert # to Index
+##### #을 인덱스로 변환
 
-A useful pattern for converting an internal `#` into an index for all rows, while maintaining the original numbering, is:
+내부 `#`을 모든 행의 인덱스로 변환하고 원래 번호 매기기를 유지하는 유용한 패턴은 다음과 같습니다.
 
 ```nu
 ls | enumerate | flatten
 ```
 
-While the results _look_ the same, the `index` is now decoupled from the internal cell-path. For example:
+결과는 동일하게 _보이지만_ `index`는 이제 내부 셀 경로와 분리됩니다. 예시:
 
 ```nu
 ls | enumerate | flatten | sort-by modified | first 5
@@ -507,9 +507,9 @@ ls | enumerate | flatten | sort-by modified | select 4
 # => ╰────┴──────────┴──────┴─────────┴──────────────╯
 ```
 
-The `sort-by modified` now _also_ sorts the `index` along with the rest of the columns.
+`sort-by modified`는 이제 나머지 열과 함께 `index`도 정렬합니다.
 
-##### Adding a Row Header
+##### 행 헤더 추가
 
 ```nu
 let table = [
@@ -530,25 +530,25 @@ $table | append $totals_row
 # => ╰────────┴───────────┴───────────┴───────╯
 ```
 
-### The `table` command
+### `table` 명령
 
-The [`table`](/commands/docs/table.md) command is used to _render_ structured data. This includes:
+[`table`](/commands/docs/table.md) 명령은 구조화된 데이터를 _렌더링_하는 데 사용됩니다. 여기에는 다음이 포함됩니다.
 
-- Tables
-- Lists
-- Records
-- Ranges
+- 테이블
+- 목록
+- 레코드
+- 범위
 
-Perhaps contrary to initial assumptions, the result of rendering these types is a `string`. For example:
+초기 가정과는 달리 이러한 유형을 렌더링한 결과는 `string`입니다. 예시:
 
 ```nu
 [ Nagasaki Ghent Cambridge Izmir Graz Lubango ] | table | describe
 # => string (stream)
 ```
 
-Other data types are passed through the `table` command unchanged.
+다른 데이터 유형은 `table` 명령을 통해 변경되지 않고 전달됩니다.
 
-With no arguments, the output rendered from the `table` command will often _display_ the same as unrendered form. For example:
+인수가 없는 경우 `table` 명령에서 렌더링된 출력은 렌더링되지 않은 형식과 동일하게 _표시_되는 경우가 많습니다. 예시:
 
 ```nu
 [ Nagasaki Ghent Cambridge Izmir Graz Lubango ]
@@ -571,15 +571,15 @@ With no arguments, the output rendered from the `table` command will often _disp
 # => ╰───┴───────────╯
 ```
 
-This can be useful when you need to store the rendered view of structured data as a string. For example, to remove all ANSI formatting (colors) from a table:
+이것은 구조화된 데이터의 렌더링된 뷰를 문자열로 저장해야 할 때 유용할 수 있습니다. 예를 들어, 테이블에서 모든 ANSI 서식(색상)을 제거하려면:
 
 ```nu
 ls | table | ansi strip
 ```
 
-The `table` command also has multiple options for _changing_ the rendering of a table, such as:
+`table` 명령에는 테이블 렌더링을 _변경_하기 위한 여러 옵션도 있습니다. 예:
 
-- `-e` to expand data that would normally be collapsed when rendering. Compare `scope modules | table` to `scope modules | table -e`.
-- `-i false` to hide the `index`/`#` column
-- `-a 5` to abbreviate the table to just the first and last 5 entries
-- And more
+- `-e`를 사용하여 렌더링할 때 일반적으로 축소되는 데이터를 확장합니다. `scope modules | table`과 `scope modules | table -e`를 비교하십시오.
+- `-i false`를 사용하여 `index`/`#` 열을 숨깁니다.
+- `-a 5`를 사용하여 테이블을 처음 5개 항목과 마지막 5개 항목으로 축약합니다.
+- 그리고 더

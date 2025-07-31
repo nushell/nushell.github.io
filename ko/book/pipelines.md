@@ -1,31 +1,31 @@
-# Pipelines
+# 파이프라인
 
-One of the core designs of Nu is the pipeline, a design idea that traces its roots back decades to some of the original philosophy behind Unix. Just as Nu extends from the single string data type of Unix, Nu also extends the idea of the pipeline to include more than just text.
+Nu의 핵심 디자인 중 하나는 파이프라인이며, 이는 수십 년 전 유닉스의 원래 철학 중 일부로 거슬러 올라가는 디자인 아이디어입니다. Nu가 유닉스의 단일 문자열 데이터 유형에서 확장된 것처럼, Nu는 파이프라인의 아이디어를 텍스트 이상을 포함하도록 확장합니다.
 
-## Basics
+## 기본
 
-A pipeline is composed of three parts: the input, the filter, and the output.
+파이프라인은 입력, 필터 및 출력의 세 부분으로 구성됩니다.
 
 ```nu
 open Cargo.toml | update workspace.dependencies.base64 0.24.2 | save Cargo_new.toml
 ```
 
-The first command, `open Cargo.toml`, is an input (sometimes also called a "source" or "producer"). This creates or loads data and feeds it into a pipeline. It's from input that pipelines have values to work with. Commands like [`ls`](/commands/docs/ls.md) are also inputs, as they take data from the filesystem and send it through the pipelines so that it can be used.
+첫 번째 명령인 `open Cargo.toml`은 입력(때로는 "소스" 또는 "생성자"라고도 함)입니다. 데이터를 생성하거나 로드하여 파이프라인에 공급합니다. 파이프라인이 작업할 값을 갖는 것은 입력에서 비롯됩니다. [`ls`](/commands/docs/ls.md)와 같은 명령도 파일 시스템에서 데이터를 가져와 파이프라인을 통해 전송하여 사용할 수 있도록 하므로 입력입니다.
 
-The second command, `update workspace.dependencies.base64 0.24.2`, is a filter. Filters take the data they are given and often do something with it. They may change it (as with the [`update`](/commands/docs/update.md) command in our example), or they may perform other operations, like logging, as the values pass through.
+두 번째 명령인 `update workspace.dependencies.base64 0.24.2`는 필터입니다. 필터는 주어진 데이터를 가져와 종종 무언가를 수행합니다. 예제의 [`update`](/commands/docs/update.md) 명령과 같이 데이터를 변경하거나 값이 통과할 때 로깅과 같은 다른 작업을 수행할 수 있습니다.
 
-The last command, `save Cargo_new.toml`, is an output (sometimes called a "sink"). An output takes input from the pipeline and does some final operation on it. In our example, we save what comes through the pipeline to a file as the final step. Other types of output commands may take the values and view them for the user.
+마지막 명령인 `save Cargo_new.toml`은 출력(때로는 "싱크"라고도 함)입니다. 출력은 파이프라인에서 입력을 받아 최종 작업을 수행합니다. 예제에서는 파이프라인을 통해 들어온 것을 최종 단계로 파일에 저장합니다. 다른 유형의 출력 명령은 값을 가져와 사용자에게 표시할 수 있습니다.
 
-The `$in` variable will collect the pipeline into a value for you, allowing you to access the whole stream as a parameter:
+`$in` 변수는 파이프라인을 값으로 수집하여 전체 스트림을 매개변수로 액세스할 수 있도록 합니다.
 
 ```nu
 [1 2 3] | $in.1 * $in.2
 # => 6
 ```
 
-## Multi-line pipelines
+## 여러 줄 파이프라인
 
-If a pipeline is getting a bit long for one line, you can enclose it within parentheses `()`:
+파이프라인이 한 줄에 너무 길어지면 괄호 `()`로 묶을 수 있습니다.
 
 ```nu
 let year = (
@@ -35,96 +35,96 @@ let year = (
 )
 ```
 
-## Semicolons
+## 세미콜론
 
-Take this example:
+이 예제를 살펴보십시오.
 
 ```nu
 line1; line2 | line3
 ```
 
-Here, semicolons are used in conjunction with pipelines. When a semicolon is used, no output data is produced to be piped. As such, the `$in` variable will not work when used immediately after the semicolon.
+여기서는 세미콜론이 파이프라인과 함께 사용됩니다. 세미콜론이 사용되면 파이프로 연결될 출력 데이터가 생성되지 않습니다. 따라서 `$in` 변수는 세미콜론 바로 뒤에 사용할 때 작동하지 않습니다.
 
-- As there is a semicolon after `line1`, the command will run to completion and get displayed on the screen.
-- `line2` | `line3` is a normal pipeline. It runs, and its contents are displayed after `line1`'s contents.
+- `line1` 뒤에 세미콜론이 있으므로 명령이 완료될 때까지 실행되고 화면에 표시됩니다.
+- `line2` | `line3`은 일반적인 파이프라인입니다. 실행되고 해당 내용은 `line1`의 내용 뒤에 표시됩니다.
 
-## Pipeline Input and the Special `$in` Variable
+## 파이프라인 입력 및 특수 `$in` 변수
 
-Much of Nu's composability comes from the special `$in` variable, which holds the current pipeline input.
+누셸의 구성 가능성의 대부분은 현재 파이프라인 입력을 보유하는 특수 `$in` 변수에서 비롯됩니다.
 
-`$in` is particular useful when used in:
+`$in`은 다음에 사용할 때 특히 유용합니다.
 
-- Command or external parameters
-- Filters
-- Custom command definitions or scripts that accept pipeline input
+- 명령 또는 외부 매개변수
+- 필터
+- 파이프라인 입력을 받는 사용자 지정 명령 정의 또는 스크립트
 
-### `$in` as a Command Argument or as Part of an Expression
+### `$in`을 명령 인수 또는 표현식의 일부로 사용
 
-Compare the following two command-lines that create a directory with tomorrow's date as part of the name. The following are equivalent:
+이름의 일부로 내일 날짜가 있는 디렉터리를 만드는 다음 두 명령줄을 비교해 보십시오. 다음은 동일합니다.
 
-Using subexpressions:
+하위 표현식 사용:
 
 ```nu
 mkdir $'((date now) + 1day | format date '%F') Report'
 ```
 
-or using pipelines:
+또는 파이프라인 사용:
 
 ```nu
-date now                    # 1: today
-| $in + 1day                # 2: tomorrow
-| format date '%F'          # 3: Format as YYYY-MM-DD
-| $'($in) Report'           # 4: Format the directory name
-| mkdir $in                 # 5: Create the directory
+date now                    # 1: 오늘
+| $in + 1day                # 2: 내일
+| format date '%F'          # 3: YYYY-MM-DD 형식으로 포맷
+| $'($in) Report'           # 4: 디렉터리 이름 포맷
+| mkdir $in                 # 5: 디렉터리 만들기
 ```
 
-While the second form may be overly verbose for this contrived example, you'll notice several advantages:
+이 가상 예제에서는 두 번째 형식이 너무 장황할 수 있지만 몇 가지 장점을 알 수 있습니다.
 
-- It can be composed step-by-step with a simple <kbd>↑</kbd> (up arrow) to repeat the previous command and add the next stage of the pipeline.
-- It's arguably more readable.
-- Each step can, if needed, be commented.
-- Each step in the pipeline can be [`inspect`ed for debugging](/commands/docs/inspect.html).
+- 이전 명령을 반복하고 파이프라인의 다음 단계를 추가하기 위해 간단한 <kbd>↑</kbd>(위쪽 화살표)를 사용하여 단계별로 구성할 수 있습니다.
+- 더 읽기 쉽다고 할 수 있습니다.
+- 필요한 경우 각 단계에 주석을 달 수 있습니다.
+- 파이프라인의 각 단계는 디버깅을 위해 [`inspect`할 수 있습니다](/commands/docs/inspect.html).
 
-Let's examine the contents of `$in` on each line of the above example:
+위 예제의 각 줄에서 `$in`의 내용을 살펴보겠습니다.
 
-- On line 2, `$in` refers to the results of line 1's `date now` (a datetime value).
-- On line 4, `$in` refers to tomorrow's formatted date from line 3 and is used in an interpolated string
-- On line 5, `$in` refers to the results of line 4's interpolated string, e.g. '2024-05-14 Report'
+- 2행에서 `$in`은 1행의 `date now`(날짜/시간 값) 결과를 나타냅니다.
+- 4행에서 `$in`은 3행의 내일 포맷된 날짜를 나타내며 보간된 문자열에서 사용됩니다.
+- 5행에서 `$in`은 4행의 보간된 문자열의 결과(예: '2024-05-14 Report')를 나타냅니다.
 
-### Pipeline Input in Filter Closures
+### 필터 클로저의 파이프라인 입력
 
-Certain [filter commands](/commands/categories/filters.html) may modify the pipeline input to their closure in order to provide more convenient access to the expected context. For example:
+특정 [필터 명령](/commands/categories/filters.html)은 예상 컨텍스트에 더 편리하게 액세스할 수 있도록 클로저에 대한 파이프라인 입력을 수정할 수 있습니다. 예시:
 
 ```nu
 1..10 | each {$in * 2}
 ```
 
-Rather than referring to the entire range of 10 digits, the `each` filter modifies `$in` to refer to the value of the _current iteration_.
+10자리 전체 범위를 참조하는 대신 `each` 필터는 `$in`을 _현재 반복_의 값을 참조하도록 수정합니다.
 
-In most filters, the pipeline input and its resulting `$in` will be the same as the closure parameter. For the `each` filter, the following example is equivalent to the one above:
+대부분의 필터에서 파이프라인 입력과 그 결과 `$in`은 클로저 매개변수와 동일합니다. `each` 필터의 경우 다음 예제는 위 예제와 동일합니다.
 
 ```nu
 1..10 | each {|value| $value * 2}
 ```
 
-However, some filters will assign an even more convenient value to their closures' input. The `update` filter is one example. The pipeline input to the `update` command's closure (as well as `$in`) refers to the _column_ being updated, while the closure parameter refers to the entire record. As a result, the following two examples are also equivalent:
+그러나 일부 필터는 클로저의 입력에 훨씬 더 편리한 값을 할당합니다. `update` 필터가 한 예입니다. `update` 명령의 클로저에 대한 파이프라인 입력(`$in` 포함)은 업데이트되는 _열_을 참조하는 반면 클로저 매개변수는 전체 레코드를 참조합니다. 결과적으로 다음 두 예제도 동일합니다.
 
 ```nu
 ls | update name {|file| $file.name | str upcase}
 ls | update name {str upcase}
 ```
 
-With most filters, the second version would refer to the entire `file` record (with `name`, `type`, `size`, and `modified` columns). However, with `update`, it refers specifically to the contents of the _column_ being updated, in this case `name`.
+대부분의 필터에서 두 번째 버전은 전체 `file` 레코드( `name`, `type`, `size` 및 `modified` 열 포함)를 참조합니다. 그러나 `update`를 사용하면 업데이트되는 _열_의 내용, 이 경우 `name`을 구체적으로 참조합니다.
 
-### Pipeline Input in Custom Command Definitions and Scripts
+### 사용자 지정 명령 정의 및 스크립트의 파이프라인 입력
 
-See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
+참조: [사용자 지정 명령 -> 파이프라인 입력](custom_commands.html#pipeline-input)
 
-### When Does `$in` Change (and when can it be reused)?
+### `$in`은 언제 변경됩니까(그리고 언제 재사용할 수 있습니까)?
 
-- **_Rule 1:_** When used in the first position of a pipeline in a closure or block, `$in` refers to the pipeline (or filter) input to the closure/block.
+- **_규칙 1:_** 클로저 또는 블록의 파이프라인의 첫 번째 위치에서 사용될 때 `$in`은 클로저/블록에 대한 파이프라인(또는 필터) 입력을 나타냅니다.
 
-  Example:
+  예시:
 
   ```nushell
   def echo_me [] {
@@ -134,9 +134,9 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   # => true
   ```
 
-- **_Rule 1.5:_** This is true throughout the current scope. Even on subsequent lines in a closure or block, `$in` is the same value when used in the first position of _any pipeline_ inside that scope.
+- **_규칙 1.5:_** 이것은 현재 범위 전체에서 사실입니다. 클로저 또는 블록의 후속 줄에서도 해당 범위 내의 _모든 파이프라인_의 첫 번째 위치에서 사용될 때 `$in`은 동일한 값입니다.
 
-  Example:
+  예시:
 
   ```nu
   [ a b c ] | each {
@@ -146,7 +146,7 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   }
   ```
 
-  All three of the `$in` values are the same on each iteration, so this outputs:
+  세 개의 `$in` 값은 모두 각 반복에서 동일하므로 다음과 같이 출력됩니다.
 
   ```nu
   a
@@ -162,37 +162,37 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   ╰───┴───╯
   ```
 
-- **_Rule 2:_** When used anywhere else in a pipeline (other than the first position), `$in` refers to the previous expression's result:
+- **_규칙 2:_** 파이프라인의 다른 곳(첫 번째 위치 제외)에서 사용될 때 `$in`은 이전 표현식의 결과를 나타냅니다.
 
-  Example:
+  예시:
 
   ```nushell
-  4               # Pipeline input
-  | $in * $in     # $in is 4 in this expression
-  | $in / 2       # $in is now 16 in this expression
-  | $in           # $in is now 8
+  4               # 파이프라인 입력
+  | $in * $in     # 이 표현식에서 $in은 4입니다.
+  | $in / 2       # 이제 이 표현식에서 $in은 16입니다.
+  | $in           # 이제 $in은 8입니다.
   # =>   8
   ```
 
-- **_Rule 2.5:_** Inside a closure or block, Rule 2 usage occurs inside a new scope (a sub-expression) where that "new" `$in` value is valid. This means that Rule 1 and Rule 2 usage can coexist in the same closure or block.
+- **_규칙 2.5:_** 클로저 또는 블록 내에서 규칙 2 사용은 해당 "새로운" `$in` 값이 유효한 새 범위(하위 표현식) 내에서 발생합니다. 즉, 규칙 1과 규칙 2 사용은 동일한 클로저 또는 블록 내에서 공존할 수 있습니다.
 
-  Example:
+  예시:
 
   ```nushell
   4 | do {
-    print $in            # closure-scope $in is 4
+    print $in            # 클로저 범위 $in은 4입니다.
 
-    let p = (            # explicit sub-expression, but one will be created regardless
-      $in * $in          # initial-pipeline position $in is still 4 here
-      | $in / 2          # $in is now 16
-    )                    # $p is the result, 8 - Sub-expression scope ends
+    let p = (            # 명시적 하위 표현식이지만 관계없이 하나가 생성됩니다.
+      $in * $in          # 초기 파이프라인 위치 $in은 여기서 여전히 4입니다.
+      | $in / 2          # 이제 $in은 16입니다.
+    )                    # $p는 결과, 8 - 하위 표현식 범위가 끝납니다.
 
-    print $in            # At the closure-scope, the "original" $in is still 4
+    print $in            # 클로저 범위에서 "원래" $in은 여전히 4입니다.
     print $p
   }
   ```
 
-  So the output from the 3 `print` statements is:
+  따라서 3개의 `print` 문의 출력은 다음과 같습니다.
 
   ```nu
   4
@@ -200,15 +200,15 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   8
   ```
 
-  Again, this would hold true even if the command above used the more compact, implicit sub-expression form:
+  다시 말하지만, 위 명령이 더 간결한 암시적 하위 표현식 형식을 사용하더라도 이것은 사실입니다.
 
-  Example:
+  예시:
 
   ```nushell
   4 | do {
-    print $in                       # closure-scope $in is 4
-    let p = $in * $in | $in / 2     # Implicit let sub-expression
-    print $in                       # At the closure-scope, $in is still 4
+    print $in                       # 클로저 범위 $in은 4입니다.
+    let p = $in * $in | $in / 2     # 암시적 let 하위 표현식
+    print $in                       # 클로저 범위에서 $in은 여전히 4입니다.
     print $p
   }
 
@@ -217,12 +217,12 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   8
   ```
 
-- **_Rule 3:_** When used with no input, `$in` is null.
+- **_규칙 3:_** 입력 없이 사용될 때 `$in`은 null입니다.
 
-  Example:
+  예시:
 
   ```nushell
-  # Input
+  # 입력
   1 | do { $in | describe }
   # =>   int
   "Hello, Nushell" | do { $in | describe }
@@ -230,32 +230,32 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   {||} | do { $in | describe }
   # =>   closure
 
-  # No input
+  # 입력 없음
   do { $in | describe }
   # =>   nothing
   ```
 
-* **_Rule 4:_** In a multi-statement line separated by semicolons, `$in` cannot be used to capture the results of the previous _statement_.
+* **_규칙 4:_** 세미콜론으로 구분된 여러 문장으로 구성된 줄에서 `$in`은 이전 _문_의 결과를 캡처하는 데 사용할 수 없습니다.
 
-  This is the same as having no-input:
+  이것은 입력이 없는 것과 같습니다.
 
   ```nushell
   ls / | get name; $in | describe
   # => nothing
   ```
 
-  Instead, simply continue the pipeline:
+  대신 파이프라인을 계속하십시오.
 
   ```nushell
   ls / | get name | $in | describe
   # => list<string>
   ```
 
-### Best practice for `$in` in Multiline Code
+### 여러 줄 코드에서 `$in`에 대한 모범 사례
 
-While `$in` can be reused as demonstrated above, assigning its value to another variable in the first line of your closure/block will often aid in readability and debugging.
+`$in`은 위에서 설명한 대로 재사용할 수 있지만, 클로저/블록의 첫 번째 줄에 해당 값을 다른 변수에 할당하면 가독성과 디버깅에 도움이 되는 경우가 많습니다.
 
-Example:
+예시:
 
 ```nu
 def "date info" [] {
@@ -271,43 +271,43 @@ def "date info" [] {
 # => ... was day 001 of the year
 ```
 
-### Collectability of `$in`
+### `$in`의 수집 가능성
 
-Currently, the use of `$in` on a stream in a pipeline results in a "collected" value, meaning the pipeline "waits" on the stream to complete before handling `$in` with the full results. However, this behavior is not guaranteed in future releases. To ensure that a stream is collected into a single variable, use the [`collect` command](/commands/docs/collect.html).
+현재 파이프라인의 스트림에서 `$in`을 사용하면 "수집된" 값이 생성됩니다. 즉, 파이프라인은 전체 결과로 `$in`을 처리하기 전에 스트림이 완료될 때까지 "대기"합니다. 그러나 이 동작은 향후 릴리스에서 보장되지 않습니다. 스트림이 단일 변수로 수집되도록 하려면 [`collect` 명령](/commands/docs/collect.html)을 사용하십시오.
 
-Likewise, avoid using `$in` when normal pipeline input will suffice, as internally `$in` forces a conversion from `PipelineData` to `Value` and _may_ result in decreased performance and/or increased memory usage.
+마찬가지로, 내부적으로 `$in`이 `PipelineData`에서 `Value`로의 변환을 강제하고 성능 저하 및/또는 메모리 사용량 증가를 _초래할 수_ 있으므로 일반 파이프라인 입력으로 충분할 때 `$in`을 사용하지 마십시오.
 
-## Working with External Commands
+## 외부 명령 작업
 
-Nu commands communicate with each other using the Nu data types (see [types of data](types_of_data.md)), but what about commands outside of Nu? Let's look at some examples of working with external commands:
+Nu 명령은 Nu 데이터 유형( [데이터 유형](types_of_data.md) 참조)을 사용하여 서로 통신하지만 Nu 외부의 명령은 어떻습니까? 외부 명령으로 작업하는 몇 가지 예를 살펴보겠습니다.
 
 `internal_command | external_command`
 
-Data will flow from the internal_command to the external_command. This data will get converted to a string, so that they can be sent to the `stdin` of the external_command.
+데이터는 internal_command에서 external_command로 흐릅니다. 이 데이터는 문자열로 변환되어 external_command의 `stdin`으로 전송됩니다.
 
 `external_command | internal_command`
 
-Data coming from an external command into Nu will come in as bytes that Nushell will try to automatically convert to UTF-8 text. If successful, a stream of text data will be sent to internal_command. If unsuccessful, a stream of binary data will be sent to internal command. Commands like [`lines`](/commands/docs/lines.md) help make it easier to bring in data from external commands, as it gives discrete lines of data to work with.
+외부 명령에서 Nu로 들어오는 데이터는 Nu가 자동으로 UTF-8 텍스트로 변환하려고 시도하는 바이트로 들어옵니다. 성공하면 텍스트 데이터 스트림이 internal_command로 전송됩니다. 실패하면 이진 데이터 스트림이 internal_command로 전송됩니다. [`lines`](/commands/docs/lines.md)와 같은 명령은 외부 명령에서 데이터를 가져오는 것을 더 쉽게 만들어 주며, 작업할 개별 데이터 줄을 제공합니다.
 
 `external_command_1 | external_command_2`
 
-Nu works with data piped between two external commands in the same way as other shells, like Bash would. The `stdout` of external_command_1 is connected to the `stdin` of external_command_2. This lets data flow naturally between the two commands.
+Nu는 Bash와 같은 다른 셸과 동일한 방식으로 두 외부 명령 간에 파이프된 데이터를 처리합니다. external_command_1의 `stdout`은 external_command_2의 `stdin`에 연결됩니다. 이렇게 하면 두 명령 간에 데이터가 자연스럽게 흐를 수 있습니다.
 
-### Command Input and Output Types
+### 명령 입력 및 출력 유형
 
-The Basics section above describes how commands can be combined in pipelines as input, filters, or output.
-How you can use commands depends on what they offer in terms of input/output handling.
+위의 기본 섹션에서는 명령을 파이프라인에서 입력, 필터 또는 출력으로 결합하는 방법을 설명합니다.
+명령을 사용하는 방법은 입력/출력 처리 측면에서 제공하는 것에 따라 다릅니다.
 
-You can check what a command supports with [`help <command name>`](/commands/docs/help.md), which shows the relevant *Input/output types*.
+[`help <command name>`](/commands/docs/help.md)으로 명령이 지원하는 것을 확인할 수 있으며, 관련 *입력/출력 유형*을 보여줍니다.
 
-For example, through `help first` we can see that the [`first` command](/commands/docs/first.md) supports multiple input and output types:
+예를 들어, `help first`를 통해 [`first` 명령](/commands/docs/first.md)이 여러 입력 및 출력 유형을 지원한다는 것을 알 수 있습니다.
 
 ```nu
 help first
 # => […]
-# => Input/output types:
+# => 입력/출력 유형:
 # =>   ╭───┬───────────┬────────╮
-# =>   │ # │   input   │ output │
+# =>   │ # │   입력   │ 출력 │
 # =>   ├───┼───────────┼────────┤
 # =>   │ 0 │ list<any> │ any    │
 # =>   │ 1 │ binary    │ binary │
@@ -321,46 +321,46 @@ help first
 # => 1
 ```
 
-As another example, the [`ls` command](/commands/docs/ls.md) supports output but not input:
+또 다른 예로, [`ls` 명령](/commands/docs/ls.md)은 출력을 지원하지만 입력을 지원하지 않습니다.
 
 ```nu
 help ls
 # => […]
-# => Input/output types:
+# => 입력/출력 유형:
 # =>   ╭───┬─────────┬────────╮
-# =>   │ # │  input  │ output │
+# =>   │ # │  입력  │ 출력 │
 # =>   ├───┼─────────┼────────┤
 # =>   │ 0 │ nothing │ table  │
 # =>   ╰───┴─────────┴────────╯
 ```
 
-This means, for example, that attempting to pipe into `ls` (`echo .. | ls`) leads to unintended results.
-The input stream is ignored, and `ls` defaults to listing the current directory.
+즉, 예를 들어 `ls`로 파이프하려고 시도하면(`echo .. | ls`) 의도하지 않은 결과가 발생합니다.
+입력 스트림은 무시되고 `ls`는 현재 디렉터리를 나열하는 기본값으로 설정됩니다.
 
-To integrate a command like `ls` into a pipeline, you have to explicitly reference the input and pass it as a parameter:
+`ls`와 같은 명령을 파이프라인에 통합하려면 입력을 명시적으로 참조하고 매개변수로 전달해야 합니다.
 
 ```nu
 echo .. | ls $in
 ```
 
-Note that this only works if `$in` matches the argument type. For example, `[dir1 dir2] | ls $in` will fail with the error `can't convert list<string> to string`.
+`$in`이 인수 유형과 일치하는 경우에만 작동합니다. 예를 들어 `[dir1 dir2] | ls $in`은 `list<string>을 문자열로 변환할 수 없음` 오류와 함께 실패합니다.
 
-Other commands without default behavior may fail in different ways, and with explicit errors.
+기본 동작이 없는 다른 명령은 다른 방식으로 그리고 명시적인 오류와 함께 실패할 수 있습니다.
 
-For example, `help sleep` tells us that [`sleep`](/commands/docs/sleep.md) supports no input and no output types:
+예를 들어 `help sleep`은 [`sleep`](/commands/docs/sleep.md)이 입력 및 출력 유형을 지원하지 않음을 알려줍니다.
 
 ```nu
 help sleep
 # => […]
-# => Input/output types:
+# => 입력/출력 유형:
 # =>   ╭───┬─────────┬─────────╮
-# =>   │ # │  input  │ output  │
+# =>   │ # │  입력  │ 출력  │
 # =>   ├───┼─────────┼─────────┤
 # =>   │ 0 │ nothing │ nothing │
 # =>   ╰───┴─────────┴─────────╯
 ```
 
-When we erroneously pipe into it, instead of unintended behavior like in the `ls` example above, we receive an error:
+잘못 파이프하면 위의 `ls` 예제와 같은 의도하지 않은 동작 대신 오류가 발생합니다.
 
 ```nu
 echo 1sec | sleep
@@ -373,23 +373,22 @@ echo 1sec | sleep
 # =>   help: Usage: sleep <duration> ...(rest) . Use `--help` for more information.
 ```
 
-While there is no steadfast rule, Nu generally tries to copy established conventions in command behavior,
-or do what 'feels right'.
-The `sleep` behavior of not supporting an input stream matches Bash `sleep` behavior for example.
+확고한 규칙은 없지만 Nu는 일반적으로 명령 동작에서 확립된 규칙을 복사하거나 '올바르게 느껴지는' 작업을 수행하려고 합니다.
+입력 스트림을 지원하지 않는 `sleep` 동작은 예를 들어 Bash `sleep` 동작과 일치합니다.
 
-Many commands do have piped input/output however, and if it's ever unclear, check their `help` documentation as described above.
+그러나 많은 명령에는 파이프된 입력/출력이 있으며, 확실하지 않은 경우 위에서 설명한 대로 `help` 설명서를 확인하십시오.
 
-## Rendering Display Results
+## 표시 결과 렌더링
 
-In interactive mode, when a pipeline ends, the [`display_output` hook configuration](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) defines how the result will be displayed.
-The default configuration uses the [`table` command](/commands/docs/table.md) to render structured data as a visual table.
+대화형 모드에서 파이프라인이 끝나면 [`display_output` 후크 구성](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed)이 결과가 표시되는 방식을 정의합니다.
+기본 구성은 [`table` 명령](/commands/docs/table.md)을 사용하여 구조화된 데이터를 시각적 테이블로 렌더링합니다.
 
-The following example shows how the `display_output` hook can render
+다음 예제는 `display_output` 후크가 렌더링할 수 있는 방법을 보여줍니다.
 
-- an expanded table with `table -e`
-- an unexpanded table with `table`
-- an empty closure `{||}` and empty string `''` lead to simple output
-- `null` can be assigned to clear any customization, reverting back to default behavior
+- `table -e`를 사용한 확장된 테이블
+- `table`을 사용한 확장되지 않은 테이블
+- 빈 클로저 `{||}` 및 빈 문자열 `''`은 간단한 출력으로 이어집니다.
+- `null`은 모든 사용자 지정을 지우고 기본 동작으로 되돌리는 데 할당될 수 있습니다.
 
 ```nu
 $env.config.hooks.display_output = { table -e }
@@ -432,7 +431,7 @@ $env.config.hooks.display_output = ''
 # => 5
 # => 6]
 
-# clear to default behavior
+# 기본 동작으로 지우기
 $env.config.hooks.display_output = null
 [1,2,3,[4,5,6]]
 # => ╭───┬────────────────╮
@@ -443,10 +442,10 @@ $env.config.hooks.display_output = null
 # => ╰───┴────────────────╯
 ```
 
-## Output Result to External Commands
+## 외부 명령에 대한 출력 결과
 
-Sometimes you want to output Nushell structured data to an external command for further processing. However, Nushell's default formatting options for structured data may not be what you want.
-For example, you want to find a file named "tutor" under "/usr/share/vim/runtime" and check its ownership
+때로는 추가 처리를 위해 누셸 구조화된 데이터를 외부 명령으로 출력하고 싶을 수 있습니다. 그러나 누셸의 구조화된 데이터에 대한 기본 서식 옵션이 원하는 것이 아닐 수 있습니다.
+예를 들어, "/usr/share/vim/runtime" 아래에서 "tutor"라는 이름의 파일을 찾고 해당 소유권을 확인하고 싶습니다.
 
 ```nu
 ls /usr/share/nvim/runtime/
@@ -465,14 +464,14 @@ ls /usr/share/nvim/runtime/
 # => ╰────┴───────────────────────────────────────┴──────┴─────────┴───────────────╯
 ```
 
-You decided to use `grep` and [pipe](https://www.nushell.sh/book/pipelines.html) the result to external `^ls`
+`grep`을 사용하고 [파이프](https://www.nushell.sh/book/pipelines.html) 결과를 외부 `^ls`로 보내기로 결정했습니다.
 
 ```nu
 ls /usr/share/nvim/runtime/ | get name | ^grep tutor | ^ls -la $in
 # => ls: cannot access ''$'\342\224\202'' 32 '$'\342\224\202'' /usr/share/nvim/runtime/tutor        '$'\342\224\202\n': No such file or directory
 ```
 
-What's wrong? Nushell renders lists and tables (by adding a border with characters like `╭`,`─`,`┬`,`╮`) before piping them as text to external commands. If that's not the behavior you want, you must explicitly convert the data to a string before piping it to an external. For example, you can do so with [`to text`](/commands/docs/to_text.md):
+무엇이 잘못되었을까요? 누셸은 목록과 테이블을 렌더링( `╭`,`─`,`┬`,`╮`와 같은 문자로 테두리 추가)한 다음 외부 명령에 텍스트로 파이프합니다. 이것이 원하는 동작이 아닌 경우 외부 명령에 파이프하기 전에 데이터를 명시적으로 문자열로 변환해야 합니다. 예를 들어 [`to text`](/commands/docs/to_text.md)를 사용하여 그렇게 할 수 있습니다.
 
 ```nu
 ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^ls -la $in
@@ -483,39 +482,38 @@ ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^l
 # => -rw-r--r--@  1 pengs  admin  1191 14 Nov 13:42 tutor.tutor.json
 ```
 
-(Actually, for this simple usage you can just use [`find`](/commands/docs/find.md))
+(실제로 이 간단한 사용법에는 [`find`](/commands/docs/find.md)를 사용할 수 있습니다.)
 
 ```nu
 ls /usr/share/nvim/runtime/ | get name | find tutor | ansi strip | ^ls -al ...$in
 ```
 
-## Command Output in Nushell
+## 누셸의 명령 출력
 
-Unlike external commands, Nushell commands are akin to functions. Most Nushell commands do not print anything to `stdout` and instead just return data.
+외부 명령과 달리 누셸 명령은 함수와 유사합니다. 대부분의 누셸 명령은 `stdout`에 아무것도 인쇄하지 않고 데이터만 반환합니다.
 
 ```nu
 do { ls; ls; ls; "What?!" }
 ```
 
-This means that the above code will not display the files under the current directory three times.
-In fact, running this in the shell will only display `"What?!"` because that is the value returned by the `do` command in this example. However, using the system `^ls` command instead of `ls` would indeed print the directory thrice because `^ls` does print its result once it runs.
+즉, 위 코드는 현재 디렉터리 아래의 파일을 세 번 표시하지 않습니다.
+실제로 셸에서 이 코드를 실행하면 이 예제에서 `do` 명령이 반환하는 값이므로 `"What?!"`만 표시됩니다. 그러나 `ls` 대신 시스템 `^ls` 명령을 사용하면 `^ls`가 실행되면 결과를 한 번 인쇄하기 때문에 실제로 디렉터리를 세 번 인쇄합니다.
 
-Knowing when data is displayed is important when using configuration variables that affect the display output of commands such as `table`.
+`table`과 같은 명령의 표시 출력에 영향을 미치는 구성 변수를 사용할 때 데이터가 언제 표시되는지 아는 것이 중요합니다.
 
 ```nu
 do { $env.config.table.mode = "none"; ls }
 ```
 
-For instance, the above example sets the `$env.config.table.mode` configuration variable to `none`, which causes the `table` command to render data without additional borders. However, as it was shown earlier, the command is effectively equivalent to
+예를 들어 위 예제는 `$env.config.table.mode` 구성 변수를 `none`으로 설정하여 `table` 명령이 추가 테두리 없이 데이터를 렌더링하도록 합니다. 그러나 이전에 보여주었듯이 이 명령은 사실상 다음과 동일합니다.
 
 ```nu
 do { $env.config.table.mode = "none"; ls } | table
 ```
 
-Because Nushell `$env` variables are [scoped](https://www.nushell.sh/book/environment.html#scoping), this means that the `table` command in the example is not affected by the
-environment modification inside the `do` block and the data will not be shown with the applied configuration.
+누셸 `$env` 변수는 [범위가 지정되므로](https://www.nushell.sh/book/environment.html#scoping) 예제의 `table` 명령은 `do` 블록 내부의 환경 수정에 영향을 받지 않으며 데이터는 적용된 구성으로 표시되지 않습니다.
 
-When displaying data early is desired, it is possible to explicitly apply `| table` inside the scope, or use the `print` command.
+데이터를 일찍 표시해야 하는 경우 범위 내에서 `| table`을 명시적으로 적용하거나 `print` 명령을 사용할 수 있습니다.
 
 ```nu
 do { $env.config.table.mode = "none"; ls | table }

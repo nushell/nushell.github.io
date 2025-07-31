@@ -1,14 +1,14 @@
-# Externs
+# 외부 명령
 
-Using external commands (a.k.a. binaries or applications) is a fundamental feature of any shell. Nushell allows custom commands to take advantage of many of its features, such as:
+외부 명령(바이너리 또는 응용 프로그램이라고도 함)을 사용하는 것은 모든 셸의 기본 기능입니다. 누셸은 사용자 지정 명령이 다음과 같은 많은 기능을 활용할 수 있도록 합니다.
 
-- Parse-time type checking
-- Completions
-- Syntax highlighting
+- 구문 분석 시 형식 검사
+- 완성
+- 구문 강조
 
-Support for these features is provided using the `extern` keyword, which allows a full signature to be defined for external commands.
+이러한 기능에 대한 지원은 `extern` 키워드를 사용하여 제공되며, 이를 통해 외부 명령에 대한 전체 서명을 정의할 수 있습니다.
 
-Here's a short example for the `ssh` command:
+다음은 `ssh` 명령에 대한 간단한 예입니다.
 
 ```nu
 module "ssh extern" {
@@ -23,33 +23,33 @@ module "ssh extern" {
   }
 
   export extern ssh [
-    destination?: string@complete_none  # Destination Host
-    -p: int                             # Destination Port
-    -i: string@complete_ssh_identity    # Identity File
+    destination?: string@complete_none  # 대상 호스트
+    -p: int                             # 대상 포트
+    -i: string@complete_ssh_identity    # ID 파일
   ]
 }
 use "ssh extern" ssh
 ```
 
-Notice that the syntax here is similar to that of the `def` keyword when defining a custom command. You can describe flags, positional parameters, types, completers, and more.
+여기서 구문은 사용자 지정 명령을 정의할 때 `def` 키워드의 구문과 유사합니다. 플래그, 위치 매개변수, 형식, 완성기 등을 설명할 수 있습니다.
 
-This implementation:
+이 구현은 다음을 수행합니다.
 
-- Will provide `-p` and `-i` (with descriptions) as possible completions for `ssh -`.
-- Will perform parse-time type checking. Attempting to use a non-`int` for the port number will result in an error (and error-condition syntax highlighting).
-- Will offer parse-time syntax highlighting based on the shapes of the arguments.
-- Will offer any private key files in `~/.ssh` as completion values for the `-i` (identity) option
-- Will not offer completions for the destination host. Without a completer that returns an empty list, Nushell would attempt to use the default "File" completer.
+- `ssh -`에 대한 가능한 완성으로 `-p` 및 `-i`(설명 포함)를 제공합니다.
+- 구문 분석 시 형식 검사를 수행합니다. 포트 번호에 대해 `int`가 아닌 값을 사용하려고 하면 오류가 발생합니다(오류 조건 구문 강조 표시).
+- 인수 모양을 기반으로 구문 분석 시 구문 강조를 제공합니다.
+- `-i`(ID) 옵션에 대한 완성 값으로 `~/.ssh`의 모든 개인 키 파일을 제공합니다.
+- 대상 호스트에 대한 완성을 제공하지 않습니다. 빈 목록을 반환하는 완성기가 없으면 누셸은 기본 "파일" 완성기를 사용하려고 시도합니다.
 
-  See the [Nu_scripts Repository](https://github.com/nushell/nu_scripts/blob/main/custom-completions/ssh/ssh-completions.nu) for an implementation that retrieves hosts from the SSH config files.
+  SSH 구성 파일에서 호스트를 검색하는 구현은 [Nu_scripts 저장소](https://github.com/nushell/nu_scripts/blob/main/custom-completions/ssh/ssh-completions.nu)를 참조하십시오.
 
-::: tip Note
-A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
+::: tip 참고
+인수 문서화 목적으로 동일한 줄에 계속되는 누셸 주석은 ` #` 파운드 기호 앞에 공백이 필요합니다.
 :::
 
-## Format Specifiers
+## 형식 지정자
 
-Positional parameters can be made optional with a `?` (as seen above). The remaining (`rest`) parameters can be matched with `...` before the parameter name. For example:
+위치 매개변수는 `?`를 사용하여 선택적으로 만들 수 있습니다(위에서 본 것과 같이). 나머지(`rest`) 매개변수는 매개변수 이름 앞에 `...`를 사용하여 일치시킬 수 있습니다. 예시:
 
 ```nu
 export extern "git add" [
@@ -58,12 +58,12 @@ export extern "git add" [
 ]
 ```
 
-## Limitations
+## 제한 사항
 
-There are a few limitations to the current `extern` syntax. In Nushell, flags and positional arguments are very flexible—flags can precede positional arguments, flags can be mixed into positional arguments, and flags can follow positional arguments. Many external commands are not this flexible. There is not yet a way to require a particular ordering of flags and positional arguments to the style required by the external.
+현재 `extern` 구문에는 몇 가지 제한 사항이 있습니다. 누셸에서 플래그와 위치 인수는 매우 유연합니다. 플래그는 위치 인수 앞에 올 수 있고, 플래그는 위치 인수에 혼합될 수 있으며, 플래그는 위치 인수 뒤에 올 수 있습니다. 많은 외부 명령은 이렇게 유연하지 않습니다. 외부에서 요구하는 스타일에 맞게 플래그와 위치 인수의 특정 순서를 요구하는 방법은 아직 없습니다.
 
-The second limitation is that some externals require flags to be passed using `=` to separate the flag and the value. In Nushell, the `=` is a convenient optional syntax and there's currently no way to require its use.
+두 번째 제한 사항은 일부 외부 명령은 플래그와 값을 구분하기 위해 `=`를 사용하여 플래그를 전달해야 한다는 것입니다. 누셸에서 `=`는 편리한 선택적 구문이며 현재 사용을 요구하는 방법은 없습니다.
 
-In addition, externals called via the caret sigil (e.g., `^ssh`) are not recognized by `extern`.
+또한 캐럿 기호(예: `^ssh`)를 통해 호출된 외부 명령은 `extern`에서 인식되지 않습니다.
 
-Finally, some external commands support `-long` arguments using a single leading hyphen. Nushell `extern` syntax can not yet represent these arguments.
+마지막으로 일부 외부 명령은 단일 선행 하이픈을 사용하여 `-long` 인수를 지원합니다. 누셸 `extern` 구문은 아직 이러한 인수를 나타낼 수 없습니다.

@@ -1,37 +1,36 @@
 ---
 next:
-  text: Coming to Nu
+  text: 누셸 시작하기
   link: /book/coming_to_nu.md
 ---
-# Background Jobs
+# 백그라운드 작업
 
-Nushell currently has experimental support for thread-based background jobs.
+누셸은 현재 스레드 기반 백그라운드 작업에 대한 실험적 지원을 제공합니다.
 
-## Spawning Jobs
+## 작업 생성
 
-Jobs can be can be spawned using [`job spawn`](/commands/docs/job_spawn.md), which receives a closure and starts its execution in a background thread, returning
-an unique integer id for the spawned job:
+작업은 클로저를 수신하고 백그라운드 스레드에서 실행을 시작하는 [`job spawn`](/commands/docs/job_spawn.md)을 사용하여 생성할 수 있으며, 생성된 작업에 대한 고유한 정수 ID를 반환합니다.
 
 ```nu
-'i am' | save status.txt
+'나는' | save status.txt
 
-job spawn { sleep 10sec; ' inevitable' | save --append status.txt }
+job spawn { sleep 10sec; ' 필연적이다' | save --append status.txt }
 # => 1
 
 open status.txt
-# => i am
+# => 나는
 
-# wait for 10 seconds
+# 10초 기다림
 sleep 10sec
 
 open status.txt
-# => i am inevitable
+# => 나는 필연적이다
 ```
 
-## Listing and Killing jobs
+## 작업 나열 및 종료
 
-Active jobs can be queried with the [`job list`](/commands/docs/job_list.md) command, which returns a table with the information of the jobs which are currently executing.
-Jobs can also be killed/interrupted by using the [`job kill`](/commands/docs/job_kill.md) command, which interrupts the job's thread and kills all of the job's child processes:
+활성 작업은 현재 실행 중인 작업의 정보가 포함된 테이블을 반환하는 [`job list`](/commands/docs/job_list.md) 명령으로 쿼리할 수 있습니다.
+작업은 작업의 스레드를 중단하고 작업의 모든 자식 프로세스를 종료하는 [`job kill`](/commands/docs/job_kill.md) 명령을 사용하여 종료/중단할 수도 있습니다.
 
 ```nu
 let id = job spawn { sleep 1day }
@@ -51,13 +50,13 @@ job list
 # => ╰────────────╯
 ```
 
-## Job suspension
+## 작업 일시 중단
 
-On Unix targets, such as Linux and macOS, Nushell also supports suspending external commands using <kbd>Ctrl</kbd>+<kbd>Z</kbd>. When a running process is suspended, it is turned into a "frozen" background job:
+Linux 및 macOS와 같은 Unix 대상에서 누셸은 <kbd>Ctrl</kbd>+<kbd>Z</kbd>를 사용하여 외부 명령을 일시 중단하는 것도 지원합니다. 실행 중인 프로세스가 일시 중단되면 "정지된" 백그라운드 작업으로 전환됩니다.
 
 ```nu
-long_running_process # this starts running, then Ctrl+Z is pressed
-# => Job 1 is frozen
+long_running_process # 이것은 실행을 시작한 다음 Ctrl+Z를 누릅니다.
+# => 작업 1이 정지되었습니다.
 
 job list
 # => ┏━━━┳━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┓
@@ -67,15 +66,15 @@ job list
 # => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
 ```
 
-A frozen job can be brought back into foreground with the [`job unfreeze`](/commands/docs/job_unfreeze.md) command:
+정지된 작업은 [`job unfreeze`](/commands/docs/job_unfreeze.md) 명령으로 포그라운드로 다시 가져올 수 있습니다.
 
 ```nu
 job unfreeze
-# process is brought back where it stopped
+# 프로세스가 중지된 위치로 다시 가져옵니다.
 ```
 
-::: tip Tip
-For those familiar with other Unix shells, you can create an alias to emulate the behavior of the `fg` command:
+::: tip 팁
+다른 Unix 셸에 익숙한 사람들을 위해 `fg` 명령의 동작을 에뮬레이트하는 별칭을 만들 수 있습니다.
 
 ```nu
 alias fg = job unfreeze
@@ -83,30 +82,25 @@ alias fg = job unfreeze
 
 :::
 
-By default, `job unfreeze` will unfreeze the most recently frozen job. However, you can also specify the id of a specific job to unfreeze:
+기본적으로 `job unfreeze`는 가장 최근에 정지된 작업을 정지 해제합니다. 그러나 정지 해제할 특정 작업의 ID를 지정할 수도 있습니다.
 
 ```nu
 vim
-# => Job 1 is frozen
+# => 작업 1이 정지되었습니다.
 
 long_running_process
-# => Job 2 is frozen
+# => 작업 2가 정지되었습니다.
 
 job unfreeze 1
-# we're back in vim
+# vim으로 돌아왔습니다.
 ```
 
-## Exit Behavior
+## 종료 동작
 
-Unlike many other shells, Nushell jobs are **not** separate processes,
-and are instead implemented as background threads.
+다른 많은 셸과 달리 누셸 작업은 별도의 프로세스가 아니며 대신 백그라운드 스레드로 구현됩니다.
 
-An important side effect of this, is that all background jobs will terminate once the shell
-process exits.
-For this reason, Nushell has no UNIX-like `disown` command to prevent jobs from terminating once the shell exits.
-To account for that, there are plans for a `job dispatch` implementation in the future,
-for spawning independent background processes (see [#15201](https://github.com/nushell/nushell/issues/15193?issue=nushell%7Cnushell%7C15201) for progress).
+이것의 중요한 부작용은 셸 프로세스가 종료되면 모든 백그라운드 작업이 종료된다는 것입니다.
+이러한 이유로 누셸에는 셸이 종료될 때 작업이 종료되는 것을 방지하는 UNIX와 유사한 `disown` 명령이 없습니다.
+이를 고려하여 향후 독립적인 백그라운드 프로세스를 생성하기 위한 `job dispatch` 구현 계획이 있습니다(진행 상황은 [#15201](https://github.com/nushell/nushell/issues/15193?issue=nushell%7Cnushell%7C15201) 참조).
 
-Additionally, if the user is running an interactive Nushell session and runs
-[`exit`](/commands/docs/exit.md) while there are background jobs running,
-the shell will warn about them before prompting the user to confirm `exit`.
+또한 사용자가 대화형 누셸 세션을 실행하고 백그라운드 작업이 실행되는 동안 [`exit`](/commands/docs/exit.md)를 실행하면 셸은 사용자에게 `exit`를 확인하라는 메시지를 표시하기 전에 이에 대해 경고합니다.

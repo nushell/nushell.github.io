@@ -1,54 +1,34 @@
-# Dataframes
+# 데이터프레임
 
-::: warning Important!
-This feature requires the Polars plugin.  See the
-[Plugins Chapter](plugins.md) to learn how to install it.
+::: warning 중요!
+이 기능은 Polars 플러그인이 필요합니다. 설치 방법은 [플러그인 장](plugins.md)을 참조하십시오.
 
-To test that this plugin is properly installed, run `help polars`.
+이 플러그인이 제대로 설치되었는지 테스트하려면 `help polars`를 실행하십시오.
 :::
 
-As we have seen so far, Nushell makes working with data its main priority.
-`Lists` and `Tables` are there to help you cycle through values in order to
-perform multiple operations or find data in a breeze. However, there are
-certain operations where a row-based data layout is not the most efficient way
-to process data, especially when working with extremely large files. Operations
-like group-by or join using large datasets can be costly memory-wise, and may
-lead to large computation times if they are not done using the appropriate
-data format.
+지금까지 보았듯이 누셸은 데이터 작업을 최우선으로 합니다.
+`목록`과 `테이블`은 여러 작업을 수행하거나 데이터를 쉽게 찾기 위해 값을 순환하는 데 도움이 됩니다. 그러나 행 기반 데이터 레이아웃이 데이터를 처리하는 가장 효율적인 방법이 아닌 특정 작업이 있으며, 특히 매우 큰 파일로 작업할 때 그렇습니다. 큰 데이터 세트를 사용하는 group-by 또는 join과 같은 작업은 메모리 측면에서 비용이 많이 들 수 있으며 적절한 데이터 형식을 사용하지 않으면 계산 시간이 길어질 수 있습니다.
 
-For this reason, the `DataFrame` structure was introduced to Nushell. A
-`DataFrame` stores its data in a columnar format using as its base the [Apache
-Arrow](https://arrow.apache.org/) specification, and uses
-[Polars](https://github.com/pola-rs/polars) as the motor for performing
-extremely [fast columnar operations](https://h2oai.github.io/db-benchmark/).
+이러한 이유로 `DataFrame` 구조가 누셸에 도입되었습니다. `DataFrame`은 [Apache Arrow](https://arrow.apache.org/) 사양을 기반으로 데이터를 열 형식으로 저장하고 [Polars](https://github.com/pola-rs/polars)를 모터로 사용하여 매우 [빠른 열 작업](https://h2oai.github.io/db-benchmark/)을 수행합니다.
 
-You may be wondering now how fast this combo could be, and how could it make
-working with data easier and more reliable. For this reason, we'll start this
-chapter by presenting benchmarks on common operations that are done when
-processing data.
+이 콤보가 얼마나 빠를 수 있는지, 그리고 데이터 작업을 더 쉽고 안정적으로 만들 수 있는지 궁금할 것입니다. 이러한 이유로 이 장에서는 데이터 처리 시 수행되는 일반적인 작업에 대한 벤치마크를 제시하는 것으로 시작하겠습니다.
 
 [[toc]]
 
-## Benchmark Comparisons
+## 벤치마크 비교
 
-For this little benchmark exercise we will be comparing native Nushell
-commands, dataframe Nushell commands and [Python
-Pandas](https://pandas.pydata.org/) commands. For the time being don't pay too
-much attention to the [`Dataframe` commands](/commands/categories/dataframe.md). They will be explained in later
-sections of this page.
+이 작은 벤치마크 연습에서는 네이티브 누셸 명령, 데이터프레임 누셸 명령 및 [Python Pandas](https://pandas.pydata.org/) 명령을 비교합니다. 당분간 [`Dataframe` 명령](/commands/categories/dataframe.md)에 너무 많은 주의를 기울이지 마십시오. 이 페이지의 뒷부분에서 설명합니다.
 
-::: tip System Details
-The benchmarks presented in this section were run using a Macbook with a processor M1 pro and 32gb of ram. All examples were run on Nushell version 0.97 using `nu_plugin_polars 0.97`.
+::: tip 시스템 세부 정보
+이 섹션에 제시된 벤치마크는 M1 pro 프로세서와 32GB RAM이 장착된 Macbook을 사용하여 실행되었습니다. 모든 예제는 `nu_plugin_polars 0.97`을 사용하여 누셸 버전 0.97에서 실행되었습니다.
 :::
 
-### File Information
+### 파일 정보
 
-The file that we will be using for the benchmarks is the
-[New Zealand business demography](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) dataset.
-Feel free to download it if you want to follow these tests.
+벤치마크에 사용할 파일은 [뉴질랜드 비즈니스 인구 통계](https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2020/Download-data/Geographic-units-by-industry-and-statistical-area-2000-2020-descending-order-CSV.zip) 데이터 세트입니다.
+이 테스트를 따라하고 싶다면 자유롭게 다운로드하십시오.
 
-The dataset has 5 columns and 5,429,252 rows. We can check that by using the
-`polars store-ls` command:
+데이터 세트에는 5개의 열과 5,429,252개의 행이 있습니다. `polars store-ls` 명령을 사용하여 확인할 수 있습니다.
 
 ```nu
 let df_0 = polars open --eager Data7602DescendingYearOrder.csv
@@ -61,11 +41,11 @@ polars store-ls | select key type columns rows estimated_size
 ```
 
 ::: tip
-As of nushell 0.97, `polars open` will open as a lazy dataframe instead of a eager dataframe.
-To open as an eager dataframe, use the `--eager` flag.
+누셸 0.97부터 `polars open`은 열성 데이터프레임 대신 지연 데이터프레임으로 열립니다.
+열성 데이터프레임으로 열려면 `--eager` 플래그를 사용하십시오.
 :::
 
-We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
+[`first`](/commands/docs/first.md)를 사용하여 파일의 첫 번째 줄을 볼 수 있습니다.
 
 ```nu
 $df_0 | polars first
@@ -76,7 +56,7 @@ $df_0 | polars first
 # => ╰───┴──────────┴─────────┴──────┴───────────┴──────────╯
 ```
 
-...and finally, we can get an idea of the inferred data types:
+...그리고 마지막으로 추론된 데이터 형식을 알 수 있습니다.
 
 ```nu
 $df_0 | polars schema
@@ -89,17 +69,17 @@ $df_0 | polars schema
 # => ╰───────────┴─────╯
 ```
 
-### Group-by Comparison
+### Group-by 비교
 
-To output more statistically correct timings, let's load and use the `std bench` command.
+더 통계적으로 정확한 타이밍을 출력하려면 `std bench` 명령을 로드하고 사용하겠습니다.
 
 ```nu
 use std/bench
 ```
 
-We are going to group the data by year, and sum the column `geo_count`.
+데이터를 연도별로 그룹화하고 `geo_count` 열을 합산할 것입니다.
 
-First, let's measure the performance of a Nushell native commands pipeline.
+먼저 네이티브 누셸 명령 파이프라인의 성능을 측정해 보겠습니다.
 
 ```nu
 bench -n 10 --pretty {
@@ -113,9 +93,9 @@ bench -n 10 --pretty {
 # => 3sec 268ms +/- 50ms
 ```
 
-So, 3.3 seconds to perform this aggregation.
+따라서 이 집계를 수행하는 데 3.3초가 걸립니다.
 
-Let's try the same operation in pandas:
+pandas에서 동일한 작업을 시도해 보겠습니다.
 
 ```nu
 ('import pandas as pd
@@ -126,7 +106,7 @@ print(res)'
 | save load.py -f)
 ```
 
-And the result from the benchmark is:
+그리고 벤치마크 결과는 다음과 같습니다.
 
 ```nu
 bench -n 10 --pretty {
@@ -135,12 +115,10 @@ bench -n 10 --pretty {
 # => 1sec 322ms +/- 6ms
 ```
 
-Not bad at all. Pandas managed to get it 2.6 times faster than Nushell.
-And with bigger files, the superiority of Pandas should increase here.
+나쁘지 않습니다. Pandas는 누셸보다 2.6배 빠르게 처리했습니다.
+그리고 더 큰 파일의 경우 Pandas의 우위가 여기서 증가해야 합니다.
 
-To finish the comparison, let's try Nushell dataframes. We are going to put
-all the operations in one `nu` file, to make sure we are doing the correct
-comparison:
+비교를 마치기 위해 누셸 데이터프레임을 시도해 보겠습니다. 올바른 비교를 하고 있는지 확인하기 위해 모든 작업을 하나의 `nu` 파일에 넣을 것입니다.
 
 ```nu
 ( 'polars open Data7602DescendingYearOrder.csv
@@ -150,8 +128,7 @@ comparison:
 | save load.nu -f )
 ```
 
-and the benchmark with dataframes (together with loading a new nushell and `polars`
-instance for each test in order of honest comparison) is:
+그리고 데이터프레임과의 벤치마크(정직한 비교를 위해 각 테스트에 대해 새로운 누셸 및 `polars` 인스턴스를 로드하는 것과 함께)는 다음과 같습니다.
 
 ```nu
 bench -n 10 --pretty {
@@ -160,28 +137,22 @@ bench -n 10 --pretty {
 # => 135ms +/- 4ms
 ```
 
-The `polars` dataframes plugin managed to finish operation 10 times
-faster than `pandas` with python. Isn't that great?
+`polars` 데이터프레임 플러그인은 python을 사용하는 `pandas`보다 10배 빠르게 작업을 완료했습니다. 대단하지 않습니까?
 
-As you can see, the Nushell's `polars` plugin is performant like `polars` itself.
-Coupled with Nushell commands and pipelines, it is capable of conducting sophisticated
-analysis without leaving the terminal.
+보시다시피 누셸의 `polars` 플러그인은 `polars` 자체처럼 성능이 뛰어납니다.
+누셸 명령 및 파이프라인과 결합하면 터미널을 떠나지 않고도 정교한 분석을 수행할 수 있습니다.
 
-Let's clean up the cache from the dataframes that we used during benchmarking.
-To do that, let's stop the `polars`.
-When we execute our next commands, we will start a new instance of plugin.
+벤치마킹 중에 사용한 데이터프레임에서 캐시를 정리하겠습니다.
+이를 위해 `polars`를 중지하겠습니다.
+다음 명령을 실행하면 플러그인의 새 인스턴스를 시작합니다.
 
 ```nu
 plugin stop polars
 ```
 
-## Working with Dataframes
+## 데이터프레임 작업
 
-After seeing a glimpse of the things that can be done with [`Dataframe` commands](/commands/categories/dataframe.md),
-now it is time to start testing them. To begin let's create a sample
-CSV file that will become our sample dataframe that we will be using along with
-the examples. In your favorite file editor paste the next lines to create out
-sample csv file.
+[`Dataframe` 명령](/commands/categories/dataframe.md)으로 할 수 있는 일을 살짝 본 후 이제 테스트를 시작할 시간입니다. 시작하려면 예제와 함께 사용할 샘플 데이터프레임이 될 샘플 CSV 파일을 만들어 보겠습니다. 좋아하는 파일 편집기에서 다음 줄을 붙여넣어 샘플 CSV 파일을 만듭니다.
 
 ```nu
 ("int_1,int_2,float_1,float_2,first,second,third,word
@@ -198,24 +169,21 @@ sample csv file.
 | save --raw --force test_small.csv)
 ```
 
-Save the file and name it however you want to, for the sake of these examples
-the file will be called `test_small.csv`.
+파일을 저장하고 원하는 대로 이름을 지정하십시오. 이 예제에서는 파일을 `test_small.csv`라고 합니다.
 
-Now, to read that file as a dataframe use the `polars open` command like
-this:
+이제 해당 파일을 데이터프레임으로 읽으려면 다음과 같이 `polars open` 명령을 사용하십시오.
 
 ```nu
 let df_1 = polars open --eager test_small.csv
 ```
 
-This should create the value `$df_1` in memory which holds the data we just
-created.
+이렇게 하면 방금 만든 데이터를 보유하는 `$df_1` 값이 메모리에 생성됩니다.
 
 ::: tip
-The `polars open` command can read files in formats: **csv**, **tsv**, **parquet**, **json(l)**, **arrow**, and **avro**.
+`polars open` 명령은 **csv**, **tsv**, **parquet**, **json(l)**, **arrow** 및 **avro** 형식의 파일을 읽을 수 있습니다.
 :::
 
-To see all the dataframes that are stored in memory you can use
+메모리에 저장된 모든 데이터프레임을 보려면 다음을 사용할 수 있습니다.
 
 ```nu
 polars store-ls | select key type columns rows estimated_size
@@ -226,11 +194,9 @@ polars store-ls | select key type columns rows estimated_size
 # => ╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
-As you can see, the command shows the created dataframes together with basic
-information about them.
+보시다시피 명령은 생성된 데이터프레임과 함께 기본 정보를 보여줍니다.
 
-And if you want to see a preview of the loaded dataframe you can send the
-dataframe variable to the stream
+그리고 로드된 데이터프레임의 미리보기를 보려면 데이터프레임 변수를 스트림으로 보낼 수 있습니다.
 
 ```nu
 $df_1
@@ -250,18 +216,15 @@ $df_1
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
-With the dataframe in memory we can start doing column operations with the
-`DataFrame`
+메모리에 데이터프레임이 있으면 `DataFrame`으로 열 작업을 시작할 수 있습니다.
 
 ::: tip
-If you want to see all the dataframe commands that are available you
-can use `scope commands | where category =~ dataframe`
+사용 가능한 모든 데이터프레임 명령을 보려면 `scope commands | where category =~ dataframe`을 사용할 수 있습니다.
 :::
 
-## Basic Aggregations
+## 기본 집계
 
-Let's start with basic aggregations on the dataframe. Let's sum all the columns
-that exist in `df` by using the `aggregate` command
+데이터프레임에 대한 기본 집계부터 시작하겠습니다. `aggregate` 명령을 사용하여 `df`에 있는 모든 열을 합산해 보겠습니다.
 
 ```nu
 $df_1 | polars sum | polars collect
@@ -272,9 +235,7 @@ $df_1 | polars sum | polars collect
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴──────╯
 ```
 
-As you can see, the aggregate function computes the sum for those columns where
-a sum makes sense. If you want to filter out the text column, you can select
-the columns you want by using the [`polars select`](/commands/docs/polars_select.md) command
+보시다시피 집계 함수는 합계가 의미 있는 열에 대해 합계를 계산합니다. 텍스트 열을 필터링하려면 [`polars select`](/commands/docs/polars_select.md) 명령을 사용하여 원하는 열을 선택할 수 있습니다.
 
 ```nu
 $df_1 | polars sum | polars select int_1 int_2 float_1 float_2 | polars collect
@@ -285,19 +246,17 @@ $df_1 | polars sum | polars select int_1 int_2 float_1 float_2 | polars collect
 # => ╰───┴───────┴───────┴─────────┴─────────╯
 ```
 
-You can even store the result from this aggregation as you would store any
-other Nushell variable
+다른 누셸 변수를 저장하는 것처럼 이 집계 결과를 저장할 수도 있습니다.
 
 ```nu
 let res = $df_1 | polars sum | polars select int_1 int_2 float_1 float_2
 ```
 
 ::: tip
-Type `let res = !!` and press enter. This will auto complete the previously
-executed command. Note the space between `=` and `!!`.
+`let res = !!`를 입력하고 Enter 키를 누릅니다. 그러면 이전에 실행한 명령이 자동 완성됩니다. `=`와 `!!` 사이의 공백에 유의하십시오.
 :::
 
-And now we have two dataframes stored in memory
+이제 메모리에 두 개의 데이터프레임이 저장되었습니다.
 
 ```nu
 polars store-ls | select key type columns rows estimated_size
@@ -309,18 +268,13 @@ polars store-ls | select key type columns rows estimated_size
 ╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
-Pretty neat, isn't it?
+정말 멋지지 않습니까?
 
-You can perform several aggregations on the dataframe in order to extract basic
-information from the dataframe and do basic data analysis on your brand new
-dataframe.
+데이터프레임에 대한 여러 집계를 수행하여 데이터프레임에서 기본 정보를 추출하고 새로운 데이터프레임에 대한 기본 데이터 분석을 수행할 수 있습니다.
 
-## Joining a DataFrame
+## 데이터프레임 조인
 
-It is also possible to join two dataframes using a column as reference. We are
-going to join our mini dataframe with another mini dataframe. Copy these lines
-in another file and create the corresponding dataframe (for these examples we
-are going to call it `test_small_a.csv`)
+열을 참조로 사용하여 두 데이터프레임을 조인할 수도 있습니다. 미니 데이터프레임을 다른 미니 데이터프레임과 조인할 것입니다. 이 줄을 다른 파일에 복사하고 해당 데이터프레임을 만듭니다(이 예제에서는 `test_small_a.csv`라고 함).
 
 ```nu
 "int_1,int_2,float_1,float_2,first
@@ -331,15 +285,13 @@ are going to call it `test_small_a.csv`)
 | save --raw --force test_small_a.csv
 ```
 
-We use the `polars open` command to create the new variable
+`polars open` 명령을 사용하여 새 변수를 만듭니다.
 
 ```nu
 let df_2 = polars open --eager test_small_a.csv
 ```
 
-Now, with the second dataframe loaded in memory we can join them using the
-column called `int_1` from the left dataframe and the column `int_1` from the
-right dataframe
+이제 두 번째 데이터프레임이 메모리에 로드되었으므로 왼쪽 데이터프레임의 `int_1` 열과 오른쪽 데이터프레임의 `int_1` 열을 사용하여 조인할 수 있습니다.
 
 ```nu
 $df_1 | polars join $df_2 int_1 int_1
@@ -354,13 +306,10 @@ $df_1 | polars join $df_2 int_1 int_1
 ```
 
 ::: tip
-In `Nu` when a command has multiple arguments that are expecting
-multiple values we use brackets `[]` to enclose those values. In the case of
-[`polars join`](/commands/docs/polars_join.md) we can join on multiple columns
-as long as they have the same type.
+`Nu`에서 명령에 여러 값을 기대하는 여러 인수가 있는 경우 대괄호 `[]`를 사용하여 해당 값을 묶습니다. [`polars join`](/commands/docs/polars_join.md)의 경우 동일한 유형을 가진 한 여러 열에서 조인할 수 있습니다.
 :::
 
-For example:
+예시:
 
 ```nu
 $df_1 | polars join $df_2 [int_1 first] [int_1 first]
@@ -371,22 +320,13 @@ $df_1 | polars join $df_2 [int_1 first] [int_1 first]
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────┴─────────┴───────────┴───────────╯
 ```
 
-By default, the join command does an inner join, meaning that it will keep the
-rows where both dataframes share the same value. You can select a left join to
-keep the missing rows from the left dataframe. You can also save this result
-in order to use it for further operations.
+기본적으로 join 명령은 내부 조인을 수행하므로 두 데이터프레임이 동일한 값을 공유하는 행을 유지합니다. 왼쪽 조인을 선택하여 왼쪽 데이터프레임의 누락된 행을 유지할 수 있습니다. 추가 작업을 위해 이 결과를 저장할 수도 있습니다.
 
-## DataFrame group-by
+## 데이터프레임 그룹별
 
-One of the most powerful operations that can be performed with a DataFrame is
-the [`polars group-by`](/commands/docs/polars_group-by.md). This command will allow you to perform aggregation operations
-based on a grouping criteria. In Nushell, a `GroupBy` is a type of object that
-can be stored and reused for multiple aggregations. This is quite handy, since
-the creation of the grouped pairs is the most expensive operation while doing
-group-by and there is no need to repeat it if you are planning to do multiple
-operations with the same group condition.
+데이터프레임으로 수행할 수 있는 가장 강력한 작업 중 하나는 [`polars group-by`](/commands/docs/polars_group-by.md)입니다. 이 명령을 사용하면 그룹화 기준에 따라 집계 작업을 수행할 수 있습니다. 누셸에서 `GroupBy`는 여러 집계를 위해 저장하고 재사용할 수 있는 개체 유형입니다. 그룹화 쌍을 만드는 것이 그룹별 작업을 수행하는 동안 가장 비용이 많이 드는 작업이고 동일한 그룹 조건으로 여러 작업을 계획하는 경우 반복할 필요가 없으므로 매우 편리합니다.
 
-To create a `GroupBy` object you only need to use the [`polars_group-by`](/commands/docs/polars_group-by.md) command
+`GroupBy` 개체를 만들려면 [`polars_group-by`](/commands/docs/polars_group-by.md) 명령을 사용하기만 하면 됩니다.
 
 ```nu
 let group = $df_1 | polars group-by first
@@ -396,9 +336,7 @@ $group
 # => ╰─────────────┴──────────────────────────────────────────────╯
 ```
 
-When printing the `GroupBy` object we can see that it is in the background a
-lazy operation waiting to be completed by adding an aggregation. Using the
-`GroupBy` we can create aggregations on a column
+`GroupBy` 개체를 인쇄할 때 집계를 추가하여 완료되기를 기다리는 백그라운드에서 지연 작업임을 알 수 있습니다. `GroupBy`를 사용하여 열에 대한 집계를 만들 수 있습니다.
 
 ```nu
 $group | polars agg (polars col int_1 | polars sum)
@@ -412,7 +350,7 @@ $group | polars agg (polars col int_1 | polars sum)
 # => ╰────────────────┴───────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-or we can define multiple aggregations on the same or different columns
+또는 동일하거나 다른 열에 대해 여러 집계를 정의할 수 있습니다.
 
 ```nu
 $group
@@ -438,14 +376,11 @@ $group
 # => ╰────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-As you can see, the `GroupBy` object is a very powerful variable and it is
-worth keeping in memory while you explore your dataset.
+보시다시피 `GroupBy` 개체는 매우 강력한 변수이며 데이터 세트를 탐색하는 동안 메모리에 보관할 가치가 있습니다.
 
-## Creating Dataframes
+## 데이터프레임 만들기
 
-It is also possible to construct dataframes from basic Nushell primitives, such
-as integers, decimals, or strings. Let's create a small dataframe using the
-command `polars into-df`.
+정수, 십진수 또는 문자열과 같은 기본 누셸 기본형에서 데이터프레임을 구성할 수도 있습니다. `polars into-df` 명령을 사용하여 작은 데이터프레임을 만들어 보겠습니다.
 
 ```nu
 let df_3 = [[a b]; [1 2] [3 4] [5 6]] | polars into-df
@@ -460,12 +395,10 @@ $df_3
 ```
 
 ::: tip
-For the time being, not all of Nushell primitives can be converted into
-a dataframe. This will change in the future, as the dataframe feature matures
+현재 모든 누셸 기본형을 데이터프레임으로 변환할 수는 없습니다. 데이터프레임 기능이 성숙해짐에 따라 이는 앞으로 변경될 것입니다.
 :::
 
-We can append columns to a dataframe in order to create a new variable. As an
-example, let's append two columns to our mini dataframe `$df_3`
+새 변수를 만들기 위해 데이터프레임에 열을 추가할 수 있습니다. 예로서 미니 데이터프레임 `$df_3`에 두 개의 열을 추가해 보겠습니다.
 
 ```nu
 let df_4 = $df_3 | polars with-column $df_3.a --name a2 | polars with-column $df_3.a --name a3
@@ -479,9 +412,7 @@ $df_4
 # => ╰───┴───┴───┴────┴────╯
 ```
 
-Nushell's powerful piping syntax allows us to create new dataframes by
-taking data from other dataframes and appending it to them. Now, if you list your
-dataframes you will see in total five dataframes
+누셸의 강력한 파이핑 구문을 사용하면 다른 데이터프레임에서 데이터를 가져와 추가하여 새 데이터프레임을 만들 수 있습니다. 이제 데이터프레임을 나열하면 총 5개의 데이터프레임이 표시됩니다.
 
 ```nu
 polars store-ls | select key type columns rows estimated_size
@@ -497,27 +428,13 @@ polars store-ls | select key type columns rows estimated_size
 # => ╰──────────────────────────────────────┴─────────────┴─────────┴──────┴────────────────╯
 ```
 
-One thing that is important to mention is how the memory is being optimized
-while working with dataframes, and this is thanks to **Apache Arrow** and
-**Polars**. In a very simple representation, each column in a DataFrame is an
-Arrow Array, which is using several memory specifications in order to maintain
-the data as packed as possible (check [Arrow columnar
-format](https://arrow.apache.org/docs/format/Columnar.html)). The other
-optimization trick is the fact that whenever possible, the columns from the
-dataframes are shared between dataframes, avoiding memory duplication for the
-same data. This means that dataframes `$df_3` and `$df_4` are sharing the same two
-columns we created using the `polars into-df` command. For this reason, it isn't
-possible to change the value of a column in a dataframe. However, you can
-create new columns based on data from other columns or dataframes.
+데이터프레임으로 작업하는 동안 메모리가 어떻게 최적화되는지 언급하는 것이 중요하며, 이는 **Apache Arrow**와 **Polars** 덕분입니다. 매우 간단한 표현으로, 데이터프레임의 각 열은 Arrow Array이며, 데이터를 가능한 한 압축된 상태로 유지하기 위해 여러 메모리 사양을 사용합니다([Arrow 열 형식](https://arrow.apache.org/docs/format/Columnar.html) 확인). 다른 최적화 트릭은 가능한 경우 데이터프레임의 열이 데이터프레임 간에 공유되어 동일한 데이터에 대한 메모리 중복을 피한다는 사실입니다. 즉, 데이터프레임 `$df_3`과 `$df_4`는 `polars into-df` 명령을 사용하여 만든 동일한 두 열을 공유합니다. 이러한 이유로 데이터프레임의 열 값을 변경할 수 없습니다. 그러나 다른 열이나 데이터프레임의 데이터를 기반으로 새 열을 만들 수 있습니다.
 
-## Working with Series
+## 시리즈 작업
 
-A `Series` is the building block of a `DataFrame`. Each Series represents a
-column with the same data type, and we can create multiple Series of different
-types, such as float, int or string.
+`시리즈`는 `데이터프레임`의 구성 요소입니다. 각 시리즈는 동일한 데이터 유형을 가진 열을 나타내며, float, int 또는 string과 같은 다양한 유형의 여러 시리즈를 만들 수 있습니다.
 
-Let's start our exploration with Series by creating one using the `polars into-df`
-command:
+`polars into-df` 명령을 사용하여 시리즈를 만드는 것으로 시리즈 탐색을 시작하겠습니다.
 
 ```nu
 let df_5 = [9 8 4] | polars into-df
@@ -531,12 +448,9 @@ $df_5
 # => ╰───┴───╯
 ```
 
-We have created a new series from a list of integers (we could have done the
-same using floats or strings)
+정수 목록에서 새 시리즈를 만들었습니다(float 또는 string을 사용하여 동일한 작업을 수행할 수 있음).
 
-Series have their own basic operations defined, and they can be used to create
-other Series. Let's create a new Series by doing some arithmetic on the
-previously created column.
+시리즈에는 자체 기본 작업이 정의되어 있으며 다른 시리즈를 만드는 데 사용할 수 있습니다. 이전에 만든 열에 대한 일부 산술을 수행하여 새 시리즈를 만들어 보겠습니다.
 
 ```nu
 let df_6 = $df_5 * 3 + 10
@@ -550,15 +464,13 @@ $df_6
 # => ╰───┴────╯
 ```
 
-Now we have a new Series that was constructed by doing basic operations on the
-previous variable.
+이제 이전 변수에 대한 기본 작업을 수행하여 구성된 새 시리즈가 있습니다.
 
 ::: tip
-If you want to see how many variables you have stored in memory you can
-use `scope variables`
+메모리에 저장된 변수 수를 보려면 `scope variables`를 사용할 수 있습니다.
 :::
 
-Let's rename our previous Series so it has a memorable name
+이전 시리즈의 이름을 기억하기 쉬운 이름으로 변경해 보겠습니다.
 
 ```nu
 let df_7 = $df_6 | polars rename "0" memorable
@@ -572,8 +484,7 @@ $df_7
 # => ╰───┴───────────╯
 ```
 
-We can also do basic operations with two Series as long as they have the same
-data type
+동일한 데이터 유형을 가진 한 두 시리즈로 기본 작업을 수행할 수도 있습니다.
 
 ```nu
 $df_5 - $df_7
@@ -586,7 +497,7 @@ $df_5 - $df_7
 # => ╰───┴─────────────────╯
 ```
 
-And we can add them to previously defined dataframes
+그리고 이전에 정의된 데이터프레임에 추가할 수 있습니다.
 
 ```nu
 let df_8 = $df_3 | polars with-column $df_5 --name new_col
@@ -600,8 +511,7 @@ $df_8
 # => ╰───┴───┴───┴─────────╯
 ```
 
-The Series stored in a Dataframe can also be used directly, for example,
-we can multiply columns `a` and `b` to create a new Series
+데이터프레임에 저장된 시리즈도 직접 사용할 수 있습니다. 예를 들어 `a` 및 `b` 열을 곱하여 새 시리즈를 만들 수 있습니다.
 
 ```nu
 $df_8.a * $df_8.b
@@ -614,7 +524,7 @@ $df_8.a * $df_8.b
 # => ╰───┴─────────╯
 ```
 
-and we can start piping things in order to create new columns and dataframes
+그리고 새 열과 데이터프레임을 만들기 위해 파이핑을 시작할 수 있습니다.
 
 ```nu
 let df_9 = $df_8 | polars with-column ($df_8.a * $df_8.b / $df_8.new_col) --name my_sum
@@ -628,13 +538,11 @@ $df_9
 # => ╰───┴───┴───┴─────────┴────────╯
 ```
 
-Nushell's piping system can help you create very interesting workflows.
+누셸의 파이핑 시스템은 매우 흥미로운 워크플로를 만드는 데 도움이 될 수 있습니다.
 
-## Series and Masks
+## 시리즈 및 마스크
 
-Series have another key use in when working with `DataFrames`, and it is the fact
-that we can build boolean masks out of them. Let's start by creating a simple
-mask using the equality operator
+시리즈는 `데이터프레임`으로 작업할 때 또 다른 핵심 용도를 가지고 있으며, 부울 마스크를 만들 수 있다는 사실입니다. 등호 연산자를 사용하여 간단한 마스크를 만드는 것으로 시작하겠습니다.
 
 ```nu
 let mask_0 = $df_5 == 8
@@ -648,7 +556,7 @@ $mask_0
 # => ╰───┴───────╯
 ```
 
-and with this mask we can now filter a dataframe, like this
+그리고 이 마스크를 사용하여 다음과 같이 데이터프레임을 필터링할 수 있습니다.
 
 ```nu
 $df_9 | polars filter-with $mask_0
@@ -659,9 +567,9 @@ $df_9 | polars filter-with $mask_0
 # => ╰───┴───┴───┴─────────┴────────╯
 ```
 
-Now we have a new dataframe with only the values where the mask was true.
+이제 마스크가 true인 값만 있는 새 데이터프레임이 있습니다.
 
-The masks can also be created from Nushell lists, for example:
+마스크는 누셸 목록에서도 만들 수 있습니다. 예를 들어:
 
 ```nu
 let mask_1 = [true true false] | polars into-df
@@ -674,7 +582,7 @@ $df_9 | polars filter-with $mask_1
 # => ╰───┴───┴───┴─────────┴────────╯
 ```
 
-To create complex masks, we have the `AND`
+복잡한 마스크를 만들려면 `AND`가 있습니다.
 
 ```nu
 $mask_0 and $mask_1
@@ -687,7 +595,7 @@ $mask_0 and $mask_1
 # => ╰───┴─────────╯
 ```
 
-and `OR` operations
+그리고 `OR` 연산
 
 ```nu
 $mask_0 or $mask_1
@@ -700,8 +608,8 @@ $mask_0 or $mask_1
 # => ╰───┴────────╯
 ```
 
-We can also create a mask by checking if some values exist in other Series.
-Using the first dataframe that we created we can do something like this
+다른 시리즈에 일부 값이 있는지 확인하여 마스크를 만들 수도 있습니다.
+만든 첫 번째 데이터프레임을 사용하여 다음과 같은 작업을 수행할 수 있습니다.
 
 ```nu
 let mask_2 = $df_1 | polars col first | polars is-in [b c]
@@ -713,7 +621,7 @@ $mask_2
 # => ╰──────────┴─────────────────────────╯
 ```
 
-and this new mask can be used to filter the dataframe
+그리고 이 새 마스크를 사용하여 데이터프레임을 필터링할 수 있습니다.
 
 ```nu
 $df_1 | polars filter-with $mask_2
@@ -730,9 +638,7 @@ $df_1 | polars filter-with $mask_2
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
-Another operation that can be done with masks is setting or replacing a value
-from a series. For example, we can change the value in the column `first` where
-the value is equal to `a`
+마스크로 수행할 수 있는 또 다른 작업은 시리즈에서 값을 설정하거나 바꾸는 것입니다. 예를 들어, `first` 열에서 값이 `a`와 같은 값을 변경할 수 있습니다.
 
 ```nu
 $df_1 | polars get first | polars set new --mask ($df_1.first =~ a)
@@ -752,12 +658,9 @@ $df_1 | polars get first | polars set new --mask ($df_1.first =~ a)
 # => ╰───┴────────╯
 ```
 
-## Series as Indices
+## 인덱스로서의 시리즈
 
-Series can be also used as a way of filtering a dataframe by using them as a
-list of indices. For example, let's say that we want to get rows 1, 4, and 6
-from our original dataframe. With that in mind, we can use the next command to
-extract that information
+시리즈는 인덱스 목록으로 사용하여 데이터프레임을 필터링하는 방법으로도 사용할 수 있습니다. 예를 들어, 원래 데이터프레임에서 1, 4, 6행을 가져오고 싶다고 가정해 보겠습니다. 이를 염두에 두고 다음 명령을 사용하여 해당 정보를 추출할 수 있습니다.
 
 ```nu
 let indices_0 = [1 4 6] | polars into-df
@@ -771,10 +674,9 @@ $df_1 | polars take $indices_0
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
-The command [`polars take`](/commands/docs/polars_take.md) is very handy, especially if we mix it with other commands.
-Let's say that we want to extract all rows for the first duplicated element for
-column `first`. In order to do that, we can use the command `polars arg-unique` as
-shown in the next example
+[`polars take`](/commands/docs/polars_take.md) 명령은 특히 다른 명령과 혼합할 때 매우 편리합니다.
+`first` 열에 대한 첫 번째 중복 요소의 모든 행을 추출하고 싶다고 가정해 보겠습니다.
+이를 위해 다음 예제와 같이 `polars arg-unique` 명령을 사용할 수 있습니다.
 
 ```nu
 let indices_1 = $df_1 | polars get first | polars arg-unique
@@ -788,12 +690,12 @@ $df_1 | polars take $indices_1
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
-Or what if we want to create a new sorted dataframe using a column in specific.
-We can use the `arg-sort` to accomplish that. In the next example we
-can sort the dataframe by the column `word`
+또는 특정 열을 사용하여 새 정렬된 데이터프레임을 만들려면 어떻게 해야 할까요?
+`arg-sort`를 사용하여 이를 달성할 수 있습니다. 다음 예제에서는
+`word` 열별로 데이터프레임을 정렬할 수 있습니다.
 
 ::: tip
-The same result could be accomplished using the command [`sort`](/commands/docs/sort.md)
+[`sort`](/commands/docs/sort.md) 명령을 사용하여 동일한 결과를 얻을 수 있습니다.
 :::
 
 ```nu
@@ -815,8 +717,8 @@ $df_1 | polars take $indices_2
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
-And finally, we can create new Series by setting a new value in the marked
-indices. Have a look at the next command
+그리고 마지막으로 표시된 인덱스에 새 값을 설정하여 새 시리즈를 만들 수 있습니다.
+다음 명령을 살펴보십시오.
 
 ```nu
 let indices_3 = [0 2] | polars into-df
@@ -837,16 +739,14 @@ $df_1 | polars get int_1 | polars set-with-idx 123 --indices $indices_3
 # => ╰───┴───────╯
 ```
 
-## Unique Values
+## 고유 값
 
-Another operation that can be done with `Series` is to search for unique values
-in a list or column. Lets use again the first dataframe we created to test
-these operations.
+`시리즈`로 수행할 수 있는 또 다른 작업은 목록이나 열에서 고유 값을 검색하는 것입니다.
+이러한 작업을 테스트하기 위해 만든 첫 번째 데이터프레임을 다시 사용해 보겠습니다.
 
-The first and most common operation that we have is `value_counts`. This
-command calculates a count of the unique values that exist in a Series. For
-example, we can use it to count how many occurrences we have in the column
-`first`
+우리가 가진 첫 번째이자 가장 일반적인 작업은 `value_counts`입니다. 이
+명령은 시리즈에 있는 고유 값의 개수를 계산합니다. 예를 들어
+`first` 열에 있는 발생 횟수를 계산하는 데 사용할 수 있습니다.
 
 ```nu
 $df_1 | polars get first | polars value-counts
@@ -859,11 +759,9 @@ $df_1 | polars get first | polars value-counts
 # => ╰───┴───────┴───────╯
 ```
 
-As expected, the command returns a new dataframe that can be used to do more
-queries.
+예상대로 이 명령은 더 많은 쿼리를 수행하는 데 사용할 수 있는 새 데이터프레임을 반환합니다.
 
-Continuing with our exploration of `Series`, the next thing that we can do is
-to only get the unique unique values from a series, like this
+`시리즈` 탐색을 계속하면서 다음으로 할 수 있는 일은 시리즈에서 고유한 값을 가져오는 것입니다.
 
 ```nu
 $df_1 | polars get first | polars unique
@@ -876,9 +774,7 @@ $df_1 | polars get first | polars unique
 # => ╰───┴───────╯
 ```
 
-Or we can get a mask that we can use to filter out the rows where data is
-unique or duplicated. For example, we can select the rows for unique values
-in column `word`
+또는 데이터가 고유하거나 중복된 행을 필터링하는 데 사용할 수 있는 마스크를 얻을 수 있습니다. 예를 들어 `word` 열의 고유 값에 대한 행을 선택할 수 있습니다.
 
 ```nu
 $df_1 | polars filter-with ($in.word | polars is-unique)
@@ -890,7 +786,7 @@ $df_1 | polars filter-with ($in.word | polars is-unique)
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────╯
 ```
 
-Or all the duplicated ones
+또는 모든 중복된 것들
 
 ```nu
 $df_1 | polars filter-with ($in.word | polars is-duplicated)
@@ -908,15 +804,13 @@ $df_1 | polars filter-with ($in.word | polars is-duplicated)
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
-## Lazy Dataframes
+## 지연 데이터프레임
 
-Lazy dataframes are a way to query data by creating a logical plan. The
-advantage of this approach is that the plan never gets evaluated until you need
-to extract data. This way you could chain together aggregations, joins and
-selections and collect the data once you are happy with the selected
-operations.
+지연 데이터프레임은 논리적 계획을 만들어 데이터를 쿼리하는 방법입니다.
+이 방법의 장점은 데이터를 추출할 때까지 계획이 평가되지 않는다는 것입니다.
+이렇게 하면 집계, 조인 및 선택을 함께 연결하고 선택한 작업에 만족하면 데이터를 수집할 수 있습니다.
 
-Let's create a small example of a lazy dataframe
+지연 데이터프레임의 작은 예제를 만들어 보겠습니다.
 
 ```nu
 let lf_0 = [[a b]; [1 a] [2 b] [3 c] [4 d]] | polars into-lazy
@@ -927,9 +821,7 @@ $lf_0
 # => ╰────────────────┴───────────────────────────────────────────────────────╯
 ```
 
-As you can see, the resulting dataframe is not yet evaluated, it stays as a
-set of instructions that can be done on the data. If you were to collect that
-dataframe you would get the next result
+보시다시피 결과 데이터프레임은 아직 평가되지 않았으며 데이터에 대해 수행할 수 있는 명령어 집합으로 남아 있습니다. 해당 데이터프레임을 수집하면 다음 결과를 얻을 수 있습니다.
 
 ```nu
 $lf_0 | polars collect
@@ -943,22 +835,17 @@ $lf_0 | polars collect
 # => ╰───┴───┴───╯
 ```
 
-as you can see, the collect command executes the plan and creates a nushell
-table for you.
+보시다시피 collect 명령은 계획을 실행하고 누셸 테이블을 만듭니다.
 
-All dataframes operations should work with eager or lazy dataframes. They are
-converted in the background for compatibility. However, to take advantage of
-lazy operations if is recommended to only use lazy operations with lazy
-dataframes.
+모든 데이터프레임 작업은 열성 또는 지연 데이터프레임과 함께 작동해야 합니다. 호환성을 위해 백그라운드에서 변환됩니다. 그러나 지연 작업의 이점을 활용하려면 지연 데이터프레임과 함께 지연 작업만 사용하는 것이 좋습니다.
 
-To find all lazy dataframe operations you can use
+모든 지연 데이터프레임 작업을 찾으려면 다음을 사용할 수 있습니다.
 
 ```nu no-run
 scope commands | where category =~ lazyframe | select name category usage
 ```
 
-With your lazy frame defined we can start chaining operations on it. For
-example this
+지연 프레임이 정의되면 작업을 연결하기 시작할 수 있습니다. 예를 들어 다음과 같습니다.
 
 ```nu
 $lf_0
@@ -979,24 +866,16 @@ $lf_0
 ```
 
 :::tip
-You can use the line buffer editor to format your queries (`ctr + o`) easily
+줄 버퍼 편집기(`ctr + o`)를 사용하여 쿼리를 쉽게 서식 지정할 수 있습니다.
 :::
 
-This query uses the lazy reverse command to invert the dataframe and the
-`polars with-column` command to create new two columns using `expressions`.
-An `expression` is used to define an operation that is executed on the lazy
-frame. When put together they create the whole set of instructions used by the
-lazy commands to query the data. To list all the commands that generate an
-expression you can use
+이 쿼리는 지연 역순 명령을 사용하여 데이터프레임을 반전하고 `polars with-column` 명령을 사용하여 `표현식`을 사용하여 새 두 열을 만듭니다. `표현식`은 지연 프레임에서 실행되는 작업을 정의하는 데 사용됩니다. 함께 사용하면 지연 명령이 데이터를 쿼리하는 데 사용하는 전체 명령어 집합을 만듭니다. 표현식을 생성하는 모든 명령을 나열하려면 다음을 사용할 수 있습니다.
 
 ```nu no-run
 scope commands | where category =~ expression | select name category usage
 ```
 
-In our previous example, we use the `polars col` command to indicate that column `a`
-will be multiplied by 2 and then it will be aliased to the name `double_a`.
-In some cases the use of the `polars col` command can be inferred. For example,
-using the `polars select` command we can use only a string
+이전 예제에서는 `polars col` 명령을 사용하여 `a` 열이 2로 곱해진 다음 `double_a`라는 이름으로 별칭이 지정됨을 나타냅니다. 경우에 따라 `polars col` 명령의 사용을 유추할 수 있습니다. 예를 들어 `polars select` 명령을 사용하면 문자열만 사용할 수 있습니다.
 
 ```nu
 $lf_0 | polars select a | polars collect
@@ -1010,7 +889,7 @@ $lf_0 | polars select a | polars collect
 # => ╰───┴───╯
 ```
 
-or the `polars col` command
+또는 `polars col` 명령
 
 ```nu
 $lf_0 | polars select (polars col a) | polars collect
@@ -1024,8 +903,7 @@ $lf_0 | polars select (polars col a) | polars collect
 # => ╰───┴───╯
 ```
 
-Let's try something more complicated and create aggregations from a lazy
-dataframe
+더 복잡한 것을 시도하고 지연 데이터프레임에서 집계를 만들어 보겠습니다.
 
 ```nu
 let lf_1 =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
@@ -1045,8 +923,7 @@ $lf_1
 # => ╰───┴──────┴─────┴──────╯
 ```
 
-And we could join on a lazy dataframe that hasn't being collected. Let's join
-the resulting group by to the original lazy frame
+그리고 수집되지 않은 지연 데이터프레임에서 조인할 수 있습니다. 결과 그룹을 원래 지연 프레임에 조인해 보겠습니다.
 
 ```nu
 let lf_2 =  [[name value]; [one 1] [two 2] [one 1] [two 3]] | polars into-lazy
@@ -1068,143 +945,133 @@ $lf_2 | polars join $group name name | polars collect
 # => ╰───┴──────┴───────┴─────┴──────╯
 ```
 
-As you can see lazy frames are a powerful construct that will let you query
-data using a flexible syntax, resulting in blazing fast results.
+보시다시피 지연 프레임은 유연한 구문을 사용하여 데이터를 쿼리할 수 있는 강력한 구성 요소이며, 매우 빠른 결과를 제공합니다.
 
-## Dataframe Commands
+## 데이터프레임 명령
 
-So far we have seen quite a few operations that can be done using `DataFrame`s
-commands. However, the commands we have used so far are not all the commands
-available to work with data and be assured that there will be more as the
-feature becomes more stable.
+지금까지 `DataFrame` 명령을 사용하여 수행할 수 있는 몇 가지 작업을 보았습니다. 그러나 지금까지 사용한 명령은 데이터 작업에 사용할 수 있는 모든 명령이 아니며 기능이 안정화됨에 따라 더 많은 명령이 추가될 것입니다.
 
-The next list shows the available dataframe commands with their descriptions, and
-whenever possible, their analogous Nushell command.
+다음 목록은 설명과 함께 사용 가능한 데이터프레임 명령을 보여주며, 가능한 경우 해당 누셸 명령도 보여줍니다.
 
 ::: warning
-This list may be outdated. To get the up-to-date command list, see [Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.html) command categories.
+이 목록은 오래되었을 수 있습니다. 최신 명령 목록을 보려면 [데이터프레임](/commands/categories/dataframe.md), [지연 프레임](/commands/categories/lazyframe.md), [데이터프레임 또는 지연 프레임](/commands/categories/dataframe_or_lazyframe.md), [표현식](/commands/categories/expression.html) 명령 범주를 참조하십시오.
 :::
 
-<!-- This table was updated using the script from ../tools/dataframes_md-update.nu -->
+<!-- 이 표는 ../tools/dataframes_md-update.nu의 스크립트를 사용하여 업데이트되었습니다. -->
 
-| Command Name           | Applies To            | Description                                                                                      | Nushell Equivalent      |
+| 명령 이름           | 적용 대상            | 설명                                                                                      | 누셸 등가물      |
 | ---------------------- | --------------------- | ------------------------------------------------------------------------------------------------ | ----------------------- |
-| polars agg             | dataframe             | Performs a series of aggregations from a group-by.                                               | math                    |
-| polars agg-groups      | expression            | Creates an agg_groups expression.                                                                |                         |
-| polars all-false       | dataframe             | Returns true if all values are false.                                                            |                         |
-| polars all-true        | dataframe             | Returns true if all values are true.                                                             | all                     |
-| polars append          | dataframe             | Appends a new dataframe.                                                                         |                         |
-| polars arg-max         | dataframe             | Return index for max value in series.                                                            |                         |
-| polars arg-min         | dataframe             | Return index for min value in series.                                                            |                         |
-| polars arg-sort        | dataframe             | Returns indexes for a sorted series.                                                             |                         |
-| polars arg-true        | dataframe             | Returns indexes where values are true.                                                           |                         |
-| polars arg-unique      | dataframe             | Returns indexes for unique values.                                                               |                         |
-| polars arg-where       | any                   | Creates an expression that returns the arguments where expression is true.                       |                         |
-| polars as              | expression            | Creates an alias expression.                                                                     |                         |
-| polars as-date         | dataframe             | Converts string to date.                                                                         |                         |
-| polars as-datetime     | dataframe             | Converts string to datetime.                                                                     |                         |
-| polars cache           | dataframe             | Caches operations in a new LazyFrame.                                                            |                         |
-| polars cast            | expression, dataframe | Cast a column to a different dtype.                                                              |                         |
-| polars col             | any                   | Creates a named column expression.                                                               |                         |
-| polars collect         | dataframe             | Collect lazy dataframe into eager dataframe.                                                     |                         |
-| polars columns         | dataframe             | Show dataframe columns.                                                                          |                         |
-| polars concat-str      | any                   | Creates a concat string expression.                                                              |                         |
-| polars concatenate     | dataframe             | Concatenates strings with other array.                                                           |                         |
-| polars contains        | dataframe             | Checks if a pattern is contained in a string.                                                    |                         |
-| polars count           | expression            | Creates a count expression.                                                                      |                         |
-| polars count-null      | dataframe             | Counts null values.                                                                              |                         |
-| polars cumulative      | dataframe             | Cumulative calculation for a series.                                                             |                         |
-| polars datepart        | expression            | Creates an expression for capturing the specified datepart in a column.                          |                         |
-| polars drop            | dataframe             | Creates a new dataframe by dropping the selected columns.                                        | drop                    |
-| polars drop-duplicates | dataframe             | Drops duplicate values in dataframe.                                                             |                         |
-| polars drop-nulls      | dataframe             | Drops null values in dataframe.                                                                  |                         |
-| polars dummies         | dataframe             | Creates a new dataframe with dummy variables.                                                    |                         |
-| polars explode         | expression, dataframe | Explodes a dataframe or creates a explode expression.                                            |                         |
-| polars expr-not        | expression            | Creates a not expression.                                                                        |                         |
-| polars fetch           | dataframe             | Collects the lazyframe to the selected rows.                                                     |                         |
-| polars fill-nan        | dataframe             | Replaces NaN values with the given expression.                                                   |                         |
-| polars fill-null       | dataframe             | Replaces NULL values with the given expression.                                                  |                         |
-| polars filter          | dataframe             | Filter dataframe based in expression.                                                            |                         |
-| polars filter-with     | dataframe             | Filters dataframe using a mask or expression as reference.                                       |                         |
-| polars first           | expression, dataframe | Show only the first number of rows or create a first expression                                  | first                   |
-| polars flatten         | expression, dataframe | An alias for polars explode.                                                                     |                         |
-| polars get             | dataframe             | Creates dataframe with the selected columns.                                                     | get                     |
-| polars get-day         | dataframe             | Gets day from date.                                                                              |                         |
-| polars get-hour        | dataframe             | Gets hour from date.                                                                             |                         |
-| polars get-minute      | dataframe             | Gets minute from date.                                                                           |                         |
-| polars get-month       | dataframe             | Gets month from date.                                                                            |                         |
-| polars get-nanosecond  | dataframe             | Gets nanosecond from date.                                                                       |                         |
-| polars get-ordinal     | dataframe             | Gets ordinal from date.                                                                          |                         |
-| polars get-second      | dataframe             | Gets second from date.                                                                           |                         |
-| polars get-week        | dataframe             | Gets week from date.                                                                             |                         |
-| polars get-weekday     | dataframe             | Gets weekday from date.                                                                          |                         |
-| polars get-year        | dataframe             | Gets year from date.                                                                             |                         |
-| polars group-by        | dataframe             | Creates a group-by object that can be used for other aggregations.                               | group-by                |
-| polars implode         | expression            | Aggregates a group to a Series.                                                                  |                         |
-| polars into-df         | any                   | Converts a list, table or record into a dataframe.                                               |                         |
-| polars into-lazy       | any                   | Converts a dataframe into a lazy dataframe.                                                      |                         |
-| polars into-nu         | expression, dataframe | Converts a dataframe or an expression into into nushell value for access and exploration.        |                         |
-| polars is-duplicated   | dataframe             | Creates mask indicating duplicated values.                                                       |                         |
-| polars is-in           | expression, dataframe | Creates an is-in expression or checks to see if the elements are contained in the right series   | in                      |
-| polars is-not-null     | expression, dataframe | Creates mask where value is not null.                                                            |                         |
-| polars is-null         | expression, dataframe | Creates mask where value is null.                                                                | `<column_name> == null` |
-| polars is-unique       | dataframe             | Creates mask indicating unique values.                                                           |                         |
-| polars join            | dataframe             | Joins a lazy frame with other lazy frame.                                                        |                         |
-| polars last            | expression, dataframe | Creates new dataframe with tail rows or creates a last expression.                               | last                    |
-| polars lit             | any                   | Creates a literal expression.                                                                    |                         |
-| polars lowercase       | dataframe             | Lowercase the strings in the column.                                                             |                         |
-| polars max             | expression, dataframe | Creates a max expression or aggregates columns to their max value.                               |                         |
-| polars mean            | expression, dataframe | Creates a mean expression for an aggregation or aggregates columns to their mean value.          |                         |
-| polars median          | expression, dataframe | Median value from columns in a dataframe or creates expression for an aggregation                |                         |
-| polars melt            | dataframe             | Unpivot a DataFrame from wide to long format.                                                    |                         |
-| polars min             | expression, dataframe | Creates a min expression or aggregates columns to their min value.                               |                         |
-| polars n-unique        | expression, dataframe | Counts unique values.                                                                            |                         |
-| polars not             | dataframe             | Inverts boolean mask.                                                                            |                         |
-| polars open            | any                   | Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.                   | open                    |
-| polars otherwise       | any                   | Completes a when expression.                                                                     |                         |
-| polars quantile        | expression, dataframe | Aggregates the columns to the selected quantile.                                                 |                         |
-| polars query           | dataframe             | Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause. |                         |
-| polars rename          | dataframe             | Rename a dataframe column.                                                                       | rename                  |
-| polars replace         | dataframe             | Replace the leftmost (sub)string by a regex pattern.                                             |                         |
-| polars replace-all     | dataframe             | Replace all (sub)strings by a regex pattern.                                                     |                         |
-| polars reverse         | dataframe             | Reverses the LazyFrame                                                                           |                         |
-| polars rolling         | dataframe             | Rolling calculation for a series.                                                                |                         |
-| polars sample          | dataframe             | Create sample dataframe.                                                                         |                         |
-| polars save            | dataframe             | Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson).|                         |
-| polars schema          | dataframe             | Show schema for a dataframe.                                                                     |                         |
-| polars select          | dataframe             | Selects columns from lazyframe.                                                                  | select                  |
-| polars set             | dataframe             | Sets value where given mask is true.                                                             |                         |
-| polars set-with-idx    | dataframe             | Sets value in the given index.                                                                   |                         |
-| polars shape           | dataframe             | Shows column and row size for a dataframe.                                                       |                         |
-| polars shift           | dataframe             | Shifts the values by a given period.                                                             |                         |
-| polars slice           | dataframe             | Creates new dataframe from a slice of rows.                                                      |                         |
-| polars sort-by         | dataframe             | Sorts a lazy dataframe based on expression(s).                                                   | sort                    |
-| polars std             | expression, dataframe | Creates a std expression for an aggregation of std value from columns in a dataframe.            |                         |
-| polars store-get       | any, any              | Gets a Dataframe or other object from the plugin cache.                                          |                         |
-| polars store-ls        |                       | Lists stored dataframes.                                                                         |                         |
-| polars store-rm        | any                   | Removes a stored Dataframe or other object from the plugin cache.                                |                         |
-| polars str-lengths     | dataframe             | Get lengths of all strings.                                                                      |                         |
-| polars str-slice       | dataframe             | Slices the string from the start position until the selected length.                             |                         |
-| polars strftime        | dataframe             | Formats date based on string rule.                                                               |                         |
-| polars sum             | expression, dataframe | Creates a sum expression for an aggregation or aggregates columns to their sum value.            |                         |
-| polars summary         | dataframe             | For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.   |                         |
-| polars take            | dataframe             | Creates new dataframe using the given indices.                                                   |                         |
-| polars unique          | dataframe             | Returns unique values from a dataframe.                                                          | uniq                    |
-| polars uppercase       | dataframe             | Uppercase the strings in the column.                                                             |                         |
-| polars value-counts    | dataframe             | Returns a dataframe with the counts for unique values in series.                                 |                         |
-| polars var             | expression, dataframe | Create a var expression for an aggregation.                                                      |                         |
-| polars when            | expression            | Creates and modifies a when expression.                                                          |                         |
-| polars with-column     | dataframe             | Adds a series to the dataframe.                                                                  | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
+| polars agg             | 데이터프레임             | 그룹별로 일련의 집계를 수행합니다.                                               | math                    |
+| polars agg-groups      | 표현식            | agg_groups 표현식을 만듭니다.                                                                |                         |
+| polars all-false       | 데이터프레임             | 모든 값이 false이면 true를 반환합니다.                                                            |                         |
+| polars all-true        | 데이터프레임             | 모든 값이 true이면 true를 반환합니다.                                                             | all                     |
+| polars append          | 데이터프레임             | 새 데이터프레임을 추가합니다.                                                                         |                         |
+| polars arg-max         | 데이터프레임             | 시리즈의 최대값에 대한 인덱스를 반환합니다.                                                            |                         |
+| polars arg-min         | 데이터프레임             | 시리즈의 최소값에 대한 인덱스를 반환합니다.                                                            |                         |
+| polars arg-sort        | 데이터프레임             | 정렬된 시리즈에 대한 인덱스를 반환합니다.                                                             |                         |
+| polars arg-true        | 데이터프레임             | 값이 true인 인덱스를 반환합니다.                                                           |                         |
+| polars arg-unique      | 데이터프레임             | 고유 값에 대한 인덱스를 반환합니다.                                                               |                         |
+| polars arg-where       | any                   | 표현식이 true인 인수를 반환하는 표현식을 만듭니다.                       |                         |
+| polars as              | 표현식            | 별칭 표현식을 만듭니다.                                                                     |                         |
+| polars as-date         | 데이터프레임             | 문자열을 날짜로 변환합니다.                                                                         |                         |
+| polars as-datetime     | 데이터프레임             | 문자열을 날짜/시간으로 변환합니다.                                                                     |                         |
+| polars cache           | 데이터프레임             | 새 LazyFrame에 작업을 캐시합니다.                                                            |                         |
+| polars cast            | 표현식, 데이터프레임 | 열을 다른 dtype으로 캐스트합니다.                                                              |                         |
+| polars col             | any                   | 명명된 열 표현식을 만듭니다.                                                               |                         |
+| polars collect         | 데이터프레임             | 지연 데이터프레임을 열성 데이터프레임으로 수집합니다.                                                     |                         |
+| polars columns         | 데이터프레임             | 데이터프레임 열을 표시합니다.                                                                          |                         |
+| polars concat-str      | any                   | 연결 문자열 표현식을 만듭니다.                                                              |                         |
+| polars concatenate     | 데이터프레임             | 다른 배열과 문자열을 연결합니다.                                                           |                         |
+| polars contains        | 데이터프레임             | 문자열에 패턴이 포함되어 있는지 확인합니다.                                                    |                         |
+| polars count           | 표현식            | 개수 표현식을 만듭니다.                                                                      |                         |
+| polars count-null      | 데이터프레임             | null 값을 계산합니다.                                                                              |                         |
+| polars cumulative      | 데이터프레임             | 시리즈에 대한 누적 계산입니다.                                                                |                         |
+| polars datepart        | 표현식            | 열에서 지정된 날짜 부분을 캡처하는 표현식을 만듭니다.                          |                         |
+| polars drop            | 데이터프레임             | 선택한 열을 삭제하여 새 데이터프레임을 만듭니다.                                        | drop                    |
+| polars drop-duplicates | 데이터프레임             | 데이터프레임에서 중복 값을 삭제합니다.                                                             |                         |
+| polars drop-nulls      | 데이터프레임             | 데이터프레임에서 null 값을 삭제합니다.                                                                  |                         |
+| polars dummies         | 데이터프레임             | 더미 변수가 있는 새 데이터프레임을 만듭니다.                                                    |                         |
+| polars explode         | 표현식, 데이터프레임 | 데이터프레임을 분해하거나 분해 표현식을 만듭니다.                                            |                         |
+| polars expr-not        | 표현식            | not 표현식을 만듭니다.                                                                        |                         |
+| polars fetch           | 데이터프레임             | 선택한 행으로 지연 프레임을 수집합니다.                                                     |                         |
+| polars fill-nan        | 데이터프레임             | NaN 값을 지정된 표현식으로 바꿉니다.                                                   |                         |
+| polars fill-null       | 데이터프레임             | NULL 값을 지정된 표현식으로 바꿉니다.                                                  |                         |
+| polars filter          | 데이터프레임             | 표현식을 기반으로 데이터프레임을 필터링합니다.                                                            |                         |
+| polars filter-with     | 데이터프레임             | 마스크 또는 표현식을 참조로 사용하여 데이터프레임을 필터링합니다.                                       |                         |
+| polars first           | 표현식, 데이터프레임 | 처음 몇 개의 행만 표시하거나 첫 번째 표현식을 만듭니다.                                  | first                   |
+| polars flatten         | 표현식, 데이터프레임 | polars explode의 별칭입니다.                                                                     |                         |
+| polars get             | 데이터프레임             | 선택한 열이 있는 데이터프레임을 만듭니다.                                                     | get                     |
+| polars get-day         | 데이터프레임             | 날짜에서 일을 가져옵니다.                                                                              |                         |
+| polars get-hour        | 데이터프레임             | 날짜에서 시간을 가져옵니다.                                                                              |                         |
+| polars get-minute      | 데이터프레임             | 날짜에서 분을 가져옵니다.                                                                              |                         |
+| polars get-month       | 데이터프레임             | 날짜에서 월을 가져옵니다.                                                                              |                         |
+| polars get-nanosecond  | 데이터프레임             | 날짜에서 나노초를 가져옵니다.                                                                       |                         |
+| polars get-ordinal     | 데이터프레임             | 날짜에서 서수를 가져옵니다.                                                                          |                         |
+| polars get-second      | 데이터프레임             | 날짜에서 초를 가져옵니다.                                                                              |                         |
+| polars get-week        | 데이터프레임             | 날짜에서 주를 가져옵니다.                                                                              |                         |
+| polars get-weekday     | 데이터프레임             | 날짜에서 요일을 가져옵니다.                                                                          |                         |
+| polars get-year        | 데이터프레임             | 날짜에서 연도를 가져옵니다.                                                                              |                         |
+| polars group-by        | 데이터프레임             | 다른 집계에 사용할 수 있는 그룹별 개체를 만듭니다.                               | group-by                |
+| polars implode         | 표현식            | 그룹을 시리즈로 집계합니다.                                                                  |                         |
+| polars into-df         | any                   | 목록, 테이블 또는 레코드를 데이터프레임으로 변환합니다.                                               |                         |
+| polars into-lazy       | any                   | 데이터프레임을 지연 데이터프레임으로 변환합니다.                                                      |                         |
+| polars into-nu         | 표현식, 데이터프레임 | 데이터프레임 또는 표현식을 액세스 및 탐색을 위해 누셸 값으로 변환합니다.        |                         |
+| polars is-duplicated   | 데이터프레임             | 중복된 값을 나타내는 마스크를 만듭니다.                                                       |                         |
+| polars is-in           | 표현식, 데이터프레임 | is-in 표현식을 만들거나 요소가 오른쪽 시리즈에 포함되어 있는지 확인합니다.   | in                      |
+| polars is-not-null     | 표현식, 데이터프레임 | 값이 null이 아닌 마스크를 만듭니다.                                                              |                         |
+| polars is-null         | 표현식, 데이터프레임 | 값이 null인 마스크를 만듭니다.                                                                | `<column_name> == null` |
+| polars is-unique       | 데이터프레임             | 고유 값을 나타내는 마스크를 만듭니다.                                                       |                         |
+| polars join            | 데이터프레임             | 지연 프레임을 다른 지연 프레임과 조인합니다.                                                        |                         |
+| polars last            | 표현식, 데이터프레임 | 꼬리 행이 있는 새 데이터프레임을 만들거나 마지막 표현식을 만듭니다.                               | last                    |
+| polars lit             | any                   | 리터럴 표현식을 만듭니다.                                                                    |                         |
+| polars lowercase       | 데이터프레임             | 열의 문자열을 소문자로 변환합니다.                                                             |                         |
+| polars max             | 표현식, 데이터프레임 | 최대 표현식을 만들거나 열을 최대값으로 집계합니다.                               |                         |
+| polars mean            | 표현식, 데이터프레임 | 집계에 대한 평균 표현식을 만들거나 열을 평균값으로 집계합니다.          |                         |
+| polars median          | 표현식, 데이터프레임 | 데이터프레임의 열에서 중앙값을 구하거나 집계에 대한 표현식을 만듭니다.                |                         |
+| polars melt            | 데이터프레임             | 데이터프레임을 넓은 형식에서 긴 형식으로 피벗 해제합니다.                                                    |                         |
+| polars min             | 표현식, 데이터프레임 | 최소 표현식을 만들거나 열을 최소값으로 집계합니다.                               |                         |
+| polars n-unique        | 표현식, 데이터프레임 | 고유 값을 계산합니다.                                                                            |                         |
+| polars not             | 데이터프레임             | 부울 마스크를 반전합니다.                                                                            |                         |
+| polars open            | any                   | CSV, JSON, JSON lines, arrow, avro 또는 parquet 파일을 열어 데이터프레임을 만듭니다.                   | open                    |
+| polars otherwise       | any                   | when 표현식을 완료합니다.                                                                     |                         |
+| polars quantile        | 표현식, 데이터프레임 | 열을 선택한 분위수로 집계합니다.                                                 |                         |
+| polars query           | 데이터프레임             | SQL을 사용하여 데이터프레임을 쿼리합니다. 참고: 데이터프레임은 항상 쿼리의 from 절에서 'df'로 명명됩니다. |                         |
+| polars rename          | 데이터프레임             | 데이터프레임 열의 이름을 바꿉니다.                                                                       | rename                  |
+| polars replace         | 데이터프레임             | 가장 왼쪽 (하위)문자열을 정규식 패턴으로 바꿉니다.                                             |                         |
+| polars replace-all     | 데이터프레임             | 모든 (하위)문자열을 정규식 패턴으로 바꿉니다.                                             |                         |
+| polars reverse         | 데이터프레임             | LazyFrame을 반전합니다.                                                                           |                         |
+| polars rolling         | 데이터프레임             | 시리즈에 대한 롤링 계산입니다.                                                                |                         |
+| polars sample          | 데이터프레임             | 샘플 데이터프레임을 만듭니다.                                                                         |                         |
+| polars save            | 데이터프레임             | 데이터프레임을 디스크에 저장합니다. 지연 데이터프레임의 경우 파일 형식이 지원하는 경우(parquet, ipc/arrow, csv 및 ndjson) 싱크 작업이 사용됩니다.|                         |
+| polars schema          | 데이터프레임             | 데이터프레임의 스키마를 표시합니다.                                                                     |                         |
+| polars select          | 데이터프레임             | 지연 프레임에서 열을 선택합니다.                                                                  | select                  |
+| polars set             | 데이터프레임             | 지정된 마스크가 true인 값을 설정합니다.                                                             |                         |
+| polars set-with-idx    | 데이터프레임             | 지정된 인덱스에 값을 설정합니다.                                                                   |                         |
+| polars shape           | 데이터프레임             | 데이터프레임의 열 및 행 크기를 표시합니다.                                                       |                         |
+| polars shift           | 데이터프레임             | 지정된 기간만큼 값을 이동합니다.                                                             |                         |
+| polars slice           | 데이터프레임             | 행의 슬라이스에서 새 데이터프레임을 만듭니다.                                                      |                         |
+| polars sort-by         | 데이터프레임             | 표현식을 기반으로 지연 데이터프레임을 정렬합니다.                                                   | sort                    |
+| polars std             | 표현식, 데이터프레임 | 데이터프레임의 열에서 표준편차의 집계에 대한 표준편차 표현식을 만듭니다.            |                         |
+| polars store-get       | any, any              | 플러그인 캐시에서 데이터프레임 또는 기타 개체를 가져옵니다.                                          |                         |
+| polars store-ls        |                       | 저장된 데이터프레임을 나열합니다.                                                                         |                         |
+| polars store-rm        | any                   | 플러그인 캐시에서 저장된 데이터프레임 또는 기타 개체를 제거합니다.                                |                         |
+| polars str-lengths     | 데이터프레임             | 모든 문자열의 길이를 가져옵니다.                                                                      |                         |
+| polars str-slice       | 데이터프레임             | 시작 위치에서 선택한 길이까지 문자열을 슬라이스합니다.                             |                         |
+| polars strftime        | 데이터프레임             | 문자열 규칙에 따라 날짜를 서식 지정합니다.                                                               |                         |
+| polars sum             | 표현식, 데이터프레임 | 집계에 대한 합계 표현식을 만들거나 열을 합계 값으로 집계합니다.            |                         |
+| polars summary         | 데이터프레임             | 데이터프레임의 경우 숫자 열에 대한 설명 통계(요약 통계)를 생성합니다.   |                         |
+| polars take            | 데이터프레임             | 지정된 인덱스를 사용하여 새 데이터프레임을 만듭니다.                                                   |                         |
+| polars unique          | 데이터프레임             | 데이터프레임에서 고유 값을 반환합니다.                                                          | uniq                    |
+| polars uppercase       | 데이터프레임             | 열의 문자열을 대문자로 변환합니다.                                                             |                         |
+| polars value-counts    | 데이터프레임             | 시리즈의 고유 값에 대한 개수가 있는 데이터프레임을 반환합니다.                                 |                         |
+| polars var             | 표현식, 데이터프레임 | 집계에 대한 분산 표현식을 만듭니다.                                                      |                         |
+| polars when            | 표현식            | when 표현식을 만들고 수정합니다.                                                          |                         |
+| polars with-column     | 데이터프레임             | 데이터프레임에 시리즈를 추가합니다.                                                                  | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
 
-## Future of Dataframes
+## 데이터프레임의 미래
 
-We hope that by the end of this page you have a solid grasp of how to use the
-dataframe commands. As you can see they offer powerful operations that can
-help you process data faster and natively.
+이 페이지가 끝날 무렵에는 데이터프레임 명령을 사용하는 방법에 대해 확실히 이해하셨기를 바랍니다. 보시다시피 데이터를 더 빠르고 기본적으로 처리하는 데 도움이 되는 강력한 작업을 제공합니다.
 
-However, the future of these dataframes is still very experimental. New
-commands and tools that take advantage of these commands will be added as they
-mature.
+그러나 이러한 데이터프레임의 미래는 아직 매우 실험적입니다. 이러한 명령을 활용하는 새로운 명령과 도구는 성숙해짐에 따라 추가될 것입니다.
 
-Check this chapter, as well as our [Blog](/blog/), regularly to learn about new
-dataframes features and how they can help you process data faster and efficiently.
+새로운 데이터프레임 기능과 데이터를 더 빠르고 효율적으로 처리하는 데 도움이 되는 방법에 대해 알아보려면 이 장과 [블로그](/blog/)를 정기적으로 확인하십시오.
