@@ -1,76 +1,72 @@
 ---
 next:
-  text: Nu as a Shell
+  text: 셸로서의 Nu
   link: /book/nu_as_a_shell.md
 ---
-# Best Practices
+# 모범 사례
 
-This page is a working document collecting syntax guidelines and best practices we have discovered so far.
-The goal of this document is to eventually land on a canonical Nushell code style, but as for now it is still work in
-progress and subject to change. We welcome discussion and contributions.
+이 페이지는 지금까지 발견한 구문 지침과 모범 사례를 수집하는 작업 문서입니다.
+이 문서의 목표는 결국 정식 누셸 코드 스타일에 도달하는 것이지만, 현재로서는 아직 진행 중이며 변경될 수 있습니다. 토론과 기여를 환영합니다.
 
-Keep in mind that these guidelines are not required to be used in external repositories (not ours), you can change them in the
-way you want, but please be consistent and follow your rules.
+이러한 지침은 외부 저장소(우리 것이 아님)에서 사용할 필요는 없으며, 원하는 방식으로 변경할 수 있지만 일관성을 유지하고 규칙을 따르십시오.
 
-All escape sequences should not be interpreted literally, unless directed to do so. In other words,
-treat something like `\n` like the new line character and not a literal slash followed by `n`.
+모든 이스케이프 시퀀스는 지시가 없는 한 문자 그대로 해석되어서는 안 됩니다. 즉, `\n`과 같은 것을 리터럴 슬래시 다음에 `n`이 오는 것이 아니라 줄 바꿈 문자로 처리하십시오.
 
-## Formatting
+## 서식 지정
 
-### Defaults
+### 기본값
 
-**It's recommended to** assume that by default no spaces or tabs allowed, but the following rules define where they are allowed.
+**기본적으로 공백이나 탭이 허용되지 않는다고 가정하는 것이 좋지만**, 다음 규칙은 허용되는 위치를 정의합니다.
 
-### Basic
+### 기본
 
-- **It's recommended to** put one space before and after pipe `|` symbol, commands, subcommands, their options and arguments.
-- **It's recommended to** never put several consecutive spaces unless they are part of string.
-- **It's recommended to** omit commas between list items.
+- **파이프 `|` 기호, 명령, 하위 명령, 해당 옵션 및 인수 앞뒤에 공백 하나를 두는 것이 좋습니다.**
+- **문자열의 일부가 아닌 한 여러 개의 연속된 공백을 넣지 않는 것이 좋습니다.**
+- **목록 항목 사이에 쉼표를 생략하는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
 ```
 
-Incorrect:
+잘못됨:
 
 ```nu
-# - too many spaces after "|": 2 instead of 1
+# - "|" 뒤에 너무 많은 공백: 1개 대신 2개
 'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
 ```
 
-#### One-line Format
+#### 한 줄 형식
 
-One-line format is a format for writing all commands in one line.
+한 줄 형식은 모든 명령을 한 줄에 작성하는 형식입니다.
 
-**It's recommended to** default to this format:
+**다음과 같은 경우를 제외하고 이 형식을 기본으로 하는 것이 좋습니다.**
 
-1. unless you are writing scripts
-2. in scripts for lists and records unless they either:
-   1. more than 80 characters long
-   2. contain nested lists or records
-3. for pipelines less than 80 characters long not containing items should be formatted with
-   a long format
+1. 스크립트를 작성하지 않는 경우
+2. 스크립트에서 목록 및 레코드의 경우 다음 중 하나에 해당하지 않는 한:
+   1. 80자보다 긴 경우
+   2. 중첩된 목록 또는 레코드를 포함하는 경우
+3. 긴 형식으로 서식을 지정해야 하는 항목을 포함하지 않는 80자 미만의 파이프라인의 경우
 
-Rules:
+규칙:
 
-1. parameters:
-   1. **It's recommended to** put one space after comma `,` after block or closure parameter.
-   2. **It's recommended to** put one space after pipe `|` symbol denoting block or closure parameter list end.
-2. block and closure bodies:
-   1. **It's recommended to** put one space after opening block or closure curly brace `{` if no explicit parameters defined.
-   2. **It's recommended to** put one space before closing block or closure curly brace `}`.
-3. records:
-   1. **It's recommended to** put one space after `:` after record key.
-   2. **It's recommended to** put one space after comma `,` after key value.
-4. lists:
-   1. **It's recommended to** put one space after comma `,` after list value.
-5. surrounding constructs:
-   1. **It's recommended to** put one space before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol is not the same.
-   2. **It's recommended to** put one space after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol is not the same.
+1. 매개변수:
+   1. **블록 또는 클로저 매개변수 뒤에 쉼표 `,` 뒤에 공백 하나를 두는 것이 좋습니다.**
+   2. **블록 또는 클로저 매개변수 목록 끝을 나타내는 파이프 `|` 기호 뒤에 공백 하나를 두는 것이 좋습니다.**
+2. 블록 및 클로저 본문:
+   1. **명시적인 매개변수가 정의되지 않은 경우 여는 블록 또는 클로저 중괄호 `{` 뒤에 공백 하나를 두는 것이 좋습니다.**
+   2. **닫는 블록 또는 클로저 중괄호 `}` 앞에 공백 하나를 두는 것이 좋습니다.**
+3. 레코드:
+   1. **레코드 키 뒤에 `:` 뒤에 공백 하나를 두는 것이 좋습니다.**
+   2. **키 값 뒤에 쉼표 `,` 뒤에 공백 하나를 두는 것이 좋습니다.**
+4. 목록:
+   1. **목록 값 뒤에 쉼표 `,` 뒤에 공백 하나를 두는 것이 좋습니다.**
+5. 주변 구문:
+   1. **앞 기호가 동일하지 않은 경우 여는 대괄호 `[`, 중괄호 `{` 또는 괄호 `(` 앞에 공백 하나를 두는 것이 좋습니다.**
+   2. **뒤 기호가 동일하지 않고 이 규칙을 적용하면 단일 괄호가 있는 줄이 생성되는 경우 닫는 대괄호 `]`, 중괄호 `}` 또는 괄호 `)` 뒤에 공백 하나를 두는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 [[status]; [UP] [UP]] | all {|el| $el.status == UP }
@@ -83,56 +79,55 @@ Correct:
 (1 + 2) * 3
 ```
 
-Incorrect:
+잘못됨:
 
 ```nu
-# too many spaces before "|el|": no space is allowed
+# "|el|" 앞에 너무 많은 공백: 공백 허용 안 됨
 [[status]; [UP] [UP]] | all { |el| $el.status == UP }
 
-# too many spaces before ",": no space is allowed
+# "," 앞에 너무 많은 공백: 공백 허용 안 됨
 [1 2 3 4] | reduce {|elt , acc| $elt + $acc }
 
-# too many spaces before "x": no space is allowed
+# "x" 앞에 너무 많은 공백: 공백 허용 안 됨
 { x: 1, y: 2}
 
-# too many spaces before "[3": one space is required
+# "[3" 앞에 너무 많은 공백: 공백 하나 필요
 [1 2] | zip  [3 4]
 
-# too many spaces before "]": no space is allowed
+# "]" 앞에 너무 많은 공백: 공백 허용 안 됨
 [ ]
 
-# too many spaces before ")": no space is allowed
+# ")" 앞에 너무 많은 공백: 공백 허용 안 됨
 (1 + 2 ) * 3
 ```
 
-#### Multi-line Format
+#### 여러 줄 형식
 
-Multi-line format is a format for writing all commands in several lines. It inherits all rules from one-line format
-and modifies them slightly.
+여러 줄 형식은 모든 명령을 여러 줄에 작성하는 형식입니다. 한 줄 형식의 모든 규칙을 상속하고 약간 수정합니다.
 
-**It's recommended to** default to this format:
+**다음과 같은 경우 이 형식을 기본으로 하는 것이 좋습니다.**
 
-1. while you are writing scripts
-2. in scripts for lists and records while they either:
-   1. more than 80 characters long
-   2. contain nested lists or records
-3. for pipelines more 80 characters long
+1. 스크립트를 작성하는 동안
+2. 스크립트에서 목록 및 레코드의 경우 다음 중 하나에 해당하는 동안:
+   1. 80자보다 긴 경우
+   2. 중첩된 목록 또는 레코드를 포함하는 경우
+3. 80자보다 긴 파이프라인의 경우
 
-Rules:
+규칙:
 
-1. general:
-   1. **It's required to omit** trailing spaces.
-2. block and closure bodies:
-   1. **It's recommended to** put each body pipeline on a separate line.
-3. records:
-   1. **It's recommended to** put each record key-value pair on separate line.
-4. lists:
-   1. **It's recommended to** put each list item on separate line.
-5. surrounding constructs:
-   1. **It's recommended to** put one `\n` before opening square `[`, curly brace `{`, or parenthesis `(` if preceding symbol is not the and applying this rule produce line with a singular parenthesis.
-   2. **It's recommended to** put one `\n` after closing square `]`, curly brace `}`, or parenthesis `)` if following symbol is not the same and applying this rule produce line with a singular parenthesis.
+1. 일반:
+   1. **후행 공백을 생략해야 합니다.**
+2. 블록 및 클로저 본문:
+   1. **각 본문 파이프라인을 별도의 줄에 두는 것이 좋습니다.**
+3. 레코드:
+   1. **각 레코드 키-값 쌍을 별도의 줄에 두는 것이 좋습니다.**
+4. 목록:
+   1. **각 목록 항목을 별도의 줄에 두는 것이 좋습니다.**
+5. 주변 구문:
+   1. **앞 기호가 동일하지 않고 이 규칙을 적용하면 단일 괄호가 있는 줄이 생성되는 경우 여는 대괄호 `[`, 중괄호 `{` 또는 괄호 `(` 앞에 `\n` 하나를 두는 것이 좋습니다.**
+   2. **뒤 기호가 동일하지 않고 이 규칙을 적용하면 단일 괄호가 있는 줄이 생성되는 경우 닫는 대괄호 `]`, 중괄호 `}` 또는 괄호 `)` 뒤에 `\n` 하나를 두는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 [[status]; [UP] [UP]] | all {|el|
@@ -155,44 +150,43 @@ let selectedProfile = (for it in ($credentials | transpose name credentials) {
 })
 ```
 
-Incorrect:
+잘못됨:
 
 ```nu
-# too many spaces before "|el|": no space is allowed (like in one-line format)
+# "|el|" 앞에 너무 많은 공백: 공백 허용 안 됨(한 줄 형식과 같음)
 [[status]; [UP] [UP]] | all { |el|
-    # too few "\n" before "}": one "\n" is required
+    # "}" 앞에 너무 적은 "\n": "\n" 하나 필요
     $el.status == UP}
 
-# too many spaces before "2": one space is required (like in one-line format)
+# "2" 앞에 너무 많은 공백: 공백 하나 필요(한 줄 형식과 같음)
 [1  2 3 4] | reduce {|elt, acc|
     $elt + $acc
 }
 
 {
-   # too many "\n" before "x": one-line format required as no nested lists or record exist
+   # "x" 앞에 너무 많은 "\n": 중첩된 목록이나 레코드가 없으므로 한 줄 형식 필요
    x: 1,
    y: 2
 }
 
-# too few "\n" before "{": multi-line format required as there are two nested records
+# "{" 앞에 너무 적은 "\n": 중첩된 레코드가 두 개 있으므로 여러 줄 형식 필요
 [{name: "Teresa", age: 24},
   {name: "Thomas", age: 26}]
 
 let selectedProfile = (
-    # too many "\n" before "foo": no "\n" is allowed
+    # "foo" 앞에 너무 많은 "\n": "\n" 허용 안 됨
     for it in ($credentials | transpose name credentials) {
         echo $it.name
 })
 ```
 
-## Naming Convention
+## 명명 규칙
 
-### Abbreviations and Acronyms
+### 약어 및 두문자어
 
-**It's recommended** to use full concise words over abbreviations and acronyms, unless they are well-known and/or
-commonly used.
+**잘 알려져 있거나 일반적으로 사용되지 않는 한 약어 및 두문자어보다 완전하고 간결한 단어를 사용하는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 query-user --id 123
@@ -200,7 +194,7 @@ query-user --id 123
 $user.name | str downcase
 ```
 
-Incorrect:
+잘못됨:
 
 ```nu
 qry-usr --id 123
@@ -208,33 +202,33 @@ qry-usr --id 123
 $user.name | string downcase
 ```
 
-### Case
+### 대소문자
 
-#### Commands
+#### 명령
 
-**It's recommended to** use kebab-case for command names with multiple words.
+**여러 단어로 된 명령 이름에는 케밥 케이스를 사용하는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 fetch-user --id 123
 ```
 
-Incorrect:
+잘못됨:
 
 ```nu
 fetch_user --id 123
 fetchUser --id 123
 ```
 
-See also [Naming Commands](custom_commands.md#naming-commands).
+참조: [명령 이름 지정](custom_commands.md#naming-commands).
 
-#### Sub-Commands
+#### 하위 명령
 
-Sub commands are commands that are logically grouped under a parent command and separated by a space.
-**It's recommended to** use kebab-case for the sub-command name.
+하위 명령은 부모 명령 아래에 논리적으로 그룹화되고 공백으로 구분되는 명령입니다.
+**하위 명령 이름에는 케밥 케이스를 사용하는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 date now
@@ -246,13 +240,13 @@ def "login basic-auth" [username: string password: string] {
 }
 ```
 
-See also [Naming Sub-Commands](custom_commands.md#subcommands).
+참조: [하위 명령 이름 지정](custom_commands.md#subcommands).
 
-#### Flags
+#### 플래그
 
-**It's recommended to** use kebab-case for flag names.
+**플래그 이름에는 케밥 케이스를 사용하는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 def greet [name: string, --all-caps] {
@@ -260,7 +254,7 @@ def greet [name: string, --all-caps] {
 }
 ```
 
-Incorrect:
+잘못됨:
 
 ```nu
 def greet [name: string, --all_caps] {
@@ -269,17 +263,16 @@ def greet [name: string, --all_caps] {
 ```
 
 ::: tip
-Notice that the name used to access the flag is accessed by replacing the dash with an underscore in the resulting
-variable name.
+플래그에 액세스하는 데 사용되는 이름은 결과 변수 이름에서 대시를 밑줄로 바꾸어 액세스합니다.
 
-See [Flags](custom_commands.md#flags).
+[플래그](custom_commands.md#flags)를 참조하십시오.
 :::
 
-#### Variables and Command Parameters
+#### 변수 및 명령 매개변수
 
-**It's recommended to** use snake_case for variable names, including command parameters.
+**명령 매개변수를 포함한 변수 이름에는 스네이크 케이스를 사용하는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 let user_id = 123
@@ -289,7 +282,7 @@ def fetch-user [user_id: int] {
 }
 ```
 
-Incorrect:
+잘못됨:
 
 ```nu
 let user-id = 123
@@ -300,11 +293,11 @@ def fetch-user [user-id: int] {
 }
 ```
 
-#### Environment Variables
+#### 환경 변수
 
-**It's recommended to** use SCREAMING_SNAKE_CASE for environment variable names.
+**환경 변수 이름에는 SCREAMING_SNAKE_CASE를 사용하는 것이 좋습니다.**
 
-Correct:
+올바름:
 
 ```nu
 $env.ENVIRONMENT_CODE = "prod"
@@ -312,7 +305,7 @@ $env.ENVIRONMENT_CODE = "prod"
 $env.APP_VERSION = "1.0.0"
 ```
 
-Incorrect:
+잘못됨:
 
 ```nu
 $env.ENVIRONMENT-CODE = "prod"
@@ -320,15 +313,14 @@ $env.ENVIRONMENT-CODE = "prod"
 $env.app_version = "1.0.0"
 ```
 
-## Options and Parameters of Custom Commands
+## 사용자 지정 명령의 옵션 및 매개변수
 
-- **It's recommended to** keep count of all positional parameters less than or equal to 2, for remaining inputs use options. Assume that command can expect source and destination parameter, like `mv`: source and target file or directory.
-- **It's recommended to** use positional parameters unless they can't be used due to rules listed here or technical restrictions.
-  For instance, when there are several kinds of optional parameters (but at least one parameter should be provided)
-  use options. Great example of this is `ansi gradient` command where at least foreground or background must be passed.
-- **It's recommended to** provide both long and short options.
+- **모든 위치 매개변수의 수를 2개 이하로 유지하고 나머지 입력에는 옵션을 사용하는 것이 좋습니다.** `mv`와 같이 명령이 소스 및 대상 매개변수를 예상할 수 있다고 가정합니다. 소스 및 대상 파일 또는 디렉터리.
+- **여기에 나열된 규칙이나 기술적 제한으로 인해 사용할 수 없는 경우를 제외하고는 위치 매개변수를 사용하는 것이 좋습니다.**
+  예를 들어, 여러 종류의 선택적 매개변수가 있지만(그러나 적어도 하나의 매개변수는 제공해야 함)
+  옵션을 사용합니다. 좋은 예는 전경 또는 배경 중 적어도 하나를 전달해야 하는 `ansi gradient` 명령입니다.
+- **긴 옵션과 짧은 옵션을 모두 제공하는 것이 좋습니다.**
 
-## Documentation
+## 문서화
 
-- **It's recommended to** provide documentation for all exported entities (like custom commands) and their
-  inputs (like custom command parameters and options).
+- **내보낸 모든 엔터티(예: 사용자 지정 명령)와 해당 입력(예: 사용자 지정 명령 매개변수 및 옵션)에 대한 문서를 제공하는 것이 좋습니다.**

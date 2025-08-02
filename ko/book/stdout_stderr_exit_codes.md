@@ -1,49 +1,49 @@
-# Stdout, Stderr, and Exit Codes
+# 표준 출력, 표준 오류 및 종료 코드
 
-An important piece of interop between Nushell and external commands is working with the standard streams of data coming from the external.
+누셸과 외부 명령 간의 상호 운용성의 중요한 부분은 외부에서 오는 데이터의 표준 스트림으로 작업하는 것입니다.
 
-The first of these important streams is stdout.
+이러한 중요한 스트림 중 첫 번째는 표준 출력입니다.
 
-## Stdout
+## 표준 출력
 
-Stdout is the way that most external apps will send data into the pipeline or to the screen. Data sent by an external app to its stdout is received by Nushell by default if it's part of a pipeline:
+표준 출력은 대부분의 외부 앱이 파이프라인이나 화면으로 데이터를 보내는 방법입니다. 외부 앱에서 표준 출력으로 보낸 데이터는 파이프라인의 일부인 경우 기본적으로 누셸에서 수신됩니다.
 
 ```nu
 external | str join
 ```
 
-The above would call the external named `external` and would redirect the stdout output stream into the pipeline. With this redirection, Nushell can then pass the data to the next command in the pipeline, here [`str join`](/commands/docs/str_join.md).
+위는 `external`이라는 외부를 호출하고 표준 출력 스트림을 파이프라인으로 리디렉션합니다. 이 리디렉션을 통해 누셸은 데이터를 파이프라인의 다음 명령인 [`str join`](/commands/docs/str_join.md)으로 전달할 수 있습니다.
 
-Without the pipeline, Nushell will not do any redirection, allowing it to print directly to the screen.
+파이프라인이 없으면 누셸은 리디렉션을 수행하지 않으므로 화면에 직접 인쇄할 수 있습니다.
 
-## Stderr
+## 표준 오류
 
-Another common stream that external applications often use to print error messages is stderr. By default, Nushell does not do any redirection of stderr, which means that by default it will print to the screen.
+외부 응용 프로그램이 오류 메시지를 인쇄하는 데 자주 사용하는 또 다른 일반적인 스트림은 표준 오류입니다. 기본적으로 누셸은 표준 오류를 리디렉션하지 않으므로 기본적으로 화면에 인쇄됩니다.
 
-But you can do pass stderr to a command or a file if you want to:
+그러나 원하는 경우 표준 오류를 명령이나 파일로 전달할 수 있습니다.
 
-- use `e>|` to pass stderr to next command.
-- use `e> file` to redirect stderr to a file.
-- use `do -i { cmd } | complete` to capture stderr message.
+- `e>|`를 사용하여 표준 오류를 다음 명령으로 전달합니다.
+- `e> file`을 사용하여 표준 오류를 파일로 리디렉션합니다.
+- `do -i { cmd } | complete`를 사용하여 표준 오류 메시지를 캡처합니다.
 
-## Exit Code
+## 종료 코드
 
-Finally, external commands have an "exit code". These codes help give a hint to the caller whether the command ran successfully.
+마지막으로 외부 명령에는 "종료 코드"가 있습니다. 이러한 코드는 명령이 성공적으로 실행되었는지 여부를 호출자에게 알려주는 데 도움이 됩니다.
 
-Nushell tracks the last exit code of the recently completed external in one of two ways. The first way is with the `LAST_EXIT_CODE` environment variable.
+누셸은 최근에 완료된 외부의 마지막 종료 코드를 두 가지 방법 중 하나로 추적합니다. 첫 번째 방법은 `LAST_EXIT_CODE` 환경 변수를 사용하는 것입니다.
 
 ```nu
 do { external }
 $env.LAST_EXIT_CODE
 ```
 
-The second way is to use the [`complete`](/commands/docs/complete.md) command.
+두 번째 방법은 [`complete`](/commands/docs/complete.md) 명령을 사용하는 것입니다.
 
-## Using the [`complete`](/commands/docs/complete.md) command
+## [`complete`](/commands/docs/complete.md) 명령 사용
 
-The [`complete`](/commands/docs/complete.md) command allows you to run an external to completion, and gather the stdout, stderr, and exit code together in one record.
+[`complete`](/commands/docs/complete.md) 명령을 사용하면 외부를 완료까지 실행하고 표준 출력, 표준 오류 및 종료 코드를 하나의 레코드에 함께 수집할 수 있습니다.
 
-If we try to run the external `cat` on a file that doesn't exist, we can see what [`complete`](/commands/docs/complete.md) does with the streams, including the redirected stderr:
+존재하지 않는 파일에서 외부 `cat`을 실행하려고 하면 리디렉션된 표준 오류를 포함하여 [`complete`](/commands/docs/complete.md)가 스트림으로 수행하는 작업을 볼 수 있습니다.
 
 ```nu
 cat unknown.txt | complete
@@ -54,86 +54,86 @@ cat unknown.txt | complete
 # => ╰───────────┴─────────────────────────────────────────────╯
 ```
 
-## `echo`, `print`, and `log` commands
+## `echo`, `print` 및 `log` 명령
 
-The [`echo`](/commands/docs/echo.md) command is mainly for _pipes_. It returns its arguments, ignoring the piped-in value. There is usually little reason to use this over just writing the values as-is.
+[`echo`](/commands/docs/echo.md) 명령은 주로 _파이프_용입니다. 파이프된 값을 무시하고 인수를 반환합니다. 일반적으로 값을 있는 그대로 작성하는 것보다 이것을 사용할 이유는 거의 없습니다.
 
-In contrast, the [`print`](/commands/docs/print.md) command prints the given values to stdout as plain text. It can be used to write to standard error output, as well. Unlike [`echo`](/commands/docs/echo.md), this command does not return any value (`print | describe` will return "nothing"). Since this command has no output, there is no point in piping it with other commands.
+반면에 [`print`](/commands/docs/print.md) 명령은 주어진 값을 일반 텍스트로 표준 출력에 인쇄합니다. 표준 오류 출력에 쓰는 데도 사용할 수 있습니다. [`echo`](/commands/docs/echo.md)와 달리 이 명령은 값을 반환하지 않습니다(`print | describe`는 "nothing"을 반환함). 이 명령에는 출력이 없으므로 다른 명령과 파이프하는 것은 의미가 없습니다.
 
-The [standard library](/book/standard_library.md) has commands to write out messages in different logging levels. For example:
+[표준 라이브러리](/book/standard_library.md)에는 다른 로깅 수준으로 메시지를 작성하는 명령이 있습니다. 예시:
 
 @[code](@snippets/book/std_log.nu)
 
-![Log message examples](../assets/images/0_79_std_log.png)
+![로그 메시지 예제](../assets/images/0_79_std_log.png)
 
-The log level for output can be set with the `NU_LOG_LEVEL` environment variable:
+출력의 로그 수준은 `NU_LOG_LEVEL` 환경 변수로 설정할 수 있습니다.
 
 ```nu
 NU_LOG_LEVEL=DEBUG nu std_log.nu
 ```
 
-## File Redirections
+## 파일 리디렉션
 
-If you want to redirect stdout of an external command to a file, you can use `out>` followed by a file path. Similarly, you can use `err>` to redirect stderr:
+외부 명령의 표준 출력을 파일로 리디렉션하려면 `out>` 다음에 파일 경로를 사용하면 됩니다. 마찬가지로 `err>`를 사용하여 표준 오류를 리디렉션할 수 있습니다.
 
 ```nu
 cat unknown.txt out> out.log err> err.log
 ```
 
-If you want to redirect both stdout and stderr to the same file, you can use `out+err>`:
+표준 출력과 표준 오류를 모두 동일한 파일로 리디렉션하려면 `out+err>`를 사용할 수 있습니다.
 
 ```nu
 cat unknown.txt out+err> log.log
 ```
 
-Note that `out` can be shortened to just `o`, and `err` can be shortened to just `e`. So, the following examples are equivalent to the previous ones above:
+`out`은 `o`로, `err`은 `e`로 단축할 수 있습니다. 따라서 다음 예제는 위의 이전 예제와 동일합니다.
 ```nu
 cat unknown.txt o> out.log e> err.log
 
 cat unknown.txt o+e> log.log
 ```
 
-Also, any expression can be used for the file path, as long as it is a string value:
+또한 문자열 값인 한 모든 표현식을 파일 경로에 사용할 수 있습니다.
 ```nu
 use std
 cat unknown.txt o+e> (std null-device)
 ```
 
-Note that file redirections are scoped to an expression and apply to all external commands in the expression. In the example below, `out.txt` will contain `hello\nworld`:
+파일 리디렉션은 표현식으로 범위가 지정되며 표현식의 모든 외부 명령에 적용됩니다. 아래 예제에서 `out.txt`에는 `hello\nworld`가 포함됩니다.
 ```nu
 let text = "hello\nworld"
 ($text | head -n 1; $text | tail -n 1) o> out.txt
 ```
-Pipes and additional file redirections inside the expression will override any file redirections applied from the outside.
+표현식 내부의 파이프 및 추가 파일 리디렉션은 외부에서 적용된 모든 파일 리디렉션을 재정의합니다.
 
-## Pipe Redirections
+## 파이프 리디렉션
 
-If a regular pipe `|` comes after an external command, it redirects the stdout of the external command as input to the next command. To instead redirect the stderr of the external command, you can use the stderr pipe, `err>|` or `e>|`:
+외부 명령 뒤에 일반 파이프 `|`가 오면 외부 명령의 표준 출력을 다음 명령의 입력으로 리디렉션합니다. 대신 외부 명령의 표준 오류를 리디렉션하려면 표준 오류 파이프 `err>|` 또는 `e>|`를 사용할 수 있습니다.
 
 ```nu
 cat unknown.txt e>| str upcase
 ```
 
-Of course, there is a corresponding pipe for combined stdout and stderr, `out+err>|` or `o+e>|`:
+물론 결합된 표준 출력 및 표준 오류에 해당하는 파이프 `out+err>|` 또는 `o+e>|`가 있습니다.
 
 ```nu
 nu -c 'print output; print -e error' o+e>| str upcase
 ```
 
-Unlike file redirections, pipe redirections do not apply to all commands inside an expression. Rather, only the last command in the expression is affected. For example, only `cmd2` in the snippet below will have its stdout and stderr redirected by the pipe.
+파일 리디렉션과 달리 파이프 리디렉션은 표현식 내의 모든 명령에 적용되지 않습니다. 오히려 표현식의 마지막 명령만 영향을 받습니다. 예를 들어, 아래 코드 조각의 `cmd2`만 파이프로 표준 출력 및 표준 오류를 리디렉션합니다.
 ```nu
 (cmd1; cmd2) o+e>| cmd3
 ```
 
-## Raw Streams
+## 원시 스트림
 
-Both stdout and stderr are represented as "raw streams" inside of Nushell. These are streams of bytes rather than the structured data used by internal Nushell commands.
+표준 출력과 표준 오류는 모두 누셸 내부에서 "원시 스트림"으로 표시됩니다. 이것은 내부 누셸 명령에서 사용하는 구조화된 데이터가 아닌 바이트 스트림입니다.
 
-Because streams of bytes can be difficult to work with, especially given how common it is to use output as if it was text data, Nushell attempts to convert raw streams into text data. This allows other commands to pull on the output of external commands and receive strings they can further process.
+바이트 스트림은 작업하기 어려울 수 있으며, 특히 출력을 텍스트 데이터처럼 사용하는 것이 일반적이기 때문에 누셸은 원시 스트림을 텍스트 데이터로 변환하려고 시도합니다. 이를 통해 다른 명령이 외부 명령의 출력을 가져와 추가로 처리할 수 있는 문자열을 받을 수 있습니다.
 
-Nushell attempts to convert to text using UTF-8. If at any time the conversion fails, the rest of the stream is assumed to always be bytes.
+누셸은 UTF-8을 사용하여 텍스트 데이터로 변환하려고 시도합니다. 변환이 실패하면 나머지 스트림은 항상 바이트로 간주됩니다.
 
-If you want more control over the decoding of the byte stream, you can use the [`decode`](/commands/docs/decode.md) command. The [`decode`](/commands/docs/decode.md) command can be inserted into the pipeline after the external, or other raw stream-creating command, and will handle decoding the bytes based on the argument you give decode. For example, you could decode shift-jis text this way:
+바이트 스트림 디코딩을 더 제어하려면 [`decode`](/commands/docs/decode.md) 명령을 사용할 수 있습니다. [`decode`](/commands/docs/decode.md) 명령은 외부 또는 기타 원시 스트림 생성 명령 뒤에 파이프라인에 삽입할 수 있으며 decode에 제공하는 인수를 기반으로 바이트를 디코딩합니다. 예를 들어, 이 방법으로 shift-jis 텍스트를 디코딩할 수 있습니다.
 
 ```nu
 0x[8a 4c] | decode shift-jis

@@ -1,7 +1,7 @@
-# Working with Records
+# 레코드 작업
 
 :::tip
-Records are roughly equivalent to the individual rows of a table. You can think of a record as essentially being a "one-row table". Thus, most commands which operate on a table row _also_ operates on a record. For instance, [`update`](/commands/docs/update.md) can be used with records:
+레코드는 테이블의 개별 행과 거의 동일합니다. 레코드를 본질적으로 "한 행 테이블"로 생각할 수 있습니다. 따라서 테이블 행에서 작동하는 대부분의 명령은 레코드에서도 _또한_ 작동합니다. 예를 들어, [`update`](/commands/docs/update.md)는 레코드와 함께 사용할 수 있습니다.
 
 ```nu
 let my_record = {
@@ -15,16 +15,16 @@ $my_record | update age { $in + 1 }
 # => ╰──────┴─────╯
 ```
 
-Note that the `my_record` [variable is immutable](variables.md). The updated record resulting from the [pipeline](pipelines.md) is printed as seen in the code block. The `my_record` variable still holds the original value - `$my_record.age` is still `30`.
+`my_record` [변수는 불변](variables.md)입니다. [파이프라인](pipelines.md)에서 반환된 업데이트된 레코드는 코드 블록에 표시된 대로 인쇄됩니다. `my_record` 변수는 여전히 원래 값을 보유하고 있습니다. `$my_record.age`는 여전히 `30`입니다.
 
 :::
 
-## Creating records
+## 레코드 만들기
 
-A record is a collection of zero or more key-value pair mappings. It is similar to a JSON object, and can be created using the same syntax:
+레코드는 0개 이상의 키-값 쌍 매핑 모음입니다. JSON 객체와 유사하며 동일한 구문을 사용하여 만들 수 있습니다.
 
 ```nu
-# Nushell
+# 누셸
 { "apples": 543, "bananas": 411, "oranges": 0 }
 # => ╭─────────┬─────╮
 # => │ apples  │ 543 │
@@ -40,10 +40,10 @@ A record is a collection of zero or more key-value pair mappings. It is similar 
 # => ╰─────────┴─────╯
 ```
 
-In Nushell, the key-value pairs of a record can also be separated using spaces or line-breaks.
+누셸에서 레코드의 키-값 쌍은 공백이나 줄 바꿈으로 구분할 수도 있습니다.
 
 ::: tip
-As records can have many fields, they are, by default, displayed vertically rather than left-to-right. To display a record left-to-right, convert it to a nuon. For example:
+레코드는 많은 필드를 가질 수 있으므로 기본적으로 왼쪽에서 오른쪽이 아닌 세로로 표시됩니다. 레코드를 왼쪽에서 오른쪽으로 표시하려면 nuon으로 변환하십시오. 예시:
 
 ```nu
   {
@@ -55,9 +55,9 @@ As records can have many fields, they are, by default, displayed vertically rath
 
 :::
 
-## Updating Records
+## 레코드 업데이트
 
-As with lists, you can [`insert`](/commands/docs/insert.md) values in records. For example, let's add some pears:
+목록과 마찬가지로 레코드에 값을 [`insert`](/commands/docs/insert.md)할 수 있습니다. 예를 들어, 배를 좀 추가해 보겠습니다.
 
 ```nu
 { "apples": 543, "bananas": 411, "oranges": 0 }
@@ -70,7 +70,7 @@ As with lists, you can [`insert`](/commands/docs/insert.md) values in records. F
 # => ╰─────────┴─────╯
 ```
 
-You can also [`update`](/commands/docs/update.md) values:
+값을 [`update`](/commands/docs/update.md)할 수도 있습니다.
 
 ```nu
 { "apples": 543, "bananas": 411, "oranges": 0 }
@@ -82,9 +82,9 @@ You can also [`update`](/commands/docs/update.md) values:
 # => ╰─────────┴─────╯
 ```
 
-To make a copy of a record with new fields, you can either:
+새 필드가 있는 레코드의 복사본을 만들려면 다음 중 하나를 수행할 수 있습니다.
 
-- Use the [`merge`](/commands/docs/merge.md) command:
+- [`merge`](/commands/docs/merge.md) 명령 사용:
 
   ```nu
   let first_record = { name: "Sam", rank: 10 }
@@ -96,7 +96,7 @@ To make a copy of a record with new fields, you can either:
   # =>   ╰───────┴───────╯
   ```
 
-- Use the [spread operator](/book/operators#spread-operator) (`...`) to expand the first record inside a new record:
+- [스프레드 연산자](/book/operators#spread-operator)(`...`)를 사용하여 새 레코드 내에서 첫 번째 레코드를 확장합니다.
 
   ```nu
   let first_record = { name: "Sam", rank: 10 }
@@ -111,9 +111,9 @@ To make a copy of a record with new fields, you can either:
   # =>   ╰───────┴───────╯
   ```
 
-## Iterating over a Record
+## 레코드 반복
 
-You can iterate over the key-value pairs of a record by first transposing it into a table:
+레코드를 테이블로 전치하여 레코드의 키-값 쌍을 반복할 수 있습니다.
 
 ```nu
 { "apples": 543, "bananas": 411, "oranges": 0 }
@@ -126,10 +126,10 @@ You can iterate over the key-value pairs of a record by first transposing it int
 # => ╰───┴─────────────────────╯
 ```
 
-## Accessing Record Values
+## 레코드 값 액세스
 
-See [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) for an in-depth explanation of how to access record values (and other structured data).
+레코드 값(및 기타 구조화된 데이터)에 액세스하는 방법에 대한 자세한 내용은 [구조화된 데이터 탐색 및 액세스](/book/navigating_structured_data.md)를 참조하십시오.
 
-## Other Record Commands
+## 기타 레코드 명령
 
-See [Working with Tables](./working_with_tables.md) - Remember, commands that operate on table rows will usually operate the same way on records.
+[테이블 작업](./working_with_tables.md)을 참조하십시오. 테이블 행에서 작동하는 명령은 일반적으로 레코드에서도 동일한 방식으로 작동합니다.
