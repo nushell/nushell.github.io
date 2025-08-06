@@ -91,6 +91,35 @@ job unfreeze 1
 # we're back in vim
 ```
 
+## Communicating between jobs
+
+Data can be sent to a job using `job send <id>`, and the job can receive it using `job recv`:
+
+```nu
+let jobId = job spawn {
+    job recv | save sent.txt
+}
+
+'hello from the main thread' | job send $jobId
+
+sleep 1sec
+
+open sent.txt
+# => hello from the main thread
+```
+
+The main thread has a job ID of 0, so you can also send data in the other direction:
+
+```nu
+job spawn {
+    sleep 1sec
+    'Hello from a background job' | job send 0
+}
+
+job recv
+# => Hello from a background job
+```
+
 ## Exit Behavior
 
 Unlike many other shells, Nushell jobs are **not** separate processes,
