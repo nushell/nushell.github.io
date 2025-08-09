@@ -66,7 +66,7 @@ The [standard library](/book/standard_library.md) has commands to write out mess
 
 ![Log message examples](../assets/images/0_79_std_log.png)
 
-The log level for output can be set with the `NU_LOG_LEVEL` environment variable:
+The log level for output can be set with the [`NU_LOG_LEVEL`](/book/special_variables.md#env-nu-log-level) environment variable:
 
 ```nu
 NU_LOG_LEVEL=DEBUG nu std_log.nu
