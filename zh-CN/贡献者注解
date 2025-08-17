@@ -1,0 +1,7 @@
+符号链接
+--------
+本目录下的 contributor-book  cookbook  lang-guide commands 这些文件夹是到根目录各自文件夹的符号链接。
+
+如需贡献这 3 个文件夹里面的翻译内容，例如cookbook，请先删除其符号链接，再把 根目录 那个cookbook文件夹复制到这里即可开始你对 cookbook 的翻译。
+
+之所以选择弄符号链接而不是在 `.vuepress/configs/navbar/zh-CN.ts` 把这些还没翻译的内容指向英文文档，是因为跳到英文文档后站点语言设置也会跟着变成英文，影响用户体验。

@@ -1,144 +1,430 @@
 # 以 Nushell 的方式思考
 
-为了帮助你理解并充分利用 Nushell，我们把这部分内容一起放入“以 Nushell 的方式思考”这一节。通过学习 Nushell 的思考方式，并使用它提供的模式，你会在开始时遇到更少的问题，并为接下来的成功做好准备。
+Nushell 与众不同！新用户通常会带着来自其他 Shell 或语言的现有"习惯"或思维模式。
 
-那么，用 Nushell 的方式思考是什么意思呢？下面是一些 Nushell 新用户常见的问题。
+新用户最常见的问题通常属于以下主题之一：
+
+[[toc]]
 
 ## Nushell 不是 Bash
 
-Nushell 既是一种编程语言，也是一种 Shell。正因为如此，它有自己的方式来处理文件、目录、网站等等。我们对其进行了建模，以使其与你可能熟悉的其他 Shell 的工作方式接近。其中管道用于将两个命令连接在一起：
+### 它有时看起来像 Bash
+
+Nushell 既是一种编程语言，也是一个 Shell。因此，它有自己处理文件、目录、网站等的方式。你会发现 Nushell 的某些功能与你熟悉的其他 Shell 类似。例如，管道通过组合两个（或更多）命令来工作，就像在其他 Shell 中一样。
+
+例如，以下命令行在 Unix/Linux 平台上的 Bash 和 Nushell 中都能工作：
 
 ```nu
-ls | length
+curl -s https://api.github.com/repos/nushell/nushell/contributors | jq -c '.[] | {login,contributions}'
+# => 返回 Nushell 的贡献者，按贡献数量排序
 ```
 
-Nushell 也支持其他常见的功能，例如从之前运行的命令中获取退出代码（Exit Code）。
+Nushell 与 Bash（和其他 Shell）有许多其他相似之处和许多共同的命令。
 
-虽然它确实有这些功能，但 Nushell 并不是 Bash。Bash 的工作方式以及一般的 POSIX 风格，并不是 Nushell 所支持的。例如，在 Bash 中你可以使用：
+::: tip
+Bash 主要是一个运行外部命令的命令解释器。Nushell 提供了许多这些命令作为跨平台的内置命令。
 
-```shell
+虽然上述命令行在两个 Shell 中都能工作，但在 Nushell 中根本不需要使用 `curl` 和 `jq` 命令。相反，Nushell 有一个内置的 [`http get` 命令](/zh-CN/commands/docs/http_get.md)并原生处理 JSON 数据。例如：
+
+```nu
+http get https://api.github.com/repos/nushell/nushell/contributors | select login contributions
+```
+
+:::
+
+::: warning 以 Nushell 的方式思考
+Nushell 从许多 Shell 和语言中借鉴了概念。你可能会发现 Nushell 的许多功能都很熟悉。
+:::
+
+### 但它不是 Bash
+
+然而，正因为如此，有时很容易忘记：一些 Bash（和一般的 POSIX）风格的设计在 Nushell 中就是不起作用。例如，在 Bash 中，通常会这样写：
+
+```sh
+# 使用 > 重定向
 echo "hello" > output.txt
+# 但使用 test 命令进行比较（大于）
+test 4 -gt 7
+echo $?
+# => 1
 ```
 
-在 Nushell 中，我们使用 `>` 作为大于运算符，这与 Nushell 的语言特质比较吻合。取而代之的是，你需要用管道将其连接到一个可以保存内容的命令：
+然而，在 Nushell 中，`>` 被用作比较的大于运算符。这更符合现代编程的期望。
+
+```nu
+4 > 10
+# => false
+```
+
+由于 `>` 是一个运算符，Nushell 中重定向到文件是通过一个专门用于保存内容的管道命令 [`save`](/zh-CN/commands/docs/save.md) 来处理的：
 
 ```nu
 "hello" | save output.txt
 ```
 
-**以 Nushell 的方式思考：** Nushell 看待数据的方式是，数据在管道中流动，直到它到达用户或由最后的命令处理。你可以简单地输入数据，从字符串到类似 JSON 的列表和记录，然后使用 `|` 将其通过管道发送。Nushell 使用命令来执行工作并生成更多数据。学习这些命令以及何时使用它们有助于你组合使用多种管道。
+::: warning 以 Nushell 的方式思考
+我们已经在 [从 Bash 迁移](./coming_from_bash.md) 章节中整理了一份常见的 Bash 用法及其在 Nushell 中的实现方式列表。
+:::
 
-## 把 Nushell 想象成一种编译型语言
+## 隐式返回
 
-Nushell 设计的一个重要部分，特别是它与许多动态语言不同的地方是，Nushell 将你提供给它的源代码转换成某种可执行产物，然后再去运行它。Nushell 没有 `eval` 功能，因此也不允许你在运行时继续拉入新的源代码。这意味着对于诸如引入文件使其成为你项目的一部分这样的任务，需要知道文件的具体路径，就如同 C++ 或 Rust 等编译语言中的文件引入一样。
+来自其他 Shell 的用户可能非常熟悉 `echo` 命令。Nushell 的 [`echo`](/zh-CN/commands/docs/echo.md) 乍一看可能相同，但它非常不同。
 
-例如，下面的代码作为 **[脚本](/zh-CN/book/scripts.md)** 将无法执行（当然，在**交互式模式**里一句句运行是可以的）：
+首先，注意以下输出在 Bash 和 Nushell（甚至 PowerShell 和 Fish）中看起来如何相同：
 
 ```nu
-# compiled.nu
-"def abc [] { 1 + 2 }" | save output.nu
-sleep 1sec # 延时 1 秒，但是并没有作用，因为是整体编译的。
-source "output.nu"
-abc
+echo "Hello, World"
+# => Hello, World
 ```
 
+但是，当其他 Shell 将 `Hello, World` 直接发送到标准输出时，Nushell 的 `echo` 只是返回一个值。然后 Nushell 渲染命令（或更技术地说，表达式）的返回值。
+
+更重要的是，Nushell 隐式返回表达式的值。这在许多方面类似于 PowerShell 或 Rust。
+
+::: tip
+表达式可以不仅仅是管道。即使是自定义命令（类似于许多语言中的函数，但我们将在 [后面的章节](./custom_commands.md) 中更深入地介绍它们）也会自动隐式返回最后一个值。不需要 `echo` 甚至 [`return` 命令](/zh-CN/commands/docs/return.md)来返回值 —— 它就是自然而然地发生了。
+:::
+
+换句话说，字符串 _"Hello, World"_ 和 `echo "Hello, World"` 的输出值是等价的：
+
 ```nu
-nu compiled.nu
+"Hello, World" == (echo "Hello, World")
+# => true
+```
+
+这是另一个自定义命令定义的例子：
+
+```nu
+def latest-file [] {
+    ls | sort-by modified | last
+}
+```
+
+该管道的*输出*（其*“值”*）成为 `latest-file` 自定义命令的*返回值*。
+
+::: warning 以 Nushell 的方式思考
+在 Nushell 中，你可能会写 `echo <something>` 的地方，大多数情况下你可以直接写 `<something>`。
+:::
+
+## 每个表达式只有一个返回值
+
+理解一个表达式只能返回一个值是很重要的。如果一个表达式中有多个子表达式，只有**最后一个**值会被返回。
+
+一个常见的错误是这样写一个自定义命令定义：
+
+```nu:line-numbers
+def latest-file [] {
+    echo "Returning the last file"
+    ls | sort-by modified | last
+}
+
+latest-file
+```
+
+新用户可能期望：
+
+- 第 2 行输出 _"Returning the last file"_
+- 第 3 行返回/输出文件
+
+然而，请记住 `echo` **返回一个值**。因为只返回最后一个值，所以第 2 行的*值*被丢弃了。只有第 3 行的文件会被返回。
+
+要确保第一行被*显示*，请使用 [`print` 命令](/zh-CN/commands/docs/print.md)：
+
+```nu
+def latest-file [] {
+    print "Returning last file"
+    ls | sort-by modified | last
+}
+```
+
+再比较一下：
+
+```nu
+40; 50; 60
+```
+
+::: tip
+分号在 Nushell 表达式中与换行符相同。上面的代码与文件或多行命令中的以下内容相同：
+
+```nu
+40
+50
+60
+```
+
+或
+
+```nu
+echo 40
+echo 50
+echo 60
+```
+
+另见：[多行编辑](./line_editor.md#多行编辑)
+:::
+
+在以上所有情况中：
+
+- 第一个值被评估为整数 40，但不会被返回
+- 第二个值被评估为整数 50，但不会被返回
+- 第三个值被评估为整数 60，并且由于它是最后一个值，它被返回并显示（渲染）。
+
+::: warning 以 Nushell 的方式思考
+在调试意外结果时，请注意：
+
+- 子表达式（例如，命令或管道）...
+- ...输出一个（非 `null`）值...
+- ...而该值没有从父表达式返回。
+
+这些可能是代码中问题的来源。
+:::
+
+## 每个命令都返回一个值
+
+有些语言有“语句”的概念，它们不返回值。Nushell 没有。
+
+在 Nushell 中，**每个命令都返回一个值**，即使该值是 `null`（`nothing` 类型）。考虑以下多行表达式：
+
+```nu:line-numbers
+let p = 7
+print $p
+$p * 6
+```
+
+1. 第 1 行：整数 7 被赋给 `$p`，但 [`let` 命令](/zh-CN/commands/docs/let.md) 本身的返回值是 `null`。然而，因为它不是表达式中的最后一个值，所以它不会被显示。
+2. 第 2 行：`print` 命令本身的返回值是 `null`，但 `print` 命令强制其参数（`$p`，即 7）被*显示*。与第 1 行一样，`null` 返回值被丢弃，因为这不是表达式中的最后一个值。
+3. 第 3 行：评估为整数值 42。作为表达式中的最后一个值，这是返回结果，并且也会被显示（渲染）。
+
+::: warning 以 Nushell 的方式思考
+熟悉常用命令的输出类型将帮助你理解如何将简单的命令组合在一起以实现复杂的结果。
+
+`help <command>` 将显示 Nushell 中每个命令的签名，包括输出类型。
+:::
+
+## 将 Nushell 视为一门编译型语言
+
+在 Nushell 中，运行代码时有两个独立的高级阶段：
+
+1. _阶段 1 (解析器):_ 解析**整个**源代码
+2. _阶段 2 (引擎):_ 评估**整个**源代码
+
+将 Nushell 的解析阶段视为[静态](./how_nushell_code_gets_run.md#dynamic-vs-static-languages)语言（如 Rust 或 C++）中的*编译*可能会有所帮助。我们的意思是，所有将在阶段 2 中评估的代码必须在解析阶段**已知且可用**。
+
+::: important
+然而，这也意味着 Nushell 目前不支持像*动态*语言（如 Bash 或 Python）中的 `eval` 结构。
+:::
+
+### 基于静态解析构建的功能
+
+另一方面，解析的**静态**结果是 Nushell 及其 REPL 的许多功能的关键，例如：
+
+- 准确且富有表现力的错误消息
+- 用于更早、更稳健地检测错误条件的语义分析
+- IDE 集成
+- 类型系统
+- 模块系统
+- 自动补全
+- 自定义命令参数解析
+- 语法高亮
+- 实时错误高亮
+- 分析和调试命令
+- (未来) 格式化
+- (未来) 保存 IR (中间表示) “编译”结果以加快执行速度
+
+### 限制
+
+Nushell 的静态特性常常让来自具有 `eval` 功能的语言的用户感到困惑。
+
+考虑一个简单的两行文件：
+
+```text
+<line1 code>
+<line2 code>
+```
+
+1. 解析：
+   1. 解析第 1 行
+   2. 解析第 2 行
+2. 如果解析成功，则进行评估：
+   1. 评估第 1 行
+   2. 评估第 2 行
+
+这有助于说明为什么以下示例不能在 Nushell 中作为单个表达式（例如，脚本）运行：
+
+::: note
+以下示例使用 [`source` 命令](/zh-CN/commands/docs/source.md)，但类似的结论也适用于解析 Nushell 源代码的其他命令，例如 [`use`](/zh-CN/commands/docs/use.md)、[`overlay use`](/zh-CN/commands/docs/overlay_use.md)、[`hide`](/zh-CN/commands/docs/hide.md) 或 [`source-env`](/zh-CN/commands/docs/source-env.md)。
+:::
+
+#### 示例：动态生成源代码
+
+考虑以下场景：
+
+```nu
+"print Hello" | save output.nu
+source output.nu
 # => Error: nu::parser::sourced_file_not_found
-# => 
+# =>
 # =>   × File not found
-# =>    ╭─[.../compiled.nu:2:1]
-# =>  2 │ sleep 1sec
-# =>  3 │ source "output.nu"
-# =>    ·        ─────┬─────
-# =>    ·             ╰── File not found: output.nu
-# =>  4 │ abc
+# =>    ╭─[entry #5:2:8]
+# =>  1 │ "print Hello" | save output.nu
+# =>  2 │ source output.nu
+# =>    ·        ────┬────
+# =>    ·            ╰── File not found: output.nu
 # =>    ╰────
 # =>   help: sourced files need to be available before your script is run
 ```
 
-但是，以 [组](types_of_data.html#组) 的方式在**交互式模式**中运行就又和脚本一样了：
+这很有问题，因为：
+
+1. 第 1 行被解析但未被评估。换句话说，`output.nu` 不是在解析阶段创建的，而是在评估阶段创建的。
+2. 第 2 行被解析。因为 `source` 是一个解析器关键字，所以在解析（阶段 1）期间会尝试解析源文件。但 `output.nu` 甚至还不存在！如果它*确实*存在，那么它甚至可能不是正确的文件！这会导致错误。
+
+::: note
+在 **REPL** 中将这两行作为*单独*的行输入将起作用，因为第一行将被解析和评估，然后第二行将被解析和评估。
+
+只有当两者作为单个表达式*一起*解析时才会出现限制，这可能是脚本、块、闭包或其他表达式的一部分。
+
+有关更多解释，请参阅*“Nushell 代码如何运行”*中的 [REPL](./how_nushell_code_gets_run.md#the-nushell-repl) 部分。
+:::
+
+#### 示例：动态创建要加载的文件名
+
+另一个来自其他 Shell 的常见场景是尝试动态创建一个将被加载的文件名：
 
 ```nu
-"def abc [] { 1 + 2 }" | save output.nu; sleep 1sec; source "output.nu"; abc
-# => Error: nu::parser::sourced_file_not_found
-# => 
-# =>   × File not found
-# =>    ╭─[entry #1:1:1]
-# =>  1 │ "def abc [] { 1 + 2 }" | save output.nu; sleep 1sec; source "output.nu"; abc
-# =>    ·                                                             ─────┬─────
-# =>    ·                                                                  ╰── File not found: output.nu
+let my_path = "~/nushell-files"
+source $"($my_path)/common.nu"
+# => Error:
+# =>   × Error: nu::shell::not_a_constant
+# =>   │
+# =>   │   × Not a constant.
+# =>   │    ╭─[entry #6:2:11]
+# =>   │  1 │ let my_path = "~/nushell-files"
+# =>   │  2 │ source $"($my_path)/common.nu"
+# =>   │    ·           ────┬───
+# =>   │    ·               ╰── Value is not a parse-time constant
+# =>   │    ╰────
+# =>   │   help: Only a subset of expressions are allowed constants during parsing. Try using the 'const' command or typing the value literally.
+# =>   │
+# =>    ╭─[entry #6:2:8]
+# =>  1 │ let my_path = "~/nushell-files"
+# =>  2 │ source $"($my_path)/common.nu"
+# =>    ·        ───────────┬───────────
+# =>    ·                   ╰── Encountered error during parse-time evaluation
 # =>    ╰────
-# =>   help: sourced files need to be available before your script is run
 ```
 
-`source` 命令将引入被编译的源码，但前面那行 `save` 命令还没有机会运行。Nushell 运行整个程序块就像运行一个文件一样，而不是一次运行一行。在这个例子中，由于 `output.nu` 文件是在“编译”步骤之后才创建的，因此 `source` 命令在解析时无法从其中读取定义。
+因为 `let` 赋值直到评估时才被解析，所以如果传递一个变量，解析器关键字 `source` 将在解析期间失败。
 
-另一个常见的问题是试图动态地创建文件名并 `source`，如下：
+::: details 比较 Rust 和 C++
+想象一下，上面的代码是用典型的编译型语言（如 C++）编写的：
+
+```cpp
+#include <string>
+
+std::string my_path("foo");
+#include <my_path + "/common.h">
+```
+
+或 Rust
+
+```rust
+let my_path = "foo";
+use format!("{}::common", my_path);
+```
+
+如果你曾经用这些语言中的任何一种编写过一个简单的程序，你就会发现这些示例在这些语言中是无效的。与 Nushell 一样，编译型语言要求所有源代码文件都预先准备好并可供编译器使用。
+:::
+
+::: tip 另见
+然而，正如错误消息中所指出的，如果 `my_path` 可以定义为[常量](/book/variables#constant-variables)，这将起作用，因为常量可以在解析期间解析。
 
 ```nu
+const my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
 ```
 
-这就需要求值器（Evaluator）运行并对字符串进行求值（Evaluate），但不幸的是，Nushell 在编译时就需要这些信息。
+有关更多详细信息，请参阅[解析时常量评估](./how_nushell_code_gets_run.md#parse-time-constant-evaluation)。
+:::
 
-**以 Nushell 的方式思考：** Nushell 被设计为对你输入的所有源代码使用一个单一的“编译”步骤，这与求值是分开的。这将允许强大的 IDE 支持，准确的错误提示，并成为第三方工具更容易使用的语言，以及在未来甚至可以有更高级的输出，比如能够直接将 Nushell 编译为二进制文件等。
+#### 示例：切换到不同目录 (`cd`) 并 `source` 一个文件
 
-## 变量是不可变的
+还有一个例子 —— 切换到不同目录，然后尝试在该目录中 `source` 一个文件。
 
-对于来自其他语言的人来说（Rustaceans 除外），另一个常见的令人惊愕之处是 Nushell 的变量是不可变的（事实上，有些人已经开始称它们为“**常量**”来反映这一点）。接触 Nushell，你需要花一些时间来熟悉更多的函数式风格，因为这往往有助于写出与**不可变的变量**最相容的代码。
-
-你可能想知道为什么 Nushell 使用不可变的变量，在 Nushell 开发的早期，我们决定看看我们能在语言中使用多长时间的以数据为中心的函数式风格。最近，我们在 Nushell 中加入了一个关键的功能，使这些早期的实验显示出其价值：并行性。通过在任何 Nushell 脚本中将 [`each`](/commands/docs/each.md) 切换到 [`par-each`](/commands/docs/par-each.md) ，你就能够在“输入”上并行地运行相应的代码块。这是可能的，因为 Nushell 的设计在很大程度上依赖于不可变性、组合和流水线。
-
-Nushell 的变量是不可变的，但这并不意味着无法表达变化。Nushell 大量使用了 "Shadowing" 技术（变量隐藏）。变量隐藏是指创建一个与之前声明的变量同名的新变量。例如，假设你有一个 `$x` 在当前作用域内，而你想要一个新的 `$x` 并将其加 1：
-
-```nu
-let x = $x + 1
-```
-
-这个新的 `x` 对任何跟在这一行后面的代码都是可见的。谨慎地使用变量隐藏可以使变量的使用变得更容易，尽管这不是必须的。
-
-循环计数器是可变变量的另一种常见模式，它被内置于大多数迭代命令中，例如，你可以使用 [`each`](/commands/docs/each.md) 上的 `-n` 标志同时获得每个元素的值和索引：
-
-```nu
-ls | enumerate | each { |elt| $"Number ($elt.index) is size ($elt.item.size)" }
-```
-
-你也可以使用 [`reduce`](/commands/docs/reduce.md) 命令来达到上述目的，其方式与你在循环中修改一个变量相同。例如，如果你想在一个字符串列表中找到最长的字符串，你可以这样做：
-
-```nu
-[one, two, three, four, five, six] | reduce {|curr, max|
-    if ($curr | str length) > ($max | str length) {
-        $curr
-    } else {
-        $max
-    }
+```nu:line-numbers
+if ('spam/foo.nu' | path exists) {
+    cd spam
+    source-env foo.nu
 }
 ```
 
-**以 Nushell 的方式思考：** 如果你习惯于使用可变的变量来完成不同的任务，那么你将需要一些时间来学习如何以更加函数式的方式来完成每个任务。Nushell 有一套内置的能力来帮助处理这样的模式，学习它们将帮助你以更加 Nushell 的风格来写代码。由此带来的额外的好处是你可以通过并行运行你的部分代码来加速脚本执行。
+根据我们对 Nushell 的解析/评估阶段的了解，看看你是否能发现该示例中的问题。
 
-## Nushell 的环境是有作用域的
+::: details 解决方案
 
-Nushell 从编译型语言中获得了很多设计灵感，其中一个是语言应该避免全局可变状态。Shell 经常通过修改全局变量来更新环境，但 Nushell 避开了这种方法。
+在第 3 行，在解析期间，`source-env` 尝试解析 `foo.nu`。然而，`cd` 直到评估时才发生。这会导致解析时错误，因为在*当前*目录中找不到该文件。
 
-在 Nushell 中，代码块可以控制自己的环境，因此对环境的改变是发生在代码块范围内的。
+要解决这个问题，当然，只需使用要加载的文件的完整路径。
 
-在实践中，这可以让你用更简洁的代码来处理子目录，例如，如果你想在当前目录下构建每个子项目，你可以运行：
+```nu
+    source-env spam/foo.nu
+```
+
+:::
+
+### 总结
+
+::: important
+有关本节的更深入解释，请参阅[Nushell 代码如何运行](how_nushell_code_gets_run.md)。
+:::
+
+::: warning 以 Nushell 的方式思考
+Nushell 被设计为对每个表达式或文件使用单个解析阶段。此解析阶段在评估之前发生，并且与评估分开。虽然这启用了 Nushell 的许多功能，但它也意味着用户需要了解它所带来的限制。
+:::
+
+## 变量默认是不可变的
+
+另一个来自其他语言的常见意外是 Nushell 变量默认是不可变的。虽然 Nushell 有可选的可变变量，但 Nushell 的许多命令都基于函数式编程风格，这要求不可变性。
+
+不可变变量也是 Nushell 的 [`par-each` 命令](/zh-CN/commands/docs/par-each.md)的关键，它允许你使用线程并行处理多个值。
+
+有关更多信息，请参阅[不可变变量](variables.html#immutable-variables)和[在可变和不可变变量之间进行选择](variables.html#choosing-between-mutable-and-immutable-variables)。
+
+::: warning 以 Nushell 的方式思考
+如果你习惯于依赖可变变量，可能需要一些时间来重新学习如何以更函数化的风格编写代码。Nushell 有许多函数式特性和命令，它们对不可变变量进行操作。学习它们将帮助你以更符合 Nushell 风格的方式编写代码。
+
+一个额外的好处是，通过使用 `par-each` 并行运行部分代码，可以实现性能提升。
+:::
+
+## Nushell 的环境是作用域的
+
+Nushell 从编译型语言中借鉴了多种设计理念。其中之一是语言应避免全局可变状态。Shell 通常使用全局突变来更新环境，但 Nushell 试图避免这种方法。
+
+在 Nushell 中，块控制自己的环境。对环境的更改仅限于它们发生的块的作用域。
+
+在实践中，这使你可以（仅举一例）编写更简洁的代码来处理子目录。这是一个在当前目录中构建每个子项目的示例：
 
 ```nu
 ls | each { |row|
-    cd $row.name
-    make
+  cd $row.name
+  make
 }
 ```
 
-`cd` 命令改变了 `PWD` 环境变量，这个变量的改变只在当前代码块有效，如此即可允许每次迭代都从当前目录开始，进入下一个子目录。
+[`cd`](/zh-CN/commands/docs/cd.md) 命令更改 `PWD` 环境变量，但此变量更改不会在块结束时保留。这允许每次迭代从当前目录开始，然后进入下一个子目录。
 
-环境变量具有作用域使命令更可预测，更容易阅读，必要时也更容易调试。Nushell 还提供了一些辅助命令，如 [`def --env`](/commands/docs/def.md)、[`load-env`](/commands/docs/load-env.md)，作为对环境变量进行批量更新的辅助方法。
+拥有一个作用域环境使命令更具可预测性、更易于阅读，并且在需要时更容易调试。这也是我们上面讨论的 `par-each` 命令的另一个关键特性。
 
-:::tip
-这里有一个例外，[`def --env`](/commands/docs/def.md) 允许你创建一个可以修改并保留调用者环境的命令
+Nushell 还提供了像 [`load-env`](/zh-CN/commands/docs/load-env.md) 这样的辅助命令，作为一次性加载多个环境更新的便捷方式。
+
+::: tip 另见
+[环境 - 作用域](./environment.md#scoping)
 :::
 
-**以 Nushell 的方式思考：** 在 Nushell 中，没有全局可修改变量的编码最佳实践延伸到了环境变量。使用内置的辅助命令可以让你更容易地处理 Nushell 中的环境变量问题。利用环境变量对代码块具有作用范围这一特性，也可以帮助你写出更简洁的脚本，并与外部命令互动，而不需要在全局环境中添加你不需要的东西。
+::: note
+[`def --env`](/zh-CN/commands/docs/def.md) 是此规则的一个例外。它允许你创建一个更改父环境的命令。
+:::
+
+::: warning 以 Nushell 的方式思考
+使用作用域环境编写更简洁的脚本，并防止不必要或不希望的全局环境突变。
+:::

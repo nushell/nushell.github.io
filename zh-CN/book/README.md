@@ -1,75 +1,65 @@
 # 介绍
 
-你好，欢迎来到 Nushell 项目。这个项目的目标是继承 Unix Shell 中用管道把简单的命令连接在一起的理念，并将其带到更具现代风格的开发中。因此，Nushell 不是一个纯粹的 shell 或编程语言，而是通过将一种丰富的编程语言和功能齐全的 shell 结合到一个软件包中，实现了二者的连接。
+你好！欢迎来到 Nushell 项目。
+这个项目的目标是继承 Unix Shell 中用管道把简单的命令连接在一起的理念，并将其带到更具现代风格的开发中。
+因此，Nushell 不是一个纯粹的 shell 或编程语言，而是通过将一种丰富的编程语言和功能齐全的 shell 结合到一个软件包中，实现了二者的连接。
 
-Nu 汲取了很多常见领域的灵感：传统 Shell 比如 Bash、基于对象的 Shell 比如 PowerShell、逐步类型化的语言比如 TypeScript、函数式编程、系统编程，等等。但是，Nu 并不试图成为万金油，而是把精力集中在做好这几件事上：
+Nu 汲取了很多常见领域的灵感：传统 Shell 比如 Bash、基于对象的 Shell 比如 PowerShell、逐步类型化的语言比如 TypeScript、函数式编程、系统编程，等等。
+但是，Nu 并不试图成为万金油，而是把精力集中在做好这几件事上：
 
-- 作为一个具有现代感的灵活的跨平台 Shell；
-- 作为一种现代的编程语言，解决与数据有关的问题；
-- 给予清晰的错误信息和干净的 IDE 支持。
+- 作为一个具有现代感的灵活的跨平台 Shell
+- 作为一种现代的编程语言，解决与数据有关的问题
+- 给予清晰的错误信息和干净的 IDE 支持
 
-了解 Nu 能做什么的最简单的方法是从一些例子开始，所以让我们深入了解一下。
+## 本书内容
 
-当你运行 [`ls`](/commands/docs/ls.md) 这样的命令时，你会注意到的第一件事是，你得到的不是一个文本块，而是一个结构化的表格：
+本书分为章节，每个章节又分为多个小节。
+你可以点击章节标题获取更多信息。
 
-@[code](@snippets/introduction/ls_example.sh)
+- [安装](installation.md)，帮助你把 Nushell 安装到系统中。
+- [入门指南](getting_started.md) 向你展示基本用法。它还解释了一些 Nushell 与典型 Shell（如 Bash）不同的设计原则。
+- [Nu 基础](nu_fundamentals.md) 解释了 Nushell 语言的基本概念。
+- [Nu 编程](programming_in_nu.md) 更深入地探讨语言特性，并展示几种组织和构建代码的方法。
+- [Nu 作为 Shell](nu_as_a_shell.md) 专注于 Shell 功能，特别是配置和环境。
+- [从其他环境迁移到 Nu](coming_to_nu.md) 旨在为来自其他 Shell 或语言的用户提供快速入门。
+- [设计说明](design_notes.md) 深入解释了 Nushell 的一些设计选择。
+- [（不那么）高级](advanced.md) 包括一些更高级的主题（它们并不是那么高级，一定要去看看！）。
 
-该表不仅仅是以不同的方式显示目录，就像电子表格中的表一样，它还允许我们以更加互动的方式来处理数据。
+## Nushell 的多个组成部分
 
-我们要做的第一件事是按大小对我们的表进行排序。要做到这一点，我们将从 [`ls`](/commands/docs/ls.md) 中获取输出，并将其输入到一个可以根据列的内容对表进行排序的命令中：
+Nushell 项目由多个不同的仓库和子项目组成。
+你可以在 [GitHub 上的组织](https://github.com/nushell) 中找到它们。
 
-@[code](@snippets/introduction/ls_sort_by_reverse_example.sh)
+- 主要的 Nushell 仓库可以在[这里](https://github.com/nushell/nushell)找到。它被分成多个 crate，如果你愿意，可以在你自己的项目中作为独立库使用。
+- 我们的 [nushell.sh](https://www.nushell.sh) 页面（包括本书）的仓库可以在[这里](https://github.com/nushell/nushell.github.io)找到。
+- Nushell 有自己的行编辑器，[它有自己的仓库](https://github.com/nushell/reedline)
+- [`nu_scripts`](https://github.com/nushell/nu_scripts) 是一个与其他用户分享脚本和模块的地方，直到我们有某种包管理器。
+- [Nana](https://github.com/nushell/nana) 是一个实验性的努力，探索 Nushell 的图形用户界面。
+- [Awesome Nu](https://github.com/nushell/awesome-nu) 包含与 Nushell 生态系统配合使用的工具列表：插件、脚本、编辑器扩展、第三方集成等。
+- [Nu 展示](https://github.com/nushell/showcase) 是一个分享关于 Nushell 的作品的地方，无论是博客、艺术作品还是其他东西。
+- [请求评论 (RFC)](https://github.com/nushell/rfcs) 作为提出和讨论主要设计变更的地方。虽然目前利用不足，但我们预计在接近和超过 1.0 版本时会更多地使用它。
 
-你可以看到，为了达到这个目的，我们没有向 [`ls`](/commands/docs/ls.md) 传递命令行参数。取而代之的是，我们使用了 Nu 提供的 [`sort-by`](/commands/docs/sort-by.md) 命令来对 [`ls`](/commands/docs/ls.md) 命令的输出进行排序。为了在顶部看到最大的文件，我们还使用了 [`reverse`](/commands/docs/reverse.md) 命令。
+## 贡献
 
-Nu 提供了许多可以对表进行操作的命令，例如，我们可以过滤 [`ls`](/commands/docs/ls.md) 表的内容，使其只显示超过 1 千字节的文件。
+我们欢迎贡献！
+[正如你所见](#nushell-的多个组成部分)，有很多地方可以贡献。
+大多数仓库都包含 `CONTRIBUTING.md` 文件，其中包含提示和细节，应该能帮助你入门（如果没有，考虑贡献一个修复！）。
 
-@[code](@snippets/introduction/ls_where_example.sh)
+Nushell 本身是用 [Rust](https://www.rust-lang.org) 编写的。
+然而，你不必是 Rust 程序员也能提供帮助。
+如果你了解一些 web 开发，你可以为改进这个网站或 Nana 项目做出贡献。
+[数据框](dataframes.md) 可以利用你的数据处理专业知识。
 
-就像在 Unix 哲学中一样，能够让命令相互对话给我们提供了在许多不同的组合中对命令进行混搭的方法。我们来看看一个不同的命令：
+如果你写了一个很酷的脚本、插件或将 Nushell 集成到某处，我们欢迎你为 `nu_scripts` 或 Awesome Nu 做出贡献。
+发现带有重现步骤的 bug 并为它们提交 GitHub issue 也是一种有价值的帮助！
+仅仅通过使用 Nushell，你就可以为 Nushell 做出贡献！
 
-@[code](@snippets/introduction/ps_example.sh)
+由于 Nushell 发展迅速，本书不断需要更新。
+为本书做出贡献不需要任何特殊技能，只需要对 Markdown 有基本的熟悉。
+此外，你可以考虑将其部分翻译成你的语言。
 
-如果你使用过 Linux，你可能对 [`ps`](/commands/docs/ps.md) 命令很熟悉。通过它，我们可以得到一个当前系统正在运行的所有进程的列表，它们的状态是什么，以及它们的名字是什么，我们还可以看到这些进程的 CPU 负载。
+## 社区
 
-如果我们想显示那些正在活跃使用 CPU 的进程呢？就像我们之前对 [`ls`](/commands/docs/ls.md) 命令所做的那样，我们也可以利用 [`ps`](/commands/docs/ps.md) 命令返回给我们的表格来做到：
-
-@[code](@snippets/introduction/ps_where_example.sh)
-
-到目前为止，我们一直在使用 [`ls`](/commands/docs/ls.md) 和 [`ps`](/commands/docs/ps.md) 来列出文件和进程。Nu 还提供了其他可以创建有用信息表格的命令。接下来，让我们试一下 [`date`](/commands/docs/date.md) 和 [`sys`](/commands/docs/sys.md)。
-
-运行 [`date now`](/commands/docs/date_now.md) 输出关于当前日期和时间的信息：
-
-@[code](@snippets/introduction/date_example.sh)
-
-为了将获得的日期以表格形式展示，我们可以把它输入到 [`date to-table`](/commands/docs/date_to-table.md) 中：
-
-@[code](@snippets/introduction/date_table_example.sh)
-
-运行 [`sys`](/commands/docs/sys.md) 可以得到 Nu 所运行的系统的信息：
-
-@[code](@snippets/introduction/sys_example.sh)
-
-这与我们之前看到的表格有些不同。[`sys`](/commands/docs/sys.md) 命令输出了一个在单元格中包含结构化表格而非简单值的表格。要查看这些数据，我们需要**获取**（[`get`](/commands/docs/get.md)）待查看的列：
-
-@[code](@snippets/introduction/sys_get_example.sh)
-
-[`get`](/commands/docs/get.md) 命令让我们深入表的某一列内容中。在这里，我们要查看的是 `host` 列，它包含了 Nu 正在运行的主机的信息：操作系统名称、主机名、CPU，以及更多。让我们来获取系统上的用户名：
-
-@[code](@snippets/introduction/sys_get_nested_example.sh)
-
-现在，系统中只有一个名为 sophiajt 的用户。你会注意到，我们可以传递一个列路径（`host.sessions.name` 部分），而不仅仅是简单的列名称。Nu 会接受列路径并输出表中相应的数据。
-
-你可能已经注意到其他一些不同之处：我们没有一个数据表，而只有一个元素：即字符串 `"sophiajt"`。Nu 既能处理数据表，也能处理字符串。字符串是使用 Nu 外部命令的一个重要部分。
-
-让我们看看字符串在 Nu 外部命令里面是如何工作的。我们以之前的例子为例，运行外部的 `echo` 命令（`^` 告诉 Nu 不要使用内置的 [`echo`](/commands/docs/echo.md) 命令）：
-
-@[code](@snippets/introduction/sys_get_external_echo_example.sh)
-
-敏锐的读者可能会发现这看起来和我们之前的非常相似！确实如此，但有一个重要的区别：我们用前面的值调用了 `^echo`。这允许我们把数据从 Nu 中传到外部命令 `echo`（或者 Nu 之外的任何命令，比如 `git`）。
-
-### 获取帮助
-
-任何 Nu 的内置命令的帮助文本都可以通过 [`help`](/commands/docs/help.md) 命令来找到。要查看所有命令，请运行 `help commands` 。你也可以通过执行 `help -f <topic>` 来搜索一个主题：
-
-@[code](@snippets/introduction/help_example.sh)
+讨论任何 Nushell 的主要地方是我们的 [Discord](https://discord.com/invite/NtAbbGn)。
+你也可以关注我们的 [博客](https://www.nushell.sh/blog) 获取新闻和更新。
+最后，你可以使用 GitHub 讨论或提交 GitHub issue。

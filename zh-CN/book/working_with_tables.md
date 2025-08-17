@@ -1,5 +1,9 @@
 # 处理表格
 
+[[toc]]
+
+## 概述
+
 在 Nu 中查看数据的一种常见方式是通过表格。Nu 提供了许多处理表格的命令以方便找到你想要的内容以及将数据缩小到你需要的范围。
 
 首先，让我们获得一个可用的表：
@@ -19,9 +23,14 @@ ls
 # => ───┴───────────────┴──────┴─────────┴────────────
 ```
 
+::: tip 改变表格显示方式
+Nu 默认会展开所有表格结构。你可以通过修改 `display_output` 钩子来改变这一行为。
+详见 [hooks](/book/hooks.md#changing-how-output-is-displayed)。
+:::
+
 ## 排序
 
-我们可以通过调用[`sort-by`](/commands/docs/sort-by.md)命令对一个表进行排序，并指定需要排序的列。比如，按照文件的大小对表格进行排序：
+我们可以通过调用[`sort-by`](/zh-CN/commands/docs/sort-by.md)命令对一个表进行排序，并指定需要排序的列。比如，按照文件的大小对表格进行排序：
 
 ```nu
 ls | sort-by size
@@ -42,7 +51,7 @@ ls | sort-by size
 
 ## 选取
 
-我们可以从表中通过选择特定的列或行来获得数据。让我们从表中选择（[`select`](/commands/docs/select.md)）几列吧：
+我们可以从表中通过选择特定的列或行来获得数据。让我们从表中选择（[`select`](/zh-CN/commands/docs/select.md)）几列吧：
 
 ```nu
 ls | select name size
@@ -117,7 +126,7 @@ ls | sort-by name | select 5
 
 ## 从表格提取数据
 
-到目前为止，我们在处理表格时都是将表格修剪成我们需要的样子。有时我们可能想更进一步，只看单元格本身的值，而不是取整列。比如，我们只想得到一个包含所有文件名的列表。在此，我们使用[`get`](/commands/docs/get.md) 命令：
+到目前为止，我们在处理表格时都是将表格修剪成我们需要的样子。有时我们可能想更进一步，只看单元格本身的值，而不是取整列。比如，我们只想得到一个包含所有文件名的列表。在此，我们使用[`get`](/zh-CN/commands/docs/get.md) 命令：
 
 ```nu
 ls | get name
@@ -134,7 +143,7 @@ ls | get name
 
 现在我们获得了每一个文件的文件名。
 
-这可能看起来很像我们之前使用的[`select`](/commands/docs/select.md)命令，所以也把它放在这里以便于比较：
+这可能看起来很像我们之前使用的[`select`](/zh-CN/commands/docs/select.md)命令，所以也把它放在这里以便于比较：
 
 ```nu
 ls | select name
@@ -153,12 +162,12 @@ ls | select name
 
 这看起来非常相似！让我们看看能不能把这两个命令的区别说清楚：
 
-- [`select`](/commands/docs/select.md) - 创建一个只包括指定列的新表；
-- [`get`](/commands/docs/get.md) - 以列表形式返回指定列内的值；
+- [`select`](/zh-CN/commands/docs/select.md) - 创建一个只包括指定列的新表；
+- [`get`](/zh-CN/commands/docs/get.md) - 以列表形式返回指定列内的值；
 
 区分这些表格的方法是 —— 列名没有了，也让我们知道这是一个我们可以处理的值的列表。
 
-[`get`](/commands/docs/get.md)命令可以更进一步，它可以接受表中更深的数据路径。这简化了对复杂数据的处理，比如那些你可能在.json 文件中发现的结构。
+[`get`](/zh-CN/commands/docs/get.md)命令可以更进一步，它可以接受表中更深的数据路径。这简化了对复杂数据的处理，比如那些你可能在.json 文件中发现的结构。
 
 ## 修改表格数据
 
@@ -166,7 +175,7 @@ ls | select name
 
 ### 拼接表格
 
-我们可以使用[`append`](/commands/docs/append.md)将列名相同的表拼接起来：
+我们可以使用[`append`](/zh-CN/commands/docs/append.md)将列名相同的表拼接起来：
 
 ```nu
 let $first = [[a b]; [1 2]]
@@ -182,7 +191,7 @@ $first | append $second
 
 ### 合并表格
 
-我们可以使用[`merge`](/commands/docs/merge.md)命令将两个（或多个）表格合并在一起：
+我们可以使用[`merge`](/zh-CN/commands/docs/merge.md)命令将两个（或多个）表格合并在一起：
 
 ```nu
 let $first = [[a b]; [1 2]]
@@ -212,7 +221,7 @@ $first | merge { $second } | merge { $third }
 # => ───┴───┴───┴───┴───┴───┴───
 ```
 
-或者我们可以使用[`reduce`](/commands/docs/reduce.md)命令来动态地合并所有的表格：
+或者我们可以使用[`reduce`](/zh-CN/commands/docs/reduce.md)命令来动态地合并所有的表格：
 
 ```nu
 [$first $second $third] | reduce {|elt, acc| $acc | merge { $elt }}
@@ -225,7 +234,7 @@ $first | merge { $second } | merge { $third }
 
 ### 添加新列
 
-我们可以使用[`insert`](/commands/docs/insert.md)命令在表中增加新列，让我们看一个例子：
+我们可以使用[`insert`](/zh-CN/commands/docs/insert.md)命令在表中增加新列，让我们看一个例子：
 
 ```nu
 open rustfmt.toml
@@ -253,7 +262,7 @@ open rustfmt.toml
 # => ─────────┴──────
 ```
 
-Nu 的更改是函数性更改，这意味着它们只在值上起作用，而不是试图引起永久性变更。这使我们可以在管道中进行许多不同类型的操作直到我们准备好将结果输出(如果我们选择这样做的话)。这里我们可以使用 [`save`](/commands/docs/save.md) 命令保存结果：
+Nu 的更改是函数性更改，这意味着它们只在值上起作用，而不是试图引起永久性变更。这使我们可以在管道中进行许多不同类型的操作直到我们准备好将结果输出(如果我们选择这样做的话)。这里我们可以使用 [`save`](/zh-CN/commands/docs/save.md) 命令保存结果：
 
 ```nu
 open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
@@ -266,7 +275,7 @@ open rustfmt2.toml
 
 ### 更新一列
 
-与[`insert`](/commands/docs/insert.md)命令类似，我们也可以使用[`update`](/commands/docs/update.md)命令将某一列的内容修改为新值。为了看看效果，让我们打开同一个文件：
+与[`insert`](/zh-CN/commands/docs/insert.md)命令类似，我们也可以使用[`update`](/zh-CN/commands/docs/update.md)命令将某一列的内容修改为新值。为了看看效果，让我们打开同一个文件：
 
 ```nu
 open rustfmt.toml
@@ -284,7 +293,7 @@ open rustfmt.toml | update edition 2021
 # => ─────────┴──────
 ```
 
-你也可以使用[`upsert`](/commands/docs/upsert.md)命令来插入或更新，这取决于该列是否已经存在。
+你也可以使用[`upsert`](/zh-CN/commands/docs/upsert.md)命令来插入或更新，这取决于该列是否已经存在。
 
 ### 移动列
 
@@ -319,3 +328,92 @@ ls | rename filename filetype filesize date
 # => │  4 │ Documents         │ dir      │    416 B │ 4 days ago   │
 # => ...
 ```
+
+### 删除列
+
+你可以使用[`reject`](/zh-CN/commands/docs/reject.md)命令删除表中的列。例如，我们可以运行[`ls`](/zh-CN/commands/docs/ls.md)并删除不需要的列：
+
+```nu
+ls -l / | reject readonly num_links inode created accessed modified
+# => ╭────┬────────┬─────────┬─────────┬───────────┬──────┬───────┬────────╮
+# => │  # │  name  │  type   │ target  │   mode    │ uid  │ group │  size  │
+# => ├────┼────────┼─────────┼─────────┼───────────┼──────┼───────┼────────┤
+# => │  0 │ /bin   │ symlink │ usr/bin │ rwxrwxrwx │ root │ root  │    7 B │
+# => │  1 │ /boot  │ dir     │         │ rwxr-xr-x │ root │ root  │ 1.0 KB │
+# => │  2 │ /dev   │ dir     │         │ rwxr-xr-x │ root │ root  │ 4.1 KB │
+# => │  3 │ /etc   │ dir     │         │ rwxr-xr-x │ root │ root  │ 3.6 KB │
+# => │  4 │ /home  │ dir     │         │ rwxr-xr-x │ root │ root  │   12 B │
+# => │  5 │ /lib   │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
+# => │  6 │ /lib64 │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
+# => │  7 │ /mnt   │ dir     │         │ rwxr-xr-x │ root │ root  │    0 B │
+# => ...
+```
+
+## # 索引列
+
+你可能已经注意到每个表格默认都有一个以`#`为标题的列。这个列有两种工作模式：
+
+1. 内部索引 #
+
+   - 默认模式
+   - Nu提供从0开始的连续索引
+   - 总是对应单元格路径的行号，`select 0`会返回列表中的第一项，`select <n-1>`会返回第n项
+   - 只是内部表示的一种显示方式，不能通过列名访问
+
+2. 重命名的索引 #
+   - 当创建一个名为"index"的列时，这个`index`列会取代表格显示中的`#`列
+   - 如果表格中的某些行有`index`键而其他行没有，结果将不再是表格而是`list<any>`
+
+### 索引列示例
+
+#### 将#转换为索引
+
+将内部`#`转换为所有行的索引同时保持原始编号的有用模式是：
+
+```nu
+ls | enumerate | flatten
+```
+
+#### 添加行标题
+
+```nu
+let table = [
+[additions   deletions   delta ];
+[       10          20     -10 ]
+[       15           5      10 ]
+[        8           6       2 ]]
+
+let totals_row = ($table | math sum | insert index {"Totals"})
+$table | append $totals_row
+# => ╭────────┬───────────┬───────────┬───────╮
+# => │      # │ additions │ deletions │ delta │
+# => ├────────┼───────────┼───────────┼───────┤
+# => │      0 │        10 │        20 │   -10 │
+# => │      1 │        15 │         5 │    10 │
+# => │      2 │         8 │         6 │     2 │
+# => │ Totals │        33 │        31 │     2 │
+# => ╰────────┴───────────┴───────────┴───────╯
+```
+
+## `table` 命令
+
+[`table`](/zh-CN/commands/docs/table.md)命令用于*渲染*结构化数据，包括：
+
+- 表格
+- 列表
+- 记录
+- 范围
+
+`table`命令的渲染结果实际上是一个`string`类型。例如：
+
+```nu
+[ Nagasaki Ghent Cambridge Izmir Graz Lubango ] | table | describe
+# => string (stream)
+```
+
+`table`命令还有多个选项可以*改变*表格的渲染方式，例如：
+
+- `-e` 展开通常会被折叠的数据
+- `-i false` 隐藏索引/`#`列
+- `-a 5` 将表格缩写为仅显示前5项和后5项
+- 以及其他选项

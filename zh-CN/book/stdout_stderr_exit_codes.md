@@ -37,13 +37,13 @@ do -i { external }
 echo $env.LAST_EXIT_CODE
 ```
 
-第二种是使用一个叫做[`complete`](/commands/docs/complete.md)的命令。
+第二种是使用一个叫做[`complete`](/zh-CN/commands/docs/complete.md)的命令。
 
-## 使用 [`complete`](/commands/docs/complete.md) 命令
+## 使用 [`complete`](/zh-CN/commands/docs/complete.md) 命令
 
-[`complete`](/commands/docs/complete.md)命令允许你运行一个外部程序直到完成，并将 stdout, stderr, 和退出代码收集在一条记录中。
+[`complete`](/zh-CN/commands/docs/complete.md)命令允许你运行一个外部程序直到完成，并将 stdout, stderr, 和退出代码收集在一条记录中。
 
-如果我们尝试在一个不存在的文件上运行外部的`cat`，我们可以看到[`complete`](/commands/docs/complete.md)对流的处理，包括重定向的 stderr：
+如果我们尝试在一个不存在的文件上运行外部的`cat`，我们可以看到[`complete`](/zh-CN/commands/docs/complete.md)对流的处理，包括重定向的 stderr：
 
 ```nu
 do -i { cat unknown.txt } | complete
@@ -54,6 +54,82 @@ do -i { cat unknown.txt } | complete
 # => ╰───────────┴─────────────────────────────────────────────╯
 ```
 
+## `echo`、`print` 和 `log` 命令
+
+[`echo`](/zh-CN/commands/docs/echo.md) 命令主要用于管道。它返回其参数，忽略管道传入的值。通常没有理由使用它而不是直接写出值。
+
+相比之下，[`print`](/zh-CN/commands/docs/print.md) 命令将给定值作为纯文本打印到 stdout。它也可以用于写入标准错误输出。与 [`echo`](/zh-CN/commands/docs/echo.md) 不同，此命令不返回任何值（`print | describe` 将返回 "nothing"）。由于此命令没有输出，因此将其与其他命令管道连接没有意义。
+
+[标准库](/book/standard_library.md) 提供了在不同日志级别写入消息的命令。例如：
+
+@[code](@snippets/book/std_log.nu)
+
+![日志消息示例](../assets/images/0_79_std_log.png)
+
+可以使用 [`NU_LOG_LEVEL`](/book/special_variables.md#env-nu-log-level) 环境变量设置输出日志级别：
+
+```nu
+NU_LOG_LEVEL=DEBUG nu std_log.nu
+```
+
+## 文件重定向
+
+如果要将外部命令的 stdout 重定向到文件，可以使用 `out>` 后跟文件路径。类似地，可以使用 `err>` 重定向 stderr：
+
+```nu
+cat unknown.txt out> out.log err> err.log
+```
+
+如果要将 stdout 和 stderr 都重定向到同一个文件，可以使用 `out+err>`：
+
+```nu
+cat unknown.txt out+err> log.log
+```
+
+注意 `out` 可以简写为 `o`，`err` 可以简写为 `e`。因此，以下示例与前面的示例等效：
+
+```nu
+cat unknown.txt o> out.log e> err.log
+
+cat unknown.txt o+e> log.log
+```
+
+此外，任何表达式都可以用作文件路径，只要它是字符串值：
+
+```nu
+use std
+cat unknown.txt o+e> (std null-device)
+```
+
+请注意，文件重定向作用于表达式范围，并应用于表达式中的所有外部命令。在下面的示例中，`out.txt` 将包含 `hello\nworld`：
+
+```nu
+let text = "hello\nworld"
+($text | head -n 1; $text | tail -n 1) o> out.txt
+```
+
+表达式内部的管道和额外的文件重定向将覆盖从外部应用的任何文件重定向。
+
+## 管道重定向
+
+如果在外部命令后使用常规管道 `|`，它会将外部命令的 stdout 重定向为下一个命令的输入。要改为重定向外部命令的 stderr，可以使用 stderr 管道 `err>|` 或 `e>|`：
+
+```nu
+cat unknown.txt e>| str upcase
+```
+
+当然，还有一个对应的管道用于组合 stdout 和 stderr，`out+err>|` 或 `o+e>|`：
+
+```nu
+nu -c 'print output; print -e error' o+e>| str upcase
+```
+
+与文件重定向不同，管道重定向不适用于表达式内的所有命令。相反，只有表达式中的最后一个命令会受到影响。例如，在下面的代码片段中，只有 `cmd2` 的 stdout 和 stderr 会被管道重定向。
+
+```nu
+(cmd1; cmd2) o+e>| cmd3
+```
+
 ## 原始流
 
 在 Nushell 中，stdout 和 stderr 都表现为 "原始流"。这些流是字节流，而不是结构化的流，而后者才是 Nushell 内部命令所使用的。
@@ -62,9 +138,9 @@ do -i { cat unknown.txt } | complete
 
 Nushell 试图将流转换为 UTF-8 文本，如果在任何时候转换失败，流的其余部分就会被假定为始终是字节。
 
-如果你想对字节流的解码有更多的控制，你可以使用 [`decode`](/commands/docs/decode.md) 命令。[`decode`](/commands/docs/decode.md)命令可以插入到外部或其他原始流创建命令之后的管道中，它将根据你给`decode`的参数来处理字节的解码。例如，你可以这样对 shift-jis 文本进行解码：
+如果你想对字节流的解码有更多的控制，你可以使用 [`decode`](/zh-CN/commands/docs/decode.md) 命令。[`decode`](/zh-CN/commands/docs/decode.md)命令可以插入到外部或其他原始流创建命令之后的管道中，它将根据你给`decode`的参数来处理字节的解码。例如，你可以这样对 shift-jis 文本进行解码：
 
 ```nu
-# => 0x[8a 4c] | decode shift-jis
+0x[8a 4c] | decode shift-jis
 # => 貝
 ```
