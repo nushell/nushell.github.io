@@ -64,7 +64,7 @@ do -i { cat unknown.txt } | complete
 
 @[code](@snippets/book/std_log.nu)
 
-![日志消息示例](../assets/images/0_79_std_log.png)
+![日志消息示例](../../assets/images/0_79_std_log.png)
 
 可以使用 [`NU_LOG_LEVEL`](/book/special_variables.md#env-nu-log-level) 环境变量设置输出日志级别：
 
