@@ -58,8 +58,7 @@ Nushell currently supports the following escape characters:
 - `\u{X...}` - a single unicode character, where X... is 1-6 hex digits (0-9, A-F)
  
 To create a `\0` (`NUL`) character, you may use `\u{0}` or
-[string interpolation](#string-interpolation) with [`char`](/commands/docs/char.md),
-e.g. `(char --integer 0)`.
+[string interpolation](#string-interpolation) with [`(char nul)`](/commands/docs/char.md).
 
 ## Raw Strings
 
