@@ -2,7 +2,7 @@
 title: bits and
 categories: |
   bits
-version: 0.104.0
+version: 0.106.0
 bits: |
   Performs bitwise and for ints or binary values.
 usage: |
@@ -33,10 +33,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| binary       | binary       |
 | int          | int          |
-| list\<binary\> | list\<binary\> |
-| list\<int\>    | list\<int\>    |
+| binary       | binary       |
+| list&lt;int&gt;    | list&lt;int&gt;    |
+| list&lt;binary&gt; | list&lt;binary&gt; |
 ## Examples
 
 Apply bitwise and to two numbers

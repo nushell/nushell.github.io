@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -33,9 +33,9 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
+| list&lt;any&gt; | list&lt;any&gt; |
+| table     | list&lt;any&gt; |
 | any       | any       |
-| list\<any\> | list\<any\> |
-| table     | list\<any\> |
 ## Examples
 
 Multiplies elements in the list

@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Sets a default value if a row's column is missing or null.
 usage: |
@@ -18,7 +18,7 @@ contributors: false
 
 ## Signature
 
-```> default {flags} (default value) (column name)```
+```> default {flags} (default value) ...rest```
 
 ## Flags
 
@@ -27,7 +27,7 @@ contributors: false
 ## Parameters
 
  -  `default value`: The value to use as a default.
- -  `column name`: The name of the column.
+ -  `...rest`: The name of the column.
 
 
 ## Input/output types:
@@ -45,7 +45,7 @@ Give a default 'target' column to all file entries
 
 Get the env value of `MY_ENV` with a default value 'abc' if not present
 ```nu
-> $env | get --ignore-errors MY_ENV | default 'abc'
+> $env | get --optional MY_ENV | default 'abc'
 abc
 ```
 
@@ -82,5 +82,23 @@ Replace the empty string in the "a" column of a list
 │ 0 │   1 │ 2 │
 │ 1 │ N/A │ 1 │
 ╰───┴─────┴───╯
+
+```
+
+Generate a default value from a closure
+```nu
+> null | default { 1 + 2 }
+3
+```
+
+Fill missing column values based on other columns
+```nu
+> [{a:1 b:2} {b:1}] | upsert a {|rc| default { $rc.b + 1 } }
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 2 │ 1 │
+╰───┴───┴───╯
 
 ```

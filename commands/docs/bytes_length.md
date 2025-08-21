@@ -2,7 +2,7 @@
 title: bytes length
 categories: |
   bytes
-version: 0.104.0
+version: 0.106.0
 bytes: |
   Output the length of any bytes in the pipeline.
 usage: |
@@ -30,9 +30,9 @@ contributors: false
 | input        | output    |
 | ------------ | --------- |
 | binary       | int       |
-| list\<binary\> | list\<int\> |
-| record       | record    |
+| list&lt;binary&gt; | list&lt;int&gt; |
 | table        | table     |
+| record       | record    |
 ## Examples
 
 Return the length of a binary

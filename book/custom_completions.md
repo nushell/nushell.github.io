@@ -228,4 +228,4 @@ let carapace_completer = {|spans|
 }
 ```
 
-[More examples of custom completers can be found in the cookbook](../cookbook/external_completers.md).
+[More examples of external completers can be found in the cookbook](../cookbook/external_completers.md).

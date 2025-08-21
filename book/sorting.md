@@ -100,7 +100,7 @@ $items | sort
 # => ╰───┴─────┴──────────┴───────╯
 ```
 
-In this example, the `id` column for all items is equal. Then, the two items with price `5` are sorted before the item with price `10`. Finally, the `item` with quantity `1` is sorted before the item with quantity `8`.
+In this example, the `id` column for all items is equal. Then, the two items with quantity `5` are sorted before the item with quantity `10`. Finally, the `item` with price `1` is sorted before the item with price `8`.
 
 ## Sorting structured data
 
@@ -205,7 +205,7 @@ let weight = {alpha: 10, beta: 5, gamma: 3}
 
 In addition to [key closures](#sort-by-key-closure), `sort-by` also supports closures which specify a custom sort order. The `--custom`, or `-c`, flag will tell `sort-by` to interpret closures as custom sort closures. A custom sort closure has two parameters, and returns a boolean. The closure should return `true` if the first parameter comes _before_ the second parameter in the sort order.
 
-For a simple example, we could rewrite a cell path sort as a custom sort. This can be read as "If $a.size is less than $b.size, a should appear before b in the sort order":
+For a simple example, we could rewrite a cell path sort as a custom sort. This can be read as "If `$a.size` is less than `$b.size`, `a` should appear before `b` in the sort order":
 
 ```nu
 ls | sort-by -c {|a, b| $a.size < $b.size }
@@ -354,7 +354,7 @@ $compatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # => ╰───┴──────╯
 $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # => Error: nu::shell::type_mismatch
-# => 
+# =>
 # =>   × Type mismatch during operation.
 # =>    ╭─[entry #26:1:36]
 # =>  1 │ $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }

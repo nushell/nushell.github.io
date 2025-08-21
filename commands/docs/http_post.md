@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.104.0
+version: 0.106.0
 network: |
   Post a body to a URL.
 usage: |
@@ -58,9 +58,15 @@ Post content to example.com, with username and password
 
 ```
 
-Post content to example.com, with custom header
+Post content to example.com, with custom header using a record
 ```nu
-> http post --headers [my-header-key my-header-value] https://www.example.com
+> http post --headers {my-header-key: my-header-value} https://www.example.com
+
+```
+
+Post content to example.com, with custom header using a list
+```nu
+> http post --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 

@@ -2,7 +2,7 @@
 title: bytes ends-with
 categories: |
   bytes
-version: 0.104.0
+version: 0.106.0
 bytes: |
   Check if bytes ends with a pattern.
 usage: |
@@ -31,8 +31,8 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | binary | bool   |
-| record | record |
 | table  | table  |
+| record | record |
 ## Examples
 
 Checks if binary ends with `0x[AA]`

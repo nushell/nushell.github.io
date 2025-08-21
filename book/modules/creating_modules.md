@@ -112,7 +112,7 @@ use <module> [ <other_definitions> ]
 :::
 
 ::: note
-Additionally, `main` has special behavior if used in a script file, regardless of whether it is exported or not. See the [Scripts](scripts.html#parameterizing-scripts) chapter for more details.
+Additionally, `main` has special behavior if used in a script file, regardless of whether it is exported or not. See the [Scripts](../scripts.html#parameterizing-scripts) chapter for more details.
 :::
 
 ## Module Files
@@ -387,7 +387,7 @@ To bring `my-utils` exported environment into scope for the `go.nu` module, ther
 
 1. Import the module in each command where it is needed
 
-   By placing `use my-utils` in the `go home` command itself, its `export-env` will be _evaludated_ when the command is. For example:
+   By placing `use my-utils` in the `go home` command itself, its `export-env` will be _evaluated_ when the command is. For example:
 
    ```nu
    # go.nu

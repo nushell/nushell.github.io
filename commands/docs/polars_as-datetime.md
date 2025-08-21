@@ -2,7 +2,7 @@
 title: polars as-datetime
 categories: |
   dataframe
-version: 0.104.0
+version: 0.106.0
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -31,7 +31,7 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
  -  `--not-exact, -n`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
  -  `--naive`: the input datetimes should be parsed as naive (i.e., not timezone-aware). Ignored if input is an expression.
- -  `--ambiguous, -a {one_of(string, nothing)}`: Determine how to deal with ambiguous datetimes:
+ -  `--ambiguous, -a {oneof<string, nothing>}`: Determine how to deal with ambiguous datetimes:
                     `raise` (default): raise error
                     `earliest`: use the earliest datetime
                     `latest`: use the latest datetime
@@ -45,9 +45,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| dataframe  | dataframe  |
+| expression | expression |
 ## Examples
 
 Converts string to datetime
@@ -91,10 +92,10 @@ Converts string to datetime using the `--not-exact` flag even with excessive sym
 ╭───┬─────────────╮
 │ # │  datetime   │
 ├───┼─────────────┤
-│ 0 │ in 6 months │
-│ 1 │ in 6 months │
-│ 2 │ in 6 months │
-│ 3 │ in 6 months │
+│ 0 │ in 3 months │
+│ 1 │ in 3 months │
+│ 2 │ in 3 months │
+│ 3 │ in 3 months │
 ╰───┴─────────────╯
 
 ```

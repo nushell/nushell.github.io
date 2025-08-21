@@ -2,7 +2,7 @@
 title: polars when
 categories: |
   expression
-version: 0.104.0
+version: 0.106.0
 expression: |
   Creates and modifies a when expression.
 usage: |
@@ -35,10 +35,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| any     | any    |
-| nothing | any    |
+| input      | output     |
+| ---------- | ---------- |
+| nothing    | expression |
+| expression | expression |
+| any        | expression |
 ## Examples
 
 Create a when conditions

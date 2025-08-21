@@ -17,7 +17,7 @@ git branch --merged | lines | where ($it != "* master" and $it != "* main") | ea
 # => ───┴───────────────────────────────────────────
 ```
 
-Parse formatted commit messages (more details in the parsing git log section)
+### Parse formatted commit messages (more details in the parsing git log section)
 
 ```nu
 git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | first 10

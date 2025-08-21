@@ -2,7 +2,7 @@
 title: flatten
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Flatten the table.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
+| list&lt;any&gt; | list&lt;any&gt; |
 | record    | table     |
 ## Examples
 

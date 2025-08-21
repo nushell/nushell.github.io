@@ -2,7 +2,7 @@
 title: url decode
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Converts a percent-encoded web safe string to a string.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Decode a url with escape characters

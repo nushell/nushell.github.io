@@ -2,7 +2,7 @@
 title: polars unique
 categories: |
   dataframe or lazyframe
-version: 0.104.0
+version: 0.106.0
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe.
 usage: |
@@ -36,9 +36,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| dataframe  | dataframe  |
+| expression | expression |
 ## Examples
 
 Returns unique values from a series
@@ -79,8 +80,32 @@ Returns unique values in a subset of lazyframe columns
 
 ```
 
-Creates a is unique expression from a column
+Returns unique values in a subset of lazyframe columns
 ```nu
-> col a | unique
+> [[a]; [2] [1] [2]]
+    | polars into-lazy
+    | polars select (polars col a | polars unique)
+    | polars collect
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+╰───┴───╯
+
+```
+
+Returns unique values in a subset of lazyframe columns
+```nu
+> [[a]; [2] [1] [2]]
+    | polars into-lazy
+    | polars select (polars col a | polars unique --maintain-order)
+    | polars collect
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 2 │
+│ 1 │ 1 │
+╰───┴───╯
 
 ```

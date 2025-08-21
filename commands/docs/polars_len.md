@@ -2,7 +2,7 @@
 title: polars len
 categories: |
   dataframe
-version: 0.104.0
+version: 0.106.0
 dataframe: |
   Return the number of rows in the context. This is similar to COUNT(*) in SQL.
 usage: |
@@ -30,9 +30,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input | output     |
+| ----- | ---------- |
+| any   | expression |
 ## Examples
 
 Count the number of rows in the the dataframe.

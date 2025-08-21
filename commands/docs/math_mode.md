@@ -2,7 +2,7 @@
 title: math mode
 categories: |
   math
-version: 0.104.0
+version: 0.106.0
 math: |
   Returns the most frequent element(s) from a list of numbers or tables.
 usage: |
@@ -25,9 +25,9 @@ contributors: false
 
 | input          | output         |
 | -------------- | -------------- |
-| list\<duration\> | list\<duration\> |
-| list\<filesize\> | list\<filesize\> |
-| list\<number\>   | list\<number\>   |
+| list&lt;number&gt;   | list&lt;number&gt;   |
+| list&lt;duration&gt; | list&lt;duration&gt; |
+| list&lt;filesize&gt; | list&lt;filesize&gt; |
 | table          | record         |
 ## Examples
 

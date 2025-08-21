@@ -2,7 +2,7 @@
 title: into cell-path
 categories: |
   conversions
-version: 0.104.0
+version: 0.106.0
 conversions: |
   Convert value to a cell-path.
 usage: |
@@ -23,12 +23,12 @@ contributors: false
 
 ## Input/output types:
 
-| input                                    | output    |
-| ---------------------------------------- | --------- |
-| cell-path                                | cell-path |
-| int                                      | cell-path |
-| list\<any\>                                | cell-path |
-| list\<record\<value: any, optional: bool\>\> | cell-path |
+| input                                                       | output    |
+| ----------------------------------------------------------- | --------- |
+| cell-path                                                   | cell-path |
+| int                                                         | cell-path |
+| list&lt;any&gt;                                                   | cell-path |
+| list&lt;record&lt;value: any, optional: bool, insensitive: bool&gt;&gt; | cell-path |
 ## Examples
 
 Convert integer into cell path
@@ -57,8 +57,8 @@ $.5.c.7.h
 
 Convert table into cell path
 ```nu
-> [[value, optional]; [5 true] [c false]] | into cell-path
-$.5?.c
+> [[value, optional, insensitive]; [5 true false] [c false false] [d false true]] | into cell-path
+$.5?.c.d!
 ```
 
 ## Notes

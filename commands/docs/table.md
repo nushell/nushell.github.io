@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.104.0
+version: 0.106.0
 viewers: |
   Render the table.
 usage: |
@@ -62,7 +62,7 @@ Render data in table view
 
 Render data in table view (expanded)
 ```nu
-> [[a b]; [1 2] [2 [4 4]]] | table --expand
+> [[a b]; [1 2] [3 [4 4]]] | table --expand
 ╭───┬───┬───────────╮
 │ # │ a │     b     │
 ├───┼───┼───────────┤
@@ -77,7 +77,7 @@ Render data in table view (expanded)
 
 Render data in table view (collapsed)
 ```nu
-> [[a b]; [1 2] [2 [4 4]]] | table --collapse
+> [[a b]; [1 2] [3 [4 4]]] | table --collapse
 ╭───┬───┬───────────╮
 │ # │ a │     b     │
 ├───┼───┼───────────┤
@@ -92,25 +92,25 @@ Render data in table view (collapsed)
 
 Change the table theme to the specified theme for a single run
 ```nu
-> [[a b]; [1 2] [2 [4 4]]] | table --theme basic
+> [[a b]; [1 2] [3 [4 4]]] | table --theme basic
 
 ```
 
 Force showing of the #/index column for a single run
 ```nu
-> [[a b]; [1 2] [2 [4 4]]] | table -i true
+> [[a b]; [1 2] [3 [4 4]]] | table -i true
 
 ```
 
 Set the starting number of the #/index column to 100 for a single run
 ```nu
-> [[a b]; [1 2] [2 [4 4]]] | table -i 100
+> [[a b]; [1 2] [3 [4 4]]] | table -i 100
 
 ```
 
 Force hiding of the #/index column for a single run
 ```nu
-> [[a b]; [1 2] [2 [4 4]]] | table -i false
+> [[a b]; [1 2] [3 [4 4]]] | table -i false
 
 ```
 

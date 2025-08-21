@@ -1,3 +1,11 @@
+---
+prev:
+  text: Special Variables
+  link: /book/special_variables.md
+next:
+  text: Custom Commands
+  link: /book/custom_commands.md
+---
 # Programming in Nu
 
 This chapter goes into more detail of Nushell as a programming language.

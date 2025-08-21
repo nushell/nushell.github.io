@@ -2,7 +2,7 @@
 title: ansi link
 categories: |
   platform
-version: 0.104.0
+version: 0.106.0
 platform: |
   Add a link (using OSC 8 escape sequence) to the given string.
 usage: |
@@ -34,10 +34,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Create a link to open some file

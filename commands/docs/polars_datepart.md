@@ -2,7 +2,7 @@
 title: polars datepart
 categories: |
   expression
-version: 0.104.0
+version: 0.106.0
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| expression | expression |
 ## Examples
 
 Creates an expression to capture the year date part
@@ -60,15 +60,10 @@ Creates an expression to capture multiple date parts
                 (polars col datetime | polars datepart minute | polars as datetime_minute ),
                 (polars col datetime | polars datepart second | polars as datetime_second ),
                 (polars col datetime | polars datepart nanosecond | polars as datetime_ns ) ]
-╭───┬─────────────┬───────────────┬────────────────┬──────────────┬───────────────┬─────────────────┬───────────┬─────╮
-│ # │  datetime   │ datetime_year │ datetime_month │ datetime_day │ datetime_hour │ datetime_minute │ datetime_ │ dat │
-│   │             │               │                │              │               │                 │ second    │ eti │
-│   │             │               │                │              │               │                 │           │ me_ │
-│   │             │               │                │              │               │                 │           │ ns  │
-├───┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼───────────┼─────┤
-│ 0 │ 3 years ago │          2021 │             12 │           30 │             1 │               2 │         3 │ 123 │
-│   │             │               │                │              │               │                 │           │ 456 │
-│   │             │               │                │              │               │                 │           │ 789 │
-╰───┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴───────────┴─────╯
+╭───┬─────────────┬───────────────┬────────────────┬──────────────┬───────────────┬─────────────────┬─────────────────┬─────────────╮
+│ # │  datetime   │ datetime_year │ datetime_month │ datetime_day │ datetime_hour │ datetime_minute │ datetime_second │ datetime_ns │
+├───┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼─────────────────┼─────────────┤
+│ 0 │ 3 years ago │          2021 │             12 │           30 │             1 │               2 │               3 │   123456789 │
+╰───┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴─────────────────┴─────────────╯
 
 ```

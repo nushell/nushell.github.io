@@ -2,7 +2,7 @@
 title: decode base32
 categories: |
   formats
-version: 0.104.0
+version: 0.106.0
 formats: |
   Decode a Base32 value.
 usage: |

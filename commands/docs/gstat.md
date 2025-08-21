@@ -2,7 +2,7 @@
 title: gstat
 categories: |
   prompt
-version: 0.104.0
+version: 0.106.0
 prompt: |
   Get the git status of a repo
 usage: |
@@ -27,13 +27,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ```> gstat {flags} (path)```
 
+## Flags
+
+ -  `--no-tag`: Disable git tag resolving
+
 ## Parameters
 
  -  `path`: path to repo
-
-
-## Input/output types:
-
-| input | output |
-| ----- | ------ |
-| any   | any    |

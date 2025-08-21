@@ -101,12 +101,12 @@ def capture-foreign-env [
         echo '<ENV_CAPTURE_EVAL_FENCE>'
         eval "$SCRIPT_TO_SOURCE"
         echo '<ENV_CAPTURE_EVAL_FENCE>'
-        env -u _ -u _AST_FEATURES -u SHLVL` # Filter out known changing variables
+        env -0 -u _ -u _AST_FEATURES -u SHLVL` # Filter out known changing variables
     }
     | split row '<ENV_CAPTURE_EVAL_FENCE>'
     | {
         before: ($in | first | str trim | lines)
-        after: ($in | last | str trim | lines)
+        after: ($in | last | str trim | split row (char --integer 0))
     }
 
     # Unfortunate Assumption:
@@ -115,6 +115,7 @@ def capture-foreign-env [
     | where { |line| $line not-in $env_out.before } # Only get changed lines
     | parse "{key}={value}"
     | transpose --header-row --as-record
+    | if $in == [] { {} } else { $in }
 }
 ```
 

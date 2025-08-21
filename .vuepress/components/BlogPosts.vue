@@ -29,7 +29,10 @@ export default {
           let path = p.path.replace('/blog/', '');
           return { ...p, path: path, date: path.substring(0, 10) };
         })
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
+        .sort(
+          (a, b) =>
+            new Date(b.date) - new Date(a.date) || b.path.localeCompare(a.path),
+        );
     },
   },
 };

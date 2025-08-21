@@ -2,7 +2,7 @@
 title: math abs
 categories: |
   math
-version: 0.104.0
+version: 0.106.0
 math: |
   Returns the absolute value of a number.
 usage: |
@@ -25,11 +25,11 @@ contributors: false
 
 | input          | output         |
 | -------------- | -------------- |
-| duration       | duration       |
-| list\<duration\> | list\<duration\> |
-| list\<number\>   | list\<number\>   |
 | number         | number         |
-| range          | list\<number\>   |
+| duration       | duration       |
+| list&lt;number&gt;   | list&lt;number&gt;   |
+| list&lt;duration&gt; | list&lt;duration&gt; |
+| range          | list&lt;number&gt;   |
 ## Examples
 
 Compute absolute value of each number in a list of numbers

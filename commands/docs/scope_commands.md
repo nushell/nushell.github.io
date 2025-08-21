@@ -2,7 +2,7 @@
 title: scope commands
 categories: |
   core
-version: 0.104.0
+version: 0.106.0
 core: |
   Output info on the commands in the current scope.
 usage: |
@@ -25,7 +25,7 @@ contributors: false
 
 | input   | output    |
 | ------- | --------- |
-| nothing | list\<any\> |
+| nothing | list&lt;any&gt; |
 ## Examples
 
 Show the commands in the current scope

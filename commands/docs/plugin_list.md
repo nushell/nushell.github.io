@@ -2,7 +2,7 @@
 title: plugin list
 categories: |
   plugin
-version: 0.104.0
+version: 0.106.0
 plugin: |
   List loaded and installed plugins.
 usage: |
@@ -31,19 +31,19 @@ contributors: false
 
 | input   | output                                                                                                                  |
 | ------- | ----------------------------------------------------------------------------------------------------------------------- |
-| nothing | table\<name: string, version: string, status: string, pid: int, filename: string, shell: string, commands: list\<string\>\> |
+| nothing | table&lt;name: string, version: string, status: string, pid: int, filename: string, shell: string, commands: list&lt;string&gt;&gt; |
 ## Examples
 
 List installed plugins.
 ```nu
 > plugin list
-╭─────┬────────┬──────────────────────┬───────────┬──────────┬────────────────────────────────┬────────┬──────────────╮
-│   # │  name  │       version        │  status   │   pid    │            filename            │ shell  │   commands   │
-├─────┼────────┼──────────────────────┼───────────┼──────────┼────────────────────────────────┼────────┼──────────────┤
-│   0 │ inc    │ 0.104.0   │ running   │   106480 │ /opt/nu/plugins/nu_plugin_inc  │        │ ╭───┬─────╮  │
-│     │        │                      │           │          │                                │        │ │ 0 │ inc │  │
-│     │        │                      │           │          │                                │        │ ╰───┴─────╯  │
-╰─────┴────────┴──────────────────────┴───────────┴──────────┴────────────────────────────────┴────────┴──────────────╯
+╭───┬──────┬────────────────────┬─────────┬────────┬───────────────────────────────┬───────┬─────────────╮
+│ # │ name │      version       │ status  │  pid   │           filename            │ shell │  commands   │
+├───┼──────┼────────────────────┼─────────┼────────┼───────────────────────────────┼───────┼─────────────┤
+│ 0 │ inc  │ 0.106.0 │ running │ 106480 │ /opt/nu/plugins/nu_plugin_inc │       │ ╭───┬─────╮ │
+│   │      │                    │         │        │                               │       │ │ 0 │ inc │ │
+│   │      │                    │         │        │                               │       │ ╰───┴─────╯ │
+╰───┴──────┴────────────────────┴─────────┴────────┴───────────────────────────────┴───────┴─────────────╯
 
 ```
 

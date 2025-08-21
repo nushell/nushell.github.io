@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Filter values based on a predicate closure.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
-| range     | list\<any\> |
+| list&lt;any&gt; | list&lt;any&gt; |
+| range     | list&lt;any&gt; |
 ## Examples
 
 Filter items of a list according to a condition
@@ -82,5 +82,5 @@ List all numbers above 3, using an existing closure condition
 ```
 
 ## Notes
-This command works similar to 'where' but allows reading the predicate closure from
-a variable. On the other hand, the "row condition" syntax is not supported.
+This command works similar to 'where' but can only use a closure as a predicate.
+The "row condition" syntax is not supported.

@@ -2,7 +2,7 @@
 title: polars shift
 categories: |
   dataframe or lazyframe
-version: 0.104.0
+version: 0.106.0
 dataframe_or_lazyframe: |
   Shifts the values by a given period.
 usage: |
@@ -38,9 +38,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| dataframe  | dataframe  |
+| expression | expression |
 ## Examples
 
 Shifts the values by a given period
@@ -68,5 +69,23 @@ Shifts the values by a given period, fill absent values with 0
 │ 3 │ 2 │
 │ 4 │ 2 │
 ╰───┴───╯
+
+```
+
+Shift values of a column, fill absent values with 0
+```nu
+> [[a]; [1] [2] [2] [3] [3]]
+                    | polars into-lazy
+                    | polars with-column {b: (polars col a | polars shift 2 --fill 0)}
+                    | polars collect
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 0 │
+│ 1 │ 2 │ 0 │
+│ 2 │ 2 │ 1 │
+│ 3 │ 3 │ 2 │
+│ 4 │ 3 │ 2 │
+╰───┴───┴───╯
 
 ```

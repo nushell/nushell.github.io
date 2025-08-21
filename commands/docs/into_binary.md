@@ -2,7 +2,7 @@
 title: into binary
 categories: |
   conversions
-version: 0.104.0
+version: 0.106.0
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -34,14 +34,14 @@ contributors: false
 | input    | output |
 | -------- | ------ |
 | binary   | binary |
-| bool     | binary |
-| datetime | binary |
-| filesize | binary |
 | int      | binary |
 | number   | binary |
-| record   | record |
 | string   | binary |
+| bool     | binary |
+| filesize | binary |
+| datetime | binary |
 | table    | table  |
+| record   | record |
 ## Examples
 
 convert string to a nushell binary primitive

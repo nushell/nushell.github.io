@@ -2,7 +2,7 @@
 title: stor insert
 categories: |
   database
-version: 0.104.0
+version: 0.106.0
 database: |
   Insert information into a specified table in the in-memory sqlite database.
 usage: |
@@ -30,10 +30,10 @@ contributors: false
 
 | input   | output |
 | ------- | ------ |
-| any     | table  |
 | nothing | table  |
 | record  | table  |
 | table   | table  |
+| any     | table  |
 ## Examples
 
 Insert data in the in-memory sqlite database using a data-record of column-name and column-value pairs

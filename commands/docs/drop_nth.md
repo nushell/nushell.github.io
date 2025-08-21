@@ -2,7 +2,7 @@
 title: drop nth
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Drop the selected rows.
 usage: |
@@ -18,20 +18,19 @@ contributors: false
 
 ## Signature
 
-```> drop nth {flags} (row number or row range) ...rest```
+```> drop nth {flags} ...rest```
 
 ## Parameters
 
- -  `row number or row range`: The number of the row to drop or a range to drop consecutive rows.
- -  `...rest`: The number of the row to drop.
+ -  `...rest`: The row numbers or ranges to drop.
 
 
 ## Input/output types:
 
 | input     | output       |
 | --------- | ------------ |
-| list\<any\> | list\<any\>    |
-| range     | list\<number\> |
+| range     | list&lt;number&gt; |
+| list&lt;any&gt; | list&lt;any&gt;    |
 ## Examples
 
 Drop the first, second, and third row

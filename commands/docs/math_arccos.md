@@ -2,7 +2,7 @@
 title: math arccos
 categories: |
   math
-version: 0.104.0
+version: 0.106.0
 math: |
   Returns the arccosine of the number.
 usage: |
@@ -29,18 +29,18 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Get the arccosine of 1
 ```nu
 > 1 | math arccos
-0
+0.0
 ```
 
 Get the arccosine of -1 in degrees
 ```nu
 > -1 | math arccos --degrees
-180
+180.0
 ```

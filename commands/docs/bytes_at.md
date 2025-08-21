@@ -2,7 +2,7 @@
 title: bytes at
 categories: |
   bytes
-version: 0.104.0
+version: 0.106.0
 bytes: |
   Get bytes defined by a range.
 usage: |
@@ -31,9 +31,9 @@ contributors: false
 | input        | output       |
 | ------------ | ------------ |
 | binary       | binary       |
-| list\<binary\> | list\<binary\> |
-| record       | record       |
+| list&lt;binary&gt; | list&lt;binary&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Extract bytes starting from a specific index

@@ -2,7 +2,7 @@
 title: from msgpack
 categories: |
   formats
-version: 0.104.0
+version: 0.106.0
 formats: |
   Convert MessagePack data into Nu values.
 usage: |
@@ -61,8 +61,8 @@ Read a table from MessagePack
 ╭───┬──────────────────────┬──────────────╮
 │ # │      event_name      │     time     │
 ├───┼──────────────────────┼──────────────┤
-│ 0 │ Apollo 11 Landing    │ 55 years ago │
-│ 1 │ Nushell first commit │ 5 years ago  │
+│ 0 │ Apollo 11 Landing    │ 56 years ago │
+│ 1 │ Nushell first commit │ 6 years ago  │
 ╰───┴──────────────────────┴──────────────╯
 
 ```

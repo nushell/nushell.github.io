@@ -2,7 +2,7 @@
 title: split cell-path
 categories: |
   conversions
-version: 0.104.0
+version: 0.106.0
 conversions: |
   Split a cell-path into its components.
 usage: |
@@ -23,34 +23,35 @@ contributors: false
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| cell-path | list\<any\> |
+| input     | output                                                      |
+| --------- | ----------------------------------------------------------- |
+| cell-path | list&lt;any&gt;                                                   |
+| cell-path | list&lt;record&lt;value: any, optional: bool, insensitive: bool&gt;&gt; |
 ## Examples
 
 Split a cell-path into its components
 ```nu
 > $.5?.c | split cell-path
-╭───┬───────┬──────────╮
-│ # │ value │ optional │
-├───┼───────┼──────────┤
-│ 0 │     5 │ true     │
-│ 1 │ c     │ false    │
-╰───┴───────┴──────────╯
+╭───┬───────┬──────────┬─────────────╮
+│ # │ value │ optional │ insensitive │
+├───┼───────┼──────────┼─────────────┤
+│ 0 │     5 │ true     │ false       │
+│ 1 │ c     │ false    │ false       │
+╰───┴───────┴──────────┴─────────────╯
 
 ```
 
 Split a complex cell-path
 ```nu
-> $.a.b?.1."2"."c.d" | split cell-path
-╭───┬───────┬──────────╮
-│ # │ value │ optional │
-├───┼───────┼──────────┤
-│ 0 │ a     │ false    │
-│ 1 │ b     │ true     │
-│ 2 │     1 │ false    │
-│ 3 │ 2     │ false    │
-│ 4 │ c.d   │ false    │
-╰───┴───────┴──────────╯
+> $.a!.b?.1."2"."c.d" | split cell-path
+╭───┬───────┬──────────┬─────────────╮
+│ # │ value │ optional │ insensitive │
+├───┼───────┼──────────┼─────────────┤
+│ 0 │ a     │ false    │ true        │
+│ 1 │ b     │ true     │ false       │
+│ 2 │     1 │ false    │ false       │
+│ 3 │ 2     │ false    │ false       │
+│ 4 │ c.d   │ false    │ false       │
+╰───┴───────┴──────────┴─────────────╯
 
 ```

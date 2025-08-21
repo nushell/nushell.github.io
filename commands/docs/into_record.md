@@ -2,7 +2,7 @@
 title: into record
 categories: |
   conversions
-version: 0.104.0
+version: 0.106.0
 conversions: |
   Convert value to record.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
 | --------- | ------ |
 | datetime  | record |
 | duration  | record |
-| list\<any\> | record |
+| list&lt;any&gt; | record |
 | record    | record |
 ## Examples
 

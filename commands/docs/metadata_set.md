@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.104.0
+version: 0.106.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -42,14 +42,12 @@ Set the metadata of a table literal
 
 Set the metadata of a file path
 ```nu
-> 'crates' | metadata set --datasource-filepath $'(pwd)/crates' | metadata
+> 'crates' | metadata set --datasource-filepath $'(pwd)/crates'
 
 ```
 
 Set the metadata of a file path
 ```nu
-> 'crates' | metadata set --content-type text/plain | metadata
-╭──────────────┬────────────╮
-│ content_type │ text/plain │
-╰──────────────┴────────────╯
+> 'crates' | metadata set --content-type text/plain | metadata | get content_type
+text/plain
 ```

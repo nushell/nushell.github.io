@@ -2,7 +2,7 @@
 title: str pascal-case
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Convert a string to PascalCase.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
 | table        | table        |
+| record       | record       |
+| list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
 convert a string to PascalCase

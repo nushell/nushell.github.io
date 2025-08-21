@@ -2,7 +2,7 @@
 title: math tan
 categories: |
   math
-version: 0.104.0
+version: 0.106.0
 math: |
   Returns the tangent of the number.
 usage: |
@@ -29,14 +29,14 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Apply the tangent to π/4
 ```nu
 > 3.141592 / 4 | math tan | math round --precision 4
-1
+1.0
 ```
 
 Apply the tangent to a list of angles in degrees

@@ -2,7 +2,7 @@
 title: polars is-in
 categories: |
   expression
-version: 0.104.0
+version: 0.106.0
 expression: |
   Creates an is-in expression or checks to see if the elements are contained in the right series
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| expression | expression |
 ## Examples
 
 Creates a is-in expression
@@ -50,23 +50,5 @@ Creates a is-in expression
 │ 1 │ two   │ 2 │ true  │
 │ 2 │ three │ 3 │ false │
 ╰───┴───────┴───┴───────╯
-
-```
-
-Checks if elements from a series are contained in right series
-```nu
-> let other = ([1 3 6] | polars into-df);
-            [5 6 6 6 8 8 8] | polars into-df | polars is-in $other
-╭───┬───────╮
-│ # │ is_in │
-├───┼───────┤
-│ 0 │ false │
-│ 1 │ true  │
-│ 2 │ true  │
-│ 3 │ true  │
-│ 4 │ false │
-│ 5 │ false │
-│ 6 │ false │
-╰───┴───────╯
 
 ```

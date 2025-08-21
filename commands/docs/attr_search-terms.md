@@ -2,7 +2,7 @@
 title: attr search-terms
 categories: |
   core
-version: 0.104.0
+version: 0.106.0
 core: |
   Attribute for adding search terms to custom commands.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 
 | input   | output       |
 | ------- | ------------ |
-| nothing | list\<string\> |
+| nothing | list&lt;string&gt; |
 ## Examples
 
 Add search terms to a custom command

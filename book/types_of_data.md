@@ -1,3 +1,8 @@
+---
+prev:
+  text: Nu Fundamentals
+  link: /book/nu_fundamentals.md
+---
 # Types of Data
 
 Traditional Unix shell commands communicate with each other using strings of text -- One command writes text to standard output (often abbreviated `stdout`) and the other reads text from standard input (or `stdin`). This allows multiple commands to be combined together to communicate through what is called a "pipeline".
@@ -247,12 +252,12 @@ let cp = $.2
 
 Simple example:
 
-This closure returns a boolean result of the comparison and then uses it in a `filter` command to return all values greater than 5.
+This closure returns a boolean result of the comparison and then uses it in a `where` command to return all values greater than 5.
 
 ```nu
 let compare_closure = {|a| $a > 5 }
 let original_list = [ 40 -4 0 8 12 16 -16 ]
-$original_list | filter $compare_closure
+$original_list | where $compare_closure
 # => ╭───┬────╮
 # => │ 0 │ 40 │
 # => │ 1 │  8 │

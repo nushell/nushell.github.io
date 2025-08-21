@@ -2,7 +2,7 @@
 title: generate
 categories: |
   generators
-version: 0.104.0
+version: 0.106.0
 generators: |
   Generate a list of values by successively invoking a closure.
 usage: |
@@ -30,10 +30,10 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
-| nothing   | list\<any\> |
-| range     | list\<any\> |
-| table     | list\<any\> |
+| nothing   | list&lt;any&gt; |
+| list&lt;any&gt; | list&lt;any&gt; |
+| table     | list&lt;any&gt; |
+| range     | list&lt;any&gt; |
 ## Examples
 
 Generate a sequence of numbers

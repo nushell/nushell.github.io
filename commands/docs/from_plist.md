@@ -2,7 +2,7 @@
 title: from plist
 categories: |
   formats
-version: 0.104.0
+version: 0.106.0
 formats: |
   Convert plist to Nushell values
 usage: |
@@ -27,12 +27,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ```> from plist {flags} ```
 
-
-## Input/output types:
-
-| input | output |
-| ----- | ------ |
-| any   | any    |
 ## Examples
 
 Convert a table into a plist file

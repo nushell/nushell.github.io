@@ -2,7 +2,7 @@
 title: split chars
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Split a string into a list of characters.
 usage: |
@@ -30,8 +30,8 @@ contributors: false
 
 | input        | output             |
 | ------------ | ------------------ |
-| list\<string\> | list\<list\<string\>\> |
-| string       | list\<string\>       |
+| string       | list&lt;string&gt;       |
+| list&lt;string&gt; | list&lt;list&lt;string&gt;&gt; |
 ## Examples
 
 Split the string into a list of characters

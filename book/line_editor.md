@@ -155,8 +155,8 @@ These keybinding events apply only to Vi-normal mode:
 | <kbd>↓</kbd> (Down Arrow)                   | Move down           |
 | <kbd>←</kbd> (Left Arrow)                   | Move left           |
 | <kbd>→</kbd> (Right Arrow)                  | Move right          |
-| <kbd>Ctrl></kbd>+<kbd>→</kbd> (Right Arrow) | Move right one word |
-| <kbd>Ctrl></kbd>+<kbd>←</kbd> (Left Arrow)  | Move left one word  |
+| <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Move right one word |
+| <kbd>Ctrl</kbd>+<kbd>←</kbd> (Left Arrow)  | Move left one word  |
 
 ### Vi-normal Motions
 
@@ -208,15 +208,7 @@ edited and sent to Nushell. To configure the max number of records that
 Reedline should store you will need to adjust this value in your config file:
 
 ```nu
-  $env.config = {
-    ...
-    history: {
-      ...
-      max_size: 1000
-      ...
-    }
-    ...
-  }
+$env.config.history.max_size = 1000
 ```
 
 ## Customizing the Prompt
@@ -233,21 +225,13 @@ For example, let's say that you would like to map the completion menu to the
 config file.
 
 ```nu
-  $env.config = {
-    ...
-
-    keybindings: [
-      {
-        name: completion_menu
-        modifier: control
-        keycode: char_t
-        mode: emacs
-        event: { send: menu name: completion_menu }
-      }
-    ]
-
-    ...
-  }
+$env.config.keybindings ++= [{
+    name: completion_menu
+    modifier: control
+    keycode: char_t
+    mode: emacs
+    event: { send: menu name: completion_menu }
+}]
 ```
 
 After loading this new `config.nu`, your new keybinding (`Ctrl + t`) will open
@@ -318,27 +302,20 @@ The next keybinding is an example of a series of events sent to the engine. It
 first clears the prompt, inserts a string and then enters that value
 
 ```nu
-  $env.config = {
-    ...
-
-    keybindings: [
-    {
-      name: change_dir_with_fzf
-      modifier: CONTROL
-      keycode: Char_t
-      mode: emacs
-      event:[
-          { edit: Clear }
-          { edit: InsertString,
-            value: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
-
-          }
-          { send: Enter }
-        ]
-    }
-
-    ...
-  }
+$env.config.keybindings ++= [{
+    name: change_dir_with_fzf
+    modifier: CONTROL
+    keycode: Char_t
+    mode: emacs
+    event: [
+        { edit: Clear }
+        {
+          edit: InsertString,
+          value: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
+        }
+        { send: Enter }
+    ]
+}]
 ```
 
 One disadvantage of the previous keybinding is the fact that the inserted text
@@ -349,24 +326,16 @@ example does the same as the previous one in a simpler way, sending a single
 event to the engine
 
 ```nu
-  $env.config = {
-    ...
-
-    keybindings: [
-    {
-      name: change_dir_with_fzf
-      modifier: CONTROL
-      keycode: Char_y
-      mode: emacs
-      event: {
+$env.config.keybindings ++= [{
+    name: change_dir_with_fzf
+    modifier: CONTROL
+    keycode: Char_y
+    mode: emacs
+    event: {
         send: executehostcommand,
         cmd: "cd (ls | where type == dir | each { |row| $row.name} | str join (char nl) | fzf | decode utf-8 | str trim)"
-      }
     }
-  ]
-
-    ...
-  }
+}]
 ```
 
 Before we continue you must have noticed that the syntax changes for edits and
@@ -426,7 +395,7 @@ parser since they are constructed based on the keybinding definition. For
 example, a `Multiple([])` event is built for you when defining a list of
 records in the keybinding's event. An `Edit([])` event is the same as the
 `edit` type that was mentioned. And the `UntilFound([])` event is the same as
-the `until` type mentioned before.
+the `until` type mentioned later.
 
 ### Edit Type
 
@@ -494,26 +463,18 @@ one is successful, the event processing is stopped.
 The next keybinding represents this case.
 
 ```nu
-  $env.config = {
-    ...
-
-    keybindings: [
-      {
-        name: completion_menu
-        modifier: control
-        keycode: char_t
-        mode: emacs
-        event: {
-          until: [
-            { send: menu name: completion_menu }
-            { send: menunext }
-          ]
-        }
-      }
-    ]
-
-    ...
-  }
+$env.config.keybindings ++= [{
+    name: completion_menu
+    modifier: control
+    keycode: char_t
+    mode: emacs
+    event: {
+        until: [
+          { send: menu name: completion_menu }
+          { send: menunext }
+        ]
+    }
+}]
 ```
 
 The previous keybinding will first try to open a completion menu. If the menu
@@ -531,27 +492,19 @@ For example, the next keybinding will always send a `down` because that event
 is always successful
 
 ```nu
-  $env.config = {
-    ...
-
-    keybindings: [
-      {
-        name: completion_menu
-        modifier: control
-        keycode: char_t
-        mode: emacs
-        event: {
-          until: [
+$env.config.keybindings ++= [{
+    name: completion_menu
+    modifier: control
+    keycode: char_t
+    mode: emacs
+    event: {
+        until: [
             { send: down }
             { send: menu name: completion_menu }
             { send: menunext }
-          ]
-        }
-      }
-    ]
-
-    ...
-  }
+        ]
+    }
+}]
 ```
 
 ### Removing a Default Keybinding
@@ -561,20 +514,12 @@ If you want to remove a certain default keybinding without replacing it with a d
 e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 
 ```nu
-  $env.config = {
-    ...
-
-    keybindings: [
-      {
-        modifier: control
-        keycode: char_l
-        mode: [emacs, vi_normal, vi_insert]
-        event: null
-      }
-    ]
-
-    ...
-  }
+$env.config.keybindings ++= [{
+    modifier: control
+    keycode: char_l
+    mode: [emacs, vi_normal, vi_insert]
+    event: null
+}]
 ```
 
 ### Troubleshooting Keybinding Problems
@@ -628,32 +573,24 @@ the line the available command examples.
 The help menu can be configured by modifying the next parameters
 
 ```nu
-  $env.config = {
-    ...
-
-    menus = [
-      ...
-      {
-        name: help_menu
-        only_buffer_difference: true # Search is done on the text written after activating the menu
-        marker: "? "                 # Indicator that appears with the menu is active
-        type: {
-            layout: description      # Type of menu
-            columns: 4               # Number of columns where the options are displayed
-            col_width: 20            # Optional value. If missing all the screen width is used to calculate column width
-            col_padding: 2           # Padding between columns
-            selection_rows: 4        # Number of rows allowed to display found options
-            description_rows: 10     # Number of rows allowed to display command description
-        }
-        style: {
-            text: green                   # Text style
-            selected_text: green_reverse  # Text style for selected option
-            description_text: yellow      # Text style for description
-        }
-      }
-      ...
-    ]
-    ...
+$env.config.menus ++= [{
+    name: help_menu
+    only_buffer_difference: true # Search is done on the text written after activating the menu
+    marker: "? "                 # Indicator that appears with the menu is active
+    type: {
+        layout: description      # Type of menu
+        columns: 4               # Number of columns where the options are displayed
+        col_width: 20            # Optional value. If missing all the screen width is used to calculate column width
+        col_padding: 2           # Padding between columns
+        selection_rows: 4        # Number of rows allowed to display found options
+        description_rows: 10     # Number of rows allowed to display command description
+    }
+    style: {
+        text: green                   # Text style
+        selected_text: green_reverse  # Text style for selected option
+        description_text: yellow      # Text style for description
+    }
+}]
 ```
 
 ### Completion Menu
@@ -669,30 +606,22 @@ The completion menu by default is accessed by pressing `tab` and it can be confi
 modifying these values from the config object:
 
 ```nu
-  $env.config = {
-    ...
-
-    menus: [
-      ...
-      {
-        name: completion_menu
-        only_buffer_difference: false # Search is done on the text written after activating the menu
-        marker: "| "                  # Indicator that appears with the menu is active
-        type: {
-            layout: columnar          # Type of menu
-            columns: 4                # Number of columns where the options are displayed
-            col_width: 20             # Optional value. If missing all the screen width is used to calculate column width
-            col_padding: 2            # Padding between columns
-        }
-        style: {
-            text: green                   # Text style
-            selected_text: green_reverse  # Text style for selected option
-            description_text: yellow      # Text style for description
-        }
-      }
-      ...
-    ]
-    ...
+$env.config.menus ++= [{
+    name: completion_menu
+    only_buffer_difference: false # Search is done on the text written after activating the menu
+    marker: "| "                  # Indicator that appears with the menu is active
+    type: {
+        layout: columnar          # Type of menu
+        columns: 4                # Number of columns where the options are displayed
+        col_width: 20             # Optional value. If missing all the screen width is used to calculate column width
+        col_padding: 2            # Padding between columns
+    }
+    style: {
+        text: green                   # Text style
+        selected_text: green_reverse  # Text style for selected option
+        description_text: yellow      # Text style for description
+    }
+}]
 ```
 
 By modifying these parameters you can customize the layout of your menu to your
@@ -707,28 +636,20 @@ chronological order, making it extremely easy to select a previous command.
 The history menu can be configured by modifying these values from the config object:
 
 ```nu
-  $env.config = {
-    ...
-
-    menus = [
-      ...
-      {
-        name: history_menu
-        only_buffer_difference: true # Search is done on the text written after activating the menu
-        marker: "? "                 # Indicator that appears with the menu is active
-        type: {
-            layout: list             # Type of menu
-            page_size: 10            # Number of entries that will presented when activating the menu
-        }
-        style: {
-            text: green                   # Text style
-            selected_text: green_reverse  # Text style for selected option
-            description_text: yellow      # Text style for description
-        }
-      }
-      ...
-    ]
-    ...
+$env.config.menus ++= [{
+    name: history_menu
+    only_buffer_difference: true # Search is done on the text written after activating the menu
+    marker: "? "                 # Indicator that appears with the menu is active
+    type: {
+        layout: list             # Type of menu
+        page_size: 10            # Number of entries that will presented when activating the menu
+    }
+    style: {
+        text: green                   # Text style
+        selected_text: green_reverse  # Text style for selected option
+        description_text: yellow      # Text style for description
+    }
+}]
 ```
 
 When the history menu is activated, it pulls `page_size` records from the
@@ -798,41 +719,33 @@ values, together with extra information that could be inserted into the buffer.
 
 Let's say we want to create a menu that displays all the variables created
 during your session, we are going to call it `vars_menu`. This menu will use a
-list layout (layout: list). To search for values, we want to use only the things
-that are written after the menu has been activated (only_buffer_difference:
-true).
+list layout (`layout: list`). To search for values, we want to use only the things
+that are written after the menu has been activated
+(`only_buffer_difference: true`).
 
 With that in mind, the desired menu would look like this
 
 ```nu
-  $env.config = {
-    ...
-
-    menus = [
-      ...
-      {
-        name: vars_menu
-        only_buffer_difference: true
-        marker: "# "
-        type: {
-            layout: list
-            page_size: 10
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
-        }
-        source: { |buffer, position|
-            scope variables
-            | where name =~ $buffer
-            | sort-by name
-            | each { |row| {value: $row.name description: $row.type} }
-        }
-      }
-      ...
-    ]
-    ...
+$env.config.menus ++= [{
+    name: vars_menu
+    only_buffer_difference: true
+    marker: "# "
+    type: {
+        layout: list
+        page_size: 10
+    }
+    style: {
+        text: green
+        selected_text: green_reverse
+        description_text: yellow
+    }
+    source: { |buffer, position|
+        scope variables
+        | where name =~ $buffer
+        | sort-by name
+        | each { |row| {value: $row.name description: $row.type} }
+    }
+}]
 ```
 
 As you can see, the new menu is identical to the `history_menu` previously
@@ -881,36 +794,30 @@ change that by defining new keybindings. For example, the next two keybindings
 assign the completion and history menu to `Ctrl+t` and `Ctrl+y` respectively
 
 ```nu
-  $env.config = {
-    ...
-
-    keybindings: [
-      {
+$env.config.keybindings ++= [
+    {
         name: completion_menu
         modifier: control
         keycode: char_t
         mode: [vi_insert vi_normal]
         event: {
-          until: [
-            { send: menu name: completion_menu }
-            { send: menupagenext }
-          ]
+            until: [
+                { send: menu name: completion_menu }
+                { send: menupagenext }
+            ]
         }
-      }
-      {
+    }
+    {
         name: history_menu
         modifier: control
         keycode: char_y
         mode: [vi_insert vi_normal]
         event: {
-          until: [
-            { send: menu name: history_menu }
-            { send: menupagenext }
-          ]
+            until: [
+                { send: menu name: history_menu }
+                { send: menupagenext }
+            ]
         }
-      }
-    ]
-
-    ...
-  }
+    }
+]
 ```

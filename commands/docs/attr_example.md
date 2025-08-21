@@ -2,7 +2,7 @@
 title: attr example
 categories: |
   core
-version: 0.104.0
+version: 0.106.0
 core: |
   Attribute for adding examples to custom commands.
 usage: |
@@ -34,7 +34,7 @@ contributors: false
 
 | input   | output                                       |
 | ------- | -------------------------------------------- |
-| nothing | record\<description: string, example: string\> |
+| nothing | record&lt;description: string, example: string&gt; |
 ## Examples
 
 Add examples to custom command

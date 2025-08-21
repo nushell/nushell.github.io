@@ -2,7 +2,7 @@
 title: seq date
 categories: |
   generators
-version: 0.104.0
+version: 0.106.0
 generators: |
   Print sequences of dates.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
  -  `--input-format, -i {string}`: give argument dates in this format (defaults to %Y-%m-%d)
  -  `--begin-date, -b {string}`: beginning date range
  -  `--end-date, -e {string}`: ending date
- -  `--increment, -n {one_of(duration, int)}`: increment dates by this duration (defaults to days if integer)
+ -  `--increment, -n {oneof<duration, int>}`: increment dates by this duration (defaults to days if integer)
  -  `--days, -d {int}`: number of days to print (ignored if periods is used)
  -  `--periods, -p {int}`: number of periods to print
  -  `--reverse, -r`: print dates in reverse
@@ -36,7 +36,7 @@ contributors: false
 
 | input   | output       |
 | ------- | ------------ |
-| nothing | list\<string\> |
+| nothing | list&lt;string&gt; |
 ## Examples
 
 Return a list of the next 10 days in the YYYY-MM-DD format

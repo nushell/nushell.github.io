@@ -2,7 +2,7 @@
 title: uniq
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Return the distinct values in the input.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Return the distinct values of a list/table (remove duplicates so that each value occurs once only)

@@ -2,7 +2,7 @@
 title: rotate
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Rotates a table or record clockwise (default) or counter-clockwise (use --ccw flag).
 usage: |
@@ -33,10 +33,10 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| list\<any\> | table  |
 | record    | table  |
-| string    | table  |
 | table     | table  |
+| list&lt;any&gt; | table  |
+| string    | table  |
 ## Examples
 
 Rotate a record clockwise, producing a table (like `transpose` but with column order reversed)

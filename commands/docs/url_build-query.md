@@ -2,7 +2,7 @@
 title: url build-query
 categories: |
   network
-version: 0.104.0
+version: 0.106.0
 network: |
   Converts record or table into query string applying percent-encoding.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
 | input                       | output |
 | --------------------------- | ------ |
 | record                      | string |
-| table\<key: any, value: any\> | string |
+| table&lt;key: any, value: any&gt; | string |
 ## Examples
 
 Outputs a query string representing the contents of this record

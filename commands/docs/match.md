@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.104.0
+version: 0.106.0
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -32,6 +32,18 @@ contributors: false
 | ----- | ------ |
 | any   | any    |
 ## Examples
+
+Match on a value
+```nu
+> match 3 { 1 => 'one', 2 => 'two', 3 => 'three' }
+three
+```
+
+Match against alternative values
+```nu
+> match 'three' { 1 | 'one' => '-', 2 | 'two' => '--', 3 | 'three' => '---' }
+---
+```
 
 Match on a value in range
 ```nu

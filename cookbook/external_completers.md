@@ -20,11 +20,16 @@ This completer will use [the fish shell](https://fishshell.com/) to handle compl
 
 ```nu
 let fish_completer = {|spans|
-    fish --command $"complete '--do-complete=($spans | str join ' ')'"
+    fish --command $"complete '--do-complete=($spans | str replace --all "'" "\\'" | str join ' ')'"
     | from tsv --flexible --noheaders --no-infer
     | rename value description
-    | update value {
-        if ($in | path exists) {$'"($in | str replace "\"" "\\\"" )"'} else {$in}
+    | update value {|row|
+      let value = $row.value
+      let need_quote = ['\' ',' '[' ']' '(' ')' ' ' '\t' "'" '"' "`"] | any {$in in $value}
+      if ($need_quote and ($value | path exists)) {
+        let expanded_path = if ($value starts-with ~) {$value | path expand --no-symlink} else {$value}
+        $'"($expanded_path | str replace --all "\"" "\\\"")"'
+      } else {$value}
     }
 }
 ```
@@ -34,37 +39,7 @@ A couple of things to note on this command:
 - The fish completer will return lines of text, each one holding the `value` and `description` separated by a tab. The `description` can be missing, and in that case there won't be a tab after the `value`. If that happens, `from tsv` will fail, so we add the `--flexible` flag.
 - The output of the fish completer does not contain a header (name of the columns), so we add `--noheaders` to prevent `from tsv` from treating the first row as headers and later give the columns their names using `rename`.
 - `--no-infer` is optional. `from tsv` will infer the data type of the result, so a numeric value like some git hashes will be inferred as a number. `--no-infer` will keep everything as a string. It doesn't make a difference in practice but it will print a more consistent output if the completer is ran on it's own.
-- Since fish only supports POSIX style escapes for file paths (`file\ name.txt`, etc.), file paths completed by fish will not be quoted or escaped properly on external commands. Nushell does not parse POSIX escapes, so we need to do this conversion manually such as by testing if the items are valid paths as shown in the example. This simple approach is imperfect, but it should cover 99.9% of use cases.
-
-### Zoxide completer
-
-[Zoxide](https://github.com/ajeetdsouza/zoxide) allows easily jumping between visited folders in the system. It's possible to autocomplete matching folders with this completer:
-
-```nu
-let zoxide_completer = {|spans|
-    $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD}
-}
-```
-
-This completer is not usable for almost every other command, so it's recommended to add it as an override in the [multiple completer](#multiple-completer):
-
-```nu
-{
-    z => $zoxide_completer
-    zi => $zoxide_completer
-}
-```
-
-> **Note**
-> Zoxide sets an alias (`z` by default) that calls the `__zoxide_z` function.
-> If [alias completions](#alias-completions) are supported, the following snippet can be used instead:
->
-> ```nu
-> {
->     __zoxide_z => $zoxide_completer
->     __zoxide_zi => $zoxide_completer
-> }
-> ```
+- Since fish only supports POSIX style escapes for file paths (`file\ name.txt`, etc.), file paths completed by fish will not be quoted or escaped properly on external commands. Nushell does not parse POSIX escapes, so we need to do this conversion manually such as by testing if the items are valid paths as shown in the example. To minimize the overhead of path lookups, we first check the string for common escape characters. If the string needs escaping, and it is a path on the filesystem, then the value is double-quoted. Also before double-quoting the file path we expand any ~ at the beginning of the path, so that completions continue to work. This simple approach is imperfect, but it should cover 99.9% of use cases.
 
 ### Multiple completer
 
@@ -141,7 +116,7 @@ let carapace_completer = {|spans: list<string>|
 let external_completer = {|spans|
     let expanded_alias = scope aliases
     | where name == $spans.0
-    | get -i 0.expansion
+    | get -o 0.expansion
 
     let spans = if $expanded_alias != null {
         $spans
@@ -158,8 +133,6 @@ let external_completer = {|spans|
         git => $fish_completer
         # carapace doesn't have completions for asdf
         asdf => $fish_completer
-        # use zoxide completions for zoxide commands
-        __zoxide_z | __zoxide_zi => $zoxide_completer
         _ => $carapace_completer
     } | do $in $spans
 }

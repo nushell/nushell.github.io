@@ -2,7 +2,7 @@
 title: overlay list
 categories: |
   core
-version: 0.104.0
+version: 0.106.0
 core: |
   List all active overlays.
 usage: |
@@ -25,7 +25,7 @@ contributors: false
 
 | input   | output       |
 | ------- | ------------ |
-| nothing | list\<string\> |
+| nothing | list&lt;string&gt; |
 ## Examples
 
 Get the last activated overlay

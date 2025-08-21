@@ -1,3 +1,11 @@
+---
+prev:
+  text: Nushell operator map
+  link: /book/nushell_operator_map.md
+next:
+  text: How Nushell Code Gets Run
+  link: /book/how_nushell_code_gets_run.md
+---
 # Design Notes
 
 This chapter intends to give more in-depth overview of certain aspects of Nushell's design. The topics are not necessary for a basic usage, but reading them will help you understand how Nushell works and why.

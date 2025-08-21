@@ -2,7 +2,7 @@
 title: bytes reverse
 categories: |
   bytes
-version: 0.104.0
+version: 0.106.0
 bytes: |
   Reverse the bytes in the pipeline.
 usage: |
@@ -30,8 +30,8 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | binary | binary |
-| record | record |
 | table  | table  |
+| record | record |
 ## Examples
 
 Reverse bytes `0x[1F FF AA AA]`

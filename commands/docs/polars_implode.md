@@ -2,7 +2,7 @@
 title: polars implode
 categories: |
   dataframe
-version: 0.104.0
+version: 0.106.0
 dataframe: |
   Aggregates values into a list.
 usage: |
@@ -30,9 +30,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| expression | expression |
 ## Examples
 
 Create two lists for columns a and b with all the rows as values.

@@ -2,7 +2,7 @@
 title: drop column
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input  | output |
 | ------ | ------ |
-| record | record |
 | table  | table  |
+| record | record |
 ## Examples
 
 Remove the last column of a table

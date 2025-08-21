@@ -2,7 +2,7 @@
 title: polars get-day
 categories: |
   dataframe
-version: 0.104.0
+version: 0.106.0
 dataframe: |
   Gets day from date.
 usage: |
@@ -30,9 +30,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| dataframe  | dataframe  |
+| expression | expression |
 ## Examples
 
 Returns day from a date

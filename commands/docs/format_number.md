@@ -2,7 +2,7 @@
 title: format number
 categories: |
   conversions
-version: 0.104.0
+version: 0.106.0
 conversions: |
   Format a number.
 usage: |
@@ -20,6 +20,10 @@ contributors: false
 
 ```> format number {flags} ```
 
+## Flags
+
+ -  `--no-prefix, -n`: don't include the binary, hex or octal prefixes
+
 
 ## Input/output types:
 
@@ -32,13 +36,28 @@ Get a record containing multiple formats for the number 42
 ```nu
 > 42 | format number
 ╭──────────┬──────────╮
-│ binary   │ 0b101010 │
 │ debug    │ 42       │
 │ display  │ 42       │
+│ binary   │ 0b101010 │
 │ lowerexp │ 4.2e1    │
-│ lowerhex │ 0x2a     │
-│ octal    │ 0o52     │
 │ upperexp │ 4.2E1    │
+│ lowerhex │ 0x2a     │
 │ upperhex │ 0x2A     │
+│ octal    │ 0o52     │
 ╰──────────┴──────────╯
+```
+
+Format float without prefixes
+```nu
+> 3.14 | format number --no-prefix
+╭──────────┬─────────────────────────────────────────────────────────────────╮
+│ debug    │ 3.14                                                            │
+│ display  │ 3.14                                                            │
+│ binary   │ 100000000001001000111101011100001010001111010111000010100011111 │
+│ lowerexp │ 3.14e0                                                          │
+│ upperexp │ 3.14E0                                                          │
+│ lowerhex │ 40091eb851eb851f                                                │
+│ upperhex │ 40091EB851EB851F                                                │
+│ octal    │ 400110753412172702437                                           │
+╰──────────┴─────────────────────────────────────────────────────────────────╯
 ```

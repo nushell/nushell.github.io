@@ -2,7 +2,7 @@
 title: split row
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Split a string into multiple rows using a separator.
 usage: |
@@ -34,8 +34,8 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| string       | list\<string\> |
+| string       | list&lt;string&gt; |
+| list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
 Split a string into rows of char

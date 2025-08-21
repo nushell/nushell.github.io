@@ -1,3 +1,8 @@
+---
+prev:
+  text: Programming in Nu
+  link: /book/programming_in_nu.md
+---
 # Custom Commands
 
 As with any programming language, you'll quickly want to save longer pipelines and expressions so that you can call them again easily when needed.
@@ -80,7 +85,7 @@ def process-list [] {
 :::
 
 ::: details Suppressing the return value
-You'll often want to create a custom command that acts as a _statement_ rather than an expression, and doesn't return a a value.
+You'll often want to create a custom command that acts as a _statement_ rather than an expression, and doesn't return a value.
 
 You can use the `ignore` keyword in this case:
 
@@ -153,7 +158,7 @@ In this case, the final expression is the `match` statement which can return:
 
 - `null` if the directory is empty
 - Otherwise, a `record` representing the randomly chosen file
-  :::
+:::
 
 ## Custom Commands and Pipelines
 
@@ -485,7 +490,8 @@ The following [types](./types_of_data.html) can be used for parameter annotation
 - `record`
 - `string`
 - `table`
-  :::
+
+:::
 
 ### Flags
 
@@ -815,7 +821,7 @@ Input-Output signatures allow Nushell to catch two additional categories of erro
   # =>    ╰────
   ```
 
-  :::
+:::
 
 ## Documenting Your Command
 

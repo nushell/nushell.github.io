@@ -2,7 +2,7 @@
 title: help pipe-and-redirect
 categories: |
   core
-version: 0.104.0
+version: 0.106.0
 core: |
   Show help on nushell pipes and redirects.
 usage: |

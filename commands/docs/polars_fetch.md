@@ -2,7 +2,7 @@
 title: polars fetch
 categories: |
   lazyframe
-version: 0.104.0
+version: 0.106.0
 lazyframe: |
   Collects the lazyframe to the selected rows.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Fetch a rows from the dataframe

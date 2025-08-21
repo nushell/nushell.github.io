@@ -1,3 +1,9 @@
+---
+next:
+  text: Default Shell
+  link: /book/default_shell.md
+---
+
 # Installing Nu
 
 There are lots of ways to get Nu up and running. You can download pre-built binaries from our [release page](https://github.com/nushell/nushell/releases), [use your favourite package manager](https://repology.org/project/nushell/versions), or build from source.
@@ -22,7 +28,13 @@ For macOS and Linux, [Homebrew](https://brew.sh/) is a popular choice (`brew ins
 
 For Windows:
 
-- [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) (`winget install nushell`)
+- [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
+
+  - Machine scope installation: `winget install nushell --scope machine`
+  - Machine scope upgrade: `winget update nushell`
+  - User scope installation: `winget install nushell` or `winget install nushell --scope user`
+  - User scope upgrade: Due to [winget-cli issue #3011](https://github.com/microsoft/winget-cli/issues/3011), running `winget update nushell` will unexpectedly install the latest version to `C:\Program Files\nu`. To work around this, run `winget install nushell` again to install the latest version in the user scope.
+
 - [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 

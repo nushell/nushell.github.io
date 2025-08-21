@@ -156,7 +156,7 @@ $result
 # => ╰───┴───╯
 ```
 
-While it may be tempting to use loops if you're familiar with them in other languages, it is considered more in the [Nushell-style](book/thinking_in_nu.html) (idiomatic) to use commands that apply closures when you can solve a problem either way. The reason for this is because of a pretty big downside with using loops.
+While it may be tempting to use loops if you're familiar with them in other languages, it is considered more in the [Nushell-style](/book/thinking_in_nu.html) (idiomatic) to use commands that apply closures when you can solve a problem either way. The reason for this is because of a pretty big downside with using loops.
 
 #### Loop Disadvantages
 

@@ -2,7 +2,7 @@
 title: random chars
 categories: |
   random
-version: 0.104.0
+version: 0.106.0
 random: |
   Generate random chars uniformly distributed over ASCII letters and numbers: a-z, A-Z and 0-9.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--length, -l {one_of(int, filesize)}`: Number of chars (default 25)
+ -  `--length, -l {oneof<int, filesize>}`: Number of chars (default 25)
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: url encode
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Converts a string to a percent encoded web safe string.
 usage: |
@@ -33,10 +33,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Encode a url with escape characters

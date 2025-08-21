@@ -2,7 +2,7 @@
 title: reduce
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Aggregate a list (starting from the left) to a single value using an accumulator closure.
 usage: |
@@ -33,9 +33,9 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| list\<any\> | any    |
-| range     | any    |
+| list&lt;any&gt; | any    |
 | table     | any    |
+| range     | any    |
 ## Examples
 
 Sum values of a list (same as 'math sum')

@@ -2,7 +2,7 @@
 title: str camel-case
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Convert a string to camelCase.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 convert a string to camelCase

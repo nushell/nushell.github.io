@@ -2,7 +2,7 @@
 title: path expand
 categories: |
   path
-version: 0.104.0
+version: 0.106.0
 path: |
   Try to expand a path to its absolute form.
 usage: |
@@ -30,8 +30,8 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
 Expand an absolute path

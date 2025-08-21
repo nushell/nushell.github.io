@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.104.0
+version: 0.106.0
 network: |
   Patch a body to a URL.
 usage: |
@@ -58,9 +58,15 @@ Patch content to example.com, with username and password
 
 ```
 
-Patch content to example.com, with custom header
+Patch content to example.com, with custom header using a record
 ```nu
-> http patch --headers [my-header-key my-header-value] https://www.example.com
+> http patch --headers {my-header-key: my-header-value} https://www.example.com
+
+```
+
+Patch content to example.com, with custom header using a list
+```nu
+> http patch --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 

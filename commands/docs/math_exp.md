@@ -2,7 +2,7 @@
 title: math exp
 categories: |
   math
-version: 0.104.0
+version: 0.106.0
 math: |
   Returns e raised to the power of x.
 usage: |
@@ -25,14 +25,14 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Get e raised to the power of zero
 ```nu
 > 0 | math exp
-1
+1.0
 ```
 
 Get e (same as 'math e')

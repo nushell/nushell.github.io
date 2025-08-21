@@ -2,7 +2,7 @@
 title: format date
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Format a given date using a format string.
 usage: |
@@ -33,10 +33,10 @@ contributors: false
 
 | input    | output |
 | -------- | ------ |
-| any      | table  |
 | datetime | string |
-| nothing  | table  |
 | string   | string |
+| nothing  | table  |
+| any      | table  |
 ## Examples
 
 Format a given date-time using the default format (RFC 2822).

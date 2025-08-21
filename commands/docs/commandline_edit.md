@@ -2,7 +2,7 @@
 title: commandline edit
 categories: |
   core
-version: 0.104.0
+version: 0.106.0
 core: |
   Modify the current command line input buffer.
 usage: |

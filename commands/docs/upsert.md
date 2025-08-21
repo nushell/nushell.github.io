@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -30,9 +30,9 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
 | record    | record    |
 | table     | table     |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Update a record's value

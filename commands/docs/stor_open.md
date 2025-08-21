@@ -2,7 +2,7 @@
 title: stor open
 categories: |
   database
-version: 0.104.0
+version: 0.106.0
 database: |
   Opens the in-memory sqlite database.
 usage: |
@@ -23,9 +23,9 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | any    |
+| input   | output           |
+| ------- | ---------------- |
+| nothing | sqlite-in-memory |
 ## Examples
 
 Open the in-memory sqlite database

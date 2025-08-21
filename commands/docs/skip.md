@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
 usage: |
@@ -29,9 +29,9 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| binary    | binary    |
-| list\<any\> | list\<any\> |
 | table     | table     |
+| binary    | binary    |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Skip the first value of a list

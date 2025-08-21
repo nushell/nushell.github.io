@@ -2,7 +2,7 @@
 title: chunk-by
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Divides a sequence into sub-sequences based on a closure.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input     | output          |
 | --------- | --------------- |
-| list\<any\> | list\<list\<any\>\> |
-| range     | list\<list\<any\>\> |
+| list&lt;any&gt; | list&lt;list&lt;any&gt;&gt; |
+| range     | list&lt;list&lt;any&gt;&gt; |
 ## Examples
 
 Chunk data into runs of larger than zero or not.

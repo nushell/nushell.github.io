@@ -2,7 +2,7 @@
 title: str distance
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Compare two strings and return the edit distance/Levenshtein distance.
 usage: |
@@ -30,9 +30,9 @@ contributors: false
 
 | input  | output |
 | ------ | ------ |
-| record | record |
 | string | int    |
 | table  | table  |
+| record | record |
 ## Examples
 
 get the edit distance between two strings

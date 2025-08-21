@@ -2,7 +2,7 @@
 title: format duration
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Outputs duration with a specified unit of time.
 usage: |
@@ -31,7 +31,7 @@ contributors: false
 | input          | output       |
 | -------------- | ------------ |
 | duration       | string       |
-| list\<duration\> | list\<string\> |
+| list&lt;duration&gt; | list&lt;string&gt; |
 | table          | table        |
 ## Examples
 

@@ -2,7 +2,7 @@
 title: str substring
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Get part of a string. Note that the first character of a string is index 0.
 usage: |
@@ -35,10 +35,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Get a substring "nushell" from the text "good nushell" using a range

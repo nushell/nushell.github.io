@@ -12,7 +12,7 @@ ls
 | transpose key value
 | inspect
 | each {|kv|
-    $'The value of the "($kv.key) field is "($kv.value)"'
+    $'The value of the "($kv.key)" field is "($kv.value)"'
   }
 ```
 
@@ -30,10 +30,10 @@ Result:
 │ modified │ 2024-01-31T10:21:46.068408713-05:00 │
 ╰──────────┴─────────────────────────────────────╯
 
-╭───┬──────────────────────────────────────────────────────────────────────────────────────╮
-│ 0 │ The value of the "name field is "CNAME"                                              │
-│ 1 │ The value of the "type field is "file"                                               │
-│ 2 │ The value of the "size field is "15 B"                                               │
-│ 3 │ The value of the "modified field is "Wed, 31 Jan 2024 10:21:46 -0500 (3 months ago)" │
-╰───┴──────────────────────────────────────────────────────────────────────────────────────╯
+╭───┬───────────────────────────────────────────────────────────────────────────────────────╮
+│ 0 │ The value of the "name" field is "CNAME"                                              │
+│ 1 │ The value of the "type" field is "file"                                               │
+│ 2 │ The value of the "size" field is "15 B"                                               │
+│ 3 │ The value of the "modified" field is "Wed, 31 Jan 2024 10:21:46 -0500 (3 months ago)" │
+╰───┴───────────────────────────────────────────────────────────────────────────────────────╯
 ```

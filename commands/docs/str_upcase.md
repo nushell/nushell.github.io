@@ -2,7 +2,7 @@
 title: str upcase
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Make text uppercase.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<string\> | list\<string\> |
-| record       | record       |
 | string       | string       |
+| list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Upcase contents

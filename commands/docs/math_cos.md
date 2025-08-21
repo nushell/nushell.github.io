@@ -2,7 +2,7 @@
 title: math cos
 categories: |
   math
-version: 0.104.0
+version: 0.106.0
 math: |
   Returns the cosine of the number.
 usage: |
@@ -29,14 +29,14 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Apply the cosine to π
 ```nu
 > 3.141592 | math cos | math round --precision 4
--1
+-1.0
 ```
 
 Apply the cosine to a list of angles in degrees

@@ -2,7 +2,7 @@
 title: skip while
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Skip elements of the input while a predicate is true.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
 | table     | table     |
+| list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
 Skip while the element is negative

@@ -2,7 +2,7 @@
 title: format pattern
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Format columns into a string using a simple pattern.
 usage: |
@@ -29,8 +29,8 @@ contributors: false
 
 | input  | output       |
 | ------ | ------------ |
+| table  | list&lt;string&gt; |
 | record | any          |
-| table  | list\<string\> |
 ## Examples
 
 Print filenames with their sizes

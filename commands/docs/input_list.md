@@ -2,7 +2,7 @@
 title: input list
 categories: |
   platform
-version: 0.104.0
+version: 0.106.0
 platform: |
   Interactive list selection.
 usage: |
@@ -36,7 +36,7 @@ contributors: false
 
 | input     | output |
 | --------- | ------ |
-| list\<any\> | any    |
+| list&lt;any&gt; | any    |
 | range     | int    |
 ## Examples
 

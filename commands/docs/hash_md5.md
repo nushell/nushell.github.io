@@ -2,7 +2,7 @@
 title: hash md5
 categories: |
   hash
-version: 0.104.0
+version: 0.106.0
 hash: |
   Hash a value using the md5 hash algorithm.
 usage: |
@@ -33,10 +33,10 @@ contributors: false
 
 | input  | output |
 | ------ | ------ |
-| binary | any    |
-| record | record |
 | string | any    |
+| binary | any    |
 | table  | table  |
+| record | record |
 ## Examples
 
 Return the md5 hash of a string, hex-encoded

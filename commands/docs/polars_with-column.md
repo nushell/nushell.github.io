@@ -2,7 +2,7 @@
 title: polars with-column
 categories: |
   dataframe or lazyframe
-version: 0.104.0
+version: 0.106.0
 dataframe_or_lazyframe: |
   Adds a series to the dataframe.
 usage: |
@@ -38,9 +38,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Adds a series to the dataframe
@@ -75,10 +75,28 @@ Adds a series to the dataframe
 
 ```
 
-Add series to the dataframe using a record
+Add series to a lazyframe using a record
 ```nu
 > [[a b]; [1 2] [3 4]]
     | polars into-lazy
+    | polars with-column {
+        c: ((polars col a) * 2)
+        d: ((polars col a) * 3)
+      }
+    | polars collect
+╭───┬───┬───┬───┬───╮
+│ # │ a │ b │ c │ d │
+├───┼───┼───┼───┼───┤
+│ 0 │ 1 │ 2 │ 2 │ 3 │
+│ 1 │ 3 │ 4 │ 6 │ 9 │
+╰───┴───┴───┴───┴───╯
+
+```
+
+Add series to a dataframe using a record
+```nu
+> [[a b]; [1 2] [3 4]]
+    | polars into-df
     | polars with-column {
         c: ((polars col a) * 2)
         d: ((polars col a) * 3)

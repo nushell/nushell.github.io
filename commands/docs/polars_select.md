@@ -2,7 +2,7 @@
 title: polars select
 categories: |
   lazyframe
-version: 0.104.0
+version: 0.106.0
 lazyframe: |
   Selects columns from lazyframe.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 Select a column from the dataframe

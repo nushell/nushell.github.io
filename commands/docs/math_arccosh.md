@@ -2,7 +2,7 @@
 title: math arccosh
 categories: |
   math
-version: 0.104.0
+version: 0.106.0
 math: |
   Returns the inverse of the hyperbolic cosine function.
 usage: |
@@ -25,12 +25,12 @@ contributors: false
 
 | input        | output      |
 | ------------ | ----------- |
-| list\<number\> | list\<float\> |
 | number       | float       |
+| list&lt;number&gt; | list&lt;float&gt; |
 ## Examples
 
 Get the arccosh of 1
 ```nu
 > 1 | math arccosh
-0
+0.0
 ```

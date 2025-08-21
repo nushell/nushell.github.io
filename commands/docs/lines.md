@@ -2,7 +2,7 @@
 title: lines
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Converts input to lines.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 
 | input | output       |
 | ----- | ------------ |
-| any   | list\<string\> |
+| any   | list&lt;string&gt; |
 ## Examples
 
 Split multi-line string into lines

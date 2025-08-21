@@ -2,7 +2,7 @@
 title: interleave
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Read multiple streams in parallel and combine them into one stream.
 usage: |
@@ -33,8 +33,8 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
-| list\<any\> | list\<any\> |
-| nothing   | list\<any\> |
+| list&lt;any&gt; | list&lt;any&gt; |
+| nothing   | list&lt;any&gt; |
 ## Examples
 
 Read two sequences of numbers into separate columns of a table.

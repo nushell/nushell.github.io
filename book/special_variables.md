@@ -1,3 +1,8 @@
+---
+next:
+  text: Programming in Nu
+  link: /book/programming_in_nu.md
+---
 # Special Variables
 
 Nushell makes available and uses a number of special variables and constants. Many of these are mentioned or documented in other places in this Book, but this page
@@ -49,19 +54,31 @@ The `$nu` constant is a record containing several useful values:
 
 There are also several environment variables that Nushell uses for specific purposes:
 
+### `$env.CMD_DURATION_MS`
+
+The amount of time in milliseconds that the previous command took to run.
+
 ### `$env.config`
 
 `$env.config` is the main configuration record used in Nushell. Settings are documented in `config nu --doc`.
 
-### `$env.PATH`
+### `$env.CURRENT_FILE`
 
-The search path for executing other applications. It is initially inherited from the parent process as a string, but converted to a Nushell `list` at startup for easy access.
-
-It is converted back to a string before running a child-process.
+Inside a script, module, or sourced-file, this variable holds the fully-qualified filename. Note that this
+information is also available as a constant through the [`path self`](/commands/docs/path_self.md) command.
 
 ### `$env.ENV_CONVERSIONS`
 
 Allows users to specify how to convert certain environment variables to Nushell types. See [ENV_CONVERSIONS](./configuration.md#env-conversions).
+
+### `$env.FILE_PWD`
+
+Inside a script, module, or sourced-file, this variable holds the fully qualified name of the directory in which
+the file resides. Note that this value is also available as a constant through:
+
+```nu
+path self | path dirname
+```
 
 ### `$env.LAST_EXIT_CODE`
 
@@ -81,35 +98,6 @@ try {
 # => 2
 ```
 
-### `$env.CMD_DURATION_MS`
-
-The amount of time in milliseconds that the previous command took to run.
-
-### `$env.NU_VERSION`
-
-The current Nushell version. The same as `(version).version`, but, as an environment variable, it is exported to and can be read by child processes.
-
-### `$env.CURRENT_FILE`
-
-Inside a script, module, or sourced-file, this variable holds the fully-qualified filename. Note that this
-information is also available as a constant through the [`path self`](/commands/docs/path_self.md) command.
-
-### `$env.FILE_PWD`
-
-Inside a script, module, or sourced-file, this variable holds the fully qualified name of the directory in which
-the file resides. Note that this value is also available as a constant through:
-
-```nu
-path self | path dirname
-```
-
-### `$env.PROCESS_PATH`
-
-When _executing a script_, this variable represents the name and relative path of the script. Unlike the two variables
-above, it is not present when sourcing a file or importing a module.
-
-Note: Also unlike the two variables above, the exact path (including symlinks) that was used to _invoke_ the file is returned.
-
 ### `$env.NU_LIB_DIRS`
 
 A list of directories which will be searched when using the `source`, `use`, or `overlay use` commands. See also:
@@ -118,11 +106,59 @@ A list of directories which will be searched when using the `source`, `use`, or 
 - [Module Path](./modules/using_modules.md#module-path)
 - [Configuration - `$NU_LIB_DIRS`](./configuration.md#nu-lib-dirs-constant)
 
+### `$env.NU_LOG_LEVEL`
+
+The [standard library](/book/standard_library.md) offers logging in `std/log`. The `NU_LOG_LEVEL` environment variable is used to define the log level being used for custom commands, modules, and scripts.
+
+```nu
+nu -c '1 | print; use std/log; log debug 1111; 9 | print'
+# => 1
+# => 9
+
+nu -c '1 | print; use std/log; NU_LOG_LEVEL=debug log debug 1111; 9 | print'
+# => 1
+# => 2025-07-12T21:27:30.080|DBG|1111
+# => 9
+
+nu -c '1 | print; use std/log; $env.NU_LOG_LEVEL = "debug"; log debug 1111; 9 | print'
+# => 1
+# => 2025-07-12T21:27:57.888|DBG|1111
+# => 9
+```
+
+Note that `$env.NU_LOG_LEVEL` is different from `nu --log-level`, which sets the log level for built-in native Rust Nushell commands. It does not influence the `std/log` logging used in custom commands and scripts.
+
+```nu
+nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
+# => … a lot more log messages, with references to the Nushell command Rust source files
+#      and without our own `log debug` message
+# => 1
+# => 9
+# => …
+```
+
 ### `$env.NU_PLUGIN_DIRS`
 
 A list of directories which will be searched when registering plugins with `plugin add`. See also:
 
 - [Plugin Search Path](./plugins.md#plugin-search-path)
+
+### `$env.NU_VERSION`
+
+The current Nushell version. The same as `(version).version`, but, as an environment variable, it is exported to and can be read by child processes.
+
+### `$env.PATH`
+
+The search path for executing other applications. It is initially inherited from the parent process as a string, but converted to a Nushell `list` at startup for easy access.
+
+It is converted back to a string before running a child-process.
+
+### `$env.PROCESS_PATH`
+
+When _executing a script_, this variable represents the name and relative path of the script. Unlike the two variables
+above, it is not present when sourcing a file or importing a module.
+
+Note: Also unlike the two variables above, the exact path (including symlinks) that was used to _invoke_ the file is returned.
 
 ### `$env.PROMPT_*` and `$env.TRANSIENT_PROMPT_*`
 
@@ -150,7 +186,7 @@ The `$in` variable represents the pipeline input into an expression. See [Pipeli
 
 ## `$it`
 
-`$it` is a special variable that is _only_ available in a `where` "row condition" — a convenient shorthand which simplifies field access. See `help where` for more information.
+`$it` is a special variable that is _only_ available in a `where` "row condition" — a convenient shorthand which simplifies field access. See `help where` or [where](/commands/docs/where.md) for more information.
 
 ## `$NU_LIB_DIRS`
 

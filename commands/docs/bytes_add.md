@@ -2,7 +2,7 @@
 title: bytes add
 categories: |
   bytes
-version: 0.104.0
+version: 0.106.0
 bytes: |
   Add specified bytes to the input.
 usage: |
@@ -36,9 +36,9 @@ contributors: false
 | input        | output       |
 | ------------ | ------------ |
 | binary       | binary       |
-| list\<binary\> | list\<binary\> |
-| record       | record       |
+| list&lt;binary&gt; | list&lt;binary&gt; |
 | table        | table        |
+| record       | record       |
 ## Examples
 
 Add bytes `0x[AA]` to `0x[1F FF AA AA]`

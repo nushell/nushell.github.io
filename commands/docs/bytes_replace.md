@@ -2,7 +2,7 @@
 title: bytes replace
 categories: |
   bytes
-version: 0.104.0
+version: 0.106.0
 bytes: |
   Find and replace binary.
 usage: |
@@ -36,8 +36,8 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | binary | binary |
-| record | record |
 | table  | table  |
+| record | record |
 ## Examples
 
 Find and replace contents

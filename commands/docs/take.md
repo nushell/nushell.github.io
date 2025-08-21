@@ -2,7 +2,7 @@
 title: take
 categories: |
   filters
-version: 0.104.0
+version: 0.106.0
 filters: |
   Take only the first n elements of a list, or the first n bytes of a binary value.
 usage: |
@@ -29,10 +29,10 @@ contributors: false
 
 | input     | output       |
 | --------- | ------------ |
-| binary    | binary       |
-| list\<any\> | list\<any\>    |
-| range     | list\<number\> |
 | table     | table        |
+| list&lt;any&gt; | list&lt;any&gt;    |
+| binary    | binary       |
+| range     | list&lt;number&gt; |
 ## Examples
 
 Return the first item of a list/table

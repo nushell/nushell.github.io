@@ -2,7 +2,7 @@
 title: history import
 categories: |
   history
-version: 0.104.0
+version: 0.106.0
 history: |
   Import command line history.
 usage: |
@@ -25,9 +25,9 @@ contributors: false
 
 | input        | output  |
 | ------------ | ------- |
-| list\<string\> | nothing |
 | nothing      | nothing |
 | string       | nothing |
+| list&lt;string&gt; | nothing |
 | table        | nothing |
 ## Examples
 
@@ -45,13 +45,13 @@ Append `foo` to the current history
 
 Append `foo` ran from `/home` to the current history
 ```nu
-> [[ command_line cwd ]; [ foo /home ]] | history import
+> [[ command cwd ]; [ foo /home ]] | history import
 
 ```
 
 ## Notes
 Can import history from input, either successive command lines or more detailed records. If providing records, available fields are:
-    command_line, id, start_timestamp, hostname, cwd, duration, exit_status.
+    command, start_timestamp, hostname, cwd, duration, exit_status.
 
 If no input is provided, will import all history items from existing history in the other format: if current history is stored in sqlite, it will store it in plain text and vice versa.
 

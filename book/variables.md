@@ -132,7 +132,7 @@ three
 While `reduce` processes lists, the [`generate`](/commands/docs/generate.md) command can be used with arbitrary sources such as external REST APIs, also without requiring mutable variables. Here's an example that retrieves local weather data every hour and generates a continuous list from that data. The `each` command can be used to consume each new list item as it becomes available.
 
 ```nu
-generate khot {|weather_station|
+generate {|weather_station|
   let res = try {
     http get -ef $'https://api.weather.gov/stations/($weather_station)/observations/latest'
   } catch {
@@ -148,7 +148,7 @@ generate khot {|weather_station|
       next: $weather_station
     }
   }
-}
+} khot
 | each {|weather_report|
     {
       time: ($weather_report.properties.timestamp | into datetime)

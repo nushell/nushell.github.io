@@ -2,7 +2,7 @@
 title: inc
 categories: |
   default
-version: 0.104.0
+version: 0.106.0
 default: |
   Increment a value or version. Optionally use the column of a table.
 usage: |
@@ -36,10 +36,3 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 ## Parameters
 
  -  `cell_path`: cell path to update
-
-
-## Input/output types:
-
-| input | output |
-| ----- | ------ |
-| any   | any    |

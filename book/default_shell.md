@@ -1,3 +1,11 @@
+---
+prev:
+  text: Installing Nu
+  link: /book/installation.md
+next:
+  text: Getting Started
+  link: /book/getting_started.md
+---
 # Default Shell
 
 ## Setting Nu as default shell on your terminal

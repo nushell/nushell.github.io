@@ -2,7 +2,7 @@
 title: polars drop
 categories: |
   dataframe
-version: 0.104.0
+version: 0.106.0
 dataframe: |
   Creates a new dataframe by dropping the selected columns.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input     | output    |
+| --------- | --------- |
+| dataframe | dataframe |
 ## Examples
 
 drop column a

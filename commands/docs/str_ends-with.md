@@ -2,7 +2,7 @@
 title: str ends-with
 categories: |
   strings
-version: 0.104.0
+version: 0.106.0
 strings: |
   Check if an input ends with a string.
 usage: |
@@ -34,10 +34,10 @@ contributors: false
 
 | input        | output     |
 | ------------ | ---------- |
-| list\<string\> | list\<bool\> |
-| record       | record     |
 | string       | bool       |
+| list&lt;string&gt; | list&lt;bool&gt; |
 | table        | table      |
+| record       | record     |
 ## Examples
 
 Checks if string ends with '.rb'

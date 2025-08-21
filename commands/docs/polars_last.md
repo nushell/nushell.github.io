@@ -2,7 +2,7 @@
 title: polars last
 categories: |
   dataframe
-version: 0.104.0
+version: 0.106.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression.
 usage: |
@@ -34,9 +34,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output |
-| ----- | ------ |
-| any   | any    |
+| input      | output     |
+| ---------- | ---------- |
+| expression | expression |
+| dataframe  | dataframe  |
 ## Examples
 
 Create new dataframe with last rows
@@ -53,5 +54,18 @@ Create new dataframe with last rows
 Creates a last expression from a column
 ```nu
 > polars col a | polars last
+
+```
+
+Aggregate the last values in the group.
+```nu
+> [[a b c d]; [1 0.5 true Apple] [2 0.5 true Orange] [2 4 true Apple] [3 10 false Apple] [4 13 false Banana] [5 14 true Banana]] | polars into-df -s {a: u8, b: f32, c: bool, d: str} | polars group-by d | polars last | polars sort-by [a] | polars collect
+╭───┬────────┬───┬───────┬───────╮
+│ # │   d    │ a │   b   │   c   │
+├───┼────────┼───┼───────┼───────┤
+│ 0 │ Orange │ 2 │  0.50 │ true  │
+│ 1 │ Apple  │ 3 │ 10.00 │ false │
+│ 2 │ Banana │ 5 │ 14.00 │ true  │
+╰───┴────────┴───┴───────┴───────╯
 
 ```

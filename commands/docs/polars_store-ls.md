@@ -2,7 +2,7 @@
 title: polars store-ls
 categories: |
   dataframe
-version: 0.104.0
+version: 0.106.0
 dataframe: |
   Lists stored polars objects.
 usage: |
@@ -27,12 +27,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ```> polars store-ls {flags} ```
 
-
-## Input/output types:
-
-| input | output |
-| ----- | ------ |
-| any   | any    |
 ## Examples
 
 Creates a new dataframe and shows it in the dataframe list

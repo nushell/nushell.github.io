@@ -2,7 +2,7 @@
 title: polars unnest
 categories: |
   dataframe
-version: 0.104.0
+version: 0.106.0
 dataframe: |
   Decompose struct columns into separate columns for each of their fields. The new columns will be inserted into the dataframe at the location of the struct column.
 usage: |
@@ -31,12 +31,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
  -  `...rest`: columns to unnest
 
-
-## Input/output types:
-
-| input | output |
-| ----- | ------ |
-| any   | any    |
 ## Examples
 
 Unnest a dataframe

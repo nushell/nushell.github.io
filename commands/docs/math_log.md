@@ -2,7 +2,7 @@
 title: math log
 categories: |
   math
-version: 0.104.0
+version: 0.106.0
 math: |
   Returns the logarithm for an arbitrary base.
 usage: |
@@ -29,15 +29,15 @@ contributors: false
 
 | input        | output       |
 | ------------ | ------------ |
-| list\<number\> | list\<float\>  |
 | number       | float        |
-| range        | list\<number\> |
+| list&lt;number&gt; | list&lt;float&gt;  |
+| range        | list&lt;number&gt; |
 ## Examples
 
 Get the logarithm of 100 to the base 10
 ```nu
 > 100 | math log 10
-2
+2.0
 ```
 
 Get the log2 of a list of values

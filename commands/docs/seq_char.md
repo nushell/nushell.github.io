@@ -2,7 +2,7 @@
 title: seq char
 categories: |
   generators
-version: 0.104.0
+version: 0.106.0
 generators: |
   Print a sequence of ASCII characters.
 usage: |
@@ -30,7 +30,7 @@ contributors: false
 
 | input   | output       |
 | ------- | ------------ |
-| nothing | list\<string\> |
+| nothing | list&lt;string&gt; |
 ## Examples
 
 sequence a to e

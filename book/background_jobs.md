@@ -1,3 +1,8 @@
+---
+next:
+  text: Coming to Nu
+  link: /book/coming_to_nu.md
+---
 # Background Jobs
 
 Nushell currently has experimental support for thread-based background jobs.
@@ -91,6 +96,35 @@ job unfreeze 1
 # we're back in vim
 ```
 
+## Communicating between jobs
+
+Data can be sent to a job using `job send <id>`, and the job can receive it using `job recv`:
+
+```nu
+let jobId = job spawn {
+    job recv | save sent.txt
+}
+
+'hello from the main thread' | job send $jobId
+
+sleep 1sec
+
+open sent.txt
+# => hello from the main thread
+```
+
+The main thread has a job ID of 0, so you can also send data in the other direction:
+
+```nu
+job spawn {
+    sleep 1sec
+    'Hello from a background job' | job send 0
+}
+
+job recv
+# => Hello from a background job
+```
+
 ## Exit Behavior
 
 Unlike many other shells, Nushell jobs are **not** separate processes,
@@ -100,7 +134,7 @@ An important side effect of this, is that all background jobs will terminate onc
 process exits.
 For this reason, Nushell has no UNIX-like `disown` command to prevent jobs from terminating once the shell exits.
 To account for that, there are plans for a `job dispatch` implementation in the future,
-for spawning independent background processes.
+for spawning independent background processes (see [#15201](https://github.com/nushell/nushell/issues/15193?issue=nushell%7Cnushell%7C15201) for progress).
 
 Additionally, if the user is running an interactive Nushell session and runs
 [`exit`](/commands/docs/exit.md) while there are background jobs running,
