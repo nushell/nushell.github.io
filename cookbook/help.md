@@ -55,7 +55,7 @@ help http get
 ```
 
 ### Custom help command
-If you want to change the `help` output, you can specify your own custom command named `help` and it will also be used for all `--help` invocations. An example of this is in the standard library.
+If you want to change the `help` output, you can create your own custom command named `help` and it will also be used for all `--help` invocations. An example of this is in the standard library.
 ```nu
 use std/help
 ```
