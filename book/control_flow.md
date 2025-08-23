@@ -211,6 +211,44 @@ $result
 # => ╰───┴───╯
 ```
 
+When creating custom errors, loops have an advantage over pipelines because they don't fail evaluation.
+
+Creating an error in a pipeline yields a pipeline evaluation error *and* the custom error:
+
+```nu
+[0] | each { error make { msg: "Custom error" } | default '' }
+# => Error: nu::shell::eval_block_with_input
+# => 
+# =>   × Eval block failed with pipeline input
+# =>    ╭─[entry #20:1:2]
+# =>  1 │ [0] | each { error make { msg: "Custom error" } | default '' }
+# =>    ·  ┬
+# =>    ·  ╰── source value
+# =>    ╰────
+# => 
+# => Error:
+# =>   × Custom error
+# =>    ╭─[entry #20:1:14]
+# =>  1 │ [0] | each { error make { msg: "Custom error" } | default '' }
+# =>    ·              ─────┬────
+# =>    ·                   ╰── originates from here
+# =>    ╰────
+```
+
+When using a loop, a `for` loop in this example, evaluation succeeds and only the created error occurs:
+
+```nu
+for x in [0] { error make { msg: "Custom error" } }
+# => Error: nu::shell::error
+# => 
+# =>   × Custom error
+# =>    ╭─[entry #18:1:16]
+# =>  1 │ for x in [0] { error make { msg: "Custom error" } }
+# =>    ·                ─────┬────
+# =>    ·                     ╰── originates from here
+# =>    ╰────
+```
+
 ### `for`
 
 [`for`](/commands/docs/for.html) loops over a range or collection like a list or a table.
