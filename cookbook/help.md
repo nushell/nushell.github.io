@@ -53,3 +53,9 @@ help http get
 # =>   http get content from example.com, with custom header
 # =>   > http get -H [my-header-key my-header-value] https://www.example.com
 ```
+
+### Custom help command
+If you want to change the `help` output, you can create your own custom command named `help` and it will also be used for all `--help` invocations. An example of this is in the standard library.
+```nu
+use std/help
+```
