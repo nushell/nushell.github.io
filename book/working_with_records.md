@@ -113,7 +113,18 @@ To make a copy of a record with new fields, you can either:
 
 ## Iterating over a Record
 
-You can iterate over the key-value pairs of a record by first transposing it into a table:
+Use the [items](/commands/docs/items.md) command to iterate over each pair of key and value:
+
+```nu
+{ "apples": 543, "bananas": 411, "oranges": 0 } | items {|fruit, count| $"We have ($fruit) ($count)" }
+# => ╭───┬─────────────────────╮
+# => │ 0 │ We have apples 543  │
+# => │ 1 │ We have bananas 411 │
+# => │ 2 │ We have oranges 0   │
+# => ╰───┴─────────────────────╯
+```
+
+Alternatively, you can [transpose](/commands/docs/transpose.md) the record into a table with columns, and then iterate over rows:
 
 ```nu
 { "apples": 543, "bananas": 411, "oranges": 0 }
