@@ -224,7 +224,8 @@ The parameters are also passed to the custom closure as a two element list, so t
 
 - `{|a, b| $a < $b }`
 - `{ $in.0 < $in.1 }`
-  :::
+
+:::
 
 Here's an example of a custom sort which couldn't be trivially written as a key sort. In this example, we have a queue of tasks with some amount of work time and a priority. We want to sort by priority (highest first). If a task has had zero work time, we want to schedule it immediately; otherwise, we ignore the work time.
 
