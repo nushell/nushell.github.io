@@ -7,8 +7,8 @@ Nerd Fonts are not required, but they can improve the prompt presentation throug
 > Nerd Fonts patches developer targeted fonts with a high number of glyphs (icons).
 > Specifically to add a high number of extra glyphs from popular ‘iconic fonts’ such as Font Awesome, Devicons, Octicons, and others.
 
-* [Nerd Fonts website](https://www.nerdfonts.com)
-* [Source Repository](https://github.com/ryanoasis/nerd-fonts)
+- [Nerd Fonts website](https://www.nerdfonts.com)
+- [Source Repository](https://github.com/ryanoasis/nerd-fonts)
 
 ## oh-my-posh
 
@@ -66,7 +66,8 @@ Starship running without doing anything manual:
 
 - Starship will create its own configuration / environment setup script
 - you simply have to create it in `env.nu` and `use` it in `config.nu`
-  :::
+
+:::
 
 Here's an example config section for Starship:
 

@@ -6,6 +6,7 @@ next:
   text: (Not so) Advanced
   link: /book/advanced.md
 ---
+
 # How Nushell Code Gets Run
 
 In [Thinking in Nu](./thinking_in_nu.md#think-of-nushell-as-a-compiled-language), we encouraged you to _"Think of Nushell as a compiled language"_ due to the way in which Nushell code is processed. We also covered several code examples that won't work in Nushell due that process.
@@ -281,7 +282,8 @@ In the text below, we use the term _"constant"_ to refer to:
 
 - A `const` definition
 - The result of any command that outputs a constant value when provide constant inputs.
-  :::
+
+:::
 
 By their nature, **_constants_** and constant values are known at Parse-time. This, of course, is in sharp contrast to _variable_ declarations and values.
 
@@ -317,7 +319,8 @@ Let's analyze the Parse/Eval process for this version:
 
 - An `eval` adds additional parsing during evaluation
 - Parse-time constants do the opposite, adding additional evaluation to the parser.
-  :::
+
+:::
 
 Also keep in mind that the evaluation allowed during parsing is **_very restricted_**. It is limited to only a small subset of what is allowed during a regular evaluation.
 
@@ -364,7 +367,8 @@ There are two reasons for this:
    This isn't currently applicable to Nushell, since the parsed results (IR) are not stored beyond Evaluation. However, this has certainly been considered as a possible future feature.
 
 2. As with Nushell's parse-time constant evaluations, these features help (safely) work around limitations caused by the absence of an `eval` function.
-   :::
+
+:::
 
 ## Conclusion
 
