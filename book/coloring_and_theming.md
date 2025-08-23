@@ -592,7 +592,7 @@ use std/config light-theme   # add this line to load the theme into scope
 
 $env.config = {
   # ...
-  color_config: (light_theme)   # if you want a light theme, replace `$dark_theme` to `$light_theme`
+  color_config: (light-theme)   # after using dark-theme or light-theme from std, you can change this with `(dark-theme)` in place of `(light-theme)`.
   # ...
 }
 ```
@@ -605,7 +605,7 @@ use std/config dark-theme
 
 $env.config = {
   # ...
-  color_config: (dark_theme)
+  color_config: (dark-theme)
   # ...
 }
 ```
