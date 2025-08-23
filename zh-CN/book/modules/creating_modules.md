@@ -76,7 +76,7 @@ use increment.nu *
 # => name, or export `main` command.
 ```
 
-如错误消息中很有帮助地提到的，您可以简单地将导出重命名为 `main`，在这种情况下，导入时将采用模块的名称。编辑 `increment.nu` 文件：
+就像错误消息中提到的那样，您可以简单地将导出重命名为 `main`，在这种情况下，导入时将采用模块的名称。编辑 `increment.nu` 文件：
 
 ```nu
 export def main []: int -> int {
@@ -208,11 +208,11 @@ export def by [amount: int]: int -> int {
 
 3. 测试它：
 
-   ```nu
-   use range-into-list.nu
-   1..5 | range-into-list | describe
-   # => list<int> (stream)
-   ```
+```nu
+use range-into-list.nu
+1..5 | range-into-list | describe
+# => list<int> (stream)
+```
 
 4. 我们现在应该有一个包含以下内容的 `my-utils` 目录：
 
@@ -234,17 +234,17 @@ export def by [amount: int]: int -> int {
 
 2. 我们现在有一个带有两个子模块的 `my-utils` 模块。试试看：
 
-   ```nu
-   # 转到 my-utils 的父目录
-   cd ..
-   use my-utils *
-   5 | increment by 4
-   # => 9
+```nu
+# 转到 my-utils 的父目录
+cd ..
+use my-utils *
+5 | increment by 4
+# => 9
 
-   let file_indices = 0..2..<10 | range-into-list
-   ls | select ...$file_indices
-   # => 返回目录中的第 1、3、5、7 和 9 个文件
-   ```
+let file_indices = 0..2..<10 | range-into-list
+ls | select ...$file_indices
+# => Returns the 1st, 3rd, 5th, 7th, and 9th file in the directory
+```
 
 在继续下一节之前，运行 `scope modules` 并查找 `my-utils` 模块。请注意，它本身没有命令；只有两个子模块。
 
@@ -270,7 +270,7 @@ use my-utils *
 
 let file_indices = 0..2..<10 | range-into-list
 ls / | sort-by modified | select ...$file_indices
-# => 返回目录中从最旧到最新的第 1、3、5、7 和 9 个文件
+# => Returns the 1st, 3rd, 5th, 7th, and 9th file in the directory, oldest-to-newest
 ```
 
 再次运行 `scope modules`，请注意子模块的所有命令都重新导出到 `my-utils` 模块中。
@@ -300,7 +300,7 @@ export use ./range-into-list.nu
 use my-utils *
 help my-utils
 
-# => 一组有用的实用函数
+# => A collection of helpful utility functions
 ```
 
 另请注意，由于 `increment` 和 `range-into-list` 的命令使用 `export use ...` 重新导出，这些命令也显示在主模块的帮助中。
@@ -325,7 +325,7 @@ export-env {
 ```nu
 use my-utils
 $env.NU_MODULES_DIR
-# => 返回目录名
+# => Returns the directory name
 cd $env.NU_MODULES_DIR
 ```
 
@@ -374,9 +374,9 @@ export def --env modules [] {
 ```nu
 use go.nu
 go home
-# => 有效
+# => Works
 go modules
-# => 错误：$env.NU_MODULES_DIR 未找到
+# => Error: $env.NU_MODULES_DIR is not found
 ```
 
 这不起作用，因为在这种情况下的 `my-utils` 没有被*求值*；它仅在导入 `go.nu` 模块时被*解析*。虽然这会将所有其他导出带入作用域，但它不会*运行* `export-env` 块。
@@ -474,8 +474,8 @@ use is-alphanumeric.nu *
 'Some punctuation?!' | str is-alphanumeric
 # => false
 'a' in (alpha-num-range)
-# => 错误：
-# => 帮助：`alpha-num-range` 既不是 Nushell 内置命令也不是已知的外部命令
+# => Error:
+# => help: `alpha-num-range` is neither a Nushell built-in or a known external command
 ```
 
 ### 子模块的选择性导出
@@ -527,9 +527,9 @@ export use ./go.nu [home, modules]
 ```nu
 use my-utils *
 home
-# => 有效
+# => works
 go home
-# => 错误：命令未找到
+# => Error: command not found
 ```
 
 要将它们导出为 `go home` 和 `go modules`，请对 `my-utils/mod.nu` 进行以下更改：
@@ -547,7 +547,7 @@ export module go {
 use my-utils *
 # => 如预期：
 go home
-# => 有效
+# => works
 home
-# => 错误：命令未找到
+# => Error: command not found
 ```

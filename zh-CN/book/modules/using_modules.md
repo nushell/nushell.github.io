@@ -114,7 +114,7 @@ log info "你好哇，模块"
 
   ```nu
   use std/log
-  log info "你好，std/log模块"
+  log info "Hello, std/log Module"
   ```
 
   注意这将导入`log`子模块及其所有*子命令*(如`log info`、`log error`等)到当前作用域。
@@ -123,7 +123,7 @@ log info "你好哇，模块"
 
   ```nu
   use std
-  std log info "你好，std模块"
+  std log info "Hello, std Module"
   ```
 
 - **从模块导入所有定义**
@@ -210,18 +210,18 @@ $PI
 ```nu
 use std/assert
 assert equal 1 2
-# => 断言失败
+# => Assertion failed
 assert true
-# => 断言通过
+# => Assertion passes
 
 hide assert
 assert equal 1 1
-# => 错误：
-# => 帮助：该名称的命令存在于模块`assert`中。尝试用`use`导入它
+# => Error:
+# => help: A command with that name exists in module `assert`. Try importing it with `use`
 
 assert true
-# => 错误：
-# => 帮助：该名称的命令存在于模块`assert`中。尝试用`use`导入它
+# => Error:
+# => help: A command with that name exists in module `assert`. Try importing it with `use`
 ```
 
 就像你可以`use`模块定义的一个子集一样，你也可以选择性地`hide`它们：
@@ -230,11 +230,11 @@ assert true
 use std/assert
 hide assert main
 assert equal 1 1
-# => 断言通过
+# => assertion passes
 
 assert true
-# => 错误：
-# => 帮助：该名称的命令存在于模块`assert`中。尝试用`use`导入它
+# => Error:
+# => help: A command with that name exists in module `assert`. Try importing it with `use`
 ```
 
 ::: tip

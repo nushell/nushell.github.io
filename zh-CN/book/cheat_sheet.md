@@ -1,4 +1,4 @@
-# Nushell 备忘单
+# Nushell 速查表
 
 ## 数据类型
 
@@ -11,7 +11,7 @@
 将当前日期转换为提供的时区：
 
 ```nu
-date now | date to-timezone "Europe/London"
+date now | date to-timezone "Asia/Shanghai"
 ```
 
 更新记录的语言，如果未指定，则插入提供的值：

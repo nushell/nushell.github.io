@@ -1,6 +1,6 @@
 # Nushell代码执行原理
 
-在[用Nu思考](./thinking_in_nu.md#think-of-nushell-as-a-compiled-language)中，我们建议您"将Nushell视为编译型语言"，这是因为Nushell代码的处理方式。我们还介绍了一些由于这种处理方式而在Nushell中无法工作的代码示例。
+在[用Nu的方式思考](./thinking_in_nu.md#think-of-nushell-as-a-compiled-language)中，我们建议您"将Nushell视为编译型语言"，这是因为Nushell代码的处理方式。我们还介绍了一些由于这种处理方式而在Nushell中无法工作的代码示例。
 
 其根本原因是Nushell严格分离了 **_解析和评估_** 阶段，并 **_禁止类似`eval`的功能_** 。在本节中，我们将详细解释这意味着什么、为什么这样做以及其影响。解释尽可能简单，但如果您之前使用过其他编程语言可能会更容易理解。
 
@@ -206,7 +206,7 @@ hello()
 
 换句话说，每个REPL调用都是独立的解析-求值序列。通过将环境合并回Nushell状态，我们保持了REPL调用之间的连续性。
 
-比较 _"用Nu思考"_ 中的简化版[`cd`示例](./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)：
+比较 _"用Nu的方式思考"_ 中的简化版[`cd`示例](./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)：
 
 ```nu
 cd spam
@@ -277,7 +277,7 @@ source-env foo.nu
 
 因此，我们可以将常量用作[`source`](/zh-CN/commands/docs/source.md)、[`use`](/zh-CN/commands/docs/use.md)等解析时关键字的安全已知参数。
 
-考虑 _"用Nu思考"_ 中的[这个示例](./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced)：
+考虑 _"用Nu的方式思考"_ 中的[这个示例](./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced)：
 
 ```nu
 let my_path = "~/nushell-files"
