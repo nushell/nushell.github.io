@@ -65,7 +65,8 @@ $env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
 
 - Starship 将创建自己的配置/环境设置脚本
 - 你只需在 `env.nu` 中创建它，并在 `config.nu` 中 `use` 它
-  :::
+
+:::
 
 下面是一个关于 Starship 的配置示例：
 
