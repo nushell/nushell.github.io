@@ -13,9 +13,9 @@ Nushell 提供了几个命令来帮助确定不同代码组的执行方式。在
 - [管道](/book/pipelines.html)页面上的管道。
 - [数据类型](/book/types_of_data.html)页面上的闭包。
 - [使用列表](/book/working_with_lists.html)页面上的迭代命令。例如：
-  - [`each`](/zh-CN/commands/docs/each.html)
-  - [`where`](/zh-CN/commands/docs/where.html)
-  - [`reduce`](/zh-CN/commands/docs/reduce.html)
+  - [`each`](/commands/docs/each.html)
+  - [`where`](/commands/docs/where.html)
+  - [`reduce`](/commands/docs/reduce.html)
 
 ## 选择（条件）
 
@@ -33,7 +33,7 @@ Nushell 提供了几个命令来帮助确定不同代码组的执行方式。在
 
 ### `if`
 
-[`if`](/zh-CN/commands/docs/if.html) 根据一个或多个条件的结果来评估分支[代码块](/book/types_of_data.html#blocks)，类似于其他编程语言中的 "if" 功能。例如：
+[`if`](/commands/docs/if.html) 根据一个或多个条件的结果来评估分支[代码块](/book/types_of_data.html#blocks)，类似于其他编程语言中的 "if" 功能。例如：
 
 ```nu
 if $x > 0 { 'positive' }
@@ -59,9 +59,9 @@ if $x > 0 { 'positive' } else if $x == 0 { 'zero' } else { "negative" }
 
 ### `match`
 
-[`match`](/zh-CN/commands/docs/match.html) 根据给定的值执行多个条件分支之一。你还可以进行一些[模式匹配](/zh-CN/cookbook/pattern_matching.html)来解包列表和记录等复合类型中的值。
+[`match`](/commands/docs/match.html) 根据给定的值执行多个条件分支之一。你还可以进行一些[模式匹配](/zh-CN/cookbook/pattern_matching.html)来解包列表和记录等复合类型中的值。
 
-[`match`](/zh-CN/commands/docs/match.html) 的基本用法可以像其他语言中常见的 "switch" 语句一样有条件地运行不同的代码。[`match`](/zh-CN/commands/docs/match.html) 检查 `match` 关键字后面的值是否等于每个分支开头 `=>` 前面的值，如果相等，则执行该分支 `=>` 后面的代码。
+[`match`](/commands/docs/match.html) 的基本用法可以像其他语言中常见的 "switch" 语句一样有条件地运行不同的代码。[`match`](/commands/docs/match.html) 检查 `match` 关键字后面的值是否等于每个分支开头 `=>` 前面的值，如果相等，则执行该分支 `=>` 后面的代码。
 
 ```nu
 match 3 {
@@ -93,7 +93,7 @@ $foo
 # => other number
 ```
 
-（提醒一下，[`match`](/zh-CN/commands/docs/match.html) 是一个表达式，这就是为什么我们可以在这里将结果赋给 `$foo`）。
+（提醒一下，[`match`](/commands/docs/match.html) 是一个表达式，这就是为什么我们可以在这里将结果赋给 `$foo`）。
 
 #### 模式匹配
 
@@ -127,7 +127,7 @@ match $foo {
 
 ---
 
-你可以在[模式匹配手册页面](https://www.nushell.sh/cookbook/pattern_matching.html)中找到有关 [`match`](/zh-CN/commands/docs/match.html) 的更多详细信息。
+你可以在[模式匹配手册页面](https://www.nushell.sh/cookbook/pattern_matching.html)中找到有关 [`match`](/commands/docs/match.html) 的更多详细信息。
 
 ## 循环
 
@@ -135,7 +135,7 @@ match $foo {
 
 ### 循环和其他迭代命令
 
-循环命令的功能类似于将闭包应用于列表或表中的元素的命令，例如 [`each`](/zh-CN/commands/docs/each.html) 或 [`where`](/zh-CN/commands/docs/where.html)，很多时候你可以用任何一种方法完成同样的事情。例如：
+循环命令的功能类似于将闭包应用于列表或表中的元素的命令，例如 [`each`](/commands/docs/each.html) 或 [`where`](/commands/docs/where.html)，很多时候你可以用任何一种方法完成同样的事情。例如：
 
 ```nu
 mut result = []
@@ -160,9 +160,9 @@ $result
 
 #### 循环的缺点
 
-循环最大的缺点是它们是语句，而 [`each`](/zh-CN/commands/docs/each.html) 是表达式。像 [`each`](/zh-CN/commands/docs/each.html) 这样的表达式总会产生某个输出值，而语句则不会。
+循环最大的缺点是它们是语句，而 [`each`](/commands/docs/each.html) 是表达式。像 [`each`](/commands/docs/each.html) 这样的表达式总会产生某个输出值，而语句则不会。
 
-这意味着它们不能很好地与不可变变量一起工作，而使用不可变变量被认为是更符合 [Nushell 风格](/book/thinking_in_nu.html#variables-are-immutable)的。在上一节的示例中，如果没有预先声明的可变变量，就不可能使用 [`for`](/zh-CN/commands/docs/each.html) 来获取递增数字的列表，或任何值。
+这意味着它们不能很好地与不可变变量一起工作，而使用不可变变量被认为是更符合 [Nushell 风格](/book/thinking_in_nu.html#variables-are-immutable)的。在上一节的示例中，如果没有预先声明的可变变量，就不可能使用 [`for`](/commands/docs/each.html) 来获取递增数字的列表，或任何值。
 
 语句在需要某些输出的 Nushell 管道中也无法工作。事实上，如果你尝试这样做，Nushell 会报错：
 
@@ -179,11 +179,11 @@ $result
 # =>   help: 'for' keyword is not allowed in pipeline. Use 'for' by itself, outside of a pipeline.
 ```
 
-因为 Nushell 非常面向管道，这意味着使用像 [`each`](/zh-CN/commands/docs/each.html) 这样的表达式命令通常比循环语句更自然。
+因为 Nushell 非常面向管道，这意味着使用像 [`each`](/commands/docs/each.html) 这样的表达式命令通常比循环语句更自然。
 
 #### 循环的优点
 
-如果循环有这么大的缺点，为什么它们还存在呢？一个原因是，像 [`each`](/zh-CN/commands/docs/each.html) 使用的闭包不能修改周围环境中的可变变量。如果你尝试在闭包中修改可变变量，你会得到一个错误：
+如果循环有这么大的缺点，为什么它们还存在呢？一个原因是，像 [`each`](/commands/docs/each.html) 使用的闭包不能修改周围环境中的可变变量。如果你尝试在闭包中修改可变变量，你会得到一个错误：
 
 ```nu
 mut foo = []
@@ -213,7 +213,7 @@ $result
 
 ### `for`
 
-[`for`](/zh-CN/commands/docs/for.html) 循环遍历一个范围或集合，如列表或表。
+[`for`](/commands/docs/for.html) 循环遍历一个范围或集合，如列表或表。
 
 ```nu
 for x in [1 2 3] { $x * $x | print }
@@ -224,14 +224,14 @@ for x in [1 2 3] { $x * $x | print }
 
 #### 表达式命令替代方案
 
-- [`each`](/zh-CN/commands/docs/each.html)
-- [`par-each`](/zh-CN/commands/docs/par-each.html)
-- [`where`](/zh-CN/commands/docs/where.html)/[`filter`](/zh-CN/commands/docs/filter.html)
-- [`reduce`](/zh-CN/commands/docs/reduce.html)
+- [`each`](/commands/docs/each.html)
+- [`par-each`](/commands/docs/par-each.html)
+- [`where`](/commands/docs/where.html)/[`filter`](/commands/docs/filter.html)
+- [`reduce`](/commands/docs/reduce.html)
 
 ### `while`
 
-[`while`](/zh-CN/commands/docs/while.html) 循环执行同一个代码块，直到给定的条件为 `false`。
+[`while`](/commands/docs/while.html) 循环执行同一个代码块，直到给定的条件为 `false`。
 
 ```nu
 mut x = 0; while $x < 10 { $x = $x + 1 }; $x
@@ -242,14 +242,14 @@ mut x = 0; while $x < 10 { $x = $x + 1 }; $x
 
 "until" 和其他 "while" 命令
 
-- [`take until`](/zh-CN/commands/docs/take_until.html)
-- [`take while`](/zh-CN/commands/docs/take_while.html)
-- [`skip until`](/zh-CN/commands/docs/skip_until.html)
-- [`skip while`](/zh-CN/commands/docs/skip_while.html)
+- [`take until`](/commands/docs/take_until.html)
+- [`take while`](/commands/docs/take_while.html)
+- [`skip until`](/commands/docs/skip_until.html)
+- [`skip while`](/commands/docs/skip_while.html)
 
 ### `loop`
 
-[`loop`](/zh-CN/commands/docs/loop.html) 无限循环一个代码块。你可以使用 [`break`](/zh-CN/commands/docs/break.html)（如下一节所述）来限制它循环的次数。它对于连续运行的脚本也很有用，比如交互式提示符。
+[`loop`](/commands/docs/loop.html) 无限循环一个代码块。你可以使用 [`break`](/commands/docs/break.html)（如下一节所述）来限制它循环的次数。它对于连续运行的脚本也很有用，比如交互式提示符。
 
 ```nu
 mut x = 0; loop { if $x > 10 { break }; $x = $x + 1 }; $x
@@ -258,7 +258,7 @@ mut x = 0; loop { if $x > 10 { break }; $x = $x + 1 }; $x
 
 ### `break`
 
-[`break`](/zh-CN/commands/docs/break.html) 将停止执行循环中的代码，并恢复在循环之后执行。有效地“跳出”循环。
+[`break`](/commands/docs/break.html) 将停止执行循环中的代码，并恢复在循环之后执行。有效地“跳出”循环。
 
 ```nu
 for x in 1..10 { if $x > 3 { break }; print $x }
@@ -269,7 +269,7 @@ for x in 1..10 { if $x > 3 { break }; print $x }
 
 ### `continue`
 
-[`continue`](/zh-CN/commands/docs/continue.html) 将停止执行当前循环，跳过循环中剩余的代码，并进入下一个循环。如果循环通常会结束，比如 [`for`](/zh-CN/commands/docs/for.html) 已经遍历了所有给定的元素，或者 [`while`](/zh-CN/commands/docs/while.html) 的条件现在为 false，它将不会再次循环，执行将在循环块之后继续。
+[`continue`](/commands/docs/continue.html) 将停止执行当前循环，跳过循环中剩余的代码，并进入下一个循环。如果循环通常会结束，比如 [`for`](/commands/docs/for.html) 已经遍历了所有给定的元素，或者 [`while`](/commands/docs/while.html) 的条件现在为 false，它将不会再次循环，执行将在循环块之后继续。
 
 ```nu
 mut x = -1; while $x <= 6 { $x = $x + 1; if $x mod 3 == 0 { continue }; print $x }
@@ -284,7 +284,7 @@ mut x = -1; while $x <= 6 { $x = $x + 1; if $x mod 3 == 0 { continue }; print $x
 
 ### `error make`
 
-[`error make`](/zh-CN/commands/docs/error_make.html) 创建一个错误，停止代码和任何调用它的代码的执行，直到它被 [`try`](/zh-CN/commands/docs/try.html) 块处理，或者它结束脚本并输出错误消息。此功能与其他语言中的“异常”相同。
+[`error make`](/commands/docs/error_make.html) 创建一个错误，停止代码和任何调用它的代码的执行，直到它被 [`try`](/commands/docs/try.html) 块处理，或者它结束脚本并输出错误消息。此功能与其他语言中的“异常”相同。
 
 ```nu
 print 'printed'; error make { msg: 'Some error info' }; print 'unprinted'
@@ -299,11 +299,11 @@ print 'printed'; error make { msg: 'Some error info' }; print 'unprinted'
 
 传递给它的记录为捕获它的代码或最终的错误消息提供了一些信息。
 
-你可以在[创建自己的错误页面](/book/creating_errors.html)上找到有关 [`error make`](/zh-CN/commands/docs/error_make.html) 和错误概念的更多信息。
+你可以在[创建自己的错误页面](/book/creating_errors.html)上找到有关 [`error make`](/commands/docs/error_make.html) 和错误概念的更多信息。
 
 ### `try`
 
-[`try`](/zh-CN/commands/docs/try.html) 将捕获在 [`try`](/zh-CN/commands/docs/try.html) 的代码块中任何地方创建的错误，并在块之后恢复代码的执行。
+[`try`](/commands/docs/try.html) 将捕获在 [`try`](/commands/docs/try.html) 的代码块中任何地方创建的错误，并在块之后恢复代码的执行。
 
 ```nu
 try { error make { msg: 'Some error info' }}; print 'Resuming'
@@ -319,7 +319,7 @@ try { 1 / 0 }; print 'Resuming'
 
 如果发生错误，结果值将是 `nothing`，如果没有发生错误，则为块的返回值。
 
-如果在 [`try`](/zh-CN/commands/docs/try.html) 块之后包含一个 `catch` 块，如果 [`try`](/zh-CN/commands/docs/try.html) 块中发生错误，它将执行 `catch` 块中的代码。
+如果在 [`try`](/commands/docs/try.html) 块之后包含一个 `catch` 块，如果 [`try`](/commands/docs/try.html) 块中发生错误，它将执行 `catch` 块中的代码。
 
 ```nu
 try { 1 / 0 } catch { 'An error happened!' } | $in ++ ' And now I am resuming.'
@@ -350,7 +350,7 @@ try { ^nonexisting }; print 'a'
 
 ### `return`
 
-[`return`](/zh-CN/commands/docs/return.html) 提前结束一个闭包或命令，而不运行命令/闭包的其余部分，并返回给定的值。通常不是必需的，因为闭包或命令中的最后一个值也会被返回，但有时它可能很方便。
+[`return`](/commands/docs/return.html) 提前结束一个闭包或命令，而不运行命令/闭包的其余部分，并返回给定的值。通常不是必需的，因为闭包或命令中的最后一个值也会被返回，但有时它可能很方便。
 
 ```nu
 def 'positive-check' [it] {

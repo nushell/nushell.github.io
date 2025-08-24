@@ -233,7 +233,7 @@ $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = null
 如上所述，操作系统路径变量由 Nushell 自动转换。因此，它可以在你的启动配置中作为列表处理，而无需出现在 `ENV_CONVERSIONS` 中。其他以冒号分隔的路径，如 `XDG_DATA_DIRS`，则不会自动转换。
 :::
 
-要添加其他转换，请使用 [`merge`](/zh-CN/commands/docs/merge.md) 将其合并到 `$env.ENV_CONVERSIONS` 记录中。例如，要为 `XDG_DATA_DIRS` 变量添加转换：
+要添加其他转换，请使用 [`merge`](/commands/docs/merge.md) 将其合并到 `$env.ENV_CONVERSIONS` 记录中。例如，要为 `XDG_DATA_DIRS` 变量添加转换：
 
 ```nu
 $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
@@ -513,11 +513,11 @@ $env | reject config | transpose key val | each {|r| echo $"$env.($r.key) = '($r
 
 ### macOS: 保持 `/usr/bin/open` 为 `open`
 
-某些工具（如 Emacs）依赖于 [`open`](/zh-CN/commands/docs/open.md) 命令在 Mac 上打开文件。
+某些工具（如 Emacs）依赖于 [`open`](/commands/docs/open.md) 命令在 Mac 上打开文件。
 
-由于 Nushell 有自己的 [`open`](/zh-CN/commands/docs/open.md) 命令，其含义不同，它会遮蔽（覆盖）`/usr/bin/open`，因此这些工具在尝试使用该命令时会产生错误。
+由于 Nushell 有自己的 [`open`](/commands/docs/open.md) 命令，其含义不同，它会遮蔽（覆盖）`/usr/bin/open`，因此这些工具在尝试使用该命令时会产生错误。
 
-解决此问题的一种方法是为 Nushell 的 [`open`](/zh-CN/commands/docs/open.md) 定义一个自定义命令，并在你的 `config.nu` 文件中为系统的 [`open`](/zh-CN/commands/docs/open.md) 创建一个别名，如下所示：
+解决此问题的一种方法是为 Nushell 的 [`open`](/commands/docs/open.md) 定义一个自定义命令，并在你的 `config.nu` 文件中为系统的 [`open`](/commands/docs/open.md) 创建一个别名，如下所示：
 
 ```nu
 alias nu-open = open

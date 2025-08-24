@@ -38,4 +38,4 @@
 - [Nushell 与命令式语言对比](nushell_map_imperative.md) - 与 Python、Kotlin、C++、C# 和 Rust 的比较
 - [Nushell 与函数式语言对比](nushell_map_functional.md) - 与 Clojure、Tablecloth (OCaml/Elm) 和 Haskell 的比较
 - [Nushell 运算符对比](nushell_operator_map.md) - 与通用编程语言运算符比较
-- [命令参考](/zh-CN/commands/) - Nushell 命令列表
+- [命令参考](/commands/) - Nushell 命令列表

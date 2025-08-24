@@ -159,7 +159,7 @@ let foo = 'C:\Program Files\exiftool.exe'
 ^$foo
 ```
 
-你也可以使用[`run-external`](/zh-CN/commands/docs/run-external.md)命令来实现此目的，该命令提供了额外的标志和选项。
+你也可以使用[`run-external`](/commands/docs/run-external.md)命令来实现此目的，该命令提供了额外的标志和选项。
 
 ## 字符串拼接
 
@@ -218,12 +218,12 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 
 ## 分割字符串
 
-[`split row`](/zh-CN/commands/docs/split_row.md)命令从一个基于分隔符的字符串创建一个列表。
+[`split row`](/commands/docs/split_row.md)命令从一个基于分隔符的字符串创建一个列表。
 例如，`let colors = ("red,green,blue" | split row ",")` 创建列表`[red green blue]`。
 
-[`split column`](/zh-CN/commands/docs/split_column.md)命令将从一个基于分隔符的字符串中创建一个表。例如，`let colors = ("red,green,blue" | split column ",")` 创建一个表格，并为每个元素添加一列。
+[`split column`](/commands/docs/split_column.md)命令将从一个基于分隔符的字符串中创建一个表。例如，`let colors = ("red,green,blue" | split column ",")` 创建一个表格，并为每个元素添加一列。
 
-最后, [`split chars`](/zh-CN/commands/docs/split_chars.md)命令将一个字符串分割成一个字符列表。
+最后, [`split chars`](/commands/docs/split_chars.md)命令将一个字符串分割成一个字符列表。
 
 ## `str` 命令
 
@@ -238,7 +238,7 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 
 ### 修剪字符串
 
-你可以用 [`str trim`](/zh-CN/commands/docs/str_trim.md) 命令修剪字符串的两侧。默认情况下，[`str trim`](/zh-CN/commands/docs/str_trim.md) 命令会修剪字符串两边的空白。比如：
+你可以用 [`str trim`](/commands/docs/str_trim.md) 命令修剪字符串的两侧。默认情况下，[`str trim`](/commands/docs/str_trim.md) 命令会修剪字符串两边的空白。比如：
 
 ```nu
 '       My   string   ' | str trim
@@ -271,7 +271,7 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 
 ### 字符串填充
 
-[`fill`](/zh-CN/commands/docs/fill.md)：
+[`fill`](/commands/docs/fill.md)：
 
 ```nu
 '1234' | fill -a right -c '0' -w 10
@@ -282,7 +282,7 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 
 ### 反转字符串
 
-反转字符串可以通过 [`str reverse`](/zh-CN/commands/docs/str_reverse.md) 命令轻松完成：
+反转字符串可以通过 [`str reverse`](/commands/docs/str_reverse.md) 命令轻松完成：
 
 ```nu
 'Nushell' | str reverse
@@ -297,7 +297,7 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 
 ## 解析字符串
 
-通过 [`parse`](/zh-CN/commands/docs/parse.md) 命令，你可以将一个字符串解析成若干列。比如：
+通过 [`parse`](/commands/docs/parse.md) 命令，你可以将一个字符串解析成若干列。比如：
 
 ```nu
 'Nushell is the best' | parse '{shell} is {type}'
@@ -342,16 +342,16 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 
 ### 转换为字符串
 
-1. 使用 [`into string`](/zh-CN/commands/docs/into_string.md)。例如：`123 | into string`
+1. 使用 [`into string`](/commands/docs/into_string.md)。例如：`123 | into string`
 2. 通过字符串插值。例如：`$'(123)'`
 
 ### 字符串转换为其他类型
 
-1. 使用 [`into <type>`](/zh-CN/commands/docs/into.md)。例如：`'123' | into int`
+1. 使用 [`into <type>`](/commands/docs/into.md)。例如：`'123' | into int`
 
 ## 字符串着色
 
-你可以通过 [`ansi`](/zh-CN/commands/docs/ansi.md) 命令给字符串着色。例如：
+你可以通过 [`ansi`](/commands/docs/ansi.md) 命令给字符串着色。例如：
 
 ```nu
 $'(ansi purple_bold)This text is a bold purple!(ansi reset)'

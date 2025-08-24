@@ -17,7 +17,7 @@
 
 ## 性能测试对比
 
-在这个小的性能测试练习中，我们将比较本地的 Nushell 原生命令、Nushell DataFrame 相关命令和[Python Pandas](https://pandas.pydata.org/)命令。暂时不要太在意[`Dataframe` 命令](/zh-CN/commands/categories/dataframe.md)，它们将在本页后面的章节中解释。
+在这个小的性能测试练习中，我们将比较本地的 Nushell 原生命令、Nushell DataFrame 相关命令和[Python Pandas](https://pandas.pydata.org/)命令。暂时不要太在意[`Dataframe` 命令](/commands/categories/dataframe.md)，它们将在本页后面的章节中解释。
 
 ::: tip 系统细节
 本节介绍的性能测试是用一台配备 M1 pro 处理器和 32gb 内存的 Macbook 运行的。所有的例子都在 Nushell 0.97 版本上使用 `nu_plugin_polars 0.97` 运行。
@@ -45,7 +45,7 @@ polars store-ls | select key type columns rows estimated_size
 要作为即时 dataframe 打开，请使用 `--eager` 标志。
 :::
 
-我们可以用 [`first`](/zh-CN/commands/docs/first.md) 看一下文件的第一行：
+我们可以用 [`first`](/commands/docs/first.md) 看一下文件的第一行：
 
 ```nu
 $df_0 | polars first
@@ -152,7 +152,7 @@ plugin stop polars
 
 ## 使用 Dataframes
 
-在看到了可以用[`Dataframe` 命令](/zh-CN/commands/categories/dataframe.md)完成的事情之后，现在是时候开始测试它们了。首先，让我们创建一个样本 CSV 文件，该文件将成为我们的样本 dataframe，并与示例一起使用。在你喜欢的编辑器中粘贴下面几行来创建样本 csv 文件：
+在看到了可以用[`Dataframe` 命令](/commands/categories/dataframe.md)完成的事情之后，现在是时候开始测试它们了。首先，让我们创建一个样本 CSV 文件，该文件将成为我们的样本 dataframe，并与示例一起使用。在你喜欢的编辑器中粘贴下面几行来创建样本 csv 文件：
 
 ```nu
 ("int_1,int_2,float_1,float_2,first,second,third,word
@@ -235,7 +235,7 @@ $df_1 | polars sum | polars collect
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴──────╯
 ```
 
-正如你所看到的，聚合函数为那些有意义的列计算出了总和。如果你想过滤掉文本列，你可以使用[`polars select`](/zh-CN/commands/docs/polars_select.md)命令来选择你想要的列。
+正如你所看到的，聚合函数为那些有意义的列计算出了总和。如果你想过滤掉文本列，你可以使用[`polars select`](/commands/docs/polars_select.md)命令来选择你想要的列。
 
 ```nu
 $df_1 | polars sum | polars select int_1 int_2 float_1 float_2 | polars collect
@@ -306,7 +306,7 @@ $df_1 | polars join $df_2 int_1 int_1
 ```
 
 ::: tip
-在`Nu`中，当一个命令有多个参数，并期望得到多个值时，我们用方括号`[]`来包裹这些值。在[`polars join`](/zh-CN/commands/docs/polars_join.md)的情况下，我们可以对多个列进行连接，只要它们具有相同的类型。
+在`Nu`中，当一个命令有多个参数，并期望得到多个值时，我们用方括号`[]`来包裹这些值。在[`polars join`](/commands/docs/polars_join.md)的情况下，我们可以对多个列进行连接，只要它们具有相同的类型。
 :::
 
 例如：
@@ -324,9 +324,9 @@ $df_1 | polars join $df_2 [int_1 first] [int_1 first]
 
 ## DataFrame 分组
 
-可以用 DataFrame 进行的最强大的操作之一是[`polars group-by`](/zh-CN/commands/docs/polars_group-by.md)。这个命令将允许你根据一个分组条件进行聚合操作。在 Nushell 中，`GroupBy`是一种可以被存储和重复使用的对象，可以被用于多个聚合。这是很方便的，因为在进行分组时，创建分组对是最昂贵的运算，如果你打算用同一个分组条件进行多个操作，就没有必要重复该运算。
+可以用 DataFrame 进行的最强大的操作之一是[`polars group-by`](/commands/docs/polars_group-by.md)。这个命令将允许你根据一个分组条件进行聚合操作。在 Nushell 中，`GroupBy`是一种可以被存储和重复使用的对象，可以被用于多个聚合。这是很方便的，因为在进行分组时，创建分组对是最昂贵的运算，如果你打算用同一个分组条件进行多个操作，就没有必要重复该运算。
 
-要创建一个`GroupBy`对象，你只需要使用[`polars_group-by`](/zh-CN/commands/docs/polars_group-by.md)命令：
+要创建一个`GroupBy`对象，你只需要使用[`polars_group-by`](/commands/docs/polars_group-by.md)命令：
 
 ```nu
 let group = ($df_1 | polars group-by first)
@@ -674,7 +674,7 @@ $df_1 | polars take $indices_0
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
-命令  [`polars take`](/zh-CN/commands/docs/polars_take.md) 非常方便，特别是当我们把它与其他命令混合使用时。
+命令  [`polars take`](/commands/docs/polars_take.md) 非常方便，特别是当我们把它与其他命令混合使用时。
 假设我们想提取 `first` 列中含有第一个重复的元素的所有记录。为了做到这一点，我们可以使用 `polars arg-unique` 命令，如下例所示：
 
 ```nu
@@ -692,7 +692,7 @@ $df_1 | polars take $indices_1
 或者，如果我们想使用一个特定的列来创建一个新的有序 DataFrame，该怎么办？我们可以使用`arg-sort`来完成这个任务。在下一个例子中，我们可以通过`word`列对 DataFrame 进行排序：
 
 ::: tip
-同样的结果也可以用[`sort`](/zh-CN/commands/docs/sort.md)命令来完成。
+同样的结果也可以用[`sort`](/commands/docs/sort.md)命令来完成。
 :::
 
 ```nu
@@ -952,7 +952,7 @@ $lf_2 | polars join $group name name | polars collect
 
 ::: warning
 此列表可能已过时。要获取最新的命令列表，请参阅
-[Dataframe](/zh-CN/commands/categories/dataframe.md), [Lazyframe](/zh-CN/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/zh-CN/commands/categories/dataframe_or_lazyframe.md), [Expressions](/zh-CN/commands/categories/expression.html)
+[Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.html)
 命令类别。
 :::
 

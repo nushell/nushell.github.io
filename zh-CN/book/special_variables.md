@@ -58,7 +58,7 @@ Nushell 还使用以下几个环境变量用于特定目的：
 
 ### `$env.CURRENT_FILE`
 
-在脚本、模块或源文件中，此变量保存文件的完全限定名称。注意，此信息也可以通过 [`path self`](/zh-CN/commands/docs/path_self.md) 命令作为常量获取。
+在脚本、模块或源文件中，此变量保存文件的完全限定名称。注意，此信息也可以通过 [`path self`](/commands/docs/path_self.md) 命令作为常量获取。
 
 ### `$env.ENV_CONVERSIONS`
 

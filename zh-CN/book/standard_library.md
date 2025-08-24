@@ -34,7 +34,7 @@ nu -c "
 
 ## 导入标准库
 
-标准库模块和子模块可以通过 [`use`](/zh-CN/commands/docs/use.md) 命令导入，就像其他模块一样。更多信息请参考[使用模块](./modules/using_modules.md)。
+标准库模块和子模块可以通过 [`use`](/commands/docs/use.md) 命令导入，就像其他模块一样。更多信息请参考[使用模块](./modules/using_modules.md)。
 
 在命令行工作时，使用以下方式加载整个标准库会很方便：
 

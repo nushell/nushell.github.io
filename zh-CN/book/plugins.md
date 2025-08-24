@@ -133,7 +133,7 @@ cargo install --path . --locked
 
 ## 注册插件
 
-要将插件添加到插件注册表文件，请调用 [`plugin add`](/zh-CN/commands/docs/plugin_add.md) 命令来告诉 Nu 在哪里可以找到它。
+要将插件添加到插件注册表文件，请调用 [`plugin add`](/commands/docs/plugin_add.md) 命令来告诉 Nu 在哪里可以找到它。
 
 ::: tip 提示
 插件文件名必须以 `nu_plugin_` 开头，Nu 使用此文件名前缀来识别插件。
@@ -151,7 +151,7 @@ cargo install --path . --locked
   plugin add .\my_plugins\nu_plugin_cool.exe
   ```
 
-当 [`plugin add`](/zh-CN/commands/docs/plugin_add.md) 被调用时，Nu：
+当 [`plugin add`](/commands/docs/plugin_add.md) 被调用时，Nu：
 
 - 运行插件二进制文件
 - 通过[插件协议](/zh-CN/contributor-book/plugin_protocol_reference.md)进行通信，以确保兼容性并获取其支持的所有命令的列表
@@ -191,7 +191,7 @@ Nushell 包括两个可用于设置插件搜索路径的 `list` 变量。这仅�
 
 ## 管理插件
 
-已安装的插件使用 [`plugin list`](/zh-CN/commands/docs/plugin_list.md) 显示：
+已安装的插件使用 [`plugin list`](/commands/docs/plugin_list.md) 显示：
 
 ```nu
 plugin list

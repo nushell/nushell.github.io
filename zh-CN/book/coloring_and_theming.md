@@ -453,7 +453,7 @@ hide-env TRANSIENT_PROMPT_COMMAND
 
 ## `LS_COLORS` 命令的配色:`LS_COLORS`
 
-Nushell 将尊重并使用 Mac、Linux 和 Windows 上的 `LS_COLORS` 环境变量设置。这个设置允许你在做[`ls`](/zh-CN/commands/docs/ls.md)时定义文件类型的颜色。例如，你可以让目录变成一种颜色，`_.md` markdown 文件一种颜色，`_.toml` 文件变成另一种颜色，等等。有很多方法可以给你的文件类型着色。
+Nushell 将尊重并使用 Mac、Linux 和 Windows 上的 `LS_COLORS` 环境变量设置。这个设置允许你在做[`ls`](/commands/docs/ls.md)时定义文件类型的颜色。例如，你可以让目录变成一种颜色，`_.md` markdown 文件一种颜色，`_.toml` 文件变成另一种颜色，等等。有很多方法可以给你的文件类型着色。
 
 如果没有设置 `LS_COLORS`，Nushell 将默认使用内置的 `LS_COLORS` 设置，基于 8 位（扩展）ANSI 颜色。
 

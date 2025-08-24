@@ -335,8 +335,8 @@ $data | sort -n
 
 - [严格排序](#严格排序)以禁止对不兼容类型进行排序
 - [自然排序](#自然排序)以排序混合的数字和数字字符串
-- 使用[`to text`](/zh-CN/commands/docs/to_text.md)、[`to nuon`](/zh-CN/commands/docs/to_nuon.html)或[`to json`](/zh-CN/commands/docs/to_json.html)的[键排序](#按键闭包排序)
-- 使用[`describe`](/zh-CN/commands/docs/describe.html)显式检查类型的[自定义排序](#自定义排序顺序)
+- 使用[`to text`](/commands/docs/to_text.md)、[`to nuon`](/commands/docs/to_nuon.html)或[`to json`](/commands/docs/to_json.html)的[键排序](#按键闭包排序)
+- 使用[`describe`](/commands/docs/describe.html)显式检查类型的[自定义排序](#自定义排序顺序)
 
 ### 严格排序
 

@@ -81,7 +81,7 @@ mut x = 0
 
 ### 常量变量
 
-常量变量是一个不可变变量，可以在解析时完全求值。这对于需要在解析时知道参数值的命令很有用，例如 [`source`](/zh-CN/commands/docs/source.md)、[`use`](/zh-CN/commands/docs/use.md) 和 [`plugin use`](/zh-CN/commands/docs/plugin_use.md)。有关更深入的解释，请参阅 [Nushell 代码如何运行](how_nushell_code_gets_run.md)。它们使用 `const` 关键字声明
+常量变量是一个不可变变量，可以在解析时完全求值。这对于需要在解析时知道参数值的命令很有用，例如 [`source`](/commands/docs/source.md)、[`use`](/commands/docs/use.md) 和 [`plugin use`](/commands/docs/plugin_use.md)。有关更深入的解释，请参阅 [Nushell 代码如何运行](how_nushell_code_gets_run.md)。它们使用 `const` 关键字声明
 
 ```nu
 const script_file = 'path/to/script.nu'
@@ -92,7 +92,7 @@ source $script_file
 
 在大多数用例中，尽量使用不可变变量。
 
-你可能想知道为什么 Nushell 默认使用不可变变量。在 Nushell 开发的最初几年，可变变量并不是一种语言特性。在 Nushell 开发的早期，我们决定看看在语言中使用更注重数据、函数式风格能走多远。当 Nushell 引入并行性时，这个实验显示了其价值。通过在任何 Nushell 脚本中从 [`each`](/zh-CN/commands/docs/each.md) 切换到 [`par-each`](/zh-CN/commands/docs/par-each.md)，你可以在输入上并行运行相应的代码块。这是可能的，因为 Nushell 的设计严重依赖于不可变性、组合和流水线。
+你可能想知道为什么 Nushell 默认使用不可变变量。在 Nushell 开发的最初几年，可变变量并不是一种语言特性。在 Nushell 开发的早期，我们决定看看在语言中使用更注重数据、函数式风格能走多远。当 Nushell 引入并行性时，这个实验显示了其价值。通过在任何 Nushell 脚本中从 [`each`](/commands/docs/each.md) 切换到 [`par-each`](/commands/docs/par-each.md)，你可以在输入上并行运行相应的代码块。这是可能的，因为 Nushell 的设计严重依赖于不可变性、组合和流水线。
 
 在 Nushell 中，许多（如果不是大多数）可变变量的用例都有一个函数式解决方案，该解决方案：
 
@@ -101,7 +101,7 @@ source $script_file
 - 支持流式处理
 - 可以支持其他功能，例如上面提到的 `par-each`
 
-例如，循环计数器是可变变量的常见模式，并且内置于大多数迭代命令中。例如，你可以使用 [`each`](/zh-CN/commands/docs/each.md) 和 [`enumerate`](/zh-CN/commands/docs/enumerate.md) 来获取每个项目及其索引：
+例如，循环计数器是可变变量的常见模式，并且内置于大多数迭代命令中。例如，你可以使用 [`each`](/commands/docs/each.md) 和 [`enumerate`](/commands/docs/enumerate.md) 来获取每个项目及其索引：
 
 ```nu
 ls | enumerate | each { |elt| $"Item #($elt.index) is size ($elt.item.size)" }
@@ -116,7 +116,7 @@ ls | enumerate | each { |elt| $"Item #($elt.index) is size ($elt.item.size)" }
 # => ╰───┴───────────────────────────╯
 ```
 
-你还可以使用 [`reduce`](/zh-CN/commands/docs/reduce.md) 命令以与在循环中改变变量相同的方式工作。例如，如果你想在字符串列表中找到最长的字符串，你可以这样做：
+你还可以使用 [`reduce`](/commands/docs/reduce.md) 命令以与在循环中改变变量相同的方式工作。例如，如果你想在字符串列表中找到最长的字符串，你可以这样做：
 
 ```nu
 [one, two, three, four, five, six] | reduce {|current_item, max|
@@ -130,7 +130,7 @@ ls | enumerate | each { |elt| $"Item #($elt.index) is size ($elt.item.size)" }
 three
 ```
 
-虽然 `reduce` 处理列表，但 [`generate`](/zh-CN/commands/docs/generate.md) 命令可以与任意源一起使用，例如外部 REST API，也无需可变变量。这是一个示例，它每小时检索一次本地天气数据，并从该数据生成一个连续的列表。`each` 命令可用于在每个新列表项可用时使用它。
+虽然 `reduce` 处理列表，但 [`generate`](/commands/docs/generate.md) 命令可以与任意源一起使用，例如外部 REST API，也无需可变变量。这是一个示例，它每小时检索一次本地天气数据，并从该数据生成一个连续的列表。`each` 命令可用于在每个新列表项可用时使用它。
 
 ```nu
 generate {|weather_station|
@@ -160,7 +160,7 @@ generate {|weather_station|
 
 ### 性能考虑
 
-使用带有不可变变量的[过滤器命令](/zh-CN/commands/categories/filters.html)通常比使用带有传统流控制语句（如 `for` 和 `while`）的可变变量性能要好得多。例如：
+使用带有不可变变量的[过滤器命令](/commands/categories/filters.html)通常比使用带有传统流控制语句（如 `for` 和 `while`）的可变变量性能要好得多。例如：
 
 - 使用 `for` 语句创建包含 50,000 个随机数的列表：
 

@@ -214,7 +214,7 @@ cd spam
 source-env foo.nu
 ```
 
-我们看到这不能工作(作为脚本或其他单一表达式)，因为目录将在解析时[`source-env`关键字](/zh-CN/commands/docs/source-env.md)尝试读取文件 _之后_ 被更改。
+我们看到这不能工作(作为脚本或其他单一表达式)，因为目录将在解析时[`source-env`关键字](/commands/docs/source-env.md)尝试读取文件 _之后_ 被更改。
 
 然而，作为单独的REPL条目运行这些命令可以工作：
 
@@ -277,7 +277,7 @@ source-env foo.nu
 
 本质上，**_常量_** 和常量值在解析时是已知的。这与 _变量_ 声明和值形成鲜明对比。
 
-因此，我们可以将常量用作[`source`](/zh-CN/commands/docs/source.md)、[`use`](/zh-CN/commands/docs/use.md)等解析时关键字的安全已知参数。
+因此，我们可以将常量用作[`source`](/commands/docs/source.md)、[`use`](/commands/docs/use.md)等解析时关键字的安全已知参数。
 
 考虑 _"用Nu的方式思考"_ 中的[这个示例](./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced)：
 

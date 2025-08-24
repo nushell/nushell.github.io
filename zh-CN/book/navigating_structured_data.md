@@ -231,13 +231,13 @@ $data | select 1
 
 注意：
 
-- [`get`](/zh-CN/commands/docs/get.md)返回与上面`$data.1`示例相同的记录
-- [`select`](/zh-CN/commands/docs/select.md)返回一个新的单行表格，包括列名和行索引
+- [`get`](/commands/docs/get.md)返回与上面`$data.1`示例相同的记录
+- [`select`](/commands/docs/select.md)返回一个新的单行表格，包括列名和行索引
 
 ::: tip
 `select`结果表格的行索引与原表格不同。新表格有自己的从0开始的索引。
 
-要获取原始索引，可以使用[`enumerate`](/zh-CN/commands/docs/enumerate.md)命令。例如：
+要获取原始索引，可以使用[`enumerate`](/commands/docs/enumerate.md)命令。例如：
 
 ```nu
 $data | enumerate | select 1
@@ -316,7 +316,7 @@ $data | reject temps | get $cp
 
 ### 为缺失或`null`数据设置默认值
 
-[`default`命令](/zh-CN/commands/docs/default.html)可用于为缺失或null的列结果应用默认值。
+[`default`命令](/commands/docs/default.html)可用于为缺失或null的列结果应用默认值。
 
 ```nu
 let missing_value = [{a:1 b:2} {b:1}]
@@ -343,5 +343,5 @@ $with_default_value.1.a
 
 ## 其他访问结构化数据的命令
 
-- [`reject`](/zh-CN/commands/docs/reject.md) 与`select`相反，移除指定的行和列
-- [`range`](/zh-CN/commands/docs/range.md) 使用[`range`](./types_of_data.md#ranges)类型指定要选择的列表或表的行范围
+- [`reject`](/commands/docs/reject.md) 与`select`相反，移除指定的行和列
+- [`range`](/commands/docs/range.md) 使用[`range`](./types_of_data.md#ranges)类型指定要选择的列表或表的行范围

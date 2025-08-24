@@ -6,7 +6,7 @@
 
 了解 Nu 功能的最简单方法就是看一些例子，让我们开始吧。
 
-当你运行像 [`ls`](/zh-CN/commands/docs/ls.md) 这样的命令时，你会注意到的第一件事是，返回的不是一个文本块，而是一个结构化的表格。
+当你运行像 [`ls`](/commands/docs/ls.md) 这样的命令时，你会注意到的第一件事是，返回的不是一个文本块，而是一个结构化的表格。
 
 ```nu:no-line-numbers
 ls
@@ -28,7 +28,7 @@ ls
 
 ## 对数据进行操作
 
-接下来，让我们按每个文件的大小对这个表进行排序。为此，我们将获取 [`ls`](/zh-CN/commands/docs/ls.md) 的输出，并将其输入到一个可以根据列中的*值*对表进行排序的命令中。
+接下来，让我们按每个文件的大小对这个表进行排序。为此，我们将获取 [`ls`](/commands/docs/ls.md) 的输出，并将其输入到一个可以根据列中的*值*对表进行排序的命令中。
 
 ```nu:no-line-numbers
 ls | sort-by size | reverse
@@ -47,7 +47,7 @@ ls | sort-by size | reverse
 # => ╰───┴─────────────────┴──────┴───────────┴──────────────╯
 ```
 
-请注意，我们没有向 [`ls`](/zh-CN/commands/docs/ls.md) 传递命令行参数或开关。相反，我们使用 Nushell 的内置命令 [`sort-by`](/zh-CN/commands/docs/sort-by.md) 来对 `ls` 命令的*输出*进行排序。然后，为了让最大的文件显示在最上面，我们对 `sort-by` 的*输出*使用了 [`reverse`](/zh-CN/commands/docs/reverse.md)。
+请注意，我们没有向 [`ls`](/commands/docs/ls.md) 传递命令行参数或开关。相反，我们使用 Nushell 的内置命令 [`sort-by`](/commands/docs/sort-by.md) 来对 `ls` 命令的*输出*进行排序。然后，为了让最大的文件显示在最上面，我们对 `sort-by` 的*输出*使用了 [`reverse`](/commands/docs/reverse.md)。
 
 ::: tip 酷！
 如果你仔细比较排序顺序，你可能会发现数据不是按字母顺序排序的，甚至不是按*数值*排序的。相反，由于 `size` 列是 [`filesize` 类型](./types_of_data.md#file-sizes)，Nushell 知道 `1.1 KiB` (kibibytes) 比 `812 B` (bytes) 大。
@@ -57,7 +57,7 @@ ls | sort-by size | reverse
 
 Nu 提供了许多可以对前一个命令的结构化输出进行操作的命令。这些在 Nushell 中通常被归类为“过滤器”。
 
-例如，我们可以使用 [`where`](/zh-CN/commands/docs/where.md) 来过滤表格的内容，使其只显示大于 10 KB 的文件：
+例如，我们可以使用 [`where`](/commands/docs/where.md) 来过滤表格的内容，使其只显示大于 10 KB 的文件：
 
 ```nu
 ls | where size > 10kb
@@ -90,7 +90,7 @@ ps
 # => ╰───┴──────┴──────┴───────────────┴──────────┴──────┴───────────┴─────────╯
 ```
 
-你可能熟悉 Linux/Unix 的 `ps` 命令。它提供了系统中所有当前正在运行的进程及其当前状态的列表。与 `ls` 一样，Nushell 提供了一个跨平台的内置 [`ps` 命令](/zh-CN/commands/docs/ps.md)，它以结构化数据的形式返回结果。
+你可能熟悉 Linux/Unix 的 `ps` 命令。它提供了系统中所有当前正在运行的进程及其当前状态的列表。与 `ls` 一样，Nushell 提供了一个跨平台的内置 [`ps` 命令](/commands/docs/ps.md)，它以结构化数据的形式返回结果。
 
 ::: note
 传统的 Unix `ps` 默认只显示当前进程及其父进程。Nushell 的实现默认显示系统上的所有进程。
@@ -125,7 +125,7 @@ ps | describe
 # => table<pid: int, ppid: int, name: string, status: string, cpu: float, mem: filesize, virtual: filesize> (stream)
 ```
 
-[`describe` 命令](/zh-CN/commands/docs/describe.md)可以用来显示任何命令或表达式的输出类型。
+[`describe` 命令](/commands/docs/describe.md)可以用来显示任何命令或表达式的输出类型。
 
 :::
 
@@ -158,12 +158,12 @@ ls | sort-by size | reverse | first | get name | cp $in ~
 
 前三行与我们在上面第二个例子中使用的命令相同，所以让我们来看看后三行：
 
-4. [`first` 命令](/zh-CN/commands/docs/first.md)只是从表格中返回第一个值。在这种情况下，这意味着大小最大的文件。如果使用上面第二个例子中的目录列表，那就是 `Cargo.lock` 文件。这个“文件”是表格中的一个 [`record`](./types_of_data.md#records)（记录），它仍然包含 `name`、`type`、`size` 和 `modified` 列/字段。
+4. [`first` 命令](/commands/docs/first.md)只是从表格中返回第一个值。在这种情况下，这意味着大小最大的文件。如果使用上面第二个例子中的目录列表，那就是 `Cargo.lock` 文件。这个“文件”是表格中的一个 [`record`](./types_of_data.md#records)（记录），它仍然包含 `name`、`type`、`size` 和 `modified` 列/字段。
 5. `get name` 从前一个命令返回 `name` 字段的*值*，即 `"Cargo.lock"`（一个字符串）。这也是一个 [`cell-path`](./types_of_data.md#cell-paths)（单元格路径）的简单例子，可用于导航和隔离结构化数据。
 6. 最后一行使用 `$in` 变量来引用第 5 行的输出。结果是一个命令，意思是*“将 'Cargo.lock' 复制到主目录”*
 
 ::: tip
-[`get`](/zh-CN/commands/docs/get.md) 和它的对应命令 [`select`](/zh-CN/commands/docs/select.md) 是 Nushell 中最常用的两个过滤器，但乍一看可能不容易发现它们之间的区别。当你准备好更广泛地使用它们时，请参阅[使用 `get` 和 `select`](./navigating_structured_data.md#using-get-and-select)指南。
+[`get`](/commands/docs/get.md) 和它的对应命令 [`select`](/commands/docs/select.md) 是 Nushell 中最常用的两个过滤器，但乍一看可能不容易发现它们之间的区别。当你准备好更广泛地使用它们时，请参阅[使用 `get` 和 `select`](./navigating_structured_data.md#using-get-and-select)指南。
 :::
 
 ## 获取帮助

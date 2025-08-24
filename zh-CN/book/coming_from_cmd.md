@@ -71,5 +71,5 @@ Nu 通过 `cmd.exe` 接受并运行*一些* CMD.EXE 的内部命令。
 
 但是，执行 `./ver` 或 `ver.bat` *将*执行本地的 bat 文件。
 
-请注意 Nushell有自己的[`start`命令](/zh-CN/commands/docs/start.md)且优先级更高。
+请注意 Nushell有自己的[`start`命令](/commands/docs/start.md)且优先级更高。
 你可以使用外部命令语法 `^start` 调用 CMD.EXE 的内部 `START` 命令。

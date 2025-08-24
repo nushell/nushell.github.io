@@ -144,7 +144,7 @@ def completer [context:string, position:int] {}
 
 :::
 
-## 自定义补全和 [`extern`](/zh-CN/commands/docs/extern.md)
+## 自定义补全和 [`extern`](/commands/docs/extern.md)
 
 一个强大的组合是为 [已知的`extern`命令](externs.md) 添加自定义补全。这些工作方式与向自定义命令添加自定义补全的方式相同：通过创建自定义补全，然后用`@`附加到 `extern` 的一个位置参数或标志参数的类型中。
 
@@ -165,7 +165,7 @@ export extern "git push" [
 作为返回字符串列表的替代方法，补全函数还可以返回一个记录列表，其中包含一个 `value` 字段以及可选的 `description` 和 `style` 字段。样式可以是以下之一：
 
 - 一个带有前景色的字符串，可以是十六进制代码或颜色名称，例如 `yellow`。有关有效颜色名称的列表，请参阅 `ansi --list`。
-- 一个包含 `fg`（前景色）、`bg`（背景色）和 `attr`（属性，如带下划线和粗体）字段的记录。此记录的格式与 `ansi --escape` 接受的格式相同。有关 `attr` 字段的可能值列表，请参阅 [`ansi`](/zh-CN/commands/docs/ansi) 命令参考。
+- 一个包含 `fg`（前景色）、`bg`（背景色）和 `attr`（属性，如带下划线和粗体）字段的记录。此记录的格式与 `ansi --escape` 接受的格式相同。有关 `attr` 字段的可能值列表，请参阅 [`ansi`](/commands/docs/ansi) 命令参考。
 - 相同的记录，但转换为 JSON 字符串。
 
 ```nu

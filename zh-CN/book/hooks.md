@@ -86,7 +86,7 @@ $env.SPAM
 
 ## `pre_execution` 钩子
 
-`pre_execution` 钩子可以通过 [`commandline` 命令](/zh-CN/commands/docs/commandline.md) 来检查将要执行的命令。
+`pre_execution` 钩子可以通过 [`commandline` 命令](/commands/docs/commandline.md) 来检查将要执行的命令。
 
 例如，要打印正在执行的命令：
 
@@ -258,7 +258,7 @@ $env.config = ($env.config | upsert hooks {
 
 你可以在网页浏览器中打开 `file:///tmp/nu-output.html` 来查看结果。
 当然，这不是很方便，除非你使用一个在文件改变时能自动重新加载的浏览器。
-除了 [`save`](/zh-CN/commands/docs/save.md) 命令，你通常会自定义这个钩子，将 HTML 输出发送到所需窗口。
+除了 [`save`](/commands/docs/save.md) 命令，你通常会自定义这个钩子，将 HTML 输出发送到所需窗口。
 
 ### 改变输出的显示方式
 

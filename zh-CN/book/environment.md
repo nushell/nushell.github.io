@@ -48,11 +48,11 @@ $env.Path = ($env.Path | prepend 'C:\path\you\want\to\add')
 ```
 
 在这里，我们把指定文件夹前置添加到`Path`中的现有路径中，所以它将有最高的优先级。
-如果你想给它最低的优先级，你可以使用[`append`](/zh-CN/commands/docs/append.md)命令。
+如果你想给它最低的优先级，你可以使用[`append`](/commands/docs/append.md)命令。
 
-### [`load-env`](/zh-CN/commands/docs/load-env.md)
+### [`load-env`](/commands/docs/load-env.md)
 
-如果你有一个以上的环境变量需要设置，你可以使用[`load-env`](/zh-CN/commands/docs/load-env.md)并创建一个键/值对表格，以用于加载多个环境变量：
+如果你有一个以上的环境变量需要设置，你可以使用[`load-env`](/commands/docs/load-env.md)并创建一个键/值对表格，以用于加载多个环境变量：
 
 ```nu
 load-env { "BOB": "FOO", "JAY": "BAR" }
@@ -63,7 +63,7 @@ load-env { "BOB": "FOO", "JAY": "BAR" }
 这些变量被定义为只在执行代码块的过程中临时有效。
 详情请看[一次性环境变量](environment.md#一次性环境变量)。
 
-### 调用[`def --env`](/zh-CN/commands/docs/def.md)定义的命令
+### 调用[`def --env`](/commands/docs/def.md)定义的命令
 
 详情见[从自定义命令中定义环境](custom_commands.md#changing-the-environment-in-a-custom-command)。
 
@@ -140,7 +140,7 @@ $env.FOO == "BAR"
 
 ## 目录切换
 
-Shell 中常见的任务是用[`cd`](/zh-CN/commands/docs/cd.md)命令来改变目录。
+Shell 中常见的任务是用[`cd`](/commands/docs/cd.md)命令来改变目录。
 在 Nushell 中，调用`cd`等同于设置`PWD`环境变量。
 因此，它遵循与其他环境变量相同的规则（例如，作用域）。
 
@@ -153,14 +153,14 @@ FOO=BAR $env.FOO
 # => BAR
 ```
 
-你也可以使用[`with-env`](/zh-CN/commands/docs/with-env.md)来更明确地做同样的事情：
+你也可以使用[`with-env`](/commands/docs/with-env.md)来更明确地做同样的事情：
 
 ```nu
 with-env { FOO: BAR } { $env.FOO }
 # => BAR
 ```
 
-[`with-env`](/zh-CN/commands/docs/with-env.md)命令将暂时把环境变量设置为给定的值（这里：变量 "FOO" 被赋为 "BAR" 值）。一旦这样做了，[块](types_of_data.html#块) 将在这个新的环境变量设置下运行。
+[`with-env`](/commands/docs/with-env.md)命令将暂时把环境变量设置为给定的值（这里：变量 "FOO" 被赋为 "BAR" 值）。一旦这样做了，[块](types_of_data.html#块) 将在这个新的环境变量设置下运行。
 
 ## 永久性环境变量
 
@@ -227,7 +227,7 @@ _(重要! 环境转换字符串->值发生在 `env.nu` 和 `config.nu` 被运行
 
 ## 删除环境变量
 
-只有当一个环境变量被设置在当前作用域中时，你才能通过 [`hide-env`](/zh-CN/commands/docs/hide-env.md) 命令“删除”它：
+只有当一个环境变量被设置在当前作用域中时，你才能通过 [`hide-env`](/commands/docs/hide-env.md) 命令“删除”它：
 
 ```nu
 $env.FOO = 'BAR'

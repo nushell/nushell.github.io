@@ -8,9 +8,9 @@ Shell 的一个决定性特征是能够在文件系统中导航和交互。Nushe
 ls
 ```
 
-正如在快速入门中看到的，[`ls`](/zh-CN/commands/docs/ls.md) 命令返回目录的内容。Nushell 的 `ls` 将以[表格](types_of_data.html#tables)的形式返回内容。
+正如在快速入门中看到的，[`ls`](/commands/docs/ls.md) 命令返回目录的内容。Nushell 的 `ls` 将以[表格](types_of_data.html#tables)的形式返回内容。
 
-[`ls`](/zh-CN/commands/docs/ls.md) 命令还需要一个可选的参数，以改变你想查看的内容。例如，我们可以列出以 `.md` 结尾的文件：
+[`ls`](/commands/docs/ls.md) 命令还需要一个可选的参数，以改变你想查看的内容。例如，我们可以列出以 `.md` 结尾的文件：
 
 ```nu
 ls *.md
@@ -94,7 +94,7 @@ Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands
 
 1.  `into glob`
 
-    [`into glob` 命令](/zh-CN/commands/docs/into_glob.html)可用于将字符串（和其他类型）转换为通配符。例如：
+    [`into glob` 命令](/commands/docs/into_glob.html)可用于将字符串（和其他类型）转换为通配符。例如：
 
     ```nu
     # 查找文件名包含当前月份（格式为 YYYY-mm）的文件
@@ -103,9 +103,9 @@ Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands
     ls $glob_pattern
     ```
 
-2.  扩展操作符与 [`glob` 命令](/zh-CN/commands/docs/glob.html)结合使用：
+2.  扩展操作符与 [`glob` 命令](/commands/docs/glob.html)结合使用：
 
-    [`glob` 命令](/zh-CN/commands/docs/glob.html)（注意：与 `into glob` 不同）生成一个与通配符模式匹配的[`列表`](types_of_data.html#lists)文件名。这个列表可以使用[扩展操作符](operators.html#spread-operator)展开并传递给文件系统命令：
+    [`glob` 命令](/commands/docs/glob.html)（注意：与 `into glob` 不同）生成一个与通配符模式匹配的[`列表`](types_of_data.html#lists)文件名。这个列表可以使用[扩展操作符](operators.html#spread-operator)展开并传递给文件系统命令：
 
     ```nu
     # 查找文件名包含当前月份（格式为 YYYY-mm）的文件
@@ -124,7 +124,7 @@ Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands
 
 ## 创建目录
 
-与大多数其他 shell 一样，[`mkdir` 命令](/zh-CN/commands/docs/mkdir.md)用于创建新目录。一个细微的区别是，Nushell 的内部 `mkdir` 命令默认情况下像 Unix/Linux 的 `mkdir -p` 一样操作，因为它：
+与大多数其他 shell 一样，[`mkdir` 命令](/commands/docs/mkdir.md)用于创建新目录。一个细微的区别是，Nushell 的内部 `mkdir` 命令默认情况下像 Unix/Linux 的 `mkdir -p` 一样操作，因为它：
 
 - 会自动创建多个目录级别。例如：
 
@@ -154,9 +154,9 @@ Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands
 cd cookbook
 ```
 
-要从当前目录换到一个新目录，我们使用 [`cd`](/zh-CN/commands/docs/cd.md) 命令。
+要从当前目录换到一个新目录，我们使用 [`cd`](/commands/docs/cd.md) 命令。
 
-如果 [`cd`](/zh-CN/commands/docs/cd.md) 被省略，只给出一个路径本身，也可以改变当前工作目录：
+如果 [`cd`](/commands/docs/cd.md) 被省略，只给出一个路径本身，也可以改变当前工作目录：
 
 ```nu
 cookbook/
@@ -181,7 +181,7 @@ cd ....
 ```
 
 ::: tip 提示
-多点快捷方式可用于内部 Nushell [文件系统命令](/zh-CN/commands/categories/filesystem.html)以及外部命令。例如，在 Linux/Unix 系统上运行 `^stat ....` 将显示路径被扩展为 `../../..`
+多点快捷方式可用于内部 Nushell [文件系统命令](/commands/categories/filesystem.html)以及外部命令。例如，在 Linux/Unix 系统上运行 `^stat ....` 将显示路径被扩展为 `../../..`
 :::
 
 你也可以将相对目录级别与目录名结合起来：
@@ -191,16 +191,16 @@ cd ../sibling
 ```
 
 ::: tip 重要提示
-用 [`cd`](/zh-CN/commands/docs/cd.md) 改变目录会改变 `PWD` 环境变量。这意味着目录的改变会保留到当前代码块（例如，块或闭包）中。一旦你退出这个代码块，你就会返回到以前的目录。你可以在[环境篇](environment.md)中了解更多关于这方面的信息。
+用 [`cd`](/commands/docs/cd.md) 改变目录会改变 `PWD` 环境变量。这意味着目录的改变会保留到当前代码块（例如，块或闭包）中。一旦你退出这个代码块，你就会返回到以前的目录。你可以在[环境篇](environment.md)中了解更多关于这方面的信息。
 :::
 
 ## 文件系统命令
 
-Nu 还提供了一些可以跨平台工作的基本[文件系统命令](/zh-CN/commands/categories/filesystem.html)，例如：
+Nu 还提供了一些可以跨平台工作的基本[文件系统命令](/commands/categories/filesystem.html)，例如：
 
-- [`mv`](/zh-CN/commands/docs/mv.md) 用于重命名或将文件或目录移动到新位置
-- [`cp`](/zh-CN/commands/docs/cp.md) 用于将项目复制到新位置
-- [`rm`](/zh-CN/commands/docs/rm.md) 用于从文件系统中删除项目
+- [`mv`](/commands/docs/mv.md) 用于重命名或将文件或目录移动到新位置
+- [`cp`](/commands/docs/cp.md) 用于将项目复制到新位置
+- [`rm`](/commands/docs/rm.md) 用于从文件系统中删除项目
 
 ::: tip 提示
 在 Bash 和许多其他 shell 中，大多数文件系统命令（`cd` 除外）实际上是系统中的独立二进制文件。例如，在 Linux 系统上，`cp` 是 `/usr/bin/cp` 二进制文件。在 Nushell 中，这些命令是内置的。这有几个优点：

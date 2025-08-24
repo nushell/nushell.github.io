@@ -4,7 +4,7 @@ Nushell 目前对基于线程的后台任务有实验性支持。
 
 ## 生成任务
 
-任务可以使用 [`job spawn`](/zh-CN/commands/docs/job_spawn.md) 生成，它接收一个闭包并在后台线程中开始执行，返回一个生成的任务的唯一整数 ID：
+任务可以使用 [`job spawn`](/commands/docs/job_spawn.md) 生成，它接收一个闭包并在后台线程中开始执行，返回一个生成的任务的唯一整数 ID：
 
 ```nu
 'i am' | save status.txt
@@ -24,8 +24,8 @@ open status.txt
 
 ## 列出和终止任务
 
-可以使用 [`job list`](/zh-CN/commands/docs/job_list.md) 命令查询活动任务，该命令返回一个包含当前正在执行的任务信息的表格。
-也可以使用 [`job kill`](/zh-CN/commands/docs/job_kill.md) 命令终止/中断任务，该命令会中断任务的线程并杀死任务的所有子进程：
+可以使用 [`job list`](/commands/docs/job_list.md) 命令查询活动任务，该命令返回一个包含当前正在执行的任务信息的表格。
+也可以使用 [`job kill`](/commands/docs/job_kill.md) 命令终止/中断任务，该命令会中断任务的线程并杀死任务的所有子进程：
 
 ```nu
 let id = job spawn { sleep 1day }
@@ -61,7 +61,7 @@ job list
 # => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
 ```
 
-可以使用 [`job unfreeze`](/zh-CN/commands/docs/job_unfreeze.md) 命令将冻结的任务带回前台：
+可以使用 [`job unfreeze`](/commands/docs/job_unfreeze.md) 命令将冻结的任务带回前台：
 
 ```nu
 job unfreeze
@@ -130,5 +130,5 @@ job recv
 用于生成独立的后台进程（有关进展，请参阅 [#15201](https://github.com/nushell/nushell/issues/15193?issue=nushell%7Cnushell%7C15201)）。
 
 此外，如果用户正在运行交互式 Nushell 会话并在有后台任务运行时运行
-[`exit`](/zh-CN/commands/docs/exit.md)，
+[`exit`](/commands/docs/exit.md)，
 shell 会在提示用户确认 `exit` 之前警告他们。

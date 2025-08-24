@@ -24,7 +24,7 @@ Nushell 与 Bash（和其他 Shell）有许多其他相似之处和许多共同�
 ::: tip
 Bash 主要是一个运行外部命令的命令解释器。Nushell 提供了许多这些命令作为跨平台的内置命令。
 
-虽然上述命令行在两个 Shell 中都能工作，但在 Nushell 中根本不需要使用 `curl` 和 `jq` 命令。相反，Nushell 有一个内置的 [`http get` 命令](/zh-CN/commands/docs/http_get.md)并原生处理 JSON 数据。例如：
+虽然上述命令行在两个 Shell 中都能工作，但在 Nushell 中根本不需要使用 `curl` 和 `jq` 命令。相反，Nushell 有一个内置的 [`http get` 命令](/commands/docs/http_get.md)并原生处理 JSON 数据。例如：
 
 ```nu
 http get https://api.github.com/repos/nushell/nushell/contributors | select login contributions
@@ -56,7 +56,7 @@ echo $?
 # => false
 ```
 
-由于 `>` 是一个运算符，Nushell 中重定向到文件是通过一个专门用于保存内容的管道命令 [`save`](/zh-CN/commands/docs/save.md) 来处理的：
+由于 `>` 是一个运算符，Nushell 中重定向到文件是通过一个专门用于保存内容的管道命令 [`save`](/commands/docs/save.md) 来处理的：
 
 ```nu
 "hello" | save output.txt
@@ -68,7 +68,7 @@ echo $?
 
 ## 隐式返回
 
-来自其他 Shell 的用户可能非常熟悉 `echo` 命令。Nushell 的 [`echo`](/zh-CN/commands/docs/echo.md) 乍一看可能相同，但它非常不同。
+来自其他 Shell 的用户可能非常熟悉 `echo` 命令。Nushell 的 [`echo`](/commands/docs/echo.md) 乍一看可能相同，但它非常不同。
 
 首先，注意以下输出在 Bash 和 Nushell（甚至 PowerShell 和 Fish）中看起来如何相同：
 
@@ -82,7 +82,7 @@ echo "Hello, World"
 更重要的是，Nushell 隐式返回表达式的值。这在许多方面类似于 PowerShell 或 Rust。
 
 ::: tip
-表达式可以不仅仅是管道。即使是自定义命令（类似于许多语言中的函数，但我们将在 [后面的章节](./custom_commands.md) 中更深入地介绍它们）也会自动隐式返回最后一个值。不需要 `echo` 甚至 [`return` 命令](/zh-CN/commands/docs/return.md)来返回值 —— 它就是自然而然地发生了。
+表达式可以不仅仅是管道。即使是自定义命令（类似于许多语言中的函数，但我们将在 [后面的章节](./custom_commands.md) 中更深入地介绍它们）也会自动隐式返回最后一个值。不需要 `echo` 甚至 [`return` 命令](/commands/docs/return.md)来返回值 —— 它就是自然而然地发生了。
 :::
 
 换句话说，字符串 _"Hello, World"_ 和 `echo "Hello, World"` 的输出值是等价的：
@@ -128,7 +128,7 @@ latest-file
 
 然而，请记住 `echo` **返回一个值**。因为只返回最后一个值，所以第 2 行的*值*被丢弃了。只有第 3 行的文件会被返回。
 
-要确保第一行被*显示*，请使用 [`print` 命令](/zh-CN/commands/docs/print.md)：
+要确保第一行被*显示*，请使用 [`print` 命令](/commands/docs/print.md)：
 
 ```nu
 def latest-file [] {
@@ -191,7 +191,7 @@ print $p
 $p * 6
 ```
 
-1. 第 1 行：整数 7 被赋给 `$p`，但 [`let` 命令](/zh-CN/commands/docs/let.md) 本身的返回值是 `null`。然而，因为它不是表达式中的最后一个值，所以它不会被显示。
+1. 第 1 行：整数 7 被赋给 `$p`，但 [`let` 命令](/commands/docs/let.md) 本身的返回值是 `null`。然而，因为它不是表达式中的最后一个值，所以它不会被显示。
 2. 第 2 行：`print` 命令本身的返回值是 `null`，但 `print` 命令强制其参数（`$p`，即 7）被*显示*。与第 1 行一样，`null` 返回值被丢弃，因为这不是表达式中的最后一个值。
 3. 第 3 行：评估为整数值 42。作为表达式中的最后一个值，这是返回结果，并且也会被显示（渲染）。
 
@@ -252,7 +252,7 @@ Nushell 的静态特性常常让来自具有 `eval` 功能的语言的用户感�
 这有助于说明为什么以下示例不能在 Nushell 中作为单个表达式（例如，脚本）运行：
 
 ::: note
-以下示例使用 [`source` 命令](/zh-CN/commands/docs/source.md)，但类似的结论也适用于解析 Nushell 源代码的其他命令，例如 [`use`](/zh-CN/commands/docs/use.md)、[`overlay use`](/zh-CN/commands/docs/overlay_use.md)、[`hide`](/zh-CN/commands/docs/hide.md) 或 [`source-env`](/zh-CN/commands/docs/source-env.md)。
+以下示例使用 [`source` 命令](/commands/docs/source.md)，但类似的结论也适用于解析 Nushell 源代码的其他命令，例如 [`use`](/commands/docs/use.md)、[`overlay use`](/commands/docs/overlay_use.md)、[`hide`](/commands/docs/hide.md) 或 [`source-env`](/commands/docs/source-env.md)。
 :::
 
 #### 示例：动态生成源代码
@@ -386,7 +386,7 @@ Nushell 被设计为对每个表达式或文件使用单个解析阶段。此解
 
 另一个来自其他语言的常见意外是 Nushell 变量默认是不可变的。虽然 Nushell 有可选的可变变量，但 Nushell 的许多命令都基于函数式编程风格，这要求不可变性。
 
-不可变变量也是 Nushell 的 [`par-each` 命令](/zh-CN/commands/docs/par-each.md)的关键，它允许你使用线程并行处理多个值。
+不可变变量也是 Nushell 的 [`par-each` 命令](/commands/docs/par-each.md)的关键，它允许你使用线程并行处理多个值。
 
 有关更多信息，请参阅[不可变变量](variables.html#immutable-variables)和[在可变和不可变变量之间进行选择](variables.html#choosing-between-mutable-and-immutable-variables)。
 
@@ -411,18 +411,18 @@ ls | each { |row|
 }
 ```
 
-[`cd`](/zh-CN/commands/docs/cd.md) 命令更改 `PWD` 环境变量，但此变量更改不会在块结束时保留。这允许每次迭代从当前目录开始，然后进入下一个子目录。
+[`cd`](/commands/docs/cd.md) 命令更改 `PWD` 环境变量，但此变量更改不会在块结束时保留。这允许每次迭代从当前目录开始，然后进入下一个子目录。
 
 拥有一个作用域环境使命令更具可预测性、更易于阅读，并且在需要时更容易调试。这也是我们上面讨论的 `par-each` 命令的另一个关键特性。
 
-Nushell 还提供了像 [`load-env`](/zh-CN/commands/docs/load-env.md) 这样的辅助命令，作为一次性加载多个环境更新的便捷方式。
+Nushell 还提供了像 [`load-env`](/commands/docs/load-env.md) 这样的辅助命令，作为一次性加载多个环境更新的便捷方式。
 
 ::: tip 另见
 [环境 - 作用域](./environment.md#scoping)
 :::
 
 ::: note
-[`def --env`](/zh-CN/commands/docs/def.md) 是此规则的一个例外。它允许你创建一个更改父环境的命令。
+[`def --env`](/commands/docs/def.md) 是此规则的一个例外。它允许你创建一个更改父环境的命令。
 :::
 
 ::: warning 以 Nushell 的方式思考

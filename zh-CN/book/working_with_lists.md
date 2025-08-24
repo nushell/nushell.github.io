@@ -24,7 +24,7 @@
 
 ## 从列表中添加或删除项
 
-除了 [`insert`](/zh-CN/commands/docs/insert.md) 和 [`update`](/zh-CN/commands/docs/update.md)，我们还有 [`prepend`](/zh-CN/commands/docs/prepend.md) 和 [`append`](/zh-CN/commands/docs/append.md)。它们分别让你在列表的开头或结尾插入项。
+除了 [`insert`](/commands/docs/insert.md) 和 [`update`](/commands/docs/update.md)，我们还有 [`prepend`](/commands/docs/prepend.md) 和 [`append`](/commands/docs/append.md)。它们分别让你在列表的开头或结尾插入项。
 
 例如：
 
@@ -38,7 +38,7 @@ $colors
 # => [black red yellow green purple blue]
 ```
 
-如果你想从列表中删除项，有多种方法。[`skip`](/zh-CN/commands/docs/skip.md) 允许你跳过输入的前几行，而 [`drop`](/zh-CN/commands/docs/drop.md) 允许你跳过列表末尾的特定编号的行。
+如果你想从列表中删除项，有多种方法。[`skip`](/commands/docs/skip.md) 允许你跳过输入的前几行，而 [`drop`](/commands/docs/drop.md) 允许你跳过列表末尾的特定编号的行。
 
 ```nu
 let colors = [red yellow green purple]
@@ -48,7 +48,7 @@ $colors
 # => [yellow]
 ```
 
-我们还有 [`last`](/zh-CN/commands/docs/last.md) 和 [`first`](/zh-CN/commands/docs/first.md)，它们分别允许你从列表的末尾或开头 [`take`](/zh-CN/commands/docs/take.md) 项。
+我们还有 [`last`](/commands/docs/last.md) 和 [`first`](/commands/docs/first.md)，它们分别允许你从列表的末尾或开头 [`take`](/commands/docs/take.md) 项。
 
 ```nu
 let colors = [red yellow green purple black magenta]
@@ -88,7 +88,7 @@ let x = [1 2]
 
 ## 迭代列表
 
-要遍历一个列表中的元素，可以使用[`each`](/zh-CN/commands/docs/each.md)命令和 [Nu 代码块](types_of_data.html#块) 指定对每一个元素做什么操作。块参数（例如`{ |elt| echo $elt }`中的`|elt|`）通常是当前的列表元素，但如果需要，通过 `--numbered`(`-n`) 标志可以将其改为包含`index`和`item`值的元素。比如：
+要遍历一个列表中的元素，可以使用[`each`](/commands/docs/each.md)命令和 [Nu 代码块](types_of_data.html#块) 指定对每一个元素做什么操作。块参数（例如`{ |elt| echo $elt }`中的`|elt|`）通常是当前的列表元素，但如果需要，通过 `--numbered`(`-n`) 标志可以将其改为包含`index`和`item`值的元素。比如：
 
 ```nu
 let names = [Mark Tami Amanda Jeremy]
@@ -99,7 +99,7 @@ $names | enumerate | each { |item| $"($item.index + 1) - ($item.item)" }
 # Outputs "1 - Mark", "2 - Tami", etc.
 ```
 
-[`where`](/zh-CN/commands/docs/where.md)命令可以用来创建一个列表的子集，高效地根据一个条件过滤列表。
+[`where`](/commands/docs/where.md)命令可以用来创建一个列表的子集，高效地根据一个条件过滤列表。
 
 下面的例子得到所有名称以 "e" 结尾的颜色：
 
@@ -118,7 +118,7 @@ let scores = [7 10 8 6 7]
 $scores | where $it > 7 # [10 8]
 ```
 
-[`reduce`](/zh-CN/commands/docs/reduce.md)命令从一个列表计算一个单一的值。
+[`reduce`](/commands/docs/reduce.md)命令从一个列表计算一个单一的值。
 它使用了一个代码块，该块有两个参数：当前元素（即 `elt`）和一个累加器 (即 `acc`)。如果想要给累加器指定一个初始值，请使用 `--fold` (`-f`) 标志。
 若要改变`elt`使其具有`index`和`item`两个值，请添加`--numbered`（`-n`）标志。
 例如：
@@ -153,9 +153,9 @@ let index = 1
 $names | get $index # gives Tami
 ```
 
-[`length`](/zh-CN/commands/docs/length.md)命令返回列表中的元素个数。例如，`[red green blue] | length`输出`3`。
+[`length`](/commands/docs/length.md)命令返回列表中的元素个数。例如，`[red green blue] | length`输出`3`。
 
-[`is-empty`](/zh-CN/commands/docs/is-empty.md) 命令确定一个字符串、列表或表格是否为空。它可以与列表一起使用，如下所示：
+[`is-empty`](/commands/docs/is-empty.md) 命令确定一个字符串、列表或表格是否为空。它可以与列表一起使用，如下所示：
 
 ```nu
 let colors = [red green blue]
@@ -174,7 +174,7 @@ let colors = [red green blue]
 'gold' not-in $colors # true
 ```
 
-[`any`](/zh-CN/commands/docs/any.md)命令用于确定一个列表中是否有任意一个元素匹配给定的条件，例如：
+[`any`](/commands/docs/any.md)命令用于确定一个列表中是否有任意一个元素匹配给定的条件，例如：
 
 ```nu
 # Do any color names end with "e"?
@@ -190,7 +190,7 @@ $scores | any {|elt| $elt > 7 } # true
 $scores | any {|elt| $elt mod 2 == 1 } # true
 ```
 
-[`all`](/zh-CN/commands/docs/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
+[`all`](/commands/docs/all.md)命令确定一个列表中是否所有元素都匹配给定的条件。例如：
 
 ```nu
 # Do all color names end with "e"?
@@ -208,7 +208,7 @@ $scores | all {|elt| $elt mod 2 == 0 } # false
 
 ## 转换列表
 
-[`flatten`](/zh-CN/commands/docs/flatten.md)命令通过将嵌套列表中的元素添加到顶层列表中来从现有的列表创建一个新列表。这条命令可以被多次调用，以使任意嵌套深度的列表变平。例如：
+[`flatten`](/commands/docs/flatten.md)命令通过将嵌套列表中的元素添加到顶层列表中来从现有的列表创建一个新列表。这条命令可以被多次调用，以使任意嵌套深度的列表变平。例如：
 
 ```nu
 [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
@@ -216,7 +216,7 @@ $scores | all {|elt| $elt mod 2 == 0 } # false
 [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-[`wrap`](/zh-CN/commands/docs/wrap.md)命令将一个列表转换为一个表格。每个列表的值将都会被转换为一个单独的行和列：
+[`wrap`](/commands/docs/wrap.md)命令将一个列表转换为一个表格。每个列表的值将都会被转换为一个单独的行和列：
 
 ```nu
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]

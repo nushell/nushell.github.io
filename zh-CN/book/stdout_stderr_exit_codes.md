@@ -37,13 +37,13 @@ do -i { external }
 echo $env.LAST_EXIT_CODE
 ```
 
-第二种是使用一个叫做[`complete`](/zh-CN/commands/docs/complete.md)的命令。
+第二种是使用一个叫做[`complete`](/commands/docs/complete.md)的命令。
 
-## 使用 [`complete`](/zh-CN/commands/docs/complete.md) 命令
+## 使用 [`complete`](/commands/docs/complete.md) 命令
 
-[`complete`](/zh-CN/commands/docs/complete.md)命令允许你运行一个外部程序直到完成，并将 stdout, stderr, 和退出代码收集在一条记录中。
+[`complete`](/commands/docs/complete.md)命令允许你运行一个外部程序直到完成，并将 stdout, stderr, 和退出代码收集在一条记录中。
 
-如果我们尝试在一个不存在的文件上运行外部的`cat`，我们可以看到[`complete`](/zh-CN/commands/docs/complete.md)对流的处理，包括重定向的 stderr：
+如果我们尝试在一个不存在的文件上运行外部的`cat`，我们可以看到[`complete`](/commands/docs/complete.md)对流的处理，包括重定向的 stderr：
 
 ```nu
 do -i { cat unknown.txt } | complete
@@ -56,9 +56,9 @@ do -i { cat unknown.txt } | complete
 
 ## `echo`、`print` 和 `log` 命令
 
-[`echo`](/zh-CN/commands/docs/echo.md) 命令主要用于管道。它返回其参数，忽略管道传入的值。通常没有理由使用它而不是直接写出值。
+[`echo`](/commands/docs/echo.md) 命令主要用于管道。它返回其参数，忽略管道传入的值。通常没有理由使用它而不是直接写出值。
 
-相比之下，[`print`](/zh-CN/commands/docs/print.md) 命令将给定值作为纯文本打印到 stdout。它也可以用于写入标准错误输出。与 [`echo`](/zh-CN/commands/docs/echo.md) 不同，此命令不返回任何值（`print | describe` 将返回 "nothing"）。由于此命令没有输出，因此将其与其他命令管道连接没有意义。
+相比之下，[`print`](/commands/docs/print.md) 命令将给定值作为纯文本打印到 stdout。它也可以用于写入标准错误输出。与 [`echo`](/commands/docs/echo.md) 不同，此命令不返回任何值（`print | describe` 将返回 "nothing"）。由于此命令没有输出，因此将其与其他命令管道连接没有意义。
 
 [标准库](/book/standard_library.md) 提供了在不同日志级别写入消息的命令。例如：
 
@@ -138,7 +138,7 @@ nu -c 'print output; print -e error' o+e>| str upcase
 
 Nushell 试图将流转换为 UTF-8 文本，如果在任何时候转换失败，流的其余部分就会被假定为始终是字节。
 
-如果你想对字节流的解码有更多的控制，你可以使用 [`decode`](/zh-CN/commands/docs/decode.md) 命令。[`decode`](/zh-CN/commands/docs/decode.md)命令可以插入到外部或其他原始流创建命令之后的管道中，它将根据你给`decode`的参数来处理字节的解码。例如，你可以这样对 shift-jis 文本进行解码：
+如果你想对字节流的解码有更多的控制，你可以使用 [`decode`](/commands/docs/decode.md) 命令。[`decode`](/commands/docs/decode.md)命令可以插入到外部或其他原始流创建命令之后的管道中，它将根据你给`decode`的参数来处理字节的解码。例如，你可以这样对 shift-jis 文本进行解码：
 
 ```nu
 0x[8a 4c] | decode shift-jis

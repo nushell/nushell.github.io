@@ -10,9 +10,9 @@ Nu 的核心设计之一是管道，这个设计思想可以追溯到几十年�
 open Cargo.toml | update workspace.dependencies.base64 0.24.2 | save Cargo_new.toml
 ```
 
-第一条命令：`open Cargo.toml` 是一个输入（有时也称为 "源" 或 "生产者"），它创建或加载数据，并将其送入管道。管道待处理的值正是来自于此输入。像[`ls`](/zh-CN/commands/docs/ls.md)这样的命令也是输入，因为它们从文件系统中获取数据，并通过管道发送以便能被后续使用。
+第一条命令：`open Cargo.toml` 是一个输入（有时也称为 "源" 或 "生产者"），它创建或加载数据，并将其送入管道。管道待处理的值正是来自于此输入。像[`ls`](/commands/docs/ls.md)这样的命令也是输入，因为它们从文件系统中获取数据，并通过管道发送以便能被后续使用。
 
-第二个命令：`update workspace.dependencies.base64 0.24.2` 是一个过滤器。过滤器获取输入的数据并对其进行处理。它们可能会修改它（如我们例子中的[`update`](/zh-CN/commands/docs/update.md)命令），或者在值通过时对其做其他操作，如记录。
+第二个命令：`update workspace.dependencies.base64 0.24.2` 是一个过滤器。过滤器获取输入的数据并对其进行处理。它们可能会修改它（如我们例子中的[`update`](/commands/docs/update.md)命令），或者在值通过时对其做其他操作，如记录。
 
 最后一条命令：`save "Cargo_new.toml"` 是一个输出（有时称为 "接收者"）。输出从管道中获取输入，并对其进行一些最终操作。在我们的例子中，我们在最后一步把通过管道的内容保存到一个文件中。还有一些其他类型的输出命令可以获取数值并供用户查看。
 
@@ -83,7 +83,7 @@ date now                    # 1: 今天
 - 它可以通过简单的 <kbd>↑</kbd> (上箭头) 来重复前一个命令并添加管道的下一个阶段，从而逐步组合。
 - 它可以说更具可读性。
 - 如果需要，可以对每个步骤进行注释。
-- 管道中的每个步骤都可以用 [`inspect` 进行调试](/zh-CN/commands/docs/inspect.html)。
+- 管道中的每个步骤都可以用 [`inspect` 进行调试](/commands/docs/inspect.html)。
 
 让我们检查上面例子中每一行 `$in` 的内容：
 
@@ -93,7 +93,7 @@ date now                    # 1: 今天
 
 ### 过滤器闭包中的管道输入
 
-某些[过滤器命令](/zh-CN/commands/categories/filters.html)可能会修改其闭包的管道输入，以便更方便地访问预期的上下文。例如：
+某些[过滤器命令](/commands/categories/filters.html)可能会修改其闭包的管道输入，以便更方便地访问预期的上下文。例如：
 
 ```nu
 1..10 | each {$in * 2}
@@ -273,7 +273,7 @@ def "date info" [] {
 
 ### `$in` 的可收集性
 
-目前，在管道中的流上使用 `$in` 会产生一个“已收集”的值，这意味着管道在处理 `$in` 之前会“等待”流完成。但是，此行为在将来的版本中不保证。为确保将流收集到单个变量中，请使用 [`collect` 命令](/zh-CN/commands/docs/collect.html)。
+目前，在管道中的流上使用 `$in` 会产生一个“已收集”的值，这意味着管道在处理 `$in` 之前会“等待”流完成。但是，此行为在将来的版本中不保证。为确保将流收集到单个变量中，请使用 [`collect` 命令](/commands/docs/collect.html)。
 
 同样，当正常的管道输入足够时，请避免使用 `$in`，因为在内部 `$in` 会强制从 `PipelineData` 转换为 `Value`，并且*可能*导致性能下降和/或内存使用增加。
 
@@ -287,7 +287,7 @@ Nu 命令之间使用 Nu 的数据类型进行通信（见[数据类型](types_o
 
 `external_command | internal_command`
 
-从外部命令进入 Nu 的数据将以字节的形式流入，Nushell 将尝试自动将其转换为 UTF-8 文本。如果成功，一个文本数据流将被发送到`internal_command`；如果不成功，一个二进制数据流将被发送到`internal_command`。像[`lines`](/zh-CN/commands/docs/lines.md)这样的命令有助于从外部命令接收数据，因为它提供了分离的数据行以供后续使用。
+从外部命令进入 Nu 的数据将以字节的形式流入，Nushell 将尝试自动将其转换为 UTF-8 文本。如果成功，一个文本数据流将被发送到`internal_command`；如果不成功，一个二进制数据流将被发送到`internal_command`。像[`lines`](/commands/docs/lines.md)这样的命令有助于从外部命令接收数据，因为它提供了分离的数据行以供后续使用。
 
 `external_command_1 | external_command_2`
 
@@ -298,9 +298,9 @@ Nu 在两个外部命令之间以与其他 Shell 相同的方式处理数据管�
 上面的基础部分描述了如何在管道中将命令组合为输入、过滤器或输出。
 如何使用命令取决于它们在输入/输出处理方面提供了什么。
 
-你可以使用 [`help <command name>`](/zh-CN/commands/docs/help.md) 来检查命令支持什么，它会显示相关的*输入/输出类型*。
+你可以使用 [`help <command name>`](/commands/docs/help.md) 来检查命令支持什么，它会显示相关的*输入/输出类型*。
 
-例如，通过 `help first` 我们可以看到 [`first` 命令](/zh-CN/commands/docs/first.md) 支持多种输入和输出类型：
+例如，通过 `help first` 我们可以看到 [`first` 命令](/commands/docs/first.md) 支持多种输入和输出类型：
 
 ```nu
 help first
@@ -321,7 +321,7 @@ help first
 # => 1
 ```
 
-再举一个例子，[`ls` 命令](/zh-CN/commands/docs/ls.md) 支持输出但不支持输入：
+再举一个例子，[`ls` 命令](/commands/docs/ls.md) 支持输出但不支持输入：
 
 ```nu
 help ls
@@ -347,7 +347,7 @@ echo .. | ls $in
 
 没有默认行为的其他命令可能会以不同的方式失败，并显示明确的错误。
 
-例如，`help sleep` 告诉我们 [`sleep`](/zh-CN/commands/docs/sleep.md) 不支持输入和输出类型：
+例如，`help sleep` 告诉我们 [`sleep`](/commands/docs/sleep.md) 不支持输入和输出类型：
 
 ```nu
 help sleep
@@ -382,7 +382,7 @@ echo 1sec | sleep
 ## 渲染显示结果
 
 在交互模式下，当管道结束时，[`display_output` 钩子配置](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) 定义了结果将如何显示。
-默认配置使用 [`table` 命令](/zh-CN/commands/docs/table.md) 将结构化数据呈现为可视化表格。
+默认配置使用 [`table` 命令](/commands/docs/table.md) 将结构化数据呈现为可视化表格。
 
 以下示例显示了 `display_output` 钩子如何呈现
 
@@ -472,7 +472,7 @@ ls /usr/share/nvim/runtime/ | get name | ^grep tutor | ^ls -la $in
 # => ls: cannot access ''$'\342\224\202'' 32 '$'\342\224\202'' /usr/share/nvim/runtime/tutor        '$'\342\224\202\n': No such file or directory
 ```
 
-怎么了？Nushell 在将列表和表格作为文本传递给外部命令之前，会对其进行渲染（通过添加边框字符，如 `╭`,`─`,`┬`,`╮`）。如果这不是你想要的行为，你必须在将数据传递给外部命令之前，显式地将其转换为字符串。例如，你可以使用 [`to text`](/zh-CN/commands/docs/to_text.md) 来实现：
+怎么了？Nushell 在将列表和表格作为文本传递给外部命令之前，会对其进行渲染（通过添加边框字符，如 `╭`,`─`,`┬`,`╮`）。如果这不是你想要的行为，你必须在将数据传递给外部命令之前，显式地将其转换为字符串。例如，你可以使用 [`to text`](/commands/docs/to_text.md) 来实现：
 
 ```nu
 ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^ls -la $in
@@ -483,7 +483,7 @@ ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^l
 # => -rw-r--r--@  1 pengs  admin  1191 14 Nov 13:42 tutor.tutor.json
 ```
 
-（实际上，对于这个简单的用法，你只需使用 [`find`](/zh-CN/commands/docs/find.md)）
+（实际上，对于这个简单的用法，你只需使用 [`find`](/commands/docs/find.md)）
 
 ```nu
 ls /usr/share/nvim/runtime/ | get name | find tutor | ansi strip | ^ls -al ...$in

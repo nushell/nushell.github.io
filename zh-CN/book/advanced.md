@@ -14,7 +14,7 @@ Nushell 中的值包含一些额外的[元数据](metadata.md)。
 
 由于 Nushell 严格的作用域规则，[并行迭代集合](parallelism.md)非常容易，这可以帮助你通过只输入几个字符来加速长时间运行的脚本。
 
-你可以使用 [`explore`](/zh-CN/commands/docs/explore.md) 命令[交互式地探索数据](explore.md)。
+你可以使用 [`explore`](/commands/docs/explore.md) 命令[交互式地探索数据](explore.md)。
 
 最后，你可以使用[插件](plugins.md)来扩展 Nushell 的功能。
 几乎任何东西都可以成为插件，只要它以 Nushell 理解的协议与 Nushell 通信。

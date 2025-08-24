@@ -8,7 +8,7 @@ _注意：要了解覆层，请确保先查看 [模块](modules.md)，因为覆�
 ## 基础
 
 首先，Nushell 有一个默认的覆层，叫做 `zero`。
-你可以用 [`overlay list`](/zh-CN/commands/docs/overlay_list.md) 命令检查哪些覆层是活动的。
+你可以用 [`overlay list`](/commands/docs/overlay_list.md) 命令检查哪些覆层是活动的。
 你应该可以看到默认的覆层显示在那里。
 
 要创建一个新的覆层，你首先需要一个模块：
@@ -38,7 +38,7 @@ module spam {
 
 :::
 
-要创建覆层，请调用 [`overlay use`](/zh-CN/commands/docs/overlay_use.md)：
+要创建覆层，请调用 [`overlay use`](/commands/docs/overlay_use.md)：
 
 ```nu
 overlay use spam
@@ -59,7 +59,7 @@ overlay list
 # => ───┴──────
 ```
 
-它将模块的定义带入当前作用域，并以与 [`use`](/zh-CN/commands/docs/use.md) 命令相同的方式评估 [`export-env`](/zh-CN/commands/docs/export-env.md) 代码块（参见[模块](modules.md#environment-variables)章节）。
+它将模块的定义带入当前作用域，并以与 [`use`](/commands/docs/use.md) 命令相同的方式评估 [`export-env`](/commands/docs/export-env.md) 代码块（参见[模块](modules.md#environment-variables)章节）。
 
 ::: tip
 在下面的章节中，`>` 的提示语前面会有最后一个活动覆层的名称。
@@ -68,7 +68,7 @@ overlay list
 
 ## 移除覆层
 
-如果你不再需要叠加定义，请调用 [`overlay hide`](/zh-CN/commands/docs/overlay_hide.md)：
+如果你不再需要叠加定义，请调用 [`overlay hide`](/commands/docs/overlay_hide.md)：
 
 ```nu
 (spam)> overlay hide spam
@@ -95,7 +95,7 @@ foo
 ───┴──────
 ```
 
-移除覆层的最后一种方法是调用不带参数的 [`overlay hide`](/zh-CN/commands/docs/overlay_hide.md)，它将删除最后一个活动的覆层。
+移除覆层的最后一种方法是调用不带参数的 [`overlay hide`](/commands/docs/overlay_hide.md)，它将删除最后一个活动的覆层。
 
 ## 覆层是可记录的
 
@@ -145,7 +145,7 @@ eggs
 
 `eggs` 命令被添加到 `scratchpad` 中，同时保持 `spam` 不变。
 
-为了让上述步骤不那么冗长，你可以使用 [`overlay new`](/zh-CN/commands/docs/overlay_new.md) 命令：
+为了让上述步骤不那么冗长，你可以使用 [`overlay new`](/commands/docs/overlay_new.md) 命令：
 
 ```nu
 (zero)> overlay use spam
@@ -159,7 +159,7 @@ eggs
 
 ## 前缀覆层
 
-[`overlay use`](/zh-CN/commands/docs/overlay_use.md) 命令会将模块中的所有命令和别名直接放入当前命名空间。
+[`overlay use`](/commands/docs/overlay_use.md) 命令会将模块中的所有命令和别名直接放入当前命名空间。
 但是，你可能希望将它们作为子命令保留在模块名称之后。
 这就是 `--prefix` 的作用：
 

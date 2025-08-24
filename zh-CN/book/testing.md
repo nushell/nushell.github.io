@@ -84,7 +84,7 @@ Error:   × Assertion failed.
    ╰────
 ```
 
-一般来说，对于基本的 `assert` 命令，建议始终提供附加消息来显示出了什么问题。如果您不能使用任何内置的断言命令，您可以通过为 [`error make`](/zh-CN/commands/docs/error_make.md) 传递标签来为 `assert` 命令创建一个自定义的：
+一般来说，对于基本的 `assert` 命令，建议始终提供附加消息来显示出了什么问题。如果您不能使用任何内置的断言命令，您可以通过为 [`error make`](/commands/docs/error_make.md) 传递标签来为 `assert` 命令创建一个自定义的：
 
 ```nu
 def "assert even" [number: int] {

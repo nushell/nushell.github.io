@@ -16,5 +16,5 @@ Nushell 有一个丰富的类型系统。
 一些数据类型具有有趣的特性，值得单独介绍：[字符串](working_with_strings.md)、[列表](working_with_lists.md)和[表格](working_with_tables.md)。
 除了解释这些特性外，这些部分还展示了如何进行一些常见的操作，例如组合字符串或更新列表中的值。
 
-最后，[命令参考](/zh-CN/commands/)列出了所有内置命令及其简要说明。
-请注意，你也可以在 Nushell 中使用 [`help`](/zh-CN/commands/docs/help.md) 命令访问此信息。
+最后，[命令参考](/commands/)列出了所有内置命令及其简要说明。
+请注意，你也可以在 Nushell 中使用 [`help`](/commands/docs/help.md) 命令访问此信息。

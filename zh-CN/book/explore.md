@@ -21,7 +21,7 @@ ls | explore -i
 
 ![explore-ls-png](https://user-images.githubusercontent.com/20165848/207849604-421312e3-537f-4b2e-b83e-f1f83f2a79d5.png)
 
-[`explore`](/zh-CN/commands/docs/explore.md)的主要功能是`:table`(您可以在上面的截图中看到)。
+[`explore`](/commands/docs/explore.md)的主要功能是`:table`(您可以在上面的截图中看到)。
 
 您可以通过`<Left>`、`<Right>`、`<Up>`、`<Down>`方向键与之交互。它还支持Vim风格的`<h>`、`<j>`、`<k>`、`<l>`键绑定，`<Ctrl-f>`和`<Ctrl-b>`，以及Emacs风格的`<Ctrl-v>`、`<Alt-v>`、`<Ctrl-p>`和`<Ctrl-n>`键绑定。
 
@@ -33,7 +33,7 @@ ls | explore -i
 
 ## 命令
 
-[`explore`](/zh-CN/commands/docs/explore.md)有一系列内置命令可供使用。通过按`<:>`然后输入命令名称来运行命令。
+[`explore`](/commands/docs/explore.md)有一系列内置命令可供使用。通过按`<:>`然后输入命令名称来运行命令。
 
 要查看完整的命令列表，可以输入`:help`。
 

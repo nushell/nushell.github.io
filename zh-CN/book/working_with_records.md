@@ -1,7 +1,7 @@
 # 处理记录(Records)
 
 :::tip
-记录大致相当于表格中的单行数据。你可以把记录看作是一个"单行表格"。因此，大多数对表格行操作的命令也适用于记录。例如，[`update`](/zh-CN/commands/docs/update.md)命令可以用于记录：
+记录大致相当于表格中的单行数据。你可以把记录看作是一个"单行表格"。因此，大多数对表格行操作的命令也适用于记录。例如，[`update`](/commands/docs/update.md)命令可以用于记录：
 
 ```nu
 let my_record = {
@@ -57,7 +57,7 @@ $my_record | update age { $in + 1 }
 
 ## 更新记录
 
-与列表类似，你可以在记录中[`insert`](/zh-CN/commands/docs/insert.md)值。例如，让我们添加一些梨子：
+与列表类似，你可以在记录中[`insert`](/commands/docs/insert.md)值。例如，让我们添加一些梨子：
 
 ```nu
 { "apples": 543, "bananas": 411, "oranges": 0 }
@@ -70,7 +70,7 @@ $my_record | update age { $in + 1 }
 # => ╰─────────┴─────╯
 ```
 
-你也可以[`update`](/zh-CN/commands/docs/update.md)值：
+你也可以[`update`](/commands/docs/update.md)值：
 
 ```nu
 { "apples": 543, "bananas": 411, "oranges": 0 }
@@ -84,7 +84,7 @@ $my_record | update age { $in + 1 }
 
 要创建带有新字段的记录副本，你可以：
 
-- 使用[`merge`](/zh-CN/commands/docs/merge.md)命令：
+- 使用[`merge`](/commands/docs/merge.md)命令：
 
   ```nu
   let first_record = { name: "Sam", rank: 10 }

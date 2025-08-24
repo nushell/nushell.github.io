@@ -46,13 +46,13 @@ use inc.nu *
 
 我们在上面的模块概述中简要介绍了模块中可用的定义类型。虽然这对于最终用户来说可能已经足够了，但模块作者需要知道*如何*为以下内容创建导出定义：
 
-- 命令 ([`export def`](/zh-CN/commands/docs/export_def.md))
-- 别名 ([`export alias`](/zh-CN/commands/docs/export_alias.md))
-- 常量 ([`export const`](/zh-CN/commands/docs/export_const.md))
-- 已知外部命令 ([`export extern`](/zh-CN/commands/docs/export_extern.md))
-- 子模块 ([`export module`](/zh-CN/commands/docs/export_module.md))
-- 从其他模块导入的符号 ([`export use`](/zh-CN/commands/docs/export_use.md))
-- 环境设置 ([`export-env`](/zh-CN/commands/docs/export-env.md))
+- 命令 ([`export def`](/commands/docs/export_def.md))
+- 别名 ([`export alias`](/commands/docs/export_alias.md))
+- 常量 ([`export const`](/commands/docs/export_const.md))
+- 已知外部命令 ([`export extern`](/commands/docs/export_extern.md))
+- 子模块 ([`export module`](/commands/docs/export_module.md))
+- 从其他模块导入的符号 ([`export use`](/commands/docs/export_use.md))
+- 环境设置 ([`export-env`](/commands/docs/export-env.md))
 
 ::: tip
 只有标记为 `export`（或环境变量的 `export-env`）的定义在导入模块时才可访问。未标记为 `export` 的定义仅在模块内部可见。在某些语言中，这些被称为"私有"或"本地"定义。下面的[附加示例](#local-definitions)中有一个示例。
@@ -307,7 +307,7 @@ help my-utils
 
 ## 环境变量
 
-模块可以使用 [`export-env`](/zh-CN/commands/docs/export-env.md) 定义环境。让我们用上面定义的 `$env.NU_MODULES_DIR` 的常见目录扩展我们的 `my-utils` 模块，我们将在未来放置我们的模块。此目录默认位于[使用模块 - 模块路径](./using_modules.md#module-path)中讨论的 `$env.NU_LIB_DIRS` 搜索路径中。
+模块可以使用 [`export-env`](/commands/docs/export-env.md) 定义环境。让我们用上面定义的 `$env.NU_MODULES_DIR` 的常见目录扩展我们的 `my-utils` 模块，我们将在未来放置我们的模块。此目录默认位于[使用模块 - 模块路径](./using_modules.md#module-path)中讨论的 `$env.NU_LIB_DIRS` 搜索路径中。
 
 ```nu
 # 一组有用的实用函数
@@ -320,7 +320,7 @@ export-env {
 }
 ```
 
-当使用 `use` 导入此模块时，[`export-env`](/zh-CN/commands/docs/export-env.md) 块内的代码将运行，其环境将合并到当前作用域中：
+当使用 `use` 导入此模块时，[`export-env`](/commands/docs/export-env.md) 块内的代码将运行，其环境将合并到当前作用域中：
 
 ```nu
 use my-utils
@@ -441,7 +441,7 @@ Windows 上的 Nushell 支持正斜杠和反斜杠作为路径分隔符。但是
 
 ### 本地定义
 
-如上所述，没有 [`export`](/zh-CN/commands/docs/export.md) 关键字的模块中的定义仅在模块的作用域内可访问。
+如上所述，没有 [`export`](/commands/docs/export.md) 关键字的模块中的定义仅在模块的作用域内可访问。
 
 为了演示，创建一个新的模块 `is-alphanumeric.nu`。在此模块中，我们将创建一个 `str is-alphanumeric` 命令。如果字符串中的任何字符不是字母数字，则返回 `false`：
 

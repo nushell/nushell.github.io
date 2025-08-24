@@ -60,7 +60,7 @@ eight
 其他示例：
 
 ::: details 提前返回
-由于某种情况需要提前退出的命令仍然可以使用 [`return` 语句](/zh-CN/commands/docs/return.md)返回值。
+由于某种情况需要提前退出的命令仍然可以使用 [`return` 语句](/commands/docs/return.md)返回值。
 
 ```nu
 def process-list [] {
@@ -170,13 +170,13 @@ def "random file" [] {
 ls | get name
 ```
 
-让我们将 [`ls`](/zh-CN/commands/docs/ls.md) 移动到我们编写的命令中：
+让我们将 [`ls`](/commands/docs/ls.md) 移动到我们编写的命令中：
 
 ```nu
 def my-ls [] { ls }
 ```
 
-我们可以像使用 [`ls`](/zh-CN/commands/docs/ls.md) 一样使用此命令的输出。
+我们可以像使用 [`ls`](/commands/docs/ls.md) 一样使用此命令的输出。
 
 ```nu
 my-ls | get name
@@ -277,7 +277,7 @@ def $name [] { foo }
 
 ### 子命令
 
-你还可以使用空格定义命令的子命令。例如，如果我们想向 [`str`](/zh-CN/commands/docs/str.md) 添加一个新子命令，我们可以通过以“str ”开头命名我们的子命令来创建它。例如：
+你还可以使用空格定义命令的子命令。例如，如果我们想向 [`str`](/commands/docs/str.md) 添加一个新子命令，我们可以通过以“str ”开头命名我们的子命令来创建它。例如：
 
 ```nu
 def "str mycommand" [] {
@@ -285,7 +285,7 @@ def "str mycommand" [] {
 }
 ```
 
-现在我们可以像调用 [`str`](/zh-CN/commands/docs/str.md) 的内置子命令一样调用我们的自定义命令：
+现在我们可以像调用 [`str`](/commands/docs/str.md) 的内置子命令一样调用我们的自定义命令：
 
 ```nu
 str mycommand
@@ -463,9 +463,9 @@ Error: nu::parser::parse_mismatch
 大多数类型都可以用作类型注解。此外，还有一些“形状”可以使用。例如：
 
 - `number`: 接受 `int` 或 `float`
-- `path`: 一个字符串，其中 `~` 和 `.` 字符具有特殊含义，并将自动扩展为等效的完整路径。有关示例用法，请参阅语言参考指南中的[路径](/zh-CN/lang-guide/chapters/types/other_types/path.html)。
+- `path`: 一个字符串，其中 `~` 和 `.` 字符具有特殊含义，并将自动扩展为等效的完整路径。有关示例用法，请参阅语言参考指南中的[路径](/lang-guide/chapters/types/other_types/path.html)。
 - `directory`: `path`（上文）的子集。使用制表符补全参数时，只会提供目录。扩展方式与 `path` 相同。
-- `error`: 可用，但目前没有已知的有效用法。有关更多信息，请参阅语言参考指南中的[错误](/zh-CN/lang-guide/chapters/types/other_types/error.html)。
+- `error`: 可用，但目前没有已知的有效用法。有关更多信息，请参阅语言参考指南中的[错误](/lang-guide/chapters/types/other_types/error.html)。
 
 以下[类型](./types_of_data.html)可用于参数注解：
 
@@ -732,7 +732,7 @@ ezal -G commands
 
 默认情况下，自定义命令接受 [`<any>` 类型](./types_of_data.md#any)作为管道输入，同样可以输出 `<any>` 类型。但自定义命令也可以被赋予明确的签名以缩小允许的类型范围。
 
-例如，[`str stats`](/zh-CN/commands/docs/str_stats.md) 的签名如下所示：
+例如，[`str stats`](/commands/docs/str_stats.md) 的签名如下所示：
 
 ```nu
 def "str stats" []: string -> record { }
@@ -743,7 +743,7 @@ def "str stats" []: string -> record { }
 - 它接受一个 `string` 作为管道输入
 - 它输出一个 `record`
 
-如果有多个输入/输出类型，它们可以放在括号内并用逗号或换行符分隔，如 [`str join`](/zh-CN/commands/docs/str_join.md) 中所示：
+如果有多个输入/输出类型，它们可以放在括号内并用逗号或换行符分隔，如 [`str join`](/commands/docs/str_join.md) 中所示：
 
 ```nu
 def "str join" [separator?: string]: [
@@ -754,7 +754,7 @@ def "str join" [separator?: string]: [
 
 这表示 `str join` 可以接受 `list<any>` 或 `string` 作为管道输入。在任何一种情况下，它都将输出一个 `string`。
 
-有些命令不接受或不需要数据作为管道输入。在这种情况下，输入类型将是 `<nothing>`。如果命令返回 `null`（例如，[`rm`](/zh-CN/commands/docs/rm.md) 或 [`hide`](/zh-CN/commands/docs/hide.md)），输出类型也是如此：
+有些命令不接受或不需要数据作为管道输入。在这种情况下，输入类型将是 `<nothing>`。如果命令返回 `null`（例如，[`rm`](/commands/docs/rm.md) 或 [`hide`](/commands/docs/hide.md)），输出类型也是如此：
 
 ```nu
 def xhide [module: string, members?]: nothing -> nothing { }
@@ -935,7 +935,7 @@ $env.FOO
 # => Before
 ```
 
-但是，使用 [`def --env`](/zh-CN/commands/docs/def.md) 或 [`export def --env`](/zh-CN/commands/docs/export_def.md)（对于[模块](modules.md)）定义的命令将在调用方保留环境：
+但是，使用 [`def --env`](/commands/docs/def.md) 或 [`export def --env`](/commands/docs/export_def.md)（对于[模块](modules.md)）定义的命令将在调用方保留环境：
 
 ```nu
 def --env foo [] {
