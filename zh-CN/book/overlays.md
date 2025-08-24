@@ -19,17 +19,26 @@ module spam {
         "foo"
     }
 
-    export alias bar = "bar"
+    export alias bar = echo "bar"
 
-    export env BAZ {
-        "baz"
+    export-env {
+        load-env { BAZ: "baz" }
     }
 }
 ```
 
 我们将在本章中使用这个模块。每当你看到 `overlay use spam`，就应该知道 `spam` 是指这个模块。
 
-要创建覆层，请调用 [`overlay use`](/commands/docs/overlay_use.md)。
+::: tip
+该模块可以通过[模块](modules.md)中描述的三种方法中的任何一种来创建：
+
+- "内联"模块（本例中使用）
+- 文件
+- 目录
+
+:::
+
+要创建覆层，请调用 [`overlay use`](/commands/docs/overlay_use.md)：
 
 ```nu
 overlay use spam
@@ -50,8 +59,12 @@ overlay list
 # => ───┴──────
 ```
 
+它将模块的定义带入当前作用域，并以与 [`use`](/commands/docs/use.md) 命令相同的方式评估 [`export-env`](/commands/docs/export-env.md) 代码块（参见[模块](modules.md#environment-variables)章节）。
+
+::: tip
 在下面的章节中，`>` 的提示语前面会有最后一个活动覆层的名称。
 `(spam)> some-command` 表示当输入命令时，`spam` 覆层是最后活动的覆层。
+:::
 
 ## 移除覆层
 
@@ -73,7 +86,7 @@ Error: Can't run executable...
 任何添加的覆层都会在作用域结束时被移除：
 
 ```nu
-(zero)> do { overlay use spam; foo }
+(zero)> do { overlay use spam; foo }  # 覆层仅在代码块内活动
 foo
 
 (zero)> overlay list
@@ -82,7 +95,7 @@ foo
 ───┴──────
 ```
 
-此外，[`overlay hide`](/commands/docs/overlay_hide.md) 在没有参数的情况下，将删除最后一个活动的覆层。
+移除覆层的最后一种方法是调用不带参数的 [`overlay hide`](/commands/docs/overlay_hide.md)，它将删除最后一个活动的覆层。
 
 ## 覆层是可记录的
 
@@ -132,7 +145,6 @@ eggs
 
 `eggs` 命令被添加到 `scratchpad` 中，同时保持 `spam` 不变。
 
-_0.64 版本新增：_
 为了让上述步骤不那么冗长，你可以使用 [`overlay new`](/commands/docs/overlay_new.md) 命令：
 
 ```nu
@@ -145,7 +157,45 @@ _0.64 版本新增：_
 
 :::
 
-## 保存定义
+## 前缀覆层
+
+[`overlay use`](/commands/docs/overlay_use.md) 命令会将模块中的所有命令和别名直接放入当前命名空间。
+但是，你可能希望将它们作为子命令保留在模块名称之后。
+这就是 `--prefix` 的作用：
+
+```nu
+(zero)> module spam {
+    export def foo [] { "foo" }
+}
+
+(zero)> overlay use --prefix spam
+
+(spam)> spam foo
+foo
+```
+
+请注意，这不适用于环境变量。
+
+## 重命名覆层
+
+你可以使用 `as` 关键字更改添加的覆层的名称：
+
+```nu
+(zero)> module spam { export def foo [] { "foo" } }
+
+(zero)> overlay use spam as eggs
+
+(eggs)> foo
+foo
+
+(eggs)> overlay hide eggs
+
+(zero)>
+```
+
+如果你有一个通用的脚本名称，例如 virtualenv 的 `activate.nu`，但你希望为你的覆层提供一个更具描述性的名称，这可能很有用。
+
+## 保留定义
 
 有时，你可能想删除一个覆层，但保留所有你添加的自定义定义，而不必在下一个活动覆层中重新定义它们：
 
@@ -161,6 +211,25 @@ eggs
 ```
 
 `--keep-custom` 标志正是用来做这个的。
+
+也可以使用 `--keep-env` 标志保留在覆层内定义的环境变量列表，但删除其余部分：
+
+```nu
+(zero)> module spam {
+    export def foo [] { "foo" }
+    export-env { $env.FOO = "foo" }
+}
+
+(zero)> overlay use spam
+
+(spam)> overlay hide spam --keep-env [ FOO ]
+
+(zero)> foo
+Error: Can't run executable...
+
+(zero)> $env.FOO
+foo
+```
 
 ## 覆层顺序
 

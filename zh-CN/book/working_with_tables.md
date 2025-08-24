@@ -1,5 +1,9 @@
 # 处理表格
 
+[[toc]]
+
+## 概述
+
 在 Nu 中查看数据的一种常见方式是通过表格。Nu 提供了许多处理表格的命令以方便找到你想要的内容以及将数据缩小到你需要的范围。
 
 首先，让我们获得一个可用的表：
@@ -18,6 +22,11 @@ ls
 # =>  6 │ signature.rs  │ File │  1.2 KB │ 5 days ago
 # => ───┴───────────────┴──────┴─────────┴────────────
 ```
+
+::: tip 改变表格显示方式
+Nu 默认会展开所有表格结构。你可以通过修改 `display_output` 钩子来改变这一行为。
+详见 [hooks](/zh-CN/book/hooks.md#changing-how-output-is-displayed)。
+:::
 
 ## 排序
 
@@ -91,7 +100,7 @@ ls | sort-by size | first 5 | skip 2
 
 我们已将其缩小为我们关心的三行。
 
-让我们看看其他几个用于选择数据的命令。您可能想知道为什么选取表格的行是通过数字，这是选择单行数据的便捷方式。让我们按文件名对表进行排序，然后使用 `select` 命令通过行号来选择其中的一行：
+让我们看看其他几个用于选择数据的命令。你可能想知道为什么选取表格的行是通过数字，这是选择单行数据的便捷方式。让我们按文件名对表进行排序，然后使用 `select` 命令通过行号来选择其中的一行：
 
 ```nu
 ls | sort-by name
@@ -319,3 +328,92 @@ ls | rename filename filetype filesize date
 # => │  4 │ Documents         │ dir      │    416 B │ 4 days ago   │
 # => ...
 ```
+
+### 删除列
+
+你可以使用[`reject`](/commands/docs/reject.md)命令删除表中的列。例如，我们可以运行[`ls`](/commands/docs/ls.md)并删除不需要的列：
+
+```nu
+ls -l / | reject readonly num_links inode created accessed modified
+# => ╭────┬────────┬─────────┬─────────┬───────────┬──────┬───────┬────────╮
+# => │  # │  name  │  type   │ target  │   mode    │ uid  │ group │  size  │
+# => ├────┼────────┼─────────┼─────────┼───────────┼──────┼───────┼────────┤
+# => │  0 │ /bin   │ symlink │ usr/bin │ rwxrwxrwx │ root │ root  │    7 B │
+# => │  1 │ /boot  │ dir     │         │ rwxr-xr-x │ root │ root  │ 1.0 KB │
+# => │  2 │ /dev   │ dir     │         │ rwxr-xr-x │ root │ root  │ 4.1 KB │
+# => │  3 │ /etc   │ dir     │         │ rwxr-xr-x │ root │ root  │ 3.6 KB │
+# => │  4 │ /home  │ dir     │         │ rwxr-xr-x │ root │ root  │   12 B │
+# => │  5 │ /lib   │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
+# => │  6 │ /lib64 │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
+# => │  7 │ /mnt   │ dir     │         │ rwxr-xr-x │ root │ root  │    0 B │
+# => ...
+```
+
+## # 索引列
+
+你可能已经注意到每个表格默认都有一个以`#`为标题的列。这个列有两种工作模式：
+
+1. 内部索引 #
+
+   - 默认模式
+   - Nu提供从0开始的连续索引
+   - 总是对应单元格路径的行号，`select 0`会返回列表中的第一项，`select <n-1>`会返回第n项
+   - 只是内部表示的一种显示方式，不能通过列名访问
+
+2. 重命名的索引 #
+   - 当创建一个名为"index"的列时，这个`index`列会取代表格显示中的`#`列
+   - 如果表格中的某些行有`index`键而其他行没有，结果将不再是表格而是`list<any>`
+
+### 索引列示例
+
+#### 将#转换为索引
+
+将内部`#`转换为所有行的索引同时保持原始编号的有用模式是：
+
+```nu
+ls | enumerate | flatten
+```
+
+#### 添加行标题
+
+```nu
+let table = [
+[additions   deletions   delta ];
+[       10          20     -10 ]
+[       15           5      10 ]
+[        8           6       2 ]]
+
+let totals_row = ($table | math sum | insert index {"Totals"})
+$table | append $totals_row
+# => ╭────────┬───────────┬───────────┬───────╮
+# => │      # │ additions │ deletions │ delta │
+# => ├────────┼───────────┼───────────┼───────┤
+# => │      0 │        10 │        20 │   -10 │
+# => │      1 │        15 │         5 │    10 │
+# => │      2 │         8 │         6 │     2 │
+# => │ Totals │        33 │        31 │     2 │
+# => ╰────────┴───────────┴───────────┴───────╯
+```
+
+## `table` 命令
+
+[`table`](/commands/docs/table.md)命令用于*渲染*结构化数据，包括：
+
+- 表格
+- 列表
+- 记录
+- 范围
+
+`table`命令的渲染结果实际上是一个`string`类型。例如：
+
+```nu
+[ Nagasaki Ghent Cambridge Izmir Graz Lubango ] | table | describe
+# => string (stream)
+```
+
+`table`命令还有多个选项可以*改变*表格的渲染方式，例如：
+
+- `-e` 展开通常会被折叠的数据
+- `-i false` 隐藏索引/`#`列
+- `-a 5` 将表格缩写为仅显示前5项和后5项
+- 以及其他选项

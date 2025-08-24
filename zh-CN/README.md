@@ -7,7 +7,7 @@ actionText: 点此了解更多 →
 actionLink: /zh-CN/book/
 features:
   - title: 利用管道控制任意系统
-    details: Nu 可以在 Linux、macOS 和 Windows 上运行。一次学习，处处可用。
+    details: Nu 可以在 Linux、macOS、BSD 和 Windows 上运行。一次学习，处处可用。
   - title: 一切皆数据
     details: Nu 管道使用结构化数据，你可以用同样的方式安全地选择，过滤和排序。停止解析字符串，开始解决问题。
   - title: 强大的插件系统
@@ -34,20 +34,39 @@ Nushell 可以通过 [你喜欢的软件包管理器](https://repology.org/proje
 
 #### macOS / Linux:
 
+##### Homebrew
+
 ```shell
 $ brew install nushell
+```
+
+##### Nix profile
+
+```shell
+$ nix profile install nixpkgs#nushell
 ```
 
 #### Windows:
 
 ```powershell
+# 安装到用户范围（默认）。
 winget install nushell
+# 系统范围安装（以管理员身份运行）。
+winget install nushell --scope machine
 ```
 
 完成安装后，输入 `nu` 来启动 Nu。
+
+## 文档
+
+- [入门](/zh-CN/book/getting_started.html) 指引你熟悉 Nushell
+- [Nu 之异同](/zh-CN/book/coming_to_nu.html) 描述了 Nu 与其他语言和 Shell 的异同之处
+- [Nu 基础](/zh-CN/book/nu_fundamentals.html) 是对 Nu 基础知识更详尽、更有条理的描述
+- [Nu 编程](/zh-CN/book/programming_in_nu.html) 将 Nu 作为一门编程语言进行描述
+- [作为 Shell 的 Nu](/zh-CN/book/nu_as_a_shell.html) 让你深入了解 Shell 环境中的交互功能和可配置性
 
 ## 社区
 
 如果你有任何问题可以在 [Discord](https://discord.gg/NtAbbGn) 上找到我们。
 
-您可以通过 [意见反馈](https://github.com/nushell/nushell.github.io/issues) 或者 [贡献 PR](https://github.com/nushell/nushell.github.io/pulls) 来帮助我们完善此网站。
+你可以通过 [意见反馈](https://github.com/nushell/nushell.github.io/issues) 或者 [贡献 PR](https://github.com/nushell/nushell.github.io/pulls) 来帮助我们完善此网站。

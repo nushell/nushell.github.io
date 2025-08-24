@@ -32,7 +32,7 @@ Because you can append a list of paths, you can append multiple at once. You can
 $env.PATH ++= [ '~/.local/bin', ($env.CARGO_HOME | path join "bin") ]
 ```
 
-Because PATH order makes a difference, you may want to *prepend* your paths instead, so that they take precedence over other executables with the same name:
+Because PATH order makes a difference, you may want to _prepend_ your paths instead, so that they take precedence over other executables with the same name:
 
 ```
 use std/util "path add"
@@ -84,6 +84,7 @@ You should now be able to run `config nu` or `config env` and edit those files e
 ```nu
 $env.APPDATA
 ```
+
 ---
 
 ### Use hooks to export state via environment variables
@@ -95,11 +96,11 @@ To be most compatible, the `starship` binary will run every prompt render and
 is absolute stateless.
 Nushell, however, is very stateful in a single instance.
 
-[Hooks](https://www.nushell.sh/book/hooks.html#hooks) allow registration of
+[Hooks](../book/hooks.md) allow registration of
 custom callback functions.
 In this case, the `pre_prompt` hook is very useful.
 With it, we can export state information as an environment variable, for
-example, what [overlays](https://www.nushell.sh/book/overlays.html) are
+example, what [overlays](../book/overlays.md) are
 currently activated.
 
 ```nu
