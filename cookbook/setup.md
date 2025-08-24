@@ -100,7 +100,7 @@ Nushell, however, is very stateful in a single instance.
 custom callback functions.
 In this case, the `pre_prompt` hook is very useful.
 With it, we can export state information as an environment variable, for
-example, what [overlays](https://www.nushell.sh/book/overlays.html) are
+example, what [overlays](../book/overlays) are
 currently activated.
 
 ```nu

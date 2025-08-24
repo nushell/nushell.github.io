@@ -97,7 +97,7 @@ $env.APPDATA
 
 [钩子](../book/hooks) 允许注册自定义回调函数。
 在这种情况下，`pre_prompt` 钩子非常有用。
-有了它，我们可以将状态信息导出为环境变量，例如，当前激活了哪些 [覆层](https://www.nushell.sh/book/overlays.html)。
+有了它，我们可以将状态信息导出为环境变量，例如，当前激活了哪些 [覆层](../book/overlays)。
 
 ```nu
 # 使用覆层列表设置 NU_OVERLAYS，对 starship 提示有用
