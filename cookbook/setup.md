@@ -96,11 +96,11 @@ To be most compatible, the `starship` binary will run every prompt render and
 is absolute stateless.
 Nushell, however, is very stateful in a single instance.
 
-[Hooks](../book/hooks) allow registration of
+[Hooks](../book/hooks.md) allow registration of
 custom callback functions.
 In this case, the `pre_prompt` hook is very useful.
 With it, we can export state information as an environment variable, for
-example, what [overlays](../book/overlays) are
+example, what [overlays](../book/overlays.md) are
 currently activated.
 
 ```nu

@@ -95,9 +95,9 @@ $env.APPDATA
 并且是绝对无状态的。
 然而，Nushell 在单个实例中是非常有状态的。
 
-[钩子](../book/hooks) 允许注册自定义回调函数。
+[钩子](../book/hooks.md) 允许注册自定义回调函数。
 在这种情况下，`pre_prompt` 钩子非常有用。
-有了它，我们可以将状态信息导出为环境变量，例如，当前激活了哪些 [覆层](../book/overlays)。
+有了它，我们可以将状态信息导出为环境变量，例如，当前激活了哪些 [覆层](../book/overlays.md)。
 
 ```nu
 # 使用覆层列表设置 NU_OVERLAYS，对 starship 提示有用
