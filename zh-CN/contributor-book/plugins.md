@@ -1,53 +1,53 @@
 ---
-title: Plugins
+title: 插件
 ---
 
-# Plugins
+# 插件
 
-## Protocol
+## 协议
 
-Plugins are executable applications that communicate with Nu by exchanging serialized data over a stream (much in the same way VSCode plugins do). The stream may either be stdio, which all plugins support, or a local socket (e.g. Unix domain socket or Windows named pipe) when supported. The protocol is split into two stages.
+插件是可执行应用程序，通过交换序列化数据通过流与 Nu 通信（与 VSCode 插件的方式非常相似）。流可以是 stdio（所有插件都支持），也可以是本地套接字（例如 Unix 域套接字或 Windows 命名管道）（当支持时）。协议分为两个阶段。
 
-The first stage of the protocol deals with the initial discovery of the plugin. When a plugin is registered the plugin is executed and asked to reply with its configuration. Just as with commands, plugins have a signature that they respond to Nu with. Once Nu has this signature, it knows how to later invoke the plugin to do work.
+协议的第一阶段处理插件的初始发现。当注册插件时，插件被执行并被要求回复其配置。与命令一样，插件有一个签名，它们用这个签名响应 Nu。一旦 Nu 有了这个签名，它就知道以后如何调用插件来工作。
 
-The second stage is the actual doing of work. Here the plugins are executed and sent serialized input data. The plugin then replies with the serialized output data.
+第二阶段是实际的工作执行。在这里，插件被执行并发送序列化的输入数据。插件然后用序列化的输出数据回复。
 
-For more detailed information about how exactly this communication works, especially if trying to implement a plugin in a language other than Rust, see the [plugin protocol](plugin_protocol_reference.md) section.
+有关这种通信如何工作的更详细信息，特别是如果尝试用 Rust 以外的语言实现插件，请参阅[插件协议](plugin_protocol_reference.md)部分。
 
-## Discovery
+## 发现
 
-Nu keeps a registry of plugins known as the ‘plugin registry file’ at the file system location defined by configuration variable `$nu.plugin-path`. To add a plugin, execute `plugin add <path_to_plugin_executable>` in a Nu shell. The plugin's signatures will be added to the plugin registry file for future launches of Nu. To make them available immediately, call `plugin use <plugin_name>`.
+Nu 维护一个称为"插件注册文件"的插件注册表，位于配置变量 `$nu.plugin-path` 定义的文件系统位置。要添加插件，在 Nu shell 中执行 `plugin add <path_to_plugin_executable>`。插件的签名将被添加到插件注册文件中，供将来启动 Nu 时使用。要立即使它们可用，请调用 `plugin use <plugin_name>`。
 
-## Launch environment
+## 启动环境
 
-When launched in `stdio` mode, `stdin` and `stdout` are redirected for use in the plugin protocol, and must not be used for other purposes. Stderr is inherited, and may be used to print to the terminal.
+在 `stdio` 模式下启动时，`stdin` 和 `stdout` 被重定向用于插件协议，不得用于其他目的。Stderr 是继承的，可以用来打印到终端。
 
-When launched in `local-socket` mode, `stdin` and `stdout` can also be used to interact with the user's terminal. This is the default for Rust plugins unless `local-socket` is disabled, and can be checked for by calling [`EngineInterface::is_using_stdio()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.is_using_stdio). Plugins may fall back to `stdio` mode if sockets are not working for some reason, so it is important to check this if you are going to be using `stdin` or `stdout`.
+在 `local-socket` 模式下启动时，`stdin` 和 `stdout` 也可以用来与用户的终端交互。这是 Rust 插件的默认设置，除非 `local-socket` 被禁用，可以通过调用 [`EngineInterface::is_using_stdio()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.is_using_stdio) 来检查。如果套接字由于某种原因无法工作，插件可能会回退到 `stdio` 模式，因此如果你要使用 `stdin` 或 `stdout`，检查这一点很重要。
 
-Environment variables set in the shell are set in the environment of a plugin when it is launched from a plugin call.
+shell 中设置的环境变量在从插件调用启动插件时设置在其环境中。
 
-Plugins are always started with the directory of their executable as their working directory. This is because they may be sent calls with different shell working directory contexts over time. [`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) can be used to determine the current working directory of the context of a call. For more information, see [this section](#current-directory).
+插件总是以其可执行文件的目录作为工作目录启动。这是因为它们可能随时间被发送具有不同 shell 工作目录上下文的调用。[`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) 可用于确定调用上下文的当前工作目录。有关更多信息，请参阅[此部分](#current-directory)。
 
-## Creating a plugin (in Rust)
+## 创建插件（在 Rust 中）
 
-In this section, we'll walk through creating a Nu plugin using Rust.
+在本节中，我们将使用 Rust 创建一个 Nu 插件。
 
-Let's create our project. For this example, we'll create a simple `len` command which will return the length of strings it's passed.
+让我们创建我们的项目。对于这个例子，我们将创建一个简单的 `len` 命令，它将返回传递给它的字符串的长度。
 
-First off, we'll create our plugin:
+首先，我们将创建我们的插件：
 
 ```sh
 cargo new nu_plugin_len
 cd nu_plugin_len
 ```
 
-Next, we'll add `nu` to our project's dependencies.
+接下来，我们将 `nu` 添加到我们项目的依赖项中。
 
 ```sh
 cargo add nu-plugin nu-protocol
 ```
 
-The `Cargo.toml` file should now look something like the following.
+`Cargo.toml` 文件现在应该看起来像下面这样。
 
 ```toml
 [package]
@@ -60,7 +60,7 @@ nu-plugin = "0.104.0"
 nu-protocol = "0.104.0"
 ```
 
-With this, we can open up `src/main.rs` and create our plugin.
+有了这个，我们可以打开 `src/main.rs` 并创建我们的插件。
 
 ```rust
 use nu_plugin::{EvaluatedCall, JsonSerializer, serve_plugin};
@@ -127,9 +127,9 @@ fn main() {
 }
 ```
 
-There are a few moving parts here, so let's break them down one by one.
+这里有一些移动的部分，所以让我们逐个分解。
 
-First off, let's look at main:
+首先，让我们看看 main：
 
 ```rust
 fn main() {
@@ -137,9 +137,9 @@ fn main() {
 }
 ```
 
-In `main()`, we just call a single function `serve_plugin`. This will do the work of calling into our plugin, handling the JSON serialization/deserialization, and sending values and errors back to Nu for us. To start it up, we pass it something that implements the `Plugin` trait and something that implements the `PluginEncoder` trait. We're given a choice of serialization formats that Nu supports. Ordinarily plugins written in Rust should use `MsgPackSerializer` as it is considerably faster, but here we select JSON to demonstrate how the communication protocol works further on in this tutorial.
+在 `main()` 中，我们只调用一个函数 `serve_plugin`。这将完成调用我们的插件、处理 JSON 序列化/反序列化以及向 Nu 发送值和错误的工作。要启动它，我们传递给它实现 `Plugin` trait 的东西和实现 `PluginEncoder` trait 的东西。我们被提供了 Nu 支持的序列化格式的选择。通常用 Rust 编写的插件应该使用 `MsgPackSerializer`，因为它相当快，但这里我们选择 JSON 来演示本教程后面通信协议的工作原理。
 
-Above `main()` is the implementation of the `SimplePluginCommand` trait for the `len` command that our plugin will expose, which is represented by the `Len` type. We use `SimplePluginCommand` rather than `PluginCommand` in order to simplify our implementation and avoid [handling streams](#using-streams-in-plugins). Let's take a look at how we implement this trait:
+在 `main()` 上面是我们的插件将暴露的 `len` 命令的 `SimplePluginCommand` trait 的实现，由 `Len` 类型表示。我们使用 `SimplePluginCommand` 而不是 `PluginCommand` 以简化我们的实现并避免[处理插件中的流](#using-streams-in-plugins)。让我们看看我们如何实现这个 trait：
 
 ```rust
 impl SimplePluginCommand for Len {
@@ -149,7 +149,7 @@ impl SimplePluginCommand for Len {
 }
 ```
 
-We first specify the plugin type our command expects. This allows us to receive a reference to it in `run()`, which we can use for shared state between commands.
+我们首先指定我们的命令期望的插件类型。这允许我们在 `run()` 中接收对它的引用，我们可以用它来在命令之间共享状态。
 
 ```rust
 impl SimplePluginCommand for Len {
@@ -173,11 +173,11 @@ impl SimplePluginCommand for Len {
 }
 ```
 
-There are a few methods required for this implementation. We first define the `name` of the command, which is what the user will type at the prompt or in their script to run the command. The `description` is also required, which is a short documentation string for users to know what the command does, and is displayed along with completions and in `help`. Finally, we define the `signature`, which specifies arguments and types for the command.
+这个实现需要一些方法。我们首先定义命令的 `name`，这是用户将在提示符或脚本中键入以运行命令的内容。`description` 也是必需的，这是用户知道命令做什么的简短文档字符串，并在完成和 `help` 中显示。最后，我们定义 `signature`，它指定命令的参数和类型。
 
-We tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
+我们告诉 Nu 名称是 "len"，给它一个基本的描述供 `help` 显示，并声明我们期望传递一个字符串并返回一个整数。
 
-Next, in the `run` implementation, we describe how to do work as values flow into this plugin. Here, we receive a `Value` type that we expect to be a string. We also return either `Value` or an error.
+接下来，在 `run` 实现中，我们描述当值流入这个插件时如何工作。在这里，我们接收一个我们期望是字符串的 `Value` 类型。我们还返回 `Value` 或错误。
 
 ```rust
 impl SimplePluginCommand for Len {
@@ -207,17 +207,17 @@ impl SimplePluginCommand for Len {
 }
 ```
 
-We use Rust's pattern matching to check the type of the `Value` coming in, and then operate with it if it's a string. The value also contains a `span` so it carries with it where the value came from. If the value isn't a string, we give an error and let the user know where the value came from that is causing the problem. On error, we use `call.head` as the span so that Nu can underline the offending command name in the error message.
+我们使用 Rust 的模式匹配来检查传入的 `Value` 的类型，然后如果它是字符串就操作它。值还包含一个 `span`，所以它携带着值来自哪里。如果值不是字符串，我们给出一个错误并让用户知道导致问题的值来自哪里。在错误时，我们使用 `call.head` 作为范围，以便 Nu 可以在错误消息中给冒犯的命令名称加下划线。
 
-Our `Len` command doesn't require any parameters, but if it did we'd get them from the `EvaluatedCall`.
+我们的 `Len` 命令不需要任何参数，但如果需要，我们会从 `EvaluatedCall` 获取它们。
 
 ```rust
 struct Len;
 ```
 
-`Len` is defined as a unit struct, with no fields, and this is the most common type definition for a command in a plugin. However, you may choose to keep state here if you want to - every call of `len` shares the same reference.
+`Len` 被定义为一个单元结构体，没有字段，这是插件中命令最常见的类型定义。但是，如果你想保持状态，你可以选择在这里保持状态 - 每个 `len` 的调用共享相同的引用。
 
-Above that, let's have a look at the definition of `LenPlugin`, which implements the `Plugin` trait:
+在上面，让我们看看 `LenPlugin` 的定义，它实现了 `Plugin` trait：
 
 ```rust
 struct LenPlugin;
@@ -235,13 +235,13 @@ impl Plugin for LenPlugin {
 }
 ```
 
-Again, we use a unit struct for `LenPlugin`, but this is the recommended place to put plugin state if needed. All commands also get a reference to the plugin type. This is what we eventually pass to `serve_plugin()` in `main()`.
+再次，我们为 `LenPlugin` 使用单元结构体，但这是推荐的地方来放置插件状态（如果需要）。所有命令也获得对插件类型的引用。这是我们最终在 `main()` 中传递给 `serve_plugin()` 的东西。
 
-`Plugin` has two required methods: `version()`, which reports the plugin's version back to Nu, and `commands()`, which initializes the plugin's commands. A boxed `dyn` reference is used so that we can keep all of the different command types in the single list. Dispatch by command name is automatically handled in `serve_plugin()` by looking at the name defined in the signature - in our case, that's `len`. A plugin can contain many commands, so if you end up adding more, just add them to the list returned by `commands()`.
+`Plugin` 有两个必需的方法：`version()`，它向 Nu 报告插件的版本，和 `commands()`，它初始化插件的命令。使用盒装的 `dyn` 引用，以便我们可以将所有不同的命令类型保存在单个列表中。通过查看签名中定义的名称 - 在我们的例子中是 `len`，在 `serve_plugin()` 中通过命令名称自动处理分派。一个插件可以包含许多命令，所以如果你最终添加更多，只需将它们添加到 `commands()` 返回的列表中。
 
-For the version, we just use the `CARGO_PKG_VERSION` environment variable available at compile-time in order to get our plugin's version from Cargo.
+对于版本，我们只使用编译时可用的 `CARGO_PKG_VERSION` 环境变量，以便从 Cargo 获取我们插件的版本。
 
-Lastly, let's look at the top of the file:
+最后，让我们看看文件的顶部：
 
 ```rust
 use nu_plugin::{serve_plugin, JsonSerializer, EvaluatedCall};
@@ -249,9 +249,9 @@ use nu_plugin::{Plugin, PluginCommand, SimplePluginCommand, EngineInterface};
 use nu_protocol::{LabeledError, Signature, Type, Value};
 ```
 
-Here we import everything we need -- types and functions -- to be able to create our plugin.
+这里我们导入我们需要的一切 - 类型和函数 - 以便能够创建我们的插件。
 
-Once we have finished our plugin, to use it all we need to do is install it.
+一旦我们完成了插件，要使用它，我们需要做的就是安装它。
 
 ```nu
 > cargo install --path . --locked
@@ -259,13 +259,13 @@ Once we have finished our plugin, to use it all we need to do is install it.
 > plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
 ```
 
-If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load your plugin, or call `plugin use` to load it immediately:
+如果你在安装插件的过程中已经在运行 `nu`，确保你重启 `nu` 以便它可以加载你的插件，或者调用 `plugin use` 立即加载它：
 
 ```nu
 > plugin use len # the name of the plugin (without `nu_plugin_`)
 ```
 
-Once `nu` starts up, it will discover the plugin and add its commands to the scope.
+一旦 `nu` 启动，它将发现插件并将其命令添加到范围中。
 
 ```nu
 nu
@@ -284,11 +284,11 @@ help len
 # =>   <string> | len -> <int>
 ```
 
-Run `plugin list` to see all plugins currently registered and available to this Nu session, including whether or not they are running, and their process ID if so.
+运行 `plugin list` 查看当前注册并可用于此 Nu 会话的所有插件，包括它们是否正在运行，以及如果是的话它们的进程 ID。
 
-## Using streams in plugins
+## 在插件中使用流
 
-The `SimplePluginCommand` trait that we just implemented for our plugin does not support streaming input or output. If we want to extend our plugin to support determining the lengths of lists, it would be helpful to not have to consume an entire list that is a stream. We can do this by implementing `PluginCommand` instead.
+我们刚刚为插件实现的 `SimplePluginCommand` trait 不支持流输入或输出。如果我们想扩展我们的插件以支持确定列表的长度，如果不必消耗整个列表（如果是流）将会很有帮助。我们可以通过实现 `PluginCommand` 而不是 `SimplePluginCommand` 来做到这一点。
 
 ```rust
 // add these imports:
@@ -347,15 +347,14 @@ impl PluginCommand for Len {
 }
 ```
 
-With this change, we can pipe a list (even a long one) to the command to get its length:
+有了这个改变，我们可以管道一个列表（甚至是一个长列表）到命令来获取它的长度：
 
 ```nu
 $ seq 1 10000 | len
 10000
 ```
 
-Since `run()` also returns `PipelineData`, it is also possible for the plugin to produce a stream, or even to transform a stream. For example, if we wanted our plugin to multiply every integer by
-two:
+由于 `run()` 也返回 `PipelineData`，插件也可以产生流，甚至转换流。例如，如果我们希望我们的插件将每个整数乘以二：
 
 ```rust
 fn run(
@@ -387,7 +386,7 @@ fn run(
 }
 ```
 
-Since the input and output are both streaming, this will work even on an infinite stream:
+由于输入和输出都是流，这甚至可以在无限流上工作：
 
 ```nu
 $ generate { |n| {out: $n, next: ($n + 1)} } 0 | plugin
@@ -399,9 +398,9 @@ $ generate { |n| {out: $n, next: ($n + 1)} } 0 | plugin
 # ...
 ```
 
-## Plugin configuration
+## 插件配置
 
-It is possible for a user to provide configuration to a plugin. For a plugin named `motd`:
+用户可以向插件提供配置。对于名为 `motd` 的插件：
 
 ```nu
 $env.config.plugins = {
@@ -411,7 +410,7 @@ $env.config.plugins = {
 }
 ```
 
-The plugin configuration can be retrieved with [`EngineInterface::get_plugin_config`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_plugin_config).
+插件配置可以通过 [`EngineInterface::get_plugin_config`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_plugin_config) 检索。
 
 ```rust
 use nu_plugin::*;
@@ -474,7 +473,7 @@ fn main() {
 }
 ```
 
-Example:
+示例：
 
 ```nu
 > $env.config.plugins.motd = {message: "Nushell rocks!"}
@@ -482,11 +481,11 @@ Example:
 Nushell rocks!
 ```
 
-For a full example, see [`nu_plugin_example`](https://github.com/nushell/plugin-examples/tree/main/rust/nu_plugin_example).
+有关完整示例，请参阅 [`nu_plugin_example`](https://github.com/nushell/plugin-examples/tree/main/rust/nu_plugin_example)。
 
-## Evaluating closures
+## 评估闭包
 
-Plugins can accept and evaluate closures using [`EngineInterface::eval_closure`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.eval_closure) or [`eval_closure_with_stream`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.eval_closure_with_stream).
+插件可以使用 [`EngineInterface::eval_closure`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.eval_closure) 或 [`eval_closure_with_stream`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.eval_closure_with_stream) 接受和评估闭包。
 
 ```rust
 use nu_plugin::*;
@@ -551,7 +550,7 @@ fn main() {
 }
 ```
 
-`my-each` works just like `each`:
+`my-each` 的工作方式就像 `each`：
 
 ```nu
 > [1 2 3] | my-each { |i| $i * 2 }
@@ -562,13 +561,13 @@ fn main() {
 ╰───┴───╯
 ```
 
-At present, the closures can only refer to values that would be valid to send to the plugin. This means that custom values from other plugins are not allowed. This is likely to be fixed in a future release.
+目前，闭包只能引用可以发送到插件的有效值。这意味着不允许来自其他插件的自定义值。这很可能在未来的版本中修复。
 
-## Custom values
+## 自定义值
 
-Plugins can create custom values that embed plugin-specific data within the engine. In Rust, this data is automatically serialized using [bincode](https://crates.io/crates/bincode), so all you need to do is implement the [`CustomValue`](https://docs.rs/nu-protocol/latest/nu_protocol/trait.CustomValue.html) trait on a type that has `Serialize` and `Deserialize` implementations compatible with bincode. This includes any attributes that would cause a dependency on field names or field presence, such as `#[serde(skip_serializing_if = "...")]` or `#[serde(untagged)]`. We use the [typetag](https://crates.io/crates/typetag) crate to reconstruct the correct custom value type.
+插件可以创建自定义值，在引擎中嵌入插件特定的数据。在 Rust 中，这些数据使用 [bincode](https://crates.io/crates/bincode) 自动序列化，所以你只需要在具有 `Serialize` 和 `Deserialize` 实现的类型上实现 [`CustomValue`](https://docs.rs/nu-protocol/latest/nu_protocol/trait.CustomValue.html) trait，这些实现与 bincode 兼容。这包括任何会导致依赖字段名称或字段存在的属性，例如 `#[serde(skip_serializing_if = "...")]` 或 `#[serde(untagged)]`。我们使用 [typetag](https://crates.io/crates/typetag) crate 来重建正确的自定义值类型。
 
-To embed the custom value in a `Value`, use [`Value::custom()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom_value). A minimal example:
+要将自定义值嵌入到 `Value` 中，使用 [`Value::custom()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom_value)。一个最小示例：
 
 ```rust
 use nu_protocol::{CustomValue, ShellError, Span, Value, record};
@@ -630,11 +629,11 @@ Value::custom(Box::new(Animal::Dog {
 }), call.head)
 ```
 
-Any of the methods in the trait can be implemented on plugin custom values, and functionality such as supporting cell paths (e.g. `$my_custom_value.field`), operators (e.g. `++`), and comparisons (e.g. for `sort`) are all supported.
+trait 中的任何方法都可以在插件自定义值上实现，支持单元格路径（例如 `$my_custom_value.field`）、操作符（例如 `++`）和比较（例如用于 `sort`）等功能。
 
-### Drop notification
+### 丢弃通知
 
-It is possible to ask Nushell to let you know when all copies of a custom value passed to it have gone out of scope and will no longer be used:
+可以要求 Nushell 让你知道传递给它的自定义值的所有副本都已超出范围并且将不再使用：
 
 ```rust
 impl CustomValue for Animal {
@@ -645,7 +644,7 @@ impl CustomValue for Animal {
 }
 ```
 
-The notification is sent to the `Plugin` via [`custom_value_dropped()`](https://docs.rs/nu-plugin/latest/nu_plugin/trait.Plugin.html#method.custom_value_dropped):
+通知通过 [`custom_value_dropped()`](https://docs.rs/nu-plugin/latest/nu_plugin/trait.Plugin.html#method.custom_value_dropped) 发送到 `Plugin`：
 
 ```rust
 impl Plugin for AnimalPlugin {
@@ -662,13 +661,13 @@ impl Plugin for AnimalPlugin {
 }
 ```
 
-Every custom value sent from the plugin to the engine counts as a new unique value for the purpose of drop checking. If you accept a custom value as an argument and then return it after, you will likely receive two drop notifications, even though the value data is identical. This has implications for trying to use custom values to reference count handles.
+从插件发送到引擎的每个自定义值都计为用于丢弃检查的新唯一值。如果你接受一个自定义值作为参数然后返回它，你可能会收到两个丢弃通知，即使值数据是相同的。这对于尝试使用自定义值来引用计数句柄有影响。
 
-For a full example, see [`DropCheck`](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_custom_values/src/drop_check.rs) in the `nu_plugin_custom_values` plugin.
+有关完整示例，请参阅 `nu_plugin_custom_values` 插件中的 [`DropCheck`](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_custom_values/src/drop_check.rs)。
 
-## Manipulating the environment
+## 操作环境
 
-Environment variables can be get or set through the [`EngineInterface`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html). For example:
+可以通过 [`EngineInterface`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html) 获取或设置环境变量。例如：
 
 ```rust
 // Get the PATH environment variable
@@ -679,11 +678,11 @@ let envs: HashMap<String, Value> = engine.get_env_vars()?;
 engine.add_env_var("FOO", Value::string("bar", call.head))?;
 ```
 
-Environment variables set during a plugin call are available in the caller's scope after the plugin call returns, and are also visible to other engine calls (such as closure evaluations) during the plugin call. Setting an environment variable after the plugin call has returned a response - for example while a stream is being produced as the result of a plugin call - has no impact on the environment of the caller's scope.
+在插件调用期间设置的环境变量在插件调用返回后可在调用者范围内使用，并且在插件调用期间对其他引擎调用（例如闭包评估）也是可见的。在插件调用返回响应后设置环境变量 - 例如，在作为插件调用结果产生的流正在发送数据时 - 对调用者范围的环境没有影响。
 
-### Current directory
+### 当前目录
 
-As noted earlier in the [Launch environment](#launch-environment) section, plugins are always started in the directory of their executable. This is intentionally done to try to ensure the current directory of the shell context is handled correctly. For plugins that work with filesystem paths, relative paths should always be joined against the path returned by [`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir):
+如[启动环境](#launch-environment)部分前面所述，插件总是以其可执行文件的目录作为工作目录启动。这是有意为之，试图确保 shell 上下文的当前目录得到正确处理。对于处理文件系统路径的插件，相对路径应始终与 [`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) 返回的路径连接：
 
 ```rust
 use std::path::Path;
@@ -701,35 +700,35 @@ if absolute_path.exists() {
 }
 ```
 
-Note that it is not safe (at least in Rust) to change the plugin's process working directory (e.g. with `std::env::set_current_dir()`) to the current directory from the call context, as multiple threads could be processing calls in different working directories simultaneously.
+请注意，将插件进程的工作目录（例如使用 `std::env::set_current_dir()`）更改为调用上下文的当前目录是不安全的（至少在 Rust 中），因为多个线程可能同时在不同的工作目录中处理调用。
 
-## Plugin garbage collection
+## 插件垃圾收集
 
-Nu comes with a [plugin garbage collector](/book/plugins.html#plugin-garbage-collector), which automatically stops plugins that are no longer in active use according to the user's preferences. Plugins are considered inactive for garbage collection if all of the following are true:
+Nu 附带一个[插件垃圾收集器](/zh-CN/book/plugins.html#plugin-garbage-collector)，它会根据用户的偏好自动停止不再活跃使用的插件。如果满足以下所有条件，则认为插件不活跃进行垃圾收集：
 
-1. They don't have any pending plugin calls that have not sent a response yet
-2. They are not currently writing any streams as part of a response
-3. They have not [explicitly opted out](#disabling-garbage-collection) of garbage collection
+1. 它们没有任何尚未发送响应的待处理插件调用
+2. 它们当前没有作为响应的一部分写入任何流
+3. 它们没有[明确选择退出](#disabling-garbage-collection)垃圾收集
 
-Note that the following will **not** cause a plugin to be considered active:
+请注意，以下情况**不会**导致插件被视为活跃：
 
-- Plugin custom values being held by the Nu engine
-- Reading streams produced by the engine outside of an active plugin call / response stream
-- Doing work in the background on another thread
-- Anything else not mentioned above
+- Nu 引擎持有的插件自定义值
+- 在活跃插件调用/响应流之外读取引擎产生的流
+- 在另一个线程上在后台进行工作
+- 上面未提及的任何其他内容
 
-When plugins are stopped by Nu, they are not killed. Instead, Nu waits for anything actively using the plugin to finish, then sends [`Goodbye`](plugin_protocol_reference.html#goodbye) and may close stdin, at which point the plugin should exit gracefully.
+当插件被 Nu 停止时，它们不会被杀死。相反，Nu 等待任何积极使用插件的东西完成，然后发送 [`Goodbye`](plugin_protocol_reference.html#goodbye) 并可能关闭 stdin，此时插件应该优雅退出。
 
-### Disabling garbage collection
+### 禁用垃圾收集
 
-In order to support use cases outside of those that are already guaranteed to keep the plugin from being garbage collected, an option is provided to disable and re-enable garbage collection as desired by the plugin. From Rust code, this can be set by calling [`EngineInterface::set_gc_disabled`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.set_gc_disabled):
+为了支持那些已经保证防止插件被垃圾收集的用例之外的使用案例，提供了一个选项来根据需要禁用和重新启用垃圾收集。从 Rust 代码中，可以通过调用 [`EngineInterface::set_gc_disabled`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.set_gc_disabled) 来设置：
 
 ```rust
 engine.set_gc_disabled(true); // Turn off garbage collection
 engine.set_gc_disabled(false); // Turn it back on
 ```
 
-This option is global to the plugin, and will last beyond the scope of a plugin call. In other languages, the [`GcDisabled` option](plugin_protocol_reference.html#gcdisabled-option) can be sent at any time:
+此选项对插件是全局的，并且将持续超出插件调用的范围。在其他语言中，可以随时发送 [`GcDisabled` 选项](plugin_protocol_reference.html#gcdisabled-option)：
 
 ```json
 {
@@ -739,15 +738,15 @@ This option is global to the plugin, and will last beyond the scope of a plugin 
 }
 ```
 
-Note that opting out of garbage collection does not stop users from explicitly stopping your plugin with the `plugin stop` command. We recommend against disabling garbage collection unless your plugin has a good reason to stay running - for example, to keep data in memory, to do background processing, or to keep shared resources like sockets or files open. For custom values that contain all of the data that they need to be interpreted properly, the plugin can always be re-launched as necessary.
+请注意，选择退出垃圾收集并不会阻止用户使用 `plugin stop` 命令明确停止你的插件。我们建议不要禁用垃圾收集，除非你的插件有充分的理由保持运行 - 例如，将数据保存在内存中，进行后台处理，或保持共享资源（如套接字或文件）打开。对于包含解释它们所需的所有数据的自定义值，插件总是可以根据需要重新启动。
 
-If your plugin takes a particularly long time to launch, you can recommend to your users that they change their [garbage collection settings](/book/plugins.html#plugin-garbage-collector) to either increase the `stop_after` duration, or disable garbage collection entirely for your plugin.
+如果你的插件启动时间特别长，你可以向用户建议更改他们的[垃圾收集设置](/zh-CN/book/plugins.html#plugin-garbage-collector)，要么增加 `stop_after` 持续时间，要么完全为你的插件禁用垃圾收集。
 
-## Making calls to other Nushell commands
+## 调用其他 Nushell 命令
 
-Plugins can look up and make calls to other Nushell commands in the scope of the original plugin call. This includes internal commands, custom commands written in Nushell, as well as commands provided by plugins. The relevant calls are [`FindDecl`](plugin_protocol_reference.html#finddecl-engine-call) and [`CallDecl`](plugin_protocol_reference.html#calldecl-engine-call).
+插件可以在原始插件调用的范围内查找和调用其他 Nushell 命令。这包括内部命令、用 Nushell 编写的自定义命令，以及插件提供的命令。相关的调用是 [`FindDecl`](plugin_protocol_reference.html#finddecl-engine-call) 和 [`CallDecl`](plugin_protocol_reference.html#calldecl-engine-call)。
 
-From Rust, use the [`.find_decl()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.find_decl) and [`.call_decl()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.call_decl) methods on `EngineInterface`. Provide arguments by adding them to an [`EvaluatedCall`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EvaluatedCall.html) via the builder or setter methods. For example:
+从 Rust 中，使用 `EngineInterface` 上的 [`.find_decl()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.find_decl) 和 [`.call_decl()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.call_decl) 方法。通过构建器或 setter 方法将它们添加到 [`EvaluatedCall`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EvaluatedCall.html) 中来提供参数。例如：
 
 ```rust
 // Find the two commands we need. We strongly recommend using a descriptive error here, and
@@ -780,13 +779,13 @@ eprintln!("IR of `std assert`:");
 eprintln!("{ir_of_assert}");
 ```
 
-Keep in mind that the engine will not validate that the parameters of a call made by the plugin actually matches the signature of the command being called, so care must be taken when designing the plugin to try to match the documented signature. There is not currently a way to look up the signature of a command before running it, but we may add that in the future to make it easier to ensure a plugin call behaves as expected. As performance is a priority for plugins, we do not intend to validate call arguments from plugins at this time.
+请记住，引擎不会验证插件进行的调用的参数是否实际匹配被调用命令的签名，因此在设计插件以尝试匹配记录的签名时必须小心。目前没有方法在运行命令之前查找命令的签名，但我们可能在将来添加它，以使确保插件调用按预期行为更容易。由于性能是插件的优先事项，我们目前不打算验证来自插件的调用参数。
 
-There is some overhead when making calls from plugins back to the engine, and it may be difficult to construct some of the arguments for commands - for example, it's not possible to create new closures from within plugins. We recommend trying to implement functionality within the plugin if possible, and falling back to command calls only when necessary. It is virtually guaranteed that a script that chains multiple commands together will be more performant than trying to put pipelines together from within a plugin, so you may want to provide a companion script with your plugins, or expect your users to compose pipelines made up of simple commands [rather than providing lots of different options](https://www.nushell.sh/contributor-book/philosophy_0_80.html#command-philosophy).
+从插件调用回引擎有一些开销，并且可能难以构造某些命令的参数 - 例如，不可能从插件内创建新的闭包。我们建议在可能的情况下尝试在插件内实现功能，仅在必要时回退到命令调用。几乎可以肯定的是，将多个命令链接在一起的脚本将比尝试从插件内组装管道更高效，因此你可能希望为你的插件提供配套脚本，或者期望你的用户组成由简单命令组成的管道[而不是提供许多不同的选项](https://www.nushell.sh/contributor-book/philosophy_0_80.html#command-philosophy)。
 
-## Testing plugins
+## 测试插件
 
-Rust-based plugins can use the [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate to write tests. Examples can be tested automatically:
+基于 Rust 的插件可以使用 [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate 来编写测试。示例可以自动测试：
 
 ```rust
 use nu_protocol::{Example, ShellError, Value};
@@ -827,7 +826,7 @@ fn test_examples() -> Result<(), ShellError> {
 }
 ```
 
-Manual tests, including with input, can also be created, via `.eval()` and `.eval_with()`:
+手动测试，包括有输入的测试，也可以通过 `.eval()` 和 `.eval_with()` 创建：
 
 ```rust
 #[test]
@@ -845,7 +844,7 @@ fn test_fib_on_input() -> Result<(), ShellError> {
 }
 ```
 
-The Nu context within tests is very basic and mostly only contains the plugin commands themselves, as well as all of the core language keywords from [`nu-cmd-lang`](https://docs.rs/nu-cmd-lang/). If you need to test your plugin with other commands, you can include those crates and then use `.add_decl()` to include them in the context:
+测试中的 Nu 上下文非常基础，主要只包含插件命令本身，以及来自 [`nu-cmd-lang`](https://docs.rs/nu-cmd-lang/) 的所有核心语言关键字。如果你需要测试你的插件与其他命令，你可以包含那些 crate，然后使用 `.add_decl()` 将它们包含在上下文中：
 
 ```rust
 #[test]
@@ -861,28 +860,28 @@ fn test_fib_with_sequence() -> Result<(), ShellError> {
 }
 ```
 
-Keep in mind that this will increase the compilation time of your tests, so it's generally preferred to do your other test logic within Rust if you can.
+请记住，这将增加你的测试的编译时间，所以通常 preferred 在可能的情况下在 Rust 内做你的其他测试逻辑。
 
-Tests on custom values are fully supported as well, but they will be serialized and deserialized to ensure that they are able to pass through the serialization that happens to custom values between the plugin and the engine safely.
+对自定义值的测试完全支持，但它们将被序列化和反序列化，以确保它们能够安全地通过插件和引擎之间发生的自定义值的序列化。
 
-## Under the hood
+## 底层细节
 
-Writing Nu plugins in Rust is convenient because we can make use of the `nu-plugin` and `nu-protocol` crates, which are part of Nu itself and define the interface protocol. To write a plugin in another language you will need to implement that protocol yourself. If you're goal is to write Nu plugins in Rust you can stop here. If you'd like to explore the low level plugin interface or write plugins in other languages such as Python, keep reading.
+用 Rust 编写 Nu 插件很方便，因为我们可以利用 `nu-plugin` 和 `nu-protocol` crate，它们是 Nu 本身的一部分并定义接口协议。要用其他语言编写插件，你需要自己实现该协议。如果你的目标是用 Rust 编写 Nu 插件，你可以在这里停止。如果你想探索低级插件接口或用其他语言（如 Python）编写插件，请继续阅读。
 
-Ordinarily, Nu will execute the plugin and knows what data to pass to it and how to interpret the responses. Here we'll be doing it manually. Note that we'll be playing with our plugin using a conventional shell (like bash or zsh) as in Nu all of this happens under the hood.
+通常，Nu 将执行插件并知道要向其传递什么数据以及如何解释响应。在这里，我们将手动进行。请注意，我们将使用传统 shell（如 bash 或 zsh）来玩我们的插件，因为在 Nu 中所有这些都发生在底层。
 
-We recommend keeping the [plugin protocol](plugin_protocol_reference.md) documentation handy as a reference while reading this section.
+我们建议在阅读本节时随时备好[插件协议](plugin_protocol_reference.md)文档作为参考。
 
-Assuming you've built the Rust plugin described above let's now run it with `--stdio` so that it communicates with us there:
+假设你已经构建了上面描述的 Rust 插件，现在让我们用 `--stdio` 运行它，以便它与我们在那里通信：
 
 ```sh
 $ ./target/release/nu_plugin_len --stdio
 json
 ```
 
-The application on start up prints the keyword `json` and blocks for input on STDIN. This tells Nu that the plugin wants to communicate via the JSON protocol rather than MsgPack. In the JSON protocol, the plugin will listen for each JSON object written on stdin and respond accordingly. Newlines are not required, but it is likely that the plugin will not see your input before you hit `enter`, as terminals usually line buffer by default.
+应用程序在启动时打印关键字 `json` 并阻塞在 STDIN 上等待输入。这告诉 Nu 插件希望通过 JSON 协议而不是 MsgPack 进行通信。在 JSON 协议中，插件将监听在 stdin 上写入的每个 JSON 对象并相应响应。不需要换行符，但插件可能在你点击 `enter` 之前看不到你的输入，因为终端通常默认行缓冲。
 
-We can simulate an initial plugin registration by sending a [`Hello`](plugin_protocol_reference.md#hello) message first, in order to let the plugin know that we are compatible with it. It is important to use the version of `nu-plugin` that the plugin was built with here for the `"version"` as this is a critical part of how Nu ensures that plugins run with a compatible engine.
+我们可以通过首先发送 [`Hello`](plugin_protocol_reference.md#hello) 消息来模拟初始插件注册，以便让插件知道我们与它兼容。在这里为 `"version"` 使用插件构建时使用的 `nu-plugin` 版本很重要，因为这是 Nu 如何确保插件与兼容引擎运行的关键部分。
 
 ```json
 {
@@ -894,7 +893,7 @@ We can simulate an initial plugin registration by sending a [`Hello`](plugin_pro
 }
 ```
 
-After that, we send a [`Signature`](plugin_protocol_reference.md#signature-plugin-call) call to the plugin with ID `0`:
+之后，我们向插件发送一个带有 ID `0` 的 [`Signature`](plugin_protocol_reference.md#signature-plugin-call) 调用：
 
 ```json
 {
@@ -902,7 +901,7 @@ After that, we send a [`Signature`](plugin_protocol_reference.md#signature-plugi
 }
 ```
 
-Putting that together, it looks like this:
+把它们放在一起，看起来像这样：
 
 ```sh
 $ ./target/release/nu_plugin_len --stdio
@@ -912,7 +911,7 @@ json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
 {"CallResponse":[0, {"Signature":[{"sig":{"name":"len","description":"calculates the length of its input","extra_description":"","search_terms":[],"required_positional":[],"optional_positional":[],"rest_positional":null,"vectorizes_over_list":false,"named":[{"long":"help","short":"h","arg":null,"required":false,"desc":"Display the help message for this command","var_id":null,"default_value":null}],"input_type":"String","output_type":"Int","input_output_types":[],"allow_variants_without_examples":false,"is_filter":false,"creates_scope":false,"allows_unknown_args":false,"category":"Default"},"examples":[]}]}]}
 ```
 
-The plugin prints its signature serialized as JSON. We'll reformat for readability.
+插件将其签名序列化为 JSON 打印。我们将重新格式化以便于阅读。
 
 ```json
 {
@@ -953,9 +952,9 @@ The plugin prints its signature serialized as JSON. We'll reformat for readabili
 }
 ```
 
-This signature tells Nu everything it needs to pass data in and out of the plugin as well as format the help message and support type aware tab completion. A full description of these fields is beyond the scope of this tutorial, but the response is simply a serialized form of the [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) struct in the `nu-plugin` crate.
+这个签名告诉 Nu 它需要知道的一切，以便将数据传入和传出插件，以及格式化帮助消息和支持类型感知的选项卡完成。这些字段的完整描述超出了本教程的范围，但响应只是 `nu-plugin` crate 中 [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) 结构体的序列化形式。
 
-Now let's try simulating an invocation. Above we tested the plugin within Nu by executing the command `"hello" | len` and we got the response `5`. Of course this hides all of the typed data handling that makes Nu so powerful.
+现在让我们尝试模拟一个调用。上面我们在 Nu 中通过执行命令 `"hello" | len` 测试了插件，并得到了响应 `5`。当然，这隐藏了使 Nu 如此强大的类型化数据处理。
 
 ```nu
 $ echo '{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}{"Call":[0,{"Run":{"name":"len","call":{"head":{"start":100953,"end":100957},"positional":[],"named":[]},"input":{"Value":{"String":{"val":"hello","span":{"start":100953,"end":100957}}}}}}]}' | target/release/nu_plugin_len --stdio
@@ -963,7 +962,7 @@ json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
 {"PipelineData":{"Value":{"Int":{"val":5,"span":{"start":100953,"end":100957}}}}}
 ```
 
-We invoked our plugin and passed a [`Run`](plugin_protocol_reference.md#run-plugin-call) plugin call that looks like the following on stdin:
+我们调用了我们的插件，并在 stdin 上传递了一个 [`Run`](plugin_protocol_reference.md#run-plugin-call) 插件调用，看起来像这样：
 
 ```json
 {
@@ -992,7 +991,7 @@ We invoked our plugin and passed a [`Run`](plugin_protocol_reference.md#run-plug
 }
 ```
 
-That is, we passed len the string "hello" and it replied with the following [`PipelineData`](plugin_protocol_reference.md#pipelinedata-plugin-call-response) response:
+也就是说，我们向 len 传递了字符串 "hello"，它回复了以下 [`PipelineData`](plugin_protocol_reference.md#pipelinedata-plugin-call-response) 响应：
 
 ```json
 {
@@ -1010,15 +1009,15 @@ That is, we passed len the string "hello" and it replied with the following [`Pi
 }
 ```
 
-with the integer 5 along with preserving source span information that may be useful for error messages later.
+带有整数 5 以及保留源范围信息，这些信息可能对以后的错误消息有用。
 
-When implementing a plugin in a non-Rust language like Python, you must manage this input and output serialization. Please refer to the [protocol documentation](plugin_protocol_reference.md) for more specific details on the protocol itself.
+在用像 Python 这样的非 Rust 语言实现插件时，你必须管理这种输入和输出序列化。请参阅[协议文档](plugin_protocol_reference.md)以获取有关协议本身的更具体细节。
 
-## Creating a plugin (in Python)
+## 创建插件（在 Python 中）
 
-Using our knowledge from the previous section, we can also create plugins in other programming languages, although you will not benefit from the plugin interface libraries that ship with Nu. In this section, we'll write the same `len` plugin in Python.
+利用我们从上一节学到的知识，我们也可以用其他编程语言创建插件，尽管你不会受益于随 Nu 一起提供的插件接口库。在本节中，我们将用 Python 编写相同的 `len` 插件。
 
-First, let's look at the full plugin:
+首先，让我们看看完整的插件：
 
 ```python
 #!/usr/bin/env python3
@@ -1139,9 +1138,9 @@ if __name__ == "__main__":
             sys.exit(1)
 ```
 
-Note: there are ways to make the python more robust, but here we've left it simple to help with explanations.
+注意：有方法可以使 python 更健壮，但这里我们保持简单以帮助解释。
 
-Let's look at how this plugin works, from the bottom to the top:
+让我们看看这个插件如何工作，从下到上：
 
 ```python
 if __name__ == "__main__":
@@ -1172,7 +1171,7 @@ if __name__ == "__main__":
             sys.exit(1)
 ```
 
-For this plugin, we have to serve two basic roles: responding to a request for the plugin configuration, and doing the actual filtering. This code acts as our main routine, responding to a message from Nu by doing some work and then returning a response: either returning with the plugin signature or handling input.
+对于这个插件，我们必须服务两个基本角色：响应插件配置的请求，以及实际进行过滤。这段代码充当我们的主例程，通过做一些工作然后返回响应来响应来自 Nu 的消息：要么返回插件签名，要么处理输入。
 
 ```python
 def send_encoder():
@@ -1194,13 +1193,13 @@ def send_hello():
     sys.stdout.flush()
 ```
 
-The first thing our plugin must do is write out the desired serialization format, in this case JSON. We do that with the `send_encoder()` method. Then we use `send_hello()` to send our [`Hello`](plugin_protocol_reference.md#hello) message, informing Nu of our compatibility with it, and which is required before we can send any other messages. Then we read the JSON serialized messages that Nu sends us. Since Nu always sends each message on its own line, we simply read each line of input and parse it separately.
+我们的插件必须做的第一件事是写出所需的序列化格式，在这种情况下是 JSON。我们用 `send_encoder()` 方法做到这一点。然后我们使用 `send_hello()` 发送我们的 [`Hello`](plugin_protocol_reference.md#hello) 消息，通知 Nu 我们与它的兼容性，这是在我们发送任何其他消息之前必需的。然后我们读取 Nu 发送给我们的 JSON 序列化消息。由于 Nu 总是将每条消息放在自己的行上，我们只需读取输入的每一行并分别解析它。
 
-Each [`Call`](plugin_protocol_reference.md#call) comes with an ID number, which we must keep for the [`CallResponse`](plugin_protocol_reference.md#callresponse) (including errors).
+每个 [`Call`](plugin_protocol_reference.md#call) 都带有一个 ID 号，我们必须为 [`CallResponse`](plugin_protocol_reference.md#callresponse)（包括错误）保留。
 
-When we're sent a `Signature` request, we respond with the signature of this plugin, which is a bit of information to tell Nu how the command should be called.
+当我们发送 `Signature` 请求时，我们使用此插件的签名进行响应，这是一些信息，告诉 Nu 应如何调用命令。
 
-When sent a `Run` request, we parse the supplied JSON and respond to the request
+当我们发送 `Run` 请求时，我们解析提供的 JSON 并响应请求
 
 ```python
 def handle_call(id, call_info):
@@ -1225,11 +1224,11 @@ def handle_call(id, call_info):
         )
 ```
 
-The work of processing input is done by this `handle_call` function. Here, we assume we're given strings (we could make this more robust in the future and return meaningful errors otherwise), and then we extract the string we're given. From there, we measure the length of the string and create a new `Int` value for that length.
+处理输入的工作由这个 `handle_call` 函数完成。在这里，我们假设我们被给予字符串（我们可以在将来使这个更健壮并返回有意义的错误），然后我们提取给我们的字符串。从那里，我们测量字符串的长度并为此长度创建一个新的 `Int` 值。
 
-Finally, we use the same item we were given and replace the payload with this new Int. We do this to reuse the `span` that was passed to us with the string, though this is an optional step. We could have instead opted to create new metadata and passed that out instead.
+最后，我们使用给我们的相同项目并用这个新的 Int 替换有效负载。我们这样做是为了重用传递给我们的字符串的 `span`，尽管这是一个可选步骤。我们可以选择创建新的元数据并传递出去。
 
-We have a couple of helpers:
+我们有一些辅助函数：
 
 ```python
 def send_response(id, response):
@@ -1240,7 +1239,7 @@ def send_response(id, response):
     sys.stdout.flush()
 ```
 
-`send_response()` formats and writes a [`CallResponse`](plugin_protocol_reference.md#callresponse) with the given id and body.
+`send_response()` 格式化并写入带有给定 id 和主体的 [`CallResponse`](plugin_protocol_reference.md#callresponse)。
 
 ```python
 def send_error(id, error_msg, span):
@@ -1254,19 +1253,19 @@ def send_error(id, error_msg, span):
     send_response(id, error)
 ```
 
-`send_error()` formats and sends an error response for us.
+`send_error()` 格式化并发送错误响应给我们。
 
 ```python
 import json
 import sys
 ```
 
-All of this takes a few imports to accomplish, so we make sure to include them.
+所有这些都需要一些导入才能完成，所以确保包含它们。
 
 ```python
 #!/usr/local/bin/python3
 ```
 
-Finally, to make it easier to run our Python, we make this file executable (using something like `chmod +x nu_plugin_len.py`) and add the path to our python at the top. This trick works for Unix-based platforms, for Windows we would need to create an .exe or .bat file that would invoke the python code for us.
+最后，为了使运行我们的 Python 更容易，我们使这个文件可执行（使用类似 `chmod +x nu_plugin_len.py` 的东西）并在顶部添加我们的 python 路径。这个技巧适用于基于 Unix 的平台，对于 Windows 我们需要创建一个 .exe 或 .bat 文件来为我们调用 python 代码。
 
-Please see the [example Python plugin](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_python) for a comprehensive example on how to implement a Nushell plugin in another language, including Python.
+请参阅[示例 Python 插件](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_python)以获取关于如何用另一种语言（包括 Python）实现 Nushell 插件的全面示例。

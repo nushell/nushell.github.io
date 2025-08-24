@@ -100,7 +100,7 @@ try {
 
 ### `$env.NU_LOG_LEVEL`
 
-[标准库](/book/standard_library.md)在 `std/log` 中提供日志记录功能。`NU_LOG_LEVEL` 环境变量用于定义自定义命令、模块和脚本使用的日志级别。
+[标准库](/zh-CN/book/standard_library.md)在 `std/log` 中提供日志记录功能。`NU_LOG_LEVEL` 环境变量用于定义自定义命令、模块和脚本使用的日志级别。
 
 ```nu
 nu -c '1 | print; use std/log; log debug 1111; 9 | print'

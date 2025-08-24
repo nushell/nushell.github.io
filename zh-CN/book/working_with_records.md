@@ -96,7 +96,7 @@ $my_record | update age { $in + 1 }
   # =>   ╰───────┴───────╯
   ```
 
-- 使用[展开运算符](/book/operators#spread-operator)(`...`)在新记录中展开原记录：
+- 使用[展开运算符](/zh-CN/book/operators#spread-operator)(`...`)在新记录中展开原记录：
 
   ```nu
   let first_record = { name: "Sam", rank: 10 }
@@ -128,7 +128,7 @@ $my_record | update age { $in + 1 }
 
 ## 访问记录值
 
-有关如何访问记录值(和其他结构化数据)的详细说明，请参阅[导航和访问结构化数据](/book/navigating_structured_data.md)。
+有关如何访问记录值(和其他结构化数据)的详细说明，请参阅[导航和访问结构化数据](/zh-CN/book/navigating_structured_data.md)。
 
 ## 其他记录命令
 

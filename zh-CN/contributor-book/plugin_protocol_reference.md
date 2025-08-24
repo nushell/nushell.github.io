@@ -1,55 +1,55 @@
 ---
-title: Plugin protocol reference
+title: 插件协议参考
 ---
 
-# Plugin protocol reference
+# 插件协议参考
 
-## How Nu runs plugins
+## Nu 如何运行插件
 
-Nu plugins **must** be an executable file with a filename starting with `nu_plugin_`. Plugins can run in one of two modes:
+Nu 插件**必须**是一个可执行文件，文件名必须以 `nu_plugin_` 开头。插件可以在两种模式下运行：
 
-1. Stdio mode, which **must** be supported. The plugin is passed `--stdio` as a command line argument. All interaction with the plugin is handled over standard input (stdin) and output (stdout). Standard error (stderr) is not redirected, and can be used by the plugin to print messages directly.
+1. **标准输入输出（Stdio）模式**，**必须**支持。插件会收到 `--stdio` 作为命令行参数。所有与插件的交互都通过标准输入（stdin）和输出（stdout）处理。标准错误（stderr）不会被重定向，插件可以使用它直接打印消息。
 
-2. Local socket mode, which **may** be supported (advertised via the [`LocalSocket` feature](#localsocket-feature)). The plugin is passed `--local-socket` as the first command line argument, and then the path of the Unix domain socket or name of the Windows named pipe to use for communication. None of the standard input or output streams are redirected, and they may all be used to interact with the user's terminal. See the [documentation](#localsocket-feature) specific to the feature for more details.
+2. **本地套接字（Local socket）模式**，**可以**支持（通过 [`LocalSocket` 功能](#localsocket-feature) 进行广告）。插件会收到 `--local-socket` 作为第一个命令行参数，然后是用于通信的 Unix 域套接字路径或 Windows 命名管道名称。标准输入输出流都不会被重定向，它们都可以用于与用户的终端交互。有关该功能的详细信息，请参阅[特定文档](#localsocket-feature)。
 
-Other command line arguments are reserved for options that might be added in the future, including other communication methods. Plugins that support the protocol as described in this document **should** reject other arguments and print an informational message to stderr.
+其他命令行参数保留给将来可能添加的选项，包括其他通信方法。支持本文档所述协议的插件**应该**拒绝其他参数，并向 stderr 打印信息性消息。
 
-Immediately after spawning a plugin, Nu expects the plugin to send its encoding type. Currently two encoding types are supported: [`json`](#json) and [`msgpack`](#messagepack). The desired encoding type **should** be sent first with the length of the string as a single byte integer and then the encoding type string. That is, with C-like escape syntax, `"\x04json"` or `"\x07msgpack"`. In this document, the JSON format will be used for readability, but the MessagePack format is largely equivalent. See the [Encoding](#encoding) section for specific intricacies of the formats.
+启动插件后，Nu 期望插件立即发送其编码类型。目前支持两种编码类型：[`json`](#json) 和 [`msgpack`](#messagepack)。所需的编码类型**应该**首先发送，字符串长度作为单字节整数，然后是编码类型字符串。即，使用类似 C 的转义语法：`"\x04json"` 或 `"\x07msgpack"`。在本文档中，为了可读性将使用 JSON 格式，但 MessagePack 格式大致等效。有关格式的具体细节，请参阅[编码](#encoding)部分。
 
-Nu will then send messages in the desired encoding. The first message is always [`Hello`](#hello). The plugin **must** send a `Hello` message indicating the expected Nu version that it is compatible with, and any supported protocol features. The engine will also send a `Hello` message with its version, and any supported protocol features. The plugin **may** verify that it is compatible with the Nu version provided by the engine, but the engine will end communication with a plugin if it is determined to be unsupported. The plugin **must not** use protocol features it supports if they are not also confirmed to be supported by the engine in its `Hello` message. It is not permitted to send any other messages before sending `Hello`.
+然后 Nu 将以所需的编码发送消息。第一条消息始终是 [`Hello`](#hello)。插件**必须**发送一条 `Hello` 消息，指示其兼容的预期 Nu 版本以及任何支持的协议功能。引擎也会发送一条 `Hello` 消息，包含其版本和任何支持的协议功能。插件**可以**验证其是否与引擎提供的 Nu 版本兼容，但如果确定不支持，引擎将结束与插件的通信。插件**不得**使用其支持但引擎在其 `Hello` 消息中未确认支持的协议功能。在发送 `Hello` 之前不允许发送任何其他消息。
 
-The plugin **should** then receive and respond to messages until its input stream is closed.
+然后插件**应该**接收并响应消息，直到其输入流关闭。
 
-Typical plugin interaction after the initial handshake looks like this:
+初始握手后典型的插件交互如下所示：
 
-1. The engine sends a [`Call`](#call). The call contains an ID used to identify the response.
-2. If the `input` of the call specified a stream, the engine will send [stream messages](#stream-messages). These do not need to be consumed before the plugin sends its response.
-3. The plugin sends a [`CallResponse`](#callresponse), with the same ID from step 1.
-4. If the plugin specified stream data as output in the response, it **should** now send [stream messages](#stream-messages) with the corresponding stream ID(s).
+1. 引擎发送一个 [`Call`](#call)。调用包含一个用于标识响应的 ID。
+2. 如果调用的 `input` 指定了流，引擎将发送[流消息](#stream-messages)。这些不需要在插件发送响应之前被消费。
+3. 插件发送一个 [`CallResponse`](#callresponse)，使用步骤 1 中的相同 ID。
+4. 如果插件在响应中指定了流数据作为输出，它**应该**现在发送具有相应流 ID 的[流消息](#stream-messages)。
 
-The plugin **should** respond to further plugin calls. The engine **may** send additional plugin calls before responses have been received, and it is up to the plugin to decide whether to handle each call immediately as it is received, or to process only one at a time and hold on to them for later. In any case, sending another plugin call before a response has been received **should not** cause an error.
+插件**应该**响应进一步的插件调用。引擎**可以**在收到响应之前发送额外的插件调用，由插件决定是立即处理每个收到的调用，还是一次只处理一个并将其保留以供以后使用。无论如何，在收到响应之前发送另一个插件调用**不应该**导致错误。
 
-The plugin **may** send [engine calls](#enginecall) during the execution of a call to request operations from the engine. Engine calls are [only valid within the context of a call](#enginecall-context) and may not be sent otherwise.
+插件**可以**在执行调用期间发送[引擎调用](#enginecall)以请求引擎执行操作。引擎调用[仅在调用上下文中有效](#enginecall-context)，否则不得发送。
 
-The engine **may** send a [`Goodbye`](#goodbye) message to the plugin indicating that it will no longer send any more plugin calls. Upon receiving this message, the plugin **may** choose not to accept any more plugin calls, and **should** exit after any in-progress plugin calls have finished.
+引擎**可以**向插件发送 [`Goodbye`](#goodbye) 消息，指示它将不再发送任何插件调用。收到此消息后，插件**可以**选择不再接受任何插件调用，并**应该**在所有进行中的插件调用完成后退出。
 
-**Note**: During the sequence, the engine may also send a [`Signal`](#signal) message asynchronously, such as when an interrupt (Ctrl+C) or reset signal is triggered. Plugins should handle these messages as they are received, for example, by pausing or stopping operations when an `Interrupt` signal is sent.
+**注意**：在此过程中，引擎还可能异步发送 [`Signal`](#signal) 消息，例如当触发中断（Ctrl+C）或重置信号时。插件应在收到这些消息时进行处理，例如，在发送 `Interrupt` 信号时暂停或停止操作。
 
 ## `Hello`
 
-After the encoding type has been decided, both the engine and plugin **must** send a `Hello` message containing relevant version and protocol support information.
+确定编码类型后，引擎和插件**必须**都发送一条 `Hello` 消息，包含相关的版本和协议支持信息。
 
-| Field        | Type   | Description                                                                           |
-| ------------ | ------ | ------------------------------------------------------------------------------------- |
-| **protocol** | string | **Must** be `"nu-plugin"`.                                                            |
-| **version**  | string | The engine's version, or the target version of Nu that the plugin supports.           |
-| **features** | array  | Protocol features supported by the plugin. Unrecognized elements **must** be ignored. |
+| 字段         | 类型   | 描述                                               |
+| ------------ | ------ | -------------------------------------------------- |
+| **protocol** | string | **必须**为 `"nu-plugin"`。                         |
+| **version**  | string | 引擎的版本，或插件支持的 Nu 目标版本。             |
+| **features** | array  | 插件支持的协议功能。无法识别的元素**必须**被忽略。 |
 
-To be accepted, the `version` specified **must** be [semver](https://semver.org) compatible with the engine's version. "0.x.y" and "x.y.z" for differing values of "x" are considered to be incompatible.
+要被接受，指定的 `version`**必须**与引擎版本[语义版本（semver）](https://semver.org)兼容。"0.x.y" 和 "x.y.z" 对于不同的 "x" 值被认为是不兼容的。
 
-Plugins **may** decide to refuse engine versions with more strict criteria than specified here.
+插件**可以**决定使用比此处指定的更严格的标准来拒绝引擎版本。
 
-Example:
+示例：
 
 ```json
 {
@@ -61,15 +61,15 @@ Example:
 }
 ```
 
-### Features
+### 功能
 
-All features are maps that **must** contain at least a `name` key, and **may** contain other keys. Features that are not recognized by `name` **must** be ignored, and not cause an error. Plugins **must** only advertise support for features they implement, and **should not** determine the features they will advertise depending on the engine's `Hello` message.
+所有功能都是映射（maps），**必须**至少包含一个 `name` 键，并且**可以**包含其他键。无法通过 `name` 识别的功能**必须**被忽略，并且不会导致错误。插件**必须**仅广告它们实现的功能支持，并且**不应该**根据引擎的 `Hello` 消息来确定它们将广告的功能。
 
-#### `LocalSocket` feature
+#### `LocalSocket` 功能
 
-This feature advertises support for local socket communication, instead of stdio.
+此功能广告支持本地套接字通信，而不是 stdio。
 
-Example:
+示例：
 
 ```json
 {
@@ -77,31 +77,30 @@ Example:
 }
 ```
 
-When local socket communication is advertised to an engine supporting the feature, the engine will cease stdio communication and launch the plugin again with the `--local-socket` command line argument. The second argument is either a path to a Unix domain socket on Linux, Android, macOS, and other Unix-like operating systems, or the name of a named pipe (without the `\\.\pipe\` prefix) on Windows.
+当向支持该功能的引擎广告本地套接字通信时，引擎将停止 stdio 通信，并使用 `--local-socket` 命令行参数重新启动插件。第二个参数要么是 Linux、Android、macOS 和其他类 Unix 操作系统上的 Unix 域套接字路径，要么是 Windows 上命名管道的名称（不带 `\\.\pipe\` 前缀）。
 
-In either case, during startup, the plugin is expected to establish two separate connections to the socket, in this order:
+无论哪种情况，在启动期间，插件都需要按此顺序建立到套接字的两个独立连接：
 
-1. The input stream connection, used to send messages from the engine to the plugin
-2. The output stream connection, used to send messages from the plugin to the engine
+1. 输入流连接，用于从引擎向插件发送消息
+2. 输出流连接，用于从插件向引擎发送消息
 
-The connections are separate in order to facilitate ownership of the streams by separate threads. After these connections are both established, the engine will remove the socket, and will not accept further connections.
+连接是分开的，以便于不同线程对流的所有权。在这两个连接都建立后，引擎将移除套接字，并且不再接受进一步的连接。
 
-If local socket communication fails to initialize, the engine will abort, stop the plugin, and start it again with the stdio mode, even if the plugin supports local sockets. Whether local socket mode initialized successfully, and therefore the plugin is allowed to use stdio, can be observed when
-[`EngineInterface::is_using_stdio()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.is_using_stdio) returns `false` for Rust plugins.
+如果本地套接字通信初始化失败，引擎将中止，停止插件，并使用 stdio 模式重新启动它，即使插件支持本地套接字。本地套接字模式是否成功初始化，以及因此是否允许插件使用 stdio，可以通过观察 Rust 插件的 [`EngineInterface::is_using_stdio()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.is_using_stdio) 是否返回 `false` 来确定。
 
-## Input messages
+## 输入消息
 
-These are messages sent from the engine to the plugin. [`Hello`](#hello) and [`Stream messages`](#stream-messages) are also included.
+这些是从引擎发送到插件的消息。[`Hello`](#hello) 和 [`Stream messages`](#stream-messages) 也包括在内。
 
 ### `Call`
 
-The body of this message is a 2-tuple (array): (`id`, `call`). The engine sends unique IDs for each plugin call it makes. The ID is needed to send the [`CallResponse`](#callresponse).
+此消息的主体是一个 2 元组（数组）：(`id`, `call`)。引擎为每个插件调用发送唯一的 ID。需要此 ID 来发送 [`CallResponse`](#callresponse)。
 
-#### `Metadata` plugin call
+#### `Metadata` 插件调用
 
-Ask the plugin to send metadata about itself. Takes no arguments. Returns [`Metadata`](#metadata-plugin-call-response) or [`Error`](#error-plugin-call-response)
+要求插件发送有关其自身的元数据。不接受参数。返回 [`Metadata`](#metadata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。
 
-Example:
+示例：
 
 ```json
 {
@@ -109,11 +108,11 @@ Example:
 }
 ```
 
-#### `Signature` plugin call
+#### `Signature` 插件调用
 
-Ask the plugin to send its command signatures. Takes no arguments. Returns [`Signature`](#signature-plugin-call-response) or [`Error`](#error-plugin-call-response)
+要求插件发送其命令签名。不接受参数。返回 [`Signature`](#signature-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。
 
-Example:
+示例：
 
 ```json
 {
@@ -121,31 +120,31 @@ Example:
 }
 ```
 
-#### `Run` plugin call
+#### `Run` 插件调用
 
-Tell the plugin to run a command. The argument is the following map:
+告诉插件运行一个命令。参数是以下映射：
 
-| Field     | Type                                        | Description                                           |
-| --------- | ------------------------------------------- | ----------------------------------------------------- |
-| **name**  | string                                      | The name of the command to run                        |
-| **call**  | [`EvaluatedCall`](#evaluatedcall)           | Information about the invocation, including arguments |
-| **input** | [`PipelineDataHeader`](#pipelinedataheader) | Pipeline input to the command                         |
+| 字段      | 类型                                        | 描述                     |
+| --------- | ------------------------------------------- | ------------------------ |
+| **name**  | string                                      | 要运行的命令名称         |
+| **call**  | [`EvaluatedCall`](#evaluatedcall)           | 有关调用的信息，包括参数 |
+| **input** | [`PipelineDataHeader`](#pipelinedataheader) | 命令的管道输入           |
 
 <a name="evaluatedcall"></a>
 
-`EvaluatedCall` is a map:
+`EvaluatedCall` 是一个映射：
 
-| Field          | Type                                              | Description                                             |
-| -------------- | ------------------------------------------------- | ------------------------------------------------------- |
-| **head**       | [`Span`](#span)                                   | The position of the beginning of the command execution. |
-| **positional** | [`Value`](#value) array                           | Positional arguments.                                   |
-| **named**      | 2-tuple (string, [`Value`](#value) or null) array | Named arguments, such as switches.                      |
+| 字段           | 类型                                              | 描述                 |
+| -------------- | ------------------------------------------------- | -------------------- |
+| **head**       | [`Span`](#span)                                   | 命令执行开始的位置。 |
+| **positional** | [`Value`](#value) array                           | 位置参数。           |
+| **named**      | 2-tuple (string, [`Value`](#value) or null) array | 命名参数，例如开关。 |
 
-Named arguments are always sent by their long name, never their short name.
+命名参数始终以其长名称发送，而不是短名称。
 
-Returns [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response).
+返回 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。
 
-Example:
+示例：
 
 ```json
 {
@@ -191,17 +190,17 @@ Example:
 }
 ```
 
-#### `CustomValueOp` plugin call
+#### `CustomValueOp` 插件调用
 
-Perform an operation on a custom value received from the plugin. The argument is a 2-tuple (array): (`custom_value`, `op`).
+对从插件接收的自定义值执行操作。参数是一个 2 元组（数组）：(`custom_value`, `op`)。
 
-The custom value is specified in spanned format, as a [`PluginCustomValue`](#plugincustomvalue) without the `type` field, and not as a `Value` - see the examples.
+自定义值以带范围的格式指定，作为没有 `type` 字段的 [`PluginCustomValue`](#plugincustomvalue)，而不是作为 `Value` - 请参阅示例。
 
 ##### `ToBaseValue`
 
-Returns a plain value that is representative of the custom value, or an error if this is not possible. Sending a custom value back for this operation is not allowed. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). If the operation produces a stream, it will be consumed to a value.
+返回一个代表自定义值的普通值，如果不可能则返回错误。不允许为此操作发送回自定义值。响应类型是 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。如果操作产生流，它将被消费为一个值。
 
-Example:
+示例：
 
 ```json
 {
@@ -228,9 +227,9 @@ Example:
 
 ##### `FollowPathInt`
 
-Returns the result of following a numeric cell path (e.g. `$custom_value.0`) on the custom value. This is most commonly used with custom types that act like lists or tables. The argument is a spanned unsigned integer. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+返回在自定义值上跟随数字单元格路径（例如 `$custom_value.0`）的结果。这最常用于像列表或表格一样操作的自定义类型。参数是一个带范围的无符号整数。响应类型是 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
 
-Example:
+示例：
 
 ```nu
 $version.0
@@ -269,9 +268,9 @@ $version.0
 
 ##### `FollowPathString`
 
-Returns the result of following a string cell path (e.g. `$custom_value.field`) on the custom value. This is most commonly used with custom types that act like lists or tables. The argument is a spanned string. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+返回在自定义值上跟随字符串单元格路径（例如 `$custom_value.field`）的结果。这最常用于像列表或表格一样操作的自定义类型。参数是一个带范围的字符串。响应类型是 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
 
-Example:
+示例：
 
 ```nu
 $version.field
@@ -310,9 +309,9 @@ $version.field
 
 ##### `PartialCmp`
 
-Compares the custom value to another value and returns the [`Ordering`](#ordering) that should be used, if any. The argument type is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`Ordering`](#ordering-plugin-call-response). [`Error`](#error-plugin-call-response) may also be returned, but at present the error is unlikely to be presented to the user - the engine will act as if you had sent `{"Ordering": null}`.
+将自定义值与另一个值进行比较，并返回应使用的 [`Ordering`](#ordering)（如果有）。参数类型是 [`Value`](#value)，可以是任何值 - 不仅仅是相同的自定义值类型。响应类型是 [`Ordering`](#ordering-plugin-call-response)。也可能返回 [`Error`](#error-plugin-call-response)，但目前错误不太可能呈现给用户 - 引擎将表现得好像您发送了 `{"Ordering": null}`。
 
-Example (comparing two `version` custom values):
+示例（比较两个 `version` 自定义值）：
 
 ```json
 {
@@ -353,9 +352,9 @@ Example (comparing two `version` custom values):
 
 ##### `Operation`
 
-Returns the result of evaluating an [`Operator`](#operator) on this custom value with another value. The argument is a 2-tuple: (`operator`, `value`), where `operator` is a spanned [`Operator`](#operator) and `value` is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+返回在此自定义值和另一个值上评估 [`Operator`](#operator) 的结果。参数是一个 2 元组：(`operator`, `value`)，其中 `operator` 是一个带范围的 [`Operator`](#operator)，`value` 是一个 [`Value`](#value)，可以是任何值 - 不仅仅是相同的自定义值类型。响应类型是 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
 
-Example:
+示例：
 
 ```nu
 $version + 7
@@ -407,9 +406,9 @@ $version + 7
 
 ##### `Dropped`
 
-This op is used to notify the plugin that a [`PluginCustomValue`](#plugincustomvalue) that had `notify_on_drop` set to `true` was dropped in the engine - i.e., all copies of it have gone out of scope. For more information on exactly under what circumstances this is sent, see the [drop notification](plugins.md#drop-notification) section of the plugin reference. The response type is [`Empty` pipeline data](#empty-header-variant) or [`Error`](#error-plugin-call-response).
+此操作用于通知插件，一个在引擎中设置了 `notify_on_drop` 为 `true` 的 [`PluginCustomValue`](#plugincustomvalue) 已被丢弃 - 即，它的所有副本都已超出范围。有关在什么情况下发送此消息的更多信息，请参阅插件参考中的[丢弃通知](plugins.md#drop-notification)部分。响应类型是 [`Empty` pipeline data](#empty-header-variant) 或 [`Error`](#error-plugin-call-response)。
 
-Example:
+示例：
 
 ```json
 {
@@ -437,15 +436,15 @@ Example:
 
 ### `EngineCallResponse`
 
-A response to an [engine call](#enginecall) made by the plugin. The argument is a 2-tuple (array): (`engine_call_id`, `engine_call`)
+对插件发出的[引擎调用](#enginecall)的响应。参数是一个 2 元组（数组）：(`engine_call_id`, `engine_call`)。
 
-The `engine_call_id` refers to the same number that the engine call being responded to originally contained. The plugin **must** send unique IDs for each engine call it makes. Like [`CallResponse`](#callresponse), there are multiple types of responses:
+`engine_call_id` 指的是原始引擎调用中包含的相同数字。插件**必须**为每个引擎调用发送唯一的 ID。与 [`CallResponse`](#callresponse) 类似，有多种类型的响应：
 
-#### `Error` engine call response
+#### `Error` 引擎调用响应
 
-A failure result. Contains a [`LabeledError`](#labelederror).
+失败结果。包含一个 [`LabeledError`](#labelederror)。
 
-Example:
+示例：
 
 ```json
 {
@@ -454,7 +453,7 @@ Example:
     {
       "Error": {
         "LabeledError": {
-          "msg": "The connection closed.",
+          "msg": "连接已关闭。",
           "labels": [],
           "code": null,
           "url": null,
@@ -467,11 +466,11 @@ Example:
 }
 ```
 
-#### `PipelineData` engine call response
+#### `PipelineData` 引擎调用响应
 
-A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
+包含 Nu [`Value`](#value) 或流的成功结果。主体是一个 [`PipelineDataHeader`](#pipelinedataheader)。
 
-Example:
+示例：
 
 ```json
 {
@@ -490,11 +489,11 @@ Example:
 }
 ```
 
-#### `Config` engine call response
+#### `Config` 引擎调用响应
 
-A successful result of a [`Config` engine call](#config-engine-call). The body is a [`Config`](#config).
+[`Config` 引擎调用](#config-engine-call)的成功结果。主体是一个 [`Config`](#config)。
 
-Example:
+示例：
 
 ```json
 {
@@ -513,13 +512,13 @@ Example:
 }
 ```
 
-This example is abbreviated, as the [`Config`](#config) object is large and ever-changing.
+此示例已缩写，因为 [`Config`](#config) 对象很大且经常变化。
 
-#### `ValueMap` engine call response
+#### `ValueMap` 引擎调用响应
 
-A successful result for engine calls that produce plain maps, such as the [`GetEnvVars` engine call](#getenvvars-engine-call). The body is a map from strings to [`Value`s](#value).
+产生普通映射的引擎调用（例如 [`GetEnvVars` 引擎调用](#getenvvars-engine-call)）的成功结果。主体是从字符串到 [`Value`s](#value) 的映射。
 
-Example:
+示例：
 
 ```json
 {
@@ -542,11 +541,11 @@ Example:
 }
 ```
 
-#### `Identifier` engine call response
+#### `Identifier` 引擎调用响应
 
-A successful result for engine calls that produce internal identifiers, such as [`FindDecl`](#finddecl-engine-call). The body is a `usize` (unsigned integer, platform pointer size).
+产生内部标识符的引擎调用（例如 [`FindDecl`](#finddecl-engine-call)）的成功结果。主体是一个 `usize`（无符号整数，平台指针大小）。
 
-Example:
+示例：
 
 ```json
 {
@@ -561,12 +560,12 @@ Example:
 
 ### `Signal`
 
-The `Signal` message type is used to relay a signal from the engine to the plugin, allowing the plugin to respond to various system-level or user-initiated signals. The message body consists of a `SignalAction` enum, which currently supports the following variants:
+`Signal` 消息类型用于将信号从引擎中继到插件，允许插件响应各种系统级或用户发起的信号。消息主体包含一个 `SignalAction` 枚举，目前支持以下变体：
 
-- **`Interrupt`**: Sent when the engine receives an interrupt signal (such as Ctrl+C), to gracefully interrupt a plugin's operation.
-- **`Reset`**: Sent when the engine’s `reset_signals` method is called, indicating that the plugin should reset its signal state.
+- **`Interrupt`**：当引擎收到中断信号（例如 Ctrl+C）时发送，以优雅地中断插件的操作。
+- **`Reset`**：当引擎的 `reset_signals` 方法被调用时发送，指示插件应重置其信号状态。
 
-Example:
+示例：
 
 ```json
 {
@@ -576,29 +575,29 @@ Example:
 
 ### `Goodbye`
 
-Indicate that no further plugin calls are expected, and that the plugin **should** exit as soon as it is finished processing any in-progress plugin calls.
+指示不再期望进一步的插件调用，并且插件**应该**在处理完任何进行中的插件调用后立即退出。
 
-This message is not a map, it is just a bare string, as it takes no arguments.
+此消息不是映射，只是一个裸字符串，因为它不接受参数。
 
-Example:
+示例：
 
 ```json
 "Goodbye"
 ```
 
-## Output messages
+## 输出消息
 
-These are messages sent from the plugin to the engine. [`Hello`](#hello) and [`Stream messages`](#stream-messages) are also included.
+这些是从插件发送到引擎的消息。[`Hello`](#hello) 和 [`Stream messages`](#stream-messages) 也包括在内。
 
 ### `CallResponse`
 
-#### `Error` plugin call response
+#### `Error` 插件调用响应
 
-An error occurred while attempting to fulfill the request. The body is a [`LabeledError`](#labelederror).
+尝试完成请求时发生错误。主体是一个 [`LabeledError`](#labelederror)。
 
-It is strongly preferred to provide labeled messages whenever possible to let the user know where the problem might be in their script. If there is no more suitable span from a value that can be used, `head` from [`EvaluatedCall`](#evaluatedcall) is a good fallback.
+强烈建议尽可能提供带标签的消息，让用户知道问题可能出现在脚本中的哪个位置。如果没有更合适的值范围可以使用，[`EvaluatedCall`](#evaluatedcall) 的 `head` 是一个很好的后备选择。
 
-Example:
+示例：
 
 ```json
 {
@@ -606,10 +605,10 @@ Example:
     0,
     {
       "Error": {
-        "msg": "A really bad error occurred",
+        "msg": "发生了一个非常严重的错误",
         "labels": [
           {
-            "text": "I don't know, but it's over nine thousand!",
+            "text": "我不知道，但它超过九千了！",
             "span": {
               "start": 9001,
               "end": 9007
@@ -618,10 +617,10 @@ Example:
         ],
         "code": "my_plugin::bad::really_bad",
         "url": "https://example.org/my_plugin/error/bad/really_bad.html",
-        "help": "you can solve this by not doing the bad thing",
+        "help": "你可以通过不做坏事来解决这个问题",
         "inner": [
           {
-            "msg": "The bad thing"
+            "msg": "坏事"
           }
         ]
       }
@@ -630,15 +629,15 @@ Example:
 }
 ```
 
-#### `Metadata` plugin call response
+#### `Metadata` 插件调用响应
 
-A successful response to a [`Metadata` plugin call](#metadata-plugin-call). The body contains fields that describe the plugin, none of which are required:
+[`Metadata` 插件调用](#metadata-plugin-call)的成功响应。主体包含描述插件的字段，这些字段都不是必需的：
 
-| Field       | Type    | Description                                                                                                   |
-| ----------- | ------- | ------------------------------------------------------------------------------------------------------------- |
-| **version** | string? | The version of the plugin (not the protocol!). [SemVer](https://semver.org) is recommended, but not required. |
+| 字段        | 类型    | 描述                                                                                           |
+| ----------- | ------- | ---------------------------------------------------------------------------------------------- |
+| **version** | string? | 插件的版本（不是协议版本！）。推荐使用[语义版本（SemVer）](https://semver.org)，但不是必需的。 |
 
-Example:
+示例：
 
 ```json
 {
@@ -653,11 +652,11 @@ Example:
 }
 ```
 
-#### `Signature` plugin call response
+#### `Signature` 插件调用响应
 
-A successful response to a [`Signature` plugin call](#signature-plugin-call). The body is an array of [signatures](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html).
+[`Signature` 插件调用](#signature-plugin-call)的成功响应。主体是一个[签名](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html)数组。
 
-Example:
+示例：
 
 ```json
 {
@@ -668,7 +667,7 @@ Example:
         {
           "sig": {
             "name": "len",
-            "description": "calculates the length of its input",
+            "description": "计算其输入的长度",
             "extra_description": "",
             "search_terms": [],
             "required_positional": [],
@@ -681,7 +680,7 @@ Example:
                 "short": "h",
                 "arg": null,
                 "required": false,
-                "desc": "Display the help message for this command",
+                "desc": "显示此命令的帮助消息",
                 "var_id": null,
                 "default_value": null
               }
@@ -703,11 +702,11 @@ Example:
 }
 ```
 
-#### `Ordering` plugin call response
+#### `Ordering` 插件调用响应
 
-A successful response to the [`PartialCmp` custom value op](#partialcmp). The body is either [`Ordering`](#ordering) if the comparison is possible, or `null` if the values can't be compared.
+[`PartialCmp` 自定义值操作](#partialcmp)的成功响应。如果比较可能，主体是 [`Ordering`](#ordering)，如果值无法比较，则为 `null`。
 
-Example:
+示例：
 
 ```json
 {
@@ -720,7 +719,7 @@ Example:
 }
 ```
 
-Example with incomparable values:
+不可比较值的示例：
 
 ```json
 {
@@ -733,11 +732,11 @@ Example with incomparable values:
 }
 ```
 
-#### `PipelineData` plugin call response
+#### `PipelineData` 插件调用响应
 
-A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
+包含 Nu [`Value`](#value) 或流的成功结果。主体是一个 [`PipelineDataHeader`](#pipelinedataheader)。
 
-Example:
+示例：
 
 ```json
 {
@@ -760,31 +759,30 @@ Example:
 
 ### `EngineCall`
 
-Plugins can make engine calls during execution of a [call](#call). The body is a map with the following keys:
+插件可以在执行[调用](#call)期间进行引擎调用。主体是一个包含以下键的映射：
 
-| Field       | Type         | Description                                                                             |
-| ----------- | ------------ | --------------------------------------------------------------------------------------- |
-| **context** | integer      | The ID of the [call](#call) that this engine call relates to.                           |
-| **id**      | integer      | A unique ID for this engine call, in order to send the [response](#enginecallresponse). |
-| **call**    | `EngineCall` | One of the options described below.                                                     |
+| 字段        | 类型         | 描述                                                       |
+| ----------- | ------------ | ---------------------------------------------------------- |
+| **context** | integer      | 此引擎调用相关的[调用](#call)的 ID。                       |
+| **id**      | integer      | 此引擎调用的唯一 ID，用于发送[响应](#enginecallresponse)。 |
+| **call**    | `EngineCall` | 下面描述的选项之一。                                       |
 
 <a name="enginecall-context"></a>
 
-The context **must** be an ID of a [call](#call) that was received that is currently in one of two states:
+上下文**必须**是已接收的[调用](#call)的 ID，该调用当前处于以下两种状态之一：
 
-1. The [response](#callresponse) has not been sent yet.
-2. The response contained stream data (i.e. [`ListStream`](#liststream-header-variant) or [`ByteStream`](#bytestream-header-variant)), and at least one of the streams started by the response is still sending data (i.e. [`End`](#end) has not been sent).
+1. [响应](#callresponse)尚未发送。
+2. 响应包含流数据（即 [`ListStream`](#liststream-header-variant) 或 [`ByteStream`](#bytestream-header-variant)），并且响应启动的至少一个流仍在发送数据（即 [`End`](#end) 尚未发送）。
 
-After a response has been fully sent, and streams have ended, the `context` from that call can no longer be used.
+在响应完全发送且流结束后，该调用的 `context` 不能再使用。
 
-The engine call ID **must** be unique for the lifetime of the plugin, and it is suggested that this be a sequentially increasing number across all engine calls made by the plugin. It is not separated by `context`; the response only contains the `id`.
+引擎调用 ID**必须**在插件的生命周期内是唯一的，建议这是插件发出的所有引擎调用的顺序递增数字。它不按 `context` 分隔；响应只包含 `id`。
 
-#### `GetConfig` engine call
+#### `GetConfig` 引擎调用
 
-Get the Nushell engine configuration. Returns a [`Config` response](#config-engine-call-response) if
-successful.
+获取 Nushell 引擎配置。如果成功，返回一个 [`Config` 响应](#config-engine-call-response)。
 
-Example:
+示例：
 
 ```json
 {
@@ -796,13 +794,13 @@ Example:
 }
 ```
 
-#### `GetPluginConfig` engine call
+#### `GetPluginConfig` 引擎调用
 
-Get the configuration for the plugin, from its section in `$env.config.plugins.NAME` if present. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#value-header-variant) or be [`Empty`](#empty-header-variant) if there is no configuration for the plugin set.
+从 `$env.config.plugins.NAME` 中的插件部分获取插件的配置（如果存在）。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-engine-call-response)，如果设置了插件配置，它将包含一个 [`Value`](#value-header-variant)，如果没有设置插件配置，则为 [`Empty`](#empty-header-variant)。
 
-If the plugin configuration was specified as a closure, the engine will evaluate that closure and return the result, which may cause an [error response](#error-engine-call-response).
+如果插件配置被指定为闭包，引擎将评估该闭包并返回结果，这可能会导致[错误响应](#error-engine-call-response)。
 
-Example:
+示例：
 
 ```json
 {
@@ -814,11 +812,11 @@ Example:
 }
 ```
 
-#### `GetEnvVar` engine call
+#### `GetEnvVar` 引擎调用
 
-Get an environment variable from the caller's scope. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#value-header-variant) or be [`Empty`](#empty-header-variant) if the environment variable is not present.
+从调用者的作用域获取环境变量。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-engine-call-response)，如果环境变量存在，它将包含一个 [`Value`](#value-header-variant)，如果环境变量不存在，则为 [`Empty`](#empty-header-variant)。
 
-Example:
+示例：
 
 ```json
 {
@@ -832,11 +830,11 @@ Example:
 }
 ```
 
-#### `GetEnvVars` engine call
+#### `GetEnvVars` 引擎调用
 
-Get all environment variables from the caller's scope. Returns a [`ValueMap` response](#valuemap-engine-call-response) if successful, with all of the environment variables in the scope.
+从调用者的作用域获取所有环境变量。如果成功，返回一个 [`ValueMap` 响应](#valuemap-engine-call-response)，包含作用域中的所有环境变量。
 
-Example:
+示例：
 
 ```json
 {
@@ -848,11 +846,11 @@ Example:
 }
 ```
 
-#### `GetCurrentDir` engine call
+#### `GetCurrentDir` 引擎调用
 
-Get the current directory path in the caller's scope. This always returns an absolute path as a string [`Value` pipeline data](#value-header-variant) response if successful. The span contained within the value response is unlikely to be useful, and may be zero.
+获取调用者作用域中的当前目录路径。如果成功，始终返回一个绝对路径作为字符串 [`Value` pipeline data](#value-header-variant) 响应。值响应中包含的范围不太可能有用，可能为零。
 
-Example:
+示例：
 
 ```json
 {
@@ -864,11 +862,11 @@ Example:
 }
 ```
 
-#### `AddEnvVar` engine call
+#### `AddEnvVar` 引擎调用
 
-Set an environment variable in the caller's scope. The environment variable can only be propagated to the caller's scope if called before the plugin call response is sent. Either way, it is propagated to other engine calls made within the same context. The argument is a 2-tuple: (`name`, `value`). The response type is [`Empty` pipeline data](#empty-header-variant) when successful.
+在调用者的作用域中设置环境变量。只有在插件调用响应发送之前调用，环境变量才能传播到调用者的作用域。无论哪种方式，它都会传播到同一上下文中进行的其他引擎调用。参数是一个 2 元组：(`name`, `value`)。成功时的响应类型是 [`Empty` pipeline data](#empty-header-variant)。
 
-Example:
+示例：
 
 ```json
 {
@@ -893,11 +891,11 @@ Example:
 }
 ```
 
-#### `GetHelp` engine call
+#### `GetHelp` 引擎调用
 
-Get fully formatted help text for the current command. This can help with implementing top-level commands that just list their subcommands, rather than implementing any specific functionality. The response on success is [`Value` pipeline data](#value-header-variant) that always contains a string.
+获取当前命令的完全格式化帮助文本。这有助于实现仅列出其子命令的顶级命令，而不是实现任何特定功能。成功时的响应是 [`Value` pipeline data](#value-header-variant)，始终包含一个字符串。
 
-Example:
+示例：
 
 ```json
 {
@@ -909,17 +907,17 @@ Example:
 }
 ```
 
-#### `EnterForeground` engine call
+#### `EnterForeground` 引擎调用
 
-Moves the plugin to the foreground group for direct terminal access, in an operating system-defined manner. This should be called when the plugin is going to drive the terminal in raw mode, for example to implement a terminal UI. It will likely be necessary for the plugin to also be running in [local socket mode](#localsocket-feature) in that case.
+以操作系统定义的方式将插件移动到前台组以进行直接终端访问。当插件将以原始模式驱动终端时（例如实现终端 UI），应调用此方法。在这种情况下，插件可能还需要在[本地套接字模式](#localsocket-feature)下运行。
 
-This call responds with [`Empty` pipeline data](#empty-header-variant) on success when no action is required by the plugin. On Unix-like operating systems, if the response is [`Value` pipeline data](#value-header-variant), it contains an [`Int`](#int) which is the process group ID the plugin must join using `setpgid()` in order to be in the foreground.
+当插件不需要任何操作时，此调用在成功时响应 [`Empty` pipeline data](#empty-header-variant)。在类 Unix 操作系统上，如果响应是 [`Value` pipeline data](#value-header-variant)，它包含一个 [`Int`](#int)，这是插件必须使用 `setpgid()` 加入的进程组 ID，以便处于前台。
 
-This call will fail with an error if the plugin is already in the foreground.
+如果插件已经在前台，此调用将失败并返回错误。
 
-The plugin **should** call [`LeaveForeground`](#leaveforeground-engine-call) when it no longer needs to be in the foreground. Note that the plugin will also automatically be removed from the foreground when the plugin call response is received, even if the plugin call returns a stream.
+插件**应该**在不再需要处于前台时调用 [`LeaveForeground`](#leaveforeground-engine-call)。请注意，当接收到插件调用响应时，插件也会自动从前台移除，即使插件调用返回流也是如此。
 
-Example:
+示例：
 
 ```json
 {
@@ -931,15 +929,15 @@ Example:
 }
 ```
 
-#### `LeaveForeground` engine call
+#### `LeaveForeground` 引擎调用
 
-Resets the state set by [`EnterForeground`](#enterforeground-engine-call).
+重置由 [`EnterForeground`](#enterforeground-engine-call) 设置的状态。
 
-If the plugin had been requested to change process groups by the response of `EnterForeground`, it should also reset that state by calling `setpgid(0)`, since plugins are normally in their own process group.
+如果插件曾被 `EnterForeground` 的响应要求更改进程组，它也应该通过调用 `setpgid(0)` 来重置该状态，因为插件通常在自己的进程组中。
 
-This call responds with [`Empty` pipeline data](#empty-header-variant) on success.
+此调用在成功时响应 [`Empty` pipeline data](#empty-header-variant)。
 
-Example:
+示例：
 
 ```json
 {
@@ -951,11 +949,11 @@ Example:
 }
 ```
 
-#### `GetSpanContents` engine call
+#### `GetSpanContents` 引擎调用
 
-Get the contents of a [`Span`](#span) from the engine. This can be used for viewing the source code that generated a value. The argument is a [`Span`](#span). The response on success is [`Value` pipeline data](3value-header-variant) containing a [`Binary`](#binary) value, as the result is not guaranteed to be valid UTF-8.
+从引擎获取 [`Span`](#span) 的内容。这可用于查看生成值的源代码。参数是一个 [`Span`](#span)。成功时的响应是 [`Value` pipeline data](3value-header-variant)，包含一个 [`Binary`](#binary) 值，因为结果不能保证是有效的 UTF-8。
 
-Example:
+示例：
 
 ```json
 {
@@ -971,21 +969,21 @@ Example:
 }
 ```
 
-#### `EvalClosure` engine call
+#### `EvalClosure` 引擎调用
 
-Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful with the output of the closure, which may be a stream.
+将 [`Closure`](#closure) 和参数传递给引擎进行评估。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-engine-call-response)，其中包含闭包的输出，可能是一个流。
 
-| Field               | Type                                        | Description                                                            |
-| ------------------- | ------------------------------------------- | ---------------------------------------------------------------------- |
-| **closure**         | spanned [`Closure`](#closure)               | The closure to call, generally from a [`Value`](#value).               |
-| **positional**      | [`Value`](#value) array                     | Positional arguments for the closure.                                  |
-| **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the closure.                                                 |
-| **redirect_stdout** | boolean                                     | Whether to redirect stdout if the closure ends in an external command. |
-| **redirect_stderr** | boolean                                     | Whether to redirect stderr if the closure ends in an external command. |
+| 字段                | 类型                                        | 描述                                        |
+| ------------------- | ------------------------------------------- | ------------------------------------------- |
+| **closure**         | spanned [`Closure`](#closure)               | 要调用的闭包，通常来自 [`Value`](#value)。  |
+| **positional**      | [`Value`](#value) array                     | 闭包的位置参数。                            |
+| **input**           | [`PipelineDataHeader`](#pipelinedataheader) | 闭包的输入。                                |
+| **redirect_stdout** | boolean                                     | 如果闭包以外部命令结束，是否重定向 stdout。 |
+| **redirect_stderr** | boolean                                     | 如果闭包以外部命令结束，是否重定向 stderr。 |
 
-The `Closure` is not wrapped as a `Value` - i.e., it doesn't have `{"Closure": ...}` around it.
+`Closure` 没有包装为 `Value` - 即，它没有 `{"Closure": ...}` 包装。
 
-Example:
+示例：
 
 ```json
 {
@@ -1024,13 +1022,13 @@ Example:
 }
 ```
 
-#### `FindDecl` engine call
+#### `FindDecl` 引擎调用
 
-Find the declaration ID for a command in scope. The body is the name of the desired command, as a string. Returns an [`Identifier` response](#identifier-engine-call-response) if successful with the ID of the declared command, or an [empty](#empty-header-variant) [`PipelineData` response](#pipelinedata-engine-call-response) if the command with the given name couldn't be found in the scope of the plugin call.
+查找作用域中命令的声明 ID。主体是所需命令的名称，作为字符串。如果成功，返回一个 [`Identifier` 响应](#identifier-engine-call-response)，其中包含声明命令的 ID，如果在插件调用的作用域中找不到具有给定名称的命令，则返回一个[空](#empty-header-variant)的 [`PipelineData` 响应](#pipelinedata-engine-call-response)。
 
-It is recommended to provide a descriptive error about what command was required if the command wasn't found, as it is possible to `hide` even the core commands that are provided with Nushell. Finding and calling commands from the same or other plugins is supported, however keep in mind that doing things within the plugin is usually more efficient when possible.
+建议在找不到命令时提供描述性错误，说明需要什么命令，因为即使是 Nushell 提供的核心命令也可能被 `hide`。支持从同一或其他插件查找和调用命令，但请记住，在可能的情况下，在插件内部执行操作通常更高效。
 
-Example:
+示例：
 
 ```json
 {
@@ -1044,19 +1042,19 @@ Example:
 }
 ```
 
-#### `CallDecl` engine call
+#### `CallDecl` 引擎调用
 
-Pass a command's declaration ID (found via [`FindDecl`](#finddecl-engine-call)) and arguments to the engine to be called. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful with the output of the command, which may be a stream.
+将命令的声明 ID（通过 [`FindDecl`](#finddecl-engine-call) 找到）和参数传递给引擎进行调用。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-engine-call-response)，其中包含命令的输出，可能是一个流。
 
-| Field               | Type                                        | Description                                                                     |
-| ------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
-| **decl_id**         | unsigned integer                            | The ID of the declaration to call.                                              |
-| **call**            | [`EvaluatedCall`](#evaluatedcall)           | Arguments and head span for the call.                                           |
-| **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the command.                                                          |
-| **redirect_stdout** | boolean                                     | Whether to redirect stdout if the declared command ends in an external command. |
-| **redirect_stderr** | boolean                                     | Whether to redirect stderr if the declared command ends in an external command. |
+| 字段                | 类型                                        | 描述                                              |
+| ------------------- | ------------------------------------------- | ------------------------------------------------- |
+| **decl_id**         | unsigned integer                            | 要调用的声明的 ID。                               |
+| **call**            | [`EvaluatedCall`](#evaluatedcall)           | 调用的参数和头范围。                              |
+| **input**           | [`PipelineDataHeader`](#pipelinedataheader) | 命令的输入。                                      |
+| **redirect_stdout** | boolean                                     | 如果声明的命令以外部命令结束，是否重定向 stdout。 |
+| **redirect_stderr** | boolean                                     | 如果声明的命令以外部命令结束，是否重定向 stderr。 |
 
-Example:
+示例：
 
 ```json
 {
@@ -1118,13 +1116,13 @@ Example:
 
 ### `Option`
 
-Sets options that affect how the engine treats the plugin. No response is expected for this message.
+设置影响引擎如何处理插件的选项。此消息不需要响应。
 
-#### `GcDisabled` option
+#### `GcDisabled` 选项
 
-Set to `true` to stop the plugin from being automatically garbage collected, or `false` to enable it again.
+设置为 `true` 可停止插件被自动垃圾回收，或设置为 `false` 可再次启用。
 
-Example:
+示例：
 
 ```json
 {
@@ -1134,19 +1132,19 @@ Example:
 }
 ```
 
-## Stream messages
+## 流消息
 
-Streams can be sent by both the plugin and the engine. The agent that is sending the stream is known as the _producer_, and the agent that receives the stream is known as the _consumer_.
+流可以由插件和引擎发送。发送流的代理称为*生产者*，接收流的代理称为*消费者*。
 
-All stream messages reference a stream ID. This identifier is an integer starting at zero and is specified by the producer in the message that described what the stream would be used for: for example, [`Call`](#call) or [`CallResponse`](#callresponse). A producer **should not** reuse identifiers it has used once before. The most obvious implementation is sequential, where each new stream gets an incremented number. It is not necessary for stream IDs to be totally unique across both the plugin and the engine: stream `0` from the plugin and stream `0` from the engine are different streams.
+所有流消息都引用一个流 ID。此标识符是从零开始的整数，由生产者在描述流用途的消息中指定：例如，[`Call`](#call) 或 [`CallResponse`](#callresponse)。生产者**不应该**重用之前使用过的标识符。最明显的实现是顺序的，每个新流获得一个递增的数字。流 ID 不需要在插件和引擎之间完全唯一：来自插件的流 `0` 和来自引擎的流 `0` 是不同的流。
 
 ### `Data`
 
-This message is sent from producer to consumer. The body is a 2-tuple (array) of (`id`, `data`).
+此消息从生产者发送到消费者。主体是一个 2 元组（数组）：(`id`, `data`)。
 
-The `data` is either a `List` map for a list stream, in which case the body is the [`Value`](#value) to be sent, or `Raw` for a raw stream, in which case the body is either an `Ok` map with a byte buffer, or an `Err` map with a [`LabeledError`](#labelederror).
+`data` 对于列表流是 `List` 映射，其中主体是要发送的 [`Value`](#value)，对于原始流是 `Raw`，其中主体是带有字节缓冲区的 `Ok` 映射，或带有 [`LabeledError`](#labelederror) 的 `Err` 映射。
 
-Examples:
+示例：
 
 ```json
 {
@@ -1199,13 +1197,13 @@ Examples:
 
 ### `End`
 
-This message is sent from producer to consumer. The body is a single value, the `id`.
+此消息从生产者发送到消费者。主体是单个值 `id`。
 
-**Must** be sent at the end of a stream by the producer. The producer **must not** send any more [`Data`](#data) messages after the end of the stream.
+**必须**由生产者在流结束时发送。生产者在流结束后**不得**再发送任何 [`Data`](#data) 消息。
 
-The consumer **must** send [`Drop`](#drop) in reply unless the stream ended because the consumer chose to drop the stream.
+消费者**必须**发送 [`Drop`](#drop) 作为回复，除非流结束是因为消费者选择丢弃流。
 
-Example:
+示例：
 
 ```json
 {
@@ -1215,11 +1213,11 @@ Example:
 
 ### `Ack`
 
-This message is sent from consumer to producer. The body is a single value, the `id`.
+此消息从消费者发送到生产者。主体是单个值 `id`。
 
-Sent by the consumer in reply to each [`Data`](#data) message, indicating that the consumer has finished processing that message. `Ack` is used for flow control. If a consumer does not need to process a stream immediately, or is having trouble keeping up, it **should not** send `Ack` messages until it is ready to process more `Data`.
+由消费者发送以回复每个 [`Data`](#data) 消息，表明消费者已完成处理该消息。`Ack` 用于流量控制。如果消费者不需要立即处理流，或者难以跟上，它**不应该**发送 `Ack` 消息，直到准备好处理更多 `Data`。
 
-Example:
+示例：
 
 ```json
 {
@@ -1229,15 +1227,15 @@ Example:
 
 ### `Drop`
 
-This message is sent from consumer to producer. The body is a single value, the `id`.
+此消息从消费者发送到生产者。主体是单个值 `id`。
 
-Sent by the consumer to indicate disinterest in further messages from a stream. The producer **may** send additional [`Data`](#data) messages after `Drop` has been received, but **should** make an effort to stop sending messages and [`End`](#end) the stream as soon as possible.
+由消费者发送以表示对来自流的进一步消息不感兴趣。生产者**可以**在收到 `Drop` 后发送额外的 [`Data`](#data) 消息，但**应该**努力停止发送消息并尽快 [`End`](#end) 流。
 
-The consumer **should not** consider `Data` messages sent after `Drop` to be an error, unless `End` has already been received.
+消费者**不应该**将在 `Drop` 之后发送的 `Data` 消息视为错误，除非已经收到 `End`。
 
-The producer **must** send `End` in reply unless the stream ended because the producer ended the stream.
+生产者**必须**发送 `End` 作为回复，除非流结束是因为生产者结束了流。
 
-Example:
+示例：
 
 ```json
 {
@@ -1245,23 +1243,23 @@ Example:
 }
 ```
 
-## Signal Handling in Plugins
+## 插件中的信号处理
 
-Plugins can respond to signals sent from the engine, such as interrupts (Ctrl+C) or resets, by registering handlers. The plugin’s signal handling methods allow for customizable responses to user or system actions, enhancing the plugin's integration with the Nu engine.
+插件可以通过注册处理程序来响应从引擎发送的信号，例如中断（Ctrl+C）或重置。插件的信号处理方法允许对用户或系统操作进行自定义响应，增强插件与 Nu 引擎的集成。
 
 ### `register_signal_handler`
 
-The `register_signal_handler` method allows a plugin to register a handler that will be called when a signal is received. This method accepts a closure with the following signature:
+`register_signal_handler` 方法允许插件注册一个处理程序，该处理程序将在收到信号时被调用。此方法接受具有以下签名的闭包：
 
 ```rust
 |action: SignalAction| { ... }
 ```
 
-The closure will be invoked with the `SignalAction` variant received from the engine. This method returns an RAII guard that ensures the handler remains active until it is dropped.
+闭包将使用从引擎接收的 `SignalAction` 变体调用。此方法返回一个 RAII 守卫，确保处理程序保持活动状态直到被丢弃。
 
-#### Example Usage
+#### 示例用法
 
-Below is an example of registering a handler that responds to both `Interrupt` and `Reset` signals:
+以下是注册处理程序以响应 `Interrupt` 和 `Reset` 信号的示例：
 
 ```rust
 let _guard = engine.register_signal_handler(Box::new(move |action| {
@@ -1274,7 +1272,7 @@ let _guard = engine.register_signal_handler(Box::new(move |action| {
 
 #### `signals()`
 
-The `signals()` method allows the plugin to check the status of the signal, specifically for `Interrupt`. This method returns a `Signals` struct, which includes the method `interrupted()` that indicates if an interrupt has occurred.
+`signals()` 方法允许插件检查信号状态，特别是 `Interrupt`。此方法返回一个 `Signals` 结构体，其中包括 `interrupted()` 方法，指示是否发生了中断。
 
 ```rust
 if engine.signals().interrupted() {
@@ -1282,25 +1280,25 @@ if engine.signals().interrupted() {
 }
 ```
 
-Use `signals().interrupted()` to check for interrupt status, particularly when managing long-running operations.
+使用 `signals().interrupted()` 来检查中断状态，特别是在管理长时间运行的操作时。
 
-## Encoding
+## 编码
 
 ### JSON
 
-The JSON encoding defines messages as JSON objects. No separator or padding is required. Whitespace within the message object as well as between messages is permitted, including newlines.
+JSON 编码将消息定义为 JSON 对象。不需要分隔符或填充。消息对象内部以及消息之间的空白字符（包括换行符）都是允许的。
 
-The engine is more strict about the format it emits: every message ends with a newline, and unnecessary whitespace and newlines will not be emitted within a message. It is explicitly supported for a plugin to choose to parse the input from the engine by parsing each line received as a separate message, as this is most commonly supported across all languages.
+引擎对其发出的格式更加严格：每条消息都以换行符结尾，并且消息内部不会发出不必要的空白字符和换行符。明确支持插件通过将接收的每一行解析为单独的消息来选择解析来自引擎的输入，因为这在所有语言中最常见。
 
-Byte arrays are encoded as plain JSON arrays of numbers representing each byte. While this is inefficient, it is maximally portable.
+字节数组被编码为表示每个字节的数字的普通 JSON 数组。虽然这效率低下，但具有最大的可移植性。
 
-MessagePack **should** be preferred where possible if performance is desired, especially if byte streams are expected to be a common input or output of the plugin.
+如果追求性能，**应该**尽可能首选 MessagePack，特别是如果字节流预计是插件的常见输入或输出。
 
 ### MessagePack
 
-[MessagePack](https://msgpack.org) is a machine-first binary encoding format with a data model very similar to JSON. Messages are encoded as maps. There is no separator between messages, and no padding character is accepted.
+[MessagePack](https://msgpack.org) 是一种面向机器的二进制编码格式，其数据模型与 JSON 非常相似。消息被编码为映射。消息之间没有分隔符，也不接受填充字符。
 
-Most messages are encoded in the same way as their JSON analogue. For example, the following [`Hello`](#hello) message in JSON:
+大多数消息的编码方式与其 JSON 对应物相同。例如，以下 JSON 中的 [`Hello`](#hello) 消息：
 
 ```json
 {
@@ -1312,33 +1310,33 @@ Most messages are encoded in the same way as their JSON analogue. For example, t
 }
 ```
 
-is encoded in the MessagePack format as:
+在 MessagePack 格式中编码为：
 
 ```text
-81                   // map, one element
-  a5 "Hello"         // 5-character string
-  83                 // map, three elements
-    a8 "protocol"    // 8-character string
-    a9 "nu-plugin"   // 9-character string
-    a7 "version"     // 7-character string
-    a6 "0.94.0"      // 6-character string
-    a8 "features"    // 8-character string
-    90               // array, zero elements
+81                   // 映射，一个元素
+  a5 "Hello"         // 5 字符字符串
+  83                 // 映射，三个元素
+    a8 "protocol"    // 8 字符字符串
+    a9 "nu-plugin"   // 9 字符字符串
+    a7 "version"     // 7 字符字符串
+    a6 "0.94.0"      // 6 字符字符串
+    a8 "features"    // 8 字符字符串
+    90               // 数组，零个元素
 ```
 
-(verbatim byte strings quoted for readability, non-printable bytes in hexadecimal)
+（逐字字节字符串为可读性而引用，不可打印字节以十六进制表示）
 
-Byte arrays are encoded with MessagePack's native byte arrays, which impose zero constraints on the formatting of the bytes within. In general, the MessagePack encoding is much more efficient than JSON and **should** be the first choice for plugins where performance is important and MessagePack is available.
+字节数组使用 MessagePack 的原生字节数组编码，这对字节内部的格式施加零约束。通常，MessagePack 编码比 JSON 高效得多，对于性能重要且 MessagePack 可用的插件，**应该**是首选。
 
 <a name="value"></a>
 
-## Value types
+## 值类型
 
-[Rust documentation](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html)
+[Rust 文档](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html)
 
-The `Value` enum describes all structured data used in Nu.
+`Value` 枚举描述了 Nu 中使用的所有结构化数据。
 
-Example:
+示例：
 
 ```json
 {
@@ -1354,14 +1352,14 @@ Example:
 
 ### `Bool`
 
-A boolean.
+布尔值。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | boolean         |
 | **span** | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 true
@@ -1381,14 +1379,14 @@ true
 
 ### `Int`
 
-A 64-bit signed integer.
+64 位有符号整数。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | integer         |
 | **span** | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 -2
@@ -1408,14 +1406,14 @@ Example:
 
 ### `Float`
 
-A 64-bit (double precision) floating point number.
+64 位（双精度）浮点数。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | double          |
 | **span** | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 36.4
@@ -1435,14 +1433,14 @@ Example:
 
 ### `Filesize`
 
-A quantity of bytes, internally a 64-bit signed integer representing the number of bytes. This is pretty-printed to the user with a more human scale, e.g. `32.4 MiB`.
+字节数量，内部是表示字节数的 64 位有符号整数。这以更人性化的比例（例如 `32.4 MiB`）漂亮地打印给用户。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | integer         |
 | **span** | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 32.4MiB
@@ -1462,14 +1460,14 @@ Example:
 
 ### `Duration`
 
-A duration of time, internally a 64-bit signed integer representing the number of nanoseconds. This is pretty-printed to the user with a more human scale, e.g. `8sec 375ms 604µs 528ns`.
+时间持续时间，内部是表示纳秒数的 64 位有符号整数。这以更人性化的比例（例如 `8sec 375ms 604µs 528ns`）漂亮地打印给用户。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | integer         |
 | **span** | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 8375604528ns
@@ -1489,14 +1487,14 @@ Example:
 
 ### `Date`
 
-A date/time value, including the time zone, represented in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. This is printed to the user according to their locale.
+日期/时间值，包括时区，以 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) 格式表示。这根据用户的区域设置打印给用户。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | string          |
 | **span** | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 1996-12-19T16:39:57-08:00
@@ -1516,24 +1514,24 @@ Example:
 
 ### `Range`
 
-A range of values.
+值的范围。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | `Range`         |
 | **span** | [`Span`](#span) |
 
-`Range` has two variants, `IntRange` and `FloatRange`:
+`Range` 有两个变体，`IntRange` 和 `FloatRange`：
 
 #### `IntRange`
 
-| Field     | Type            |
+| 字段      | 类型            |
 | --------- | --------------- |
 | **start** | integer         |
 | **step**  | integer         |
 | **end**   | `Bound` integer |
 
-Examples:
+示例：
 
 ```nu
 0..
@@ -1625,15 +1623,15 @@ Examples:
 
 #### `FloatRange`
 
-Identical to [`IntRange`](#intrange) but for floats instead.
+与 [`IntRange`](#intrange) 相同，但用于浮点数。
 
-| Field     | Type           |
+| 字段      | 类型           |
 | --------- | -------------- |
 | **start** | double         |
 | **step**  | double         |
 | **end**   | `Bound` double |
 
-Example:
+示例：
 
 ```nu
 7.5..10.5
@@ -1659,14 +1657,14 @@ Example:
 
 ### `String`
 
-A UTF-8 string.
+UTF-8 字符串。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | string          |
 | **span** | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 "Hello, nu!"
@@ -1686,17 +1684,17 @@ Example:
 
 ### `Glob`
 
-A filesystem glob, selecting multiple files or directories depending on the expansion of wildcards.
+文件系统通配符，根据通配符的扩展选择多个文件或目录。
 
-If `no_expand` is true, the expansion of wildcards is disabled and this just acts as a literal path.
+如果 `no_expand` 为 true，则禁用通配符扩展，这仅作为文字路径使用。
 
-| Field         | Type            |
+| 字段          | 类型            |
 | ------------- | --------------- |
 | **val**       | string          |
 | **no_expand** | boolean         |
 | **span**      | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 "src/**/*.rs" | into glob
@@ -1717,14 +1715,14 @@ Example:
 
 ### `Record`
 
-An associative key-value map. If records are contained in a list, this renders as a table. The keys are always strings, but the values may be any type.
+关联键值映射。如果记录包含在列表中，这将呈现为表格。键始终是字符串，但值可以是任何类型。
 
-| Field    | Type                            |
+| 字段     | 类型                            |
 | -------- | ------------------------------- |
 | **val**  | map: string ⇒ [`Value`](#value) |
 | **span** | [`Span`](#span)                 |
 
-Example:
+示例：
 
 ```nu
 {foo: 5, bar: "hello nushell"}
@@ -1763,14 +1761,14 @@ Example:
 
 ### `List`
 
-A list of values of any type.
+任何类型的值列表。
 
-| Field    | Type                    |
+| 字段     | 类型                    |
 | -------- | ----------------------- |
 | **vals** | [`Value`](#value) array |
 | **span** | [`Span`](#span)         |
 
-Example:
+示例：
 
 ```nu
 [1, 2, foo, bar]
@@ -1827,14 +1825,14 @@ Example:
 
 ### `Block`
 
-A reference to a parsed block of Nushell code, without any captured variables.
+对已解析的 Nushell 代码块的引用，不包含任何捕获的变量。
 
-| Field    | Type                        |
+| 字段     | 类型                        |
 | -------- | --------------------------- |
 | **val**  | unsigned integer (block id) |
 | **span** | [`Span`](#span)             |
 
-Example:
+示例：
 
 ```json
 {
@@ -1850,23 +1848,23 @@ Example:
 
 ### `Closure`
 
-A reference to a parsed block of Nushell code, with variables captured from scope.
+对已解析的 Nushell 代码块的引用，包含从作用域捕获的变量。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | `Closure`       |
 | **span** | [`Span`](#span) |
 
-`Closure` is defined as:
+`Closure` 定义为：
 
-| Field        | Type                                                          |
+| 字段         | 类型                                                          |
 | ------------ | ------------------------------------------------------------- |
 | **block_id** | unsigned integer                                              |
 | **captures** | array of pairs (unsigned integer `var_id`, [`Value`](#value)) |
 
-The plugin **should not** try to inspect the contents of the closure. It is recommended that this is only used as an argument to the [`EvalClosure` engine call](#evalclosure-engine-call). The exact representation of a closure is likely to change in the future to avoid serializing all of the captures.
+插件**不应该**尝试检查闭包的内容。建议仅将其用作 [`EvalClosure` 引擎调用](#evalclosure-engine-call)的参数。闭包的确切表示可能会在未来更改，以避免序列化所有捕获。
 
-Example:
+示例：
 
 ```nu
 let foo = "bar"
@@ -1903,13 +1901,13 @@ let foo = "bar"
 
 ### `Nothing`
 
-The absence of a value, represented by `null` within Nushell.
+值的缺失，在 Nushell 中由 `null` 表示。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **span** | [`Span`](#span) |
 
-Example:
+示例：
 
 ```nu
 null
@@ -1928,14 +1926,14 @@ null
 
 ### `Error`
 
-An error contained within a value. Trying to operate on the value will most likely cause the error to be forwarded. When writing plugins, error values should typically be handled by returning the error from the command when encountered.
+值中包含的错误。尝试对值进行操作很可能会导致错误被转发。编写插件时，错误值通常应通过在遇到时从命令返回错误来处理。
 
-| Field    | Type                            |
+| 字段     | 类型                            |
 | -------- | ------------------------------- |
 | **val**  | [`LabeledError`](#labelederror) |
 | **span** | [`Span`](#span)                 |
 
-Example:
+示例：
 
 ```nu
 error make {
@@ -1975,16 +1973,16 @@ error make {
 
 ### `Binary`
 
-An array of raw bytes. This is sometimes returned from operations that detect data that isn't valid as UTF-8, but can also be created with `into binary` or binary literals.
+原始字节数组。这有时从检测到非有效 UTF-8 数据的操作返回，但也可以使用 `into binary` 或二进制字面量创建。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | byte array      |
 | **span** | [`Span`](#span) |
 
-Note that the encoding of byte arrays in [JSON](#json) and [MessagePack](#messagepack) is different - the former uses an array of numbers, but the latter uses the native byte array support.
+请注意，字节数组在 [JSON](#json) 和 [MessagePack](#messagepack) 中的编码不同 - 前者使用数字数组，但后者使用原生字节数组支持。
 
-Example:
+示例：
 
 ```nu
 0x[aa bb cc dd]
@@ -2004,30 +2002,30 @@ Example:
 
 ### `CellPath`
 
-Represents a path into subfields of lists, records, and tables.
+表示进入列表、记录和表格子字段的路径。
 
-| Field    | Type            |
+| 字段     | 类型            |
 | -------- | --------------- |
 | **val**  | `CellPath`      |
 | **span** | [`Span`](#span) |
 
-`CellPath` is defined as:
+`CellPath` 定义为：
 
-| Field       | Type         |
+| 字段        | 类型         |
 | ----------- | ------------ |
 | **members** | `PathMember` |
 
-`PathMember` has two variants, `String` or `Int`, and both contain the following fields:
+`PathMember` 有两个变体，`String` 或 `Int`，并且都包含以下字段：
 
-| Field        | Type                      |
+| 字段         | 类型                      |
 | ------------ | ------------------------- |
 | **val**      | string / unsigned integer |
 | **span**     | [`Span`](#span)           |
 | **optional** | boolean                   |
 
-Optional path members will not cause errors if they can't be accessed - the path access will just return [`Nothing`](#nothing) instead.
+可选路径成员如果无法访问不会导致错误 - 路径访问将返回 [`Nothing`](#nothing)。
 
-Example:
+示例：
 
 ```nu
 foo.0?.bar
@@ -2081,22 +2079,22 @@ foo.0?.bar
 
 ### `Custom`
 
-Represents data types that extend the base nushell types with custom functionality. Plugins can use custom values to implement native-like data types that can be indexed by cell paths, operated on by operators, and compared in plugin-defined ways.
+表示使用自定义功能扩展基础 nushell 类型的数据类型。插件可以使用自定义值来实现类似本地的数据类型，这些类型可以通过单元格路径索引、通过运算符操作，并以插件定义的方式进行比较。
 
-`Custom` values for plugins **may** only contain the following content map:
+插件的 `Custom` 值**可能**仅包含以下内容映射：
 
-| Field              | Type       | Description                                                                               |
-| ------------------ | ---------- | ----------------------------------------------------------------------------------------- |
-| **type**           | string     | **Must** be `"PluginCustomValue"`.                                                        |
-| **name**           | string     | The human-readable name of the custom value emitted by the plugin.                        |
-| **data**           | byte array | Plugin-defined representation of the custom value.                                        |
-| **notify_on_drop** | boolean    | Enable [drop notification](plugins.md#drop-notification). Default `false` if not present. |
+| 字段               | 类型       | 描述                                                                       |
+| ------------------ | ---------- | -------------------------------------------------------------------------- |
+| **type**           | string     | **必须**为 `"PluginCustomValue"`。                                         |
+| **name**           | string     | 插件发出的人类可读的自定义值名称。                                         |
+| **data**           | byte array | 插件定义的自定义值表示。                                                   |
+| **notify_on_drop** | boolean    | 启用[丢弃通知](plugins.md#drop-notification)。如果不存在，默认为 `false`。 |
 
-Plugins will only be sent custom values that they have previously emitted. Custom values from other plugins or custom values used within the Nu engine itself are not permitted to be sent to or from the plugin.
+插件只会收到它们之前发出的自定义值。不允许发送来自其他插件的自定义值或在 Nu 引擎本身内使用的自定义值。
 
-`notify_on_drop` is an optional field that **should** be omitted if `false`, to save bytes. If this is not convenient for your implementation, `"notify_on_drop": false` is still valid, but it's preferred to not include it.
+`notify_on_drop` 是一个可选字段，如果为 `false`**应该**省略，以节省字节。如果这对您的实现不方便，`"notify_on_drop": false` 仍然有效，但最好不包含它。
 
-Example:
+示例：
 
 ```json
 {
@@ -2115,11 +2113,11 @@ Example:
 }
 ```
 
-## Embedded Nu types
+## 嵌入式 Nu 类型
 
-Several types used within the protocol come from elsewhere in Nu's source code, especially the [`nu-protocol`](https://docs.rs/nu-protocol) crate.
+协议中使用的几种类型来自 Nu 源代码的其他地方，特别是 [`nu-protocol`](https://docs.rs/nu-protocol) crate。
 
-Rust enums are usually encoded in [serde](https://serde.rs)'s default format:
+Rust 枚举通常以 [serde](https://serde.rs) 的默认格式编码：
 
 ```javascript
 "Variant"             // Variant
@@ -2133,45 +2131,45 @@ Rust enums are usually encoded in [serde](https://serde.rs)'s default format:
 }                     // Variant { one: 1, two: 2 }
 ```
 
-Structs are encoded as maps of their fields, without the name of the struct.
+结构体被编码为其字段的映射，没有结构体名称。
 
 ### `Span`
 
-[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/span/struct.Span.html)
+[文档](https://docs.rs/nu-protocol/latest/nu_protocol/span/struct.Span.html)
 
-Describes a region of code in the engine's memory, used mostly for providing diagnostic error messages to the user with context about where a value that caused an error came from.
+描述引擎内存中的代码区域，主要用于向用户提供诊断错误消息，其中包含有关导致错误的值来源的上下文。
 
-| Field     | Type    | Description                                    |
-| --------- | ------- | ---------------------------------------------- |
-| **start** | integer | The index of the first character referenced.   |
-| **end**   | integer | The index after the last character referenced. |
+| 字段      | 类型    | 描述                           |
+| --------- | ------- | ------------------------------ |
+| **start** | integer | 引用的第一个字符的索引。       |
+| **end**   | integer | 引用的最后一个字符之后的索引。 |
 
 ### `PipelineDataHeader`
 
-Describes either a single value, or the beginning of a stream.
+描述单个值或流的开始。
 
-| Variant                                    | Description                              |
-| ------------------------------------------ | ---------------------------------------- |
-| [`Empty`](#empty-header-variant)           | No values produced; an empty stream.     |
-| [`Value`](#value-header-variant)           | A single value                           |
-| [`ListStream`](#liststream-header-variant) | Specify a list stream that will be sent. |
-| [`ByteStream`](#bytestream-header-variant) | Specify a byte stream that will be sent. |
+| 变体                                       | 描述                 |
+| ------------------------------------------ | -------------------- |
+| [`Empty`](#empty-header-variant)           | 不产生值；空流。     |
+| [`Value`](#value-header-variant)           | 单个值               |
+| [`ListStream`](#liststream-header-variant) | 指定将发送的列表流。 |
+| [`ByteStream`](#bytestream-header-variant) | 指定将发送的字节流。 |
 
-#### `Empty` header variant
+#### `Empty` 头变体
 
-An empty stream. Nothing will be sent. There is no identifier, and this is equivalent to a `Nothing` value.
+空流。不会发送任何内容。没有标识符，这等同于 `Nothing` 值。
 
-The representation is the following string:
+表示形式是以下字符串：
 
 ```json
 "Empty"
 ```
 
-#### `Value` header variant
+#### `Value` 头变体
 
-A single value. Does not start a stream, so there is no identifier. Contains a [`Value`](#value).
+单个值。不启动流，因此没有标识符。包含一个 [`Value`](#value)。
 
-Example:
+示例：
 
 ```json
 {
@@ -2187,18 +2185,18 @@ Example:
 }
 ```
 
-#### `ListStream` header variant
+#### `ListStream` 头变体
 
-Starts a list stream. Expect [`Data`](#data) messages of the `List` variant with the referenced ID.
+启动列表流。期望具有引用 ID 的 `List` 变体的 [`Data`](#data) 消息。
 
-Contains <a name="liststreaminfo">`ListStreamInfo`</a>, a map:
+包含 <a name="liststreaminfo">`ListStreamInfo`</a>，一个映射：
 
-| Field    | Type            | Description                                       |
-| -------- | --------------- | ------------------------------------------------- |
-| **id**   | integer         | The stream identifier                             |
-| **span** | [`Span`](#span) | The source code reference that caused the stream. |
+| 字段     | 类型            | 描述                 |
+| -------- | --------------- | -------------------- |
+| **id**   | integer         | 流标识符             |
+| **span** | [`Span`](#span) | 导致流的源代码引用。 |
 
-Example:
+示例：
 
 ```json
 {
@@ -2212,27 +2210,27 @@ Example:
 }
 ```
 
-#### `ByteStream` header variant
+#### `ByteStream` 头变体
 
-Starts a byte stream. Expect [`Data`](#data) messages of the `Raw` variant with the referenced ID.
+启动字节流。期望具有引用 ID 的 `Raw` 变体的 [`Data`](#data) 消息。
 
-| Field    | Type                                | Description                                       |
-| -------- | ----------------------------------- | ------------------------------------------------- |
-| **id**   | integer                             | The stream identifier                             |
-| **span** | [`Span`](#span)                     | The source code reference that caused the stream. |
-| **type** | [`ByteStreamType`](#bytestreamtype) | The expected type of the stream.                  |
+| 字段     | 类型                                | 描述                 |
+| -------- | ----------------------------------- | -------------------- |
+| **id**   | integer                             | 流标识符             |
+| **span** | [`Span`](#span)                     | 导致流的源代码引用。 |
+| **type** | [`ByteStreamType`](#bytestreamtype) | 流的预期类型。       |
 
-<a name="bytestreamtype"></a> Byte streams carry a `type` field with one of the three following strings:
+<a name="bytestreamtype"></a> 字节流携带一个 `type` 字段，包含以下三个字符串之一：
 
-| `type`      | Meaning                                                                                                                               |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `"Binary"`  | The stream contains binary data of unknown encoding, and should be treated as a `binary` value.                                       |
-| `"String"`  | The stream contains text data that is valid UTF-8, and should be treated as a `string` value.                                         |
-| `"Unknown"` | The type of the byte stream is unknown and should be inferred depending on whether its contents can be decoded as valid UTF-8 or not. |
+| `type`      | 含义                                                            |
+| ----------- | --------------------------------------------------------------- |
+| `"Binary"`  | 流包含未知编码的二进制数据，应视为 `binary` 值。                |
+| `"String"`  | 流包含有效 UTF-8 的文本数据，应视为 `string` 值。               |
+| `"Unknown"` | 字节流的类型未知，应根据其内容是否可以解码为有效 UTF-8 来推断。 |
 
-The `Unknown` type is used by Nu to represent the output of external commands if they are not passed through [`into string`](/commands/docs/into_string.md) or [`into binary`](/commands/docs/into_binary.md) to explicitly set their type. A command that declares an output type of exclusively either `string` or `binary` **must** explicitly type its output byte streams appropriately, to ensure they coerce to the correct type, rather than using `Unknown`.
+`Unknown` 类型由 Nu 用于表示外部命令的输出，如果它们没有通过 [`into string`](/commands/docs/into_string.md) 或 [`into binary`](/commands/docs/into_binary.md) 来显式设置其类型。声明输出类型仅为 `string` 或 `binary` 的命令**必须**适当地显式键入其输出字节流，以确保它们强制转换为正确的类型，而不是使用 `Unknown`。
 
-Example:
+示例：
 
 ```json
 {
@@ -2249,31 +2247,31 @@ Example:
 
 ### `LabeledError`
 
-[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/struct.LabeledError.html)
+[文档](https://docs.rs/nu-protocol/latest/nu_protocol/struct.LabeledError.html)
 
-A flexible, generic error type, with any number of labeled spans.
+灵活、通用的错误类型，具有任意数量的带标签的范围。
 
-| Field      | Type                  | Description                                                                                                    |
-| ---------- | --------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **msg**    | string                | The main error message to show at the top of the error.                                                        |
-| **labels** | `ErrorLabel` array?   | Spans and messages to label the error in the source code.                                                      |
-| **code**   | string?               | A unique machine- and search-friendly code that can be matched against, e.g. `nu::shell::missing_config_value` |
-| **url**    | string?               | A URL that links to additional information about the error.                                                    |
-| **help**   | string?               | Additional help for the error, usually a hint about what the user might try.                                   |
-| **inner**  | `LabeledError` array? | Additional errors referenced by the error, possibly the cause(s) of this error.                                |
+| 字段       | 类型                  | 描述                                                                   |
+| ---------- | --------------------- | ---------------------------------------------------------------------- |
+| **msg**    | string                | 在错误顶部显示的主要错误消息。                                         |
+| **labels** | `ErrorLabel` array?   | 在源代码中标记错误的范围和消息。                                       |
+| **code**   | string?               | 唯一且搜索友好的代码，可以匹配，例如 `nu::shell::missing_config_value` |
+| **url**    | string?               | 链接到有关错误的附加信息的 URL。                                       |
+| **help**   | string?               | 错误的附加帮助，通常是关于用户可以尝试什么的提示。                     |
+| **inner**  | `LabeledError` array? | 错误引用的附加错误，可能是此错误的原因。                               |
 
-Most of the fields are not required - only `msg` must be present. `ErrorLabel` (in the `labels` array) is as follows:
+大多数字段不是必需的 - 只有 `msg` 必须存在。`ErrorLabel`（在 `labels` 数组中）如下：
 
-| Field    | Type            | Description                                                 |
-| -------- | --------------- | ----------------------------------------------------------- |
-| **text** | string          | The message for the label.                                  |
-| **span** | [`Span`](#span) | The span in the source code that the label should point to. |
+| 字段     | 类型            | 描述                         |
+| -------- | --------------- | ---------------------------- |
+| **text** | string          | 标签的消息。                 |
+| **span** | [`Span`](#span) | 标签应指向的源代码中的范围。 |
 
 ::: tip
-When reading the Rust source code for the `nu-plugin` crates, many places where `LabeledError` is specified here are actually represented as `ShellError` in that implementation. However, `ShellError` always serializes as if it were `LabeledError`, so the difference between the two can be ignored within the protocol.
+在阅读 `nu-plugin` crates 的 Rust 源代码时，此处指定 `LabeledError` 的许多地方实际上在该实现中表示为 `ShellError`。但是，`ShellError` 总是序列化为 `LabeledError`，因此协议中可以忽略两者之间的差异。
 :::
 
-Example:
+示例：
 
 ```json
 {
@@ -2300,27 +2298,27 @@ Example:
 
 ### `Config`
 
-[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Config.html)
+[文档](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Config.html)
 
-This struct describes the configuration of Nushell. It is quite large and frequently changing, so please refer to the Rust documentation if there is anything you need from it.
+此结构体描述了 Nushell 的配置。它相当大且经常变化，因此如果您需要其中的任何内容，请参阅 Rust 文档。
 
 ### `Ordering`
 
-[Documentation](https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html)
+[文档](https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html)
 
-We serialize the Rust `Ordering` type as literal strings, for example:
+我们将 Rust `Ordering` 类型序列化为字面字符串，例如：
 
 ```js
-'Less'; // left hand side is less than right hand side
-'Equal'; // both values are equal
-'Greater'; // left hand side is greater than right hand side
+'Less'; // 左侧小于右侧
+'Equal'; // 两个值相等
+'Greater'; // 左侧大于右侧
 ```
 
 ### `Operator`
 
-[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/ast/enum.Operator.html)
+[文档](https://docs.rs/nu-protocol/latest/nu_protocol/ast/enum.Operator.html)
 
-Serialized with serde's default enum representation. Examples:
+使用 serde 的默认枚举表示法进行序列化。示例：
 
 ```js
 { "Math": "Append" }           // ++   Math(Append)
@@ -2330,11 +2328,11 @@ Serialized with serde's default enum representation. Examples:
 
 ### `SignalAction`
 
-The `SignalAction` enum is used to specify actions that the plugin should take in response to signals from the engine.
+`SignalAction` 枚举用于指定插件应响应来自引擎的信号而采取的操作。
 
-| Variant     | Description                                                                                                           |
-| ----------- | --------------------------------------------------------------------------------------------------------------------- |
-| `Interrupt` | Indicates an interrupt signal (e.g., Ctrl+C) was received. Plugins should pause, stop, or end their operation.        |
-| `Reset`     | Indicates a reset signal from the engine’s `reset_signals` function. Plugins should reset any internal signal states. |
+| 变体        | 描述                                                                      |
+| ----------- | ------------------------------------------------------------------------- |
+| `Interrupt` | 表示收到了中断信号（例如 Ctrl+C）。插件应暂停、停止或结束其操作。         |
+| `Reset`     | 表示来自引擎 `reset_signals` 函数的重置信号。插件应重置任何内部信号状态。 |
 
-This enum can be used in conjunction with `register_signal_handler` to perform specific tasks when each signal type is received.
+此枚举可以与 `register_signal_handler` 结合使用，以便在收到每种信号类型时执行特定任务。

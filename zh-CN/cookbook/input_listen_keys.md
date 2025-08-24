@@ -1,5 +1,5 @@
 ---
-title: 使用 `input listen` 对按键进行操作
+title: 使用 input listen 对按键进行操作
 ---
 
 # 使用 `input listen` 对按键进行操作

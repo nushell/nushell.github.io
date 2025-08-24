@@ -3,16 +3,16 @@
 Nushell 提供了几个命令来帮助确定不同代码组的执行方式。在编程语言中，这种功能通常被称为*控制流*。
 
 ::: tip
-需要注意的一点是，本页讨论的所有命令都使用[代码块](/book/types_of_data.html#blocks)。这意味着你可以在其中改变[环境变量](/book/environment.html)和其他[可变变量](/book/variables.html#mutable-variables)。
+需要注意的一点是，本页讨论的所有命令都使用[代码块](/zh-CN/book/types_of_data.html#blocks)。这意味着你可以在其中改变[环境变量](/zh-CN/book/environment.html)和其他[可变变量](/zh-CN/book/variables.html#mutable-variables)。
 :::
 
 ## 已涵盖内容
 
 下面我们介绍一些与控制流相关的命令，但在开始之前，值得注意的是，在其他章节中已经介绍了一些与控制流相关或可以在相同情况下使用的功能和概念。这些包括：
 
-- [管道](/book/pipelines.html)页面上的管道。
-- [数据类型](/book/types_of_data.html)页面上的闭包。
-- [使用列表](/book/working_with_lists.html)页面上的迭代命令。例如：
+- [管道](/zh-CN/book/pipelines.html)页面上的管道。
+- [数据类型](/zh-CN/book/types_of_data.html)页面上的闭包。
+- [使用列表](/zh-CN/book/working_with_lists.html)页面上的迭代命令。例如：
   - [`each`](/commands/docs/each.html)
   - [`where`](/commands/docs/where.html)
   - [`reduce`](/commands/docs/reduce.html)
@@ -33,7 +33,7 @@ Nushell 提供了几个命令来帮助确定不同代码组的执行方式。在
 
 ### `if`
 
-[`if`](/commands/docs/if.html) 根据一个或多个条件的结果来评估分支[代码块](/book/types_of_data.html#blocks)，类似于其他编程语言中的 "if" 功能。例如：
+[`if`](/commands/docs/if.html) 根据一个或多个条件的结果来评估分支[代码块](/zh-CN/book/types_of_data.html#blocks)，类似于其他编程语言中的 "if" 功能。例如：
 
 ```nu
 if $x > 0 { 'positive' }
@@ -76,7 +76,7 @@ match 3 {
 # => three
 ```
 
-分支可以返回单个值，或者如第二个分支所示，可以返回[代码块](/book/types_of_data.html#blocks)的结果。
+分支可以返回单个值，或者如第二个分支所示，可以返回[代码块](/zh-CN/book/types_of_data.html#blocks)的结果。
 
 #### 捕获所有分支
 
@@ -127,7 +127,7 @@ match $foo {
 
 ---
 
-你可以在[模式匹配手册页面](https://www.nushell.sh/cookbook/pattern_matching.html)中找到有关 [`match`](/commands/docs/match.html) 的更多详细信息。
+你可以在[模式匹配手册页面](https://www.nushell.sh/zh-CN/cookbook/pattern_matching.html)中找到有关 [`match`](/commands/docs/match.html) 的更多详细信息。
 
 ## 循环
 
@@ -156,13 +156,13 @@ $result
 # => ╰───┴───╯
 ```
 
-虽然如果你熟悉其他语言中的循环，可能会倾向于使用循环，但在 Nushell 中，当你能用任何一种方式解决问题时，使用应用闭包的命令被认为是更符合 [Nushell 风格](/book/thinking_in_nu.html)（惯用）的。原因在于使用循环有一个相当大的缺点。
+虽然如果你熟悉其他语言中的循环，可能会倾向于使用循环，但在 Nushell 中，当你能用任何一种方式解决问题时，使用应用闭包的命令被认为是更符合 [Nushell 风格](/zh-CN/book/thinking_in_nu.html)（惯用）的。原因在于使用循环有一个相当大的缺点。
 
 #### 循环的缺点
 
 循环最大的缺点是它们是语句，而 [`each`](/commands/docs/each.html) 是表达式。像 [`each`](/commands/docs/each.html) 这样的表达式总会产生某个输出值，而语句则不会。
 
-这意味着它们不能很好地与不可变变量一起工作，而使用不可变变量被认为是更符合 [Nushell 风格](/book/thinking_in_nu.html#variables-are-immutable)的。在上一节的示例中，如果没有预先声明的可变变量，就不可能使用 [`for`](/commands/docs/each.html) 来获取递增数字的列表，或任何值。
+这意味着它们不能很好地与不可变变量一起工作，而使用不可变变量被认为是更符合 [Nushell 风格](/zh-CN/book/thinking_in_nu.html#variables-are-immutable)的。在上一节的示例中，如果没有预先声明的可变变量，就不可能使用 [`for`](/commands/docs/each.html) 来获取递增数字的列表，或任何值。
 
 语句在需要某些输出的 Nushell 管道中也无法工作。事实上，如果你尝试这样做，Nushell 会报错：
 
@@ -198,7 +198,7 @@ mut foo = []
 # =>    ╰────
 ```
 
-如果你在闭包中修改环境变量，你可以，但它只会在闭包的作用域内修改它，在其他地方保持不变。然而，循环使用[代码块](/book/types_of_data.html#blocks)，这意味着它们可以在更大的作用域内修改常规的可变变量或环境变量。
+如果你在闭包中修改环境变量，你可以，但它只会在闭包的作用域内修改它，在其他地方保持不变。然而，循环使用[代码块](/zh-CN/book/types_of_data.html#blocks)，这意味着它们可以在更大的作用域内修改常规的可变变量或环境变量。
 
 ```nu
 mut result = []
@@ -299,7 +299,7 @@ print 'printed'; error make { msg: 'Some error info' }; print 'unprinted'
 
 传递给它的记录为捕获它的代码或最终的错误消息提供了一些信息。
 
-你可以在[创建自己的错误页面](/book/creating_errors.html)上找到有关 [`error make`](/commands/docs/error_make.html) 和错误概念的更多信息。
+你可以在[创建自己的错误页面](/zh-CN/book/creating_errors.html)上找到有关 [`error make`](/commands/docs/error_make.html) 和错误概念的更多信息。
 
 ### `try`
 

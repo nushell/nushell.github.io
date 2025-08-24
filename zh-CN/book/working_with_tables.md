@@ -25,7 +25,7 @@ ls
 
 ::: tip 改变表格显示方式
 Nu 默认会展开所有表格结构。你可以通过修改 `display_output` 钩子来改变这一行为。
-详见 [hooks](/book/hooks.md#changing-how-output-is-displayed)。
+详见 [hooks](/zh-CN/book/hooks.md#changing-how-output-is-displayed)。
 :::
 
 ## 排序

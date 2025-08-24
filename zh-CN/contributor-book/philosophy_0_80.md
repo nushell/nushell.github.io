@@ -1,163 +1,163 @@
 ---
-title: Philosophy (0.80)
+title: 理念 (0.80)
 ---
 
-# Nushell design philosophy
+# Nushell 设计理念
 
-## Core philosophy
+## 核心理念
 
-Nushell is "A shell-first scripting language for working with structured data flowing through pipelines".
+Nushell 是"一个 shell 优先的脚本语言，用于处理流经管道的结构化数据"。
 
-Designs should work towards serving this goal. Those that don't should be removed or moved to optional add-ons.
+设计应该朝着服务于这个目标而努力。那些不符合这个目标的设计应该被移除或移动到可选的附加组件中。
 
-## Core design
+## 核心设计
 
-### Shell-first
+### Shell 优先
 
-Nushell should work to serve its role as a shell and a language with a focus on shells. Shell types of activities include, but aren't limited to:
+Nushell 应该努力服务于其作为 shell 和具有 shell 焦点的语言的角色。Shell 类型的活动包括但不限于：
 
-- Running commands
-- Redirecting stdout/stdin/stderr
-- Unix-only: Properly handling signals
+- 运行命令
+- 重定向 stdout/stdin/stderr
+- 仅限 Unix：正确处理信号
   - Ctrl-C
   - Ctrl-D
-  - and others
-- Support for background tasks
-  - In Unix, this may mean Ctrl-Z and traditional background/foregrounding of tasks or a more modern approach
+  - 以及其他
+- 支持后台任务
+  - 在 Unix 中，这可能意味着 Ctrl-Z 和传统的任务后台/前台处理，或者更现代的方法
 
-In cases where the user would reasonably have an expectation of the functionality of the shell, we should make every effort to include. If a feature would be a reasonable expectation (say ctrl-z on Unix), then we should have OS-specific functionality for that platform that meets that expectation.
+在用户合理期望 shell 功能的情况下，我们应该尽一切努力包含它。如果一个功能是合理的期望（比如 Unix 上的 ctrl-z），那么我们应该为该平台提供满足该期望的特定于操作系统的功能。
 
-### Scripting language
+### 脚本语言
 
-The intent of Nushell's design is to be a scripting language. Scripting can take many forms, from simple pipelines to large scripts. Nushell should handle these with ease by meeting reasonable expectations in terms of:
+Nushell 设计的意图是成为一种脚本语言。脚本可以采取多种形式，从简单的管道到大型脚本。Nushell 应该通过满足以下方面的合理期望来轻松处理这些：
 
-- Modularity
-- Readability
-- Programming language features and convenience
+- 模块化
+- 可读性
+- 编程语言功能和便利性
 
-### Structured data
+### 结构化数据
 
-In Nushell, all data is "structured". For Nushell, this means that values can take shapes beyond just a simple string.
+在 Nushell 中，所有数据都是"结构化的"。对于 Nushell，这意味着值可以采取不仅仅是简单字符串的形状。
 
-Values in Nushell can be records, lists, tables, binary data, and more. Being able to convert into structured data and work with structured data is fundamental to Nushell.
+Nushell 中的值可以是记录、列表、表格、二进制数据等。能够转换为结构化数据并使用结构化数据是 Nushell 的基础。
 
-### Pipelines
+### 管道
 
-Nushell takes the Unix philosophy of pipelines to heart. Commands should be built with the intent of composition. Nushell enables composition via the use of pipes (`|`), just like Unix pipelines.
+Nushell 认真对待 Unix 的管道哲学。命令应该以组合的意图构建。Nushell 通过使用管道（`|`）实现组合，就像 Unix 管道一样。
 
-Composing commands, both built-in and user-defined, is a core piece of Nushell. The design of Nushell and its standard library must support both easily composing commands as well as allowing the user to easily create compose-able commands.
+组合命令，无论是内置的还是用户定义的，都是 Nushell 的核心部分。Nushell 及其标准库的设计必须既支持轻松组合命令，又允许用户轻松创建可组合的命令。
 
-### Command philosophy
+### 命令理念
 
-Specifically, Nushell's philosophy about commands is represented by the following positions (these apply especially to the library of builtin commands distributed with nushell, but are also good guidance for your own commands and plugins):
+具体来说，Nushell 关于命令的理念由以下立场代表（这些尤其适用于与 nushell 一起分发的内置命令库，但对于你自己的命令和插件也是很好的指导）：
 
-1. There should be one -- and preferably only one -- obvious way to do it.
-   You will probably recognize this from the "[Zen of Python](https://peps.python.org/pep-0020/)"!
+1. 应该有一种——最好只有一种——明显的方法来做这件事。
+   你可能会从"[Python 之禅](https://peps.python.org/pep-0020/)"中认出这一点！
 
-2. The aim of our library of builtin commands is to provide a collection of simple and composable primitive commands, that covers essential shell programming needs and allows virtually anything to be built via composition and creation of custom user commands and plugins.
-   That's as opposed to maintaining an extensive catalog of more specialized commands in the core nushell codebase: more specialized functionality should exist as community-contributed libraries (e.g. plugins/nushell libraries).
+2. 我们内置命令库的目标是提供一组简单且可组合的原始命令，涵盖基本的 shell 编程需求，并允许通过组合和创建自定义用户命令和插件来构建几乎所有东西。
+   这与在核心 nushell 代码库中维护大量更专业的命令目录相反：更专业的功能应该作为社区贡献的库存在（例如插件/nushell 库）。
 
-3. If something can be done conveniently by composition of simpler commands then we do not add flags and options to do the same thing.
+3. 如果某件事可以通过组合更简单的命令来方便地完成，那么我们不会添加标志和选项来做同样的事情。
 
-4. The primary input to a command should generally be supplied as "input", not as a positional argument.
-   This is what enables pipeline composition.
+4. 命令的主要输入通常应该作为"输入"提供，而不是作为位置参数。
+   这实现了管道组合。
 
-5. A given command, on a given input, should generally always produce the same type of output data structure; the presence/absence/value of arguments and flags shouldn't change the output type.
+5. 给定命令在给定输入上通常应该总是产生相同类型的输出数据结构；参数和标志的存在/缺失/值不应改变输出类型。
 
-6. Commands should not consume their entire input streams unless that is explicitly part of the functionality of that command.
+6. 命令不应消耗其整个输入流，除非这是该命令功能的明确部分。
 
-## Command signatures and their parts
+## 命令签名及其部分
 
-### Signature
+### 签名
 
-The signature of the command describes the following:
+命令的签名描述以下内容：
 
-- The name of the command
-- The usage information (documentation) for the command
-- The name and type of:
-  - Named parameters
-  - Positional parameters
-- The type of:
-  - Input
-  - Output
+- 命令的名称
+- 命令的使用信息（文档）
+- 以下内容的名称和类型：
+  - 命名参数
+  - 位置参数
+- 以下内容的类型：
+  - 输入
+  - 输出
 
-### When to use input
+### 何时使用输入
 
-Input is intended for one or both of:
+输入用于以下一个或两个目的：
 
-- Pipeline composition
-- Streams of data
+- 管道组合
+- 数据流
 
-### When to use output
+### 何时使用输出
 
-All return values are output.
+所有返回值都是输出。
 
-### When to use positional parameters
+### 何时使用位置参数
 
-Use a positional parameter when:
+在以下情况下使用位置参数：
 
-- A parameter is required
+- 参数是必需的
 
-### When to use rest parameters
+### 何时使用 rest 参数
 
-Use a rest parameter when:
+在以下情况下使用 rest 参数：
 
-- A command takes some number of additional optional arguments of the same type
+- 命令接受一些相同类型的额外可选参数
 
-### When to use named parameters
+### 何时使用命名参数
 
-Use a named parameter (a flag parameter) when:
+在以下情况下使用命名参数（标志参数）：
 
-- The value you need is optional
+- 你需要的值是可选的
 
-### When to use a switch flag
+### 何时使用开关标志
 
-Use a switch flag when:
+在以下情况下使用开关标志：
 
-- You need to allow the user to change the default action of the command
+- 你需要允许用户更改命令的默认操作
 
-### Comments
+### 注释
 
-Commands should be commented to describe their function and usage. This documentation should also cover parameters and their use.
+命令应该被注释以描述它们的功能和用法。此文档还应涵盖参数及其使用。
 
-## Core categories
+## 核心类别
 
-The core language and standard library needs to cover the following categories to support common use cases for Nushell:
+核心语言和标准库需要涵盖以下类别以支持 Nushell 的常见用例：
 
-- Filesystem
-- Operating system
-- Manipulating the environment
-- Parsing string data into structured data
-- Formatting structured data as standard string formats (CSV and JSON)
-- Querying, filtering, and manipulating structured data
-- Network connectivity
-  - note: Network support is fundamental because with it users can easily acquire and install Nushell extensions
-- Basic formats (exact list to be determined by common use cases)
-- Basic date support
+- 文件系统
+- 操作系统
+- 操作环境
+- 将字符串数据解析为结构化数据
+- 将结构化数据格式化为标准字符串格式（CSV 和 JSON）
+- 查询、过滤和操作结构化数据
+- 网络连接性
+  - 注意：网络支持是基础的，因为有了它用户可以轻松获取和安装 Nushell 扩展
+- 基本格式（确切列表由常见用例确定）
+- 基本日期支持
 
-The following categories should be moved to plugins:
+以下类别应移至插件：
 
-- Database connectivity
-- Dataframe support
-- Hash functionality
-- Uncommon format support
-- Experimental commands
-- Supplemental random number support (eg `random dice`)
-- Supplemental math support from `math`
-- Supplemental binary data functionality from `bytes`
-- Advanced date support
+- 数据库连接性
+- 数据框支持
+- 哈希功能
+- 不常见的格式支持
+- 实验性命令
+- 补充的随机数支持（例如 `random dice`）
+- 来自 `math` 的补充数学支持
+- 来自 `bytes` 的补充二进制数据功能
+- 高级日期支持
 
-We should select commands to be in the core categories which meet the common use cases for Nushell. Commands that are in the core categories that are uncommon use cases should move to optional extensions.
+我们应该选择满足 Nushell 常见用例的核心类别中的命令。核心类别中不常见用例的命令应移至可选扩展。
 
-## Language design
+## 语言设计
 
-Rather than describe the whole of the language here, this section describes the changes expected to come as part of 0.80 and how they differ from the 0.60 series.
+与其在这里描述整个语言，本节描述了作为 0.80 一部分预期的更改以及它们与 0.60 系列的不同之处。
 
-### More shell functionality
+### 更多 shell 功能
 
-Being a shell-focused language means incorporating more of the expected shell-features into the language. These include:
+成为以 shell 为中心的语言意味着将更多预期的 shell 功能纳入语言。这些包括：
 
-Redirection (with common variations):
+重定向（带有常见变体）：
 
 ```bash
 cat foo.txt > bar.txt
@@ -165,34 +165,34 @@ cat foo.txt >> bar.txt
 cat foo.txt 2> bar.txt
 ```
 
-Note: as of 0.72, these are currently:
+注意：截至 0.72，这些目前是：
 
 ```nu
 cat foo.txt out> bar.txt
 cat foo.txt err> bar.txt
 ```
 
-(note: no operator support for append currently)
+（注意：目前没有追加操作符支持）
 
-Equivalent functionality for Bash logic operators:
+等效的 Bash 逻辑操作符功能：
 
 ```bash
 cat foo.txt && cat bar.txt
 cat foo.txt || cat bar.txt
 ```
 
-Note: as of 0.72, these are currently:
+注意：截至 0.72，这些目前是：
 
 ```nu
 cat foo.txt; cat bar.txt
 try { cat foo.txt } catch { cat bar.txt }
 ```
 
-We don't have plans to support the full bash language.
+我们没有计划支持完整的 bash 语言。
 
-### Limited mutation
+### 有限突变
 
-In 0.80, there will be a limited form of mutation that works with the local command.
+在 0.80 中，将有一种有限形式的突变，可以与本地命令一起工作。
 
 ```nu
 mut x = 100
@@ -200,17 +200,17 @@ $x = 200
 print $x
 ```
 
-This will help with some patterns where people wanted to calculate something in a loop but didn't have an easy way to do so previously.
+这将有助于一些模式，其中人们想要在循环中计算某些东西，但之前没有简单的方法来做到这一点。
 
-### Splitting closures and blocks
+### 分离闭包和块
 
-Connected to mutation is the idea that blocks and closures will be separate concepts in 0.80. In the 0.60 series, these were largely both treated on under the same concept as "blocks".
+与突变相关的是块和闭包在 0.80 中将是独立的概念。在 0.60 系列中，这些在很大程度上都被视为"块"的同一概念。
 
-In the future, a block will not be a first-class value. Instead, it will be expected to be run by the command you give it to and not passed into the pipeline. This allows blocks to work with mutable variables.
+将来，块将不是一等值。相反，它将被期望由你给它的命令运行，而不是传递到管道中。这允许块与可变变量一起工作。
 
-Closures retain the capabilities of 0.60 and can be used as first-class values, but can't mutate variables.
+闭包保留了 0.60 的功能，可以用作一等值，但不能修改变量。
 
-Block example:
+块示例：
 
 ```nu
 for x in 1..100 {
@@ -218,14 +218,14 @@ for x in 1..100 {
 }
 ```
 
-Closure example:
+闭包示例：
 
 ```nu
 ls | each { |x| $x.name + "foo" }
 ```
 
-## Extensions
+## 扩展
 
-We will need to design and implement an easy-to-use extension mechanism that allows people to extend Nushell with additional functionality. This will be important both for helping shrink the core Nushell down but also to make it easy for contributors to create and share their own extensions.
+我们将需要设计和实现一个易于使用的扩展机制，允许人们用额外的功能扩展 Nushell。这对于帮助缩小核心 Nushell 的大小以及使贡献者能够轻松创建和共享他们自己的扩展都很重要。
 
-The extension mechanism will need a standard form by 1.0. For 0.80, we should have our best guess at a complete solution that meets the design goals.
+扩展机制需要在 1.0 之前有一个标准形式。对于 0.80，我们应该有我们对满足设计目标的完整解决方案的最佳猜测。

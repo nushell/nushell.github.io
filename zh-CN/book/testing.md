@@ -3,7 +3,8 @@
 ## 断言命令
 
 Nushell 在标准库中提供了一组"断言"命令。
-可以使用内置的相等/顺序测试，如 `==` 或 `<=` 或更复杂的命令，并在预期条件失败时手动抛出错误，但使用标准库提供的内容可以说更容易！
+
+我们确实可以使用内置的相等/顺序命令实现测试目的，如 `==` 或 `<=` 或更复杂的命令，并在预期条件失败时手动抛出错误，但使用标准库提供的内容可以说更容易！
 
 在下文中，将假设 `std assert` 模块已在当前作用域中导入
 
@@ -31,15 +32,15 @@ Error:
 
 ```nu
 let a = 0
-assert ($a == 19) $"锁定代码错误，收到：($a)"
+assert ($a == 19) $"The lockout code is wrong, received: ($a)"
 ```
 
 ```
 Error:
-  × 锁定代码错误，收到：13
+  × The lockout code is wrong, received: 13
    ╭─[entry #25:1:1]
  1 │ let a = 0
- 2 │ assert ($a == 19) $"锁定代码错误，收到：($a)"
+ 2 │ assert ($a == 19) $"The lockout code is wrong, received: ($a)"
    ·         ────┬───
    ·             ╰── It is not true.
    ╰────
@@ -89,7 +90,7 @@ Error:   × Assertion failed.
 ```nu
 def "assert even" [number: int] {
     assert ($number mod 2 == 0) --error-label {
-        text: $"($number) 不是偶数",
+        text: $"($number) is not an even number",
         span: (metadata $number).span,
     }
 }
@@ -108,7 +109,7 @@ Error:
    ╭─[entry #37:1:1]
  1 │ assert even $a
    ·             ─┬
-   ·              ╰── 13 不是偶数
+   ·              ╰── 13 is not an even number
    ╰────
 ```
 
@@ -185,7 +186,7 @@ use std/assert
 source fib.nu
 
 def main [] {
-    print "运行测试中..."
+    print "Running tests..."
 
     let test_commands = (
         scope commands
@@ -193,12 +194,12 @@ def main [] {
                 and ($it.name | str starts-with "test ")
                 and not ($it.description | str starts-with "ignore")
             | get name
-            | each { |test| [$"print '运行测试：($test)'", $test] } | flatten
+            | each { |test| [$"print 'Running test: ($test)'", $test] } | flatten
             | str join "; "
     )
 
     nu --commands $"source ($env.CURRENT_FILE); ($test_commands)"
-    print "测试成功完成"
+    print "Tests completed successfully"
 }
 
 def "test fib" [] {
@@ -219,7 +220,7 @@ def "test fib" [] {
 
 # ignore
 def "test show-ignored-test" [] {
-    print "此测试将不会被执行"
+    print "This test will not be executed"
 }
 ```
 

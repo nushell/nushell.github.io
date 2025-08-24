@@ -1,46 +1,46 @@
 ---
-title: Commands
+title: 命令
 ---
 
-# Commands
+# 命令
 
-Commands are the building blocks for pipelines in Nu. They do the action of the pipeline, whether creating data, changing data as it flows from inputs to outputs, or viewing data once it has exited the pipeline. There are two types of commands: internal commands, those commands built to run inside of Nu, and external commands, commands that are outside of Nu and communicate with standard Unix-style `stdin`/`stdout`.
+命令是 Nu 中管道的构建块。它们执行管道的操作，无论是创建数据、在数据从输入流向输出时更改数据，还是在数据退出管道后查看数据。有两种类型的命令：内部命令，即构建在 Nu 内部运行的命令；以及外部命令，即位于 Nu 外部并通过标准 Unix 风格的 `stdin`/`stdout` 进行通信的命令。
 
-## Internal commands
+## 内部命令
 
-All commands inside of Nu, including plugins, are internal commands. Internal commands communicate with each other using [`PipelineData`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.PipelineData.html).
+Nu 内部的所有命令，包括插件，都是内部命令。内部命令使用 [`PipelineData`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.PipelineData.html) 相互通信。
 
-### Signature
+### 签名
 
-Commands use a light typechecking pass to ensure that arguments passed to them can be handled correctly. To enable this, each [`Command`](https://docs.rs/nu-protocol/latest/nu_protocol/engine/trait.Command.html) provides a [`Signature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Signature.html) which tells Nu:
+命令使用轻量级类型检查来确保传递给它们的参数能够正确处理。为了实现这一点，每个 [`Command`](https://docs.rs/nu-protocol/latest/nu_protocol/engine/trait.Command.html) 都提供一个 [`Signature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Signature.html)，它告诉 Nu：
 
-- The name of the command
-- The positional arguments (e.g. in `start x y` the `x` and `y` are positional arguments)
-- If the command takes an unbounded number of additional positional arguments (e.g. `start a1 a2 a3 ... a99 a100`)
-- The named arguments (e.g. `ansi gradient --fgstart '0x40c9ff'`)
+- 命令的名称
+- 位置参数（例如在 `start x y` 中，`x` 和 `y` 是位置参数）
+- 命令是否接受无限数量的额外位置参数（例如 `start a1 a2 a3 ... a99 a100`）
+- 命名参数（例如 `ansi gradient --fgstart '0x40c9ff'`）
 
-With this information, a pipeline can be checked for potential problems before it's executed.
+有了这些信息，可以在执行之前检查管道是否存在潜在问题。
 
-## External commands
+## 外部命令
 
-An external command is any command that is not part of the Nu built-in commands or plugins. If a command is called that Nu does not know about, it will call out to the underlying environment with the provided arguments in an attempt to invoke this command as an external program.
+外部命令是不属于 Nu 内置命令或插件的任何命令。如果调用了一个 Nu 不知道的命令，它将使用提供的参数调用底层环境，尝试将此命令作为外部程序调用。
 
-## Communicating between internal and external commands
+## 内部和外部命令之间的通信
 
-### Internal to internal
+### 内部到内部
 
-Internal commands communicate with each other using the complete value stream that Nu provides, which includes all the built-in file types. This includes communication between internal commands and plugins (in both directions).
+内部命令使用 Nu 提供的完整值流相互通信，其中包括所有内置文件类型。这包括内部命令和插件之间的通信（双向）。
 
-### Internal to external
+### 内部到外部
 
-Internal commands that send text to external commands need to have prepared text strings ahead of time. If an object is sent directly to an external command, that is considered an error as there is no way to infer how the structured data should be represented for the external command. The user is expected to either narrow down to a simple data cell or to use one of the file type converters (like `to json`) to convert the table into a string representation.
+向外部命令发送文本的内部命令需要提前准备好文本字符串。如果直接将对象发送到外部命令，这将被视为错误，因为无法推断结构化数据应如何为外部命令表示。期望用户要么缩小到简单的数据单元格，要么使用文件类型转换器之一（如 `to json`）将表格转换为字符串表示形式。
 
-The external command is opened so that its `stdin` is redirected, so that the data can be sent to it.
+外部命令被打开，以便重定向其 `stdin`，从而可以将数据发送给它。
 
-### External to internal
+### 外部到内部
 
-External commands send a series of strings via their `stdout`. These strings are read into the pipeline and are made available to the internal command that is next in the pipeline, or displayed to the user if the external command is the last step of the pipeline.
+外部命令通过其 `stdout` 发送一系列字符串。这些字符串被读入管道，并可供管道中的下一个内部命令使用，或者如果外部命令是管道的最后一步，则显示给用户。
 
-### External to external
+### 外部到外部
 
-External commands communicate with each other via `stdin`/`stdout`. As Nu will detect this situation, it will redirect the `stdout` of the first command to the `stdin` of the following external command. In this way, the expected behavior of a shell pipeline between external commands is maintained.
+外部命令通过 `stdin`/`stdout` 相互通信。由于 Nu 会检测到这种情况，它将把第一个命令的 `stdout` 重定向到后续外部命令的 `stdin`。通过这种方式，保持了外部命令之间 shell 管道的预期行为。

@@ -67,7 +67,7 @@ $first_table
 # => ───┴───┴───┴───┴───┴───┴───
 ```
 
-或者如 [实战指南](https://www.nushell.sh/book/working_with_tables.html#merging-tables) 中提到的，我们可以使用 [`reduce`](../commands/docs/reduce.md) 命令递归地合并表格：
+或者如 [Nushell 之书](../book/working_with_tables.html#合并表格) 中提到的，我们可以使用 [`reduce`](../commands/docs/reduce.md) 命令递归地合并表格：
 
 ```nu
 [$first_table $second_table $third_table]

@@ -39,7 +39,7 @@ use std/util "path add"
 path add '~/.local/bin'
 ```
 
-更多信息，请参阅关于 [环境变量](/book/environment.html#setting-environment-variables) 和 [PATH 配置](/book/configuration.html#path-configuration) 的文档。
+更多信息，请参阅关于 [环境变量](/zh-CN/book/environment.html#setting-environment-variables) 和 [PATH 配置](/zh-CN/book/configuration.html#path-configuration) 的文档。
 
 ### 如何列出你的环境变量
 

@@ -1,25 +1,25 @@
 ---
-title: Philosophy
+title: 理念
 ---
 
-# Philosophy
+# 理念
 
-## Core Values
+## 核心价值
 
-Nu's core value is that working in a shell should be fun. To support this, we believe that:
+Nu 的核心价值是在 shell 中工作应该是有趣的。为了支持这一点，我们相信：
 
-- A modern shell should be designed for usability and ergonomics. **Above all else, Nu should be fun to use.**
-- It should provide great informative errors messages when a command will not succeed correctly. This is critically important. A fun shell gives **clear, actionable errors**.
-- It should be built around supporting casual use, as this is the majority of use in a shell, even by experienced users. Building a shell that is **fun for casual use makes a fun shell for everyone**.
-- Nu supports experimentation and **growing ideas from experiments to programs**. The ability to evolve ideas to one-liners, scripts, and then to programs is a key role a shell plays. To support this, Nu builds on the idea of composable commands that work on a shared set of data types.
+- 现代 shell 应该为可用性和人体工程学而设计。**最重要的是，Nu 应该使用起来有趣。**
+- 当命令无法正确成功时，它应该提供很好的信息性错误消息。这至关重要。一个有趣的 shell 提供**清晰、可操作的错误**。
+- 它应该围绕支持休闲使用而构建，因为这是 shell 中的主要用途，即使是有经验的用户也是如此。构建一个**对休闲使用有趣的 shell 会让每个人都觉得有趣**。
+- Nu 支持实验和**将想法从实验发展为程序**。将想法演变为单行命令、脚本，然后发展为程序的能力是 shell 扮演的关键角色。为了支持这一点，Nu 建立在可组合命令的概念之上，这些命令在共享的数据类型集上工作。
 
-## Non-goals
+## 非目标
 
-- _Optimal performance_. While we care about performance, the focus on performance should be in service of making Nu more usable and enjoyable to use. Best performance on micro-benchmarks is a non-goal.
-- _Strictness_. We want to help users write good scripts, but we should focus on helping them write correct scripts with good errors and good documentation.
-- _POSIX-compliance_. Nu intentionally optimizes for a pleasant experience over matching how commandline programs work in a POSIX-compliant way. It's important to be able to interop between Nu commands and external commands, but maintaining strict compatibility is a non-goal.
-- _Paradigm adherence_. Nu looks at the shell space flexibly, and borrows good ideas where possible from functional programming, systems programming, OOP, and more. Following any particular paradigm rigidly does not serve the goals of the Nu project.
+- _最优性能_。虽然我们关心性能，但对性能的关注应该服务于使 Nu 更可用和更愉快地使用。微基准测试上的最佳性能是一个非目标。
+- _严格性_。我们想帮助用户编写好的脚本，但我们应该专注于帮助他们编写正确的脚本，提供良好的错误和良好的文档。
+- _POSIX 兼容性_。Nu 有意优化为愉快的体验，而不是匹配命令行程序在 POSIX 兼容方式下的工作方式。能够在 Nu 命令和外部命令之间互操作很重要，但保持严格兼容性是一个非目标。
+- _范式坚持_。Nu 灵活地看待 shell 空间，并在可能的情况下从函数式编程、系统编程、OOP 等中借鉴好的想法。严格遵循任何特定范式都不符合 Nu 项目的目标。
 
-## Basic Design
+## 基本设计
 
-The core of the Nu design is the data model. Commands largely follow in service of making it easy to create data, to work with data, and to view data. One of the visible pieces of this work is the pipeline, which borrows heavily from the original Unix ideas of connecting simple programs together into more complex commands. Nu takes this Unix philosophy and extends it from only strings to the wider data set that is more common in modern programming languages.
+Nu 设计的核心是数据模型。命令主要服务于使创建数据、处理数据和查看数据变得容易。这项工作的一个可见部分是管道，它大量借鉴了原始 Unix 将简单程序连接成更复杂命令的思想。Nu 采用这种 Unix 哲学，并将其从仅字符串扩展到现代编程语言中更常见的数据集。

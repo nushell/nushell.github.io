@@ -62,7 +62,7 @@
 
 ## 覆层和"虚拟环境"
 
-[覆层](/book/overlays.md)是 **层** 的 **定义** 。我们可以利用它来建立一个临时的虚拟环境，其中包含自定义环境变量，最后再丢弃这些变量。
+[覆层](/zh-CN/book/overlays.md)是 **层** 的 **定义** 。我们可以利用它来建立一个临时的虚拟环境，其中包含自定义环境变量，最后再丢弃这些变量。
 
 我们在这个示例中的目标是：
 
@@ -113,10 +113,10 @@ print $"('A' in $env) ('B' in $env)"
 # => true false
 ```
 
-请注意 - 如[覆层](/book/overlays.md)中所述 - 重新激活覆层将恢复加载的环境变量，
+请注意 - 如[覆层](/zh-CN/book/overlays.md)中所述 - 重新激活覆层将恢复加载的环境变量，
 只要 Nushell 会话保持活动状态，就不会创建新的上下文，尽管 `overlay list` 不再列出覆层。
 
-更多相关信息，特别是关于环境变量及其修改的信息，可以在[环境](/book/environment.md)、[模块](/book/modules.md)、[覆层](/book/overlays.md)中找到，
+更多相关信息，特别是关于环境变量及其修改的信息，可以在[环境](/zh-CN/book/environment.md)、[模块](/zh-CN/book/modules.md)、[覆层](/zh-CN/book/overlays.md)中找到，
 以及相应的命令文档：[`def --env`](/commands/docs/def.md)、[`export def --env`](/commands/docs/export_def.md)、[`load-env`](/commands/docs/load-env.md) 和 [`export-env`](/commands/docs/export-env.md)。
 
 ### 复杂的虚拟环境

@@ -668,7 +668,7 @@ vip-greet Rahul Priya Arjun Anjali Vikram
 # => And a special welcome to our VIP today, Rahul!
 ```
 
-要将列表传递给剩余参数，你可以使用[展开运算符](/book/operators#spread-operator) (`...`)。使用上面的 `vip-greet` 命令定义：
+要将列表传递给剩余参数，你可以使用[展开运算符](/zh-CN/book/operators#spread-operator) (`...`)。使用上面的 `vip-greet` 命令定义：
 
 ```nu
 let vip = "Tanisha"

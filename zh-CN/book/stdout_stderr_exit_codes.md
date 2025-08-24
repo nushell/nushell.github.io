@@ -60,13 +60,13 @@ do -i { cat unknown.txt } | complete
 
 相比之下，[`print`](/commands/docs/print.md) 命令将给定值作为纯文本打印到 stdout。它也可以用于写入标准错误输出。与 [`echo`](/commands/docs/echo.md) 不同，此命令不返回任何值（`print | describe` 将返回 "nothing"）。由于此命令没有输出，因此将其与其他命令管道连接没有意义。
 
-[标准库](/book/standard_library.md) 提供了在不同日志级别写入消息的命令。例如：
+[标准库](/zh-CN/book/standard_library.md) 提供了在不同日志级别写入消息的命令。例如：
 
 @[code](@snippets/book/std_log.nu)
 
 ![日志消息示例](../../assets/images/0_79_std_log.png)
 
-可以使用 [`NU_LOG_LEVEL`](/book/special_variables.md#env-nu-log-level) 环境变量设置输出日志级别：
+可以使用 [`NU_LOG_LEVEL`](/zh-CN/book/special_variables.md#env-nu-log-level) 环境变量设置输出日志级别：
 
 ```nu
 NU_LOG_LEVEL=DEBUG nu std_log.nu

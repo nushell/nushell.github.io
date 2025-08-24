@@ -68,7 +68,7 @@ $colors
 
 ### 使用展开运算符
 
-要将一个或多个列表追加在一起，可以选择在中间穿插值，你也可以使用[展开运算符](/book/operators#spread-operator) (`...`)：
+要将一个或多个列表追加在一起，可以选择在中间穿插值，你也可以使用[展开运算符](/zh-CN/book/operators#spread-operator) (`...`)：
 
 ```nu
 let x = [1 2]

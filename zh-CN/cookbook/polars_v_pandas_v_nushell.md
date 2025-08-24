@@ -4,7 +4,7 @@ title: Polars vs Pandas vs Nushell
 
 # Polars vs Pandas vs Nushell
 
-基于 https://studioterabyte.nl/en/blog/polars-vs-pandas 的 dataframe 示例
+dataframe 示例来源于 https://studioterabyte.nl/en/blog/polars-vs-pandas
 
 ## 1. 打开文件并显示 DataFrame 的形状
 

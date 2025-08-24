@@ -493,7 +493,7 @@ $env.LS_COLORS = (vivid generate molokai)
 $env.LS_COLORS = (vivid generate ayu)
 ```
 
-你可以将此命令放入你的 [Nushell 配置](/book/configuration.md)中，使其成为默认颜色。
+你可以将此命令放入你的 [Nushell 配置](/zh-CN/book/configuration.md)中，使其成为默认颜色。
 
 ## 主题
 
@@ -583,7 +583,7 @@ $env.config.use_ls_colors: true
 
 ### 在浅色背景终端上工作
 
-Nushell 的[标准库](/book/standard_library.md)包含一个带有默认浅色和深色主题的 `config` 模块。
+Nushell 的[标准库](/zh-CN/book/standard_library.md)包含一个带有默认浅色和深色主题的 `config` 模块。
 如果你在浅色背景的终端上工作，你可以很容易地应用浅色主题。
 
 ```nu

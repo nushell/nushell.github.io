@@ -377,7 +377,7 @@ echo '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}' |
 jq -r '.data[].values[] | select(. > 3)'
 ```
 
-在 `nu` 中，我们可以利用[记录列表实际上是表](/book/types_of_data.html#tables)这一事实，简单地这样做：
+在 `nu` 中，我们可以利用[记录列表实际上是表](/zh-CN/book/types_of_data.html#tables)这一事实，简单地这样做：
 
 ```nu
 '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}'
@@ -620,7 +620,7 @@ jq -r 'group_by(. / 5 | floor * 5) | map({ bin: .[0], count: length })'
 
 ## 附录：自定义命令
 
-本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果您对此感兴趣，[插件](/book/plugins.html)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
+本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果您对此感兴趣，[插件](/zh-CN/book/plugins.html)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
 
 ```nu
 use toolbox.nu *

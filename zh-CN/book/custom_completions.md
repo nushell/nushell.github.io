@@ -29,7 +29,7 @@ my-command
 第三行是补全的演示。输入自定义命令的名称 `my-command`，然后是一个空格，再按 <kbd>Tab</kbd> 键。这将显示一个包含可能补全的菜单。自定义补全的工作方式与系统中的其他补全相同，允许你输入 `e` 然后按 <kbd>Tab</kbd> 键自动补全 "eel"。
 
 ::: tip
-当补全菜单显示时，提示符默认会包含 `|` 字符。要更改提示标记，请在 `$env.config.menus` 列表的 `completion_menu` 记录中修改 `marker` 的值。另请参阅[补全菜单配置](/book/line_editor.md#completion-menu)。
+当补全菜单显示时，提示符默认会包含 `|` 字符。要更改提示标记，请在 `$env.config.menus` 列表的 `completion_menu` 记录中修改 `marker` 的值。另请参阅[补全菜单配置](/zh-CN/book/line_editor.md#completion-menu)。
 :::
 
 ::: tip
@@ -228,4 +228,4 @@ let carapace_completer = {|spans|
 }
 ```
 
-[更多外部补全器的示例可以在 cookbook 中找到](../cookbook/external_completers.md)。
+[更多外部补全器的示例可以在 实战指南 中找到](../cookbook/external_completers.md)。

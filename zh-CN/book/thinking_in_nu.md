@@ -100,7 +100,7 @@ def latest-file [] {
 }
 ```
 
-该管道的*输出*（其*“值”*）成为 `latest-file` 自定义命令的*返回值*。
+该管道的*输出*（其 _“值”_ ）成为了自定义命令 `latest-file` 的*返回值*。
 
 ::: warning 以 Nushell 的方式思考
 在 Nushell 中，你可能会写 `echo <something>` 的地方，大多数情况下你可以直接写 `<something>`。
@@ -337,7 +337,7 @@ use format!("{}::common", my_path);
 :::
 
 ::: tip 另见
-然而，正如错误消息中所指出的，如果 `my_path` 可以定义为[常量](/book/variables#constant-variables)，这将起作用，因为常量可以在解析期间解析。
+然而，正如错误消息中所指出的，如果 `my_path` 可以定义为[常量](/zh-CN/book/variables#constant-variables)，这将起作用，因为常量可以在解析期间解析。
 
 ```nu
 const my_path = "~/nushell-files"
