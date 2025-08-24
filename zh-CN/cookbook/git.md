@@ -8,7 +8,7 @@ Nu 可以帮助处理常见的 `Git` 任务，例如删除所有已合并到 mas
 
 ### 删除已合并的 git 分支
 
-**警告**：此命令将从您的计算机中硬删除已合并的分支。您可能希望通过省略最后一个 git 命令来检查选择删除的分支。
+**警告**：此命令将从你的计算机中硬删除已合并的分支。你可能希望通过省略最后一个 git 命令来检查选择删除的分支。
 
 ```nu
 git branch --merged | lines | where ($it != "* master" and $it != "* main") | each {|br| git branch -D ($br | str trim) } | str trim

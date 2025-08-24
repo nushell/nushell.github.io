@@ -46,7 +46,7 @@ open Cargo.toml | get package.version
 
 ### 解析非标准格式的文件
 
-假设您有一个以下格式的文件。
+假设你有一个以下格式的文件。
 
 ```text
 band:album:year
@@ -57,7 +57,7 @@ Fugazi:Repeater:1990
 Fugazi:In On The Kill Taker:1993
 ```
 
-您可以将其解析为表格。
+你可以将其解析为表格。
 
 ```nu
 open bands.txt | lines | split column ":" Band Album Year | skip 1 | sort-by Year
@@ -72,13 +72,13 @@ open bands.txt | lines | split column ":" Band Album Year | skip 1 | sort-by Yea
 # => ━━━┷━━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━
 ```
 
-您也可以使用 `parse` 来实现这一点。
+你也可以使用 `parse` 来实现这一点。
 
 ```nu
 open bands.txt | lines | parse "{Band}:{Album}:{Year}" | skip 1 | sort-by Year
 ```
 
-或者，您可以使用 `headers` 命令将第一行用作标题行。唯一的区别是标题将与文本文件的大小写匹配。因此，在这种情况下，标题将为小写。
+或者，你可以使用 `headers` 命令将第一行用作标题行。唯一的区别是标题将与文本文件的大小写匹配。因此，在这种情况下，标题将为小写。
 
 ```nu
 open bands.txt | lines | split column ":" | headers | sort-by year
@@ -88,7 +88,7 @@ open bands.txt | lines | split column ":" | headers | sort-by year
 
 ### 使用 Ripgrep 进行单词出现次数统计
 
-假设您想要检查字符串 "Value" 在 nushell 项目中每个文件出现的行数，然后按行数最多的文件排序。
+假设你想要检查字符串 "Value" 在 nushell 项目中每个文件出现的行数，然后按行数最多的文件排序。
 
 ```nu
 rg -c Value | lines | split column ":" file line_count | into int line_count | sort-by line_count | reverse

@@ -26,7 +26,7 @@ def --env --wrapped z [...rest: string@"nu-complete zoxide path"] {
 }
 ```
 
-请注意，上述补全器可能不适用于多个关键字，因为每个补全建议都是一个完整路径。类似 `z nu <TAB>` 可能会提供 `/home/user/nushell` 作为建议，如果您选择此建议，您的命令行将被替换为 `z nu /home/user/nushell` 而不是 `z /home/user/nushell`。运行 `z nu /home/user/nushell` 现在会失败。
+请注意，上述补全器可能不适用于多个关键字，因为每个补全建议都是一个完整路径。类似 `z nu <TAB>` 可能会提供 `/home/user/nushell` 作为建议，如果你选择此建议，你的命令行将被替换为 `z nu /home/user/nushell` 而不是 `z /home/user/nushell`。运行 `z nu /home/user/nushell` 现在会失败。
 
 下面是一个更复杂的补全器，它提供看起来奇怪的建议，但确实适用于多个关键字。
 

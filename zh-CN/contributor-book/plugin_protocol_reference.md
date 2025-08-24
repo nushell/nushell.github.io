@@ -309,7 +309,7 @@ $version.field
 
 ##### `PartialCmp`
 
-将自定义值与另一个值进行比较，并返回应使用的 [`Ordering`](#ordering)（如果有）。参数类型是 [`Value`](#value)，可以是任何值 - 不仅仅是相同的自定义值类型。响应类型是 [`Ordering`](#ordering-plugin-call-response)。也可能返回 [`Error`](#error-plugin-call-response)，但目前错误不太可能呈现给用户 - 引擎将表现得好像您发送了 `{"Ordering": null}`。
+将自定义值与另一个值进行比较，并返回应使用的 [`Ordering`](#ordering)（如果有）。参数类型是 [`Value`](#value)，可以是任何值 - 不仅仅是相同的自定义值类型。响应类型是 [`Ordering`](#ordering-plugin-call-response)。也可能返回 [`Error`](#error-plugin-call-response)，但目前错误不太可能呈现给用户 - 引擎将表现得好像你发送了 `{"Ordering": null}`。
 
 示例（比较两个 `version` 自定义值）：
 
@@ -2092,7 +2092,7 @@ foo.0?.bar
 
 插件只会收到它们之前发出的自定义值。不允许发送来自其他插件的自定义值或在 Nu 引擎本身内使用的自定义值。
 
-`notify_on_drop` 是一个可选字段，如果为 `false`**应该**省略，以节省字节。如果这对您的实现不方便，`"notify_on_drop": false` 仍然有效，但最好不包含它。
+`notify_on_drop` 是一个可选字段，如果为 `false`**应该**省略，以节省字节。如果这对你的实现不方便，`"notify_on_drop": false` 仍然有效，但最好不包含它。
 
 示例：
 
@@ -2300,7 +2300,7 @@ Rust 枚举通常以 [serde](https://serde.rs) 的默认格式编码：
 
 [文档](https://docs.rs/nu-protocol/latest/nu_protocol/struct.Config.html)
 
-此结构体描述了 Nushell 的配置。它相当大且经常变化，因此如果您需要其中的任何内容，请参阅 Rust 文档。
+此结构体描述了 Nushell 的配置。它相当大且经常变化，因此如果你需要其中的任何内容，请参阅 Rust 文档。
 
 ### `Ordering`
 

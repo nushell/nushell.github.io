@@ -579,7 +579,7 @@ $env.config.use_grid_icons: true
 $env.config.use_ls_colors: true
 ```
 
-如果你想在主题设计上火力全开，你需要把我在一开始提到的所有项目作为主题，包括`LS_COLORS`和提示。祝您好运!
+如果你想在主题设计上火力全开，你需要把我在一开始提到的所有项目作为主题，包括`LS_COLORS`和提示。祝你好运!
 
 ### 在浅色背景终端上工作
 

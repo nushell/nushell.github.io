@@ -31,7 +31,7 @@ $env.config = {
 ```
 
 ::: tip 注意
-您可以关注 Nushell 的 [`nu_scripts`](https://github.com/nushell/nu_scripts/blob/main/nu-hooks/nu-hooks/direnv/config.nu)
+你可以关注 Nushell 的 [`nu_scripts`](https://github.com/nushell/nu_scripts/blob/main/nu-hooks/nu-hooks/direnv/config.nu)
 获取上述钩子的最新版本
 :::
 

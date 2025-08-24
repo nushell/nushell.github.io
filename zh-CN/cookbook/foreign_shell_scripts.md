@@ -4,7 +4,7 @@ title: 外部 Shell 脚本
 
 # 使用外部 Shell 脚本
 
-nu 的一个常见问题是，其他应用程序将环境变量或功能导出为 shell 脚本，这些脚本期望由您的 shell 运行。
+nu 的一个常见问题是，其他应用程序将环境变量或功能导出为 shell 脚本，这些脚本期望由你的 shell 运行。
 
 但许多应用程序只考虑最常用的 shell，如 `bash` 或 `zsh`。不幸的是，nu 与这些 shell 的语法完全不兼容，因此无法直接运行或 `source` 这些脚本。
 
@@ -44,7 +44,7 @@ load-env (
 print $"($env.GREETING) ($env.FROM)" # "Hello from bash"
 ```
 
-对于您确定脚本的确切格式并且可以预测解析边缘情况的情况，这完全可以。
+对于你确定脚本的确切格式并且可以预测解析边缘情况的情况，这完全可以。
 
 但这很快就会变得棘手，例如当脚本声明一个引用其先前值的 `PATH` 变量时（`export PATH="$PATH:/extra/path";`）。
 
@@ -67,7 +67,7 @@ print $"($env.GREETING) ($env.FROM)" # "Hello from bash"
 注意：所示的命令假设类 Unix 操作系统，也可能为 Windows 实现一个可以从 PowerShell 脚本捕获变量的版本。
 
 ```nu
-# 返回运行非 nushell 脚本内容（通过 stdin 传递）后更改的环境变量记录，例如您想要 "source" 的 bash 脚本
+# 返回运行非 nushell 脚本内容（通过 stdin 传递）后更改的环境变量记录，例如你想要 "source" 的 bash 脚本
 def capture-foreign-env [
     --shell (-s): string = /bin/sh
     # 运行脚本的 shell
@@ -107,7 +107,7 @@ def capture-foreign-env [
 load-env (open script.sh | capture-foreign-env)
 
 # 运行不同 shell 的脚本
-# fish 可能在您系统的其他地方，如果在 PATH 中，`fish` 就足够了
+# fish 可能在你系统的其他地方，如果在 PATH 中，`fish` 就足够了
 load-env (open script.fish | capture-foreign-env --shell /usr/local/bin/fish)
 ```
 

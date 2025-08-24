@@ -4,7 +4,7 @@ title: jq vs Nushell
 
 # jq vs Nushell
 
-[`jq`](https://jqlang.github.io/jq/) 和 `nu` 都能够以可组合的方式转换数据。本实战指南将引导您完成常见的数据操作任务，旨在帮助您建立使用 Nushell 的有效心智模型。
+[`jq`](https://jqlang.github.io/jq/) 和 `nu` 都能够以可组合的方式转换数据。本实战指南将引导你完成常见的数据操作任务，旨在帮助你建立使用 Nushell 的有效心智模型。
 
 所有示例都将使用 JSON 以保持示例之间的一致性。
 
@@ -46,9 +46,9 @@ echo '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}' | jq -r '.'
 }
 ```
 
-当您的 JSON 数据存储在文件中时，您可以使用 [open](/commands/docs/open.html) 而不是 [from json](/commands/docs/from_json.html)。
+当你的 JSON 数据存储在文件中时，你可以使用 [open](/commands/docs/open.html) 而不是 [from json](/commands/docs/from_json.html)。
 
-在我们深入示例之前，以下词汇表可以帮助您熟悉 Nushell 数据类型如何映射到 jq 数据类型。
+在我们深入示例之前，以下词汇表可以帮助你熟悉 Nushell 数据类型如何映射到 jq 数据类型。
 
 | Nushell | jq             |
 | ------- | -------------- |
@@ -125,7 +125,7 @@ jq -r 'map(. * 2)'
 # => ╰───┴────╯
 ```
 
-注意，您可以依赖 `$in` 自动绑定来获得稍微更紧凑的块：
+注意，你可以依赖 `$in` 自动绑定来获得稍微更紧凑的块：
 
 ```nu
 '[1, 2, 3, 4, 5]'
@@ -288,7 +288,7 @@ jq -r 'map(select(. != null))'
 # => ╰───┴───╯
 ```
 
-或者，您可以使用 [`compact`](/commands/docs/compact.html)：
+或者，你可以使用 [`compact`](/commands/docs/compact.html)：
 
 ```nu
 '[1, null, 3, null, 5]'
@@ -505,7 +505,7 @@ jq -r 'group_by(.category)'
 # => ╰───┴───────┴──────────────────────────╯
 ```
 
-注意 `--to-table` 是在 [版本 0.87.0](blog/2023-11-14-nushell_0_87_0.html) 中添加到 Nushell 的。在此之前，您必须对 `group-by` 产生的记录进行 [`transpose`](/commands/docs/transpose)，这对于大型数据集来说速度要慢得多。
+注意 `--to-table` 是在 [版本 0.87.0](blog/2023-11-14-nushell_0_87_0.html) 中添加到 Nushell 的。在此之前，你必须对 `group-by` 产生的记录进行 [`transpose`](/commands/docs/transpose)，这对于大型数据集来说速度要慢得多。
 
 ### 聚合分组值
 
@@ -616,11 +616,11 @@ jq -r 'group_by(. / 5 | floor * 5) | map({ bin: .[0], count: length })'
 # => ╰───┴─────┴───────╯
 ```
 
-注意，如果您想要计算直方图，可以受益于 [`histogram`](/commands/docs/histogram) 命令。
+注意，如果你想要计算直方图，可以受益于 [`histogram`](/commands/docs/histogram) 命令。
 
 ## 附录：自定义命令
 
-本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果您对此感兴趣，[插件](/zh-CN/book/plugins.html)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
+本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果你对此感兴趣，[插件](/zh-CN/book/plugins.html)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
 
 ```nu
 use toolbox.nu *

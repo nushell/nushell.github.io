@@ -21,15 +21,15 @@ ls | explore -i
 
 ![explore-ls-png](https://user-images.githubusercontent.com/20165848/207849604-421312e3-537f-4b2e-b83e-f1f83f2a79d5.png)
 
-[`explore`](/commands/docs/explore.md)的主要功能是`:table`(您可以在上面的截图中看到)。
+[`explore`](/commands/docs/explore.md)的主要功能是`:table`(你可以在上面的截图中看到)。
 
-您可以通过`<Left>`、`<Right>`、`<Up>`、`<Down>`方向键与之交互。它还支持Vim风格的`<h>`、`<j>`、`<k>`、`<l>`键绑定，`<Ctrl-f>`和`<Ctrl-b>`，以及Emacs风格的`<Ctrl-v>`、`<Alt-v>`、`<Ctrl-p>`和`<Ctrl-n>`键绑定。
+你可以通过`<Left>`、`<Right>`、`<Up>`、`<Down>`方向键与之交互。它还支持Vim风格的`<h>`、`<j>`、`<k>`、`<l>`键绑定，`<Ctrl-f>`和`<Ctrl-b>`，以及Emacs风格的`<Ctrl-v>`、`<Alt-v>`、`<Ctrl-p>`和`<Ctrl-n>`键绑定。
 
-您可以通过进入光标模式来检查底层值。按`<i>`或`<Enter>`进入该模式。
+你可以通过进入光标模式来检查底层值。按`<i>`或`<Enter>`进入该模式。
 然后使用方向键选择需要的单元格。
-您将能够看到它的底层结构。
+你将能够看到它的底层结构。
 
-您可以通过`:help`获取更多相关信息。
+你可以通过`:help`获取更多相关信息。
 
 ## 命令
 
@@ -39,8 +39,8 @@ ls | explore -i
 
 ## 配置
 
-您可以通过配置自定义许多选项(包括样式和颜色)。
-您可以在[`default-config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_config.nu)中找到示例配置。
+你可以通过配置自定义许多选项(包括样式和颜色)。
+你可以在[`default-config.nu`](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_config.nu)中找到示例配置。
 
 ## 示例
 
@@ -54,12 +54,12 @@ $nu | explore --peek
 
 ### `:try`命令
 
-有一个交互式环境，您可以使用`nu`命令浏览数据。
+有一个交互式环境，你可以使用`nu`命令浏览数据。
 
 ![explore-try-gif](https://user-images.githubusercontent.com/20165848/208159049-0954c327-9cdf-4cb3-a6e9-e3ba86fde55c.gif)
 
 #### 通过`$nu`保留所选值
 
-记住您可以结合`--peek`参数使用。
+记住你可以结合`--peek`参数使用。
 
 ![explore-try-nu-gif](https://user-images.githubusercontent.com/20165848/208161203-96b51209-726d-449a-959a-48b205c6f55a.gif)

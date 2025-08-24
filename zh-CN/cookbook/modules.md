@@ -39,7 +39,7 @@
    ```
 
 4. 将 `export module git.nu` 添加到 `mod.nu`
-5. 在 `env.nu` 中将 `completions` 目录的父目录添加到您的 `NU_LIB_DIRS` 中
+5. 在 `env.nu` 中将 `completions` 目录的父目录添加到你的 `NU_LIB_DIRS` 中
 
    ```nu
    $env.NU_LIB_DIRS = [
@@ -52,12 +52,12 @@
 
    `use completions *`
 
-现在您已经设置了一个可以放置补全文件的目录，下次启动 Nushell 时应该会有一些 Git 补全。
+现在你已经设置了一个可以放置补全文件的目录，下次启动 Nushell 时应该会有一些 Git 补全。
 
 ::: tip 注意
 这将使用文件名（在我们的示例中为 `git.nu` 中的 `git`）作为模块名称。这意味着如果定义中包含基本命令名称，某些补全可能无法工作。
-例如，如果您在 `git.nu` 中将我们的已知外部命令定义为 `export extern 'git push' []` 等，并遵循其余步骤，您将得到像 `git git push` 等子命令。
-您需要调用 `use completions git *` 来获得所需的子命令。因此，使用上面步骤中概述的 `main` 是定义子命令的首选方式。
+例如，如果你在 `git.nu` 中将我们的已知外部命令定义为 `export extern 'git push' []` 等，并遵循其余步骤，你将得到像 `git git push` 等子命令。
+你需要调用 `use completions git *` 来获得所需的子命令。因此，使用上面步骤中概述的 `main` 是定义子命令的首选方式。
 :::
 
 ## 覆层和"虚拟环境"

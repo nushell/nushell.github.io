@@ -41,7 +41,7 @@ http get https://jsonplaceholder.typicode.com/posts | first 5
 
 ### 从多个 URL 获取
 
-假设您正在查询多个端点，
+假设你正在查询多个端点，
 可能使用不同的查询参数，并且希望将所有响应视为单个数据集。
 
 一个示例 JSON 文件 `urls.json`，内容如下：
@@ -80,7 +80,7 @@ open urls.json | get urls | each { |u| http get $u }
 
 ---
 
-如果您指定 `--raw` 标志，您将看到 3 个独立的 json 对象，每行一个。
+如果你指定 `--raw` 标志，你将看到 3 个独立的 json 对象，每行一个。
 
 ```nu
 open urls.json | get urls | each { |u| http get $u -r }
@@ -113,7 +113,7 @@ open urls.json | get urls | each { |u| http get $u -r }
 
 ---
 
-要将这些响应组合成一个有效的 JSON 数组，您可以将表格转换为 json。
+要将这些响应组合成一个有效的 JSON 数组，你可以将表格转换为 json。
 
 ```nu
 open urls.json | get urls | each { |u| http get $u } | to json
@@ -146,7 +146,7 @@ open urls.json | get urls | each { |u| http get $u } | to json
 
 ---
 
-向端点发出带有 JSON 负载的 `post` 请求。为了使长请求更容易，您可以在文件内组织 json 负载。
+向端点发出带有 JSON 负载的 `post` 请求。为了使长请求更容易，你可以在文件内组织 json 负载。
 
 ```json
 {
@@ -182,7 +182,7 @@ open urls.json | get urls | first | http get $in | upsert id {|item| $item.id | 
 
 ### 上传文件
 
-要上传带有文件的表单（想想浏览器中常见的文件上传表单，您必须选择文件并提供一些额外数据），您需要：
+要上传带有文件的表单（想想浏览器中常见的文件上传表单，你必须选择文件并提供一些额外数据），你需要：
 
 1. 将内容类型指定为 `multipart/form-data`
 2. 将记录作为 POST 主体提供
@@ -224,7 +224,7 @@ http post https://httpbin.org/post --content-type "multipart/form-data" {
 # => ╰─────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-如果文件恰好是文本文件，您可能需要在发送之前将其转换为二进制数据。这可以使用 `into binary` 命令完成。
+如果文件恰好是文本文件，你可能需要在发送之前将其转换为二进制数据。这可以使用 `into binary` 命令完成。
 
 ```nu
 http post https://httpbin.org/post --content-type "multipart/form-data" {

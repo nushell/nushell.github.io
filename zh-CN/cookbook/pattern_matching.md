@@ -6,7 +6,7 @@ title: 模式匹配
 
 ## 使用 `match` 关键字
 
-像许多其他语言一样，nu 提供了一个 [`match`](https://www.nushell.sh/commands/docs/match.html#frontmatter-title-for-core) 关键字。通常这被用作 `if-else` 语句的一个稍微更符合人体工程学的版本，如果您有很多分支的话。
+像许多其他语言一样，nu 提供了一个 [`match`](https://www.nushell.sh/commands/docs/match.html#frontmatter-title-for-core) 关键字。通常这被用作 `if-else` 语句的一个稍微更符合人体工程学的版本，如果你有很多分支的话。
 
 ```nu
 [black red yellow green purple blue indigo] | each {|c|
@@ -44,7 +44,7 @@ title: 模式匹配
 }
 ```
 
-如您所见，您也可以在 match 语句中使用命令表达式（在这种情况下与 `|` 一起使用）。还要注意末尾的 `_` 情况，这被称为默认分支，在其他模式都不匹配时使用。还要注意，如果情况重叠，将使用第一个匹配的模式（就像 `if-else` 语句一样）：
+如你所见，你也可以在 match 语句中使用命令表达式（在这种情况下与 `|` 一起使用）。还要注意末尾的 `_` 情况，这被称为默认分支，在其他模式都不匹配时使用。还要注意，如果情况重叠，将使用第一个匹配的模式（就像 `if-else` 语句一样）：
 
 ```nu
 [yellow green] | each {|c|
@@ -61,7 +61,7 @@ title: 模式匹配
 
 ## 类型上的模式匹配
 
-您可以使用 [`describe`](https://www.nushell.sh/commands/docs/describe.html) 命令获取有关值类型的更多信息。例如：
+你可以使用 [`describe`](https://www.nushell.sh/commands/docs/describe.html) 命令获取有关值类型的更多信息。例如：
 
 ```nu
 {one: 1 two: 2} | describe
@@ -73,7 +73,7 @@ title: 模式匹配
 # => table<a: int, b: int>
 ```
 
-结合 `match` 和一些巧妙的 regex 使用，您可以进行相当强大的类型匹配。例如，假设我们想要实现一个 `str append` 函数，该函数可以同时在字符串和列表上工作。在字符串上，它应该按预期工作，在字符串列表上，它应该将相同的字符串附加到列表的每个元素。使用 `match`，可以这样做：
+结合 `match` 和一些巧妙的 regex 使用，你可以进行相当强大的类型匹配。例如，假设我们想要实现一个 `str append` 函数，该函数可以同时在字符串和列表上工作。在字符串上，它应该按预期工作，在字符串列表上，它应该将相同的字符串附加到列表的每个元素。使用 `match`，可以这样做：
 
 ```nu
 def "str append" [tail: string]: [string -> string, list<string> -> list<string>] {
