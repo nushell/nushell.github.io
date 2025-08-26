@@ -222,7 +222,7 @@ for x in [1 2 3] { $x * $x | print }
 # => 9
 ```
 
-#### 표현식 명령 대안
+#### for 표현식 명령 대안
 
 - [`each`](/commands/docs/each.html)
 - [`par-each`](/commands/docs/par-each.html)
@@ -238,7 +238,7 @@ mut x = 0; while $x < 10 { $x = $x + 1 }; $x
 # => 10
 ```
 
-#### 표현식 명령 대안
+#### while 표현식 명령 대안
 
 "until" 및 기타 "while" 명령
 

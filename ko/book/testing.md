@@ -17,7 +17,7 @@ use std/assert
 assert (1 == 2)
 ```
 
-```
+```nu
 Error:
   × Assertion failed.
    ╭─[entry #13:1:1]
@@ -34,7 +34,7 @@ let a = 0
 assert ($a == 19) $"The lockout code is wrong, received: ($a)"
 ```
 
-```
+```nu
 Error:
   × The lockout code is wrong, received: 13
    ╭─[entry #25:1:1]
@@ -55,7 +55,7 @@ let b = "bar"
 assert ($b | str contains $a)
 ```
 
-```
+```nu
 Error:   × Assertion failed.
    ╭─[entry #5:3:8]
  2 │ let b = "bar"
@@ -73,7 +73,7 @@ let b = "haystack"
 assert str contains $b $a
 ```
 
-```
+```nu
 Error:   × Assertion failed.
    ╭─[entry #7:3:21]
  2 │ let b = "bar"
@@ -102,7 +102,7 @@ let $a = 13
 assert even $a
 ```
 
-```
+```nu
 Error:
   × Assertion failed.
    ╭─[entry #37:1:1]

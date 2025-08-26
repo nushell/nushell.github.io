@@ -87,6 +87,7 @@ cat unknown.txt out+err> log.log
 ```
 
 `out`은 `o`로, `err`은 `e`로 단축할 수 있습니다. 따라서 다음 예제는 위의 이전 예제와 동일합니다.
+
 ```nu
 cat unknown.txt o> out.log e> err.log
 
@@ -94,16 +95,19 @@ cat unknown.txt o+e> log.log
 ```
 
 또한 문자열 값인 한 모든 표현식을 파일 경로에 사용할 수 있습니다.
+
 ```nu
 use std
 cat unknown.txt o+e> (std null-device)
 ```
 
 파일 리디렉션은 표현식으로 범위가 지정되며 표현식의 모든 외부 명령에 적용됩니다. 아래 예제에서 `out.txt`에는 `hello\nworld`가 포함됩니다.
+
 ```nu
 let text = "hello\nworld"
 ($text | head -n 1; $text | tail -n 1) o> out.txt
 ```
+
 표현식 내부의 파이프 및 추가 파일 리디렉션은 외부에서 적용된 모든 파일 리디렉션을 재정의합니다.
 
 ## 파이프 리디렉션
@@ -121,6 +125,7 @@ nu -c 'print output; print -e error' o+e>| str upcase
 ```
 
 파일 리디렉션과 달리 파이프 리디렉션은 표현식 내의 모든 명령에 적용되지 않습니다. 오히려 표현식의 마지막 명령만 영향을 받습니다. 예를 들어, 아래 코드 조각의 `cmd2`만 파이프로 표준 출력 및 표준 오류를 리디렉션합니다.
+
 ```nu
 (cmd1; cmd2) o+e>| cmd3
 ```
