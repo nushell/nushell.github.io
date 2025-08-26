@@ -21,7 +21,6 @@ macOS、Linuxでは、 [Homebrew](https://brew.sh/) が人気です (`brew insta
 Windowsでは:
 
 - [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) (`winget install nushell`)
-- [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 
 クロスプラットフォームのインストールとしては:
