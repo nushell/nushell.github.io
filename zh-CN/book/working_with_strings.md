@@ -2,6 +2,18 @@
 
 Nushell 中的字符串用于保存文本数据以便后续使用，其中可以包括文件名、文件路径、列名以及更多。字符串是如此地普遍，以至于 Nushell 提供了几种处理它们的方法，你可以从中选择最合适的。
 
+## 字符串格式一览
+
+| 字符串格式                               | 示例                    | 转义字符        | 说明                                       |
+| ---------------------------------------- | ----------------------- | --------------- | ------------------------------------------ |
+| [单引号字符串](#single-quoted-strings)   | `'[^\n]+'`              | 无              | 字符串内不能包含单引号                     |
+| [双引号字符串](#double-quoted-strings)   | `"The\nEnd"`            | C风格反斜杠转义 | 所有字面反斜杠都必须转义                   |
+| [原始字符串](#raw-strings)               | `r#'Raw string'#`       | 无              | 可以包含单引号                             |
+| [裸词字符串](#bare-word-strings)         | `ozymandias`            | 无              | 只能包含"单词"字符；不能在命令位置使用     |
+| [反引号字符串](#backtick-quoted-strings) | <code>\`[^\n]+\`</code> | 无              | 可以包含空格的裸字符串。不能包含任何反引号 |
+| [单引号插值](#string-interpolation)      | `$'Captain ($name)'`    | 无              | 不能包含任何 `'` 或不匹配的 `()`           |
+| [双引号插值](#string-interpolation)      | `$"Captain ($name)"`    | C风格反斜杠转义 | 所有字面反斜杠和 `()` 都必须转义           |
+
 ## 单引号字符串
 
 Nushell 中最简单的字符串是单引号字符串。这种字符串使用`'`字符来包裹文本。下面是作为单引号字符串的`hello world`示例：
@@ -39,6 +51,145 @@ Nushell 目前支持以下转义字符：
 - `\n` - 换行符 (line feed)
 - `\t` - 制表符
 - `\u{X...}` - Unicode 字符, 其中 X...为 1 到 6 位的十六进制数字
+
+## 原始字符串(Raw Strings)
+
+原始字符串的行为与单引号字符串相同，不同之处在于原始字符串也可以包含单引号。这是可能的，因为原始字符串由起始的`r#'`和结束的`'#`包围。这种语法对Rust用户来说应该很熟悉。
+
+```nu
+r#'原始字符串可以包含'引号'文本'#
+# => 原始字符串可以包含'引号'文本
+```
+
+可以在原始字符串的开始和结束处添加额外的`#`符号来包围字符串中比`'`符号少一个的相同数量的`#`符号。这可以用来嵌套原始字符串：
+
+```nu
+r###'r##'这是一个原始字符串的例子'##'###
+# => r##'这是一个原始字符串的例子'##
+```
+
+## 裸词字符串(Bare Word Strings)
+
+像其他shell语言(但与大多数其他编程语言不同)一样，由单个'词'组成的字符串也可以不加任何引号：
+
+```nu
+print hello
+# => hello
+[hello] | describe
+# => list<string>
+```
+
+但要小心 - 如果在命令行上直接使用裸词(即不在数据结构中或作为命令参数使用)或在圆括号`(` `)`内，它将被解释为外部命令：
+
+```nu
+hello
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[entry #5:1:1]
+# =>  1 │ hello
+# =>    · ──┬──
+# =>    ·   ╰── executable was not found
+# =>    ╰────
+# =>   help: program not found
+```
+
+此外，许多裸词在nu中有特殊含义，因此不会被解释为字符串：
+
+```nu
+true | describe
+# => bool
+[true] | describe
+# => list<bool>
+[trueX] | describe
+# => list<string>
+trueX | describe
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[entry #5:1:1]
+# =>  1 │ trueX | describe
+# =>    · ──┬──
+# =>    ·   ╰── executable was not found
+# =>    ╰────
+# =>   help: program not found
+```
+
+## 反引号字符串(Backtick-quoted Strings)
+
+裸词字符串本质上不能包含空格或引号。作为替代方案，Nushell还包括使用<code>`</code>字符的反引号字符串。在大多数情况下，这些应该与裸词字符串的操作方式相同。
+
+例如，与裸词一样，表达式第一个位置的反引号字符串将被解释为*命令*或*路径*。例如：
+
+```nu
+# 运行路径中找到的外部ls二进制文件
+`ls`
+
+# 向上移动一个目录
+`..`
+
+# 切换到"my dir"子目录(如果存在)
+`./my dir`
+```
+
+反引号字符串对于将glob与包含空格的文件或目录组合很有用：
+
+```nu
+ls `./my dir/*`
+```
+
+反引号字符串不能在字符串本身中包含*不匹配的*反引号。例如：
+
+`````nu
+echo ````
+``
+
+echo ```
+# 未终止的字符串将在CLI中开始新行
+`````
+
+## 字符串作为外部命令
+
+你可以在任何字符串(包括变量)前面加上`^`符号，让Nushell执行该字符串，就像它是外部命令一样：
+
+```nu
+^'C:\Program Files\exiftool.exe'
+
+let foo = 'C:\Program Files\exiftool.exe'
+^$foo
+```
+
+你也可以使用[`run-external`](/commands/docs/run-external.md)命令来实现此目的，该命令提供了额外的标志和选项。
+
+## 字符串拼接
+
+有多种方法可以在字符串前后添加内容。如果你想在每个字符串的开头添加一些东西，闭包是一个不错的选择：
+
+```nu
+['foo', 'bar'] | each {|s| '~/' ++ $s} # ~/foo, ~/bar
+['foo', 'bar'] | each {|s| '~/' + $s} # ~/foo, ~/bar
+```
+
+你也可以使用正则表达式替换字符串的开头或结尾：
+
+```nu
+['foo', 'bar'] | str replace -r '^' '~/'# ~/foo, ~/bar
+['foo', 'bar'] | str replace -r '$' '~/'# foo~/, bar~/
+```
+
+如果你想在最后得到一个字符串，那么`str join`是你的朋友：
+
+```nu
+"hello" | append "world!" | str join " " # hello world!
+```
+
+你也可以使用reduce：
+
+```nu
+1..10 | reduce -f "" {|elt, acc| $acc + ($elt | into string) + " + "} # 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 +
+```
+
+不过在字符串的情况下，特别是如果你不必对字符串进行操作，使用`str join`通常更容易且更正确(注意上面例子中末尾多余的+)。
 
 ## 字符串插值
 
@@ -161,6 +312,28 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 # => ├───┼───────┼──────────────┤
 # => │ 0 │ Bash  │ kinda cringe │
 # => ╰───┴───────┴──────────────╯
+```
+
+## 字符串比较
+
+除了标准的`==`和`!=`操作符外，还有一些专门用于比较字符串的操作符。
+
+熟悉Bash和Perl的人会认识这些正则表达式比较操作符：
+
+```nu
+'APL' =~ '^\w{0,3}$'
+# => true
+'FORTRAN' !~ '^\w{0,3}$'
+# => true
+```
+
+还有两个操作符用于更简单的比较：
+
+```nu
+'JavaScript' starts-with 'Java'
+# => true
+'OCaml' ends-with 'Caml'
+# => true
 ```
 
 ## 字符串转换

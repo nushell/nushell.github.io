@@ -22,13 +22,68 @@
 # => [1, 10, 3, 4]
 ```
 
-除了 `update` 和 `insert` 之外，还有 `prepend` 和 `append`，它们分别让你插入到列表的开头或列表的结尾。例如：
+## 从列表中添加或删除项
+
+除了 [`insert`](/commands/docs/insert.md) 和 [`update`](/commands/docs/update.md)，我们还有 [`prepend`](/commands/docs/prepend.md) 和 [`append`](/commands/docs/append.md)。它们分别让你在列表的开头或结尾插入项。
+
+例如：
 
 ```nu
 let colors = [yellow green]
 let colors = ($colors | prepend red)
 let colors = ($colors | append purple)
-$colors # [red yellow green purple]
+let colors = ($colors ++ ["blue"])
+let colors = (["black"] ++ $colors)
+$colors
+# => [black red yellow green purple blue]
+```
+
+如果你想从列表中删除项，有多种方法。[`skip`](/commands/docs/skip.md) 允许你跳过输入的前几行，而 [`drop`](/commands/docs/drop.md) 允许你跳过列表末尾的特定编号的行。
+
+```nu
+let colors = [red yellow green purple]
+let colors = ($colors | skip 1)
+let colors = ($colors | drop 2)
+$colors
+# => [yellow]
+```
+
+我们还有 [`last`](/commands/docs/last.md) 和 [`first`](/commands/docs/first.md)，它们分别允许你从列表的末尾或开头 [`take`](/commands/docs/take.md) 项。
+
+```nu
+let colors = [red yellow green purple black magenta]
+let colors = ($colors | last 3)
+$colors
+# => [purple black magenta]
+```
+
+以及从列表的开头：
+
+```nu
+let colors = [yellow green purple]
+let colors = ($colors | first 2)
+$colors
+# => [yellow green]
+```
+
+### 使用展开运算符
+
+要将一个或多个列表追加在一起，可以选择在中间穿插值，你也可以使用[展开运算符](/zh-CN/book/operators#spread-operator) (`...`)：
+
+```nu
+let x = [1 2]
+[
+  ...$x
+  3
+  ...(4..7 | take 2)
+]
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => │ 3 │ 4 │
+# => │ 4 │ 5 │
+# => ╰───┴───╯
 ```
 
 ## 迭代列表
