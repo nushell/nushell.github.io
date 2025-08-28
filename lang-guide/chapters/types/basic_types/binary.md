@@ -18,7 +18,7 @@
 
 ## Common commands that can be used with `binary`
 
-- `into bits`
+- `into binary`
 - `bits` subcommands (see `help bits` for a list)
 - `bytes` subcommands (see `help bytes` for a list)
 - `encode`
