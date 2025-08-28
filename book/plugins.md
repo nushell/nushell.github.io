@@ -63,7 +63,7 @@ To begin using the Polars plugin:
 
    ```nu
    # The name of the plugin, without the leading `nu_plugin` nor any extension
-   use polars
+   plugin use polars
    ```
 
 5. Confirm the plugin is working:
