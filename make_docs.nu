@@ -14,12 +14,17 @@ def plugin-paths [ nu_path?: path ] {
         _ => ($nu_path | path dirname)
     }
 
-    $PLUGINS | each {|plugin|
+    let plugin_paths = $PLUGINS | each {|plugin|
         match (sys host | get name) {
             'Windows' => $'($nu_dir | path join $plugin).exe'
             _ => $'($nu_dir | path join $plugin)'
         }
     }
+
+    let decorated = $plugin_paths | wrap path | insert exists {|x| $x.path | path exists }
+    $decorated | where not exists | each {|x| print $"(ansi red)No plugin under path '($x.path)', will be skipped...(ansi reset)" }
+
+    $decorated | where exists | get path
 }
 
 # get all command names from a clean scope
