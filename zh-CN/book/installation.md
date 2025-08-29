@@ -29,7 +29,6 @@ Nu 可以通过几个软件包管理器获得：
   - 用户范围安装: `winget install nushell` or `winget install nushell --scope user`
   - 用户范围升级: 由于 [winget-cli 问题 #3011](https://github.com/microsoft/winget-cli/issues/3011)，运行 `winget update nushell` 会意外地将最新版本安装到 `C:\Program Files\nu`。要解决此问题，请再次运行 `winget install nushell` 以在用户范围内安装最新版本。
 
-- [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 
 对于 Debian 和 Ubuntu：

@@ -21,7 +21,6 @@ Pour macOS et Linux, [Homebrew](https://brew.sh/) est un choix populaire (`brew 
 Pour Windows :
 
 - [Winget](https://docs.microsoft.com/fr-fr/windows/package-manager/winget/) (`winget install nushell`)
-- [Chocolatey](https://chocolatey.org/) (`choco install nushell`)
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 
 Installation multiplateforme :
