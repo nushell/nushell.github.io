@@ -22,7 +22,7 @@ Nushell 继承了这种方法，并扩展支持除字符串外的其他数据类
 | [字符串](#字符串)         | `"第18洞"`, `'第18洞'`, \`第18洞\`, 第18洞, r#'第18洞'#           |
 | [布尔值](#布尔值)         | `true`                                                            |
 | [日期](#日期)             | `2000-01-01`                                                      |
-| [时间间隔](#时间间隔)     | `2分钟 + 12秒`                                                    |
+| [时间间隔](#时间间隔)     | `2min + 12sec`                                                    |
 | [文件大小](#文件大小)     | `64mb`                                                            |
 | [区间](#区间)             | `0..4`, `0..<5`, `0..`, `..4`                                     |
 | [二进制数据](#二进制数据) | `0x[FE FF]`                                                       |
@@ -96,9 +96,9 @@ Nushell提供了多种表示字符串的方式和许多处理字符串的命令�
 简单示例:
 
 ```nu
-let audience: string = "世界"
-$"你好, ($audience)"
-# => 你好, 世界
+let audience: string = "World"
+$"Hello, ($audience)"
+# => Hello, World
 ```
 
 ### 布尔值
@@ -116,8 +116,8 @@ $"你好, ($audience)"
 let mybool: bool = (2 > 1)
 $mybool
 # => true
-let 我的布尔值: bool = ($env.HOME | path exists)
-$我的布尔值
+let mybool: bool = ($env.HOME | path exists)
+$mybool
 # => true
 ```
 
@@ -125,8 +125,8 @@ $我的布尔值
 
 ```nu
 let num = -2
-if $num < 0 { print "是负数" }
-# => 是负数
+if $num < 0 { print "It's negative" }
+# => It's negative
 ```
 
 ### 日期
@@ -141,7 +141,7 @@ if $num < 0 { print "是负数" }
 
 ```nu
 date now
-# => 2024年8月12日 13:59:22 -0400 (现在)
+# => Mon, 12 Aug 2024 13:59:22 -0400 (now)
 # 格式化为Unix时间戳
 date now | format date '%s'
 # => 1723485562
@@ -160,9 +160,9 @@ date now | format date '%s'
 简单示例:
 
 ```nu
-3.14天
-# => 3天3小时21分钟
-30天 / 1秒  # 30天有多少秒?
+3.14day
+# => 3day 3hr 21min
+30day / 1sec  # How many seconds in 30 days?
 # => 2592000
 ```
 
@@ -319,16 +319,16 @@ Nushell包含一组可以包含上述基本类型的结构化数据类型。例�
 
 ```nu
 let my_record = {
-  姓名: "张三"
-  等级: 99
+  name: "张三"
+  rank: 99
 }
 $my_record
 # => ╭───────┬────────────╮
-# => │ 姓名  │ 张三       │
-# => │ 等级  │ 99         │
+# => │ name  │ 张三       │
+# => │ rank  │ 99         │
 # => ╰───────┴────────────╯
 
-$我的记录 | get 姓名
+$my_record | get name
 # => 张三
 ```
 
@@ -380,10 +380,10 @@ $我的记录 | get 姓名
 简单示例:
 
 ```nu
-if true { print "是真的" }
+if true { print "It's true" }
 ```
 
-上面的`{ print "是真的" }`部分就是一个代码块。
+上面的`{ print "It's true" }`部分就是一个代码块。
 
 ### 空值
 
@@ -402,10 +402,10 @@ if true { print "是真的" }
 let simple_record = { a: 5, b: 10 }
 $simple_record.a?
 # => 5
-$简单记录.c?
-# => 无输出
-$简单记录.c? | describe
+$simple_record.c?
+# => Nothing is output
+$simple_record.c? | describe
 # => nothing
-$简单记录.c? == null
+$simple_record.c? == null
 # => true
 ```
