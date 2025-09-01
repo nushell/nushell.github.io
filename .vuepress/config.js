@@ -90,7 +90,16 @@ export default defineUserConfig({
     },
   },
   head: [
-    ["link", { rel: "preload", href: "/fonts/FiraCode-Regular.woff2", as: "font", type: "font/woff2", crossorigin: "anonymous" }],
+    [
+      'link',
+      {
+        rel: 'preload',
+        href: '/fonts/FiraCode-Regular.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossorigin: 'anonymous',
+      },
+    ],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     [
@@ -199,6 +208,7 @@ export default defineUserConfig({
         onedarkpro: 'one-dark-pro', // pre-load one-dark-pro for ansi code blocks
       },
       lineNumbers: 10,
+      collapsedLines: false,
       transformers: [
         // use one-dark-pro theme for ansi code blocks
         {
