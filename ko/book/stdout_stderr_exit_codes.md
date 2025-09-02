@@ -56,7 +56,7 @@ cat unknown.txt | complete
 
 ## `echo`, `print` 및 `log` 명령
 
-[`echo`](/commands/docs/echo.md) 명령은 주로 _파이프_용입니다. 파이프된 값을 무시하고 인수를 반환합니다. 일반적으로 값을 있는 그대로 작성하는 것보다 이것을 사용할 이유는 거의 없습니다.
+[`echo`](/commands/docs/echo.md) 명령은 주로 *파이프*용입니다. 파이프된 값을 무시하고 인수를 반환합니다. 일반적으로 값을 있는 그대로 작성하는 것보다 이것을 사용할 이유는 거의 없습니다.
 
 반면에 [`print`](/commands/docs/print.md) 명령은 주어진 값을 일반 텍스트로 표준 출력에 인쇄합니다. 표준 오류 출력에 쓰는 데도 사용할 수 있습니다. [`echo`](/commands/docs/echo.md)와 달리 이 명령은 값을 반환하지 않습니다(`print | describe`는 "nothing"을 반환함). 이 명령에는 출력이 없으므로 다른 명령과 파이프하는 것은 의미가 없습니다.
 
@@ -64,7 +64,7 @@ cat unknown.txt | complete
 
 @[code](@snippets/book/std_log.nu)
 
-![로그 메시지 예제](../assets/images/0_79_std_log.png)
+![로그 메시지 예제](../../assets/images/0_79_std_log.png)
 
 출력의 로그 수준은 `NU_LOG_LEVEL` 환경 변수로 설정할 수 있습니다.
 
