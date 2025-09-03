@@ -2,7 +2,7 @@
 title: polars implode
 categories: |
   dataframe
-version: 0.106.0
+version: 0.107.0
 dataframe: |
   Aggregates values into a list.
 usage: |

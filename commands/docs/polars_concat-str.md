@@ -2,7 +2,7 @@
 title: polars concat-str
 categories: |
   expression
-version: 0.106.0
+version: 0.107.0
 expression: |
   Creates a concat string expression.
 usage: |

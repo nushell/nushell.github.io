@@ -2,7 +2,7 @@
 title: polars fill-null
 categories: |
   lazyframe
-version: 0.106.0
+version: 0.107.0
 lazyframe: |
   Replaces NULL values with the given expression.
 usage: |
@@ -34,9 +34,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| dataframe | dataframe |
+| input      | output     |
+| ---------- | ---------- |
+| dataframe  | dataframe  |
+| expression | expression |
 ## Examples
 
 Fills the null values by 0
@@ -44,6 +45,24 @@ Fills the null values by 0
 > [1 2 2 3 3] | polars into-df | polars shift 2 | polars fill-null 0
 ╭───┬───╮
 │ # │ 0 │
+├───┼───┤
+│ 0 │ 0 │
+│ 1 │ 0 │
+│ 2 │ 1 │
+│ 3 │ 2 │
+│ 4 │ 2 │
+╰───┴───╯
+
+```
+
+Fills the null values in expression
+```nu
+> [[a]; [1] [2] [2] [3] [3]]
+                    | polars into-df
+                    | polars select (polars col a | polars shift 2 | polars fill-null 0)
+                    | polars collect
+╭───┬───╮
+│ # │ a │
 ├───┼───┤
 │ 0 │ 0 │
 │ 1 │ 0 │

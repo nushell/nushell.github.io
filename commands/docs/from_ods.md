@@ -2,7 +2,7 @@
 title: from ods
 categories: |
   formats
-version: 0.106.0
+version: 0.107.0
 formats: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 usage: |

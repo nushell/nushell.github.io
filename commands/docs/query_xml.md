@@ -2,11 +2,11 @@
 title: query xml
 categories: |
   filters
-version: 0.106.0
+version: 0.107.0
 filters: |
-  execute xpath query on xml
+  Execute XPath 1.0 query on XML input
 usage: |
-  execute xpath query on xml
+  Execute XPath 1.0 query on XML input
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `query xml` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>execute xpath query on xml</div>
+<div class='command-title'>Execute XPath 1.0 query on XML input</div>
 
 ::: warning This command requires a plugin
 The `query xml` command resides in the `query` plugin.
@@ -30,7 +30,56 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 ## Flags
 
  -  `--namespaces, -n {record}`: map of prefixes to namespace URIs
+ -  `--output-string-value`: Include `string_value` in the nodeset output. On by default.
+ -  `--output-type`: Include `type` in the nodeset output. Off by default.
+ -  `--output-names`: Include `local_name`, `prefixed_name`, and `namespace` in the nodeset output. Off by default.
 
 ## Parameters
 
  -  `query`: xpath query
+
+
+## Input/output types:
+
+| input  | output |
+| ------ | ------ |
+| string | any    |
+## Examples
+
+Query namespaces on the root element of an SVG file
+```nu
+> http get --raw https://www.w3.org/TR/SVG/images/conform/smiley.svg
+    | query xml '/svg:svg/namespace::*' --output-string-value --output-names --output-type --namespaces {svg: "http://www.w3.org/2000/svg"}
+
+```
+
+Query the language of Nushell blog (`xml:` prefix is always available)
+```nu
+> http get --raw https://www.nushell.sh/atom.xml
+    | query xml 'string(/*/@xml:lang)'
+
+```
+
+Query all XLink targets in SVG document
+```nu
+> http get --raw https://www.w3.org/TR/SVG/images/conform/smiley.svg
+    | query xml '//*/@xlink:href' --namespaces {xlink: "http://www.w3.org/1999/xlink"}
+
+```
+
+Get recent Nushell news
+```nu
+> http get --raw https://www.nushell.sh/atom.xml
+    | query xml '//atom:entry/atom:title|//atom:entry/atom:link/@href' --namespaces {atom: "http://www.w3.org/2005/Atom"}
+    | window 2 --stride 2
+    | each { {title: $in.0.string_value, link: $in.1.string_value} }
+
+```
+
+## Notes
+Scalar results (Number, String, Boolean) are returned as nu scalars.
+Output of the nodeset results depends on the flags used:
+    - No flags: returns a table with `string_value` column.
+    - You have to specify `--output-string-value` to include `string_value` in the output when using any other `--output-*` flags.
+    - `--output-type` includes `type` column with node type.
+    - `--output-names` includes `local_name`, `prefixed_name`, and `namespace` columns.

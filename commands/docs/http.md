@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.106.0
+version: 0.107.0
 network: |
   Various commands for working with http methods.
 usage: |
@@ -29,7 +29,14 @@ contributors: false
  -  `--headers, -H {any}`: custom headers you want to add
  -  `--raw, -r`: fetch contents as text rather than a table
  -  `--insecure, -k`: allow insecure server connections when using SSL
- -  `--full, -f`: returns the full response instead of only the body
+ -  `--full, -f`: Returns the record, containing metainformation about the exchange in addition to the response.
+                Returning record fields:
+                - urls: list of url redirects this command had to make to get to the destination
+                - headers.request: list of headers passed when doing the request
+                - headers.response: list of received headers
+                - body: the http body of the response
+                - status: the http status of the response
+
  -  `--allow-errors, -e`: do not fail if the server returns an error code
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
 

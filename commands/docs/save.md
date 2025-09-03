@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.106.0
+version: 0.107.0
 filesystem: |
   Save a file.
 usage: |

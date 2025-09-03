@@ -2,7 +2,7 @@
 title: select
 categories: |
   filters
-version: 0.106.0
+version: 0.107.0
 filters: |
   Select only these columns or rows from the input. Opposite of `reject`.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--optional, -o`: make all cell path members optional (returns `null` for missing values)
+ -  `--ignore-case`: make all cell path members case insensitive
  -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional) (deprecated)
 
 ## Parameters
@@ -47,6 +48,18 @@ Select a column in a table
 ├───┼───┤
 │ 0 │ a │
 ╰───┴───╯
+
+```
+
+Select a column even if some rows are missing that column
+```nu
+> [{a: a0 b: b0} {b: b1}] | select -o a
+╭───┬────╮
+│ # │ a  │
+├───┼────┤
+│ 0 │ a0 │
+│ 1 │    │
+╰───┴────╯
 
 ```
 

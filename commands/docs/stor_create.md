@@ -2,7 +2,7 @@
 title: stor create
 categories: |
   database
-version: 0.106.0
+version: 0.107.0
 database: |
   Create a table in the in-memory sqlite database.
 usage: |
@@ -36,5 +36,11 @@ contributors: false
 Create an in-memory sqlite database with specified table name, column names, and column data types
 ```nu
 > stor create --table-name nudb --columns {bool1: bool, int1: int, float1: float, str1: str, datetime1: datetime}
+
+```
+
+Create an in-memory sqlite database with a json column
+```nu
+> stor create --table-name files_with_md --columns {file: str, metadata: jsonb}
 
 ```

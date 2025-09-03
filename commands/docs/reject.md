@@ -2,7 +2,7 @@
 title: reject
 categories: |
   filters
-version: 0.106.0
+version: 0.107.0
 filters: |
   Remove the given columns or rows from the table. Opposite of `select`.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--optional, -o`: make all cell path members optional
+ -  `--ignore-case`: make all cell path members case insensitive
  -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional) (deprecated)
 
 ## Parameters

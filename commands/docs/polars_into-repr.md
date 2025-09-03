@@ -2,7 +2,7 @@
 title: polars into-repr
 categories: |
   dataframe
-version: 0.106.0
+version: 0.107.0
 dataframe: |
   Display a dataframe in its repr format.
 usage: |

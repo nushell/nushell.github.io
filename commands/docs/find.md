@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.106.0
+version: 0.107.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -23,8 +23,8 @@ contributors: false
 ## Flags
 
  -  `--regex, -r {string}`: regex to match with
- -  `--ignore-case, -i`: case-insensitive regex mode; equivalent to (?i)
- -  `--multiline, -m`: multi-line regex mode: ^ and $ match begin/end of line; equivalent to (?m)
+ -  `--ignore-case, -i`: case-insensitive; when in regex mode, this is equivalent to (?i)
+ -  `--multiline, -m`: don't split multi-line strings into lists of lines. you should use this option when using the (?m) or (?s) flags in regex mode
  -  `--dotall, -s`: dotall regex mode: allow a dot . to match newlines \n; equivalent to (?s)
  -  `--columns, -c {list<string>}`: column names to be searched
  -  `--no-highlight, -n`: no-highlight mode: find without marking with ansi code
@@ -49,15 +49,15 @@ Search for multiple terms in a command output
 
 ```
 
-Search and highlight text for a term in a string. Note that regular search is case insensitive
+Search and highlight text for a term in a string.
 ```nu
-> 'Cargo.toml' | find cargo
+> 'Cargo.toml' | find Cargo
 Cargo.toml
 ```
 
 Search a number or a file size in a list of numbers
 ```nu
-> [1 5 3kb 4 3Mb] | find 5 3kb
+> [1 5 3kb 4 35 3Mb] | find 5 3kb
 ╭───┬────────╮
 │ 0 │      5 │
 │ 1 │ 3.0 kB │
@@ -75,9 +75,9 @@ Search a char in a list of string
 
 ```
 
-Find using regex
+Search using regex
 ```nu
-> [abc bde arc abf] | find --regex "ab"
+> [abc odb arc abf] | find --regex "b."
 ╭───┬─────╮
 │ 0 │ abc │
 │ 1 │ abf │
@@ -85,9 +85,9 @@ Find using regex
 
 ```
 
-Find using regex case insensitive
+Case insensitive search
 ```nu
-> [aBc bde Arc abf] | find --regex "ab" -i
+> [aBc bde Arc abf] | find "ab" -i
 ╭───┬─────╮
 │ 0 │ aBc │
 │ 1 │ abf │
@@ -162,4 +162,23 @@ Find and highlight text in specific columns
 │ 0 │ moe  │ larry │ curly │
 ╰───┴──────┴───────┴───────╯
 
+```
+
+Find in a multi-line string
+```nu
+> "Violets are red\nAnd roses are blue\nWhen metamaterials\nAlter their hue" | find "ue"
+╭───┬────────────────────╮
+│ 0 │ And roses are blue │
+│ 1 │ Alter their hue    │
+╰───┴────────────────────╯
+
+```
+
+Find in a multi-line string without splitting the input into a list of lines
+```nu
+> "Violets are red\nAnd roses are blue\nWhen metamaterials\nAlter their hue" | find --multiline "ue"
+Violets are red
+And roses are blue
+When metamaterials
+Alter their hue
 ```

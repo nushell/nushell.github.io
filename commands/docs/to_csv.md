@@ -2,7 +2,7 @@
 title: to csv
 categories: |
   formats
-version: 0.106.0
+version: 0.107.0
 formats: |
   Convert table into .csv text .
 usage: |

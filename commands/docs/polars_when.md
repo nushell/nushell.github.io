@@ -2,7 +2,7 @@
 title: polars when
 categories: |
   expression
-version: 0.106.0
+version: 0.107.0
 expression: |
   Creates and modifies a when expression.
 usage: |

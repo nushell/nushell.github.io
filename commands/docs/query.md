@@ -2,7 +2,7 @@
 title: query
 categories: |
   filters
-version: 0.106.0
+version: 0.107.0
 filters: |
   Show all the query commands
 usage: |
@@ -36,4 +36,4 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 | [`query json`](/commands/docs/query_json.md)                 | execute json query on json file (open --raw \<file\> | query json 'query string')                                                 | plugin   |
 | [`query web`](/commands/docs/query_web.md)                   | execute selector query on html/web                                                                                                | plugin   |
 | [`query webpage-info`](/commands/docs/query_webpage-info.md) | uses the webpage crate to extract info from html: title, description, language, links, RSS feeds, Opengraph, Schema.org, and more | plugin   |
-| [`query xml`](/commands/docs/query_xml.md)                   | execute xpath query on xml                                                                                                        | plugin   |
+| [`query xml`](/commands/docs/query_xml.md)                   | Execute XPath 1.0 query on XML input                                                                                              | plugin   |

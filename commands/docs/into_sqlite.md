@@ -2,7 +2,7 @@
 title: into sqlite
 categories: |
   conversions
-version: 0.106.0
+version: 0.107.0
 conversions: |
   Convert table into a SQLite database.
 usage: |
@@ -58,5 +58,18 @@ Convert table literal into a SQLite database with 'main' as the table name
 Insert a single record into a SQLite database
 ```nu
 > { foo: bar, baz: quux } | into sqlite filename.db
+
+```
+
+Insert data that contains records, lists or tables, that will be stored as JSONB columns
+These columns will be automatically turned back into nu objects when read directly via cell-path
+```nu
+> {a_record: {foo: bar, baz: quux}, a_list: [1 2 3], a_table: [[a b]; [0 1] [2 3]]} | into sqlite filename.db -t my_table
+(open filename.db).my_table.0.a_list
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+╰───┴───╯
 
 ```
