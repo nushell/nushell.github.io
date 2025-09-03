@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.106.0
+version: 0.107.0
 core: |
   Display help information about different parts of Nushell.
 usage: |
@@ -56,6 +56,8 @@ search for string in command names, descriptions, and search terms
 
 ## Notes
 `help word` searches for "word" in commands, aliases and modules, in that order.
+If you want your own help implementation, create a custom command named `help` and it will also be used for `--help` invocations.
+There already is an alternative `help` command in the standard library you can try with `use std/help`.
 
 ## Subcommands:
 

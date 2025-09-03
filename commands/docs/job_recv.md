@@ -2,7 +2,7 @@
 title: job recv
 categories: |
   experimental
-version: 0.106.0
+version: 0.107.0
 experimental: |
   Read a message from the mailbox.
 usage: |
@@ -48,6 +48,12 @@ Receive a message, wait for at most 10 seconds.
 Get a message or fail if no message is available immediately
 ```nu
 > job recv --timeout 0sec
+
+```
+
+Receive a message from a newly-spawned job
+```nu
+> job spawn { sleep 1sec; 'hi' | job send 0 }; job recv
 
 ```
 

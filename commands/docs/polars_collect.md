@@ -2,7 +2,7 @@
 title: polars collect
 categories: |
   lazyframe
-version: 0.106.0
+version: 0.107.0
 lazyframe: |
   Collect lazy dataframe into eager dataframe.
 usage: |

@@ -2,7 +2,7 @@
 title: bits ror
 categories: |
   bits
-version: 0.106.0
+version: 0.107.0
 bits: |
   Bitwise rotate right for ints or binary values.
 usage: |
@@ -23,7 +23,7 @@ contributors: false
 ## Flags
 
  -  `--signed, -s`: always treat input number as a signed number
- -  `--number-bytes, -n {int}`: the word size in number of bytes, it can be 1, 2, 4, 8, auto, default value `8`
+ -  `--number-bytes, -n {int}`: the word size in number of bytes. Must be `1`, `2`, `4`, or `8` (defaults to the smallest of those that fits the input number)
 
 ## Parameters
 

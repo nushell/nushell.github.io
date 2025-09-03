@@ -2,7 +2,7 @@
 title: job send
 categories: |
   experimental
-version: 0.106.0
+version: 0.107.0
 experimental: |
   Send a message to the mailbox of a job.
 usage: |
@@ -36,9 +36,15 @@ contributors: false
 | any   | nothing |
 ## Examples
 
-Send a message to a newly spawned job
+Send a message from the main thread to a newly-spawned job
 ```nu
 > let id = job spawn { job recv | save sent.txt }; 'hi' | job send $id
+
+```
+
+Send a message from a newly-spawned job to the main thread (which always has an ID of 0)
+```nu
+> job spawn { sleep 1sec; 'hi' | job send 0 }; job recv
 
 ```
 

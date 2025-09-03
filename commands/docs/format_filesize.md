@@ -2,7 +2,7 @@
 title: format filesize
 categories: |
   strings
-version: 0.106.0
+version: 0.107.0
 strings: |
   Converts a column of filesizes to some specified format.
 usage: |
@@ -37,7 +37,7 @@ contributors: false
 
 Convert the size column to KB
 ```nu
-> ls | format filesize KB size
+> ls | format filesize kB size
 
 ```
 

@@ -2,11 +2,11 @@
 title: overlay list
 categories: |
   core
-version: 0.106.0
+version: 0.107.0
 core: |
-  List all active overlays.
+  List all overlays with their active status.
 usage: |
-  List all active overlays.
+  List all overlays with their active status.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `overlay list` for [core](/commands/categories/core.md)
 
-<div class='command-title'>List all active overlays.</div>
+<div class='command-title'>List all overlays with their active status.</div>
 
 ## Signature
 
@@ -23,18 +23,37 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output       |
-| ------- | ------------ |
-| nothing | list&lt;string&gt; |
+| input   | output                            |
+| ------- | --------------------------------- |
+| nothing | table&lt;name: string, active: bool&gt; |
 ## Examples
 
-Get the last activated overlay
+List all overlays with their active status
 ```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam
-    overlay list | last
-spam
+    overlay list
+╭───┬──────┬────────╮
+│ # │ name │ active │
+├───┼──────┼────────┤
+│ 0 │ spam │ true   │
+╰───┴──────┴────────╯
+
+```
+
+Get overlay status after hiding
+```nu
+> module spam { export def foo [] { "foo" } }
+    overlay use spam
+    overlay hide spam
+    overlay list | where name == "spam"
+╭───┬──────┬────────╮
+│ # │ name │ active │
+├───┼──────┼────────┤
+│ 0 │ spam │ false  │
+╰───┴──────┴────────╯
+
 ```
 
 ## Notes
-The overlays are listed in the order they were activated.
+The overlays are listed in the order they were activated. Hidden overlays are listed first, followed by active overlays listed in the order that they were activated. `last` command will always give the top active overlay

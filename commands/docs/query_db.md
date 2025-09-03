@@ -2,7 +2,7 @@
 title: query db
 categories: |
   database
-version: 0.106.0
+version: 0.107.0
 database: |
   Query a database using SQL.
 usage: |
@@ -45,7 +45,7 @@ Execute SQL against a SQLite database
 Execute a SQL statement with parameters
 ```nu
 > stor create -t my_table -c { first: str, second: int }
-stor open | query db "INSERT INTO my_table VALUES (?, ?)" -p [hello 123]
+        stor open | query db "INSERT INTO my_table VALUES (?, ?)" -p [hello 123]
 
 ```
 
@@ -59,5 +59,40 @@ stor open | query db "SELECT * FROM my_table WHERE second = :search_second" -p {
 ├───┼───────┼────────┤
 │ 0 │ hello │    123 │
 ╰───┴───────┴────────╯
+
+```
+
+Execute a SQL query, selecting a declared JSON(B) column that will automatically be parsed
+```nu
+> stor create -t my_table -c {data: jsonb}
+[{data: {name: Albert, age: 40}} {data: {name: Barnaby, age: 54}}] | stor insert -t my_table
+stor open | query db "SELECT data FROM my_table WHERE data->>'age' < 45"
+╭───┬───────────────────╮
+│ # │       data        │
+├───┼───────────────────┤
+│ 0 │ ╭──────┬────────╮ │
+│   │ │ name │ Albert │ │
+│   │ │ age  │ 40     │ │
+│   │ ╰──────┴────────╯ │
+╰───┴───────────────────╯
+
+```
+
+Execute a SQL query selecting a sub-field of a JSON(B) column.
+In this case, results must be parsed afterwards because SQLite does not
+return declaration types when a JSON(B) column is not directly selected
+```nu
+> stor create -t my_table -c {data: jsonb}
+stor insert -t my_table -d {data: {foo: foo, bar: 12, baz: [0 1 2]}}
+stor open | query db "SELECT data->'baz' AS baz FROM my_table" | update baz {from json}
+╭───┬───────────╮
+│ # │    baz    │
+├───┼───────────┤
+│ 0 │ ╭───┬───╮ │
+│   │ │ 0 │ 0 │ │
+│   │ │ 1 │ 1 │ │
+│   │ │ 2 │ 2 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
 
 ```

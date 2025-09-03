@@ -2,7 +2,7 @@
 title: hash
 categories: |
   hash
-version: 0.106.0
+version: 0.107.0
 hash: |
   Apply hash function.
 usage: |

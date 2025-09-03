@@ -2,7 +2,7 @@
 title: polars filter
 categories: |
   lazyframe
-version: 0.106.0
+version: 0.107.0
 lazyframe: |
   Filter dataframe based in expression.
 usage: |
@@ -58,8 +58,8 @@ Filter dataframe for rows where dt is within the last 2 days of the maximum dt v
 ╭───┬──────────────┬─────╮
 │ # │      dt      │ val │
 ├───┼──────────────┼─────┤
-│ 0 │ 3 months ago │   3 │
-│ 1 │ 3 months ago │   4 │
+│ 0 │ 5 months ago │   3 │
+│ 1 │ 5 months ago │   4 │
 ╰───┴──────────────┴─────╯
 
 ```

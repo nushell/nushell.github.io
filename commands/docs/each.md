@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.106.0
+version: 0.107.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -87,6 +87,12 @@ Iterate over each element, keeping null results
 │ 1 │ found 2! │
 │ 2 │          │
 ╰───┴──────────╯
+
+```
+
+Update value if not null, otherwise do nothing
+```nu
+> $env.name? | each { $"hello ($in)" } | default "bye"
 
 ```
 

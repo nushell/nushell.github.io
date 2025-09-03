@@ -2,7 +2,7 @@
 title: stor import
 categories: |
   database
-version: 0.106.0
+version: 0.107.0
 database: |
   Import a sqlite database file into the in-memory sqlite database.
 usage: |

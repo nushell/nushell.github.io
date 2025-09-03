@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.106.0
+version: 0.107.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -22,7 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--debounce-ms, -d {int}`: Debounce changes for this many milliseconds (default: 100). Adjust if you find that single writes are reported as multiple events
+ -  `--debounce-ms, -d {int}`: Debounce changes for this many milliseconds (default: 100). Adjust if you find that single writes are reported as multiple events (deprecated)
+ -  `--debounce {duration}`: Debounce changes for this duration (default: 100ms). Adjust if you find that single writes are reported as multiple events
  -  `--glob, -g {string}`: Only report changes for files that match this glob pattern (default: all files)
  -  `--recursive, -r {bool}`: Watch all directories under `<path>` recursively. Will be ignored if `<path>` is a file (default: true)
  -  `--quiet, -q`: Hide the initial status message (default: false)
@@ -36,9 +37,10 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | table  |
+| input   | output                                                   |
+| ------- | -------------------------------------------------------- |
+| nothing | nothing                                                  |
+| nothing | table&lt;operation: string, path: string, new_path: string&gt; |
 ## Examples
 
 Run `cargo test` whenever a Rust file changes
@@ -53,9 +55,20 @@ Watch all changes in the current directory
 
 ```
 
-Log all changes in a directory
+`watch` (when run without a closure) can also emit a stream of events it detects.
 ```nu
-> watch /foo/bar { |op, path| $"($op) - ($path)(char nl)" | save --append changes_in_bar.log }
+> watch /foo/bar
+    | where operation == Create
+    | first 5
+    | each {|e| $"New file!: ($e.path)" }
+    | to text
+    | save --append changes_in_bar.log
+
+```
+
+Print file changes with a debounce time of 5 minutes
+```nu
+> watch /foo/bar --debounce 5min { |op, path| $"Registered ($op) on ($path)" | print }
 
 ```
 
@@ -64,3 +77,6 @@ Note: if you are looking to run a command every N units of time, this can be acc
 > loop { command; sleep duration }
 
 ```
+
+## Notes
+When run without a closure, `watch` returns a stream of events instead.

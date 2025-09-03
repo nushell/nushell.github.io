@@ -2,7 +2,7 @@
 title: stor insert
 categories: |
   database
-version: 0.106.0
+version: 0.107.0
 database: |
   Insert information into a specified table in the in-memory sqlite database.
 usage: |
@@ -57,5 +57,11 @@ Insert data through pipeline input as a table literal
 Insert ls entries
 ```nu
 > ls | stor insert --table-name files
+
+```
+
+Insert nu records as json data
+```nu
+> ls -l | each {{file: $in.name, metadata: ($in | reject name)}} | stor insert --table-name files_with_md
 
 ```

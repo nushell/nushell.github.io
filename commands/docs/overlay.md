@@ -2,7 +2,7 @@
 title: overlay
 categories: |
   core
-version: 0.106.0
+version: 0.107.0
 core: |
   Commands for manipulating overlays.
 usage: |
@@ -37,6 +37,6 @@ This command is a parser keyword. For details, check:
 | name                                             | description                                  | type     |
 | ------------------------------------------------ | -------------------------------------------- | -------- |
 | [`overlay hide`](/commands/docs/overlay_hide.md) | Hide an active overlay.                      | keyword  |
-| [`overlay list`](/commands/docs/overlay_list.md) | List all active overlays.                    | built-in |
+| [`overlay list`](/commands/docs/overlay_list.md) | List all overlays with their active status.  | built-in |
 | [`overlay new`](/commands/docs/overlay_new.md)   | Create an empty overlay.                     | keyword  |
 | [`overlay use`](/commands/docs/overlay_use.md)   | Use definitions from a module as an overlay. | keyword  |
