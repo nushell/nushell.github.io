@@ -2,7 +2,7 @@
 title: polars last
 categories: |
   dataframe
-version: 0.106.0
+version: 0.107.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression.
 usage: |

@@ -2,7 +2,7 @@
 title: into binary
 categories: |
   conversions
-version: 0.106.0
+version: 0.107.0
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--compact, -c`: output without padding zeros
+ -  `--endian, -e {string}`: byte encode endian. Does not affect string, date or binary. In containers, only individual elements are affected. Available options: native(default), little, big
 
 ## Parameters
 
@@ -60,6 +61,22 @@ convert a number to a nushell binary primitive
 > 1 | into binary
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 00000000:   01 00 00 00  00 00 00 00                             •0000000
+
+```
+
+convert a number to a nushell binary primitive (big endian)
+```nu
+> 258 | into binary --endian big
+Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
+00000000:   00 00 00 00  00 00 01 02                             000000••
+
+```
+
+convert a number to a nushell binary primitive (little endian)
+```nu
+> 258 | into binary --endian little
+Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
+00000000:   02 01 00 00  00 00 00 00                             ••000000
 
 ```
 

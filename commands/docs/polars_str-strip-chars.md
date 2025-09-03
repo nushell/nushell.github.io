@@ -2,7 +2,7 @@
 title: polars str-strip-chars
 categories: |
   dataframe
-version: 0.106.0
+version: 0.107.0
 dataframe: |
   Strips specified characters from strings in a column
 usage: |

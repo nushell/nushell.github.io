@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.106.0
+version: 0.107.0
 filters: |
   Extract data using a cell path.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--optional, -o`: make all cell path members optional (returns `null` for missing values)
+ -  `--ignore-case`: make all cell path members case insensitive
  -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional) (deprecated)
  -  `--sensitive, -s`: get path in a case sensitive manner (deprecated)
 
@@ -57,6 +58,28 @@ Get a column from a table
 
 ```
 
+Get a column from a table where some rows don't have that column, using optional cell-path syntax
+```nu
+> [{A: A0, B: B0}, {B: B1}, {A: A2, B: B2}] | get A?
+╭───┬────╮
+│ 0 │ A0 │
+│ 1 │    │
+│ 2 │ A2 │
+╰───┴────╯
+
+```
+
+Get a column from a table where some rows don't have that column, using the optional flag
+```nu
+> [{A: A0, B: B0}, {B: B1}, {A: A2, B: B2}] | get -o A
+╭───┬────╮
+│ 0 │ A0 │
+│ 1 │    │
+│ 2 │ A2 │
+╰───┴────╯
+
+```
+
 Get a cell from a table
 ```nu
 > [{A: A0}] | get 0.A
@@ -75,9 +98,15 @@ Extract the name of the 3rd record in a list
 
 ```
 
-Getting Path/PATH in a case insensitive way
+Getting environment variables in a case insensitive way, using case insensitive cell-path syntax
 ```nu
-> $env | get paTH!
+> $env | get home! path!
+
+```
+
+Getting environment variables in a case insensitive way, using the '--ignore-case' flag
+```nu
+> $env | get --ignore-case home path
 
 ```
 

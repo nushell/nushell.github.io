@@ -2,7 +2,7 @@
 title: run-external
 categories: |
   system
-version: 0.106.0
+version: 0.107.0
 system: |
   Runs external command.
 usage: |
@@ -49,3 +49,7 @@ Redirect stderr from an external command into the pipeline
 > run-external "nu" "-c" "print -e hello" e>| split chars
 
 ```
+
+## Notes
+All externals are run with this command, whether you call it directly with `run-external external` or use `external` or `^external`.
+If you create a custom command with this name, that will be used instead.

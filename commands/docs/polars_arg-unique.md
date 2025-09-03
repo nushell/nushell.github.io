@@ -2,7 +2,7 @@
 title: polars arg-unique
 categories: |
   dataframe
-version: 0.106.0
+version: 0.107.0
 dataframe: |
   Returns indexes for unique values.
 usage: |

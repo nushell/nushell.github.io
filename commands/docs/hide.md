@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.106.0
+version: 0.107.0
 core: |
   Hide definitions in the current scope.
 usage: |
@@ -23,7 +23,7 @@ contributors: false
 ## Parameters
 
  -  `module`: Module or module file.
- -  `members`: Which members of the module to import.
+ -  `members`: Which members of the module to hide.
 
 
 ## Input/output types:

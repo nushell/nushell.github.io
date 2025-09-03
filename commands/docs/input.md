@@ -2,7 +2,7 @@
 title: input
 categories: |
   platform
-version: 0.106.0
+version: 0.107.0
 platform: |
   Get input from the user.
 usage: |
@@ -26,8 +26,8 @@ contributors: false
  -  `--numchar, -n {int}`: number of characters to read; suppresses output
  -  `--default, -d {string}`: default value if no input is provided
  -  `--reedline`: use the reedline library, defaults to false
- -  `--history-file {path}`: Path to a file to read and write command history. This is a text file and will be created if it doesn't exist. Will be used as the selection list.
- -  `--max-history {int}`: The maximum number of entries to keep in the history, defaults to $env.config.history.max_size.
+ -  `--history-file {path}`: Path to a file to read and write command history. This is a text file and will be created if it doesn't exist. Will be used as the selection list. Implies `--reedline`.
+ -  `--max-history {int}`: The maximum number of entries to keep in the history, defaults to $env.config.history.max_size. Implies `--reedline`.
  -  `--suppress-output, -s`: don't print keystroke values
 
 ## Parameters
@@ -61,15 +61,21 @@ Get input from the user with default value, and assign to a variable
 
 ```
 
+Get multiple lines of input from the user (newlines can be entered using `Alt` + `Enter` or `Ctrl` + `Enter`), and assign to a variable
+```nu
+> let multiline_input = (input --reedline)
+
+```
+
 Get input from the user with history, and assign to a variable
 ```nu
-> let user_input = ([past,command,entries] | input )
+> let user_input = ([past,command,entries] | input --reedline)
 
 ```
 
 Get input from the user with history backed by a file, and assign to a variable
 ```nu
-> let user_input = (input --history-file ./history.txt)
+> let user_input = (input --reedline --history-file ./history.txt)
 
 ```
 

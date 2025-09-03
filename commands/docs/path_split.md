@@ -2,7 +2,7 @@
 title: path split
 categories: |
   path
-version: 0.106.0
+version: 0.107.0
 path: |
   Split a path into a list based on the system's path separator.
 usage: |

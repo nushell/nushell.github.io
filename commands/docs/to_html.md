@@ -2,7 +2,7 @@
 title: to html
 categories: |
   formats
-version: 0.106.0
+version: 0.107.0
 formats: |
   Convert table into simple HTML.
 usage: |
@@ -28,6 +28,7 @@ contributors: false
  -  `--partial, -p`: only output the html for the content itself
  -  `--theme, -t {string}`: the name of the theme to use (github, blulocolight, ...); case-insensitive
  -  `--list, -l`: produce a color table of all available themes
+ -  `--raw, -r`: do not escape html tags
 
 
 ## Input/output types:
@@ -38,10 +39,16 @@ contributors: false
 | any     | string |
 ## Examples
 
-Outputs an  HTML string representing the contents of this table
+Outputs an HTML string representing the contents of this table
 ```nu
 > [[foo bar]; [1 2]] | to html
 <html><style>body { background-color:white;color:black; }</style><body><table><thead><tr><th>foo</th><th>bar</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table></body></html>
+```
+
+Outputs an HTML string using a record of xml data
+```nu
+> {tag: a attributes: { style: "color: red" } content: ["hello!"] } | to xml | to html --raw
+<html><style>body { background-color:white;color:black; }</style><body><a style="color: red">hello!</a></body></html>
 ```
 
 Optionally, only output the html for the content itself
