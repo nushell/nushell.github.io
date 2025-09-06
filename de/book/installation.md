@@ -4,7 +4,7 @@ Der aktuell beste Weg Nu zu bekommen ist, es von [crates.io](https://crates.io) 
 
 ## Binärdatei
 
-Von der [Release-Seite](https://github.com/nushell/nushell/releases) kann Nushell bereits kompiliert heruntergeladen werden. Alternativ kann Nushell, wenn [Homebrew](https://brew.sh/) verwendet wird, mit dem Befehl `brew install nushell` installiert werden. Unter Windows können [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) oder [Chocolatey](https://chocolatey.org/) zur Installation verwendet werden: `winget install nushell` beziehungsweise `choco install nushell`.
+Von der [Release-Seite](https://github.com/nushell/nushell/releases) kann Nushell bereits kompiliert heruntergeladen werden. Alternativ kann Nushell, wenn [Homebrew](https://brew.sh/) verwendet wird, mit dem Befehl `brew install nushell` installiert werden. Unter Windows kann [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) zur Installation verwendet werden: `winget install nushell`.
 
 ### Windows
 
