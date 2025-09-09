@@ -1,8 +1,9 @@
 ---
 next:
   text: 셸로서의 Nu
-  link: /book/nu_as_a_shell.md
+  link: /ko/book/nu_as_a_shell.md
 ---
+
 # 모범 사례
 
 이 페이지는 지금까지 발견한 구문 지침과 모범 사례를 수집하는 작업 문서입니다.

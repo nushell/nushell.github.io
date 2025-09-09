@@ -1,8 +1,9 @@
 ---
 next:
   text: 누셸 기본
-  link: /book/nu_fundamentals.md
+  link: /ko/book/nu_fundamentals.md
 ---
+
 # 누셸 치트 시트
 
 ## 데이터 유형

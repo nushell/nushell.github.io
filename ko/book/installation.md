@@ -1,7 +1,7 @@
 ---
 next:
   text: 기본 셸
-  link: /book/default_shell.md
+  link: /ko/book/default_shell.md
 ---
 
 # Nu 설치

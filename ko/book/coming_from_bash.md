@@ -1,7 +1,7 @@
 ---
 prev:
   text: 누셸 시작하기
-  link: /book/coming_to_nu.md
+  link: /ko/book/coming_to_nu.md
 ---
 # Bash에서 오신 분들을 위해
 

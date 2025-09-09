@@ -228,4 +228,4 @@ let carapace_completer = {|spans|
 }
 ```
 
-[외부 완성기의 더 많은 예는 요리책에서 찾을 수 있습니다](../cookbook/external_completers.md).
+[더 많은 예는 쿡북에서 찾을 수 있습니다](/cookbook/external_completers.md).

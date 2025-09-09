@@ -1,11 +1,12 @@
 ---
 prev:
   text: 백그라운드 작업
-  link: /book/background_jobs.md
+  link: /ko/book/background_jobs.md
 next:
   text: Bash에서 오신 분들을 위해
-  link: /book/coming_from_bash.md
+  link: /ko/book/coming_from_bash.md
 ---
+
 # 누셸 시작하기
 
 다른 셸이나 프로그래밍 언어에 익숙하다면 이 장이 빠르게 익숙해지는 데 도움이 될 것입니다.

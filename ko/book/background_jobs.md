@@ -1,8 +1,9 @@
 ---
 next:
   text: 누셸 시작하기
-  link: /book/coming_to_nu.md
+  link: /ko/book/coming_to_nu.md
 ---
+
 # 백그라운드 작업
 
 누셸은 현재 스레드 기반 백그라운드 작업에 대한 실험적 지원을 제공합니다.

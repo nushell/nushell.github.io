@@ -1,11 +1,12 @@
 ---
 prev:
   text: 모범 사례
-  link: /book/style_guide.md
+  link: /ko/book/style_guide.md
 next:
   text: 구성
-  link: /book/configuration.md
+  link: /ko/book/configuration.md
 ---
+
 # 셸로서의 Nu
 
 [Nu 기본 사항](nu_fundamentals.md) 및 [Nu 프로그래밍](programming_in_nu.md) 장에서는 주로 누셸의 언어 측면에 중점을 두었습니다.

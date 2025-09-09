@@ -1,18 +1,19 @@
 ---
 prev:
   text: 누셸 코드가 실행되는 방법
-  link: /book/how_nushell_code_gets_run.md
+  link: /ko/book/how_nushell_code_gets_run.md
 next:
   text: 표준 라이브러리 (미리보기)
-  link: /book/standard_library.md
+  link: /ko/book/standard_library.md
 ---
-# (그렇게) 고급은 아님
+
+# (약간)고급 사용법
 
 "고급"이라는 제목이 부담스러워 이 장을 건너뛰고 싶을 수도 있지만, 사실 가장 흥미롭고 강력한 기능 중 일부는 여기에서 찾을 수 있습니다.
 
 내장 명령어 외에도 누셸에는 [표준 라이브러리](standard_library.md)가 있습니다.
 
-누셸은 _구조화된 데이터_에서 작동합니다.
+누셸은 *구조화된 데이터*에서 작동합니다.
 누셸은 "데이터 우선" 셸이자 프로그래밍 언어라고 말할 수 있습니다.
 데이터 중심 방향을 더 탐색하기 위해 누셸은 백엔드로 [Polars](https://github.com/pola-rs/polars)를 사용하는 모든 기능을 갖춘 데이터프레임 처리 엔진을 포함합니다.
 셸에서 직접 대용량 데이터를 효율적으로 처리하려면 [데이터프레임 설명서](dataframes.md)를 확인하십시오.

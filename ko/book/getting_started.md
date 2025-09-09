@@ -1,11 +1,12 @@
 ---
 prev:
   text: 기본 셸
-  link: /book/default_shell.md
+  link: /ko/book/default_shell.md
 next:
   text: 빠른 둘러보기
-  link: /book/quick_tour.md
+  link: /ko/book/quick_tour.md
 ---
+
 # 시작하기
 
 시작해 봅시다! :elephant:

@@ -1,11 +1,12 @@
 ---
 prev:
   text: 누셸 연산자 맵
-  link: /book/nushell_operator_map.md
+  link: /ko/book/nushell_operator_map.md
 next:
   text: 누셸 코드가 실행되는 방법
-  link: /book/how_nushell_code_gets_run.md
+  link: /ko/book/how_nushell_code_gets_run.md
 ---
+
 # 디자인 노트
 
 이 장에서는 누셸 디자인의 특정 측면에 대한 심층적인 개요를 제공하고자 합니다. 이 주제는 기본적인 사용에는 필수는 아니지만, 이를 읽으면 누셸이 어떻게 작동하고 왜 그렇게 작동하는지 이해하는 데 도움이 될 것입니다.

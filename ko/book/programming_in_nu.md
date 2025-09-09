@@ -1,11 +1,12 @@
 ---
 prev:
   text: 특수 변수
-  link: /book/special_variables.md
+  link: /ko/book/special_variables.md
 next:
   text: 사용자 지정 명령
-  link: /book/custom_commands.md
+  link: /ko/book/custom_commands.md
 ---
+
 # Nu로 프로그래밍하기
 
 이 장에서는 누셸을 프로그래밍 언어로서 더 자세히 다룹니다.
