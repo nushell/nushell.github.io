@@ -4,7 +4,7 @@ title: jq vs Nushell
 
 # jq vs Nushell
 
-[`jq`](https://jqlang.github.io/jq/) 和 `nu` 都能够以可组合的方式转换数据。本实战指南将引导你完成常见的数据操作任务，旨在帮助你建立使用 Nushell 的有效心智模型。
+[`jq`](https://jqlang.github.io/jq/) 和 `nu` 都能够以可组合的方式转换数据。本实战宝典将引导你完成常见的数据操作任务，旨在帮助你建立使用 Nushell 的有效心智模型。
 
 所有示例都将使用 JSON 以保持示例之间的一致性。
 
@@ -620,7 +620,7 @@ jq -r 'group_by(. / 5 | floor * 5) | map({ bin: .[0], count: length })'
 
 ## 附录：自定义命令
 
-本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果你对此感兴趣，[插件](/zh-CN/book/plugins.html)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
+本节提供了本实战宝典中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果你对此感兴趣，[插件](/zh-CN/book/plugins.html)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
 
 ```nu
 use toolbox.nu *

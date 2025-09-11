@@ -228,4 +228,4 @@ let carapace_completer = {|spans|
 }
 ```
 
-[更多外部补全器的示例可以在 实战指南 中找到](../cookbook/external_completers.md)。
+[更多外部补全器的示例可以在 实战宝典 中找到](../cookbook/external_completers.md)。
