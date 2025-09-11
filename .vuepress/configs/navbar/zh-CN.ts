@@ -8,7 +8,7 @@ export const navbarZhCN: NavbarConfig = [
     children: [
       { text: 'Nushell 之书', link: '/zh-CN/book/' },
       { text: '命令参考列表', link: '/commands/' },
-      { text: '实战指南', link: '/zh-CN/cookbook/' },
+      { text: '实战宝典', link: '/zh-CN/cookbook/' },
       { text: '语言参考指南', link: '/lang-guide/' },
       { text: '贡献指南', link: '/zh-CN/contributor-book/' },
     ],

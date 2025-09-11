@@ -144,7 +144,7 @@ export const sidebarZhCN: SidebarConfig = {
   ],
   '/zh-CN/cookbook/': [
     {
-      text: '实战指南',
+      text: '实战宝典',
       collapsible: false,
       children: [
         '/zh-CN/cookbook/README.md',
