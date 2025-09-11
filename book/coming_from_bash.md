@@ -42,6 +42,8 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `command \| head -5`                 | `command \| first 5`                                          | Limit the output to the first 5 rows of an internal command (see also `last` and `skip`) |
 | `cat <path>`                         | `open --raw <path>`                                           | Display the contents of the given file                            |
 |                                      | `open <path>`                                                 | Read a file as structured data                                    |
+| `cat <(<command1>) <(<command2>)`    | `[(command1), (command2)] \| str join`                        | Concatenate the outputs of command1 and command2                  |
+| `cat <path> <(<command>)`            | `[(open --raw <path>), (command)] \| str join`                | Concatenate the contents of the given file and output of command  |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                                          | Move file to new location                                         |
 | `for f in *.md; do echo $f; done`    | `ls *.md \| each { $in.name }`                                | Iterate over a list and return results                            |
 | `for i in $(seq 1 10); do echo $i; done` | `for i in 1..10 { print $i }`                             | Iterate over a list and run a command on results                  |
