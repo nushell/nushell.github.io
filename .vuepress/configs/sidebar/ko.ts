@@ -1,0 +1,123 @@
+import type { SidebarConfig } from '@vuepress/theme-default';
+import type { commandCategories } from './command_categories';
+
+export const sidebarKo: SidebarConfig = {
+  '/ko/book/': [
+    {
+      text: '소개',
+      link: '/ko/book/README.md',
+      collapsible: false,
+    },
+    {
+      text: '설치하기',
+      link: '/ko/book/installation.md',
+      collapsible: false,
+      children: ['/ko/book/default_shell.md'],
+    },
+    {
+      text: '시작하기',
+      link: '/ko/book/getting_started.md',
+      collapsible: false,
+      children: [
+        '/ko/book/quick_tour.md',
+        '/ko/book/moving_around.md',
+        '/ko/book/thinking_in_nu.md',
+        '/ko/book/cheat_sheet.md',
+      ],
+    },
+    {
+      text: 'Nu 기본',
+      link: '/ko/book/nu_fundamentals.md',
+      collapsible: false,
+      children: [
+        '/ko/book/types_of_data.md',
+        '/ko/book/loading_data.md',
+        '/ko/book/pipelines.md',
+        '/ko/book/working_with_strings.md',
+        '/ko/book/working_with_lists.md',
+        '/ko/book/working_with_records.md',
+        '/ko/book/working_with_tables.md',
+        '/ko/book/navigating_structured_data.md',
+        '/ko/book/special_variables.md',
+      ],
+    },
+    {
+      text: 'Nu에서 프로그래밍하기',
+      link: '/ko/book/programming_in_nu.md',
+      collapsible: false,
+      children: [
+        '/ko/book/custom_commands',
+        '/ko/book/aliases',
+        '/ko/book/operators',
+        '/ko/book/variables.md',
+        '/ko/book/control_flow.md',
+        '/ko/book/scripts.md',
+        {
+          text: '모듈',
+          link: '/ko/book/modules.md',
+          collapsible: false,
+          children: [
+            '/ko/book/modules/using_modules.md',
+            '/ko/book/modules/creating_modules.md',
+          ],
+        },
+        '/ko/book/overlays.md',
+        '/ko/book/sorting.md',
+        '/ko/book/testing.md',
+        '/ko/book/style_guide.md',
+      ],
+    },
+    {
+      text: '셸로서의 Nu',
+      link: '/ko/book/nu_as_a_shell.md',
+      collapsible: false,
+      children: [
+        '/ko/book/configuration.md',
+        '/ko/book/environment.md',
+        '/ko/book/stdout_stderr_exit_codes.md',
+        '/ko/book/running_externals.md',
+        '/ko/book/3rdpartyprompts.md',
+        '/ko/book/directory_stack.md',
+        '/ko/book/line_editor.md',
+        '/ko/book/custom_completions.md',
+        '/ko/book/externs.md',
+        '/ko/book/coloring_and_theming.md',
+        '/ko/book/hooks.md',
+        '/ko/book/background_jobs.md',
+      ],
+    },
+    {
+      text: 'Nu로 전환하기',
+      link: '/ko/book/coming_to_nu.md',
+      collapsible: false,
+      children: [
+        '/ko/book/coming_from_bash.md',
+        '/ko/book/coming_from_cmd.md',
+        '/ko/book/nushell_map.md',
+        '/ko/book/nushell_map_imperative.md',
+        '/ko/book/nushell_map_functional.md',
+        '/ko/book/nushell_operator_map.md',
+      ],
+    },
+    {
+      text: '디자인 노트',
+      link: '/ko/book/design_notes.md',
+      collapsible: false,
+      children: ['/ko/book/how_nushell_code_gets_run.md'],
+    },
+    {
+      text: '(약간)고급 사용법',
+      link: '/ko/book/advanced.md',
+      collapsible: false,
+      children: [
+        '/ko/book/standard_library.md',
+        '/ko/book/dataframes.md',
+        '/ko/book/metadata.md',
+        '/ko/book/creating_errors.md',
+        '/ko/book/parallelism.md',
+        '/ko/book/plugins.md',
+        '/ko/book/explore.md',
+      ],
+    },
+  ],
+};
