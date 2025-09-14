@@ -20,6 +20,7 @@ import {
   navbarPtBR,
   navbarRU,
   navbarZhCN,
+  navbarKo,
   sidebarDe,
   sidebarEn,
   sidebarFr,
@@ -28,6 +29,7 @@ import {
   sidebarPtBR,
   sidebarRU,
   sidebarZhCN,
+  sidebarKo,
 } from './configs/index.js';
 
 const compareDate = (dateA, dateB) => {
@@ -87,6 +89,11 @@ export default defineUserConfig({
       lang: 'ru-RU',
       title: 'Nushell',
       description: 'Новый тип оболочки.',
+    },
+    '/ko/': {
+      lang: 'ko-KR',
+      title: 'Nushell',
+      description: '새로운 유형의 셸',
     },
   },
   head: [
@@ -184,6 +191,13 @@ export default defineUserConfig({
         editLinkText: '在GitHub上编辑此页面',
         navbar: navbarZhCN,
         sidebar: sidebarZhCN,
+      },
+      '/ko/': {
+        selectText: '언어',
+        selectLanguageName: '한국어',
+        editLinkText: 'GitHub에서 수정하기',
+        navbar: navbarKo,
+        sidebar: sidebarKo,
       },
     },
     themePlugins: {
