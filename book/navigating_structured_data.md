@@ -344,4 +344,4 @@ $with_default_value.1.a
 ## Other commands for accessing structured data
 
 - [`reject`](/commands/docs/reject.md) is the opposite of `select`, removing the specified rows and columns
-- [`range`](/commands/docs/range.md) specifies the rows of a list or table to select using a [`range`](./types_of_data.md#ranges) type
+- [`slice`](/commands/docs/slice.md) specifies the rows of a list or table to select using a [`range`](./types_of_data.md#ranges) type
