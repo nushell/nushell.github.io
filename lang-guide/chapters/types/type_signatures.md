@@ -79,19 +79,3 @@ and `false` if not present.
 
 You cannot use the `bool` type as a flag annotation as that is the same
 as the the existence or not of the occurrence of the flag.
-
-## Closure parameters
-
-(TODO: Needs update for changes in 0.92)
-
-In Nu, closures have a simpler kind of type annotations for parameters
-than custom commands. Basically, closures can have type annotations for their
-parameters but not optional or default values.
-
-E.g. An annotated closure:
-
-```nu
-let cl = {|x: int, y: string| $"x: ($x), y: ($y)" }
-do $cl 88 'hello'
-# => x: 88, y: hello
-```
