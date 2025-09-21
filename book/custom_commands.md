@@ -3,6 +3,7 @@ prev:
   text: Programming in Nu
   link: /book/programming_in_nu.md
 ---
+
 # Custom Commands
 
 As with any programming language, you'll quickly want to save longer pipelines and expressions so that you can call them again easily when needed.
@@ -158,7 +159,7 @@ In this case, the final expression is the `match` statement which can return:
 
 - `null` if the directory is empty
 - Otherwise, a `record` representing the randomly chosen file
-:::
+  :::
 
 ## Custom Commands and Pipelines
 
@@ -490,6 +491,9 @@ The following [types](./types_of_data.html) can be used for parameter annotation
 - `record`
 - `string`
 - `table`
+- `oneof`
+
+See [Type signatures](/lang-guide/chapters/types/type_signatures.html) in the Language Reference Guide for more information.
 
 :::
 
