@@ -64,7 +64,7 @@ Only definitions marked with `export` (or `export-env` for environment variables
 An export cannot have the same name as that of the module itself.
 :::
 
-In the [Basic Example](#basic-module-example) above, we had a module named `inc` with a command named `increment`. However, if we rename that file to `increment.nu`, it will fail to import.
+In the [Basic Example](#simple-module-example) above, we had a module named `inc` with a command named `increment`. However, if we rename that file to `increment.nu`, it will fail to import.
 
 ```nu
 mv inc.nu increment.nu

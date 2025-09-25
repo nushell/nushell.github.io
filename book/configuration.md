@@ -3,6 +3,7 @@ prev:
   text: Nu as a Shell
   link: /book/nu_as_a_shell.md
 ---
+
 # Configuration
 
 ## Quickstart
@@ -116,7 +117,7 @@ Other users may prefer a "modular" configuration where each file handles a small
 `config.nu` is commonly used to:
 
 - Set [environment variables](#set-environment-variables) for Nushell and other applications
-- Set Nushell settings in [`$env.config`](#nushell-settings-in-the-envconfig-record)
+- Set Nushell settings in [`$env.config`](#nushell-settings-in-the-env-config-record)
 - Load modules or source files so that their commands are readily available
 - Run any other applications or commands at startup
 
@@ -581,10 +582,10 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | 18.  | (config files) (plugin)         | Processes the signatures in the user's `plugin.msgpackz` (located in the configuration directory) so that added plugins can be used in the following config files.                                                                                                                                                                                                             |
 | 19.  | (config files)                  | If this is the first time Nushell has been launched, then it creates the configuration directory. "First launch" is determined by whether or not the configuration directory exists.                                                                                                                                                                                           |
 | 20.  | (config files)                  | Also, if this is the first time Nushell has been launched, creates a mostly empty (other than a few comments) `env.nu` and `config .nu` in that directory.                                                                                                                                                                                                                     |
-| 21.  | (config files) (default_env.nu) | Loads default environment variables from the internal `default_env.nu`. This file can be viewed with: `config env --default \| nu-highlight \| less -R`.                                                                                                                                                                                                                    |
+| 21.  | (config files) (default_env.nu) | Loads default environment variables from the internal `default_env.nu`. This file can be viewed with: `config env --default \| nu-highlight \| less -R`.                                                                                                                                                                                                                       |
 | 22.  | (config files) (env.nu)         | Converts the `PATH` variable into a list so that it can be accessed more easily in the next step.                                                                                                                                                                                                                                                                              |
 | 23.  | (config files) (env.nu)         | Loads (parses and evaluates) the user's `env.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                     |
-| 24.  | (config files) (config.nu)      | Loads a minimal `$env.config` record from the internal `default_config.nu`. This file can be viewed with: `config nu --default \| nu-highlight \| less -R`. Most values that are not defined in `default_config.nu` will be auto-populated into `$env.config` using their internal defaults as well.                                                                        |
+| 24.  | (config files) (config.nu)      | Loads a minimal `$env.config` record from the internal `default_config.nu`. This file can be viewed with: `config nu --default \| nu-highlight \| less -R`. Most values that are not defined in `default_config.nu` will be auto-populated into `$env.config` using their internal defaults as well.                                                                           |
 | 25.  | (config files) (config.nu)      | Loads (parses and evaluates) the user's `config.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                  |
 | 26.  | (config files) (login)          | When Nushell is running as a login shell, loads the user's `login.nu`.                                                                                                                                                                                                                                                                                                         |
 | 27.  | (config files)                  | Loops through the vendor autoload directories and loads any `.nu` files found. The directories are processed in the order found in `$nu.vendor-autoload-dirs`, and files in those directories are processed in alphabetical order.                                                                                                                                             |
