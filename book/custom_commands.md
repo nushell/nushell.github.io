@@ -3,6 +3,7 @@ prev:
   text: Programming in Nu
   link: /book/programming_in_nu.md
 ---
+
 # Custom Commands
 
 As with any programming language, you'll quickly want to save longer pipelines and expressions so that you can call them again easily when needed.
@@ -158,7 +159,7 @@ In this case, the final expression is the `match` statement which can return:
 
 - `null` if the directory is empty
 - Otherwise, a `record` representing the randomly chosen file
-:::
+  :::
 
 ## Custom Commands and Pipelines
 
@@ -191,7 +192,7 @@ my-ls | get name
 # => ╰───┴───────────────────────╯
 ```
 
-This lets us easily build custom commands and process their output. Remember that we don't use return statements like other languages. Instead, the [implicit return](#returning-values-from-a-command) allows us to build pipelines that output streams of data that can be connected to other pipelines.
+This lets us easily build custom commands and process their output. Remember that we don't use return statements like other languages. Instead, the [implicit return](#returning-values-from-commands) allows us to build pipelines that output streams of data that can be connected to other pipelines.
 
 ::: tip Note
 The `ls` content is still streamed in this case, even though it is in a separate command. Running this command against a long-directory on a slow (e.g., networked) filesystem would return rows as they became available.
