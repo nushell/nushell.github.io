@@ -192,7 +192,7 @@ $env.config = ($env.config | upsert hooks {
             code: 'print $"changing directory from ($before) to ($after)"'
         }
     }
-}
+})
 ```
 
 ## Examples
