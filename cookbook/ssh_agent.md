@@ -40,7 +40,7 @@ You can work around this behavior by checking if a ssh-agent is already running 
 ```nu
 do --env {
     let ssh_agent_file = (
-        $nu.temp-path | path join $"ssh-agent-($env.USER? | default $env.USERNAME).nuon"
+        $nu.temp-path | path join $"ssh-agent-(whoami).nuon"
     )
 
     if ($ssh_agent_file | path exists) {
