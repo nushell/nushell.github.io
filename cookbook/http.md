@@ -285,7 +285,7 @@ http get https://api.example.com/events.jsonl
 | where event_type == "error"
 ```
 
-The response body streams through the pipeline—you can inspect metadata and process the stream simultaneously. Before `metadata access`, you needed `--full` to get metadata, which consumed the entire body and prevented streaming.
+The response body streams through the pipeline while you inspect metadata and process the stream simultaneously. Before `metadata access`, you needed `--full` to get metadata, which consumed the entire body and prevented streaming.
 
 Available metadata:
 - `status` - HTTP status code (200, 404, 500, etc.)
