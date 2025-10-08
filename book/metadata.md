@@ -56,20 +56,33 @@ This naming convention helps ensure different parts of the system don't overwrit
 
 ## HTTP Response Metadata
 
-All HTTP commands (`http get`, `http post`, etc.) automatically attach response metadata under the `"http_response"` key. This includes the status code, headers, and redirect history.
-
-You can access this metadata using the [`metadata access`](/commands/docs/metadata_access.md) command, which is especially useful for streaming large responses:
+All HTTP commands (`http get`, `http post`, etc.) attach response metadata:
 
 ```nu
-# Check status code while streaming the response
+http get https://api.example.com | metadata | get http_response
+# => ╭─────────┬───────────────────╮
+# => │ status  │ 200               │
+# => │ headers │ [list]            │
+# => │ urls    │ [list]            │
+# => ╰─────────┴───────────────────╯
+```
+
+The metadata includes:
+- `status` - HTTP status code (200, 404, 500, etc.)
+- `headers` - Response headers as `[{name, value}, ...]`
+- `urls` - Redirect history
+
+For large responses, use [`metadata access`](/commands/docs/metadata_access.md) to check metadata before the body downloads:
+
+```nu
 http get https://api.example.com/large-file
 | metadata access {|meta|
     if $meta.http_response.status != 200 {
         error make {msg: "Request failed"}
     } else { }
   }
-| lines
+| lines  # body streams through only if status is 200
 | each {|line| process $line }
 ```
 
-The `else { }` clause passes the input through when the check succeeds, allowing the response body to stream through the pipeline. This pattern lets you fail fast on error responses without downloading the entire body.
+The `else { }` passes the input through when the check succeeds.

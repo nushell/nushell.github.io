@@ -258,29 +258,34 @@ http post https://httpbin.org/post --content-type "multipart/form-data" {
 
 ---
 
-### Checking HTTP Response Status While Streaming
+### Accessing HTTP Response Metadata
 
-When working with large HTTP responses, you often want to stream the response body while still checking the HTTP status code. All HTTP commands automatically attach response metadata under the `"http_response"` key, which you can access using `metadata access`.
+All HTTP commands attach response metadata (status, headers, redirect history):
 
 ```nu
-# Stream a large response while checking the status code
-http get https://api.example.com/large-stream
+# After response completes
+http get https://api.example.com/data.json
+| metadata
+| get http_response.status
+# => 200
+```
+
+For large responses, check status *before* downloading the body:
+
+```nu
+# Fail fast without downloading body on error
+http get https://api.example.com/large-file.bin
 | metadata access {|meta|
     if $meta.http_response.status != 200 {
         error make {msg: $"Request failed with status ($meta.http_response.status)"}
     } else { }
   }
-| lines
-| each {|line| process $line }
+| save large-file.bin  # only runs if status is 200
 ```
 
-The `metadata access` command allows you to inspect metadata before the response body streams through. The `else { }` clause is required to pass the input through when the status check succeeds. This pattern is useful for:
+This checks metadata before the body streams through. If the status isn't 200, the error occurs immediately—the body is never downloaded.
 
-- Failing fast on error responses without downloading the entire body
-- Handling large payloads efficiently (the body still streams)
-- Checking response metadata without blocking the pipeline
-
-The response metadata includes:
-- `status` - HTTP status code (e.g., 200, 404, 500)
-- `headers` - Response headers as a list of `{name, value}` records
-- `urls` - Redirect history (list of URLs followed)
+Available metadata:
+- `status` - HTTP status code (200, 404, 500, etc.)
+- `headers` - `[{name, value}, ...]`
+- `urls` - Redirect history
