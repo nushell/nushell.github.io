@@ -48,31 +48,11 @@ You can attach arbitrary metadata to pipeline data using the [`metadata set`](/c
 
 ## HTTP Response Metadata
 
-All HTTP commands attach response metadata (status, headers, redirect history):
+All HTTP commands attach response metadata:
 
 ```nu
 http get https://api.example.com | metadata | get http_response.status
 # => 200
 ```
 
-To work with metadata while streaming the response body, use [`metadata access`](/commands/docs/metadata_access.md):
-
-```nu
-http get https://api.example.com/large-file
-| metadata access {|meta|
-    print $"Status: ($meta.http_response.status)"
-    if $meta.http_response.status != 200 {
-        error make {msg: "Request failed"}
-    } else { }
-  }
-| lines  # body streams through
-| each {|line| process $line }
-```
-
-Without `metadata access`, you'd need `--full` to get metadata, which consumes the entire response body and prevents streaming. With `metadata access`, the body continues streaming through the pipeline.
-
-Metadata structure:
-
-- `status` - HTTP status code (200, 404, 500, etc.)
-- `headers` - Response headers as `[{name, value}, ...]`
-- `urls` - Redirect history
+For working with metadata while streaming response bodies, see the [HTTP cookbook](/cookbook/http.html#accessing-http-response-metadata-while-streaming).
