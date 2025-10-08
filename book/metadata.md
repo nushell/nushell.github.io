@@ -37,3 +37,39 @@ metadata (open Cargo.toml) | get span
 ```
 
 The span "start" and "end" here refer to where the underline will be in the line. If you count over 5, and then count up to 15, you'll see it lines up with the "Cargo.toml" filename. This is how the error we saw earlier knew what to underline.
+
+## Custom Metadata
+
+You can attach arbitrary metadata to pipeline data using the [`metadata set`](/commands/docs/metadata_set.md) command with the `--merge` flag:
+
+```nu
+"data" | metadata set --merge {custom_key: "custom_value"}
+```
+
+This allows you to attach any key-value pairs to data flowing through the pipeline. To avoid key collisions between different commands and plugins, it's recommended to use namespaced keys with an underscore separator:
+
+- `"http_response"` - HTTP response metadata
+- `"polars_schema"` - DataFrame schema information
+- `"custom_plugin_field"` - Plugin-specific metadata
+
+This naming convention helps ensure different parts of the system don't overwrite each other's metadata.
+
+## HTTP Response Metadata
+
+All HTTP commands (`http get`, `http post`, etc.) automatically attach response metadata under the `"http_response"` key. This includes the status code, headers, and redirect history.
+
+You can access this metadata using the [`metadata access`](/commands/docs/metadata_access.md) command, which is especially useful for streaming large responses:
+
+```nu
+# Check status code while streaming the response
+http get https://api.example.com/large-file
+| metadata access {|meta|
+    if $meta.http_response.status != 200 {
+        error make {msg: "Request failed"}
+    } else { }
+  }
+| lines
+| each {|line| process $line }
+```
+
+The `else { }` clause passes the input through when the check succeeds, allowing the response body to stream through the pipeline. This pattern lets you fail fast on error responses without downloading the entire body.
