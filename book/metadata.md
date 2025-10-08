@@ -46,14 +46,6 @@ You can attach arbitrary metadata to pipeline data using the [`metadata set`](/c
 "data" | metadata set --merge {custom_key: "custom_value"}
 ```
 
-This allows you to attach any key-value pairs to data flowing through the pipeline. To avoid key collisions between different commands and plugins, it's recommended to use namespaced keys with an underscore separator:
-
-- `"http_response"` - HTTP response metadata
-- `"polars_schema"` - DataFrame schema information
-- `"custom_plugin_field"` - Plugin-specific metadata
-
-This naming convention helps ensure different parts of the system don't overwrite each other's metadata.
-
 ## HTTP Response Metadata
 
 All HTTP commands attach response metadata (status, headers, redirect history):

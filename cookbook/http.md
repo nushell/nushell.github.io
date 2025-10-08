@@ -267,7 +267,7 @@ http get https://api.example.com/data.json | metadata | get http_response.status
 # => 200
 ```
 
-To work with metadata while streaming the response body, use `metadata access`. This is useful for handling unexpected responses (errors, redirects, content negotiation) without consuming the entire body:
+To work with metadata while streaming the response body, use `metadata access`:
 
 ```nu
 # Log status and headers while streaming a large JSONL file
