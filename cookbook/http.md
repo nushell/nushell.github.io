@@ -186,7 +186,7 @@ To upload a form with a file (think a common file upload form in a browser, wher
 
 1. Specify the content type as `multipart/form-data`
 2. Provide the record as the POST body
-3. Provide the file data in one of the record fields as *binary* data.
+3. Provide the file data in one of the record fields as _binary_ data.
 
 ```nu
 http post https://httpbin.org/post --content-type "multipart/form-data" {
@@ -288,6 +288,7 @@ http get https://api.example.com/events.jsonl
 The response body streams through the pipeline while you inspect metadata and process the stream simultaneously. Before `metadata access`, you needed `--full` to get metadata, which consumed the entire body and prevented streaming.
 
 Available metadata:
+
 - `status` - HTTP status code (200, 404, 500, etc.)
 - `headers` - `[{name, value}, ...]`
 - `urls` - Redirect history

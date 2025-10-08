@@ -72,6 +72,7 @@ http get https://api.example.com/large-file
 Without `metadata access`, you'd need `--full` to get metadata, which consumes the entire response body and prevents streaming. With `metadata access`, the body continues streaming through the pipeline.
 
 Metadata structure:
+
 - `status` - HTTP status code (200, 404, 500, etc.)
 - `headers` - Response headers as `[{name, value}, ...]`
 - `urls` - Redirect history
