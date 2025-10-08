@@ -56,33 +56,30 @@ This naming convention helps ensure different parts of the system don't overwrit
 
 ## HTTP Response Metadata
 
-All HTTP commands (`http get`, `http post`, etc.) attach response metadata:
+All HTTP commands attach response metadata (status, headers, redirect history):
 
 ```nu
-http get https://api.example.com | metadata | get http_response
-# => ╭─────────┬───────────────────╮
-# => │ status  │ 200               │
-# => │ headers │ [list]            │
-# => │ urls    │ [list]            │
-# => ╰─────────┴───────────────────╯
+http get https://api.example.com | metadata | get http_response.status
+# => 200
 ```
 
-The metadata includes:
-- `status` - HTTP status code (200, 404, 500, etc.)
-- `headers` - Response headers as `[{name, value}, ...]`
-- `urls` - Redirect history
-
-For large responses, use [`metadata access`](/commands/docs/metadata_access.md) to check metadata before the body downloads:
+To work with metadata while streaming the response body, use [`metadata access`](/commands/docs/metadata_access.md):
 
 ```nu
 http get https://api.example.com/large-file
 | metadata access {|meta|
+    print $"Status: ($meta.http_response.status)"
     if $meta.http_response.status != 200 {
         error make {msg: "Request failed"}
     } else { }
   }
-| lines  # body streams through only if status is 200
+| lines  # body streams through
 | each {|line| process $line }
 ```
 
-The `else { }` passes the input through when the check succeeds.
+Without `metadata access`, you'd need `--full` to get metadata, which consumes the entire response body and prevents streaming. With `metadata access`, the body continues streaming through the pipeline.
+
+Metadata structure:
+- `status` - HTTP status code (200, 404, 500, etc.)
+- `headers` - Response headers as `[{name, value}, ...]`
+- `urls` - Redirect history

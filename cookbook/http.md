@@ -258,32 +258,34 @@ http post https://httpbin.org/post --content-type "multipart/form-data" {
 
 ---
 
-### Accessing HTTP Response Metadata
+### Accessing HTTP Response Metadata While Streaming
 
-All HTTP commands attach response metadata (status, headers, redirect history):
+All HTTP commands attach response metadata. To access it after the response completes:
 
 ```nu
-# After response completes
-http get https://api.example.com/data.json
-| metadata
-| get http_response.status
+http get https://api.example.com/data.json | metadata | get http_response.status
 # => 200
 ```
 
-For large responses, check status *before* downloading the body:
+To work with metadata while streaming the response body, use `metadata access`. This is useful for handling unexpected responses (errors, redirects, content negotiation) without consuming the entire body:
 
 ```nu
-# Fail fast without downloading body on error
-http get https://api.example.com/large-file.bin
+# Log status and headers while streaming a large file
+http get https://api.example.com/large-dataset.csv
 | metadata access {|meta|
+    print $"Status: ($meta.http_response.status)"
+    print $"Content-Type: ($meta.http_response.headers | where name == content-type | get value.0)"
+
     if $meta.http_response.status != 200 {
-        error make {msg: $"Request failed with status ($meta.http_response.status)"}
+        error make {msg: $"Failed with status ($meta.http_response.status)"}
     } else { }
   }
-| save large-file.bin  # only runs if status is 200
+| lines
+| from csv
+| where amount > 1000
 ```
 
-This checks metadata before the body streams through. If the status isn't 200, the error occurs immediately—the body is never downloaded.
+The response body streams through the pipeline—you can inspect metadata and process the stream simultaneously. Before `metadata access`, you needed `--full` to get metadata, which consumed the entire body and prevented streaming.
 
 Available metadata:
 - `status` - HTTP status code (200, 404, 500, etc.)
