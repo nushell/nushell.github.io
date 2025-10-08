@@ -270,8 +270,8 @@ http get https://api.example.com/data.json | metadata | get http_response.status
 To work with metadata while streaming the response body, use `metadata access`. This is useful for handling unexpected responses (errors, redirects, content negotiation) without consuming the entire body:
 
 ```nu
-# Log status and headers while streaming a large file
-http get https://api.example.com/large-dataset.csv
+# Log status and headers while streaming a large JSONL file
+http get https://api.example.com/events.jsonl
 | metadata access {|meta|
     print $"Status: ($meta.http_response.status)"
     print $"Content-Type: ($meta.http_response.headers | where name == content-type | get value.0)"
@@ -281,8 +281,8 @@ http get https://api.example.com/large-dataset.csv
     } else { }
   }
 | lines
-| from csv
-| where amount > 1000
+| each { from json }
+| where event_type == "error"
 ```
 
 The response body streams through the pipeline—you can inspect metadata and process the stream simultaneously. Before `metadata access`, you needed `--full` to get metadata, which consumed the entire body and prevented streaming.
