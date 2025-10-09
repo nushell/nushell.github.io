@@ -271,7 +271,7 @@ To work with metadata while streaming the response body, use `metadata access`:
 
 ```nu
 # Log status and headers while streaming a large JSONL file
-http get https://api.example.com/events.jsonl
+http get --allow-errors https://api.example.com/events.jsonl
 | metadata access {|meta|
     print $"Status: ($meta.http_response.status)"
     print $"Content-Type: ($meta.http_response.headers | where name == content-type | get value.0)"
