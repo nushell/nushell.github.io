@@ -186,7 +186,7 @@ To upload a form with a file (think a common file upload form in a browser, wher
 
 1. Specify the content type as `multipart/form-data`
 2. Provide the record as the POST body
-3. Provide the file data in one of the record fields as *binary* data.
+3. Provide the file data in one of the record fields as _binary_ data.
 
 ```nu
 http post https://httpbin.org/post --content-type "multipart/form-data" {
@@ -255,3 +255,40 @@ http post https://httpbin.org/post --content-type "multipart/form-data" {
 # => │ url     │ https://httpbin.org/post                                                                                 │
 # => ╰─────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
+
+---
+
+### Accessing HTTP Response Metadata While Streaming
+
+All HTTP commands attach response metadata. To access it after the response completes:
+
+```nu
+http get https://api.example.com/data.json | metadata | get http_response.status
+# => 200
+```
+
+To work with metadata while streaming the response body, use `metadata access`:
+
+```nu
+# Log status and headers while streaming a large JSONL file
+http get --allow-errors https://api.example.com/events.jsonl
+| metadata access {|meta|
+    print $"Status: ($meta.http_response.status)"
+    print $"Content-Type: ($meta.http_response.headers | where name == content-type | get value.0)"
+
+    if $meta.http_response.status != 200 {
+        error make {msg: $"Failed with status ($meta.http_response.status)"}
+    } else { }
+  }
+| lines
+| each { from json }
+| where event_type == "error"
+```
+
+The response body streams through the pipeline while you inspect metadata and process the stream simultaneously. Before `metadata access`, you needed `--full` to get metadata, which consumed the entire body and prevented streaming.
+
+Available metadata:
+
+- `status` - HTTP status code (200, 404, 500, etc.)
+- `headers` - `[{name, value}, ...]`
+- `urls` - Redirect history
