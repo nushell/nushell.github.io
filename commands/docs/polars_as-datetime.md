@@ -2,7 +2,7 @@
 title: polars as-datetime
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -37,6 +37,8 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
                     `latest`: use the latest datetime
                     `null`: set to null
                     Used only when input is a lazyframe or expression and ignored otherwise
+ -  `--time-unit {string}`: time unit for the output datetime. One of: ns, us, ms. Default is ns
+ -  `--time-zone {string}`: time zone for the output datetime. E.g. 'UTC', 'America/New_York'
 
 ## Parameters
 
@@ -45,10 +47,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input      | output     |
-| ---------- | ---------- |
-| dataframe  | dataframe  |
-| expression | expression |
+| input             | output            |
+| ----------------- | ----------------- |
+| polars_dataframe  | polars_dataframe  |
+| polars_lazyframe  | polars_lazyframe  |
+| polars_expression | polars_expression |
 ## Examples
 
 Converts string to datetime
@@ -89,14 +92,14 @@ Converts string to datetime using the `--not-exact` flag even with excessive sym
 Converts string to datetime using the `--not-exact` flag even with excessive symbols in an expression
 ```nu
 > ["2025-11-02 00:00:00", "2025-11-02 01:00:00", "2025-11-02 02:00:00", "2025-11-02 03:00:00"] | polars into-df | polars select (polars col 0 | polars as-datetime "%Y-%m-%d %H:%M:%S")
-╭───┬─────────────╮
-│ # │  datetime   │
-├───┼─────────────┤
-│ 0 │ in 2 months │
-│ 1 │ in 2 months │
-│ 2 │ in 2 months │
-│ 3 │ in 2 months │
-╰───┴─────────────╯
+╭───┬────────────╮
+│ # │  datetime  │
+├───┼────────────┤
+│ 0 │ in 2 weeks │
+│ 1 │ in 2 weeks │
+│ 2 │ in 2 weeks │
+│ 3 │ in 3 weeks │
+╰───┴────────────╯
 
 ```
 

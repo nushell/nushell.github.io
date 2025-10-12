@@ -2,7 +2,7 @@
 title: into record
 categories: |
   conversions
-version: 0.107.0
+version: 0.108.0
 conversions: |
   Convert value to record.
 usage: |

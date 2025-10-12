@@ -2,7 +2,7 @@
 title: polars col
 categories: |
   expression
-version: 0.107.0
+version: 0.108.0
 expression: |
   Creates a named column expression.
 usage: |
@@ -39,9 +39,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output     |
-| ----- | ---------- |
-| any   | expression |
+| input | output            |
+| ----- | ----------------- |
+| any   | polars_expression |
 ## Examples
 
 Creates a named column expression and converts it to a nu object

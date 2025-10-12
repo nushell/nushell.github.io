@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.107.0
+version: 0.108.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -65,6 +65,18 @@ Get content from example.com, with custom header using a record
 Get content from example.com, with custom headers using a list
 ```nu
 > http get --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
+
+```
+
+Get the response status code
+```nu
+> http get https://www.example.com | metadata | get http_response.status
+
+```
+
+Check response status while streaming
+```nu
+> http get --allow-errors https://example.com/file | metadata access {|m| if $m.http_response.status != 200 { error make {msg: "failed"} } else { } } | lines
 
 ```
 

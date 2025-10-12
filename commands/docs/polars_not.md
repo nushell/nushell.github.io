@@ -2,7 +2,7 @@
 title: polars not
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Inverts boolean mask.
 usage: |
@@ -30,9 +30,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| dataframe | dataframe |
+| input            | output           |
+| ---------------- | ---------------- |
+| polars_dataframe | polars_dataframe |
+| polars_lazyframe | polars_lazyframe |
 ## Examples
 
 Inverts boolean mask

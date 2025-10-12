@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |
@@ -32,17 +32,19 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
  -  `--on, -o {list<string>}`: column names for pivoting
  -  `--index, -i {list<string>}`: column names for indexes
  -  `--values, -v {list<string>}`: column names used as value columns
- -  `--aggregate, -a {string}`: Aggregation to apply when pivoting. The following are supported: first, sum, min, max, mean, median, count, last
+ -  `--aggregate, -a {any}`: Aggregation to apply when pivoting. The following are supported: first, sum, min, max, mean, median, count, last, or a custom expression
  -  `--separator, -p {string}`: Delimiter in generated column names in case of multiple `values` columns (default '_')
  -  `--sort, -s`: Sort columns
  -  `--streamable, -t`: Whether or not to use the polars streaming engine. Only valid for lazy dataframes
+ -  `--stable`: Perform a stable pivot.
 
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| dataframe | dataframe |
+| input            | output           |
+| ---------------- | ---------------- |
+| polars_dataframe | polars_dataframe |
+| polars_lazyframe | polars_lazyframe |
 ## Examples
 
 Perform a pivot in order to show individuals test score by subject
@@ -51,8 +53,8 @@ Perform a pivot in order to show individuals test score by subject
 ╭───┬───────┬──────────────┬───────┬─────────╮
 │ # │ name  │     date     │ maths │ physics │
 ├───┼───────┼──────────────┼───────┼─────────┤
-│ 0 │ Cady  │ 5 months ago │    98 │      99 │
-│ 1 │ Karen │ 5 months ago │    61 │      58 │
+│ 0 │ Cady  │ 6 months ago │    98 │      99 │
+│ 1 │ Karen │ 6 months ago │    61 │      58 │
 ╰───┴───────┴──────────────┴───────┴─────────╯
 
 ```

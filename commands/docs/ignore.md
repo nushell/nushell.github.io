@@ -2,7 +2,7 @@
 title: ignore
 categories: |
   core
-version: 0.107.0
+version: 0.108.0
 core: |
   Ignore the output of the previous command in the pipeline.
 usage: |

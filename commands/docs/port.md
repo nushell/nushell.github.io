@@ -2,11 +2,11 @@
 title: port
 categories: |
   network
-version: 0.107.0
+version: 0.108.0
 network: |
-  Get a free port from system.
+  Get a free TCP port from system.
 usage: |
-  Get a free port from system.
+  Get a free TCP port from system.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `port` for [network](/commands/categories/network.md)
 
-<div class='command-title'>Get a free port from system.</div>
+<div class='command-title'>Get a free TCP port from system.</div>
 
 ## Signature
 

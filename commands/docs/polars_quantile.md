@@ -2,7 +2,7 @@
 title: polars quantile
 categories: |
   lazyframe
-version: 0.107.0
+version: 0.108.0
 lazyframe: |
   Aggregates the columns to the selected quantile.
 usage: |
@@ -34,10 +34,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input      | output     |
-| ---------- | ---------- |
-| expression | expression |
-| dataframe  | dataframe  |
+| input             | output            |
+| ----------------- | ----------------- |
+| polars_expression | polars_expression |
+| polars_dataframe  | polars_dataframe  |
+| polars_lazyframe  | polars_lazyframe  |
 ## Examples
 
 quantile value from columns in a dataframe

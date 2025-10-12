@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.107.0
+version: 0.108.0
 conversions: |
   Convert value to string.
 usage: |
@@ -43,6 +43,7 @@ contributors: false
 | filesize  | string       |
 | datetime  | string       |
 | duration  | string       |
+| cell-path | string       |
 | range     | string       |
 | list&lt;any&gt; | list&lt;string&gt; |
 | table     | table        |
@@ -113,4 +114,10 @@ convert duration to string
 ```nu
 > 9day | into string
 1wk 2day
+```
+
+convert cell-path to string
+```nu
+> $.name | into string
+$.name
 ```

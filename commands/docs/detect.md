@@ -2,7 +2,7 @@
 title: detect
 categories: |
   strings
-version: 0.107.0
+version: 0.108.0
 strings: |
   Various commands for detecting things.
 usage: |
@@ -34,3 +34,4 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                                 | description                                                | type     |
 | ---------------------------------------------------- | ---------------------------------------------------------- | -------- |
 | [`detect columns`](/commands/docs/detect_columns.md) | Attempt to automatically split text into multiple columns. | built-in |
+| [`detect type`](/commands/docs/detect_type.md)       | Infer Nushell datatype from a string.                      | built-in |

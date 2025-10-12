@@ -2,7 +2,7 @@
 title: uniq
 categories: |
   filters
-version: 0.107.0
+version: 0.108.0
 filters: |
   Return the distinct values in the input.
 usage: |

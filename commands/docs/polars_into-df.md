@@ -2,7 +2,7 @@
 title: polars into-df
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Converts a list, table or record into a dataframe.
 usage: |
@@ -35,9 +35,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output    |
-| ----- | --------- |
-| any   | dataframe |
+| input | output           |
+| ----- | ---------------- |
+| any   | polars_dataframe |
 ## Examples
 
 Takes a dictionary and creates a dataframe

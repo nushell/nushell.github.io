@@ -2,7 +2,7 @@
 title: job tag
 categories: |
   experimental
-version: 0.107.0
+version: 0.108.0
 experimental: |
   Add a description tag to a background job.
 usage: |

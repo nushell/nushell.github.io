@@ -2,7 +2,7 @@
 title: url split-query
 categories: |
   network
-version: 0.107.0
+version: 0.108.0
 network: |
   Converts query string into table applying percent-decoding.
 usage: |

@@ -2,7 +2,7 @@
 title: format bits
 categories: |
   conversions
-version: 0.107.0
+version: 0.108.0
 conversions: |
   Convert value to a string of binary data represented by 0 and 1.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> format bits {flags} ...rest```
+
+## Flags
+
+ -  `--endian, -e {string}`: Byte encode endian. Only applies to int, filesize, duration and bool, as well as tables and records of those. Available options: native, little, big(default)
 
 ## Parameters
 
@@ -55,6 +59,12 @@ convert an int into a string, padded to 8 places with 0s (big endian)
 ```nu
 > 258 | format bits
 00000001 00000010
+```
+
+convert an int into a string, padded to 8 places with 0s (little endian)
+```nu
+> 258 | format bits --endian little
+00000010 00000001
 ```
 
 convert a filesize value into a string, padded to 8 places with 0s

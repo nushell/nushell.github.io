@@ -2,7 +2,7 @@
 title: http put
 categories: |
   network
-version: 0.107.0
+version: 0.108.0
 network: |
   Put a body to a URL.
 usage: |

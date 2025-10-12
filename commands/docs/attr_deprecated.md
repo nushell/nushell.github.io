@@ -2,7 +2,7 @@
 title: attr deprecated
 categories: |
   core
-version: 0.107.0
+version: 0.108.0
 core: |
   Attribute for marking a command or flag as deprecated.
 usage: |
@@ -34,10 +34,9 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output  |
-| ------- | ------- |
-| nothing | nothing |
-| nothing | string  |
+| input   | output |
+| ------- | ------ |
+| nothing | record |
 ## Examples
 
 Add a deprecation warning to a custom command

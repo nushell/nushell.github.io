@@ -2,7 +2,7 @@
 title: polars open
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Opens CSV, JSON, NDJSON/JSON lines, arrow, avro, or parquet file to create dataframe. A lazy dataframe will be created by default, if supported.
 usage: |
@@ -50,9 +50,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output    |
-| ----- | --------- |
-| any   | dataframe |
+| input | output           |
+| ----- | ---------------- |
+| any   | polars_dataframe |
+| any   | polars_lazyframe |
 ## Examples
 
 Takes a file name and creates a dataframe

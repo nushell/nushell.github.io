@@ -2,7 +2,7 @@
 title: polars rename
 categories: |
   dataframe or lazyframe
-version: 0.107.0
+version: 0.108.0
 dataframe_or_lazyframe: |
   Rename a dataframe column.
 usage: |
@@ -35,9 +35,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| dataframe | dataframe |
+| input            | output           |
+| ---------------- | ---------------- |
+| polars_dataframe | polars_dataframe |
+| polars_lazyframe | polars_lazyframe |
 ## Examples
 
 Renames a series

@@ -2,7 +2,7 @@
 title: bits not
 categories: |
   bits
-version: 0.107.0
+version: 0.108.0
 bits: |
   Performs logical negation on each bit.
 usage: |

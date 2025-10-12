@@ -2,7 +2,7 @@
 title: polars is-not-null
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Creates mask where value is not null.
 usage: |
@@ -30,10 +30,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input      | output     |
-| ---------- | ---------- |
-| expression | expression |
-| dataframe  | dataframe  |
+| input             | output            |
+| ----------------- | ----------------- |
+| polars_expression | polars_expression |
+| polars_dataframe  | polars_dataframe  |
+| polars_lazyframe  | polars_lazyframe  |
 ## Examples
 
 Create mask where values are not null

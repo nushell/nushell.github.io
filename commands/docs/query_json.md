@@ -2,7 +2,7 @@
 title: query json
 categories: |
   filters
-version: 0.107.0
+version: 0.108.0
 filters: |
   execute json query on json file (open --raw <file> | query json 'query string')
 usage: |
@@ -80,4 +80,4 @@ Jack
 ```
 
 ## Notes
-query json uses the gjson crate https://github.com/tidwall/gjson.rs to query json data. The query syntax is available at https://github.com/tidwall/gjson/blob/master/SYNTAX.md.
+query json uses the gjson crate https://github.com/tidwall/gjson.rs to query json data.

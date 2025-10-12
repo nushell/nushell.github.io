@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -89,7 +89,6 @@ to the `polars agg` command with some column expressions for aggregation which t
 | [`polars dummies`](/commands/docs/polars_dummies.md)                       | Creates a new dataframe with dummy variables.                                                                                                                      | plugin |
 | [`polars explode`](/commands/docs/polars_explode.md)                       | Explodes a dataframe or creates a explode expression.                                                                                                              | plugin |
 | [`polars expr-not`](/commands/docs/polars_expr-not.md)                     | Creates a not expression.                                                                                                                                          | plugin |
-| [`polars fetch`](/commands/docs/polars_fetch.md)                           | Collects the lazyframe to the selected rows.                                                                                                                       | plugin |
 | [`polars fill-nan`](/commands/docs/polars_fill-nan.md)                     | Replaces NaN values with the given expression.                                                                                                                     | plugin |
 | [`polars fill-null`](/commands/docs/polars_fill-null.md)                   | Replaces NULL values with the given expression.                                                                                                                    | plugin |
 | [`polars filter`](/commands/docs/polars_filter.md)                         | Filter dataframe based in expression.                                                                                                                              | plugin |
@@ -168,7 +167,7 @@ to the `polars agg` command with some column expressions for aggregation which t
 | [`polars str-replace`](/commands/docs/polars_str-replace.md)               | Replace the leftmost (sub)string by a regex pattern.                                                                                                               | plugin |
 | [`polars str-replace-all`](/commands/docs/polars_str-replace-all.md)       | Replace all (sub)strings by a regex pattern.                                                                                                                       | plugin |
 | [`polars str-slice`](/commands/docs/polars_str-slice.md)                   | Slices the string from the start position until the selected length.                                                                                               | plugin |
-| [`polars str-split`](/commands/docs/polars_str-split.md)                   | Split the string by a substring. The resulting dtype is list\<str\>.                                                                                               | plugin |
+| [`polars str-split`](/commands/docs/polars_str-split.md)                   | Split the string by a substring. The resulting dtype is list\\<str\\>.                                                                                             | plugin |
 | [`polars str-strip-chars`](/commands/docs/polars_str-strip-chars.md)       | Strips specified characters from strings in a column                                                                                                               | plugin |
 | [`polars strftime`](/commands/docs/polars_strftime.md)                     | Formats date based on string rule.                                                                                                                                 | plugin |
 | [`polars struct-json-encode`](/commands/docs/polars_struct-json-encode.md) | Convert this struct to a string column with json values.                                                                                                           | plugin |

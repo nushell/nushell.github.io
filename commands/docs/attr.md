@@ -2,7 +2,7 @@
 title: attr
 categories: |
   core
-version: 0.107.0
+version: 0.108.0
 core: |
   Various attributes for custom commands.
 usage: |
@@ -31,9 +31,11 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                       | description                                            | type     |
-| ---------------------------------------------------------- | ------------------------------------------------------ | -------- |
-| [`attr category`](/commands/docs/attr_category.md)         | Attribute for adding a category to custom commands.    | built-in |
-| [`attr deprecated`](/commands/docs/attr_deprecated.md)     | Attribute for marking a command or flag as deprecated. | built-in |
-| [`attr example`](/commands/docs/attr_example.md)           | Attribute for adding examples to custom commands.      | built-in |
-| [`attr search-terms`](/commands/docs/attr_search-terms.md) | Attribute for adding search terms to custom commands.  | built-in |
+| name                                                                 | description                                                                   | type     |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------------------- | -------- |
+| [`attr category`](/commands/docs/attr_category.md)                   | Attribute for adding a category to custom commands.                           | built-in |
+| [`attr complete`](/commands/docs/attr_complete.md)                   | Attribute for using another command as a completion source for all arguments. | built-in |
+| [`attr complete external`](/commands/docs/attr_complete_external.md) | Attribute for enabling use of the external completer for internal commands.   | built-in |
+| [`attr deprecated`](/commands/docs/attr_deprecated.md)               | Attribute for marking a command or flag as deprecated.                        | built-in |
+| [`attr example`](/commands/docs/attr_example.md)                     | Attribute for adding examples to custom commands.                             | built-in |
+| [`attr search-terms`](/commands/docs/attr_search-terms.md)           | Attribute for adding search terms to custom commands.                         | built-in |

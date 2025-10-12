@@ -2,7 +2,7 @@
 title: polars store-get
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Gets a Dataframe or other object from the plugin cache.
 usage: |
@@ -34,10 +34,15 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output     |
-| ----- | ---------- |
-| any   | dataframe  |
-| any   | expression |
+| input | output            |
+| ----- | ----------------- |
+| any   | polars_dataframe  |
+| any   | polars_lazyframe  |
+| any   | polars_expression |
+| any   | polars_group_by   |
+| any   | polars_when       |
+| any   | polars_datatype   |
+| any   | polars_schema     |
 ## Examples
 
 Get a stored object
