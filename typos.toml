@@ -1,5 +1,5 @@
 [files]
-extend-exclude = ["pt-BR", "de", "ja", "es", "blog/202[0-3]*", "commands/", "fr"]
+extend-exclude = ["pt-BR", "de", "ja", "es", "blog/202[0-4]*", "commands/", "fr", "blog/2025-03-1*"]
 
 [default]
 extend-ignore-identifiers-re = [
@@ -19,4 +19,7 @@ ons = "ons" # false positive in commands/docs/str_replace.md
 optio = "optio" # false positive in cookbook/http.md
 ratatui = "ratatui"
 ws = "ws" # false positive in book/nushell_map.md
+feeze = "feeze"
+alues = "alues"
+Flippin = "Flippin"
 
