@@ -28,12 +28,16 @@ Nushell provides support for these bitwise operators:
 
 ## Other operators
 
-- `=~` - Regex Match / Contains
-- `!~` - Not Regex Match / Not Contains
-- `in` - In / Contains (doesn't use regex)
-- `not-in` - Not In / Not Contains (doesn't use regex)
+- `=~`/`like` - Regex Match / Contains
+- `!~`/`not-like` - Not Regex Match / Not Contains
+- `in` - Is a member of (doesn't use regex)
+- `not-in` - Is not a member of (doesn't use regex)
+- `has` - Contains a value of (doesn't use regex)
+- `not-has` - Does not contain a value of (doesn't use regex)
 - `starts-with` - Starts With
+- `not-starts-with` - Does not start with
 - `ends-with` - Ends With
+- `not-ends-with` - Does not end with
 - `and` - And
 - `or` - Or
 
