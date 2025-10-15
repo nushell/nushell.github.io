@@ -2,7 +2,7 @@
 title: polars convert-time-zone
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Convert datetime to target timezone.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input      | output     |
-| ---------- | ---------- |
-| expression | expression |
+| input             | output            |
+| ----------------- | ----------------- |
+| polars_expression | polars_expression |
 ## Examples
 
 Convert timezone for timezone-aware datetime
@@ -47,8 +47,8 @@ Convert timezone for timezone-aware datetime
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 4 months ago │
-│ 1 │ 4 months ago │
+│ 0 │ 6 months ago │
+│ 1 │ 6 months ago │
 ╰───┴──────────────╯
 
 ```
@@ -61,8 +61,8 @@ Timezone conversions for timezone-naive datetime will assume the original timezo
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 4 months ago │
-│ 1 │ 4 months ago │
+│ 0 │ 6 months ago │
+│ 1 │ 6 months ago │
 ╰───┴──────────────╯
 
 ```

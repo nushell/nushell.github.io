@@ -2,7 +2,7 @@
 title: polars integer
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Converts a string column into a integer column
 usage: |
@@ -25,14 +25,23 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Signature
 
-```> polars integer {flags} ```
+```> polars integer {flags} (base) (dtype)```
+
+## Flags
+
+ -  `--strict, -s`: Raises an error as opposed to converting to null
+
+## Parameters
+
+ -  `base`: An integer or expression representing the base (radix) of the number system (default is 10)
+ -  `dtype`: Data type to cast to (defaults is i64)
 
 
 ## Input/output types:
 
-| input      | output     |
-| ---------- | ---------- |
-| expression | expression |
+| input             | output            |
+| ----------------- | ----------------- |
+| polars_expression | polars_expression |
 ## Examples
 
 Modifies strings to integer

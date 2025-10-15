@@ -2,7 +2,7 @@
 title: bytes reverse
 categories: |
   bytes
-version: 0.107.0
+version: 0.108.0
 bytes: |
   Reverse the bytes in the pipeline.
 usage: |

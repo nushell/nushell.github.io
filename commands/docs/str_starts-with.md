@@ -2,7 +2,7 @@
 title: str starts-with
 categories: |
   strings
-version: 0.107.0
+version: 0.108.0
 strings: |
   Check if an input starts with a string.
 usage: |

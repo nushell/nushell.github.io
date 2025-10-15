@@ -2,7 +2,7 @@
 title: debug experimental-options
 categories: |
   debug
-version: 0.107.0
+version: 0.108.0
 debug: |
   Show all experimental options.
 usage: |
@@ -23,6 +23,6 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output                                                                        |
-| ------- | ----------------------------------------------------------------------------- |
-| nothing | table&lt;identifier: string, enabled: bool, status: string, description: string&gt; |
+| input   | output                                                                                                      |
+| ------- | ----------------------------------------------------------------------------------------------------------- |
+| nothing | table&lt;identifier: string, enabled: bool, status: string, description: string, since: string, issue: string&gt; |

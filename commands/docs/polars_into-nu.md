@@ -2,7 +2,7 @@
 title: polars into-nu
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Converts a dataframe or an expression into nushell value for access and exploration.
 usage: |
@@ -36,12 +36,15 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input      | output |
-| ---------- | ------ |
-| expression | any    |
-| dataframe  | table  |
-| datatype   | any    |
-| schema     | any    |
+| input             | output |
+| ----------------- | ------ |
+| polars_dataframe  | table  |
+| polars_lazyframe  | table  |
+| polars_expression | any    |
+| polars_group_by   | any    |
+| polars_when       | any    |
+| polars_datatype   | any    |
+| polars_schema     | any    |
 ## Examples
 
 Shows head rows from dataframe

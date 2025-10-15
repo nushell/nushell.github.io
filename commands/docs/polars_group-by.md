@@ -2,7 +2,7 @@
 title: polars group-by
 categories: |
   lazyframe
-version: 0.107.0
+version: 0.108.0
 lazyframe: |
   Creates a group-by object that can be used for other aggregations.
 usage: |
@@ -38,9 +38,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input     | output    |
-| --------- | --------- |
-| dataframe | dataframe |
+| input            | output           |
+| ---------------- | ---------------- |
+| polars_dataframe | polars_dataframe |
+| polars_lazyframe | polars_lazyframe |
 ## Examples
 
 Group by and perform an aggregation

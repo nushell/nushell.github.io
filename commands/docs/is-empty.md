@@ -2,7 +2,7 @@
 title: is-empty
 categories: |
   filters
-version: 0.107.0
+version: 0.108.0
 filters: |
   Check for empty values.
 usage: |

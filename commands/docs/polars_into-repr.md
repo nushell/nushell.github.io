@@ -2,7 +2,7 @@
 title: polars into-repr
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Display a dataframe in its repr format.
 usage: |
@@ -30,9 +30,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input     | output |
-| --------- | ------ |
-| dataframe | string |
+| input            | output |
+| ---------------- | ------ |
+| polars_dataframe | string |
+| polars_lazyframe | string |
 ## Examples
 
 Shows dataframe in repr format

@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.107.0
+version: 0.108.0
 formats: |
   Convert table into simple Markdown.
 usage: |
@@ -23,8 +23,11 @@ contributors: false
 ## Flags
 
  -  `--pretty, -p`: Formats the Markdown table to vertically align items
- -  `--per-element, -e`: treat each row as markdown syntax element
+ -  `--per-element, -e`: Treat each row as markdown syntax element
  -  `--center, -c {list<cell-path>}`: Formats the Markdown table to center given columns
+ -  `--escape-md, -m`: Escapes Markdown special characters
+ -  `--escape-html, -t`: Escapes HTML special characters
+ -  `--escape-all, -a`: Escapes both Markdown and HTML special characters
 
 
 ## Input/output types:
@@ -37,9 +40,9 @@ contributors: false
 Outputs an MD string representing the contents of this table
 ```nu
 > [[foo bar]; [1 2]] | to md
-|foo|bar|
-|-|-|
-|1|2|
+| foo | bar |
+| --- | --- |
+| 1 | 2 |
 ```
 
 Optionally, output a formatted markdown string
@@ -70,13 +73,14 @@ Render a list
 Separate list into markdown tables
 ```nu
 > [ {foo: 1, bar: 2} {foo: 3, bar: 4} {foo: 5}] | to md --per-element
-|foo|bar|
-|-|-|
-|1|2|
-|3|4|
-|foo|
-|-|
-|5|
+| foo | bar |
+| --- | --- |
+| 1 | 2 |
+| 3 | 4 |
+
+| foo |
+| --- |
+| 5 |
 ```
 
 Center a column of a markdown table
@@ -86,4 +90,21 @@ Center a column of a markdown table
 | --- |:---:|
 | 1   |  2  |
 | 3   |  4  |
+```
+
+Escape markdown special characters
+```nu
+> [ {foo: "_1_", bar: "\# 2"} {foo: "[3]", bar: "4|5"}] | to md --escape-md
+| foo | bar |
+| --- | --- |
+| \_1\_ | \# 2 |
+| \[3\] | 4\|5 |
+```
+
+Escape html special characters
+```nu
+> [ {a: p, b: "<p>Welcome to nushell</p>"}] | to md --escape-html
+| a | b |
+| --- | --- |
+| p | &lt;p&gt;Welcome to nushell&lt;&#x2f;p&gt; |
 ```

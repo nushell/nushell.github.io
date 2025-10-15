@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.107.0
+version: 0.108.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |

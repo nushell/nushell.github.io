@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.107.0
+version: 0.108.0
 network: |
   Post a body to a URL.
 usage: |
@@ -91,6 +91,18 @@ Upload a binary file to example.com
 Convert a text file into binary and upload it to example.com
 ```nu
 > http post --content-type multipart/form-data https://www.example.com { file: (open -r file.txt | into binary) }
+
+```
+
+Get the response status code
+```nu
+> http post https://www.example.com 'body' | metadata | get http_response.status
+
+```
+
+Check response status while streaming
+```nu
+> http post --allow-errors https://example.com/upload 'data' | metadata access {|m| if $m.http_response.status != 200 { error make {msg: "failed"} } else { } } | lines
 
 ```
 

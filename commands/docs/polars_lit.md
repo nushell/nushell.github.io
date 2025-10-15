@@ -2,7 +2,7 @@
 title: polars lit
 categories: |
   expression
-version: 0.107.0
+version: 0.108.0
 expression: |
   Creates a literal expression.
 usage: |
@@ -34,9 +34,9 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output     |
-| ----- | ---------- |
-| any   | expression |
+| input | output            |
+| ----- | ----------------- |
+| any   | polars_expression |
 ## Examples
 
 Created a literal expression and converts it to a nu object
@@ -56,7 +56,7 @@ Create a literal expression from date
 │ expr         │ │ expr  │ literal                      │ │
 │              │ │ value │ dyn int: 1744502400000000000 │ │
 │              │ ╰───────┴──────────────────────────────╯ │
-│ dtype        │ Datetime(Nanoseconds, None)              │
+│ dtype        │ Datetime('ns')                           │
 │ cast_options │ STRICT                                   │
 ╰──────────────┴──────────────────────────────────────────╯
 ```
@@ -69,7 +69,7 @@ Create a literal expression from duration
 │ expr         │ │ expr  │ literal                 │ │
 │              │ │ value │ dyn int: 10800000000000 │ │
 │              │ ╰───────┴─────────────────────────╯ │
-│ dtype        │ Duration(Nanoseconds)               │
+│ dtype        │ Duration('ns')                      │
 │ cast_options │ STRICT                              │
 ╰──────────────┴─────────────────────────────────────╯
 ```

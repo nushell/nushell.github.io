@@ -2,7 +2,7 @@
 title: compact
 categories: |
   filters
-version: 0.107.0
+version: 0.108.0
 filters: |
   Creates a table with non-empty rows.
 usage: |
@@ -33,6 +33,7 @@ contributors: false
 
 | input     | output    |
 | --------- | --------- |
+| record    | record    |
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
@@ -78,3 +79,15 @@ Filter out all instances of null and empty items from a list
 ╰───┴───╯
 
 ```
+
+Filter out all instances of null from a record
+```nu
+> {a: 1, b: null, c: 3} | compact
+╭───┬───╮
+│ a │ 1 │
+│ c │ 3 │
+╰───┴───╯
+```
+
+## Notes
+Can be used to remove `null` or empty values from lists and records too.

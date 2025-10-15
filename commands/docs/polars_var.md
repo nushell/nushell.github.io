@@ -2,7 +2,7 @@
 title: polars var
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Create a var expression for an aggregation.
 usage: |
@@ -30,10 +30,11 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input      | output     |
-| ---------- | ---------- |
-| expression | expression |
-| dataframe  | dataframe  |
+| input             | output            |
+| ----------------- | ----------------- |
+| polars_expression | polars_expression |
+| polars_dataframe  | polars_dataframe  |
+| polars_lazyframe  | polars_lazyframe  |
 ## Examples
 
 Var value from columns in a dataframe or aggregates columns to their var value

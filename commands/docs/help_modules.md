@@ -2,7 +2,7 @@
 title: help modules
 categories: |
   core
-version: 0.107.0
+version: 0.108.0
 core: |
   Show help on nushell modules.
 usage: |

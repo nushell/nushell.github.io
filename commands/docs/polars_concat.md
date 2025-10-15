@@ -2,7 +2,7 @@
 title: polars concat
 categories: |
   dataframe
-version: 0.107.0
+version: 0.108.0
 dataframe: |
   Concatenate two or more dataframes.
 usage: |
@@ -43,9 +43,10 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 
 ## Input/output types:
 
-| input | output    |
-| ----- | --------- |
-| any   | dataframe |
+| input | output           |
+| ----- | ---------------- |
+| any   | polars_dataframe |
+| any   | polars_lazyframe |
 ## Examples
 
 Concatenates two dataframes with the dataframe in the pipeline.

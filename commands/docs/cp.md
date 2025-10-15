@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.107.0
+version: 0.108.0
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |

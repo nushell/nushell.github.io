@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.107.0
+version: 0.108.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -25,6 +25,7 @@ contributors: false
  -  `--datasource-ls, -l`: Assign the DataSource::Ls metadata to the input
  -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input
  -  `--content-type, -c {string}`: Assign content type metadata to the input
+ -  `--merge, -m {record}`: Merge arbitrary metadata fields
 
 
 ## Input/output types:
@@ -46,8 +47,14 @@ Set the metadata of a file path
 
 ```
 
-Set the metadata of a file path
+Set the content type metadata
 ```nu
 > 'crates' | metadata set --content-type text/plain | metadata | get content_type
 text/plain
+```
+
+Set custom metadata
+```nu
+> "data" | metadata set --merge {custom_key: "value"} | metadata | get custom_key
+value
 ```

@@ -2,7 +2,7 @@
 title: registry
 categories: |
   system
-version: 0.107.0
+version: 0.108.0
 system: |
   Various commands for interacting with the system registry (Windows only).
 usage: |

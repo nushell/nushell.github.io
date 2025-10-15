@@ -2,11 +2,11 @@
 title: query db
 categories: |
   database
-version: 0.107.0
+version: 0.108.0
 database: |
-  Query a database using SQL.
+  Query a SQLite database with SQL statements.
 usage: |
-  Query a database using SQL.
+  Query a SQLite database with SQL statements.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `query db` for [database](/commands/categories/database.md)
 
-<div class='command-title'>Query a database using SQL.</div>
+<div class='command-title'>Query a SQLite database with SQL statements.</div>
 
 ## Signature
 
@@ -96,3 +96,6 @@ stor open | query db "SELECT data->'baz' AS baz FROM my_table" | update baz {fro
 ╰───┴───────────╯
 
 ```
+
+## Notes
+This command is only supported for local or in-memory SQLite databases.

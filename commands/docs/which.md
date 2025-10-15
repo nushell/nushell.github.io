@@ -2,11 +2,11 @@
 title: which
 categories: |
   system
-version: 0.107.0
+version: 0.108.0
 system: |
-  Finds a program file, alias or custom command.
+  Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.
 usage: |
-  Finds a program file, alias or custom command.
+  Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `which` for [system](/commands/categories/system.md)
 
-<div class='command-title'>Finds a program file, alias or custom command.</div>
+<div class='command-title'>Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.</div>
 
 ## Signature
 
@@ -39,5 +39,11 @@ contributors: false
 Find if the 'myapp' application is available
 ```nu
 > which myapp
+
+```
+
+Find all executables across all paths without deduplication
+```nu
+> which -a
 
 ```
