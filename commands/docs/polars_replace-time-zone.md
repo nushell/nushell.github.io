@@ -71,10 +71,10 @@ Apply timezone with ambiguous datetime
 ╭───┬────────────╮
 │ # │  datetime  │
 ├───┼────────────┤
-│ 0 │ in 3 weeks │
+│ 0 │ in 2 weeks │
 │ 1 │            │
-│ 2 │ in 3 weeks │
-│ 3 │ in 3 weeks │
+│ 2 │ in 2 weeks │
+│ 3 │ in 2 weeks │
 ╰───┴────────────╯
 
 ```

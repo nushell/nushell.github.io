@@ -98,7 +98,7 @@ Converts string to datetime using the `--not-exact` flag even with excessive sym
 │ 0 │ in 2 weeks │
 │ 1 │ in 2 weeks │
 │ 2 │ in 2 weeks │
-│ 3 │ in 3 weeks │
+│ 3 │ in 2 weeks │
 ╰───┴────────────╯
 
 ```
