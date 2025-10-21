@@ -297,7 +297,7 @@ Available metadata:
 
 ### Connecting via Unix Domain Sockets
 
-On Unix systems, you can connect to HTTP servers over Unix domain sockets using the `--unix-socket` flag. This is commonly used for local services like the Docker daemon, systemd, or other IPC services.
+You can connect to HTTP servers over Unix domain sockets using the `--unix-socket` flag. This works on Unix/Linux systems and Windows 10+ (build 17063 and later). This is commonly used for local services like the Docker daemon, systemd, or other IPC services.
 
 ```nu
 # Query Docker daemon via Unix socket
