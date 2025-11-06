@@ -572,11 +572,11 @@ $env.config.filesize_metric: true
 $env.config.float_precision: 2
 $env.config.footer_mode: always #always, never, number_of_rows, auto
 $env.config.log_level: error
+$env.config.ls.use_ls_colors: true
 $env.config.max_history_size: 10000
 $env.config.table_mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
 $env.config.use_ansi_coloring: true
 $env.config.use_grid_icons: true
-$env.config.use_ls_colors: true
 ```
 
 if you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
