@@ -564,19 +564,15 @@ let base16_theme = {
 
 # now let's apply our regular config settings but also apply the "color_config:" theme that we specified above.
 
-$env.config.animate_prompt: false
 $env.config.color_config: $base16_theme # <-- this is the theme
 $env.config.edit_mode: emacs # vi
-$env.config.filesize_format: "b" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
-$env.config.filesize_metric: true
+$env.config.filesize.unit: metric
 $env.config.float_precision: 2
 $env.config.footer_mode: always #always, never, number_of_rows, auto
-$env.config.log_level: error
+$env.config.history.max_size: 10000
 $env.config.ls.use_ls_colors: true
-$env.config.max_history_size: 10000
-$env.config.table_mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
+$env.config.table.mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
 $env.config.use_ansi_coloring: true
-$env.config.use_grid_icons: true
 ```
 
 if you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
