@@ -286,10 +286,10 @@ This is the current list of primitives. Not all of these are configurable. The c
 | `binary`     | Color::White.normal() | \*           |
 | `block`      | Color::White.normal() | \*           |
 | `bool`       | Color::White.normal() | \*           |
-| `cellpath`   | Color::White.normal() | \*           |
+| `cell-path`   | Color::White.normal() | \*           |
 | `condition`  |                       |              |
 | `custom`     |                       |              |
-| `date`       | Color::White.normal() | \*           |
+| `datetime`       | Color::White.normal() | \*           |
 | `duration`   | Color::White.normal() | \*           |
 | `expression` |                       |              |
 | `filesize`   | Color::White.normal() | \*           |
@@ -327,7 +327,7 @@ Here's a small example of changing some of these values.
 $env.config.color_config.separator = purple
 $env.config.color_config.leading_trailing_space_bg = "#ffffff"
 $env.config.color_config.header = gb
-$env.config.color_config.date = wd
+$env.config.color_config.datetime = wd
 $env.config.color_config.filesize = c
 $env.config.color_config.row_index = cb
 $env.config.color_config.bool = red
@@ -338,7 +338,7 @@ $env.config.color_config.float = red
 $env.config.color_config.string = white
 $env.config.color_config.nothing = red
 $env.config.color_config.binary = red
-$env.config.color_config.cellpath = cyan
+$env.config.color_config.cell-path = cyan
 $env.config.color_config.hints = dark_gray
 ```
 
@@ -352,7 +352,7 @@ $env.config.color_config.header = { # this is like PR #489
     bg: "#ffb900", # note, commas are not required, it could also be all on one line
     attr: bli # note, there are no quotes around this value. it works with or without quotes
 }
-$env.config.color_config.date = "#75507B"
+$env.config.color_config.datetime = "#75507B"
 $env.config.color_config.filesize = "#729fcf"
 $env.config.color_config.row_index = {
     # note, that this is another way to set only the foreground, no need to specify bg and attr
@@ -527,7 +527,7 @@ let base16_theme = {
     separator: $base03
     leading_trailing_space_bg: $base04
     header: $base0b
-    date: $base0e
+    datetime: $base0e
     filesize: $base0d
     row_index: $base0c
     bool: $base08
@@ -538,7 +538,7 @@ let base16_theme = {
     string: $base04
     nothing: $base08
     binary: $base08
-    cellpath: $base08
+    cell-path: $base08
     hints: dark_gray
 
     # shape_garbage: { fg: $base07 bg: $base08 attr: b } # base16 white on red
