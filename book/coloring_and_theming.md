@@ -571,7 +571,7 @@ $env.config.float_precision: 2
 $env.config.footer_mode: always #always, never, number_of_rows, auto
 $env.config.history.max_size: 10000
 $env.config.ls.use_ls_colors: true
-$env.config.table.mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
+$env.config.table.mode: rounded # ascii_rounded, basic, basic_compact, compact, compact_double, default, dots, double, heavy, light, markdown, none, psql, reinforced, restructured, rounded, single, thin, with_love
 $env.config.use_ansi_coloring: true
 ```
 
