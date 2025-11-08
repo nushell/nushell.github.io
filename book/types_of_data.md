@@ -225,7 +225,7 @@ You can also easily create lists of characters with a form similar to ranges wit
 
 |                       |                                                                                                                 |
 | --------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **_Description:_**    | An expression that is used to navigated to an inner value in a structured value.                                |
+| **_Description:_**    | An expression that is used to navigate to an inner value in a structured value.                                 |
 | **_Annotation:_**     | `cell-path`                                                                                                     |
 | **_Literal syntax:_** | A dot-separated list of row (int) and column (string) IDs. E.g., `name.4.5`.                                    |
 |                       | Optionally, use a leading `$.` when needed for disambiguation, such as when assigning a cell-path to a variable |
