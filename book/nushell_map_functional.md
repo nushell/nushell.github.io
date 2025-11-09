@@ -4,44 +4,44 @@ The idea behind this table is to help you understand how Nu builtins and plugins
 
 Note: this table assumes Nu 0.43 or later.
 
-| Nushell      | Clojure                      | Tablecloth (Ocaml / Elm)        | Haskell                  |
-| ------------ | ---------------------------- | ------------------------------- | ------------------------ |
-| append       | conj, into, concat           | append, (++), concat, concatMap | (++)                     |
-| into binary  | Integer/toHexString          |                                 | showHex                  |
-| count        | count                        | length, size                    | length, size             |
-| date         | java.time.LocalDate/now      |                                 |                          |
-| each         | map, mapv, iterate           | map, forEach                    | map, mapM                |
-| exit         | System/exit                  |                                 |                          |
-| first        | first                        | head                            | head                     |
-| format       | format                       |                                 | Text.Printf.printf       |
-| group-by     | group-by                     |                                 | group, groupBy           |
-| help         | doc                          |                                 |                          |
-| is-empty     | empty?                       | isEmpty                         |                          |
-| last         | last, peek, take-last        | last                            | last                     |
-| lines        |                              |                                 | lines, words, split-with |
-| match        |                              | match (Ocaml), case (Elm)       | case                     |
-| nth          | nth                          | Array.get                       | lookup                   |
-| open         | with-open                    |                                 |                          |
-| transpose    | (apply mapv vector matrix)   |                                 | transpose                |
-| prepend      | cons                         | cons, ::                        | ::                       |
-| print        | println                      |                                 | putStrLn, print          |
-| range, 1..10 | range                        | range                           | 1..10, 'a'..'f'          |
-| reduce       | reduce, reduce-kv            | foldr                           | foldr                    |
-| reverse      | reverse, rseq                | reverse, reverseInPlace         | reverse                  |
-| select       | select-keys                  |                                 |                          |
-| shuffle      | shuffle                      |                                 |                          |
-| size         | count                        |                                 | size, length             |
-| skip         | rest                         | tail                            | tail                     |
-| skip until   | drop-while                   |                                 |                          |
-| skip while   | drop-while                   | dropWhile                       | dropWhile, dropWhileEnd  |
-| sort-by      | sort, sort-by, sorted-set-by | sort, sortBy, sortWith          | sort, sortBy             |
-| split row    | split, split-{at,with,lines} | split, words, lines             | split, words, lines      |
-| str          | clojure.string functions     | String functions                |                          |
-| str join     | join                         | concat                          | intercalate              |
-| str trim     | trim, triml, trimr           | trim, trimLeft, trimRight       | strip                    |
-| sum          | apply +                      | sum                             | sum                      |
-| take         | take, drop-last, pop         | take, init                      | take, init               |
-| take until   | take-while                   | takeWhile                       | takeWhile                |
-| take while   | take-while                   | takeWhile                       | takeWhile                |
-| uniq         | set                          | Set.empty                       | Data.Set                 |
-| where        | filter, filterv, select      | filter, filterMap               | filter                   |
+| Nushell                                        | Clojure                      | Tablecloth (Ocaml / Elm)        | Haskell                  |
+|------------------------------------------------|------------------------------|---------------------------------|--------------------------|
+| [append](../commands/docs/append.md)           | conj, into, concat           | append, (++), concat, concatMap | (++)                     |
+| [into binary](../commands/docs/into_binary.md) | Integer/toHexString          |                                 | showHex                  |
+| [length](../commands/docs/length.md)           | count                        | length, size                    | length, size             |
+| [date](../commands/docs/date.md)               | java.time.LocalDate/now      |                                 |                          |
+| [each](../commands/docs/each.md)               | map, mapv, iterate           | map, forEach                    | map, mapM                |
+| [exit](../commands/docs/each.md)               | System/exit                  |                                 |                          |
+| [first](../commands/docs/first.md)             | first                        | head                            | head                     |
+| [format](../commands/docs/format.md)           | format                       |                                 | Text.Printf.printf       |
+| [group-by](../commands/docs/group-by.md)       | group-by                     |                                 | group, groupBy           |
+| [help](../cookbook/help.md)                    | doc                          |                                 |                          |
+| [is-empty](../commands/docs/is-empty.md)       | empty?                       | isEmpty                         |                          |
+| [last](../commands/docs/last.md)               | last, peek, take-last        | last                            | last                     |
+| [lines](../commands/docs/lines.md)             |                              |                                 | lines, words, split-with |
+| [match](../commands/docs/match.md)             |                              | match (Ocaml), case (Elm)       | case                     |
+| [select](../commands/docs/select.md)           | nth                          | Array.get                       | lookup                   |
+| [open](../commands/docs/open.md)               | with-open                    |                                 |                          |
+| [transpose](../commands/docs/transpose.md)     | (apply mapv vector matrix)   |                                 | transpose                |
+| [prepend](../commands/docs/prepend.md)         | cons                         | cons, ::                        | ::                       |
+| [print](../commands/docs/print.md)             | println                      |                                 | putStrLn, print          |
+| [slice](../commands/docs/slice.md), 1..10      | range                        | range                           | 1..10, 'a'..'f'          |
+| [reduce](../commands/docs/reduce.md)           | reduce, reduce-kv            | foldr                           | foldr                    |
+| [reverse](../commands/docs/reverse.md)         | reverse, rseq                | reverse, reverseInPlace         | reverse                  |
+| [select](../commands/docs/select.md)           | select-keys                  |                                 |                          |
+| [shuffle](../commands/docs/shuffle.md)         | shuffle                      |                                 |                          |
+| [length](../commands/docs/length.md)           | count                        |                                 | size, length             |
+| [skip](../commands/docs/skip.md)               | rest                         | tail                            | tail                     |
+| [skip until](../commands/docs/skip_until.md)   | drop-while                   |                                 |                          |
+| [skip while](../commands/docs/skip_while.md)   | drop-while                   | dropWhile                       | dropWhile, dropWhileEnd  |
+| [sort-by](../commands/docs/sort-by.md)         | sort, sort-by, sorted-set-by | sort, sortBy, sortWith          | sort, sortBy             |
+| [split row](../commands/docs/split_row.md)     | split, split-{at,with,lines} | split, words, lines             | split, words, lines      |
+| [str](../commands/docs/str.md)                 | clojure.string functions     | String functions                |                          |
+| [str join](../commands/docs/str_join.md)       | join                         | concat                          | intercalate              |
+| [str trim](../commands/docs/str_trim.md)       | trim, triml, trimr           | trim, trimLeft, trimRight       | strip                    |
+| [math sum](../commands/docs/math_sum.md)       | apply +                      | sum                             | sum                      |
+| [take](../commands/docs/take.md)               | take, drop-last, pop         | take, init                      | take, init               |
+| [take until](../commands/docs/take_until.md)   | take-while                   | takeWhile                       | takeWhile                |
+| [take while](../commands/docs/take_while.md)   | take-while                   | takeWhile                       | takeWhile                |
+| [uniq](../commands/docs/uniq.md)               | set                          | Set.empty                       | Data.Set                 |
+| [where](../commands/docs/where.md)             | filter, filterv, select      | filter, filterMap               | filter                   |
