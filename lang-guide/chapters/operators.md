@@ -44,7 +44,7 @@ Nushell provides support for these bitwise operators:
 ## Brackets
 
 ### `[` and `]`
-The square brackets can be used to make [lists](types/basic_types/list.md).
+The brackets can be used to make [lists](types/basic_types/list.md).
 ```nu
 ~> [ 1, 2, 3 ]
 ╭───┬───╮
@@ -55,7 +55,7 @@ The square brackets can be used to make [lists](types/basic_types/list.md).
 ```
 
 ### `{` and `}`
-The curly brackets can be used to make [records](types/basic_types/record.md) and [closures](types/basic_types/closure.md).
+The braces can be used to make [records](types/basic_types/record.md) and [closures](types/basic_types/closure.md).
 ```nu
 ~> { a: 1, b: 2 }
 ╭───┬───╮
@@ -65,7 +65,7 @@ The curly brackets can be used to make [records](types/basic_types/record.md) an
 ```
 
 ### `(` and `)`
-The round brackets can be used to denote sub-expressions.
+The parentheses can be used to denote sub-expressions.
 ```nu
 ~> # This would fail without parentheses
 ~> { a: ('aaa' | str length), b: 2 }
