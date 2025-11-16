@@ -43,10 +43,34 @@ Nushell provides support for these bitwise operators:
 
 ## Brackets
 
-TODO
-
-### `(` and `)`
-
 ### `[` and `]`
+The brackets can be used to make [lists](types/basic_types/list.md).
+```nu
+~> [ 1, 2, 3 ]
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+╰───┴───╯
+```
 
 ### `{` and `}`
+The braces can be used to make [records](types/basic_types/record.md) and [closures](types/basic_types/closure.md).
+```nu
+~> { a: 1, b: 2 }
+╭───┬───╮
+│ a │ 1 │
+│ b │ 2 │
+╰───┴───╯
+```
+
+### `(` and `)`
+The parentheses can be used to denote sub-expressions.
+```nu
+~> # This would fail without parentheses
+~> { a: ('aaa' | str length), b: 2 }
+╭───┬───╮
+│ a │ 3 │
+│ b │ 2 │
+╰───┴───╯
+```
