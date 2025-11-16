@@ -14,7 +14,7 @@ head: [[meta, {name: draft}]]
 ╰───┴───╯
 ```
 
-`select` returns a record without the other values.
+`select` maintains the nushell values and returns the records selected by column name or key.
 ```nu
 ~> {a: 1, b: 2, c: 3} | select b
 ╭───┬───╮
