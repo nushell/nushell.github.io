@@ -3,7 +3,7 @@ head: [[meta, {name: draft}]]
 ---
 # Understanding the difference between `get` and `select`
 
-`get` extracts the value and returns a single value or array if multiple keys have been specified.
+`get` extracts the value and returns a single value or list if multiple keys have been specified.
 ```nu
 ~> {a: 1, b: 2, c: 3} | get b
 2
