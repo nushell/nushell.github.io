@@ -2,7 +2,7 @@
 title: polars truncate
 categories: |
   expression
-version: 0.108.0
+version: 0.109.0
 expression: |
   Divide the date/datetime range into buckets.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars truncate` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Divide the date&#x2f;datetime range into buckets.</div>
-
-::: warning This command requires a plugin
-The `polars truncate` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 
@@ -42,14 +35,14 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 Truncate a series of dates by period length
 ```nu
 > seq date -b 2025-01-01 --periods 4 --increment 6wk -o "%Y-%m-%d %H:%M:%S" | polars into-df | polars as-datetime "%F %H:%M:%S" --naive | polars select datetime (polars col datetime | polars truncate 5d37m | polars as truncated)
-╭───┬──────────────┬──────────────╮
-│ # │   datetime   │  truncated   │
-├───┼──────────────┼──────────────┤
-│ 0 │ 9 months ago │ 9 months ago │
-│ 1 │ 8 months ago │ 8 months ago │
-│ 2 │ 6 months ago │ 6 months ago │
-│ 3 │ 5 months ago │ 5 months ago │
-╰───┴──────────────┴──────────────╯
+╭───┬───────────────┬───────────────╮
+│ # │   datetime    │   truncated   │
+├───┼───────────────┼───────────────┤
+│ 0 │ 10 months ago │ 10 months ago │
+│ 1 │ 9 months ago  │ 9 months ago  │
+│ 2 │ 8 months ago  │ 8 months ago  │
+│ 3 │ 6 months ago  │ 6 months ago  │
+╰───┴───────────────┴───────────────╯
 
 ```
 

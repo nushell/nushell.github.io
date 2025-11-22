@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.108.0
+version: 0.109.0
 filters: |
   Searches terms in the input.
 usage: |
@@ -29,6 +29,7 @@ contributors: false
  -  `--columns, -c {list<string>}`: column names to be searched
  -  `--no-highlight, -n`: no-highlight mode: find without marking with ansi code
  -  `--invert, -v`: invert the match
+ -  `--rfind, -R`: search from the end of the string and only return the first match
 
 ## Parameters
 
@@ -166,7 +167,10 @@ Find and highlight text in specific columns
 
 Find in a multi-line string
 ```nu
-> "Violets are red\nAnd roses are blue\nWhen metamaterials\nAlter their hue" | find "ue"
+> 'Violets are red
+And roses are blue
+When metamaterials
+Alter their hue' | find ue
 ╭───┬────────────────────╮
 │ 0 │ And roses are blue │
 │ 1 │ Alter their hue    │
@@ -176,9 +180,18 @@ Find in a multi-line string
 
 Find in a multi-line string without splitting the input into a list of lines
 ```nu
-> "Violets are red\nAnd roses are blue\nWhen metamaterials\nAlter their hue" | find --multiline "ue"
+> 'Violets are red
+And roses are blue
+When metamaterials
+Alter their hue' | find --multiline ue
 Violets are red
 And roses are blue
 When metamaterials
 Alter their hue
+```
+
+Find and highlight the last occurrence in a string
+```nu
+> 'hello world hello' | find --rfind hello
+hello world hello
 ```

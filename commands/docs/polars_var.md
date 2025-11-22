@@ -2,7 +2,7 @@
 title: polars var
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Create a var expression for an aggregation.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars var` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Create a var expression for an aggregation.</div>
-
-::: warning This command requires a plugin
-The `polars var` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

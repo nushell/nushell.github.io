@@ -2,7 +2,7 @@
 title: polars count
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Returns the number of non-null values in the column.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars count` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Returns the number of non-null values in the column.</div>
-
-::: warning This command requires a plugin
-The `polars count` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

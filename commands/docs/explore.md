@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.108.0
+version: 0.109.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |
@@ -61,3 +61,9 @@ Explore a JSON file, then save the last visited sub-structure to a file
 
 ## Notes
 Press `:` then `h` to get a help menu.
+
+## Subcommands:
+
+| name                                               | description                                                           | type     |
+| -------------------------------------------------- | --------------------------------------------------------------------- | -------- |
+| [`explore regex`](/commands/docs/explore_regex.md) | Launch a TUI to create and explore regular expressions interactively. | built-in |

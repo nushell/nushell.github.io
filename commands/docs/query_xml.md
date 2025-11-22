@@ -2,7 +2,7 @@
 title: query xml
 categories: |
   filters
-version: 0.108.0
+version: 0.109.0
 filters: |
   Execute XPath 1.0 query on XML input
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `query xml` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Execute XPath 1.0 query on XML input</div>
-
-::: warning This command requires a plugin
-The `query xml` command resides in the `query` plugin.
-To use this command, you must install and register `nu_plugin_query`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

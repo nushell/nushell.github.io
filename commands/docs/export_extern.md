@@ -2,7 +2,7 @@
 title: export extern
 categories: |
   core
-version: 0.108.0
+version: 0.109.0
 core: |
   Define an extern and export it from a module.
 usage: |

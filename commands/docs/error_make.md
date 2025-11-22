@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.108.0
+version: 0.109.0
 core: |
   Create an error.
 usage: |
@@ -42,34 +42,54 @@ Create a simple custom error
 
 ```
 
-Create a more complex custom error
-```nu
-> error make {
-        msg: "my custom error message"
-        label: {
-            text: "my custom label text"  # not mandatory unless $.label exists
-            # optional
-            span: {
-                # if $.label.span exists, both start and end must be present
-                start: 123
-                end: 456
-            }
-        }
-        help: "A help string, suggesting a fix to the user"  # optional
-    }
-
-```
-
-Create a custom error for a custom command that shows the span of the argument
+Create a complex error for a custom command that shows a full `error_struct`
 ```nu
 > def foo [x] {
         error make {
             msg: "this is fishy"
-            label: {
-                text: "fish right here"
-                span: (metadata $x).span
+            code: "my::error"  # optional error type to use
+            labels: {  # optional, a table or single record
+                text: "fish right here"  # Required if $.labels exists
+                # use (metadata $var).span to get the {start: x end: y} of the variable
+                span: (metadata $x).span  # optional
             }
+            help: "something to tell the user as help"  # optional
+            url: "https://nushell.sh"  # optional
         }
     }
 
 ```
+
+Create a nested error from a try/catch statement with multiple labels
+```nu
+> try {
+        error make {msg: "foo" labels: [{text: one} {text: two}]}
+    } catch {|err|
+        error make {msg: "bar", inner: [($err.json | from json)]}
+    }
+
+```
+
+## Notes
+Errors are defined by an `error_record`, which is a record with a specific
+structure. (`*`) indicates a required key:
+
+  * `msg: string` (`*`)
+  * `code: string`
+  * `labels: oneof<table, record>`
+  * `help: string`
+  * `url: string`
+  * `inner: table`
+
+The `labels` key allow for placing arrows to points in the code, optionally
+using `span` to choose where it points (see `metadata`). `label` can be a table
+(list of records) or a single record. There is an example of both in the
+examples. Each record has the following structure:
+
+  * `text: string` (`*`)
+  * `span: record<start: int end: int>`
+
+The `inner` table takes a list of `error_struct` records, and can be used to
+have detail the errors that happened in a previous `try {} catch {}` statement
+or can be manually created. To use them from a `catch` statement, see the
+example below.

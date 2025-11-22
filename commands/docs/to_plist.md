@@ -2,7 +2,7 @@
 title: to plist
 categories: |
   formats
-version: 0.108.0
+version: 0.109.0
 formats: |
   Convert Nu values into plist
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `to plist` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert Nu values into plist</div>
-
-::: warning This command requires a plugin
-The `to plist` command resides in the `formats` plugin.
-To use this command, you must install and register `nu_plugin_formats`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

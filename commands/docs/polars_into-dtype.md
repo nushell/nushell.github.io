@@ -2,7 +2,7 @@
 title: polars into-dtype
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Convert a string to a specific datatype.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars into-dtype` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Convert a string to a specific datatype.</div>
-
-::: warning This command requires a plugin
-The `polars into-dtype` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

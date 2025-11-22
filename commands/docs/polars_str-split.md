@@ -2,7 +2,7 @@
 title: polars str-split
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Split the string by a substring. The resulting dtype is list<str>.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars str-split` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Split the string by a substring. The resulting dtype is list&lt;str&gt;.</div>
-
-::: warning This command requires a plugin
-The `polars str-split` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

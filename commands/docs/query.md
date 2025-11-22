@@ -2,7 +2,7 @@
 title: query
 categories: |
   filters
-version: 0.108.0
+version: 0.109.0
 filters: |
   Show all the query commands
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `query` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Show all the query commands</div>
-
-::: warning This command requires a plugin
-The `query` command resides in the `query` plugin.
-To use this command, you must install and register `nu_plugin_query`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

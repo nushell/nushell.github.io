@@ -2,7 +2,7 @@
 title: gstat
 categories: |
   prompt
-version: 0.108.0
+version: 0.109.0
 prompt: |
   Get the git status of a repo
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `gstat` for [prompt](/commands/categories/prompt.md)
 
 <div class='command-title'>Get the git status of a repo</div>
-
-::: warning This command requires a plugin
-The `gstat` command resides in the `gstat` plugin.
-To use this command, you must install and register `nu_plugin_gstat`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

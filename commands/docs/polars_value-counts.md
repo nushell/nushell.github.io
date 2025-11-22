@@ -2,7 +2,7 @@
 title: polars value-counts
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Returns a dataframe with the counts for unique values in series.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars value-counts` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Returns a dataframe with the counts for unique values in series.</div>
-
-::: warning This command requires a plugin
-The `polars value-counts` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

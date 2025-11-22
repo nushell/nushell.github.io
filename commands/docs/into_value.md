@@ -2,7 +2,7 @@
 title: into value
 categories: |
   conversions
-version: 0.108.0
+version: 0.109.0
 conversions: |
   Convert custom values into base values.
 usage: |

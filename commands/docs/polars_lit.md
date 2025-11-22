@@ -2,7 +2,7 @@
 title: polars lit
 categories: |
   expression
-version: 0.108.0
+version: 0.109.0
 expression: |
   Creates a literal expression.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars lit` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Creates a literal expression.</div>
-
-::: warning This command requires a plugin
-The `polars lit` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

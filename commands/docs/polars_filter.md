@@ -2,7 +2,7 @@
 title: polars filter
 categories: |
   lazyframe
-version: 0.108.0
+version: 0.109.0
 lazyframe: |
   Filter dataframe based in expression.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars filter` for [lazyframe](/commands/categories/lazyframe.md)
 
 <div class='command-title'>Filter dataframe based in expression.</div>
-
-::: warning This command requires a plugin
-The `polars filter` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 
@@ -59,8 +52,8 @@ Filter dataframe for rows where dt is within the last 2 days of the maximum dt v
 ╭───┬──────────────┬─────╮
 │ # │      dt      │ val │
 ├───┼──────────────┼─────┤
-│ 0 │ 6 months ago │   3 │
-│ 1 │ 6 months ago │   4 │
+│ 0 │ 7 months ago │   3 │
+│ 1 │ 7 months ago │   4 │
 ╰───┴──────────────┴─────╯
 
 ```

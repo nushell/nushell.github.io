@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.108.0
+version: 0.109.0
 network: |
   Get the headers from a URL.
 usage: |
@@ -28,6 +28,7 @@ contributors: false
  -  `--headers, -H {any}`: custom headers you want to add
  -  `--insecure, -k`: allow insecure server connections when using SSL
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
 
 ## Parameters
 

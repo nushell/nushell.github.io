@@ -2,7 +2,7 @@
 title: compact
 categories: |
   filters
-version: 0.108.0
+version: 0.109.0
 filters: |
   Creates a table with non-empty rows.
 usage: |

@@ -2,7 +2,7 @@
 title: ansi strip
 categories: |
   platform
-version: 0.108.0
+version: 0.109.0
 platform: |
   Strip ANSI escape sequences from a string.
 usage: |
@@ -39,4 +39,24 @@ Strip ANSI escape sequences from a string
 ```nu
 > $'(ansi green)(ansi cursor_on)hello' | ansi strip
 hello
+```
+
+Strip ANSI escape sequences from a record field
+```nu
+> { greeting: $'hello (ansi red)world' exclamation: false } | ansi strip greeting
+╭─────────────┬─────────────╮
+│ greeting    │ hello world │
+│ exclamation │ false       │
+╰─────────────┴─────────────╯
+```
+
+Strip ANSI escape sequences from multiple table columns
+```nu
+> [[language feature]; [$'(ansi red)rust' $'(ansi i)safety']] | ansi strip language feature
+╭───┬──────────┬─────────╮
+│ # │ language │ feature │
+├───┼──────────┼─────────┤
+│ 0 │ rust     │ safety  │
+╰───┴──────────┴─────────╯
+
 ```

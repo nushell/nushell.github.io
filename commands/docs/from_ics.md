@@ -2,7 +2,7 @@
 title: from ics
 categories: |
   formats
-version: 0.108.0
+version: 0.109.0
 formats: |
   Parse text as .ics and create table.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `from ics` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse text as .ics and create table.</div>
-
-::: warning This command requires a plugin
-The `from ics` command resides in the `formats` plugin.
-To use this command, you must install and register `nu_plugin_formats`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 
@@ -39,10 +32,15 @@ Converts ics formatted string to table
 ```nu
 > 'BEGIN:VCALENDAR
 END:VCALENDAR' | from ics
-╭───┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────╮
-│ # │   properties   │     events     │     alarms     │     to-Dos     │    journals    │   free-busys   │   timezones    │
-├───┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤
-│ 0 │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │
-╰───┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────╯
+╭───┬────────────────┬────────────────┬────────────────┬────────────────┬────────────────┬────────────┬──────╮
+│ # │   properties   │     events     │     alarms     │     to-Dos     │    journals    │ free-busys │ time │
+│   │                │                │                │                │                │            │ zone │
+│   │                │                │                │                │                │            │ s    │
+├───┼────────────────┼────────────────┼────────────────┼────────────────┼────────────────┼────────────┼──────┤
+│ 0 │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0 items] │ [list 0    │ [lis │
+│   │                │                │                │                │                │ items]     │ t 0  │
+│   │                │                │                │                │                │            │ item │
+│   │                │                │                │                │                │            │ s]   │
+╰───┴────────────────┴────────────────┴────────────────┴────────────────┴────────────────┴────────────┴──────╯
 
 ```

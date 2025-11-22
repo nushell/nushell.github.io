@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.108.0
+version: 0.109.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |
@@ -28,6 +28,7 @@ contributors: false
  -  `--headers, -H {any}`: custom headers you want to add
  -  `--insecure, -k`: allow insecure server connections when using SSL
  -  `--allow-errors, -e`: do not fail if the server returns an error code
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
 
 ## Parameters
 

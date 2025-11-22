@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.108.0
+version: 0.109.0
 network: |
   Post a body to a URL.
 usage: |
@@ -32,6 +32,7 @@ contributors: false
  -  `--full, -f`: returns the full response instead of only the body
  -  `--allow-errors, -e`: do not fail if the server returns an error code
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
 
 ## Parameters
 

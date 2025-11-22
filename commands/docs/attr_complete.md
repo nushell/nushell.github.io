@@ -2,7 +2,7 @@
 title: attr complete
 categories: |
   core
-version: 0.108.0
+version: 0.109.0
 core: |
   Attribute for using another command as a completion source for all arguments.
 usage: |

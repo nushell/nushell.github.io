@@ -2,7 +2,7 @@
 title: format bits
 categories: |
   conversions
-version: 0.108.0
+version: 0.109.0
 conversions: |
   Convert value to a string of binary data represented by 0 and 1.
 usage: |

@@ -2,7 +2,7 @@
 title: transpose
 categories: |
   filters
-version: 0.108.0
+version: 0.109.0
 filters: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |

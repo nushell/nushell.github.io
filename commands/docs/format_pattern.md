@@ -2,7 +2,7 @@
 title: format pattern
 categories: |
   strings
-version: 0.108.0
+version: 0.109.0
 strings: |
   Format columns into a string using a simple pattern.
 usage: |
@@ -47,4 +47,10 @@ Print elements from some columns of a table
 │ 1 │ v4 │
 ╰───┴────╯
 
+```
+
+Escape braces by repeating them
+```nu
+> {start: 3, end: 5} | format pattern 'if {start} < {end} {{ "correct" }} else {{ "incorrect" }}'
+if 3 < 5 { "correct" } else { "incorrect" }
 ```

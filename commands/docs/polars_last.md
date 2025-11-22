@@ -2,7 +2,7 @@
 title: polars last
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars last` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Creates new dataframe with tail rows or creates a last expression.</div>
-
-::: warning This command requires a plugin
-The `polars last` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 
