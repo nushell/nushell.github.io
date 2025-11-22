@@ -11,15 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     steps:
-      - uses: actions/checkout@v4.1.2
+      - uses: actions/checkout@v6.0.0
         with:
           ref: main
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v6.0.0
         with:
-          node-version: 20
+          node-version: 22
 
       - run: npm install
       - name: Build Static Docs
@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3.0.1
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
           path: ./.vuepress/dist
 
