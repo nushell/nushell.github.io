@@ -1,15 +1,11 @@
 import path from 'node:path';
 import { defineUserConfig } from '@vuepress/cli';
-import { gitPlugin } from '@vuepress/plugin-git';
 import { feedPlugin } from '@vuepress/plugin-feed';
 import { viteBundler } from '@vuepress/bundler-vite';
 import { shikiPlugin } from '@vuepress/plugin-shiki';
 import { defaultTheme } from '@vuepress/theme-default';
 import { sitemapPlugin } from '@vuepress/plugin-sitemap';
-import { copyCodePlugin } from '@vuepress/plugin-copy-code';
 import { docsearchPlugin } from '@vuepress/plugin-docsearch';
-import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
-import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom';
 
 import {
   navbarDe,
@@ -202,19 +198,19 @@ export default defineUserConfig({
     },
     themePlugins: {
       prismjs: false,
+      // copyCode plugin configuration (already included in defaultTheme)
+      copyCode: {
+        locales: {
+          '/': {
+            copy: 'Copy Codes from code block',
+          },
+        },
+      },
     },
   }),
   plugins: [
-    gitPlugin(),
-    backToTopPlugin(),
-    mediumZoomPlugin(),
-    copyCodePlugin({
-      locales: {
-        '/': {
-          copy: 'Copy Codes from code block',
-        },
-      },
-    }),
+    // Note: gitPlugin, backToTopPlugin, mediumZoomPlugin, and copyCodePlugin
+    // are already included in defaultTheme, so we don't need to add them here
     shikiPlugin({
       themes: {
         light: 'dark-plus',

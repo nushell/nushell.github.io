@@ -14,21 +14,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.26",
-    "@vuepress/plugin-back-to-top": "2.0.0-rc.118",
-    "@vuepress/plugin-copy-code": "2.0.0-rc.118",
-    "@vuepress/plugin-docsearch": "2.0.0-rc.118",
-    "@vuepress/plugin-feed": "2.0.0-rc.118",
-    "@vuepress/plugin-git": "2.0.0-rc.118",
-    "@vuepress/plugin-medium-zoom": "2.0.0-rc.118",
-    "@vuepress/plugin-shiki": "2.0.0-rc.118",
-    "@vuepress/plugin-sitemap": "2.0.0-rc.118",
-    "@vuepress/theme-default": "2.0.0-rc.118",
+    "@vuepress/bundler-vite": "2.0.0-rc.24",
+    "@vuepress/plugin-docsearch": "2.0.0-rc.112",
+    "@vuepress/plugin-feed": "2.0.0-rc.112",
+    "@vuepress/plugin-shiki": "2.0.0-rc.112",
+    "@vuepress/plugin-sitemap": "2.0.0-rc.112",
+    "@vuepress/theme-default": "2.0.0-rc.112",
     "lefthook": "1.8.2",
     "patch-package": "^8.0.1",
     "prettier": "^3.3.3",
     "sass-embedded": "^1.81.0",
-    "vuepress": "^2.0.0-rc.26"
+    "vuepress": "^2.0.0-rc.24"
   },
   "engines": {
     "npm": ">=9.0.0",
