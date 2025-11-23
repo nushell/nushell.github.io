@@ -120,4 +120,5 @@ export const sidebarKo: SidebarConfig = {
       ],
     },
   ],
+  '/blog/': false,
 };

@@ -29,4 +29,5 @@ export const sidebarEs: SidebarConfig = {
       ],
     },
   ],
+  '/blog/': false,
 };

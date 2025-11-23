@@ -21,4 +21,5 @@ export const sidebarPtBR: SidebarConfig = {
       ],
     },
   ],
+  '/blog/': false,
 };

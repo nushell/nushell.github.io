@@ -73,4 +73,5 @@ export const sidebarDe: SidebarConfig = {
       children: ['/de/book/plugins', '/de/book/metadata.md'],
     },
   ],
+  '/blog/': false,
 };

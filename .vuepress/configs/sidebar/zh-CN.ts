@@ -170,4 +170,5 @@ export const sidebarZhCN: SidebarConfig = {
       ],
     },
   ],
+  '/blog/': false,
 };
