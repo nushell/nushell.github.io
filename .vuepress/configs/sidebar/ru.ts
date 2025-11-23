@@ -113,4 +113,5 @@ export const sidebarRU: SidebarConfig = {
     //   ],
     // },
   ],
+  '/blog/': false,
 };

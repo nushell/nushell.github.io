@@ -104,4 +104,5 @@ export const sidebarJa: SidebarConfig = {
       ],
     },
   ],
+  '/blog/': false,
 };
