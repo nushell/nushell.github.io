@@ -88,10 +88,10 @@ Converts string to datetime using the `--not-exact` flag even with excessive sym
 ╭───┬─────────────╮
 │ # │  datetime   │
 ├───┼─────────────┤
-│ 0 │ 2 weeks ago │
-│ 1 │ 2 weeks ago │
-│ 2 │ 2 weeks ago │
-│ 3 │ 2 weeks ago │
+│ 0 │ 3 weeks ago │
+│ 1 │ 3 weeks ago │
+│ 2 │ 3 weeks ago │
+│ 3 │ 3 weeks ago │
 ╰───┴─────────────╯
 
 ```

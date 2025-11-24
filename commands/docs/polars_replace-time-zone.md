@@ -64,10 +64,10 @@ Apply timezone with ambiguous datetime
 ╭───┬─────────────╮
 │ # │  datetime   │
 ├───┼─────────────┤
-│ 0 │ 2 weeks ago │
+│ 0 │ 3 weeks ago │
 │ 1 │             │
-│ 2 │ 2 weeks ago │
-│ 3 │ 2 weeks ago │
+│ 2 │ 3 weeks ago │
+│ 3 │ 3 weeks ago │
 ╰───┴─────────────╯
 
 ```

@@ -20,6 +20,10 @@ contributors: false
 
 ```> last {flags} (rows)```
 
+## Flags
+
+ -  `--strict, -s`: Throw an error if input is empty
+
 ## Parameters
 
  -  `rows`: Starting from the back, the number of rows to return.
