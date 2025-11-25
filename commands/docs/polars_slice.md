@@ -44,3 +44,9 @@ Create new dataframe from a slice of the rows
 ╰───┴───┴───╯
 
 ```
+
+Create a new lazy dataframe from a slice of a lazy dataframe's rows
+```nu
+> [[a b]; [1 2] [3 4]] | polars into-lazy | polars slice 0 1 | describe
+polars_lazyframe
+```
