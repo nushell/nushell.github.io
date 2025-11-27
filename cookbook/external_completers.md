@@ -95,7 +95,7 @@ The solution to this involves manually checking the value to filter it out:
 let carapace_completer = {|spans: list<string>|
     carapace $spans.0 nushell ...$spans
     | from json
-    | if ($in | default [] | where value == $"($spans | last)ERR" | is-empty) { $in } else { null }
+    | if ($in | default [] | any {|| $in.display | str starts-with "ERR"}) { null } else { $in }
 }
 ```
 
@@ -109,7 +109,7 @@ let fish_completer = ...
 let carapace_completer = {|spans: list<string>|
     carapace $spans.0 nushell ...$spans
     | from json
-    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+    | if ($in | default [] | any {|| $in.display | str starts-with "ERR"}) { null } else { $in }
 }
 
 # This completer will use carapace by default
