@@ -2,7 +2,7 @@
 title: polars unnest
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Decompose struct columns into separate columns for each of their fields. The new columns will be inserted into the dataframe at the location of the struct column.
 usage: |
@@ -16,16 +16,13 @@ contributors: false
 
 <div class='command-title'>Decompose struct columns into separate columns for each of their fields. The new columns will be inserted into the dataframe at the location of the struct column.</div>
 
-::: warning This command requires a plugin
-The `polars unnest` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
-
 ## Signature
 
 ```> polars unnest {flags} ...rest```
+
+## Flags
+
+ -  `--separator, -s {string}`: optional separator to use when creating new column names
 
 ## Parameters
 
@@ -71,5 +68,21 @@ Unnest a lazy dataframe
 │ 0 │  1 │ Bob   │  36 │
 │ 1 │  2 │ Betty │  63 │
 ╰───┴────┴───────┴─────╯
+
+```
+
+Unnest with a custom separator
+```nu
+> [[id person]; [1 {name: "Bob", age: 36}] [2 {name: "Betty", age: 63}]]
+                    | polars into-df -s {id: i64, person: {name: str, age: u8}}
+                    | polars unnest person -s "_"
+                    | polars get id person_name person_age
+                    | polars sort-by id
+╭───┬────┬─────────────┬────────────╮
+│ # │ id │ person_name │ person_age │
+├───┼────┼─────────────┼────────────┤
+│ 0 │  1 │ Bob         │         36 │
+│ 1 │  2 │ Betty       │         63 │
+╰───┴────┴─────────────┴────────────╯
 
 ```

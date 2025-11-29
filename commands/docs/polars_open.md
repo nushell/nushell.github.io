@@ -2,7 +2,7 @@
 title: polars open
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Opens CSV, JSON, NDJSON/JSON lines, arrow, avro, or parquet file to create dataframe. A lazy dataframe will be created by default, if supported.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars open` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Opens CSV, JSON, NDJSON&#x2f;JSON lines, arrow, avro, or parquet file to create dataframe. A lazy dataframe will be created by default, if supported.</div>
-
-::: warning This command requires a plugin
-The `polars open` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

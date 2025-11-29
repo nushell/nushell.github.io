@@ -2,7 +2,7 @@
 title: polars convert-time-zone
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Convert datetime to target timezone.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars convert-time-zone` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Convert datetime to target timezone.</div>
-
-::: warning This command requires a plugin
-The `polars convert-time-zone` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 
@@ -47,8 +40,8 @@ Convert timezone for timezone-aware datetime
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 6 months ago │
-│ 1 │ 6 months ago │
+│ 0 │ 7 months ago │
+│ 1 │ 7 months ago │
 ╰───┴──────────────╯
 
 ```
@@ -61,8 +54,8 @@ Timezone conversions for timezone-naive datetime will assume the original timezo
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 6 months ago │
-│ 1 │ 6 months ago │
+│ 0 │ 7 months ago │
+│ 1 │ 7 months ago │
 ╰───┴──────────────╯
 
 ```

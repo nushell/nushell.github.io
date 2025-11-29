@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.108.0
+version: 0.109.0
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
@@ -181,6 +181,30 @@ Group items by multiple columns' values
 │   │      │      │ ╰───┴───────┴──────┴──────╯  │
 ╰───┴──────┴──────┴──────────────────────────────╯
 
+```
+
+Group items by column and delete the original
+```nu
+> [
+        [name, lang, year];
+        [andres, rb, "2019"],
+        [jt, rs, "2019"],
+        [storm, rs, "2021"]
+    ]
+    | group-by lang | update cells { reject lang }
+╭────┬───────────────────────╮
+│    │ ╭───┬────────┬──────╮ │
+│ rb │ │ # │  name  │ year │ │
+│    │ ├───┼────────┼──────┤ │
+│    │ │ 0 │ andres │ 2019 │ │
+│    │ ╰───┴────────┴──────╯ │
+│    │ ╭───┬───────┬──────╮  │
+│ rs │ │ # │ name  │ year │  │
+│    │ ├───┼───────┼──────┤  │
+│    │ │ 0 │ jt    │ 2019 │  │
+│    │ │ 1 │ storm │ 2021 │  │
+│    │ ╰───┴───────┴──────╯  │
+╰────┴───────────────────────╯
 ```
 
 ## Notes

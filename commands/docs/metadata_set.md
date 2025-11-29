@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.108.0
+version: 0.109.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -18,7 +18,7 @@ contributors: false
 
 ## Signature
 
-```> metadata set {flags} ```
+```> metadata set {flags} (closure)```
 
 ## Flags
 
@@ -26,6 +26,10 @@ contributors: false
  -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input
  -  `--content-type, -c {string}`: Assign content type metadata to the input
  -  `--merge, -m {record}`: Merge arbitrary metadata fields
+
+## Parameters
+
+ -  `closure`: A closure that receives the current metadata and returns a new metadata record. Cannot be used with other flags.
 
 
 ## Input/output types:
@@ -57,4 +61,10 @@ Set custom metadata
 ```nu
 > "data" | metadata set --merge {custom_key: "value"} | metadata | get custom_key
 value
+```
+
+Set metadata using a closure
+```nu
+> "data" | metadata set --content-type "text/csv" | metadata set {|m| $m | update content_type {$in + "-processed"}} | metadata | get content_type
+text/csv-processed
 ```

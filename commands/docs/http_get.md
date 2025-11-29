@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.108.0
+version: 0.109.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -31,6 +31,7 @@ contributors: false
  -  `--full, -f`: returns the full response instead of only the body
  -  `--allow-errors, -e`: do not fail if the server returns an error code
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
 
 ## Parameters
 
@@ -77,6 +78,12 @@ Get the response status code
 Check response status while streaming
 ```nu
 > http get --allow-errors https://example.com/file | metadata access {|m| if $m.http_response.status != 200 { error make {msg: "failed"} } else { } } | lines
+
+```
+
+Get from Docker daemon via Unix socket
+```nu
+> http get --unix-socket /var/run/docker.sock http://localhost/containers/json
 
 ```
 

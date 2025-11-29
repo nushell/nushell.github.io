@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.108.0
+version: 0.109.0
 strings: |
   Split a string into multiple columns using a separator.
 usage: |
@@ -44,7 +44,7 @@ Split a string into columns by the specified separator
 ```nu
 > 'a--b--c' | split column '--'
 ╭───┬─────────┬─────────┬─────────╮
-│ # │ column1 │ column2 │ column3 │
+│ # │ column0 │ column1 │ column2 │
 ├───┼─────────┼─────────┼─────────┤
 │ 0 │ a       │ b       │ c       │
 ╰───┴─────────┴─────────┴─────────╯
@@ -55,7 +55,7 @@ Split a string into columns of char and remove the empty columns
 ```nu
 > 'abc' | split column --collapse-empty ''
 ╭───┬─────────┬─────────┬─────────╮
-│ # │ column1 │ column2 │ column3 │
+│ # │ column0 │ column1 │ column2 │
 ├───┼─────────┼─────────┼─────────┤
 │ 0 │ a       │ b       │ c       │
 ╰───┴─────────┴─────────┴─────────╯
@@ -66,7 +66,7 @@ Split a list of strings into a table
 ```nu
 > ['a-b' 'c-d'] | split column -
 ╭───┬─────────┬─────────╮
-│ # │ column1 │ column2 │
+│ # │ column0 │ column1 │
 ├───┼─────────┼─────────┤
 │ 0 │ a       │ b       │
 │ 1 │ c       │ d       │
@@ -78,7 +78,7 @@ Split a list of strings into a table, ignoring padding
 ```nu
 > ['a -  b' 'c  -    d'] | split column --regex '\s*-\s*'
 ╭───┬─────────┬─────────╮
-│ # │ column1 │ column2 │
+│ # │ column0 │ column1 │
 ├───┼─────────┼─────────┤
 │ 0 │ a       │ b       │
 │ 1 │ c       │ d       │

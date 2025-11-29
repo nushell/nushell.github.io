@@ -2,7 +2,7 @@
 title: polars drop
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Creates a new dataframe by dropping the selected columns.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars drop` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Creates a new dataframe by dropping the selected columns.</div>
-
-::: warning This command requires a plugin
-The `polars drop` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

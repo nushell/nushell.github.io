@@ -2,7 +2,7 @@
 title: tee
 categories: |
   filters
-version: 0.108.0
+version: 0.109.0
 filters: |
   Copy a stream to another command in parallel.
 usage: |

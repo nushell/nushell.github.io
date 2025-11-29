@@ -2,7 +2,7 @@
 title: polars first
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Show only the first number of rows or create a first expression
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars first` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Show only the first number of rows or create a first expression</div>
-
-::: warning This command requires a plugin
-The `polars first` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

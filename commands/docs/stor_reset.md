@@ -2,7 +2,7 @@
 title: stor reset
 categories: |
   database
-version: 0.108.0
+version: 0.109.0
 database: |
   Reset the in-memory database by dropping all tables.
 usage: |

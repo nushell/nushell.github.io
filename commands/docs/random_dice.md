@@ -2,7 +2,7 @@
 title: random dice
 categories: |
   random
-version: 0.108.0
+version: 0.109.0
 random: |
   Generate a random dice roll.
 usage: |

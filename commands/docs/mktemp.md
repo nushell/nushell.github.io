@@ -2,7 +2,7 @@
 title: mktemp
 categories: |
   filesystem
-version: 0.108.0
+version: 0.109.0
 filesystem: |
   Create temporary files or directories using uutils/coreutils mktemp.
 usage: |
@@ -26,6 +26,7 @@ contributors: false
  -  `--tmpdir-path, -p {path}`: Interpret TEMPLATE relative to tmpdir-path. If tmpdir-path is not set use $TMPDIR
  -  `--tmpdir, -t`: Interpret TEMPLATE relative to the system temporary directory.
  -  `--directory, -d`: Create a directory instead of a file.
+ -  `--dry`: Don't create a file and just return the path that would have been created.
 
 ## Parameters
 

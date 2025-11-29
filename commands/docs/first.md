@@ -2,7 +2,7 @@
 title: first
 categories: |
   filters
-version: 0.108.0
+version: 0.109.0
 filters: |
   Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> first {flags} (rows)```
+
+## Flags
+
+ -  `--strict, -s`: Throw an error if input is empty
 
 ## Parameters
 

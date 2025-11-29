@@ -2,7 +2,7 @@
 title: polars shape
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Shows column and row size for a dataframe.
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars shape` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Shows column and row size for a dataframe.</div>
-
-::: warning This command requires a plugin
-The `polars shape` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 

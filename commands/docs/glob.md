@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.108.0
+version: 0.109.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |

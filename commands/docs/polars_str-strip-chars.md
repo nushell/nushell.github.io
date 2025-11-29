@@ -2,7 +2,7 @@
 title: polars str-strip-chars
 categories: |
   dataframe
-version: 0.108.0
+version: 0.109.0
 dataframe: |
   Strips specified characters from strings in a column
 usage: |
@@ -15,13 +15,6 @@ contributors: false
 # `polars str-strip-chars` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Strips specified characters from strings in a column</div>
-
-::: warning This command requires a plugin
-The `polars str-strip-chars` command resides in the `polars` plugin.
-To use this command, you must install and register `nu_plugin_polars`.
-See the [Plugins](/book/plugins.html) chapter in the book for more information.
-:::
-
 
 ## Signature
 
