@@ -23,3 +23,4 @@
 - `bytes` subcommands (see `help bytes` for a list)
 - `encode`
 - `take`
+- `chunks` to split binary into individual bytes or groups
