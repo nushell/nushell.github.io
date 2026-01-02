@@ -324,7 +324,7 @@ Substrings are slices of a string. They have a startpoint and an endpoint. Here'
 'Hello World!' | str index-of 'r'
 # => 8
 'Hello World!' | str substring 4..8
-# => o Wo
+# => o Wor
 ```
 
 ### String Padding
