@@ -292,3 +292,19 @@ Available metadata:
 - `status` - HTTP status code (200, 404, 500, etc.)
 - `headers` - `[{name, value}, ...]`
 - `urls` - Redirect history
+
+---
+
+### Connecting via Unix Domain Sockets
+
+You can connect to HTTP servers over Unix domain sockets using the `--unix-socket` flag. This works on Unix/Linux systems and Windows 10+ (build 17063 and later). This is commonly used for local services like the Docker daemon, systemd, or other IPC services.
+
+```nu
+# Query Docker daemon via Unix socket
+http get --unix-socket /var/run/docker.sock http://localhost/containers/json
+
+# The hostname in the URL populates the HTTP Host header
+http post --unix-socket ./my-service.sock http://api/endpoint {data: "value"}
+```
+
+The socket path specifies where to connect, while the URL's hostname is used for the HTTP Host header.
