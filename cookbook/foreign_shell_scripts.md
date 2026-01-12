@@ -63,19 +63,6 @@ This quickly gets tricky though, for example when the script is declaring a
 There are ways to implement some form of expansion too, but at some point it
 might make more sense to leave the parsing to the shell it was meant for.
 
-## Bash Env Plugin
-
-There is a third-party Nu plugin [bash-env](https://github.com/tesujimath/nu_plugin_bash_env)
-for importing environment variables from Bash format files and pipes.
-This plugin uses Bash itself to parse the environment definitions,
-and can therefore cope with arbitrarily complex Bash sources.
-
-::: warning
-Please note that the `bash-env` plugin is not supported by the core Nushell team.
-All issues and requests for support should be directed to its own
-[issue tracker](https://github.com/tesujimath/nu_plugin_bash_env/issues).
-:::
-
 ## Capturing the environment from a foreign shell script
 
 A more complex approach is to run the script in the shell it is written for and

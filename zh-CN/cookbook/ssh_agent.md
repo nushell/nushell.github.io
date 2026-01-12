@@ -21,17 +21,6 @@ title: ssh-agent
 请参阅解决方法。
 :::
 
-或者，使用第三方 Nu 插件 [bash-env](https://github.com/tesujimath/nu_plugin_bash_env)，如下所示。
-
-```nu
-^ssh-agent | bash-env | load-env
-```
-
-::: warning
-请注意，`bash-env` 插件不受核心 Nushell 团队支持。
-所有问题和支持请求应直接发送到他们团队自己的 [问题跟踪器](https://github.com/tesujimath/nu_plugin_bash_env/issues)。
-:::
-
 ## 解决方法
 
 你可以通过检查是否已经有 ssh-agent 在你的用户上运行来解决此行为，如果没有则启动一个：
