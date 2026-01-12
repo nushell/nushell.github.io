@@ -50,16 +50,6 @@ print $"($env.GREETING) ($env.FROM)" # "Hello from bash"
 
 也有方法实现某种形式的扩展，但在某些时候，将其解析留给它原本为之设计的 shell 可能更有意义。
 
-## Bash Env 插件
-
-有一个第三方 Nu 插件 [bash-env](https://github.com/tesujimath/nu_plugin_bash_env)，用于从 Bash 格式的文件和管道导入环境变量。
-该插件使用 Bash 本身来解析环境定义，因此可以处理任意复杂的 Bash 源。
-
-::: warning
-请注意，`bash-env` 插件不受核心 Nushell 团队支持。
-所有问题和支持请求应直接发送到其自己的 [问题跟踪器](https://github.com/tesujimath/nu_plugin_bash_env/issues)。
-:::
-
 ## 从外部 shell 脚本捕获环境
 
 更复杂的方法是在为其编写的 shell 中运行脚本，然后进行一些黑客操作来捕获脚本的变量。
