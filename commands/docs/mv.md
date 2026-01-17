@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.109.0
+version: 0.110.0
 filesystem: |
   Move files or directories using uutils/coreutils mv.
 usage: |
@@ -28,6 +28,7 @@ contributors: false
  -  `--interactive, -i`: prompt before overwriting
  -  `--update, -u`: move and overwrite only when the SOURCE file is newer than the destination file or when the destination file is missing
  -  `--no-clobber, -n`: do not overwrite an existing file
+ -  `--all, -a`: move hidden files if '*' is provided
 
 ## Parameters
 

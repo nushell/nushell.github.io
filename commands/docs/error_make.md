@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.109.0
+version: 0.110.0
 core: |
   Create an error.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--unspanned, -u`: remove the origin label from the error
+ -  `--unspanned, -u`: remove the labels from the error
 
 ## Parameters
 
@@ -34,62 +34,98 @@ contributors: false
 | input   | output |
 | ------- | ------ |
 | nothing | error  |
+| string  | error  |
+| record  | error  |
 ## Examples
 
-Create a simple custom error
+Create a simple, default error
 ```nu
-> error make {msg: "my custom error message"}
+> error make
 
 ```
 
-Create a complex error for a custom command that shows a full `error_struct`
+Create a simple error from a string
 ```nu
-> def foo [x] {
+> error make 'my error message'
+
+```
+
+Create a simple error from an `error_struct` record
+```nu
+> error make {msg: 'my error message'}
+
+```
+
+A complex error utilizing spans and inners
+```nu
+> def foo [x: int, y: int] {
+        let z = $x + $y
         error make {
-            msg: "this is fishy"
-            code: "my::error"  # optional error type to use
-            labels: {  # optional, a table or single record
-                text: "fish right here"  # Required if $.labels exists
-                # use (metadata $var).span to get the {start: x end: y} of the variable
-                span: (metadata $x).span  # optional
-            }
-            help: "something to tell the user as help"  # optional
-            url: "https://nushell.sh"  # optional
+            msg: "an error for foo just occurred"
+            labels: [
+                {text: "one" span: (metadata $x).span}
+                {text: "two" span: (metadata $y).span}
+            ]
+            help: "some help for the user"
+            inner: [
+                {msg: "an inner error" labels: [{text: "" span: (metadata $y).span}]}
+            ]
         }
     }
 
 ```
 
-Create a nested error from a try/catch statement with multiple labels
+Chain errors using a pipeline
+```nu
+> try {error make "foo"} catch {error make "bar"}
+
+```
+
+Chain errors using arguments (note the extra command in `catch`)
 ```nu
 > try {
-        error make {msg: "foo" labels: [{text: one} {text: two}]}
+        error make "foo"
     } catch {|err|
-        error make {msg: "bar", inner: [($err.json | from json)]}
+        print 'We got an error that will be chained!'
+        error make {msg: "bar" inner: [$err]}
     }
 
 ```
 
 ## Notes
-Errors are defined by an `error_record`, which is a record with a specific
-structure. (`*`) indicates a required key:
+Use either as a command with an `error_struct` or string as an input. The
+`error_struct` is detailed below:
 
-  * `msg: string` (`*`)
+  * `msg: string` (required)
   * `code: string`
-  * `labels: oneof<table, record>`
+  * `labels: table<error_label>`
   * `help: string`
   * `url: string`
-  * `inner: table`
+  * `inner: table<error_struct>`
+  * `src: src_record`
 
-The `labels` key allow for placing arrows to points in the code, optionally
-using `span` to choose where it points (see `metadata`). `label` can be a table
-(list of records) or a single record. There is an example of both in the
-examples. Each record has the following structure:
+The `error_label` should contain the following keys:
 
-  * `text: string` (`*`)
+  * `text: string`
   * `span: record<start: int end: int>`
 
-The `inner` table takes a list of `error_struct` records, and can be used to
-have detail the errors that happened in a previous `try {} catch {}` statement
-or can be manually created. To use them from a `catch` statement, see the
-example below.
+External errors (referencing external sources, not the default nu spans) are
+created using the `src` column with the `src_record` record. This only changes
+where the labels are placed. For this, the `code` key is ignored, and will
+always be `nu::shell::outside`. Errors cannot use labels that reference both
+inside and outside sources, to do that use an `inner` error.
+
+  * `name: string` - name of the source
+  * `text: string` - the raw text to place the spans in
+  * `path: string` - a file path to place the spans in
+
+Errors can be chained together using the `inner` key, and multiple spans can be
+specified to give more detailed error outputs.
+
+If a string is passed it will be the `msg` part of the `error_struct`.
+
+Errors can also be chained using `try {} catch {}`, allowing for related errors
+to be printed out more easily. The code block for `catch` passes a record of the
+`try` block's error into the catch block, which can be used in `error make`
+either as the input or as an argument. These will be added as `inner` errors to
+the most recent `error make`.

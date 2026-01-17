@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.109.0
+version: 0.110.0
 filters: |
   Sort by the given cell path or closure.
 usage: |

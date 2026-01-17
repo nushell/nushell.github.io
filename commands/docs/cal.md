@@ -2,7 +2,7 @@
 title: cal
 categories: |
   generators
-version: 0.109.0
+version: 0.110.0
 generators: |
   Display a calendar.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
  -  `--as-table, -t`: output as a table
  -  `--full-year {int}`: Display a year-long calendar for the specified year
  -  `--week-start {string}`: Display the calendar with the specified day as the first day of the week
- -  `--month-names`: Display the month names instead of integers
+ -  `--month-names`: Display the month names in a separate column
 
 
 ## Input/output types:

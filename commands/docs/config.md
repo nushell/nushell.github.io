@@ -2,7 +2,7 @@
 title: config
 categories: |
   env
-version: 0.109.0
+version: 0.110.0
 env: |
   Edit nushell configuration files.
 usage: |

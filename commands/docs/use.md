@@ -2,7 +2,7 @@
 title: use
 categories: |
   core
-version: 0.109.0
+version: 0.110.0
 core: |
   Use definitions from a module, making them available in your shell.
 usage: |

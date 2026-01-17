@@ -2,7 +2,7 @@
 title: polars str-split
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Split the string by a substring. The resulting dtype is list<str>.
 usage: |
@@ -30,6 +30,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Split the string by comma, then create a new row for each string

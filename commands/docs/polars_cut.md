@@ -2,7 +2,7 @@
 title: polars cut
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Bin continuous values into discrete categories for a series.
 usage: |

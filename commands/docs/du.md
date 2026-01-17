@@ -2,7 +2,7 @@
 title: du
 categories: |
   filesystem
-version: 0.109.0
+version: 0.110.0
 filesystem: |
   Find disk usage sizes of specified items.
 usage: |
@@ -27,6 +27,7 @@ contributors: false
  -  `--exclude, -x {glob}`: Exclude these file names
  -  `--max-depth, -d {int}`: Directory recursion limit
  -  `--min-size, -m {int}`: Exclude files below this size
+ -  `--all, -a`: move hidden files if '*' is provided
 
 ## Parameters
 

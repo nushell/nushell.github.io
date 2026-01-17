@@ -2,7 +2,7 @@
 title: let
 categories: |
   core
-version: 0.109.0
+version: 0.110.0
 core: |
   Create a variable and give it a value.
 usage: |
@@ -48,6 +48,12 @@ Set a variable to the result of an expression
 Set a variable based on the condition
 ```nu
 > let x = if false { -1 } else { 1 }
+
+```
+
+Set a variable to the output of a pipeline
+```nu
+> ls | let files
 
 ```
 

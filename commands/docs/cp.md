@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.109.0
+version: 0.110.0
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |
@@ -35,6 +35,7 @@ contributors: false
                     if not specified only mode is preserved
                     possible values: mode, ownership (unix only), timestamps, context, link, links, xattr
  -  `--debug`: explain how a file is copied. Implies -v
+ -  `--all, -a`: move hidden files if '*' is provided
 
 ## Parameters
 

@@ -2,7 +2,7 @@
 title: polars as-date
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Converts string to date.
 usage: |
@@ -44,8 +44,8 @@ Converts string to date
 ╭───┬─────────────╮
 │ # │    date     │
 ├───┼─────────────┤
-│ 0 │ 3 years ago │
-│ 1 │ 3 years ago │
+│ 0 │ 4 years ago │
+│ 1 │ 4 years ago │
 ╰───┴─────────────╯
 
 ```
@@ -56,8 +56,8 @@ Converts string to date
 ╭───┬─────────────╮
 │ # │    date     │
 ├───┼─────────────┤
-│ 0 │ 3 years ago │
-│ 1 │ 3 years ago │
+│ 0 │ 4 years ago │
+│ 1 │ 4 years ago │
 ╰───┴─────────────╯
 
 ```
@@ -68,8 +68,8 @@ Converts string to date in an expression
 ╭───┬─────────────╮
 │ # │    date     │
 ├───┼─────────────┤
-│ 0 │ 3 years ago │
-│ 1 │ 3 years ago │
+│ 0 │ 4 years ago │
+│ 1 │ 4 years ago │
 ╰───┴─────────────╯
 
 ```

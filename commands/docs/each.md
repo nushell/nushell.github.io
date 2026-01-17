@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.109.0
+version: 0.110.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -23,7 +23,7 @@ contributors: false
 ## Flags
 
  -  `--keep-empty, -k`: keep empty result cells
- -  `--flatten, -f`: combine outputs into a single stream instead ofcollecting them to separate values
+ -  `--flatten, -f`: combine outputs into a single stream instead of collecting them to separate values
 
 ## Parameters
 

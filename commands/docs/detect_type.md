@@ -2,7 +2,7 @@
 title: detect type
 categories: |
   strings
-version: 0.109.0
+version: 0.110.0
 strings: |
   Infer Nushell datatype from a string.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--prefer-filesize, -f`: For ints display them as human-readable file sizes
+ -  `--prefer-dmy`: Prefer day-month-year format for ambiguous dates
 
 
 ## Input/output types:
@@ -84,19 +85,31 @@ Prefer filesize for ints
 Date Y-M-D
 ```nu
 > '2022-01-01' | detect type
-Sat, 1 Jan 2022 00:00:00 +0800 (3 years ago)
+Sat, 1 Jan 2022 00:00:00 +0800 (4 years ago)
 ```
 
 Date with time and offset
 ```nu
 > '2022-01-01T00:00:00Z' | detect type
-Sat, 1 Jan 2022 00:00:00 +0000 (3 years ago)
+Sat, 1 Jan 2022 00:00:00 +0000 (4 years ago)
 ```
 
 Date D-M-Y
 ```nu
 > '31-12-2021' | detect type
-Fri, 31 Dec 2021 00:00:00 +0800 (3 years ago)
+Fri, 31 Dec 2021 00:00:00 +0800 (4 years ago)
+```
+
+Date M-D-Y (default for ambiguous)
+```nu
+> '01/02/2025' | detect type
+Thu, 2 Jan 2025 00:00:00 +0800 (a year ago)
+```
+
+Prefer DMY for ambiguous dates
+```nu
+> '01/02/2025' | detect type --prefer-dmy
+Sat, 1 Feb 2025 00:00:00 +0800 (a year ago)
 ```
 
 Unknown stays a string

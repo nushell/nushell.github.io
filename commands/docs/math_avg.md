@@ -2,7 +2,7 @@
 title: math avg
 categories: |
   math
-version: 0.109.0
+version: 0.110.0
 math: |
   Returns the average of a list of numbers.
 usage: |

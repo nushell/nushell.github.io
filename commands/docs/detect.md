@@ -2,7 +2,7 @@
 title: detect
 categories: |
   strings
-version: 0.109.0
+version: 0.110.0
 strings: |
   Various commands for detecting things.
 usage: |

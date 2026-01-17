@@ -2,7 +2,7 @@
 title: inspect
 categories: |
   debug
-version: 0.109.0
+version: 0.110.0
 debug: |
   Inspect pipeline results while running a pipeline.
 usage: |

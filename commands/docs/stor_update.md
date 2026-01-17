@@ -2,7 +2,7 @@
 title: stor update
 categories: |
   database
-version: 0.109.0
+version: 0.110.0
 database: |
   Update information in a specified table in the in-memory sqlite database.
 usage: |

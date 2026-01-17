@@ -2,7 +2,7 @@
 title: polars list-contains
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Checks if an element is contained in a list.
 usage: |
@@ -30,6 +30,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Returns boolean indicating if a literal element was found in a list column

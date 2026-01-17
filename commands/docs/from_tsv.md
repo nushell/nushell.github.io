@@ -2,7 +2,7 @@
 title: from tsv
 categories: |
   formats
-version: 0.109.0
+version: 0.110.0
 formats: |
   Parse text as .tsv and create table.
 usage: |

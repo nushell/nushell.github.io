@@ -2,7 +2,7 @@
 title: http put
 categories: |
   network
-version: 0.109.0
+version: 0.110.0
 network: |
   Put a body to a URL.
 usage: |
@@ -31,6 +31,7 @@ contributors: false
  -  `--insecure, -k`: allow insecure server connections when using SSL
  -  `--full, -f`: returns the full response instead of only the body
  -  `--allow-errors, -e`: do not fail if the server returns an error code
+ -  `--pool`: using a global pool as a client
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
  -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
 

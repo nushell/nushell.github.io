@@ -2,7 +2,7 @@
 title: timeit
 categories: |
   debug
-version: 0.109.0
+version: 0.110.0
 debug: |
   Time how long it takes a closure to run.
 usage: |
@@ -20,6 +20,10 @@ contributors: false
 
 ```> timeit {flags} (command)```
 
+## Flags
+
+ -  `--output, -o`: Include the closure output.
+
 ## Parameters
 
  -  `command`: The closure to run.
@@ -27,16 +31,18 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output   |
-| ------- | -------- |
-| any     | duration |
-| nothing | duration |
+| input   | output                              |
+| ------- | ----------------------------------- |
+| any     | duration                            |
+| nothing | duration                            |
+| any     | record&lt;time: duration, output: any&gt; |
+| nothing | record&lt;time: duration, output: any&gt; |
 ## Examples
 
 Time a closure containing one command
 ```nu
 > timeit { sleep 500ms }
-
+500ms 631µs 800ns
 ```
 
 Time a closure with an input value
@@ -57,7 +63,16 @@ Time a closure containing a pipeline
 
 ```
 
+Time a closure and also return the output
+```nu
+> timeit --output { 'example text' }
+╭────────┬──────────────╮
+│ time   │ 14µs 328ns   │
+│ output │ example text │
+╰────────┴──────────────╯
+```
+
 ## Notes
 Any pipeline input given to this command is passed to the closure. Note that streaming inputs may affect timing results, and it is recommended to add a `collect` command before this if the input is a stream.
 
-This command will bubble up any errors encountered when running the closure. The return pipeline of the closure is collected into a value and then discarded.
+This command will bubble up any errors encountered when running the closure. The return pipeline of the closure is collected into a value and then discarded if `--output` is not set.

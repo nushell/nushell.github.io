@@ -2,7 +2,7 @@
 title: plugin stop
 categories: |
   plugin
-version: 0.109.0
+version: 0.110.0
 plugin: |
   Stop an installed plugin if it was running.
 usage: |
