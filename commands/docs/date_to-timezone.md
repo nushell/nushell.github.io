@@ -2,7 +2,7 @@
 title: date to-timezone
 categories: |
   date
-version: 0.109.0
+version: 0.110.0
 date: |
   Convert a date to a given time zone.
 usage: |

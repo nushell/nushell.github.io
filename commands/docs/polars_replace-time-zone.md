@@ -2,7 +2,7 @@
 title: polars replace-time-zone
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Replace the timezone information in a datetime column.
 usage: |
@@ -39,6 +39,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Apply timezone to a naive datetime
@@ -49,8 +50,8 @@ Apply timezone to a naive datetime
 ╭───┬─────────────╮
 │ # │  datetime   │
 ├───┼─────────────┤
-│ 0 │ 3 years ago │
-│ 1 │ 3 years ago │
+│ 0 │ 4 years ago │
+│ 1 │ 4 years ago │
 ╰───┴─────────────╯
 
 ```
@@ -61,14 +62,14 @@ Apply timezone with ambiguous datetime
                     | polars into-df
                     | polars as-datetime "%Y-%m-%d %H:%M:%S" --naive
                     | polars select (polars col datetime | polars replace-time-zone "America/New_York" --ambiguous null)
-╭───┬─────────────╮
-│ # │  datetime   │
-├───┼─────────────┤
-│ 0 │ 3 weeks ago │
-│ 1 │             │
-│ 2 │ 3 weeks ago │
-│ 3 │ 3 weeks ago │
-╰───┴─────────────╯
+╭───┬──────────────╮
+│ # │   datetime   │
+├───┼──────────────┤
+│ 0 │ 2 months ago │
+│ 1 │              │
+│ 2 │ 2 months ago │
+│ 3 │ 2 months ago │
+╰───┴──────────────╯
 
 ```
 
@@ -78,13 +79,13 @@ Apply timezone with nonexistent datetime
                     | polars into-df
                     | polars as-datetime "%Y-%m-%d %H:%M:%S" --naive
                     | polars select (polars col datetime | polars replace-time-zone "America/New_York" --nonexistent null)
-╭───┬──────────────╮
-│ # │   datetime   │
-├───┼──────────────┤
-│ 0 │ 8 months ago │
-│ 1 │              │
-│ 2 │ 8 months ago │
-│ 3 │ 8 months ago │
-╰───┴──────────────╯
+╭───┬───────────────╮
+│ # │   datetime    │
+├───┼───────────────┤
+│ 0 │ 10 months ago │
+│ 1 │               │
+│ 2 │ 10 months ago │
+│ 3 │ 10 months ago │
+╰───┴───────────────╯
 
 ```

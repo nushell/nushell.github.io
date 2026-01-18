@@ -2,7 +2,7 @@
 title: into int
 categories: |
   conversions
-version: 0.109.0
+version: 0.110.0
 conversions: |
   Convert value to integer.
 usage: |

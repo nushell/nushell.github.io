@@ -2,7 +2,7 @@
 title: bits ror
 categories: |
   bits
-version: 0.109.0
+version: 0.110.0
 bits: |
   Bitwise rotate right for ints or binary values.
 usage: |

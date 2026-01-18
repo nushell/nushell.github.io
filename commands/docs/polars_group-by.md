@@ -2,7 +2,7 @@
 title: polars group-by
 categories: |
   lazyframe
-version: 0.109.0
+version: 0.110.0
 lazyframe: |
   Creates a group-by object that can be used for other aggregations.
 usage: |

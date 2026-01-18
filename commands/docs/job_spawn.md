@@ -2,7 +2,7 @@
 title: job spawn
 categories: |
   experimental
-version: 0.109.0
+version: 0.110.0
 experimental: |
   Spawn a background job and retrieve its ID.
 usage: |

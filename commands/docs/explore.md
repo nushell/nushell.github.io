@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.109.0
+version: 0.110.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |
@@ -64,6 +64,7 @@ Press `:` then `h` to get a help menu.
 
 ## Subcommands:
 
-| name                                               | description                                                           | type     |
-| -------------------------------------------------- | --------------------------------------------------------------------- | -------- |
-| [`explore regex`](/commands/docs/explore_regex.md) | Launch a TUI to create and explore regular expressions interactively. | built-in |
+| name                                                 | description                                                            | type     |
+| ---------------------------------------------------- | ---------------------------------------------------------------------- | -------- |
+| [`explore config`](/commands/docs/explore_config.md) | Launch a TUI to view and edit the nushell configuration interactively. | built-in |
+| [`explore regex`](/commands/docs/explore_regex.md)   | Launch a TUI to create and explore regular expressions interactively.  | built-in |

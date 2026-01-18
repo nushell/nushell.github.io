@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.109.0
+version: 0.110.0
 viewers: |
   Render the table.
 usage: |
@@ -33,6 +33,7 @@ contributors: false
 Be aware collapse mode currently doesn't support width control
  -  `--abbreviated, -a {int}`: abbreviate the data in the table by truncating the middle part and only showing amount provided on top and bottom
  -  `--list, -l`: list available table modes/themes
+ -  `--icons, -o`: adds icons to ls tables
 
 
 ## Input/output types:

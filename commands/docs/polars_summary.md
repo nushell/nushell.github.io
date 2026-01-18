@@ -2,7 +2,7 @@
 title: polars summary
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.
 usage: |

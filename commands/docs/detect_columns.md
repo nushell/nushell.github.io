@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.109.0
+version: 0.110.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -24,6 +24,7 @@ contributors: false
 
  -  `--skip, -s {int}`: number of rows to skip before detecting
  -  `--no-headers, -n`: don't detect headers
+ -  `--ignore-box-chars, -i`: ignore lines consisting entirely of box drawing characters and clean box characters from tokens
  -  `--combine-columns, -c {range}`: columns to be combined; listed as a range
  -  `--guess`: detect columns by guessing width, it may be useful if default one doesn't work
 
@@ -33,6 +34,7 @@ contributors: false
 | input  | output |
 | ------ | ------ |
 | string | table  |
+| table  | table  |
 ## Examples
 
 use --guess if you find default algorithm not working
@@ -80,5 +82,43 @@ Splits a multi-line string into columns with headers detected
 Parse external ls command and combine columns for datetime
 ```nu
 > ^ls -lh | detect columns --no-headers --skip 1 --combine-columns 5..7
+
+```
+
+Table literal input is passed through unchanged
+```nu
+> [[name, age]; [Alice, 25]] | detect columns
+╭───┬───────┬─────╮
+│ # │ name  │ age │
+├───┼───────┼─────┤
+│ 0 │ Alice │  25 │
+╰───┴───────┴─────╯
+
+```
+
+List of records input is passed through unchanged
+```nu
+> [{name: Alice, age: 25}, {name: Bob, age: 30}] | detect columns
+╭───┬───────┬─────╮
+│ # │ name  │ age │
+├───┼───────┼─────┤
+│ 0 │ Alice │  25 │
+│ 1 │ Bob   │  30 │
+╰───┴───────┴─────╯
+
+```
+
+Parse a box-bordered table by ignoring separator lines and using header positions
+```nu
+> "+-------+-------+
+| col1  | col2  |
++-------+-------+
+| a     | b     |
++-------+-------+" | detect columns --ignore-box-chars
+╭───┬──────┬──────╮
+│ # │ col1 │ col2 │
+├───┼──────┼──────┤
+│ 0 │ a    │ b    │
+╰───┴──────┴──────╯
 
 ```

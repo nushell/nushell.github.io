@@ -2,7 +2,7 @@
 title: polars get-ordinal
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Gets ordinal from date.
 usage: |

@@ -2,7 +2,7 @@
 title: pwd
 categories: |
   default
-version: 0.109.0
+version: 0.110.0
 default: |
   Return the current working directory
 usage: |

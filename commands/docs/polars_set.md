@@ -2,7 +2,7 @@
 title: polars set
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Sets value where given mask is true.
 usage: |

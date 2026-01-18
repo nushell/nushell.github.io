@@ -2,7 +2,7 @@
 title: polars with-column
 categories: |
   dataframe or lazyframe
-version: 0.109.0
+version: 0.110.0
 dataframe_or_lazyframe: |
   Adds a series to the dataframe.
 usage: |
@@ -102,5 +102,35 @@ Add series to a dataframe using a record
 │ 0 │ 1 │ 2 │ 2 │ 3 │
 │ 1 │ 3 │ 4 │ 6 │ 9 │
 ╰───┴───┴───┴───┴───╯
+
+```
+
+Add columns using a selector to multiply all columns by 2
+```nu
+> [[a b]; [1 2] [3 4]]
+    | polars into-df
+    | polars with-column ((polars selector all) * 2)
+    | polars collect
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 2 │ 4 │
+│ 1 │ 6 │ 8 │
+╰───┴───┴───╯
+
+```
+
+Add a new column using a selector on the first column
+```nu
+> [[a b c]; [1 2 3] [4 5 6]]
+    | polars into-df
+    | polars with-column ((polars selector first) * 10 | polars as a_times_10)
+    | polars collect
+╭───┬───┬───┬───┬────────────╮
+│ # │ a │ b │ c │ a_times_10 │
+├───┼───┼───┼───┼────────────┤
+│ 0 │ 1 │ 2 │ 3 │         10 │
+│ 1 │ 4 │ 5 │ 6 │         40 │
+╰───┴───┴───┴───┴────────────╯
 
 ```

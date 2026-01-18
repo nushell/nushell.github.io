@@ -2,7 +2,7 @@
 title: attr example
 categories: |
   core
-version: 0.109.0
+version: 0.110.0
 core: |
   Attribute for adding examples to custom commands.
 usage: |

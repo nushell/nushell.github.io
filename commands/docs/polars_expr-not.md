@@ -2,7 +2,7 @@
 title: polars expr-not
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Creates a not expression.
 usage: |
@@ -26,6 +26,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Creates a not expression

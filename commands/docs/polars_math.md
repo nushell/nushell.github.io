@@ -2,7 +2,7 @@
 title: polars math
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Collection of math functions to be applied on one or more column expressions
 usage: |
@@ -31,6 +31,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Apply function to column expression

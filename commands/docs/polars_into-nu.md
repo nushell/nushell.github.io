@@ -2,7 +2,7 @@
 title: polars into-nu
 categories: |
   dataframe
-version: 0.109.0
+version: 0.110.0
 dataframe: |
   Converts a dataframe or an expression into nushell value for access and exploration.
 usage: |
@@ -38,6 +38,7 @@ contributors: false
 | polars_when       | any    |
 | polars_datatype   | any    |
 | polars_schema     | any    |
+| polars_selector   | any    |
 ## Examples
 
 Shows head rows from dataframe

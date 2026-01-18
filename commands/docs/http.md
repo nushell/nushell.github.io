@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.109.0
+version: 0.110.0
 network: |
   Various commands for working with http methods.
 usage: |
@@ -83,5 +83,6 @@ Without a subcommand but with a URL provided, it performs a GET request by defau
 | [`http head`](/commands/docs/http_head.md)       | Get the headers from a URL.                               | built-in |
 | [`http options`](/commands/docs/http_options.md) | Requests permitted communication options for a given URL. | built-in |
 | [`http patch`](/commands/docs/http_patch.md)     | Patch a body to a URL.                                    | built-in |
+| [`http pool`](/commands/docs/http_pool.md)       | Configure and reset builtin http connection pool.         | built-in |
 | [`http post`](/commands/docs/http_post.md)       | Post a body to a URL.                                     | built-in |
 | [`http put`](/commands/docs/http_put.md)         | Put a body to a URL.                                      | built-in |

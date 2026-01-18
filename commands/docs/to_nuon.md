@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.109.0
+version: 0.110.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -26,6 +26,7 @@ contributors: false
  -  `--indent, -i {number}`: specify indentation width
  -  `--tabs, -t {number}`: specify indentation tab quantity
  -  `--serialize, -s`: serialize nushell types that cannot be deserialized
+ -  `--raw-strings`: use raw string syntax (r#'...'#) for strings with quotes or backslashes
 
 
 ## Input/output types:
@@ -77,4 +78,10 @@ A more complex record with --raw
 ```nu
 > {date: 2000-01-01, data: [1 [2 3] 4.56]} | to nuon --raw
 {date:2000-01-01T00:00:00+00:00,data:[1,[2,3],4.56]}
+```
+
+Use raw string syntax for strings with quotes or backslashes
+```nu
+> 'hello "world"' | to nuon --raw-strings
+r#'hello "world"'#
 ```

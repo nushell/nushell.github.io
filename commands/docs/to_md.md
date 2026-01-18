@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.109.0
+version: 0.110.0
 formats: |
   Convert table into simple Markdown.
 usage: |
@@ -28,6 +28,7 @@ contributors: false
  -  `--escape-md, -m`: Escapes Markdown special characters
  -  `--escape-html, -t`: Escapes HTML special characters
  -  `--escape-all, -a`: Escapes both Markdown and HTML special characters
+ -  `--list, -l {string}`: Format lists as 'ordered' (1. 2. 3.), 'unordered' (* * *), or 'none'. Default: unordered
 
 
 ## Input/output types:
@@ -62,12 +63,12 @@ Treat each row as a markdown element
 | 1   | 2   |
 ```
 
-Render a list
+Render a list (unordered by default)
 ```nu
-> [0 1 2] | to md --pretty
-0
-1
-2
+> [0 1 2] | to md
+* 0
+* 1
+* 2
 ```
 
 Separate list into markdown tables
@@ -107,4 +108,20 @@ Escape html special characters
 | a | b |
 | --- | --- |
 | p | &lt;p&gt;Welcome to nushell&lt;&#x2f;p&gt; |
+```
+
+Render a list as an ordered markdown list
+```nu
+> [one two three] | to md --list ordered
+1. one
+2. two
+3. three
+```
+
+Render a list without markers
+```nu
+> [one two three] | to md --list none
+one
+two
+three
 ```

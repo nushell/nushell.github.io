@@ -2,7 +2,7 @@
 title: job flush
 categories: |
   experimental
-version: 0.109.0
+version: 0.110.0
 experimental: |
   Clear this job's mailbox.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> job flush {flags} ```
+
+## Flags
+
+ -  `--tag {int}`: Clear messages with this tag
 
 
 ## Input/output types:

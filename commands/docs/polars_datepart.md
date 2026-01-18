@@ -2,7 +2,7 @@
 title: polars datepart
 categories: |
   expression
-version: 0.109.0
+version: 0.110.0
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |
@@ -38,7 +38,7 @@ Creates an expression to capture the year date part
 ╭───┬─────────────┬───────────────╮
 │ # │  datetime   │ datetime_year │
 ├───┼─────────────┼───────────────┤
-│ 0 │ 3 years ago │          2021 │
+│ 0 │ 4 years ago │          2021 │
 ╰───┴─────────────┴───────────────╯
 
 ```
@@ -66,7 +66,7 @@ Creates an expression to capture multiple date parts
 │   │             │               │                │              │               │                 │    │ n │
 │   │             │               │                │              │               │                 │    │ s │
 ├───┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼────┼───┤
-│ 0 │ 3 years ago │          2021 │             12 │           30 │             1 │               2 │  3 │ 1 │
+│ 0 │ 4 years ago │          2021 │             12 │           30 │             1 │               2 │  3 │ 1 │
 │   │             │               │                │              │               │                 │    │ 2 │
 │   │             │               │                │              │               │                 │    │ 3 │
 │   │             │               │                │              │               │                 │    │ 4 │

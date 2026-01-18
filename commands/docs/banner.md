@@ -2,7 +2,7 @@
 title: banner
 categories: |
   default
-version: 0.109.0
+version: 0.110.0
 default: |
   Print a banner for Nushell with information about the project
 usage: |

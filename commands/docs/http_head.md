@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.109.0
+version: 0.110.0
 network: |
   Get the headers from a URL.
 usage: |
@@ -27,6 +27,7 @@ contributors: false
  -  `--max-time, -m {duration}`: max duration before timeout occurs
  -  `--headers, -H {any}`: custom headers you want to add
  -  `--insecure, -k`: allow insecure server connections when using SSL
+ -  `--pool`: using a global pool as a client
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
  -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
 

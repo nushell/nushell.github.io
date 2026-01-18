@@ -2,7 +2,7 @@
 title: polars select
 categories: |
   lazyframe
-version: 0.109.0
+version: 0.110.0
 lazyframe: |
   Selects columns from lazyframe.
 usage: |
@@ -69,5 +69,42 @@ Select a column from a dataframe using a mix of expressions and record of expres
 │ 1 │ 4 │ 2 │ 16 │
 │ 2 │ 2 │ 2 │  4 │
 ╰───┴───┴───┴────╯
+
+```
+
+Select all columns from a dataframe using a selector
+```nu
+> [[a b]; [6 2] [4 2] [2 2]] | polars into-df | polars select (polars selector all)
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 6 │ 2 │
+│ 1 │ 4 │ 2 │
+│ 2 │ 2 │ 2 │
+╰───┴───┴───╯
+
+```
+
+Select columns by name using a selector
+```nu
+> [[a b c]; [1 2 3] [4 5 6]] | polars into-df | polars select (polars selector by-name a c)
+╭───┬───┬───╮
+│ # │ a │ c │
+├───┼───┼───┤
+│ 0 │ 1 │ 3 │
+│ 1 │ 4 │ 6 │
+╰───┴───┴───╯
+
+```
+
+Select the first column using a selector
+```nu
+> [[a b c]; [1 2 3] [4 5 6]] | polars into-df | polars select (polars selector first)
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 4 │
+╰───┴───╯
 
 ```
