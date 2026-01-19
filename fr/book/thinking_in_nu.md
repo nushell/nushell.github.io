@@ -53,7 +53,7 @@ Cela ne fonctionne pas si `my_path` est une variable déclarée au runtime avec 
 Cependant, si `my_path` est une [constante](/book/variables#constant-variables), cela fonctionnera, car la chaîne de caractères peut être évaluée au moment de la compilation :
 
 ```nu
-const my_path = ([$nu.home-path nushell] | path join)
+const my_path = ([$nu.home-dir nushell] | path join)
 source $"($my_path)/common.nu" # sources /home/user/nushell/common.nu
 ```
 

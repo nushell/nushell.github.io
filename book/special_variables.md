@@ -3,6 +3,7 @@ next:
   text: Programming in Nu
   link: /book/programming_in_nu.md
 ---
+
 # Special Variables
 
 Nushell makes available and uses a number of special variables and constants. Many of these are mentioned or documented in other places in this Book, but this page
@@ -20,12 +21,12 @@ The `$nu` constant is a record containing several useful values:
 - `history-path`: The text or SQLite file storing the command history.
 - `loginshell-path`: The optional config file which runs for login shells, normally `login.nu` in the config directory.
 - `plugin-path`: The plugin registry file, normally `plugin.msgpackz` in the config directory.
-- `home-path`: The user's home directory which can be accessed using the shorthand `~`.
+- `home-dir`: The user's home directory which can be accessed using the shorthand `~`.
 - `data-dir`: The data directory for Nushell, which includes the `./vendor/autoload` directories loaded at startup and other user data.
 - `cache-dir`: A directory for non-essential (cached) data.
 - `vendor-autoload-dirs`: A list of directories where third-party applications should install configuration files that will be auto-loaded during startup.
 - `user-autoload-dirs`: A list of directories where the user may create additional configuration files which will be auto-loaded during startup.
-- `temp-path`: A path for temporary files that should be writeable by the user.
+- `temp-dir`: A path for temporary files that should be writeable by the user.
 - `pid`: The PID of the currently running Nushell process.
 - `os-info`: Information about the host operating system.
 - `startup-time`: The amount of time (in duration) that it took for Nushell to start and process all configuration files.
