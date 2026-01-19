@@ -3,6 +3,7 @@ next:
   text: Programming in Nu
   link: /book/programming_in_nu.md
 ---
+
 # Special Variables
 
 Nushell makes available and uses a number of special variables and constants. Many of these are mentioned or documented in other places in this Book, but this page
@@ -25,7 +26,7 @@ The `$nu` constant is a record containing several useful values:
 - `cache-dir`: A directory for non-essential (cached) data.
 - `vendor-autoload-dirs`: A list of directories where third-party applications should install configuration files that will be auto-loaded during startup.
 - `user-autoload-dirs`: A list of directories where the user may create additional configuration files which will be auto-loaded during startup.
-- `temp-path`: A path for temporary files that should be writeable by the user.
+- `temp-dir`: A path for temporary files that should be writeable by the user.
 - `pid`: The PID of the currently running Nushell process.
 - `os-info`: Information about the host operating system.
 - `startup-time`: The amount of time (in duration) that it took for Nushell to start and process all configuration files.
