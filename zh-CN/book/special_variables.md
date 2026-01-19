@@ -14,7 +14,7 @@ Nushell 提供并使用了一系列特殊变量和常量。其中许多在本手
 - `history-path`: 存储命令历史的文本或 SQLite 文件
 - `loginshell-path`: 登录 shell 运行的可选配置文件，通常是配置目录中的 `login.nu`
 - `plugin-path`: 插件注册表文件，通常是配置目录中的 `plugin.msgpackz`
-- `home-path`: 用户的主目录，可以使用简写 `~` 访问
+- `home-dir`: 用户的主目录，可以使用简写 `~` 访问
 - `data-dir`: Nushell 的数据目录，包括启动时加载的 `./vendor/autoload` 目录和其他用户数据
 - `cache-dir`: 用于非必要(缓存)数据的目录
 - `vendor-autoload-dirs`: 第三方应用应安装配置文件的目录列表，这些文件将在启动时自动加载

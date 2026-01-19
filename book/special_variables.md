@@ -21,7 +21,7 @@ The `$nu` constant is a record containing several useful values:
 - `history-path`: The text or SQLite file storing the command history.
 - `loginshell-path`: The optional config file which runs for login shells, normally `login.nu` in the config directory.
 - `plugin-path`: The plugin registry file, normally `plugin.msgpackz` in the config directory.
-- `home-path`: The user's home directory which can be accessed using the shorthand `~`.
+- `home-dir`: The user's home directory which can be accessed using the shorthand `~`.
 - `data-dir`: The data directory for Nushell, which includes the `./vendor/autoload` directories loaded at startup and other user data.
 - `cache-dir`: A directory for non-essential (cached) data.
 - `vendor-autoload-dirs`: A list of directories where third-party applications should install configuration files that will be auto-loaded during startup.
