@@ -19,7 +19,7 @@ Nushell 提供并使用了一系列特殊变量和常量。其中许多在本手
 - `cache-dir`: 用于非必要(缓存)数据的目录
 - `vendor-autoload-dirs`: 第三方应用应安装配置文件的目录列表，这些文件将在启动时自动加载
 - `user-autoload-dirs`: 用户可以创建额外配置文件的目录列表，这些文件将在启动时自动加载
-- `temp-path`: 用户可写的临时文件路径
+- `temp-dir`: 用户可写的临时文件路径
 - `pid`: 当前运行的 Nushell 进程的 PID
 - `os-info`: 主机操作系统信息
 - `startup-time`: Nushell 启动并处理所有配置文件所花费的时间(持续时间)
