@@ -84,9 +84,21 @@ This a good option for you if you're using a Windows Manager or a Compositor sin
 
 ### As a service
 
-Alternatively, you can enable it as an **user service**. OpenSSH typically includes a systemd service and the [ArchLinux wiki systemd/User](https://wiki.archlinux.org/title/Systemd/User) page covers how to enable services per user with systemd.
+Alternatively, you can enable it as an **user service**. OpenSSH typically includes a systemd service named [`ssh-agent.service`](https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user).
 
-However, if you're using a different service manager, please refer its own documentation to create a user service that utilizes the aforementioned command.
+#### systemd OS
+
+The [ArchLinux wiki systemd/User](https://wiki.archlinux.org/title/Systemd/User) page covers how to enable services per user with systemd, but the command looks something like this:
+
+```sh
+systemctl enable --now --user ssh-agent.service
+```
+
+#### Non-systemd OS
+
+However, if you're using a different service manager, please refer its own documentation as you might need to create a custom user service that utilizes the [standalone command from the previous section](#de-wm-config).
+
+#### Connect to it
 
 To enable Nushell to access this socket, you need to add its path as `$env.SSH_AUTH_SOCK` like so:
 
