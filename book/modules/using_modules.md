@@ -70,7 +70,7 @@ The path to the module can be:
   :::
 
   ::: important Important! Importing modules from `$NU_LIB_DIRS` or `$env.NU_LIB_DIRS`
-  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the constant `$NU_LIB_DIRS` list, and then `$env.NU_LIB_DIRS`.
+  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the constant `$NU_LIB_DIRS` list, and then `$env.NU_LIB_DIRS` (deprecated).
 
   This allows you to install modules to a location that is easily accessible via a relative path regardless of the current directory.
   :::
