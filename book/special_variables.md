@@ -101,6 +101,12 @@ try {
 
 ### `$env.NU_LIB_DIRS`
 
+::: warning
+
+As of version 0.101.0, this environment variable is marked as deprecated. Users should prefer the `$NU_LIB_DIRS` constant (see below).
+
+:::
+
 A list of directories which will be searched when using the `source`, `use`, or `overlay use` commands. See also:
 
 - The `$NU_LIB_DIRS` constant below

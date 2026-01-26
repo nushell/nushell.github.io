@@ -305,7 +305,7 @@ Also notice that, because the commands from `increment` and `range-into-list` ar
 
 ## Environment Variables
 
-Modules can define an environment using [`export-env`](/commands/docs/export-env.md). Let's extend our `my-utils` module with an environment variable export for a common directory where we'll place our modules in the future. This directory is (by default) in the `$env.NU_LIB_DIRS` search path discussed in [Using Modules - Module Path](./using_modules.md#module-path).
+Modules can define an environment using [`export-env`](/commands/docs/export-env.md). Let's extend our `my-utils` module with an environment variable export for a common directory where we'll place our modules in the future. This directory is (by default) in the `$NU_LIB_DIRS` search path discussed in [Using Modules - Module Path](./using_modules.md#module-path).
 
 ```nu
 # A collection of helpful utility functions
