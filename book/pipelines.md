@@ -45,8 +45,10 @@ line1; line2 | line3
 
 Here, semicolons are used in conjunction with pipelines. When a semicolon is used, no output data is produced to be piped. As such, the `$in` variable will not work when used immediately after the semicolon.
 
-- As there is a semicolon after `line1`, the command will run to completion and get displayed on the screen.
-- `line2` | `line3` is a normal pipeline. It runs, and its contents are displayed after `line1`'s contents.
+- As there is a semicolon after `line1`, the command will run to completion and its output discarded.
+- `line2` | `line3` is a normal pipeline. It runs, and as the final value, its contents are returned and displayed.
+
+See: [Thinking in Nu -> Single Return Value per Expression](thinking_in_nu.html#single-return-value-per-expression)
 
 ## Pipeline Input and the Special `$in` Variable
 
