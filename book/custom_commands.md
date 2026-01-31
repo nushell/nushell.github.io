@@ -953,7 +953,9 @@ attribute adds to the output of `help {command}` or `{command} -h`:
 # celebrates an event # for a particular
 # person.
 @example "Greet a VIP" {vip-greet "Bob"} --result "And a special welcome to our VIP today, Bob!"
-@example "Greet multiple people" {vip-greet "Bob" ["Alice" "Charlie"]} --result $"Hello, Alice!(char newline)Hello, Charlie!(char newline)And a special welcome to our VIP today, Bob!"
+@example "Greet multiple people" {vip-greet "Bob" ["Alice" "Charlie"]} --result "Hello, Alice!
+Hello, Charlie!
+And a special welcome to our VIP today, Bob!"
 def vip-greet [
   vip: string        # The special guest
    ...names: string  # The other guests
@@ -966,7 +968,7 @@ def vip-greet [
 }
 ```
 
-Now, run `help vip-greet` to see the examples added:
+Now, run `help vip-greet` to see the examples added.
 
 ```text
 Greet guests along with a VIP
@@ -1028,7 +1030,7 @@ def greet [
 }
 ```
 
-Run `greet` with a name argument to see the warning:
+Run `greet {name}` to see the warning.
 
 ```bash
 > greet "bob"
@@ -1043,10 +1045,12 @@ Warning: nu::parser::deprecated
 
 Hello, bob!
 ```
-If there is a replacement command, or if there is additional context that would
+
+If there is a replacement command or additional context that would
 assist the user when updating their workflows, add text after `@deprecated`.
+
 The `category` attribute assigns the specified label when using `scope commands`
-or `help` commands; a `deprecated` category can be useful in these scenarios
+or `help` commands.
 
 ```nu
 @deprecated "Use vip-greet as a replacement."
