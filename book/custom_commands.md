@@ -939,7 +939,7 @@ A Nushell comment that continues on the same line for argument documentation pur
 
 As of version 0.103.0, Nushell allows authors of custom commands to enrich their work
 with attributes with subcommands of the `attr` builtin, prefixed by the `@` symbol
-before the defintion of the command. For those coming from Python, Java, or JavaScript, this
+before the definition of the command. For those coming from Python, Java, or JavaScript, this
 will appear similar to decorators or annotations, but serve a slightly different purpose.
 
 Let's improve the documentation for the `vip-greet` custom command. The `example`
