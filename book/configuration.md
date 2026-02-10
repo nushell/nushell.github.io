@@ -20,7 +20,7 @@ can get started with just a few simple steps:
    For example:
 
    ```nu
-   $env.config.buffer_editor = "code"
+   $env.config.buffer_editor = ["code", "-w"]
    # or
    $env.config.buffer_editor = "nano"
    # or
