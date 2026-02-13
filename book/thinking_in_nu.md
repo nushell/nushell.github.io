@@ -270,8 +270,8 @@ The following examples use the [`source` command](/commands/docs/source.md), but
 Consider this scenario:
 
 ```nu
-"print Hello" | save output.nu
-source output.nu
+("print Hello" | save output.nu;
+source output.nu)
 # => Error: nu::parser::sourced_file_not_found
 # =>
 # =>   × File not found
