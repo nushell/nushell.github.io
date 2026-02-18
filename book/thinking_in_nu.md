@@ -225,7 +225,7 @@ However, this also means that Nushell cannot currently support an `eval` constru
 
 ### Features Built on Static Parsing
 
-On the other hand, the **_static_** results of Parsing are key to many features of Nushell its REPL, such as:
+On the other hand, the **_static_** results of Parsing are key to many features of Nushell and its REPL, such as:
 
 - Accurate and expressive error messages
 - Semantic analysis for earlier and robust detection of error conditions
