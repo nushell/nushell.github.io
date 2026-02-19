@@ -180,7 +180,7 @@ You can also use the [`run-external`](/commands/docs/run-external.md) command fo
 
 ## Appending and Prepending to strings
 
-There are various ways to pre, or append strings. If you want to add something to the beginning of each string closures are a good option:
+There are various ways to prepend, or append strings. If you want to add something to the beginning of each string, closures are a good option:
 
 ```nu
 ['foo', 'bar'] | each {|s| '~/' ++ $s} # ~/foo, ~/bar
