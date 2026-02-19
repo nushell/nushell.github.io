@@ -194,7 +194,7 @@ You can also use a regex to replace the beginning or end of a string:
 ['foo', 'bar'] | str replace -r '$' '~/'# foo~/, bar~/
 ```
 
-If you want to get one string out at the end then `str join` is your friend:
+If you want to combine a list into a string, then `str join` is your friend:
 
 ```nu
 "hello" | append "world!" | str join " " # hello world!
