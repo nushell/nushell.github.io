@@ -195,7 +195,7 @@ $first | append $second
 # => ───┴───┴───
 ```
 
-If the column names are not identical then additionally columns and values will be created as necessary:
+If the column names are not identical then additional columns and values will be created as necessary:
 
 ```nu
 let first = [[a b]; [1 2]]
