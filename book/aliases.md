@@ -60,7 +60,7 @@ def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 
 displaying all listed files and folders in a grid.
 
-Similarly trying to chain multiple commands will not work as expected.
+Similarly trying to chain multiple commands will not work as expected. In this example the aim is have `make_calls` print both call1 and call2.
 
 ```nu
 alias make_calls = print call1; print call2
@@ -78,7 +78,7 @@ make_calls
 #call1
 ```
 
-To implement this a custom command would again be needed.
+To implement the desired functionality a custom command would again be needed.
 
 ```nu
 def make_calls [] { print call1; print call2 }
