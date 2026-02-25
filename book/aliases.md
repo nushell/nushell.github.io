@@ -60,7 +60,7 @@ def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 
 displaying all listed files and folders in a grid.
 
-Similarly trying to chain multiple commands will not work as expected. In this example the aim is have `make_calls` print both call1 and call2.
+Similarly trying to chain multiple commands also will not work. In this example the aim is have `make_calls` print both "call1" and "call2".
 
 ```nu
 alias make_calls = print call1; print call2
@@ -69,7 +69,7 @@ alias make_calls = print call1; print call2
 #call2
 ```
 
-If we try testing the alias we get:
+It output "call2" right away because the ";" ended the alias command instead of being included in it. If we try testing the alias we only get "call1" output as seen below:
 
 ```nu
 make_calls
